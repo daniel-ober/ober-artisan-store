@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../firebaseConfig'; 
+import { auth } from '../firebaseConfig';
 
 function SignUp() {
   const [email, setEmail] = useState('');
@@ -18,7 +18,7 @@ function SignUp() {
 
   return (
     <div>
-      <h2>Sign Up</h2>
+      <h2>Quick Sign up</h2>
       <form onSubmit={handleSubmit}>
         <input
           type="email"

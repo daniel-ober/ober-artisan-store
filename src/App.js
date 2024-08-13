@@ -1,22 +1,35 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import HomePage from './components/Home'; 
+import React, { useContext } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import HomePage from './components/Home';
 import SignInEmail from './components/SignInEmail';
 import SignInGoogle from './components/SignInGoogle';
 import SignUp from './components/SignUp';
-import NavBar from './NavBar';
+import Shop from './components/Shop';
+import Cart from './components/Cart';
+import Checkout from './components/Checkout';
+import { AuthenticationContext } from './AuthenticationContext';
+import NavBar from './components/NavBar';
 
 const App = () => {
+  const { user } = useContext(AuthenticationContext);
+
   return (
-    <Router> {/* Wrap Routes with BrowserRouter */}
-      <NavBar /> {/* Add NavBar here if it should be visible on all pages */}
+    <div>
+      <NavBar />
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/signin-email" element={<SignInEmail />} />
-        <Route path="/signin-google" element={<SignInGoogle />} />
-        <Route path="/signup" element={<SignUp />} />
+        <Route path="/" element={user ? <HomePage /> : <Navigate to="/signin-email" />} />
+        <Route path="/signin-email" element={user ? <Navigate to="/" /> : <SignInEmail />} />
+        <Route path="/signin-google" element={user ? <Navigate to="/" /> : <SignInGoogle />} />
+        <Route path="/signup" element={user ? <Navigate to="/" /> : <SignUp />} />
+        {user && (
+          <>
+            <Route path="/shop" element={<Shop />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/checkout" element={<Checkout />} />
+          </>
+        )}
       </Routes>
-    </Router>
+    </div>
   );
 };
 
