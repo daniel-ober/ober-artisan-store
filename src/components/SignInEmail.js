@@ -1,27 +1,27 @@
-import React, { useState, useContext } from 'react';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { AuthenticationContext } from '../AuthenticationContext';
-import { Button, TextField } from '@mui/material';
-import { Link } from 'react-router-dom';
+// src/components/SignInEmail.js
+import React, { useState } from 'react';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebaseConfig';
+import { Button, TextField, Typography } from '@mui/material';
 
-const SignInEmail = () => {
+function SignInEmail() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { signIn } = useContext(AuthenticationContext);
-  const auth = getAuth();
+  const [error, setError] = useState('');  // State to handle errors
 
-  const handleSignIn = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError(''); // Reset error message
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      signIn(userCredential.user); // Update context with user info
+      await signInWithEmailAndPassword(auth, email, password);
+      // Handle successful login (like redirecting to another page)
     } catch (error) {
-      console.error("Error signing in with email:", error);
+      setError('Failed to sign in. Please check your email and password.'); // Set error message
     }
   };
 
   return (
-    <form onSubmit={handleSignIn}>
+    <form onSubmit={handleSubmit}>
       <TextField
         label="Email"
         type="email"
@@ -38,12 +38,16 @@ const SignInEmail = () => {
         fullWidth
         margin="normal"
       />
+      {error && (
+        <Typography color="error" variant="body2" sx={{ marginTop: 1 }}>
+          {error}
+        </Typography>
+      )}
       <Button type="submit" variant="contained" color="primary">
         Sign In
       </Button>
-      Don't have an account? Click <Link to="/signup">here</Link> to join!
     </form>
   );
-};
+}
 
 export default SignInEmail;
