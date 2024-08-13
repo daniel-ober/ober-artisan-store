@@ -2,19 +2,38 @@
 import React, { useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
-import { Button, TextField } from '@mui/material';  
+import { Button, TextField, Typography } from '@mui/material';
 
 function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');  // State to handle errors
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(''); // Reset error message
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      // Handle post sign-up actions (like email verification)
+      // Handle successful sign-up (like redirecting to another page or showing a success message)
     } catch (error) {
-      console.error("Error creating account:", error.message);
+      handleFirebaseError(error.code);  // Handle Firebase errors
+    }
+  };
+
+  const handleFirebaseError = (errorCode) => {
+    switch (errorCode) {
+      case 'auth/email-already-in-use':
+        setError('This email is already in use. Please use a different email.');
+        break;
+      case 'auth/invalid-email':
+        setError('Invalid email format. Please check your email and try again.');
+        break;
+      case 'auth/weak-password':
+        setError('Your password is too weak. Please use a stronger password. Your strong password should be at least 8 characters long and include a combination of uppercase and lowercase letters, numbers, and special characters.');
+        break;
+      default:
+        setError('Failed to sign up. Please try again.');
+        break;
     }
   };
 
@@ -36,6 +55,11 @@ function SignUp() {
         fullWidth
         margin="normal"
       />
+      {error && (
+        <Typography color="error" variant="body2" sx={{ marginTop: 1 }}>
+          {error}
+        </Typography>
+      )}
       <Button type="submit" variant="contained" color="primary">
         Sign Up
       </Button>
