@@ -8,7 +8,7 @@ function SignOut() {
       await signOut(auth);
       console.log('User signed out');
       // Optionally, redirect to home or sign-in page
-      window.location.href = '/signin-email';
+      window.location.href = '/signin';
     } catch (error) {
       console.error('Error signing out:', error.message);
     }
