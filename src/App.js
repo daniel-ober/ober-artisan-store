@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import HomePage from './components/Home';
 import SignInEmail from './components/SignInEmail';
-import SignInGoogle from './components/SignInGoogle';
+// import SignInGoogle from './components/SignInGoogle';
 import SignUp from './components/SignUp';
 import Shop from './components/Shop';
 import Cart from './components/Cart';
@@ -17,9 +17,9 @@ const App = () => {
     <div>
       <NavBar />
       <Routes>
-        <Route path="/" element={user ? <HomePage /> : <Navigate to="/signin" />} />
+        <Route path="/" element={user ? <HomePage /> : <Navigate to="/" />} />
         <Route path="/signin" element={user ? <Navigate to="/" /> : <SignInEmail />} />
-        <Route path="/signin-google" element={user ? <Navigate to="/" /> : <SignInGoogle />} />
+        {/* <Route path="/signin-google" element={user ? <Navigate to="/" /> : <SignInGoogle />} /> */}
         <Route path="/signup" element={user ? <Navigate to="/" /> : <SignUp />} />
         {user && (
           <>
