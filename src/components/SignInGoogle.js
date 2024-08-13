@@ -1,27 +1,24 @@
-// src/SignInGoogle.js
+// src/components/SignInGoogle.js
 import React from 'react';
-import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
-import { auth } from '../firebaseConfig'; // Adjust the path if the file is in a different directory
-import { Button } from '@mui/material';  // Ensure @mui/material is installed
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { auth } from '../firebaseConfig';
 
-const SignInGoogle = () => {
-  const auth = getAuth();
-  const provider = new GoogleAuthProvider();
-
+function SignInGoogle() {
   const handleSignIn = async () => {
+    const provider = new GoogleAuthProvider();
     try {
       await signInWithPopup(auth, provider);
-      console.log("Google sign-in successful");
+      // Handle post sign-in actions (like redirect)
     } catch (error) {
-      console.error("Error signing in with Google:", error);
+      console.error("Error signing in with Google:", error.message);
     }
   };
 
   return (
-    <Button onClick={handleSignIn} variant="contained" color="primary">
-      Sign in with Google
-    </Button>
+    <button onClick={handleSignIn}>
+      Sign In with Google
+    </button>
   );
-};
+}
 
 export default SignInGoogle;
