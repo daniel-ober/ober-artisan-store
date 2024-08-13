@@ -1,19 +1,20 @@
-// src/SignInEmail.js
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../firebaseConfig'; 
-import { Button, TextField } from '@mui/material';  
+import { AuthenticationContext } from '../AuthenticationContext';
+import { Button, TextField } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const SignInEmail = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { signIn } = useContext(AuthenticationContext);
   const auth = getAuth();
 
   const handleSignIn = async (event) => {
     event.preventDefault();
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      console.log("Email sign-in successful");
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      signIn(userCredential.user); // Update context with user info
     } catch (error) {
       console.error("Error signing in with email:", error);
     }
@@ -40,6 +41,7 @@ const SignInEmail = () => {
       <Button type="submit" variant="contained" color="primary">
         Sign In
       </Button>
+      Don't have an account? Click <Link to="/signup">here</Link> to join!
     </form>
   );
 };
