@@ -1,6 +1,8 @@
+// src/components/SignUp.js
 import React, { useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
+import { Button, TextField } from '@mui/material';  
 
 function SignUp() {
   const [email, setEmail] = useState('');
@@ -17,24 +19,27 @@ function SignUp() {
   };
 
   return (
-    <div>
-      <h2>Quick Sign up</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit">Sign Up</button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <TextField
+        label="Email"
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        fullWidth
+        margin="normal"
+      />
+      <TextField
+        label="Password"
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        fullWidth
+        margin="normal"
+      />
+      <Button type="submit" variant="contained" color="primary">
+        Sign Up
+      </Button>
+    </form>
   );
 }
 
