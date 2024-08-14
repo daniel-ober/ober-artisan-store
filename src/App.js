@@ -9,12 +9,16 @@ import Cart from './components/Cart';
 import Checkout from './components/Checkout';
 import { AuthenticationContext } from './AuthenticationContext';
 import NavBar from './components/NavBar';
+import VideoBackground from './components/VideoBackground';
+
 
 const App = () => {
   const { user } = useContext(AuthenticationContext);
 
   return (
     <div>
+          <VideoBackground />
+
       <NavBar />
       <Routes>
         <Route path="/" element={user ? <HomePage /> : <Navigate to="/" />} />
