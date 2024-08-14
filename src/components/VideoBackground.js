@@ -1,17 +1,24 @@
 // src/components/VideoBackground.js
 import React from 'react';
-import './VideoBackground.css'; // Import the corresponding CSS for styling
+import './VideoBackground.css';
 
 const VideoBackground = () => {
+  // Function to detect mobile devices
+  const isMobile = () => {
+    return window.innerWidth <= 430; // Width of iPhone 14 Pro Max
+  };
+
+  // Select the correct video based on the device
+  const videoSrc = isMobile()
+    ? '/background-mobile.mp4'   // Mobile video
+    : '/background.mp4'; // Desktop video
+
   return (
-    <div className="video-background-container">
-      <video autoPlay loop muted className="video-background">
-        <source src={`${process.env.PUBLIC_URL}/background.mp4`} type="video/mp4" />
+    <div className="video-background">
+      <video autoPlay loop muted playsInline>
+        <source src={videoSrc} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
-      <div className="content-overlay">
-        {/* Place any content you want on top of the video here */}
-      </div>
     </div>
   );
 };
