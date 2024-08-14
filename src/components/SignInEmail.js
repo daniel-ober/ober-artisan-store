@@ -1,4 +1,3 @@
-// src/components/SignInEmail.js
 import React, { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
@@ -16,7 +15,19 @@ function SignInEmail() {
       await signInWithEmailAndPassword(auth, email, password);
       // Handle successful login (like redirecting to another page)
     } catch (error) {
-      setError('Failed to sign in. Please check your email and password.'); // Set error message
+      switch (error.code) {
+        case 'auth/wrong-password':
+          setError('Incorrect password. Please try again.');
+          break;
+        case 'auth/user-not-found':
+          setError('No account found with this email address.');
+          break;
+        case 'auth/invalid-email':
+          setError('Invalid email address format.');
+          break;
+        default:
+          setError('Failed to sign in. Please check your email and password.');
+      }
     }
   };
 
