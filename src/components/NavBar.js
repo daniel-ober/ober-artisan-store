@@ -1,24 +1,35 @@
-import React, { useContext } from 'react';
+// src/components/NavBar.js
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { AuthenticationContext } from '../AuthenticationContext';
+import './NavBar.css'; // Ensure you have this file for styling
 
 const NavBar = () => {
-  const { user } = useContext(AuthenticationContext);
-  const cartItems = 5; // Replace with actual cart item count
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
-    <nav>
-      <Link to="/">
+    <nav className="navbar">
+      <div className="navbar-content">
+        <Link to="/" className="logo">
         <img src="/ober-artisan-logo-large.png" alt="Logo" style={{ width: '200px' }} /> {/* Adjust size as needed */}
-      </Link>
-      {user ? (
-        <>
+        </Link>
+        <div className="nav-links">
           <Link to="/shop">Shop</Link>
-          {cartItems > 0 && <Link to="/checkout">Checkout</Link>}
-        </>
-      ) : (
-        <Link to="/signin">Sign In</Link>
-      )}
+          <Link to="/cart">Cart</Link>
+          <Link to="/contact">Contact</Link>
+        </div>
+        <div className="mobile-menu-icon" onClick={toggleMenu}>
+          ☰
+        </div>
+      </div>
+      <div className={`dropdown-menu ${isOpen ? 'open' : ''}`}>
+        <Link to="/shop" onClick={toggleMenu}>Shop</Link>
+        <Link to="/cart" onClick={toggleMenu}>Cart</Link>
+        <Link to="/contact" onClick={toggleMenu}>Contact</Link>
+      </div>
     </nav>
   );
 };

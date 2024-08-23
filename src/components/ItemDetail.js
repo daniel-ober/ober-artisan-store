@@ -1,8 +1,7 @@
-// src/components/ItemDetail.js
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import items from '../data/items';
-import './ItemDetail.css'; // Optional, for styling
+import './ItemDetail.css'; // Import the CSS file
 
 const ItemDetail = () => {
   const { id } = useParams();
