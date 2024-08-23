@@ -1,17 +1,21 @@
-// src/components/VideoBackground.js
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './VideoBackground.css';
 
 const VideoBackground = () => {
-  // Function to detect mobile devices
-  const isMobile = () => {
-    return window.innerWidth <= 430; // Width of iPhone 14 Pro Max
-  };
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 430);
 
-  // Select the correct video based on the device
-  const videoSrc = isMobile()
-    ? '/background-mobile.mp4'   // Mobile video
-    : '/background.mp4'; // Desktop video
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 430);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const videoSrc = isMobile ? '/background-mobile.mp4' : '/background.mp4';
+
+  console.log('Is Mobile:', isMobile); // Debugging output
 
   return (
     <div className="video-background">
