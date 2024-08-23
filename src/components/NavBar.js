@@ -16,11 +16,6 @@ const NavBar = () => {
         <Link to="/" className="logo">
         <img src="/ober-artisan-logo-large.png" alt="Logo" style={{ width: '200px' }} /> {/* Adjust size as needed */}
         </Link>
-        <div className="nav-links">
-          <Link to="/shop">Shop</Link>
-          <Link to="/cart">Cart</Link>
-          <Link to="/contact">Contact</Link>
-        </div>
         <div className="mobile-menu-icon" onClick={toggleMenu}>
           ☰
         </div>
@@ -28,7 +23,9 @@ const NavBar = () => {
       <div className={`dropdown-menu ${isOpen ? 'open' : ''}`}>
         <Link to="/shop" onClick={toggleMenu}>Shop</Link>
         <Link to="/cart" onClick={toggleMenu}>Cart</Link>
+        <Link to="/about" onClick={toggleMenu}>About</Link>
         <Link to="/contact" onClick={toggleMenu}>Contact</Link>
+
       </div>
     </nav>
   );
