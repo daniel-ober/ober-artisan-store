@@ -1,13 +1,12 @@
-// src/components/Shop.js
 import React from 'react';
-import items from '../data/items'; // Ensure this file exists and has items
-import './Shop.css'; // Optional, for styling
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import items from '../data/items';
+import './Shop.css';
 
 const Shop = ({ addToCart }) => {
-  // Ensure addToCart is a function
   if (typeof addToCart !== 'function') {
     console.error('addToCart is not a function');
-    return null; // or an error message
+    return null;
   }
 
   const handleAddToCart = (item) => {
@@ -26,6 +25,8 @@ const Shop = ({ addToCart }) => {
               <p>{item.description}</p>
               <p>${item.price.toFixed(2)}</p>
               <button onClick={() => handleAddToCart(item)}>Add to Cart</button>
+              {/* Link to the item detail page */}
+              <Link to={`/item/${item.id}`}>View Details</Link>
             </div>
           </div>
         ))}

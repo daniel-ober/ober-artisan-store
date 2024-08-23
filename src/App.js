@@ -6,6 +6,7 @@ import SignInEmail from './components/SignInEmail';
 import SignUp from './components/SignUp';
 import Shop from './components/Shop';
 import Cart from './components/Cart';
+import ItemDetail from './components/ItemDetail';
 import NavBar from './components/NavBar';
 import VideoBackground from './components/VideoBackground';
 
@@ -24,6 +25,7 @@ const App = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/signin" element={<SignInEmail />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/item/:id" element={<ItemDetail />} />
         <Route path="/shop" element={<Shop addToCart={addToCart} />} />
         <Route path="/cart" element={<Cart cartItems={cartItems} />} />
       </Routes>
