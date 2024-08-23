@@ -1,3 +1,4 @@
+// src/App.js
 import React, { useContext } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import HomePage from './components/Home';
@@ -11,17 +12,17 @@ import { AuthenticationContext } from './AuthenticationContext';
 import NavBar from './components/NavBar';
 import VideoBackground from './components/VideoBackground';
 
-
 const App = () => {
   const { user } = useContext(AuthenticationContext);
 
   return (
     <div>
-          <VideoBackground />
+      {/* Include VideoBackground component */}
+      <VideoBackground />
 
       <NavBar />
       <Routes>
-        <Route path="/" element={user ? <HomePage /> : <Navigate to="/" />} />
+        <Route path="/" element={user ? <HomePage /> : <Navigate to="/signin" />} />
         <Route path="/signin" element={user ? <Navigate to="/" /> : <SignInEmail />} />
         {/* <Route path="/signin-google" element={user ? <Navigate to="/" /> : <SignInGoogle />} /> */}
         <Route path="/signup" element={user ? <Navigate to="/" /> : <SignUp />} />
