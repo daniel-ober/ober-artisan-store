@@ -1,38 +1,42 @@
-// src/App.js
 import React, { useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import HomePage from './components/Home';
-import SignInEmail from './components/SignInEmail';
-import SignUp from './components/SignUp';
-import Shop from './components/Shop';
-import Cart from './components/Cart';
-import ItemDetail from './components/ItemDetail';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import NavBar from './components/NavBar';
-import VideoBackground from './components/VideoBackground';
-import About from './components/About';
+import Shop from './components/Shop';
+import ItemDetail from './components/ItemDetail';
+import Cart from './components/Cart';
+import Contact from './components/Contact';
+import Home from './components/Home'
 
-const App = () => {
+function App() {
   const [cartItems, setCartItems] = useState([]);
 
   const addToCart = (item) => {
-    setCartItems((prevItems) => [...prevItems, item]);
+    // Check if item is already in the cart
+    const itemExists = cartItems.some(cartItem => cartItem.id === item.id);
+    
+    if (!itemExists) {
+      setCartItems([...cartItems, item]);
+    } else {
+      alert('This item is already in your cart!');
+    }
+  };
+
+  const removeFromCart = (itemId) => {
+    setCartItems(cartItems.filter(item => item.id !== itemId));
   };
 
   return (
-    <div>
-      <VideoBackground />
+    <Router>
       <NavBar />
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/signin" element={<SignInEmail />} />
-        <Route path="/signup" element={<SignUp />} />
+        <Route path="/" element={<Home />} />       
+        <Route path="/shop" element={<Shop cartItems={cartItems} addToCart={addToCart} />} />
         <Route path="/item/:id" element={<ItemDetail />} />
-        <Route path="/shop" element={<Shop addToCart={addToCart} />} />
-        <Route path="/cart" element={<Cart cartItems={cartItems} />} />
+        <Route path="/cart" element={<Cart cartItems={cartItems} removeFromCart={removeFromCart} />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
-    </div>
+    </Router>
   );
-};
+}
 
 export default App;
