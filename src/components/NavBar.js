@@ -3,26 +3,22 @@ import { Link } from 'react-router-dom';
 import { AuthenticationContext } from '../AuthenticationContext';
 
 const NavBar = () => {
-  const { user, signOut } = useContext(AuthenticationContext);
+  const { user } = useContext(AuthenticationContext);
+  const cartItems = 5; // Replace with actual cart item count
 
   return (
     <nav>
-      <ul>
-        <li><Link to="/">Home</Link></li>
-        {user ? (
-          <>
-            <li><Link to="/shop">Shop</Link></li>
-            <li><Link to="/cart">Cart</Link></li>
-            <li><Link to="/checkout">Checkout</Link></li>
-            <li><button onClick={signOut}>Logout</button></li>
-          </>
-        ) : (
-          <>
-            <li><Link to="/signin">Sign In</Link></li>
-            <li><Link to="/signup">Sign Up</Link></li>
-          </>
-        )}
-      </ul>
+      <Link to="/">
+        <img src="/ober-artisan-logo-large.png" alt="Logo" style={{ width: '200px' }} /> {/* Adjust size as needed */}
+      </Link>
+      {user ? (
+        <>
+          <Link to="/shop">Shop</Link>
+          {cartItems > 0 && <Link to="/checkout">Checkout</Link>}
+        </>
+      ) : (
+        <Link to="/signin">Sign In</Link>
+      )}
     </nav>
   );
 };

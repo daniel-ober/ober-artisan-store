@@ -1,0 +1,39 @@
+/* NavBar.css */
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .logo {
+    width: 400px; /* Adjust this value for the web */
+    height: auto;
+  }
+
+  /* src/components/NavBar.css */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  }
+  
+  .navbar-logo .logo-image {
+    height: 80px; /* Adjust height to make it twice as large */
+  }
+  
+  .navbar-links a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #333;
+  }
+  
+  
+  /* For mobile devices, you can keep the logo smaller */
+  @media only screen and (max-width: 768px) {
+    .logo {
+      width: 100px; /* Adjust this value for mobile */
+    }
+  }
+  
