@@ -1,0 +1,26 @@
+/* src/components/ItemDetail.css */
+.item-detail-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .item-detail-image {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .item-detail-info {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .item-detail-info h1 {
+    margin-bottom: 10px;
+  }
+  
+  .item-detail-info p {
+    margin: 5px 0;
+  }
+  
