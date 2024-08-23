@@ -1,35 +1,21 @@
-import React, { createContext, useState, useEffect } from 'react';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import { auth } from './firebaseConfig'; // Correct import path
 
-export const AuthenticationContext = createContext();
+const AuthenticationContext = createContext();
 
 export const AuthenticationProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const auth = getAuth();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    });
-
+    const unsubscribe = auth.onAuthStateChanged(setUser);
     return () => unsubscribe();
-  }, [auth]);
-
-  const signIn = (userData) => {
-    setUser(userData);
-  };
-
-  const signOut = () => {
-    auth.signOut().then(() => {
-      setUser(null);
-    }).catch((error) => {
-      console.error('Sign Out Error', error);
-    });
-  };
+  }, []);
 
   return (
-    <AuthenticationContext.Provider value={{ user, signIn, signOut }}>
+    <AuthenticationContext.Provider value={{ user }}>
       {children}
     </AuthenticationContext.Provider>
   );
 };
+
+export const useAuth = () => useContext(AuthenticationContext);
