@@ -5,8 +5,9 @@
   flex-direction: column;
   align-items: center;
   padding: 1rem;
-  background-color: #4e190247;
+  background-color: #64646415;
   color: white;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .navbar h1 {
