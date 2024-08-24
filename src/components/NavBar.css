@@ -5,7 +5,7 @@
   flex-direction: column;
   align-items: center;
   padding: 1rem;
-  background-color: #593f349c;
+  background-color: #4e190247;
   color: white;
 }
 
@@ -22,7 +22,7 @@
 }
 
 .nav-link {
-  color: white;
+  color: rgb(39, 18, 202);
   text-decoration: none;
   padding: 0.5rem 1rem;
   border-radius: 5px;

@@ -6,6 +6,8 @@ import ItemDetail from './components/ItemDetail';
 import Cart from './components/Cart';
 import Contact from './components/Contact';
 import Home from './components/Home'
+import About from './components/About';
+
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -29,7 +31,8 @@ function App() {
     <Router>
       <NavBar />
       <Routes>
-        <Route path="/" element={<Home />} />       
+        <Route path="/" element={<Home />} />   
+        <Route path="/about" element={<About />} />   
         <Route path="/shop" element={<Shop cartItems={cartItems} addToCart={addToCart} />} />
         <Route path="/item/:id" element={<ItemDetail />} />
         <Route path="/cart" element={<Cart cartItems={cartItems} removeFromCart={removeFromCart} />} />
