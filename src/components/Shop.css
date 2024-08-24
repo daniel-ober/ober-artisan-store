@@ -1,6 +1,7 @@
 /* src/components/Shop.css */
 .shop-container {
     padding: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
   }
   
   .item-list {
