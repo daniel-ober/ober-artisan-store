@@ -9,10 +9,11 @@ const NavBar = () => {
         <Link to="/" className="logo">
         <img src="/ober-artisan-logo-large.png" alt="Logo" style={{ width: '200px' }} /> {/* Adjust size as needed */}
         </Link><div className="nav-links">
+        <Link to="/" className="nav-link">Home</Link>
         <Link to="/shop" className="nav-link">Shop</Link>
-        <Link to="/cart" className="nav-link">Cart</Link>
         <Link to="/about" className="nav-link">About</Link> 
         <Link to="/contact" className="nav-link">Contact</Link>
+        <Link to="/cart" className="nav-link">Cart</Link>
       </div>
     </nav>
   );
