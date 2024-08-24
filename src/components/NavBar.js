@@ -2,6 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './NavBar.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const NavBar = () => {
   return (
@@ -13,7 +14,9 @@ const NavBar = () => {
         <Link to="/shop" className="nav-link">Shop</Link>
         <Link to="/about" className="nav-link">About</Link> 
         <Link to="/contact" className="nav-link">Contact</Link>
-        <Link to="/cart" className="nav-link">Cart</Link>
+        <Link to="/cart" className="nav-link">          <a className="nav-link" href="/cart">
+              <i className="bi bi-cart"></i>
+            </a></Link>
       </div>
     </nav>
   );

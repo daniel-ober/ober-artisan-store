@@ -1,5 +1,5 @@
-// src/components/About.js
 import React from 'react';
+import './About.css'; // Adjust this path to match the location of your CSS file
 
 const About = () => {
   return (
