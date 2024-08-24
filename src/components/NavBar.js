@@ -14,9 +14,7 @@ const NavBar = () => {
         <Link to="/shop" className="nav-link">Shop</Link>
         <Link to="/about" className="nav-link">About</Link> 
         <Link to="/contact" className="nav-link">Contact</Link>
-        <Link to="/cart" className="nav-link">          <a className="nav-link" href="/cart">
-              <i className="bi bi-cart"></i>
-            </a></Link>
+        <Link to="/cart" className="nav-link"><i className="bi bi-cart"></i></Link>
       </div>
     </nav>
   );
