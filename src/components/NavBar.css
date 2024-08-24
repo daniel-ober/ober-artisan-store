@@ -26,12 +26,12 @@
   color: rgb(39, 18, 202);
   text-decoration: none;
   padding: 0.5rem 1rem;
-  border-radius: 5px;
+  border-radius: 10px;
   transition: background-color 0.3s;
 }
 
 .nav-link:hover {
-  background-color: #555;
+  background-color: #cbcbcb;
 }
 
 /* Media query for mobile devices */

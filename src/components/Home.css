@@ -1,0 +1,30 @@
+/* src/components/Home.css */
+
+.home-container {
+  padding: 20px;
+  background-color: #f8f9fa;
+  text-align: center;
+}
+
+.home-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #343a40;
+}
+
+.home-description {
+  font-size: 1.25rem;
+  color: #6c757d;
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+
+.home-button {
+  font-size: 1.1rem;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px
+}
