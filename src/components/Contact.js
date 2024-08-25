@@ -1,4 +1,3 @@
-// src/components/Contact.js
 import React, { useState } from 'react';
 import axios from 'axios';
 import './Contact.css'; // Ensure you have this CSS file if needed
