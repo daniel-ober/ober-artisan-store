@@ -1,23 +1,18 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const connectDB = require('./db'); // Ensure this path is correct
+const mongoose = require('mongoose');
+require('dotenv').config(); // If you're using environment variables to store sensitive info
 
-const app = express();
-const port = process.env.PORT || 3001; // Port should be 3001 if that’s where you’re accessing it
+const connectDB = async () => {
+  try {
+    // Replace 'your_connection_string' with the actual connection string
+    await mongoose.connect(process.env.MONGO_URI || 'your_connection_string', {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log('Database connected successfully');
+  } catch (error) {
+    console.error('Database connection failed:', error);
+    process.exit(1); // Exit the process with failure
+  }
+};
 
-app.use(bodyParser.json());
-
-// Contact form route
-app.post('/api/contact', (req, res) => {
-  const { email, message } = req.body;
-  
-  // Handle form data, e.g., save to database or send email
-  // For now, just return a success response
-  res.status(200).json({ success: true, message: 'Message received' });
-});
-
-// Start the server and connect to the database
-app.listen(port, async () => {
-  await connectDB(); // Ensure database connection
-  console.log(`Server running on port ${port}`);
-});
+module.exports = connectDB;
