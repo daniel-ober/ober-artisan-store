@@ -1,21 +1,22 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import NavBar from './components/NavBar';
+import React, { useState } from 'react'; // Import useState
+import { Routes, Route } from 'react-router-dom';
+import NavBar from './components/NavBar'; // Import NavBar
+import Home from './components/Home';
 import Shop from './components/Shop';
-import ItemDetail from './components/ItemDetail';
-import Cart from './components/Cart';
-import Contact from './components/Contact';
-import Home from './components/Home'
 import About from './components/About';
-
+import Contact from './components/Contact';
+import Cart from './components/Cart';
+import SignInEmail from './components/SignInEmail';
+import SignInGoogle from './components/SignInGoogle';
+import SignUp from './components/SignUp';
+import Checkout from './components/Checkout';
+import ItemDetail from './components/ItemDetail';
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
 
   const addToCart = (item) => {
-    // Check if item is already in the cart
     const itemExists = cartItems.some(cartItem => cartItem.id === item.id);
-    
     if (!itemExists) {
       setCartItems([...cartItems, item]);
     } else {
@@ -28,17 +29,21 @@ function App() {
   };
 
   return (
-    <Router>
-      <NavBar />
+    <>
+      <NavBar /> {/* Include the NavBar */}
       <Routes>
-        <Route path="/" element={<Home />} />   
-        <Route path="/about" element={<About />} />   
-        <Route path="/shop" element={<Shop cartItems={cartItems} addToCart={addToCart} />} />
-        <Route path="/item/:id" element={<ItemDetail />} />
-        <Route path="/cart" element={<Cart cartItems={cartItems} removeFromCart={removeFromCart} />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/shop" element={<Shop addToCart={addToCart} />} />
+        <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/cart" element={<Cart cartItems={cartItems} removeFromCart={removeFromCart} />} />
+        <Route path="/signin-email" element={<SignInEmail />} />
+        <Route path="/signin-google" element={<SignInGoogle />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/item/:id" element={<ItemDetail />} />
       </Routes>
-    </Router>
+    </>
   );
 }
 
