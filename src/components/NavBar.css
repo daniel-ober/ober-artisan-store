@@ -1,23 +1,35 @@
-/* NavBar Styles */
+/* src/components/NavBar.css */
+
 .navbar {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  padding: 10px 20px;
-  background-color: #f8f8f8;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  background-color: #64646415;
+  color: white;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  position: relative; /* Ensure proper stacking context */
+}
+
+.navbar h1 {
+  margin-bottom: 1rem;
 }
 
 .nav-links {
   display: flex;
-  gap: 20px;
-  align-items: center;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .nav-link {
+  color: rgb(39, 18, 202);
   text-decoration: none;
-  color: #333;
-  font-size: 18px;
   padding: 0.5rem 1rem;
   border-radius: 10px;
   transition: background-color 0.3s;
@@ -27,35 +39,36 @@
   background-color: #cbcbcb;
 }
 
-.bi-cart {
-  font-size: 24px;
-  color: #333;
-}
-
-/* Logout Link Specific Styles */
-.logout-link {
-  cursor: pointer;
-  color: rgb(39, 18, 202);
-  text-decoration: none;
-  padding: 0.5rem 1rem;
-  border-radius: 10px;
-  transition: background-color 0.3s;
-}
-
-.logout-link:hover {
-  background-color: #cbcbcb;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
+@media (min-width: 768px) {
+  .navbar {
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .logo {
+    margin-right: auto; /* Push the logo to the left */
+  }
+  
   .nav-links {
+    flex-direction: row;
+    gap: 1rem;
+    position: static; /* Default positioning for landscape mode */
+  }
+}
+
+@media (max-width: 767px) {
+  .navbar {
     flex-direction: column;
-    gap: 10px;
+    align-items: center;
+  }
+  
+  .logo {
+    margin-bottom: 1rem; /* Space between the logo and links in portrait mode */
   }
 
-  .nav-link, .logout-link {
-    padding: 10px 15px;
-    font-size: 16px;
+  .nav-links {
+    position: static; /* Reset positioning for portrait mode */
+    flex-direction: column;
+    align-items: center;
   }
-
 }
