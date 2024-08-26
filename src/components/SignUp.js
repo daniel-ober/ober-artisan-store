@@ -61,7 +61,7 @@ function SignUp() {
         <Button type="submit" variant="contained" color="primary">
           Register
         </Button>
-        <p>Already have an account? <a href="/signin">Sign in here</a></p>
+        <p>Already have an account? <a href="/signin-email">Sign in here</a></p>
       </form>
     </div>
   );
