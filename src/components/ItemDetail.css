@@ -1,27 +1,27 @@
 /* src/components/ItemDetail.css */
-.item-detail-container {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-  }
-  
-  .item-detail-image {
-    max-width: 100%;
-    height: auto;
-  }
-  
-  .item-detail-info {
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-  .item-detail-info h1 {
-    margin-bottom: 10px;
-  }
-  
-  .item-detail-info p {
-    margin: 5px 0;
-  }
-  
+
+.item-detail img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.item-not-found {
+  text-align: center;
+  padding: 20px;
+}
+
+.item-not-found h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.item-not-found p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.item-not-found a {
+  color: #007bff;
+  text-decoration: none;
+}
