@@ -1,21 +1,21 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import { auth } from './firebaseConfig'; // Correct import path
+import React, { createContext, useContext, useState } from 'react';
 
-const AuthenticationContext = createContext();
+const AuthContext = createContext();
 
-export const AuthenticationProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(setUser);
-    return () => unsubscribe();
-  }, []);
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null); // Example state
 
   return (
-    <AuthenticationContext.Provider value={{ user }}>
+    <AuthContext.Provider value={{ user, setUser }}>
       {children}
-    </AuthenticationContext.Provider>
+    </AuthContext.Provider>
   );
 };
 
-export const useAuth = () => useContext(AuthenticationContext);
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+};
