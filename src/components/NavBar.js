@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/AuthContext'; // Import useAuth instead of AuthContext
 import './NavBar.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const NavBar = () => {
-  const { user, logout } = useAuth(); // Access the user and logout function using the useAuth hook
+  const { user } = useAuth(); // Access the user using the useAuth hook
 
   return (
     <nav className="navbar">
@@ -17,14 +17,10 @@ const NavBar = () => {
         <Link to="/shop" className="nav-link">Shop</Link>
         <Link to="/about" className="nav-link">About</Link>
         <Link to="/contact" className="nav-link">Contact</Link>
-        {!user ? (
+        {!user && (
           <Link to="/signin-email" className="nav-link">
             Sign In
           </Link>
-        ) : (
-          <span onClick={logout} className="nav-link logout-link">
-            Logout
-          </span>
         )}
         <Link to="/cart" className="nav-link">
           <i className="bi bi-cart"></i>
