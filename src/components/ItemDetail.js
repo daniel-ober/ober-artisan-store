@@ -1,27 +1,46 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-import items from '../data/items';
-import './ItemDetail.css'; // Import the CSS file
+import React, { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import './NavBar.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
-const ItemDetail = () => {
-  const { id } = useParams();
-  const item = items.find((item) => item.id === parseInt(id, 10));
+const NavBar = () => {
+  const { user } = useAuth();
+  const location = useLocation();
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  if (!item) {
-    return <div>Item not found</div>;
-  }
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
 
   return (
-    <div className="item-detail-container">
-      <img src={item.imageUrl} alt={item.name} className="item-detail-image" />
-      <div className="item-detail-info">
-        <h1>{item.name}</h1>
-        <p>{item.description}</p>
-        <p>${item.price.toFixed(2)}</p>
-        {/* Add additional details or a button to add to cart */}
+    <nav className="navbar">
+      <button className="menu-button" onClick={toggleMenu}>
+        <i className="bi bi-list"></i>
+      </button>
+      <Link to="/" className="logo">
+        <img src="/ober-artisan-logo-large.png" alt="Logo" />
+      </Link>
+      <div className={`nav-links ${menuOpen ? 'active' : ''}`}>
+        <Link to="/" className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}>Home</Link>
+        <Link to="/shop" className={`nav-link ${location.pathname === '/shop' ? 'active' : ''}`}>Shop</Link>
+        <Link to="/about" className={`nav-link ${location.pathname === '/about' ? 'active' : ''}`}>About</Link>
+        <Link to="/contact" className={`nav-link ${location.pathname === '/contact' ? 'active' : ''}`}>Contact</Link>
+        {!user ? (
+          <Link to="/signin-email" className={`nav-link ${location.pathname === '/signin-email' ? 'active' : ''}`}>
+            Sign In
+          </Link>
+        ) : (
+          <Link to="/signout" className="nav-link">
+            Sign Out
+          </Link>
+        )}
+        <Link to="/cart" className="nav-link">
+          <i className="bi bi-cart"></i>
+        </Link>
       </div>
-    </div>
+    </nav>
   );
 };
 
-export default ItemDetail;
+export default NavBar;

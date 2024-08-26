@@ -28,7 +28,7 @@ const items = [
       name: 'Handcrafted Drum 4',
       description: 'Another amazing handcrafted drum.',
       price: 999.99,
-      imageUrl: 'https://i.imgur.com/yJ7aaMm.jpeg',
+      imageUrl: 'https://i.imgur.com/GSqgGbp.jpeg',
     },
     {
       id: 5,
