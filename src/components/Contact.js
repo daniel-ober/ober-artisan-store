@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './Contact.css'; // Ensure you have this CSS file if needed
+import { TextField, Button, Typography } from '@mui/material';
+import './Contact.css'; // Ensure this CSS file is updated accordingly
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -21,7 +22,7 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/api/contact', formData);
+      await axios.post('/api/contact', formData);
       setStatus('Message sent successfully!');
       setFormData({ name: '', email: '', message: '' });
     } catch (error) {
@@ -31,40 +32,52 @@ const Contact = () => {
 
   return (
     <div className="contact-container">
-      <h1>Contact Us</h1>
+      <Typography variant="h4" component="h1" gutterBottom>
+        Contact Us
+      </Typography>
       <form onSubmit={handleSubmit}>
-        <label>
-          Name:
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <label>
-          Email:
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <label>
-          Message:
-          <textarea
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <button type="submit">Send</button>
+        <TextField
+          label="Name"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          fullWidth
+          margin="normal"
+          required
+          className="contact-input"
+        />
+        <TextField
+          label="Email"
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          fullWidth
+          margin="normal"
+          required
+          className="contact-input"
+        />
+        <TextField
+          label="Message"
+          name="message"
+          value={formData.message}
+          onChange={handleChange}
+          fullWidth
+          margin="normal"
+          required
+          multiline
+          rows={4}
+          className="contact-input"
+        />
+        <Button type="submit" variant="contained" color="primary" className="contact-button">
+          Send
+        </Button>
       </form>
-      {status && <p>{status}</p>}
+      {status && (
+        <Typography variant="body2" color="textSecondary" sx={{ marginTop: 2 }}>
+          {status}
+        </Typography>
+      )}
     </div>
   );
 };

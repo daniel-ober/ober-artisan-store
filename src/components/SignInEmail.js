@@ -1,22 +1,22 @@
-// src/components/SignInEmail.js
 import React, { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
 import { Button, TextField, Typography } from '@mui/material';
-import { Link } from 'react-router-dom'; // Import Link here
-import './SignInEmail.css'; // Ensure you have this CSS file if needed
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate hook
+import './Contact.css';
 
 function SignInEmail() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');  // State to handle errors
+  const [error, setError] = useState('');
+  const navigate = useNavigate(); // Initialize the useNavigate hook
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(''); // Reset error message
+    setError('');
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      // Handle successful login (like redirecting to another page)
+      navigate('/shop'); // Redirect to the shop page after successful login
     } catch (error) {
       switch (error.code) {
         case 'auth/wrong-password':
@@ -35,9 +35,9 @@ function SignInEmail() {
   };
 
   return (
-    <div className="signin-container">
+    <div className="contact-container">
       <h1>Sign In</h1>
-      <form onSubmit={handleSubmit} className="signin-form">
+      <form onSubmit={handleSubmit}>
         <TextField
           label="Email"
           type="email"
@@ -45,6 +45,7 @@ function SignInEmail() {
           onChange={(e) => setEmail(e.target.value)}
           fullWidth
           margin="normal"
+          className="contact-input"
         />
         <TextField
           label="Password"
@@ -53,18 +54,22 @@ function SignInEmail() {
           onChange={(e) => setPassword(e.target.value)}
           fullWidth
           margin="normal"
+          className="contact-input"
         />
         {error && (
           <Typography color="error" variant="body2" sx={{ marginTop: 1 }}>
             {error}
           </Typography>
         )}
-        <Button type="submit" variant="contained" color="primary">
+        <Button type="submit" variant="contained" color="primary" className="contact-button">
           Sign In
         </Button>
       </form>
       <p>
-        Don't already have an account? <Link to="/signup">Register here</Link>
+        Don't already have an account?{' '}
+        <Link to="/signup" className="form-link">
+          Register here
+        </Link>
       </p>
     </div>
   );
