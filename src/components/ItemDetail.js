@@ -1,36 +1,27 @@
 // src/components/ItemDetail.js
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import items from '../data/items'; // Import the items data
-import './ItemDetail.css'; // Ensure you have styling for this component
-import { useDispatch } from 'react-redux';
-import { addToCart } from '../redux/cartSlice'; // Adjust the path as necessary
+import items from '../data/items';
+import './ItemDetail.css';
 
 const ItemDetail = () => {
-  const { id } = useParams(); // Get the item ID from the URL parameters
-  const dispatch = useDispatch();
-
-  // Find the item based on the ID
-  const item = items.find(item => item.id === parseInt(id, 10));
-
-  const handleAddToCart = () => {
-    if (item) {
-      dispatch(addToCart(item));
-    }
-  };
+  const { id } = useParams();
+  const item = items.find((item) => item.id === parseInt(id));
 
   if (!item) {
-    return <p>Item not found</p>;
+    return <div>Item not found</div>;
   }
 
   return (
     <div className="item-detail-container">
-      <h1>{item.name}</h1>
-      <img src={item.imageUrl} alt={item.name} className="item-detail-image" />
+      <div className="item-detail-image">
+        <img src={item.imageUrl} alt={item.name} />
+      </div>
       <div className="item-detail-info">
+        <h1>{item.name}</h1>
         <p>{item.description}</p>
-        <p>${item.price.toFixed(2)}</p>
-        <button onClick={handleAddToCart}>Add to Cart</button>
+        <p className="item-detail-price">${item.price.toFixed(2)}</p>
+        <button className="item-detail-add-to-cart">Add to Cart</button>
       </div>
     </div>
   );
