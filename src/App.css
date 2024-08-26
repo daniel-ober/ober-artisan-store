@@ -1,16 +1,30 @@
 .App {
   text-align: center;
+  position: relative;
+  overflow: hidden;
+  height: 100vh; /* Ensure the app takes full height of the viewport */
+  margin: 0; /* Remove default margin */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1; /* Ensure the video is behind other content */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.background-video-content {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.app-content {
+  position: relative;
+  z-index: 1; /* Ensure content appears above the background video */
 }
 
 .App-header {
