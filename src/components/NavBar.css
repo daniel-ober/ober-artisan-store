@@ -1,30 +1,27 @@
-/* src/components/NavBar.css */
-
+/* NavBar Styles */
 .navbar {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  padding: 1rem;
-  background-color: #64646415;
-  color: white;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding: 10px 20px;
+  background-color: #f8f8f8;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.navbar h1 {
-  margin-bottom: 1rem;
+.logo img {
+  height: 60px;
 }
 
 .nav-links {
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  width: 100%;
-  justify-content: center;
+  gap: 20px;
+  align-items: center;
 }
 
 .nav-link {
-  color: rgb(39, 18, 202);
   text-decoration: none;
+  color: #333;
+  font-size: 18px;
   padding: 0.5rem 1rem;
   border-radius: 10px;
   transition: background-color 0.3s;
@@ -34,10 +31,38 @@
   background-color: #cbcbcb;
 }
 
-/* Media query for mobile devices */
-@media (min-width: 768px) {
+.bi-cart {
+  font-size: 24px;
+  color: #333;
+}
+
+/* Logout Link Specific Styles */
+.logout-link {
+  cursor: pointer;
+  color: rgb(39, 18, 202);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  transition: background-color 0.3s;
+}
+
+.logout-link:hover {
+  background-color: #cbcbcb;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
   .nav-links {
-    flex-direction: row;
-    gap: 1rem;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .nav-link, .logout-link {
+    padding: 10px 15px;
+    font-size: 16px;
+  }
+
+  .logo img {
+    height: 50px;
   }
 }
