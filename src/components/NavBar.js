@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext'; // Import useAuth instead of AuthContext
 import './NavBar.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import { useAuth } from '../context/AuthContext'; // Adjust path as needed
+
 
 const NavBar = () => {
-  const { user } = useAuth(); // Access the user using the useAuth hook
+  const { user, logout } = useAuth(); // Access the user and logout function using the useAuth hook
 
   return (
     <nav className="navbar">
@@ -21,6 +22,11 @@ const NavBar = () => {
           <Link to="/signin-email" className="nav-link">
             Sign In
           </Link>
+        )}
+        {user && (
+          <button onClick={logout} className="nav-link btn-link">
+            Logout
+          </button>
         )}
         <Link to="/cart" className="nav-link">
           <i className="bi bi-cart"></i>

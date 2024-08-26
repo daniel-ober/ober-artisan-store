@@ -1,22 +1,28 @@
+// src/components/Cart.js
 import React from 'react';
-import './Cart.css'; // Assuming you have some styles for the cart
+import { useSelector, useDispatch } from 'react-redux';
+import { removeFromCart } from '../redux/cartSlice'; // Adjust path if necessary
 
-const Cart = ({ cartItems, removeFromCart }) => {
+const Cart = () => {
+  const cartItems = useSelector((state) => state.cart.cartItems);
+  const dispatch = useDispatch();
+
+  const handleRemoveFromCart = (id) => {
+    dispatch(removeFromCart(id));
+  };
+
   return (
-    <div className="cart-container">
+    <div>
       <h1>Shopping Cart</h1>
       {cartItems.length === 0 ? (
         <p>Your cart is empty</p>
       ) : (
         <ul>
-          {cartItems.map((item) => (
-            <li key={item.id} className="cart-item">
-              <img src={item.imageUrl} alt={item.name} />
-              <div className="item-details">
-                <h2>{item.name}</h2>
-                <p>${item.price}</p>
-                <button onClick={() => removeFromCart(item.id)}>Remove</button>
-              </div>
+          {cartItems.map(item => (
+            <li key={item.id}>
+              <h2>{item.name}</h2>
+              <p>Price: ${item.price.toFixed(2)}</p>
+              <button onClick={() => handleRemoveFromCart(item.id)}>Remove</button>
             </li>
           ))}
         </ul>
