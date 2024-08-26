@@ -1,20 +1,31 @@
-// src/context/AuthContext.js
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { auth } from '../firebaseConfig';
 
 const AuthContext = createContext();
 
-export function AuthProvider({ children }) {
+export const useAuth = () => {
+  return useContext(AuthContext);
+};
+
+export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  // Add any authentication logic here
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    });
+    return unsubscribe;
+  }, []);
 
-  return (
-    <AuthContext.Provider value={{ user, setUser }}>
-      {children}
-    </AuthContext.Provider>
-  );
-}
+  const logout = () => {
+    signOut(auth);
+  };
 
-export function useAuth() {
-  return useContext(AuthContext);
-}
+  const value = {
+    user,
+    logout,
+  };
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+};
