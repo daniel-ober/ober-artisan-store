@@ -3,18 +3,22 @@ import React, { useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
 import { Button, TextField, Typography } from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom';
 import './Register.css'
 
 function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate(); // Initialize the useNavigate hook
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     try {
       await createUserWithEmailAndPassword(auth, email, password);
+      navigate('/shop'); // Redirect to the shop page after successful registration
       // Handle successful registration (like redirecting)
     } catch (error) {
       switch (error.code) {
@@ -35,7 +39,9 @@ function SignUp() {
 
   return (
     <div className="contact-container">
-      <h1>Register</h1>
+      <Typography variant="h4" component="h1" gutterBottom>
+        Register
+      </Typography>
       <form onSubmit={handleSubmit}>
         <TextField
           label="Email"
@@ -44,6 +50,7 @@ function SignUp() {
           onChange={(e) => setEmail(e.target.value)}
           fullWidth
           margin="normal"
+          required
         />
         <TextField
           label="Password"
@@ -52,6 +59,7 @@ function SignUp() {
           onChange={(e) => setPassword(e.target.value)}
           fullWidth
           margin="normal"
+          required
         />
         {error && (
           <Typography color="error" variant="body2" sx={{ marginTop: 1 }}>
@@ -61,7 +69,12 @@ function SignUp() {
         <Button type="submit" variant="contained" color="primary">
           Register
         </Button>
-        <p>Already have an account? <a href="/signin">Sign in here</a></p>
+        <Typography variant="body2" sx={{ marginTop: 2 }}>
+        Already have an account?{' '}
+        <Link to="/signin" className="form-link">
+          Sign in here
+        </Link>
+      </Typography>
       </form>
     </div>
   );
