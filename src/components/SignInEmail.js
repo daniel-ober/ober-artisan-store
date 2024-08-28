@@ -1,9 +1,11 @@
+// src/components/SignInEmail.js
+
 import React, { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
 import { Button, TextField, Typography } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate hook
-import './Contact.css';
+import { Link, useNavigate } from 'react-router-dom';
+import './SignInEmail.css';
 
 function SignInEmail() {
   const [email, setEmail] = useState('');
@@ -36,7 +38,9 @@ function SignInEmail() {
 
   return (
     <div className="contact-container">
-      <h1>Sign In</h1>
+      <Typography variant="h4" component="h1" gutterBottom>
+        Sign In
+      </Typography>
       <form onSubmit={handleSubmit}>
         <TextField
           label="Email"
@@ -46,6 +50,7 @@ function SignInEmail() {
           fullWidth
           margin="normal"
           className="contact-input"
+          required
         />
         <TextField
           label="Password"
@@ -55,6 +60,7 @@ function SignInEmail() {
           fullWidth
           margin="normal"
           className="contact-input"
+          required
         />
         {error && (
           <Typography color="error" variant="body2" sx={{ marginTop: 1 }}>
@@ -65,12 +71,12 @@ function SignInEmail() {
           Sign In
         </Button>
       </form>
-      <p>
-        Don't already have an account?{' '}
-        <Link to="/signup" className="form-link">
+      <Typography variant="body2" sx={{ marginTop: 2 }}>
+        Don't have an account?{' '}
+        <Link to="/register" className="form-link">
           Register here
         </Link>
-      </p>
+      </Typography>
     </div>
   );
 }
