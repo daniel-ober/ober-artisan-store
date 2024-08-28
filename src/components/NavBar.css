@@ -1,112 +1,62 @@
-/* General Styles */
+/* src/components/NavBar.css */
 .navbar {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  background-color: #ffffffab;
-  color: rgb(0, 0, 0);
+  background-color: #dededed6;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  position: relative;
+  color: #fff;
 }
 
-.logo-container {
+.navbar-logo .logo-image {
+  height: 100px;
+}
+
+.navbar-links {
   display: flex;
-  align-items: center;
-  width: 100%;
-  justify-content: center; /* Center the logo */
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.logo {
-  margin-right: 2rem; /* Adjust space between logo and links */
+.navbar-links li {
+  margin: 0 1rem;
 }
 
-.dropdown-toggle {
-  display: none;
+.navbar-links a {
+  color: #000000;
+  text-decoration: none;
+  font-size: 1.0rem;
+}
+
+.navbar-links a:hover {
+  text-decoration: underline;
+}
+
+.logout-button {
   background: none;
   border: none;
-  color: white;
-  font-size: 1.5rem;
+  color: #820000;
+  font-size: 1rem;
   cursor: pointer;
 }
 
-.nav-links {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  width: 100%;
-  justify-content: center;
-  transition: transform 0.3s ease;
+.logout-button:hover {
+  text-decoration: underline;
 }
 
-/* Default to stacked links for mobile */
-.nav-links.open {
-  display: flex;
-}
-
-.nav-link {
-  color: rgb(39, 18, 202);
-  text-decoration: none;
-  padding: 0.5rem 1rem;
-  border-radius: 10px;
-  transition: background-color 0.3s;
-}
-
-.nav-link-active {
-  background-color: #cbcbcb;
-}
-
-.nav-link:hover {
-  background-color: #cbcbcb;
-}
-
-/* Landscape and Wide Screen */
-@media (min-width: 768px) {
-  .navbar {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .logo-container {
-    justify-content: flex-start; /* Align logo to the left */
-  }
-
-  .logo {
-    margin-right: 2rem; /* Space between logo and links */
-  }
-
-  .nav-links {
-    flex-direction: row;
-    gap: 1rem;
-    transform: none;
-  }
-
-  .dropdown-toggle {
-    display: none;
-  }
-}
-
-/* Mobile Portrait Mode */
 @media (max-width: 767px) {
-  .nav-links {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: #64646415;
-    width: 100%;
-    z-index: 1;
-  }
-
-  .nav-links.open {
-    display: flex;
+  .navbar-links {
     flex-direction: column;
-    gap: 0.5rem;
-    transform: translateY(0);
+    display: none;
   }
 
-  .dropdown-toggle {
-    display: block;
+  .navbar-links.active {
+    display: flex;
+  }
+
+  .navbar-logo {
+    text-align: center;
   }
 }

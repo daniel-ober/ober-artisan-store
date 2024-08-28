@@ -1,10 +1,20 @@
-// src/reducers/index.js
-import { combineReducers } from 'redux';
-import cartReducer from './cartReducer'; // Ensure this path is correct
+// src/index.js
 
-const rootReducer = combineReducers({
-  cart: cartReducer,
-  // Add other reducers here
-});
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
+import store from './redux/store'; // Ensure the path is correct
+import App from './App';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
 
-export default rootReducer;
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <Provider store={store}>
+    <Router>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </Router>
+  </Provider>
+);

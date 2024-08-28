@@ -1,39 +1,35 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './NavBar.css';
-import 'bootstrap-icons/font/bootstrap-icons.css';
-import { useAuth } from '../context/AuthContext'; // Adjust path as needed
+import { useAuth } from '../context/AuthContext'; // Ensure this path is correct
+import './NavBar.css'; // Import the CSS for styling
 
-
-const NavBar = () => {
-  const { user, logout } = useAuth(); // Access the user and logout function using the useAuth hook
+function NavBar() {
+  const { user, logout } = useAuth() || {}; // Provide default value to avoid errors
 
   return (
     <nav className="navbar">
-      <Link to="/" className="logo">
-        <img src="/ober-artisan-logo-large.png" alt="Logo" style={{ width: '200px' }} />
-      </Link>
-      <div className="nav-links">
-        <Link to="/" className="nav-link">Home</Link>
-        <Link to="/shop" className="nav-link">Shop</Link>
-        <Link to="/about" className="nav-link">About</Link>
-        <Link to="/contact" className="nav-link">Contact</Link>
-        {!user && (
-          <Link to="/signin-email" className="nav-link">
-            Sign In
-          </Link>
-        )}
-        {user && (
-          <button onClick={logout} className="nav-link btn-link">
-            Logout
-          </button>
-        )}
-        <Link to="/cart" className="nav-link">
-          <i className="bi bi-cart"></i>
+      <div className="navbar-logo">
+        <Link to="/">
+          <img src="/ober-artisan-logo-small.png" alt="Logo" className="logo-image" />
         </Link>
       </div>
+      <ul className="navbar-links">
+        <li><Link to="/shop">Shop</Link></li>
+        <li><Link to="/about">About</Link></li>
+        <li><Link to="/contact">Contact</Link></li>
+        {!user ? (
+          <li><Link to="/signin">Sign In</Link></li>
+        ) : (
+          <li><button className="logout-button" onClick={logout}>Logout</button></li>
+        )}
+        <li>
+          <Link to="/cart">
+            View Cart <i className="bi bi-cart cart-icon"></i> {/* Bootstrap icon for cart */}
+          </Link>
+        </li>
+      </ul>
     </nav>
   );
-};
+}
 
 export default NavBar;
