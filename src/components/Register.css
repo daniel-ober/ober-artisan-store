@@ -1,4 +1,3 @@
-src/components/Register.css
 .register-container {
     max-width: 400px;
     margin: auto;
@@ -6,44 +5,32 @@ src/components/Register.css
     border: 1px solid #ddd;
     border-radius: 8px;
     background-color: #f9f9f9;
-}
-
-.register-form {
+  }
+  
+  .register-form {
     display: flex;
     flex-direction: column;
-}
-
-.register-input {
-    margin-bottom: 1rem;
-}
-
-.register-input label {
-    margin-bottom: 0.5rem;
-    display: block;
-}
-
-.register-input input {
-    width: 100%;
-    padding: 0.8rem;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-}
-
-.register-button {
-    margin-top: 1rem;
-    padding: 0.8rem;
-    border: none;
-    border-radius: 4px;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-}
-
-.register-button:hover {
-    background-color: #0056b3;
-}
-
-.error-message {
+  }
+  
+  .register-input {
+    margin-bottom: 16px;
+  }
+  
+  .register-button {
+    margin-top: 16px;
+  }
+  
+  .error-message {
     color: red;
     margin-bottom: 1rem;
-}
+  }
+  
+  .password-rules ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .password-rules li {
+    margin-bottom: 0.5rem;
+  }
+  
