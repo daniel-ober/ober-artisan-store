@@ -9,7 +9,7 @@ import Contact from './components/Contact';
 import Cart from './components/Cart';
 import SignInEmail from './components/SignInEmail';
 import SignInGoogle from './components/SignInGoogle';
-import SignUp from './components/SignUp';
+import Register from './components/Register';
 import Checkout from './components/Checkout';
 import ItemDetail from './components/ItemDetail';
 import './App.css';
@@ -43,9 +43,9 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/signin-email" element={<SignInEmail />} />
+          <Route path="/signin" element={<SignInEmail />} />
           <Route path="/signin-google" element={<SignInGoogle />} />
-          <Route path="/signup" element={<SignUp />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/item/:id" element={<ItemDetail />} />
         </Routes>

@@ -1,16 +1,17 @@
 // src/components/Shop.js
+
 import React from 'react';
 import { Link } from 'react-router-dom'; // Import Link for navigation
 import items from '../data/items';
 import './Shop.css';
+import { addItem } from '../redux/cartSlice'; // Correct import
 import { useDispatch } from 'react-redux';
-import { addToCart } from '../redux/cartSlice'; // Adjust the path as necessary
 
 const Shop = () => {
   const dispatch = useDispatch();
 
   const handleAddToCart = (item) => {
-    dispatch(addToCart(item));
+    dispatch(addItem(item)); // Use the correct action
   };
 
   return (
