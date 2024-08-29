@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { TextField, Button, Typography } from '@mui/material';
-import './Contact.css';
+import './Contact.css'; // Ensure this CSS file is updated accordingly
 
 const Contact = () => {
   const [formData, setFormData] = useState({
