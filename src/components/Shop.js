@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './Shop.css';
 
 const Shop = () => {
   const [products, setProducts] = useState([]);
@@ -30,23 +31,33 @@ const Shop = () => {
   }
 
   if (error) {
-    return <p>{error}</p>;
+    return <p className="error-message">{error}</p>;
   }
 
   return (
-    <div>
-      {products.length > 0 ? (
-        products.map((product) => (
-          <div key={product._id}>
-            <h3>{product.name}</h3>
-            <p>{product.description}</p>
-            <p>{product.price !== undefined && product.price !== null ? product.price.toFixed(2) : 'N/A'}</p>
-            <img src={product.imageUrl} alt={product.name} />
-          </div>
-        ))
-      ) : (
-        <p>No items available</p>
-      )}
+    <div className="shop-container">
+      <div className="item-list">
+        {products.length > 0 ? (
+          products.map((product) => (
+            <div key={product._id} className="product-card">
+              <img
+                src={product.imageUrl || '/path/to/placeholder-image.jpg'}
+                alt={product.name}
+                className="product-image"
+              />
+              <div className="product-info">
+                <h3 className="product-name">{product.name}</h3>
+                <p className="product-description">{product.description}</p>
+                <p className="product-price">
+                  {product.price !== undefined && product.price !== null ? `$${product.price.toFixed(2)}` : 'Price not available'}
+                </p>
+              </div>
+            </div>
+          ))
+        ) : (
+          <p>No items available</p>
+        )}
+      </div>
     </div>
   );
 };
