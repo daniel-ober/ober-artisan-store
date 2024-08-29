@@ -1,32 +1,68 @@
+/* src/components/Cart.css */
 .cart-container {
   padding: 20px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.cart-items {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ececec;  /* Light gray background for table */
 }
 
-.cart-item {
-  display: flex;
-  align-items: center;
+.cart-table th, .cart-table td {
   border: 1px solid #ddd;
   padding: 10px;
-  border-radius: 8px;
-  background-color: #fff;
+  text-align: center;
 }
 
-.cart-item-image {
-  width: 100px;
-  height: auto;
-  margin-right: 20px;
+.cart-table th {
+  background-color: #301602d7; 
+  color: white;
 }
 
-.cart-item-details {
-  flex: 1;
+.action-cell {
+  text-align: center;
 }
 
-.checkout-button {
-  margin-top: 20px;
+.remove-button {
+  background-color: #ff4d4d;  /* Red background for remove button */
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: background-color 0.3s;
+}
+
+.remove-button:hover {
+  background-color: #ff1a1a;  /* Darker red on hover */
+}
+
+.cart-image {
+  width: 80px;
+  height: 60px;
+  object-fit: cover;
+}
+
+.grand-total-label {
+  font-weight: bold;
+}
+
+.grand-total-amount {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* Responsive styles for mobile devices */
+@media (max-width: 767px) {
+  .cart-table {
+    font-size: 0.875rem;  /* Smaller text for mobile */
+  }
+
+  .cart-image {
+    width: 60px;
+    height: 45px;
+  }
 }

@@ -26,6 +26,22 @@ const Shop = () => {
     fetchProducts();
   }, []);
 
+  const addToCart = (product) => {
+    const existingCart = JSON.parse(localStorage.getItem('cartItems')) || [];
+    const itemIndex = existingCart.findIndex(item => item._id === product._id);
+
+    if (itemIndex > -1) {
+      // If item already exists, update quantity
+      existingCart[itemIndex].quantity += 1;
+    } else {
+      // Add new item to cart
+      product.quantity = 1;  // Initialize quantity
+      existingCart.push(product);
+    }
+
+    localStorage.setItem('cartItems', JSON.stringify(existingCart));
+  };
+
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -51,6 +67,12 @@ const Shop = () => {
                 <p className="product-price">
                   {product.price !== undefined && product.price !== null ? `$${product.price.toFixed(2)}` : 'Price not available'}
                 </p>
+                <button
+                  className="add-to-cart-button"
+                  onClick={() => addToCart(product)}
+                >
+                  Add to Cart
+                </button>
               </div>
             </div>
           ))
