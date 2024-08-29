@@ -18,11 +18,11 @@
 
 .product-card {
   border: 1px solid #ddd;
-  border-radius: 10px;
+  border-radius: 10px;  /* Adjusted radius for a softer look */
   overflow: hidden;
   width: 220px;  /* Increased width for larger cards */
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  background-color: #313031;
+  background-color: #ececec;  /* Light gray background for cards */
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
@@ -39,7 +39,7 @@
 
 .product-info {
   padding: 10px;
-  color: #ffffff;
+  color: #000000;  /* Black text color for better readability */
   text-align: center;
 }
 
@@ -56,6 +56,22 @@
 .product-price {
   font-size: 1.1rem;  /* Adjusted font size for price */
   margin: 0;
+}
+
+.add-to-cart-button {
+  background-color: #4CAF50;  /* Green background */
+  color: white;  /* White text */
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+}
+
+.add-to-cart-button:hover {
+  background-color: #45a049;  /* Darker green on hover */
 }
 
 /* Responsive styles for mobile devices */
