@@ -1,38 +1,43 @@
-// src/components/Shop.js
-
-import React from 'react';
-import { Link } from 'react-router-dom'; // Import Link for navigation
-import items from '../data/items';
-import './Shop.css';
-import { addItem } from '../redux/cartSlice'; // Correct import
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
 
 const Shop = () => {
-  const dispatch = useDispatch();
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const handleAddToCart = (item) => {
-    dispatch(addItem(item)); // Use the correct action
-  };
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/products');
+        const data = await response.json();
+        setProducts(data);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
   return (
-    <div className="shop-container">
-      <h1>Shop</h1>
-      <div className="item-list">
-        {items.map((item) => (
-          <div key={item.id} className="item-card">
-            <Link to={`/item/${item.id}`} className="item-image-link">
-              <img src={item.imageUrl} alt={item.name} className="item-image" />
-            </Link>
-            <div className="item-info">
-              <h2>{item.name}</h2>
-              <p>{item.description}</p>
-              <p>${item.price.toFixed(2)}</p>
-              <Link to={`/item/${item.id}`} className="item-details-link">Item Details</Link>
-              <button onClick={() => handleAddToCart(item)}>Add to Cart</button>
-            </div>
+    <div>
+      {products.length > 0 ? (
+        products.map((product) => (
+          <div key={product._id}>
+            <h3>{product.name}</h3>
+            <p>{product.description}</p>
+            <p>${product.price.toFixed(2)}</p>
+            <img src={product.imageUrl} alt={product.name} />
           </div>
-        ))}
-      </div>
+        ))
+      ) : (
+        <p>No items available</p>
+      )}
     </div>
   );
 };

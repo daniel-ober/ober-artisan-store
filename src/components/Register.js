@@ -43,6 +43,7 @@ const Register = () => {
     const uppercaseValid = /[A-Z]/.test(password);
     const lowercaseValid = /[a-z]/.test(password);
     const numberValid = /\d/.test(password);
+    // eslint-disable-next-line 
     const specialCharValid = /[~!@#$%^*()_\-+=\{\}\[\]|:;",.?]/.test(password);
     const noInvalidChars = !/[<>&']/.test(password);
 
@@ -200,7 +201,7 @@ const Register = () => {
                 Contain one number
               </li>
               <li style={{ color: passwordRules.specialChar ? 'green' : 'red' }}>
-                Contain at least one special character: ~ ! @ # $ % ^ * ( ) _ - + = { } [ ] | : ; " , ?
+                Contain at least one special character
               </li>
             </ul>
           </Typography>
