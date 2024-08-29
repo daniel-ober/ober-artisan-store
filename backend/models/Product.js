@@ -17,6 +17,10 @@ const ProductSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  images: {
+    type: String,
+    required: true,
+  },
   // Add more fields as needed
 });
 
