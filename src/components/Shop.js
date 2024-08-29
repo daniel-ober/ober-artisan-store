@@ -5,6 +5,7 @@ const Shop = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -26,20 +27,40 @@ const Shop = () => {
     fetchProducts();
   }, []);
 
-  const addToCart = (product) => {
-    const existingCart = JSON.parse(localStorage.getItem('cartItems')) || [];
-    const itemIndex = existingCart.findIndex(item => item._id === product._id);
+  useEffect(() => {
+    // Load cart items from localStorage on component mount
+    const loadCart = () => {
+      const storedCart = JSON.parse(localStorage.getItem('cartItems')) || [];
+      setCartItems(storedCart);
+    };
 
-    if (itemIndex > -1) {
-      // If item already exists, update quantity
-      existingCart[itemIndex].quantity += 1;
-    } else {
-      // Add new item to cart
-      product.quantity = 1;  // Initialize quantity
-      existingCart.push(product);
+    loadCart();
+  }, []);
+
+  const updateCart = (product, action) => {
+    let updatedCart = [...cartItems];
+
+    if (action === 'add') {
+      if (!updatedCart.some(item => item._id === product._id)) {
+        product.quantity = 1;
+        updatedCart.push(product);
+      }
+    } else if (action === 'remove') {
+      updatedCart = updatedCart.filter(item => item._id !== product._id);
     }
 
-    localStorage.setItem('cartItems', JSON.stringify(existingCart));
+    setCartItems(updatedCart);
+    localStorage.setItem('cartItems', JSON.stringify(updatedCart));
+  };
+
+  const handleCartToggle = (product) => {
+    const isInCart = cartItems.some(item => item._id === product._id);
+    const action = isInCart ? 'remove' : 'add';
+    updateCart(product, action);
+  };
+
+  const isInCart = (productId) => {
+    return cartItems.some(item => item._id === productId);
   };
 
   if (loading) {
@@ -68,10 +89,10 @@ const Shop = () => {
                   {product.price !== undefined && product.price !== null ? `$${product.price.toFixed(2)}` : 'Price not available'}
                 </p>
                 <button
-                  className="add-to-cart-button"
-                  onClick={() => addToCart(product)}
+                  className={isInCart(product._id) ? 'remove-from-cart-button' : 'add-to-cart-button'}
+                  onClick={() => handleCartToggle(product)}
                 >
-                  Add to Cart
+                  {isInCart(product._id) ? 'Remove from Cart' : 'Add to Cart'}
                 </button>
               </div>
             </div>
