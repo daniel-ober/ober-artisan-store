@@ -1,7 +1,7 @@
 // src/firebaseConfig.js
-import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
 
 
 const firebaseConfig = {
@@ -12,11 +12,10 @@ const firebaseConfig = {
     messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
     appId: process.env.REACT_APP_FIREBASE_APP_ID,
 };
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
 
-// Export auth and firestore for use in other parts of the app
-export const auth = getAuth(app);
-export const firestore = getFirestore(app);
+firebase.initializeApp(firebaseConfig);
 
-export default app;
+const auth = firebase.auth();
+const firestore = firebase.firestore();
+
+export { auth, firestore };

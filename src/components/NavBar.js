@@ -1,3 +1,4 @@
+// src/components/NavBar.js
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext'; // Ensure this path is correct
@@ -10,7 +11,7 @@ function NavBar() {
     <nav className="navbar">
       <div className="navbar-logo">
         <Link to="/">
-          <img src="/ober-artisan-logo-small.png" alt="Logo" className="logo-image" />
+          <img src="/ober-artisan-logo-large.png" alt="Logo" className="logo-image" /> {/* Changed to large logo */}
         </Link>
       </div>
       <ul className="navbar-links">
