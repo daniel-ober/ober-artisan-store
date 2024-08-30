@@ -28,7 +28,6 @@ const Shop = () => {
   }, []);
 
   useEffect(() => {
-    // Load cart items from localStorage on component mount
     const loadCart = () => {
       const storedCart = JSON.parse(localStorage.getItem('cartItems')) || [];
       setCartItems(storedCart);
