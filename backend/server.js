@@ -1,11 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 const app = express();
 
 // Middleware
 app.use(express.json());
 app.use(cors());
+app.use(bodyParser.json());
 
 // Connect to MongoDB
 mongoose.connect('mongodb://localhost:27017/mydatabase', { useNewUrlParser: true, useUnifiedTopology: true })
@@ -14,7 +16,7 @@ mongoose.connect('mongodb://localhost:27017/mydatabase', { useNewUrlParser: true
   })
   .catch(err => {
     console.error('MongoDB connection error:', err);
-    process.exit(1); // Exit the process with failure
+    process.exit(1);
   });
 
 // Define Product Schema
@@ -25,9 +27,10 @@ const productSchema = new mongoose.Schema({
   imageUrl: String
 });
 
-const Product = mongoose.model('Product', productSchema);
+// Define Product Model
+const Product = mongoose.model('Product', productSchema, 'products');
 
-// API Route
+// Define API Route
 app.get('/api/products', async (req, res) => {
   try {
     const products = await Product.find();
