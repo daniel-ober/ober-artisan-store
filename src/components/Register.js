@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../firebaseConfig'; // Adjust import if necessary
+import { auth, firestore } from '../firebaseConfig'; // Import Firestore as well
 import { TextField, Button, Typography, IconButton } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
@@ -43,7 +43,6 @@ const Register = () => {
     const uppercaseValid = /[A-Z]/.test(password);
     const lowercaseValid = /[a-z]/.test(password);
     const numberValid = /\d/.test(password);
-    // eslint-disable-next-line 
     const specialCharValid = /[~!@#$%^*()_\-+=\{\}\[\]|:;",.?]/.test(password);
     const noInvalidChars = !/[<>&']/.test(password);
 
@@ -71,7 +70,18 @@ const Register = () => {
     }
 
     try {
-      await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+      // Create user with Firebase Authentication
+      const { user } = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+
+      // Create a new user document in Firestore
+      await firestore.collection('users').doc(user.uid).set({
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        phone: formData.phone,
+        createdAt: new Date()
+      });
+
       setStatus('Registration successful!');
       setError(''); // Clear any previous error messages
       setPasswordRules({ // Clear password rules
