@@ -1,5 +1,3 @@
-// src/components/SignInEmail.js
-
 import React, { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
@@ -11,7 +9,7 @@ function SignInEmail() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const navigate = useNavigate(); // Initialize the useNavigate hook
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -71,6 +69,11 @@ function SignInEmail() {
           Sign In
         </Button>
       </form>
+      <Typography variant="body2" sx={{ marginTop: 2 }}>
+        <Link to="/forgot-password" className="form-link">
+          Forgot Password?
+        </Link>
+      </Typography>
       <Typography variant="body2" sx={{ marginTop: 2 }}>
         Don't have an account?{' '}
         <Link to="/register" className="form-link">
