@@ -1,5 +1,3 @@
-// src/components/Contact.js
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { TextField, Button, Typography } from '@mui/material';
@@ -93,7 +91,7 @@ const Contact = () => {
           className="contact-input"
         />
         <TextField
-          label="Phone"
+          label="Phone (Optional)"
           name="phone"
           value={formData.phone}
           onChange={handleChange}

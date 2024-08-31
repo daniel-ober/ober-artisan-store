@@ -1,7 +1,10 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY); // Initialize Stripe
+
 const app = express();
 
 // Middleware
@@ -10,7 +13,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/mydatabase', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('MongoDB connected successfully');
   })
@@ -19,25 +22,40 @@ mongoose.connect('mongodb://localhost:27017/mydatabase', { useNewUrlParser: true
     process.exit(1);
   });
 
-// Define Product Schema
-const productSchema = new mongoose.Schema({
-  name: String,
-  description: String,
-  price: Number,
-  imageUrl: String
-});
+// Import routes
+const contactRoutes = require('./routes/contact'); // Adjusted path
+const productRoutes = require('./routes/products'); // Adjusted path
 
-// Define Product Model
-const Product = mongoose.model('Product', productSchema, 'products');
+// Use routes
+app.use('/api', contactRoutes);
+app.use('/api/products', productRoutes);
 
-// Define API Route
-app.get('/api/products', async (req, res) => {
+// Create Checkout Session Route
+app.post('/create-checkout-session', async (req, res) => {
+  const { items } = req.body;
+
   try {
-    const products = await Product.find();
-    res.json(products);
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ['card'],
+      line_items: items.map(item => ({
+        price_data: {
+          currency: 'usd',
+          product_data: {
+            name: item.name,
+          },
+          unit_amount: item.price * 100, // Stripe requires amount in cents
+        },
+        quantity: item.quantity,
+      })),
+      mode: 'payment',
+      success_url: `${process.env.CLIENT_URL}/success`,
+      cancel_url: `${process.env.CLIENT_URL}/cancel`,
+    });
+
+    res.json({ id: session.id });
   } catch (error) {
-    console.error('Error fetching products:', error);
-    res.status(500).json({ message: 'Server Error' });
+    console.error('Error creating checkout session:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
