@@ -1,5 +1,10 @@
 import React, { useContext } from 'react';
 import { CartContext } from '../CartContext';
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
+import CheckoutForm from './CheckoutForm';
+
+const stripePromise = loadStripe("pk_test_51PrBd7Jbbx8jAR4NZ2vOilq5lRJaQ0JnQjT9R7Z1brJvVokZc6TpaRFtX67jSCg8PpeqeUqmXBmFTUBLo0lkeI1G00KrLLeSJb");
 
 const Checkout = () => {
   const { cart } = useContext(CartContext);
@@ -15,15 +20,15 @@ const Checkout = () => {
           items: cart.map(item => ({
             name: item.name,
             quantity: item.quantity,
-            price: item.price, // Assuming price is in dollars
+            price: item.price,
           })),
         }),
       });
 
       const session = await response.json();
 
-      if (session.id) {
-        window.location.href = `https://checkout.stripe.com/pay/${session.id}`;
+      if (session.url) {
+        window.location.href = session.url;
       } else {
         console.error('Error creating checkout session:', session.error);
       }
@@ -50,6 +55,9 @@ const Checkout = () => {
           <button onClick={handleCheckout}>Proceed to Checkout</button>
         </div>
       )}
+      <Elements stripe={stripePromise}>
+        <CheckoutForm />
+      </Elements>
     </div>
   );
 };
