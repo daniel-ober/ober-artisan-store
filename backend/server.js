@@ -1,3 +1,5 @@
+// server.js
+
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
@@ -49,10 +51,10 @@ app.post('/create-checkout-session', async (req, res) => {
       })),
       mode: 'payment',
       success_url: `${process.env.CLIENT_URL}/success`,
-      cancel_url: `${process.env.CLIENT_URL}/cancel`,
+      cancel_url: `${process.env.CLIENT_URL}/cart`,
     });
 
-    res.json({ id: session.id });
+    res.json({ url: session.url });  // Return the Stripe Checkout URL
   } catch (error) {
     console.error('Error creating checkout session:', error);
     res.status(500).json({ error: 'Internal Server Error' });

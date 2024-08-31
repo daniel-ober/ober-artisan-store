@@ -1,0 +1,27 @@
+/* src/components/CheckoutForm.css */
+
+form {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  button {
+    width: 100%;
+    padding: 10px;
+    background-color: #6772e5;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  div {
+    color: red;
+    margin-top: 10px;
+  }
+  
