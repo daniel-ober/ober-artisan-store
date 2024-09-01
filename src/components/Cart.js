@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { FaArrowLeft } from 'react-icons/fa'; // Importing FontAwesome arrow left icon
 import './Cart.css';
 
 const Cart = () => {
@@ -6,7 +8,6 @@ const Cart = () => {
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    // Fetch cart items from local storage or an API
     const fetchCartItems = () => {
       const items = JSON.parse(localStorage.getItem('cartItems')) || [];
       setCartItems(items);
@@ -18,7 +19,6 @@ const Cart = () => {
 
   const calculateTotal = (items) => {
     const totalAmount = items.reduce((acc, item) => {
-      // Ensure item.price and item.quantity are numbers
       const price = Number(item.price) || 0;
       const quantity = Number(item.quantity) || 0;
       return acc + (price * quantity);
@@ -27,7 +27,31 @@ const Cart = () => {
   };
 
   const removeItem = (id) => {
-    const updatedItems = cartItems.filter(item => item._id !== id);
+    const updatedItems = cartItems.filter((item) => item._id !== id);
+    setCartItems(updatedItems);
+    localStorage.setItem('cartItems', JSON.stringify(updatedItems));
+    calculateTotal(updatedItems);
+  };
+
+  const increaseQuantity = (id) => {
+    const updatedItems = cartItems.map((item) => {
+      if (item._id === id && item.price < 500) {
+        item.quantity += 1;
+      }
+      return item;
+    });
+    setCartItems(updatedItems);
+    localStorage.setItem('cartItems', JSON.stringify(updatedItems));
+    calculateTotal(updatedItems);
+  };
+
+  const decreaseQuantity = (id) => {
+    const updatedItems = cartItems.map((item) => {
+      if (item._id === id && item.quantity > 1 && item.price < 500) {
+        item.quantity -= 1;
+      }
+      return item;
+    });
     setCartItems(updatedItems);
     localStorage.setItem('cartItems', JSON.stringify(updatedItems));
     calculateTotal(updatedItems);
@@ -63,56 +87,79 @@ const Cart = () => {
 
   return (
     <div className="cart-container">
-      <table className="cart-table">
-        <thead>
-          <tr>
-            <th>Action</th>
-            <th>Image</th>
-            <th>Description</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Subtotal</th>
-          </tr>
-        </thead>
-        <tbody>
-          {cartItems.length > 0 ? (
-            cartItems.map(item => {
-              // Ensure item.price, item.quantity, and item._id are valid
-              const price = Number(item.price) || 0;
-              const quantity = Number(item.quantity) || 0;
-              return (
-                <tr key={item._id}>
-                  <td className="action-cell">
-                    <button className="remove-button" onClick={() => removeItem(item._id)}>X</button>
-                  </td>
-                  <td className="image-cell">
-                    <img src={item.imageUrl || '/path/to/placeholder-image.jpg'} alt={item.name} className="cart-image" />
-                  </td>
-                  <td className="description-cell">{item.name}</td>
-                  <td className="price-cell">${price.toFixed(2)}</td>
-                  <td className="quantity-cell">{quantity}</td>
-                  <td className="subtotal-cell">${(price * quantity).toFixed(2)}</td>
-                </tr>
-              );
-            })
-          ) : (
-            <tr>
-              <td colSpan="6">No items in cart</td>
-            </tr>
-          )}
-        </tbody>
-        <tfoot>
-          <tr>
-            <td colSpan="5" className="grand-total-label">Grand Total</td>
-            <td className="grand-total-amount">${total.toFixed(2)}</td>
-          </tr>
-        </tfoot>
-      </table>
-      {cartItems.length > 0 && (
-        <button className="checkout-button" onClick={handleCheckout}>
-          Checkout
-        </button>
-      )}
+      <div className="cart-header">
+        <h2 className="cart-title">Your Shopping Cart</h2>
+        <Link to="/shop" className="continue-shopping-link">
+          <FaArrowLeft className="back-icon" />
+          Back to Shop/Gallery
+        </Link>
+      </div>
+
+      <div className="cart-items">
+        {cartItems.length > 0 ? (
+          cartItems.map(item => {
+            const price = Number(item.price) || 0;
+            const quantity = Number(item.quantity) || 0;
+            const isExpensive = price >= 500;
+            return (
+              <div key={item._id} className="cart-item">
+                <img src={item.imageUrl || '/path/to/placeholder-image.jpg'} alt={item.name} className="cart-item-image" />
+                <div className="cart-item-details">
+                  <h3 className="cart-item-name">{item.name}</h3>
+                  <p className="cart-item-price">${price.toFixed(2)}</p>
+                  {price < 500 ? (
+                    <div className="cart-item-quantity">
+                      <button
+                        className={`quantity-btn ${quantity === 1 ? 'disabled' : ''}`}
+                        data-tooltip={quantity === 1 ? 'Minimum quantity reached. Please use "Remove" to take this item out of your cart.' : ''}
+                        onClick={() => decreaseQuantity(item._id)}
+                      >
+                        -
+                      </button>
+                      <span className="quantity-value">{quantity}</span>
+                      <button
+                        className="quantity-btn"
+                        onClick={() => increaseQuantity(item._id)}
+                      >
+                        +
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="cart-item-quantity">
+                      <button
+                        className="quantity-btn disabled"
+                        data-tooltip="Quantity cannot be adjusted. This item is 1 of 1."
+                      >
+                        -
+                      </button>
+                      <span className="quantity-value">{quantity}</span>
+                      <button
+                        className="quantity-btn disabled"
+                        data-tooltip="Quantity cannot be adjusted. This item is 1 of 1."
+                      >
+                        +
+                      </button>
+                    </div>
+                  )}
+                  <button className="remove-btn" onClick={() => removeItem(item._id)}>Remove</button>
+                </div>
+                <p className="cart-item-subtotal">Subtotal: ${(price * quantity).toFixed(2)}</p>
+              </div>
+            );
+          })
+        ) : (
+          <p className="empty-cart-message">Your cart is currently empty.</p>
+        )}
+      </div>
+
+      <div className="cart-summary">
+        <p className="cart-total">Total: ${total.toFixed(2)}</p>
+        {cartItems.length > 0 && (
+          <button className="checkout-btn" onClick={handleCheckout}>
+            Proceed to Checkout
+          </button>
+        )}
+      </div>
     </div>
   );
 };
