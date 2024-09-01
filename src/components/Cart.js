@@ -128,14 +128,14 @@ const Cart = () => {
                     <div className="cart-item-quantity">
                       <button
                         className="quantity-btn disabled"
-                        data-tooltip="Quantity cannot be adjusted. This item is 1 of 1."
+                        data-tooltip='Quantity cannot be adjusted. Please use "Remove" to take this item out of your cart.'
                       >
                         -
                       </button>
                       <span className="quantity-value">{quantity}</span>
                       <button
                         className="quantity-btn disabled"
-                        data-tooltip="Quantity cannot be adjusted. This item is 1 of 1."
+                        data-tooltip='Quantity cannot be adjusted. Please use "Remove" to take this item out of your cart.'
                       >
                         +
                       </button>
