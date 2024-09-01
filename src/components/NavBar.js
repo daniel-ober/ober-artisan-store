@@ -1,36 +1,48 @@
-// src/components/NavBar.js
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext'; // Ensure this path is correct
-import './NavBar.css'; // Import the CSS for styling
+import { FaCartPlus, FaSignInAlt, FaSignOutAlt } from 'react-icons/fa';
+import './NavBar.css';
 
-function NavBar() {
-  const { user, logout } = useAuth() || {}; // Provide default value to avoid errors
+const NavBar = ({ isAuthenticated, onSignOut }) => {
+  const [isNavOpen, setIsNavOpen] = useState(false);
+
+  const toggleNav = () => {
+    setIsNavOpen(!isNavOpen);
+  };
 
   return (
     <nav className="navbar">
       <div className="navbar-logo">
         <Link to="/">
-          <img src="/ober-artisan-logo-large.png" alt="Logo" className="logo-image" /> {/* Changed to large logo */}
+          <img src="ober-artisan-logo-large.png" alt="Logo" className="logo-img" />
         </Link>
       </div>
-      <ul className="navbar-links">
-        <li><Link to="/shop">Shop/Gallery</Link></li>
-        <li><Link to="/about">About</Link></li>
-        <li><Link to="/contact">Contact</Link></li>
-        {!user ? (
-          <li><Link to="/signin">Sign In</Link></li>
+      <button className="navbar-toggle" onClick={toggleNav} aria-label="Toggle navigation">
+        <span className="navbar-toggle-icon"></span>
+      </button>
+      <div className={`navbar-links ${isNavOpen ? 'active' : ''}`}>
+        <Link to="/" className="nav-link">Home</Link>
+        <Link to="/shop" className="nav-link">Shop/Gallery</Link>
+        <Link to="/about" className="nav-link">About</Link>
+        <Link to="/contact" className="nav-link">Contact</Link>
+        {isAuthenticated ? (
+          <button className="nav-link" onClick={onSignOut}>
+            <FaSignOutAlt className="nav-icon" />
+            Sign Out
+          </button>
         ) : (
-          <li><button className="logout-button" onClick={logout}>Logout</button></li>
-        )}
-        <li>
-          <Link to="/cart">
-            View Cart <i className="bi bi-cart cart-icon"></i> {/* Bootstrap icon for cart */}
+          <Link to="/signin" className="nav-link">
+            <FaSignInAlt className="nav-icon" />
+            Sign In
           </Link>
-        </li>
-      </ul>
+        )}
+        <Link to="/cart" className="nav-link">
+          <FaCartPlus className="nav-icon" />
+          Cart
+        </Link>
+      </div>
     </nav>
   );
-}
+};
 
 export default NavBar;

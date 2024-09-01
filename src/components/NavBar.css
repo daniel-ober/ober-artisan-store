@@ -1,62 +1,112 @@
-/* src/components/NavBar.css */
+/* General styles for the navbar */
 .navbar {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-  background-color: #dededed6;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  flex-direction: column; /* Stack items vertically */
+  align-items: center;    /* Center items horizontally */
+  background-color: rgba(51, 51, 51, 0); /* Transparent background */
+  padding: 20px;          /* Padding around the navbar */
+  position: relative;
+  z-index: 1000;          /* Ensure navbar is on top */
+}
+
+/* Styles for the logo */
+.navbar-logo {
+  margin-bottom: 20px; /* Space between logo and nav links */
+  width: 100%;          /* Full width of the viewport */
+  max-width: 800px;     /* Maximum width of the logo on large screens */
+  padding: 20px;       /* Padding around the logo */
+}
+
+.logo-img {
+  width: 100%;         /* Full width within its container */
+  height: auto;        /* Maintain aspect ratio */
+  max-height: 350px;   /* Maximum height for the logo on large screens */
+  object-fit: contain; /* Ensure the logo scales proportionally */
+}
+
+/* Styles for the navigation links */
+.nav-links {
+  display: flex;
+  flex-direction: row; /* Arrange links horizontally */
+  justify-content: space-between; /* Distribute space evenly between links */
+  width: 100%; /* Full width of the navbar */
+  gap: 20px; /* Space between each link */
+  padding: 0; /* Remove default padding */
+  margin: 0; /* Remove default margin */
+}
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  padding: 12px 20px;    /* Comfortable padding around each link */
+  border: 2px solid #fff; /* Border around each link */
+  border-radius: 5px;    /* Rounded corners for the border */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-links a:hover {
+  background-color: #555;
   color: #fff;
 }
 
-.navbar-logo .logo-image {
-  height: 100px;
+/* Dropdown menu styles */
+.dropdown {
+  position: relative;
 }
 
-.navbar-links {
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #333;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 2000; /* Ensure dropdown is on top of other content */
 }
 
-.navbar-links li {
-  margin: 0 1rem;
-}
-
-.navbar-links a {
-  color: #000000;
+.dropdown-content a {
+  color: white;
+  padding: 12px 16px;
   text-decoration: none;
-  font-size: 1.0rem;
+  display: block;
 }
 
-.navbar-links a:hover {
-  text-decoration: underline;
+.dropdown-content a:hover {
+  background-color: #575757;
 }
 
-.logout-button {
-  background: none;
-  border: none;
-  color: #820000;
-  font-size: 1rem;
-  cursor: pointer;
+.dropdown:hover .dropdown-content {
+  display: block;
 }
 
-.logout-button:hover {
-  text-decoration: underline;
-}
-
+/* Adjust logo size and padding for mobile view */
 @media (max-width: 767px) {
-  .navbar-links {
-    flex-direction: column;
-    display: none;
-  }
-
-  .navbar-links.active {
-    display: flex;
+  .navbar {
+    padding: 10px; /* Reduced padding on mobile */
   }
 
   .navbar-logo {
-    text-align: center;
+    margin-bottom: 15px; /* Space between logo and nav links on mobile */
+    width: 90%;          /* Full width within viewport with some margin */
+    max-width: none;    /* Remove max-width restriction on mobile */
+  }
+
+  .logo-img {
+    width: 100%;         /* Full width within its container */
+    height: auto;        /* Maintain aspect ratio */
+    max-height: 80vh;    /* Maximum height to fit within viewport height */
+    object-fit: contain; /* Ensure the logo scales proportionally */
+  }
+
+  .nav-links {
+    flex-direction: column; /* Stack links vertically on mobile */
+    align-items: center;    /* Center links horizontally */
+    gap: 10px;              /* Space between links on mobile */
+  }
+
+  .nav-links a {
+    font-size: 16px; /* Adjust font size on mobile */
+    padding: 10px 15px; /* Comfortable padding on mobile */
+    border: 1px solid #fff; /* Border around each link on mobile */
   }
 }
