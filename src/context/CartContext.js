@@ -1,20 +1,26 @@
 // src/context/CartContext.js
-import React, { createContext, useState } from 'react';
 
-// Create a context for the cart
-export const CartContext = createContext();
+import React, { createContext, useState, useContext } from 'react';
+
+const CartContext = createContext();
+
+export const useCart = () => {
+  const context = useContext(CartContext);
+  if (!context) {
+    throw new Error('useCart must be used within a CartProvider');
+  }
+  return context;
+};
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
 
-  // Function to add item to the cart
   const addToCart = (item) => {
-    setCartItems([...cartItems, item]);
+    setCartItems((prevItems) => [...prevItems, item]);
   };
 
-  // Function to remove item from the cart
   const removeFromCart = (itemId) => {
-    setCartItems(cartItems.filter((item) => item.id !== itemId));
+    setCartItems((prevItems) => prevItems.filter(item => item._id !== itemId));
   };
 
   return (

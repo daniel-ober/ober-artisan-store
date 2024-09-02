@@ -1,11 +1,9 @@
-// server.js
-
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY); // Initialize Stripe
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 const app = express();
 
@@ -25,8 +23,8 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
   });
 
 // Import routes
-const contactRoutes = require('./routes/contact'); // Adjusted path
-const productRoutes = require('./routes/products'); // Adjusted path
+const contactRoutes = require('./routes/contact');
+const productRoutes = require('./routes/products');
 
 // Use routes
 app.use('/api', contactRoutes);
@@ -45,7 +43,7 @@ app.post('/create-checkout-session', async (req, res) => {
           product_data: {
             name: item.name,
           },
-          unit_amount: item.price * 100, // Stripe requires amount in cents
+          unit_amount: item.price * 100,
         },
         quantity: item.quantity,
       })),
@@ -54,7 +52,7 @@ app.post('/create-checkout-session', async (req, res) => {
       cancel_url: `${process.env.CLIENT_URL}/cart`,
     });
 
-    res.json({ url: session.url });  // Return the Stripe Checkout URL
+    res.json({ url: session.url });
   } catch (error) {
     console.error('Error creating checkout session:', error);
     res.status(500).json({ error: 'Internal Server Error' });
