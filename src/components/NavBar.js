@@ -1,50 +1,85 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { FaCartPlus, FaSignOutAlt, FaUserAlt, FaBars } from 'react-icons/fa';
+import React, { useState, useRef, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { FaCartPlus, FaSignOutAlt, FaUserAlt } from 'react-icons/fa';
 import './NavBar.css';
 
 const NavBar = ({ isAuthenticated, onSignOut }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef(null);
+  const buttonRef = useRef(null);
+  const location = useLocation();
 
-  const handleMenuToggle = () => setIsMenuOpen(!isMenuOpen);
-
-  const handleSignOut = (event) => {
-    event.preventDefault(); // Prevent default link behavior
-    onSignOut(); // Call the sign-out function passed as prop
+  const handleMenuToggle = () => {
+    setIsMenuOpen(prevState => !prevState);
   };
+
+  const handleClickOutside = (event) => {
+    if (
+      menuRef.current &&
+      !menuRef.current.contains(event.target) &&
+      buttonRef.current &&
+      !buttonRef.current.contains(event.target)
+    ) {
+      setIsMenuOpen(false); // Close the menu if clicked outside
+    }
+  };
+
+  const handleLinkClick = (path) => {
+    if (path !== location.pathname) {
+      setIsMenuOpen(false); // Close the menu when navigating to a different page
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
     <nav className="navbar">
       <div className="navbar-logo">
         <Link to="/">
-          <img src="ober-artisan-logo-large.png" alt="Logo" className="logo-img" />
+          <img src="/ober-artisan-logo-large.png" alt="Logo" className="logo-img" />
         </Link>
       </div>
-      <div className="navbar-menu-toggle" onClick={handleMenuToggle}>
-        <FaBars className="nav-icon" />
+      <div className="navbar-menu-container">
+        <div className="menu-label">Menu</div>
+        <div
+          className={`navbar-menu-toggle ${isMenuOpen ? 'open' : ''}`}
+          onClick={handleMenuToggle}
+          ref={buttonRef}
+        >
+          <img
+            src={isMenuOpen ? "https://i.imgur.com/iGiegQg.png" : "https://i.imgur.com/P61nlaA.png"}
+            alt="Menu Toggle"
+            className="menu-arrow-icon"
+          />
+        </div>
       </div>
-      <div className={`navbar-links ${isMenuOpen ? 'open' : ''}`}>
-        <Link to="/" className="nav-link" onClick={() => setIsMenuOpen(false)}>Home</Link>
-        <Link to="/shop" className="nav-link" onClick={() => setIsMenuOpen(false)}>Shop/Gallery</Link>
-        <Link to="/about" className="nav-link" onClick={() => setIsMenuOpen(false)}>About</Link>
-        <Link to="/contact" className="nav-link" onClick={() => setIsMenuOpen(false)}>Contact</Link>
+      <div className={`navbar-links ${isMenuOpen ? 'open' : ''}`} ref={menuRef}>
+        <Link to="/" className="nav-link" onClick={() => handleLinkClick('/')}>Home</Link>
+        <Link to="/shop" className="nav-link" onClick={() => handleLinkClick('/shop')}>Shop/Gallery</Link>
+        <Link to="/about" className="nav-link" onClick={() => handleLinkClick('/about')}>About</Link>
+        <Link to="/contact" className="nav-link" onClick={() => handleLinkClick('/contact')}>Contact</Link>
         {isAuthenticated ? (
           <>
-            <Link to="/account" className="nav-link" onClick={() => setIsMenuOpen(false)}>
+            <Link to="/account" className="nav-link" onClick={() => handleLinkClick('/account')}>
               <FaUserAlt className="nav-icon" />
               Account
             </Link>
-            <Link to="#" className="nav-link" onClick={handleSignOut}>
+            <Link to="/signin" className="nav-link" onClick={onSignOut}>
               <FaSignOutAlt className="nav-icon" />
               Sign Out
             </Link>
           </>
         ) : (
-          <Link to="/signin" className="nav-link" onClick={() => setIsMenuOpen(false)}>
+          <Link to="/signin" className="nav-link" onClick={() => handleLinkClick('/signin')}>
             Sign In
           </Link>
         )}
-        <Link to="/cart" className="nav-link" onClick={() => setIsMenuOpen(false)}>
+        <Link to="/cart" className="nav-link" onClick={() => handleLinkClick('/cart')}>
           <FaCartPlus className="nav-icon" />
           View Cart
         </Link>
