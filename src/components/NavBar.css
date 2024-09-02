@@ -47,10 +47,26 @@
 }
 
 /* Dropdown menu for mobile view */
-.navbar-menu-toggle {
-  display: none; /* Hide the menu toggle by default (non-mobile view) */
+.navbar-menu-container {
+  display: none; /* Hide the menu container by default (non-mobile view) */
+  align-items: center;
+  flex-direction: column;
   cursor: pointer;
-  margin-bottom: 10px; /* Space between the menu button and dropdown */
+}
+
+.menu-label {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.menu-arrow-icon {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.3s ease; /* Smooth transition for the arrow icon */
+}
+
+.navbar-menu-toggle.open .menu-arrow-icon {
+  transform: rotate(180deg); /* Rotate the arrow icon when open */
 }
 
 /* Mobile view styles */
@@ -70,9 +86,9 @@
     max-height: 80vh;
   }
 
-  .navbar-menu-toggle {
-    display: block; /* Show the menu toggle button on mobile */
-    margin-bottom: 10px; /* Space between menu button and dropdown */
+  .navbar-menu-container {
+    display: flex; /* Show the menu container on mobile */
+    margin-bottom: 10px;
   }
 
   .navbar-links {
@@ -85,7 +101,7 @@
     left: 0;
     width: 100%;
     background-color: white; /* Background color for dropdown */
-    z-index: 1000; /* Ensure dropdown is above other content */
+    z-index: 2000; /* Ensure dropdown is above other content */
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for better visibility */
     opacity: 0; /* Start hidden for animation */
     transition: opacity 0.3s ease, transform 0.3s ease;

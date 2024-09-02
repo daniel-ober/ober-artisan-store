@@ -62,7 +62,7 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/register" element={<Register />} />
           <Route path="/checkout" element={<Checkout />} />
-          <Route path="/item/:id" element={<ItemDetail />} />
+          <Route path="/item/:itemId" element={<ItemDetail />} />
           <Route path="/account" element={<Account user={user} />} />
         </Routes>
       </div>
