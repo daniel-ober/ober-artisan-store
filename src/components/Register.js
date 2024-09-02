@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth, firestore } from '../firebaseConfig'; // Import Firestore as well
+import { auth, firestore } from '../firebaseConfig'; // Correct import for firestore
 import { TextField, Button, Typography, IconButton } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
