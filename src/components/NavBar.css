@@ -39,15 +39,21 @@
   font-size: 18px;
   padding: 12px 20px;
   border-radius: 5px;
-  /* transition: background-color 0.3s ease, color 0.3s ease; */
 }
 
 .nav-link:hover {
   background-color: #55555500;
-  color: #fff;
+  color: #1d5160;
 }
 
-/* Adjust logo size and padding for mobile view */
+/* Dropdown menu for mobile view */
+.navbar-menu-toggle {
+  display: none; /* Hide the menu toggle by default (non-mobile view) */
+  cursor: pointer;
+  margin-bottom: 10px; /* Space between the menu button and dropdown */
+}
+
+/* Mobile view styles */
 @media (max-width: 767px) {
   .navbar {
     padding: 10px;
@@ -64,15 +70,43 @@
     max-height: 80vh;
   }
 
+  .navbar-menu-toggle {
+    display: block; /* Show the menu toggle button on mobile */
+    margin-bottom: 10px; /* Space between menu button and dropdown */
+  }
+
   .navbar-links {
+    display: none; /* Hide the links by default on mobile */
     flex-direction: column;
     align-items: center;
     gap: 10px;
+    position: absolute;
+    top: 100%; /* Position below the menu button */
+    left: 0;
+    width: 100%;
+    background-color: white; /* Background color for dropdown */
+    z-index: 1000; /* Ensure dropdown is above other content */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for better visibility */
+    opacity: 0; /* Start hidden for animation */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(-10px); /* Move dropdown slightly up before display */
+  }
+
+  .navbar-links.open {
+    display: flex;
+    opacity: 1; /* Show dropdown */
+    transform: translateY(0); /* Move dropdown to its position */
   }
 
   .nav-link {
     font-size: 16px;
     padding: 10px 15px;
     border: 1px solid #fff;
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-link:first-child {
+    margin-top: 10px; /* Add space between menu button and first link */
   }
 }
