@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaCartPlus, FaSignInAlt, FaSignOutAlt } from 'react-icons/fa';
+import { FaCartPlus, FaSignOutAlt, FaUserAlt } from 'react-icons/fa';
 import './NavBar.css';
 
 const NavBar = ({ isAuthenticated, onSignOut }) => {
-  const [isNavOpen, setIsNavOpen] = useState(false);
-
-  const toggleNav = () => {
-    setIsNavOpen(!isNavOpen);
+  const handleSignOut = (event) => {
+    event.preventDefault(); // Prevent default link behavior
+    onSignOut(); // Call the sign-out function passed as prop
   };
 
   return (
@@ -17,28 +16,30 @@ const NavBar = ({ isAuthenticated, onSignOut }) => {
           <img src="ober-artisan-logo-large.png" alt="Logo" className="logo-img" />
         </Link>
       </div>
-      <button className="navbar-toggle" onClick={toggleNav} aria-label="Toggle navigation">
-        <span className="navbar-toggle-icon"></span>
-      </button>
-      <div className={`navbar-links ${isNavOpen ? 'active' : ''}`}>
+      <div className="navbar-links">
         <Link to="/" className="nav-link">Home</Link>
         <Link to="/shop" className="nav-link">Shop/Gallery</Link>
         <Link to="/about" className="nav-link">About</Link>
         <Link to="/contact" className="nav-link">Contact</Link>
         {isAuthenticated ? (
-          <button className="nav-link" onClick={onSignOut}>
-            <FaSignOutAlt className="nav-icon" />
-            Sign Out
-          </button>
+          <>
+            <Link to="/account" className="nav-link">
+              <FaUserAlt className="nav-icon" />
+              Account
+            </Link>
+            <Link to="#" className="nav-link" onClick={handleSignOut}>
+              <FaSignOutAlt className="nav-icon" />
+              Sign Out
+            </Link>
+          </>
         ) : (
           <Link to="/signin" className="nav-link">
-            <FaSignInAlt className="nav-icon" />
             Sign In
           </Link>
         )}
         <Link to="/cart" className="nav-link">
           <FaCartPlus className="nav-icon" />
-          Cart
+          View Cart
         </Link>
       </div>
     </nav>

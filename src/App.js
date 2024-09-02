@@ -1,5 +1,5 @@
 // src/App.js
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import Home from './components/Home';
@@ -13,9 +13,22 @@ import ForgotPassword from './components/ForgotPassword';
 import Register from './components/Register';
 import Checkout from './components/Checkout';
 import ItemDetail from './components/ItemDetail';
+import Account from './components/Account';
+import { auth, onAuthStateChanged } from './firebaseConfig';
+import { signOut } from './firebaseConfig';
 import './App.css';
 
 function App() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
   return (
     <div className="app-container">
       <div className="background-video-container">
@@ -36,7 +49,7 @@ function App() {
           src="/background-mobile.mp4"
         />
       </div>
-      <NavBar />
+      <NavBar isAuthenticated={!!user} onSignOut={() => signOut(auth)} />
       <div className="app-content">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -50,6 +63,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/item/:id" element={<ItemDetail />} />
+          <Route path="/account" element={<Account user={user} />} />
         </Routes>
       </div>
     </div>

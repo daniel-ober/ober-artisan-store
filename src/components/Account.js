@@ -1,41 +1,43 @@
 // src/components/Account.js
-import React, { useState } from 'react';
-import { useAuth } from '../context/AuthContext';
-import { updateEmail, updatePassword } from 'firebase/auth';
+import React, { useState, useEffect } from 'react';
+import { auth, signOut } from '../firebaseConfig';
 
-
-const Account = () => {
-  const { user } = useAuth();
+const Account = ({ user }) => {
+  const [firstName, setFirstName] = useState(user?.displayName || '');
   const [email, setEmail] = useState(user?.email || '');
+  const [phoneNumber, setPhoneNumber] = useState(user?.phoneNumber || '');
   const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
 
-  const handleUpdateEmail = async () => {
+  const handleSignOut = async () => {
     try {
-      if (user) {
-        await updateEmail(user, email);
-        setMessage('Email updated successfully.');
-      }
+      await signOut(auth);
     } catch (error) {
-      setMessage(`Failed to update email: ${error.message}`);
+      console.error('Sign out error:', error);
     }
   };
 
-  const handleUpdatePassword = async () => {
+  const handleUpdateProfile = async () => {
     try {
-      if (user && password) {
-        await updatePassword(user, password);
-        setMessage('Password updated successfully.');
-      }
+      // Add logic for updating user profile
     } catch (error) {
-      setMessage(`Failed to update password: ${error.message}`);
+      setError('Failed to update profile');
     }
   };
 
   return (
     <div className="account-container">
       <h2>Account Settings</h2>
-      <div>
+      {error && <p className="error-message">{error}</p>}
+      <form onSubmit={handleUpdateProfile}>
+        <label>
+          First Name:
+          <input
+            type="text"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+        </label>
         <label>
           Email:
           <input
@@ -44,20 +46,25 @@ const Account = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
         </label>
-        <button onClick={handleUpdateEmail}>Update Email</button>
-      </div>
-      <div>
         <label>
-          New Password:
+          Phone Number:
+          <input
+            type="text"
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+          />
+        </label>
+        <label>
+          Password:
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </label>
-        <button onClick={handleUpdatePassword}>Update Password</button>
-      </div>
-      {message && <p>{message}</p>}
+        <button type="submit">Update Profile</button>
+      </form>
+      <button onClick={handleSignOut}>Sign Out</button>
     </div>
   );
 };

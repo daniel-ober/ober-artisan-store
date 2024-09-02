@@ -1,6 +1,6 @@
 // src/firebaseService.js
 
-import { firestore } from './firebaseConfig'; // Correct import path for your firebase config
+import { firestore } from './firebaseConfig'; // Correct import for firestore
 import { doc, getDoc } from 'firebase/firestore';
 
 export const fetchUserProfile = async (userId) => {
