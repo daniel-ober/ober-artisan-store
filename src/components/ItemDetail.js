@@ -3,14 +3,15 @@ import { useParams, Link } from 'react-router-dom';
 import './ItemDetail.css';
 
 const ItemDetail = () => {
-  const { itemId } = useParams(); // Get itemId from the URL
+  const { itemId } = useParams();
   const [item, setItem] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isInCart, setIsInCart] = useState(false);
+  const [selectedImage, setSelectedImage] = useState('');
 
   useEffect(() => {
-    if (!itemId) return; // Exit if itemId is undefined
+    if (!itemId) return;
 
     const fetchItem = async () => {
       try {
@@ -20,6 +21,7 @@ const ItemDetail = () => {
         }
         const data = await response.json();
         setItem(data);
+        setSelectedImage(data.images[0]); // Use the first image as the main image
         checkIfInCart(data._id);
       } catch (error) {
         setError(error.message);
@@ -63,6 +65,10 @@ const ItemDetail = () => {
     setIsInCart(false);
   };
 
+  const handleThumbnailClick = (image) => {
+    setSelectedImage(image);
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -79,15 +85,17 @@ const ItemDetail = () => {
     <div className="item-detail-container">
       <div className="item-detail-main">
         <div className="gallery-main">
-          <img src={item.imageUrl} alt={item.name} className="main-image" />
+          <img src={selectedImage} alt={item.name} className="main-image" />
           <div className="gallery-thumbnails">
-            {Array.isArray(item.images) && item.images.length > 0 ? (
-              item.images.map((image, index) => (
-                <img key={index} src={image} alt={`Additional ${index + 1}`} className="thumbnail" />
-              ))
-            ) : (
-              <p>No additional images available</p>
-            )}
+            {item.images.length > 0 && item.images.map((image, index) => (
+              <img
+                key={index}
+                src={image}
+                alt={`Thumbnail ${index + 1}`}
+                className={`thumbnail ${selectedImage === image ? 'active' : ''}`}
+                onClick={() => handleThumbnailClick(image)}
+              />
+            ))}
           </div>
         </div>
         <div className="item-detail-info">

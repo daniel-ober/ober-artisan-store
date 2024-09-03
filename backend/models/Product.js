@@ -13,12 +13,8 @@ const ProductSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  imageUrl: {
-    type: String,
-    required: true,
-  },
   images: {
-    type: String,
+    type: [String], // Array of image URLs
     required: true,
   },
   // Add more fields as needed

@@ -1,79 +1,69 @@
 .item-detail-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
   padding: 20px;
 }
 
 .item-detail-main {
   display: flex;
-  align-items: flex-start;
-  gap: 20px; /* Space between main image and details */
+  flex-direction: column;
+  align-items: center;
 }
 
 .gallery-main {
-  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .main-image {
   width: 100%;
-  height: auto;
-  max-width: 600px; /* Max width for main image */
-  border: 1px solid #ddd;
+  max-width: 500px;
+  border-radius: 8px;
 }
 
 .gallery-thumbnails {
   display: flex;
-  flex-direction: column;
-  margin-top: 20px;
+  flex-direction: row;
+  margin-top: 10px;
+  gap: 10px; /* Spacing between thumbnails */
 }
 
 .thumbnail {
-  width: 100px;
-  height: auto;
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
   cursor: pointer;
-  margin: 5px 0;
-  border: 1px solid #ddd;
+  border-radius: 8px;
+  transition: transform 0.2s ease-in-out;
 }
 
 .thumbnail.active {
-  border: 2px solid blue;
+  transform: scale(1.1); /* Slightly enlarge the active thumbnail */
+  border: 2px solid #000; /* Optional: Add a border to the active thumbnail */
 }
 
 .item-detail-info {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+  text-align: center;
+  margin-top: 20px;
 }
 
 .item-detail-price {
-  font-size: 1.5rem;
-  color: green;
+  font-weight: bold;
+  margin-top: 10px;
 }
 
 .item-detail-add-to-cart,
 .item-detail-remove-from-cart {
-  background-color: blue;
-  color: white;
-  padding: 10px;
-  border: none;
-  cursor: pointer;
   margin-top: 20px;
-  font-size: 1rem;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-}
-
-.item-detail-add-to-cart:hover,
-.item-detail-remove-from-cart:hover {
-  background-color: darkblue;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 .cart-message {
   margin-top: 10px;
-  font-size: 0.9rem;
-}
-
-.cart-message a {
-  color: blue;
-  text-decoration: underline;
+  font-size: 14px;
 }
