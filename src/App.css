@@ -43,5 +43,4 @@
 .app-content {
   position: relative;
   z-index: 1; /* Ensure the content is above the video */
-  padding-top: 60px; /* Adjust based on the height of your NavBar */
 }
