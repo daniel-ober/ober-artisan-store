@@ -1,9 +1,7 @@
-// src/components/Shop.js
-
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom'; // Import Link for navigation
+import { Link } from 'react-router-dom';
 import './Shop.css';
-import { useCart } from '../context/CartContext'; // Correct import path
+import { useCart } from '../context/CartContext';
 
 const Shop = () => {
   const [products, setProducts] = useState([]);
@@ -57,7 +55,7 @@ const Shop = () => {
             <div key={product._id} className="product-card">
               <Link to={`/item/${product._id}`} className="product-link">
                 <img
-                  src={product.imageUrl || '/path/to/placeholder-image.jpg'}
+                  src={product.images && product.images.length > 0 ? product.images[0] : '/path/to/placeholder-image.jpg'}
                   alt={product.name}
                   className="product-image"
                 />
