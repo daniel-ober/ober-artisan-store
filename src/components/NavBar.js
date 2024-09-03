@@ -8,7 +8,7 @@ const NavBar = ({ isAuthenticated, onSignOut }) => {
   const menuRef = useRef(null);
   const buttonRef = useRef(null);
   const location = useLocation();
-  const navigate = useNavigate(); // Import navigate for redirection
+  const navigate = useNavigate();
 
   const handleMenuToggle = () => {
     setIsMenuOpen(prevState => !prevState);
@@ -21,19 +21,19 @@ const NavBar = ({ isAuthenticated, onSignOut }) => {
       buttonRef.current &&
       !buttonRef.current.contains(event.target)
     ) {
-      setIsMenuOpen(false); // Close the menu if clicked outside
+      setIsMenuOpen(false);
     }
   };
 
   const handleLinkClick = (path) => {
     if (path !== location.pathname) {
-      setIsMenuOpen(false); // Close the menu when navigating to a different page
+      setIsMenuOpen(false);
     }
   };
 
   const handleSignOut = () => {
     onSignOut();
-    navigate('/signin'); // Redirect to sign-in page after sign-out
+    navigate('/signin');
   };
 
   useEffect(() => {
@@ -50,13 +50,9 @@ const NavBar = ({ isAuthenticated, onSignOut }) => {
           <img src="/ober-artisan-logo-large.png" alt="Logo" className="logo-img" />
         </Link>
       </div>
-      <div className="navbar-menu-container">
-        <div className="menu-label">Menu</div>
-        <div
-          className={`navbar-menu-toggle ${isMenuOpen ? 'open' : ''}`}
-          onClick={handleMenuToggle}
-          ref={buttonRef}
-        >
+      <div className="navbar-menu-container" ref={buttonRef} onClick={handleMenuToggle}>
+        <div className="menu-toggle-content">
+          <div className="menu-label">Menu</div>
           <img
             src={isMenuOpen ? "https://i.imgur.com/iGiegQg.png" : "https://i.imgur.com/P61nlaA.png"}
             alt="Menu Toggle"

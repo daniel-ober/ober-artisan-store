@@ -1,12 +1,14 @@
-// src/components/Account.js
 import React, { useState } from 'react';
 import { auth, signOut } from '../firebaseConfig';
 import { Button, TextField, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp'; // Import the sign-out icon
 import './Account.css';
 
 const Account = ({ user }) => {
-  const [firstName, setFirstName] = useState(user?.displayName || '');
+  // Split the display name into first and last names if available
+  const [firstName, setFirstName] = useState(user?.displayName?.split(' ')[0] || '');
+  const [lastName, setLastName] = useState(user?.displayName?.split(' ')[1] || '');
   const [email, setEmail] = useState(user?.email || '');
   const [phoneNumber, setPhoneNumber] = useState(user?.phoneNumber || '');
   const [password, setPassword] = useState('');
@@ -38,14 +40,22 @@ const Account = ({ user }) => {
       </Typography>
       {error && <Typography className="account-error">{error}</Typography>}
       <form onSubmit={handleUpdateProfile} className="account-form">
-        <TextField
-          label="First Name"
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-          fullWidth
-          margin="normal"
-          className="account-input"
-        />
+        <div className="name-fields">
+          <TextField
+            label="First Name"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            margin="normal"
+            className="account-input account-first-name"
+          />
+          <TextField
+            label="Last Name"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            margin="normal"
+            className="account-input account-last-name"
+          />
+        </div>
         <TextField
           label="Email"
           type="email"
@@ -83,9 +93,10 @@ const Account = ({ user }) => {
       </form>
       <Button
         onClick={handleSignOut}
-        variant="outlined"
+        variant="text"
         color="secondary"
-        className="account-button"
+        className="signout-button"
+        startIcon={<ExitToAppIcon />}
       >
         Sign Out
       </Button>
