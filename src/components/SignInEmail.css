@@ -25,3 +25,12 @@
     color: red;
     margin-bottom: 1rem;
 }
+
+.form-link {
+    color: #1976d2;
+    text-decoration: none;
+}
+
+.form-link:hover {
+    text-decoration: underline;
+}

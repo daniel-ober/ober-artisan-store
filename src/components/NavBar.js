@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaCartPlus, FaSignOutAlt, FaUserAlt } from 'react-icons/fa';
 import './NavBar.css';
 
@@ -8,6 +8,7 @@ const NavBar = ({ isAuthenticated, onSignOut }) => {
   const menuRef = useRef(null);
   const buttonRef = useRef(null);
   const location = useLocation();
+  const navigate = useNavigate(); // Import navigate for redirection
 
   const handleMenuToggle = () => {
     setIsMenuOpen(prevState => !prevState);
@@ -28,6 +29,11 @@ const NavBar = ({ isAuthenticated, onSignOut }) => {
     if (path !== location.pathname) {
       setIsMenuOpen(false); // Close the menu when navigating to a different page
     }
+  };
+
+  const handleSignOut = () => {
+    onSignOut();
+    navigate('/signin'); // Redirect to sign-in page after sign-out
   };
 
   useEffect(() => {
@@ -69,7 +75,7 @@ const NavBar = ({ isAuthenticated, onSignOut }) => {
               <FaUserAlt className="nav-icon" />
               Account
             </Link>
-            <Link to="/signin" className="nav-link" onClick={onSignOut}>
+            <Link to="/signin" className="nav-link" onClick={handleSignOut}>
               <FaSignOutAlt className="nav-icon" />
               Sign Out
             </Link>

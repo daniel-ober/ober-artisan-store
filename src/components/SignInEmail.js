@@ -1,13 +1,17 @@
+// src/components/SignInEmail.js
 import React, { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
-import { Button, TextField, Typography } from '@mui/material';
+import { Button, TextField, Typography, IconButton, InputAdornment } from '@mui/material';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { Link, useNavigate } from 'react-router-dom';
 import './SignInEmail.css';
 
 function SignInEmail() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false); // State for toggling password visibility
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
@@ -35,11 +39,11 @@ function SignInEmail() {
   };
 
   return (
-    <div className="contact-container">
+    <div className="signin-container">
       <Typography variant="h4" component="h1" gutterBottom>
         Sign In
       </Typography>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="signin-form">
         <TextField
           label="Email"
           type="email"
@@ -47,34 +51,46 @@ function SignInEmail() {
           onChange={(e) => setEmail(e.target.value)}
           fullWidth
           margin="normal"
-          className="contact-input"
+          className="signin-input"
           required
         />
         <TextField
           label="Password"
-          type="password"
+          type={showPassword ? 'text' : 'password'} // Toggle password visibility
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           fullWidth
           margin="normal"
-          className="contact-input"
+          className="signin-input"
           required
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  onClick={() => setShowPassword(!showPassword)} // Toggle button
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
         />
         {error && (
-          <Typography color="error" variant="body2" sx={{ marginTop: 1 }}>
+          <Typography color="error" variant="body2" className="error-message">
             {error}
           </Typography>
         )}
-        <Button type="submit" variant="contained" color="primary" className="contact-button">
+        <Button type="submit" variant="contained" color="primary" className="signin-button">
           Sign In
         </Button>
       </form>
-      <Typography variant="body2" sx={{ marginTop: 2 }}>
+      <Typography variant="body2" className="form-link" sx={{ marginTop: 2 }}>
         <Link to="/forgot-password" className="form-link">
           Forgot Password?
         </Link>
       </Typography>
-      <Typography variant="body2" sx={{ marginTop: 2 }}>
+      <Typography variant="body2" className="form-link" sx={{ marginTop: 2 }}>
         Don't have an account?{' '}
         <Link to="/register" className="form-link">
           Register here
