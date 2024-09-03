@@ -1,4 +1,3 @@
-/* src/components/Account.css */
 .account-container {
   max-width: 600px;
   margin: 0 auto;
@@ -13,8 +12,21 @@
   flex-direction: column;
 }
 
+.name-fields {
+  display: flex;
+  gap: 16px; /* Space between first and last name fields */
+}
+
 .account-input {
   margin-bottom: 16px;
+}
+
+.account-first-name {
+  flex: 1;
+}
+
+.account-last-name {
+  flex: 1;
 }
 
 .account-button {

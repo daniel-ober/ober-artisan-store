@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0); /* Transparent background */
+  background-color: transparent;
   padding: 20px;
   position: relative;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -12,9 +12,9 @@
 
 /* Styles for the logo */
 .navbar-logo {
-  margin-bottom: 20px; /* Space between logo and nav links */
+  margin-bottom: 20px;
   width: 100%;
-  max-width: 800px;
+  max-width: 600px;
   padding: 20px;
 }
 
@@ -28,7 +28,7 @@
 /* Styles for the navigation links */
 .navbar-links {
   display: flex;
-  justify-content: space-around; /* Space out links evenly */
+  justify-content: space-between;
   width: 100%;
   max-width: 800px;
 }
@@ -36,7 +36,7 @@
 .nav-link {
   color: #000000;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 15px;
   padding: 12px 20px;
   border-radius: 5px;
 }
@@ -48,25 +48,38 @@
 
 /* Dropdown menu for mobile view */
 .navbar-menu-container {
-  display: none; /* Hide the menu container by default (non-mobile view) */
+  display: none;
   align-items: center;
+  justify-content: center;
   flex-direction: column;
   cursor: pointer;
+}
+
+/* Centering the "Menu" text and dropdown icon */
+.menu-toggle-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%; /* Ensuring the toggle is full-width for centering */
 }
 
 .menu-label {
   font-size: 18px;
   margin-bottom: 5px;
+  text-align: center;
 }
 
 .menu-arrow-icon {
   width: 24px;
   height: 24px;
-  transition: transform 0.3s ease; /* Smooth transition for the arrow icon */
+  margin-top: 5px;
+  transition: transform 0.3s ease;
 }
 
+/* Rotate the arrow icon when menu is open */
 .navbar-menu-toggle.open .menu-arrow-icon {
-  transform: rotate(180deg); /* Rotate the arrow icon when open */
+  transform: rotate(180deg);
 }
 
 /* Mobile view styles */
@@ -77,7 +90,7 @@
 
   .navbar-logo {
     margin-bottom: 15px;
-    width: 90%;
+    width: 70%;
   }
 
   .logo-img {
@@ -87,31 +100,42 @@
   }
 
   .navbar-menu-container {
-    display: flex; /* Show the menu container on mobile */
+    display: flex;
     margin-bottom: 10px;
+    width: 100%; /* Ensuring the container is full-width */
+    align-items: center; /* Centering items vertically */
+    justify-content: center; /* Centering items horizontally */
+  }
+
+  .navbar-menu-toggle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%; /* Ensuring the toggle is full-width for centering */
   }
 
   .navbar-links {
-    display: none; /* Hide the links by default on mobile */
+    display: none;
     flex-direction: column;
     align-items: center;
     gap: 10px;
     position: absolute;
-    top: 100%; /* Position below the menu button */
+    top: 100%;
     left: 0;
     width: 100%;
-    background-color: white; /* Background color for dropdown */
-    z-index: 2000; /* Ensure dropdown is above other content */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for better visibility */
-    opacity: 0; /* Start hidden for animation */
+    background-color: white;
+    z-index: 2000;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    opacity: 0;
     transition: opacity 0.3s ease, transform 0.3s ease;
-    transform: translateY(-10px); /* Move dropdown slightly up before display */
+    transform: translateY(-10px);
   }
 
   .navbar-links.open {
     display: flex;
-    opacity: 1; /* Show dropdown */
-    transform: translateY(0); /* Move dropdown to its position */
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .nav-link {
@@ -123,6 +147,6 @@
   }
 
   .nav-link:first-child {
-    margin-top: 10px; /* Add space between menu button and first link */
+    margin-top: 10px;
   }
 }

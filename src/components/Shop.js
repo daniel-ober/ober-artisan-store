@@ -67,15 +67,17 @@ const Shop = () => {
                   </p>
                 </div>
               </Link>
-              <button
-                className={cartItems.some(item => item._id === product._id) ? 'remove-from-cart-button' : 'add-to-cart-button'}
-                onClick={(e) => {
-                  e.stopPropagation(); // Prevent click event from bubbling up to the Link component
-                  handleCartToggle(product);
-                }}
-              >
-                {cartItems.some(item => item._id === product._id) ? 'Remove from Cart' : 'Add to Cart'}
-              </button>
+              <div className="product-card-footer">
+                <button
+                  className={cartItems.some(item => item._id === product._id) ? 'remove-from-cart-button' : 'add-to-cart-button'}
+                  onClick={(e) => {
+                    e.stopPropagation(); // Prevent click event from bubbling up to the Link component
+                    handleCartToggle(product);
+                  }}
+                >
+                  {cartItems.some(item => item._id === product._id) ? 'Remove from Cart' : 'Add to Cart'}
+                </button>
+              </div>
             </div>
           ))
         ) : (
