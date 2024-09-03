@@ -1,3 +1,5 @@
+// src/components/Cart.js
+
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa'; // Importing FontAwesome arrow left icon
