@@ -1,30 +1,38 @@
 /* src/components/Home.css */
-
 .home-container {
   padding: 20px;
-  background-color: #f8f9fadf;
+  background-color: #f8f9fa;
   text-align: center;
 }
 
-.home-title {
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: #343a40;
+.home-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.home-description {
+.home-section {
+  margin-bottom: 20px;
+}
+
+.home-image {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+}
+
+.home-paragraph {
   font-size: 1.25rem;
   color: #6c757d;
-  margin-bottom: 40px;
-  line-height: 1.6;
+  margin-top: 10px;
 }
 
-.home-button {
-  font-size: 1.1rem;
-  color: #fff;
-  background-color: #007bff;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px
+@media (max-width: 768px) {
+  .home-image {
+    width: 100%;
+  }
+
+  .home-paragraph {
+    font-size: 1rem;
+  }
 }
