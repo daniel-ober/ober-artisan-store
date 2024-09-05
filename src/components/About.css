@@ -1,123 +1,16 @@
 .about-page {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   padding: 40px;
   background-color: #f4f4f4;
+  height: 100vh;
 }
 
-.about-carousel {
-  position: relative;
-  text-align: center;
-  margin-bottom: 60px;
-  max-width: 1200px;
-  width: 100%;
-}
-
-.carousel {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  margin: 0 auto;
-}
-
-.carousel-inner {
-  display: flex;
-  transition: transform 0.5s ease;
-}
-
-.carousel-card {
-  flex: 0 0 80%; /* Width of each card */
-  max-width: 80%;
-  margin: 0 10px; /* Spacing for previews */
-  opacity: 0;
-  transform: scale(0.9);
-  transition: all 0.5s ease;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  position: relative;
-}
-
-.carousel-card.active {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.carousel-card .carousel-image {
-  margin-bottom: 20px;
-  overflow: hidden; /* Ensure image does not overflow card */
-  border-radius: 8px; /* Match card border radius */
-  transition: border-radius 0.3s ease;
-}
-
-.carousel-card img {
-  width: 80%; /* Make image smaller */
-  height: auto;
-  border-radius: 8px; /* Round corners */
-  display: block;
-  margin: 0 auto;
-  transition: transform 0.3s ease, border-radius 0.3s ease;
-}
-
-.carousel-card:hover .carousel-image {
-  border-radius: 16px; /* Increase border-radius on hover */
-}
-
-.carousel-card:hover img {
-  transform: scale(1.05); /* Slight zoom effect on hover */
-}
-
-.carousel-card h1 {
+h2 {
   font-family: 'Georgia', serif;
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-.carousel-card p {
-  font-family: 'Arial', sans-serif;
-  font-size: 18px;
-  line-height: 1.6;
-}
-
-.carousel-controls {
-  position: absolute;
-  top: 50%;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  transform: translateY(-50%);
-  z-index: 10; /* Bring the buttons to the front */
-}
-
-.carousel-button {
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-  border: none;
-  color: white;
-  padding: 10px;
-  cursor: pointer;
-  font-size: 1.5rem;
-  z-index: 11; /* Ensure buttons are above other elements */
-  transition: background-color 0.3s ease;
-}
-
-.carousel-button:hover {
-  background-color: rgba(0, 0, 0, 0.8);
-}
-
-/* Mobile responsiveness */
-@media (max-width: 768px) {
-  .carousel-card {
-    flex: 0 0 90%; /* Adjust card width for mobile */
-    max-width: 90%;
-  }
-  
-  .carousel-card h1 {
-    font-size: 20px;
-  }
-  
-  .carousel-card p {
-    font-size: 16px;
-  }
+  font-size: 32px;
+  margin-bottom: 20px;
+  text-align: center;
 }

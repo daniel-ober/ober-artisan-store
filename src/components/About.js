@@ -1,79 +1,30 @@
 import React from 'react';
+import Carousel from './Carousel';
 import './About.css';
 
-const Carousel = ({ sections }) => {
-  const [currentIndex, setCurrentIndex] = React.useState(0);
-
-  const handleSwipe = (direction) => {
-    const maxIndex = sections.length - 1;
-    if (direction === 'left') {
-      setCurrentIndex((prevIndex) => Math.min(prevIndex + 1, maxIndex));
-    } else if (direction === 'right') {
-      setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
-    }
-  };
-
-  const translateX = `-${currentIndex * 100}%`;
-
-  return (
-    <div className="about-carousel">
-      <div className="carousel">
-        <div
-          className="carousel-inner"
-          style={{ transform: `translateX(${translateX})` }}
-        >
-          {sections.map((section, index) => (
-            <div
-              key={index}
-              className={`carousel-card ${currentIndex === index ? 'active' : ''}`}
-            >
-              <div className="carousel-image">
-                <img src={section.image} alt={section.title} />
-              </div>
-              <h1>{section.title}</h1>
-              <p>{section.description}</p>
-            </div>
-          ))}
-        </div>
-        <div className="carousel-controls">
-          {currentIndex > 0 && (
-            <button onClick={() => handleSwipe('right')} className="carousel-button">
-              ←
-            </button>
-          )}
-          {currentIndex < sections.length - 1 && (
-            <button onClick={() => handleSwipe('left')} className="carousel-button">
-              →
-            </button>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-};
-
 const About = () => {
-  const sections = [
-    {
-      title: "About Dan Ober Artisan Drums",
-      description: "I'm Dan Ober, a lifelong competitor, artist, and craftsman. My journey has always been about pushing boundaries – in life, art, and drumming. With inspirations drawn from grit, nature, and perseverance, I strive to craft one-of-a-kind drums that tell a story as raw and real as the musicians who play them.",
-      image: "https://i.imgur.com/R34mmJi.jpeg" // Choose appropriate image
+  const carouselItems = [
+    { 
+      image: 'https://i.imgur.com/5yLFqry.png', 
+      title: 'The Craftsman', 
+      description: `Dan’s journey into the world of drumming began with a profound passion for music, but it wasn't limited to just drumming. While drumming is Dan’s primary focus, his versatility extends to guitar, singing, keyboard, and more. His formal education in Film Scoring and Composition at Berklee College of Music allowed him to study under some of the industry’s finest, including Mike Mangini (Dream Theater, Steve Vai) and Kim Plainfield (Bill Connors, Pointer Sisters). With a decade of experience performing in a bar and wedding band, Dan honed his skills and developed a deep understanding of music before moving to Nashville to fully immerse himself in his true love—drumming. This rich background fuels Dan’s craftsmanship, blending technical expertise with a profound artistic vision to create drums that are not only functional but also resonant with both quality and emotion.`
     },
-    {
-      title: "My Process",
-      description: "Crafted with a meticulous eye for detail, my drums combine traditional methods with innovative designs. I select only the finest materials, ensuring that each drum not only sounds incredible but also inspires unmatched self-expression. The process is a blend of passion and craftsmanship, bringing forth the best qualities in every piece.",
-      image: "https://i.imgur.com/248CyuT.jpeg" // Choose appropriate image
+    { 
+      image: 'https://i.imgur.com/4pTBtXS.png', 
+      title: 'The Process', 
+      description: 'Dan’s approach to drum building is a meticulous blend of traditional techniques and modern innovation. From his first 14" 10-stave snare drum made of oak to advanced custom designed 3D-printed tools, Dan’s process involves careful design, craftsmanship, and personal attention. Each drum is constructed with precision and passion, reflecting Dan’s dedication to producing instruments that resonate with both quality and artistry.'
     },
-    {
-      title: "Why Choose Dan Ober Artisan?",
-      description: "My drums are for those who seek something truly unique. Each piece is a work of art, made with love, dedication, and a commitment to the highest quality. Whether you're a collector or a serious musician, these drums are built to perform and to last, offering an unparalleled drumming experience.",
-      image: "https://i.imgur.com/FuGcdM8.jpeg" // Choose appropriate image
+    { 
+      image: 'https://i.imgur.com/7sXi5LE.jpeg', 
+      title: 'The Result', 
+      description: 'Dan Ober Artisan Drums stand apart for their individuality, quality, and attention to detail. Each drum is a functional work of art, crafted with passion for those who value originality and creativity. Designed for those who know what they want, these drums are for the risk-takers, the serious musicians, and collectors who seek inspiration through their instruments. They are more than drums—they are the heart of rhythm, built to inspire unmatched self-expression.'
     }
   ];
 
   return (
     <div className="about-page">
-      <Carousel sections={sections} />
+      <h2>About Dan Ober Artisan</h2>
+      <Carousel items={carouselItems} />
     </div>
   );
 };
