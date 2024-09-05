@@ -44,7 +44,7 @@ const Register = () => {
     const lowercaseValid = /[a-z]/.test(password);
     const numberValid = /\d/.test(password);
     const specialCharValid = /[~!@#$%^*()_\-+=\{\}\[\]|:;",.?]/.test(password);
-    const noInvalidChars = !/[<>&']/.test(password);
+    const noInvalidChars = !/[<>&']/ .test(password); //  fix
 
     setPasswordRules({
       length: lengthValid,
