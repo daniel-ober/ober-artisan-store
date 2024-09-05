@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { FaArrowLeft } from 'react-icons/fa'; // Importing FontAwesome arrow left icon
 import { useParams, Link } from 'react-router-dom';
 import './ItemDetail.css';
 
@@ -84,6 +85,10 @@ const ItemDetail = () => {
   return (
     <div className="item-detail-container">
       <div className="item-detail-main">
+      <Link to="/shop" className="continue-shopping-link">
+          <FaArrowLeft className="back-icon" />
+          Back to Shop/Gallery
+        </Link>
         <div className="gallery-main">
           <img src={selectedImage} alt={item.name} className="main-image" />
           <div className="gallery-thumbnails">
