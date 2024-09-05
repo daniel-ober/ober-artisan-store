@@ -1,5 +1,3 @@
-// src/components/Cart.js
-
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa'; // Importing FontAwesome arrow left icon
@@ -105,7 +103,9 @@ const Cart = () => {
             const isExpensive = price >= 500;
             return (
               <div key={item._id} className="cart-item">
-                <img src={item.images || '/path/to/placeholder-image.jpg'} alt={item.name} className="cart-item-image" />
+                <Link to={`/item/${item._id}`}>
+                  <img src={item.images || '/path/to/placeholder-image.jpg'} alt={item.name} className="cart-item-image" />
+                </Link>
                 <div className="cart-item-details">
                   <h3 className="cart-item-name">{item.name}</h3>
                   <p className="cart-item-price">${price.toFixed(2)}</p>
