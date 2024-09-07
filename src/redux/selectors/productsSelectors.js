@@ -1,4 +1,3 @@
-// src/redux/selectors/productsSelectors.js
 import { createSelector } from '@reduxjs/toolkit';
 
 export const selectProductsState = (state) => state.products;

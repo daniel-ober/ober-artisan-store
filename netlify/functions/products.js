@@ -2,7 +2,7 @@ const fetch = require('node-fetch');
 
 exports.handler = async (event) => {
   try {
-    const response = await fetch('https://your-backend-api-url/api/products');
+    const response = await fetch('http://localhost:4949/api/products'); // Update this URL
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }

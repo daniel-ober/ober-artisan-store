@@ -2,7 +2,11 @@
   publish = "public"
   functions = "netlify/functions"
 
+[build.environment]
+  NODE_VERSION = "18"
+
 [[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/server"
+  from = "/*"
+  to = "/index.html"
   status = 200
+  force = true
