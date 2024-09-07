@@ -22,6 +22,7 @@
     "firebase": "^10.12.5",
     "mongodb": "^6.8.0",
     "mongoose": "^8.6.0",
+    "node-fetch": "^3.3.2",
     "nodemailer": "^6.9.14",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.4",
@@ -58,7 +59,7 @@
       "last 1 safari version"
     ]
   },
-"proxy": "http://localhost:4949",
+  "proxy": "http://localhost:4949",
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   }
