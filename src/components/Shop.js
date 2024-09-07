@@ -15,7 +15,8 @@ const Shop = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}/products`);
+        const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:4949/api';
+        const response = await axios.get(`${apiUrl}/products`);
         setProducts(response.data);
       } catch (error) {
         console.error('Error fetching products:', error);
@@ -29,9 +30,9 @@ const Shop = () => {
   }, []);
 
   const handleCartToggle = (product) => {
-    const isInCart = cartItems.some(item => item.id === product.id);
+    const isInCart = cartItems.some(item => item.id === product._id);
     if (isInCart) {
-      removeFromCart(product.id);
+      removeFromCart(product._id);
     } else {
       addToCart(product);
     }
