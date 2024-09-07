@@ -9,11 +9,20 @@ const app = express();
 
 // Middleware
 app.use(express.json());
-app.use(cors());
 app.use(bodyParser.json());
 
+// Configure CORS
+app.use(cors({
+  origin: ['http://localhost:3000', 'https://danoberartisan.netlify.app'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
+
 // Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
   .then(() => {
     console.log('MongoDB connected successfully');
   })
@@ -27,7 +36,7 @@ const contactRoutes = require('./routes/contact');
 const productRoutes = require('./routes/products');
 
 // Use routes
-app.use('/api', contactRoutes);
+app.use('/api/contact', contactRoutes);
 app.use('/api/products', productRoutes);
 
 // Create Checkout Session Route

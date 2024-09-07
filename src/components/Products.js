@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import './Products.css';
 import { useCart } from '../context/CartContext';
@@ -14,16 +15,13 @@ const Products = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch('http://localhost:4949/api/products');
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const data = await response.json();
-        setProducts(data);
-        setLoading(false);
+        const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:4949/api';
+        const response = await axios.get(`${apiUrl}/products`);
+        setProducts(response.data);
       } catch (error) {
         console.error('Error fetching products:', error);
-        setError('Failed to fetch products');
+        setError(`Failed to fetch products: ${error.message}`);
+      } finally {
         setLoading(false);
       }
     };
@@ -32,7 +30,7 @@ const Products = () => {
   }, []);
 
   const handleCartToggle = (product) => {
-    const isInCart = cartItems.some(item => item._id === product._id);
+    const isInCart = cartItems.some(item => item.id === product._id);
     if (isInCart) {
       removeFromCart(product._id);
     } else {
@@ -98,13 +96,13 @@ const Products = () => {
               </Link>
               <div className="product-card-footer">
                 <button
-                  className={cartItems.some(item => item._id === product._id) ? 'remove-from-cart-button' : 'add-to-cart-button'}
+                  className={cartItems.some(item => item.id === product._id) ? 'remove-from-cart-button' : 'add-to-cart-button'}
                   onClick={(e) => {
                     e.stopPropagation(); // Prevent click event from bubbling up to the Link component
                     handleCartToggle(product);
                   }}
                 >
-                  {cartItems.some(item => item._id === product._id) ? 'Remove from Cart' : 'Add to Cart'}
+                  {cartItems.some(item => item.id === product._id) ? 'Remove from Cart' : 'Add to Cart'}
                 </button>
               </div>
             </div>
