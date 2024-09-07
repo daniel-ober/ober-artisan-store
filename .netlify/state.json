@@ -1,20 +1,3 @@
 {
-	"geolocation": {
-		"data": {
-			"city": "Nashville",
-			"country": {
-				"code": "US",
-				"name": "United States"
-			},
-			"subdivision": {
-				"code": "TN",
-				"name": "Tennessee"
-			},
-			"timezone": "America/Chicago",
-			"latitude": 36.0711,
-			"longitude": -86.7196
-		},
-		"timestamp": 1725681263807
-	},
 	"siteId": "e46f941c-2cbf-475d-8882-ec58e68dac14"
 }
