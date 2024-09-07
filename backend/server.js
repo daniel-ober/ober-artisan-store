@@ -1,3 +1,4 @@
+// Import required modules
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
@@ -7,13 +8,26 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 const app = express();
 
+// Define allowed origins for CORS
+const allowedOrigins = [
+  'http://localhost:3000', // Local development
+  'https://danoberartisan.netlify.app' // Production deployment
+];
+
 // Middleware
 app.use(express.json());
 app.use(bodyParser.json());
 
 // Configure CORS
 app.use(cors({
-  origin: ['http://localhost:3000', 'https://danoberartisan.netlify.app'],
+  origin: function(origin, callback) {
+    console.log('Origin:', origin); // Log the origin being checked
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
