@@ -1,11 +1,10 @@
-// src/redux/slices/productsSlice.js
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 export const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
   async () => {
-    const response = await axios.get('/api/products'); // Check if this path is correct
+    const response = await axios.get('/api/products'); // Ensure this path is correct
     return response.data;
   }
 );
