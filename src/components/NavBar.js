@@ -62,7 +62,7 @@ const NavBar = ({ isAuthenticated, onSignOut }) => {
       </div>
       <div className={`navbar-links ${isMenuOpen ? 'open' : ''}`} ref={menuRef}>
         <Link to="/" className="nav-link" onClick={() => handleLinkClick('/')}>Home</Link>
-        <Link to="/shop" className="nav-link" onClick={() => handleLinkClick('/shop')}>Shop/Gallery</Link>
+        <Link to="/products" className="nav-link" onClick={() => handleLinkClick('/products')}>Shop/Gallery</Link>
         <Link to="/about" className="nav-link" onClick={() => handleLinkClick('/about')}>About</Link>
         <Link to="/contact" className="nav-link" onClick={() => handleLinkClick('/contact')}>Contact</Link>
         {isAuthenticated ? (
