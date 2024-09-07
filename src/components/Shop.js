@@ -14,16 +14,19 @@ const Shop = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch('http://localhost:4949/api/products');
+        const response = await fetch('https://danoberartisan.netlify.app/api/products'); // Ensure this is the correct URL
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const data = await response.json();
+        if (!Array.isArray(data)) {
+          throw new Error('Unexpected response format');
+        }
         setProducts(data);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching products:', error);
-        setError('Failed to fetch products');
+        setError(`Failed to fetch products: ${error.message}`);
         setLoading(false);
       }
     };

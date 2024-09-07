@@ -1,3 +1,5 @@
+// server.js
+
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
@@ -9,8 +11,14 @@ const app = express();
 
 // Middleware
 app.use(express.json());
-app.use(cors());
 app.use(bodyParser.json());
+
+// Configure CORS to allow requests from your Netlify domain
+app.use(cors({
+    origin: 'https://danoberartisan.netlify.app', // Your Netlify app domain
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+}));
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
