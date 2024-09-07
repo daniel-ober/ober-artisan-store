@@ -14,7 +14,7 @@ const Shop = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch('https://danoberartisan.netlify.app/api/products'); // Ensure this is the correct URL
+        const response = await fetch('/.netlify/functions/products'); // Ensure this URL is correct
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -35,9 +35,9 @@ const Shop = () => {
   }, []);
 
   const handleCartToggle = (product) => {
-    const isInCart = cartItems.some(item => item._id === product._id);
+    const isInCart = cartItems.some(item => item.id === product.id);
     if (isInCart) {
-      removeFromCart(product._id);
+      removeFromCart(product.id);
     } else {
       addToCart(product);
     }
@@ -84,8 +84,8 @@ const Shop = () => {
       <div className="item-list">
         {sortedProducts.length > 0 ? (
           sortedProducts.map((product) => (
-            <div key={product._id} className="product-card">
-              <Link to={`/item/${product._id}`} className="product-link">
+            <div key={product.id} className="product-card">
+              <Link to={`/item/${product.id}`} className="product-link">
                 <img
                   src={product.images && product.images.length > 0 ? product.images[0] : '/path/to/placeholder-image.jpg'}
                   alt={product.name}
@@ -101,13 +101,13 @@ const Shop = () => {
               </Link>
               <div className="product-card-footer">
                 <button
-                  className={cartItems.some(item => item._id === product._id) ? 'remove-from-cart-button' : 'add-to-cart-button'}
+                  className={cartItems.some(item => item.id === product.id) ? 'remove-from-cart-button' : 'add-to-cart-button'}
                   onClick={(e) => {
                     e.stopPropagation(); // Prevent click event from bubbling up to the Link component
                     handleCartToggle(product);
                   }}
                 >
-                  {cartItems.some(item => item._id === product._id) ? 'Remove from Cart' : 'Add to Cart'}
+                  {cartItems.some(item => item.id === product.id) ? 'Remove from Cart' : 'Add to Cart'}
                 </button>
               </div>
             </div>
