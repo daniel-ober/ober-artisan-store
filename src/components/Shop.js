@@ -14,7 +14,7 @@ const Shop = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch('/.netlify/functions/products'); // Ensure this URL is correct
+        const response = await fetch('https://danoberartisan.netlify.app/api/products'); // Updated URL
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
