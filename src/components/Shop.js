@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import './Shop.css';
 import { useCart } from '../context/CartContext';
@@ -14,19 +15,12 @@ const Shop = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch('https://danoberartisan.netlify.app/api/products'); // Updated URL
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const data = await response.json();
-        if (!Array.isArray(data)) {
-          throw new Error('Unexpected response format');
-        }
-        setProducts(data);
-        setLoading(false);
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/products`);
+        setProducts(response.data);
       } catch (error) {
         console.error('Error fetching products:', error);
         setError(`Failed to fetch products: ${error.message}`);
+      } finally {
         setLoading(false);
       }
     };
@@ -84,8 +78,8 @@ const Shop = () => {
       <div className="item-list">
         {sortedProducts.length > 0 ? (
           sortedProducts.map((product) => (
-            <div key={product.id} className="product-card">
-              <Link to={`/item/${product.id}`} className="product-link">
+            <div key={product._id} className="product-card">
+              <Link to={`/item/${product._id}`} className="product-link">
                 <img
                   src={product.images && product.images.length > 0 ? product.images[0] : '/path/to/placeholder-image.jpg'}
                   alt={product.name}
@@ -101,13 +95,13 @@ const Shop = () => {
               </Link>
               <div className="product-card-footer">
                 <button
-                  className={cartItems.some(item => item.id === product.id) ? 'remove-from-cart-button' : 'add-to-cart-button'}
+                  className={cartItems.some(item => item.id === product._id) ? 'remove-from-cart-button' : 'add-to-cart-button'}
                   onClick={(e) => {
                     e.stopPropagation(); // Prevent click event from bubbling up to the Link component
                     handleCartToggle(product);
                   }}
                 >
-                  {cartItems.some(item => item.id === product.id) ? 'Remove from Cart' : 'Add to Cart'}
+                  {cartItems.some(item => item.id === product._id) ? 'Remove from Cart' : 'Add to Cart'}
                 </button>
               </div>
             </div>
