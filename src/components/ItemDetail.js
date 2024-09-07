@@ -85,7 +85,7 @@ const ItemDetail = () => {
   return (
     <div className="item-detail-container">
       <div className="item-detail-main">
-      <Link to="/shop" className="continue-shopping-link">
+        <Link to="/shop" className="continue-shopping-link">
           <FaArrowLeft className="back-icon" />
           Back to Shop/Gallery
         </Link>
