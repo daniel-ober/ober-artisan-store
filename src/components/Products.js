@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import './Shop.css';
+import './Products.css';
 import { useCart } from '../context/CartContext';
 
-const Shop = () => {
+const Products = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -114,7 +114,7 @@ const Shop = () => {
         )}
       </div>
     </div>
-  );
+  ); 
 };
 
-export default Shop;
+export default Products;
