@@ -16,7 +16,7 @@ const inquirySchema = new mongoose.Schema({
 const Inquiry = mongoose.model('Inquiry', inquirySchema, 'inquiries');
 
 // POST /api/contact
-router.post('/contact', async (req, res) => {
+router.post('/', async (req, res) => {
   const { first_name, last_name, email, phone, message } = req.body;
 
   // Create a new inquiry document

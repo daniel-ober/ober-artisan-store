@@ -13,8 +13,8 @@ import Register from './components/Register';
 import Checkout from './components/Checkout';
 import ItemDetail from './components/ItemDetail';
 import Account from './components/Account';
-import { auth, onAuthStateChanged } from './firebaseConfig';
-import { signOut } from './firebaseConfig';
+import { auth } from './firebaseConfig';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 import './App.css';
 
 function App() {
