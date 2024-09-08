@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { auth, signOut } from '../firebaseConfig';
+import { auth } from '../firebaseConfig';
+import { signOut } from 'firebase/auth';
 import { Button, TextField, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp'; // Import the sign-out icon

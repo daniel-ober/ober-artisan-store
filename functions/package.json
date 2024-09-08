@@ -13,10 +13,13 @@
     "node": "18"
   },
   "main": "index.js",
+  "type": "module",
   "dependencies": {
     "@netlify/functions": "^2.8.1",
+    "express": "^4.19.2",
     "firebase-admin": "^12.1.0",
-    "firebase-functions": "^5.0.0"
+    "firebase-functions": "^5.1.1",
+    "node-fetch": "^3.3.2"
   },
   "devDependencies": {
     "eslint": "^8.15.0",

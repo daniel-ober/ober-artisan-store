@@ -1,5 +1,9 @@
 {
   "projects": {
-    "default": "ober-artisan-sso"
-  }
+    "default": "danoberartisandrums",
+    "production": "danoberartisandrums"
+  },
+  "targets": {},
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
 }

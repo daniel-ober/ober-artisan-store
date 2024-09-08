@@ -1,28 +1,27 @@
+// routes/products.js
 const express = require('express');
 const router = express.Router();
-const Product = require('../models/Product'); // Ensure the path is correct
+const admin = require('firebase-admin');
 
-// Route to get all products
+// Get a reference to the Firestore database
+const db = admin.firestore();
+
+// GET /api/products
 router.get('/', async (req, res) => {
   try {
-    const products = await Product.find();
-    res.json(products);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
-
-// Route to get a product by ID
-router.get('/:id', async (req, res) => {
-  try {
-    const product = await Product.findById(req.params.id);
-    if (product) {
-      res.json(product);
-    } else {
-      res.status(404).json({ message: 'Product not found' });
+    const productsSnapshot = await db.collection('products').get();
+    if (productsSnapshot.empty) {
+      res.status(404).json({ error: 'No products found' });
+      return;
     }
+    const products = productsSnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }));
+    res.status(200).json(products);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error('Error fetching products:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 

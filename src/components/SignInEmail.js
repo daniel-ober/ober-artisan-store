@@ -20,7 +20,7 @@ function SignInEmail() {
     setError('');
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      navigate('/shop'); // Redirect to the shop page after successful login
+      navigate('/products'); // Redirect to the products page after successful login
     } catch (error) {
       switch (error.code) {
         case 'auth/wrong-password':
