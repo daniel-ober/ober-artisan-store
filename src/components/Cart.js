@@ -89,7 +89,7 @@ const Cart = () => {
     <div className="cart-container">
       <div className="cart-header">
         <h2 className="cart-title">Your Shopping Cart</h2>
-        <Link to="/shop" className="continue-shopping-link">
+        <Link to="/products" className="continue-shopping-link">
           <FaArrowLeft className="back-icon" />
           Back to Shop/Gallery
         </Link>

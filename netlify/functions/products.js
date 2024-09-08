@@ -2,7 +2,7 @@ const fetch = require('node-fetch');
 
 exports.handler = async (event) => {
   try {
-    const response = await fetch('http://localhost:4949/api/products'); // Update this URL
+    const response = await fetch('mongodb+srv://danoberdev:ediPwEKaCCeEdq70@danobercluster.luigg.mongodb.net/?retryWrites=true&w=majority&appName=DanOberCluster'); // Update this URL
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }

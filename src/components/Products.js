@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-import './Products.css';
-import { useCart } from '../context/CartContext';
+import ProductCard from './ProductCard'; // Ensure this is the correct path
+import './Products.css'; // Add or update the styles if needed
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -10,17 +9,13 @@ const Products = () => {
   const [error, setError] = useState(null);
   const [sortOption, setSortOption] = useState('Most Recent');
 
-  const { addToCart, removeFromCart, cartItems } = useCart();
-
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:4949/api';
-        const response = await axios.get(`${apiUrl}/products`);
+        const response = await axios.get('http://localhost:4949/api/products');
         setProducts(response.data);
-      } catch (error) {
-        console.error('Error fetching products:', error);
-        setError(`Failed to fetch products: ${error.message}`);
+      } catch (err) {
+        setError('Failed to fetch products');
       } finally {
         setLoading(false);
       }
@@ -28,15 +23,6 @@ const Products = () => {
 
     fetchProducts();
   }, []);
-
-  const handleCartToggle = (product) => {
-    const isInCart = cartItems.some(item => item.id === product._id);
-    if (isInCart) {
-      removeFromCart(product._id);
-    } else {
-      addToCart(product);
-    }
-  };
 
   const handleSortChange = (event) => {
     setSortOption(event.target.value);
@@ -57,13 +43,8 @@ const Products = () => {
     }
   });
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if (error) {
-    return <p className="error-message">{error}</p>;
-  }
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
 
   return (
     <div className="shop-container">
@@ -79,33 +60,7 @@ const Products = () => {
       <div className="item-list">
         {sortedProducts.length > 0 ? (
           sortedProducts.map((product) => (
-            <div key={product._id} className="product-card">
-              <Link to={`/item/${product._id}`} className="product-link">
-                <img
-                  src={product.images && product.images.length > 0 ? product.images[0] : '/path/to/placeholder-image.jpg'}
-                  alt={product.name}
-                  className="product-image"
-                />
-                <div className="product-info">
-                  <h3 className="product-name">{product.name}</h3>
-                  <p className="product-description">{product.description}</p>
-                  <p className="product-price">
-                    {product.price !== undefined && product.price !== null ? `$${product.price.toFixed(2)}` : 'Price not available'}
-                  </p>
-                </div>
-              </Link>
-              <div className="product-card-footer">
-                <button
-                  className={cartItems.some(item => item.id === product._id) ? 'remove-from-cart-button' : 'add-to-cart-button'}
-                  onClick={(e) => {
-                    e.stopPropagation(); // Prevent click event from bubbling up to the Link component
-                    handleCartToggle(product);
-                  }}
-                >
-                  {cartItems.some(item => item.id === product._id) ? 'Remove from Cart' : 'Add to Cart'}
-                </button>
-              </div>
-            </div>
+            <ProductCard key={product._id} product={product} />
           ))
         ) : (
           <p>No items available</p>
