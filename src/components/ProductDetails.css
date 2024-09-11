@@ -1,11 +1,11 @@
-.item-detail-container {
+.product-detail-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
 }
 
-.item-detail-main {
+.product-detail-main {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -45,18 +45,18 @@
   border: 2px solid #000; /* Optional: Add a border to the active thumbnail */
 }
 
-.item-detail-info {
+.product-detail-info {
   text-align: center;
   margin-top: 20px;
 }
 
-.item-detail-price {
+.product-detail-price {
   font-weight: bold;
   margin-top: 10px;
 }
 
-.item-detail-add-to-cart,
-.item-detail-remove-from-cart {
+.product-detail-add-to-cart,
+.product-detail-remove-from-cart {
   margin-top: 20px;
   padding: 10px 20px;
   font-size: 16px;

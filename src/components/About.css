@@ -1,16 +1,42 @@
-.about-page {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 40px;
-  background-color: #f4f4f4;
-  height: 100vh;
+/* General card container styling */
+.card {
+  background-color: #fff; /* Or your card background color */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 10px;
+  max-width: 300px; /* Adjust as needed */
+  overflow: hidden;
 }
 
-h2 {
-  font-family: 'Georgia', serif;
-  font-size: 32px;
-  margin-bottom: 20px;
-  text-align: center;
+/* Card heading styling */
+.card h2 {
+  font-size: 1.5rem; /* Adjust size as needed */
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+/* Card paragraph styling */
+.card p {
+  font-size: 1rem; /* Consistent size */
+  line-height: 1.5; /* Improved readability */
+  color: #333; /* Dark color for readability */
+  margin: 0;
+  padding: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .card {
+    max-width: 100%;
+    padding: 15px;
+  }
+
+  .card h2 {
+    font-size: 1.25rem;
+  }
+
+  .card p {
+    font-size: 0.875rem;
+  }
 }

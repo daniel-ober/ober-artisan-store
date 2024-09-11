@@ -10,7 +10,7 @@ const About = () => {
       description: `Dan’s journey into the world of drumming began with a profound passion for music, but it wasn't limited to just drumming. While drumming is Dan’s primary focus, his versatility extends to guitar, singing, keyboard, and more. His formal education in Film Scoring and Composition at Berklee College of Music allowed him to study under some of the industry’s finest, including Mike Mangini (Dream Theater, Steve Vai) and Kim Plainfield (Bill Connors, Pointer Sisters). With a decade of experience performing in a bar and wedding band, Dan honed his skills and developed a deep understanding of music before moving to Nashville to fully immerse himself in his true love—drumming. This rich background fuels Dan’s craftsmanship, blending technical expertise with a profound artistic vision to create drums that are not only functional but also resonant with both quality and emotion.`
     },
     { 
-      image: 'https://i.imgur.com/4pTBtXS.png', 
+      image: 'https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/toasting.png?alt=media&token=3cb8986a-f97c-48d2-bae1-021ad00a65c0', 
       title: 'The Process', 
       description: 'Dan’s approach to drum building is a meticulous blend of traditional techniques and modern innovation. From his first 14" 10-stave snare drum made of oak to advanced custom designed 3D-printed tools, Dan’s process involves careful design, craftsmanship, and personal attention. Each drum is constructed with precision and passion, reflecting Dan’s dedication to producing instruments that resonate with both quality and artistry.'
     },

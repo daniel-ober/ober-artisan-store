@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { TextField, Button, Typography } from '@mui/material';
-import { checkAuthentication } from '../authCheck'; // Correct path
-import { fetchUserProfile } from '../firebaseService'; // Correct path
+import { checkAuthentication } from '../authCheck'; // Ensure this function checks auth status correctly
+import { fetchUserProfile } from '../firebaseService'; // Ensure fetchUserProfile is implemented and exported
 import './Contact.css';
 
 const Contact = () => {
@@ -14,9 +14,10 @@ const Contact = () => {
     message: ''
   });
   const [status, setStatus] = useState('');
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const user = checkAuthentication();
+    const user = checkAuthentication(); // Function to get the current authenticated user
     if (user) {
       fetchUserProfile(user.uid).then(profile => {
         if (profile) {
@@ -44,12 +45,17 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setStatus(''); // Reset status before submitting
     try {
-      await axios.post('/api/contact', formData);
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/contact.json`, formData); // Use environment variable for API URL
       setStatus('Message sent successfully!');
       setFormData({ first_name: '', last_name: '', email: '', phone: '', message: '' });
     } catch (error) {
+      console.error('Error sending message:', error);
       setStatus('Failed to send message. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -112,8 +118,14 @@ const Contact = () => {
           className="contact-input"
           inputProps={{ minLength: 20 }} // Minimum character limit
         />
-        <Button type="submit" variant="contained" color="primary" className="contact-button">
-          Send
+        <Button 
+          type="submit" 
+          variant="contained" 
+          color="primary" 
+          className="contact-button"
+          disabled={loading} // Disable button while loading
+        >
+          {loading ? 'Sending...' : 'Send'}
         </Button>
       </form>
       {status && (

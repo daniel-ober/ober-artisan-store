@@ -1,30 +1,25 @@
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
+const admin = require('firebase-admin');
 
-// Define Inquiry Schema
-const inquirySchema = new mongoose.Schema({
-  first_name: String,
-  last_name: String,
-  email: String,
-  phone: String,
-  message: String,
-  submittedAt: { type: Date, default: Date.now }
-});
-
-// Define Inquiry Model
-const Inquiry = mongoose.model('Inquiry', inquirySchema, 'inquiries');
+// Reference to Firestore
+const db = admin.firestore();
 
 // POST /api/contact
 router.post('/', async (req, res) => {
   const { first_name, last_name, email, phone, message } = req.body;
 
-  // Create a new inquiry document
-  const newInquiry = new Inquiry({ first_name, last_name, email, phone, message });
-
   try {
-    // Save the document to MongoDB
-    await newInquiry.save();
+    // Add a new inquiry document to Firestore
+    await db.collection('inquiries').add({
+      first_name,
+      last_name,
+      email,
+      phone,
+      message,
+      submittedAt: new Date()
+    });
+
     res.status(200).json({ success: true, message: 'Inquiry saved successfully' });
   } catch (error) {
     console.error('Error saving inquiry:', error);

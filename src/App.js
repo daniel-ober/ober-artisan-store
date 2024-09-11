@@ -11,11 +11,12 @@ import SignInGoogle from './components/SignInGoogle';
 import ForgotPassword from './components/ForgotPassword';
 import Register from './components/Register';
 import Checkout from './components/Checkout';
-import ItemDetail from './components/ItemDetail';
+import ProductDetails from './components/ProductDetails';
 import Account from './components/Account';
 import { auth } from './firebaseConfig';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import './App.css';
+
 
 function App() {
   const [user, setUser] = useState(null);
@@ -61,7 +62,7 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/register" element={<Register />} />
           <Route path="/checkout" element={<Checkout />} />
-          <Route path="/item/:itemId" element={<ItemDetail />} />
+          <Route path="/products/:id" element={<ProductDetails />} />
           <Route path="/account" element={<Account user={user} />} />
         </Routes>
       </div>
