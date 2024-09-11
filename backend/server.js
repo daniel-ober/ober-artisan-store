@@ -1,9 +1,9 @@
-require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const admin = require('firebase-admin');
+require('dotenv').config();
 
 // Initialize Firebase Admin
 admin.initializeApp({
@@ -23,23 +23,16 @@ admin.initializeApp({
 });
 
 const db = admin.firestore();
-
 const app = express();
 
 // Define allowed origins for CORS
 const allowedOrigins = [
   'http://localhost:3000',
-  'https://danoberartisan.netlify.app'
 ];
 
 // Middleware
-app.use(express.json());
-app.use(bodyParser.json());
-
-// Configure CORS
 app.use(cors({
   origin: function(origin, callback) {
-    console.log('Origin:', origin);
     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
@@ -49,6 +42,15 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
+
+app.use(express.json());
+app.use(bodyParser.json());
+
+// Logging incoming requests for debugging
+app.use((req, res, next) => {
+  console.log('Request Headers:', req.headers);
+  next();
+});
 
 // Import routes
 const contactRoutes = require('./routes/contact');
@@ -60,20 +62,20 @@ app.use('/api/products', productRoutes);
 
 // Create Checkout Session Route
 app.post('/create-checkout-session', async (req, res) => {
-  const { items } = req.body;
+  const { products } = req.body;
 
   try {
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
-      line_items: items.map(item => ({
+      line_items: products.map(product => ({
         price_data: {
           currency: 'usd',
           product_data: {
-            name: item.name,
+            name: product.name,
           },
-          unit_amount: item.price * 100,
+          unit_amount: product.price * 100,
         },
-        quantity: item.quantity,
+        quantity: product.quantity,
       })),
       mode: 'payment',
       success_url: `${process.env.CLIENT_URL}/success`,
@@ -85,6 +87,12 @@ app.post('/create-checkout-session', async (req, res) => {
     console.error('Error creating checkout session:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
+});
+
+// Catch-all route for debugging
+app.use((req, res) => {
+  console.log('Unhandled route:', req.method, req.url);
+  res.status(404).json({ error: 'Not Found' });
 });
 
 // Start Server

@@ -10,6 +10,7 @@
     "@reduxjs/toolkit": "^2.2.7",
     "@stripe/react-stripe-js": "^2.8.0",
     "@stripe/stripe-js": "^4.4.0",
+    "@svgr/webpack": "^8.1.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -18,7 +19,8 @@
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
     "cors": "^2.8.5",
-    "express": "^4.19.2",
+    "eslint": "^9.10.0",
+    "express": "^5.0.0",
     "firebase": "^10.13.1",
     "http-proxy-middleware": "^3.0.2",
     "mongodb": "^6.8.0",
@@ -34,6 +36,7 @@
     "react-router-dom": "^6.26.0",
     "react-scripts": "^5.0.1",
     "redux": "^5.0.1",
+    "svgo": "^3.3.2",
     "web-vitals": "^2.1.4",
     "webpack": "^5.94.0"
   },
@@ -45,9 +48,18 @@
   },
   "eslintConfig": {
     "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+      "eslint:recommended",
+      "plugin:node/recommended",
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint"
+    ],
+    "rules": {
+      "no-unused-vars": "warn",
+      "no-console": "off"
+    }
   },
   "browserslist": {
     "production": [
@@ -63,6 +75,9 @@
   },
   "proxy": "http://localhost:4949",
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@typescript-eslint/eslint-plugin": "^8.5.0",
+    "@typescript-eslint/parser": "^8.5.0",
+    "eslint-plugin-node": "^11.1.0"
   }
 }

@@ -1,7 +1,8 @@
 {
   "projects": {
     "default": "danoberartisandrums",
-    "production": "danoberartisandrums"
+    "production": "danoberartisandrums",
+    "y": "danoberartisandrums"
   },
   "targets": {},
   "etags": {},
