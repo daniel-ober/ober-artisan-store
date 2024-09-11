@@ -18,9 +18,15 @@ const Carousel = ({ items }) => {
 
   return (
     <div className="carousel">
-      <div className="carousel-inner" style={{ transform: `translateX(-${activeIndex * 100}%)` }}>
+      <div
+        className="carousel-inner"
+        style={{ transform: `translateX(-${activeIndex * 100}%)` }}
+      >
         {items.map((item, index) => (
-          <div key={index} className={`carousel-item ${index === activeIndex ? 'active' : ''}`}>
+          <div
+            key={index}
+            className={`carousel-item ${index === activeIndex ? 'active' : ''}`}
+          >
             <img src={item.image} alt={item.title} />
             <h1>{item.title}</h1>
             <p>{item.description}</p>
@@ -28,8 +34,12 @@ const Carousel = ({ items }) => {
         ))}
       </div>
       <div className="carousel-controls">
-        <button className="carousel-button" onClick={handlePrev}>❮</button>
-        <button className="carousel-button" onClick={handleNext}>❯</button>
+        <button className="carousel-button" onClick={handlePrev}>
+          ❮
+        </button>
+        <button className="carousel-button" onClick={handleNext}>
+          ❯
+        </button>
       </div>
     </div>
   );

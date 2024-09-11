@@ -32,7 +32,7 @@ const Products = () => {
         {products.length === 0 ? (
           <p>No products available.</p>
         ) : (
-          products.map(product => (
+          products.map((product) => (
             <div key={product.id} className="product-item">
               <Link to={`/products/${product.id}`}>
                 <img src={product.imageUrl} alt={product.name} />

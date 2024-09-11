@@ -4,7 +4,7 @@ export const selectProductsState = (state) => state.products;
 
 export const selectProductItems = createSelector(
   [selectProductsState],
-  (products) => products.items || []  // Ensure default value
+  (products) => products.items || [] // Ensure default value
 );
 
 export const selectProductStatus = createSelector(

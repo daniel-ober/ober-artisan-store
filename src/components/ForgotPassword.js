@@ -51,7 +51,12 @@ function ForgotPassword() {
             {message}
           </Typography>
         )}
-        <Button type="submit" variant="contained" color="primary" className="contact-button">
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          className="contact-button"
+        >
           Send Password Reset Email
         </Button>
       </form>
