@@ -13,7 +13,7 @@ const Register = () => {
     email: '',
     phone: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
   });
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
@@ -24,14 +24,14 @@ const Register = () => {
     lowercase: false,
     number: false,
     specialChar: false,
-    noInvalidChars: true
+    noInvalidChars: true,
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value
+      [name]: value,
     });
     if (name === 'password') {
       validatePassword(value);
@@ -52,26 +52,30 @@ const Register = () => {
       lowercase: lowercaseValid,
       number: numberValid,
       specialChar: specialCharValid,
-      noInvalidChars: noInvalidChars
+      noInvalidChars: noInvalidChars,
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match');
       return;
     }
 
-    if (!Object.values(passwordRules).every(rule => rule === true)) {
+    if (!Object.values(passwordRules).every((rule) => rule === true)) {
       setError('Please ensure all password requirements are met.');
       return;
     }
 
     try {
       // Create user with Firebase Authentication
-      const { user } = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+      const { user } = await createUserWithEmailAndPassword(
+        auth,
+        formData.email,
+        formData.password
+      );
 
       // Create a new user document in Firestore
       await firestore.collection('users').doc(user.uid).set({
@@ -79,18 +83,19 @@ const Register = () => {
         lastName: formData.lastName,
         email: formData.email,
         phone: formData.phone,
-        createdAt: new Date()
+        createdAt: new Date(),
       });
 
       setStatus('Registration successful!');
       setError(''); // Clear any previous error messages
-      setPasswordRules({ // Clear password rules
+      setPasswordRules({
+        // Clear password rules
         length: false,
         uppercase: false,
         lowercase: false,
         number: false,
         specialChar: false,
-        noInvalidChars: true
+        noInvalidChars: true,
       });
       setFormData({
         firstName: '',
@@ -98,7 +103,7 @@ const Register = () => {
         email: '',
         password: '',
         confirmPassword: '',
-        phone: ''
+        phone: '',
       });
     } catch (error) {
       switch (error.code) {
@@ -210,13 +215,20 @@ const Register = () => {
               <li style={{ color: passwordRules.number ? 'green' : 'red' }}>
                 Contain one number
               </li>
-              <li style={{ color: passwordRules.specialChar ? 'green' : 'red' }}>
+              <li
+                style={{ color: passwordRules.specialChar ? 'green' : 'red' }}
+              >
                 Contain at least one special character
               </li>
             </ul>
           </Typography>
         </div>
-        <Button type="submit" variant="contained" color="primary" className="register-button">
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          className="register-button"
+        >
           Register
         </Button>
         {status && (

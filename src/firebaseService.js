@@ -31,7 +31,7 @@ const fetchUserProfile = async (userId) => {
 const fetchProducts = async () => {
   try {
     const querySnapshot = await getDocs(collection(firestore, 'products'));
-    const productsList = querySnapshot.docs.map(doc => ({
+    const productsList = querySnapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
     }));

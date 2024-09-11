@@ -2,7 +2,13 @@
 import React, { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
-import { Button, TextField, Typography, IconButton, InputAdornment } from '@mui/material';
+import {
+  Button,
+  TextField,
+  Typography,
+  IconButton,
+  InputAdornment,
+} from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { Link, useNavigate } from 'react-router-dom';
@@ -81,7 +87,12 @@ function SignInEmail() {
             {error}
           </Typography>
         )}
-        <Button type="submit" variant="contained" color="primary" className="signin-button">
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          className="signin-button"
+        >
           Sign In
         </Button>
       </form>
@@ -91,7 +102,7 @@ function SignInEmail() {
         </Link>
       </Typography>
       <Typography variant="body2" className="form-link" sx={{ marginTop: 2 }}>
-        Don't have an account?{' '}
+        Don&apos;t have an account?{' '}
         <Link to="/register" className="form-link">
           Register here
         </Link>

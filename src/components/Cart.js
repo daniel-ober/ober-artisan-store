@@ -21,7 +21,7 @@ const Cart = () => {
     const totalAmount = items.reduce((acc, item) => {
       const price = Number(item.price) || 0;
       const quantity = Number(item.quantity) || 0;
-      return acc + (price * quantity);
+      return acc + price * quantity;
     }, 0);
     setTotal(totalAmount);
   };
@@ -59,19 +59,22 @@ const Cart = () => {
 
   const handleCheckout = async () => {
     try {
-      const response = await fetch('http://localhost:4949/create-checkout-session', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          items: cartItems.map(item => ({
-            name: item.name,
-            price: item.price,
-            quantity: item.quantity,
-          })),
-        }),
-      });
+      const response = await fetch(
+        'http://localhost:4949/create-checkout-session',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            items: cartItems.map((item) => ({
+              name: item.name,
+              price: item.price,
+              quantity: item.quantity,
+            })),
+          }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -97,13 +100,17 @@ const Cart = () => {
 
       <div className="cart-items">
         {cartItems.length > 0 ? (
-          cartItems.map(item => {
+          cartItems.map((item) => {
             const price = Number(item.price) || 0;
             const quantity = Number(item.quantity) || 0;
             return (
               <div key={item._id} className="cart-item">
                 <Link to={`/item/${item._id}`}>
-                  <img src={item.images || '/path/to/placeholder-image.jpg'} alt={item.name} className="cart-item-image" />
+                  <img
+                    src={item.images || '/path/to/placeholder-image.jpg'}
+                    alt={item.name}
+                    className="cart-item-image"
+                  />
                 </Link>
                 <div className="cart-item-details">
                   <h3 className="cart-item-name">{item.name}</h3>
@@ -112,7 +119,11 @@ const Cart = () => {
                     <div className="cart-item-quantity">
                       <button
                         className={`quantity-btn ${quantity === 1 ? 'disabled' : ''}`}
-                        data-tooltip={quantity === 1 ? 'Minimum quantity reached. Please use "Remove" to take this item out of your cart.' : ''}
+                        data-tooltip={
+                          quantity === 1
+                            ? 'Minimum quantity reached. Please use "Remove" to take this item out of your cart.'
+                            : ''
+                        }
                         onClick={() => decreaseQuantity(item._id)}
                       >
                         -
@@ -142,9 +153,16 @@ const Cart = () => {
                       </button>
                     </div>
                   )}
-                  <button className="remove-btn" onClick={() => removeItem(item._id)}>Remove</button>
+                  <button
+                    className="remove-btn"
+                    onClick={() => removeItem(item._id)}
+                  >
+                    Remove
+                  </button>
                 </div>
-                <p className="cart-item-subtotal">Subtotal: ${(price * quantity).toFixed(2)}</p>
+                <p className="cart-item-subtotal">
+                  Subtotal: ${(price * quantity).toFixed(2)}
+                </p>
               </div>
             );
           })

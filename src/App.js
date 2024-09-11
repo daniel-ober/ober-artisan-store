@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import Home from './components/Home';
 import Products from './components/Products';
@@ -13,10 +13,42 @@ import Register from './components/Register';
 import Checkout from './components/Checkout';
 import ProductDetails from './components/ProductDetails';
 import Account from './components/Account';
+import Admin from './components/Admin';
 import { auth } from './firebaseConfig';
-import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { onAuthStateChanged, signOut as firebaseSignOut } from 'firebase/auth';
 import './App.css';
 
+// PrivateRoute component to protect routes
+const PrivateRoute = ({ element }) => {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  return user ? element : <Navigate to="/signin" />;
+};
+
+// AdminRoute component to protect admin routes
+const AdminRoute = ({ element }) => {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const isAdmin = user && user.email === 'chilldrummer@gmail.com'; // Example admin check
+
+  return isAdmin ? element : <Navigate to="/" />;
+};
 
 function App() {
   const [user, setUser] = useState(null);
@@ -49,7 +81,7 @@ function App() {
           src="/background-mobile.mp4"
         />
       </div>
-      <NavBar isAuthenticated={!!user} onSignOut={() => signOut(auth)} />
+      <NavBar isAuthenticated={!!user} onSignOut={() => firebaseSignOut(auth)} />
       <div className="app-content">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -61,9 +93,16 @@ function App() {
           <Route path="/signin-google" element={<SignInGoogle />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/checkout" element={<Checkout />} />
+          <Route
+            path="/checkout"
+            element={<PrivateRoute element={<Checkout />} />}
+          />
           <Route path="/products/:id" element={<ProductDetails />} />
-          <Route path="/account" element={<Account user={user} />} />
+          <Route
+            path="/account"
+            element={<PrivateRoute element={<Account user={user} />} />}
+          />
+          <Route path="/admin" element={<AdminRoute element={<Admin />} />} />
         </Routes>
       </div>
     </div>
