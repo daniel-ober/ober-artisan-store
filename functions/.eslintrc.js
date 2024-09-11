@@ -1,28 +1,14 @@
 module.exports = {
   env: {
-    es6: true,
     node: true,
   },
-  parserOptions: {
-    ecmaVersion: 2018,
-  },
   extends: [
-    "eslint:recommended",
-    "airbnb-base",
+    'eslint:recommended',
+    'plugin:node/recommended',
   ],
+  plugins: ['node'],
   rules: {
-    "no-restricted-globals": ["error", "name", "length"],
-    "prefer-arrow-callback": "error",
-    quotes: ["error", "double", { allowTemplateLiterals: true }],
+    'no-unused-vars': 'warn',
+    'no-console': 'off',
   },
-  overrides: [
-    {
-      files: ["**/*.spec.*"],
-      env: {
-        mocha: true,
-      },
-      rules: {},
-    },
-  ],
-  globals: {},
 };

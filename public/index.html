@@ -1,14 +1,49 @@
 <!-- public/index.html -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dan Ober Artisan Drums</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="%PUBLIC_URL%/index.css">
-</head>
-<body>
-  <div id="root"></div>
-</body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Your App Title</title>
+
+    <style>
+      body {
+        background: #ECEFF1;
+        color: rgba(0, 0, 0, 0.87);
+        font-family: Roboto, Helvetica, Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      #message {
+        background: white;
+        max-width: 360px;
+        margin: 100px auto 16px;
+        padding: 32px 24px;
+        border-radius: 3px;
+      }
+
+      #message h1, #message h2, #message p {
+        margin: 0 0 16px;
+        font-size: 14px;
+      }
+
+      #load {
+        color: rgba(0, 0, 0, 0.4);
+        text-align: center;
+        font-size: 13px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div> <!-- Ensure this is present for React -->
+
+    <!-- Your app will be mounted here -->
+
+    <script src="/path/to/your/firebaseConfig.js"></script> <!-- Use a script to import Firebase config if needed -->
+    
+    <!-- Add your React and other necessary script files here -->
+    <!-- For example, your bundled JavaScript file -->
+    <script src="/static/js/bundle.js"></script> <!-- Update this path according to your build setup -->
+  </body>
 </html>
