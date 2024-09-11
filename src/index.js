@@ -8,13 +8,15 @@ import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext'; // Import CartProvider
 
 const container = document.getElementById('root');
-const root = createRoot(container);  // Using createRoot for React 18
+const root = createRoot(container); // Using createRoot for React 18
 
 root.render(
   <Provider store={store}>
     <Router>
       <AuthProvider>
-        <CartProvider> {/* Wrap App with CartProvider */}
+        <CartProvider>
+          {' '}
+          {/* Wrap App with CartProvider */}
           <App />
         </CartProvider>
       </AuthProvider>

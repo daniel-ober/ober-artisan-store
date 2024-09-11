@@ -11,7 +11,7 @@ const Contact = () => {
     last_name: '',
     email: '',
     phone: '',
-    message: ''
+    message: '',
   });
   const [status, setStatus] = useState('');
   const [loading, setLoading] = useState(false);
@@ -19,19 +19,21 @@ const Contact = () => {
   useEffect(() => {
     const user = checkAuthentication(); // Function to get the current authenticated user
     if (user) {
-      fetchUserProfile(user.uid).then(profile => {
-        if (profile) {
-          setFormData(prev => ({
-            ...prev,
-            first_name: profile.first_name || '',
-            last_name: profile.last_name || '',
-            email: profile.email || '',
-            phone: profile.phone || ''
-          }));
-        }
-      }).catch(error => {
-        console.error('Error fetching user profile:', error);
-      });
+      fetchUserProfile(user.uid)
+        .then((profile) => {
+          if (profile) {
+            setFormData((prev) => ({
+              ...prev,
+              first_name: profile.first_name || '',
+              last_name: profile.last_name || '',
+              email: profile.email || '',
+              phone: profile.phone || '',
+            }));
+          }
+        })
+        .catch((error) => {
+          console.error('Error fetching user profile:', error);
+        });
     }
   }, []);
 
@@ -39,7 +41,7 @@ const Contact = () => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value
+      [name]: value,
     });
   };
 
@@ -48,9 +50,18 @@ const Contact = () => {
     setLoading(true);
     setStatus(''); // Reset status before submitting
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/contact.json`, formData); // Use environment variable for API URL
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/contact.json`,
+        formData
+      ); // Use environment variable for API URL
       setStatus('Message sent successfully!');
-      setFormData({ first_name: '', last_name: '', email: '', phone: '', message: '' });
+      setFormData({
+        first_name: '',
+        last_name: '',
+        email: '',
+        phone: '',
+        message: '',
+      });
     } catch (error) {
       console.error('Error sending message:', error);
       setStatus('Failed to send message. Please try again.');
@@ -118,10 +129,10 @@ const Contact = () => {
           className="contact-input"
           inputProps={{ minLength: 20 }} // Minimum character limit
         />
-        <Button 
-          type="submit" 
-          variant="contained" 
-          color="primary" 
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
           className="contact-button"
           disabled={loading} // Disable button while loading
         >

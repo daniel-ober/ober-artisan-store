@@ -10,8 +10,8 @@ const userSlice = createSlice({
     },
     logout(state) {
       state.userInfo = null;
-    }
-  }
+    },
+  },
 });
 
 export const { setUser, logout } = userSlice.actions;

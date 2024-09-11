@@ -19,7 +19,7 @@ export const CartProvider = ({ children }) => {
   };
 
   const removeFromCart = (id) => {
-    const updatedCartItems = cartItems.filter(item => item._id !== id);
+    const updatedCartItems = cartItems.filter((item) => item._id !== id);
     setCartItems(updatedCartItems);
     localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
   };

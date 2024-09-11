@@ -1,20 +1,35 @@
-import React, { useState } from 'react';
-import { auth } from '../firebaseConfig';
-import { signOut } from 'firebase/auth';
+import React, { useState, useEffect } from 'react';
+import { auth, signOut } from '../firebaseConfig';
 import { Button, TextField, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp'; // Import the sign-out icon
 import './Account.css';
 
-const Account = ({ user }) => {
-  // Split the display name into first and last names if available
-  const [firstName, setFirstName] = useState(user?.displayName?.split(' ')[0] || '');
-  const [lastName, setLastName] = useState(user?.displayName?.split(' ')[1] || '');
-  const [email, setEmail] = useState(user?.email || '');
-  const [phoneNumber, setPhoneNumber] = useState(user?.phoneNumber || '');
+const Account = () => {
+  const [user, setUser] = useState(null);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        setUser(user);
+        setFirstName(user.displayName?.split(' ')[0] || '');
+        setLastName(user.displayName?.split(' ')[1] || '');
+        setEmail(user.email || '');
+        setPhoneNumber(user.phoneNumber || '');
+      } else {
+        navigate('/signin'); // Redirect to sign-in page if not authenticated
+      }
+    });
+
+    return () => unsubscribe();
+  }, [navigate]);
 
   const handleSignOut = async () => {
     try {
