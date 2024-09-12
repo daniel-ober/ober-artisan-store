@@ -1,31 +1,39 @@
 import React, { useState, useEffect } from 'react';
-import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import { doc, getDoc, updateDoc, collection, getDocs, query, where } from 'firebase/firestore';
 import { auth, firestore } from '../firebaseConfig';
 import { updatePassword, reauthenticateWithCredential, EmailAuthProvider } from 'firebase/auth';
-import './AccountPage.css'; // Ensure this contains the updated styles
+import { TextField, Button, Typography, FormControlLabel, Checkbox } from '@mui/material';
+import './AccountPage.css';
 
 const AccountPage = () => {
   const [loading, setLoading] = useState(true);
   const [editMode, setEditMode] = useState(false);
+  const [expandedOrderId, setExpandedOrderId] = useState(null);
 
   // User data state
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [notificationSettings, setNotificationSettings] = useState(false);
+  const [emailNotification, setEmailNotification] = useState(false);
+  const [smsNotification, setSmsNotification] = useState(false);
 
   // Editable fields
   const [newFirstName, setNewFirstName] = useState('');
   const [newLastName, setNewLastName] = useState('');
   const [newPhone, setNewPhone] = useState('');
-  const [newNotificationSettings, setNewNotificationSettings] = useState(false);
+  const [newEmailNotification, setNewEmailNotification] = useState(false);
+  const [newSmsNotification, setNewSmsNotification] = useState(false);
 
   // Password change state
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
+
+  // Orders state
+  const [orders, setOrders] = useState([]);
+  const [orderLoading, setOrderLoading] = useState(true);
 
   // Fetch user additional data
   const getUserData = async (userId) => {
@@ -39,18 +47,39 @@ const AccountPage = () => {
         setLastName(data.lastName || '');
         setEmail(auth.currentUser.email); // Use the current user email
         setPhone(data.phone || '');
-        setNotificationSettings(data.notificationSettings || false);
+        setEmailNotification(data.emailNotification || false);
+        setSmsNotification(data.smsNotification || false);
 
         // Set new values for editable inputs
         setNewFirstName(data.firstName || '');
         setNewLastName(data.lastName || '');
         setNewPhone(data.phone || '');
-        setNewNotificationSettings(data.notificationSettings || false);
+        setNewEmailNotification(data.emailNotification || false);
+        setNewSmsNotification(data.smsNotification || false);
+
+        // Fetch user orders
+        await getUserOrders(userId);
       } else {
         console.log('No user data found');
       }
     } catch (error) {
       console.error('Error fetching user data:', error.message);
+    }
+  };
+
+  // Fetch user orders
+  const getUserOrders = async (userId) => {
+    try {
+      const ordersRef = collection(firestore, 'orders');
+      const q = query(ordersRef, where('userId', '==', userId));
+      const querySnapshot = await getDocs(q);
+
+      const userOrders = querySnapshot.docs.map(doc => doc.data());
+      setOrders(userOrders);
+    } catch (error) {
+      console.error('Error fetching orders:', error.message);
+    } finally {
+      setOrderLoading(false);
     }
   };
 
@@ -63,18 +92,26 @@ const AccountPage = () => {
       const userRef = doc(firestore, 'users', userId);
 
       try {
+        // Check if SMS notifications are enabled and validate phone number
+        if (newSmsNotification && !newPhone) {
+          alert('Phone number is required if SMS notifications are enabled.');
+          return;
+        }
+
         await updateDoc(userRef, {
           firstName: newFirstName,
           lastName: newLastName,
           phone: newPhone,
-          notificationSettings: newNotificationSettings,
+          emailNotification: newEmailNotification,
+          smsNotification: newSmsNotification,
         });
 
         // Update state after saving
         setFirstName(newFirstName);
         setLastName(newLastName);
         setPhone(newPhone);
-        setNotificationSettings(newNotificationSettings);
+        setEmailNotification(newEmailNotification);
+        setSmsNotification(newSmsNotification);
 
         setEditMode(false); // Exit edit mode after saving
       } catch (error) {
@@ -103,6 +140,17 @@ const AccountPage = () => {
     }
   };
 
+  // Group orders by orderId
+  const groupOrdersById = (orders) => {
+    return orders.reduce((acc, order) => {
+      if (!acc[order.orderId]) {
+        acc[order.orderId] = [];
+      }
+      acc[order.orderId].push(order);
+      return acc;
+    }, {});
+  };
+
   // UseEffect to fetch data when component mounts
   useEffect(() => {
     const user = auth.currentUser;
@@ -121,119 +169,162 @@ const AccountPage = () => {
     return <div>Loading account information...</div>;
   }
 
+  const groupedOrders = groupOrdersById(orders);
+
+  const handleToggleOrderDetails = (orderId) => {
+    setExpandedOrderId(expandedOrderId === orderId ? null : orderId);
+  };
+
   return (
-    <div className="account-container">
-      <h1 className="account-header">Account Settings</h1>
+    <div className="account-page-container">
+      <Typography variant="h4" gutterBottom className="account-page-header">Account Settings</Typography>
 
       {/* User Account Details */}
-      <div className="account-details">
-        <h2>Account Details</h2>
+      <div className="account-page-section">
+        <Typography variant="h6" gutterBottom>Account Details</Typography>
+        <div className="account-page-field">
+          <TextField
+            label="First Name"
+            value={editMode ? newFirstName : firstName}
+            onChange={(e) => setNewFirstName(e.target.value)}
+            variant="outlined"
+            fullWidth
+            disabled={!editMode}
+            className="account-page-textfield"
+          />
+        </div>
+        <div className="account-page-field">
+          <TextField
+            label="Last Name"
+            value={editMode ? newLastName : lastName}
+            onChange={(e) => setNewLastName(e.target.value)}
+            variant="outlined"
+            fullWidth
+            disabled={!editMode}
+            className="account-page-textfield"
+          />
+        </div>
+        <div className="account-page-field">
+          <TextField
+            label="Email"
+            value={email}
+            variant="outlined"
+            fullWidth
+            disabled
+            className="account-page-textfield"
+          />
+        </div>
+        <div className="account-page-field">
+          <TextField
+            label="Phone"
+            value={editMode ? newPhone : phone}
+            onChange={(e) => setNewPhone(e.target.value)}
+            variant="outlined"
+            fullWidth
+            disabled={!editMode}
+            className="account-page-textfield"
+          />
+        </div>
+        <div className="account-page-field">
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={editMode ? newEmailNotification : emailNotification}
+                onChange={() => setNewEmailNotification(!newEmailNotification)}
+                disabled={!editMode}
+              />
+            }
+            label="Receive Email Notifications"
+          />
+        </div>
+        <div className="account-page-field">
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={editMode ? newSmsNotification : smsNotification}
+                onChange={() => setNewSmsNotification(!newSmsNotification)}
+                disabled={!editMode}
+              />
+            }
+            label="Receive SMS Notifications"
+          />
+        </div>
 
-        {/* First Name */}
-        <p>
-          <strong>First Name:</strong>
-          {editMode ? (
-            <input
-              type="text"
-              value={newFirstName}
-              onChange={(e) => setNewFirstName(e.target.value)}
-              className="account-input"
-            />
-          ) : (
-            <span> {firstName}</span>
-          )}
-        </p>
-
-        {/* Last Name */}
-        <p>
-          <strong>Last Name:</strong>
-          {editMode ? (
-            <input
-              type="text"
-              value={newLastName}
-              onChange={(e) => setNewLastName(e.target.value)}
-              className="account-input"
-            />
-          ) : (
-            <span> {lastName}</span>
-          )}
-        </p>
-
-        {/* Email */}
-        <p>
-          <strong>Email:</strong> {email}
-        </p>
-
-        {/* Phone */}
-        <p>
-          <strong>Phone:</strong>
-          {editMode ? (
-            <input
-              type="text"
-              value={newPhone}
-              onChange={(e) => setNewPhone(e.target.value)}
-              className="account-input"
-            />
-          ) : (
-            <span> {phone}</span>
-          )}
-        </p>
-
-        {/* Notification Settings */}
-        <p>
-          <strong>Notification Settings:</strong>
-          {editMode ? (
-            <input
-              type="checkbox"
-              checked={newNotificationSettings}
-              onChange={(e) => setNewNotificationSettings(e.target.checked)}
-              className="account-input"
-            />
-          ) : (
-            <span>{notificationSettings ? 'Enabled' : 'Disabled'}</span>
-          )}
-        </p>
-
-        {/* Edit / Save Button */}
         {editMode ? (
-          <button className="account-button save-button" onClick={saveUserDetails}>
-            Save Changes
-          </button>
+          <div className="account-page-button-group">
+            <Button variant="contained" color="primary" onClick={saveUserDetails}>Save Changes</Button>
+            <Button variant="outlined" color="secondary" onClick={() => setEditMode(false)}>Cancel</Button>
+          </div>
         ) : (
-          <button className="account-button edit-button" onClick={() => setEditMode(true)}>
-            Edit Details
-          </button>
+          <Button variant="contained" color="primary" onClick={() => setEditMode(true)}>Edit Details</Button>
         )}
       </div>
 
-      {/* Password Change Section */}
-      <div className="account-password">
-        <h2>Change Password</h2>
-        <input
-          type="password"
-          placeholder="Current Password"
-          value={currentPassword}
-          onChange={(e) => setCurrentPassword(e.target.value)}
-          className="account-input"
-        />
-        <input
-          type="password"
-          placeholder="New Password"
-          value={newPassword}
-          onChange={(e) => setNewPassword(e.target.value)}
-          className="account-input"
-        />
-        <input
-          type="password"
-          placeholder="Confirm New Password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          className="account-input"
-        />
-        <button className="account-button save-button" onClick={handlePasswordChange}>
-          Change Password
-        </button>
-        {passwordError && <p className="account-error">{passwordError}</p>}
+      {/* Change Password */}
+      <div className="account-page-section">
+        <Typography variant="h6" gutterBottom>Change Password</Typography>
+        <div className="account-page-field">
+          <TextField
+            label="Current Password"
+            type="password"
+            value={currentPassword}
+            onChange={(e) => setCurrentPassword(e.target.value)}
+            variant="outlined"
+            fullWidth
+            className="account-page-textfield"
+          />
+        </div>
+        <div className="account-page-field">
+          <TextField
+            label="New Password"
+            type="password"
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
+            variant="outlined"
+            fullWidth
+            className="account-page-textfield"
+          />
+        </div>
+        <div className="account-page-field">
+          <TextField
+            label="Confirm New Password"
+            type="password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            variant="outlined"
+            fullWidth
+            className="account-page-textfield"
+          />
+        </div>
+        {passwordError && <Typography color="error">{passwordError}</Typography>}
+        <Button variant="contained" color="primary" onClick={handlePasswordChange}>Change Password</Button>
+      </div>
+
+      {/* Orders */}
+      <div className="account-page-section">
+        <Typography variant="h6" gutterBottom>Your Orders</Typography>
+        {orderLoading ? (
+          <div>Loading orders...</div>
+        ) : (
+          Object.keys(groupedOrders).map(orderId => (
+            <div key={orderId}>
+              <Button onClick={() => handleToggleOrderDetails(orderId)}>
+                Order {orderId} {expandedOrderId === orderId ? '-' : '+'}
+              </Button>
+              {expandedOrderId === orderId && (
+                <div>
+                  {groupedOrders[orderId].map((order, index) => (
+                    <div key={index}>
+                      <Typography>Item: {order.itemName}</Typography>
+                      <Typography>Quantity: {order.quantity}</Typography>
+                      <Typography>Price: ${order.price}</Typography>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
