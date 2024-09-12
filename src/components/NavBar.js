@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaCartPlus, FaSignOutAlt, FaUserAlt, FaCog } from 'react-icons/fa';
 import { auth, signOut, getUserDoc } from '../firebaseConfig';
@@ -16,12 +16,13 @@ const NavBar = ({ isAuthenticated, onSignOut }) => {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
       if (user) {
         try {
-          const userDocSnap = await getUserDoc(user.uid);
-          const userData = userDocSnap.data();
+          const userData = await getUserDoc(user.uid);
           setIsAdmin(userData?.role === 'admin');
         } catch (error) {
           console.error('Error fetching user data:', error);
         }
+      } else {
+        setIsAdmin(false);
       }
     });
 
