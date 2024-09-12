@@ -1,82 +1,75 @@
-/* src/components/AccountPage.css */
-
-.account-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.account-page-container {
+  max-width: 800px;
+  margin: 0 auto;
   padding: 20px;
-  max-width: 600px; /* Increased width for better alignment */
-  margin: auto;
-  background-color: #ffffff; /* White background */
+  background-color: #f9f9f9;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.account-header {
-  font-size: 24px;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.account-details,
-.account-password {
-  width: 100%;
+.account-page-header {
   margin-bottom: 20px;
 }
 
-.account-details h2,
-.account-password h2 {
-  font-size: 20px;
-  margin-bottom: 10px;
+.account-page-section {
+  margin-bottom: 20px;
 }
 
-.account-input {
-  width: 100%;
+.account-page-field {
   margin-bottom: 15px;
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
 }
 
-.account-button {
-  padding: 10px;
+.account-page-textfield {
   width: 100%;
-  font-size: 16px;
-  border: none;
-  border-radius: 5px;
-  background-color: #007BFF; /* Blue button color */
-  color: white;
-  cursor: pointer;
-  text-align: center;
 }
 
-.account-button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+.account-page-button-group {
+  display: flex;
+  gap: 10px;
 }
 
-.account-error {
-  color: red;
-  margin-top: 10px;
-  text-align: center;
-}
-
-.edit-button,
-.save-button {
+.account-page-order {
+  border: 1px solid #ddd;
   padding: 10px;
-  width: 100%;
-  font-size: 16px;
-  border: none;
-  border-radius: 5px;
-  background-color: #007BFF; /* Blue button color */
-  color: white;
+  border-radius: 4px;
   cursor: pointer;
-  text-align: center;
   margin-bottom: 10px;
 }
 
-.edit-button:hover,
-.save-button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+.order-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.order-toggle:hover {
+  background-color: #f5f5f5;
+  border-radius: 4px;
+}
+
+.click-indicator {
+  font-size: 0.9rem;
+  color: #007bff;
+  margin-left: 10px;
+  font-style: italic;
+}
+
+.order-details {
+  margin-top: 10px;
+}
+
+.order-item {
+  margin-bottom: 10px;
+  padding: 5px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+}
+
+.order-item:hover {
+  background-color: #f0f0f0;
+}
+
+.order-total {
+  margin-top: 10px;
 }
