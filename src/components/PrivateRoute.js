@@ -1,17 +1,29 @@
-import React from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext'; // Adjust path as necessary
+import React, { useEffect, useState } from 'react';
+import { Navigate } from 'react-router-dom';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from './firebaseConfig';
 
-const PrivateRoute = ({ element: Element }) => {
-  const { user } = useAuth(); // Assuming you have useAuth hook to get the current user
-  const location = useLocation();
+// PrivateRoute component to protect routes
+const PrivateRoute = ({ element }) => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  if (!user) {
-    // Redirect them to the /signin page, but save the current location they were trying to go to
-    return <Navigate to="/signin" state={{ from: location }} />;
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  // Show a loading indicator while checking authentication status
+  if (loading) {
+    return <p>Loading...</p>;
   }
 
-  return Element;
+  // Show the protected element if user is authenticated, otherwise redirect to sign-in
+  return user ? element : <Navigate to="/signin" />;
 };
 
 export default PrivateRoute;

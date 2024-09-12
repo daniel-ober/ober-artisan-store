@@ -15,8 +15,6 @@ root.render(
     <Router>
       <AuthProvider>
         <CartProvider>
-          {' '}
-          {/* Wrap App with CartProvider */}
           <App />
         </CartProvider>
       </AuthProvider>

@@ -1,92 +1,110 @@
+/* Container for the product cards */
+.product-card-container {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto; /* Enables horizontal scrolling */
+  padding: 10px;
+  gap: 10px; /* Space between cards */
+  scroll-snap-type: x mandatory; /* Optional: Smooth scrolling */
+}
+
 .product-card {
-    border: 2px solid #000000;
-    border-radius: 1px;
-    overflow: hidden;
-    width: 220px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
-    background-color: #d8d8d8e3;
-    transition: transform 0.2s, box-shadow 0.2s;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  border: 2px solid #000000;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 220px; /* Fixed width */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  background-color: #d8d8d8e3;
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  scroll-snap-align: start; /* Optional: Snap to card edges */
+}
+
+.product-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.4);
+}
+
+.product-image {
+  width: 100%;
+  height: 180px; /* Adjusted height for a better fit */
+  object-fit: cover;
+}
+
+.product-info {
+  padding: 10px;
+  color: #000000;
+  text-align: center;
+}
+
+.product-name {
+  font-size: 1.2rem; /* Adjusted font size */
+  margin: 0 0 5px;
+}
+
+.product-price {
+  font-size: 1.1rem; /* Adjusted font size */
+  margin: 0 0 10px;
+}
+
+.product-link {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #286bc2;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  transition: background-color 0.3s;
+}
+
+.product-link:hover {
+  background-color: #3d8c3c;
+}
+
+/* Responsive styles */
+@media (max-width: 1200px) {
+  .product-card-container {
+    flex-wrap: wrap; /* Allows wrapping for medium screens */
   }
-  
-  .product-card:hover {
-    transform: scale(1.007);
-    box-shadow: 0 14px 12px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 992px) {
+  .product-card {
+    width: 220px; /* Standard width for tablets */
   }
-  
+}
+
+@media (max-width: 767px) {
+  .product-card-container {
+    flex-direction: column; /* Stacks cards vertically on small screens */
+    align-items: center; /* Center align cards */
+  }
+
+  .product-card {
+    width: 100%; /* Full width for small screens */
+    margin-bottom: 10px; /* Margin between stacked cards */
+  }
+
   .product-image {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
+    height: 150px; /* Adjusted height for smaller screens */
   }
-  
+
   .product-info {
-    padding: 10px;
-    color: #000000;
-    text-align: center;
+    padding: 8px; /* Reduced padding for mobile screens */
   }
-  
+
   .product-name {
-    font-size: 1.2rem;
-    margin: 0 0 5px;
+    font-size: 1rem; /* Adjust font size for mobile screens */
   }
-  
-  .product-description {
-    font-size: 1rem;
-    margin: 0 0 10px;
-  }
-  
+
   .product-price {
-    font-size: 1.1rem;
-    margin: 0;
+    font-size: 0.9rem; /* Adjust font size for mobile screens */
   }
-  
-  .product-card-footer {
-    margin-top: auto; /* Ensures footer stays at the bottom */
-    padding: 10px;
-    background-color: #f0f0f0;
-    text-align: center;
+
+  .product-link {
+    font-size: 0.75rem; /* Smaller font size for mobile screens */
   }
-  
-  .add-to-cart-button {
-    background-color: #286bc2;
-    color: white;
-    border: none;
-    padding: 15px 20px;
-    cursor: pointer;
-    font-size: 0.875rem;
-    width: 100%;
-    transition: background-color 0.5s;
-  }
-  
-  .add-to-cart-button:hover {
-    background-color: #3d8c3c;
-  }
-  
-  .remove-from-cart-button {
-    background-color: #d9544f9d;
-    color: white;
-    border: none;
-    padding: 15px 20px;
-    cursor: pointer;
-    font-size: 0.875rem;
-    width: 100%;
-    transition: background-color 0.5s;
-  }
-  
-  .remove-from-cart-button:hover {
-    background-color: #c9302c;
-  }
-  
-  @media (max-width: 767px) {
-    .product-card {
-      width: 95%;
-    }
-  
-    .product-image {
-      height: 150px;
-    }
-  }
-  
+}
