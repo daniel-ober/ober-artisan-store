@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import Home from './components/Home';
@@ -14,11 +14,12 @@ import Checkout from './components/Checkout';
 import ProductDetail from './components/ProductDetail';
 import AccountPage from './components/AccountPage';
 import AdminPage from './components/AdminPage';
+import AdminRoute from './components/AdminRoute';
 import { auth } from './firebaseConfig';
+import CheckUserClaims from './checkUserClaims'; // Import CheckUserClaims
 import { onAuthStateChanged, signOut as firebaseSignOut } from 'firebase/auth';
 import './App.css';
 
-// PrivateRoute component to protect routes
 const PrivateRoute = ({ element }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -39,39 +40,38 @@ const PrivateRoute = ({ element }) => {
   return user ? element : <Navigate to="/signin" />;
 };
 
-// AdminRoute component to protect admin routes
-const AdminRoute = ({ element }) => {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
-      setLoading(false);
-    });
-
-    return () => unsubscribe();
-  }, []);
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  const isAdmin = user && user.email === 'chilldrummer@gmail.com'; // Example admin check
-
-  return isAdmin ? element : <Navigate to="/" />;
-};
-
 function App() {
   const [user, setUser] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false); // State to track if the user is an admin
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setUser(user);
+
+      if (user) {
+        // Call CheckUserClaims after user is authenticated
+        try {
+          const claims = await CheckUserClaims();
+          if (claims?.admin) {
+            setIsAdmin(true); // Set admin status based on custom claims
+          } else {
+            setIsAdmin(false);
+          }
+        } catch (error) {
+          console.error('Error checking user claims:', error);
+        }
+      }
     });
 
     return () => unsubscribe();
   }, []);
+
+  const handleSignOut = () => {
+    firebaseSignOut(auth).then(() => {
+      setUser(null);
+      setIsAdmin(false); // Reset admin state on sign out
+    });
+  };
 
   return (
     <div className="app-container">
@@ -93,7 +93,7 @@ function App() {
           src="/background-mobile.mp4"
         />
       </div>
-      <NavBar isAuthenticated={!!user} onSignOut={() => firebaseSignOut(auth)} />
+      <NavBar isAuthenticated={!!user} isAdmin={isAdmin} onSignOut={handleSignOut} /> {/* Pass isAdmin to NavBar */}
       <div className="app-content">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -114,7 +114,13 @@ function App() {
             path="/account"
             element={<PrivateRoute element={<AccountPage />} />}
           />
-          <Route path="/admin" element={<AdminRoute element={<AdminPage />} />} />
+          {/* Only show the Admin page for users with admin claims */}
+          {isAdmin && (
+            <Route
+              path="/admin"
+              element={<AdminRoute element={<AdminPage />} />}
+            />
+          )}
         </Routes>
       </div>
     </div>

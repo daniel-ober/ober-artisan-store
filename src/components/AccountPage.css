@@ -1,43 +1,82 @@
-.account-container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 2rem;
-  background: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+/* src/components/AccountPage.css */
 
-.account-form {
+.account-container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  max-width: 600px; /* Increased width for better alignment */
+  margin: auto;
+  background-color: #ffffff; /* White background */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
 }
 
-.name-fields {
-  display: flex;
-  gap: 16px; /* Space between first and last name fields */
+.account-header {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.account-details,
+.account-password {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.account-details h2,
+.account-password h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
 }
 
 .account-input {
-  margin-bottom: 16px;
-}
-
-.account-first-name {
-  flex: 1;
-}
-
-.account-last-name {
-  flex: 1;
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
 }
 
 .account-button {
-  margin-top: 16px;
+  padding: 10px;
+  width: 100%;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007BFF; /* Blue button color */
+  color: white;
+  cursor: pointer;
+  text-align: center;
+}
+
+.account-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
 }
 
 .account-error {
   color: red;
-  margin-bottom: 1rem;
+  margin-top: 10px;
+  text-align: center;
 }
 
-.account-header {
-  margin-bottom: 1.5rem;
+.edit-button,
+.save-button {
+  padding: 10px;
+  width: 100%;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007BFF; /* Blue button color */
+  color: white;
+  cursor: pointer;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.edit-button:hover,
+.save-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
 }

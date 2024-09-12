@@ -31,7 +31,8 @@ export const getUserDoc = async (userId) => {
     const userDocRef = doc(firestore, 'users', userId);
     const userDocSnap = await getDoc(userDocRef);
     if (userDocSnap.exists()) {
-      return userDocSnap;
+      console.log('User Data:', userDocSnap.data()); // Log the user data
+      return userDocSnap.data(); // Return document data directly
     } else {
       console.error('No such document!');
       return null;
