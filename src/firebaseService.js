@@ -32,7 +32,7 @@ const fetchProducts = async () => {
   try {
     const querySnapshot = await getDocs(collection(firestore, 'products'));
     const productsList = querySnapshot.docs.map((doc) => ({
-      id: doc.id,
+      _id: doc.id,
       ...doc.data(),
     }));
     return productsList;
@@ -42,4 +42,20 @@ const fetchProducts = async () => {
   }
 };
 
-export { addUserToFirestore, fetchUserProfile, fetchProducts };
+// Fetch a single product by Firestore document ID
+const fetchProductById = async (id) => {
+  try {
+    const productDoc = await getDoc(doc(firestore, 'products', id));
+    if (productDoc.exists()) {
+      return { _id: productDoc.id, ...productDoc.data() };
+    } else {
+      console.log('No such product found!');
+      return null;
+    }
+  } catch (error) {
+    console.error('Error fetching product by ID:', error);
+    throw error;
+  }
+};
+
+export { addUserToFirestore, fetchUserProfile, fetchProducts, fetchProductById };

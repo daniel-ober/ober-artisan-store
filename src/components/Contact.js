@@ -17,10 +17,11 @@ const Contact = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const user = checkAuthentication(); // Function to get the current authenticated user
-    if (user) {
-      fetchUserProfile(user.uid)
-        .then((profile) => {
+    const fetchUserData = async () => {
+      const user = checkAuthentication(); // Function to get the current authenticated user
+      if (user) {
+        try {
+          const profile = await fetchUserProfile(user.uid);
           if (profile) {
             setFormData((prev) => ({
               ...prev,
@@ -30,11 +31,13 @@ const Contact = () => {
               phone: profile.phone || '',
             }));
           }
-        })
-        .catch((error) => {
+        } catch (error) {
           console.error('Error fetching user profile:', error);
-        });
-    }
+        }
+      }
+    };
+
+    fetchUserData();
   }, []);
 
   const handleChange = (e) => {
