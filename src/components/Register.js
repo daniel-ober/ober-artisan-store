@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
 import { auth, firestore } from '../firebaseConfig'; // Use db instead of firestore
 import { TextField, Button, Typography, IconButton } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
@@ -71,14 +72,15 @@ const Register = () => {
 
     try {
       // Create user with Firebase Authentication
-      const { user } = await createUserWithEmailAndPassword(
+      const userCredential = await createUserWithEmailAndPassword(
         auth,
         formData.email,
         formData.password
       );
+      const user = userCredential.user;
 
       // Create a new user document in Firestore
-      await firestore.collection('users').doc(user.uid).set({
+      await setDoc(doc(firestore, 'users', user.uid), {
         firstName: formData.firstName,
         lastName: formData.lastName,
         email: formData.email,
