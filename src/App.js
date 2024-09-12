@@ -11,9 +11,9 @@ import SignInGoogle from './components/SignInGoogle';
 import ForgotPassword from './components/ForgotPassword';
 import Register from './components/Register';
 import Checkout from './components/Checkout';
-import ProductDetails from './components/ProductDetails';
-import Account from './components/Account';
-import Admin from './components/Admin';
+import ProductDetail from './components/ProductDetail';
+import AccountPage from './components/AccountPage';
+import AdminPage from './components/AdminPage';
 import { auth } from './firebaseConfig';
 import { onAuthStateChanged, signOut as firebaseSignOut } from 'firebase/auth';
 import './App.css';
@@ -21,14 +21,20 @@ import './App.css';
 // PrivateRoute component to protect routes
 const PrivateRoute = ({ element }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
+      setLoading(false);
     });
 
     return () => unsubscribe();
   }, []);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
   return user ? element : <Navigate to="/signin" />;
 };
@@ -36,14 +42,20 @@ const PrivateRoute = ({ element }) => {
 // AdminRoute component to protect admin routes
 const AdminRoute = ({ element }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
+      setLoading(false);
     });
 
     return () => unsubscribe();
   }, []);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
   const isAdmin = user && user.email === 'chilldrummer@gmail.com'; // Example admin check
 
@@ -97,12 +109,12 @@ function App() {
             path="/checkout"
             element={<PrivateRoute element={<Checkout />} />}
           />
-          <Route path="/products/:id" element={<ProductDetails />} />
+          <Route path="/products/:id" element={<ProductDetail />} />
           <Route
             path="/account"
-            element={<PrivateRoute element={<Account user={user} />} />}
+            element={<PrivateRoute element={<AccountPage />} />}
           />
-          <Route path="/admin" element={<AdminRoute element={<Admin />} />} />
+          <Route path="/admin" element={<AdminRoute element={<AdminPage />} />} />
         </Routes>
       </div>
     </div>

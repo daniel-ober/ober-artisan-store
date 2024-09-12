@@ -1,20 +1,32 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaCartPlus, FaSignOutAlt, FaUserAlt, FaCog } from 'react-icons/fa';
+import { auth, signOut, getUserDoc } from '../firebaseConfig';
 import './NavBar.css';
-import { signOut } from 'firebase/auth';
-import { auth } from '../firebaseConfig';
 
 const NavBar = ({ isAuthenticated, onSignOut }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const menuRef = useRef(null);
   const buttonRef = useRef(null);
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Check if user is admin
-  const user = auth.currentUser;
-  const isAdmin = user && user.email === 'admin@example.com'; // Example admin check
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        try {
+          const userDocSnap = await getUserDoc(user.uid);
+          const userData = userDocSnap.data();
+          setIsAdmin(userData?.role === 'admin');
+        } catch (error) {
+          console.error('Error fetching user data:', error);
+        }
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   const handleMenuToggle = () => {
     setIsMenuOpen((prevState) => !prevState);
@@ -88,28 +100,28 @@ const NavBar = ({ isAuthenticated, onSignOut }) => {
       <div className={`navbar-links ${isMenuOpen ? 'open' : ''}`} ref={menuRef}>
         <Link
           to="/"
-          className="nav-link"
+          className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}
           onClick={() => handleLinkClick('/')}
         >
           Home
         </Link>
         <Link
           to="/products"
-          className="nav-link"
+          className={`nav-link ${location.pathname === '/products' ? 'active' : ''}`}
           onClick={() => handleLinkClick('/products')}
         >
           Shop/Gallery
         </Link>
         <Link
           to="/about"
-          className="nav-link"
+          className={`nav-link ${location.pathname === '/about' ? 'active' : ''}`}
           onClick={() => handleLinkClick('/about')}
         >
           About
         </Link>
         <Link
           to="/contact"
-          className="nav-link"
+          className={`nav-link ${location.pathname === '/contact' ? 'active' : ''}`}
           onClick={() => handleLinkClick('/contact')}
         >
           Contact
@@ -118,35 +130,28 @@ const NavBar = ({ isAuthenticated, onSignOut }) => {
           <>
             <Link
               to="/account"
-              className="nav-link"
+              className={`nav-link ${location.pathname === '/account' ? 'active' : ''}`}
               onClick={() => handleLinkClick('/account')}
             >
-              <FaUserAlt className="nav-icon" />
-              Account
+              <FaUserAlt /> Account
             </Link>
             {isAdmin && (
               <Link
                 to="/admin"
-                className="nav-link"
+                className={`nav-link ${location.pathname === '/admin' ? 'active' : ''}`}
                 onClick={() => handleLinkClick('/admin')}
               >
-                <FaCog className="nav-icon" />
-                Admin
+                <FaCog /> Admin
               </Link>
             )}
-            <button
-              className="nav-link"
-              onClick={handleSignOut}
-              aria-label="Sign out"
-            >
-              <FaSignOutAlt className="nav-icon" />
-              Sign Out
+            <button className="nav-link" onClick={handleSignOut}>
+              <FaSignOutAlt /> Sign Out
             </button>
           </>
         ) : (
           <Link
             to="/signin"
-            className="nav-link"
+            className={`nav-link ${location.pathname === '/signin' ? 'active' : ''}`}
             onClick={() => handleLinkClick('/signin')}
           >
             Sign In
@@ -154,11 +159,10 @@ const NavBar = ({ isAuthenticated, onSignOut }) => {
         )}
         <Link
           to="/cart"
-          className="nav-link"
+          className={`nav-link ${location.pathname === '/cart' ? 'active' : ''}`}
           onClick={() => handleLinkClick('/cart')}
         >
-          <FaCartPlus className="nav-icon" />
-          View Cart
+          <FaCartPlus /> Cart
         </Link>
       </div>
     </nav>

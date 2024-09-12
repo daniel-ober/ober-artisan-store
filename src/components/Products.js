@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { fetchProducts } from '../firebaseService'; // Ensure this is correct
+import { fetchProducts } from '../firebaseService';
+import ProductCard from './ProductCard'; // Assuming a ProductCard component is used
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -10,11 +10,11 @@ const Products = () => {
     const fetchProductsData = async () => {
       try {
         const productsList = await fetchProducts();
-        setProducts(productsList);
-        setLoading(false); // Set loading to false once data is fetched
+        setProducts(productsList); // Ensure productsList includes Firestore doc ids
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching products:', error);
-        setLoading(false); // Also set loading to false in case of error
+        setLoading(false);
       }
     };
 
@@ -26,20 +26,14 @@ const Products = () => {
   }
 
   return (
-    <div>
+    <div className="shop-container">
       <h1>Products</h1>
-      <div className="product-list">
+      <div className="item-list">
         {products.length === 0 ? (
           <p>No products available.</p>
         ) : (
           products.map((product) => (
-            <div key={product.id} className="product-item">
-              <Link to={`/products/${product.id}`}>
-                <img src={product.imageUrl} alt={product.name} />
-                <h3>{product.name}</h3>
-                <p>Price: ${product.price}</p>
-              </Link>
-            </div>
+            <ProductCard key={product._id} product={product} />
           ))
         )}
       </div>

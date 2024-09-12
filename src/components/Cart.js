@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FaArrowLeft } from 'react-icons/fa'; // Importing FontAwesome arrow left icon
-import './Cart.css';
+import { FaArrowLeft } from 'react-icons/fa';
+import './Cart.css'; // Assuming you have a CSS file for styles
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -81,7 +81,6 @@ const Cart = () => {
       }
 
       const session = await response.json();
-      // Redirect to the Stripe checkout page
       window.location.href = session.url;
     } catch (error) {
       console.error('Failed to redirect to checkout:', error);
@@ -94,7 +93,7 @@ const Cart = () => {
         <h2 className="cart-title">Your Shopping Cart</h2>
         <Link to="/products" className="continue-shopping-link">
           <FaArrowLeft className="back-icon" />
-          Back to Shop/Gallery
+          Back to Shop
         </Link>
       </div>
 
@@ -105,9 +104,9 @@ const Cart = () => {
             const quantity = Number(item.quantity) || 0;
             return (
               <div key={item._id} className="cart-item">
-                <Link to={`/item/${item._id}`}>
+                <Link to={`/products/${item._id}`}>
                   <img
-                    src={item.images || '/path/to/placeholder-image.jpg'}
+                    src={item.imageUrl || '/path/to/placeholder-image.jpg'}
                     alt={item.name}
                     className="cart-item-image"
                   />
@@ -119,12 +118,8 @@ const Cart = () => {
                     <div className="cart-item-quantity">
                       <button
                         className={`quantity-btn ${quantity === 1 ? 'disabled' : ''}`}
-                        data-tooltip={
-                          quantity === 1
-                            ? 'Minimum quantity reached. Please use "Remove" to take this item out of your cart.'
-                            : ''
-                        }
                         onClick={() => decreaseQuantity(item._id)}
+                        disabled={quantity === 1}
                       >
                         -
                       </button>
@@ -137,48 +132,32 @@ const Cart = () => {
                       </button>
                     </div>
                   ) : (
-                    <div className="cart-item-quantity">
-                      <button
-                        className="quantity-btn disabled"
-                        data-tooltip='Quantity cannot be adjusted. Please use "Remove" to take this item out of your cart.'
-                      >
-                        -
-                      </button>
-                      <span className="quantity-value">{quantity}</span>
-                      <button
-                        className="quantity-btn disabled"
-                        data-tooltip='Quantity cannot be adjusted. Please use "Remove" to take this item out of your cart.'
-                      >
-                        +
-                      </button>
-                    </div>
+                    <p className="cart-item-quantity">Quantity: {quantity}</p>
                   )}
                   <button
-                    className="remove-btn"
+                    className="remove-item-btn"
                     onClick={() => removeItem(item._id)}
                   >
                     Remove
                   </button>
                 </div>
-                <p className="cart-item-subtotal">
-                  Subtotal: ${(price * quantity).toFixed(2)}
-                </p>
               </div>
             );
           })
         ) : (
-          <p className="empty-cart-message">Your cart is currently empty.</p>
+          <p>Your cart is empty</p>
         )}
       </div>
 
-      <div className="cart-summary">
-        <p className="cart-total">Total: ${total.toFixed(2)}</p>
-        {cartItems.length > 0 && (
+      {cartItems.length > 0 && (
+        <div className="cart-summary">
+          <h3 className="summary-title">Cart Summary</h3>
+          <p className="summary-total">Total: ${total.toFixed(2)}</p>
           <button className="checkout-btn" onClick={handleCheckout}>
-            Proceed to Checkout
+            Checkout
           </button>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };
