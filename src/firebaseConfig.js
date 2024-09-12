@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 import { getAuth, signOut as firebaseSignOut } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
+import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 
 // Use environment variables to configure Firebase
@@ -24,3 +24,20 @@ export const auth = getAuth(app);
 export const firestore = getFirestore(app);
 export const storage = getStorage(app);
 export const signOut = firebaseSignOut; // Export signOut
+
+// Add getUserDoc function
+export const getUserDoc = async (userId) => {
+  try {
+    const userDocRef = doc(firestore, 'users', userId);
+    const userDocSnap = await getDoc(userDocRef);
+    if (userDocSnap.exists()) {
+      return userDocSnap;
+    } else {
+      console.error('No such document!');
+      return null;
+    }
+  } catch (error) {
+    console.error('Error getting document:', error);
+    return null;
+  }
+};
