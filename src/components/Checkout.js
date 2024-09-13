@@ -10,6 +10,8 @@ const Checkout = () => {
   const { cart } = useContext(CartContext);
 
   const handleCheckout = async () => {
+    const userId = 'exampleUserId'; // Replace with actual user ID
+  
     try {
       const response = await fetch('http://localhost:4949/create-checkout-session', {
         method: 'POST',
@@ -17,16 +19,17 @@ const Checkout = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          items: cart.map(item => ({
+          products: cart.map(item => ({
             name: item.name,
             quantity: item.quantity,
             price: item.price,
           })),
+          userId, // Include userId in the request payload
         }),
       });
-
+  
       const session = await response.json();
-
+  
       if (session.url) {
         window.location.href = session.url;
       } else {
@@ -35,7 +38,7 @@ const Checkout = () => {
     } catch (error) {
       console.error('Checkout error:', error);
     }
-  };
+  };  
 
   return (
     <div>
