@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { auth, firestore } from '../firebaseConfig';
 import { onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import './AdminPage.css'; // Assuming you have this CSS file
 
 const AdminPage = () => {
   const [user, setUser] = useState(null);
@@ -46,8 +47,8 @@ const AdminPage = () => {
   };
 
   return (
-    <div>
-      <h1>Admin Dashboard</h1>
+    <div className="admin-container">
+      <h1 className="admin-header">Admin Dashboard</h1>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       {adminData ? (
         <div>
