@@ -13,10 +13,10 @@ const CheckoutForm = () => {
     fetch('/create-payment-intent', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ amount: 1000 }), // Example amount in cents ($10.00)
+      body: JSON.stringify({ amount: 1000 }) // Example amount in cents ($10.00)
     })
-      .then((response) => response.json())
-      .then((data) => setClientSecret(data.clientSecret));
+    .then(response => response.json())
+    .then(data => setClientSecret(data.clientSecret));
   }, []);
 
   const handleSubmit = async (event) => {
@@ -28,14 +28,11 @@ const CheckoutForm = () => {
 
     const cardElement = elements.getElement(CardElement);
 
-    const { error, paymentIntent } = await stripe.confirmCardPayment(
-      clientSecret,
-      {
-        payment_method: {
-          card: cardElement,
-        },
-      }
-    );
+    const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: {
+        card: cardElement,
+      },
+    });
 
     if (error) {
       setError(error.message);
@@ -48,9 +45,7 @@ const CheckoutForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <CardElement />
-      <button type="submit" disabled={!stripe}>
-        Pay
-      </button>
+      <button type="submit" disabled={!stripe}>Pay</button>
       {error && <div>{error}</div>}
       {success && <div>Payment successful!</div>}
     </form>

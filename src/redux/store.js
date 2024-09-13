@@ -1,13 +1,10 @@
-// src/redux/store.js
+import { createStore, applyMiddleware } from 'redux';
+import { thunk } from 'redux-thunk';
+import rootReducer from './reducers'; // Adjust the path as necessary
 
-import { createStore, combineReducers } from 'redux';
-import cartReducer from './reducers/cartReducer'; // Ensure the path is correct
-
-const rootReducer = combineReducers({
-  cart: cartReducer,
-  // Add other reducers here if needed
-});
-
-const store = createStore(rootReducer);
+const store = createStore(
+  rootReducer,
+  applyMiddleware(thunk)
+);
 
 export default store;
