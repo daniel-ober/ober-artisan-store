@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchProducts } from '../firebaseService';
-import ProductCard from './ProductCard'; // Assuming a ProductCard component is used
+import ProductCard from './ProductCard';
+import './Products.css'; // Make sure the path is correct
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -10,7 +11,7 @@ const Products = () => {
     const fetchProductsData = async () => {
       try {
         const productsList = await fetchProducts();
-        setProducts(productsList); // Ensure productsList includes Firestore doc ids
+        setProducts(productsList);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching products:', error);
@@ -26,17 +27,17 @@ const Products = () => {
   }
 
   return (
-    <div className="shop-container">
-      <h1>Products</h1>
-      <div className="item-list">
-        {products.length === 0 ? (
-          <p>No products available.</p>
-        ) : (
-          products.map((product) => (
-            <ProductCard key={product._id} product={product} />
-          ))
-        )}
-      </div>
+    <div className="products-container">
+      {products.length > 0 ? (
+        products.map((product) => (
+          <ProductCard 
+            key={product._id} 
+            product={product} 
+          />
+        ))
+      ) : (
+        <p>No products available</p>
+      )}
     </div>
   );
 };
