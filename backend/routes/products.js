@@ -1,26 +1,25 @@
-// routes/products.js
 const express = require('express');
 const router = express.Router();
 const admin = require('firebase-admin');
 
-// Get a reference to the Firestore database
+// Ensure Firestore is initialized
 const db = admin.firestore();
 
-// GET /api/products
-router.get('/', async (req, res) => {
+// Get product by ID
+router.get('/:id', async (req, res) => {
+  console.log('Fetching product with ID:', req.params.id);
   try {
-    const productsSnapshot = await db.collection('products').get();
-    if (productsSnapshot.empty) {
-      res.status(404).json({ error: 'No products found' });
-      return;
+    const productRef = db.collection('products').doc(req.params.id);
+    const doc = await productRef.get();
+
+    if (!doc.exists) {
+      console.log('Product not found');
+      return res.status(404).json({ error: 'Product not found' });
     }
-    const products = productsSnapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data()
-    }));
-    res.status(200).json(products);
+
+    res.json(doc.data());
   } catch (error) {
-    console.error('Error fetching products:', error);
+    console.error('Error fetching product:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
