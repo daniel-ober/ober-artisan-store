@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const stripe = require('stripe')('sk_test_51PrBd7Jbbx8jAR4NhFfH4oOmbY20nVEKmWwonRIoGplpZwEk65KNuNxY411kkHbRysJAh51aV5jJG94qyiFsdIpN00nLBrhiSL');
 const admin = require('firebase-admin');
 require('dotenv').config();
 
@@ -28,6 +28,7 @@ const app = express();
 // Define allowed origins for CORS
 const allowedOrigins = [
   'http://localhost:3000',
+  // 'http://localhost:4949'
   process.env.CLIENT_URL, // Allow the production client URL if needed
 ];
 
@@ -54,51 +55,40 @@ app.use((req, res, next) => {
 });
 
 // Import routes
-const contactRoutes = require('./routes/contact');
-const productRoutes = require('./routes/products');
+const contactRoutes = require('./routes/contact'); // Adjusted path
+const productRoutes = require('./routes/products'); // Adjusted path
 
 // Use routes
-app.use('/api/contact', contactRoutes);
+app.use('/api', contactRoutes);
 app.use('/api/products', productRoutes);
 
 // Create Checkout Session Route
 app.post('/create-checkout-session', async (req, res) => {
   const { products } = req.body;
 
-  // Validate products
-  if (!products || !Array.isArray(products) || products.length === 0) {
-    return res.status(400).json({ error: 'Invalid product data' });
-  }
-
   try {
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
-      line_items: products.map(product => ({
+      line_items: products.map(item => ({
         price_data: {
           currency: 'usd',
           product_data: {
-            name: product.name,
+            name: item.name,
           },
-          unit_amount: product.price * 100, // Stripe requires amount in the smallest currency unit
+          unit_amount: item.price * 100, // Stripe requires amount in cents
         },
-        quantity: product.quantity,
+        quantity: item.quantity,
       })),
       mode: 'payment',
-      success_url: `${process.env.CLIENT_URL || 'http://localhost:3000'}/success`,
-      cancel_url: `${process.env.CLIENT_URL || 'http://localhost:3000'}/cart`,
+      success_url: `${process.env.CLIENT_URL}/success`,
+      cancel_url: `${process.env.CLIENT_URL}/cart`,
     });
 
-    res.json({ url: session.url });
+    res.json({ url: session.url });  // Return the Stripe Checkout URL
   } catch (error) {
     console.error('Error creating checkout session:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
-});
-
-// Catch-all route for debugging
-app.use((req, res) => {
-  console.log('Unhandled route:', req.method, req.url);
-  res.status(404).json({ error: 'Not Found' });
 });
 
 // Start Server
