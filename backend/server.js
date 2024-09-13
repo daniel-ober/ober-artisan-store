@@ -1,11 +1,11 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const stripe = require('stripe')('sk_test_51PrBd7Jbbx8jAR4NhFfH4oOmbY20nVEKmWwonRIoGplpZwEk65KNuNxY411kkHbRysJAh51aV5jJG94qyiFsdIpN00nLBrhiSL');
-const admin = require('firebase-admin');
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const admin = require('firebase-admin'); 
 require('dotenv').config();
 
-// Initialize Firebase Admin
+// Firebase Admin setup (ensure correct env variables)
 admin.initializeApp({
   credential: admin.credential.cert({
     type: "service_account",
@@ -28,8 +28,7 @@ const app = express();
 // Define allowed origins for CORS
 const allowedOrigins = [
   'http://localhost:3000',
-  // 'http://localhost:4949'
-  process.env.CLIENT_URL, // Allow the production client URL if needed
+  process.env.CLIENT_URL,
 ];
 
 // Middleware
@@ -48,23 +47,19 @@ app.use(cors({
 app.use(express.json());
 app.use(bodyParser.json());
 
-// Logging incoming requests for debugging
-app.use((req, res, next) => {
-  console.log('Request Headers:', req.headers);
-  next();
-});
-
 // Import routes
-const contactRoutes = require('./routes/contact'); // Adjusted path
-const productRoutes = require('./routes/products'); // Adjusted path
+const contactRoutes = require('./routes/contact');
+const productRoutes = require('./routes/products');
+const webhookRoutes = require('./webhooks'); // Optional
 
 // Use routes
 app.use('/api', contactRoutes);
 app.use('/api/products', productRoutes);
+app.use('/webhooks', webhookRoutes); // Optional
 
 // Create Checkout Session Route
 app.post('/create-checkout-session', async (req, res) => {
-  const { products } = req.body;
+  const { products, userId } = req.body; // Include userId in the request body
 
   try {
     const session = await stripe.checkout.sessions.create({
@@ -80,8 +75,9 @@ app.post('/create-checkout-session', async (req, res) => {
         quantity: item.quantity,
       })),
       mode: 'payment',
-      success_url: `${process.env.CLIENT_URL}/success`,
+      success_url: `${process.env.CLIENT_URL}/success?session_id={CHECKOUT_SESSION_ID}&userId=${userId}`, // Include userId in the success URL
       cancel_url: `${process.env.CLIENT_URL}/cart`,
+      metadata: { userId }, // Store userId in metadata
     });
 
     res.json({ url: session.url });  // Return the Stripe Checkout URL
