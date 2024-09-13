@@ -23,8 +23,32 @@ const Cart = () => {
   };
 
   const handleCheckout = async () => {
-    // Checkout logic here
-  };
+    try {
+      const response = await fetch('http://localhost:4949/create-checkout-session', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          products: cart.map(item => ({
+            name: item.name,
+            price: item.price,
+            quantity: item.quantity,
+          })),
+        }),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+  
+      const session = await response.json();
+      // Redirect to the Stripe checkout page
+      window.location.href = session.url;
+    } catch (error) {
+      console.error('Failed to redirect to checkout:', error);
+    }
+  };  
 
   return (
     <div className="cart-container">
@@ -54,9 +78,9 @@ const Cart = () => {
       <div className="cart-summary">
         <p className="cart-total">Total: ${total.toFixed(2)}</p>
         {cart.length > 0 && (
-          <button className="checkout-btn" onClick={handleCheckout}>
-            Proceed to Checkout
-          </button>
+          <button className="checkout-button" onClick={handleCheckout}>
+          Checkout
+        </button>
         )}
       </div>
     </div>
