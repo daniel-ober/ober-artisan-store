@@ -5,6 +5,7 @@ import store from './redux/store'; // Ensure correct path
 import App from './App';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { CartProvider } from './context/CartContext'; // Ensure correct path
+import { AuthProvider } from './context/AuthContext'; // Import the AuthProvider
 
 const container = document.getElementById('root');
 const root = createRoot(container);
@@ -12,9 +13,11 @@ const root = createRoot(container);
 root.render(
   <Provider store={store}>
     <Router>
-      <CartProvider>
-        <App />
-      </CartProvider>
+      <AuthProvider> {/* Wrap AuthProvider */}
+        <CartProvider>
+          <App />
+        </CartProvider>
+      </AuthProvider>
     </Router>
   </Provider>
 );

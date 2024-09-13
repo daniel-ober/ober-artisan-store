@@ -1,54 +1,52 @@
-/* Admin.css */
 .admin-container {
-    padding: 20px;
-    background-color: #f4f4f4;
-  }
-  
-  .admin-header {
-    font-size: 2em;
-    margin-bottom: 20px;
-  }
-  
-  .manage-products, .block-user {
-    margin-bottom: 30px;
-  }
-  
-  .manage-products h2, .block-user h2 {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-  }
-  
-  .product-list, .blocked-users-list {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .product-list li, .blocked-users-list li {
-    background-color: #fff;
-    margin-bottom: 10px;
-    padding: 10px;
-    border-radius: 5px;
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .product-list button, .block-user button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .product-list button:hover, .block-user button:hover {
-    background-color: #0056b3;
-  }
-  
-  input[type="text"] {
-    padding: 5px;
-    margin-right: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
+  padding: 20px;
+  background-color: #f4f4f4;
+}
+
+.admin-header {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.manage-products, .block-user {
+  margin-bottom: 30px;
+}
+
+.manage-products h2, .block-user h2 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.product-list, .blocked-users-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.product-list li, .blocked-users-list li {
+  background-color: #fff;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.product-list button, .block-user button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.product-list button:hover, .block-user button:hover {
+  background-color: #0056b3;
+}
+
+input[type="text"] {
+  padding: 5px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
