@@ -1,4 +1,3 @@
-// ProductDetail.js
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchProductById } from '../firebaseService';
@@ -10,7 +9,7 @@ const ProductDetail = () => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { addToCart, cart } = useCart();
+  const { addToCart } = useCart();
 
   useEffect(() => {
     const fetchProductData = async () => {
@@ -33,14 +32,7 @@ const ProductDetail = () => {
 
   const handleAddToCart = () => {
     if (product) {
-      // Check if the item already exists in the cart
-      const existingItem = cart.find(item => item.id === product.id);
-      if (existingItem) {
-        console.log('Item already in cart');
-        return;
-      }
-      console.log('Adding to cart:', product);
-      addToCart({ ...product, quantity: 1 }); // Default quantity to 1
+      addToCart(product);  // Allow adding all product categories to the cart
     }
   };
 
@@ -58,17 +50,22 @@ const ProductDetail = () => {
 
   return (
     <div className="product-detail-container">
-      <h1 className="product-title">{product.name}</h1>
-      <img 
-        className="product-image" 
-        src={product.images?.[0] || '/path/to/placeholder.jpg'} 
-        alt={product.name} 
+      <img
+        className="product-image"
+        src={product.images?.[0] || '/path/to/placeholder.jpg'}
+        alt={product.name}
       />
-      <p className="product-description">{product.description}</p>
-      <p className="product-price">${product.price}</p>
-      <button className="add-to-cart-button" onClick={handleAddToCart}>
-        Add to Cart
-      </button>
+      <div className="product-info">
+        <h1 className="product-title">{product.name}</h1>
+        <p className="product-description">{product.description}</p>
+        <p className="product-price">${product.price}</p>
+        <button 
+          className="add-to-cart-button" 
+          onClick={handleAddToCart}
+        >
+          Add to Cart
+        </button>
+      </div>
     </div>
   );
 };

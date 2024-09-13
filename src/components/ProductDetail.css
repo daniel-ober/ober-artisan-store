@@ -1,3 +1,4 @@
+/* Base Styles for Mobile and Smaller Screens */
 .product-detail-container {
   padding: 20px;
   max-width: 800px;
@@ -37,4 +38,45 @@
 
 .add-to-cart-button:hover {
   background-color: #0056b3;
+}
+
+/* Styles for Web View and Larger Screens */
+@media (min-width: 768px) {
+  .product-detail-container {
+    display: flex;
+    align-items: flex-start;
+    text-align: left;
+    padding: 20px; /* Add padding to the container if needed */
+  }
+
+  .product-image {
+    flex: 1;
+    max-width: 100%;
+    height: auto;
+    margin-right: 20px;
+  }
+
+  .product-info {
+    flex: 2;
+  }
+
+  .product-title {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+  }
+
+  .product-description {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+  }
+
+  .product-price {
+    font-size: 1.7rem;
+    margin-bottom: 15px;
+  }
+
+  .add-to-cart-button {
+    padding: 12px 24px;
+    font-size: 1.125rem;
+  }
 }
