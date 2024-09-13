@@ -28,11 +28,12 @@ const app = express();
 // Define allowed origins for CORS
 const allowedOrigins = [
   'http://localhost:3000',
+  process.env.CLIENT_URL, // Allow the production client URL if needed
 ];
 
 // Middleware
 app.use(cors({
-  origin: function(origin, callback) {
+  origin: function (origin, callback) {
     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
@@ -64,6 +65,11 @@ app.use('/api/products', productRoutes);
 app.post('/create-checkout-session', async (req, res) => {
   const { products } = req.body;
 
+  // Validate products
+  if (!products || !Array.isArray(products) || products.length === 0) {
+    return res.status(400).json({ error: 'Invalid product data' });
+  }
+
   try {
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -73,13 +79,13 @@ app.post('/create-checkout-session', async (req, res) => {
           product_data: {
             name: product.name,
           },
-          unit_amount: product.price * 100,
+          unit_amount: product.price * 100, // Stripe requires amount in the smallest currency unit
         },
         quantity: product.quantity,
       })),
       mode: 'payment',
-      success_url: `${process.env.CLIENT_URL}/success`,
-      cancel_url: `${process.env.CLIENT_URL}/cart`,
+      success_url: `${process.env.CLIENT_URL || 'http://localhost:3000'}/success`,
+      cancel_url: `${process.env.CLIENT_URL || 'http://localhost:3000'}/cart`,
     });
 
     res.json({ url: session.url });

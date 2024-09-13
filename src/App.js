@@ -16,10 +16,11 @@ import AccountPage from './components/AccountPage';
 import AdminPage from './components/AdminPage';
 import AdminRoute from './components/AdminRoute';
 import { auth } from './firebaseConfig';
-import CheckUserClaims from './checkUserClaims'; // Import CheckUserClaims
+import CheckUserClaims from './checkUserClaims';
 import { onAuthStateChanged, signOut as firebaseSignOut } from 'firebase/auth';
 import './App.css';
 
+// PrivateRoute component to protect private routes
 const PrivateRoute = ({ element }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -40,26 +41,28 @@ const PrivateRoute = ({ element }) => {
   return user ? element : <Navigate to="/signin" />;
 };
 
+// App component with routing
 function App() {
   const [user, setUser] = useState(null);
-  const [isAdmin, setIsAdmin] = useState(false); // State to track if the user is an admin
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setUser(user);
 
       if (user) {
-        // Call CheckUserClaims after user is authenticated
         try {
           const claims = await CheckUserClaims();
           if (claims?.admin) {
-            setIsAdmin(true); // Set admin status based on custom claims
+            setIsAdmin(true);
           } else {
             setIsAdmin(false);
           }
         } catch (error) {
           console.error('Error checking user claims:', error);
         }
+      } else {
+        setIsAdmin(false);
       }
     });
 
@@ -69,7 +72,7 @@ function App() {
   const handleSignOut = () => {
     firebaseSignOut(auth).then(() => {
       setUser(null);
-      setIsAdmin(false); // Reset admin state on sign out
+      setIsAdmin(false);
     });
   };
 
@@ -93,7 +96,7 @@ function App() {
           src="/background-mobile.mp4"
         />
       </div>
-      <NavBar isAuthenticated={!!user} isAdmin={isAdmin} onSignOut={handleSignOut} /> {/* Pass isAdmin to NavBar */}
+      <NavBar isAuthenticated={!!user} isAdmin={isAdmin} onSignOut={handleSignOut} />
       <div className="app-content">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -114,7 +117,6 @@ function App() {
             path="/account"
             element={<PrivateRoute element={<AccountPage />} />}
           />
-          {/* Only show the Admin page for users with admin claims */}
           {isAdmin && (
             <Route
               path="/admin"
