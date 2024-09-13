@@ -4,13 +4,13 @@ import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 import CheckoutForm from './CheckoutForm';
 
-const stripePromise = loadStripe("pk_test_51PrBd7Jbbx8jAR4NZ2vOilq5lRJaQ0JnQjT9R7Z1brJvVokZc6TpaRFtX67jSCg8PpeqeUqmXBmFTUBLo0lkeI1G00KrLLeSJb");
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
 const Checkout = () => {
   const { cart } = useContext(CartContext);
 
   const handleCheckout = async () => {
-    const userId = 'exampleUserId'; // Replace with actual user ID
+    const userId = 'exampleUserId'; // Replace with actual user ID, fetched from auth or session
   
     try {
       const response = await fetch('http://localhost:4949/create-checkout-session', {
