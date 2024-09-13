@@ -1,13 +1,11 @@
-// src/actions/cartActions.js
-
-// Action to add an item to the cart
-export const addToCart = (item) => ({
+export const addToCart = (product) => ({
   type: 'ADD_TO_CART',
-  payload: item,
+  payload: product,
 });
 
-// Action to remove an item from the cart
-export const removeFromCart = (itemId) => ({
+export const removeFromCart = (id) => ({
   type: 'REMOVE_FROM_CART',
-  payload: itemId,
+  payload: id,
 });
+
+// Add actions for increasing and decreasing quantity if needed

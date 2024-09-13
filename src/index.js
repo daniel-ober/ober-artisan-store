@@ -1,23 +1,20 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import store from './redux/store'; // Ensure the path is correct
+import store from './redux/store'; // Ensure correct path
 import App from './App';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext';
-import { CartProvider } from './context/CartContext'; // Import CartProvider
+import { CartProvider } from './context/CartContext'; // Ensure correct path
 
 const container = document.getElementById('root');
-const root = createRoot(container); // Using createRoot for React 18
+const root = createRoot(container);
 
 root.render(
   <Provider store={store}>
     <Router>
-      <AuthProvider>
-        <CartProvider>
-          <App />
-        </CartProvider>
-      </AuthProvider>
+      <CartProvider>
+        <App />
+      </CartProvider>
     </Router>
   </Provider>
 );

@@ -4,31 +4,26 @@ import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 import CheckoutForm from './CheckoutForm';
 
-const stripePromise = loadStripe(
-  'pk_test_51PrBd7Jbbx8jAR4NZ2vOilq5lRJaQ0JnQjT9R7Z1brJvVokZc6TpaRFtX67jSCg8PpeqeUqmXBmFTUBLo0lkeI1G00KrLLeSJb'
-);
+const stripePromise = loadStripe("pk_test_51PrBd7Jbbx8jAR4NZ2vOilq5lRJaQ0JnQjT9R7Z1brJvVokZc6TpaRFtX67jSCg8PpeqeUqmXBmFTUBLo0lkeI1G00KrLLeSJb");
 
 const Checkout = () => {
   const { cart } = useContext(CartContext);
 
   const handleCheckout = async () => {
     try {
-      const response = await fetch(
-        'http://localhost:4949/create-checkout-session',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            items: cart.map((item) => ({
-              name: item.name,
-              quantity: item.quantity,
-              price: item.price,
-            })),
-          }),
-        }
-      );
+      const response = await fetch('http://localhost:4949/create-checkout-session', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          items: cart.map(item => ({
+            name: item.name,
+            quantity: item.quantity,
+            price: item.price,
+          })),
+        }),
+      });
 
       const session = await response.json();
 
@@ -51,7 +46,7 @@ const Checkout = () => {
         <div>
           <h2>Your Items:</h2>
           <ul>
-            {cart.map((item) => (
+            {cart.map(item => (
               <li key={item.id}>
                 {item.name} - Quantity: {item.quantity} - Price: ${item.price}
               </li>
