@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchProductById } from '../firebaseService';
+import { fetchProductById } from '../services/firebaseService';
 import { useCart } from '../context/CartContext';
 import './ProductDetail.css';
 
@@ -32,7 +32,13 @@ const ProductDetail = () => {
 
   const handleAddToCart = () => {
     if (product) {
-      addToCart(product);  // Allow adding all product categories to the cart
+      // Add user authentication check
+      if (addToCart) {
+        addToCart(product);  // Allow adding all product categories to the cart
+      } else {
+        console.error('User not authenticated');
+        // Optionally: Notify the user to sign in
+      }
     }
   };
 

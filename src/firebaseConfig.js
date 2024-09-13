@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 import { getAuth, signOut as firebaseSignOut } from 'firebase/auth';
-import { getFirestore, doc, getDoc } from 'firebase/firestore';
+import { getFirestore, doc, getDoc, setDoc, updateDoc, arrayUnion } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 
 // Use environment variables to configure Firebase
@@ -17,7 +17,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+const analytics = getAnalytics(app); // Initialize Analytics
 
 // Initialize Firebase services
 export const auth = getAuth(app);
@@ -40,5 +40,30 @@ export const getUserDoc = async (userId) => {
   } catch (error) {
     console.error('Error getting document:', error);
     return null;
+  }
+};
+
+// Function to create a cart for a specific user
+export const createCart = async (userId) => {
+  try {
+    const cartRef = doc(firestore, 'carts', userId);
+    await setDoc(cartRef, {
+      items: []
+    });
+    return userId;
+  } catch (error) {
+    console.error('Error creating cart:', error);
+  }
+};
+
+// Function to add an item to a cart
+export const addItemToCart = async (userId, item) => {
+  try {
+    const cartRef = doc(firestore, 'carts', userId);
+    await updateDoc(cartRef, {
+      items: arrayUnion(item)
+    });
+  } catch (error) {
+    console.error('Error adding item to cart:', error);
   }
 };

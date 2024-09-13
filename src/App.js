@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import Home from './components/Home';
@@ -15,66 +15,21 @@ import ProductDetail from './components/ProductDetail';
 import AccountPage from './components/AccountPage';
 import AdminPage from './components/AdminPage';
 import AdminRoute from './components/AdminRoute';
-import { auth } from './firebaseConfig';
-import CheckUserClaims from './checkUserClaims';
-import { onAuthStateChanged, signOut as firebaseSignOut } from 'firebase/auth';
+import { useAuth } from './context/AuthContext';
 import './App.css';
 
 // PrivateRoute component to protect private routes
 const PrivateRoute = ({ element }) => {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
-      setLoading(false);
-    });
-
-    return () => unsubscribe();
-  }, []);
-
-  if (loading) {
-    return <p>Loading...</p>;
+  const { user } = useAuth(); // Use user from AuthContext
+  if (!user) {
+    return <Navigate to="/signin" />;
   }
-
-  return user ? element : <Navigate to="/signin" />;
+  return element;
 };
 
 // App component with routing
 function App() {
-  const [user, setUser] = useState(null);
-  const [isAdmin, setIsAdmin] = useState(false);
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      setUser(user);
-
-      if (user) {
-        try {
-          const claims = await CheckUserClaims();
-          if (claims?.admin) {
-            setIsAdmin(true);
-          } else {
-            setIsAdmin(false);
-          }
-        } catch (error) {
-          console.error('Error checking user claims:', error);
-        }
-      } else {
-        setIsAdmin(false);
-      }
-    });
-
-    return () => unsubscribe();
-  }, []);
-
-  const handleSignOut = () => {
-    firebaseSignOut(auth).then(() => {
-      setUser(null);
-      setIsAdmin(false);
-    });
-  };
+  const { user, handleSignOut } = useAuth(); // Use user and handleSignOut from AuthContext
 
   return (
     <div className="app-container">
@@ -96,7 +51,7 @@ function App() {
           src="/background-mobile.mp4"
         />
       </div>
-      <NavBar isAuthenticated={!!user} isAdmin={isAdmin} onSignOut={handleSignOut} />
+      <NavBar isAuthenticated={!!user} onSignOut={handleSignOut} />
       <div className="app-content">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -117,12 +72,10 @@ function App() {
             path="/account"
             element={<PrivateRoute element={<AccountPage />} />}
           />
-          {isAdmin && (
-            <Route
-              path="/admin"
-              element={<AdminRoute element={<AdminPage />} />}
-            />
-          )}
+          <Route
+            path="/admin"
+            element={<PrivateRoute element={<AdminRoute />} />}
+          />
         </Routes>
       </div>
     </div>

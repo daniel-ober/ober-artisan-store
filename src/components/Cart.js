@@ -2,18 +2,46 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
 import { useCart } from '../context/CartContext';
+import { getCartItems } from '../services/cartService';
+import { useAuth } from '../context/AuthContext';
 import CartItem from './CartItem';
 import './Cart.css';
 
 const Cart = () => {
   const { cart, updateQuantity, removeFromCart } = useCart();
+  const { user } = useAuth();
   const [total, setTotal] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Calculate total whenever cart changes
     calculateTotal(cart);
   }, [cart]);
 
+  useEffect(() => {
+    const fetchCartItems = async () => {
+      try {
+        if (user) {
+          const items = await getCartItems(user.uid);
+          // Update local cart state or context here if needed
+          // Assuming the context provides the cart, this might not be necessary
+        }
+      } catch (error) {
+        console.error('Error fetching cart items:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCartItems();
+  }, [user]);
+
   const calculateTotal = (items) => {
+    if (!Array.isArray(items)) {
+      console.error('Expected items to be an array, but got:', items);
+      setTotal(0);
+      return;
+    }
     const totalAmount = items.reduce((acc, item) => {
       const price = Number(item.price) || 0;
       const quantity = Number(item.quantity) || 0;
@@ -31,24 +59,28 @@ const Cart = () => {
         },
         body: JSON.stringify({
           products: cart.map(item => ({
-            name: item.name,
+            name: item.productName,
             price: item.price,
             quantity: item.quantity,
           })),
         }),
       });
-  
+
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-  
+
       const session = await response.json();
       // Redirect to the Stripe checkout page
       window.location.href = session.url;
     } catch (error) {
       console.error('Failed to redirect to checkout:', error);
     }
-  };  
+  };
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <div className="cart-container">
@@ -79,8 +111,8 @@ const Cart = () => {
         <p className="cart-total">Total: ${total.toFixed(2)}</p>
         {cart.length > 0 && (
           <button className="checkout-button" onClick={handleCheckout}>
-          Checkout
-        </button>
+            Checkout
+          </button>
         )}
       </div>
     </div>
