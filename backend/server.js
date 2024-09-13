@@ -1,11 +1,12 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const admin = require('firebase-admin'); 
-require('dotenv').config();
+const webhookRoutes = require('./webhooks'); // Import webhook route
 
-// Firebase Admin setup (ensure correct env variables)
+// Firebase Admin setup
 admin.initializeApp({
   credential: admin.credential.cert({
     type: "service_account",
@@ -44,18 +45,18 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
-app.use(express.json());
+// Middleware for parsing raw body (for Stripe webhooks)
+app.use(express.json({ limit: '10kb' }));
 app.use(bodyParser.json());
 
 // Import routes
 const contactRoutes = require('./routes/contact');
 const productRoutes = require('./routes/products');
-const webhookRoutes = require('./webhooks'); // Optional
 
 // Use routes
 app.use('/api', contactRoutes);
 app.use('/api/products', productRoutes);
-app.use('/webhooks', webhookRoutes); // Optional
+app.use('/webhooks', webhookRoutes); // Webhook route
 
 // Create Checkout Session Route
 app.post('/create-checkout-session', async (req, res) => {
@@ -85,6 +86,33 @@ app.post('/create-checkout-session', async (req, res) => {
     console.error('Error creating checkout session:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
+});
+
+// Webhook Endpoint for Stripe
+app.post('/webhook', express.raw({ type: 'application/json' }), (req, res) => {
+  const sig = req.headers['stripe-signature'];
+  let event;
+
+  try {
+    event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET); // Use Webhook Secret
+  } catch (err) {
+    console.error('⚠️  Webhook signature verification failed.', err.message);
+    return res.status(400).send(`Webhook Error: ${err.message}`);
+  }
+
+  // Handle the event
+  switch (event.type) {
+    case 'checkout.session.completed':
+      const session = event.data.object;
+      console.log(`Payment for session ${session.id} succeeded!`);
+      // Fulfill the purchase here
+      break;
+    default:
+      console.log(`Unhandled event type ${event.type}`);
+  }
+
+  // Return a response to acknowledge receipt of the event
+  res.json({ received: true });
 });
 
 // Start Server
