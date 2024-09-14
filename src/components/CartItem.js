@@ -1,33 +1,36 @@
 import React from 'react';
 import { useCart } from '../context/CartContext';
-import './Cart.css'; // Import the CSS file
+import './Cart.css';
 
 const CartItem = ({ item }) => {
   const { removeFromCart, updateQuantity } = useCart();
 
+  const minQuantity = 1;
+
   const handleRemove = () => removeFromCart(item.id);
 
   const handleIncrease = () => {
-    if (item.quantity < 1) return; // No increase if quantity is 1 or more
-    updateQuantity(item.id, item.quantity + 1);
+    if (item.quantity >= minQuantity) {
+      updateQuantity(item.id, item.quantity + 1);
+    }
   };
 
   const handleDecrease = () => {
-    if (item.quantity <= 1) return; // No decrease if quantity is 1 or less
-    updateQuantity(item.id, item.quantity - 1);
+    if (item.quantity > minQuantity && !['one of a kind', 'custom shop'].includes(item.category)) {
+      updateQuantity(item.id, item.quantity - 1);
+    }
   };
 
-  const quantity = item.quantity || 0;
+  const quantity = item.category === 'one of a kind' || item.category === 'custom shop' ? minQuantity : item.quantity || minQuantity;
   const price = item.price || 0;
   const subtotal = (price * quantity).toFixed(2);
 
-  // Disable quantity adjustment for certain categories
   const isAdjustable = !['one of a kind', 'custom shop'].includes(item.category);
 
   return (
     <div className="cart-item">
       <img 
-        src={item.images[0] || '/path/to/placeholder.jpg'} 
+        src={item.images?.[0] || '/path/to/placeholder.jpg'} 
         alt={item.name} 
         className="cart-item-image" 
       />
@@ -37,28 +40,23 @@ const CartItem = ({ item }) => {
           <p className="cart-item-price">${price.toFixed(2)}</p>
         </div>
         <div className="cart-item-quantity">
-          {isAdjustable ? (
-            <>
-              <button
-                className={`quantity-btn ${quantity <= 1 ? 'disabled' : ''}`}
-                onClick={handleDecrease}
-                disabled={quantity <= 1}
-                data-tooltip="Decrease quantity"
-              >
-                -
-              </button>
-              <span className="quantity-value">{quantity}</span>
-              <button
-                className="quantity-btn"
-                onClick={handleIncrease}
-                data-tooltip="Increase quantity"
-              >
-                +
-              </button>
-            </>
-          ) : (
-            <span className="quantity-value">Quantity: {quantity}</span>
-          )}
+          <button
+            className={`quantity-btn ${quantity <= minQuantity || !isAdjustable ? 'disabled' : ''}`}
+            onClick={handleDecrease}
+            disabled={quantity <= minQuantity || !isAdjustable}
+            data-tooltip="Decrease quantity"
+          >
+            -
+          </button>
+          <span className="quantity-value">{quantity}</span>
+          <button
+            className={`quantity-btn ${!isAdjustable ? 'disabled' : ''}`}
+            onClick={handleIncrease}
+            disabled={!isAdjustable}
+            data-tooltip="Increase quantity"
+          >
+            +
+          </button>
           <button 
             className="remove-btn" 
             onClick={handleRemove}

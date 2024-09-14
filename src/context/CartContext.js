@@ -1,63 +1,44 @@
-// /src/context/CartContext.js
-
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { useAuth } from './AuthContext'; // Import useAuth hook
-import { fetchProductById, addItemToCart, createCart } from '../services/firebaseService'; // Adjust import path as necessary
-import { doc, getDoc, updateDoc } from 'firebase/firestore'; // Import necessary Firestore methods
-import { firestore } from '../firebaseConfig'; // Import firestore instance from your configuration
+import { useAuth } from './AuthContext';
+import { fetchProductById, addItemToCart, createCart } from '../services/firebaseService';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import { firestore } from '../firebaseConfig';
 
 const CartContext = createContext();
 
-// Fetch the cart for a specific user
 const fetchUserCart = async (userId) => {
   try {
     const cartRef = doc(firestore, 'carts', userId);
     const cartSnap = await getDoc(cartRef);
-    
+
     if (cartSnap.exists()) {
       return cartSnap.data();
     } else {
-      // If no cart exists, create one
       return await createCart(userId);
     }
   } catch (error) {
     console.error('Error fetching user cart:', error);
-    throw error; // Ensure errors are thrown so they can be caught in calling functions
-  }
-};
-
-// Update cart in Firestore
-const updateUserCart = async (userId, updatedCart) => {
-  try {
-    const cartRef = doc(firestore, 'carts', userId);
-    await updateDoc(cartRef, { items: updatedCart });
-  } catch (error) {
-    console.error('Error updating user cart:', error);
     throw error;
   }
 };
 
 export const CartProvider = ({ children }) => {
-  const { user } = useAuth(); // Get user from AuthContext
+  const { user } = useAuth();
   const [cart, setCart] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (user) {
       const fetchCart = async () => {
         try {
-          const userCart = await fetchUserCart(user.uid); // Fetch cart for current user
+          const userCart = await fetchUserCart(user.uid);
           setCart(userCart.items || []);
         } catch (error) {
           console.error('Error fetching cart:', error);
-        } finally {
-          setLoading(false);
         }
       };
       fetchCart();
     } else {
       setCart([]);
-      setLoading(false);
     }
   }, [user]);
 
@@ -67,12 +48,17 @@ export const CartProvider = ({ children }) => {
       return;
     }
     try {
-      await addItemToCart(user.uid, item); // Add item to user's cart
-      setCart(prevCart => {
-        const updatedCart = [...prevCart, item];
-        updateUserCart(user.uid, updatedCart); // Update Firestore
-        return updatedCart;
-      });
+      const existingItemIndex = cart.findIndex(cartItem => cartItem.id === item.id);
+
+      if (existingItemIndex > -1) {
+        // Item already in cart; do not increase quantity
+        return;
+      }
+
+      // Add new item
+      const updatedCart = [...cart, { ...item, quantity: 1 }];
+      await addItemToCart(user.uid, updatedCart);
+      setCart(updatedCart);
     } catch (error) {
       console.error('Error adding item to cart:', error);
     }
@@ -84,15 +70,13 @@ export const CartProvider = ({ children }) => {
       return;
     }
 
-    setCart(prevCart => {
-      const updatedCart = prevCart.map(cartItem =>
+    setCart(prevCart => 
+      prevCart.map(cartItem =>
         cartItem.id === id
           ? { ...cartItem, quantity }
           : cartItem
-      );
-      updateUserCart(user.uid, updatedCart); // Update Firestore
-      return updatedCart;
-    });
+      )
+    );
   };
 
   const removeFromCart = (id) => {
@@ -101,15 +85,11 @@ export const CartProvider = ({ children }) => {
       return;
     }
 
-    setCart(prevCart => {
-      const updatedCart = prevCart.filter(cartItem => cartItem.id !== id);
-      updateUserCart(user.uid, updatedCart); // Update Firestore
-      return updatedCart;
-    });
+    setCart(prevCart => prevCart.filter(cartItem => cartItem.id !== id));
   };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, updateQuantity, removeFromCart, loading }}>
+    <CartContext.Provider value={{ cart, addToCart, updateQuantity, removeFromCart }}>
       {children}
     </CartContext.Provider>
   );
