@@ -1,10 +1,7 @@
-// src/components/Cart.js
-
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
 import { useCart } from '../context/CartContext';
-import { getCartItems } from '../services/cartService';
 import { useAuth } from '../context/AuthContext';
 import CartItem from './CartItem';
 import './Cart.css';
@@ -16,7 +13,6 @@ const Cart = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Calculate total whenever cart changes
     calculateTotal(cart);
   }, [cart]);
 
@@ -24,10 +20,7 @@ const Cart = () => {
     const fetchCartItems = async () => {
       try {
         if (user) {
-          const items = await getCartItems(user.uid);
-          // Assuming you need to update local cart state or context here
-          // For example:
-          // updateCart(items); // updateCart function should be defined in CartContext
+          // Fetch items from Firebase or any other source if needed
         }
       } catch (error) {
         console.error('Error fetching cart items:', error);
@@ -74,7 +67,6 @@ const Cart = () => {
       }
 
       const session = await response.json();
-      // Redirect to the Stripe checkout page
       window.location.href = session.url;
     } catch (error) {
       console.error('Failed to redirect to checkout:', error);

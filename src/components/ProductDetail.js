@@ -9,7 +9,8 @@ const ProductDetail = () => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { addToCart } = useCart();
+  const { addToCart, cart } = useCart();
+  const [inCart, setInCart] = useState(null);
 
   useEffect(() => {
     const fetchProductData = async () => {
@@ -17,6 +18,9 @@ const ProductDetail = () => {
         const productData = await fetchProductById(id);
         if (productData) {
           setProduct(productData);
+          // Check if the product is already in the cart
+          const cartProduct = cart.find(item => item.id === id);
+          setInCart(cartProduct);
         } else {
           setError('Product not found');
         }
@@ -28,18 +32,24 @@ const ProductDetail = () => {
     };
 
     fetchProductData();
-  }, [id]);
+  }, [id, cart]);
 
   const handleAddToCart = () => {
     if (product) {
-      // Add user authentication check
       if (addToCart) {
-        addToCart(product);  // Allow adding all product categories to the cart
+        addToCart(product);
       } else {
         console.error('User not authenticated');
-        // Optionally: Notify the user to sign in
       }
     }
+  };
+
+  const handleQuantityChange = (change) => {
+    if (!product) return;
+    const newQuantity = inCart ? inCart.quantity + change : 1;
+
+    if (newQuantity < 1) return; // Prevent setting quantity to less than 1
+    addToCart({ ...product, quantity: newQuantity });
   };
 
   if (loading) {
@@ -53,6 +63,8 @@ const ProductDetail = () => {
   if (!product) {
     return <p>Product not found</p>;
   }
+
+  const canAdjustQuantity = product.category !== 'custom shop' && product.category !== 'one of a kind';
 
   return (
     <div className="product-detail-container">
@@ -71,6 +83,24 @@ const ProductDetail = () => {
         >
           Add to Cart
         </button>
+        {canAdjustQuantity && (
+          <div className="quantity-controls">
+            <button
+              className="quantity-button"
+              onClick={() => handleQuantityChange(-1)}
+              disabled={!inCart || inCart.quantity <= 1}
+            >
+              -
+            </button>
+            <span className="quantity-display">{inCart ? inCart.quantity : 1}</span>
+            <button
+              className="quantity-button"
+              onClick={() => handleQuantityChange(1)}
+            >
+              +
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

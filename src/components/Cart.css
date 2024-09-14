@@ -60,10 +60,47 @@
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 0 5px;
+  position: relative;
 }
 
 .quantity-btn:hover:not(.disabled) {
   background-color: #0056b3;
+}
+
+.quantity-btn.disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  color: #666;
+}
+
+.quantity-btn.disabled::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: #fff;
+  padding: 5px;
+  border-radius: 4px;
+  white-space: nowrap;
+  font-size: 12px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 10;
+}
+
+.quantity-btn.disabled:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+.quantity-value {
+  font-size: 16px;
+  margin: 0 10px;
 }
 
 .remove-btn {
@@ -88,16 +125,17 @@
   font-weight: bold;
 }
 
-.checkout-btn {
+.checkout-button {
   background-color: #28a745;
   color: #fff;
   padding: 10px 20px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  font-size: 16px;
 }
 
-.checkout-btn:hover {
+.checkout-button:hover {
   background-color: #218838;
 }
 
