@@ -1,3 +1,5 @@
+// src/components/Cart.js
+
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
@@ -23,8 +25,9 @@ const Cart = () => {
       try {
         if (user) {
           const items = await getCartItems(user.uid);
-          // Update local cart state or context here if needed
-          // Assuming the context provides the cart, this might not be necessary
+          // Assuming you need to update local cart state or context here
+          // For example:
+          // updateCart(items); // updateCart function should be defined in CartContext
         }
       } catch (error) {
         console.error('Error fetching cart items:', error);
