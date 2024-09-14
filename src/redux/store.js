@@ -1,3 +1,5 @@
+// src/redux/store.js
+
 import { configureStore } from '@reduxjs/toolkit';
 import cartReducer from './reducers/cartReducer'; // Import your actual reducer
 

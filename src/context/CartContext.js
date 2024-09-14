@@ -1,7 +1,9 @@
+// /src/context/CartContext.js
+
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useAuth } from './AuthContext'; // Import useAuth hook
 import { fetchProductById, addItemToCart, createCart } from '../services/firebaseService'; // Adjust import path as necessary
-import { doc, getDoc } from 'firebase/firestore'; // Import necessary Firestore methods
+import { doc, getDoc, updateDoc } from 'firebase/firestore'; // Import necessary Firestore methods
 import { firestore } from '../firebaseConfig'; // Import firestore instance from your configuration
 
 const CartContext = createContext();
@@ -24,9 +26,21 @@ const fetchUserCart = async (userId) => {
   }
 };
 
+// Update cart in Firestore
+const updateUserCart = async (userId, updatedCart) => {
+  try {
+    const cartRef = doc(firestore, 'carts', userId);
+    await updateDoc(cartRef, { items: updatedCart });
+  } catch (error) {
+    console.error('Error updating user cart:', error);
+    throw error;
+  }
+};
+
 export const CartProvider = ({ children }) => {
   const { user } = useAuth(); // Get user from AuthContext
   const [cart, setCart] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (user) {
@@ -36,11 +50,14 @@ export const CartProvider = ({ children }) => {
           setCart(userCart.items || []);
         } catch (error) {
           console.error('Error fetching cart:', error);
+        } finally {
+          setLoading(false);
         }
       };
       fetchCart();
     } else {
       setCart([]);
+      setLoading(false);
     }
   }, [user]);
 
@@ -51,7 +68,11 @@ export const CartProvider = ({ children }) => {
     }
     try {
       await addItemToCart(user.uid, item); // Add item to user's cart
-      setCart(prevCart => [...prevCart, item]); // Update local cart state
+      setCart(prevCart => {
+        const updatedCart = [...prevCart, item];
+        updateUserCart(user.uid, updatedCart); // Update Firestore
+        return updatedCart;
+      });
     } catch (error) {
       console.error('Error adding item to cart:', error);
     }
@@ -63,13 +84,15 @@ export const CartProvider = ({ children }) => {
       return;
     }
 
-    setCart(prevCart => 
-      prevCart.map(cartItem =>
+    setCart(prevCart => {
+      const updatedCart = prevCart.map(cartItem =>
         cartItem.id === id
           ? { ...cartItem, quantity }
           : cartItem
-      )
-    );
+      );
+      updateUserCart(user.uid, updatedCart); // Update Firestore
+      return updatedCart;
+    });
   };
 
   const removeFromCart = (id) => {
@@ -78,11 +101,15 @@ export const CartProvider = ({ children }) => {
       return;
     }
 
-    setCart(prevCart => prevCart.filter(cartItem => cartItem.id !== id));
+    setCart(prevCart => {
+      const updatedCart = prevCart.filter(cartItem => cartItem.id !== id);
+      updateUserCart(user.uid, updatedCart); // Update Firestore
+      return updatedCart;
+    });
   };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, updateQuantity, removeFromCart }}>
+    <CartContext.Provider value={{ cart, addToCart, updateQuantity, removeFromCart, loading }}>
       {children}
     </CartContext.Provider>
   );
