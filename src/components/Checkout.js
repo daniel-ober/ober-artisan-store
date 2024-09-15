@@ -1,66 +1,114 @@
-import React, { useContext } from 'react';
-import { CartContext } from '../CartContext';
-import { loadStripe } from '@stripe/stripe-js';
-import { Elements } from '@stripe/react-stripe-js';
-import CheckoutForm from './CheckoutForm';
-
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
+import React, { useState, useEffect } from 'react';
+import { collection, addDoc } from 'firebase/firestore';
+import { firestore } from '../firebaseConfig';
+import { TextField, Button, Typography } from '@mui/material';
+import { nanoid } from 'nanoid'; // For generating alphanumeric IDs
+import './Checkout.css';
 
 const Checkout = () => {
-  const { cart } = useContext(CartContext);
+  const [cart, setCart] = useState([]);
+  const [userDetails, setUserDetails] = useState({
+    name: '',
+    address: '',
+    paymentMethod: '',
+  });
+  const [status, setStatus] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleCheckout = async () => {
-    const userId = 'exampleUserId'; // Replace with actual user ID, fetched from auth or session
-  
+  useEffect(() => {
+    const fetchCart = async () => {
+      // Fetch cart items from local storage or Firestore
+      // Assuming cart items are stored in local storage
+      const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
+      setCart(savedCart);
+    };
+
+    fetchCart();
+  }, []);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUserDetails({
+      ...userDetails,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
     try {
-      const response = await fetch('http://localhost:4949/create-checkout-session', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          products: cart.map(item => ({
-            name: item.name,
-            quantity: item.quantity,
-            price: item.price,
-          })),
-          userId, // Include userId in the request payload
-        }),
+      const orderId = Date.now(); // Generate numeric ID based on timestamp
+      await addDoc(collection(firestore, 'orders'), {
+        id: orderId, // Include generated ID
+        ...userDetails,
+        cart,
+        placedAt: new Date(),
       });
-  
-      const session = await response.json();
-  
-      if (session.url) {
-        window.location.href = session.url;
-      } else {
-        console.error('Error creating checkout session:', session.error);
-      }
+
+      setStatus('Order placed successfully!');
+      setCart([]); // Clear cart
+      localStorage.removeItem('cart');
     } catch (error) {
-      console.error('Checkout error:', error);
+      console.error('Error placing order:', error);
+      setStatus('Failed to place order. Please try again.');
+    } finally {
+      setLoading(false);
     }
-  };  
+  };
 
   return (
-    <div>
-      <h1>Checkout</h1>
-      {cart.length === 0 ? (
-        <p>Your cart is empty.</p>
-      ) : (
-        <div>
-          <h2>Your Items:</h2>
-          <ul>
-            {cart.map(item => (
-              <li key={item.id}>
-                {item.name} - Quantity: {item.quantity} - Price: ${item.price}
-              </li>
-            ))}
-          </ul>
-          <button onClick={handleCheckout}>Proceed to Checkout</button>
-        </div>
+    <div className="checkout-container">
+      <Typography variant="h4" component="h1" gutterBottom>
+        Checkout
+      </Typography>
+      <form onSubmit={handleSubmit}>
+        <TextField
+          label="Name"
+          name="name"
+          value={userDetails.name}
+          onChange={handleChange}
+          fullWidth
+          margin="normal"
+          required
+          className="checkout-input"
+        />
+        <TextField
+          label="Address"
+          name="address"
+          value={userDetails.address}
+          onChange={handleChange}
+          fullWidth
+          margin="normal"
+          required
+          className="checkout-input"
+        />
+        <TextField
+          label="Payment Method"
+          name="paymentMethod"
+          value={userDetails.paymentMethod}
+          onChange={handleChange}
+          fullWidth
+          margin="normal"
+          required
+          className="checkout-input"
+        />
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          className="checkout-button"
+          disabled={loading}
+        >
+          {loading ? 'Placing Order...' : 'Place Order'}
+        </Button>
+      </form>
+      {status && (
+        <Typography variant="body2" color="textSecondary" sx={{ marginTop: 2 }}>
+          {status}
+        </Typography>
       )}
-      <Elements stripe={stripePromise}>
-        <CheckoutForm />
-      </Elements>
     </div>
   );
 };

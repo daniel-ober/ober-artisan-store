@@ -13,14 +13,14 @@ const cartReducer = (state = initialState, action) => {
       return {
         ...state,
         cartItems: [...state.cartItems, action.payload],
-        cartId: generateCartId() // Ensure cartId updates on every change
+        // cartId: generateCartId() // Ensure cartId updates on every change
       };
 
     case REMOVE_ITEM:
       return {
         ...state,
         cartItems: state.cartItems.filter(item => item.id !== action.payload),
-        cartId: generateCartId() // Update cartId
+        // cartId: generateCartId() // Update cartId
       };
 
     case UPDATE_ITEM_QUANTITY:
@@ -31,7 +31,7 @@ const cartReducer = (state = initialState, action) => {
             ? { ...item, quantity: action.payload.quantity }
             : item
         ),
-        cartId: generateCartId() // Update cartId
+        // cartId: generateCartId() // Update cartId
       };
 
     default:

@@ -1,11 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
-import { auth, firestore } from '../firebaseConfig'; // Use firestore
-import { TextField, Button, Typography, IconButton, FormControlLabel, Checkbox } from '@mui/material';
+import { auth, firestore } from '../firebaseConfig';
+import {
+  TextField,
+  Button,
+  Typography,
+  Checkbox,
+  FormControlLabel,
+  Dialog,
+  DialogContent,
+  IconButton,
+  InputAdornment,
+} from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import TermsOfService from './TermsOfService';
+import PrivacyPolicy from './PrivacyPolicy';
 import './Register.css';
+import printJS from 'print-js';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -16,19 +29,24 @@ const Register = () => {
     password: '',
     confirmPassword: '',
   });
-  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [status, setStatus] = useState('');
-  const [passwordRules, setPasswordRules] = useState({
-    length: false,
-    uppercase: false,
-    lowercase: false,
-    number: false,
-    specialChar: false,
-    noInvalidChars: true,
-  });
-  const [agreedToTerms, setAgreedToTerms] = useState(false);
-  const [agreedToPrivacyPolicy, setAgreedToPrivacyPolicy] = useState(false);
+  const [agreedToTermsAndPrivacy, setAgreedToTermsAndPrivacy] = useState(false);
+  const [openTerms, setOpenTerms] = useState(false);
+  const [openPrivacy, setOpenPrivacy] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const termsRef = useRef(null);
+  const privacyRef = useRef(null);
+
+  const passwordRules = {
+    length: formData.password.length >= 8 && formData.password.length <= 32,
+    uppercase: /[A-Z]/.test(formData.password),
+    lowercase: /[a-z]/.test(formData.password),
+    number: /\d/.test(formData.password),
+    specialChar: /[!@#$%^&*(),.?":{}|<>]/.test(formData.password),
+    match: formData.password === formData.confirmPassword,
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -36,58 +54,31 @@ const Register = () => {
       ...formData,
       [name]: value,
     });
-    if (name === 'password') {
-      validatePassword(value);
-    }
   };
 
   const handleCheckboxChange = (e) => {
-    const { name, checked } = e.target;
-    if (name === 'terms') {
-      setAgreedToTerms(checked);
-    } else if (name === 'privacyPolicy') {
-      setAgreedToPrivacyPolicy(checked);
-    }
-  };
-
-  const validatePassword = (password) => {
-    const lengthValid = password.length >= 8 && password.length <= 32;
-    const uppercaseValid = /[A-Z]/.test(password);
-    const lowercaseValid = /[a-z]/.test(password);
-    const numberValid = /\d/.test(password);
-    const specialCharValid = /[~!@#$%^*()_\-+={}[\]|:;",.?]/.test(password);
-    const noInvalidChars = !/[<>&']/.test(password);
-
-    setPasswordRules({
-      length: lengthValid,
-      uppercase: uppercaseValid,
-      lowercase: lowercaseValid,
-      number: numberValid,
-      specialChar: specialCharValid,
-      noInvalidChars: noInvalidChars,
-    });
+    setAgreedToTermsAndPrivacy(e.target.checked);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
+    setStatus('');
 
-    if (!agreedToTerms || !agreedToPrivacyPolicy) {
-      setError('You must agree to the Terms of Service and Privacy Policy.');
+    if (!agreedToTermsAndPrivacy) {
+      setError(
+        'You must agree to the Terms of Service and Privacy Policy to register.'
+      );
       return;
     }
 
-    if (formData.password !== formData.confirmPassword) {
+    if (!passwordRules.match) {
       setError('Passwords do not match');
       return;
     }
 
-    if (!Object.values(passwordRules).every((rule) => rule === true)) {
-      setError('Please ensure all password requirements are met.');
-      return;
-    }
-
     try {
-      // Create user with Firebase Authentication
+      // Create user with email and password
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         formData.email,
@@ -95,8 +86,11 @@ const Register = () => {
       );
       const user = userCredential.user;
 
-      // Create a new user document in Firestore
-      await setDoc(doc(firestore, 'users', user.uid), {
+      // Use the UID from Firebase Authentication
+      const uid = user.uid;
+
+      // Store additional user information in Firestore
+      await setDoc(doc(firestore, 'users', uid), {
         firstName: formData.firstName,
         lastName: formData.lastName,
         email: formData.email,
@@ -105,42 +99,38 @@ const Register = () => {
       });
 
       setStatus('Registration successful!');
-      setError(''); // Clear any previous error messages
-      setPasswordRules({
-        // Clear password rules
-        length: false,
-        uppercase: false,
-        lowercase: false,
-        number: false,
-        specialChar: false,
-        noInvalidChars: true,
-      });
-      setAgreedToTerms(false);
-      setAgreedToPrivacyPolicy(false);
       setFormData({
         firstName: '',
         lastName: '',
         email: '',
+        phone: '',
         password: '',
         confirmPassword: '',
-        phone: '',
       });
     } catch (error) {
-      switch (error.code) {
-        case 'auth/email-already-in-use':
-          setError('Email is already in use.');
-          break;
-        case 'auth/invalid-email':
-          setError('Invalid email address.');
-          break;
-        case 'auth/weak-password':
-          setError('Password should be at least 6 characters.');
-          break;
-        default:
-          setError('Registration failed. Please try again.');
-      }
-      setStatus(''); // Clear any previous success messages
+      console.error('Error creating user:', error);
+      setError('Failed to register. Please try again.');
     }
+  };
+
+  const handleOpenTerms = () => setOpenTerms(true);
+  const handleCloseTerms = () => setOpenTerms(false);
+  const handleOpenPrivacy = () => setOpenPrivacy(true);
+  const handleClosePrivacy = () => setOpenPrivacy(false);
+
+  const printDocument = (ref) => {
+    printJS({
+      printable: ref.current,
+      type: 'html',
+      style: `
+        @media print {
+          body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+          }
+        }
+      `,
+    });
   };
 
   return (
@@ -148,27 +138,27 @@ const Register = () => {
       <Typography variant="h4" component="h1" gutterBottom>
         Register
       </Typography>
-      <form onSubmit={handleSubmit}>
-        <div className="name-fields">
-          <TextField
-            label="First Name"
-            name="firstName"
-            value={formData.firstName}
-            onChange={handleChange}
-            fullWidth
-            margin="normal"
-            required
-          />
-          <TextField
-            label="Last Name"
-            name="lastName"
-            value={formData.lastName}
-            onChange={handleChange}
-            fullWidth
-            margin="normal"
-            required
-          />
-        </div>
+      <form onSubmit={handleSubmit} className="register-form">
+        <TextField
+          label="First Name"
+          name="firstName"
+          value={formData.firstName}
+          onChange={handleChange}
+          fullWidth
+          margin="normal"
+          required
+          className="register-input"
+        />
+        <TextField
+          label="Last Name"
+          name="lastName"
+          value={formData.lastName}
+          onChange={handleChange}
+          fullWidth
+          margin="normal"
+          required
+          className="register-input"
+        />
         <TextField
           label="Email"
           type="email"
@@ -178,6 +168,7 @@ const Register = () => {
           fullWidth
           margin="normal"
           required
+          className="register-input"
         />
         <TextField
           label="Phone (Optional)"
@@ -186,6 +177,7 @@ const Register = () => {
           onChange={handleChange}
           fullWidth
           margin="normal"
+          className="register-input"
         />
         <TextField
           label="Password"
@@ -196,6 +188,19 @@ const Register = () => {
           fullWidth
           margin="normal"
           required
+          className="register-input"
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  onClick={() => setShowPassword(!showPassword)}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
         />
         <TextField
           label="Confirm Password"
@@ -206,81 +211,41 @@ const Register = () => {
           fullWidth
           margin="normal"
           required
+          className="register-input"
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  onClick={() => setShowPassword(!showPassword)}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
         />
-        <IconButton
-          onClick={() => setShowPassword(!showPassword)}
-          edge="end"
-          aria-label="toggle password visibility"
-        >
-          {showPassword ? <VisibilityOff /> : <Visibility />}
-        </IconButton>
-        {error && (
-          <Typography color="error" variant="body2" sx={{ marginTop: 1 }}>
-            {error}
-          </Typography>
-        )}
-        <div className="password-rules">
-          <Typography variant="body2" sx={{ marginTop: 2 }}>
-            Password must:
-            <ul>
-              <li style={{ color: passwordRules.length ? 'green' : 'red' }}>
-                Be 8-32 characters long
-              </li>
-              <li style={{ color: passwordRules.uppercase ? 'green' : 'red' }}>
-                Contain one uppercase letter
-              </li>
-              <li style={{ color: passwordRules.lowercase ? 'green' : 'red' }}>
-                Contain one lowercase letter
-              </li>
-              <li style={{ color: passwordRules.number ? 'green' : 'red' }}>
-                Contain one number
-              </li>
-              <li
-                style={{ color: passwordRules.specialChar ? 'green' : 'red' }}
-              >
-                Contain at least one special character
-              </li>
-            </ul>
-          </Typography>
-        </div>
-        <div className="terms-privacy">
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={agreedToTerms}
-                onChange={handleCheckboxChange}
-                name="terms"
-                required
-              />
-            }
-            label={
-              <Typography variant="body2">
-                I agree to the{' '}
-                <a href="/terms-of-service" target="_blank" rel="noopener noreferrer">
-                  Terms of Service
-                </a>
-              </Typography>
-            }
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={agreedToPrivacyPolicy}
-                onChange={handleCheckboxChange}
-                name="privacyPolicy"
-                required
-              />
-            }
-            label={
-              <Typography variant="body2">
-                I agree to the{' '}
-                <a href="/privacy-policy" target="_blank" rel="noopener noreferrer">
-                  Privacy Policy
-                </a>
-              </Typography>
-            }
-          />
-        </div>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={agreedToTermsAndPrivacy}
+              onChange={handleCheckboxChange}
+            />
+          }
+          label={
+            <span>
+              I agree to the{' '}
+              <Button onClick={handleOpenTerms} color="primary">
+                Terms of Service
+              </Button>{' '}
+              and{' '}
+              <Button onClick={handleOpenPrivacy} color="primary">
+                Privacy Policy
+              </Button>
+              .
+            </span>
+          }
+        />
         <Button
           type="submit"
           variant="contained"
@@ -289,12 +254,79 @@ const Register = () => {
         >
           Register
         </Button>
-        {status && (
-          <Typography variant="body2" sx={{ marginTop: 2 }}>
-            {status}
-          </Typography>
-        )}
       </form>
+      {error && (
+        <Typography color="error" variant="body2" sx={{ marginTop: 2 }}>
+          {error}
+        </Typography>
+      )}
+      {status && (
+        <Typography color="success" variant="body2" sx={{ marginTop: 2 }}>
+          {status}
+        </Typography>
+      )}
+
+      <div className="password-rules">
+        <Typography variant="body2" sx={{ marginTop: 2 }}>
+          Password must:
+          <ul>
+            <li>
+              <span className={passwordRules.length ? 'checkmark' : 'not-met'}>
+                {passwordRules.length ? '✔️' : '❌'}
+              </span>
+              Be 8-32 characters long
+            </li>
+            <li>
+              <span className={passwordRules.uppercase ? 'checkmark' : 'not-met'}>
+                {passwordRules.uppercase ? '✔️' : '❌'}
+              </span>
+              Contain one uppercase letter
+            </li>
+            <li>
+              <span className={passwordRules.lowercase ? 'checkmark' : 'not-met'}>
+                {passwordRules.lowercase ? '✔️' : '❌'}
+              </span>
+              Contain one lowercase letter
+            </li>
+            <li>
+              <span className={passwordRules.number ? 'checkmark' : 'not-met'}>
+                {passwordRules.number ? '✔️' : '❌'}
+              </span>
+              Contain one number
+            </li>
+            <li>
+              <span className={passwordRules.specialChar ? 'checkmark' : 'not-met'}>
+                {passwordRules.specialChar ? '✔️' : '❌'}
+              </span>
+              Contain one special character
+            </li>
+            <li>
+              <span className={passwordRules.match ? 'checkmark' : 'not-met'}>
+                {passwordRules.match ? '✔️' : '❌'}
+              </span>
+              Match the confirmed password
+            </li>
+          </ul>
+        </Typography>
+      </div>
+
+      <Dialog open={openTerms} onClose={handleCloseTerms}>
+        <DialogContent>
+          <TermsOfService ref={termsRef} />
+          <Button onClick={() => printDocument(termsRef)}>
+            Print Terms of Service
+          </Button>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={openPrivacy} onClose={handleClosePrivacy}>
+        <DialogContent>
+          <PrivacyPolicy ref={privacyRef} />
+          <Button onClick={() => printDocument(privacyRef)}>
+            Print Privacy Policy
+          </Button>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

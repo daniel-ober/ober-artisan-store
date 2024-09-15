@@ -25,20 +25,24 @@ const fetchUserCart = async (userId) => {
 export const CartProvider = ({ children }) => {
   const { user } = useAuth();
   const [cart, setCart] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (user) {
       const fetchCart = async () => {
         try {
           const userCart = await fetchUserCart(user.uid);
-          setCart(userCart.items || []);
+          setCart(userCart.cart || {});
         } catch (error) {
           console.error('Error fetching cart:', error);
+        } finally {
+          setLoading(false);
         }
       };
       fetchCart();
     } else {
-      setCart([]);
+      setCart({});
+      setLoading(false);
     }
   }, [user]);
 
@@ -48,48 +52,58 @@ export const CartProvider = ({ children }) => {
       return;
     }
     try {
-      const existingItemIndex = cart.findIndex(cartItem => cartItem.id === item.id);
-
-      if (existingItemIndex > -1) {
+      const cartRef = doc(firestore, 'users', user.uid);
+      const userCart = cart || {};
+      if (userCart[item.productId]) {
         // Item already in cart; do not increase quantity
-        return;
+        userCart[item.productId].quantity += 1;
+      } else {
+        // Add new item
+        userCart[item.productId] = { ...item, quantity: 1 };
       }
-
-      // Add new item
-      const updatedCart = [...cart, { ...item, quantity: 1 }];
-      await addItemToCart(user.uid, updatedCart);
-      setCart(updatedCart);
+      await updateDoc(cartRef, { cart: userCart });
+      setCart(userCart);
     } catch (error) {
       console.error('Error adding item to cart:', error);
     }
   };
 
-  const updateQuantity = (id, quantity) => {
+  const updateQuantity = async (id, quantity) => {
     if (!user) {
       console.error('User not authenticated');
       return;
     }
-
-    setCart(prevCart => 
-      prevCart.map(cartItem =>
-        cartItem.id === id
-          ? { ...cartItem, quantity }
-          : cartItem
-      )
-    );
+    try {
+      const cartRef = doc(firestore, 'users', user.uid);
+      const updatedCart = { ...cart };
+      if (updatedCart[id]) {
+        updatedCart[id].quantity = quantity;
+      }
+      await updateDoc(cartRef, { cart: updatedCart });
+      setCart(updatedCart);
+    } catch (error) {
+      console.error('Error updating quantity:', error);
+    }
   };
 
-  const removeFromCart = (id) => {
+  const removeFromCart = async (id) => {
     if (!user) {
       console.error('User not authenticated');
       return;
     }
-
-    setCart(prevCart => prevCart.filter(cartItem => cartItem.id !== id));
+    try {
+      const cartRef = doc(firestore, 'users', user.uid);
+      const updatedCart = { ...cart };
+      delete updatedCart[id];
+      await updateDoc(cartRef, { cart: updatedCart });
+      setCart(updatedCart);
+    } catch (error) {
+      console.error('Error removing item from cart:', error);
+    }
   };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, updateQuantity, removeFromCart }}>
+    <CartContext.Provider value={{ cart, addToCart, updateQuantity, removeFromCart, loading }}>
       {children}
     </CartContext.Provider>
   );

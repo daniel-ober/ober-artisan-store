@@ -7,44 +7,22 @@ import CartItem from './CartItem';
 import './Cart.css';
 
 const Cart = () => {
-  const { cart, updateQuantity, removeFromCart } = useCart();
+  const { cart, updateQuantity, removeFromCart, loading } = useCart();
   const { user } = useAuth();
   const [total, setTotal] = useState(0);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    calculateTotal(cart);
-  }, [cart]);
-
-  useEffect(() => {
-    const fetchCartItems = async () => {
-      try {
-        if (user) {
-          // Fetch items from Firebase or any other source if needed
-        }
-      } catch (error) {
-        console.error('Error fetching cart items:', error);
-      } finally {
-        setLoading(false);
-      }
+    const calculateTotal = () => {
+      const totalAmount = Object.values(cart).reduce((acc, product) => {
+        const price = Number(product.price) || 0;
+        const quantity = Number(product.quantity) || 0;
+        return acc + price * quantity;
+      }, 0);
+      setTotal(totalAmount);
     };
 
-    fetchCartItems();
-  }, [user]);
-
-  const calculateTotal = (items) => {
-    if (!Array.isArray(items)) {
-      console.error('Expected items to be an array, but got:', items);
-      setTotal(0);
-      return;
-    }
-    const totalAmount = items.reduce((acc, item) => {
-      const price = Number(item.price) || 0;
-      const quantity = Number(item.quantity) || 0;
-      return acc + price * quantity;
-    }, 0);
-    setTotal(totalAmount);
-  };
+    calculateTotal();
+  }, [cart]);
 
   const handleCheckout = async () => {
     try {
@@ -54,10 +32,10 @@ const Cart = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          products: cart.map(item => ({
-            name: item.productName,
-            price: item.price,
-            quantity: item.quantity,
+          products: Object.values(cart).map(product => ({
+            name: product.productId,
+            price: product.priceId,
+            quantity: product.quantity,
           })),
         }),
       });
@@ -88,11 +66,11 @@ const Cart = () => {
       </div>
 
       <div className="cart-items">
-        {cart.length > 0 ? (
-          cart.map((item) => (
+        {Object.keys(cart).length > 0 ? (
+          Object.values(cart).map((product) => (
             <CartItem 
-              key={item.id} 
-              item={item} 
+              key={product.productId} 
+              item={product} 
               updateQuantity={updateQuantity}
               removeFromCart={removeFromCart}
             />
@@ -104,7 +82,7 @@ const Cart = () => {
 
       <div className="cart-summary">
         <p className="cart-total">Total: ${total.toFixed(2)}</p>
-        {cart.length > 0 && (
+        {Object.keys(cart).length > 0 && (
           <button className="checkout-button" onClick={handleCheckout}>
             Checkout
           </button>

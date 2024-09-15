@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { TextField, Button, Typography } from '@mui/material';
 import { checkAuthentication } from '../authCheck'; // Ensure this function checks auth status correctly
-import { fetchUserProfile } from '../firebaseService'; // Ensure fetchUserProfile is implemented and exported
+import { fetchUserProfile, addInquiry } from '../firebaseService'; // Ensure addInquiry is implemented and exported
+import { nanoid } from 'nanoid'; // For generating alphanumeric IDs
 import './Contact.css';
 
 const Contact = () => {
@@ -53,10 +53,12 @@ const Contact = () => {
     setLoading(true);
     setStatus(''); // Reset status before submitting
     try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/contact.json`,
-        formData
-      ); // Use environment variable for API URL
+      const inquiryId = nanoid(); // Generate alphanumeric ID
+      await addInquiry({
+        id: inquiryId, // Include generated ID
+        ...formData,
+        createdAt: new Date(), // Add timestamp
+      }); // Add inquiry to Firestore
       setStatus('Message sent successfully!');
       setFormData({
         first_name: '',
@@ -130,7 +132,7 @@ const Contact = () => {
           multiline
           rows={4}
           className="contact-input"
-          inputProps={{ minLength: 20 }} // Minimum character limit
+          inputProps={{ minLength: 5 }} // Minimum character limit
         />
         <Button
           type="submit"

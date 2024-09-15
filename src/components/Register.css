@@ -1,36 +1,86 @@
 .register-container {
-    max-width: 400px;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-  }
-  
-  .register-form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .register-input {
-    margin-bottom: 16px;
-  }
-  
-  .register-button {
-    margin-top: 16px;
-  }
-  
-  .error-message {
-    color: red;
-    margin-bottom: 1rem;
-  }
-  
-  .password-rules ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .password-rules li {
-    margin-bottom: 0.5rem;
-  }
-  
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.register-input {
+  margin-bottom: 16px;
+}
+
+.register-button {
+  margin-top: 16px;
+}
+
+.error-message {
+  color: red;
+  margin-bottom: 1rem;
+}
+
+.password-rules ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.password-rules li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.password-rules .checkmark {
+  font-size: 16px;
+  margin-right: 8px;
+  color: green;
+}
+
+.password-rules .not-met {
+  font-size: 16px;
+  margin-right: 8px;
+  color: red;
+}
+
+.legal-links {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.legal-links a {
+  cursor: pointer;
+  color: #1976d2; /* Primary color */
+  margin-bottom: 8px;
+  text-decoration: underline;
+}
+
+.legal-links a:hover {
+  color: #115293; /* Darker shade on hover */
+}
+
+.password-field-container {
+  position: relative;
+}
+
+.password-visibility-toggle {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.dialog-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.print-button {
+  margin-top: 16px;
+}

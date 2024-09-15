@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { auth, firestore } from '../firebaseConfig';
 import { onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import { v4 as uuidv4 } from 'uuid'; // For generating UUIDs
 import './AdminPage.css'; // Assuming you have this CSS file
 
 const AdminPage = () => {
@@ -38,7 +39,7 @@ const AdminPage = () => {
   const handleUpdate = async () => {
     try {
       const docRef = doc(firestore, 'adminData', 'info');
-      await updateDoc(docRef, { updated: new Date() });
+      await updateDoc(docRef, { updated: new Date(), uuid: uuidv4() }); // Added UUID
       alert('Admin data updated successfully!');
     } catch (error) {
       console.error('Error updating admin data:', error);

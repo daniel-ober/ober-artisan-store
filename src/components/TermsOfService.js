@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import './TermsOfService.css';
 
-const TermsOfService = () => {
+const TermsOfService = forwardRef((props, ref) => {
   return (
-    <div className="terms-of-service-container">
+    <div ref={ref} className="terms-of-service-container">
       <h1>Terms of Service</h1>
       <p>Effective Date: January 1, 2024</p>
 
@@ -92,6 +92,9 @@ const TermsOfService = () => {
       </p>
     </div>
   );
-};
+});
+
+// Add a display name to the component for debugging
+TermsOfService.displayName = 'TermsOfService';
 
 export default TermsOfService;
