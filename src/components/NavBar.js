@@ -85,8 +85,20 @@ const NavBar = ({ isAuthenticated, onSignOut }) => {
         aria-expanded={isMenuOpen}
         aria-label="Toggle menu"
       >
+              <div className="menu-toggle-content">
+          {/* <div className="menu-label">Menu</div> */}
+          <img
+            src={
+              isMenuOpen
+                ? 'https://i.imgur.com/P61nlaA.png'
+                : 'https://i.imgur.com/iGiegQg.png'
+            }
+            alt="Menu Toggle"
+            className="menu-arrow-icon"
+          />
+        </div>
         <div className="menu-toggle-content">
-          <div className="menu-label">Menu</div>
+          {/* <div className="menu-label">Menu</div> */}
           <img
             src={
               isMenuOpen
