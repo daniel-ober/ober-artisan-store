@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import './PrivacyPolicy.css';
 
-const PrivacyPolicy = () => {
+const PrivacyPolicy = forwardRef((props, ref) => {
   return (
-    <div className="privacy-policy-container">
+    <div ref={ref} className="privacy-policy-container">
       <h1>Privacy Policy</h1>
       <p>Effective Date: January 1, 2024</p>
       <h2>1. Introduction</h2>
@@ -66,6 +66,9 @@ const PrivacyPolicy = () => {
       </p>
     </div>
   );
-};
+});
+
+// Add a display name to the component for debugging
+PrivacyPolicy.displayName = 'PrivacyPolicy';
 
 export default PrivacyPolicy;

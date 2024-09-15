@@ -1,0 +1,34 @@
+Container for the dialog
+.dialog-container {
+  /* Adjust the width of the dialog if needed */
+  width: 80%;
+  max-width: 600px;
+}
+
+/* Title of the dialog */
+.dialog-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Content of the dialog */
+.dialog-content {
+  padding: 20px;
+  /* Customize the font size, color, or any other styling as needed */
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Actions (buttons) at the bottom of the dialog */
+.dialog-actions {
+  padding: 10px;
+  /* Customize button alignment or spacing if necessary */
+  justify-content: center;
+}
+
+/* Optional: Customize button styles */
+.dialog-actions .MuiButton-root {
+  /* Example: Add custom colors or padding */
+  padding: 10px 20px;
+}
