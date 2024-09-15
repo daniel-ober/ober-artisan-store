@@ -15,6 +15,10 @@ import ProductDetail from './components/ProductDetail';
 import AccountPage from './components/AccountPage';
 import AdminPage from './components/AdminPage';
 import AdminRoute from './components/AdminRoute';
+import PrivacyPolicy from './components/PrivacyPolicy'; // Import Privacy Policy component
+import TermsOfService from './components/TermsOfService'; // Import Terms of Service component
+import ReturnPolicy from './components/ReturnPolicy'; // Import the ReturnPolicy component
+import Footer from './components/Footer'; // Import Footer component
 import { useAuth } from './context/AuthContext';
 import './App.css';
 
@@ -76,8 +80,12 @@ function App() {
             path="/admin"
             element={<PrivateRoute element={<AdminRoute />} />}
           />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} /> {/* Privacy Policy route */}
+          <Route path="/terms-of-service" element={<TermsOfService />} /> {/* Terms of Service route */}
+          <Route path="/return-policy" element={<ReturnPolicy />} /> {/* Return Policy route */}
         </Routes>
       </div>
+      <Footer /> {Footer}
     </div>
   );
 }
