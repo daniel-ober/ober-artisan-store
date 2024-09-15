@@ -1,7 +1,8 @@
+// src/firebaseConfig.js
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 import { getAuth, signOut as firebaseSignOut } from 'firebase/auth';
-import { getFirestore, doc, getDoc, setDoc, updateDoc, arrayUnion } from 'firebase/firestore';
+import { getFirestore, doc, getDoc, setDoc, updateDoc, arrayUnion } from 'firebase/firestore'; // Ensure all Firestore methods are imported
 import { getStorage } from 'firebase/storage';
 
 // Use environment variables to configure Firebase
@@ -21,7 +22,7 @@ const analytics = getAnalytics(app); // Initialize Analytics
 
 // Initialize Firebase services
 export const auth = getAuth(app);
-export const firestore = getFirestore(app);
+export const firestore = getFirestore(app); // Initialize Firestore
 export const storage = getStorage(app);
 export const signOut = firebaseSignOut; // Export signOut
 
