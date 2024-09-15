@@ -1,0 +1,23 @@
+.return-policy-container {
+    background-color: #ffffff;
+    color: #333;
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 800px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .return-policy-container h1,
+  .return-policy-container h2 {
+    color: #333;
+  }
+  
+  .return-policy-container p {
+    line-height: 1.6;
+  }
+  
+  .return-policy-container strong {
+    font-weight: bold;
+  }
+  
