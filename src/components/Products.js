@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchProducts } from '../firebaseService';
 import ProductCard from './ProductCard';
-import './Products.css'; // Make sure the path is correct
+import './Products.css';
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -12,9 +12,9 @@ const Products = () => {
       try {
         const productsList = await fetchProducts();
         setProducts(productsList);
-        setLoading(false);
       } catch (error) {
         console.error('Error fetching products:', error);
+      } finally {
         setLoading(false);
       }
     };
@@ -23,20 +23,22 @@ const Products = () => {
   }, []);
 
   if (loading) {
-    return <p>Loading products...</p>;
+    return <p className="loading-message">Loading products...</p>;
   }
 
   return (
     <div className="products-container">
       {products.length > 0 ? (
-        products.map((product) => (
-          <ProductCard 
-            key={product._id} 
-            product={product} 
-          />
-        ))
+        <div className="product-grid">
+          {products.map((product) => (
+            <ProductCard 
+              key={product._id} 
+              product={product} 
+            />
+          ))}
+        </div>
       ) : (
-        <p>No products available</p>
+        <p className="no-products-message">No products available</p>
       )}
     </div>
   );

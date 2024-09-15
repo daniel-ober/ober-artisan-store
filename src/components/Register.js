@@ -225,7 +225,51 @@ const Register = () => {
             ),
           }}
         />
-        <FormControlLabel
+
+      <div className="password-rules">
+        <Typography variant="body2" sx={{ marginTop: 2 }}>
+          Password must:
+          <ul>
+            <li>
+              <span className={passwordRules.length ? 'checkmark' : 'not-met'}>
+                {passwordRules.length ? '✔️' : '❌'}
+              </span>
+              Be 8 characters at minimum
+            </li>
+            <li>
+              <span className={passwordRules.uppercase ? 'checkmark' : 'not-met'}>
+                {passwordRules.uppercase ? '✔️' : '❌'}
+              </span>
+              Contain one uppercase letter
+            </li>
+            <li>
+              <span className={passwordRules.lowercase ? 'checkmark' : 'not-met'}>
+                {passwordRules.lowercase ? '✔️' : '❌'}
+              </span>
+              Contain one lowercase letter
+            </li>
+            <li>
+              <span className={passwordRules.number ? 'checkmark' : 'not-met'}>
+                {passwordRules.number ? '✔️' : '❌'}
+              </span>
+              Contain one number
+            </li>
+            <li>
+              <span className={passwordRules.specialChar ? 'checkmark' : 'not-met'}>
+                {passwordRules.specialChar ? '✔️' : '❌'}
+              </span>
+              Contain one special character
+            </li>
+            <li>
+              <span className={passwordRules.match ? 'checkmark' : 'not-met'}>
+                {passwordRules.match ? '✔️' : '❌'}
+              </span>
+              Match the confirmed password
+            </li>
+          </ul>
+        </Typography>
+      </div>
+      <FormControlLabel
           control={
             <Checkbox
               checked={agreedToTermsAndPrivacy}
@@ -265,50 +309,6 @@ const Register = () => {
           {status}
         </Typography>
       )}
-
-      <div className="password-rules">
-        <Typography variant="body2" sx={{ marginTop: 2 }}>
-          Password must:
-          <ul>
-            <li>
-              <span className={passwordRules.length ? 'checkmark' : 'not-met'}>
-                {passwordRules.length ? '✔️' : '❌'}
-              </span>
-              Be 8-32 characters long
-            </li>
-            <li>
-              <span className={passwordRules.uppercase ? 'checkmark' : 'not-met'}>
-                {passwordRules.uppercase ? '✔️' : '❌'}
-              </span>
-              Contain one uppercase letter
-            </li>
-            <li>
-              <span className={passwordRules.lowercase ? 'checkmark' : 'not-met'}>
-                {passwordRules.lowercase ? '✔️' : '❌'}
-              </span>
-              Contain one lowercase letter
-            </li>
-            <li>
-              <span className={passwordRules.number ? 'checkmark' : 'not-met'}>
-                {passwordRules.number ? '✔️' : '❌'}
-              </span>
-              Contain one number
-            </li>
-            <li>
-              <span className={passwordRules.specialChar ? 'checkmark' : 'not-met'}>
-                {passwordRules.specialChar ? '✔️' : '❌'}
-              </span>
-              Contain one special character
-            </li>
-            <li>
-              <span className={passwordRules.match ? 'checkmark' : 'not-met'}>
-                {passwordRules.match ? '✔️' : '❌'}
-              </span>
-              Match the confirmed password
-            </li>
-          </ul>
-        </Typography>
-      </div>
 
       <Dialog open={openTerms} onClose={handleCloseTerms}>
         <DialogContent>
