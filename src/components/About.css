@@ -1,42 +1,122 @@
+/* General page styling */
+.about-page {
+  padding: 40px;
+  text-align: center;
+  background-color: #f4f4f4; /* Light background to contrast with cards */
+}
+
+/* Page heading styling */
+.about-page h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+  color: #333;
+}
+
 /* General card container styling */
 .card {
-  background-color: #fff; /* Or your card background color */
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  margin: 10px;
-  max-width: 300px; /* Adjust as needed */
+  margin: 20px;
+  max-width: 320px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 /* Card heading styling */
 .card h2 {
-  font-size: 1.5rem; /* Adjust size as needed */
-  margin-bottom: 10px;
+  font-size: 1.6rem;
+  margin-bottom: 15px;
   font-weight: bold;
+  color: #1d5160; /* Color to match your brand */
 }
 
 /* Card paragraph styling */
 .card p {
-  font-size: 1rem; /* Consistent size */
-  line-height: 1.5; /* Improved readability */
-  color: #333; /* Dark color for readability */
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #666; /* Softer color for better readability */
   margin: 0;
   padding: 0;
 }
 
-/* Responsive adjustments */
+/* Responsive adjustments for cards */
 @media (max-width: 768px) {
   .card {
     max-width: 100%;
     padding: 15px;
+    margin: 10px;
   }
 
   .card h2 {
-    font-size: 1.25rem;
+    font-size: 1.4rem;
   }
 
   .card p {
-    font-size: 0.875rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Carousel container */
+.carousel-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+/* Carousel item styling */
+.carousel-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 100%;
+}
+
+.carousel-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+  margin-bottom: 15px;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.carousel-item h3 {
+  font-size: 1.4rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.carousel-item p {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #555;
+}
+
+/* Smooth transition for carousel images */
+.carousel-item img:hover {
+  opacity: 0.9;
+}
+
+/* Responsive adjustments for carousel */
+@media (max-width: 768px) {
+  .carousel-item h3 {
+    font-size: 1.2rem;
+  }
+
+  .carousel-item p {
+    font-size: 0.9rem;
   }
 }
