@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-const admin = require('firebase-admin'); 
+const admin = require('firebase-admin');
 const webhookRoutes = require('./webhooks'); // Import webhook route
 
 // Firebase Admin setup
@@ -54,7 +54,7 @@ const contactRoutes = require('./routes/contact');
 const productRoutes = require('./routes/products');
 
 // Use routes
-app.use('/api', contactRoutes);
+app.use('/api/contact', contactRoutes);
 app.use('/api/products', productRoutes);
 app.use('/webhooks', webhookRoutes); // Webhook route
 
@@ -63,18 +63,20 @@ app.post('/create-checkout-session', async (req, res) => {
   const { products, userId } = req.body; // Include userId in the request body
 
   try {
+    const lineItems = products.map(item => ({
+      price_data: {
+        currency: 'usd',
+        product_data: {
+          name: item.name,
+        },
+        unit_amount: Math.round(item.price * 100), // Ensure this is an integer
+      },
+      quantity: item.quantity,
+    }));
+
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
-      line_items: products.map(item => ({
-        price_data: {
-          currency: 'usd',
-          product_data: {
-            name: item.name,
-          },
-          unit_amount: item.price * 100, // Stripe requires amount in cents
-        },
-        quantity: item.quantity,
-      })),
+      line_items: lineItems,
       mode: 'payment',
       success_url: `${process.env.CLIENT_URL}/success?session_id={CHECKOUT_SESSION_ID}&userId=${userId}`, // Include userId in the success URL
       cancel_url: `${process.env.CLIENT_URL}/cart`,

@@ -1,5 +1,6 @@
 import { firestore } from './firebaseConfig'; // Firestore instance
-import { collection, doc, getDoc, getDocs, setDoc } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, setDoc } from 'firebase/firestore'; // Import only once
+import { v4 as uuidv4 } from 'uuid'; // Import uuid for unique ID generation
 
 // Add user to Firestore
 const addUserToFirestore = async (userId, userData) => {
@@ -58,4 +59,28 @@ const fetchProductById = async (id) => {
   }
 };
 
-export { addUserToFirestore, fetchUserProfile, fetchProducts, fetchProductById };
+// Add inquiry to Firestore
+const addInquiry = async (inquiryData) => {
+  try {
+    // Generate a unique ID for the inquiry
+    const uniqueId = uuidv4(); // Generate a unique ID
+
+    // Add timestamp to the inquiry data
+    const timestamp = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
+
+    // Create a document reference with the unique ID
+    const docRef = doc(firestore, 'inquiries', uniqueId);
+
+    // Set the document with the unique ID and timestamp
+    await setDoc(docRef, {
+      ...inquiryData,
+      submittedAt: timestamp,
+    });
+
+    console.log('Inquiry added to Firestore with ID:', uniqueId);
+  } catch (error) {
+    console.error('Error adding inquiry:', error);
+  }
+};
+
+export { addUserToFirestore, fetchUserProfile, fetchProducts, fetchProductById, addInquiry };

@@ -1,4 +1,3 @@
-// src/components/SignInEmail.js
 import React, { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
@@ -101,7 +100,7 @@ function SignInEmail() {
           Forgot Password?
         </Link>
       </Typography>
-      <Typography variant="body2" className="form-link" sx={{ marginTop: 2 }}>
+      <Typography variant="body2" sx={{ marginTop: 2 }}>
         Don&apos;t have an account?{' '}
         <Link to="/register" className="form-link">
           Register here
