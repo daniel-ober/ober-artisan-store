@@ -1,0 +1,36 @@
+.privacy-policy-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+    color: #333; /* Darker text color for better readability */
+    background-color: #f9f9f9; /* Soft background for a cleaner look */
+    border-radius: 8px; /* Slight rounding for better aesthetics */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for a floating effect */
+  }
+  
+  .privacy-policy-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #222; /* Darker heading for contrast */
+    text-align: center; /* Centering main title */
+  }
+  
+  .privacy-policy-container h2 {
+    font-size: 1.5rem;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #444; /* Slight contrast between main and subheadings */
+  }
+  
+  .privacy-policy-container p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #555; /* Softer text color for readability */
+  }
+  
+  .privacy-policy-container strong {
+    color: #333; /* Emphasizing important points */
+    font-weight: bold;
+  }
+  

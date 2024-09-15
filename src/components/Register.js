@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
-import { auth, firestore } from '../firebaseConfig'; // Use db instead of firestore
-import { TextField, Button, Typography, IconButton } from '@mui/material';
+import { auth, firestore } from '../firebaseConfig'; // Use firestore
+import { TextField, Button, Typography, IconButton, FormControlLabel, Checkbox } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import './Register.css';
@@ -27,6 +27,8 @@ const Register = () => {
     specialChar: false,
     noInvalidChars: true,
   });
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
+  const [agreedToPrivacyPolicy, setAgreedToPrivacyPolicy] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -36,6 +38,15 @@ const Register = () => {
     });
     if (name === 'password') {
       validatePassword(value);
+    }
+  };
+
+  const handleCheckboxChange = (e) => {
+    const { name, checked } = e.target;
+    if (name === 'terms') {
+      setAgreedToTerms(checked);
+    } else if (name === 'privacyPolicy') {
+      setAgreedToPrivacyPolicy(checked);
     }
   };
 
@@ -59,6 +70,11 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!agreedToTerms || !agreedToPrivacyPolicy) {
+      setError('You must agree to the Terms of Service and Privacy Policy.');
+      return;
+    }
 
     if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match');
@@ -99,6 +115,8 @@ const Register = () => {
         specialChar: false,
         noInvalidChars: true,
       });
+      setAgreedToTerms(false);
+      setAgreedToPrivacyPolicy(false);
       setFormData({
         firstName: '',
         lastName: '',
@@ -224,6 +242,44 @@ const Register = () => {
               </li>
             </ul>
           </Typography>
+        </div>
+        <div className="terms-privacy">
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={agreedToTerms}
+                onChange={handleCheckboxChange}
+                name="terms"
+                required
+              />
+            }
+            label={
+              <Typography variant="body2">
+                I agree to the{' '}
+                <a href="/terms-of-service" target="_blank" rel="noopener noreferrer">
+                  Terms of Service
+                </a>
+              </Typography>
+            }
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={agreedToPrivacyPolicy}
+                onChange={handleCheckboxChange}
+                name="privacyPolicy"
+                required
+              />
+            }
+            label={
+              <Typography variant="body2">
+                I agree to the{' '}
+                <a href="/privacy-policy" target="_blank" rel="noopener noreferrer">
+                  Privacy Policy
+                </a>
+              </Typography>
+            }
+          />
         </div>
         <Button
           type="submit"
