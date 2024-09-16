@@ -7,8 +7,13 @@ const ProductCard = ({ product }) => {
   const { addToCart } = useCart();
 
   const handleAddToCart = () => {
-    if (!product) return;
-    addToCart(product);
+    if (product) {
+      addToCart(product).catch((error) => {
+        console.error('Failed to add product to cart:', error);
+      });
+    } else {
+      console.error('Product is not defined');
+    }
   };
 
   return (

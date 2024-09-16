@@ -37,6 +37,7 @@ const Cart = () => {
             price: product.priceId,
             quantity: product.quantity,
           })),
+          userId: user?.uid,
         }),
       });
 
