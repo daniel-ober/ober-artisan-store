@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { fetchProductById } from '../services/firebaseService';
 import { useCart } from '../context/CartContext';
+import { FaArrowLeft } from 'react-icons/fa';
 import './ProductDetail.css';
 
 const ProductDetail = () => {
@@ -69,48 +70,52 @@ const ProductDetail = () => {
 
   return (
     <div className="product-detail-container">
+      <Link to="/products" className="back-to-shop-link">
+        <FaArrowLeft className="back-icon" />
+        Back to Shop/Gallery
+      </Link>
       <div className="product-image-gallery">
         <img
-          className="product-main-image"
           src={mainImage}
-          alt={product.name}
+          alt={product?.name}
+          className="product-main-image"
         />
         <div className="product-thumbnail-gallery">
-          {product.images?.map((image, index) => (
+          {product?.images.map((image, index) => (
             <button
               key={index}
               className="product-thumbnail"
               onClick={() => handleThumbnailClick(image)}
-              aria-label={`Thumbnail ${index + 1}`}
             >
-              <img
-                src={image}
-                alt={`Thumbnail ${index + 1}`}
-              />
+              <img src={image} alt={`Thumbnail ${index + 1}`} />
             </button>
           ))}
         </div>
       </div>
       <div className="product-info">
-        <h1 className="product-title">{product.name}</h1>
-        <p className="product-description">{product.description}</p>
-        <p className="product-price">${product.price.toFixed(2)}</p>
-        <button className="add-to-cart-button" onClick={handleAddToCart}>
+        <h1 className="product-title">{product?.name}</h1>
+        <p className="product-description">{product?.description}</p>
+        <p className="product-price">${product?.price}</p>
+        <button
+          className="add-to-cart-button"
+          onClick={handleAddToCart}
+        >
           {inCart ? 'Update Cart' : 'Add to Cart'}
         </button>
-        {inCart && canAdjustQuantity && (
+        {canAdjustQuantity && (
           <div className="quantity-controls">
             <button
               className="quantity-button"
               onClick={() => handleQuantityChange(-1)}
-              disabled={inCart.quantity <= 1}
+              disabled={!inCart || inCart.quantity <= 1}
             >
               -
             </button>
-            <span className="quantity-display">{inCart.quantity}</span>
+            <span className="quantity-display">{inCart?.quantity || 0}</span>
             <button
               className="quantity-button"
               onClick={() => handleQuantityChange(1)}
+              disabled={!inCart}
             >
               +
             </button>
