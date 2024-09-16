@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useAuth } from './AuthContext';
-import { fetchProductById, createCart } from '../services/firebaseService';
+import { createCart } from '../services/firebaseService';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { firestore } from '../firebaseConfig';
 
@@ -53,16 +53,18 @@ export const CartProvider = ({ children }) => {
     }
     try {
       const cartRef = doc(firestore, 'carts', user.uid);
-      const userCart = { ...cart };
-      if (userCart[item.productId]) {
+      const updatedCart = { ...cart };
+
+      if (updatedCart[item.productId]) {
         // Item already in cart; increase quantity
-        userCart[item.productId].quantity += 1;
+        updatedCart[item.productId].quantity += 1;
       } else {
         // Add new item
-        userCart[item.productId] = { ...item, quantity: 1 };
+        updatedCart[item.productId] = { ...item, quantity: 1 };
       }
-      await updateDoc(cartRef, { cart: userCart });
-      setCart(userCart);
+
+      await updateDoc(cartRef, { cart: updatedCart });
+      setCart(updatedCart);
     } catch (error) {
       console.error('Error adding item to cart:', error);
     }
