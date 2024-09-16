@@ -1,26 +1,10 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import { useAuth } from './AuthContext';
-import { createCart } from '../services/firebaseService';
-import { doc, getDoc, updateDoc } from 'firebase/firestore';
-import { firestore } from '../firebaseConfig';
+import React, { createContext, useState, useContext, useEffect } from 'react';
+import { doc, updateDoc, setDoc, getDoc } from 'firebase/firestore';
+import { firestore } from '../firebaseConfig'; // Correct path to Firestore instance
+import { useAuth } from './AuthContext'; // Assuming you have an AuthContext for user authentication
+import { fetchUserCart } from '../firebaseService'; // Import the fetchUserCart function
 
 const CartContext = createContext();
-
-const fetchUserCart = async (userId) => {
-  try {
-    const cartRef = doc(firestore, 'carts', userId);
-    const cartSnap = await getDoc(cartRef);
-
-    if (cartSnap.exists()) {
-      return cartSnap.data();
-    } else {
-      return await createCart(userId);
-    }
-  } catch (error) {
-    console.error('Error fetching user cart:', error);
-    throw error;
-  }
-};
 
 export const CartProvider = ({ children }) => {
   const { user } = useAuth();
@@ -28,77 +12,84 @@ export const CartProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (user) {
-      const fetchCart = async () => {
+    const loadCart = async () => {
+      if (user) {
         try {
           const userCart = await fetchUserCart(user.uid);
-          setCart(userCart.cart || {});
+          setCart(userCart);
         } catch (error) {
-          console.error('Error fetching cart:', error);
+          console.error('Failed to load cart:', error);
         } finally {
           setLoading(false);
         }
-      };
-      fetchCart();
-    } else {
-      setCart({});
-      setLoading(false);
-    }
+      } else {
+        setCart({});
+        setLoading(false);
+      }
+    };
+
+    loadCart();
   }, [user]);
 
-  const addToCart = async (item) => {
-    if (!user) {
-      console.error('User not authenticated');
-      return;
-    }
+  const addToCart = async (product) => {
+    const updatedCart = {
+      ...cart,
+      [product.id]: {
+        ...product,
+        quantity: (cart[product.id]?.quantity || 0) + 1,
+      },
+    };
+
+    setCart(updatedCart);
+
     try {
-      const cartRef = doc(firestore, 'carts', user.uid);
-      const updatedCart = { ...cart };
-
-      if (updatedCart[item.productId]) {
-        // Item already in cart; increase quantity
-        updatedCart[item.productId].quantity += 1;
-      } else {
-        // Add new item
-        updatedCart[item.productId] = { ...item, quantity: 1 };
+      if (user) {
+        const cartRef = doc(firestore, 'carts', user.uid);
+        
+        // Check if the cart document exists
+        const cartDoc = await getDoc(cartRef);
+        if (cartDoc.exists()) {
+          // Update the existing document
+          await updateDoc(cartRef, updatedCart);
+        } else {
+          // Create a new document if it does not exist
+          await setDoc(cartRef, updatedCart);
+        }
       }
-
-      await updateDoc(cartRef, { cart: updatedCart });
-      setCart(updatedCart);
     } catch (error) {
-      console.error('Error adding item to cart:', error);
+      console.error('Error updating cart:', error);
     }
   };
 
-  const updateQuantity = async (id, quantity) => {
-    if (!user) {
-      console.error('User not authenticated');
-      return;
-    }
+  const updateQuantity = async (productId, quantity) => {
+    const updatedCart = {
+      ...cart,
+      [productId]: { ...cart[productId], quantity },
+    };
+
+    setCart(updatedCart);
+
     try {
-      const cartRef = doc(firestore, 'carts', user.uid);
-      const updatedCart = { ...cart };
-      if (updatedCart[id]) {
-        updatedCart[id].quantity = quantity;
+      if (user) {
+        const cartRef = doc(firestore, 'carts', user.uid);
+        await updateDoc(cartRef, updatedCart);
       }
-      await updateDoc(cartRef, { cart: updatedCart });
-      setCart(updatedCart);
     } catch (error) {
-      console.error('Error updating quantity:', error);
+      console.error('Error updating cart:', error);
     }
   };
 
-  const removeFromCart = async (id) => {
-    if (!user) {
-      console.error('User not authenticated');
-      return;
-    }
+  const removeFromCart = async (productId) => {
+    const updatedCart = { ...cart };
+    delete updatedCart[productId];
+
+    setCart(updatedCart);
+
     try {
-      const cartRef = doc(firestore, 'carts', user.uid);
-      const updatedCart = { ...cart };
-      delete updatedCart[id];
-      await updateDoc(cartRef, { cart: updatedCart });
-      setCart(updatedCart);
+      if (user) {
+        const cartRef = doc(firestore, 'carts', user.uid);
+        await updateDoc(cartRef, updatedCart);
+      }
     } catch (error) {
       console.error('Error removing item from cart:', error);
     }

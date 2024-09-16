@@ -1,10 +1,11 @@
+// server.js
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const admin = require('firebase-admin');
-const webhookRoutes = require('./webhooks'); // Import webhook route
+const webhookRoutes = require('./webhooks');
 
 // Firebase Admin setup
 admin.initializeApp({
@@ -26,7 +27,6 @@ admin.initializeApp({
 const db = admin.firestore();
 const app = express();
 
-// Define allowed origins for CORS
 const allowedOrigins = [
   'http://localhost:3000',
   process.env.CLIENT_URL,
@@ -45,7 +45,6 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
-// Middleware for parsing raw body (for Stripe webhooks)
 app.use(express.json({ limit: '10kb' }));
 app.use(bodyParser.json());
 
@@ -53,37 +52,40 @@ app.use(bodyParser.json());
 const contactRoutes = require('./routes/contact');
 const productRoutes = require('./routes/products');
 
-// Use routes
 app.use('/api/contact', contactRoutes);
 app.use('/api/products', productRoutes);
-app.use('/webhooks', webhookRoutes); // Webhook route
+app.use('/webhooks', webhookRoutes);
 
 // Create Checkout Session Route
 app.post('/create-checkout-session', async (req, res) => {
-  const { products, userId } = req.body; // Include userId in the request body
+  const { products, userId } = req.body;
 
   try {
-    const lineItems = products.map(item => ({
-      price_data: {
-        currency: 'usd',
-        product_data: {
-          name: item.name,
-        },
-        unit_amount: Math.round(item.price * 100), // Ensure this is an integer
-      },
-      quantity: item.quantity,
-    }));
+    console.log('Received products:', products); // Log products
 
+    // Map through the products array and ensure that price_id is correctly used
+    const lineItems = products.map(item => {
+      if (!item.price || !item.name) {
+        throw new Error(`Missing price or name for product: ${JSON.stringify(item)}`);
+      }
+
+      return {
+        price: item.price, // Use the price ID from Stripe
+        quantity: item.quantity,
+      };
+    });
+
+    // Create a Checkout Session with Stripe
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: lineItems,
       mode: 'payment',
-      success_url: `${process.env.CLIENT_URL}/success?session_id={CHECKOUT_SESSION_ID}&userId=${userId}`, // Include userId in the success URL
+      success_url: `${process.env.CLIENT_URL}/success?session_id={CHECKOUT_SESSION_ID}&userId=${userId}`,
       cancel_url: `${process.env.CLIENT_URL}/cart`,
-      metadata: { userId }, // Store userId in metadata
+      metadata: { userId },
     });
 
-    res.json({ url: session.url });  // Return the Stripe Checkout URL
+    res.json({ url: session.url });
   } catch (error) {
     console.error('Error creating checkout session:', error);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -96,13 +98,12 @@ app.post('/webhook', express.raw({ type: 'application/json' }), (req, res) => {
   let event;
 
   try {
-    event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET); // Use Webhook Secret
+    event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
   } catch (err) {
     console.error('⚠️  Webhook signature verification failed.', err.message);
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }
 
-  // Handle the event
   switch (event.type) {
     case 'checkout.session.completed':
       const session = event.data.object;
@@ -113,26 +114,23 @@ app.post('/webhook', express.raw({ type: 'application/json' }), (req, res) => {
       console.log(`Unhandled event type ${event.type}`);
   }
 
-  // Return a response to acknowledge receipt of the event
   res.json({ received: true });
 });
 
-// Endpoint to retrieve a Firestore document
 app.get('/api/firestore-doc', async (req, res) => {
   try {
-    const docRef = db.collection('products').doc('y0Z3azz4Dxzv7H3uyOMT'); // Example document path
+    const docRef = db.collection('products').doc('y0Z3azz4Dxzv7H3uyOMT');
     const doc = await docRef.get();
     if (!doc.exists) {
       return res.status(404).send('Document not found');
     }
     res.json(doc.data());
   } catch (error) {
-    console.error('Error retrieving document:', error); // Log the error
+    console.error('Error retrieving document:', error);
     res.status(500).send('Internal Server Error');
   }
 });
 
-// Start Server
 const PORT = process.env.PORT || 4949;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

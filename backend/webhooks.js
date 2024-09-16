@@ -1,10 +1,8 @@
-// webhooks.js
-
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const express = require('express');
 const router = express.Router();
 
-// Define the Stripe webhook secret (you'll get this from Stripe)
+// Define the Stripe webhook secret (get this from Stripe)
 const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
 router.post('/webhook', express.raw({ type: 'application/json' }), (req, res) => {
@@ -16,7 +14,7 @@ router.post('/webhook', express.raw({ type: 'application/json' }), (req, res) =>
         // Verify the webhook signature
         event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
     } catch (err) {
-        console.error(`Webhook signature verification failed.`, err.message);
+        console.error(`Webhook signature verification failed: ${err.message}`);
         return res.status(400).send(`Webhook Error: ${err.message}`);
     }
 
@@ -24,12 +22,12 @@ router.post('/webhook', express.raw({ type: 'application/json' }), (req, res) =>
     switch (event.type) {
         case 'payment_intent.succeeded':
             const paymentIntent = event.data.object;
-            console.log(`PaymentIntent was successful!`);
+            console.log(`PaymentIntent for ${paymentIntent.id} was successful!`);
             // Add your business logic here (e.g., fulfill the order)
             break;
         case 'payment_intent.payment_failed':
             const failedPaymentIntent = event.data.object;
-            console.log('Payment failed.');
+            console.log(`PaymentIntent for ${failedPaymentIntent.id} failed.`);
             break;
         // Add other cases for different event types
         default:
