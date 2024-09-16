@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { TextField, Button, Typography } from '@mui/material';
-import { checkAuthentication } from '../authCheck'; // Ensure this function checks auth status correctly
-import { fetchUserProfile, addInquiry } from '../firebaseService'; // Ensure addInquiry is implemented and exported
-import { nanoid } from 'nanoid'; // For generating alphanumeric IDs
+import { checkAuthentication } from '../authCheck'; // Function to check auth status
+import { fetchUserProfile, addInquiry } from '../firebaseService'; // Ensure these functions are implemented
+import { nanoid } from 'nanoid'; // For generating unique IDs
 import './Contact.css';
 
 const Contact = () => {
@@ -18,7 +18,7 @@ const Contact = () => {
 
   useEffect(() => {
     const fetchUserData = async () => {
-      const user = checkAuthentication(); // Function to get the current authenticated user
+      const user = checkAuthentication(); // Get the current authenticated user
       if (user) {
         try {
           const profile = await fetchUserProfile(user.uid);
@@ -52,8 +52,9 @@ const Contact = () => {
     e.preventDefault();
     setLoading(true);
     setStatus(''); // Reset status before submitting
+
     try {
-      const inquiryId = nanoid(); // Generate alphanumeric ID
+      const inquiryId = nanoid(); // Generate unique ID
       await addInquiry({
         id: inquiryId, // Include generated ID
         ...formData,

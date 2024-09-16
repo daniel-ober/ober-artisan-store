@@ -80,4 +80,20 @@ const addInquiry = async (inquiryData) => {
   }
 };
 
-export { addUserToFirestore, fetchUserProfile, fetchProducts, fetchProductById, addInquiry };
+// Fetch the user's cart from Firestore
+const fetchUserCart = async (userId) => {
+  try {
+    const cartDoc = await getDoc(doc(firestore, 'carts', userId));
+    if (cartDoc.exists()) {
+      return cartDoc.data(); // Return cart data if found
+    } else {
+      console.log('No cart found for the given user ID!');
+      return {}; // Return an empty cart if no document is found
+    }
+  } catch (error) {
+    console.error('Error fetching user cart:', error);
+    throw error; // Rethrow error for further handling
+  }
+};
+
+export { addUserToFirestore, fetchUserProfile, fetchProducts, fetchProductById, addInquiry, fetchUserCart };
