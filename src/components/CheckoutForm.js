@@ -26,28 +26,28 @@ const CheckoutForm = () => {
       return;
     }
 
-    const cardElement = elements.getElement(CardElement);
-
     const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
       payment_method: {
-        card: cardElement,
-      },
+        card: elements.getElement(CardElement),
+      }
     });
 
     if (error) {
       setError(error.message);
-    } else {
+    } else if (paymentIntent.status === 'succeeded') {
       setSuccess(true);
-      console.log('Payment successful:', paymentIntent);
+      // Handle successful payment here
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <CardElement />
-      <button type="submit" disabled={!stripe}>Pay</button>
-      {error && <div>{error}</div>}
-      {success && <div>Payment successful!</div>}
+      <button type="submit" disabled={!stripe}>
+        Pay
+      </button>
+      {error && <div className="error">{error}</div>}
+      {success && <div className="success">Payment successful!</div>}
     </form>
   );
 };
