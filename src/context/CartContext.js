@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useAuth } from './AuthContext';
-import { fetchProductById, addItemToCart, createCart } from '../services/firebaseService';
+import { fetchProductById, createCart } from '../services/firebaseService';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { firestore } from '../firebaseConfig';
 
@@ -24,7 +24,7 @@ const fetchUserCart = async (userId) => {
 
 export const CartProvider = ({ children }) => {
   const { user } = useAuth();
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState({});
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -52,10 +52,10 @@ export const CartProvider = ({ children }) => {
       return;
     }
     try {
-      const cartRef = doc(firestore, 'users', user.uid);
-      const userCart = cart || {};
+      const cartRef = doc(firestore, 'carts', user.uid);
+      const userCart = { ...cart };
       if (userCart[item.productId]) {
-        // Item already in cart; do not increase quantity
+        // Item already in cart; increase quantity
         userCart[item.productId].quantity += 1;
       } else {
         // Add new item
@@ -74,7 +74,7 @@ export const CartProvider = ({ children }) => {
       return;
     }
     try {
-      const cartRef = doc(firestore, 'users', user.uid);
+      const cartRef = doc(firestore, 'carts', user.uid);
       const updatedCart = { ...cart };
       if (updatedCart[id]) {
         updatedCart[id].quantity = quantity;
@@ -92,7 +92,7 @@ export const CartProvider = ({ children }) => {
       return;
     }
     try {
-      const cartRef = doc(firestore, 'users', user.uid);
+      const cartRef = doc(firestore, 'carts', user.uid);
       const updatedCart = { ...cart };
       delete updatedCart[id];
       await updateDoc(cartRef, { cart: updatedCart });
