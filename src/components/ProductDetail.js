@@ -11,6 +11,7 @@ const ProductDetail = () => {
   const [error, setError] = useState(null);
   const { addToCart, cart } = useCart();
   const [inCart, setInCart] = useState(null);
+  const [mainImage, setMainImage] = useState('');
 
   useEffect(() => {
     const fetchProductData = async () => {
@@ -21,9 +22,13 @@ const ProductDetail = () => {
 
         if (productData) {
           setProduct(productData);
+          setMainImage(productData.images?.[0] || '/path/to/placeholder.jpg');
+
+          // Convert cart object to array for easier handling
+          const cartArray = Object.values(cart);
 
           // Check if the product is in the cart
-          const cartProduct = cart[productData._id]; // Using _id for cart lookup
+          const cartProduct = cartArray.find(item => item.productId === id);
           setInCart(cartProduct || null);
         } else {
           setError('Product not found');
@@ -53,6 +58,10 @@ const ProductDetail = () => {
     addToCart({ ...product, quantity: newQuantity });
   };
 
+  const handleThumbnailClick = (image) => {
+    setMainImage(image);
+  };
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
 
@@ -60,11 +69,28 @@ const ProductDetail = () => {
 
   return (
     <div className="product-detail-container">
-      <img
-        className="product-image"
-        src={product.images?.[0] || '/path/to/placeholder.jpg'}
-        alt={product.name}
-      />
+      <div className="product-image-gallery">
+        <img
+          className="product-main-image"
+          src={mainImage}
+          alt={product.name}
+        />
+        <div className="product-thumbnail-gallery">
+          {product.images?.map((image, index) => (
+            <button
+              key={index}
+              className="product-thumbnail"
+              onClick={() => handleThumbnailClick(image)}
+              aria-label={`Thumbnail ${index + 1}`}
+            >
+              <img
+                src={image}
+                alt={`Thumbnail ${index + 1}`}
+              />
+            </button>
+          ))}
+        </div>
+      </div>
       <div className="product-info">
         <h1 className="product-title">{product.name}</h1>
         <p className="product-description">{product.description}</p>
