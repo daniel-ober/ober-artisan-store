@@ -117,6 +117,21 @@ app.post('/webhook', express.raw({ type: 'application/json' }), (req, res) => {
   res.json({ received: true });
 });
 
+// Endpoint to retrieve a Firestore document
+app.get('/api/firestore-doc', async (req, res) => {
+  try {
+    const docRef = db.collection('products').doc('y0Z3azz4Dxzv7H3uyOMT'); // Example document path
+    const doc = await docRef.get();
+    if (!doc.exists) {
+      return res.status(404).send('Document not found');
+    }
+    res.json(doc.data());
+  } catch (error) {
+    console.error('Error retrieving document:', error); // Log the error
+    res.status(500).send('Internal Server Error');
+  }
+});
+
 // Start Server
 const PORT = process.env.PORT || 4949;
 app.listen(PORT, () => {
