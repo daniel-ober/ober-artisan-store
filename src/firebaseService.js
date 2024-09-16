@@ -1,83 +1,80 @@
-import { firestore } from './firebaseConfig'; // Firestore instance
-import { collection, doc, getDoc, getDocs, setDoc } from 'firebase/firestore'; // Import only once
-import { v4 as uuidv4 } from 'uuid'; // Import uuid for unique ID generation
+import { firestore } from './firebaseConfig'; // Firestore instance from your config
+import { collection, doc, getDoc, getDocs, setDoc } from 'firebase/firestore'; // Firebase Firestore imports
+import { v4 as uuidv4 } from 'uuid'; // For generating unique IDs
 
-// Add user to Firestore
+// Add a user to Firestore
 const addUserToFirestore = async (userId, userData) => {
   try {
-    await setDoc(doc(firestore, 'users', userId), userData);
-    console.log('User added to Firestore');
+    await setDoc(doc(firestore, 'users', userId), userData); // Add user data to 'users' collection
+    console.log('User successfully added to Firestore');
   } catch (error) {
     console.error('Error adding user to Firestore:', error);
   }
 };
 
-// Fetch user profile from Firestore
+// Fetch a user profile from Firestore
 const fetchUserProfile = async (userId) => {
   try {
-    const userDoc = await getDoc(doc(firestore, 'users', userId));
+    const userDoc = await getDoc(doc(firestore, 'users', userId)); // Fetch the user document
     if (userDoc.exists()) {
-      return userDoc.data();
+      return userDoc.data(); // Return user data if found
     } else {
-      console.log('No such user found!');
-      return null;
+      console.log('No user found with the given ID!');
+      return null; // Return null if no document is found
     }
   } catch (error) {
     console.error('Error fetching user profile:', error);
-    throw error;
+    throw error; // Rethrow error to handle it in the calling component
   }
 };
 
-// Fetch products from Firestore
+// Fetch all products from Firestore
 const fetchProducts = async () => {
   try {
-    const querySnapshot = await getDocs(collection(firestore, 'products'));
+    const querySnapshot = await getDocs(collection(firestore, 'products')); // Get all product documents
     const productsList = querySnapshot.docs.map((doc) => ({
-      _id: doc.id,
-      ...doc.data(),
+      _id: doc.id, // Include the document ID
+      ...doc.data(), // Spread the rest of the document data
     }));
-    return productsList;
+    return productsList; // Return the array of products
   } catch (error) {
     console.error('Error fetching products:', error);
-    throw error;
+    throw error; // Rethrow error for further handling
   }
 };
 
-// Fetch a single product by Firestore document ID
+// Fetch a single product by its ID from Firestore
 const fetchProductById = async (id) => {
   try {
-    const productDoc = await getDoc(doc(firestore, 'products', id));
+    const productDoc = await getDoc(doc(firestore, 'products', id)); // Fetch product by document ID
     if (productDoc.exists()) {
-      return { _id: productDoc.id, ...productDoc.data() };
+      return { _id: productDoc.id, ...productDoc.data() }; // Return product data along with its ID
     } else {
-      console.log('No such product found!');
-      return null;
+      console.log('No product found with the given ID!');
+      return null; // Return null if no document is found
     }
   } catch (error) {
     console.error('Error fetching product by ID:', error);
-    throw error;
+    throw error; // Rethrow error for further handling
   }
 };
 
-// Add inquiry to Firestore
+// Add an inquiry to Firestore
 const addInquiry = async (inquiryData) => {
   try {
-    // Generate a unique ID for the inquiry
-    const uniqueId = uuidv4(); // Generate a unique ID
+    const uniqueId = uuidv4(); // Generate a unique ID for the inquiry
+    const timestamp = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' }); // Timestamp for the inquiry
 
-    // Add timestamp to the inquiry data
-    const timestamp = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
-
-    // Create a document reference with the unique ID
+    // Create a new inquiry document with a unique ID
     const docRef = doc(firestore, 'inquiries', uniqueId);
-
-    // Set the document with the unique ID and timestamp
+    
+    // Add inquiry data to Firestore with the timestamp
     await setDoc(docRef, {
       ...inquiryData,
-      submittedAt: timestamp,
+      submittedAt: timestamp, // Add timestamp to inquiry
     });
 
-    console.log('Inquiry added to Firestore with ID:', uniqueId);
+    console.log('Inquiry successfully added with ID:', uniqueId);
   } catch (error) {
     console.error('Error adding inquiry:', error);
   }

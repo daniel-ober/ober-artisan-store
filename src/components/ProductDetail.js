@@ -15,16 +15,21 @@ const ProductDetail = () => {
   useEffect(() => {
     const fetchProductData = async () => {
       try {
+        console.log('Fetching product with ID:', id);
         const productData = await fetchProductById(id);
+        console.log('Product data:', productData);
+
         if (productData) {
           setProduct(productData);
-          // Check if the product is already in the cart
-          const cartProduct = cart.find(item => item.id === id);
-          setInCart(cartProduct);
+
+          // Check if the product is in the cart
+          const cartProduct = cart[productData._id]; // Using _id for cart lookup
+          setInCart(cartProduct || null);
         } else {
           setError('Product not found');
         }
       } catch (error) {
+        console.error('Error fetching product:', error);
         setError('Error fetching product');
       } finally {
         setLoading(false);
@@ -36,35 +41,22 @@ const ProductDetail = () => {
 
   const handleAddToCart = () => {
     if (product) {
-      if (addToCart) {
-        addToCart(product);
-      } else {
-        console.error('User not authenticated');
-      }
+      addToCart(product);
     }
   };
 
   const handleQuantityChange = (change) => {
-    if (!product) return;
-    const newQuantity = inCart ? inCart.quantity + change : 1;
+    if (!inCart) return;
+    const newQuantity = inCart.quantity + change;
 
-    if (newQuantity < 1) return; // Prevent setting quantity to less than 1
+    if (newQuantity < 1) return;
     addToCart({ ...product, quantity: newQuantity });
   };
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
 
-  if (error) {
-    return <p>{error}</p>;
-  }
-
-  if (!product) {
-    return <p>Product not found</p>;
-  }
-
-  const canAdjustQuantity = product.category !== 'custom shop' && product.category !== 'one of a kind';
+  const canAdjustQuantity = product?.category !== 'custom shop' && product?.category !== 'one of a kind';
 
   return (
     <div className="product-detail-container">
@@ -76,23 +68,20 @@ const ProductDetail = () => {
       <div className="product-info">
         <h1 className="product-title">{product.name}</h1>
         <p className="product-description">{product.description}</p>
-        <p className="product-price">${product.price}</p>
-        <button 
-          className="add-to-cart-button" 
-          onClick={handleAddToCart}
-        >
-          Add to Cart
+        <p className="product-price">${product.price.toFixed(2)}</p>
+        <button className="add-to-cart-button" onClick={handleAddToCart}>
+          {inCart ? 'Update Cart' : 'Add to Cart'}
         </button>
-        {canAdjustQuantity && (
+        {inCart && canAdjustQuantity && (
           <div className="quantity-controls">
             <button
               className="quantity-button"
               onClick={() => handleQuantityChange(-1)}
-              disabled={!inCart || inCart.quantity <= 1}
+              disabled={inCart.quantity <= 1}
             >
               -
             </button>
-            <span className="quantity-display">{inCart ? inCart.quantity : 1}</span>
+            <span className="quantity-display">{inCart.quantity}</span>
             <button
               className="quantity-button"
               onClick={() => handleQuantityChange(1)}
