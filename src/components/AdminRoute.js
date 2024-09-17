@@ -1,28 +1,28 @@
-import React, { useState, useEffect } from 'react';
+// src/components/AdminRoute.js
+
+import React, { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import { auth } from '../firebaseConfig'; // Adjust path as needed
-import { onAuthStateChanged } from 'firebase/auth';
+import { useAuth } from '../context/AuthContext';
 
 const AdminRoute = ({ element }) => {
-  const [user, setUser] = useState(null);
+  const { user, isAdmin } = useAuth(); // Ensure isAdmin is provided by AuthContext
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
+    if (user) {
+      // Check if the user is an admin
       setLoading(false);
-    });
-
-    return () => unsubscribe();
-  }, []);
+    } else {
+      setLoading(false);
+    }
+  }, [user]);
 
   if (loading) {
     return <p>Loading...</p>;
   }
 
-  const isAdmin = user && user.email === 'chilldrummer@gmail.com'; // Replace with your admin check
-
-  return isAdmin ? element : <Navigate to="/" />;
+  // Redirect to sign-in if the user is not an admin
+  return user && isAdmin ? element : <Navigate to="/signin" />;
 };
 
 export default AdminRoute;
