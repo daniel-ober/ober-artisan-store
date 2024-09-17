@@ -1,21 +1,10 @@
-import React, { useEffect, useState } from 'react';
+// src/components/PrivateRoute.js
+import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../firebaseConfig';
-import { useAuth } from '../context/AuthContext'; // Import useAuth hook
+import { useAuth } from '../context/AuthContext';
 
-// PrivateRoute component to protect routes
 const PrivateRoute = ({ element, adminOnly = false }) => {
-  const { user, isAdmin } = useAuth(); // Use useAuth to get user and admin status
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, () => {
-      setLoading(false); // Set loading to false after auth status is determined
-    });
-
-    return () => unsubscribe();
-  }, []);
+  const { user, isAdmin, loading } = useAuth();
 
   // Show a loading indicator while checking authentication status
   if (loading) {
