@@ -1,5 +1,4 @@
 // src/App.js
-
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
@@ -12,15 +11,18 @@ import SignInEmail from './components/SignInEmail';
 import Checkout from './components/Checkout';
 import ProductDetail from './components/ProductDetail';
 import AccountPage from './components/AccountPage';
-import AdminPage from './components/AdminPage';
+import AdminDashboard from './components/AdminDashboard';
+import ManageUsers from './components/ManageUsers';
+import ManageProducts from './components/ManageProducts';
+import SiteSettings from './components/SiteSettings';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import TermsOfService from './components/TermsOfService';
 import ReturnPolicy from './components/ReturnPolicy';
 import Footer from './components/Footer';
 import NotFound from './components/NotFound';
-import NotAuthorized from './components/NotAuthorized'; // Import NotAuthorized
+import NotAuthorized from './components/NotAuthorized';
 import PrivateRoute from './components/PrivateRoute';
-import { useAuth } from './context/AuthContext'; // Import useAuth
+import { useAuth } from './context/AuthContext';
 
 function App() {
   const { user, handleSignOut } = useAuth();
@@ -36,14 +38,35 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/signin" element={<SignInEmail />} />
-          <Route path="/checkout" element={<PrivateRoute element={<Checkout />} />} />
+          <Route
+            path="/checkout"
+            element={<PrivateRoute element={<Checkout />} />}
+          />
           <Route path="/products/:id" element={<ProductDetail />} />
-          <Route path="/account" element={<PrivateRoute element={<AccountPage />} />} />
-          <Route path="/admin" element={<PrivateRoute element={<AdminPage />} adminOnly />} />
+          <Route
+            path="/account"
+            element={<PrivateRoute element={<AccountPage />} />}
+          />
+          <Route
+            path="/admin"
+            element={<PrivateRoute element={<AdminDashboard />} adminOnly />}
+          />
+          <Route
+            path="/admin/users"
+            element={<PrivateRoute element={<ManageUsers />} adminOnly />}
+          />
+          <Route
+            path="/admin/products"
+            element={<PrivateRoute element={<ManageProducts />} adminOnly />}
+          />
+          <Route
+            path="/admin/settings"
+            element={<PrivateRoute element={<SiteSettings />} adminOnly />}
+          />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/return-policy" element={<ReturnPolicy />} />
-          <Route path="/not-authorized" element={<NotAuthorized />} /> {/* Add NotAuthorized route */}
+          <Route path="/not-authorized" element={<NotAuthorized />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
