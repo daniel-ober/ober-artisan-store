@@ -1,5 +1,6 @@
-import { firestore } from '../firebaseConfig';
-import { doc, setDoc, getDoc } from 'firebase/firestore';
+// src/services/userService.js
+import { firestore } from '../firebaseConfig'; // Single import statement
+import { doc, setDoc, getDoc, collection, getDocs } from 'firebase/firestore';
 
 // Add user to Firestore
 export const addUserToFirestore = async (userId, userData) => {
@@ -8,6 +9,22 @@ export const addUserToFirestore = async (userId, userData) => {
     console.log('User added to Firestore');
   } catch (error) {
     console.error('Error adding user to Firestore:', error);
+  }
+};
+
+// Fetch all users from Firestore
+export const fetchUsers = async () => {
+  try {
+    const usersCollectionRef = collection(firestore, 'users');
+    const querySnapshot = await getDocs(usersCollectionRef);
+    const users = querySnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    return users;
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    return [];
   }
 };
 
