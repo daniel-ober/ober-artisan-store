@@ -1,0 +1,16 @@
+.admin-container {
+    display: flex;
+    border: 1px solid #000; /* Add border to make it visible */
+  }
+  
+  .admin-navbar {
+    width: 200px;
+    background-color: #333;
+    color: white;
+  }
+  
+  .admin-content {
+    flex-grow: 1;
+    padding: 20px;
+  }
+  
