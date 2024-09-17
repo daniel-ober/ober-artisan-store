@@ -1,31 +1,48 @@
 import React, { useState, useEffect } from 'react';
 import { auth, firestore } from '../firebaseConfig';
 import { onAuthStateChanged } from 'firebase/auth';
-import { doc, getDoc, updateDoc } from 'firebase/firestore';
-import { v4 as uuidv4 } from 'uuid'; // For generating UUIDs
+import { doc, getDoc, updateDoc } from 'firebase/firestore'; // Import updateDoc
 import './AdminPage.css'; // Assuming you have this CSS file
 
 const AdminPage = () => {
   const [user, setUser] = useState(null);
   const [adminData, setAdminData] = useState(null);
   const [error, setError] = useState('');
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      setUser(user);
       if (user) {
+        setUser(user);
         try {
-          const docRef = doc(firestore, 'adminData', 'info');
-          const docSnap = await getDoc(docRef);
-          if (docSnap.exists()) {
-            setAdminData(docSnap.data());
+          // Fetch user data from Firestore
+          const userDocRef = doc(firestore, 'users', user.uid);
+          const userDocSnap = await getDoc(userDocRef);
+
+          if (userDocSnap.exists()) {
+            const userData = userDocSnap.data();
+            setIsAdmin(userData.isAdmin || false); // Check if user is an admin
+
+            if (userData.isAdmin) {
+              // Fetch admin data if user is admin
+              const adminDocRef = doc(firestore, 'adminData', 'info');
+              const adminDocSnap = await getDoc(adminDocRef);
+              if (adminDocSnap.exists()) {
+                setAdminData(adminDocSnap.data());
+              } else {
+                setError('Admin data does not exist.');
+              }
+            }
           } else {
-            setError('Admin data does not exist.');
+            setError('User data does not exist.');
           }
+
         } catch (error) {
-          console.error('Error fetching admin data:', error);
-          setError('Error fetching admin data. Check permissions.');
+          console.error('Error fetching user or admin data:', error);
+          setError('Error fetching data. Check permissions.');
         }
+      } else {
+        setUser(null);
       }
     });
 
@@ -36,10 +53,14 @@ const AdminPage = () => {
     return <p>Loading...</p>;
   }
 
+  if (!isAdmin) {
+    return <p>Access Denied: You are not authorized to view this page.</p>;
+  }
+
   const handleUpdate = async () => {
     try {
       const docRef = doc(firestore, 'adminData', 'info');
-      await updateDoc(docRef, { updated: new Date(), uuid: uuidv4() }); // Added UUID
+      await updateDoc(docRef, { updated: new Date() });
       alert('Admin data updated successfully!');
     } catch (error) {
       console.error('Error updating admin data:', error);
