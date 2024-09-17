@@ -17,7 +17,7 @@ const NavBar = ({ isAuthenticated, onSignOut }) => {
       if (user) {
         try {
           const userData = await getUserDoc(user.uid);
-          setIsAdmin(userData?.role === 'admin');
+          setIsAdmin(userData?.isAdmin || false); // Check if user is an admin
         } catch (error) {
           console.error('Error fetching user data:', error);
         }
@@ -85,8 +85,7 @@ const NavBar = ({ isAuthenticated, onSignOut }) => {
         aria-expanded={isMenuOpen}
         aria-label="Toggle menu"
       >
-              <div className="menu-toggle-content">
-          {/* <div className="menu-label">Menu</div> */}
+        <div className="menu-toggle-content">
           <img
             src={
               isMenuOpen
@@ -98,7 +97,6 @@ const NavBar = ({ isAuthenticated, onSignOut }) => {
           />
         </div>
         <div className="menu-toggle-content">
-          {/* <div className="menu-label">Menu</div> */}
           <img
             src={
               isMenuOpen
