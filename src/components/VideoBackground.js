@@ -13,7 +13,7 @@ const VideoBackground = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const videoSrc = isMobile ? '/background-mobile.mp4' : '/background-web.mp4';
+  const videoSrc = isMobile ? 'public/background-web.mp4'/background-web.mp4';
 
   console.log('Is Mobile:', isMobile); // Debugging output
 
