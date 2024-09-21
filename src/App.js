@@ -8,6 +8,8 @@ import About from './components/About';
 import Contact from './components/Contact';
 import Cart from './components/Cart';
 import SignInEmail from './components/SignInEmail';
+import ForgotPassword from './components/ForgotPassword';
+import Register from './components/Register';
 import Checkout from './components/Checkout';
 import ProductDetail from './components/ProductDetail';
 import AccountPage from './components/AccountPage';
@@ -38,31 +40,15 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/signin" element={<SignInEmail />} />
-          <Route
-            path="/checkout"
-            element={<PrivateRoute element={<Checkout />} />}
-          />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/products/:id" element={<ProductDetail />} />
-          <Route
-            path="/account"
-            element={<PrivateRoute element={<AccountPage />} />}
-          />
-          <Route
-            path="/admin"
-            element={<PrivateRoute element={<AdminDashboard />} adminOnly />}
-          />
-          <Route
-            path="/admin/users"
-            element={<PrivateRoute element={<ManageUsers />} adminOnly />}
-          />
-          <Route
-            path="/admin/products"
-            element={<PrivateRoute element={<ManageProducts />} adminOnly />}
-          />
-          <Route
-            path="/admin/settings"
-            element={<PrivateRoute element={<SiteSettings />} adminOnly />}
-          />
+          <Route path="/checkout" element={<PrivateRoute element={<Checkout />} />} />
+          <Route path="/account" element={<PrivateRoute element={<AccountPage />} />} />
+          <Route path="/admin" element={<PrivateRoute element={<AdminDashboard />} adminOnly />} />
+          <Route path="/admin/users" element={<PrivateRoute element={<ManageUsers />} adminOnly />} />
+          <Route path="/admin/products" element={<PrivateRoute element={<ManageProducts />} adminOnly />} />
+          <Route path="/admin/settings" element={<PrivateRoute element={<SiteSettings />} adminOnly />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/return-policy" element={<ReturnPolicy />} />
