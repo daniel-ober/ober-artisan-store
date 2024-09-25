@@ -20,6 +20,7 @@
     "express": "^4.19.2",
     "firebase-admin": "^12.4.0",
     "mongodb": "^6.8.0",
+    "openai": "^4.63.0",
     "stripe": "^16.8.0"
   }
 }
