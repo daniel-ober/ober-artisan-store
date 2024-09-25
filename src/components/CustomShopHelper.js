@@ -9,34 +9,18 @@ const CustomShopHelper = () => {
 
   const handleSendMessage = async () => {
     if (!input.trim()) return;
-  
+
     const newMessages = [...messages, { sender: 'user', text: input }];
     setMessages(newMessages);
     setInput('');
     setLoading(true);
-  
+
     try {
       const filteredMessages = newMessages.map(msg => ({
         role: msg.sender === 'user' ? 'user' : 'assistant',
         content: msg.text || ''
       }));
-  
-      console.log('Payload to send:', {
-        model: 'gpt-3.5-turbo',
-        messages: [
-          {
-            role: 'system',
-            content: "You are a customer support assistant for Dan Ober Artisan Drums. Your job is to help customers with custom drum inquiries, pricing, and product information."
-          },
-          ...filteredMessages
-        ],
-        temperature: 1,
-        max_tokens: 2048,
-        top_p: 1,
-        frequency_penalty: 0,
-        presence_penalty: 0,
-      });
-  
+
       const response = await axios.post(
         'http://localhost:4949/custom-shop-helper',
         {
@@ -55,15 +39,13 @@ const CustomShopHelper = () => {
           presence_penalty: 0,
         }
       );
-  
-      console.log('Full API response:', response);
-  
+
       if (response.data && response.data.choices && response.data.choices.length > 0) {
         const botMessage = {
           sender: 'bot',
           text: response.data.choices[0]?.message?.content || "No content returned.",
         };
-  
+
         setMessages([...newMessages, botMessage]);
       } else {
         console.error('Unexpected response structure:', response.data);
@@ -76,7 +58,6 @@ const CustomShopHelper = () => {
       setLoading(false);
     }
   };
-  
 
   return (
     <div className="chat-container">

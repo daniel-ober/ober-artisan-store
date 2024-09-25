@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { collection, addDoc } from 'firebase/firestore';
 import { firestore } from '../firebaseConfig';
 import { TextField, Button, Typography } from '@mui/material';
-import { nanoid } from 'nanoid'; // For generating alphanumeric IDs
 import './Checkout.css';
 
 const Checkout = () => {
@@ -17,8 +16,7 @@ const Checkout = () => {
 
   useEffect(() => {
     const fetchCart = async () => {
-      // Fetch cart items from local storage or Firestore
-      // Assuming cart items are stored in local storage
+      // Fetch cart items from local storage
       const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
       setCart(savedCart);
     };
@@ -39,17 +37,17 @@ const Checkout = () => {
     setLoading(true);
 
     try {
-      const orderId = Date.now(); // Generate numeric ID based on timestamp
+      const orderId = Date.now(); // Generate a unique ID based on timestamp
       await addDoc(collection(firestore, 'orders'), {
-        id: orderId, // Include generated ID
+        id: orderId, // Include the generated ID
         ...userDetails,
         cart,
         placedAt: new Date(),
       });
 
       setStatus('Order placed successfully!');
-      setCart([]); // Clear cart
-      localStorage.removeItem('cart');
+      setCart([]); // Clear the cart
+      localStorage.removeItem('cart'); // Remove cart from local storage
     } catch (error) {
       console.error('Error placing order:', error);
       setStatus('Failed to place order. Please try again.');
