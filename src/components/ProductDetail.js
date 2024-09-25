@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { fetchProductById } from '../services/firebaseService';
 import { useCart } from '../context/CartContext';
-import { FaArrowLeft, FaTimes, FaSearchPlus, FaSearchMinus } from 'react-icons/fa';
+import { FaArrowLeft } from 'react-icons/fa';
 import './ProductDetail.css';
 
 const ProductDetail = () => {
@@ -13,24 +13,29 @@ const ProductDetail = () => {
   const { addToCart, cart } = useCart();
   const [inCart, setInCart] = useState(null);
   const [mainImage, setMainImage] = useState('');
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [zoomLevel, setZoomLevel] = useState(1); // State for zoom level
 
   useEffect(() => {
     const fetchProductData = async () => {
       try {
+        console.log('Fetching product with ID:', id);
         const productData = await fetchProductById(id);
+        console.log('Product data:', productData);
+
         if (productData) {
           setProduct(productData);
           setMainImage(productData.images?.[0] || '/path/to/placeholder.jpg');
 
+          // Convert cart object to array for easier handling
           const cartArray = Object.values(cart);
+
+          // Check if the product is in the cart
           const cartProduct = cartArray.find(item => item.productId === id);
           setInCart(cartProduct || null);
         } else {
           setError('Product not found');
         }
       } catch (error) {
+        console.error('Error fetching product:', error);
         setError('Error fetching product');
       } finally {
         setLoading(false);
@@ -49,6 +54,7 @@ const ProductDetail = () => {
   const handleQuantityChange = (change) => {
     if (!inCart) return;
     const newQuantity = inCart.quantity + change;
+
     if (newQuantity < 1) return;
     addToCart({ ...product, quantity: newQuantity });
   };
@@ -57,30 +63,10 @@ const ProductDetail = () => {
     setMainImage(image);
   };
 
-  const toggleModal = () => {
-    setIsModalOpen(!isModalOpen);
-    setZoomLevel(1); // Reset zoom level when closing the modal
-  };
-
-  const handleMouseMove = (event) => {
-    const image = document.querySelector('.enlarged-image');
-    const rect = image.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-
-    image.style.transformOrigin = `${(x / rect.width) * 100}% ${(y / rect.height) * 100}%`;
-  };
-
-  const handleZoomIn = () => {
-    setZoomLevel((prev) => Math.min(prev + 1, 3));
-  };
-
-  const handleZoomOut = () => {
-    setZoomLevel((prev) => Math.max(prev - 1, 1));
-  };
-
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
+
+  const canAdjustQuantity = product?.category !== 'custom shop' && product?.category !== 'one of a kind';
 
   return (
     <div className="product-detail-container">
@@ -93,8 +79,6 @@ const ProductDetail = () => {
           src={mainImage}
           alt={product?.name}
           className="product-main-image"
-          onClick={toggleModal}
-          style={{ cursor: 'zoom-in' }}
         />
         <div className="product-thumbnail-gallery">
           {product?.images.map((image, index) => (
@@ -108,52 +92,35 @@ const ProductDetail = () => {
           ))}
         </div>
       </div>
-
-      {/* Modal for Enlarged Image */}
-      {isModalOpen && (
-        <div className="image-modal" onClick={toggleModal}>
-          <div className="image-modal-content" onClick={(e) => e.stopPropagation()} onMouseMove={handleMouseMove}>
-            <FaTimes className="close-modal" onClick={toggleModal} />
-            <div className="zoom-container">
-              <img
-                className={`enlarged-image ${zoomLevel > 1 ? 'zoomed' : ''}`}
-                style={{ transform: `scale(${zoomLevel})` }}
-                src={mainImage}
-                alt="Enlarged product"
-              />
-              <div className="zoom-icons">
-                <FaSearchPlus className="zoom-icon" onClick={handleZoomIn} />
-                <FaSearchMinus className="zoom-icon" onClick={handleZoomOut} />
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
       <div className="product-info">
         <h1 className="product-title">{product?.name}</h1>
         <p className="product-description">{product?.description}</p>
         <p className="product-price">${product?.price}</p>
-        <button className="add-to-cart-button" onClick={handleAddToCart}>
+        <button
+          className="add-to-cart-button"
+          onClick={handleAddToCart}
+        >
           {inCart ? 'Update Cart' : 'Add to Cart'}
         </button>
-        <div className="quantity-controls">
-          <button
-            className="quantity-button"
-            onClick={() => handleQuantityChange(-1)}
-            disabled={!inCart || inCart.quantity <= 1}
-          >
-            -
-          </button>
-          <span className="quantity-display">{inCart?.quantity || 0}</span>
-          <button
-            className="quantity-button"
-            onClick={() => handleQuantityChange(1)}
-            disabled={!inCart}
-          >
-            +
-          </button>
-        </div>
+        {canAdjustQuantity && (
+          <div className="quantity-controls">
+            <button
+              className="quantity-button"
+              onClick={() => handleQuantityChange(-1)}
+              disabled={!inCart || inCart.quantity <= 1}
+            >
+              -
+            </button>
+            <span className="quantity-display">{inCart?.quantity || 0}</span>
+            <button
+              className="quantity-button"
+              onClick={() => handleQuantityChange(1)}
+              disabled={!inCart}
+            >
+              +
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

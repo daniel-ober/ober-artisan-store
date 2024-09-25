@@ -40,12 +40,19 @@ const CustomShopHelper = () => {
         }
       );
 
+      // Adjusted response handling
       if (response.data && response.data.choices && response.data.choices.length > 0) {
         const botMessage = {
           sender: 'bot',
           text: response.data.choices[0]?.message?.content || "No content returned.",
         };
-
+        setMessages([...newMessages, botMessage]);
+      } else if (response.data && response.data.reply) {
+        // Handle the unexpected structure case
+        const botMessage = {
+          sender: 'bot',
+          text: response.data.reply, // Accessing the reply directly
+        };
         setMessages([...newMessages, botMessage]);
       } else {
         console.error('Unexpected response structure:', response.data);
