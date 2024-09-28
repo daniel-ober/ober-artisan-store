@@ -1,8 +1,7 @@
-// src/firebaseConfig.js
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 import { getAuth, signOut as firebaseSignOut } from 'firebase/auth';
-import { getFirestore, doc, getDoc, setDoc, updateDoc, arrayUnion } from 'firebase/firestore'; // Ensure all Firestore methods are imported
+import { getFirestore, doc, getDoc, setDoc, updateDoc, arrayUnion, addDoc, collection } from 'firebase/firestore'; // Ensure all Firestore methods are imported
 import { getStorage } from 'firebase/storage';
 
 // Use environment variables to configure Firebase
@@ -25,6 +24,9 @@ export const auth = getAuth(app);
 export const firestore = getFirestore(app); // Initialize Firestore
 export const storage = getStorage(app);
 export const signOut = firebaseSignOut; // Export signOut
+
+// Export Firestore database instance for use in other files
+export const db = firestore;
 
 // Add getUserDoc function
 export const getUserDoc = async (userId) => {
@@ -68,3 +70,19 @@ export const addItemToCart = async (userId, item) => {
     console.error('Error adding item to cart:', error);
   }
 };
+
+// Function to test Firestore connection
+export const testFirestoreConnection = async () => {
+  try {
+    const docRef = await addDoc(collection(firestore, 'test'), {
+      message: 'This is a test message',
+      timestamp: new Date(),
+    });
+    console.log('Test document written with ID:', docRef.id);
+  } catch (e) {
+    console.error('Error adding test document:', e);
+  }
+};
+
+// Call the test function to confirm Firestore connection
+testFirestoreConnection();

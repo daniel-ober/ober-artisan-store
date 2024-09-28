@@ -17,7 +17,7 @@ const NavBar = ({ isAuthenticated, onSignOut }) => {
       if (user) {
         try {
           const userData = await getUserDoc(user.uid);
-          setIsAdmin(userData?.isAdmin || false); // Check if user is an admin
+          setIsAdmin(userData?.isAdmin || false);
         } catch (error) {
           console.error('Error fetching user data:', error);
         }
@@ -138,7 +138,7 @@ const NavBar = ({ isAuthenticated, onSignOut }) => {
           Contact
         </Link>
         <Link
-          to="/custom-shop-assistant"  // Updated path for the custom shop assistant
+          to="/custom-shop-assistant"
           className={`nav-link ${location.pathname === '/custom-shop-assistant' ? 'active' : ''}`}
           onClick={() => handleLinkClick('/custom-shop-assistant')}
         >
