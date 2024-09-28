@@ -36,7 +36,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 10px; /* Added padding */
+    padding: 5px; /* Reduced padding */
     animation: fadeIn 0.3s ease;
 }
 
@@ -46,7 +46,7 @@
 }
 
 .chat-messages {
-    padding: 10px; /* Adjusted padding */
+    padding: 5px; /* Reduced padding */
     height: 80%;
     overflow-y: auto;
     background-color: #f9f9f9;
