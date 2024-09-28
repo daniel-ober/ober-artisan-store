@@ -23,7 +23,7 @@ import NotFound from './components/NotFound';
 import NotAuthorized from './components/NotAuthorized';
 import PrivateRoute from './components/PrivateRoute';
 import { useAuth } from './context/AuthContext';
-import ChatSupportButton from './components/ChatSupportButton'; // Chat Support Button
+import ChatSupportButton from './components/ChatSupportButton';
 
 function App() {
   const { user, handleSignOut } = useAuth();
@@ -72,7 +72,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
-      <ChatSupportButton /> {/* Chat Support button */}
+      <ChatSupportButton />
       <Footer />
     </div>
   );

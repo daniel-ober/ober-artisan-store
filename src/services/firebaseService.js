@@ -8,9 +8,10 @@ export const fetchProductById = async (id) => {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
+      console.log(`Product fetched with ID: ${id}`, docSnap.data()); // Log the fetched product
       return docSnap.data();
     } else {
-      console.error('No such document!');
+      console.error('No such document exists!');
       return null;
     }
   } catch (error) {
@@ -30,6 +31,7 @@ export const createCart = async (cartId) => {
     return cartId;
   } catch (error) {
     console.error('Error creating cart:', error);
+    throw error; // Ensure errors are thrown for external error handling
   }
 };
 
@@ -40,6 +42,7 @@ export const addItemToCart = async (cartId, item) => {
     const cartSnap = await getDoc(cartRef);
 
     if (!cartSnap.exists()) {
+      console.log(`Cart with ID: ${cartId} does not exist, creating a new cart...`);
       // Cart does not exist, create it
       await createCart(cartId);
     }
@@ -48,8 +51,9 @@ export const addItemToCart = async (cartId, item) => {
     await updateDoc(cartRef, {
       items: arrayUnion(item)
     });
-    console.log(`Item added to cart ID: ${cartId}`); // Add this line for debugging
+    console.log(`Item added to cart with ID: ${cartId}`, item); // Add this line for debugging
   } catch (error) {
     console.error('Error adding item to cart:', error);
+    throw error; // Ensure errors are thrown for external error handling
   }
 };

@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComments } from '@fortawesome/free-solid-svg-icons';
 import ChatSupportWindow from './ChatSupportWindow'; // Adjust the path as necessary
 import './ChatSupportButton.css';
+import { db } from '../firebaseConfig'; // Import Firestore
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 function ChatSupportButton({ currentTab }) {
     const [chatOpen, setChatOpen] = useState(false);
@@ -16,7 +18,11 @@ function ChatSupportButton({ currentTab }) {
     const sendMessage = async () => {
         if (input.trim() === '') return; // Prevent sending empty messages
 
-        const userMessage = { role: 'user', content: input };
+        // Log currentTab to check if it's being passed correctly
+        console.log('currentTab:', currentTab);
+
+        // User message object
+        const userMessage = { role: 'user', content: input, timestamp: new Date() };
         setMessages((prevMessages) => [...prevMessages, userMessage]);
 
         try {
@@ -25,9 +31,9 @@ function ChatSupportButton({ currentTab }) {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ 
+                body: JSON.stringify({
                     model: 'gpt-3.5-turbo',
-                    messages: [...messages, userMessage]
+                    messages: [...messages, userMessage],
                 }),
             });
 
@@ -37,9 +43,30 @@ function ChatSupportButton({ currentTab }) {
             }
 
             const data = await response.json();
-            const assistantMessage = { role: 'assistant', content: data.choices[0].message.content };
+            // Assistant message object
+            const assistantMessage = { role: 'assistant', content: data.choices[0].message.content, timestamp: new Date() };
 
             setMessages((prevMessages) => [...prevMessages, assistantMessage]);
+
+            // Ensure currentTab is defined, use a fallback if undefined
+            const tabToUse = currentTab || 'defaultTab'; // Fallback to 'defaultTab' if undefined
+            console.log('Using tab:', tabToUse); // Log the tab being used for debugging
+
+            // Save the entire chat (user + assistant messages) to Firestore
+            await addDoc(collection(db, 'chats'), {
+                userMessage: {
+                    role: userMessage.role,
+                    content: userMessage.content,
+                    timestamp: serverTimestamp(), // Timestamp outside of the array
+                },
+                assistantMessage: {
+                    role: assistantMessage.role,
+                    content: assistantMessage.content,
+                    timestamp: serverTimestamp(), // Timestamp outside of the array
+                },
+                currentTab: tabToUse, // Use the defined or fallback tab
+                createdAt: serverTimestamp(), // Record the chat creation timestamp
+            });
         } catch (error) {
             console.error('Error:', error);
         }
@@ -47,7 +74,6 @@ function ChatSupportButton({ currentTab }) {
         setInput(''); // Clear the input after sending
     };
 
-    // New function to handle key press events
     const handleKeyPress = (event) => {
         if (event.key === 'Enter') {
             sendMessage();
@@ -75,7 +101,7 @@ function ChatSupportButton({ currentTab }) {
                             type="text"
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
-                            onKeyPress={handleKeyPress} // Add key press handler here
+                            onKeyPress={handleKeyPress}
                             placeholder="Type your message..."
                         />
                         <button onClick={sendMessage}>Send</button>
