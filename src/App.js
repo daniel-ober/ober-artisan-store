@@ -1,4 +1,3 @@
-// src/App.js
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
@@ -15,7 +14,7 @@ import AdminDashboard from './components/AdminDashboard';
 import ManageUsers from './components/ManageUsers';
 import ManageProducts from './components/ManageProducts';
 import SiteSettings from './components/SiteSettings';
-import CustomShopHelper from './components/CustomShopHelper'; // Import the CustomShopHelper component
+import CustomShopAssistant from './components/CustomShopAssistant';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import TermsOfService from './components/TermsOfService';
 import ReturnPolicy from './components/ReturnPolicy';
@@ -24,6 +23,7 @@ import NotFound from './components/NotFound';
 import NotAuthorized from './components/NotAuthorized';
 import PrivateRoute from './components/PrivateRoute';
 import { useAuth } from './context/AuthContext';
+import ChatSupportButton from './components/ChatSupportButton'; // Chat Support Button
 
 function App() {
   const { user, handleSignOut } = useAuth();
@@ -38,7 +38,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/custom-shop-helper" element={<CustomShopHelper />} /> {/* Add the route for CustomShopHelper */}
+          <Route path="/custom-shop-assistant" element={<CustomShopAssistant />} />
           <Route path="/signin" element={<SignInEmail />} />
           <Route
             path="/checkout"
@@ -72,6 +72,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
+      <ChatSupportButton /> {/* Chat Support button */}
       <Footer />
     </div>
   );

@@ -1,3 +1,4 @@
+// src/firebaseService.js
 import { firestore } from './firebaseConfig'; // Firestore instance from your config
 import { collection, doc, getDoc, getDocs, setDoc } from 'firebase/firestore'; // Firebase Firestore imports
 import { v4 as uuidv4 } from 'uuid'; // For generating unique IDs
@@ -33,7 +34,7 @@ const fetchProducts = async () => {
   try {
     const querySnapshot = await getDocs(collection(firestore, 'products')); // Get all product documents
     const productsList = querySnapshot.docs.map((doc) => ({
-      _id: doc.id, // Include the document ID
+      id: doc.id, // Include the document ID
       ...doc.data(), // Spread the rest of the document data
     }));
     return productsList; // Return the array of products
@@ -43,19 +44,27 @@ const fetchProducts = async () => {
   }
 };
 
-// Fetch a single product by its ID from Firestore
+// Fetch a product by ID
 const fetchProductById = async (id) => {
   try {
-    const productDoc = await getDoc(doc(firestore, 'products', id)); // Fetch product by document ID
+    if (!id) {
+      console.error('Product ID is undefined or null');
+      return null;
+    }
+
+    const productDocRef = doc(firestore, 'products', id);
+    const productDoc = await getDoc(productDocRef);
+
     if (productDoc.exists()) {
-      return { _id: productDoc.id, ...productDoc.data() }; // Return product data along with its ID
+      console.log('Product data:', { id: productDoc.id, ...productDoc.data() });
+      return { id: productDoc.id, ...productDoc.data() };
     } else {
       console.log('No product found with the given ID!');
-      return null; // Return null if no document is found
+      return null;
     }
   } catch (error) {
     console.error('Error fetching product by ID:', error);
-    throw error; // Rethrow error for further handling
+    throw error;
   }
 };
 
@@ -96,4 +105,28 @@ const fetchUserCart = async (userId) => {
   }
 };
 
-export { addUserToFirestore, fetchUserProfile, fetchProducts, fetchProductById, addInquiry, fetchUserCart };
+// Fetch all users from Firestore
+const fetchUsers = async () => {
+  try {
+    const querySnapshot = await getDocs(collection(firestore, 'users')); // Get all user documents
+    const usersList = querySnapshot.docs.map((doc) => ({
+      id: doc.id, // Include the document ID
+      ...doc.data(), // Spread the rest of the document data
+    }));
+    return usersList; // Return the array of users
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    throw error; // Rethrow error for further handling
+  }
+};
+
+// Export functions for use in other components
+export { 
+  addUserToFirestore, 
+  fetchUserProfile, 
+  fetchProducts, 
+  fetchProductById, 
+  addInquiry, 
+  fetchUserCart, 
+  fetchUsers 
+};
