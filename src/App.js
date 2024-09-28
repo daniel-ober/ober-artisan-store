@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import Home from './components/Home';
@@ -27,10 +27,15 @@ import ChatSupportButton from './components/ChatSupportButton';
 
 function App() {
   const { user, handleSignOut } = useAuth();
+  const [currentTab, setCurrentTab] = useState('Home');
 
   return (
     <div className="app-container">
-      <NavBar isAuthenticated={!!user} onSignOut={handleSignOut} />
+      <NavBar 
+        isAuthenticated={!!user} 
+        onSignOut={handleSignOut} 
+        onTabChange={(tab) => setCurrentTab(tab)} // Pass tab change function
+      />
       <div className="app-content">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -65,14 +70,13 @@ function App() {
             path="/admin/settings"
             element={<PrivateRoute element={<SiteSettings />} adminOnly />}
           />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/terms-of-service" element={<TermsOfService />} />
-          <Route path="/return-policy" element={<ReturnPolicy />} />
-          <Route path="/not-authorized" element={<NotAuthorized />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/terms" element={<TermsOfService />} />
+          <Route path="/returns" element={<ReturnPolicy />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
-      <ChatSupportButton />
+      <ChatSupportButton currentTab={currentTab} />
       <Footer />
     </div>
   );

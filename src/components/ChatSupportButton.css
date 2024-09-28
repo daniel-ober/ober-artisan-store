@@ -26,8 +26,8 @@
     position: fixed;
     bottom: 90px;
     right: 20px;
-    width: 350px;
-    height: 450px;
+    width: 400px;
+    height: 500px;
     background-color: white;
     border: 1px solid #ddd;
     border-radius: 10px;
@@ -36,7 +36,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 5px; /* Reduced padding */
+    padding: 10px;
     animation: fadeIn 0.3s ease;
 }
 
@@ -46,8 +46,8 @@
 }
 
 .chat-messages {
-    padding: 5px; /* Reduced padding */
-    height: 80%;
+    padding: 10px;
+    height: 60%;
     overflow-y: auto;
     background-color: #f9f9f9;
     border-bottom: 1px solid #ddd;
@@ -76,6 +76,13 @@
     border-radius: 10px 10px 10px 0;
 }
 
+.chat-input-container {
+    display: flex;
+    border-top: 1px solid #ddd;
+    padding: 10px;
+    background-color: #f1f1f1;
+}
+
 input {
     padding: 10px;
     border: 1px solid #ddd;
@@ -98,11 +105,4 @@ button {
 
 button:hover {
     background-color: #0056b3;
-}
-
-.chat-input-container {
-    display: flex;
-    border-top: 1px solid #ddd;
-    padding: 10px;
-    background-color: #f1f1f1;
 }
