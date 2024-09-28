@@ -20,24 +20,24 @@ function ChatSupportButton({ currentTab }) {
         setMessages((prevMessages) => [...prevMessages, userMessage]);
 
         try {
-            const response = await fetch('http://localhost:4949/api/chat', { // Adjust this URL as necessary
+            const response = await fetch('http://localhost:4949/api/chat', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ 
-                    model: 'gpt-3.5-turbo', // Add model info here
-                    messages: [...messages, userMessage] // Send the full messages array
+                    model: 'gpt-3.5-turbo',
+                    messages: [...messages, userMessage]
                 }),
             });
 
             if (!response.ok) {
-                const errorText = await response.text(); // Get error text
+                const errorText = await response.text();
                 throw new Error(`Network response was not ok: ${errorText}`);
             }
 
             const data = await response.json();
-            const assistantMessage = { role: 'assistant', content: data.choices[0].message.content }; // Adjust based on the actual response structure
+            const assistantMessage = { role: 'assistant', content: data.choices[0].message.content };
 
             setMessages((prevMessages) => [...prevMessages, assistantMessage]);
         } catch (error) {
@@ -45,6 +45,13 @@ function ChatSupportButton({ currentTab }) {
         }
 
         setInput(''); // Clear the input after sending
+    };
+
+    // New function to handle key press events
+    const handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            sendMessage();
+        }
     };
 
     return (
@@ -68,6 +75,7 @@ function ChatSupportButton({ currentTab }) {
                             type="text"
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
+                            onKeyPress={handleKeyPress} // Add key press handler here
                             placeholder="Type your message..."
                         />
                         <button onClick={sendMessage}>Send</button>
