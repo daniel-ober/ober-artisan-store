@@ -1,12 +1,11 @@
+// server.js (or your backend entry file)
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const admin = require('firebase-admin');
-const webhookRoutes = require('./webhooks');
-
-// Import OpenAI correctly
+const nodemailer = require('nodemailer');
 const OpenAI = require('openai');
 
 // Firebase Admin setup
@@ -29,13 +28,10 @@ admin.initializeApp({
 const db = admin.firestore();
 const app = express();
 
-// Initialize OpenAI API with the key from environment variables
+// Initialize OpenAI client
 const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
+    apiKey: process.env.REACT_APP_OPENAI_API_KEY,
 });
-
-// Debugging logs to check configuration
-console.log('OpenAI API successfully configured.');
 
 // Allowed origins for CORS
 const allowedOrigins = [
@@ -69,27 +65,6 @@ app.use('/api/contact', contactRoutes);
 // Route for product handling
 app.use('/api/products', productRoutes);
 
-// Webhook route
-app.use('/webhooks', webhookRoutes);
-
-// Custom Shop Helper Route
-app.post('/custom-shop-helper', async (req, res) => {
-    const { model, messages } = req.body;
-
-    try {
-        const response = await openai.chat.completions.create({
-            model: model,
-            messages: messages,
-        });
-
-        const reply = response.choices[0].message.content;
-        res.status(200).json({ reply });
-    } catch (error) {
-        console.error('Error processing custom shop request:', error);
-        res.status(500).json({ error: 'Error processing custom shop request' });
-    }
-});
-
 // Create Checkout Session Route
 app.post('/create-checkout-session', async (req, res) => {
     const { products, userId } = req.body;
@@ -117,27 +92,79 @@ app.post('/create-checkout-session', async (req, res) => {
         res.json({ url: session.url });
     } catch (error) {
         console.error('Error creating checkout session:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).json({ error: 'Error creating checkout session' });
     }
 });
 
-// Sample Route for Firestore
-app.get('/api/firestore-doc', async (req, res) => {
+// Sending chat email route
+app.post('/send-chat-email', async (req, res) => {
+    const { name, email, request, phone, chatMessages } = req.body;
+
+    // Validate input
+    if (!email) {
+        console.error('No user email provided');
+        return res.status(400).send('User email is required');
+    }
+
+    if (!Array.isArray(chatMessages) || chatMessages.length === 0) {
+        console.error('No chat messages provided');
+        return res.status(400).send('Chat messages are required');
+    }
+
     try {
-        const docRef = db.collection('products').doc('y0Z3azz4Dxzv7H3uyOMT');
-        const doc = await docRef.get();
-        if (!doc.exists) {
-            return res.status(404).send('Document not found');
-        }
-        res.json(doc.data());
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_PASS,
+            },
+        });
+
+        const chatContent = chatMessages.map(msg => 
+            `${msg.sender === 'user' ? 'You' : 'Bot'}: ${msg.text}`).join('\n');
+
+        const mailOptions = {
+            from: process.env.EMAIL_USER,
+            to: 'danober.dev@gmail.com', // Always send to this email address
+            subject: 'Chat Inquiry from Oakli (Custom Drum Assistant)',
+            text: `Customer Name: ${name}\nCustomer Email: ${email}\nCustomer Phone: ${phone}\n\nCustomer Request: ${request}\n\nChat History:\n${chatContent}`,
+        };
+
+        await transporter.sendMail(mailOptions);
+        res.status(200).send('Email sent successfully');
     } catch (error) {
-        console.error('Error retrieving document:', error);
-        res.status(500).send('Internal Server Error');
+        console.error('Error sending email:', error);
+        res.status(500).send('Error sending email');
     }
 });
 
-// Start the server
-const PORT = process.env.PORT || 4949;
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+// Chat API endpoint
+app.post('/api/chat', async (req, res) => { // Ensure the route starts with /api
+    const { model, messages } = req.body;
+
+    // Adding system message for context
+    const systemMessage = {
+        role: 'system',
+        content: `You are an assistant for Dan Ober Artisan Drums. Help the user choose a drum based on their preferences, emphasizing artisan craftsmanship, quality, and the unique characteristics of the drums.`
+    };
+
+    const allMessages = [systemMessage, ...messages]; // Combine system message with user messages
+
+    try {
+        const response = await openai.chat.completions.create({
+            model,
+            messages: allMessages,
+        });
+
+        res.json(response);
+    } catch (error) {
+        console.error('Error generating chat response:', error);
+        res.status(500).send('Error generating chat response');
+    }
+});
+
+// Listening on PORT
+const port = process.env.PORT || 4949;
+app.listen(port, () => {
+    console.log(`Server listening on port ${port}`);
 });

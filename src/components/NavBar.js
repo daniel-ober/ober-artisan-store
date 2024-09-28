@@ -138,11 +138,11 @@ const NavBar = ({ isAuthenticated, onSignOut }) => {
           Contact
         </Link>
         <Link
-          to="/custom-shop-helper"  // Updated path for the custom shop helper
-          className={`nav-link ${location.pathname === '/custom-shop-helper' ? 'active' : ''}`}
-          onClick={() => handleLinkClick('/custom-shop-helper')}
+          to="/custom-shop-assistant"  // Updated path for the custom shop assistant
+          className={`nav-link ${location.pathname === '/custom-shop-assistant' ? 'active' : ''}`}
+          onClick={() => handleLinkClick('/custom-shop-assistant')}
         >
-          Custom Shop Helper
+          Custom Shop Assistant (Beta)
         </Link>
         {isAuthenticated ? (
           <>
