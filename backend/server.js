@@ -52,8 +52,9 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
-app.use(express.json({ limit: '10kb' }));
-app.use(bodyParser.json());
+// Increase the limit for request body size
+app.use(express.json({ limit: '1mb' })); // Set to a suitable limit for your use case
+app.use(bodyParser.json({ limit: '1mb' })); // Also set for body-parser
 
 // Import routes
 const contactRoutes = require('./routes/contact');
