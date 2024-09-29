@@ -1,7 +1,5 @@
-// src/components/Products.js
-
 import React, { useEffect, useState } from 'react';
-import { fetchProducts } from '../firebaseService';
+import { fetchProducts } from '../services/firebaseService';
 import ProductCard from './ProductCard';
 import { useCart } from '../context/CartContext'; // Import the useCart hook
 import './Products.css';
