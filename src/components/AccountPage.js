@@ -8,7 +8,9 @@ import './AccountPage.css';
 const AccountPage = () => {
   const [loading, setLoading] = useState(true);
   const [editMode, setEditMode] = useState(false);
-  const [expandedOrderId, setExpandedOrderId] = useState(null);
+  const [passwordEditMode, setPasswordEditMode] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   // User data state
   const [firstName, setFirstName] = useState('');
@@ -45,7 +47,7 @@ const AccountPage = () => {
         const data = docSnap.data();
         setFirstName(data.firstName || '');
         setLastName(data.lastName || '');
-        setEmail(auth.currentUser.email); // Use the current user email
+        setEmail(auth.currentUser.email);
         setPhone(data.phone || '');
         setEmailNotification(data.emailNotification || false);
         setSmsNotification(data.smsNotification || false);
@@ -74,7 +76,7 @@ const AccountPage = () => {
       const q = query(ordersRef, where('userId', '==', userId));
       const querySnapshot = await getDocs(q);
 
-      const userOrders = querySnapshot.docs.map(doc => doc.data());
+      const userOrders = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })); // Include order id
       setOrders(userOrders);
     } catch (error) {
       console.error('Error fetching orders:', error.message);
@@ -129,12 +131,20 @@ const AccountPage = () => {
       return;
     }
 
+    // Password validation rules
+    const passwordRules = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    if (!passwordRules.test(newPassword)) {
+      setPasswordError('Password must be at least 8 characters long and include at least one letter and one number.');
+      return;
+    }
+
     try {
       const credential = EmailAuthProvider.credential(user.email, currentPassword);
-      await reauthenticateWithCredential(user, credential); // Reauthenticate the user
+      await reauthenticateWithCredential(user, credential);
 
       await updatePassword(user, newPassword);
       setPasswordError('Password updated successfully');
+      setPasswordEditMode(false); // Exit password edit mode after saving
     } catch (error) {
       setPasswordError('Error updating password: ' + error.message);
     }
@@ -171,8 +181,23 @@ const AccountPage = () => {
 
   const groupedOrders = groupOrdersById(orders);
 
-  const handleToggleOrderDetails = (orderId) => {
-    setExpandedOrderId(expandedOrderId === orderId ? null : orderId);
+  // Cancel edit details
+  const handleCancelEditDetails = () => {
+    setEditMode(false);
+    setNewFirstName(firstName);
+    setNewLastName(lastName);
+    setNewPhone(phone);
+    setNewEmailNotification(emailNotification);
+    setNewSmsNotification(smsNotification);
+  };
+
+  // Cancel edit password
+  const handleCancelEditPassword = () => {
+    setPasswordEditMode(false);
+    setCurrentPassword('');
+    setNewPassword('');
+    setConfirmPassword('');
+    setPasswordError('');
   };
 
   return (
@@ -234,7 +259,7 @@ const AccountPage = () => {
                 disabled={!editMode}
               />
             }
-            label="Receive Email Notifications"
+            label="Email Notifications"
           />
         </div>
         <div className="account-page-field">
@@ -246,84 +271,92 @@ const AccountPage = () => {
                 disabled={!editMode}
               />
             }
-            label="Receive SMS Notifications"
+            label="SMS Notifications"
           />
         </div>
+        <div className="account-page-buttons">
+          {editMode ? (
+            <>
+              <Button variant="contained" color="primary" onClick={saveUserDetails}>Save Changes</Button>
+              <Button variant="outlined" onClick={handleCancelEditDetails}>Cancel</Button>
+            </>
+          ) : (
+            <Button variant="outlined" onClick={() => setEditMode(true)}>Edit</Button>
+          )}
+        </div>
+      </div>
 
-        {editMode ? (
-          <div className="account-page-button-group">
-            <Button variant="contained" color="primary" onClick={saveUserDetails}>Save Changes</Button>
-            <Button variant="outlined" color="secondary" onClick={() => setEditMode(false)}>Cancel</Button>
-          </div>
+      {/* Password Change Section */}
+      <div className="account-page-section">
+        <Typography variant="h6" gutterBottom>Password Change</Typography>
+        {passwordEditMode ? (
+          <>
+            <div className="account-page-field">
+              <TextField
+                label="Current Password"
+                type="password"
+                value={currentPassword}
+                onChange={(e) => setCurrentPassword(e.target.value)}
+                variant="outlined"
+                fullWidth
+                className="account-page-textfield"
+              />
+            </div>
+            <div className="account-page-field">
+              <TextField
+                label="New Password"
+                type={showNewPassword ? 'text' : 'password'}
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                variant="outlined"
+                fullWidth
+                className="account-page-textfield"
+              />
+            </div>
+            <div className="account-page-field">
+              <TextField
+                label="Confirm New Password"
+                type={showConfirmPassword ? 'text' : 'password'}
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                variant="outlined"
+                fullWidth
+                className="account-page-textfield"
+              />
+            </div>
+            {passwordError && <Typography color="error">{passwordError}</Typography>}
+            <div className="account-page-buttons">
+              <Button variant="contained" color="primary" onClick={handlePasswordChange}>Change Password</Button>
+              <Button variant="outlined" onClick={handleCancelEditPassword}>Cancel</Button>
+            </div>
+          </>
         ) : (
-          <Button variant="contained" color="primary" onClick={() => setEditMode(true)}>Edit Details</Button>
+          <Button variant="outlined" onClick={() => setPasswordEditMode(true)}>Change Password</Button>
         )}
       </div>
 
-      {/* Change Password */}
+      {/* User Orders Section */}
       <div className="account-page-section">
-        <Typography variant="h6" gutterBottom>Change Password</Typography>
-        <div className="account-page-field">
-          <TextField
-            label="Current Password"
-            type="password"
-            value={currentPassword}
-            onChange={(e) => setCurrentPassword(e.target.value)}
-            variant="outlined"
-            fullWidth
-            className="account-page-textfield"
-          />
-        </div>
-        <div className="account-page-field">
-          <TextField
-            label="New Password"
-            type="password"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-            variant="outlined"
-            fullWidth
-            className="account-page-textfield"
-          />
-        </div>
-        <div className="account-page-field">
-          <TextField
-            label="Confirm New Password"
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            variant="outlined"
-            fullWidth
-            className="account-page-textfield"
-          />
-        </div>
-        {passwordError && <Typography color="error">{passwordError}</Typography>}
-        <Button variant="contained" color="primary" onClick={handlePasswordChange}>Change Password</Button>
-      </div>
-
-      {/* Orders */}
-      <div className="account-page-section">
-        <Typography variant="h6" gutterBottom>Your Orders</Typography>
+        <Typography variant="h6" gutterBottom>Order History</Typography>
         {orderLoading ? (
-          <div>Loading orders...</div>
+          <div>Loading your orders...</div>
         ) : (
-          Object.keys(groupedOrders).map(orderId => (
-            <div key={orderId}>
-              <Button onClick={() => handleToggleOrderDetails(orderId)}>
-                Order {orderId} {expandedOrderId === orderId ? '-' : '+'}
-              </Button>
-              {expandedOrderId === orderId && (
-                <div>
-                  {groupedOrders[orderId].map((order, index) => (
-                    <div key={index}>
-                      <Typography>Item: {order.itemName}</Typography>
-                      <Typography>Quantity: {order.quantity}</Typography>
-                      <Typography>Price: ${order.price}</Typography>
+          <div>
+            {Object.keys(groupedOrders).length === 0 ? (
+              <Typography>No orders found.</Typography>
+            ) : (
+              Object.keys(groupedOrders).map(orderId => (
+                <div key={orderId} className="order-item">
+                  <Typography variant="subtitle1">Order ID: {orderId}</Typography>
+                  {groupedOrders[orderId].map(order => (
+                    <div key={order.id}>
+                      <Typography variant="body2">{JSON.stringify(order)}</Typography>
                     </div>
                   ))}
                 </div>
-              )}
-            </div>
-          ))
+              ))
+            )}
+          </div>
         )}
       </div>
     </div>

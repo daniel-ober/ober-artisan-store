@@ -1,9 +1,8 @@
-// src/components/PrivateRoute.js
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
-const PrivateRoute = ({ element, adminOnly = false }) => {
+const PrivateRoute = ({ element, adminOnly = false, redirectAuthenticated = false }) => {
   const { user, isAdmin, loading } = useAuth();
 
   // Show a loading indicator while checking authentication status
@@ -11,16 +10,23 @@ const PrivateRoute = ({ element, adminOnly = false }) => {
     return <p>Loading...</p>;
   }
 
-  // Check if user is authenticated and has the required role (if adminOnly is true)
-  if (user) {
-    if (adminOnly && !isAdmin) {
-      return <Navigate to="/not-authorized" />; // Redirect if user is not an admin
-    }
-    return element; // Render the protected element if user is authenticated
+  // Redirect authenticated users away from routes like /signin, /register, etc.
+  if (redirectAuthenticated && user) {
+    return <Navigate to="/account" />;
   }
 
-  // Redirect to sign-in page if user is not authenticated
-  return <Navigate to="/signin" />;
+  // If the route is protected but the user is not authenticated
+  if (!user && !redirectAuthenticated) {
+    return <Navigate to="/signin" />;
+  }
+
+  // For admin-only routes
+  if (adminOnly && (!user || !isAdmin)) {
+    return <Navigate to="/not-authorized" />;
+  }
+
+  // Render the element if all conditions are met
+  return element;
 };
 
 export default PrivateRoute;
