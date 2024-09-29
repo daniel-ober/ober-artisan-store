@@ -1,5 +1,6 @@
+// src/firebaseService.js
 import { firestore } from '../firebaseConfig'; // Adjust the import path as needed
-import { doc, getDoc, setDoc, updateDoc, arrayUnion } from 'firebase/firestore';
+import { doc, getDoc, setDoc, updateDoc, arrayUnion, collection, getDocs, addDoc } from 'firebase/firestore';
 
 // Fetch product by ID
 export const fetchProductById = async (id) => {
@@ -8,7 +9,7 @@ export const fetchProductById = async (id) => {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      console.log(`Product fetched with ID: ${id}`, docSnap.data()); // Log the fetched product
+      console.log(`Product fetched with ID: ${id}`, docSnap.data());
       return docSnap.data();
     } else {
       console.error('No such document exists!');
@@ -16,7 +17,23 @@ export const fetchProductById = async (id) => {
     }
   } catch (error) {
     console.error('Error fetching product:', error);
-    throw error; // Ensure errors are thrown so they can be caught in calling functions
+    throw error;
+  }
+};
+
+// Function to fetch all products
+export const fetchProducts = async () => {
+  try {
+    const productsCollection = collection(firestore, 'products');
+    const productSnapshot = await getDocs(productsCollection);
+    const productsList = productSnapshot.docs.map(doc => ({
+      ...doc.data(),
+      _id: doc.id,
+    }));
+    return productsList;
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    throw error;
   }
 };
 
@@ -27,11 +44,11 @@ export const createCart = async (cartId) => {
     await setDoc(cartRef, {
       items: []
     });
-    console.log(`Cart created with ID: ${cartId}`); // Add this line for debugging
+    console.log(`Cart created with ID: ${cartId}`);
     return cartId;
   } catch (error) {
     console.error('Error creating cart:', error);
-    throw error; // Ensure errors are thrown for external error handling
+    throw error;
   }
 };
 
@@ -43,17 +60,82 @@ export const addItemToCart = async (cartId, item) => {
 
     if (!cartSnap.exists()) {
       console.log(`Cart with ID: ${cartId} does not exist, creating a new cart...`);
-      // Cart does not exist, create it
       await createCart(cartId);
     }
 
-    // Add item to the cart
     await updateDoc(cartRef, {
       items: arrayUnion(item)
     });
-    console.log(`Item added to cart with ID: ${cartId}`, item); // Add this line for debugging
+    console.log(`Item added to cart with ID: ${cartId}`, item);
   } catch (error) {
     console.error('Error adding item to cart:', error);
-    throw error; // Ensure errors are thrown for external error handling
+    throw error;
   }
 };
+
+// Function to add an inquiry (new function)
+export const addInquiry = async (inquiryData) => {
+  try {
+    const inquiriesCollection = collection(firestore, 'inquiries'); // Adjust collection name
+    const docRef = await addDoc(inquiriesCollection, inquiryData);
+    console.log('Inquiry added with ID:', docRef.id);
+    return docRef.id;
+  } catch (error) {
+    console.error('Error adding inquiry:', error);
+    throw error;
+  }
+};
+
+// Function to fetch user profile (new function)
+export const fetchUserProfile = async (userId) => {
+  try {
+    const userRef = doc(firestore, 'users', userId); // Adjust collection name as necessary
+    const userSnap = await getDoc(userRef);
+
+    if (userSnap.exists()) {
+      console.log(`User profile fetched with ID: ${userId}`, userSnap.data());
+      return userSnap.data();
+    } else {
+      console.error('No such user exists!');
+      return null;
+    }
+  } catch (error) {
+    console.error('Error fetching user profile:', error);
+    throw error;
+  }
+};
+
+// Function to fetch user cart (new function)
+export const fetchUserCart = async (cartId) => {
+  try {
+    const cartRef = doc(firestore, 'carts', cartId);
+    const cartSnap = await getDoc(cartRef);
+
+    if (cartSnap.exists()) {
+      console.log(`Cart fetched with ID: ${cartId}`, cartSnap.data());
+      return cartSnap.data();
+    } else {
+      console.error('No such cart exists!');
+      return null;
+    }
+  } catch (error) {
+    console.error('Error fetching user cart:', error);
+    throw error;
+  }
+};
+
+// Function to test Firestore connection
+export const testFirestoreConnection = async () => {
+  try {
+    const docRef = await addDoc(collection(firestore, 'test'), {
+      message: 'This is a test message',
+      timestamp: new Date(),
+    });
+    console.log('Test document written with ID:', docRef.id);
+  } catch (e) {
+    console.error('Error adding test document:', e);
+  }
+};
+
+// Call the test function to confirm Firestore connection
+testFirestoreConnection();

@@ -88,7 +88,7 @@ function ChatSupportWindow({ currentTab, messages, sendMessage, toggleMaximize, 
         <div className="chat-support-window">
             <div className="chat-header">
                 <div className="chat-intro">
-                    Hi! My name is Oakli, Dan Ober's chat assistant. I can help you with questions about products, availability, and more!
+                    Hi! My name is Oakli, Dan Ober&apos;s chat assistant. I can help you with questions about products, availability, and more!
                 </div>
                 <div className="chat-header-icons">
                     <FontAwesomeIcon icon={isMaximized ? faWindowRestore : faWindowMaximize} onClick={toggleMaximize} />
@@ -105,13 +105,13 @@ function ChatSupportWindow({ currentTab, messages, sendMessage, toggleMaximize, 
 
             <div className="preloaded-questions">
                 {preloadedQuestions[currentTab]?.map((question, index) => (
-                    <div
+                    <button
                         key={index}
                         className="preloaded-question"
                         onClick={() => sendMessage(question)} // Directly send preloaded question
                     >
                         {question}
-                    </div>
+                    </button>
                 )) || (
                     <div>No preloaded questions available for this section.</div>
                 )}

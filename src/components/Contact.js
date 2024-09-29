@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Button, Typography } from '@mui/material';
-import { checkAuthentication } from '../authCheck'; // Function to check auth status
-import { fetchUserProfile, addInquiry } from '../firebaseService'; // Ensure these functions are implemented
-import { nanoid } from 'nanoid'; // For generating unique IDs
+import { TextField, Button, Typography, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { checkAuthentication } from '../authCheck'; 
+import { fetchUserProfile, addInquiry } from '../firebaseService'; 
+import { nanoid } from 'nanoid'; 
 import './Contact.css';
 
 const Contact = () => {
@@ -13,12 +14,13 @@ const Contact = () => {
     phone: '',
     message: '',
   });
-  const [status, setStatus] = useState('');
   const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false); // Modal state
+  const navigate = useNavigate(); // Initialize useNavigate
 
   useEffect(() => {
     const fetchUserData = async () => {
-      const user = checkAuthentication(); // Get the current authenticated user
+      const user = checkAuthentication(); 
       if (user) {
         try {
           const profile = await fetchUserProfile(user.uid);
@@ -51,16 +53,15 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setStatus(''); // Reset status before submitting
 
     try {
-      const inquiryId = nanoid(); // Generate unique ID
+      const inquiryId = nanoid(); 
       await addInquiry({
-        id: inquiryId, // Include generated ID
+        id: inquiryId, 
         ...formData,
-        createdAt: new Date(), // Add timestamp
-      }); // Add inquiry to Firestore
-      setStatus('Message sent successfully!');
+        createdAt: new Date(), 
+      });
+      setOpen(true); // Open the modal
       setFormData({
         first_name: '',
         last_name: '',
@@ -70,10 +71,14 @@ const Contact = () => {
       });
     } catch (error) {
       console.error('Error sending message:', error);
-      setStatus('Failed to send message. Please try again.');
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    navigate('/products'); // Redirect to products page
   };
 
   return (
@@ -133,23 +138,33 @@ const Contact = () => {
           multiline
           rows={4}
           className="contact-input"
-          inputProps={{ minLength: 5 }} // Minimum character limit
+          inputProps={{ minLength: 5 }} 
         />
         <Button
           type="submit"
           variant="contained"
           color="primary"
           className="contact-button"
-          disabled={loading} // Disable button while loading
+          disabled={loading}
         >
-          {loading ? 'Sending...' : 'Send'}
+          {loading ? 'Sending...' : 'Send Message'}
         </Button>
       </form>
-      {status && (
-        <Typography variant="body2" color="textSecondary" sx={{ marginTop: 2 }}>
-          {status}
-        </Typography>
-      )}
+
+      {/* Dialog for success message */}
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Message Sent</DialogTitle>
+        <DialogContent>
+          <Typography variant="body1">
+            Your message has been sent successfully! Someone will be in contact with you in the next 1-2 business days.
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            OK
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };
