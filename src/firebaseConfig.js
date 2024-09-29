@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 import { getAuth, signOut as firebaseSignOut } from 'firebase/auth';
-import { getFirestore, doc, getDoc, setDoc, updateDoc, arrayUnion, addDoc, collection } from 'firebase/firestore'; // Ensure all Firestore methods are imported
+import { getFirestore, doc, getDoc, setDoc, updateDoc, arrayUnion, addDoc, collection } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 
 // Use environment variables to configure Firebase
@@ -17,7 +17,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app); // Initialize Analytics
+const analytics = getAnalytics(app);
 
 // Initialize Firebase services
 export const auth = getAuth(app);
@@ -34,8 +34,8 @@ export const getUserDoc = async (userId) => {
     const userDocRef = doc(firestore, 'users', userId);
     const userDocSnap = await getDoc(userDocRef);
     if (userDocSnap.exists()) {
-      console.log('User Data:', userDocSnap.data()); // Log the user data
-      return userDocSnap.data(); // Return document data directly
+      console.log('User Data:', userDocSnap.data());
+      return userDocSnap.data();
     } else {
       console.error('No such document!');
       return null;
