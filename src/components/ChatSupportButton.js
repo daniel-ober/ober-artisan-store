@@ -8,17 +8,22 @@ import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 function ChatSupportButton({ currentTab }) {
     const [chatOpen, setChatOpen] = useState(false);
+    const [isMaximized, setIsMaximized] = useState(false);
     const [messages, setMessages] = useState([]);
 
     const toggleChat = () => {
         setChatOpen(!chatOpen);
+        if (isMaximized) setIsMaximized(false);
+    };
+
+    const toggleMaximize = () => {
+        setIsMaximized((prevState) => !prevState);
     };
 
     const sendMessage = async (messageContent) => {
         const content = messageContent.trim();
-        if (content === '') return; // Prevent sending empty messages
+        if (content === '') return;
 
-        // User message object
         const userMessage = { role: 'user', content, timestamp: new Date() };
         setMessages((prevMessages) => [...prevMessages, userMessage]);
 
@@ -40,33 +45,20 @@ function ChatSupportButton({ currentTab }) {
             }
 
             const data = await response.json();
-            // Assistant message object
             const assistantMessage = { role: 'assistant', content: data.choices[0].message.content, timestamp: new Date() };
 
             setMessages((prevMessages) => [...prevMessages, assistantMessage]);
 
-            // Save the chat to Firestore
+            // Save to Firestore
             await addDoc(collection(db, 'chats'), {
-                userMessage: {
-                    role: userMessage.role,
-                    content: userMessage.content,
-                    timestamp: serverTimestamp(),
-                },
-                assistantMessage: {
-                    role: assistantMessage.role,
-                    content: assistantMessage.content,
-                    timestamp: serverTimestamp(),
-                },
-                currentTab: currentTab,
-                createdAt: serverTimestamp(),
+                userMessage: userMessage.content,
+                assistantMessage: assistantMessage.content,
+                timestamp: serverTimestamp(),
             });
+
         } catch (error) {
             console.error('Error:', error);
         }
-    };
-
-    const handlePreloadedQuestionClick = (question) => {
-        sendMessage(question);
     };
 
     return (
@@ -76,13 +68,14 @@ function ChatSupportButton({ currentTab }) {
             </button>
 
             {chatOpen && (
-                <div className="chat-window">
+                <div className={`chat-window ${isMaximized ? 'maximized' : ''}`}>
                     <ChatSupportWindow
                         currentTab={currentTab}
                         messages={messages}
-                        setMessages={setMessages}
-                        handlePreloadedQuestionClick={handlePreloadedQuestionClick}
-                        sendMessage={sendMessage} // Pass down sendMessage to handle it in ChatSupportWindow
+                        sendMessage={sendMessage}
+                        toggleMaximize={toggleMaximize}
+                        isMaximized={isMaximized}
+                        toggleChat={toggleChat}
                     />
                 </div>
             )}

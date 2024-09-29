@@ -3,6 +3,36 @@
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
+    width: 400px; /* Default width */
+    max-width: 100%;
+    transition: width 0.3s ease; /* Transition for resizing */
+}
+
+.chat-window.maximized {
+    width: 600px; /* Width when maximized */
+    height: 80vh; /* Height when maximized */
+    max-width: none; /* Remove max width when maximized */
+}
+
+.chat-header {
+    display: flex;
+    justify-content: space-between; /* Adjusted for spacing */
+    padding: 5px;
+}
+
+.chat-intro {
+    flex: 1; /* Allow intro text to take available space */
+    margin-right: 10px; /* Space between intro text and icons */
+}
+
+.chat-header-icons {
+    display: flex;
+    gap: 10px; /* Space between icons */
+    cursor: pointer;
+}
+
+.chat-header-icons svg {
+    font-size: 16px; /* Adjust icon size */
 }
 
 .chat-messages {
@@ -13,52 +43,44 @@
 }
 
 .preloaded-questions {
-    background-color: #e1e1e1;
+    background-color: white; /* Change background to white */
     padding: 10px;
-    border-top: 1px solid #ddd;
-    display: flex;
-    flex-direction: column;
+    border-radius: 10px; /* Add border radius */
+    border: 2px solid transparent; /* Set initial border */
+    background-clip: padding-box; /* Prevent background from showing through border */
+    position: relative; /* Position for gradient border */
+}
+
+.preloaded-questions::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(to right, #007bff, #6f42c1); /* Gradient background */
+    border-radius: 12px; /* Match border radius */
+    z-index: -1; /* Place behind */
 }
 
 .preloaded-question {
     cursor: pointer;
     margin-bottom: 5px;
     padding: 8px;
-    background-color: #007bff;
-    color: white;
+    color: transparent; /* Hide text color */
+    background: linear-gradient(to right, #007bff, #6f42c1); /* Gradient text */
+    -webkit-background-clip: text; /* Clip text with background */
+    background-clip: text;
     border-radius: 5px;
-    font-size: 14px;
+    border: 2px solid #007bff; /* Outline around questions */
 }
 
 .preloaded-question:hover {
-    background-color: #0056b3;
+    background: linear-gradient(to right, #6f42c1, #007bff); /* Change gradient on hover */
 }
 
 .chat-input-container {
     display: flex;
     padding: 10px;
-    border-top: 1px solid #ddd;
-    background-color: #f1f1f1;
-}
-
-input {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-right: none;
-    outline: none;
-    font-size: 16px;
-}
-
-button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: #0056b3;
+    background-color: #e9ecef;
 }
