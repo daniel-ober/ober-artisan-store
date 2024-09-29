@@ -1,132 +1,141 @@
 // src/firebaseService.js
-import { firestore } from './firebaseConfig'; // Firestore instance from your config
-import { collection, doc, getDoc, getDocs, setDoc } from 'firebase/firestore'; // Firebase Firestore imports
-import { v4 as uuidv4 } from 'uuid'; // For generating unique IDs
+import { firestore } from './firebaseConfig'; // Adjust the import path as needed
+import { doc, getDoc, setDoc, updateDoc, arrayUnion, collection, getDocs, addDoc } from 'firebase/firestore';
 
-// Add a user to Firestore
-const addUserToFirestore = async (userId, userData) => {
+// Fetch product by ID
+export const fetchProductById = async (id) => {
   try {
-    await setDoc(doc(firestore, 'users', userId), userData); // Add user data to 'users' collection
-    console.log('User successfully added to Firestore');
-  } catch (error) {
-    console.error('Error adding user to Firestore:', error);
-  }
-};
+    const docRef = doc(firestore, 'products', id); // Adjust 'products' to your collection name
+    const docSnap = await getDoc(docRef);
 
-// Fetch a user profile from Firestore
-const fetchUserProfile = async (userId) => {
-  try {
-    const userDoc = await getDoc(doc(firestore, 'users', userId)); // Fetch the user document
-    if (userDoc.exists()) {
-      return userDoc.data(); // Return user data if found
+    if (docSnap.exists()) {
+      console.log(`Product fetched with ID: ${id}`, docSnap.data());
+      return docSnap.data();
     } else {
-      console.log('No user found with the given ID!');
-      return null; // Return null if no document is found
-    }
-  } catch (error) {
-    console.error('Error fetching user profile:', error);
-    throw error; // Rethrow error to handle it in the calling component
-  }
-};
-
-// Fetch all products from Firestore
-const fetchProducts = async () => {
-  try {
-    const querySnapshot = await getDocs(collection(firestore, 'products')); // Get all product documents
-    const productsList = querySnapshot.docs.map((doc) => ({
-      id: doc.id, // Include the document ID
-      ...doc.data(), // Spread the rest of the document data
-    }));
-    return productsList; // Return the array of products
-  } catch (error) {
-    console.error('Error fetching products:', error);
-    throw error; // Rethrow error for further handling
-  }
-};
-
-// Fetch a product by ID
-const fetchProductById = async (id) => {
-  try {
-    if (!id) {
-      console.error('Product ID is undefined or null');
-      return null;
-    }
-
-    const productDocRef = doc(firestore, 'products', id);
-    const productDoc = await getDoc(productDocRef);
-
-    if (productDoc.exists()) {
-      console.log('Product data:', { id: productDoc.id, ...productDoc.data() });
-      return { id: productDoc.id, ...productDoc.data() };
-    } else {
-      console.log('No product found with the given ID!');
+      console.error('No such document exists!');
       return null;
     }
   } catch (error) {
-    console.error('Error fetching product by ID:', error);
+    console.error('Error fetching product:', error);
     throw error;
   }
 };
 
-// Add an inquiry to Firestore
-const addInquiry = async (inquiryData) => {
+// Function to fetch all products
+export const fetchProducts = async () => {
   try {
-    const uniqueId = uuidv4(); // Generate a unique ID for the inquiry
-    const timestamp = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' }); // Timestamp for the inquiry
-
-    // Create a new inquiry document with a unique ID
-    const docRef = doc(firestore, 'inquiries', uniqueId);
-    
-    // Add inquiry data to Firestore with the timestamp
-    await setDoc(docRef, {
-      ...inquiryData,
-      submittedAt: timestamp, // Add timestamp to inquiry
-    });
-
-    console.log('Inquiry successfully added with ID:', uniqueId);
+    const productsCollection = collection(firestore, 'products');
+    const productSnapshot = await getDocs(productsCollection);
+    const productsList = productSnapshot.docs.map(doc => ({
+      ...doc.data(),
+      _id: doc.id,
+    }));
+    return productsList;
   } catch (error) {
-    console.error('Error adding inquiry:', error);
+    console.error('Error fetching products:', error);
+    throw error;
   }
 };
 
-// Fetch the user's cart from Firestore
-const fetchUserCart = async (userId) => {
+// Function to create a cart for a guest
+export const createCart = async (cartId) => {
   try {
-    const cartDoc = await getDoc(doc(firestore, 'carts', userId));
-    if (cartDoc.exists()) {
-      return cartDoc.data(); // Return cart data if found
+    const cartRef = doc(firestore, 'carts', cartId);
+    await setDoc(cartRef, {
+      items: []
+    });
+    console.log(`Cart created with ID: ${cartId}`);
+    return cartId;
+  } catch (error) {
+    console.error('Error creating cart:', error);
+    throw error;
+  }
+};
+
+// Function to add an item to a cart
+export const addItemToCart = async (cartId, item) => {
+  try {
+    const cartRef = doc(firestore, 'carts', cartId);
+    const cartSnap = await getDoc(cartRef);
+
+    if (!cartSnap.exists()) {
+      console.log(`Cart with ID: ${cartId} does not exist, creating a new cart...`);
+      await createCart(cartId);
+    }
+
+    await updateDoc(cartRef, {
+      items: arrayUnion(item)
+    });
+    console.log(`Item added to cart with ID: ${cartId}`, item);
+  } catch (error) {
+    console.error('Error adding item to cart:', error);
+    throw error;
+  }
+};
+
+// Function to add an inquiry (new function)
+export const addInquiry = async (inquiryData) => {
+  try {
+    const inquiriesCollection = collection(firestore, 'inquiries'); // Adjust collection name
+    const docRef = await addDoc(inquiriesCollection, inquiryData);
+    console.log('Inquiry added with ID:', docRef.id);
+    return docRef.id;
+  } catch (error) {
+    console.error('Error adding inquiry:', error);
+    throw error;
+  }
+};
+
+// Function to fetch user profile (new function)
+export const fetchUserProfile = async (userId) => {
+  try {
+    const userRef = doc(firestore, 'users', userId); // Adjust collection name as necessary
+    const userSnap = await getDoc(userRef);
+
+    if (userSnap.exists()) {
+      console.log(`User profile fetched with ID: ${userId}`, userSnap.data());
+      return userSnap.data();
     } else {
-      console.log('No cart found for the given user ID!');
-      return {}; // Return an empty cart if no document is found
+      console.error('No such user exists!');
+      return null;
+    }
+  } catch (error) {
+    console.error('Error fetching user profile:', error);
+    throw error;
+  }
+};
+
+// Function to fetch user cart (new function)
+export const fetchUserCart = async (cartId) => {
+  try {
+    const cartRef = doc(firestore, 'carts', cartId);
+    const cartSnap = await getDoc(cartRef);
+
+    if (cartSnap.exists()) {
+      console.log(`Cart fetched with ID: ${cartId}`, cartSnap.data());
+      return cartSnap.data();
+    } else {
+      console.error('No such cart exists!');
+      return null;
     }
   } catch (error) {
     console.error('Error fetching user cart:', error);
-    throw error; // Rethrow error for further handling
+    throw error;
   }
 };
 
-// Fetch all users from Firestore
-const fetchUsers = async () => {
+// Function to test Firestore connection
+export const testFirestoreConnection = async () => {
   try {
-    const querySnapshot = await getDocs(collection(firestore, 'users')); // Get all user documents
-    const usersList = querySnapshot.docs.map((doc) => ({
-      id: doc.id, // Include the document ID
-      ...doc.data(), // Spread the rest of the document data
-    }));
-    return usersList; // Return the array of users
-  } catch (error) {
-    console.error('Error fetching users:', error);
-    throw error; // Rethrow error for further handling
+    const docRef = await addDoc(collection(firestore, 'test'), {
+      message: 'This is a test message',
+      timestamp: new Date(),
+    });
+    console.log('Test document written with ID:', docRef.id);
+  } catch (e) {
+    console.error('Error adding test document:', e);
   }
 };
 
-// Export functions for use in other components
-export { 
-  addUserToFirestore, 
-  fetchUserProfile, 
-  fetchProducts, 
-  fetchProductById, 
-  addInquiry, 
-  fetchUserCart, 
-  fetchUsers 
-};
+// Call the test function to confirm Firestore connection
+testFirestoreConnection();
