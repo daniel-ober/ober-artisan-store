@@ -29,7 +29,7 @@ const ProductDetail = () => {
           const cartArray = Object.values(cart);
 
           // Check if the product is in the cart
-          const cartProduct = cartArray.find(item => item.productId === id);
+          const cartProduct = cartArray.find(item => item.productId === productData._id);
           setInCart(cartProduct || null);
         } else {
           setError('Product not found');

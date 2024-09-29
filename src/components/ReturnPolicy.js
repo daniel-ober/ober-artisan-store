@@ -72,7 +72,7 @@ const ReturnPolicy = () => {
         <br />
         Dan Ober Artisan Drums
         <br />
-        Email: <strong>returns@danoberartisan.com</strong>
+        Email: <strong>support@danoberartisan.com</strong>
       </p>
     </div>
   );

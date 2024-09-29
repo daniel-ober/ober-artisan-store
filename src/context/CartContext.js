@@ -3,6 +3,7 @@ import { doc, updateDoc, setDoc, getDoc } from 'firebase/firestore';
 import { firestore } from '../firebaseConfig'; // Correct path to Firestore instance
 import { useAuth } from './AuthContext'; // Assuming you have an AuthContext for user authentication
 import { fetchUserCart } from '../firebaseService'; // Import the fetchUserCart function
+import { arrayUnion } from 'firebase/firestore'; // Ensure this import is included
 
 const CartContext = createContext();
 
