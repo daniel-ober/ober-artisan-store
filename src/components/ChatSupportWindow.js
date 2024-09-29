@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import './ChatSupportWindow.css'; // Import your CSS for styling
+import './ChatSupportWindow.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faWindowMaximize, faWindowRestore, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 const preloadedQuestions = {
     About: [
@@ -16,18 +18,27 @@ const preloadedQuestions = {
     ],
 };
 
-function ChatSupportWindow({ currentTab, messages, setMessages, handlePreloadedQuestionClick, sendMessage }) {
+function ChatSupportWindow({ currentTab, messages, sendMessage, toggleMaximize, isMaximized, toggleChat }) {
     const [input, setInput] = useState('');
 
     const handleSend = () => {
         if (input.trim()) {
-            sendMessage(input); // Use sendMessage passed from the parent
+            sendMessage(input);
             setInput(''); // Clear input after sending
         }
     };
 
     return (
         <div className="chat-support-window">
+            <div className="chat-header">
+                <div className="chat-intro">
+                    Hi! My name is Oakli, Dan Ober's chat assistant. I can help you with questions about products, availability, and more!
+                </div>
+                <div className="chat-header-icons">
+                    <FontAwesomeIcon icon={isMaximized ? faWindowRestore : faWindowMaximize} onClick={toggleMaximize} />
+                    <FontAwesomeIcon icon={faTimes} onClick={toggleChat} />
+                </div>
+            </div>
             <div className="chat-messages">
                 {messages.map((message, index) => (
                     <div key={index} className={`message ${message.role}`}>
@@ -36,20 +47,18 @@ function ChatSupportWindow({ currentTab, messages, setMessages, handlePreloadedQ
                 ))}
             </div>
 
-            {/* Preloaded Questions */}
             <div className="preloaded-questions">
                 {preloadedQuestions[currentTab]?.map((question, index) => (
                     <div
                         key={index}
                         className="preloaded-question"
-                        onClick={() => handlePreloadedQuestionClick(question)}
+                        onClick={() => sendMessage(question)} // Directly send preloaded question
                     >
                         {question}
                     </div>
                 ))}
             </div>
 
-            {/* Chat Input */}
             <div className="chat-input-container">
                 <input
                     type="text"
