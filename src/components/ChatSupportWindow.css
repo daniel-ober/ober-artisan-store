@@ -77,6 +77,7 @@
 
 .preloaded-question:hover {
     background: linear-gradient(to right, #6f42c1, #007bff); /* Change gradient on hover */
+    color: #e9ecef;
 }
 
 .chat-input-container {
