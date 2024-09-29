@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom'; // for redirecting after successful registration
 import { auth, firestore } from '../firebaseConfig';
 import {
   TextField,
@@ -10,6 +11,8 @@ import {
   FormControlLabel,
   Dialog,
   DialogContent,
+  DialogActions,
+  DialogTitle,
   IconButton,
   InputAdornment,
 } from '@mui/material';
@@ -34,8 +37,10 @@ const Register = () => {
   const [agreedToTermsAndPrivacy, setAgreedToTermsAndPrivacy] = useState(false);
   const [openTerms, setOpenTerms] = useState(false);
   const [openPrivacy, setOpenPrivacy] = useState(false);
+  const [openSuccessDialog, setOpenSuccessDialog] = useState(false); // Success popup dialog
   const [showPassword, setShowPassword] = useState(false);
 
+  const navigate = useNavigate(); // Used for navigation after successful signup
   const termsRef = useRef(null);
   const privacyRef = useRef(null);
 
@@ -99,14 +104,7 @@ const Register = () => {
       });
 
       setStatus('Registration successful!');
-      setFormData({
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: '',
-        password: '',
-        confirmPassword: '',
-      });
+      setOpenSuccessDialog(true); // Open the success dialog popup
     } catch (error) {
       console.error('Error creating user:', error);
       setError('Failed to register. Please try again.');
@@ -131,6 +129,11 @@ const Register = () => {
         }
       `,
     });
+  };
+
+  const handleCloseSuccessDialog = () => {
+    setOpenSuccessDialog(false);
+    navigate('/account'); // Redirect to account settings page after clicking "OK"
   };
 
   return (
@@ -226,50 +229,56 @@ const Register = () => {
           }}
         />
 
-      <div className="password-rules">
-        <Typography variant="body2" sx={{ marginTop: 2 }}>
-          Password must:
-          <ul>
-            <li>
-              <span className={passwordRules.length ? 'checkmark' : 'not-met'}>
-                {passwordRules.length ? '✔️' : '❌'}
-              </span>
-              Be 8 characters at minimum
-            </li>
-            <li>
-              <span className={passwordRules.uppercase ? 'checkmark' : 'not-met'}>
-                {passwordRules.uppercase ? '✔️' : '❌'}
-              </span>
-              Contain one uppercase letter
-            </li>
-            <li>
-              <span className={passwordRules.lowercase ? 'checkmark' : 'not-met'}>
-                {passwordRules.lowercase ? '✔️' : '❌'}
-              </span>
-              Contain one lowercase letter
-            </li>
-            <li>
-              <span className={passwordRules.number ? 'checkmark' : 'not-met'}>
-                {passwordRules.number ? '✔️' : '❌'}
-              </span>
-              Contain one number
-            </li>
-            <li>
-              <span className={passwordRules.specialChar ? 'checkmark' : 'not-met'}>
-                {passwordRules.specialChar ? '✔️' : '❌'}
-              </span>
-              Contain one special character
-            </li>
-            <li>
-              <span className={passwordRules.match ? 'checkmark' : 'not-met'}>
-                {passwordRules.match ? '✔️' : '❌'}
-              </span>
-              Match the confirmed password
-            </li>
-          </ul>
-        </Typography>
-      </div>
-      <FormControlLabel
+        <div className="password-rules">
+          <Typography variant="body2" sx={{ marginTop: 2 }}>
+            Password must:
+            <ul>
+              <li>
+                <span className={passwordRules.length ? 'checkmark' : 'not-met'}>
+                  {passwordRules.length ? '✔️' : '❌'}
+                </span>
+                Be 8 characters at minimum
+              </li>
+              <li>
+                <span
+                  className={passwordRules.uppercase ? 'checkmark' : 'not-met'}
+                >
+                  {passwordRules.uppercase ? '✔️' : '❌'}
+                </span>
+                Contain one uppercase letter
+              </li>
+              <li>
+                <span
+                  className={passwordRules.lowercase ? 'checkmark' : 'not-met'}
+                >
+                  {passwordRules.lowercase ? '✔️' : '❌'}
+                </span>
+                Contain one lowercase letter
+              </li>
+              <li>
+                <span className={passwordRules.number ? 'checkmark' : 'not-met'}>
+                  {passwordRules.number ? '✔️' : '❌'}
+                </span>
+                Contain one number
+              </li>
+              <li>
+                <span
+                  className={passwordRules.specialChar ? 'checkmark' : 'not-met'}
+                >
+                  {passwordRules.specialChar ? '✔️' : '❌'}
+                </span>
+                Contain one special character
+              </li>
+              <li>
+                <span className={passwordRules.match ? 'checkmark' : 'not-met'}>
+                  {passwordRules.match ? '✔️' : '❌'}
+                </span>
+                Match the confirmed password
+              </li>
+            </ul>
+          </Typography>
+        </div>
+        <FormControlLabel
           control={
             <Checkbox
               checked={agreedToTermsAndPrivacy}
@@ -298,34 +307,63 @@ const Register = () => {
         >
           Register
         </Button>
-      </form>
-      {error && (
-        <Typography color="error" variant="body2" sx={{ marginTop: 2 }}>
-          {error}
-        </Typography>
-      )}
-      {status && (
-        <Typography color="success" variant="body2" sx={{ marginTop: 2 }}>
-          {status}
-        </Typography>
-      )}
 
-      <Dialog open={openTerms} onClose={handleCloseTerms}>
+        {error && (
+          <Typography color="error" variant="body2">
+            {error}
+          </Typography>
+        )}
+
+        {status && (
+          <Typography color="primary" variant="body2">
+            {status}
+          </Typography>
+        )}
+      </form>
+
+      {/* Success Dialog */}
+      <Dialog open={openSuccessDialog} onClose={handleCloseSuccessDialog}>
+        <DialogTitle>Success</DialogTitle>
         <DialogContent>
-          <TermsOfService ref={termsRef} />
-          <Button onClick={() => printDocument(termsRef)}>
-            Print Terms of Service
-          </Button>
+          <Typography>Your account has been created successfully!</Typography>
         </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseSuccessDialog} color="primary">
+            OK
+          </Button>
+        </DialogActions>
       </Dialog>
 
-      <Dialog open={openPrivacy} onClose={handleClosePrivacy}>
+      {/* Terms of Service Dialog */}
+      <Dialog open={openTerms} onClose={handleCloseTerms} maxWidth="md" fullWidth>
+        <DialogTitle>Terms of Service</DialogTitle>
+        <DialogContent>
+          <TermsOfService ref={termsRef} />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => printDocument(termsRef)} color="primary">
+            Print
+          </Button>
+          <Button onClick={handleCloseTerms} color="primary">
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Privacy Policy Dialog */}
+      <Dialog open={openPrivacy} onClose={handleClosePrivacy} maxWidth="md" fullWidth>
+        <DialogTitle>Privacy Policy</DialogTitle>
         <DialogContent>
           <PrivacyPolicy ref={privacyRef} />
-          <Button onClick={() => printDocument(privacyRef)}>
-            Print Privacy Policy
-          </Button>
         </DialogContent>
+        <DialogActions>
+          <Button onClick={() => printDocument(privacyRef)} color="primary">
+            Print
+          </Button>
+          <Button onClick={handleClosePrivacy} color="primary">
+            Close
+          </Button>
+        </DialogActions>
       </Dialog>
     </div>
   );
