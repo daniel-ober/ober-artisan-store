@@ -7,17 +7,21 @@ const CartItem = ({ item }) => {
 
   const minQuantity = 1;
 
-  const handleRemove = () => removeFromCart(item.id);
+  // Update handleRemove to use item._id
+  const handleRemove = () => {
+    console.log('Removing item with ID:', item._id); // Log the ID being removed
+    removeFromCart(item._id); // Use item._id instead of item.id
+  };
 
   const handleIncrease = () => {
     if (item.quantity >= minQuantity) {
-      updateQuantity(item.id, item.quantity + 1);
+      updateQuantity(item._id, item.quantity + 1); // Update to item._id
     }
   };
 
   const handleDecrease = () => {
     if (item.quantity > minQuantity && !['one of a kind', 'custom shop'].includes(item.category)) {
-      updateQuantity(item.id, item.quantity - 1);
+      updateQuantity(item._id, item.quantity - 1); // Update to item._id
     }
   };
 
@@ -30,7 +34,7 @@ const CartItem = ({ item }) => {
   return (
     <div className="cart-item">
       <img 
-        src={item.images?.[0] || '/path/to/placeholder.jpg'} 
+        src={item.images?.[0] || 'https://i.imgur.com/eoKsILV.png'} 
         alt={item.name} 
         className="cart-item-image" 
       />
@@ -72,3 +76,4 @@ const CartItem = ({ item }) => {
 };
 
 export default CartItem;
+``

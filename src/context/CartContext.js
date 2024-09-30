@@ -2,7 +2,7 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
 import { doc, updateDoc, setDoc, getDoc } from 'firebase/firestore';
 import { firestore } from '../firebaseConfig'; // Correct path to Firestore instance
 import { useAuth } from './AuthContext'; // Assuming you have an AuthContext for user authentication
-import { fetchUserCart } from '../firebaseService'; // Import the fetchUserCart function
+import { fetchUserCart } from '../services/firebaseService'; // Import the fetchUserCart function
 import { arrayUnion } from 'firebase/firestore'; // Ensure this import is included
 
 const CartContext = createContext();
@@ -35,9 +35,9 @@ export const CartProvider = ({ children }) => {
   const addToCart = async (product) => {
     const updatedCart = {
       ...cart,
-      [product.id]: {
+      [product._id]: {
         ...product,
-        quantity: (cart[product.id]?.quantity || 0) + 1,
+        quantity: (cart[product._id]?.quantity || 0) + 1,
       },
     };
 
