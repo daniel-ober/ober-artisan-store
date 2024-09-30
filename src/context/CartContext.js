@@ -1,3 +1,4 @@
+// src/context/CartContext.js
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { doc, updateDoc, setDoc, getDoc } from 'firebase/firestore';
 import { firestore } from '../firebaseConfig'; // Correct path to Firestore instance
@@ -10,20 +11,25 @@ export const CartProvider = ({ children }) => {
     const { user } = useAuth();
     const [cart, setCart] = useState({});
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null); // State to manage error messages
 
     useEffect(() => {
         const loadCart = async () => {
             if (user) {
                 try {
                     const userCart = await fetchUserCart(user.uid);
-                    setCart(userCart);
+                    if (userCart) {
+                        setCart(userCart);
+                    }
                 } catch (error) {
                     console.error('Failed to load cart:', error);
+                    setError('Failed to load cart. Please try again later.');
                 } finally {
                     setLoading(false);
                 }
             } else {
-                setCart({});
+                const savedCart = JSON.parse(localStorage.getItem('cart')) || {};
+                setCart(savedCart);
                 setLoading(false);
             }
         };
@@ -31,21 +37,28 @@ export const CartProvider = ({ children }) => {
         loadCart();
     }, [user]);
 
+    useEffect(() => {
+        if (user) {
+            localStorage.removeItem('cart'); // Clear local storage when user is logged in
+        } else {
+            localStorage.setItem('cart', JSON.stringify(cart)); // Save cart to local storage
+        }
+    }, [cart, user]);
+
     const addToCart = async (product) => {
         const isOneOfAKind = product.category === "one of a kind" || product.category === "custom shop";
-        const existingItem = cart[product._id];
+        const existingItem = cart[product.id]; // Ensure to use product ID here correctly
 
-        // If item is one of a kind, set quantity to 1
         if (isOneOfAKind && existingItem) {
-            console.log(`Cannot add more than one ${product.name} to the cart.`);
-            return; // Prevent adding more than one
+            setError(`Cannot add more than one ${product.name} to the cart.`);
+            return;
         }
 
         const updatedCart = {
             ...cart,
-            [product._id]: {
+            [product.id]: { // Use product ID correctly
                 ...product,
-                quantity: isOneOfAKind ? 1 : (existingItem?.quantity || 0) + 1, // Set quantity to 1 if it's a one-of-a-kind item
+                quantity: isOneOfAKind ? 1 : (existingItem?.quantity || 0) + 1,
             },
         };
 
@@ -54,26 +67,26 @@ export const CartProvider = ({ children }) => {
         try {
             if (user) {
                 const cartRef = doc(firestore, 'carts', user.uid);
-                
-                // Check if the cart document exists
                 const cartDoc = await getDoc(cartRef);
+
                 if (cartDoc.exists()) {
-                    // Update the existing document
-                    await updateDoc(cartRef, updatedCart);
+                    await updateDoc(cartRef, { cart: updatedCart });
                 } else {
-                    // Create a new document if it does not exist
-                    await setDoc(cartRef, updatedCart);
+                    await setDoc(cartRef, { cart: updatedCart });
                 }
             }
         } catch (error) {
             console.error('Error updating cart:', error);
+            setError('Error updating cart. Please try again later.');
         }
     };
 
     const updateQuantity = async (productId, quantity) => {
+        if (!cart[productId]) return;
+
         const updatedCart = {
             ...cart,
-            [productId]: { ...cart[productId], quantity: Math.max(quantity, 1) }, // Ensure quantity does not drop below 1
+            [productId]: { ...cart[productId], quantity: Math.max(quantity, 1) },
         };
 
         setCart(updatedCart);
@@ -81,14 +94,17 @@ export const CartProvider = ({ children }) => {
         try {
             if (user) {
                 const cartRef = doc(firestore, 'carts', user.uid);
-                await updateDoc(cartRef, updatedCart);
+                await updateDoc(cartRef, { cart: updatedCart });
             }
         } catch (error) {
             console.error('Error updating cart:', error);
+            setError('Error updating cart. Please try again later.');
         }
     };
 
     const removeFromCart = async (productId) => {
+        if (!cart[productId]) return;
+
         const updatedCart = { ...cart };
         delete updatedCart[productId];
 
@@ -97,15 +113,20 @@ export const CartProvider = ({ children }) => {
         try {
             if (user) {
                 const cartRef = doc(firestore, 'carts', user.uid);
-                await updateDoc(cartRef, updatedCart);
+                await updateDoc(cartRef, { cart: updatedCart });
             }
         } catch (error) {
             console.error('Error removing item from cart:', error);
+            setError('Error removing item from cart. Please try again later.');
         }
     };
 
+    useEffect(() => {
+        console.log("Cart updated:", cart);
+    }, [cart]);
+
     return (
-        <CartContext.Provider value={{ cart, addToCart, updateQuantity, removeFromCart, loading }}>
+        <CartContext.Provider value={{ cart, addToCart, updateQuantity, removeFromCart, loading, error }}>
             {children}
         </CartContext.Provider>
     );
