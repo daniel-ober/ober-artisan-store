@@ -1,99 +1,61 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { FaArrowLeft } from 'react-icons/fa';
+// src/components/Cart.js
+import React from 'react';
 import { useCart } from '../context/CartContext';
-import { useAuth } from '../context/AuthContext';
-import CartItem from './CartItem';
 import './Cart.css';
 
 const Cart = () => {
-    const { cart, updateQuantity, removeFromCart, loading } = useCart();
-    const { user } = useAuth();
-    const [total, setTotal] = useState(0);
+    const { cart, removeFromCart, updateQuantity } = useCart();
 
-    // Debugging: Log cart contents
-    console.log('Cart Contents:', cart);
+    const handleRemove = (productId) => {
+        console.log(`Removing item with ID: ${productId}`);
+        removeFromCart(productId); // Ensure productId is passed correctly
+    };
 
-    useEffect(() => {
-      const calculateTotal = () => {
-          const totalAmount = Object.values(cart).reduce((acc, product) => {
-              const price = Number(product.price); // Ensure price is a number
-              const quantity = Number(product.quantity); // Ensure quantity is a number
-              const itemTotal = price * quantity; // Calculate item total
-              console.log(`Calculating: ${product.name} - Price: $${price}, Quantity: ${quantity}, Item Total: $${itemTotal}`); // Debugging log
-              return acc + itemTotal; // Update total
-          }, 0);
-          setTotal(totalAmount);
-      };
-  
-      calculateTotal();
-  }, [cart]);
+    const handleQuantityChange = (productId, change) => {
+        const currentItem = cart[productId];
+        if (!currentItem) return;
 
-    const handleCheckout = async () => {
-        try {
-            const response = await fetch('http://localhost:4949/create-checkout-session', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    products: Object.values(cart).map(product => ({
-                        name: product.productId,
-                        price: product.priceId,
-                        quantity: product.quantity,
-                    })),
-                    userId: user?.uid,
-                }),
-            });
-
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-
-            const session = await response.json();
-            window.location.href = session.url;
-        } catch (error) {
-            console.error('Failed to redirect to checkout:', error);
+        const newQuantity = currentItem.quantity + change;
+        if (newQuantity <= 0) {
+            handleRemove(productId);
+        } else {
+            updateQuantity(productId, newQuantity);
         }
     };
 
-    if (loading) {
-        return <p>Loading...</p>;
+    const calculateTotal = () => {
+        return Object.values(cart).reduce((acc, item) => {
+            const itemTotal = item.price * item.quantity;
+            console.log(`Calculating: ${item.name} - Price: $${item.price}, Quantity: ${item.quantity}, Item Total: $${itemTotal}`);
+            return acc + itemTotal;
+        }, 0).toFixed(2);
+    };
+
+    if (!cart || Object.keys(cart).length === 0) {
+        return <p>Your cart is empty.</p>;
     }
 
     return (
         <div className="cart-container">
-            <div className="cart-header">
-                <h2 className="cart-title">Your Shopping Cart</h2>
-                <Link to="/products" className="continue-shopping-link">
-                    <FaArrowLeft className="back-icon" />
-                    Back to Shop/Gallery
-                </Link>
-            </div>
-
-            <div className="cart-items">
-                {Object.keys(cart).length > 0 ? (
-                    Object.values(cart).map((product) => (
-                        <CartItem 
-                            key={product.productId} 
-                            item={product} 
-                            updateQuantity={updateQuantity}
-                            removeFromCart={removeFromCart}
-                        />
-                    ))
-                ) : (
-                    <p className="empty-cart-message">Your cart is currently empty.</p>
-                )}
-            </div>
-
-            <div className="cart-summary">
-                <p className="cart-total">Total: ${total.toFixed(2)}</p>
-                {Object.keys(cart).length > 0 && (
-                    <button className="checkout-button" onClick={handleCheckout}>
-                        Checkout
-                    </button>
-                )}
-            </div>
+            <h2>Your Cart</h2>
+            <ul className="cart-items">
+                {Object.values(cart).map((item) => (
+                    <li key={item.id} className="cart-item">
+                        <img src={item.images[0]} alt={item.name} className="cart-item-image" />
+                        <div className="cart-item-details">
+                            <h3>{item.name}</h3>
+                            <p>Price: ${item.price}</p>
+                            <p>Quantity: {item.quantity}</p>
+                            <div className="cart-item-controls">
+                                <button onClick={() => handleQuantityChange(item.id, -1)}>-</button>
+                                <button onClick={() => handleQuantityChange(item.id, 1)}>+</button>
+                                <button onClick={() => handleRemove(item.id)}>Remove</button>
+                            </div>
+                        </div>
+                    </li>
+                ))}
+            </ul>
+            <h3>Total: ${calculateTotal()}</h3>
         </div>
     );
 };

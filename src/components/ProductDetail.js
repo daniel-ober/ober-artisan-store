@@ -6,11 +6,11 @@ import { FaArrowLeft } from 'react-icons/fa';
 import './ProductDetail.css';
 
 const ProductDetail = () => {
-    const { id } = useParams();
+    const { id } = useParams(); // Firestore document ID
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const { addToCart, cart } = useCart();
+    const { addToCart, removeFromCart, cart } = useCart();
     const [inCart, setInCart] = useState(null);
     const [mainImage, setMainImage] = useState('');
 
@@ -19,17 +19,14 @@ const ProductDetail = () => {
             try {
                 console.log('Fetching product with ID:', id);
                 const productData = await fetchProductById(id);
-                console.log('Product data:', productData);
 
                 if (productData) {
                     setProduct(productData);
                     setMainImage(productData.images?.[0] || 'https://i.imgur.com/eoKsILV.png');
 
-                    // Convert cart object to array for easier handling
-                    const cartArray = Object.values(cart);
-
                     // Check if the product is in the cart
-                    const cartProduct = cartArray.find(item => item.productId === productData._id);
+                    const cartArray = Object.values(cart);
+                    const cartProduct = cartArray.find(item => item.id === id);
                     setInCart(cartProduct || null);
                 } else {
                     setError('Product not found');
@@ -47,8 +44,14 @@ const ProductDetail = () => {
 
     const handleAddToCart = () => {
         if (product) {
-            const quantity = inCart ? inCart.quantity + 1 : 1; // Increment quantity if already in cart
-            addToCart({ ...product, quantity });
+            addToCart({ ...product, id });
+        }
+    };
+
+    const handleRemoveFromCart = () => {
+        if (inCart) {
+            removeFromCart(inCart.id);
+            setInCart(null);
         }
     };
 
@@ -56,8 +59,11 @@ const ProductDetail = () => {
         if (!inCart) return;
         const newQuantity = inCart.quantity + change;
 
-        if (newQuantity < 1) return;
-        addToCart({ ...product, quantity: newQuantity });
+        if (newQuantity < 1) {
+            handleRemoveFromCart();
+            return;
+        }
+        addToCart({ ...product, quantity: newQuantity, id });
     };
 
     const handleThumbnailClick = (image) => {
@@ -97,31 +103,22 @@ const ProductDetail = () => {
                 <h1 className="product-title">{product?.name}</h1>
                 <p className="product-description">{product?.description}</p>
                 <p className="product-price">${product?.price}</p>
-                <button
-                    className="add-to-cart-button"
-                    onClick={handleAddToCart}
-                >
-                    {inCart ? 'Update Cart' : 'Add to Cart'}
-                </button>
-                {canAdjustQuantity && (
-                    <div className="quantity-controls">
-                        <button
-                            className="quantity-button"
-                            onClick={() => handleQuantityChange(-1)}
-                            disabled={!inCart || inCart.quantity <= 1}
-                        >
-                            -
+                <div className="quantity-control">
+                    {inCart ? (
+                        <>
+                            <button onClick={() => handleQuantityChange(-1)} disabled={!canAdjustQuantity}>-</button>
+                            <span>{inCart.quantity}</span>
+                            <button onClick={() => handleQuantityChange(1)} disabled={!canAdjustQuantity}>+</button>
+                            <button onClick={handleRemoveFromCart} className="remove-from-cart-button">
+                                Remove from Cart
+                            </button>
+                        </>
+                    ) : (
+                        <button onClick={handleAddToCart} className="add-to-cart-button">
+                            Add to Cart
                         </button>
-                        <span className="quantity-display">{inCart?.quantity || 0}</span>
-                        <button
-                            className="quantity-button"
-                            onClick={() => handleQuantityChange(1)}
-                            disabled={!inCart}
-                        >
-                            +
-                        </button>
-                    </div>
-                )}
+                    )}
+                </div>
             </div>
         </div>
     );
