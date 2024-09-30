@@ -11,6 +11,9 @@ const Cart = () => {
   const { user } = useAuth();
   const [total, setTotal] = useState(0);
 
+  // Debugging: Log cart contents
+  console.log('Cart Contents:', cart);
+
   useEffect(() => {
     const calculateTotal = () => {
       const totalAmount = Object.values(cart).reduce((acc, product) => {
