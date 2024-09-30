@@ -1,8 +1,7 @@
 // src/components/ProductCard.js
-
 import React from 'react';
 import { useCart } from '../context/CartContext';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { Link } from 'react-router-dom';
 import './ProductCard.css';
 
 const ProductCard = ({ product }) => {
@@ -10,7 +9,8 @@ const ProductCard = ({ product }) => {
 
   const handleAddToCart = () => {
     if (product) {
-      addToCart(product);
+      // Adding the product to cart with its ID and other properties
+      addToCart({ ...product, _id: product.id }); // Ensure the product ID is passed correctly
     } else {
       console.error('Product is not defined');
     }
@@ -28,8 +28,7 @@ const ProductCard = ({ product }) => {
         <p className="product-description">{product.description}</p>
         <p className="product-price">${product.price}</p>
         
-        {/* Add View Details Link */}
-        <Link to={`/products/${product._id}`} className="view-details-link">
+        <Link to={`/products/${product.id}`} className="view-details-link">
           View Details
         </Link>
         

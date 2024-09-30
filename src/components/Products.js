@@ -1,13 +1,13 @@
+// src/components/Products.js
 import React, { useEffect, useState } from 'react';
 import { fetchProducts } from '../services/firebaseService';
 import ProductCard from './ProductCard';
-import { useCart } from '../context/CartContext'; // Import the useCart hook
+import { useCart } from '../context/CartContext'; 
 import './Products.css';
 
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { addToCart } = useCart(); // Get the addToCart function from context
 
   useEffect(() => {
     const fetchProductsData = async () => {
@@ -24,14 +24,6 @@ const Products = () => {
     fetchProductsData();
   }, []);
 
-  const handleAddToCart = (product) => {
-    if (addToCart) {
-      addToCart(product);
-    } else {
-      console.error('addToCart is not defined');
-    }
-  };
-
   if (loading) {
     return <p className="loading-message">Loading products...</p>;
   }
@@ -42,9 +34,8 @@ const Products = () => {
         <div className="product-grid">
           {products.map((product) => (
             <ProductCard 
-              key={product._id} 
+              key={product.id} 
               product={product} 
-              onAddToCart={() => handleAddToCart(product)} // Pass the addToCart handler
             />
           ))}
         </div>

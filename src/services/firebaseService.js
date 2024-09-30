@@ -1,4 +1,5 @@
 // src/firebaseService.js
+
 import { firestore } from '../firebaseConfig'; // Adjust the import path as needed
 import { doc, getDoc, setDoc, updateDoc, arrayUnion, collection, getDocs, addDoc } from 'firebase/firestore';
 
@@ -9,7 +10,7 @@ export const fetchProductById = async (id) => {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      console.log(`Product fetched with ID: ${id}`, docSnap.data());
+      console.log(`Product fetched with ID: ${id}`, docSnap.data()); // Debugging log
       return docSnap.data();
     } else {
       console.error('No such document exists!');
@@ -28,8 +29,9 @@ export const fetchProducts = async () => {
     const productSnapshot = await getDocs(productsCollection);
     const productsList = productSnapshot.docs.map(doc => ({
       ...doc.data(),
-      _id: doc.id,
+      id: doc.id,
     }));
+    console.log('Fetched all products:', productsList); // Debugging log
     return productsList;
   } catch (error) {
     console.error('Error fetching products:', error);
@@ -44,7 +46,7 @@ export const createCart = async (cartId) => {
     await setDoc(cartRef, {
       items: []
     });
-    console.log(`Cart created with ID: ${cartId}`);
+    console.log(`Cart created with ID: ${cartId}`); // Debugging log
     return cartId;
   } catch (error) {
     console.error('Error creating cart:', error);
@@ -59,14 +61,14 @@ export const addItemToCart = async (cartId, item) => {
     const cartSnap = await getDoc(cartRef);
 
     if (!cartSnap.exists()) {
-      console.log(`Cart with ID: ${cartId} does not exist, creating a new cart...`);
+      console.log(`Cart with ID: ${cartId} does not exist, creating a new cart...`); // Debugging log
       await createCart(cartId);
     }
 
     await updateDoc(cartRef, {
       items: arrayUnion(item)
     });
-    console.log(`Item added to cart with ID: ${cartId}`, item);
+    console.log(`Item added to cart with ID: ${cartId}`, item); // Debugging log
   } catch (error) {
     console.error('Error adding item to cart:', error);
     throw error;
@@ -78,7 +80,7 @@ export const addInquiry = async (inquiryData) => {
   try {
     const inquiriesCollection = collection(firestore, 'inquiries'); // Adjust collection name
     const docRef = await addDoc(inquiriesCollection, inquiryData);
-    console.log('Inquiry added with ID:', docRef.id);
+    console.log('Inquiry added with ID:', docRef.id); // Debugging log
     return docRef.id;
   } catch (error) {
     console.error('Error adding inquiry:', error);
@@ -93,7 +95,7 @@ export const fetchUserProfile = async (userId) => {
     const userSnap = await getDoc(userRef);
 
     if (userSnap.exists()) {
-      console.log(`User profile fetched with ID: ${userId}`, userSnap.data());
+      console.log(`User profile fetched with ID: ${userId}`, userSnap.data()); // Debugging log
       return userSnap.data();
     } else {
       console.error('No such user exists!');
@@ -112,7 +114,7 @@ export const fetchUserCart = async (cartId) => {
     const cartSnap = await getDoc(cartRef);
 
     if (cartSnap.exists()) {
-      console.log(`Cart fetched with ID: ${cartId}`, cartSnap.data());
+      console.log(`Cart fetched with ID: ${cartId}`, cartSnap.data()); // Debugging log
       return cartSnap.data();
     } else {
       console.error('No such cart exists!');
@@ -131,7 +133,7 @@ export const testFirestoreConnection = async () => {
       message: 'This is a test message',
       timestamp: new Date(),
     });
-    console.log('Test document written with ID:', docRef.id);
+    console.log('Test document written with ID:', docRef.id); // Debugging log
   } catch (e) {
     console.error('Error adding test document:', e);
   }
