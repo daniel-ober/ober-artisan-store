@@ -1,3 +1,5 @@
+// src/components/ProductCard.js
+
 import React from 'react';
 import { useCart } from '../context/CartContext';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
@@ -8,9 +10,7 @@ const ProductCard = ({ product }) => {
 
   const handleAddToCart = () => {
     if (product) {
-      addToCart(product).catch((error) => {
-        console.error('Failed to add product to cart:', error);
-      });
+      addToCart(product);
     } else {
       console.error('Product is not defined');
     }
@@ -20,7 +20,7 @@ const ProductCard = ({ product }) => {
     <div className="product-card">
       <img
         className="product-image"
-        src={product.images?.[0] || '/path/to/placeholder.jpg'}
+        src={product.images?.[0] || 'https://i.imgur.com/eoKsILV.png'}
         alt={product.name}
       />
       <div className="product-info">

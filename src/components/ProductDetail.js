@@ -23,7 +23,7 @@ const ProductDetail = () => {
 
         if (productData) {
           setProduct(productData);
-          setMainImage(productData.images?.[0] || '/path/to/placeholder.jpg');
+          setMainImage(productData.images?.[0] || 'https://i.imgur.com/eoKsILV.png');
 
           // Convert cart object to array for easier handling
           const cartArray = Object.values(cart);
