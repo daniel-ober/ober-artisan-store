@@ -7,6 +7,9 @@ const Cart = () => {
     const { cart, updateQuantity, removeFromCart } = useCart();
 
     const handleQuantityChange = (productId, change) => {
+        // Ensure that cart[productId] exists before attempting to access it
+        if (!cart[productId]) return;
+        
         const currentQuantity = cart[productId].quantity;
         const newQuantity = currentQuantity + change;
 
@@ -19,11 +22,13 @@ const Cart = () => {
     };
 
     const getItemTotal = (item) => {
+        // Ensure item is defined and has necessary properties
+        if (!item || typeof item.price !== 'number' || typeof item.quantity !== 'number') return 0;
         return item.price * item.quantity;
     };
 
     const getTotalAmount = () => {
-        return Object.values(cart).reduce((total, item) => {
+        return Object.values(cart || {}).reduce((total, item) => {
             return total + getItemTotal(item);
         }, 0);
     };
@@ -31,13 +36,16 @@ const Cart = () => {
     return (
         <div className="cart-container">
             <h1>Your Cart</h1>
-            {Object.keys(cart).length === 0 ? (
+            {Object.keys(cart || {}).length === 0 ? (
                 <p>Your cart is empty.</p>
             ) : (
                 <>
                     {Object.values(cart).map((item) => (
                         <div key={item.id} className="cart-item">
-                            <img src={item.images[0]} alt={item.name} className="cart-item-image" />
+                            {/* Ensure item and images[0] are defined */}
+                            {item.images && item.images[0] && (
+                                <img src={item.images[0]} alt={item.name} className="cart-item-image" />
+                            )}
                             <div className="cart-item-details">
                                 <h2>{item.name}</h2>
                                 <p>{item.description}</p>
