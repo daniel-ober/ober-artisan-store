@@ -14,13 +14,16 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      console.log('Auth state changed:', user); // Debugging log
       if (user) {
         const userDoc = await fetchUserDoc(user.uid);
         setIsAdmin(userDoc?.isAdmin || false);
         setUser(user);
+        console.log(`User authenticated: ${user.uid}, Admin: ${isAdmin}`); // Debugging log
       } else {
         setUser(null);
         setIsAdmin(false);
+        console.log('User is not authenticated'); // Debugging log
       }
       setLoading(false);
     });
@@ -30,6 +33,7 @@ export const AuthProvider = ({ children }) => {
 
   const handleSignOut = () => {
     auth.signOut().catch((error) => console.error('Sign out error:', error));
+    console.log('User signed out'); // Debugging log
   };
 
   if (loading) {
