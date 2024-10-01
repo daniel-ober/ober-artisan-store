@@ -66,35 +66,65 @@ app.use('/api/contact', contactRoutes);
 // Route for product handling
 app.use('/api/products', productRoutes);
 
-// Create Checkout Session Route
+ // Create Checkout Session Route
 app.post('/create-checkout-session', async (req, res) => {
-    const { products, userId } = req.body;
+  const { products, userId } = req.body;
 
-    try {
-        const lineItems = products.map(item => {
-            if (!item.price || !item.name) {
-                throw new Error(`Missing price or name for product: ${JSON.stringify(item)}`);
-            }
-            return {
-                price: item.price,
-                quantity: item.quantity,
-            };
-        });
+  try {
+    console.log('Received products:', products); // Log products
 
-        const session = await stripe.checkout.sessions.create({
-            payment_method_types: ['card'],
-            line_items: lineItems,
-            mode: 'payment',
-            success_url: `${process.env.CLIENT_URL}/success?session_id={CHECKOUT_SESSION_ID}&userId=${userId}`,
-            cancel_url: `${process.env.CLIENT_URL}/cart`,
-            metadata: { userId },
-        });
+    // Map through the products array and ensure that price_id is correctly used
+    const lineItems = products.map(item => {
+      if (!item.price || !item.name) {
+        throw new Error(`Missing price or name for product: ${JSON.stringify(item)}`);
+      }
 
-        res.json({ url: session.url });
-    } catch (error) {
-        console.error('Error creating checkout session:', error);
-        res.status(500).json({ error: 'Error creating checkout session' });
-    }
+      return {
+        price: item.price, // Use the price ID from Stripe
+        quantity: item.quantity,
+      };
+    });
+
+    // Create a Checkout Session with Stripe
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ['card'],
+      line_items: lineItems,
+      mode: 'payment',
+      success_url: `${process.env.CLIENT_URL}/success?session_id={CHECKOUT_SESSION_ID}&userId=${userId}`,
+      cancel_url: `${process.env.CLIENT_URL}/cart`,
+      metadata: { userId },
+    });
+
+    res.json({ url: session.url });
+  } catch (error) {
+    console.error('Error creating checkout session:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+// Webhook Endpoint for Stripe
+app.post('/webhook', express.raw({ type: 'application/json' }), (req, res) => {
+  const sig = req.headers['stripe-signature'];
+  let event;
+
+  try {
+    event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
+  } catch (err) {
+    console.error('⚠️  Webhook signature verification failed.', err.message);
+    return res.status(400).send(`Webhook Error: ${err.message}`);
+  }
+
+  switch (event.type) {
+    case 'checkout.session.completed':
+      const session = event.data.object;
+      console.log(`Payment for session ${session.id} succeeded!`);
+      // Fulfill the purchase here
+      break;
+    default:
+      console.log(`Unhandled event type ${event.type}`);
+  }
+
+  res.json({ received: true });
 });
 
 // Sending chat email route
