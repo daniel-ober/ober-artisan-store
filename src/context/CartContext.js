@@ -18,8 +18,10 @@ export const CartProvider = ({ children }) => {
             if (user) {
                 try {
                     const userCart = await fetchUserCart(user.uid);
-                    if (userCart) {
-                        setCart(userCart);
+                    if (userCart && userCart.cart) {
+                        setCart(userCart.cart);  // Accessing the cart data correctly
+                    } else {
+                        setCart({});  // Initialize with empty cart if no cart data
                     }
                 } catch (error) {
                     console.error('Failed to load cart:', error);
@@ -70,8 +72,10 @@ export const CartProvider = ({ children }) => {
                 const cartDoc = await getDoc(cartRef);
 
                 if (cartDoc.exists()) {
+                    // Update the cart object directly, not under another 'cart' field
                     await updateDoc(cartRef, { cart: updatedCart });
                 } else {
+                    // Create a new cart object for the user
                     await setDoc(cartRef, { cart: updatedCart });
                 }
             }
