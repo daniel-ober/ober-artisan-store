@@ -35,7 +35,6 @@ const Home = () => {
     <div className="home-container">
       <h1 className="welcome-message">Welcome to Dan Ober Artisan Drums!</h1>
       <div className="home-content">
-        <CountdownTimer />
         {/* Video section */}
         <div className="video-container">
           <video
@@ -44,13 +43,11 @@ const Home = () => {
             loop
             muted
             playsInline
-            controls
-            onMouseEnter={(e) => e.target.setAttribute('controls', 'controls')}
-            onMouseLeave={(e) => e.target.removeAttribute('controls')}
           >
             <source src="https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/Home%2Fcomingsoon2.mp4?alt=media&token=31ad46c4-2d4c-447a-821e-13547a75a46f" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
+          <CountdownTimer /> {/* Overlay the countdown timer on the video */}
         </div>
         <div className="home-section">
           <img
