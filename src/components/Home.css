@@ -48,6 +48,19 @@
   line-height: 1.6;
 }
 
+/* Video Styles */
+.video-container {
+  margin: 30px 0; /* Add margin to space the video from other elements */
+  max-width: 800px; /* Match the max width of other sections */
+  width: 100%; /* Make it responsive */
+}
+
+.coming-soon-video {
+  width: 100%; /* Make the video responsive */
+  border-radius: 8px; /* Match the image border radius */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Match the image box shadow */
+}
+
 @media (max-width: 768px) {
   .home-paragraph {
     font-size: 1rem;
