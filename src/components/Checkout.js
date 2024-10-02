@@ -1,7 +1,8 @@
+// src/components/Checkout.js
 import React, { useState, useEffect } from 'react';
-import { collection, addDoc } from 'firebase/firestore';
-import { firestore } from '../firebaseConfig';
+import { createOrder } from '../services/firebaseService'; // Import the createOrder function
 import { TextField, Button, Typography } from '@mui/material';
+import CheckoutForm from './CheckoutForm'; // Ensure you're importing the CheckoutForm
 import './Checkout.css';
 
 const Checkout = () => {
@@ -13,6 +14,7 @@ const Checkout = () => {
   });
   const [status, setStatus] = useState('');
   const [loading, setLoading] = useState(false);
+  const [paymentSuccess, setPaymentSuccess] = useState(false); // Track payment success
 
   useEffect(() => {
     const fetchCart = async () => {
@@ -32,22 +34,26 @@ const Checkout = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handlePaymentSuccess = async (paymentMethodId) => {
     setLoading(true);
 
     try {
-      const orderId = Date.now(); // Generate a unique ID based on timestamp
-      await addDoc(collection(firestore, 'orders'), {
-        id: orderId, // Include the generated ID
+      const orderData = {
+        userId: 'user123', // Replace with actual user ID or get from auth
         ...userDetails,
-        cart,
-        placedAt: new Date(),
-      });
+        items: cart, // Use the cart as the items in the order
+        total: cart.reduce((total, item) => total + item.price * item.quantity, 0), // Calculate total price
+        status: 'pending',
+        paymentId: paymentMethodId, // Add payment method ID to order data
+      };
 
-      setStatus('Order placed successfully!');
+      // Call the createOrder function from firebaseConfig.js
+      const orderId = await createOrder(orderData);
+
+      setStatus(`Order placed successfully! Order ID: ${orderId}`);
       setCart([]); // Clear the cart
       localStorage.removeItem('cart'); // Remove cart from local storage
+      setPaymentSuccess(true); // Indicate payment success
     } catch (error) {
       console.error('Error placing order:', error);
       setStatus('Failed to place order. Please try again.');
@@ -61,7 +67,7 @@ const Checkout = () => {
       <Typography variant="h4" component="h1" gutterBottom>
         Checkout
       </Typography>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={(e) => e.preventDefault()}>
         <TextField
           label="Name"
           name="name"
@@ -97,7 +103,7 @@ const Checkout = () => {
           variant="contained"
           color="primary"
           className="checkout-button"
-          disabled={loading}
+          disabled={loading || paymentSuccess} // Disable button if loading or payment is successful
         >
           {loading ? 'Placing Order...' : 'Place Order'}
         </Button>
@@ -107,6 +113,8 @@ const Checkout = () => {
           {status}
         </Typography>
       )}
+      {/* Include the CheckoutForm for payment processing */}
+      <CheckoutForm onPaymentSuccess={handlePaymentSuccess} />
     </div>
   );
 };
