@@ -1,4 +1,5 @@
-/* src/components/CountdownTimer.css */
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital@0;1&family=Lora:wght@400;700&display=swap');
+
 .countdown-timer {
     position: absolute; /* Position it absolutely */
     top: 50%; /* Center vertically */
@@ -8,16 +9,17 @@
     font-size: 1rem;
     background: rgba(0, 0, 0, 0); /* Semi-transparent background for better readability */
     color: whitesmoke; /* Change text color to smokewhite */
-    /* padding: 10px; */
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0); /* Add shadow for depth */
 }
 
 .countdown-timer span {
     margin: 0 5px;
+    font-family: 'Lora', serif; /* Apply Lora font for the timer */
 }
 
 .countdown-timer h2 {
     font-size: 1.75rem;
     margin-bottom: 10px; /* Space below the title */
+    font-family: 'Bodoni Moda', serif; /* Apply Bodoni Moda font for the header */
 }

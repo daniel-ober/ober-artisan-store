@@ -1,8 +1,6 @@
-// src/components/Products.js
 import React, { useEffect, useState } from 'react';
 import { fetchProducts } from '../services/firebaseService';
 import ProductCard from './ProductCard';
-import { useCart } from '../context/CartContext'; 
 import './Products.css';
 
 const Products = () => {
