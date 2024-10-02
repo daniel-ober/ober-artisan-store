@@ -1,75 +1,111 @@
-/* Add styling for the View Details link */
-.view-details-link {
-  display: inline-block;
-  margin-bottom: 10px;
-  color: #007bff;
-  text-decoration: none;
+/* Product Card Styles */
+.product-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* Set to 100% for responsive behavior */
+  max-width: 450px; /* Added max-width for card size control */
+  height: 450px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  padding: 7px;
+  box-sizing: border-box;
+}
+
+.product-image-container {
+  width: 100%; /* Full width of the product card */
+  height: 200px; /* Fixed height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Fit the image without distortion */
+  object-position: top; /* Center the image if cropped */
+}
+
+/* Container for product information */
+.product-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center content horizontally */
+  justify-content: center; /* Center content vertically */
+  flex-grow: 1; /* Allow this section to take available space */
+  padding: 0; /* Removed padding from the product-info */
+}
+
+/* Explicitly style product title */
+.product-title,
+.product-title-custom {
+  font-size: 18px !important; /* Reduce font size with increased specificity */
   font-weight: bold;
-  font-size: 1rem;
+  white-space: nowrap; /* Prevent line break */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Add ellipsis for overflow */
+  height: auto; /* Adjust height to match single line */
+  margin: 10px 0; /* Consistent margin (10px top and bottom) */
+}
+
+.product-title-custom {
+  font-size: 24px !important; /* Ensure size can be adjusted in future */
+  color: #333;
+}
+
+/* Ensure consistent height for product description */
+.product-description {
+  font-size: 16px;
+  color: #666;
+  padding: 5px;
+  height: 50px; /* Fixed height for description */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* Limit description to 2 lines */
+  text-align: center; /* Center text horizontally */
+  line-height: 1.2; /* Aligns text vertically within the height */
+}
+
+/* Change product price color to a more attractive shade */
+.product-info .product-price {
+  font-size: 22px;
+  color: #28a745 !important; /* Bright green color for price, using !important */
+  margin: 10px 0; /* Consistent margin (10px top and bottom) */
+}
+
+.view-details-link {
+  font-size: 16px;
+  color: #007bff;
+  margin: 10px 0; /* Consistent margin (10px top and bottom) */
+  text-decoration: none;
 }
 
 .view-details-link:hover {
   text-decoration: underline;
 }
 
-/* Existing styles */
-.product-card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s, box-shadow 0.3s;
-  background-color: #fff;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.product-card:hover {
-  transform: scale(1.03);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-}
-
-.product-image {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-
-.product-info {
-  padding: 16px;
-  text-align: center;
-}
-
-.product-title {
-  font-size: 1.25rem;
-  margin: 0 0 10px;
-  color: #333;
-}
-
-.product-description {
-  font-size: 1rem;
-  color: #666;
-  margin: 0 0 10px;
-}
-
-.product-price {
-  font-size: 1.125rem;
-  color: #000;
-  margin: 0 0 16px;
-}
-
 .add-to-cart-button {
-  padding: 10px 20px;
-  font-size: 1rem;
-  border: none;
-  border-radius: 4px;
   background-color: #007bff;
-  color: #fff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.2s;
+  width: 100%;
+  margin-top: 10px; /* Add margin for consistency with other elements */
 }
 
 .add-to-cart-button:hover {
   background-color: #0056b3;
+}
+
+/* Media Queries for smaller screens */
+@media (max-width: 768px) {
+  .product-card {
+    width: 100%; /* Make cards take full width on smaller screens */
+  }
 }
