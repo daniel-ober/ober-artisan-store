@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { TextField, Button, Typography, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import { checkAuthentication } from '../authCheck'; 
-import { fetchUserProfile, addInquiry } from '../firebaseService'; 
+import { fetchUserProfile, addInquiry } from '../services/firebaseService'; 
 import { nanoid } from 'nanoid'; 
 import './Contact.css';
 
