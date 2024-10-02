@@ -6,7 +6,7 @@ import { FaArrowLeft } from 'react-icons/fa';
 import './ProductDetail.css';
 
 const ProductDetail = () => {
-    const { id } = useParams(); // Firestore document ID
+    const { id } = useParams();
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -17,14 +17,12 @@ const ProductDetail = () => {
     useEffect(() => {
         const fetchProductData = async () => {
             try {
-                console.log('Fetching product with ID:', id);
                 const productData = await fetchProductById(id);
 
                 if (productData) {
                     setProduct(productData);
                     setMainImage(productData.images?.[0] || 'https://i.imgur.com/eoKsILV.png');
 
-                    // Check if the product is in the cart
                     const cartArray = Object.values(cart);
                     const cartProduct = cartArray.find(item => item.id === id);
                     setInCart(cartProduct || null);
@@ -77,10 +75,10 @@ const ProductDetail = () => {
 
     return (
         <div className="product-detail-container">
-            <Link to="/products" className="back-to-shop-link">
+            {/* <Link to="/products" className="back-to-shop-link">
                 <FaArrowLeft className="back-icon" />
                 Back to Shop/Gallery
-            </Link>
+            </Link> */}
             <div className="product-image-gallery">
                 <img
                     src={mainImage}
