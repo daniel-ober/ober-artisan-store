@@ -1,4 +1,3 @@
-/* src/components/Products.css */
 .products-container {
   padding: 20px;
   background-color: #f8f9fa;
@@ -6,8 +5,10 @@
 
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Minimum width set to 250px */
+  gap: 20px; /* Space between cards */
+  padding: 10px; /* Padding around the grid */
+  justify-items: center; /* Center product cards within their grid cells */
 }
 
 .loading-message {
