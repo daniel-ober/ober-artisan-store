@@ -45,6 +45,7 @@ const ManageOrders = () => {
       <table className="manage-orders-table">
         <thead>
           <tr>
+            <th>Order Date</th> {/* New Column for Order Date */}
             <th>ID</th>
             <th>Customer Name</th>
             <th>Order Total</th>
@@ -55,6 +56,7 @@ const ManageOrders = () => {
         <tbody>
           {orders.map((order) => (
             <tr key={order.id}>
+              <td>{new Date(order.timestamp).toLocaleDateString()}</td> {/* Format the date */}
               <td>{order.id}</td>
               <td>{order.customerName}</td> {/* Adjust based on your order structure */}
               <td>${order.total}</td> {/* Adjust based on your order structure */}
