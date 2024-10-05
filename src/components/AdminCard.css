@@ -1,0 +1,48 @@
+.admin-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 150px; /* Adjust as necessary */
+    height: 150px; /* Adjust as necessary */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .admin-card.selected {
+    background-color: #007bff; /* Highlight color */
+    color: white; /* Text color when selected */
+    transform: scale(1.05); /* Slightly enlarge the card */
+  }
+  
+  .admin-card-icon {
+    font-size: 2rem; /* Adjust as necessary */
+  }
+  
+  .admin-card-title {
+    margin-top: 10px;
+    text-align: center;
+  }
+  
+  /* Styles for Admin Dashboard */
+  .admin-dashboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .admin-card-container {
+    display: flex;
+    justify-content: center; /* Center the cards horizontally */
+    flex-wrap: wrap; /* Allow wrapping to the next line if necessary */
+  }
+  
+  .admin-content-container {
+    margin-top: 20px; /* Space between cards and content */
+    text-align: center; /* Center the content */
+  }
+  
