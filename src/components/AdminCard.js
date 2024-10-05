@@ -1,26 +1,43 @@
-import React from 'react';
+// src/components/AdminCard.js
+
+import React, { useState } from 'react';
 import './AdminCard.css'; // Ensure this path is correct
+import AdminModal from './AdminModal'; // Import the AdminModal component
+import { useAuth } from '../context/AuthContext'; // Import the useAuth hook to access auth context
 
-const AdminCard = ({ title, icon, onClick, isSelected }) => {
-  const handleKeyPress = (event) => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      onClick();
-    }
-  };
+const AdminCard = ({ title, icon, isSelected }) => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalType, setModalType] = useState('');
+    const { isAdmin } = useAuth(); // Access the isAdmin status from the Auth context
 
-  return (
-    <div 
-      className={`admin-card ${isSelected ? 'selected' : ''}`} 
-      onClick={onClick}
-      onKeyPress={handleKeyPress} // Handle keyboard events
-      role="button" // Indicate that this div is a button
-      tabIndex={0} // Make the div focusable
-      aria-pressed={isSelected} // Indicates the button's state
-    >
-      <div className="admin-card-icon">{icon}</div>
-      <h2 className="admin-card-title">{title}</h2>
-    </div>
-  );
+    const handleAddClick = (type) => {
+        setModalType(type);
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setModalType(''); // Reset modal type
+    };
+
+    return (
+        <div className={`admin-card ${isSelected ? 'selected' : ''}`} role="button" tabIndex={0} aria-pressed={isSelected}>
+            <div className="admin-card-icon">{icon}</div>
+            <h2 className="admin-card-title">{title}</h2>
+
+            {isAdmin && ( // Show buttons only if the user is an admin
+                <div className="admin-card-buttons">
+                    <button onClick={() => handleAddClick('user')}>Add User</button>
+                    <button onClick={() => handleAddClick('product')}>Add Product</button>
+                    <button onClick={() => handleAddClick('order')}>Add Order</button>
+                </div>
+            )}
+
+            {isModalOpen && (
+                <AdminModal type={modalType} onClose={closeModal} />
+            )}
+        </div>
+    );
 };
 
 export default AdminCard;

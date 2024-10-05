@@ -1,4 +1,3 @@
-// src/components/ManageOrders.js
 import React, { useEffect, useState } from 'react';
 import { fetchOrders, updateOrderInFirestore } from '../services/orderService';
 import './ManageOrders.css'; // Create this file for styling
@@ -43,6 +42,11 @@ const ManageOrders = () => {
     }
   };
 
+  const handleAddNewOrder = () => {
+    // Logic to open a modal or navigate to an "Add New Order" form
+    alert('Open Add New Order modal');
+  };
+
   if (loading) {
     return <div>Loading orders...</div>;
   }
@@ -54,6 +58,7 @@ const ManageOrders = () => {
   return (
     <div className="manage-orders-container">
       <h1>Manage Orders</h1>
+      <button className="add-new-btn" onClick={handleAddNewOrder}>Add New Order</button>
       <table className="manage-orders-table">
         <thead>
           <tr>
@@ -86,7 +91,6 @@ const ManageOrders = () => {
               </td>
               <td>
                 <button className="view-btn">View</button>
-                {/* Edit button removed */}
               </td>
             </tr>
           ))}
