@@ -2,45 +2,46 @@
   padding: 20px;
 }
 
+.add-new-btn {
+  margin-bottom: 20px;
+  padding: 10px 15px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 .manage-users-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
 }
 
 .manage-users-table th,
 .manage-users-table td {
-  padding: 10px;
   border: 1px solid #ddd;
-  text-align: center;
+  padding: 10px;
+  text-align: left;
 }
 
 .manage-users-table th {
-  background-color: #f2f2f2;
+  background-color: #f4f4f4;
 }
 
-.add-new-btn,
-.edit-btn,
-.delete-btn {
-  padding: 8px 12px;
-  margin: 5px;
-  background-color: #007bff;
-  color: white;
+.edit-btn, .delete-btn {
+  padding: 5px 10px;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
 }
 
 .edit-btn {
-  background-color: #28a745;
+  background-color: #007bff;
+  color: white;
 }
 
 .delete-btn {
   background-color: #dc3545;
-}
-
-.edit-btn:hover,
-.delete-btn:hover,
-.add-new-btn:hover {
-  opacity: 0.8;
+  color: white;
+  margin-left: 10px;
 }
