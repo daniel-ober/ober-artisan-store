@@ -3,44 +3,53 @@ import { updateUserInFirestore } from '../services/userService'; // Import your 
 import './EditUserModal.css';
 
 const EditUserModal = ({ user, onClose, onUserUpdated }) => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [smsNotification, setSmsNotification] = useState(false);
-  const [emailNotification, setEmailNotification] = useState(false);
-  const [isBlocked, setIsBlocked] = useState(false);
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    smsNotification: false,
+    emailNotification: false,
+    isBlocked: false,
+  });
 
   useEffect(() => {
     if (user) {
-      setFirstName(user.firstName);
-      setLastName(user.lastName);
-      setEmail(user.email);
-      setPhone(user.phone || '');
-      setSmsNotification(user.smsNotification);
-      setEmailNotification(user.emailNotification);
-      setIsBlocked(user.isBlocked);
+      setFormData({
+        firstName: user.firstName || '',
+        lastName: user.lastName || '',
+        email: user.email || '',
+        phone: user.phone || '',
+        smsNotification: user.smsNotification || false,
+        emailNotification: user.emailNotification || false,
+        isBlocked: user.isBlocked || false,
+      });
     }
   }, [user]);
 
+  const handleChange = (e) => {
+    const { name, type, checked, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: type === 'checkbox' ? checked : value,
+    }));
+  };
+
   const handleSave = async () => {
-    const updatedUserData = {
-      firstName,
-      lastName,
-      email,
-      phone,
-      smsNotification,
-      emailNotification,
-      isBlocked,
-    };
+    const { firstName, lastName, email } = formData;
+
+    if (!firstName || !lastName || !email) {
+      alert('Please fill in all required fields.');
+      return;
+    }
 
     try {
-      await updateUserInFirestore(user.id, updatedUserData);
-      onUserUpdated({ ...user, ...updatedUserData }); // Call the onUserUpdated function
+      await updateUserInFirestore(user.id, formData);
+      onUserUpdated({ ...user, ...formData }); // Call the onUserUpdated function
       onClose(); // Close the modal
     } catch (error) {
       console.error('Error saving user:', error);
-      alert('Failed to save user. Please try again.');
+      alert('Failed to save user. Please try again.'); // Keep the existing error handling
     }
   };
 
@@ -59,7 +68,7 @@ const EditUserModal = ({ user, onClose, onUserUpdated }) => {
         onClick={onClose} 
         onKeyDown={handleKeyDown} 
         aria-label="Close modal"
-      /> {/* Overlay for closing the modal */}
+      />
       <div className="edit-user-modal" role="dialog" aria-labelledby="modal-title" aria-modal="true">
         <h2 id="modal-title">Edit User</h2>
         <div className="modal-content">
@@ -67,56 +76,66 @@ const EditUserModal = ({ user, onClose, onUserUpdated }) => {
             First Name:
             <input 
               type="text" 
-              value={firstName} 
-              onChange={(e) => setFirstName(e.target.value)} 
+              name="firstName" // Adding name attribute for handling
+              value={formData.firstName} 
+              onChange={handleChange} 
+              required // Making it required for better UX
             />
           </label>
           <label>
             Last Name:
             <input 
               type="text" 
-              value={lastName} 
-              onChange={(e) => setLastName(e.target.value)} 
+              name="lastName" // Adding name attribute for handling
+              value={formData.lastName} 
+              onChange={handleChange} 
+              required // Making it required for better UX
             />
           </label>
           <label>
             Email:
             <input 
               type="email" 
-              value={email} 
-              onChange={(e) => setEmail(e.target.value)} 
+              name="email" // Adding name attribute for handling
+              value={formData.email} 
+              onChange={handleChange} 
+              required // Making it required for better UX
             />
           </label>
           <label>
             Phone:
             <input 
               type="text" 
-              value={phone} 
-              onChange={(e) => setPhone(e.target.value)} 
+              name="phone" // Adding name attribute for handling
+              value={formData.phone} 
+              onChange={handleChange} 
             />
           </label>
           <label>
             SMS Notifications:
             <input 
               type="checkbox" 
-              checked={smsNotification} 
-              onChange={(e) => setSmsNotification(e.target.checked)} 
+              name="smsNotification" // Adding name attribute for handling
+              checked={formData.smsNotification} 
+              onChange={handleChange} 
             />
           </label>
           <label>
             Email Notifications:
             <input 
               type="checkbox" 
-              checked={emailNotification} 
-              onChange={(e) => setEmailNotification(e.target.checked)} 
+              name="emailNotification" // Adding name attribute for handling
+              checked={formData.emailNotification} 
+              onChange={handleChange} 
             />
           </label>
           <label>
             Is Blocked:
             <input 
               type="checkbox" 
-              checked={isBlocked} 
-              onChange={(e) => setIsBlocked(e.target.checked)} 
+              name="isBlocked" // Adding name attribute for handling
+              checked={formData.isBlocked} 
+              onChange={handleChange} 
             />
           </label>
         </div>

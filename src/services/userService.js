@@ -82,5 +82,6 @@ export const deleteUserFromFirestore = async (userId) => {
     console.log('User deleted from Firestore');
   } catch (error) {
     console.error('Error deleting user from Firestore:', error);
+    throw error; // Rethrow for handling in component
   }
 };
