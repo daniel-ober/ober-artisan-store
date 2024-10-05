@@ -1,120 +1,129 @@
-import React, { useEffect, useState } from 'react';
-import { fetchUserDoc, updateUserInFirestore, deleteUserFromFirestore } from '../services/userService';
+import React, { useState, useEffect } from 'react';
+import { updateUserInFirestore } from '../services/userService'; // Import your update function
+import './EditUserModal.css';
 
-const EditUserModal = ({ userId, onClose, onUserUpdated }) => {
-  const [user, setUser] = useState({
-    email: '',
-    firstName: '',
-    lastName: '',
-    phone: '',
-    emailNotification: false,
-    smsNotification: false,
-  });
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+const EditUserModal = ({ user, onClose, onUserUpdated }) => {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [smsNotification, setSmsNotification] = useState(false);
+  const [emailNotification, setEmailNotification] = useState(false);
+  const [isBlocked, setIsBlocked] = useState(false);
 
   useEffect(() => {
-    const getUser = async () => {
-      try {
-        const userData = await fetchUserDoc(userId);
-        setUser(userData);
-      } catch (error) {
-        setError('Error fetching user: ' + error.message);
-      } finally {
-        setLoading(false);
-      }
+    if (user) {
+      setFirstName(user.firstName);
+      setLastName(user.lastName);
+      setEmail(user.email);
+      setPhone(user.phone || '');
+      setSmsNotification(user.smsNotification);
+      setEmailNotification(user.emailNotification);
+      setIsBlocked(user.isBlocked);
+    }
+  }, [user]);
+
+  const handleSave = async () => {
+    const updatedUserData = {
+      firstName,
+      lastName,
+      email,
+      phone,
+      smsNotification,
+      emailNotification,
+      isBlocked,
     };
-    getUser();
-  }, [userId]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
     try {
-      await updateUserInFirestore(userId, user);
-      onUserUpdated();
-      onClose();
+      await updateUserInFirestore(user.id, updatedUserData);
+      onUserUpdated({ ...user, ...updatedUserData }); // Call the onUserUpdated function
+      onClose(); // Close the modal
     } catch (error) {
-      setError('Error updating user: ' + error.message);
+      console.error('Error saving user:', error);
+      alert('Failed to save user. Please try again.');
     }
   };
 
-  const handleDelete = async () => {
-    try {
-      await deleteUserFromFirestore(userId);
-      onUserUpdated();
+  const handleKeyDown = (event) => {
+    if (event.key === 'Escape') {
       onClose();
-    } catch (error) {
-      setError('Error deleting user: ' + error.message);
     }
   };
-
-  if (loading) {
-    return <div>Loading user details...</div>;
-  }
-
-  if (error) {
-    return <div>{error}</div>;
-  }
 
   return (
-    <div className="modal-overlay">
-      <div className="modal-content">
-        <h2>Edit User</h2>
-        <form onSubmit={handleSubmit}>
-          <input 
-            type="email" 
-            name="email" 
-            value={user.email} 
-            onChange={(e) => setUser({ ...user, email: e.target.value })} 
-            placeholder="Email" 
-            required 
-          />
-          <input 
-            type="text" 
-            name="firstName" 
-            value={user.firstName} 
-            onChange={(e) => setUser({ ...user, firstName: e.target.value })} 
-            placeholder="First Name" 
-            required 
-          />
-          <input 
-            type="text" 
-            name="lastName" 
-            value={user.lastName} 
-            onChange={(e) => setUser({ ...user, lastName: e.target.value })} 
-            placeholder="Last Name" 
-            required 
-          />
-          <input 
-            type="text" 
-            name="phone" 
-            value={user.phone} 
-            onChange={(e) => setUser({ ...user, phone: e.target.value })} 
-            placeholder="Phone" 
-            required 
-          />
+    <>
+      <div 
+        className="modal-overlay" 
+        role="button" 
+        tabIndex={0} 
+        onClick={onClose} 
+        onKeyDown={handleKeyDown} 
+        aria-label="Close modal"
+      /> {/* Overlay for closing the modal */}
+      <div className="edit-user-modal" role="dialog" aria-labelledby="modal-title" aria-modal="true">
+        <h2 id="modal-title">Edit User</h2>
+        <div className="modal-content">
           <label>
-            Email Notifications:
+            First Name:
             <input 
-              type="checkbox" 
-              checked={user.emailNotification} 
-              onChange={(e) => setUser({ ...user, emailNotification: e.target.checked })} 
+              type="text" 
+              value={firstName} 
+              onChange={(e) => setFirstName(e.target.value)} 
+            />
+          </label>
+          <label>
+            Last Name:
+            <input 
+              type="text" 
+              value={lastName} 
+              onChange={(e) => setLastName(e.target.value)} 
+            />
+          </label>
+          <label>
+            Email:
+            <input 
+              type="email" 
+              value={email} 
+              onChange={(e) => setEmail(e.target.value)} 
+            />
+          </label>
+          <label>
+            Phone:
+            <input 
+              type="text" 
+              value={phone} 
+              onChange={(e) => setPhone(e.target.value)} 
             />
           </label>
           <label>
             SMS Notifications:
             <input 
               type="checkbox" 
-              checked={user.smsNotification} 
-              onChange={(e) => setUser({ ...user, smsNotification: e.target.checked })} 
+              checked={smsNotification} 
+              onChange={(e) => setSmsNotification(e.target.checked)} 
             />
           </label>
-          <button type="submit">Update User</button>
-          <button type="button" onClick={handleDelete}>Delete User</button>
-          <button type="button" onClick={onClose}>Cancel</button>
-        </form>
+          <label>
+            Email Notifications:
+            <input 
+              type="checkbox" 
+              checked={emailNotification} 
+              onChange={(e) => setEmailNotification(e.target.checked)} 
+            />
+          </label>
+          <label>
+            Is Blocked:
+            <input 
+              type="checkbox" 
+              checked={isBlocked} 
+              onChange={(e) => setIsBlocked(e.target.checked)} 
+            />
+          </label>
+        </div>
+        <button onClick={handleSave}>Save</button>
+        <button onClick={onClose}>Cancel</button>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -1,14 +1,29 @@
-// src/services/userService.js
-import { firestore } from '../firebaseConfig'; // Ensure correct path to your firebaseConfig
-import { doc, setDoc, getDoc, collection, getDocs, deleteDoc } from 'firebase/firestore';
-import { updateDoc } from 'firebase/firestore';
+import { auth, firestore } from '../firebaseConfig'; // Ensure correct path to your firebaseConfig
+import { doc, setDoc, getDoc, collection, getDocs, deleteDoc, updateDoc } from 'firebase/firestore';
+import { createUserWithEmailAndPassword } from 'firebase/auth'; // Import to create users
+
+// Create a new user with email and password
+export const registerUser = async (email, password, userData) => {
+  try {
+    // Create user in Firebase Authentication
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const userId = userCredential.user.uid; // Get the user's unique ID
+
+    // Add user data to Firestore
+    await addUserToFirestore(userId, userData);
+    console.log('User registered and added to Firestore');
+  } catch (error) {
+    console.error('Error registering user:', error);
+    throw error; // Rethrow for handling in component
+  }
+};
 
 // Update user data in Firestore
 export const updateUserInFirestore = async (userId, userData) => {
   try {
     const userDocRef = doc(firestore, 'users', userId);
     await updateDoc(userDocRef, userData);
-    console.log('User updated in Firestore');
+    console.log('User updated in Firestore:', userData); // Log the updated user data
   } catch (error) {
     console.error('Error updating user in Firestore:', error);
     throw error; // Rethrow for handling in component

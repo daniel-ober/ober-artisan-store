@@ -1,8 +1,8 @@
 /* Main admin dashboard container */
 .admin-dashboard {
-  max-width: 800px; /* Same max-width as account page */
+  max-width: 1000px; /* Expand max-width for a wider dashboard */
   margin: 0 auto; /* Center the dashboard */
-  padding: 20px;
+  padding: 30px; /* Increased padding for more space */
   background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -15,7 +15,7 @@
   flex-wrap: wrap; /* Wrap cards on smaller screens */
   justify-content: center; /* Center the cards */
   margin-top: 20px;
-  gap: 20px; /* Space between cards */
+  gap: 30px; /* Increase space between cards */
 }
 
 /* Individual card styling */
@@ -23,12 +23,12 @@
   background-color: #f0f0f0; /* Light background for cards */
   border: 1px solid #ccc; /* Light border */
   border-radius: 8px; /* Rounded corners */
-  padding: 20px;
+  padding: 25px; /* Increased padding */
   text-align: center;
   cursor: pointer;
   transition: background-color 0.3s;
-  min-width: 150px;
-  max-width: 200px;
+  min-width: 180px; /* Increased minimum width */
+  max-width: 250px; /* Increased maximum width */
 }
 
 /* Card hover effect */
@@ -38,12 +38,12 @@
 
 /* Component container with scrollable content */
 .component-container {
-  margin-top: 20px; /* Space between cards and active component */
-  padding: 20px;
+  margin-top: 30px; /* Space between cards and active component */
+  padding: 25px; /* Increased padding */
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border: 1px solid #ddd;
-  max-height: 400px; /* Set a max height for the container */
+  max-height: 500px; /* Set a max height for the container */
   overflow: auto; /* Allow scrolling if content exceeds the container height */
 }

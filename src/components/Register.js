@@ -83,16 +83,15 @@ const Register = () => {
     }
 
     try {
-      // Create user with email and password
-      const userCredential = await createUserWithEmailAndPassword(
+      // Create user without affecting the admin's authentication state
+      const newUserCredential = await createUserWithEmailAndPassword(
         auth,
         formData.email,
         formData.password
       );
-      const user = userCredential.user;
 
-      // Use the UID from Firebase Authentication
-      const uid = user.uid;
+      // Use the UID from the newly created user
+      const uid = newUserCredential.user.uid; // No admin session is affected
 
       // Store additional user information in Firestore
       await setDoc(doc(firestore, 'users', uid), {
@@ -133,7 +132,7 @@ const Register = () => {
 
   const handleCloseSuccessDialog = () => {
     setOpenSuccessDialog(false);
-    navigate('/account'); // Redirect to account settings page after clicking "OK"
+    navigate('/admin/manage-users'); // Redirect to Manage Users page after clicking "OK"
   };
 
   return (
@@ -198,6 +197,7 @@ const Register = () => {
                 <IconButton
                   onClick={() => setShowPassword(!showPassword)}
                   edge="end"
+                  aria-label="toggle password visibility"
                 >
                   {showPassword ? <VisibilityOff /> : <Visibility />}
                 </IconButton>
@@ -221,6 +221,7 @@ const Register = () => {
                 <IconButton
                   onClick={() => setShowPassword(!showPassword)}
                   edge="end"
+                  aria-label="toggle password visibility"
                 >
                   {showPassword ? <VisibilityOff /> : <Visibility />}
                 </IconButton>
@@ -287,45 +288,47 @@ const Register = () => {
           }
           label={
             <span>
-              I agree to the{' '}
-              <Button onClick={handleOpenTerms} color="primary">
+              I have read and agree to the{' '}
+              <span
+                role="button"
+                tabIndex="0"
+                className="terms-link"
+                onClick={handleOpenTerms}
+                onKeyDown={(e) => e.key === 'Enter' && handleOpenTerms()}
+                onKeyPress={(e) => e.key === 'Enter' && handleOpenTerms()}
+              >
                 Terms of Service
-              </Button>{' '}
+              </span>{' '}
               and{' '}
-              <Button onClick={handleOpenPrivacy} color="primary">
+              <span
+                role="button"
+                tabIndex="0"
+                className="privacy-link"
+                onClick={handleOpenPrivacy}
+                onKeyDown={(e) => e.key === 'Enter' && handleOpenPrivacy()}
+                onKeyPress={(e) => e.key === 'Enter' && handleOpenPrivacy()}
+              >
                 Privacy Policy
-              </Button>
+              </span>
               .
             </span>
           }
         />
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          className="register-button"
-        >
-          Register
-        </Button>
-
         {error && (
           <Typography color="error" variant="body2">
             {error}
           </Typography>
         )}
-
-        {status && (
-          <Typography color="primary" variant="body2">
-            {status}
-          </Typography>
-        )}
+        <Button type="submit" variant="contained" color="primary" fullWidth>
+          Register
+        </Button>
       </form>
 
       {/* Success Dialog */}
       <Dialog open={openSuccessDialog} onClose={handleCloseSuccessDialog}>
-        <DialogTitle>Success</DialogTitle>
+        <DialogTitle>Registration Successful</DialogTitle>
         <DialogContent>
-          <Typography>Your account has been created successfully!</Typography>
+          <Typography variant="body1">{status}</Typography>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseSuccessDialog} color="primary">
@@ -335,15 +338,12 @@ const Register = () => {
       </Dialog>
 
       {/* Terms of Service Dialog */}
-      <Dialog open={openTerms} onClose={handleCloseTerms} maxWidth="md" fullWidth>
+      <Dialog open={openTerms} onClose={handleCloseTerms}>
         <DialogTitle>Terms of Service</DialogTitle>
-        <DialogContent>
-          <TermsOfService ref={termsRef} />
+        <DialogContent ref={termsRef}>
+          <TermsOfService printDocument={printDocument} />
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => printDocument(termsRef)} color="primary">
-            Print
-          </Button>
           <Button onClick={handleCloseTerms} color="primary">
             Close
           </Button>
@@ -351,15 +351,12 @@ const Register = () => {
       </Dialog>
 
       {/* Privacy Policy Dialog */}
-      <Dialog open={openPrivacy} onClose={handleClosePrivacy} maxWidth="md" fullWidth>
+      <Dialog open={openPrivacy} onClose={handleClosePrivacy}>
         <DialogTitle>Privacy Policy</DialogTitle>
-        <DialogContent>
-          <PrivacyPolicy ref={privacyRef} />
+        <DialogContent ref={privacyRef}>
+          <PrivacyPolicy printDocument={printDocument} />
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => printDocument(privacyRef)} color="primary">
-            Print
-          </Button>
           <Button onClick={handleClosePrivacy} color="primary">
             Close
           </Button>

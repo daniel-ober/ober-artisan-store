@@ -1,16 +1,28 @@
 .admin-container {
-    display: flex;
-    border: 1px solid #000; /* Add border to make it visible */
-  }
-  
-  .admin-navbar {
-    width: 200px;
-    background-color: #333;
-    color: white;
-  }
-  
-  .admin-content {
-    flex-grow: 1;
-    padding: 20px;
-  }
-  
+  display: flex;
+  border: 1px solid #000; /* Add border to make it visible */
+  height: 100vh; /* Make the admin container full height of the viewport */
+  overflow: hidden; /* Prevent overflow */
+}
+
+.admin-navbar {
+  width: 250px; /* Slightly wider navbar for more space */
+  background-color: #333;
+  color: white;
+  padding: 20px; /* Padding for better spacing */
+}
+
+.admin-navbar ul {
+  list-style-type: none; /* Remove bullet points */
+  padding: 0; /* Remove padding */
+}
+
+.admin-navbar li {
+  margin-bottom: 15px; /* Space between navbar links */
+}
+
+.admin-content {
+  flex-grow: 1;
+  padding: 30px; /* Increased padding for content area */
+  overflow: auto; /* Allow scrolling in the content area */
+}
