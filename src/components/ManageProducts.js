@@ -1,18 +1,22 @@
+// src/components/ManageProducts.js
 import React, { useEffect, useState } from 'react';
-import { fetchProducts, deleteProduct } from '../services/productService'; 
-import { Link } from 'react-router-dom';
-import './ManageProducts.css';
+import { fetchProducts, deleteProduct } from '../services/productService';
+import './ManageProducts.css'; // Create this file for styling
 
 const ManageProducts = () => {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const getProducts = async () => {
       try {
-        const productsData = await fetchProducts(); 
+        const productsData = await fetchProducts();
         setProducts(productsData);
       } catch (error) {
-        console.error('Error fetching products:', error);
+        setError('Error fetching products: ' + error.message);
+      } finally {
+        setLoading(false);
       }
     };
     getProducts();
@@ -21,11 +25,19 @@ const ManageProducts = () => {
   const handleDelete = async (productId) => {
     try {
       await deleteProduct(productId);
-      setProducts(products.filter((product) => product.id !== productId)); 
+      setProducts((prevProducts) => prevProducts.filter(product => product.id !== productId));
     } catch (error) {
-      console.error('Error deleting product:', error);
+      setError('Error deleting product: ' + error.message);
     }
   };
+
+  if (loading) {
+    return <div>Loading products...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   return (
     <div className="manage-products-container">
@@ -35,6 +47,7 @@ const ManageProducts = () => {
           <tr>
             <th>ID</th>
             <th>Name</th>
+            <th>Description</th>
             <th>Price</th>
             <th>Actions</th>
           </tr>
@@ -44,14 +57,11 @@ const ManageProducts = () => {
             <tr key={product.id}>
               <td>{product.id}</td>
               <td>{product.name}</td>
+              <td>{product.description}</td>
               <td>${product.price}</td>
               <td>
-                <Link to={`/admin/products/edit/${product.id}`}>
-                  <button className="edit-btn">Edit</button>
-                </Link>
-                <button className="delete-btn" onClick={() => handleDelete(product.id)}>
-                  Delete
-                </button>
+                <button className="view-btn">View</button>
+                <button className="delete-btn" onClick={() => handleDelete(product.id)}>Delete</button>
               </td>
             </tr>
           ))}
