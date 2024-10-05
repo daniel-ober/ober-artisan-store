@@ -16,6 +16,7 @@ import TransactionSuccess from './components/TransactionSuccess'; // Adjust the 
 import AdminDashboard from './components/AdminDashboard';
 import ManageUsers from './components/ManageUsers';
 import ManageProducts from './components/ManageProducts';
+import ManageOrders from './components/ManageOrders';
 import SiteSettings from './components/SiteSettings';
 import CustomShopAssistant from './components/CustomShopAssistant';
 import PrivacyPolicy from './components/PrivacyPolicy';
@@ -57,6 +58,7 @@ function App() {
           <Route path="/admin" element={<PrivateRoute element={<AdminDashboard />} adminOnly />} />
           <Route path="/admin/users" element={<PrivateRoute element={<ManageUsers />} adminOnly />} />
           <Route path="/admin/products" element={<PrivateRoute element={<ManageProducts />} adminOnly />} />
+          <Route path="/admin/orders" element={<PrivateRoute element={<ManageOrders />} adminOnly />} />
           <Route path="/admin/settings" element={<PrivateRoute element={<SiteSettings />} adminOnly />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />

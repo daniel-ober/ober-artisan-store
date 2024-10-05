@@ -15,6 +15,9 @@ const AdminDashboard = () => {
             <Link to="/admin/products" className="admin-link">Manage Products</Link>
           </li>
           <li>
+            <Link to="/admin/orders" className="admin-link">Manage Orders</Link>
+          </li>
+          <li>
             <Link to="/admin/settings" className="admin-link">Site Settings</Link>
           </li>
         </ul>
