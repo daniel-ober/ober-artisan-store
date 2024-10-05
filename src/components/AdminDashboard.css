@@ -36,6 +36,13 @@
   background-color: #e0e0e0;
 }
 
+/* Icon styling to increase size */
+.admin-card-icon {
+  font-size: 40px; /* Increased font size for icons */
+  margin-bottom: 15px; /* Space between icon and title */
+  color: #555; /* Optional: Change color for better visibility */
+}
+
 /* Component container with scrollable content */
 .component-container {
   margin-top: 30px; /* Space between cards and active component */
