@@ -1,6 +1,19 @@
 // src/services/userService.js
-import { firestore } from '../firebaseConfig'; // Single import statement
-import { doc, setDoc, getDoc, collection, getDocs } from 'firebase/firestore';
+import { firestore } from '../firebaseConfig'; // Ensure correct path to your firebaseConfig
+import { doc, setDoc, getDoc, collection, getDocs, deleteDoc } from 'firebase/firestore';
+import { updateDoc } from 'firebase/firestore';
+
+// Update user data in Firestore
+export const updateUserInFirestore = async (userId, userData) => {
+  try {
+    const userDocRef = doc(firestore, 'users', userId);
+    await updateDoc(userDocRef, userData);
+    console.log('User updated in Firestore');
+  } catch (error) {
+    console.error('Error updating user in Firestore:', error);
+    throw error; // Rethrow for handling in component
+  }
+};
 
 // Add user to Firestore
 export const addUserToFirestore = async (userId, userData) => {
@@ -21,10 +34,11 @@ export const fetchUsers = async () => {
       id: doc.id,
       ...doc.data(),
     }));
+    console.log('Fetched users:', users); // Log fetched users
     return users;
   } catch (error) {
     console.error('Error fetching users:', error);
-    return [];
+    throw error; // Rethrow the error for handling in the component
   }
 };
 
@@ -43,5 +57,15 @@ export const fetchUserDoc = async (userId) => {
   } catch (error) {
     console.error('Error fetching user document:', error);
     return null;
+  }
+};
+
+// Delete user from Firestore
+export const deleteUserFromFirestore = async (userId) => {
+  try {
+    await deleteDoc(doc(firestore, 'users', userId));
+    console.log('User deleted from Firestore');
+  } catch (error) {
+    console.error('Error deleting user from Firestore:', error);
   }
 };

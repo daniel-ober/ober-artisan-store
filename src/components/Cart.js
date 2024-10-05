@@ -8,7 +8,7 @@ import './Cart.css';
 const stripePromise = loadStripe('your-publishable-key-here');
 
 const Cart = () => {
-    const { cart, updateQuantity, removeFromCart } = useCart();
+    const { cart, updateQuantity, removeFromCart, clearCart } = useCart(); // Add clearCart function
     const { user } = useAuth();
     const [loading, setLoading] = useState(false);
 
@@ -55,6 +55,9 @@ const Cart = () => {
 
             const session = await response.json();
             window.location.href = session.url;
+
+            // Clear the cart after a successful purchase
+            clearCart();
         } catch (error) {
             console.error('Failed to redirect to checkout:', error);
         } finally {
@@ -77,8 +80,9 @@ const Cart = () => {
             ) : (
                 <>
                     {Object.values(cart).map((item) => {
-                        // Debugging: Log each item
+                        // Debugging: Log each item and its price
                         console.log("Cart item details:", item);
+                        console.log("Item price:", item.price, "Type:", typeof item.price);
                         
                         return (
                             <div key={item.id} className="cart-item"> {/* Ensure item.id is unique */}
@@ -88,7 +92,7 @@ const Cart = () => {
                                 <div className="cart-item-details">
                                     <h2>{item.name || 'Unnamed Product'}</h2> {/* Fallback name */}
                                     <p>{item.description || 'No description available.'}</p>
-                                    <p>${(item.price || 0).toFixed(2)}</p> {/* Safe toFixed use */}
+                                    <p>${typeof item.price === 'number' ? item.price.toFixed(2) : 'N/A'}</p> {/* Safe toFixed use */}
 
                                     <div className="quantity-control">
                                         <button 
