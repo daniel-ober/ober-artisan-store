@@ -93,7 +93,6 @@ const ManageProducts = () => {
                 <td>{product.price}</td>
                 <td>
                   <button className="edit-btn" onClick={() => openEditModal(product.id)}>Edit</button>
-                  <button className="delete-btn" onClick={() => handleDelete(product.id)}>Delete</button>
                 </td>
               </tr>
             ))

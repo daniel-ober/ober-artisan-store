@@ -7,8 +7,8 @@ const ManageUsers = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [selectedUser, setSelectedUser] = useState(null); // Track selected user for editing
-  const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const getUsers = async () => {
@@ -34,18 +34,17 @@ const ManageUsers = () => {
   };
 
   const handleEdit = (user) => {
-    setSelectedUser(user); // Set the selected user for editing
-    setIsModalOpen(true); // Open the modal
+    setSelectedUser(user);
+    setIsModalOpen(true);
   };
 
   const handleUserUpdated = (updatedUser) => {
-    // Update the user in the state
     setUsers((prevUsers) => 
       prevUsers.map((user) => 
         user.id === updatedUser.id ? updatedUser : user
       )
     );
-    setIsModalOpen(false); // Close the modal after update
+    setIsModalOpen(false);
   };
 
   const handleAddNewUser = () => {
@@ -91,8 +90,7 @@ const ManageUsers = () => {
                 <td>{user.emailNotification ? 'Yes' : 'No'}</td>
                 <td>{user.isBlocked ? 'Yes' : 'No'}</td>
                 <td>
-                  <button className="edit-btn" onClick={() => handleEdit(user)}>Edit</button>
-                  <button className="delete-btn" onClick={() => handleDelete(user.id)}>Delete</button>
+                  <button type="button" className="edit-btn" onClick={() => handleEdit(user)}>Edit</button>
                 </td>
               </tr>
             ))
@@ -107,8 +105,8 @@ const ManageUsers = () => {
       {isModalOpen && (
         <EditUserModal
           user={selectedUser}
-          onClose={() => setIsModalOpen(false)} // Close the modal
-          onUserUpdated={handleUserUpdated} // Pass the handler to update user in the parent
+          onClose={() => setIsModalOpen(false)} 
+          onUserUpdated={handleUserUpdated} 
         />
       )}
     </div>
