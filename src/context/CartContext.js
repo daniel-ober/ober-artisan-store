@@ -125,12 +125,27 @@ export const CartProvider = ({ children }) => {
         }
     };
 
+    // New function to clear the cart
+    const clearCart = async () => {
+        setCart({}); // Resets the cart to an empty object
+
+        try {
+            if (user) {
+                const cartRef = doc(firestore, 'carts', user.uid);
+                await updateDoc(cartRef, { cart: {} }); // Clear the cart in Firestore
+            }
+        } catch (error) {
+            console.error('Error clearing cart:', error);
+            setError('Error clearing cart. Please try again later.');
+        }
+    };
+
     useEffect(() => {
         console.log("Cart updated:", cart);
     }, [cart]);
 
     return (
-        <CartContext.Provider value={{ cart, addToCart, updateQuantity, removeFromCart, loading, error }}>
+        <CartContext.Provider value={{ cart, addToCart, updateQuantity, removeFromCart, clearCart, loading, error }}>
             {children}
         </CartContext.Provider>
     );

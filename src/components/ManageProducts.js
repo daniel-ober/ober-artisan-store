@@ -1,12 +1,14 @@
-// src/components/ManageProducts.js
 import React, { useEffect, useState } from 'react';
-import { fetchProducts, deleteProduct } from '../services/productService';
-import './ManageProducts.css'; // Create this file for styling
+import { fetchProducts, deleteProductFromFirestore } from '../services/productService';
+import EditProductModal from './EditProductModal';
+import './ManageProducts.css';
 
 const ManageProducts = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [editProductId, setEditProductId] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const getProducts = async () => {
@@ -14,6 +16,7 @@ const ManageProducts = () => {
         const productsData = await fetchProducts();
         setProducts(productsData);
       } catch (error) {
+        console.error('Error fetching products:', error);
         setError('Error fetching products: ' + error.message);
       } finally {
         setLoading(false);
@@ -24,11 +27,35 @@ const ManageProducts = () => {
 
   const handleDelete = async (productId) => {
     try {
-      await deleteProduct(productId);
+      await deleteProductFromFirestore(productId);
       setProducts((prevProducts) => prevProducts.filter(product => product.id !== productId));
     } catch (error) {
+      console.error('Error deleting product:', error);
       setError('Error deleting product: ' + error.message);
     }
+  };
+
+  const openEditModal = (productId) => {
+    setEditProductId(productId);
+    setIsModalOpen(true);
+  };
+
+  const closeEditModal = () => {
+    setEditProductId(null);
+    setIsModalOpen(false);
+  };
+
+  const handleProductUpdated = () => {
+    // Refresh the product list after an update
+    const getProducts = async () => {
+      try {
+        const productsData = await fetchProducts();
+        setProducts(productsData);
+      } catch (error) {
+        console.error('Error refreshing product list:', error);
+      }
+    };
+    getProducts();
   };
 
   if (loading) {
@@ -45,7 +72,6 @@ const ManageProducts = () => {
       <table className="manage-products-table">
         <thead>
           <tr>
-            <th>ID</th>
             <th>Name</th>
             <th>Description</th>
             <th>Price</th>
@@ -53,20 +79,32 @@ const ManageProducts = () => {
           </tr>
         </thead>
         <tbody>
-          {products.map((product) => (
-            <tr key={product.id}>
-              <td>{product.id}</td>
-              <td>{product.name}</td>
-              <td>{product.description}</td>
-              <td>${product.price}</td>
-              <td>
-                <button className="view-btn">View</button>
-                <button className="delete-btn" onClick={() => handleDelete(product.id)}>Delete</button>
-              </td>
+          {products.length > 0 ? (
+            products.map((product) => (
+              <tr key={product.id}>
+                <td>{product.name}</td>
+                <td>{product.description}</td>
+                <td>{product.price}</td>
+                <td>
+                  <button className="edit-btn" onClick={() => openEditModal(product.id)}>Edit</button>
+                  <button className="delete-btn" onClick={() => handleDelete(product.id)}>Delete</button>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="4">No products found.</td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
+      {isModalOpen && (
+        <EditProductModal 
+          productId={editProductId}
+          onClose={closeEditModal}
+          onProductUpdated={handleProductUpdated}
+        />
+      )}
     </div>
   );
 };

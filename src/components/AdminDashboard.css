@@ -1,38 +1,49 @@
-.admin-dashboard-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    font-family: 'Roboto', sans-serif;
-  }
-  
-  .admin-dashboard-header {
-    font-size: 2.5rem;
-    color: #333;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  .admin-link-list {
-    list-style: none;
-    padding: 0;
-    text-align: center;
-  }
-  
-  .admin-link-list li {
-    margin: 15px 0;
-  }
-  
-  .admin-link {
-    font-size: 1.2rem;
-    color: #007bff;
-    text-decoration: none;
-    transition: color 0.3s;
-  }
-  
-  .admin-link:hover {
-    color: #0056b3;
-  }
-  
+/* Main admin dashboard container */
+.admin-dashboard {
+  max-width: 800px; /* Same max-width as account page */
+  margin: 0 auto; /* Center the dashboard */
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* Ensure content does not overflow */
+}
+
+/* Cards container styling */
+.admin-cards {
+  display: flex;
+  flex-wrap: wrap; /* Wrap cards on smaller screens */
+  justify-content: center; /* Center the cards */
+  margin-top: 20px;
+  gap: 20px; /* Space between cards */
+}
+
+/* Individual card styling */
+.admin-card {
+  background-color: #f0f0f0; /* Light background for cards */
+  border: 1px solid #ccc; /* Light border */
+  border-radius: 8px; /* Rounded corners */
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  min-width: 150px;
+  max-width: 200px;
+}
+
+/* Card hover effect */
+.admin-card:hover {
+  background-color: #e0e0e0;
+}
+
+/* Component container with scrollable content */
+.component-container {
+  margin-top: 20px; /* Space between cards and active component */
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+  max-height: 400px; /* Set a max height for the container */
+  overflow: auto; /* Allow scrolling if content exceeds the container height */
+}
