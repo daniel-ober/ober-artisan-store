@@ -58,6 +58,11 @@ const ManageProducts = () => {
     getProducts();
   };
 
+  const handleAddNewProduct = () => {
+    // Logic to open a modal or navigate to an "Add New Product" form
+    alert('Open Add New Product modal');
+  };
+
   if (loading) {
     return <div>Loading products...</div>;
   }
@@ -69,6 +74,7 @@ const ManageProducts = () => {
   return (
     <div className="manage-products-container">
       <h1>Manage Products</h1>
+      <button className="add-new-btn" onClick={handleAddNewProduct}>Add New Product</button>
       <table className="manage-products-table">
         <thead>
           <tr>
