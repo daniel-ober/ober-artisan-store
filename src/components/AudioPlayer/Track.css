@@ -1,0 +1,58 @@
+/* src/components/AudioPlayer/Track.css */
+
+.track {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center elements */
+}
+
+.fader-container {
+    position: relative; /* To position the fader properly */
+}
+
+.fader {
+    -webkit-appearance: slider-vertical; /* For Safari */
+    writing-mode: bt-lr; /* For Firefox */
+    height: 150px; /* Adjust height for vertical fader */
+    width: 20px; /* Narrow width */
+    background: #777; /* Fader track background */
+    border-radius: 5px; /* Rounded corners */
+    margin-bottom: 10px; /* Space below fader */
+}
+
+.fader::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px; /* Thumb width */
+    height: 20px; /* Thumb height */
+    background: #ffcc00; /* Thumb color */
+    border-radius: 10px; /* Rounded thumb */
+    cursor: pointer; /* Cursor on hover */
+}
+
+.fader::-moz-range-thumb {
+    width: 20px; /* Thumb width */
+    height: 20px; /* Thumb height */
+    background: #ffcc00; /* Thumb color */
+    border-radius: 10px; /* Rounded thumb */
+    cursor: pointer; /* Cursor on hover */
+}
+
+.signal-meter {
+    width: 20px; /* Signal meter width */
+    height: 80px; /* Fixed height for signal meter */
+    background-color: #222; /* Dark background */
+    border-radius: 5px; /* Rounded corners */
+    margin-bottom: 10px; /* Space below meter */
+}
+
+.meter {
+    width: 100%;
+    border-radius: 5px;
+    transition: height 0.1s ease-in-out; /* Smooth transition for volume changes */
+}
+
+.track-controls {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px; /* Space between controls and track name */
+}
