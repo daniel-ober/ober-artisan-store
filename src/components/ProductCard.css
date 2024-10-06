@@ -2,29 +2,32 @@
 .product-card {
   display: flex;
   flex-direction: column;
-  width: 100%; /* Set to 100% for responsive behavior */
   max-width: 450px; /* Added max-width for card size control */
-  height: 450px;
+  width: 100%; /* Set to 100% for responsive behavior */
+  height: 100%;
   border: 1px solid #ccc;
   background-color: #fff;
-  padding: 7px;
+  padding: 10px;
   box-sizing: border-box;
 }
 
 .product-image-container {
   width: 100%; /* Full width of the product card */
-  height: 200px; /* Fixed height */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 100%; /* Fixed height */
+  max-height: 150px;
+  display:grid;
+  justify-content:center;
+  align-items:center;
   overflow: hidden;
 }
 
 .product-image {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Fit the image without distortion */
+  object-fit:contain; /* Fit the image without distortion */
   object-position: top; /* Center the image if cropped */
+  border: 1px black;
+
 }
 
 /* Container for product information */

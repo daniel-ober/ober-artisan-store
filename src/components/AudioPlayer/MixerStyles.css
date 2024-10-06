@@ -1,0 +1,15 @@
+src/components/mixer/MixerStyles.css
+.mixer {
+    padding: 20px;
+    background-color: #f0f0f0;
+  }
+  
+  .track {
+    margin: 10px 0;
+    display: flex;
+  }
+  
+  .track label {
+    margin-right: 10px;
+  }
+  

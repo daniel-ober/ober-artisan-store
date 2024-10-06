@@ -1,0 +1,116 @@
+/* src/components/AudioPlayer/Mixer.css */
+
+.mixer {
+    background: #333; /* Dark background for the mixer */
+    padding: 20px;
+    border-radius: 8px; /* Rounded corners for the mixer */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.control-button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background: #444; /* Button background */
+    color: #fff; /* Button text color */
+    border: none;
+    border-radius: 5px; /* Rounded button corners */
+    cursor: pointer;
+}
+
+.control-button:hover {
+    background: #555; /* Change on hover */
+}
+
+.track-list {
+    display: flex; /* Arrange tracks in a row */
+    overflow-x: auto; /* Allow horizontal scrolling if necessary */
+}
+
+.track {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically within each track */
+    align-items: center;
+    margin-right: 20px; /* Space between tracks */
+    min-width: 120px; /* Set a minimum width for each track */
+    background: #444; /* Track background */
+    padding: 10px; /* Padding for tracks */
+    border-radius: 5px; /* Rounded corners */
+}
+
+.signal-meter {
+    width: 20px; /* Wider signal meter */
+    background-color: #222; /* Darker background for signal meter */
+    border-radius: 5px;
+    height: 80px; /* Height of the signal meter */
+    margin-bottom: 10px; /* Space between meter and fader */
+}
+
+.meter {
+    width: 100%;
+    border-radius: 5px;
+    transition: height 0.1s ease-in-out; /* Smooth transition for volume changes */
+}
+
+.fader-container {
+    position: relative; /* To position the fader properly */
+    height: 150px; /* Give height to the fader container */
+}
+
+.fader {
+    -webkit-appearance: slider-vertical; /* For Safari */
+    writing-mode: bt-lr; /* For Firefox */
+    height: 120px; /* Adjust height for vertical fader */
+    width: 20px; /* Narrow width */
+    background: #777; /* Fader track background */
+    border-radius: 5px; /* Rounded corners */
+    margin: 0 auto; /* Center the fader */
+}
+
+.fader::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px; /* Thumb width */
+    height: 20px; /* Thumb height */
+    background: #ffcc00; /* Thumb color */
+    border-radius: 10px; /* Rounded thumb */
+    cursor: pointer; /* Cursor on hover */
+}
+
+.fader::-moz-range-thumb {
+    width: 20px; /* Thumb width */
+    height: 20px; /* Thumb height */
+    background: #ffcc00; /* Thumb color */
+    border-radius: 10px; /* Rounded thumb */
+    cursor: pointer; /* Cursor on hover */
+}
+
+.track-controls {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px; /* Space between controls and track name */
+}
+
+.track-controls button {
+    margin: 0 5px; /* Space between mute and solo buttons */
+    padding: 5px 10px;
+    background: #555; /* Button background for track controls */
+    color: #fff; /* Button text color */
+    border: none;
+    border-radius: 5px; /* Rounded button corners */
+    cursor: pointer; /* Cursor on hover */
+}
+
+.track-controls button:hover {
+    background: #666; /* Change on hover */
+}
+
+.track-name {
+    font-weight: bold;
+    text-align: center; /* Center the track name */
+}
