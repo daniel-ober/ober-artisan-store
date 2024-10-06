@@ -1,9 +1,11 @@
+// src/App.js
 import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import Home from './components/Home';
 import Products from './components/Products';
 import About from './components/About';
+import ChatSupportButton from './components/ChatSupportButton'; // Make sure the path is correct
 import Contact from './components/Contact';
 import Cart from './components/Cart';
 import SignInEmail from './components/SignInEmail';
@@ -27,7 +29,7 @@ import NotFound from './components/NotFound';
 import NotAuthorized from './components/NotAuthorized';
 import PrivateRoute from './components/PrivateRoute';
 import { useAuth } from './context/AuthContext';
-import ChatSupportButton from './components/ChatSupportButton';
+import * as AudioPlayer from './components/AudioPlayer'; // Import everything from index.js
 
 function App() {
   const { user, handleSignOut } = useAuth();
@@ -48,6 +50,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/custom-shop-assistant" element={<CustomShopAssistant />} />
+          <Route path="/mixing-booth" element={<AudioPlayer.Mixer />} /> {/* Use the Mixer component */}
           <Route path="/signin" element={<SignInEmail />} />
           <Route path="/register" element={<Register />} /> {/* Add register route */}
           <Route path="/forgot-password" element={<ForgotPassword />} /> {/* Add forgot password route */}
@@ -66,7 +69,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
-      <ChatSupportButton currentTab={currentTab} />
+      <ChatSupportButton />
       <Footer />
     </div>
   );
