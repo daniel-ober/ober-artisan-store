@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { fetchProductById, updateProductInFirestore } from '../services/productService'; // Use updateProductInFirestore
+import { fetchProductById, updateProductInFirestore } from '../services/productService'; 
 import './Modal.css';
 
 const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
-  const [product, setProduct] = useState({ name: '', description: '', price: '' });
+  const [product, setProduct] = useState({ name: '', description: '', price: 0, priceId: '', productId: '' });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -25,13 +25,19 @@ const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      await updateProductInFirestore(productId, product); // Update this line
-      onProductUpdated(); // Call this to refresh the product list
-      onClose(); // Close the modal after update
+      await updateProductInFirestore(productId, product); 
+      onProductUpdated(); 
+      onClose(); 
     } catch (error) {
       console.error('Error updating product:', error);
       setError('Error updating product: ' + error.message);
     }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    const updatedValue = name === 'price' ? parseFloat(value) : value; // Convert price to number
+    setProduct({ ...product, [name]: updatedValue });
   };
 
   if (loading) {
@@ -50,22 +56,41 @@ const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
           <input 
             type="text" 
             value={product.name} 
-            onChange={(e) => setProduct({ ...product, name: e.target.value })} 
+            onChange={handleInputChange} 
+            name="name"
             placeholder="Product Name" 
             required 
           />
           <input 
             type="text" 
             value={product.description} 
-            onChange={(e) => setProduct({ ...product, description: e.target.value })} 
+            onChange={handleInputChange} 
+            name="description"
             placeholder="Product Description" 
             required 
           />
           <input 
             type="number" 
             value={product.price} 
-            onChange={(e) => setProduct({ ...product, price: e.target.value })} 
+            onChange={handleInputChange} 
+            name="price"
             placeholder="Product Price" 
+            required 
+          />
+          <input 
+            type="text" 
+            value={product.priceId} 
+            onChange={handleInputChange} 
+            name="priceId"
+            placeholder="Price ID" 
+            required 
+          />
+          <input 
+            type="text" 
+            value={product.productId} 
+            onChange={handleInputChange} 
+            name="productId"
+            placeholder="Product ID" 
             required 
           />
           <button type="submit">Update Product</button>

@@ -5,7 +5,7 @@ import { useAuth } from '../context/AuthContext';
 import { loadStripe } from '@stripe/stripe-js';
 import './Cart.css';
 
-const stripePromise = loadStripe('your-publishable-key-here');
+const stripePromise = loadStripe('pk_test_51PrBd7Jbbx8jAR4NZ2vOilq5lRJaQ0JnQjT9R7Z1brJvVokZc6TpaRFtX67jSCg8PpeqeUqmXBmFTUBLo0lkeI1G00KrLLeSJb');
 
 const Cart = () => {
     const { cart, updateQuantity, removeFromCart, clearCart } = useCart(); // Add clearCart function
@@ -34,7 +34,7 @@ const Cart = () => {
     const handleCheckout = async () => {
         setLoading(true); // Start loading when checkout begins
         try {
-            const response = await fetch('http://localhost:4949/create-checkout-session', {
+            const response = await fetch('http://localhost:4949/api/create-checkout-session', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
