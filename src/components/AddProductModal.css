@@ -1,0 +1,46 @@
+/* AddProductModal.css */
+.add-product-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    z-index: 1000; /* Ensure it's above other content */
+  }
+  
+  .modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  
+  .close-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  form button {
+    padding: 10px 20px;
+    background-color: blue;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  

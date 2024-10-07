@@ -11,7 +11,9 @@ const Products = () => {
     const fetchProductsData = async () => {
       try {
         const productsList = await fetchProducts();
-        setProducts(productsList);
+        // Filter only available products
+        const availableProducts = productsList.filter(product => product.status === 'available');
+        setProducts(availableProducts);
       } catch (error) {
         console.error('Error fetching products:', error);
       } finally {

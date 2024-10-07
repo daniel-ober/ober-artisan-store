@@ -48,7 +48,7 @@ export const CartProvider = ({ children }) => {
     }, [cart, user]);
 
     const addToCart = async (product) => {
-        const isOneOfAKind = product.category === "one of a kind" || product.category === "custom shop";
+        const isOneOfAKind = product.category === "artisan";
         const existingItem = cart[product.id]; // Ensure to use product ID here correctly
 
         if (isOneOfAKind && existingItem) {
