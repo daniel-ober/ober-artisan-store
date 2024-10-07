@@ -1,6 +1,5 @@
-// src/firebaseService.js
-
-import { firestore } from '../firebaseConfig'; // Adjust the import path as needed
+// src/services/firebaseService.js
+import { firestore, storage } from '../firebaseConfig'; // Adjust the import path as needed
 import { 
     doc, 
     getDoc, 
@@ -11,6 +10,8 @@ import {
     getDocs, 
     addDoc 
 } from 'firebase/firestore';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { v4 as uuidv4 } from 'uuid'; // For generating unique file names
 
 // Fetch product by ID
 export const fetchProductById = async (id) => {
@@ -144,6 +145,19 @@ export const createOrder = async (orderData) => {
         return docRef.id;
     } catch (error) {
         console.error('Error creating order:', error);
+        throw error;
+    }
+};
+
+// Function to upload image to Firebase Storage
+export const uploadImageToFirebase = async (file) => {
+    try {
+        const storageRef = ref(storage, `images/${uuidv4()}_${file.name}`); // Create a unique reference for the file
+        await uploadBytes(storageRef, file); // Upload the file to Firebase Storage
+        const url = await getDownloadURL(storageRef); // Get the file's URL
+        return url; // Return the file's URL
+    } catch (error) {
+        console.error('Error uploading image:', error);
         throw error;
     }
 };
