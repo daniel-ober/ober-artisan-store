@@ -90,35 +90,59 @@ app.use('/api/webhooks', webhookRoutes);
 
 // Create Product Route (Stripe integration and Firestore)
 app.post('/api/create-stripe-product', async (req, res) => {
-    const { name, description, images = [], price } = req.body;
+    const { name, description, images = [], price, category } = req.body;
+
+    // Log incoming request data
+    console.log('Request body:', req.body);
 
     try {
+        // Validate input
         if (!name) return res.status(400).json({ error: 'Product name is required.' });
         if (price === undefined || price <= 0) return res.status(400).json({ error: 'Valid price is required.' });
 
+        // Create the product in Stripe
         const product = await stripe.products.create({
             name,
             description,
             images,
         });
 
+        // Log created Stripe product
+        console.log('Created Stripe product:', product);
+
+        // Create a price for the product
         const priceId = await stripe.prices.create({
             currency: 'usd',
             unit_amount: Math.round(price * 100), // Stripe requires price in cents
             product: product.id,
         });
 
-        await db.collection('products').doc(product.id).set({
+        // Prepare product data for Firestore
+        const productData = {
             name,
             description,
             images,
             priceId: priceId.id,
-            stripeProductId: product.id,
-        });
+            stripeProductId: product.id, // Keep this to reference the Stripe product
+            category: category || "default-category", // Assign a default category if not provided
+            status: "unavailable", // Default status
+            price, // Include the price field
+        };
 
-        res.status(201).json({ productId: product.id, priceId: priceId.id });
+        // Log the product data before saving to Firestore
+        console.log('Product data before Firestore save:', productData);
+
+        // Add the product to Firestore using auto-generated document ID
+        const newProductRef = await db.collection('products').add(productData);
+        console.log('New Firestore document created with ID:', newProductRef.id);
+
+        // Return the auto-generated document ID along with the Stripe price ID
+        res.status(201).json({ productId: newProductRef.id, priceId: priceId.id });
     } catch (error) {
         console.error('Error creating Stripe product:', error);
+        if (error.code === 'invalid_request_error') {
+            return res.status(400).json({ error: 'Invalid request to Stripe.' });
+        }
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
