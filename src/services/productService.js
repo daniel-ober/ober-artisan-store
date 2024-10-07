@@ -1,4 +1,3 @@
-// src/services/productService.js
 import { db } from '../firebaseConfig'; // Adjust the path as necessary
 import { collection, getDocs, doc, deleteDoc, updateDoc, addDoc, getDoc } from "firebase/firestore";
 
@@ -35,4 +34,10 @@ export const updateProductInFirestore = async (productId, updatedProduct) => {
 // Add a new product
 export const addProductToFirestore = async (newProduct) => {
   await addDoc(productsCollection, newProduct);
+};
+
+// Update the status of a product
+export const updateProductStatus = async (productId, newStatus) => {
+  const productDocRef = doc(db, "products", productId);
+  await updateDoc(productDocRef, { status: newStatus });
 };
