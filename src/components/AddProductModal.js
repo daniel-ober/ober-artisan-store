@@ -30,37 +30,53 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(''); // Reset error state
-
+  
+    // Prevent multiple submissions if already in progress
+    if (isUploading) {
+      console.warn('Submission is already in progress.');
+      return; 
+    }
+  
+    setIsUploading(true); // Indicate that the submission is in progress
+  
     try {
-      setIsUploading(true); // Set uploading state to true
-
-      // Upload images
+      // Upload images and handle their responses
       const uploadedImages = imageFiles.length > 0 
           ? await Promise.all(imageFiles.map(file => uploadImageToFirebase(file))) 
           : [];
-
+  
       // Prepare product data
       const productData = {
         ...newProduct,
         images: uploadedImages,
       };
-
-      // Log product data
-      console.log('Raw product data:', productData);
-
+  
+      console.log('Product data before Stripe creation:', productData);
+  
       // Create product in Stripe
-      const stripeProduct = await createStripeProduct(productData); // Create product in Stripe
+      const stripeProduct = await createStripeProduct(productData);
       console.log('Stripe product created:', stripeProduct);
-
-      // Add the product to Firestore, including Stripe product ID
-      const docRef = await addDoc(collection(db, 'products'), {
-        ...productData,
-        stripeProductId: stripeProduct.id, // Assuming Stripe returns the product ID
-      });
-
-      onProductAdded({ id: docRef.id, ...productData });
-
+  
+      // Check if Stripe product creation was successful
+      if (stripeProduct && stripeProduct.id) {
+        console.log('Adding product to Firestore...');
+  
+        // Create Firestore document only once
+        const docRef = await addDoc(collection(db, 'products'), {
+          ...productData,
+          stripeProductId: stripeProduct.id, // Use the product ID returned from Stripe
+          stripePriceId: stripeProduct.default_price, // Store the default price if applicable
+        });
+  
+        console.log('New Firestore document created with ID:', docRef.id);
+  
+        // Trigger success handler
+        onProductAdded({ id: docRef.id, ...productData });
+      } else {
+        console.error('Stripe product creation failed.');
+        setError('Failed to create Stripe product. Please try again.');
+      }
+  
     } catch (error) {
       console.error('Error adding product:', error);
       setError('Failed to add product. Please try again.');
@@ -69,6 +85,8 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
       onClose(); // Close the modal after submission
     }
   };
+  
+  
 
   return (
     <div className="add-product-modal">
