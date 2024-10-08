@@ -23,7 +23,7 @@
   background-color: #f0f0f0; /* Light background for cards */
   border: 1px solid #ccc; /* Light border */
   border-radius: 8px; /* Rounded corners */
-  padding: 25px; /* Increased padding */
+  padding: 20px; /* Increased padding */
   text-align: center;
   cursor: pointer;
   transition: background-color 0.3s;

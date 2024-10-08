@@ -81,7 +81,6 @@ const ViewOrderModal = ({ order, onClose }) => {
         </head>
         <body>
           <img src="${logoUrl}" alt="Dan Ober Artisan" style="max-width: 100%; height: auto;" />
-          <h2>Order Details</h2>
           <div class="order-info">${modalRef.current.innerHTML}</div>
         </body>
       </html>
@@ -109,7 +108,7 @@ const ViewOrderModal = ({ order, onClose }) => {
           &times;
         </button>
         <img src={logoUrl} alt="Dan Ober Artisan Logo" className="logo" />
-        <h2>Invoice Details</h2>
+        <h2>Receipt Details</h2>
 
         <div className="modal-body">
           {/* Customer Details Section */}
@@ -136,7 +135,7 @@ const ViewOrderModal = ({ order, onClose }) => {
           </div>
 
           {/* Order Details Section */}
-          <div className="order-details">
+          <div className="order-details-section">
             <h3>Order Details</h3>
             <p>
               <strong>Order ID:</strong> {order.id}
@@ -195,7 +194,7 @@ const ViewOrderModal = ({ order, onClose }) => {
           <p><strong>Shipping & Handling:</strong> ${shipping.toFixed(2)}</p>
           <p><strong>Total:</strong> ${total.toFixed(2)}</p>
           <p>
-            <strong>Return Policy:</strong> Find our return policy <a href="https://www.danoberartisan.com/return-policy" target="_blank" rel="noopener noreferrer">here</a>.
+            <strong>Return Policy:</strong> Find our return policy <a href="http://localhost:3000/return-policy" target="_blank" rel="noopener noreferrer">here</a>.
           </p>
           <p>
             <strong>Support:</strong> For support, contact us at <a href="mailto:support@danoberartisan.com">support@danoberartisan.com</a>.

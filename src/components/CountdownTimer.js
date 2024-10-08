@@ -58,7 +58,7 @@ const CountdownTimer = () => {
 
     return (
         <div className="countdown-timer">
-            <h2>Next Artisan Drum Drop</h2>
+            {/* <h2>Next Artisan Drum Drop</h2> */}
             {timerComponents.length ? timerComponents : <span>Drop happening soon!</span>}
         </div>
     );

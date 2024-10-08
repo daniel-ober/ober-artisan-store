@@ -68,14 +68,16 @@ textarea {
     justify-content: space-between;
 }
 
-.customer-details, .order-details {
+.customer-details, 
+.order-details-section {
     flex: 1;
-    margin-right: 20px;
+    margin-left: 40px;
+    margin-right: 40px;
     text-align: left;
 }
 
-.order-details {
-    margin-left: 20px;
+.order-details-section {
+    margin-left: 40px;
 }
 
 h3 {
