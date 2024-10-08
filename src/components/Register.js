@@ -290,64 +290,76 @@ const Register = ({ orderDetails }) => {
           label={
             <span>
               I have read and agree to the{' '}
-              <span onClick={handleOpenTerms} className="terms-link">
+              <span
+                onClick={handleOpenTerms}
+                className="terms-link"
+                role="button"
+                tabIndex={0}
+                onKeyPress={(e) => { if (e.key === 'Enter') handleOpenTerms(); }}
+              >
                 Terms of Service
               </span>{' '}
               and{' '}
-              <span onClick={handleOpenPrivacy} className="privacy-link">
+              <span
+                onClick={handleOpenPrivacy}
+                className="privacy-link"
+                role="button"
+                tabIndex={0}
+                onKeyPress={(e) => { if (e.key === 'Enter') handleOpenPrivacy(); }}
+              >
                 Privacy Policy
               </span>
             </span>
           }
         />
+
         {error && <Typography color="error">{error}</Typography>}
-        {status && <Typography color="primary">{status}</Typography>}
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          className="register-button"
-        >
+        <Button type="submit" variant="contained" color="primary" className="register-button">
           Register
         </Button>
       </form>
 
-      <Dialog open={openTerms} onClose={handleCloseTerms}>
-        <DialogTitle>Terms of Service</DialogTitle>
+      {/* Success dialog */}
+      <Dialog open={openSuccessDialog} onClose={handleCloseSuccessDialog}>
+        <DialogTitle>Registration Successful</DialogTitle>
         <DialogContent>
-          <TermsOfService ref={termsRef} />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => printDocument(termsRef)}>Print</Button>
-          <Button onClick={handleCloseTerms}>Close</Button>
-        </DialogActions>
-      </Dialog>
-
-      <Dialog open={openPrivacy} onClose={handleClosePrivacy}>
-        <DialogTitle>Privacy Policy</DialogTitle>
-        <DialogContent>
-          <PrivacyPolicy ref={privacyRef} />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => printDocument(privacyRef)}>Print</Button>
-          <Button onClick={handleClosePrivacy}>Close</Button>
-        </DialogActions>
-      </Dialog>
-
-      <Dialog
-        open={openSuccessDialog}
-        onClose={handleCloseSuccessDialog}
-      >
-        <DialogTitle>Registration Successful!</DialogTitle>
-        <DialogContent>
-          <Typography>Thank you for registering!</Typography>
-          <Typography>
-            You can now log in to your account.
-          </Typography>
+          <Typography>Your registration was successful!</Typography>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseSuccessDialog} color="primary">
             OK
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Terms of Service Dialog */}
+      <Dialog open={openTerms} onClose={handleCloseTerms}>
+        <DialogTitle>Terms of Service</DialogTitle>
+        <DialogContent ref={termsRef}>
+          <TermsOfService />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => printDocument(termsRef)} color="primary">
+            Print
+          </Button>
+          <Button onClick={handleCloseTerms} color="primary">
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Privacy Policy Dialog */}
+      <Dialog open={openPrivacy} onClose={handleClosePrivacy}>
+        <DialogTitle>Privacy Policy</DialogTitle>
+        <DialogContent ref={privacyRef}>
+          <PrivacyPolicy />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => printDocument(privacyRef)} color="primary">
+            Print
+          </Button>
+          <Button onClick={handleClosePrivacy} color="primary">
+            Close
           </Button>
         </DialogActions>
       </Dialog>

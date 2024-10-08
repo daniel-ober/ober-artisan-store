@@ -7,8 +7,8 @@
     transform: translate(-50%, -50%); /* Adjust position */
     text-align: center;
     font-size: 1.25rem;
-    background: rgba(0, 0, 0, 0); /* Semi-transparent background for better readability */
-    color: rgb(187, 121, 8); /* Change text color to smokewhite */
+    background: rgba(190, 78, 21, 0); /* Semi-transparent background for better readability */
+    color: rgb(76, 84, 116); /* Change text color to smokewhite */
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0); /* Add shadow for depth */
 }
