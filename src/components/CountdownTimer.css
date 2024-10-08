@@ -8,7 +8,7 @@
     text-align: center;
     font-size: 1.25rem;
     background: rgba(190, 78, 21, 0); /* Semi-transparent background for better readability */
-    color: rgb(76, 84, 116); /* Change text color to smokewhite */
+    color: rgb(251, 142, 0); /* Change text color to smokewhite */
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0); /* Add shadow for depth */
 }
