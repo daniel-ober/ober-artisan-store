@@ -1,101 +1,109 @@
 import React, { useEffect, useState } from 'react';
-import { fetchOrders, updateOrderInFirestore } from '../services/orderService';
-import './ManageOrders.css'; // Create this file for styling
+import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore'; // Add deleteDoc and doc for deletion
+import { db } from '../firebaseConfig'; // Ensure the correct path to firebaseConfig
+import ViewOrderModal from './ViewOrderModal'; // Import the modal component
 
 const ManageOrders = () => {
   const [orders, setOrders] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  // Status options for orders
-  const statusOptions = ['Order Complete', 'Pending', 'Processing', 'Shipped', 'Delivered', 'Cancelled'];
+  const [selectedOrder, setSelectedOrder] = useState(null); // Track the selected order
+  const [isModalOpen, setIsModalOpen] = useState(false); // Track modal state
+  const [loading, setLoading] = useState(false); // Track loading state for deletion
 
   useEffect(() => {
-    const getOrders = async () => {
-      try {
-        const ordersData = await fetchOrders();
-        // Set default status to "Order Complete" if not already set
-        const updatedOrdersData = ordersData.map(order => ({
-          ...order,
-          status: order.status || 'Order Complete' // Default status if none exists
-        }));
-        setOrders(updatedOrdersData);
-      } catch (error) {
-        setError('Error fetching orders: ' + error.message);
-      } finally {
-        setLoading(false);
-      }
+    const fetchOrders = async () => {
+      const ordersCollection = collection(db, 'orders');
+      const orderSnapshot = await getDocs(ordersCollection);
+      const ordersList = orderSnapshot.docs.map((doc) => {
+        const data = doc.data();
+        return {
+          id: doc.id,
+          orderDate: data.timestamp ? new Date(data.timestamp).toLocaleString() : 'No date available',
+          customerName: data.customerName || 'No name available',
+          total: typeof data.totalAmount === 'number' ? data.totalAmount.toFixed(2) : 'N/A',
+          status: data.status || 'No status available',
+          ...data // Include all other order fields
+        };
+      });
+      setOrders(ordersList);
     };
-    getOrders();
+
+    fetchOrders();
   }, []);
 
-  const handleStatusChange = async (orderId, newStatus) => {
+  // Function to open modal and set selected order
+  const handleViewOrder = (order) => {
+    setSelectedOrder(order);
+    setIsModalOpen(true);
+  };
+
+  // Function to close modal
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedOrder(null); // Clear selected order
+  };
+
+  // Function to delete an order
+  const handleDeleteOrder = async (orderId) => {
+    setLoading(true); // Optional loading indicator
+
     try {
-      await updateOrderInFirestore(orderId, { status: newStatus });
-      setOrders((prevOrders) =>
-        prevOrders.map((order) =>
-          order.id === orderId ? { ...order, status: newStatus } : order
-        )
-      );
+      // Delete the order from Firestore
+      await deleteDoc(doc(db, 'orders', orderId));
+
+      // Remove the order from the state
+      setOrders(orders.filter(order => order.id !== orderId));
     } catch (error) {
-      setError('Error updating order status: ' + error.message);
+      console.error('Error deleting order:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
-  const handleAddNewOrder = () => {
-    // Logic to open a modal or navigate to an "Add New Order" form
-    alert('Open Add New Order modal');
-  };
-
-  if (loading) {
-    return <div>Loading orders...</div>;
-  }
-
-  if (error) {
-    return <div>{error}</div>;
-  }
-
   return (
-    <div className="manage-orders-container">
-      <h1>Manage Orders</h1>
-      <button className="add-new-btn" onClick={handleAddNewOrder}>Add New Order</button>
+    <div className="manage-orders">
+      <h2>Manage Orders</h2>
       <table className="manage-orders-table">
         <thead>
           <tr>
-            <th>Order Date</th>
-            <th>ID</th>
+            <th>Date</th>
+            <th>Order ID</th>
             <th>Customer Name</th>
-            <th>Order Total</th>
+            <th>Total</th>
             <th>Status</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {orders.map((order) => (
-            <tr key={order.id}>
-              <td>{new Date(order.timestamp).toLocaleDateString()}</td> {/* Format the date */}
-              <td>{order.id}</td>
-              <td>{order.customerName}</td> {/* Adjust based on your order structure */}
-              <td>${order.total}</td> {/* Adjust based on your order structure */}
-              <td>
-                <select
-                  value={order.status}
-                  onChange={(e) => handleStatusChange(order.id, e.target.value)}
-                >
-                  {statusOptions.map((status) => (
-                    <option key={status} value={status}>
-                      {status}
-                    </option>
-                  ))}
-                </select>
-              </td>
-              <td>
-                <button className="view-btn">View</button>
-              </td>
+          {orders.length === 0 ? (
+            <tr>
+              <td colSpan="6">No orders available</td>
             </tr>
-          ))}
+          ) : (
+            orders.map((order) => (
+              <tr key={order.id}>
+                <td>{order.orderDate}</td>
+                <td>{order.id}</td>
+                <td>{order.customerName}</td>
+                <td>${order.total}</td>
+                <td>{order.status}</td>
+                <td>
+                  {/* View button to open the modal */}
+                  <button className="view-btn" onClick={() => handleViewOrder(order)}>View</button>
+                  {/* Delete button to delete the order */}
+                  <button className="delete-btn" onClick={() => handleDeleteOrder(order.id)} disabled={loading}>
+                    {loading ? 'Deleting...' : 'Delete'}
+                  </button>
+                </td>
+              </tr>
+            ))
+          )}
         </tbody>
       </table>
+
+      {/* Render ViewOrderModal if modal is open and an order is selected */}
+      {isModalOpen && selectedOrder && (
+        <ViewOrderModal order={selectedOrder} onClose={handleCloseModal} />
+      )}
     </div>
   );
 };

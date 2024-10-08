@@ -23,7 +23,7 @@ import PrivacyPolicy from './PrivacyPolicy';
 import './Register.css';
 import printJS from 'print-js';
 
-const Register = () => {
+const Register = ({ orderDetails }) => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -100,6 +100,7 @@ const Register = () => {
         email: formData.email,
         phone: formData.phone,
         createdAt: new Date(),
+        orderDetails: orderDetails, // Store order details if available
       });
 
       setStatus('Registration successful!');
@@ -289,76 +290,64 @@ const Register = () => {
           label={
             <span>
               I have read and agree to the{' '}
-              <span
-                role="button"
-                tabIndex="0"
-                className="terms-link"
-                onClick={handleOpenTerms}
-                onKeyDown={(e) => e.key === 'Enter' && handleOpenTerms()}
-                onKeyPress={(e) => e.key === 'Enter' && handleOpenTerms()}
-              >
+              <span onClick={handleOpenTerms} className="terms-link">
                 Terms of Service
               </span>{' '}
               and{' '}
-              <span
-                role="button"
-                tabIndex="0"
-                className="privacy-link"
-                onClick={handleOpenPrivacy}
-                onKeyDown={(e) => e.key === 'Enter' && handleOpenPrivacy()}
-                onKeyPress={(e) => e.key === 'Enter' && handleOpenPrivacy()}
-              >
+              <span onClick={handleOpenPrivacy} className="privacy-link">
                 Privacy Policy
               </span>
-              .
             </span>
           }
         />
-        {error && (
-          <Typography color="error" variant="body2">
-            {error}
-          </Typography>
-        )}
-        <Button type="submit" variant="contained" color="primary" fullWidth>
+        {error && <Typography color="error">{error}</Typography>}
+        {status && <Typography color="primary">{status}</Typography>}
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          className="register-button"
+        >
           Register
         </Button>
       </form>
 
-      {/* Success Dialog */}
-      <Dialog open={openSuccessDialog} onClose={handleCloseSuccessDialog}>
-        <DialogTitle>Registration Successful</DialogTitle>
+      <Dialog open={openTerms} onClose={handleCloseTerms}>
+        <DialogTitle>Terms of Service</DialogTitle>
         <DialogContent>
-          <Typography variant="body1">{status}</Typography>
+          <TermsOfService ref={termsRef} />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => printDocument(termsRef)}>Print</Button>
+          <Button onClick={handleCloseTerms}>Close</Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog open={openPrivacy} onClose={handleClosePrivacy}>
+        <DialogTitle>Privacy Policy</DialogTitle>
+        <DialogContent>
+          <PrivacyPolicy ref={privacyRef} />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => printDocument(privacyRef)}>Print</Button>
+          <Button onClick={handleClosePrivacy}>Close</Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog
+        open={openSuccessDialog}
+        onClose={handleCloseSuccessDialog}
+      >
+        <DialogTitle>Registration Successful!</DialogTitle>
+        <DialogContent>
+          <Typography>Thank you for registering!</Typography>
+          <Typography>
+            You can now log in to your account.
+          </Typography>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseSuccessDialog} color="primary">
             OK
-          </Button>
-        </DialogActions>
-      </Dialog>
-
-      {/* Terms of Service Dialog */}
-      <Dialog open={openTerms} onClose={handleCloseTerms}>
-        <DialogTitle>Terms of Service</DialogTitle>
-        <DialogContent ref={termsRef}>
-          <TermsOfService printDocument={printDocument} />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseTerms} color="primary">
-            Close
-          </Button>
-        </DialogActions>
-      </Dialog>
-
-      {/* Privacy Policy Dialog */}
-      <Dialog open={openPrivacy} onClose={handleClosePrivacy}>
-        <DialogTitle>Privacy Policy</DialogTitle>
-        <DialogContent ref={privacyRef}>
-          <PrivacyPolicy printDocument={printDocument} />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClosePrivacy} color="primary">
-            Close
           </Button>
         </DialogActions>
       </Dialog>
