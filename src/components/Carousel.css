@@ -1,72 +1,99 @@
 .carousel {
-    position: relative;
-    width: 100%;
-    max-width: 800px; /* Adjusted for carousel size */
-    overflow: hidden;
-    margin: 0 auto;
-  }
-  
-  .carousel-inner {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-  }
-  
-  .carousel-item {
-    min-width: 100%; /* Each item takes full width */
-    text-align: center;
-    opacity: 0.5; /* Inactive item faded */
-    transition: opacity 0.5s ease, transform 0.5s ease; /* Transition effect */
-    transform: scale(0.8); /* Shrinks the inactive cards */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .carousel-item.active {
-    opacity: 1;
-    transform: scale(1); /* Scales up the active card */
-  }
-  
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.carousel-track-container {
+  width: 100%;
+  overflow: hidden;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-item {
+  flex: 0 0 100%;
+  box-sizing: border-box;
+  text-align: center;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  opacity: 0.5;
+}
+
+.carousel-item.active {
+  opacity: 1;
+}
+
+.carousel-item img {
+  width: 60%; /* Adjust this based on desired width */
+  height: 500px; /* Set a fixed height for the image */
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.carousel-item h1 {
+  font-family: 'Georgia', serif;
+  font-size: 24px;
+  margin: 10px 0;
+}
+
+.carousel-item p {
+  font-family: 'Arial', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  padding: 0 20px;
+}
+
+/* Controls styling */
+.carousel-controls {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content:space-between;
+  transform: translateY(-50%);
+  z-index: 10; /* Ensures buttons are on top */
+}
+
+.carousel-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 10; /* Ensures buttons are on top */
+}
+
+.carousel-icon {
+  width: 40px;
+  height: 40px;
+}
+
+/* Flip the left arrow image to face left */
+.carousel-icon.prev {
+  transform: none; /* Flips the image horizontally */
+}
+
+.carousel-icon.next {
+  transform: none; /* No flip needed for the right arrow */
+}
+
+/* Remove the hover animation for rotation */
+.carousel-button:hover .carousel-icon {
+  transform: none; /* No change on hover */
+}
+
+/* Responsiveness adjustments */
+@media (max-width: 768px) {
   .carousel-item img {
-    width: 50%; /* Adjusted image size */
-    height: auto;
-    border-radius: 8px;
-    margin-bottom: 20px; /* Add space below the image */
+    width: 80%; /* Adjusts width on mobile */
+    height: auto; /* Maintain aspect ratio on mobile */
   }
-  
-  .carousel-item h1 {
-    font-family: 'Georgia', serif;
-    font-size: 24px;
-    margin: 10px 0;
-  }
-  
-  .carousel-item p {
-    font-family: 'Arial', sans-serif;
-    font-size: 16px;
-    line-height: 1.5;
-    padding: 0 20px; /* Add some padding for readability */
-  }
-  
-  .carousel-controls {
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    transform: translateY(-50%);
-  }
-  
+
   .carousel-button {
-    background-color: rgba(0, 0, 0, 0.5);
-    border: none;
-    color: white;
-    padding: 10px;
-    cursor: pointer;
-    font-size: 1.5rem;
+    padding: 8px;
   }
-  
-  .carousel-button:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-  }
-  
+}

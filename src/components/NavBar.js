@@ -117,7 +117,7 @@ const NavBar = ({ isAuthenticated, onSignOut, onTabChange }) => {
           <>
             <Link to="/account" className={`nav-link ${location.pathname === '/account' ? 'active' : ''}`} onClick={() => handleLinkClick('/account', 'Account')}><FaUserAlt /> Account</Link>
             {isAdmin && <Link to="/admin" className={`nav-link ${location.pathname === '/admin' ? 'active' : ''}`} onClick={() => handleLinkClick('/admin', 'Admin')}><FaCog /> Admin</Link>}
-            <button className="nav-link" onClick={handleSignOut}><FaSignOutAlt /> Sign Out</button>
+            <div className="nav-link" onClick={handleSignOut}><FaSignOutAlt /> Sign Out</div>
           </>
         ) : (
           <Link to="/signin" className={`nav-link ${location.pathname === '/signin' ? 'active' : ''}`} onClick={() => handleLinkClick('/signin', 'Sign In')}>Sign In</Link>
