@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchProductById, updateProductInFirestore } from '../services/productService'; 
-import './Modal.css';
+import './Modal.css'; // You can keep this line for future CSS if needed
 
 const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
   const [product, setProduct] = useState({ name: '', description: '', price: 0, priceId: '', productId: '' });

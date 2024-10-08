@@ -1,0 +1,76 @@
+/* src/components/TransactionSuccess.css */
+
+.transaction-success {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* Full height for centering */
+    background-color: #f9f9f9; /* Light background for contrast */
+    padding: 20px;
+    font-family: Arial, sans-serif; /* Default font family */
+}
+
+.transaction-success h1 {
+    font-size: 2.5rem;
+    color: #4caf50; /* Green color for success message */
+    margin-bottom: 20px;
+}
+
+.transaction-success p {
+    font-size: 1.2rem;
+    color: #333; /* Dark text color for readability */
+    margin: 10px 0;
+}
+
+.order-details {
+    background-color: #ffffff; /* White background for order details */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 20px;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 600px; /* Max width for better readability */
+}
+
+.order-details h2 {
+    font-size: 1.8rem;
+    color: #333; /* Dark color for headings */
+    margin-bottom: 15px;
+}
+
+.order-details p {
+    font-size: 1rem;
+    color: #555; /* Slightly lighter text for details */
+    margin: 5px 0;
+}
+
+/* Signup Banner Styles */
+.signup-banner {
+    background-color: #4caf50; /* Green background */
+    color: white; /* White text */
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 20px;
+    text-align: center; /* Centered text */
+    width: 100%;
+    max-width: 600px; /* Max width for better readability */
+}
+
+.signup-button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #ffffff; /* White background for the button */
+    color: #4caf50; /* Green text for the button */
+    border: none;
+    border-radius: 5px;
+    text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Bold text */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.signup-button:hover {
+    background-color: #e0e0e0; /* Light gray on hover */
+    cursor: pointer; /* Pointer cursor for button */
+}
