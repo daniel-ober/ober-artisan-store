@@ -1,4 +1,3 @@
-// src/services/firebaseService.js
 import { firestore, storage } from '../firebaseConfig'; // Adjust the import path as needed
 import { 
     doc, 
@@ -158,6 +157,25 @@ export const uploadImageToFirebase = async (file) => {
         return url; // Return the file's URL
     } catch (error) {
         console.error('Error uploading image:', error);
+        throw error;
+    }
+};
+
+// Function to check if an order exists by ID (added function)
+export const checkExistingOrder = async (orderId) => {
+    try {
+        const orderRef = doc(firestore, 'orders', orderId); // Adjust 'orders' to your collection name
+        const orderSnap = await getDoc(orderRef);
+
+        if (orderSnap.exists()) {
+            console.log(`Order exists with ID: ${orderId}`, orderSnap.data()); // Debugging log
+            return true; // Order exists
+        } else {
+            console.log(`No order found with ID: ${orderId}`); // Debugging log
+            return false; // Order does not exist
+        }
+    } catch (error) {
+        console.error('Error checking existing order:', error);
         throw error;
     }
 };

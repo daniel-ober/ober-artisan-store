@@ -1,11 +1,12 @@
 // src/components/TransactionSuccess.js
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom'; // Import useLocation and useNavigate
 import { CreateOrder } from '../createOrder'; // Adjust the import path if necessary
 import './TransactionSuccess.css';
 
 const TransactionSuccess = () => {
   const location = useLocation();
+  const navigate = useNavigate(); // Initialize useNavigate
   const query = new URLSearchParams(location.search);
   const sessionId = query.get('session_id');
   const userId = query.get('userId');
@@ -17,7 +18,7 @@ const TransactionSuccess = () => {
     if (sessionId && userId) {
       const orderData = {
         timestamp: new Date().toISOString(),
-        itemName: 'Handcrafted Drum 1',
+        itemName: 'Handcrafted Drum 1', // Adjust as necessary
         itemPrice: 1399.99,
         itemQuantity: 1,
         orderId: Math.floor(Math.random() * 1000),
@@ -42,6 +43,12 @@ const TransactionSuccess = () => {
     }
   }, [sessionId, userId]);
 
+  const handleSignupRedirect = () => {
+    navigate('/register', {
+      state: { orderDetails }, // Pass order details as state
+    });
+  };
+
   if (loading) return <p>Loading...</p>;
 
   return (
@@ -60,6 +67,11 @@ const TransactionSuccess = () => {
           <p>Your order will be shipped within X days. You can find your order details and status in your account page.</p>
         </div>
       )}
+      {/* Marketing Banner */}
+      <div className="signup-banner">
+        <p>Sign up for our newsletter to receive exclusive promotions, discounts, and product updates!</p>
+        <button onClick={handleSignupRedirect} className="signup-button">Get Your Coupon</button>
+      </div>
     </div>
   );
 };

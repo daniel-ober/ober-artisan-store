@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 
-const CheckoutForm = () => {
+const CheckoutForm = ({ onPaymentSuccess }) => { // Accept onPaymentSuccess as a prop
   const stripe = useStripe();
   const elements = useElements();
   const [clientSecret, setClientSecret] = useState('');
@@ -36,7 +36,7 @@ const CheckoutForm = () => {
       setError(error.message);
     } else if (paymentIntent.status === 'succeeded') {
       setSuccess(true);
-      // Handle successful payment here
+      onPaymentSuccess(paymentIntent.id); // Call the success handler passed as a prop
     }
   };
 

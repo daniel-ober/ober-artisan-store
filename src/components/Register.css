@@ -1,5 +1,5 @@
 .register-container {
-  max-width: 600px;
+  max-width: 600px; /* Increased width for better layout */
   margin: auto;
   padding: 20px;
   border: 1px solid #ddd;
@@ -23,6 +23,10 @@
 .error-message {
   color: red;
   margin-bottom: 1rem;
+}
+
+.password-rules {
+  margin: 10px 0; /* Adjusted margin */
 }
 
 .password-rules ul {

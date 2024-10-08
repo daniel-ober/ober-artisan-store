@@ -1,45 +1,70 @@
-/* src/components/ManageOrders.css */
-.manage-orders-container {
+.manage-orders {
     padding: 20px;
     background-color: #f9f9f9;
-}
-
-.manage-orders-table {
+    font-family: Arial, sans-serif;
+  }
+  
+  .manage-orders h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .manage-orders-table {
     width: 100%;
     border-collapse: collapse;
-}
-
-.manage-orders-table th, .manage-orders-table td {
+    margin-bottom: 20px;
+  }
+  
+  .manage-orders-table th, 
+  .manage-orders-table td {
     border: 1px solid #ddd;
-    padding: 8px;
-}
-
-.manage-orders-table th {
-    background-color: #f2f2f2;
+    padding: 12px;
     text-align: left;
-}
-
-.view-btn, .delete-btn {
-    margin: 0 5px;
-    padding: 5px 10px;
+  }
+  
+  .manage-orders-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  
+  .manage-orders-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .manage-orders-table tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .view-btn, 
+  .delete-btn {
+    padding: 8px 15px;
     border: none;
+    border-radius: 4px;
     cursor: pointer;
-}
-
-.delete-btn {
-    background-color: #e74c3c;
-    color: white;
-}
-
-.delete-btn:hover {
-    background-color: #c0392b;
-}
-
-.view-btn {
+    font-size: 14px;
+  }
+  
+  .view-btn {
     background-color: #3498db;
     color: white;
-}
-
-.view-btn:hover {
+  }
+  
+  .view-btn:hover {
     background-color: #2980b9;
-}
+  }
+  
+  .delete-btn {
+    background-color: #e74c3c;
+    color: white;
+    margin-left: 10px;
+  }
+  
+  .delete-btn:hover {
+    background-color: #c0392b;
+  }
+  
+  .delete-btn:disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+  }
+  

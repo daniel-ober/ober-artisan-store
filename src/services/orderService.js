@@ -1,6 +1,6 @@
 // src/services/orderService.js
 import { db } from '../firebaseConfig'; // Ensure you have the correct path
-import { collection, getDocs, doc, updateDoc, getDoc } from 'firebase/firestore'; // Import necessary functions from Firestore
+import { collection, getDocs, doc, updateDoc, getDoc, deleteDoc } from 'firebase/firestore'; // Import necessary functions from Firestore
 
 // Function to fetch orders
 export const fetchOrders = async () => {
@@ -25,4 +25,14 @@ export const fetchOrderById = async (orderId) => {
 export const updateOrderInFirestore = async (orderId, orderData) => {
   const orderRef = doc(db, 'orders', orderId); // Get the document reference
   await updateDoc(orderRef, orderData); // Update the document with new data
+};
+
+// Function to delete an order from Firestore
+export const deleteOrderFromFirestore = async (orderId) => {
+  try {
+    const orderRef = doc(db, 'orders', orderId); // Get the document reference
+    await deleteDoc(orderRef); // Delete the document
+  } catch (error) {
+    throw new Error('Error deleting order: ' + error.message);
+  }
 };
