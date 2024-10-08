@@ -45,10 +45,16 @@ export const fetchUsers = async () => {
   try {
     const usersCollectionRef = collection(firestore, 'users');
     const querySnapshot = await getDocs(usersCollectionRef);
+    
+    if (querySnapshot.empty) {
+      throw new Error('No users found.');
+    }
+
     const users = querySnapshot.docs.map(doc => ({
       id: doc.id,
       ...doc.data(),
     }));
+    
     console.log('Fetched users:', users); // Log fetched users
     return users;
   } catch (error) {
