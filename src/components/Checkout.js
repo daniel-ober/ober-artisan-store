@@ -1,121 +1,79 @@
-// src/components/Checkout.js
-import React, { useState, useEffect } from 'react';
-import { createOrder } from '../services/firebaseService'; // Import the createOrder function
-import { TextField, Button, Typography } from '@mui/material';
-import CheckoutForm from './CheckoutForm'; // Ensure you're importing the CheckoutForm
-import './Checkout.css';
+import React, { useState } from 'react';
 
-const Checkout = () => {
-  const [cart, setCart] = useState([]);
-  const [userDetails, setUserDetails] = useState({
-    name: '',
-    address: '',
-    paymentMethod: '',
-  });
-  const [status, setStatus] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [paymentSuccess, setPaymentSuccess] = useState(false); // Track payment success
+const Checkout = ({ onCheckoutComplete }) => {
+  const [customerName, setCustomerName] = useState('');
+  const [customerPhone, setCustomerPhone] = useState('');
+  const [shippingAddress, setShippingAddress] = useState('');
+  const [billingAddress, setBillingAddress] = useState('');
+  const [paymentMethod, setPaymentMethod] = useState('');
+  const [cardLast4, setCardLast4] = useState('');
+  const [total, setTotal] = useState(0); // Example for total amount
+  const [items, setItems] = useState([]); // Example for ordered items
 
-  useEffect(() => {
-    const fetchCart = async () => {
-      // Fetch cart items from local storage
-      const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
-      setCart(savedCart);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Logic for processing payment here (e.g., with Stripe)
+
+    // On successful payment, create the order object
+    const order = {
+      id: 'ORDER_ID', // You should generate or retrieve the actual order ID
+      timestamp: new Date().toISOString(),
+      customerName, // Capture customer name
+      customerPhone,
+      shippingAddress,
+      billingAddress,
+      status: 'Processing', // Set appropriate status
+      priority: 'Normal', // Set default priority
+      total,
+      paymentMethod,
+      cardLast4,
+      items,
+      subtotal: total, // If needed
+      tax: 0, // Calculate tax if applicable
+      internalNotes: '', // Capture any internal notes
+      stripeInvoiceUrl: '', // Capture invoice URL if applicable
     };
 
-    fetchCart();
-  }, []);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUserDetails({
-      ...userDetails,
-      [name]: value,
-    });
-  };
-
-  const handlePaymentSuccess = async (paymentMethodId) => {
-    setLoading(true);
-
-    try {
-      const orderData = {
-        userId: 'user123', // Replace with actual user ID or get from auth
-        ...userDetails,
-        items: cart, // Use the cart as the items in the order
-        total: cart.reduce((total, item) => total + item.price * item.quantity, 0), // Calculate total price
-        status: 'pending',
-        paymentId: paymentMethodId, // Add payment method ID to order data
-      };
-
-      // Call the createOrder function from firebaseConfig.js
-      const orderId = await createOrder(orderData);
-
-      setStatus(`Order placed successfully! Order ID: ${orderId}`);
-      setCart([]); // Clear the cart
-      localStorage.removeItem('cart'); // Remove cart from local storage
-      setPaymentSuccess(true); // Indicate payment success
-    } catch (error) {
-      console.error('Error placing order:', error);
-      setStatus('Failed to place order. Please try again.');
-    } finally {
-      setLoading(false);
-    }
+    // Call the onCheckoutComplete callback with the order data
+    onCheckoutComplete(order);
   };
 
   return (
-    <div className="checkout-container">
-      <Typography variant="h4" component="h1" gutterBottom>
-        Checkout
-      </Typography>
-      <form onSubmit={(e) => e.preventDefault()}>
-        <TextField
-          label="Name"
-          name="name"
-          value={userDetails.name}
-          onChange={handleChange}
-          fullWidth
-          margin="normal"
-          required
-          className="checkout-input"
-        />
-        <TextField
-          label="Address"
-          name="address"
-          value={userDetails.address}
-          onChange={handleChange}
-          fullWidth
-          margin="normal"
-          required
-          className="checkout-input"
-        />
-        <TextField
-          label="Payment Method"
-          name="paymentMethod"
-          value={userDetails.paymentMethod}
-          onChange={handleChange}
-          fullWidth
-          margin="normal"
-          required
-          className="checkout-input"
-        />
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          className="checkout-button"
-          disabled={loading || paymentSuccess} // Disable button if loading or payment is successful
-        >
-          {loading ? 'Placing Order...' : 'Place Order'}
-        </Button>
-      </form>
-      {status && (
-        <Typography variant="body2" color="textSecondary" sx={{ marginTop: 2 }}>
-          {status}
-        </Typography>
-      )}
-      {/* Include the CheckoutForm for payment processing */}
-      <CheckoutForm onPaymentSuccess={handlePaymentSuccess} />
-    </div>
+    <form onSubmit={handleSubmit}>
+      <h2>Checkout</h2>
+      <label>
+        Name:
+        <input type="text" value={customerName} onChange={(e) => setCustomerName(e.target.value)} required />
+      </label>
+      <label>
+        Phone:
+        <input type="text" value={customerPhone} onChange={(e) => setCustomerPhone(e.target.value)} required />
+      </label>
+      <label>
+        Shipping Address:
+        <input type="text" value={shippingAddress} onChange={(e) => setShippingAddress(e.target.value)} required />
+      </label>
+      <label>
+        Billing Address:
+        <input type="text" value={billingAddress} onChange={(e) => setBillingAddress(e.target.value)} required />
+      </label>
+      <label>
+        Payment Method:
+        <select value={paymentMethod} onChange={(e) => setPaymentMethod(e.target.value)} required>
+          <option value="">Select a payment method</option>
+          <option value="Credit Card">Credit Card</option>
+          <option value="PayPal">PayPal</option>
+          {/* Add other payment methods as needed */}
+        </select>
+      </label>
+      <label>
+        Last 4 Digits of Card:
+        <input type="text" value={cardLast4} onChange={(e) => setCardLast4(e.target.value)} required />
+      </label>
+      {/* Add any additional fields as needed */}
+      <button type="submit">Complete Purchase</button>
+    </form>
   );
 };
 
