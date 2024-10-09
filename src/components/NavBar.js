@@ -111,12 +111,13 @@ const NavBar = ({ isAuthenticated, onSignOut, onTabChange }) => {
         <Link to="/products" className={`nav-link ${location.pathname === '/products' ? 'active' : ''}`} onClick={() => handleLinkClick('/products', 'Products')}>Shop/Gallery</Link>
         <Link to="/about" className={`nav-link ${location.pathname === '/about' ? 'active' : ''}`} onClick={() => handleLinkClick('/about', 'About')}>About</Link>
         <Link to="/contact" className={`nav-link ${location.pathname === '/contact' ? 'active' : ''}`} onClick={() => handleLinkClick('/contact', 'Contact')}>Contact</Link>
-        <Link to="/custom-shop-assistant" className={`nav-link ${location.pathname === '/custom-shop-assistant' ? 'active' : ''}`} onClick={() => handleLinkClick('/custom-shop-assistant', 'Custom Shop Assistant')}>Custom Shop Assistant (Beta)</Link>
-        <Link to="/mixing-booth" className={`nav-link ${location.pathname === '/mixing-booth' ? 'active' : ''}`} onClick={() => handleLinkClick('/mixing-booth', 'Mixing Booth')}>Mixing Booth</Link> New Mixing Booth Link
         {isAuthenticated ? (
           <>
-            <Link to="/account" className={`nav-link ${location.pathname === '/account' ? 'active' : ''}`} onClick={() => handleLinkClick('/account', 'Account')}><FaUserAlt /> Account</Link>
+            {isAdmin && <Link to="/custom-shop-assistant" className={`nav-link ${location.pathname === '/custom-shop-assistant' ? 'active' : ''}`} onClick={() => handleLinkClick('/custom-shop-assistant', 'Custom Shop Assistant')}>ARTiSAN SUITE</Link>}
+            {isAdmin && <Link to="/mixing-booth" className={`nav-link ${location.pathname === '/mixing-booth' ? 'active' : ''}`} onClick={() => handleLinkClick('/mixing-booth', 'Mixing Booth')}>Mixing Booth</Link>}
             {isAdmin && <Link to="/admin" className={`nav-link ${location.pathname === '/admin' ? 'active' : ''}`} onClick={() => handleLinkClick('/admin', 'Admin')}><FaCog /> Admin</Link>}
+            <Link to="/account" className={`nav-link ${location.pathname === '/account' ? 'active' : ''}`} onClick={() => handleLinkClick('/account', 'Account')}><FaUserAlt /> Account</Link>
+
             <button className="nav-link" onClick={handleSignOut}><FaSignOutAlt /> Sign Out</button>
           </>
         ) : (
