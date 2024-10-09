@@ -1,7 +1,7 @@
-// src/components/Cart.js
 import React, { useState } from 'react';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
+import { Link } from 'react-router-dom'; // Import Link for navigation
 import { loadStripe } from '@stripe/stripe-js';
 import './Cart.css';
 
@@ -24,7 +24,7 @@ const Cart = () => {
     };
 
     const getItemTotal = (item) => {
-        return (item.price || 0) * (item.quantity || 0); // Safely handle undefined values
+        return (item.price || 0) * (item.quantity || 0);
     };
 
     const getTotalAmount = () => {
@@ -32,7 +32,7 @@ const Cart = () => {
     };
 
     const handleCheckout = async () => {
-        setLoading(true); // Start loading when checkout begins
+        setLoading(true);
         try {
             const response = await fetch('http://localhost:4949/api/create-checkout-session', {
                 method: 'POST',
@@ -41,9 +41,9 @@ const Cart = () => {
                 },
                 body: JSON.stringify({
                     products: Object.values(cart).map(product => ({
-                        name: product.name || 'Unnamed Product', // Fallback name
-                        price: product.priceId || '0', // Ensure priceId is valid
-                        quantity: product.quantity || 0, // Default to 0 if undefined
+                        name: product.name || 'Unnamed Product',
+                        price: product.priceId || '0',
+                        quantity: product.quantity || 0,
                     })),
                     userId: user?.uid,
                 }),
@@ -56,17 +56,13 @@ const Cart = () => {
             const session = await response.json();
             window.location.href = session.url;
 
-            // Clear the cart after a successful purchase
             clearCart();
         } catch (error) {
             console.error('Failed to redirect to checkout:', error);
         } finally {
-            setLoading(false); // Stop loading after the process
+            setLoading(false);
         }
     };
-
-    // Debugging: Log cart content
-    console.log("Cart items:", cart);
 
     if (loading) {
         return <p>Loading...</p>;
@@ -79,58 +75,54 @@ const Cart = () => {
                 <p>Your cart is empty.</p>
             ) : (
                 <>
-                    {Object.values(cart).map((item) => {
-                        // Debugging: Log each item and its price
-                        console.log("Cart item details:", item);
-                        console.log("Item price:", item.price, "Type:", typeof item.price);
-                        
-                        return (
-                            <div key={item.id} className="cart-item"> {/* Ensure item.id is unique */}
-                                {item.images && item.images[0] && (
+                    {Object.values(cart).map((item) => (
+                        <div key={item.id} className="cart-item">
+                            {item.images && item.images[0] && (
+                                <Link to={`/products/${item.id}`}> {/* Link to product detail page */}
                                     <img src={item.images[0]} alt={item.name} className="cart-item-image" />
-                                )}
-                                <div className="cart-item-details">
-                                    <h2>{item.name || 'Unnamed Product'}</h2> {/* Fallback name */}
-                                    <p>{item.description || 'No description available.'}</p>
-                                    <p>${typeof item.price === 'number' ? item.price.toFixed(2) : 'N/A'}</p> {/* Safe toFixed use */}
+                                </Link>
+                            )}
+                            <div className="cart-item-details">
+                                <h2>{item.name || 'Unnamed Product'}</h2>
+                                <p>{item.description || 'No description available.'}</p>
+                                <p>${typeof item.price === 'number' ? item.price.toFixed(2) : 'N/A'}</p>
 
-                                    <div className="quantity-control">
-                                        <button 
-                                            onClick={() => handleQuantityChange(item.id, -1)}
-                                            disabled={item.category === 'artisan'}
-                                            className={item.category === 'artisan' ? 'disabled-button' : ''}
-                                        >
-                                            -
-                                        </button>
-                                        <span>{item.quantity || 0}</span> {/* Fallback to 0 */}
-                                        <button 
-                                            onClick={() => handleQuantityChange(item.id, 1)} 
-                                            disabled={item.category === 'artisan'}
-                                            className={item.category === 'artisan' ? 'disabled-button' : ''}
-                                        >
-                                            +
-                                        </button>
-                                    </div>
-
-                                    <button onClick={() => removeFromCart(item.id)} className="remove-button">
-                                        Remove
+                                <div className="quantity-control">
+                                    <button 
+                                        onClick={() => handleQuantityChange(item.id, -1)}
+                                        disabled={item.category === 'artisan'}
+                                        className={item.category === 'artisan' ? 'disabled-button' : ''}
+                                    >
+                                        -
+                                    </button>
+                                    <span>{item.quantity || 0}</span>
+                                    <button 
+                                        onClick={() => handleQuantityChange(item.id, 1)} 
+                                        disabled={item.category === 'artisan'}
+                                        className={item.category === 'artisan' ? 'disabled-button' : ''}
+                                    >
+                                        +
                                     </button>
                                 </div>
-                                <div className="cart-item-total">
-                                    <p>Total: ${(getItemTotal(item) || 0).toFixed(2)}</p> {/* Safe toFixed use */}
-                                </div>
+
+                                <button onClick={() => removeFromCart(item.id)} className="remove-button">
+                                    Remove
+                                </button>
                             </div>
-                        );
-                    })}
+                            <div className="cart-item-total">
+                                <p>Total: ${(getItemTotal(item) || 0).toFixed(2)}</p>
+                            </div>
+                        </div>
+                    ))}
 
                     <div className="cart-total">
-                        <h3>Total Amount: ${(getTotalAmount() || 0).toFixed(2)}</h3> {/* Safe toFixed use */}
+                        <h3>Total Amount: ${(getTotalAmount() || 0).toFixed(2)}</h3>
                     </div>
 
                     <button
                         onClick={handleCheckout}
                         className="checkout-button"
-                        disabled={loading || Object.keys(cart).length === 0} // Disable if cart is empty
+                        disabled={loading || Object.keys(cart).length === 0}
                     >
                         {loading ? 'Processing...' : 'Checkout'}
                     </button>
