@@ -53,8 +53,20 @@
   transition: background-color 0.3s; /* Smooth transition */
 }
 
-.quantity-control button:hover {
-  background-color: #2980b9; /* Darker blue on hover */
+.quantity-control button.disabled-button {
+  background-color: #d3d3d3; /* Light gray background for disabled buttons */
+  color: #808080; /* Dark gray text */
+  cursor: not-allowed; /* Change cursor to not-allowed */
+}
+
+.quantity-control button:disabled {
+  background-color: #d3d3d3; /* Light gray background for disabled buttons */
+  color: #808080; /* Dark gray text */
+  cursor: not-allowed; /* Change cursor to not-allowed */
+}
+
+.quantity-control button:not(.disabled-button):hover {
+  background-color: #2980b9; /* Darker blue on hover for enabled buttons */
 }
 
 .remove-button {

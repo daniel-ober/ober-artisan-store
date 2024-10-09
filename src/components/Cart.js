@@ -8,7 +8,7 @@ import './Cart.css';
 const stripePromise = loadStripe('pk_test_51PrBd7Jbbx8jAR4NZ2vOilq5lRJaQ0JnQjT9R7Z1brJvVokZc6TpaRFtX67jSCg8PpeqeUqmXBmFTUBLo0lkeI1G00KrLLeSJb');
 
 const Cart = () => {
-    const { cart, updateQuantity, removeFromCart, clearCart } = useCart(); // Add clearCart function
+    const { cart, updateQuantity, removeFromCart, clearCart } = useCart();
     const { user } = useAuth();
     const [loading, setLoading] = useState(false);
 
@@ -97,14 +97,16 @@ const Cart = () => {
                                     <div className="quantity-control">
                                         <button 
                                             onClick={() => handleQuantityChange(item.id, -1)}
-                                            disabled={item.category === 'custom shop' || item.category === 'one of a kind'}
+                                            disabled={item.category === 'artisan'}
+                                            className={item.category === 'artisan' ? 'disabled-button' : ''}
                                         >
                                             -
                                         </button>
                                         <span>{item.quantity || 0}</span> {/* Fallback to 0 */}
                                         <button 
                                             onClick={() => handleQuantityChange(item.id, 1)} 
-                                            disabled={item.category === 'custom shop' || item.category === 'one of a kind'}
+                                            disabled={item.category === 'artisan'}
+                                            className={item.category === 'artisan' ? 'disabled-button' : ''}
                                         >
                                             +
                                         </button>
