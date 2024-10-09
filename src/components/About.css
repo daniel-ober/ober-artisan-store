@@ -1,16 +1,14 @@
 /* General page styling */
 .about-page {
   padding: 40px;
-  background-color: #f4f4f4; /* Light background around the content */
+  background-color: #f4f4f4; /* Change to your preferred background color */
+  text-align: center;
 }
 
-/* Page heading styling */
 .about-page h2 {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 30px;
-  color: #333;
-  text-align: center;
+  font-family: 'Georgia', serif;
+  font-size: 32px;
+  margin-bottom: 20px;
 }
 
 /* Carousel container to align items evenly */
@@ -24,7 +22,6 @@
 
 /* Carousel item container with fixed width for even layout */
 .carousel-item {
-  background-color: white; /* White background behind text */
   border-radius: 8px;
   padding: 20px;
   width: 350px; /* Ensures consistent width for all items */
