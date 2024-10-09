@@ -71,14 +71,15 @@ const ProductDetail = () => {
     if (loading) return <p>Loading...</p>;
     if (error) return <p>{error}</p>;
 
-    const canAdjustQuantity = product?.category !== 'custom shop' && product?.category !== 'one of a kind';
+    // Adjust quantity button functionality based on product category
+    const isArtisanProduct = product?.category === 'artisan';
 
     return (
         <div className="product-detail-container">
-            {/* <Link to="/products" className="back-to-shop-link">
+            <Link to="/products" className="back-to-shop-link">
                 <FaArrowLeft className="back-icon" />
                 Back to Shop/Gallery
-            </Link> */}
+            </Link>
             <div className="product-image-gallery">
                 <img
                     src={mainImage}
@@ -104,9 +105,25 @@ const ProductDetail = () => {
                 <div className="quantity-control">
                     {inCart ? (
                         <>
-                            <button onClick={() => handleQuantityChange(-1)} disabled={!canAdjustQuantity}>-</button>
-                            <span>{inCart.quantity}</span>
-                            <button onClick={() => handleQuantityChange(1)} disabled={!canAdjustQuantity}>+</button>
+                            {!isArtisanProduct && (
+                                <>
+                                    <button
+                                        onClick={() => handleQuantityChange(-1)}
+                                        disabled={!inCart}
+                                        className={(!inCart ? 'disabled-button' : '')}
+                                    >
+                                        -
+                                    </button>
+                                    <span>{inCart.quantity}</span>
+                                    <button
+                                        onClick={() => handleQuantityChange(1)}
+                                        disabled={!inCart}
+                                        className={(!inCart ? 'disabled-button' : '')}
+                                    >
+                                        +
+                                    </button>
+                                </>
+                            )}
                             <button onClick={handleRemoveFromCart} className="remove-from-cart-button">
                                 Remove from Cart
                             </button>
