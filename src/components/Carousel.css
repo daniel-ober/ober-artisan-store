@@ -1,99 +1,126 @@
 .carousel {
   position: relative;
   width: 100%;
-  max-width: 500px;
-  margin: 0 auto;
-  overflow: hidden;
+  overflow: hidden; /* Hide overflow for neatness */
 }
 
 .carousel-track-container {
-  width: 100%;
-  overflow: hidden;
+  width: 100%; /* Full width */
+  height: calc(100vh - 454px - 200px); /* Adjust these values based on the height of your navbar and footer */
+  display: flex; /* Flexbox to manage item layout */
+  align-items: center; /* Center vertically */
 }
 
 .carousel-track {
-  display: flex;
-  transition: transform 0.5s ease-in-out;
+  display: flex; /* Align items in a row */
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  transition: transform 0.5s ease; /* Smooth transition */
+  height: auto; /* Full height to fill the container */
 }
 
 .carousel-item {
-  flex: 0 0 100%;
-  box-sizing: border-box;
-  text-align: center;
-  transition: opacity 0.5s ease, transform 0.5s ease;
-  opacity: 0.5;
+  flex: 0 0 50%; /* Center active item and allow for space */
+  box-sizing: border-box; /* Include padding in width */
+  position: relative; /* Ensure correct positioning */
 }
 
-.carousel-item.active {
-  opacity: 1;
+.preview-item {
+  flex: 0 0 25%; /* Adjust width for preview items */
+  text-align: center; /* Center text */
+  opacity: 0.5; /* Make previews slightly transparent */
+  transition: opacity 0.3s; /* Smooth opacity transition */
 }
 
-.carousel-item img {
-  width: 60%; /* Adjust this based on desired width */
-  height: 500px; /* Set a fixed height for the image */
-  border-radius: 8px;
-  margin-bottom: 20px;
+.preview-item img {
+  width: 80%; /* Responsive width for preview images */
+  height: auto; /* Maintain aspect ratio */
 }
 
-.carousel-item h1 {
-  font-family: 'Georgia', serif;
-  font-size: 24px;
-  margin: 10px 0;
-}
-
-.carousel-item p {
-  font-family: 'Arial', sans-serif;
-  font-size: 16px;
-  line-height: 1.5;
-  padding: 0 20px;
-}
-
-/* Controls styling */
 .carousel-controls {
   position: absolute;
-  top: 50%;
-  width: 100%;
+  top: 50%; /* Center buttons vertically */
+  left: 10px; /* Position on the left */
+  right: 10px; /* Position on the right */
   display: flex;
-  justify-content:space-between;
-  transform: translateY(-50%);
-  z-index: 10; /* Ensures buttons are on top */
+  justify-content: space-between; /* Space out buttons */
+  transform: translateY(-50%); /* Center the buttons */
 }
 
 .carousel-button {
-  background-color: transparent;
+  background: transparent;
   border: none;
   cursor: pointer;
-  padding: 0;
-  z-index: 10; /* Ensures buttons are on top */
 }
 
 .carousel-icon {
-  width: 40px;
-  height: 40px;
+  width: 30px; /* Smaller size for icons */
+  height: auto; /* Maintain aspect ratio */
 }
 
-/* Flip the left arrow image to face left */
-.carousel-icon.prev {
-  transform: none; /* Flips the image horizontally */
+.carousel-item.active {
+  opacity: 1; /* Full visibility for active item */
+  width: 100%; /* Ensure it takes full width */
+  height: 300px; /* Set a fixed height, adjust as needed */
+  display: flex; /* Center content vertically */
+  flex-direction: column; /* Stack children vertically */
+  justify-content: center; /* Center content */
+  align-items: center; /* Center content horizontally */
 }
 
-.carousel-icon.next {
-  transform: none; /* No flip needed for the right arrow */
+.carousel-item.active img {
+  width: 100%; /* Full width of the container */
+  height: 325px; /* Full height of the container */
+  object-fit: contain; /* Maintain aspect ratio and cover the entire area */
 }
 
-/* Remove the hover animation for rotation */
-.carousel-button:hover .carousel-icon {
-  transform: none; /* No change on hover */
+.preview-item:hover {
+  opacity: 1; /* Full visibility on hover */
 }
 
-/* Responsiveness adjustments */
-@media (max-width: 768px) {
-  .carousel-item img {
-    width: 80%; /* Adjusts width on mobile */
-    height: auto; /* Maintain aspect ratio on mobile */
+/* Media Queries */
+@media (max-width: 1024px) {
+  .carousel-track-container {
+    height: calc(100vh - 300px); /* Adjust for smaller screens */
   }
 
-  .carousel-button {
-    padding: 8px;
+  .carousel-item {
+    flex: 0 0 70%; /* Wider active item on smaller screens */
+  }
+
+  .preview-item {
+    flex: 0 0 20%; /* Adjust preview width for smaller screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel-track-container {
+    height: calc(100vh - 250px); /* Further adjust height */
+  }
+
+  .carousel-item {
+    flex: 0 0 80%; /* Wider active item on smaller screens */
+  }
+
+  .preview-item {
+    flex: 0 0 15%; /* Adjust preview width for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-track-container {
+    height: calc(100vh - 200px); /* Adjust for mobile */
+  }
+
+  .carousel-item {
+    flex: 0 0 90%; /* Wider active item on mobile */
+  }
+
+  .preview-item {
+    flex: 0 0 10%; /* Adjust preview width for mobile */
+  }
+
+  .carousel-icon {
+    width: 25px; /* Smaller icons for mobile */
   }
 }

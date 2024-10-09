@@ -49,8 +49,8 @@ function App() {
                     <Route path="/about" element={<About />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/cart" element={<Cart />} />
-                    <Route path="/custom-shop-assistant" element={<CustomShopAssistant />} />
-                    <Route path="/mixing-booth" element={<AudioPlayer.Mixer />} />
+                    <Route path="/custom-shop-assistant" element={<PrivateRoute element={<CustomShopAssistant />} adminOnly />} />
+                    <Route path="/mixing-booth" element={<PrivateRoute element={<AudioPlayer.Mixer />} adminOnly />} />
                     <Route path="/signin" element={<SignInEmail />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/forgot-password" element={<ForgotPassword />} />
