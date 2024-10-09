@@ -40,4 +40,4 @@ export const addProductToFirestore = async (newProduct) => {
 export const updateProductStatus = async (productId, newStatus) => {
   const productDocRef = doc(db, "products", productId);
   await updateDoc(productDocRef, { status: newStatus });
-};
+}
