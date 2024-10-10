@@ -1,21 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { fetchUsers, deleteUserFromFirestore } from '../services/userService'; 
-import './ManageUsers.css';
+import { fetchUsers, deleteUserFromFirestore, updateUserStatus } from '../services/userService';
 import EditUserModal from './EditUserModal';
+import AddUserModal from './AddUserModal';
+import './ManageUsers.css';
 
 const ManageUsers = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [selectedUser, setSelectedUser] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editUserId, setEditUserId] = useState(null);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false); 
 
   useEffect(() => {
     const getUsers = async () => {
       try {
-        const usersData = await fetchUsers();
-        setUsers(usersData);
+        const fetchedUsers = await fetchUsers();
+        setUsers(fetchedUsers);
       } catch (error) {
+        console.error('Error fetching users:', error);
         setError('Error fetching users: ' + error.message);
       } finally {
         setLoading(false);
@@ -27,28 +30,59 @@ const ManageUsers = () => {
   const handleDelete = async (userId) => {
     try {
       await deleteUserFromFirestore(userId);
-      setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
+      setUsers((prevUsers) => prevUsers.filter(user => user.uid !== userId));
     } catch (error) {
+      console.error('Error deleting user:', error);
       setError('Error deleting user: ' + error.message);
     }
   };
 
-  const handleEdit = (user) => {
-    setSelectedUser(user);
-    setIsModalOpen(true);
+  const handleStatusChange = async (userId, newStatus) => {
+    try {
+      await updateUserStatus(userId, newStatus);
+      setUsers(prevUsers => 
+        prevUsers.map(user => 
+          user.uid === userId ? { ...user, status: newStatus } : user
+        )
+      );
+    } catch (error) {
+      console.error('Error updating user status:', error);
+      setError('Error updating user status: ' + error.message);
+    }
   };
 
-  const handleUserUpdated = (updatedUser) => {
-    setUsers((prevUsers) => 
-      prevUsers.map((user) => 
-        user.id === updatedUser.id ? updatedUser : user
-      )
-    );
-    setIsModalOpen(false);
+  const openEditModal = (userId) => {
+    setEditUserId(userId);
+    setIsEditModalOpen(true);
   };
 
-  const handleAddNewUser = () => {
-    alert('Open Add New User modal');
+  const closeEditModal = () => {
+    setEditUserId(null);
+    setIsEditModalOpen(false);
+  };
+
+  const openAddModal = () => {
+    setIsAddModalOpen(true); 
+  };
+
+  const closeAddModal = () => {
+    setIsAddModalOpen(false); 
+  };
+
+  const handleUserUpdated = () => {
+    const getUsers = async () => {
+      try {
+        const fetchedUsers = await fetchUsers();
+        setUsers(fetchedUsers);
+      } catch (error) {
+        console.error('Error refreshing user list:', error);
+      }
+    };
+    getUsers();
+  };
+
+  const handleUserAdded = (newUser) => {
+    setUsers((prevUsers) => [...prevUsers, newUser]);
   };
 
   if (loading) {
@@ -62,51 +96,53 @@ const ManageUsers = () => {
   return (
     <div className="manage-users-container">
       <h1>Manage Users</h1>
-      <button className="add-new-btn" onClick={handleAddNewUser}>
-        Add New User
-      </button>
+      <button className="add-new-btn" onClick={openAddModal}>Add New User</button>
       <table className="manage-users-table">
         <thead>
           <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
             <th>Email</th>
-            <th>Phone</th>
-            <th>SMS Notifications</th>
-            <th>Email Notifications</th>
-            <th>Is Blocked?</th>
+            <th>Status</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {users.length > 0 ? (
             users.map((user) => (
-              <tr key={user.id}>
-                <td>{user.firstName}</td>
-                <td>{user.lastName}</td>
+              <tr key={user.uid}>
                 <td>{user.email}</td>
-                <td>{user.phone || 'N/A'}</td>
-                <td>{user.smsNotification ? 'Yes' : 'No'}</td>
-                <td>{user.emailNotification ? 'Yes' : 'No'}</td>
-                <td>{user.isBlocked ? 'Yes' : 'No'}</td>
                 <td>
-                  <button type="button" className="edit-btn" onClick={() => handleEdit(user)}>Edit</button>
+                  <select 
+                    value={user.status} 
+                    onChange={(e) => handleStatusChange(user.uid, e.target.value)}
+                  >
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                  </select>
+                </td>
+                <td>
+                  <button className="edit-btn" onClick={() => openEditModal(user.uid)}>Edit</button>
+                  <button className="delete-btn" onClick={() => handleDelete(user.uid)}>Delete</button>
                 </td>
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan="8">No users found.</td>
+              <td colSpan="3">No users found.</td>
             </tr>
           )}
         </tbody>
       </table>
-
-      {isModalOpen && (
-        <EditUserModal
-          user={selectedUser}
-          onClose={() => setIsModalOpen(false)} 
-          onUserUpdated={handleUserUpdated} 
+      {isEditModalOpen && (
+        <EditUserModal 
+          userId={editUserId}
+          onClose={closeEditModal}
+          onUserUpdated={handleUserUpdated}
+        />
+      )}
+      {isAddModalOpen && (
+        <AddUserModal
+          onClose={closeAddModal}
+          onUserAdded={handleUserAdded}
         />
       )}
     </div>
