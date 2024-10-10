@@ -76,10 +76,10 @@ const ProductDetail = () => {
 
     return (
         <div className="product-detail-container">
-            <Link to="/products" className="back-to-shop-link">
+            {/* <Link to="/products" className="back-to-shop-link">
                 <FaArrowLeft className="back-icon" />
                 Back to Shop/Gallery
-            </Link>
+            </Link> */}
             <div className="product-image-gallery">
                 <img
                     src={mainImage}

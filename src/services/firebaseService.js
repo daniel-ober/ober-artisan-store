@@ -11,6 +11,7 @@ import {
 } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { v4 as uuidv4 } from 'uuid'; // For generating unique file names
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'; // Import Firebase authentication
 
 // Fetch product by ID
 export const fetchProductById = async (id) => {
@@ -180,6 +181,44 @@ export const checkExistingOrder = async (orderId) => {
     }
 };
 
+// Function to check admin claim
+export const checkAdminClaim = async (email) => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    if (user && user.email === email) {
+        const idTokenResult = await user.getIdTokenResult();
+        return idTokenResult.claims.admin || false; // returns true if admin claim exists
+    }
+    return false; // Not signed in or does not match the email
+};
+
+// Function to sign in user and check admin claim
+export const signInUser = async (email, password) => {
+    const auth = getAuth();
+    
+    try {
+        // Sign in the user
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        
+        // Log the user credential to verify sign-in
+        console.log('User signed in:', userCredential.user);
+        
+        // Now check admin claim
+        const isAdmin = await checkAdminClaim(userCredential.user.email);
+        
+        if (isAdmin) {
+            console.log('User has admin claim');
+        } else {
+            console.log('User does not have admin claim');
+        }
+    } catch (error) {
+        console.error('Error signing in:', error);
+    }
+};
+
+
+
 // Function to test Firestore connection
 export const testFirestoreConnection = async () => {
     try {
@@ -195,3 +234,7 @@ export const testFirestoreConnection = async () => {
 
 // Call the test function to confirm Firestore connection
 testFirestoreConnection();
+
+// Expose the checkAdminClaim function to the global scope
+window.checkAdminClaim = checkAdminClaim;
+window.signInUser = signInUser; // Make signInUser globally accessible

@@ -1,0 +1,32 @@
+.carousel-container {
+    display: flex;
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    position: relative; /* Relative positioning for absolute children */
+}
+
+.carousel-drums {
+    position: relative; /* For positioning of drum items */
+    width: 400px; /* Set width for the drum area */
+    height: 400px; /* Set height for the drum area */
+    overflow: hidden; /* Hide overflow */
+}
+
+.carousel-drum {
+    position: absolute; /* Allow stacking of drums */
+    top: 0;
+    left: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    transition: opacity 0.5s ease; /* Smooth transition */
+}
+
+.carousel-drum.active {
+    opacity: 1; /* Fully visible */
+}
+
+.carousel-button {
+    margin: 0 20px; /* Space between buttons */
+    padding: 10px 20px; /* Padding for buttons */
+    cursor: pointer; /* Pointer on hover */
+}
