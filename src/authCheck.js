@@ -1,3 +1,4 @@
+// src/authCheck.js
 import { getAuth } from 'firebase/auth';
 
 export const checkAuthentication = () => {

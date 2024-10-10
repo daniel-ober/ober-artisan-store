@@ -1,51 +1,65 @@
-import { auth, firestore } from '../firebaseConfig'; // Ensure correct path to your firebaseConfig
-import { doc, setDoc, getDoc, collection, getDocs, deleteDoc, updateDoc } from 'firebase/firestore';
-import { createUserWithEmailAndPassword } from 'firebase/auth'; // Import to create users
+import { auth, db } from '../firebaseConfig'; // Ensure correct path
+import { collection, getDocs, doc, deleteDoc, updateDoc, addDoc, getDoc } from 'firebase/firestore';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
-// Create a new user with email and password
+// Update user status in Firestore
+export const updateUserStatus = async (userId, newStatus) => {
+  try {
+    const userDocRef = doc(db, 'users', userId); // Use db instead of firestore
+    await updateDoc(userDocRef, { status: newStatus });
+    console.log('User status updated to:', newStatus);
+  } catch (error) {
+    console.error('Error updating user status:', error);
+    throw error;
+  }
+};
+
+// Register a new user
 export const registerUser = async (email, password, userData) => {
   try {
-    // Create user in Firebase Authentication
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    const userId = userCredential.user.uid; // Get the user's unique ID
-
-    // Add user data to Firestore
+    const userId = userCredential.user.uid;
     await addUserToFirestore(userId, userData);
     console.log('User registered and added to Firestore');
   } catch (error) {
     console.error('Error registering user:', error);
-    throw error; // Rethrow for handling in component
+    throw error;
   }
 };
 
-// Update user data in Firestore
-export const updateUserInFirestore = async (userId, userData) => {
-  try {
-    const userDocRef = doc(firestore, 'users', userId);
-    await updateDoc(userDocRef, userData);
-    console.log('User updated in Firestore:', userData); // Log the updated user data
-  } catch (error) {
-    console.error('Error updating user in Firestore:', error);
-    throw error; // Rethrow for handling in component
-  }
-};
-
-// Add user to Firestore
+// Add a user to Firestore
 export const addUserToFirestore = async (userId, userData) => {
   try {
-    await setDoc(doc(firestore, 'users', userId), userData);
+    await addDoc(doc(db, 'users', userId), userData); // Use db
     console.log('User added to Firestore');
   } catch (error) {
     console.error('Error adding user to Firestore:', error);
   }
 };
 
+// Update user in Firestore
+export const updateUserInFirestore = async (userId, userData) => {
+  try {
+    const userDocRef = doc(db, 'users', userId); // Use db
+    await updateDoc(userDocRef, userData);
+    console.log('User updated in Firestore:', userData);
+  } catch (error) {
+    console.error('Error updating user in Firestore:', error);
+    throw error;
+  }
+};
+
 // Fetch all users from Firestore
 export const fetchUsers = async () => {
+  const user = auth.currentUser;
+  if (!user || !(await user.getIdTokenResult()).claims.isAdmin) {
+    throw new Error('You do not have permission to fetch users.');
+  }
+
   try {
-    const usersCollectionRef = collection(firestore, 'users');
+    const usersCollectionRef = collection(db, 'users'); // Use db
     const querySnapshot = await getDocs(usersCollectionRef);
-    
+
     if (querySnapshot.empty) {
       throw new Error('No users found.');
     }
@@ -54,19 +68,19 @@ export const fetchUsers = async () => {
       id: doc.id,
       ...doc.data(),
     }));
-    
-    console.log('Fetched users:', users); // Log fetched users
+
+    console.log('Fetched users:', users);
     return users;
   } catch (error) {
     console.error('Error fetching users:', error);
-    throw error; // Rethrow the error for handling in the component
+    throw error;
   }
 };
 
-// Fetch user document from Firestore
+// Fetch a specific user document from Firestore
 export const fetchUserDoc = async (userId) => {
   try {
-    const docRef = doc(firestore, 'users', userId);
+    const docRef = doc(db, 'users', userId); // Use db
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
@@ -81,13 +95,13 @@ export const fetchUserDoc = async (userId) => {
   }
 };
 
-// Delete user from Firestore
+// Delete a user from Firestore
 export const deleteUserFromFirestore = async (userId) => {
   try {
-    await deleteDoc(doc(firestore, 'users', userId));
+    await deleteDoc(doc(db, 'users', userId)); // Use db
     console.log('User deleted from Firestore');
   } catch (error) {
     console.error('Error deleting user from Firestore:', error);
-    throw error; // Rethrow for handling in component
+    throw error;
   }
 };

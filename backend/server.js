@@ -224,16 +224,40 @@ app.post('/api/chat', async (req, res) => {
         res.status(200).json(response.choices[0].message);
     } catch (error) {
         console.error('Error communicating with OpenAI:', error);
-        res.status(500).json({ error: 'Error communicating with OpenAI' });
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 });
 
-// Global error handling for unhandled rejections
-process.on('unhandledRejection', (error) => {
-    console.error('Unhandled Rejection:', error);
+// Webhook for Stripe events
+app.post('/api/webhooks/stripe', express.raw({ type: 'application/json' }), async (req, res) => {
+    const sig = req.headers['stripe-signature'];
+
+    let event;
+
+    try {
+        event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
+        console.log('Received Stripe event:', event.id);
+    } catch (err) {
+        console.log('Webhook error:', err.message);
+        return res.status(400).send(`Webhook Error: ${err.message}`);
+    }
+
+    // Handle the event
+    switch (event.type) {
+        case 'checkout.session.completed':
+            const session = event.data.object;
+            // Fulfill the purchase...
+            // Update Firestore with purchase details
+            break;
+        // ... handle other event types
+        default:
+            console.log(`Unhandled event type ${event.type}`);
+    }
+
+    res.json({ received: true });
 });
 
-// Start the server
+// Starting the server
 const PORT = process.env.PORT || 4949;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
