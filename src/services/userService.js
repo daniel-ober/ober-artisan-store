@@ -1,11 +1,11 @@
-import { auth, db } from '../firebaseConfig'; // Ensure correct path
-import { collection, getDocs, doc, deleteDoc, updateDoc, addDoc, getDoc } from 'firebase/firestore';
+import { auth, db } from '../firebaseConfig';
+import { doc, setDoc, getDoc, collection, getDocs, deleteDoc, updateDoc } from 'firebase/firestore';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 // Update user status in Firestore
 export const updateUserStatus = async (userId, newStatus) => {
   try {
-    const userDocRef = doc(db, 'users', userId); // Use db instead of firestore
+    const userDocRef = doc(db, 'users', userId);
     await updateDoc(userDocRef, { status: newStatus });
     console.log('User status updated to:', newStatus);
   } catch (error) {
@@ -30,7 +30,7 @@ export const registerUser = async (email, password, userData) => {
 // Add a user to Firestore
 export const addUserToFirestore = async (userId, userData) => {
   try {
-    await addDoc(doc(db, 'users', userId), userData); // Use db
+    await setDoc(doc(db, 'users', userId), userData);
     console.log('User added to Firestore');
   } catch (error) {
     console.error('Error adding user to Firestore:', error);
@@ -40,7 +40,7 @@ export const addUserToFirestore = async (userId, userData) => {
 // Update user in Firestore
 export const updateUserInFirestore = async (userId, userData) => {
   try {
-    const userDocRef = doc(db, 'users', userId); // Use db
+    const userDocRef = doc(db, 'users', userId);
     await updateDoc(userDocRef, userData);
     console.log('User updated in Firestore:', userData);
   } catch (error) {
@@ -52,12 +52,17 @@ export const updateUserInFirestore = async (userId, userData) => {
 // Fetch all users from Firestore
 export const fetchUsers = async () => {
   const user = auth.currentUser;
-  if (!user || !(await user.getIdTokenResult()).claims.isAdmin) {
+  if (!user) {
+    throw new Error('User is not authenticated.');
+  }
+
+  const tokenResult = await user.getIdTokenResult();
+  if (!tokenResult.claims.isAdmin) {
     throw new Error('You do not have permission to fetch users.');
   }
 
   try {
-    const usersCollectionRef = collection(db, 'users'); // Use db
+    const usersCollectionRef = collection(db, 'users');
     const querySnapshot = await getDocs(usersCollectionRef);
 
     if (querySnapshot.empty) {
@@ -65,7 +70,7 @@ export const fetchUsers = async () => {
     }
 
     const users = querySnapshot.docs.map(doc => ({
-      id: doc.id,
+      uid: doc.id,
       ...doc.data(),
     }));
 
@@ -80,7 +85,7 @@ export const fetchUsers = async () => {
 // Fetch a specific user document from Firestore
 export const fetchUserDoc = async (userId) => {
   try {
-    const docRef = doc(db, 'users', userId); // Use db
+    const docRef = doc(db, 'users', userId);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
@@ -98,7 +103,7 @@ export const fetchUserDoc = async (userId) => {
 // Delete a user from Firestore
 export const deleteUserFromFirestore = async (userId) => {
   try {
-    await deleteDoc(doc(db, 'users', userId)); // Use db
+    await deleteDoc(doc(db, 'users', userId));
     console.log('User deleted from Firestore');
   } catch (error) {
     console.error('Error deleting user from Firestore:', error);
