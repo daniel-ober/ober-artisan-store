@@ -6,25 +6,25 @@ import Products from './components/Products';
 import About from './components/About';
 import Contact from './components/Contact';
 import Cart from './components/Cart';
-import SignInEmail from './components/SignInEmail';
-import Register from './components/Register'; // Add Register component
-import ForgotPassword from './components/ForgotPassword'; // Add ForgotPassword component
+// import Mixer from './components/AudioPlayer/Mixer';
+import Register from './components/Register';
+import ForgotPassword from './components/ForgotPassword';
 import Checkout from './components/Checkout';
 import ProductDetail from './components/ProductDetail';
 import AccountPage from './components/AccountPage';
-import TransactionSuccess from './components/TransactionSuccess'; // Adjust the import as necessary
+import TransactionSuccess from './components/TransactionSuccess';
 import AdminDashboard from './components/AdminDashboard';
 import ManageUsers from './components/ManageUsers';
 import ManageProducts from './components/ManageProducts';
 import ManageOrders from './components/ManageOrders';
 import SiteSettings from './components/SiteSettings';
+import SignInEmail from './components/SignInEmail';
 import CustomShopAssistant from './components/CustomShopAssistant';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import TermsOfService from './components/TermsOfService';
 import ReturnPolicy from './components/ReturnPolicy';
 import Footer from './components/Footer';
 import NotFound from './components/NotFound';
-import NotAuthorized from './components/NotAuthorized';
 import PrivateRoute from './components/PrivateRoute';
 import { useAuth } from './context/AuthContext';
 import ChatSupportButton from './components/ChatSupportButton';
@@ -49,9 +49,8 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/custom-shop-assistant" element={<CustomShopAssistant />} />
           <Route path="/signin" element={<SignInEmail />} />
-          {/* <Route path='/not-authorized' element={<NotAuthorized />} /> */}
-          <Route path="/register" element={<Register />} /> {/* Add register route */}
-          <Route path="/forgot-password" element={<ForgotPassword />} /> {/* Add forgot password route */}
+          <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/products/:id" element={<ProductDetail />} />
           <Route path="/success" element={<TransactionSuccess />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
@@ -60,6 +59,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
           <Route path="/checkout" element={<PrivateRoute element={<Checkout />} />} />
           <Route path="/account" element={<PrivateRoute element={<AccountPage />} />} />
+          {/* <Route path="/mixing-booth" element={<PrivateRoute element={<Mixer />} adminOnly />} /> */}
           <Route path="/admin" element={<PrivateRoute element={<AdminDashboard />} adminOnly />} />
           <Route path="/admin/users" element={<PrivateRoute element={<ManageUsers />} adminOnly />} />
           <Route path="/admin/products" element={<PrivateRoute element={<ManageProducts />} adminOnly />} />

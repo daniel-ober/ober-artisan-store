@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { FaUsers, FaTags, FaShoppingCart } from 'react-icons/fa'; // Updated to include FaTags
+import { FaUsers, FaTags, FaShoppingCart } from 'react-icons/fa';
 import ManageProducts from './ManageProducts';
 import ManageUsers from './ManageUsers';
 import ManageOrders from './ManageOrders';
-import './AdminDashboard.css'; // Ensure this file exists for styling
+import './AdminDashboard.css';
 
 const AdminDashboard = () => {
   const [activeComponent, setActiveComponent] = useState(null); // State to track active component
@@ -46,7 +46,7 @@ const AdminDashboard = () => {
             if (e.key === 'Enter') setActiveComponent('manageProducts');
           }}
         >
-          <div className="admin-card-icon"><FaTags /></div> {/* Updated Icon */}
+          <div className="admin-card-icon"><FaTags /></div>
           <h3>Manage Products</h3>
         </div>
         <div

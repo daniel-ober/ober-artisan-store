@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { doc, getDoc, updateDoc, collection, getDocs, query, where } from 'firebase/firestore';
-import { auth, firestore } from '../firebaseConfig';
+import { auth, db } from '../firebaseConfig'; // Change firestore to db
 import { updatePassword, reauthenticateWithCredential, EmailAuthProvider } from 'firebase/auth';
 import { TextField, Button, Typography, FormControlLabel, Checkbox } from '@mui/material';
 import './AccountPage.css';
@@ -40,7 +40,7 @@ const AccountPage = () => {
   // Fetch user additional data
   const getUserData = async (userId) => {
     try {
-      const docRef = doc(firestore, 'users', userId);
+      const docRef = doc(db, 'users', userId);
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
@@ -72,7 +72,7 @@ const AccountPage = () => {
   // Fetch user orders
   const getUserOrders = async (userId) => {
     try {
-      const ordersRef = collection(firestore, 'orders');
+      const ordersRef = collection(db, 'orders');
       const q = query(ordersRef, where('userId', '==', userId));
       const querySnapshot = await getDocs(q);
 
@@ -91,7 +91,7 @@ const AccountPage = () => {
 
     if (user) {
       const userId = user.uid;
-      const userRef = doc(firestore, 'users', userId);
+      const userRef = doc(db, 'users', userId);
 
       try {
         // Check if SMS notifications are enabled and validate phone number
