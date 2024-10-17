@@ -1,10 +1,11 @@
+// src/firebaseConfig.js
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 import { getAuth, signOut as firebaseSignOut } from 'firebase/auth';
 import { getFirestore, doc, getDoc, setDoc, updateDoc, arrayUnion, addDoc, collection } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 
-// Use environment variables to configure Firebase
+// Firebase configuration
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
@@ -17,21 +18,18 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+const analytics = getAnalytics(app); // Optional: Initialize Analytics
 
-// Initialize Firebase services
-export const auth = getAuth(app);
-export const firestore = getFirestore(app); // Initialize Firestore
-export const storage = getStorage(app);
-export const signOut = firebaseSignOut; // Export signOut
+// Initialize and export Firestore, Auth, and Storage instances
+export const db = getFirestore(app); // Export the Firestore instance
+export const auth = getAuth(app); // Initialize and export Firebase Auth
+export const storage = getStorage(app); // Initialize and export Firebase Storage
+export const signOut = firebaseSignOut; // Export signOut function
 
-// Export Firestore database instance for use in other files
-export const db = firestore;
-
-// Add getUserDoc function
+// Function to get user document data
 export const getUserDoc = async (userId) => {
   try {
-    const userDocRef = doc(firestore, 'users', userId);
+    const userDocRef = doc(db, 'users', userId); // Use db instead of firestore
     const userDocSnap = await getDoc(userDocRef);
     if (userDocSnap.exists()) {
       console.log('User Data:', userDocSnap.data());
@@ -49,7 +47,7 @@ export const getUserDoc = async (userId) => {
 // Function to create a cart for a specific user
 export const createCart = async (userId) => {
   try {
-    const cartRef = doc(firestore, 'carts', userId);
+    const cartRef = doc(db, 'carts', userId); // Use db instead of firestore
     await setDoc(cartRef, {
       items: []
     });
@@ -62,7 +60,7 @@ export const createCart = async (userId) => {
 // Function to add an item to a cart
 export const addItemToCart = async (userId, item) => {
   try {
-    const cartRef = doc(firestore, 'carts', userId);
+    const cartRef = doc(db, 'carts', userId); // Use db instead of firestore
     await updateDoc(cartRef, {
       items: arrayUnion(item)
     });
@@ -74,7 +72,7 @@ export const addItemToCart = async (userId, item) => {
 // Function to test Firestore connection
 export const testFirestoreConnection = async () => {
   try {
-    const docRef = await addDoc(collection(firestore, 'test'), {
+    const docRef = await addDoc(collection(db, 'test'), { // Use db instead of firestore
       message: 'This is a test message',
       timestamp: new Date(),
     });

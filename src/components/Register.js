@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom'; // for redirecting after successful registration
-import { auth, firestore } from '../firebaseConfig';
+import { auth, db } from '../firebaseConfig'; // Change firestore to db
 import {
   TextField,
   Button,
@@ -94,7 +94,7 @@ const Register = ({ orderDetails }) => {
       const uid = newUserCredential.user.uid; // No admin session is affected
 
       // Store additional user information in Firestore
-      await setDoc(doc(firestore, 'users', uid), {
+      await setDoc(doc(db, 'users', uid), {
         firstName: formData.firstName,
         lastName: formData.lastName,
         email: formData.email,

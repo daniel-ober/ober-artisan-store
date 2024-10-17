@@ -1,4 +1,4 @@
-import { auth, db } from '../firebaseConfig';
+import { auth, db } from '../firebaseConfig'; // Use the right import for the Firestore instance
 import { doc, setDoc, getDoc, collection, getDocs, deleteDoc, updateDoc } from 'firebase/firestore';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 
@@ -19,7 +19,8 @@ export const registerUser = async (email, password, userData) => {
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const userId = userCredential.user.uid;
-    await addUserToFirestore(userId, userData);
+    // Set the user status to active by default
+    await addUserToFirestore(userId, { ...userData, status: 'active' });
     console.log('User registered and added to Firestore');
   } catch (error) {
     console.error('Error registering user:', error);
@@ -51,34 +52,15 @@ export const updateUserInFirestore = async (userId, userData) => {
 
 // Fetch all users from Firestore
 export const fetchUsers = async () => {
-  const user = auth.currentUser;
-  if (!user) {
-    throw new Error('User is not authenticated.');
-  }
-
-  const tokenResult = await user.getIdTokenResult();
-  if (!tokenResult.claims.isAdmin) {
-    throw new Error('You do not have permission to fetch users.');
-  }
-
   try {
-    const usersCollectionRef = collection(db, 'users');
-    const querySnapshot = await getDocs(usersCollectionRef);
-
-    if (querySnapshot.empty) {
-      throw new Error('No users found.');
-    }
-
-    const users = querySnapshot.docs.map(doc => ({
-      uid: doc.id,
-      ...doc.data(),
-    }));
-
-    console.log('Fetched users:', users);
-    return users;
+    const userCollectionRef = collection(db, 'users'); // Use db here
+    const userSnapshot = await getDocs(userCollectionRef);
+    const userList = userSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    console.log(userList); // Display the fetched users
+    return userList;
   } catch (error) {
     console.error('Error fetching users:', error);
-    throw error;
+    throw error; // Throw error to handle it where this function is called
   }
 };
 

@@ -11,13 +11,19 @@ const ManageUsers = () => {
   const [error, setError] = useState(null);
   const [editUserId, setEditUserId] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false); 
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
   useEffect(() => {
     const getUsers = async () => {
       try {
         const fetchedUsers = await fetchUsers();
-        setUsers(fetchedUsers);
+        // Ensure fetched users have the expected structure
+        const validUsers = fetchedUsers.map(user => ({
+          uid: user.id,
+          email: user.email || 'No email', // Provide a fallback
+          status: user.status || 'inactive', // Provide a default status
+        }));
+        setUsers(validUsers);
       } catch (error) {
         console.error('Error fetching users:', error);
         setError('Error fetching users: ' + error.message);
@@ -48,8 +54,8 @@ const ManageUsers = () => {
   const handleStatusChange = async (userId, newStatus) => {
     try {
       await updateUserStatus(userId, newStatus);
-      setUsers(prevUsers => 
-        prevUsers.map(user => 
+      setUsers(prevUsers =>
+        prevUsers.map(user =>
           user.uid === userId ? { ...user, status: newStatus } : user
         )
       );
@@ -70,23 +76,25 @@ const ManageUsers = () => {
   };
 
   const openAddModal = () => {
-    setIsAddModalOpen(true); 
+    setIsAddModalOpen(true);
   };
 
   const closeAddModal = () => {
-    setIsAddModalOpen(false); 
+    setIsAddModalOpen(false);
   };
 
-  const handleUserUpdated = () => {
-    const getUsers = async () => {
-      try {
-        const fetchedUsers = await fetchUsers();
-        setUsers(fetchedUsers);
-      } catch (error) {
-        console.error('Error refreshing user list:', error);
-      }
-    };
-    getUsers();
+  const handleUserUpdated = async () => {
+    try {
+      const fetchedUsers = await fetchUsers();
+      const validUsers = fetchedUsers.map(user => ({
+        uid: user.id,
+        email: user.email || 'No email', // Provide a fallback
+        status: user.status || 'inactive', // Provide a default status
+      }));
+      setUsers(validUsers);
+    } catch (error) {
+      console.error('Error refreshing user list:', error);
+    }
   };
 
   const handleUserAdded = (newUser) => {
@@ -119,8 +127,8 @@ const ManageUsers = () => {
               <tr key={user.uid}>
                 <td>{user.email}</td>
                 <td>
-                  <select 
-                    value={user.status} 
+                  <select
+                    value={user.status}
                     onChange={(e) => handleStatusChange(user.uid, e.target.value)}
                   >
                     <option value="active">Active</option>
@@ -129,7 +137,7 @@ const ManageUsers = () => {
                 </td>
                 <td>
                   <button className="edit-btn" onClick={() => openEditModal(user.uid)}>Edit</button>
-                  <button className="delete-btn" onClick={() => handleDelete(user.uid)}>Delete</button>
+                  {/* <button className="delete-btn" onClick={() => handleDelete(user.uid)}>Delete</button> */}
                 </td>
               </tr>
             ))
@@ -141,7 +149,7 @@ const ManageUsers = () => {
         </tbody>
       </table>
       {isEditModalOpen && (
-        <EditUserModal 
+        <EditUserModal
           userId={editUserId}
           onClose={closeEditModal}
           onUserUpdated={handleUserUpdated}
