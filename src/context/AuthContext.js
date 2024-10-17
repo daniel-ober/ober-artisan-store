@@ -1,50 +1,55 @@
-// src/context/AuthContext.js
-
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../firebaseConfig';
-import { fetchUserDoc } from '../services/userService'; // Ensure this path is correct
+import { auth } from '../firebaseConfig'; // Your Firebase config
+import { getUserDoc } from '../firebaseConfig'; // Make sure to import your getUserDoc function
 
 const AuthContext = createContext();
 
-export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
-    const [isAdmin, setIsAdmin] = useState(false);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, async (user) => {
-            console.log('Auth state changed:', user); // Debugging log
-            if (user) {
-                const userDoc = await fetchUserDoc(user.uid);
-                setIsAdmin(userDoc?.isAdmin || false); // Set admin status based on user document
-                setUser(user);
-                console.log(`User authenticated: ${user.uid}, Admin: ${userDoc?.isAdmin}`); // Debugging log
-            } else {
-                setUser(null);
-                setIsAdmin(false);
-                console.log('User is not authenticated'); // Debugging log
-            }
-            setLoading(false);
-        });
-
-        return () => unsubscribe();
-    }, []);
-
-    const handleSignOut = () => {
-        auth.signOut().catch((error) => console.error('Sign out error:', error));
-        console.log('User signed out'); // Debugging log
-    };
-
-    if (loading) {
-        return <p>Loading...</p>; // Optionally, you could implement a loading spinner here
-    }
-
-    return (
-        <AuthContext.Provider value={{ user, isAdmin, handleSignOut }}>
-            {children}
-        </AuthContext.Provider>
-    );
+export const useAuth = () => {
+  return useContext(AuthContext);
 };
 
-export const useAuth = () => useContext(AuthContext);
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        setUser(user);
+        try {
+          const userData = await getUserDoc(user.uid);
+          setIsAdmin(userData?.isAdmin || false); // Set isAdmin based on user data
+        } catch (error) {
+          console.error('Error fetching user data:', error);
+        }
+      } else {
+        setUser(null);
+        setIsAdmin(false); // Reset isAdmin when user is null
+      }
+      setLoading(false);
+    });
+
+    return () => unsubscribe(); // Cleanup on unmount
+  }, []);
+
+  const handleSignOut = async () => {
+    setLoading(true);
+    await auth.signOut();
+    setUser(null);
+    setLoading(false);
+  };
+
+  const value = {
+    user,
+    isAdmin,
+    loading,
+    handleSignOut,
+  };
+
+  return (
+    <AuthContext.Provider value={value}>
+      {children}
+    </AuthContext.Provider>
+  );
+};

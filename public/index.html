@@ -40,9 +40,12 @@
 
     <!-- Your app will be mounted here -->
 
-    <script src="/path/to/your/firebaseConfig.js"></script> <!-- Use a script to import Firebase config if needed -->
-    
+    <!-- Ensure that Firebase and other scripts are loaded before your main app -->
+    <!-- <script src="/src/firebaseConfig.js"></script> Typically, Firebase config is imported in the app itself, not directly here -->
+
     <!-- Add your React and other necessary script files here -->
-    <script src="/static/js/bundle.js"></script> <!-- Update this path according to your build setup -->
+    <script src="/static/js/bundle.js"></script> <!-- This should be the output of your build process -->
+
+    <!-- Optional: Include any other libraries or scripts you may need -->
   </body>
 </html>

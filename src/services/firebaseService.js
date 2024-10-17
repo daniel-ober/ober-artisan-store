@@ -220,21 +220,21 @@ export const signInUser = async (email, password) => {
 
 
 
-// Function to test Firestore connection
-export const testFirestoreConnection = async () => {
-    try {
-        const docRef = await addDoc(collection(db, 'test'), {
-            message: 'This is a test message',
-            timestamp: new Date(),
-        });
-        console.log('Test document written with ID:', docRef.id); // Debugging log
-    } catch (e) {
-        console.error('Error adding test document:', e);
-    }
-};
+// // Function to test Firestore connection
+// export const testFirestoreConnection = async () => {
+//     try {
+//         const docRef = await addDoc(collection(db, 'test'), {
+//             message: 'This is a test message',
+//             timestamp: new Date(),
+//         });
+//         console.log('Test document written with ID:', docRef.id); // Debugging log
+//     } catch (e) {
+//         console.error('Error adding test document:', e);
+//     }
+// };
 
-// Call the test function to confirm Firestore connection
-testFirestoreConnection();
+// // Call the test function to confirm Firestore connection
+// testFirestoreConnection();
 
 // Expose the checkAdminClaim function to the global scope
 window.checkAdminClaim = checkAdminClaim;

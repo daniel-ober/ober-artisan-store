@@ -76,10 +76,10 @@ const ProductDetail = () => {
 
     return (
         <div className="product-detail-container">
-            {/* <Link to="/products" className="back-to-shop-link">
+            <Link to="/products" className="back-to-shop-link">
                 <FaArrowLeft className="back-icon" />
                 Back to Shop/Gallery
-            </Link> */}
+            </Link>
             <div className="product-image-gallery">
                 <img
                     src={mainImage}
@@ -135,6 +135,21 @@ const ProductDetail = () => {
                     )}
                 </div>
             </div>
+
+            {/* 360 Interactive View Section */}
+            {product?.interactive360Url && (
+                <div className="interactive-360-container">
+                    <h2>360° View</h2>
+                    <iframe
+                        src={product.interactive360Url}
+                        width="100%"
+                        height="500px"
+                        allowFullScreen
+                        title={`${product?.name} 360 View`}
+                        className="interactive-360-iframe"
+                    />
+                </div>
+            )}
         </div>
     );
 };

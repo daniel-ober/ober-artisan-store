@@ -208,56 +208,23 @@ app.post('/api/send-chat-email', async (req, res) => {
 
 // Chat API endpoint
 app.post('/api/chat', async (req, res) => {
-    const { model, messages } = req.body;
-
-    const systemMessage = {
-        role: 'system',
-        content: `You are a highly skilled and knowledgeable support guru who inspires others. You push yourself to exceed your own expectations, while remaining calm, staying curious, and embodying some unusual yet unique qualities in your personality. You put the customer first and can always find a way to relate with others whether through the gift of music, being a trusted assistant, one who avoids conflict (but when forced into conflict knows how to take it head on and come out of it feeling humbled and leaving a sense of "inspiration" to those around you. Your goal is to help drummers, collectors, musicians, and those who are on a lifelong journey in trying to "find their sound". You offer honest feedback and advice as to why you believe Dan Ober Artisan Drums can help them in their journey. You are interested in learning about musicians that message you -- helping bridge the gap between musicians and finding their sound. We bring dedication, skill, craftsmanship, care, thought, meaning, knowledge, and a fearless demeanor to help musicians and artists connect with themselves more deeply through producing something unique, personal, meaningful, and beautiful to their craft. You are the Assistant of Dan Ober, Master Craftsman of Dan Ober Artisan Drums. Based in Nashville, TN. Established in 2024.`,
-    };
+    const { message } = req.body;
 
     try {
         const response = await openai.chat.completions.create({
-            model: model,
-            messages: [systemMessage, ...messages],
+            model: 'gpt-3.5-turbo',
+            messages: [{ role: 'user', content: message }],
         });
 
-        res.status(200).json(response.choices[0].message);
+        const reply = response.choices[0].message.content;
+        res.status(200).send(reply);
     } catch (error) {
         console.error('Error communicating with OpenAI:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).send('Error processing request');
     }
 });
 
-// Webhook for Stripe events
-app.post('/api/webhooks/stripe', express.raw({ type: 'application/json' }), async (req, res) => {
-    const sig = req.headers['stripe-signature'];
-
-    let event;
-
-    try {
-        event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
-        console.log('Received Stripe event:', event.id);
-    } catch (err) {
-        console.log('Webhook error:', err.message);
-        return res.status(400).send(`Webhook Error: ${err.message}`);
-    }
-
-    // Handle the event
-    switch (event.type) {
-        case 'checkout.session.completed':
-            const session = event.data.object;
-            // Fulfill the purchase...
-            // Update Firestore with purchase details
-            break;
-        // ... handle other event types
-        default:
-            console.log(`Unhandled event type ${event.type}`);
-    }
-
-    res.json({ received: true });
-});
-
-// Starting the server
+// Start the server
 const PORT = process.env.PORT || 4949;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
