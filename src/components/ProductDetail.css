@@ -7,6 +7,21 @@
   gap: 30px;
 }
 
+/* Interactive 360° View Container */
+.interactive-360-container {
+  margin-top: 20px;
+  border: 1px solid #ccc; /* Optional: Add border around the 360 view */
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.interactive-360-iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+
 /* Product image gallery */
 .product-image-gallery {
   flex: 1; /* Take up 50% of the available space */

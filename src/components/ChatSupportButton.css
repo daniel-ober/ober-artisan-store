@@ -80,29 +80,38 @@
     display: flex;
     border-top: 1px solid #ddd;
     padding: 10px;
-    background-color: #f1f1f1;
 }
 
-input {
-    padding: 10px;
+.chat-input {
+    flex-grow: 1;
     border: 1px solid #ddd;
-    border-top: none;
-    width: 75%;
-    font-size: 16px;
-    outline: none;
-    flex: 1;
+    border-radius: 5px;
+    padding: 8px;
+    margin-right: 10px;
 }
 
-button {
+.chat-input:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.send-button {
+    padding: 8px 12px;
+    border: none;
     background-color: #007bff;
     color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
+    border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-button:hover {
+.send-button:hover {
     background-color: #0056b3;
+}
+
+.maximized {
+    width: 90%;
+    height: 90%;
+    bottom: 5%;
+    right: 5%;
 }
