@@ -29,6 +29,7 @@ import PrivateRoute from './components/PrivateRoute';
 import { useAuth } from './context/AuthContext';
 import ChatSupportButton from './components/ChatSupportButton';
 
+
 function App() {
   const { user, handleSignOut } = useAuth();
   const [currentTab, setCurrentTab] = useState('Home');
@@ -57,9 +58,10 @@ function App() {
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/return-policy" element={<ReturnPolicy />} />
           <Route path="*" element={<NotFound />} />
+          
+          {/* Private routes */}
           <Route path="/checkout" element={<PrivateRoute element={<Checkout />} />} />
           <Route path="/account" element={<PrivateRoute element={<AccountPage />} />} />
-          {/* <Route path="/mixing-booth" element={<PrivateRoute element={<Mixer />} adminOnly />} /> */}
           <Route path="/admin" element={<PrivateRoute element={<AdminDashboard />} adminOnly />} />
           <Route path="/admin/users" element={<PrivateRoute element={<ManageUsers />} adminOnly />} />
           <Route path="/admin/products" element={<PrivateRoute element={<ManageProducts />} adminOnly />} />

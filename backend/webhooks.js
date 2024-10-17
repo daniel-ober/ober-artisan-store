@@ -29,6 +29,12 @@ router.post('/', express.raw({ type: 'application/json' }), (req, res) => {
             const failedPaymentIntent = event.data.object;
             console.log(`PaymentIntent for ${failedPaymentIntent.id} failed.`);
             break;
+        case 'checkout.session.completed':
+            const session = event.data.object;
+            console.log(`Checkout session completed for session ID: ${session.id}`);
+            // Fulfill the purchase...
+            // Update Firestore with purchase details
+            break;
         // Add other cases for different event types
         default:
             console.log(`Unhandled event type ${event.type}`);
