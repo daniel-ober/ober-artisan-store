@@ -1,3 +1,4 @@
+// src/context/CartContext.js
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { doc, updateDoc, setDoc, getDoc } from 'firebase/firestore';
 import { db } from '../firebaseConfig'; // Correct path to Firestore instance
@@ -15,19 +16,17 @@ export const CartProvider = ({ children }) => {
     useEffect(() => {
         const loadCart = async () => {
             if (user) {
-                try {
-                    const userCart = await fetchUserCart(user.uid);
-                    if (userCart && userCart.cart) {
-                        setCart(userCart.cart);  // Accessing the cart data correctly
-                    } else {
-                        setCart({});  // Initialize with empty cart if no cart data
-                    }
-                } catch (error) {
-                    console.error('Failed to load cart:', error);
-                    setError('Failed to load cart. Please try again later.');
-                } finally {
-                    setLoading(false);
+                const cartRef = doc(db, 'carts', user.uid);
+                const cartDoc = await getDoc(cartRef);
+                
+                if (cartDoc.exists()) {
+                    setCart(cartDoc.data().cart || {}); // Accessing the cart data correctly
+                } else {
+                    // Create a new cart document for the user if it doesn't exist
+                    await setDoc(cartRef, { cart: {} });
+                    setCart({});
                 }
+                setLoading(false);
             } else {
                 const savedCart = JSON.parse(localStorage.getItem('cart')) || {};
                 setCart(savedCart);
@@ -71,7 +70,7 @@ export const CartProvider = ({ children }) => {
                 const cartDoc = await getDoc(cartRef);
 
                 if (cartDoc.exists()) {
-                    // Update the cart object directly, not under another 'cart' field
+                    // Update the cart object directly
                     await updateDoc(cartRef, { cart: updatedCart });
                 } else {
                     // Create a new cart object for the user

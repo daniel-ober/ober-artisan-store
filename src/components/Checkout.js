@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { db } from '../firebaseConfig'; // Ensure the path is correct
+import { doc, setDoc } from 'firebase/firestore';
 
 const Checkout = ({ onCheckoutComplete }) => {
   const [customerName, setCustomerName] = useState('');
@@ -10,33 +13,53 @@ const Checkout = ({ onCheckoutComplete }) => {
   const [total, setTotal] = useState(0); // Example for total amount
   const [items, setItems] = useState([]); // Example for ordered items
 
+  const navigate = useNavigate(); // Hook for navigation
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Logic for processing payment here (e.g., with Stripe)
+    try {
+      // Example: Simulate payment processing (replace with actual payment logic)
+      const paymentSuccessful = true; // Simulated payment success
 
-    // On successful payment, create the order object
-    const order = {
-      id: 'ORDER_ID', // You should generate or retrieve the actual order ID
-      timestamp: new Date().toISOString(),
-      customerName, // Capture customer name
-      customerPhone,
-      shippingAddress,
-      billingAddress,
-      status: 'Processing', // Set appropriate status
-      priority: 'Normal', // Set default priority
-      total,
-      paymentMethod,
-      cardLast4,
-      items,
-      subtotal: total, // If needed
-      tax: 0, // Calculate tax if applicable
-      internalNotes: '', // Capture any internal notes
-      stripeInvoiceUrl: '', // Capture invoice URL if applicable
-    };
+      if (paymentSuccessful) {
+        // On successful payment, create the order object
+        const order = {
+          id: `ORDER_${Date.now()}`, // Generate a unique order ID
+          timestamp: new Date().toISOString(),
+          customerName,
+          customerPhone,
+          shippingAddress,
+          billingAddress,
+          status: 'Processing',
+          priority: 'Normal',
+          total,
+          paymentMethod,
+          cardLast4,
+          items,
+          subtotal: total, // If needed
+          tax: 0, // Calculate tax if applicable
+          internalNotes: '', // Capture any internal notes
+          stripeInvoiceUrl: '', // Capture invoice URL if applicable
+        };
 
-    // Call the onCheckoutComplete callback with the order data
-    onCheckoutComplete(order);
+        // Create a new order document in Firestore
+        const orderRef = doc(db, 'orders', `${Date.now()}`); // Use a timestamp as an ID
+        await setDoc(orderRef, order);
+        console.log('Order created successfully!');
+
+        // Call the onCheckoutComplete callback with the order data
+        onCheckoutComplete(order);
+
+        // Redirect to a confirmation page or another page
+        navigate('/success'); // Change to your desired route
+      } else {
+        console.error('Payment failed.');
+      }
+    } catch (error) {
+      console.error('Error creating order: ', error);
+    }
   };
 
   return (
@@ -71,7 +94,6 @@ const Checkout = ({ onCheckoutComplete }) => {
         Last 4 Digits of Card:
         <input type="text" value={cardLast4} onChange={(e) => setCardLast4(e.target.value)} required />
       </label>
-      {/* Add any additional fields as needed */}
       <button type="submit">Complete Purchase</button>
     </form>
   );
