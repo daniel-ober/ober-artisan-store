@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 
-const CheckoutForm = ({ onPaymentSuccess }) => { // Accept onPaymentSuccess as a prop
+const CheckoutForm = ({ onPaymentSuccess }) => {
   const stripe = useStripe();
   const elements = useElements();
   const [clientSecret, setClientSecret] = useState('');
@@ -9,7 +9,6 @@ const CheckoutForm = ({ onPaymentSuccess }) => { // Accept onPaymentSuccess as a
   const [success, setSuccess] = useState(false);
 
   useEffect(() => {
-    // Fetch the client secret from your backend when the component mounts
     fetch('/create-payment-intent', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
