@@ -115,7 +115,7 @@ const NavBar = ({ isAuthenticated, onSignOut, onTabChange }) => {
         {isAuthenticated ? (
           <>
             {isAdmin && <Link to="/custom-shop-assistant" className={`nav-link ${location.pathname === '/custom-shop-assistant' ? 'active' : ''}`} onClick={() => handleLinkClick('/custom-shop-assistant', 'Custom Shop Assistant')}>ARTiSAN SUITE</Link>}
-            {isAdmin && <Link to="/mixing-booth" className={`nav-link ${location.pathname === '/mixing-booth' ? 'active' : ''}`} onClick={() => handleLinkClick('/mixing-booth', 'Mixing Booth')}>Mixing Booth</Link>}
+            {/* {isAdmin && <Link to="/mixing-booth" className={`nav-link ${location.pathname === '/mixing-booth' ? 'active' : ''}`} onClick={() => handleLinkClick('/mixing-booth', 'Mixing Booth')}>Mixing Booth</Link>} */}
             {isAdmin && <Link to="/admin" className={`nav-link ${location.pathname === '/admin' ? 'active' : ''}`} onClick={() => handleLinkClick('/admin', 'Admin')}><FaCog /> Admin</Link>}
             <Link to="/account" className={`nav-link ${location.pathname === '/account' ? 'active' : ''}`} onClick={() => handleLinkClick('/account', 'Account')}><FaUserAlt /> Account</Link>
 

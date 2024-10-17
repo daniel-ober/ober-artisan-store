@@ -1,7 +1,6 @@
-// src/context/CartContext.js
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { doc, updateDoc, setDoc, getDoc } from 'firebase/firestore';
-import { firestore } from '../firebaseConfig'; // Correct path to Firestore instance
+import { db } from '../firebaseConfig'; // Correct path to Firestore instance
 import { useAuth } from './AuthContext'; // Assuming you have an AuthContext for user authentication
 import { fetchUserCart } from '../services/firebaseService'; // Import the fetchUserCart function
 
@@ -68,7 +67,7 @@ export const CartProvider = ({ children }) => {
 
         try {
             if (user) {
-                const cartRef = doc(firestore, 'carts', user.uid);
+                const cartRef = doc(db, 'carts', user.uid);
                 const cartDoc = await getDoc(cartRef);
 
                 if (cartDoc.exists()) {
@@ -85,38 +84,43 @@ export const CartProvider = ({ children }) => {
         }
     };
 
+    // Update item quantity in cart
     const updateQuantity = async (productId, quantity) => {
-        if (!cart[productId]) return;
+        if (!cart[productId]) {
+            console.warn(`Product ID ${productId} not found in cart.`);
+            return;
+        }
 
+        const previousQuantity = cart[productId].quantity;
+        const newQuantity = Math.max(quantity, 1); // Ensure quantity is at least 1
         const updatedCart = {
             ...cart,
-            [productId]: { ...cart[productId], quantity: Math.max(quantity, 1) },
+            [productId]: { ...cart[productId], quantity: newQuantity },
         };
 
         setCart(updatedCart);
+        console.log(`Previous Quantity: ${previousQuantity} Change: ${quantity - previousQuantity} New Quantity: ${newQuantity}`);
 
         try {
             if (user) {
-                const cartRef = doc(firestore, 'carts', user.uid);
-                await updateDoc(cartRef, { cart: updatedCart });
+                const cartRef = doc(db, 'carts', user.uid);
+                await updateDoc(cartRef, { [`cart.${productId}.quantity`]: newQuantity });
             }
         } catch (error) {
-            console.error('Error updating cart:', error);
-            setError('Error updating cart. Please try again later.');
+            console.error('Error updating quantity:', error);
+            setError('Error updating quantity. Please try again later.');
         }
     };
 
+    // Remove item from cart
     const removeFromCart = async (productId) => {
-        if (!cart[productId]) return;
-
         const updatedCart = { ...cart };
         delete updatedCart[productId];
-
         setCart(updatedCart);
 
         try {
             if (user) {
-                const cartRef = doc(firestore, 'carts', user.uid);
+                const cartRef = doc(db, 'carts', user.uid);
                 await updateDoc(cartRef, { cart: updatedCart });
             }
         } catch (error) {
@@ -125,14 +129,13 @@ export const CartProvider = ({ children }) => {
         }
     };
 
-    // New function to clear the cart
     const clearCart = async () => {
-        setCart({}); // Resets the cart to an empty object
+        setCart({});
 
         try {
             if (user) {
-                const cartRef = doc(firestore, 'carts', user.uid);
-                await updateDoc(cartRef, { cart: {} }); // Clear the cart in Firestore
+                const cartRef = doc(db, 'carts', user.uid);
+                await updateDoc(cartRef, { cart: {} });
             }
         } catch (error) {
             console.error('Error clearing cart:', error);
@@ -140,12 +143,8 @@ export const CartProvider = ({ children }) => {
         }
     };
 
-    useEffect(() => {
-        console.log("Cart updated:", cart);
-    }, [cart]);
-
     return (
-        <CartContext.Provider value={{ cart, addToCart, updateQuantity, removeFromCart, clearCart, loading, error }}>
+        <CartContext.Provider value={{ cart, loading, error, addToCart, updateQuantity, removeFromCart, clearCart }}>
             {children}
         </CartContext.Provider>
     );

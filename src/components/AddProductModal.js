@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { uploadImageToFirebase } from '../services/firebaseService';
 import { db } from '../firebaseConfig';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { createStripeProduct } from '../services/stripeService';
 import './AddProductModal.css';
 
@@ -17,6 +17,7 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
   const [imageFiles, setImageFiles] = useState([]);
   const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState(''); // New state for success message
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -53,6 +54,7 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
     }
 
     setIsUploading(true); 
+    setSuccessMessage(''); // Reset success message on new submission
 
     try {
       const uploadedImages = imageFiles.length > 0 
@@ -76,10 +78,12 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
           ...productData,
           stripeProductId: stripeProduct.id,
           stripePriceId: stripeProduct.default_price,
+          createdAt: serverTimestamp(),  // Add this line for timestamp
         });
 
         console.log('New Firestore document created with ID:', docRef.id);
         onProductAdded({ id: docRef.id, ...productData });
+        setSuccessMessage('Product added successfully!'); // Set success message
       } else {
         console.error('Stripe product creation failed.');
         setError('Failed to create Stripe product. Please try again.');
@@ -89,7 +93,10 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
       setError('Failed to add product. Please try again.');
     } finally {
       setIsUploading(false); 
-      onClose(); 
+      // Optional: Reset form state or close modal based on your requirements
+      // setNewProduct({...}) // Reset new product state if needed
+      // setImageFiles([]); // Clear image files if needed
+      // onClose(); // Uncomment if you want to close the modal immediately
     }
   };
 
@@ -98,6 +105,7 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
       <div className="modal-content">
         <h2 className="modal-title">Add New Product</h2>
         {error && <div className="error-message">{error}</div>}
+        {successMessage && <div className="success-message">{successMessage}</div>} {/* New success message */}
         <form onSubmit={handleSubmit} className="add-product-form">
           <div className="form-group">
             <label htmlFor="name">Name</label>
@@ -110,6 +118,7 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
               onChange={handleInputChange}
               placeholder="e.g. Custom Drum"
               required
+              disabled={isUploading} // Disable input while uploading
             />
           </div>
           <div className="form-group">
@@ -123,6 +132,7 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
               onChange={handleInputChange}
               placeholder="e.g. High-quality handcrafted drum"
               required
+              disabled={isUploading} // Disable input while uploading
             />
           </div>
           <div className="form-group">
@@ -138,6 +148,7 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
               required
               step="0.01"
               min="0"
+              disabled={isUploading} // Disable input while uploading
             />
           </div>
           <div className="form-group">
@@ -149,10 +160,14 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
               value={newProduct.category}
               onChange={handleInputChange}
               required
+              disabled={isUploading} // Disable input while uploading
             >
               <option value="dreamfeather">Dreamfeather</option>
-              <option value="another-category">Another Category</option>
-              {/* Add more categories as needed */}
+              <option value="true artisan">True Artisan</option>
+              <option value="soundlegend">Soundlegend</option>
+              <option value="accessories">Accessories</option>
+              <option value="apparel">Apparel</option>
+              <option value="miscellaneous">Miscellaneous</option>
             </select>
           </div>
           <div
@@ -168,6 +183,7 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
               onChange={handleFileChange}
               style={{ display: 'none' }} // Hide default file input
               id="image-upload-input"
+              disabled={isUploading} // Disable input while uploading
             />
             <label htmlFor="image-upload-input" style={{ cursor: 'pointer' }}>
               <span>Select Files</span>
@@ -183,6 +199,7 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
                     const newFiles = imageFiles.filter((_, i) => i !== index);
                     setImageFiles(newFiles);
                   }}
+                  disabled={isUploading} // Disable button while uploading
                 >
                   &times;
                 </button>
@@ -192,11 +209,11 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
           <button
             type="submit"
             className="modal-button"
-            disabled={isUploading}
+            disabled={isUploading} // Disable submit button while uploading
           >
             {isUploading ? 'Adding...' : 'Add Product'}
           </button>
-          <button type="button" className="close-btn" onClick={onClose}>
+          <button type="button" className="close-btn" onClick={onClose} disabled={isUploading}> {/* Disable close button while uploading */}
             Close
           </button>
         </form>

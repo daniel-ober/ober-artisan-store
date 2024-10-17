@@ -1,4 +1,5 @@
-import { firestore, storage } from '../firebaseConfig'; // Adjust the import path as needed
+// src/services/firebaseService.js
+import { db, storage } from '../firebaseConfig'; // Adjust the import path as needed
 import { 
     doc, 
     getDoc, 
@@ -16,7 +17,7 @@ import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'; // Import F
 // Fetch product by ID
 export const fetchProductById = async (id) => {
     try {
-        const docRef = doc(firestore, 'products', id); // Adjust 'products' to your collection name
+        const docRef = doc(db, 'products', id); // Adjust 'products' to your collection name
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
@@ -35,7 +36,7 @@ export const fetchProductById = async (id) => {
 // Function to fetch all products
 export const fetchProducts = async () => {
     try {
-        const productsCollection = collection(firestore, 'products');
+        const productsCollection = collection(db, 'products');
         const productSnapshot = await getDocs(productsCollection);
         const productsList = productSnapshot.docs.map(doc => ({
             ...doc.data(),
@@ -52,7 +53,7 @@ export const fetchProducts = async () => {
 // Function to create a cart for a guest
 export const createCart = async (cartId) => {
     try {
-        const cartRef = doc(firestore, 'carts', cartId);
+        const cartRef = doc(db, 'carts', cartId);
         await setDoc(cartRef, {
             items: []
         });
@@ -67,7 +68,7 @@ export const createCart = async (cartId) => {
 // Function to add an item to a cart
 export const addItemToCart = async (cartId, item) => {
     try {
-        const cartRef = doc(firestore, 'carts', cartId);
+        const cartRef = doc(db, 'carts', cartId);
         const cartSnap = await getDoc(cartRef);
 
         if (!cartSnap.exists()) {
@@ -88,7 +89,7 @@ export const addItemToCart = async (cartId, item) => {
 // Function to add an inquiry (new function)
 export const addInquiry = async (inquiryData) => {
     try {
-        const inquiriesCollection = collection(firestore, 'inquiries'); // Adjust collection name
+        const inquiriesCollection = collection(db, 'inquiries'); // Adjust collection name
         const docRef = await addDoc(inquiriesCollection, inquiryData);
         console.log('Inquiry added with ID:', docRef.id); // Debugging log
         return docRef.id;
@@ -101,7 +102,7 @@ export const addInquiry = async (inquiryData) => {
 // Function to fetch user profile (new function)
 export const fetchUserProfile = async (userId) => {
     try {
-        const userRef = doc(firestore, 'users', userId); // Adjust collection name as necessary
+        const userRef = doc(db, 'users', userId); // Adjust collection name as necessary
         const userSnap = await getDoc(userRef);
 
         if (userSnap.exists()) {
@@ -120,7 +121,7 @@ export const fetchUserProfile = async (userId) => {
 // Function to fetch user cart (new function)
 export const fetchUserCart = async (cartId) => {
     try {
-        const cartRef = doc(firestore, 'carts', cartId);
+        const cartRef = doc(db, 'carts', cartId);
         const cartSnap = await getDoc(cartRef);
 
         if (cartSnap.exists()) {
@@ -139,7 +140,7 @@ export const fetchUserCart = async (cartId) => {
 // Function to create an order (added function)
 export const createOrder = async (orderData) => {
     try {
-        const ordersCollection = collection(firestore, 'orders'); // Adjust 'orders' to your collection name
+        const ordersCollection = collection(db, 'orders'); // Adjust 'orders' to your collection name
         const docRef = await addDoc(ordersCollection, orderData);
         console.log('Order created with ID:', docRef.id); // Debugging log
         return docRef.id;
@@ -165,7 +166,7 @@ export const uploadImageToFirebase = async (file) => {
 // Function to check if an order exists by ID (added function)
 export const checkExistingOrder = async (orderId) => {
     try {
-        const orderRef = doc(firestore, 'orders', orderId); // Adjust 'orders' to your collection name
+        const orderRef = doc(db, 'orders', orderId); // Adjust 'orders' to your collection name
         const orderSnap = await getDoc(orderRef);
 
         if (orderSnap.exists()) {
@@ -222,7 +223,7 @@ export const signInUser = async (email, password) => {
 // Function to test Firestore connection
 export const testFirestoreConnection = async () => {
     try {
-        const docRef = await addDoc(collection(firestore, 'test'), {
+        const docRef = await addDoc(collection(db, 'test'), {
             message: 'This is a test message',
             timestamp: new Date(),
         });
