@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { fetchUsers, deleteUserFromFirestore, updateUserStatus } from '../services/userService';
 import EditUserModal from './EditUserModal';
 import AddUserModal from './AddUserModal';
+import { auth } from '../firebaseConfig';
 import './ManageUsers.css';
 
 const ManageUsers = () => {
@@ -24,7 +25,14 @@ const ManageUsers = () => {
         setLoading(false);
       }
     };
-    getUsers();
+
+    const user = auth.currentUser;
+    if (user) {
+      getUsers();
+    } else {
+      setError('User is not authenticated. Please log in.');
+      setLoading(false);
+    }
   }, []);
 
   const handleDelete = async (userId) => {

@@ -17,6 +17,7 @@ const NavBar = ({ isAuthenticated, onSignOut, onTabChange }) => {
       if (user) {
         try {
           const userData = await getUserDoc(user.uid);
+          console.log('Fetched User Data:', userData); // Log userData
           setIsAdmin(userData?.isAdmin || false);
         } catch (error) {
           console.error('Error fetching user data:', error);
