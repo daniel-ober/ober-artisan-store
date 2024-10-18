@@ -1,9 +1,8 @@
-// src/firebaseConfig.js
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 import { getAuth, signOut as firebaseSignOut } from 'firebase/auth';
-import { getFirestore, doc, getDoc, setDoc, updateDoc, arrayUnion } from 'firebase/firestore'; // Fix import
-import { getStorage } from 'firebase/storage';
+import { getFirestore, doc, getDoc, setDoc, updateDoc, arrayUnion } from 'firebase/firestore';
+import { getStorage, ref, getDownloadURL } from 'firebase/storage';
 
 // Firebase configuration
 const firebaseConfig = {
@@ -21,9 +20,9 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app); // Optional: Initialize Analytics
 
 // Initialize and export Firestore, Auth, and Storage instances
-export const db = getFirestore(app); // Export the Firestore instance
-export const auth = getAuth(app); // Initialize and export Firebase Auth
-export const storage = getStorage(app); // Initialize and export Firebase Storage
+export const db = getFirestore(app); // Firestore instance
+export const auth = getAuth(app); // Firebase Auth instance
+export const storage = getStorage(app); // Firebase Storage instance
 export const signOut = firebaseSignOut; // Export signOut function
 
 // Function to get user document data
@@ -32,7 +31,6 @@ export const getUserDoc = async (userId) => {
     const userDocRef = doc(db, 'users', userId);
     const userDocSnap = await getDoc(userDocRef);
     if (userDocSnap.exists()) {
-      // console.log('User Data:', userDocSnap.data());
       return userDocSnap.data();
     } else {
       console.error('No such document!');
