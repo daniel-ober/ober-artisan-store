@@ -37,7 +37,7 @@ const TransactionSuccess = () => {
         const existingOrder = await checkIfOrderExists(sessionId);
         if (!existingOrder) {
           const orderId = await createOrder(orderData); // Use the createOrder function
-          console.log('Order created with ID:', orderId);
+          // console.log('Order created with ID:', orderId);
           setOrderDetails({ ...orderData, orderId });
           setOrderCreated(true); // Set orderCreated to true to prevent further calls
         } else {

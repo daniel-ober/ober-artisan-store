@@ -1,3 +1,4 @@
+// src/components/CheckoutForm.js
 import React, { useState, useEffect } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 
