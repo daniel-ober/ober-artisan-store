@@ -47,7 +47,7 @@ const Checkout = ({ onCheckoutComplete }) => {
         onCheckoutComplete(order);
 
         // Redirect to a confirmation page or another page
-        navigate('/success'); // Change to your desired route
+        navigate('/checkout-summary'); // Change to your desired route
       } else {
         console.error('Payment failed.');
       }
