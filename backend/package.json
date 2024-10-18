@@ -12,7 +12,6 @@
   "license": "ISC",
   "dependencies": {
     "@emotion/react": "^11.13.3",
-    "@emotion/styled": "^11.13.0",
     "@mui/material": "^6.0.0",
     "axios": "^1.7.5",
     "cors": "^2.8.5",
