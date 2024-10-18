@@ -1,63 +1,65 @@
-import React, { useEffect, useState, useRef } from 'react';
+// src/components/TransactionSuccess.js
+import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { CreateOrder } from '../createOrder'; // Adjust the import path if necessary
+import { createOrder } from '../services/orderService'; // Updated import
+import { db } from '../firebaseConfig'; // Firestore instance
+import { collection, query, where, getDocs } from 'firebase/firestore'; // Import Firestore functions
 import './TransactionSuccess.css';
 
 const TransactionSuccess = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const query = new URLSearchParams(location.search);
-  const sessionId = query.get('session_id');
-  const userId = query.get('userId');
+  const queryParams = new URLSearchParams(location.search);
+  const sessionId = queryParams.get('session_id');
+  const userId = queryParams.get('userId');
 
   const [orderDetails, setOrderDetails] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [previousSessionId, setPreviousSessionId] = useState(null); // Track previous session ID
-  const orderCreatedRef = useRef(false); // Use a ref to track order creation
+  const [orderCreated, setOrderCreated] = useState(false); // Track if the order has been created
 
   useEffect(() => {
-    const createOrder = async () => {
-      // Log the sessionId and userId for debugging
-      console.log('Session ID:', sessionId);
-      console.log('User ID:', userId);
-      console.log('Previous Session ID:', previousSessionId);
-      console.log('Order Created:', orderCreatedRef.current);
+    const createOrderAndDisplay = async () => {
+      if (orderCreated || !sessionId || !userId) return; // Skip if the order is already created or IDs are missing
 
-      // Check if sessionId and userId exist and if an order hasn't been created for this session
-      if (sessionId && userId && previousSessionId !== sessionId && !orderCreatedRef.current) {
-        console.log('Attempting to create order...');
+      const orderData = {
+        timestamp: new Date().toISOString(),
+        productName: 'Handcrafted Drum 1',
+        productPrice: 1399.99,
+        productQuantity: 1,
+        orderId: Math.floor(Math.random() * 1000), // Consider generating orderId on the server
+        stripeSessionId: sessionId,
+        totalAmount: 2199.98,
+        userId: userId,
+        status: 'Order Complete',
+      };
 
-        const orderData = {
-          timestamp: new Date().toISOString(),
-          productName: 'Handcrafted Drum 1', // Adjust as necessary
-          productPrice: 1399.99, // Adjust as necessary
-          productQuantity: 1, // Quantity of the product
-          orderId: Math.floor(Math.random() * 1000), // For testing
-          stripeSessionId: sessionId, // Stripe session ID from query params
-          totalAmount: 2199.98, // Total amount (for testing)
-          userId: userId, // User ID from query params
-          status: 'Order Complete', // Order status
-        };
-
-        try {
-          const orderId = await CreateOrder(orderData);
+      try {
+        const existingOrder = await checkIfOrderExists(sessionId);
+        if (!existingOrder) {
+          const orderId = await createOrder(orderData); // Use the createOrder function
           console.log('Order created with ID:', orderId);
           setOrderDetails({ ...orderData, orderId });
-          orderCreatedRef.current = true; // Mark the order as created
-          setPreviousSessionId(sessionId); // Set previous session ID to current
-        } catch (error) {
-          console.error('Failed to create order:', error);
+          setOrderCreated(true); // Set orderCreated to true to prevent further calls
+        } else {
+          console.log('Order already exists. Skipping creation.');
         }
-      } else {
-        console.log('Order creation skipped. Either session ID or user ID is missing, or the order has already been created.');
+      } catch (error) {
+        console.error('Failed to create order:', error);
+      } finally {
+        setLoading(false); // Ensure loading is set to false regardless of the outcome
       }
-
-      // Stop loading after checking conditions
-      setLoading(false);
     };
 
-    createOrder();
-  }, [sessionId, userId]); // Remove orderCreated and previousSessionId from dependencies
+    createOrderAndDisplay();
+  }, [sessionId, userId, orderCreated]); // Include orderCreated in dependencies
+
+  const checkIfOrderExists = async (stripeSessionId) => {
+    const ordersRef = collection(db, 'orders'); // Get the collection reference
+    const q = query(ordersRef, where('stripeSessionId', '==', stripeSessionId));
+    const querySnapshot = await getDocs(q);
+    
+    return !querySnapshot.empty; // If querySnapshot is not empty, order exists
+  };
 
   if (loading) return <p>Loading...</p>;
 
