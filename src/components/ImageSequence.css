@@ -1,0 +1,19 @@
+.image-sequence {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black; /* Black background */
+    padding: 50px 0; /* Space around the image sequence */
+    margin: 0; /* No margin to ensure it fills the width */
+}
+
+.image-sequence img {
+    max-width: 100%; /* Responsive size */
+    height: auto; /* Maintain aspect ratio */
+    transition: opacity 0.3s ease-in-out; /* Adjust duration for smoothness */
+    opacity: 0; /* Start with an invisible image */
+}
+
+.image-sequence img.show {
+    opacity: 1; /* Show the image */
+}
