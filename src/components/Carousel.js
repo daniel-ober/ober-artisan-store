@@ -10,32 +10,6 @@ const Carousel = ({ items }) => {
     setActiveIndex(index);
   };
 
-  const handleMouseDown = (e) => {
-    setStartX(e.clientX);
-    carouselRef.current.addEventListener('mousemove', handleMouseMove);
-    carouselRef.current.addEventListener('mouseup', handleMouseUp);
-    carouselRef.current.addEventListener('mouseleave', handleMouseUp);
-  };
-
-  const handleMouseMove = (e) => {
-    const moveX = e.clientX - startX;
-    if (moveX > 50) {
-      // Swipe right
-      handlePreviewClick((activeIndex - 1 + items.length) % items.length);
-      handleMouseUp(); // Cleanup event listeners
-    } else if (moveX < -50) {
-      // Swipe left
-      handlePreviewClick((activeIndex + 1) % items.length);
-      handleMouseUp(); // Cleanup event listeners
-    }
-  };
-
-  const handleMouseUp = () => {
-    carouselRef.current.removeEventListener('mousemove', handleMouseMove);
-    carouselRef.current.removeEventListener('mouseup', handleMouseUp);
-    carouselRef.current.removeEventListener('mouseleave', handleMouseUp);
-  };
-
   const handleTouchStart = (e) => {
     setStartX(e.touches[0].clientX);
   };
@@ -57,14 +31,20 @@ const Carousel = ({ items }) => {
     <div
       className="carousel"
       ref={carouselRef}
-      onMouseDown={handleMouseDown}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
+      role="region" // Added role for accessibility
+      aria-label="Image carousel" // Added ARIA label for accessibility
     >
       <div className="carousel-track-container">
         <div className="carousel-track">
           {/* Previous Preview Item */}
-          <div className="preview-item previous-preview" onClick={() => handlePreviewClick((activeIndex - 1 + items.length) % items.length)}>
+          <button
+            className="preview-item previous-preview"
+            onClick={() => handlePreviewClick((activeIndex - 1 + items.length) % items.length)}
+            tabIndex="0"
+            aria-label={`Previous: ${items[(activeIndex - 1 + items.length) % items.length]?.title}`}
+          >
             {items[(activeIndex - 1 + items.length) % items.length] && (
               <>
                 <img
@@ -74,17 +54,27 @@ const Carousel = ({ items }) => {
                 <h2>{items[(activeIndex - 1 + items.length) % items.length]?.title}</h2>
               </>
             )}
-          </div>
+          </button>
 
           {/* Active Item */}
-          <div className="carousel-item active">
+          <button
+            className="carousel-item active"
+            onClick={() => handlePreviewClick(activeIndex)}
+            tabIndex="0"
+            aria-label={`Current: ${items[activeIndex]?.title}`}
+          >
             <img src={items[activeIndex].image} alt={items[activeIndex].title} />
             <h1>{items[activeIndex]?.title}</h1>
             <p>{items[activeIndex]?.description}</p>
-          </div>
+          </button>
 
           {/* Next Preview Item */}
-          <div className="preview-item next-preview" onClick={() => handlePreviewClick((activeIndex + 1) % items.length)}>
+          <button
+            className="preview-item next-preview"
+            onClick={() => handlePreviewClick((activeIndex + 1) % items.length)}
+            tabIndex="0"
+            aria-label={`Next: ${items[(activeIndex + 1) % items.length]?.title}`}
+          >
             {items[(activeIndex + 1) % items.length] && (
               <>
                 <img
@@ -94,7 +84,7 @@ const Carousel = ({ items }) => {
                 <h2>{items[(activeIndex + 1) % items.length]?.title}</h2>
               </>
             )}
-          </div>
+          </button>
         </div>
       </div>
     </div>

@@ -53,7 +53,7 @@ const ChatSupportButton = React.memo(({ currentTab }) => {
                 timestamp: new Date(),
             };
 
-            console.log("Received assistant message:", assistantMessage);
+            // console.log("Received assistant message:", assistantMessage);
             setMessages((prevMessages) => [...prevMessages, assistantMessage]);
 
             await addDoc(collection(db, 'chats'), {
@@ -68,7 +68,7 @@ const ChatSupportButton = React.memo(({ currentTab }) => {
     };
 
     useEffect(() => {
-        console.log("ChatSupportButton - Received currentTab:", currentTab);
+        // console.log("ChatSupportButton - Received currentTab:", currentTab);
     }, [currentTab]);
 
     return (
