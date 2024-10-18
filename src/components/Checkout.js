@@ -1,7 +1,7 @@
+// src/components/Checkout.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { db } from '../firebaseConfig'; // Ensure the path is correct
-import { doc, setDoc } from 'firebase/firestore';
+import { createOrder } from '../services/orderService'; // Updated import
 
 const Checkout = ({ onCheckoutComplete }) => {
   const [customerName, setCustomerName] = useState('');
@@ -12,6 +12,7 @@ const Checkout = ({ onCheckoutComplete }) => {
   const [cardLast4, setCardLast4] = useState('');
   const [total, setTotal] = useState(0); // Example for total amount
   const [items, setItems] = useState([]); // Example for ordered items
+  const [error, setError] = useState(null); // State for error messages
 
   const navigate = useNavigate(); // Hook for navigation
 
@@ -24,30 +25,23 @@ const Checkout = ({ onCheckoutComplete }) => {
       const paymentSuccessful = true; // Simulated payment success
 
       if (paymentSuccessful) {
-        // On successful payment, create the order object
+        // Create the order object
         const order = {
-          id: `ORDER_${Date.now()}`, // Generate a unique order ID
-          timestamp: new Date().toISOString(),
           customerName,
           customerPhone,
           shippingAddress,
           billingAddress,
           status: 'Processing',
-          priority: 'Normal',
           total,
           paymentMethod,
           cardLast4,
           items,
-          subtotal: total, // If needed
-          tax: 0, // Calculate tax if applicable
-          internalNotes: '', // Capture any internal notes
-          stripeInvoiceUrl: '', // Capture invoice URL if applicable
+          createdAt: new Date(),
         };
 
-        // Create a new order document in Firestore
-        const orderRef = doc(db, 'orders', `${Date.now()}`); // Use a timestamp as an ID
-        await setDoc(orderRef, order);
-        console.log('Order created successfully!');
+        // Create the order using the orderService
+        const orderId = await createOrder(order); // Call to createOrder function
+        console.log('Order created successfully with ID:', orderId);
 
         // Call the onCheckoutComplete callback with the order data
         onCheckoutComplete(order);
@@ -59,6 +53,7 @@ const Checkout = ({ onCheckoutComplete }) => {
       }
     } catch (error) {
       console.error('Error creating order: ', error);
+      setError('Failed to create order: ' + error.message); // Set error message for display
     }
   };
 
@@ -95,6 +90,7 @@ const Checkout = ({ onCheckoutComplete }) => {
         <input type="text" value={cardLast4} onChange={(e) => setCardLast4(e.target.value)} required />
       </label>
       <button type="submit">Complete Purchase</button>
+      {error && <p style={{ color: 'red' }}>{error}</p>} {/* Display error message */}
     </form>
   );
 };

@@ -78,6 +78,17 @@
   opacity: 1; /* Full visibility on hover */
 }
 
+/* Remove default outline and provide an alternative focus style */
+.preview-item:focus,
+.carousel-item:focus {
+  outline: none; /* Remove focus outline */
+}
+
+.preview-item:focus-visible,
+.carousel-item:focus-visible {
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.5); /* Alternative focus style */
+}
+
 /* Media Queries */
 @media (max-width: 1024px) {
   .carousel-track-container {

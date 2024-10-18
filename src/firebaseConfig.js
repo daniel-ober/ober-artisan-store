@@ -1,7 +1,8 @@
+// src/firebaseConfig.js
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 import { getAuth, signOut as firebaseSignOut } from 'firebase/auth';
-import { getFirestore, doc, getDoc, setDoc, updateDoc, arrayUnion, addDoc, collection } from 'firebase/firestore';
+import { getFirestore, doc, getDoc, setDoc, updateDoc, arrayUnion } from 'firebase/firestore'; // Fix import
 import { getStorage } from 'firebase/storage';
 
 // Firebase configuration
@@ -28,10 +29,10 @@ export const signOut = firebaseSignOut; // Export signOut function
 // Function to get user document data
 export const getUserDoc = async (userId) => {
   try {
-    const userDocRef = doc(db, 'users', userId); // Use db instead of firestore
+    const userDocRef = doc(db, 'users', userId);
     const userDocSnap = await getDoc(userDocRef);
     if (userDocSnap.exists()) {
-      console.log('User Data:', userDocSnap.data());
+      // console.log('User Data:', userDocSnap.data());
       return userDocSnap.data();
     } else {
       console.error('No such document!');
@@ -46,11 +47,11 @@ export const getUserDoc = async (userId) => {
 // Function to create a cart for a specific user
 export const createCart = async (userId) => {
   try {
-    const cartRef = doc(db, 'carts', userId); // Use db instead of firestore
+    const cartRef = doc(db, 'carts', userId);
     await setDoc(cartRef, {
       items: []
     });
-    console.log(`Cart created with ID: ${userId}`); // Debugging log
+    console.log(`Cart created with ID: ${userId}`);
     return userId;
   } catch (error) {
     console.error('Error creating cart:', error);
@@ -60,28 +61,12 @@ export const createCart = async (userId) => {
 // Function to add an item to a cart
 export const addItemToCart = async (userId, item) => {
   try {
-    const cartRef = doc(db, 'carts', userId); // Use db instead of firestore
+    const cartRef = doc(db, 'carts', userId);
     await updateDoc(cartRef, {
       items: arrayUnion(item)
     });
-    console.log(`Item added to cart for user ID: ${userId}`, item); // Debugging log
+    console.log(`Item added to cart for user ID: ${userId}`, item);
   } catch (error) {
     console.error('Error adding item to cart:', error);
   }
 };
-
-// // Function to test Firestore connection
-// export const testFirestoreConnection = async () => {
-//   try {
-//     const docRef = await addDoc(collection(db, 'test'), { // Use db instead of firestore
-//       message: 'This is a test message',
-//       timestamp: new Date(),
-//     });
-//     console.log('Test document written with ID:', docRef.id);
-//   } catch (e) {
-//     console.error('Error adding test document:', e);
-//   }
-// };
-
-// // Call the test function to confirm Firestore connection
-// testFirestoreConnection();
