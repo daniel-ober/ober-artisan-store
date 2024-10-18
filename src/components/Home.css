@@ -1,5 +1,4 @@
 .home-container {
-  /* padding: 20px; */
   background-color: #f8f9fa;
   text-align: center;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -9,7 +8,7 @@
 .welcome-message {
   color: #333;
   margin-bottom: 30px;
-  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .home-content {
@@ -25,10 +24,9 @@
 }
 
 .home-image {
-  width: 100%; /* Make the image responsive */
-  max-width: 100%; /* Ensure it doesn't overflow */
-  height: auto; /* Maintain aspect ratio */
-  /* border-radius: 8px; */
+  width: 100%; /* Responsive width */
+  max-width: 600px; /* Limit maximum width */
+  height: auto;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   opacity: 0;
   transform: translateY(20px);
@@ -43,22 +41,20 @@
 .home-paragraph {
   font-size: 1.125rem;
   color: #6c757d;
-  /* margin-top: 15px; */
   line-height: 1.6;
 }
 
 /* Video Styles */
 .video-container {
-  position: relative; /* Position relative for the countdown timer overlay */
-  /* margin: 30px 0; Add margin to space the video from other elements */
-  max-width: 100%; /* Match the max width of other sections */
-  width: 100%; /* Make it responsive */
+  position: relative;
+  max-width: 100%;
+  width: 100%;
 }
 
 .coming-soon-video {
-  width: 99.87%; /* Make the video responsive */
-  border-radius:5px; /* Match the image border radius */
-  box-shadow: 5px 5px 20px rgba(0, 0, 0, 1.0); /* Match the image box shadow */
+  width: 99.87%;
+  border-radius: 5px;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 1.0);
 }
 
 @media (max-width: 768px) {
