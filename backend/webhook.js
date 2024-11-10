@@ -1,12 +1,34 @@
 const express = require('express');
 const router = express.Router();
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const cors = require('cors');
+
+// Middleware for CORS
+router.use(cors());
 
 // Define the Stripe webhook secret
 const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
+// Create a checkout session endpoint
+router.post('/create-checkout-session', async (req, res) => {
+    try {
+        const session = await stripe.checkout.sessions.create({
+            payment_method_types: ['card'],
+            line_items: req.body.line_items, // Ensure you're passing line items correctly
+            mode: 'payment',
+            success_url: `${req.headers.origin}/success`, // Adjust success URL
+            cancel_url: `${req.headers.origin}/cancel`, // Adjust cancel URL
+        });
+
+        res.status(200).json({ id: session.id });
+    } catch (error) {
+        console.error('Error creating checkout session:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
 // Change the route to handle /webhook
-router.post('/api/webhooks', express.raw({ type: 'application/json' }), (req, res) => {
+router.post('/webhooks', express.raw({ type: 'application/json' }), (req, res) => {
     const sig = req.headers['stripe-signature'];
     let event;
 
