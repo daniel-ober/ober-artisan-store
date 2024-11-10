@@ -81,13 +81,12 @@
 .menu-arrow-icon {
   width: 27px;
   height: 27px;
-  margin:-8.4px;
+  margin: -8.4px;
   transition: transform 0.3s ease;
 }
 
-/* Rotate the arrow icon when menu is open */
 .menu-arrow-icon.open {
-  transform: rotate(180deg);
+  transform: rotate(180deg); /* Only rotates to 180 degrees */
 }
 
 /* Mobile view styles */
@@ -123,16 +122,16 @@
     top: 100%;
     left: 0;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Adjust the background for contrast */
+    background-color: rgba(0, 0, 0, 0.5);
     z-index: 2000;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.2s cubic-bezier(0.86, 0, 0.07, 1);
+    transition: max-height 0.3s ease-in-out;
   }
 
   .navbar-links.open {
     max-height: 500px;
-    background-color: #27252afb;
+    background-color: rgba(39, 37, 42, 0.95);
   }
 
   .nav-link {
@@ -143,22 +142,10 @@
     color: whitesmoke;
   }
 
-  .nav-link.active {
-    font-size: 14px;
-    padding: 8px;
-    width: 100%;
-    text-align: center;
-    color: #ffa200;
-  }
-
+  .nav-link.active,
   .nav-link:hover {
-    font-size: 14px;
-    padding: 8px;
-    width: 100%;
-    text-align: center;
     color: #ffe100;
   }
-
 }
 
 @media (min-width: 768px) {
