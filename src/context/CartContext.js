@@ -3,7 +3,6 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
 import { doc, updateDoc, setDoc, getDoc } from 'firebase/firestore';
 import { db } from '../firebaseConfig'; // Correct path to Firestore instance
 import { useAuth } from './AuthContext'; // Assuming you have an AuthContext for user authentication
-import { fetchUserCart } from '../services/firebaseService'; // Import the fetchUserCart function
 
 const CartContext = createContext();
 

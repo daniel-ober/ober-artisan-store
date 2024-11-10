@@ -10,7 +10,7 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
     category: 'dreamfeather',
     description: '',
     images: [],
-    name: '',
+    name: 'Test Product Name', // Default value for testing
     price: 0,
     status: 'unavailable',
   });
@@ -84,6 +84,17 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
         console.log('New Firestore document created with ID:', docRef.id);
         onProductAdded({ id: docRef.id, ...productData });
         setSuccessMessage('Product added successfully!'); // Set success message
+
+        // Reset form after successful submission
+        setNewProduct({
+          category: 'dreamfeather',
+          description: '',
+          images: [],
+          name: '',
+          price: 0,
+          status: 'unavailable',
+        });
+        setImageFiles([]);
       } else {
         console.error('Stripe product creation failed.');
         setError('Failed to create Stripe product. Please try again.');
@@ -93,10 +104,6 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
       setError('Failed to add product. Please try again.');
     } finally {
       setIsUploading(false); 
-      // Optional: Reset form state or close modal based on your requirements
-      // setNewProduct({...}) // Reset new product state if needed
-      // setImageFiles([]); // Clear image files if needed
-      // onClose(); // Uncomment if you want to close the modal immediately
     }
   };
 

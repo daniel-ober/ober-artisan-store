@@ -1,0 +1,64 @@
+.manage-inquiries {
+    padding: 20px;
+  }
+  
+  .manage-inquiries h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+  }
+  
+  .manage-inquiries-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+  }
+  
+  .manage-inquiries-table th, .manage-inquiries-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+  }
+  
+  .manage-inquiries-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+  }
+  
+  .manage-inquiries-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .view-btn, .delete-btn {
+    padding: 8px 12px;
+    margin: 0 5px;
+    font-size: 0.9em;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+  }
+  
+  .view-btn {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .delete-btn {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .delete-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .view-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .delete-btn:hover {
+    background-color: #e53935;
+  }
+  

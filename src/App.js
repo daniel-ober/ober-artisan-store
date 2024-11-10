@@ -6,7 +6,6 @@ import Products from './components/Products';
 import About from './components/About';
 import Contact from './components/Contact';
 import Cart from './components/Cart';
-// import Mixer from './components/AudioPlayer/Mixer';
 import Register from './components/Register';
 import ForgotPassword from './components/ForgotPassword';
 import Checkout from './components/Checkout';
@@ -28,7 +27,6 @@ import NotFound from './components/NotFound';
 import PrivateRoute from './components/PrivateRoute';
 import { useAuth } from './context/AuthContext';
 import ChatSupportButton from './components/ChatSupportButton';
-
 
 function App() {
   const { user, handleSignOut } = useAuth();
