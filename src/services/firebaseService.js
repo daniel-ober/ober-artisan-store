@@ -50,6 +50,19 @@ export const fetchProducts = async () => {
     }
 };
 
+// Function to create a product
+export const createProduct = async (productData) => {
+    try {
+        const productsCollection = collection(db, 'products');
+        const docRef = await addDoc(productsCollection, productData);
+        console.log('Product created with ID:', docRef.id); // Debugging log
+        return docRef.id;
+    } catch (error) {
+        console.error('Error creating product:', error);
+        throw error;
+    }
+};
+
 // Function to create a cart for a guest
 export const createCart = async (cartId) => {
     try {
@@ -86,7 +99,7 @@ export const addItemToCart = async (cartId, item) => {
     }
 };
 
-// Function to add an inquiry (new function)
+// Function to add an inquiry
 export const addInquiry = async (inquiryData) => {
     try {
         const inquiriesCollection = collection(db, 'inquiries'); // Adjust collection name
@@ -99,7 +112,7 @@ export const addInquiry = async (inquiryData) => {
     }
 };
 
-// Function to fetch user profile (new function)
+// Function to fetch user profile
 export const fetchUserProfile = async (userId) => {
     try {
         const userRef = doc(db, 'users', userId); // Adjust collection name as necessary
@@ -109,7 +122,7 @@ export const fetchUserProfile = async (userId) => {
             console.log(`User profile fetched with ID: ${userId}`, userSnap.data()); // Debugging log
             return userSnap.data();
         } else {
-            console.error('No such user exists!');
+            console.error('No such user document!');
             return null;
         }
     } catch (error) {
@@ -118,29 +131,10 @@ export const fetchUserProfile = async (userId) => {
     }
 };
 
-// Function to fetch user cart (new function)
-export const fetchUserCart = async (cartId) => {
-    try {
-        const cartRef = doc(db, 'carts', cartId);
-        const cartSnap = await getDoc(cartRef);
-
-        if (cartSnap.exists()) {
-            console.log(`Cart fetched with ID: ${cartId}`, cartSnap.data()); // Debugging log
-            return cartSnap.data();
-        } else {
-            console.error('No such cart exists!');
-            return null;
-        }
-    } catch (error) {
-        console.error('Error fetching user cart:', error);
-        throw error;
-    }
-};
-
-// Function to create an order (added function)
+// Function to create an order
 export const createOrder = async (orderData) => {
     try {
-        const ordersCollection = collection(db, 'orders'); // Adjust 'orders' to your collection name
+        const ordersCollection = collection(db, 'orders'); // Adjust collection name
         const docRef = await addDoc(ordersCollection, orderData);
         console.log('Order created with ID:', docRef.id); // Debugging log
         return docRef.id;
@@ -150,92 +144,38 @@ export const createOrder = async (orderData) => {
     }
 };
 
-// Function to upload image to Firebase Storage
+// Function to upload images to Firebase Storage
 export const uploadImageToFirebase = async (file) => {
     try {
-        const storageRef = ref(storage, `images/${uuidv4()}_${file.name}`); // Create a unique reference for the file
-        await uploadBytes(storageRef, file); // Upload the file to Firebase Storage
-        const url = await getDownloadURL(storageRef); // Get the file's URL
-        return url; // Return the file's URL
+        const storageRef = ref(storage, `images/${uuidv4()}_${file.name}`);
+        await uploadBytes(storageRef, file);
+        const downloadURL = await getDownloadURL(storageRef);
+        console.log('Image uploaded successfully:', downloadURL); // Debugging log
+        return downloadURL;
     } catch (error) {
         console.error('Error uploading image:', error);
         throw error;
     }
 };
 
-// Function to check if an order exists by ID (added function)
-export const checkExistingOrder = async (orderId) => {
-    try {
-        const orderRef = doc(db, 'orders', orderId); // Adjust 'orders' to your collection name
-        const orderSnap = await getDoc(orderRef);
+// Function to check if a user has an admin claim
+export const checkAdminClaim = async (email) => {
+    // Logic to check admin claims in your Firestore user collection or use Firebase Authentication Admin SDK
+    return email === 'admin@example.com'; // Placeholder logic
+};
 
-        if (orderSnap.exists()) {
-            console.log(`Order exists with ID: ${orderId}`, orderSnap.data()); // Debugging log
-            return true; // Order exists
-        } else {
-            console.log(`No order found with ID: ${orderId}`); // Debugging log
-            return false; // Order does not exist
-        }
+// Function to sign in a user
+export const signInUser = async (email, password) => {
+    const auth = getAuth();
+    try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+
+        const isAdmin = await checkAdminClaim(user.email); // Check admin claims
+        console.log('User signed in:', user.email, 'Admin:', isAdmin); // Debugging log
+        return { user, isAdmin };
     } catch (error) {
-        console.error('Error checking existing order:', error);
+        console.error('Error signing in user:', error);
         throw error;
     }
 };
-
-// Function to check admin claim
-export const checkAdminClaim = async (email) => {
-    const auth = getAuth();
-    const user = auth.currentUser;
-
-    if (user && user.email === email) {
-        const idTokenResult = await user.getIdTokenResult();
-        return idTokenResult.claims.admin || false; // returns true if admin claim exists
-    }
-    return false; // Not signed in or does not match the email
-};
-
-// Function to sign in user and check admin claim
-export const signInUser = async (email, password) => {
-    const auth = getAuth();
-    
-    try {
-        // Sign in the user
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        
-        // Log the user credential to verify sign-in
-        console.log('User signed in:', userCredential.user);
-        
-        // Now check admin claim
-        const isAdmin = await checkAdminClaim(userCredential.user.email);
-        
-        if (isAdmin) {
-            console.log('User has admin claim');
-        } else {
-            console.log('User does not have admin claim');
-        }
-    } catch (error) {
-        console.error('Error signing in:', error);
-    }
-};
-
-
-
-// // Function to test Firestore connection
-// export const testFirestoreConnection = async () => {
-//     try {
-//         const docRef = await addDoc(collection(db, 'test'), {
-//             message: 'This is a test message',
-//             timestamp: new Date(),
-//         });
-//         console.log('Test document written with ID:', docRef.id); // Debugging log
-//     } catch (e) {
-//         console.error('Error adding test document:', e);
-//     }
-// };
-
-// // Call the test function to confirm Firestore connection
-// testFirestoreConnection();
-
-// Expose the checkAdminClaim function to the global scope
-window.checkAdminClaim = checkAdminClaim;
-window.signInUser = signInUser; // Make signInUser globally accessible

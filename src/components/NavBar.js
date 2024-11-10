@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaCartPlus, FaSignOutAlt, FaUserAlt, FaCog } from 'react-icons/fa';
-import { useAuth } from '../context/AuthContext'; // Importing from AuthContext
+import { useAuth } from '../context/AuthContext';
 import './NavBar.css';
 
 const NavBar = () => {
@@ -10,21 +10,15 @@ const NavBar = () => {
   const buttonRef = useRef(null);
   const location = useLocation();
   const navigate = useNavigate();
-  const { user, isAdmin, handleSignOut } = useAuth(); // Using Auth context
-
-  const isAuthenticated = Boolean(user); // Determine if user is authenticated
+  const { user, isAdmin, handleSignOut } = useAuth();
 
   const handleMenuToggle = () => {
-    setIsMenuOpen((prevState) => !prevState);
+    setIsMenuOpen((prev) => !prev);
   };
 
   const handleClickOutside = (event) => {
-    if (
-      menuRef.current &&
-      !menuRef.current.contains(event.target) &&
-      buttonRef.current &&
-      !buttonRef.current.contains(event.target)
-    ) {
+    if (menuRef.current && !menuRef.current.contains(event.target) &&
+        buttonRef.current && !buttonRef.current.contains(event.target)) {
       setIsMenuOpen(false);
     }
   };
@@ -49,7 +43,6 @@ const NavBar = () => {
 
   return (
     <nav className="navbar">
-      {/* Video Background */}
       <video
         className="navbar-background"
         autoPlay
@@ -58,14 +51,9 @@ const NavBar = () => {
         playsInline
         src={isMenuOpen ? "/background-mobile.mp4" : "/background-web.mp4"}
       />
-
       <div className="navbar-logo">
         <Link to="/" onClick={() => handleLinkClick('/')}>
-          <img
-            src="/ober-artisan-logo-large.png"
-            alt="Logo"
-            className="logo-img"
-          />
+          <img src="/ober-artisan-logo-large.png" alt="Logo" className="logo-img" />
         </Link>
       </div>
       <button
@@ -75,13 +63,11 @@ const NavBar = () => {
         aria-expanded={isMenuOpen}
         aria-label="Toggle menu"
       >
-        <div className="menu-toggle-content">
-          <img
-            src={isMenuOpen ? 'https://i.imgur.com/P61nlaA.png' : 'https://i.imgur.com/iGiegQg.png'}
-            alt="Menu Toggle"
-            className="menu-arrow-icon"
-          />
-        </div>
+        <img
+          src={isMenuOpen ? 'https://i.imgur.com/P61nlaA.png' : 'https://i.imgur.com/iGiegQg.png'}
+          alt="Menu Toggle"
+          className={`menu-arrow-icon ${isMenuOpen ? 'open' : ''}`}
+        />
       </button>
       <div className={`navbar-links ${isMenuOpen ? 'open' : ''}`} ref={menuRef}>
         <Link to="/" className={`nav-link ${location.pathname === '/' ? 'active' : ''}`} onClick={() => handleLinkClick('/')}>Home</Link>
@@ -89,7 +75,7 @@ const NavBar = () => {
         <Link to="/about" className={`nav-link ${location.pathname === '/about' ? 'active' : ''}`} onClick={() => handleLinkClick('/about')}>About</Link>
         <Link to="/contact" className={`nav-link ${location.pathname === '/contact' ? 'active' : ''}`} onClick={() => handleLinkClick('/contact')}>Contact</Link>
 
-        {isAuthenticated ? (
+        {user ? (
           <>
             {isAdmin && (
               <>

@@ -5,6 +5,7 @@ import {
   Typography,
   TextField,
   Button,
+  Link,
 } from '@mui/material';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebaseConfig'; // Adjust the path as necessary
@@ -65,6 +66,15 @@ const SignInEmail = () => {
             Sign In
           </Button>
         </form>
+        {/* Forgot Password and Register Here links */}
+        <Box mt={2} display="flex" justifyContent="space-between">
+          <Link href="/forgot-password" variant="body2">
+            Forgot password?
+          </Link>
+          <Link href="/register" variant="body2">
+            Don&apos;t have an account? Register here
+          </Link>
+        </Box>
       </Box>
     </Container>
   );
