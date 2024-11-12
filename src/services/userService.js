@@ -1,3 +1,4 @@
+// src/services/userService.js
 import { auth, db } from '../firebaseConfig'; // Use the right import for the Firestore instance
 import { doc, setDoc, getDoc, collection, getDocs, deleteDoc, updateDoc } from 'firebase/firestore';
 import { createUserWithEmailAndPassword } from 'firebase/auth';

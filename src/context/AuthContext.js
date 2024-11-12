@@ -1,12 +1,10 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { auth } from '../firebaseConfig'; // Your Firebase config
-import { getUserDoc } from '../firebaseConfig'; // Make sure to import your getUserDoc function
+import { auth } from '../firebaseConfig';
+import { getUserDoc } from '../firebaseConfig'; // Ensure `getUserDoc` fetches user data from Firestore
 
 const AuthContext = createContext();
 
-export const useAuth = () => {
-  return useContext(AuthContext);
-};
+export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -19,25 +17,31 @@ export const AuthProvider = ({ children }) => {
         setUser(user);
         try {
           const userData = await getUserDoc(user.uid);
-          setIsAdmin(userData?.isAdmin || false); // Set isAdmin based on user data
+          setIsAdmin(userData?.isAdmin || false); // Check admin status
         } catch (error) {
           console.error('Error fetching user data:', error);
         }
       } else {
         setUser(null);
-        setIsAdmin(false); // Reset isAdmin when user is null
+        setIsAdmin(false);
       }
       setLoading(false);
     });
 
-    return () => unsubscribe(); // Cleanup on unmount
+    return unsubscribe; // Cleanup
   }, []);
 
   const handleSignOut = async () => {
     setLoading(true);
-    await auth.signOut();
-    setUser(null);
-    setLoading(false);
+    try {
+      await auth.signOut();
+      setUser(null);
+      setIsAdmin(false); // Reset admin status
+    } catch (error) {
+      console.error('Error during sign out:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const value = {
@@ -49,7 +53,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={value}>
-      {children}
+      {!loading && children}
     </AuthContext.Provider>
   );
 };
