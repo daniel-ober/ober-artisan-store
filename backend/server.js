@@ -207,8 +207,14 @@ app.post('/api/send-chat-email', async (req, res) => {
 });
 
 // Chat API endpoint
+// Chat API endpoint
 app.post('/api/chat', async (req, res) => {
     const { message } = req.body;
+
+    // Validate the message content
+    if (!message || typeof message !== 'string' || message.trim() === '') {
+        return res.status(400).send('Invalid or empty message.');
+    }
 
     try {
         const response = await openai.chat.completions.create({

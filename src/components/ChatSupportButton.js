@@ -21,8 +21,12 @@ const ChatSupportButton = React.memo(({ currentTab }) => {
     };
 
     const sendMessage = async (messageContent) => {
-        const content = messageContent.trim();
-        if (content === '') return;
+        // Ensure message content is valid (not empty or null)
+        const content = messageContent?.trim();
+        if (!content) {
+            console.error("Cannot send an empty message.");
+            return;
+        }
 
         const userMessage = { role: 'user', content, timestamp: new Date() };
         setMessages((prevMessages) => [...prevMessages, userMessage]);
@@ -53,7 +57,6 @@ const ChatSupportButton = React.memo(({ currentTab }) => {
                 timestamp: new Date(),
             };
 
-            // console.log("Received assistant message:", assistantMessage);
             setMessages((prevMessages) => [...prevMessages, assistantMessage]);
 
             await addDoc(collection(db, 'chats'), {
@@ -68,7 +71,8 @@ const ChatSupportButton = React.memo(({ currentTab }) => {
     };
 
     useEffect(() => {
-        // console.log("ChatSupportButton - Received currentTab:", currentTab);
+        // Optional: log current tab changes
+        console.log("Current Tab changed to:", currentTab);
     }, [currentTab]);
 
     return (

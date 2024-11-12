@@ -1,4 +1,3 @@
-// routes/chat.js
 const express = require('express');
 const router = express.Router();
 const OpenAI = require('openai');
@@ -10,6 +9,17 @@ const openai = new OpenAI({
 
 router.post('/', async (req, res) => {
     const { messages } = req.body;
+
+    // Validate the messages array and content
+    if (!Array.isArray(messages) || messages.length === 0) {
+        return res.status(400).send('Messages array is required and should not be empty.');
+    }
+
+    // Ensure all messages have valid content
+    const invalidMessage = messages.find(msg => !msg.content || typeof msg.content !== 'string' || msg.content.trim() === '');
+    if (invalidMessage) {
+        return res.status(400).send('One or more messages have invalid or empty content.');
+    }
 
     try {
         const response = await openai.chat.completions.create({
