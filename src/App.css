@@ -1,43 +1,117 @@
-.app-container {
-  position: relative;
-  min-height: 100vh; /* Ensure the container covers the full viewport height */
-  overflow: hidden; /* Prevent scrolling on the body */
+/* Default Light Mode Styles */
+body.light {
+  background-color: #ffffff;
+  color: #000000;
 }
 
-.background-video-container {
-  position: fixed; /* Fixes the video to the viewport */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  z-index: -1; /* Ensure the video stays behind all other content */
+body.light .navbar,
+body.light .footer,
+body.light .app-content {
+  background-color: #f0f0f0;
+  color: #000000;
 }
 
-.background-video, .background-video-mobile {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Ensure the video covers the entire viewport */
+/* Dark Mode Styles */
+body.dark {
+  background-color: #000000;
+  color: #ffffff;
 }
 
-/* Hide mobile video on non-mobile devices */
-@media (min-width: 768px) {
-  .background-video-mobile {
-    display: none;
-  }
+body.dark .navbar,
+body.dark .footer,
+body.dark .app-content {
+  background-color: #222;
+  color: #ffffff;
 }
 
-/* Hide web video on mobile devices */
-@media (max-width: 767px) {
-  .background-video {
-    display: none;
-  }
+body.dark * {
+  color: #ffffff !important; /* Force all text to white in dark mode */
+  background-color: transparent !important; /* Prevent overriding with transparent */
 }
 
-.app-content {
-  position: relative;
-  z-index: 1; /* Ensure the content is above the video */
+/* Smooth transition for background and text color */
+.navbar, .footer, .app-content {
+  transition: background-color 4s ease-in-out, color 4s ease-in-out; /* Slow and smooth transition */
+}
+
+/* Theme toggle button styling */
+.theme-toggle {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  z-index: 1000;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.theme-toggle:hover {
+  background-color: #555;
+}
+
+/* Global CSS styles for dark and light themes */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 2s ease-in-out, color 2s ease-in-out; /* Smooth fade transition */
+}
+
+/* Light Mode Styles */
+body.light {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+body.light .navbar,
+body.light .footer,
+body.light .app-content {
+  background-color: #f0f0f0;
+  color: #000000;
+}
+
+/* Dark Mode Styles */
+body.dark {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+body.dark .navbar,
+body.dark .footer,
+body.dark .app-content {
+  background-color: #222;
+  color: #ffffff;
+}
+
+body.dark * {
+  color: #ffffff !important; /* Force all text to white in dark mode */
+  background-color: transparent !important; /* Prevent overriding with transparent */
+}
+
+/* Smooth transition for background and text color */
+.navbar, .footer, .app-content {
+  transition: background-color 2s ease-in-out, color 2s ease-in-out;
+}
+
+/* Theme toggle button styling */
+.theme-toggle {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  z-index: 1000;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.theme-toggle:hover {
+  background-color: #555;
 }
