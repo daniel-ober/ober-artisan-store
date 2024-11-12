@@ -1,7 +1,6 @@
-// src/context/CartContext.js
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { doc, updateDoc, setDoc, getDoc } from 'firebase/firestore';
-import { db } from '../firebaseConfig'; // Correct path to Firestore instance
+import { db } from '../firebaseConfig'; // Ensure correct path to Firestore instance
 import { useAuth } from './AuthContext'; // Assuming you have an AuthContext for user authentication
 
 const CartContext = createContext();
@@ -10,43 +9,41 @@ export const CartProvider = ({ children }) => {
     const { user } = useAuth();
     const [cart, setCart] = useState({});
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null); // State to manage error messages
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         const loadCart = async () => {
-            if (user) {
-                const cartRef = doc(db, 'carts', user.uid);
-                const cartDoc = await getDoc(cartRef);
-                
-                if (cartDoc.exists()) {
-                    setCart(cartDoc.data().cart || {}); // Accessing the cart data correctly
+            setLoading(true);
+            try {
+                if (user) {
+                    const cartRef = doc(db, 'carts', user.uid);
+                    const cartDoc = await getDoc(cartRef);
+                    setCart(cartDoc.exists() ? cartDoc.data().cart : {});
                 } else {
-                    // Create a new cart document for the user if it doesn't exist
-                    await setDoc(cartRef, { cart: {} });
-                    setCart({});
+                    const savedCart = JSON.parse(localStorage.getItem('cart')) || {};
+                    setCart(savedCart);
                 }
-                setLoading(false);
-            } else {
-                const savedCart = JSON.parse(localStorage.getItem('cart')) || {};
-                setCart(savedCart);
+            } catch (err) {
+                console.error('Error loading cart:', err);
+                setError('Error loading cart. Please try again later.');
+            } finally {
                 setLoading(false);
             }
         };
-
         loadCart();
     }, [user]);
 
     useEffect(() => {
-        if (user) {
-            localStorage.removeItem('cart'); // Clear local storage when user is logged in
+        if (!user) {
+            localStorage.setItem('cart', JSON.stringify(cart));
         } else {
-            localStorage.setItem('cart', JSON.stringify(cart)); // Save cart to local storage
+            localStorage.removeItem('cart');
         }
     }, [cart, user]);
 
     const addToCart = async (product) => {
-        const isOneOfAKind = product.category === "artisan";
-        const existingItem = cart[product.id]; // Ensure to use product ID here correctly
+        const isOneOfAKind = product.category === 'artisan';
+        const existingItem = cart[product.id];
 
         if (isOneOfAKind && existingItem) {
             setError(`Cannot add more than one ${product.name} to the cart.`);
@@ -55,89 +52,75 @@ export const CartProvider = ({ children }) => {
 
         const updatedCart = {
             ...cart,
-            [product.id]: { // Use product ID correctly
+            [product.id]: {
                 ...product,
                 quantity: isOneOfAKind ? 1 : (existingItem?.quantity || 0) + 1,
             },
         };
-
         setCart(updatedCart);
 
-        try {
-            if (user) {
+        if (user) {
+            try {
                 const cartRef = doc(db, 'carts', user.uid);
-                const cartDoc = await getDoc(cartRef);
-
-                if (cartDoc.exists()) {
-                    // Update the cart object directly
-                    await updateDoc(cartRef, { cart: updatedCart });
-                } else {
-                    // Create a new cart object for the user
-                    await setDoc(cartRef, { cart: updatedCart });
-                }
+                await updateDoc(cartRef, { cart: updatedCart });
+            } catch (err) {
+                console.error('Error updating cart:', err);
+                setError('Error updating cart. Please try again later.');
             }
-        } catch (error) {
-            console.error('Error updating cart:', error);
-            setError('Error updating cart. Please try again later.');
         }
     };
 
-    // Update item quantity in cart
     const updateQuantity = async (productId, quantity) => {
         if (!cart[productId]) {
-            console.warn(`Product ID ${productId} not found in cart.`);
+            setError(`Product ID ${productId} not found in cart.`);
             return;
         }
 
-        const previousQuantity = cart[productId].quantity;
-        const newQuantity = Math.max(quantity, 1); // Ensure quantity is at least 1
+        const newQuantity = Math.max(quantity, 1);
         const updatedCart = {
             ...cart,
             [productId]: { ...cart[productId], quantity: newQuantity },
         };
-
         setCart(updatedCart);
-        console.log(`Previous Quantity: ${previousQuantity} Change: ${quantity - previousQuantity} New Quantity: ${newQuantity}`);
 
-        try {
-            if (user) {
+        if (user) {
+            try {
                 const cartRef = doc(db, 'carts', user.uid);
                 await updateDoc(cartRef, { [`cart.${productId}.quantity`]: newQuantity });
+            } catch (err) {
+                console.error('Error updating quantity:', err);
+                setError('Error updating quantity. Please try again later.');
             }
-        } catch (error) {
-            console.error('Error updating quantity:', error);
-            setError('Error updating quantity. Please try again later.');
         }
     };
 
-    // Remove item from cart
     const removeFromCart = async (productId) => {
         const updatedCart = { ...cart };
         delete updatedCart[productId];
         setCart(updatedCart);
 
-        try {
-            if (user) {
+        if (user) {
+            try {
                 const cartRef = doc(db, 'carts', user.uid);
                 await updateDoc(cartRef, { cart: updatedCart });
+            } catch (err) {
+                console.error('Error removing item from cart:', err);
+                setError('Error removing item from cart. Please try again later.');
             }
-        } catch (error) {
-            console.error('Error removing item from cart:', error);
-            setError('Error removing item from cart. Please try again later.');
         }
     };
 
     const clearCart = async () => {
         setCart({});
 
-        try {
-            if (user) {
+        if (user) {
+            try {
                 const cartRef = doc(db, 'carts', user.uid);
                 await updateDoc(cartRef, { cart: {} });
+            } catch (err) {
+                console.error('Error clearing cart:', err);
+                setError('Error clearing cart. Please try again later.');
             }
-        } catch (error) {
-            console.error('Error clearing cart:', error);
-            setError('Error clearing cart. Please try again later.');
         }
     };
 

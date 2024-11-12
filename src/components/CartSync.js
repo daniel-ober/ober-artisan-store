@@ -1,3 +1,4 @@
+// src/components/CartSync.js
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { syncCart } from '../redux/slices/cartSlice'; // Ensure you have a syncCart action

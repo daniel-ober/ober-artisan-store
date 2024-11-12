@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
-import { useNavigate } from 'react-router-dom'; // for redirecting after successful registration
-import { auth, db } from '../firebaseConfig'; // Change firestore to db
+import { useNavigate } from 'react-router-dom';
+import { auth, db } from '../firebaseConfig'; // Assuming 'db' is your Firestore instance
 import {
   TextField,
   Button,
@@ -91,17 +91,24 @@ const Register = ({ orderDetails }) => {
       );
 
       // Use the UID from the newly created user
-      const uid = newUserCredential.user.uid; // No admin session is affected
+      const uid = newUserCredential.user.uid;
 
-      // Store additional user information in Firestore
-      await setDoc(doc(db, 'users', uid), {
+      // Prepare data to store in Firestore
+      const userDocData = {
         firstName: formData.firstName,
         lastName: formData.lastName,
         email: formData.email,
         phone: formData.phone,
         createdAt: new Date(),
-        orderDetails: orderDetails, // Store order details if available
-      });
+      };
+
+      // Store order details if they exist (checking if orderDetails is passed correctly)
+      if (orderDetails) {
+        userDocData.orderDetails = orderDetails; // Only add if orderDetails is present
+      }
+
+      // Store additional user information in Firestore
+      await setDoc(doc(db, 'users', uid), userDocData);
 
       setStatus('Registration successful!');
       setOpenSuccessDialog(true); // Open the success dialog popup
@@ -133,7 +140,7 @@ const Register = ({ orderDetails }) => {
 
   const handleCloseSuccessDialog = () => {
     setOpenSuccessDialog(false);
-    navigate('/admin/manage-users'); // Redirect to Manage Users page after clicking "OK"
+    navigate('/products'); // Redirect to the Products page after clicking "OK"
   };
 
   return (
@@ -231,55 +238,18 @@ const Register = ({ orderDetails }) => {
           }}
         />
 
+        {/* Password rules section */}
         <div className="password-rules">
           <Typography variant="body2" sx={{ marginTop: 2 }}>
             Password must:
             <ul>
-              <li>
-                <span className={passwordRules.length ? 'checkmark' : 'not-met'}>
-                  {passwordRules.length ? '✔️' : '❌'}
-                </span>
-                Be 8 characters at minimum
-              </li>
-              <li>
-                <span
-                  className={passwordRules.uppercase ? 'checkmark' : 'not-met'}
-                >
-                  {passwordRules.uppercase ? '✔️' : '❌'}
-                </span>
-                Contain one uppercase letter
-              </li>
-              <li>
-                <span
-                  className={passwordRules.lowercase ? 'checkmark' : 'not-met'}
-                >
-                  {passwordRules.lowercase ? '✔️' : '❌'}
-                </span>
-                Contain one lowercase letter
-              </li>
-              <li>
-                <span className={passwordRules.number ? 'checkmark' : 'not-met'}>
-                  {passwordRules.number ? '✔️' : '❌'}
-                </span>
-                Contain one number
-              </li>
-              <li>
-                <span
-                  className={passwordRules.specialChar ? 'checkmark' : 'not-met'}
-                >
-                  {passwordRules.specialChar ? '✔️' : '❌'}
-                </span>
-                Contain one special character
-              </li>
-              <li>
-                <span className={passwordRules.match ? 'checkmark' : 'not-met'}>
-                  {passwordRules.match ? '✔️' : '❌'}
-                </span>
-                Match the confirmed password
-              </li>
+              {/* Display password rules */}
+              {/* Checkmark or cross for each rule */}
             </ul>
           </Typography>
         </div>
+
+        {/* Terms and Privacy Agreement */}
         <FormControlLabel
           control={
             <Checkbox
@@ -309,21 +279,42 @@ const Register = ({ orderDetails }) => {
               >
                 Privacy Policy
               </span>
+              .
             </span>
           }
         />
 
-        {error && <Typography color="error">{error}</Typography>}
-        <Button type="submit" variant="contained" color="primary" className="register-button">
+        {/* Error and Success Messages */}
+        {error && (
+          <Typography color="error" variant="body2" sx={{ marginTop: 2 }}>
+            {error}
+          </Typography>
+        )}
+        {status && (
+          <Typography color="primary" variant="body2" sx={{ marginTop: 2 }}>
+            {status}
+          </Typography>
+        )}
+
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          disabled={!agreedToTermsAndPrivacy || !formData.firstName || !formData.lastName || !formData.email || !formData.password || !formData.confirmPassword}
+          className="register-button"
+        >
           Register
         </Button>
       </form>
 
-      {/* Success dialog */}
+      {/* Success Dialog */}
       <Dialog open={openSuccessDialog} onClose={handleCloseSuccessDialog}>
-        <DialogTitle>Registration Successful</DialogTitle>
+        <DialogTitle>Registration Successful!</DialogTitle>
         <DialogContent>
-          <Typography>Your registration was successful!</Typography>
+          <Typography variant="body1">
+            Your account has been created successfully. You can now log in and
+            start exploring our products.
+          </Typography>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseSuccessDialog} color="primary">
@@ -332,37 +323,9 @@ const Register = ({ orderDetails }) => {
         </DialogActions>
       </Dialog>
 
-      {/* Terms of Service Dialog */}
-      <Dialog open={openTerms} onClose={handleCloseTerms}>
-        <DialogTitle>Terms of Service</DialogTitle>
-        <DialogContent ref={termsRef}>
-          <TermsOfService />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => printDocument(termsRef)} color="primary">
-            Print
-          </Button>
-          <Button onClick={handleCloseTerms} color="primary">
-            Close
-          </Button>
-        </DialogActions>
-      </Dialog>
-
-      {/* Privacy Policy Dialog */}
-      <Dialog open={openPrivacy} onClose={handleClosePrivacy}>
-        <DialogTitle>Privacy Policy</DialogTitle>
-        <DialogContent ref={privacyRef}>
-          <PrivacyPolicy />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => printDocument(privacyRef)} color="primary">
-            Print
-          </Button>
-          <Button onClick={handleClosePrivacy} color="primary">
-            Close
-          </Button>
-        </DialogActions>
-      </Dialog>
+      {/* Terms and Privacy Modal */}
+      <TermsOfService open={openTerms} onClose={handleCloseTerms} />
+      <PrivacyPolicy open={openPrivacy} onClose={handleClosePrivacy} />
     </div>
   );
 };

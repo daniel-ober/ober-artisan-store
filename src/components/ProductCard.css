@@ -27,7 +27,6 @@
   object-fit:contain; /* Fit the image without distortion */
   object-position: top; /* Center the image if cropped */
   border: 1px black;
-
 }
 
 /* Container for product information */

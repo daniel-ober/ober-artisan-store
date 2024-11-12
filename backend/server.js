@@ -3,21 +3,14 @@ const express = require('express');
 const cors = require('cors');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const admin = require('firebase-admin');
-const helmet = require('helmet');
-const rateLimit = require('express-rate-limit');
-const bodyParser = require('body-parser');
-
-// Check for required environment variables
-if (!process.env.STRIPE_SECRET_KEY || !process.env.FIREBASE_PROJECT_ID) {
-    throw new Error('Missing critical environment variables.');
-}
+const nodemailer = require('nodemailer');
+const OpenAI = require('openai');
 
 // Define allowed origins for CORS
 const allowedOrigins = [
-    'http://localhost:3000',
-    'http://localhost:4949',
-    'http://10.0.0.210:3000',
-    'https://d88d-2601-480-4101-1ba0-1b1-3c9d-e72-7192.ngrok-free.app',
+    'http://localhost:3000', // Frontend in development
+    'http://localhost:4949', // Your backend server
+    'http://10.0.0.210:3000', // Your local network IP (if accessing from another device)
 ];
 
 // Firebase Admin setup
@@ -27,7 +20,7 @@ if (!admin.apps.length) {
             type: "service_account",
             project_id: process.env.FIREBASE_PROJECT_ID,
             private_key_id: process.env.FIREBASE_PRIVATE_KEY_ID,
-            private_key: process.env.FIREBASE_PRIVATE_KEY.replace(/\\\\n/g, '\\n'),
+            private_key: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
             client_email: process.env.FIREBASE_CLIENT_EMAIL,
             client_id: process.env.FIREBASE_CLIENT_ID,
             auth_uri: process.env.FIREBASE_AUTH_URI,
@@ -38,19 +31,24 @@ if (!admin.apps.length) {
         databaseURL: `https://${process.env.FIREBASE_PROJECT_ID}.firebaseio.com`,
     });
 } else {
-    console.log('Firebase app already initialized');
+    console.log("Firebase app already initialized.");
 }
 
 const db = admin.firestore();
 const app = express();
 
-// Middleware
-app.set('trust proxy', 1); // Enable 'trust proxy' for rate limiting
-app.use(helmet()); // Add security headers
-app.use(cors({
-    origin: (origin, callback) => {
+// Initialize OpenAI client
+const openai = new OpenAI({
+    apiKey: process.env.REACT_APP_OPENAI_API_KEY,
+});
+
+// CORS configuration
+const corsOptions = {
+    origin: function (origin, callback) {
         console.log("Incoming request origin:", origin);
-        if (!origin) return callback(null, true);
+        
+        if (!origin) return callback(null, true); // Allow requests with no origin (like mobile apps)
+
         if (allowedOrigins.includes(origin)) {
             callback(null, true);
         } else {
@@ -61,107 +59,168 @@ app.use(cors({
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
-    optionsSuccessStatus: 204,
-}));
+    optionsSuccessStatus: 204, // Some legacy browsers choke on 204
+};
 
-// Middleware to capture the raw body for webhook verification
-app.use(bodyParser.raw({ type: 'application/json' }));
+// Apply CORS middleware before defining routes
+app.use(cors(corsOptions));
 
-// Rate limiting
-const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100 // Limit each IP to 100 requests per windowMs
+// Logging middleware to check origin and other headers
+app.use((req, res, next) => {
+    console.log('Incoming request origin:', req.headers.origin); // Log the origin
+    next();
 });
-app.use(limiter);
+
+// Middleware to parse JSON requests
+app.use(express.json({ limit: '1mb' }));
 
 // Import routes
 const contactRoutes = require('./routes/contact');
 const productRoutes = require('./routes/products');
-const webhookRoutes = require('./webhook'); // Updated import statement
+const webhookRoutes = require('./webhook');
 
-// Define routes
+// Route for contact messages
 app.use('/api/contact', contactRoutes);
+
+// Route for product handling
 app.use('/api/products', productRoutes);
+
+// Route for webhook handling
 app.use('/api/webhook', webhookRoutes);
 
-// Create Product Route
+// Create Product Route (Stripe integration and Firestore)
 app.post('/api/create-stripe-product', async (req, res) => {
     const { name, description, images = [], price, category } = req.body;
+
+    // Log incoming request data
     console.log('Request body:', req.body);
 
     try {
+        // Validate input
         if (!name) return res.status(400).json({ error: 'Product name is required.' });
         if (price === undefined || price <= 0) return res.status(400).json({ error: 'Valid price is required.' });
 
+        // Create the product in Stripe
         const product = await stripe.products.create({
             name,
             description,
             images,
         });
 
+        // Log created Stripe product
+        console.log('Created Stripe product:', product);
+
+        // Create a price for the product
         const priceId = await stripe.prices.create({
             currency: 'usd',
-            unit_amount: Math.round(price * 100),
+            unit_amount: Math.round(price * 100), // Stripe requires price in cents
             product: product.id,
         });
 
+        // Prepare product data for Firestore
         const productData = {
             name,
             description,
             images,
             priceId: priceId.id,
-            stripeProductId: product.id,
-            category: category || "default-category",
-            status: "unavailable",
-            price,
-            createdAt: admin.firestore.FieldValue.serverTimestamp(),
-            updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+            stripeProductId: product.id, // Keep this to reference the Stripe product
+            category: category || "default-category", // Assign a default category if not provided
+            status: "unavailable", // Default status
+            price, // Include the price field
         };
 
+        // Log the product data before saving to Firestore
+        console.log('Product data before Firestore save:', productData);
+
+        // Add the product to Firestore using auto-generated document ID
         const newProductRef = await db.collection('products').add(productData);
         console.log('New Firestore document created with ID:', newProductRef.id);
 
-        res.status(201).json({ productId: newProductRef.id, ...productData });
+        // Return the auto-generated document ID along with the Stripe price ID
+        res.status(201).json({ productId: newProductRef.id, priceId: priceId.id });
     } catch (error) {
-        console.error('Error creating product:', error);
-        res.status(500).json({ error: 'Error creating product.' });
+        console.error('Error creating Stripe product:', error);
+        if (error.code === 'invalid_request_error') {
+            return res.status(400).json({ error: 'Invalid request to Stripe.' });
+        }
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 });
 
 // Create Checkout Session Route
 app.post('/api/create-checkout-session', async (req, res) => {
+    const { products, userId } = req.body;
+
     try {
-        const { products } = req.body;
-        console.log('Products for checkout session:', products);
+        const lineItems = products.map(item => ({
+            price: item.price,
+            quantity: item.quantity,
+        }));
 
-        // Validate input
-        if (!products || products.length === 0) {
-            return res.status(400).json({ error: 'No products provided.' });
-        }
-
-        // Create a checkout session
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
-            line_items: products.map(product => ({
-                price_data: {
-                    currency: 'usd',
-                    product_data: {
-                        name: product.name,
-                        images: [product.imageUrl], // Optional
-                    },
-                    unit_amount: Math.round(product.price * 100), // Convert to cents
-                },
-                quantity: product.quantity,
-            })),
+            line_items: lineItems,
             mode: 'payment',
-            success_url: 'http://localhost:3000/success',
-            cancel_url: 'http://localhost:3000/cancel',
+            success_url: `${process.env.CLIENT_URL}/success?session_id={CHECKOUT_SESSION_ID}&userId=${userId}`,
+            cancel_url: `${process.env.CLIENT_URL}/cart`,
+            metadata: { userId },
         });
 
         res.json({ url: session.url });
     } catch (error) {
         console.error('Error creating checkout session:', error);
-        res.status(500).json({ error: 'Unable to create checkout session.' });
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+// Sending chat email route
+app.post('/api/send-chat-email', async (req, res) => {
+    const { name, email, request, phone, chatMessages } = req.body;
+
+    if (!email) return res.status(400).send('User email is required');
+    if (!Array.isArray(chatMessages) || chatMessages.length === 0) return res.status(400).send('Chat messages are required');
+
+    try {
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_PASS,
+            },
+        });
+
+        const chatContent = chatMessages.map(msg => `${msg.sender === 'user' ? 'You' : 'Bot'}: ${msg.text}`).join('\n');
+
+        const mailOptions = {
+            from: process.env.EMAIL_USER,
+            to: 'danober.dev@gmail.com',
+            subject: 'Chat Inquiry from Oakli (Custom Drum Assistant)',
+            text: `Customer Name: ${name}\nCustomer Email: ${email}\nCustomer Phone: ${phone}\n\nCustomer Request: ${request}\n\nChat History:\n${chatContent}`,
+        };
+
+        await transporter.sendMail(mailOptions);
+        res.status(200).send('Email sent successfully');
+    } catch (error) {
+        console.error('Error sending email:', error);
+        res.status(500).send('Error sending email');
+    }
+});
+
+// Chat API endpoint
+app.post('/api/chat', async (req, res) => {
+    const { message } = req.body;
+
+    try {
+        const response = await openai.chat.completions.create({
+            model: 'gpt-3.5-turbo',
+            messages: [{ role: 'user', content: message }],
+        });
+
+        const reply = response.choices[0].message.content;
+        res.status(200).send(reply);
+    } catch (error) {
+        console.error('Error communicating with OpenAI:', error);
+        res.status(500).send('Error processing request');
     }
 });
 
