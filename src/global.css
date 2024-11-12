@@ -1,0 +1,68 @@
+/* Global CSS styles for dark and light themes */
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.8s ease, color 0.8s ease; /* Smooth fade transition */
+  }
+  
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  }
+  
+  /* Light Mode Styles */
+  body.light {
+    background-color: #ffffff;
+    color: #000000;
+  }
+  
+  body.light .navbar,
+  body.light .footer,
+  body.light .app-content {
+    background-color: #f0f0f0;
+    color: #000000;
+  }
+  
+  /* Dark Mode Styles */
+  body.dark {
+    background-color: #000000;
+    color: #ffffff;
+  }
+  
+  body.dark .navbar,
+  body.dark .footer,
+  body.dark .app-content {
+    background-color: #222;
+    color: #ffffff;
+  }
+  
+  body.dark * {
+    color: #ffffff !important; /* Force all text to white in dark mode */
+    background-color: transparent !important; /* Prevent overriding with transparent */
+  }
+  
+  /* Smooth transition for background and text color */
+  .navbar, .footer, .app-content {
+    transition: background-color 0.8s ease, color 0.8s ease;
+  }
+  
+  /* Theme toggle button styling */
+  .theme-toggle {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    z-index: 1000;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .theme-toggle:hover {
+    background-color: #555;
+  }
+  

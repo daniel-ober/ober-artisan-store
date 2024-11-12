@@ -1,3 +1,4 @@
+// App.js
 import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
@@ -31,6 +32,17 @@ import ChatSupportButton from './components/ChatSupportButton';
 function App() {
   const { user, handleSignOut } = useAuth();
   const [currentTab, setCurrentTab] = useState('Home');
+  const [darkMode, setDarkMode] = useState(false);
+
+  // Toggle dark mode
+  const toggleDarkMode = () => {
+    const currentMode = darkMode;
+    setDarkMode(!currentMode);
+    document.body.classList.toggle('dark', !currentMode);
+    document.body.classList.toggle('light', currentMode);
+    console.log('Toggling dark mode...');
+    console.log('Dark mode is now:', !currentMode);
+  };
 
   return (
     <div className="app-container">
@@ -39,6 +51,9 @@ function App() {
         onSignOut={handleSignOut} 
         onTabChange={(tab) => setCurrentTab(tab)} 
       />
+      <button className="theme-toggle" onClick={toggleDarkMode}>
+        Switch to {darkMode ? 'Light' : 'Dark'} Mode
+      </button>
       <div className="app-content">
         <Routes>
           <Route path="/" element={<Home />} />
