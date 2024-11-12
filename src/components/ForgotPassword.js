@@ -9,8 +9,8 @@ function ForgotPassword() {
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
-  const [open, setOpen] = useState(false); // State for controlling the dialog
-  const navigate = useNavigate(); // Hook to navigate programmatically
+  const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleForgotPassword = async (e) => {
     e.preventDefault();
@@ -20,22 +20,20 @@ function ForgotPassword() {
     try {
       await sendPasswordResetEmail(auth, email);
       setMessage('Password reset email sent! Check your inbox.');
-      setOpen(true); // Open the dialog on successful email send
+      setOpen(true);
     } catch (error) {
       setError('Error sending password reset email. Please try again.');
     }
   };
 
   const handleClose = () => {
-    setOpen(false); // Close the dialog
-    navigate('/signin'); // Redirect to the sign-in page
+    setOpen(false);
+    navigate('/signin');
   };
 
   return (
     <div className="forgot-password-container">
-      <Typography variant="h4" component="h1" gutterBottom>
-        Forgot Password
-      </Typography>
+      <Typography variant="h4">Forgot Password</Typography>
       <form onSubmit={handleForgotPassword}>
         <TextField
           label="Email"
@@ -43,50 +41,27 @@ function ForgotPassword() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           fullWidth
-          margin="normal"
-          className="contact-input"
           required
+          margin="normal"
         />
-        {error && (
-          <Typography color="error" variant="body2" sx={{ marginTop: 1 }}>
-            {error}
-          </Typography>
-        )}
-        {message && (
-          <Typography color="primary" variant="body2" sx={{ marginTop: 1 }}>
-            {message}
-          </Typography>
-        )}
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          className="contact-button"
-        >
-          Send Password Reset Email
+        <Button type="submit" variant="contained" color="primary" fullWidth sx={{ marginTop: 2 }}>
+          Send Reset Email
         </Button>
+        {error && <Typography variant="body2" color="error">{error}</Typography>}
+        {message && <Typography variant="body2" color="primary">{message}</Typography>}
       </form>
-      <Typography variant="body2" sx={{ marginTop: 2 }}>
-        Remembered your password?{' '}
-        <Link to="/signin" className="form-link">
-          Sign in here
-        </Link>
-      </Typography>
-
-      {/* Confirmation Dialog */}
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Password Reset Email Sent</DialogTitle>
+        <DialogTitle>Reset Password Email Sent</DialogTitle>
         <DialogContent>
-          <Typography>
-            A password reset email has been sent. Please check your inbox for further instructions.
-          </Typography>
+          <Typography>{message}</Typography>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            OK
-          </Button>
+          <Button onClick={handleClose} color="primary">OK</Button>
         </DialogActions>
       </Dialog>
+      <Typography variant="body2">
+        Go back to <Link to="/signin">Sign In</Link>
+      </Typography>
     </div>
   );
 }

@@ -1,3 +1,5 @@
+// backend/models/Inquiry.js
+
 // Define Inquiry Schema
 const inquirySchema = new mongoose.Schema({
   first_name: String,

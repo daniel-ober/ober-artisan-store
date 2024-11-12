@@ -1,3 +1,5 @@
+// backend/test.js
+
 const OpenAI = require('openai');
 
 // Initialize OpenAI API
