@@ -18,15 +18,15 @@ router.post('/', async (req, res) => {
     }
 });
 
-// Get all orders for a user
-router.get('/:userId', async (req, res) => {
-    const userId = req.params.userId;
+// Update an order status
+router.patch('/:orderId', async (req, res) => {
+    const { orderId } = req.params;
+    const { status } = req.body; // Get status from request body
     try {
-        const ordersSnapshot = await db.collection('orders').where('userId', '==', userId).get();
-        const orders = ordersSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        res.json(orders);
+        await db.collection('orders').doc(orderId).update({ status });
+        res.status(200).json({ message: 'Order status updated successfully' });
     } catch (error) {
-        console.error('Error fetching orders:', error);
+        console.error('Error updating order status:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });

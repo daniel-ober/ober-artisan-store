@@ -99,6 +99,7 @@ const Register = ({ orderDetails }) => {
         lastName: formData.lastName,
         email: formData.email,
         phone: formData.phone,
+        status: "active",
         createdAt: new Date(),
       };
 

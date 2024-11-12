@@ -56,7 +56,7 @@ const Home = () => {
 
     return (
         <div className="home-container">
-            <h1 className="welcome-message">Welcome to Dan Ober Artisan Drums!</h1>
+            {/* <h1 className="welcome-message">Welcome to Dan Ober Artisan Drums!</h1> */}
 
             {/* Video section */}
             <div className="video-container">
