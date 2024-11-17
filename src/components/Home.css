@@ -1,31 +1,47 @@
+/* Ensure the body and html elements take up the full height */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+/* Home container takes full height and uses flexbox */
 .home-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensures the container takes up at least the full height of the viewport */
   background-color: #f8f9fa;
   text-align: center;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: smaller;
 }
 
-.welcome-message {
-  color: #333;
-  margin-bottom: 30px;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+/* Video container should take available space */
+.video-container {
+  position: relative;
+  max-width: 100%;
+  width: 100%;
+  flex: 1; /* Makes the video container take available space */
 }
 
+/* Content area */
 .home-content {
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex-shrink: 0; /* Prevents content from shrinking */
 }
 
+/* Additional content section */
 .home-section {
   margin-bottom: 30px;
   max-width: 100%;
   width: 100%;
 }
 
+/* Styling for images */
 .home-image {
-  width: 100%; /* Responsive width */
-  max-width: 600px; /* Limit maximum width */
+  width: 100%;
+  max-width: 600px;
   height: auto;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   opacity: 0;
@@ -44,19 +60,40 @@
   line-height: 1.6;
 }
 
-/* Video Styles */
-.video-container {
-  position: relative;
-  max-width: 100%;
-  width: 100%;
-}
-
+/* Video styles */
 .coming-soon-video {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 99.87%;
+  height: auto;
   border-radius: 5px;
-  box-shadow: 5px 5px 20px rgba(0, 0, 0, 1.0);
+  transition: opacity 1.5s ease-in-out;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
 }
 
+.fade-in {
+  opacity: 1;
+  z-index: 1;
+}
+
+.fade-out {
+  opacity: 0;
+  z-index: 0;
+}
+
+/* Footer styles */
+footer {
+  margin-top: auto; /* Pushes footer to the bottom */
+  background-color: #333; /* Dark background */
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Responsive Styles */
 @media (max-width: 768px) {
   .home-paragraph {
     font-size: 1rem;

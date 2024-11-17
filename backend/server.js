@@ -6,14 +6,7 @@ const admin = require('firebase-admin');
 const nodemailer = require('nodemailer');
 const OpenAI = require('openai');
 
-// Define allowed origins for CORS
-const allowedOrigins = [
-    'http://localhost:3000', // Frontend in development
-    'http://localhost:4949', // Your backend server
-    'http://10.0.0.210:3000', // Your local network IP (if accessing from another device)
-];
-
-// Firebase Admin setup
+// Initialize Firebase Admin
 if (!admin.apps.length) {
     admin.initializeApp({
         credential: admin.credential.cert({
@@ -43,50 +36,70 @@ const openai = new OpenAI({
 });
 
 // CORS configuration
+const allowedOrigins = [
+    'http://localhost:3000', // Frontend in development
+    'http://localhost:4949', // Your backend server
+    'http://10.0.0.210:3000', // Your local network IP (if accessing from another device)
+];
 const corsOptions = {
     origin: function (origin, callback) {
-        console.log("Incoming request origin:", origin);
-        
-        if (!origin) return callback(null, true); // Allow requests with no origin (like mobile apps)
-
-        if (allowedOrigins.includes(origin)) {
+        if (!origin || allowedOrigins.includes(origin)) {
             callback(null, true);
         } else {
-            console.log('Origin not allowed by CORS:', origin);
             callback(new Error('Not allowed by CORS'));
         }
     },
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
-    optionsSuccessStatus: 204, // Some legacy browsers choke on 204
+    optionsSuccessStatus: 204, // For legacy browsers
 };
 
 // Apply CORS middleware before defining routes
 app.use(cors(corsOptions));
 
-// Logging middleware to check origin and other headers
-app.use((req, res, next) => {
-    console.log('Incoming request origin:', req.headers.origin); // Log the origin
-    next();
-});
-
 // Middleware to parse JSON requests
 app.use(express.json({ limit: '1mb' }));
 
-// Import routes
-const contactRoutes = require('./routes/contact');
-const productRoutes = require('./routes/products');
-const webhookRoutes = require('./webhook');
+// Logging middleware to check origin and headers
+app.use((req, res, next) => {
+    console.log('Incoming request origin:', req.headers.origin);
+    next();
+});
 
-// Route for contact messages
-app.use('/api/contact', contactRoutes);
+// Chat API endpoint
+app.post('/api/chat', async (req, res) => {
+    const { messages } = req.body;
 
-// Route for product handling
-app.use('/api/products', productRoutes);
+    // Validate the message content
+    if (!messages || !Array.isArray(messages) || messages.length === 0) {
+        return res.status(400).send('Invalid or empty messages array.');
+    }
 
-// Route for webhook handling
-app.use('/api/webhook', webhookRoutes);
+    // Check for the presence of the required fields in each message
+    for (let msg of messages) {
+        if (!msg.role || !msg.content || typeof msg.content !== 'string') {
+            return res.status(400).send('Each message must have a valid role and content.');
+        }
+    }
+
+    try {
+        // Call OpenAI to generate a response based on the chat history
+        const response = await openai.chat.completions.create({
+            model: 'gpt-3.5-turbo',
+            messages: messages,
+        });
+
+        const reply = response.choices[0].message.content;
+
+        // Send back the assistant's response
+        res.status(200).send({ content: reply });
+
+    } catch (error) {
+        console.error('Error with OpenAI API:', error);
+        res.status(500).send('Error processing request');
+    }
+});
 
 // Create Product Route (Stripe integration and Firestore)
 app.post('/api/create-stripe-product', async (req, res) => {
@@ -203,30 +216,6 @@ app.post('/api/send-chat-email', async (req, res) => {
     } catch (error) {
         console.error('Error sending email:', error);
         res.status(500).send('Error sending email');
-    }
-});
-
-// Chat API endpoint
-// Chat API endpoint
-app.post('/api/chat', async (req, res) => {
-    const { message } = req.body;
-
-    // Validate the message content
-    if (!message || typeof message !== 'string' || message.trim() === '') {
-        return res.status(400).send('Invalid or empty message.');
-    }
-
-    try {
-        const response = await openai.chat.completions.create({
-            model: 'gpt-3.5-turbo',
-            messages: [{ role: 'user', content: message }],
-        });
-
-        const reply = response.choices[0].message.content;
-        res.status(200).send(reply);
-    } catch (error) {
-        console.error('Error communicating with OpenAI:', error);
-        res.status(500).send('Error processing request');
     }
 });
 

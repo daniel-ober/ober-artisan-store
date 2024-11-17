@@ -34,14 +34,14 @@ const ChatSupportButton = React.memo(({ currentTab }) => {
         try {
             console.log("Sending message:", userMessage);
 
+            // Ensure the message structure is correctly formatted
             const response = await fetch('http://localhost:4949/api/chat', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    model: 'gpt-3.5-turbo',
-                    messages: [...messages, userMessage],
+                    messages: [...messages, userMessage], // Send the full chat history
                 }),
             });
 
