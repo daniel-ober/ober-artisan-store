@@ -1,12 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react';
 import CountdownTimer from './CountdownTimer';
-import { getUserDoc, createCart } from '../firebaseConfig'; // Import Firebase functions
-import ImageSequence from './ImageSequence'; // Import the new scroll image component
+import { getUserDoc, createCart } from '../firebaseConfig';
+// import ImageSequence from './ImageSequence';
 import './Home.css';
 
 const Home = () => {
     const [visible, setVisible] = useState({});
-    const [userData, setUserData] = useState(null); // Store user data
+    const [userData, setUserData] = useState(null);
+    const [isDarkMode, setIsDarkMode] = useState(() => {
+        return localStorage.getItem('darkMode') === 'true';
+    });
+    const [isVideoReady, setIsVideoReady] = useState(true);
+
+    const lightVideoRef = useRef(null);
+    const darkVideoRef = useRef(null);
 
     const observer = useRef(
         new IntersectionObserver((entries) => {
@@ -22,7 +29,22 @@ const Home = () => {
     );
 
     useEffect(() => {
-        // Intersection Observer for fading in images
+        const initialDarkMode = document.body.classList.contains('dark');
+        setIsDarkMode(initialDarkMode);
+        localStorage.setItem('darkMode', initialDarkMode);
+
+        const mutationObserver = new MutationObserver(() => {
+            const newDarkMode = document.body.classList.contains('dark');
+            setIsDarkMode(newDarkMode);
+            localStorage.setItem('darkMode', newDarkMode);
+        });
+
+        mutationObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+
+        return () => mutationObserver.disconnect();
+    }, []);
+
+    useEffect(() => {
         const elements = document.querySelectorAll('.home-image');
         elements.forEach((element) => {
             observer.current.observe(element);
@@ -35,62 +57,64 @@ const Home = () => {
         };
     }, []);
 
-    // Test Firebase: Fetch user document or create a cart
     useEffect(() => {
         const testFirebaseIntegration = async () => {
-            const userId = 'testUserId123'; // Replace with actual userId
+            const userId = 'testUserId123';
             const userDoc = await getUserDoc(userId);
 
             if (!userDoc) {
-                // If no user document exists, create a cart for the user
                 await createCart(userId);
                 console.log(`Created a cart for user ID: ${userId}`);
             } else {
-                setUserData(userDoc); // Store user data
+                setUserData(userDoc);
                 console.log('User Data:', userDoc);
             }
         };
 
-        testFirebaseIntegration(); // Call the function to test Firebase
+        testFirebaseIntegration();
     }, []);
+
+    const handleVideoLoaded = () => {
+        setIsVideoReady(true);
+    };
+
+    const lightVideoSrc = "https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/Home%2Fteaser-light%2Fd.mp4?alt=media&token=b52e81d0-2ae9-449d-b3cb-051547ed97e0";
+    const darkVideoSrc = "https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/Home%2Fteaser-dark%2Fc.mp4?alt=media&token=03f2688a-c1bd-48ba-9c75-b351007e3fa7";
 
     return (
         <div className="home-container">
-            {/* <h1 className="welcome-message">Welcome to Dan Ober Artisan Drums!</h1> */}
-
-            {/* Video section */}
             <div className="video-container">
                 <video
-                    className="coming-soon-video"
+                    ref={lightVideoRef}
+                    src={lightVideoSrc}
+                    className={`coming-soon-video ${!isDarkMode && isVideoReady ? 'fade-in' : 'fade-out'}`}
                     autoPlay
                     loop
                     muted
                     playsInline
-                >
-                    <source src="https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/Home%2Fcomingsoon2.mp4?alt=media&token=31ad46c4-2d4c-447a-821e-13547a75a46f" type="video/mp4" />
-                    Your browser does not support the video tag.
-                </video>
+                    onCanPlayThrough={handleVideoLoaded}
+                />
+                <video
+                    ref={darkVideoRef}
+                    src={darkVideoSrc}
+                    className={`coming-soon-video ${isDarkMode && isVideoReady ? 'fade-in' : 'fade-out'}`}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    onCanPlayThrough={handleVideoLoaded}
+                />
                 <CountdownTimer />
             </div>
 
-            {/* Scroll Image Sequence Section */}
-            <ImageSequence />
+            {/* <ImageSequence /> */}
 
             <div className="home-content">
-                {userData && <p className="user-info">Welcome back, {userData.name}!</p>} {/* Display user data */}
+                {userData && <p className="user-info">Welcome back, {userData.name}!</p>}
 
                 <div className="home-section">
-                    <img
-                        src="https://i.imgur.com/248CyuT.jpeg"
-                        alt="Shop 1"
-                        className={`home-image ${visible['image1'] ? 'fade-in' : ''}`}
-                        id="image1"
-                    />
-                    <p className="home-paragraph">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit...
-                    </p>
+                    {/* Additional content here */}
                 </div>
-                {/* Add other sections here... */}
             </div>
         </div>
     );
