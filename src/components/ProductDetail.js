@@ -11,14 +11,13 @@ const ProductDetail = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const { addToCart, removeFromCart, cart } = useCart();
-    const [inCart, setInCart] = useState(null);
+    const [inCart, setInCart] = useState(null); // Local state for inCart
     const [mainImage, setMainImage] = useState('');
 
     useEffect(() => {
         const fetchProductData = async () => {
             try {
                 const productData = await fetchProductById(id);
-
                 if (productData) {
                     setProduct(productData);
                     setMainImage(productData.images?.[0] || 'https://i.imgur.com/eoKsILV.png');
@@ -38,7 +37,7 @@ const ProductDetail = () => {
         };
 
         fetchProductData();
-    }, [id, cart]);
+    }, [id, cart]); // Refetch when id or cart state changes
 
     const handleAddToCart = () => {
         if (product) {
@@ -55,13 +54,36 @@ const ProductDetail = () => {
 
     const handleQuantityChange = (change) => {
         if (!inCart) return;
-        const newQuantity = inCart.quantity + change;
 
+        // Log current state before updating
+        console.log("Current inCart state before change:", inCart);
+
+        // Calculate the new quantity
+        const newQuantity = inCart.quantity + change;
+        console.log("Calculated new quantity:", newQuantity);
+
+        // If quantity is less than 1, remove from cart
         if (newQuantity < 1) {
+            console.log("Quantity below 1, removing item from cart");
             handleRemoveFromCart();
             return;
         }
-        addToCart({ ...product, quantity: newQuantity, id });
+
+        // Step 1: Update `inCart` state directly
+        setInCart((prevInCart) => {
+            const updatedInCart = { ...prevInCart, quantity: newQuantity };
+            console.log("Updated inCart state:", updatedInCart);  // Log updated inCart state
+            return updatedInCart;
+        });
+
+        // Log cart state and check if inCart has been updated correctly
+        console.log("Cart state after quantity update (before addToCart):", cart);
+
+        // Step 2: Temporarily skip addToCart to focus only on inCart update
+        // addToCart({ ...product, quantity: newQuantity, id });
+
+        // Optional: Log the updated inCart state after all functions
+        console.log("Final inCart state:", inCart);
     };
 
     const handleThumbnailClick = (image) => {
@@ -71,7 +93,6 @@ const ProductDetail = () => {
     if (loading) return <p>Loading...</p>;
     if (error) return <p>{error}</p>;
 
-    // Adjust quantity button functionality based on product category
     const isArtisanProduct = product?.category === 'artisan';
 
     return (
