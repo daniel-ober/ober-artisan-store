@@ -57,14 +57,12 @@ const ProductDetail = () => {
     const handleQuantityChange = (change) => {
         if (!inCart) return;
 
-        // Update quantity using the global context function
         const newQuantity = inCart.quantity + change;
         if (newQuantity < 1) {
             handleRemoveFromCart();
             return;
         }
 
-        // Update cart in the global context
         updateQuantity(inCart.id, newQuantity);
     };
 
@@ -153,15 +151,17 @@ const ProductDetail = () => {
 
             {/* Modal for enlarged image */}
             {showModal && (
-                <div className="modal show" onClick={handleModalClose} role="dialog" aria-labelledby="modalTitle">
-                    <button
-                        className="modal-close"
-                        onClick={handleModalClose}
-                        aria-label="Close image view"
-                    >
-                        &times;
-                    </button>
-                    <img src={mainImage} alt="Enlarged Product" />
+                <div className="modal-overlay" onClick={handleModalClose} role="dialog" aria-labelledby="modalTitle">
+                    <div className="modal-content">
+                        <button
+                            className="modal-close"
+                            onClick={handleModalClose}
+                            aria-label="Close image view"
+                        >
+                            &times;
+                        </button>
+                        <img src={mainImage} alt="Enlarged Product" />
+                    </div>
                 </div>
             )}
 
