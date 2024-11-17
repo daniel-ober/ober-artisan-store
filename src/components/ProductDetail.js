@@ -10,7 +10,7 @@ const ProductDetail = () => {
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const { addToCart, removeFromCart, cart } = useCart();
+    const { addToCart, removeFromCart, updateQuantity, cart } = useCart();
     const [inCart, setInCart] = useState(null); // Local state for inCart
     const [mainImage, setMainImage] = useState('');
     const [showModal, setShowModal] = useState(false); // For modal image view
@@ -57,25 +57,15 @@ const ProductDetail = () => {
     const handleQuantityChange = (change) => {
         if (!inCart) return;
 
-        // Calculate the new quantity
+        // Update quantity using the global context function
         const newQuantity = inCart.quantity + change;
-
-        // If quantity is less than 1, remove from cart
         if (newQuantity < 1) {
             handleRemoveFromCart();
             return;
         }
 
-        // Update inCart state directly
-        setInCart((prevInCart) => {
-            const updatedInCart = { ...prevInCart, quantity: newQuantity };
-            return updatedInCart;
-        });
-
-        // Temporarily skip addToCart to focus only on inCart update
-        setTimeout(() => {
-            addToCart({ ...product, quantity: newQuantity, id });
-        }, 100);
+        // Update cart in the global context
+        updateQuantity(inCart.id, newQuantity);
     };
 
     const handleThumbnailClick = (image) => {
@@ -97,15 +87,19 @@ const ProductDetail = () => {
                 Back to Shop/Gallery
             </Link>
             <div className="product-image-gallery">
-                <img
-                    src={mainImage}
-                    alt={product?.name}
-                    className="product-main-image"
-                    onClick={handleModalOpen} // Open modal when clicked
-                    role="button" // Adding a role to ensure it's considered interactive
-                    tabIndex="0" // Make it focusable
-                    onKeyDown={(e) => e.key === 'Enter' && handleModalOpen()} // Ensure keyboard accessibility
-                />
+                <button
+                    className="product-main-image-button"
+                    onClick={handleModalOpen}
+                    aria-label="Enlarge product image"
+                    tabIndex="0" // Make image button focusable
+                    onKeyDown={(e) => e.key === 'Enter' && handleModalOpen()} // Open modal with "Enter" key
+                >
+                    <img
+                        src={mainImage}
+                        alt={product?.name}
+                        className="product-main-image"
+                    />
+                </button>
                 <div className="product-thumbnail-gallery">
                     {product?.images.map((image, index) => (
                         <button
@@ -160,7 +154,13 @@ const ProductDetail = () => {
             {/* Modal for enlarged image */}
             {showModal && (
                 <div className="modal show" onClick={handleModalClose} role="dialog" aria-labelledby="modalTitle">
-                    <button className="modal-close" onClick={handleModalClose} aria-label="Close image view">&times;</button>
+                    <button
+                        className="modal-close"
+                        onClick={handleModalClose}
+                        aria-label="Close image view"
+                    >
+                        &times;
+                    </button>
                     <img src={mainImage} alt="Enlarged Product" />
                 </div>
             )}
