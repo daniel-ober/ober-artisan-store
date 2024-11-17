@@ -13,6 +13,7 @@ const ProductDetail = () => {
     const { addToCart, removeFromCart, cart } = useCart();
     const [inCart, setInCart] = useState(null); // Local state for inCart
     const [mainImage, setMainImage] = useState('');
+    const [showModal, setShowModal] = useState(false); // For modal image view
 
     useEffect(() => {
         const fetchProductData = async () => {
@@ -37,7 +38,7 @@ const ProductDetail = () => {
         };
 
         fetchProductData();
-    }, [id, cart]); // Refetch when id or cart state changes
+    }, [id, cart]);
 
     const handleAddToCart = () => {
         if (product) {
@@ -52,43 +53,37 @@ const ProductDetail = () => {
         }
     };
 
+    // Handle quantity change for products
     const handleQuantityChange = (change) => {
         if (!inCart) return;
 
-        // Log current state before updating
-        console.log("Current inCart state before change:", inCart);
-
         // Calculate the new quantity
         const newQuantity = inCart.quantity + change;
-        console.log("Calculated new quantity:", newQuantity);
 
         // If quantity is less than 1, remove from cart
         if (newQuantity < 1) {
-            console.log("Quantity below 1, removing item from cart");
             handleRemoveFromCart();
             return;
         }
 
-        // Step 1: Update `inCart` state directly
+        // Update inCart state directly
         setInCart((prevInCart) => {
             const updatedInCart = { ...prevInCart, quantity: newQuantity };
-            console.log("Updated inCart state:", updatedInCart);  // Log updated inCart state
             return updatedInCart;
         });
 
-        // Log cart state and check if inCart has been updated correctly
-        console.log("Cart state after quantity update (before addToCart):", cart);
-
-        // Step 2: Temporarily skip addToCart to focus only on inCart update
-        // addToCart({ ...product, quantity: newQuantity, id });
-
-        // Optional: Log the updated inCart state after all functions
-        console.log("Final inCart state:", inCart);
+        // Temporarily skip addToCart to focus only on inCart update
+        setTimeout(() => {
+            addToCart({ ...product, quantity: newQuantity, id });
+        }, 100);
     };
 
     const handleThumbnailClick = (image) => {
         setMainImage(image);
     };
+
+    const handleModalOpen = () => setShowModal(true);
+    const handleModalClose = () => setShowModal(false);
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>{error}</p>;
@@ -106,6 +101,10 @@ const ProductDetail = () => {
                     src={mainImage}
                     alt={product?.name}
                     className="product-main-image"
+                    onClick={handleModalOpen} // Open modal when clicked
+                    role="button" // Adding a role to ensure it's considered interactive
+                    tabIndex="0" // Make it focusable
+                    onKeyDown={(e) => e.key === 'Enter' && handleModalOpen()} // Ensure keyboard accessibility
                 />
                 <div className="product-thumbnail-gallery">
                     {product?.images.map((image, index) => (
@@ -113,6 +112,7 @@ const ProductDetail = () => {
                             key={index}
                             className="product-thumbnail"
                             onClick={() => handleThumbnailClick(image)}
+                            aria-label={`Select image ${index + 1}`}
                         >
                             <img src={image} alt={`Thumbnail ${index + 1}`} />
                         </button>
@@ -131,7 +131,7 @@ const ProductDetail = () => {
                                     <button
                                         onClick={() => handleQuantityChange(-1)}
                                         disabled={!inCart}
-                                        className={(!inCart ? 'disabled-button' : '')}
+                                        aria-label="Decrease quantity"
                                     >
                                         -
                                     </button>
@@ -139,7 +139,7 @@ const ProductDetail = () => {
                                     <button
                                         onClick={() => handleQuantityChange(1)}
                                         disabled={!inCart}
-                                        className={(!inCart ? 'disabled-button' : '')}
+                                        aria-label="Increase quantity"
                                     >
                                         +
                                     </button>
@@ -157,7 +157,15 @@ const ProductDetail = () => {
                 </div>
             </div>
 
-            {/* 360 Interactive View Section */}
+            {/* Modal for enlarged image */}
+            {showModal && (
+                <div className="modal show" onClick={handleModalClose} role="dialog" aria-labelledby="modalTitle">
+                    <button className="modal-close" onClick={handleModalClose} aria-label="Close image view">&times;</button>
+                    <img src={mainImage} alt="Enlarged Product" />
+                </div>
+            )}
+
+            {/* 360° Interactive View Section */}
             {product?.interactive360Url && (
                 <div className="interactive-360-container">
                     <h2>360° View</h2>
