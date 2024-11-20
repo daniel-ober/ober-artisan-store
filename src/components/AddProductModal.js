@@ -10,24 +10,18 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
     category: 'dreamfeather',
     description: '',
     images: [],
-    name: 'Test Product Name', // Default value for testing
+    name: '',
     price: 0,
     status: 'unavailable',
   });
   const [imageFiles, setImageFiles] = useState([]);
   const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState('');
-  const [successMessage, setSuccessMessage] = useState(''); // New state for success message
+  const [successMessage, setSuccessMessage] = useState('');
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-
-    if (name === 'price') {
-      const numericValue = parseFloat(value) || 0;
-      setNewProduct({ ...newProduct, [name]: numericValue });
-    } else {
-      setNewProduct({ ...newProduct, [name]: value });
-    }
+    setNewProduct({ ...newProduct, [name]: name === 'price' ? parseFloat(value) || 0 : value });
   };
 
   const handleFileChange = (e) => {
@@ -35,85 +29,59 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
     setImageFiles((prevFiles) => [...prevFiles, ...files]);
   };
 
-  const handleDrop = (e) => {
-    e.preventDefault();
-    const files = Array.from(e.dataTransfer.files);
+  const handleDrop = (event) => {
+    event.preventDefault();
+    const files = Array.from(event.dataTransfer.files);
     setImageFiles((prevFiles) => [...prevFiles, ...files]);
   };
 
-  const handleDragOver = (e) => {
-    e.preventDefault();
+  const handleDragOver = (event) => {
+    event.preventDefault();
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isUploading) return;
 
-    if (isUploading) {
-      console.warn('Submission is already in progress.');
-      return; 
-    }
-
-    setIsUploading(true); 
-    setSuccessMessage(''); // Reset success message on new submission
+    setIsUploading(true);
+    setSuccessMessage('');
+    setError('');
 
     try {
       const uploadedImages = imageFiles.length > 0 
-          ? await Promise.all(imageFiles.map(file => uploadImageToFirebase(file))) 
-          : [];
+        ? await Promise.all(imageFiles.map(uploadImageToFirebase)) 
+        : [];
 
-      const productData = {
-        ...newProduct,
-        images: uploadedImages,
-      };
-
-      console.log('Product data before Stripe creation:', productData);
+      const productData = { ...newProduct, images: uploadedImages };
 
       const stripeProduct = await createStripeProduct(productData);
-      console.log('Stripe product created:', stripeProduct);
+      if (!stripeProduct || !stripeProduct.id) throw new Error('Failed to create Stripe product.');
 
-      if (stripeProduct && stripeProduct.id) {
-        console.log('Adding product to Firestore...');
+      const docRef = await addDoc(collection(db, 'products'), {
+        ...productData,
+        stripeProductId: stripeProduct.id,
+        stripePriceId: stripeProduct.default_price,
+        createdAt: serverTimestamp(),
+      });
 
-        const docRef = await addDoc(collection(db, 'products'), {
-          ...productData,
-          stripeProductId: stripeProduct.id,
-          stripePriceId: stripeProduct.default_price,
-          createdAt: serverTimestamp(),  // Add this line for timestamp
-        });
-
-        console.log('New Firestore document created with ID:', docRef.id);
-        onProductAdded({ id: docRef.id, ...productData });
-        setSuccessMessage('Product added successfully!'); // Set success message
-
-        // Reset form after successful submission
-        setNewProduct({
-          category: 'dreamfeather',
-          description: '',
-          images: [],
-          name: '',
-          price: 0,
-          status: 'unavailable',
-        });
-        setImageFiles([]);
-      } else {
-        console.error('Stripe product creation failed.');
-        setError('Failed to create Stripe product. Please try again.');
-      }
-    } catch (error) {
-      console.error('Error adding product:', error);
-      setError('Failed to add product. Please try again.');
+      setSuccessMessage('Product added successfully!');
+      onProductAdded({ id: docRef.id, ...productData });
+      setNewProduct({ category: 'dreamfeather', description: '', images: [], name: '', price: 0, status: 'unavailable' });
+      setImageFiles([]);
+    } catch (err) {
+      setError(err.message || 'Failed to add product.');
     } finally {
-      setIsUploading(false); 
+      setIsUploading(false);
     }
   };
 
   return (
     <div className="add-product-modal">
       <div className="modal-content">
-        <h2 className="modal-title">Add New Product</h2>
+        <h2>Add New Product</h2>
         {error && <div className="error-message">{error}</div>}
-        {successMessage && <div className="success-message">{successMessage}</div>} {/* New success message */}
-        <form onSubmit={handleSubmit} className="add-product-form">
+        {successMessage && <div className="success-message">{successMessage}</div>}
+        <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="name">Name</label>
             <input
@@ -125,7 +93,7 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
               onChange={handleInputChange}
               placeholder="e.g. Custom Drum"
               required
-              disabled={isUploading} // Disable input while uploading
+              disabled={isUploading}
             />
           </div>
           <div className="form-group">
@@ -139,7 +107,7 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
               onChange={handleInputChange}
               placeholder="e.g. High-quality handcrafted drum"
               required
-              disabled={isUploading} // Disable input while uploading
+              disabled={isUploading}
             />
           </div>
           <div className="form-group">
@@ -155,7 +123,7 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
               required
               step="0.01"
               min="0"
-              disabled={isUploading} // Disable input while uploading
+              disabled={isUploading}
             />
           </div>
           <div className="form-group">
@@ -167,7 +135,7 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
               value={newProduct.category}
               onChange={handleInputChange}
               required
-              disabled={isUploading} // Disable input while uploading
+              disabled={isUploading}
             >
               <option value="presale-dreamfeather">Pre-sale: DREAMFEATHER</option>
               <option value="presale-artisan">Pre-sale: Artisan</option>
@@ -190,9 +158,9 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
               accept="image/*"
               multiple
               onChange={handleFileChange}
-              style={{ display: 'none' }} // Hide default file input
+              style={{ display: 'none' }}
               id="image-upload-input"
-              disabled={isUploading} // Disable input while uploading
+              disabled={isUploading}
             />
             <label htmlFor="image-upload-input" style={{ cursor: 'pointer' }}>
               <span>Select Files</span>
@@ -208,7 +176,7 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
                     const newFiles = imageFiles.filter((_, i) => i !== index);
                     setImageFiles(newFiles);
                   }}
-                  disabled={isUploading} // Disable button while uploading
+                  disabled={isUploading}
                 >
                   &times;
                 </button>
@@ -218,11 +186,11 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
           <button
             type="submit"
             className="modal-button"
-            disabled={isUploading} // Disable submit button while uploading
+            disabled={isUploading}
           >
             {isUploading ? 'Adding...' : 'Add Product'}
           </button>
-          <button type="button" className="close-btn" onClick={onClose} disabled={isUploading}> {/* Disable close button while uploading */}
+          <button type="button" className="close-btn" onClick={onClose} disabled={isUploading}>
             Close
           </button>
         </form>
