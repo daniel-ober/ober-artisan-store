@@ -59,7 +59,7 @@ app.use((req, res, next) => {
     }
 });
 
-// Webhook route
+// Webhook route for Stripe
 app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, res) => {
     const sig = req.headers['stripe-signature'];
     let event;
@@ -68,43 +68,24 @@ app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, 
         event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
         console.log(`Received Stripe event: ${event.type}`);
 
+        // Handle event types
         switch (event.type) {
             case 'checkout.session.completed':
                 const session = event.data.object;
-
                 console.log('Checkout session completed:', session.id);
-
-                // Retrieve line items for the session
-                const lineItems = await stripe.checkout.sessions.listLineItems(session.id, { expand: ['data.price.product'] });
-
-                const orderData = {
-                    stripeSessionId: session.id,
-                    customerName: session.customer_details?.name || 'Guest',
-                    customerEmail: session.customer_details?.email || 'No email provided',
-                    products: lineItems.data.map((item) => ({
-                        name: item.price.product.name,
-                        price: item.price.unit_amount / 100, // Convert cents to dollars
-                        quantity: item.quantity,
-                    })),
-                    totalAmount: session.amount_total / 100, // Convert cents to dollars
-                    status: session.payment_status,
-                    createdAt: new Date(),
-                };
-
-                // Save order to Firestore
-                await db.collection('orders').add(orderData);
-                console.log('Order saved to Firestore:', orderData);
                 break;
             default:
                 console.log(`Unhandled event type: ${event.type}`);
         }
 
-        res.status(200).send({ received: true });
+        res.status(200).json({ received: true });
     } catch (err) {
         console.error(`Webhook Error: ${err.message}`);
         res.status(400).send(`Webhook Error: ${err.message}`);
     }
 });
+
+
 
 // Create a Stripe checkout session
 app.post('/api/create-checkout-session', async (req, res) => {
@@ -115,7 +96,7 @@ app.post('/api/create-checkout-session', async (req, res) => {
             if (!item.price || isNaN(item.price)) {
                 throw new Error(`Invalid price for product: ${item.name}`);
             }
-        
+
             return {
                 price_data: {
                     currency: 'usd',
@@ -123,7 +104,7 @@ app.post('/api/create-checkout-session', async (req, res) => {
                         name: item.name || 'Unnamed Product',
                         description: item.description || 'No description available',
                     },
-                    unit_amount: Math.round(item.price * 100), // Convert dollars to cents
+                    unit_amount: Math.round(item.price * 100),
                 },
                 quantity: item.quantity || 1,
             };
@@ -145,62 +126,47 @@ app.post('/api/create-checkout-session', async (req, res) => {
     }
 });
 
-// Get Stripe order details
-app.get('/api/get-order-details', async (req, res) => {
-    const { session_id } = req.query;
-    if (!session_id) {
-        return res.status(400).json({ error: 'Missing session_id parameter' });
+// Create a Stripe product
+app.post('/api/create-stripe-product', async (req, res) => {
+    const { name, description, price, images, category, status } = req.body;
+
+    if (!name || !price) {
+        return res.status(400).json({ error: 'Product name and price are required.' });
     }
 
     try {
-        const session = await stripe.checkout.sessions.retrieve(session_id, {
-            expand: ['line_items.data.price.product'],
+        const product = await stripe.products.create({
+            name,
+            description: description || '',
+            images: images || [],
+            metadata: {
+                category: category || 'general',
+                status: status || 'available',
+            },
         });
 
-        const orderData = {
-            stripeSessionId: session.id,
-            customerName: session.customer_details?.name || 'Guest',
-            customerEmail: session.customer_details?.email || 'No email provided',
-            products: session.line_items.data.map((item) => ({
-                name: item.price.product.name,
-                price: item.price.unit_amount / 100, // Convert cents to dollars
-                quantity: item.quantity,
-            })),
-            totalAmount: session.amount_total / 100, // Convert cents to dollars
-            status: session.payment_status,
-        };
+        const priceObj = await stripe.prices.create({
+            unit_amount: Math.round(price * 100),
+            currency: 'usd',
+            product: product.id,
+        });
 
-        res.status(200).json(orderData);
-    } catch (error) {
-        console.error('Error fetching order details:', error);
-        res.status(500).json({ error: 'Failed to retrieve order details.' });
+        res.status(201).json({
+            message: 'Stripe product created successfully.',
+            product,
+            price: priceObj,
+        });
+    } catch (err) {
+        console.error('Failed to create Stripe product:', err.message);
+        res.status(500).json({ error: 'Failed to create Stripe product.' });
     }
 });
 
-// Chat API endpoint
-app.post('/api/chat', async (req, res) => {
-    const { model, messages } = req.body;
+// Import routes
+const productsRouter = require('./routes/products');
+app.use('/api/products', productsRouter);
 
-    const systemMessage = {
-        role: 'system',
-        content: `You are an assistant for Dan Ober Artisan Drums. Help the user choose a drum based on their preferences, emphasizing artisan craftsmanship, quality, and the unique characteristics of the drums.`,
-    };
-
-    const allMessages = [systemMessage, ...messages];
-
-    try {
-        const response = await openai.chat.completions.create({
-            model,
-            messages: allMessages,
-        });
-
-        res.json(response);
-    } catch (error) {
-        console.error('Error generating chat response:', error);
-        res.status(500).send('Error generating chat response');
-    }
-});
-
+// Start Server
 const PORT = process.env.PORT || 4949;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

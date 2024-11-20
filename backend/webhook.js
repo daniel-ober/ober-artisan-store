@@ -1,3 +1,4 @@
+// backend/webhook.js
 const express = require('express');
 const router = express.Router();
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
@@ -42,42 +43,52 @@ router.post('/', express.raw({ type: 'application/json' }), async (req, res) => 
             case 'payment_intent.succeeded':
                 console.log(`PaymentIntent succeeded: ${event.data.object.id}`);
                 break;
-
+        
+            case 'charge.succeeded':
+                console.log(`Charge succeeded: ${event.data.object.id}`);
+                break;
+        
+            case 'product.created':
+            case 'price.created':
+                console.log(`Event ignored: ${event.type}`);
+                break;
+        
             case 'checkout.session.completed': {
                 const session = await stripe.checkout.sessions.retrieve(event.data.object.id, {
                     expand: ['line_items.data.price.product'],
                 });
-
+        
                 const customerDetails = session.customer_details || {};
                 const lineItems = session.line_items?.data || [];
                 const products = lineItems.map((item) => ({
                     name: item.description,
-                    price: item.price.unit_amount / 100, // Convert cents to dollars
+                    price: item.price.unit_amount / 100,
                     quantity: item.quantity,
                 }));
-
+        
                 const orderData = {
                     stripeSessionId: session.id,
                     customerName: customerDetails.name || 'Guest',
                     customerEmail: customerDetails.email || 'No email provided',
                     products,
-                    totalAmount: session.amount_total / 100, // Convert cents to dollars
+                    totalAmount: session.amount_total / 100,
                     status: session.payment_status,
                     userId: session.metadata?.userId || null,
                     createdAt: new Date(),
                 };
-
-                // Save order to Firestore
+        
                 const ordersRef = db.collection('orders');
                 await ordersRef.add(orderData);
-
+        
                 console.log('Order saved to Firestore:', orderData);
                 break;
             }
-
+        
             default:
                 console.log(`Unhandled event type: ${event.type}`);
+                break;
         }
+        
 
         res.status(200).json({ received: true });
     } catch (error) {
@@ -85,5 +96,6 @@ router.post('/', express.raw({ type: 'application/json' }), async (req, res) => 
         res.status(500).send(`Webhook processing error: ${error.message}`);
     }
 });
+
 
 module.exports = router;

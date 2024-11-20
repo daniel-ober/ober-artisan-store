@@ -57,22 +57,22 @@ const Home = () => {
         };
     }, []);
 
-    useEffect(() => {
-        const testFirebaseIntegration = async () => {
-            const userId = 'testUserId123';
-            const userDoc = await getUserDoc(userId);
+    // useEffect(() => {
+    //     const testFirebaseIntegration = async () => {
+    //         const userId = 'testUserId123';
+    //         const userDoc = await getUserDoc(userId);
 
-            if (!userDoc) {
-                await createCart(userId);
-                console.log(`Created a cart for user ID: ${userId}`);
-            } else {
-                setUserData(userDoc);
-                console.log('User Data:', userDoc);
-            }
-        };
+    //         if (!userDoc) {
+    //             await createCart(userId);
+    //             console.log(`Created a cart for user ID: ${userId}`);
+    //         } else {
+    //             setUserData(userDoc);
+    //             console.log('User Data:', userDoc);
+    //         }
+    //     };
 
-        testFirebaseIntegration();
-    }, []);
+    //     testFirebaseIntegration();
+    // }, []);
 
     const handleVideoLoaded = () => {
         setIsVideoReady(true);
