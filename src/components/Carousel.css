@@ -1,137 +1,63 @@
+/* About Page Styling */
+.about-page {
+  padding: 40px;
+  background-color: #f4f4f4;
+  text-align: center;
+}
+
+.about-page h2 {
+  font-family: 'Georgia', serif;
+  font-size: 32px;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+/* Adjusting carousel for About section */
 .carousel {
+  margin-top: 20px;
   position: relative;
   width: 100%;
-  overflow: hidden; /* Hide overflow for neatness */
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .carousel-track-container {
-  width: 100%; /* Full width */
-  height: calc(100vh - 454px - 200px); /* Adjust these values based on the height of your navbar and footer */
-  display: flex; /* Flexbox to manage item layout */
-  align-items: center; /* Center vertically */
-}
-
-.carousel-track {
-  display: flex; /* Align items in a row */
-  align-items: center; /* Center vertically */
-  justify-content: center; /* Center horizontally */
-  transition: transform 0.5s ease; /* Smooth transition */
-  height: auto; /* Full height to fill the container */
-}
-
-.carousel-item {
-  flex: 0 0 50%; /* Center active item and allow for space */
-  box-sizing: border-box; /* Include padding in width */
-  position: relative; /* Ensure correct positioning */
-}
-
-.preview-item {
-  flex: 0 0 25%; /* Adjust width for preview items */
-  text-align: center; /* Center text */
-  opacity: 0.5; /* Make previews slightly transparent */
-  transition: opacity 0.3s; /* Smooth opacity transition */
-}
-
-.preview-item img {
-  width: 80%; /* Responsive width for preview images */
-  height: auto; /* Maintain aspect ratio */
-}
-
-.carousel-controls {
-  position: absolute;
-  top: 50%; /* Center buttons vertically */
-  left: 10px; /* Position on the left */
-  right: 10px; /* Position on the right */
+  height: auto; /* Adjust to content height */
   display: flex;
-  justify-content: space-between; /* Space out buttons */
-  transform: translateY(-50%); /* Center the buttons */
-}
-
-.carousel-button {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-}
-
-.carousel-icon {
-  width: 30px; /* Smaller size for icons */
-  height: auto; /* Maintain aspect ratio */
-}
-
-.carousel-item.active {
-  opacity: 1; /* Full visibility for active item */
-  width: 100%; /* Ensure it takes full width */
-  height: 300px; /* Set a fixed height, adjust as needed */
-  display: flex; /* Center content vertically */
-  flex-direction: column; /* Stack children vertically */
-  justify-content: center; /* Center content */
-  align-items: center; /* Center content horizontally */
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
 
 .carousel-item.active img {
-  width: 100%; /* Full width of the container */
-  height: 325px; /* Full height of the container */
-  object-fit: contain; /* Maintain aspect ratio and cover the entire area */
+  border-radius: 8px;
 }
 
-.preview-item:hover {
-  opacity: 1; /* Full visibility on hover */
+.carousel-item h1,
+.carousel-item p {
+  margin-top: 10px;
+  color: #333;
+  text-align: center;
 }
 
-/* Remove default outline and provide an alternative focus style */
-.preview-item:focus,
-.carousel-item:focus {
-  outline: none; /* Remove focus outline */
+.carousel-item p {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #555;
 }
 
-.preview-item:focus-visible,
-.carousel-item:focus-visible {
-  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.5); /* Alternative focus style */
-}
-
-/* Media Queries */
-@media (max-width: 1024px) {
-  .carousel-track-container {
-    height: calc(100vh - 300px); /* Adjust for smaller screens */
-  }
-
-  .carousel-item {
-    flex: 0 0 70%; /* Wider active item on smaller screens */
-  }
-
-  .preview-item {
-    flex: 0 0 20%; /* Adjust preview width for smaller screens */
-  }
-}
-
+/* Responsive Styles */
 @media (max-width: 768px) {
-  .carousel-track-container {
-    height: calc(100vh - 250px); /* Further adjust height */
+  .about-page {
+    padding: 20px;
   }
 
-  .carousel-item {
-    flex: 0 0 80%; /* Wider active item on smaller screens */
+  .carousel {
+    max-width: 100%;
   }
 
-  .preview-item {
-    flex: 0 0 15%; /* Adjust preview width for smaller screens */
-  }
-}
-
-@media (max-width: 480px) {
-  .carousel-track-container {
-    height: calc(100vh - 200px); /* Adjust for mobile */
-  }
-
-  .carousel-item {
-    flex: 0 0 90%; /* Wider active item on mobile */
-  }
-
-  .preview-item {
-    flex: 0 0 10%; /* Adjust preview width for mobile */
-  }
-
-  .carousel-icon {
-    width: 25px; /* Smaller icons for mobile */
+  .carousel-item.active img {
+    height: auto; /* Adjust image height for smaller screens */
   }
 }

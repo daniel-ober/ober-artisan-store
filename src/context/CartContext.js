@@ -1,7 +1,7 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { doc, updateDoc, setDoc, getDoc } from 'firebase/firestore';
-import { db } from '../firebaseConfig'; // Ensure correct path to Firestore instance
-import { useAuth } from './AuthContext'; // Assuming you have an AuthContext for user authentication
+import { db } from '../firebaseConfig';
+import { useAuth } from './AuthContext';
 
 const CartContext = createContext();
 
@@ -11,6 +11,7 @@ export const CartProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    // Load cart from Firestore or localStorage
     useEffect(() => {
         const loadCart = async () => {
             setLoading(true);
@@ -18,7 +19,11 @@ export const CartProvider = ({ children }) => {
                 if (user) {
                     const cartRef = doc(db, 'carts', user.uid);
                     const cartDoc = await getDoc(cartRef);
-                    setCart(cartDoc.exists() ? cartDoc.data().cart : {});
+                    if (cartDoc.exists()) {
+                        setCart(cartDoc.data().cart || {});
+                    } else {
+                        setCart({});
+                    }
                 } else {
                     const savedCart = JSON.parse(localStorage.getItem('cart')) || {};
                     setCart(savedCart);
@@ -30,22 +35,23 @@ export const CartProvider = ({ children }) => {
                 setLoading(false);
             }
         };
+
         loadCart();
     }, [user]);
 
+    // Sync cart to localStorage for guests
     useEffect(() => {
         if (!user) {
             localStorage.setItem('cart', JSON.stringify(cart));
-        } else {
-            localStorage.removeItem('cart');
         }
     }, [cart, user]);
 
     const addToCart = async (product) => {
-        const isOneOfAKind = product.category === 'artisan';
+        const isArtisan = product.category === 'artisan';
         const existingItem = cart[product.id];
 
-        if (isOneOfAKind && existingItem) {
+        // Prevent adding multiple artisan items
+        if (isArtisan && existingItem) {
             setError(`Cannot add more than one ${product.name} to the cart.`);
             return;
         }
@@ -54,15 +60,16 @@ export const CartProvider = ({ children }) => {
             ...cart,
             [product.id]: {
                 ...product,
-                quantity: isOneOfAKind ? 1 : (existingItem?.quantity || 0) + 1,
+                quantity: isArtisan ? 1 : (existingItem?.quantity || 0) + 1,
             },
         };
+
         setCart(updatedCart);
 
         if (user) {
             try {
                 const cartRef = doc(db, 'carts', user.uid);
-                await updateDoc(cartRef, { cart: updatedCart });
+                await setDoc(cartRef, { cart: updatedCart });
             } catch (err) {
                 console.error('Error updating cart:', err);
                 setError('Error updating cart. Please try again later.');
@@ -81,6 +88,7 @@ export const CartProvider = ({ children }) => {
             ...cart,
             [productId]: { ...cart[productId], quantity: newQuantity },
         };
+
         setCart(updatedCart);
 
         if (user) {
@@ -116,7 +124,7 @@ export const CartProvider = ({ children }) => {
         if (user) {
             try {
                 const cartRef = doc(db, 'carts', user.uid);
-                await updateDoc(cartRef, { cart: {} });
+                await setDoc(cartRef, { cart: {} });
             } catch (err) {
                 console.error('Error clearing cart:', err);
                 setError('Error clearing cart. Please try again later.');

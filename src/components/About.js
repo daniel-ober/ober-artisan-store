@@ -1,5 +1,4 @@
 import React from 'react';
-import Carousel from './Carousel';
 import './About.css';
 
 const About = () => {
@@ -7,91 +6,56 @@ const About = () => {
     {
       image: 'https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/About%2Fthe-craftsman-2.png?alt=media&token=18575b92-6e04-404a-9e31-d93c0ec8d6bf',
       title: 'Dan Ober Artisan Drums',
-      description: 
+      description:
         'Dan Ober Artisan Drums stand apart for their individuality, quality, and attention to detail. Each drum is a functional work of art, crafted with passion for those who value originality and creativity. Designed for those who know what they want, these drums are for the risk-takers, the serious musicians, and collectors who seek inspiration through their instruments. They are more than drums—they are the heart of rhythm, built to inspire unmatched self-expression.',
     },
     {
       image: 'https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/About%2Fthe-craftsman-2.png?alt=media&token=18575b92-6e04-404a-9e31-d93c0ec8d6bf',
       title: 'Drummer + Craftsman',
-      description: 
-        'Dan Ober Artisan Drums stand apart for their individuality, quality, and attention to detail. Each drum is a functional work of art, crafted with passion for those who value originality and creativity. Designed for those who know what they want, these drums are for the risk-takers, the serious musicians, and collectors who seek inspiration through their instruments. They are more than drums—they are the heart of rhythm, built to inspire unmatched self-expression.',
+      description:
+        'Crafting drums is not just a skill but an art. As a drummer and craftsman, Dan Ober combines his passion for music with expert woodworking techniques to create one-of-a-kind instruments that embody creativity and individuality.',
     },
     {
       image:
         'https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/About%2Ftoastforbreakfast.png?alt=media&token=959e8e5e-b119-4aa2-8a08-3c75adeb71f4',
       title: 'Concept + Design',
       description:
-      'Dan Ober Artisan Drums stand apart for their individuality, quality, and attention to detail. Each drum is a functional work of art, crafted with passion for those who value originality and creativity. Designed for those who know what they want, these drums are for the risk-takers, the serious musicians, and collectors who seek inspiration through their instruments. They are more than drums—they are the heart of rhythm, built to inspire unmatched self-expression.',
+        'From initial concept sketches to the final drum, each piece tells a story. Dan’s design philosophy focuses on blending innovative artistry with top-notch functionality to inspire musicians worldwide.',
     },
     {
       image: 'https://i.imgur.com/7sXi5LE.jpeg',
       title: 'Planning + Execution',
       description:
-        'Dan Ober Artisan Drums stand apart for their individuality, quality, and attention to detail. Each drum is a functional work of art, crafted with passion for those who value originality and creativity. Designed for those who know what they want, these drums are for the risk-takers, the serious musicians, and collectors who seek inspiration through their instruments. They are more than drums—they are the heart of rhythm, built to inspire unmatched self-expression.',
+        'Attention to detail is key in planning and executing each design. Every cut, joint, and finish is meticulously crafted to ensure the highest quality for every drum.',
     },
-    { image: 'https://i.imgur.com/7sXi5LE.jpeg',
+    {
+      image: 'https://i.imgur.com/7sXi5LE.jpeg',
       title: 'Inspection + Detailing',
       description:
-        'Dan Ober Artisan Drums stand apart for their individuality, quality, and attention to detail. Each drum is a functional work of art, crafted with passion for those who value originality and creativity. Designed for those who know what they want, these drums are for the risk-takers, the serious musicians, and collectors who seek inspiration through their instruments. They are more than drums—they are the heart of rhythm, built to inspire unmatched self-expression.',
+        'Each drum undergoes rigorous inspection and detailing, ensuring it meets the highest standards of craftsmanship and sound quality.',
     },
-    { image: 'https://i.imgur.com/7sXi5LE.jpeg',
+    {
+      image: 'https://i.imgur.com/7sXi5LE.jpeg',
       title: 'Ready to Inspire',
       description:
-        'Dan Ober Artisan Drums stand apart for their individuality, quality, and attention to detail. Each drum is a functional work of art, crafted with passion for those who value originality and creativity. Designed for those who know what they want, these drums are for the risk-takers, the serious musicians, and collectors who seek inspiration through their instruments. They are more than drums—they are the heart of rhythm, built to inspire unmatched self-expression.',
-    }
+        'The result is not just a drum—it’s a masterpiece. Built to inspire, each drum resonates with the heart of rhythm, allowing musicians to express themselves like never before.',
+    },
   ];
 
   return (
     <div className="about-page">
-      <Carousel items={carouselItems} />
+      <h2>About Dan Ober Artisan Drums</h2>
+      <div className="carousel-container">
+        {carouselItems.map((item, index) => (
+          <div className="carousel-item" key={index}>
+            <img src={item.image} alt={item.title} />
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
 
 export default About;
-
-
-// // v2.0
-
-// import React from 'react';
-// import './About.css';
-
-// const About = () => {
-//   const carouselItems = [
-//     {
-//       image: 'https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/About%2Fthe-craftsman-2.png?alt=media&token=18575b92-6e04-404a-9e31-d93c0ec8d6bf',
-//       title: 'The Craftsman',
-//       description: `Dan’s journey into the world of drumming began with a profound passion for music, but it wasn't limited to just drumming. While drumming is Dan’s primary focus, his versatility extends to guitar, singing, keyboard, and more. His formal education in Film Scoring and Composition at Berklee College of Music allowed him to study under some of the industry’s finest, including Mike Mangini (Dream Theater, Steve Vai) and Kim Plainfield (Bill Connors, Pointer Sisters). With a decade of experience performing in a bar and wedding band, Dan honed his skills and developed a deep understanding of music before moving to Nashville to fully immerse himself in his true love—drumming. This rich background fuels Dan’s craftsmanship, blending technical expertise with a profound artistic vision to create drums that are not only functional but also resonant with both quality and emotion.`,
-//     },
-//     {
-//       image:
-//         'https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/toasting.png?alt=media&token=3cb8986a-f97c-48d2-bae1-021ad00a65c0',
-//       title: 'The Process',
-//       description:
-//         'Dan’s approach to drum building is a meticulous blend of traditional techniques and modern innovation. From his first 14" 10-stave snare drum made of oak to advanced custom designed 3D-printed tools, Dan’s process involves careful design, craftsmanship, and personal attention. Each drum is constructed with precision and passion, reflecting Dan’s dedication to producing instruments that resonate with both quality and artistry.',
-//     },
-//     {
-//       image: 'https://i.imgur.com/7sXi5LE.jpeg',
-//       title: 'The Result',
-//       description:
-//         'Dan Ober Artisan Drums stand apart for their individuality, quality, and attention to detail. Each drum is a functional work of art, crafted with passion for those who value originality and creativity. Designed for those who know what they want, these drums are for the risk-takers, the serious musicians, and collectors who seek inspiration through their instruments. They are more than drums—they are the heart of rhythm, built to inspire unmatched self-expression.',
-//     },
-//   ];
-
-//   return (
-//     <div className="about-page">
-//       <h2>About Dan Ober Artisan</h2>
-//       <div className="carousel-container">
-//         {carouselItems.map((item, index) => (
-//           <div className="carousel-item" key={index}>
-//             <img src={item.image} alt={item.title} />
-//             <h3>{item.title}</h3>
-//             <p>{item.description}</p>
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default About;

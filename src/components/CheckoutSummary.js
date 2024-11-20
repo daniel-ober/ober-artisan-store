@@ -1,124 +1,123 @@
-// src/components/CheckoutSummary.js
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { createOrder } from '../services/orderService';
-import { db } from '../firebaseConfig'; 
-import { collection, query, where, getDocs } from 'firebase/firestore';
+import { db } from '../firebaseConfig';
+import { collection, query, where, getDocs, addDoc } from 'firebase/firestore';
 import './CheckoutSummary.css';
 
 const CheckoutSummary = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const queryParams = new URLSearchParams(location.search);
-  const sessionId = queryParams.get('session_id');
-  const userId = queryParams.get('userId');
+    const location = useLocation();
+    const navigate = useNavigate();
+    const queryParams = new URLSearchParams(location.search);
+    const sessionId = queryParams.get('session_id');
+    const userId = queryParams.get('userId');
+    const status = queryParams.get('status');
 
-  const [orderDetails, setOrderDetails] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [orderCreated, setOrderCreated] = useState(false); 
+    const [orderDetails, setOrderDetails] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchOrderDetails = async () => {
-      if (orderCreated || !sessionId || !userId) return;
+    useEffect(() => {
+        const fetchOrderDetails = async () => {
+            setLoading(true);
+            try {
+                if (!sessionId) {
+                    setError('Invalid session ID.');
+                    return;
+                }
 
-      try {
-        const existingOrder = await checkIfOrderExists(sessionId);
-        if (!existingOrder) {
-          const orderData = await fetchOrderFromWebhook(sessionId); // Assuming webhook data is stored in Firestore or another DB
-          const orderId = await createOrder(orderData); 
-          setOrderDetails({ ...orderData, orderId });
-          setOrderCreated(true); 
-        } else {
-          const orderData = await fetchOrderFromFirestore(sessionId); // Fetch existing order
-          setOrderDetails(orderData);
+                const existingOrder = await checkIfOrderExists(sessionId);
+                if (!existingOrder) {
+                    // Fetch order from the backend
+                    const orderData = await fetchOrderFromBackend(sessionId);
+                    if (orderData) {
+                        await saveOrderToFirestore(orderData);
+                        setOrderDetails(orderData);
+                    }
+                } else {
+                    // Retrieve existing order from Firestore
+                    const orderData = await fetchOrderFromFirestore(sessionId);
+                    setOrderDetails(orderData);
+                }
+            } catch (err) {
+                console.error('Error fetching order details:', err);
+                setError('Failed to fetch order details. Please try again later.');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchOrderDetails();
+    }, [sessionId]);
+
+    const checkIfOrderExists = async (stripeSessionId) => {
+        const ordersRef = collection(db, 'orders');
+        const q = query(ordersRef, where('stripeSessionId', '==', stripeSessionId));
+        const querySnapshot = await getDocs(q);
+        return !querySnapshot.empty;
+    };
+
+    const fetchOrderFromBackend = async (stripeSessionId) => {
+        try {
+            const response = await fetch(`/api/get-order-details?session_id=${stripeSessionId}`);
+            if (!response.ok) {
+                throw new Error('Failed to fetch order from backend.');
+            }
+            return await response.json();
+        } catch (error) {
+            console.error('Error fetching order from backend:', error);
+            setError('Failed to retrieve order details from the backend.');
+            return null;
         }
-      } catch (error) {
-        console.error('Failed to fetch order:', error);
-      } finally {
-        setLoading(false);
-      }
     };
 
-    fetchOrderDetails();
-  }, [sessionId, userId, orderCreated]);
-
-  const checkIfOrderExists = async (stripeSessionId) => {
-    const ordersRef = collection(db, 'orders');
-    const q = query(ordersRef, where('stripeSessionId', '==', stripeSessionId));
-    const querySnapshot = await getDocs(q);
-    return !querySnapshot.empty;
-  };
-
-  const fetchOrderFromWebhook = async (sessionId) => {
-    // Logic to fetch the webhook data from Firestore or your server
-    // You will fetch the order from the webhook session
-    // e.g. Fetch customer name, address, email, phone, items, shipping, and total cost
-    return {
-      timestamp: new Date().toISOString(),
-      customerName: 'John Doe',
-      customerEmail: 'johndoe@example.com',
-      customerPhone: '+123456789',
-      customerAddress: '123 Main St, City, State, ZIP',
-      products: [
-        {
-          name: 'Handcrafted Drum',
-          description: 'Custom drum with amazing sound',
-          price: 1399.99,
-          quantity: 1,
-        },
-        {
-          name: 'Drumsticks',
-          description: 'Pair of premium drumsticks',
-          price: 49.99,
-          quantity: 2,
-        },
-      ],
-      shipping: 50.0,
-      taxes: 100.0,
-      totalAmount: 1649.97,
-      stripeSessionId: sessionId,
-      status: 'Payment Succeeded', // or 'Payment Failed' based on webhook data
+    const saveOrderToFirestore = async (orderData) => {
+        try {
+            const ordersRef = collection(db, 'orders');
+            await addDoc(ordersRef, {
+                ...orderData,
+                createdAt: new Date(),
+                userId: userId || null,
+            });
+        } catch (error) {
+            console.error('Error saving order to Firestore:', error);
+            setError('Failed to save order to Firestore.');
+        }
     };
-  };
 
-  const fetchOrderFromFirestore = async (sessionId) => {
-    // Logic to fetch order from Firestore if it already exists
-  };
+    const fetchOrderFromFirestore = async (stripeSessionId) => {
+        const ordersRef = collection(db, 'orders');
+        const q = query(ordersRef, where('stripeSessionId', '==', stripeSessionId));
+        const querySnapshot = await getDocs(q);
+        if (!querySnapshot.empty) {
+            return { ...querySnapshot.docs[0].data(), id: querySnapshot.docs[0].id };
+        }
+        return null;
+    };
 
-  if (loading) return <p>Loading...</p>;
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p className="error">{error}</p>;
 
-  return (
-    <div className="checkout-summary">
-      <h1>Order Summary</h1>
-      {orderDetails && (
-        <div className="order-details">
-          <h2>Order Details</h2>
-          <p><strong>Customer Name:</strong> {orderDetails.customerName}</p>
-          <p><strong>Email:</strong> {orderDetails.customerEmail}</p>
-          <p><strong>Phone:</strong> {orderDetails.customerPhone}</p>
-          <p><strong>Delivery Address:</strong> {orderDetails.customerAddress}</p>
-          <h3>Products:</h3>
-          {orderDetails.products.map((product, index) => (
-            <div key={index} className="product-details">
-              <p><strong>Product Name:</strong> {product.name}</p>
-              <p><strong>Description:</strong> {product.description}</p>
-              <p><strong>Price:</strong> ${product.price.toFixed(2)}</p>
-              <p><strong>Quantity:</strong> {product.quantity}</p>
-              <p><strong>Subtotal:</strong> ${(product.price * product.quantity).toFixed(2)}</p>
-            </div>
-          ))}
-          <p><strong>Shipping:</strong> ${orderDetails.shipping.toFixed(2)}</p>
-          <p><strong>Taxes:</strong> ${orderDetails.taxes.toFixed(2)}</p>
-          <p><strong>Grand Total:</strong> ${orderDetails.totalAmount.toFixed(2)}</p>
-          <p><strong>Payment Status:</strong> {orderDetails.status}</p>
+    return (
+        <div className="checkout-summary">
+            <h1>Order Summary</h1>
+            {orderDetails ? (
+                <div className="order-details">
+                    <h2>Customer Name: {orderDetails.customerName}</h2>
+                    <p>Email: {orderDetails.customerEmail}</p>
+                    <p>Products:</p>
+                    {orderDetails.products.map((product, index) => (
+                        <p key={index}>
+                            {product.name} - ${product.price.toFixed(2)} x {product.quantity}
+                        </p>
+                    ))}
+                    <p>Total Amount: ${orderDetails.totalAmount.toFixed(2)}</p>
+                    <p>Payment Status: {orderDetails.status}</p>
+                </div>
+            ) : (
+                <p>No order details available.</p>
+            )}
         </div>
-      )}
-      <div className="signup-banner">
-        <p>Sign up for our newsletter to receive exclusive promotions, updates, and new product launches.</p>
-        <button onClick={() => navigate('/signup')}>Sign Up Now</button>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default CheckoutSummary;
