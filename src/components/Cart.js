@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
-import { Link } from 'react-router-dom'; // Import Link for navigation
+import { Link } from 'react-router-dom';
 import { loadStripe } from '@stripe/stripe-js';
 import './Cart.css';
 
@@ -40,29 +40,40 @@ const Cart = () => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    products: Object.values(cart).map(product => ({
-                        name: product.name || 'Unnamed Product',
-                        price: product.priceId || '0',
-                        quantity: product.quantity || 0,
-                    })),
-                    userId: user?.uid,
+                    products: Object.values(cart).map((product) => {
+                        if (!product.price || isNaN(product.price)) {
+                            throw new Error(`Product ${product.name} has an invalid price.`);
+                        }
+    
+                        return {
+                            name: product.name || 'Unnamed Product',
+                            description: product.description || 'No description available',
+                            price: product.price, // Keep price as dollars, backend handles cents conversion
+                            quantity: product.quantity || 1,
+                        };
+                    }),
+                    userId: user?.uid || 'guest',
                 }),
             });
-
+    
             if (!response.ok) {
-                throw new Error('Network response was not ok');
+                throw new Error('Failed to create checkout session.');
             }
-
+    
             const session = await response.json();
+            if (!session.url) {
+                throw new Error('Session URL is missing in the response.');
+            }
+    
             window.location.href = session.url;
-
-            clearCart();
         } catch (error) {
-            console.error('Failed to redirect to checkout:', error);
+            console.error('Failed to redirect to checkout:', error.message);
+            alert(`Checkout error: ${error.message}`);
         } finally {
             setLoading(false);
         }
     };
+    
 
     if (loading) {
         return <p>Loading...</p>;
@@ -78,7 +89,7 @@ const Cart = () => {
                     {Object.values(cart).map((item) => (
                         <div key={item.id} className="cart-item">
                             {item.images && item.images[0] && (
-                                <Link to={`/products/${item.id}`}> {/* Link to product detail page */}
+                                <Link to={`/products/${item.id}`}>
                                     <img src={item.images[0]} alt={item.name} className="cart-item-image" />
                                 </Link>
                             )}
@@ -88,7 +99,7 @@ const Cart = () => {
                                 <p>${typeof item.price === 'number' ? item.price.toFixed(2) : 'N/A'}</p>
 
                                 <div className="quantity-control">
-                                    <button 
+                                    <button
                                         onClick={() => handleQuantityChange(item.id, -1)}
                                         disabled={item.category === 'artisan'}
                                         className={item.category === 'artisan' ? 'disabled-button' : ''}
@@ -96,8 +107,8 @@ const Cart = () => {
                                         -
                                     </button>
                                     <span>{item.quantity || 0}</span>
-                                    <button 
-                                        onClick={() => handleQuantityChange(item.id, 1)} 
+                                    <button
+                                        onClick={() => handleQuantityChange(item.id, 1)}
                                         disabled={item.category === 'artisan'}
                                         className={item.category === 'artisan' ? 'disabled-button' : ''}
                                     >

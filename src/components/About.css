@@ -1,81 +1,78 @@
 /* General page styling */
 .about-page {
   padding: 40px;
-  background-color: #f4f4f4; /* Change to your preferred background color */
+  background-color: #f4f4f4;
   text-align: center;
 }
 
 .about-page h2 {
   font-family: 'Georgia', serif;
   font-size: 32px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  color: #333;
 }
 
-/* Carousel container to align items evenly */
+/* Carousel container for alignment */
 .carousel-container {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 20px;
-  margin-top: 20px;
 }
 
-/* Carousel item container with fixed width for even layout */
+/* Individual carousel item styling */
 .carousel-item {
+  background-color: #fff;
   border-radius: 8px;
   padding: 20px;
-  width: 350px; /* Ensures consistent width for all items */
+  width: 300px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
 }
 
-/* Image styling with fixed height for consistency */
+.carousel-item:hover {
+  transform: translateY(-5px);
+}
+
+/* Image styling */
 .carousel-item img {
-  width: 100%; /* Ensure the image fits the container */
-  height: 200px; /* Fixed height for all images */
-  object-fit: cover; /* Ensure image covers the whole area */
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
   border-radius: 8px;
   margin-bottom: 15px;
 }
 
-/* Text container styling */
+/* Title styling */
 .carousel-item h3 {
   font-size: 1.5rem;
   color: #333;
   margin-bottom: 10px;
-  text-align: center;
 }
 
-/* Ensuring text fills the container evenly */
+/* Description styling */
 .carousel-item p {
   font-size: 1rem;
   color: #555;
-  text-align: justify; /* Ensure text stretches evenly */
   line-height: 1.6;
-  flex-grow: 1; /* Fills up the remaining space in the container */
 }
 
-/* Responsive adjustments */
+/* Responsive styles */
 @media (max-width: 768px) {
   .carousel-container {
-    flex-direction: column; /* Stack items on top of each other on mobile */
+    flex-direction: column;
+    align-items: center;
   }
 
   .carousel-item {
-    width: 100%; /* Take full width on smaller screens */
+    width: 100%;
   }
 
   .carousel-item img {
-    height: 180px; /* Adjust height slightly for mobile */
-  }
-
-  .carousel-item h3 {
-    font-size: 1.25rem;
-  }
-
-  .carousel-item p {
-    font-size: 0.95rem;
+    height: 180px;
   }
 }

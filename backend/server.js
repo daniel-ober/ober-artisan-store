@@ -3,10 +3,9 @@ const express = require('express');
 const cors = require('cors');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const admin = require('firebase-admin');
-const nodemailer = require('nodemailer');
-const OpenAI = require('openai');
+const openai = require('openai');
 
-// Initialize Firebase Admin
+// Firebase Admin Initialization
 if (!admin.apps.length) {
     admin.initializeApp({
         credential: admin.credential.cert({
@@ -23,23 +22,16 @@ if (!admin.apps.length) {
         }),
         databaseURL: `https://${process.env.FIREBASE_PROJECT_ID}.firebaseio.com`,
     });
-} else {
-    console.log("Firebase app already initialized.");
 }
 
 const db = admin.firestore();
 const app = express();
 
-// Initialize OpenAI client
-const openai = new OpenAI({
-    apiKey: process.env.REACT_APP_OPENAI_API_KEY,
-});
-
-// CORS configuration
+// CORS Configuration
 const allowedOrigins = [
-    'http://localhost:3000', // Frontend in development
-    'http://localhost:4949', // Your backend server
-    'http://10.0.0.210:3000', // Your local network IP (if accessing from another device)
+    'http://localhost:3000',
+    'http://localhost:4949',
+    'http://10.0.0.210:3000',
 ];
 const corsOptions = {
     origin: function (origin, callback) {
@@ -52,174 +44,163 @@ const corsOptions = {
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
-    optionsSuccessStatus: 204, // For legacy browsers
+    optionsSuccessStatus: 204,
 };
 
-// Apply CORS middleware before defining routes
+// Apply CORS globally
 app.use(cors(corsOptions));
 
-// Middleware to parse JSON requests
-app.use(express.json({ limit: '1mb' }));
-
-// Logging middleware to check origin and headers
+// Apply JSON parsing globally except for webhook
 app.use((req, res, next) => {
-    console.log('Incoming request origin:', req.headers.origin);
-    next();
+    if (req.originalUrl === '/api/webhook') {
+        next(); // Skip JSON middleware for webhook
+    } else {
+        express.json({ limit: '1mb' })(req, res, next); // Parse JSON for other routes
+    }
 });
 
-// Chat API endpoint
-app.post('/api/chat', async (req, res) => {
-    const { messages } = req.body;
-
-    // Validate the message content
-    if (!messages || !Array.isArray(messages) || messages.length === 0) {
-        return res.status(400).send('Invalid or empty messages array.');
-    }
-
-    // Check for the presence of the required fields in each message
-    for (let msg of messages) {
-        if (!msg.role || !msg.content || typeof msg.content !== 'string') {
-            return res.status(400).send('Each message must have a valid role and content.');
-        }
-    }
+// Webhook route
+app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, res) => {
+    const sig = req.headers['stripe-signature'];
+    let event;
 
     try {
-        // Call OpenAI to generate a response based on the chat history
-        const response = await openai.chat.completions.create({
-            model: 'gpt-3.5-turbo',
-            messages: messages,
-        });
+        event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
+        console.log(`Received Stripe event: ${event.type}`);
 
-        const reply = response.choices[0].message.content;
+        switch (event.type) {
+            case 'checkout.session.completed':
+                const session = event.data.object;
 
-        // Send back the assistant's response
-        res.status(200).send({ content: reply });
+                console.log('Checkout session completed:', session.id);
 
-    } catch (error) {
-        console.error('Error with OpenAI API:', error);
-        res.status(500).send('Error processing request');
-    }
-});
+                // Retrieve line items for the session
+                const lineItems = await stripe.checkout.sessions.listLineItems(session.id, { expand: ['data.price.product'] });
 
-// Create Product Route (Stripe integration and Firestore)
-app.post('/api/create-stripe-product', async (req, res) => {
-    const { name, description, images = [], price, category } = req.body;
+                const orderData = {
+                    stripeSessionId: session.id,
+                    customerName: session.customer_details?.name || 'Guest',
+                    customerEmail: session.customer_details?.email || 'No email provided',
+                    products: lineItems.data.map((item) => ({
+                        name: item.price.product.name,
+                        price: item.price.unit_amount / 100, // Convert cents to dollars
+                        quantity: item.quantity,
+                    })),
+                    totalAmount: session.amount_total / 100, // Convert cents to dollars
+                    status: session.payment_status,
+                    createdAt: new Date(),
+                };
 
-    // Log incoming request data
-    console.log('Request body:', req.body);
-
-    try {
-        // Validate input
-        if (!name) return res.status(400).json({ error: 'Product name is required.' });
-        if (price === undefined || price <= 0) return res.status(400).json({ error: 'Valid price is required.' });
-
-        // Create the product in Stripe
-        const product = await stripe.products.create({
-            name,
-            description,
-            images,
-        });
-
-        // Log created Stripe product
-        console.log('Created Stripe product:', product);
-
-        // Create a price for the product
-        const priceId = await stripe.prices.create({
-            currency: 'usd',
-            unit_amount: Math.round(price * 100), // Stripe requires price in cents
-            product: product.id,
-        });
-
-        // Prepare product data for Firestore
-        const productData = {
-            name,
-            description,
-            images,
-            priceId: priceId.id,
-            stripeProductId: product.id, // Keep this to reference the Stripe product
-            category: category || "default-category", // Assign a default category if not provided
-            status: "unavailable", // Default status
-            price, // Include the price field
-        };
-
-        // Log the product data before saving to Firestore
-        console.log('Product data before Firestore save:', productData);
-
-        // Add the product to Firestore using auto-generated document ID
-        const newProductRef = await db.collection('products').add(productData);
-        console.log('New Firestore document created with ID:', newProductRef.id);
-
-        // Return the auto-generated document ID along with the Stripe price ID
-        res.status(201).json({ productId: newProductRef.id, priceId: priceId.id });
-    } catch (error) {
-        console.error('Error creating Stripe product:', error);
-        if (error.code === 'invalid_request_error') {
-            return res.status(400).json({ error: 'Invalid request to Stripe.' });
+                // Save order to Firestore
+                await db.collection('orders').add(orderData);
+                console.log('Order saved to Firestore:', orderData);
+                break;
+            default:
+                console.log(`Unhandled event type: ${event.type}`);
         }
-        res.status(500).json({ error: 'Internal Server Error' });
+
+        res.status(200).send({ received: true });
+    } catch (err) {
+        console.error(`Webhook Error: ${err.message}`);
+        res.status(400).send(`Webhook Error: ${err.message}`);
     }
 });
 
-// Create Checkout Session Route
+// Create a Stripe checkout session
 app.post('/api/create-checkout-session', async (req, res) => {
     const { products, userId } = req.body;
 
     try {
-        const lineItems = products.map(item => ({
-            price: item.price,
-            quantity: item.quantity,
-        }));
+        const lineItems = products.map((item) => {
+            if (!item.price || isNaN(item.price)) {
+                throw new Error(`Invalid price for product: ${item.name}`);
+            }
+        
+            return {
+                price_data: {
+                    currency: 'usd',
+                    product_data: {
+                        name: item.name || 'Unnamed Product',
+                        description: item.description || 'No description available',
+                    },
+                    unit_amount: Math.round(item.price * 100), // Convert dollars to cents
+                },
+                quantity: item.quantity || 1,
+            };
+        });
 
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
             line_items: lineItems,
             mode: 'payment',
-            success_url: `${process.env.CLIENT_URL}/success?session_id={CHECKOUT_SESSION_ID}&userId=${userId}`,
+            success_url: `${process.env.CLIENT_URL}/checkout-summary?session_id={CHECKOUT_SESSION_ID}&userId=${userId}`,
             cancel_url: `${process.env.CLIENT_URL}/cart`,
             metadata: { userId },
         });
 
-        res.json({ url: session.url });
-    } catch (error) {
-        console.error('Error creating checkout session:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(200).json({ url: session.url, id: session.id });
+    } catch (err) {
+        console.error('Error creating checkout session:', err.message);
+        res.status(500).json({ error: err.message });
     }
 });
 
-// Sending chat email route
-app.post('/api/send-chat-email', async (req, res) => {
-    const { name, email, request, phone, chatMessages } = req.body;
-
-    if (!email) return res.status(400).send('User email is required');
-    if (!Array.isArray(chatMessages) || chatMessages.length === 0) return res.status(400).send('Chat messages are required');
+// Get Stripe order details
+app.get('/api/get-order-details', async (req, res) => {
+    const { session_id } = req.query;
+    if (!session_id) {
+        return res.status(400).json({ error: 'Missing session_id parameter' });
+    }
 
     try {
-        const transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: process.env.EMAIL_USER,
-                pass: process.env.EMAIL_PASS,
-            },
+        const session = await stripe.checkout.sessions.retrieve(session_id, {
+            expand: ['line_items.data.price.product'],
         });
 
-        const chatContent = chatMessages.map(msg => `${msg.sender === 'user' ? 'You' : 'Bot'}: ${msg.text}`).join('\n');
-
-        const mailOptions = {
-            from: process.env.EMAIL_USER,
-            to: 'danober.dev@gmail.com',
-            subject: 'Chat Inquiry from Oakli (Custom Drum Assistant)',
-            text: `Customer Name: ${name}\nCustomer Email: ${email}\nCustomer Phone: ${phone}\n\nCustomer Request: ${request}\n\nChat History:\n${chatContent}`,
+        const orderData = {
+            stripeSessionId: session.id,
+            customerName: session.customer_details?.name || 'Guest',
+            customerEmail: session.customer_details?.email || 'No email provided',
+            products: session.line_items.data.map((item) => ({
+                name: item.price.product.name,
+                price: item.price.unit_amount / 100, // Convert cents to dollars
+                quantity: item.quantity,
+            })),
+            totalAmount: session.amount_total / 100, // Convert cents to dollars
+            status: session.payment_status,
         };
 
-        await transporter.sendMail(mailOptions);
-        res.status(200).send('Email sent successfully');
+        res.status(200).json(orderData);
     } catch (error) {
-        console.error('Error sending email:', error);
-        res.status(500).send('Error sending email');
+        console.error('Error fetching order details:', error);
+        res.status(500).json({ error: 'Failed to retrieve order details.' });
     }
 });
 
-// Start the server
+// Chat API endpoint
+app.post('/api/chat', async (req, res) => {
+    const { model, messages } = req.body;
+
+    const systemMessage = {
+        role: 'system',
+        content: `You are an assistant for Dan Ober Artisan Drums. Help the user choose a drum based on their preferences, emphasizing artisan craftsmanship, quality, and the unique characteristics of the drums.`,
+    };
+
+    const allMessages = [systemMessage, ...messages];
+
+    try {
+        const response = await openai.chat.completions.create({
+            model,
+            messages: allMessages,
+        });
+
+        res.json(response);
+    } catch (error) {
+        console.error('Error generating chat response:', error);
+        res.status(500).send('Error generating chat response');
+    }
+});
+
 const PORT = process.env.PORT || 4949;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
