@@ -169,8 +169,10 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
               required
               disabled={isUploading} // Disable input while uploading
             >
-              <option value="dreamfeather">Dreamfeather</option>
-              <option value="true artisan">True Artisan</option>
+              <option value="presale-dreamfeather">Pre-sale: DREAMFEATHER</option>
+              <option value="presale-artisan">Pre-sale: Artisan</option>
+              <option value="dreamfeather">DREAMFEATHER</option>
+              <option value="artisan">Artisan</option>
               <option value="soundlegend">Soundlegend</option>
               <option value="accessories">Accessories</option>
               <option value="apparel">Apparel</option>
