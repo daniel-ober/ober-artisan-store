@@ -11,30 +11,24 @@ const Products = () => {
     let isMounted = true; // Track if the component is mounted
 
     const fetchProductsData = async () => {
-      console.log('Fetching products...');
       try {
         const productsList = await fetchProducts();
-        console.log('Products fetched:', productsList);
-        const availableProducts = productsList.filter(product => product.status === 'available');
+        const availableProducts = productsList.filter(
+          (product) => product.status === 'available'
+        );
         if (isMounted) {
-          console.log('Setting available products:', availableProducts);
           setProducts(availableProducts);
         }
       } catch (error) {
         console.error('Error fetching products:', error);
       } finally {
-        if (isMounted) {
-          console.log('Finished fetching products');
-          setLoading(false);
-        }
+        if (isMounted) setLoading(false);
       }
     };
 
     fetchProductsData();
-
     return () => {
       isMounted = false; // Cleanup on unmount
-      console.log('Products component unmounted');
     };
   }, []);
 
@@ -47,10 +41,7 @@ const Products = () => {
       {products.length > 0 ? (
         <div className="product-grid">
           {products.map((product) => (
-            <ProductCard 
-              key={product.id} // Ensure this is unique for each product
-              product={product} 
-            />
+            <ProductCard key={product.id} product={product} />
           ))}
         </div>
       ) : (
