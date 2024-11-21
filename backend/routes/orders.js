@@ -1,69 +1,34 @@
-// backend/routes/orders.js
 const express = require('express');
 const router = express.Router();
 const admin = require('firebase-admin');
-const { query, where, getDocs } = require('firebase/firestore');
 
 const db = admin.firestore();
 
 // Create a new order
 router.post('/', async (req, res) => {
-    const orderData = req.body;
-
     try {
-        const orderRef = await db.collection('orders').add({
-            ...orderData,
-            createdAt: admin.firestore.FieldValue.serverTimestamp(), // Timestamp for order creation
+        const order = req.body;
+        const ref = await db.collection('orders').add({
+            ...order,
+            createdAt: admin.firestore.FieldValue.serverTimestamp(),
         });
-        res.status(201).json({ id: orderRef.id, ...orderData });
+        res.status(201).json({ id: ref.id, ...order });
     } catch (error) {
-        console.error('Error creating order:', error);
+        console.error('Error creating order:', error.message);
         res.status(500).json({ error: 'Failed to create order.' });
     }
 });
 
-// Retrieve order details by Stripe session ID
-router.get('/:sessionId', async (req, res) => {
-    const { sessionId } = req.params;
-
-    try {
-        // Query the Firestore database for the order with the given Stripe session ID
-        const ordersRef = db.collection('orders');
-        const q = ordersRef.where('stripeSessionId', '==', sessionId);
-        const querySnapshot = await q.get();
-
-        if (querySnapshot.empty) {
-            return res.status(404).json({ error: 'Order not found.' });
-        }
-
-        // Return the first matching document (there should only be one)
-        const orderDoc = querySnapshot.docs[0];
-        res.status(200).json({ id: orderDoc.id, ...orderDoc.data() });
-    } catch (error) {
-        console.error('Error retrieving order:', error);
-        res.status(500).json({ error: 'Failed to retrieve order.' });
-    }
-});
-
-// Retrieve all orders for a specific user (optional, useful for authenticated users)
+// Get orders by user ID
 router.get('/user/:userId', async (req, res) => {
-    const { userId } = req.params;
-
     try {
-        const ordersRef = db.collection('orders');
-        const q = ordersRef.where('userId', '==', userId);
-        const querySnapshot = await q.get();
+        const snapshot = await db.collection('orders').where('userId', '==', req.params.userId).get();
+        if (snapshot.empty) return res.status(404).json({ error: 'No orders found.' });
 
-        if (querySnapshot.empty) {
-            return res.status(404).json({ error: 'No orders found for this user.' });
-        }
-
-        const orders = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+        const orders = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         res.status(200).json(orders);
     } catch (error) {
-        console.error('Error retrieving user orders:', error);
-        res.status(500).json({ error: 'Failed to retrieve user orders.' });
+        console.error('Error fetching orders:', error.message);
+        res.status(500).json({ error: 'Failed to fetch orders.' });
     }
 });
-
-module.exports = router;

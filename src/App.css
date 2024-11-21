@@ -45,7 +45,7 @@ body.dark * {
   border: none;
   cursor: pointer;
   z-index: 1000;
-  transition: background-color 0.3s, color 0.3s;
+  transition: background-color 0.3s, color 1.3s;
 }
 
 .theme-toggle:hover {
@@ -95,7 +95,7 @@ body.dark * {
 
 /* Smooth transition for background and text color */
 .navbar, .footer, .app-content {
-  transition: background-color 2s ease-in-out, color 2s ease-in-out;
+  transition: background-color 1s ease-in-out, color 2s ease-in-out;
 }
 
 /* Theme toggle button styling */
@@ -109,7 +109,7 @@ body.dark * {
   border: none;
   cursor: pointer;
   z-index: 1000;
-  transition: background-color 0.3s, color 0.3s;
+  transition: background-color 0.9s, color 0.9s;
 }
 
 .theme-toggle:hover {
