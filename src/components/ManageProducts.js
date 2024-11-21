@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { fetchProducts, deleteProduct, updateProduct } from '../services/productService';
+import { fetchProducts, deleteProduct } from '../services/productService';
+import './ManageProducts.css';
 
-const ManageProducts = () => {
+const ManageProducts = ({ onEditProduct }) => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -14,7 +15,6 @@ const ManageProducts = () => {
                 setProducts(fetchedProducts);
             } catch (err) {
                 setError('Failed to fetch products. Please try again later.');
-                console.error(err);
             } finally {
                 setLoading(false);
             }
@@ -23,16 +23,12 @@ const ManageProducts = () => {
         fetchAllProducts();
     }, []);
 
-    const toggleProductStatus = async (productId, currentStatus) => {
-        const newStatus = currentStatus === 'available' ? 'unavailable' : 'sold';
+    const handleDeleteProduct = async (productId) => {
         try {
-            await updateProduct(productId, { status: newStatus });
-            setProducts(products.map(product => 
-                product.id === productId ? { ...product, status: newStatus } : product
-            ));
+            await deleteProduct(productId);
+            setProducts(products.filter((product) => product.id !== productId));
         } catch (err) {
-            console.error('Failed to update product status:', err);
-            setError('Error updating product status.');
+            setError('Error deleting product.');
         }
     };
 
@@ -40,9 +36,9 @@ const ManageProducts = () => {
     if (error) return <p>{error}</p>;
 
     return (
-        <div>
+        <div className="manage-products-container">
             <h1>Manage Products</h1>
-            <table>
+            <table className="manage-products-table">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -51,16 +47,23 @@ const ManageProducts = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {products.map(product => (
+                    {products.map((product) => (
                         <tr key={product.id}>
                             <td>{product.name}</td>
                             <td>{product.status}</td>
                             <td>
-                                <button onClick={() => toggleProductStatus(product.id, product.status)}>
-                                    {product.status === 'Mark Available' ? 'Mark Unavailable' : 'Inactive'}
+                                <button
+                                    className="edit-btn"
+                                    onClick={() => onEditProduct(product.id)} // Trigger edit function
+                                >
+                                    Edit
                                 </button>
-                                <button onClick={() => updateProduct(product.id)}>Edit</button>
-                                <button onClick={() => deleteProduct(product.id)}>Delete</button>
+                                <button
+                                    className="delete-btn"
+                                    onClick={() => handleDeleteProduct(product.id)}
+                                >
+                                    Delete
+                                </button>
                             </td>
                         </tr>
                     ))}

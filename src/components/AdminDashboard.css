@@ -26,24 +26,27 @@
   padding: 20px; /* Increased padding */
   text-align: center;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.3s; /* Added smooth transform effect */
   min-width: 180px; /* Increased minimum width */
   max-width: 250px; /* Increased maximum width */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
 /* Card hover effect */
 .admin-card:hover {
   background-color: #e0e0e0;
+  transform: scale(1.05); /* Slightly enlarge on hover */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* More pronounced shadow on hover */
 }
 
-/* Icon styling to increase size */
+/* Icon styling */
 .admin-card-icon {
   font-size: 40px; /* Increased font size for icons */
   margin-bottom: 15px; /* Space between icon and title */
-  color: #555; /* Optional: Change color for better visibility */
+  color: #555; /* Neutral color for icons */
 }
 
-/* Component container with scrollable content */
+/* Component container styling */
 .component-container {
   margin-top: 30px; /* Space between cards and active component */
   padding: 25px; /* Increased padding */
@@ -53,4 +56,46 @@
   border: 1px solid #ddd;
   max-height: 500px; /* Set a max height for the container */
   overflow: auto; /* Allow scrolling if content exceeds the container height */
+}
+
+/* Action buttons container */
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px; /* Space between buttons */
+  margin-top: 20px;
+}
+
+/* Action button styling */
+.action-buttons button {
+  background-color: #007bff; /* Primary blue color */
+  color: white; /* White text for contrast */
+  padding: 10px 20px; /* Adjust button size */
+  border: none; /* No border */
+  border-radius: 5px; /* Slightly rounded corners */
+  cursor: pointer; /* Pointer cursor for interaction */
+  font-size: 1rem; /* Standard font size */
+  transition: background-color 0.3s, transform 0.3s; /* Smooth hover and active effects */
+}
+
+/* Button hover effect */
+.action-buttons button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Button active effect */
+.action-buttons button:active {
+  transform: scale(0.98); /* Slightly shrink on click */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .admin-cards {
+    flex-direction: column; /* Stack cards vertically on smaller screens */
+    gap: 20px; /* Adjust spacing for stacked layout */
+  }
+
+  .admin-card {
+    width: 100%; /* Full-width cards on small screens */
+  }
 }

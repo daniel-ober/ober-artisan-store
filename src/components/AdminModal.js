@@ -1,13 +1,28 @@
-// src/components/AdminModal.js
-import React, { useState } from 'react';
-import { firestore } from '../firebaseConfig';
-import { setDoc, doc } from 'firebase/firestore';
-import { sendPasswordResetEmail } from 'firebase/auth';
-import { auth } from '../firebaseConfig'; // Import auth from your Firebase config
+import React, { useEffect, useState } from 'react';
+import { doc, setDoc, getDoc } from 'firebase/firestore';
+import { db } from '../firebaseConfig'; // Replace 'firebaseConfig' with your file path
+import './AdminModal.css';
 
-const AdminModal = ({ type, onClose }) => {
+const AdminModal = ({ type, onClose, productId }) => {
     const [formData, setFormData] = useState({});
     const [error, setError] = useState('');
+
+    useEffect(() => {
+        if (type === 'product' && productId) {
+            const fetchProduct = async () => {
+                try {
+                    const productRef = doc(db, 'products', productId);
+                    const productSnapshot = await getDoc(productRef);
+                    if (productSnapshot.exists()) {
+                        setFormData(productSnapshot.data());
+                    }
+                } catch (err) {
+                    setError('Error fetching product details.');
+                }
+            };
+            fetchProduct();
+        }
+    }, [type, productId]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -17,55 +32,75 @@ const AdminModal = ({ type, onClose }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            if (type === 'user') {
-                const password = `${formData.firstName}${formData.lastName}${new Date().getFullYear()}`;
-                // Create a user in Firestore
-                await setDoc(doc(firestore, 'users', formData.email), {
-                    ...formData,
-                    password, // Set the password
-                });
-                // Send a password reset email
-                await sendPasswordResetEmail(auth, formData.email);
-                onClose(); // Close the modal after submission
-            } else if (type === 'product') {
-                await setDoc(doc(firestore, 'products', formData.id), formData);
-                onClose();
-            } else if (type === 'order') {
-                await setDoc(doc(firestore, 'orders', formData.id), formData);
-                onClose();
-            }
+            const collection = type === 'user' ? 'users' : type === 'order' ? 'orders' : 'products';
+            const docRef = doc(db, collection, productId || formData.id);
+            await setDoc(docRef, formData, { merge: true });
+            onClose();
         } catch (err) {
-            setError('Error adding record: ' + err.message);
+            setError(`Error ${productId ? 'updating' : 'adding'} ${type}: ` + err.message);
         }
     };
 
     return (
         <div className="modal">
-            <h2>Add {type}</h2>
-            {error && <p>{error}</p>}
+            <h2>{productId ? 'Edit' : 'Add'} {type}</h2>
+            {error && <p className="error">{error}</p>}
             <form onSubmit={handleSubmit}>
                 {type === 'user' && (
                     <>
-                        <input type="text" name="firstName" placeholder="First Name" onChange={handleChange} required />
-                        <input type="text" name="lastName" placeholder="Last Name" onChange={handleChange} required />
-                        <input type="email" name="email" placeholder="Email" onChange={handleChange} required />
+                        <input
+                            type="text"
+                            name="firstName"
+                            placeholder="First Name"
+                            value={formData.firstName || ''}
+                            onChange={handleChange}
+                            required
+                        />
+                        <input
+                            type="text"
+                            name="lastName"
+                            placeholder="Last Name"
+                            value={formData.lastName || ''}
+                            onChange={handleChange}
+                            required
+                        />
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="Email"
+                            value={formData.email || ''}
+                            onChange={handleChange}
+                            required
+                        />
                     </>
                 )}
                 {type === 'product' && (
                     <>
-                        <input type="text" name="id" placeholder="Product ID" onChange={handleChange} required />
-                        <input type="text" name="name" placeholder="Product Name" onChange={handleChange} required />
-                        <input type="number" name="price" placeholder="Price" onChange={handleChange} required />
+                        <input
+                            type="text"
+                            name="name"
+                            placeholder="Product Name"
+                            value={formData.name || ''}
+                            onChange={handleChange}
+                            required
+                        />
+                        <input
+                            type="number"
+                            name="price"
+                            placeholder="Price"
+                            value={formData.price || ''}
+                            onChange={handleChange}
+                            required
+                        />
+                        <textarea
+                            name="description"
+                            placeholder="Description"
+                            value={formData.description || ''}
+                            onChange={handleChange}
+                        />
                     </>
                 )}
-                {type === 'order' && (
-                    <>
-                        <input type="text" name="id" placeholder="Order ID" onChange={handleChange} required />
-                        <input type="text" name="productId" placeholder="Product ID" onChange={handleChange} required />
-                        <input type="text" name="userId" placeholder="User ID" onChange={handleChange} required />
-                    </>
-                )}
-                <button type="submit">Add {type}</button>
+                <button type="submit">{productId ? 'Update' : 'Add'} {type}</button>
                 <button type="button" onClick={onClose}>Cancel</button>
             </form>
         </div>

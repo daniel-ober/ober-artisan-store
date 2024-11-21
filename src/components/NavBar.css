@@ -17,7 +17,7 @@
   height: 100%;
   object-fit: cover;
   z-index: -1002;
-  /* opacity: 1; */
+  opacity: 0.4;
 }
 
 /* Styles for the logo */
