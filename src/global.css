@@ -121,6 +121,7 @@ body.dark .modal-content {
 
 .modal.show {
   display: flex;
+  z-index: 1001;
 }
 
 .modal img {

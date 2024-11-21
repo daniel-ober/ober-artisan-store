@@ -67,6 +67,7 @@ const Cart = () => {
     
             window.location.href = session.url;
         } catch (error) {
+            // This is the block you are referring to
             console.error('Failed to redirect to checkout:', error.message);
             alert(`Checkout error: ${error.message}`);
         } finally {

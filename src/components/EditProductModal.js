@@ -1,104 +1,64 @@
-import React, { useEffect, useState } from 'react';
-import { fetchProductById, updateProductInFirestore } from '../services/productService'; 
-import './Modal.css'; // You can keep this line for future CSS if needed
+import React, { useState, useEffect, useCallback } from 'react';
+import { fetchProductById, updateProduct } from '../services/productService';
 
 const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
-  const [product, setProduct] = useState({ name: '', description: '', price: 0, priceId: '', productId: '' });
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+    const [product, setProduct] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const getProduct = async () => {
-      try {
-        const fetchedProduct = await fetchProductById(productId);
-        setProduct(fetchedProduct);
-      } catch (error) {
-        console.error('Error fetching product:', error);
-        setError('Error fetching product: ' + error.message);
-      } finally {
-        setLoading(false);
-      }
+    const fetchProduct = useCallback(async () => {
+        try {
+            const data = await fetchProductById(productId);
+            setProduct(data);
+            setLoading(false);
+        } catch (err) {
+            setError('Failed to fetch product details.');
+            setLoading(false);
+        }
+    }, [productId]);
+
+    useEffect(() => {
+        fetchProduct();
+    }, [fetchProduct]);
+
+    const handleUpdateProduct = async () => {
+        try {
+            await updateProduct(product.id, product);
+            onProductUpdated(product);
+            onClose();
+        } catch (err) {
+            setError('Failed to update product.');
+        }
     };
-    getProduct();
-  }, [productId]);
 
-  const handleUpdate = async (e) => {
-    e.preventDefault();
-    try {
-      await updateProductInFirestore(productId, product); 
-      onProductUpdated(); 
-      onClose(); 
-    } catch (error) {
-      console.error('Error updating product:', error);
-      setError('Error updating product: ' + error.message);
-    }
-  };
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>{error}</p>;
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    const updatedValue = name === 'price' ? parseFloat(value) : value; // Convert price to number
-    setProduct({ ...product, [name]: updatedValue });
-  };
-
-  if (loading) {
-    return <div>Loading product...</div>;
-  }
-
-  if (error) {
-    return <div>{error}</div>;
-  }
-
-  return (
-    <div className="modal-overlay">
-      <div className="modal-content">
-        <h3>Edit Product</h3>
-        <form onSubmit={handleUpdate}>
-          <input 
-            type="text" 
-            value={product.name} 
-            onChange={handleInputChange} 
-            name="name"
-            placeholder="Product Name" 
-            required 
-          />
-          <input 
-            type="text" 
-            value={product.description} 
-            onChange={handleInputChange} 
-            name="description"
-            placeholder="Product Description" 
-            required 
-          />
-          <input 
-            type="number" 
-            value={product.price} 
-            onChange={handleInputChange} 
-            name="price"
-            placeholder="Product Price" 
-            required 
-          />
-          <input 
-            type="text" 
-            value={product.priceId} 
-            onChange={handleInputChange} 
-            name="priceId"
-            placeholder="Price ID" 
-            required 
-          />
-          <input 
-            type="text" 
-            value={product.productId} 
-            onChange={handleInputChange} 
-            name="productId"
-            placeholder="Product ID" 
-            required 
-          />
-          <button type="submit">Update Product</button>
-          <button type="button" onClick={onClose}>Cancel</button>
-        </form>
-      </div>
-    </div>
-  );
+    return (
+        <div className="modal">
+            <h2>Edit Product</h2>
+            <input
+                type="text"
+                value={product.name}
+                onChange={(e) => setProduct({ ...product, name: e.target.value })}
+                placeholder="Product Name"
+            />
+            <textarea
+                value={product.description}
+                onChange={(e) => setProduct({ ...product, description: e.target.value })}
+                placeholder="Product Description"
+            />
+            <select
+                value={product.status}
+                onChange={(e) => setProduct({ ...product, status: e.target.value })}
+            >
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+            </select>
+            <button onClick={handleUpdateProduct}>Update Product</button>
+            <button onClick={onClose}>Cancel</button>
+        </div>
+    );
 };
 
 export default EditProductModal;

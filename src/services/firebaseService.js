@@ -1,181 +1,70 @@
-// src/services/firebaseService.js
-import { db, storage } from '../firebaseConfig'; // Adjust the import path as needed
+import { db, storage } from '../firebaseConfig';
 import { 
     doc, 
     getDoc, 
     setDoc, 
     updateDoc, 
-    arrayUnion, 
     collection, 
     getDocs, 
     addDoc 
 } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { v4 as uuidv4 } from 'uuid'; // For generating unique file names
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'; // Import Firebase authentication
+import { v4 as uuidv4 } from 'uuid';
 
-// Fetch product by ID
-export const fetchProductById = async (id) => {
-    try {
-        const docRef = doc(db, 'products', id); // Adjust 'products' to your collection name
-        const docSnap = await getDoc(docRef);
-
-        if (docSnap.exists()) {
-            console.log(`Product fetched with ID: ${id}`, docSnap.data()); // Debugging log
-            return docSnap.data();
-        } else {
-            console.error('No such document exists!');
-            return null;
-        }
-    } catch (error) {
-        console.error('Error fetching product:', error);
-        throw error;
-    }
-};
-
-// Function to fetch all products
 export const fetchProducts = async () => {
-    try {
-        const productsCollection = collection(db, 'products');
-        const productSnapshot = await getDocs(productsCollection);
-        const productsList = productSnapshot.docs.map(doc => ({
-            ...doc.data(),
-            id: doc.id,
-        }));
-        console.log('Fetched all products:', productsList); // Debugging log
-        return productsList;
-    } catch (error) {
-        console.error('Error fetching products:', error);
-        throw error;
-    }
+    const productsCollection = collection(db, 'products');
+    const productSnapshot = await getDocs(productsCollection);
+    return productSnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data(),
+    }));
 };
 
-// Function to create a product
-export const createProduct = async (productData) => {
-    try {
-        const productsCollection = collection(db, 'products');
-        const docRef = await addDoc(productsCollection, productData);
-        console.log('Product created with ID:', docRef.id); // Debugging log
-        return docRef.id;
-    } catch (error) {
-        console.error('Error creating product:', error);
-        throw error;
-    }
-};
-
-// Function to create a cart for a guest
-export const createCart = async (cartId) => {
-    try {
-        const cartRef = doc(db, 'carts', cartId);
-        await setDoc(cartRef, {
-            items: []
-        });
-        console.log(`Cart created with ID: ${cartId}`); // Debugging log
-        return cartId;
-    } catch (error) {
-        console.error('Error creating cart:', error);
-        throw error;
-    }
-};
-
-// Function to add an item to a cart
-export const addItemToCart = async (cartId, item) => {
-    try {
-        const cartRef = doc(db, 'carts', cartId);
-        const cartSnap = await getDoc(cartRef);
-
-        if (!cartSnap.exists()) {
-            console.log(`Cart with ID: ${cartId} does not exist, creating a new cart...`); // Debugging log
-            await createCart(cartId);
-        }
-
-        await updateDoc(cartRef, {
-            items: arrayUnion(item)
-        });
-        console.log(`Item added to cart with ID: ${cartId}`, item); // Debugging log
-    } catch (error) {
-        console.error('Error adding item to cart:', error);
-        throw error;
-    }
-};
-
-// Function to add an inquiry
-export const addInquiry = async (inquiryData) => {
-    try {
-        const inquiriesCollection = collection(db, 'inquiries'); // Adjust collection name
-        const docRef = await addDoc(inquiriesCollection, inquiryData);
-        console.log('Inquiry added with ID:', docRef.id); // Debugging log
-        return docRef.id;
-    } catch (error) {
-        console.error('Error adding inquiry:', error);
-        throw error;
-    }
-};
-
-// Function to fetch user profile
 export const fetchUserProfile = async (userId) => {
-    try {
-        const userRef = doc(db, 'users', userId); // Adjust collection name as necessary
-        const userSnap = await getDoc(userRef);
+    const userRef = doc(db, 'users', userId);
+    const userSnap = await getDoc(userRef);
 
-        if (userSnap.exists()) {
-            console.log(`User profile fetched with ID: ${userId}`, userSnap.data()); // Debugging log
-            return userSnap.data();
-        } else {
-            console.error('No such user document!');
-            return null;
-        }
-    } catch (error) {
-        console.error('Error fetching user profile:', error);
-        throw error;
+    if (userSnap.exists()) {
+        return userSnap.data();
     }
+    throw new Error('User profile not found');
 };
 
-// Function to create an order
-export const createOrder = async (orderData) => {
-    try {
-        const ordersCollection = collection(db, 'orders'); // Adjust collection name
-        const docRef = await addDoc(ordersCollection, orderData);
-        console.log('Order created with ID:', docRef.id); // Debugging log
-        return docRef.id;
-    } catch (error) {
-        console.error('Error creating order:', error);
-        throw error;
-    }
+export const addInquiry = async (inquiryData) => {
+    const inquiriesCollection = collection(db, 'inquiries');
+    const docRef = await addDoc(inquiriesCollection, inquiryData);
+    return docRef.id;
 };
 
-// Function to upload images to Firebase Storage
-export const uploadImageToFirebase = async (file) => {
-    try {
-        const storageRef = ref(storage, `images/${uuidv4()}_${file.name}`);
-        await uploadBytes(storageRef, file);
-        const downloadURL = await getDownloadURL(storageRef);
-        console.log('Image uploaded successfully:', downloadURL); // Debugging log
-        return downloadURL;
-    } catch (error) {
-        console.error('Error uploading image:', error);
-        throw error;
-    }
+export const uploadImage = async (file) => {
+    const storageRef = ref(storage, `images/${uuidv4()}_${file.name}`);
+    await uploadBytes(storageRef, file);
+    return getDownloadURL(storageRef);
 };
 
-// Function to check if a user has an admin claim
-export const checkAdminClaim = async (email) => {
-    // Logic to check admin claims in your Firestore user collection or use Firebase Authentication Admin SDK
-    return email === 'admin@example.com'; // Placeholder logic
+export const addDocument = async (collectionName, data) => {
+    const collectionRef = collection(db, collectionName);
+    const docRef = await addDoc(collectionRef, data);
+    return docRef.id;
 };
 
-// Function to sign in a user
-export const signInUser = async (email, password) => {
-    const auth = getAuth();
-    try {
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        const user = userCredential.user;
+export const fetchCollection = async (collectionName) => {
+    const collectionRef = collection(db, collectionName);
+    const snapshot = await getDocs(collectionRef);
+    return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+};
 
-        const isAdmin = await checkAdminClaim(user.email); // Check admin claims
-        console.log('User signed in:', user.email, 'Admin:', isAdmin); // Debugging log
-        return { user, isAdmin };
-    } catch (error) {
-        console.error('Error signing in user:', error);
-        throw error;
+export const fetchDocumentById = async (collectionName, id) => {
+    const docRef = doc(db, collectionName, id);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+        return { id: docSnap.id, ...docSnap.data() };
     }
+    throw new Error('Document not found');
+};
+
+export const updateDocument = async (collectionName, id, data) => {
+    const docRef = doc(db, collectionName, id);
+    await updateDoc(docRef, data);
 };
