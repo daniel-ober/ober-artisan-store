@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { fetchProductById } from '../services/firebaseService';
+import { fetchProductById } from '../services/productService';
 import { useCart } from '../context/CartContext';
 import { FaArrowLeft } from 'react-icons/fa';
 import './ProductDetail.css';
@@ -9,11 +9,11 @@ const ProductDetail = () => {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState('');
     const { addToCart, removeFromCart, updateQuantity, cart } = useCart();
-    const [inCart, setInCart] = useState(null); // Local state for inCart
+    const [inCart, setInCart] = useState(null);
     const [mainImage, setMainImage] = useState('');
-    const [showModal, setShowModal] = useState(false); // For modal image view
+    const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
         const fetchProductData = async () => {
@@ -22,16 +22,14 @@ const ProductDetail = () => {
                 if (productData) {
                     setProduct(productData);
                     setMainImage(productData.images?.[0] || 'https://i.imgur.com/eoKsILV.png');
-
-                    const cartArray = Object.values(cart);
-                    const cartProduct = cartArray.find(item => item.id === id);
-                    setInCart(cartProduct || null);
+                    const cartItem = Object.values(cart).find((item) => item.id === id);
+                    setInCart(cartItem || null);
                 } else {
-                    setError('Product not found');
+                    setError('Product not found.');
                 }
-            } catch (error) {
-                console.error('Error fetching product:', error);
-                setError('Error fetching product');
+            } catch (fetchError) {
+                console.error('Error fetching product:', fetchError.message);
+                setError('Unable to fetch product details. Please try again later.');
             } finally {
                 setLoading(false);
             }
@@ -43,6 +41,7 @@ const ProductDetail = () => {
     const handleAddToCart = () => {
         if (product) {
             addToCart({ ...product, id });
+            setInCart({ ...product, quantity: 1 });
         }
     };
 
@@ -53,27 +52,25 @@ const ProductDetail = () => {
         }
     };
 
-    // Handle quantity change for products
     const handleQuantityChange = (change) => {
         if (!inCart) return;
-
         const newQuantity = inCart.quantity + change;
+
         if (newQuantity < 1) {
             handleRemoveFromCart();
             return;
         }
 
         updateQuantity(inCart.id, newQuantity);
+        setInCart((prev) => ({ ...prev, quantity: newQuantity }));
     };
 
-    const handleThumbnailClick = (image) => {
-        setMainImage(image);
-    };
+    const handleThumbnailClick = (image) => setMainImage(image);
 
     const handleModalOpen = () => setShowModal(true);
     const handleModalClose = () => setShowModal(false);
 
-    if (loading) return <p>Loading...</p>;
+    if (loading) return <p>Loading product details...</p>;
     if (error) return <p>{error}</p>;
 
     const isArtisanProduct = product?.category === 'artisan';
@@ -89,17 +86,11 @@ const ProductDetail = () => {
                     className="product-main-image-button"
                     onClick={handleModalOpen}
                     aria-label="Enlarge product image"
-                    tabIndex="0" // Make image button focusable
-                    onKeyDown={(e) => e.key === 'Enter' && handleModalOpen()} // Open modal with "Enter" key
                 >
-                    <img
-                        src={mainImage}
-                        alt={product?.name}
-                        className="product-main-image"
-                    />
+                    <img src={mainImage} alt={product?.name || 'Product'} className="product-main-image" />
                 </button>
                 <div className="product-thumbnail-gallery">
-                    {product?.images.map((image, index) => (
+                    {product?.images?.map((image, index) => (
                         <button
                             key={index}
                             className="product-thumbnail"
@@ -112,9 +103,9 @@ const ProductDetail = () => {
                 </div>
             </div>
             <div className="product-info">
-                <h1 className="product-title">{product?.name}</h1>
-                <p className="product-description">{product?.description}</p>
-                <p className="product-price">${product?.price}</p>
+                <h1 className="product-title">{product?.name || 'Unnamed Product'}</h1>
+                <p className="product-description">{product?.description || 'No description available.'}</p>
+                <p className="product-price">${product?.price?.toFixed(2) || 'N/A'}</p>
                 <div className="quantity-control">
                     {inCart ? (
                         <>
@@ -149,9 +140,13 @@ const ProductDetail = () => {
                 </div>
             </div>
 
-            {/* Modal for enlarged image */}
             {showModal && (
-                <div className="modal-overlay" onClick={handleModalClose} role="dialog" aria-labelledby="modalTitle">
+                <div
+                    className={`modal ${showModal ? 'show' : ''}`} // Apply `show` class dynamically
+                    onClick={(e) => e.target === e.currentTarget && handleModalClose()}
+                    role="dialog"
+                    aria-labelledby="modalTitle"
+                >
                     <div className="modal-content">
                         <button
                             className="modal-close"
@@ -165,7 +160,6 @@ const ProductDetail = () => {
                 </div>
             )}
 
-            {/* 360° Interactive View Section */}
             {product?.interactive360Url && (
                 <div className="interactive-360-container">
                     <h2>360° View</h2>
