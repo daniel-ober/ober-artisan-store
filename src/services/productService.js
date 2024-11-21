@@ -1,43 +1,38 @@
-import { db } from '../firebaseConfig'; // Adjust the path as necessary
-import { collection, getDocs, doc, deleteDoc, updateDoc, addDoc, getDoc } from "firebase/firestore";
-
-const productsCollection = collection(db, "products");
+import { db } from '../firebaseConfig';
+import { collection, getDocs, doc, deleteDoc, updateDoc, addDoc, getDoc } from 'firebase/firestore';
 
 // Fetch all products
 export const fetchProducts = async () => {
-  const productSnapshot = await getDocs(productsCollection);
-  return productSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    const productsCollection = collection(db, 'products');
+    const snapshot = await getDocs(productsCollection);
+    return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 };
 
-// Fetch product by ID
+// Fetch a product by ID
 export const fetchProductById = async (productId) => {
-  const productDocRef = doc(db, "products", productId); // Create a document reference
-  const productSnapshot = await getDoc(productDocRef); // Fetch the document snapshot
-  if (!productSnapshot.exists()) {
-    throw new Error("Product not found"); // Handle case where product doesn't exist
-  }
-  return { id: productSnapshot.id, ...productSnapshot.data() }; // Return product data
-};
-
-// Delete a product
-export const deleteProductFromFirestore = async (productId) => {
-  const productDocRef = doc(db, "products", productId);
-  await deleteDoc(productDocRef);
-};
-
-// Update a product
-export const updateProductInFirestore = async (productId, updatedProduct) => {
-  const productDocRef = doc(db, "products", productId);
-  await updateDoc(productDocRef, updatedProduct);
+    const productRef = doc(db, 'products', productId);
+    const snapshot = await getDoc(productRef);
+    if (!snapshot.exists()) {
+        throw new Error('Product not found');
+    }
+    return { id: snapshot.id, ...snapshot.data() };
 };
 
 // Add a new product
-export const addProductToFirestore = async (newProduct) => {
-  await addDoc(productsCollection, newProduct);
+export const addProduct = async (productData) => {
+    const productsCollection = collection(db, 'products');
+    const docRef = await addDoc(productsCollection, productData);
+    return { id: docRef.id, ...productData };
 };
 
-// Update the status of a product
-export const updateProductStatus = async (productId, newStatus) => {
-  const productDocRef = doc(db, "products", productId);
-  await updateDoc(productDocRef, { status: newStatus });
-}
+// Update a product
+export const updateProduct = async (productId, updatedData) => {
+    const productRef = doc(db, 'products', productId);
+    await updateDoc(productRef, updatedData);
+};
+
+// Delete a product
+export const deleteProduct = async (productId) => {
+    const productRef = doc(db, 'products', productId);
+    await deleteDoc(productRef);
+};
