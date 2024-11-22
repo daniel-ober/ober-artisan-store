@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { FaUsers, FaTags, FaShoppingCart, FaChartLine, FaEnvelope } from 'react-icons/fa';
+import { FaUsers, FaTags, FaShoppingCart, FaChartLine, FaEnvelope, FaCog } from 'react-icons/fa';
 import ManageProducts from './ManageProducts';
 import ManageUsers from './ManageUsers';
 import ManageOrders from './ManageOrders';
 import SalesPipeline from './SalesPipeline';
 import ManageInquiries from './ManageInquiries';
+import AdminSettings from './AdminSettings';
 import AdminModal from './AdminModal';
 import './AdminDashboard.css';
 
@@ -39,6 +40,8 @@ const AdminDashboard = () => {
                 return <SalesPipeline />;
             case 'manageInquiries':
                 return <ManageInquiries />;
+            case 'adminSettings':
+                return <AdminSettings />;
             default:
                 return <div>Select a management option above.</div>;
         }
@@ -53,7 +56,7 @@ const AdminDashboard = () => {
                     role="button"
                     tabIndex={0}
                     onClick={() => setActiveComponent('manageUsers')}
-                    onKeyPress={(e) => e.key === 'Enter' && setActiveComponent('manageUsers')}
+                    onKeyDown={(e) => e.key === 'Enter' && setActiveComponent('manageUsers')}
                 >
                     <div className="admin-card-icon"><FaUsers /></div>
                     <h3>Manage Users</h3>
@@ -63,7 +66,7 @@ const AdminDashboard = () => {
                     role="button"
                     tabIndex={0}
                     onClick={() => setActiveComponent('manageProducts')}
-                    onKeyPress={(e) => e.key === 'Enter' && setActiveComponent('manageProducts')}
+                    onKeyDown={(e) => e.key === 'Enter' && setActiveComponent('manageProducts')}
                 >
                     <div className="admin-card-icon"><FaTags /></div>
                     <h3>Manage Products</h3>
@@ -73,7 +76,7 @@ const AdminDashboard = () => {
                     role="button"
                     tabIndex={0}
                     onClick={() => setActiveComponent('manageOrders')}
-                    onKeyPress={(e) => e.key === 'Enter' && setActiveComponent('manageOrders')}
+                    onKeyDown={(e) => e.key === 'Enter' && setActiveComponent('manageOrders')}
                 >
                     <div className="admin-card-icon"><FaShoppingCart /></div>
                     <h3>Manage Orders</h3>
@@ -83,7 +86,7 @@ const AdminDashboard = () => {
                     role="button"
                     tabIndex={0}
                     onClick={() => setActiveComponent('salesPipeline')}
-                    onKeyPress={(e) => e.key === 'Enter' && setActiveComponent('salesPipeline')}
+                    onKeyDown={(e) => e.key === 'Enter' && setActiveComponent('salesPipeline')}
                 >
                     <div className="admin-card-icon"><FaChartLine /></div>
                     <h3>Sales Pipeline</h3>
@@ -93,40 +96,45 @@ const AdminDashboard = () => {
                     role="button"
                     tabIndex={0}
                     onClick={() => setActiveComponent('manageInquiries')}
-                    onKeyPress={(e) => e.key === 'Enter' && setActiveComponent('manageInquiries')}
+                    onKeyDown={(e) => e.key === 'Enter' && setActiveComponent('manageInquiries')}
                 >
                     <div className="admin-card-icon"><FaEnvelope /></div>
                     <h3>Manage Inquiries</h3>
                 </div>
+                <div
+                    className="admin-card"
+                    role="button"
+                    tabIndex={0}
+                    onClick={() => setActiveComponent('adminSettings')}
+                    onKeyDown={(e) => e.key === 'Enter' && setActiveComponent('adminSettings')}
+                >
+                    <div className="admin-card-icon"><FaCog /></div>
+                    <h3>Settings</h3>
+                </div>
             </div>
-            <div className="component-container">
-    {renderActiveComponent()}
-    {modalType && (
-        <>
-            <div
-                className="modal-overlay"
-                role="button"
-                tabIndex={0}
-                onClick={handleCloseModal}
-                onKeyPress={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        handleCloseModal();
-                    }
-                }}
-            ></div>
-            <AdminModal
-                type={modalType}
-                productId={selectedProductId}
-                onClose={handleCloseModal}
-            />
-        </>
-    )}
-</div>
-
             <div className="action-buttons">
                 <button onClick={() => handleOpenModal('user')}>Add User</button>
                 <button onClick={() => handleOpenModal('product')}>Add Product</button>
                 <button onClick={() => handleOpenModal('order')}>Add Order</button>
+            </div>
+            <div className="component-container">
+                {renderActiveComponent()}
+                {modalType && (
+                    <>
+                        <div
+                            className="modal-overlay"
+                            role="button"
+                            tabIndex={0}
+                            onClick={handleCloseModal}
+                            onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && handleCloseModal()}
+                        />
+                        <AdminModal
+                            type={modalType}
+                            productId={selectedProductId}
+                            onClose={handleCloseModal}
+                        />
+                    </>
+                )}
             </div>
         </div>
     );
