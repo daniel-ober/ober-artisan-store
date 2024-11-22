@@ -1,8 +1,9 @@
 rules_version = '2';
 service firebase.storage {
   match /b/{bucket}/o {
+    // Allow authenticated users to upload and download files
     match /{allPaths=**} {
-      allow read, write: if false; // Adjust your rules here
+      allow read, write: if request.auth != null; // Allow authenticated users
     }
   }
 }
