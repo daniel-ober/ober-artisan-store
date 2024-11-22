@@ -1,3 +1,4 @@
+// src/firebaseConfig.js
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 import { getAuth, signOut as firebaseSignOut } from 'firebase/auth';
@@ -38,7 +39,11 @@ export const auth = getAuth(app);
 export const storage = getStorage(app);
 export const signOut = firebaseSignOut;
 
-// Fetch user document data
+/**
+ * Fetch user document data.
+ * @param {string} userId - The user ID.
+ * @returns {Promise<Object|null>} - User data or null if not found.
+ */
 export const getUserDoc = async (userId) => {
   try {
     const userDocRef = doc(db, 'users', userId);
@@ -55,7 +60,11 @@ export const getUserDoc = async (userId) => {
   }
 };
 
-// Create a cart for a specific user
+/**
+ * Create a cart for a specific user.
+ * @param {string} userId - The user ID.
+ * @returns {Promise<string>} - User ID if successful.
+ */
 export const createCart = async (userId) => {
   try {
     const cartRef = doc(db, 'carts', userId);
@@ -67,7 +76,11 @@ export const createCart = async (userId) => {
   }
 };
 
-// Add an item to a cart
+/**
+ * Add an item to a user's cart.
+ * @param {string} userId - The user ID.
+ * @param {Object} item - The item to add.
+ */
 export const addItemToCart = async (userId, item) => {
   try {
     const cartRef = doc(db, 'carts', userId);
@@ -78,7 +91,11 @@ export const addItemToCart = async (userId, item) => {
   }
 };
 
-// Fetch cart items for a specific user
+/**
+ * Fetch cart items for a specific user.
+ * @param {string} userId - The user ID.
+ * @returns {Promise<Array>} - Array of cart items.
+ */
 export const getCartItems = async (userId) => {
   try {
     const cartRef = doc(db, 'carts', userId);
@@ -95,7 +112,11 @@ export const getCartItems = async (userId) => {
   }
 };
 
-// Delete an item from a cart
+/**
+ * Delete an item from a user's cart.
+ * @param {string} userId - The user ID.
+ * @param {string} itemId - The item ID to delete.
+ */
 export const deleteCartItem = async (userId, itemId) => {
   try {
     const cartRef = doc(db, 'carts', userId);
@@ -112,7 +133,11 @@ export const deleteCartItem = async (userId, itemId) => {
   }
 };
 
-// Save an order to Firestore
+/**
+ * Save an order to Firestore.
+ * @param {Object} orderData - The order data.
+ * @returns {Promise<string|null>} - Order ID or null if failed.
+ */
 export const saveOrder = async (orderData) => {
   try {
     const ordersRef = collection(db, 'orders');
@@ -125,7 +150,11 @@ export const saveOrder = async (orderData) => {
   }
 };
 
-// Fetch order details by session ID
+/**
+ * Fetch order details by session ID.
+ * @param {string} sessionId - The Stripe session ID.
+ * @returns {Promise<Object|null>} - Order data or null if not found.
+ */
 export const getOrderBySessionId = async (sessionId) => {
   try {
     const ordersRef = collection(db, 'orders');
@@ -142,7 +171,10 @@ export const getOrderBySessionId = async (sessionId) => {
   }
 };
 
-// Remove a cart after checkout
+/**
+ * Clear a user's cart after checkout.
+ * @param {string} userId - The user ID.
+ */
 export const clearCart = async (userId) => {
   try {
     const cartRef = doc(db, 'carts', userId);

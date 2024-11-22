@@ -1,3 +1,4 @@
+// src/checkUserClaims.js
 import { getAuth } from 'firebase/auth';
 
 const CheckUserClaims = async () => {
