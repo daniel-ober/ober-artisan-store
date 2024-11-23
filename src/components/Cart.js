@@ -34,40 +34,45 @@ const Cart = () => {
     const handleCheckout = async () => {
         setLoading(true);
         try {
+            const productsPayload = Object.values(cart).map((product) => {
+                if (!product.price || isNaN(product.price)) {
+                    throw new Error(`Product ${product.name} has an invalid price.`);
+                }
+    
+                return {
+                    name: product.name || 'Unnamed Product',
+                    description: product.description || 'No description available',
+                    price: product.price, // Price in dollars; backend converts to cents
+                    quantity: product.quantity || 1,
+                };
+            });
+    
+            console.log('Products Payload:', productsPayload); // Log payload
+    
             const response = await fetch('http://localhost:4949/api/create-checkout-session', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    products: Object.values(cart).map((product) => {
-                        if (!product.price || isNaN(product.price)) {
-                            throw new Error(`Product ${product.name} has an invalid price.`);
-                        }
-    
-                        return {
-                            name: product.name || 'Unnamed Product',
-                            description: product.description || 'No description available',
-                            price: product.price, // Keep price as dollars, backend handles cents conversion
-                            quantity: product.quantity || 1,
-                        };
-                    }),
+                    products: productsPayload,
                     userId: user?.uid || 'guest',
                 }),
             });
     
             if (!response.ok) {
-                throw new Error('Failed to create checkout session.');
+                throw new Error(`Failed to create checkout session. Server responded with: ${response.status}`);
             }
     
             const session = await response.json();
+            console.log('Checkout Session:', session);
+    
             if (!session.url) {
                 throw new Error('Session URL is missing in the response.');
             }
     
             window.location.href = session.url;
         } catch (error) {
-            // This is the block you are referring to
             console.error('Failed to redirect to checkout:', error.message);
             alert(`Checkout error: ${error.message}`);
         } finally {
@@ -75,11 +80,6 @@ const Cart = () => {
         }
     };
     
-
-    if (loading) {
-        return <p>Loading...</p>;
-    }
-
     return (
         <div className="cart-container">
             <h1>Your Cart</h1>

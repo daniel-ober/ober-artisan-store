@@ -1,4 +1,4 @@
-import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, updateDoc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 
 /**
@@ -19,6 +19,21 @@ export const fetchUserDoc = async (userId) => {
         }
     } catch (error) {
         console.error('Error fetching user document:', error);
+        throw error;
+    }
+};
+
+/**
+ * Updates a user's document in Firestore.
+ * @param {string} userId - The ID of the user to update.
+ * @param {Object} updatedData - The updated user data.
+ */
+export const updateUserInFirestore = async (userId, updatedData) => {
+    try {
+        const userRef = doc(db, 'users', userId);
+        await updateDoc(userRef, updatedData);
+    } catch (error) {
+        console.error('Error updating user in Firestore:', error);
         throw error;
     }
 };

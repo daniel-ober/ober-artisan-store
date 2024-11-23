@@ -17,8 +17,12 @@ const NavBar = () => {
   };
 
   const handleClickOutside = (event) => {
-    if (menuRef.current && !menuRef.current.contains(event.target) &&
-        buttonRef.current && !buttonRef.current.contains(event.target)) {
+    if (
+      menuRef.current &&
+      !menuRef.current.contains(event.target) &&
+      buttonRef.current &&
+      !buttonRef.current.contains(event.target)
+    ) {
       setIsMenuOpen(false);
     }
   };
@@ -70,26 +74,91 @@ const NavBar = () => {
         />
       </button>
       <div className={`navbar-links ${isMenuOpen ? 'open' : ''}`} ref={menuRef}>
-        <Link to="/" className={`nav-link ${location.pathname === '/' ? 'active' : ''}`} onClick={() => handleLinkClick('/')}>Home</Link>
-        <Link to="/products" className={`nav-link ${location.pathname === '/products' ? 'active' : ''}`} onClick={() => handleLinkClick('/products')}>Shop/Gallery</Link>
-        <Link to="/about" className={`nav-link ${location.pathname === '/about' ? 'active' : ''}`} onClick={() => handleLinkClick('/about')}>About</Link>
-        <Link to="/contact" className={`nav-link ${location.pathname === '/contact' ? 'active' : ''}`} onClick={() => handleLinkClick('/contact')}>Contact</Link>
+        <Link
+          to="/"
+          className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}
+          onClick={() => handleLinkClick('/')}
+        >
+          Home
+        </Link>
+        <Link
+          to="/products"
+          className={`nav-link ${location.pathname === '/products' ? 'active' : ''}`}
+          onClick={() => handleLinkClick('/products')}
+        >
+          Shop/Gallery
+        </Link>
+        <Link
+          to="/about"
+          className={`nav-link ${location.pathname === '/about' ? 'active' : ''}`}
+          onClick={() => handleLinkClick('/about')}
+        >
+          About
+        </Link>
+        <Link
+          to="/contact"
+          className={`nav-link ${location.pathname === '/contact' ? 'active' : ''}`}
+          onClick={() => handleLinkClick('/contact')}
+        >
+          Contact
+        </Link>
+        <Link
+          to="/order-lookup"
+          className={`nav-link ${location.pathname === '/order-lookup' ? 'active' : ''}`}
+          onClick={() => handleLinkClick('/order-lookup')}
+        >
+          Order Lookup
+        </Link>
 
         {user ? (
           <>
             {isAdmin && (
               <>
-                <Link to="/custom-shop-assistant" className={`nav-link ${location.pathname === '/custom-shop-assistant' ? 'active' : ''}`} onClick={() => handleLinkClick('/custom-shop-assistant')}>ARTiSAN SUITE</Link>
-                <Link to="/admin" className={`nav-link ${location.pathname === '/admin' ? 'active' : ''}`} onClick={() => handleLinkClick('/admin')}><FaCog /> Admin</Link>
+                <Link
+                  to="/custom-shop-assistant"
+                  className={`nav-link ${
+                    location.pathname === '/custom-shop-assistant' ? 'active' : ''
+                  }`}
+                  onClick={() => handleLinkClick('/custom-shop-assistant')}
+                >
+                  ARTiSAN SUITE
+                </Link>
+                <Link
+                  to="/admin"
+                  className={`nav-link ${location.pathname === '/admin' ? 'active' : ''}`}
+                  onClick={() => handleLinkClick('/admin')}
+                >
+                  <FaCog /> Admin
+                </Link>
               </>
             )}
-            <Link to="/account" className={`nav-link ${location.pathname === '/account' ? 'active' : ''}`} onClick={() => handleLinkClick('/account')}><FaUserAlt /> Account</Link>
-            <button className="nav-link" onClick={handleSignOutClick}><FaSignOutAlt /> Sign Out</button>
+            <Link
+              to="/account"
+              className={`nav-link ${location.pathname === '/account' ? 'active' : ''}`}
+              onClick={() => handleLinkClick('/account')}
+            >
+              <FaUserAlt /> Account
+            </Link>
+            <button className="nav-link" onClick={handleSignOutClick}>
+              <FaSignOutAlt /> Sign Out
+            </button>
           </>
         ) : (
-          <Link to="/signin" className={`nav-link ${location.pathname === '/signin' ? 'active' : ''}`} onClick={() => handleLinkClick('/signin')}>Sign In</Link>
+          <Link
+            to="/signin"
+            className={`nav-link ${location.pathname === '/signin' ? 'active' : ''}`}
+            onClick={() => handleLinkClick('/signin')}
+          >
+            Sign In
+          </Link>
         )}
-        <Link to="/cart" className={`nav-link ${location.pathname === '/cart' ? 'active' : ''}`} onClick={() => handleLinkClick('/cart')}><FaCartPlus /> Cart</Link>
+        <Link
+          to="/cart"
+          className={`nav-link ${location.pathname === '/cart' ? 'active' : ''}`}
+          onClick={() => handleLinkClick('/cart')}
+        >
+          <FaCartPlus /> Cart
+        </Link>
       </div>
     </nav>
   );

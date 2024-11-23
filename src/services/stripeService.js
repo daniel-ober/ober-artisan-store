@@ -15,6 +15,9 @@ export const createStripeProduct = async (name, description, price) => {
 
 // Create Checkout Session
 export const createCheckoutSession = async (products, userId) => {
+    const guestToken = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`; // Generate guestToken
+    console.log('Generated guestToken:', guestToken); // Debugging log
+
     const lineItems = products.map(product => ({
         price_data: {
             currency: 'usd',
@@ -28,15 +31,23 @@ export const createCheckoutSession = async (products, userId) => {
         payment_method_types: ['card'],
         line_items: lineItems,
         mode: 'payment',
-        success_url: `${process.env.CLIENT_URL}/checkout-summary?session_id={CHECKOUT_SESSION_ID}&userId=${userId}`,
+        success_url: `${process.env.CLIENT_URL}/checkout-summary?session_id={CHECKOUT_SESSION_ID}&guest_token=${guestToken}`,
         cancel_url: `${process.env.CLIENT_URL}/cart`,
-        metadata: { userId },
+        metadata: { userId, guestToken }, // Add guestToken to metadata
     });
 
-    return session;
+    console.log('Stripe session created:', {
+        sessionId: session.id,
+        guestToken,
+        metadata: session.metadata,
+    }); // Debugging log
+
+    return { session, guestToken };
 };
 
 // Retrieve Checkout Session
 export const retrieveCheckoutSession = async (sessionId) => {
-    return await stripe.checkout.sessions.retrieve(sessionId);
+    return await stripe.checkout.sessions.retrieve(sessionId, {
+        expand: ['line_items.data.price.product'], // Expand to include detailed product data
+    });
 };

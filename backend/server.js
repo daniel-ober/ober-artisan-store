@@ -3,7 +3,6 @@ const express = require('express');
 const cors = require('cors');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const admin = require('firebase-admin');
-const openai = require('openai');
 
 // Firebase Admin Initialization
 if (!admin.apps.length) {
@@ -28,27 +27,15 @@ const db = admin.firestore();
 const app = express();
 
 // CORS Configuration
-const allowedOrigins = [
-    'http://localhost:3000',
-    'http://localhost:4949',
-    'http://10.0.0.210:3000',
-];
-const corsOptions = {
-    origin: function (origin, callback) {
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
+const allowedOrigins = ['http://localhost:3000', 'http://localhost:4949', 'http://10.0.0.210:3000'];
+app.use(cors({
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) callback(null, true);
+        else callback(new Error('Not allowed by CORS'));
     },
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    methods: ['GET', 'POST', 'OPTIONS'],
     credentials: true,
-    optionsSuccessStatus: 204,
-};
-
-// Apply CORS globally
-app.use(cors(corsOptions));
+}));
 
 // Apply JSON parsing globally except for webhook
 app.use((req, res, next) => {
@@ -68,35 +55,34 @@ app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, 
         event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
         console.log(`Received Stripe event: ${event.type}`);
 
-        switch (event.type) {
-            case 'checkout.session.completed':
-                const session = event.data.object;
+        if (event.type === 'checkout.session.completed') {
+            const session = event.data.object;
 
-                console.log('Checkout session completed:', session.id);
+            console.log('Checkout session completed:', session.id);
+            console.log('Session metadata:', session.metadata);
 
-                // Retrieve line items for the session
-                const lineItems = await stripe.checkout.sessions.listLineItems(session.id, { expand: ['data.price.product'] });
+            const lineItems = await stripe.checkout.sessions.listLineItems(session.id, { expand: ['data.price.product'] });
 
-                const orderData = {
-                    stripeSessionId: session.id,
-                    customerName: session.customer_details?.name || 'Guest',
-                    customerEmail: session.customer_details?.email || 'No email provided',
-                    products: lineItems.data.map((item) => ({
-                        name: item.price.product.name,
-                        price: item.price.unit_amount / 100, // Convert cents to dollars
-                        quantity: item.quantity,
-                    })),
-                    totalAmount: session.amount_total / 100, // Convert cents to dollars
-                    status: session.payment_status,
-                    createdAt: new Date(),
-                };
+            const orderData = {
+                stripeSessionId: session.id,
+                customerName: session.customer_details?.name || 'Guest',
+                customerEmail: session.customer_details?.email || 'No email provided',
+                products: lineItems.data.map((item) => ({
+                    name: item.price.product.name,
+                    price: item.price.unit_amount / 100,
+                    quantity: item.quantity,
+                })),
+                totalAmount: session.amount_total / 100,
+                status: session.payment_status,
+                createdAt: new Date(),
+                userId: session.metadata?.userId || 'guest',
+                guestToken: session.metadata?.guestToken || null,
+            };
 
-                // Save order to Firestore
-                await db.collection('orders').add(orderData);
-                console.log('Order saved to Firestore:', orderData);
-                break;
-            default:
-                console.log(`Unhandled event type: ${event.type}`);
+            console.log('Saving order with guestToken:', orderData.guestToken);
+
+            await db.collection('orders').add(orderData);
+            console.log('Order saved to Firestore:', orderData);
         }
 
         res.status(200).send({ received: true });
@@ -108,102 +94,44 @@ app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, 
 
 // Create a Stripe checkout session
 app.post('/api/create-checkout-session', async (req, res) => {
-    const { products, userId } = req.body;
-
     try {
-        const lineItems = products.map((item) => {
-            if (!item.price || isNaN(item.price)) {
-                throw new Error(`Invalid price for product: ${item.name}`);
-            }
+        console.log('Received Checkout Session Request:', req.body);
 
-            return {
-                price_data: {
-                    currency: 'usd',
-                    product_data: {
-                        name: item.name || 'Unnamed Product',
-                        description: item.description || 'No description available',
-                    },
-                    unit_amount: Math.round(item.price * 100), // Convert dollars to cents
+        const { products, userId } = req.body;
+        if (!products || !Array.isArray(products) || products.length === 0) {
+            throw new Error('Invalid products array');
+        }
+
+        const guestToken = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+        const lineItems = products.map((product) => ({
+            price_data: {
+                currency: 'usd',
+                product_data: {
+                    name: product.name || 'Unnamed Product',
+                    description: product.description || 'No description available',
                 },
-                quantity: item.quantity || 1,
-            };
-        });
+                unit_amount: Math.round(product.price * 100), // Convert price to cents
+            },
+            quantity: product.quantity || 1,
+        }));
 
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
             line_items: lineItems,
             mode: 'payment',
-            success_url: `${process.env.CLIENT_URL}/checkout-summary?session_id={CHECKOUT_SESSION_ID}&userId=${userId}`,
+            success_url: `${process.env.CLIENT_URL}/checkout-summary?session_id={CHECKOUT_SESSION_ID}&guest_token=${guestToken}`,
             cancel_url: `${process.env.CLIENT_URL}/cart`,
-            metadata: { userId },
+            metadata: { userId: userId || 'guest', guestToken },
         });
 
-        res.status(200).json({ url: session.url, id: session.id });
+        console.log('Created Stripe Session:', session);
+
+        res.status(200).json({ url: session.url, id: session.id, guestToken });
     } catch (err) {
-        console.error('Error creating checkout session:', err.message);
+        console.error('Error in create-checkout-session:', err.message);
         res.status(500).json({ error: err.message });
     }
 });
-
-// Get Stripe order details
-app.get('/api/get-order-details', async (req, res) => {
-    const { session_id } = req.query;
-    if (!session_id) {
-        return res.status(400).json({ error: 'Missing session_id parameter' });
-    }
-
-    try {
-        const session = await stripe.checkout.sessions.retrieve(session_id, {
-            expand: ['line_items.data.price.product'],
-        });
-
-        const orderData = {
-            stripeSessionId: session.id,
-            customerName: session.customer_details?.name || 'Guest',
-            customerEmail: session.customer_details?.email || 'No email provided',
-            products: session.line_items.data.map((item) => ({
-                name: item.price.product.name,
-                price: item.price.unit_amount / 100, // Convert cents to dollars
-                quantity: item.quantity,
-            })),
-            totalAmount: session.amount_total / 100, // Convert cents to dollars
-            status: session.payment_status,
-        };
-
-        res.status(200).json(orderData);
-    } catch (error) {
-        console.error('Error fetching order details:', error);
-        res.status(500).json({ error: 'Failed to retrieve order details.' });
-    }
-});
-
-// Chat API endpoint
-app.post('/api/chat', async (req, res) => {
-    const { model, messages } = req.body;
-
-    const systemMessage = {
-        role: 'system',
-        content: `You are an assistant for Dan Ober Artisan Drums. Help the user choose a drum based on their preferences, emphasizing artisan craftsmanship, quality, and the unique characteristics of the drums.`,
-    };
-
-    const allMessages = [systemMessage, ...messages];
-
-    try {
-        const response = await openai.chat.completions.create({
-            model,
-            messages: allMessages,
-        });
-
-        res.json(response);
-    } catch (error) {
-        console.error('Error generating chat response:', error);
-        res.status(500).send('Error generating chat response');
-    }
-});
-
-// Import routes
-const productsRouter = require('./routes/products');
-app.use('/api/products', productsRouter);
 
 const PORT = process.env.PORT || 4949;
 app.listen(PORT, () => {

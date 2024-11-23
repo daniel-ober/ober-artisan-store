@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { doc, setDoc } from 'firebase/firestore';
+import { collection, addDoc, doc, setDoc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import './AdminModal.css';
 
-const AdminModal = ({ type, onClose, itemId = null, defaultValues = {} }) => {
-  const [formData, setFormData] = useState(defaultValues);
+const AdminModal = ({ type, onClose, itemId = null, onItemAdded }) => {
+  const [formData, setFormData] = useState({});
   const [error, setError] = useState('');
 
   const handleChange = (e) => {
@@ -17,8 +17,14 @@ const AdminModal = ({ type, onClose, itemId = null, defaultValues = {} }) => {
     const collectionName = type === 'user' ? 'users' : type === 'product' ? 'products' : 'orders';
 
     try {
-      const docRef = doc(db, collectionName, itemId || formData.id);
-      await setDoc(docRef, formData, { merge: true });
+      if (itemId) {
+        const docRef = doc(db, collectionName, itemId);
+        await setDoc(docRef, formData, { merge: true });
+      } else {
+        const collectionRef = collection(db, collectionName);
+        await addDoc(collectionRef, formData);
+      }
+      onItemAdded();
       onClose();
     } catch (err) {
       setError(`Error ${itemId ? 'updating' : 'adding'} ${type}: ${err.message}`);
@@ -33,7 +39,7 @@ const AdminModal = ({ type, onClose, itemId = null, defaultValues = {} }) => {
             <input
               type="text"
               name="name"
-              placeholder="Full Name"
+              placeholder="Name"
               value={formData.name || ''}
               onChange={handleChange}
               required
@@ -46,16 +52,6 @@ const AdminModal = ({ type, onClose, itemId = null, defaultValues = {} }) => {
               onChange={handleChange}
               required
             />
-            <select
-              name="role"
-              value={formData.role || ''}
-              onChange={handleChange}
-              required
-            >
-              <option value="" disabled>Select Role</option>
-              <option value="admin">Admin</option>
-              <option value="user">User</option>
-            </select>
           </>
         );
       case 'product':
@@ -104,17 +100,6 @@ const AdminModal = ({ type, onClose, itemId = null, defaultValues = {} }) => {
               onChange={handleChange}
               required
             />
-            <select
-              name="status"
-              value={formData.status || ''}
-              onChange={handleChange}
-              required
-            >
-              <option value="" disabled>Select Status</option>
-              <option value="pending">Pending</option>
-              <option value="completed">Completed</option>
-              <option value="canceled">Canceled</option>
-            </select>
           </>
         );
       default:
@@ -123,24 +108,18 @@ const AdminModal = ({ type, onClose, itemId = null, defaultValues = {} }) => {
   };
 
   return (
-    <div className="modal">
+    <div className="modal-overlay">
       <div className="modal-content">
         <h2>{itemId ? 'Edit' : 'Add'} {type}</h2>
         {error && <p className="error">{error}</p>}
         <form onSubmit={handleSubmit}>
           {renderFields()}
           <button type="submit">{itemId ? 'Update' : 'Add'} {type}</button>
-          <button type="button" onClick={onClose}>Cancel</button>
+          <button type="button" onClick={onClose}>
+            Cancel
+          </button>
         </form>
       </div>
-      <div
-        className="modal-overlay"
-        role="button"
-        tabIndex={0}
-        onClick={onClose}
-        onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && onClose()}
-        aria-label="Close Modal"
-      ></div>
     </div>
   );
 };
