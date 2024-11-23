@@ -1,69 +1,36 @@
-// backend/routes/users.js
 const express = require('express');
 const router = express.Router();
 const admin = require('firebase-admin');
 
-// Ensure Firestore is initialized
 const db = admin.firestore();
 
-// Get all users
-router.get('/', async (req, res) => {
-    try {
-        const users = [];
-        const listUsersResult = await admin.auth().listUsers();
-        
-        listUsersResult.users.forEach(user => {
-            users.push({
-                uid: user.uid,
-                email: user.email,
-                displayName: user.displayName,
-                // Add more fields as necessary
-            });
-        });
-
-        res.status(200).json(users);
-    } catch (error) {
-        console.error('Error fetching users:', error);
-        res.status(500).json({ error: 'Failed to fetch users.' });
-    }
-});
-
-// Get user by ID
-router.get('/:id', async (req, res) => {
-    const userId = req.params.id;
+// Middleware for role-based access
+const isAdmin = async (req, res, next) => {
+    const userId = req.headers['x-user-id'];
+    if (!userId) return res.status(401).json({ error: "Unauthorized access" });
 
     try {
-        const userRecord = await admin.auth().getUser(userId);
-        res.status(200).json({
-            uid: userRecord.uid,
-            email: userRecord.email,
-            displayName: userRecord.displayName,
-            // Add more fields as necessary
-        });
+        const user = await admin.auth().getUser(userId);
+        if (user.customClaims?.admin) {
+            next();
+        } else {
+            res.status(403).json({ error: "Forbidden: Admin access required" });
+        }
     } catch (error) {
-        console.error('Error fetching user:', error);
-        res.status(404).json({ error: 'User not found.' });
+        res.status(403).json({ error: "Invalid user credentials" });
     }
-});
-
-// Function to set custom claims
-const setUserRole = async (userId, isAdmin) => {
-    await admin.auth().setCustomUserClaims(userId, { isAdmin });
 };
 
-// Update user role (e.g., set custom claims)
-router.post('/:id/role', async (req, res) => {
+// Update user role
+router.post('/:id/role', isAdmin, async (req, res) => {
     const userId = req.params.id;
-    const { isAdmin } = req.body; // Expecting { isAdmin: true/false }
+    const { isAdmin } = req.body;
 
     try {
-        // Set the user's custom claims
-        await setUserRole(userId, isAdmin);
-        res.status(200).json({ message: 'User role updated successfully.' });
+        await admin.auth().setCustomUserClaims(userId, { admin: isAdmin });
+        res.status(200).json({ message: "User role updated successfully" });
     } catch (error) {
-        console.error('Error updating user role:', error);
-        res.status(500).json({ error: 'Failed to update user role.' });
+        console.error("Error updating user role:", error.message);
+        res.status(500).json({ error: "Failed to update user role" });
     }
 });
-
-module.exports = router;

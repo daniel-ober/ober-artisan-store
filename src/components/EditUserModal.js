@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { updateUserInFirestore } from '../services/userService'; // Import your update function
+import { updateUserInFirestore } from '../services/userService';
 import './EditUserModal.css';
 
 const EditUserModal = ({ user, onClose, onUserUpdated }) => {
@@ -8,9 +8,9 @@ const EditUserModal = ({ user, onClose, onUserUpdated }) => {
     lastName: '',
     email: '',
     phone: '',
-    smsNotification: false,
     emailNotification: false,
-    isBlocked: false,
+    smsNotification: false,
+    status: 'active', // Reflects account status
   });
 
   useEffect(() => {
@@ -20,9 +20,9 @@ const EditUserModal = ({ user, onClose, onUserUpdated }) => {
         lastName: user.lastName || '',
         email: user.email || '',
         phone: user.phone || '',
-        smsNotification: user.smsNotification || false,
         emailNotification: user.emailNotification || false,
-        isBlocked: user.isBlocked || false,
+        smsNotification: user.smsNotification || false,
+        status: user.status || 'active',
       });
     }
   }, [user]);
@@ -45,28 +45,40 @@ const EditUserModal = ({ user, onClose, onUserUpdated }) => {
 
     try {
       await updateUserInFirestore(user.id, formData);
-      onUserUpdated({ ...user, ...formData }); // Call the onUserUpdated function
-      onClose(); // Close the modal
+      onUserUpdated({ ...user, ...formData });
+      onClose();
     } catch (error) {
       console.error('Error saving user:', error);
-      alert('Failed to save user. Please try again.'); // Keep the existing error handling
+      alert('Failed to save user. Please try again.');
     }
   };
 
-  const handleKeyDown = (event) => {
-    if (event.key === 'Escape') {
-      onClose();
+  const handleCancel = () => {
+    onClose();
+  };
+
+  const handleDeactivateActivate = async () => {
+    const updatedStatus = formData.status === 'active' ? 'inactive' : 'active';
+    try {
+      await updateUserInFirestore(user.id, { status: updatedStatus });
+      setFormData((prev) => ({ ...prev, status: updatedStatus }));
+      onUserUpdated({ ...user, status: updatedStatus });
+    } catch (error) {
+      console.error('Error updating status:', error);
+      alert('Failed to update user status.');
     }
   };
 
   return (
     <>
-      <div 
-        className="modal-overlay" 
-        role="button" 
-        tabIndex={0} 
-        onClick={onClose} 
-        onKeyDown={handleKeyDown} 
+      <div
+        className="modal-overlay"
+        role="button"
+        tabIndex={0}
+        onClick={handleCancel}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') handleCancel();
+        }}
         aria-label="Close modal"
       />
       <div className="edit-user-modal" role="dialog" aria-labelledby="modal-title" aria-modal="true">
@@ -74,73 +86,87 @@ const EditUserModal = ({ user, onClose, onUserUpdated }) => {
         <div className="modal-content">
           <label>
             First Name:
-            <input 
-              type="text" 
-              name="firstName" // Adding name attribute for handling
-              value={formData.firstName} 
-              onChange={handleChange} 
-              required // Making it required for better UX
+            <input
+              type="text"
+              name="firstName"
+              value={formData.firstName}
+              onChange={handleChange}
+              required
             />
           </label>
           <label>
             Last Name:
-            <input 
-              type="text" 
-              name="lastName" // Adding name attribute for handling
-              value={formData.lastName} 
-              onChange={handleChange} 
-              required // Making it required for better UX
+            <input
+              type="text"
+              name="lastName"
+              value={formData.lastName}
+              onChange={handleChange}
+              required
             />
           </label>
           <label>
             Email:
-            <input 
-              type="email" 
-              name="email" // Adding name attribute for handling
-              value={formData.email} 
-              onChange={handleChange} 
-              required // Making it required for better UX
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              disabled // Email is non-editable
             />
           </label>
           <label>
             Phone:
-            <input 
-              type="text" 
-              name="phone" // Adding name attribute for handling
-              value={formData.phone} 
-              onChange={handleChange} 
+            <input
+              type="text"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
             />
           </label>
           <label>
             SMS Notifications:
-            <input 
-              type="checkbox" 
-              name="smsNotification" // Adding name attribute for handling
-              checked={formData.smsNotification} 
-              onChange={handleChange} 
+            <input
+              type="checkbox"
+              name="smsNotification"
+              checked={formData.smsNotification}
+              onChange={handleChange}
             />
           </label>
           <label>
             Email Notifications:
-            <input 
-              type="checkbox" 
-              name="emailNotification" // Adding name attribute for handling
-              checked={formData.emailNotification} 
-              onChange={handleChange} 
+            <input
+              type="checkbox"
+              name="emailNotification"
+              checked={formData.emailNotification}
+              onChange={handleChange}
             />
           </label>
           <label>
-            Is Blocked:
-            <input 
-              type="checkbox" 
-              name="isBlocked" // Adding name attribute for handling
-              checked={formData.isBlocked} 
-              onChange={handleChange} 
-            />
+            Status:
+            <select
+              name="status"
+              value={formData.status}
+              onChange={handleChange}
+              disabled
+            >
+              <option value="active">Active</option>
+              <option value="inactive">Inactive</option>
+            </select>
           </label>
         </div>
-        <button onClick={handleSave}>Save</button>
-        <button onClick={onClose}>Cancel</button>
+        <div className="modal-actions">
+          <button onClick={handleSave}>Save</button>
+          <button onClick={handleCancel}>Cancel</button>
+          <button
+            onClick={handleDeactivateActivate}
+            className={
+              formData.status === 'active' ? 'deactivate-button' : 'activate-button'
+            }
+          >
+            {formData.status === 'active' ? 'Deactivate' : 'Activate'}
+          </button>
+        </div>
       </div>
     </>
   );
