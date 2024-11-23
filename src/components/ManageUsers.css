@@ -1,47 +1,77 @@
-.manage-users-container {
+.manage-users {
   padding: 20px;
+  background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
 }
 
-.add-new-btn {
+.manage-users h2 {
+  font-size: 24px;
   margin-bottom: 20px;
-  padding: 10px 15px;
-  background-color: #28a745;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+}
+
+.search-bar {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
 
 .manage-users-table {
   width: 100%;
   border-collapse: collapse;
+  margin-bottom: 20px;
 }
 
 .manage-users-table th,
 .manage-users-table td {
   border: 1px solid #ddd;
-  padding: 10px;
+  padding: 12px;
   text-align: left;
 }
 
 .manage-users-table th {
-  background-color: #f4f4f4;
+  background-color: #f2f2f2;
+  font-weight: bold;
 }
 
-.edit-btn, .delete-btn {
-  padding: 5px 10px;
+.manage-users-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.manage-users-table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+.view-btn,
+.delete-btn {
+  padding: 8px 15px;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
+  font-size: 14px;
 }
 
-.edit-btn {
-  background-color: #007bff;
+.view-btn {
+  background-color: #3498db;
   color: white;
+}
+
+.view-btn:hover {
+  background-color: #2980b9;
 }
 
 .delete-btn {
-  background-color: #dc3545;
+  background-color: #e74c3c;
   color: white;
   margin-left: 10px;
+}
+
+.delete-btn:hover {
+  background-color: #c0392b;
+}
+
+.delete-btn:disabled {
+  background-color: #95a5a6;
+  cursor: not-allowed;
 }

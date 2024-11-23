@@ -1,7 +1,7 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore';
-import { useNavigate } from 'react-router-dom';
+import { doc, setDoc, updateDoc } from 'firebase/firestore';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { auth, db } from '../firebaseConfig'; // Assuming 'db' is your Firestore instance
 import {
   TextField,
@@ -23,7 +23,7 @@ import PrivacyPolicy from './PrivacyPolicy';
 import './Register.css';
 import printJS from 'print-js';
 
-const Register = ({ orderDetails }) => {
+const Register = () => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -41,6 +41,7 @@ const Register = ({ orderDetails }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate(); // Used for navigation after successful signup
+  const location = useLocation(); // Get the orderId from the navigation state
   const termsRef = useRef(null);
   const privacyRef = useRef(null);
 
@@ -103,12 +104,24 @@ const Register = ({ orderDetails }) => {
         createdAt: new Date(),
       };
 
-      // Store order details if they exist (checking if orderDetails is passed correctly)
-      if (orderDetails) {
-        userDocData.orderDetails = orderDetails; // Only add if orderDetails is present
+      // Retrieve guest order details from localStorage
+      const guestOrderDetails = JSON.parse(localStorage.getItem('guestOrderDetails'));
+
+      if (guestOrderDetails) {
+        // If the guestOrderDetails are available, add the orderId to the user profile
+        userDocData.orderId = guestOrderDetails.orderId;
+
+        // Retrieve the orderId and update the Firestore order with the new userId
+        const orderRef = doc(db, 'orders', guestOrderDetails.orderId);
+        await updateDoc(orderRef, {
+          userId: newUserCredential.user.uid,
+        });
+
+        // Clear the guest order details from localStorage
+        localStorage.removeItem('guestOrderDetails');
       }
 
-      // Store additional user information in Firestore
+      // Store user information in Firestore
       await setDoc(doc(db, 'users', uid), userDocData);
 
       setStatus('Registration successful!');

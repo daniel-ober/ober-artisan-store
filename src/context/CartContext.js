@@ -36,7 +36,23 @@ export const CartProvider = ({ children }) => {
         if (!user) localStorage.setItem('cart', JSON.stringify(cart));
     }, [cart, user]);
 
+    const validateCart = (product) => {
+        if (product.category === "artisan") {
+            const existingArtisan = Object.values(cart).find(
+                (item) => item.category === "artisan"
+            );
+
+            if (existingArtisan) {
+                setError(`You can only add one "${existingArtisan.name}" to the cart.`);
+                return false;
+            }
+        }
+        return true;
+    };
+
     const addToCart = async (product) => {
+        if (!validateCart(product)) return;
+
         const updatedCart = {
             ...cart,
             [product.id]: {
@@ -44,6 +60,7 @@ export const CartProvider = ({ children }) => {
                 quantity: (cart[product.id]?.quantity || 0) + 1,
             },
         };
+
         setCart(updatedCart);
 
         if (user) {
@@ -61,6 +78,7 @@ export const CartProvider = ({ children }) => {
             ...cart,
             [productId]: { ...cart[productId], quantity },
         };
+
         setCart(updatedCart);
 
         if (user) {
@@ -93,15 +111,32 @@ export const CartProvider = ({ children }) => {
         if (user) {
             try {
                 const cartRef = doc(db, 'carts', user.uid);
-                await setDoc(cartRef, { cart: {} });
+                await setDoc(cartRef, { cart: {} }); // Clear the cart in Firestore for the user
             } catch (err) {
                 setError('Error clearing cart.');
             }
+        } else {
+            localStorage.removeItem('cart'); // Remove cart from local storage for guest users
         }
     };
 
+    const clearCartOnCheckout = () => {
+        clearCart(); // Clear cart immediately after a successful checkout
+    };
+
     return (
-        <CartContext.Provider value={{ cart, loading, error, addToCart, updateQuantity, removeFromCart, clearCart }}>
+        <CartContext.Provider
+            value={{
+                cart,
+                loading,
+                error,
+                addToCart,
+                updateQuantity,
+                removeFromCart,
+                clearCart,
+                clearCartOnCheckout, // Expose the function to clear cart on checkout
+            }}
+        >
             {children}
         </CartContext.Provider>
     );
