@@ -3,6 +3,7 @@ import { db } from '../firebaseConfig';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
 import './SiteSettings.css';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { FaCartPlus } from 'react-icons/fa';
 
 const SiteSettings = () => {
   const [settings, setSettings] = useState({
@@ -75,6 +76,45 @@ const SiteSettings = () => {
   return (
     <div className="site-settings-container">
       <h1>Site Settings</h1>
+
+      {/* Navbar Preview */}
+      <div className="navbar-preview">
+        <h3>Preview Navbar (Non-Admin View):</h3>
+        <DragDropContext onDragEnd={handleDragEnd}>
+          <Droppable droppableId="navbar-preview" direction="horizontal">
+            {(provided) => (
+              <div
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+                className="navbar-preview-container"
+              >
+                {settings.navbarLinks
+                  .filter((link) => link.enabled)
+                  .map((link, index) => (
+                    <Draggable key={link.name} draggableId={link.name} index={index}>
+                      {(provided) => (
+                        <span
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          className="navbar-preview-tab"
+                        >
+                          {link.label}
+                        </span>
+                      )}
+                    </Draggable>
+                  ))}
+                <div className="navbar-preview-special">
+                  <span className="navbar-preview-tab">Sign In</span>
+                  <FaCartPlus className="nav-icon" />
+                </div>
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
+      </div>
+
       <form onSubmit={handleSubmit}>
         <h3>Navbar Links</h3>
         <DragDropContext onDragEnd={handleDragEnd}>
@@ -90,6 +130,7 @@ const SiteSettings = () => {
                         {...provided.dragHandleProps}
                         className="navbar-link-item"
                       >
+                        <span className="drag-indicator">⋮</span>
                         <label
                           htmlFor={`navbar-link-${link.name}`}
                           className="link-name"
@@ -121,14 +162,11 @@ const SiteSettings = () => {
         </button>
 
         <div className="settings-field maintenance-field">
-          <label htmlFor="maintenanceMode" className="maintenance-label">
-            Enter Maintenance Mode:
-          </label>
-          <label className="toggle-switch" htmlFor="maintenanceMode">
+          <label htmlFor="maintenanceMode">Enter Maintenance Mode:</label>
+          <label className="toggle-switch">
             <input
-              id="maintenanceMode"
               type="checkbox"
-              aria-labelledby="maintenanceModeLabel"
+              id="maintenanceMode"
               checked={settings.maintenanceMode}
               onChange={handleMaintenanceModeToggle}
             />
