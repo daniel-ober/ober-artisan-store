@@ -1,8 +1,7 @@
-// src/components/ManageUsers.js
 import React, { useEffect, useState } from 'react';
 import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
-import EditUserModal from './EditUserModal'; // Assuming you have this component
+import EditUserModal from './EditUserModal';
 
 const ManageUsers = () => {
   const [users, setUsers] = useState([]);
@@ -14,20 +13,23 @@ const ManageUsers = () => {
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const usersCollection = collection(db, 'users');
-      const userSnapshot = await getDocs(usersCollection);
-      const usersList = userSnapshot.docs.map((doc) => ({
-        id: doc.id,
-        email: doc.data().email || 'N/A',
-        firstName: doc.data().firstName || 'N/A',
-        lastName: doc.data().lastName || 'N/A',
-        phone: doc.data().phone || 'N/A',
-        status: doc.data().status || 'active',
-      }));
+      try {
+        const usersCollection = collection(db, 'users');
+        const userSnapshot = await getDocs(usersCollection);
+        const usersList = userSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          email: doc.data().email || 'N/A',
+          firstName: doc.data().firstName || 'N/A',
+          lastName: doc.data().lastName || 'N/A',
+          phone: doc.data().phone || 'N/A',
+          status: doc.data().status || 'active',
+        }));
 
-      usersList.sort((a, b) => a.email.localeCompare(b.email)); // Sort alphabetically by email
-      setUsers(usersList);
-      setFilteredUsers(usersList);
+        setUsers(usersList);
+        setFilteredUsers(usersList);
+      } catch (error) {
+        console.error('Error fetching users:', error);
+      }
     };
 
     fetchUsers();
@@ -56,7 +58,6 @@ const ManageUsers = () => {
 
   const handleDeleteUser = async (userId) => {
     setLoading(true);
-
     try {
       await deleteDoc(doc(db, 'users', userId));
       setUsers(users.filter((user) => user.id !== userId));

@@ -34,6 +34,7 @@ const ProductCard = ({ product }) => {
       <button 
         className="add-to-cart-button" 
         onClick={handleAddToCart}
+        aria-label="Add product to cart"
       >
         Add to Cart
       </button>
