@@ -113,7 +113,6 @@ const ProductDetail = () => {
                                 <>
                                     <button
                                         onClick={() => handleQuantityChange(-1)}
-                                        disabled={!inCart}
                                         aria-label="Decrease quantity"
                                     >
                                         -
@@ -121,7 +120,6 @@ const ProductDetail = () => {
                                     <span>{inCart.quantity}</span>
                                     <button
                                         onClick={() => handleQuantityChange(1)}
-                                        disabled={!inCart}
                                         aria-label="Increase quantity"
                                     >
                                         +
@@ -142,10 +140,11 @@ const ProductDetail = () => {
 
             {showModal && (
                 <div
-                    className={`modal ${showModal ? 'show' : ''}`} // Apply `show` class dynamically
+                    className="modal"
                     onClick={(e) => e.target === e.currentTarget && handleModalClose()}
-                    role="dialog"
-                    aria-labelledby="modalTitle"
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => (e.key === 'Escape' ? handleModalClose() : null)}
                 >
                     <div className="modal-content">
                         <button

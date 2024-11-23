@@ -1,18 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Footer.css'; // Import the CSS for styling
+import './Footer.css';
 
-const Footer = () => {
+const Footer = ({ navbarLinks }) => {
   return (
     <footer className="footer-container">
       <div className="footer-content">
         <div className="footer-section">
           <h2>Sitemap</h2>
           <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/products">Products</Link></li>
-            <li><Link to="/about">About</Link></li>
-            <li><Link to="/contact">Contact</Link></li>
+            {navbarLinks.map(
+              (link, index) =>
+                link.enabled && (
+                  <li key={index}>
+                    <Link to={`/${link.name.toLowerCase().replace(' ', '-')}`}>{link.label}</Link>
+                  </li>
+                )
+            )}
             <li><Link to="/privacy-policy">Privacy Policy</Link></li>
             <li><Link to="/terms-of-service">Terms of Service</Link></li>
             <li><Link to="/return-policy">Return Policy</Link></li>

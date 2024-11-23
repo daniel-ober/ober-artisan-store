@@ -2,15 +2,36 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaCartPlus, FaSignOutAlt, FaUserAlt, FaCog } from 'react-icons/fa';
 import { useAuth } from '../context/AuthContext';
+import { db } from '../firebaseConfig';
+import { doc, getDoc } from 'firebase/firestore';
 import './NavBar.css';
 
 const NavBar = () => {
+  const [navbarLinks, setNavbarLinks] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef(null);
   const buttonRef = useRef(null);
   const location = useLocation();
   const navigate = useNavigate();
   const { user, isAdmin, handleSignOut } = useAuth();
+
+  useEffect(() => {
+    const fetchNavbarLinks = async () => {
+      try {
+        const settingsDoc = doc(db, 'settings', 'site');
+        const snapshot = await getDoc(settingsDoc);
+        if (snapshot.exists()) {
+          setNavbarLinks(snapshot.data().navbarLinks || []);
+        } else {
+          console.error('Site settings document does not exist.');
+        }
+      } catch (error) {
+        console.error('Error fetching navbar links:', error);
+      }
+    };
+
+    fetchNavbarLinks();
+  }, []);
 
   const handleMenuToggle = () => {
     setIsMenuOpen((prev) => !prev);
@@ -23,12 +44,6 @@ const NavBar = () => {
       buttonRef.current &&
       !buttonRef.current.contains(event.target)
     ) {
-      setIsMenuOpen(false);
-    }
-  };
-
-  const handleLinkClick = (path) => {
-    if (path !== location.pathname) {
       setIsMenuOpen(false);
     }
   };
@@ -47,16 +62,8 @@ const NavBar = () => {
 
   return (
     <nav className="navbar">
-      <video
-        className="navbar-background"
-        autoPlay
-        loop
-        muted
-        playsInline
-        src={isMenuOpen ? "/background-mobile.mp4" : "/background-web.mp4"}
-      />
       <div className="navbar-logo">
-        <Link to="/" onClick={() => handleLinkClick('/')}>
+        <Link to="/">
           <img src="/ober-artisan-logo-large.png" alt="Logo" className="logo-img" />
         </Link>
       </div>
@@ -74,59 +81,27 @@ const NavBar = () => {
         />
       </button>
       <div className={`navbar-links ${isMenuOpen ? 'open' : ''}`} ref={menuRef}>
-        <Link
-          to="/"
-          className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}
-          onClick={() => handleLinkClick('/')}
-        >
-          Home
-        </Link>
-        <Link
-          to="/products"
-          className={`nav-link ${location.pathname === '/products' ? 'active' : ''}`}
-          onClick={() => handleLinkClick('/products')}
-        >
-          Shop/Gallery
-        </Link>
-        <Link
-          to="/about"
-          className={`nav-link ${location.pathname === '/about' ? 'active' : ''}`}
-          onClick={() => handleLinkClick('/about')}
-        >
-          About
-        </Link>
-        <Link
-          to="/contact"
-          className={`nav-link ${location.pathname === '/contact' ? 'active' : ''}`}
-          onClick={() => handleLinkClick('/contact')}
-        >
-          Contact
-        </Link>
-        <Link
-          to="/order-lookup"
-          className={`nav-link ${location.pathname === '/order-lookup' ? 'active' : ''}`}
-          onClick={() => handleLinkClick('/order-lookup')}
-        >
-          Order Lookup
-        </Link>
-
-        {user ? (
+        {navbarLinks.map(
+          (link, index) =>
+            link.enabled && (
+              <Link
+                key={index}
+                to={`/${link.name.toLowerCase().replace(' ', '-')}`}
+                className={`nav-link ${
+                  location.pathname === `/${link.name.toLowerCase().replace(' ', '-')}` ? 'active' : ''
+                }`}
+              >
+                {link.label}
+              </Link>
+            )
+        )}
+        {user && (
           <>
             {isAdmin && (
               <>
                 <Link
-                  to="/custom-shop-assistant"
-                  className={`nav-link ${
-                    location.pathname === '/custom-shop-assistant' ? 'active' : ''
-                  }`}
-                  onClick={() => handleLinkClick('/custom-shop-assistant')}
-                >
-                  ARTiSAN SUITE
-                </Link>
-                <Link
                   to="/admin"
                   className={`nav-link ${location.pathname === '/admin' ? 'active' : ''}`}
-                  onClick={() => handleLinkClick('/admin')}
                 >
                   <FaCog /> Admin
                 </Link>
@@ -135,7 +110,6 @@ const NavBar = () => {
             <Link
               to="/account"
               className={`nav-link ${location.pathname === '/account' ? 'active' : ''}`}
-              onClick={() => handleLinkClick('/account')}
             >
               <FaUserAlt /> Account
             </Link>
@@ -143,11 +117,11 @@ const NavBar = () => {
               <FaSignOutAlt /> Sign Out
             </button>
           </>
-        ) : (
+        )}
+        {!user && (
           <Link
             to="/signin"
             className={`nav-link ${location.pathname === '/signin' ? 'active' : ''}`}
-            onClick={() => handleLinkClick('/signin')}
           >
             Sign In
           </Link>
@@ -155,7 +129,6 @@ const NavBar = () => {
         <Link
           to="/cart"
           className={`nav-link ${location.pathname === '/cart' ? 'active' : ''}`}
-          onClick={() => handleLinkClick('/cart')}
         >
           <FaCartPlus /> Cart
         </Link>
@@ -165,3 +138,4 @@ const NavBar = () => {
 };
 
 export default NavBar;
+

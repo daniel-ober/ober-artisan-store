@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from './firebaseConfig';
 import NavBar from './components/NavBar';
 import Home from './components/Home';
 import Products from './components/Products';
+import PreOrderPage from './components/PreOrderPage';
 import About from './components/About';
 import Contact from './components/Contact';
 import Cart from './components/Cart';
@@ -14,7 +15,7 @@ import Checkout from './components/Checkout';
 import ProductDetail from './components/ProductDetail';
 import AccountPage from './components/AccountPage';
 import CheckoutSummary from './components/CheckoutSummary';
-import OrderLookup from './components/OrderLookup';
+import Gallery from './components/Gallery';
 import AdminDashboard from './components/AdminDashboard';
 import ManageUsers from './components/ManageUsers';
 import ManageProducts from './components/ManageProducts';
@@ -37,6 +38,7 @@ function App() {
   const [currentTab, setCurrentTab] = useState('Home');
   const [darkMode, setDarkMode] = useState(false);
   const [isMaintenanceMode, setIsMaintenanceMode] = useState(false);
+  const [navbarLinks, setNavbarLinks] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -45,10 +47,12 @@ function App() {
         const settingsDoc = doc(db, 'settings', 'site');
         const snapshot = await getDoc(settingsDoc);
         if (snapshot.exists()) {
-          setIsMaintenanceMode(snapshot.data().maintenanceMode || false);
+          const data = snapshot.data();
+          setIsMaintenanceMode(data.maintenanceMode || false);
+          setNavbarLinks(data.navbarLinks || []);
         }
       } catch (error) {
-        console.debug('Error fetching site settings:', error);
+        console.error('Error fetching site settings:', error);
       } finally {
         setLoading(false);
       }
@@ -63,6 +67,11 @@ function App() {
     document.body.classList.toggle('light', currentMode);
   };
 
+  const isLinkEnabled = (linkName) => {
+    const link = navbarLinks.find((l) => l.name.toLowerCase() === linkName.toLowerCase());
+    return link?.enabled || false;
+  };
+
   if (loading) return <div>Loading...</div>;
 
   if (isMaintenanceMode && !user?.isAdmin) return <MaintenancePage />;
@@ -72,6 +81,7 @@ function App() {
       <NavBar
         isAuthenticated={!!user}
         onSignOut={handleSignOut}
+        navbarLinks={navbarLinks}
         onTabChange={(tab) => setCurrentTab(tab)}
       />
       <button className="theme-toggle" onClick={toggleDarkMode}>
@@ -79,33 +89,42 @@ function App() {
       </button>
       <div className="app-content">
         <Routes>
+          {/* Public Routes */}
           <Route path="/" element={<Home />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/custom-shop-assistant" element={<CustomShopAssistant />} />
+          <Route path="/products" element={isLinkEnabled('Products') ? <Products /> : <Navigate to="/" />} />
+          <Route path="/pre-order" element={isLinkEnabled('Pre-Order') ? <PreOrderPage /> : <Navigate to="/" />} />
+          <Route path="/about" element={isLinkEnabled('About') ? <About /> : <Navigate to="/" />} />
+          <Route path="/contact" element={isLinkEnabled('Contact') ? <Contact /> : <Navigate to="/" />} />
+          <Route path="/cart" element={isLinkEnabled('Cart') ? <Cart /> : <Navigate to="/" />} />
+          <Route path="/gallery" element={isLinkEnabled('Gallery') ? <Gallery /> : <Navigate to="/" />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-of-service" element={<TermsOfService />} />
+          <Route path="/return-policy" element={<ReturnPolicy />} />
           <Route path="/signin" element={<SignInEmail />} />
           <Route path="/register" element={<Register />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/products/:id" element={<ProductDetail />} />
           <Route path="/checkout-summary" element={<CheckoutSummary />} />
-          <Route path="/order-lookup" element={<OrderLookup />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/terms-of-service" element={<TermsOfService />} />
-          <Route path="/return-policy" element={<ReturnPolicy />} />
           <Route path="*" element={<NotFound />} />
+
+          {/* Private Routes */}
           <Route path="/checkout" element={<PrivateRoute element={<Checkout />} />} />
           <Route path="/account" element={<PrivateRoute element={<AccountPage />} />} />
+
+          {/* Admin Routes */}
           <Route path="/admin" element={<PrivateRoute element={<AdminDashboard />} adminOnly />} />
           <Route path="/admin/users" element={<PrivateRoute element={<ManageUsers />} adminOnly />} />
           <Route path="/admin/products" element={<PrivateRoute element={<ManageProducts />} adminOnly />} />
           <Route path="/admin/orders" element={<PrivateRoute element={<ManageOrders />} adminOnly />} />
           <Route path="/admin/settings" element={<PrivateRoute element={<SiteSettings />} adminOnly />} />
+          <Route
+            path="/custom-shop-assistant"
+            element={isLinkEnabled('Custom Shop Assistant') ? <PrivateRoute element={<CustomShopAssistant />} /> : <Navigate to="/" />}
+          />
         </Routes>
       </div>
       <ChatSupportButton currentTab={currentTab} />
-      <Footer />
+      <Footer navbarLinks={navbarLinks} />
     </div>
   );
 }
