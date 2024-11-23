@@ -1,3 +1,4 @@
+// src/components/AdminDashboard.js
 import React, { useState } from 'react';
 import { FaUsers, FaTags, FaShoppingCart, FaChartLine, FaEnvelope, FaCog } from 'react-icons/fa';
 import ManageProducts from './ManageProducts';

@@ -1,3 +1,4 @@
+// src/components/ManageOrders.js
 import React, { useEffect, useState } from 'react';
 import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore'; // Add deleteDoc and doc for deletion
 import { db } from '../firebaseConfig'; // Ensure the correct path to firebaseConfig
