@@ -1,4 +1,3 @@
-// src/components/AdminDashboard.js
 import React, { useState } from 'react';
 import { FaUsers, FaTags, FaShoppingCart, FaChartLine, FaEnvelope, FaCog } from 'react-icons/fa';
 import ManageProducts from './ManageProducts';
@@ -6,139 +5,139 @@ import ManageUsers from './ManageUsers';
 import ManageOrders from './ManageOrders';
 import SalesPipeline from './SalesPipeline';
 import ManageInquiries from './ManageInquiries';
-import AdminSettings from './AdminSettings';
+import SiteSettings from './SiteSettings'; // Updated import to SiteSettings
 import AdminModal from './AdminModal';
 import './AdminDashboard.css';
 
 const AdminDashboard = () => {
-    const [activeComponent, setActiveComponent] = useState(null);
-    const [modalType, setModalType] = useState(null);
-    const [selectedProductId, setSelectedProductId] = useState(null);
+  const [activeComponent, setActiveComponent] = useState(null);
+  const [modalType, setModalType] = useState(null);
+  const [selectedProductId, setSelectedProductId] = useState(null);
 
-    const handleOpenModal = (type, productId = null) => {
-        setModalType(type);
-        setSelectedProductId(productId);
-    };
+  const handleOpenModal = (type, productId = null) => {
+    setModalType(type);
+    setSelectedProductId(productId);
+  };
 
-    const handleCloseModal = () => {
-        setModalType(null);
-        setSelectedProductId(null);
-    };
+  const handleCloseModal = () => {
+    setModalType(null);
+    setSelectedProductId(null);
+  };
 
-    const handleEditProduct = (productId) => {
-        handleOpenModal('product', productId);
-    };
+  const handleEditProduct = (productId) => {
+    handleOpenModal('product', productId);
+  };
 
-    const renderActiveComponent = () => {
-        switch (activeComponent) {
-            case 'manageProducts':
-                return <ManageProducts onEditProduct={handleEditProduct} />;
-            case 'manageUsers':
-                return <ManageUsers />;
-            case 'manageOrders':
-                return <ManageOrders />;
-            case 'salesPipeline':
-                return <SalesPipeline />;
-            case 'manageInquiries':
-                return <ManageInquiries />;
-            case 'adminSettings':
-                return <AdminSettings />;
-            default:
-                return <div>Select a management option above.</div>;
-        }
-    };
+  const renderActiveComponent = () => {
+    switch (activeComponent) {
+      case 'manageProducts':
+        return <ManageProducts onEditProduct={handleEditProduct} />;
+      case 'manageUsers':
+        return <ManageUsers />;
+      case 'manageOrders':
+        return <ManageOrders />;
+      case 'salesPipeline':
+        return <SalesPipeline />;
+      case 'manageInquiries':
+        return <ManageInquiries />;
+      case 'siteSettings': // Updated to SiteSettings
+        return <SiteSettings />;
+      default:
+        return <div>Select a management option above.</div>;
+    }
+  };
 
-    return (
-        <div className="admin-dashboard">
-            <h1>Admin Dashboard</h1>
-            <div className="admin-cards">
-                <div
-                    className="admin-card"
-                    role="button"
-                    tabIndex={0}
-                    onClick={() => setActiveComponent('manageUsers')}
-                    onKeyDown={(e) => e.key === 'Enter' && setActiveComponent('manageUsers')}
-                >
-                    <div className="admin-card-icon"><FaUsers /></div>
-                    <h3>Manage Users</h3>
-                </div>
-                <div
-                    className="admin-card"
-                    role="button"
-                    tabIndex={0}
-                    onClick={() => setActiveComponent('manageProducts')}
-                    onKeyDown={(e) => e.key === 'Enter' && setActiveComponent('manageProducts')}
-                >
-                    <div className="admin-card-icon"><FaTags /></div>
-                    <h3>Manage Products</h3>
-                </div>
-                <div
-                    className="admin-card"
-                    role="button"
-                    tabIndex={0}
-                    onClick={() => setActiveComponent('manageOrders')}
-                    onKeyDown={(e) => e.key === 'Enter' && setActiveComponent('manageOrders')}
-                >
-                    <div className="admin-card-icon"><FaShoppingCart /></div>
-                    <h3>Manage Orders</h3>
-                </div>
-                <div
-                    className="admin-card"
-                    role="button"
-                    tabIndex={0}
-                    onClick={() => setActiveComponent('salesPipeline')}
-                    onKeyDown={(e) => e.key === 'Enter' && setActiveComponent('salesPipeline')}
-                >
-                    <div className="admin-card-icon"><FaChartLine /></div>
-                    <h3>Sales Pipeline</h3>
-                </div>
-                <div
-                    className="admin-card"
-                    role="button"
-                    tabIndex={0}
-                    onClick={() => setActiveComponent('manageInquiries')}
-                    onKeyDown={(e) => e.key === 'Enter' && setActiveComponent('manageInquiries')}
-                >
-                    <div className="admin-card-icon"><FaEnvelope /></div>
-                    <h3>Manage Inquiries</h3>
-                </div>
-                <div
-                    className="admin-card"
-                    role="button"
-                    tabIndex={0}
-                    onClick={() => setActiveComponent('adminSettings')}
-                    onKeyDown={(e) => e.key === 'Enter' && setActiveComponent('adminSettings')}
-                >
-                    <div className="admin-card-icon"><FaCog /></div>
-                    <h3>Settings</h3>
-                </div>
-            </div>
-            <div className="action-buttons">
-                <button onClick={() => handleOpenModal('user')}>Add User</button>
-                <button onClick={() => handleOpenModal('product')}>Add Product</button>
-                <button onClick={() => handleOpenModal('order')}>Add Order</button>
-            </div>
-            <div className="component-container">
-                {renderActiveComponent()}
-                {modalType && (
-                    <>
-                        <div
-                            className="modal-overlay"
-                            role="button"
-                            tabIndex={0}
-                            onClick={handleCloseModal}
-                            onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && handleCloseModal()}
-                        />
-                        <AdminModal
-                            type={modalType}
-                            productId={selectedProductId}
-                            onClose={handleCloseModal}
-                        />
-                    </>
-                )}
-            </div>
+  return (
+    <div className="admin-dashboard">
+      <h1>Admin Dashboard</h1>
+      <div className="admin-cards">
+        <div
+          className="admin-card"
+          role="button"
+          tabIndex={0}
+          onClick={() => setActiveComponent('manageUsers')}
+          onKeyDown={(e) => e.key === 'Enter' && setActiveComponent('manageUsers')}
+        >
+          <div className="admin-card-icon"><FaUsers /></div>
+          <h3>Manage Users</h3>
         </div>
-    );
+        <div
+          className="admin-card"
+          role="button"
+          tabIndex={0}
+          onClick={() => setActiveComponent('manageProducts')}
+          onKeyDown={(e) => e.key === 'Enter' && setActiveComponent('manageProducts')}
+        >
+          <div className="admin-card-icon"><FaTags /></div>
+          <h3>Manage Products</h3>
+        </div>
+        <div
+          className="admin-card"
+          role="button"
+          tabIndex={0}
+          onClick={() => setActiveComponent('manageOrders')}
+          onKeyDown={(e) => e.key === 'Enter' && setActiveComponent('manageOrders')}
+        >
+          <div className="admin-card-icon"><FaShoppingCart /></div>
+          <h3>Manage Orders</h3>
+        </div>
+        <div
+          className="admin-card"
+          role="button"
+          tabIndex={0}
+          onClick={() => setActiveComponent('salesPipeline')}
+          onKeyDown={(e) => e.key === 'Enter' && setActiveComponent('salesPipeline')}
+        >
+          <div className="admin-card-icon"><FaChartLine /></div>
+          <h3>Sales Pipeline</h3>
+        </div>
+        <div
+          className="admin-card"
+          role="button"
+          tabIndex={0}
+          onClick={() => setActiveComponent('manageInquiries')}
+          onKeyDown={(e) => e.key === 'Enter' && setActiveComponent('manageInquiries')}
+        >
+          <div className="admin-card-icon"><FaEnvelope /></div>
+          <h3>Manage Inquiries</h3>
+        </div>
+        <div
+          className="admin-card"
+          role="button"
+          tabIndex={0}
+          onClick={() => setActiveComponent('siteSettings')} // Updated to SiteSettings
+          onKeyDown={(e) => e.key === 'Enter' && setActiveComponent('siteSettings')}
+        >
+          <div className="admin-card-icon"><FaCog /></div>
+          <h3>Settings</h3>
+        </div>
+      </div>
+      <div className="action-buttons">
+        <button onClick={() => handleOpenModal('user')}>Add User</button>
+        <button onClick={() => handleOpenModal('product')}>Add Product</button>
+        <button onClick={() => handleOpenModal('order')}>Add Order</button>
+      </div>
+      <div className="component-container">
+        {renderActiveComponent()}
+        {modalType && (
+          <>
+            <div
+              className="modal-overlay"
+              role="button"
+              tabIndex={0}
+              onClick={handleCloseModal}
+              onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && handleCloseModal()}
+            />
+            <AdminModal
+              type={modalType}
+              productId={selectedProductId}
+              onClose={handleCloseModal}
+            />
+          </>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default AdminDashboard;
