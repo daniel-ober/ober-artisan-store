@@ -3,7 +3,6 @@ import { db } from '../firebaseConfig';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
 import './SiteSettings.css';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { FaCartPlus } from 'react-icons/fa';
 
 const SiteSettings = () => {
   const [settings, setSettings] = useState({
@@ -40,11 +39,9 @@ const SiteSettings = () => {
 
   const handleDragEnd = (result) => {
     if (!result.destination) return;
-
     const reorderedLinks = Array.from(settings.navbarLinks);
     const [removed] = reorderedLinks.splice(result.source.index, 1);
     reorderedLinks.splice(result.destination.index, 0, removed);
-
     setSettings((prev) => ({
       ...prev,
       navbarLinks: reorderedLinks,
@@ -76,51 +73,16 @@ const SiteSettings = () => {
   return (
     <div className="site-settings-container">
       <h1>Site Settings</h1>
-
-      {/* Navbar Preview */}
-      <div className="navbar-preview">
-        <h3>Preview Navbar (Non-Admin View):</h3>
+      <form onSubmit={handleSubmit}>
+        <h3>Navbar Links</h3>
         <DragDropContext onDragEnd={handleDragEnd}>
-          <Droppable droppableId="navbar-preview" direction="horizontal">
+          <Droppable droppableId="navbar-links" direction="horizontal">
             {(provided) => (
               <div
                 ref={provided.innerRef}
                 {...provided.droppableProps}
-                className="navbar-preview-container"
+                className="navbar-preview"
               >
-                {settings.navbarLinks
-                  .filter((link) => link.enabled)
-                  .map((link, index) => (
-                    <Draggable key={link.name} draggableId={link.name} index={index}>
-                      {(provided) => (
-                        <span
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                          className="navbar-preview-tab"
-                        >
-                          {link.label}
-                        </span>
-                      )}
-                    </Draggable>
-                  ))}
-                <div className="navbar-preview-special">
-                  <span className="navbar-preview-tab">Sign In</span>
-                  <FaCartPlus className="nav-icon" />
-                </div>
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        </DragDropContext>
-      </div>
-
-      <form onSubmit={handleSubmit}>
-        <h3>Navbar Links</h3>
-        <DragDropContext onDragEnd={handleDragEnd}>
-          <Droppable droppableId="navbar-links">
-            {(provided) => (
-              <div ref={provided.innerRef} {...provided.droppableProps}>
                 {settings.navbarLinks.map((link, index) => (
                   <Draggable key={link.name} draggableId={link.name} index={index}>
                     {(provided) => (
@@ -130,15 +92,11 @@ const SiteSettings = () => {
                         {...provided.dragHandleProps}
                         className="navbar-link-item"
                       >
-                        <span className="drag-indicator">⋮</span>
+                        <span className="link-name">{link.label}</span>
                         <label
+                          className="toggle-switch"
                           htmlFor={`navbar-link-${link.name}`}
-                          className="link-name"
-                          id={`navbar-link-label-${link.name}`}
                         >
-                          {link.label}
-                        </label>
-                        <label className="toggle-switch" htmlFor={`navbar-link-${link.name}`}>
                           <input
                             id={`navbar-link-${link.name}`}
                             type="checkbox"
@@ -162,11 +120,17 @@ const SiteSettings = () => {
         </button>
 
         <div className="settings-field maintenance-field">
-          <label htmlFor="maintenanceMode">Enter Maintenance Mode:</label>
-          <label className="toggle-switch">
+          <label
+            htmlFor="maintenanceMode"
+            id="maintenance-mode-label"
+          >
+            Enter Maintenance Mode:
+          </label>
+          <label className="toggle-switch" htmlFor="maintenanceMode">
             <input
               type="checkbox"
               id="maintenanceMode"
+              aria-labelledby="maintenance-mode-label"
               checked={settings.maintenanceMode}
               onChange={handleMaintenanceModeToggle}
             />
