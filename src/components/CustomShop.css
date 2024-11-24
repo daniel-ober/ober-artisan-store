@@ -1,14 +1,113 @@
 .custom-shop {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px;
   text-align: center;
-  margin-top: 50px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .custom-shop h1 {
-  font-size: 36px;
+  font-size: 2.5rem;
   color: #333;
+  margin-bottom: 20px;
 }
 
 .custom-shop p {
-  font-size: 18px;
-  color: #777;
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+.steps-container {
+  margin-bottom: 30px;
+}
+
+.step {
+  margin: 20px 0;
+}
+
+.step h2 {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.step select,
+.step textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.1);
+  outline: none;
+}
+
+.step select:focus,
+.step textarea:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.additional-options {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.step-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.step-btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.step-btn:hover:enabled {
+  background-color: #0056b3;
+}
+
+.summary {
+  margin-top: 30px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.summary h3 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.summary ul {
+  text-align: left;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  max-width: 400px;
+}
+
+.summary ul li {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 10px;
 }
