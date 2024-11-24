@@ -62,6 +62,15 @@ const NavBar = () => {
 
   return (
     <nav className="navbar">
+      {/* Video Background */}
+      <video
+        className="navbar-background"
+        autoPlay
+        loop
+        muted
+        playsInline
+        src={isMenuOpen ? '/background-mobile.mp4' : '/background-web.mp4'}
+      />
       <div className="navbar-logo">
         <Link to="/">
           <img src="/ober-artisan-logo-large.png" alt="Logo" className="logo-img" />
@@ -138,4 +147,3 @@ const NavBar = () => {
 };
 
 export default NavBar;
-
