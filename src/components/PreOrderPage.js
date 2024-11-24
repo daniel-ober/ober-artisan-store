@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import { Link } from 'react-router-dom';
+import './PreOrderPage.css';
 
 const PreOrderPage = () => {
   const [preOrderItems, setPreOrderItems] = useState([]);
@@ -12,7 +13,7 @@ const PreOrderPage = () => {
       try {
         const preOrderQuery = query(
           collection(db, 'products'),
-          where('category', '==', 'pre-order')
+          where('isPreOrder', '==', true)
         );
         const querySnapshot = await getDocs(preOrderQuery);
         const items = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
@@ -28,30 +29,93 @@ const PreOrderPage = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading Pre-Order Items...</div>;
+    return <div className="loading">Loading Pre-Order Items...</div>;
   }
 
   return (
     <div className="pre-order-page">
-      <h1>Pre-Order Your Handcrafted Oaked Ember</h1>
-      <p>Limited quantities available. Reserve yours today!</p>
+      <h1>Pre-Order Your Handcrafted Drum</h1>
+      <p className="subtitle">Limited quantities available. Reserve yours today!</p>
 
-      {preOrderItems.length > 0 ? (
-        <div className="pre-order-items">
-          {preOrderItems.map((item) => (
+      <div className="pre-order-items">
+        {/* Dynamic pre-order items from Firebase */}
+        {preOrderItems.length > 0 &&
+          preOrderItems.map((item) => (
             <div key={item.id} className="pre-order-item">
-              <h2>{item.name}</h2>
-              <p>{item.description}</p>
-              <p>Price: ${item.price}</p>
-              <Link to={`/products/${item.id}`}>
-                <button>Pre-Order Now</button>
-              </Link>
+              <img src={item.imageUrl} alt={item.name} className="pre-order-image" />
+              <div className="pre-order-info">
+                <h2>{item.name}</h2>
+                <p>{item.description}</p>
+                <p className="price">Price: ${item.price}</p>
+                <Link to={`/products/${item.id}`}>
+                  <button className="pre-order-button">Pre-Order Now</button>
+                </Link>
+              </div>
             </div>
           ))}
+
+        {/* Sample Card: Oaked Ember Snare Drum */}
+        <div className="pre-order-item">
+          <img
+            src="https://via.placeholder.com/300x200"
+            alt="Oaked Ember Snare Drum"
+            className="pre-order-image"
+          />
+          <div className="pre-order-info">
+            <h2>Oaked Ember Snare Drum</h2>
+            <p>
+              Experience unmatched resonance and warmth with our handcrafted Oaked Ember snare drum,
+              crafted with precision and passion.
+            </p>
+            <p className="price">Price: $599</p>
+            <button className="pre-order-button" onClick={() => alert('This is a sample pre-order.')}>
+              Pre-Order Now
+            </button>
+          </div>
         </div>
-      ) : (
-        <p>No pre-order items available at the moment.</p>
-      )}
+
+        {/* ARTiSAN True Experience Card */}
+        <div className="pre-order-item">
+          <img
+            src="https://via.placeholder.com/300x200"
+            alt="ARTiSAN True Experience"
+            className="pre-order-image"
+          />
+          <div className="pre-order-info">
+            <h2>ARTiSAN True Experience</h2>
+            <p>
+              Work directly with our master craftsmen to design your custom drum. Choose from a wide
+              array of materials, finishes, and configurations to bring your dream drum to life.
+            </p>
+            <p className="price">Starting at $999</p>
+            <Link to="/custom-shop">
+              <button className="pre-order-button">Start Custom Order</button>
+            </Link>
+          </div>
+        </div>
+
+        {/* Placeholder Card for Future Drums */}
+        <div className="pre-order-item">
+          <img
+            src="https://via.placeholder.com/300x200"
+            alt="Future Pre-Order Item"
+            className="pre-order-image"
+          />
+          <div className="pre-order-info">
+            <h2>Coming Soon</h2>
+            <p>
+              Stay tuned for our next handcrafted creation. Sign up to be the first to know about
+              future releases!
+            </p>
+            <button
+              className="pre-order-button"
+              onClick={() => alert('Sign up to be notified about future releases!')}
+            >
+              Notify Me
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

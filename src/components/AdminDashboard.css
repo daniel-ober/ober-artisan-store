@@ -64,42 +64,6 @@
   overflow: auto;
 }
 
-/* Action buttons container */
-.action-buttons {
-  display: flex;
-  flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
-  justify-content: center; /* Center the buttons */
-  gap: 20px;
-  margin: 20px 0;
-  padding: 0 10px; /* Add padding to prevent overflow */
-  box-sizing: border-box; /* Include padding in size calculations */
-  max-width: 100%; /* Ensure buttons stay within the container */
-}
-
-/* Action button styling */
-.action-buttons button {
-  background-color: #007bff;
-  color: white;
-  padding: 12px 25px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
-}
-
-/* Button hover effect */
-.action-buttons button:hover {
-  background-color: #0056b3;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
-}
-
-/* Button active effect */
-.action-buttons button:active {
-  transform: scale(0.97);
-  box-shadow: none;
-}
-
 /* Mobile Responsive Adjustments */
 @media (max-width: 768px) {
   .admin-dashboard {
@@ -124,18 +88,6 @@
 
   .admin-card h3 {
     font-size: 1rem; /* Adjusted font size for readability */
-  }
-
-  .action-buttons {
-    flex-direction: column; /* Stack buttons vertically */
-    gap: 15px;
-    width: 100%; /* Ensure buttons fit within the screen width */
-  }
-
-  .action-buttons button {
-    width: 100%; /* Full-width buttons for mobile */
-    padding: 10px 20px;
-    font-size: 0.9rem;
   }
 
   .component-container {

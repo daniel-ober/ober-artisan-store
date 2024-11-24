@@ -1,14 +1,15 @@
-// src/components/ManageOrders.js
 import React, { useEffect, useState } from 'react';
-import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore'; // Add deleteDoc and doc for deletion
-import { db } from '../firebaseConfig'; // Ensure the correct path to firebaseConfig
-import ViewOrderModal from './ViewOrderModal'; // Import the modal component
+import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
+import { db } from '../firebaseConfig';
+import ViewOrderModal from './ViewOrderModal'; // Default export
+import AddOrderModal from './AddOrderModal'; // Default export
 
 const ManageOrders = () => {
   const [orders, setOrders] = useState([]);
-  const [selectedOrder, setSelectedOrder] = useState(null); // Track the selected order
-  const [isModalOpen, setIsModalOpen] = useState(false); // Track modal state
-  const [loading, setLoading] = useState(false); // Track loading state for deletion
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -18,11 +19,16 @@ const ManageOrders = () => {
         const data = doc.data();
         return {
           id: doc.id,
-          orderDate: data.timestamp ? new Date(data.timestamp).toLocaleString() : 'No date available',
+          orderDate: data.timestamp
+            ? new Date(data.timestamp).toLocaleString()
+            : 'No date available',
           customerName: data.customerName || 'No name available',
-          total: typeof data.totalAmount === 'number' ? data.totalAmount.toFixed(2) : 'N/A',
+          total:
+            typeof data.totalAmount === 'number'
+              ? data.totalAmount.toFixed(2)
+              : 'N/A',
           status: data.status || 'No status available',
-          ...data // Include all other order fields
+          ...data,
         };
       });
       setOrders(ordersList);
@@ -31,28 +37,21 @@ const ManageOrders = () => {
     fetchOrders();
   }, []);
 
-  // Function to open modal and set selected order
   const handleViewOrder = (order) => {
     setSelectedOrder(order);
     setIsModalOpen(true);
   };
 
-  // Function to close modal
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    setSelectedOrder(null); // Clear selected order
+    setSelectedOrder(null);
   };
 
-  // Function to delete an order
   const handleDeleteOrder = async (orderId) => {
-    setLoading(true); // Optional loading indicator
-
+    setLoading(true);
     try {
-      // Delete the order from Firestore
       await deleteDoc(doc(db, 'orders', orderId));
-
-      // Remove the order from the state
-      setOrders(orders.filter(order => order.id !== orderId));
+      setOrders(orders.filter((order) => order.id !== orderId));
     } catch (error) {
       console.error('Error deleting order:', error);
     } finally {
@@ -60,9 +59,20 @@ const ManageOrders = () => {
     }
   };
 
+  const handleAddOrder = () => {
+    setIsAddModalOpen(true);
+  };
+
+  const handleAddOrderClose = () => {
+    setIsAddModalOpen(false);
+  };
+
   return (
     <div className="manage-orders">
       <h2>Manage Orders</h2>
+      <button className="add-btn" onClick={handleAddOrder}>
+        Add Order
+      </button>
       <table className="manage-orders-table">
         <thead>
           <tr>
@@ -88,10 +98,17 @@ const ManageOrders = () => {
                 <td>${order.total}</td>
                 <td>{order.status}</td>
                 <td>
-                  {/* View button to open the modal */}
-                  <button className="view-btn" onClick={() => handleViewOrder(order)}>View</button>
-                  {/* Delete button to delete the order */}
-                  <button className="delete-btn" onClick={() => handleDeleteOrder(order.id)} disabled={loading}>
+                  <button
+                    className="view-btn"
+                    onClick={() => handleViewOrder(order)}
+                  >
+                    View
+                  </button>
+                  <button
+                    className="delete-btn"
+                    onClick={() => handleDeleteOrder(order.id)}
+                    disabled={loading}
+                  >
                     {loading ? 'Deleting...' : 'Delete'}
                   </button>
                 </td>
@@ -101,9 +118,17 @@ const ManageOrders = () => {
         </tbody>
       </table>
 
-      {/* Render ViewOrderModal if modal is open and an order is selected */}
       {isModalOpen && selectedOrder && (
         <ViewOrderModal order={selectedOrder} onClose={handleCloseModal} />
+      )}
+
+      {isAddModalOpen && (
+        <AddOrderModal
+          onClose={handleAddOrderClose}
+          onOrderAdded={(newOrder) => {
+            setOrders([newOrder, ...orders]);
+          }}
+        />
       )}
     </div>
   );

@@ -6,32 +6,15 @@ import ManageOrders from './ManageOrders';
 import SalesPipeline from './SalesPipeline';
 import ManageInquiries from './ManageInquiries';
 import SiteSettings from './SiteSettings'; // Updated import to SiteSettings
-import AdminModal from './AdminModal';
 import './AdminDashboard.css';
 
 const AdminDashboard = () => {
   const [activeComponent, setActiveComponent] = useState(null);
-  const [modalType, setModalType] = useState(null);
-  const [selectedProductId, setSelectedProductId] = useState(null);
-
-  const handleOpenModal = (type, productId = null) => {
-    setModalType(type);
-    setSelectedProductId(productId);
-  };
-
-  const handleCloseModal = () => {
-    setModalType(null);
-    setSelectedProductId(null);
-  };
-
-  const handleEditProduct = (productId) => {
-    handleOpenModal('product', productId);
-  };
 
   const renderActiveComponent = () => {
     switch (activeComponent) {
       case 'manageProducts':
-        return <ManageProducts onEditProduct={handleEditProduct} />;
+        return <ManageProducts />;
       case 'manageUsers':
         return <ManageUsers />;
       case 'manageOrders':
@@ -109,32 +92,11 @@ const AdminDashboard = () => {
           onKeyDown={(e) => e.key === 'Enter' && setActiveComponent('siteSettings')}
         >
           <div className="admin-card-icon"><FaCog /></div>
-          <h3>Settings</h3>
+          <h3>Site Settings</h3>
         </div>
-      </div>
-      <div className="action-buttons">
-        <button onClick={() => handleOpenModal('user')}>Add User</button>
-        <button onClick={() => handleOpenModal('product')}>Add Product</button>
-        <button onClick={() => handleOpenModal('order')}>Add Order</button>
       </div>
       <div className="component-container">
         {renderActiveComponent()}
-        {modalType && (
-          <>
-            <div
-              className="modal-overlay"
-              role="button"
-              tabIndex={0}
-              onClick={handleCloseModal}
-              onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && handleCloseModal()}
-            />
-            <AdminModal
-              type={modalType}
-              productId={selectedProductId}
-              onClose={handleCloseModal}
-            />
-          </>
-        )}
       </div>
     </div>
   );

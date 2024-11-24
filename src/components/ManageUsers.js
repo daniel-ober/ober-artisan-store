@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import EditUserModal from './EditUserModal';
+import AddUserModal from './AddUserModal'; // Import AddUserModal
 
 const ManageUsers = () => {
   const [users, setUsers] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false); // State for AddUserModal
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -48,11 +50,11 @@ const ManageUsers = () => {
 
   const handleViewUser = (user) => {
     setSelectedUser(user);
-    setIsModalOpen(true);
+    setIsEditModalOpen(true);
   };
 
   const handleCloseModal = () => {
-    setIsModalOpen(false);
+    setIsEditModalOpen(false);
     setSelectedUser(null);
   };
 
@@ -69,9 +71,20 @@ const ManageUsers = () => {
     }
   };
 
+  const handleAddUser = () => {
+    setIsAddModalOpen(true); // Open the AddUserModal
+  };
+
+  const handleAddUserClose = () => {
+    setIsAddModalOpen(false);
+  };
+
   return (
     <div className="manage-users">
       <h2>Manage Users</h2>
+      <button className="add-btn" onClick={handleAddUser}>
+        Add User
+      </button>
       <input
         type="text"
         placeholder="Search by email or last name"
@@ -124,7 +137,7 @@ const ManageUsers = () => {
         </tbody>
       </table>
 
-      {isModalOpen && selectedUser && (
+      {isEditModalOpen && selectedUser && (
         <EditUserModal
           user={selectedUser}
           onClose={handleCloseModal}
@@ -134,6 +147,16 @@ const ManageUsers = () => {
             );
             setUsers(updatedUsers);
             setFilteredUsers(updatedUsers);
+          }}
+        />
+      )}
+
+      {isAddModalOpen && (
+        <AddUserModal
+          onClose={handleAddUserClose}
+          onUserAdded={(newUser) => {
+            setUsers([newUser, ...users]);
+            setFilteredUsers([newUser, ...filteredUsers]);
           }}
         />
       )}

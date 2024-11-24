@@ -11,6 +11,13 @@
     margin-bottom: 20px;
   }
   
+  .subtitle {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 40px;
+  }
+  
   .product-list {
     display: flex;
     flex-wrap: wrap;
@@ -23,7 +30,7 @@
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    width: 280px;
+    width: 300px;
     transition: transform 0.3s ease;
   }
   
@@ -50,6 +57,18 @@
     color: #555;
   }
   
+  .faq-list {
+    margin: 10px 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .faq-list li {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 5px;
+  }
+  
   .price {
     font-weight: bold;
     color: #007bff;
@@ -70,5 +89,58 @@
   
   .pre-order-btn:hover {
     background-color: #0056b3;
+  }
+  
+  .custom-shop-form {
+    margin-top: 40px;
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .custom-shop-form h2 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+  }
+  
+  .custom-shop-form .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .custom-shop-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .custom-shop-form input,
+  .custom-shop-form select,
+  .custom-shop-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .custom-shop-form textarea {
+    resize: none;
+  }
+  
+  .custom-shop-form button {
+    width: 100%;
+    background: #007bff;
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  .custom-shop-form button:hover {
+    background: #0056b3;
   }
   
