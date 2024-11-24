@@ -15,15 +15,14 @@ const ViewOrderModal = ({ order, onClose }) => {
     internalNotes: false,
   });
 
-  // Local state to manage editable field values
   const [editableValues, setEditableValues] = useState({
-    customerName: order.customerName,
-    customerEmail: order.customerEmail,
-    customerPhone: order.customerPhone,
-    shippingAddress: order.shippingAddress,
-    billingAddress: order.billingAddress,
-    status: order.status,
-    internalNotes: order.internalNotes,
+    customerName: order.customerName || "N/A",
+    customerEmail: order.customerEmail || "N/A",
+    customerPhone: order.customerPhone || "N/A",
+    shippingAddress: order.shippingAddress || "N/A",
+    billingAddress: order.billingAddress || "N/A",
+    status: order.status || "N/A",
+    internalNotes: order.internalNotes || "No notes available.",
   });
 
   const handleEditToggle = (field) => {
@@ -90,12 +89,11 @@ const ViewOrderModal = ({ order, onClose }) => {
   };
 
   const handleEmail = () => {
-    // Functionality to email the order receipt
-    console.log(`Emailing order receipt to ${order.customerEmail}`);
-    // You can implement your emailing logic here
+    console.log(`Emailing order receipt to ${editableValues.customerEmail}`);
+    // Add logic for sending an email if necessary
   };
 
-  // Fallback to 0 if the value is undefined or not a number
+  // Ensure numeric values for financial calculations
   const subtotal = typeof order.subtotal === 'number' ? order.subtotal : 0;
   const taxes = typeof order.taxes === 'number' ? order.taxes : 0;
   const shipping = typeof order.shipping === 'number' ? order.shipping : 0;
@@ -111,7 +109,6 @@ const ViewOrderModal = ({ order, onClose }) => {
         <h2>Receipt Details</h2>
 
         <div className="modal-body">
-          {/* Customer Details Section */}
           <div className="customer-details">
             <h3>Customer Details</h3>
             {Object.keys(editableValues).slice(0, 5).map((field) => (
@@ -134,12 +131,9 @@ const ViewOrderModal = ({ order, onClose }) => {
             ))}
           </div>
 
-          {/* Order Details Section */}
           <div className="order-details-section">
             <h3>Order Details</h3>
-            <p>
-              <strong>Order ID:</strong> {order.id}
-            </p>
+            <p><strong>Order ID:</strong> {order.id}</p>
             <p>
               <strong>Status:</strong>
               {isEditing.status ? (
@@ -156,9 +150,7 @@ const ViewOrderModal = ({ order, onClose }) => {
                 </span>
               )}
             </p>
-            <p>
-              <strong>Order Date:</strong> {new Date(order.createdAt).toLocaleString()}
-            </p>
+            <p><strong>Order Date:</strong> {new Date(order.createdAt).toLocaleString()}</p>
             <h4>Items Ordered:</h4>
             <ul>
               {Array.isArray(order.items) && order.items.length > 0 ? (
@@ -197,7 +189,7 @@ const ViewOrderModal = ({ order, onClose }) => {
             <strong>Return Policy:</strong> Find our return policy <a href="http://localhost:3000/return-policy" target="_blank" rel="noopener noreferrer">here</a>.
           </p>
           <p>
-            <strong>Support:</strong> For support, contact us at <a href="mailto:support@danoberartisan.com">support@danoberartisan.com</a>.
+            <strong>Support:</strong> Contact us at <a href="mailto:support@danoberartisan.com">support@danoberartisan.com</a>.
           </p>
         </div>
 
