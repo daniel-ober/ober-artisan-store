@@ -72,7 +72,7 @@ const SiteSettings = () => {
         const linkRef = doc(navbarLinksCollection, link.id);
         await updateDoc(linkRef, { enabled: link.enabled, order: navbarLinks.indexOf(link) });
       });
-
+  
       setUnsavedChanges(false);
       setSnackbar({ open: true, message: 'Settings saved successfully!', severity: 'success' });
     } catch (error) {
@@ -80,6 +80,7 @@ const SiteSettings = () => {
       setSnackbar({ open: true, message: 'Error saving settings.', severity: 'error' });
     }
   };
+  
 
   return (
     <div className="site-settings-container">

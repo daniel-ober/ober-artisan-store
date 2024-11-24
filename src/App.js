@@ -60,8 +60,6 @@ function App() {
     const adminIP = process.env.REACT_APP_ADMIN_IP;
 
     const handleKeyPress = (event) => {
-      console.log('Key pressed:', event.key, event.ctrlKey, event.altKey);
-
       if (event.ctrlKey && event.altKey && event.key === 'ß') {
         fetch('https://api.ipify.org?format=json')
           .then((res) => res.json())
