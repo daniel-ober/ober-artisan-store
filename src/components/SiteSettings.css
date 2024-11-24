@@ -79,6 +79,11 @@
   border: 1px solid #ddd;
   border-radius: 5px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s;
+}
+
+.navbar-link-item:hover {
+  background-color: #f1f1f1;
 }
 
 .link-name {
@@ -160,6 +165,11 @@ input:checked + .slider:before {
 
 .settings-save-btn:hover {
   background-color: #0056b3;
+}
+
+.settings-save-btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
 }
 
 .maintenance-field {
