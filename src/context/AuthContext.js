@@ -8,44 +8,44 @@ const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [isAdmin, setIsAdmin] = useState(false);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
 
-    useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged(async (user) => {
-            setLoading(true);
-            if (user) {
-                setUser(user);
-                try {
-                    const userData = await fetchUserDoc(user.uid);
-                    setIsAdmin(userData?.isAdmin || false);
-                } catch (error) {
-                    console.error('Error fetching user data:', error);
-                }
-            } else {
-                setUser(null);
-                setIsAdmin(false);
-            }
-            setLoading(false);
-        });
-
-        return unsubscribe;
-    }, []);
-
-    const handleSignOut = async () => {
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(async (currentUser) => {
+      setLoading(true);
+      if (currentUser) {
+        setUser(currentUser);
         try {
-            await auth.signOut();
-            setUser(null);
-            setIsAdmin(false);
+          const userData = await fetchUserDoc(currentUser.uid);
+          setIsAdmin(userData?.isAdmin || false);
         } catch (error) {
-            console.error('Error signing out:', error);
+          console.error('Error fetching user data:', error);
         }
-    };
+      } else {
+        setUser(null);
+        setIsAdmin(false);
+      }
+      setLoading(false);
+    });
 
-    return (
-        <AuthContext.Provider value={{ user, isAdmin, loading, handleSignOut }}>
-            {!loading && children}
-        </AuthContext.Provider>
-    );
+    return () => unsubscribe();
+  }, []);
+
+  const handleSignOut = async () => {
+    try {
+      await auth.signOut();
+      setUser(null);
+      setIsAdmin(false);
+    } catch (error) {
+      console.error('Error signing out:', error);
+    }
+  };
+
+  return (
+    <AuthContext.Provider value={{ user, isAdmin, loading, handleSignOut }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
