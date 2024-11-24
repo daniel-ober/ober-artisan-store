@@ -29,7 +29,7 @@ const SignInEmail = () => {
       // Check if the user is active
       const userDoc = await fetchUserDoc(user.uid); // Ensure fetchUserDoc is correctly imported
       if (userDoc && userDoc.status === 'active') {
-        navigate('/products'); // Redirect to the shop page on successful login
+        navigate('/account'); // Redirect to the account page on successful login
       } else {
         setError('Your account is inactive. Please contact support.');
       }

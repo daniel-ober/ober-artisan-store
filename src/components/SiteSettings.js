@@ -14,13 +14,11 @@ const SiteSettings = () => {
   useEffect(() => {
     const fetchSettings = async () => {
       try {
-        // Fetch navbarLinks sub-collection
         const navbarLinksCollection = collection(db, 'settings', 'site', 'navbarLinks');
         const navbarLinksSnapshot = await getDocs(navbarLinksCollection);
         const navbarLinks = navbarLinksSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-        navbarLinks.sort((a, b) => b.enabled - a.enabled); // Enabled links first
+        navbarLinks.sort((a, b) => b.enabled - a.enabled);
 
-        // Fetch features sub-collection
         const featuresCollection = collection(db, 'settings', 'site', 'features');
         const featuresSnapshot = await getDocs(featuresCollection);
         const featuresData = {};
@@ -50,7 +48,7 @@ const SiteSettings = () => {
     const updatedLinks = navbarLinks.map((link) =>
       link.id === id ? { ...link, enabled: !link.enabled } : link
     );
-    updatedLinks.sort((a, b) => b.enabled - a.enabled); // Reprioritize enabled links at the top
+    updatedLinks.sort((a, b) => b.enabled - a.enabled);
     setNavbarLinks(updatedLinks);
     setUnsavedChanges(true);
   };
@@ -93,10 +91,12 @@ const SiteSettings = () => {
             <div key={key} className="feature-item">
               <span>{feature.label}</span>
               <label className="toggle-switch">
+                <span className="visually-hidden">Toggle {feature.label}</span>
                 <input
                   type="checkbox"
                   checked={feature.enabled}
                   onChange={() => handleToggleFeature(key)}
+                  id={`feature-${key}`}
                 />
                 <span className="slider"></span>
               </label>
@@ -106,15 +106,45 @@ const SiteSettings = () => {
 
         <h3>Navbar Links</h3>
         <div className="navbar-preview-container">
-          <div className="navbar-preview">
-            {navbarLinks.map((link) => link.enabled && <div key={link.id}>{link.label}</div>)}
-          </div>
+          <DragDropContext onDragEnd={handleDragEnd}>
+            <Droppable droppableId="navbar-preview" direction="horizontal">
+              {(provided) => (
+                <div
+                  className="navbar-preview"
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                >
+                  {navbarLinks
+                    .filter((link) => link.enabled)
+                    .map((link, index) => (
+                      <Draggable key={link.id} draggableId={link.id} index={index}>
+                        {(provided) => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            className="navbar-preview-item"
+                          >
+                            {link.label}
+                          </div>
+                        )}
+                      </Draggable>
+                    ))}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </DragDropContext>
         </div>
 
         <DragDropContext onDragEnd={handleDragEnd}>
           <Droppable droppableId="navbar-links">
             {(provided) => (
-              <div ref={provided.innerRef} {...provided.droppableProps} className="navbar-links-list">
+              <div
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+                className="navbar-links-list"
+              >
                 {navbarLinks.map((link, index) => (
                   <Draggable key={link.id} draggableId={link.id} index={index}>
                     {(provided) => (
@@ -126,8 +156,10 @@ const SiteSettings = () => {
                       >
                         <span className="drag-indicator">⋮</span>
                         <span className="link-name">{link.label}</span>
-                        <label className="toggle-switch">
+                        <label className="toggle-switch" htmlFor={`link-toggle-${link.id}`}>
+                          <span className="visually-hidden">Toggle {link.label}</span>
                           <input
+                            id={`link-toggle-${link.id}`}
                             type="checkbox"
                             checked={link.enabled}
                             onChange={() => handleToggleNavbarLink(link.id)}

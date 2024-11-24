@@ -1,0 +1,25 @@
+.admin-signin-container {
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .admin-signin-title {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .admin-signin-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .admin-signin-error {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+  }
+  
