@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
-import { doc, getDocs, collection } from 'firebase/firestore';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { getDocs, collection } from 'firebase/firestore';
 import { db } from './firebaseConfig';
 import NavBar from './components/NavBar';
+import Footer from './components/Footer';
 import Home from './components/Home';
 import Products from './components/Products';
 import PreOrderPage from './components/PreOrderPage';
@@ -22,24 +23,22 @@ import ManageProducts from './components/ManageProducts';
 import ManageOrders from './components/ManageOrders';
 import SiteSettings from './components/SiteSettings';
 import SignInEmail from './components/SignInEmail';
-import CustomShopAssistant from './components/CustomShopAssistant';
+import CustomShop from './components/CustomShop';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import TermsOfService from './components/TermsOfService';
 import ReturnPolicy from './components/ReturnPolicy';
 import MaintenancePage from './components/MaintenancePage';
-import Footer from './components/Footer';
 import NotFound from './components/NotFound';
 import PrivateRoute from './components/PrivateRoute';
 import { useAuth } from './context/AuthContext';
 import ChatSupportButton from './components/ChatSupportButton';
+import AdminSignin from './components/AdminSignin';
 
 function App() {
-  const { user, handleSignOut } = useAuth();
-  const [currentTab, setCurrentTab] = useState('Home');
-  const [darkMode, setDarkMode] = useState(false);
-  const [isMaintenanceMode, setIsMaintenanceMode] = useState(false);
+  const { user } = useAuth();
   const [navbarLinks, setNavbarLinks] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchSettings = async () => {
@@ -47,12 +46,6 @@ function App() {
         const navbarLinksCollection = collection(db, 'settings/site/navbarLinks');
         const navbarLinksSnapshot = await getDocs(navbarLinksCollection);
         const navbarLinks = navbarLinksSnapshot.docs.map((doc) => doc.data());
-
-        const featuresDoc = doc(db, 'settings/site/features');
-        const featuresSnapshot = await getDocs(featuresDoc);
-        const features = featuresSnapshot.docs.map((doc) => doc.data());
-
-        setIsMaintenanceMode(features?.maintenanceMode || false);
         setNavbarLinks(navbarLinks || []);
       } catch (error) {
         console.error('Error fetching site settings:', error);
@@ -63,51 +56,78 @@ function App() {
     fetchSettings();
   }, []);
 
-  const toggleDarkMode = () => {
-    const currentMode = darkMode;
-    setDarkMode(!currentMode);
-    document.body.classList.toggle('dark', !currentMode);
-    document.body.classList.toggle('light', currentMode);
-  };
+  useEffect(() => {
+    const adminIP = process.env.REACT_APP_ADMIN_IP;
 
-  const isLinkEnabled = (linkName) => {
-    const link = navbarLinks.find((l) => l.name.toLowerCase() === linkName.toLowerCase());
-    return link?.enabled || false;
-  };
+    const handleKeyPress = (event) => {
+      console.log('Key pressed:', event.key, event.ctrlKey, event.altKey);
+
+      if (event.ctrlKey && event.altKey && event.key === 'ß') {
+        fetch('https://api.ipify.org?format=json')
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.ip === adminIP) {
+              console.log('Admin keyboard shortcut triggered. Navigating to Admin Sign In page.');
+              navigate('/admin-signin');
+            } else {
+              console.warn('Unauthorized IP detected. Access denied.');
+            }
+          })
+          .catch((error) => console.error('Error fetching IP address:', error));
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress);
+    };
+  }, [navigate]);
 
   if (loading) return <div>Loading...</div>;
 
-  if (isMaintenanceMode && !user?.isAdmin) return <MaintenancePage />;
+  const isLinkEnabled = (linkName) => {
+    const link = navbarLinks.find((l) => l.name?.toLowerCase() === linkName.toLowerCase());
+    return link?.enabled || false;
+  };
 
   return (
     <div className="app-container">
-      <NavBar
-        isAuthenticated={!!user}
-        onSignOut={handleSignOut}
-        navbarLinks={navbarLinks}
-        onTabChange={(tab) => setCurrentTab(tab)}
-      />
-      <button className="theme-toggle" onClick={toggleDarkMode}>
-        Switch to {darkMode ? 'Light' : 'Dark'} Mode
-      </button>
+      <NavBar navbarLinks={navbarLinks} />
       <div className="app-content">
         <Routes>
-          {/* Public Routes */}
+          {/* Redirect `/home` to `/` */}
+          <Route path="/home" element={<Navigate to="/" replace />} />
           <Route path="/" element={<Home />} />
-          <Route path="/products" element={isLinkEnabled('Products') ? <Products /> : <Navigate to="/" />} />
-          <Route path="/pre-order" element={isLinkEnabled('Pre-Order') ? <PreOrderPage /> : <Navigate to="/" />} />
-          <Route path="/about" element={isLinkEnabled('About') ? <About /> : <Navigate to="/" />} />
-          <Route path="/contact" element={isLinkEnabled('Contact') ? <Contact /> : <Navigate to="/" />} />
-          <Route path="/cart" element={isLinkEnabled('Cart') ? <Cart /> : <Navigate to="/" />} />
-          <Route path="/gallery" element={isLinkEnabled('Gallery') ? <Gallery /> : <Navigate to="/" />} />
+          <Route path="/about" element={isLinkEnabled('about') ? <About /> : <NotFound />} />
+          <Route path="/cart" element={isLinkEnabled('cart') ? <Cart /> : <NotFound />} />
+          <Route path="/contact" element={isLinkEnabled('contact') ? <Contact /> : <NotFound />} />
+          <Route path="/gallery" element={isLinkEnabled('gallery') ? <Gallery /> : <NotFound />} />
+          <Route path="/pre-order" element={isLinkEnabled('pre-order') ? <PreOrderPage /> : <NotFound />} />
+          <Route path="/custom-shop" element={isLinkEnabled('custom-shop') ? <CustomShop /> : <NotFound />} />
+          <Route path="/products" element={isLinkEnabled('products') ? <Products /> : <NotFound />} />
+
+          {/* Authentication Routes */}
+          <Route
+            path="/signin"
+            element={isLinkEnabled('signin') ? <SignInEmail /> : <Navigate to="/" replace />}
+          />
+          <Route
+            path="/register"
+            element={isLinkEnabled('signin') ? <Register /> : <Navigate to="/" replace />}
+          />
+          <Route
+            path="/forgot-password"
+            element={isLinkEnabled('signin') ? <ForgotPassword /> : <Navigate to="/" replace />}
+          />
+
+          {/* Admin Signin Route */}
+          <Route path="/admin-signin" element={<AdminSignin />} />
+
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/return-policy" element={<ReturnPolicy />} />
-          <Route path="/signin" element={<SignInEmail />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/products/:id" element={<ProductDetail />} />
-          <Route path="/checkout-summary" element={<CheckoutSummary />} />
+          <Route path="/checkout-summary" element={isLinkEnabled('checkout-summary') ? <CheckoutSummary /> : <NotFound />} />
           <Route path="*" element={<NotFound />} />
 
           {/* Private Routes */}
@@ -120,13 +140,9 @@ function App() {
           <Route path="/admin/products" element={<PrivateRoute element={<ManageProducts />} adminOnly />} />
           <Route path="/admin/orders" element={<PrivateRoute element={<ManageOrders />} adminOnly />} />
           <Route path="/admin/settings" element={<PrivateRoute element={<SiteSettings />} adminOnly />} />
-          <Route
-            path="/custom-shop-assistant"
-            element={isLinkEnabled('Custom Shop Assistant') ? <PrivateRoute element={<CustomShopAssistant />} /> : <Navigate to="/" />}
-          />
         </Routes>
       </div>
-      <ChatSupportButton currentTab={currentTab} />
+      <ChatSupportButton />
       <Footer navbarLinks={navbarLinks} />
     </div>
   );
