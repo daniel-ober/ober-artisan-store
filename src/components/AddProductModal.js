@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { db } from '../firebaseConfig';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { uploadImage } from '../services/firebaseService'; // Ensure this function exists and works
-import { createStripeProduct } from '../services/stripeService';
+import { uploadImage } from '../services/firebaseService'; // Ensure this function exists
+import { createStripeProduct } from '../services/stripeService'; // Ensure this function is implemented
 import './AddProductModal.css';
 
 const AddProductModal = ({ onClose, onProductAdded }) => {
@@ -21,7 +21,10 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setNewProduct((prev) => ({ ...prev, [name]: name === 'price' ? parseFloat(value) || 0 : value }));
+    setNewProduct((prev) => ({
+      ...prev,
+      [name]: name === 'price' ? parseFloat(value) || 0 : value,
+    }));
   };
 
   const handleFileChange = (e) => {
@@ -48,14 +51,18 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
     setSuccessMessage('');
 
     try {
-      const uploadedImages = await Promise.all(imageFiles.map(uploadImage));
+      // Upload images to Firebase Storage
+      const uploadedImages = await Promise.all(imageFiles.map((file) => uploadImage(file, 'products')));
 
       const productData = { ...newProduct, images: uploadedImages };
+
+      // Create a product in Stripe
       const stripeProduct = await createStripeProduct(productData);
       if (!stripeProduct || !stripeProduct.id) {
         throw new Error('Failed to create Stripe product.');
       }
 
+      // Add product to Firestore
       const docRef = await addDoc(collection(db, 'products'), {
         ...productData,
         stripeProductId: stripeProduct.id,
@@ -65,6 +72,8 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
 
       setSuccessMessage('Product added successfully!');
       onProductAdded({ id: docRef.id, ...productData });
+
+      // Reset form
       setNewProduct({
         category: 'dreamfeather',
         description: '',
@@ -88,7 +97,6 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
         {error && <div className="error-message">{error}</div>}
         {successMessage && <div className="success-message">{successMessage}</div>}
         <form onSubmit={handleSubmit}>
-          {/* Form fields */}
           <div className="form-group">
             <label htmlFor="name">Name</label>
             <input
@@ -145,6 +153,13 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
             <label htmlFor="image-upload-input" style={{ cursor: 'pointer' }}>
               <span>Select Files</span>
             </label>
+          </div>
+          <div className="selected-images">
+            {imageFiles.map((file, index) => (
+              <div key={index} className="image-preview">
+                {file.name}
+              </div>
+            ))}
           </div>
           <button type="submit" disabled={isUploading}>
             {isUploading ? 'Adding...' : 'Add Product'}
