@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaCartPlus, FaSignOutAlt, FaUserAlt, FaCog } from 'react-icons/fa';
 import { useAuth } from '../context/AuthContext';
 import { db } from '../firebaseConfig';
-import { doc, getDoc } from 'firebase/firestore';
+import { collection, getDocs } from 'firebase/firestore';
 import './NavBar.css';
 
 const NavBar = () => {
@@ -18,13 +18,13 @@ const NavBar = () => {
   useEffect(() => {
     const fetchNavbarLinks = async () => {
       try {
-        const settingsDoc = doc(db, 'settings', 'site');
-        const snapshot = await getDoc(settingsDoc);
-        if (snapshot.exists()) {
-          setNavbarLinks(snapshot.data().navbarLinks || []);
-        } else {
-          console.error('Site settings document does not exist.');
-        }
+        const navbarLinksCollection = collection(db, 'settings/site/navbarLinks');
+        const navbarLinksSnapshot = await getDocs(navbarLinksCollection);
+        const navbarLinks = navbarLinksSnapshot.docs
+          .map((doc) => doc.data())
+          .filter((link) => link.enabled);
+
+        setNavbarLinks(navbarLinks);
       } catch (error) {
         console.error('Error fetching navbar links:', error);
       }
@@ -90,31 +90,31 @@ const NavBar = () => {
         />
       </button>
       <div className={`navbar-links ${isMenuOpen ? 'open' : ''}`} ref={menuRef}>
-        {navbarLinks.map(
-          (link, index) =>
-            link.enabled && (
-              <Link
-                key={index}
-                to={`/${link.name.toLowerCase().replace(' ', '-')}`}
-                className={`nav-link ${
-                  location.pathname === `/${link.name.toLowerCase().replace(' ', '-')}` ? 'active' : ''
-                }`}
-              >
-                {link.label}
-              </Link>
-            )
-        )}
+        {/* Render dynamic links from Firestore */}
+        {navbarLinks
+          .filter((link) => link.name.toLowerCase() !== 'signin' && link.name.toLowerCase() !== 'cart')
+          .map((link, index) => (
+            <Link
+              key={index}
+              to={`/${link.name.toLowerCase().replace(' ', '-')}`}
+              className={`nav-link ${
+                location.pathname === `/${link.name.toLowerCase().replace(' ', '-')}` ? 'active' : ''
+              }`}
+            >
+              {link.label}
+            </Link>
+          ))}
+
+        {/* Render user-specific links */}
         {user && (
           <>
             {isAdmin && (
-              <>
-                <Link
-                  to="/admin"
-                  className={`nav-link ${location.pathname === '/admin' ? 'active' : ''}`}
-                >
-                  <FaCog /> Admin
-                </Link>
-              </>
+              <Link
+                to="/admin"
+                className={`nav-link ${location.pathname === '/admin' ? 'active' : ''}`}
+              >
+                <FaCog /> Admin
+              </Link>
             )}
             <Link
               to="/account"
@@ -127,20 +127,25 @@ const NavBar = () => {
             </button>
           </>
         )}
-        {!user && (
+
+        {/* Conditionally render Sign In and Cart links based on Firestore settings */}
+        {!user &&
+          navbarLinks.some((link) => link.name.toLowerCase() === 'signin') && (
+            <Link
+              to="/signin"
+              className={`nav-link ${location.pathname === '/signin' ? 'active' : ''}`}
+            >
+              Sign In
+            </Link>
+          )}
+        {navbarLinks.some((link) => link.name.toLowerCase() === 'cart') && (
           <Link
-            to="/signin"
-            className={`nav-link ${location.pathname === '/signin' ? 'active' : ''}`}
+            to="/cart"
+            className={`nav-link ${location.pathname === '/cart' ? 'active' : ''}`}
           >
-            Sign In
+            <FaCartPlus /> Cart
           </Link>
         )}
-        <Link
-          to="/cart"
-          className={`nav-link ${location.pathname === '/cart' ? 'active' : ''}`}
-        >
-          <FaCartPlus /> Cart
-        </Link>
       </div>
     </nav>
   );

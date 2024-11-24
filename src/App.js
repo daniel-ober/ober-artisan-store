@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDocs, collection } from 'firebase/firestore';
 import { db } from './firebaseConfig';
 import NavBar from './components/NavBar';
 import Home from './components/Home';
@@ -44,13 +44,16 @@ function App() {
   useEffect(() => {
     const fetchSettings = async () => {
       try {
-        const settingsDoc = doc(db, 'settings', 'site');
-        const snapshot = await getDoc(settingsDoc);
-        if (snapshot.exists()) {
-          const data = snapshot.data();
-          setIsMaintenanceMode(data.maintenanceMode || false);
-          setNavbarLinks(data.navbarLinks || []);
-        }
+        const navbarLinksCollection = collection(db, 'settings/site/navbarLinks');
+        const navbarLinksSnapshot = await getDocs(navbarLinksCollection);
+        const navbarLinks = navbarLinksSnapshot.docs.map((doc) => doc.data());
+
+        const featuresDoc = doc(db, 'settings/site/features');
+        const featuresSnapshot = await getDocs(featuresDoc);
+        const features = featuresSnapshot.docs.map((doc) => doc.data());
+
+        setIsMaintenanceMode(features?.maintenanceMode || false);
+        setNavbarLinks(navbarLinks || []);
       } catch (error) {
         console.error('Error fetching site settings:', error);
       } finally {
