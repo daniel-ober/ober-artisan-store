@@ -1,11 +1,12 @@
 /* Main admin dashboard container */
 .admin-dashboard {
-  max-width: 1100px;
-  margin: 0 auto;
+  max-width: 1200px; /* Adjusted for better centering */
+  margin: 0 auto; /* Centers the container horizontally */
   padding: 25px;
   background-color: #f9f9f9;
   border-radius: 10px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  text-align: center; /* Ensures text and components are centered */
   overflow: hidden; /* Prevent content overflow */
 }
 
@@ -13,8 +14,10 @@
 .admin-cards {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: center; /* Centers cards horizontally */
+  align-items: center; /* Centers cards vertically */
   gap: 25px;
+  padding-top: 20px; /* Adds spacing above the cards */
 }
 
 /* Individual card styling */
@@ -64,6 +67,22 @@
   overflow: auto;
 }
 
+/* Center logo styling */
+.navbar-logo img {
+  display: block;
+  margin: 0 auto;
+  max-width: 150px; /* Adjust based on your logo dimensions */
+  height: auto;
+}
+
+/* Center heading */
+h1 {
+  font-size: 2rem;
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
 /* Mobile Responsive Adjustments */
 @media (max-width: 768px) {
   .admin-dashboard {
@@ -74,6 +93,7 @@
   .admin-cards {
     flex-direction: column; /* Stack cards vertically */
     gap: 20px;
+    align-items: center; /* Ensures cards are centered */
   }
 
   .admin-card {
@@ -109,4 +129,17 @@
     min-width: 180px; /* Adjust card size for tablets */
     max-width: 220px;
   }
+}
+
+/* Add padding and spacing adjustments */
+.admin-dashboard h1 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 2.5rem;
+  color: #333;
+}
+
+.admin-dashboard .admin-cards {
+  margin: 0 auto;
+  padding-top: 20px;
 }
