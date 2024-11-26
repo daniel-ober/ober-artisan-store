@@ -32,7 +32,7 @@ const CustomShop = () => {
     return (
         <div className="custom-shop">
             <h1>Custom Shop: Build Your Dream Drum</h1>
-            <p>Create a drum that's as unique as your music with our custom shop experience.</p>
+            <p>Create a drum that&apos;s as unique as your music with our custom shop experience.</p>
 
             <div className="steps-container">
                 {step === 1 && (
