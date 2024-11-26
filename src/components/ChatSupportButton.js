@@ -1,24 +1,31 @@
-// src/components/ChatSupportButton.js
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComments } from '@fortawesome/free-solid-svg-icons';
-import ChatSupportWindow from './ChatSupportWindow';
+import { faLightbulb } from '@fortawesome/free-solid-svg-icons'; // Use lightbulb icon
+import FAQSearchModal from './FAQSearchModal'; // Ensure default import
+import ChatSupportWindow from './ChatSupportWindow'; // Ensure default import
 import './ChatSupportButton.css';
-import preloadedQuestions from '../data/preloadedquestions'; // Import preloaded questions
+import preloadedQuestions from '../data/preloadedquestions'; // Import FAQs
 
-const ChatSupportButton = React.memo(({ currentTab }) => {
+const ChatSupportButton = React.memo(() => {
+  const [faqOpen, setFaqOpen] = useState(false);
   const [chatOpen, setChatOpen] = useState(false);
-  const [isMaximized, setIsMaximized] = useState(false);
   const [messages, setMessages] = useState([]);
 
-  const toggleChat = () => {
-    setChatOpen((prev) => !prev);
-    if (isMaximized) setIsMaximized(false);
+  const openFAQ = () => setFaqOpen(true);
+  const closeFAQ = () => setFaqOpen(false);
+  const openChat = () => {
+    setFaqOpen(false);
+    setChatOpen(true);
   };
+  const closeChat = () => setChatOpen(false);
 
-  const toggleMaximize = () => {
-    setIsMaximized((prevState) => !prevState);
-  };
+  // Transform preloadedQuestions into an array of FAQs
+  const faqArray = Object.entries(preloadedQuestions).flatMap(([section, questions]) =>
+    questions.map((faq) => ({
+      ...faq,
+      section, // Include the section (e.g., "home", "about") for context if needed
+    }))
+  );
 
   const sendMessage = async (messageContent) => {
     const content = messageContent?.trim();
@@ -26,95 +33,59 @@ const ChatSupportButton = React.memo(({ currentTab }) => {
       console.error('Cannot send an empty message.');
       return;
     }
-  
-    const userMessage = {
-      role: 'user',
-      content,
-      timestamp: new Date().toISOString(),
-    };
+
+    const userMessage = { role: 'user', content, timestamp: new Date().toISOString() };
     setMessages((prevMessages) => [...prevMessages, userMessage]);
-  
+
     try {
-      console.log('Sending message:', userMessage);
-  
-      // Call the backend API for assistant response
       const response = await fetch('http://localhost:4949/api/chat', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           messages: [
-            {
-              role: 'system',
-              content: `
-                You are Oakli, the assistant for Dan Ober Artisan Drums. 
-                Your primary goal is to provide short, concise, and helpful answers (1-3 sentences) 
-                to user questions about Dan Ober's handcrafted drums. Avoid unnecessary details and 
-                focus on delivering clear, actionable information.
-              `,
-            },
+            { role: 'system', content: '...', },
             ...messages,
             userMessage,
           ],
         }),
       });
-  
+
       if (!response.ok) {
-        throw new Error(`Error: ${response.status} ${response.statusText}`);
+        throw new Error('Error: Chat assistant API call failed.');
       }
-  
+
       const data = await response.json();
       const assistantMessage = {
         role: 'assistant',
-        content: data?.content || 'No response from assistant.',
+        content: data?.content || 'No response.',
         timestamp: new Date().toISOString(),
       };
-  
       setMessages((prevMessages) => [...prevMessages, assistantMessage]);
     } catch (error) {
-      console.error('Error sending message:', error.message || error);
-  
-      // Fallback response
+      console.error('Error sending message:', error.message);
       setMessages((prevMessages) => [
         ...prevMessages,
-        {
-          role: 'assistant',
-          content:
-            "Sorry, I'm having trouble processing your request. Please try again later or refer to our FAQs.",
-        },
+        { role: 'assistant', content: 'Sorry, I couldn’t process your request.' },
       ]);
     }
   };
-  
-
-  useEffect(() => {
-    console.log('Current Tab changed to:', currentTab);
-  }, [currentTab]);
 
   return (
     <>
-      <button onClick={toggleChat} className="chat-button">
-        <FontAwesomeIcon icon={faComments} />
+      <button onClick={openFAQ} className="faq-button enhanced">
+        <FontAwesomeIcon icon={faLightbulb} />
       </button>
 
+      {faqOpen && (
+        <FAQSearchModal faqs={faqArray} onChatRequest={openChat} onClose={closeFAQ} />
+      )}
+
       {chatOpen && (
-        <div className={`chat-window ${isMaximized ? 'maximized' : ''}`}>
-          <ChatSupportWindow
-            currentTab={currentTab}
-            messages={messages}
-            sendMessage={sendMessage}
-            toggleMaximize={toggleMaximize}
-            isMaximized={isMaximized}
-            toggleChat={toggleChat}
-          />
-        </div>
+        <ChatSupportWindow messages={messages} sendMessage={sendMessage} onClose={closeChat} />
       )}
     </>
   );
 });
 
-// Assign a display name for easier debugging
 ChatSupportButton.displayName = 'ChatSupportButton';
-
 export default ChatSupportButton;
