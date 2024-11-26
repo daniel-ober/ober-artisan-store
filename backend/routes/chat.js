@@ -1,14 +1,13 @@
-// backend/routes/chat.js
 const express = require('express');
 const router = express.Router();
-const OpenAI = require('openai');
+const { OpenAI } = require('openai');
 
-// OpenAI initialization
+// Initialize OpenAI with your API key
 const openai = new OpenAI({
-    apiKey: process.env.REACT_APP_OPENAI_API_KEY,
+    apiKey: process.env.OPENAI_API_KEY, // Ensure this matches the `.env` variable
 });
 
-// Route to handle chat
+// Route to handle chat requests
 router.post('/', async (req, res) => {
     const { messages } = req.body;
 
@@ -19,9 +18,9 @@ router.post('/', async (req, res) => {
     }
 
     try {
+        // Correct method for generating chat completions
         const response = await openai.chat.completions.create({
             model: 'gpt-3.5-turbo',
-            assistant: 'asst_7gkLO2QlEEZSOMieg1JlWlgH', // Specify the assistant ID
             messages: [
                 {
                     role: 'system',
@@ -36,15 +35,13 @@ router.post('/', async (req, res) => {
             ],
         });
 
-        console.log('Full OpenAI API Response:', response);
+        console.log('Full OpenAI API Response:', JSON.stringify(response, null, 2));
 
-        // Extract the assistant's message
-        const assistantMessage = response.choices?.[0]?.message || {
+        // Extract and send the assistant's message
+        const assistantMessage = response.choices[0]?.message || {
             role: 'assistant',
             content: 'I am sorry, I could not process your request.',
         };
-
-        console.log('Assistant Message:', assistantMessage);
 
         res.json(assistantMessage);
     } catch (error) {

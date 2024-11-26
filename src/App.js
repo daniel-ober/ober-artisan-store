@@ -31,7 +31,9 @@ import MaintenancePage from './components/MaintenancePage';
 import NotFound from './components/NotFound';
 import PrivateRoute from './components/PrivateRoute';
 import { useAuth } from './context/AuthContext';
-import ChatSupportButton from './components/ChatSupportButton';
+import SupportButton from './components/SupportButton';
+import SupportModal from './components/SupportModal'; // FAQ Modal
+import SupportChatModal from './components/SupportChatModal'; // Chat Modal
 import AdminSignin from './components/AdminSignin';
 
 function App() {
@@ -39,6 +41,9 @@ function App() {
   const [navbarLinks, setNavbarLinks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentTab, setCurrentTab] = useState('Home'); // Track the current tab
+  const [supportModalOpen, setSupportModalOpen] = useState(false); // Control Support modal state
+  const [chatOpen, setChatOpen] = useState(false); // Control chat modal state
+  const [selectedCategory, setSelectedCategory] = useState(null); // Track selected category
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -120,7 +125,6 @@ function App() {
       <NavBar navbarLinks={navbarLinks} />
       <div className="app-content">
         <Routes>
-          {/* Redirect `/home` to `/` */}
           <Route path="/home" element={<Navigate to="/" replace />} />
           <Route path="/" element={<Home />} />
           <Route path="/about" element={isLinkEnabled('about') ? <About /> : <NotFound />} />
@@ -167,8 +171,27 @@ function App() {
           <Route path="/admin/settings" element={<PrivateRoute element={<SiteSettings />} adminOnly />} />
         </Routes>
       </div>
-      <ChatSupportButton currentTab={currentTab} />
-      <Footer navbarLinks={navbarLinks} />
+
+      {/* Support Button */}
+      <SupportButton onClick={() => setSupportModalOpen(true)} />
+
+      {/* Support Modal */}
+      {supportModalOpen && (
+        <SupportModal
+          onClose={() => setSupportModalOpen(false)}
+          onCategorySelect={(category) => {
+            setSelectedCategory(category);
+            setChatOpen(false); // Reset chat state when selecting a category
+          }}
+          selectedCategory={selectedCategory}
+          onChatOpen={() => setChatOpen(true)}
+        />
+      )}
+
+      {/* Chat Modal */}
+      {chatOpen && <SupportChatModal onClose={() => setChatOpen(false)} />}
+      
+      <Footer />
     </div>
   );
 }

@@ -1,10 +1,8 @@
-// backend/server.js
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const admin = require('firebase-admin');
-const chatRoute = require('./routes/chat'); // Import OpenAI chat route
 
 // Firebase Admin Initialization
 if (!admin.apps.length) {
@@ -136,7 +134,8 @@ app.post('/api/create-checkout-session', async (req, res) => {
 });
 
 // Mount OpenAI Chat Route
-app.use('/api/chat', chatRoute);
+const chatRoute = require('./routes/chat'); // Import OpenAI chat route
+app.use('/api/chat', chatRoute); // Mount the chat route
 
 // Server Listener
 const PORT = process.env.PORT || 4949;
