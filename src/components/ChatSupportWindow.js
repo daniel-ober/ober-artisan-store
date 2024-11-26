@@ -1,70 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import './ChatSupportWindow.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faWindowMaximize,
-  faWindowRestore,
-  faTimes,
-} from '@fortawesome/free-solid-svg-icons';
-import preloadedQuestions from '../data/preloadedquestions'; // Import the questions
+import { faWindowMaximize, faWindowRestore, faTimes, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
-function ChatSupportWindow({
-  currentTab,
-  messages,
-  sendMessage,
-  toggleMaximize,
-  isMaximized,
-  toggleChat,
-}) {
+const ChatSupportWindow = ({ messages, sendMessage, onClose, onBack }) => {
   const [input, setInput] = useState('');
-  const [preloadedQuestionsList, setPreloadedQuestionsList] = useState([]);
-  const [error, setError] = useState('');
+  const [showIntro, setShowIntro] = useState(true);
 
   useEffect(() => {
-    console.log('ChatSupportWindow - Current Tab:', currentTab);
-
-    const normalizedTab = currentTab?.toLowerCase(); // Normalize the currentTab to lowercase
-    if (normalizedTab && preloadedQuestions[normalizedTab]) {
-      setPreloadedQuestionsList(preloadedQuestions[normalizedTab]);
-      console.log(
-        'Preloaded Questions List:',
-        preloadedQuestions[normalizedTab]
+    // Show Oakli's intro message on load
+    if (showIntro && messages.length === 0) {
+      sendMessage(
+        "Hi! I'm Oakli, your chat assistant. I can help answer questions about products, services, and more. If I can't find what you're looking for, I'll let you know how to get further assistance!"
       );
-    } else {
-      console.log('No preloaded questions available for this tab:', currentTab);
-      setPreloadedQuestionsList([]);
+      setShowIntro(false);
     }
-  }, [currentTab]);
+  }, [showIntro, messages, sendMessage]);
 
-  const handleSend = async () => {
+  const handleSend = () => {
     if (input.trim()) {
-      try {
-        await sendMessage(input);
-        setInput('');
-        setError('');
-      } catch (error) {
-        console.error('Error sending message:', error);
-        setError(
-          'There was an issue sending your message. Please try again later.'
-        );
-      }
+      sendMessage(input);
+      setInput('');
     }
   };
 
   return (
     <div className="chat-support-window">
       <div className="chat-header">
-        <div className="chat-intro">
-          Hi! My name is Oakli, Dan Ober’s chat assistant. I can help you with
-          questions about products, availability, and more!
-        </div>
-        <div className="chat-header-icons">
+        {onBack && (
           <FontAwesomeIcon
-            icon={isMaximized ? faWindowRestore : faWindowMaximize}
-            onClick={toggleMaximize}
+            icon={faArrowLeft}
+            className="back-icon"
+            onClick={onBack}
           />
-          <FontAwesomeIcon icon={faTimes} onClick={toggleChat} />
-        </div>
+        )}
+        <div>Chat with Oakli</div>
+        <FontAwesomeIcon icon={faTimes} className="close-icon" onClick={onClose} />
       </div>
 
       <div className="chat-messages">
@@ -75,35 +46,17 @@ function ChatSupportWindow({
         ))}
       </div>
 
-      <div className="preloaded-questions">
-        {preloadedQuestionsList.length > 0 ? (
-          preloadedQuestionsList.map((item, index) => (
-            <button
-              key={index}
-              className="preloaded-question"
-              onClick={() => sendMessage(item.question)}
-            >
-              {item.question}
-            </button>
-          ))
-        ) : (
-          <div>No preloaded questions available for this section.</div>
-        )}
-      </div>
-
       <div className="chat-input-container">
         <input
           type="text"
+          placeholder="Type your message..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Type your message..."
         />
         <button onClick={handleSend}>Send</button>
       </div>
-
-      {error && <div className="error-message">{error}</div>}
     </div>
   );
-}
+};
 
 export default ChatSupportWindow;
