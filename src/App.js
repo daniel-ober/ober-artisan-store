@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import { getDocs, collection } from 'firebase/firestore';
 import { db } from './firebaseConfig';
 import NavBar from './components/NavBar';
@@ -38,7 +38,34 @@ function App() {
   const { user } = useAuth();
   const [navbarLinks, setNavbarLinks] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [currentTab, setCurrentTab] = useState('Home'); // Track the current tab
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Map routes to tab names
+  const routeToTabMap = {
+    '/': 'Home',
+    '/about': 'About',
+    '/cart': 'Cart',
+    '/contact': 'Contact',
+    '/gallery': 'Gallery',
+    '/pre-order': 'PreOrder',
+    '/custom-shop': 'CustomShop',
+    '/products': 'Products',
+    '/signin': 'SignIn',
+    '/register': 'Register',
+    '/forgot-password': 'ForgotPassword',
+    '/checkout': 'Checkout',
+    '/account': 'Account',
+    '/admin': 'Admin',
+  };
+
+  // Update the current tab based on the route
+  useEffect(() => {
+    const activeTab = routeToTabMap[location.pathname] || 'NotFound';
+    setCurrentTab(activeTab);
+    console.log(`Current Tab changed to: ${activeTab}`);
+  }, [location]);
 
   useEffect(() => {
     const fetchSettings = async () => {
@@ -81,12 +108,12 @@ function App() {
     };
   }, [navigate]);
 
-  if (loading) return <div>Loading...</div>;
-
   const isLinkEnabled = (linkName) => {
     const link = navbarLinks.find((l) => l.name?.toLowerCase() === linkName.toLowerCase());
     return link?.enabled || false;
   };
+
+  if (loading) return <div>Loading...</div>;
 
   return (
     <div className="app-container">
@@ -140,7 +167,7 @@ function App() {
           <Route path="/admin/settings" element={<PrivateRoute element={<SiteSettings />} adminOnly />} />
         </Routes>
       </div>
-      <ChatSupportButton />
+      <ChatSupportButton currentTab={currentTab} />
       <Footer navbarLinks={navbarLinks} />
     </div>
   );
