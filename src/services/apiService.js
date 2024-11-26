@@ -1,3 +1,4 @@
+// src/services/apiService.js
 const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:4949/api';
 
 // Fetch all products
