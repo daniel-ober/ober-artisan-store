@@ -38,7 +38,6 @@ const PreOrderPage = () => {
       <p className="subtitle">Limited quantities available. Reserve yours today!</p>
 
       <div className="pre-order-items">
-        {/* Dynamic pre-order items from Firebase */}
         {preOrderItems.length > 0 &&
           preOrderItems.map((item) => (
             <div key={item.id} className="pre-order-item">
@@ -46,7 +45,10 @@ const PreOrderPage = () => {
               <div className="pre-order-info">
                 <h2>{item.name}</h2>
                 <p>{item.description}</p>
-                <p className="price">Price: ${item.price}</p>
+                <div className="price-container">
+                  <p className="regular-price">Regular: ${item.regularPrice}</p>
+                  <p className="promo-price">Early Access Promo: ${item.promoPrice}</p>
+                </div>
                 <Link to={`/products/${item.id}`}>
                   <button className="pre-order-button">Pre-Order Now</button>
                 </Link>
@@ -62,12 +64,15 @@ const PreOrderPage = () => {
             className="pre-order-image"
           />
           <div className="pre-order-info">
-            <h2>Oaked Ember Snare Drum</h2>
+            <h2>Embered Oak Snare Drum</h2>
             <p>
               Experience unmatched resonance and warmth with our handcrafted Oaked Ember snare drum,
               crafted with precision and passion.
             </p>
-            <p className="price">Price: $599</p>
+            <div className="price-container">
+              <p className="regular-price">Regular: $999.99</p>
+              <p className="promo-price">Early Access Promo Price: $799.99</p>
+            </div>
             <button className="pre-order-button" onClick={() => alert('This is a sample pre-order.')}>
               Pre-Order Now
             </button>
@@ -82,12 +87,15 @@ const PreOrderPage = () => {
             className="pre-order-image"
           />
           <div className="pre-order-info">
-            <h2>ARTiSAN True Experience</h2>
+            <h2>PURE ARTiSAN Experience</h2>
             <p>
               Work directly with our master craftsmen to design your custom drum. Choose from a wide
               array of materials, finishes, and configurations to bring your dream drum to life.
             </p>
-            <p className="price">Starting at $999</p>
+            <div className="price-container">
+              <p className="starting-price">Starting at: $999.99</p>
+              <p className="promo-price">Early Access Promo: Free Consultation + $100 off</p>
+            </div>
             <Link to="/custom-shop">
               <button className="pre-order-button">Start Custom Order</button>
             </Link>
