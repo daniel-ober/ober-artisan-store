@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { FaCartPlus, FaSignOutAlt, FaUserAlt, FaCog } from 'react-icons/fa';
 import { useAuth } from '../context/AuthContext';
 import { collection, getDocs } from 'firebase/firestore';
@@ -9,13 +9,14 @@ import './NavBar.css';
 const NavBar = () => {
   const [navbarLinks, setNavbarLinks] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false); // State for dark mode
   const menuRef = useRef(null);
   const buttonRef = useRef(null);
   const location = useLocation();
-  const navigate = useNavigate();
   const { user, isAdmin, handleSignOut } = useAuth();
 
   useEffect(() => {
+    // Fetch navbar links from Firebase
     const fetchNavbarLinks = async () => {
       try {
         const navbarLinksCollection = collection(db, 'settings', 'site', 'navbarLinks');
@@ -33,22 +34,41 @@ const NavBar = () => {
     fetchNavbarLinks();
   }, []);
 
+  // Handle menu toggle
   const handleMenuToggle = () => {
     setIsMenuOpen((prev) => !prev);
   };
 
+  // Handle sign out
   const handleSignOutClick = async () => {
     await handleSignOut();
-    navigate('/signin');
+  };
+
+  // Function to toggle dark mode
+  const toggleDarkMode = () => {
+    setIsDarkMode((prev) => !prev);
+    document.body.classList.toggle('dark', !isDarkMode);
+    document.body.classList.toggle('light', isDarkMode);
   };
 
   return (
     <nav className="navbar">
       <div className="navbar-logo">
         <Link to="/">
-          <img src="/ober-artisan-logo-large.png" alt="Logo" className="logo-img" />
+          <img
+            src={isDarkMode ? 'logo-white-a.png' : 'logo-black-a.png'}
+            alt="Logo"
+            className="logo-img"
+          />
         </Link>
       </div>
+
+      {/* Button to toggle dark mode */}
+      <button className="theme-toggle" onClick={toggleDarkMode}>
+        {isDarkMode ? 'Light Mode' : 'Dark Mode'}
+      </button>
+
+      {/* Menu toggle button */}
       <button
         className="navbar-menu-container"
         ref={buttonRef}
@@ -62,6 +82,7 @@ const NavBar = () => {
           className={`menu-arrow-icon ${isMenuOpen ? 'open' : ''}`}
         />
       </button>
+
       <div className={`navbar-links ${isMenuOpen ? 'open' : ''}`} ref={menuRef}>
         {navbarLinks.map((link) => (
           <Link
