@@ -10,14 +10,14 @@ const Gallery = () => {
         const fetchImages = async () => {
             try {
                 const storage = getStorage();
-                const imagesRef = ref(storage, 'gallery/'); // Adjust path as needed
+                const imagesRef = ref(storage, 'Gallery/'); // Adjust path as needed
                 const result = await listAll(imagesRef);
                 const imageUrls = await Promise.all(
                     result.items.map((item) => getDownloadURL(item))
                 );
                 setImages(imageUrls);
             } catch (err) {
-                console.error('Error fetching images:', err);
+                console.error('Error fetching images:', err.code, err.message);
                 setError('Failed to load gallery images. Please try again.');
             } finally {
                 setLoading(false);
@@ -28,7 +28,12 @@ const Gallery = () => {
     }, []);
 
     if (loading) return <p>Loading gallery...</p>;
-    if (error) return <p>{error}</p>;
+    if (error) return (
+        <div>
+            <p>{error}</p>
+            <button onClick={() => window.location.reload()}>Retry</button>
+        </div>
+    );
 
     return (
         <div className="gallery">
