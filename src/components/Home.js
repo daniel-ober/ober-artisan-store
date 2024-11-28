@@ -1,11 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
-import CountdownTimer from './CountdownTimer';
 import { getUserDoc, createCart } from '../firebaseConfig';
-// import ImageSequence from './ImageSequence';
 import './Home.css';
 
 const Home = () => {
-    const [visible, setVisible] = useState({});
     const [userData, setUserData] = useState(null);
     const [isDarkMode, setIsDarkMode] = useState(() => {
         return localStorage.getItem('darkMode') === 'true';
@@ -15,19 +12,30 @@ const Home = () => {
     const lightVideoRef = useRef(null);
     const darkVideoRef = useRef(null);
 
-    const observer = useRef(
-        new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    setVisible((prevVisible) => ({
-                        ...prevVisible,
-                        [entry.target.id]: true,
-                    }));
-                }
-            });
-        }, { threshold: 0.1 })
-    );
+    // Intersection Observer setup
+    const observer = useRef(new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                // Handle visibility of elements here if needed
+            }
+        });
+    }, { threshold: 0.1 }));
 
+    // Effect to observe visibility of elements
+    useEffect(() => {
+        const elements = document.querySelectorAll('.home-image');
+        elements.forEach((element) => {
+            observer.current.observe(element);
+        });
+
+        return () => {
+            elements.forEach((element) => {
+                observer.current.unobserve(element);
+            });
+        };
+    }, []);
+
+    // Effect for handling dark mode
     useEffect(() => {
         const initialDarkMode = document.body.classList.contains('dark');
         setIsDarkMode(initialDarkMode);
@@ -44,35 +52,23 @@ const Home = () => {
         return () => mutationObserver.disconnect();
     }, []);
 
+    // Test Firebase integration
     useEffect(() => {
-        const elements = document.querySelectorAll('.home-image');
-        elements.forEach((element) => {
-            observer.current.observe(element);
-        });
+        const testFirebaseIntegration = async () => {
+            const userId = 'testUserId123';
+            const userDoc = await getUserDoc(userId);
 
-        return () => {
-            elements.forEach((element) => {
-                observer.current.unobserve(element);
-            });
+            if (!userDoc) {
+                await createCart(userId);
+                console.log(`Created a cart for user ID: ${userId}`);
+            } else {
+                setUserData(userDoc);
+                console.log('User Data:', userDoc);
+            }
         };
+
+        testFirebaseIntegration();
     }, []);
-
-    // useEffect(() => {
-    //     const testFirebaseIntegration = async () => {
-    //         const userId = 'testUserId123';
-    //         const userDoc = await getUserDoc(userId);
-
-    //         if (!userDoc) {
-    //             await createCart(userId);
-    //             console.log(`Created a cart for user ID: ${userId}`);
-    //         } else {
-    //             setUserData(userDoc);
-    //             console.log('User Data:', userDoc);
-    //         }
-    //     };
-
-    //     testFirebaseIntegration();
-    // }, []);
 
     const handleVideoLoaded = () => {
         setIsVideoReady(true);
@@ -104,10 +100,7 @@ const Home = () => {
                     playsInline
                     onCanPlayThrough={handleVideoLoaded}
                 />
-                <CountdownTimer />
             </div>
-
-            {/* <ImageSequence /> */}
 
             <div className="home-content">
                 {userData && <p className="user-info">Welcome back, {userData.name}!</p>}
@@ -116,6 +109,8 @@ const Home = () => {
                     {/* Additional content here */}
                 </div>
             </div>
+
+            {/* Footer */}
         </div>
     );
 };

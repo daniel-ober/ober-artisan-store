@@ -1,47 +1,65 @@
 .admin-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 150px; /* Adjust as necessary */
-    height: 150px; /* Adjust as necessary */
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 16px;
-    margin: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
-  }
-  
-  .admin-card.selected {
-    background-color: #007bff; /* Highlight color */
-    color: white; /* Text color when selected */
-    transform: scale(1.05); /* Slightly enlarge the card */
-  }
-  
-  .admin-card-icon {
-    font-size: 2rem; /* Adjust as necessary */
-  }
-  
-  .admin-card-title {
-    margin-top: 10px;
-    text-align: center;
-  }
-  
-  /* Styles for Admin Dashboard */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 150px; /* Adjust as necessary */
+  height: 150px; /* Adjust as necessary */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.admin-card.selected {
+  background-color: #007bff; /* Highlight color */
+  color: white; /* Text color when selected */
+  transform: scale(1.05); /* Slightly enlarge the card */
+}
+
+.admin-card-icon {
+  font-size: 2rem; /* Adjust as necessary */
+}
+
+.admin-card-title {
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* Mobile View */
+@media screen and (max-width: 767px) {
   .admin-dashboard {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+      width: 100%; /* Ensure the dashboard container takes full width */
+      padding: 10px;
+      box-sizing: border-box;
   }
-  
+
   .admin-card-container {
-    display: flex;
-    justify-content: center; /* Center the cards horizontally */
-    flex-wrap: wrap; /* Allow wrapping to the next line if necessary */
+      display: flex;
+      flex-direction: column; /* Stack the cards vertically */
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 0 10px; /* Prevent overflow with some padding */
   }
-  
+
+  .admin-card {
+      width: 100%; /* Full width of the container */
+      max-width: 250px; /* Restrict width to prevent overflow */
+      height: auto; /* Adjust height accordingly */
+      margin: 5px 0; /* Margin to separate cards */
+      padding: 10px; /* Adjust padding for smaller screens */
+  }
+
+  .admin-card-title {
+      font-size: 1.2rem; /* Adjust font size */
+      margin-top: 5px;
+  }
+
   .admin-content-container {
-    margin-top: 20px; /* Space between cards and content */
-    text-align: center; /* Center the content */
+      margin-top: 20px;
+      text-align: center;
   }
+}
