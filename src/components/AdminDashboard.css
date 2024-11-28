@@ -71,7 +71,7 @@
 .navbar-logo img {
   display: block;
   margin: 0 auto;
-  max-width: 150px; /* Adjust based on your logo dimensions */
+  max-width: 350px; /* Adjust based on your logo dimensions */
   height: auto;
 }
 
@@ -98,8 +98,7 @@ h1 {
 
   .admin-card {
     width: 100%; /* Full-width for smaller screens */
-    max-width: none;
-  }
+    }
 
   .admin-card-icon {
     font-size: 2rem; /* Slightly smaller icons for smaller screens */

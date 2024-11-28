@@ -2,6 +2,7 @@
 html, body {
   height: 100%;
   margin: 0;
+  transition: background-color 0.5s ease, color 0.5s ease; /* Smooth transition for background and text colors */
 }
 
 /* Home container takes full height and uses flexbox */
@@ -21,44 +22,7 @@ html, body {
   max-width: 100%;
   width: 100%;
   flex: 1; /* Makes the video container take available space */
-  z-index: 0; /* Ensure videos are layered correctly */
-}
-
-/* Content area */
-.home-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex-shrink: 0; /* Prevents content from shrinking */
-}
-
-/* Additional content section */
-.home-section {
-  margin-bottom: 30px;
-  max-width: 100%;
-  width: 100%;
-}
-
-/* Styling for images */
-.home-image {
-  width: 100%;
-  max-width: 600px;
-  height: auto;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 1s ease-in-out, transform 1s ease-in-out;
-}
-
-.home-image.fade-in {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.home-paragraph {
-  font-size: 1.125rem;
-  color: #6c757d;
-  line-height: 1.6;
+  will-change: opacity; /* Improve transition smoothness */
 }
 
 /* Video styles */
@@ -67,22 +31,34 @@ html, body {
   top: 0;
   left: 0;
   width: 100%;
-  height: auto;
-  border-radius: 5px;
-  transition: opacity 1.5s ease-in-out;
+  height: 100%;
+  transition: opacity 1.5s ease-in-out, z-index 0s linear 1.5s; /* Smooth transition for opacity */
   opacity: 0;
-  pointer-events: none;
-  z-index: -1; /* Default behind other elements */
+  pointer-events: none; /* Prevents interaction with the inactive video */
+  z-index: -1; /* Initially behind the active video */
+  will-change: opacity; /* Optimize for opacity transition */
 }
 
-.fade-in {
+.coming-soon-video.fade-in {
   opacity: 1;
-  z-index: 10; /* Bring to the front */
+  z-index: 1; /* Brings the active video in front */
 }
 
-.fade-out {
+.coming-soon-video.fade-out {
   opacity: 0;
-  z-index: -1; /* Send behind other elements */
+  z-index: 0; /* Keeps the inactive video behind */
+}
+
+/* Light mode and dark mode video toggle */
+.light-mode .video-container .video-dark,
+.dark-mode .video-container .video-light {
+  opacity: 0; /* Hide the non-active video */
+}
+
+.dark-mode .video-container .video-dark,
+.light-mode .video-container .video-light {
+  opacity: 1; /* Show the active video */
+  transition: opacity 1.5s ease-in-out; /* Smooth transition for opacity */
 }
 
 /* Footer styles */
