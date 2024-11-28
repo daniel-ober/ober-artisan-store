@@ -1,3 +1,4 @@
+// backend/firebaseConfig.js
 require('dotenv').config();
 const admin = require('firebase-admin');
 
