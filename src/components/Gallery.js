@@ -18,6 +18,9 @@ const Gallery = () => {
                 setImages(imageUrls);
             } catch (err) {
                 console.error('Error fetching images:', err.code, err.message);
+                if (err.details) {
+                    console.error('Error details:', err.details); // Log any additional details if available
+                }
                 setError('Failed to load gallery images. Please try again.');
             } finally {
                 setLoading(false);

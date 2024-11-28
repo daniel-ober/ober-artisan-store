@@ -35,6 +35,7 @@ import SupportButton from './components/SupportButton';
 import SupportModal from './components/SupportModal'; // FAQ Modal
 import SupportChatModal from './components/SupportChatModal'; // Chat Modal
 import AdminSignin from './components/AdminSignin';
+import './App.css';
 
 function App() {
   const { user } = useAuth();
@@ -134,7 +135,7 @@ function App() {
           <Route path="/pre-order" element={isLinkEnabled('pre-order') ? <PreOrderPage /> : <NotFound />} />
           <Route path="/custom-shop" element={isLinkEnabled('custom-shop') ? <CustomShop /> : <NotFound />} />
           <Route path="/products" element={isLinkEnabled('products') ? <Products /> : <NotFound />} />
-
+          
           {/* Authentication Routes */}
           <Route
             path="/signin"
