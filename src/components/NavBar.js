@@ -53,6 +53,17 @@ const NavBar = () => {
 
   return (
     <nav className="navbar">
+      {/* Background Video */}
+      <video
+        className="navbar-background"
+        autoPlay
+        loop
+        muted
+        playsInline
+        src={isMenuOpen ? "/background-mobile.mp4" : "/background-web.mp4"}
+        type="video/mp4"
+      />
+
       <div className="navbar-logo">
         <Link to="/">
           <img
