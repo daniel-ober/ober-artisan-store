@@ -76,7 +76,7 @@ function App() {
   useEffect(() => {
     const fetchSettings = async () => {
       try {
-        const navbarLinksCollection = collection(db, 'settings/site/navbarLinks');
+        const navbarLinksCollection = collection(db, 'settings', 'site', 'navbarLinks');
         const navbarLinksSnapshot = await getDocs(navbarLinksCollection);
         const navbarLinks = navbarLinksSnapshot.docs.map((doc) => doc.data());
         setNavbarLinks(navbarLinks || []);
@@ -192,7 +192,7 @@ function App() {
       {/* Chat Modal */}
       {chatOpen && <SupportChatModal onClose={() => setChatOpen(false)} />}
       
-      <Footer />
+      <Footer navbarLinks={navbarLinks} />
     </div>
   );
 }
