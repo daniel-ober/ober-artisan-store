@@ -3,19 +3,24 @@ import { Link } from 'react-router-dom';
 import './Footer.css';
 
 const Footer = ({ navbarLinks = [] }) => {
+  // Filter and sort navbarLinks, keeping enabled links and sorting them by the order
+  const sortedNavbarLinks = navbarLinks
+    .filter((link) => link.enabled)
+    .sort((a, b) => a.order - b.order); // Ensuring the correct order based on "order" field
+
   return (
     <footer className="footer-container">
       <div className="footer-content">
         <div className="footer-section">
           <h2>Sitemap</h2>
           <ul>
-            {navbarLinks
-              .filter((link) => link.enabled)
-              .map((link, index) => (
-                <li key={index}>
-                  <Link to={`/${link.name.toLowerCase().replace(/\s+/g, '-')}`}>{link.label}</Link>
-                </li>
-              ))}
+            {sortedNavbarLinks.map((link, index) => (
+              <li key={index}>
+                <Link to={`/${link.name.toLowerCase().replace(/\s+/g, '-')}`}>
+                  {link.label}
+                </Link>
+              </li>
+            ))}
             <li>
               <Link to="/privacy-policy">Privacy Policy</Link>
             </li>
