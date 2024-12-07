@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { fetchProducts, deleteProduct } from '../services/productService';
 import './ManageProducts.css';
-import AddProductModal from './AddProductModal'; // Import AddProductModal
+import AddProductModal from './AddProductModal';
+import EditProductModal from './EditProductModal'; // Import EditProductModal
 
-const ManageProducts = ({ onEditProduct }) => {
+const ManageProducts = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false); // Add modal state
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [editProductId, setEditProductId] = useState(null);
 
   useEffect(() => {
     const fetchAllProducts = async () => {
@@ -34,18 +36,21 @@ const ManageProducts = ({ onEditProduct }) => {
     }
   };
 
-  const handleAddProduct = () => {
-    setIsAddModalOpen(true); // Open AddProductModal
-  };
+  const handleAddProductClose = () => setIsAddModalOpen(false);
 
-  const handleAddProductClose = () => {
-    setIsAddModalOpen(false);
+  const handleProductUpdate = (updatedProduct) => {
+    setProducts((prevProducts) =>
+      prevProducts.map((product) =>
+        product.id === updatedProduct.id ? updatedProduct : product
+      )
+    );
+    setEditProductId(null); // Close edit modal
   };
 
   return (
     <div className="manage-products-container">
       <h1>Manage Products</h1>
-      <button className="add-btn" onClick={handleAddProduct}>
+      <button className="add-btn" onClick={() => setIsAddModalOpen(true)}>
         Add Product
       </button>
       {loading && <p>Loading products...</p>}
@@ -67,7 +72,7 @@ const ManageProducts = ({ onEditProduct }) => {
                 <td>
                   <button
                     className="edit-btn"
-                    onClick={() => onEditProduct(product.id)} // Trigger edit function
+                    onClick={() => setEditProductId(product.id)}
                   >
                     Edit
                   </button>
@@ -83,13 +88,17 @@ const ManageProducts = ({ onEditProduct }) => {
           </tbody>
         </table>
       )}
-
       {isAddModalOpen && (
         <AddProductModal
           onClose={handleAddProductClose}
-          onProductAdded={(newProduct) => {
-            setProducts([newProduct, ...products]);
-          }}
+          onProductAdded={(newProduct) => setProducts([newProduct, ...products])}
+        />
+      )}
+      {editProductId && (
+        <EditProductModal
+          productId={editProductId}
+          onClose={() => setEditProductId(null)}
+          onProductUpdated={handleProductUpdate}
         />
       )}
     </div>

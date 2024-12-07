@@ -10,6 +10,16 @@
     justify-content: center;
     z-index: 1000;
   }
+
+  .add-user-modal .error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+  }
+  
   
   .modal-content {
     background: #ffffff;
