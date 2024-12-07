@@ -127,3 +127,33 @@ export const retrieveCheckoutSession = async (sessionId) => {
     throw new Error('Failed to retrieve Stripe checkout session.');
   }
 };
+
+/**
+ * List all Stripe products.
+ * @returns {Promise<Array>} - An array of Stripe products.
+ */
+export const listStripeProducts = async () => {
+  try {
+    const products = await stripe.products.list();
+    console.log('Stripe Products Retrieved:', products.data);
+    return products.data;
+  } catch (error) {
+    console.error('Error listing Stripe products:', error.message);
+    throw new Error('Failed to retrieve Stripe products.');
+  }
+};
+
+/**
+ * Delete a Stripe product by ID.
+ * @param {string} productId - The ID of the product to delete.
+ * @returns {Promise<void>}
+ */
+export const deleteStripeProduct = async (productId) => {
+  try {
+    await stripe.products.del(productId);
+    console.log(`Stripe Product Deleted: ${productId}`);
+  } catch (error) {
+    console.error('Error deleting Stripe product:', error.message);
+    throw new Error('Failed to delete Stripe product.');
+  }
+};
