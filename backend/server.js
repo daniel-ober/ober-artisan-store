@@ -122,6 +122,7 @@ app.post('/api/create-checkout-session', async (req, res) => {
             mode: 'payment',
             success_url: `${process.env.CLIENT_URL}/checkout-summary?session_id={CHECKOUT_SESSION_ID}&guest_token=${guestToken}`,
             cancel_url: `${process.env.CLIENT_URL}/cart`,
+            allow_promotion_codes: true, 
             metadata: { userId: userId || 'guest', guestToken },
         });
 

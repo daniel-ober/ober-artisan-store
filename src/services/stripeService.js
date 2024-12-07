@@ -20,7 +20,6 @@ const stripe = stripePackage(stripeSecretKey);
  */
 export const createStripeProduct = async (name, description, price, images = []) => {
   try {
-    // Validate inputs
     if (!name || !description || typeof price !== 'number' || price <= 0) {
       throw new Error('Invalid input: Name, description, and a positive price are required.');
     }
@@ -29,14 +28,12 @@ export const createStripeProduct = async (name, description, price, images = [])
       throw new Error('Invalid input: Images must be an array of URLs.');
     }
 
-    // Create the Stripe product
     const product = await stripe.products.create({
       name,
       description,
       images, // Include image URLs
     });
 
-    // Create the Stripe price
     const priceObj = await stripe.prices.create({
       product: product.id,
       unit_amount: Math.round(price * 100), // Convert price to cents
@@ -52,6 +49,44 @@ export const createStripeProduct = async (name, description, price, images = [])
 };
 
 /**
+ * Update a Stripe Product and optionally create a new Price if the price changes.
+ * @param {string} productId - Stripe product ID.
+ * @param {string} name - Name of the product.
+ * @param {string} description - Description of the product.
+ * @param {Array<string>} images - Array of image URLs.
+ * @param {number} newPrice - New price of the product (in USD).
+ * @param {string} currentPriceId - Current Stripe price ID.
+ * @returns {Promise<{newPriceId?: string}>} - Updated Stripe product and optionally a new price ID.
+ */
+export const updateStripeProduct = async (productId, name, description, images = [], newPrice, currentPriceId) => {
+  try {
+    await stripe.products.update(productId, {
+      name,
+      description,
+      images, // Update product images
+    });
+
+    let newPriceId;
+
+    const currentPriceObj = await stripe.prices.retrieve(currentPriceId);
+    if (currentPriceObj.unit_amount !== Math.round(newPrice * 100)) {
+      const newPriceObj = await stripe.prices.create({
+        product: productId,
+        unit_amount: Math.round(newPrice * 100),
+        currency: 'usd',
+      });
+      newPriceId = newPriceObj.id;
+    }
+
+    console.log('Stripe Product Updated:', { productId, newPriceId });
+    return { newPriceId };
+  } catch (error) {
+    console.error('Error updating Stripe product:', error.message);
+    throw new Error('Failed to update Stripe product.');
+  }
+};
+
+/**
  * Create a Checkout Session for Stripe payment.
  * @param {Array} products - List of products to purchase.
  * @param {string} userId - User ID for the session (optional).
@@ -59,15 +94,12 @@ export const createStripeProduct = async (name, description, price, images = [])
  */
 export const createCheckoutSession = async (products, userId) => {
   try {
-    // Validate inputs
     if (!Array.isArray(products) || products.length === 0) {
       throw new Error('Invalid input: At least one product is required.');
     }
 
-    // Generate a unique guest token
     const guestToken = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
-    // Prepare line items for the checkout session
     const lineItems = products.map((product) => {
       if (!product.name || typeof product.price !== 'number' || product.price <= 0 || !product.quantity) {
         throw new Error('Invalid product data: Each product must have a name, price, and quantity.');
@@ -78,7 +110,7 @@ export const createCheckoutSession = async (products, userId) => {
           product_data: {
             name: product.name,
             description: product.description || '',
-            images: product.images || [], // Include images for product in line items
+            images: product.images || [],
           },
           unit_amount: Math.round(product.price * 100),
         },
@@ -86,13 +118,13 @@ export const createCheckoutSession = async (products, userId) => {
       };
     });
 
-    // Create the checkout session
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: lineItems,
       mode: 'payment',
       success_url: `${process.env.CLIENT_URL}/checkout-summary?session_id={CHECKOUT_SESSION_ID}&guest_token=${guestToken}`,
       cancel_url: `${process.env.CLIENT_URL}/cart`,
+      allow_promotion_codes: true,
       metadata: { userId: userId || 'guest', guestToken },
     });
 
@@ -115,7 +147,6 @@ export const retrieveCheckoutSession = async (sessionId) => {
       throw new Error('Invalid input: Session ID is required.');
     }
 
-    // Retrieve the checkout session
     const session = await stripe.checkout.sessions.retrieve(sessionId, {
       expand: ['line_items.data.price.product'],
     });
