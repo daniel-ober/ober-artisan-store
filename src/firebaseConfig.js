@@ -1,4 +1,3 @@
-// src/firebaseConfig.js
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 import { getAuth, signOut as firebaseSignOut } from 'firebase/auth';
@@ -31,9 +30,8 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app); // Optional: Initialize Analytics
+const analytics = getAnalytics(app);
 
-// Initialize and export Firestore, Auth, and Storage instances
 export const db = getFirestore(app);
 export const auth = getAuth(app);
 export const storage = getStorage(app);
@@ -68,7 +66,7 @@ export const getUserDoc = async (userId) => {
 export const createCart = async (userId) => {
   try {
     const cartRef = doc(db, 'carts', userId);
-    await setDoc(cartRef, { items: [] });
+    await setDoc(cartRef, { items: [], createdAt: new Date() });
     console.log(`Cart created for user: ${userId}`);
     return userId;
   } catch (error) {
@@ -146,27 +144,6 @@ export const saveOrder = async (orderData) => {
     return orderDoc.id;
   } catch (error) {
     console.error('Error saving order:', error);
-    return null;
-  }
-};
-
-/**
- * Fetch order details by session ID.
- * @param {string} sessionId - The Stripe session ID.
- * @returns {Promise<Object|null>} - Order data or null if not found.
- */
-export const getOrderBySessionId = async (sessionId) => {
-  try {
-    const ordersRef = collection(db, 'orders');
-    const q = query(ordersRef, where('stripeSessionId', '==', sessionId));
-    const querySnapshot = await getDocs(q);
-    if (!querySnapshot.empty) {
-      return querySnapshot.docs[0].data();
-    }
-    console.error('No order found for session ID:', sessionId);
-    return null;
-  } catch (error) {
-    console.error('Error fetching order by session ID:', error);
     return null;
   }
 };
