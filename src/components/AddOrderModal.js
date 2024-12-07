@@ -27,8 +27,8 @@ const AddOrderModal = ({ onClose, onOrderAdded }) => {
     const { name, value } = e.target;
     setNewOrder((prev) => ({
       ...prev,
-      [name]: name === 'subtotal' || name === 'taxes' || name === 'shipping' || name === 'total' 
-        ? parseFloat(value) || 0 
+      [name]: name === 'subtotal' || name === 'taxes' || name === 'shipping' || name === 'total'
+        ? parseFloat(value) || 0
         : value,
     }));
   };
@@ -128,6 +128,7 @@ const AddOrderModal = ({ onClose, onOrderAdded }) => {
               name="customerName"
               value={newOrder.customerName}
               onChange={handleInputChange}
+              autocomplete="name"
               required
             />
           </div>
@@ -139,6 +140,7 @@ const AddOrderModal = ({ onClose, onOrderAdded }) => {
               name="customerEmail"
               value={newOrder.customerEmail}
               onChange={handleInputChange}
+              autocomplete="email"
               required
             />
           </div>
@@ -150,6 +152,7 @@ const AddOrderModal = ({ onClose, onOrderAdded }) => {
               name="customerPhone"
               value={newOrder.customerPhone}
               onChange={handleInputChange}
+              autocomplete="tel"
               required
             />
           </div>
@@ -161,6 +164,7 @@ const AddOrderModal = ({ onClose, onOrderAdded }) => {
               name="shippingAddress"
               value={newOrder.shippingAddress}
               onChange={handleInputChange}
+              autocomplete="shipping street-address"
               required
             />
           </div>
@@ -172,6 +176,7 @@ const AddOrderModal = ({ onClose, onOrderAdded }) => {
               name="billingAddress"
               value={newOrder.billingAddress}
               onChange={handleInputChange}
+              autocomplete="billing street-address"
               required
             />
           </div>
@@ -182,6 +187,7 @@ const AddOrderModal = ({ onClose, onOrderAdded }) => {
               name="status"
               value={newOrder.status}
               onChange={handleInputChange}
+              autocomplete="off"
             >
               <option value="pending">Pending</option>
               <option value="completed">Completed</option>
@@ -198,6 +204,7 @@ const AddOrderModal = ({ onClose, onOrderAdded }) => {
               onChange={handleInputChange}
               step="0.01"
               min="0"
+              autocomplete="off"
             />
           </div>
 
@@ -209,6 +216,7 @@ const AddOrderModal = ({ onClose, onOrderAdded }) => {
               placeholder="Item Name"
               value={item.name}
               onChange={handleItemChange}
+              autocomplete="off"
             />
             <input
               type="text"
@@ -216,6 +224,7 @@ const AddOrderModal = ({ onClose, onOrderAdded }) => {
               placeholder="Description"
               value={item.description}
               onChange={handleItemChange}
+              autocomplete="off"
             />
             <input
               type="number"
@@ -225,6 +234,7 @@ const AddOrderModal = ({ onClose, onOrderAdded }) => {
               onChange={handleItemChange}
               step="0.01"
               min="0"
+              autocomplete="off"
             />
             <input
               type="number"
@@ -233,6 +243,7 @@ const AddOrderModal = ({ onClose, onOrderAdded }) => {
               value={item.quantity}
               onChange={handleItemChange}
               min="1"
+              autocomplete="off"
             />
             <button type="button" onClick={addItem}>
               Add Item

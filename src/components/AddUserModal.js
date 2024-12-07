@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { addDoc, collection } from 'firebase/firestore';
+import { collection, query, where, getDocs, addDoc, Timestamp } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
-import './AdminModal.css';
+import './AddUserModal.css';
 
 const AddUserModal = ({ onClose, onUserAdded }) => {
   const [formData, setFormData] = useState({
@@ -9,84 +9,153 @@ const AddUserModal = ({ onClose, onUserAdded }) => {
     lastName: '',
     email: '',
     phone: '',
+    emailNotification: true,
+    smsNotification: false,
     status: 'active',
   });
-  const [error, setError] = useState(null);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    const { name, value, type, checked } = e.target;
+    setFormData({
+      ...formData,
+      [name]: type === 'checkbox' ? checked : value,
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(null);
+    setError('');
+    setLoading(true);
 
     try {
-      // Add user to Firestore
-      await addDoc(collection(db, 'users'), {
+      // Check if the email already exists
+      const usersRef = collection(db, 'users');
+      const emailQuery = query(usersRef, where('email', '==', formData.email));
+      const existingUsers = await getDocs(emailQuery);
+
+      if (!existingUsers.empty) {
+        setError('A user with this email already exists.');
+        setLoading(false);
+        return;
+      }
+
+      // Add the new user to Firestore
+      const newUser = {
         ...formData,
-        createdAt: new Date(),
-      });
-      onUserAdded(); // Refresh the user list
-      onClose(); // Close the modal
+        createdAt: Timestamp.now(),
+      };
+
+      const userRef = await addDoc(usersRef, newUser);
+
+      // Pass the new user back to the parent component
+      onUserAdded({ ...newUser, id: userRef.id });
+
+      // Close the modal
+      onClose();
     } catch (err) {
       console.error('Error adding user:', err);
       setError('Failed to add user. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="modal-overlay">
+    <div className="add-user-modal">
       <div className="modal-content">
-        <h2>Add New User</h2>
+        <h2>Add User</h2>
+        {error && <div className="error-message">{error}</div>}
         <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            name="firstName"
-            placeholder="First Name"
-            value={formData.firstName}
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="text"
-            name="lastName"
-            placeholder="Last Name"
-            value={formData.lastName}
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="text"
-            name="phone"
-            placeholder="Phone"
-            value={formData.phone}
-            onChange={handleChange}
-          />
-          <select
-            name="status"
-            value={formData.status}
-            onChange={handleChange}
-            required
-          >
-            <option value="active">Active</option>
-            <option value="inactive">Inactive</option>
-          </select>
-          <button type="submit">Add User</button>
-          <button type="button" onClick={onClose}>
-            Close
-          </button>
+          <div className="form-group">
+            <label htmlFor="firstName">First Name *</label>
+            <input
+              type="text"
+              id="firstName"
+              name="firstName"
+              value={formData.firstName}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="lastName">Last Name *</label>
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              value={formData.lastName}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="email">Email *</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="phone">Phone</label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="emailNotification">
+              <input
+                type="checkbox"
+                id="emailNotification"
+                name="emailNotification"
+                checked={formData.emailNotification}
+                onChange={handleChange}
+              />
+              Email Notification
+            </label>
+          </div>
+          <div className="form-group">
+            <label htmlFor="smsNotification">
+              <input
+                type="checkbox"
+                id="smsNotification"
+                name="smsNotification"
+                checked={formData.smsNotification}
+                onChange={handleChange}
+              />
+              SMS Notification
+            </label>
+          </div>
+          <div className="form-group">
+            <label htmlFor="status">Status</label>
+            <select
+              id="status"
+              name="status"
+              value={formData.status}
+              onChange={handleChange}
+            >
+              <option value="active">Active</option>
+              <option value="inactive">Inactive</option>
+            </select>
+          </div>
+          <div className="modal-actions">
+            <button type="submit" disabled={loading}>
+              {loading ? 'Adding...' : 'Add User'}
+            </button>
+            <button type="button" onClick={onClose}>
+              Cancel
+            </button>
+          </div>
         </form>
-        {error && <p className="error">{error}</p>}
       </div>
     </div>
   );

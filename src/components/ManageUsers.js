@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import EditUserModal from './EditUserModal';
-import AddUserModal from './AddUserModal'; // Import AddUserModal
+import AddUserModal from './AddUserModal';
 
 const ManageUsers = () => {
   const [users, setUsers] = useState([]);
@@ -10,7 +10,7 @@ const ManageUsers = () => {
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false); // State for AddUserModal
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -18,14 +18,17 @@ const ManageUsers = () => {
       try {
         const usersCollection = collection(db, 'users');
         const userSnapshot = await getDocs(usersCollection);
-        const usersList = userSnapshot.docs.map((doc) => ({
-          id: doc.id,
-          email: doc.data().email || 'N/A',
-          firstName: doc.data().firstName || 'N/A',
-          lastName: doc.data().lastName || 'N/A',
-          phone: doc.data().phone || 'N/A',
-          status: doc.data().status || 'active',
-        }));
+        const usersList = userSnapshot.docs.map((doc) => {
+          const data = doc.data() || {};
+          return {
+            id: doc.id,
+            email: data.email || 'N/A',
+            firstName: data.firstName || 'N/A',
+            lastName: data.lastName || 'N/A',
+            phone: data.phone || 'N/A',
+            status: data.status || 'active',
+          };
+        });
 
         setUsers(usersList);
         setFilteredUsers(usersList);
@@ -72,7 +75,7 @@ const ManageUsers = () => {
   };
 
   const handleAddUser = () => {
-    setIsAddModalOpen(true); // Open the AddUserModal
+    setIsAddModalOpen(true);
   };
 
   const handleAddUserClose = () => {

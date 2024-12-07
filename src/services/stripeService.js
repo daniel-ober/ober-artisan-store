@@ -15,17 +15,26 @@ const stripe = stripePackage(stripeSecretKey);
  * @param {string} name - Name of the product.
  * @param {string} description - Description of the product.
  * @param {number} price - Price of the product in USD.
+ * @param {Array<string>} images - Array of image URLs for the product.
  * @returns {Promise<{product: object, price: object}>} - The created product and price objects.
  */
-export const createStripeProduct = async (name, description, price) => {
+export const createStripeProduct = async (name, description, price, images = []) => {
   try {
     // Validate inputs
     if (!name || !description || typeof price !== 'number' || price <= 0) {
       throw new Error('Invalid input: Name, description, and a positive price are required.');
     }
 
+    if (!Array.isArray(images)) {
+      throw new Error('Invalid input: Images must be an array of URLs.');
+    }
+
     // Create the Stripe product
-    const product = await stripe.products.create({ name, description });
+    const product = await stripe.products.create({
+      name,
+      description,
+      images, // Include image URLs
+    });
 
     // Create the Stripe price
     const priceObj = await stripe.prices.create({
@@ -66,7 +75,11 @@ export const createCheckoutSession = async (products, userId) => {
       return {
         price_data: {
           currency: 'usd',
-          product_data: { name: product.name, description: product.description || '' },
+          product_data: {
+            name: product.name,
+            description: product.description || '',
+            images: product.images || [], // Include images for product in line items
+          },
           unit_amount: Math.round(product.price * 100),
         },
         quantity: product.quantity,
