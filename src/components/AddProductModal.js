@@ -41,29 +41,27 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
     setSuccessMessage('');
 
     try {
-      // Upload images and get high-res and optimized URLs
+      // Upload images and get URLs
       const uploadedImages = await Promise.all(
         imageFiles.map((file) => uploadImage(file, 'products'))
       );
-      const highResUrls = uploadedImages.map((img) => img.highResUrl);
-      const optimizedUrls = uploadedImages.map((img) => img.optimizedUrl);
 
       // Prepare product data
-      const productData = { ...newProduct, images: highResUrls };
+      const productData = { ...newProduct, images: uploadedImages };
 
-      // Create Stripe Product
+      // Create Stripe product
       const stripeProduct = await createStripeProduct(
         productData.name,
         productData.description,
         productData.price,
-        optimizedUrls // Pass optimized image URLs to Stripe
+        uploadedImages // Pass the image URLs to Stripe
       );
 
       if (!stripeProduct || !stripeProduct.product.id) {
         throw new Error('Failed to create Stripe product.');
       }
 
-      // Save product to Firestore
+      // Add to Firestore
       const docRef = await addDoc(collection(db, 'products'), {
         ...productData,
         stripeProductId: stripeProduct.product.id,
@@ -85,6 +83,7 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
       });
       setImageFiles([]);
     } catch (err) {
+      console.error('Error adding product:', err.message);
       setError(err.message || 'Failed to add product.');
     } finally {
       setIsUploading(false);
@@ -108,7 +107,6 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
               onChange={handleInputChange}
               required
               disabled={isUploading}
-              autoComplete="off"
             />
           </div>
           <div className="form-group">
@@ -120,7 +118,6 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
               onChange={handleInputChange}
               required
               disabled={isUploading}
-              autoComplete="off"
             ></textarea>
           </div>
           <div className="form-group">
@@ -135,7 +132,6 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
               min="0"
               required
               disabled={isUploading}
-              autoComplete="off"
             />
           </div>
           <div className="form-group">
