@@ -41,20 +41,29 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
     setSuccessMessage('');
 
     try {
-      const uploadedImages = await Promise.all(imageFiles.map((file) => uploadImage(file, 'products')));
-      const productData = { ...newProduct, images: uploadedImages };
+      // Upload images and get high-res and optimized URLs
+      const uploadedImages = await Promise.all(
+        imageFiles.map((file) => uploadImage(file, 'products'))
+      );
+      const highResUrls = uploadedImages.map((img) => img.highResUrl);
+      const optimizedUrls = uploadedImages.map((img) => img.optimizedUrl);
 
-      // Pass individual fields instead of the full object
+      // Prepare product data
+      const productData = { ...newProduct, images: highResUrls };
+
+      // Create Stripe Product
       const stripeProduct = await createStripeProduct(
         productData.name,
         productData.description,
-        productData.price
+        productData.price,
+        optimizedUrls // Pass optimized image URLs to Stripe
       );
 
       if (!stripeProduct || !stripeProduct.product.id) {
         throw new Error('Failed to create Stripe product.');
       }
 
+      // Save product to Firestore
       const docRef = await addDoc(collection(db, 'products'), {
         ...productData,
         stripeProductId: stripeProduct.product.id,
@@ -65,6 +74,7 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
       setSuccessMessage('Product added successfully!');
       onProductAdded({ id: docRef.id, ...productData });
 
+      // Reset form
       setNewProduct({
         category: 'dreamfeather',
         description: '',
