@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { doc, getDoc, updateDoc, collection, getDocs, query, where } from 'firebase/firestore';
-import { auth, db } from '../firebaseConfig'; // Change firestore to db
+import { auth, db } from '../firebaseConfig';
 import { updatePassword, reauthenticateWithCredential, EmailAuthProvider } from 'firebase/auth';
-import { TextField, Button, Typography, FormControlLabel, Checkbox } from '@mui/material';
+import { TextField, Button, Typography, FormControlLabel, Checkbox, InputAdornment, IconButton } from '@mui/material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 import './AccountPage.css';
 
 const AccountPage = () => {
@@ -76,7 +77,7 @@ const AccountPage = () => {
       const q = query(ordersRef, where('userId', '==', userId));
       const querySnapshot = await getDocs(q);
 
-      const userOrders = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })); // Include order id
+      const userOrders = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       setOrders(userOrders);
     } catch (error) {
       console.error('Error fetching orders:', error.message);
@@ -115,7 +116,7 @@ const AccountPage = () => {
         setEmailNotification(newEmailNotification);
         setSmsNotification(newSmsNotification);
 
-        setEditMode(false); // Exit edit mode after saving
+        setEditMode(false);
       } catch (error) {
         console.error('Error updating user details:', error.message);
       }
@@ -126,39 +127,32 @@ const AccountPage = () => {
   const handlePasswordChange = async () => {
     const user = auth.currentUser;
 
+    // Validate passwords match
     if (newPassword !== confirmPassword) {
       setPasswordError('Passwords do not match');
       return;
     }
 
-    // Password validation rules
-    const passwordRules = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    // Updated password rules
+    const passwordRules = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     if (!passwordRules.test(newPassword)) {
-      setPasswordError('Password must be at least 8 characters long and include at least one letter and one number.');
+      setPasswordError('Password must be at least 8 characters long and include at least one letter, one number, and one special character.');
       return;
     }
 
     try {
+      // Reauthenticate user
       const credential = EmailAuthProvider.credential(user.email, currentPassword);
       await reauthenticateWithCredential(user, credential);
 
+      // Update password
       await updatePassword(user, newPassword);
       setPasswordError('Password updated successfully');
-      setPasswordEditMode(false); // Exit password edit mode after saving
+      setPasswordEditMode(false);
     } catch (error) {
-      setPasswordError('Error updating password: ' + error.message);
+      console.error('Error updating password:', error.message);
+      setPasswordError('Error updating password. Please ensure your current password is correct.');
     }
-  };
-
-  // Group orders by orderId
-  const groupOrdersById = (orders) => {
-    return orders.reduce((acc, order) => {
-      if (!acc[order.orderId]) {
-        acc[order.orderId] = [];
-      }
-      acc[order.orderId].push(order);
-      return acc;
-    }, {});
   };
 
   // UseEffect to fetch data when component mounts
@@ -172,14 +166,12 @@ const AccountPage = () => {
       console.log('No user is signed in');
     }
 
-    setLoading(false); // Set loading to false after data is fetched
+    setLoading(false);
   }, []);
 
   if (loading) {
     return <div>Loading account information...</div>;
   }
-
-  const groupedOrders = groupOrdersById(orders);
 
   // Cancel edit details
   const handleCancelEditDetails = () => {
@@ -215,7 +207,6 @@ const AccountPage = () => {
             variant="outlined"
             fullWidth
             disabled={!editMode}
-            className="account-page-textfield"
           />
         </div>
         <div className="account-page-field">
@@ -226,7 +217,6 @@ const AccountPage = () => {
             variant="outlined"
             fullWidth
             disabled={!editMode}
-            className="account-page-textfield"
           />
         </div>
         <div className="account-page-field">
@@ -236,7 +226,6 @@ const AccountPage = () => {
             variant="outlined"
             fullWidth
             disabled
-            className="account-page-textfield"
           />
         </div>
         <div className="account-page-field">
@@ -247,30 +236,17 @@ const AccountPage = () => {
             variant="outlined"
             fullWidth
             disabled={!editMode}
-            className="account-page-textfield"
           />
         </div>
         <div className="account-page-field">
           <FormControlLabel
-            control={
-              <Checkbox
-                checked={editMode ? newEmailNotification : emailNotification}
-                onChange={() => setNewEmailNotification(!newEmailNotification)}
-                disabled={!editMode}
-              />
-            }
+            control={<Checkbox checked={editMode ? newEmailNotification : emailNotification} onChange={() => setNewEmailNotification(!newEmailNotification)} disabled={!editMode} />}
             label="Email Notifications"
           />
         </div>
         <div className="account-page-field">
           <FormControlLabel
-            control={
-              <Checkbox
-                checked={editMode ? newSmsNotification : smsNotification}
-                onChange={() => setNewSmsNotification(!newSmsNotification)}
-                disabled={!editMode}
-              />
-            }
+            control={<Checkbox checked={editMode ? newSmsNotification : smsNotification} onChange={() => setNewSmsNotification(!newSmsNotification)} disabled={!editMode} />}
             label="SMS Notifications"
           />
         </div>
@@ -299,7 +275,6 @@ const AccountPage = () => {
                 onChange={(e) => setCurrentPassword(e.target.value)}
                 variant="outlined"
                 fullWidth
-                className="account-page-textfield"
               />
             </div>
             <div className="account-page-field">
@@ -310,7 +285,18 @@ const AccountPage = () => {
                 onChange={(e) => setNewPassword(e.target.value)}
                 variant="outlined"
                 fullWidth
-                className="account-page-textfield"
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={() => setShowNewPassword(!showNewPassword)}
+                        edge="end"
+                      >
+                        {showNewPassword ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
               />
             </div>
             <div className="account-page-field">
@@ -321,7 +307,18 @@ const AccountPage = () => {
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 variant="outlined"
                 fullWidth
-                className="account-page-textfield"
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                        edge="end"
+                      >
+                        {showConfirmPassword ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
               />
             </div>
             {passwordError && <Typography color="error">{passwordError}</Typography>}
@@ -342,17 +339,13 @@ const AccountPage = () => {
           <div>Loading your orders...</div>
         ) : (
           <div>
-            {Object.keys(groupedOrders).length === 0 ? (
+            {orders.length === 0 ? (
               <Typography>No orders found.</Typography>
             ) : (
-              Object.keys(groupedOrders).map(orderId => (
-                <div key={orderId} className="order-item">
-                  <Typography variant="subtitle1">Order ID: {orderId}</Typography>
-                  {groupedOrders[orderId].map(order => (
-                    <div key={order.id}>
-                      <Typography variant="body2">{JSON.stringify(order)}</Typography>
-                    </div>
-                  ))}
+              orders.map((order) => (
+                <div key={order.id} className="order-item">
+                  <Typography variant="subtitle1">Order ID: {order.id}</Typography>
+                  <Typography variant="body2">{JSON.stringify(order)}</Typography>
                 </div>
               ))
             )}
