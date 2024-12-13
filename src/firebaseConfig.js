@@ -14,6 +14,7 @@ import {
   where,
   getDocs,
   deleteDoc,
+  Timestamp,
 } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 
@@ -25,17 +26,33 @@ const firebaseConfig = {
   storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
-  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
+  ...(process.env.REACT_APP_FIREBASE_MEASUREMENT_ID && {
+    measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
+  }),
 };
+
+// Debugging: Log Firebase configuration values in development mode
+if (process.env.NODE_ENV === 'development') {
+  console.log('Firebase Config:', firebaseConfig);
+}
+
+// Validate Firebase configuration
+if (!firebaseConfig.projectId) {
+  throw new Error('Firebase configuration is missing the "projectId" value.');
+}
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+const analytics = process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
+  ? getAnalytics(app)
+  : null;
 
 export const db = getFirestore(app);
 export const auth = getAuth(app);
 export const storage = getStorage(app);
 export const signOut = firebaseSignOut;
+
+// Firestore utility functions
 
 /**
  * Fetch user document data.
@@ -48,13 +65,12 @@ export const getUserDoc = async (userId) => {
     const userDocSnap = await getDoc(userDocRef);
     if (userDocSnap.exists()) {
       return userDocSnap.data();
-    } else {
-      console.error('No such document!');
-      return null;
     }
+    console.error('No such document!');
+    return null;
   } catch (error) {
     console.error('Error getting document:', error);
-    return null;
+    throw error;
   }
 };
 
@@ -66,11 +82,12 @@ export const getUserDoc = async (userId) => {
 export const createCart = async (userId) => {
   try {
     const cartRef = doc(db, 'carts', userId);
-    await setDoc(cartRef, { items: [], createdAt: new Date() });
+    await setDoc(cartRef, { items: [], createdAt: Timestamp.now() });
     console.log(`Cart created for user: ${userId}`);
     return userId;
   } catch (error) {
     console.error('Error creating cart:', error);
+    throw error;
   }
 };
 
@@ -86,6 +103,7 @@ export const addItemToCart = async (userId, item) => {
     console.log(`Item added to cart for user: ${userId}`, item);
   } catch (error) {
     console.error('Error adding item to cart:', error);
+    throw error;
   }
 };
 
@@ -100,13 +118,12 @@ export const getCartItems = async (userId) => {
     const cartSnap = await getDoc(cartRef);
     if (cartSnap.exists()) {
       return cartSnap.data().items || [];
-    } else {
-      console.error('No cart found for user:', userId);
-      return [];
     }
+    console.error('No cart found for user:', userId);
+    return [];
   } catch (error) {
     console.error('Error fetching cart items:', error);
-    return [];
+    throw error;
   }
 };
 
@@ -128,6 +145,7 @@ export const deleteCartItem = async (userId, itemId) => {
     }
   } catch (error) {
     console.error('Error deleting item from cart:', error);
+    throw error;
   }
 };
 
@@ -139,12 +157,12 @@ export const deleteCartItem = async (userId, itemId) => {
 export const saveOrder = async (orderData) => {
   try {
     const ordersRef = collection(db, 'orders');
-    const orderDoc = await addDoc(ordersRef, { ...orderData, createdAt: new Date() });
+    const orderDoc = await addDoc(ordersRef, { ...orderData, createdAt: Timestamp.now() });
     console.log('Order saved with ID:', orderDoc.id);
     return orderDoc.id;
   } catch (error) {
     console.error('Error saving order:', error);
-    return null;
+    throw error;
   }
 };
 
@@ -159,5 +177,6 @@ export const clearCart = async (userId) => {
     console.log(`Cart cleared for user: ${userId}`);
   } catch (error) {
     console.error('Error clearing cart:', error);
+    throw error;
   }
 };
