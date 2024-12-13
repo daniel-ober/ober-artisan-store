@@ -1,21 +1,19 @@
 {
   "name": "functions",
-  "engines": {
-    "node": "18"
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase emulators:start --only functions",
+    "deploy": "firebase deploy --only functions"
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "firebase-admin": "^12.4.0",
-    "firebase-functions": "^4.0.0",
-    "node-fetch": "^2.7.0"
+    "dotenv": "^16.4.7",
+    "express": "^4.18.2",
+    "firebase-admin": "^13.0.1",
+    "firebase-functions": "^6.1.2",
+    "openai": "^3.3.0"
   },
-  "scripts": {
-    "lint": "eslint ."
-  },
-  "devDependencies": {
-    "babel-loader": "^9.1.3",
-    "eslint": "^7.32.0",
-    "eslint-plugin-node": "^11.1.0",
-    "html-webpack-plugin": "^5.6.0"
+  "engines": {
+    "node": "18"
   }
 }

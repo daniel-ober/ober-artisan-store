@@ -93,48 +93,49 @@ export const updateStripeProduct = async (productId, name, description, images =
  * @returns {Promise<{session: object, guestToken: string}>} - The created session and guest token.
  */
 export const createCheckoutSession = async (products, userId) => {
-  try {
-    if (!Array.isArray(products) || products.length === 0) {
-      throw new Error('Invalid input: At least one product is required.');
-    }
-
-    const guestToken = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-
-    const lineItems = products.map((product) => {
-      if (!product.name || typeof product.price !== 'number' || product.price <= 0 || !product.quantity) {
-        throw new Error('Invalid product data: Each product must have a name, price, and quantity.');
+    try {
+      if (!Array.isArray(products) || products.length === 0) {
+        throw new Error('Invalid input: At least one product is required.');
       }
-      return {
-        price_data: {
-          currency: 'usd',
-          product_data: {
-            name: product.name,
-            description: product.description || '',
-            images: product.images || [],
+  
+      const guestToken = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+  
+      const lineItems = products.map((product) => {
+        if (!product.name || typeof product.price !== 'number' || product.price <= 0 || !product.quantity) {
+          throw new Error('Invalid product data: Each product must have a name, price, and quantity.');
+        }
+        return {
+          price_data: {
+            currency: 'usd',
+            product_data: {
+              name: product.name,
+              description: product.description || '',
+              images: product.images || [],
+            },
+            unit_amount: Math.round(product.price * 100),
           },
-          unit_amount: Math.round(product.price * 100),
-        },
-        quantity: product.quantity,
-      };
-    });
-
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
-      line_items: lineItems,
-      mode: 'payment',
-      success_url: `${process.env.CLIENT_URL}/checkout-summary?session_id={CHECKOUT_SESSION_ID}&guest_token=${guestToken}`,
-      cancel_url: `${process.env.CLIENT_URL}/cart`,
-      allow_promotion_codes: true,
-      metadata: { userId: userId || 'guest', guestToken },
-    });
-
-    console.log('Stripe Checkout Session Created:', { sessionId: session.id, guestToken });
-    return { session, guestToken };
-  } catch (error) {
-    console.error('Error creating Stripe checkout session:', error.message);
-    throw new Error('Failed to create Stripe checkout session.');
-  }
-};
+          quantity: product.quantity,
+        };
+      });
+  
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ['card'],
+        line_items: lineItems,
+        mode: 'payment',
+        success_url: `${process.env.CLIENT_URL}/checkout-summary?session_id=${session.id}&guest_token=${guestToken}`, // Dynamically use session.id
+        cancel_url: `${process.env.CLIENT_URL}/cart`,
+        allow_promotion_codes: true,
+        metadata: { userId: userId || 'guest', guestToken },
+      });
+  
+      console.log('Stripe Checkout Session Created:', { sessionId: session.id, guestToken });
+      return { session, guestToken };
+    } catch (error) {
+      console.error('Error creating Stripe checkout session:', error.message);
+      throw new Error('Failed to create Stripe checkout session.');
+    }
+  };
+  
 
 /**
  * Retrieve a Stripe Checkout Session by ID.
