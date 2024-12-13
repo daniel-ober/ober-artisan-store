@@ -1,12 +1,21 @@
 const express = require('express');
 const router = express.Router();
-const { db } = require('../firebaseConfig'); // Use the centralized configuration
+const admin = require('firebase-admin'); // Use the already initialized Firebase Admin SDK
 
-// Fetch all products
+const db = admin.firestore(); // Access Firestore instance
+
 router.get('/', async (req, res) => {
     try {
         const snapshot = await db.collection('products').get();
-        const products = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+        if (snapshot.empty) {
+            return res.status(404).json({ error: 'No products found' });
+        }
+
+        const products = snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+        }));
+
         res.status(200).json(products);
     } catch (error) {
         console.error('Error fetching products:', error);

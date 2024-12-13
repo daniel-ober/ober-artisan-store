@@ -16,23 +16,24 @@ const NavBar = () => {
   const { user, isAdmin, handleSignOut } = useAuth();
 
   useEffect(() => {
-    // Fetch navbar links from Firebase
     const fetchNavbarLinks = async () => {
       try {
         const navbarLinksCollection = collection(db, 'settings', 'site', 'navbarLinks');
         const navbarLinksSnapshot = await getDocs(navbarLinksCollection);
         const fetchedLinks = navbarLinksSnapshot.docs
           .map((doc) => ({ id: doc.id, ...doc.data() }))
-          .filter((link) => link.enabled) // Only include enabled links
-          .sort((a, b) => a.order - b.order); // Sort by 'order'
+          .filter((link) => link.enabled)
+          .sort((a, b) => a.order - b.order);
+        console.log('Fetched Navbar Links:', fetchedLinks); // Debugging
         setNavbarLinks(fetchedLinks);
       } catch (error) {
         console.error('Error fetching navbar links:', error);
       }
     };
-
+  
     fetchNavbarLinks();
   }, []);
+  
 
   // Handle menu toggle
   const handleMenuToggle = () => {

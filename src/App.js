@@ -161,8 +161,9 @@ function App() {
       <NavBar navbarLinks={navbarLinks} />
       <div className="app-content">
         <Routes>
-          <Route path="/home" element={<Navigate to="/" replace />} />
           <Route path="/" element={<Home />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="/home" element={<Navigate to="/" replace />} />
           <Route path="/about" element={isLinkEnabled('about') ? <About /> : <NotFound />} />
           <Route path="/cart" element={isLinkEnabled('cart') ? <Cart /> : <NotFound />} />
           <Route path="/contact" element={isLinkEnabled('contact') ? <Contact /> : <NotFound />} />
@@ -173,13 +174,7 @@ function App() {
           <Route path="/signin" element={isLinkEnabled('signin') ? <SignInEmail /> : <Navigate to="/" replace />} />
           <Route path="/register" element={isLinkEnabled('signin') ? <Register /> : <Navigate to="/" replace />} />
           <Route path="/forgot-password" element={isLinkEnabled('signin') ? <ForgotPassword /> : <Navigate to="/" replace />} />
-          <Route path="/admin-signin" element={<AdminSignin />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/terms-of-service" element={<TermsOfService />} />
-          <Route path="/return-policy" element={<ReturnPolicy />} />
-          <Route path="/products/:id" element={<ProductDetail />} />
-          <Route path="/checkout-summary" element={isLinkEnabled('checkout-summary') ? <CheckoutSummary /> : <NotFound />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path="/checkout-summary" element={<CheckoutSummary />} />
           <Route path="/checkout" element={<PrivateRoute element={<Checkout />} />} />
           <Route path="/account" element={<PrivateRoute element={<AccountPage />} />} />
           <Route path="/admin" element={<PrivateRoute element={<AdminDashboard />} adminOnly />} />
@@ -187,6 +182,11 @@ function App() {
           <Route path="/admin/products" element={<PrivateRoute element={<ManageProducts />} adminOnly />} />
           <Route path="/admin/orders" element={<PrivateRoute element={<ManageOrders />} adminOnly />} />
           <Route path="/admin/settings" element={<PrivateRoute element={<SiteSettings />} adminOnly />} />
+          <Route path="/admin-signin" element={<AdminSignin />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-of-service" element={<TermsOfService />} />
+          <Route path="/return-policy" element={<ReturnPolicy />} />
+          <Route path="/products/:id" element={<ProductDetail />} />
         </Routes>
       </div>
 

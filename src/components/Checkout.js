@@ -16,14 +16,12 @@ const Checkout = ({ cart }) => {
     e.preventDefault();
   
     try {
-      // Generate a unique guest token
-      const guestToken = uuidv4(); // This creates the guestToken
-  
-      const stripeSessionId = `cs_test_${uuidv4()}`; // Simulated Stripe session ID
+      const guestToken = uuidv4();
+      const stripeSessionId = `cs_test_${uuidv4()}`;
   
       const order = {
         userId: 'guest',
-        guestToken, // Add the generated guestToken to the order object
+        guestToken,
         stripeSessionId,
         customerName,
         customerEmail,
@@ -38,19 +36,17 @@ const Checkout = ({ cart }) => {
       };
   
       const ordersRef = collection(db, 'orders');
-      await addDoc(ordersRef, order); // Save the order in Firestore, including the guestToken
+      await addDoc(ordersRef, order);
   
       console.log('Generated guestToken:', guestToken);
       console.log('Order created:', order);
   
-      // Navigate to Checkout Summary
       navigate(`/checkout-summary?session_id=${stripeSessionId}&guest_token=${guestToken}`);
     } catch (err) {
       console.error('Error creating order:', err);
       setError('Failed to complete checkout. Please try again.');
     }
   };
-  
 
   return (
     <form onSubmit={handleSubmit}>

@@ -1,29 +1,20 @@
 module.exports = {
   env: {
-    browser: true,
-    es2021: true,
+    node: true, // Set to Node.js environment
+    es2021: true, // Use ES2021 standards
   },
   extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:react-hooks/recommended',
-    'plugin:jsx-a11y/recommended',
-    'prettier',
-    'eslint-config-prettier',
+    'eslint:recommended', // Basic recommended rules
+    'prettier', // Integrate Prettier for formatting
   ],
-  parser: '@babel/eslint-parser',
+  parser: '@babel/eslint-parser', // Use Babel parser
   parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
-    ecmaVersion: 12,
-    sourceType: 'module',
+    ecmaVersion: 2021, // Ensure compatibility with ES2021
+    sourceType: 'module', // Support ES module syntax
+    requireConfigFile: false, // Prevent the need for a Babel config file in Functions
   },
-  plugins: ['react', 'react-hooks', 'jsx-a11y'],
   rules: {
-    'no-unused-vars': 'warn',
-    'no-console': 'off',
-    'react/prop-types': 'off',
-    'react/react-in-jsx-scope': 'off', // if using React 17 or newer with the new JSX transform
+    'no-unused-vars': 'warn', // Warn for unused variables
+    'no-console': 'off', // Allow console logs
   },
 };

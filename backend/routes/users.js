@@ -4,33 +4,37 @@ const admin = require('firebase-admin');
 
 const db = admin.firestore();
 
-// Middleware for role-based access
-const isAdmin = async (req, res, next) => {
-    const userId = req.headers['x-user-id'];
-    if (!userId) return res.status(401).json({ error: "Unauthorized access" });
+router.post('/', async (req, res) => {
+    const { customerName, total, items, userId } = req.body;
 
-    try {
-        const user = await admin.auth().getUser(userId);
-        if (user.customClaims?.admin) {
-            next();
-        } else {
-            res.status(403).json({ error: "Forbidden: Admin access required" });
-        }
-    } catch (error) {
-        res.status(403).json({ error: "Invalid user credentials" });
+    if (!customerName || !total || !items || !userId) {
+        return res.status(400).json({ error: 'Missing required fields' });
     }
-};
-
-// Update user role
-router.post('/:id/role', isAdmin, async (req, res) => {
-    const userId = req.params.id;
-    const { isAdmin } = req.body;
 
     try {
-        await admin.auth().setCustomUserClaims(userId, { admin: isAdmin });
-        res.status(200).json({ message: "User role updated successfully" });
+        const ref = await db.collection('orders').add({
+            customerName,
+            total,
+            items,
+            userId,
+            createdAt: admin.firestore.FieldValue.serverTimestamp(),
+        });
+        res.status(201).json({ id: ref.id });
     } catch (error) {
-        console.error("Error updating user role:", error.message);
-        res.status(500).json({ error: "Failed to update user role" });
+        console.error('Error creating order:', error.message);
+        res.status(500).json({ error: 'Failed to create order' });
     }
 });
+
+router.get('/all', async (req, res) => {
+    try {
+        const snapshot = await db.collection('orders').get();
+        const orders = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+        res.status(200).json(orders);
+    } catch (error) {
+        console.error('Error fetching orders:', error.message);
+        res.status(500).json({ error: 'Failed to fetch orders' });
+    }
+});
+
+module.exports = router;
