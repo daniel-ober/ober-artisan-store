@@ -98,10 +98,18 @@ app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, 
                 expand: ['data.price.product'],
             });
 
+            const address = session.customer_details?.address || {};
+            const fullAddress = `${address.line1 || ''}, ${address.city || ''}, ${address.state || ''} ${address.postal_code || ''}, ${address.country || ''}`.trim();
+
             const orderData = {
                 stripeSessionId: session.id,
                 customerName: session.customer_details?.name || 'Guest',
                 customerEmail: session.customer_details?.email || 'No email provided',
+                customerPhone: session.customer_details?.phone || 'No phone provided',
+                customerAddress: fullAddress || 'No address provided',
+                shippingDetails: session.shipping || 'No shipping details provided',
+                paymentMethod: session.payment_method_types?.[0] || 'Unknown',
+                currency: session.currency,
                 products: lineItems.data.map((item) => ({
                     name: item.price.product.name,
                     price: item.price.unit_amount / 100,
