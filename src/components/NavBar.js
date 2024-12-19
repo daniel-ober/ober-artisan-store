@@ -68,7 +68,7 @@ const NavBar = () => {
       <div className="navbar-logo">
         <Link to="/">
           <img
-            src={isDarkMode ? 'logo-white-a.png' : 'logo-black-a.png'}
+            src={isDarkMode ? 'danober-logo-wht.png' : 'danober-logo-blk.png'}
             alt="Logo"
             className="logo-img"
           />
