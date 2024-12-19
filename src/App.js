@@ -90,7 +90,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const adminIPs = process.env.REACT_APP_ADMIN_IPS?.split(',') || []; // Split the IPs into an array
+    const adminIPs = process.env.REACT_APP_ADMIN_IP?.split(',') || [];
   
     const handleKeyPress = async (event) => {
       if (event.ctrlKey && event.altKey && event.key === 'ß') {
