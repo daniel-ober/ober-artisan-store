@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "site": "danoberartisandrums-dev",
+    "site": "danoberartisandrums",
     "public": "build",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
