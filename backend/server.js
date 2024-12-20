@@ -1,4 +1,8 @@
 require('dotenv').config({ path: `.env.${process.env.NODE_ENV}` });
+
+console.log('NODE_ENV:', process.env.NODE_ENV);
+console.log('Loaded STRIPE_SECRET_KEY:', process.env.STRIPE_SECRET_KEY);
+
 const express = require('express');
 const cors = require('cors');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
@@ -56,7 +60,10 @@ const allowedOrigins = {
         'http://localhost:3000',
         'http://localhost:4949',
     ],
-    stg: ['https://danoberartisandrums-stg.web.app'],
+    stg: [
+        'http://localhost:3001',
+        'http://localhost:5959',
+    ],
     prod: ['https://danoberartisandrums-prod.web.app'],
 }[env] || [];
 
