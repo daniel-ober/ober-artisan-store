@@ -10,30 +10,49 @@ import {
   arrayUnion,
   collection,
   addDoc,
-  query,
-  where,
-  getDocs,
   deleteDoc,
   Timestamp,
 } from 'firebase/firestore';
-import { getStorage } from 'firebase/storage';
+import { getStorage, ref, listAll, getDownloadURL } from 'firebase/storage';
 
-// Firebase configuration
-const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_FIREBASE_APP_ID,
-  ...(process.env.REACT_APP_FIREBASE_MEASUREMENT_ID && {
+// Firebase configurations for each environment
+const firebaseConfigs = {
+  dev: {
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_FIREBASE_APP_ID,
     measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
-  }),
+  },
+  stg: {
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_FIREBASE_APP_ID,
+    measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
+  },
+  prod: {
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_FIREBASE_APP_ID,
+    measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
+  },
 };
 
-// Debugging: Log Firebase configuration values in development mode
+// Determine the current environment
+const environment = process.env.REACT_APP_ENV || 'dev';
+const firebaseConfig = firebaseConfigs[environment];
+
+// Debugging: Log Firebase configuration in development
 if (process.env.NODE_ENV === 'development') {
-  console.log('Firebase Config:', firebaseConfig);
+  console.log('Firebase Config for Environment:', environment, firebaseConfig);
 }
 
 // Validate Firebase configuration
@@ -43,16 +62,35 @@ if (!firebaseConfig.projectId) {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
-  ? getAnalytics(app)
-  : null;
+const analytics = firebaseConfig.measurementId ? getAnalytics(app) : null;
 
 export const db = getFirestore(app);
 export const auth = getAuth(app);
 export const storage = getStorage(app);
 export const signOut = firebaseSignOut;
 
-// Firestore utility functions
+// Utility Functions
+
+/**
+ * Fetch and display all gallery images from the Firebase Storage
+ * @returns {Promise<string[]>} - List of gallery image URLs
+ */
+export const fetchGalleryImages = async () => {
+  try {
+    const galleryRef = ref(storage, 'Gallery/');
+    const galleryList = await listAll(galleryRef);
+
+    const imageUrls = await Promise.all(
+      galleryList.items.map((item) => getDownloadURL(item))
+    );
+
+    console.log('Fetched Gallery Images:', imageUrls);
+    return imageUrls;
+  } catch (error) {
+    console.error('Error fetching gallery images:', error);
+    throw error;
+  }
+};
 
 /**
  * Fetch user document data.
@@ -128,28 +166,6 @@ export const getCartItems = async (userId) => {
 };
 
 /**
- * Delete an item from a user's cart.
- * @param {string} userId - The user ID.
- * @param {string} itemId - The item ID to delete.
- */
-export const deleteCartItem = async (userId, itemId) => {
-  try {
-    const cartRef = doc(db, 'carts', userId);
-    const cartSnap = await getDoc(cartRef);
-    if (cartSnap.exists()) {
-      const updatedItems = cartSnap
-        .data()
-        .items.filter((item) => item.id !== itemId);
-      await updateDoc(cartRef, { items: updatedItems });
-      console.log(`Item deleted from cart for user: ${userId}`);
-    }
-  } catch (error) {
-    console.error('Error deleting item from cart:', error);
-    throw error;
-  }
-};
-
-/**
  * Save an order to Firestore.
  * @param {Object} orderData - The order data.
  * @returns {Promise<string|null>} - Order ID or null if failed.
@@ -180,3 +196,6 @@ export const clearCart = async (userId) => {
     throw error;
   }
 };
+
+console.log('Environment:', environment);
+console.log('Firebase Project:', firebaseConfig.projectId);
