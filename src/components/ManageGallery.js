@@ -1,6 +1,6 @@
-// ManageGallery.js
 import React, { useState, useEffect } from 'react';
-import { fetchGalleryImages } from '../firebaseConfig'; // Corrected import path
+import { fetchGalleryImages, storage } from '../firebase/firebaseconfig';
+import { ref, deleteObject } from 'firebase/storage';
 import './ManageGallery.css';
 
 const ManageGallery = () => {
@@ -50,13 +50,28 @@ const ManageGallery = () => {
             try {
                 // Logic for uploading files to Firebase
                 console.log(`Uploading ${file.name} to /Gallery`);
-                const uploadedUrl = `/Gallery/${file.name}`; // Replace this with the actual upload URL
+                const uploadedUrl = `/Gallery/${file.name}`; 
                 uploadedImages.push({ name: file.name, url: uploadedUrl, visible: true });
             } catch (error) {
                 console.error(`Failed to upload ${file.name}:`, error);
             }
         }
         setGalleryImages((prevImages) => [...prevImages, ...uploadedImages]);
+    };
+
+    const deleteImage = async (image) => {
+        const confirmDelete = window.confirm(`Are you sure you want to delete ${image.name}?`);
+        if (!confirmDelete) return;
+
+        try {
+            const imageRef = ref(storage, `Gallery/${image.name}`);
+            await deleteObject(imageRef);
+            setGalleryImages((prevImages) => prevImages.filter((img) => img.name !== image.name));
+            alert('Image deleted successfully!');
+        } catch (error) {
+            console.error('Failed to delete image:', error);
+            alert('Failed to delete image. Please try again.');
+        }
     };
 
     const toggleVisibility = (image) => {
@@ -96,21 +111,29 @@ const ManageGallery = () => {
                         {galleryImages.map((image, index) => (
                             <div key={index} className="gallery-item">
                                 <img src={image.url} alt={image.name} />
-                                <button onClick={() => toggleVisibility(image)}>
-                                    {image.visible ? 'Hide' : 'Show'}
-                                </button>
-                                <button
-                                    disabled={index === 0}
-                                    onClick={() => updateOrder(image, 'up')}
-                                >
-                                    Move Up
-                                </button>
-                                <button
-                                    disabled={index === galleryImages.length - 1}
-                                    onClick={() => updateOrder(image, 'down')}
-                                >
-                                    Move Down
-                                </button>
+                                <div className="gallery-item-buttons">
+                                    <button onClick={() => toggleVisibility(image)}>
+                                        {image.visible ? 'Hide' : 'Show'}
+                                    </button>
+                                    <button
+                                        disabled={index === 0}
+                                        onClick={() => updateOrder(image, 'up')}
+                                    >
+                                        Move Up
+                                    </button>
+                                    <button
+                                        disabled={index === galleryImages.length - 1}
+                                        onClick={() => updateOrder(image, 'down')}
+                                    >
+                                        Move Down
+                                    </button>
+                                    <button
+                                        className="delete-btn"
+                                        onClick={() => deleteImage(image)}
+                                    >
+                                        Delete
+                                    </button>
+                                </div>
                             </div>
                         ))}
                     </div>
