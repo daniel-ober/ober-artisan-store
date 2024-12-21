@@ -48,7 +48,6 @@ const ManageGallery = () => {
         const uploadedImages = [];
         for (const file of files) {
             try {
-                // Logic for uploading files to Firebase
                 console.log(`Uploading ${file.name} to /Gallery`);
                 const uploadedUrl = `/Gallery/${file.name}`; 
                 uploadedImages.push({ name: file.name, url: uploadedUrl, visible: true });
