@@ -15,6 +15,10 @@ const NavBar = () => {
   const location = useLocation();
   const { user, isAdmin, handleSignOut } = useAuth();
 
+  // Load logos from environment variables
+  const logoLight = process.env.REACT_APP_LOGO_LIGHT;
+  const logoDark = process.env.REACT_APP_LOGO_DARK;
+
   useEffect(() => {
     const fetchNavbarLinks = async () => {
       try {
@@ -30,10 +34,9 @@ const NavBar = () => {
         console.error('Error fetching navbar links:', error);
       }
     };
-  
+
     fetchNavbarLinks();
   }, []);
-  
 
   // Handle menu toggle
   const handleMenuToggle = () => {
@@ -68,7 +71,7 @@ const NavBar = () => {
       <div className="navbar-logo">
         <Link to="/">
           <img
-            src={isDarkMode ? 'danober-logo-wht.png' : 'danober-logo-blk.png'}
+            src={isDarkMode ? logoLight : logoDark}
             alt="Logo"
             className="logo-img"
           />
