@@ -39,3 +39,5 @@ yarn-error.log*
 *.swp
 *.tmp
 *.temp
+backend/.env.*
+frontend/.env.*
