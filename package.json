@@ -57,7 +57,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "start:dev": "dotenv -e .env.dev react-scripts start",
-    "start:stg": "dotenv -e .env.stg react-scripts start",
+    "start:stg": "PORT=3001 dotenv -e .env.stg react-scripts start",
     "start:prod": "dotenv -e .env.prod react-scripts start",
     "build:dev": "dotenv -e .env.dev react-scripts build",
     "build:stg": "dotenv -e .env.stg react-scripts build",
