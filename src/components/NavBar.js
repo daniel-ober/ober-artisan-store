@@ -15,6 +15,9 @@ const NavBar = () => {
   const location = useLocation();
   const { user, isAdmin, handleSignOut } = useAuth();
 
+  // Log the isAdmin value to the console
+  console.log('Is Admin:', isAdmin);  // Log isAdmin value
+
   // Load logos from environment variables
   const logoLight = process.env.REACT_APP_LOGO_LIGHT;
   const logoDark = process.env.REACT_APP_LOGO_DARK;
