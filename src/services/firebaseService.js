@@ -1,3 +1,4 @@
+// src/services/firebaseService.js
 import { db, storage } from '../firebaseConfig';
 import {
   doc,
