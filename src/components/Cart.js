@@ -49,6 +49,7 @@ const Cart = () => {
     
             console.log('Products Payload:', productsPayload); // Log payload
     
+            // Send the request to the backend using the correct API URL
             const response = await fetch(`${process.env.REACT_APP_API_URL}/create-checkout-session`, {
                 method: 'POST',
                 headers: {
@@ -71,6 +72,7 @@ const Cart = () => {
                 throw new Error('Session URL is missing in the response.');
             }
     
+            // Redirect to Stripe checkout session URL
             window.location.href = session.url;
         } catch (error) {
             console.error('Failed to redirect to checkout:', error.message);
@@ -79,6 +81,7 @@ const Cart = () => {
             setLoading(false);
         }
     };
+    
 
     return (
         <div className="cart-container">
