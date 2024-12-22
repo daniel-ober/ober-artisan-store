@@ -1,3 +1,4 @@
+// src/services/stripeService.js
 import stripePackage from 'stripe';
 
 // Load Stripe secret key from environment variables

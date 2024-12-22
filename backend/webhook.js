@@ -22,28 +22,43 @@ router.post('/', express.raw({ type: 'application/json' }), async (req, res) => 
         const session = event.data.object;
 
         try {
-            const lineItems = await stripe.checkout.sessions.listLineItems(session.id, {
-                expand: ['data.price.product'],
+            // Retrieve the full session including line items
+            const fullSession = await stripe.checkout.sessions.retrieve(session.id, {
+                expand: ['line_items', 'shipping'],
             });
 
+            console.log('Full Session Data:', JSON.stringify(fullSession, null, 2));
+
+            const lineItems = fullSession.line_items.data;
+
+            // Function to format address
             const formatAddress = (address) => {
                 if (!address) return 'No address provided';
                 const { line1, line2, city, state, postal_code, country } = address;
                 return `${line1 || ''}${line2 ? `, ${line2}` : ''}, ${city || ''}, ${state || ''} ${postal_code || ''}, ${country || ''}`;
             };
 
+            // Get shipping name and address explicitly
+            const shippingAddress = formatAddress(fullSession.shipping_details?.address);
+            const [firstName, ...lastNameParts] = (fullSession.shipping_details?.name || 'Guest').split(' ');
+            const lastName = lastNameParts.join(' ');
+
+            // Capture email and phone from session
+            const email = fullSession.customer_details?.email || 'No email provided';
+            const phone = fullSession.customer_details?.phone || 'No phone provided';
+
             const orderData = {
                 stripeSessionId: session.id,
-                customerName: session.customer_details?.name || 'Guest',
-                customerEmail: session.customer_details?.email || 'No email provided',
-                customerPhone: session.customer_details?.phone || 'No phone provided',
-                customerAddress: fullAddress || 'No address provided',
-                shippingDetails: session.shipping || 'No shipping details provided',
-                paymentMethod: session.payment_method_types?.[0] || 'Unknown',
+                customerFirstName: firstName || 'Guest',
+                customerLastName: lastName || 'No last name provided',
+                customerEmail: email,
+                customerPhone: phone,
+                customerShippingAddress: shippingAddress,
+                paymentMethod: session.payment_method_types[0] || 'Unknown',
                 currency: session.currency,
-                products: lineItems.data.map((item) => ({
-                    name: item.price.product.name,
-                    price: item.price.unit_amount / 100,
+                products: lineItems.map((item) => ({
+                    name: item.description,
+                    price: item.amount_total / 100,
                     quantity: item.quantity,
                 })),
                 totalAmount: session.amount_total / 100,
@@ -57,6 +72,7 @@ router.post('/', express.raw({ type: 'application/json' }), async (req, res) => 
             console.log('Order saved to Firestore:', orderData);
         } catch (err) {
             console.error('Error processing checkout session:', err.message);
+            console.error(err.stack);
             return res.status(500).send(`Server Error: ${err.message}`);
         }
     } else {
