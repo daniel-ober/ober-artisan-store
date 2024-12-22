@@ -60,20 +60,13 @@ const allowedOrigins = {
         'http://localhost:3000',
         'http://localhost:4949',
         'https://dev.danoberartisan.com',
-        'https://danoberartisandrums-dev.web.app',
-        'https://danoberartisandrums-dev.firebaseapp.com',
     ],
     stg: [
         'http://localhost:3001',
-        'http://localhost:5959',
         'https://stg.danoberartisan.com',
-        'https://danoberartisandrums-stg.web.app',
-        'https://danoberartisandrums-stg.firebaseapp.com',
     ],
     prod: [
         'https://danoberartisan.com',
-        'https://danoberartisandrums.web.app',
-        'https://danoberartisandrums.firebaseapp.com',
     ],
 }[env] || [];
 
@@ -91,7 +84,6 @@ app.use(
 // Middleware: Log all incoming requests
 app.use((req, res, next) => {
     console.log(`[${new Date().toISOString()}] ${req.method} ${req.originalUrl}`);
-    console.log('Request Headers:', req.headers);
     next();
 });
 
@@ -101,65 +93,20 @@ app.use((req, res, next) => {
     else express.json({ limit: '1mb' })(req, res, next);
 });
 
-// Stripe Webhook Route
-app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, res) => {
-    const sig = req.headers['stripe-signature'];
-    try {
-        const event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
-        console.log(`Received Stripe event: ${event.type}`);
-
-        if (event.type === 'checkout.session.completed') {
-            const session = event.data.object;
-
-            const lineItems = await stripe.checkout.sessions.listLineItems(session.id, {
-                expand: ['data.price.product'],
-            });
-
-            const address = session.customer_details?.address || {};
-            const fullAddress = `${address.line1 || ''}, ${address.city || ''}, ${address.state || ''} ${address.postal_code || ''}, ${address.country || ''}`.trim();
-
-            const orderData = {
-                stripeSessionId: session.id,
-                customerName: session.customer_details?.name || 'Guest',
-                customerEmail: session.customer_details?.email || 'No email provided',
-                customerPhone: session.customer_details?.phone || 'No phone provided',
-                customerAddress: fullAddress || 'No address provided',
-                shippingDetails: session.shipping || 'No shipping details provided',
-                paymentMethod: session.payment_method_types?.[0] || 'Unknown',
-                currency: session.currency,
-                products: lineItems.data.map((item) => ({
-                    name: item.price.product.name,
-                    price: item.price.unit_amount / 100,
-                    quantity: item.quantity,
-                })),
-                totalAmount: session.amount_total / 100,
-                status: session.payment_status,
-                createdAt: admin.firestore.Timestamp.now(),
-                userId: session.metadata?.userId || 'guest',
-                guestToken: session.metadata?.guestToken || null,
-            };
-
-            await db.collection('orders').add(orderData);
-            console.log('Order saved to Firestore:', orderData);
-        }
-
-        res.status(200).send({ received: true });
-    } catch (err) {
-        console.error(`Webhook Error: ${err.message}`);
-        res.status(400).send(`Webhook Error: ${err.message}`);
-    }
-});
+// Webhook Route for Stripe
+const webhookRoute = require('./webhook');
+app.use('/api/webhook', webhookRoute);
 
 // Route for creating Stripe checkout sessions
 app.post('/api/create-checkout-session', async (req, res) => {
     try {
-        const { products, userId } = req.body;
+        const { products, userId, customerFirstName, customerLastName, customerEmail, customerPhone, shippingAddress } = req.body;
+        const guestToken = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
-        if (!products || !Array.isArray(products) || products.length === 0) {
+        if (!products || products.length === 0) {
             return res.status(400).json({ error: 'Invalid products array' });
         }
 
-        const guestToken = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
         const lineItems = products.map((product) => ({
             price_data: {
                 currency: 'usd',
@@ -178,9 +125,18 @@ app.post('/api/create-checkout-session', async (req, res) => {
             mode: 'payment',
             success_url: `${process.env.CLIENT_URL}/checkout-summary?session_id={CHECKOUT_SESSION_ID}&guest_token=${guestToken}`,
             cancel_url: `${process.env.CLIENT_URL}/cart`,
-            allow_promotion_codes: true,
-            metadata: { userId: userId || 'guest', guestToken },
-        });        
+            metadata: {
+                userId: userId || 'guest',
+                guestToken,
+                customerFirstName,
+                customerLastName,
+                customerEmail,
+                customerPhone: customerPhone || 'No phone provided',
+                shippingAddress: JSON.stringify(shippingAddress || {}),
+            },
+            customer_email: customerEmail,
+            shipping_address_collection: { allowed_countries: ['US', 'CA'] },
+        });
 
         res.status(200).json({ url: session.url, id: session.id, guestToken });
     } catch (err) {

@@ -1,3 +1,4 @@
+// src/components/CheckoutSummary.js
 import React, { useState, useEffect, useRef } from 'react';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
