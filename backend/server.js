@@ -180,7 +180,7 @@ app.post('/api/create-checkout-session', async (req, res) => {
             cancel_url: `${process.env.CLIENT_URL}/cart`,
             allow_promotion_codes: true,
             metadata: { userId: userId || 'guest', guestToken },
-        });
+        });        
 
         res.status(200).json({ url: session.url, id: session.id, guestToken });
     } catch (err) {
