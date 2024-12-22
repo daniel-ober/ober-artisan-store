@@ -59,12 +59,22 @@ const allowedOrigins = {
     dev: [
         'http://localhost:3000',
         'http://localhost:4949',
+        'https://dev.danoberartisan.com',
+        'https://danoberartisandrums-dev.web.app',
+        'https://danoberartisandrums-dev.firebaseapp.com',
     ],
     stg: [
         'http://localhost:3001',
         'http://localhost:5959',
+        'https://stg.danoberartisan.com',
+        'https://danoberartisandrums-stg.web.app',
+        'https://danoberartisandrums-stg.firebaseapp.com',
     ],
-    prod: ['https://danoberartisandrums-prod.web.app'],
+    prod: [
+        'https://danoberartisan.com',
+        'https://danoberartisandrums.web.app',
+        'https://danoberartisandrums.firebaseapp.com',
+    ],
 }[env] || [];
 
 app.use(

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { fetchGalleryImages, storage } from '../firebase/firebaseconfig';
+import { fetchGalleryImages, storage } from '../firebaseConfig';
 import { ref, deleteObject } from 'firebase/storage';
 import './ManageGallery.css';
 
@@ -8,12 +8,15 @@ const ManageGallery = () => {
     const [dragging, setDragging] = useState(false);
     const [loading, setLoading] = useState(true);
 
-    // Fetch current images from Firebase Storage
     useEffect(() => {
         const loadGalleryImages = async () => {
             try {
                 const images = await fetchGalleryImages();
-                setGalleryImages(images.map((url) => ({ url, name: url.split('/').pop(), visible: true })));
+                setGalleryImages(images.map((url) => ({
+                  url,
+                  name: url.split('/').pop(),
+                  visible: true
+                })));
                 setLoading(false);
             } catch (error) {
                 console.error("Failed to load gallery images:", error);
@@ -102,39 +105,12 @@ const ManageGallery = () => {
                         onDragOver={handleDragOver}
                         onDragLeave={handleDragLeave}
                         onDrop={handleDrop}
+                        role="button"
+                        tabIndex={0}
+                        onKeyDown={(e) => e.key === 'Enter' && document.querySelector('input[type="file"]').click()}
                     >
                         Drag and drop images here or
                         <input type="file" multiple accept="image/*" onChange={handleFileSelect} />
-                    </div>
-                    <div className="gallery-list">
-                        {galleryImages.map((image, index) => (
-                            <div key={index} className="gallery-item">
-                                <img src={image.url} alt={image.name} />
-                                <div className="gallery-item-buttons">
-                                    <button onClick={() => toggleVisibility(image)}>
-                                        {image.visible ? 'Hide' : 'Show'}
-                                    </button>
-                                    <button
-                                        disabled={index === 0}
-                                        onClick={() => updateOrder(image, 'up')}
-                                    >
-                                        Move Up
-                                    </button>
-                                    <button
-                                        disabled={index === galleryImages.length - 1}
-                                        onClick={() => updateOrder(image, 'down')}
-                                    >
-                                        Move Down
-                                    </button>
-                                    <button
-                                        className="delete-btn"
-                                        onClick={() => deleteImage(image)}
-                                    >
-                                        Delete
-                                    </button>
-                                </div>
-                            </div>
-                        ))}
                     </div>
                 </>
             )}

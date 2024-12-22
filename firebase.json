@@ -2,7 +2,11 @@
   "hosting": {
     "site": "danoberartisandrums",
     "public": "build",
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
     "rewrites": [
       {
         "source": "**",
@@ -35,5 +39,8 @@
     "database": {
       "port": 9000
     }
+  },
+  "storage": {
+    "rules": "firebase deploy --only storage"
   }
 }

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { loadStripe } from '@stripe/stripe-js';
 import './Cart.css';
 
-const stripePromise = loadStripe('pk_test_51PrBd7Jbbx8jAR4NZ2vOilq5lRJaQ0JnQjT9R7Z1brJvVokZc6TpaRFtX67jSCg8PpeqeUqmXBmFTUBLo0lkeI1G00KrLLeSJb');
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
 const Cart = () => {
     const { cart, updateQuantity, removeFromCart, clearCart } = useCart();
@@ -49,7 +49,7 @@ const Cart = () => {
     
             console.log('Products Payload:', productsPayload); // Log payload
     
-            const response = await fetch('http://localhost:4949/api/create-checkout-session', {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/create-checkout-session`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -79,7 +79,7 @@ const Cart = () => {
             setLoading(false);
         }
     };
-    
+
     return (
         <div className="cart-container">
             <h1>Your Cart</h1>
