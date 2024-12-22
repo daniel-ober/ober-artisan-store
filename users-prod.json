@@ -1,0 +1,52 @@
+{"users": [
+{
+  "localId": "3mL9KWX06WaZbnb4KCB3z7e55jx1",
+  "email": "danober.dev@gmail.com",
+  "emailVerified": true,
+  "passwordHash": "gR6kSy1ISrpp+WKyUdVwlXNUQK3cTfhhK14UGU9UfsNi5JriACqMA1l9o4Y+EwHupchCgTawcNo9gVfkRmmXMQ==",
+  "salt": "ygfd4iQtWj7rUQ==",
+  "lastSignedInAt": "1734603908564",
+  "createdAt": "1731235494476",
+  "providerUserInfo": []
+},
+{
+  "localId": "65oPcW1T31Oiup2cB2rmvmezfJH3",
+  "email": "chilldrummer@gmail.com",
+  "emailVerified": true,
+  "passwordHash": "6d79/+nKWZ6+6gmp6qo2vez8rKZJqeXqc/bHCn8J0/n0jlI1AaHU7sIKYy25P5VTFdDFR3kIwiJ1Sg5gVtNq7g==",
+  "salt": "2gqTuC/ppWD9fA==",
+  "lastSignedInAt": "1734838800083",
+  "createdAt": "1727916469140",
+  "customAttributes": "{\"admin\":true}",
+  "providerUserInfo": []
+},
+{
+  "localId": "GCs5m2asCFUmUkZRXu3zxnVFCf43",
+  "email": "support@danoberartisan.com",
+  "emailVerified": false,
+  "passwordHash": "Vm3m9eHgR/tF/mO59c8S12Mhr3sAqV5RzJuCzq2+jGHFIp+8N3S8TaMwZkN9OKjjYe8NMaOqeVCmju4dFw2nIQ==",
+  "salt": "yArYzUkMYyTNnA==",
+  "lastSignedInAt": "1734603901089",
+  "createdAt": "1734602554043",
+  "providerUserInfo": []
+},
+{
+  "localId": "JIEJwDVF7Yft6R6hMEEGt6bZqxA3",
+  "email": "rickjames_doberpop_9872134kj354@mailinator.com",
+  "emailVerified": false,
+  "passwordHash": "/edmX1qI45YWue4bWrbpdu0o+wKp00pmNLRyIqeidco0xF8PWlePCckDN8YNmlt9HGRJDiOJzUU+QWRhjc7BTQ==",
+  "salt": "n3zzFMH/37y7DA==",
+  "lastSignedInAt": "1733614301281",
+  "createdAt": "1728301807019",
+  "providerUserInfo": []
+},
+{
+  "localId": "VsxooGoLN4Z8rkmd2Ku9oybUpJ22",
+  "email": "billybeaner_doberpop32984792384@mailinator.com",
+  "emailVerified": true,
+  "passwordHash": "x/YeuYkzy1JCtku9yQrWGzsSjTC2QkclJQiZXasZdTKWD2HxufwdOzQFIvPDgKXy7MudXn7caOpga0ypyhk+5g==",
+  "salt": "qxqOmzfnZSgLuw==",
+  "lastSignedInAt": "1733626811894",
+  "createdAt": "1728153978830",
+  "providerUserInfo": []
+}]}
