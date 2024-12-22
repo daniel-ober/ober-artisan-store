@@ -41,3 +41,11 @@ yarn-error.log*
 *.temp
 backend/.env.*
 frontend/.env.*
+
+# CORS
+cors.json
+
+# Firebase Service Account Keys
+backend/serviceAccountKey-dev.json
+backend/serviceAccountKey-stg.json
+backend/serviceAccountKey-prod.json

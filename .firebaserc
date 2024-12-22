@@ -1,9 +1,11 @@
 {
   "projects": {
-    "default": "danoberartisandrums",
+    "default": "danoberartisandrums-stg",
     "production": "danoberartisandrums",
     "y": "danoberartisandrums",
-    "dev": "danoberartisandrums-dev"
+    "dev": "danoberartisandrums-dev",
+    "prod": "danoberartisandrums",
+    "stg": "danoberartisandrums-stg"
   },
   "targets": {},
   "etags": {},

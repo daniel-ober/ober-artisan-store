@@ -1,0 +1,32 @@
+{"users": [
+{
+  "localId": "2U6VCQNDfkPRjZeo9caKpZYgqqp1",
+  "email": "customer.b-stg@danoberartisan.com",
+  "emailVerified": false,
+  "passwordHash": "l2ZWaz9guMy3gFYhZF/EUBywMoOdpEhXpZW1rqs3IPoL9bhNTlfeQj0w2RtvA/hCNvyYlccJG0mfwjPUW+jBBw==",
+  "salt": "Ag2G3KoCQ9HuuQ==",
+  "lastSignedInAt": "1734708155978",
+  "createdAt": "1734708155978",
+  "providerUserInfo": []
+},
+{
+  "localId": "7r6TtlaePfYcLeNKkLjajJK5ZDJ2",
+  "email": "admin-stg@danoberartisan.com",
+  "emailVerified": false,
+  "passwordHash": "4lXCLa+8leBP2CCqy3PioQCRs1t3zxFTqwEcciMjmNBZ3aAFUWyOOLrbg89XJ0epGwXXjhhe2hpXzrJnriBWFA==",
+  "salt": "nk5bViWGQ2QVPw==",
+  "lastSignedInAt": "1734845989473",
+  "createdAt": "1734707901143",
+  "customAttributes": "{\"admin\":true}",
+  "providerUserInfo": []
+},
+{
+  "localId": "fMN3wENR0lZ7XiWdqFrbpKyredV2",
+  "email": "customer-stg@danoberartisan.com",
+  "emailVerified": false,
+  "passwordHash": "ZzVLnszEm7e42eurJ4I4B6S/6GZF7VkNXaAbLraMaAUU5gOsVWv34dP1Xlq9zUWmNQguAtdze5OsMHy7kDbuhw==",
+  "salt": "/QBGjYhiQ6RFww==",
+  "lastSignedInAt": "1734708383625",
+  "createdAt": "1734708092610",
+  "providerUserInfo": []
+}]}
