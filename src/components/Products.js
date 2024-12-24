@@ -13,11 +13,11 @@ const Products = () => {
     const fetchProductsData = async () => {
       try {
         const productsList = await fetchProducts();
-        const availableProducts = productsList.filter(
-          (product) => product.status === 'available'
+        const activeProducts = productsList.filter(
+          (product) => product.status === 'active'
         );
         if (isMounted) {
-          setProducts(availableProducts);
+          setProducts(activeProducts);
         }
       } catch (error) {
         console.error('Error fetching products:', error);
