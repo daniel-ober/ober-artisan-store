@@ -5,9 +5,10 @@ import { uploadImage } from '../services/firebaseService';
 import { createStripeProduct } from '../services/stripeService';
 import './AddProductModal.css';
 import ArtisanSpecsForm from './ArtisanSpecsForm';
-import LoadingSpinner from './LoadingSpinner';  // Import loading spinner component
+import LoadingSpinner from './LoadingSpinner';
+import SuccessModal from './SuccessModal';  // Import the SuccessModal component
 
-const AddProductModal = ({ onClose, onProductAdded }) => {
+const AddProductModal = ({ onClose }) => {
   const [step, setStep] = useState(1);
   const [newProduct, setNewProduct] = useState({
     category: '',
@@ -23,8 +24,8 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
   const [artisanSpecs, setArtisanSpecs] = useState({});
   const [imageFiles, setImageFiles] = useState([]);
   const [isUploading, setIsUploading] = useState(false);
+  const [successProductId, setSuccessProductId] = useState(null);  // Track product ID for success modal
   const [error, setError] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
 
   const categories = ['artisan', 'merch', 'accessories'];
 
@@ -52,7 +53,7 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
   const handleArtisanSubmit = async (artisanData) => {
     setIsUploading(true);
     setError('');
-    setSuccessMessage('');
+    setSuccessProductId(null);  // Reset success state
 
     try {
       // Validate required fields
@@ -94,10 +95,10 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
         stripePriceId: stripeProduct.price.id,
       });
 
-      setSuccessMessage('Product added successfully!');
-      onProductAdded({ id: docRef.id, ...finalProductData });
+      // Show success modal by storing the new product ID
+      setSuccessProductId(docRef.id);
 
-      // Reset form
+      // Reset form state
       setNewProduct({
         category: '',
         name: '',
@@ -122,122 +123,128 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
   return (
     <div className="add-product-modal">
       <div className="modal-content">
-        <h2>Add New Product</h2>
-        {error && <div className="error-message">{error}</div>}
-        {successMessage && <div className="success-message">{successMessage}</div>}
-
-        {isUploading ? (
-          <LoadingSpinner />  // Show spinner during upload
+        {successProductId ? (
+          <SuccessModal productId={successProductId} />  // Show success message upon creation
         ) : (
-          <form>
-            {step === 1 && (
-              <>
-                <div className="form-group">
-                  <label htmlFor="category">Category*</label>
-                  <select
-                    id="category"
-                    name="category"
-                    value={newProduct.category}
-                    onChange={handleInputChange}
-                    required
-                  >
-                    <option value="">Select Category</option>
-                    {categories.map((cat) => (
-                      <option key={cat} value={cat}>
-                        {cat}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+          <>
+            <h2>Add New Product</h2>
 
-                <div className="form-group">
-                  <label htmlFor="name">Product Name*</label>
-                  <input
-                    id="name"
-                    type="text"
-                    name="name"
-                    value={newProduct.name}
-                    onChange={handleInputChange}
-                    required
+            {error && <div className="error-message">{error}</div>}
+
+            {isUploading ? (
+              <LoadingSpinner />  // Show spinner during upload
+            ) : (
+              <form>
+                {step === 1 && (
+                  <>
+                    <div className="form-group">
+                      <label htmlFor="category">Category*</label>
+                      <select
+                        id="category"
+                        name="category"
+                        value={newProduct.category}
+                        onChange={handleInputChange}
+                        required
+                      >
+                        <option value="">Select Category</option>
+                        {categories.map((cat) => (
+                          <option key={cat} value={cat}>
+                            {cat}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div className="form-group">
+                      <label htmlFor="name">Product Name*</label>
+                      <input
+                        id="name"
+                        type="text"
+                        name="name"
+                        value={newProduct.name}
+                        onChange={handleInputChange}
+                        required
+                      />
+                    </div>
+
+                    <div className="form-group">
+                      <label htmlFor="price">Price (USD)*</label>
+                      <input
+                        id="price"
+                        type="number"
+                        name="price"
+                        value={newProduct.price}
+                        onChange={handleInputChange}
+                        required
+                      />
+                    </div>
+
+                    <div className="form-group">
+                      <label htmlFor="sku">SKU*</label>
+                      <input
+                        id="sku"
+                        type="text"
+                        name="sku"
+                        value={newProduct.sku}
+                        onChange={handleInputChange}
+                        required
+                      />
+                    </div>
+
+                    <div className="form-group">
+                      <label htmlFor="deliveryTime">Delivery Time*</label>
+                      <input
+                        id="deliveryTime"
+                        type="text"
+                        name="deliveryTime"
+                        value={newProduct.deliveryTime}
+                        onChange={handleInputChange}
+                        required
+                      />
+                    </div>
+
+                    <div className="form-group">
+                      <label htmlFor="description">Description*</label>
+                      <textarea
+                        id="description"
+                        name="description"
+                        value={newProduct.description}
+                        onChange={handleInputChange}
+                        required
+                      ></textarea>
+                    </div>
+
+                    <div className="form-group">
+                      <label htmlFor="file-upload">Images*</label>
+                      <input
+                        id="file-upload"
+                        type="file"
+                        accept="image/*"
+                        multiple
+                        onChange={handleFileChange}
+                      />
+                    </div>
+
+                    <div className="button-group">
+                      {newProduct.category === 'artisan' ? (
+                        <button type="button" onClick={handleNextStep}>Next</button>
+                      ) : (
+                        <button type="button" onClick={() => handleArtisanSubmit({})}>Submit</button>
+                      )}
+                      <button type="button" onClick={onClose}>Close</button>
+                    </div>
+                  </>
+                )}
+
+                {step === 2 && newProduct.category === 'artisan' && (
+                  <ArtisanSpecsForm
+                    onBack={handlePreviousStep}
+                    onSubmit={handleArtisanSubmit}
                   />
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="price">Price (USD)*</label>
-                  <input
-                    id="price"
-                    type="number"
-                    name="price"
-                    value={newProduct.price}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="sku">SKU*</label>
-                  <input
-                    id="sku"
-                    type="text"
-                    name="sku"
-                    value={newProduct.sku}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="deliveryTime">Delivery Time*</label>
-                  <input
-                    id="deliveryTime"
-                    type="text"
-                    name="deliveryTime"
-                    value={newProduct.deliveryTime}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="description">Description*</label>
-                  <textarea
-                    id="description"
-                    name="description"
-                    value={newProduct.description}
-                    onChange={handleInputChange}
-                    required
-                  ></textarea>
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="file-upload">Images*</label>
-                  <input
-                    id="file-upload"
-                    type="file"
-                    accept="image/*"
-                    multiple
-                    onChange={handleFileChange}
-                  />
-                </div>
-
-                <div className="button-group">
-                  {newProduct.category === 'artisan' ? (
-                    <button type="button" onClick={handleNextStep}>Next</button>
-                  ) : (
-                    <button type="button" onClick={() => handleArtisanSubmit({})}>Submit</button>
-                  )}
-                  <button type="button" onClick={onClose}>Close</button>
-                </div>
-              </>
+                )}
+              </form>
             )}
-
-            {step === 2 && newProduct.category === 'artisan' && (
-              <ArtisanSpecsForm
-                onBack={handlePreviousStep}
-                onSubmit={handleArtisanSubmit}
-              />
-            )}
-          </form>
+          </>
         )}
       </div>
     </div>
