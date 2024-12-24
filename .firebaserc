@@ -7,7 +7,21 @@
     "prod": "danoberartisandrums",
     "stg": "danoberartisandrums-stg"
   },
-  "targets": {},
+  "targets": {
+    "danoberartisandrums-stg": {
+      "hosting": {
+        "prod": [
+          "danoberartisandrums"
+        ],
+        "stg": [
+          "danoberartisandrums-stg"
+        ],
+        "dev": [
+          "danoberartisandrums-dev"
+        ]
+      }
+    }
+  },
   "etags": {},
   "dataconnectEmulatorConfig": {}
 }
