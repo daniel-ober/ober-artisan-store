@@ -4,20 +4,29 @@ import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { uploadImage } from '../services/firebaseService';
 import { createStripeProduct } from '../services/stripeService';
 import './AddProductModal.css';
+import ArtisanSpecsForm from './ArtisanSpecsForm';
+import LoadingSpinner from './LoadingSpinner';  // Import loading spinner component
 
 const AddProductModal = ({ onClose, onProductAdded }) => {
+  const [step, setStep] = useState(1);
   const [newProduct, setNewProduct] = useState({
-    category: 'dreamfeather',
-    description: '',
-    images: [],
+    category: '',
     name: '',
     price: 0,
-    status: 'unavailable',
+    description: '',
+    deliveryTime: '',
+    sku: '',
+    images: [],
+    interactive360Url: '',
   });
+
+  const [artisanSpecs, setArtisanSpecs] = useState({});
   const [imageFiles, setImageFiles] = useState([]);
   const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+
+  const categories = ['artisan', 'merch', 'accessories'];
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -29,59 +38,79 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
 
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
-    setImageFiles((prevFiles) => [...prevFiles, ...files]);
+    setImageFiles(files);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (isUploading) return;
+  const handleNextStep = () => {
+    setStep(2);
+  };
 
+  const handlePreviousStep = () => {
+    setStep(1);
+  };
+
+  const handleArtisanSubmit = async (artisanData) => {
     setIsUploading(true);
     setError('');
     setSuccessMessage('');
 
     try {
-      // Upload images and get URLs
+      // Validate required fields
+      if (!newProduct.name || !newProduct.description || newProduct.price <= 0 || !newProduct.sku || !newProduct.deliveryTime) {
+        throw new Error('Name, description, price, SKU, and delivery time are required fields.');
+      }
+
+      // Upload images to Firebase Storage
       const uploadedImages = await Promise.all(
         imageFiles.map((file) => uploadImage(file, 'products'))
       );
 
       // Prepare product data
-      const productData = { ...newProduct, images: uploadedImages };
+      const finalProductData = {
+        ...newProduct,
+        ...artisanData,
+        images: uploadedImages,
+        createdAt: serverTimestamp(),
+      };
+
+      console.log('Final product data before Stripe:', finalProductData);
 
       // Create Stripe product
       const stripeProduct = await createStripeProduct(
-        productData.name,
-        productData.description,
-        productData.price,
-        uploadedImages // Pass the image URLs to Stripe
+        finalProductData.name,
+        finalProductData.description,
+        finalProductData.price,
+        uploadedImages
       );
 
       if (!stripeProduct || !stripeProduct.product.id) {
         throw new Error('Failed to create Stripe product.');
       }
 
-      // Add to Firestore
+      // Add product to Firestore
       const docRef = await addDoc(collection(db, 'products'), {
-        ...productData,
+        ...finalProductData,
         stripeProductId: stripeProduct.product.id,
         stripePriceId: stripeProduct.price.id,
-        createdAt: serverTimestamp(),
       });
 
       setSuccessMessage('Product added successfully!');
-      onProductAdded({ id: docRef.id, ...productData });
+      onProductAdded({ id: docRef.id, ...finalProductData });
 
       // Reset form
       setNewProduct({
-        category: 'dreamfeather',
-        description: '',
-        images: [],
+        category: '',
         name: '',
         price: 0,
-        status: 'unavailable',
+        description: '',
+        deliveryTime: '',
+        sku: '',
+        images: [],
+        interactive360Url: '',
       });
+      setArtisanSpecs({});
       setImageFiles([]);
+      setStep(1);
     } catch (err) {
       console.error('Error adding product:', err.message);
       setError(err.message || 'Failed to add product.');
@@ -96,62 +125,120 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
         <h2>Add New Product</h2>
         {error && <div className="error-message">{error}</div>}
         {successMessage && <div className="success-message">{successMessage}</div>}
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="name">Name</label>
-            <input
-              id="name"
-              type="text"
-              name="name"
-              value={newProduct.name}
-              onChange={handleInputChange}
-              required
-              disabled={isUploading}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="description">Description</label>
-            <textarea
-              id="description"
-              name="description"
-              value={newProduct.description}
-              onChange={handleInputChange}
-              required
-              disabled={isUploading}
-            ></textarea>
-          </div>
-          <div className="form-group">
-            <label htmlFor="price">Price</label>
-            <input
-              id="price"
-              type="number"
-              name="price"
-              value={newProduct.price}
-              onChange={handleInputChange}
-              step="0.01"
-              min="0"
-              required
-              disabled={isUploading}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="image-upload-input">Upload Images</label>
-            <input
-              type="file"
-              accept="image/*"
-              multiple
-              id="image-upload-input"
-              onChange={handleFileChange}
-              disabled={isUploading}
-            />
-          </div>
-          <button type="submit" disabled={isUploading}>
-            {isUploading ? 'Adding...' : 'Add Product'}
-          </button>
-          <button type="button" onClick={onClose}>
-            Close
-          </button>
-        </form>
+
+        {isUploading ? (
+          <LoadingSpinner />  // Show spinner during upload
+        ) : (
+          <form>
+            {step === 1 && (
+              <>
+                <div className="form-group">
+                  <label htmlFor="category">Category*</label>
+                  <select
+                    id="category"
+                    name="category"
+                    value={newProduct.category}
+                    onChange={handleInputChange}
+                    required
+                  >
+                    <option value="">Select Category</option>
+                    {categories.map((cat) => (
+                      <option key={cat} value={cat}>
+                        {cat}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="name">Product Name*</label>
+                  <input
+                    id="name"
+                    type="text"
+                    name="name"
+                    value={newProduct.name}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="price">Price (USD)*</label>
+                  <input
+                    id="price"
+                    type="number"
+                    name="price"
+                    value={newProduct.price}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="sku">SKU*</label>
+                  <input
+                    id="sku"
+                    type="text"
+                    name="sku"
+                    value={newProduct.sku}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="deliveryTime">Delivery Time*</label>
+                  <input
+                    id="deliveryTime"
+                    type="text"
+                    name="deliveryTime"
+                    value={newProduct.deliveryTime}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="description">Description*</label>
+                  <textarea
+                    id="description"
+                    name="description"
+                    value={newProduct.description}
+                    onChange={handleInputChange}
+                    required
+                  ></textarea>
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="file-upload">Images*</label>
+                  <input
+                    id="file-upload"
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    onChange={handleFileChange}
+                  />
+                </div>
+
+                <div className="button-group">
+                  {newProduct.category === 'artisan' ? (
+                    <button type="button" onClick={handleNextStep}>Next</button>
+                  ) : (
+                    <button type="button" onClick={() => handleArtisanSubmit({})}>Submit</button>
+                  )}
+                  <button type="button" onClick={onClose}>Close</button>
+                </div>
+              </>
+            )}
+
+            {step === 2 && newProduct.category === 'artisan' && (
+              <ArtisanSpecsForm
+                onBack={handlePreviousStep}
+                onSubmit={handleArtisanSubmit}
+              />
+            )}
+          </form>
+        )}
       </div>
     </div>
   );
