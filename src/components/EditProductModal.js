@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { fetchProductById, updateProduct } from '../services/productService';
+import { updateStripeProduct } from '../services/stripeService';
 import './EditProductModal.css';
 
 const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
@@ -7,16 +8,43 @@ const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
     name: '',
     description: '',
     price: 0,
+    category: '',
+    sku: '',
+    deliveryTime: '',
+    images: [],
+    interactive360Url: '',
+    height: '',
+    width: '',
+    weight: '',
+    shellThickness: '',
+    bearingEdge: '',
+    woodSpecies: [],
+    customWoodSpecies: '',
+    constructionType: '',
+    drumType: '',
+    finish: '',
+    hardwareColor: '',
+    lugCount: '',
+    lugType: '',
+    snareThrowOff: '',
+    snareWires: '',
+    quantityStaves: '',
+    completionDate: '',
+    stripeProductId: '',
+    stripePriceId: '',
   });
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [initialProduct, setInitialProduct] = useState({});
 
   useEffect(() => {
     const loadProduct = async () => {
       try {
         const fetchedProduct = await fetchProductById(productId);
         setProduct(fetchedProduct);
+        setInitialProduct(fetchedProduct);  // Store initial product state
       } catch (err) {
         setError('Failed to load product details.');
       } finally {
@@ -34,11 +62,43 @@ const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
     }));
   };
 
+  const handleWoodSpeciesChange = (e) => {
+    const selectedOptions = Array.from(e.target.selectedOptions).map((opt) => opt.value);
+    setProduct((prevProduct) => ({
+      ...prevProduct,
+      woodSpecies: selectedOptions,
+    }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
+      // Update Firestore product data
       await updateProduct(productId, product);
+
+      // Trigger Stripe update if price or name changes
+      if (
+        product.name !== initialProduct.name ||
+        product.price !== initialProduct.price
+      ) {
+        const updatedStripe = await updateStripeProduct(
+          product.stripeProductId,
+          product.name,
+          product.description,
+          product.images,
+          product.price,
+          product.stripePriceId
+        );
+
+        // If a new price ID is created, update Firestore
+        if (updatedStripe.newPriceId) {
+          await updateProduct(productId, {
+            stripePriceId: updatedStripe.newPriceId,
+          });
+        }
+      }
+
       onProductUpdated(product);
       onClose();
     } catch (err) {
@@ -49,6 +109,10 @@ const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
   };
 
   if (loading) return <div>Loading...</div>;
+
+  const drumTypes = ['Snare', 'Piccolo', 'Tom', 'Bass Drum', 'Floor Tom'];
+  const constructionTypes = ['Stave', 'Ply', 'Steam Bent', 'Hybrid'];
+  const woodSpeciesOptions = ['Maple', 'Mahogany', 'Birch', 'Walnut'];
 
   return (
     <div className="modal-overlay">
@@ -65,9 +129,9 @@ const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
               value={product.name}
               onChange={handleInputChange}
               required
-              autoComplete="off"
             />
           </div>
+
           <div className="form-group">
             <label htmlFor="description">Description</label>
             <textarea
@@ -76,11 +140,11 @@ const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
               value={product.description}
               onChange={handleInputChange}
               required
-              autoComplete="off"
             ></textarea>
           </div>
+
           <div className="form-group">
-            <label htmlFor="price">Price</label>
+            <label htmlFor="price">Price (USD)</label>
             <input
               id="price"
               name="price"
@@ -90,9 +154,50 @@ const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
               step="0.01"
               min="0"
               required
-              autoComplete="off"
             />
           </div>
+
+          <div className="form-group non-editable">
+            <label htmlFor="category">Category (Non-editable)</label>
+            <input
+              id="category"
+              name="category"
+              type="text"
+              value={product.category}
+              disabled
+            />
+          </div>
+
+          {product.category === 'artisan' && (
+            <>
+              <div className="form-group">
+                <label htmlFor="drumType">Drum Type</label>
+                <select
+                  id="drumType"
+                  name="drumType"
+                  value={product.drumType}
+                  onChange={handleInputChange}
+                >
+                  {drumTypes.map((type) => (
+                    <option key={type} value={type}>
+                      {type}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </>
+          )}
+
+          <div className="form-group non-editable">
+            <label htmlFor="stripeProductId">Stripe Product ID</label>
+            <input id="stripeProductId" type="text" value={product.stripeProductId} disabled />
+          </div>
+
+          <div className="form-group non-editable">
+            <label htmlFor="stripePriceId">Stripe Price ID</label>
+            <input id="stripePriceId" type="text" value={product.stripePriceId} disabled />
+          </div>
+
           <button type="submit" disabled={isSubmitting}>
             {isSubmitting ? 'Updating...' : 'Update Product'}
           </button>
