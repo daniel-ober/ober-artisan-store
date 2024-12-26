@@ -1,5 +1,8 @@
+/* Full CSS for Register Page */
+
+/* Ensure that the register container is centered and has spacing */
 .register-container {
-  max-width: 600px; /* Increased width for better layout */
+  max-width: 600px;
   margin: auto;
   padding: 20px;
   border: 1px solid #ddd;
@@ -7,26 +10,31 @@
   background-color: #f9f9f9;
 }
 
+/* Align form elements in a vertical column */
 .register-form {
   display: flex;
   flex-direction: column;
 }
 
+/* Input field margin */
 .register-input {
   margin-bottom: 16px;
 }
 
+/* Button margin */
 .register-button {
   margin-top: 16px;
 }
 
+/* Error message styling */
 .error-message {
   color: red;
   margin-bottom: 1rem;
 }
 
+/* Password rules margin */
 .password-rules {
-  margin: 10px 0; /* Adjusted margin */
+  margin: 10px 0;
 }
 
 .password-rules ul {
@@ -52,23 +60,33 @@
   color: red;
 }
 
+/* Styling for legal links */
+.terms-link, .privacy-link {
+  color: #1976d2; /* Blue color for links */
+  text-decoration: none; /* No underline by default */
+  margin: 0 2px; /* Slight spacing between links */
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.terms-link:hover, .privacy-link:hover {
+  text-decoration: underline; /* Underline on hover */
+  color: #115293; /* Darker shade on hover */
+}
+
+/* Legal links section to ensure inline display */
+.inline-links {
+  display: inline; /* Keeps the links on the same line */
+}
+
+/* Styling for the legal agreement section */
 .legal-links {
   margin-top: 16px;
   display: flex;
   flex-direction: column;
 }
 
-.legal-links a {
-  cursor: pointer;
-  color: #1976d2; /* Primary color */
-  margin-bottom: 8px;
-  text-decoration: underline;
-}
-
-.legal-links a:hover {
-  color: #115293; /* Darker shade on hover */
-}
-
+/* Password field container for toggling visibility */
 .password-field-container {
   position: relative;
 }
@@ -79,6 +97,7 @@
   top: 0;
 }
 
+/* Dialog content styling */
 .dialog-content {
   display: flex;
   flex-direction: column;
