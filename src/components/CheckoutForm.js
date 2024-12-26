@@ -6,6 +6,7 @@ const CheckoutForm = ({ onPaymentSuccess, cart }) => {
   const [lastName, setLastName] = useState('');
   const [customerEmail, setCustomerEmail] = useState('');
   const [customerPhone, setCustomerPhone] = useState('');
+  const [promoCode, setPromoCode] = useState('');
   const [shippingAddress, setShippingAddress] = useState({
     line1: '',
     city: '',
@@ -34,6 +35,7 @@ const CheckoutForm = ({ onPaymentSuccess, cart }) => {
         lastName,
         customerEmail,
         customerPhone,
+        promoCode,
         shippingAddress,
         billingAddress: isBillingSameAsShipping ? shippingAddress : billingAddress,
       }),
@@ -72,6 +74,18 @@ const CheckoutForm = ({ onPaymentSuccess, cart }) => {
         <label>
           Phone:
           <input type="text" value={customerPhone} onChange={(e) => setCustomerPhone(e.target.value)} required />
+        </label>
+      </div>
+
+      <div>
+        <label>
+          Promotional Code:
+          <input
+            type="text"
+            value={promoCode}
+            onChange={(e) => setPromoCode(e.target.value)}
+            placeholder="Enter promo code"
+          />
         </label>
       </div>
 

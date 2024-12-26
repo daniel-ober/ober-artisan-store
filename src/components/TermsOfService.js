@@ -86,7 +86,7 @@ const TermsOfService = forwardRef((props, ref) => {
         <br />
         Dan Ober Artisan Drums
         <br />
-        Email: legal@danoberartisan.com
+        Email: support@danoberartisan.com
       </p>
     </div>
   );
