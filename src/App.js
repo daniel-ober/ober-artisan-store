@@ -37,8 +37,7 @@ import AdminSignin from './components/AdminSignin';
 import './App.css';
 
 function App() {
-  // eslint-disable-next-line no-unused-vars
-  const { user } = useAuth(); // 'user' is defined but currently not used
+  const { user } = useAuth(); // 'user' tracks the authentication status of the user
   const [navbarLinks, setNavbarLinks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [supportModalOpen, setSupportModalOpen] = useState(false);
@@ -147,7 +146,6 @@ function App() {
       window.removeEventListener('keydown', handleKeyPress);
     };
   }, [navigate]);
-  
 
   const isLinkEnabled = (linkName) => {
     const link = navbarLinks.find((l) => l.name?.toLowerCase() === linkName.toLowerCase());
@@ -171,8 +169,17 @@ function App() {
           <Route path="/pre-order" element={isLinkEnabled('pre-order') ? <PreOrderPage /> : <NotFound />} />
           <Route path="/custom-shop" element={isLinkEnabled('custom-shop') ? <CustomShop /> : <NotFound />} />
           <Route path="/products" element={isLinkEnabled('products') ? <Products /> : <NotFound />} />
-          <Route path="/signin" element={isLinkEnabled('signin') ? <SignInEmail /> : <Navigate to="/" replace />} />
-          <Route path="/register" element={isLinkEnabled('signin') ? <Register /> : <Navigate to="/" replace />} />
+          
+          {/* Conditional Rendering: Redirect authenticated users from sign-in and register pages */}
+          <Route
+            path="/signin"
+            element={user ? <Navigate to="/account" /> : <SignInEmail />}
+          />
+          <Route
+            path="/register"
+            element={user ? <Navigate to="/account" /> : <Register />}
+          />
+          
           <Route path="/forgot-password" element={isLinkEnabled('signin') ? <ForgotPassword /> : <Navigate to="/" replace />} />
           <Route path="/checkout-summary" element={<CheckoutSummary />} />
           <Route path="/checkout" element={<PrivateRoute element={<Checkout />} />} />

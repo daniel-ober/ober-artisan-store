@@ -70,9 +70,7 @@ const TermsOfService = forwardRef((props, ref) => {
 
       <h2>10. Governing Law</h2>
       <p>
-        These Terms of Service shall be governed by and construed in accordance with the laws of Tennessee, USA. 
-        <br />
-        Any disputes arising under these terms shall be subject to the exclusive jurisdiction of the courts in Tennessee, USA.
+        These Terms of Service shall be governed by and construed in accordance with the laws of Tennessee, USA. Any disputes arising under these terms shall be subject to the exclusive jurisdiction of the courts in Tennessee, USA.
       </p>
 
       <h2>11. Changes to Terms</h2>

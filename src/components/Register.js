@@ -1,8 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc, updateDoc } from 'firebase/firestore';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { auth, db } from '../firebaseConfig'; // Assuming 'db' is your Firestore instance
+import { useNavigate } from 'react-router-dom';
+import { auth, db } from '../firebaseConfig';
 import {
   TextField,
   Button,
@@ -21,7 +21,6 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import TermsOfService from './TermsOfService';
 import PrivacyPolicy from './PrivacyPolicy';
 import './Register.css';
-import printJS from 'print-js';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -41,9 +40,6 @@ const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate(); // Used for navigation after successful signup
-  const location = useLocation(); // Get the orderId from the navigation state
-  const termsRef = useRef(null);
-  const privacyRef = useRef(null);
 
   const passwordRules = {
     length: formData.password.length >= 8 && formData.password.length <= 32,
@@ -53,6 +49,16 @@ const Register = () => {
     specialChar: /[!@#$%^&*(),.?":{}|<>]/.test(formData.password),
     match: formData.password === formData.confirmPassword,
   };
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        navigate('/account');
+      }
+    });
+
+    return () => unsubscribe();
+  }, [navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -72,9 +78,7 @@ const Register = () => {
     setStatus('');
 
     if (!agreedToTermsAndPrivacy) {
-      setError(
-        'You must agree to the Terms of Service and Privacy Policy to register.'
-      );
+      setError('You must agree to the Terms of Service and Privacy Policy to register.');
       return;
     }
 
@@ -84,48 +88,26 @@ const Register = () => {
     }
 
     try {
-      // Create user without affecting the admin's authentication state
       const newUserCredential = await createUserWithEmailAndPassword(
         auth,
         formData.email,
         formData.password
       );
 
-      // Use the UID from the newly created user
       const uid = newUserCredential.user.uid;
-
-      // Prepare data to store in Firestore
       const userDocData = {
         firstName: formData.firstName,
         lastName: formData.lastName,
         email: formData.email,
         phone: formData.phone,
-        status: "active",
+        status: 'active',
         createdAt: new Date(),
       };
 
-      // Retrieve guest order details from localStorage
-      const guestOrderDetails = JSON.parse(localStorage.getItem('guestOrderDetails'));
-
-      if (guestOrderDetails) {
-        // If the guestOrderDetails are available, add the orderId to the user profile
-        userDocData.orderId = guestOrderDetails.orderId;
-
-        // Retrieve the orderId and update the Firestore order with the new userId
-        const orderRef = doc(db, 'orders', guestOrderDetails.orderId);
-        await updateDoc(orderRef, {
-          userId: newUserCredential.user.uid,
-        });
-
-        // Clear the guest order details from localStorage
-        localStorage.removeItem('guestOrderDetails');
-      }
-
-      // Store user information in Firestore
       await setDoc(doc(db, 'users', uid), userDocData);
 
       setStatus('Registration successful!');
-      setOpenSuccessDialog(true); // Open the success dialog popup
+      setOpenSuccessDialog(true);
     } catch (error) {
       console.error('Error creating user:', error);
       setError('Failed to register. Please try again.');
@@ -137,24 +119,9 @@ const Register = () => {
   const handleOpenPrivacy = () => setOpenPrivacy(true);
   const handleClosePrivacy = () => setOpenPrivacy(false);
 
-  const printDocument = (ref) => {
-    printJS({
-      printable: ref.current,
-      type: 'html',
-      style: `
-        @media print {
-          body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-          }
-        }
-      `,
-    });
-  };
-
   const handleCloseSuccessDialog = () => {
     setOpenSuccessDialog(false);
-    navigate('/products'); // Redirect to the Products page after clicking "OK"
+    navigate('/products');
   };
 
   return (
@@ -252,51 +219,36 @@ const Register = () => {
           }}
         />
 
-        {/* Password rules section */}
-        <div className="password-rules">
-          <Typography variant="body2" sx={{ marginTop: 2 }}>
-            Password must:
-            <ul>
-              {/* Display password rules */}
-              {/* Checkmark or cross for each rule */}
-            </ul>
-          </Typography>
-        </div>
-
         {/* Terms and Privacy Agreement */}
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={agreedToTermsAndPrivacy}
-              onChange={handleCheckboxChange}
-            />
-          }
-          label={
-            <span>
-              I have read and agree to the{' '}
-              <span
-                onClick={handleOpenTerms}
-                className="terms-link"
-                role="button"
-                tabIndex={0}
-                onKeyPress={(e) => { if (e.key === 'Enter') handleOpenTerms(); }}
-              >
-                Terms of Service
-              </span>{' '}
-              and{' '}
-              <span
-                onClick={handleOpenPrivacy}
-                className="privacy-link"
-                role="button"
-                tabIndex={0}
-                onKeyPress={(e) => { if (e.key === 'Enter') handleOpenPrivacy(); }}
-              >
-                Privacy Policy
-              </span>
-              .
-            </span>
-          }
-        />
+        <div className="legal-checkbox">
+  <Checkbox
+    checked={agreedToTermsAndPrivacy}
+    onChange={handleCheckboxChange}
+  />
+  <span>
+    I have read and agree to the{' '}
+    <span className="inline-links">
+      <button
+        type="button"
+        onClick={handleOpenTerms}
+        className="terms-link"
+      >
+        Terms of Service
+      </button>
+      {' and '}
+      <button
+        type="button"
+        onClick={handleOpenPrivacy}
+        className="privacy-link"
+      >
+        Privacy Policy
+      </button>
+    </span>
+    .
+  </span>
+</div>
+
+
 
         {/* Error and Success Messages */}
         {error && (
@@ -315,20 +267,21 @@ const Register = () => {
           variant="contained"
           color="primary"
           disabled={!agreedToTermsAndPrivacy || !formData.firstName || !formData.lastName || !formData.email || !formData.password || !formData.confirmPassword}
-          className="register-button"
+          fullWidth
         >
           Register
         </Button>
       </form>
 
       {/* Success Dialog */}
-      <Dialog open={openSuccessDialog} onClose={handleCloseSuccessDialog}>
-        <DialogTitle>Registration Successful!</DialogTitle>
+      <Dialog
+        open={openSuccessDialog}
+        onClose={handleCloseSuccessDialog}
+        aria-labelledby="success-dialog-title"
+      >
+        <DialogTitle id="success-dialog-title">Registration Successful</DialogTitle>
         <DialogContent>
-          <Typography variant="body1">
-            Your account has been created successfully. You can now log in and
-            start exploring our products.
-          </Typography>
+          <Typography variant="body1">Your registration was successful!</Typography>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseSuccessDialog} color="primary">
@@ -337,9 +290,25 @@ const Register = () => {
         </DialogActions>
       </Dialog>
 
-      {/* Terms and Privacy Modal */}
-      <TermsOfService open={openTerms} onClose={handleCloseTerms} />
-      <PrivacyPolicy open={openPrivacy} onClose={handleClosePrivacy} />
+      {/* Terms of Service Dialog */}
+      <Dialog open={openTerms} onClose={handleCloseTerms}>
+        <DialogContent>
+          <TermsOfService />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseTerms}>Close</Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Privacy Policy Dialog */}
+      <Dialog open={openPrivacy} onClose={handleClosePrivacy}>
+        <DialogContent>
+          <PrivacyPolicy />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClosePrivacy}>Close</Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };
