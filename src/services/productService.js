@@ -31,6 +31,15 @@ export const updateProduct = async (productId, updatedData) => {
     await updateDoc(productRef, updatedData);
 };
 
+// Update product status
+export const updateProductStatus = async (productId, status) => {
+    const productRef = doc(db, 'products', productId);
+    await updateDoc(productRef, {
+        status,
+        updatedAt: new Date()  // Optional: Track the update time
+    });
+};
+
 // Delete a product
 export const deleteProduct = async (productId) => {
     const productRef = doc(db, 'products', productId);
