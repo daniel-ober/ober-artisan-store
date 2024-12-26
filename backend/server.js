@@ -134,9 +134,11 @@ app.post('/api/create-checkout-session', async (req, res) => {
                 customerEmail,
                 customerPhone: customerPhone || 'No phone provided',
                 shippingAddress: JSON.stringify(shippingAddress || {}),
+
             },
             customer_email: customerEmail,
             shipping_address_collection: { allowed_countries: ['US', 'CA'] },
+            allow_promotion_codes: true
         });
 
         res.status(200).json({ url: session.url, id: session.id, guestToken });

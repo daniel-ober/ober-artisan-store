@@ -8,6 +8,7 @@ import { v4 as uuidv4 } from 'uuid';
 const Checkout = ({ cart }) => {
   const [customerName, setCustomerName] = useState('');
   const [customerEmail, setCustomerEmail] = useState('');
+  const [promoCode, setPromoCode] = useState('');
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
@@ -26,6 +27,7 @@ const Checkout = ({ cart }) => {
         stripeSessionId,
         customerName,
         customerEmail,
+        promoCode,  // Include promo code in the order
         products: cart.map((item) => ({
           name: item.name,
           price: item.price,
@@ -68,6 +70,15 @@ const Checkout = ({ cart }) => {
           value={customerEmail}
           onChange={(e) => setCustomerEmail(e.target.value)}
           required
+        />
+      </label>
+      <label>
+        Promotional Code:
+        <input
+          type="text"
+          value={promoCode}
+          onChange={(e) => setPromoCode(e.target.value)}
+          placeholder="Enter promo code"
         />
       </label>
       <h3>Total: ${totalAmount.toFixed(2)}</h3>
