@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { fetchProducts, deleteProduct } from '../services/productService';
+import { fetchProducts, deleteProduct, updateProductStatus } from '../services/productService';
 import './ManageProducts.css';
 import AddProductModal from './AddProductModal';
-import EditProductModal from './EditProductModal'; // Import EditProductModal
+import EditProductModal from './EditProductModal';
 
 const ManageProducts = () => {
   const [products, setProducts] = useState([]);
@@ -44,7 +44,24 @@ const ManageProducts = () => {
         product.id === updatedProduct.id ? updatedProduct : product
       )
     );
-    setEditProductId(null); // Close edit modal
+    setEditProductId(null);
+  };
+
+  const handleStatusChange = async (productId, newStatus) => {
+    try {
+      await updateProductStatus(productId, newStatus);
+      setProducts((prevProducts) =>
+        prevProducts.map((product) =>
+          product.id === productId ? { ...product, status: newStatus } : product
+        )
+      );
+    } catch (err) {
+      setError('Failed to update product status.');
+    }
+  };
+
+  const openProductDetail = (productId) => {
+    window.open(`/products/${productId}`, '_blank');
   };
 
   return (
@@ -59,6 +76,7 @@ const ManageProducts = () => {
         <table className="manage-products-table">
           <thead>
             <tr>
+              <th>Preview</th>
               <th>Name</th>
               <th>Status</th>
               <th>Actions</th>
@@ -67,8 +85,29 @@ const ManageProducts = () => {
           <tbody>
             {products.map((product) => (
               <tr key={product.id}>
+                <td>
+                  <button
+                    className="thumbnail-btn"
+                    onClick={() => openProductDetail(product.id)}
+                    aria-label={`View details for ${product.name}`}
+                  >
+                    <img
+                      src={product.images[0]}
+                      alt={product.name}
+                      className="thumbnail"
+                    />
+                  </button>
+                </td>
                 <td>{product.name}</td>
-                <td>{product.status}</td>
+                <td>
+                  <select
+                    value={product.status}
+                    onChange={(e) => handleStatusChange(product.id, e.target.value)}
+                  >
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                  </select>
+                </td>
                 <td>
                   <button
                     className="edit-btn"
