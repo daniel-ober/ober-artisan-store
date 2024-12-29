@@ -1,35 +1,53 @@
-/* Container for the entire product detail page */
+/* Container for entire product detail page */
 .product-detail-container {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 40px 30px;
-  max-width: 1400px;
+  padding: 40px 15px;
+  max-width: 1200px;
   margin: 0 auto;
+  box-sizing: border-box;
 }
 
-/* Flex layout for product content */
+/* Header and back link */
+.product-header {
+  margin-bottom: 20px;
+}
+
+.back-to-shop-link {
+  text-decoration: none;
+  color: #007bff;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.back-to-shop-link .back-icon {
+  margin-right: 8px;
+}
+
+/* Flex layout for main product section */
 .product-content {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   width: 100%;
-  gap: 50px;
-  align-items: stretch;  /* Ensure all flex children stretch to equal height */
+  gap: 40px;
+  box-sizing: border-box;
 }
 
-/* Product Gallery and Info Section */
+/* Product gallery and info section */
 .product-gallery-info {
   display: flex;
   width: 100%;
-  gap: 50px;
-  align-items: stretch;  /* Stretch both sides to match height */
+  gap: 30px;
+  align-items: flex-start;
 }
 
-/* Main Image and Thumbnails Section */
+/* Image Gallery */
 .product-image-gallery {
-  flex: 1.5;
-  max-width: 65%;
+  flex: 1.2;
+  max-width: 60%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -39,127 +57,110 @@
   width: 100%;
   height: auto;
   border-radius: 10px;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.5);
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
 }
 
 .product-main-image:hover {
   transform: scale(1.03);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
 }
 
-/* Thumbnail container with scroll option */
+/* Thumbnails */
 .thumbnail-scroll-container {
-  position: relative;
   width: 100%;
   display: flex;
-  align-items: center;
-  margin-top: 20px;
-  z-index: 2;
-}
-
-.product-thumbnail-gallery {
-  display: flex;
-  overflow-x: scroll;
-  gap: 6px;  /* Reduce gap between thumbnails */
-  padding-bottom: 8px;
-}
-
-/* Thumbnail buttons for image selection */
-.product-thumbnail {
-  flex: 0 0 auto;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-  padding: 0;  /* Remove any default button padding */
-  border: none;  /* Remove default button border */
-  background: none;  /* Remove button background */
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  margin-top: 15px;
+  gap: 10px;
 }
 
 .product-thumbnail img {
-  width: 65px;  /* Adjusted thumbnail size */
-  height: 65px;
+  width: 70px;
+  height: 70px;
   object-fit: cover;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
-  margin: 4px;  /* Adjust spacing between thumbnails */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .product-thumbnail:hover {
   transform: scale(1.05);
 }
 
-/* Scroll buttons for thumbnails */
-.scroll-button {
-  background: rgba(255, 255, 255, 0.9);
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
-  padding: 8px 12px;
-  border-radius: 50%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 3;
-}
-
-.scroll-left {
-  left: -10px;
-}
-
-.scroll-right {
-  right: -10px;
-}
-
 /* Product Specifications Section */
 .product-info {
-  flex: 1;
+  flex: 0.75;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  box-sizing: border-box;
 }
 
+/* Specifications Card */
 .artisan-specs {
   background-color: #f8f8f8;
-  padding:25px;
-  border-radius: 12px;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.5);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
   border: 1px solid #ddd;
   width: 100%;
-  flex-grow: 1;  /* Match the height of sibling gallery */
-  display: flex;
-  flex-direction: column;
-  /* justify-content: space-between; */
+  box-sizing: border-box;
 }
 
 .artisan-specs h2 {
-  font-size: 28px;
   margin-bottom: 20px;
+  font-size: 26px;
+  color: #333;
 }
 
-.product-title {
-  font-size: 70px;
-  font-weight: 800;
+/* Table for Product Specs */
+.artisan-specs-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.artisan-specs-table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Align keys to the left */
+.artisan-specs-table td:first-child {
+  font-weight: bold;
   color: #333;
-  margin-bottom: 30px;
+  text-align: left;   /* Align to the left */
+  padding-right: 20px;
+}
+
+/* Align values to the left */
+.artisan-specs-table td:last-child {
+  text-align: left;
+  color: #555;
+}
+
+/* Price Section */
+.product-price-container {
+  text-align: left;
+  margin-top: 25px;
+}
+
+.product-price {
+  font-size: 32px;
+  font-weight: 800;
+  color: #28a745;
+  margin-bottom: 15px;
 }
 
 /* Add to Cart / Remove from Cart Button */
 .add-to-cart-button,
 .remove-from-cart-button {
-  font-size: 20px;
-margin-top: 10px;
-margin-left: 0px;
-padding: 12px;
-border: none;
-  /* border-radius: 8px; */
+  font-size: 18px;
+  padding: 18px;
+  border: none;
   cursor: pointer;
   width: 100%;
   transition: background-color 0.2s ease;
+  text-align: center;
+  border-radius: 0;
 }
 
 .add-to-cart-button {
@@ -172,15 +173,15 @@ border: none;
   color: white;
 }
 
-.remove-from-cart-button:hover {
-  background-color: #c82333;
-}
-
 .add-to-cart-button:hover {
   background-color: #0056b3;
 }
 
-/* Responsive Design */
+.remove-from-cart-button:hover {
+  background-color: #c82333;
+}
+
+/* Responsive Design for Mobile */
 @media (max-width: 1024px) {
   .product-content {
     flex-direction: column;
@@ -190,17 +191,44 @@ border: none;
   .product-gallery-info {
     flex-direction: column;
     align-items: center;
+    width: 100%;
   }
 
   .product-image-gallery {
     max-width: 100%;
   }
 
+  .product-info {
+    max-width: 100%;
+  }
+
+  .artisan-specs {
+    width: 100%;
+  }
+
   .product-thumbnail-gallery {
     justify-content: center;
   }
+}
 
-  .product-info {
-    max-width: 100%;
+/* Center Align for Mobile */
+@media (max-width: 768px) {
+  .product-header,
+  .product-title,
+  .artisan-specs {
+    text-align: center;
+  }
+
+  .product-content {
+    gap: 20px;
+  }
+
+  .product-price {
+    font-size: 28px;
+  }
+
+  /* Ensure table keys are still left-aligned on mobile */
+  .artisan-specs-table td:first-child {
+    text-align: left;
   }
 }
