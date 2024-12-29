@@ -24,6 +24,25 @@ const NavBar = () => {
     0
   );
 
+  useEffect(() => {
+    const fetchNavbarLinks = async () => {
+      try {
+        const navbarLinksCollection = collection(db, 'settings', 'site', 'navbarLinks');
+        const navbarLinksSnapshot = await getDocs(navbarLinksCollection);
+        const fetchedLinks = navbarLinksSnapshot.docs
+          .map((doc) => ({ id: doc.id, ...doc.data() }))
+          .sort((a, b) => a.order - b.order);
+        
+        console.log('Fetched Navbar Links:', fetchedLinks);
+        setNavbarLinks(fetchedLinks.filter(link => link.enabled));  // Only show enabled links
+      } catch (error) {
+        console.error('Error fetching navbar links:', error);
+      }
+    };
+  
+    fetchNavbarLinks();
+  }, [user]);
+
   const toggleCartPreview = () => {
     if (location.pathname !== '/cart') {
       setShowCartPreview((prev) => !prev);
@@ -34,42 +53,14 @@ const NavBar = () => {
     setShowCartPreview(false);
   };
 
-  useEffect(() => {
-    const fetchNavbarLinks = async () => {
-      try {
-        const navbarLinksCollection = collection(
-          db,
-          'settings',
-          'site',
-          'navbarLinks'
-        );
-        const navbarLinksSnapshot = await getDocs(navbarLinksCollection);
-        const fetchedLinks = navbarLinksSnapshot.docs
-          .map((doc) => ({ id: doc.id, ...doc.data() }))
-          .filter((link) => link.enabled)
-          .sort((a, b) => a.order - b.order);
-        setNavbarLinks(fetchedLinks);
-      } catch (error) {
-        console.error('Error fetching navbar links:', error);
-      }
-    };
-
-    fetchNavbarLinks();
-  }, []);
-
-  const handleMenuToggle = () => {
-    setIsMenuOpen((prev) => !prev);
-  };
-
-  const handleSignOutClick = async () => {
-    await handleSignOut();
-  };
-
   const toggleDarkMode = () => {
     setIsDarkMode((prev) => !prev);
     document.body.classList.toggle('dark', !isDarkMode);
     document.body.classList.toggle('light', isDarkMode);
   };
+
+  const isCartEnabled = navbarLinks.some((link) => link.name.toLowerCase() === 'cart');
+  const isSignInEnabled = navbarLinks.some((link) => link.name.toLowerCase() === 'signin');
 
   return (
     <nav className="navbar">
@@ -100,53 +91,91 @@ const NavBar = () => {
       <button
         className="navbar-menu-container"
         ref={buttonRef}
-        onClick={handleMenuToggle}
+        onClick={() => setIsMenuOpen((prev) => !prev)}
         aria-expanded={isMenuOpen}
         aria-label="Toggle menu"
       >
         <img
-          src={
-            isMenuOpen
-              ? 'https://i.imgur.com/P61nlaA.png'
-              : 'https://i.imgur.com/iGiegQg.png'
-          }
+          src={isMenuOpen ? 'https://i.imgur.com/P61nlaA.png' : 'https://i.imgur.com/iGiegQg.png'}
           alt="Menu Toggle"
           className={`menu-arrow-icon ${isMenuOpen ? 'open' : ''}`}
         />
       </button>
 
       <div className={`navbar-links ${isMenuOpen ? 'open' : ''}`} ref={menuRef}>
-        {navbarLinks.map((link) => (
+        {navbarLinks
+          .filter((link) => link.name.toLowerCase() !== 'cart' && link.name.toLowerCase() !== 'signin')
+          .map((link) => (
+            <Link
+              key={link.id}
+              to={`/${link.name.toLowerCase().replace(/\s+/g, '-')}`}
+              className={`nav-link ${
+                location.pathname === `/${link.name.toLowerCase().replace(/\s+/g, '-')}`
+                  ? 'active'
+                  : ''
+              }`}
+            >
+              {link.label}
+            </Link>
+          ))}
+
+        {isCartEnabled && (
+          <div className="cart-link-container">
+            <button
+              className={`nav-link cart-link ${
+                location.pathname === '/cart' ? 'active' : ''
+              }`}
+              onClick={toggleCartPreview}
+            >
+              <FaCartPlus /> Cart ({cartItemCount})
+            </button>
+
+            {showCartPreview && (
+              <div className="cart-preview-container">
+                <CartPreview onClose={handleCloseCartPreview} />
+              </div>
+            )}
+          </div>
+        )}
+
+        {!user && !isSignInEnabled && (
           <Link
-            key={link.name}
-            to={`/${link.name.toLowerCase().replace(/\s+/g, '-')}`}
+            to="/signin"
             className={`nav-link ${
-              location.pathname ===
-              `/${link.name.toLowerCase().replace(/\s+/g, '-')}`
-                ? 'active'
-                : ''
+              location.pathname === '/signin' ? 'active' : ''
             }`}
           >
-            {link.label}
+            Sign In
           </Link>
-        ))}
+        )}
 
-        <div className="cart-link-container">
-          <button
-            className={`nav-link cart-link ${
-              location.pathname === '/cart' ? 'active' : ''
-            }`}
-            onClick={toggleCartPreview}
-          >
-            <FaCartPlus /> Cart ({cartItemCount})
-          </button>
+        {/* Admin button visible if user is authenticated and isAdmin is true */}
+        {user && isAdmin && (
+  <Link
+    to="/admin"
+    className={`nav-link ${
+      location.pathname === '/admin' ? 'active' : ''
+    }`}
+  >
+    <FaCog /> Admin
+  </Link>
+)}
 
-          {showCartPreview && (
-            <div className="cart-preview-container">
-              <CartPreview onClose={handleCloseCartPreview} />
-            </div>
-          )}
-        </div>
+        {user && (
+          <>
+            <Link
+              to="/account"
+              className={`nav-link ${
+                location.pathname === '/account' ? 'active' : ''
+              }`}
+            >
+              <FaUserAlt /> Account
+            </Link>
+            <button className="nav-link" onClick={handleSignOut}>
+              <FaSignOutAlt /> Sign Out
+            </button>
+          </>
+        )}
       </div>
     </nav>
   );
