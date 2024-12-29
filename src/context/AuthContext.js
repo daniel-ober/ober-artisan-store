@@ -1,4 +1,3 @@
-// src/context/AuthContext.js
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { auth } from '../firebaseConfig';
 import { fetchUserDoc } from '../services/userService';
@@ -12,22 +11,30 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
 
+  // Fetch user data and admin status
+  const fetchUserData = async (currentUser) => {
+    setLoading(true);
+    try {
+      const userData = await fetchUserDoc(currentUser.uid);
+      setIsAdmin(userData?.isAdmin || false);  // Ensure admin status updates
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+      setIsAdmin(false);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(async (currentUser) => {
-      setLoading(true);
+    const unsubscribe = auth.onAuthStateChanged((currentUser) => {
       if (currentUser) {
         setUser(currentUser);
-        try {
-          const userData = await fetchUserDoc(currentUser.uid);
-          setIsAdmin(userData?.isAdmin || false);
-        } catch (error) {
-          console.error('Error fetching user data:', error);
-        }
+        fetchUserData(currentUser);  // Re-fetch admin status on sign-in
       } else {
         setUser(null);
         setIsAdmin(false);
+        setLoading(false);
       }
-      setLoading(false);
     });
 
     return () => unsubscribe();

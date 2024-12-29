@@ -14,10 +14,12 @@ const PrivateRoute = ({ element, adminOnly = false, redirectAuthenticated = fals
   }
 
   if (!user && !redirectAuthenticated) {
+    console.log("User not authenticated - Redirecting to Sign In");
     return <Navigate to="/signin" />;
   }
 
   if (adminOnly && (!user || !isAdmin)) {
+    console.warn("Access denied - Admin privileges required.");
     return <Navigate to="/not-authorized" />;
   }
 
