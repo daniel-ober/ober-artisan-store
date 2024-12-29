@@ -37,7 +37,7 @@ import AdminSignin from './components/AdminSignin';
 import './App.css';
 
 function App() {
-  const { user } = useAuth(); // 'user' tracks the authentication status of the user
+  const { user, isAdmin } = useAuth();
   const [navbarLinks, setNavbarLinks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [supportModalOpen, setSupportModalOpen] = useState(false);
@@ -72,6 +72,7 @@ function App() {
     console.log(`Current Tab changed to: ${activeTab}`);
   }, [location.pathname, routeToTabMap]);
 
+  // Fetch Navbar Links from Firestore
   useEffect(() => {
     const fetchSettings = async () => {
       try {
@@ -88,50 +89,49 @@ function App() {
     fetchSettings();
   }, []);
 
+  // Admin Sign-In Key Command Logic
   useEffect(() => {
     const adminIPs = process.env.REACT_APP_ADMIN_IP?.split(',') || [];
-  
+
     const handleKeyPress = async (event) => {
       if (event.ctrlKey && event.altKey && event.key === 'ß') {
         try {
           console.log('Shortcut triggered. Checking access...');
-  
+          
           // Fetch user's current IP address
           const ipResponse = await fetch('https://api.ipify.org?format=json');
           const { ip } = await ipResponse.json();
           console.log(`Current IP: ${ip}`);
           console.log(`Allowed Admin IPs: ${adminIPs.join(', ')}`);
-  
+
           // Check if the current IP matches any of the allowed IPs
           const isAllowedIP = adminIPs.includes(ip);
-  
+
           if (isAllowedIP) {
             console.log('Access granted via IP address.');
             navigate('/admin-signin');
             return;
           }
-  
+
           // Get stored token from localStorage
           const storedToken = localStorage.getItem('admin-token');
           console.log(`Stored Token: ${storedToken}`);
-  
-          // Check device token (already implemented logic for device tokens)
+
           const macbookToken = process.env.REACT_APP_ADMIN_MACBOOK_TOKEN;
           const iphoneToken = process.env.REACT_APP_ADMIN_IPHONE_TOKEN;
           const ipadToken = process.env.REACT_APP_ADMIN_IPAD_TOKEN;
-  
+
           const isAllowedToken =
             storedToken === macbookToken ||
             storedToken === iphoneToken ||
             storedToken === ipadToken;
-  
+
           if (isAllowedToken) {
             console.log('Access granted via device token.');
             navigate('/admin-signin');
             return;
           }
-  
-          // If neither matches
+
           console.warn('Access Denied: Unauthorized device or IP.');
           alert('Access Denied: Unauthorized device or IP.');
         } catch (error) {
@@ -140,7 +140,7 @@ function App() {
         }
       }
     };
-  
+
     window.addEventListener('keydown', handleKeyPress);
     return () => {
       window.removeEventListener('keydown', handleKeyPress);
@@ -165,57 +165,30 @@ function App() {
           <Route path="/about" element={isLinkEnabled('about') ? <About /> : <NotFound />} />
           <Route path="/cart" element={isLinkEnabled('cart') ? <Cart /> : <NotFound />} />
           <Route path="/contact" element={isLinkEnabled('contact') ? <Contact /> : <NotFound />} />
-          <Route path="/gallery" element={isLinkEnabled('gallery') ? <Gallery /> : <NotFound />} />
-          <Route path="/pre-order" element={isLinkEnabled('pre-order') ? <PreOrderPage /> : <NotFound />} />
-          <Route path="/custom-shop" element={isLinkEnabled('custom-shop') ? <CustomShop /> : <NotFound />} />
-          <Route path="/products" element={isLinkEnabled('products') ? <Products /> : <NotFound />} />
           
-          {/* Conditional Rendering: Redirect authenticated users from sign-in and register pages */}
+          {/* Protect SignIn and Register */}
           <Route
             path="/signin"
-            element={user ? <Navigate to="/account" /> : <SignInEmail />}
+            element={isLinkEnabled('signin') ? (
+              user ? <Navigate to="/account" /> : <SignInEmail />
+            ) : (
+              <Navigate to="/" replace />
+            )}
           />
           <Route
             path="/register"
-            element={user ? <Navigate to="/account" /> : <Register />}
+            element={isLinkEnabled('signin') ? (
+              user ? <Navigate to="/account" /> : <Register />
+            ) : (
+              <Navigate to="/" replace />
+            )}
           />
-          
-          <Route path="/forgot-password" element={isLinkEnabled('signin') ? <ForgotPassword /> : <Navigate to="/" replace />} />
-          <Route path="/checkout-summary" element={<CheckoutSummary />} />
-          <Route path="/checkout" element={<PrivateRoute element={<Checkout />} />} />
-          <Route path="/account" element={<PrivateRoute element={<AccountPage />} />} />
-          <Route path="/admin" element={<PrivateRoute element={<AdminDashboard />} adminOnly />} />
-          <Route path="/admin/users" element={<PrivateRoute element={<ManageUsers />} adminOnly />} />
-          <Route path="/admin/products" element={<PrivateRoute element={<ManageProducts />} adminOnly />} />
-          <Route path="/admin/orders" element={<PrivateRoute element={<ManageOrders />} adminOnly />} />
-          <Route path="/admin/settings" element={<PrivateRoute element={<SiteSettings />} adminOnly />} />
+
+          {/* Admin and Private Routes */}
           <Route path="/admin-signin" element={<AdminSignin />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/terms-of-service" element={<TermsOfService />} />
-          <Route path="/return-policy" element={<ReturnPolicy />} />
-          <Route path="/products/:id" element={<ProductDetail />} />
+          <Route path="/admin" element={<PrivateRoute element={<AdminDashboard />} adminOnly />} />
         </Routes>
       </div>
-
-      {/* Support Button */}
-      <SupportButton onClick={() => setSupportModalOpen(true)} />
-
-      {/* Support Modal */}
-      {supportModalOpen && (
-        <SupportModal
-          onClose={() => setSupportModalOpen(false)}
-          onCategorySelect={(category) => {
-            setSelectedCategory(category);
-            setChatOpen(false);
-          }}
-          selectedCategory={selectedCategory}
-          onChatOpen={() => setChatOpen(true)}
-        />
-      )}
-
-      {/* Chat Modal */}
-      {chatOpen && <SupportChatModal onClose={() => setChatOpen(false)} />}
-      
       <Footer navbarLinks={navbarLinks} />
     </div>
   );
