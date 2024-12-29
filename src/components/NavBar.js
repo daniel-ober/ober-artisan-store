@@ -9,15 +9,11 @@ import './NavBar.css';
 const NavBar = () => {
   const [navbarLinks, setNavbarLinks] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false); // State for dark mode
   const menuRef = useRef(null);
   const buttonRef = useRef(null);
   const location = useLocation();
   const { user, isAdmin, handleSignOut } = useAuth();
-
-  // Log user state for debugging
-  console.log('User:', user);
-  console.log('Is Admin:', isAdmin);
 
   // Load logos from environment variables
   const logoLight = process.env.REACT_APP_LOGO_LIGHT;
@@ -32,7 +28,7 @@ const NavBar = () => {
           .map((doc) => ({ id: doc.id, ...doc.data() }))
           .filter((link) => link.enabled)
           .sort((a, b) => a.order - b.order);
-        console.log('Fetched Navbar Links:', fetchedLinks);
+        console.log('Fetched Navbar Links:', fetchedLinks); // Debugging
         setNavbarLinks(fetchedLinks);
       } catch (error) {
         console.error('Error fetching navbar links:', error);
@@ -42,14 +38,17 @@ const NavBar = () => {
     fetchNavbarLinks();
   }, []);
 
+  // Handle menu toggle
   const handleMenuToggle = () => {
     setIsMenuOpen((prev) => !prev);
   };
 
+  // Handle sign out
   const handleSignOutClick = async () => {
     await handleSignOut();
   };
 
+  // Function to toggle dark mode
   const toggleDarkMode = () => {
     setIsDarkMode((prev) => !prev);
     document.body.classList.toggle('dark', !isDarkMode);
@@ -58,6 +57,7 @@ const NavBar = () => {
 
   return (
     <nav className="navbar">
+      {/* Background Video */}
       <video
         className="navbar-background"
         autoPlay
@@ -78,10 +78,12 @@ const NavBar = () => {
         </Link>
       </div>
 
+      {/* Button to toggle dark mode */}
       <button className="theme-toggle" onClick={toggleDarkMode}>
         {isDarkMode ? 'Light Mode' : 'Dark Mode'}
       </button>
 
+      {/* Menu toggle button */}
       <button
         className="navbar-menu-container"
         ref={buttonRef}
@@ -97,26 +99,17 @@ const NavBar = () => {
       </button>
 
       <div className={`navbar-links ${isMenuOpen ? 'open' : ''}`} ref={menuRef}>
-        {navbarLinks.map((link) => {
-          const lowerCaseName = link.name.toLowerCase();
-          
-          // Hide Sign In and Register when user is logged in
-          if ((lowerCaseName === 'signin' || lowerCaseName === 'register') && user) {
-            return null;
-          }
-
-          return (
-            <Link
-              key={link.name}
-              to={`/${lowerCaseName.replace(/\s+/g, '-')}`}
-              className={`nav-link ${
-                location.pathname === `/${lowerCaseName.replace(/\s+/g, '-')}` ? 'active' : ''
-              }`}
-            >
-              {link.label}
-            </Link>
-          );
-        })}
+        {navbarLinks.map((link) => (
+          <Link
+            key={link.name}
+            to={`/${link.name.toLowerCase().replace(/\s+/g, '-')}`}
+            className={`nav-link ${
+              location.pathname === `/${link.name.toLowerCase().replace(/\s+/g, '-')}` ? 'active' : ''
+            }`}
+          >
+            {link.label}
+          </Link>
+        ))}
 
         {navbarLinks.some((link) => link.name.toLowerCase() === 'cart') && (
           <Link to="/cart" className={`nav-link ${location.pathname === '/cart' ? 'active' : ''}`}>
@@ -124,7 +117,12 @@ const NavBar = () => {
           </Link>
         )}
 
-        {/* Show admin and account links for authenticated users */}
+        {!user && navbarLinks.some((link) => link.name.toLowerCase() === 'signin') && (
+          <Link to="/signin" className={`nav-link ${location.pathname === '/signin' ? 'active' : ''}`}>
+            Sign In
+          </Link>
+        )}
+
         {user && (
           <>
             {isAdmin && (

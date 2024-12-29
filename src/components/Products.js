@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { fetchProducts } from '../services/firebaseService'; // Adjust the path according to your structure
+import { fetchProducts } from '../services/firebaseService';
 import ProductCard from './ProductCard';
 import './Products.css';
 
@@ -8,7 +8,7 @@ const Products = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    let isMounted = true; // Track if the component is mounted
+    let isMounted = true;
 
     const fetchProductsData = async () => {
       try {
@@ -28,7 +28,7 @@ const Products = () => {
 
     fetchProductsData();
     return () => {
-      isMounted = false; // Cleanup on unmount
+      isMounted = false;
     };
   }, []);
 
@@ -38,15 +38,12 @@ const Products = () => {
 
   return (
     <div className="products-container">
-      {products.length > 0 ? (
-        <div className="product-grid">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
-      ) : (
-        <p className="no-products-message">No products available</p>
-      )}
+      <h1 className="page-title">Our Products</h1>
+      <div className="product-grid">
+        {products.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </div>
     </div>
   );
 };
