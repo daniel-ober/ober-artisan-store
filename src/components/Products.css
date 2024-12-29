@@ -11,22 +11,31 @@
 
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));  /* More compact */
-  gap: 10px;  /* Reduced spacing between cards */
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));  /* Standard grid */
+  gap: 20px;  /* Adjust spacing between cards */
   padding: 0 20px;
   justify-items: center;
 }
 
-.loading-message {
-  font-size: 1.2rem;
-  text-align: center;
-  color: #007bff;
-  margin-top: 50px;
+/* Mobile View – Two Products per Row */
+@media (max-width: 768px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);  /* Forces two columns on mobile */
+    gap: 10px;  /* Smaller gap for compact layout */
+  }
 }
 
+/* Smaller Screens (Stack on top of each other) */
+@media (max-width: 480px) {
+  .product-grid {
+    grid-template-columns: 1fr;  /* One product per row on very small screens */
+  }
+}
+
+.loading-message,
 .no-products-message {
   font-size: 1.2rem;
   text-align: center;
-  color: #666;
+  color: #007bff;
   margin-top: 50px;
 }

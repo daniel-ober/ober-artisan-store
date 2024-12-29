@@ -2,33 +2,52 @@ import React, { useRef, useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FaCartPlus, FaSignOutAlt, FaUserAlt, FaCog } from 'react-icons/fa';
 import { useAuth } from '../context/AuthContext';
+import { useCart } from '../context/CartContext';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
+import CartPreview from './CartPreview';
 import './NavBar.css';
 
 const NavBar = () => {
   const [navbarLinks, setNavbarLinks] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false); // State for dark mode
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [showCartPreview, setShowCartPreview] = useState(false);
   const menuRef = useRef(null);
   const buttonRef = useRef(null);
   const location = useLocation();
   const { user, isAdmin, handleSignOut } = useAuth();
+  const { cart } = useCart();
 
-  // Load logos from environment variables
-  const logoLight = process.env.REACT_APP_LOGO_LIGHT;
-  const logoDark = process.env.REACT_APP_LOGO_DARK;
+  const cartItemCount = Object.values(cart).reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
+
+  const toggleCartPreview = () => {
+    if (location.pathname !== '/cart') {
+      setShowCartPreview((prev) => !prev);
+    }
+  };
+
+  const handleCloseCartPreview = () => {
+    setShowCartPreview(false);
+  };
 
   useEffect(() => {
     const fetchNavbarLinks = async () => {
       try {
-        const navbarLinksCollection = collection(db, 'settings', 'site', 'navbarLinks');
+        const navbarLinksCollection = collection(
+          db,
+          'settings',
+          'site',
+          'navbarLinks'
+        );
         const navbarLinksSnapshot = await getDocs(navbarLinksCollection);
         const fetchedLinks = navbarLinksSnapshot.docs
           .map((doc) => ({ id: doc.id, ...doc.data() }))
           .filter((link) => link.enabled)
           .sort((a, b) => a.order - b.order);
-        console.log('Fetched Navbar Links:', fetchedLinks); // Debugging
         setNavbarLinks(fetchedLinks);
       } catch (error) {
         console.error('Error fetching navbar links:', error);
@@ -38,17 +57,14 @@ const NavBar = () => {
     fetchNavbarLinks();
   }, []);
 
-  // Handle menu toggle
   const handleMenuToggle = () => {
     setIsMenuOpen((prev) => !prev);
   };
 
-  // Handle sign out
   const handleSignOutClick = async () => {
     await handleSignOut();
   };
 
-  // Function to toggle dark mode
   const toggleDarkMode = () => {
     setIsDarkMode((prev) => !prev);
     document.body.classList.toggle('dark', !isDarkMode);
@@ -57,33 +73,30 @@ const NavBar = () => {
 
   return (
     <nav className="navbar">
-      {/* Background Video */}
       <video
         className="navbar-background"
         autoPlay
         loop
         muted
         playsInline
-        src={isMenuOpen ? "/background-mobile.mp4" : "/background-web.mp4"}
+        src={isMenuOpen ? '/background-mobile.mp4' : '/background-web.mp4'}
         type="video/mp4"
       />
 
       <div className="navbar-logo">
         <Link to="/">
           <img
-            src={isDarkMode ? logoLight : logoDark}
+            src={isDarkMode ? process.env.REACT_APP_LOGO_LIGHT : process.env.REACT_APP_LOGO_DARK}
             alt="Logo"
             className="logo-img"
           />
         </Link>
       </div>
 
-      {/* Button to toggle dark mode */}
       <button className="theme-toggle" onClick={toggleDarkMode}>
         {isDarkMode ? 'Light Mode' : 'Dark Mode'}
       </button>
 
-      {/* Menu toggle button */}
       <button
         className="navbar-menu-container"
         ref={buttonRef}
@@ -92,7 +105,11 @@ const NavBar = () => {
         aria-label="Toggle menu"
       >
         <img
-          src={isMenuOpen ? 'https://i.imgur.com/P61nlaA.png' : 'https://i.imgur.com/iGiegQg.png'}
+          src={
+            isMenuOpen
+              ? 'https://i.imgur.com/P61nlaA.png'
+              : 'https://i.imgur.com/iGiegQg.png'
+          }
           alt="Menu Toggle"
           className={`menu-arrow-icon ${isMenuOpen ? 'open' : ''}`}
         />
@@ -104,40 +121,32 @@ const NavBar = () => {
             key={link.name}
             to={`/${link.name.toLowerCase().replace(/\s+/g, '-')}`}
             className={`nav-link ${
-              location.pathname === `/${link.name.toLowerCase().replace(/\s+/g, '-')}` ? 'active' : ''
+              location.pathname ===
+              `/${link.name.toLowerCase().replace(/\s+/g, '-')}`
+                ? 'active'
+                : ''
             }`}
           >
             {link.label}
           </Link>
         ))}
 
-        {navbarLinks.some((link) => link.name.toLowerCase() === 'cart') && (
-          <Link to="/cart" className={`nav-link ${location.pathname === '/cart' ? 'active' : ''}`}>
-            <FaCartPlus /> Cart
-          </Link>
-        )}
+        <div className="cart-link-container">
+          <button
+            className={`nav-link cart-link ${
+              location.pathname === '/cart' ? 'active' : ''
+            }`}
+            onClick={toggleCartPreview}
+          >
+            <FaCartPlus /> Cart ({cartItemCount})
+          </button>
 
-        {!user && navbarLinks.some((link) => link.name.toLowerCase() === 'signin') && (
-          <Link to="/signin" className={`nav-link ${location.pathname === '/signin' ? 'active' : ''}`}>
-            Sign In
-          </Link>
-        )}
-
-        {user && (
-          <>
-            {isAdmin && (
-              <Link to="/admin" className={`nav-link ${location.pathname === '/admin' ? 'active' : ''}`}>
-                <FaCog /> Admin
-              </Link>
-            )}
-            <Link to="/account" className={`nav-link ${location.pathname === '/account' ? 'active' : ''}`}>
-              <FaUserAlt /> Account
-            </Link>
-            <button className="nav-link" onClick={handleSignOutClick}>
-              <FaSignOutAlt /> Sign Out
-            </button>
-          </>
-        )}
+          {showCartPreview && (
+            <div className="cart-preview-container">
+              <CartPreview onClose={handleCloseCartPreview} />
+            </div>
+          )}
+        </div>
       </div>
     </nav>
   );
