@@ -20,6 +20,26 @@
           "danoberartisandrums-dev"
         ]
       }
+    },
+    "danoberartisandrums": {
+      "hosting": {
+        "prod": [
+          "danoberartisandrums"
+        ],
+        "stg": [
+          "danoberartisandrums-stg"
+        ],
+        "dev": [
+          "danoberartisandrums-dev"
+        ]
+      }
+    },
+    "danoberartisandrums-dev": {
+      "hosting": {
+        "dev": [
+          "danoberartisandrums-dev"
+        ]
+      }
     }
   },
   "etags": {},

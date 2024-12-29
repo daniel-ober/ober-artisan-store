@@ -1,113 +1,134 @@
-/* Product Card Styles */
 .product-card {
   display: flex;
   flex-direction: column;
-  max-width: 450px; /* Added max-width for card size control */
-  width: 100%; /* Set to 100% for responsive behavior */
-  height: 100%;
-  border: 1px solid #ccc;
+  max-width: 280px;
+  width: 100%;
+  border: 1px solid #ddd;
   background-color: #fff;
-  padding: 10px;
-  box-sizing: border-box;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  height: 100%;
+  justify-content: space-between;
+  border-radius: 0;
+}
+
+.product-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
 }
 
 .product-image-container {
-  width: 100%; /* Full width of the product card */
-  height: 100%; /* Fixed height */
-  max-height: 150px;
-  display:grid;
-  justify-content:center;
-  align-items:center;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
 }
 
 .product-image {
+    padding: 20px 15px;
   width: 100%;
   height: 100%;
-  object-fit:contain; /* Fit the image without distortion */
-  object-position: top; /* Center the image if cropped */
-  border: 1px black;
+  object-fit: cover;
+  cursor: pointer;
 }
 
-/* Container for product information */
 .product-info {
+  /* padding: 20px 15px; */
+  text-align: center;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center content horizontally */
-  justify-content: center; /* Center content vertically */
-  flex-grow: 1; /* Allow this section to take available space */
-  padding: 0; /* Removed padding from the product-info */
+  flex-grow: 1;
+  justify-content: flex-start;
 }
 
-/* Explicitly style product title */
-.product-title,
-.product-title-custom {
-  font-size: 18px !important; /* Reduce font size with increased specificity */
-  font-weight: bold;
-  white-space: nowrap; /* Prevent line break */
-  overflow: hidden;
-  text-overflow: ellipsis; /* Add ellipsis for overflow */
-  height: auto; /* Adjust height to match single line */
-  margin: 10px 0; /* Consistent margin (10px top and bottom) */
+/* Title consistency */
+.product-title {
+  font-size: 18px !important;
+  font-weight: 600;
+  margin-bottom: 6px;
+  line-height: 1.4;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.product-title-custom {
-  font-size: 24px !important; /* Ensure size can be adjusted in future */
-  color: #333;
-}
-
-/* Ensure consistent height for product description */
+/* Description alignment */
 .product-description {
-  font-size: 16px;
+  font-size: 14px;
   color: #666;
-  padding: 5px;
-  height: 50px; /* Fixed height for description */
+  margin-bottom: 12px;
+  height: 40px;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2; /* Limit description to 2 lines */
-  text-align: center; /* Center text horizontally */
-  line-height: 1.2; /* Aligns text vertically within the height */
 }
 
-/* Change product price color to a more attractive shade */
-.product-info .product-price {
-  font-size: 22px;
-  color: #28a745 !important; /* Bright green color for price, using !important */
-  margin: 10px 0; /* Consistent margin (10px top and bottom) */
+/* Product specs alignment */
+.product-meta {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 12px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-price {
+  font-size: 18px;
+  font-weight: 700;
+  color: #28a745;
+  margin: 10px 0;
+}
+
+/* Faint separator */
+.product-separator {
+  border-top: 1px solid #eee;
+  margin: 0 15px 10px;
 }
 
 .view-details-link {
-  font-size: 16px;
+  font-size: 13px;
   color: #007bff;
-  margin: 10px 0; /* Consistent margin (10px top and bottom) */
   text-decoration: none;
+  margin-bottom: 15px;
 }
 
 .view-details-link:hover {
   text-decoration: underline;
 }
 
+/* Full-width button - spans edge-to-edge */
+.product-button-container {
+  width: 100%;
+  margin-top: auto;
+}
+
 .add-to-cart-button {
   background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 5px;
-  padding: 10px;
-  cursor: pointer;
-  transition: background-color 0.2s;
+  padding: 18px;
+  font-size: 15px;
+  font-weight: 600;
   width: 100%;
-  margin-top: 10px; /* Add margin for consistency with other elements */
+  cursor: pointer;
+  border-radius: 0;
+  box-shadow: none;
+  text-align: center;
 }
 
 .add-to-cart-button:hover {
   background-color: #0056b3;
 }
 
-/* Media Queries for smaller screens */
-@media (max-width: 768px) {
-  .product-card {
-    width: 100%; /* Make cards take full width on smaller screens */
-  }
+.add-to-cart-button:disabled {
+  background-color: #ddd;
+  cursor: not-allowed;
 }
