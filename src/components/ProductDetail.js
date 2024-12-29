@@ -93,6 +93,11 @@ const ProductDetail = () => {
   const isMerchOrAccessory =
     product?.category === 'merch' || product?.category === 'accessory';
 
+  const speciesList = [
+    product?.woodSpecies,
+    product?.customWoodSpecies
+  ].filter(Boolean).join(', ');
+
   if (loading) return <p>Loading product details...</p>;
   if (error) return <p>{error}</p>;
 
@@ -111,7 +116,10 @@ const ProductDetail = () => {
         </Link>
       </div>
 
-      <h1 className="product-title">{product?.name || 'Unnamed Product'}, {product.height} x {product.width} {product.drumType} ({product.finish})</h1>
+      <h1 className="product-title">
+        {product?.name || 'Unnamed Product'}, {product.height} x{' '}
+        {product.width} {product.drumType} ({product.finish})
+      </h1>
 
       <div className="product-content">
         <div className="product-gallery-info">
@@ -120,6 +128,7 @@ const ProductDetail = () => {
               src={mainImage}
               alt={product?.name || 'Product'}
               className="product-main-image"
+              loading="lazy"
             />
             <div className="thumbnail-scroll-container">
               {!atStart && (
@@ -167,59 +176,24 @@ const ProductDetail = () => {
               <h2>Product Specifications</h2>
               {isArtisanProduct ? (
                 <>
-                  <p>
-                    <strong>Type:</strong> {product.drumType}
-                  </p>
-                  <p>
-                    <strong>Construction:</strong>{' '}
-                    {product.constructionType}
-                  </p>
-                  <p>
-                    <strong>Species:</strong> {product.woodSpecies}{' '}
-                    {product.customWoodSpecies}
-                  </p>
-                  <p>
-                    <strong>Size:</strong> H:{product.height} in. x W:{product.width} in.
-                  </p>
-                  <p>
-                    <strong>Shell Thickness:</strong> {product.shellThickness} mm
-                  </p>
-                  <p>
-                    <strong>Bearing Edge:</strong> {product.bearingEdge}&deg;
-                  </p>
-                  <p>
-                    <strong>Hardware:</strong> {product.lugCount/2}-lug {product.lugType} ({product.hardwareColor}), {product.snareThrowOff} 
-                  </p>
-                  <p>
-                    <strong>Drum Type:</strong> {product.drumType}
-                  </p>
-                  <p>
-                    <strong>Drum Type:</strong> {product.drumType}
-                  </p>
-                  <p>
-                    <strong>Description:</strong> {product.description}
-                  </p>
-                  <p>
-                    <strong>Delivery Time:</strong> {product.deliveryTime}
-                  </p>
-                  <p>
-                    <strong>SKU:</strong> {product.sku}
-                  </p>
+                  <p><strong>Type:</strong> {product.drumType}</p>
+                  <p><strong>Construction:</strong> {product.constructionType}</p>
+                  <p><strong>Wood Species:</strong> {speciesList}</p>
+                  <p><strong>Depth:</strong> {product.height}&quot;</p>
+                  <p><strong>Diameter:</strong> {product.width}&quot;</p>
+                  <p><strong>Shell Thickness:</strong> {product.shellThickness} mm</p>
+                  <p><strong>Bearing Edge:</strong> {product.bearingEdge}&deg;</p>
+                  <p><strong>Hardware:</strong> {product.lugCount}-lug {product.lugType} ({product.hardwareColor}), {product.snareThrowOff}</p>
+                  <p><strong>Description:</strong> {product.description}</p>
+                  <p><strong>Delivery Time:</strong> {product.deliveryTime}</p>
+                  <p><strong>SKU:</strong> {product.sku}</p>
                 </>
               ) : (
                 <>
-                  <p>
-                    <strong>Description:</strong> {product.description}
-                  </p>
-                  <p>
-                    <strong>SKU:</strong> {product.sku}
-                  </p>
-                  <p>
-                    <strong>Delivery Time:</strong> {product.deliveryTime}
-                  </p>
+                  <p><strong>Description:</strong> {product.description}</p>
+                  <p><strong>SKU:</strong> {product.sku}</p>
                 </>
               )}
-
               <div className="product-price-container">
                 <p className="product-price">${product?.price?.toFixed(2)}</p>
                 {inCart ? (
@@ -237,40 +211,11 @@ const ProductDetail = () => {
                     Add to Cart
                   </button>
                 )}
-
-                {inCart && isMerchOrAccessory && (
-                  <div className="quantity-control">
-                    <button onClick={() => handleQuantityChange(-1)}>-</button>
-                    <span className="quantity-display">{inCart.quantity}</span>
-                    <button onClick={() => handleQuantityChange(1)}>+</button>
-                  </div>
-                )}
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      {showModal && (
-        <div
-          className="modal show"
-          onClick={handleModalClose}
-          onKeyDown={(e) => {
-            if (e.key === 'Escape') handleModalClose();
-          }}
-          role="button"
-          tabIndex={0}
-        >
-          <div className="modal-content">
-            <iframe
-              src={product.interactive360Url}
-              width="100%"
-              height="500px"
-              title="360° View"
-            />
-          </div>
-        </div>
-      )}
     </div>
   );
 };
