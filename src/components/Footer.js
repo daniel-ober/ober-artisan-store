@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import './Footer.css';
 
 const Footer = ({ navbarLinks = [] }) => {
-  // Filter and sort navbarLinks, keeping enabled links and sorting them by the order
+  // Filter and sort navbarLinks, keeping enabled links and sorting them by order
   const sortedNavbarLinks = navbarLinks
-    .filter((link) => link.enabled)
-    .sort((a, b) => a.order - b.order); // Ensuring the correct order based on "order" field
+    .filter((link) => link.enabled)  // <== This filters out disabled links
+    .sort((a, b) => a.order - b.order); // Ensuring correct order based on the "order" field
 
   return (
     <footer className="footer-container">
