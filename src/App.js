@@ -34,15 +34,16 @@ import SupportButton from './components/SupportButton';
 import SupportModal from './components/SupportModal';
 import SupportChatModal from './components/SupportChatModal';
 import AdminSignin from './components/AdminSignin';
+import PathSelection from './components/PathSelection'; // New component for path selection
+import CustomDrumBuilder from './components/CustomDrumBuilder'; // Custom Drum Builder
+import SoundProfileRecommendations from './components/SoundProfileRecommendations'; // New component for Sound Profile Recommendations
 import './App.css';
 
 function App() {
   const { user, isAdmin } = useAuth();
   const [navbarLinks, setNavbarLinks] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [supportModalOpen, setSupportModalOpen] = useState(false);
-  const [chatOpen, setChatOpen] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedPath, setSelectedPath] = useState(null); // State to store the selected path
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -98,11 +99,16 @@ function App() {
         try {
           console.log('Shortcut triggered. Checking access...');
           
+          // Fetch user's current IP address
           const ipResponse = await fetch('https://api.ipify.org?format=json');
           const { ip } = await ipResponse.json();
+          console.log(`Current IP: ${ip}`);
+          console.log(`Allowed Admin IPs: ${adminIPs.join(', ')}`);
+
           const isAllowedIP = adminIPs.includes(ip);
 
           if (isAllowedIP) {
+            console.log('Access granted via IP address.');
             navigate('/admin-signin');
             return;
           }
@@ -118,13 +124,16 @@ function App() {
             storedToken === ipadToken;
 
           if (isAllowedToken) {
+            console.log('Access granted via device token.');
             navigate('/admin-signin');
             return;
           }
 
+          console.warn('Access Denied: Unauthorized device or IP.');
           alert('Access Denied: Unauthorized device or IP.');
         } catch (error) {
           console.error('Error verifying admin access:', error);
+          alert('An error occurred while verifying access. Please try again.');
         }
       }
     };
@@ -153,7 +162,15 @@ function App() {
           <Route path="/about" element={isLinkEnabled('about') ? <About /> : <NotFound />} />
           <Route path="/cart" element={isLinkEnabled('cart') ? <Cart /> : <NotFound />} />
           <Route path="/contact" element={isLinkEnabled('contact') ? <Contact /> : <NotFound />} />
-          
+          <Route path="/custom-drum-builder" element={<CustomDrumBuilder />} />
+
+          {/* Main Path Selection */}
+          <Route path="/sound-profile-tool" element={<PathSelection setSelectedPath={setSelectedPath} />} />
+
+          {/* Conditionally Render the Selected Path */}
+          <Route path="/custom-drum-builder" element={selectedPath === 'builder' ? <CustomDrumBuilder /> : <Navigate to="/" />} />
+          <Route path="/sound-profile-recommendations" element={selectedPath === 'recommendations' ? <SoundProfileRecommendations /> : <Navigate to="/" />} />
+
           {/* General Routes for All Users */}
           <Route path="/gallery" element={isLinkEnabled('gallery') ? <Gallery /> : <NotFound />} />
           <Route path="/custom-shop" element={isLinkEnabled('custom-shop') ? <CustomShop /> : <NotFound />} />
@@ -175,7 +192,6 @@ function App() {
               <Navigate to="/" replace />
             )}
           />
-          <Route path="/register" element={<Register />} />
           <Route path="/admin-signin" element={<AdminSignin />} />
         </Routes>
       </div>

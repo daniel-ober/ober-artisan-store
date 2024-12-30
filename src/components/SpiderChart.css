@@ -1,0 +1,88 @@
+body {
+    background-color: #000000;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #ffffff;
+}
+
+.chart-container {
+    text-align: center;
+    margin: 40px 0;
+    color: #ffffff;
+}
+
+canvas {
+    max-width: 500px;
+    max-height: 500px;
+    margin-bottom: 30px;
+}
+
+.definitions {
+    text-align: left;
+    margin: 40px auto;
+    max-width: 700px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: rgba(34, 34, 34, 0.9);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+}
+
+.definition-item h3 {
+    margin: 10px 0;
+    color: #4db8ff;
+}
+
+.definition-item p {
+    margin: 5px 0;
+    line-height: 1.6;
+}
+
+/* Gauge Styling */
+.gauge-container {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.gauge {
+    flex-grow: 1;
+    height: 15px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 0 10px;
+    background-color: rgba(0, 0, 0, 0.5);  /* Black transparent background */
+}
+
+/* Gradients for Each Characteristic */
+.gauge-fill {
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.5s ease;
+}
+
+/* Unique Gradients for Each Characteristic */
+.attack {
+    background: linear-gradient(90deg, #ff5f6d, #ffc371);  /* Red to Orange */
+}
+
+.sustain {
+    background: linear-gradient(90deg, #36d1dc, #5b86e5);  /* Teal to Blue */
+}
+
+.warmth {
+    background: linear-gradient(90deg, #ff9966, #ff5e62);  /* Warm Orange to Red */
+}
+
+.projection {
+    background: linear-gradient(90deg, #00c6ff, #0072ff);  /* Light Blue to Deep Blue */
+}
+
+.brightness {
+    background: linear-gradient(90deg, #f4e2d8, #ba5370);  /* Soft White to Pink */
+}
+
+.gauge-label {
+    font-size: 14px;
+    color: #dddddd;
+}
