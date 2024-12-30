@@ -98,16 +98,11 @@ function App() {
         try {
           console.log('Shortcut triggered. Checking access...');
           
-          // Fetch user's current IP address
           const ipResponse = await fetch('https://api.ipify.org?format=json');
           const { ip } = await ipResponse.json();
-          console.log(`Current IP: ${ip}`);
-          console.log(`Allowed Admin IPs: ${adminIPs.join(', ')}`);
-
           const isAllowedIP = adminIPs.includes(ip);
 
           if (isAllowedIP) {
-            console.log('Access granted via IP address.');
             navigate('/admin-signin');
             return;
           }
@@ -123,16 +118,13 @@ function App() {
             storedToken === ipadToken;
 
           if (isAllowedToken) {
-            console.log('Access granted via device token.');
             navigate('/admin-signin');
             return;
           }
 
-          console.warn('Access Denied: Unauthorized device or IP.');
           alert('Access Denied: Unauthorized device or IP.');
         } catch (error) {
           console.error('Error verifying admin access:', error);
-          alert('An error occurred while verifying access. Please try again.');
         }
       }
     };
@@ -183,6 +175,7 @@ function App() {
               <Navigate to="/" replace />
             )}
           />
+          <Route path="/register" element={<Register />} />
           <Route path="/admin-signin" element={<AdminSignin />} />
         </Routes>
       </div>
