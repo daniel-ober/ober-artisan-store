@@ -60,7 +60,6 @@ const NavBar = () => {
   };
 
   const isCartEnabled = navbarLinks.some((link) => link.name.toLowerCase() === 'cart');
-  const isSignInEnabled = navbarLinks.some((link) => link.name.toLowerCase() === 'signin');
 
   return (
     <nav className="navbar">
@@ -104,7 +103,10 @@ const NavBar = () => {
 
       <div className={`navbar-links ${isMenuOpen ? 'open' : ''}`} ref={menuRef}>
         {navbarLinks
-          .filter((link) => link.name.toLowerCase() !== 'cart' && link.name.toLowerCase() !== 'signin')
+          .filter((link) => 
+            link.name.toLowerCase() !== 'cart' && 
+            (link.name.toLowerCase() !== 'signin' || !user)  // Hides "Sign In" if user is authenticated
+          )
           .map((link) => (
             <Link
               key={link.id}
@@ -138,28 +140,17 @@ const NavBar = () => {
           </div>
         )}
 
-        {!user && !isSignInEnabled && (
-          <Link
-            to="/signin"
-            className={`nav-link ${
-              location.pathname === '/signin' ? 'active' : ''
-            }`}
-          >
-            Sign In
-          </Link>
-        )}
-
         {/* Admin button visible if user is authenticated and isAdmin is true */}
         {user && isAdmin && (
-  <Link
-    to="/admin"
-    className={`nav-link ${
-      location.pathname === '/admin' ? 'active' : ''
-    }`}
-  >
-    <FaCog /> Admin
-  </Link>
-)}
+          <Link
+            to="/admin"
+            className={`nav-link ${
+              location.pathname === '/admin' ? 'active' : ''
+            }`}
+          >
+            <FaCog /> Admin
+          </Link>
+        )}
 
         {user && (
           <>
