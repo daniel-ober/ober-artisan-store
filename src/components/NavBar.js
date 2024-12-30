@@ -167,6 +167,16 @@ const NavBar = () => {
             </button>
           </>
         )}
+
+        {/* Link to the Custom Drum Builder */}
+        <Link
+          to="/custom-drum-builder"
+          className={`nav-link ${
+            location.pathname === '/custom-drum-builder' ? 'active' : ''
+          }`}
+        >
+          Custom Drum Builder
+        </Link>
       </div>
     </nav>
   );
