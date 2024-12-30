@@ -1,0 +1,64 @@
+.custom-drum-builder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.builder-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1200px;
+    gap: 40px;
+}
+
+.form-container {
+    flex: 1;
+    min-width: 450px;
+}
+
+.chart-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 450px;
+    height: 500px;
+}
+
+.builder-section {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1rem;
+    color: #ffffff;
+}
+
+select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    background-color: #262626;
+    color: white;
+}
+
+h3 {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+@media (max-width: 768px) {
+    .builder-container {
+        flex-direction: column;
+    }
+
+    .form-container,
+    .chart-container {
+        width: 100%;
+    }
+}
