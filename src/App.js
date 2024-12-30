@@ -37,7 +37,7 @@ import AdminSignin from './components/AdminSignin';
 import './App.css';
 
 function App() {
-  const { user, isAdmin } = useAuth();
+  const { user } = useAuth();
   const [navbarLinks, setNavbarLinks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [supportModalOpen, setSupportModalOpen] = useState(false);
@@ -72,7 +72,6 @@ function App() {
     console.log(`Current Tab changed to: ${activeTab}`);
   }, [location.pathname, routeToTabMap]);
 
-  // Fetch Navbar Links from Firestore
   useEffect(() => {
     const fetchSettings = async () => {
       try {
@@ -98,25 +97,16 @@ function App() {
         try {
           console.log('Shortcut triggered. Checking access...');
           
-          // Fetch user's current IP address
           const ipResponse = await fetch('https://api.ipify.org?format=json');
           const { ip } = await ipResponse.json();
-          console.log(`Current IP: ${ip}`);
-          console.log(`Allowed Admin IPs: ${adminIPs.join(', ')}`);
-
-          // Check if the current IP matches any of the allowed IPs
           const isAllowedIP = adminIPs.includes(ip);
 
           if (isAllowedIP) {
-            console.log('Access granted via IP address.');
             navigate('/admin-signin');
             return;
           }
 
-          // Get stored token from localStorage
           const storedToken = localStorage.getItem('admin-token');
-          console.log(`Stored Token: ${storedToken}`);
-
           const macbookToken = process.env.REACT_APP_ADMIN_MACBOOK_TOKEN;
           const iphoneToken = process.env.REACT_APP_ADMIN_IPHONE_TOKEN;
           const ipadToken = process.env.REACT_APP_ADMIN_IPAD_TOKEN;
@@ -127,16 +117,13 @@ function App() {
             storedToken === ipadToken;
 
           if (isAllowedToken) {
-            console.log('Access granted via device token.');
             navigate('/admin-signin');
             return;
           }
 
-          console.warn('Access Denied: Unauthorized device or IP.');
           alert('Access Denied: Unauthorized device or IP.');
         } catch (error) {
           console.error('Error verifying admin access:', error);
-          alert('An error occurred while verifying access. Please try again.');
         }
       }
     };
@@ -166,7 +153,12 @@ function App() {
           <Route path="/cart" element={isLinkEnabled('cart') ? <Cart /> : <NotFound />} />
           <Route path="/contact" element={isLinkEnabled('contact') ? <Contact /> : <NotFound />} />
           
-          {/* Protect SignIn and Register */}
+          {/* Define Routes for Gallery, Custom Shop, Products, and Pre-Order */}
+          <Route path="/gallery" element={isLinkEnabled('gallery') ? <Gallery /> : <NotFound />} />
+          <Route path="/custom-shop" element={isLinkEnabled('custom-shop') ? <CustomShop /> : <NotFound />} />
+          <Route path="/products" element={isLinkEnabled('products') ? <Products /> : <NotFound />} />
+          <Route path="/pre-order" element={isLinkEnabled('pre-order') ? <PreOrderPage /> : <NotFound />} />
+
           <Route
             path="/signin"
             element={isLinkEnabled('signin') ? (
@@ -184,9 +176,7 @@ function App() {
             )}
           />
 
-          {/* Admin and Private Routes */}
           <Route path="/admin-signin" element={<AdminSignin />} />
-          <Route path="/admin" element={<PrivateRoute element={<AdminDashboard />} adminOnly />} />
         </Routes>
       </div>
       <Footer navbarLinks={navbarLinks} />
