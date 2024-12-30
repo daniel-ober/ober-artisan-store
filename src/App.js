@@ -37,7 +37,7 @@ import AdminSignin from './components/AdminSignin';
 import './App.css';
 
 function App() {
-  const { user } = useAuth();
+  const { user, isAdmin } = useAuth();
   const [navbarLinks, setNavbarLinks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [supportModalOpen, setSupportModalOpen] = useState(false);
@@ -72,6 +72,7 @@ function App() {
     console.log(`Current Tab changed to: ${activeTab}`);
   }, [location.pathname, routeToTabMap]);
 
+  // Fetch Navbar Links from Firestore
   useEffect(() => {
     const fetchSettings = async () => {
       try {
@@ -97,11 +98,16 @@ function App() {
         try {
           console.log('Shortcut triggered. Checking access...');
           
+          // Fetch user's current IP address
           const ipResponse = await fetch('https://api.ipify.org?format=json');
           const { ip } = await ipResponse.json();
+          console.log(`Current IP: ${ip}`);
+          console.log(`Allowed Admin IPs: ${adminIPs.join(', ')}`);
+
           const isAllowedIP = adminIPs.includes(ip);
 
           if (isAllowedIP) {
+            console.log('Access granted via IP address.');
             navigate('/admin-signin');
             return;
           }
@@ -117,13 +123,16 @@ function App() {
             storedToken === ipadToken;
 
           if (isAllowedToken) {
+            console.log('Access granted via device token.');
             navigate('/admin-signin');
             return;
           }
 
+          console.warn('Access Denied: Unauthorized device or IP.');
           alert('Access Denied: Unauthorized device or IP.');
         } catch (error) {
           console.error('Error verifying admin access:', error);
+          alert('An error occurred while verifying access. Please try again.');
         }
       }
     };
@@ -153,12 +162,19 @@ function App() {
           <Route path="/cart" element={isLinkEnabled('cart') ? <Cart /> : <NotFound />} />
           <Route path="/contact" element={isLinkEnabled('contact') ? <Contact /> : <NotFound />} />
           
-          {/* Define Routes for Gallery, Custom Shop, Products, and Pre-Order */}
+          {/* General Routes for All Users */}
           <Route path="/gallery" element={isLinkEnabled('gallery') ? <Gallery /> : <NotFound />} />
           <Route path="/custom-shop" element={isLinkEnabled('custom-shop') ? <CustomShop /> : <NotFound />} />
           <Route path="/products" element={isLinkEnabled('products') ? <Products /> : <NotFound />} />
           <Route path="/pre-order" element={isLinkEnabled('pre-order') ? <PreOrderPage /> : <NotFound />} />
 
+          {/* Account Page for Signed-In Users */}
+          <Route path="/account" element={<PrivateRoute element={<AccountPage />} />} />
+
+          {/* Admin Route */}
+          <Route path="/admin" element={<PrivateRoute element={<AdminDashboard />} adminOnly />} />
+
+          {/* Sign-In and Register */}
           <Route
             path="/signin"
             element={isLinkEnabled('signin') ? (
@@ -167,15 +183,6 @@ function App() {
               <Navigate to="/" replace />
             )}
           />
-          <Route
-            path="/register"
-            element={isLinkEnabled('signin') ? (
-              user ? <Navigate to="/account" /> : <Register />
-            ) : (
-              <Navigate to="/" replace />
-            )}
-          />
-
           <Route path="/admin-signin" element={<AdminSignin />} />
         </Routes>
       </div>
