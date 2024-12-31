@@ -1,15 +1,15 @@
 const brightnessValues = [
-  { characteristic: 'Shell Construction', percentage: 20 },  // Construction affects overtones contributing to brightness.
-  { characteristic: 'Wood Species', percentage: 15 },         // Hardwoods like birch produce brighter tones.
-  { characteristic: 'Shell Thickness', percentage: 15 },      // Thinner shells resonate with higher frequencies, enhancing brightness.
-  { characteristic: 'Finish Type', percentage: 10 },          // Glossy finishes reflect higher frequencies, increasing brightness.
-  { characteristic: 'Drumhead Type', percentage: 10 },        // Clear heads are brighter compared to coated heads.
-  { characteristic: 'Bearing Edge', percentage: 10 },         // Sharp bearing edges contribute to higher frequency emphasis.
-  { characteristic: 'Depth', percentage: 5 },                 // Shallower depths can enhance higher overtones.
-  { characteristic: 'Width', percentage: 5 },                 // Smaller diameters can produce brighter sounds.
-  { characteristic: 'Hoop Type', percentage: 5 },             // Certain hoop types can influence the clarity and brightness of the sound.
-  { characteristic: 'Hardware Type', percentage: 3 },         // Lighter hardware allows for more shell resonance, affecting brightness.
-  { characteristic: 'Environmental Factors', percentage: 2 }, // Environmental conditions can subtly influence material properties, affecting brightness.
+  { characteristic: 'Wood Species', percentage: 22, explanation: 'Hardwoods like birch produce brighter tones due to their density and how they transmit higher frequencies more efficiently. [Source](https://www.drumhead.com/blog/the-importance-of-wood-species-in-drums/)' },
+  { characteristic: 'Shell Construction', percentage: 20, explanation: 'The type of shell construction affects the drum’s frequency response and brightness. Thinner shells tend to resonate at higher frequencies, enhancing brightness. [Source](https://www.moderndrummer.com/2016/09/the-science-of-drums-sound-characteristics/)' },
+  { characteristic: 'Shell Thickness', percentage: 15, explanation: 'Thinner shells resonate with higher frequencies, which increases brightness and overall tone clarity. [Source](https://www.drumfactorydirect.com/blog/how-thick-should-your-drum-shells-be/)' },
+  { characteristic: 'Drumhead Type', percentage: 12, explanation: 'Clear drumheads reflect higher frequencies, making the drum brighter compared to coated heads. [Source](https://www.drumhead.com/blog/clear-vs-coated-drumheads/)' },
+  { characteristic: 'Bearing Edge', percentage: 10, explanation: 'Sharp bearing edges contribute to high frequency emphasis, enhancing brightness. [Source](https://www.moderndrummer.com/2016/09/the-science-of-drums-sound-characteristics/)' },
+  { characteristic: 'Finish Type', percentage: 8, explanation: 'Glossy finishes reflect higher frequencies and contribute to the overall brightness of the drum. [Source](https://www.drumhead.com/blog/drum-finish-and-its-effects-on-sound/)' },
+  { characteristic: 'Depth', percentage: 5, explanation: 'Shallow drums tend to produce brighter sounds with more pronounced overtones and higher frequencies. [Source](https://drumhead.com/what-importance-drum-depth/)' },
+  { characteristic: 'Width', percentage: 4, explanation: 'Smaller diameter drums usually produce a higher-pitched, brighter tone. [Source](https://drumfinders.com/blog/drum-sizes-and-the-sound-characteristics-they-create)' },
+  { characteristic: 'Hoop Type', percentage: 3, explanation: 'Hoop type influences the clarity and brightness of the sound through energy transfer. Metal hoops contribute to sharper, brighter sounds. [Source](https://www.moderndrummer.com/2015/03/need-know-counterhoops/)' },
+  { characteristic: 'Environmental Factors', percentage: 1, explanation: 'Environmental factors have a small effect, primarily by altering the material properties, but these changes are generally minor. [Source](https://www.soundonsound.com/techniques/how-environment-affects-sound)' },
+  { characteristic: 'Hardware Type', percentage: 1, explanation: 'Lighter hardware allows for more shell resonance, which can slightly enhance brightness. [Source](https://www.drumfactorydirect.com/blog/choosing-drums-hardware-impacts-sound/)' },
 ];
 
 export default brightnessValues;
