@@ -20,16 +20,6 @@ const drumheadTypes = [
     },
   },
   {
-    drumhead: 'Mesh',
-    soundProfile: {
-      attack: 3,      // Very muted attack, great for silent practice.
-      sustain: 2,     // Very low sustain, primarily used for practice.
-      warmth: 4,      // Low warmth.
-      projection: 2,  // Very low projection.
-      brightness: 3,  // Low brightness.
-    },
-  },
-  {
     drumhead: 'Hybrid (Coated + Clear)',
     soundProfile: {
       attack: 8,      // Balanced attack, between clear and coated.

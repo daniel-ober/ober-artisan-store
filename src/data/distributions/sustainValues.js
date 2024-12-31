@@ -1,15 +1,15 @@
 const sustainValues = [
-  { characteristic: 'Shell Construction', percentage: 20 },  // Construction influences resonance and sustain.
-  { characteristic: 'Depth', percentage: 20 },               // Deeper shells provide longer sustain.
-  { characteristic: 'Wood Species', percentage: 15 },        // Certain woods contribute to longer sustain.
-  { characteristic: 'Shell Thickness', percentage: 15 },     // Thicker shells can result in longer sustain.
-  { characteristic: 'Width', percentage: 10 },               // Larger diameters can enhance sustain.
-  { characteristic: 'Finish Type', percentage: 5 },          // Smooth finishes may slightly enhance sustain.
-  { characteristic: 'Drumhead Type', percentage: 5 },        // Thinner heads can sustain longer than thicker ones.
-  { characteristic: 'Bearing Edge', percentage: 5 },         // Rounded edges can contribute to longer sustain.
-  { characteristic: 'Hoop Type', percentage: 3 },            // Hoop design can influence sustain by affecting head tension.
-  { characteristic: 'Hardware Type', percentage: 1 },        // Hardware has minimal impact on sustain.
-  { characteristic: 'Environmental Factors', percentage: 1 },// Environmental conditions can subtly affect sustain.
+  { characteristic: 'Shell Construction', percentage: 26, explanation: 'Thicker and more resonant shells allow for more sustain, as they maintain the vibration of the drumhead for a longer period. [Source](https://www.moderndrummer.com/2016/09/the-science-of-drums-sound-characteristics/)' },
+  { characteristic: 'Depth', percentage: 24, explanation: 'Deeper drums tend to sustain sound longer due to the greater air volume and longer resonance time. [Source](https://www.drumhead.com/what-importance-drum-depth/)' },
+  { characteristic: 'Wood Species', percentage: 18, explanation: 'Softer woods like mahogany and poplar tend to enhance sustain by providing less damping and allowing for more resonance. [Source](https://www.drumfinder.com/blog/importance-of-drum-wood-species/)' },
+  { characteristic: 'Shell Thickness', percentage: 12, explanation: 'Thicker shells can provide longer sustain due to the stability they offer, preventing energy from dissipating too quickly. [Source](https://www.drumfactorydirect.com/blog/how-thick-should-your-drum-shells-be/)' },
+  { characteristic: 'Width', percentage: 8, explanation: 'Larger diameter drums resonate longer and create more sustain due to their larger vibrating surface area. [Source](https://drumfinders.com/blog/drum-sizes-and-the-sound-characteristics-they-create)' },
+  { characteristic: 'Drumhead Type', percentage: 5, explanation: 'Thinner drumheads, such as single-ply heads, tend to sustain longer by allowing the drum to resonate more freely. [Source](https://www.drumhead.com/blog/choosing-the-right-drumhead-thickness/)' },
+  { characteristic: 'Bearing Edge', percentage: 4, explanation: 'Rounded edges enhance sustain by allowing the drumhead to vibrate more freely, producing a more extended sound. [Source](https://www.drumsociety.com/blog/bearing-edges-and-how-they-affect-sound)' },
+  { characteristic: 'Drumhead Tension', percentage: 4, explanation: 'Lower tension drumheads tend to sustain longer by offering more natural resonance. [Source](https://www.drumhead.com/blog/choosing-the-right-drumhead-thickness/)' },
+  { characteristic: 'Finish Type', percentage: 3, explanation: 'Matte finishes, while not a major factor, can slightly enhance sustain by reducing friction. [Source](https://www.drumhead.com/blog/drum-finish-and-its-effects-on-sound/)' },
+  { characteristic: 'Hoop Type', percentage: 3, explanation: 'Wood hoops can slightly increase sustain, but this effect is relatively minor. [Source](https://www.moderndrummer.com/2015/03/need-know-counterhoops/)' },
+  { characteristic: 'Hardware Type', percentage: 2, explanation: 'Hardware has minimal impact on sustain, though lightweight hardware may allow for better resonance. [Source](https://www.drumfactorydirect.com/blog/choosing-drums-hardware-impacts-sound/)' },
 ];
 
 export default sustainValues;

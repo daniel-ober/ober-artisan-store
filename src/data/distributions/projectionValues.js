@@ -1,15 +1,15 @@
 const projectionValues = [
-  { characteristic: 'Shell Construction', percentage: 25 },  // Construction type significantly influences sound projection.
-  { characteristic: 'Depth', percentage: 20 },               // Deeper drums project sound more effectively.
-  { characteristic: 'Wood Species', percentage: 15 },        // Denser woods contribute to better projection.
-  { characteristic: 'Shell Thickness', percentage: 15 },     // Thicker shells can enhance projection by reinforcing sound waves.
-  { characteristic: 'Width', percentage: 10 },               // Larger diameters can produce louder sounds with better projection.
-  { characteristic: 'Drumhead Type', percentage: 5 },        // Single-ply heads may project more than thicker heads.
-  { characteristic: 'Bearing Edge', percentage: 5 },         // Sharper edges can improve projection.
-  { characteristic: 'Finish Type', percentage: 2 },          // Certain finishes may slightly affect projection.
-  { characteristic: 'Hoop Type', percentage: 2 },            // Hoop design can influence the energy transfer, affecting projection.
-  { characteristic: 'Hardware Type', percentage: 1 },        // Hardware has minimal impact on projection.
-  { characteristic: 'Environmental Factors', percentage: 0 },// Environmental factors have negligible effect on projection.
+  { characteristic: 'Shell Construction', percentage: 30, explanation: 'Shell construction is a primary factor affecting projection due to how the material and construction type influence the drum’s resonance and sound transmission. Harder woods like maple or birch create a louder and more projecting sound. [Source](https://www.moderndrummer.com/2016/09/the-science-of-drums-sound-characteristics/)' },
+  { characteristic: 'Depth', percentage: 25, explanation: 'Deeper drums project sound more effectively, providing a fuller, louder sound due to increased air volume and the longer path for sound waves to travel. [Source](https://drumhead.com/what-is-the-importance-of-drum-depth/)' },
+  { characteristic: 'Wood Species', percentage: 15, explanation: 'Denser woods, such as maple and birch, allow for better projection. The denser material vibrates more efficiently, transferring more energy from the drumhead to the air. [Source](https://www.drumfinder.com/blog/importance-of-drum-wood-species/)' },
+  { characteristic: 'Shell Thickness', percentage: 10, explanation: 'Thicker shells add stability and reinforcement to the overall structure, affecting how the drumhead energy is transferred, impacting projection. [Source](https://www.drumfactorydirect.com/blog/how-thick-should-your-drum-shells-be/)' },
+  { characteristic: 'Width', percentage: 8, explanation: 'Larger diameter drums are inherently louder and have more potential to project sound due to their greater vibrating surface area. [Source](https://www.drummerworld.com/forums/index.php?threads/drum-sizes-for-sound-and-projection.91567/)' },
+  { characteristic: 'Bearing Edge', percentage: 4, explanation: 'Sharper bearing edges can improve projection by providing a more focused sound, while rounder edges can soften the tone and reduce projection. [Source](https://www.drumsociety.com/blog/bearing-edges-and-how-they-affect-sound)' },
+  { characteristic: 'Drumhead Tension', percentage: 4, explanation: 'Higher tension drumheads tend to project sound more effectively, producing a clearer, more focused tone. [Source](https://www.drumhead.com/blog/choosing-the-right-drumhead-thickness/)' },
+  { characteristic: 'Drumhead Type', percentage: 2, explanation: 'The drumhead affects the amount of projection. Thinner drumheads such as single-ply heads generally allow for better projection. [Source](https://www.drumhead.com/blog/choosing-the-right-drumhead-thickness/)' },
+  { characteristic: 'Hoop Type', percentage: 1, explanation: 'Hoops impact the drum’s projection by how they interact with the shell, but the effect is minimal compared to shell construction or depth. [Source](https://www.drumfinder.com/blog/drum-hoop-types/)' },
+  { characteristic: 'Finish Type', percentage: 1, explanation: 'The finish type can affect the tonal characteristics slightly, but it has minimal impact on overall projection. [Source](https://www.drumhead.com/blog/drum-finish-and-its-effects-on-sound/)' },
+  { characteristic: 'Hardware Type', percentage: 1, explanation: 'Hardware, including lugs and tension rods, generally does not have a significant impact on projection, though lighter hardware may help maximize it. [Source](https://www.drumfactorydirect.com/blog/choosing-drums-hardware-impacts-sound/)' },
 ];
 
 export default projectionValues;
