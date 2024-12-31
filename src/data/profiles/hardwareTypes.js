@@ -1,4 +1,4 @@
-const hardwareType = [
+const hardwareTypes = [
     {
       hardware: 'Standard Lugs',
       soundProfile: {
@@ -20,26 +20,6 @@ const hardwareType = [
       },
     },
     {
-      hardware: 'Throw-Off Mechanism',
-      soundProfile: {
-        attack: 5,
-        sustain: 6,
-        warmth: 6,
-        projection: 5,
-        brightness: 6,
-      },
-    },
-    {
-      hardware: 'High-End Throw-Off',
-      soundProfile: {
-        attack: 7,
-        sustain: 8,
-        warmth: 7,
-        projection: 7,
-        brightness: 7,
-      },
-    },
-    {
       hardware: 'Brass Lugs',
       soundProfile: {
         attack: 8,
@@ -51,4 +31,4 @@ const hardwareType = [
     },
   ];
   
-  export default hardwareType;
+  export default hardwareTypes;
