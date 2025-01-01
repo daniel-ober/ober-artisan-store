@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import Chart from 'chart.js/auto'; // Ensure this is imported
+import Chart from 'chart.js/auto';
 import './SpiderChart.css';
 
 const SpiderChart = ({ data }) => {
@@ -7,7 +7,6 @@ const SpiderChart = ({ data }) => {
     const chartInstance = useRef(null);
 
     useEffect(() => {
-        // Destroy the previous chart instance if it exists
         if (chartInstance.current) {
             chartInstance.current.destroy();
         }
@@ -31,44 +30,49 @@ const SpiderChart = ({ data }) => {
                 }]
             },
             options: {
+                responsive: true,
+                maintainAspectRatio: false,
                 scales: {
                     r: {
+                        beginAtZero: true,
                         suggestedMin: 0,
                         suggestedMax: 10,
-                        grid: {
-                            color: 'rgba(255, 255, 255, 0.1)'
+                        ticks: {
+                            stepSize: 1,
+                            backdropColor: 'rgba(0,0,0,0)',
+                            color: '#ffffff',
+                            font: {
+                                size: 14
+                            }
                         },
-                        angleLines: {
+                        grid: {
                             color: 'rgba(255, 255, 255, 0.2)'
                         },
+                        angleLines: {
+                            color: 'rgba(255, 255, 255, 0.3)'
+                        },
                         pointLabels: {
-                            color: '#fff',
+                            color: '#ffffff',
                             font: {
                                 size: 16
                             }
                         }
                     }
-                },
-                elements: {
-                    line: {
-                        borderWidth: 2
-                    }
                 }
             }
         });
 
-        // Cleanup: Destroy the chart instance when the component unmounts or when the data changes
         return () => {
             if (chartInstance.current) {
                 chartInstance.current.destroy();
             }
         };
-    }, [data]);  // Re-run this effect when data changes
+    }, [data]);
 
     return (
         <div className="chart-container">
             <h1>Drum Sound Profile</h1>
-            <canvas ref={chartRef} width="500" height="500"></canvas>
+            <canvas ref={chartRef} width="400" height="400"></canvas>
         </div>
     );
 };
