@@ -168,27 +168,6 @@ const CustomDrumBuilder = () => {
       
       <div className="builder-container">
         {/* Form Container */}
-        <div className="form-container">
-          <form className="drum-builder-form">
-            {categories.map(({ key, data, label }) => (
-              <div key={key} className="form-group">
-                <label htmlFor={key}>{label}</label>
-                <select
-                  id={key}
-                  value={specs[key]}
-                  onChange={(e) => handleInputChange(e, key)}
-                  className="form-control"
-                >
-                  {data.map((item, idx) => (
-                    <option key={idx} value={item[dataKeyForKey(key)]}>
-                      {item[dataKeyForKey(key)]}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            ))}
-          </form>
-        </div>
 
         {/* Chart Container */}
         <div className="chart-container">
@@ -211,6 +190,27 @@ const CustomDrumBuilder = () => {
           {/* Display Chart Based on View Mode */}
           {viewMode === 'spider' && <SpiderChart data={Object.values(soundProfile)} />}
           {viewMode === 'bar' && <BarChart data={soundProfile} />}
+        </div>
+        <div className="form-container">
+          <form className="drum-builder-form">
+            {categories.map(({ key, data, label }) => (
+              <div key={key} className="form-group">
+                <label htmlFor={key}>{label}</label>
+                <select
+                  id={key}
+                  value={specs[key]}
+                  onChange={(e) => handleInputChange(e, key)}
+                  className="form-control"
+                >
+                  {data.map((item, idx) => (
+                    <option key={idx} value={item[dataKeyForKey(key)]}>
+                      {item[dataKeyForKey(key)]}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            ))}
+          </form>
         </div>
       </div>
     </div>
