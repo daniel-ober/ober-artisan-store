@@ -1,11 +1,3 @@
-body {
-    background-color: #000000;
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    color: #ffffff;
-}
-
 .chart-container {
     text-align: center;
     margin: 40px 0;
@@ -15,74 +7,82 @@ body {
 canvas {
     max-width: 500px;
     max-height: 500px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .definitions {
     text-align: left;
     margin: 40px auto;
     max-width: 700px;
-    padding: 20px;
-    border-radius: 8px;
-    background-color: rgba(34, 34, 34, 0.9);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    padding: 25px;
+    border-radius: 10px;
+    background-color: rgba(20, 20, 20, 0.95);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
 }
 
 .definition-item h3 {
-    margin: 10px 0;
+    margin: 15px 0;
     color: #4db8ff;
+    font-size: 1.5rem;
 }
 
 .definition-item p {
     margin: 5px 0;
-    line-height: 1.6;
+    line-height: 1.7;
 }
 
-/* Gauge Styling */
+/* Gauge Container */
 .gauge-container {
     display: flex;
     align-items: center;
-    margin: 10px 0;
+    margin: 15px 0;
 }
 
 .gauge {
     flex-grow: 1;
-    height: 15px;
-    border-radius: 10px;
+    height: 20px;
+    border-radius: 12px;
     overflow: hidden;
-    margin: 0 10px;
-    background-color: rgba(0, 0, 0, 0.5);  /* Black transparent background */
+    margin: 0 15px;
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
 /* Gradients for Each Characteristic */
 .gauge-fill {
     height: 100%;
-    border-radius: 10px;
-    transition: width 0.5s ease;
+    border-radius: 12px;
+    transition: width 0.6s ease;
 }
 
-/* Unique Gradients for Each Characteristic */
 .attack {
-    background: linear-gradient(90deg, #ff5f6d, #ffc371);  /* Red to Orange */
+    background: linear-gradient(90deg, #ff5f6d, #ffc371);
 }
 
 .sustain {
-    background: linear-gradient(90deg, #36d1dc, #5b86e5);  /* Teal to Blue */
+    background: linear-gradient(90deg, #36d1dc, #5b86e5);
 }
 
 .warmth {
-    background: linear-gradient(90deg, #ff9966, #ff5e62);  /* Warm Orange to Red */
+    background: linear-gradient(90deg, #ff9966, #ff5e62);
 }
 
 .projection {
-    background: linear-gradient(90deg, #00c6ff, #0072ff);  /* Light Blue to Deep Blue */
+    background: linear-gradient(90deg, #00c6ff, #0072ff);
 }
 
 .brightness {
-    background: linear-gradient(90deg, #f4e2d8, #ba5370);  /* Soft White to Pink */
+    background: linear-gradient(90deg, #f4e2d8, #ba5370);
 }
 
 .gauge-label {
-    font-size: 14px;
-    color: #dddddd;
+    font-size: 15px;
+    color: #ffffff;
+    font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .definitions {
+        padding: 15px;
+    }
 }
