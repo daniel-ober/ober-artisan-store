@@ -139,15 +139,59 @@
 
 /* Price Section */
 .product-price-container {
-  text-align: left;
+  display: flex;
+  flex-direction: column; /* Stack price and quantity vertically */
+  align-items: flex-start;
+  width: 100%;
   margin-top: 25px;
 }
 
-.product-price {
-  font-size: 32px;
-  font-weight: 800;
-  color: #28a745;
-  margin-bottom: 15px;
+/* Quantity Section */
+.quantity-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.quantity-label {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Ensure quantity buttons and value are side by side */
+.quantity-selector {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.quantity-btn {
+  background-color: #007bff;
+  color: white;
+  font-size: 24px;
+  width: 36px;
+  height: 36px;
+  border: none;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.quantity-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Quantity value */
+.quantity-display {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  width: 40px;
+  text-align: center;
 }
 
 /* Add to Cart / Remove from Cart Button */
@@ -161,6 +205,7 @@
   transition: background-color 0.2s ease;
   text-align: center;
   border-radius: 0;
+  margin-top: 20px; /* Ensure it's placed below the price and quantity */
 }
 
 .add-to-cart-button {
@@ -183,52 +228,47 @@
 
 /* Responsive Design for Mobile */
 @media (max-width: 1024px) {
-  .product-content {
+  /* Ensure proper stacking on mobile */
+  .product-price-container {
+    flex-direction: column; /* Stack elements vertically */
+    align-items: flex-start;
+  }
+
+  /* Make the quantity section stack vertically on mobile */
+  .quantity-section {
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
+    margin-top: 10px;
   }
 
-  .product-gallery-info {
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
+  .quantity-selector {
+    flex-direction: row; /* Keep buttons in a row */
+    gap: 10px;
   }
 
-  .product-image-gallery {
-    max-width: 100%;
-  }
-
-  .product-info {
-    max-width: 100%;
-  }
-
-  .artisan-specs {
-    width: 100%;
-  }
-
-  .product-thumbnail-gallery {
-    justify-content: center;
+  /* Add to cart should be full width */
+  .add-to-cart-button,
+  .remove-from-cart-button {
+    width: 100%; /* Ensure Add to Cart button is full-width */
+    margin-top: 10px; /* Add space between quantity section and button */
   }
 }
 
-/* Center Align for Mobile */
 @media (max-width: 768px) {
+  /* Center text and adjust spacing for mobile */
   .product-header,
   .product-title,
   .artisan-specs {
     text-align: center;
   }
 
-  .product-content {
-    gap: 20px;
-  }
-
   .product-price {
     font-size: 28px;
   }
 
-  /* Ensure table keys are still left-aligned on mobile */
-  .artisan-specs-table td:first-child {
-    text-align: left;
+  /* Ensure quantity and buttons are still side-by-side in mobile view */
+  .quantity-selector {
+    flex-direction: row;
+    gap: 10px;
   }
 }

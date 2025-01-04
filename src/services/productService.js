@@ -1,3 +1,4 @@
+// src/services/productService.js
 import { db } from '../firebaseConfig';
 import { collection, getDocs, doc, deleteDoc, updateDoc, addDoc, getDoc } from 'firebase/firestore';
 
