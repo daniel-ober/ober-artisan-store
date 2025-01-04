@@ -1,4 +1,3 @@
-// src/services/firebaseService.js
 import { db, storage } from '../firebaseConfig';
 import {
   doc,
@@ -14,16 +13,34 @@ import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage
 import { v4 as uuidv4 } from 'uuid';
 
 /**
- * Fetches all products from the 'products' collection.
+ * Fetches all products from the 'products' collection with enhanced error logging.
  * @returns {Promise<Array>} - Array of product objects.
  */
 export const fetchProducts = async () => {
-  const productsCollection = collection(db, 'products');
-  const productSnapshot = await getDocs(productsCollection);
-  return productSnapshot.docs.map((doc) => ({
-    id: doc.id,
-    ...doc.data(),
-  }));
+  try {
+    const productsCollection = collection(db, 'products');
+    const productSnapshot = await getDocs(productsCollection);
+
+    if (productSnapshot.empty) {
+      console.warn('No products found in Firestore.');
+    } else {
+      console.log('Fetched product documents:', productSnapshot.size);
+    }
+
+    const products = productSnapshot.docs.map((doc) => {
+      const productData = doc.data();
+      console.log(`Product ID: ${doc.id}`, productData);  // Log each product
+      return {
+        id: doc.id,
+        ...productData,
+      };
+    });
+
+    return products;
+  } catch (error) {
+    console.error('Error fetching products:', error.code, error.message);
+    throw new Error('Failed to fetch products from Firestore');
+  }
 };
 
 /**
