@@ -5,100 +5,170 @@
 .cart-item {
   display: flex;
   align-items: center;
-  margin-bottom: 20px; /* Space between items */
-  border: 1px solid #ccc; /* Border for cart items */
-  border-radius: 8px; /* Rounding */
-  padding: 10px; /* Padding for item */
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 15px;
+  background-color: #f9f9f9;
+}
+
+.cart-item.artisan-item {
+  background-color: #f0f0f0;  /* Subtle background for artisan items */
+  border: 1px solid #aaa;      /* Slightly darker border for distinction */
 }
 
 .cart-item-image {
-  width: 100px; /* Fixed width for images */
-  height: auto; /* Keep aspect ratio */
-  border-radius: 4px; /* Slight rounding */
-  margin-right: 20px; /* Space from text */
+  width: 100px;
+  height: auto;
+  border-radius: 6px;
+  margin-right: 20px;
 }
 
 .cart-item-details {
-  flex-grow: 1; /* Allow details to take available space */
+  flex-grow: 2;
 }
 
-.cart-item-name {
-  font-size: 1.5rem; /* Name size */
-  margin-bottom: 5px; /* Space below name */
+.cart-item-details h2 {
+  margin: 0 0 10px;
+  font-size: 1.3rem;
 }
 
-.cart-item-description {
-  margin-bottom: 5px; /* Space below description */
+.cart-item-details p {
+  margin: 5px 0;
+  color: #555;
 }
 
-.cart-item-price {
-  font-weight: bold; /* Emphasize price */
-  margin-bottom: 10px; /* Space below price */
+.cart-item-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 .quantity-control {
   display: flex;
   align-items: center;
-  margin-bottom: 10px; /* Space below quantity control */
+  margin-bottom: 10px;
 }
 
 .quantity-control button {
-  background-color: #3498db; /* Button background */
-  color: white; /* White text */
+  background-color: #3498db;
+  color: white;
   border: none;
   border-radius: 4px;
-  padding: 8px 12px; /* Padding for buttons */
-  margin: 0 5px; /* Space between buttons */
+  padding: 5px 12px;
+  margin: 0 5px;
   cursor: pointer;
-  transition: background-color 0.3s; /* Smooth transition */
+  transition: background-color 0.3s;
 }
 
 .quantity-control button.disabled-button {
-  background-color: #d3d3d3; /* Light gray background for disabled buttons */
-  color: #808080; /* Dark gray text */
-  cursor: not-allowed; /* Change cursor to not-allowed */
+  background-color: #d3d3d3;
+  color: #808080;
+  cursor: not-allowed;
 }
 
-.quantity-control button:disabled {
-  background-color: #d3d3d3; /* Light gray background for disabled buttons */
-  color: #808080; /* Dark gray text */
-  cursor: not-allowed; /* Change cursor to not-allowed */
+.quantity-control button:hover:not(.disabled-button) {
+  background-color: #2980b9;
 }
 
-.quantity-control button:not(.disabled-button):hover {
-  background-color: #2980b9; /* Darker blue on hover for enabled buttons */
+/* Tooltip styling for disabled artisan items */
+.quantity-control button[title] {
+  position: relative;
+}
+
+.quantity-control button[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  background-color: #333;
+  color: #fff;
+  padding: 5px 8px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  z-index: 10;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .remove-button {
-  background-color: #e74c3c; /* Red background */
-  color: white; /* White text */
+  background-color: #e74c3c;
+  color: white;
   border: none;
   border-radius: 4px;
-  padding: 10px 15px; /* Padding for remove button */
-  margin-left: 10px; /* Space from quantity control */
+  padding: 8px 15px;
+  margin-top: 10px;
   cursor: pointer;
-  transition: background-color 0.3s; /* Smooth transition */
+  transition: background-color 0.3s;
 }
 
 .remove-button:hover {
-  background-color: #c0392b; /* Darker red on hover */
+  background-color: #c0392b;
+}
+
+.cart-item-total {
+  margin-top: 10px;
+  font-weight: bold;
 }
 
 .cart-total {
-  margin-top: 20px; /* Space above total */
-  font-size: 1.5rem; /* Total size */
+  margin-top: 30px;
+  font-size: 1.4rem;
+  text-align: right;
 }
 
 .checkout-button {
-  background-color: #2ecc71; /* Green background for checkout */
-  color: white; /* White text */
+  margin-top: 30px;
+  background-color: #2ecc71;
+  color: white;
+  padding: 15px 25px;
+  font-size: 1.2rem;
   border: none;
-  border-radius: 4px;
-  padding: 10px 20px; /* Padding for button */
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s; /* Smooth transition */
 }
 
 .checkout-button:hover {
-  background-color: #27ae60; /* Darker green on hover */
+  background-color: #27ae60;
+}
+
+.promo-section {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.promo-section input {
+  padding: 10px;
+  width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.promo-section button {
+  margin-left: 10px;
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.promo-section button:hover {
+  background-color: #45a049;
+}
+
+.promo-error {
+  color: red;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.discount-info {
+  color: #4caf50;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 5px;
 }

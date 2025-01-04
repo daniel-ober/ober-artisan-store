@@ -1,90 +1,84 @@
-// src/components/Checkout.js
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { collection, addDoc } from 'firebase/firestore';
-import { db } from '../firebaseConfig';
-import { v4 as uuidv4 } from 'uuid';
+import './Checkout.css';
 
-const Checkout = ({ cart }) => {
-  const [customerName, setCustomerName] = useState('');
-  const [customerEmail, setCustomerEmail] = useState('');
+const Checkout = ({ cartItems, totalAmount, onApplyPromo }) => {
   const [promoCode, setPromoCode] = useState('');
-  const [error, setError] = useState(null);
-  const navigate = useNavigate();
+  const [discount, setDiscount] = useState(0);
+  const [error, setError] = useState('');
 
-  const totalAmount = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-  
-    try {
-      const guestToken = uuidv4();
-      const stripeSessionId = `cs_test_${uuidv4()}`;
-  
-      const order = {
-        userId: 'guest',
-        guestToken,
-        stripeSessionId,
-        customerName,
-        customerEmail,
-        promoCode,  // Include promo code in the order
-        products: cart.map((item) => ({
-          name: item.name,
-          price: item.price,
-          quantity: item.quantity,
-        })),
-        totalAmount,
-        status: 'paid',
-        createdAt: new Date(),
-      };
-  
-      const ordersRef = collection(db, 'orders');
-      await addDoc(ordersRef, order);
-  
-      console.log('Generated guestToken:', guestToken);
-      console.log('Order created:', order);
-  
-      navigate(`/checkout-summary?session_id=${stripeSessionId}&guest_token=${guestToken}`);
-    } catch (err) {
-      console.error('Error creating order:', err);
-      setError('Failed to complete checkout. Please try again.');
+  const handleApplyPromo = () => {
+    if (promoCode.trim() === 'DRUM10') {
+      setDiscount(0.1); // 10% discount
+      setError('');
+      onApplyPromo(0.1);
+    } else {
+      setDiscount(0);
+      setError('Invalid promo code');
     }
   };
 
+  const finalAmount = (totalAmount * (1 - discount)).toFixed(2);
+
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Checkout</h2>
-      <label>
-        Name:
-        <input
-          type="text"
-          value={customerName}
-          onChange={(e) => setCustomerName(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Email:
-        <input
-          type="email"
-          value={customerEmail}
-          onChange={(e) => setCustomerEmail(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Promotional Code:
-        <input
-          type="text"
-          value={promoCode}
-          onChange={(e) => setPromoCode(e.target.value)}
-          placeholder="Enter promo code"
-        />
-      </label>
-      <h3>Total: ${totalAmount.toFixed(2)}</h3>
-      <button type="submit">Complete Purchase</button>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-    </form>
+    <div className="checkout-container">
+      <h1>Checkout</h1>
+
+      {/* Cart Items */}
+      <div className="cart-summary">
+        {cartItems.map((item) => (
+          <div className="cart-item" key={item.id}>
+            <img src={item.image} alt={item.name} className="item-image" />
+            <div className="item-details">
+              <h3>{item.name}</h3>
+              <p className="description">{item.description}</p>
+              <p>Price: ${item.price}</p>
+              <p>Quantity: {item.quantity}</p>
+              <p>Total: ${(item.price * item.quantity).toFixed(2)}</p>
+            </div>
+            <div className="item-actions">
+              <button className="remove-btn">Remove</button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Promo Code Section */}
+      <div className="promo-code-section">
+        <h2>Apply Promo Code</h2>
+        <div className="promo-input-wrapper">
+          <input
+            type="text"
+            value={promoCode}
+            onChange={(e) => setPromoCode(e.target.value)}
+            placeholder="Enter Promo Code"
+          />
+          <button onClick={handleApplyPromo}>Apply</button>
+        </div>
+        {error && <p className="error-message">{error}</p>}
+      </div>
+
+      {/* Order Summary */}
+      <div className="order-summary">
+        <h2>Order Summary</h2>
+        <div className="summary-line">
+          <span>Subtotal:</span>
+          <span>${totalAmount.toFixed(2)}</span>
+        </div>
+        {discount > 0 && (
+          <div className="summary-line discount">
+            <span>Discount (10%):</span>
+            <span>- ${(totalAmount * discount).toFixed(2)}</span>
+          </div>
+        )}
+        <div className="summary-line total">
+          <span>Total Amount:</span>
+          <span>${finalAmount}</span>
+        </div>
+      </div>
+
+      {/* Checkout Button */}
+      <button className="checkout-btn">Proceed to Payment</button>
+    </div>
   );
 };
 

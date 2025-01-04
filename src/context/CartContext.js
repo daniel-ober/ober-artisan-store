@@ -1,3 +1,4 @@
+// src/context/CartContext.js
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { doc, updateDoc, setDoc, getDoc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
