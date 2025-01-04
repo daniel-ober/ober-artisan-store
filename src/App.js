@@ -6,6 +6,7 @@ import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import Home from './components/Home';
 import Products from './components/Products';
+import ProductDetail from './components/ProductDetail';  {/* Add ProductDetail import */}
 import PreOrderPage from './components/PreOrderPage';
 import About from './components/About';
 import Contact from './components/Contact';
@@ -13,7 +14,6 @@ import Cart from './components/Cart';
 import Register from './components/Register';
 import ForgotPassword from './components/ForgotPassword';
 import Checkout from './components/Checkout';
-import ProductDetail from './components/ProductDetail';
 import AccountPage from './components/AccountPage';
 import CheckoutSummary from './components/CheckoutSummary';
 import Gallery from './components/Gallery';
@@ -175,6 +175,10 @@ function App() {
           <Route path="/gallery" element={isLinkEnabled('gallery') ? <Gallery /> : <NotFound />} />
           <Route path="/custom-shop" element={isLinkEnabled('custom-shop') ? <CustomShop /> : <NotFound />} />
           <Route path="/products" element={isLinkEnabled('products') ? <Products /> : <NotFound />} />
+
+          {/* Product Detail Page Route */}
+          <Route path="/products/:productId" element={<ProductDetail />} /> {/* New Route for Product Detail */}
+
           <Route path="/pre-order" element={isLinkEnabled('pre-order') ? <PreOrderPage /> : <NotFound />} />
 
           {/* Account Page for Signed-In Users */}

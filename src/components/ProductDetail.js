@@ -6,26 +6,26 @@ import { FaArrowLeft } from 'react-icons/fa';
 import './ProductDetail.css';
 
 const ProductDetail = () => {
-  const { id } = useParams();
+  const { productId } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const { addToCart, removeFromCart, updateQuantity, cart } = useCart();
   const [inCart, setInCart] = useState(null);
   const [mainImage, setMainImage] = useState('');
+  const [quantity, setQuantity] = useState(1); // Added state for quantity
   const thumbnailContainerRef = useRef(null);
 
+  // Fetch product details from API and update state
   useEffect(() => {
     const fetchProductData = async () => {
       try {
-        const productData = await fetchProductById(id);
+        const productData = await fetchProductById(productId);
         if (productData) {
           setProduct(productData);
           setMainImage(
             productData.images?.[0] || 'https://i.imgur.com/eoKsILV.png'
           );
-          const cartItem = Object.values(cart).find((item) => item.id === id);
-          setInCart(cartItem || null);
         } else {
           setError('Product not found.');
         }
@@ -38,12 +38,26 @@ const ProductDetail = () => {
     };
 
     fetchProductData();
-  }, [id, cart]);
+  }, [productId]); // Only fetch product when productId changes
+
+  // Watch for cart changes and update inCart and quantity states
+  useEffect(() => {
+    if (product) {
+      const cartItem = cart ? Object.values(cart).find(item => item.id === productId) : null;
+      if (cartItem) {
+        setInCart(cartItem);
+        setQuantity(cartItem.quantity); // Sync with cart quantity
+      } else {
+        setInCart(null);
+        setQuantity(1); // Reset quantity if product is removed from cart
+      }
+    }
+  }, [cart, product, productId]); // Listen to changes in cart and productId
 
   const handleAddToCart = () => {
     if (product) {
-      addToCart({ ...product, id });
-      setInCart({ ...product, quantity: 1 });
+      addToCart({ ...product, id: productId, quantity });
+      setInCart({ ...product, quantity });
     }
   };
 
@@ -58,14 +72,41 @@ const ProductDetail = () => {
     setMainImage(image);
   };
 
-  const isArtisanProduct = product?.category === 'artisan';
+  const handleQuantityIncrease = () => {
+    const newQuantity = quantity + 1;
+    setQuantity(newQuantity);
+    if (inCart) {
+      updateQuantity(inCart.id, newQuantity); // Update quantity in cart
+    }
+  };
+
+  const handleQuantityDecrease = () => {
+    if (quantity > 1) {
+      const newQuantity = quantity - 1;
+      setQuantity(newQuantity);
+      if (inCart) {
+        updateQuantity(inCart.id, newQuantity); // Update quantity in cart
+      }
+    }
+  };
+
   const speciesList = [
     product?.woodSpecies,
     product?.customWoodSpecies
   ].filter(Boolean).join(', ');
 
   if (loading) return <p>Loading product details...</p>;
-  if (error) return <p>{error}</p>;
+  if (error) {
+    return (
+      <div className="error-container">
+        <h2>{error}</h2>
+        <Link to="/products">Return to Products</Link>
+      </div>
+    );
+  }
+
+  const isArtisan = product.category === 'artisan';
+  const showFullSpecs = product.category === 'artisan';
 
   return (
     <div className="product-detail-container">
@@ -87,13 +128,10 @@ const ProductDetail = () => {
             <img
               src={mainImage}
               alt={product?.name || 'Product'}
-              className="product-main-image"
+              className={`product-main-image ${isArtisan ? 'artisan' : 'non-artisan'}`}
             />
             <div className="thumbnail-scroll-container">
-              <div
-                className="product-thumbnail-gallery"
-                ref={thumbnailContainerRef}
-              >
+              <div className="product-thumbnail-gallery" ref={thumbnailContainerRef}>
                 {product?.images?.map((image, index) => (
                   <button
                     key={index}
@@ -107,77 +145,69 @@ const ProductDetail = () => {
             </div>
           </div>
 
-          {/* Full Product Specifications Section */}
           <div className="product-info">
-            <div className="artisan-specs">
-              <h2>Product Specifications</h2>
-              <table className="artisan-specs-table">
-                <tbody>
-                  <tr>
-                    <td>Type:</td>
-                    <td>{product.drumType}</td>
-                  </tr>
-                  <tr>
-                    <td>Construction:</td>
-                    <td>{product.constructionType}</td>
-                  </tr>
-                  <tr>
-                    <td>Wood Species:</td>
-                    <td>{speciesList}</td>
-                  </tr>
-                  <tr>
-                    <td>Depth:</td>
-                    <td>{product.depth}&quot;</td>
-                  </tr>
-                  <tr>
-                    <td>Diameter:</td>
-                    <td>{product.width}&quot;</td>
-                  </tr>
-                  <tr>
-                    <td>Shell Thickness:</td>
-                    <td>{product.shellThickness} mm</td>
-                  </tr>
-                  <tr>
-                    <td>Bearing Edge:</td>
-                    <td>{product.bearingEdge}&deg;</td>
-                  </tr>
-                  <tr>
-                    <td>Hardware:</td>
-                    <td>{product.lugCount}-lug {product.lugType}</td>
-                  </tr>
-                  <tr>
-                    <td>Description:</td>
-                    <td>{product.description}</td>
-                  </tr>
-                  <tr>
-                    <td>Delivery Time:</td>
-                    <td>{product.deliveryTime}</td>
-                  </tr>
-                  <tr>
-                    <td>SKU:</td>
-                    <td>{product.sku}</td>
-                  </tr>
-                </tbody>
-              </table>
-
-              <div className="product-price-container">
-                <p className="product-price">${product?.price?.toFixed(2)}</p>
-                {inCart ? (
-                  <button
-                    onClick={handleRemoveFromCart}
-                    className="remove-from-cart-button"
-                  >
-                    Remove from Cart
-                  </button>
-                ) : (
-                  <button
-                    onClick={handleAddToCart}
-                    className="add-to-cart-button"
-                  >
-                    Add to Cart
-                  </button>
+            <h2>Product Specifications</h2>
+            <table className="artisan-specs-table">
+              <tbody>
+                {showFullSpecs && (
+                  <>
+                    <tr>
+                      <td>Type:</td>
+                      <td>{product.drumType}</td>
+                    </tr>
+                    <tr>
+                      <td>Construction:</td>
+                      <td>{product.constructionType}</td>
+                    </tr>
+                    <tr>
+                      <td>Wood Species:</td>
+                      <td>{speciesList}</td>
+                    </tr>
+                    <tr>
+                      <td>Depth:</td>
+                      <td>{product.depth}in.</td>
+                    </tr>
+                    <tr>
+                      <td>Diameter:</td>
+                      <td>{product.width}in.</td>
+                    </tr>
+                  </>
                 )}
-              </div>
+                <tr>
+                  <td>Description:</td>
+                  <td>{product.description}</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div className="product-price-container">
+              <p className="product-price">${product?.price?.toFixed(2)}</p>
+
+              {/* Conditionally render quantity buttons for non-artisan products */}
+              {!isArtisan && inCart && (
+                <div className="quantity-section">
+                  <span className="quantity-label">Quantity:</span>
+                  <div className="quantity-selector">
+                    <button onClick={handleQuantityDecrease} className="quantity-btn">
+                      -
+                    </button>
+                    <span className="quantity-display">{quantity}</span>
+                    <button onClick={handleQuantityIncrease} className="quantity-btn">
+                      +
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {inCart ? (
+                <button onClick={handleRemoveFromCart} className="remove-from-cart-button">
+                  Remove from Cart
+                </button>
+              ) : (
+                <button onClick={handleAddToCart} className="add-to-cart-button">
+                  Add to Cart
+                </button>
+              )}
             </div>
           </div>
         </div>
