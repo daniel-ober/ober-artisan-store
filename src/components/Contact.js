@@ -1,10 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Button, Typography, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { TextField, Button, MenuItem, Select, FormControl, InputLabel, Typography, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import { checkAuthentication } from '../authCheck'; 
 import { addInquiry, fetchUserProfile } from '../services/firebaseService';
 import { nanoid } from 'nanoid'; 
 import './Contact.css';
+
+// Inquiry Categories
+const inquiryCategories = [
+  { value: 'Order & Billing Assistance', label: 'Order & Billing Assistance – Track orders, update billing, or inquire about payments' },
+  { value: 'Custom Shop Request', label: 'Custom Shop Request – Request custom drum builds or modifications' },
+  { value: 'Shipping & Delivery', label: 'Shipping & Delivery – Get shipping updates or tracking info' },
+  { value: 'Product Information', label: 'Product Information – Ask about products or specifications' },
+  { value: 'Technical Assistance', label: 'Technical Assistance – Login issues, account updates, or website errors' },
+  { value: 'Partner Relations', label: 'Partner Relations – Vendor inquiries or partnership opportunities' },
+  { value: 'Feedback & Suggestions', label: 'Feedback & Suggestions – Share feedback or ideas' },
+  { value: 'Other', label: 'Other – All other inquiries' },
+];
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -13,10 +25,11 @@ const Contact = () => {
     email: '',
     phone: '',
     message: '',
+    category: '',
   });
   const [loading, setLoading] = useState(false);
-  const [open, setOpen] = useState(false); // Modal state
-  const navigate = useNavigate(); // Initialize useNavigate
+  const [open, setOpen] = useState(false); 
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -61,13 +74,14 @@ const Contact = () => {
         ...formData,
         createdAt: new Date(), 
       });
-      setOpen(true); // Open the modal
+      setOpen(true); 
       setFormData({
         first_name: '',
         last_name: '',
         email: '',
         phone: '',
         message: '',
+        category: '',
       });
     } catch (error) {
       console.error('Error sending message:', error);
@@ -78,7 +92,7 @@ const Contact = () => {
 
   const handleClose = () => {
     setOpen(false);
-    navigate('/products'); // Redirect to products page
+    navigate('/products'); 
   };
 
   return (
@@ -127,6 +141,28 @@ const Contact = () => {
           margin="normal"
           className="contact-input"
         />
+
+        {/* Category Picklist with Fix */}
+        <FormControl fullWidth margin="normal" required>
+          <InputLabel shrink>Inquiry Category</InputLabel>
+          <Select
+            name="category"
+            value={formData.category}
+            onChange={handleChange}
+            displayEmpty
+            className="contact-input"
+          >
+            <MenuItem value="">
+              <em>Select an option</em>
+            </MenuItem>
+            {inquiryCategories.map((category) => (
+              <MenuItem key={category.value} value={category.value}>
+                {category.label}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+
         <TextField
           label="Message"
           name="message"
@@ -151,7 +187,6 @@ const Contact = () => {
         </Button>
       </form>
 
-      {/* Dialog for success message */}
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Message Sent</DialogTitle>
         <DialogContent>
