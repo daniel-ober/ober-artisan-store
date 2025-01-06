@@ -55,6 +55,11 @@ h1 {
   color: #333;
 }
 
+.pre-order-info h3 {
+  font-size: 1rem;
+  color: #855200;
+}
+
 .pre-order-info p {
   font-size: 1rem;
   color: #555;
@@ -71,12 +76,6 @@ h1 {
 
 .price-container p {
   margin: 0;
-}
-
-.regular-price {
-  text-decoration: line-through;
-  color: #888;
-  font-size: 1rem;
 }
 
 .promo-price {

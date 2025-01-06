@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { fetchGalleryImages, storage } from '../firebaseConfig';
-import { ref, deleteObject } from 'firebase/storage';
+import { fetchGalleryImages, storage, db } from '../firebaseConfig';
+import { ref, uploadBytesResumable, getDownloadURL, deleteObject } from 'firebase/storage'; // Added deleteObject import
+import { collection, addDoc, getDocs, updateDoc } from 'firebase/firestore';
 import './ManageGallery.css';
 
 const ManageGallery = () => {
@@ -51,9 +52,26 @@ const ManageGallery = () => {
         const uploadedImages = [];
         for (const file of files) {
             try {
-                console.log(`Uploading ${file.name} to /Gallery`);
-                const uploadedUrl = `/Gallery/${file.name}`; 
-                uploadedImages.push({ name: file.name, url: uploadedUrl, visible: true });
+                // Uploading file to Firebase Storage
+                const storageRef = ref(storage, `Gallery/${file.name}`);
+                const uploadTask = uploadBytesResumable(storageRef, file);
+                await uploadTask;
+
+                // Get the download URL of the uploaded image
+                const uploadedUrl = await getDownloadURL(storageRef);
+                
+                // Add image metadata to Firestore
+                const imageDocRef = await addDoc(collection(db, "galleryImages"), {
+                    url: uploadedUrl,
+                    galleryOrder: galleryImages.length, // Set the order based on current images count
+                    visible: true,
+                });
+
+                uploadedImages.push({
+                    name: file.name,
+                    url: uploadedUrl,
+                    visible: true
+                });
             } catch (error) {
                 console.error(`Failed to upload ${file.name}:`, error);
             }
@@ -66,7 +84,10 @@ const ManageGallery = () => {
         if (!confirmDelete) return;
 
         try {
-            const imageRef = ref(storage, `Gallery/${image.name}`);
+            // Decode the URL and extract the storage path
+            const imagePath = decodeURIComponent(image.url.split('?')[0].split('Gallery/')[1]);
+            const imageRef = ref(storage, `Gallery/${imagePath}`);
+
             await deleteObject(imageRef);
             setGalleryImages((prevImages) => prevImages.filter((img) => img.name !== image.name));
             alert('Image deleted successfully!');
@@ -76,12 +97,29 @@ const ManageGallery = () => {
         }
     };
 
-    const toggleVisibility = (image) => {
+    const toggleVisibility = async (image) => {
+        const updatedVisibility = !image.visible;
         setGalleryImages((prevImages) =>
             prevImages.map((img) =>
-                img.name === image.name ? { ...img, visible: !img.visible } : img
+                img.name === image.name ? { ...img, visible: updatedVisibility } : img
             )
         );
+
+        try {
+            // Get the reference to the Firestore document
+            const galleryDocRef = collection(db, 'galleryImages');
+            const querySnapshot = await getDocs(galleryDocRef);
+            const docToUpdate = querySnapshot.docs.find(doc => doc.data().url === image.url);
+            if (docToUpdate) {
+                // Update the visible field in Firestore
+                await updateDoc(docToUpdate.ref, {
+                    visible: updatedVisibility
+                });
+            }
+        } catch (error) {
+            console.error('Failed to update visibility in Firestore:', error);
+            alert('Failed to update visibility. Please try again.');
+        }
     };
 
     const updateOrder = (image, direction) => {
@@ -111,6 +149,19 @@ const ManageGallery = () => {
                     >
                         Drag and drop images here or
                         <input type="file" multiple accept="image/*" onChange={handleFileSelect} />
+                    </div>
+                    <div className="gallery-list">
+                        {galleryImages.map((image) => (
+                            <div key={image.name} className="gallery-item">
+                                <img src={image.url} alt={image.name} />
+                                <div className="gallery-item-buttons">
+                                    <button onClick={() => deleteImage(image)} className="delete-btn">Delete</button>
+                                    <button onClick={() => toggleVisibility(image)}>
+                                        {image.visible ? 'Hide' : 'Show'}
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </>
             )}

@@ -1,10 +1,9 @@
-// src/components/CheckoutSummary.js
 import React, { useState, useEffect, useRef } from 'react';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
-import './CheckoutSummary.css'; // Make sure the styles are saved in this file
+import './CheckoutSummary.css'; // Ensure styles are correctly applied
 
 const CheckoutSummary = () => {
   const [order, setOrder] = useState(null);
@@ -19,43 +18,47 @@ const CheckoutSummary = () => {
         const params = new URLSearchParams(window.location.search);
         const sessionId = params.get('session_id');
         const guestToken = params.get('guest_token');
-
-        console.log('sessionId:', sessionId);
-        console.log('guestToken:', guestToken);
-
+    
+        console.log('sessionId:', sessionId);  // Log sessionId
+        console.log('guestToken:', guestToken);  // Log guestToken
+    
         if (!sessionId || !guestToken) {
           console.error('Missing session ID or guest token.');
           setError('Missing session ID or guest token.');
           return;
         }
-
+    
         const ordersRef = collection(db, 'orders');
         const q = query(
           ordersRef,
           where('stripeSessionId', '==', sessionId),
           where('guestToken', '==', guestToken)
         );
-
+    
+        // Log the query parameters for debugging
+        console.log('Firestore Query:', q);
+    
         const querySnapshot = await getDocs(q);
-
+        console.log('Firestore Query Snapshot:', querySnapshot);
+    
         if (querySnapshot.empty) {
           console.error('No matching order found for sessionId and guestToken.');
           setError('Order not found.');
           return;
         }
-
+    
         const orderDoc = querySnapshot.docs[0];
         const orderData = orderDoc.data();
         const createdAt = orderData.createdAt
           ? orderData.createdAt.toDate().toLocaleString()
           : 'Invalid Date';
-
+    
         console.log('Order fetched successfully:', orderData);
-
+    
         setOrder({ id: orderDoc.id, ...orderData, createdAt });
         setError(null);
-
-        // Clear cart only once
+    
+        // Clear the cart after fetching the order
         clearCartOnCheckout();
       } catch (err) {
         console.error('Error fetching order:', err.message);
@@ -63,8 +66,9 @@ const CheckoutSummary = () => {
       }
     };
 
+    // Call fetchOrder function when the component is mounted
     fetchOrder();
-  }, []); // Removed `clearCartOnCheckout` to prevent loop
+  }, []); // Empty dependency array means it only runs once on mount
 
   const handleRegisterClick = () => {
     navigate('/register', { state: { orderId: order ? order.id : null } });
@@ -80,6 +84,7 @@ const CheckoutSummary = () => {
     }
   };
 
+  // If there's an error fetching the order, display it
   if (error) {
     return (
       <div className="transaction-success">
@@ -95,6 +100,7 @@ const CheckoutSummary = () => {
     );
   }
 
+  // If order is still loading, show loading message
   if (!order) {
     return <p>Loading order details...</p>;
   }
