@@ -59,7 +59,7 @@
     display: inline-block;
     margin-top: 10px;
     padding: 10px 15px;
-    background-color: #ffffff; /* White background for the button */
+    /* background-color: #ffffff; White background for the button */
     color: #4caf50; /* Green text for the button */
     border: none;
     border-radius: 5px;
@@ -69,6 +69,6 @@
 }
 
 .signup-button:hover {
-    background-color: #e0e0e0; /* Light gray on hover */
+    /* background-color: ; Light gray on hover */
     cursor: pointer; /* Pointer cursor for button */
 }

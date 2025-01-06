@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import SpiderChart from './SpiderChart';
 import BarChart from './BarChart';  // Import BarChart component
+import { Tooltip, Modal, Button } from 'react-bootstrap';  // Added Tooltip and Modal from react-bootstrap
 
 // Importing data files for dropdowns
 import woodSpecies from '../data/profiles/woodSpecies';
@@ -43,6 +44,23 @@ const CustomDrumBuilder = () => {
 
   const [soundProfile, setSoundProfile] = useState({});
   const [viewMode, setViewMode] = useState('spider');  // Default to 'spider' view
+  const [randomizerEnabled, setRandomizerEnabled] = useState(false);
+  const [lockedFields, setLockedFields] = useState({
+    construction: false,
+    species: false,
+    depth: false,
+    width: false,
+    bearingEdge: false,
+    thickness: false,
+    finish: false,
+    hoopType: false,
+    hardwareType: false,
+    environmental: false,
+    drumhead: false,
+    tension: false,
+  });
+  const [showRandomizerModal, setShowRandomizerModal] = useState(false);
+  const [hasSeenModal, setHasSeenModal] = useState(false);
 
   // Handle dropdown change
   const handleInputChange = (e, specType) => {
@@ -108,8 +126,6 @@ const CustomDrumBuilder = () => {
     let profile = { attack: 0, sustain: 0, warmth: 0, projection: 0, brightness: 0 };
     console.log("Starting full sound profile calculation...");
 
-    for (let key in profile) profile[key] = 0;
-
     // Handle wood species separately
     specs.species.forEach((species) => {
       const woodData = woodSpecies.find(item => item.woodSpecies.includes(species));
@@ -162,57 +178,140 @@ const CustomDrumBuilder = () => {
     calculateSoundProfile();
   }, [specs]);
 
+  // Handle Randomizer Toggle
+  const toggleRandomizer = () => {
+    setRandomizerEnabled(!randomizerEnabled);
+    if (!randomizerEnabled && !hasSeenModal) {
+      setShowRandomizerModal(true);
+      setHasSeenModal(true);  // Ensure modal doesn't appear again
+    }
+  };
+
+  // Handle Randomization
+  const handleRandomizeNow = () => {
+    const randomizedSpecs = { ...specs };
+
+    categories.forEach(({ key, data }) => {
+      if (!lockedFields[key]) {
+        const randomItem = data[Math.floor(Math.random() * data.length)];
+        randomizedSpecs[key] = randomItem[dataKeyForKey(key)];
+      }
+    });
+
+    setSpecs(randomizedSpecs);
+  };
+
+  // Handle Lock/Unlock of Fields
+  const toggleLockField = (field) => {
+    setLockedFields(prev => ({ ...prev, [field]: !prev[field] }));
+  };
+
   return (
     <div className="custom-drum-builder">
       <h1>Custom Drum Builder</h1>
-      
-      <div className="builder-container">
-        {/* Form Container */}
 
-        {/* Chart Container */}
+      <div className="builder-container">
         <div className="chart-container">
-          {/* View Mode Toggle */}
           <div className="view-toggle">
-            <button
-              className={`view-btn ${viewMode === 'spider' ? 'active' : ''}`}
-              onClick={() => setViewMode('spider')}
-            >
+            <button className={`view-btn ${viewMode === 'spider' ? 'active' : ''}`} onClick={() => setViewMode('spider')}>
               Spider Chart
             </button>
-            <button
-              className={`view-btn ${viewMode === 'bar' ? 'active' : ''}`}
-              onClick={() => setViewMode('bar')}
-            >
+            <button className={`view-btn ${viewMode === 'bar' ? 'active' : ''}`} onClick={() => setViewMode('bar')}>
               Bar Chart
             </button>
           </div>
-
-          {/* Display Chart Based on View Mode */}
           {viewMode === 'spider' && <SpiderChart data={Object.values(soundProfile)} />}
           {viewMode === 'bar' && <BarChart data={soundProfile} />}
         </div>
+
         <div className="form-container">
           <form className="drum-builder-form">
+            <div className="randomizer-toggle">
+              <button type="button" onClick={toggleRandomizer}>
+                Randomizer
+              </button>
+            </div>
+
+            {randomizerEnabled && (
+              <button type="button" onClick={handleRandomizeNow}>
+                Randomize Now
+              </button>
+            )}
+
             {categories.map(({ key, data, label }) => (
               <div key={key} className="form-group">
                 <label htmlFor={key}>{label}</label>
-                <select
-                  id={key}
-                  value={specs[key]}
-                  onChange={(e) => handleInputChange(e, key)}
-                  className="form-control"
-                >
-                  {data.map((item, idx) => (
-                    <option key={idx} value={item[dataKeyForKey(key)]}>
-                      {item[dataKeyForKey(key)]}
-                    </option>
-                  ))}
-                </select>
+                <div className="input-group">
+                  <select
+                    id={key}
+                    value={specs[key]}
+                    onChange={(e) => handleInputChange(e, key)}
+                    className="form-control"
+                    disabled={lockedFields[key] && randomizerEnabled}
+                  >
+                    {data.map((item, idx) => (
+                      <option key={idx} value={item[dataKeyForKey(key)]}>
+                        {item[dataKeyForKey(key)]}
+                      </option>
+                    ))}
+                  </select>
+                  {randomizerEnabled && (
+                    <div
+                      className={`lock-icon ${lockedFields[key] ? 'locked' : 'unlocked'}`}
+                      onClick={() => toggleLockField(key)}
+                      role="button"
+                      tabIndex="0"
+                      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') toggleLockField(key); }}
+                    >
+                      {lockedFields[key] ? '🔒' : '🔓'}
+                    </div>
+                  )}
+                </div>
               </div>
             ))}
+
+            <div className="additional-factors">
+              <h3>Additional Factors</h3>
+              <Tooltip id="tooltip-additional-factors" title="These factors affect the overall sound profile but are not considered key factors.">
+                <span>❓</span>
+              </Tooltip>
+              {['environmental', 'hardwareType', 'hoopType', 'finish'].map(key => (
+                <div key={key} className="form-group">
+                  <label htmlFor={key}>{categories.find(c => c.key === key).label}</label>
+                  <select
+                    id={key}
+                    value={specs[key]}
+                    onChange={(e) => handleInputChange(e, key)}
+                    className="form-control"
+                    disabled={lockedFields[key] && randomizerEnabled}
+                  >
+                    {categories.find(c => c.key === key).data.map((item, idx) => (
+                      <option key={idx} value={item[dataKeyForKey(key)]}>
+                        {item[dataKeyForKey(key)]}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              ))}
+            </div>
           </form>
         </div>
       </div>
+
+      <Modal show={showRandomizerModal} onHide={() => setShowRandomizerModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Randomizer Explanation</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>The randomizer allows you to automatically generate random drum specifications for a unique sound profile.</p>
+          <p>Use the lock/unlock icon to choose which fields should remain fixed and which should be randomized.</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowRandomizerModal(false)}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

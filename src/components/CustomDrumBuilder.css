@@ -3,7 +3,6 @@ body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    color: #e0e0e0;
 }
 
 .custom-drum-builder {
@@ -23,7 +22,7 @@ body {
     gap: 50px;
 }
 
-.form-container {
+.form-container, .chart-container {
     flex: 1;
     min-width: 450px;
     padding: 30px;
@@ -33,17 +32,12 @@ body {
 }
 
 .chart-container {
-    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-width: 450px;
+    min-width: 500px;
     height: auto;
-    padding: 30px;
-    background-color: #151515;
-    border-radius: 12px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
 }
 
 label {
@@ -58,19 +52,12 @@ select {
     width: 100%;
     padding: 15px;
     border-radius: 8px;
-    border: 1px solid #333333;
-    background-color: #202020;
-    color: #ffffff;
     font-size: 1rem;
     transition: border 0.3s ease;
 }
 
 select:hover {
     border: 1px solid #4db8ff;
-}
-
-.builder-section {
-    margin-bottom: 25px;
 }
 
 h3 {
@@ -80,16 +67,9 @@ h3 {
     text-align: left;
 }
 
-/* Spider Chart Section */
-canvas {
-    max-width: 500px;
-    max-height: 500px;
-    margin-bottom: 30px;
-}
-
-/* Sound Profile Values */
-.sound-profile-bars {
-    width: 100%;
+/* Shared Bar Chart and Sound Profile Section */
+.sound-profile-bars, .bar-chart {
+    width: 90%;
     max-width: 700px;
     margin: 30px auto;
     padding: 20px;
@@ -114,38 +94,38 @@ canvas {
 }
 
 .bar {
-    flex: 5;
+    flex: 3;
     height: 20px;
     border-radius: 10px;
     overflow: hidden;
     background-color: rgba(0, 0, 0, 0.4);
 }
 
-.bar-fill {
+.bar-fill, .gauge-fill {
     height: 100%;
     border-radius: 10px;
     transition: width 0.6s ease;
 }
 
 /* Gradients for Each Sound Profile */
-.bar-fill.attack {
-    background: linear-gradient(90deg, #ff5f6d, #ffc371);
+.attack {
+    background: linear-gradient(90deg, #ff1100, #ff7f00);
 }
 
-.bar-fill.sustain {
-    background: linear-gradient(90deg, #36d1dc, #5b86e5);
+.sustain {
+    background: linear-gradient(90deg, #073a8d, #3ea8ff);
 }
 
-.bar-fill.warmth {
-    background: linear-gradient(90deg, #ff9966, #ff5e62);
+.warmth {
+    background: linear-gradient(90deg, #4a1e0a, #f06532);
 }
 
-.bar-fill.projection {
-    background: linear-gradient(90deg, #00c6ff, #0072ff);
+.projection {
+    background: linear-gradient(90deg, #ffcc00, #ff4400);
 }
 
-.bar-fill.brightness {
-    background: linear-gradient(90deg, #f4e2d8, #ba5370);
+.brightness {
+    background: linear-gradient(90deg, #f0f9ff, #ffe57f);
 }
 
 /* View Toggle Buttons */
@@ -157,8 +137,6 @@ canvas {
 
 .view-btn {
     padding: 10px 20px;
-    background-color: #333333;
-    color: #e0e0e0;
     border: 1px solid #555;
     border-radius: 8px;
     font-size: 1.1rem;
@@ -181,6 +159,63 @@ canvas {
     outline: none;
 }
 
+/* Spider Chart Section */
+canvas {
+    max-width: 500px;
+    max-height: 500px;
+    margin-bottom: 30px;
+}
+
+.chart-container {
+    text-align: center;
+    margin: 40px 0;
+    color: #ffffff;
+}
+
+/* Definitions Section */
+.definitions {
+    text-align: left;
+    margin: 40px auto;
+    max-width: 700px;
+    padding: 25px;
+    border-radius: 10px;
+    background-color: rgba(20, 20, 20, 0.95);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+}
+
+.definition-item h3 {
+    margin: 15px 0;
+    color: #4db8ff;
+    font-size: 1.5rem;
+}
+
+.definition-item p {
+    margin: 5px 0;
+    line-height: 1.7;
+}
+
+/* Gauge Container */
+.gauge-container {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+}
+
+.gauge {
+    flex-grow: 1;
+    height: 20px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 0 15px;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.gauge-label {
+    font-size: 15px;
+    color: #ffffff;
+    font-weight: 500;
+}
+
 /* Responsive Design */
 @media (max-width: 900px) {
     .builder-container {
@@ -195,13 +230,14 @@ canvas {
 }
 
 @media (max-width: 500px) {
-    .form-container {
+    .form-container, .chart-container {
         min-width: 100%;
         padding: 20px;
     }
+}
 
-    .chart-container {
-        min-width: 100%;
-        padding: 20px;
+@media (max-width: 600px) {
+    .definitions {
+        padding: 15px;
     }
 }
