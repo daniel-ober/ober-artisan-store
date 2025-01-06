@@ -23,7 +23,7 @@ const SpiderChart = ({ data }) => {
                     fill: true,
                     backgroundColor: 'rgba(34, 202, 236, 0.2)',
                     borderColor: 'rgba(34, 202, 236, 1)',
-                    pointBackgroundColor: 'rgba(34, 202, 236, 1)',
+                    pointBackgroundColor: 'rgb(34, 202, 236)',
                     pointBorderColor: '#fff',
                     pointHoverBackgroundColor: '#fff',
                     pointHoverBorderColor: 'rgba(34, 202, 236, 1)'
@@ -31,18 +31,18 @@ const SpiderChart = ({ data }) => {
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: false,
+                maintainAspectRatio: true,
                 scales: {
                     r: {
-                        beginAtZero: true,
-                        suggestedMin: 0,
+                        beginAtZero: false,
+                        suggestedMin: 4,
                         suggestedMax: 10,
                         ticks: {
                             stepSize: 1,
                             backdropColor: 'rgba(0,0,0,0)',
                             color: '#ffffff',
                             font: {
-                                size: 14
+                                size: 0
                             }
                         },
                         grid: {
