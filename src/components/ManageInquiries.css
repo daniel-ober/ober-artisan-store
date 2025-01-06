@@ -1,64 +1,172 @@
 .manage-inquiries {
-    padding: 20px;
+  padding: 20px;
+}
+
+.manage-inquiries h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2em;
+  color: #111;
+  font-weight: 700;
+}
+
+.manage-inquiries-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 auto;
+  font-family: 'Arial', sans-serif;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.manage-inquiries-table th,
+.manage-inquiries-table td {
+  padding: 16px;
+  border: 1px solid #ccc;
+  text-align: center;
+  font-size: 1em;
+  color: #333;
+}
+
+.manage-inquiries-table th {
+  background-color: #ddd;
+  font-weight: bold;
+  color: #222;
+  text-transform: uppercase;
+}
+
+.manage-inquiries-table tr:nth-child(even) {
+  background-color: #f0f0f0;
+}
+
+.manage-inquiries-table tr:hover {
+  /* background-color: ; */
+}
+
+.manage-inquiries-table .status-closed {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.manage-inquiries-table .status-converted {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.manage-inquiries-table .status-new {
+  background-color: #cce5ff;
+  color: #004085;
+}
+
+.manage-inquiries-table select {
+  padding: 10px;
+  border: 1px solid #bbb;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.view-btn,
+.delete-btn {
+  padding: 12px 18px;
+  margin: 5px;
+  font-size: 1em;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.view-btn {
+  background-color: #0056b3;
+  color: white;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.delete-btn:disabled {
+  background-color: #b0b0b0;
+  cursor: not-allowed;
+}
+
+.view-btn:hover {
+  background-color: #003f8a;
+}
+
+.delete-btn:hover:not(:disabled) {
+  background-color: #c82333;
+}
+
+.status-dropdown {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+  cursor: pointer;
+  background-color: #fff;
+  transition: border-color 0.3s ease;
+}
+
+.status-dropdown:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.no-inquiries {
+  text-align: center;
+  padding: 30px;
+  font-size: 1.3em;
+  color: #555;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+@media (max-width: 768px) {
+  .manage-inquiries-table th,
+  .manage-inquiries-table td {
+    padding: 12px;
+    font-size: 0.9em;
   }
-  
+
+  .filters select {
+    padding: 10px;
+    font-size: 0.9em;
+  }
+
+  .view-btn,
+  .delete-btn {
+    padding: 10px 14px;
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 480px) {
   .manage-inquiries h2 {
-    text-align: center;
-    margin-bottom: 20px;
     font-size: 1.5em;
   }
-  
+
   .manage-inquiries-table {
+    font-size: 0.85em;
+  }
+
+  .filters {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .filters select {
     width: 100%;
-    border-collapse: collapse;
-    margin: 0 auto;
-    font-family: Arial, sans-serif;
   }
-  
-  .manage-inquiries-table th, .manage-inquiries-table td {
-    padding: 12px;
-    border: 1px solid #ddd;
-    text-align: center;
-  }
-  
-  .manage-inquiries-table th {
-    background-color: #f4f4f4;
-    font-weight: bold;
-  }
-  
-  .manage-inquiries-table tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  
-  .view-btn, .delete-btn {
-    padding: 8px 12px;
-    margin: 0 5px;
-    font-size: 0.9em;
-    cursor: pointer;
-    border: none;
-    border-radius: 4px;
-  }
-  
-  .view-btn {
-    background-color: #007bff;
-    color: white;
-  }
-  
+
+  .view-btn,
   .delete-btn {
-    background-color: #f44336;
-    color: white;
+    width: 100%;
+    margin-bottom: 10px;
   }
-  
-  .delete-btn:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-  
-  .view-btn:hover {
-    background-color: #0056b3;
-  }
-  
-  .delete-btn:hover {
-    background-color: #e53935;
-  }
-  
+}
