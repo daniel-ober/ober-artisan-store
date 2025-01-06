@@ -197,6 +197,10 @@ function App() {
             )}
           />
           <Route path="/admin-signin" element={<AdminSignin />} />
+
+          {/* Checkout and Checkout Summary Routes */}
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/checkout-summary" element={<CheckoutSummary />} />
         </Routes>
       </div>
       <Footer navbarLinks={navbarLinks} />

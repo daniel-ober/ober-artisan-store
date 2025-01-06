@@ -1,3 +1,4 @@
+// backend/server.js
 require('dotenv').config({ path: `.env.${process.env.NODE_ENV}` });
 
 console.log('NODE_ENV:', process.env.NODE_ENV);
@@ -100,48 +101,25 @@ app.use('/api/webhook', webhookRoute);
 // Route for creating Stripe checkout sessions
 app.post('/api/create-checkout-session', async (req, res) => {
     try {
-        const { products, userId, customerEmail, promoCode } = req.body;
+        const { products, userId, customerFirstName, customerLastName, customerEmail, customerPhone, shippingAddress } = req.body;
         const guestToken = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
         if (!products || products.length === 0) {
             return res.status(400).json({ error: 'Invalid products array' });
         }
 
-        // Fetch the promo code from Stripe to get the promotion_code ID
-        let promotionCodeId = null;
-        if (promoCode) {
-            const promoList = await stripe.promotionCodes.list({
-                code: promoCode,
-                active: true,
-                limit: 1,
-            });
-
-            if (promoList.data.length > 0) {
-                promotionCodeId = promoList.data[0].id;
-                console.log('Promotion code ID:', promotionCodeId);
-            } else {
-                console.warn('Promo code not found or inactive.');
-            }
-        }
-
-        // Create line items for the session
-        const lineItems = products.map((product) => {
-            const productData = {
-                name: product.name || 'Unnamed Product',
-                description: product.description?.trim() || 'No description available',
-            };
-
-            return {
-                price_data: {
-                    currency: 'usd',
-                    product_data: productData,
-                    unit_amount: Math.round(product.price * 100),
+        const lineItems = products.map((product) => ({
+            price_data: {
+                currency: 'usd',
+                product_data: {
+                    name: product.name || 'Unnamed Product',
+                    description: product.description || 'No description available',
                 },
-                quantity: product.quantity || 1,
-            };
-        });
+                unit_amount: Math.round(product.price * 100),
+            },
+            quantity: product.quantity || 1,
+        }));
 
-        // Create the Stripe checkout session
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
             line_items: lineItems,
@@ -151,54 +129,45 @@ app.post('/api/create-checkout-session', async (req, res) => {
             metadata: {
                 userId: userId || 'guest',
                 guestToken,
-                promoCode,
+                customerFirstName,
+                customerLastName,
                 customerEmail,
+                customerPhone: customerPhone || 'No phone provided',
+                shippingAddress: JSON.stringify(shippingAddress || {}),
+
             },
             customer_email: customerEmail,
             shipping_address_collection: { allowed_countries: ['US', 'CA'] },
-            discounts: promotionCodeId ? [{ promotion_code: promotionCodeId }] : [],
+            allow_promotion_codes: true
         });
 
         res.status(200).json({ url: session.url, id: session.id, guestToken });
     } catch (err) {
-        console.error('Error creating Stripe session:', err);
-        res.status(500).json({ error: 'Failed to create checkout session. Please try again.' });
+        console.error('Error creating Stripe session:', err.message);
+        res.status(500).json({ error: err.message });
     }
 });
 
-// Promo Code Validation Route
-app.post('/api/validate-promo', async (req, res) => {
-    const { promoCode } = req.body;
+// Import and mount routes
+const chatRoute = require('./routes/chat');
+const contactRoute = require('./routes/contact');
+const productsRoute = require('./routes/products');
+const ordersRoute = require('./routes/orders');
+const usersRoute = require('./routes/users');
 
-    try {
-        const promoList = await stripe.promotionCodes.list({
-            code: promoCode,
-            active: true,
-            limit: 1,
-        });
+app.use('/api/chat', chatRoute);
+app.use('/api/contact', contactRoute);
+app.use('/api/products', productsRoute);
+app.use('/api/orders', ordersRoute);
+app.use('/api/users', usersRoute);
 
-        if (promoList.data.length > 0) {
-            const promo = promoList.data[0];
-            res.status(200).json({
-                valid: true,
-                discount: promo.coupon.percent_off || 0,
-                description: promo.coupon.name || 'Promo applied successfully',
-            });
-        } else {
-            res.status(404).json({
-                valid: false,
-                message: 'Promo code is invalid or expired.',
-            });
-        }
-    } catch (error) {
-        console.error('Error validating promo code:', error);
-        res.status(500).json({
-            valid: false,
-            message: 'Failed to validate promo code. Please try again later.',
-        });
-    }
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error('Unhandled error:', err.message);
+    res.status(500).json({ error: 'Internal Server Error' });
 });
 
+// Start the server
 const PORT = process.env.PORT || 4949;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
