@@ -19,6 +19,7 @@ const AddProductModal = ({ onClose }) => {
     sku: '',
     images: [],
     interactive360Url: '',
+    status: 'inactive',
   });
 
   const [artisanSpecs, setArtisanSpecs] = useState({});
@@ -108,6 +109,7 @@ const AddProductModal = ({ onClose }) => {
         sku: '',
         images: [],
         interactive360Url: '',
+        status: 'inactive',
       });
       setArtisanSpecs({});
       setImageFiles([]);

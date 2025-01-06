@@ -33,4 +33,10 @@ if (!admin.apps.length) {
     }
 }
 
-module.exports = admin.firestore();
+// Firestore initialization
+const db = admin.firestore();
+
+// Storage initialization (for backend usage)
+const storage = admin.storage();
+
+module.exports = { db, storage };
