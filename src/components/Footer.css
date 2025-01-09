@@ -1,52 +1,58 @@
+/* Footer container styling */
 .footer-container {
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
-  }
-  
-  .footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  .footer-section {
-    margin-bottom: 20px;
-  }
-  
-  .footer-section h2 {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-  }
-  
-  .footer-section ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .footer-section ul li {
-    margin: 5px 0;
-  }
-  
-  .footer-section ul li a {
-    color: #fff;
-    text-decoration: none;
-  }
-  
-  .footer-section ul li a:hover {
-    text-decoration: underline;
-  }
-  
-  .footer-section p {
-    margin: 5px 0;
-  }
-  
-  .footer-section a {
-    color: #fff;
-    text-decoration: none;
-  }
-  
-  .footer-section a:hover {
-    text-decoration: underline;
-  }
-  
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  margin-top: auto; /* Pushes footer to the bottom of the layout */
+}
+
+/* Center footer content */
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Footer sections spacing */
+.footer-section {
+  margin-bottom: 20px;
+}
+
+/* Footer headings */
+.footer-section h2 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+/* Footer links */
+.footer-section ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin: 5px 0;
+}
+
+.footer-section ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer-section ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Footer paragraph spacing */
+.footer-section p {
+  margin: 5px 0;
+}
+
+.footer-section a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer-section a:hover {
+  text-decoration: underline;
+}

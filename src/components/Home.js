@@ -1,9 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { getUserDoc, createCart } from '../firebaseConfig';
 import './Home.css';
 
 const Home = () => {
-  const [userData, setUserData] = useState(null);
   const [isDarkMode, setIsDarkMode] = useState(() => localStorage.getItem('darkMode') === 'true');
   const [isVideoReady, setIsVideoReady] = useState(false);
 
@@ -25,37 +23,18 @@ const Home = () => {
     return () => mutationObserver.disconnect();
   }, []);
 
-  useEffect(() => {
-    const testFirebaseIntegration = async () => {
-      try {
-        const userId = 'testUserId123';
-        const userDoc = await getUserDoc(userId);
-
-        if (!userDoc) {
-          await createCart(userId);
-          console.log(`Created a cart for user ID: ${userId}`);
-        } else {
-          setUserData(userDoc);
-          console.log('User Data:', userDoc);
-        }
-      } catch (error) {
-        console.error('Error interacting with Firebase:', error.message);
-      }
-    };
-
-    testFirebaseIntegration();
-  }, []);
-
   const lightVideoSrc =
     'https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/Home%2Fteaser-light%2Fd.mp4?alt=media&token=b52e81d0-2ae9-449d-b3cb-051547ed97e0';
   const darkVideoSrc =
     'https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/Home%2Fteaser-dark%2Fc.mp4?alt=media&token=03f2688a-c1bd-48ba-9c75-b351007e3fa7';
 
-  const handleVideoLoaded = () => setIsVideoReady(true);
+  const handleVideoLoaded = () => {
+    setIsVideoReady(true);
+  };
 
   return (
     <div className="home-container">
-      <div className="video-container">
+      <div className="video-container" aria-label="Coming Soon Video">
         <video
           ref={lightVideoRef}
           src={lightVideoSrc}
@@ -77,9 +56,9 @@ const Home = () => {
           onCanPlayThrough={handleVideoLoaded}
         />
       </div>
-      <div className="home-content">
-        {userData && <p className="user-info">Welcome back, {userData.name}!</p>}
-      </div>
+      <footer className="footer-container">
+        <p>&copy; {new Date().getFullYear()} Dan Ober Artisan Drums. All rights reserved.</p>
+      </footer>
     </div>
   );
 };
