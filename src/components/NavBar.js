@@ -63,7 +63,7 @@ const NavBar = () => {
 
   return (
     <nav className="navbar">
-      <video
+      {/* <video
         className="navbar-background"
         autoPlay
         loop
@@ -71,7 +71,7 @@ const NavBar = () => {
         playsInline
         src={isMenuOpen ? '/background-mobile.mp4' : '/background-web.mp4'}
         type="video/mp4"
-      />
+      /> */}
 
       <div className="navbar-logo">
         <Link to="/">
@@ -95,7 +95,7 @@ const NavBar = () => {
         aria-label="Toggle menu"
       >
         <img
-          src={isMenuOpen ? 'https://i.imgur.com/P61nlaA.png' : 'https://i.imgur.com/iGiegQg.png'}
+          src={isMenuOpen ? '/menu/41.png' : '/menu/31.png'}
           alt="Menu Toggle"
           className={`menu-arrow-icon ${isMenuOpen ? 'open' : ''}`}
         />
