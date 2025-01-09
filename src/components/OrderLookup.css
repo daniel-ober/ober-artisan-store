@@ -109,7 +109,7 @@
     top: 100%;
     left: 0;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.9); /* Darker background */
+    background-color: rgb(0, 0, 0); /* Darker background */
     z-index: 2000;
     max-height: 0; /* Initially collapsed */
     overflow: hidden;
