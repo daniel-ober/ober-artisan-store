@@ -262,6 +262,14 @@
     text-align: center;
   }
 
+  .product-gallery-info {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 30px;
+    align-items: flex-start;
+  }
+  
   .product-price {
     font-size: 28px;
   }

@@ -16,7 +16,7 @@ const SpiderChart = ({ data }) => {
         chartInstance.current = new Chart(ctx, {
             type: 'radar',
             data: {
-                labels: ['Attack', 'Sustain', 'Warmth', 'Projection', 'Brightness'],
+                labels: ['Projection','Wamth','Sustain','Attack','Bright'],
                 datasets: [{
                     label: 'Drum Sound Profile',
                     data: data,
@@ -31,7 +31,7 @@ const SpiderChart = ({ data }) => {
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: true,
+                maintainAspectRatio: false,
                 scales: {
                     r: {
                         beginAtZero: false,

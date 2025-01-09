@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import SpiderChart from './SpiderChart';
 import BarChart from './BarChart';  // Import BarChart component
 import { Tooltip, Modal, Button } from 'react-bootstrap';  // Added Tooltip and Modal from react-bootstrap
+import FrequencySpectrum from './FrequencySpectrum';  // Import Frequency Spectrum component
 
 // Importing data files for dropdowns
 import woodSpecies from '../data/profiles/woodSpecies';
@@ -23,41 +24,49 @@ import sustainValues from '../data/distributions/sustainValues';
 import warmthValues from '../data/distributions/warmthValues';
 import projectionValues from '../data/distributions/projectionValues';
 import brightnessValues from '../data/distributions/brightnessValues';
+import frequencyResponse from '../data/distributions/frequencyResponseValues'; 
 
 import './CustomDrumBuilder.css';
 
 const CustomDrumBuilder = () => {
   const [specs, setSpecs] = useState({
     construction: 'Stave',
-    species: ['Maple'], // Ensure species is an array
-    depth: 6.5,
+    species: ['Maple'],
     width: 14,
+    depth: 6.5,
     bearingEdge: '45 Degree',
     thickness: '8mm',
+    tension: 'Medium',
+    drumhead: 'Coated',
     finish: 'Glossy',
     hoopType: 'Die-Cast',
     hardwareType: 'Standard Lugs',
     environmental: 'Average Setting',
-    drumhead: 'Coated',
-    tension: 'Medium', // Drumhead tension state
   });
 
   const [soundProfile, setSoundProfile] = useState({});
+  const [frequencyResponseData, setFrequencyResponseData] = useState({
+    low: 0,
+    lowMid: 0,
+    mid: 0,
+    midHigh: 0,
+    high: 0
+  });
   const [viewMode, setViewMode] = useState('spider');  // Default to 'spider' view
   const [randomizerEnabled, setRandomizerEnabled] = useState(false);
   const [lockedFields, setLockedFields] = useState({
     construction: false,
     species: false,
-    depth: false,
     width: false,
+    depth: false,
     bearingEdge: false,
     thickness: false,
+    tension: false,
+    drumhead: false,
     finish: false,
     hoopType: false,
     hardwareType: false,
     environmental: false,
-    drumhead: false,
-    tension: false,
   });
   const [showRandomizerModal, setShowRandomizerModal] = useState(false);
   const [hasSeenModal, setHasSeenModal] = useState(false);
@@ -80,10 +89,10 @@ const CustomDrumBuilder = () => {
       case 'width': return 'diameter';
       case 'depth': return 'depth';
       case 'thickness': return 'thickness';
+      case 'drumheadTension': return 'tension';
       case 'construction': return 'constructionType';
       case 'hardwareType': return 'hardware';
       case 'environmental': return 'factor';
-      case 'drumheadTension': return 'tension';  // Ensure correct mapping for drumheadTension
       default: return key;
     }
   };
@@ -92,16 +101,16 @@ const CustomDrumBuilder = () => {
   const categories = [
     { key: 'construction', data: constructionTypes, label: 'Shell Construction' },
     { key: 'species', data: woodSpecies, label: 'Wood Species' },
-    { key: 'depth', data: drumDepths, label: 'Depth' },
-    { key: 'width', data: shellDiameters, label: 'Width (Diameter)' },
+    { key: 'tension', data: drumheadTensions, label: 'Drumhead Tension' },
+    { key: 'drumhead', data: drumheadTypes, label: 'Drumhead Type' },
     { key: 'bearingEdge', data: bearingEdgesTypes, label: 'Bearing Edge' },
     { key: 'thickness', data: shellThickness, label: 'Shell Thickness' },
+    { key: 'width', data: shellDiameters, label: 'Width (Diameter)' },
+    { key: 'depth', data: drumDepths, label: 'Depth' },
     { key: 'finish', data: finishTypes, label: 'Finish Type' },
     { key: 'hoopType', data: hoopRimTypes, label: 'Hoop Type' },
     { key: 'hardwareType', data: hardwareTypes, label: 'Hardware Type' },
     { key: 'environmental', data: environmentalFactors, label: 'Environmental Factors' },
-    { key: 'drumhead', data: drumheadTypes, label: 'Drumhead Type' },
-    { key: 'tension', data: drumheadTensions, label: 'Drumhead Tension' },  // Ensure drumheadTension is added
   ];
 
   // Calculate weighted profile
@@ -124,6 +133,14 @@ const CustomDrumBuilder = () => {
   // Main calculation for sound profile
   const calculateSoundProfile = () => {
     let profile = { attack: 0, sustain: 0, warmth: 0, projection: 0, brightness: 0 };
+    let frequencyResponseData = {
+      low: 0,
+      lowMid: 0,
+      mid: 0,
+      midHigh: 0,
+      high: 0
+    };
+
     console.log("Starting full sound profile calculation...");
 
     // Handle wood species separately
@@ -133,32 +150,61 @@ const CustomDrumBuilder = () => {
         const weighted = calculateWeightedProfile('Wood Species', woodData.soundProfile);
         console.log('Wood Species Contribution:', weighted);
         for (let key in profile) profile[key] += weighted[key];
+        
+        // Add frequency response for wood species
+        if (woodData.frequencyResponse) {
+          for (let key in frequencyResponseData) {
+            frequencyResponseData[key] += woodData.frequencyResponse[key] || 0;
+          }
+        }
       }
     });
 
     // Process depth, width, and thickness explicitly
     const depthData = drumDepths.find(item => item.depth == specs.depth);
     const widthData = shellDiameters.find(item => item.diameter == specs.width);
-    const thicknessData = shellThickness.find(item => item.thickness == specs.thickness);  // Handle shell thickness
+    const thicknessData = shellThickness.find(item => item.thickness == specs.thickness);
 
+    // Add frequency response from drum depth
     if (depthData) {
       const weightedDepth = calculateWeightedProfile('Depth', depthData.soundProfile);
       console.log('Depth Contribution:', weightedDepth);
       for (let key in profile) profile[key] += weightedDepth[key];
+
+      if (depthData.frequencyResponse) {
+        for (let key in frequencyResponseData) {
+          frequencyResponseData[key] += depthData.frequencyResponse[key] || 0;
+        }
+      }
     }
 
+    // Add frequency response from shell diameter
     if (widthData) {
       const weightedWidth = calculateWeightedProfile('Width', widthData.soundProfile);
       console.log('Width Contribution:', weightedWidth);
       for (let key in profile) profile[key] += weightedWidth[key];
+
+      if (widthData.frequencyResponse) {
+        for (let key in frequencyResponseData) {
+          frequencyResponseData[key] += widthData.frequencyResponse[key] || 0;
+        }
+      }
     }
 
+    // Add frequency response from shell thickness
     if (thicknessData) {
       const weightedThickness = calculateWeightedProfile('Shell Thickness', thicknessData.soundProfile);
       console.log('Thickness Contribution:', weightedThickness);
       for (let key in profile) profile[key] += weightedThickness[key];
+
+      if (thicknessData.frequencyResponse) {
+        for (let key in frequencyResponseData) {
+          frequencyResponseData[key] += thicknessData.frequencyResponse[key] || 0;
+        }
+      }
     }
 
+    // Iterate through other categories and add their contributions
     categories.forEach(({ key, data, label }) => {
       if (!['species', 'depth', 'width', 'thickness'].includes(key)) {
         const itemData = data.find(item => item[dataKeyForKey(key)] === specs[key]);
@@ -166,12 +212,51 @@ const CustomDrumBuilder = () => {
           const weighted = calculateWeightedProfile(label, itemData.soundProfile);
           console.log(`${label} Contribution:`, weighted);
           for (let prop in profile) profile[prop] += weighted[prop];
+
+          // Add frequency response for each category
+          if (itemData.frequencyResponse) {
+            for (let key in frequencyResponseData) {
+              frequencyResponseData[key] += itemData.frequencyResponse[key] || 0;
+            }
+          }
         }
       }
     });
 
+    // Normalize or adjust frequency response values for smoother output
+    for (let band in frequencyResponseData) {
+      frequencyResponseData[band] = Math.min(Math.max(frequencyResponseData[band] / 10, 0), 1); // Normalize to 0-1 range
+    }
+
+    // Normalize frequency response data to ensure they are in the 0-1 range
+    const normalizeFrequencyResponse = (frequencyResponseData) => {
+      const maxResponse = Math.max(...Object.values(frequencyResponseData)); // Find the maximum response value
+      const minResponse = Math.min(...Object.values(frequencyResponseData)); // Find the minimum response value
+
+      // Normalize to the range of 0 to 1
+      for (let key in frequencyResponseData) {
+        frequencyResponseData[key] = (frequencyResponseData[key] - minResponse) / (maxResponse - minResponse);
+      }
+
+      // Optional: Smooth out the transitions by applying a simple smoothing function
+      const smoothResponse = { ...frequencyResponseData };
+      Object.keys(smoothResponse).forEach((key, index, array) => {
+        if (index > 0 && index < array.length - 1) {
+          smoothResponse[key] = (frequencyResponseData[key] + frequencyResponseData[array[index - 1]] + frequencyResponseData[array[index + 1]]) / 3;
+        }
+      });
+
+      return smoothResponse;
+    };
+
+    // Normalize frequency response data before applying it
+    frequencyResponseData = normalizeFrequencyResponse(frequencyResponseData);
+
     console.log("Final Calculated Sound Profile:", profile);
+    console.log("Final Frequency Response Data:", frequencyResponseData);
+
     setSoundProfile(profile);
+    setFrequencyResponseData(frequencyResponseData);  // Store frequency response data for further use
   };
 
   useEffect(() => {
@@ -209,7 +294,6 @@ const CustomDrumBuilder = () => {
   return (
     <div className="custom-drum-builder">
       <h1>Custom Drum Builder</h1>
-
       <div className="builder-container">
         <div className="chart-container">
           <div className="view-toggle">
@@ -222,6 +306,7 @@ const CustomDrumBuilder = () => {
           </div>
           {viewMode === 'spider' && <SpiderChart data={Object.values(soundProfile)} />}
           {viewMode === 'bar' && <BarChart data={soundProfile} />}
+          <FrequencySpectrum drumSpecs={specs} frequencyResponse={frequencyResponseData} />
         </div>
 
         <div className="form-container">
@@ -238,46 +323,50 @@ const CustomDrumBuilder = () => {
               </button>
             )}
 
-            {categories.map(({ key, data, label }) => (
-              <div key={key} className="form-group">
-                <label htmlFor={key}>{label}</label>
-                <div className="input-group">
-                  <select
-                    id={key}
-                    value={specs[key]}
-                    onChange={(e) => handleInputChange(e, key)}
-                    className="form-control"
-                    disabled={lockedFields[key] && randomizerEnabled}
-                  >
-                    {data.map((item, idx) => (
-                      <option key={idx} value={item[dataKeyForKey(key)]}>
-                        {item[dataKeyForKey(key)]}
-                      </option>
-                    ))}
-                  </select>
-                  {randomizerEnabled && (
-                    <div
-                      className={`lock-icon ${lockedFields[key] ? 'locked' : 'unlocked'}`}
-                      onClick={() => toggleLockField(key)}
-                      role="button"
-                      tabIndex="0"
-                      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') toggleLockField(key); }}
+            {categories
+              .filter(({ key }) => !['environmental', 'hardwareType', 'hoopType', 'finish'].includes(key))
+              .map(({ key, data, label }) => (
+                <div key={key} className="form-group">
+                  <label htmlFor={key}>{label}</label>
+                  <div className="input-group">
+                    <select
+                      id={key}
+                      value={specs[key]}
+                      onChange={(e) => handleInputChange(e, key)}
+                      className="form-control"
+                      disabled={lockedFields[key] && randomizerEnabled}
                     >
-                      {lockedFields[key] ? '🔒' : '🔓'}
-                    </div>
-                  )}
+                      {Array.isArray(data) && data.map((item, idx) => (
+                        <option key={idx} value={item[dataKeyForKey(key)]}>
+                          {item[dataKeyForKey(key)]}
+                        </option>
+                      ))}
+                    </select>
+                    {randomizerEnabled && (
+                      <div
+                        className={`lock-icon ${lockedFields[key] ? 'locked' : 'unlocked'}`}
+                        onClick={() => toggleLockField(key)}
+                        role="button"
+                        tabIndex="0"
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter' || e.key === ' ') toggleLockField(key);
+                        }}
+                      >
+                        {lockedFields[key] ? '🔒' : '🔓'}
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
 
             <div className="additional-factors">
               <h3>Additional Factors</h3>
               <Tooltip id="tooltip-additional-factors" title="These factors affect the overall sound profile but are not considered key factors.">
                 <span>❓</span>
               </Tooltip>
-              {['environmental', 'hardwareType', 'hoopType', 'finish'].map(key => (
+              {['environmental', 'hardwareType', 'hoopType', 'finish'].map((key) => (
                 <div key={key} className="form-group">
-                  <label htmlFor={key}>{categories.find(c => c.key === key).label}</label>
+                  <label htmlFor={key}>{categories.find((c) => c.key === key).label}</label>
                   <select
                     id={key}
                     value={specs[key]}
@@ -285,11 +374,13 @@ const CustomDrumBuilder = () => {
                     className="form-control"
                     disabled={lockedFields[key] && randomizerEnabled}
                   >
-                    {categories.find(c => c.key === key).data.map((item, idx) => (
-                      <option key={idx} value={item[dataKeyForKey(key)]}>
-                        {item[dataKeyForKey(key)]}
-                      </option>
-                    ))}
+                    {categories
+                      .find((c) => c.key === key)
+                      .data.map((item, idx) => (
+                        <option key={idx} value={item[dataKeyForKey(key)]}>
+                          {item[dataKeyForKey(key)]}
+                        </option>
+                      ))}
                   </select>
                 </div>
               ))}
@@ -297,21 +388,6 @@ const CustomDrumBuilder = () => {
           </form>
         </div>
       </div>
-
-      <Modal show={showRandomizerModal} onHide={() => setShowRandomizerModal(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>Randomizer Explanation</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <p>The randomizer allows you to automatically generate random drum specifications for a unique sound profile.</p>
-          <p>Use the lock/unlock icon to choose which fields should remain fixed and which should be randomized.</p>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowRandomizerModal(false)}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
     </div>
   );
 };

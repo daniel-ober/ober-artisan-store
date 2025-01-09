@@ -10,7 +10,7 @@
 
 /* Background video styling - Default (light mode) */
 .navbar-background {
-  position: absolute;
+  position:fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -28,17 +28,15 @@ body.dark .navbar-background {
 
 /* Logo Section */
 .navbar-logo {
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
   width: 100%;
-  max-width: 600px;
+  max-width: 550px;
   padding: 20px;
 }
 
 .logo-img {
-  width: 100%;
-  height: auto;
-  max-height: 350px;
-  object-fit: contain;
+  min-width: 100%;
+  max-height: 50%;
 }
 
 /* Navbar Links */
@@ -78,7 +76,7 @@ body.dark .navbar-background {
   right: 20px;
   width: 360px;
   background-color: white;
-  border: 1px solid #ddd;
+  /* border: 1px solid #ddd; */
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   z-index: 1050;
@@ -119,14 +117,14 @@ body.dark .navbar-background {
 }
 
 .menu-arrow-icon {
-  width: 27px;
-  height: 27px;
+  width: 50px;
+  height: 50px;
   margin: -8.4px;
   transition: transform 0.3s ease;
 }
 
 .menu-arrow-icon.open {
-  transform: rotate(180deg);
+  transform: rotate(360deg);
 }
 
 /* Mobile View Styles */
@@ -136,15 +134,13 @@ body.dark .navbar-background {
   }
 
   .navbar-logo {
-    margin-bottom: 5px;
-    width: 70%;
+    /* margin-bottom: 5px; */
+    width: 75%;
   }
 
   .logo-img {
-    width: 100%;
-    height: auto;
-    max-height: 80vh;
-  }
+
+width: 50%;  }
 
   .navbar-menu-container {
     display: flex;
@@ -170,27 +166,27 @@ body.dark .navbar-background {
   }
 
   .navbar-links.open {
-    max-height: 500px;
+    max-height: 1000px;
     background-color: rgb(39, 37, 42);
   }
 
   .nav-link {
-    font-size: 14px;
-    padding: 8px;
-    width: 100%;
+    /* font-size: 14px; */
+    /* padding: 8px; */
+    width:fit-content;
     text-align: center;
     color: whitesmoke;
   }
 
   .nav-link.active,
   .nav-link:hover {
-    color: #ffe100;
+    color: #000000;
+    /* display: flex; */
   }
 
   .cart-preview-container {
     top: 100px;
-    width: 90%;
-    right: 50%;
+    width: 25%;
     transform: translateX(50%);
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
   }
