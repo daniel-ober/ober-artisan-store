@@ -5,16 +5,14 @@ import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
-import CartPreview from './CartPreview';
 import './NavBar.css';
 
 const NavBar = () => {
   const [navbarLinks, setNavbarLinks] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [showCartPreview, setShowCartPreview] = useState(false);
+  const [isMobileView, setIsMobileView] = useState(false);
   const menuRef = useRef(null);
-  const buttonRef = useRef(null);
   const location = useLocation();
   const { user, isAdmin, handleSignOut } = useAuth();
   const { cart } = useCart();
@@ -24,6 +22,25 @@ const NavBar = () => {
     0
   );
 
+  // Detect screen size
+  useEffect(() => {
+    const handleResize = () => {
+      const isMobile = window.innerWidth <= 768;
+      setIsMobileView(isMobile);
+
+      if (!isMobile) {
+        setIsMenuOpen(false); // Close menu automatically on desktop
+      }
+    };
+
+    handleResize(); // Initial screen size check
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   useEffect(() => {
     const fetchNavbarLinks = async () => {
       try {
@@ -32,26 +49,15 @@ const NavBar = () => {
         const fetchedLinks = navbarLinksSnapshot.docs
           .map((doc) => ({ id: doc.id, ...doc.data() }))
           .sort((a, b) => a.order - b.order);
-        
-        console.log('Fetched Navbar Links:', fetchedLinks);
-        setNavbarLinks(fetchedLinks.filter(link => link.enabled));  // Only show enabled links
+
+        setNavbarLinks(fetchedLinks.filter((link) => link.enabled)); // Only show enabled links
       } catch (error) {
         console.error('Error fetching navbar links:', error);
       }
     };
-  
+
     fetchNavbarLinks();
   }, [user]);
-
-  const toggleCartPreview = () => {
-    if (location.pathname !== '/cart') {
-      setShowCartPreview((prev) => !prev);
-    }
-  };
-
-  const handleCloseCartPreview = () => {
-    setShowCartPreview(false);
-  };
 
   const toggleDarkMode = () => {
     setIsDarkMode((prev) => !prev);
@@ -59,19 +65,38 @@ const NavBar = () => {
     document.body.classList.toggle('light', isDarkMode);
   };
 
-  const isCartEnabled = navbarLinks.some((link) => link.name.toLowerCase() === 'cart');
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => !prev);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
+  // Close menu when clicking outside of it
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
     <nav className="navbar">
-      {/* <video
+      <video
         className="navbar-background"
         autoPlay
         loop
         muted
         playsInline
-        src={isMenuOpen ? '/background-mobile.mp4' : '/background-web.mp4'}
+        src="/smoke.mp4" 
         type="video/mp4"
-      /> */}
+      />
 
       <div className="navbar-logo">
         <Link to="/">
@@ -87,27 +112,30 @@ const NavBar = () => {
         {isDarkMode ? 'Light Mode' : 'Dark Mode'}
       </button>
 
-      <button
-        className="navbar-menu-container"
-        ref={buttonRef}
-        onClick={() => setIsMenuOpen((prev) => !prev)}
-        aria-expanded={isMenuOpen}
-        aria-label="Toggle menu"
-      >
-        <img
-          src={isMenuOpen ? '/menu/41.png' : '/menu/31.png'}
-          alt="Menu Toggle"
-          className={`menu-arrow-icon ${isMenuOpen ? 'open' : ''}`}
-        />
-      </button>
+      {isMobileView && (
+        <button
+          className="navbar-menu-container"
+          onClick={toggleMenu}
+          aria-expanded={isMenuOpen}
+          aria-label="Toggle menu"
+        >
+          <img
+            src={isDarkMode 
+              ? (isMenuOpen ? '/menu/white-e.png' : '/menu/white-b.png') 
+              : (isMenuOpen ? '/menu/black-e.png' : '/menu/black-b.png')
+            }
+            alt="Menu Toggle"
+            className={`menu-arrow-icon ${isMenuOpen ? 'open' : ''}`}
+          />
+        </button>
+      )}
 
-      <div className={`navbar-links ${isMenuOpen ? 'open' : ''}`} ref={menuRef}>
-        {navbarLinks
-          .filter((link) => 
-            link.name.toLowerCase() !== 'cart' && 
-            (link.name.toLowerCase() !== 'signin' || !user)  // Hides "Sign In" if user is authenticated
-          )
-          .map((link) => (
+      {(isMenuOpen || !isMobileView) && (
+        <div
+          className={`navbar-links ${isMobileView && isMenuOpen ? 'open' : ''}`}
+          ref={menuRef}
+        >
+          {navbarLinks.map((link) => (
             <Link
               key={link.id}
               to={`/${link.name.toLowerCase().replace(/\s+/g, '-')}`}
@@ -116,68 +144,52 @@ const NavBar = () => {
                   ? 'active'
                   : ''
               }`}
+              onClick={closeMenu}
             >
               {link.label}
             </Link>
           ))}
 
-        {isCartEnabled && (
-          <div className="cart-link-container">
-            <button
-              className={`nav-link cart-link ${
-                location.pathname === '/cart' ? 'active' : ''
-              }`}
-              onClick={toggleCartPreview}
-            >
-              <FaCartPlus /> Cart ({cartItemCount})
-            </button>
-
-            {showCartPreview && (
-              <div className="cart-preview-container">
-                <CartPreview onClose={handleCloseCartPreview} />
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* Admin button visible if user is authenticated and isAdmin is true */}
-        {user && isAdmin && (
-          <Link
-            to="/admin"
-            className={`nav-link ${
-              location.pathname === '/admin' ? 'active' : ''
-            }`}
-          >
-            <FaCog /> Admin
-          </Link>
-        )}
-
-        {user && (
-          <>
+          {user && isAdmin && (
             <Link
-              to="/account"
+              to="/admin"
               className={`nav-link ${
-                location.pathname === '/account' ? 'active' : ''
+                location.pathname === '/admin' ? 'active' : ''
               }`}
+              onClick={closeMenu}
             >
-              <FaUserAlt /> Account
+              <FaCog /> Admin
             </Link>
-            <button className="nav-link" onClick={handleSignOut}>
-              <FaSignOutAlt /> Sign Out
-            </button>
-          </>
-        )}
+          )}
 
-        {/* Link to the Custom Drum Builder */}
-        <Link
-          to="/custom-drum-builder"
-          className={`nav-link ${
-            location.pathname === '/custom-drum-builder' ? 'active' : ''
-          }`}
-        >
-          Custom Drum Builder
-        </Link>
-      </div>
+          {user && (
+            <>
+              <Link
+                to="/account"
+                className={`nav-link ${
+                  location.pathname === '/account' ? 'active' : ''
+                }`}
+                onClick={closeMenu}
+              >
+                <FaUserAlt /> Account
+              </Link>
+              <button className="nav-link" onClick={handleSignOut}>
+                <FaSignOutAlt /> Sign Out
+              </button>
+            </>
+          )}
+
+          <Link
+            to="/custom-drum-builder"
+            className={`nav-link ${
+              location.pathname === '/custom-drum-builder' ? 'active' : ''
+            }`}
+            onClick={closeMenu}
+          >
+            Custom Drum Builder
+          </Link>
+        </div>
+      )}
     </nav>
   );
 };

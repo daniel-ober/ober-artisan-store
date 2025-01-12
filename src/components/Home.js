@@ -24,9 +24,9 @@ const Home = () => {
   }, []);
 
   const lightVideoSrc =
-    'https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/Home%2Fteaser-light%2Fd.mp4?alt=media&token=b52e81d0-2ae9-449d-b3cb-051547ed97e0';
+    '/light5.mp4';
   const darkVideoSrc =
-    'https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/Home%2Fteaser-dark%2Fc.mp4?alt=media&token=03f2688a-c1bd-48ba-9c75-b351007e3fa7';
+    '/dark3.mp4';
 
   const handleVideoLoaded = () => {
     setIsVideoReady(true);
@@ -56,9 +56,6 @@ const Home = () => {
           onCanPlayThrough={handleVideoLoaded}
         />
       </div>
-      <footer className="footer-container">
-        <p>&copy; {new Date().getFullYear()} Dan Ober Artisan Drums. All rights reserved.</p>
-      </footer>
     </div>
   );
 };

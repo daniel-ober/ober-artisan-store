@@ -20,13 +20,6 @@
   text-align: center;
 }
 
-.logo-img {
-  width: 100%;
-  height: auto;
-  max-height: 450px;
-  object-fit: contain;
-  z-index: -999;
-}
 
 /* Styles for the navigation links */
 .navbar-links {
@@ -86,11 +79,6 @@
     width: 100%; /* Ensure logo spans full width */
   }
 
-  .logo-img {
-    width: 100%;
-    height: auto;
-    max-height: 90vh; /* Ensure logo doesn't get too large */
-  }
 
   .navbar-menu-container {
     display: flex;
