@@ -3,19 +3,20 @@
   display: flex;
   flex-direction: column;
   text-align: center;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: smaller;
-  min-height: 100vh; /* Ensure it always takes up full viewport height */
+  min-height: 100vh; /* Full height */
+  overflow: hidden;
 }
 
 /* Video Container */
 .video-container {
-  position:relative;
-  flex: 1; /* Allow it to grow and fill available space */
+  position: relative;
+  width: 100%;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden; /* Prevent overflow of video elements */
+  overflow: hidden;
+  z-index: -1; /* Ensure video is behind the navbar */
 }
 
 /* Video Element */
@@ -24,18 +25,16 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
-  object-fit: cover; /* Ensures video fills the container */
+  height: 102%;
+  object-fit:cover;
   opacity: 0;
   transition: opacity 1.5s ease-in-out;
 }
 
-/* Fading in the active video */
 .coming-soon-video.fade-in {
   opacity: 1;
 }
 
-/* Fading out the inactive video */
 .coming-soon-video.fade-out {
   opacity: 0;
 }
@@ -46,12 +45,5 @@
   color: white;
   padding: 20px;
   text-align: center;
-  flex-shrink: 0; /* Ensure the footer doesn't shrink */
-}
-
-/* Mobile-Specific Adjustments */
-@media (max-width: 768px) {
-  .video-container {
-    height: auto;
-  }
+  flex-shrink: 0;
 }
