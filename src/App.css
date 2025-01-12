@@ -27,7 +27,7 @@ body.light {
 body.light .navbar,
 body.light .footer,
 body.light .app-content {
-  background-color: #f0f0f0;
+  /* background-color: #f0f0f0; */
   color: #000000;
 }
 
