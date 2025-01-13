@@ -13,6 +13,7 @@ const NavBar = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isMobileView, setIsMobileView] = useState(false);
   const menuRef = useRef(null);
+  const buttonRef = useRef(null); // Reference for the menu button
   const location = useLocation();
   const { user, isAdmin, handleSignOut } = useAuth();
   const { cart } = useCart();
@@ -41,6 +42,7 @@ const NavBar = () => {
     };
   }, []);
 
+  // Fetch navbar links from Firestore
   useEffect(() => {
     const fetchNavbarLinks = async () => {
       try {
@@ -59,27 +61,31 @@ const NavBar = () => {
     fetchNavbarLinks();
   }, [user]);
 
+  // Toggle dark mode
   const toggleDarkMode = () => {
     setIsDarkMode((prev) => !prev);
     document.body.classList.toggle('dark', !isDarkMode);
     document.body.classList.toggle('light', isDarkMode);
   };
 
+  // Toggle menu
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
   };
 
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-  };
-
-  // Close menu when clicking outside of it
+  // Close menu when clicking outside the menu or button
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(event.target) &&
+        buttonRef.current &&
+        !buttonRef.current.contains(event.target)
+      ) {
         setIsMenuOpen(false);
       }
     };
+
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
@@ -94,7 +100,7 @@ const NavBar = () => {
         loop
         muted
         playsInline
-        src="/smoke.mp4" 
+        src={isDarkMode ? '/dark3.mp4' : '/light5.mp4'} // Use Coming Soon video
         type="video/mp4"
       />
 
@@ -118,11 +124,17 @@ const NavBar = () => {
           onClick={toggleMenu}
           aria-expanded={isMenuOpen}
           aria-label="Toggle menu"
+          ref={buttonRef} // Reference for the button
         >
           <img
-            src={isDarkMode 
-              ? (isMenuOpen ? '/menu/white-e.png' : '/menu/white-b.png') 
-              : (isMenuOpen ? '/menu/black-e.png' : '/menu/black-b.png')
+            src={
+              isDarkMode
+                ? isMenuOpen
+                  ? '/menu/white-e.png'
+                  : '/menu/white-b.png'
+                : isMenuOpen
+                ? '/menu/black-e.png'
+                : '/menu/black-b.png'
             }
             alt="Menu Toggle"
             className={`menu-arrow-icon ${isMenuOpen ? 'open' : ''}`}
@@ -144,7 +156,7 @@ const NavBar = () => {
                   ? 'active'
                   : ''
               }`}
-              onClick={closeMenu}
+              onClick={() => setIsMenuOpen(false)} // Close menu on link click
             >
               {link.label}
             </Link>
@@ -156,7 +168,7 @@ const NavBar = () => {
               className={`nav-link ${
                 location.pathname === '/admin' ? 'active' : ''
               }`}
-              onClick={closeMenu}
+              onClick={() => setIsMenuOpen(false)}
             >
               <FaCog /> Admin
             </Link>
@@ -169,7 +181,7 @@ const NavBar = () => {
                 className={`nav-link ${
                   location.pathname === '/account' ? 'active' : ''
                 }`}
-                onClick={closeMenu}
+                onClick={() => setIsMenuOpen(false)}
               >
                 <FaUserAlt /> Account
               </Link>
@@ -184,7 +196,7 @@ const NavBar = () => {
             className={`nav-link ${
               location.pathname === '/custom-drum-builder' ? 'active' : ''
             }`}
-            onClick={closeMenu}
+            onClick={() => setIsMenuOpen(false)}
           >
             Custom Drum Builder
           </Link>

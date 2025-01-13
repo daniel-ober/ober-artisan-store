@@ -1,6 +1,8 @@
 .products-container {
-  padding: 30px;
-  background-color: #f8f9fa;
+  padding: 40px;
+  background-color: #f4f4f4f2;
+  text-align: center;
+  margin: 40px;
 }
 
 .page-title {
