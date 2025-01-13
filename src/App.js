@@ -6,7 +6,7 @@ import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import Home from './components/Home';
 import Products from './components/Products';
-import ProductDetail from './components/ProductDetail'; // New import
+import ProductDetail from './components/ProductDetail';
 import PreOrderPage from './components/PreOrderPage';
 import About from './components/About';
 import Contact from './components/Contact';
@@ -34,19 +34,20 @@ import SupportButton from './components/SupportButton';
 import SupportModal from './components/SupportModal';
 import SupportChatModal from './components/SupportChatModal';
 import AdminSignin from './components/AdminSignin';
-import PathSelection from './components/PathSelection'; // New component for path selection
-import CustomDrumBuilder from './components/CustomDrumBuilder'; // Custom Drum Builder
-import SoundProfileRecommendations from './components/SoundProfileRecommendations'; // New component
+import PathSelection from './components/PathSelection';
+import CustomDrumBuilder from './components/CustomDrumBuilder';
+import SoundProfileRecommendations from './components/SoundProfileRecommendations';
 import './App.css';
 
 function App() {
   const { user, isAdmin } = useAuth();
   const [navbarLinks, setNavbarLinks] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedPath, setSelectedPath] = useState(null); // State for path selection
+  const [selectedPath, setSelectedPath] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
 
+  // Route to tab mapping
   const routeToTabMap = useMemo(() => ({
     '/': 'Home',
     '/about': 'About',
@@ -55,7 +56,6 @@ function App() {
     '/gallery': 'Gallery',
     '/pre-order': 'PreOrder',
     '/custom-shop': 'CustomShop',
-    '/privacy-policy': 'PrivacyPolicy',
     '/products': 'Products',
     '/signin': 'SignIn',
     '/register': 'Register',
@@ -70,6 +70,7 @@ function App() {
     console.log(`Current Tab changed to: ${activeTab}`);
   }, [location.pathname, routeToTabMap]);
 
+  // Fetch Navbar Links from Firestore
   useEffect(() => {
     const fetchSettings = async () => {
       try {
@@ -86,6 +87,59 @@ function App() {
     fetchSettings();
   }, []);
 
+  // Admin Sign-In Key Command Logic
+  useEffect(() => {
+    const adminIPs = process.env.REACT_APP_ADMIN_IP?.split(',') || [];
+
+    const handleKeyPress = async (event) => {
+      if (event.ctrlKey && event.altKey && event.key === 'ß') {
+        try {
+          console.log('Shortcut triggered. Checking access...');
+          
+          const ipResponse = await fetch('https://api.ipify.org?format=json');
+          const { ip } = await ipResponse.json();
+          console.log(`Current IP: ${ip}`);
+          console.log(`Allowed Admin IPs: ${adminIPs.join(', ')}`);
+
+          const isAllowedIP = adminIPs.includes(ip);
+
+          if (isAllowedIP) {
+            console.log('Access granted via IP address.');
+            navigate('/admin-signin');
+            return;
+          }
+
+          const storedToken = localStorage.getItem('admin-token');
+          const macbookToken = process.env.REACT_APP_ADMIN_MACBOOK_TOKEN;
+          const iphoneToken = process.env.REACT_APP_ADMIN_IPHONE_TOKEN;
+          const ipadToken = process.env.REACT_APP_ADMIN_IPAD_TOKEN;
+
+          const isAllowedToken =
+            storedToken === macbookToken ||
+            storedToken === iphoneToken ||
+            storedToken === ipadToken;
+
+          if (isAllowedToken) {
+            console.log('Access granted via device token.');
+            navigate('/admin-signin');
+            return;
+          }
+
+          console.warn('Access Denied: Unauthorized device or IP.');
+          alert('Access Denied: Unauthorized device or IP.');
+        } catch (error) {
+          console.error('Error verifying admin access:', error);
+          alert('An error occurred while verifying access. Please try again.');
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress);
+    };
+  }, [navigate]);
+
   const isLinkEnabled = (linkName) => {
     const link = navbarLinks.find((l) => l.name?.toLowerCase() === linkName.toLowerCase());
     return link?.enabled || false;
@@ -96,49 +150,36 @@ function App() {
   return (
     <div className="app-container">
       <NavBar navbarLinks={navbarLinks} />
-      <div className="app-content">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="*" element={<Navigate to="/" replace />} />
-          <Route path="/home" element={<Navigate to="/" replace />} />
-          <Route path="/return-policy" element={<ReturnPolicy to="/" replace />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy to="/" replace />} />
-          <Route path="/terms-of-service" element={<TermsOfService to="/" replace />} />
           <Route path="/about" element={isLinkEnabled('about') ? <About /> : <NotFound />} />
           <Route path="/cart" element={isLinkEnabled('cart') ? <Cart /> : <NotFound />} />
           <Route path="/contact" element={isLinkEnabled('contact') ? <Contact /> : <NotFound />} />
-          <Route path="/custom-shop" element={isLinkEnabled('custom-shop') ? <CustomShop /> : <NotFound />} />
-          <Route path="/gallery" element={isLinkEnabled('gallery') ? <Gallery /> : <NotFound />} />
-          <Route path="/products" element={isLinkEnabled('products') ? <Products /> : <NotFound />} />
-          <Route path="/products/:productId" element={<ProductDetail />} />
-          <Route path="/pre-order" element={isLinkEnabled('pre-order') ? <PreOrderPage /> : <NotFound />} />
-
-          {/* Path Selection for Sound Profile Tool */}
+          <Route path="/custom-drum-builder" element={<CustomDrumBuilder />} />
           <Route path="/sound-profile-tool" element={<PathSelection setSelectedPath={setSelectedPath} />} />
           <Route path="/custom-drum-builder" element={selectedPath === 'builder' ? <CustomDrumBuilder /> : <Navigate to="/" />} />
           <Route path="/sound-profile-recommendations" element={selectedPath === 'recommendations' ? <SoundProfileRecommendations /> : <Navigate to="/" />} />
-
-          {/* Account and Admin Routes */}
+          <Route path="/gallery" element={isLinkEnabled('gallery') ? <Gallery /> : <NotFound />} />
+          <Route path="/custom-shop" element={isLinkEnabled('custom-shop') ? <CustomShop /> : <NotFound />} />
+          <Route path="/products" element={isLinkEnabled('products') ? <Products /> : <NotFound />} />
+          <Route path="/products/:productId" element={<ProductDetail />} />
+          <Route path="/pre-order" element={isLinkEnabled('pre-order') ? <PreOrderPage /> : <NotFound />} />
           <Route path="/account" element={<PrivateRoute element={<AccountPage />} />} />
           <Route path="/admin" element={<PrivateRoute element={<AdminDashboard />} adminOnly />} />
-          <Route path="/admin-signin" element={<AdminSignin />} />
-          <Route path="/register" element={<Register />} />
-
-
-          {/* Authentication Routes */}
           <Route
             path="/signin"
-            element={
-              isLinkEnabled('signin') ? (
-                user ? <Navigate to="/account" /> : <SignInEmail />
-              ) : (
-                <Navigate to="/" replace />
-              )
-            }
+            element={isLinkEnabled('signin') ? (
+              user ? <Navigate to="/account" /> : <SignInEmail />
+            ) : (
+              <Navigate to="/" replace />
+            )}
           />
+          <Route path="/admin-signin" element={<AdminSignin />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/checkout-summary" element={<CheckoutSummary />} />
         </Routes>
+        <div className="app-content">
       </div>
       <Footer navbarLinks={navbarLinks} />
     </div>
