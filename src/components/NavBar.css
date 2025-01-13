@@ -19,14 +19,14 @@
   opacity: 0.6; /* Adjust opacity as needed */
 }
 
-/* Dark Mode - Override background video opacity */
+/* Dark Mode - Override background video opacity
 body.light .navbar-background {
-  /* opacity: 0.5; */
+  opacity: 0.6;
 }
 
 body.dark .navbar-background {
-  /* opacity: 0.085; */
-}
+  opacity: 0.6;
+} */
 
 /* Logo Section */
 .navbar-logo {
@@ -59,13 +59,13 @@ body.dark .navbar-background {
 
 .nav-link:hover {
   color: #ffffff;
-  background-color: #3a270690;
-
-  border-radius: 3px;
+  /* background-color: #115060ba; */
+  border-radius: 10px;
+  transition: ease-in-out 0.3s;
 }
 
 .nav-link.active {
-  color: hsl(184, 37%, 15%);
+  color: hsl(0, 0%, 93%);
   text-decoration:underline;
 }
 
@@ -172,7 +172,7 @@ width: 50%;  }
 
   .navbar-links.open {
     max-height: 500px;
-    background-color: rgb(39, 37, 42);
+    background-color: rgb(7, 15, 21);
   }
 
   .nav-link {
@@ -185,7 +185,7 @@ width: 50%;  }
 
   .nav-link.active,
   .nav-link:hover {
-    color: #ffe100;
+    color: #69b0fc;
   }
 
   .cart-preview-container {

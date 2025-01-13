@@ -21,3 +21,9 @@
   margin-top: 16px;
   text-align: center;
 }
+
+@media (max-width: 768px) {
+  .contact-container {
+    margin: 20px;
+  }
+}

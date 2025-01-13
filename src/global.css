@@ -28,19 +28,19 @@ body.light .navbar,
 body.light .footer,
 body.light .app-content {
   /* background-color: #f0f0f0; */
-  color: #000000;
+  /* color: #000000; */
 }
 
 /* Dark Mode Styles */
 body.dark {
-  background-color: #000000;
+  /* background-color: #000000; */
   color: #ffffff;
 }
 
 body.dark .navbar,
 body.dark .footer,
 body.dark .app-content {
-  background-color: #222;
+  /* background-color: #222; */
   color: #ffffff;
 }
 

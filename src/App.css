@@ -70,13 +70,13 @@ body.dark {
 body.dark .navbar,
 body.dark .footer,
 body.dark .app-content {
-  background-color: #222222;
+  /* background-color: #222222; */
   color: #ffffff;
 }
 
 body.dark * {
   color: #ffffff !important;
-  background-color: transparent !important;
+  /* background-color: transparent !important; */
 }
 
 /* Navbar and Footer Transitions */
