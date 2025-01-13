@@ -111,3 +111,12 @@
   color: #555;
   margin-bottom: 10px;
 }
+
+
+@media (max-width: 768px) {
+
+  .custom-shop {
+    margin: 20px;
+    padding: 20px;
+  }
+}

@@ -3,6 +3,7 @@
   padding: 40px;
   background-color: #f4f4f4f2;
   text-align: center;
+  border-radius: 8px;
   margin: 40px;
 }
 
@@ -108,4 +109,11 @@ h1 {
   font-size: 1.5rem;
   color: #555;
   text-align: center;
+}
+
+@media (max-width: 768px) {
+  .pre-order-page {
+    margin: 20px;
+    padding: 20px;
+  }
 }
