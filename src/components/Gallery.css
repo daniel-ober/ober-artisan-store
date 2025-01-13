@@ -1,8 +1,8 @@
 .gallery-container {
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 40px 20px;
-  background-color: #f9f9f9;
+  padding: 40px;
+  background-color: #f4f4f4f2;
+  text-align: center;
+  margin: 40px;
 }
 
 .image-slider {

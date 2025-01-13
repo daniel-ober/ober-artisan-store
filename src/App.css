@@ -7,15 +7,46 @@ body {
   transition: background-color 2s ease-in-out, color 2s ease-in-out;
 }
 
+/* App Container */
 .app-container {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
+/* Content with background video */
+.content-with-background {
+  position: relative;
+  width: 100%;
+  min-height: calc(100vh - var(--navbar-height) - var(--footer-height)); /* Dynamic height adjustment */
+  overflow: hidden;
+}
+
+/* Background video */
+.content-background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1; /* Place behind content */
+  opacity: 0; /* Adjust opacity for desired effect */
+}
+
+/* Main content within the background container */
 .app-content {
-  flex: 1;
-  transition: background-color 2s ease-in-out, color 2s ease-in-out; /* Ensure smooth transition for content */
+  position: absolute;
+  z-index: 1000; /* Ensure content is above the video */
+  width: 100%;
+  /* padding: 20px; */
+  box-sizing: border-box; /* Ensure padding does not affect width */
+}
+
+/* Dynamic height variables for navbar and footer */
+:root {
+  --navbar-height: 70px; /* Set your navbar height */
+  --footer-height: 50px; /* Set your footer height */
 }
 
 /* Light Mode Styles */
@@ -27,7 +58,6 @@ body.light {
 body.light .navbar,
 body.light .footer,
 body.light .app-content {
-  /* background-color: #f0f0f0; */
   color: #000000;
 }
 
@@ -40,7 +70,7 @@ body.dark {
 body.dark .navbar,
 body.dark .footer,
 body.dark .app-content {
-  background-color: #222;
+  background-color: #222222;
   color: #ffffff;
 }
 
@@ -49,9 +79,9 @@ body.dark * {
   background-color: transparent !important;
 }
 
-/* Navbar Transitions */
+/* Navbar and Footer Transitions */
 .navbar, .footer {
-  transition: background-color 2s ease-in-out, color 2s ease-in-out; /* Unified transition for navbar and footer */
+  transition: background-color 2s ease-in-out, color 2s ease-in-out;
 }
 
 /* Theme toggle button styling */
@@ -72,6 +102,7 @@ body.dark * {
   background-color: #555;
 }
 
+/* Video container for specific elements (if needed elsewhere) */
 .video-container {
   position: relative;
   max-width: 100%;
@@ -88,5 +119,5 @@ body.dark * {
 .dark-mode .video-container .video-dark,
 .light-mode .video-container .video-light {
   opacity: 1;
-  transition: opacity 2s ease-in-out; /* Synchronizing fade with the page background */
+  transition: opacity 2s ease-in-out; /* Synchronize fade with the page background */
 }

@@ -35,7 +35,7 @@ const Home = () => {
   return (
     <div className="home-container">
       <div className="video-container" aria-label="Coming Soon Video">
-        <video
+        {/* <video
           ref={lightVideoRef}
           src={lightVideoSrc}
           className={`coming-soon-video ${!isDarkMode && isVideoReady ? 'fade-in' : 'fade-out'}`}
@@ -54,7 +54,7 @@ const Home = () => {
           muted
           playsInline
           onCanPlayThrough={handleVideoLoaded}
-        />
+        /> */}
       </div>
     </div>
   );

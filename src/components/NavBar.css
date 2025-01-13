@@ -4,30 +4,28 @@
   flex-direction: column;
   align-items: center;
   position: relative;
-  z-index: 1000;
   padding: 0px;
 }
 
 /* Background video styling - Default (light mode) */
 .navbar-background {
-  position:absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Ensures the video covers the entire area */
-  object-position: center;
+  object-fit: cover;
   z-index: -1;
-  /* opacity: 0.0; */
+  opacity: 0.6; /* Adjust opacity as needed */
 }
 
 /* Dark Mode - Override background video opacity */
 body.light .navbar-background {
-  opacity: 0.5;
+  /* opacity: 0.5; */
 }
 
 body.dark .navbar-background {
-  opacity: 0.075;
+  /* opacity: 0.085; */
 }
 
 /* Logo Section */
@@ -60,13 +58,15 @@ body.dark .navbar-background {
 }
 
 .nav-link:hover {
-  color: #1d5160;
-  background-color: #3a270611;
-  border-radius: 30px;
+  color: #ffffff;
+  background-color: #3a270690;
+
+  border-radius: 3px;
 }
 
 .nav-link.active {
-  color: #0077ff;
+  color: hsl(184, 37%, 15%);
+  text-decoration:underline;
 }
 
 /* Cart Link Container */
