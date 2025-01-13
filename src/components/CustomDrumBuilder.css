@@ -156,12 +156,14 @@ h3 {
 canvas {
     max-width: 500px;
     max-height: 500px;
-    margin-bottom: 30px;
+    /* margin-bottom: 30px; */
 }
 
 .chart-container {
     text-align: center;
-    margin: 40px 0;
+    margin: 0px;
+
+    margin-bottom: 40px;
     color: #ffffff;
 }
 

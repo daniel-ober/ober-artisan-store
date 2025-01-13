@@ -2,6 +2,7 @@
   padding: 40px;
   background-color: #f4f4f4f2;
   text-align: center;
+  border-radius: 8px;
   margin: 40px;
 }
 
@@ -25,6 +26,12 @@
     grid-template-columns: repeat(2, 1fr);  /* Forces two columns on mobile */
     gap: 10px;  /* Smaller gap for compact layout */
   }
+
+  .products-container {
+    margin: 20px;
+    padding: 20px;
+  }
+
 }
 
 /* Smaller Screens (Stack on top of each other) */
