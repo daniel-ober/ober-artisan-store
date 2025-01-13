@@ -1,6 +1,6 @@
 .admin-signin-container {
     background-color: #f4f4f4;
-    padding: 20px;
+    padding-bottom: 80px;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   }
@@ -9,6 +9,8 @@
     text-align: center;
     font-weight: bold;
     margin-bottom: 20px;
+    /* padding-bottom: 20px; */
+
   }
   
   .admin-signin-form {
