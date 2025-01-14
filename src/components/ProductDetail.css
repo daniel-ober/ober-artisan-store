@@ -16,7 +16,7 @@
 
 .back-to-shop-link {
   text-decoration: none;
-  color: #007bff;
+  color: #1e398a;
   font-size: 16px;
   display: flex;
   align-items: center;
@@ -134,7 +134,7 @@
 /* Align values to the left */
 .artisan-specs-table td:last-child {
   text-align: left;
-  color: #555;
+  color: #000000;
 }
 
 /* Price Section */
@@ -144,6 +144,13 @@
   align-items: flex-start;
   width: 100%;
   margin-top: 25px;
+}
+
+/* Price Section */
+.product-price {
+  color: #1aff00;
+  font-weight: 300;
+  
 }
 
 /* Quantity Section */
@@ -209,7 +216,7 @@
 }
 
 .add-to-cart-button {
-  background-color: #007bff;
+  background-color: 007bff;
   color: white;
 }
 

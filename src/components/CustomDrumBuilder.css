@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 50px 20px;
+    /* padding: 50px 20px; */
 }
 
 .builder-container {
@@ -156,6 +156,7 @@ h3 {
 canvas {
     max-width: 500px;
     max-height: 500px;
+    padding: 40px;
     /* margin-bottom: 30px; */
 }
 
@@ -227,7 +228,7 @@ canvas {
 @media (max-width: 500px) {
     .form-container, .chart-container {
         min-width: 100%;
-        padding: 20px;
+        /* padding: 20px; */
     }
 }
 

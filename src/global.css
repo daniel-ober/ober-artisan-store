@@ -51,5 +51,5 @@ body.dark .cart-preview {
 }
 
 body.dark * {
-  color: #ffffff !important; /* Keep text color white */
+  color: #ffffff; /* Keep text color white */
 }
