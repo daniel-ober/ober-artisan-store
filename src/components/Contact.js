@@ -8,14 +8,14 @@ import './Contact.css';
 
 // Inquiry Categories
 const inquiryCategories = [
-  { value: 'Order & Billing Assistance', label: 'Order & Billing Assistance – Track orders, update billing, or inquire about payments' },
-  { value: 'Custom Shop Request', label: 'Custom Shop Request – Request custom drum builds or modifications' },
-  { value: 'Shipping & Delivery', label: 'Shipping & Delivery – Get shipping updates or tracking info' },
-  { value: 'Product Information', label: 'Product Information – Ask about products or specifications' },
-  { value: 'Technical Assistance', label: 'Technical Assistance – Login issues, account updates, or website errors' },
+  { value: 'Billing', label: 'Billing – Update billing or inquire about payments' },
+  { value: 'Custom Shop', label: 'Custom Shop – Request custom drum builds or modifications' },
   { value: 'Partner Relations', label: 'Partner Relations – Vendor inquiries or partnership opportunities' },
-  { value: 'Feedback & Suggestions', label: 'Feedback & Suggestions – Share feedback or ideas' },
-  { value: 'Other', label: 'Other – All other inquiries' },
+  { value: 'Product Information', label: 'Product Information – Ask about products or specifications' },
+  { value: 'Shipping & Delivery', label: 'Shipping & Delivery – Get shipping updates or tracking info' },
+  { value: 'Technical Assistance', label: 'Technical Assistance – Account and login issues' },
+  { value: 'Website Feedback', label: 'Website Feedback – Share feedback or ideas' },
+  { value: 'Other', label: 'Other' },
 ];
 
 const Contact = () => {
@@ -101,6 +101,26 @@ const Contact = () => {
         Contact Us
       </Typography>
       <form onSubmit={handleSubmit}>
+              {/* Category Picklist with Fix */}
+              <FormControl fullWidth margin="normal" required>
+          <Select
+            name="category"
+            value={formData.category}
+            onChange={handleChange}
+            displayEmpty
+            className="contact-input"
+          >
+            <MenuItem value="">
+              <em>Select a category</em>
+            </MenuItem>
+            {inquiryCategories.map((category) => (
+              <MenuItem key={category.value} value={category.value}>
+                {category.label}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+
         <TextField
           label="First Name"
           name="first_name"
@@ -141,27 +161,6 @@ const Contact = () => {
           margin="normal"
           className="contact-input"
         />
-
-        {/* Category Picklist with Fix */}
-        <FormControl fullWidth margin="normal" required>
-          <InputLabel shrink>Inquiry Category</InputLabel>
-          <Select
-            name="category"
-            value={formData.category}
-            onChange={handleChange}
-            displayEmpty
-            className="contact-input"
-          >
-            <MenuItem value="">
-              <em>Select an option</em>
-            </MenuItem>
-            {inquiryCategories.map((category) => (
-              <MenuItem key={category.value} value={category.value}>
-                {category.label}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
 
         <TextField
           label="Message"
