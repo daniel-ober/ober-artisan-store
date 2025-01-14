@@ -12,7 +12,7 @@ const Footer = ({ navbarLinks = [] }) => {
     <footer className="footer-container">
       <div className="footer-content">
         <div className="footer-section">
-          <h2>Sitemap</h2>
+          <div className='footer-title'>Sitemap</div>
           <ul>
             {sortedNavbarLinks.map((link, index) => (
               <li key={index}>
@@ -33,9 +33,9 @@ const Footer = ({ navbarLinks = [] }) => {
           </ul>
         </div>
         <div className="footer-section">
-          <h2>Contact Us</h2>
+          <div className='footer-contact-us'>Contact Us</div>
           <p>
-            Email: <a href="mailto:support@danoberartisan.com">support@danoberartisan.com</a>
+            <a href="mailto:support@danoberartisan.com">support@danoberartisan.com</a>
           </p>
         </div>
         <div className="footer-section">
