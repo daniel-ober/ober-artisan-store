@@ -58,6 +58,7 @@ function App() {
     '/custom-shop': 'CustomShop',
     '/products': 'Products',
     '/signin': 'SignIn',
+    '/terms-of-service': 'TermsOfService',
     '/register': 'Register',
     '/forgot-password': 'ForgotPassword',
     '/checkout': 'Checkout',
@@ -156,9 +157,12 @@ function App() {
           <Route path="/about" element={isLinkEnabled('about') ? <About /> : <NotFound />} />
           <Route path="/cart" element={isLinkEnabled('cart') ? <Cart /> : <NotFound />} />
           <Route path="/contact" element={isLinkEnabled('contact') ? <Contact /> : <NotFound />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/return-policy" element={<ReturnPolicy />} />
+          <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/custom-drum-builder" element={<CustomDrumBuilder />} />
           <Route path="/sound-profile-tool" element={<PathSelection setSelectedPath={setSelectedPath} />} />
-          <Route path="/custom-drum-builder" element={selectedPath === 'builder' ? <CustomDrumBuilder /> : <Navigate to="/" />} />
+          <Route path="/custom-drum-builder" element={selectedPath === 'custom-drum-builder' ? <CustomDrumBuilder /> : <Navigate to="/" />} />
           <Route path="/sound-profile-recommendations" element={selectedPath === 'recommendations' ? <SoundProfileRecommendations /> : <Navigate to="/" />} />
           <Route path="/gallery" element={isLinkEnabled('gallery') ? <Gallery /> : <NotFound />} />
           <Route path="/custom-shop" element={isLinkEnabled('custom-shop') ? <CustomShop /> : <NotFound />} />

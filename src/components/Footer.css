@@ -18,6 +18,18 @@
   margin-bottom: 20px;
 }
 
+.footer-title {
+  font-size: 16px;
+font-weight: 400;
+text-decoration: underline;
+}
+
+.footer-contact-us {
+  font-size: 16px;
+font-weight: 400;
+text-decoration: underline;
+}
+
 /* Footer headings */
 .footer-section h2 {
   font-size: 1.5em;

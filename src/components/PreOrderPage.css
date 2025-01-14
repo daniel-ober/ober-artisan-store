@@ -16,7 +16,7 @@ h1 {
 .subtitle {
   font-size: 1.2rem;
   color: #555;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 .pre-order-items {
@@ -113,7 +113,7 @@ h1 {
 
 @media (max-width: 768px) {
   .pre-order-page {
-    margin: 20px;
+  margin: 0px 20px 20px 20px;
     padding: 20px;
   }
 }

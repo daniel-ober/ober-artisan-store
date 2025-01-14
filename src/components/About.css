@@ -9,7 +9,7 @@
 
 .about-page h2 {
   font-size: 32px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   color: #333;
 }
 
@@ -53,6 +53,7 @@
   font-size: 1.5rem;
   color: #333;
   margin-bottom: 10px;
+  text-align: center;
 }
 
 /* Description styling */
@@ -60,13 +61,14 @@
   font-size: 1rem;
   color: #555;
   line-height: 1.6;
+  text-align: justify;
 }
 
 /* Responsive styles */
 @media (max-width: 768px) {
 
   .about-page {
-    margin: 20px;
+    margin: 0px 20px 20px 20px;
     padding: 20px;
   }
 
