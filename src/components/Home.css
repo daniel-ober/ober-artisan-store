@@ -1,32 +1,96 @@
-/* Home Container */
-.home-container {
+/* Highlights Section */
+.highlights-section {
   display: flex;
-  flex-direction: column;
+  justify-content: space-around;
+  padding: 50px 10px;
+  background-color: #f9f9f9;
+}
+
+.highlight {
   text-align: center;
-  min-height: 100vh; /* Full height */
-  overflow: hidden;
+  width: 30%;
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.highlight h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.highlight p {
+  font-size: 1rem;
+  margin-bottom: 15px;
+}
+
+.highlight button {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.highlight button:hover {
+  background-color: #555;
+}
+
+/* Hero Overlay */
+.hero-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+}
+
+.hero-overlay h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.hero-overlay p {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.hero-overlay .cta-button {
+  background-color: #ff6600;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.hero-overlay .cta-button:hover {
+  background-color: #ff4500;
 }
 
 /* Video Container */
 .video-container {
   position: relative;
-  width: 100%;
-  height: 100vh;
+  width: 100%; /* Full browser width */
+  height: 100vh; /* Full height of the viewport */
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
-  z-index: -1; /* Ensure video is behind the navbar */
 }
 
 /* Video Element */
 .coming-soon-video {
-  position:fixed;
+  position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 102%;
-  object-fit:cover;
+  width: 100%; /* Scale to 100% of the browser width */
+  height: 100%; /* Scale to 100% of the container height */
+  object-fit: cover; /* Maintain aspect ratio while covering the area */
   opacity: 0;
   transition: opacity 1.5s ease-in-out;
 }
@@ -39,11 +103,104 @@
   opacity: 0;
 }
 
-/* Footer Styles */
-.footer-container {
+
+/* Highlights Section */
+.highlights-section {
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+  justify-content: space-around;
+  padding: 50px 10px;
+  background-color: #f9f9f9;
+}
+
+.highlight {
+  text-align: center;
+  width: 30%;
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  margin-bottom: 20px; /* Add spacing between rows */
+}
+
+.highlight h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.highlight p {
+  font-size: 1rem;
+  margin-bottom: 15px;
+}
+
+.highlight button {
   background-color: #333;
   color: white;
-  padding: 20px;
-  text-align: center;
-  flex-shrink: 0;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.highlight button:hover {
+  background-color: #555;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  /* Adjust video height for tablets */
+  .video-container {
+    height: 60vh;
+  }
+
+  .home-video {
+    height: 100%;
+    width: auto;
+  }
+
+  .hero-overlay h1 {
+    font-size: 2rem;
+  }
+
+  .hero-overlay p {
+    font-size: 1.2rem;
+  }
+
+  .hero-overlay .cta-button {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+
+  .highlight {
+    width: 45%; /* Two items per row */
+  }
+}
+
+@media (max-width: 480px) {
+  /* Adjust video height for phones */
+  .video-container {
+    height: 50vh;
+  }
+
+  .home-video {
+    height: 100%;
+    width: auto;
+  }
+
+  .hero-overlay h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero-overlay p {
+    font-size: 1rem;
+  }
+
+  .hero-overlay .cta-button {
+    padding: 8px 15px;
+    font-size: 0.8rem;
+  }
+
+  .highlight {
+    width: 100%; /* One item per row */
+  }
 }
