@@ -88,7 +88,7 @@ const ReturnPolicy = () => {
         <br />
         <br />
 
-        <strong>Other Products:</strong> For all other items, you may cancel your order as long as it has not yet shipped. Please contact us at <strong>support@danoberartisan.com</strong> for assistance.
+        <strong>Other Products:</strong> For all other items, you may cancel your order as long as it has not yet shipped. Please contact us at support@danoberartisan.com for assistance.
       </p>
 
       <h2>7. Contact Information</h2>
