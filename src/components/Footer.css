@@ -19,9 +19,9 @@
 }
 
 .footer-title {
-  font-size: 16px;
-font-weight: 400;
-text-decoration: underline;
+  font-size: 24px;
+font-weight: 500;
+/* text-decoration: underline; */
 }
 
 .footer-contact-us {

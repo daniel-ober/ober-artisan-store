@@ -9,7 +9,7 @@ import './Contact.css';
 // Inquiry Categories
 const inquiryCategories = [
   { value: 'Billing', label: 'Billing – Update billing or inquire about payments' },
-  { value: 'Custom Shop', label: 'Custom Shop – Request custom drum builds or modifications' },
+  { value: 'Custom Shop', label: 'Custom Shop – Custom drum builds or modifications' },
   { value: 'Partner Relations', label: 'Partner Relations – Vendor inquiries or partnership opportunities' },
   { value: 'Product Information', label: 'Product Information – Ask about products or specifications' },
   { value: 'Shipping & Delivery', label: 'Shipping & Delivery – Get shipping updates or tracking info' },
@@ -92,7 +92,7 @@ const Contact = () => {
 
   const handleClose = () => {
     setOpen(false);
-    navigate('/products'); 
+    navigate('/'); 
   };
 
   return (
@@ -109,9 +109,9 @@ const Contact = () => {
             onChange={handleChange}
             displayEmpty
             className="contact-input"
-          >
+          > 
             <MenuItem value="">
-              <em>Select a category</em>
+              <div>Select a category</div>
             </MenuItem>
             {inquiryCategories.map((category) => (
               <MenuItem key={category.value} value={category.value}>

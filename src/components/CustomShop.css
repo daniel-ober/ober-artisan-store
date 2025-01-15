@@ -1,11 +1,9 @@
-.custom-shop {
-  max-width: 800px;
-  margin: 0 auto;
+.custom-shop-overview {
   padding: 40px;
+  background-color: #f4f4f4f2;
   text-align: center;
-  background-color: #f9f9f9;
   border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin: 25px 40px 40px 40px;
 }
 
 .custom-shop h1 {
