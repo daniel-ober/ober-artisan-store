@@ -1,5 +1,5 @@
 .cart-container {
-  padding: 20px;
+  margin: 0px 20px 20px;
   display: flex;
   flex-direction: column;
 }
@@ -15,6 +15,7 @@
 .cart-empty {
   text-align: center;
 }
+
 
 .cart-item {
   display: flex;

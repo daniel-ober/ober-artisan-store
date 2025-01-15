@@ -53,12 +53,11 @@ const ProductCard = ({ product }) => {
           )}
         </div>
         {/* <p className="product-description">{product.description}</p> */}
-
-        <p className="product-price">${product.price.toFixed(2)}</p>
-
+        <p className="product-card-price">${product.price.toFixed(2)}</p>
         <Link to={`/products/${product.id}`} className="view-details-link">
           View Details
         </Link>
+
 
         {/* Ensure button stretches edge-to-edge */}
         <div className="product-button-container">
