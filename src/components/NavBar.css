@@ -30,12 +30,12 @@ body.dark .navbar-background {
   /* margin-bottom: 10px; */
   width: 100%;
   max-width: 500px;
-  /* padding: 20px; */
 }
 
 .logo-img {
-  min-width: 100%;
+  min-width: 75%;
   max-height: 50%;
+
 }
 
 /* Navbar Links */

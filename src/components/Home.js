@@ -80,7 +80,7 @@ const Home = () => {
         <div className="highlight">
           <h2>Pre-Order</h2>
           <p>Reserve your spot for upcoming limited batches.</p>
-          <Link to="/products" className="highlight-button">
+          <Link to="/pre-order" className="highlight-button">
           <button>Pre-Order Now</button>
           </Link>
         </div>

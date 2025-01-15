@@ -65,7 +65,7 @@ const Cart = () => {
         <div className="cart-container">
             <div className='cart-container-title'>Your Cart</div>
             {Object.keys(cart || {}).length === 0 ? (
-                <p>Your cart is empty.</p>
+                <div className='cart-empty'>Your cart is empty.</div>
             ) : (
                 <>
                     {Object.values(cart).map((item) => (
