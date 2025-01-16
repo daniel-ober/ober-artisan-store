@@ -16,7 +16,7 @@ const SpiderChart = ({ data }) => {
         chartInstance.current = new Chart(ctx, {
             type: 'radar',
             data: {
-                labels: ['Projection','Sustain','Bright','Warmth', 'Attack'],
+                labels: ['Projection','Sustain','Brightness','Warmth', 'Attack'],
                 datasets: [{
                     label: 'Drum Sound Profile',
                     data: data,
