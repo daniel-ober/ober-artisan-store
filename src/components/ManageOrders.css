@@ -1,70 +1,92 @@
-.manage-orders {
-    padding: 20px;
-    background-color: #f9f9f9;
-    font-family: Arial, sans-serif;
+/* Shared container styling for consistency */
+.manage-orders,
+.manage-users,
+.manage-products-container,
+.manage-inquiries,
+.manage-gallery,
+.site-settings-container {
+  padding: 20px;
+  background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
+}
+
+/* ======================== */
+/* Manage Users Styles      */
+/* ======================== */
+
+/* Table */
+.manage-users-table {
+  width: 100%; /* Ensure table takes full width */
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.manage-users-table th,
+.manage-users-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  font-size: 14px;
+}
+
+.manage-users-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+/* Responsive scroll behavior */
+.manage-users-container {
+  overflow-x: auto; /* Enable horizontal scrolling */
+  max-width: 100%; /* Ensure container fits within the viewport */
+  margin: 0 auto; /* Center the container */
+}
+
+/* Search Bar */
+.search-bar {
+  width: 100%; /* Ensure search bar fits within the container */
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+/* Add Button */
+.add-btn {
+  margin-bottom: 20px;
+  padding: 10px 15px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.add-btn:hover {
+  background-color: #2980b9;
+}
+
+@media (max-width: 768px) {
+  .manage-orders-table th[data-label="Status"],
+  .manage-orders-table td[data-label="Status"] {
+    display: none; /* Hide Status column */
   }
-  
-  .manage-orders h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  .manage-orders-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-  }
-  
-  .manage-orders-table th, 
+
+  .manage-orders-table th,
   .manage-orders-table td {
-    border: 1px solid #ddd;
-    padding: 12px;
-    text-align: left;
+    font-size: 12px;
+    padding: 6px;
   }
-  
-  .manage-orders-table th {
-    background-color: #f2f2f2;
-    font-weight: bold;
+}
+
+@media (max-width: 480px) {
+  .manage-orders-table th[data-label="Total"],
+  .manage-orders-table td[data-label="Total"] {
+    display: none; /* Optionally hide Total column for very small screens */
   }
-  
-  .manage-orders-table tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
+
+  .manage-orders-table th,
+  .manage-orders-table td {
+    font-size: 10px;
+    padding: 4px;
   }
-  
-  .manage-orders-table tbody tr:hover {
-    background-color: #f1f1f1;
-  }
-  
-  .view-btn, 
-  .delete-btn {
-    padding: 8px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-  }
-  
-  .view-btn {
-    background-color: #3498db;
-    color: white;
-  }
-  
-  .view-btn:hover {
-    background-color: #2980b9;
-  }
-  
-  .delete-btn {
-    background-color: #e74c3c;
-    color: white;
-    margin-left: 10px;
-  }
-  
-  .delete-btn:hover {
-    background-color: #c0392b;
-  }
-  
-  .delete-btn:disabled {
-    background-color: #95a5a6;
-    cursor: not-allowed;
-  }
-  
+}

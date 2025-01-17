@@ -6,7 +6,7 @@ import { createStripeProduct } from '../services/stripeService';
 import './AddProductModal.css';
 import ArtisanSpecsForm from './ArtisanSpecsForm';
 import LoadingSpinner from './LoadingSpinner';
-import SuccessModal from './SuccessModal';  // Import the SuccessModal component
+import SuccessModal from './SuccessModal'; // Import the SuccessModal component
 
 const AddProductModal = ({ onClose }) => {
   const [step, setStep] = useState(1);
@@ -20,12 +20,13 @@ const AddProductModal = ({ onClose }) => {
     images: [],
     interactive360Url: '',
     status: 'inactive',
+    isPreOrder: false,
   });
 
   const [artisanSpecs, setArtisanSpecs] = useState({});
   const [imageFiles, setImageFiles] = useState([]);
   const [isUploading, setIsUploading] = useState(false);
-  const [successProductId, setSuccessProductId] = useState(null);  // Track product ID for success modal
+  const [successProductId, setSuccessProductId] = useState(null); // Track product ID for success modal
   const [error, setError] = useState('');
 
   const categories = ['artisan', 'merch', 'accessories'];
@@ -54,12 +55,20 @@ const AddProductModal = ({ onClose }) => {
   const handleArtisanSubmit = async (artisanData) => {
     setIsUploading(true);
     setError('');
-    setSuccessProductId(null);  // Reset success state
+    setSuccessProductId(null); // Reset success state
 
     try {
       // Validate required fields
-      if (!newProduct.name || !newProduct.description || newProduct.price <= 0 || !newProduct.sku || !newProduct.deliveryTime) {
-        throw new Error('Name, description, price, SKU, and delivery time are required fields.');
+      if (
+        !newProduct.name ||
+        !newProduct.description ||
+        newProduct.price <= 0 ||
+        !newProduct.sku ||
+        !newProduct.deliveryTime
+      ) {
+        throw new Error(
+          'Name, description, price, SKU, and delivery time are required fields.'
+        );
       }
 
       // Upload images to Firebase Storage
@@ -126,7 +135,7 @@ const AddProductModal = ({ onClose }) => {
     <div className="add-product-modal">
       <div className="modal-content">
         {successProductId ? (
-          <SuccessModal productId={successProductId} />  // Show success message upon creation
+          <SuccessModal productId={successProductId} /> // Show success message upon creation
         ) : (
           <>
             <h2>Add New Product</h2>
@@ -134,7 +143,7 @@ const AddProductModal = ({ onClose }) => {
             {error && <div className="error-message">{error}</div>}
 
             {isUploading ? (
-              <LoadingSpinner />  // Show spinner during upload
+              <LoadingSpinner /> // Show spinner during upload
             ) : (
               <form>
                 {step === 1 && (
@@ -216,6 +225,20 @@ const AddProductModal = ({ onClose }) => {
                       ></textarea>
                     </div>
 
+                    <label htmlFor="isPreOrder">Set as Pre-Order</label>
+                    <input
+                      id="isPreOrder"
+                      type="checkbox"
+                      name="isPreOrder"
+                      checked={newProduct.isPreOrder}
+                      onChange={(e) =>
+                        setNewProduct((prev) => ({
+                          ...prev,
+                          isPreOrder: e.target.checked,
+                        }))
+                      }
+                    />
+
                     <div className="form-group">
                       <label htmlFor="file-upload">Images*</label>
                       <input
@@ -229,11 +252,20 @@ const AddProductModal = ({ onClose }) => {
 
                     <div className="button-group">
                       {newProduct.category === 'artisan' ? (
-                        <button type="button" onClick={handleNextStep}>Next</button>
+                        <button type="button" onClick={handleNextStep}>
+                          Next
+                        </button>
                       ) : (
-                        <button type="button" onClick={() => handleArtisanSubmit({})}>Submit</button>
+                        <button
+                          type="button"
+                          onClick={() => handleArtisanSubmit({})}
+                        >
+                          Submit
+                        </button>
                       )}
-                      <button type="button" onClick={onClose}>Close</button>
+                      <button type="button" onClick={onClose}>
+                        Close
+                      </button>
                     </div>
                   </>
                 )}

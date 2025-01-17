@@ -185,7 +185,7 @@ const NavBar = () => {
               >
                 <FaUserAlt /> Account
               </Link>
-              <button className="nav-link" onClick={handleSignOut}>
+              <button className="nav-link-signout" onClick={handleSignOut}>
                 <FaSignOutAlt /> Sign Out
               </button>
             </>

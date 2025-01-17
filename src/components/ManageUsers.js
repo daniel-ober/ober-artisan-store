@@ -25,8 +25,8 @@ const ManageUsers = () => {
             email: data.email || 'N/A',
             firstName: data.firstName || 'N/A',
             lastName: data.lastName || 'N/A',
-            phone: data.phone || 'N/A',
-            status: data.status || 'active',
+            // phone: data.phone || 'N/A',
+            // status: data.status || 'active',
           };
         });
 
@@ -95,50 +95,52 @@ const ManageUsers = () => {
         onChange={handleSearch}
         className="search-bar"
       />
-      <table className="manage-users-table">
-        <thead>
-          <tr>
-            <th>Email</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Phone</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredUsers.length === 0 ? (
+      <div className="responsive-table-container">
+        <table className="manage-users-table">
+          <thead>
             <tr>
-              <td colSpan="6">No users found</td>
+              <th>Email</th>
+              <th>Actions</th>
+              {/* <th>First Name</th> */}
+              {/* <th>Last Name</th> */}
+              {/* <th className="hidden-column">Phone</th> */}
+              {/* <th className="hidden-column">Status</th> */}
             </tr>
-          ) : (
-            filteredUsers.map((user) => (
-              <tr key={user.id}>
-                <td>{user.email}</td>
-                <td>{user.firstName}</td>
-                <td>{user.lastName}</td>
-                <td>{user.phone}</td>
-                <td>{user.status}</td>
-                <td>
-                  <button
-                    className="view-btn"
-                    onClick={() => handleViewUser(user)}
-                  >
-                    View
-                  </button>
-                  <button
-                    className="delete-btn"
-                    onClick={() => handleDeleteUser(user.id)}
-                    disabled={loading}
-                  >
-                    {loading ? 'Deleting...' : 'Delete'}
-                  </button>
-                </td>
+          </thead>
+          <tbody>
+            {filteredUsers.length === 0 ? (
+              <tr>
+                <td colSpan="6">No users found</td>
               </tr>
-            ))
-          )}
-        </tbody>
-      </table>
+            ) : (
+              filteredUsers.map((user) => (
+                <tr key={user.id}>
+                  <td>{user.email}</td>
+                  {/* <td>{user.firstName}</td> */}
+                  {/* <td>{user.lastName}</td> */}
+                  {/* <td className="hidden-column">{user.phone}</td> */}
+                  {/* <td className="hidden-column">{user.status}</td> */}
+                  <td>
+                    <button
+                      className="view-btn"
+                      onClick={() => handleViewUser(user)}
+                    >
+                      View
+                    </button>
+                    {/* <button
+                      className="delete-btn"
+                      onClick={() => handleDeleteUser(user.id)}
+                      disabled={loading}
+                    >
+                      {loading ? 'Deleting...' : 'Delete'}
+                    </button> */}
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
 
       {isEditModalOpen && selectedUser && (
         <EditUserModal

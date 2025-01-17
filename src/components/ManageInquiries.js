@@ -152,11 +152,11 @@ const ManageInquiries = () => {
         <thead>
           <tr>
             <th onClick={() => handleSort('createdAt')}>Created At</th>
-            <th onClick={() => handleSort('status')}>Status</th>
-            <th>Category</th>
             <th>Name</th>
-            <th onClick={() => handleSort('email')}>Email</th>
-            <th>Origin</th>
+            <th>Category</th>
+            {/* <th>Origin</th> */}
+            <th onClick={() => handleSort('status')}>Status</th>
+            {/* <th onClick={() => handleSort('email')}>Email</th> */}
             <th>Actions</th>
           </tr>
         </thead>
@@ -164,6 +164,9 @@ const ManageInquiries = () => {
           {sortedInquiries.map((inquiry) => (
             <tr key={inquiry.id} className={getStatusClass(inquiry.status)}>
               <td>{inquiry.createdAt}</td>
+              <td>{inquiry.name}</td>
+              <td>{inquiry.category}</td>
+              {/* <td>{inquiry.origin}</td> */}
               <td>
                 <select
                   value={inquiry.status}
@@ -175,20 +178,17 @@ const ManageInquiries = () => {
                   <option value="Closed">Closed</option>
                 </select>
               </td>
-              <td>{inquiry.category}</td>
-              <td>{inquiry.name}</td>
-              <td>{inquiry.email}</td>
-              <td>{inquiry.origin}</td>
+              {/* <td>{inquiry.email}</td> */}
               <td>
                 <button className="view-btn">View</button>
-                <button className="delete-btn" onClick={() => handleDeleteInquiry(inquiry.id)}>Delete</button>
-                <button
+                {/* <button className="delete-btn" onClick={() => handleDeleteInquiry(inquiry.id)}>Delete</button> */}
+                {/* <button
                   className="convert-btn"
                   onClick={() => handleConvertToLead(inquiry.id)}
                   disabled={inquiry.convertToSales}
                 >
                   {inquiry.convertToSales ? 'CONVERTED' : 'Convert to Sales'}
-                </button>
+                </button> */}
               </td>
             </tr>
           ))}

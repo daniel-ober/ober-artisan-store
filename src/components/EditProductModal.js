@@ -1,18 +1,20 @@
+// src/components/EditProductModal.js
 import React, { useState, useEffect } from 'react';
 import { fetchProductById, updateProduct } from '../services/productService';
-import { updateStripeProduct } from '../services/stripeService';
+import { updateStripeProduct, fetchStripePrices } from '../services/stripeService';
 import './EditProductModal.css';
 
 const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
   const [product, setProduct] = useState({
-    name: '',
-    description: '',
-    price: 0,
     category: '',
-    sku: '',
+    name: '',
+    price: 0,
+    description: '',
     deliveryTime: '',
+    sku: '',
     images: [],
     interactive360Url: '',
+    status: 'inactive',
     height: '',
     width: '',
     weight: '',
@@ -32,19 +34,25 @@ const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
     completionDate: '',
     stripeProductId: '',
     stripePriceId: '',
+    isPreOrder: false,
   });
 
+  const [imageFiles, setImageFiles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [initialProduct, setInitialProduct] = useState({});
+  const [stripePrices, setStripePrices] = useState([]);
 
   useEffect(() => {
     const loadProduct = async () => {
       try {
         const fetchedProduct = await fetchProductById(productId);
         setProduct(fetchedProduct);
-        setInitialProduct(fetchedProduct);  // Store initial product state
+
+        if (fetchedProduct.stripeProductId) {
+          const prices = await fetchStripePrices(fetchedProduct.stripeProductId);
+          setStripePrices(prices);
+        }
       } catch (err) {
         setError('Failed to load product details.');
       } finally {
@@ -58,7 +66,7 @@ const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
     const { name, value } = e.target;
     setProduct((prevProduct) => ({
       ...prevProduct,
-      [name]: name === 'price' ? parseFloat(value) || 0 : value,
+      [name]: value,
     }));
   };
 
@@ -74,15 +82,10 @@ const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      // Update Firestore product data
       await updateProduct(productId, product);
 
-      // Trigger Stripe update if price or name changes
-      if (
-        product.name !== initialProduct.name ||
-        product.price !== initialProduct.price
-      ) {
-        const updatedStripe = await updateStripeProduct(
+      if (product.name || product.price) {
+        await updateStripeProduct(
           product.stripeProductId,
           product.name,
           product.description,
@@ -90,13 +93,6 @@ const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
           product.price,
           product.stripePriceId
         );
-
-        // If a new price ID is created, update Firestore
-        if (updatedStripe.newPriceId) {
-          await updateProduct(productId, {
-            stripePriceId: updatedStripe.newPriceId,
-          });
-        }
       }
 
       onProductUpdated(product);
@@ -112,7 +108,8 @@ const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
 
   const drumTypes = ['Snare', 'Piccolo', 'Tom', 'Bass Drum', 'Floor Tom'];
   const constructionTypes = ['Stave', 'Ply', 'Steam Bent', 'Hybrid'];
-  const woodSpeciesOptions = ['Maple', 'Mahogany', 'Birch', 'Walnut'];
+  const hardwareColors = ['Chrome', 'Black Nickel', 'Gold'];
+  const finishes = ['Gloss', 'Matte', 'Satin', 'Natural'];
 
   return (
     <div className="modal-overlay">
@@ -121,7 +118,35 @@ const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
         {error && <div className="error-message">{error}</div>}
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="name">Name</label>
+            <label htmlFor="category">Category</label>
+            <select
+              id="category"
+              name="category"
+              value={product.category}
+              onChange={handleInputChange}
+              required
+            >
+              <option value="artisan">Artisan</option>
+              <option value="merch">Merch</option>
+              <option value="accessories">Accessories</option>
+            </select>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="isPreOrder">Set as Pre-Order</label>
+            <input
+              id="isPreOrder"
+              type="checkbox"
+              name="isPreOrder"
+              checked={product.isPreOrder}
+              onChange={(e) =>
+                setProduct((prevProduct) => ({ ...prevProduct, isPreOrder: e.target.checked }))
+              }
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="name">Product Name</label>
             <input
               id="name"
               name="name"
@@ -130,17 +155,6 @@ const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
               onChange={handleInputChange}
               required
             />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="description">Description</label>
-            <textarea
-              id="description"
-              name="description"
-              value={product.description}
-              onChange={handleInputChange}
-              required
-            ></textarea>
           </div>
 
           <div className="form-group">
@@ -157,45 +171,113 @@ const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
             />
           </div>
 
-          <div className="form-group non-editable">
-            <label htmlFor="category">Category (Non-editable)</label>
+          <div className="form-group">
+            <label htmlFor="description">Description</label>
+            <textarea
+              id="description"
+              name="description"
+              value={product.description}
+              onChange={handleInputChange}
+              required
+            ></textarea>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="drumType">Drum Type</label>
+            <select
+              id="drumType"
+              name="drumType"
+              value={product.drumType}
+              onChange={handleInputChange}
+            >
+              {drumTypes.map((type) => (
+                <option key={type} value={type}>
+                  {type}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="depth">Depth (in)</label>
             <input
-              id="category"
-              name="category"
+              id="depth"
+              name="depth"
               type="text"
-              value={product.category}
-              disabled
+              value={product.depth}
+              onChange={handleInputChange}
             />
           </div>
 
-          {product.category === 'artisan' && (
-            <>
-              <div className="form-group">
-                <label htmlFor="drumType">Drum Type</label>
-                <select
-                  id="drumType"
-                  name="drumType"
-                  value={product.drumType}
-                  onChange={handleInputChange}
-                >
-                  {drumTypes.map((type) => (
-                    <option key={type} value={type}>
-                      {type}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </>
-          )}
-
-          <div className="form-group non-editable">
-            <label htmlFor="stripeProductId">Stripe Product ID</label>
-            <input id="stripeProductId" type="text" value={product.stripeProductId} disabled />
+          <div className="form-group">
+            <label htmlFor="thickness">Thickness (mm)</label>
+            <input
+              id="thickness"
+              name="thickness"
+              type="text"
+              value={product.thickness}
+              onChange={handleInputChange}
+            />
           </div>
 
-          <div className="form-group non-editable">
-            <label htmlFor="stripePriceId">Stripe Price ID</label>
-            <input id="stripePriceId" type="text" value={product.stripePriceId} disabled />
+
+          <div className="form-group">
+            <label htmlFor="weight">Weight (lbs)</label>
+            <input
+              id="weight"
+              name="weight"
+              type="text"
+              value={product.weight}
+              onChange={handleInputChange}
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="constructionType">Construction Type</label>
+            <select
+              id="constructionType"
+              name="constructionType"
+              value={product.constructionType}
+              onChange={handleInputChange}
+            >
+              {constructionTypes.map((type) => (
+                <option key={type} value={type}>
+                  {type}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="hardwareColor">Hardware Color</label>
+            <select
+              id="hardwareColor"
+              name="hardwareColor"
+              value={product.hardwareColor}
+              onChange={handleInputChange}
+            >
+              {hardwareColors.map((color) => (
+                <option key={color} value={color}>
+                  {color}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="finish">Finish</label>
+            <select
+              id="finish"
+              name="finish"
+              value={product.finish}
+              onChange={handleInputChange}
+            >
+              {finishes.map((finish) => (
+                <option key={finish} value={finish}>
+                  {finish}
+                </option>
+              ))}
+            </select>
           </div>
 
           <button type="submit" disabled={isSubmitting}>

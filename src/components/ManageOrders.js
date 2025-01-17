@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
-import ViewOrderModal from './ViewOrderModal'; // Default export
-import AddOrderModal from './AddOrderModal'; // Default export
+import ViewOrderModal from './ViewOrderModal';
+import AddOrderModal from './AddOrderModal';
 
 const ManageOrders = () => {
   const [orders, setOrders] = useState([]);
@@ -76,12 +76,12 @@ const ManageOrders = () => {
       <table className="manage-orders-table">
         <thead>
           <tr>
-            <th>Date</th>
-            <th>Order ID</th>
-            <th>Customer Name</th>
-            <th>Total</th>
-            <th>Status</th>
-            <th>Actions</th>
+            <th data-label="Date">Date</th>
+            {/* <th data-label="Order ID">Order ID</th> */}
+            <th data-label="Customer Name">Customer Name</th>
+            <th data-label="Total">Total</th>
+            {/* <th data-label="Status">Status</th> */}
+            <th data-label="Actions">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -92,25 +92,25 @@ const ManageOrders = () => {
           ) : (
             orders.map((order) => (
               <tr key={order.id}>
-                <td>{order.orderDate}</td>
-                <td>{order.id}</td>
-                <td>{order.customerName}</td>
-                <td>${order.total}</td>
-                <td>{order.status}</td>
-                <td>
+                <td data-label="Date">{order.orderDate}</td>
+                {/* <td data-label="Order ID">{order.id}</td> */}
+                <td data-label="Customer Name">{order.customerName}</td>
+                <td data-label="Total">${order.total}</td>
+                {/* <td data-label="Status">{order.status}</td> */}
+                <td data-label="Actions">
                   <button
                     className="view-btn"
                     onClick={() => handleViewOrder(order)}
                   >
                     View
                   </button>
-                  <button
+                  {/* <button
                     className="delete-btn"
                     onClick={() => handleDeleteOrder(order.id)}
                     disabled={loading}
                   >
                     {loading ? 'Deleting...' : 'Delete'}
-                  </button>
+                  </button> */}
                 </td>
               </tr>
             ))

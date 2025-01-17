@@ -60,7 +60,7 @@ const Products = () => {
 
   return (
     <div className="products-container">
-      <h1 className="page-title">Our Products</h1>
+      <h1 className="page-title">Products</h1>
       <div className="product-grid">
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
