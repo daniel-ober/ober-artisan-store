@@ -3,7 +3,7 @@ import './AddProductModal.css';
 
 const ArtisanSpecsForm = ({ onBack, onSubmit }) => {
   const [artisanSpecs, setArtisanSpecs] = useState({
-    height: '',
+    depth: '',
     width: '',
     weight: '',
     shellThickness: '',
@@ -35,15 +35,20 @@ const ArtisanSpecsForm = ({ onBack, onSubmit }) => {
   };
 
   const handleWoodSpeciesChange = (e) => {
-    const selectedOptions = Array.from(e.target.selectedOptions).map((opt) => opt.value);
+    const selectedOptions = Array.from(e.target.selectedOptions).map(
+      (opt) => opt.value
+    );
     setArtisanSpecs((prev) => ({
       ...prev,
       woodSpecies: selectedOptions,
     }));
   };
 
-  const isSnareOrPiccolo = artisanSpecs.drumType === 'Snare' || artisanSpecs.drumType === 'Piccolo';
-  const isStaveOrHybrid = artisanSpecs.constructionType === 'Stave' || artisanSpecs.constructionType === 'Hybrid';
+  const isSnareOrPiccolo =
+    artisanSpecs.drumType === 'Snare' || artisanSpecs.drumType === 'Piccolo';
+  const isStaveOrHybrid =
+    artisanSpecs.constructionType === 'Stave' ||
+    artisanSpecs.constructionType === 'Hybrid';
 
   return (
     <div className="add-product-modal">
@@ -100,18 +105,51 @@ const ArtisanSpecsForm = ({ onBack, onSubmit }) => {
 
           <div className="form-group">
             <label htmlFor="woodSpecies">Wood Species:</label>
-            <select
-              id="woodSpecies"
-              name="woodSpecies"
-              multiple
-              value={artisanSpecs.woodSpecies}
-              onChange={handleWoodSpeciesChange}
-            >
-              <option value="Maple">Maple</option>
-              <option value="Mahogany">Mahogany</option>
-              <option value="Birch">Birch</option>
-              <option value="Walnut">Walnut</option>
-            </select>
+            <div id="woodSpecies" className="checkbox-group">
+              {[
+                'Ash',
+                'Beech',
+                'Birch',
+                'Bubinga',
+                'Cherry',
+                'Jatoba',
+                'Kapur',
+                'Leopardwood',
+                'Mahogany',
+                'Mango',
+                'Maple',
+                'Oak',
+                'Padauk',
+                'Poplar',
+                'Purpleheart',
+                'Sapele',
+                'Walnut',
+                'Other',
+              ].map((species) => (
+                <div key={species} className="checkbox-item">
+                  <input
+                    id={`woodSpecies-${species}`} // Unique ID for each checkbox
+                    type="checkbox"
+                    name="woodSpecies"
+                    value={species}
+                    checked={artisanSpecs.woodSpecies.includes(species)}
+                    onChange={(e) => {
+                      const { value, checked } = e.target;
+                      setArtisanSpecs((prevSpecs) => {
+                        const woodSpecies = checked
+                          ? [...prevSpecs.woodSpecies, value]
+                          : prevSpecs.woodSpecies.filter(
+                              (item) => item !== value
+                            );
+                        return { ...prevSpecs, woodSpecies };
+                      });
+                    }}
+                  />
+                  <label htmlFor={`woodSpecies-${species}`}>{species}</label>{' '}
+                  {/* Associated label */}
+                </div>
+              ))}
+            </div>
           </div>
 
           <div className="form-group">
@@ -125,12 +163,12 @@ const ArtisanSpecsForm = ({ onBack, onSubmit }) => {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="height">Height (in):</label>
+            <label htmlFor="depth">Depth (in):</label>
             <input
-              id="height"
+              id="depth"
               type="text"
-              name="height"
-              value={artisanSpecs.height}
+              name="depth"
+              value={artisanSpecs.depth}
               onChange={handleInputChange}
             />
           </div>
@@ -178,8 +216,6 @@ const ArtisanSpecsForm = ({ onBack, onSubmit }) => {
               onChange={handleInputChange}
             />
           </div>
-
-
 
           {isSnareOrPiccolo && (
             <>

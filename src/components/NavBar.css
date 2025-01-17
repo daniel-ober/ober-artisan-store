@@ -168,7 +168,7 @@ width: 50%;  }
   }
 
   .navbar-links.open {
-    max-height: 500px;
+    max-height: 1200px;
     background-color: rgba(20, 20, 20, 0.995);
     padding: 20px 0px 20px 0px;
   }

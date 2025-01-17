@@ -1,172 +1,91 @@
-.manage-inquiries {
+/* Shared container styling for consistency */
+.manage-orders,
+.manage-users,
+.manage-products-container,
+.manage-inquiries,
+.manage-gallery,
+.site-settings-container {
   padding: 20px;
+  background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
 }
 
-.manage-inquiries h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 2em;
-  color: #111;
-  font-weight: 700;
-}
+/* ========================= */
+/* Manage Inquiries Styles   */
+/* ========================= */
 
+/* Table */
 .manage-inquiries-table {
-  width: 100%;
+  width: 100%; /* Ensure table takes full width */
   border-collapse: collapse;
-  margin: 0 auto;
-  font-family: 'Arial', sans-serif;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
 }
 
 .manage-inquiries-table th,
 .manage-inquiries-table td {
-  padding: 16px;
-  border: 1px solid #ccc;
-  text-align: center;
-  font-size: 1em;
-  color: #333;
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left; /* Align text for better readability */
+  font-size: 14px;
 }
 
 .manage-inquiries-table th {
-  background-color: #ddd;
+  background-color: #f2f2f2;
   font-weight: bold;
-  color: #222;
-  text-transform: uppercase;
 }
 
-.manage-inquiries-table tr:nth-child(even) {
-  background-color: #f0f0f0;
+/* Responsive scroll behavior */
+.manage-inquiries-container {
+  overflow-x: auto; /* Enable horizontal scrolling */
+  max-width: 100%; /* Ensure container fits within the viewport */
+  margin: 0 auto; /* Center the container */
 }
 
-.manage-inquiries-table tr:hover {
-  /* background-color: ; */
-}
-
-.manage-inquiries-table .status-closed {
-  background-color: #f8d7da;
-  color: #721c24;
-}
-
-.manage-inquiries-table .status-converted {
-  background-color: #d4edda;
-  color: #155724;
-}
-
-.manage-inquiries-table .status-new {
-  background-color: #cce5ff;
-  color: #004085;
-}
-
-.manage-inquiries-table select {
-  padding: 10px;
-  border: 1px solid #bbb;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1em;
-}
-
-.view-btn,
-.delete-btn {
-  padding: 12px 18px;
-  margin: 5px;
-  font-size: 1em;
-  cursor: pointer;
+/* Buttons */
+.refresh-btn {
+  margin-bottom: 20px;
+  padding: 10px 15px;
+  background-color: #3498db;
+  color: white;
   border: none;
   border-radius: 4px;
-  font-weight: 500;
-  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.refresh-btn:hover {
+  background-color: #2980b9;
 }
 
 .view-btn {
-  background-color: #0056b3;
-  color: white;
+  
 }
 
-.delete-btn {
-  background-color: #dc3545;
-  color: white;
-}
-
-.delete-btn:disabled {
-  background-color: #b0b0b0;
-  cursor: not-allowed;
-}
-
-.view-btn:hover {
-  background-color: #003f8a;
-}
-
-.delete-btn:hover:not(:disabled) {
-  background-color: #c82333;
-}
-
-.status-dropdown {
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #aaa;
-  cursor: pointer;
-  background-color: #fff;
-  transition: border-color 0.3s ease;
-}
-
-.status-dropdown:focus {
-  outline: none;
-  border-color: #007bff;
-}
-
-.no-inquiries {
-  text-align: center;
-  padding: 30px;
-  font-size: 1.3em;
-  color: #555;
-}
-
-.action-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-}
-
+/* ========================= */
+/* Responsive Styling        */
+/* ========================= */
 @media (max-width: 768px) {
   .manage-inquiries-table th,
   .manage-inquiries-table td {
-    padding: 12px;
-    font-size: 0.9em;
+    font-size: 12px;
+    padding: 6px;
   }
-
-  .filters select {
-    padding: 10px;
-    font-size: 0.9em;
-  }
-
-  .view-btn,
-  .delete-btn {
-    padding: 10px 14px;
-    font-size: 0.9em;
+  .refresh-btn {
+    font-size: 14px;
+    padding: 8px 12px;
   }
 }
 
 @media (max-width: 480px) {
-  .manage-inquiries h2 {
-    font-size: 1.5em;
+  .manage-inquiries-container {
+    padding: 10px;
   }
-
-  .manage-inquiries-table {
-    font-size: 0.85em;
-  }
-
-  .filters {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .filters select {
-    width: 100%;
-  }
-
-  .view-btn,
-  .delete-btn {
-    width: 100%;
+  .refresh-btn {
+    width: 100%; /* Ensure button fits the screen */
     margin-bottom: 10px;
+  }
+  .manage-inquiries-table th,
+  .manage-inquiries-table td {
+    font-size: 10px;
+    padding: 4px;
   }
 }

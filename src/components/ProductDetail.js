@@ -24,7 +24,7 @@ const ProductDetail = () => {
         if (productData) {
           setProduct(productData);
           setMainImage(
-            productData.images?.[0] || 'https://i.imgur.com/eoKsILV.png'
+            productData.images?.[0] || '/fallback-images/images-coming-soon-regular.png'
           );
         } else {
           setError('Product not found.');
@@ -165,11 +165,15 @@ const ProductDetail = () => {
                     </tr>
                     <tr>
                       <td>Depth:</td>
-                      <td>{product.depth}in.</td>
+                      <td>{product.depth}&quot;</td>
                     </tr>
                     <tr>
                       <td>Diameter:</td>
-                      <td>{product.width}in.</td>
+                      <td>{product.width}&quot;</td>
+                    </tr>
+                    <tr>
+                      <td>Thickness:</td>
+                      <td>{product.thickness}&quot;</td>
                     </tr>
                   </>
                 )}

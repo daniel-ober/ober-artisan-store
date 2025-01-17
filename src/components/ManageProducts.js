@@ -4,6 +4,8 @@ import './ManageProducts.css';
 import AddProductModal from './AddProductModal';
 import EditProductModal from './EditProductModal';
 
+const FALLBACK_IMAGE_URL = 'https://i.imgur.com/eoKsILV.png';
+
 const ManageProducts = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -66,7 +68,7 @@ const ManageProducts = () => {
 
   return (
     <div className="manage-products-container">
-      <h1>Manage Products</h1>
+      <h2>Manage Products</h2>
       <button className="add-btn" onClick={() => setIsAddModalOpen(true)}>
         Add Product
       </button>
@@ -92,8 +94,8 @@ const ManageProducts = () => {
                     aria-label={`View details for ${product.name}`}
                   >
                     <img
-                      src={product.images[0]}
-                      alt={product.name}
+                      src={product.images && product.images.length > 0 ? product.images[0] : FALLBACK_IMAGE_URL}
+                      alt={product.name || 'No Image Available'}
                       className="thumbnail"
                     />
                   </button>
@@ -115,12 +117,12 @@ const ManageProducts = () => {
                   >
                     Edit
                   </button>
-                  <button
+                  {/* <button
                     className="delete-btn"
                     onClick={() => handleDeleteProduct(product.id)}
                   >
                     Delete
-                  </button>
+                  </button> */}
                 </td>
               </tr>
             ))}
