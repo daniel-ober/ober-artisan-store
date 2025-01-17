@@ -1,0 +1,129 @@
+/* Shared container styling for consistency */
+.manage-orders,
+.manage-users,
+.manage-products-container,
+.manage-inquiries,
+.manage-gallery,
+.site-settings-container {
+  padding: 20px;
+  background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
+}
+
+/* ======================= */
+/* Sales Pipeline Styles   */
+/* (Similar to Manage Products) */
+/* ======================= */
+
+/* Removed the old .manage-products-container { ... } block 
+   if you used the same container class for pipeline */
+
+/* Table */
+.manage-products-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.manage-products-table th,
+.manage-products-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+.manage-products-table th {
+  background-color: #f2f2f2;
+}
+
+/* Thumbnail */
+.thumbnail {
+  width: 60px;
+  height: auto;
+  cursor: pointer;
+}
+
+.thumbnail-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* Add Button */
+.add-btn {
+  margin-bottom: 20px;
+  padding: 10px 15px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.add-btn:hover {
+  background-color: #2980b9;
+}
+
+/* Edit/Delete Buttons */
+.edit-btn {
+  background-color: #4654a2;
+  color: white;
+  margin-right: 10px;
+}
+
+.edit-btn:hover {
+  background-color: #4654a2;
+}
+
+.delete-btn {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.delete-btn:hover {
+  background-color: #c0392b;
+}
+
+/* ========================= */
+/* Responsive Styling        */
+/* ========================= */
+@media (max-width: 768px) {
+  .manage-products-table th,
+  .manage-products-table td {
+    font-size: 14px;
+    padding: 8px;
+  }
+  .add-btn {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+  .edit-btn,
+  .delete-btn {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+  .thumbnail {
+    width: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .manage-products-table th,
+  .manage-products-table td {
+    font-size: 12px;
+    padding: 6px;
+  }
+  .add-btn {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .edit-btn,
+  .delete-btn {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+  .thumbnail {
+    width: 30px;
+  }
+}

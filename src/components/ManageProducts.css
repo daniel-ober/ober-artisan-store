@@ -1,8 +1,22 @@
-.manage-products-container {
+/* Shared container styling for consistency */
+.manage-orders,
+.manage-users,
+.manage-products-container,
+.manage-inquiries,
+.manage-gallery,
+.site-settings-container {
   padding: 20px;
   background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
 }
 
+/* ============================== */
+/* Manage Products Styles         */
+/* ============================== */
+
+/* Removed the old .manage-products-container { ... } block */
+
+/* Table */
 .manage-products-table {
   width: 100%;
   border-collapse: collapse;
@@ -20,6 +34,7 @@
   background-color: #f2f2f2;
 }
 
+/* Thumbnail */
 .thumbnail {
   width: 60px;
   height: auto;
@@ -33,6 +48,7 @@
   cursor: pointer;
 }
 
+/* Add Button */
 .add-btn {
   margin-bottom: 20px;
   padding: 10px 15px;
@@ -47,10 +63,15 @@
   background-color: #2980b9;
 }
 
+/* Edit/Delete Buttons */
 .edit-btn {
   background-color: #4654a2;
   color: white;
   margin-right: 10px;
+}
+
+.edit-btn:hover {
+  background-color: #4654a2; /* You can pick a darker shade if desired */
 }
 
 .delete-btn {
@@ -58,10 +79,49 @@
   color: white;
 }
 
-.edit-btn:hover {
-  background-color: #4654a2;
-}
-
 .delete-btn:hover {
   background-color: #c0392b;
+}
+
+/* ========================= */
+/* Responsive Styling        */
+/* ========================= */
+@media (max-width: 768px) {
+  .manage-products-table th,
+  .manage-products-table td {
+    font-size: 14px;
+    padding: 8px;
+  }
+  .add-btn {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+  .edit-btn,
+  .delete-btn {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+  .thumbnail {
+    width: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .manage-products-table th,
+  .manage-products-table td {
+    font-size: 12px;
+    padding: 6px;
+  }
+  .add-btn {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .edit-btn,
+  .delete-btn {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+  .thumbnail {
+    width: 30px;
+  }
 }
