@@ -102,7 +102,7 @@ const SiteSettings = () => {
 
   return (
     <div className="site-settings-container">
-      <h1>Site Settings</h1>
+      <h2>Site Settings</h2>
       <form onSubmit={handleSave}>
         <h3>Features</h3>
         <div className="features-container">

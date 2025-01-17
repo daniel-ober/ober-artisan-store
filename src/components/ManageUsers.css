@@ -1,33 +1,32 @@
-.manage-users {
+/* Shared container styling for consistency */
+.manage-orders,
+.manage-users,
+.manage-products-container,
+.manage-inquiries,
+.manage-gallery,
+.site-settings-container {
   padding: 20px;
   background-color: #f9f9f9;
   font-family: Arial, sans-serif;
 }
 
-.manage-users h2 {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
+/* ======================== */
+/* Manage Users Styles      */
+/* ======================== */
 
-.search-bar {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
+/* Table */
 .manage-users-table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .manage-users-table th,
 .manage-users-table td {
   border: 1px solid #ddd;
-  padding: 12px;
+  padding: 8px;
   text-align: left;
+  font-size: 14px;
 }
 
 .manage-users-table th {
@@ -35,43 +34,77 @@
   font-weight: bold;
 }
 
-.manage-users-table tbody tr:nth-child(even) {
-  background-color: #f9f9f9;
+/* Responsive scroll behavior */
+.manage-users-container {
+  overflow-x: auto; /* Enable horizontal scrolling */
+  max-width: 100%; /* Ensure container fits within the viewport */
+  margin: 0 auto; /* Center the container */
 }
 
-.manage-users-table tbody tr:hover {
-  background-color: #f1f1f1;
+/* Search Bar */
+.search-bar {
+  width: 100%; /* Ensure search bar fits within the container */
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
 
-.view-btn,
-.delete-btn {
-  padding: 8px 15px;
+/* Add Button */
+.add-btn {
+  margin-bottom: 20px;
+  padding: 10px 15px;
+  background-color: #3498db;
+  color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 14px;
 }
 
-.view-btn {
-  background-color: #3498db;
-  color: white;
-}
-
-.view-btn:hover {
+.add-btn:hover {
   background-color: #2980b9;
 }
 
-.delete-btn {
-  background-color: #e74c3c;
-  color: white;
-  margin-left: 10px;
+/* Table Responsiveness */
+.responsive-table-container {
+  overflow-x: auto;
+  max-width: 100%;
 }
 
-.delete-btn:hover {
-  background-color: #c0392b;
+/* ========================= */
+/* Responsive Styling        */
+/* ========================= */
+/* Hide specific columns for smaller screens */
+@media (max-width: 768px) {
+  .hidden-column {
+    display: none;
+  }
+
+  .manage-users-table th,
+  .manage-users-table td {
+    font-size: 12px;
+    padding: 6px;
+  }
+
+  .add-btn,
+  .view-btn,
+  .delete-btn {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
 }
 
-.delete-btn:disabled {
-  background-color: #95a5a6;
-  cursor: not-allowed;
+@media (max-width: 480px) {
+  .manage-users-table th,
+  .manage-users-table td {
+    font-size: 10px;
+    padding: 4px;
+  }
+
+  .add-btn,
+  .view-btn,
+  .delete-btn {
+    width: 100%; /* Make buttons stack for small screens */
+    margin-bottom: 8px;
+  }
 }

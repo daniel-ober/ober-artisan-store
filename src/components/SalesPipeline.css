@@ -10,11 +10,13 @@
   font-family: Arial, sans-serif;
 }
 
-/* ============================== */
-/* Manage Products Styles         */
-/* ============================== */
+/* ======================= */
+/* Sales Pipeline Styles   */
+/* (Similar to Manage Products) */
+/* ======================= */
 
-/* Removed the old .manage-products-container { ... } block */
+/* Removed the old .manage-products-container { ... } block 
+   if you used the same container class for pipeline */
 
 /* Table */
 .manage-products-table {
@@ -71,7 +73,7 @@
 }
 
 .edit-btn:hover {
-  background-color: #4654a2; /* You can pick a darker shade if desired */
+  background-color: #4654a2;
 }
 
 .delete-btn {
