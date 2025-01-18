@@ -171,13 +171,18 @@ function App() {
           <Route path="/pre-order" element={isLinkEnabled('pre-order') ? <PreOrderPage /> : <NotFound />} />
           <Route path="/account" element={<PrivateRoute element={<AccountPage />} />} />
           <Route path="/admin" element={<PrivateRoute element={<AdminDashboard />} adminOnly />} />
+          {/* Conditional Rendering: Redirect authenticated users from sign-in and register pages */}
           <Route
             path="/signin"
-            element={isLinkEnabled('signin') ? (
-              user ? <Navigate to="/account" /> : <SignInEmail />
-            ) : (
-              <Navigate to="/" replace />
-            )}
+            element={user ? <Navigate to="/account" /> : <SignInEmail />}
+          />
+          <Route
+            path="/register"
+            element={user ? <Navigate to="/account" /> : <Register />}
+          />
+                    <Route
+            path="/forgot-password"
+            element={user ? <Navigate to="/forgot-password" /> : <ForgotPassword />}
           />
           <Route path="/admin-signin" element={<AdminSignin />} />
           <Route path="/checkout" element={<Checkout />} />

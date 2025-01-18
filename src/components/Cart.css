@@ -73,10 +73,6 @@
   margin: 10px 0;
 }
 
-.cart-item-total {
-  font-weight: bold;
-}
-
 .checkout-button {
   margin-top: 20px;
   background-color: #0da81a;
@@ -111,7 +107,7 @@
 }
 
 .quantity-control button.disabled-button {
-  background-color: #d3d3d3;
+  background-color: #d3d3d3 !important;
   color: #808080;
   cursor: not-allowed;
 }
@@ -134,7 +130,7 @@
   background-color: #c0392b;
 }
 
-/* Tooltip styling for disabled artisan items */
+/* Tooltip styling */
 .quantity-control button[title] {
   position: relative;
 }
@@ -153,59 +149,4 @@
   font-size: 0.85rem;
   z-index: 10;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.promo-section {
-  display: flex;
-  justify-content: center;
-  margin: 20px 0;
-}
-
-.promo-section input {
-  padding: 10px;
-  width: 300px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.promo-section button {
-  margin-left: 10px;
-  padding: 10px 20px;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.promo-section button:hover {
-  background-color: #45a049;
-}
-
-.promo-error {
-  color: red;
-  text-align: center;
-  margin-top: 10px;
-}
-
-.discount-info {
-  color: #4caf50;
-  font-weight: bold;
-  text-align: center;
-  margin-top: 5px;
-}
-
-@media (max-width: 768px) {
-  .cart-container {
-    margin: 20px;
-  }
-
-  .cart-table th,
-  .cart-table td {
-    padding: 10px 15px;
-  }
-
-  .cart-summary {
-    font-size: 1rem;
-  }
 }

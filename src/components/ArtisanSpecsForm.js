@@ -6,7 +6,7 @@ const ArtisanSpecsForm = ({ onBack, onSubmit }) => {
     depth: '',
     width: '',
     weight: '',
-    shellThickness: '',
+    thickness: '',
     bearingEdge: '',
     woodSpecies: [],
     customWoodSpecies: '',
@@ -196,12 +196,12 @@ const ArtisanSpecsForm = ({ onBack, onSubmit }) => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="shellThickness">Shell Thickness (mm):</label>
+            <label htmlFor="thickness">Shell Thickness (mm):</label>
             <input
-              id="shellThickness"
+              id="thickness"
               type="text"
-              name="shellThickness"
-              value={artisanSpecs.shellThickness}
+              name="thickness"
+              value={artisanSpecs.thickness}
               onChange={handleInputChange}
             />
           </div>
