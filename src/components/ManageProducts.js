@@ -117,12 +117,12 @@ const ManageProducts = () => {
                   >
                     Edit
                   </button>
-                  {/* <button
+                  <button
                     className="delete-btn"
                     onClick={() => handleDeleteProduct(product.id)}
                   >
                     Delete
-                  </button> */}
+                  </button>
                 </td>
               </tr>
             ))}

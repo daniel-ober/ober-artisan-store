@@ -17,7 +17,7 @@ const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
     height: '',
     width: '',
     weight: '',
-    shellThickness: '',
+    thickness: '',
     bearingEdge: '',
     woodSpecies: [],
     customWoodSpecies: '',

@@ -127,7 +127,7 @@
 .artisan-specs-table td:first-child {
   font-weight: bold;
   color: #333;
-  text-align: left;   /* Align to the left */
+  text-align: left;
   padding-right: 20px;
 }
 
@@ -186,19 +186,46 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative; /* For tooltip positioning */
 }
 
 .quantity-btn:hover {
   background-color: #0056b3;
 }
 
-/* Quantity value */
+.quantity-btn.disabled {
+  background-color: #d3d3d3;
+  color: #808080;
+  cursor: not-allowed;
+}
+
 .quantity-display {
   font-size: 18px;
   font-weight: bold;
   color: #333;
   width: 40px;
   text-align: center;
+}
+
+/* Tooltip Styling */
+.quantity-btn[title] {
+  position: relative;
+}
+
+.quantity-btn[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  background-color: #333333;
+  color: #fff;
+  padding: 5px 8px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  z-index: 10;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 /* Add to Cart / Remove from Cart Button */
@@ -212,11 +239,11 @@
   transition: background-color 0.2s ease;
   text-align: center;
   border-radius: 0;
-  margin-top: 20px; /* Ensure it's placed below the price and quantity */
+  margin-top: 20px;
 }
 
 .add-to-cart-button {
-  background-color: 007bff;
+  background-color: #007bff;
   color: white;
 }
 
@@ -235,13 +262,11 @@
 
 /* Responsive Design for Mobile */
 @media (max-width: 1024px) {
-  /* Ensure proper stacking on mobile */
   .product-price-container {
-    flex-direction: column; /* Stack elements vertically */
+    flex-direction: column;
     align-items: flex-start;
   }
 
-  /* Make the quantity section stack vertically on mobile */
   .quantity-section {
     flex-direction: column;
     align-items: flex-start;
@@ -249,20 +274,18 @@
   }
 
   .quantity-selector {
-    flex-direction: row; /* Keep buttons in a row */
+    flex-direction: row;
     gap: 10px;
   }
 
-  /* Add to cart should be full width */
   .add-to-cart-button,
   .remove-from-cart-button {
-    width: 100%; /* Ensure Add to Cart button is full-width */
-    margin-top: 10px; /* Add space between quantity section and button */
+    width: 100%;
+    margin-top: 10px;
   }
 }
 
 @media (max-width: 768px) {
-  /* Center text and adjust spacing for mobile */
   .product-header,
   .product-title,
   .artisan-specs {
@@ -275,15 +298,5 @@
     width: 100%;
     gap: 30px;
     align-items: flex-start;
-  }
-  
-  .product-price {
-    font-size: 28px;
-  }
-
-  /* Ensure quantity and buttons are still side-by-side in mobile view */
-  .quantity-selector {
-    flex-direction: row;
-    gap: 10px;
   }
 }

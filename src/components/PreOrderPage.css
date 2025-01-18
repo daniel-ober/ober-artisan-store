@@ -47,7 +47,7 @@ h1 {
 }
 
 .pre-order-info {
-  padding: 20px;
+  padding: 0px 20px 20px 20px;
 }
 
 .pre-order-info h2 {
@@ -67,7 +67,8 @@ h1 {
 
 /* Price Styling */
 .price-container {
-  margin-top: 15px;
+  
+  margin: 15px 0px 15px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
