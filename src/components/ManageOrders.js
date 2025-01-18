@@ -104,13 +104,13 @@ const ManageOrders = () => {
                   >
                     View
                   </button>
-                  {/* <button
+                  <button
                     className="delete-btn"
                     onClick={() => handleDeleteOrder(order.id)}
                     disabled={loading}
                   >
                     {loading ? 'Deleting...' : 'Delete'}
-                  </button> */}
+                  </button>
                 </td>
               </tr>
             ))
