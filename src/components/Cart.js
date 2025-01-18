@@ -28,13 +28,16 @@ const Cart = () => {
   const handleQuantityChange = (productId, change, item) => {
     const currentQuantity = cart[productId]?.quantity || 0;
     const newQuantity = currentQuantity + change;
-
+  
     // Handle quantity restrictions
     if (item.category === "artisan") {
       if (item.isPreOrder && newQuantity > 3) return; // Pre-order artisan max quantity is 3
       if (!item.isPreOrder && newQuantity > 1) return; // One-of-a-kind artisan max quantity is 1
+    } else if (item.category === "merch" || item.category === "accessories") {
+      if (newQuantity > 20) return; // Merch/Accessories max quantity is 20
     }
-
+  
+    // Prevent setting quantity to less than 1
     if (newQuantity < 1) {
       removeFromCart(productId);
     } else {
@@ -146,6 +149,9 @@ const Cart = () => {
                     <div className="quantity-control">
                       <button
                         onClick={() => handleQuantityChange(item.id, -1, item)}
+                        className={`quantity-button ${
+                          item.quantity <= 1 ? "disabled-button" : ""
+                        }`}
                         title={
                           item.category === "artisan" && item.quantity === 1
                             ? "One-of-a-kind artisan drums are limited to 1."
@@ -158,18 +164,33 @@ const Cart = () => {
                       <span>{item.quantity || 0}</span>
                       <button
                         onClick={() => handleQuantityChange(item.id, 1, item)}
+                        className={`quantity-button ${
+                          (item.isPreOrder && item.quantity >= 3) ||
+                          (!item.isPreOrder && item.quantity >= 1) ||
+                          ((item.category === "merch" ||
+                            item.category === "accessories") &&
+                            item.quantity >= 20)
+                            ? "disabled-button"
+                            : ""
+                        }`}
                         title={
                           item.category === "artisan"
                             ? item.isPreOrder && item.quantity === 3
-                              ? "Pre-order artisan drums are limited to 3 to balance production throughput."
+                              ? "Pre-order artisan drums are limited to 3 per customer to ensure fair production and delivery scheduling."
                               : !item.isPreOrder && item.quantity === 1
                               ? "One-of-a-kind artisan drums are limited to 1."
                               : undefined
+                            : item.category === "merch" ||
+                              item.category === "accessories"
+                            ? "Non-artisan products are limited to a maximum of 20 per customer."
                             : undefined
                         }
                         disabled={
                           (item.isPreOrder && item.quantity >= 3) ||
-                          (!item.isPreOrder && item.quantity >= 1)
+                          (!item.isPreOrder && item.quantity >= 1) ||
+                          ((item.category === "merch" ||
+                            item.category === "accessories") &&
+                            item.quantity >= 20)
                         }
                       >
                         +

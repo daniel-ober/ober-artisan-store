@@ -13,10 +13,10 @@ const ProductDetail = () => {
   const { addToCart, removeFromCart, updateQuantity, cart } = useCart();
   const [inCart, setInCart] = useState(null);
   const [mainImage, setMainImage] = useState('');
-  const [quantity, setQuantity] = useState(1); // Added state for quantity
+  const [quantity, setQuantity] = useState(1);
   const thumbnailContainerRef = useRef(null);
 
-  // Fetch product details from API and update state
+  // Fetch product details
   useEffect(() => {
     const fetchProductData = async () => {
       try {
@@ -38,26 +38,34 @@ const ProductDetail = () => {
     };
 
     fetchProductData();
-  }, [productId]); // Only fetch product when productId changes
+  }, [productId]);
 
-  // Watch for cart changes and update inCart and quantity states
+  // Sync cart state
   useEffect(() => {
     if (product) {
-      const cartItem = cart ? Object.values(cart).find(item => item.id === productId) : null;
+      const cartItem = cart ? Object.values(cart).find((item) => item.id === productId) : null;
       if (cartItem) {
         setInCart(cartItem);
-        setQuantity(cartItem.quantity); // Sync with cart quantity
+        setQuantity(cartItem.quantity);
       } else {
         setInCart(null);
-        setQuantity(1); // Reset quantity if product is removed from cart
+        setQuantity(1);
       }
     }
-  }, [cart, product, productId]); // Listen to changes in cart and productId
+  }, [cart, product, productId]);
 
   const handleAddToCart = () => {
     if (product) {
+      const maxQuantity = product.category === 'merch' || product.category === 'accessories' ? 20 : 1;
+      const currentQuantity = inCart?.quantity || 0;
+
+      if (currentQuantity + quantity > maxQuantity) {
+        alert(`You cannot add more than ${maxQuantity} of this product.`);
+        return;
+      }
+
       addToCart({ ...product, id: productId, quantity });
-      setInCart({ ...product, quantity });
+      setInCart({ ...product, quantity: currentQuantity + quantity });
     }
   };
 
@@ -73,27 +81,23 @@ const ProductDetail = () => {
   };
 
   const handleQuantityIncrease = () => {
-    const newQuantity = quantity + 1;
-    setQuantity(newQuantity);
-    if (inCart) {
-      updateQuantity(inCart.id, newQuantity); // Update quantity in cart
+    const maxQuantity = product.category === 'merch' || product.category === 'accessories' ? 20 : 1;
+
+    if (quantity + (inCart?.quantity || 0) >= maxQuantity) {
+      alert(`You cannot exceed the max limit of ${maxQuantity} items for this product.`);
+      return;
     }
+
+    setQuantity(quantity + 1);
   };
 
   const handleQuantityDecrease = () => {
     if (quantity > 1) {
-      const newQuantity = quantity - 1;
-      setQuantity(newQuantity);
-      if (inCart) {
-        updateQuantity(inCart.id, newQuantity); // Update quantity in cart
-      }
+      setQuantity(quantity - 1);
     }
   };
 
-  const speciesList = [
-    product?.woodSpecies,
-    product?.customWoodSpecies
-  ].filter(Boolean).join(', ');
+  const speciesList = [product?.woodSpecies, product?.customWoodSpecies].filter(Boolean).join(', ');
 
   if (loading) return <p>Loading product details...</p>;
   if (error) {
@@ -106,7 +110,7 @@ const ProductDetail = () => {
   }
 
   const isArtisan = product.category === 'artisan';
-  const showFullSpecs = product.category === 'artisan';
+  const isArtisanOne = product.artisanLine === 'ONE';
 
   return (
     <div className="product-detail-container">
@@ -118,8 +122,8 @@ const ProductDetail = () => {
       </div>
 
       <h1 className="product-title">
-        {product?.name || 'Unnamed Product'}, {product.depth} x{' '}
-        {product.width} {product.drumType} ({product.finish})
+        {product?.name || 'Unnamed Product'}, {product.depth}&quot; x {product.width}&quot;{' '}
+        {product.drumType} ({product.finish})
       </h1>
 
       <div className="product-content">
@@ -149,7 +153,7 @@ const ProductDetail = () => {
             <h2>Product Specifications</h2>
             <table className="artisan-specs-table">
               <tbody>
-                {showFullSpecs && (
+                {isArtisan && (
                   <>
                     <tr>
                       <td>Type:</td>
@@ -173,7 +177,19 @@ const ProductDetail = () => {
                     </tr>
                     <tr>
                       <td>Thickness:</td>
-                      <td>{product.thickness}&quot;</td>
+                      <td>{product.thickness}mm</td>
+                    </tr>
+                    {/* <tr>
+                      <td>Quantity Staves:</td>
+                      <td>{product.quantityStaves}</td>
+                    </tr> */}
+                    <tr>
+                      <td>Lug Count:</td>
+                      <td>{product.lugCount}</td>
+                    </tr>
+                    <tr>
+                      <td>Hardware:</td>
+                      <td>{product.hardwareColor}</td>
                     </tr>
                   </>
                 )}
@@ -187,16 +203,30 @@ const ProductDetail = () => {
             <div className="product-price-container">
               <p className="product-price">${product?.price?.toFixed(2)}</p>
 
-              {/* Conditionally render quantity buttons for non-artisan products */}
-              {!isArtisan && inCart && (
+              {/* Conditionally render quantity section */}
+              {!isArtisanOne && inCart && (
                 <div className="quantity-section">
                   <span className="quantity-label">Quantity:</span>
                   <div className="quantity-selector">
-                    <button onClick={handleQuantityDecrease} className="quantity-btn">
+                    <button
+                      onClick={handleQuantityDecrease}
+                      className={`quantity-btn ${quantity <= 1 ? 'disabled' : ''}`}
+                      disabled={quantity <= 1}
+                    >
                       -
                     </button>
                     <span className="quantity-display">{quantity}</span>
-                    <button onClick={handleQuantityIncrease} className="quantity-btn">
+                    <button
+                      onClick={handleQuantityIncrease}
+                      className={`quantity-btn ${
+                        product.category === 'merch' || product.category === 'accessories'
+                          ? quantity >= 20
+                            ? 'disabled'
+                            : ''
+                          : 'disabled'
+                      }`}
+                      disabled={quantity >= (product.maxQuantity || 1)}
+                    >
                       +
                     </button>
                   </div>
@@ -208,7 +238,15 @@ const ProductDetail = () => {
                   Remove from Cart
                 </button>
               ) : (
-                <button onClick={handleAddToCart} className="add-to-cart-button">
+                <button
+                  onClick={handleAddToCart}
+                  className="add-to-cart-button"
+                  title={
+                    isArtisanOne
+                      ? 'This product is one-of-a-kind and limited to 1 per customer.'
+                      : undefined
+                  }
+                >
                   Add to Cart
                 </button>
               )}

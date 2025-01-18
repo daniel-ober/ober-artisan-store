@@ -6,12 +6,13 @@ import { createStripeProduct } from '../services/stripeService';
 import './AddProductModal.css';
 import ArtisanSpecsForm from './ArtisanSpecsForm';
 import LoadingSpinner from './LoadingSpinner';
-import SuccessModal from './SuccessModal'; // Import the SuccessModal component
+import SuccessModal from './SuccessModal';
 
 const AddProductModal = ({ onClose }) => {
   const [step, setStep] = useState(1);
   const [newProduct, setNewProduct] = useState({
     category: '',
+    artisanLine: '',
     name: '',
     price: 0,
     description: '',
@@ -21,21 +22,34 @@ const AddProductModal = ({ onClose }) => {
     interactive360Url: '',
     status: 'inactive',
     isPreOrder: false,
+    maxQuantity: 0,
+    currentQuantity: 0,
+    isAvailable: false,
+    availabilityMessage: '',
   });
 
-  const [artisanSpecs, setArtisanSpecs] = useState({});
   const [imageFiles, setImageFiles] = useState([]);
   const [isUploading, setIsUploading] = useState(false);
-  const [successProductId, setSuccessProductId] = useState(null); // Track product ID for success modal
+  const [successProductId, setSuccessProductId] = useState(null);
   const [error, setError] = useState('');
 
   const categories = ['artisan', 'merch', 'accessories'];
+  const artisanLines = [
+    'HERiTAGE',
+    'HybridX',
+    'Limited Batch',
+    'ONE',
+    'Custom Shop',
+    'Dreamfeather',
+  ];
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setNewProduct((prev) => ({
       ...prev,
-      [name]: name === 'price' ? parseFloat(value) || 0 : value,
+      [name]: name === 'price' || name === 'maxQuantity' || name === 'currentQuantity'
+        ? parseFloat(value) || 0
+        : value,
     }));
   };
 
@@ -55,28 +69,28 @@ const AddProductModal = ({ onClose }) => {
   const handleArtisanSubmit = async (artisanData) => {
     setIsUploading(true);
     setError('');
-    setSuccessProductId(null); // Reset success state
+    setSuccessProductId(null);
 
     try {
-      // Validate required fields
       if (
         !newProduct.name ||
         !newProduct.description ||
         newProduct.price <= 0 ||
         !newProduct.sku ||
-        !newProduct.deliveryTime
+        !newProduct.deliveryTime ||
+        newProduct.maxQuantity <= 0 ||
+        newProduct.currentQuantity < 0 ||
+        newProduct.currentQuantity > newProduct.maxQuantity
       ) {
         throw new Error(
-          'Name, description, price, SKU, and delivery time are required fields.'
+          'Name, description, price, SKU, delivery time, and valid inventory values are required fields.'
         );
       }
 
-      // Upload images to Firebase Storage
       const uploadedImages = await Promise.all(
         imageFiles.map((file) => uploadImage(file, 'products'))
       );
 
-      // Prepare product data
       const finalProductData = {
         ...newProduct,
         ...artisanData,
@@ -86,7 +100,6 @@ const AddProductModal = ({ onClose }) => {
 
       console.log('Final product data before Stripe:', finalProductData);
 
-      // Create Stripe product
       const stripeProduct = await createStripeProduct(
         finalProductData.name,
         finalProductData.description,
@@ -98,19 +111,17 @@ const AddProductModal = ({ onClose }) => {
         throw new Error('Failed to create Stripe product.');
       }
 
-      // Add product to Firestore
       const docRef = await addDoc(collection(db, 'products'), {
         ...finalProductData,
         stripeProductId: stripeProduct.product.id,
         stripePriceId: stripeProduct.price.id,
       });
 
-      // Show success modal by storing the new product ID
       setSuccessProductId(docRef.id);
 
-      // Reset form state
       setNewProduct({
         category: '',
+        artisanLine: '',
         name: '',
         price: 0,
         description: '',
@@ -119,8 +130,12 @@ const AddProductModal = ({ onClose }) => {
         images: [],
         interactive360Url: '',
         status: 'inactive',
+        isPreOrder: false,
+        maxQuantity: 0,
+        currentQuantity: 0,
+        isAvailable: false,
+        availabilityMessage: '',
       });
-      setArtisanSpecs({});
       setImageFiles([]);
       setStep(1);
     } catch (err) {
@@ -135,7 +150,7 @@ const AddProductModal = ({ onClose }) => {
     <div className="add-product-modal">
       <div className="modal-content">
         {successProductId ? (
-          <SuccessModal productId={successProductId} /> // Show success message upon creation
+          <SuccessModal productId={successProductId} />
         ) : (
           <>
             <h2>Add New Product</h2>
@@ -143,7 +158,7 @@ const AddProductModal = ({ onClose }) => {
             {error && <div className="error-message">{error}</div>}
 
             {isUploading ? (
-              <LoadingSpinner /> // Show spinner during upload
+              <LoadingSpinner />
             ) : (
               <form>
                 {step === 1 && (
@@ -165,6 +180,26 @@ const AddProductModal = ({ onClose }) => {
                         ))}
                       </select>
                     </div>
+
+                    {newProduct.category === 'artisan' && (
+                      <div className="form-group">
+                        <label htmlFor="artisanLine">Artisan Line*</label>
+                        <select
+                          id="artisanLine"
+                          name="artisanLine"
+                          value={newProduct.artisanLine}
+                          onChange={handleInputChange}
+                          required
+                        >
+                          <option value="">Select Artisan Line</option>
+                          {artisanLines.map((line) => (
+                            <option key={line} value={line}>
+                              {line}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    )}
 
                     <div className="form-group">
                       <label htmlFor="name">Product Name*</label>
@@ -225,19 +260,56 @@ const AddProductModal = ({ onClose }) => {
                       ></textarea>
                     </div>
 
-                    <label htmlFor="isPreOrder">Set as Pre-Order</label>
-                    <input
-                      id="isPreOrder"
-                      type="checkbox"
-                      name="isPreOrder"
-                      checked={newProduct.isPreOrder}
-                      onChange={(e) =>
-                        setNewProduct((prev) => ({
-                          ...prev,
-                          isPreOrder: e.target.checked,
-                        }))
-                      }
-                    />
+                    <div className="form-group">
+                      <label htmlFor="maxQuantity">Max Quantity*</label>
+                      <input
+                        id="maxQuantity"
+                        type="number"
+                        name="maxQuantity"
+                        value={newProduct.maxQuantity}
+                        onChange={handleInputChange}
+                        required
+                      />
+                    </div>
+
+                    <div className="form-group">
+                      <label htmlFor="currentQuantity">Initial Quantity*</label>
+                      <input
+                        id="currentQuantity"
+                        type="number"
+                        name="currentQuantity"
+                        value={newProduct.currentQuantity}
+                        onChange={handleInputChange}
+                        required
+                      />
+                    </div>
+
+                    <div className="form-group">
+                      <label htmlFor="isAvailable">Set as Available</label>
+                      <input
+                        id="isAvailable"
+                        type="checkbox"
+                        name="isAvailable"
+                        checked={newProduct.isAvailable}
+                        onChange={(e) =>
+                          setNewProduct((prev) => ({
+                            ...prev,
+                            isAvailable: e.target.checked,
+                          }))
+                        }
+                      />
+                    </div>
+
+                    <div className="form-group">
+                      <label htmlFor="availabilityMessage">Availability Message</label>
+                      <input
+                        id="availabilityMessage"
+                        type="text"
+                        name="availabilityMessage"
+                        value={newProduct.availabilityMessage}
+                        onChange={handleInputChange}
+                      />
+                    </div>
 
                     <div className="form-group">
                       <label htmlFor="file-upload">Images*</label>

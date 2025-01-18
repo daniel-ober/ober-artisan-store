@@ -43,10 +43,11 @@ const ProductCard = ({ product }) => {
       <div className="product-info">
         <h3 className="product-title">{product.name}</h3>
         <div className="product-meta">
-          {product.shellDepth && product.shellWidth && (
-            <p className="product-dimensions">
-              {product.depth}&quot; x {product.width}&quot;
-            </p>
+          {product.artisanLine && (
+            <p className="artisan-line">{product.artisanLine}</p>
+          )}
+          {product.deliveryTime && (
+            <p className="delivery-time">Delivery: {product.deliveryTime}</p>
           )}
         </div>
         <p className="product-card-price">${product.price.toFixed(2)}</p>

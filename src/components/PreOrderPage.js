@@ -50,8 +50,8 @@ const PreOrderPage = () => {
               <h2>{item.name}</h2>
               <p>{item.description}</p>
               <div className="price-container">
-                {/* <p className="regular-price">Regular: ${item.regularPrice}</p> */}
-                <p className="promo-price">Pre-Order Price: ${item.promoPrice}</p>
+                <p className="regular-price">Price: ${item.price}</p>
+                {/* <p className="promo-price">Pre-Order Price: ${item.promoPrice}</p> */}
               </div>
               <Link to={`/products/${item.id}`}>
                 <button className="pre-order-button">Pre-Order Now</button>
