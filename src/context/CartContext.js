@@ -8,29 +8,26 @@ const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const { user } = useAuth();
   const [cart, setCart] = useState({});
-  const [cartId, setCartId] = useState(""); // Track cartId
+  const [cartId, setCartId] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Initialize Cart
   useEffect(() => {
     const initializeCart = async () => {
       setLoading(true);
       try {
         if (user) {
-          // Authenticated users
           const cartRef = doc(db, "carts", user.uid);
           const cartDoc = await getDoc(cartRef);
           if (cartDoc.exists()) {
             setCart(cartDoc.data().cart || {});
-            setCartId(user.uid); // Use user ID as the cartId
+            setCartId(user.uid);
           } else {
             setCart({});
             setCartId(user.uid);
-            await setDoc(cartRef, { cart: {}, lastUpdated: serverTimestamp() }); // Initialize cart for new users
+            await setDoc(cartRef, { cart: {}, lastUpdated: serverTimestamp() });
           }
         } else {
-          // Guest users
           const localCart = JSON.parse(localStorage.getItem("cart")) || {};
           const localCartId = localStorage.getItem("cartId");
           if (!localCartId) {
@@ -39,7 +36,6 @@ export const CartProvider = ({ children }) => {
               .substring(2, 10)}`;
             localStorage.setItem("cartId", generatedCartId);
             setCartId(generatedCartId);
-            // Create Firestore document for guest cart
             const cartRef = doc(db, "carts", generatedCartId);
             await setDoc(cartRef, { cart: {}, lastUpdated: serverTimestamp() });
           } else {
@@ -49,7 +45,6 @@ export const CartProvider = ({ children }) => {
             if (cartDoc.exists()) {
               setCart(cartDoc.data().cart || {});
             } else {
-              // If Firestore doc does not exist, create it
               await setDoc(cartRef, { cart: {}, lastUpdated: serverTimestamp() });
             }
           }
@@ -66,72 +61,29 @@ export const CartProvider = ({ children }) => {
     initializeCart();
   }, [user]);
 
-  // Save Cart to LocalStorage for Guests
   useEffect(() => {
     if (!user) {
       localStorage.setItem("cart", JSON.stringify(cart));
     }
   }, [cart, user]);
 
-  // Helper Function to Update Firestore
   const updateFirestoreCart = async (updatedCart) => {
     try {
       const cartRef = doc(db, "carts", user?.uid || cartId);
-      await setDoc(
-        cartRef,
-        {
-          cart: updatedCart,
-          lastUpdated: serverTimestamp(), // Update the lastUpdated field
-        },
-        { merge: true }
-      );
+      await setDoc(cartRef, { cart: updatedCart, lastUpdated: serverTimestamp() }, { merge: true });
     } catch (err) {
       console.error("Error updating cart in Firestore:", err);
       setError("Error updating cart.");
     }
   };
 
-  // Add Item to Cart
-  const addToCart = async (product) => {
-    const updatedCart = {
-      ...cart,
-      [product.id]: {
-        ...product,
-        quantity: (cart[product.id]?.quantity || 0) + 1,
-      },
-    };
-
-    setCart(updatedCart);
-    await updateFirestoreCart(updatedCart); // Update Firestore
-  };
-
-  // Update Quantity in Cart
-  const updateQuantity = async (productId, quantity) => {
-    const updatedCart = {
-      ...cart,
-      [productId]: { ...cart[productId], quantity },
-    };
-
-    setCart(updatedCart);
-    await updateFirestoreCart(updatedCart); // Update Firestore
-  };
-
-  // Remove Item from Cart
-  const removeFromCart = async (productId) => {
-    const updatedCart = { ...cart };
-    delete updatedCart[productId];
-    setCart(updatedCart);
-    await updateFirestoreCart(updatedCart); // Update Firestore
-  };
-
-  // Clear Cart
-  const clearCart = async () => {
+  const clearCartOnCheckout = async () => {
     setCart({});
     try {
       const cartRef = doc(db, "carts", user?.uid || cartId);
-      await setDoc(cartRef, { cart: {}, lastUpdated: serverTimestamp() }); // Clear the cart and update lastUpdated
+      await setDoc(cartRef, { cart: {}, lastUpdated: serverTimestamp() });
     } catch (err) {
-      console.error("Error clearing cart in Firestore:", err);
+      console.error("Error clearing cart on checkout:", err);
       setError("Error clearing cart.");
     }
   };
@@ -140,13 +92,35 @@ export const CartProvider = ({ children }) => {
     <CartContext.Provider
       value={{
         cart,
-        cartId, // Expose cartId
+        cartId,
         loading,
         error,
-        addToCart,
-        updateQuantity,
-        removeFromCart,
-        clearCart,
+        addToCart: async (product) => {
+          const updatedCart = {
+            ...cart,
+            [product.id]: {
+              ...product,
+              quantity: (cart[product.id]?.quantity || 0) + 1,
+            },
+          };
+          setCart(updatedCart);
+          await updateFirestoreCart(updatedCart);
+        },
+        updateQuantity: async (productId, quantity) => {
+          const updatedCart = {
+            ...cart,
+            [productId]: { ...cart[productId], quantity },
+          };
+          setCart(updatedCart);
+          await updateFirestoreCart(updatedCart);
+        },
+        removeFromCart: async (productId) => {
+          const updatedCart = { ...cart };
+          delete updatedCart[productId];
+          setCart(updatedCart);
+          await updateFirestoreCart(updatedCart);
+        },
+        clearCartOnCheckout,
       }}
     >
       {children}
