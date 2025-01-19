@@ -1,85 +1,122 @@
 const express = require('express');
+const { buffer } = require('micro');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-const admin = require('firebase-admin');
+const { updateProductInventory } = require('./services/productService');
+const { db } = require('./firebaseConfig');
+const { doc, setDoc, serverTimestamp } = require('firebase/firestore');
 
 const router = express.Router();
-const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
-router.post('/', express.raw({ type: 'application/json' }), async (req, res) => {
-    const sig = req.headers['stripe-signature'];
-    let event;
+// Middleware for parsing webhook events
+router.post('/', async (req, res) => {
+  const sig = req.headers['stripe-signature'];
 
-    try {
-        event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
-    } catch (err) {
-        console.error(`Webhook signature verification failed: ${err.message}`);
-        return res.status(400).send(`Webhook Error: ${err.message}`);
-    }
+  let event;
+  try {
+    const rawBody = await buffer(req);
+    event = stripe.webhooks.constructEvent(rawBody, sig, process.env.STRIPE_WEBHOOK_SECRET);
+  } catch (err) {
+    console.error('[Webhook Error] Invalid Signature:', err.message);
+    return res.status(400).send(`Webhook Error: ${err.message}`);
+  }
 
-    console.log(`Received Stripe event: ${event.type}`);
+  console.log(`[Webhook Received] Event Type: ${event.type}`);
 
-    if (event.type === 'checkout.session.completed') {
-        const session = event.data.object;
+  switch (event.type) {
+    case 'checkout.session.completed': {
+      const session = event.data.object;
 
-        try {
-            // Retrieve the full session including line items
-            const fullSession = await stripe.checkout.sessions.retrieve(session.id, {
-                expand: ['line_items', 'shipping'],
-            });
+      try {
+        console.log('[checkout.session.completed] Session:', session);
 
-            console.log('Full Session Data:', JSON.stringify(fullSession, null, 2));
+        // Retrieve the session to get line items
+        const lineItems = await stripe.checkout.sessions.listLineItems(session.id, {
+          expand: ['data.price.product'],
+        });
 
-            const lineItems = fullSession.line_items.data;
+        console.log('[checkout.session.completed] Line Items:', lineItems);
 
-            // Function to format address
-            const formatAddress = (address) => {
-                if (!address) return 'No address provided';
-                const { line1, line2, city, state, postal_code, country } = address;
-                return `${line1 || ''}${line2 ? `, ${line2}` : ''}, ${city || ''}, ${state || ''} ${postal_code || ''}, ${country || ''}`;
-            };
+        // Prepare order data
+        const orderData = {
+          stripeSessionId: session.id,
+          guestToken: session.metadata.guestToken || null,
+          userId: session.metadata.userId || 'guest',
+          customerName: session.customer_details.name,
+          customerEmail: session.customer_details.email,
+          customerPhone: session.metadata.customerPhone || 'Not provided',
+          customerAddress: `${session.customer_details.address.line1}, ${session.customer_details.address.city}, ${session.customer_details.address.state}, ${session.customer_details.address.country}, ${session.customer_details.address.postal_code}`,
+          paymentMethod: 'Card',
+          cardLastFour: session.payment_method_details?.card?.last4 || 'N/A',
+          totalAmount: session.amount_total / 100, // Convert to dollars
+          products: [],
+          createdAt: serverTimestamp(),
+        };
 
-            // Get shipping name and address explicitly
-            const shippingAddress = formatAddress(fullSession.shipping_details?.address);
-            const [firstName, ...lastNameParts] = (fullSession.shipping_details?.name || 'Guest').split(' ');
-            const lastName = lastNameParts.join(' ');
+        // Add product details and update inventory
+        for (const item of lineItems.data) {
+          const productMetadata = item.price.product.metadata || {};
+          const productId = productMetadata.firestoreProductId;
+          const quantityPurchased = item.quantity;
 
-            // Capture email and phone from session
-            const email = fullSession.customer_details?.email || 'No email provided';
-            const phone = fullSession.customer_details?.phone || 'No phone provided';
+          if (!productId || !quantityPurchased) {
+            console.warn('[checkout.session.completed] Missing product ID or quantity.');
+            continue;
+          }
 
-            const orderData = {
-                stripeSessionId: session.id,
-                customerFirstName: firstName || 'Guest',
-                customerLastName: lastName || 'No last name provided',
-                customerEmail: email,
-                customerPhone: phone,
-                customerShippingAddress: shippingAddress,
-                paymentMethod: session.payment_method_types[0] || 'Unknown',
-                currency: session.currency,
-                products: lineItems.map((item) => ({
-                    name: item.description,
-                    price: item.amount_total / 100,
-                    quantity: item.quantity,
-                })),
-                totalAmount: session.amount_total / 100,
-                status: session.payment_status,
-                createdAt: admin.firestore.Timestamp.now(),
-                userId: session.metadata?.userId || 'guest',
-                guestToken: session.metadata?.guestToken || null,
-            };
+          // Fetch the product from Firestore to get current inventory
+          const productDoc = doc(db, 'products', productId);
+          const productSnapshot = await getDoc(productDoc);
 
-            await admin.firestore().collection('orders').add(orderData);
-            console.log('Order saved to Firestore:', orderData);
-        } catch (err) {
-            console.error('Error processing checkout session:', err.message);
-            console.error(err.stack);
-            return res.status(500).send(`Server Error: ${err.message}`);
+          if (!productSnapshot.exists()) {
+            console.warn(`[checkout.session.completed] Product with ID ${productId} not found.`);
+            continue;
+          }
+
+          const productData = productSnapshot.data();
+          const currentQuantity = productData.currentQuantity || 0;
+          const newQuantity = Math.max(currentQuantity - quantityPurchased, 0);
+
+          console.log(
+            `[checkout.session.completed] Updating Inventory for Product ID ${productId}: Current Quantity: ${currentQuantity}, New Quantity: ${newQuantity}`
+          );
+
+          // Update Firestore inventory
+          await updateProductInventory(productId, { currentQuantity: newQuantity });
+
+          // Add product to the order's product list
+          orderData.products.push({
+            name: productData.name,
+            quantity: quantityPurchased,
+            price: item.price.unit_amount / 100, // Convert to dollars
+          });
         }
-    } else {
-        console.log(`Unhandled event type: ${event.type}`);
+
+        // Save the order to Firestore
+        console.log('[checkout.session.completed] Saving Order:', orderData);
+        const ordersCollection = doc(db, 'orders', session.id); // Use Stripe session ID as the Firestore doc ID
+        await setDoc(ordersCollection, orderData);
+
+        console.log('[checkout.session.completed] Order successfully saved to Firestore.');
+      } catch (err) {
+        console.error(
+          `[checkout.session.completed] Error Processing Event: ${err.message}`,
+          err.stack
+        );
+        return res.status(500).send('Webhook Handler Error');
+      }
+
+      break;
     }
 
-    res.status(200).json({ received: true });
+    case 'payment_intent.succeeded':
+      console.log('[payment_intent.succeeded] Payment Intent:', event.data.object);
+      break;
+
+    default:
+      console.log(`[Webhook] Unhandled Event Type: ${event.type}`);
+  }
+
+  res.status(200).json({ received: true });
 });
 
 module.exports = router;

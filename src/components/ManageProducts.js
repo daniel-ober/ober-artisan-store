@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { fetchProducts, deleteProduct, updateProductStatus } from '../services/productService';
+import {
+  fetchProducts,
+  deleteProduct,
+  updateProductStatus,
+  updateProductInventory,
+} from '../services/productService'; // Assuming inventory update logic is in productService
 import './ManageProducts.css';
 import AddProductModal from './AddProductModal';
 import EditProductModal from './EditProductModal';
@@ -62,6 +67,38 @@ const ManageProducts = () => {
     }
   };
 
+  const handleMaxInventoryChange = async (productId, newMaxInventory) => {
+    try {
+      await updateProductInventory(productId, { maxQuantity: newMaxInventory });
+      setProducts((prevProducts) =>
+        prevProducts.map((product) =>
+          product.id === productId
+            ? { ...product, maxQuantity: newMaxInventory }
+            : product
+        )
+      );
+    } catch (err) {
+      setError('Failed to update max inventory.');
+    }
+  };
+
+  const handleCurrentInventoryChange = async (productId, newCurrentInventory) => {
+    try {
+      await updateProductInventory(productId, {
+        currentQuantity: newCurrentInventory,
+      });
+      setProducts((prevProducts) =>
+        prevProducts.map((product) =>
+          product.id === productId
+            ? { ...product, currentQuantity: newCurrentInventory }
+            : product
+        )
+      );
+    } catch (err) {
+      setError('Failed to update current inventory.');
+    }
+  };
+
   const openProductDetail = (productId) => {
     window.open(`/products/${productId}`, '_blank');
   };
@@ -81,6 +118,8 @@ const ManageProducts = () => {
               <th>Preview</th>
               <th>Name</th>
               <th>Status</th>
+              <th>Max Inventory</th>
+              <th>Current Inventory</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -94,7 +133,11 @@ const ManageProducts = () => {
                     aria-label={`View details for ${product.name}`}
                   >
                     <img
-                      src={product.images && product.images.length > 0 ? product.images[0] : FALLBACK_IMAGE_URL}
+                      src={
+                        product.images && product.images.length > 0
+                          ? product.images[0]
+                          : FALLBACK_IMAGE_URL
+                      }
                       alt={product.name || 'No Image Available'}
                       className="thumbnail"
                     />
@@ -104,11 +147,41 @@ const ManageProducts = () => {
                 <td>
                   <select
                     value={product.status}
-                    onChange={(e) => handleStatusChange(product.id, e.target.value)}
+                    onChange={(e) =>
+                      handleStatusChange(product.id, e.target.value)
+                    }
                   >
                     <option value="active">Active</option>
                     <option value="inactive">Inactive</option>
                   </select>
+                </td>
+                <td>
+                  <select
+                    value={product.maxQuantity}
+                    onChange={(e) =>
+                      handleMaxInventoryChange(product.id, parseInt(e.target.value))
+                    }
+                  >
+                    {Array.from({ length: 21 }, (_, i) => (
+                      <option key={i} value={i}>
+                        {i}
+                      </option>
+                    ))}
+                  </select>
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    value={product.currentQuantity}
+                    min="0"
+                    max={product.maxQuantity}
+                    onChange={(e) =>
+                      handleCurrentInventoryChange(
+                        product.id,
+                        parseInt(e.target.value) || 0
+                      )
+                    }
+                  />
                 </td>
                 <td>
                   <button
@@ -132,7 +205,9 @@ const ManageProducts = () => {
       {isAddModalOpen && (
         <AddProductModal
           onClose={handleAddProductClose}
-          onProductAdded={(newProduct) => setProducts([newProduct, ...products])}
+          onProductAdded={(newProduct) =>
+            setProducts([newProduct, ...products])
+          }
         />
       )}
       {editProductId && (

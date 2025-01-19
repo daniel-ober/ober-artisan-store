@@ -17,7 +17,6 @@ const AddProductModal = ({ onClose }) => {
     price: 0,
     description: '',
     deliveryTime: '',
-    sku: '',
     images: [],
     interactive360Url: '',
     status: 'inactive',
@@ -32,6 +31,7 @@ const AddProductModal = ({ onClose }) => {
   const [isUploading, setIsUploading] = useState(false);
   const [successProductId, setSuccessProductId] = useState(null);
   const [error, setError] = useState('');
+  let isSubmitting = false; // Lock mechanism to prevent duplicate submissions
 
   const categories = ['artisan', 'merch', 'accessories'];
   const artisanLines = [
@@ -47,9 +47,10 @@ const AddProductModal = ({ onClose }) => {
     const { name, value } = e.target;
     setNewProduct((prev) => ({
       ...prev,
-      [name]: name === 'price' || name === 'maxQuantity' || name === 'currentQuantity'
-        ? parseFloat(value) || 0
-        : value,
+      [name]:
+        name === 'price' || name === 'maxQuantity' || name === 'currentQuantity'
+          ? parseFloat(value) || 0
+          : value,
     }));
   };
 
@@ -59,33 +60,66 @@ const AddProductModal = ({ onClose }) => {
   };
 
   const handleNextStep = () => {
-    setStep(2);
+    setStep((prevStep) => prevStep + 1);
   };
 
   const handlePreviousStep = () => {
-    setStep(1);
+    setStep((prevStep) => prevStep - 1);
+  };
+
+  const generateSku = (category, artisanLine) => {
+    const categoryPrefixes = {
+      artisan: 'ART',
+      merch: 'MER',
+      accessories: 'ACC',
+    };
+
+    const artisanLinePrefixes = {
+      HERiTAGE: 'H',
+      HybridX: 'HX',
+      'Limited Batch': 'B',
+      ONE: '1',
+      'Custom Shop': 'CS',
+      Dreamfeather: 'D',
+    };
+
+    const categoryPrefix = categoryPrefixes[category] || 'GEN';
+    const artisanPrefix =
+      category === 'artisan' ? artisanLinePrefixes[artisanLine] || '' : '';
+
+    const timestamp = Date.now().toString().slice(-6); // Shorten timestamp for SKU suffix
+    return `${categoryPrefix}${artisanPrefix ? `-${artisanPrefix}` : ''}-${timestamp}`;
   };
 
   const handleArtisanSubmit = async (artisanData) => {
+    if (isSubmitting) {
+      console.warn('[handleArtisanSubmit] Duplicate submission prevented.');
+      return;
+    }
+
+    isSubmitting = true; // Set lock
     setIsUploading(true);
     setError('');
     setSuccessProductId(null);
 
     try {
+      console.log(`[handleArtisanSubmit] Called at ${new Date().toISOString()}`);
+
       if (
         !newProduct.name ||
         !newProduct.description ||
         newProduct.price <= 0 ||
-        !newProduct.sku ||
         !newProduct.deliveryTime ||
         newProduct.maxQuantity <= 0 ||
         newProduct.currentQuantity < 0 ||
         newProduct.currentQuantity > newProduct.maxQuantity
       ) {
         throw new Error(
-          'Name, description, price, SKU, delivery time, and valid inventory values are required fields.'
+          'Name, description, price, delivery time, and valid inventory values are required fields.'
         );
       }
+
+      const generatedSku = generateSku(newProduct.category, newProduct.artisanLine);
 
       const uploadedImages = await Promise.all(
         imageFiles.map((file) => uploadImage(file, 'products'))
@@ -94,28 +128,39 @@ const AddProductModal = ({ onClose }) => {
       const finalProductData = {
         ...newProduct,
         ...artisanData,
+        sku: generatedSku, // Auto-generated SKU
         images: uploadedImages,
         createdAt: serverTimestamp(),
+        currentQuantity: newProduct.maxQuantity, // Initialize currentQuantity
+        isOutOfStock: newProduct.maxQuantity === 0, // Automatically set out-of-stock flag
       };
 
-      console.log('Final product data before Stripe:', finalProductData);
+      console.log('[handleArtisanSubmit] Final Product Data for Firestore:', finalProductData);
 
       const stripeProduct = await createStripeProduct(
         finalProductData.name,
         finalProductData.description,
         finalProductData.price,
-        uploadedImages
+        uploadedImages,
+        { SKU: generatedSku } // Pass SKU in metadata
       );
 
       if (!stripeProduct || !stripeProduct.product.id) {
         throw new Error('Failed to create Stripe product.');
       }
 
+      console.log(
+        '[handleArtisanSubmit] Saving Product to Firestore with Stripe Product ID:',
+        stripeProduct.product.id
+      );
+
       const docRef = await addDoc(collection(db, 'products'), {
         ...finalProductData,
         stripeProductId: stripeProduct.product.id,
         stripePriceId: stripeProduct.price.id,
       });
+
+      console.log('[handleArtisanSubmit] Firestore Document Created:', docRef.id);
 
       setSuccessProductId(docRef.id);
 
@@ -126,7 +171,6 @@ const AddProductModal = ({ onClose }) => {
         price: 0,
         description: '',
         deliveryTime: '',
-        sku: '',
         images: [],
         interactive360Url: '',
         status: 'inactive',
@@ -139,9 +183,10 @@ const AddProductModal = ({ onClose }) => {
       setImageFiles([]);
       setStep(1);
     } catch (err) {
-      console.error('Error adding product:', err.message);
+      console.error('[handleArtisanSubmit] Error:', err.message);
       setError(err.message || 'Failed to add product.');
     } finally {
+      isSubmitting = false; // Release lock
       setIsUploading(false);
     }
   };
@@ -220,18 +265,6 @@ const AddProductModal = ({ onClose }) => {
                         type="number"
                         name="price"
                         value={newProduct.price}
-                        onChange={handleInputChange}
-                        required
-                      />
-                    </div>
-
-                    <div className="form-group">
-                      <label htmlFor="sku">SKU*</label>
-                      <input
-                        id="sku"
-                        type="text"
-                        name="sku"
-                        value={newProduct.sku}
                         onChange={handleInputChange}
                         required
                       />
