@@ -95,8 +95,43 @@ app.use((req, res, next) => {
 });
 
 // Webhook Route for Stripe
-const webhookRoute = require('./webhook');
-app.use('/api/webhook', webhookRoute);
+app.post('/api/webhook', express.raw({ type: 'application/json' }), (req, res) => {
+    const sig = req.headers['stripe-signature'];
+    let event;
+
+    try {
+        event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
+    } catch (err) {
+        console.error(`Webhook signature verification failed: ${err.message}`);
+        return res.status(400).send(`Webhook Error: ${err.message}`);
+    }
+
+    console.log(`Received Stripe event: ${event.type}`);
+
+    // Handle specific events
+    switch (event.type) {
+        case 'product.created':
+            console.log('Product created:', event.data.object);
+            // Optional: Add logic to check and handle duplicates
+            break;
+        case 'price.created':
+            console.log('Price created:', event.data.object);
+            break;
+        case 'checkout.session.completed':
+            console.log('Checkout session completed:', event.data.object);
+            break;
+        case 'payment_intent.succeeded':
+            console.log('Payment intent succeeded:', event.data.object);
+            break;
+        case 'charge.succeeded':
+            console.log('Charge succeeded:', event.data.object);
+            break;
+        default:
+            console.warn(`Unhandled event type: ${event.type}`);
+    }
+
+    res.status(200).send('Event received');
+});
 
 // Route for creating Stripe checkout sessions
 app.post('/api/create-checkout-session', async (req, res) => {
@@ -134,11 +169,10 @@ app.post('/api/create-checkout-session', async (req, res) => {
                 customerEmail,
                 customerPhone: customerPhone || 'No phone provided',
                 shippingAddress: JSON.stringify(shippingAddress || {}),
-
             },
             customer_email: customerEmail,
             shipping_address_collection: { allowed_countries: ['US', 'CA'] },
-            allow_promotion_codes: true
+            allow_promotion_codes: true,
         });
 
         res.status(200).json({ url: session.url, id: session.id, guestToken });
