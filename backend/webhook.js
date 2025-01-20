@@ -1,4 +1,3 @@
-// Webhook Route for Stripe
 app.post(
     '/api/webhook',
     express.raw({ type: 'application/json' }),
@@ -40,18 +39,32 @@ app.post(
         if (session.payment_intent) {
           try {
             const paymentIntent = await stripe.paymentIntents.retrieve(session.payment_intent, {
-              expand: ['payment_method.card'], // Expand to include card details
+              expand: ['payment_method'],
             });
   
-            if (paymentIntent.payment_method_details?.card) {
-              cardDetails = {
-                brand: paymentIntent.payment_method_details.card.brand || 'Unknown',
-                lastFour: paymentIntent.payment_method_details.card.last4 || 'XXXX',
-              };
+            console.log('Fetched Payment Intent:', paymentIntent); // Debugging log
+  
+            if (paymentIntent.payment_method && paymentIntent.payment_method_details) {
+              const paymentMethod = paymentIntent.payment_method_details.card;
+  
+              if (paymentMethod) {
+                cardDetails = {
+                  brand: paymentMethod.brand || 'Unknown',
+                  lastFour: paymentMethod.last4 || 'XXXX',
+                  expMonth: paymentMethod.exp_month || 'XX',
+                  expYear: paymentMethod.exp_year || 'XXXX',
+                };
+              } else {
+                console.error('Payment method details are missing in payment intent');
+              }
+            } else {
+              console.error('Payment method is missing in payment intent');
             }
           } catch (error) {
             console.error('Error fetching payment intent for card details:', error.message);
           }
+        } else {
+          console.error('Payment intent ID is missing in session');
         }
   
         console.log('Card Details Fetched:', cardDetails); // Log card details for debugging
@@ -71,11 +84,11 @@ app.post(
             ? `${session.shipping.address.line1 || ''}, ${session.shipping.address.city || ''}, ${session.shipping.address.state || ''}, ${session.shipping.address.country || ''}, ${session.shipping.address.postal_code || ''}`
             : 'No Shipping Details Provided',
           paymentMethod: session.payment_method_types?.[0] || 'Unknown',
+          cardDetails, // Include card details
           totalAmount: session.amount_total / 100 || 0, // Convert to dollars
           currency: session.currency || 'usd',
           status: session.payment_status || 'unpaid',
           items, // Include line items
-          cardDetails, // Include card details
           createdAt: admin.firestore.FieldValue.serverTimestamp(), // Firestore timestamp
         };
   
