@@ -39,24 +39,28 @@ router.get('/all', async (req, res) => {
     }
 });
 
-// **New Route**: Fetch a single order by ID (e.g., Stripe session ID)
+// Route to fetch a single order by ID (e.g., Stripe session ID)
 router.get('/:id', async (req, res) => {
     const { id } = req.params;
 
     console.log(`[GET /api/orders/:id] Received ID: ${id}`);
 
     try {
-        const orderDoc = await db.collection('orders').doc(id).get();
+        const ordersSnapshot = await db
+            .collection('orders')
+            .where('stripeSessionId', '==', id)
+            .limit(1)
+            .get();
 
-        if (!orderDoc.exists) {
-            console.error(`[GET /api/orders/:id] Order not found for ID: ${id}`);
+        if (ordersSnapshot.empty) {
+            console.error(`[GET /api/orders/:id] Order not found for session ID: ${id}`);
             return res.status(404).json({ error: 'Order not found' });
         }
 
-        const orderData = { id: orderDoc.id, ...orderDoc.data() };
-        console.log(`[GET /api/orders/:id] Order found:`, orderData);
+        const orderDoc = ordersSnapshot.docs[0];
+        console.log(`[GET /api/orders/:id] Order found:`, orderDoc.data());
 
-        res.status(200).json(orderData);
+        res.status(200).json({ id: orderDoc.id, ...orderDoc.data() });
     } catch (error) {
         console.error(`[GET /api/orders/:id] Error fetching order: ${error.message}`);
         res.status(500).json({ error: 'Failed to fetch order details' });
