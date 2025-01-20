@@ -17,9 +17,8 @@ const Cart = () => {
   const [unavailableProducts, setUnavailableProducts] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [notifyMeList, setNotifyMeList] = useState([]);
-  const [isCartSynced, setIsCartSynced] = useState(false); // Track if the cart is synced
+  const [isCartSynced, setIsCartSynced] = useState(false);
 
-  // Sync cart with the latest product data
   useEffect(() => {
     const syncCartWithProductData = async () => {
       const unavailable = [];
@@ -31,33 +30,25 @@ const Cart = () => {
         const productData = productSnapshot.data();
 
         if (productData) {
-          // Handle unavailable products
           if (productData.currentQuantity === 0) {
             unavailable.push({ id: productId, name: productData.name });
-            removeFromCart(productId); // Remove unavailable product
+            removeFromCart(productId);
             hasChanges = true;
           } else if (cart[productId]?.quantity > productData.currentQuantity) {
-            // Adjust quantity if it exceeds current stock
             updateQuantity(productId, productData.currentQuantity);
             hasChanges = true;
           }
-        } else {
-          console.warn(`Product with ID ${productId} does not exist.`);
-          removeFromCart(productId); // Remove missing product
-          hasChanges = true;
         }
       }
 
       if (unavailable.length > 0) {
         setUnavailableProducts(unavailable);
-        setShowModal(true); // Show modal for unavailable products
+        setShowModal(true);
       }
 
       if (hasChanges) {
-        console.log("Cart updated based on product data.");
+        setIsCartSynced(true);
       }
-
-      setIsCartSynced(true); // Mark the cart as synced
     };
 
     if (!isCartSynced) {
@@ -205,14 +196,9 @@ const Cart = () => {
                       <button
                         onClick={() => handleQuantityChange(item.id, 1)}
                         className={`quantity-button ${
-                          item.quantity >= item.currentQuantity ? "disabled-button" : ""
+                          item.quantity >= (item.currentQuantity || 0) ? "disabled-button" : ""
                         }`}
-                        disabled={item.quantity >= item.currentQuantity}
-                        title={
-                          item.quantity >= item.currentQuantity
-                            ? `Maximum quantity available: ${item.currentQuantity}`
-                            : undefined
-                        }
+                        disabled={item.quantity >= (item.currentQuantity || 0)}
                       >
                         +
                       </button>
@@ -262,7 +248,7 @@ const Cart = () => {
                 </li>
               ))}
             </ul>
-            <button onClick={() => setShowModal(false)} className="modal-close-button">
+            <button onClick={closeModal} className="modal-close-button">
               OK
             </button>
           </div>
