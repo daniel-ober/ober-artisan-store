@@ -134,6 +134,17 @@ app.post(
 
       console.log('Checkout session completed:', session);
 
+      // Fetch line items for the session
+      const lineItems = await stripe.checkout.sessions.listLineItems(session.id, {
+        expand: ['data.price.product'],
+      });
+
+      const items = lineItems.data.map((item) => ({
+        name: item.description,
+        quantity: item.quantity,
+        price: item.amount_total / 100, // Convert to dollars
+      }));
+
       // Prepare order data
       const orderData = {
         stripeSessionId: session.id || null,
@@ -152,6 +163,7 @@ app.post(
         totalAmount: session.amount_total / 100 || 0, // Convert to dollars
         currency: session.currency || 'usd',
         status: session.payment_status || 'unpaid',
+        items, // Include line items
         createdAt: admin.firestore.FieldValue.serverTimestamp(), // Firestore timestamp
       };
 
