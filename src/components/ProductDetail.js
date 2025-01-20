@@ -14,6 +14,7 @@ const ProductDetail = () => {
   const [inCart, setInCart] = useState(null);
   const [mainImage, setMainImage] = useState('');
   const [quantity, setQuantity] = useState(1);
+  const [notifyMe, setNotifyMe] = useState(false);
   const thumbnailContainerRef = useRef(null);
 
   // Fetch product details
@@ -97,6 +98,12 @@ const ProductDetail = () => {
     }
   };
 
+  const handleNotifyMe = () => {
+    // Placeholder for notifying users when the product is back in stock
+    alert('You will be notified once this product is available again!');
+    setNotifyMe(true);
+  };
+
   const speciesList = [product?.woodSpecies, product?.customWoodSpecies].filter(Boolean).join(', ');
 
   if (loading) return <p>Loading product details...</p>;
@@ -111,6 +118,7 @@ const ProductDetail = () => {
 
   const isArtisan = product.category === 'artisan';
   const isArtisanOne = product.artisanLine === 'ONE';
+  const isSoldOut = product.currentQuantity === 0;
 
   return (
     <div className="product-detail-container">
@@ -179,10 +187,6 @@ const ProductDetail = () => {
                       <td>Thickness:</td>
                       <td>{product.thickness}mm</td>
                     </tr>
-                    {/* <tr>
-                      <td>Quantity Staves:</td>
-                      <td>{product.quantityStaves}</td>
-                    </tr> */}
                     <tr>
                       <td>Lug Count:</td>
                       <td>{product.lugCount}</td>
@@ -212,10 +216,11 @@ const ProductDetail = () => {
                       onClick={handleQuantityDecrease}
                       className={`quantity-btn ${quantity <= 1 ? 'disabled' : ''}`}
                       disabled={quantity <= 1}
+                      data-tooltip="Decrease quantity"
                     >
                       -
                     </button>
-                    <span className="quantity-display">{quantity}</span>
+                    <span className="quantity-value">{quantity}</span>
                     <button
                       onClick={handleQuantityIncrease}
                       className={`quantity-btn ${
@@ -226,6 +231,7 @@ const ProductDetail = () => {
                           : 'disabled'
                       }`}
                       disabled={quantity >= (product.maxQuantity || 1)}
+                      data-tooltip="Increase quantity"
                     >
                       +
                     </button>
@@ -233,7 +239,12 @@ const ProductDetail = () => {
                 </div>
               )}
 
-              {inCart ? (
+              {/* Button Logic */}
+              {isSoldOut ? (
+                <button className="sold-out-button" disabled>
+                  Sold Out
+                </button>
+              ) : inCart ? (
                 <button onClick={handleRemoveFromCart} className="remove-from-cart-button">
                   Remove from Cart
                 </button>
@@ -248,6 +259,13 @@ const ProductDetail = () => {
                   }
                 >
                   Add to Cart
+                </button>
+              )}
+              
+              {/* Notify Me button */}
+              {isSoldOut && !notifyMe && (
+                <button className="notify-me-button" onClick={handleNotifyMe}>
+                  Notify Me When Available
                 </button>
               )}
             </div>
