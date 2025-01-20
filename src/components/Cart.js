@@ -1,10 +1,11 @@
+// src/components/Cart.js
 import React, { useState, useEffect } from "react";
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
 import { Link } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
-import { doc, getDoc } from "firebase/firestore"; // Add necessary Firebase imports
-import { db } from "../firebaseConfig"; // Ensure you import your Firestore config
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebaseConfig";
 import "./Cart.css";
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
@@ -14,6 +15,9 @@ const Cart = () => {
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
   const [shippingEstimate, setShippingEstimate] = useState(0);
+  const [unavailableProducts, setUnavailableProducts] = useState([]); // Track products with quantity 0
+  const [showModal, setShowModal] = useState(false); // Modal for unavailable products
+  const [notifyMeList, setNotifyMeList] = useState([]); // Track "Notify Me" subscriptions
 
   useEffect(() => {
     if (!cartId) {
@@ -27,28 +31,58 @@ const Cart = () => {
     }
   }, [cartId]);
 
+  // Check and remove products with currentQuantity of 0
+  useEffect(() => {
+    const checkUnavailableProducts = async () => {
+      const unavailable = [];
+      for (const productId in cart) {
+        const productRef = doc(db, "products", productId);
+        const productSnapshot = await getDoc(productRef);
+        const productData = productSnapshot.data();
+
+        if (productData && productData.currentQuantity === 0) {
+          unavailable.push({ id: productId, name: productData.name });
+          removeFromCart(productId); // Remove product from cart
+        }
+      }
+
+      if (unavailable.length > 0) {
+        setUnavailableProducts(unavailable);
+        setShowModal(true); // Show modal if products are unavailable
+      }
+    };
+
+    checkUnavailableProducts();
+  }, [cart, removeFromCart]);
+
   const handleQuantityChange = async (productId, change, item) => {
     const currentQuantity = cart[productId]?.quantity || 0;
     const newQuantity = currentQuantity + change;
 
-    // Fetch current quantity from Firestore
-    const productRef = doc(db, "products", productId); 
+    const productRef = doc(db, "products", productId);
     const productSnapshot = await getDoc(productRef);
     const productData = productSnapshot.data();
-    const maxQuantity = productData?.currentQuantity || 0;  // Get the max available quantity from Firestore
+    const maxQuantity = productData?.currentQuantity || 0;
 
-    // Handle quantity restrictions based on max quantity
     if (newQuantity > maxQuantity) {
       alert(`Cannot add more than ${maxQuantity} of this product.`);
-      return; // Stop if the quantity exceeds available stock
+      return;
     }
 
-    // Update the cart if new quantity is valid
     if (newQuantity < 1) {
       removeFromCart(productId);
     } else {
       updateQuantity(productId, newQuantity);
     }
+  };
+
+  const handleNotifyMe = (product) => {
+    setNotifyMeList((prev) => [...prev, product]);
+    alert(`You will be notified when "${product.name}" is back in stock.`);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
   };
 
   const getItemTotal = (item) => {
@@ -67,8 +101,8 @@ const Cart = () => {
       (total, item) => total + (item.weight || 1) * item.quantity,
       0
     );
-    const baseRate = 10; // $10 base rate
-    const weightRate = 2; // $2 per unit weight
+    const baseRate = 10;
+    const weightRate = 2;
     const shippingCost = baseRate + weightRate * totalWeight;
     setShippingEstimate(shippingCost);
   };
@@ -137,10 +171,7 @@ const Cart = () => {
                   <td>
                     <Link to={`/products/${item.id}`}>
                       <img
-                        src={
-                          item.images?.[0] ||
-                          "/fallback-images/image-not-available.png"
-                        }
+                        src={item.images?.[0] || "/fallback-images/image-not-available.png"}
                         alt={item.name || "Product Image"}
                         className="cart-item-image"
                       />
@@ -155,9 +186,7 @@ const Cart = () => {
                     <div className="quantity-control">
                       <button
                         onClick={() => handleQuantityChange(item.id, -1, item)}
-                        className={`quantity-button ${
-                          item.quantity <= 1 ? "disabled-button" : ""
-                        }`}
+                        className={`quantity-button ${item.quantity <= 1 ? "disabled-button" : ""}`}
                         disabled={item.quantity <= 1}
                       >
                         -
@@ -165,10 +194,7 @@ const Cart = () => {
                       <span>{item.quantity || 0}</span>
                       <button
                         onClick={() => handleQuantityChange(item.id, 1, item)}
-                        className={`quantity-button ${
-                          item.quantity >= item.currentQuantity ? "disabled-button" : ""
-                        }`}
-                        disabled={item.quantity >= item.currentQuantity}
+                        className="quantity-button"
                       >
                         +
                       </button>
@@ -176,10 +202,7 @@ const Cart = () => {
                   </td>
                   <td>${getItemTotal(item).toFixed(2)}</td>
                   <td>
-                    <button
-                      onClick={() => removeFromCart(item.id)}
-                      className="remove-btn"
-                    >
+                    <button onClick={() => removeFromCart(item.id)} className="remove-btn">
                       Remove
                     </button>
                   </td>
@@ -199,6 +222,34 @@ const Cart = () => {
             {loading ? "Processing..." : "Checkout"}
           </button>
         </>
+      )}
+
+      {/* Modal Notification for Unavailable Products */}
+      {showModal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h2>Unavailable Products</h2>
+            <p>
+              The following items are no longer available and have been removed from your cart:
+            </p>
+            <ul>
+              {unavailableProducts.map((product) => (
+                <li key={product.id}>
+                  {product.name}{" "}
+                  <button
+                    className="notify-me-button"
+                    onClick={() => handleNotifyMe(product)}
+                  >
+                    Notify Me When Available
+                  </button>
+                </li>
+              ))}
+            </ul>
+            <button onClick={() => setShowModal(false)} className="modal-close-button">
+              OK
+            </button>
+          </div>
+        </div>
       )}
     </div>
   );
