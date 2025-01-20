@@ -1,17 +1,37 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useCart } from '../context/CartContext';
 import { Link, useNavigate } from 'react-router-dom';
 import './ProductCard.css';
+import { doc, getDoc } from 'firebase/firestore'; // Firebase imports
+import { db } from '../firebaseConfig'; // Ensure you import your Firestore config
 
 const ProductCard = ({ product }) => {
   const { addToCart, cart } = useCart();
+  const [isSoldOut, setIsSoldOut] = useState(false);
+  const [notifyMe, setNotifyMe] = useState(false);
   const navigate = useNavigate();
 
+  // Check if product is already in the cart
+  const isInCart = cart[product.id];
+
+  useEffect(() => {
+    const checkStock = async () => {
+      // Fetch product data from Firestore to check if it is out of stock
+      const productRef = doc(db, 'products', product.id);
+      const productSnapshot = await getDoc(productRef);
+      const productData = productSnapshot.data();
+      if (productData?.currentQuantity === 0) {
+        setIsSoldOut(true);
+      }
+    };
+    checkStock();
+  }, [product.id]);
+
   const handleAddToCart = () => {
-    if (product) {
+    if (product && !isSoldOut) {
       addToCart({ ...product, _id: product.id });
     } else {
-      console.error('Product is not defined');
+      console.error('Product is not defined or is out of stock');
     }
   };
 
@@ -19,8 +39,11 @@ const ProductCard = ({ product }) => {
     navigate(`/products/${product.id}`);
   };
 
-  // Check if product is already in the cart
-  const isInCart = cart[product.id];
+  const handleNotifyMe = () => {
+    // Placeholder for notifying users when the product is back in stock
+    alert('You will be notified once this product is available again!');
+    setNotifyMe(true);
+  };
 
   return (
     <div className="product-card">
@@ -57,7 +80,11 @@ const ProductCard = ({ product }) => {
 
         {/* Ensure button stretches edge-to-edge */}
         <div className="product-button-container">
-          {isInCart ? (
+          {isSoldOut ? (
+            <button className="sold-out-button" disabled>
+              Sold Out
+            </button>
+          ) : isInCart ? (
             <Link to="/cart" className="add-to-cart-button">
               View in Cart
             </Link>
@@ -66,8 +93,16 @@ const ProductCard = ({ product }) => {
               className="add-to-cart-button"
               onClick={handleAddToCart}
               aria-label="Add product to cart"
+              disabled={isSoldOut}
             >
               Add to Cart
+            </button>
+          )}
+
+          {/* Notify Me button */}
+          {isSoldOut && !notifyMe && (
+            <button className="notify-me-button" onClick={handleNotifyMe}>
+              Notify Me When Available
             </button>
           )}
         </div>
