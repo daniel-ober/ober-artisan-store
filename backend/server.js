@@ -145,6 +145,66 @@ app.post(
         price: item.amount_total / 100, // Convert to dollars
       }));
 
+      // Fetch payment intent to get card details
+      let cardDetails = {};
+      if (session.payment_intent) {
+        try {
+          const paymentIntent = await stripe.paymentIntents.retrieve(session.payment_intent, {
+            expand: ['payment_method'], // Expand payment method to get card details
+          });
+
+          console.log('Fetched Payment Intent:', paymentIntent);
+
+          if (paymentIntent.payment_method && paymentIntent.payment_method.card) {
+            const card = paymentIntent.payment_method.card;
+
+            cardDetails = {
+              brand: card.brand || 'Unknown',
+              lastFour: card.last4 || 'XXXX',
+              expMonth: card.exp_month || 'XX',
+              expYear: card.exp_year || 'XXXX',
+            };
+          } else {
+            console.error('Card details are missing in payment intent');
+          }
+        } catch (error) {
+          console.error('Error fetching payment intent for card details:', error.message);
+        }
+      } else {
+        console.error('Payment intent ID is missing in session');
+      }
+
+      console.log('Card Details Fetched:', cardDetails);
+
+      // Update product quantities in Firestore
+      try {
+        for (const item of items) {
+          const productSnapshot = await db
+            .collection('products')
+            .where('name', '==', item.name)
+            .limit(1)
+            .get();
+
+          if (productSnapshot.empty) {
+            console.error(`Product "${item.name}" does not exist in Firestore.`);
+            continue;
+          }
+
+          const productDoc = productSnapshot.docs[0];
+          const productData = productDoc.data();
+          const newQuantity = (productData.currentQuantity || 0) - item.quantity;
+
+          if (newQuantity < 0) {
+            console.warn(`Insufficient stock for product "${item.name}".`);
+          } else {
+            await productDoc.ref.update({ currentQuantity: newQuantity });
+            console.log(`Updated quantity for product "${item.name}" to ${newQuantity}.`);
+          }
+        }
+      } catch (error) {
+        console.error('Error updating product quantities:', error.message);
+      }
+
       // Prepare order data
       const orderData = {
         stripeSessionId: session.id || null,
@@ -160,6 +220,7 @@ app.post(
           ? `${session.shipping.address.line1 || ''}, ${session.shipping.address.city || ''}, ${session.shipping.address.state || ''}, ${session.shipping.address.country || ''}, ${session.shipping.address.postal_code || ''}`
           : 'No Shipping Details Provided',
         paymentMethod: session.payment_method_types?.[0] || 'Unknown',
+        cardDetails, // Include card details
         totalAmount: session.amount_total / 100 || 0, // Convert to dollars
         currency: session.currency || 'usd',
         status: session.payment_status || 'unpaid',
