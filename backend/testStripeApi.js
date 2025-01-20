@@ -47,5 +47,5 @@ async function testFetchLineItems(sessionId) {
 }
 
 // Replace this with the actual session ID you want to test
-const sessionId = 'cs_test_b19JlnqBjj6dAWxRwHKlzKg31u00YFl60ctYMIGla5FZUQHM9gIjApVzdp';
+const sessionId = 'cs_test_b1aOerGaapQh6lCBEPIQ6EtcjcyPXiUS6WqeSPch0zLBT7PY4dpbece29z';
 testFetchLineItems(sessionId);
