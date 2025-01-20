@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 import Home from './components/Home';
 import Products from './components/Products';
 import ProductDetail from './components/ProductDetail';
+import TestRedirect from './components/TestRedirect';
 import PreOrderPage from './components/PreOrderPage';
 import About from './components/About';
 import Contact from './components/Contact';
@@ -166,6 +167,7 @@ function App() {
           <Route path="/sound-profile-recommendations" element={selectedPath === 'recommendations' ? <SoundProfileRecommendations /> : <Navigate to="/" />} />
           <Route path="/gallery" element={isLinkEnabled('gallery') ? <Gallery /> : <NotFound />} />
           <Route path="/custom-shop" element={isLinkEnabled('custom-shop') ? <CustomShop /> : <NotFound />} />
+          <Route path="/test-redirect" element={<TestRedirect />} />
           <Route path="/products" element={isLinkEnabled('products') ? <Products /> : <NotFound />} />
           <Route path="/products/:productId" element={<ProductDetail />} />
           <Route path="/pre-order" element={isLinkEnabled('pre-order') ? <PreOrderPage /> : <NotFound />} />
