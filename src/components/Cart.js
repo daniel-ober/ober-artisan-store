@@ -1,4 +1,3 @@
-// src/components/Cart.js
 import React, { useState, useEffect } from "react";
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
@@ -15,47 +14,58 @@ const Cart = () => {
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
   const [shippingEstimate, setShippingEstimate] = useState(0);
-  const [unavailableProducts, setUnavailableProducts] = useState([]); // Track products with quantity 0
-  const [showModal, setShowModal] = useState(false); // Modal for unavailable products
-  const [notifyMeList, setNotifyMeList] = useState([]); // Track "Notify Me" subscriptions
+  const [unavailableProducts, setUnavailableProducts] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [notifyMeList, setNotifyMeList] = useState([]);
+  const [isCartSynced, setIsCartSynced] = useState(false); // Track if the cart is synced
 
+  // Sync cart with the latest product data
   useEffect(() => {
-    if (!cartId) {
-      const localCartId = localStorage.getItem("cartId");
-      if (!localCartId) {
-        const newCartId = `cart-${Date.now()}-${Math.random()
-          .toString(36)
-          .substring(2, 10)}`;
-        localStorage.setItem("cartId", newCartId);
-      }
-    }
-  }, [cartId]);
-
-  // Check and remove products with currentQuantity of 0
-  useEffect(() => {
-    const checkUnavailableProducts = async () => {
+    const syncCartWithProductData = async () => {
       const unavailable = [];
+      let hasChanges = false;
+
       for (const productId in cart) {
         const productRef = doc(db, "products", productId);
         const productSnapshot = await getDoc(productRef);
         const productData = productSnapshot.data();
 
-        if (productData && productData.currentQuantity === 0) {
-          unavailable.push({ id: productId, name: productData.name });
-          removeFromCart(productId); // Remove product from cart
+        if (productData) {
+          // Handle unavailable products
+          if (productData.currentQuantity === 0) {
+            unavailable.push({ id: productId, name: productData.name });
+            removeFromCart(productId); // Remove unavailable product
+            hasChanges = true;
+          } else if (cart[productId]?.quantity > productData.currentQuantity) {
+            // Adjust quantity if it exceeds current stock
+            updateQuantity(productId, productData.currentQuantity);
+            hasChanges = true;
+          }
+        } else {
+          console.warn(`Product with ID ${productId} does not exist.`);
+          removeFromCart(productId); // Remove missing product
+          hasChanges = true;
         }
       }
 
       if (unavailable.length > 0) {
         setUnavailableProducts(unavailable);
-        setShowModal(true); // Show modal if products are unavailable
+        setShowModal(true); // Show modal for unavailable products
       }
+
+      if (hasChanges) {
+        console.log("Cart updated based on product data.");
+      }
+
+      setIsCartSynced(true); // Mark the cart as synced
     };
 
-    checkUnavailableProducts();
-  }, [cart, removeFromCart]);
+    if (!isCartSynced) {
+      syncCartWithProductData();
+    }
+  }, [cart, updateQuantity, removeFromCart, isCartSynced]);
 
-  const handleQuantityChange = async (productId, change, item) => {
+  const handleQuantityChange = async (productId, change) => {
     const currentQuantity = cart[productId]?.quantity || 0;
     const newQuantity = currentQuantity + change;
 
@@ -185,7 +195,7 @@ const Cart = () => {
                   <td>
                     <div className="quantity-control">
                       <button
-                        onClick={() => handleQuantityChange(item.id, -1, item)}
+                        onClick={() => handleQuantityChange(item.id, -1)}
                         className={`quantity-button ${item.quantity <= 1 ? "disabled-button" : ""}`}
                         disabled={item.quantity <= 1}
                       >
@@ -193,8 +203,16 @@ const Cart = () => {
                       </button>
                       <span>{item.quantity || 0}</span>
                       <button
-                        onClick={() => handleQuantityChange(item.id, 1, item)}
-                        className="quantity-button"
+                        onClick={() => handleQuantityChange(item.id, 1)}
+                        className={`quantity-button ${
+                          item.quantity >= item.currentQuantity ? "disabled-button" : ""
+                        }`}
+                        disabled={item.quantity >= item.currentQuantity}
+                        title={
+                          item.quantity >= item.currentQuantity
+                            ? `Maximum quantity available: ${item.currentQuantity}`
+                            : undefined
+                        }
                       >
                         +
                       </button>
@@ -224,7 +242,6 @@ const Cart = () => {
         </>
       )}
 
-      {/* Modal Notification for Unavailable Products */}
       {showModal && (
         <div className="modal-overlay">
           <div className="modal-content">
