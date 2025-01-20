@@ -3,6 +3,8 @@ import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
 import { Link } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
+import { doc, getDoc } from "firebase/firestore"; // Add necessary Firebase imports
+import { db } from "../firebaseConfig"; // Ensure you import your Firestore config
 import "./Cart.css";
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
@@ -25,19 +27,23 @@ const Cart = () => {
     }
   }, [cartId]);
 
-  const handleQuantityChange = (productId, change, item) => {
+  const handleQuantityChange = async (productId, change, item) => {
     const currentQuantity = cart[productId]?.quantity || 0;
     const newQuantity = currentQuantity + change;
-  
-    // Handle quantity restrictions
-    if (item.category === "artisan") {
-      if (item.isPreOrder && newQuantity > 3) return; // Pre-order artisan max quantity is 3
-      if (!item.isPreOrder && newQuantity > 1) return; // One-of-a-kind artisan max quantity is 1
-    } else if (item.category === "merch" || item.category === "accessories") {
-      if (newQuantity > 20) return; // Merch/Accessories max quantity is 20
+
+    // Fetch current quantity from Firestore
+    const productRef = doc(db, "products", productId); 
+    const productSnapshot = await getDoc(productRef);
+    const productData = productSnapshot.data();
+    const maxQuantity = productData?.currentQuantity || 0;  // Get the max available quantity from Firestore
+
+    // Handle quantity restrictions based on max quantity
+    if (newQuantity > maxQuantity) {
+      alert(`Cannot add more than ${maxQuantity} of this product.`);
+      return; // Stop if the quantity exceeds available stock
     }
-  
-    // Prevent setting quantity to less than 1
+
+    // Update the cart if new quantity is valid
     if (newQuantity < 1) {
       removeFromCart(productId);
     } else {
@@ -152,11 +158,6 @@ const Cart = () => {
                         className={`quantity-button ${
                           item.quantity <= 1 ? "disabled-button" : ""
                         }`}
-                        title={
-                          item.category === "artisan" && item.quantity === 1
-                            ? "One-of-a-kind artisan drums are limited to 1."
-                            : undefined
-                        }
                         disabled={item.quantity <= 1}
                       >
                         -
@@ -165,33 +166,9 @@ const Cart = () => {
                       <button
                         onClick={() => handleQuantityChange(item.id, 1, item)}
                         className={`quantity-button ${
-                          (item.isPreOrder && item.quantity >= 3) ||
-                          (!item.isPreOrder && item.quantity >= 1) ||
-                          ((item.category === "merch" ||
-                            item.category === "accessories") &&
-                            item.quantity >= 20)
-                            ? "disabled-button"
-                            : ""
+                          item.quantity >= item.currentQuantity ? "disabled-button" : ""
                         }`}
-                        title={
-                          item.category === "artisan"
-                            ? item.isPreOrder && item.quantity === 3
-                              ? "Pre-order artisan drums are limited to 3 per customer to ensure fair production and delivery scheduling."
-                              : !item.isPreOrder && item.quantity === 1
-                              ? "One-of-a-kind artisan drums are limited to 1."
-                              : undefined
-                            : item.category === "merch" ||
-                              item.category === "accessories"
-                            ? "Non-artisan products are limited to a maximum of 20 per customer."
-                            : undefined
-                        }
-                        disabled={
-                          (item.isPreOrder && item.quantity >= 3) ||
-                          (!item.isPreOrder && item.quantity >= 1) ||
-                          ((item.category === "merch" ||
-                            item.category === "accessories") &&
-                            item.quantity >= 20)
-                        }
+                        disabled={item.quantity >= item.currentQuantity}
                       >
                         +
                       </button>
