@@ -233,6 +233,11 @@ const Cart = () => {
                           item.quantity >= (cart[item.id]?.currentQuantity || 0) ? "disabled-button" : ""
                         }`}
                         disabled={item.quantity >= (cart[item.id]?.currentQuantity || 0)}
+                        title={
+                          item.quantity >= (cart[item.id]?.currentQuantity || 0)
+                            ? `Maximum quantity available: ${cart[item.id]?.currentQuantity}`
+                            : undefined
+                        } // Tooltip for max quantity
                       >
                         +
                       </button>
