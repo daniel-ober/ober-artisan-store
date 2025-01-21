@@ -41,22 +41,25 @@ const ManageOrders = () => {
   }, []);
 
   const handleSearch = async (e) => {
-    const searchQuery = e.target.value.toLowerCase(); // Convert the search query to lowercase
-    setSearchId(searchQuery); // Update the search ID as you type
+    const searchQuery = e.target.value.toLowerCase();
+    setSearchId(searchQuery);
 
     if (!searchQuery.trim()) {
       setFilteredOrders(orders);
       return;
     }
 
-    // Filter orders by matching the query within the raw Firestore order ID
     const filtered = orders.filter((order) => {
-      // Remove dashes and convert to lowercase for easier matching
       const orderIdRaw = order.id.replace(/-/g, '').toLowerCase();
       return orderIdRaw.includes(searchQuery);
     });
 
     setFilteredOrders(filtered);
+  };
+
+  const handleClearSearch = () => {
+    setSearchId(''); // Clear the search field
+    setFilteredOrders(orders); // Reset the filtered orders to show all
   };
 
   // Helper function to format Firestore order ID
@@ -107,8 +110,9 @@ const ManageOrders = () => {
           type="text"
           placeholder="Search by Firestore ID"
           value={searchId}
-          onChange={handleSearch} // Trigger search on input change
+          onChange={handleSearch}
         />
+        <button onClick={handleClearSearch}>Clear</button> {/* Clear button */}
       </div>
       <button className="add-btn" onClick={handleAddOrder}>
         Add Order
