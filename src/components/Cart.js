@@ -10,17 +10,17 @@ import "./Cart.css";
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
 const Cart = () => {
-  const { cart, cartId, updateQuantity, removeFromCart } = useCart();
+  const { cart, cartId, updateQuantity, removeFromCart, setCart } = useCart();
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
   const [shippingEstimate, setShippingEstimate] = useState(0);
   const [unavailableProducts, setUnavailableProducts] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [isCartSynced, setIsCartSynced] = useState(false);
 
   useEffect(() => {
     const syncCartWithProductData = async () => {
       const unavailable = [];
+      let updatedCart = { ...cart };
       let hasChanges = false;
 
       for (const productId in cart) {
@@ -29,16 +29,20 @@ const Cart = () => {
         const productData = productSnapshot.data();
 
         if (productData) {
-          cart[productId].currentQuantity = productData.currentQuantity || 0;
+          updatedCart[productId].currentQuantity = productData.currentQuantity || 0;
 
           if (productData.currentQuantity === 0) {
             unavailable.push({ id: productId, name: productData.name });
-            removeFromCart(productId);
+            delete updatedCart[productId]; // Remove unavailable product
             hasChanges = true;
           } else if (cart[productId]?.quantity > productData.currentQuantity) {
-            updateQuantity(productId, productData.currentQuantity);
+            updatedCart[productId].quantity = productData.currentQuantity; // Adjust quantity
             hasChanges = true;
           }
+        } else {
+          unavailable.push({ id: productId, name: cart[productId]?.name });
+          delete updatedCart[productId];
+          hasChanges = true;
         }
       }
 
@@ -48,14 +52,12 @@ const Cart = () => {
       }
 
       if (hasChanges) {
-        setIsCartSynced(true);
+        setCart(updatedCart); // Update the cart context
       }
     };
 
-    if (!isCartSynced) {
-      syncCartWithProductData();
-    }
-  }, [cart, updateQuantity, removeFromCart, isCartSynced]);
+    syncCartWithProductData();
+  }, [cart, setCart]);
 
   const handleQuantityChange = async (productId, change) => {
     const currentQuantity = cart[productId]?.quantity || 0;
@@ -81,7 +83,12 @@ const Cart = () => {
   const closeModal = () => {
     setShowModal(false);
     setUnavailableProducts([]);
-    setIsCartSynced(false); // Reset to allow re-sync if needed
+
+    // Explicitly sync the cart state to force a re-render
+    console.log("Cart before refresh:", cart);
+    const updatedCart = { ...cart };
+    setCart(updatedCart);
+    console.log("Cart after refresh:", updatedCart);
   };
 
   const getItemTotal = (item) => {
