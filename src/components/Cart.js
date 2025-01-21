@@ -16,7 +16,6 @@ const Cart = () => {
   const [shippingEstimate, setShippingEstimate] = useState(0);
   const [unavailableProducts, setUnavailableProducts] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [notifyMeList, setNotifyMeList] = useState([]);
   const [isCartSynced, setIsCartSynced] = useState(false);
 
   useEffect(() => {
@@ -30,6 +29,8 @@ const Cart = () => {
         const productData = productSnapshot.data();
 
         if (productData) {
+          cart[productId].currentQuantity = productData.currentQuantity || 0;
+
           if (productData.currentQuantity === 0) {
             unavailable.push({ id: productId, name: productData.name });
             removeFromCart(productId);
@@ -77,13 +78,10 @@ const Cart = () => {
     }
   };
 
-  const handleNotifyMe = (product) => {
-    setNotifyMeList((prev) => [...prev, product]);
-    alert(`You will be notified when "${product.name}" is back in stock.`);
-  };
-
   const closeModal = () => {
     setShowModal(false);
+    setUnavailableProducts([]);
+    setIsCartSynced(false); // Reset to allow re-sync if needed
   };
 
   const getItemTotal = (item) => {
@@ -116,6 +114,31 @@ const Cart = () => {
 
   const handleCheckout = async () => {
     setLoading(true);
+
+    const unavailable = [];
+    const finalCart = { ...cart };
+
+    for (const productId in cart) {
+      const productRef = doc(db, "products", productId);
+      const productSnapshot = await getDoc(productRef);
+      const productData = productSnapshot.data();
+
+      if (!productData || cart[productId]?.quantity > productData.currentQuantity) {
+        unavailable.push({
+          id: productId,
+          name: productData ? productData.name : cart[productId]?.name,
+        });
+        delete finalCart[productId];
+      }
+    }
+
+    if (unavailable.length > 0) {
+      setUnavailableProducts(unavailable);
+      setShowModal(true);
+      setLoading(false);
+      return;
+    }
+
     try {
       const productsPayload = Object.values(cart).map((product) => ({
         name: product.name || "Unnamed Product",
@@ -139,6 +162,10 @@ const Cart = () => {
       );
 
       const session = await response.json();
+      if (!response.ok) {
+        throw new Error(session.error || "Failed to create checkout session");
+      }
+
       window.location.href = session.url;
     } catch (error) {
       alert(`Checkout error: ${error.message}`);
@@ -196,9 +223,9 @@ const Cart = () => {
                       <button
                         onClick={() => handleQuantityChange(item.id, 1)}
                         className={`quantity-button ${
-                          item.quantity >= (item.currentQuantity || 0) ? "disabled-button" : ""
+                          item.quantity >= (cart[item.id]?.currentQuantity || 0) ? "disabled-button" : ""
                         }`}
-                        disabled={item.quantity >= (item.currentQuantity || 0)}
+                        disabled={item.quantity >= (cart[item.id]?.currentQuantity || 0)}
                       >
                         +
                       </button>
@@ -237,15 +264,7 @@ const Cart = () => {
             </p>
             <ul>
               {unavailableProducts.map((product) => (
-                <li key={product.id}>
-                  {product.name}{" "}
-                  <button
-                    className="notify-me-button"
-                    onClick={() => handleNotifyMe(product)}
-                  >
-                    Notify Me When Available
-                  </button>
-                </li>
+                <li key={product.id}>{product.name}</li>
               ))}
             </ul>
             <button onClick={closeModal} className="modal-close-button">
