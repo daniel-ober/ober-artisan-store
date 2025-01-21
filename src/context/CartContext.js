@@ -1,4 +1,3 @@
-// src/context/CartContext.js
 import React, { createContext, useState, useContext, useEffect } from "react";
 import { doc, setDoc, getDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebaseConfig";
@@ -122,6 +121,7 @@ export const CartProvider = ({ children }) => {
           await updateFirestoreCart(updatedCart);
         },
         clearCartOnCheckout,
+        setCart, // Explicitly include setCart here
       }}
     >
       {children}
