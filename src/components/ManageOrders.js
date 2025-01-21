@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
+import { collection, getDocs, getDoc, deleteDoc, doc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import ViewOrderModal from './ViewOrderModal';
 import AddOrderModal from './AddOrderModal';
 
 const ManageOrders = () => {
   const [orders, setOrders] = useState([]);
+  const [filteredOrders, setFilteredOrders] = useState([]);
+  const [searchId, setSearchId] = useState('');
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -32,10 +34,39 @@ const ManageOrders = () => {
         };
       });
       setOrders(ordersList);
+      setFilteredOrders(ordersList);
     };
 
     fetchOrders();
   }, []);
+
+  const handleSearch = async (e) => {
+    const searchQuery = e.target.value.toLowerCase(); // Convert the search query to lowercase
+    setSearchId(searchQuery); // Update the search ID as you type
+
+    if (!searchQuery.trim()) {
+      setFilteredOrders(orders);
+      return;
+    }
+
+    // Filter orders by matching the query within the raw Firestore order ID
+    const filtered = orders.filter((order) => {
+      // Remove dashes and convert to lowercase for easier matching
+      const orderIdRaw = order.id.replace(/-/g, '').toLowerCase();
+      return orderIdRaw.includes(searchQuery);
+    });
+
+    setFilteredOrders(filtered);
+  };
+
+  // Helper function to format Firestore order ID
+  const formatOrderId = (id) => {
+    if (id && id.length > 4) {
+      const formattedId = `${id.slice(0, id.length - 4)}-${id.slice(id.length - 4)}`;
+      return formattedId;
+    }
+    return id;
+  };
 
   const handleViewOrder = (order) => {
     setSelectedOrder(order);
@@ -52,6 +83,7 @@ const ManageOrders = () => {
     try {
       await deleteDoc(doc(db, 'orders', orderId));
       setOrders(orders.filter((order) => order.id !== orderId));
+      setFilteredOrders(filteredOrders.filter((order) => order.id !== orderId));
     } catch (error) {
       console.error('Error deleting order:', error);
     } finally {
@@ -70,33 +102,39 @@ const ManageOrders = () => {
   return (
     <div className="manage-orders">
       <h2>Manage Orders</h2>
+      <div className="search-bar">
+        <input
+          type="text"
+          placeholder="Search by Firestore ID"
+          value={searchId}
+          onChange={handleSearch} // Trigger search on input change
+        />
+      </div>
       <button className="add-btn" onClick={handleAddOrder}>
         Add Order
       </button>
       <table className="manage-orders-table">
         <thead>
           <tr>
+            <th data-label="Order ID">Order ID</th>
             <th data-label="Date">Date</th>
-            {/* <th data-label="Order ID">Order ID</th> */}
             <th data-label="Customer Name">Customer Name</th>
             <th data-label="Total">Total</th>
-            {/* <th data-label="Status">Status</th> */}
             <th data-label="Actions">Actions</th>
           </tr>
         </thead>
         <tbody>
-          {orders.length === 0 ? (
+          {filteredOrders.length === 0 ? (
             <tr>
               <td colSpan="6">No orders available</td>
             </tr>
           ) : (
-            orders.map((order) => (
+            filteredOrders.map((order) => (
               <tr key={order.id}>
+                <td data-label="Order ID">{formatOrderId(order.id)}</td>
                 <td data-label="Date">{order.orderDate}</td>
-                {/* <td data-label="Order ID">{order.id}</td> */}
                 <td data-label="Customer Name">{order.customerName}</td>
                 <td data-label="Total">${order.total}</td>
-                {/* <td data-label="Status">{order.status}</td> */}
                 <td data-label="Actions">
                   <button
                     className="view-btn"
@@ -127,6 +165,7 @@ const ManageOrders = () => {
           onClose={handleAddOrderClose}
           onOrderAdded={(newOrder) => {
             setOrders([newOrder, ...orders]);
+            setFilteredOrders([newOrder, ...filteredOrders]);
           }}
         />
       )}
