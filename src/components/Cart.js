@@ -214,7 +214,7 @@ const Cart = () => {
                   </td>
                   <td>
                     <p>{item.name}</p>
-                    <p>{item.description || "No description available."}</p>
+                    {/* <p>{item.description || "No description available."}</p> */}
                   </td>
                   <td>${item.price.toFixed(2)}</td>
                   <td>

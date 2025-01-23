@@ -42,12 +42,13 @@ h1 {
 /* General Product Image Styling */
 .pre-order-image {
   width: 100%;
-  height: 200px;
+  height: 270px;
   object-fit: cover;
 }
 
 .pre-order-info {
   padding: 0px 20px 20px 20px;
+  /* align-content: center; */
 }
 
 .pre-order-info h2 {
@@ -63,11 +64,12 @@ h1 {
 .pre-order-info p {
   font-size: 1rem;
   color: #555;
+  align-content: center;
+
 }
 
 /* Price Styling */
 .price-container {
-  
   margin: 15px 0px 15px;
   display: flex;
   flex-direction: column;

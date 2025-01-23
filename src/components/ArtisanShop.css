@@ -1,0 +1,160 @@
+.artisan-shop {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    text-align: center;
+    color: white;
+    background: black;
+    margin: 0; /* Remove white gap */
+  }
+  
+  /* Responsive Hero Image */
+  .image-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 2;
+  }
+  
+  .image-layer.base {
+    opacity: 1;
+    z-index: 1;
+  }
+  
+  .image-layer.visible {
+    opacity: 1;
+    z-index: 3;
+  }
+  
+  /* Hover Zones */
+  .hover-zones {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 4;
+  }
+  
+  .hover-zone {
+    position: absolute;
+    cursor: pointer;
+  }
+  
+  /* Adjust hover zones */
+  .hover-zone.heritage {
+    top: 40%;
+    left: 5%;
+    width: 30%;
+    height: 50%;
+  }
+  
+  .hover-zone.one {
+    top: 35%;
+    left: 35%;
+    width: 30%;
+    height: 50%;
+  }
+  
+  .hover-zone.vapre {
+    top: 40%;
+    left: 65%;
+    width: 30%;
+    height: 50%;
+  }
+  
+  /* Popup Window */
+  .info-popup {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.95);
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    z-index: 5;
+    color: white;
+    max-width: 400px;
+    text-align: left;
+  }
+  
+  .popup-image {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+  }
+  
+  .info-popup h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .info-popup .popup-price {
+    font-size: 1.2rem;
+    color: #f0b040;
+  }
+  
+  .action-button {
+    margin-top: 1rem;
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .action-button.add-to-cart {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .action-button.sold-out {
+    background-color: #d9534f;
+    color: white;
+  }
+  
+  .action-button.pre-order {
+    background-color: #f0ad4e;
+    color: white;
+  }
+  
+  .more-info {
+    display: inline-block;
+    margin-top: 0.5rem;
+    color: #69b0fc;
+    background: none;
+    border: none;
+    font-size: 1rem;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
+  .more-info:hover {
+    color: #ffffff;
+  }
+  
+  /* Mobile Responsiveness */
+  @media (max-width: 768px) {
+    .artisan-shop {
+      height: auto;
+    }
+  
+    .info-popup {
+      top: 5%;
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+  
+    .hover-zone {
+      width: 30%;
+      height: 25%;
+    }
+  }
