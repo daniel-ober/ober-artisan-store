@@ -1,51 +1,37 @@
-/* Highlights Section */
-.highlights-section {
+/* General Styles */
+body {
+  margin: 0; /* Remove default margin */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  box-sizing: border-box; /* Include padding/border in element dimensions */
+}
+
+/* Home Container Styles */
+.home-container {
   display: flex;
-  justify-content: space-around;
-  padding: 50px 10px;
-  background-color: #f9f9f9c2;
+  flex-direction: column;
+  align-items: center;
+  width: 100%; /* Full width */
+  padding: 0;
+  background-color: #f9f9f9;
+  box-sizing: border-box; /* Prevent overflow issues */
 }
 
-.highlight {
-  text-align: center;
-  width: 30%;
-  padding: 20px;
-  background: #fff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
+.image-container {
+  width: 100%; /* Full width */
 }
 
-.highlight h2 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
+.coming-soon-image {
+  width: 100%; /* Full width */
+  object-fit: cover; /* Maintain aspect ratio */
 }
 
-.highlight p {
-  font-size: 1rem;
-  margin-bottom: 15px;
-}
-
-.highlight button {
-  background-color: #333;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.highlight button:hover {
-  background-color: #555;
-}
-
-/* Hero Overlay */
+/* Hero Overlay (Now Below Image) */
 .hero-overlay {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  color: white;
+  margin-top: 20px; /* Add spacing below the image */
 }
 
 .hero-overlay h1 {
@@ -72,45 +58,12 @@
   background-color: #ff4500;
 }
 
-/* Video Container */
-.video-container {
-  position: relative;
-  width: 100%; /* Full browser width */
-  height: 100vh; /* Full height of the viewport */
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Video Element */
-.coming-soon-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%; /* Scale to 100% of the browser width */
-  height: 100%; /* Scale to 100% of the container height */
-  object-fit: cover; /* Maintain aspect ratio while covering the area */
-  opacity: 0;
-  transition: opacity 1.5s ease-in-out;
-}
-
-.coming-soon-video.fade-in {
-  opacity: 1;
-}
-
-.coming-soon-video.fade-out {
-  opacity: 0;
-}
-
-
 /* Highlights Section */
 .highlights-section {
   display: flex;
-  flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+  flex-wrap: wrap;
   justify-content: space-around;
   padding: 50px 10px;
-  /* background-color: #f9f9f9; */
 }
 
 .highlight {
@@ -120,7 +73,7 @@
   background: #fff;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
-  margin-bottom: 20px; /* Add spacing between rows */
+  margin-bottom: 20px;
 }
 
 .highlight h2 {
@@ -148,16 +101,6 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  /* Adjust video height for tablets */
-  .video-container {
-    height: 60vh;
-  }
-
-  .home-video {
-    height: 100%;
-    width: auto;
-  }
-
   .hero-overlay h1 {
     font-size: 2rem;
   }
@@ -172,21 +115,11 @@
   }
 
   .highlight {
-    width: 100%; /* Two items per row */
+    width: 100%; /* Full width on smaller screens */
   }
 }
 
 @media (max-width: 480px) {
-  /* Adjust video height for phones */
-  .video-container {
-    height: 50vh;
-  }
-
-  .home-video {
-    height: 100%;
-    width: auto;
-  }
-
   .hero-overlay h1 {
     font-size: 1.8rem;
   }
@@ -198,9 +131,5 @@
   .hero-overlay .cta-button {
     padding: 8px 15px;
     font-size: 0.8rem;
-  }
-
-  .highlight {
-    width: 100%; /* One item per row */
   }
 }
