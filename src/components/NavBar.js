@@ -162,6 +162,17 @@ const NavBar = () => {
             </Link>
           ))}
 
+          {/* Add the Artisan Shop link */}
+          <Link
+            to="/artisan-shop"
+            className={`nav-link ${
+              location.pathname === '/artisan-shop' ? 'active' : ''
+            }`}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Artisan Shop
+          </Link>
+
           {user && isAdmin && (
             <Link
               to="/admin"

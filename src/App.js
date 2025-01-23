@@ -19,6 +19,7 @@ import AccountPage from './components/AccountPage';
 import CheckoutSummary from './components/CheckoutSummary';
 import Gallery from './components/Gallery';
 import AdminDashboard from './components/AdminDashboard';
+import ArtisanShop from './components/ArtisanShop';
 import ManageUsers from './components/ManageUsers';
 import ManageProducts from './components/ManageProducts';
 import ManageOrders from './components/ManageOrders';
@@ -162,6 +163,7 @@ function App() {
           <Route path="/return-policy" element={<ReturnPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/custom-drum-builder" element={<CustomDrumBuilder />} />
+          <Route path="/artisan-shop" element={<ArtisanShop />} />
           <Route path="/sound-profile-tool" element={<PathSelection setSelectedPath={setSelectedPath} />} />
           <Route path="/custom-drum-builder" element={selectedPath === 'custom-drum-builder' ? <CustomDrumBuilder /> : <Navigate to="/" />} />
           <Route path="/sound-profile-recommendations" element={selectedPath === 'recommendations' ? <SoundProfileRecommendations /> : <Navigate to="/" />} />
