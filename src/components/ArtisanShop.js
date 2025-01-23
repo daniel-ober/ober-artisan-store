@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../firebaseConfig'; // Adjust the path to your Firebase config
+import { db } from '../firebaseConfig';
 import './ArtisanShop.css';
 
 const ArtisanShop = () => {
@@ -65,22 +65,29 @@ const ArtisanShop = () => {
       ))}
 
       {/* Hover Zones */}
-      <div className="hover-zones">
-        {Object.keys(drumDetails).map((drumKey) => (
-          <div
-            key={drumKey}
-            className={`hover-zone ${drumKey.toLowerCase()}`}
-            role="button"
-            tabIndex="0"
-            onMouseEnter={() => handleHover(drumKey)}
-            onMouseLeave={() => setHoveredDrum(null)}
-          />
-        ))}
-      </div>
+   {/* Hover Zones */}
+<div className="hover-zones">
+  {Object.keys(drumDetails).map((drumKey) => (
+    <div
+      key={drumKey}
+      className={`hover-zone ${drumKey.toLowerCase()}`}
+      role="button"
+      tabIndex="0"
+      onMouseEnter={() => handleHover(drumKey)}
+      onMouseLeave={() => setHoveredDrum(null)}
+      onClick={() => handleHover(drumKey)} // For touch devices
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          handleHover(drumKey);
+        }
+      }}
+    />
+  ))}
+</div>
 
       {/* Popup Section */}
-      <div className="popup-container">
-        {hoveredDrum && drumDetails[hoveredDrum] && (
+      {hoveredDrum && drumDetails[hoveredDrum] && (
+        <div className="popup-container">
           <div className="info-popup">
             <img
               src={drumDetails[hoveredDrum].imageUrl}
@@ -99,8 +106,8 @@ const ArtisanShop = () => {
               More Info
             </button>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };
