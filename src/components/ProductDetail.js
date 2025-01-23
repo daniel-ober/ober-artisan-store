@@ -125,15 +125,17 @@ const ProductDetail = () => {
   }
 
   const isSoldOut = product.currentQuantity === 0;
+  const isArtisan = product.category === 'artisan';
+  const showFullSpecs = product.category === 'artisan';
 
   return (
     <div className="product-detail-container">
-      <div className="product-header">
+      {/* <div className="product-header">
         <Link to="/products" className="back-to-shop-link">
           <FaArrowLeft className="back-icon" />
           Back to Shop/Gallery
         </Link>
-      </div>
+      </div> */}
 
       <h1 className="product-title">
         {product?.name || "Unnamed Product"}, {product.depth}&quot; x{" "}
@@ -170,14 +172,34 @@ const ProductDetail = () => {
             <h2>Product Specifications</h2>
             <table className="artisan-specs-table">
               <tbody>
-                <tr>
-                  <td>Type:</td>
-                  <td>{product.drumType}</td>
-                </tr>
-                <tr>
-                  <td>Wood Species:</td>
-                  <td>{speciesList}</td>
-                </tr>
+                {showFullSpecs && (
+                  <>
+                    <tr>
+                      <td>Type:</td>
+                      <td>{product.drumType}</td>
+                    </tr>
+                    <tr>
+                      <td>Construction:</td>
+                      <td>{product.constructionType}</td>
+                    </tr>
+                    <tr>
+                      <td>Wood Species:</td>
+                      <td>{speciesList}</td>
+                    </tr>
+                    <tr>
+                      <td>Depth:</td>
+                      <td>{product.depth}&quot;</td>
+                    </tr>
+                    <tr>
+                      <td>Diameter:</td>
+                      <td>{product.width}&quot;</td>
+                    </tr>
+                    <tr>
+                      <td>Thickness:</td>
+                      <td>{product.thickness}mm</td>
+                    </tr>
+                  </>
+                )}
                 <tr>
                   <td>Description:</td>
                   <td>{product.description}</td>
