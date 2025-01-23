@@ -30,7 +30,7 @@
   
   .image-layer.visible {
     opacity: 1;
-    z-index: 3;
+    z-index: 3; /* Ensure it appears on top */
   }
   
   /* Hover Zones */
@@ -77,7 +77,7 @@
     background: rgba(0, 0, 0, 0.95);
     padding: 1rem 2rem;
     text-align: center;
-    z-index: 5;
+    z-index: 6; /* Ensure above the overlay */
   }
   
   /* Popup Window */
