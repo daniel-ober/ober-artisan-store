@@ -1,15 +1,14 @@
 .artisan-shop {
     position: relative;
     width: 100%;
-    height: 100vh;
+    height: calc(100vh - 70px); /* Adjust height to remove white gap */
     overflow: hidden;
     text-align: center;
-    color: white;
     background: black;
-    margin: 0; /* Remove white gap */
+    margin: 0;
   }
   
-  /* Responsive Hero Image */
+  /* Hero Image Layers */
   .image-layer {
     position: absolute;
     top: 0;
@@ -49,7 +48,6 @@
     cursor: pointer;
   }
   
-  /* Adjust hover zones */
   .hover-zone.heritage {
     top: 40%;
     left: 5%;
@@ -71,25 +69,31 @@
     height: 50%;
   }
   
-  /* Popup Window */
-  .info-popup {
+  /* Popup Container */
+  .popup-container {
     position: absolute;
-    top: 10%;
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: 0;
+    width: 100%;
     background: rgba(0, 0, 0, 0.95);
     padding: 1rem 2rem;
-    border-radius: 8px;
+    text-align: center;
     z-index: 5;
+  }
+  
+  /* Popup Window */
+  .info-popup {
     color: white;
-    max-width: 400px;
-    text-align: left;
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
   }
   
   .popup-image {
-    width: 100%;
+    width: 300px;
     border-radius: 8px;
-    margin-bottom: 1rem;
   }
   
   .info-popup h2 {
@@ -100,30 +104,6 @@
   .info-popup .popup-price {
     font-size: 1.2rem;
     color: #f0b040;
-  }
-  
-  .action-button {
-    margin-top: 1rem;
-    padding: 0.5rem 1.5rem;
-    font-size: 1rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .action-button.add-to-cart {
-    background-color: #28a745;
-    color: white;
-  }
-  
-  .action-button.sold-out {
-    background-color: #d9534f;
-    color: white;
-  }
-  
-  .action-button.pre-order {
-    background-color: #f0ad4e;
-    color: white;
   }
   
   .more-info {
@@ -147,14 +127,22 @@
       height: auto;
     }
   
-    .info-popup {
-      top: 5%;
-      padding: 1rem;
-      font-size: 0.9rem;
-    }
-  
     .hover-zone {
       width: 30%;
       height: 25%;
+    }
+  
+    .popup-container {
+      padding: 1rem;
+    }
+  
+    .info-popup {
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: flex-start;
+    }
+  
+    .popup-image {
+      width: 100%;
     }
   }

@@ -94,13 +94,14 @@ const NavBar = () => {
 
   return (
     <nav className="navbar">
+      {/* Updated Background Video */}
       <video
         className="navbar-background"
         autoPlay
         loop
         muted
         playsInline
-        src={isDarkMode ? '/dark3.mp4' : '/light5.mp4'} // Use Coming Soon video
+        src="/background-web.mp4" // Updated video source
         type="video/mp4"
       />
 
