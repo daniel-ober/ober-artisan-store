@@ -15,6 +15,7 @@ import {
   doc,
   query,
   orderBy,
+  deleteDoc,
 } from 'firebase/firestore';
 import './ManageGallery.css';
 
@@ -92,29 +93,37 @@ const ManageGallery = () => {
 
   const deleteImage = async (image) => {
     const confirmDelete = window.confirm(
-      `Are you sure you want to delete ${image.name}?`
+      `Are you sure you want to delete ${image.name || 'this image'}?`
     );
     if (!confirmDelete) return;
 
     try {
-      const imagePath = decodeURIComponent(
-        image.url.split('?')[0].split('Gallery/')[1]
-      );
-      const imageRef = ref(storage, `Gallery/${imagePath}`);
+      if (!image.url) {
+        throw new Error('Image URL is missing.');
+      }
+
+      const decodedUrl = decodeURIComponent(image.url);
+      const fileName = decodedUrl.substring(decodedUrl.lastIndexOf('/') + 1).split('?')[0];
+      if (!fileName) {
+        throw new Error('Unable to extract file name from URL.');
+      }
+
+      const imagePath = `Gallery/${fileName}`;
+      const imageRef = ref(storage, imagePath);
+
+      // Delete the file from Firebase Storage
       await deleteObject(imageRef);
 
-      await updateDoc(doc(db, 'galleryImages', image.id), { visible: false });
+      // Delete the document from Firestore
+      await deleteDoc(doc(db, 'galleryImages', image.id));
 
+      // Update the state to reflect the changes
       setGalleryImages((prevImages) =>
-        prevImages
-          .filter((img) => img.id !== image.id)
-          .sort((a, b) => {
-            if (a.visible === b.visible) return a.galleryOrder - b.galleryOrder;
-            return a.visible ? -1 : 1;
-          })
+        prevImages.filter((img) => img.id !== image.id)
       );
     } catch (error) {
-      console.error('Failed to delete image:', error);
+      console.error('Failed to delete image:', error.message);
+      alert('Failed to delete the image. Please try again.');
     }
   };
 
