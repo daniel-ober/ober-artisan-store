@@ -3,6 +3,7 @@ import {
   FaUsers,
   FaTags,
   FaShoppingCart,
+  FaBox,
   FaChartLine,
   FaEnvelope,
   FaCog,
@@ -27,8 +28,8 @@ const AdminDashboard = () => {
         return <ManageProducts />;
       case 'manageUsers':
         return <ManageUsers />;
-        case 'manageCarts':
-  return <ManageCarts />;
+      case 'manageCarts':
+        return <ManageCarts />;
       case 'manageOrders':
         return <ManageOrders />;
       case 'salesPipeline':
@@ -71,15 +72,15 @@ const AdminDashboard = () => {
         </div>
 
         <div
-  className="admin-card"
-  role="button"
-  tabIndex={0}
-  onClick={() => setActiveComponent('manageCarts')}
-  onKeyDown={(e) => e.key === 'Enter' && setActiveComponent('manageCarts')}
->
-  <div className="admin-card-icon"><FaShoppingCart /></div>
-  <h3>Manage Carts</h3>
-</div>
+          className="admin-card"
+          role="button"
+          tabIndex={0}
+          onClick={() => setActiveComponent('manageCarts')}
+          onKeyDown={(e) => e.key === 'Enter' && setActiveComponent('manageCarts')}
+        >
+          <div className="admin-card-icon"><FaShoppingCart /></div>
+          <h3>Manage Carts</h3>
+        </div>
 
         <div
           className="admin-card"
@@ -88,7 +89,7 @@ const AdminDashboard = () => {
           onClick={() => setActiveComponent('manageOrders')}
           onKeyDown={(e) => e.key === 'Enter' && setActiveComponent('manageOrders')}
         >
-          <div className="admin-card-icon"><FaShoppingCart /></div>
+          <div className="admin-card-icon"><FaBox /></div>
           <h3>Manage Orders</h3>
         </div>
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { getStorage, ref, listAll, getDownloadURL } from 'firebase/storage';
+import { collection, query, getDocs, orderBy } from 'firebase/firestore';
+import { db } from '../firebaseConfig';
 import './Gallery.css';
 
 const Gallery = () => {
@@ -17,13 +18,15 @@ const Gallery = () => {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const storage = getStorage();
-        const imagesRef = ref(storage, 'Gallery/'); // Adjust path as needed
-        const result = await listAll(imagesRef);
-        const imageUrls = await Promise.all(
-          result.items.map((item) => getDownloadURL(item))
-        );
-        setImages(imageUrls);
+        const galleryCollection = collection(db, 'galleryImages');
+        const q = query(galleryCollection, orderBy('galleryOrder')); // Ensure ordered results
+        const querySnapshot = await getDocs(q);
+
+        const images = querySnapshot.docs
+          .map((doc) => doc.data())
+          .filter((image) => image.visible); // Exclude hidden images
+
+        setImages(images.map((image) => image.url));
       } catch (err) {
         setError('Failed to load gallery images.');
         console.error(err.message);
