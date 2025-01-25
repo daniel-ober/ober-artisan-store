@@ -17,6 +17,7 @@ export const CartProvider = ({ children }) => {
       setLoading(true);
       try {
         if (user) {
+          // Registered user cart logic
           const cartRef = doc(db, "carts", user.uid);
           const cartDoc = await getDoc(cartRef);
           if (cartDoc.exists()) {
@@ -25,19 +26,22 @@ export const CartProvider = ({ children }) => {
           } else {
             setCart({});
             setCartId(user.uid);
-            await setDoc(cartRef, { cart: {}, lastUpdated: serverTimestamp() });
+            await setDoc(cartRef, { cart: {}, userId: user.uid, lastUpdated: serverTimestamp() });
           }
         } else {
+          // Guest cart logic
           const localCart = JSON.parse(localStorage.getItem("cart")) || {};
           const localCartId = localStorage.getItem("cartId");
+
           if (!localCartId) {
             const generatedCartId = `cart-${Date.now()}-${Math.random()
               .toString(36)
               .substring(2, 10)}`;
             localStorage.setItem("cartId", generatedCartId);
             setCartId(generatedCartId);
+
             const cartRef = doc(db, "carts", generatedCartId);
-            await setDoc(cartRef, { cart: {}, lastUpdated: serverTimestamp() });
+            await setDoc(cartRef, { cart: {}, userId: "guest", lastUpdated: serverTimestamp() });
           } else {
             setCartId(localCartId);
             const cartRef = doc(db, "carts", localCartId);
@@ -45,7 +49,7 @@ export const CartProvider = ({ children }) => {
             if (cartDoc.exists()) {
               setCart(cartDoc.data().cart || {});
             } else {
-              await setDoc(cartRef, { cart: {}, lastUpdated: serverTimestamp() });
+              await setDoc(cartRef, { cart: {}, userId: "guest", lastUpdated: serverTimestamp() });
             }
           }
           setCart(localCart);
@@ -70,7 +74,11 @@ export const CartProvider = ({ children }) => {
   const updateFirestoreCart = async (updatedCart) => {
     try {
       const cartRef = doc(db, "carts", user?.uid || cartId);
-      await setDoc(cartRef, { cart: updatedCart, lastUpdated: serverTimestamp() }, { merge: true });
+      await setDoc(
+        cartRef,
+        { cart: updatedCart, userId: user?.uid || "guest", lastUpdated: serverTimestamp() },
+        { merge: true }
+      );
     } catch (err) {
       console.error("Error updating cart in Firestore:", err);
       setError("Error updating cart.");
@@ -81,7 +89,7 @@ export const CartProvider = ({ children }) => {
     setCart({});
     try {
       const cartRef = doc(db, "carts", user?.uid || cartId);
-      await setDoc(cartRef, { cart: {}, lastUpdated: serverTimestamp() });
+      await setDoc(cartRef, { cart: {}, userId: user?.uid || "guest", lastUpdated: serverTimestamp() });
     } catch (err) {
       console.error("Error clearing cart on checkout:", err);
       setError("Error clearing cart.");

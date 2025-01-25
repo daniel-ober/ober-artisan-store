@@ -184,7 +184,9 @@ const Cart = () => {
   return (
     <div className="cart-container">
       <h1 className="cart-title">Shopping Cart</h1>
-      <p className="cart-id">Cart ID: {cartId || localStorage.getItem("cartId")}</p>
+      <p className="cart-id">
+        Cart ID: {(cartId || localStorage.getItem("cartId"))?.slice(-5)}
+      </p>
       {Object.keys(cart || {}).length === 0 ? (
         <div className="cart-empty">Your cart is empty.</div>
       ) : (
@@ -214,7 +216,6 @@ const Cart = () => {
                   </td>
                   <td>
                     <p>{item.name}</p>
-                    {/* <p>{item.description || "No description available."}</p> */}
                   </td>
                   <td>${item.price.toFixed(2)}</td>
                   <td>
@@ -237,7 +238,7 @@ const Cart = () => {
                           item.quantity >= (cart[item.id]?.currentQuantity || 0)
                             ? `Maximum quantity available: ${cart[item.id]?.currentQuantity}`
                             : undefined
-                        } // Tooltip for max quantity
+                        }
                       >
                         +
                       </button>
