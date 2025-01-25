@@ -10,19 +10,13 @@
   font-family: Arial, sans-serif;
 }
 
-/* ========================= */
-/* Manage Gallery Styles     */
-/* ========================= */
-
-/* Removed .manage-gallery { padding: 20px; } block */
-
 /* Upload zone */
 .upload-zone {
   border: 2px dashed #ccc;
   padding: 20px;
   text-align: center;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s ease;
 }
 
 .upload-zone.dragging {
@@ -35,59 +29,120 @@
   flex-wrap: wrap;
   gap: 20px;
   margin-top: 20px;
+  justify-content: center; /* Center align the gallery */
+  position: relative;
 }
 
 /* Gallery item */
 .gallery-item {
+  display: flex;
+  flex-direction: column; /* Arrange content vertically */
+  justify-content: space-between; /* Ensure buttons are always at the bottom */
+  align-items: center;
   border: 1px solid #ddd;
-  border-radius: 5px;
+  border-radius: 8px;
   padding: 10px;
+  width: 150px;
+  height: 220px;
   text-align: center;
   position: relative;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  cursor: grab; /* Indicate draggable state */
+}
+
+.gallery-item:active {
+  cursor: grabbing; /* Indicate grabbing state */
+}
+
+.gallery-item.moving {
+  transform: scale(1.05); /* Enlarge image slightly while dragging */
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  z-index: 1; /* Bring to the front */
+}
+
+.gallery-item.hidden {
+  background-color: #f0f0f0; /* Light gray background for hidden cards */
+  opacity: 0.6; /* Reduce opacity for hidden effect */
 }
 
 .gallery-item img {
-  max-width: 100px;
+  max-width: 100%;
+  max-height: 120px;
+  object-fit: cover; /* Ensure images fit nicely */
   margin-bottom: 10px;
+  border-radius: 5px;
 }
 
+/* Buttons container */
 .gallery-item-buttons {
   display: flex;
-  justify-content: center;
+  justify-content: space-between; /* Space out buttons */
   gap: 10px;
-  margin-top: 10px;
+  margin-top: auto; /* Push the buttons to the bottom */
+  width: 100%; /* Ensure buttons span the full width */
+}
+
+.gallery-item button {
+  flex: 1; /* Equal button widths */
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  text-align: center;
 }
 
 /* Delete button */
 .delete-btn {
   background-color: #e74c3c;
   color: white;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-  border-radius: 3px;
 }
 
 .delete-btn:hover {
   background-color: #c0392b;
 }
 
-/* ========================= */
-/* Responsive Styling        */
-/* ========================= */
+/* Show/Hide button */
+.toggle-visibility-btn {
+  background-color: #3498db;
+  color: white;
+}
+
+.toggle-visibility-btn:hover {
+  background-color: #2980b9;
+}
+
+.gallery-item.hidden .toggle-visibility-btn.show-button:hover {
+  background-color: #27ae60; /* Darker green for hover effect */
+}
+
+/* Smooth swap effect */
+.gallery-item {
+  transition: transform 0.3s ease; /* Smooth transform effect */
+}
+
+.gallery-item.placeholder {
+  visibility: hidden; /* Placeholder visibility during drag */
+  pointer-events: none; /* Disable interactions */
+}
+
+/* Hover effect */
+.gallery-item:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Styling */
 @media (max-width: 768px) {
-  .upload-zone {
-    padding: 15px;
-  }
-  .gallery-item img {
-    max-width: 80px;
-  }
   .gallery-item {
-    padding: 8px;
+    width: 120px;
+    height: 180px;
   }
-  .delete-btn {
-    font-size: 14px;
-    padding: 5px 8px;
+
+  .gallery-item img {
+    max-height: 90px;
   }
 }
 
@@ -96,11 +151,21 @@
     flex-direction: column;
     align-items: center;
   }
-  .gallery-item img {
-    max-width: 60px;
-  }
-  .delete-btn {
+
+  .gallery-item {
     width: 100%;
-    margin-top: 5px;
+    height: auto;
+  }
+
+  .gallery-item img {
+    max-height: 150px;
+  }
+
+  .gallery-item-buttons {
+    flex-direction: column;
+  }
+
+  .gallery-item button {
+    width: 100%;
   }
 }
