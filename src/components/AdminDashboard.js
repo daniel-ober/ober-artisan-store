@@ -15,6 +15,7 @@ import SalesPipeline from './SalesPipeline';
 import ManageInquiries from './ManageInquiries';
 import ManageGallery from './ManageGallery';  // Import ManageGallery component
 import SiteSettings from './SiteSettings';
+import ManageCarts from './ManageCarts'; // Import ManageCarts component
 import './AdminDashboard.css';
 
 const AdminDashboard = () => {
@@ -26,6 +27,8 @@ const AdminDashboard = () => {
         return <ManageProducts />;
       case 'manageUsers':
         return <ManageUsers />;
+        case 'manageCarts':
+  return <ManageCarts />;
       case 'manageOrders':
         return <ManageOrders />;
       case 'salesPipeline':
@@ -66,6 +69,17 @@ const AdminDashboard = () => {
           <div className="admin-card-icon"><FaTags /></div>
           <h3>Manage Products</h3>
         </div>
+
+        <div
+  className="admin-card"
+  role="button"
+  tabIndex={0}
+  onClick={() => setActiveComponent('manageCarts')}
+  onKeyDown={(e) => e.key === 'Enter' && setActiveComponent('manageCarts')}
+>
+  <div className="admin-card-icon"><FaShoppingCart /></div>
+  <h3>Manage Carts</h3>
+</div>
 
         <div
           className="admin-card"

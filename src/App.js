@@ -39,6 +39,7 @@ import AdminSignin from './components/AdminSignin';
 import PathSelection from './components/PathSelection';
 import CustomDrumBuilder from './components/CustomDrumBuilder';
 import SoundProfileRecommendations from './components/SoundProfileRecommendations';
+import UpdateCartsPage from "./components/UpdateCartsPage"; // Import the page
 import './App.css';
 
 function App() {
@@ -164,6 +165,7 @@ function App() {
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/custom-drum-builder" element={<CustomDrumBuilder />} />
           <Route path="/artisan-shop" element={<ArtisanShop />} />
+          <Route path="/admin/update-carts" element={<UpdateCartsPage />} />
           <Route path="/sound-profile-tool" element={<PathSelection setSelectedPath={setSelectedPath} />} />
           <Route path="/custom-drum-builder" element={selectedPath === 'custom-drum-builder' ? <CustomDrumBuilder /> : <Navigate to="/" />} />
           <Route path="/sound-profile-recommendations" element={selectedPath === 'recommendations' ? <SoundProfileRecommendations /> : <Navigate to="/" />} />
