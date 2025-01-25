@@ -1,0 +1,60 @@
+.search-input {
+    margin-bottom: 10px; /* Space below the search box */
+    padding: 10px;
+    font-size: 16px;
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    text-align: center; /* Center text inside the search input */
+}
+  
+.search-input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.filter-container {
+    display: flex;
+    flex-direction: column; /* Stack search and filters */
+    align-items: center; /* Center align the entire filter container */
+    margin-bottom: 20px;
+    gap: 10px; /* Space between search and filter checkbox */
+}
+
+.inline-filters {
+    display: flex;
+    align-items: center; /* Vertically align checkbox and label */
+    gap: 10px; /* Add space between checkbox and label */
+}
+
+.hide-guest-filter {
+    font-size: 16px;
+    color: #333; /* Ensure the text is visible */
+    display: flex;
+    align-items: center;
+}
+
+.hide-guest-filter input {
+    margin-right: 5px;
+    cursor: pointer;
+}
+  
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+  
+.cart-table th,
+.cart-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center; /* Center align table cells */
+}
+  
+.cart-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
