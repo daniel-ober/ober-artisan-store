@@ -1,10 +1,10 @@
-// backend/routes/users.js
 const express = require('express');
 const router = express.Router();
 const admin = require('firebase-admin');
 
 const db = admin.firestore();
 
+// POST route to create an order (existing route)
 router.post('/', async (req, res) => {
     const { customerName, total, items, userId } = req.body;
 
@@ -27,11 +27,28 @@ router.post('/', async (req, res) => {
     }
 });
 
+// GET route to fetch all users
+router.get('/', async (req, res) => {
+    try {
+        const snapshot = await db.collection('users').get();
+        const users = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        const totalCount = users.length; // Get total count
+
+        res.status(200).json({ totalCount, users }); // Return total count and the users
+    } catch (error) {
+        console.error('Error fetching users:', error.message);
+        res.status(500).json({ error: 'Failed to fetch users' });
+    }
+});
+
+// Route to fetch all orders (this already exists)
 router.get('/all', async (req, res) => {
     try {
         const snapshot = await db.collection('orders').get();
         const orders = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-        res.status(200).json(orders);
+        const totalCount = orders.length; // Get total count
+
+        res.status(200).json({ totalCount, orders }); // Return total count and the orders
     } catch (error) {
         console.error('Error fetching orders:', error.message);
         res.status(500).json({ error: 'Failed to fetch orders' });

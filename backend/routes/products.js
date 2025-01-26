@@ -1,9 +1,8 @@
-// backend/routes/products.js
 const express = require('express');
 const router = express.Router();
-const admin = require('firebase-admin'); // Use the already initialized Firebase Admin SDK
+const admin = require('firebase-admin');
 
-const db = admin.firestore(); // Access Firestore instance
+const db = admin.firestore();
 
 router.get('/', async (req, res) => {
     try {
@@ -16,8 +15,9 @@ router.get('/', async (req, res) => {
             id: doc.id,
             ...doc.data(),
         }));
+        const totalCount = products.length; // Get total count
 
-        res.status(200).json(products);
+        res.status(200).json({ totalCount, products }); // Return total count and the products
     } catch (error) {
         console.error('Error fetching products:', error);
         res.status(500).json({ error: 'Failed to fetch products' });

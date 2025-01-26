@@ -1,18 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Button, MenuItem, Select, FormControl, InputLabel, Typography, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
+import {
+  TextField,
+  Button,
+  MenuItem,
+  FormControl,
+  Typography,
+  Select,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { checkAuthentication } from '../authCheck'; 
+import { checkAuthentication } from '../authCheck';
 import { addInquiry, fetchUserProfile } from '../services/firebaseService';
-import { nanoid } from 'nanoid'; 
+import { nanoid } from 'nanoid';
 import './Contact.css';
 
-// Inquiry Categories
 const inquiryCategories = [
   { value: 'Billing', label: 'Billing – Update billing or inquire about payments' },
   { value: 'Custom Shop', label: 'Custom Shop – Custom drum builds or modifications' },
   { value: 'Partner Relations', label: 'Partner Relations – Vendor inquiries or partnership opportunities' },
   { value: 'Product Information', label: 'Product Information – Ask about products or specifications' },
-  { value: 'Shipping & Delivery', label: 'Shipping & Delivery – Get shipping updates or tracking info' },
+  { value: 'Shipping & Delivery', label: 'Shipping updates or tracking info' },
   { value: 'Technical Assistance', label: 'Technical Assistance – Account and login issues' },
   { value: 'Website Feedback', label: 'Website Feedback – Share feedback or ideas' },
   { value: 'Other', label: 'Other' },
@@ -28,12 +38,13 @@ const Contact = () => {
     category: '',
   });
   const [loading, setLoading] = useState(false);
-  const [open, setOpen] = useState(false); 
+  const [open, setOpen] = useState(false); // Popup dialog state
   const navigate = useNavigate();
 
+  // Populate form with user profile if authenticated
   useEffect(() => {
     const fetchUserData = async () => {
-      const user = checkAuthentication(); 
+      const user = checkAuthentication();
       if (user) {
         try {
           const profile = await fetchUserProfile(user.uid);
@@ -68,13 +79,15 @@ const Contact = () => {
     setLoading(true);
 
     try {
-      const inquiryId = nanoid(); 
+      const inquiryId = nanoid();
       await addInquiry({
-        id: inquiryId, 
+        id: inquiryId,
         ...formData,
-        createdAt: new Date(), 
+        origin: 'web-contact', // Add the origin field
+        status: 'New', // Ensure the status is explicitly added
+        createdAt: new Date(),
       });
-      setOpen(true); 
+      setOpen(true); // Open success dialog
       setFormData({
         first_name: '',
         last_name: '',
@@ -92,7 +105,7 @@ const Contact = () => {
 
   const handleClose = () => {
     setOpen(false);
-    navigate('/'); 
+    navigate('/pre-order'); // Redirect to the "Pre-Order" page after success
   };
 
   return (
@@ -101,15 +114,15 @@ const Contact = () => {
         Contact Us
       </Typography>
       <form onSubmit={handleSubmit}>
-              {/* Category Picklist with Fix */}
-              <FormControl fullWidth margin="normal" required>
+        {/* Category Dropdown */}
+        <FormControl fullWidth margin="normal" required>
           <Select
             name="category"
             value={formData.category}
             onChange={handleChange}
             displayEmpty
             className="contact-input"
-          > 
+          >
             <MenuItem value="">
               <div>Select a category</div>
             </MenuItem>
@@ -121,6 +134,7 @@ const Contact = () => {
           </Select>
         </FormControl>
 
+        {/* Form Fields */}
         <TextField
           label="First Name"
           name="first_name"
@@ -161,7 +175,6 @@ const Contact = () => {
           margin="normal"
           className="contact-input"
         />
-
         <TextField
           label="Message"
           name="message"
@@ -173,7 +186,6 @@ const Contact = () => {
           multiline
           rows={4}
           className="contact-input"
-          inputProps={{ minLength: 5 }} 
         />
         <Button
           type="submit"
@@ -186,16 +198,17 @@ const Contact = () => {
         </Button>
       </form>
 
+      {/* Success Dialog */}
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Message Sent</DialogTitle>
         <DialogContent>
           <Typography variant="body1">
-            Your message has been sent successfully! Someone will be in contact with you in the next 1-2 business days.
+            Thank you for reaching out! We&apos;ll get back to you within 2-3 business days. Feel free to explore our current Pre-Order options while you wait.
           </Typography>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
-            OK
+            Continue
           </Button>
         </DialogActions>
       </Dialog>

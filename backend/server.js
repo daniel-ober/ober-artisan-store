@@ -331,16 +331,19 @@ app.get('/api/orders/by-session/:sessionId', async (req, res) => {
 
 // Import and mount routes
 const chatRoute = require('./routes/chat');
-const contactRoute = require('./routes/contact');
+const inquiriesRoute = require('./routes/inquiries');
 const productsRoute = require('./routes/products');
 const ordersRoute = require('./routes/orders');
 const usersRoute = require('./routes/users');
+const cartsRoute = require('./routes/carts');
 
 app.use('/api/chat', chatRoute);
-app.use('/api/contact', contactRoute);
+app.use('/api/inquiries', inquiriesRoute);
 app.use('/api/products', productsRoute);
 app.use('/api/orders', ordersRoute);
 app.use('/api/users', usersRoute);
+app.use('/api/carts', cartsRoute);
+
 
 // Error handling middleware
 app.use((err, req, res, next) => {

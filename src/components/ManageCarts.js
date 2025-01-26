@@ -52,6 +52,7 @@ const ManageCarts = () => {
 
             return {
               id: cartDoc.id,
+              shortId: cartDoc.id.slice(-5), // Extract last 5 digits
               ...cartData,
               totalItems,
               totalAmount,
@@ -192,7 +193,7 @@ const ManageCarts = () => {
         <thead>
           <tr>
             <th onClick={() => sortCarts("id")}>
-              Cart ID (Full) {getSortIndicator("id")}
+              Cart ID {getSortIndicator("id")}
             </th>
             <th onClick={() => sortCarts("user")}>
               User {getSortIndicator("user")}
@@ -212,7 +213,7 @@ const ManageCarts = () => {
           {filteredCarts.length > 0 ? (
             filteredCarts.map((cart) => (
               <tr key={cart.id} onClick={() => handleRowClick(cart)}>
-                <td>{cart.id}</td>
+                <td>{cart.shortId}</td>
                 <td>{cart.userDetails.email}</td>
                 <td>{cart.totalItems}</td>
                 <td>${cart.totalAmount.toFixed(2)}</td>

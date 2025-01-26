@@ -34,6 +34,20 @@
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
 }
 
+.notification-badge {
+  position: absolute; /* Ensures the badge is positioned relative to its container */
+  top: -10px; /* Adjust badge alignment to the icon */
+  right: -10px; /* Adjust badge alignment to the icon */
+  background-color: red; /* Badge color */
+  color: white; /* Text color inside the badge */
+  border-radius: 50%; /* Circular badge */
+  padding: 5px 8px; /* Padding to fit text size */
+  font-size: 0.8rem; /* Font size inside the badge */
+  font-weight: bold; /* Bold text for visibility */
+  z-index: 1; /* Ensures badge is above other elements */
+  display: inline-block; /* Ensures badge is always visible */
+}
+
 /* Card hover effect */
 .admin-card:hover {
   background-color: #e7e7e7;
@@ -43,6 +57,7 @@
 
 /* Icon styling */
 .admin-card-icon {
+  position: relative; /* Allows notification badge to position relative to the icon */
   font-size: 2.0rem;
   margin-bottom: 12px;
   color: #444;
@@ -99,7 +114,7 @@ h1 {
 
   .admin-card {
     width: 100%; /* Full-width for smaller screens */
-    }
+  }
 
   .admin-card-icon {
     font-size: 2rem; /* Slightly smaller icons for smaller screens */

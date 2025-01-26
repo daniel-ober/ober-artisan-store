@@ -1,43 +1,126 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   FaUsers,
-  FaTags,
+  FaDrum,
   FaShoppingCart,
   FaBox,
-  FaChartLine,
+  FaDollarSign,
   FaEnvelope,
   FaCog,
-  FaImages
+  FaImages,
 } from 'react-icons/fa';
 import ManageProducts from './ManageProducts';
 import ManageUsers from './ManageUsers';
 import ManageOrders from './ManageOrders';
 import SalesPipeline from './SalesPipeline';
 import ManageInquiries from './ManageInquiries';
-import ManageGallery from './ManageGallery';  // Import ManageGallery component
+import ManageGallery from './ManageGallery';
 import SiteSettings from './SiteSettings';
-import ManageCarts from './ManageCarts'; // Import ManageCarts component
+import ManageCarts from './ManageCarts';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../firebaseConfig';
 import './AdminDashboard.css';
 
 const AdminDashboard = () => {
   const [activeComponent, setActiveComponent] = useState(null);
 
+  // Notification counts
+  const [notifications, setNotifications] = useState({
+    manageProducts: 0,
+    manageCarts: 0,
+    manageOrders: 0,
+    manageInquiries: 0, // For "New" inquiries only
+  });
+
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      try {
+        const [
+          productsOutOfStock,
+          unfulfilledOrders,
+          newInquiriesCount,
+        ] = await Promise.all([
+          getOutOfStockProductsCount(),
+          getUnfulfilledOrdersCount(),
+          getNewInquiriesCount(),
+        ]);
+
+        setNotifications((prev) => ({
+          ...prev,
+          manageProducts: productsOutOfStock,
+          manageOrders: unfulfilledOrders,
+          manageInquiries: newInquiriesCount, // Badge count for Manage Inquiries
+        }));
+      } catch (error) {
+        console.error('Error fetching notifications:', error.message);
+      }
+    };
+
+    fetchNotifications();
+  }, []);
+
+  // Fetch out-of-stock products count
+  const getOutOfStockProductsCount = async () => {
+    try {
+      const response = await fetch('http://localhost:4949/api/products');
+      if (!response.ok) throw new Error('Failed to fetch products');
+      const data = await response.json();
+
+      return data.products.filter((product) => product.currentQuantity === 0)
+        .length;
+    } catch (error) {
+      console.error('Error fetching products:', error.message);
+      return 0;
+    }
+  };
+
+  // Fetch unfulfilled orders count
+  const getUnfulfilledOrdersCount = async () => {
+    try {
+      const ordersCollection = collection(db, 'orders');
+      const orderSnapshot = await getDocs(ordersCollection);
+      const orders = orderSnapshot.docs.map((doc) => doc.data());
+
+      // Count orders not equal to "Order Fulfilled"
+      return orders.filter((order) => order.currentStage !== 'Order Fulfilled')
+        .length;
+    } catch (error) {
+      console.error('Error fetching orders:', error.message);
+      return 0;
+    }
+  };
+
+  // Fetch "New" inquiries count
+  const getNewInquiriesCount = async () => {
+    try {
+      const inquiriesCollection = collection(db, 'inquiries');
+      const inquirySnapshot = await getDocs(inquiriesCollection);
+      const inquiries = inquirySnapshot.docs.map((doc) => doc.data());
+
+      // Count inquiries with the status "New"
+      return inquiries.filter((inquiry) => inquiry.status === 'New').length;
+    } catch (error) {
+      console.error('Error fetching inquiries:', error.message);
+      return 0;
+    }
+  };
+
   const renderActiveComponent = () => {
     switch (activeComponent) {
+      case 'manageOrders':
+        return <ManageOrders />;
+      case 'manageInquiries':
+        return <ManageInquiries />;
       case 'manageProducts':
         return <ManageProducts />;
+      case 'salesPipeline':
+        return <SalesPipeline />;
       case 'manageUsers':
         return <ManageUsers />;
       case 'manageCarts':
         return <ManageCarts />;
-      case 'manageOrders':
-        return <ManageOrders />;
-      case 'salesPipeline':
-        return <SalesPipeline />;
-      case 'manageInquiries':
-        return <ManageInquiries />;
       case 'manageGallery':
-        return <ManageGallery />;  // Render ManageGallery when selected
+        return <ManageGallery />;
       case 'siteSettings':
         return <SiteSettings />;
       default:
@@ -49,98 +132,49 @@ const AdminDashboard = () => {
     <div className="admin-dashboard">
       <h1>Admin Dashboard</h1>
       <div className="admin-cards">
-        <div
-          className="admin-card"
-          role="button"
-          tabIndex={0}
-          onClick={() => setActiveComponent('manageUsers')}
-          onKeyDown={(e) => e.key === 'Enter' && setActiveComponent('manageUsers')}
-        >
-          <div className="admin-card-icon"><FaUsers /></div>
-          <h3>Manage Users</h3>
-        </div>
-
-        <div
-          className="admin-card"
-          role="button"
-          tabIndex={0}
-          onClick={() => setActiveComponent('manageProducts')}
-          onKeyDown={(e) => e.key === 'Enter' && setActiveComponent('manageProducts')}
-        >
-          <div className="admin-card-icon"><FaTags /></div>
-          <h3>Manage Products</h3>
-        </div>
-
-        <div
-          className="admin-card"
-          role="button"
-          tabIndex={0}
-          onClick={() => setActiveComponent('manageCarts')}
-          onKeyDown={(e) => e.key === 'Enter' && setActiveComponent('manageCarts')}
-        >
-          <div className="admin-card-icon"><FaShoppingCart /></div>
-          <h3>Manage Carts</h3>
-        </div>
-
-        <div
-          className="admin-card"
-          role="button"
-          tabIndex={0}
-          onClick={() => setActiveComponent('manageOrders')}
-          onKeyDown={(e) => e.key === 'Enter' && setActiveComponent('manageOrders')}
-        >
-          <div className="admin-card-icon"><FaBox /></div>
-          <h3>Manage Orders</h3>
-        </div>
-
-        <div
-          className="admin-card"
-          role="button"
-          tabIndex={0}
-          onClick={() => setActiveComponent('salesPipeline')}
-          onKeyDown={(e) => e.key === 'Enter' && setActiveComponent('salesPipeline')}
-        >
-          <div className="admin-card-icon"><FaChartLine /></div>
-          <h3>Sales Pipeline</h3>
-        </div>
-
-        <div
-          className="admin-card"
-          role="button"
-          tabIndex={0}
-          onClick={() => setActiveComponent('manageInquiries')}
-          onKeyDown={(e) => e.key === 'Enter' && setActiveComponent('manageInquiries')}
-        >
-          <div className="admin-card-icon"><FaEnvelope /></div>
-          <h3>Manage Inquiries</h3>
-        </div>
-
-        {/* New Manage Gallery Card */}
-        <div
-          className="admin-card"
-          role="button"
-          tabIndex={0}
-          onClick={() => setActiveComponent('manageGallery')}
-          onKeyDown={(e) => e.key === 'Enter' && setActiveComponent('manageGallery')}
-        >
-          <div className="admin-card-icon"><FaImages /></div>
-          <h3>Manage Gallery</h3>
-        </div>
-
-        <div
-          className="admin-card"
-          role="button"
-          tabIndex={0}
-          onClick={() => setActiveComponent('siteSettings')}
-          onKeyDown={(e) => e.key === 'Enter' && setActiveComponent('siteSettings')}
-        >
-          <div className="admin-card-icon"><FaCog /></div>
-          <h3>Site Settings</h3>
-        </div>
+        {[
+          {
+            name: 'Manage Inquiries',
+            icon: FaEnvelope,
+            stateKey: 'manageInquiries',
+          },
+          {
+            name: 'Sales Pipeline',
+            icon: FaDollarSign,
+            stateKey: 'salesPipeline',
+          },
+          { name: 'Manage Orders', icon: FaBox, stateKey: 'manageOrders' },
+          { name: 'Manage Products', icon: FaDrum, stateKey: 'manageProducts' },
+          { name: 'Manage Users', icon: FaUsers, stateKey: 'manageUsers' },
+          {
+            name: 'Manage Carts',
+            icon: FaShoppingCart,
+            stateKey: 'manageCarts',
+          },
+          { name: 'Manage Gallery', icon: FaImages, stateKey: 'manageGallery' },
+          { name: 'Site Settings', icon: FaCog, stateKey: 'siteSettings' },
+        ].map(({ name, icon: Icon, stateKey }) => (
+          <div
+            key={stateKey}
+            className="admin-card"
+            role="button"
+            tabIndex={0}
+            onClick={() => setActiveComponent(stateKey)}
+            onKeyDown={(e) => e.key === 'Enter' && setActiveComponent(stateKey)}
+          >
+            <div className="admin-card-icon">
+              <Icon />
+              {notifications[stateKey] > 0 && (
+                <span className="notification-badge">
+                  {notifications[stateKey]}
+                </span>
+              )}
+            </div>
+            <h3>{name}</h3>
+          </div>
+        ))}
       </div>
-      <div className="component-container">
-        {renderActiveComponent()}
-      </div>
+      <div className="component-container">{renderActiveComponent()}</div>
     </div>
   );
 };
