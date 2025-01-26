@@ -41,6 +41,38 @@
   margin: 0 auto; /* Center the container */
 }
 
+/* Badge for new inquiries */
+.manage-inquiries .badge {
+  background-color: #e74c3c; /* Red badge color */
+  color: white; /* White text */
+  font-size: 12px; /* Adjust font size */
+  padding: 5px 10px; /* Add padding for better visibility */
+  border-radius: 12px; /* Rounded badge */
+  margin-left: 10px; /* Add spacing from the header text */
+}
+
+/* Filter checkboxes */
+.manage-inquiries .filters {
+  margin-bottom: 15px; /* Add spacing below filters */
+}
+
+.filter-checkbox {
+  display: inline-flex; /* Align checkbox and text horizontally */
+  align-items: center; /* Vertically align the text */
+  margin-right: 15px; /* Add spacing between checkboxes */
+}
+
+.filter-checkbox input {
+  margin-right: 5px; /* Add space between checkbox and label */
+}
+
+.filter-checkbox label {
+  color: black; /* Ensure the text is visible */
+  font-size: 14px; /* Set readable font size */
+  font-weight: normal; /* Normal font weight */
+  text-shadow: none; /* Remove any shadows */
+}
+
 /* Buttons */
 .refresh-btn {
   margin-bottom: 20px;
@@ -57,7 +89,16 @@
 }
 
 .view-btn {
-  
+  padding: 6px 12px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.view-btn:hover {
+  background-color: #2980b9;
 }
 
 /* ========================= */

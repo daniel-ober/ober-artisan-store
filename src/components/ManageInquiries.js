@@ -6,11 +6,15 @@ import './ManageInquiries.css';
 
 const ManageInquiries = () => {
   const [inquiries, setInquiries] = useState([]);
-  const [sortedInquiries, setSortedInquiries] = useState([]);
+  const [filteredInquiries, setFilteredInquiries] = useState([]);
   const [selectedInquiry, setSelectedInquiry] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [sortConfig, setSortConfig] = useState({ key: '', direction: '' });
   const [loading, setLoading] = useState(false);
+
+  const [showSupportClosed, setShowSupportClosed] = useState(false);
+  const [showSalesClosedWon, setShowSalesClosedWon] = useState(false);
+  const [showSalesClosedLost, setShowSalesClosedLost] = useState(false);
 
   const fetchInquiries = async () => {
     setLoading(true);
@@ -35,7 +39,7 @@ const ManageInquiries = () => {
       });
 
       setInquiries(inquiriesList);
-      setSortedInquiries(inquiriesList);
+      applyFilters(inquiriesList);
     } catch (error) {
       console.error('Error fetching inquiries:', error);
     } finally {
@@ -47,16 +51,23 @@ const ManageInquiries = () => {
     fetchInquiries();
   }, []);
 
+  useEffect(() => {
+    applyFilters(inquiries);
+  }, [showSupportClosed, showSalesClosedWon, showSalesClosedLost]);
+
   const handleRefresh = () => {
     fetchInquiries();
   };
 
-  const applySorting = (list, key, direction) => {
-    return [...list].sort((a, b) => {
-      if (a[key] < b[key]) return direction === 'asc' ? -1 : 1;
-      if (a[key] > b[key]) return direction === 'asc' ? 1 : -1;
-      return 0;
+  const applyFilters = (inquiriesList) => {
+    const filteredList = inquiriesList.filter((inquiry) => {
+      if (!showSupportClosed && inquiry.status === 'Support - Closed') return false;
+      if (!showSalesClosedWon && inquiry.status === 'Sales - Closed Won') return false;
+      if (!showSalesClosedLost && inquiry.status === 'Sales - Closed Lost') return false;
+      return true;
     });
+
+    setFilteredInquiries(filteredList);
   };
 
   const handleSort = (key) => {
@@ -69,10 +80,14 @@ const ManageInquiries = () => {
     setSortConfig({ key, direction });
 
     const sortedList = direction
-      ? applySorting(inquiries, key, direction)
-      : inquiries;
+      ? [...filteredInquiries].sort((a, b) => {
+          if (a[key] < b[key]) return direction === 'asc' ? -1 : 1;
+          if (a[key] > b[key]) return direction === 'asc' ? 1 : -1;
+          return 0;
+        })
+      : filteredInquiries;
 
-    setSortedInquiries(sortedList);
+    setFilteredInquiries(sortedList);
   };
 
   const handleStatusUpdate = async (inquiryId, newStatus) => {
@@ -85,30 +100,9 @@ const ManageInquiries = () => {
       );
 
       setInquiries(updatedInquiries);
-      setSortedInquiries(updatedInquiries);
+      applyFilters(updatedInquiries);
     } catch (error) {
       console.error('Error updating status:', error);
-    }
-  };
-
-  const handleConvertToLead = async (inquiryId) => {
-    try {
-      const inquiryRef = doc(db, 'inquiries', inquiryId);
-      await updateDoc(inquiryRef, {
-        convertToSales: true,
-        status: 'Converted to Sales',
-      });
-
-      const updatedInquiries = inquiries.map((inquiry) =>
-        inquiry.id === inquiryId
-          ? { ...inquiry, convertToSales: true, status: 'Converted to Sales',  salesStage: 'Prospecting' }
-          : inquiry
-      );
-
-      setInquiries(updatedInquiries);
-      setSortedInquiries(updatedInquiries);
-    } catch (error) {
-      console.error('Error converting to sales lead:', error);
     }
   };
 
@@ -122,18 +116,25 @@ const ManageInquiries = () => {
       const updatedInquiries = inquiries.filter((inquiry) => inquiry.id !== inquiryId);
 
       setInquiries(updatedInquiries);
-      setSortedInquiries(updatedInquiries);
+      applyFilters(updatedInquiries);
     } catch (error) {
       console.error('Error deleting inquiry:', error);
     }
+  };
+
+  const handleViewInquiry = (inquiry) => {
+    setSelectedInquiry(inquiry); // Set the selected inquiry
+    setIsModalOpen(true); // Open the modal
   };
 
   const getStatusClass = (status) => {
     switch (status) {
       case 'New':
         return 'status-new';
-      case 'Converted to Sales':
-        return 'status-converted';
+      case 'Support - In Progress':
+        return 'status-in-progress';
+      case 'Sales - Prospecting':
+        return 'status-prospecting';
       default:
         return 'status-other';
     }
@@ -148,52 +149,78 @@ const ManageInquiries = () => {
         </button>
       </div>
 
+      <div className="filters">
+        <label className="filter-checkbox">
+          <input
+            type="checkbox"
+            checked={showSupportClosed}
+            onChange={(e) => setShowSupportClosed(e.target.checked)}
+          />
+          Show Support - Closed
+        </label>
+        <label className="filter-checkbox">
+          <input
+            type="checkbox"
+            checked={showSalesClosedWon}
+            onChange={(e) => setShowSalesClosedWon(e.target.checked)}
+          />
+          Show Sales - Closed Won
+        </label>
+        <label className="filter-checkbox">
+          <input
+            type="checkbox"
+            checked={showSalesClosedLost}
+            onChange={(e) => setShowSalesClosedLost(e.target.checked)}
+          />
+          Show Sales - Closed Lost
+        </label>
+      </div>
+
       <table className="manage-inquiries-table">
         <thead>
           <tr>
             <th onClick={() => handleSort('createdAt')}>Created At</th>
             <th>Name</th>
             <th>Category</th>
-            {/* <th>Origin</th> */}
             <th onClick={() => handleSort('status')}>Status</th>
-            {/* <th onClick={() => handleSort('email')}>Email</th> */}
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {sortedInquiries.map((inquiry) => (
+          {filteredInquiries.map((inquiry) => (
             <tr key={inquiry.id} className={getStatusClass(inquiry.status)}>
               <td>{inquiry.createdAt}</td>
               <td>{inquiry.name}</td>
               <td>{inquiry.category}</td>
-              {/* <td>{inquiry.origin}</td> */}
               <td>
                 <select
                   value={inquiry.status}
                   onChange={(e) => handleStatusUpdate(inquiry.id, e.target.value)}
                 >
                   <option value="New">New</option>
-                  <option value="In Progress - Artisan">In Progress</option>
-                  <option value="Converted to Sales">Converted to Sales</option>
-                  <option value="Closed">Closed</option>
+                  <option value="Support - In Progress">Support - In Progress</option>
+                  <option value="Support - Closed">Support - Closed</option>
+                  <option value="Sales - Prospecting">Sales - Prospecting</option>
+                  <option value="Sales - Closed Won">Sales - Closed Won</option>
+                  <option value="Sales - Closed Lost">Sales - Closed Lost</option>
                 </select>
               </td>
-              {/* <td>{inquiry.email}</td> */}
               <td>
-                <button className="view-btn">View</button>
-                {/* <button className="delete-btn" onClick={() => handleDeleteInquiry(inquiry.id)}>Delete</button> */}
-                {/* <button
-                  className="convert-btn"
-                  onClick={() => handleConvertToLead(inquiry.id)}
-                  disabled={inquiry.convertToSales}
-                >
-                  {inquiry.convertToSales ? 'CONVERTED' : 'Convert to Sales'}
-                </button> */}
+                <button className="view-btn" onClick={() => handleViewInquiry(inquiry)}>
+                  View
+                </button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+
+      {isModalOpen && selectedInquiry && (
+        <ViewInquiryModal
+          inquiry={selectedInquiry}
+          onClose={() => setIsModalOpen(false)}
+        />
+      )}
     </div>
   );
 };
