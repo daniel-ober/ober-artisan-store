@@ -27,20 +27,17 @@ body.light {
 body.light .navbar,
 body.light .footer,
 body.light .app-content {
-  /* background-color: #f0f0f0; */
-  /* color: #000000; */
+  color: #000000;
 }
 
 /* Dark Mode Styles */
 body.dark {
-  /* background-color: #000000; */
   color: #ffffff;
 }
 
 body.dark .navbar,
 body.dark .footer,
 body.dark .app-content {
-  /* background-color: #222; */
   color: #ffffff;
 }
 
@@ -50,6 +47,19 @@ body.dark .cart-preview {
   color: #ffffff;
 }
 
-body.dark * {
-  color: #ffffff; /* Keep text color white */
+/* Ensure all labels have proper text visibility */
+body label {
+  color: black !important; /* Make all labels default to black text */
+}
+
+/* Specific fix for 'Show' filter labels in Manage Inquiries */
+body .manage-inquiries .filters label {
+  color: black !important; /* Ensure visibility for filter labels */
+  font-size: 14px; /* Make text size consistent */
+  font-weight: normal;
+}
+
+/* Force the label text for 'Hide Fulfilled Orders' to be black */
+body .manage-orders .hide-fulfilled-label {
+  color: black !important;
 }
