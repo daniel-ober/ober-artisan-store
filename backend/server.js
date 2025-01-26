@@ -205,28 +205,28 @@ app.post(
         console.error('Error updating product quantities:', error.message);
       }
 
-      // Prepare order data
-      const orderData = {
-        stripeSessionId: session.id || null,
-        userId: session.metadata?.userId || 'guest',
-        guestToken: session.metadata?.guestToken || null,
-        customerName: session.customer_details?.name || 'No Name Provided',
-        customerEmail: session.customer_details?.email || 'No Email Provided',
-        customerPhone: session.customer_details?.phone || 'No Phone Provided',
-        customerAddress: session.customer_details?.address
-          ? `${session.customer_details.address.line1 || ''}, ${session.customer_details.address.city || ''}, ${session.customer_details.address.postal_code || ''}, ${session.customer_details.address.country || ''}`
-          : 'No Address Provided',
-        shippingDetails: session.shipping?.address
-          ? `${session.shipping.address.line1 || ''}, ${session.shipping.address.city || ''}, ${session.shipping.address.state || ''}, ${session.shipping.address.country || ''}, ${session.shipping.address.postal_code || ''}`
-          : 'No Shipping Details Provided',
-        paymentMethod: session.payment_method_types?.[0] || 'Unknown',
-        cardDetails, // Include card details
-        totalAmount: session.amount_total / 100 || 0, // Convert to dollars
-        currency: session.currency || 'usd',
-        status: session.payment_status || 'unpaid',
-        items, // Include line items
-        createdAt: admin.firestore.FieldValue.serverTimestamp(), // Firestore timestamp
-      };
+ // Prepare order data
+const orderData = {
+    stripeSessionId: session.id || null,
+    userId: session.metadata?.userId || 'guest',
+    guestToken: session.metadata?.guestToken || null,
+    customerName: session.customer_details?.name || 'No Name Provided',
+    customerEmail: session.customer_details?.email || 'No Email Provided',
+    customerPhone: session.customer_details?.phone || 'No Phone Provided',
+    customerAddress: session.customer_details?.address
+      ? `${session.customer_details.address.line1 || ''}, ${session.customer_details.address.city || ''}, ${session.customer_details.address.postal_code || ''}, ${session.customer_details.address.country || ''}`
+      : 'No Address Provided',
+    shippingDetails: session.shipping?.address
+      ? `${session.shipping.address.line1 || ''}, ${session.shipping.address.city || ''}, ${session.shipping.address.state || ''}, ${session.shipping.address.country || ''}, ${session.shipping.address.postal_code || ''}`
+      : 'No Shipping Details Provided',
+    paymentMethod: session.payment_method_types?.[0] || 'Unknown',
+    cardDetails, // Include card details
+    totalAmount: session.amount_total / 100 || 0, // Convert to dollars
+    currency: session.currency || 'usd',
+    status: 'Order Started', // Set to "Order Started" by default
+    items, // Include line items
+    createdAt: admin.firestore.FieldValue.serverTimestamp(), // Firestore timestamp
+  };
 
       console.log('Order Data Prepared:', orderData);
 

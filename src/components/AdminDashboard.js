@@ -4,7 +4,7 @@ import {
   FaDrum,
   FaShoppingCart,
   FaBox,
-  FaDollarSign,
+  FaHammer,
   FaEnvelope,
   FaCog,
   FaImages,
@@ -12,11 +12,12 @@ import {
 import ManageProducts from './ManageProducts';
 import ManageUsers from './ManageUsers';
 import ManageOrders from './ManageOrders';
-import SalesPipeline from './SalesPipeline';
+// import SalesPipeline from './SalesPipeline';
 import ManageInquiries from './ManageInquiries';
 import ManageGallery from './ManageGallery';
 import SiteSettings from './SiteSettings';
 import ManageCarts from './ManageCarts';
+import InProduction from './InProduction';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import './AdminDashboard.css';
@@ -113,8 +114,8 @@ const AdminDashboard = () => {
         return <ManageInquiries />;
       case 'manageProducts':
         return <ManageProducts />;
-      case 'salesPipeline':
-        return <SalesPipeline />;
+      case 'inProduction':
+        return <InProduction />;
       case 'manageUsers':
         return <ManageUsers />;
       case 'manageCarts':
@@ -139,9 +140,9 @@ const AdminDashboard = () => {
             stateKey: 'manageInquiries',
           },
           {
-            name: 'Sales Pipeline',
-            icon: FaDollarSign,
-            stateKey: 'salesPipeline',
+            name: 'In Production',
+            icon: FaHammer,
+            stateKey: 'inProduction',
           },
           { name: 'Manage Orders', icon: FaBox, stateKey: 'manageOrders' },
           { name: 'Manage Products', icon: FaDrum, stateKey: 'manageProducts' },
