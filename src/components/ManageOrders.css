@@ -1,4 +1,7 @@
-/* Shared container styling for consistency */
+/* ======================== */
+/* General Container Styles */
+/* ======================== */
+
 .manage-orders,
 .manage-users,
 .manage-products-container,
@@ -11,46 +14,68 @@
 }
 
 /* ======================== */
-/* Manage Users Styles      */
+/* Manage Orders Styles     */
 /* ======================== */
 
-/* Table */
-.manage-users-table {
+/* Specific style for the "Hide Fulfilled Orders" label */
+.manage-orders .hide-fulfilled-label {
+  color: black !important; /* Ensure text is black */
+  font-size: 14px; /* Set readable font size */
+  font-weight: normal; /* Keep the font-weight normal */
+  display: flex; /* Align items horizontally */
+  align-items: center; /* Vertically align the checkbox and text */
+  gap: 5px; /* Add spacing between checkbox and text */
+  background: none; /* Remove any parent background interference */
+  text-shadow: none; /* Remove shadows */
+  margin-bottom: 10px; /* Add some spacing below */
+}
+
+/* Ensure the checkbox itself is styled properly */
+.manage-orders .hide-fulfilled-label input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+/* ======================== */
+/* Table Styles             */
+/* ======================== */
+
+.manage-orders-table {
   width: 100%; /* Ensure table takes full width */
   border-collapse: collapse;
   margin-top: 20px;
 }
 
-.manage-users-table th,
-.manage-users-table td {
+.manage-orders-table th,
+.manage-orders-table td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: left;
   font-size: 14px;
 }
 
-.manage-users-table th {
+.manage-orders-table th {
   background-color: #f2f2f2;
   font-weight: bold;
 }
 
-/* Responsive scroll behavior */
-.manage-users-container {
-  overflow-x: auto; /* Enable horizontal scrolling */
-  max-width: 100%; /* Ensure container fits within the viewport */
-  margin: 0 auto; /* Center the container */
+.manage-orders-container {
+  overflow-x: auto;
+  max-width: 100%;
+  margin: 0 auto;
 }
 
-/* Search Bar */
+/* ======================== */
+/* Search Bar and Buttons   */
+/* ======================== */
+
 .search-bar {
-  width: 100%; /* Ensure search bar fits within the container */
+  width: 100%;
   padding: 10px;
   margin-bottom: 20px;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
 
-/* Add Button */
 .add-btn {
   margin-bottom: 20px;
   padding: 10px 15px;
@@ -65,10 +90,14 @@
   background-color: #2980b9;
 }
 
+/* ======================== */
+/* Responsive Styles        */
+/* ======================== */
+
 @media (max-width: 768px) {
   .manage-orders-table th[data-label="Status"],
   .manage-orders-table td[data-label="Status"] {
-    display: none; /* Hide Status column */
+    display: none;
   }
 
   .manage-orders-table th,
@@ -81,7 +110,7 @@
 @media (max-width: 480px) {
   .manage-orders-table th[data-label="Total"],
   .manage-orders-table td[data-label="Total"] {
-    display: none; /* Optionally hide Total column for very small screens */
+    display: none;
   }
 
   .manage-orders-table th,

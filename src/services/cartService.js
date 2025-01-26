@@ -1,4 +1,3 @@
-// src/services/cartService.js
 import { firestore } from '../firebaseConfig';
 import { 
   doc, 
@@ -10,6 +9,10 @@ import {
   getDocs, 
   writeBatch 
 } from 'firebase/firestore';
+import axios from 'axios'; // Added for making API requests
+
+// Ensure Axios is configured with the correct base URL
+axios.defaults.baseURL = 'http://localhost:4949'; // Update this if your backend URL is different
 
 const cartCollection = (userId) => collection(firestore, `carts/${userId}/items`);
 const productCollection = collection(firestore, 'products'); // Assumes products are stored in a Firestore collection
@@ -95,5 +98,22 @@ export const clearCart = async (userId) => {
   } catch (error) {
     console.error('Error clearing cart:', error.message);
     throw error;
+  }
+};
+
+/**
+ * Fetch carts not updated in the past 5 days and their total count
+ */
+export const getCartsWithNotificationCount = async () => {
+  try {
+    console.log('Fetching carts with notification count...');
+    const response = await axios.get('/api/carts'); // Ensure baseURL is configured
+    console.log('Carts API Response:', response.data); // Log the response
+    return response.data; // Returns an object with totalCount and carts
+  } catch (error) {
+    console.error('Error in getCartsWithNotificationCount:', error.response?.data || error.message);
+    throw new Error(
+      error.response?.data?.message || 'Failed to fetch carts with notification count'
+    );
   }
 };

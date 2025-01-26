@@ -11,31 +11,33 @@ const db = admin.firestore();
 
 // POST route for contact form
 router.post('/', async (req, res) => {
-    const { first_name, last_name, email, phone, message, category } = req.body;
+    const { first_name, last_name, email, phone, message } = req.body;
 
     // Validate required fields
-    if (!first_name || !last_name || !email || !message || !category) {
+    if (!first_name || !last_name || !email || !message) {
         return res.status(400).json({ error: 'Missing required fields' });
     }
 
-    // Validate email format
+    // Validate email format (optional)
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
         return res.status(400).json({ error: 'Invalid email format' });
     }
 
     try {
-        // Inquiry data to be saved
+        // Add "status: New" field to the inquiry data
         const contactData = {
             first_name,
             last_name,
             email,
-            phone: phone || '', // Default to empty if not provided
             message,
-            category,
-            status: 'New', // Default status
+            status: 'New', // Add the "status" field
             createdAt: admin.firestore.FieldValue.serverTimestamp(),
+            ...(phone && { phone }), // Include phone only if provided
         };
+
+        // Log contactData to verify
+        console.log('Contact Data:', contactData);
 
         // Add document to Firestore
         const docRef = await db.collection('inquiries').add(contactData);
@@ -48,13 +50,14 @@ router.post('/', async (req, res) => {
     }
 });
 
-// GET route to fetch all inquiries
+// GET route to fetch all inquiries with total count
 router.get('/', async (req, res) => {
     try {
         const snapshot = await db.collection('inquiries').get();
-        const inquiries = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+        const inquiries = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        const totalCount = inquiries.length;
 
-        res.status(200).json({ inquiries });
+        res.status(200).json({ totalCount, inquiries });
     } catch (error) {
         console.error('Error fetching inquiries:', error);
         res.status(500).json({ error: 'Failed to fetch inquiries' });
