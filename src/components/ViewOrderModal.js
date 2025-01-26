@@ -1,203 +1,251 @@
-import React, { useRef, useState } from 'react';
-import './ViewOrderModal.css';
+import React, { useEffect, useState } from "react";
+import { doc, getDoc, updateDoc, arrayUnion } from "firebase/firestore";
+import { db } from "../firebaseConfig";
+import "./ViewOrderModal.css";
 
-const logoUrl = "https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/images%2Flogo%20A%20-%20main%20concept(large)%20.png?alt=media&token=a6ee039e-82c9-4a0d-8322-b6942bed48ba";
+const ITEM_STATUSES = [
+  "Preparing",
+  "Back Ordered",
+  "Packaged",
+  "Ready for Shipment",
+  "Shipped",
+  "Delivered",
+  "Canceled",
+];
 
-const ViewOrderModal = ({ order, onClose }) => {
-  const modalRef = useRef();
-  const [isEditing, setIsEditing] = useState({
-    customerName: false,
-    customerEmail: false,
-    customerPhone: false,
-    shippingAddress: false,
-    billingAddress: false,
-    status: false,
-    internalNotes: false,
-  });
+const ViewOrderModal = ({ isOpen, onClose, orderDetails }) => {
+  const [internalNotes, setInternalNotes] = useState([]);
+  const [systemHistory, setSystemHistory] = useState([]);
+  const [newNote, setNewNote] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [items, setItems] = useState(orderDetails.items || []);
+  const [orderStatus, setOrderStatus] = useState(orderDetails.status || "Order Started");
 
-  const [editableValues, setEditableValues] = useState({
-    customerName: order.customerName || "N/A",
-    customerEmail: order.customerEmail || "N/A",
-    customerPhone: order.customerPhone || "N/A",
-    shippingAddress: order.shippingAddress || "N/A",
-    billingAddress: order.billingAddress || "N/A",
-    status: order.status || "N/A",
-    internalNotes: order.internalNotes || "No notes available.",
-  });
+  useEffect(() => {
+    const fetchOrderDetails = async () => {
+      try {
+        const orderRef = doc(db, "orders", orderDetails.id);
+        const orderDoc = await getDoc(orderRef);
+        if (orderDoc.exists()) {
+          const data = orderDoc.data();
+          setInternalNotes(
+            data.internalNotes?.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)) || []
+          );
+          setSystemHistory(
+            data.systemHistory?.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)) || []
+          );
+          setItems(data.items || []);
+          setOrderStatus(data.status || "Order Started");
+        }
+      } catch (error) {
+        console.error("Error fetching order details:", error);
+      }
+    };
 
-  const handleEditToggle = (field) => {
-    setIsEditing((prevState) => ({
-      ...prevState,
-      [field]: !prevState[field],
-    }));
-  };
+    fetchOrderDetails();
+  }, [orderDetails.id]);
 
-  const handleDoubleClick = (field) => {
-    setIsEditing((prevState) => ({
-      ...prevState,
-      [field]: true,
-    }));
-  };
+  const handleAddNote = async () => {
+    if (!newNote.trim()) return alert("Note cannot be empty.");
+    setLoading(true);
 
-  const handleBlur = (field) => {
-    setIsEditing((prevState) => ({
-      ...prevState,
-      [field]: false,
-    }));
-  };
+    try {
+      const orderRef = doc(db, "orders", orderDetails.id);
+      const note = {
+        text: newNote,
+        timestamp: new Date().toISOString(),
+      };
 
-  const handleInputChange = (field, value) => {
-    setEditableValues((prevValues) => ({
-      ...prevValues,
-      [field]: value,
-    }));
-  };
+      await updateDoc(orderRef, {
+        internalNotes: arrayUnion(note),
+      });
 
-  const handleKeyDown = (e, field) => {
-    if (e.key === 'Enter') {
-      handleBlur(field);
-    } else if (e.key === 'Escape') {
-      handleBlur(field);
-      setEditableValues((prevValues) => ({
-        ...prevValues,
-        [field]: order[field], // Reset to original value on cancel
-      }));
+      setInternalNotes((prevNotes) => [note, ...prevNotes]);
+      setNewNote("");
+    } catch (error) {
+      console.error("Error adding note:", error);
+      alert("Failed to add note. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
-  const handlePrint = () => {
-    const printWindow = window.open('', '_blank');
-    printWindow.document.write(`
-      <html>
-        <head>
-          <title>Order Receipt</title>
-          <style>
-            body { font-family: Arial, sans-serif; padding: 20px; }
-            h1, h2, h3 { text-align: center; }
-            p { margin: 5px 0; }
-            .order-info { margin-bottom: 20px; }
-          </style>
-        </head>
-        <body>
-          <img src="${logoUrl}" alt="Dan Ober Artisan" style="max-width: 100%; height: auto;" />
-          <div class="order-info">${modalRef.current.innerHTML}</div>
-        </body>
-      </html>
-    `);
-    printWindow.document.close();
-    printWindow.print();
+  const handleItemStatusChange = async (index, newStatus) => {
+    try {
+      const updatedItems = [...items];
+      updatedItems[index].status = newStatus;
+
+      // Update Firestore
+      const orderRef = doc(db, "orders", orderDetails.id);
+      await updateDoc(orderRef, {
+        items: updatedItems,
+      });
+
+      setItems(updatedItems);
+      updateOrderStatus(updatedItems); // Update the overall order status
+    } catch (error) {
+      console.error("Error updating item status:", error);
+      alert("Failed to update item status. Please try again.");
+    }
   };
 
-  const handleEmail = () => {
-    console.log(`Emailing order receipt to ${editableValues.customerEmail}`);
-    // Add logic for sending an email if necessary
+  const updateOrderStatus = async (items) => {
+    const statuses = items.map((item) => item.status);
+    let newStatus = "Processing";
+
+    if (statuses.every((status) => status === "Delivered")) {
+      newStatus = "Order Completed";
+    } else if (statuses.every((status) => ["Ready for Shipment", "Shipped"].includes(status))) {
+      newStatus = "Ready for Shipment";
+    } else if (statuses.some((status) => status === "Shipped")) {
+      newStatus = "Partially Fulfilled";
+    } else if (statuses.some((status) => status === "Back Ordered")) {
+      newStatus = "Partially Fulfilled / Back Ordered";
+    } else if (statuses.every((status) => status === "Canceled")) {
+      newStatus = "Canceled";
+    } else if (statuses.every((status) => status === "Preparing")) {
+      newStatus = "Order Started";
+    }
+
+    try {
+      const orderRef = doc(db, "orders", orderDetails.id);
+      await updateDoc(orderRef, { status: newStatus });
+
+      const statusChangeEvent = {
+        event: `Order status updated to "${newStatus}"`,
+        timestamp: new Date().toISOString(),
+      };
+
+      await updateDoc(orderRef, {
+        systemHistory: arrayUnion(statusChangeEvent),
+      });
+
+      setOrderStatus(newStatus); // Update local state
+      setSystemHistory((prevHistory) => [statusChangeEvent, ...prevHistory]);
+    } catch (error) {
+      console.error("Error updating order status:", error);
+    }
   };
 
-  // Ensure numeric values for financial calculations
-  const subtotal = typeof order.subtotal === 'number' ? order.subtotal : 0;
-  const taxes = typeof order.taxes === 'number' ? order.taxes : 0;
-  const shipping = typeof order.shipping === 'number' ? order.shipping : 0;
-  const total = typeof order.total === 'number' ? order.total : 0;
+  if (!isOpen) return null;
 
   return (
     <div className="modal-overlay">
-      <div className="modal-content" ref={modalRef}>
-        <button className="close-btn" onClick={onClose} aria-label="Close modal">
-          &times;
-        </button>
-        <img src={logoUrl} alt="Dan Ober Artisan Logo" className="logo" />
-        <h2>Receipt Details</h2>
+      <div className="modal-content">
+        <h3 className="modal-title">Order Details</h3>
 
-        <div className="modal-body">
-          <div className="customer-details">
-            <h3>Customer Details</h3>
-            {Object.keys(editableValues).slice(0, 5).map((field) => (
-              <p key={field}>
-                <strong>{`${field.charAt(0).toUpperCase() + field.slice(1)}:`}</strong>
-                {isEditing[field] ? (
-                  <input
-                    type={field === "customerEmail" ? "email" : "text"}
-                    value={editableValues[field]}
-                    onChange={(e) => handleInputChange(field, e.target.value)}
-                    onBlur={() => handleBlur(field)}
-                    onKeyDown={(e) => handleKeyDown(e, field)}
-                  />
-                ) : (
-                  <span onDoubleClick={() => handleDoubleClick(field)}>
-                    {editableValues[field]}
-                  </span>
-                )}
-              </p>
-            ))}
+        <div className="compact-order-details">
+          <div className="detail-group">
+            <strong>Order ID:</strong> <span>{orderDetails.id}</span>
           </div>
-
-          <div className="order-details-section">
-            <h3>Order Details</h3>
-            <p><strong>Order ID:</strong> {order.id}</p>
-            <p>
-              <strong>Status:</strong>
-              {isEditing.status ? (
-                <input
-                  type="text"
-                  value={editableValues.status}
-                  onChange={(e) => handleInputChange('status', e.target.value)}
-                  onBlur={() => handleBlur('status')}
-                  onKeyDown={(e) => handleKeyDown(e, 'status')}
-                />
-              ) : (
-                <span onDoubleClick={() => handleDoubleClick('status')}>
-                  {editableValues.status}
-                </span>
-              )}
-            </p>
-            <p><strong>Order Date:</strong> {new Date(order.createdAt).toLocaleString()}</p>
-            <h4>Items Ordered:</h4>
-            <ul>
-              {Array.isArray(order.items) && order.items.length > 0 ? (
-                order.items.map((item) => (
-                  <li key={item.id}>
-                    {item.name} - {item.description} - {item.quantity} x ${item.price?.toFixed(2) || '0.00'} = ${(item.quantity * (item.price || 0)).toFixed(2)}
-                  </li>
-                ))
-              ) : (
-                <li>No items ordered.</li>
-              )}
-            </ul>
-            <h4>Internal Notes:</h4>
-            {isEditing.internalNotes ? (
-              <textarea
-                value={editableValues.internalNotes}
-                onChange={(e) => handleInputChange('internalNotes', e.target.value)}
-                onBlur={() => handleBlur('internalNotes')}
-                onKeyDown={(e) => handleKeyDown(e, 'internalNotes')}
-              />
-            ) : (
-              <p onDoubleClick={() => handleDoubleClick('internalNotes')}>
-                {editableValues.internalNotes}
-              </p>
-            )}
+          <div className="detail-group">
+            <strong>Customer Name:</strong> <span>{orderDetails.customerName || "N/A"}</span>
+          </div>
+          <div className="detail-group">
+            <strong>Email:</strong> <span>{orderDetails.customerEmail || "N/A"}</span>
+          </div>
+          <div className="detail-group">
+            <strong>Order Status:</strong> <span>{orderStatus}</span>
           </div>
         </div>
 
-        <div className="order-summary">
-          <h4>Order Summary</h4>
-          <p><strong>Subtotal:</strong> ${subtotal.toFixed(2)}</p>
-          <p><strong>Taxes:</strong> ${taxes.toFixed(2)}</p>
-          <p><strong>Shipping & Handling:</strong> ${shipping.toFixed(2)}</p>
-          <p><strong>Total:</strong> ${total.toFixed(2)}</p>
-          <p>
-            <strong>Return Policy:</strong> Find our return policy <a href="http://localhost:3000/return-policy" target="_blank" rel="noopener noreferrer">here</a>.
-          </p>
-          <p>
-            <strong>Support:</strong> Contact us at <a href="mailto:support@danoberartisan.com">support@danoberartisan.com</a>.
-          </p>
+        <h3>Products Ordered:</h3>
+        {items.length > 0 ? (
+          <table className="order-details-table">
+            <thead>
+              <tr>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {items.map((item, index) => (
+                <tr key={index}>
+                  <td>{item.name}</td>
+                  <td>{item.quantity}</td>
+                  <td>${item.price.toFixed(2)}</td>
+                  <td>
+                    <select
+                      value={item.status || "Preparing"}
+                      onChange={(e) => handleItemStatusChange(index, e.target.value)}
+                      className="status-select"
+                    >
+                      {ITEM_STATUSES.map((status) => (
+                        <option key={status} value={status}>
+                          {status}
+                        </option>
+                      ))}
+                    </select>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <p>No products in the order.</p>
+        )}
+
+        <h3>Internal Notes:</h3>
+        <textarea
+          placeholder="Add a note..."
+          value={newNote}
+          onChange={(e) => setNewNote(e.target.value)}
+          className="note-input"
+        />
+        <button onClick={handleAddNote} disabled={loading} className="add-note-btn">
+          {loading ? "Adding Note..." : "Add Note"}
+        </button>
+
+        <div className="history-log">
+          <h4>Notes History</h4>
+          {internalNotes.length > 0 ? (
+            <table className="notes-table">
+              <thead>
+                <tr>
+                  <th>Note</th>
+                  <th>Timestamp</th>
+                </tr>
+              </thead>
+              <tbody>
+                {internalNotes.map((note, index) => (
+                  <tr key={index}>
+                    <td>{note.text}</td>
+                    <td>{new Date(note.timestamp).toLocaleString()}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <p>No notes available.</p>
+          )}
+
+          <h4>System History</h4>
+          {systemHistory.length > 0 ? (
+            <table className="notes-table">
+              <thead>
+                <tr>
+                  <th>Event</th>
+                  <th>Timestamp</th>
+                </tr>
+              </thead>
+              <tbody>
+                {systemHistory.map((event, index) => (
+                  <tr key={index}>
+                    <td>{event.event}</td>
+                    <td>{new Date(event.timestamp).toLocaleString()}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <p>No system history available.</p>
+          )}
         </div>
 
-        <button className="print-btn" onClick={handlePrint}>
-          Print Receipt
-        </button>
-        <button className="email-btn" onClick={handleEmail}>
-          Email Receipt
+        <button className="order-close-btn" onClick={onClose}>
+          Close
         </button>
       </div>
     </div>
