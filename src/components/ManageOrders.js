@@ -10,7 +10,7 @@ const ManageOrders = () => {
   const [searchId, setSearchId] = useState("");
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [hideFulfilled, setHideFulfilled] = useState(true);
+  const [hideFulfilled, setHideFulfilled] = useState(true); // Default to hiding completed/canceled orders
 
   // Determine the overall order status based on item statuses
   const determineOrderStatus = (items) => {
@@ -19,6 +19,7 @@ const ManageOrders = () => {
     const statuses = items.map((item) => item.status || "Preparing");
 
     if (statuses.every((status) => status === "Shipped")) return "Order Completed";
+    if (statuses.every((status) => status === "Canceled")) return "Canceled";
     if (statuses.some((status) => status === "Back Ordered")) return "Partially Fulfilled / Back Ordered";
     if (statuses.some((status) => status === "Ready for Shipment")) return "Ready for Shipment";
     if (statuses.some((status) => status === "Packaged")) return "Order Started";
@@ -53,7 +54,8 @@ const ManageOrders = () => {
 
   const applyFilters = (ordersList) => {
     const filtered = ordersList.filter((order) => {
-      if (hideFulfilled && order.status === "Order Completed") {
+      // Exclude orders with status "Order Completed" or "Canceled" when hideFulfilled is true
+      if (hideFulfilled && ["Order Completed", "Canceled"].includes(order.status)) {
         return false;
       }
       return true;
@@ -97,7 +99,7 @@ const ManageOrders = () => {
             checked={hideFulfilled}
             onChange={toggleHideFulfilled}
           />
-          Hide Fulfilled Orders
+          Hide Completed/Canceled
         </label>
         <input
           type="text"
