@@ -17,7 +17,7 @@ import ManageInquiries from './ManageInquiries';
 import ManageGallery from './ManageGallery';
 import SiteSettings from './SiteSettings';
 import ManageCarts from './ManageCarts';
-import InProduction from './InProduction';
+import ManageProjects from './ManageProjects';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import './AdminDashboard.css';
@@ -114,8 +114,8 @@ const AdminDashboard = () => {
         return <ManageInquiries />;
       case 'manageProducts':
         return <ManageProducts />;
-      case 'inProduction':
-        return <InProduction />;
+      case 'manageProjects':
+        return <ManageProjects />;
       case 'manageUsers':
         return <ManageUsers />;
       case 'manageCarts':
@@ -140,9 +140,9 @@ const AdminDashboard = () => {
             stateKey: 'manageInquiries',
           },
           {
-            name: 'In Production',
+            name: 'Manage Projects',
             icon: FaHammer,
-            stateKey: 'inProduction',
+            stateKey: 'manageProjects',
           },
           { name: 'Manage Orders', icon: FaBox, stateKey: 'manageOrders' },
           { name: 'Manage Products', icon: FaDrum, stateKey: 'manageProducts' },
