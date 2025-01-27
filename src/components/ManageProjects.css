@@ -1,0 +1,47 @@
+.manage-projects {
+    padding: 20px;
+  }
+  
+  .filters {
+    margin-bottom: 20px;
+  }
+  
+  .filters label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+  }
+  
+  .projects-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  
+  .projects-table th,
+  .projects-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .projects-table tr:hover {
+    background-color: #f4f4f4;
+  }
+  
+  .progress-bar {
+    width: 100%;
+    background-color: #f4f4f4;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+    height: 15px;
+  }
+  
+  .progress {
+    background-color: #4caf50;
+    height: 100%;
+    transition: width 0.3s;
+  }

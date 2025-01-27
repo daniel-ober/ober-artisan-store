@@ -1,0 +1,32 @@
+.step-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .step-timestamps {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .checklist {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .checklist li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .artisan-notes {
+    margin-top: 20px;
+  }
+  
+  .artisan-notes textarea {
+    width: 100%;
+    height: 100px;
+    resize: none;
+  }
