@@ -85,7 +85,7 @@
     background: #e4e4e4;
   }
   
-  .close-btn {
+  .addorder-close-btn {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -97,7 +97,7 @@
     transition: color 0.3s ease-in-out;
   }
   
-  .close-btn:hover {
+  .adorder-close-btn:hover {
     color: #d9534f;
   }
   

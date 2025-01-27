@@ -32,7 +32,7 @@
     color: #333;
   }
   
-  .close-btn {
+  .order-close-btn {
     margin-top: 20px;
     background-color: #3498db;
     color: white;
@@ -46,7 +46,7 @@
     width: 100%; /* Stretch button across modal width */
   }
   
-  .close-btn:hover {
+  .order-close-btn:hover {
     background-color: #2980b9;
   }
   

@@ -38,7 +38,7 @@ button {
     margin: 0 auto 20px;
 }
 
-.close-btn {
+.receipt-close-btn {
     font-size: 24px;
     color: #e74c3c;
     cursor: pointer;
@@ -47,7 +47,7 @@ button {
     right: 10px;
 }
 
-.close-btn:hover {
+.receipt-close-btn:hover {
     color: #c0392b;
 }
 
