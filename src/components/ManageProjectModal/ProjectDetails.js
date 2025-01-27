@@ -1,0 +1,77 @@
+import React from "react";
+
+const ProjectDetails = ({ data, handleChange, isEditing }) => {
+  const determineStatus = () => {
+    const today = new Date();
+    const startDate = new Date(data.startDate || null);
+    const completionDate = new Date(data.targetCompletion || null);
+
+    if (completionDate && today > completionDate) return "Overdue";
+    if (completionDate && today > new Date(completionDate.setDate(completionDate.getDate() - 3))) return "Nearing Overdue";
+    return "On Track";
+  };
+
+  return (
+    <div className="project-details-container">
+      <h3>Project Details</h3>
+      <div className="project-details">
+        <p>
+          <strong>Project ID:</strong> {data?.id || "N/A"}
+        </p>
+        <p>
+          <strong>Order ID:</strong>{" "}
+          {isEditing ? (
+            <input
+              type="text"
+              value={data?.orderId || ""}
+              onChange={(e) => handleChange("orderId", e.target.value)}
+            />
+          ) : (
+            data?.orderId || "N/A"
+          )}
+        </p>
+        <p>
+          <strong>Project Start Date:</strong>{" "}
+          {isEditing ? (
+            <input
+              type="date"
+              value={data?.startDate || ""}
+              onChange={(e) => handleChange("startDate", e.target.value)}
+            />
+          ) : (
+            data?.startDate || "N/A"
+          )}
+        </p>
+        <p>
+          <strong>Target Completion:</strong>{" "}
+          {isEditing ? (
+            <input
+              type="date"
+              value={data?.targetCompletion || ""}
+              onChange={(e) => handleChange("targetCompletion", e.target.value)}
+            />
+          ) : (
+            data?.targetCompletion || "N/A"
+          )}
+        </p>
+        <p>
+          <strong>Current Phase:</strong>{" "}
+          {isEditing ? (
+            <input
+              type="text"
+              value={data?.currentPhase || ""}
+              onChange={(e) => handleChange("currentPhase", e.target.value)}
+            />
+          ) : (
+            data?.currentPhase || "N/A"
+          )}
+        </p>
+        <p>
+          <strong>Status:</strong> {determineStatus()}
+        </p>
+      </div>
+    </div>
+  );
+};
+
+export default ProjectDetails;
