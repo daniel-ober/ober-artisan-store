@@ -2,9 +2,32 @@ import React, { useState, useEffect } from "react";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import Sidebar from "./Sidebar";
 import TabContent from "./TabContent";
-import CustomerDetails from "./CustomerDetails"; // Import the new component
-import { db } from "../../firebaseConfig"; // Adjust to your Firebase config file path
+import CustomerDetails from "./CustomerDetails";
+import ProjectDetails from "./ProjectDetails"; // Import ProjectDetails component
+import ScopeOfWork from "./ScopeOfWork"; // Import ScopeOfWork component
+import { db } from "../../firebaseConfig";
 import "./ManageProjectModal.css";
+
+const woodSpeciesOptions = [
+  "Ash",
+  "Beech",
+  "Birch",
+  "Bubinga",
+  "Cherry",
+  "Jatoba",
+  "Kapur",
+  "Leopardwood",
+  "Mahogany",
+  "Mango",
+  "Maple",
+  "Oak",
+  "Padauk",
+  "Poplar",
+  "Purpleheart",
+  "Sapele",
+  "Walnut",
+  "Other",
+];
 
 const ManageProjectModal = ({ isOpen, onClose, projectData, onSave }) => {
   const [selectedTab, setSelectedTab] = useState("overview");
@@ -97,14 +120,24 @@ const ManageProjectModal = ({ isOpen, onClose, projectData, onSave }) => {
           <main>
             {selectedTab === "overview" && (
               <>
-                <TabContent
-                  selectedTab={selectedTab}
-                  editableData={editableData}
-                  setEditableData={setEditableData}
-                  customerData={customerData}
-                  isEditing={isEditing}
+                <div className="overview-details">
+                  {/* Project and Customer Details Side by Side */}
+                  <ProjectDetails
+                    data={editableData}
+                    handleChange={handleChange}
+                    isEditing={isEditing}
+                  />
+                  <CustomerDetails
+                    customerData={customerData}
+                    handleChange={handleCustomerChange}
+                    isEditing={isEditing}
+                  />
+                </div>
+                <ScopeOfWork
+                  scopeData={editableData}
                   handleChange={handleChange}
-                  handleCustomerChange={handleCustomerChange}
+                  isEditing={isEditing}
+                  woodSpeciesOptions={woodSpeciesOptions}
                 />
               </>
             )}

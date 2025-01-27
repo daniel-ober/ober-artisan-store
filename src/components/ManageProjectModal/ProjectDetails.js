@@ -1,15 +1,18 @@
 import React from "react";
 
 const ProjectDetails = ({ data, handleChange, isEditing }) => {
+  // Determine status and color for the status icon
   const determineStatus = () => {
     const today = new Date();
     const startDate = new Date(data.startDate || null);
     const completionDate = new Date(data.targetCompletion || null);
 
-    if (completionDate && today > completionDate) return "Overdue";
-    if (completionDate && today > new Date(completionDate.setDate(completionDate.getDate() - 3))) return "Nearing Overdue";
-    return "On Track";
+    if (completionDate && today > completionDate) return { text: "Overdue", color: "red" };
+    if (completionDate && today > new Date(completionDate.setDate(completionDate.getDate() - 7))) return { text: "Nearing Overdue", color: "yellow" };
+    return { text: "On Track", color: "green" };
   };
+
+  const { text: statusText, color: statusColor } = determineStatus();
 
   return (
     <div className="project-details-container">
@@ -67,7 +70,14 @@ const ProjectDetails = ({ data, handleChange, isEditing }) => {
           )}
         </p>
         <p>
-          <strong>Status:</strong> {determineStatus()}
+          <strong>Status:</strong>{" "}
+          <span className="status-indicator">
+            <span
+              className="status-dot"
+              style={{ backgroundColor: statusColor }}
+            ></span>
+            {statusText}
+          </span>
         </p>
       </div>
     </div>
