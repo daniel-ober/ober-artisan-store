@@ -5,19 +5,21 @@ import ProjectDetails from "./ProjectDetails";
 import ScopeOfWork from "./ScopeOfWork";
 import CustomerDetails from "./CustomerDetails";
 import FileUploader from "./FileUploader";
+import Step1WoodPreparation from "./Step1WoodPreparation";
 import { db } from "../../firebaseConfig";
 import "./ManageProjectModal.css";
 
 const ManageProjectModal = ({ isOpen, onClose, projectData }) => {
   const [editableData, setEditableData] = useState({});
   const [customerData, setCustomerData] = useState({});
+  const [selectedTab, setSelectedTab] = useState("overview"); // Default tab
   const [isEditingProjectDetails, setIsEditingProjectDetails] = useState(false);
   const [isEditingScopeOfWork, setIsEditingScopeOfWork] = useState(false);
   const [isEditingCustomerDetails, setIsEditingCustomerDetails] = useState(false);
 
-  // Load project and customer data
   useEffect(() => {
     if (projectData) {
+      console.log("Project Data:", projectData); // Debugging
       setEditableData({
         ...projectData,
         woodPreparation: projectData?.woodPreparation || {
@@ -55,11 +57,14 @@ const ManageProjectModal = ({ isOpen, onClose, projectData }) => {
     }
   }, [projectData]);
 
-  // Save updated data to Firestore
-  const saveToFirestore = async () => {
+  const saveToFirestore = async (updatedData = {}) => {
     try {
       const projectRef = doc(db, "projects", editableData.id);
-      await updateDoc(projectRef, editableData);
+      const dataToSave = {
+        ...editableData,
+        ...updatedData,
+      };
+      await updateDoc(projectRef, dataToSave);
 
       console.log("Project updated successfully!");
     } catch (error) {
@@ -82,18 +87,6 @@ const ManageProjectModal = ({ isOpen, onClose, projectData }) => {
     saveToFirestore();
   };
 
-  const handleProjectDetailsCancel = () => {
-    setIsEditingProjectDetails(false);
-  };
-
-  const handleScopeOfWorkCancel = () => {
-    setIsEditingScopeOfWork(false);
-  };
-
-  const handleCustomerDetailsCancel = () => {
-    setIsEditingCustomerDetails(false);
-  };
-
   const handleChange = (field, value) => {
     setEditableData((prev) => ({
       ...prev,
@@ -110,6 +103,9 @@ const ManageProjectModal = ({ isOpen, onClose, projectData }) => {
 
   if (!isOpen) return null;
 
+  console.log("Current Tab:", selectedTab); // Debugging
+  console.log("Customer Data:", customerData); // Debugging
+
   return (
     <div className="manage-project-modal-overlay">
       <div className="manage-project-modal-content">
@@ -120,68 +116,108 @@ const ManageProjectModal = ({ isOpen, onClose, projectData }) => {
           </button>
         </header>
         <div className="modal-body">
-          <Sidebar />
+          {/* Sidebar with tab switching */}
+          <Sidebar selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
           <main>
-            <div className="overview-details">
-              {/* Project Details Section */}
-              <ProjectDetails
-                data={editableData}
-                handleChange={handleChange}
-                isEditing={isEditingProjectDetails}
-                onSave={handleProjectDetailsSave}
-                onEditToggle={() =>
-                  setIsEditingProjectDetails(!isEditingProjectDetails)
+            {/* Conditional rendering based on selectedTab */}
+            {selectedTab === "overview" && (
+              <>
+                <div className="overview-details">
+                  <ProjectDetails
+                    data={editableData}
+                    handleChange={handleChange}
+                    isEditing={isEditingProjectDetails}
+                    onSave={handleProjectDetailsSave}
+                    onCancel={() => setIsEditingProjectDetails(false)}
+                    onEditToggle={() =>
+                      setIsEditingProjectDetails(!isEditingProjectDetails)
+                    }
+                  />
+                  <ScopeOfWork
+                    scopeData={editableData}
+                    handleChange={handleChange}
+                    isEditing={isEditingScopeOfWork}
+                    onSave={handleScopeOfWorkSave}
+                    onCancel={() => setIsEditingScopeOfWork(false)}
+                    onEditToggle={() =>
+                      setIsEditingScopeOfWork(!isEditingScopeOfWork)
+                    }
+                    woodSpeciesOptions={[
+                      "Ash",
+                      "Beech",
+                      "Birch",
+                      "Bubinga",
+                      "Cherry",
+                      "Jatoba",
+                      "Kapur",
+                      "Leopardwood",
+                      "Mahogany",
+                      "Mango",
+                      "Maple",
+                      "Oak",
+                      "Padauk",
+                      "Poplar",
+                      "Purpleheart",
+                      "Sapele",
+                      "Walnut",
+                      "Other",
+                    ]}
+                  />
+                </div>
+                <CustomerDetails
+                  customerData={customerData}
+                  handleChange={handleCustomerChange}
+                  isEditing={isEditingCustomerDetails}
+                  onSave={handleCustomerDetailsSave}
+                  onCancel={() => setIsEditingCustomerDetails(false)}
+                  onEditToggle={() =>
+                    setIsEditingCustomerDetails(!isEditingCustomerDetails)
+                  }
+                />
+                {/* Include FileUploader under the Overview tab */}
+                <FileUploader projectId={editableData.id} />
+              </>
+            )}
+            {selectedTab === "Step 1. Wood Preparation" && (
+              <Step1WoodPreparation
+                stepData={editableData.woodPreparation}
+                relatedData={{
+                  woodSpecies: editableData.woodSpecies,
+                  thickness: editableData.thickness,
+                  bearingEdge: editableData.bearingEdge,
+                }}
+                onToggleChecklist={(field, value) =>
+                  setEditableData((prev) => ({
+                    ...prev,
+                    woodPreparation: {
+                      ...prev.woodPreparation,
+                      [field]: value,
+                    },
+                  }))
                 }
-                onCancel={handleProjectDetailsCancel}
+                onStart={(startTime) => {
+                  setEditableData((prev) => ({
+                    ...prev,
+                    woodPreparation: {
+                      ...prev.woodPreparation,
+                      startTime,
+                    },
+                  }));
+                  saveToFirestore({ woodPreparation: { ...editableData.woodPreparation, startTime } });
+                }}
+                onComplete={(completeTime) => {
+                  setEditableData((prev) => ({
+                    ...prev,
+                    woodPreparation: {
+                      ...prev.woodPreparation,
+                      completeTime,
+                    },
+                  }));
+                  saveToFirestore({ woodPreparation: { ...editableData.woodPreparation, completeTime } });
+                }}
+                onSaveToFirestore={saveToFirestore}
               />
-
-              {/* Scope of Work Section */}
-              <ScopeOfWork
-                scopeData={editableData}
-                handleChange={handleChange}
-                isEditing={isEditingScopeOfWork}
-                onSave={handleScopeOfWorkSave}
-                onEditToggle={() =>
-                  setIsEditingScopeOfWork(!isEditingScopeOfWork)
-                }
-                onCancel={handleScopeOfWorkCancel}
-                woodSpeciesOptions={[
-                  "Ash",
-                  "Beech",
-                  "Birch",
-                  "Bubinga",
-                  "Cherry",
-                  "Jatoba",
-                  "Kapur",
-                  "Leopardwood",
-                  "Mahogany",
-                  "Mango",
-                  "Maple",
-                  "Oak",
-                  "Padauk",
-                  "Poplar",
-                  "Purpleheart",
-                  "Sapele",
-                  "Walnut",
-                  "Other",
-                ]}
-              />
-            </div>
-
-            {/* Customer Details Section */}
-            <CustomerDetails
-              customerData={customerData}
-              handleChange={handleCustomerChange}
-              isEditing={isEditingCustomerDetails}
-              onSave={handleCustomerDetailsSave}
-              onEditToggle={() =>
-                setIsEditingCustomerDetails(!isEditingCustomerDetails)
-              }
-              onCancel={handleCustomerDetailsCancel}
-            />
-
-            {/* FileUploader Section */}
-            <FileUploader projectId={editableData.id} />
+            )}
           </main>
         </div>
       </div>
