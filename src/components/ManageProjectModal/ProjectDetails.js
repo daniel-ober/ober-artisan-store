@@ -81,10 +81,10 @@ const ProjectDetails = ({ data, handleChange, isEditing, handleSave, onEditToggl
       </div>
       {isEditing ? (
         <>
-          <button className="save-button" onClick={handleSave}>
+        <button className="save-button" onClick={handleSave}>
             Save
           </button>
-          <button className="cancel-button" onClick={onEditToggle}>
+        <button className="cancel-button" onClick={onEditToggle}>
             Cancel
           </button>
         </>
