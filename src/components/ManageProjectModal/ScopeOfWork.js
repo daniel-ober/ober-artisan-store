@@ -1,6 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 
-const ScopeOfWork = ({ scopeData, handleChange, isEditing, woodSpeciesOptions }) => {
+const ScopeOfWork = ({
+  scopeData,
+  handleChange,
+  isEditing,
+  onSave,
+  onEditToggle,
+  onCancel,
+  woodSpeciesOptions,
+}) => {
+  const [localData, setLocalData] = useState(scopeData);
+
+  const handleLocalChange = (field, value) => {
+    setLocalData((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
+
+  const handleSaveClick = () => {
+    Object.keys(localData).forEach((key) => {
+      handleChange(key, localData[key]);
+    });
+    onSave();
+  };
+
+  const handleCancelClick = () => {
+    setLocalData(scopeData); // Reset local data to original state
+    onCancel();
+  };
+
   return (
     <div className="scope-of-work-container">
       <h3>Scope of Work</h3>
@@ -9,8 +38,8 @@ const ScopeOfWork = ({ scopeData, handleChange, isEditing, woodSpeciesOptions })
           <strong>Artisan Line:</strong>{" "}
           {isEditing ? (
             <select
-              value={scopeData?.artisanLine || ""}
-              onChange={(e) => handleChange("artisanLine", e.target.value)}
+              value={localData?.artisanLine || ""}
+              onChange={(e) => handleLocalChange("artisanLine", e.target.value)}
             >
               <option value="">Select Artisan Line</option>
               <option value="Heritage">Heritage</option>
@@ -28,8 +57,8 @@ const ScopeOfWork = ({ scopeData, handleChange, isEditing, woodSpeciesOptions })
           <strong>Shell Depth:</strong>{" "}
           {isEditing ? (
             <select
-              value={scopeData?.shellDepth || ""}
-              onChange={(e) => handleChange("shellDepth", e.target.value)}
+              value={localData?.shellDepth || ""}
+              onChange={(e) => handleLocalChange("shellDepth", e.target.value)}
             >
               {[...Array(18).keys()].map((i) => (
                 <option key={i + 3} value={`${i + 3}"`}>
@@ -45,8 +74,8 @@ const ScopeOfWork = ({ scopeData, handleChange, isEditing, woodSpeciesOptions })
           <strong>Width:</strong>{" "}
           {isEditing ? (
             <select
-              value={scopeData?.width || ""}
-              onChange={(e) => handleChange("width", e.target.value)}
+              value={localData?.width || ""}
+              onChange={(e) => handleLocalChange("width", e.target.value)}
             >
               {[...Array(19).keys()].map((i) => (
                 <option key={i + 6} value={`${i + 6}"`}>
@@ -63,8 +92,8 @@ const ScopeOfWork = ({ scopeData, handleChange, isEditing, woodSpeciesOptions })
           {isEditing ? (
             <input
               type="text"
-              value={scopeData?.weight || ""}
-              onChange={(e) => handleChange("weight", e.target.value)}
+              value={localData?.weight || ""}
+              onChange={(e) => handleLocalChange("weight", e.target.value)}
             />
           ) : (
             scopeData?.weight || "N/A"
@@ -75,8 +104,8 @@ const ScopeOfWork = ({ scopeData, handleChange, isEditing, woodSpeciesOptions })
           {isEditing ? (
             <input
               type="text"
-              value={scopeData?.thickness || ""}
-              onChange={(e) => handleChange("thickness", e.target.value)}
+              value={localData?.thickness || ""}
+              onChange={(e) => handleLocalChange("thickness", e.target.value)}
             />
           ) : (
             scopeData?.thickness || "N/A"
@@ -86,8 +115,8 @@ const ScopeOfWork = ({ scopeData, handleChange, isEditing, woodSpeciesOptions })
           <strong>Bearing Edge:</strong>{" "}
           {isEditing ? (
             <select
-              value={scopeData?.bearingEdge || ""}
-              onChange={(e) => handleChange("bearingEdge", e.target.value)}
+              value={localData?.bearingEdge || ""}
+              onChange={(e) => handleLocalChange("bearingEdge", e.target.value)}
             >
               <option value="">Select Edge</option>
               <option value="30 degrees">30 degrees</option>
@@ -105,8 +134,8 @@ const ScopeOfWork = ({ scopeData, handleChange, isEditing, woodSpeciesOptions })
           <strong>Wood Species:</strong>{" "}
           {isEditing ? (
             <select
-              value={scopeData?.woodSpecies || ""}
-              onChange={(e) => handleChange("woodSpecies", e.target.value)}
+              value={localData?.woodSpecies || ""}
+              onChange={(e) => handleLocalChange("woodSpecies", e.target.value)}
             >
               {woodSpeciesOptions.map((wood) => (
                 <option key={wood} value={wood}>
@@ -123,20 +152,23 @@ const ScopeOfWork = ({ scopeData, handleChange, isEditing, woodSpeciesOptions })
           {isEditing ? (
             <input
               type="text"
-              value={scopeData?.customWoodSpecies || ""}
-              onChange={(e) => handleChange("customWoodSpecies", e.target.value)}
+              value={localData?.customWoodSpecies || ""}
+              onChange={(e) =>
+                handleLocalChange("customWoodSpecies", e.target.value)
+              }
             />
           ) : (
             scopeData?.customWoodSpecies || "N/A"
           )}
         </p>
-        {/* Artisan Comments Section */}
         <p>
           <strong>Artisan Comments:</strong>{" "}
           {isEditing ? (
             <textarea
-              value={scopeData?.artisanComments || ""}
-              onChange={(e) => handleChange("artisanComments", e.target.value)}
+              value={localData?.artisanComments || ""}
+              onChange={(e) =>
+                handleLocalChange("artisanComments", e.target.value)
+              }
               rows="4"
               style={{ width: "100%" }}
             />
@@ -144,6 +176,22 @@ const ScopeOfWork = ({ scopeData, handleChange, isEditing, woodSpeciesOptions })
             scopeData?.artisanComments || "N/A"
           )}
         </p>
+      </div>
+      <div className="edit-controls">
+        {isEditing ? (
+          <>
+            <button className="save-button" onClick={handleSaveClick}>
+              Save
+            </button>
+            <button className="cancel-button" onClick={handleCancelClick}>
+              Cancel
+            </button>
+          </>
+        ) : (
+          <button className="edit-button" onClick={onEditToggle}>
+            Edit
+          </button>
+        )}
       </div>
     </div>
   );
