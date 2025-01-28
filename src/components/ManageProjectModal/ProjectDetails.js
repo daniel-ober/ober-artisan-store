@@ -1,7 +1,6 @@
 import React from "react";
 
-const ProjectDetails = ({ data, handleChange, isEditing }) => {
-  // Determine status and color for the status icon
+const ProjectDetails = ({ data, handleChange, isEditing, handleSave, onEditToggle }) => {
   const determineStatus = () => {
     const today = new Date();
     const startDate = new Date(data.startDate || null);
@@ -80,6 +79,20 @@ const ProjectDetails = ({ data, handleChange, isEditing }) => {
           </span>
         </p>
       </div>
+      {isEditing ? (
+        <>
+          <button className="save-button" onClick={handleSave}>
+            Save
+          </button>
+          <button className="cancel-button" onClick={onEditToggle}>
+            Cancel
+          </button>
+        </>
+      ) : (
+        <button className="edit-button" onClick={onEditToggle}>
+          Edit
+        </button>
+      )}
     </div>
   );
 };

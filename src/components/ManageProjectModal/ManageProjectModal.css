@@ -101,15 +101,15 @@ main {
     display: flex;
     gap: 20px;
     margin-bottom: 20px;
-}
+  }
 
 .project-details-container,
-.customer-details-container {
-    flex: 1;
-    background: #f9f9f9;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+.scope-of-work-container {
+  flex: 1;
+  background: #f9f9f9;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
 }
 
 .project-details,
@@ -142,6 +142,24 @@ form button {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+}
+
+.formatted-notes p {
+  margin: 0.5rem 0;
+  align-content: flex-start;
+}
+
+.formatted-notes p strong {
+  color: #333;
+}
+
+.formatted-notes p:nth-child(odd) {
+  margin-left: 0;
+}
+
+.formatted-notes p:nth-child(even) {
+  margin-left: 20px;
+  font-style: italic;
 }
 
 .customer-details {
@@ -222,7 +240,6 @@ form button {
   }
 
 .scope-of-work-container {
-    margin-top: 1rem;
     padding: 1rem;
     background-color: #f9f9f9;
     border-radius: 8px;
@@ -240,3 +257,44 @@ form button {
     border: 1px solid #ccc;
     border-radius: 4px;
 }
+
+.project-attachments-section {
+    margin-top: 2rem;
+    background-color: #f9f9f9;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+  }
+  
+  .file-category {
+    margin-bottom: 1.5rem;
+  }
+  
+  .file-category h4 {
+    margin-bottom: 0.5rem;
+  }
+  
+  .upload-zone {
+    border: 2px dashed #ccc;
+    padding: 1rem;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 0.5rem;
+  }
+  
+  .upload-zone:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .upload-zone input[type="file"] {
+    display: none;
+  }
+  
+  .file-category ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .file-category li {
+    margin-bottom: 0.5rem;
+  }
