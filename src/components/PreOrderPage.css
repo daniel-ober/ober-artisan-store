@@ -1,5 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
+
 .pre-order-page {
   padding: 20px;
+  font-family: "Poppins";
   background-color: #f4f4f4f2;
   text-align: center;
   border-radius: 8px;
