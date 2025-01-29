@@ -25,7 +25,7 @@ const Home = () => {
       {/* Image Section */}
       <div className="image-container">
         <img
-          src="/home-products.png"
+          src="/about.png"
           alt="Coming Soon"
           className="coming-soon-image"
         />
