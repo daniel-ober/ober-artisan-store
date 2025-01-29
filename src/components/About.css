@@ -1,88 +1,139 @@
-/* General page styling */
+/* General Page Styling */
 .about-page {
-  padding: 40px;
-  background-color: #f4f4f4f2;
-  text-align: center;
-  border-radius: 8px;
-  margin: 25px 40px 40px 40px;
-  background-image: 'public/background-web.mp4';
+  width: 100%;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-family: "Poppins", sans-serif;
+  scroll-snap-type: y mandatory; /* Enables smooth snap-scrolling */
+  scroll-behavior: smooth;
+  background-size: cover; /* Ensures full coverage */
+  background-position: center;
+  background-attachment: fixed; /* ✅ FIXED BACKGROUND */
+  position: relative;
 }
 
-.about-page h2 {
-  font-size: 32px;
-  margin-bottom: 20px;
-  color: #333;
-}
-
-/* Carousel container for alignment */
-.carousel-container {
+/* Full-Screen Sections */
+.about-section {
+  width: 100%;
+  height: 100vh; /* Each section takes full viewport height */
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-/* Individual carousel item styling */
-.carousel-item {
-  background-color: #ffffff00;
-  border-radius: 8px;
-  padding: 20px;
-  width: 300px;
-  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
-  display: flex;
-  flex-direction: column;
   align-items: center;
   text-align: center;
-  transition: transform 0.3s ease-in-out;
+  position: relative;
+  scroll-snap-align: start; /* Snap to the start of each section */
 }
 
-.carousel-item:hover {
-  transform: translateY(-5px);
-}
-
-/* Image styling */
-.carousel-item img {
+/* Dark Overlay for Readability */
+.about-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 8px;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4); /* Dark overlay */
+  z-index: 1;
+}
+
+/* Content Styling */
+.section-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  padding: 20px;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+/* Section Title */
+.section-content h2 {
+  font-size: 3rem;
   margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.9);
 }
 
-/* Title styling */
-.carousel-item h3 {
-  font-size: 1.5rem;
-  color: #333;
-  margin-bottom: 10px;
-  text-align: center;
+/* Section Subtitle */
+.section-content h3 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.8);
 }
 
-/* Description styling */
-.carousel-item p {
-  font-size: 1rem;
-  color: #555;
-  line-height: 1.6;
-  text-align: justify;
+/* Section Paragraph */
+.section-content p {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  margin-bottom: 20px;
+  color: rgba(255, 255, 255, 0.85);
 }
 
-/* Responsive styles */
+/* Smooth Fade-in Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 🎯 Responsive Adjustments */
+@media (max-width: 1024px) {
+  .section-content {
+    max-width: 90%;
+  }
+
+  .section-content h2 {
+    font-size: 2.5rem;
+  }
+
+  .section-content h3 {
+    font-size: 1.6rem;
+  }
+
+  .section-content p {
+    font-size: 1.1rem;
+  }
+}
+
 @media (max-width: 768px) {
-
-  .about-page {
-    margin: 0px 20px 20px 20px;
-    padding: 20px;
+  .section-content {
+    max-width: 95%;
   }
 
-  .carousel-container {
-    flex-direction: column;
-    align-items: center;
+  .section-content h2 {
+    font-size: 2rem;
   }
 
-  .carousel-item {
-    width: 90%;
+  .section-content h3 {
+    font-size: 1.4rem;
   }
 
-  .carousel-item img {
-    height: 180px;
+  .section-content p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-content {
+    padding: 40px 15px;
+  }
+
+  .section-content h2 {
+    font-size: 1.8rem;
+  }
+
+  .section-content h3 {
+    font-size: 1.2rem;
+  }
+
+  .section-content p {
+    font-size: 0.95rem;
   }
 }
