@@ -12,41 +12,31 @@
   margin-bottom: 25px;
 }
 
+/* Updated Grid to Maintain Smooth Drag & Drop */
 .product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));  /* Standard grid */
-  gap: 20px;  /* Adjust spacing between cards */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
   padding: 0 20px;
-  justify-items: center;
 }
 
-/* Mobile View – Two Products per Row */
-@media (max-width: 768px) {
-  .product-grid {
-    grid-template-columns: repeat(2, 1fr);  /* Forces two columns on mobile */
-    gap: 10px;  /* Smaller gap for compact layout */
-  }
-
-  .products-container {
-    margin: 20px;
-    padding: 20px;
-  }
-
+/* Ensures All Cards Have the Same Height */
+.draggable-item {
+  width: 340px;
+  display: flex;
+  justify-content: center;
 }
 
-/* Smaller Screens (Stack on top of each other) */
-@media (max-width: 480px) {
-  .product-grid {
-   padding:0px 10px 20px;
-   gap: 25px;
-    grid-template-columns: 1fr;  /* One product per row on very small screens */
-  }
+.draggable-item .product-card {
+  width: 100%;
+  min-height: 540px;
 }
 
-.loading-message,
-.no-products-message {
-  font-size: 1.2rem;
-  text-align: center;
-  color: #007bff;
-  margin-top: 50px;
+/* Dragging Effect */
+.draggable-item.dragging {
+  opacity: 0.8;
+  transform: scale(1.05);
+  z-index: 10;
+  position: relative;
 }

@@ -1,14 +1,14 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
-
+/* Main Pre-Order Page Container */
 .pre-order-page {
   padding: 20px;
-  font-family: "Poppins";
   background-color: #f4f4f4f2;
   text-align: center;
   border-radius: 8px;
   margin: 25px 40px 40px 40px;
+  overflow: hidden; /* Prevents unwanted scroll jumps */
 }
 
+/* Page Titles */
 h1 {
   font-size: 2.5rem;
   color: #333;
@@ -21,105 +21,115 @@ h1 {
   margin-bottom: 20px;
 }
 
+/* Product Cards Container */
 .pre-order-items {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 30px;
+  min-height: 300px; /* Prevents collapse when dragging */
+  position: relative;
 }
 
+/* Individual Product Card */
 .pre-order-item {
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   width: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   text-align: left;
-  transition: transform 0.3s ease;
+  transition: transform 0.2s ease-in-out;
+  padding-bottom: 20px;
+  position: relative;
 }
 
+/* Hover effect for product cards */
 .pre-order-item:hover {
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
 
-/* General Product Image Styling */
+/* Product Image Styling */
 .pre-order-image {
   width: 100%;
   height: 270px;
   object-fit: cover;
 }
 
+/* Product Information Container */
 .pre-order-info {
-  padding: 0px 20px 20px 20px;
-  /* align-content: center; */
+  flex-grow: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
+/* Product Titles */
 .pre-order-info h2 {
   font-size: 1.5rem;
   color: #333;
+  margin-bottom: 10px;
 }
 
-.pre-order-info h3 {
-  font-size: 1rem;
-  color: #855200;
-}
-
-.pre-order-info p {
-  font-size: 1rem;
-  color: #555;
-  align-content: center;
-
-}
-
-/* Price Styling */
-.price-container {
-  margin: 15px 0px 15px;
+/* Drag and Drop Fixes */
+.droppable-container {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 5px;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  min-height: 300px;
+  position: relative;
+  overflow: hidden; /* Prevents auto-scrolling */
 }
 
-.price-container p {
-  margin: 0;
+/* Ensure dragging does not force scroll */
+.dragging {
+  opacity: 0.8;
+  transform: scale(1.1);
+  z-index: 1000;
+  position: fixed !important;
+  top: auto;
+  left: auto;
+  pointer-events: none; /* Prevents browser scroll trigger */
 }
 
-.promo-price {
-  color: #007bff;
-  font-size: 1.2rem;
-  font-weight: bold;
+/* Placeholder space when dragging */
+.placeholder {
+  background-color: rgba(200, 200, 200, 0.2);
+  border: 2px dashed #ccc;
+  width: 350px;
+  height: 530px;
+  border-radius: 8px;
+  position: relative;
 }
 
-.starting-price {
-  color: #333;
-  font-size: 1rem;
-  font-weight: normal;
+/* Prevent sudden layout shifts */
+.droppable-container > div {
+  transition: transform 0.3s ease-in-out;
 }
 
-.pre-order-button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s;
+/* Prevents layout collapse when dragging */
+.pre-order-item {
+  transition: all 0.2s ease-in-out;
 }
 
-.pre-order-button:hover {
-  background-color: #0056b3;
+/* Fix Auto Scrolling on Drag */
+html, body {
+  overscroll-behavior: none;
+  scroll-behavior: smooth;
 }
 
-.loading {
-  font-size: 1.5rem;
-  color: #555;
-  text-align: center;
-}
-
+/* Responsive Styles */
 @media (max-width: 768px) {
   .pre-order-page {
     margin: 0px 20px 20px 20px;
     padding: 20px;
+  }
+  
+  .pre-order-item {
+    width: 100%;
   }
 }

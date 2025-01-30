@@ -50,7 +50,11 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Route to tab mapping
+  // Debugging logs
+  console.log('🔍 User from AuthContext:', user);
+  console.log('🔍 Admin Status in App.js:', isAdmin);
+
+  // Route to tab mapping for tracking navigation changes
   const routeToTabMap = useMemo(() => ({
     '/': 'Home',
     '/about': 'About',
@@ -71,78 +75,26 @@ function App() {
 
   useEffect(() => {
     const activeTab = routeToTabMap[location.pathname] || 'NotFound';
-    console.log(`Current Tab changed to: ${activeTab}`);
+    console.log(`📌 Current Tab changed to: ${activeTab}`);
   }, [location.pathname, routeToTabMap]);
 
   // Fetch Navbar Links from Firestore
   useEffect(() => {
     const fetchSettings = async () => {
       try {
+        console.log('📥 Fetching Navbar Links...');
         const navbarLinksCollection = collection(db, 'settings', 'site', 'navbarLinks');
         const navbarLinksSnapshot = await getDocs(navbarLinksCollection);
         const navbarLinks = navbarLinksSnapshot.docs.map((doc) => doc.data());
         setNavbarLinks(navbarLinks || []);
       } catch (error) {
-        console.error('Error fetching site settings:', error);
+        console.error('❌ Error fetching site settings:', error);
       } finally {
         setLoading(false);
       }
     };
     fetchSettings();
   }, []);
-
-  // Admin Sign-In Key Command Logic
-  useEffect(() => {
-    const adminIPs = process.env.REACT_APP_ADMIN_IP?.split(',') || [];
-
-    const handleKeyPress = async (event) => {
-      if (event.ctrlKey && event.altKey && event.key === 'ß') {
-        try {
-          console.log('Shortcut triggered. Checking access...');
-          
-          const ipResponse = await fetch('https://api.ipify.org?format=json');
-          const { ip } = await ipResponse.json();
-          console.log(`Current IP: ${ip}`);
-          console.log(`Allowed Admin IPs: ${adminIPs.join(', ')}`);
-
-          const isAllowedIP = adminIPs.includes(ip);
-
-          if (isAllowedIP) {
-            console.log('Access granted via IP address.');
-            navigate('/admin-signin');
-            return;
-          }
-
-          const storedToken = localStorage.getItem('admin-token');
-          const macbookToken = process.env.REACT_APP_ADMIN_MACBOOK_TOKEN;
-          const iphoneToken = process.env.REACT_APP_ADMIN_IPHONE_TOKEN;
-          const ipadToken = process.env.REACT_APP_ADMIN_IPAD_TOKEN;
-
-          const isAllowedToken =
-            storedToken === macbookToken ||
-            storedToken === iphoneToken ||
-            storedToken === ipadToken;
-
-          if (isAllowedToken) {
-            console.log('Access granted via device token.');
-            navigate('/admin-signin');
-            return;
-          }
-
-          console.warn('Access Denied: Unauthorized device or IP.');
-          alert('Access Denied: Unauthorized device or IP.');
-        } catch (error) {
-          console.error('Error verifying admin access:', error);
-          alert('An error occurred while verifying access. Please try again.');
-        }
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyPress);
-    return () => {
-      window.removeEventListener('keydown', handleKeyPress);
-    };
-  }, [navigate]);
 
   const isLinkEnabled = (linkName) => {
     const link = navbarLinks.find((l) => l.name?.toLowerCase() === linkName.toLowerCase());
@@ -154,48 +106,40 @@ function App() {
   return (
     <div className="app-container">
       <NavBar navbarLinks={navbarLinks} />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-          <Route path="/about" element={isLinkEnabled('about') ? <About /> : <NotFound />} />
-          <Route path="/cart" element={isLinkEnabled('cart') ? <Cart /> : <NotFound />} />
-          <Route path="/contact" element={isLinkEnabled('contact') ? <Contact /> : <NotFound />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/return-policy" element={<ReturnPolicy />} />
-          <Route path="/terms-of-service" element={<TermsOfService />} />
-          <Route path="/custom-drum-builder" element={<CustomDrumBuilder />} />
-          <Route path="/artisan-shop" element={<ArtisanShop />} />
-          <Route path="/admin/update-carts" element={<UpdateCartsPage />} />
-          <Route path="/sound-profile-tool" element={<PathSelection setSelectedPath={setSelectedPath} />} />
-          <Route path="/custom-drum-builder" element={selectedPath === 'custom-drum-builder' ? <CustomDrumBuilder /> : <Navigate to="/" />} />
-          <Route path="/sound-profile-recommendations" element={selectedPath === 'recommendations' ? <SoundProfileRecommendations /> : <Navigate to="/" />} />
-          <Route path="/gallery" element={isLinkEnabled('gallery') ? <Gallery /> : <NotFound />} />
-          <Route path="/custom-shop" element={isLinkEnabled('custom-shop') ? <CustomShop /> : <NotFound />} />
-          <Route path="/test-redirect" element={<TestRedirect />} />
-          <Route path="/products" element={isLinkEnabled('products') ? <Products /> : <NotFound />} />
-          <Route path="/products/:productId" element={<ProductDetail />} />
-          <Route path="/pre-order" element={isLinkEnabled('pre-order') ? <PreOrderPage /> : <NotFound />} />
-          <Route path="/account" element={<PrivateRoute element={<AccountPage />} />} />
-          <Route path="/admin" element={<PrivateRoute element={<AdminDashboard />} adminOnly />} />
-          {/* Conditional Rendering: Redirect authenticated users from sign-in and register pages */}
-          <Route
-            path="/signin"
-            element={user ? <Navigate to="/account" /> : <SignInEmail />}
-          />
-          <Route
-            path="/register"
-            element={user ? <Navigate to="/account" /> : <Register />}
-          />
-                    <Route
-            path="/forgot-password"
-            element={user ? <Navigate to="/forgot-password" /> : <ForgotPassword />}
-          />
-          <Route path="/admin-signin" element={<AdminSignin />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/checkout-summary" element={<CheckoutSummary />} />
-        </Routes>
-        <div className="app-content">
-      </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="/about" element={isLinkEnabled('about') ? <About /> : <NotFound />} />
+        <Route path="/cart" element={isLinkEnabled('cart') ? <Cart /> : <NotFound />} />
+        <Route path="/contact" element={isLinkEnabled('contact') ? <Contact /> : <NotFound />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/return-policy" element={<ReturnPolicy />} />
+        <Route path="/terms-of-service" element={<TermsOfService />} />
+        <Route path="/custom-drum-builder" element={<CustomDrumBuilder />} />
+        <Route path="/artisan-shop" element={<ArtisanShop />} />
+        <Route path="/admin/update-carts" element={<UpdateCartsPage />} />
+        <Route path="/sound-profile-tool" element={<PathSelection setSelectedPath={setSelectedPath} />} />
+        <Route path="/gallery" element={isLinkEnabled('gallery') ? <Gallery /> : <NotFound />} />
+        <Route path="/custom-shop" element={isLinkEnabled('custom-shop') ? <CustomShop /> : <NotFound />} />
+        <Route path="/test-redirect" element={<TestRedirect />} />
+        <Route path="/products" element={isLinkEnabled('products') ? <Products /> : <NotFound />} />
+        <Route path="/products/:productId" element={<ProductDetail />} />
+
+        {/* Regular Pre-Order Page */}
+        <Route path="/pre-order" element={<PreOrderPage isAdmin={isAdmin} />} />
+        
+        {/* Admin Pre-Order Page */}
+        <Route path="/admin/pre-order" element={<PreOrderPage isAdmin={isAdmin} />} />
+
+        <Route path="/account" element={<PrivateRoute element={<AccountPage />} />} />
+        <Route path="/admin" element={<PrivateRoute element={<AdminDashboard />} adminOnly />} />
+        <Route path="/signin" element={user ? <Navigate to="/account" /> : <SignInEmail />} />
+        <Route path="/register" element={user ? <Navigate to="/account" /> : <Register />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/admin-signin" element={<AdminSignin />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/checkout-summary" element={<CheckoutSummary />} />
+      </Routes>
       <Footer navbarLinks={navbarLinks} />
     </div>
   );
