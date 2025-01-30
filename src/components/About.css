@@ -4,7 +4,7 @@
   height: 100vh;
   overflow-x: hidden;
   overflow-y: auto;
-  font-family: "Poppins", sans-serif;
+  /* font-family: "Poppins", sans-serif; */
   scroll-snap-type: y mandatory; /* Enables smooth snap-scrolling */
   scroll-behavior: smooth;
   background-size: cover; /* Ensures full coverage */
