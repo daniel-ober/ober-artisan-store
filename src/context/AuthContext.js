@@ -1,4 +1,3 @@
-// src/context/AuthContext.js
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { auth } from '../firebaseConfig';
 import { fetchUserDoc } from '../services/userService';
@@ -16,8 +15,18 @@ export const AuthProvider = ({ children }) => {
   const fetchUserData = async (currentUser) => {
     setLoading(true);
     try {
+      console.log('Fetching user data for UID:', currentUser.uid);
+
       const userData = await fetchUserDoc(currentUser.uid);
-      setIsAdmin(userData?.isAdmin || false);  // Ensure admin status updates
+      console.log('Fetched User Data:', userData);
+
+      if (userData) {
+        setIsAdmin(userData.isAdmin || false);
+        console.log('Updated isAdmin state:', userData.isAdmin);
+      } else {
+        console.warn('User data not found in Firestore. Setting isAdmin to false.');
+        setIsAdmin(false);
+      }
     } catch (error) {
       console.error('Error fetching user data:', error);
       setIsAdmin(false);
@@ -27,11 +36,13 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((currentUser) => {
+    const unsubscribe = auth.onAuthStateChanged(async (currentUser) => {
       if (currentUser) {
+        console.log('User Signed In:', currentUser);
         setUser(currentUser);
-        fetchUserData(currentUser);  // Re-fetch admin status on sign-in
+        await fetchUserData(currentUser); // Fetch admin status from Firestore
       } else {
+        console.log('User Signed Out');
         setUser(null);
         setIsAdmin(false);
         setLoading(false);
@@ -41,18 +52,8 @@ export const AuthProvider = ({ children }) => {
     return () => unsubscribe();
   }, []);
 
-  const handleSignOut = async () => {
-    try {
-      await auth.signOut();
-      setUser(null);
-      setIsAdmin(false);
-    } catch (error) {
-      console.error('Error signing out:', error);
-    }
-  };
-
   return (
-    <AuthContext.Provider value={{ user, isAdmin, loading, handleSignOut }}>
+    <AuthContext.Provider value={{ user, isAdmin, loading }}>
       {children}
     </AuthContext.Provider>
   );
