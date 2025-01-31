@@ -145,11 +145,11 @@ const NavBar = () => {
             src={
               isDarkMode
                 ? isMenuOpen
-                  ? '/menu/white-e.png'
-                  : '/menu/white-b.png'
+                  ? '/menu/close-button-dark-mode.png'
+                  : '/menu/menu-button-dark-mode.png'
                 : isMenuOpen
-                ? '/menu/black-e.png'
-                : '/menu/black-b.png'
+                ? '/menu/close-button-light-mode.png'
+                : '/menu/menu-button-light-mode.png'
             }
             alt="Menu Toggle"
             className={`menu-arrow-icon ${isMenuOpen ? 'open' : ''}`}
