@@ -4,11 +4,25 @@ import { collection, getDocs, query, where, updateDoc, doc } from "firebase/fire
 import { db } from "../firebaseConfig";
 import { Link } from "react-router-dom";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import ProductCard from "./ProductCard";  // ✅ Fix: Add missing import
+import ProductCard from "./ProductCard";  
 import "./PreOrderPage.css";
 
-const PreOrderPage = () => {
-  const { isAdmin } = useAuth();
+const artisanLogos = {
+  "Heritage": {
+    light: "/overview/logo-black-heritage.png",
+    dark: "/overview/logo-white-heritage.png",
+  },
+  "Feuzon": {
+    light: "/overview/logo-black-feuzon.png",
+    dark: "/overview/logo-white-feuzon.png",
+  },
+  "Sound Legend": {
+    light: "/overview/logo-black-soundlegend.png",
+    dark: "/overview/logo-white-soundlegend.png",
+  },
+};
+
+const PreOrderPage = ({ isDarkMode, isAdmin }) => {  // ✅ Accept isDarkMode as a prop
   const [preOrderItems, setPreOrderItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -37,32 +51,6 @@ const PreOrderPage = () => {
     fetchPreOrderItems();
   }, []);
 
-  // Handle drag-and-drop reordering
-  const onDragEnd = async (result) => {
-    if (!result.destination) return;
-
-    const updatedItems = [...preOrderItems];
-    const [movedItem] = updatedItems.splice(result.source.index, 1);
-    updatedItems.splice(result.destination.index, 0, movedItem);
-
-    updatedItems.forEach((item, index) => {
-      item.displayOrder = index;
-    });
-
-    setPreOrderItems([...updatedItems]);
-
-    try {
-      const batchUpdates = updatedItems.map((item) => {
-        const productRef = doc(db, "products", item.id);
-        return updateDoc(productRef, { displayOrder: item.displayOrder });
-      });
-
-      await Promise.all(batchUpdates);
-    } catch (error) {
-      console.error("❌ Error updating display order:", error);
-    }
-  };
-
   if (loading) {
     return <div className="loading">Loading Pre-Order Items...</div>;
   }
@@ -73,7 +61,7 @@ const PreOrderPage = () => {
       <p className="subtitle">Limited quantities available. Reserve yours today!</p>
 
       {isAdmin ? (
-        <DragDropContext onDragEnd={onDragEnd}>
+        <DragDropContext>
           <Droppable droppableId="preOrderItems" direction="horizontal">
             {(provided) => (
               <div
@@ -97,7 +85,16 @@ const PreOrderPage = () => {
                           loading="lazy"
                         />
                         <div className="pre-order-info">
-                          <h2>{item.name}</h2>
+                          {/* ✅ Dynamically switch logos based on isDarkMode */}
+                          {artisanLogos[item.name] ? (
+                            <img
+                              src={isDarkMode ? artisanLogos[item.name].dark : artisanLogos[item.name].light}
+                              alt={item.name}
+                              className="artisan-logo"
+                            />
+                          ) : (
+                            <h2>{item.name}</h2> // Fallback if no logo exists
+                          )}
                           <p>{item.description}</p>
                           <div className="price-container">
                             <p>Price: ${item.price}</p>
