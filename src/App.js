@@ -12,6 +12,7 @@ import PreOrderPage from './components/PreOrderPage';
 import About from './components/About';
 import Contact from './components/Contact';
 import Cart from './components/Cart';
+import Overview from './components/Overview';
 import Register from './components/Register';
 import ForgotPassword from './components/ForgotPassword';
 import Checkout from './components/Checkout';
@@ -109,6 +110,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="/overview" element={<Overview />} />
         <Route path="/about" element={isLinkEnabled('about') ? <About /> : <NotFound />} />
         <Route path="/cart" element={isLinkEnabled('cart') ? <Cart /> : <NotFound />} />
         <Route path="/contact" element={isLinkEnabled('contact') ? <Contact /> : <NotFound />} />

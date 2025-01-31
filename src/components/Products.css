@@ -1,36 +1,93 @@
-.products-container {
-  padding: 20px;
-  background-color: #f4f4f4f2;
-  text-align: center;
-  border-radius: 8px;
-  margin: 40px;
+/* Admin Product Grid */
+.admin-product-grid {
+  display: flex;
+  flex-wrap: wrap; /* Ensure horizontal layout in admin view */
+  justify-content: center; /* Center items in the grid */
+  gap: 20px;
+  padding: 0 20px; /* Align items */
+  width: 100%;
 }
 
-.page-title {
-  font-size: 28px;
-  text-align: center;
-  margin-bottom: 25px;
-}
-
-/* Updated Grid to Maintain Smooth Drag & Drop */
+/* Product Grid for Non-Admins */
 .product-grid {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center; /* Center items in the grid */
+  gap: 20px;
+  padding: 0 20px; /* Align items */
+}
+
+/* Admin Section */
+.admin-section {
+  display: flex;
+  flex-wrap: wrap; /* Ensure horizontal layout in admin view */
+  justify-content: center; /* Align to center */
+  width: 100%;
+}
+
+/* ✅ Product Item Container */
+.product-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+  transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+.product-item:hover {
+  background-color: #f9f9f9;
+}
+
+
+/* Admin Drag and Drop Container */
+.droppable-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
-  padding: 0 20px;
-}
-
-/* Ensures All Cards Have the Same Height */
-.draggable-item {
-  width: 340px;
-  display: flex;
-  justify-content: center;
-}
-
-.draggable-item .product-card {
+  padding: 20px;
   width: 100%;
-  min-height: 540px;
+}
+
+/* Draggable Item */
+.draggable-item {
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: grab;
+}
+
+/* Prevents Cards from Stacking Vertically */
+.admin-section .droppable-container > * {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+/* Drag Handle */
+.drag-handle {
+  display: none;
+}
+
+.admin-section .drag-handle {
+  display: block;
+  text-align: center;
+  cursor: grab;
+  font-size: 18px;
+  padding: 5px;
+}
+
+.drag-handle::before {
+  content: "⠿";
+  color: #777;
 }
 
 /* Dragging Effect */
@@ -39,4 +96,30 @@
   transform: scale(1.05);
   z-index: 10;
   position: relative;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+  .droppable-container {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .product-grid {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .droppable-container {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-grid {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }

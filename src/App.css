@@ -12,7 +12,19 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  padding: 0; /* Ensure no extra padding is added */
 }
+
+.overview-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  margin-top: 0; /* Adjusted to start directly below navbar */
+  background-color: var(--background-color);
+  padding-top: var(--navbar-height); /* Ensure the background starts just below the navbar */
+  box-sizing: border-box;
+}
+
 
 /* Content with background video */
 .content-with-background {
@@ -54,6 +66,7 @@ body.light {
   background-color: #ffffff;
   color: #000000;
 }
+
 
 body.light .navbar,
 body.light .footer,

@@ -62,11 +62,27 @@ const NavBar = () => {
   }, [user]);
 
   // Toggle dark mode
-  const toggleDarkMode = () => {
-    setIsDarkMode((prev) => !prev);
-    document.body.classList.toggle('dark', !isDarkMode);
-    document.body.classList.toggle('light', isDarkMode);
-  };
+// Toggle dark mode with immediate class change
+const toggleDarkMode = () => {
+  const newMode = !isDarkMode;
+  setIsDarkMode(newMode);
+
+  // Instantly update dark mode in localStorage
+  localStorage.setItem("darkMode", newMode);
+
+  // Immediately apply dark mode styles
+  document.body.classList.toggle("dark", newMode);
+  document.body.classList.toggle("light", !newMode);
+
+  // Reduce flickering by forcing an instant background change
+  document.querySelector(".navbar").style.transition = "none";
+  document.querySelector(".navbar").style.backgroundColor = newMode ? "rgba(20, 20, 20, 0.95)" : "rgba(255, 255, 255, 0.9)";
+  
+  // Re-enable transition after a short delay
+  setTimeout(() => {
+    document.querySelector(".navbar").style.transition = "background-color 0.2s ease-in-out";
+  }, 10);
+};
 
   // Toggle menu
   const toggleMenu = () => {
@@ -101,7 +117,7 @@ const NavBar = () => {
         loop
         muted
         playsInline
-        src="/background-web.mp4" // Updated video source
+        src="/hero-light.mp4" // Updated video source
         type="video/mp4"
       />
 
@@ -163,17 +179,6 @@ const NavBar = () => {
             </Link>
           ))}
 
-          {/* Add the Artisan Shop link */}
-          <Link
-            to="/artisan-shop"
-            className={`nav-link ${
-              location.pathname === '/artisan-shop' ? 'active' : ''
-            }`}
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Artisan Shop
-          </Link>
-
           {user && isAdmin && (
             <Link
               to="/admin"
@@ -202,16 +207,6 @@ const NavBar = () => {
               </button>
             </>
           )}
-
-          <Link
-            to="/custom-drum-builder"
-            className={`nav-link ${
-              location.pathname === '/custom-drum-builder' ? 'active' : ''
-            }`}
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Custom Drum Builder
-          </Link>
         </div>
       )}
     </nav>
