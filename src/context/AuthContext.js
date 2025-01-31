@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { auth } from '../firebaseConfig';
 import { fetchUserDoc } from '../services/userService';
+import { signOut, onAuthStateChanged } from "firebase/auth";
 
 const AuthContext = createContext();
 
@@ -22,13 +23,13 @@ export const AuthProvider = ({ children }) => {
 
       if (userData) {
         setIsAdmin(userData.isAdmin || false);
-        console.log('Updated isAdmin state:', userData.isAdmin);
+        console.log('✅ Updated isAdmin state:', userData.isAdmin);
       } else {
-        console.warn('User data not found in Firestore. Setting isAdmin to false.');
+        console.warn('⚠️ User data not found in Firestore. Setting isAdmin to false.');
         setIsAdmin(false);
       }
     } catch (error) {
-      console.error('Error fetching user data:', error);
+      console.error('❌ Error fetching user data:', error);
       setIsAdmin(false);
     } finally {
       setLoading(false);
@@ -36,13 +37,13 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(async (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
-        console.log('User Signed In:', currentUser);
+        console.log('✅ User Signed In:', currentUser);
         setUser(currentUser);
         await fetchUserData(currentUser); // Fetch admin status from Firestore
       } else {
-        console.log('User Signed Out');
+        console.log('❌ User Signed Out');
         setUser(null);
         setIsAdmin(false);
         setLoading(false);
@@ -52,9 +53,23 @@ export const AuthProvider = ({ children }) => {
     return () => unsubscribe();
   }, []);
 
+  // ✅ Sign out function
+  const logout = async () => {
+    try {
+      await signOut(auth);
+      setUser(null);
+      setIsAdmin(false);
+      console.log("✅ Successfully signed out.");
+    } catch (error) {
+      console.error("❌ Error logging out:", error.message);
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, isAdmin, loading }}>
-      {children}
+    <AuthContext.Provider value={{ user, isAdmin, loading, logout }}>
+      {!loading && children}
     </AuthContext.Provider>
   );
 };
+
+export default AuthProvider;
