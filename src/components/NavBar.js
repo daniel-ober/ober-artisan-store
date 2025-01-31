@@ -10,12 +10,14 @@ import './NavBar.css';
 const NavBar = () => {
   const [navbarLinks, setNavbarLinks] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    return localStorage.getItem("darkMode") === "true";
+  });
   const [isMobileView, setIsMobileView] = useState(false);
   const menuRef = useRef(null);
-  const buttonRef = useRef(null); // Reference for the menu button
+  const buttonRef = useRef(null);
   const location = useLocation();
-  const { user, isAdmin, handleSignOut } = useAuth();
+  const { user, isAdmin, logout } = useAuth(); // ✅ Corrected to use `logout` from AuthContext
   const { cart } = useCart();
 
   const cartItemCount = Object.values(cart).reduce(
@@ -30,11 +32,11 @@ const NavBar = () => {
       setIsMobileView(isMobile);
 
       if (!isMobile) {
-        setIsMenuOpen(false); // Close menu automatically on desktop
+        setIsMenuOpen(false);
       }
     };
 
-    handleResize(); // Initial screen size check
+    handleResize();
     window.addEventListener('resize', handleResize);
 
     return () => {
@@ -52,7 +54,7 @@ const NavBar = () => {
           .map((doc) => ({ id: doc.id, ...doc.data() }))
           .sort((a, b) => a.order - b.order);
 
-        setNavbarLinks(fetchedLinks.filter((link) => link.enabled)); // Only show enabled links
+        setNavbarLinks(fetchedLinks.filter((link) => link.enabled));
       } catch (error) {
         console.error('Error fetching navbar links:', error);
       }
@@ -62,34 +64,20 @@ const NavBar = () => {
   }, [user]);
 
   // Toggle dark mode
-// Toggle dark mode with immediate class change
-const toggleDarkMode = () => {
-  const newMode = !isDarkMode;
-  setIsDarkMode(newMode);
-
-  // Instantly update dark mode in localStorage
-  localStorage.setItem("darkMode", newMode);
-
-  // Immediately apply dark mode styles
-  document.body.classList.toggle("dark", newMode);
-  document.body.classList.toggle("light", !newMode);
-
-  // Reduce flickering by forcing an instant background change
-  document.querySelector(".navbar").style.transition = "none";
-  document.querySelector(".navbar").style.backgroundColor = newMode ? "rgba(20, 20, 20, 0.95)" : "rgba(255, 255, 255, 0.9)";
-  
-  // Re-enable transition after a short delay
-  setTimeout(() => {
-    document.querySelector(".navbar").style.transition = "background-color 0.2s ease-in-out";
-  }, 10);
-};
+  const toggleDarkMode = () => {
+    const newMode = !isDarkMode;
+    setIsDarkMode(newMode);
+    localStorage.setItem("darkMode", newMode);
+    document.body.classList.toggle("dark", newMode);
+    document.body.classList.toggle("light", !newMode);
+  };
 
   // Toggle menu
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
   };
 
-  // Close menu when clicking outside the menu or button
+  // Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -108,6 +96,16 @@ const toggleDarkMode = () => {
     };
   }, []);
 
+  // Handle user sign-out
+  const handleSignOut = async () => {
+    try {
+      await logout(); // ✅ Corrected to call `logout` from `useAuth()`
+      console.log("✅ Successfully signed out.");
+    } catch (error) {
+      console.error("❌ Error signing out:", error.message);
+    }
+  };
+
   return (
     <nav className="navbar">
       {/* Updated Background Video */}
@@ -117,7 +115,7 @@ const toggleDarkMode = () => {
         loop
         muted
         playsInline
-        src="/hero-light.mp4" // Updated video source
+        src={isDarkMode ? "/hero-dark.mp4" : "/hero-light.mp4"} // ✅ Corrected dynamic background
         type="video/mp4"
       />
 
@@ -141,7 +139,7 @@ const toggleDarkMode = () => {
           onClick={toggleMenu}
           aria-expanded={isMenuOpen}
           aria-label="Toggle menu"
-          ref={buttonRef} // Reference for the button
+          ref={buttonRef}
         >
           <img
             src={
@@ -173,7 +171,7 @@ const toggleDarkMode = () => {
                   ? 'active'
                   : ''
               }`}
-              onClick={() => setIsMenuOpen(false)} // Close menu on link click
+              onClick={() => setIsMenuOpen(false)}
             >
               {link.label}
             </Link>
@@ -182,9 +180,7 @@ const toggleDarkMode = () => {
           {user && isAdmin && (
             <Link
               to="/admin"
-              className={`nav-link ${
-                location.pathname === '/admin' ? 'active' : ''
-              }`}
+              className={`nav-link ${location.pathname === '/admin' ? 'active' : ''}`}
               onClick={() => setIsMenuOpen(false)}
             >
               <FaCog /> Admin
@@ -195,9 +191,7 @@ const toggleDarkMode = () => {
             <>
               <Link
                 to="/account"
-                className={`nav-link ${
-                  location.pathname === '/account' ? 'active' : ''
-                }`}
+                className={`nav-link ${location.pathname === '/account' ? 'active' : ''}`}
                 onClick={() => setIsMenuOpen(false)}
               >
                 <FaUserAlt /> Account
