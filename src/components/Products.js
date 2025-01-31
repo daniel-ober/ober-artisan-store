@@ -3,120 +3,84 @@ import { useAuth } from "../context/AuthContext";
 import { collection, getDocs, updateDoc, doc } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import ProductCard from "./ProductCard";
-import { Container, Draggable } from "react-smooth-dnd";
 import "./Products.css";
-
-// Function to swap array elements
-const applyDrag = (arr, dragResult) => {
-  const { removedIndex, addedIndex, payload } = dragResult;
-  if (removedIndex === null || addedIndex === null) return arr;
-  const result = [...arr];
-  const [removed] = result.splice(removedIndex, 1);
-  result.splice(addedIndex, 0, removed);
-  return result;
-};
 
 const Products = () => {
   const { isAdmin } = useAuth();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
-    let isMounted = true;
-
     const fetchProducts = async () => {
       try {
-        console.log("📥 Fetching products...");
+        console.log("📥 Fetching all products...");
         const querySnapshot = await getDocs(collection(db, "products"));
-        const productsList = querySnapshot.docs.map((doc) => ({
+        let productsList = querySnapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
 
-        if (productsList.length === 0) {
-          console.warn("⚠️ No products found.");
-          setError("No products available at the moment.");
-        }
+        // Sort by displayOrder
+        productsList = productsList.sort((a, b) => (a.displayOrder || 0) - (b.displayOrder || 0));
 
-        const activeProducts = productsList
-          .filter((product) => product.status === "active")
-          .sort((a, b) => (a.displayOrder || 0) - (b.displayOrder || 0));
-
-        if (isMounted) {
-          setProducts(activeProducts);
-        }
+        setProducts(productsList);
       } catch (error) {
         console.error("❌ Error fetching products:", error);
-        setError(`Error: ${error.message || "Unable to fetch product details."}`);
       } finally {
-        if (isMounted) setLoading(false);
+        setLoading(false);
       }
     };
 
     fetchProducts();
-    return () => {
-      isMounted = false;
-    };
   }, []);
 
-  // Handle drag-and-drop
-  const onDrop = async (dropResult) => {
-    const updatedProducts = applyDrag(products, dropResult);
+  const moveProduct = async (index, direction) => {
+    const newIndex = index + direction;
+    if (newIndex < 0 || newIndex >= products.length) return;
+
+    const updatedProducts = [...products];
+    [updatedProducts[index], updatedProducts[newIndex]] = [updatedProducts[newIndex], updatedProducts[index]];
+
+    updatedProducts.forEach((item, i) => {
+      item.displayOrder = i;
+    });
+
     setProducts([...updatedProducts]);
 
-    console.log("🔄 Updating product order...");
-
     try {
-      const batchUpdates = updatedProducts.map((product, index) => {
-        const productRef = doc(db, "products", product.id);
-        return updateDoc(productRef, { displayOrder: index });
+      const batchUpdates = updatedProducts.map((item) => {
+        const productRef = doc(db, "products", item.id);
+        return updateDoc(productRef, { displayOrder: item.displayOrder });
       });
 
       await Promise.all(batchUpdates);
-      console.log("✅ Product order updated in Firestore.");
     } catch (error) {
       console.error("❌ Error updating product order:", error);
     }
   };
 
   if (loading) {
-    return <p className="loading-message">Loading products...</p>;
-  }
-
-  if (error) {
-    return (
-      <div className="error-container">
-        <p className="error-message">{error}</p>
-      </div>
-    );
-  }
-
-  if (products.length === 0) {
-    return <p className="no-products-message">No active products available.</p>;
+    return <div className="loading">Loading Products...</div>;
   }
 
   return (
     <div className="products-container">
-      <h1 className="page-title">Products</h1>
+      <h1 className="page-title">Manage Products</h1>
 
       {isAdmin ? (
         <div className="admin-section">
-          <h2>Admin Mode: Drag & Drop to Reorder</h2>
-          <Container
-            lockAxis="y"
-            dragHandleSelector=".drag-handle"
-            onDrop={onDrop}
-            className="product-grid droppable-container"
-          >
-            {products.map((product) => (
-              <Draggable key={product.id}>
-                <div className="draggable-item">
-                  <ProductCard product={product} />
+          <h2>Admin Mode: Use Arrows to Reorder</h2>
+          <div className="admin-product-grid">
+            {products.map((product, index) => (
+              <div key={product.id} className="product-item">
+                <div className="product-controls">
+                  <button className="move-button left" onClick={() => moveProduct(index, -1)}>&larr;</button>
+                  <button className="move-button right" onClick={() => moveProduct(index, 1)}>&rarr;</button>
                 </div>
-              </Draggable>
+                <ProductCard product={product} isAdmin={isAdmin} />
+              </div>
             ))}
-          </Container>
+          </div>
         </div>
       ) : (
         <div className="product-grid">

@@ -1,54 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { useCart } from '../context/CartContext';
-import { Link, useNavigate } from 'react-router-dom';
-import './ProductCard.css';
-import { doc, getDoc, updateDoc } from 'firebase/firestore';
-import { db } from '../firebaseConfig';
+import React from "react";
+import { useCart } from "../context/CartContext";
+import { useNavigate } from "react-router-dom";
+import "./ProductCard.css";
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, isAdmin }) => {
   const { addToCart, cart } = useCart();
-  const [isSoldOut, setIsSoldOut] = useState(false);
-  const [notifyMe, setNotifyMe] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const checkStock = async () => {
-      try {
-        const productRef = doc(db, 'products', product.id);
-        const productSnapshot = await getDoc(productRef);
-        const productData = productSnapshot.data();
-
-        if (productData?.currentQuantity === 0) {
-          setIsSoldOut(true);
-        }
-      } catch (error) {
-        console.error('Error checking stock:', error);
-      }
-    };
-    checkStock();
-  }, [product.id]);
-
   const handleAddToCart = () => {
-    if (!isSoldOut) {
-      addToCart({ ...product, _id: product.id });
-    } else {
-      console.error('Product is out of stock');
-    }
+    addToCart({ ...product, _id: product.id });
   };
 
-  const handleNotifyMe = async () => {
-    try {
-      const productRef = doc(db, 'products', product.id);
-      await updateDoc(productRef, { notifyRequests: (product.notifyRequests || 0) + 1 });
-      alert('You will be notified when this product is back in stock!');
-      setNotifyMe(true);
-    } catch (error) {
-      console.error('Error setting notify me:', error);
-    }
+  const handleViewCart = () => {
+    navigate("/cart");
   };
 
   return (
     <div className="product-card">
+      {/* Product Image */}
       <div
         className="product-image-container"
         onClick={() => navigate(`/products/${product.id}`)}
@@ -57,27 +26,43 @@ const ProductCard = ({ product }) => {
         tabIndex={0}
         aria-label={`View details of ${product.name}`}
       >
-        <img src={product.images?.[0] || '/fallback.jpg'} alt={product.name} className="product-image" />
+        <img
+          src={product.thumbnail || product.images?.[0] || "/fallback.jpg"}
+          alt={product.name}
+          className="product-image"
+          loading="lazy"
+        />
       </div>
-      <div className="product-info">
-        <h3>{product.name}</h3>
-        <p>Delivery: {product.deliveryTime}</p>
-        <p className="product-price">${product.price.toFixed(2)}</p>
-        <Link to={`/products/${product.id}`} className="view-details-link">View Details</Link>
 
+      {/* Product Info */}
+      <div className="product-info">
+        <h3 className="product-name">{product.name}</h3>
+        <p className="product-description">{product.description}</p>
+        <p className="delivery-time">Delivery: {product.deliveryTime}</p>
+        <p className="card-product-price">${product.price.toFixed(2)}</p>
+
+        {/* View Details Button */}
+        <button
+          className="view-details-button"
+          onClick={() => navigate(`/products/${product.id}`)}
+        >
+          View Details
+        </button>
+
+        {/* Product Action Buttons */}
         <div className="product-button-container">
-          {isSoldOut ? (
-            notifyMe ? (
-              <button className="notify-me-button" disabled>Notification Requested</button>
-            ) : (
-              <button className="notify-me-button" onClick={handleNotifyMe}>Notify Me</button>
-            )
+          {product.currentQuantity === 0 ? (
+            <button className="prod-card-notify-me-button" disabled>
+              Out of Stock
+            </button>
+          ) : cart[product.id] ? (
+            <button className="prod-card-view-in-cart-button" onClick={handleViewCart}>
+              View in Cart
+            </button>
           ) : (
-            cart[product.id] ? (
-              <Link to="/cart" className="view-in-cart-button">View in Cart</Link>
-            ) : (
-              <button className="add-to-cart-button" onClick={handleAddToCart}>Add to Cart</button>
-            )
+            <button className="prod-card-add-to-cart-button" onClick={handleAddToCart}>
+              Add to Cart
+            </button>
           )}
         </div>
       </div>
