@@ -1,19 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import './Home.css';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import "./Home.css";
 
 const Home = () => {
-  const [isDarkMode, setIsDarkMode] = useState(() => localStorage.getItem('darkMode') === 'true');
+  const [isDarkMode, setIsDarkMode] = useState(() => localStorage.getItem("darkMode") === "true");
+  const [videoClass, setVideoClass] = useState(""); // Used for fade effect
 
   useEffect(() => {
     const updateDarkMode = () => {
-      const darkModeEnabled = document.body.classList.contains('dark');
-      setIsDarkMode(darkModeEnabled);
-      localStorage.setItem('darkMode', darkModeEnabled);
+      const darkModeEnabled = document.body.classList.contains("dark");
+      setVideoClass("video-fade"); // Start fading out the video
+
+      setTimeout(() => {
+        setIsDarkMode(darkModeEnabled);
+        localStorage.setItem("darkMode", darkModeEnabled);
+        setVideoClass(""); // Reset fade effect
+      }, 300); // Wait 300ms before switching videos
     };
 
     const mutationObserver = new MutationObserver(updateDarkMode);
-    mutationObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+    mutationObserver.observe(document.body, { attributes: true, attributeFilter: ["class"] });
 
     updateDarkMode();
 
@@ -22,20 +28,22 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      {/* Image Section */}
-      <div className="image-container">
-        <img
-          src="/about.png"
-          alt="Coming Soon"
-          className="coming-soon-image"
-        />
-      </div>
+      {/* Hero Video Section */}
+      {/* <video
+        className={`hero-video ${isDarkMode ? "hero-video-dark" : "hero-video-light"} ${videoClass}`}
+        autoPlay
+        loop
+        muted
+        playsInline
+        src={isDarkMode ? "/hero-dark.mp4" : "/hero-light.mp4"} // Dynamic video source
+        type="video/mp4"
+      /> */}
 
       {/* Hero Section */}
       <div className="hero-overlay">
         <h1>Ober Artisan Drums</h1>
         <p>Handcrafted Excellence, Nashville TN</p>
-        <Link to="/products" className="cta-button">
+        <Link to="/overview" className="cta-button">
           Explore Drums
         </Link>
       </div>

@@ -1,0 +1,91 @@
+:root {
+    --scroll: 0;
+    --navbar-height: 120px;
+    --section-height: 110vh; /* Ensures enough height to avoid cutoffs */
+    --background-color: #111111;
+  }
+  
+  /* Overview container */
+  .overview-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    margin-top: var(--navbar-height);
+    background-color: var(--background-color);
+    padding-top: 0;
+  }
+  
+  /* Drum Section (Each Product) */
+  .drum-section {
+    position: relative;
+    min-height: var(--section-height);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    perspective: 2000px;
+    z-index: 2;
+    padding: 5vh 0;
+  }
+  
+  /* Drum Layer (Moves at Medium Speed) */
+  .drum-layer {
+    position: absolute;
+    width: 100vw;
+    height: auto;
+    transform: translateY(calc(var(--scroll) * -0.3px)); /* Slightly slowed */
+    z-index: 3;
+  }
+  
+  .drum-layer img {
+    width: 80vw;
+    height: auto;
+    object-fit: cover;
+    transform: scale(1.05);
+  }
+  
+  /* Text Layer (Moves Fastest) */
+  .text-layer {
+    position: absolute;
+    max-width: 400px;
+    text-align: left;
+    transform: translateY(calc(var(--scroll) * -0.5px)); /* Faster movement */
+    z-index: 4;
+  }
+  
+  /* Header Image for Each Section */
+  .header-image {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    margin-top: 400px;
+  }
+  
+  /* Alternating Layout */
+  .drum-section.left {
+    flex-direction: row-reverse;
+  }
+  
+  .drum-section.right {
+    flex-direction: row;
+  }
+  
+  /* Mobile View */
+  @media (max-width: 768px) {
+    .drum-section {
+      flex-direction: column !important;
+      min-height: auto;
+    }
+  
+    .drum-layer img {
+      width: 100vw;
+    }
+  
+    .text-layer {
+      max-width: 90%;
+    }
+  
+    .header-image {
+      width: 80%;
+    }
+  }
