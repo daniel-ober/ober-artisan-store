@@ -59,6 +59,13 @@ h1 {
   object-fit: cover;
 }
 
+.artisan-logo {
+  max-width: 200px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
 /* Product Information Container */
 .pre-order-info {
   flex-grow: 1;
