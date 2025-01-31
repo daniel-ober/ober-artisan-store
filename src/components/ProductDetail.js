@@ -237,11 +237,11 @@ const ProductDetail = () => {
                       +
                     </button>
                   </div>
-                  <button className="view-cart-button" onClick={handleViewCart}>
+                  <button className="prod-detail-view-cart-button" onClick={handleViewCart}>
                     View in Cart
                   </button>
                   <button
-                    className="remove-cart-button"
+                    className="prod-detail-remove-cart-button"
                     onClick={handleRemoveFromCart}
                   >
                     Remove from Cart
@@ -249,17 +249,17 @@ const ProductDetail = () => {
                 </div>
               ) : isSoldOut ? (
                 <>
-                  <button className="sold-out-button" disabled>
+                  <button className="prod-detail-sold-out-button" disabled>
                     Sold Out
                   </button>
                   {!notifyMe && (
-                    <button className="notify-me-button" onClick={handleNotifyMe}>
+                    <button className="prod-detail-notify-me-button" onClick={handleNotifyMe}>
                       Notify Me When Available
                     </button>
                   )}
                 </>
               ) : (
-                <button onClick={handleAddToCart} className="add-to-cart-button">
+                <button onClick={handleAddToCart} className="prod-detail-add-to-cart-button">
                   Add to Cart
                 </button>
               )}
