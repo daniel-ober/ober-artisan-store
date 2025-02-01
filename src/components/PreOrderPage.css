@@ -1,10 +1,10 @@
 /* Main Pre-Order Page Container */
 .pre-order-page {
   padding: 20px;
-  background-color: #f4f4f4f2;
+  background-color: #f4f4f400;
   text-align: center;
   border-radius: 8px;
-  margin: 25px 40px 40px 40px;
+  /* margin: 25px 40px 40px 40px; */
   overflow: hidden; /* Prevents unwanted scroll jumps */
 }
 
