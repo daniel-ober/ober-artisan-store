@@ -43,7 +43,7 @@ const Home = () => {
       <div className="hero-overlay">
         <h1>Ober Artisan Drums</h1>
         <p>Handcrafted Excellence, Nashville TN</p>
-        <Link to="/overview" className="cta-button">
+        <Link to="/artisanseries" className="cta-button">
           Explore Drums
         </Link>
       </div>

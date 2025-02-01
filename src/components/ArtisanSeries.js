@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import "./Overview.css";
+import "./ArtisanSeries.css";
 
-const Overview = ({ isDarkMode }) => {
+const ArtisanSeries = ({ isDarkMode }) => {
   const containerRef = useRef(null);
   const sectionsRef = useRef([]);
   const [scrollIndex, setScrollIndex] = useState(0);
@@ -10,29 +10,29 @@ const Overview = ({ isDarkMode }) => {
   const drumLines = [
     {
       id: "heritage",
-      image: "/overview/overview-layer2a.png",
-      headerImage: isDarkMode ? "/overview/logo-white-heritage.png" : "/overview/logo-black-heritage.png",
+      image: "/artisan-shop/46.png",
+      headerImage: isDarkMode ? "/artisanseries/logo-white-heritage.png" : "/artisanseries/logo-black-heritage.png",
       description: "balanced, full, rich",
       textAlignment: "left",
     },
     {
       id: "feuzon",
-      image: "/overview/overview-layer2b.png",
-      headerImage: isDarkMode ? "/overview/logo-white-feuzon.png" : "/overview/logo-black-feuzon.png",
+      image: "/artisan-shop/47.png",
+      headerImage: isDarkMode ? "/artisanseries/logo-white-feuzon.png" : "/artisanseries/logo-black-feuzon.png",
       description: "strong, dry, focused",
       textAlignment: "right",
     },
     {
       id: "soundlegend",
-      image: "/overview/overview-layer2c.png",
-      headerImage: isDarkMode ? "/overview/logo-white-soundlegend.png" : "/overview/logo-black-soundlegend.png",
+      image: "/artisan-shop/48.png",
+      headerImage: isDarkMode ? "/artisanseries/logo-white-soundlegend.png" : "/artisanseries/logo-black-soundlegend.png",
       description: "versatile, soulful, articulate",
       textAlignment: "left",
     },
   ];
 
   return (
-    <div className="overview-container" ref={containerRef}>
+    <div className="artisanseries-container" ref={containerRef}>
       {drumLines.map((line) => (
         <section key={line.id} className={`drum-section ${line.textAlignment}`}>
           <div className="drum-layer">
@@ -48,4 +48,4 @@ const Overview = ({ isDarkMode }) => {
   );
 };
 
-export default Overview;
+export default ArtisanSeries;
