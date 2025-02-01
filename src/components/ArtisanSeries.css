@@ -2,11 +2,11 @@
     --scroll: 0;
     --navbar-height: 120px;
     --section-height: 110vh; /* Ensures enough height to avoid cutoffs */
-    --background-color: #111111;
+    --background-color: #11111100;
   }
   
   /* Overview container */
-  .overview-container {
+  .artisanseries-container {
     position: relative;
     width: 100%;
     overflow: hidden;

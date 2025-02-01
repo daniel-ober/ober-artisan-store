@@ -9,16 +9,16 @@ import "./PreOrderPage.css";
 
 const artisanLogos = {
   "Heritage": {
-    light: "/overview/logo-black-heritage.png",
-    dark: "/overview/logo-white-heritage.png",
+    light: "/artisanseries/logo-black-heritage.png",
+    dark: "/artisanseries/logo-white-heritage.png",
   },
   "Feuzon": {
-    light: "/overview/logo-black-feuzon.png",
-    dark: "/overview/logo-white-feuzon.png",
+    light: "/artisanseries/logo-black-feuzon.png",
+    dark: "/artisanseries/logo-white-feuzon.png",
   },
   "Sound Legend": {
-    light: "/overview/logo-black-soundlegend.png",
-    dark: "/overview/logo-white-soundlegend.png",
+    light: "/artisanseries/logo-black-soundlegend.png",
+    dark: "/artisanseries/logo-white-soundlegend.png",
   },
 };
 
