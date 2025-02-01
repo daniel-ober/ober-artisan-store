@@ -57,7 +57,7 @@ body {
 
 /* Dynamic height variables for navbar and footer */
 :root {
-  --navbar-height: 70px; /* Set your navbar height */
+  /* --navbar-height: -70px; Set your navbar height */
   --footer-height: 50px; /* Set your footer height */
 }
 

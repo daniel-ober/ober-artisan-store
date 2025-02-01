@@ -1,28 +1,28 @@
 /* General Page Styling */
 .about-page {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   overflow-x: hidden;
   overflow-y: auto;
-  /* font-family: "Poppins", sans-serif; */
   scroll-snap-type: y mandatory; /* Enables smooth snap-scrolling */
   scroll-behavior: smooth;
   background-size: cover; /* Ensures full coverage */
-  background-position: center;
+  background-position: center top; /* ✅ Aligns image to the top */
   background-attachment: fixed; /* ✅ FIXED BACKGROUND */
   position: relative;
+  padding-top: var(--navbar-height); /* ✅ Ensures it starts below navbar */
 }
 
 /* Full-Screen Sections */
 .about-section {
   width: 100%;
-  height: 100vh; /* Each section takes full viewport height */
+  min-height: 100vh; /* ✅ Ensures full viewport height */
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   position: relative;
-  scroll-snap-align: start; /* Snap to the start of each section */
+  scroll-snap-align: start; /* ✅ Snap-scrolling */
 }
 
 /* Dark Overlay for Readability */
