@@ -3,83 +3,88 @@ import "./ArtisanSeries.css";
 
 const ArtisanSeries = ({ isDarkMode }) => {
   const containerRef = useRef(null);
-  const sectionsRef = useRef([]);
-  const [scrollY, setScrollY] = useState(0);
   const [darkModeActive, setDarkModeActive] = useState(isDarkMode);
 
   useEffect(() => {
     setDarkModeActive(isDarkMode);
-    console.log("🌗 Dark Mode Toggled:", isDarkMode ? "Enabled" : "Disabled");
   }, [isDarkMode]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const drumLines = [
     {
       id: "heritage",
-      image: "/artisan-shop/46.png",
-      headerImage: darkModeActive ? "/logos/heritage2-white.png" : "/logos/heritage2-white.png",
+      image: "/artisan-shop/heritage-left.png",
+      headerImage: darkModeActive
+        ? "/logos/heritage2-white.png"
+        : "/logos/heritage2-black.png",
       description: "balanced, full, rich",
       textAlignment: "left",
     },
     {
       id: "feuzon",
-      image: "/artisan-shop/47.png",
-      headerImage: darkModeActive ? "/logos/feuzon-white.png" : "/logos/feuzon/feuzon-white-thin.png",
+      image: "/artisan-shop/feuzon-right.png",
+      headerImage: darkModeActive
+        ? "/logos/feuzon2-white.png"
+        : "/logos/feuzon2-black.png",
       description: "strong, dry, focused",
       textAlignment: "right",
     },
     {
       id: "soundlegend",
-      image: "/artisan-shop/48.png",
-      headerImage: darkModeActive ? "/logos/soundlegend2-white.png" : "/logos/soundlegend2-white.png",
+      image: "/artisan-shop/soundlegend-left.png",
+      headerImage: darkModeActive
+        ? "/logos/soundlegend2-white.png"
+        : "/logos/soundlegend2-black.png",
       description: "versatile, soulful, articulate",
       textAlignment: "left",
     },
   ];
 
   return (
-    <div className="artisanseries-container" ref={containerRef}>
-      {drumLines.map((line, index) => {
-        const parallaxFactor = index * 200; // Adjust spacing dynamically
-        return (
-          <section
-            key={line.id}
-            className={`drum-section ${line.textAlignment}`}
-            ref={(el) => (sectionsRef.current[index] = el)}
-            style={{
-              transform: `translateY(${scrollY * 0.1 - parallaxFactor}px)`, // Smooth parallax movement
-            }}
-          >
-            <div
-              className="background-layer"
-              style={{ transform: `translateY(${scrollY * 0.05}px) scale(1.1)` }} // Slowest movement
-            ></div>
-            <div
-              className="drum-layer"
-              style={{
-                transform: `translateY(${scrollY * 0.2 - parallaxFactor}px) scale(1.05)`,
-              }}
-            >
-              <img src={line.image} alt={`Drum line: ${line.id}`} />
-            </div>
-            <div
-              className={`text-layer ${line.textAlignment}`}
-              style={{ transform: `translateY(${scrollY * 0.3 - parallaxFactor}px)` }} // Fastest movement
-            >
-              <img src={line.headerImage} alt={`Logo for ${line.id}`} className="header-image" />
-              <p>{line.description}</p>
-            </div>
-          </section>
-        );
-      })}
+    <div
+      className={`artisanseries-container ${darkModeActive ? "dark-mode" : ""}`}
+      ref={containerRef}
+    >
+      {drumLines.map((line) => (
+        <section key={line.id} className={`drum-section ${line.textAlignment}`}>
+          <div className={`text-layer ${line.textAlignment}`}>
+            <img
+              src={line.headerImage}
+              alt={`Logo for ${line.id}`}
+              className="header-image"
+            />
+            <p className={`description ${darkModeActive ? "dark" : "light"}`}>
+              {line.description}
+            </p>
+          </div>
+          <div className="drum-layer">
+            <img src={line.image} alt={`Drum line: ${line.id}`} />
+          </div>
+        </section>
+      ))}
+
+      {/* 🆕 FINAL SECTION WITH 3 DRUM LINEUP */}
+      <section className="drum-final-section">
+        <div className="drum-final-text">
+          <img
+            src={darkModeActive ? "/logos/heritage2-white.png" : "/logos/heritage2-black.png"}
+            alt="Heritage"
+            className="drum-label-img"
+          />
+          <img
+            src={darkModeActive ? "/logos/soundlegend2-white.png" : "/logos/soundlegend2-black.png"}
+            alt="Soundlegend"
+            className="drum-label-img"
+          />
+          <img
+            src={darkModeActive ? "/logos/feuzon2-white.png" : "/logos/feuzon2-black.png"}
+            alt="Feuzon"
+            className="drum-label-img"
+          />
+        </div>
+        <div className="drum-final-image">
+          <img src="/artisan-shop/render-4.png" alt="All three drum models" />
+        </div>
+      </section>
     </div>
   );
 };
