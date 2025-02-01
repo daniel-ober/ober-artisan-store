@@ -33,7 +33,7 @@ const About = () => {
     <div
       className="about-page"
       style={{
-        backgroundImage: `url(${process.env.PUBLIC_URL}/about.png)`, // ✅ FIXED IMAGE REFERENCE
+        backgroundImage: `url(${process.env.PUBLIC_URL}/about/about-1.png)`,
       }}
     >
       {sections.map((section, index) => (
