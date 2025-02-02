@@ -15,28 +15,23 @@ body {
   transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out;
 }
 
-/* Default text color */
-body * {
-  /* color: #000000; */
-}
-
-/* Light Mode Styles */
+/* ✅ Set Light Mode as Default */
 body.light {
   background-color: #ffffff;
   color: #000000;
 }
 
 body.light * {
-  /* color: #000000; */
+  color: #000000;
 }
 
-/* Dark Mode Styles */
+/* ✅ Dark Mode Styles */
 body.dark {
   background-color: #111111;
   color: #ffffff;
 }
 
-/* 🔥 OVERRIDE: Ensure Cart Title Stays White in Dark Mode */
+/* 🔥 OVERRIDE: Cart Title */
 body.dark .cart-title {
   color: white !important;
 }
@@ -45,7 +40,7 @@ body.light .cart-title {
   color: black !important;
 }
 
-/* 🔥 OVERRIDE: Ensure Pre-Order Subtitle Stays White in Dark Mode */
+/* 🔥 OVERRIDE: Pre-Order Subtitle */
 body.dark .subtitle {
   color: white !important;
 }
@@ -54,7 +49,7 @@ body.light .subtitle {
   color: black !important;
 }
 
-/* 🔥 FIX: Ensure Pre-Order Cards Keep Black Text in Dark Mode */
+/* ✅ Fix Pre-Order Cards in Dark Mode */
 body.dark .pre-order-item {
   background-color: white !important;
   color: black !important;
@@ -70,12 +65,12 @@ body.dark .pre-order-item .price {
   color: black !important;
 }
 
-/* 🔥 FIX: Ensure Pre-Order Buttons Stay Dark */
+/* ✅ Fix Pre-Order Buttons */
 body.dark .pre-order-item button,
 body.dark .pre-order-item .pre-order-button {
-  /* background-color: #333 !important; */
+  background-color: #333 !important;
   color: white !important;
-  /* border: 2px solid #555 !important; */
+  border: 2px solid #555 !important;
 }
 
 body.dark .pre-order-item button:hover,
@@ -83,12 +78,12 @@ body.dark .pre-order-item .pre-order-button:hover {
   background-color: #222 !important;
 }
 
-/* 🔥 FIX: Ensure Buttons in Cart Stay Visible */
+/* ✅ Ensure Cart Buttons are Visible */
 body.dark .cart-table button,
 body.dark .cart-table .quantity-adjust {
-  /* background-color: #333 !important; */
+  background-color: #333 !important;
   color: white !important;
-  /* border: 2px solid #555 !important; */
+  border: 2px solid #555 !important;
 }
 
 body.dark .cart-table button:hover,
@@ -96,7 +91,7 @@ body.dark .cart-table .quantity-adjust:hover {
   background-color: #222 !important;
 }
 
-/* 🔥 FIX: Ensure Cart Table Text is Black on White Background */
+/* ✅ Ensure Cart Table Text is Black on White Background */
 body.dark .cart-table {
   background-color: white !important;
   color: black !important;
@@ -108,14 +103,14 @@ body.dark .cart-table td {
   color: black !important;
 }
 
-/* 🔥 FIX: Dark Mode - Ensure Cart Product Name, Description, and Quantity Stay Black */
+/* ✅ Ensure Cart Product Details Stay Black */
 body.dark .cart-table td.product-name,
 body.dark .cart-table td.product-description,
 body.dark .cart-table td.quantity-value {
   color: black !important;
 }
 
-/* 🔥 FIX: Dark Mode - Ensure Product Details Page Text is White */
+/* ✅ Fix Product Details Page in Dark Mode */
 body.dark .product-details {
   background-color: #111 !important;
   color: white !important;
@@ -127,14 +122,14 @@ body.dark .product-details span {
   color: white !important;
 }
 
-/* 🔥 FIX: Contact Page - Ensure Form Background is Dark in Dark Mode */
+/* ✅ Fix Contact Page Background */
 body.dark .contact-container {
   background-color: #222 !important;
   padding: 20px;
   border-radius: 10px;
 }
 
-/* 🔥 FIX: Contact Form Dropdown Background and Text */
+/* ✅ Fix Contact Form Dropdown */
 body.dark .MuiInputBase-root,
 body.dark .MuiInputBase-input {
   background-color: #222 !important;
@@ -149,7 +144,7 @@ body.dark .MuiFormLabel-root {
   color: white !important;
 }
 
-/* 🔥 FIX: Ensure Home Page Text is Always White */
+/* ✅ Ensure Home Page Text is White */
 .hero-overlay h1,
 .hero-overlay p,
 .hero-overlay a {
@@ -166,19 +161,19 @@ body.light .highlights-section .highlight p {
   color: black !important;
 }
 
-/* 🔥 Hero CTA Button Fix */
+/* ✅ Fix CTA Button */
 .hero-overlay .cta-button,
 .hero-overlay .cta-button:hover {
   color: white !important;
   background-color: #ff6600 !important;
 }
 
-/* 🔥 Ensure Highlight Buttons Are Visible */
+/* ✅ Ensure Highlight Buttons Are Visible */
 .highlight button {
   color: white !important;
 }
 
-/* 🔥 Fix visibility for modals and popups */
+/* ✅ Fix Modals and Popups */
 body.dark .MuiDialog-paper {
   background-color: #222222 !important;
   color: #ffffff !important;
@@ -193,17 +188,17 @@ body.dark .MuiDialogContent-root {
 }
 
 body.dark .MuiDialogActions-root button {
-  /* color: #ffffff !important; */
+  color: white !important;
 }
 
-/* 🔥 Fix About Page Text */
+/* ✅ Fix About Page Text */
 .about-page .section-content h2,
 .about-page .section-content h3,
 .about-page .section-content p {
   color: #ffffff !important;
 }
 
-/* 🔥 Responsive Adjustments */
+/* ✅ Responsive Fixes */
 @media (max-width: 768px) {
   .pre-order-item {
     width: 100%;
@@ -212,4 +207,27 @@ body.dark .MuiDialogActions-root button {
   .contact-container {
     padding: 15px;
   }
+}
+
+/* ✅ Footer Dark Mode Toggle */
+.footer-darkmode-toggle {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.footer-theme-toggle {
+  background-color: #222;
+  color: white;
+  border: 2px solid #555;
+  padding: 8px 15px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.footer-theme-toggle:hover {
+  background-color: #111;
+  transform: scale(1.05);
 }
