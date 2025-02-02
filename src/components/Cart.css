@@ -76,7 +76,7 @@
 
 .checkout-button {
   margin-top: 20px;
-  background-color: #08d219;
+  background-color: #26c112;
   color: white;
   padding: 15px 25px;
   font-size: 1.2rem;
@@ -87,7 +87,7 @@
 }
 
 .checkout-button:hover {
-  background-color: #27ae60;
+  background-color: #39cb25;
 }
 
 .quantity-control {
