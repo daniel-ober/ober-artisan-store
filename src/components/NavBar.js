@@ -120,10 +120,6 @@ const NavBar = () => {
         </Link>
       </div>
 
-      <button className="theme-toggle" onClick={toggleDarkMode}>
-        {isDarkMode ? "Light Mode" : "Dark Mode"}
-      </button>
-
       {isMobileView && (
         <button
           className="navbar-menu-container"
