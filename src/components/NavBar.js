@@ -1,83 +1,78 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { FaCartPlus, FaSignOutAlt, FaUserAlt, FaCog } from 'react-icons/fa';
-import { useAuth } from '../context/AuthContext';
-import { useCart } from '../context/CartContext';
-import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../firebaseConfig';
-import './NavBar.css';
+import React, { useRef, useState, useEffect, useContext } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { FaCartPlus, FaSignOutAlt, FaUserAlt, FaCog } from "react-icons/fa";
+import { useAuth } from "../context/AuthContext";
+import { useCart } from "../context/CartContext";
+import { DarkModeContext } from "../context/DarkModeContext";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firebaseConfig";
+import "./NavBar.css";
 
 const NavBar = () => {
   const [navbarLinks, setNavbarLinks] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    return localStorage.getItem("darkMode") === "true";
-  });
-  const [isMobileView, setIsMobileView] = useState(false);
+  const { isDarkMode, setIsDarkMode } = useContext(DarkModeContext);
+  const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 768);
   const menuRef = useRef(null);
   const buttonRef = useRef(null);
   const location = useLocation();
-  const { user, isAdmin, logout } = useAuth(); // ✅ Corrected to use `logout` from AuthContext
+  const { user, isAdmin, logout } = useAuth();
   const { cart } = useCart();
+
+  console.log("📌 Navbar Dark Mode State:", isDarkMode);
 
   const cartItemCount = Object.values(cart).reduce(
     (total, item) => total + item.quantity,
     0
   );
 
-  // Detect screen size
   useEffect(() => {
     const handleResize = () => {
       const isMobile = window.innerWidth <= 768;
       setIsMobileView(isMobile);
-
-      if (!isMobile) {
-        setIsMenuOpen(false);
-      }
+      if (!isMobile) setIsMenuOpen(false);
     };
 
-    handleResize();
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Fetch navbar links from Firestore
   useEffect(() => {
     const fetchNavbarLinks = async () => {
       try {
-        const navbarLinksCollection = collection(db, 'settings', 'site', 'navbarLinks');
+        const navbarLinksCollection = collection(db, "settings", "site", "navbarLinks");
         const navbarLinksSnapshot = await getDocs(navbarLinksCollection);
         const fetchedLinks = navbarLinksSnapshot.docs
           .map((doc) => ({ id: doc.id, ...doc.data() }))
           .sort((a, b) => a.order - b.order);
 
-        setNavbarLinks(fetchedLinks.filter((link) => link.enabled));
+        setNavbarLinks(fetchedLinks.length ? fetchedLinks.filter((link) => link.enabled) : []);
       } catch (error) {
-        console.error('Error fetching navbar links:', error);
+        console.error("Error fetching navbar links:", error);
       }
     };
 
     fetchNavbarLinks();
   }, [user]);
 
-  // Toggle dark mode
+  useEffect(() => {
+    document.body.classList.toggle("dark", isDarkMode);
+    document.body.classList.toggle("light", !isDarkMode);
+  }, [isDarkMode]);
+
   const toggleDarkMode = () => {
     const newMode = !isDarkMode;
     setIsDarkMode(newMode);
-    localStorage.setItem("darkMode", newMode);
+    localStorage.setItem("darkMode", newMode.toString());
+  
     document.body.classList.toggle("dark", newMode);
     document.body.classList.toggle("light", !newMode);
   };
 
-  // Toggle menu
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
   };
 
-  // Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -90,16 +85,13 @@ const NavBar = () => {
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Handle user sign-out
   const handleSignOut = async () => {
     try {
-      await logout(); // ✅ Corrected to call `logout` from `useAuth()`
+      await logout();
       console.log("✅ Successfully signed out.");
     } catch (error) {
       console.error("❌ Error signing out:", error.message);
@@ -108,19 +100,18 @@ const NavBar = () => {
 
   return (
     <nav className="navbar">
-      {/* Updated Background Video */}
       <video
         className="navbar-background"
         autoPlay
         loop
         muted
         playsInline
-        src={isDarkMode ? "/hero-dark.mp4" : "/hero-light.mp4"} // ✅ Corrected dynamic background
+        src={isDarkMode ? "/hero-dark.mp4" : "/hero-light.mp4"}
         type="video/mp4"
       />
 
       <div className="navbar-logo">
-        <Link to="/">
+      <Link to="/">
           <img
             src={isDarkMode ? process.env.REACT_APP_LOGO_LIGHT : process.env.REACT_APP_LOGO_DARK}
             alt="Logo"
@@ -130,7 +121,7 @@ const NavBar = () => {
       </div>
 
       <button className="theme-toggle" onClick={toggleDarkMode}>
-        {isDarkMode ? 'Light Mode' : 'Dark Mode'}
+        {isDarkMode ? "Light Mode" : "Dark Mode"}
       </button>
 
       {isMobileView && (
@@ -145,32 +136,25 @@ const NavBar = () => {
             src={
               isDarkMode
                 ? isMenuOpen
-                  ? '/menu/close-button-dark-mode.png'
-                  : '/menu/menu-button-dark-mode.png'
+                  ? "/menu/close-button-dark-mode.png"
+                  : "/menu/menu-button-dark-mode.png"
                 : isMenuOpen
-                ? '/menu/close-button-light-mode.png'
-                : '/menu/menu-button-light-mode.png'
+                ? "/menu/close-button-light-mode.png"
+                : "/menu/menu-button-light-mode.png"
             }
             alt="Menu Toggle"
-            className={`menu-arrow-icon ${isMenuOpen ? 'open' : ''}`}
+            className={`menu-arrow-icon ${isMenuOpen ? "open" : ""}`}
           />
         </button>
       )}
 
       {(isMenuOpen || !isMobileView) && (
-        <div
-          className={`navbar-links ${isMobileView && isMenuOpen ? 'open' : ''}`}
-          ref={menuRef}
-        >
+        <div className={`navbar-links ${isMobileView && isMenuOpen ? "open" : ""}`} ref={menuRef}>
           {navbarLinks.map((link) => (
             <Link
               key={link.id}
-              to={`/${link.name.toLowerCase().replace(/\s+/g, '-')}`}
-              className={`nav-link ${
-                location.pathname === `/${link.name.toLowerCase().replace(/\s+/g, '-')}`
-                  ? 'active'
-                  : ''
-              }`}
+              to={`/${link.name.toLowerCase().replace(/\s+/g, "-")}`}
+              className={`nav-link ${location.pathname === `/${link.name.toLowerCase().replace(/\s+/g, "-")}` ? "active" : ""}`}
               onClick={() => setIsMenuOpen(false)}
             >
               {link.label}
@@ -180,7 +164,7 @@ const NavBar = () => {
           {user && isAdmin && (
             <Link
               to="/admin"
-              className={`nav-link ${location.pathname === '/admin' ? 'active' : ''}`}
+              className={`nav-link ${location.pathname === "/admin" ? "active" : ""}`}
               onClick={() => setIsMenuOpen(false)}
             >
               <FaCog /> Admin
@@ -191,7 +175,7 @@ const NavBar = () => {
             <>
               <Link
                 to="/account"
-                className={`nav-link ${location.pathname === '/account' ? 'active' : ''}`}
+                className={`nav-link ${location.pathname === "/account" ? "active" : ""}`}
                 onClick={() => setIsMenuOpen(false)}
               >
                 <FaUserAlt /> Account

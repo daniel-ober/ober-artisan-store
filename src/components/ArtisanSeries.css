@@ -1,16 +1,16 @@
 :root {
   --scroll: 0;
-  --section-height: 95vh; /* ✅ Slightly reduced height for better spacing */
+  --section-height: 100vh; /* Full viewport height */
 }
 
-/* 🏠 Main Container */
+/* 🏠 Main Container - Enables Snap Scrolling */
 .artisanseries-container {
   position: relative;
   width: 100%;
-  overflow: hidden;
-  background-color: var(--background-color);
+  overflow-y: scroll; /* Enables scrolling */
+  height: 100vh; /* Ensures full-page scroll */
   scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
+  scroll-snap-type: y mandatory; /* Forces snapping */
 }
 
 /* 🥁 Drum Section */
@@ -21,16 +21,14 @@
   align-items: center;
   justify-content: space-between;
   overflow: hidden;
-  perspective: 2000px;
   padding: 0 4vw;
-  scroll-snap-align: start;
+  scroll-snap-align: start; /* Each section locks into place */
 }
 
 /* 🛠 Fix: Drum Image “Kissing” the Edge */
 .drum-layer {
   width: 52vw;
   z-index: 3;
-  will-change: transform;
 }
 
 .drum-section.left .drum-layer {
@@ -56,23 +54,17 @@
   flex-direction: column;
   justify-content: center;
   z-index: 4;
-  will-change: transform;
-  transform: translateY(calc(var(--scroll) * -0.4px));
 }
 
 /* ✅ Ensures proper text positioning */
 .text-layer.right {
   text-align: right;
   margin-left: auto;
-  display: flex;
-  align-items: flex-end;
 }
 
 .text-layer.left {
   text-align: left;
   margin-right: auto;
-  display: flex;
-  align-items: flex-start;
 }
 
 /* 🎨 Dark Mode Styling */
@@ -108,6 +100,7 @@
   text-align: center;
   padding: 0;
   margin: -2vh 0 0 0;
+  scroll-snap-align: start; /* Locks final section */
 }
 
 /* Drum Labels */
@@ -116,7 +109,7 @@
   justify-content: center;
   align-items: center;
   padding-bottom: 1vh;
-  gap: 14vw; /* ✅ Adjusted spacing between labels */
+  gap: 14vw;
 }
 
 /* Individual Drum Label Adjustments */
@@ -127,16 +120,16 @@
 
 /* 🛠 Adjustments for Individual Labels */
 .drum-label-img.heritage {
-  margin-right: 2vw; /* ✅ Slightly moved for better centering */
+  margin-right: 2vw;
 }
 
 .drum-label-img.soundlegend {
-  margin-right: 1vw; /* ✅ Slightly fine-tuned */
-  transform: translateY(-14px); /* ✅ Moves this label UP slightly more */
+  margin-right: 1vw;
+  transform: translateY(-14px);
 }
 
 .drum-label-img.feuzon {
-  margin-left: 3vw; /* ✅ Moved slightly for balance */
+  margin-left: 3vw;
 }
 
 /* Drum Image Container */
@@ -154,48 +147,4 @@
   height: auto;
   display: block;
   margin: 0 auto;
-}
-
-/* 🛠 Mobile View */
-@media (max-width: 768px) {
-  .drum-section {
-    flex-direction: column !important;
-    height: auto;
-  }
-
-  .drum-layer {
-    width: 90vw;
-  }
-
-  .text-layer {
-    width: 90%;
-    text-align: center !important;
-    align-items: center !important;
-  }
-
-  .header-image {
-    width: 80%;
-  }
-
-  /* Adjustments for Final Section */
-  .drum-final-text {
-    flex-direction: column;
-    align-items: center;
-    padding-bottom: 1vh;
-    gap: 2vh;
-  }
-
-  .drum-label-img {
-    width: 90px;
-    margin-bottom: 5px;
-  }
-
-  /* Move soundlegend up slightly on mobile */
-  .drum-label-img.soundlegend {
-    transform: translateY(-7px);
-  }
-
-  .drum-final-image img {
-    width: 100%;
-  }
 }

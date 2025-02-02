@@ -141,7 +141,7 @@
 /* Align values to the left */
 .artisan-specs-table td:last-child {
   text-align: left;
-  color: #000000;
+  /* color: #000000; */
 }
 
 /* Price Section */
@@ -154,8 +154,8 @@
 }
 
 .product-price {
-  color: #156d19;
-  font-weight: 600;
+  color: #e8c100;
+  font-weight: 1000;
   font-size: 24px;
 }
 
@@ -268,11 +268,8 @@
 }
 
 .prod-detail-view-cart-button:hover {
-  background-color: #0056b3;
-}
-
-.prod-detail-view-cart-button:hover {
-  background-color: #2347c8;
+  background-color: #0062ff;
+  color: white;
 }
 
 /* 📱 Responsive Design for Mobile & Tablets */
