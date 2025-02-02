@@ -46,7 +46,8 @@ const NavBar = () => {
           .map((doc) => ({ id: doc.id, ...doc.data() }))
           .sort((a, b) => a.order - b.order);
 
-        setNavbarLinks(fetchedLinks.length ? fetchedLinks.filter((link) => link.enabled) : []);
+        // ✅ Filter out "Home" from Firebase so it doesn’t duplicate
+        setNavbarLinks(fetchedLinks.length ? fetchedLinks.filter((link) => link.name.toLowerCase() !== "home" && link.enabled) : []);
       } catch (error) {
         console.error("Error fetching navbar links:", error);
       }
@@ -64,7 +65,7 @@ const NavBar = () => {
     const newMode = !isDarkMode;
     setIsDarkMode(newMode);
     localStorage.setItem("darkMode", newMode.toString());
-  
+
     document.body.classList.toggle("dark", newMode);
     document.body.classList.toggle("light", !newMode);
   };
@@ -111,7 +112,7 @@ const NavBar = () => {
       />
 
       <div className="navbar-logo">
-      <Link to="/">
+        <Link to="/">
           <img
             src={isDarkMode ? process.env.REACT_APP_LOGO_LIGHT : process.env.REACT_APP_LOGO_DARK}
             alt="Logo"
@@ -146,6 +147,15 @@ const NavBar = () => {
 
       {(isMenuOpen || !isMobileView) && (
         <div className={`navbar-links ${isMobileView && isMenuOpen ? "open" : ""}`} ref={menuRef}>
+          {/* ✅ Manually added "Home" link back */}
+          <Link
+            to="/"
+            className={`nav-link ${location.pathname === "/" ? "active" : ""}`}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Home
+          </Link>
+
           {navbarLinks.map((link) => (
             <Link
               key={link.id}
