@@ -4,20 +4,17 @@
   background-color: #f4f4f400;
   text-align: center;
   border-radius: 8px;
-  /* margin: 25px 40px 40px 40px; */
   overflow: hidden; /* Prevents unwanted scroll jumps */
 }
 
 /* Page Titles */
 h1 {
   font-size: 2.5rem;
-  color: #333;
   margin-bottom: 10px;
 }
 
 .subtitle {
   font-size: 1.2rem;
-  color: #555;
   margin-bottom: 20px;
 }
 
@@ -27,13 +24,13 @@ h1 {
   flex-wrap: wrap;
   justify-content: center;
   gap: 30px;
-  min-height: 300px; /* Prevents collapse when dragging */
+  min-height: 300px;
   position: relative;
 }
 
 /* Individual Product Card */
 .pre-order-item {
-  background-color: #fff;
+  background-color: white !important;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -74,11 +71,40 @@ h1 {
   flex-direction: column;
 }
 
-/* Product Titles */
-.pre-order-info h2 {
-  font-size: 1.5rem;
-  color: #333;
-  margin-bottom: 10px;
+/* ✅ FIX 1: Ensure Product Card Background is ALWAYS WHITE in dark mode */
+body.dark .pre-order-item {
+  background-color: white !important;
+  color: black !important;
+}
+
+/* ✅ FIX 2: Ensure Text is BLACK in dark mode */
+body.dark .pre-order-item h2,
+body.dark .pre-order-item p,
+body.dark .pre-order-item .delivery,
+body.dark .pre-order-item .price {
+  color: black !important;
+}
+
+/* ✅ FIX 3: Ensure "View Details" & "Add to Cart" Buttons have a DARK background in dark mode */
+body.dark .pre-order-button {
+  background-color: #222 !important;
+  color: white !important;
+  border: 1px solid #444 !important;
+}
+
+body.dark .pre-order-button:hover {
+  background-color: #111 !important;
+}
+
+/* ✅ FIX 4: Ensure Dark Mode Buttons are Properly Styled */
+body.dark .pre-order-item a button {
+  background-color: #222 !important;
+  color: white !important;
+  border: 1px solid #444 !important;
+}
+
+body.dark .pre-order-item a button:hover {
+  background-color: #111 !important;
 }
 
 /* Drag and Drop Fixes */
@@ -127,6 +153,20 @@ h1 {
 html, body {
   overscroll-behavior: none;
   scroll-behavior: smooth;
+}
+
+/* 🔥 FORCE FIX: Ensure Pre-Order Buttons Have a Dark Background */
+body.dark .pre-order-item button,
+body.dark .pre-order-item .pre-order-button {
+  background-color: #222 !important;
+  color: white !important;
+  border: 2px solid #444 !important;
+}
+
+/* 🔥 FORCE FIX: Ensure Hover State is Also Dark */
+body.dark .pre-order-item button:hover,
+body.dark .pre-order-item .pre-order-button:hover {
+  background-color: #111 !important;
 }
 
 /* Responsive Styles */
