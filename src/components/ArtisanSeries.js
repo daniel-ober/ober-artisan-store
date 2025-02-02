@@ -1,12 +1,22 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { DarkModeContext } from "../context/DarkModeContext"; // ✅ Use Global Dark Mode State
 import "./ArtisanSeries.css";
 
-const ArtisanSeries = ({ isDarkMode }) => {
-  const containerRef = useRef(null);
+const ArtisanSeries = () => {
+  const { isDarkMode } = useContext(DarkModeContext); // ✅ Get Dark Mode state from context
   const [darkModeActive, setDarkModeActive] = useState(isDarkMode);
 
   useEffect(() => {
+    console.log("🎨 ArtisanSeries: Dark Mode Changed →", isDarkMode);
+
+    // 🔄 Preserve Scroll Position
+    const scrollPosition = window.scrollY;
     setDarkModeActive(isDarkMode);
+    
+    // Restore the user's scroll position after re-render
+    setTimeout(() => {
+      window.scrollTo(0, scrollPosition);
+    }, 0); // Ensure this runs after re-render
   }, [isDarkMode]);
 
   const drumLines = [
@@ -14,8 +24,8 @@ const ArtisanSeries = ({ isDarkMode }) => {
       id: "heritage",
       image: "/artisan-shop/heritage-left.png",
       headerImage: darkModeActive
-        ? "/logos/heritage2-white.png"
-        : "/logos/heritage2-black.png",
+        ? "/artisanseries/heritage-white.png"
+        : "/artisanseries/heritage-black.png",
       description: "balanced, full, rich",
       textAlignment: "left",
     },
@@ -23,8 +33,8 @@ const ArtisanSeries = ({ isDarkMode }) => {
       id: "feuzon",
       image: "/artisan-shop/feuzon-right.png",
       headerImage: darkModeActive
-        ? "/logos/feuzon2-white.png"
-        : "/logos/feuzon2-black.png",
+        ? "/artisanseries/feuzon-white.png"
+        : "/artisanseries/feuzon-black.png",
       description: "strong, dry, focused",
       textAlignment: "right",
     },
@@ -32,29 +42,26 @@ const ArtisanSeries = ({ isDarkMode }) => {
       id: "soundlegend",
       image: "/artisan-shop/soundlegend-left.png",
       headerImage: darkModeActive
-        ? "/logos/soundlegend2-white.png"
-        : "/logos/soundlegend2-black.png",
+        ? "/artisanseries/soundlegend-white.png"
+        : "/artisanseries/soundlegend-black.png",
       description: "versatile, soulful, articulate",
       textAlignment: "left",
     },
   ];
 
+  console.log("📌 ArtisanSeries Dark Mode State:", darkModeActive);
+  console.log("📌 Current Image Paths:");
+  drumLines.forEach((line) =>
+    console.log(`${line.id}: ${line.headerImage}`)
+  );
+
   return (
-    <div
-      className={`artisanseries-container ${darkModeActive ? "dark-mode" : ""}`}
-      ref={containerRef}
-    >
+    <div className={`artisanseries-container ${darkModeActive ? "dark-mode" : ""}`}>
       {drumLines.map((line) => (
         <section key={line.id} className={`drum-section ${line.textAlignment}`}>
           <div className={`text-layer ${line.textAlignment}`}>
-            <img
-              src={line.headerImage}
-              alt={`Logo for ${line.id}`}
-              className="header-image"
-            />
-            <p className={`description ${darkModeActive ? "dark" : "light"}`}>
-              {line.description}
-            </p>
+            <img src={line.headerImage} alt={`Logo for ${line.id}`} className="header-image" />
+            <p className={`description ${darkModeActive ? "dark" : "light"}`}>{line.description}</p>
           </div>
           <div className="drum-layer">
             <img src={line.image} alt={`Drum line: ${line.id}`} />
@@ -66,19 +73,19 @@ const ArtisanSeries = ({ isDarkMode }) => {
       <section className="drum-final-section">
         <div className="drum-final-text">
           <img
-            src={darkModeActive ? "/logos/heritage2-white.png" : "/logos/heritage2-black.png"}
+            src={darkModeActive ? "/artisanseries/heritage-white.png" : "/artisanseries/heritage-black.png"}
             alt="Heritage"
-            className="drum-label-img"
+            className="drum-label-img heritage"
           />
           <img
-            src={darkModeActive ? "/logos/soundlegend2-white.png" : "/logos/soundlegend2-black.png"}
+            src={darkModeActive ? "/artisanseries/soundlegend-white.png" : "/artisanseries/soundlegend-black.png"}
             alt="Soundlegend"
-            className="drum-label-img"
+            className="drum-label-img soundlegend"
           />
           <img
-            src={darkModeActive ? "/logos/feuzon2-white.png" : "/logos/feuzon2-black.png"}
+            src={darkModeActive ? "/artisanseries/feuzon-white.png" : "/artisanseries/feuzon-black.png"}
             alt="Feuzon"
-            className="drum-label-img"
+            className="drum-label-img feuzon"
           />
         </div>
         <div className="drum-final-image">

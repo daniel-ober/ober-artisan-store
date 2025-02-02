@@ -19,7 +19,7 @@
   height: 100%;
   object-fit: cover;
   z-index: -1;
-  opacity: 0.5; /* Adjust opacity as needed */
+  opacity: 0.5;
 }
 
 /* Dark Mode - Override background video opacity */
@@ -27,10 +27,8 @@ body.dark .navbar-background {
   opacity: 0.5;
 }
 
-
 /* Logo Section */
 .navbar-logo {
-  /* margin-bottom: 10px; */
   width: 100%;
   max-width: 500px;
 }
@@ -38,7 +36,6 @@ body.dark .navbar-background {
 .logo-img {
   min-width: 75%;
   max-height: 50%;
-
 }
 
 /* Navbar Links */
@@ -50,23 +47,21 @@ body.dark .navbar-background {
 
 .nav-link {
   color: #000000;
-  text-decoration:none;
+  text-decoration: none;
   font-size: 16px;
   padding: 15px 12px;
-  /* border-radius: 5px; */
   cursor: pointer;
 }
 
 .nav-link:hover {
   color: hsl(46, 100%, 89%);
-  /* background-color: #115060ba; */
   border-radius: 10px;
   transition: ease-in-out 0.3;
 }
 
 .nav-link.active {
   color: hsl(48, 62%, 91%);
-  text-decoration:underline;
+  text-decoration: underline;
 }
 
 /* Cart Link Container */
@@ -77,11 +72,10 @@ body.dark .navbar-background {
 /* Cart Preview Window */
 .cart-preview-container {
   position: fixed;
-  top: 60px;  /* Ensures the preview is below the navbar */
+  top: 60px;
   right: 20px;
   width: 360px;
   background-color: white;
-  /* border: 1px solid #ddd; */
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   z-index: 1050;
@@ -99,32 +93,48 @@ body.dark .navbar-background {
 }
 
 .nav-link-signout {
-  background-color:#0b6e8000;
+  background-color: transparent !important;
 }
 
-/* Fade In Animation for Cart */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Dropdown Menu for Mobile */
+/* 🔥 FIX: Menu Button Always Fully Transparent (No Background, No Border, No Outline) */
 .navbar-menu-container {
   display: none;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   cursor: pointer;
-  border: none;
-  /* padding-bottom: 20px; */
+  border: none !important;
+  background: none !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
+/* 🔥 Ensure Dark Mode Menu Button is Fully Transparent */
+body.dark .navbar-menu-container {
+  background: none !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* 🔥 Prevent Hover from Changing Menu Button in Dark Mode */
+.navbar-menu-container:hover,
+body.dark .navbar-menu-container:hover {
+  background: none !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* 🔥 Prevent Hover from Changing Menu Button in Light Mode */
+body.light .navbar-menu-container:hover {
+  background: none !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* 🔥 Ensure Menu Icon (Image) is Visible */
 .menu-arrow-icon {
   width: 35px;
   height: 35px;
@@ -132,6 +142,7 @@ body.dark .navbar-background {
   transition: transform 0.3s ease;
 }
 
+/* Menu Button Animation */
 .menu-arrow-icon.open {
   transform: rotate(360deg);
 }
@@ -142,20 +153,15 @@ body.dark .navbar-background {
     padding: 20px;
   }
 
-  .navbar-logo {
-    /* margin-bottom: 5px; */
-    /* width: 100%; */
-  }
-
-  .logo-img {
-
-width: 50%;  }
-
   .navbar-menu-container {
     display: flex;
-    background-color: transparent;
     align-items: center;
     justify-content: center;
+  }
+
+  /* 🔥 Ensure Mobile Navbar Links are White in Light Mode */
+  body.light .navbar-links .nav-link {
+    color: white !important;
   }
 
   .navbar-links {
@@ -180,15 +186,7 @@ width: 50%;  }
     padding: 20px 0px 20px 0px;
   }
 
-  .nav-link {
-    font-size: 14px;
-    padding: 6px;
-    margin: 8px;
-    width: 100%;
-    text-align: center;
-    color: rgb(255, 255, 255);
-  }
-
+  /* Hover & Active States */
   .nav-link.active,
   .nav-link:hover {
     color: #69b0fc;
@@ -208,5 +206,16 @@ width: 50%;  }
     display: flex;
     justify-content: center;
   }
+}
 
+/* 🔥 Fade In Animation for Cart */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

@@ -8,7 +8,7 @@
 .cart-title {
   font-size: 2rem;
   text-align: center;
-  color: var(--text-color, #282828);
+  color: var(--text-color, #555);
   font-weight: 550;
   margin-bottom: 20px;
 }
@@ -76,7 +76,7 @@
 
 .checkout-button {
   margin-top: 20px;
-  background-color: #0da81a;
+  background-color: #08d219;
   color: white;
   padding: 15px 25px;
   font-size: 1.2rem;

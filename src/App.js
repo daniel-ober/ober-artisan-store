@@ -40,7 +40,9 @@ import AdminSignin from './components/AdminSignin';
 import PathSelection from './components/PathSelection';
 import CustomDrumBuilder from './components/CustomDrumBuilder';
 import SoundProfileRecommendations from './components/SoundProfileRecommendations';
-import UpdateCartsPage from "./components/UpdateCartsPage"; // Import the page
+import UpdateCartsPage from "./components/UpdateCartsPage";
+import { DarkModeProvider } from "./context/DarkModeContext";
+
 import './App.css';
 
 function App() {
@@ -48,12 +50,15 @@ function App() {
   const [navbarLinks, setNavbarLinks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedPath, setSelectedPath] = useState(null);
+  const [isDarkMode, setIsDarkMode] = useState(() => localStorage.getItem("darkMode") === "true"); // ✅ Manage Dark Mode
+
   const navigate = useNavigate();
   const location = useLocation();
 
   // Debugging logs
   console.log('🔍 User from AuthContext:', user);
   console.log('🔍 Admin Status in App.js:', isAdmin);
+  console.log('🌓 Global Dark Mode State:', isDarkMode);
 
   // Route to tab mapping for tracking navigation changes
   const routeToTabMap = useMemo(() => ({
@@ -64,6 +69,7 @@ function App() {
     '/gallery': 'Gallery',
     '/pre-order': 'PreOrder',
     '/custom-shop': 'CustomShop',
+    '/artisanseries': 'ArtisanSeries',
     '/products': 'Products',
     '/signin': 'SignIn',
     '/terms-of-service': 'TermsOfService',
@@ -78,6 +84,22 @@ function App() {
     const activeTab = routeToTabMap[location.pathname] || 'NotFound';
     console.log(`📌 Current Tab changed to: ${activeTab}`);
   }, [location.pathname, routeToTabMap]);
+
+  // ✅ Apply dark mode class to <body> on load and state changes
+  useEffect(() => {
+    document.body.classList.toggle("dark", isDarkMode);
+    document.body.classList.toggle("light", !isDarkMode);
+  }, [isDarkMode]);
+
+  // ✅ Toggle Dark Mode Function
+  const toggleDarkMode = () => {
+    const newMode = !isDarkMode;
+    setIsDarkMode(newMode);
+    localStorage.setItem("darkMode", newMode.toString());
+    document.body.classList.toggle("dark", newMode);
+    document.body.classList.toggle("light", !newMode);
+    console.log("🌓 Dark Mode Toggled in App.js:", newMode);
+  };
 
   // Fetch Navbar Links from Firestore
   useEffect(() => {
@@ -105,12 +127,18 @@ function App() {
   if (loading) return <div>Loading...</div>;
 
   return (
+    <DarkModeProvider>
     <div className="app-container">
-      <NavBar navbarLinks={navbarLinks} />
+      {/* ✅ Pass toggleDarkMode and isDarkMode to Navbar */}
+      <NavBar navbarLinks={navbarLinks} isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
+      
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="*" element={<Navigate to="/" replace />} />
-        <Route path="/artisanseries" element={<ArtisanSeries />} />
+        
+        {/* ✅ Pass isDarkMode to ArtisanSeries */}
+        <Route path="/artisanseries" element={<ArtisanSeries isDarkMode={isDarkMode} />} />
+
         <Route path="/about" element={isLinkEnabled('about') ? <About /> : <NotFound />} />
         <Route path="/cart" element={isLinkEnabled('cart') ? <Cart /> : <NotFound />} />
         <Route path="/contact" element={isLinkEnabled('contact') ? <Contact /> : <NotFound />} />
@@ -119,22 +147,17 @@ function App() {
         <Route path="/terms-of-service" element={<TermsOfService />} />
         <Route path="/custom-drum-builder" element={<CustomDrumBuilder />} />
         <Route path="/artisan-shop" element={<ArtisanShop />} />
-        <Route path="/admin/update-carts" element={<UpdateCartsPage />} />
-        <Route path="/sound-profile-tool" element={<PathSelection setSelectedPath={setSelectedPath} />} />
         <Route path="/gallery" element={isLinkEnabled('gallery') ? <Gallery /> : <NotFound />} />
         <Route path="/custom-shop" element={isLinkEnabled('custom-shop') ? <CustomShop /> : <NotFound />} />
-        <Route path="/test-redirect" element={<TestRedirect />} />
         <Route path="/products" element={isLinkEnabled('products') ? <Products /> : <NotFound />} />
         <Route path="/products/:productId" element={<ProductDetail />} />
 
-        {/* Regular Pre-Order Page */}
-        <Route path="/pre-order" element={<PreOrderPage isAdmin={isAdmin} />} />
-        
-        {/* Admin Pre-Order Page */}
-        <Route path="/admin/pre-order" element={<PreOrderPage isAdmin={isAdmin} />} />
+        {/* ✅ Pass isDarkMode to PreOrderPage */}
+        <Route path="/pre-order" element={<PreOrderPage isAdmin={isAdmin} isDarkMode={isDarkMode} />} />
 
         <Route path="/account" element={<PrivateRoute element={<AccountPage />} />} />
         <Route path="/admin" element={<PrivateRoute element={<AdminDashboard />} adminOnly />} />
+        <Route path="/admin/update-carts" element={<UpdateCartsPage />} />
         <Route path="/signin" element={user ? <Navigate to="/account" /> : <SignInEmail />} />
         <Route path="/register" element={user ? <Navigate to="/account" /> : <Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -142,8 +165,10 @@ function App() {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/checkout-summary" element={<CheckoutSummary />} />
       </Routes>
+
       <Footer navbarLinks={navbarLinks} />
     </div>
+  </DarkModeProvider>
   );
 }
 
