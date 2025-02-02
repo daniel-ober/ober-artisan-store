@@ -136,8 +136,8 @@ body.light .navbar-menu-container:hover {
 
 /* 🔥 Ensure Menu Icon (Image) is Visible */
 .menu-arrow-icon {
-  width: 35px;
-  height: 35px;
+  width: 40px;
+  height: 40px;
   margin: -8.4px;
   transition: transform 0.3s ease;
 }

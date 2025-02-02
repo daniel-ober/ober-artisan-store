@@ -1,6 +1,6 @@
 /* Footer container */
 .footer-container {
-  background-color: #333;
+  background-color: #383838;
   color: white;
   padding: 20px 0;
   text-align: center;
@@ -51,26 +51,46 @@
 /* Bottom row: Contact and Copyright */
 .footer-bottom {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  padding-top: 10px;
+  /* padding-top: 10px; */
   font-size: 12px;
-}
-
-/* Contact section */
-.footer-contact {
-  text-align: center;
-  flex: 1;
-}
-
-.footer-contact-us {
-  font-size: 14px;
-  text-decoration: underline;
 }
 
 /* Copyright section */
 .footer-copyright {
   text-align: center;
   flex: 1;
+}
+
+/* 🔥 Dark Mode Toggle Button */
+.footer-theme-toggle {
+  display: block;
+  margin: 15px auto;
+  padding: 10px 15px;
+  font-size: 12px;
+  font-weight: bold;
+  /* border-radius: 6px; */
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+  background-color: #222;
+  color: white;
+  border: 2px solid #555;
+}
+
+.footer-theme-toggle:hover {
+  background-color: #111;
+  transform: scale(1.05);
+}
+
+/* Light Mode Styles */
+body.light .footer-theme-toggle {
+  background-color: black;
+  color: white;
+  border: 2px solid #555;
+}
+
+body.light .footer-theme-toggle:hover {
+  background-color: #333;
 }

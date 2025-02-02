@@ -193,7 +193,7 @@ body.dark .MuiDialogContent-root {
 }
 
 body.dark .MuiDialogActions-root button {
-  color: #ffffff !important;
+  /* color: #ffffff !important; */
 }
 
 /* 🔥 Fix About Page Text */

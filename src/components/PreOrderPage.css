@@ -172,7 +172,7 @@ body.dark .pre-order-item .pre-order-button:hover {
 /* Responsive Styles */
 @media (max-width: 768px) {
   .pre-order-page {
-    margin: 0px 20px 20px 20px;
+    /* margin: 0px 20px 20px 20px; */
     padding: 20px;
   }
   
