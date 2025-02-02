@@ -1,11 +1,11 @@
-import React, { useContext, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { DarkModeContext } from "../context/DarkModeContext"; 
-import './Footer.css';
+import React, { useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { DarkModeContext } from "../context/DarkModeContext";
+import "./Footer.css";
 
 const Footer = ({ navbarLinks = [] }) => {
   const sortedNavbarLinks = navbarLinks
-    .filter((link) => link.enabled)
+    .filter((link) => link.enabled && link.name.toLowerCase() !== "home") // ✅ Filter out Home
     .sort((a, b) => a.order - b.order);
 
   const { isDarkMode, setIsDarkMode } = useContext(DarkModeContext);
@@ -13,7 +13,7 @@ const Footer = ({ navbarLinks = [] }) => {
   useEffect(() => {
     // ✅ Ensure light mode is default
     const savedMode = localStorage.getItem("darkMode");
-    const defaultMode = savedMode === "true" ? true : false;
+    const defaultMode = savedMode === "true";
     
     setIsDarkMode(defaultMode);
     document.body.classList.remove("dark", "light"); // Reset first
@@ -35,13 +35,21 @@ const Footer = ({ navbarLinks = [] }) => {
       <div className="footer-sitemap">
         <div className="footer-title">Sitemap</div>
         <ul>
+          {/* ✅ Manually added "Home" link */}
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+
+          {/* ✅ Render the remaining navbar links from Firebase */}
           {sortedNavbarLinks.map((link, index) => (
             <li key={index}>
-              <Link to={`/${link.name.toLowerCase().replace(/\s+/g, '-')}`}>
+              <Link to={`/${link.name.toLowerCase().replace(/\s+/g, "-")}`}>
                 {link.label}
               </Link>
             </li>
           ))}
+
+          {/* Additional fixed footer links */}
           <li><Link to="/return-policy">Return Policy</Link></li>
           <li><Link to="/privacy-policy">Privacy Policy</Link></li>
           <li><Link to="/terms-of-service">Terms of Service</Link></li>
