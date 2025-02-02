@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { DarkModeContext } from "../context/DarkModeContext"; 
 import './Footer.css';
@@ -10,18 +10,28 @@ const Footer = ({ navbarLinks = [] }) => {
 
   const { isDarkMode, setIsDarkMode } = useContext(DarkModeContext);
 
+  useEffect(() => {
+    // ✅ Ensure light mode is default
+    const savedMode = localStorage.getItem("darkMode");
+    const defaultMode = savedMode === "true" ? true : false;
+    
+    setIsDarkMode(defaultMode);
+    document.body.classList.remove("dark", "light"); // Reset first
+    document.body.classList.add(defaultMode ? "dark" : "light");
+  }, [setIsDarkMode]);
+
   const toggleDarkMode = () => {
     const newMode = !isDarkMode;
     setIsDarkMode(newMode);
     localStorage.setItem("darkMode", newMode.toString());
 
-    document.body.classList.toggle("dark", newMode);
-    document.body.classList.toggle("light", !newMode);
+    document.body.classList.remove("dark", "light");
+    document.body.classList.add(newMode ? "dark" : "light");
   };
 
   return (
     <footer className="footer-container">
-      {/* Sitemap Section (Full Width & On Top) */}
+      {/* Sitemap Section */}
       <div className="footer-sitemap">
         <div className="footer-title">Sitemap</div>
         <ul>
@@ -38,6 +48,12 @@ const Footer = ({ navbarLinks = [] }) => {
         </ul>
       </div>
 
+      {/* 🔥 Move Dark Mode Toggle Here */}
+      <div className="footer-darkmode-toggle">
+        <button className="footer-theme-toggle" onClick={toggleDarkMode}>
+          {isDarkMode ? "Light Mode" : "Dark Mode"}
+        </button>
+      </div>
 
       {/* Bottom Row: Contact & Copyright */}
       <div className="footer-bottom">
@@ -45,10 +61,6 @@ const Footer = ({ navbarLinks = [] }) => {
           <p>&copy; {new Date().getFullYear()} Dan Ober Artisan Drums. All rights reserved.</p>
         </div>
       </div>
-      {/* Dark Mode Toggle */}
-      <button className="footer-theme-toggle" onClick={toggleDarkMode}>
-        {isDarkMode ? "Light Mode" : "Dark Mode"}
-      </button>
     </footer>
   );
 };

@@ -3,14 +3,16 @@ import React, { createContext, useState, useEffect } from "react";
 export const DarkModeContext = createContext();
 
 export const DarkModeProvider = ({ children }) => {
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    return localStorage.getItem("darkMode") === "true";
-  });
+  // ✅ Check localStorage; Default to "false" (light mode)
+  const storedMode = localStorage.getItem("darkMode");
+  const initialMode = storedMode === "true" ? true : false;
+
+  const [isDarkMode, setIsDarkMode] = useState(initialMode);
 
   useEffect(() => {
-    localStorage.setItem("darkMode", isDarkMode);
-    document.body.classList.toggle("dark", isDarkMode);
-    document.body.classList.toggle("light", !isDarkMode);
+    // ✅ Set body class on first load
+    document.body.classList.remove("dark", "light"); // Reset first
+    document.body.classList.add(isDarkMode ? "dark" : "light");
   }, [isDarkMode]);
 
   return (
