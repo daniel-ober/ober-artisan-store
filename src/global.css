@@ -22,7 +22,7 @@ body.light {
 }
 
 body.light * {
-  color: #000000;
+  /* color: #000000; */
 }
 
 /* ✅ Dark Mode Styles */
@@ -81,9 +81,9 @@ body.dark .pre-order-item .pre-order-button:hover {
 /* ✅ Ensure Cart Buttons are Visible */
 body.dark .cart-table button,
 body.dark .cart-table .quantity-adjust {
-  background-color: #333 !important;
+  /* background-color: #333 !important; */
   color: white !important;
-  border: 2px solid #555 !important;
+  /* border: 2px solid #555 !important; */
 }
 
 body.dark .cart-table button:hover,
