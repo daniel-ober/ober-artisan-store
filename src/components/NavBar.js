@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect, useContext } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaCartPlus, FaSignOutAlt, FaUserAlt, FaCog } from "react-icons/fa";
 import { useAuth } from "../context/AuthContext";
 import { useCart } from "../context/CartContext";
@@ -16,10 +16,9 @@ const NavBar = () => {
   const menuRef = useRef(null);
   const buttonRef = useRef(null);
   const location = useLocation();
+  const navigate = useNavigate(); // ✅ Hook for navigation
   const { user, isAdmin, logout } = useAuth();
   const { cart } = useCart();
-
-  console.log("📌 Navbar Dark Mode State:", isDarkMode);
 
   const cartItemCount = Object.values(cart).reduce(
     (total, item) => total + item.quantity,
@@ -28,9 +27,8 @@ const NavBar = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      const isMobile = window.innerWidth <= 768;
-      setIsMobileView(isMobile);
-      if (!isMobile) setIsMenuOpen(false);
+      setIsMobileView(window.innerWidth <= 768);
+      if (!isMobileView) setIsMenuOpen(false);
     };
 
     window.addEventListener("resize", handleResize);
@@ -56,17 +54,19 @@ const NavBar = () => {
   }, [user]);
 
   useEffect(() => {
-    document.body.classList.toggle("dark", isDarkMode);
-    document.body.classList.toggle("light", !isDarkMode);
+    if (isDarkMode) {
+      document.body.classList.add("dark");
+      document.body.classList.remove("light");
+    } else {
+      document.body.classList.add("light");
+      document.body.classList.remove("dark");
+    }
   }, [isDarkMode]);
 
   const toggleDarkMode = () => {
     const newMode = !isDarkMode;
     setIsDarkMode(newMode);
     localStorage.setItem("darkMode", newMode.toString());
-  
-    document.body.classList.toggle("dark", newMode);
-    document.body.classList.toggle("light", !newMode);
   };
 
   const toggleMenu = () => {
@@ -92,26 +92,29 @@ const NavBar = () => {
   const handleSignOut = async () => {
     try {
       await logout();
-      console.log("✅ Successfully signed out.");
     } catch (error) {
-      console.error("❌ Error signing out:", error.message);
+      console.error("Error signing out:", error.message);
     }
+  };
+
+  // ✅ FIX: Handle Home link navigation cleanly
+  const handleHomeClick = (e) => {
+    if (location.pathname === "/") {
+      e.preventDefault();
+      window.scrollTo(0, 0); // Reset scroll to top
+      window.history.replaceState({}, "", "/"); // Force URL recognition
+    }
+    setIsMenuOpen(false);
   };
 
   return (
     <nav className="navbar">
-      <video
-        className="navbar-background"
-        autoPlay
-        loop
-        muted
-        playsInline
-        src={isDarkMode ? "/hero-dark.mp4" : "/hero-light.mp4"}
-        type="video/mp4"
-      />
+      <video key={isDarkMode ? "dark" : "light"} className="navbar-background" autoPlay loop muted playsInline>
+        <source src={isDarkMode ? "/hero-dark.mp4" : "/hero-light.mp4"} type="video/mp4" />
+      </video>
 
       <div className="navbar-logo">
-      <Link to="/">
+        <Link to="/" replace onClick={handleHomeClick}>
           <img
             src={isDarkMode ? process.env.REACT_APP_LOGO_LIGHT : process.env.REACT_APP_LOGO_DARK}
             alt="Logo"
@@ -121,23 +124,9 @@ const NavBar = () => {
       </div>
 
       {isMobileView && (
-        <button
-          className="navbar-menu-container"
-          onClick={toggleMenu}
-          aria-expanded={isMenuOpen}
-          aria-label="Toggle menu"
-          ref={buttonRef}
-        >
+        <button className="navbar-menu-container" onClick={toggleMenu} aria-expanded={isMenuOpen} aria-label="Toggle menu" ref={buttonRef}>
           <img
-            src={
-              isDarkMode
-                ? isMenuOpen
-                  ? "/menu/close-button-dark-mode.png"
-                  : "/menu/menu-button-dark-mode.png"
-                : isMenuOpen
-                ? "/menu/close-button-light-mode.png"
-                : "/menu/menu-button-light-mode.png"
-            }
+            src={isDarkMode ? "/menu/menu-button-dark-mode.png" : "/menu/menu-button-light-mode.png"}
             alt="Menu Toggle"
             className={`menu-arrow-icon ${isMenuOpen ? "open" : ""}`}
           />
@@ -146,11 +135,17 @@ const NavBar = () => {
 
       {(isMenuOpen || !isMobileView) && (
         <div className={`navbar-links ${isMobileView && isMenuOpen ? "open" : ""}`} ref={menuRef}>
+          {/* ✅ FIX: Home Link Navigation */}
+          <Link to="/" replace onClick={handleHomeClick} className="nav-link">
+            Home
+          </Link>
+
+          {/* ✅ Render the remaining navbar links */}
           {navbarLinks.map((link) => (
             <Link
               key={link.id}
               to={`/${link.name.toLowerCase().replace(/\s+/g, "-")}`}
-              className={`nav-link ${location.pathname === `/${link.name.toLowerCase().replace(/\s+/g, "-")}` ? "active" : ""}`}
+              className="nav-link"
               onClick={() => setIsMenuOpen(false)}
             >
               {link.label}
@@ -158,22 +153,14 @@ const NavBar = () => {
           ))}
 
           {user && isAdmin && (
-            <Link
-              to="/admin"
-              className={`nav-link ${location.pathname === "/admin" ? "active" : ""}`}
-              onClick={() => setIsMenuOpen(false)}
-            >
+            <Link to="/admin" className="nav-link" onClick={() => setIsMenuOpen(false)}>
               <FaCog /> Admin
             </Link>
           )}
 
           {user && (
             <>
-              <Link
-                to="/account"
-                className={`nav-link ${location.pathname === "/account" ? "active" : ""}`}
-                onClick={() => setIsMenuOpen(false)}
-              >
+              <Link to="/account" className="nav-link" onClick={() => setIsMenuOpen(false)}>
                 <FaUserAlt /> Account
               </Link>
               <button className="nav-link-signout" onClick={handleSignOut}>

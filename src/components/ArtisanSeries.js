@@ -1,14 +1,41 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
 import "./ArtisanSeries.css";
+import { DarkModeContext } from "../context/DarkModeContext";
 
 const ArtisanSeries = () => {
+  const { isDarkMode } = useContext(DarkModeContext);
+
+  useEffect(() => {
+    const sections = document.querySelectorAll(".drum-section, .drum-info");
+
+    const revealOnScroll = () => {
+      sections.forEach((section) => {
+        const sectionTop = section.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        if (sectionTop < windowHeight * 0.85) {
+          section.classList.add("visible");
+        }
+      });
+    };
+
+    window.addEventListener("scroll", revealOnScroll);
+    revealOnScroll(); // Run initially in case some are already in view
+
+    return () => {
+      window.removeEventListener("scroll", revealOnScroll);
+    };
+  }, []);
+
   return (
     <div className="artisanseries-container">
       {/* HERÌTAGE Series Section */}
       <section className="drum-section left">
         <div className="text-layer">
-        
-          <img src="/artisanseries/heritage-black.png" alt="HERÌTAGE Series" className="header-image" />
+          <img
+            src={isDarkMode ? "/artisanseries/heritage-white.png" : "/artisanseries/heritage-black.png"}
+            alt="HERÌTAGE Series"
+            className="header-image"
+          />
           <p className="description">
             <strong>“The drum that started it all—classic craftsmanship, timeless sound.”</strong>
           </p>
@@ -34,7 +61,11 @@ const ArtisanSeries = () => {
       {/* FEUZØN Series Section */}
       <section className="drum-section right">
         <div className="text-layer">
-          <img src="/artisanseries/feuzon-black.png" alt="FEUZØN Series" className="header-image" />
+          <img
+            src={isDarkMode ? "/artisanseries/feuzon-white.png" : "/artisanseries/feuzon-black.png"}
+            alt="FEUZØN Series"
+            className="header-image"
+          />
           <p className="description">
             <strong>“Blending tradition and innovation into one harmonious voice.”</strong>
           </p>
@@ -58,7 +89,11 @@ const ArtisanSeries = () => {
       {/* SoundLegend Series Section */}
       <section className="drum-section left">
         <div className="text-layer">
-          <img src="/artisanseries/soundlegend-black.png" alt="SoundLegend Series" className="header-image" />
+          <img
+            src={isDarkMode ? "/artisanseries/soundlegend-white.png" : "/artisanseries/soundlegend-black.png"}
+            alt="SoundLegend Series"
+            className="header-image"
+          />
           <p className="description">
             <strong>“Every drum tells a story—let’s craft yours together.”</strong>
           </p>
@@ -79,55 +114,52 @@ const ArtisanSeries = () => {
         </div>
       </section>
 
-      {/* 🆕 FINAL IMAGE SECTION WITH ALL 3 DRUMS */}
+      {/* 🏆 FINAL IMAGE SECTION - DRUM LINEUP & DETAILS BELOW */}
       <section className="drum-final-section">
-        <div className="drum-final-text">
-          <img
-            src="/artisanseries/heritage-white.png"
-            alt="Heritage"
-            className="drum-label-img heritage"
-          />
-          <img
-            src="/artisanseries/soundlegend-white.png"
-            alt="Soundlegend"
-            className="drum-label-img soundlegend"
-          />
-          <img
-            src="/artisanseries/feuzon-white.png"
-            alt="Feuzon"
-            className="drum-label-img feuzon"
-          />
-        </div>
         <div className="drum-final-image">
-          <img src="/artisan-shop/render-4.png" alt="All three drum models" />
+          <img src="/artisan-shop/render-10.png" alt="All three drum models" />
+        </div>
+
+        <div className="drum-final-text">
+          {/* HERITAGE */}
+          <div className="drum-info">
+            <img src="/artisanseries/heritage-white.png" alt="Heritage" className="drum-logo" />
+            <ul className="description-list">
+              <li>Shell Construction: Stave</li>
+              <li>Available Sizes: 12”, 13”, 14”</li>
+              <li>Finish: Light gloss, Medium gloss, Torch-scorched aesthetic</li>
+              <li>Wood Selection: Oak + compatible woods</li>
+              <li>Price Range: <strong>$850 - $1,100</strong></li>
+            </ul>
+            <a href="/products/heritage" className="preorder-button">Pre-Order Now</a>
+          </div>
+
+          {/* SOUNDLEGEND */}
+          <div className="drum-info">
+            <img src="/artisanseries/soundlegend-white.png" alt="SoundLegend" className="drum-logo" />
+            <ul className="description-list">
+              <li>Shell Construction: Stave, Steam-Bent, or Hybrid</li>
+              <li>Fully Customizable: Size, Lugs, Finish, Wood</li>
+              <li>Hands-on experience: Consultation + Concept Renders</li>
+              <li>Price Range: <strong>$1,500 - $2,500+</strong></li>
+            </ul>
+            <a href="/products/soundlegend" className="preorder-button">Pre-Order Now</a>
+          </div>
+
+          {/* FEUZØN */}
+          <div className="drum-info">
+            <img src="/artisanseries/feuzon-white.png" alt="Feuzon" className="drum-logo" />
+            <ul className="description-list">
+              <li>Shell Construction: Stave + Vapor Bent</li>
+              <li>Available Sizes: 12”, 13”, 14”</li>
+              <li>Finish: Natural or Stained</li>
+              <li>Wood Selection: Stave (varied) + limited vapor bent woods</li>
+              <li>Price Range: <strong>$1,100 - $1,350</strong></li>
+            </ul>
+            <a href="/products/feuzon" className="preorder-button">Pre-Order Now</a>
+          </div>
         </div>
       </section>
-
-
-      <section className="drum-final-section">
-        <div className="drum-final-text">
-          <img
-            src="/artisanseries/heritage-white.png"
-            alt="Heritage"
-            className="drum-label-img heritage"
-          />
-          <img
-            src="/artisanseries/soundlegend-white.png"
-            alt="Soundlegend"
-            className="drum-label-img soundlegend"
-          />
-          <img
-            src="/artisanseries/feuzon-white.png"
-            alt="Feuzon"
-            className="drum-label-img feuzon"
-          />
-        </div>
-        <div className="drum-final-image">
-          <img src="/artisan-shop/render-4.png" alt="All three drum models" />
-        </div>
-      </section>
-
-
     </div>
   );
 };

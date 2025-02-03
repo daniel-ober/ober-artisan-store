@@ -7,10 +7,11 @@
 .artisanseries-container {
   position: relative;
   width: 100%;
-  overflow-y: scroll; /* Enables scrolling */
-  height: 100vh; /* Ensures full-page scroll */
+  overflow-y: auto; /* Ensures full scrolling */
+  min-height: 100vh;
   scroll-behavior: smooth;
-  scroll-snap-type: y mandatory; /* Forces snapping */
+  scroll-snap-type: y mandatory; /* Enables snapping */
+  background-color: #000000c3;
 }
 
 /* 🥁 Drum Section */
@@ -22,10 +23,19 @@
   justify-content: space-between;
   overflow: hidden;
   padding: 0 4vw;
-  scroll-snap-align: start; /* Each section locks into place */
+  scroll-snap-align: start; /* Ensures section snaps into place */
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
-/* 🛠 Fix: Drum Image “Kissing” the Edge */
+/* 🏆 Active State for Scroll Animation */
+.drum-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ✅ Adjustments to prevent images from “kissing” the edge */
 .drum-layer {
   width: 52vw;
   z-index: 3;
@@ -46,7 +56,7 @@
   object-fit: cover;
 }
 
-/* ✏️ Text Layer (Aligned Opposite Drum Image) */
+/* ✏️ Text Layer */
 .text-layer {
   width: 30vw;
   max-width: 450px;
@@ -54,26 +64,7 @@
   flex-direction: column;
   justify-content: center;
   z-index: 4;
-}
-
-/* ✅ Ensures proper text positioning */
-.text-layer.right {
-  text-align: right;
-  margin-left: auto;
-}
-
-.text-layer.left {
-  text-align: left;
-  margin-right: auto;
-}
-
-/* 🎨 Dark Mode Styling */
-.text-layer .description.dark {
-  color: white;
-}
-
-.text-layer .description.light {
-  color: black;
+  color: white; /* Ensure text is always visible */
 }
 
 /* 🔠 Header Image */
@@ -93,73 +84,108 @@
   flex-direction: row-reverse;
 }
 
-/* 🔽 FINAL SECTION - 3 DRUM LINEUP */
+/* 🏆 FINAL IMAGE SECTION - SCROLLING FIX */
 .drum-final-section {
   position: relative;
   width: 100%;
   text-align: center;
-  padding: 0;
-  margin: -2vh 0 0 0;
-  scroll-snap-align: start; /* Locks final section */
+  /* padding: 4vh 2vw; */
+  background-color: #373737; /* Dark background for contrast */
+  color: white; /* Ensures text is visible */
+  min-height: 100vh; /* Ensures proper spacing */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  scroll-snap-align: start; /* Fixes scrolling issue */
 }
 
-/* Drum Labels */
+/* 🛠 Drum Labels & Logos */
 .drum-final-text {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-bottom: 1vh;
-  gap: 14vw;
-}
-
-/* Individual Drum Label Adjustments */
-.drum-label-img {
-  width: 120px;
-  height: auto;
-}
-
-/* 🛠 Adjustments for Individual Labels */
-.drum-label-img.heritage {
-  margin-right: 2vw;
-}
-
-.drum-label-img.soundlegend {
-  margin-right: 1vw;
-  transform: translateY(-14px);
-}
-
-.drum-label-img.feuzon {
-  margin-left: 3vw;
-}
-
-/* Drum Image Container */
-.drum-final-image {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-/* Drum Image */
-.drum-final-image img {
-  width: 100%;
-  height: auto;
-  display: block;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-top: 3vh;
+  width: 90%;
   margin: 0 auto;
 }
 
-/* 🛠 Mobile Responsiveness Improvements */
+/* 🏆 Individual Drum Logo Adjustments */
+.drum-logo {
+  width: 150px; /* Ensures consistent size */
+  height: auto;
+  margin-bottom: 10px;
+  filter: brightness(0) invert(1); /* Forces white in all modes */
+}
+
+/* 🥁 Drum Information Box */
+.drum-info {
+  text-align: center;
+  width: 30%;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* ✅ Active State for Scroll Animation */
+.drum-info.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.drum-info ul {
+  list-style: none;
+  padding: 0;
+  text-align: center;
+}
+
+.drum-info li {
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+/* 🔘 Pre-Order Button */
+.preorder-button {
+  display: inline-block;
+  padding: 10px 15px;
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background: #d9534f; /* Reddish Accent */
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+.preorder-button:hover {
+  background: #c9302c; /* Darker Red */
+}
+
+/* 📸 FIX: Final Image Now Fills Full Screen Width */
+.drum-final-image {
+  display: flex;
+  justify-content: center;
+  width: 100vw; /* Ensures full-width */
+  margin-top: -5vh;
+  overflow: hidden;
+}
+
+.drum-final-image img {
+  width: 100vw; /* Ensures it stretches fully */
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+/* 🛠 Mobile Responsiveness Fixes */
 @media (max-width: 768px) {
   .drum-section {
     flex-direction: column; /* Stack images and text on mobile */
     height: auto;
-    padding: 8vh 6vw; /* Adjusted padding for mobile */
+    padding: 8vh 6vw;
     text-align: center;
-    scroll-snap-align: start;
   }
 
-  /* Ensure proper spacing */
   .text-layer {
     width: 100%;
     max-width: 90%;
@@ -167,13 +193,6 @@
     padding-bottom: 3vh;
   }
 
-  .text-layer.right,
-  .text-layer.left {
-    text-align: center;
-    margin: 0 auto;
-  }
-
-  /* Ensure images adjust properly */
   .drum-layer {
     width: 100%;
     text-align: center;
@@ -186,25 +205,22 @@
     margin: 0 auto;
   }
 
-  /* Adjust the final section */
   .drum-final-text {
     flex-direction: column;
     align-items: center;
     gap: 2vh;
   }
 
-  .drum-label-img {
-    width: 90px; /* Reduce label image size for mobile */
+  .drum-logo {
+    width: 120px; /* Reduce logo size for mobile */
   }
 
-  /* Adjust table responsiveness */
-  .comparison-table table {
+  .drum-info {
     width: 100%;
-    font-size: 14px;
+    padding-bottom: 4vh;
   }
 
-  .comparison-table th,
-  .comparison-table td {
-    padding: 6px;
+  .drum-final-image img {
+    width: 100vw; /* Ensures full width on mobile */
   }
 }

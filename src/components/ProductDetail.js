@@ -208,7 +208,7 @@ const ProductDetail = () => {
             </table>
 
             <div className="product-price-container">
-              <p className="product-price">${product?.price?.toFixed(2)}</p>
+              <p className="product-price">${product?.price}</p>
 
               {inCart ? (
                 <div className="quantity-section">

@@ -40,7 +40,7 @@ const ProductCard = ({ product, isAdmin }) => {
         <h3 className="product-name">{product.name}</h3>
         <p className="product-description">{product.description}</p>
         <p className="delivery-time">Delivery: {product.deliveryTime}</p>
-        <p className="card-product-price">${product.price.toFixed(2)}</p>
+        <p className="card-product-price">${product.price}</p>
 
         {/* View Details Button */}
         <button
