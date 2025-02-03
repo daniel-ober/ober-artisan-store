@@ -56,18 +56,18 @@ const Footer = ({ navbarLinks = [] }) => {
         </ul>
       </div>
 
-      {/* 🔥 Move Dark Mode Toggle Here */}
-      <div className="footer-darkmode-toggle">
-        <button className="footer-theme-toggle" onClick={toggleDarkMode}>
-          {isDarkMode ? "Light Mode" : "Dark Mode"}
-        </button>
-      </div>
 
       {/* Bottom Row: Contact & Copyright */}
       <div className="footer-bottom">
         <div className="footer-copyright">
           <p>&copy; {new Date().getFullYear()} Dan Ober Artisan Drums. All rights reserved.</p>
         </div>
+      </div>
+      {/* 🔥 Move Dark Mode Toggle Here */}
+      <div className="footer-darkmode-toggle">
+        <button className="footer-theme-toggle" onClick={toggleDarkMode}>
+          {isDarkMode ? "Light Mode" : "Dark Mode"}
+        </button>
       </div>
     </footer>
   );
