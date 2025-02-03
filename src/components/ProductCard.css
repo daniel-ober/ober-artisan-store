@@ -1,4 +1,3 @@
-/* Product Card - Modern, Minimal Design */
 .product-card {
   display: flex;
   flex-direction: column;
@@ -9,10 +8,19 @@
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Subtle depth */
   text-align: center;
-  height: 100%;
+  height: auto; /* Ensures it adapts to max height */
   transition: transform 0.2s ease, box-shadow 0.3s ease;
   position: relative;
   border: 1px solid #e0e0e0; /* Subtle border */
+}
+
+/* Ensure cards have equal height dynamically */
+.product-card-group-preorder {
+  min-height: var(--max-card-height-preorder, auto);
+}
+
+.product-card-group-regular {
+  min-height: var(--max-card-height-regular, auto);
 }
 
 /* Hover Effect */
@@ -46,12 +54,11 @@
   padding: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-between; /* Ensures all elements stay aligned */
   align-items: center;
-  min-height: 220px;
 }
 
-/* Sleek Product Name */
+/* Product Name */
 .product-name {
   font-size: 26px;
   font-weight: 800;
@@ -61,17 +68,13 @@
   letter-spacing: 1px;
   margin-bottom: 8px;
   margin-top: 0px;
+  min-height: 50px; /* Ensures all names are the same height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.product-nutshell {
-  font-size: 14px;
-  font-family: "Poppins", sans-serif;
-  text-transform: uppercase;
-  color: #222;
-  letter-spacing: 1px;
-  margin-bottom: 8px;
-}
-
+/* Product Description */
 .product-description {
   font-size: 14px;
   font-family: sans-serif;
@@ -79,12 +82,20 @@
   color: #222;
   letter-spacing: 1px;
   margin-bottom: 8px;
+  min-height: var(--min-description-height, auto); /* Dynamically set */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Delivery Time */
 .delivery-time {
   font-size: 14px;
   color: #666;
+  min-height: 20px; /* Ensures delivery times align */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Price Styling */
@@ -93,6 +104,10 @@
   font-weight: 500;
   color: #27AE60; /* Sophisticated green */
   margin: 10px 0;
+  min-height: 30px; /* Ensures prices align */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* View Details Button */
@@ -116,7 +131,8 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  margin-top: 20px;
+  justify-content: flex-end;
+  min-height: 80px; /* Ensures buttons align */
 }
 
 /* Uniform Button Sizing */
