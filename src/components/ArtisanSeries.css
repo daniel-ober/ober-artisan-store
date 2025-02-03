@@ -148,3 +148,63 @@
   display: block;
   margin: 0 auto;
 }
+
+/* 🛠 Mobile Responsiveness Improvements */
+@media (max-width: 768px) {
+  .drum-section {
+    flex-direction: column; /* Stack images and text on mobile */
+    height: auto;
+    padding: 8vh 6vw; /* Adjusted padding for mobile */
+    text-align: center;
+    scroll-snap-align: start;
+  }
+
+  /* Ensure proper spacing */
+  .text-layer {
+    width: 100%;
+    max-width: 90%;
+    margin: 0 auto;
+    padding-bottom: 3vh;
+  }
+
+  .text-layer.right,
+  .text-layer.left {
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  /* Ensure images adjust properly */
+  .drum-layer {
+    width: 100%;
+    text-align: center;
+    padding-top: 2vh;
+  }
+
+  .drum-layer img {
+    width: 90%;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  /* Adjust the final section */
+  .drum-final-text {
+    flex-direction: column;
+    align-items: center;
+    gap: 2vh;
+  }
+
+  .drum-label-img {
+    width: 90px; /* Reduce label image size for mobile */
+  }
+
+  /* Adjust table responsiveness */
+  .comparison-table table {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  .comparison-table th,
+  .comparison-table td {
+    padding: 6px;
+  }
+}
