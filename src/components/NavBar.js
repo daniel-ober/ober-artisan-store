@@ -16,7 +16,7 @@ const NavBar = () => {
   const menuRef = useRef(null);
   const buttonRef = useRef(null);
   const location = useLocation();
-  const navigate = useNavigate(); // ✅ Hook for navigation
+  const navigate = useNavigate();
   const { user, isAdmin, logout } = useAuth();
   const { cart } = useCart();
 
@@ -97,12 +97,12 @@ const NavBar = () => {
     }
   };
 
-  // ✅ FIX: Handle Home link navigation cleanly
+  // ✅ Fix Home Link Glitch
   const handleHomeClick = (e) => {
     if (location.pathname === "/") {
-      e.preventDefault();
-      window.scrollTo(0, 0); // Reset scroll to top
-      window.history.replaceState({}, "", "/"); // Force URL recognition
+      e.preventDefault(); // Prevents full navigation re-render
+      window.scrollTo({ top: 0, behavior: "smooth" }); // Smooth scroll to top
+      return;
     }
     setIsMenuOpen(false);
   };
@@ -140,17 +140,19 @@ const NavBar = () => {
             Home
           </Link>
 
-          {/* ✅ Render the remaining navbar links */}
-          {navbarLinks.map((link) => (
-            <Link
-              key={link.id}
-              to={`/${link.name.toLowerCase().replace(/\s+/g, "-")}`}
-              className="nav-link"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {link.label}
-            </Link>
-          ))}
+          {/* ✅ Render the remaining navbar links - Remove duplicate Home */}
+          {navbarLinks
+            .filter((link) => link.name.toLowerCase() !== "home") // 🚀 Remove duplicate Home link
+            .map((link) => (
+              <Link
+                key={link.id}
+                to={`/${link.name.toLowerCase().replace(/\s+/g, "-")}`}
+                className="nav-link"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {link.label}
+              </Link>
+            ))}
 
           {user && isAdmin && (
             <Link to="/admin" className="nav-link" onClick={() => setIsMenuOpen(false)}>
