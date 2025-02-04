@@ -1,164 +1,223 @@
-/* 📌 Heritage Product Detail Layout */
+/* 📌 Main Page Container - Slightly Widened for Better Balance */
 .heritage-product-detail {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  padding: 40px 15px;
-  max-width: 1200px;
+  align-items: center;
+  padding: 50px 25px;
+  max-width: 1500px; /* Increased from 1400px */
   margin: 0 auto;
   box-sizing: border-box;
+  background: #121212;
+  color: white;
 }
 
-/* Title Styling */
-.heritage-product-detail h1 {
-  font-size: 36px;
-  font-weight: bold;
-  text-align: center;
-  width: 100%;
-  margin-bottom: 20px;
-}
-
-/* 🔄 Main Product Section Layout */
+/* 🔄 Main Content Layout - Balanced for More Spacing */
 .heritage-product-content {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   width: 100%;
-  gap: 40px;
+  gap: 60px; /* Increased from 50px */
+  max-width: 1300px; /* Increased from 1200px */
   box-sizing: border-box;
 }
 
-/* 📌 Image Gallery Layout */
-.heritage-product-image {
-  flex: 1.2;
-  max-width: 55%;
+/* 📌 Left Side: Product Image + Sound Charts */
+.heritage-product-visuals {
+  flex: 1;
+  max-width: 58%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+/* Product Image */
 .heritage-product-image img {
   width: 100%;
   height: auto;
-  border-radius: 5px;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease;
 }
 
 .heritage-product-image img:hover {
-  transform: scale(1.03);
+  transform: scale(1.02);
 }
 
-/* 📌 Drum Customization Panel */
-.heritage-product-options {
-  flex: 0.75;
-  background: rgba(0, 0, 0, 0.85);
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  border: 1px solid #333;
+/* 📌 Sound Profile Charts - More Space Below */
+.heritage-sound-charts {
   width: 100%;
-  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Increased spacing between charts */
+  margin-top: 25px;
+}
+
+/* 📌 Right Side: Features + Customization - Slightly Wider */
+.heritage-product-details {
+  flex: 1;
+  max-width: 42%; /* Increased from 45% */
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* 📌 Artisan Notes - Spaced Better */
+.artisan-notes {
+  padding: 18px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   color: white;
+  font-size: 14px;
+  line-height: 1.6; /* Increased line height for better readability */
   box-sizing: border-box;
 }
 
+.artisan-notes h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #f0f0f0;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 5px;
+}
+
+.artisan-notes p {
+  margin-bottom: 10px;
+  color: #ccc;
+  font-size: 14px;
+}
+
+/* 📌 Customization Panel - Adjusted for Better Layout */
+.heritage-product-options {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 22px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  width: 100%;
+  color: white;
+  box-sizing: border-box;
+  backdrop-filter: blur(8px);
+}
+
+/* 📌 Section Titles */
 .heritage-product-options h2 {
-  margin-bottom: 20px;
-  font-size: 26px;
-  color: #ffd700;
+  font-size: 20px;
+  margin-bottom: 14px;
+  color: #e0e0e0;
 }
 
 /* 📌 Labels for Dropdowns */
 .heritage-product-options label {
   display: block;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
-  margin-bottom: 8px;
-  color: #fff;
+  margin-bottom: 6px;
+  color: #ccc;
 }
 
 /* 📌 Dropdown Styling */
 .heritage-product-options select {
   width: 100%;
   padding: 10px;
-  font-size: 16px;
-  border-radius: 5px;
-  border: 1px solid #777;
-  background: #222;
+  font-size: 15px;
+  border-radius: 6px;
+  border: 1px solid #666;
+  background: #1a1a1a;
   color: white;
   cursor: pointer;
-  margin-bottom: 15px;
-  transition: border 0.2s ease-in-out;
-}
-
-.heritage-product-options select:hover,
-.heritage-product-options select:focus {
-  border-color: #ffd700;
-  outline: none;
+  margin-bottom: 12px;
 }
 
 /* 📌 Total Price Styling */
 .heritage-product-options .total-price {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: bold;
-  margin-top: 20px;
-  color: #ffd700;
+  margin-top: 14px;
+  color: #f0f0f0;
   text-align: center;
 }
 
 /* 📌 Add to Cart Button */
 .heritage-product-options button {
   width: 100%;
-  padding: 15px;
-  font-size: 18px;
+  padding: 14px;
+  font-size: 16px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background 0.2s ease-in-out;
   text-align: center;
-  margin-top: 15px;
+  margin-top: 12px;
+  background: linear-gradient(90deg, #ffcc00, #ff9900);
+  color: white;
+  font-weight: bold;
 }
 
-.heritage-product-options .add-to-cart {
-  background: #007bff;
+.heritage-product-options button:hover {
+  background: linear-gradient(90deg, #ff9900, #cc6600);
+}
+
+/* 📌 Footer Adjustments - More Spacing */
+.footer {
+  margin-top: 40px; /* Increased spacing from the last section */
+  padding: 20px;
+  background: #181818;
+  text-align: center;
   color: white;
 }
 
-.heritage-product-options .add-to-cart:hover {
-  background: #0056b3;
-}
-
-/* 📌 Responsive Design for Mobile */
+/* 📌 Responsive Adjustments */
 @media (max-width: 1024px) {
   .heritage-product-detail {
-    padding: 20px;
+    padding: 30px;
   }
 
   .heritage-product-content {
     flex-direction: column;
     align-items: center;
-    gap: 30px;
+    gap: 35px;
   }
 
-  .heritage-product-image {
-    max-width: 90%;
+  .heritage-product-visuals {
+    max-width: 100%;
+  }
+
+  .heritage-product-details {
+    max-width: 100%;
+  }
+
+  .heritage-sound-charts {
+    gap: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .heritage-product-detail h1 {
+    font-size: 28px;
   }
 
   .heritage-product-options {
-    width: 90%;
+    padding: 18px;
   }
 
   .heritage-product-options h2 {
-    font-size: 22px;
+    font-size: 20px;
   }
 
   .heritage-product-options select {
     font-size: 14px;
+    padding: 8px;
   }
 
   .heritage-product-options button {
-    font-size: 16px;
+    font-size: 15px;
     padding: 12px;
+  }
+
+  .artisan-notes,
+  .heritage-product-options {
+    font-size: 14px;
+    padding: 14px;
   }
 }
