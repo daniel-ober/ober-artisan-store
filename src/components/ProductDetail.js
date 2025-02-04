@@ -3,6 +3,9 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { fetchProductById } from "../services/productService";
 import { useCart } from "../context/CartContext";
 import { FaArrowLeft } from "react-icons/fa";
+import HeritageProductDetail from "./HeritageProductDetail";
+import FeuzonProductDetail from "./FeuzonProductDetail";
+import SoundlegendProductDetail from "./SoundlegendProductDetail";
 import "./ProductDetail.css";
 
 const ProductDetail = () => {
@@ -56,64 +59,7 @@ const ProductDetail = () => {
     }
   }, [cart, product, productId]);
 
-  const handleAddToCart = () => {
-    if (product) {
-      const availableQuantity = product.currentQuantity || 0;
-
-      if (quantity > availableQuantity) {
-        alert(`Only ${availableQuantity} of this product is available.`);
-        setQuantity(availableQuantity); // Adjust to the available quantity
-        return;
-      }
-
-      addToCart({ ...product, id: productId, quantity });
-      setInCart({ ...product, quantity });
-    }
-  };
-
-  const handleRemoveFromCart = () => {
-    removeFromCart(productId);
-    setInCart(null);
-    setQuantity(1); // Reset quantity
-  };
-
-  const handleQuantityChange = (change) => {
-    const availableQuantity = product.currentQuantity || 0;
-    const newQuantity = quantity + change;
-
-    if (newQuantity > availableQuantity) {
-      alert(`Only ${availableQuantity} of this product is available.`);
-      return;
-    }
-
-    if (newQuantity < 1) {
-      handleRemoveFromCart();
-      return;
-    }
-
-    setQuantity(newQuantity);
-    if (inCart) {
-      updateQuantity(productId, newQuantity); // Sync with cart if already in cart
-    }
-  };
-
-  const handleThumbnailClick = (image) => {
-    setMainImage(image);
-  };
-
-  const handleNotifyMe = () => {
-    alert("You will be notified once this product is available again!");
-    setNotifyMe(true);
-  };
-
-  const handleViewCart = () => {
-    navigate("/cart");
-  };
-
-  const speciesList = [product?.woodSpecies, product?.customWoodSpecies]
-    .filter(Boolean)
-    .join(", ");
-
+  // Handle special case product pages (HERITAGE, FEUZON, SOUNDLEGEND)
   if (loading) return <p>Loading product details...</p>;
   if (error) {
     return (
@@ -124,19 +70,20 @@ const ProductDetail = () => {
     );
   }
 
+  if (!product) return <div>Product not found</div>;
+
+  if (productId === "heritage") return <HeritageProductDetail product={product} />;
+  if (productId === "feuzon") return <FeuzonProductDetail product={product} />;
+  if (productId === "soundlegend") return <SoundlegendProductDetail product={product} />;
+
+  // Standard product page for all other products
   const isSoldOut = product.currentQuantity === 0;
-  const isArtisan = product.category === 'artisan';
-  const showFullSpecs = product.category === 'artisan';
+  const isArtisan = product.category === "artisan";
+  const showFullSpecs = product.category === "artisan";
+  const speciesList = [product?.woodSpecies, product?.customWoodSpecies].filter(Boolean).join(", ");
 
   return (
     <div className="product-detail-container">
-      {/* <div className="product-header">
-        <Link to="/products" className="back-to-shop-link">
-          <FaArrowLeft className="back-icon" />
-          Back to Shop/Gallery
-        </Link>
-      </div> */}
-
       <h1 className="product-title">
         {product?.name || "Unnamed Product"}, {product.depth}&quot; x{" "}
         {product.width}&quot; {product.drumType} ({product.finish})
@@ -151,15 +98,12 @@ const ProductDetail = () => {
               className="product-main-image"
             />
             <div className="thumbnail-scroll-container">
-              <div
-                className="product-thumbnail-gallery"
-                ref={thumbnailContainerRef}
-              >
+              <div className="product-thumbnail-gallery" ref={thumbnailContainerRef}>
                 {product?.images?.map((image, index) => (
                   <button
                     key={index}
                     className="product-thumbnail"
-                    onClick={() => handleThumbnailClick(image)}
+                    onClick={() => setMainImage(image)}
                   >
                     <img src={image} alt={`Thumbnail ${index + 1}`} />
                   </button>
@@ -174,30 +118,12 @@ const ProductDetail = () => {
               <tbody>
                 {showFullSpecs && (
                   <>
-                    <tr>
-                      <td>Type:</td>
-                      <td>{product.drumType}</td>
-                    </tr>
-                    <tr>
-                      <td>Construction:</td>
-                      <td>{product.constructionType}</td>
-                    </tr>
-                    <tr>
-                      <td>Wood Species:</td>
-                      <td>{speciesList}</td>
-                    </tr>
-                    <tr>
-                      <td>Depth:</td>
-                      <td>{product.depth}&quot;</td>
-                    </tr>
-                    <tr>
-                      <td>Diameter:</td>
-                      <td>{product.width}&quot;</td>
-                    </tr>
-                    <tr>
-                      <td>Thickness:</td>
-                      <td>{product.thickness}mm</td>
-                    </tr>
+                    <tr><td>Type:</td><td>{product.drumType}</td></tr>
+                    <tr><td>Construction:</td><td>{product.constructionType}</td></tr>
+                    <tr><td>Wood Species:</td><td>{speciesList}</td></tr>
+                    <tr><td>Depth:</td><td>{product.depth}&quot;</td></tr>
+                    <tr><td>Diameter:</td><td>{product.width}&quot;</td></tr>
+                    <tr><td>Thickness:</td><td>{product.thickness}mm</td></tr>
                   </>
                 )}
                 <tr>
@@ -215,7 +141,7 @@ const ProductDetail = () => {
                   <span className="quantity-label">Quantity:</span>
                   <div className="quantity-selector">
                     <button
-                      onClick={() => handleQuantityChange(-1)}
+                      onClick={() => updateQuantity(productId, quantity - 1)}
                       className={`quantity-btn ${quantity <= 1 ? "disabled" : ""}`}
                       disabled={quantity <= 1}
                     >
@@ -223,7 +149,7 @@ const ProductDetail = () => {
                     </button>
                     <span className="quantity-value">{quantity}</span>
                     <button
-                      onClick={() => handleQuantityChange(1)}
+                      onClick={() => updateQuantity(productId, quantity + 1)}
                       className={`quantity-btn ${
                         quantity >= product.currentQuantity ? "disabled" : ""
                       }`}
@@ -237,29 +163,24 @@ const ProductDetail = () => {
                       +
                     </button>
                   </div>
-                  <button className="prod-detail-view-cart-button" onClick={handleViewCart}>
+                  <button className="prod-detail-view-cart-button" onClick={() => navigate("/cart")}>
                     View in Cart
                   </button>
-                  <button
-                    className="prod-detail-remove-cart-button"
-                    onClick={handleRemoveFromCart}
-                  >
+                  <button className="prod-detail-remove-cart-button" onClick={() => removeFromCart(productId)}>
                     Remove from Cart
                   </button>
                 </div>
               ) : isSoldOut ? (
                 <>
-                  <button className="prod-detail-sold-out-button" disabled>
-                    Sold Out
-                  </button>
+                  <button className="prod-detail-sold-out-button" disabled>Sold Out</button>
                   {!notifyMe && (
-                    <button className="prod-detail-notify-me-button" onClick={handleNotifyMe}>
+                    <button className="prod-detail-notify-me-button" onClick={() => setNotifyMe(true)}>
                       Notify Me When Available
                     </button>
                   )}
                 </>
               ) : (
-                <button onClick={handleAddToCart} className="prod-detail-add-to-cart-button">
+                <button onClick={() => addToCart({ ...product, id: productId, quantity })} className="prod-detail-add-to-cart-button">
                   Add to Cart
                 </button>
               )}
