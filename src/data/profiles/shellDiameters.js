@@ -55,103 +55,120 @@ const shellDiameters = [
   {
     diameter: 12,
     soundProfile: {
-      attack: 9,      // Strong attack, sharper than 10" drums.
-      sustain: 6,     // Good sustain, as the larger shell allows for more resonance.
-      warmth: 5,      // Moderate warmth, less pronounced than smaller drums.
+      attack: 9,      // Strong attack, sharper than 10" drums due to smaller diameter and focused energy.
+      sustain: 6,     // Good sustain, as the larger shell allows for more resonance than smaller drums.
+      warmth: 5,      // Moderate warmth, but less pronounced due to its relatively smaller size.
       projection: 9,  // High projection, as larger drums still retain good cutting ability.
-      brightness: 8,  // Brightness is still present but slightly more subdued.
+      brightness: 8,  // Brightness is still present but slightly more subdued compared to smaller shells.
     },
     frequencyResponse: {
       low: 0.40,      // Low-end frequencies have a more balanced presence compared to smaller drums.
-      lowMid: 0.55,   // Low-mid frequencies are well-defined, providing fullness.
-      mid: 0.65,      // Mids are clear with more resonance.
-      midHigh: 0.70,  // High mids are more present, contributing to clarity.
+      lowMid: 0.55,   // Low-mid frequencies are well-defined, providing warmth and depth.
+      mid: 0.65,      // Mids are clear with more resonance, making the drum articulate.
+      midHigh: 0.70,  // High mids are more present, contributing to clarity and articulation.
       high: 0.80,     // High frequencies are present and add brightness without being harsh.
     },
   },
   {
     diameter: 13,
     soundProfile: {
-      attack: 8,      // Slightly softer attack compared to 12", but still punchy.
-      sustain: 6,     // Good sustain, but less than 12" drums.
-      warmth: 6,      // Balanced warmth, a good middle ground.
-      projection: 8,  // Good projection, but not as sharp as smaller drums.
-      brightness: 8,  // Bright but not too piercing, keeping a good balance.
+      attack: 8,      // Slightly softer attack compared to 12", but still retains a punchy response.
+      sustain: 6,     // Good sustain, but less than a 14" drum due to its smaller air volume.
+      warmth: 6,      // Balanced warmth, a good middle ground between 12" and 14".
+      projection: 8,  // Good projection, but not as sharp or cutting as a 12" drum.
+      brightness: 8,  // Bright but not overly piercing, keeping a smooth balance in the high end.
     },
     frequencyResponse: {
-      low: 0.45,      // Low-end frequencies become more defined, providing a rounded sound.
-      lowMid: 0.60,   // Low-mid frequencies resonate well with good definition.
-      mid: 0.70,      // Balanced mid-range frequencies, providing a full sound.
-      midHigh: 0.75,  // High mids become clearer, adding sharpness without harshness.
-      high: 0.85,     // High frequencies provide clarity and brightness.
+      low: 0.45,      // Low-end frequencies are slightly more present than in a 12" drum.
+      lowMid: 0.60,   // Low-mid frequencies resonate well with a slightly fuller sound.
+      mid: 0.70,      // Balanced mid-range frequencies, contributing to a full-bodied tone.
+      midHigh: 0.75,  // High mids are clear and defined, preventing muddiness.
+      high: 0.85,     // High frequencies add clarity, allowing for articulation in playing.
     },
   },
   {
     diameter: 14,
     soundProfile: {
-      attack: 8,      // Moderate attack, not as sharp but still present.
+      attack: 8,      // Moderate attack, not as sharp as smaller diameters, but still defined.
       sustain: 7,     // Longer sustain compared to smaller shells, producing a more resonant sound.
-      warmth: 7,      // Warmer tone, adding fullness to the sound.
+      warmth: 7,      // Warmer tone, adding fullness and depth to the sound.
       projection: 8,  // Good projection, but with more focus on the low-mid frequencies.
-      brightness: 7,  // Balanced brightness, not too sharp.
+      brightness: 7,  // Balanced brightness, reducing harshness while maintaining clarity.
     },
     frequencyResponse: {
-      low: 0.55,      // Low-end frequencies are prominent and provide a solid foundation.
-      lowMid: 0.65,   // Low-mid frequencies project well, adding warmth to the sound.
-      mid: 0.75,      // Mid-range frequencies are clear and pronounced.
-      midHigh: 0.70,  // High mids are slightly subdued but still maintain presence.
-      high: 0.80,     // High frequencies are present without being piercing.
+      low: 0.55,      // Low-end frequencies are more pronounced, providing a full-bodied sound.
+      lowMid: 0.65,   // Low-mid frequencies project well, giving the drum a solid tone.
+      mid: 0.75,      // Mid-range frequencies are clear and balanced with warmth.
+      midHigh: 0.70,  // High mids are slightly subdued but still present for articulation.
+      high: 0.80,     // High frequencies add clarity but are smoother compared to smaller diameters.
+    },
+  },
+  {
+    diameter: 15,
+    soundProfile: {
+      attack: 7,      // Slightly softer attack due to the larger diameter distributing energy more evenly.
+      sustain: 7,     // Sustain increases with size, allowing for more resonance.
+      warmth: 8,      // Warmer tone compared to smaller drums, making it ideal for deeper sounds.
+      projection: 7,  // Projection is slightly reduced due to the wider distribution of sound energy.
+      brightness: 6,  // Slightly less bright, with more emphasis on warmth and midrange tones.
+    },
+    frequencyResponse: {
+      low: 0.60,      // Low-end frequencies become more prominent with the larger shell.
+      lowMid: 0.70,   // Low-mid resonance increases, contributing to a fuller sound.
+      mid: 0.75,      // Mids remain clear but blend more into the lower range.
+      midHigh: 0.65,  // High mids are softer, preventing excessive sharpness.
+      high: 0.75,     // High frequencies remain present but are less pronounced than in smaller drums.
     },
   },
   {
     diameter: 16,
     soundProfile: {
-      attack: 7,      // Softer attack, due to the larger shell size, with a more rounded tone.
-      sustain: 7,     // Good sustain, with deeper resonance.
-      warmth: 8,      // Very warm, making it ideal for deeper, resonant tones.
-      projection: 7,  // Moderate projection, providing depth without being overpowering.
-      brightness: 6,  // Reduced brightness, focusing more on warmth and lower frequencies.
+      attack: 7,      // Softer attack due to the large shell size, with a rounder tone.
+      sustain: 7,     // Sustain increases with size, providing deeper resonance.
+      warmth: 8,      // Very warm, making it ideal for fuller, resonant tones.
+      projection: 7,  // Moderate projection, providing depth without excessive sharpness.
+      brightness: 6,  // Reduced brightness, with more focus on warmth and lower frequencies.
     },
     frequencyResponse: {
-      low: 0.60,      // Low-end frequencies resonate well, adding richness to the sound.
-      lowMid: 0.70,   // Low-mid frequencies are enhanced, adding warmth to the tone.
-      mid: 0.80,      // Mids are present and provide fullness.
-      midHigh: 0.65,  // High mids are subdued, giving a more mellow tone.
-      high: 0.60,     // High frequencies are softer, providing a warmer overall sound.
+      low: 0.65,      // Low-end frequencies become more dominant, adding depth.
+      lowMid: 0.75,   // Low-mids resonate well, making the drum sound fuller.
+      mid: 0.80,      // Mids are warm and well-balanced within the overall tone.
+      midHigh: 0.65,  // High mids are subdued, contributing to a smooth sound.
+      high: 0.70,     // High frequencies remain present but are softer.
     },
   },
   {
     diameter: 18,
     soundProfile: {
-      attack: 6,      // Softer attack, more subdued than smaller drums.
-      sustain: 8,     // High sustain, longer resonance due to the larger shell.
-      warmth: 9,      // Extremely warm, ideal for jazz or mellow genres.
-      projection: 6,  // Lower projection, suitable for controlled environments.
-      brightness: 5,  // Low brightness, more focused on the low and mid-range frequencies.
+      attack: 6,      // Softer attack due to the larger diameter dispersing impact energy.
+      sustain: 8,     // High sustain, as the larger shell promotes resonance.
+      warmth: 9,      // Extremely warm, making it perfect for deep, mellow tones.
+      projection: 6,  // Lower projection, as larger shells tend to absorb more energy.
+      brightness: 5,  // Lower brightness, focusing more on midrange and low-end tones.
     },
     frequencyResponse: {
-      low: 0.65,      // Low-end frequencies have more presence, contributing to the warmth.
-      lowMid: 0.80,   // Low-mid frequencies dominate, providing a full tone.
-      mid: 0.85,      // Mids are rich and resonant, adding body to the sound.
-      midHigh: 0.75,  // High mids are less pronounced, keeping the tone smooth.
-      high: 0.60,     // High frequencies are subdued, focusing on the low-end warmth.
+      low: 0.70,      // Strong low-end resonance, making the drum sound deep.
+      lowMid: 0.80,   // Low-mids contribute to the richness of the tone.
+      mid: 0.85,      // Mids are well-balanced, giving the drum a smooth tonal character.
+      midHigh: 0.70,  // High mids remain soft, preventing harshness.
+      high: 0.60,     // High frequencies are present but significantly more subdued.
     },
   },
   {
     diameter: 20,
     soundProfile: {
-      attack: 5,      // Softer attack, with less defined sharpness.
-      sustain: 9,     // Very long sustain, providing a deep, resonant sound.
-      warmth: 10,     // Maximum warmth, ideal for creating deep, full tones.
-      projection: 5,  // Lower projection, making it best for smaller environments.
-      brightness: 4,  // Very low brightness, focusing entirely on deep tones.
+      attack: 5,      // Soft attack, prioritizing depth and resonance over sharpness.
+      sustain: 9,     // Very long sustain, offering deep, full-bodied resonance.
+      warmth: 10,     // Maximum warmth, perfect for deep, resonant tones.
+      projection: 5,  // Lower projection, making it more suited for studio or low-volume applications.
+      brightness: 4,  // Minimal brightness, allowing the sound to be more bass-heavy.
     },
     frequencyResponse: {
-      low: 0.75,      // Strong low-end frequencies, contributing to the deep warmth.
-      lowMid: 0.85,   // Low-mid frequencies dominate, providing fullness and depth.
-      mid: 0.80,      // Mids are full, giving the drum a rich and smooth tone.
-      midHigh: 0.60,  // High mids are present but subdued, creating a mellow sound.
-      high: 0.40,     // Low brightness, with little emphasis on high frequencies.
+      low: 0.75,      // Deep low-end resonance, adding body and warmth.
+      lowMid: 0.85,   // Low-mid frequencies dominate, making the drum sound powerful.
+      mid: 0.80,      // Midrange remains present, though warmth is prioritized.
+      midHigh: 0.65,  // High mids are softened, reducing harshness.
+      high: 0.50,     // High frequencies are reduced, making the tone darker.
     },
   },
   {
