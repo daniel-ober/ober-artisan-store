@@ -2,14 +2,14 @@ const constructionTypes = [
   {
     constructionType: 'Stave',
     soundProfile: {
-      attack: 9,      // High attack due to solid wood pieces.
+      attack: 8,      // Strong attack, immediate response, but slightly softer than metal shells.
       sustain: 7,     // Good sustain, but not as resonant as steam-bent.
       warmth: 6,      // Moderate warmth, suitable for various genres.
-      projection: 9,  // Excellent projection, ideal for loud environments.
+      projection: 10, // Excellent projection, one of the loudest wooden shell types.
       brightness: 7,  // Balanced brightness, good for most styles.
     },
     frequencyResponse: {
-      low: 0.52,      // Solid lows, slightly less than steam bent.
+      low: 0.52,      // Solid low-end, slightly less than steam bent.
       lowMid: 0.65,   // Strong low-mid frequencies, provides good resonance.
       mid: 0.80,      // Strong mids, giving the drum a defined tone.
       midHigh: 0.75,  // Balanced mid-highs, clear yet not too sharp.
@@ -19,11 +19,11 @@ const constructionTypes = [
   {
     constructionType: 'Steam Bent',
     soundProfile: {
-      attack: 6,      // Softer attack, more rounded tone.
-      sustain: 8,     // Long sustain, ideal for softer genres.
+      attack: 5,      // Softer attack, more rounded and warm.
+      sustain: 9,     // Extremely long sustain due to minimal glue and seamless structure.
       warmth: 8,      // Warm sound, excellent for acoustic or jazz.
       projection: 7,  // Moderate projection, not as cutting as stave.
-      brightness: 6,  // Balanced brightness, warmer tone.
+      brightness: 6,  // Balanced brightness, slightly warmer tone.
     },
     frequencyResponse: {
       low: 0.60,      // Strong low frequencies, with plenty of warmth.
@@ -36,11 +36,11 @@ const constructionTypes = [
   {
     constructionType: 'Hybrid',
     soundProfile: {
-      attack: 7,      // Balanced attack, between stave and steam-bent.
+      attack: 8,      // Balanced attack, combining the punch of stave with the resonance of steam bent.
       sustain: 7,     // Good sustain, well-rounded resonance.
       warmth: 7,      // Balanced warmth, versatile sound.
-      projection: 7,  // Good projection, works for various settings.
-      brightness: 7,  // Balanced brightness, good for general use.
+      projection: 8,  // Strong projection, suitable for multiple genres.
+      brightness: 7,  // Balanced brightness, adaptable for different playing styles.
     },
     frequencyResponse: {
       low: 0.55,      // Solid low-end, balanced with warmth and resonance.
@@ -53,14 +53,14 @@ const constructionTypes = [
   {
     constructionType: 'Segmented',
     soundProfile: {
-      attack: 7,      // Balanced attack, slightly reduced punch.
-      sustain: 6,     // Moderate sustain, suitable for controlled sound.
-      warmth: 6,      // Balanced warmth, but less resonant than stave.
-      projection: 8,  // Good projection for the segmented structure.
-      brightness: 7,  // Balanced brightness.
+      attack: 7,      // Balanced attack, slightly softer than stave.
+      sustain: 6,     // Moderate sustain, less resonant due to multiple glued joints.
+      warmth: 6,      // Balanced warmth, with a slightly drier tone.
+      projection: 7,  // Good projection, slightly diffused due to segment construction.
+      brightness: 7,  // Balanced brightness, works well in many situations.
     },
     frequencyResponse: {
-      low: 0.50,      // Low frequencies present, but with less depth.
+      low: 0.50,      // Low frequencies present, but with slightly less depth than stave.
       lowMid: 0.60,   // Moderate low-mid frequencies providing some body.
       mid: 0.70,      // Clear mids with balanced tonal quality.
       midHigh: 0.65,  // Bright mids with controlled presence.
@@ -70,10 +70,10 @@ const constructionTypes = [
   {
     constructionType: 'Solid',
     soundProfile: {
-      attack: 8,      // Excellent attack, solid construction enhances punch.
-      sustain: 9,     // Very good sustain, creates a resonant tone.
-      warmth: 9,      // Extremely warm sound, perfect for jazz.
-      projection: 7,  // Lower projection, good for smaller spaces.
+      attack: 8,      // Strong attack, solid structure allows for precise energy transfer.
+      sustain: 10,    // Maximum sustain, purest resonance of all construction types.
+      warmth: 9,      // Extremely warm sound, smoothest in terms of tonal balance.
+      projection: 6,  // Lower projection, more suited for small settings or studio use.
       brightness: 6,  // Lower brightness, focusing on warmth and low-mid tones.
     },
     frequencyResponse: {
