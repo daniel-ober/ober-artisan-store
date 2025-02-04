@@ -208,11 +208,11 @@ const woodSpecies = [
   {
     woodSpecies: ['Oak'],
     soundProfile: {
-      attack: 6,      // More subdued attack due to density.
-      sustain: 6,     // Moderate sustain, less long-lasting than maple.
-      warmth: 7,      // Provides solid warmth in the sound.
-      projection: 6,  // Less projection compared to maple or bubinga.
-      brightness: 5,  // Subdued brightness, more mid-focused.
+      attack: 6,      // Moderate attack due to density.
+      sustain: 6,     // Balanced sustain.
+      warmth: 7,      // Warm and full-bodied tone.
+      projection: 7,  // Good projection but less sharp than maple.
+      brightness: 6,  // Subdued brightness, favoring midrange presence.
     },
     frequencyResponse: {
       low: 0.60,      // Reduced low-end response with more emphasis on mids.

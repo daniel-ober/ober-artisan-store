@@ -50,7 +50,7 @@ const ArtisanSeries = () => {
             <li>Stave Configurations: 16, 20, or 10 staves</li>
             <li>Finish: Light gloss, Medium gloss, Torch-scorched aesthetic</li>
             <li>Wood Selection: Oak + compatible woods</li>
-            <li>Price Range: <strong>$850 - $1,100</strong></li>
+            <li>Price Range: <strong>$850 - $1,300</strong></li>
           </ul>
         </div>
         <div className="drum-layer">
@@ -127,9 +127,9 @@ const ArtisanSeries = () => {
             <ul className="description-list">
               <li>Shell Construction: Stave</li>
               <li>Available Sizes: 12”, 13”, 14”</li>
-              <li>Finish: Light gloss, Medium gloss, Torch-scorched aesthetic</li>
-              <li>Wood Selection: Oak + compatible woods</li>
-              <li>Price Range: <strong>$850 - $1,100</strong></li>
+              <li>Finish: Natural semi-gloss, Torch-scorched aesthetic</li>
+              <li>Wood Selection: Northern Red Oak</li>
+              <li>Price Range: <strong>$850 - $1,300</strong></li>
             </ul>
             <a href="/products/heritage" className="preorder-button">Pre-Order Now</a>
           </div>
