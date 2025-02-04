@@ -1,0 +1,164 @@
+/* 📌 Heritage Product Detail Layout */
+.heritage-product-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 40px 15px;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* Title Styling */
+.heritage-product-detail h1 {
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* 🔄 Main Product Section Layout */
+.heritage-product-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  gap: 40px;
+  box-sizing: border-box;
+}
+
+/* 📌 Image Gallery Layout */
+.heritage-product-image {
+  flex: 1.2;
+  max-width: 55%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.heritage-product-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.heritage-product-image img:hover {
+  transform: scale(1.03);
+}
+
+/* 📌 Drum Customization Panel */
+.heritage-product-options {
+  flex: 0.75;
+  background: rgba(0, 0, 0, 0.85);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border: 1px solid #333;
+  width: 100%;
+  max-width: 400px;
+  color: white;
+  box-sizing: border-box;
+}
+
+.heritage-product-options h2 {
+  margin-bottom: 20px;
+  font-size: 26px;
+  color: #ffd700;
+}
+
+/* 📌 Labels for Dropdowns */
+.heritage-product-options label {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #fff;
+}
+
+/* 📌 Dropdown Styling */
+.heritage-product-options select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #777;
+  background: #222;
+  color: white;
+  cursor: pointer;
+  margin-bottom: 15px;
+  transition: border 0.2s ease-in-out;
+}
+
+.heritage-product-options select:hover,
+.heritage-product-options select:focus {
+  border-color: #ffd700;
+  outline: none;
+}
+
+/* 📌 Total Price Styling */
+.heritage-product-options .total-price {
+  font-size: 22px;
+  font-weight: bold;
+  margin-top: 20px;
+  color: #ffd700;
+  text-align: center;
+}
+
+/* 📌 Add to Cart Button */
+.heritage-product-options button {
+  width: 100%;
+  padding: 15px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.heritage-product-options .add-to-cart {
+  background: #007bff;
+  color: white;
+}
+
+.heritage-product-options .add-to-cart:hover {
+  background: #0056b3;
+}
+
+/* 📌 Responsive Design for Mobile */
+@media (max-width: 1024px) {
+  .heritage-product-detail {
+    padding: 20px;
+  }
+
+  .heritage-product-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .heritage-product-image {
+    max-width: 90%;
+  }
+
+  .heritage-product-options {
+    width: 90%;
+  }
+
+  .heritage-product-options h2 {
+    font-size: 22px;
+  }
+
+  .heritage-product-options select {
+    font-size: 14px;
+  }
+
+  .heritage-product-options button {
+    font-size: 16px;
+    padding: 12px;
+  }
+}
