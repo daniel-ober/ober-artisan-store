@@ -144,7 +144,7 @@ const HeritageProductDetail = () => {
 
       <div className="heritage-product-content">
         <div className="heritage-product-image">
-          <img src="/artisan-shop/heritage-left.png" alt="HERÍTAGE Snare Drum" />
+          <img src="https://firebasestorage.googleapis.com/v0/b/danoberartisandrums-dev.firebasestorage.app/o/products%2FIMG_6123.png?alt=media&token=ec8d40b8-ebae-41dc-93c6-e7936055ead7" alt="HERÍTAGE Snare Drum" />
         </div>
 
         <div className="heritage-product-options">
