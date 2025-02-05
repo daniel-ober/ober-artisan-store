@@ -85,49 +85,77 @@ const FeuzonProductDetail = () => {
     let newPrice = basePrices[size] || 0;
     let depthAdjustment = depthPrices[size]?.[depth] || 0;
     newPrice += depthAdjustment;
-
-    if (staveOption.includes("Re-Rings")) {
-      newPrice += reRingCost;
+  
+    // ✅ Determine if Re-Rings should be applied
+    const isReRingsRequired =
+      size === "14" && lugs === "10" && staveOption.includes("10 -") && staveOption.includes("Re-Rings");
+  
+    if (isReRingsRequired) {
+      newPrice += reRingCost; // ✅ Add $150 for Re-Rings
     }
-
+  
     setTotalPrice(newPrice);
-
+  
+    // ✅ Calculate Recommended Shell Thickness
     const recommendedThicknessValue = calculateShellThickness(
       outerShell, innerStave, size, depth, lugs
     );
     setRecommendedThickness(recommendedThicknessValue);
-
-    const updatedStaveQuantities = getStaveQuantities(
+  
+    // ✅ Get updated stave quantities, ensuring Re-Rings option is included when applicable
+    let updatedStaveQuantities = getStaveQuantities(
       size, lugs, outerShell, innerStave, depth, recommendedThicknessValue
     );
-
+  
+    // ✅ Ensure Re-Rings is dynamically added only ONCE if applicable
+    if (size === "14" && lugs === "10") {
+      const reRingOption = `10 - ${recommendedThicknessValue - 1}mm + $150 (Re-Rings Required)`;
+      if (!updatedStaveQuantities.some(option => option.includes("Re-Rings"))) {
+        updatedStaveQuantities.push(reRingOption);
+      }
+    }
+  
     console.log("Updated Stave Quantities:", updatedStaveQuantities);
-
+  
     if (updatedStaveQuantities.length > 0) {
+      // ✅ Ensure Re-Rings selection stays when selected
+      const currentSelectionIsValid = updatedStaveQuantities.includes(staveOption);
       setStaveQuantities(updatedStaveQuantities);
-      setStaveOption(updatedStaveQuantities[0]);
+      setStaveOption(currentSelectionIsValid ? staveOption : updatedStaveQuantities[0]);
     } else {
       setStaveQuantities([`12 - ${recommendedThicknessValue}mm`]); // Default fallback
       setStaveOption(`12 - ${recommendedThicknessValue}mm`);
     }
-  }, [outerShell, innerStave, size, depth, lugs]);
+  }, [outerShell, innerStave, size, depth, lugs, staveOption]);
 
   return (
     <div className="feuzon-product-detail">
-      <h1>FEUZON SERIES SNARE DRUM</h1>
-
+      <h1>FEUZON Series Snare Drum</h1>
+  
       <div className="feuzon-product-content">
-        <div className="feuzon-product-visuals">
-          <div className="feuzon-product-image">
-            <img src="/images/feuzon/default.png" alt="Feuzon Drum Model" />
-          </div>
-          <div className="feuzon-sound-charts">
-            <SpiderChart data={[8, 7, 7, 7, 8]} />
-            <BarChart data={{ attack: 8, sustain: 7, brightness: 7, warmth: 7, projection: 8 }} />
-          </div>
+        {/* 📌 Left Side: Product Image */}
+        <div className="feuzon-product-image">
+          <img src="https://firebasestorage.googleapis.com/v0/b/danoberartisandrums-dev.firebasestorage.app/o/products%2F67c255d1-a9ca-4f5d-80af-ddeee6a424e1_IMG_6133.png?alt=media&token=a15b2e68-d34b-44fa-bf33-eccc4a025331" alt="FEUZON Snare Drum" />
         </div>
-
-        <div className="feuzon-product-details">
+  
+        {/* 📌 Right Side: Product Features + Customization */}
+        <div className="feuzon-product-options">
+          {/* 📌 Default Features List */}
+          <div className="feuzon-features">
+            <h2>FEUZON Series Features</h2>
+            <ul>
+              <li>Hybrid Shell Construction</li>
+              <li>Double Tube Lugs</li>
+              <li>45° Inner Bearing Edge</li>
+              <li>Custom-Tuned for Maximum Projection</li>
+              <li>Handcrafted Semi-Gloss Finish</li>
+              <li>Precision Cut Snare Beds</li>
+              <li>Trick Snare Throw-Off</li>
+              <li>Puresound Custom Snare Wires</li>
+              <li>Remo Ambassador Batter & Hazy Side Heads</li>
+            </ul>
+          </div>
+  
           <h2>Customize Your Drum</h2>
 
           <label htmlFor="outerShell">Outer Shell</label>
@@ -144,33 +172,54 @@ const FeuzonProductDetail = () => {
             ))}
           </select>
 
-          <label htmlFor="size">Snare Size (Diameter)</label>
-          <select id="size" value={size} onChange={(e) => setSize(e.target.value)}>
-            {Object.keys(basePrices).map((s) => (
-              <option key={s} value={s}>{s}&quot;</option>
-            ))}
-          </select>
+{/* Snare Size (Diameter) with Base Price */}
+<label htmlFor="size">Snare Size (Diameter)</label>
+<select id="size" value={size} onChange={(e) => setSize(e.target.value)}>
+  {Object.keys(basePrices).map((s) => (
+    <option key={s} value={s}>
+      {s}&quot; - Base Price: ${basePrices[s]}
+    </option>
+  ))}
+</select>
 
-          <label htmlFor="depth">Depth</label>
-          <select id="depth" value={depth} onChange={(e) => setDepth(e.target.value)}>
-            {Object.keys(depthPrices[size]).map((d) => (
-              <option key={d} value={d}>{d}&quot;</option>
-            ))}
-          </select>
+{/* Depth with Upgrade Pricing */}
+<label htmlFor="depth">Depth</label>
+<select id="depth" value={depth} onChange={(e) => setDepth(e.target.value)}>
+  {Object.keys(depthPrices[size]).map((d) => (
+    <option key={d} value={d}>
+      {d}&quot; {depthPrices[size][d] > 0 ? `+ $${depthPrices[size][d]}` : ""}
+    </option>
+  ))}
+</select>
 
-          <label htmlFor="lugs">Lug Quantity</label>
-          <select id="lugs" value={lugs} onChange={(e) => setLugs(e.target.value)}>
-            {lugOptions[size].map((lugOption) => (
-              <option key={lugOption} value={lugOption}>{lugOption} Lugs</option>
-            ))}
-          </select>
+{/* Lug Quantity */}
+<label htmlFor="lugs">Lug Quantity</label>
+<select id="lugs" value={lugs} onChange={(e) => setLugs(e.target.value)}>
+  {lugOptions[size].map((lugOption) => (
+    <option key={lugOption} value={lugOption}>
+      {lugOption} Lugs
+    </option>
+  ))}
+</select>
 
-          <label htmlFor="staveOption">Stave Quantity & Shell Thickness</label>
-          <select id="staveOption" value={staveOption} onChange={(e) => setStaveOption(e.target.value)}>
-            {staveQuantities.map((option) => (
-              <option key={option} value={option}>{option}</option>
-            ))}
-          </select>
+{/* Stave Quantity & Shell Thickness with Re-Rings Cost */}
+<label htmlFor="staveOption">Stave Quantity & Shell Thickness</label>
+<select id="staveOption" value={staveOption} onChange={(e) => setStaveOption(e.target.value)}>
+  {staveQuantities.map((option) => {
+    let displayOption = option;
+
+    // ✅ Append $150 for Re-Rings when applicable
+    if (size === "14" && lugs === "10" && option.includes("10 -") && option.includes("Re-Rings")) {
+      displayOption = `${option} + $150 (Re-Rings Required)`;
+    }
+
+    return (
+      <option key={option} value={option}>
+        {displayOption}
+      </option>
+    );
+  })}
+</select>
 
           <h3>Recommended Shell Thickness: {recommendedThickness}mm</h3>
           <h3>Total Price: ${totalPrice}</h3>
