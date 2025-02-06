@@ -890,7 +890,7 @@ const feuzonSummaries = {
     playingSituation: 'Gospel choirs and church worship sessions.',
     recordingMic: 'Audix i5 or AKG C414 for precise transients.',
   },
-  '14" - Base Price: $1500-6.0"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Maple-Walnut + Birch':
+  '14" - Base Price: $1450-6.0"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Maple-Walnut + Birch':
     {
       highlightedCharacteristics:
         'Crisp attack with balanced sustain, ideal for tight articulation.',
@@ -915,7 +915,7 @@ const feuzonSummaries = {
     playingSituation: 'Stadium shows & high-energy rock gigs.',
     recordingMic: 'Shure Beta 57A or Earthworks DM20 for crisp attack.',
   },
-  '14" - Base Price: $1500-6.0"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Maple-Oak + Cherry':
+  '14" - Base Price: $1450-6.0"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Maple-Oak + Cherry':
     {
       highlightedCharacteristics:
         'Fast response with bright attack and controlled resonance.',
@@ -940,7 +940,7 @@ const feuzonSummaries = {
     playingSituation: 'R&B and neo-soul jam sessions.',
     recordingMic: 'Shure SM7B or Sennheiser MD421 for strong projection.',
   },
-  '14" - Base Price: $1500-6.0"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Maple-Maple + Bubinga':
+  '14" - Base Price: $1450-6.0"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Maple-Maple + Bubinga':
     {
       highlightedCharacteristics:
         'Strong midrange presence, perfect for versatile tuning.',
@@ -965,7 +965,7 @@ const feuzonSummaries = {
     playingSituation: 'Big band and brass ensemble performances.',
     recordingMic: 'Royer R-121 or Neumann KM84 for intricate dynamics.',
   },
-  '14" - Base Price: $1500-6.0"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Walnut-Mahogany + Cherry':
+  '14" - Base Price: $1450-6.0"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Walnut-Mahogany + Cherry':
     {
       highlightedCharacteristics:
         'Dynamic and expressive, with controlled high-end presence.',
@@ -990,7 +990,7 @@ const feuzonSummaries = {
     playingSituation: 'Intimate jazz clubs & acoustic sessions.',
     recordingMic: 'Beyerdynamic M201 TG or AKG C414 for warm articulation.',
   },
-  '14" - Base Price: $1500-6.0"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Walnut-Walnut + Padauk':
+  '14" - Base Price: $1450-6.0"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Walnut-Walnut + Padauk':
     {
       highlightedCharacteristics:
         'Powerful projection with rich overtones and deep lows.',
@@ -1015,7 +1015,7 @@ const feuzonSummaries = {
     playingSituation: 'Funk and groove-driven performances.',
     recordingMic: 'Audix D4 or AKG C214 for deep tone and clarity.',
   },
-  '14" - Base Price: $1500-6.0"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Walnut-Oak + Wenge':
+  '14" - Base Price: $1450-6.0"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Walnut-Oak + Wenge':
     {
       highlightedCharacteristics:
         'Tight and focused snare with quick decay and smooth balance.',
@@ -1040,7 +1040,7 @@ const feuzonSummaries = {
     playingSituation: 'Orchestral and concert hall settings.',
     recordingMic: 'Earthworks SR25 or Beyerdynamic MC930 for natural presence.',
   },
-  '14" - Base Price: $1500-6.0"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Cherry-Birch + Maple':
+  '14" - Base Price: $1450-6.0"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Cherry-Birch + Maple':
     {
       highlightedCharacteristics:
         'Articulate snare with defined stick response and full projection.',
@@ -1066,7 +1066,7 @@ const feuzonSummaries = {
       playingSituation: 'Live performances & studio recordings.',
       recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
     },
-  '14" - Base Price: $1500-6.0"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Cherry-Zebrawood + Mahogany':
+  '14" - Base Price: $1450-6.0"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Cherry-Zebrawood + Mahogany':
     {
       highlightedCharacteristics:
         'Warm, vintage-inspired sound with excellent midrange depth.',
@@ -1091,7 +1091,7 @@ const feuzonSummaries = {
     playingSituation: 'Recording studios & dynamic live sets.',
     recordingMic: 'Neumann U87 or Royer R-121 for smooth detail.',
   },
-  '14" - Base Price: $1500-6.0"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Cherry-Padauk + Ash':
+  '14" - Base Price: $1450-6.0"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Cherry-Padauk + Ash':
     {
       highlightedCharacteristics:
         'Rich, full-bodied tone with natural warmth and clarity.',

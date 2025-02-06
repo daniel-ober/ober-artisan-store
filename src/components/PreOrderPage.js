@@ -98,7 +98,7 @@ const PreOrderPage = ({ isDarkMode, isAdmin }) => {  // ✅ Accept isDarkMode as
                           )}
                           <p>{item.description}</p>
                           <div className="price-container">
-                            <p>Price: ${item.price}</p>
+                            <p>Starting Price: ${item.price}</p>
                             <Link to={`/products/${item.id}`}>
                               <button className="pre-order-button">Pre-Order Now</button>
                             </Link>
