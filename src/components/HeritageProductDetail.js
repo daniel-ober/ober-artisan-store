@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import SpiderChart from "./SpiderChart";
 import BarChart from "./BarChart";
-import drumSummaries from "../data/drumSummaries"; // Ensure the import is correct
+import heritageSummaries from "../data/heritageSummaries"; // Ensure the import is correct
 import "./HeritageProductDetail.css";
 
 const HeritageProductDetail = () => {
@@ -85,7 +85,7 @@ const HeritageProductDetail = () => {
   
     setSoundProfile(updatedProfile);
   
-    // ✅ **Standardize Key Formatting to Match drumSummaries Object**
+    // ✅ **Standardize Key Formatting to Match heritageSummaries Object**
     const staveParts = staveOption.split(" - ");
     let staveThickness = staveParts[1];
   
@@ -100,9 +100,9 @@ const HeritageProductDetail = () => {
   
     console.log("🔎 Generated Summary Key:", generatedKey); // Debugging log
   
-    if (drumSummaries[generatedKey]) {
-      console.log("✅ Drum Summary Found:", drumSummaries[generatedKey]); // Debugging log
-      setSelectedDrumSummary(drumSummaries[generatedKey]);
+    if (heritageSummaries[generatedKey]) {
+      console.log("✅ Drum Summary Found:", heritageSummaries[generatedKey]); // Debugging log
+      setSelectedDrumSummary(heritageSummaries[generatedKey]);
     } else {
       console.error("❌ Summary not found for the key:", generatedKey); // Error if no summary is found
       setSelectedDrumSummary({});
