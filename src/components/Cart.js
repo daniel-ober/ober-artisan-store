@@ -92,7 +92,7 @@ const Cart = () => {
   };
 
   const getItemTotal = (item) => {
-    return (item.price || 0) * (item.quantity || 0);
+    return (Number(item.price) || 0) * (item.quantity || 0);
   };
 
   const getTotalAmount = () => {
@@ -217,8 +217,8 @@ const Cart = () => {
                   <td>
                     <p>{item.name}</p>
                   </td>
-                  <td>${item.price.toFixed(2)}</td>
-                  <td>
+                  <td>${(Number(item.price) || 0).toFixed(2)}</td>
+                                    <td>
                     <div className="quantity-control">
                       <button
                         onClick={() => handleQuantityChange(item.id, -1)}
@@ -244,8 +244,8 @@ const Cart = () => {
                       </button>
                     </div>
                   </td>
-                  <td>${getItemTotal(item).toFixed(2)}</td>
-                  <td>
+                  <td>${(Number(getItemTotal(item)) || 0).toFixed(2)}</td>
+                                    <td>
                     <button onClick={() => removeFromCart(item.id)} className="remove-btn">
                       Remove
                     </button>

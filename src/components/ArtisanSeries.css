@@ -179,10 +179,14 @@
 
 /* 🛠 Mobile Responsiveness Fixes */
 @media (max-width: 768px) {
+  .artisanseries-container {
+    scroll-snap-type: none; /* Disable snap scrolling on mobile */
+  }
+
   .drum-section {
-    flex-direction: column; /* Stack images and text on mobile */
+    flex-direction: column; /* Stack elements */
     height: auto;
-    padding: 8vh 6vw;
+    padding: 5vh 6vw;
     text-align: center;
   }
 
@@ -190,18 +194,29 @@
     width: 100%;
     max-width: 90%;
     margin: 0 auto;
-    padding-bottom: 3vh;
+    padding-bottom: 2vh;
+  }
+
+  .text-layer .header-image {
+    max-width: 250px; /* Reduce logo size for better balance */
+    margin: 0 auto 10px;
+  }
+
+  .text-layer .description {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin-bottom: 1rem;
   }
 
   .drum-layer {
     width: 100%;
     text-align: center;
-    padding-top: 2vh;
+    padding-top: 1vh;
   }
 
   .drum-layer img {
-    width: 90%;
-    max-width: 500px;
+    width: 80%;
+    max-width: 350px; /* Ensure image scales properly */
     margin: 0 auto;
   }
 
@@ -212,15 +227,43 @@
   }
 
   .drum-logo {
-    width: 120px; /* Reduce logo size for mobile */
+    width: 110px; /* Reduce logo size */
   }
 
   .drum-info {
     width: 100%;
-    padding-bottom: 4vh;
+    padding-bottom: 3vh;
   }
 
   .drum-final-image img {
-    width: 100vw; /* Ensures full width on mobile */
+    width: 100vw;
+    max-height: 400px; /* Prevent oversized images */
+  }
+}
+
+/* For ultra-small devices */
+@media (max-width: 480px) {
+  .drum-section {
+    padding: 4vh 5vw;
+  }
+
+  .text-layer {
+    max-width: 95%;
+  }
+
+  .text-layer .header-image {
+    max-width: 220px;
+  }
+
+  .text-layer .description {
+    font-size: 0.85rem;
+  }
+
+  .drum-layer img {
+    max-width: 300px;
+  }
+
+  .drum-info {
+    font-size: 0.9rem;
   }
 }

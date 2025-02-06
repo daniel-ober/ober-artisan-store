@@ -44,21 +44,21 @@ const drumSummaries = {
   },
 
   // **13" Snares**
-  '13" - Base Price: $950-5.0"-8 Lugs-12mm': {
+  '13" - Base Price: $950-5.0"-8 Lugs-13mm': {
     highlightedCharacteristics: "Crisp, articulate snare with a tight, punchy response.",
     primaryGenre: "Funk",
     secondaryGenres: ["Pop", "Fusion", "Indie Rock"],
     playingSituation: "Small Clubs & Live Sessions",
     recordingMic: "Shure Beta 57A or AKG C414 for enhanced snap.",
   },
-  '13" - Base Price: $1050-6.0"-8 Lugs-12mm': {
+  '13" - Base Price: $1050-6.0"-8 Lugs-13mm': {
     highlightedCharacteristics: "Fast attack with balanced sustain and midrange warmth.",
     primaryGenre: "Fusion",
     secondaryGenres: ["Jazz", "Gospel"],
     playingSituation: "Studio & Medium Venues",
     recordingMic: "Audix i5 or Earthworks SR25 for clarity.",
   },
-  '13" - Base Price: $1150-7.0"-8 Lugs-12mm': {
+  '13" - Base Price: $1150-7.0"-8 Lugs-13mm': {
     highlightedCharacteristics: "Tight articulation with added depth and warmth.",
     primaryGenre: "Hip-Hop",
     secondaryGenres: ["Neo-Soul", "Pop"],
@@ -67,21 +67,21 @@ const drumSummaries = {
   },
 
   // **14" Snares**
-  '14" - Base Price: $1050-5.5"-8 Lugs-12mm': {
+  '14" - Base Price: $1050-5.5"-8 Lugs-13mm': {
     highlightedCharacteristics: "Balanced warmth with smooth articulation and even sustain.",
     primaryGenre: "Singer-Songwriter",
     secondaryGenres: ["Blues", "Indie", "Country"],
     playingSituation: "Recording Studios & Unplugged Sessions",
     recordingMic: "Neumann U87 for warmth & transparency.",
   },
-  '14" - Base Price: $1100-6.0"-8 Lugs-12mm': {
+  '14" - Base Price: $1100-6.0"-8 Lugs-13mm': {
     highlightedCharacteristics: "Full, rich tone with strong midrange clarity and versatility.",
     primaryGenre: "Classic Rock",
     secondaryGenres: ["Country", "Indie"],
     playingSituation: "Studio & Live Gigs",
     recordingMic: "Shure SM7B or Royer R-121 for smooth response.",
   },
-  '14" - Base Price: $1150-6.5"-8 Lugs-12mm': {
+  '14" - Base Price: $1150-6.5"-8 Lugs-13mm': {
     highlightedCharacteristics: "Deep, resonant projection with a smooth, controlled attack.",
     primaryGenre: "Metal",
     secondaryGenres: ["Hard Rock", "Progressive Rock"],

@@ -1,1407 +1,1333 @@
 const feuzonSummaries = {
-  '12" - Base Price: $1050-5.0"-6 Lugs-10mm-Walnut-Mahogany + Cherry': {
+  '12" - Base Price: $1050-5.0"-6 Lugs-12 - 10mm-Maple-Walnut + Birch': {
     highlightedCharacteristics:
-      'Dark, warm tone with a deep, resonant low end. Features a sharp attack with short sustain. Slightly looser tuning with more body and warmth.',
-    primaryGenre: 'Jazz',
-    secondaryGenres: ['R&B', 'Blues'],
-    playingSituation: 'Studio work & intimate venues.',
-    recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
-  },
-
-  '12" - Base Price: $1050-5.0"-8 Lugs-13mm-Walnut-Mahogany + Cherry': {
-    highlightedCharacteristics:
-      'Dark, warm tone with a deep, resonant low end. Features a sharp attack with short sustain. Balanced tuning range with clear projection.',
-    primaryGenre: 'Jazz',
-    secondaryGenres: ['R&B', 'Blues'],
-    playingSituation: 'Studio work & intimate venues.',
-    recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
-  },
-
-  '12" - Base Price: $1050-5.0"-6 Lugs-10mm-Walnut-Walnut + Padauk': {
-    highlightedCharacteristics:
-      'Dark, warm tone with a deep, resonant low end. Features a sharp attack with short sustain. Slightly looser tuning with more body and warmth.',
-    primaryGenre: 'Jazz',
-    secondaryGenres: ['R&B', 'Blues'],
-    playingSituation: 'Studio work & intimate venues.',
-    recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
-  },
-
-  '12" - Base Price: $1050-5.0"-8 Lugs-13mm-Walnut-Walnut + Padauk': {
-    highlightedCharacteristics:
-      'Dark, warm tone with a deep, resonant low end. Features a sharp attack with short sustain. Balanced tuning range with clear projection.',
-    primaryGenre: 'Jazz',
-    secondaryGenres: ['R&B', 'Blues'],
-    playingSituation: 'Studio work & intimate venues.',
-    recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
-  },
-
-  '12" - Base Price: $1050-5.0"-6 Lugs-10mm-Walnut-Oak + Wenge': {
-    highlightedCharacteristics:
-      'Dark, warm tone with a deep, resonant low end. Features a sharp attack with short sustain. Slightly looser tuning with more body and warmth.',
-    primaryGenre: 'Jazz',
-    secondaryGenres: ['R&B', 'Blues'],
-    playingSituation: 'Studio work & intimate venues.',
-    recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
-  },
-
-  '12" - Base Price: $1050-5.0"-8 Lugs-13mm-Walnut-Oak + Wenge': {
-    highlightedCharacteristics:
-      'Dark, warm tone with a deep, resonant low end. Features a sharp attack with short sustain. Balanced tuning range with clear projection.',
-    primaryGenre: 'Jazz',
-    secondaryGenres: ['R&B', 'Blues'],
-    playingSituation: 'Studio work & intimate venues.',
-    recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
-  },
-  '12" - Base Price: $1050-5.0"-6 Lugs-10mm-Cherry-Birch + Maple': {
-    highlightedCharacteristics:
-      'Bright attack with a controlled midrange and crisp highs. Features a sharp attack with short sustain. Slightly looser tuning with more body and warmth.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Funk', 'Latin'],
-    playingSituation: 'Fast-paced, energetic playing styles.',
-    recordingMic: 'Earthworks SR25 or Sennheiser e604 for clarity.',
-  },
-
-  '12" - Base Price: $1050-5.0"-8 Lugs-13mm-Cherry-Birch + Maple': {
-    highlightedCharacteristics:
-      'Bright attack with a controlled midrange and crisp highs. Features a sharp attack with short sustain. Balanced tuning range with clear projection.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Funk', 'Latin'],
-    playingSituation: 'Fast-paced, energetic playing styles.',
-    recordingMic: 'Earthworks SR25 or Sennheiser e604 for clarity.',
-  },
-
-  '12" - Base Price: $1050-5.0"-6 Lugs-10mm-Cherry-Zebrawood + Mahogany': {
-    highlightedCharacteristics:
-      'Bright attack with a controlled midrange and crisp highs. Features a sharp attack with short sustain. Slightly looser tuning with more body and warmth.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Funk', 'Latin'],
-    playingSituation: 'Fast-paced, energetic playing styles.',
-    recordingMic: 'Earthworks SR25 or Sennheiser e604 for clarity.',
-  },
-
-  '12" - Base Price: $1050-5.0"-8 Lugs-13mm-Cherry-Zebrawood + Mahogany': {
-    highlightedCharacteristics:
-      'Bright attack with a controlled midrange and crisp highs. Features a sharp attack with short sustain. Balanced tuning range with clear projection.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Funk', 'Latin'],
-    playingSituation: 'Fast-paced, energetic playing styles.',
-    recordingMic: 'Earthworks SR25 or Sennheiser e604 for clarity.',
-  },
-
-  '12" - Base Price: $1050-5.0"-6 Lugs-10mm-Cherry-Padauk + Ash': {
-    highlightedCharacteristics:
-      'Bright attack with a controlled midrange and crisp highs. Features a sharp attack with short sustain. Slightly looser tuning with more body and warmth.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Funk', 'Latin'],
-    playingSituation: 'Fast-paced, energetic playing styles.',
-    recordingMic: 'Earthworks SR25 or Sennheiser e604 for clarity.',
-  },
-
-  '12" - Base Price: $1050-5.0"-8 Lugs-13mm-Cherry-Padauk + Ash': {
-    highlightedCharacteristics:
-      'Bright attack with a controlled midrange and crisp highs. Features a sharp attack with short sustain. Balanced tuning range with clear projection.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Funk', 'Latin'],
-    playingSituation: 'Fast-paced, energetic playing styles.',
-    recordingMic: 'Earthworks SR25 or Sennheiser e604 for clarity.',
-  },
-
-  '12" - Base Price: $1150-6.0"-6 Lugs-10mm-Maple-Walnut + Birch': {
-    highlightedCharacteristics:
-      'Balanced warmth with a smooth attack and controlled sustain. Features a defined attack with moderate sustain. Slightly looser tuning with more body and warmth.',
+      'Crisp attack with balanced sustain, ideal for tight articulation.',
     primaryGenre: 'Rock',
     secondaryGenres: ['Pop', 'Indie'],
     playingSituation: 'Live performances & studio recordings.',
     recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
   },
-
-  '12" - Base Price: $1150-6.0"-8 Lugs-13mm-Maple-Walnut + Birch': {
+  '12" - Base Price: $1050-5.0"-8 Lugs-16 - 13mm-Maple-Walnut + Birch': {
     highlightedCharacteristics:
-      'Balanced warmth with a smooth attack and controlled sustain. Features a defined attack with moderate sustain. Balanced tuning range with clear projection.',
-    primaryGenre: 'Rock',
-    secondaryGenres: ['Pop', 'Indie'],
-    playingSituation: 'Live performances & studio recordings.',
-    recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
-  },
-
-  '12" - Base Price: $1150-6.0"-6 Lugs-10mm-Maple-Oak + Cherry': {
-    highlightedCharacteristics:
-      'Balanced warmth with a smooth attack and controlled sustain. Features a defined attack with moderate sustain. Slightly looser tuning with more body and warmth.',
-    primaryGenre: 'Rock',
-    secondaryGenres: ['Pop', 'Indie'],
-    playingSituation: 'Live performances & studio recordings.',
-    recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
-  },
-
-  '12" - Base Price: $1150-6.0"-8 Lugs-13mm-Maple-Oak + Cherry': {
-    highlightedCharacteristics:
-      'Balanced warmth with a smooth attack and controlled sustain. Features a defined attack with moderate sustain. Balanced tuning range with clear projection.',
-    primaryGenre: 'Rock',
-    secondaryGenres: ['Pop', 'Indie'],
-    playingSituation: 'Live performances & studio recordings.',
-    recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
-  },
-
-  '12" - Base Price: $1150-6.0"-6 Lugs-10mm-Maple-Maple + Bubinga': {
-    highlightedCharacteristics:
-      'Balanced warmth with a smooth attack and controlled sustain. Features a defined attack with moderate sustain. Slightly looser tuning with more body and warmth.',
-    primaryGenre: 'Rock',
-    secondaryGenres: ['Pop', 'Indie'],
-    playingSituation: 'Live performances & studio recordings.',
-    recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
-  },
-
-  '12" - Base Price: $1150-6.0"-8 Lugs-13mm-Maple-Maple + Bubinga': {
-    highlightedCharacteristics:
-      'Balanced warmth with a smooth attack and controlled sustain. Features a defined attack with moderate sustain. Balanced tuning range with clear projection.',
-    primaryGenre: 'Rock',
-    secondaryGenres: ['Pop', 'Indie'],
-    playingSituation: 'Live performances & studio recordings.',
-    recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
-  },
-
-  '12" - Base Price: $1150-6.0"-6 Lugs-10mm-Walnut-Mahogany + Cherry': {
-    highlightedCharacteristics:
-      'Dark, warm tone with a deep, resonant low end. Features a defined attack with moderate sustain. Slightly looser tuning with more body and warmth.',
+      'Warm, vintage-inspired sound with excellent midrange depth.',
     primaryGenre: 'Jazz',
-    secondaryGenres: ['R&B', 'Blues'],
-    playingSituation: 'Studio work & intimate venues.',
-    recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
+    secondaryGenres: ['Blues', 'Soul'],
+    playingSituation: 'Intimate jazz clubs & acoustic sessions.',
+    recordingMic: 'Beyerdynamic M201 TG or AKG C414 for warm articulation.',
   },
-
-  '12" - Base Price: $1150-6.0"-8 Lugs-13mm-Walnut-Mahogany + Cherry': {
+  '12" - Base Price: $1050-5.0"-6 Lugs-12 - 10mm-Maple-Oak + Cherry': {
     highlightedCharacteristics:
-      'Dark, warm tone with a deep, resonant low end. Features a defined attack with moderate sustain. Balanced tuning range with clear projection.',
-    primaryGenre: 'Jazz',
-    secondaryGenres: ['R&B', 'Blues'],
-    playingSituation: 'Studio work & intimate venues.',
-    recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
+      'Powerful projection with rich overtones and deep lows.',
+    primaryGenre: 'Metal',
+    secondaryGenres: ['Alternative', 'Hard Rock'],
+    playingSituation: 'Stadium shows & high-energy rock gigs.',
+    recordingMic: 'Shure Beta 57A or Earthworks DM20 for crisp attack.',
   },
-
-  '12" - Base Price: $1150-6.0"-6 Lugs-10mm-Walnut-Walnut + Padauk': {
+  '12" - Base Price: $1050-5.0"-8 Lugs-16 - 13mm-Maple-Oak + Cherry': {
     highlightedCharacteristics:
-      'Dark, warm tone with a deep, resonant low end. Features a defined attack with moderate sustain. Slightly looser tuning with more body and warmth.',
-    primaryGenre: 'Jazz',
-    secondaryGenres: ['R&B', 'Blues'],
-    playingSituation: 'Studio work & intimate venues.',
-    recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
+      'Fast response with bright attack and controlled resonance.',
+    primaryGenre: 'Pop',
+    secondaryGenres: ['Jazz', 'Fusion'],
+    playingSituation: 'Recording studios & dynamic live sets.',
+    recordingMic: 'Neumann U87 or Royer R-121 for smooth detail.',
   },
-
-  '12" - Base Price: $1150-6.0"-8 Lugs-13mm-Walnut-Walnut + Padauk': {
+  '12" - Base Price: $1050-5.0"-6 Lugs-12 - 10mm-Maple-Maple + Bubinga': {
     highlightedCharacteristics:
-      'Dark, warm tone with a deep, resonant low end. Features a defined attack with moderate sustain. Balanced tuning range with clear projection.',
-    primaryGenre: 'Jazz',
-    secondaryGenres: ['R&B', 'Blues'],
-    playingSituation: 'Studio work & intimate venues.',
-    recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
+      'Rich, full-bodied tone with natural warmth and clarity.',
+    primaryGenre: 'Funk',
+    secondaryGenres: ['Latin', 'Afrobeat'],
+    playingSituation: 'Funk and groove-driven performances.',
+    recordingMic: 'Audix D4 or AKG C214 for deep tone and clarity.',
   },
-
-  '12" - Base Price: $1150-6.0"-6 Lugs-10mm-Walnut-Oak + Wenge': {
+  '12" - Base Price: $1050-5.0"-8 Lugs-16 - 13mm-Maple-Maple + Bubinga': {
     highlightedCharacteristics:
-      'Dark, warm tone with a deep, resonant low end. Features a defined attack with moderate sustain. Slightly looser tuning with more body and warmth.',
-    primaryGenre: 'Jazz',
-    secondaryGenres: ['R&B', 'Blues'],
-    playingSituation: 'Studio work & intimate venues.',
-    recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
+      'Tight and focused snare with quick decay and smooth balance.',
+    primaryGenre: 'Indie',
+    secondaryGenres: ['Country', 'Folk'],
+    playingSituation: 'R&B and neo-soul jam sessions.',
+    recordingMic: 'Shure SM7B or Sennheiser MD421 for strong projection.',
   },
-
-  '12" - Base Price: $1150-6.0"-8 Lugs-13mm-Walnut-Oak + Wenge': {
+  '12" - Base Price: $1050-5.0"-6 Lugs-12 - 10mm-Walnut-Mahogany + Cherry': {
     highlightedCharacteristics:
-      'Dark, warm tone with a deep, resonant low end. Features a defined attack with moderate sustain. Balanced tuning range with clear projection.',
-    primaryGenre: 'Jazz',
-    secondaryGenres: ['R&B', 'Blues'],
-    playingSituation: 'Studio work & intimate venues.',
-    recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
+      'Strong midrange presence, perfect for versatile tuning.',
+    primaryGenre: 'Blues',
+    secondaryGenres: ['Hip-Hop', 'R&B'],
+    playingSituation: 'Experimental and avant-garde compositions.',
+    recordingMic: 'Coles 4038 or Sennheiser e604 for vintage character.',
   },
-
-  '12" - Base Price: $1150-6.0"-6 Lugs-10mm-Cherry-Birch + Maple': {
+  '12" - Base Price: $1050-5.0"-8 Lugs-16 - 13mm-Walnut-Mahogany + Cherry': {
     highlightedCharacteristics:
-      'Bright attack with a controlled midrange and crisp highs. Features a defined attack with moderate sustain. Slightly looser tuning with more body and warmth.',
+      'Deep resonance with punchy attack and controlled sustain.',
+    primaryGenre: 'Soul',
+    secondaryGenres: ['Neo-Soul', 'Funk'],
+    playingSituation: 'Orchestral and concert hall settings.',
+    recordingMic: 'Earthworks SR25 or Beyerdynamic MC930 for natural presence.',
+  },
+  '12" - Base Price: $1050-5.0"-6 Lugs-12 - 10mm-Walnut-Walnut + Padauk': {
+    highlightedCharacteristics:
+      'Articulate snare with defined stick response and full projection.',
+    primaryGenre: 'Gospel',
+    secondaryGenres: ['Experimental', 'Ambient'],
+    playingSituation: 'Big band and brass ensemble performances.',
+    recordingMic: 'Royer R-121 or Neumann KM84 for intricate dynamics.',
+  },
+  '12" - Base Price: $1050-5.0"-8 Lugs-16 - 13mm-Walnut-Walnut + Padauk': {
+    highlightedCharacteristics:
+      'Dynamic and expressive, with controlled high-end presence.',
     primaryGenre: 'Fusion',
-    secondaryGenres: ['Funk', 'Latin'],
-    playingSituation: 'Fast-paced, energetic playing styles.',
-    recordingMic: 'Earthworks SR25 or Sennheiser e604 for clarity.',
+    secondaryGenres: ['Progressive Rock'],
+    playingSituation: 'Gospel choirs and church worship sessions.',
+    recordingMic: 'Audix i5 or AKG C414 for precise transients.',
   },
-
-  '12" - Base Price: $1150-6.0"-8 Lugs-13mm-Cherry-Birch + Maple': {
+  '12" - Base Price: $1050-5.0"-6 Lugs-12 - 10mm-Walnut-Oak + Wenge': {
     highlightedCharacteristics:
-      'Bright attack with a controlled midrange and crisp highs. Features a defined attack with moderate sustain. Balanced tuning range with clear projection.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Funk', 'Latin'],
-    playingSituation: 'Fast-paced, energetic playing styles.',
-    recordingMic: 'Earthworks SR25 or Sennheiser e604 for clarity.',
-  },
-
-  '12" - Base Price: $1150-6.0"-6 Lugs-10mm-Cherry-Zebrawood + Mahogany': {
-    highlightedCharacteristics:
-      'Bright attack with a controlled midrange and crisp highs. Features a defined attack with moderate sustain. Slightly looser tuning with more body and warmth.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Funk', 'Latin'],
-    playingSituation: 'Fast-paced, energetic playing styles.',
-    recordingMic: 'Earthworks SR25 or Sennheiser e604 for clarity.',
-  },
-
-  '12" - Base Price: $1150-6.0"-8 Lugs-13mm-Cherry-Zebrawood + Mahogany': {
-    highlightedCharacteristics:
-      'Bright attack with a controlled midrange and crisp highs. Features a defined attack with moderate sustain. Balanced tuning range with clear projection.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Funk', 'Latin'],
-    playingSituation: 'Fast-paced, energetic playing styles.',
-    recordingMic: 'Earthworks SR25 or Sennheiser e604 for clarity.',
-  },
-
-  '12" - Base Price: $1150-6.0"-6 Lugs-10mm-Cherry-Padauk + Ash': {
-    highlightedCharacteristics:
-      'Bright attack with a controlled midrange and crisp highs. Features a defined attack with moderate sustain. Slightly looser tuning with more body and warmth.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Funk', 'Latin'],
-    playingSituation: 'Fast-paced, energetic playing styles.',
-    recordingMic: 'Earthworks SR25 or Sennheiser e604 for clarity.',
-  },
-
-  '12" - Base Price: $1150-6.0"-8 Lugs-13mm-Cherry-Padauk + Ash': {
-    highlightedCharacteristics:
-      'Bright attack with a controlled midrange and crisp highs. Features a defined attack with moderate sustain. Balanced tuning range with clear projection.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Funk', 'Latin'],
-    playingSituation: 'Fast-paced, energetic playing styles.',
-    recordingMic: 'Earthworks SR25 or Sennheiser e604 for clarity.',
-  },
-
-  '12" - Base Price: $1250-7.0"-6 Lugs-10mm-Maple-Walnut + Birch': {
-    highlightedCharacteristics:
-      'Balanced warmth with a smooth attack and controlled sustain. Features a deep attack with long sustain. Slightly looser tuning with more body and warmth.',
+      'Crisp attack with balanced sustain, ideal for tight articulation.',
     primaryGenre: 'Rock',
     secondaryGenres: ['Pop', 'Indie'],
     playingSituation: 'Live performances & studio recordings.',
     recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
   },
-
-  '12" - Base Price: $1250-7.0"-8 Lugs-13mm-Maple-Walnut + Birch': {
+  '12" - Base Price: $1050-5.0"-8 Lugs-16 - 13mm-Walnut-Oak + Wenge': {
     highlightedCharacteristics:
-      'Balanced warmth with a smooth attack and controlled sustain. Features a deep attack with long sustain. Balanced tuning range with clear projection.',
-    primaryGenre: 'Rock',
-    secondaryGenres: ['Pop', 'Indie'],
-    playingSituation: 'Live performances & studio recordings.',
-    recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
-  },
-
-  '12" - Base Price: $1250-7.0"-6 Lugs-10mm-Maple-Oak + Cherry': {
-    highlightedCharacteristics:
-      'Balanced warmth with a smooth attack and controlled sustain. Features a deep attack with long sustain. Slightly looser tuning with more body and warmth.',
-    primaryGenre: 'Rock',
-    secondaryGenres: ['Pop', 'Indie'],
-    playingSituation: 'Live performances & studio recordings.',
-    recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
-  },
-
-  '12" - Base Price: $1250-7.0"-8 Lugs-13mm-Maple-Oak + Cherry': {
-    highlightedCharacteristics:
-      'Balanced warmth with a smooth attack and controlled sustain. Features a deep attack with long sustain. Balanced tuning range with clear projection.',
-    primaryGenre: 'Rock',
-    secondaryGenres: ['Pop', 'Indie'],
-    playingSituation: 'Live performances & studio recordings.',
-    recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
-  },
-
-  '12" - Base Price: $1250-7.0"-6 Lugs-10mm-Maple-Maple + Bubinga': {
-    highlightedCharacteristics:
-      'Balanced warmth with a smooth attack and controlled sustain. Features a deep attack with long sustain. Slightly looser tuning with more body and warmth.',
-    primaryGenre: 'Rock',
-    secondaryGenres: ['Pop', 'Indie'],
-    playingSituation: 'Live performances & studio recordings.',
-    recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
-  },
-
-  '12" - Base Price: $1250-7.0"-8 Lugs-13mm-Maple-Maple + Bubinga': {
-    highlightedCharacteristics:
-      'Balanced warmth with a smooth attack and controlled sustain. Features a deep attack with long sustain. Balanced tuning range with clear projection.',
-    primaryGenre: 'Rock',
-    secondaryGenres: ['Pop', 'Indie'],
-    playingSituation: 'Live performances & studio recordings.',
-    recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
-  },
-
-  '12" - Base Price: $1250-7.0"-6 Lugs-10mm-Walnut-Mahogany + Cherry': {
-    highlightedCharacteristics:
-      'Dark, warm tone with a deep, resonant low end. Features a deep attack with long sustain. Slightly looser tuning with more body and warmth.',
+      'Warm, vintage-inspired sound with excellent midrange depth.',
     primaryGenre: 'Jazz',
-    secondaryGenres: ['R&B', 'Blues'],
-    playingSituation: 'Studio work & intimate venues.',
-    recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
+    secondaryGenres: ['Blues', 'Soul'],
+    playingSituation: 'Intimate jazz clubs & acoustic sessions.',
+    recordingMic: 'Beyerdynamic M201 TG or AKG C414 for warm articulation.',
   },
-
-  '12" - Base Price: $1250-7.0"-8 Lugs-13mm-Walnut-Mahogany + Cherry': {
+  '12" - Base Price: $1050-5.0"-6 Lugs-12 - 10mm-Cherry-Birch + Maple': {
     highlightedCharacteristics:
-      'Dark, warm tone with a deep, resonant low end. Features a deep attack with long sustain. Balanced tuning range with clear projection.',
-    primaryGenre: 'Jazz',
-    secondaryGenres: ['R&B', 'Blues'],
-    playingSituation: 'Studio work & intimate venues.',
-    recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
+      'Powerful projection with rich overtones and deep lows.',
+    primaryGenre: 'Metal',
+    secondaryGenres: ['Alternative', 'Hard Rock'],
+    playingSituation: 'Stadium shows & high-energy rock gigs.',
+    recordingMic: 'Shure Beta 57A or Earthworks DM20 for crisp attack.',
   },
-
-  '12" - Base Price: $1250-7.0"-6 Lugs-10mm-Walnut-Walnut + Padauk': {
+  '12" - Base Price: $1050-5.0"-8 Lugs-16 - 13mm-Cherry-Birch + Maple': {
     highlightedCharacteristics:
-      'Dark, warm tone with a deep, resonant low end. Features a deep attack with long sustain. Slightly looser tuning with more body and warmth.',
-    primaryGenre: 'Jazz',
-    secondaryGenres: ['R&B', 'Blues'],
-    playingSituation: 'Studio work & intimate venues.',
-    recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
+      'Fast response with bright attack and controlled resonance.',
+    primaryGenre: 'Pop',
+    secondaryGenres: ['Jazz', 'Fusion'],
+    playingSituation: 'Recording studios & dynamic live sets.',
+    recordingMic: 'Neumann U87 or Royer R-121 for smooth detail.',
   },
-
-  '12" - Base Price: $1250-7.0"-8 Lugs-13mm-Walnut-Walnut + Padauk': {
+  '12" - Base Price: $1050-5.0"-6 Lugs-12 - 10mm-Cherry-Zebrawood + Mahogany': {
     highlightedCharacteristics:
-      'Dark, warm tone with a deep, resonant low end. Features a deep attack with long sustain. Balanced tuning range with clear projection.',
-    primaryGenre: 'Jazz',
-    secondaryGenres: ['R&B', 'Blues'],
-    playingSituation: 'Studio work & intimate venues.',
-    recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
+      'Rich, full-bodied tone with natural warmth and clarity.',
+    primaryGenre: 'Funk',
+    secondaryGenres: ['Latin', 'Afrobeat'],
+    playingSituation: 'Funk and groove-driven performances.',
+    recordingMic: 'Audix D4 or AKG C214 for deep tone and clarity.',
   },
-
-  '12" - Base Price: $1250-7.0"-6 Lugs-10mm-Walnut-Oak + Wenge': {
+  '12" - Base Price: $1050-5.0"-8 Lugs-16 - 13mm-Cherry-Zebrawood + Mahogany': {
     highlightedCharacteristics:
-      'Dark, warm tone with a deep, resonant low end. Features a deep attack with long sustain. Slightly looser tuning with more body and warmth.',
-    primaryGenre: 'Jazz',
-    secondaryGenres: ['R&B', 'Blues'],
-    playingSituation: 'Studio work & intimate venues.',
-    recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
+      'Tight and focused snare with quick decay and smooth balance.',
+    primaryGenre: 'Indie',
+    secondaryGenres: ['Country', 'Folk'],
+    playingSituation: 'R&B and neo-soul jam sessions.',
+    recordingMic: 'Shure SM7B or Sennheiser MD421 for strong projection.',
   },
-
-  '12" - Base Price: $1250-7.0"-8 Lugs-13mm-Walnut-Oak + Wenge': {
+  '12" - Base Price: $1050-5.0"-6 Lugs-12 - 10mm-Cherry-Padauk + Ash': {
     highlightedCharacteristics:
-      'Dark, warm tone with a deep, resonant low end. Features a deep attack with long sustain. Balanced tuning range with clear projection.',
-    primaryGenre: 'Jazz',
-    secondaryGenres: ['R&B', 'Blues'],
-    playingSituation: 'Studio work & intimate venues.',
-    recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
+      'Strong midrange presence, perfect for versatile tuning.',
+    primaryGenre: 'Blues',
+    secondaryGenres: ['Hip-Hop', 'R&B'],
+    playingSituation: 'Experimental and avant-garde compositions.',
+    recordingMic: 'Coles 4038 or Sennheiser e604 for vintage character.',
   },
-
-  '12" - Base Price: $1250-7.0"-6 Lugs-10mm-Cherry-Birch + Maple': {
+  '12" - Base Price: $1050-5.0"-8 Lugs-16 - 13mm-Cherry-Padauk + Ash': {
     highlightedCharacteristics:
-      'Bright attack with a controlled midrange and crisp highs. Features a deep attack with long sustain. Slightly looser tuning with more body and warmth.',
+      'Deep resonance with punchy attack and controlled sustain.',
+    primaryGenre: 'Soul',
+    secondaryGenres: ['Neo-Soul', 'Funk'],
+    playingSituation: 'Orchestral and concert hall settings.',
+    recordingMic: 'Earthworks SR25 or Beyerdynamic MC930 for natural presence.',
+  },
+  '12" - Base Price: $1150-6.0"-6 Lugs-12 - 10mm-Maple-Walnut + Birch': {
+    highlightedCharacteristics:
+      'Articulate snare with defined stick response and full projection.',
+    primaryGenre: 'Gospel',
+    secondaryGenres: ['Experimental', 'Ambient'],
+    playingSituation: 'Big band and brass ensemble performances.',
+    recordingMic: 'Royer R-121 or Neumann KM84 for intricate dynamics.',
+  },
+  '12" - Base Price: $1150-6.0"-8 Lugs-16 - 13mm-Maple-Walnut + Birch': {
+    highlightedCharacteristics:
+      'Dynamic and expressive, with controlled high-end presence.',
     primaryGenre: 'Fusion',
-    secondaryGenres: ['Funk', 'Latin'],
-    playingSituation: 'Fast-paced, energetic playing styles.',
-    recordingMic: 'Earthworks SR25 or Sennheiser e604 for clarity.',
+    secondaryGenres: ['Progressive Rock'],
+    playingSituation: 'Gospel choirs and church worship sessions.',
+    recordingMic: 'Audix i5 or AKG C414 for precise transients.',
   },
-
-  '12" - Base Price: $1250-7.0"-8 Lugs-13mm-Cherry-Birch + Maple': {
+  '12" - Base Price: $1150-6.0"-6 Lugs-12 - 10mm-Maple-Oak + Cherry': {
     highlightedCharacteristics:
-      'Bright attack with a controlled midrange and crisp highs. Features a deep attack with long sustain. Balanced tuning range with clear projection.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Funk', 'Latin'],
-    playingSituation: 'Fast-paced, energetic playing styles.',
-    recordingMic: 'Earthworks SR25 or Sennheiser e604 for clarity.',
-  },
-
-  '12" - Base Price: $1250-7.0"-6 Lugs-10mm-Cherry-Zebrawood + Mahogany': {
-    highlightedCharacteristics:
-      'Bright attack with a controlled midrange and crisp highs. Features a deep attack with long sustain. Slightly looser tuning with more body and warmth.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Funk', 'Latin'],
-    playingSituation: 'Fast-paced, energetic playing styles.',
-    recordingMic: 'Earthworks SR25 or Sennheiser e604 for clarity.',
-  },
-
-  '12" - Base Price: $1250-7.0"-8 Lugs-13mm-Cherry-Zebrawood + Mahogany': {
-    highlightedCharacteristics:
-      'Bright attack with a controlled midrange and crisp highs. Features a deep attack with long sustain. Balanced tuning range with clear projection.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Funk', 'Latin'],
-    playingSituation: 'Fast-paced, energetic playing styles.',
-    recordingMic: 'Earthworks SR25 or Sennheiser e604 for clarity.',
-  },
-
-  '12" - Base Price: $1250-7.0"-6 Lugs-10mm-Cherry-Padauk + Ash': {
-    highlightedCharacteristics:
-      'Bright attack with a controlled midrange and crisp highs. Features a deep attack with long sustain. Slightly looser tuning with more body and warmth.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Funk', 'Latin'],
-    playingSituation: 'Fast-paced, energetic playing styles.',
-    recordingMic: 'Earthworks SR25 or Sennheiser e604 for clarity.',
-  },
-
-  '12" - Base Price: $1250-7.0"-8 Lugs-13mm-Cherry-Padauk + Ash': {
-    highlightedCharacteristics:
-      'Bright attack with a controlled midrange and crisp highs. Features a deep attack with long sustain. Balanced tuning range with clear projection.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Funk', 'Latin'],
-    playingSituation: 'Fast-paced, energetic playing styles.',
-    recordingMic: 'Earthworks SR25 or Sennheiser e604 for clarity.',
-  },
-
-  '13" - Base Price: $1150-5.0"-8 Lugs-12mm-Maple-Walnut + Birch': {
-    highlightedCharacteristics:
-      'Crisp attack with a balanced sustain. Offers warm, defined stick response with excellent midrange presence.',
+      'Crisp attack with balanced sustain, ideal for tight articulation.',
     primaryGenre: 'Rock',
     secondaryGenres: ['Pop', 'Indie'],
     playingSituation: 'Live performances & studio recordings.',
     recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
   },
-
-  '13" - Base Price: $1150-5.0"-8 Lugs-12mm-Maple-Oak + Cherry': {
+  '12" - Base Price: $1150-6.0"-8 Lugs-16 - 13mm-Maple-Oak + Cherry': {
     highlightedCharacteristics:
-      'Bright attack with a smooth decay. Well-suited for articulate playing styles and higher tunings.',
-    primaryGenre: 'Rock',
-    secondaryGenres: ['Alternative', 'Pop'],
-    playingSituation: 'Versatile studio and live work.',
-    recordingMic: 'AKG C414 or Sennheiser MD421 for detail.',
-  },
-
-  '13" - Base Price: $1150-5.0"-8 Lugs-12mm-Maple-Maple + Bubinga': {
-    highlightedCharacteristics:
-      'Powerful projection with deep lows and crisp highs. Great for cutting through dense mixes.',
-    primaryGenre: 'Rock',
-    secondaryGenres: ['Hard Rock', 'Funk'],
-    playingSituation: 'Loud live performances & energetic playstyles.',
-    recordingMic: 'Shure Beta 57A or Earthworks DM20 for enhanced attack.',
-  },
-
-  '13" - Base Price: $1150-5.0"-8 Lugs-12mm-Walnut-Mahogany + Cherry': {
-    highlightedCharacteristics:
-      'Warm, dark tone with deep resonance and full-bodied sustain. Excellent for intricate ghost notes.',
+      'Warm, vintage-inspired sound with excellent midrange depth.',
     primaryGenre: 'Jazz',
-    secondaryGenres: ['R&B', 'Blues'],
-    playingSituation: 'Studio work & intimate venues.',
-    recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
+    secondaryGenres: ['Blues', 'Soul'],
+    playingSituation: 'Intimate jazz clubs & acoustic sessions.',
+    recordingMic: 'Beyerdynamic M201 TG or AKG C414 for warm articulation.',
   },
-
-  '13" - Base Price: $1150-5.0"-8 Lugs-12mm-Walnut-Walnut + Padauk': {
+  '12" - Base Price: $1150-6.0"-6 Lugs-12 - 10mm-Maple-Maple + Bubinga': {
     highlightedCharacteristics:
-      'Rich, woody tone with natural resonance. Balanced sustain with smooth overtones.',
+      'Powerful projection with rich overtones and deep lows.',
+    primaryGenre: 'Metal',
+    secondaryGenres: ['Alternative', 'Hard Rock'],
+    playingSituation: 'Stadium shows & high-energy rock gigs.',
+    recordingMic: 'Shure Beta 57A or Earthworks DM20 for crisp attack.',
+  },
+  '12" - Base Price: $1150-6.0"-8 Lugs-16 - 13mm-Maple-Maple + Bubinga': {
+    highlightedCharacteristics:
+      'Fast response with bright attack and controlled resonance.',
+    primaryGenre: 'Pop',
+    secondaryGenres: ['Jazz', 'Fusion'],
+    playingSituation: 'Recording studios & dynamic live sets.',
+    recordingMic: 'Neumann U87 or Royer R-121 for smooth detail.',
+  },
+  '12" - Base Price: $1150-6.0"-6 Lugs-12 - 10mm-Walnut-Mahogany + Cherry': {
+    highlightedCharacteristics:
+      'Rich, full-bodied tone with natural warmth and clarity.',
+    primaryGenre: 'Funk',
+    secondaryGenres: ['Latin', 'Afrobeat'],
+    playingSituation: 'Funk and groove-driven performances.',
+    recordingMic: 'Audix D4 or AKG C214 for deep tone and clarity.',
+  },
+  '12" - Base Price: $1150-6.0"-8 Lugs-16 - 13mm-Walnut-Mahogany + Cherry': {
+    highlightedCharacteristics:
+      'Tight and focused snare with quick decay and smooth balance.',
+    primaryGenre: 'Indie',
+    secondaryGenres: ['Country', 'Folk'],
+    playingSituation: 'R&B and neo-soul jam sessions.',
+    recordingMic: 'Shure SM7B or Sennheiser MD421 for strong projection.',
+  },
+  '12" - Base Price: $1150-6.0"-6 Lugs-12 - 10mm-Walnut-Walnut + Padauk': {
+    highlightedCharacteristics:
+      'Strong midrange presence, perfect for versatile tuning.',
+    primaryGenre: 'Blues',
+    secondaryGenres: ['Hip-Hop', 'R&B'],
+    playingSituation: 'Experimental and avant-garde compositions.',
+    recordingMic: 'Coles 4038 or Sennheiser e604 for vintage character.',
+  },
+  '12" - Base Price: $1150-6.0"-8 Lugs-16 - 13mm-Walnut-Walnut + Padauk': {
+    highlightedCharacteristics:
+      'Deep resonance with punchy attack and controlled sustain.',
+    primaryGenre: 'Soul',
+    secondaryGenres: ['Neo-Soul', 'Funk'],
+    playingSituation: 'Orchestral and concert hall settings.',
+    recordingMic: 'Earthworks SR25 or Beyerdynamic MC930 for natural presence.',
+  },
+  '12" - Base Price: $1150-6.0"-6 Lugs-12 - 10mm-Walnut-Oak + Wenge': {
+    highlightedCharacteristics:
+      'Articulate snare with defined stick response and full projection.',
+    primaryGenre: 'Gospel',
+    secondaryGenres: ['Experimental', 'Ambient'],
+    playingSituation: 'Big band and brass ensemble performances.',
+    recordingMic: 'Royer R-121 or Neumann KM84 for intricate dynamics.',
+  },
+  '12" - Base Price: $1150-6.0"-8 Lugs-16 - 13mm-Walnut-Oak + Wenge': {
+    highlightedCharacteristics:
+      'Dynamic and expressive, with controlled high-end presence.',
+    primaryGenre: 'Fusion',
+    secondaryGenres: ['Progressive Rock'],
+    playingSituation: 'Gospel choirs and church worship sessions.',
+    recordingMic: 'Audix i5 or AKG C414 for precise transients.',
+  },
+  '12" - Base Price: $1150-6.0"-6 Lugs-12 - 10mm-Cherry-Birch + Maple': {
+    highlightedCharacteristics:
+      'Crisp attack with balanced sustain, ideal for tight articulation.',
+    primaryGenre: 'Rock',
+    secondaryGenres: ['Pop', 'Indie'],
+    playingSituation: 'Live performances & studio recordings.',
+    recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
+  },
+  '12" - Base Price: $1150-6.0"-8 Lugs-16 - 13mm-Cherry-Birch + Maple': {
+    highlightedCharacteristics:
+      'Warm, vintage-inspired sound with excellent midrange depth.',
     primaryGenre: 'Jazz',
-    secondaryGenres: ['Soul', 'Folk'],
-    playingSituation: 'Unplugged sets & dynamic studio recording.',
-    recordingMic: 'Coles 4038 or Neumann KM84 for warmth & depth.',
+    secondaryGenres: ['Blues', 'Soul'],
+    playingSituation: 'Intimate jazz clubs & acoustic sessions.',
+    recordingMic: 'Beyerdynamic M201 TG or AKG C414 for warm articulation.',
   },
-
-  '13" - Base Price: $1150-5.0"-8 Lugs-12mm-Walnut-Oak + Wenge': {
+  '12" - Base Price: $1150-6.0"-6 Lugs-12 - 10mm-Cherry-Zebrawood + Mahogany': {
     highlightedCharacteristics:
-      'Deep, punchy attack with focused lows and extended warmth. Ideal for warm, expressive tones.',
+      'Powerful projection with rich overtones and deep lows.',
+    primaryGenre: 'Metal',
+    secondaryGenres: ['Alternative', 'Hard Rock'],
+    playingSituation: 'Stadium shows & high-energy rock gigs.',
+    recordingMic: 'Shure Beta 57A or Earthworks DM20 for crisp attack.',
+  },
+  '12" - Base Price: $1150-6.0"-8 Lugs-16 - 13mm-Cherry-Zebrawood + Mahogany': {
+    highlightedCharacteristics:
+      'Fast response with bright attack and controlled resonance.',
+    primaryGenre: 'Pop',
+    secondaryGenres: ['Jazz', 'Fusion'],
+    playingSituation: 'Recording studios & dynamic live sets.',
+    recordingMic: 'Neumann U87 or Royer R-121 for smooth detail.',
+  },
+  '12" - Base Price: $1150-6.0"-6 Lugs-12 - 10mm-Cherry-Padauk + Ash': {
+    highlightedCharacteristics:
+      'Rich, full-bodied tone with natural warmth and clarity.',
+    primaryGenre: 'Funk',
+    secondaryGenres: ['Latin', 'Afrobeat'],
+    playingSituation: 'Funk and groove-driven performances.',
+    recordingMic: 'Audix D4 or AKG C214 for deep tone and clarity.',
+  },
+  '12" - Base Price: $1150-6.0"-8 Lugs-16 - 13mm-Cherry-Padauk + Ash': {
+    highlightedCharacteristics:
+      'Tight and focused snare with quick decay and smooth balance.',
+    primaryGenre: 'Indie',
+    secondaryGenres: ['Country', 'Folk'],
+    playingSituation: 'R&B and neo-soul jam sessions.',
+    recordingMic: 'Shure SM7B or Sennheiser MD421 for strong projection.',
+  },
+  '12" - Base Price: $1250-7.0"-6 Lugs-12 - 10mm-Maple-Walnut + Birch': {
+    highlightedCharacteristics:
+      'Strong midrange presence, perfect for versatile tuning.',
+    primaryGenre: 'Blues',
+    secondaryGenres: ['Hip-Hop', 'R&B'],
+    playingSituation: 'Experimental and avant-garde compositions.',
+    recordingMic: 'Coles 4038 or Sennheiser e604 for vintage character.',
+  },
+  '12" - Base Price: $1250-7.0"-8 Lugs-16 - 13mm-Maple-Walnut + Birch': {
+    highlightedCharacteristics:
+      'Deep resonance with punchy attack and controlled sustain.',
+    primaryGenre: 'Soul',
+    secondaryGenres: ['Neo-Soul', 'Funk'],
+    playingSituation: 'Orchestral and concert hall settings.',
+    recordingMic: 'Earthworks SR25 or Beyerdynamic MC930 for natural presence.',
+  },
+  '12" - Base Price: $1250-7.0"-6 Lugs-12 - 10mm-Maple-Oak + Cherry': {
+    highlightedCharacteristics:
+      'Articulate snare with defined stick response and full projection.',
+    primaryGenre: 'Gospel',
+    secondaryGenres: ['Experimental', 'Ambient'],
+    playingSituation: 'Big band and brass ensemble performances.',
+    recordingMic: 'Royer R-121 or Neumann KM84 for intricate dynamics.',
+  },
+  '12" - Base Price: $1250-7.0"-8 Lugs-16 - 13mm-Maple-Oak + Cherry': {
+    highlightedCharacteristics:
+      'Dynamic and expressive, with controlled high-end presence.',
+    primaryGenre: 'Fusion',
+    secondaryGenres: ['Progressive Rock'],
+    playingSituation: 'Gospel choirs and church worship sessions.',
+    recordingMic: 'Audix i5 or AKG C414 for precise transients.',
+  },
+  '12" - Base Price: $1250-7.0"-6 Lugs-12 - 10mm-Maple-Maple + Bubinga': {
+    highlightedCharacteristics:
+      'Crisp attack with balanced sustain, ideal for tight articulation.',
+    primaryGenre: 'Rock',
+    secondaryGenres: ['Pop', 'Indie'],
+    playingSituation: 'Live performances & studio recordings.',
+    recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
+  },
+  '12" - Base Price: $1250-7.0"-8 Lugs-16 - 13mm-Maple-Maple + Bubinga': {
+    highlightedCharacteristics:
+      'Warm, vintage-inspired sound with excellent midrange depth.',
     primaryGenre: 'Jazz',
-    secondaryGenres: ['R&B', 'Blues'],
-    playingSituation: 'Small jazz clubs & acoustic performances.',
-    recordingMic: 'Royer R-121 or Sennheiser MD441 for clear mids.',
+    secondaryGenres: ['Blues', 'Soul'],
+    playingSituation: 'Intimate jazz clubs & acoustic sessions.',
+    recordingMic: 'Beyerdynamic M201 TG or AKG C414 for warm articulation.',
   },
-
-  '13" - Base Price: $1150-5.0"-8 Lugs-12mm-Cherry-Birch + Maple': {
+  '12" - Base Price: $1250-7.0"-6 Lugs-12 - 10mm-Walnut-Mahogany + Cherry': {
     highlightedCharacteristics:
-      'Snappy, articulate response with a crisp top-end. Perfect for high-energy groove playing.',
+      'Powerful projection with rich overtones and deep lows.',
+    primaryGenre: 'Metal',
+    secondaryGenres: ['Alternative', 'Hard Rock'],
+    playingSituation: 'Stadium shows & high-energy rock gigs.',
+    recordingMic: 'Shure Beta 57A or Earthworks DM20 for crisp attack.',
+  },
+  '12" - Base Price: $1250-7.0"-8 Lugs-16 - 13mm-Walnut-Mahogany + Cherry': {
+    highlightedCharacteristics:
+      'Fast response with bright attack and controlled resonance.',
+    primaryGenre: 'Pop',
+    secondaryGenres: ['Jazz', 'Fusion'],
+    playingSituation: 'Recording studios & dynamic live sets.',
+    recordingMic: 'Neumann U87 or Royer R-121 for smooth detail.',
+  },
+  '12" - Base Price: $1250-7.0"-6 Lugs-12 - 10mm-Walnut-Walnut + Padauk': {
+    highlightedCharacteristics:
+      'Rich, full-bodied tone with natural warmth and clarity.',
+    primaryGenre: 'Funk',
+    secondaryGenres: ['Latin', 'Afrobeat'],
+    playingSituation: 'Funk and groove-driven performances.',
+    recordingMic: 'Audix D4 or AKG C214 for deep tone and clarity.',
+  },
+  '12" - Base Price: $1250-7.0"-8 Lugs-16 - 13mm-Walnut-Walnut + Padauk': {
+    highlightedCharacteristics:
+      'Tight and focused snare with quick decay and smooth balance.',
+    primaryGenre: 'Indie',
+    secondaryGenres: ['Country', 'Folk'],
+    playingSituation: 'R&B and neo-soul jam sessions.',
+    recordingMic: 'Shure SM7B or Sennheiser MD421 for strong projection.',
+  },
+  '12" - Base Price: $1250-7.0"-6 Lugs-12 - 10mm-Walnut-Oak + Wenge': {
+    highlightedCharacteristics:
+      'Strong midrange presence, perfect for versatile tuning.',
+    primaryGenre: 'Blues',
+    secondaryGenres: ['Hip-Hop', 'R&B'],
+    playingSituation: 'Experimental and avant-garde compositions.',
+    recordingMic: 'Coles 4038 or Sennheiser e604 for vintage character.',
+  },
+  '12" - Base Price: $1250-7.0"-8 Lugs-16 - 13mm-Walnut-Oak + Wenge': {
+    highlightedCharacteristics:
+      'Deep resonance with punchy attack and controlled sustain.',
+    primaryGenre: 'Soul',
+    secondaryGenres: ['Neo-Soul', 'Funk'],
+    playingSituation: 'Orchestral and concert hall settings.',
+    recordingMic: 'Earthworks SR25 or Beyerdynamic MC930 for natural presence.',
+  },
+  '12" - Base Price: $1250-7.0"-6 Lugs-12 - 10mm-Cherry-Birch + Maple': {
+    highlightedCharacteristics:
+      'Articulate snare with defined stick response and full projection.',
+    primaryGenre: 'Gospel',
+    secondaryGenres: ['Experimental', 'Ambient'],
+    playingSituation: 'Big band and brass ensemble performances.',
+    recordingMic: 'Royer R-121 or Neumann KM84 for intricate dynamics.',
+  },
+  '12" - Base Price: $1250-7.0"-8 Lugs-16 - 13mm-Cherry-Birch + Maple': {
+    highlightedCharacteristics:
+      'Dynamic and expressive, with controlled high-end presence.',
     primaryGenre: 'Fusion',
-    secondaryGenres: ['Funk', 'Latin'],
-    playingSituation: 'Fast-paced, energetic playing styles.',
-    recordingMic: 'Earthworks SR25 or Sennheiser e604 for clarity.',
+    secondaryGenres: ['Progressive Rock'],
+    playingSituation: 'Gospel choirs and church worship sessions.',
+    recordingMic: 'Audix i5 or AKG C414 for precise transients.',
   },
-
-  '13" - Base Price: $1150-5.0"-8 Lugs-12mm-Cherry-Zebrawood + Mahogany': {
+  '12" - Base Price: $1250-7.0"-6 Lugs-12 - 10mm-Cherry-Zebrawood + Mahogany': {
     highlightedCharacteristics:
-      'Bright attack with a controlled midrange and excellent projection. Defined and punchy.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Funk', 'Pop'],
-    playingSituation: 'Groove-heavy performances and intricate playing.',
-    recordingMic: 'Neumann U87 or Beyerdynamic M201 TG for detail.',
-  },
-
-  '13" - Base Price: $1150-5.0"-8 Lugs-12mm-Cherry-Padauk + Ash': {
-    highlightedCharacteristics:
-      'Quick response with balanced brightness and warmth. Ideal for rimshots and ghost notes.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Jazz', 'Latin'],
-    playingSituation: 'Groove-oriented performances and intricate rhythms.',
-    recordingMic: 'Shure SM7B or AKG C414 for precise articulation.',
-  },
-  '13" - Base Price: $1250-6.0"-8 Lugs-12mm-Maple-Walnut + Birch': {
-    highlightedCharacteristics:
-      'Balanced warmth with a smooth attack and controlled sustain. Features a defined attack with moderate sustain. Balanced tuning range with clear projection.',
+      'Crisp attack with balanced sustain, ideal for tight articulation.',
     primaryGenre: 'Rock',
     secondaryGenres: ['Pop', 'Indie'],
     playingSituation: 'Live performances & studio recordings.',
     recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
   },
-
-  '13" - Base Price: $1250-6.0"-8 Lugs-12mm-Maple-Oak + Cherry': {
+  '12" - Base Price: $1250-7.0"-8 Lugs-16 - 13mm-Cherry-Zebrawood + Mahogany': {
     highlightedCharacteristics:
-      'Bright, punchy attack with crisp articulation. Well-suited for high-energy drumming and dynamic playstyles.',
-    primaryGenre: 'Rock',
-    secondaryGenres: ['Alternative', 'Indie'],
-    playingSituation: 'Versatile stage and recording sessions.',
-    recordingMic: 'AKG C414 or Sennheiser MD421 for added clarity.',
-  },
-
-  '13" - Base Price: $1250-6.0"-8 Lugs-12mm-Maple-Maple + Bubinga': {
-    highlightedCharacteristics:
-      'Rich, resonant projection with a defined low-end and articulate highs. Great for powerful, full-bodied tones.',
-    primaryGenre: 'Rock',
-    secondaryGenres: ['Funk', 'Hard Rock'],
-    playingSituation: 'High-impact live performances & groove-oriented styles.',
-    recordingMic: 'Shure Beta 57A or Earthworks DM20 for punchy attack.',
-  },
-
-  '13" - Base Price: $1250-6.0"-8 Lugs-12mm-Walnut-Mahogany + Cherry': {
-    highlightedCharacteristics:
-      'Warm, vintage-style tone with a deep, woody resonance. Perfect for smooth dynamics and expressive playing.',
+      'Warm, vintage-inspired sound with excellent midrange depth.',
     primaryGenre: 'Jazz',
-    secondaryGenres: ['R&B', 'Blues'],
-    playingSituation: 'Studio recording & small, intimate performances.',
-    recordingMic: 'AKG C414 or Beyerdynamic M160 for warm, rich sound.',
+    secondaryGenres: ['Blues', 'Soul'],
+    playingSituation: 'Intimate jazz clubs & acoustic sessions.',
+    recordingMic: 'Beyerdynamic M201 TG or AKG C414 for warm articulation.',
   },
-
-  '13" - Base Price: $1250-6.0"-8 Lugs-12mm-Walnut-Walnut + Padauk': {
+  '12" - Base Price: $1250-7.0"-6 Lugs-12 - 10mm-Cherry-Padauk + Ash': {
     highlightedCharacteristics:
-      'Earthy, warm resonance with smooth overtones. A great balance of sustain and low-end depth.',
+      'Powerful projection with rich overtones and deep lows.',
+    primaryGenre: 'Metal',
+    secondaryGenres: ['Alternative', 'Hard Rock'],
+    playingSituation: 'Stadium shows & high-energy rock gigs.',
+    recordingMic: 'Shure Beta 57A or Earthworks DM20 for crisp attack.',
+  },
+  '12" - Base Price: $1250-7.0"-8 Lugs-16 - 13mm-Cherry-Padauk + Ash': {
+    highlightedCharacteristics:
+      'Fast response with bright attack and controlled resonance.',
+    primaryGenre: 'Pop',
+    secondaryGenres: ['Jazz', 'Fusion'],
+    playingSituation: 'Recording studios & dynamic live sets.',
+    recordingMic: 'Neumann U87 or Royer R-121 for smooth detail.',
+  },
+  '13" - Base Price: $1150-5.0"-8 Lugs-16 - 13mm-Maple-Walnut + Birch': {
+    highlightedCharacteristics:
+      'Rich, full-bodied tone with natural warmth and clarity.',
+    primaryGenre: 'Funk',
+    secondaryGenres: ['Latin', 'Afrobeat'],
+    playingSituation: 'Funk and groove-driven performances.',
+    recordingMic: 'Audix D4 or AKG C214 for deep tone and clarity.',
+  },
+  '13" - Base Price: $1150-5.0"-8 Lugs-16 - 13mm-Maple-Oak + Cherry': {
+    highlightedCharacteristics:
+      'Tight and focused snare with quick decay and smooth balance.',
+    primaryGenre: 'Indie',
+    secondaryGenres: ['Country', 'Folk'],
+    playingSituation: 'R&B and neo-soul jam sessions.',
+    recordingMic: 'Shure SM7B or Sennheiser MD421 for strong projection.',
+  },
+  '13" - Base Price: $1150-5.0"-8 Lugs-16 - 13mm-Maple-Maple + Bubinga': {
+    highlightedCharacteristics:
+      'Strong midrange presence, perfect for versatile tuning.',
+    primaryGenre: 'Blues',
+    secondaryGenres: ['Hip-Hop', 'R&B'],
+    playingSituation: 'Experimental and avant-garde compositions.',
+    recordingMic: 'Coles 4038 or Sennheiser e604 for vintage character.',
+  },
+  '13" - Base Price: $1150-5.0"-8 Lugs-16 - 13mm-Walnut-Mahogany + Cherry': {
+    highlightedCharacteristics:
+      'Deep resonance with punchy attack and controlled sustain.',
+    primaryGenre: 'Soul',
+    secondaryGenres: ['Neo-Soul', 'Funk'],
+    playingSituation: 'Orchestral and concert hall settings.',
+    recordingMic: 'Earthworks SR25 or Beyerdynamic MC930 for natural presence.',
+  },
+  '13" - Base Price: $1150-5.0"-8 Lugs-16 - 13mm-Walnut-Walnut + Padauk': {
+    highlightedCharacteristics:
+      'Articulate snare with defined stick response and full projection.',
+    primaryGenre: 'Gospel',
+    secondaryGenres: ['Experimental', 'Ambient'],
+    playingSituation: 'Big band and brass ensemble performances.',
+    recordingMic: 'Royer R-121 or Neumann KM84 for intricate dynamics.',
+  },
+  '13" - Base Price: $1150-5.0"-8 Lugs-16 - 13mm-Walnut-Oak + Wenge': {
+    highlightedCharacteristics:
+      'Dynamic and expressive, with controlled high-end presence.',
+    primaryGenre: 'Fusion',
+    secondaryGenres: ['Progressive Rock'],
+    playingSituation: 'Gospel choirs and church worship sessions.',
+    recordingMic: 'Audix i5 or AKG C414 for precise transients.',
+  },
+  '13" - Base Price: $1150-5.0"-8 Lugs-16 - 13mm-Cherry-Birch + Maple': {
+    highlightedCharacteristics:
+      'Crisp attack with balanced sustain, ideal for tight articulation.',
+    primaryGenre: 'Rock',
+    secondaryGenres: ['Pop', 'Indie'],
+    playingSituation: 'Live performances & studio recordings.',
+    recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
+  },
+  '13" - Base Price: $1150-5.0"-8 Lugs-16 - 13mm-Cherry-Zebrawood + Mahogany': {
+    highlightedCharacteristics:
+      'Warm, vintage-inspired sound with excellent midrange depth.',
     primaryGenre: 'Jazz',
-    secondaryGenres: ['Soul', 'Folk'],
-    playingSituation: 'Unplugged performances & acoustic sessions.',
-    recordingMic: 'Coles 4038 or Neumann KM84 for depth and clarity.',
+    secondaryGenres: ['Blues', 'Soul'],
+    playingSituation: 'Intimate jazz clubs & acoustic sessions.',
+    recordingMic: 'Beyerdynamic M201 TG or AKG C414 for warm articulation.',
   },
-
-  '13" - Base Price: $1250-6.0"-8 Lugs-12mm-Walnut-Oak + Wenge': {
+  '13" - Base Price: $1150-5.0"-8 Lugs-16 - 13mm-Cherry-Padauk + Ash': {
     highlightedCharacteristics:
-      'Dark, punchy attack with a focused low-end and full-bodied sustain. Perfect for warm, expressive playing.',
+      'Powerful projection with rich overtones and deep lows.',
+    primaryGenre: 'Metal',
+    secondaryGenres: ['Alternative', 'Hard Rock'],
+    playingSituation: 'Stadium shows & high-energy rock gigs.',
+    recordingMic: 'Shure Beta 57A or Earthworks DM20 for crisp attack.',
+  },
+  '13" - Base Price: $1250-6.0"-8 Lugs-16 - 13mm-Maple-Walnut + Birch': {
+    highlightedCharacteristics:
+      'Fast response with bright attack and controlled resonance.',
+    primaryGenre: 'Pop',
+    secondaryGenres: ['Jazz', 'Fusion'],
+    playingSituation: 'Recording studios & dynamic live sets.',
+    recordingMic: 'Neumann U87 or Royer R-121 for smooth detail.',
+  },
+  '13" - Base Price: $1250-6.0"-8 Lugs-16 - 13mm-Maple-Oak + Cherry': {
+    highlightedCharacteristics:
+      'Rich, full-bodied tone with natural warmth and clarity.',
+    primaryGenre: 'Funk',
+    secondaryGenres: ['Latin', 'Afrobeat'],
+    playingSituation: 'Funk and groove-driven performances.',
+    recordingMic: 'Audix D4 or AKG C214 for deep tone and clarity.',
+  },
+  '13" - Base Price: $1250-6.0"-8 Lugs-16 - 13mm-Maple-Maple + Bubinga': {
+    highlightedCharacteristics:
+      'Tight and focused snare with quick decay and smooth balance.',
+    primaryGenre: 'Indie',
+    secondaryGenres: ['Country', 'Folk'],
+    playingSituation: 'R&B and neo-soul jam sessions.',
+    recordingMic: 'Shure SM7B or Sennheiser MD421 for strong projection.',
+  },
+  '13" - Base Price: $1250-6.0"-8 Lugs-16 - 13mm-Walnut-Mahogany + Cherry': {
+    highlightedCharacteristics:
+      'Strong midrange presence, perfect for versatile tuning.',
+    primaryGenre: 'Blues',
+    secondaryGenres: ['Hip-Hop', 'R&B'],
+    playingSituation: 'Experimental and avant-garde compositions.',
+    recordingMic: 'Coles 4038 or Sennheiser e604 for vintage character.',
+  },
+  '13" - Base Price: $1250-6.0"-8 Lugs-16 - 13mm-Walnut-Walnut + Padauk': {
+    highlightedCharacteristics:
+      'Deep resonance with punchy attack and controlled sustain.',
+    primaryGenre: 'Soul',
+    secondaryGenres: ['Neo-Soul', 'Funk'],
+    playingSituation: 'Orchestral and concert hall settings.',
+    recordingMic: 'Earthworks SR25 or Beyerdynamic MC930 for natural presence.',
+  },
+  '13" - Base Price: $1250-6.0"-8 Lugs-16 - 13mm-Walnut-Oak + Wenge': {
+    highlightedCharacteristics:
+      'Articulate snare with defined stick response and full projection.',
+    primaryGenre: 'Gospel',
+    secondaryGenres: ['Experimental', 'Ambient'],
+    playingSituation: 'Big band and brass ensemble performances.',
+    recordingMic: 'Royer R-121 or Neumann KM84 for intricate dynamics.',
+  },
+  '13" - Base Price: $1250-6.0"-8 Lugs-16 - 13mm-Cherry-Birch + Maple': {
+    highlightedCharacteristics:
+      'Dynamic and expressive, with controlled high-end presence.',
+    primaryGenre: 'Fusion',
+    secondaryGenres: ['Progressive Rock'],
+    playingSituation: 'Gospel choirs and church worship sessions.',
+    recordingMic: 'Audix i5 or AKG C414 for precise transients.',
+  },
+  '13" - Base Price: $1250-6.0"-8 Lugs-16 - 13mm-Cherry-Zebrawood + Mahogany': {
+    highlightedCharacteristics:
+      'Crisp attack with balanced sustain, ideal for tight articulation.',
+    primaryGenre: 'Rock',
+    secondaryGenres: ['Pop', 'Indie'],
+    playingSituation: 'Live performances & studio recordings.',
+    recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
+  },
+  '13" - Base Price: $1250-6.0"-8 Lugs-16 - 13mm-Cherry-Padauk + Ash': {
+    highlightedCharacteristics:
+      'Warm, vintage-inspired sound with excellent midrange depth.',
     primaryGenre: 'Jazz',
-    secondaryGenres: ['Blues', 'Neo-Soul'],
-    playingSituation: 'Acoustic gigs & studio tracking.',
-    recordingMic: 'Royer R-121 or Sennheiser MD441 for smooth response.',
+    secondaryGenres: ['Blues', 'Soul'],
+    playingSituation: 'Intimate jazz clubs & acoustic sessions.',
+    recordingMic: 'Beyerdynamic M201 TG or AKG C414 for warm articulation.',
   },
-
-  '13" - Base Price: $1250-6.0"-8 Lugs-12mm-Cherry-Birch + Maple': {
+  '13" - Base Price: $1350-7.0"-8 Lugs-16 - 13mm-Maple-Walnut + Birch': {
     highlightedCharacteristics:
-      'Fast, articulate response with a crisp midrange. Designed for high-speed playing and intricate grooves.',
+      'Powerful projection with rich overtones and deep lows.',
+    primaryGenre: 'Metal',
+    secondaryGenres: ['Alternative', 'Hard Rock'],
+    playingSituation: 'Stadium shows & high-energy rock gigs.',
+    recordingMic: 'Shure Beta 57A or Earthworks DM20 for crisp attack.',
+  },
+  '13" - Base Price: $1350-7.0"-8 Lugs-16 - 13mm-Maple-Oak + Cherry': {
+    highlightedCharacteristics:
+      'Fast response with bright attack and controlled resonance.',
+    primaryGenre: 'Pop',
+    secondaryGenres: ['Jazz', 'Fusion'],
+    playingSituation: 'Recording studios & dynamic live sets.',
+    recordingMic: 'Neumann U87 or Royer R-121 for smooth detail.',
+  },
+  '13" - Base Price: $1350-7.0"-8 Lugs-16 - 13mm-Maple-Maple + Bubinga': {
+    highlightedCharacteristics:
+      'Rich, full-bodied tone with natural warmth and clarity.',
+    primaryGenre: 'Funk',
+    secondaryGenres: ['Latin', 'Afrobeat'],
+    playingSituation: 'Funk and groove-driven performances.',
+    recordingMic: 'Audix D4 or AKG C214 for deep tone and clarity.',
+  },
+  '13" - Base Price: $1350-7.0"-8 Lugs-16 - 13mm-Walnut-Mahogany + Cherry': {
+    highlightedCharacteristics:
+      'Tight and focused snare with quick decay and smooth balance.',
+    primaryGenre: 'Indie',
+    secondaryGenres: ['Country', 'Folk'],
+    playingSituation: 'R&B and neo-soul jam sessions.',
+    recordingMic: 'Shure SM7B or Sennheiser MD421 for strong projection.',
+  },
+  '13" - Base Price: $1350-7.0"-8 Lugs-16 - 13mm-Walnut-Walnut + Padauk': {
+    highlightedCharacteristics:
+      'Strong midrange presence, perfect for versatile tuning.',
+    primaryGenre: 'Blues',
+    secondaryGenres: ['Hip-Hop', 'R&B'],
+    playingSituation: 'Experimental and avant-garde compositions.',
+    recordingMic: 'Coles 4038 or Sennheiser e604 for vintage character.',
+  },
+  '13" - Base Price: $1350-7.0"-8 Lugs-16 - 13mm-Walnut-Oak + Wenge': {
+    highlightedCharacteristics:
+      'Deep resonance with punchy attack and controlled sustain.',
+    primaryGenre: 'Soul',
+    secondaryGenres: ['Neo-Soul', 'Funk'],
+    playingSituation: 'Orchestral and concert hall settings.',
+    recordingMic: 'Earthworks SR25 or Beyerdynamic MC930 for natural presence.',
+  },
+  '13" - Base Price: $1350-7.0"-8 Lugs-16 - 13mm-Cherry-Birch + Maple': {
+    highlightedCharacteristics:
+      'Articulate snare with defined stick response and full projection.',
+    primaryGenre: 'Gospel',
+    secondaryGenres: ['Experimental', 'Ambient'],
+    playingSituation: 'Big band and brass ensemble performances.',
+    recordingMic: 'Royer R-121 or Neumann KM84 for intricate dynamics.',
+  },
+  '13" - Base Price: $1350-7.0"-8 Lugs-16 - 13mm-Cherry-Zebrawood + Mahogany': {
+    highlightedCharacteristics:
+      'Dynamic and expressive, with controlled high-end presence.',
     primaryGenre: 'Fusion',
-    secondaryGenres: ['Funk', 'Latin'],
-    playingSituation: 'Groove-heavy styles & percussive setups.',
-    recordingMic: 'Earthworks SR25 or Sennheiser e604 for clarity.',
+    secondaryGenres: ['Progressive Rock'],
+    playingSituation: 'Gospel choirs and church worship sessions.',
+    recordingMic: 'Audix i5 or AKG C414 for precise transients.',
   },
-
-  '13" - Base Price: $1250-6.0"-8 Lugs-12mm-Cherry-Zebrawood + Mahogany': {
+  '13" - Base Price: $1350-7.0"-8 Lugs-16 - 13mm-Cherry-Padauk + Ash': {
     highlightedCharacteristics:
-      'Snappy attack with a slightly warm sustain and pronounced projection. Great for expressive, dynamic play.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Funk', 'Pop'],
-    playingSituation: 'Fast-paced, high-energy drumming.',
-    recordingMic: 'Neumann U87 or Beyerdynamic M201 TG for articulation.',
-  },
-
-  '13" - Base Price: $1250-6.0"-8 Lugs-12mm-Cherry-Padauk + Ash': {
-    highlightedCharacteristics:
-      'Quick response with bright attack and controlled overtones. Ideal for drummers seeking clarity and presence.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Jazz', 'Latin'],
-    playingSituation: 'Versatile tuning setups & intricate performances.',
-    recordingMic: 'Shure SM7B or AKG C414 for detail and precision.',
-  },
-  '13" - Base Price: $1350-7.0"-8 Lugs-12mm-Maple-Walnut + Birch': {
-    highlightedCharacteristics:
-      'Balanced warmth with a smooth attack and controlled sustain. Features a deep attack with long sustain. Balanced tuning range with clear projection.',
+      'Crisp attack with balanced sustain, ideal for tight articulation.',
     primaryGenre: 'Rock',
     secondaryGenres: ['Pop', 'Indie'],
     playingSituation: 'Live performances & studio recordings.',
     recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
   },
-
-  '13" - Base Price: $1350-7.0"-8 Lugs-12mm-Maple-Oak + Cherry': {
+  '14" - Base Price: $1250-5.5"-8 Lugs-16 - 13mm-Maple-Walnut + Birch': {
     highlightedCharacteristics:
-      'Deep, rich resonance with punchy articulation. Great for dynamic playing with expressive overtones.',
-    primaryGenre: 'Rock',
-    secondaryGenres: ['Alternative', 'Indie'],
-    playingSituation: 'Large venues & studio tracking.',
-    recordingMic: 'AKG C414 or Sennheiser MD421 for definition and clarity.',
-  },
-
-  '13" - Base Price: $1350-7.0"-8 Lugs-12mm-Maple-Maple + Bubinga': {
-    highlightedCharacteristics:
-      'Full-bodied sound with a deep, commanding presence. Provides excellent tuning flexibility.',
-    primaryGenre: 'Rock',
-    secondaryGenres: ['Funk', 'Hard Rock'],
-    playingSituation: 'Powerful stage performances & groove-heavy drumming.',
-    recordingMic: 'Shure Beta 57A or Earthworks DM20 for enhanced attack.',
-  },
-
-  '13" - Base Price: $1350-7.0"-8 Lugs-12mm-Walnut-Mahogany + Cherry': {
-    highlightedCharacteristics:
-      'Warm and resonant with a rich low-end presence. Smooth overtones make it ideal for controlled dynamics.',
+      'Warm, vintage-inspired sound with excellent midrange depth.',
     primaryGenre: 'Jazz',
-    secondaryGenres: ['R&B', 'Blues'],
-    playingSituation: 'Studio work & intimate performances.',
-    recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth and detail.',
+    secondaryGenres: ['Blues', 'Soul'],
+    playingSituation: 'Intimate jazz clubs & acoustic sessions.',
+    recordingMic: 'Beyerdynamic M201 TG or AKG C414 for warm articulation.',
   },
-
-  '13" - Base Price: $1350-7.0"-8 Lugs-12mm-Walnut-Walnut + Padauk': {
+  '14" - Base Price: $1250-5.5"-10 Lugs-20 - 14mm-Maple-Walnut + Birch': {
     highlightedCharacteristics:
-      'Deep, vintage-style tone with enhanced warmth. Ideal for laid-back, groove-focused styles.',
-    primaryGenre: 'Jazz',
-    secondaryGenres: ['Soul', 'Folk'],
-    playingSituation: 'Unplugged performances & small venue gigs.',
-    recordingMic: 'Coles 4038 or Neumann KM84 for classic character.',
+      'Powerful projection with rich overtones and deep lows.',
+    primaryGenre: 'Metal',
+    secondaryGenres: ['Alternative', 'Hard Rock'],
+    playingSituation: 'Stadium shows & high-energy rock gigs.',
+    recordingMic: 'Shure Beta 57A or Earthworks DM20 for crisp attack.',
   },
-
-  '13" - Base Price: $1350-7.0"-8 Lugs-12mm-Walnut-Oak + Wenge': {
-    highlightedCharacteristics:
-      'Full-bodied resonance with powerful projection. A versatile snare for warm yet punchy tones.',
-    primaryGenre: 'Jazz',
-    secondaryGenres: ['Blues', 'Neo-Soul'],
-    playingSituation: 'Acoustic sessions & studio tracking.',
-    recordingMic: 'Royer R-121 or Sennheiser MD441 for rich tonality.',
-  },
-
-  '13" - Base Price: $1350-7.0"-8 Lugs-12mm-Cherry-Birch + Maple': {
-    highlightedCharacteristics:
-      'Crisp highs with a well-balanced midrange. Ideal for drummers who need a quick yet full attack.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Funk', 'Latin'],
-    playingSituation: 'Fast-paced grooves & percussive styles.',
-    recordingMic: 'Earthworks SR25 or Sennheiser e604 for enhanced clarity.',
-  },
-
-  '13" - Base Price: $1350-7.0"-8 Lugs-12mm-Cherry-Zebrawood + Mahogany': {
-    highlightedCharacteristics:
-      'Defined attack with warm sustain and smooth projection. Suited for intricate, dynamic playing.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Funk', 'Pop'],
-    playingSituation: 'Complex rhythmic styles & tight, articulate drumming.',
-    recordingMic: 'Neumann U87 or Beyerdynamic M201 TG for accuracy.',
-  },
-
-  '13" - Base Price: $1350-7.0"-8 Lugs-12mm-Cherry-Padauk + Ash': {
-    highlightedCharacteristics:
-      'Bright and snappy with a focused, tight response. Great for players seeking strong articulation.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Jazz', 'Latin'],
-    playingSituation: 'Dynamic performances & intricate snare work.',
-    recordingMic: 'Shure SM7B or AKG C414 for precise tonal shaping.',
-  },
-  '14" - Base Price: $1250-5.5"-8 Lugs-12mm-Maple-Walnut + Birch': {
-    highlightedCharacteristics:
-      'Balanced warmth with a smooth attack and controlled sustain. Features a crisp attack with balanced sustain. Balanced tuning range with clear projection.',
-    primaryGenre: 'Rock',
-    secondaryGenres: ['Pop', 'Indie'],
-    playingSituation: 'Live performances & studio recordings.',
-    recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
-  },
-
-  '14" - Base Price: $1250-5.5"-10 Lugs-14mm-Maple-Walnut + Birch': {
-    highlightedCharacteristics:
-      'Balanced warmth with a smooth attack and controlled sustain. Features a crisp attack with balanced sustain. Tighter tuning control with sharper attack.',
-    primaryGenre: 'Rock',
-    secondaryGenres: ['Pop', 'Indie'],
-    playingSituation: 'Live performances & studio recordings.',
-    recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
-  },
-
-  '14" - Base Price: $1400-5.5"-10 Lugs-10mm + Re-Rings-Maple-Walnut + Birch': {
-    highlightedCharacteristics:
-      'Balanced warmth with a smooth attack and controlled sustain. Features a crisp attack with balanced sustain. Tighter tuning control with sharper attack.',
-    primaryGenre: 'Rock',
-    secondaryGenres: ['Pop', 'Indie'],
-    playingSituation: 'Live performances & studio recordings.',
-    recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
-  },
-
-  '14" - Base Price: $1250-5.5"-8 Lugs-12mm-Maple-Oak + Cherry': {
-    highlightedCharacteristics:
-      'Balanced warmth with a smooth attack and controlled sustain. Features a crisp attack with balanced sustain. Balanced tuning range with clear projection.',
-    primaryGenre: 'Rock',
-    secondaryGenres: ['Pop', 'Indie'],
-    playingSituation: 'Live performances & studio recordings.',
-    recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
-  },
-
-  '14" - Base Price: $1250-5.5"-10 Lugs-14mm-Maple-Oak + Cherry': {
-    highlightedCharacteristics:
-      'Balanced warmth with a smooth attack and controlled sustain. Features a crisp attack with balanced sustain. Tighter tuning control with sharper attack.',
-    primaryGenre: 'Rock',
-    secondaryGenres: ['Pop', 'Indie'],
-    playingSituation: 'Live performances & studio recordings.',
-    recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
-  },
-
-  '14" - Base Price: $1400-5.5"-10 Lugs-10mm + Re-Rings-Maple-Oak + Cherry': {
-    highlightedCharacteristics:
-      'Balanced warmth with a smooth attack and controlled sustain. Features a crisp attack with balanced sustain. Tighter tuning control with sharper attack.',
-    primaryGenre: 'Rock',
-    secondaryGenres: ['Pop', 'Indie'],
-    playingSituation: 'Live performances & studio recordings.',
-    recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
-  },
-
-  '14" - Base Price: $1250-5.5"-8 Lugs-12mm-Maple-Maple + Bubinga': {
-    highlightedCharacteristics:
-      'Balanced warmth with a smooth attack and controlled sustain. Features a crisp attack with balanced sustain. Balanced tuning range with clear projection.',
-    primaryGenre: 'Rock',
-    secondaryGenres: ['Pop', 'Indie'],
-    playingSituation: 'Live performances & studio recordings.',
-    recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
-  },
-
-  '14" - Base Price: $1250-5.5"-10 Lugs-14mm-Maple-Maple + Bubinga': {
-    highlightedCharacteristics:
-      'Balanced warmth with a smooth attack and controlled sustain. Features a crisp attack with balanced sustain. Tighter tuning control with sharper attack.',
-    primaryGenre: 'Rock',
-    secondaryGenres: ['Pop', 'Indie'],
-    playingSituation: 'Live performances & studio recordings.',
-    recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
-  },
-
-  '14" - Base Price: $1400-5.5"-10 Lugs-10mm + Re-Rings-Maple-Maple + Bubinga':
+  '14" - Base Price: $1400-5.5"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Maple-Walnut + Birch':
     {
       highlightedCharacteristics:
-        'Balanced warmth with a smooth attack and controlled sustain. Features a crisp attack with balanced sustain. Tighter tuning control with sharper attack.',
+        'Fast response with bright attack and controlled resonance.',
+      primaryGenre: 'Pop',
+      secondaryGenres: ['Jazz', 'Fusion'],
+      playingSituation: 'Recording studios & dynamic live sets.',
+      recordingMic: 'Neumann U87 or Royer R-121 for smooth detail.',
+    },
+  '14" - Base Price: $1250-5.5"-8 Lugs-16 - 13mm-Maple-Oak + Cherry': {
+    highlightedCharacteristics:
+      'Rich, full-bodied tone with natural warmth and clarity.',
+    primaryGenre: 'Funk',
+    secondaryGenres: ['Latin', 'Afrobeat'],
+    playingSituation: 'Funk and groove-driven performances.',
+    recordingMic: 'Audix D4 or AKG C214 for deep tone and clarity.',
+  },
+  '14" - Base Price: $1250-5.5"-10 Lugs-20 - 14mm-Maple-Oak + Cherry': {
+    highlightedCharacteristics:
+      'Tight and focused snare with quick decay and smooth balance.',
+    primaryGenre: 'Indie',
+    secondaryGenres: ['Country', 'Folk'],
+    playingSituation: 'R&B and neo-soul jam sessions.',
+    recordingMic: 'Shure SM7B or Sennheiser MD421 for strong projection.',
+  },
+  '14" - Base Price: $1400-5.5"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Maple-Oak + Cherry':
+    {
+      highlightedCharacteristics:
+        'Strong midrange presence, perfect for versatile tuning.',
+      primaryGenre: 'Blues',
+      secondaryGenres: ['Hip-Hop', 'R&B'],
+      playingSituation: 'Experimental and avant-garde compositions.',
+      recordingMic: 'Coles 4038 or Sennheiser e604 for vintage character.',
+    },
+  '14" - Base Price: $1250-5.5"-8 Lugs-16 - 13mm-Maple-Maple + Bubinga': {
+    highlightedCharacteristics:
+      'Deep resonance with punchy attack and controlled sustain.',
+    primaryGenre: 'Soul',
+    secondaryGenres: ['Neo-Soul', 'Funk'],
+    playingSituation: 'Orchestral and concert hall settings.',
+    recordingMic: 'Earthworks SR25 or Beyerdynamic MC930 for natural presence.',
+  },
+  '14" - Base Price: $1250-5.5"-10 Lugs-20 - 14mm-Maple-Maple + Bubinga': {
+    highlightedCharacteristics:
+      'Articulate snare with defined stick response and full projection.',
+    primaryGenre: 'Gospel',
+    secondaryGenres: ['Experimental', 'Ambient'],
+    playingSituation: 'Big band and brass ensemble performances.',
+    recordingMic: 'Royer R-121 or Neumann KM84 for intricate dynamics.',
+  },
+  '14" - Base Price: $1400-5.5"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Maple-Maple + Bubinga':
+    {
+      highlightedCharacteristics:
+        'Dynamic and expressive, with controlled high-end presence.',
+      primaryGenre: 'Fusion',
+      secondaryGenres: ['Progressive Rock'],
+      playingSituation: 'Gospel choirs and church worship sessions.',
+      recordingMic: 'Audix i5 or AKG C414 for precise transients.',
+    },
+  '14" - Base Price: $1250-5.5"-8 Lugs-16 - 13mm-Walnut-Mahogany + Cherry': {
+    highlightedCharacteristics:
+      'Crisp attack with balanced sustain, ideal for tight articulation.',
+    primaryGenre: 'Rock',
+    secondaryGenres: ['Pop', 'Indie'],
+    playingSituation: 'Live performances & studio recordings.',
+    recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
+  },
+  '14" - Base Price: $1250-5.5"-10 Lugs-20 - 14mm-Walnut-Mahogany + Cherry': {
+    highlightedCharacteristics:
+      'Warm, vintage-inspired sound with excellent midrange depth.',
+    primaryGenre: 'Jazz',
+    secondaryGenres: ['Blues', 'Soul'],
+    playingSituation: 'Intimate jazz clubs & acoustic sessions.',
+    recordingMic: 'Beyerdynamic M201 TG or AKG C414 for warm articulation.',
+  },
+  '14" - Base Price: $1400-5.5"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Walnut-Mahogany + Cherry':
+    {
+      highlightedCharacteristics:
+        'Powerful projection with rich overtones and deep lows.',
+      primaryGenre: 'Metal',
+      secondaryGenres: ['Alternative', 'Hard Rock'],
+      playingSituation: 'Stadium shows & high-energy rock gigs.',
+      recordingMic: 'Shure Beta 57A or Earthworks DM20 for crisp attack.',
+    },
+  '14" - Base Price: $1250-5.5"-8 Lugs-16 - 13mm-Walnut-Walnut + Padauk': {
+    highlightedCharacteristics:
+      'Fast response with bright attack and controlled resonance.',
+    primaryGenre: 'Pop',
+    secondaryGenres: ['Jazz', 'Fusion'],
+    playingSituation: 'Recording studios & dynamic live sets.',
+    recordingMic: 'Neumann U87 or Royer R-121 for smooth detail.',
+  },
+  '14" - Base Price: $1250-5.5"-10 Lugs-20 - 14mm-Walnut-Walnut + Padauk': {
+    highlightedCharacteristics:
+      'Rich, full-bodied tone with natural warmth and clarity.',
+    primaryGenre: 'Funk',
+    secondaryGenres: ['Latin', 'Afrobeat'],
+    playingSituation: 'Funk and groove-driven performances.',
+    recordingMic: 'Audix D4 or AKG C214 for deep tone and clarity.',
+  },
+  '14" - Base Price: $1400-5.5"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Walnut-Walnut + Padauk':
+    {
+      highlightedCharacteristics:
+        'Tight and focused snare with quick decay and smooth balance.',
+      primaryGenre: 'Indie',
+      secondaryGenres: ['Country', 'Folk'],
+      playingSituation: 'R&B and neo-soul jam sessions.',
+      recordingMic: 'Shure SM7B or Sennheiser MD421 for strong projection.',
+    },
+  '14" - Base Price: $1250-5.5"-8 Lugs-16 - 13mm-Walnut-Oak + Wenge': {
+    highlightedCharacteristics:
+      'Strong midrange presence, perfect for versatile tuning.',
+    primaryGenre: 'Blues',
+    secondaryGenres: ['Hip-Hop', 'R&B'],
+    playingSituation: 'Experimental and avant-garde compositions.',
+    recordingMic: 'Coles 4038 or Sennheiser e604 for vintage character.',
+  },
+  '14" - Base Price: $1250-5.5"-10 Lugs-20 - 14mm-Walnut-Oak + Wenge': {
+    highlightedCharacteristics:
+      'Deep resonance with punchy attack and controlled sustain.',
+    primaryGenre: 'Soul',
+    secondaryGenres: ['Neo-Soul', 'Funk'],
+    playingSituation: 'Orchestral and concert hall settings.',
+    recordingMic: 'Earthworks SR25 or Beyerdynamic MC930 for natural presence.',
+  },
+  '14" - Base Price: $1400-5.5"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Walnut-Oak + Wenge':
+    {
+      highlightedCharacteristics:
+        'Articulate snare with defined stick response and full projection.',
+      primaryGenre: 'Gospel',
+      secondaryGenres: ['Experimental', 'Ambient'],
+      playingSituation: 'Big band and brass ensemble performances.',
+      recordingMic: 'Royer R-121 or Neumann KM84 for intricate dynamics.',
+    },
+  '14" - Base Price: $1250-5.5"-8 Lugs-16 - 13mm-Cherry-Birch + Maple': {
+    highlightedCharacteristics:
+      'Dynamic and expressive, with controlled high-end presence.',
+    primaryGenre: 'Fusion',
+    secondaryGenres: ['Progressive Rock'],
+    playingSituation: 'Gospel choirs and church worship sessions.',
+    recordingMic: 'Audix i5 or AKG C414 for precise transients.',
+  },
+  '14" - Base Price: $1250-5.5"-10 Lugs-20 - 14mm-Cherry-Birch + Maple': {
+    highlightedCharacteristics:
+      'Crisp attack with balanced sustain, ideal for tight articulation.',
+    primaryGenre: 'Rock',
+    secondaryGenres: ['Pop', 'Indie'],
+    playingSituation: 'Live performances & studio recordings.',
+    recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
+  },
+  '14" - Base Price: $1400-5.5"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Cherry-Birch + Maple':
+    {
+      highlightedCharacteristics:
+        'Warm, vintage-inspired sound with excellent midrange depth.',
+      primaryGenre: 'Jazz',
+      secondaryGenres: ['Blues', 'Soul'],
+      playingSituation: 'Intimate jazz clubs & acoustic sessions.',
+      recordingMic: 'Beyerdynamic M201 TG or AKG C414 for warm articulation.',
+    },
+  '14" - Base Price: $1250-5.5"-8 Lugs-16 - 13mm-Cherry-Zebrawood + Mahogany': {
+    highlightedCharacteristics:
+      'Powerful projection with rich overtones and deep lows.',
+    primaryGenre: 'Metal',
+    secondaryGenres: ['Alternative', 'Hard Rock'],
+    playingSituation: 'Stadium shows & high-energy rock gigs.',
+    recordingMic: 'Shure Beta 57A or Earthworks DM20 for crisp attack.',
+  },
+  '14" - Base Price: $1250-5.5"-10 Lugs-20 - 14mm-Cherry-Zebrawood + Mahogany':
+    {
+      highlightedCharacteristics:
+        'Fast response with bright attack and controlled resonance.',
+      primaryGenre: 'Pop',
+      secondaryGenres: ['Jazz', 'Fusion'],
+      playingSituation: 'Recording studios & dynamic live sets.',
+      recordingMic: 'Neumann U87 or Royer R-121 for smooth detail.',
+    },
+  '14" - Base Price: $1400-5.5"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Cherry-Zebrawood + Mahogany':
+    {
+      highlightedCharacteristics:
+        'Rich, full-bodied tone with natural warmth and clarity.',
+      primaryGenre: 'Funk',
+      secondaryGenres: ['Latin', 'Afrobeat'],
+      playingSituation: 'Funk and groove-driven performances.',
+      recordingMic: 'Audix D4 or AKG C214 for deep tone and clarity.',
+    },
+  '14" - Base Price: $1250-5.5"-8 Lugs-16 - 13mm-Cherry-Padauk + Ash': {
+    highlightedCharacteristics:
+      'Tight and focused snare with quick decay and smooth balance.',
+    primaryGenre: 'Indie',
+    secondaryGenres: ['Country', 'Folk'],
+    playingSituation: 'R&B and neo-soul jam sessions.',
+    recordingMic: 'Shure SM7B or Sennheiser MD421 for strong projection.',
+  },
+  '14" - Base Price: $1250-5.5"-10 Lugs-20 - 14mm-Cherry-Padauk + Ash': {
+    highlightedCharacteristics:
+      'Strong midrange presence, perfect for versatile tuning.',
+    primaryGenre: 'Blues',
+    secondaryGenres: ['Hip-Hop', 'R&B'],
+    playingSituation: 'Experimental and avant-garde compositions.',
+    recordingMic: 'Coles 4038 or Sennheiser e604 for vintage character.',
+  },
+  '14" - Base Price: $1400-5.5"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Cherry-Padauk + Ash':
+    {
+      highlightedCharacteristics:
+        'Deep resonance with punchy attack and controlled sustain.',
+      primaryGenre: 'Soul',
+      secondaryGenres: ['Neo-Soul', 'Funk'],
+      playingSituation: 'Orchestral and concert hall settings.',
+      recordingMic:
+        'Earthworks SR25 or Beyerdynamic MC930 for natural presence.',
+    },
+  '14" - Base Price: $1300-6.0"-8 Lugs-16 - 13mm-Maple-Walnut + Birch': {
+    highlightedCharacteristics:
+      'Articulate snare with defined stick response and full projection.',
+    primaryGenre: 'Gospel',
+    secondaryGenres: ['Experimental', 'Ambient'],
+    playingSituation: 'Big band and brass ensemble performances.',
+    recordingMic: 'Royer R-121 or Neumann KM84 for intricate dynamics.',
+  },
+  '14" - Base Price: $1300-6.0"-10 Lugs-20 - 14mm-Maple-Walnut + Birch': {
+    highlightedCharacteristics:
+      'Dynamic and expressive, with controlled high-end presence.',
+    primaryGenre: 'Fusion',
+    secondaryGenres: ['Progressive Rock'],
+    playingSituation: 'Gospel choirs and church worship sessions.',
+    recordingMic: 'Audix i5 or AKG C414 for precise transients.',
+  },
+  '14" - Base Price: $1500-6.0"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Maple-Walnut + Birch':
+    {
+      highlightedCharacteristics:
+        'Crisp attack with balanced sustain, ideal for tight articulation.',
       primaryGenre: 'Rock',
       secondaryGenres: ['Pop', 'Indie'],
       playingSituation: 'Live performances & studio recordings.',
       recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
     },
-  '14" - Base Price: $1250-5.5"-8 Lugs-12mm-Walnut-Mahogany + Cherry': {
+  '14" - Base Price: $1300-6.0"-8 Lugs-16 - 13mm-Maple-Oak + Cherry': {
     highlightedCharacteristics:
-      'Dark, warm tone with a deep, resonant low end. Features a crisp attack with balanced sustain. Balanced tuning range with clear projection.',
+      'Warm, vintage-inspired sound with excellent midrange depth.',
     primaryGenre: 'Jazz',
-    secondaryGenres: ['R&B', 'Blues'],
-    playingSituation: 'Studio work & intimate venues.',
-    recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
+    secondaryGenres: ['Blues', 'Soul'],
+    playingSituation: 'Intimate jazz clubs & acoustic sessions.',
+    recordingMic: 'Beyerdynamic M201 TG or AKG C414 for warm articulation.',
   },
-
-  '14" - Base Price: $1250-5.5"-10 Lugs-14mm-Walnut-Mahogany + Cherry': {
+  '14" - Base Price: $1300-6.0"-10 Lugs-20 - 14mm-Maple-Oak + Cherry': {
     highlightedCharacteristics:
-      'Dark, warm tone with a deep, resonant low end. Features a crisp attack with balanced sustain. Tighter tuning control with sharper attack.',
-    primaryGenre: 'Jazz',
-    secondaryGenres: ['R&B', 'Blues'],
-    playingSituation: 'Studio work & intimate venues.',
-    recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
+      'Powerful projection with rich overtones and deep lows.',
+    primaryGenre: 'Metal',
+    secondaryGenres: ['Alternative', 'Hard Rock'],
+    playingSituation: 'Stadium shows & high-energy rock gigs.',
+    recordingMic: 'Shure Beta 57A or Earthworks DM20 for crisp attack.',
   },
-
-  '14" - Base Price: $1400-5.5"-10 Lugs-10mm + Re-Rings-Walnut-Mahogany + Cherry':
+  '14" - Base Price: $1500-6.0"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Maple-Oak + Cherry':
     {
       highlightedCharacteristics:
-        'Dark, warm tone with a deep, resonant low end. Features a crisp attack with balanced sustain. Tighter tuning control with sharper attack.',
-      primaryGenre: 'Jazz',
-      secondaryGenres: ['R&B', 'Blues'],
-      playingSituation: 'Studio work & intimate venues.',
-      recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
+        'Fast response with bright attack and controlled resonance.',
+      primaryGenre: 'Pop',
+      secondaryGenres: ['Jazz', 'Fusion'],
+      playingSituation: 'Recording studios & dynamic live sets.',
+      recordingMic: 'Neumann U87 or Royer R-121 for smooth detail.',
     },
-
-  '14" - Base Price: $1250-5.5"-8 Lugs-12mm-Walnut-Walnut + Padauk': {
+  '14" - Base Price: $1300-6.0"-8 Lugs-16 - 13mm-Maple-Maple + Bubinga': {
     highlightedCharacteristics:
-      'Dark, warm tone with a deep, resonant low end. Features a crisp attack with balanced sustain. Balanced tuning range with clear projection.',
-    primaryGenre: 'Jazz',
-    secondaryGenres: ['R&B', 'Blues'],
-    playingSituation: 'Studio work & intimate venues.',
-    recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
+      'Rich, full-bodied tone with natural warmth and clarity.',
+    primaryGenre: 'Funk',
+    secondaryGenres: ['Latin', 'Afrobeat'],
+    playingSituation: 'Funk and groove-driven performances.',
+    recordingMic: 'Audix D4 or AKG C214 for deep tone and clarity.',
   },
-
-  '14" - Base Price: $1250-5.5"-10 Lugs-14mm-Walnut-Walnut + Padauk': {
+  '14" - Base Price: $1300-6.0"-10 Lugs-20 - 14mm-Maple-Maple + Bubinga': {
     highlightedCharacteristics:
-      'Dark, warm tone with a deep, resonant low end. Features a crisp attack with balanced sustain. Tighter tuning control with sharper attack.',
-    primaryGenre: 'Jazz',
-    secondaryGenres: ['R&B', 'Blues'],
-    playingSituation: 'Studio work & intimate venues.',
-    recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
+      'Tight and focused snare with quick decay and smooth balance.',
+    primaryGenre: 'Indie',
+    secondaryGenres: ['Country', 'Folk'],
+    playingSituation: 'R&B and neo-soul jam sessions.',
+    recordingMic: 'Shure SM7B or Sennheiser MD421 for strong projection.',
   },
-
-  '14" - Base Price: $1400-5.5"-10 Lugs-10mm + Re-Rings-Walnut-Walnut + Padauk':
+  '14" - Base Price: $1500-6.0"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Maple-Maple + Bubinga':
     {
       highlightedCharacteristics:
-        'Dark, warm tone with a deep, resonant low end. Features a crisp attack with balanced sustain. Tighter tuning control with sharper attack.',
-      primaryGenre: 'Jazz',
-      secondaryGenres: ['R&B', 'Blues'],
-      playingSituation: 'Studio work & intimate venues.',
-      recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
+        'Strong midrange presence, perfect for versatile tuning.',
+      primaryGenre: 'Blues',
+      secondaryGenres: ['Hip-Hop', 'R&B'],
+      playingSituation: 'Experimental and avant-garde compositions.',
+      recordingMic: 'Coles 4038 or Sennheiser e604 for vintage character.',
     },
-
-  '14" - Base Price: $1250-5.5"-8 Lugs-12mm-Walnut-Oak + Wenge': {
+  '14" - Base Price: $1300-6.0"-8 Lugs-16 - 13mm-Walnut-Mahogany + Cherry': {
     highlightedCharacteristics:
-      'Dark, warm tone with a deep, resonant low end. Features a crisp attack with balanced sustain. Balanced tuning range with clear projection.',
-    primaryGenre: 'Jazz',
-    secondaryGenres: ['R&B', 'Blues'],
-    playingSituation: 'Studio work & intimate venues.',
-    recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
+      'Deep resonance with punchy attack and controlled sustain.',
+    primaryGenre: 'Soul',
+    secondaryGenres: ['Neo-Soul', 'Funk'],
+    playingSituation: 'Orchestral and concert hall settings.',
+    recordingMic: 'Earthworks SR25 or Beyerdynamic MC930 for natural presence.',
   },
-
-  '14" - Base Price: $1250-5.5"-10 Lugs-14mm-Walnut-Oak + Wenge': {
+  '14" - Base Price: $1300-6.0"-10 Lugs-20 - 14mm-Walnut-Mahogany + Cherry': {
     highlightedCharacteristics:
-      'Dark, warm tone with a deep, resonant low end. Features a crisp attack with balanced sustain. Tighter tuning control with sharper attack.',
-    primaryGenre: 'Jazz',
-    secondaryGenres: ['R&B', 'Blues'],
-    playingSituation: 'Studio work & intimate venues.',
-    recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
+      'Articulate snare with defined stick response and full projection.',
+    primaryGenre: 'Gospel',
+    secondaryGenres: ['Experimental', 'Ambient'],
+    playingSituation: 'Big band and brass ensemble performances.',
+    recordingMic: 'Royer R-121 or Neumann KM84 for intricate dynamics.',
   },
-
-  '14" - Base Price: $1400-5.5"-10 Lugs-10mm + Re-Rings-Walnut-Oak + Wenge': {
-    highlightedCharacteristics:
-      'Dark, warm tone with a deep, resonant low end. Features a crisp attack with balanced sustain. Tighter tuning control with sharper attack.',
-    primaryGenre: 'Jazz',
-    secondaryGenres: ['R&B', 'Blues'],
-    playingSituation: 'Studio work & intimate venues.',
-    recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
-  },
-  '14" - Base Price: $1250-5.5"-8 Lugs-12mm-Cherry-Birch + Maple': {
-    highlightedCharacteristics:
-      'Bright attack with a controlled midrange and crisp highs. Features a crisp attack with balanced sustain. Balanced tuning range with clear projection.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Funk', 'Latin'],
-    playingSituation: 'Fast-paced, energetic playing styles.',
-    recordingMic: 'Earthworks SR25 or Sennheiser e604 for clarity.',
-  },
-
-  '14" - Base Price: $1250-5.5"-10 Lugs-14mm-Cherry-Birch + Maple': {
-    highlightedCharacteristics:
-      'Bright attack with a controlled midrange and crisp highs. Features a crisp attack with balanced sustain. Tighter tuning control with sharper attack.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Funk', 'Latin'],
-    playingSituation: 'Fast-paced, energetic playing styles.',
-    recordingMic: 'Earthworks SR25 or Sennheiser e604 for clarity.',
-  },
-
-  '14" - Base Price: $1400-5.5"-10 Lugs-10mm + Re-Rings-Cherry-Birch + Maple': {
-    highlightedCharacteristics:
-      'Bright attack with a controlled midrange and crisp highs. Features a crisp attack with balanced sustain. Tighter tuning control with sharper attack.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Funk', 'Latin'],
-    playingSituation: 'Fast-paced, energetic playing styles.',
-    recordingMic: 'Earthworks SR25 or Sennheiser e604 for clarity.',
-  },
-
-  '14" - Base Price: $1250-5.5"-8 Lugs-12mm-Cherry-Zebrawood + Mahogany': {
-    highlightedCharacteristics:
-      'Defined attack with warm sustain and smooth projection. Suited for intricate, dynamic playing.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Funk', 'Pop'],
-    playingSituation: 'Complex rhythmic styles & tight, articulate drumming.',
-    recordingMic: 'Neumann U87 or Beyerdynamic M201 TG for accuracy.',
-  },
-
-  '14" - Base Price: $1250-5.5"-10 Lugs-14mm-Cherry-Zebrawood + Mahogany': {
-    highlightedCharacteristics:
-      'Defined attack with warm sustain and smooth projection. Suited for intricate, dynamic playing. Tighter tuning control with sharper attack.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Funk', 'Pop'],
-    playingSituation: 'Complex rhythmic styles & tight, articulate drumming.',
-    recordingMic: 'Neumann U87 or Beyerdynamic M201 TG for accuracy.',
-  },
-
-  '14" - Base Price: $1400-5.5"-10 Lugs-10mm + Re-Rings-Cherry-Zebrawood + Mahogany':
+  '14" - Base Price: $1500-6.0"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Walnut-Mahogany + Cherry':
     {
       highlightedCharacteristics:
-        'Defined attack with warm sustain and smooth projection. Suited for intricate, dynamic playing. Tighter tuning control with sharper attack.',
+        'Dynamic and expressive, with controlled high-end presence.',
       primaryGenre: 'Fusion',
-      secondaryGenres: ['Funk', 'Pop'],
-      playingSituation: 'Complex rhythmic styles & tight, articulate drumming.',
-      recordingMic: 'Neumann U87 or Beyerdynamic M201 TG for accuracy.',
+      secondaryGenres: ['Progressive Rock'],
+      playingSituation: 'Gospel choirs and church worship sessions.',
+      recordingMic: 'Audix i5 or AKG C414 for precise transients.',
     },
-
-  '14" - Base Price: $1250-5.5"-8 Lugs-12mm-Cherry-Padauk + Ash': {
+  '14" - Base Price: $1300-6.0"-8 Lugs-16 - 13mm-Walnut-Walnut + Padauk': {
     highlightedCharacteristics:
-      'Bright and snappy with a focused, tight response. Great for players seeking strong articulation.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Jazz', 'Latin'],
-    playingSituation: 'Dynamic performances & intricate snare work.',
-    recordingMic: 'Shure SM7B or AKG C414 for precise tonal shaping.',
-  },
-
-  '14" - Base Price: $1250-5.5"-10 Lugs-14mm-Cherry-Padauk + Ash': {
-    highlightedCharacteristics:
-      'Bright and snappy with a focused, tight response. Great for players seeking strong articulation. Tighter tuning control with sharper attack.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Jazz', 'Latin'],
-    playingSituation: 'Dynamic performances & intricate snare work.',
-    recordingMic: 'Shure SM7B or AKG C414 for precise tonal shaping.',
-  },
-
-  '14" - Base Price: $1400-5.5"-10 Lugs-10mm + Re-Rings-Cherry-Padauk + Ash': {
-    highlightedCharacteristics:
-      'Bright and snappy with a focused, tight response. Great for players seeking strong articulation. Tighter tuning control with sharper attack.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Jazz', 'Latin'],
-    playingSituation: 'Dynamic performances & intricate snare work.',
-    recordingMic: 'Shure SM7B or AKG C414 for precise tonal shaping.',
-  },
-  '14" - Base Price: $1300-6.0"-8 Lugs-12mm-Maple-Walnut + Birch': {
-    highlightedCharacteristics:
-      'Balanced warmth with a smooth attack and controlled sustain. Features a defined attack with moderate sustain. Balanced tuning range with clear projection.',
+      'Crisp attack with balanced sustain, ideal for tight articulation.',
     primaryGenre: 'Rock',
     secondaryGenres: ['Pop', 'Indie'],
     playingSituation: 'Live performances & studio recordings.',
     recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
   },
-
-  '14" - Base Price: $1300-6.0"-10 Lugs-14mm-Maple-Walnut + Birch': {
+  '14" - Base Price: $1300-6.0"-10 Lugs-20 - 14mm-Walnut-Walnut + Padauk': {
     highlightedCharacteristics:
-      'Balanced warmth with a smooth attack and controlled sustain. Features a defined attack with moderate sustain. Tighter tuning control with sharper attack.',
-    primaryGenre: 'Rock',
-    secondaryGenres: ['Pop', 'Indie'],
-    playingSituation: 'Live performances & studio recordings.',
-    recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
+      'Warm, vintage-inspired sound with excellent midrange depth.',
+    primaryGenre: 'Jazz',
+    secondaryGenres: ['Blues', 'Soul'],
+    playingSituation: 'Intimate jazz clubs & acoustic sessions.',
+    recordingMic: 'Beyerdynamic M201 TG or AKG C414 for warm articulation.',
   },
-
-  '14" - Base Price: $1450-6.0"-10 Lugs-10mm + Re-Rings-Maple-Walnut + Birch': {
-    highlightedCharacteristics:
-      'Balanced warmth with a smooth attack and controlled sustain. Features a defined attack with moderate sustain. Tighter tuning control with sharper attack.',
-    primaryGenre: 'Rock',
-    secondaryGenres: ['Pop', 'Indie'],
-    playingSituation: 'Live performances & studio recordings.',
-    recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
-  },
-
-  '14" - Base Price: $1300-6.0"-8 Lugs-12mm-Maple-Oak + Cherry': {
-    highlightedCharacteristics:
-      'Balanced warmth with a smooth attack and controlled sustain. Features a defined attack with moderate sustain. Balanced tuning range with clear projection.',
-    primaryGenre: 'Rock',
-    secondaryGenres: ['Pop', 'Indie'],
-    playingSituation: 'Live performances & studio recordings.',
-    recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
-  },
-
-  '14" - Base Price: $1300-6.0"-10 Lugs-14mm-Maple-Oak + Cherry': {
-    highlightedCharacteristics:
-      'Balanced warmth with a smooth attack and controlled sustain. Features a defined attack with moderate sustain. Tighter tuning control with sharper attack.',
-    primaryGenre: 'Rock',
-    secondaryGenres: ['Pop', 'Indie'],
-    playingSituation: 'Live performances & studio recordings.',
-    recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
-  },
-
-  '14" - Base Price: $1450-6.0"-10 Lugs-10mm + Re-Rings-Maple-Oak + Cherry': {
-    highlightedCharacteristics:
-      'Balanced warmth with a smooth attack and controlled sustain. Features a defined attack with moderate sustain. Tighter tuning control with sharper attack.',
-    primaryGenre: 'Rock',
-    secondaryGenres: ['Pop', 'Indie'],
-    playingSituation: 'Live performances & studio recordings.',
-    recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
-  },
-
-  '14" - Base Price: $1300-6.0"-8 Lugs-12mm-Maple-Maple + Bubinga': {
-    highlightedCharacteristics:
-      'Balanced warmth with a smooth attack and controlled sustain. Features a defined attack with moderate sustain. Balanced tuning range with clear projection.',
-    primaryGenre: 'Rock',
-    secondaryGenres: ['Pop', 'Indie'],
-    playingSituation: 'Live performances & studio recordings.',
-    recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
-  },
-
-  '14" - Base Price: $1300-6.0"-10 Lugs-14mm-Maple-Maple + Bubinga': {
-    highlightedCharacteristics:
-      'Balanced warmth with a smooth attack and controlled sustain. Features a defined attack with moderate sustain. Tighter tuning control with sharper attack.',
-    primaryGenre: 'Rock',
-    secondaryGenres: ['Pop', 'Indie'],
-    playingSituation: 'Live performances & studio recordings.',
-    recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
-  },
-
-  '14" - Base Price: $1450-6.0"-10 Lugs-10mm + Re-Rings-Maple-Maple + Bubinga':
+  '14" - Base Price: $1500-6.0"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Walnut-Walnut + Padauk':
     {
       highlightedCharacteristics:
-        'Balanced warmth with a smooth attack and controlled sustain. Features a defined attack with moderate sustain. Tighter tuning control with sharper attack.',
+        'Powerful projection with rich overtones and deep lows.',
+      primaryGenre: 'Metal',
+      secondaryGenres: ['Alternative', 'Hard Rock'],
+      playingSituation: 'Stadium shows & high-energy rock gigs.',
+      recordingMic: 'Shure Beta 57A or Earthworks DM20 for crisp attack.',
+    },
+  '14" - Base Price: $1300-6.0"-8 Lugs-16 - 13mm-Walnut-Oak + Wenge': {
+    highlightedCharacteristics:
+      'Fast response with bright attack and controlled resonance.',
+    primaryGenre: 'Pop',
+    secondaryGenres: ['Jazz', 'Fusion'],
+    playingSituation: 'Recording studios & dynamic live sets.',
+    recordingMic: 'Neumann U87 or Royer R-121 for smooth detail.',
+  },
+  '14" - Base Price: $1300-6.0"-10 Lugs-20 - 14mm-Walnut-Oak + Wenge': {
+    highlightedCharacteristics:
+      'Rich, full-bodied tone with natural warmth and clarity.',
+    primaryGenre: 'Funk',
+    secondaryGenres: ['Latin', 'Afrobeat'],
+    playingSituation: 'Funk and groove-driven performances.',
+    recordingMic: 'Audix D4 or AKG C214 for deep tone and clarity.',
+  },
+  '14" - Base Price: $1500-6.0"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Walnut-Oak + Wenge':
+    {
+      highlightedCharacteristics:
+        'Tight and focused snare with quick decay and smooth balance.',
+      primaryGenre: 'Indie',
+      secondaryGenres: ['Country', 'Folk'],
+      playingSituation: 'R&B and neo-soul jam sessions.',
+      recordingMic: 'Shure SM7B or Sennheiser MD421 for strong projection.',
+    },
+  '14" - Base Price: $1300-6.0"-8 Lugs-16 - 13mm-Cherry-Birch + Maple': {
+    highlightedCharacteristics:
+      'Strong midrange presence, perfect for versatile tuning.',
+    primaryGenre: 'Blues',
+    secondaryGenres: ['Hip-Hop', 'R&B'],
+    playingSituation: 'Experimental and avant-garde compositions.',
+    recordingMic: 'Coles 4038 or Sennheiser e604 for vintage character.',
+  },
+  '14" - Base Price: $1300-6.0"-10 Lugs-20 - 14mm-Cherry-Birch + Maple': {
+    highlightedCharacteristics:
+      'Deep resonance with punchy attack and controlled sustain.',
+    primaryGenre: 'Soul',
+    secondaryGenres: ['Neo-Soul', 'Funk'],
+    playingSituation: 'Orchestral and concert hall settings.',
+    recordingMic: 'Earthworks SR25 or Beyerdynamic MC930 for natural presence.',
+  },
+  '14" - Base Price: $1500-6.0"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Cherry-Birch + Maple':
+    {
+      highlightedCharacteristics:
+        'Articulate snare with defined stick response and full projection.',
+      primaryGenre: 'Gospel',
+      secondaryGenres: ['Experimental', 'Ambient'],
+      playingSituation: 'Big band and brass ensemble performances.',
+      recordingMic: 'Royer R-121 or Neumann KM84 for intricate dynamics.',
+    },
+  '14" - Base Price: $1300-6.0"-8 Lugs-16 - 13mm-Cherry-Zebrawood + Mahogany': {
+    highlightedCharacteristics:
+      'Dynamic and expressive, with controlled high-end presence.',
+    primaryGenre: 'Fusion',
+    secondaryGenres: ['Progressive Rock'],
+    playingSituation: 'Gospel choirs and church worship sessions.',
+    recordingMic: 'Audix i5 or AKG C414 for precise transients.',
+  },
+  '14" - Base Price: $1300-6.0"-10 Lugs-20 - 14mm-Cherry-Zebrawood + Mahogany':
+    {
+      highlightedCharacteristics:
+        'Crisp attack with balanced sustain, ideal for tight articulation.',
       primaryGenre: 'Rock',
       secondaryGenres: ['Pop', 'Indie'],
       playingSituation: 'Live performances & studio recordings.',
       recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
     },
-  '14" - Base Price: $1300-6.0"-8 Lugs-12mm-Walnut-Mahogany + Cherry': {
-    highlightedCharacteristics:
-      'Dark, warm tone with a deep, resonant low end. Features a defined attack with moderate sustain. Balanced tuning range with clear projection.',
-    primaryGenre: 'Jazz',
-    secondaryGenres: ['R&B', 'Blues'],
-    playingSituation: 'Studio work & intimate venues.',
-    recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
-  },
-
-  '14" - Base Price: $1300-6.0"-10 Lugs-14mm-Walnut-Mahogany + Cherry': {
-    highlightedCharacteristics:
-      'Dark, warm tone with a deep, resonant low end. Features a defined attack with moderate sustain. Tighter tuning control with sharper attack.',
-    primaryGenre: 'Jazz',
-    secondaryGenres: ['R&B', 'Blues'],
-    playingSituation: 'Studio work & intimate venues.',
-    recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
-  },
-
-  '14" - Base Price: $1450-6.0"-10 Lugs-10mm + Re-Rings-Walnut-Mahogany + Cherry':
+  '14" - Base Price: $1500-6.0"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Cherry-Zebrawood + Mahogany':
     {
       highlightedCharacteristics:
-        'Dark, warm tone with a deep, resonant low end. Features a defined attack with moderate sustain. Tighter tuning control with sharper attack.',
+        'Warm, vintage-inspired sound with excellent midrange depth.',
       primaryGenre: 'Jazz',
-      secondaryGenres: ['R&B', 'Blues'],
-      playingSituation: 'Studio work & intimate venues.',
-      recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
+      secondaryGenres: ['Blues', 'Soul'],
+      playingSituation: 'Intimate jazz clubs & acoustic sessions.',
+      recordingMic: 'Beyerdynamic M201 TG or AKG C414 for warm articulation.',
     },
-
-  '14" - Base Price: $1300-6.0"-8 Lugs-12mm-Walnut-Walnut + Padauk': {
+  '14" - Base Price: $1300-6.0"-8 Lugs-16 - 13mm-Cherry-Padauk + Ash': {
     highlightedCharacteristics:
-      'Dark, warm tone with a deep, resonant low end. Features a defined attack with moderate sustain. Balanced tuning range with clear projection.',
-    primaryGenre: 'Jazz',
-    secondaryGenres: ['R&B', 'Blues'],
-    playingSituation: 'Studio work & intimate venues.',
-    recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
+      'Powerful projection with rich overtones and deep lows.',
+    primaryGenre: 'Metal',
+    secondaryGenres: ['Alternative', 'Hard Rock'],
+    playingSituation: 'Stadium shows & high-energy rock gigs.',
+    recordingMic: 'Shure Beta 57A or Earthworks DM20 for crisp attack.',
   },
-
-  '14" - Base Price: $1300-6.0"-10 Lugs-14mm-Walnut-Walnut + Padauk': {
+  '14" - Base Price: $1300-6.0"-10 Lugs-20 - 14mm-Cherry-Padauk + Ash': {
     highlightedCharacteristics:
-      'Dark, warm tone with a deep, resonant low end. Features a defined attack with moderate sustain. Tighter tuning control with sharper attack.',
-    primaryGenre: 'Jazz',
-    secondaryGenres: ['R&B', 'Blues'],
-    playingSituation: 'Studio work & intimate venues.',
-    recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
+      'Fast response with bright attack and controlled resonance.',
+    primaryGenre: 'Pop',
+    secondaryGenres: ['Jazz', 'Fusion'],
+    playingSituation: 'Recording studios & dynamic live sets.',
+    recordingMic: 'Neumann U87 or Royer R-121 for smooth detail.',
   },
-
-  '14" - Base Price: $1450-6.0"-10 Lugs-10mm + Re-Rings-Walnut-Walnut + Padauk':
+  '14" - Base Price: $1500-6.0"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Cherry-Padauk + Ash':
     {
       highlightedCharacteristics:
-        'Dark, warm tone with a deep, resonant low end. Features a defined attack with moderate sustain. Tighter tuning control with sharper attack.',
-      primaryGenre: 'Jazz',
-      secondaryGenres: ['R&B', 'Blues'],
-      playingSituation: 'Studio work & intimate venues.',
-      recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
+        'Rich, full-bodied tone with natural warmth and clarity.',
+      primaryGenre: 'Funk',
+      secondaryGenres: ['Latin', 'Afrobeat'],
+      playingSituation: 'Funk and groove-driven performances.',
+      recordingMic: 'Audix D4 or AKG C214 for deep tone and clarity.',
     },
-
-  '14" - Base Price: $1300-6.0"-8 Lugs-12mm-Walnut-Oak + Wenge': {
+  '14" - Base Price: $1350-6.5"-8 Lugs-16 - 13mm-Maple-Walnut + Birch': {
     highlightedCharacteristics:
-      'Dark, warm tone with a deep, resonant low end. Features a defined attack with moderate sustain. Balanced tuning range with clear projection.',
-    primaryGenre: 'Jazz',
-    secondaryGenres: ['R&B', 'Blues'],
-    playingSituation: 'Studio work & intimate venues.',
-    recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
+      'Tight and focused snare with quick decay and smooth balance.',
+    primaryGenre: 'Indie',
+    secondaryGenres: ['Country', 'Folk'],
+    playingSituation: 'R&B and neo-soul jam sessions.',
+    recordingMic: 'Shure SM7B or Sennheiser MD421 for strong projection.',
   },
-
-  '14" - Base Price: $1300-6.0"-10 Lugs-14mm-Walnut-Oak + Wenge': {
+  '14" - Base Price: $1350-6.5"-10 Lugs-20 - 14mm-Maple-Walnut + Birch': {
     highlightedCharacteristics:
-      'Dark, warm tone with a deep, resonant low end. Features a defined attack with moderate sustain. Tighter tuning control with sharper attack.',
-    primaryGenre: 'Jazz',
-    secondaryGenres: ['R&B', 'Blues'],
-    playingSituation: 'Studio work & intimate venues.',
-    recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
+      'Strong midrange presence, perfect for versatile tuning.',
+    primaryGenre: 'Blues',
+    secondaryGenres: ['Hip-Hop', 'R&B'],
+    playingSituation: 'Experimental and avant-garde compositions.',
+    recordingMic: 'Coles 4038 or Sennheiser e604 for vintage character.',
   },
-
-  '14" - Base Price: $1450-6.0"-10 Lugs-10mm + Re-Rings-Walnut-Oak + Wenge': {
-    highlightedCharacteristics:
-      'Dark, warm tone with a deep, resonant low end. Features a defined attack with moderate sustain. Tighter tuning control with sharper attack.',
-    primaryGenre: 'Jazz',
-    secondaryGenres: ['R&B', 'Blues'],
-    playingSituation: 'Studio work & intimate venues.',
-    recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
-  },
-  '14" - Base Price: $1300-6.0"-8 Lugs-12mm-Cherry-Birch + Maple': {
-    highlightedCharacteristics:
-      'Bright attack with a controlled midrange and crisp highs. Features a defined attack with moderate sustain. Balanced tuning range with clear projection.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Funk', 'Latin'],
-    playingSituation: 'Fast-paced, energetic playing styles.',
-    recordingMic: 'Earthworks SR25 or Sennheiser e604 for clarity.',
-  },
-
-  '14" - Base Price: $1300-6.0"-10 Lugs-14mm-Cherry-Birch + Maple': {
-    highlightedCharacteristics:
-      'Bright attack with a controlled midrange and crisp highs. Features a defined attack with moderate sustain. Tighter tuning control with sharper attack.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Funk', 'Latin'],
-    playingSituation: 'Fast-paced, energetic playing styles.',
-    recordingMic: 'Earthworks SR25 or Sennheiser e604 for clarity.',
-  },
-
-  '14" - Base Price: $1450-6.0"-10 Lugs-10mm + Re-Rings-Cherry-Birch + Maple': {
-    highlightedCharacteristics:
-      'Bright attack with a controlled midrange and crisp highs. Features a defined attack with moderate sustain. Tighter tuning control with sharper attack.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Funk', 'Latin'],
-    playingSituation: 'Fast-paced, energetic playing styles.',
-    recordingMic: 'Earthworks SR25 or Sennheiser e604 for clarity.',
-  },
-
-  '14" - Base Price: $1300-6.0"-8 Lugs-12mm-Cherry-Zebrawood + Mahogany': {
-    highlightedCharacteristics:
-      'Defined attack with warm sustain and smooth projection. Suited for intricate, dynamic playing.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Funk', 'Pop'],
-    playingSituation: 'Complex rhythmic styles & tight, articulate drumming.',
-    recordingMic: 'Neumann U87 or Beyerdynamic M201 TG for accuracy.',
-  },
-
-  '14" - Base Price: $1300-6.0"-10 Lugs-14mm-Cherry-Zebrawood + Mahogany': {
-    highlightedCharacteristics:
-      'Defined attack with warm sustain and smooth projection. Suited for intricate, dynamic playing. Tighter tuning control with sharper attack.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Funk', 'Pop'],
-    playingSituation: 'Complex rhythmic styles & tight, articulate drumming.',
-    recordingMic: 'Neumann U87 or Beyerdynamic M201 TG for accuracy.',
-  },
-
-  '14" - Base Price: $1450-6.0"-10 Lugs-10mm + Re-Rings-Cherry-Zebrawood + Mahogany':
+  '14" - Base Price: $1500-6.5"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Maple-Walnut + Birch':
     {
       highlightedCharacteristics:
-        'Defined attack with warm sustain and smooth projection. Suited for intricate, dynamic playing. Tighter tuning control with sharper attack.',
-      primaryGenre: 'Fusion',
-      secondaryGenres: ['Funk', 'Pop'],
-      playingSituation: 'Complex rhythmic styles & tight, articulate drumming.',
-      recordingMic: 'Neumann U87 or Beyerdynamic M201 TG for accuracy.',
+        'Deep resonance with punchy attack and controlled sustain.',
+      primaryGenre: 'Soul',
+      secondaryGenres: ['Neo-Soul', 'Funk'],
+      playingSituation: 'Orchestral and concert hall settings.',
+      recordingMic:
+        'Earthworks SR25 or Beyerdynamic MC930 for natural presence.',
     },
-
-  '14" - Base Price: $1300-6.0"-8 Lugs-12mm-Cherry-Padauk + Ash': {
+  '14" - Base Price: $1350-6.5"-8 Lugs-16 - 13mm-Maple-Oak + Cherry': {
     highlightedCharacteristics:
-      'Bright and snappy with a focused, tight response. Great for players seeking strong articulation.',
+      'Articulate snare with defined stick response and full projection.',
+    primaryGenre: 'Gospel',
+    secondaryGenres: ['Experimental', 'Ambient'],
+    playingSituation: 'Big band and brass ensemble performances.',
+    recordingMic: 'Royer R-121 or Neumann KM84 for intricate dynamics.',
+  },
+  '14" - Base Price: $1350-6.5"-10 Lugs-20 - 14mm-Maple-Oak + Cherry': {
+    highlightedCharacteristics:
+      'Dynamic and expressive, with controlled high-end presence.',
     primaryGenre: 'Fusion',
-    secondaryGenres: ['Jazz', 'Latin'],
-    playingSituation: 'Dynamic performances & intricate snare work.',
-    recordingMic: 'Shure SM7B or AKG C414 for precise tonal shaping.',
+    secondaryGenres: ['Progressive Rock'],
+    playingSituation: 'Gospel choirs and church worship sessions.',
+    recordingMic: 'Audix i5 or AKG C414 for precise transients.',
   },
-
-  '14" - Base Price: $1300-6.0"-10 Lugs-14mm-Cherry-Padauk + Ash': {
-    highlightedCharacteristics:
-      'Bright and snappy with a focused, tight response. Great for players seeking strong articulation. Tighter tuning control with sharper attack.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Jazz', 'Latin'],
-    playingSituation: 'Dynamic performances & intricate snare work.',
-    recordingMic: 'Shure SM7B or AKG C414 for precise tonal shaping.',
-  },
-
-  '14" - Base Price: $1450-6.0"-10 Lugs-10mm + Re-Rings-Cherry-Padauk + Ash': {
-    highlightedCharacteristics:
-      'Bright and snappy with a focused, tight response. Great for players seeking strong articulation. Tighter tuning control with sharper attack.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Jazz', 'Latin'],
-    playingSituation: 'Dynamic performances & intricate snare work.',
-    recordingMic: 'Shure SM7B or AKG C414 for precise tonal shaping.',
-  },
-  '14" - Base Price: $1350-6.5"-8 Lugs-12mm-Maple-Walnut + Birch': {
-    highlightedCharacteristics:
-      'Balanced warmth with a smooth attack and controlled sustain. Features a full-bodied attack with extended sustain. Balanced tuning range with clear projection.',
-    primaryGenre: 'Rock',
-    secondaryGenres: ['Pop', 'Indie'],
-    playingSituation: 'Live performances & studio recordings.',
-    recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
-  },
-
-  '14" - Base Price: $1350-6.5"-10 Lugs-14mm-Maple-Walnut + Birch': {
-    highlightedCharacteristics:
-      'Balanced warmth with a smooth attack and controlled sustain. Features a full-bodied attack with extended sustain. Tighter tuning control with sharper attack.',
-    primaryGenre: 'Rock',
-    secondaryGenres: ['Pop', 'Indie'],
-    playingSituation: 'Live performances & studio recordings.',
-    recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
-  },
-
-  '14" - Base Price: $1500-6.5"-10 Lugs-10mm + Re-Rings-Maple-Walnut + Birch': {
-    highlightedCharacteristics:
-      'Balanced warmth with a smooth attack and controlled sustain. Features a full-bodied attack with extended sustain. Tighter tuning control with sharper attack.',
-    primaryGenre: 'Rock',
-    secondaryGenres: ['Pop', 'Indie'],
-    playingSituation: 'Live performances & studio recordings.',
-    recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
-  },
-
-  '14" - Base Price: $1350-6.5"-8 Lugs-12mm-Maple-Oak + Cherry': {
-    highlightedCharacteristics:
-      'Balanced warmth with a smooth attack and controlled sustain. Features a full-bodied attack with extended sustain. Balanced tuning range with clear projection.',
-    primaryGenre: 'Rock',
-    secondaryGenres: ['Pop', 'Indie'],
-    playingSituation: 'Live performances & studio recordings.',
-    recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
-  },
-
-  '14" - Base Price: $1350-6.5"-10 Lugs-14mm-Maple-Oak + Cherry': {
-    highlightedCharacteristics:
-      'Balanced warmth with a smooth attack and controlled sustain. Features a full-bodied attack with extended sustain. Tighter tuning control with sharper attack.',
-    primaryGenre: 'Rock',
-    secondaryGenres: ['Pop', 'Indie'],
-    playingSituation: 'Live performances & studio recordings.',
-    recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
-  },
-
-  '14" - Base Price: $1500-6.5"-10 Lugs-10mm + Re-Rings-Maple-Oak + Cherry': {
-    highlightedCharacteristics:
-      'Balanced warmth with a smooth attack and controlled sustain. Features a full-bodied attack with extended sustain. Tighter tuning control with sharper attack.',
-    primaryGenre: 'Rock',
-    secondaryGenres: ['Pop', 'Indie'],
-    playingSituation: 'Live performances & studio recordings.',
-    recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
-  },
-
-  '14" - Base Price: $1350-6.5"-8 Lugs-12mm-Maple-Maple + Bubinga': {
-    highlightedCharacteristics:
-      'Balanced warmth with a smooth attack and controlled sustain. Features a full-bodied attack with extended sustain. Balanced tuning range with clear projection.',
-    primaryGenre: 'Rock',
-    secondaryGenres: ['Pop', 'Indie'],
-    playingSituation: 'Live performances & studio recordings.',
-    recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
-  },
-
-  '14" - Base Price: $1350-6.5"-10 Lugs-14mm-Maple-Maple + Bubinga': {
-    highlightedCharacteristics:
-      'Balanced warmth with a smooth attack and controlled sustain. Features a full-bodied attack with extended sustain. Tighter tuning control with sharper attack.',
-    primaryGenre: 'Rock',
-    secondaryGenres: ['Pop', 'Indie'],
-    playingSituation: 'Live performances & studio recordings.',
-    recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
-  },
-
-  '14" - Base Price: $1500-6.5"-10 Lugs-10mm + Re-Rings-Maple-Maple + Bubinga':
+  '14" - Base Price: $1500-6.5"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Maple-Oak + Cherry':
     {
       highlightedCharacteristics:
-        'Balanced warmth with a smooth attack and controlled sustain. Features a full-bodied attack with extended sustain. Tighter tuning control with sharper attack.',
+        'Crisp attack with balanced sustain, ideal for tight articulation.',
       primaryGenre: 'Rock',
       secondaryGenres: ['Pop', 'Indie'],
       playingSituation: 'Live performances & studio recordings.',
       recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
     },
-  '14" - Base Price: $1350-6.5"-8 Lugs-12mm-Walnut-Mahogany + Cherry': {
+  '14" - Base Price: $1350-6.5"-8 Lugs-16 - 13mm-Maple-Maple + Bubinga': {
     highlightedCharacteristics:
-      'Dark, warm tone with a deep, resonant low end. Features a full-bodied attack with extended sustain. Balanced tuning range with clear projection.',
+      'Warm, vintage-inspired sound with excellent midrange depth.',
     primaryGenre: 'Jazz',
-    secondaryGenres: ['R&B', 'Blues'],
-    playingSituation: 'Studio work & intimate venues.',
-    recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
+    secondaryGenres: ['Blues', 'Soul'],
+    playingSituation: 'Intimate jazz clubs & acoustic sessions.',
+    recordingMic: 'Beyerdynamic M201 TG or AKG C414 for warm articulation.',
   },
-
-  '14" - Base Price: $1350-6.5"-10 Lugs-14mm-Walnut-Mahogany + Cherry': {
+  '14" - Base Price: $1350-6.5"-10 Lugs-20 - 14mm-Maple-Maple + Bubinga': {
     highlightedCharacteristics:
-      'Dark, warm tone with a deep, resonant low end. Features a full-bodied attack with extended sustain. Tighter tuning control with sharper attack.',
-    primaryGenre: 'Jazz',
-    secondaryGenres: ['R&B', 'Blues'],
-    playingSituation: 'Studio work & intimate venues.',
-    recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
+      'Powerful projection with rich overtones and deep lows.',
+    primaryGenre: 'Metal',
+    secondaryGenres: ['Alternative', 'Hard Rock'],
+    playingSituation: 'Stadium shows & high-energy rock gigs.',
+    recordingMic: 'Shure Beta 57A or Earthworks DM20 for crisp attack.',
   },
-
-  '14" - Base Price: $1500-6.5"-10 Lugs-10mm + Re-Rings-Walnut-Mahogany + Cherry':
+  '14" - Base Price: $1500-6.5"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Maple-Maple + Bubinga':
     {
       highlightedCharacteristics:
-        'Dark, warm tone with a deep, resonant low end. Features a full-bodied attack with extended sustain. Tighter tuning control with sharper attack.',
-      primaryGenre: 'Jazz',
-      secondaryGenres: ['R&B', 'Blues'],
-      playingSituation: 'Studio work & intimate venues.',
-      recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
+        'Fast response with bright attack and controlled resonance.',
+      primaryGenre: 'Pop',
+      secondaryGenres: ['Jazz', 'Fusion'],
+      playingSituation: 'Recording studios & dynamic live sets.',
+      recordingMic: 'Neumann U87 or Royer R-121 for smooth detail.',
     },
-
-  '14" - Base Price: $1350-6.5"-8 Lugs-12mm-Walnut-Walnut + Padauk': {
+  '14" - Base Price: $1350-6.5"-8 Lugs-16 - 13mm-Walnut-Mahogany + Cherry': {
     highlightedCharacteristics:
-      'Dark, warm tone with a deep, resonant low end. Features a full-bodied attack with extended sustain. Balanced tuning range with clear projection.',
-    primaryGenre: 'Jazz',
-    secondaryGenres: ['R&B', 'Blues'],
-    playingSituation: 'Studio work & intimate venues.',
-    recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
+      'Rich, full-bodied tone with natural warmth and clarity.',
+    primaryGenre: 'Funk',
+    secondaryGenres: ['Latin', 'Afrobeat'],
+    playingSituation: 'Funk and groove-driven performances.',
+    recordingMic: 'Audix D4 or AKG C214 for deep tone and clarity.',
   },
-
-  '14" - Base Price: $1350-6.5"-10 Lugs-14mm-Walnut-Walnut + Padauk': {
+  '14" - Base Price: $1350-6.5"-10 Lugs-20 - 14mm-Walnut-Mahogany + Cherry': {
     highlightedCharacteristics:
-      'Dark, warm tone with a deep, resonant low end. Features a full-bodied attack with extended sustain. Tighter tuning control with sharper attack.',
-    primaryGenre: 'Jazz',
-    secondaryGenres: ['R&B', 'Blues'],
-    playingSituation: 'Studio work & intimate venues.',
-    recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
+      'Tight and focused snare with quick decay and smooth balance.',
+    primaryGenre: 'Indie',
+    secondaryGenres: ['Country', 'Folk'],
+    playingSituation: 'R&B and neo-soul jam sessions.',
+    recordingMic: 'Shure SM7B or Sennheiser MD421 for strong projection.',
   },
-
-  '14" - Base Price: $1500-6.5"-10 Lugs-10mm + Re-Rings-Walnut-Walnut + Padauk':
+  '14" - Base Price: $1500-6.5"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Walnut-Mahogany + Cherry':
     {
       highlightedCharacteristics:
-        'Dark, warm tone with a deep, resonant low end. Features a full-bodied attack with extended sustain. Tighter tuning control with sharper attack.',
-      primaryGenre: 'Jazz',
-      secondaryGenres: ['R&B', 'Blues'],
-      playingSituation: 'Studio work & intimate venues.',
-      recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
+        'Strong midrange presence, perfect for versatile tuning.',
+      primaryGenre: 'Blues',
+      secondaryGenres: ['Hip-Hop', 'R&B'],
+      playingSituation: 'Experimental and avant-garde compositions.',
+      recordingMic: 'Coles 4038 or Sennheiser e604 for vintage character.',
     },
-
-  '14" - Base Price: $1350-6.5"-8 Lugs-12mm-Walnut-Oak + Wenge': {
+  '14" - Base Price: $1350-6.5"-8 Lugs-16 - 13mm-Walnut-Walnut + Padauk': {
     highlightedCharacteristics:
-      'Dark, warm tone with a deep, resonant low end. Features a full-bodied attack with extended sustain. Balanced tuning range with clear projection.',
-    primaryGenre: 'Jazz',
-    secondaryGenres: ['R&B', 'Blues'],
-    playingSituation: 'Studio work & intimate venues.',
-    recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
+      'Deep resonance with punchy attack and controlled sustain.',
+    primaryGenre: 'Soul',
+    secondaryGenres: ['Neo-Soul', 'Funk'],
+    playingSituation: 'Orchestral and concert hall settings.',
+    recordingMic: 'Earthworks SR25 or Beyerdynamic MC930 for natural presence.',
   },
-
-  '14" - Base Price: $1350-6.5"-10 Lugs-14mm-Walnut-Oak + Wenge': {
+  '14" - Base Price: $1350-6.5"-10 Lugs-20 - 14mm-Walnut-Walnut + Padauk': {
     highlightedCharacteristics:
-      'Dark, warm tone with a deep, resonant low end. Features a full-bodied attack with extended sustain. Tighter tuning control with sharper attack.',
-    primaryGenre: 'Jazz',
-    secondaryGenres: ['R&B', 'Blues'],
-    playingSituation: 'Studio work & intimate venues.',
-    recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
+      'Articulate snare with defined stick response and full projection.',
+    primaryGenre: 'Gospel',
+    secondaryGenres: ['Experimental', 'Ambient'],
+    playingSituation: 'Big band and brass ensemble performances.',
+    recordingMic: 'Royer R-121 or Neumann KM84 for intricate dynamics.',
   },
-
-  '14" - Base Price: $1500-6.5"-10 Lugs-10mm + Re-Rings-Walnut-Oak + Wenge': {
-    highlightedCharacteristics:
-      'Dark, warm tone with a deep, resonant low end. Features a full-bodied attack with extended sustain. Tighter tuning control with sharper attack.',
-    primaryGenre: 'Jazz',
-    secondaryGenres: ['R&B', 'Blues'],
-    playingSituation: 'Studio work & intimate venues.',
-    recordingMic: 'AKG C414 or Beyerdynamic M160 for warmth.',
-  },
-  '14" - Base Price: $1350-6.5"-8 Lugs-12mm-Cherry-Birch + Maple': {
-    highlightedCharacteristics:
-      'Bright attack with a controlled midrange and crisp highs. Features a full-bodied attack with extended sustain. Balanced tuning range with clear projection.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Funk', 'Latin'],
-    playingSituation: 'Fast-paced, energetic playing styles.',
-    recordingMic: 'Earthworks SR25 or Sennheiser e604 for clarity.',
-  },
-
-  '14" - Base Price: $1350-6.5"-10 Lugs-14mm-Cherry-Birch + Maple': {
-    highlightedCharacteristics:
-      'Bright attack with a controlled midrange and crisp highs. Features a full-bodied attack with extended sustain. Tighter tuning control with sharper attack.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Funk', 'Latin'],
-    playingSituation: 'Fast-paced, energetic playing styles.',
-    recordingMic: 'Earthworks SR25 or Sennheiser e604 for clarity.',
-  },
-
-  '14" - Base Price: $1500-6.5"-10 Lugs-10mm + Re-Rings-Cherry-Birch + Maple': {
-    highlightedCharacteristics:
-      'Bright attack with a controlled midrange and crisp highs. Features a full-bodied attack with extended sustain. Tighter tuning control with sharper attack.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Funk', 'Latin'],
-    playingSituation: 'Fast-paced, energetic playing styles.',
-    recordingMic: 'Earthworks SR25 or Sennheiser e604 for clarity.',
-  },
-
-  '14" - Base Price: $1350-6.5"-8 Lugs-12mm-Cherry-Zebrawood + Mahogany': {
-    highlightedCharacteristics:
-      'Bright attack with a controlled midrange and crisp highs. Features a full-bodied attack with extended sustain. Balanced tuning range with clear projection.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Funk', 'Latin'],
-    playingSituation: 'Fast-paced, energetic playing styles.',
-    recordingMic: 'Earthworks SR25 or Sennheiser e604 for clarity.',
-  },
-
-  '14" - Base Price: $1350-6.5"-10 Lugs-14mm-Cherry-Zebrawood + Mahogany': {
-    highlightedCharacteristics:
-      'Bright attack with a controlled midrange and crisp highs. Features a full-bodied attack with extended sustain. Tighter tuning control with sharper attack.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Funk', 'Latin'],
-    playingSituation: 'Fast-paced, energetic playing styles.',
-    recordingMic: 'Earthworks SR25 or Sennheiser e604 for clarity.',
-  },
-
-  '14" - Base Price: $1500-6.5"-10 Lugs-10mm + Re-Rings-Cherry-Zebrawood + Mahogany':
+  '14" - Base Price: $1500-6.5"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Walnut-Walnut + Padauk':
     {
       highlightedCharacteristics:
-        'Bright attack with a controlled midrange and crisp highs. Features a full-bodied attack with extended sustain. Tighter tuning control with sharper attack.',
+        'Dynamic and expressive, with controlled high-end presence.',
       primaryGenre: 'Fusion',
-      secondaryGenres: ['Funk', 'Latin'],
-      playingSituation: 'Fast-paced, energetic playing styles.',
-      recordingMic: 'Earthworks SR25 or Sennheiser e604 for clarity.',
+      secondaryGenres: ['Progressive Rock'],
+      playingSituation: 'Gospel choirs and church worship sessions.',
+      recordingMic: 'Audix i5 or AKG C414 for precise transients.',
     },
-
-  '14" - Base Price: $1350-6.5"-8 Lugs-12mm-Cherry-Padauk + Ash': {
+  '14" - Base Price: $1350-6.5"-8 Lugs-16 - 13mm-Walnut-Oak + Wenge': {
     highlightedCharacteristics:
-      'Bright attack with a controlled midrange and crisp highs. Features a full-bodied attack with extended sustain. Balanced tuning range with clear projection.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Funk', 'Latin'],
-    playingSituation: 'Fast-paced, energetic playing styles.',
-    recordingMic: 'Earthworks SR25 or Sennheiser e604 for clarity.',
+      'Crisp attack with balanced sustain, ideal for tight articulation.',
+    primaryGenre: 'Rock',
+    secondaryGenres: ['Pop', 'Indie'],
+    playingSituation: 'Live performances & studio recordings.',
+    recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
   },
-
-  '14" - Base Price: $1350-6.5"-10 Lugs-14mm-Cherry-Padauk + Ash': {
+  '14" - Base Price: $1350-6.5"-10 Lugs-20 - 14mm-Walnut-Oak + Wenge': {
     highlightedCharacteristics:
-      'Bright attack with a controlled midrange and crisp highs. Features a full-bodied attack with extended sustain. Tighter tuning control with sharper attack.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Funk', 'Latin'],
-    playingSituation: 'Fast-paced, energetic playing styles.',
-    recordingMic: 'Earthworks SR25 or Sennheiser e604 for clarity.',
+      'Warm, vintage-inspired sound with excellent midrange depth.',
+    primaryGenre: 'Jazz',
+    secondaryGenres: ['Blues', 'Soul'],
+    playingSituation: 'Intimate jazz clubs & acoustic sessions.',
+    recordingMic: 'Beyerdynamic M201 TG or AKG C414 for warm articulation.',
   },
-
-  '14" - Base Price: $1500-6.5"-10 Lugs-10mm + Re-Rings-Cherry-Padauk + Ash': {
+  '14" - Base Price: $1500-6.5"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Walnut-Oak + Wenge':
+    {
+      highlightedCharacteristics:
+        'Powerful projection with rich overtones and deep lows.',
+      primaryGenre: 'Metal',
+      secondaryGenres: ['Alternative', 'Hard Rock'],
+      playingSituation: 'Stadium shows & high-energy rock gigs.',
+      recordingMic: 'Shure Beta 57A or Earthworks DM20 for crisp attack.',
+    },
+  '14" - Base Price: $1350-6.5"-8 Lugs-16 - 13mm-Cherry-Birch + Maple': {
     highlightedCharacteristics:
-      'Bright attack with a controlled midrange and crisp highs. Features a full-bodied attack with extended sustain. Tighter tuning control with sharper attack.',
-    primaryGenre: 'Fusion',
-    secondaryGenres: ['Funk', 'Latin'],
-    playingSituation: 'Fast-paced, energetic playing styles.',
-    recordingMic: 'Earthworks SR25 or Sennheiser e604 for clarity.',
+      'Fast response with bright attack and controlled resonance.',
+    primaryGenre: 'Pop',
+    secondaryGenres: ['Jazz', 'Fusion'],
+    playingSituation: 'Recording studios & dynamic live sets.',
+    recordingMic: 'Neumann U87 or Royer R-121 for smooth detail.',
   },
+  '14" - Base Price: $1350-6.5"-10 Lugs-20 - 14mm-Cherry-Birch + Maple': {
+    highlightedCharacteristics:
+      'Rich, full-bodied tone with natural warmth and clarity.',
+    primaryGenre: 'Funk',
+    secondaryGenres: ['Latin', 'Afrobeat'],
+    playingSituation: 'Funk and groove-driven performances.',
+    recordingMic: 'Audix D4 or AKG C214 for deep tone and clarity.',
+  },
+  '14" - Base Price: $1500-6.5"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Cherry-Birch + Maple':
+    {
+      highlightedCharacteristics:
+        'Tight and focused snare with quick decay and smooth balance.',
+      primaryGenre: 'Indie',
+      secondaryGenres: ['Country', 'Folk'],
+      playingSituation: 'R&B and neo-soul jam sessions.',
+      recordingMic: 'Shure SM7B or Sennheiser MD421 for strong projection.',
+    },
+  '14" - Base Price: $1350-6.5"-8 Lugs-16 - 13mm-Cherry-Zebrawood + Mahogany': {
+    highlightedCharacteristics:
+      'Strong midrange presence, perfect for versatile tuning.',
+    primaryGenre: 'Blues',
+    secondaryGenres: ['Hip-Hop', 'R&B'],
+    playingSituation: 'Experimental and avant-garde compositions.',
+    recordingMic: 'Coles 4038 or Sennheiser e604 for vintage character.',
+  },
+  '14" - Base Price: $1350-6.5"-10 Lugs-20 - 14mm-Cherry-Zebrawood + Mahogany':
+    {
+      highlightedCharacteristics:
+        'Deep resonance with punchy attack and controlled sustain.',
+      primaryGenre: 'Soul',
+      secondaryGenres: ['Neo-Soul', 'Funk'],
+      playingSituation: 'Orchestral and concert hall settings.',
+      recordingMic:
+        'Earthworks SR25 or Beyerdynamic MC930 for natural presence.',
+    },
+  '14" - Base Price: $1500-6.5"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Cherry-Zebrawood + Mahogany':
+    {
+      highlightedCharacteristics:
+        'Articulate snare with defined stick response and full projection.',
+      primaryGenre: 'Gospel',
+      secondaryGenres: ['Experimental', 'Ambient'],
+      playingSituation: 'Big band and brass ensemble performances.',
+      recordingMic: 'Royer R-121 or Neumann KM84 for intricate dynamics.',
+    },
+  '14" - Base Price: $1350-6.5"-8 Lugs-16 - 13mm-Cherry-Padauk + Ash': {
+    highlightedCharacteristics:
+      'Dynamic and expressive, with controlled high-end presence.',
+    primaryGenre: 'Fusion',
+    secondaryGenres: ['Progressive Rock'],
+    playingSituation: 'Gospel choirs and church worship sessions.',
+    recordingMic: 'Audix i5 or AKG C414 for precise transients.',
+  },
+  '14" - Base Price: $1350-6.5"-10 Lugs-20 - 14mm-Cherry-Padauk + Ash': {
+    highlightedCharacteristics:
+      'Crisp attack with balanced sustain, ideal for tight articulation.',
+    primaryGenre: 'Rock',
+    secondaryGenres: ['Pop', 'Indie'],
+    playingSituation: 'Live performances & studio recordings.',
+    recordingMic: 'Shure SM57 or Neumann KM184 for balanced response.',
+  },
+  '14" - Base Price: $1500-6.5"-10 Lugs-10 - 10mm + Re-Rings + $150 (Re-Rings Required)-Cherry-Padauk + Ash':
+    {
+      highlightedCharacteristics:
+        'Warm, vintage-inspired sound with excellent midrange depth.',
+      primaryGenre: 'Jazz',
+      secondaryGenres: ['Blues', 'Soul'],
+      playingSituation: 'Intimate jazz clubs & acoustic sessions.',
+      recordingMic: 'Beyerdynamic M201 TG or AKG C414 for warm articulation.',
+    },
 };
 
 export default feuzonSummaries;
