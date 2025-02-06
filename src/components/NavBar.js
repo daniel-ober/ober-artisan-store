@@ -124,11 +124,25 @@ const NavBar = () => {
       </div>
 
       {isMobileView && (
-        <button className="navbar-menu-container" onClick={toggleMenu} aria-expanded={isMenuOpen} aria-label="Toggle menu" ref={buttonRef}>
+        <button
+          className="navbar-menu-container"
+          onClick={toggleMenu}
+          aria-expanded={isMenuOpen}
+          aria-label="Toggle menu"
+          ref={buttonRef}
+        >
           <img
-            src={isDarkMode ? "/menu/menu-button-dark-mode.png" : "/menu/menu-button-light-mode.png"}
+            src={
+              isDarkMode
+                ? isMenuOpen
+                  ? '/menu/close-button-dark-mode.png'
+                  : '/menu/menu-button-dark-mode.png'
+                : isMenuOpen
+                ? '/menu/close-button-light-mode.png'
+                : '/menu/menu-button-light-mode.png'
+            }
             alt="Menu Toggle"
-            className={`menu-arrow-icon ${isMenuOpen ? "open" : ""}`}
+            className={`menu-arrow-icon ${isMenuOpen ? 'open' : ''}`}
           />
         </button>
       )}

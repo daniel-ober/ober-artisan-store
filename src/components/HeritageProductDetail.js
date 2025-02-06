@@ -3,7 +3,7 @@ import SpiderChart from "./SpiderChart";
 import BarChart from "./BarChart";
 import heritageSummaries from "../data/heritageSummaries"; // Ensure the import is correct
 import "./HeritageProductDetail.css";
-
+ 
 const HeritageProductDetail = () => {
   const [size, setSize] = useState("12");
   const [depth, setDepth] = useState("5.0");
@@ -13,12 +13,7 @@ const HeritageProductDetail = () => {
   const [selectedDrumSummary, setSelectedDrumSummary] = useState({});
   const reRingCost = 150;
 
-  // 🔄 Base Pricing for Each Size & Depth
-  const basePrices = {
-    "12": 850,
-    "13": 950,
-    "14": 1050,
-  };
+  const basePrices = { "12": 850, "13": 950, "14": 1050 };
 
   const depthPrices = {
     "12": { "5.0": 0, "6.0": 100, "7.0": 200 },
@@ -26,7 +21,6 @@ const HeritageProductDetail = () => {
     "14": { "5.5": 0, "6.0": 50, "6.5": 100 },
   };
 
-  // 🔄 Stave Quantity & Shell Thickness (ONLY 14" 10-STAVE HAS RE-RINGS)
   const staveOptions = {
     "12": { "6": ["12 - 10mm"], "8": ["16 - 13mm"] },
     "13": { "8": ["16 - 12mm"] },

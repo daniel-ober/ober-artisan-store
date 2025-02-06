@@ -149,73 +149,111 @@ body.light .navbar-menu-container:hover {
 
 /* Mobile View Styles */
 @media (max-width: 767px) {
-  .navbar {
-    padding: 20px;
-  }
-
-  .navbar-menu-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* 🔥 Ensure Mobile Navbar Links are White in Light Mode */
-  body.light .navbar-links .nav-link {
-    color: white !important;
-  }
-
-  .navbar-links {
+  .artisanseries-container {
+    scroll-snap-type: none; /* Disable snap scrolling */
+    background-color: #f4f4f4;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
-    position: absolute;
-    top: 100%;
-    left: 0;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 2000;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease-in-out;
   }
 
-  .navbar-links.open {
-    max-height: 1200px;
-    background-color: rgba(20, 20, 20, 0.995);
-    padding: 20px 0px 20px 0px;
+  /* 🏆 Full-width logo/title section */
+  .logo-container {
+    width: 100%;
+    text-align: center;
+    padding: 2vh 0;
   }
 
-  /* Hover & Active States */
-  .nav-link.active,
-  .nav-link:hover {
-    color: #69b0fc;
+  .logo-container img {
+    width: 85%;
+    max-width: 500px;
+    height: auto;
   }
 
-  .cart-preview-container {
-    top: 100px;
-    width: 25%;
-    transform: translateX(50%);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  /* 📸 Image between header and text */
+  .drum-layer {
+    width: 100%;
+    text-align: center;
+    padding: 2vh 0;
+  }
+
+  .drum-layer img {
+    width: 92%;
+    max-width: 600px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  /* 🔹 Full-width text/description section */
+  .text-layer {
+    width: 100%;
+    padding: 3vh 6vw;
+    background-color: white;
+    text-align: center;
+  }
+
+  .text-layer .header-image {
+    max-width: 250px;
+    margin: 0 auto 10px;
+  }
+
+  .text-layer .description {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    color: #222;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  /* 📝 Full-width specs section */
+  .drum-specs {
+    width: 100%;
+    padding: 3vh 6vw;
+    background-color: white;
+    text-align: left;
+  }
+
+  .drum-specs ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .drum-specs li {
+    margin-bottom: 8px;
+    font-size: 1rem;
+    color: #444;
+  }
+
+  .drum-specs li strong {
+    color: black;
   }
 }
 
-/* Desktop View */
-@media (min-width: 768px) {
-  .navbar-links {
-    display: flex;
-    justify-content: center;
+/* For Ultra-Small Devices */
+@media (max-width: 480px) {
+  .logo-container img {
+    width: 80%;
   }
-}
 
-/* 🔥 Fade In Animation for Cart */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-15px);
+  .text-layer {
+    padding: 2vh 5vw;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  .text-layer .header-image {
+    max-width: 220px;
+  }
+
+  .text-layer .description {
+    font-size: 0.9rem;
+  }
+
+  .drum-layer img {
+    width: 95%;
+    max-width: 400px;
   }
 }
