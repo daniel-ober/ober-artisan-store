@@ -121,7 +121,7 @@ const shellThickness = [
       },
   },
   {
-    thickness: '12mm',
+    thickness: '13mm',
     soundProfile: {
       attack: 10,     // Extremely sharp attack, fast response.
       sustain: 4,     // Minimal sustain, very dry sound.
