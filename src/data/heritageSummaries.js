@@ -1,4 +1,25 @@
 const drumSummaries = {
+  pricingOptions: [
+    { size: "12", depth: "5.0", price: 850, reRing: false, stripePriceId: "price_1QqE9RJbbx8jAR4NFB2ylNbg", lugQuantity: 6, staveQuantity: 12 },
+    { size: "12", depth: "6.0", price: 950, reRing: false, stripePriceId: "price_1QqEA6Jbbx8jAR4NmqWTicxj", lugQuantity: 6, staveQuantity: 12 },
+    { size: "12", depth: "7.0", price: 1050, reRing: false, stripePriceId: "price_1QqEAjJbbx8jAR4NBY5GeDDm", lugQuantity: 6, staveQuantity: 12 },
+    { size: "12", depth: "5.0", price: 850, reRing: false, stripePriceId: "price_1Qq1tBJbbx8jAR4Nlw66VQ8l", lugQuantity: 8, staveQuantity: 16 },
+    { size: "12", depth: "6.0", price: 950, reRing: false, stripePriceId: "price_1Qq1tBJbbx8jAR4NUFalgpwz", lugQuantity: 8, staveQuantity: 16 },
+    { size: "12", depth: "7.0", price: 1050, reRing: false, stripePriceId: "price_1Qq1tBJbbx8jAR4N42tqp0sn", lugQuantity: 8, staveQuantity: 16 },
+    { size: "13", depth: "5.0", price: 950, reRing: false, stripePriceId: "price_1Qq1tBJbbx8jAR4NoIC5v94V", lugQuantity: 8, staveQuantity: 16 },
+    { size: "13", depth: "6.0", price: 1050, reRing: false, stripePriceId: "price_1Qq1tBJbbx8jAR4NvYqEyQMp", lugQuantity: 8, staveQuantity: 16 },
+    { size: "13", depth: "7.0", price: 1150, reRing: false, stripePriceId: "price_1Qq1tBJbbx8jAR4NmIIxMO71", lugQuantity: 8, staveQuantity: 16 },
+    { size: "14", depth: "5.0", price: 1050, reRing: false, stripePriceId: "price_1Qq1tBJbbx8jAR4NISOntCBC", lugQuantity: 8, staveQuantity: 16 },
+    { size: "14", depth: "6.0", price: 1150, reRing: false, stripePriceId: "price_1Qq1tBJbbx8jAR4NYQtL5Y9m", lugQuantity: 8, staveQuantity: 16 },
+    { size: "14", depth: "7.0", price: 1250, reRing: false, stripePriceId: "price_1Qq1tBJbbx8jAR4Nn9EnI9CO", lugQuantity: 8, staveQuantity: 16 },
+    { size: "14", depth: "5.0", price: 1050, reRing: false, stripePriceId: "price_1QqE0YJbbx8jAR4NfRmJh5q4", lugQuantity: 10, staveQuantity: 20 },
+    { size: "14", depth: "6.0", price: 1150, reRing: false, stripePriceId: "price_1QqE2WJbbx8jAR4NcNG4RQBo", lugQuantity: 10, staveQuantity: 20 },
+    { size: "14", depth: "7.0", price: 1250, reRing: false, stripePriceId: "price_1QqE3WJbbx8jAR4NPX9BjZWu", lugQuantity: 10, staveQuantity: 20 },
+    { size: "14", depth: "5.0", price: 1200, reRing: true, stripePriceId: "price_1Qq1ueJbbx8jAR4NZryJpAiN", lugQuantity: 10, staveQuantity: 10 },
+    { size: "14", depth: "6.0", price: 1300, reRing: true, stripePriceId: "price_1Qq1ueJbbx8jAR4NwJh6F2qV", lugQuantity: 10, staveQuantity: 10 },
+    { size: "14", depth: "7.0", price: 1400, reRing: true, stripePriceId: "price_1Qq1ueJbbx8jAR4NVBiDmecT", lugQuantity: 10, staveQuantity: 10 },
+
+],
   // **12" Snares**
   '12" - Base Price: $850-5.0"-6 Lugs-10mm': {
     highlightedCharacteristics: "Bright, cutting attack with tight control. Ideal for high-energy, fast-paced playing.",
@@ -44,21 +65,21 @@ const drumSummaries = {
   },
 
   // **13" Snares**
-  '13" - Base Price: $950-5.0"-8 Lugs-13mm': {
+  '13" - Base Price: $950-5.0"-8 Lugs-12mm': {
     highlightedCharacteristics: "Crisp, articulate snare with a tight, punchy response.",
     primaryGenre: "Funk",
     secondaryGenres: ["Pop", "Fusion", "Indie Rock"],
     playingSituation: "Small Clubs & Live Sessions",
     recordingMic: "Shure Beta 57A or AKG C414 for enhanced snap.",
   },
-  '13" - Base Price: $1050-6.0"-8 Lugs-13mm': {
+  '13" - Base Price: $1050-6.0"-8 Lugs-12mm': {
     highlightedCharacteristics: "Fast attack with balanced sustain and midrange warmth.",
     primaryGenre: "Fusion",
     secondaryGenres: ["Jazz", "Gospel"],
     playingSituation: "Studio & Medium Venues",
     recordingMic: "Audix i5 or Earthworks SR25 for clarity.",
   },
-  '13" - Base Price: $1150-7.0"-8 Lugs-13mm': {
+  '13" - Base Price: $1150-7.0"-8 Lugs-12mm': {
     highlightedCharacteristics: "Tight articulation with added depth and warmth.",
     primaryGenre: "Hip-Hop",
     secondaryGenres: ["Neo-Soul", "Pop"],
@@ -67,63 +88,63 @@ const drumSummaries = {
   },
 
   // **14" Snares**
-  '14" - Base Price: $1050-5.5"-8 Lugs-13mm': {
+  '14" - Base Price: $1050-5.0"-8 Lugs-12mm': {
     highlightedCharacteristics: "Balanced warmth with smooth articulation and even sustain.",
     primaryGenre: "Singer-Songwriter",
     secondaryGenres: ["Blues", "Indie", "Country"],
     playingSituation: "Recording Studios & Unplugged Sessions",
     recordingMic: "Neumann U87 for warmth & transparency.",
   },
-  '14" - Base Price: $1100-6.0"-8 Lugs-13mm': {
+  '14" - Base Price: $1150-6.0"-8 Lugs-12mm': {
     highlightedCharacteristics: "Full, rich tone with strong midrange clarity and versatility.",
     primaryGenre: "Classic Rock",
     secondaryGenres: ["Country", "Indie"],
     playingSituation: "Studio & Live Gigs",
     recordingMic: "Shure SM7B or Royer R-121 for smooth response.",
   },
-  '14" - Base Price: $1150-6.5"-8 Lugs-13mm': {
+  '14" - Base Price: $1250-7.0"-8 Lugs-12mm': {
     highlightedCharacteristics: "Deep, resonant projection with a smooth, controlled attack.",
     primaryGenre: "Metal",
     secondaryGenres: ["Hard Rock", "Progressive Rock"],
     playingSituation: "Arena Performances & High-Energy Sessions",
     recordingMic: "Beyerdynamic M201 TG or Sennheiser MD421 for aggressive tone.",
   },
-  '14" - Base Price: $1050-5.5"-10 Lugs-14mm': {
+  '14" - Base Price: $1050-5.0"-10 Lugs-14mm': {
     highlightedCharacteristics: "Powerful, full-bodied snare with deep lows and controlled sustain.",
     primaryGenre: "Rock",
     secondaryGenres: ["Hard Rock", "Alternative"],
     playingSituation: "Large Venues & Studio Recording",
     recordingMic: "Shure SM57 or Beyerdynamic M201 TG for punchy sound.",
   },
-  '14" - Base Price: $1100-6.0"-10 Lugs-14mm': {
+  '14" - Base Price: $1150-6.0"-10 Lugs-14mm': {
     highlightedCharacteristics: "Louder projection with a deep, commanding sound signature.",
     primaryGenre: "Hard Rock",
     secondaryGenres: ["Metal", "Alternative"],
     playingSituation: "Stadium & Large Venue Performances",
     recordingMic: "Audix D4 for deep tone & presence.",
   },
-  '14" - Base Price: $1150-6.5"-10 Lugs-14mm': {
+  '14" - Base Price: $1250-7.0"-10 Lugs-14mm': {
     highlightedCharacteristics: "Bold, full-bodied, and powerful. Delivers rich depth with crisp highs.",
     primaryGenre: "Metal",
     secondaryGenres: ["Progressive Rock", "Punk"],
     playingSituation: "Arena Performances & High-Energy Sessions",
     recordingMic: "Shure Beta 52A or Earthworks DM20 for aggressive attack.",
   },
-  '14" - Base Price: $1200-5.5"-10 Lugs-7mm': {
+  '14" - Base Price: $1200-5.0"-10 Lugs-7mm': {
     highlightedCharacteristics: "Deep, resonant projection with a controlled response.",
     primaryGenre: "Orchestral",
     secondaryGenres: ["Big Band", "Contemporary Jazz"],
     playingSituation: "Concert Halls & Studio Recordings",
     recordingMic: "Royer R-121 or Neumann KM84 for detail.",
   },
-  '14" - Base Price: $1250-6.0"-10 Lugs-7mm': {
+  '14" - Base Price: $1300-6.0"-10 Lugs-7mm': {
     highlightedCharacteristics: "Enhanced low-end warmth with precision control.",
     primaryGenre: "Big Band Jazz",
     secondaryGenres: ["Symphonic", "Contemporary Jazz"],
     playingSituation: "Large Ensemble & Studio Work",
     recordingMic: "Neumann U87 for warmth & balance.",
   },
-  '14" - Base Price: $1300-6.5"-10 Lugs-7mm': {
+  '14" - Base Price: $1400-7.0"-10 Lugs-7mm': {
     highlightedCharacteristics: "Maximum resonance with deep, complex sustain.",
     primaryGenre: "Orchestral",
     secondaryGenres: ["Contemporary Jazz", "Experimental"],
