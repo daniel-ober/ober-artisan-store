@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import SpiderChart from "./SpiderChart";
 import BarChart from "./BarChart";
 import heritageSummaries from "../data/heritageSummaries"; // Ensure the import is correct
+import { useCart } from "../context/CartContext"; // ✅ Use Context API
 import "./HeritageProductDetail.css";
- 
+
 const HeritageProductDetail = () => {
   const [size, setSize] = useState("12");
   const [depth, setDepth] = useState("5.0");
@@ -18,7 +19,7 @@ const HeritageProductDetail = () => {
   const depthPrices = {
     "12": { "5.0": 0, "6.0": 100, "7.0": 200 },
     "13": { "5.0": 0, "6.0": 100, "7.0": 200 },
-    "14": { "5.5": 0, "6.0": 50, "6.5": 100 },
+    "14": { "5.0": 0, "6.0": 100, "7.0": 200 },
   };
 
   const staveOptions = {
@@ -44,6 +45,81 @@ const HeritageProductDetail = () => {
     warmth: 7,
     projection: 8
   });
+
+  // ✅ Use Cart Context
+  const { addToCart } = useCart(); 
+
+  const handleAddToCart = () => {
+    console.log("🛒 Add to Cart Clicked");
+
+    if (!size || !depth) {
+        console.error("❌ Missing selection: Size or Depth not chosen");
+        return;
+    }
+
+    const normalizedSize = String(size).trim();
+    const normalizedDepth = String(depth).trim();
+
+    // ✅ More reliable way to check if Re-Rings are required
+    const hasReRing = staveOption.includes("Re-Rings") || staveOption.includes("+ $150");
+
+    console.log("🔍 Searching for:", { size: normalizedSize, depth: normalizedDepth, reRing: hasReRing });
+
+    if (!heritageSummaries.pricingOptions) {
+        console.error("❌ Error: pricingOptions is missing or undefined in heritageSummaries");
+        return;
+    }
+
+    // ✅ Find the correct pricing option
+    const selectedOption = heritageSummaries.pricingOptions.find(option =>
+        String(option.size).trim() === normalizedSize &&
+        String(option.depth).trim() === normalizedDepth &&
+        option.reRing === hasReRing
+    );
+
+    if (!selectedOption) {
+        console.error("❌ No matching pricing option found for:", { size: normalizedSize, depth: normalizedDepth, reRing: hasReRing });
+        console.log("Available options:", heritageSummaries.pricingOptions);
+        return;
+    }
+
+    console.log("✅ Selected Pricing Option:", selectedOption);
+
+   // ✅ Extract lugQuantity and staveQuantity safely
+const lugQuantity = selectedOption.lugQuantity !== undefined ? selectedOption.lugQuantity : (Number(lugs) || 6);
+const staveQuantity = selectedOption.staveQuantity !== undefined ? selectedOption.staveQuantity : (Number(staveOption.split(" - ")[0]) || 12);
+
+    // ✅ Generate a **proper** unique ID for this variant
+    const uniqueItemId = `${selectedOption.stripePriceId}-${normalizedSize}-${normalizedDepth}-${hasReRing}-${lugQuantity}-${staveQuantity}`;
+
+    // ✅ Format the cart item correctly
+    const cartItem = {
+        id: uniqueItemId,
+        productId: "heritage",
+        name: "HERÌTAGE Series Snare Drum",
+        size: normalizedSize,
+        depth: normalizedDepth,
+        reRing: hasReRing,
+        lugQuantity,
+        staveQuantity,
+        price: selectedOption.price,
+        stripePriceId: selectedOption.stripePriceId,
+        quantity: 1
+    };
+
+    console.log("🛒 Cart Item Data:", cartItem);
+
+    // ✅ Add to cart using Context API
+    addToCart(cartItem);
+    console.log("🔎 Debugging Unique ID:", {
+      stripePriceId: selectedOption.stripePriceId,
+      size: normalizedSize,
+      depth: normalizedDepth,
+      reRing: hasReRing,
+      lugQuantity,
+      staveQuantity
+  });
+};
 
   useEffect(() => {
     let newPrice = basePrices[size];
@@ -102,7 +178,6 @@ const HeritageProductDetail = () => {
       setSelectedDrumSummary({});
     }
   }, [size, depth, lugs, staveOption]);
-  
 
   const handleSizeChange = (e) => {
     const newSize = e.target.value;
@@ -204,7 +279,7 @@ const HeritageProductDetail = () => {
           <h3>Total Price: ${totalPrice}</h3>
 
           {/* Add to Cart */}
-          <button>Add to Cart</button>
+          <button onClick={handleAddToCart}>Add to Cart</button>
         </div>
       </div>
 
@@ -231,8 +306,8 @@ const HeritageProductDetail = () => {
       </div>
 
       {/* 📌 Sound Profile Charts */}
-      <SpiderChart data={[soundProfile.projection, soundProfile.sustain, soundProfile.brightness, soundProfile.warmth, soundProfile.attack]} />
-      <BarChart data={soundProfile} />
+      {/* <SpiderChart data={[soundProfile.projection, soundProfile.sustain, soundProfile.brightness, soundProfile.warmth, soundProfile.attack]} />
+      <BarChart data={soundProfile} /> */}
     </div>
   );
 };

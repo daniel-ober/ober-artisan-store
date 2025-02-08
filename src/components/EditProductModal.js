@@ -1,7 +1,6 @@
-// src/components/EditProductModal.js
 import React, { useState, useEffect } from 'react';
 import { fetchProductById, updateProduct } from '../services/productService';
-import { updateStripeProduct, fetchStripePrices } from '../services/stripeService';
+import { createStripeProduct, createStripePrice, updateStripeProductWithPrices, fetchStripePrices } from '../services/stripeService';
 import './EditProductModal.css';
 
 const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
@@ -37,28 +36,61 @@ const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
     isPreOrder: false,
   });
 
-  const [imageFiles, setImageFiles] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [pricingOptions, setPricingOptions] = useState([]);
   const [stripePrices, setStripePrices] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const loadProduct = async () => {
       try {
+        setLoading(true);
+        setError("");
+
         const fetchedProduct = await fetchProductById(productId);
         setProduct(fetchedProduct);
 
-        if (fetchedProduct.stripeProductId) {
-          const prices = await fetchStripePrices(fetchedProduct.stripeProductId);
-          setStripePrices(prices);
+        let firestorePricingOptions = fetchedProduct.pricingOptions || [];
+        let stripePricingOptions = [];
+
+        if (["HERÌTAGE", "FEUZØN", "SOUNDLEGEND"].includes(fetchedProduct.name)) {
+          if (fetchedProduct.stripeProductId) {
+            const stripePrices = await fetchStripePrices(fetchedProduct.stripeProductId);
+
+            if (stripePrices.length > 0) {
+              stripePricingOptions = stripePrices.map((price) => ({
+                size: "",
+                depth: "",
+                reRing: false,
+                price: price.unit_amount / 100,
+                stripePriceId: price.id,
+              }));
+            }
+          }
         }
+
+        const mergedPricingOptions = firestorePricingOptions.map((firestoreOption) => {
+          const matchingStripePrice = stripePricingOptions.find(
+            (stripeOption) => stripeOption.stripePriceId === firestoreOption.stripePriceId
+          );
+          return matchingStripePrice ? { ...firestoreOption, price: matchingStripePrice.price } : firestoreOption;
+        });
+
+        stripePricingOptions.forEach((stripeOption) => {
+          if (!mergedPricingOptions.find((option) => option.stripePriceId === stripeOption.stripePriceId)) {
+            mergedPricingOptions.push(stripeOption);
+          }
+        });
+
+        setPricingOptions(mergedPricingOptions);
       } catch (err) {
-        setError('Failed to load product details.');
+        setError("Failed to load product details.");
       } finally {
         setLoading(false);
       }
     };
+
     loadProduct();
   }, [productId]);
 
@@ -70,46 +102,83 @@ const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
     }));
   };
 
-  const handleWoodSpeciesChange = (e) => {
-    const selectedOptions = Array.from(e.target.selectedOptions).map((opt) => opt.value);
-    setProduct((prevProduct) => ({
-      ...prevProduct,
-      woodSpecies: selectedOptions,
-    }));
+  const handlePriceOptionChange = (index, field, value) => {
+    const updatedOptions = [...pricingOptions];
+    updatedOptions[index][field] = value;
+    setPricingOptions(updatedOptions);
+  };
+
+  const addPriceOption = () => {
+    setPricingOptions([
+      ...pricingOptions,
+      { size: "", depth: "", reRing: false, price: 0, stripePriceId: "" },
+    ]);
+  };
+
+  const removePriceOption = (index) => {
+    setPricingOptions(pricingOptions.filter((_, i) => i !== index));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+  
     try {
-      await updateProduct(productId, product);
-
-      if (product.name || product.price) {
-        await updateStripeProduct(
-          product.stripeProductId,
+      console.log("🔄 Updating product in Firestore...");
+  
+      let stripeProductId = product.stripeProductId;
+  
+      // ✅ Step 1: Ensure Stripe Product Exists
+      if (!stripeProductId) {
+        console.log("⚠️ No Stripe Product ID found. Creating a new Stripe product...");
+  
+        const newStripeProduct = await createStripeProduct(
           product.name,
           product.description,
-          product.images,
-          product.price,
-          product.stripePriceId
+          product.images
         );
+  
+        if (!newStripeProduct || !newStripeProduct.id) {
+          throw new Error("❌ Failed to create Stripe product.");
+        }
+  
+        stripeProductId = newStripeProduct.id;
+        console.log(`✅ Created Stripe Product: ${stripeProductId}`);
+  
+        // ✅ Update Firestore with the new Stripe Product ID
+        await updateProduct(productId, { ...product, stripeProductId });
       }
-
-      onProductUpdated(product);
+  
+      // ✅ Step 2: Update or Create Stripe Prices
+      const updatedPricingOptions = await Promise.all(
+        pricingOptions.map(async (option) => {
+          if (option.stripePriceId) {
+            console.log(`🔄 Updating existing Stripe price: ${option.stripePriceId}`);
+            return option; // Keep existing price ID
+          } else {
+            console.log(`➕ Creating new Stripe price for:`, option);
+            const newStripePrice = await createStripePrice(stripeProductId, option.price * 100);
+            return { ...option, stripePriceId: newStripePrice.id };
+          }
+        })
+      );
+  
+      // ✅ Step 3: Save Updated Product to Firestore
+      const updatedProduct = { ...product, pricingOptions: updatedPricingOptions, stripeProductId };
+      await updateProduct(productId, updatedProduct);
+      console.log("✅ Product updated in Firestore with Stripe Prices:", updatedProduct);
+  
+      onProductUpdated(updatedProduct);
       onClose();
     } catch (err) {
-      setError('Failed to update product.');
+      console.error("❌ Failed to update product:", err);
+      setError(err.message || "Failed to update product.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
   if (loading) return <div>Loading...</div>;
-
-  const drumTypes = ['Snare', 'Piccolo', 'Tom', 'Bass Drum', 'Floor Tom'];
-  const constructionTypes = ['Stave', 'Ply', 'Steam Bent', 'Hybrid'];
-  const hardwareColors = ['Chrome', 'Black Nickel', 'Gold'];
-  const finishes = ['Gloss', 'Matte', 'Satin', 'Natural'];
 
   return (
     <div className="modal-overlay">
@@ -118,174 +187,74 @@ const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
         {error && <div className="error-message">{error}</div>}
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="category">Category</label>
-            <select
-              id="category"
-              name="category"
-              value={product.category}
-              onChange={handleInputChange}
-              required
-            >
-              <option value="artisan">Artisan</option>
-              <option value="merch">Merch</option>
-              <option value="accessories">Accessories</option>
-            </select>
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="isPreOrder">Set as Pre-Order</label>
-            <input
-              id="isPreOrder"
-              type="checkbox"
-              name="isPreOrder"
-              checked={product.isPreOrder}
-              onChange={(e) =>
-                setProduct((prevProduct) => ({ ...prevProduct, isPreOrder: e.target.checked }))
-              }
-            />
-          </div>
-
-          <div className="form-group">
             <label htmlFor="name">Product Name</label>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              value={product.name}
-              onChange={handleInputChange}
-              required
-            />
+            <input id="name" name="name" type="text" value={product.name} onChange={handleInputChange} required />
           </div>
 
           <div className="form-group">
-            <label htmlFor="price">Price (USD)</label>
-            <input
-              id="price"
-              name="price"
-              type="number"
-              value={product.price}
-              onChange={handleInputChange}
-              step="0.01"
-              min="0"
-              required
-            />
+            <label htmlFor="price">Base Price (USD)</label>
+            <input id="price" name="price" type="number" value={product.price} onChange={handleInputChange} min="0" required />
           </div>
 
           <div className="form-group">
-            <label htmlFor="description">Description</label>
-            <textarea
-              id="description"
-              name="description"
-              value={product.description}
-              onChange={handleInputChange}
-              required
-            ></textarea>
-          </div>
+  <label htmlFor="pricing-options">Pricing Options</label>
+  <div id="pricing-options">
+    {pricingOptions.map((option, index) => (
+      <div key={index} className="price-option">
+        <label htmlFor={`size-${index}`}>Size</label>
+        <select
+          id={`size-${index}`}
+          value={option.size}
+          onChange={(e) => handlePriceOptionChange(index, "size", e.target.value)}
+        >
+          <option value="">Select</option>
+          <option value="12-inch">12-inch</option>
+          <option value="13-inch">13-inch</option>
+          <option value="14-inch">14-inch</option>
+        </select>
 
-          <div className="form-group">
-            <label htmlFor="drumType">Drum Type</label>
-            <select
-              id="drumType"
-              name="drumType"
-              value={product.drumType}
-              onChange={handleInputChange}
-            >
-              {drumTypes.map((type) => (
-                <option key={type} value={type}>
-                  {type}
-                </option>
-              ))}
-            </select>
-          </div>
+        <label htmlFor={`depth-${index}`}>Depth</label>
+        <select
+          id={`depth-${index}`}
+          value={option.depth}
+          onChange={(e) => handlePriceOptionChange(index, "depth", e.target.value)}
+        >
+          <option value="">Select</option>
+          <option value="5-inch">5-inch</option>
+          <option value="5.5-inch">5.5-inch</option>
+          <option value="6-inch">6-inch</option>
+          <option value="6.5-inch">6.5-inch</option>
+          <option value="7-inch">7-inch</option>
+        </select>
 
-          <div className="form-group">
-            <label htmlFor="depth">Depth (in)</label>
-            <input
-              id="depth"
-              name="depth"
-              type="text"
-              value={product.depth}
-              onChange={handleInputChange}
-            />
-          </div>
+        <label className="checkbox-label">
+          <input
+            type="checkbox"
+            checked={option.reRing}
+            onChange={(e) => handlePriceOptionChange(index, "reRing", e.target.checked)}
+          />
+          Re-Ring
+        </label>
 
-          <div className="form-group">
-            <label htmlFor="thickness">Thickness (mm)</label>
-            <input
-              id="thickness"
-              name="thickness"
-              type="text"
-              value={product.thickness}
-              onChange={handleInputChange}
-            />
-          </div>
+        <label htmlFor={`price-${index}`}>Price (USD)</label>
+        <input
+          id={`price-${index}`}
+          type="number"
+          value={option.price}
+          onChange={(e) => handlePriceOptionChange(index, "price", e.target.value)}
+          min="0"
+          required
+        />
 
+        <button type="button" onClick={() => removePriceOption(index)}>Remove</button>
+      </div>
+    ))}
+  </div>
+  <button type="button" onClick={addPriceOption}>+ Add Price Option</button>
+</div>
 
-          <div className="form-group">
-            <label htmlFor="weight">Weight (lbs)</label>
-            <input
-              id="weight"
-              name="weight"
-              type="text"
-              value={product.weight}
-              onChange={handleInputChange}
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="constructionType">Construction Type</label>
-            <select
-              id="constructionType"
-              name="constructionType"
-              value={product.constructionType}
-              onChange={handleInputChange}
-            >
-              {constructionTypes.map((type) => (
-                <option key={type} value={type}>
-                  {type}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="hardwareColor">Hardware Color</label>
-            <select
-              id="hardwareColor"
-              name="hardwareColor"
-              value={product.hardwareColor}
-              onChange={handleInputChange}
-            >
-              {hardwareColors.map((color) => (
-                <option key={color} value={color}>
-                  {color}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="finish">Finish</label>
-            <select
-              id="finish"
-              name="finish"
-              value={product.finish}
-              onChange={handleInputChange}
-            >
-              {finishes.map((finish) => (
-                <option key={finish} value={finish}>
-                  {finish}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? 'Updating...' : 'Update Product'}
-          </button>
-          <button type="button" onClick={onClose}>
-            Close
-          </button>
+          <button type="submit" disabled={isSubmitting}>{isSubmitting ? "Updating..." : "Update Product"}</button>
+          <button type="button" onClick={onClose}>Close</button>
         </form>
       </div>
     </div>
