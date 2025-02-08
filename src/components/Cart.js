@@ -1,48 +1,49 @@
-import React, { useState, useEffect } from "react";
-import { useCart } from "../context/CartContext";
-import { useAuth } from "../context/AuthContext";
-import { Link } from "react-router-dom";
-import { loadStripe } from "@stripe/stripe-js";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../firebaseConfig";
-import "./Cart.css";
+import React, { useState, useEffect } from 'react';
+import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
+import { Link } from 'react-router-dom';
+import { loadStripe } from '@stripe/stripe-js';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../firebaseConfig';
+import './Cart.css';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
 const Cart = () => {
-  const { cart, cartId, updateQuantity, removeFromCart, setCart } = useCart();
+  const { cart, cartId, removeFromCart, setCart, updateFirestoreCart } =
+    useCart();
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
   const [shippingEstimate, setShippingEstimate] = useState(0);
   const [unavailableProducts, setUnavailableProducts] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [lastSyncedCart, setLastSyncedCart] = useState(null);
 
   useEffect(() => {
     const syncCartWithProductData = async () => {
-      const unavailable = [];
-      let updatedCart = { ...cart };
-      let hasChanges = false;
+      if (!cart || !Array.isArray(cart) || cart.length === 0) return;
+      if (JSON.stringify(cart) === JSON.stringify(lastSyncedCart)) return;
 
-      for (const productId in cart) {
-        const productRef = doc(db, "products", productId);
+      setLastSyncedCart(cart);
+
+      let updatedCart = [...cart];
+      let unavailable = [];
+
+      for (const item of updatedCart) {
+        if (!item || !item.stripePriceId) {
+          unavailable.push({ id: 'unknown', name: 'Unknown Product' });
+          updatedCart = updatedCart.filter((i) => i.id !== item.id);
+          continue;
+        }
+
+        // ✅ Get Firestore Product ID from the Cart Item
+        const productRef = doc(db, 'products', item.productId || ''); // 🔹 Use `productId`, not `id`
         const productSnapshot = await getDoc(productRef);
-        const productData = productSnapshot.data();
 
-        if (productData) {
-          updatedCart[productId].currentQuantity = productData.currentQuantity || 0;
-
-          if (productData.currentQuantity === 0) {
-            unavailable.push({ id: productId, name: productData.name });
-            delete updatedCart[productId]; // Remove unavailable product
-            hasChanges = true;
-          } else if (cart[productId]?.quantity > productData.currentQuantity) {
-            updatedCart[productId].quantity = productData.currentQuantity; // Adjust quantity
-            hasChanges = true;
-          }
-        } else {
-          unavailable.push({ id: productId, name: cart[productId]?.name });
-          delete updatedCart[productId];
-          hasChanges = true;
+        if (!productSnapshot.exists()) {
+          console.warn(`⚠️ Product not found in Firestore: ${item.name}`);
+          unavailable.push({ id: item.id, name: item.name });
+          updatedCart = updatedCart.filter((i) => i.id !== item.id);
         }
       }
 
@@ -51,70 +52,34 @@ const Cart = () => {
         setShowModal(true);
       }
 
-      if (hasChanges) {
-        setCart(updatedCart); // Update the cart context
-      }
+      setCart(updatedCart);
+      await updateFirestoreCart(updatedCart);
     };
 
     syncCartWithProductData();
-  }, [cart, setCart]);
-
-  const handleQuantityChange = async (productId, change) => {
-    const currentQuantity = cart[productId]?.quantity || 0;
-    const newQuantity = currentQuantity + change;
-
-    const productRef = doc(db, "products", productId);
-    const productSnapshot = await getDoc(productRef);
-    const productData = productSnapshot.data();
-    const maxQuantity = productData?.currentQuantity || 0;
-
-    if (newQuantity > maxQuantity) {
-      alert(`Cannot add more than ${maxQuantity} of this product.`);
-      return;
-    }
-
-    if (newQuantity < 1) {
-      removeFromCart(productId);
-    } else {
-      updateQuantity(productId, newQuantity);
-    }
-  };
+  }, [cart, setCart, updateFirestoreCart, lastSyncedCart]);
 
   const closeModal = () => {
     setShowModal(false);
     setUnavailableProducts([]);
-
-    // Explicitly sync the cart state to force a re-render
-    console.log("Cart before refresh:", cart);
-    const updatedCart = { ...cart };
-    setCart(updatedCart);
-    console.log("Cart after refresh:", updatedCart);
+    setCart([...cart]);
   };
 
-  const getItemTotal = (item) => {
-    return (Number(item.price) || 0) * (item.quantity || 0);
-  };
-
-  const getTotalAmount = () => {
-    return Object.values(cart || {}).reduce(
-      (total, item) => total + getItemTotal(item),
-      0
-    );
-  };
+  const getItemTotal = (item) =>
+    (Number(item.price) || 0) * (item.quantity || 1);
+  const getTotalAmount = () =>
+    cart.reduce((total, item) => total + getItemTotal(item), 0);
 
   const calculateShipping = () => {
-    const totalWeight = Object.values(cart).reduce(
+    const totalWeight = cart.reduce(
       (total, item) => total + (item.weight || 1) * item.quantity,
       0
     );
-    const baseRate = 10;
-    const weightRate = 2;
-    const shippingCost = baseRate + weightRate * totalWeight;
-    setShippingEstimate(shippingCost);
+    setShippingEstimate(10 + totalWeight * 2);
   };
 
   useEffect(() => {
-    if (Object.keys(cart).length > 0) {
+    if (cart.length > 0) {
       calculateShipping();
     }
   }, [cart]);
@@ -123,19 +88,19 @@ const Cart = () => {
     setLoading(true);
 
     const unavailable = [];
-    const finalCart = { ...cart };
+    const finalCart = [...cart];
 
-    for (const productId in cart) {
-      const productRef = doc(db, "products", productId);
+    for (const product of cart) {
+      const productRef = doc(db, 'products', product.productId);
       const productSnapshot = await getDoc(productRef);
       const productData = productSnapshot.data();
 
-      if (!productData || cart[productId]?.quantity > productData.currentQuantity) {
+      if (!productData || product.quantity > productData.currentQuantity) {
         unavailable.push({
-          id: productId,
-          name: productData ? productData.name : cart[productId]?.name,
+          id: product.id,
+          name: productData ? productData.name : product.name,
         });
-        delete finalCart[productId];
+        finalCart.splice(finalCart.indexOf(product), 1);
       }
     }
 
@@ -147,9 +112,8 @@ const Cart = () => {
     }
 
     try {
-      const productsPayload = Object.values(cart).map((product) => ({
-        name: product.name || "Unnamed Product",
-        description: product.description || "No description available",
+      const productsPayload = cart.map((product) => ({
+        name: product.name,
         price: product.price,
         quantity: product.quantity || 1,
       }));
@@ -157,21 +121,18 @@ const Cart = () => {
       const response = await fetch(
         `${process.env.REACT_APP_API_URL}/create-checkout-session`,
         {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             products: productsPayload,
-            userId: user?.uid || localStorage.getItem("cartId"),
+            userId: user?.uid || cartId,
           }),
         }
       );
 
       const session = await response.json();
-      if (!response.ok) {
-        throw new Error(session.error || "Failed to create checkout session");
-      }
+      if (!response.ok)
+        throw new Error(session.error || 'Failed to create checkout session');
 
       window.location.href = session.url;
     } catch (error) {
@@ -185,9 +146,10 @@ const Cart = () => {
     <div className="cart-container">
       <h1 className="cart-title">Shopping Cart</h1>
       <p className="cart-id">
-        Cart ID: {(cartId || localStorage.getItem("cartId"))?.slice(-5)}
+        Cart ID: {(cartId || user?.uid || 'guest').slice(-5)}
       </p>
-      {Object.keys(cart || {}).length === 0 ? (
+
+      {cart.length === 0 ? (
         <div className="cart-empty">Your cart is empty.</div>
       ) : (
         <>
@@ -203,50 +165,40 @@ const Cart = () => {
               </tr>
             </thead>
             <tbody>
-              {Object.values(cart).map((item) => (
+              {cart.map((item) => (
                 <tr key={item.id}>
                   <td>
                     <Link to={`/products/${item.id}`}>
                       <img
-                        src={item.images?.[0] || "/fallback-images/image-not-available.png"}
-                        alt={item.name || "Product Image"}
+                        src={
+                          item.images?.[0] ||
+                          '/fallback-images/image-not-available.png'
+                        }
+                        alt={item.name}
                         className="cart-item-image"
                       />
                     </Link>
                   </td>
                   <td>
                     <p>{item.name}</p>
+                    <p className="cart-sub-description">
+                      {item.size}&quot; Diameter | {item.depth}&quot; Depth | {item.lugQuantity}-lug | {item.reRing ? 'With Re-Ring' : ''}
+                    </p>
                   </td>
                   <td>${(Number(item.price) || 0).toFixed(2)}</td>
-                                    <td>
-                    <div className="quantity-control">
-                      <button
-                        onClick={() => handleQuantityChange(item.id, -1)}
-                        className={`quantity-button ${item.quantity <= 1 ? "disabled-button" : ""}`}
-                        disabled={item.quantity <= 1}
-                      >
-                        -
-                      </button>
-                      <span>{item.quantity || 0}</span>
-                      <button
-                        onClick={() => handleQuantityChange(item.id, 1)}
-                        className={`quantity-button ${
-                          item.quantity >= (cart[item.id]?.currentQuantity || 0) ? "disabled-button" : ""
-                        }`}
-                        disabled={item.quantity >= (cart[item.id]?.currentQuantity || 0)}
-                        title={
-                          item.quantity >= (cart[item.id]?.currentQuantity || 0)
-                            ? `Maximum quantity available: ${cart[item.id]?.currentQuantity}`
-                            : undefined
-                        }
-                      >
-                        +
-                      </button>
-                    </div>
+                  <td>
+                    {item.category === 'artisan' ? (
+                      <span>1</span>
+                    ) : (
+                      <span>{item.quantity}</span>
+                    )}
                   </td>
-                  <td>${(Number(getItemTotal(item)) || 0).toFixed(2)}</td>
-                                    <td>
-                    <button onClick={() => removeFromCart(item.id)} className="remove-btn">
+                  <td>${getItemTotal(item).toFixed(2)}</td>
+                  <td>
+                    <button
+                      onClick={() => removeFromCart(item.id)}
+                      className="remove-btn"
+                    >
                       Remove
                     </button>
                   </td>
@@ -261,9 +213,9 @@ const Cart = () => {
           <button
             onClick={handleCheckout}
             className="checkout-button"
-            disabled={loading || Object.keys(cart).length === 0}
+            disabled={loading}
           >
-            {loading ? "Processing..." : "Checkout"}
+            {loading ? 'Processing...' : 'Checkout'}
           </button>
         </>
       )}
@@ -273,7 +225,8 @@ const Cart = () => {
           <div className="modal-content">
             <h2>Unavailable Products</h2>
             <p>
-              The following items are no longer available and have been removed from your cart:
+              The following items are no longer available and have been removed
+              from your cart:
             </p>
             <ul>
               {unavailableProducts.map((product) => (
