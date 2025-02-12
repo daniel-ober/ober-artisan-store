@@ -181,7 +181,12 @@ const ManageGallery = () => {
         const imageRef = doc(db, 'galleryImages', image.id);
         batch.update(imageRef, { galleryOrder: image.galleryOrder });
       });
-      await batch.commit();
+      try {
+        await batch.commit();
+        console.log("✅ Firestore Batch Commit Successful!");
+      } catch (err) {
+        console.error("❌ Firestore Batch Commit Failed:", err.message);
+      }
     } catch (error) {
       console.error('Failed to save order:', error);
     } finally {
