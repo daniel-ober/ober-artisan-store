@@ -1,117 +1,161 @@
-app.post(
-    '/api/webhook',
-    express.raw({ type: 'application/json' }),
-    async (req, res) => {
-      const sig = req.headers['stripe-signature'];
-      let event;
-  
-      try {
-        event = stripe.webhooks.constructEvent(
-          req.body,
-          sig,
-          process.env.STRIPE_WEBHOOK_SECRET
-        );
-      } catch (err) {
-        console.error(`Webhook signature verification failed: ${err.message}`);
-        return res.status(400).send(`Webhook Error: ${err.message}`);
-      }
-  
-      console.log(`Received Stripe event: ${event.type}`);
-  
-      if (event.type === 'checkout.session.completed') {
-        const session = event.data.object;
-  
-        console.log('Checkout session completed:', session);
-  
-        // Fetch line items for the session
-        const lineItems = await stripe.checkout.sessions.listLineItems(session.id, {
-          expand: ['data.price.product'],
-        });
-  
-        const items = lineItems.data.map((item) => ({
-          name: item.description,
-          quantity: item.quantity,
-          price: item.amount_total / 100, // Convert to dollars
-        }));
-  
-        // Fetch payment intent for card details
-        let cardDetails = {};
-        if (session.payment_intent) {
-          try {
-            const paymentIntent = await stripe.paymentIntents.retrieve(session.payment_intent, {
-              expand: ['payment_method'],
-            });
-  
-            console.log('Fetched Payment Intent:', paymentIntent); // Debugging log
-  
-            if (paymentIntent.payment_method && paymentIntent.payment_method_details) {
-              const paymentMethod = paymentIntent.payment_method_details.card;
-  
-              if (paymentMethod) {
-                cardDetails = {
-                  brand: paymentMethod.brand || 'Unknown',
-                  lastFour: paymentMethod.last4 || 'XXXX',
-                  expMonth: paymentMethod.exp_month || 'XX',
-                  expYear: paymentMethod.exp_year || 'XXXX',
-                };
-              } else {
-                console.error('Payment method details are missing in payment intent');
-              }
-            } else {
-              console.error('Payment method is missing in payment intent');
-            }
-          } catch (error) {
-            console.error('Error fetching payment intent for card details:', error.message);
-          }
-        } else {
-          console.error('Payment intent ID is missing in session');
-        }
-  
-        console.log('Card Details Fetched:', cardDetails); // Log card details for debugging
-  
-        // Prepare order data
-// Prepare order data
-const orderData = {
-    stripeSessionId: session.id || null,
-    userId: session.metadata?.userId || 'guest',
-    guestToken: session.metadata?.guestToken || null,
-    customerName: session.customer_details?.name || 'No Name Provided',
-    customerEmail: session.customer_details?.email || 'No Email Provided',
-    customerPhone: session.customer_details?.phone || 'No Phone Provided',
-    customerAddress: session.customer_details?.address
-      ? `${session.customer_details.address.line1 || ''}, ${session.customer_details.address.city || ''}, ${session.customer_details.address.postal_code || ''}, ${session.customer_details.address.country || ''}`
-      : 'No Address Provided',
-    shippingDetails: session.shipping?.address
-      ? `${session.shipping.address.line1 || ''}, ${session.shipping.address.city || ''}, ${session.shipping.address.state || ''}, ${session.shipping.address.country || ''}, ${session.shipping.address.postal_code || ''}`
-      : 'No Shipping Details Provided',
-    paymentMethod: session.payment_method_types?.[0] || 'Unknown',
-    cardDetails, // Include card details
-    totalAmount: session.amount_total / 100 || 0, // Convert to dollars
-    currency: session.currency || 'usd',
-    status: 'Order Started', // Set to "Order Started" by default
-    items, // Include line items
-    createdAt: admin.firestore.FieldValue.serverTimestamp(), // Firestore timestamp
-  };
-  
-        console.log('Order Data Prepared:', orderData);
-  
-        try {
-          // Generate custom ID
-          const customId = generateCustomId();
-  
-          // Save the order to Firestore
-          const orderRef = db.collection('orders').doc(customId); // Use custom ID as document ID
-          await orderRef.set(orderData);
-          console.log('Order successfully saved to Firestore with ID:', customId);
-  
-          res.status(200).send('Event processed successfully');
-        } catch (error) {
-          console.error('Error saving order to Firestore:', error.message);
-          res.status(500).send('Internal Server Error');
-        }
-      } else {
-        console.log(`Unhandled event type: ${event.type}`);
-        res.status(200).send('Event received');
-      }
+// backend/webhook.js
+const express = require('express');
+const admin = require('firebase-admin');
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+
+const router = express.Router();
+
+// Middleware to handle raw Stripe webhook body
+router.post(
+  '/api/webhook',
+  express.raw({ type: 'application/json' }),
+  async (req, res) => {
+    const sig = req.headers['stripe-signature'];
+    let event;
+
+    try {
+      event = stripe.webhooks.constructEvent(
+        req.body,
+        sig,
+        process.env.STRIPE_WEBHOOK_SECRET
+      );
+    } catch (err) {
+      console.error(`❌ Webhook signature verification failed: ${err.message}`);
+      return res.status(400).send(`Webhook Error: ${err.message}`);
     }
-  );
+
+    console.log(`📩 Received Stripe event: ${event.type}`);
+
+    if (event.type === 'checkout.session.completed') {
+      const session = event.data.object;
+      console.log('✅ Checkout session completed:', session);
+
+      // Fetch line items for the session
+      let lineItems;
+      try {
+        const lineItemsResponse = await stripe.checkout.sessions.listLineItems(
+          session.id,
+          {
+            expand: ['data.price.product'],
+          }
+        );
+
+        lineItems = lineItemsResponse.data.map((item) => ({
+          stripeProductId: item.price.product?.id || null, // ✅ Corrected!
+          stripePriceId: item.price.id || null,
+          quantity: item.quantity,
+          price: item.amount_total / 100,
+        }));
+
+        console.log(
+          '✅ Processed Line Items:',
+          JSON.stringify(lineItems, null, 2)
+        );
+      } catch (error) {
+        console.error('❌ Error fetching line items:', error.message);
+        return res.status(500).send('Error fetching line items.');
+      }
+
+      try {
+        console.log('📦 Updating Inventory for Ordered Items...');
+
+        for (const item of lineItems) {
+          console.log(
+            `🔍 Searching for Firestore product with stripeProductId: ${item.stripeProductId}`
+          );
+
+          console.log(
+            `🛠️ Debug: Searching for product with stripeProductId = ${item.stripeProductId}`
+          );
+
+          let productSnapshot = await admin
+            .firestore()
+            .collection('products')
+            .where('stripeProductId', '==', item.stripeProductId)
+            .limit(1)
+            .get();
+
+          console.log(
+            `🛠️ Debug: Searching for product with stripeProductId = ${item.stripeProductId}`
+          );
+          console.log(
+            `🛠️ Debug: Found ${productSnapshot.size} products matching stripeProductId = ${item.stripeProductId}`
+          );
+
+          if (!productSnapshot || productSnapshot.empty) {
+            console.error(
+              `❌ No product found for Stripe Product ID: ${item.stripeProductId}. Skipping inventory update.`
+            );
+            continue;
+          }
+
+          const productDoc = productSnapshot.docs[0];
+          const productRef = productDoc.ref;
+          const productData = productDoc.data();
+
+          console.log(
+            `✅ Matched Firestore Product: ${productData.name} (ID: ${productData.id}, Current Quantity: ${productData.currentQuantity})`
+          );
+
+          const matchedOptionIndex = (
+            productData.pricingOptions || []
+          ).findIndex((option) => option.stripePriceId === item.stripePriceId);
+
+          if (matchedOptionIndex === -1) {
+            console.warn(
+              `⚠️ No matching variant found for stripePriceId: ${item.stripePriceId}`
+            );
+            console.log(
+              `🔄 Defaulting to updating product-level currentQuantity for: ${productData.id}`
+            );
+          }
+
+          // Update inventory using transaction
+          await admin.firestore().runTransaction(async (transaction) => {
+            const freshProductDoc = await transaction.get(productRef);
+            if (!freshProductDoc.exists) {
+              console.error(`❌ Firestore product missing: ${productData.id}`);
+              return;
+            }
+
+            const freshProductData = freshProductDoc.data();
+            const newQuantity = Math.max(
+              0,
+              (freshProductData.currentQuantity || 0) - item.quantity
+            );
+
+            console.log(
+              `🔄 Updating stock for ${productData.id}: ${freshProductData.currentQuantity} -> ${newQuantity}`
+            );
+
+            // ✅ Always update `currentQuantity`
+            transaction.update(productRef, {
+              currentQuantity: newQuantity,
+              isAvailable: newQuantity > 0,
+            });
+
+            console.log(
+              `✅ Inventory Updated for ${productData.name} - New Quantity: ${newQuantity}`
+            );
+          });
+        }
+
+        console.log('✅ Inventory Updated Successfully!');
+        res.status(200).send('✅ Event processed successfully.');
+      } catch (error) {
+        console.error('❌ Error processing order:', error.message);
+        res.status(500).send('Internal Server Error');
+      }
+    } else {
+      console.log(`⚠️ Unhandled Stripe event type: ${event.type}`);
+      res.status(200).send('Event received.');
+    }
+  }
+);
+
+// Function to generate a unique custom ID for orders
+function generateCustomId() {
+  return `ORD-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
+}
+
+module.exports = router;

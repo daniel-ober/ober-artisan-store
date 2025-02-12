@@ -1,3 +1,4 @@
+// src/components/CartPreview.js
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
@@ -11,20 +12,24 @@ const CartPreview = ({ onClose }) => {
   };
 
   const handleQuantityChange = (itemId, change) => {
-    const currentQuantity = cart[itemId]?.quantity || 0;
-    const newQuantity = currentQuantity + change;
+    const item = cart.find((i) => i._id === itemId);
+    if (!item) return;
 
-    if (newQuantity < 1) {
+    const minQuantity = 1;
+    const maxQuantity = item.currentQuantity || 1;
+    const newQuantity = item.quantity + change;
+
+    if (newQuantity < minQuantity) {
       removeFromCart(itemId);
-    } else {
+    } else if (
+      newQuantity <= maxQuantity &&
+      !['one of a kind', 'custom shop'].includes(item.category)
+    ) {
       updateQuantity(itemId, newQuantity);
     }
   };
 
-  const cartTotal = Object.values(cart).reduce(
-    (total, item) => total + item.price * item.quantity,
-    0
-  );
+  const cartTotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
 
   return (
     <div className="cart-preview">
@@ -32,10 +37,10 @@ const CartPreview = ({ onClose }) => {
         <h3>Cart Preview</h3>
         <button className="close-preview" onClick={onClose}>✕</button>
       </div>
-      {Object.keys(cart).length > 0 ? (
+      {cart.length > 0 ? (
         <>
-          {Object.values(cart).map((item) => (
-            <div key={item.id} className="cart-preview-item">
+          {cart.map((item) => (
+            <div key={item._id} className="cart-preview-item">
               <img
                 src={item.images?.[0] || 'https://i.imgur.com/eoKsILV.png'}
                 alt={item.name}
@@ -44,17 +49,29 @@ const CartPreview = ({ onClose }) => {
               <div className="cart-item-details">
                 <p>{item.name}</p>
                 <span className="item-price">${item.price.toFixed(2)}</span>
-                {item.category !== 'artisan' && (
+                {item.category !== 'artisan' ? (
                   <div className="quantity-buttons">
-                    <button onClick={() => handleQuantityChange(item.id, -1)}>-</button>
+                    <button
+                      onClick={() => handleQuantityChange(item._id, -1)}
+                      disabled={item.quantity <= 1}
+                    >
+                      -
+                    </button>
                     <span>{item.quantity}</span>
-                    <button onClick={() => handleQuantityChange(item.id, 1)}>+</button>
+                    <button
+                      onClick={() => handleQuantityChange(item._id, 1)}
+                      disabled={item.quantity >= (item.currentQuantity || 1)}
+                    >
+                      +
+                    </button>
                   </div>
+                ) : (
+                  <span className="quantity-value">1</span>
                 )}
               </div>
               <button
                 className="remove-item red"
-                onClick={() => handleRemoveItem(item.id)}
+                onClick={() => handleRemoveItem(item._id)}
               >
                 ✕
               </button>

@@ -1,53 +1,66 @@
-
-// functions/src/updateInventory.js
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 
+if (!admin.apps.length) {
+    admin.initializeApp();
+}
+
 const db = admin.firestore();
 
-const updateInventory = functions.https.onCall(async (data, context) => {
-  const { cartItems } = data;
-  const batch = db.batch();
+// **Ensure Cloud Function is correctly structured**
+exports.updateInventory = functions
+    .region("us-central1")
+    .https.onCall(async (data, context) => {
+        console.log("🔥 updateInventory function triggered.");
 
-  try {
-    for (const item of cartItems) {
-      const productRef = db.collection("products").doc(item.productId);
-      const productDoc = await productRef.get();
+        if (!data || !data.cartItems || !data.userId) {
+            console.error("❌ Invalid data received.");
+            throw new functions.https.HttpsError("invalid-argument", "No cart items or userId provided.");
+        }
 
-      if (!productDoc.exists) {
-        throw new Error(`Product with ID ${item.productId} does not exist.`);
-      }
+        const { cartItems, userId } = data;
+        console.log("📦 Received Cart Items:", cartItems);
+        console.log("👤 User ID:", userId);
 
-      const productData = productDoc.data();
+        const batch = db.batch();
 
-      if (productData.currentQuantity < item.quantity) {
-        throw new Error(
-          `Not enough stock for ${productData.name}. Available: ${productData.currentQuantity}, Requested: ${item.quantity}`
-        );
-      }
+        try {
+            for (const item of cartItems) {
+                if (!item.productId || !item.quantity) {
+                    console.warn(`⚠️ Invalid item found:`, item);
+                    continue;
+                }
 
-      const newQuantity = productData.currentQuantity - item.quantity;
-      const isAvailable = newQuantity > 0;
-      const availabilityMessage = isAvailable
-        ? "In Stock"
-        : "Out of Stock";
+                // 🔍 Look up product in Firestore using `productId` (NOT `stripeProductId`)
+                const productRef = db.collection("products").doc(item.productId);
+                const productDoc = await productRef.get();
 
-      batch.update(productRef, {
-        currentQuantity: newQuantity,
-        isAvailable,
-        availabilityMessage,
-      });
-    }
+                if (!productDoc.exists) {
+                    console.warn(`⚠️ No Firestore product found for Product ID: ${item.productId}`);
+                    continue;
+                }
 
-    await batch.commit();
-    return { success: true, message: "Inventory updated successfully." };
-  } catch (error) {
-    console.error("Error updating inventory:", error.message);
-    throw new functions.https.HttpsError(
-      "failed-precondition",
-      error.message
-    );
-  }
-});
+                const productData = productDoc.data();
 
-module.exports = updateInventory;
+                // Update Inventory
+                const newStock = Math.max(0, productData.currentQuantity - item.quantity);
+                console.log(`🔄 Updating stock for ${productData.name} (${item.productId}): ${productData.currentQuantity} -> ${newStock}`);
+
+                batch.update(productRef, { currentQuantity: newStock });
+            }
+
+            // 💨 **Clear User's Cart**
+            const cartRef = db.collection("carts").doc(userId);
+            console.log(`🛒 Clearing cart for user: ${userId}`);
+            batch.delete(cartRef);
+
+            // ✅ Commit Firestore Batch
+            await batch.commit();
+            console.log("✅ Firestore Batch Commit Successful! Cart cleared.");
+
+            return { success: true, message: "Inventory updated and cart cleared." };
+        } catch (error) {
+            console.error("❌ Error updating inventory:", error.message);
+            throw new functions.https.HttpsError("internal", error.message);
+        }
+    });
