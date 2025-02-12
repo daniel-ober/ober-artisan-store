@@ -18,7 +18,6 @@ const drumSummaries = {
     { size: "14", depth: "5.0", price: 1200, reRing: true, stripePriceId: "price_1Qq1ueJbbx8jAR4NZryJpAiN", lugQuantity: 10, staveQuantity: 10 },
     { size: "14", depth: "6.0", price: 1300, reRing: true, stripePriceId: "price_1Qq1ueJbbx8jAR4NwJh6F2qV", lugQuantity: 10, staveQuantity: 10 },
     { size: "14", depth: "7.0", price: 1400, reRing: true, stripePriceId: "price_1Qq1ueJbbx8jAR4NVBiDmecT", lugQuantity: 10, staveQuantity: 10 },
-
 ],
   // **12" Snares**
   '12" - Base Price: $850-5.0"-6 Lugs-10mm': {

@@ -1,0 +1,39 @@
+/* PreOrderCard.css */
+.product-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.2s ease;
+  }
+  
+  .product-card:hover {
+    transform: scale(1.02);
+  }
+  
+  .product-info {
+    padding: 15px;
+  }
+  
+  .prod-card-view-details-button {
+    background: #222;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .prod-card-preorder-button {
+    background: green;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .prod-card-view-details-button:hover,
+  .prod-card-preorder-button:hover {
+    background: #333;
+  }

@@ -197,6 +197,7 @@ export const clearCart = async (userId) => {
     throw error;
   }
 };
+export { app }; // ✅ Ensure this is exported
 
 console.log('Environment:', environment);
 console.log('Firebase Project:', firebaseConfig.projectId);

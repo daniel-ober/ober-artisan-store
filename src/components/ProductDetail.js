@@ -79,6 +79,8 @@ const ProductDetail = () => {
   // Standard product page for all other products
   const isSoldOut = product.currentQuantity === 0;
   const isArtisan = product.category === "artisan";
+  const isLimited = ["one of a kind", "custom shop"].includes(product.category);
+  const maxQuantity = product.currentQuantity || 1;
   const showFullSpecs = product.category === "artisan";
   const speciesList = [product?.woodSpecies, product?.customWoodSpecies].filter(Boolean).join(", ");
 
@@ -140,28 +142,34 @@ const ProductDetail = () => {
                 <div className="quantity-section">
                   <span className="quantity-label">Quantity:</span>
                   <div className="quantity-selector">
-                    <button
-                      onClick={() => updateQuantity(productId, quantity - 1)}
-                      className={`quantity-btn ${quantity <= 1 ? "disabled" : ""}`}
-                      disabled={quantity <= 1}
-                    >
-                      -
-                    </button>
-                    <span className="quantity-value">{quantity}</span>
-                    <button
-                      onClick={() => updateQuantity(productId, quantity + 1)}
-                      className={`quantity-btn ${
-                        quantity >= product.currentQuantity ? "disabled" : ""
-                      }`}
-                      disabled={quantity >= product.currentQuantity}
-                      title={
-                        quantity >= product.currentQuantity
-                          ? `Maximum quantity available: ${product.currentQuantity}`
-                          : undefined
-                      }
-                    >
-                      +
-                    </button>
+                    {isArtisan ? (
+                      <span className="quantity-value">1</span>
+                    ) : (
+                      <>
+                        <button
+                          onClick={() => updateQuantity(productId, quantity - 1)}
+                          className={`quantity-btn ${quantity <= 1 ? "disabled" : ""}`}
+                          disabled={quantity <= 1}
+                        >
+                          -
+                        </button>
+                        <span className="quantity-value">{quantity}</span>
+                        <button
+                          onClick={() => updateQuantity(productId, quantity + 1)}
+                          className={`quantity-btn ${
+                            quantity >= maxQuantity ? "disabled" : ""
+                          }`}
+                          disabled={quantity >= maxQuantity}
+                          title={
+                            quantity >= maxQuantity
+                              ? `Maximum quantity available: ${maxQuantity}`
+                              : undefined
+                          }
+                        >
+                          +
+                        </button>
+                      </>
+                    )}
                   </div>
                   <button className="prod-detail-view-cart-button" onClick={() => navigate("/cart")}>
                     View in Cart
@@ -180,7 +188,12 @@ const ProductDetail = () => {
                   )}
                 </>
               ) : (
-                <button onClick={() => addToCart({ ...product, id: productId, quantity })} className="prod-detail-add-to-cart-button">
+                <button
+                  onClick={() =>
+                    addToCart({ ...product, id: productId, quantity: isArtisan ? 1 : quantity })
+                  }
+                  className="prod-detail-add-to-cart-button"
+                >
                   Add to Cart
                 </button>
               )}

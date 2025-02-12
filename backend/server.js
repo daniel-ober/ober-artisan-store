@@ -102,7 +102,8 @@ app.use((req, res, next) => {
 const generateCustomId = () => {
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   let result = '';
-  for (let i = 0; i < 10; i++) { // Length of the ID
+  for (let i = 0; i < 10; i++) {
+    // Length of the ID
     result += characters.charAt(Math.floor(Math.random() * characters.length));
   }
   return result;
@@ -135,12 +136,15 @@ app.post(
       console.log('Checkout session completed:', session);
 
       // Fetch line items for the session
-      const lineItems = await stripe.checkout.sessions.listLineItems(session.id, {
-        expand: ['data.price.product'],
-      });
+      const lineItems = await stripe.checkout.sessions.listLineItems(
+        session.id,
+        {
+          expand: ['data.price.product'],
+        }
+      );
 
       const items = lineItems.data.map((item) => ({
-        name: item.description,
+        name: item.description, // ❌ Incorrect - Using Stripe's name
         quantity: item.quantity,
         price: item.amount_total / 100, // Convert to dollars
       }));
@@ -149,13 +153,19 @@ app.post(
       let cardDetails = {};
       if (session.payment_intent) {
         try {
-          const paymentIntent = await stripe.paymentIntents.retrieve(session.payment_intent, {
-            expand: ['payment_method'], // Expand payment method to get card details
-          });
+          const paymentIntent = await stripe.paymentIntents.retrieve(
+            session.payment_intent,
+            {
+              expand: ['payment_method'], // Expand payment method to get card details
+            }
+          );
 
           console.log('Fetched Payment Intent:', paymentIntent);
 
-          if (paymentIntent.payment_method && paymentIntent.payment_method.card) {
+          if (
+            paymentIntent.payment_method &&
+            paymentIntent.payment_method.card
+          ) {
             const card = paymentIntent.payment_method.card;
 
             cardDetails = {
@@ -168,7 +178,10 @@ app.post(
             console.error('Card details are missing in payment intent');
           }
         } catch (error) {
-          console.error('Error fetching payment intent for card details:', error.message);
+          console.error(
+            'Error fetching payment intent for card details:',
+            error.message
+          );
         }
       } else {
         console.error('Payment intent ID is missing in session');
@@ -186,47 +199,52 @@ app.post(
             .get();
 
           if (productSnapshot.empty) {
-            console.error(`Product "${item.name}" does not exist in Firestore.`);
+            console.error(
+              `Product "${item.name}" does not exist in Firestore.`
+            );
             continue;
           }
 
           const productDoc = productSnapshot.docs[0];
           const productData = productDoc.data();
-          const newQuantity = (productData.currentQuantity || 0) - item.quantity;
+          const newQuantity =
+            (productData.currentQuantity || 0) - item.quantity;
 
           if (newQuantity < 0) {
             console.warn(`Insufficient stock for product "${item.name}".`);
           } else {
             await productDoc.ref.update({ currentQuantity: newQuantity });
-            console.log(`Updated quantity for product "${item.name}" to ${newQuantity}.`);
+            console.log(
+              `Updated quantity for product "${item.name}" to ${newQuantity}.`
+            );
           }
         }
       } catch (error) {
         console.error('Error updating product quantities:', error.message);
       }
 
- // Prepare order data
-const orderData = {
-    stripeSessionId: session.id || null,
-    userId: session.metadata?.userId || 'guest',
-    guestToken: session.metadata?.guestToken || null,
-    customerName: session.customer_details?.name || 'No Name Provided',
-    customerEmail: session.customer_details?.email || 'No Email Provided',
-    customerPhone: session.customer_details?.phone || 'No Phone Provided',
-    customerAddress: session.customer_details?.address
-      ? `${session.customer_details.address.line1 || ''}, ${session.customer_details.address.city || ''}, ${session.customer_details.address.postal_code || ''}, ${session.customer_details.address.country || ''}`
-      : 'No Address Provided',
-    shippingDetails: session.shipping?.address
-      ? `${session.shipping.address.line1 || ''}, ${session.shipping.address.city || ''}, ${session.shipping.address.state || ''}, ${session.shipping.address.country || ''}, ${session.shipping.address.postal_code || ''}`
-      : 'No Shipping Details Provided',
-    paymentMethod: session.payment_method_types?.[0] || 'Unknown',
-    cardDetails, // Include card details
-    totalAmount: session.amount_total / 100 || 0, // Convert to dollars
-    currency: session.currency || 'usd',
-    status: 'Order Started', // Set to "Order Started" by default
-    items, // Include line items
-    createdAt: admin.firestore.FieldValue.serverTimestamp(), // Firestore timestamp
-  };
+      // Prepare order data
+      const orderData = {
+        stripeSessionId: session.id || null,
+        userId: session.metadata?.userId || 'guest',
+        guestToken: session.metadata?.guestToken || null,
+        customerName: session.customer_details?.name || 'No Name Provided',
+        customerEmail: session.customer_details?.email || 'No Email Provided',
+        customerPhone: session.customer_details?.phone || 'No Phone Provided',
+        customerAddress: session.customer_details?.address
+          ? `${session.customer_details.address.line1 || ''}, ${session.customer_details.address.city || ''}, ${session.customer_details.address.postal_code || ''}, ${session.customer_details.address.country || ''}`
+          : 'No Address Provided',
+        shippingDetails: session.shipping?.address
+          ? `${session.shipping.address.line1 || ''}, ${session.shipping.address.city || ''}, ${session.shipping.address.state || ''}, ${session.shipping.address.country || ''}, ${session.shipping.address.postal_code || ''}`
+          : 'No Shipping Details Provided',
+        paymentMethod: session.payment_method_types?.[0] || 'Unknown',
+        cardDetails, // Include card details
+        totalAmount: session.amount_total / 100 || 0, // Convert to dollars
+        currency: session.currency || 'usd',
+        status: 'Order Started', // Set to "Order Started" by default
+        items, // Include line items
+        createdAt: admin.firestore.FieldValue.serverTimestamp(), // Firestore timestamp
+      };
 
       console.log('Order Data Prepared:', orderData);
 
@@ -275,6 +293,7 @@ app.post('/api/create-checkout-session', async (req, res) => {
         product_data: {
           name: product.name || 'Unnamed Product',
           description: product.description || 'No description available',
+          metadata: { productId: product.id }, // ✅ Ensure productId is included!
         },
         unit_amount: Math.round(product.price * 100),
       },
@@ -312,7 +331,8 @@ app.post('/api/create-checkout-session', async (req, res) => {
 app.get('/api/orders/by-session/:sessionId', async (req, res) => {
   const { sessionId } = req.params;
   try {
-    const ordersSnapshot = await db.collection('orders')
+    const ordersSnapshot = await db
+      .collection('orders')
       .where('stripeSessionId', '==', sessionId)
       .limit(1)
       .get();
@@ -343,7 +363,6 @@ app.use('/api/products', productsRoute);
 app.use('/api/orders', ordersRoute);
 app.use('/api/users', usersRoute);
 app.use('/api/carts', cartsRoute);
-
 
 // Error handling middleware
 app.use((err, req, res, next) => {

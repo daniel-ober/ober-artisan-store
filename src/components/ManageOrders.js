@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import ViewOrderModal from "./ViewOrderModal";
 import "./ManageOrders.css";
@@ -10,14 +10,11 @@ const ManageOrders = () => {
   const [searchId, setSearchId] = useState("");
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [hideFulfilled, setHideFulfilled] = useState(true); // Default to hiding completed/canceled orders
+  const [hideFulfilled, setHideFulfilled] = useState(true);
 
-  // Determine the overall order status based on item statuses
   const determineOrderStatus = (items) => {
     if (!items || items.length === 0) return "No Items";
-
     const statuses = items.map((item) => item.status || "Preparing");
-
     if (statuses.every((status) => status === "Shipped")) return "Order Completed";
     if (statuses.every((status) => status === "Canceled")) return "Canceled";
     if (statuses.some((status) => status === "Back Ordered")) return "Partially Fulfilled / Back Ordered";
@@ -27,34 +24,33 @@ const ManageOrders = () => {
   };
 
   useEffect(() => {
-    const fetchOrders = async () => {
-      try {
-        const ordersCollection = collection(db, "orders");
-        const orderSnapshot = await getDocs(ordersCollection);
-        const ordersList = orderSnapshot.docs.map((doc) => {
-          const data = doc.data();
-          return {
-            id: doc.id,
-            orderDate: data.createdAt?.toDate().toLocaleString() || "No date available",
-            customerName: data.customerName || "No name available",
-            total: typeof data.totalAmount === "number" ? data.totalAmount.toFixed(2) : "N/A",
-            status: determineOrderStatus(data.items || []), // Calculate the overall status
-            ...data,
-          };
-        });
-        setOrders(ordersList);
-        applyFilters(ordersList);
-      } catch (error) {
-        console.error("Error fetching orders:", error);
-      }
-    };
-
     fetchOrders();
   }, [hideFulfilled]);
 
+  const fetchOrders = async () => {
+    try {
+      const ordersCollection = collection(db, "orders");
+      const orderSnapshot = await getDocs(ordersCollection);
+      const ordersList = orderSnapshot.docs.map((doc) => {
+        const data = doc.data();
+        return {
+          id: doc.id,
+          orderDate: data.createdAt?.toDate().toLocaleString() || "No date available",
+          customerName: data.customerName || "No name available",
+          total: typeof data.totalAmount === "number" ? data.totalAmount.toFixed(2) : "N/A",
+          status: determineOrderStatus(data.items || []),
+          ...data,
+        };
+      });
+      setOrders(ordersList);
+      applyFilters(ordersList);
+    } catch (error) {
+      console.error("Error fetching orders:", error);
+    }
+  };
+
   const applyFilters = (ordersList) => {
     const filtered = ordersList.filter((order) => {
-      // Exclude orders with status "Order Completed" or "Canceled" when hideFulfilled is true
       if (hideFulfilled && ["Order Completed", "Canceled"].includes(order.status)) {
         return false;
       }
@@ -89,6 +85,19 @@ const ManageOrders = () => {
     setIsModalOpen(true);
   };
 
+  const handleDeleteOrder = async (orderId) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this order?");
+    if (!confirmDelete) return;
+
+    try {
+      await deleteDoc(doc(db, "orders", orderId));
+      console.log(`✅ Order ${orderId} deleted successfully`);
+      fetchOrders(); // Refresh the order list after deletion
+    } catch (error) {
+      console.error("❌ Error deleting order:", error);
+    }
+  };
+
   return (
     <div className="manage-orders">
       <h2>Manage Orders</h2>
@@ -112,26 +121,35 @@ const ManageOrders = () => {
       <table className="manage-orders-table">
         <thead>
           <tr>
-            <th data-label="Order ID">Order ID</th>
-            <th data-label="Date">Date</th>
-            <th data-label="Customer Name">Customer Name</th>
-            <th data-label="Total">Total</th>
-            <th data-label="Order Status">Order Status</th>
+            <th>Order ID</th>
+            <th>Date</th>
+            <th>Customer Name</th>
+            <th>Total</th>
+            <th>Order Status</th>
+            <th>Actions</th> {/* New column for actions */}
           </tr>
         </thead>
         <tbody>
           {filteredOrders.length === 0 ? (
             <tr>
-              <td colSpan="5">No orders available</td>
+              <td colSpan="6">No orders available</td>
             </tr>
           ) : (
             filteredOrders.map((order) => (
-              <tr key={order.id} onClick={() => handleRowClick(order)}>
-                <td data-label="Order ID">{order.id}</td>
-                <td data-label="Date">{order.orderDate}</td>
-                <td data-label="Customer Name">{order.customerName}</td>
-                <td data-label="Total">${order.total}</td>
-                <td data-label="Order Status">{order.status}</td>
+              <tr key={order.id}>
+                <td onClick={() => handleRowClick(order)}>{order.id}</td>
+                <td onClick={() => handleRowClick(order)}>{order.orderDate}</td>
+                <td onClick={() => handleRowClick(order)}>{order.customerName}</td>
+                <td onClick={() => handleRowClick(order)}>${order.total}</td>
+                <td onClick={() => handleRowClick(order)}>{order.status}</td>
+                <td>
+                  <button
+                    className="delete-button"
+                    onClick={() => handleDeleteOrder(order.id)}
+                  >
+                    ❌ Delete
+                  </button>
+                </td>
               </tr>
             ))
           )}

@@ -112,24 +112,56 @@
     text-align: center;
 }
 
-/* 📌 Add to Cart Button */
-.feuzon-product-options button {
-    width: 100%;
-    padding: 14px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-    margin-top: 12px;
-    background: linear-gradient(90deg, #ffcc00, #ff9900);
+.add-to-cart-button {
+    background-color: #1D1D1D;
     color: white;
+    font-size: 18px;
     font-weight: bold;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.feuzon-product-options button:hover {
-    background: linear-gradient(90deg, #ff9900, #cc6600);
+.add-to-cart-button:hover {
+    background-color: #333;
 }
+
+.notify-me-button {
+    background-color: #888;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.loading-button {
+    background-color: #ddd;
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+/* Grey out locked dropdowns */
+.disabled-dropdown {
+    background-color: #ddd !important;
+    color: #666 !important;
+    cursor: not-allowed;
+  }
+  
+  /* Change Selection Button Flicker */
+  @keyframes flicker {
+    0% { background-color: #ffcc00; }
+    50% { background-color: #ffaa00; }
+    100% { background-color: #ffcc00; }
+  }
 
 /* 📌 Footer Adjustments */
 .footer {
