@@ -96,7 +96,7 @@ const staveQuantity = selectedOption.staveQuantity !== undefined ? selectedOptio
     const cartItem = {
         id: uniqueItemId,
         productId: "heritage",
-        name: "HERÌTAGE Series Snare Drum",
+        name: "HERÌTAGE",
         size: normalizedSize,
         depth: normalizedDepth,
         reRing: hasReRing,

@@ -8,16 +8,24 @@ const AppInitializer = () => {
   const cartStatus = useSelector((state) => state.cart.status);
 
   useEffect(() => {
-    if (userId) {
-      dispatch(fetchCart(userId));
-    }
-  }, [dispatch, userId]);
-
-  if (cartStatus === 'loading') {
-    return <div>Loading cart...</div>;
-  }
-
-  return null; // Or some initialization logic
+    if (!cartId) return;
+  
+    const cartRef = doc(db, 'carts', cartId);
+  
+    // 🔄 Listen for real-time Firestore updates on the cart
+    const unsubscribe = onSnapshot(cartRef, (cartSnapshot) => {
+      if (cartSnapshot.exists()) {
+        const cartData = cartSnapshot.data();
+        console.log('✅ Real-time cart update received:', cartData);
+        setCart(Object.values(cartData.cart || {})); // Convert Firestore object to array
+      } else {
+        console.warn('⚠️ No cart found in Firestore');
+        setCart([]);
+      }
+    });
+  
+    return () => unsubscribe(); // Cleanup listener when component unmounts
+  }, [cartId, setCart]);
 };
 
 export default AppInitializer;

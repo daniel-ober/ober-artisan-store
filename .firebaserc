@@ -42,6 +42,12 @@
       }
     }
   },
-  "etags": {},
+  "etags": {
+    "danoberartisandrums-dev": {
+      "extensionInstances": {
+        "storage-resize-images": "b4ad819abd6d80b5b4a145d1300043e3018e02b83b3f043794946fdc04a1a4a2"
+      }
+    }
+  },
   "dataconnectEmulatorConfig": {}
 }

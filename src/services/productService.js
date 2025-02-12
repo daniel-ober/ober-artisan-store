@@ -8,9 +8,10 @@ import {
   addDoc,
   updateDoc,
   deleteDoc,
+  runTransaction, // ✅ Firestore transaction for safe inventory updates
 } from 'firebase/firestore';
 
-// Fetch all products
+// **Fetch all products**
 export const fetchProducts = async () => {
   const productsCollection = collection(db, 'products');
   const productsSnapshot = await getDocs(productsCollection);
@@ -20,69 +21,109 @@ export const fetchProducts = async () => {
   }));
 };
 
-// Fetch a single product by ID
+// **Fetch a single product by ID**
 export const fetchProductById = async (productId) => {
-  const productDoc = doc(db, 'products', productId);
-  const productSnapshot = await getDoc(productDoc);
-  if (!productSnapshot.exists()) {
-    throw new Error('Product not found.');
+  if (!productId) {
+    throw new Error("❌ Product ID is required.");
   }
+
+  const productRef = doc(db, 'products', productId);
+  const productSnapshot = await getDoc(productRef);
+
+  if (!productSnapshot.exists()) {
+    throw new Error(`❌ Product with ID ${productId} not found.`);
+  }
+
   return { id: productSnapshot.id, ...productSnapshot.data() };
 };
 
-// Add a new product
+// **Add a new product**
 export const addProduct = async (productData) => {
   const productsCollection = collection(db, 'products');
   const docRef = await addDoc(productsCollection, productData);
   return docRef.id;
 };
 
-// Update product fields
+// **Update product fields**
 export const updateProduct = async (productId, updatedData) => {
-  const productDoc = doc(db, 'products', productId);
-  await updateDoc(productDoc, updatedData);
+  if (!productId) {
+    throw new Error("❌ Product ID is required.");
+  }
+
+  const productRef = doc(db, 'products', productId);
+  await updateDoc(productRef, updatedData);
 };
 
-// Update product status
+// **Update product status (Active/Inactive)**
 export const updateProductStatus = async (productId, newStatus) => {
-  const productDoc = doc(db, 'products', productId);
-  await updateDoc(productDoc, { status: newStatus });
+  if (!productId) {
+    throw new Error("❌ Product ID is required.");
+  }
+
+  const productRef = doc(db, 'products', productId);
+  await updateDoc(productRef, { status: newStatus });
 };
 
-// Delete a product
+// **Delete a product**
 export const deleteProduct = async (productId) => {
-  const productDoc = doc(db, 'products', productId);
-  await deleteDoc(productDoc);
+  if (!productId) {
+    throw new Error("❌ Product ID is required.");
+  }
+
+  const productRef = doc(db, 'products', productId);
+  await deleteDoc(productRef);
 };
 
-// Update inventory levels for a product
-export const updateProductInventory = async (productId, inventoryData) => {
-  const { maxQuantity, currentQuantity } = inventoryData;
-
-  if (
-    typeof maxQuantity !== 'undefined' &&
-    (typeof maxQuantity !== 'number' || maxQuantity < 0)
-  ) {
-    throw new Error('Invalid maxQuantity. It must be a non-negative number.');
+// ✅ **NEW: Update inventory for multiple products at checkout**
+export const updateProductInventory = async (cartItems) => {
+  if (!Array.isArray(cartItems) || cartItems.length === 0) {
+    console.warn("⚠️ No cart items provided for inventory update. Skipping.");
+    return { success: false, message: 'No valid cart items to update.' };
   }
 
-  if (
-    typeof currentQuantity !== 'undefined' &&
-    (typeof currentQuantity !== 'number' || currentQuantity < 0)
-  ) {
-    throw new Error('Invalid currentQuantity. It must be a non-negative number.');
-  }
+  try {
+    console.log("📦 Processing inventory update for cart items:", cartItems);
 
-  if (
-    typeof maxQuantity !== 'undefined' &&
-    typeof currentQuantity !== 'undefined' &&
-    currentQuantity > maxQuantity
-  ) {
-    throw new Error(
-      'Invalid inventory update. currentQuantity cannot exceed maxQuantity.'
-    );
-  }
+    await runTransaction(db, async (transaction) => {
+      for (const item of cartItems) {
+        if (!item.productId) {
+          throw new Error(`❌ Invalid product in cart: Missing productId.`);
+        }
 
-  const productDoc = doc(db, 'products', productId);
-  await updateDoc(productDoc, inventoryData);
+        const productRef = doc(db, 'products', item.productId);
+        const productDoc = await transaction.get(productRef);
+
+        if (!productDoc.exists()) {
+          throw new Error(`❌ Product with ID ${item.productId} does not exist.`);
+        }
+
+        const productData = productDoc.data();
+        console.log(`🔍 Checking inventory for ${productData.name}: ${productData.currentQuantity} in stock`);
+
+        // **Ensure we don't allow overselling**
+        if (productData.currentQuantity < item.quantity) {
+          throw new Error(`⚠️ Not enough stock for ${productData.name}. Requested: ${item.quantity}, Available: ${productData.currentQuantity}`);
+        }
+
+        const newQuantity = productData.currentQuantity - item.quantity;
+        const isAvailable = newQuantity > 0;
+        const availabilityMessage = isAvailable ? "In Stock" : "Out of Stock";
+
+        // ✅ **Update the product's inventory**
+        transaction.update(productRef, {
+          currentQuantity: newQuantity,
+          isAvailable,
+          availabilityMessage,
+        });
+
+        console.log(`✅ Inventory updated for ${productData.name}: New Quantity = ${newQuantity}`);
+      }
+    });
+
+    console.log("✅ Inventory successfully updated!");
+    return { success: true, message: 'Inventory updated successfully.' };
+  } catch (error) {
+    console.error('❌ Error updating inventory:', error.message);
+    throw new Error(error.message);
+  }
 };

@@ -1,138 +1,118 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { Link } from 'react-router-dom';
 import { loadStripe } from '@stripe/stripe-js';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import './Cart.css';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
 const Cart = () => {
-  const { cart, cartId, removeFromCart, setCart, updateFirestoreCart } =
-    useCart();
+  const { cart, cartId, removeFromCart, setCart, updateFirestoreCart } = useCart();
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
   const [shippingEstimate, setShippingEstimate] = useState(0);
   const [unavailableProducts, setUnavailableProducts] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [lastSyncedCart, setLastSyncedCart] = useState(null);
 
+  console.log("🛒 Cart from Context:", cart);
+  console.log("🆔 Cart ID:", cartId);
+
+  // ✅ Ensure unavailable products are removed before checkout
   useEffect(() => {
-    const syncCartWithProductData = async () => {
-      if (!cart || !Array.isArray(cart) || cart.length === 0) return;
-      if (JSON.stringify(cart) === JSON.stringify(lastSyncedCart)) return;
-
-      setLastSyncedCart(cart);
+    const checkInventory = async () => {
+      if (!cart || cart.length === 0 || !cartId) return;
 
       let updatedCart = [...cart];
       let unavailable = [];
+      let cartChanged = false;
 
       for (const item of updatedCart) {
-        if (!item || !item.stripePriceId) {
-          unavailable.push({ id: 'unknown', name: 'Unknown Product' });
-          updatedCart = updatedCart.filter((i) => i.id !== item.id);
-          continue;
+        if (!item || !item.stripePriceId || !item.productId) {
+          console.warn(`⚠️ Skipping item with missing productId:`, item);
+          continue; // Skip items that don't have a productId
         }
 
-        // ✅ Get Firestore Product ID from the Cart Item
-        const productRef = doc(db, 'products', item.productId || ''); // 🔹 Use `productId`, not `id`
-        const productSnapshot = await getDoc(productRef);
+        try {
+          const productRef = doc(db, 'products', item.productId);
+          const productSnapshot = await getDoc(productRef);
 
-        if (!productSnapshot.exists()) {
-          console.warn(`⚠️ Product not found in Firestore: ${item.name}`);
-          unavailable.push({ id: item.id, name: item.name });
-          updatedCart = updatedCart.filter((i) => i.id !== item.id);
+          if (!productSnapshot.exists()) {
+            console.warn(`⚠️ Product not found: ${item.name}`);
+            unavailable.push({ id: item.id, name: item.name });
+            updatedCart = updatedCart.filter((i) => i.id !== item.id);
+            cartChanged = true;
+            continue;
+          }
+
+          const productData = productSnapshot.data();
+          const availableStock = productData.currentQuantity || 0;
+
+          if (availableStock === 0) {
+            console.warn(`🚨 ${productData.name} is out of stock. Removing from cart.`);
+            unavailable.push({ id: item.id, name: item.name });
+            updatedCart = updatedCart.filter((i) => i.id !== item.id);
+            cartChanged = true;
+          }
+        } catch (error) {
+          console.error(`❌ Error fetching product ${item.productId}:`, error);
         }
       }
 
-      if (unavailable.length > 0) {
+      if (cartChanged) {
+        setCart(updatedCart);
+        await updateFirestoreCart(updatedCart);
         setUnavailableProducts(unavailable);
         setShowModal(true);
       }
-
-      setCart(updatedCart);
-      await updateFirestoreCart(updatedCart);
     };
 
-    syncCartWithProductData();
-  }, [cart, setCart, updateFirestoreCart, lastSyncedCart]);
+    checkInventory();
+  }, [cart, cartId, setCart, updateFirestoreCart]);
+
+  // ✅ Update quantity but enforce limits
+  const updateQuantity = (productId, newQuantity) => {
+    if (newQuantity < 1) return; // Prevent negative/zero quantity
+
+    const updatedCart = cart.map((item) =>
+      item.id === productId
+        ? { ...item, quantity: Math.min(newQuantity, item.currentQuantity) }
+        : item
+    );
+
+    setCart(updatedCart);
+    updateFirestoreCart(updatedCart);
+  };
 
   const closeModal = () => {
     setShowModal(false);
     setUnavailableProducts([]);
-    setCart([...cart]);
   };
 
-  const getItemTotal = (item) =>
-    (Number(item.price) || 0) * (item.quantity || 1);
-  const getTotalAmount = () =>
-    cart.reduce((total, item) => total + getItemTotal(item), 0);
-
-  const calculateShipping = () => {
-    const totalWeight = cart.reduce(
-      (total, item) => total + (item.weight || 1) * item.quantity,
-      0
-    );
-    setShippingEstimate(10 + totalWeight * 2);
-  };
-
-  useEffect(() => {
-    if (cart.length > 0) {
-      calculateShipping();
-    }
-  }, [cart]);
+  const getItemTotal = (item) => (Number(item.price) || 0) * (item.quantity || 1);
+  const getTotalAmount = () => cart.reduce((total, item) => total + getItemTotal(item), 0);
 
   const handleCheckout = async () => {
     setLoading(true);
-
-    const unavailable = [];
-    const finalCart = [...cart];
-
-    for (const product of cart) {
-      const productRef = doc(db, 'products', product.productId);
-      const productSnapshot = await getDoc(productRef);
-      const productData = productSnapshot.data();
-
-      if (!productData || product.quantity > productData.currentQuantity) {
-        unavailable.push({
-          id: product.id,
-          name: productData ? productData.name : product.name,
-        });
-        finalCart.splice(finalCart.indexOf(product), 1);
-      }
-    }
-
-    if (unavailable.length > 0) {
-      setUnavailableProducts(unavailable);
-      setShowModal(true);
-      setLoading(false);
-      return;
-    }
 
     try {
       const productsPayload = cart.map((product) => ({
         name: product.name,
         price: product.price,
         quantity: product.quantity || 1,
+        stripePriceId: product.stripePriceId,
       }));
 
-      const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/create-checkout-session`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            products: productsPayload,
-            userId: user?.uid || cartId,
-          }),
-        }
-      );
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/create-checkout-session`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ products: productsPayload, userId: user?.uid || cartId }),
+      });
 
       const session = await response.json();
-      if (!response.ok)
-        throw new Error(session.error || 'Failed to create checkout session');
+      if (!response.ok) throw new Error(session.error || 'Failed to create checkout session');
 
       window.location.href = session.url;
     } catch (error) {
@@ -145,9 +125,7 @@ const Cart = () => {
   return (
     <div className="cart-container">
       <h1 className="cart-title">Shopping Cart</h1>
-      <p className="cart-id">
-        Cart ID: {(cartId || user?.uid || 'guest').slice(-5)}
-      </p>
+      <p className="cart-id">Cart ID: {(cartId || user?.uid || 'guest').slice(-5)}</p>
 
       {cart.length === 0 ? (
         <div className="cart-empty">Your cart is empty.</div>
@@ -170,10 +148,7 @@ const Cart = () => {
                   <td>
                     <Link to={`/products/${item.id}`}>
                       <img
-                        src={
-                          item.images?.[0] ||
-                          '/fallback-images/image-not-available.png'
-                        }
+                        src={item.image || "/fallback-images/image-not-available.png"}
                         alt={item.name}
                         className="cart-item-image"
                       />
@@ -187,18 +162,26 @@ const Cart = () => {
                   </td>
                   <td>${(Number(item.price) || 0).toFixed(2)}</td>
                   <td>
-                    {item.category === 'artisan' ? (
-                      <span>1</span>
+                    {item.category === "artisan" ? (
+                      "1"
                     ) : (
-                      <span>{item.quantity}</span>
+                      <input
+                        type="number"
+                        value={item.quantity}
+                        min="1"
+                        max={item.currentQuantity}
+                        onChange={(e) => {
+                          const newQty = parseInt(e.target.value, 10);
+                          if (!isNaN(newQty)) {
+                            updateQuantity(item.id, newQty);
+                          }
+                        }}
+                      />
                     )}
                   </td>
                   <td>${getItemTotal(item).toFixed(2)}</td>
                   <td>
-                    <button
-                      onClick={() => removeFromCart(item.id)}
-                      className="remove-btn"
-                    >
+                    <button onClick={() => removeFromCart(item.id)} className="remove-btn">
                       Remove
                     </button>
                   </td>
@@ -210,12 +193,8 @@ const Cart = () => {
             <p>Estimated Shipping: ${shippingEstimate.toFixed(2)}</p>
             <p>Total: ${(getTotalAmount() + shippingEstimate).toFixed(2)}</p>
           </div>
-          <button
-            onClick={handleCheckout}
-            className="checkout-button"
-            disabled={loading}
-          >
-            {loading ? 'Processing...' : 'Checkout'}
+          <button onClick={handleCheckout} className="checkout-button" disabled={loading}>
+            {loading ? "Processing..." : "Checkout"}
           </button>
         </>
       )}
@@ -224,18 +203,9 @@ const Cart = () => {
         <div className="modal-overlay">
           <div className="modal-content">
             <h2>Unavailable Products</h2>
-            <p>
-              The following items are no longer available and have been removed
-              from your cart:
-            </p>
-            <ul>
-              {unavailableProducts.map((product) => (
-                <li key={product.id}>{product.name}</li>
-              ))}
-            </ul>
-            <button onClick={closeModal} className="modal-close-button">
-              OK
-            </button>
+            <p>The following items were removed because they are no longer available:</p>
+            <ul>{unavailableProducts.map((product) => <li key={product.id}>{product.name}</li>)}</ul>
+            <button onClick={closeModal} className="modal-close-button">OK</button>
           </div>
         </div>
       )}

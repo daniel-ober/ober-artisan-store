@@ -1,7 +1,7 @@
 // src/components/PreOrderCard.js
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "./PreOrderCard.css";
+import "./ProductCard.css";
 
 const PreOrderCard = ({ product }) => {
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ const PreOrderCard = ({ product }) => {
         <p className="delivery-time">Delivery: {product.deliveryTime}</p>
         <p className="card-product-price">${product.price}</p>
 
-        {/* 🔥 No "View Details" button here for pre-order items */}
+        {/* 🔥 No "View Details" link here, unlike ProductCard.js */}
 
         {/* Product Action Buttons */}
         <div className="product-button-container">
