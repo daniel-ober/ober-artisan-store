@@ -1,22 +1,24 @@
 import React, { useRef, useState, useEffect, useContext } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FaCartPlus, FaSignOutAlt, FaUserAlt, FaCog } from "react-icons/fa";
 import { useAuth } from "../context/AuthContext";
 import { useCart } from "../context/CartContext";
 import { DarkModeContext } from "../context/DarkModeContext";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebaseConfig";
+import CartPreview from "./CartPreview"; // ✅ Import CartPreview
 import "./NavBar.css";
 
 const NavBar = () => {
   const [navbarLinks, setNavbarLinks] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isCartPreviewOpen, setIsCartPreviewOpen] = useState(false); // ✅ State for Cart Preview
   const { isDarkMode, setIsDarkMode } = useContext(DarkModeContext);
   const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 768);
   const menuRef = useRef(null);
   const buttonRef = useRef(null);
+  const cartRef = useRef(null); // ✅ Ref for Cart Preview
   const location = useLocation();
-  const navigate = useNavigate();
   const { user, isAdmin, logout } = useAuth();
   const { cart } = useCart();
 
@@ -63,14 +65,21 @@ const NavBar = () => {
     }
   }, [isDarkMode]);
 
-  const toggleDarkMode = () => {
-    const newMode = !isDarkMode;
-    setIsDarkMode(newMode);
-    localStorage.setItem("darkMode", newMode.toString());
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
+  const closeCartPreview = () => {
+    setIsCartPreviewOpen(false);
   };
 
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
+  };
+
+  const toggleCartPreview = (event) => {
+    event.stopPropagation(); // Prevents menu from closing when clicking cart icon
+    setIsCartPreviewOpen((prev) => !prev);
   };
 
   useEffect(() => {
@@ -82,6 +91,13 @@ const NavBar = () => {
         !buttonRef.current.contains(event.target)
       ) {
         setIsMenuOpen(false);
+      }
+      if (
+        cartRef.current &&
+        !cartRef.current.contains(event.target) &&
+        !event.target.closest(".cart-icon")
+      ) {
+        setIsCartPreviewOpen(false);
       }
     };
 
@@ -97,12 +113,9 @@ const NavBar = () => {
     }
   };
 
-  // ✅ Fix Home Link Glitch
-  const handleHomeClick = (e) => {
-    if (location.pathname === "/") {
-      e.preventDefault(); // Prevents full navigation re-render
-      window.scrollTo({ top: 0, behavior: "smooth" }); // Smooth scroll to top
-      return;
+  const handleNavLinkClick = (path) => {
+    if (location.pathname === path) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
     setIsMenuOpen(false);
   };
@@ -114,7 +127,7 @@ const NavBar = () => {
       </video>
 
       <div className="navbar-logo">
-        <Link to="/" replace onClick={handleHomeClick}>
+        <Link to="/" replace onClick={() => handleNavLinkClick("/")}>
           <img
             src={isDarkMode ? process.env.REACT_APP_LOGO_LIGHT : process.env.REACT_APP_LOGO_DARK}
             alt="Logo"
@@ -149,40 +162,51 @@ const NavBar = () => {
 
       {(isMenuOpen || !isMobileView) && (
         <div className={`navbar-links ${isMobileView && isMenuOpen ? "open" : ""}`} ref={menuRef}>
-          {/* ✅ FIX: Home Link Navigation */}
-          <Link to="/" replace onClick={handleHomeClick} className="nav-link">
+          <Link to="/" replace onClick={() => handleNavLinkClick("/")} className="nav-link">
             Home
           </Link>
 
-          {/* ✅ Render the remaining navbar links - Remove duplicate Home */}
           {navbarLinks
-            .filter((link) => link.name.toLowerCase() !== "home") // 🚀 Remove duplicate Home link
+            .filter((link) => link.name.toLowerCase() !== "home")
             .map((link) => (
               <Link
                 key={link.id}
                 to={`/${link.name.toLowerCase().replace(/\s+/g, "-")}`}
                 className="nav-link"
-                onClick={() => setIsMenuOpen(false)}
+                onClick={() => handleNavLinkClick(`/${link.name.toLowerCase().replace(/\s+/g, "-")}`)}
               >
                 {link.label}
               </Link>
             ))}
 
           {user && isAdmin && (
-            <Link to="/admin" className="nav-link" onClick={() => setIsMenuOpen(false)}>
+            <Link to="/admin" className="nav-link" onClick={() => handleNavLinkClick("/admin")}>
               <FaCog /> Admin
             </Link>
           )}
 
           {user && (
             <>
-              <Link to="/account" className="nav-link" onClick={() => setIsMenuOpen(false)}>
+              <Link to="/account" className="nav-link" onClick={() => handleNavLinkClick("/account")}>
                 <FaUserAlt /> Account
               </Link>
               <button className="nav-link-signout" onClick={handleSignOut}>
                 <FaSignOutAlt /> Sign Out
               </button>
             </>
+          )}
+
+          {/* ✅ Move Cart Inside Menu */}
+          <button className="cart-icon nav-link" onClick={toggleCartPreview}>
+            <FaCartPlus />
+            {cartItemCount > 0 && <span className="cart-badge">{cartItemCount}</span>}
+          </button>
+
+          {/* ✅ Conditionally Render Cart Preview */}
+          {isCartPreviewOpen && (
+            <div className="cart-preview-container" ref={cartRef}>
+              <CartPreview onClose={closeCartPreview} />
+            </div>
           )}
         </div>
       )}

@@ -305,9 +305,9 @@ const staveQuantity = selectedOption.staveQuantity !== undefined ? selectedOptio
         </ul>
       </div>
 
-      {/* 📌 Sound Profile Charts */}
-      {/* <SpiderChart data={[soundProfile.projection, soundProfile.sustain, soundProfile.brightness, soundProfile.warmth, soundProfile.attack]} />
-      <BarChart data={soundProfile} /> */}
+      📌 Sound Profile Charts
+      <SpiderChart data={[soundProfile.projection, soundProfile.sustain, soundProfile.brightness, soundProfile.warmth, soundProfile.attack]} />
+      <BarChart data={soundProfile} />
     </div>
   );
 };
