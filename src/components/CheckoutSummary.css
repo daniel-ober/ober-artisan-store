@@ -2,73 +2,87 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* justify-content: center; */
-    min-height: 100vh; /* Full height for centering */
-    background-color: #f9f9f9; /* Light background for contrast */
-    padding: 20px;
-    font-family: Arial, sans-serif; /* Default font family */
+    min-height: 100vh;
+    background-color: #f9f9f9;
+    padding: 30px;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
 }
 
 .transaction-success h1 {
     font-size: 2.5rem;
-    color: #4caf50; /* Green color for success message */
-    margin-bottom: 20px;
-}
-
-.transaction-success p {
-    font-size: 1.2rem;
-    color: #333; /* Dark text color for readability */
-    margin: 10px 0;
-}
-
-.order-details {
-    background-color: #ffffff; /* White background for order details */
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    padding: 20px;
-    margin-top: 20px;
-    width: 100%;
-    max-width: 600px; /* Max width for better readability */
-}
-
-.order-details h2 {
-    font-size: 1.8rem;
-    color: #333; /* Dark color for headings */
+    color: #4caf50;
     margin-bottom: 15px;
 }
 
-.order-details p {
-    font-size: 1rem;
-    color: #555; /* Slightly lighter text for details */
-    margin: 5px 0;
+.confirmation-msg {
+    font-size: 1.3rem;
+    color: #333;
+    margin-bottom: 20px;
 }
 
-/* Signup Banner Styles */
+.order-details {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    text-align: left;
+}
+
+.order-details h2, .order-details h3 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.item-list {
+    list-style: none;
+    padding: 0;
+}
+
+.item-list li {
+    background: #f5f5f5;
+    margin: 5px 0;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+.total {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.print-receipt {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
 .signup-banner {
-    background-color: #4caf50; /* Green background */
-    color: white; /* White text */
+    background: #4caf50;
+    color: white;
     padding: 15px;
     border-radius: 5px;
     margin-top: 20px;
-    text-align: center; /* Centered text */
-    width: 100%;
-    max-width: 600px; /* Max width for better readability */
+    text-align: center;
+    max-width: 600px;
 }
 
 .signup-button {
-    display: inline-block;
-    margin-top: 10px;
+    background: white;
+    color: #4caf50;
     padding: 10px 15px;
-    /* background-color: #ffffff; White background for the button */
-    color: #4caf50; /* Green text for the button */
-    border: none;
     border-radius: 5px;
-    text-decoration: none; /* Remove underline */
-    font-weight: bold; /* Bold text */
-    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
 }
 
 .signup-button:hover {
-    /* background-color: ; Light gray on hover */
-    cursor: pointer; /* Pointer cursor for button */
+    background: #e0e0e0;
 }

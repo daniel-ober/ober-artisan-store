@@ -1,5 +1,6 @@
 const feuzonSummaries = {
   pricingOptions: [
+    // 14"-Base Price: $1450-7.0"-8 Lugs-16-13mm-Maple-Walnut + Birch
     { size: "12", depth: "5.0", price: 1050, reRing: false, stripePriceId: "price_1Qq1kAJbbx8jAR4NoZAX4EbT", lugQuantity: 6, staveQuantity: 12 },
     { size: "12", depth: "6.0", price: 1150, reRing: false, stripePriceId: "price_1Qq1kAJbbx8jAR4NO3d18RPw", lugQuantity: 6, staveQuantity: 12 },
     { size: "12", depth: "7.0", price: 1250, reRing: false, stripePriceId: "price_1Qq1kAJbbx8jAR4NTiyiktS9", lugQuantity: 6, staveQuantity: 12 },
