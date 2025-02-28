@@ -1,6 +1,6 @@
 {
   "projects": {
-    "default": "danoberartisandrums-stg",
+    "default": "danoberartisandrums-dev",
     "production": "danoberartisandrums",
     "y": "danoberartisandrums",
     "dev": "danoberartisandrums-dev",

@@ -93,7 +93,8 @@ body.dark .navbar-background {
 }
 
 .nav-link-signout {
-  background-color: transparent !important;
+  /* color: white; */
+  /* background-color: transparent !important; */
 }
 
 /* 🔥 FIX: Menu Button Always Fully Transparent (No Background, No Border, No Outline) */

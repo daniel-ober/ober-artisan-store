@@ -46,17 +46,31 @@
       ]
     }
   ],
-  "functions": {
-    "source": "functions",
-    "ignore": [
-      "node_modules",
-      ".git"
-    ],
-    "predeploy": [
-      "npm --prefix \"$RESOURCE_DIR\" run lint"
-    ],
-    "runtime": "nodejs18"
-  },
+  "functions": [
+    {
+      "source": "functions",
+      "ignore": [
+        "node_modules",
+        ".git"
+      ],
+      "predeploy": [
+        "npm --prefix \"$RESOURCE_DIR\" run lint"
+      ],
+      "runtime": "nodejs18",
+      "codebase": "default"
+    },
+    {
+      "source": "recaptcha-functions",
+      "codebase": "recaptcha-functions",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        "*.local"
+      ]
+    }
+  ],
   "firestore": {
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"

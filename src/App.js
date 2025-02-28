@@ -56,6 +56,7 @@ function App() {
   const location = useLocation();
 
   // Debugging logs
+  console.log("reCAPTCHA Site Key:", process.env.REACT_APP_RECAPTCHA_SITE_KEY);
   console.log('🔍 User from AuthContext:', user);
   console.log('🔍 Admin Status in App.js:', isAdmin);
   console.log('🌓 Global Dark Mode State:', isDarkMode);
