@@ -32,7 +32,7 @@ const ArtisanSeries = () => {
       <section className="drum-section left">
         <div className="text-layer">
           <img
-            src={isDarkMode ? "/artisanseries/heritage-white.png" : "/artisanseries/heritage-black.png"}
+            src={isDarkMode ? "/artisanseries/heritage-white.png" : "/artisanseries/heritage-white.png"}
             alt="HERÌTAGE Series"
             className="header-image"
           />
@@ -61,7 +61,7 @@ const ArtisanSeries = () => {
       <section className="drum-section right">
         <div className="text-layer">
           <img
-            src={isDarkMode ? "/artisanseries/feuzon-white.png" : "/artisanseries/feuzon-black.png"}
+            src={isDarkMode ? "/artisanseries/feuzon-white.png" : "/artisanseries/feuzon-white.png"}
             alt="FEUZØN Series"
             className="header-image"
           />
@@ -89,7 +89,7 @@ const ArtisanSeries = () => {
       <section className="drum-section left">
         <div className="text-layer">
           <img
-            src={isDarkMode ? "/artisanseries/soundlegend-white.png" : "/artisanseries/soundlegend-black.png"}
+            src={isDarkMode ? "/artisanseries/soundlegend-white.png" : "/artisanseries/soundlegend-white.png"}
             alt="SoundLegend Series"
             className="header-image"
           />
@@ -128,7 +128,7 @@ const ArtisanSeries = () => {
               <li>Available Sizes: 12”, 13”, 14”</li>
               <li>Finish: Natural semi-gloss, Torch-scorched aesthetic</li>
               <li>Wood Selection: Northern Red Oak</li>
-              <li>Price Range: <strong>$850 - $1,300</strong></li>
+              <li>Starting Price: <strong>$850</strong></li>
             </ul>
             <a href="/products/heritage" className="preorder-button">Pre-Order Now</a>
           </div>
@@ -139,8 +139,8 @@ const ArtisanSeries = () => {
             <ul className="description-list">
               <li>Shell Construction: Stave, Steam-Bent, or Hybrid</li>
               <li>Fully Customizable: Size, Lugs, Finish, Wood</li>
-              <li>Hands-on experience: Consultation + Concept Renders</li>
-              <li>Price Range: <strong>$1,500 - $2,500+</strong></li>
+              <li>Hands-on experience: Consultation + Concept Renders + Limited Edition Swag </li>
+              <li>Starting Price: <strong>$1,750</strong></li>
             </ul>
             <a href="/products/soundlegend" className="preorder-button">Pre-Order Now</a>
           </div>
@@ -153,7 +153,7 @@ const ArtisanSeries = () => {
               <li>Available Sizes: 12”, 13”, 14”</li>
               <li>Finish: Natural or Stained</li>
               <li>Wood Selection: Stave (varied) + limited vapor bent woods</li>
-              <li>Price Range: <strong>$1,050 - $1,500</strong></li>
+              <li>Starting Price: <strong>$1,050</strong></li>
             </ul>
             <a href="/products/feuzon" className="preorder-button">Pre-Order Now</a>
           </div>
