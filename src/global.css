@@ -28,7 +28,7 @@ body.light * {
 /* ✅ Dark Mode Styles */
 body.dark {
   background-color: #111111;
-  color: #ffffff;
+  /* color: #ffffff; */
 }
 
 /* 🔥 OVERRIDE: Cart Title */
