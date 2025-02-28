@@ -132,6 +132,17 @@
   transform: translateY(0);
 }
 
+.description-list,
+.text-layer {
+  color: white;
+}
+
+ul,
+.description-list,
+.drum-final-section {
+  color: white;
+}
+
 .drum-info ul {
   list-style: none;
   padding: 0;
