@@ -22,7 +22,7 @@ const inquiryCategories = [
   { value: 'Custom Shop', label: 'Custom Shop – Custom drum builds or modifications' },
   { value: 'Partner Relations', label: 'Partner Relations – Vendor inquiries or partnership opportunities' },
   { value: 'Product Information', label: 'Product Information – Ask about products or specifications' },
-  { value: 'Shipping & Delivery', label: 'Shipping updates or tracking info' },
+  { value: 'Shipping & Delivery', label: 'Shipping & Delivery – Shipping updates or tracking info' },
   { value: 'Technical Assistance', label: 'Technical Assistance – Account and login issues' },
   { value: 'Website Feedback', label: 'Website Feedback – Share feedback or ideas' },
   { value: 'Other', label: 'Other' },

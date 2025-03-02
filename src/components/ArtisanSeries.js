@@ -34,7 +34,7 @@ const ArtisanSeries = () => {
           <img
             src={isDarkMode ? "/artisanseries/heritage-white.png" : "/artisanseries/heritage-white.png"}
             alt="HERÌTAGE Series"
-            className="header-image"
+            className="artisanseries-header-image "
           />
           <p className="description">
             <strong>“The drum that started it all—classic craftsmanship, timeless sound.”</strong>
@@ -49,7 +49,7 @@ const ArtisanSeries = () => {
             <li>Available Sizes: 12”, 13”, 14”</li>
             <li>Finish: Light gloss, Medium gloss, Torch-scorched aesthetic</li>
             <li>Wood Selection: Northern Red Oak</li>
-            <li>Price Range: <strong>$850 - $1,300</strong></li>
+            <li>Price Range: <strong>$850 - $1,400</strong></li>
           </ul>
         </div>
         <div className="drum-layer">
@@ -63,21 +63,21 @@ const ArtisanSeries = () => {
           <img
             src={isDarkMode ? "/artisanseries/feuzon-white.png" : "/artisanseries/feuzon-white.png"}
             alt="FEUZØN Series"
-            className="header-image"
+            className="artisanseries-header-image"
           />
           <p className="description">
             <strong>“Blending tradition and innovation into one harmonious voice.”</strong>
           </p>
           <p className="description">
-            The FEUZØN Series is a revolutionary hybrid snare drum that fuses the precision of stave construction with the controlled resonance of a vapor (steam) bent outer shell.
+            The FEUZØN Series is a revolutionary hybrid snare drum that fuses the precision of stave construction with the controlled resonance of a steam bent outer shell.
             This innovative design enhances warmth, articulation, and dynamic response, offering a snare drum unlike any other. Each drum is torch-tuned to refine its sonic character, bringing out the rich harmonics and bold presence that drummers crave.
           </p>
           <ul className="description-list">
-            <li>Shell Construction: Stave + Vapor Bent</li>
+            <li>Shell Construction: Stave + Steam Bent</li>
             <li>Available Sizes: 12”, 13”, 14”</li>
             <li>Finish: Natural or Stained</li>
-            <li>Wood Selection: Stave (varied) + limited vapor bent woods</li>
-            <li>Price Range: <strong>$1,050 - $1,500</strong></li>
+            <li>Wood Selection: Stave (varied) + limited steam bent woods</li>
+            <li>Price Range: <strong>$1,050 - $1,600</strong></li>
           </ul>
         </div>
         <div className="drum-layer">
@@ -91,7 +91,7 @@ const ArtisanSeries = () => {
           <img
             src={isDarkMode ? "/artisanseries/soundlegend-white.png" : "/artisanseries/soundlegend-white.png"}
             alt="SoundLegend Series"
-            className="header-image"
+            className="artisanseries-header-image"
           />
           <p className="description">
             <strong>“Every drum tells a story—let’s craft yours together.”</strong>
@@ -105,7 +105,7 @@ const ArtisanSeries = () => {
             <li>Shell Construction: Stave, Steam-Bent, or Hybrid</li>
             <li>Fully Customizable: Size, Lugs, Finish, Wood</li>
             <li>Hands-on experience: Consultation + Concept Renders</li>
-            <li>Price Range: <strong>$1,500 - $2,500+</strong></li>
+            <li>Starting Price: <strong>$1,250</strong></li>
           </ul>
         </div>
         <div className="drum-layer">
@@ -140,7 +140,7 @@ const ArtisanSeries = () => {
               <li>Shell Construction: Stave, Steam-Bent, or Hybrid</li>
               <li>Fully Customizable: Size, Lugs, Finish, Wood</li>
               <li>Hands-on experience: Consultation + Concept Renders + Limited Edition Swag </li>
-              <li>Starting Price: <strong>$1,750</strong></li>
+              <li>Starting Price: <strong>$1,250</strong></li>
             </ul>
             <a href="/products/soundlegend" className="preorder-button">Pre-Order Now</a>
           </div>
@@ -149,10 +149,10 @@ const ArtisanSeries = () => {
           <div className="drum-info">
             <img src="/artisanseries/feuzon-white.png" alt="Feuzon" className="drum-logo" />
             <ul className="description-list">
-              <li>Shell Construction: Stave + Vapor Bent</li>
+              <li>Shell Construction: Stave + Steam Bent</li>
               <li>Available Sizes: 12”, 13”, 14”</li>
               <li>Finish: Natural or Stained</li>
-              <li>Wood Selection: Stave (varied) + limited vapor bent woods</li>
+              <li>Wood Selection: Stave (varied) + limited steam bent woods</li>
               <li>Starting Price: <strong>$1,050</strong></li>
             </ul>
             <a href="/products/feuzon" className="preorder-button">Pre-Order Now</a>
