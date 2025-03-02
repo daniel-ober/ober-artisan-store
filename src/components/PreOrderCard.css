@@ -1,5 +1,5 @@
 /* PreOrderCard.css */
-.product-card {
+.preorder-card {
     background: white;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -7,15 +7,52 @@
     transition: transform 0.2s ease;
   }
   
-  .product-card:hover {
+  .preorder-card:hover {
     transform: scale(1.02);
   }
-  
-  .product-info {
+
+  /* Image Container */
+.preorder-image-container {
+  height: 250px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.preorder-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.preorder-header-image {
+  max-width: 160px; /* Reduce logo size for better balance */
+  }
+
+  /* Product Description */
+.preorder-description {
+  font-size: 14px;
+  font-family: sans-serif;
+  text-align: justify;
+  color: #222;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  min-height: var(--min-description-height, auto); /* Dynamically set */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+  .preorder-info {
     padding: 15px;
   }
+
+  .preorder-options-starting-at {
+    font-size: 14px;
+    color: #666;
+  }
   
-  .prod-card-view-details-button {
+  .preorder-card-view-details-button {
     background: #222;
     color: white;
     border: none;
@@ -24,7 +61,7 @@
     width: 100%;
   }
   
-  .prod-card-preorder-button {
+  .preorder-card-preorder-button {
     background: green;
     color: white;
     border: none;
@@ -33,7 +70,7 @@
     width: 100%;
   }
   
-  .prod-card-view-details-button:hover,
-  .prod-card-preorder-button:hover {
+  .preorder-card-view-details-button:hover,
+  .preorder-card-preorder-button:hover {
     background: #333;
   }
