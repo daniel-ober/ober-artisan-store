@@ -221,15 +221,16 @@ const staveQuantity = selectedOption.staveQuantity !== undefined ? selectedOptio
           <div className="heritage-features">
             <h2>HERÍTAGE Series Features</h2>
             <ul>
-              <li>Oak Shell</li>
-              <li>Double Tube Lugs</li>
+              <li>Northern Red Oak</li>
+              <li>Stave Construction</li>
+              <li>Double Ended Tube Lugs</li>
               <li>Roundover Outer / 45° Inner Bearing Edge</li>
               <li>Precision Cut Snare Beds</li>
               <li>Natural Semi-Gloss Finish</li>
               <li>Torch Tuned for Maximum Resonance</li>
               <li>Trick Snare Throw-Off</li>
-              <li>Puresound Pro 20 Snare Wires</li>
-              <li>Remo Ambassador Batter & Hazy Side Heads</li>
+              <li>Puresound Snare Wires</li>
+              <li>Remo Coated Ambassador Batter & Clear Snare Side</li>
             </ul>
           </div>
 
@@ -285,29 +286,25 @@ const staveQuantity = selectedOption.staveQuantity !== undefined ? selectedOptio
 
       {/* 📌 Drum Summary Section */}
       <div className="drum-summary">
-        <h3>🎯 Highlighted Characteristics</h3>
+      <SpiderChart data={[soundProfile.projection, soundProfile.sustain, soundProfile.brightness, soundProfile.warmth, soundProfile.attack]} />
+      {/* <BarChart data={soundProfile} /> */}
+      <h1>Artisan Notes</h1>
+        <h3>🎛️ Highlighted Characteristics</h3>
         <p>{selectedDrumSummary.highlightedCharacteristics || "Select options to view summary"}</p>
 
-        <h3>🎵 Primary Genre</h3>
-        <p>{selectedDrumSummary.primaryGenre || "Select options to view summary"}</p>
-
-        <h3>🎤 Best Playing Situations</h3>
-        <p>{selectedDrumSummary.playingSituation || "Select options to view summary"}</p>
-
-        <h3>🎙 Recommended Recording Mic</h3>
-        <p>{selectedDrumSummary.recordingMic || "Select options to view summary"}</p>
-
-        <h3>🎵 Secondary Genres</h3>
+        <h3>🎵 Genre Top Picks</h3>
+        {selectedDrumSummary.primaryGenre || "Select options to view summary"}
         <ul>
           {selectedDrumSummary.secondaryGenres?.map((genre, idx) => (
             <li key={idx}>{genre}</li>
           )) || "Select options to view summary"}
         </ul>
-      </div>
+        {/* <h3>🎤 Playing Situations</h3>
+        <p>{selectedDrumSummary.playingSituation || "Select options to view summary"}</p> */}
 
-      📌 Sound Profile Charts
-      <SpiderChart data={[soundProfile.projection, soundProfile.sustain, soundProfile.brightness, soundProfile.warmth, soundProfile.attack]} />
-      <BarChart data={soundProfile} />
+        <h3>🎙 Recording Mic Top Picks</h3>
+        <p>{selectedDrumSummary.recordingMic || "Select options to view summary"}</p>
+      </div>
     </div>
   );
 };

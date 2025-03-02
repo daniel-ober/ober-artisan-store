@@ -22,7 +22,7 @@ body.light {
 }
 
 body.light * {
-  /* color: #000000; */
+  color: #000000;
 }
 
 /* ✅ Dark Mode Styles */
