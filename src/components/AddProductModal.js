@@ -96,15 +96,15 @@ const AddProductModal = ({ onClose }) => {
       console.warn('[handleArtisanSubmit] Duplicate submission prevented.');
       return;
     }
-
+  
     isSubmitting = true; // Set lock
     setIsUploading(true);
     setError('');
     setSuccessProductId(null);
-
+  
     try {
       console.log(`[handleArtisanSubmit] Called at ${new Date().toISOString()}`);
-
+  
       if (
         !newProduct.name ||
         !newProduct.description ||
@@ -118,52 +118,48 @@ const AddProductModal = ({ onClose }) => {
           'Name, description, price, delivery time, and valid inventory values are required fields.'
         );
       }
-
+  
       const generatedSku = generateSku(newProduct.category, newProduct.artisanLine);
-
-      const uploadedImages = await Promise.all(
+  
+      // **STEP 1: Upload Images to Firebase Storage**
+      console.log("[handleArtisanSubmit] Uploading images to Firebase Storage...");
+      const uploadedImageUrls = await Promise.all(
         imageFiles.map((file) => uploadImage(file, 'products'))
       );
-
-      const finalProductData = {
-        ...newProduct,
-        ...artisanData,
-        sku: generatedSku, // Auto-generated SKU
-        images: uploadedImages,
-        createdAt: serverTimestamp(),
-        currentQuantity: newProduct.maxQuantity, // Initialize currentQuantity
-        isOutOfStock: newProduct.maxQuantity === 0, // Automatically set out-of-stock flag
-      };
-
-      console.log('[handleArtisanSubmit] Final Product Data for Firestore:', finalProductData);
-
+      console.log("[handleArtisanSubmit] Uploaded image URLs:", uploadedImageUrls);
+  
+      // **STEP 2: Create Product in Stripe with Firebase Image URLs**
       const stripeProduct = await createStripeProduct(
-        finalProductData.name,
-        finalProductData.description,
-        finalProductData.price,
-        uploadedImages,
-        { SKU: generatedSku } // Pass SKU in metadata
+        newProduct.name,
+        newProduct.description,
+        uploadedImageUrls, // Pass only URLs here
+        { SKU: generatedSku } // Pass metadata
       );
-
-      if (!stripeProduct || !stripeProduct.product.id) {
+  
+      if (!stripeProduct || !stripeProduct.id) {
         throw new Error('Failed to create Stripe product.');
       }
-
+  
       console.log(
         '[handleArtisanSubmit] Saving Product to Firestore with Stripe Product ID:',
-        stripeProduct.product.id
+        stripeProduct.id
       );
-
+  
+      // **STEP 3: Save Product to Firestore**
       const docRef = await addDoc(collection(db, 'products'), {
-        ...finalProductData,
-        stripeProductId: stripeProduct.product.id,
-        stripePriceId: stripeProduct.price.id,
+        ...newProduct,
+        ...artisanData,
+        sku: generatedSku,
+        images: uploadedImageUrls, // Ensure images are Firebase Storage URLs
+        createdAt: serverTimestamp(),
+        stripeProductId: stripeProduct.id,
+        isOutOfStock: newProduct.maxQuantity === 0, // Automatically set out-of-stock flag
       });
-
+  
       console.log('[handleArtisanSubmit] Firestore Document Created:', docRef.id);
-
       setSuccessProductId(docRef.id);
-
+  
+      // **Reset Form After Successful Submission**
       setNewProduct({
         category: '',
         artisanLine: '',

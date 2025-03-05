@@ -1,4 +1,3 @@
-// backend/server.js
 require('dotenv').config({ path: `.env.${process.env.NODE_ENV}` });
 
 console.log('NODE_ENV:', process.env.NODE_ENV);
@@ -350,12 +349,12 @@ app.get('/api/orders/by-session/:sessionId', async (req, res) => {
 });
 
 // Import and mount routes
-const chatRoute = require('./routes/chat');
-const inquiriesRoute = require('./routes/inquiries');
-const productsRoute = require('./routes/products');
-const ordersRoute = require('./routes/orders');
-const usersRoute = require('./routes/users');
-const cartsRoute = require('./routes/carts');
+const chatRoute = require('../functions/src/routes/chat');
+const inquiriesRoute = require('../functions/src/routes/inquiries');
+const productsRoute = require('../functions/src/routes/products');
+const ordersRoute = require('../functions/src/routes/orders');
+const usersRoute = require('../functions/src/routes/users');
+const cartsRoute = require('../functions/src/routes/carts');
 
 app.use('/api/chat', chatRoute);
 app.use('/api/inquiries', inquiriesRoute);
@@ -370,7 +369,7 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Internal Server Error' });
 });
 
-// Start the server
+// Start the server, default to 4949 for local dev, but use PORT for cloud environments like Cloud Run
 const PORT = process.env.PORT || 4949;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

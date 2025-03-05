@@ -234,7 +234,7 @@ const staveQuantity = selectedOption.staveQuantity !== undefined ? selectedOptio
             </ul>
           </div>
 
-          <h2>Customize Your Drum</h2>
+          <h2>Build Options</h2>
 
           {/* Snare Size */}
           <label htmlFor="size">Snare Size (Diameter)</label>

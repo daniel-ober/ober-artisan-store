@@ -1,3 +1,5 @@
+// functions/src/updateInventory.js
+
 const functions = require("firebase-functions/v1");
 const admin = require("firebase-admin");
 
@@ -10,7 +12,7 @@ const db = admin.firestore();
 // **Ensure Cloud Function is correctly structured**
 exports.updateInventory = functions
     .region("us-central1")
-    .https.onCall(async (data, context) => {
+    .https.onCall(async (data) => { // Removed 'context' parameter
         console.log("🔥 updateInventory function triggered.");
 
         if (!data || !data.cartItems || !data.userId) {

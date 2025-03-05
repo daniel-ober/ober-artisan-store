@@ -417,7 +417,7 @@ const FeuzonProductDetail = () => {
         console.log(`✅ Stave Option reset to ${defaultStaveOption}`);
       }
     }
-  }, [size, lugs]); 
+  }, [size, lugs]);
 
   // ✅ Fetch Product Availability from Firestore
   useEffect(() => {
@@ -512,9 +512,9 @@ const FeuzonProductDetail = () => {
         </div>
 
         {/* 📌 Right Side: Product Features + Customization */}
-        <div className="feuzon-product-options">
           {/* 📌 Default Features List */}
           <div className="feuzon-features">
+        <div className="feuzon-product-options">
             <h2>FEUZØN Series Features</h2>
             <ul>
               <li>Hybrid Shell Construction</li>
@@ -528,140 +528,139 @@ const FeuzonProductDetail = () => {
               <li>Remo Coated Ambassador Batter & Clear Snare Side</li>
             </ul>
           </div>
+          <div className="feuzon-order-form">
+            <h2>Customize Your Drum</h2>
 
-          <h2>Customize Your Drum</h2>
-
-          {/* Snare Size */}
-          <label htmlFor="size">Snare Size (Diameter)</label>
-          <select
-            id="size"
-            value={size}
-            onChange={(e) => {
-              setSize(e.target.value);
-              setSelectionChanged(true); // ✅ Mark selection as changed
-            }}
-          >
-            {Object.keys(basePrices).map((sizeOption) => (
-              <option key={sizeOption} value={sizeOption}>
-                {sizeOption}&quot; - Base Price: ${basePrices[sizeOption]}
-              </option>
-            ))}
-          </select>
-
-          {/* Depth */}
-          <label htmlFor="depth">Depth</label>
-          <select
-            id="depth"
-            value={depth}
-            onChange={(e) => {
-              setDepth(e.target.value);
-              setSelectionChanged(true);
-            }}
-          >
-            {Object.keys(depthPrices[size]).map((depthOption) => (
-              <option key={depthOption} value={depthOption}>
-                {depthOption}&quot;
-                {depthPrices[size][depthOption] > 0
-                  ? ` +$${depthPrices[size][depthOption]}`
-                  : ''}
-              </option>
-            ))}
-          </select>
-
-          {/* Outer Shell Selection */}
-          <label htmlFor="outerShell">Exterior Shell (Steam Bent)</label>
-          <select
-            id="outerShell"
-            value={outerShell}
-            onChange={(e) => {
-              setOuterShell(e.target.value);
-              setSelectionChanged(true);
-            }}
-          >
-            {Object.keys(staveOptions).map((shell) => (
-              <option key={shell} value={shell}>
-                {shell}
-              </option>
-            ))}
-          </select>
-
-          {/* Inner Stave Selection */}
-          <label htmlFor="innerStave">Interior Shell (Stave)</label>
-          <select
-            id="innerStave"
-            value={innerStave}
-            onChange={(e) => {
-              setInnerStave(e.target.value);
-              setSelectionChanged(true);
-            }}
-          >
-            {staveOptions[outerShell].map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-
-          {/* Lug Quantity */}
-          <label htmlFor="lugs">Lug Quantity</label>
-          <select
-            id="lugs"
-            value={lugs}
-            onChange={(e) => {
-              setLugs(e.target.value);
-              setSelectionChanged(true);
-            }}
-          >
-            {lugOptions[size].map((lugOption) => (
-              <option key={lugOption} value={lugOption}>
-                {lugOption} Lugs
-              </option>
-            ))}
-          </select>
-
-          {/* Stave Quantity & Shell Thickness */}
-          <label htmlFor="staves">Stave Quantity & Shell Thickness</label>
-          <select
-            id="staves"
-            value={staveOption}
-            onChange={(e) => {
-              setStaveOption(e.target.value);
-              setSelectionChanged(true);
-            }}
-          >
-            {staveQuantities.map((option) => {
-              let displayOption = option;
-              if (
-                size === '14' &&
-                lugs === '10' &&
-                option.includes('10 -') &&
-                option.includes('Re-Rings')
-              ) {
-                displayOption = `${option}`;
-              }
-              return (
-                <option key={option} value={option}>
-                  {displayOption}
+            {/* Snare Size */}
+            <label htmlFor="size">Snare Size (Diameter)</label>
+            <select
+              id="size"
+              value={size}
+              onChange={(e) => {
+                setSize(e.target.value);
+                setSelectionChanged(true); // ✅ Mark selection as changed
+              }}
+            >
+              {Object.keys(basePrices).map((sizeOption) => (
+                <option key={sizeOption} value={sizeOption}>
+                  {sizeOption}&quot; - Base Price: ${basePrices[sizeOption]}
                 </option>
-              );
-            })}
-          </select>
+              ))}
+            </select>
 
-          {/* ✅ Total Price Display */}
-          <h3>Total Price: ${totalPrice}</h3>
+            {/* Depth */}
+            <label htmlFor="depth">Depth</label>
+            <select
+              id="depth"
+              value={depth}
+              onChange={(e) => {
+                setDepth(e.target.value);
+                setSelectionChanged(true);
+              }}
+            >
+              {Object.keys(depthPrices[size]).map((depthOption) => (
+                <option key={depthOption} value={depthOption}>
+                  {depthOption}&quot;
+                  {depthPrices[size][depthOption] > 0
+                    ? ` +$${depthPrices[size][depthOption]}`
+                    : ''}
+                </option>
+              ))}
+            </select>
 
-          {/* Add to Cart */}
-          <button onClick={handleAddToCart}>Add to Cart</button>
+            {/* Outer Shell Selection */}
+            <label htmlFor="outerShell">Exterior Shell (Steam Bent)</label>
+            <select
+              id="outerShell"
+              value={outerShell}
+              onChange={(e) => {
+                setOuterShell(e.target.value);
+                setSelectionChanged(true);
+              }}
+            >
+              {Object.keys(staveOptions).map((shell) => (
+                <option key={shell} value={shell}>
+                  {shell}
+                </option>
+              ))}
+            </select>
+
+            {/* Inner Stave Selection */}
+            <label htmlFor="innerStave">Interior Shell (Stave)</label>
+            <select
+              id="innerStave"
+              value={innerStave}
+              onChange={(e) => {
+                setInnerStave(e.target.value);
+                setSelectionChanged(true);
+              }}
+            >
+              {staveOptions[outerShell].map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+
+            {/* Lug Quantity */}
+            <label htmlFor="lugs">Lug Quantity</label>
+            <select
+              id="lugs"
+              value={lugs}
+              onChange={(e) => {
+                setLugs(e.target.value);
+                setSelectionChanged(true);
+              }}
+            >
+              {lugOptions[size].map((lugOption) => (
+                <option key={lugOption} value={lugOption}>
+                  {lugOption} Lugs
+                </option>
+              ))}
+            </select>
+
+            {/* Stave Quantity & Shell Thickness */}
+            <label htmlFor="staves">Stave Quantity & Shell Thickness</label>
+            <select
+              id="staves"
+              value={staveOption}
+              onChange={(e) => {
+                setStaveOption(e.target.value);
+                setSelectionChanged(true);
+              }}
+            >
+              {staveQuantities.map((option) => {
+                let displayOption = option;
+                if (
+                  size === '14' &&
+                  lugs === '10' &&
+                  option.includes('10 -') &&
+                  option.includes('Re-Rings')
+                ) {
+                  displayOption = `${option}`;
+                }
+                return (
+                  <option key={option} value={option}>
+                    {displayOption}
+                  </option>
+                );
+              })}
+            </select>
+
+            {/* ✅ Total Price Display */}
+            <h3>Total Price: ${totalPrice}</h3>
+
+            {/* Add to Cart */}
+            <button onClick={handleAddToCart}>Add to Cart</button>
+          </div>
         </div>
       </div>
 
-
-
       {/* 📌 Drum Summary Section (Now formatted like FeuzonProductDetail) */}
       <div className="drum-summary">
-      {/* <SpiderChart data={[soundProfile.projection, soundProfile.sustain, soundProfile.brightness, soundProfile.warmth, soundProfile.attack]} />
+        {/* <SpiderChart data={[soundProfile.projection, soundProfile.sustain, soundProfile.brightness, soundProfile.warmth, soundProfile.attack]} />
       <BarChart data={soundProfile} /> */}
-      <h1>Artisan Notes</h1>
+        <h1>Artisan Notes</h1>
         <h3>🎛️ Tonal Characteristics</h3>
         <p>
           {selectedDrumSummary?.highlightedCharacteristics ||
@@ -673,7 +672,7 @@ const FeuzonProductDetail = () => {
           {selectedDrumSummary?.primaryGenre ||
             'Select options to view summary'}
         </p>
-                <ul>
+        <ul>
           {selectedDrumSummary?.secondaryGenres?.length > 0 ? (
             selectedDrumSummary.secondaryGenres.map((genre, idx) => (
               <li key={idx}>{genre}</li>
@@ -682,7 +681,7 @@ const FeuzonProductDetail = () => {
             <li>Select options to view summary</li>
           )}
         </ul>
-{/* 
+        {/* 
         <h3>🎤 Best Playing Situations</h3>
         <p>
           {selectedDrumSummary?.playingSituation ||

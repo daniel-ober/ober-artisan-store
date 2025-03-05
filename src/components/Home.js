@@ -51,9 +51,9 @@ const Home = () => {
       {/* Highlights Section */}
       <div className="highlights-section">
         <div className="highlight">
-          <h2>Custom Shop</h2>
+          <h2>Soundlegend</h2>
           <p>Build your dream drum, customized to perfection.</p>
-          <Link to="/custom-shop" className="highlight-button">
+          <Link to="/soundlegend" className="highlight-button">
             <button>Custom Shop</button>
           </Link>
         </div>
