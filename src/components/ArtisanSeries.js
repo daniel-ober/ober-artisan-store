@@ -1,8 +1,10 @@
 import React, { useEffect, useContext } from "react";
 import "./ArtisanSeries.css";
+import { useNavigate } from "react-router-dom";
 import { DarkModeContext } from "../context/DarkModeContext";
 
-const ArtisanSeries = () => {
+const ArtisanSeries = ({ product = {} }) => {
+    const navigate = useNavigate();
   const { isDarkMode } = useContext(DarkModeContext);
 
   useEffect(() => {
@@ -25,6 +27,22 @@ const ArtisanSeries = () => {
       window.removeEventListener("scroll", revealOnScroll);
     };
   }, []);
+
+      // Determine button text dynamically
+      let preOrderButton;
+      if (product && product.currentQuantity === 0) {
+                preOrderButton = "Click here for Details";
+      } else if (product.id === "heritage") {
+        preOrderButton = "Pre-Order Now";
+      } else if (product.id === "feuzon") {
+        preOrderButton = "Pre-Order Now";
+      } else if (product.id === "soundlegend") {
+        preOrderButton = "Schedule Consultation";
+      } else if (product.id === "dreamfeather") {
+        preOrderButton = "Own This One-of-a-Kind Snare";
+      } else {
+        preOrderButton = "Pre-Order Now";
+      }
 
   return (
     <div className="artisanseries-container">
@@ -130,7 +148,12 @@ const ArtisanSeries = () => {
               <li>Wood Selection: Northern Red Oak</li>
               <li>Starting Price: <strong>$850</strong></li>
             </ul>
-            <a href="/products/heritage" className="preorder-button">Pre-Order Now</a>
+            <button
+className={product?.currentQuantity === 0 ? "prod-card-view-details-button" : "preorder-card-preorder-button"}
+              onClick={() => navigate("/pre-order")}
+            >
+              {preOrderButton}
+            </button>
           </div>
 
           {/* SOUNDLEGEND */}
@@ -139,10 +162,15 @@ const ArtisanSeries = () => {
             <ul className="description-list">
               <li>Shell Construction: Stave, Steam-Bent, or Hybrid</li>
               <li>Fully Customizable: Size, Lugs, Finish, Wood</li>
-              <li>Hands-on experience: Consultation + Concept Renders + Limited Edition Swag </li>
+              <li>Unforgettable Experience: Consultation + Concept Renders, Special Web Access, Swag, and more! </li>
               <li>Starting Price: <strong>$1,250</strong></li>
             </ul>
-            <a href="/products/soundlegend" className="preorder-button">Pre-Order Now</a>
+            <button
+              className={product.currentQuantity === 0 ? "prod-card-view-details-button" : "preorder-card-preorder-button"}
+              onClick={() => navigate("/pre-order")}
+            >
+              {preOrderButton}
+            </button>
           </div>
 
           {/* FEUZØN */}
@@ -155,7 +183,12 @@ const ArtisanSeries = () => {
               <li>Wood Selection: Stave (varied) + limited steam bent woods</li>
               <li>Starting Price: <strong>$1,050</strong></li>
             </ul>
-            <a href="/products/feuzon" className="preorder-button">Pre-Order Now</a>
+            <button
+              className={product.currentQuantity === 0 ? "prod-card-view-details-button" : "preorder-card-preorder-button"}
+              onClick={() => navigate("/pre-order")}
+            >
+              {preOrderButton}
+            </button>
           </div>
         </div>
       </section>
