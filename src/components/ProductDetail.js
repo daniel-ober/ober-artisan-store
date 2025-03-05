@@ -87,8 +87,7 @@ const ProductDetail = () => {
   return (
     <div className="product-detail-container">
       <h1 className="product-title">
-        {product?.name || "Unnamed Product"}, {product.depth}&quot; x{" "}
-        {product.width}&quot; {product.drumType} ({product.finish})
+        {product?.name || "Unnamed Product"}
       </h1>
 
       <div className="product-content">
@@ -189,9 +188,7 @@ const ProductDetail = () => {
                 </>
               ) : (
                 <button
-                  onClick={() =>
-                    addToCart({ ...product, id: productId, quantity: isArtisan ? 1 : quantity })
-                  }
+onClick={() => addToCart([...cart, { ...product, id: productId, quantity: isArtisan ? 1 : quantity }])}
                   className="prod-detail-add-to-cart-button"
                 >
                   Add to Cart

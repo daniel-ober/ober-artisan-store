@@ -18,6 +18,10 @@
   cursor: pointer;
 }
 
+.card-preorder-price {
+  /* padding-bottom: 20px; */
+}
+
 .preorder-image {
   width: 100%;
   height: 100%;

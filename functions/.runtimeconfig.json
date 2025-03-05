@@ -1,0 +1,12 @@
+{
+  "openai": {
+    "key": "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"
+  },
+  "recaptcha": {
+    "secret": "6Lf3WeUqAAAAAPoJE5-RDi4n1YTVHnTMLDyw_2Vc"
+  },
+  "stripe": {
+    "webhook_secret": "whsec_...",
+    "secret": "sk_test_51PrBd7Jbbx8jAR4NhFfH4oOmbY20nVEKmWwonRIoGplpZwEk65KNuNxY411kkHbRysJAh51aV5jJG94qyiFsdIpN00nLBrhiSL"
+  }
+}

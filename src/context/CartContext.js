@@ -96,59 +96,63 @@ export const CartProvider = ({ children }) => {
      * ✅ Add Product to Cart
      */
     const addToCart = async (updatedCart) => {
-      console.log("🛒 Attempting to add/update product in cart:", updatedCart);
-  
-      // 🚨 Validate Stripe Price ID for all items before proceeding
-      for (const item of updatedCart) {
-          if (!item.stripePriceId) {
-              console.error("❌ Missing Stripe Price ID for item:", item);
-              alert("A product is missing required payment information. Please refresh the page and try again.");
-              return;
-          }
-      }
-  
-      console.log("✅ All products have valid Stripe Price IDs!");
-  
-      if (!cartId) {
-          console.warn("❌ Cannot update Firestore: No cartId found.");
-          return;
-      }
-  
-      console.log("🔥 Attempting to save to Firestore:", updatedCart);
-  
-      const cartRef = doc(db, "carts", cartId);
-  
-      try {
-          // ✅ Ensure Firestore document exists before updating
-          const cartSnapshot = await getDoc(cartRef);
-          if (!cartSnapshot.exists()) {
-              console.warn("⚠️ Cart document does not exist. Creating new cart document.");
-              await setDoc(cartRef, { cart: [], userId: cartId, lastUpdated: serverTimestamp() });
-          }
-  
-          // 🔄 **Remove `undefined` fields from cart items**
-          const sanitizedCart = updatedCart.map(item => {
-              return Object.fromEntries(
-                  Object.entries(item).filter(([_, value]) => value !== undefined)
-              );
-          });
-  
-          console.log("🔥 Firestore Data After Cleaning:", sanitizedCart);
-  
-          // ✅ Now save the sanitized cart
-          await setDoc(cartRef, { 
-              cart: sanitizedCart, 
-              userId: cartId, 
-              lastUpdated: serverTimestamp() 
-          }, { merge: true });
-  
-          console.log("✅ Firestore Cart Successfully Updated!");
-          setCart(updatedCart); // ✅ Only update local state after Firestore success
-  
-      } catch (err) {
-          console.error("❌ Firestore Update Error:", err);
-      }
-  };
+        console.log("🛒 Attempting to add/update product in cart:", updatedCart);
+    
+        if (!Array.isArray(updatedCart)) {
+            console.error("❌ addToCart Error: updatedCart is not an array!", updatedCart);
+            alert("An unexpected error occurred while adding the item to the cart.");
+            return;
+        }
+    
+        // 🚨 Validate Stripe Price ID for all items before proceeding
+        for (const item of updatedCart) {
+            if (!item.stripePriceId) {
+                console.error("❌ Missing Stripe Price ID for item:", item);
+                alert("A product is missing required payment information. Please refresh the page and try again.");
+                return;
+            }
+        }
+    
+        console.log("✅ All products have valid Stripe Price IDs!");
+    
+        if (!cartId) {
+            console.warn("❌ Cannot update Firestore: No cartId found.");
+            return;
+        }
+    
+        console.log("🔥 Attempting to save to Firestore:", updatedCart);
+    
+        const cartRef = doc(db, "carts", cartId);
+    
+        try {
+            // ✅ Ensure Firestore document exists before updating
+            const cartSnapshot = await getDoc(cartRef);
+            if (!cartSnapshot.exists()) {
+                console.warn("⚠️ Cart document does not exist. Creating new cart document.");
+                await setDoc(cartRef, { cart: [], userId: cartId, lastUpdated: serverTimestamp() });
+            }
+    
+            // 🔄 **Remove `undefined` fields from cart items**
+            const sanitizedCart = updatedCart.map(item => 
+                Object.fromEntries(Object.entries(item).filter(([_, value]) => value !== undefined))
+            );
+    
+            console.log("🔥 Firestore Data After Cleaning:", sanitizedCart);
+    
+            // ✅ Save the sanitized cart
+            await setDoc(cartRef, { 
+                cart: sanitizedCart, 
+                userId: cartId, 
+                lastUpdated: serverTimestamp() 
+            }, { merge: true });
+    
+            console.log("✅ Firestore Cart Successfully Updated!");
+            setCart(sanitizedCart); // ✅ Only update local state after Firestore success
+    
+        } catch (err) {
+            console.error("❌ Firestore Update Error:", err);
+        }
+    };
   
     /**
      * ✅ Remove Product from Cart

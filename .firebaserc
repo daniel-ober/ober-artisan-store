@@ -1,43 +1,35 @@
 {
   "projects": {
     "default": "danoberartisandrums-dev",
-    "production": "danoberartisandrums",
-    "y": "danoberartisandrums",
     "dev": "danoberartisandrums-dev",
-    "prod": "danoberartisandrums",
-    "stg": "danoberartisandrums-stg"
+    "stg": "danoberartisandrums-stg",
+    "prod": "danoberartisandrums-prod"
   },
   "targets": {
-    "danoberartisandrums-stg": {
-      "hosting": {
-        "prod": [
-          "danoberartisandrums"
-        ],
-        "stg": [
-          "danoberartisandrums-stg"
-        ],
-        "dev": [
-          "danoberartisandrums-dev"
-        ]
-      }
-    },
-    "danoberartisandrums": {
-      "hosting": {
-        "prod": [
-          "danoberartisandrums"
-        ],
-        "stg": [
-          "danoberartisandrums-stg"
-        ],
-        "dev": [
-          "danoberartisandrums-dev"
-        ]
-      }
-    },
     "danoberartisandrums-dev": {
       "hosting": {
         "dev": [
           "danoberartisandrums-dev"
+        ],
+        "stg": [
+          "danoberartisandrums-stg"
+        ],
+        "prod": [
+          "danoberartisandrums-prod"
+        ]
+      }
+    },
+    "danoberartisandrums-stg": {
+      "hosting": {
+        "stg": [
+          "danoberartisandrums-stg"
+        ]
+      }
+    },
+    "danoberartisandrums-prod": {
+      "hosting": {
+        "prod": [
+          "danoberartisandrums-prod"
         ]
       }
     }
