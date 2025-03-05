@@ -157,7 +157,7 @@ const Cart = () => {
                   <td>
                     <p>{item.name}</p>
                     <p className="cart-sub-description">
-                      {item.size}&quot; Diameter | {item.depth}&quot; Depth | {item.lugQuantity}-lug | {item.reRing ? 'With Re-Ring' : ''}
+                      {item.size}&quot; Diameter | {item.depth}&quot; Depth | {item.lugQuantity}-lug | {item.reRing ? 'With Re-Ring' : 'Re-Rings: None'}
                     </p>
                   </td>
                   <td>${(Number(item.price) || 0).toFixed(2)}</td>

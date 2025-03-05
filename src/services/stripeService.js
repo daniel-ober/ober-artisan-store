@@ -67,6 +67,10 @@ export const createStripeProduct = async (name, description, images = [], metada
  */
 export const createStripePrice = async (productId, unitAmount) => {
   try {
+    if (!productId || !unitAmount) {
+      throw new Error("Invalid input: Product ID and unit amount are required.");
+    }
+
     const price = await stripe.prices.create({
       product: productId,
       unit_amount: unitAmount,
@@ -76,7 +80,7 @@ export const createStripePrice = async (productId, unitAmount) => {
     console.log(`✅ Stripe Price Created: ${price.id} for Product: ${productId}`);
     return price;
   } catch (error) {
-    console.error('❌ Error creating Stripe price:', error);
+    console.error("❌ Error creating Stripe price:", error);
     throw error;
   }
 };
