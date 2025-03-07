@@ -127,7 +127,7 @@ const ProductDetail = () => {
               </button>
             ) : isSoldOut ? (
               <button className="prod-detail-sold-out-button" disabled>
-                Sold Out
+                Sold Out - Notify Me When Available
               </button>
             ) : inCart ? (
               <>

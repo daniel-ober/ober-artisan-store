@@ -180,12 +180,12 @@ const Cart = () => {
                     </p>
                   </td>
                   <td>
-                    {item.price !== undefined ? (
-                      `$${Number(item.price).toFixed(2)}`
-                    ) : (
-                      <span style={{ color: 'red' }}>⚠️ Missing Price</span>
-                    )}
-                  </td>{' '}
+  {item.price !== undefined ? (
+    `$${Number(item.price).toFixed(2)}`
+  ) : (
+    <span style={{ color: "red" }}>⚠️ Missing Price</span>
+  )}
+</td>
                   <td>
                     {item.category === 'artisan' ? (
                       <span className="quantity-value">1</span>
