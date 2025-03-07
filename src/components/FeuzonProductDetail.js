@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../firebaseConfig'; // Import Firestore configuration
 import { doc, getDoc } from 'firebase/firestore'; // Add Firestore imports
-
 import { useCart } from '../context/CartContext'; // Adjust path if needed
 import SpiderChart from './SpiderChart';
 import BarChart from './BarChart';
@@ -108,71 +107,87 @@ const FeuzonProductDetail = () => {
 
   const handleAddToCart = async (addAsSeparateItem = false) => {
     console.log('🛒 Add to Cart button clicked!');
-
+  
     if (!stripePriceId) {
       console.error('❌ Missing Stripe Price ID! Firestore update may fail.');
-      alert(
-        'Stripe Payment ID is missing. Please refresh the page and try again.'
-      );
+      alert('Stripe Payment ID is missing. Please refresh the page and try again.');
       return;
     }
-
+  
+    // ✅ Generate a valid unique ID for the cart item
     const generatedId = `feuzon-${size}-${depth}-${lugs}-${staveQuantity}`;
     console.log('🆔 Generated ID:', generatedId);
     console.log('💳 Stripe Price ID:', stripePriceId);
-
-    let cartItem = {
-      id: generatedId,
-      productId: 'feuzon',
-      name: 'FEUZØN',
-      size,
-      depth,
-      reRing,
-      lugQuantity: lugs,
-      staveQuantity,
-      price: totalPrice,
-      stripePriceId,
-      outerShell, // ✅ Ensure outer shell is saved
-      innerStave, // ✅ Ensure inner stave is saved
-      quantity: 1, // ✅ Always explicitly set quantity to 1
+  
+    // ✅ Construct selectedOptions to pass necessary details
+    const selectedOptions = {
+      size: size || "N/A",
+      depth: depth || "N/A",
+      lugQuantity: lugs || "N/A",
+      staveQuantity: staveQuantity || "N/A",
+      reRing: reRing ?? false,
+      outerShell: outerShell || "N/A",
+      innerStave: innerStave || "N/A",
+      stripePriceId: stripePriceId || "",
+      totalPrice: Number(totalPrice) || 0, // 🔥 Ensure price is correctly stored
     };
-
+  
+    // ✅ Construct the cartItem object
+    const cartItem = {
+      id: `${stripePriceId || "no-stripe-id"}-${size}-${depth}-${reRing}-${lugs}-${staveQuantity}`,
+      productId: "feuzon",
+      name: "FEUZØN",
+      category: "artisan",
+      quantity: 1,
+      price: selectedOptions.totalPrice, // ✅ Fix price assignment
+      ...selectedOptions, // ✅ Spread all selectedOptions to ensure values are passed
+      timestamp: new Date().toISOString(),
+    };
+  
     console.log('🛠️ Cart Item before adding:', cartItem);
-
+    console.log('🔍 Debugging Selected Options:', selectedOptions);
+  
     let updatedCart = [...cart];
-
+  
+    // ✅ Check if product already exists in the cart
     const existingCustomProductIndex = updatedCart.findIndex(
-      (item) => item.productId === 'feuzon'
+      (item) =>
+        item.productId === 'feuzon' &&
+        item.size === size &&
+        item.depth === depth &&
+        item.lugQuantity === lugs &&
+        item.staveQuantity === staveQuantity &&
+        item.reRing === reRing
     );
-
+  
     if (existingCustomProductIndex !== -1 && !addAsSeparateItem) {
-      // ✅ Replace the existing Feuzon drum in cart
-      updatedCart[existingCustomProductIndex] = cartItem;
-      console.log('♻️ Replacing existing custom Feuzon in cart:', cartItem);
+      // ✅ Increase quantity instead of adding duplicate
+      updatedCart[existingCustomProductIndex].quantity += 1;
+      console.log('♻️ Updated existing Feuzon quantity in cart:', updatedCart);
     } else {
-      // ✅ Add as a new, separate Feuzon drum
+      // ✅ Add as new separate Feuzon drum
       updatedCart.push(cartItem);
       console.log('➕ Adding new Feuzon drum as separate item:', cartItem);
     }
-
+  
     console.log('📢 Updated Cart Before Firestore Save:', updatedCart);
-
+  
     try {
-      await addToCart(updatedCart);
+      await addToCart(cartItem, selectedOptions); // ✅ Pass correct arguments
       console.log('✅ Firestore updated successfully!');
     } catch (error) {
       console.error('❌ Error updating Firestore:', error);
       alert('An error occurred while updating the cart. Please try again.');
       return;
     }
-
+  
     setSelectionChanged(false);
-
+  
     if (!cartId) {
       console.error('❌ cartId is missing! Firestore may not update.');
       return;
     }
-
+  
     console.log('🔄 Checking Firestore for updated cart...');
     try {
       setTimeout(async () => {
@@ -180,7 +195,7 @@ const FeuzonProductDetail = () => {
         const cartDoc = await getDoc(cartRef);
         if (cartDoc.exists()) {
           console.log('✅ Firestore Cart Updated:', cartDoc.data().cart);
-
+  
           const updatedCartData = cartDoc.data().cart || [];
           const isProductInCart = updatedCartData.some(
             (item) => item.id === generatedId
@@ -367,8 +382,8 @@ const FeuzonProductDetail = () => {
       cart.map((item) => item.id)
     );
 
-    setProductInCart(isInCart);
-    console.log('✅ productInCart Updated to:', isInCart);
+    setProductInCart(cart.some((item) => item.id === generatedId));
+        console.log('✅ productInCart Updated to:', isInCart);
   }, [cart, size, depth, lugs, staveQuantity]);
 
   // ✅ **New Effect to Reset `innerStave` When `outerShell` Changes**
@@ -498,318 +513,168 @@ const FeuzonProductDetail = () => {
     .filter((item) => item.productId === 'feuzon')
     .reduce((sum, item) => sum + (item.quantity || 1), 0); // Sum quantities
 
-  return (
-    <div className="feuzon-product-detail">
-      <h1>FEUZØN Series Snare Drum</h1>
-
-      <div className="feuzon-product-content">
-        {/* 📌 Left Side: Product Image */}
-        <div className="feuzon-product-image">
-          <img
-            src="https://firebasestorage.googleapis.com/v0/b/danoberartisandrums-dev.firebasestorage.app/o/products%2F67c255d1-a9ca-4f5d-80af-ddeee6a424e1_IMG_6133.png?alt=media&token=a15b2e68-d34b-44fa-bf33-eccc4a025331"
-            alt="FEUZON Snare Drum"
-          />
-        </div>
-
-        {/* 📌 Right Side: Product Features + Customization */}
-          {/* 📌 Default Features List */}
-          <div className="feuzon-features">
-        <div className="feuzon-product-options">
-            <h2>FEUZØN Series Features</h2>
-            <ul>
-              <li>Hybrid Shell Construction</li>
-              <li>Double Ended Tube Lugs</li>
-              <li>Roundover Outer / 45° Inner Bearing Edge</li>
-              <li>Custom-Tuned for Maximum Projection</li>
-              <li>Handcrafted Semi-Gloss Finish</li>
-              <li>Precision Cut Snare Beds</li>
-              <li>Trick Snare Throw-Off</li>
-              <li>Puresound Snare Wires</li>
-              <li>Remo Coated Ambassador Batter & Clear Snare Side</li>
-            </ul>
+    return (
+      <div className="feuzon-product-detail">
+        <h1>FEUZØN Series Snare Drum</h1>
+  
+        <div className="feuzon-product-content">
+          <div className="feuzon-product-image">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/danoberartisandrums-dev.firebasestorage.app/o/products%2F67c255d1-a9ca-4f5d-80af-ddeee6a424e1_IMG_6133.png?alt=media&token=a15b2e68-d34b-44fa-bf33-eccc4a025331"
+              alt="FEUZON Snare Drum"
+            />
           </div>
-          <div className="feuzon-order-form">
-            <h2>Customize Your Drum</h2>
-
+  
+          <div className="feuzon-product-options">
+            {/* 📌 Default Features List */}
+            <div className="feuzon-features">
+              <h2>FEUZØN Series Features</h2>
+              <ul>
+                <li>Hybrid Shell Construction</li>
+                <li>Double Ended Tube Lugs</li>
+                <li>Roundover Outer / 45° Inner Bearing Edge</li>
+                <li>Custom-Tuned for Maximum Projection</li>
+                <li>Handcrafted Semi-Gloss Finish</li>
+                <li>Precision Cut Snare Beds</li>
+                <li>Trick Snare Throw-Off</li>
+                <li>Puresound Snare Wires</li>
+                <li>Remo Coated Ambassador Batter & Clear Snare Side</li>
+              </ul>
+            </div>
+  
+            <h2>Build Options</h2>
+  
             {/* Snare Size */}
             <label htmlFor="size">Snare Size (Diameter)</label>
-            <select
-              id="size"
-              value={size}
-              onChange={(e) => {
-                setSize(e.target.value);
-                setSelectionChanged(true); // ✅ Mark selection as changed
-              }}
-            >
+            <select id="size" value={size} onChange={(e) => setSize(e.target.value)}>
               {Object.keys(basePrices).map((sizeOption) => (
                 <option key={sizeOption} value={sizeOption}>
                   {sizeOption}&quot; - Base Price: ${basePrices[sizeOption]}
                 </option>
               ))}
             </select>
-
-            {/* Depth */}
+  
+            {/* Snare Depth */}
             <label htmlFor="depth">Depth</label>
-            <select
-              id="depth"
-              value={depth}
-              onChange={(e) => {
-                setDepth(e.target.value);
-                setSelectionChanged(true);
-              }}
-            >
+            <select id="depth" value={depth} onChange={(e) => setDepth(e.target.value)}>
               {Object.keys(depthPrices[size]).map((depthOption) => (
                 <option key={depthOption} value={depthOption}>
-                  {depthOption}&quot;
-                  {depthPrices[size][depthOption] > 0
-                    ? ` +$${depthPrices[size][depthOption]}`
-                    : ''}
+                  {depthOption}&quot; {depthPrices[size][depthOption] > 0 ? `+ $${depthPrices[size][depthOption]}` : ""}
                 </option>
               ))}
             </select>
-
-            {/* Outer Shell Selection */}
+  
+            {/* Exterior Shell Selection */}
             <label htmlFor="outerShell">Exterior Shell (Steam Bent)</label>
-            <select
-              id="outerShell"
-              value={outerShell}
-              onChange={(e) => {
-                setOuterShell(e.target.value);
-                setSelectionChanged(true);
-              }}
-            >
+            <select id="outerShell" value={outerShell} onChange={(e) => setOuterShell(e.target.value)}>
               {Object.keys(staveOptions).map((shell) => (
                 <option key={shell} value={shell}>
                   {shell}
                 </option>
               ))}
             </select>
-
-            {/* Inner Stave Selection */}
+  
+            {/* Interior Shell Selection */}
             <label htmlFor="innerStave">Interior Shell (Stave)</label>
-            <select
-              id="innerStave"
-              value={innerStave}
-              onChange={(e) => {
-                setInnerStave(e.target.value);
-                setSelectionChanged(true);
-              }}
-            >
+            <select id="innerStave" value={innerStave} onChange={(e) => setInnerStave(e.target.value)}>
               {staveOptions[outerShell].map((option) => (
                 <option key={option} value={option}>
                   {option}
                 </option>
               ))}
             </select>
-
+  
             {/* Lug Quantity */}
             <label htmlFor="lugs">Lug Quantity</label>
-            <select
-              id="lugs"
-              value={lugs}
-              onChange={(e) => {
-                setLugs(e.target.value);
-                setSelectionChanged(true);
-              }}
-            >
+            <select id="lugs" value={lugs} onChange={(e) => setLugs(e.target.value)}>
               {lugOptions[size].map((lugOption) => (
                 <option key={lugOption} value={lugOption}>
                   {lugOption} Lugs
                 </option>
               ))}
             </select>
-
+  
             {/* Stave Quantity & Shell Thickness */}
             <label htmlFor="staves">Stave Quantity & Shell Thickness</label>
-            <select
-              id="staves"
-              value={staveOption}
-              onChange={(e) => {
-                setStaveOption(e.target.value);
-                setSelectionChanged(true);
-              }}
-            >
-              {staveQuantities.map((option) => {
-                let displayOption = option;
-                if (
-                  size === '14' &&
-                  lugs === '10' &&
-                  option.includes('10 -') &&
-                  option.includes('Re-Rings')
-                ) {
-                  displayOption = `${option}`;
-                }
-                return (
-                  <option key={option} value={option}>
-                    {displayOption}
-                  </option>
-                );
-              })}
+            <select id="staves" value={staveOption} onChange={(e) => setStaveOption(e.target.value)}>
+              {staveQuantities.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
             </select>
-
-            {/* ✅ Total Price Display */}
+  
+            {/* Total Price */}
             <h3>Total Price: ${totalPrice}</h3>
-
+  
             {/* Add to Cart */}
             <button onClick={handleAddToCart}>Add to Cart</button>
           </div>
         </div>
-      </div>
-
-      {/* 📌 Drum Summary Section (Now formatted like FeuzonProductDetail) */}
-      <div className="drum-summary">
-        {/* <SpiderChart data={[soundProfile.projection, soundProfile.sustain, soundProfile.brightness, soundProfile.warmth, soundProfile.attack]} />
-      <BarChart data={soundProfile} /> */}
-        <h1>Artisan Notes</h1>
-        <h3>🎛️ Tonal Characteristics</h3>
-        <p>
-          {selectedDrumSummary?.highlightedCharacteristics ||
-            'Select options to view summary'}
-        </p>
-
-        <h3>🎵 Genre Top Picks</h3>
-        <p>
-          {selectedDrumSummary?.primaryGenre ||
-            'Select options to view summary'}
-        </p>
-        <ul>
-          {selectedDrumSummary?.secondaryGenres?.length > 0 ? (
-            selectedDrumSummary.secondaryGenres.map((genre, idx) => (
-              <li key={idx}>{genre}</li>
-            ))
-          ) : (
-            <li>Select options to view summary</li>
-          )}
-        </ul>
-        {/* 
-        <h3>🎤 Best Playing Situations</h3>
-        <p>
-          {selectedDrumSummary?.playingSituation ||
-            'Select options to view summary'}
-        </p> */}
-
-        <h3>🎙 Recording Mic Top Picks</h3>
-        <p>
-          {selectedDrumSummary?.recordingMic ||
-            'Select options to view summary'}
-        </p>
-
-        {/* <h3>🎵 Secondary Genres</h3>
-        <ul>
-          {selectedDrumSummary?.secondaryGenres?.length > 0 ? (
-            selectedDrumSummary.secondaryGenres.map((genre, idx) => (
-              <li key={idx}>{genre}</li>
-            ))
-          ) : (
-            <li>Select options to view summary</li>
-          )}
-        </ul> */}
-      </div>
-
-      {/* ✅ Button Actions - Manage UI Based on Cart & Stock State */}
-      <div className="button-group">
-        {productQuantity === 0 ? (
-          <button className="notify-button" onClick={handleNotifyMe}>
-            Sold Out - Notify Me When Available
-          </button>
-        ) : productInCart ? (
-          <>
-            <button
-              className="go-to-checkout-button"
-              onClick={() => (window.location.href = '/cart')}
-            >
-              Go to Checkout
-            </button>
-
-            <button
-              className="change-selections-button"
-              onClick={() => setShowModifyModal(true)}
-            >
-              Change Selections
-            </button>
-
-            <button
-              className="remove-from-cart-button"
-              onClick={async () => {
-                console.log('🛑 Removing custom product from cart...');
-                const generatedId = `feuzon-${size}-${depth}-${lugs}-${staveQuantity}`;
-                await removeFromCart(generatedId);
-                setProductInCart(false);
-              }}
-            >
-              Remove from Cart
-            </button>
-          </>
-        ) : (
-          <button
-            onClick={() => handleAddToCart()}
-            className="add-to-cart-button"
-          >
-            Add to Cart
-          </button>
-        )}
-      </div>
-
-      {/* ✅ Modal for Selection Change Confirmation
-    {selectionChanged && (
-      <div className="modal-overlay">
-        <div className="modal-content">
-          <h3>Modify Feuzon Configuration?</h3>
-          <p>You have an existing Feuzon in your cart. Would you like to:</p>
+  
+        {/* 📌 Drum Summary Section */}
+        <div className="drum-summary">
+          <h1>Artisan Notes</h1>
+          <h3>🎛️ Tonal Characteristics</h3>
+          <p>{selectedDrumSummary?.highlightedCharacteristics || "Select options to view summary"}</p>
+  
+          <h3>🎵 Genre Top Picks</h3>
+          <p>{selectedDrumSummary?.primaryGenre || "Select options to view summary"}</p>
           <ul>
-            <li>Replace your current Feuzon snare</li>
-            <li>Add a second Feuzon snare (if stock allows)</li>
+            {selectedDrumSummary?.secondaryGenres?.length > 0
+              ? selectedDrumSummary.secondaryGenres.map((genre, idx) => <li key={idx}>{genre}</li>)
+              : <li>Select options to view summary</li>}
           </ul>
-          <div className="modal-actions">
-            <button onClick={() => setSelectionChanged(false)}>Cancel</button>
-            <button onClick={handleModifySelection}>Replace Current</button>
-            {productQuantity > totalFeuzonInCart && (
-              <button onClick={handleAddSeparateItem}>
-                Add Separate Feuzon
+  
+          <h3>🎙 Recording Mic Top Picks</h3>
+          <p>{selectedDrumSummary?.recordingMic || "Select options to view summary"}</p>
+        </div>
+  
+        {/* ✅ Button Actions - Manage UI Based on Cart & Stock State */}
+        <div className="button-group">
+          {productQuantity === 0 ? (
+            <button className="notify-button" onClick={handleNotifyMe}>
+              Sold Out - Notify Me When Available
+            </button>
+          ) : productInCart ? (
+            <>
+              <button
+                className="go-to-checkout-button"
+                onClick={() => (window.location.href = '/cart')}
+              >
+                Go to Checkout
               </button>
-            )}
-          </div>
+  
+              <button
+                className="change-selections-button"
+                onClick={() => setShowModifyModal(true)}
+              >
+                Change Selections
+              </button>
+  
+              <button
+                className="remove-from-cart-button"
+                onClick={async () => {
+                  console.log('🛑 Removing custom product from cart...');
+                  const generatedId = `feuzon-${size}-${depth}-${lugs}-${staveQuantity}`;
+                  await removeFromCart(generatedId);
+                  setProductInCart(false);
+                }}
+              >
+                Remove from Cart
+              </button>
+            </>
+          ) : (
+            <button
+              onClick={() => handleAddToCart()}
+              className="add-to-cart-button"
+            >
+              Add to Cart
+            </button>
+          )}
         </div>
       </div>
-    )} */}
-
-      {/* ✅ Modify Selections Confirmation Modal */}
-      {showModifyModal && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <h3>Modify Feuzon Configuration?</h3>
-            <p>Your current selection will be replaced. Continue?</p>
-            <button onClick={() => setShowModifyModal(false)}>Cancel</button>
-            <button onClick={handleModifySelection}>
-              Replace Current Selection
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* ✅ New Modal for Adding Separate Feuzon Product */}
-      {showAddSeparateModal && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <h3>Add Another Feuzon Snare?</h3>
-            <p>
-              You already have a Feuzon snare in your cart. Would you like to
-              add this as a separate item or replace your current selection?
-            </p>
-            <button onClick={() => setShowAddSeparateModal(false)}>
-              Cancel
-            </button>
-            <button onClick={handleAddSeparateItem}>
-              Add as Separate Item
-            </button>
-            <button onClick={handleModifySelection}>
-              Replace Current Selection
-            </button>
-          </div>
-        </div>
-      )}
-    </div>
-  );
+    );
 };
 
 export default FeuzonProductDetail;
