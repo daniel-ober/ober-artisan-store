@@ -1,22 +1,23 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
-import { fetchProductById } from "../services/productService";
-import { useCart } from "../context/CartContext";
-import { FaArrowLeft } from "react-icons/fa";
-import HeritageProductDetail from "./HeritageProductDetail";
-import FeuzonProductDetail from "./FeuzonProductDetail";
-import SoundlegendProductDetail from "./SoundlegendProductDetail";
-import "./ProductDetail.css";
+// src/components/ProductDetail.js
+import React, { useState, useEffect, useRef } from 'react';
+import { useParams, Link, useNavigate } from 'react-router-dom';
+import { fetchProductById } from '../services/productService';
+import { useCart } from '../context/CartContext';
+import { FaArrowLeft } from 'react-icons/fa';
+import HeritageProductDetail from './HeritageProductDetail';
+import FeuzonProductDetail from './FeuzonProductDetail';
+import SoundlegendProductDetail from './SoundlegendProductDetail';
+import './ProductDetail.css';
 
 const ProductDetail = () => {
   const { productId } = useParams();
   const navigate = useNavigate();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const { addToCart, updateQuantity, removeFromCart, cart } = useCart();
   const [inCart, setInCart] = useState(null);
-  const [mainImage, setMainImage] = useState("");
+  const [mainImage, setMainImage] = useState('');
   const [quantity, setQuantity] = useState(1);
   const [notifyMe, setNotifyMe] = useState(false);
   const thumbnailContainerRef = useRef(null);
@@ -29,14 +30,15 @@ const ProductDetail = () => {
         if (productData) {
           setProduct(productData);
           setMainImage(
-            productData.images?.[0] || "/fallback-images/images-coming-soon-regular.png"
+            productData.images?.[0] ||
+              '/fallback-images/images-coming-soon-regular.png'
           );
         } else {
-          setError("Product not found.");
+          setError('Product not found.');
         }
       } catch (fetchError) {
-        console.error("Error fetching product:", fetchError.message);
-        setError("Unable to fetch product details. Please try again later.");
+        console.error('Error fetching product:', fetchError.message);
+        setError('Unable to fetch product details. Please try again later.');
       } finally {
         setLoading(false);
       }
@@ -48,7 +50,7 @@ const ProductDetail = () => {
   // Sync cart state
   useEffect(() => {
     if (product) {
-      const cartItem = cart ? cart[productId] : null;
+      const cartItem = cart.find((item) => item.id === product.id);
       if (cartItem) {
         setInCart(cartItem);
         setQuantity(Math.min(cartItem.quantity, product.currentQuantity));
@@ -57,9 +59,8 @@ const ProductDetail = () => {
         setQuantity(1);
       }
     }
-  }, [cart, product, productId]);
+  }, [cart, product]);
 
-  // Handle special case product pages (HERITAGE, FEUZON, SOUNDLEGEND)
   if (loading) return <p>Loading product details...</p>;
   if (error) {
     return (
@@ -72,34 +73,33 @@ const ProductDetail = () => {
 
   if (!product) return <div>Product not found</div>;
 
-  if (productId === "heritage") return <HeritageProductDetail product={product} />;
-  if (productId === "feuzon") return <FeuzonProductDetail product={product} />;
-  if (productId === "soundlegend") return <SoundlegendProductDetail product={product} />;
+  if (productId === 'heritage')
+    return <HeritageProductDetail product={product} />;
+  if (productId === 'feuzon') return <FeuzonProductDetail product={product} />;
+  if (productId === 'soundlegend')
+    return <SoundlegendProductDetail product={product} />;
 
-  // Standard product page for all other products
   const isSoldOut = product.currentQuantity === 0;
-  const isArtisan = product.category === "artisan";
-  const isLimited = ["one of a kind", "custom shop"].includes(product.category);
+  const isArtisan = product.category === 'artisan';
   const maxQuantity = product.currentQuantity || 1;
-  const showFullSpecs = product.category === "artisan";
-  const speciesList = [product?.woodSpecies, product?.customWoodSpecies].filter(Boolean).join(", ");
 
   return (
     <div className="product-detail-container">
-      <h1 className="product-title">
-        {product?.name || "Unnamed Product"}
-      </h1>
+      <h1 className="product-title">{product?.name || 'Unnamed Product'}</h1>
 
       <div className="product-content">
         <div className="product-gallery-info">
           <div className="product-image-gallery">
             <img
               src={mainImage}
-              alt={product?.name || "Product"}
+              alt={product?.name || 'Product'}
               className="product-main-image"
             />
             <div className="thumbnail-scroll-container">
-              <div className="product-thumbnail-gallery" ref={thumbnailContainerRef}>
+              <div
+                className="product-thumbnail-gallery"
+                ref={thumbnailContainerRef}
+              >
                 {product?.images?.map((image, index) => (
                   <button
                     key={index}
@@ -115,86 +115,92 @@ const ProductDetail = () => {
 
           <div className="product-info">
             <h2>Product Specifications</h2>
-            <table className="artisan-specs-table">
-              <tbody>
-                {showFullSpecs && (
-                  <>
-                    <tr><td>Type:</td><td>{product.drumType}</td></tr>
-                    <tr><td>Construction:</td><td>{product.constructionType}</td></tr>
-                    <tr><td>Wood Species:</td><td>{speciesList}</td></tr>
-                    <tr><td>Depth:</td><td>{product.depth}&quot;</td></tr>
-                    <tr><td>Diameter:</td><td>{product.width}&quot;</td></tr>
-                    <tr><td>Thickness:</td><td>{product.thickness}mm</td></tr>
-                  </>
-                )}
-                <tr>
-                  <td>Description:</td>
-                  <td>{product.description}</td>
-                </tr>
-              </tbody>
-            </table>
+            <p className="product-price">${product?.price}</p>
 
-            <div className="product-price-container">
-              <p className="product-price">${product?.price}</p>
-
-              {inCart ? (
-                <div className="quantity-section">
-                  <span className="quantity-label">Quantity:</span>
-                  <div className="quantity-selector">
-                    {isArtisan ? (
-                      <span className="quantity-value">1</span>
-                    ) : (
-                      <>
-                        <button
-                          onClick={() => updateQuantity(productId, quantity - 1)}
-                          className={`quantity-btn ${quantity <= 1 ? "disabled" : ""}`}
-                          disabled={quantity <= 1}
-                        >
-                          -
-                        </button>
-                        <span className="quantity-value">{quantity}</span>
-                        <button
-                          onClick={() => updateQuantity(productId, quantity + 1)}
-                          className={`quantity-btn ${
-                            quantity >= maxQuantity ? "disabled" : ""
-                          }`}
-                          disabled={quantity >= maxQuantity}
-                          title={
-                            quantity >= maxQuantity
-                              ? `Maximum quantity available: ${maxQuantity}`
-                              : undefined
-                          }
-                        >
-                          +
-                        </button>
-                      </>
-                    )}
-                  </div>
-                  <button className="prod-detail-view-cart-button" onClick={() => navigate("/cart")}>
-                    View in Cart
-                  </button>
-                  <button className="prod-detail-remove-cart-button" onClick={() => removeFromCart(productId)}>
-                    Remove from Cart
-                  </button>
-                </div>
-              ) : isSoldOut ? (
-                <>
-                  <button className="prod-detail-sold-out-button" disabled>Sold Out</button>
-                  {!notifyMe && (
-                    <button className="prod-detail-notify-me-button" onClick={() => setNotifyMe(true)}>
-                      Notify Me When Available
+            {/* SoundLegend Custom Handling */}
+            {product.id === 'soundlegend' ? (
+              <button
+                className="prod-detail-request-consultation-button"
+                onClick={() => navigate('/products/soundlegend')}
+              >
+                Request Consultation
+              </button>
+            ) : isSoldOut ? (
+              <button className="prod-detail-sold-out-button" disabled>
+                Sold Out
+              </button>
+            ) : inCart ? (
+              <>
+                {/* Quantity Control for Non-Artisan Items */}
+                {!isArtisan && (
+                  <div className="quantity-control">
+                    <button
+                      className="quantity-btn"
+                      onClick={() =>
+                        updateQuantity(product.id, Math.max(quantity - 1, 1))
+                      }
+                      disabled={quantity <= 1}
+                    >
+                      -
                     </button>
-                  )}
-                </>
-              ) : (
+                    <span className="quantity-value">{quantity}</span>
+                    <button
+                      className="quantity-btn"
+                      onClick={() =>
+                        updateQuantity(
+                          product.id,
+                          Math.min(quantity + 1, maxQuantity)
+                        )
+                      }
+                      disabled={quantity >= maxQuantity}
+                    >
+                      +
+                    </button>
+                  </div>
+                )}
+
                 <button
-onClick={() => addToCart([...cart, { ...product, id: productId, quantity: isArtisan ? 1 : quantity }])}
-                  className="prod-detail-add-to-cart-button"
+                  className="prod-detail-view-cart-button"
+                  onClick={() => navigate('/cart')}
                 >
-                  Add to Cart
+                  View in Cart
                 </button>
-              )}
-            </div>
+                <button
+                  className="prod-detail-remove-cart-button"
+                  onClick={() => removeFromCart(product.id)}
+                >
+                  Remove from Cart
+                </button>
+              </>
+            ) : (
+              <button
+                className={`prod-detail-${inCart ? 'remove-cart' : 'add-to-cart'}-button`}
+                onClick={() => {
+                  if (inCart) {
+                    removeFromCart(product.id);
+                  } else {
+                    const selectedOptions = {
+                      size: product.size || 'N/A',
+                      depth: product.depth || 'N/A',
+                      lugQuantity: product.lugQuantity || 'N/A',
+                      staveQuantity: product.staveQuantity || 'N/A',
+                      reRing: product.reRing ?? false,
+                      stripePriceId: product.stripePriceId || '',
+                      totalPrice: Number(product.price) || 0, // 🔥 Ensure price is correctly passed
+                    };
+
+                    console.log('🛒 Adding Artisan Product to Cart:', {
+                      product,
+                      selectedOptions,
+                    });
+
+                    addToCart(product, selectedOptions);
+                  }
+                }}
+              >
+                {inCart ? 'Remove from Cart' : 'Add to Cart'}
+              </button>
+            )}
           </div>
         </div>
       </div>

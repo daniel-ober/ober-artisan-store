@@ -1,25 +1,20 @@
-/* PreOrderCard.css */
 .preorder-card {
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: transform 0.2s ease;
-  }
-  
-  .preorder-card:hover {
-    transform: scale(1.02);
-  }
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.2s ease;
+}
 
-  /* Image Container */
+.preorder-card:hover {
+  transform: scale(1.02);
+}
+
+/* Image Container */
 .preorder-image-container {
   height: 250px;
   overflow: hidden;
   cursor: pointer;
-}
-
-.card-preorder-price {
-  /* padding-bottom: 20px; */
 }
 
 .preorder-image {
@@ -31,9 +26,9 @@
 
 .preorder-header-image {
   max-width: 160px; /* Reduce logo size for better balance */
-  }
+}
 
-  /* Product Description */
+/* Product Description */
 .preorder-description {
   font-size: 14px;
   font-family: sans-serif;
@@ -47,34 +42,56 @@
   justify-content: center;
 }
 
-  .preorder-info {
-    padding: 15px;
-  }
+.preorder-info {
+  padding: 15px;
+}
 
-  .preorder-options-starting-at {
-    font-size: 14px;
-    color: #666;
-  }
-  
-  .preorder-card-view-details-button {
-    background: #222;
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    width: 100%;
-  }
-  
-  .preorder-card-preorder-button {
-    background: green;
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    width: 100%;
-  }
-  
-  .preorder-card-view-details-button:hover,
-  .preorder-card-preorder-button:hover {
-    background: #333;
-  }
+.preorder-options-starting-at {
+  font-size: 14px;
+  color: #666;
+}
+
+.card-preorder-price {
+  font-size: 16px;
+  font-weight: bold;
+  color: #444;
+}
+
+.delivery-time {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Buttons */
+.preorder-button-container {
+  margin-top: 10px;
+}
+
+.preorder-card-preorder-button {
+  background: #b65454;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 4px;
+}
+
+.preorder-card-view-details-button {
+  background: #222;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 4px;
+}
+
+.preorder-card-preorder-button:hover,
+.preorder-card-view-details-button:hover {
+  background: #333;
+}

@@ -1,14 +1,55 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import "./Checkout.css";
 
+// Use your REACT_APP_RECAPTCHA_SITE_KEY and VERIFY_URL
 const RECAPTCHA_SITE_KEY = process.env.REACT_APP_RECAPTCHA_SITE_KEY;
 const VERIFY_URL = process.env.REACT_APP_RECAPTCHA_VERIFY_URL;
+
+// Stripe Initialization
+const stripePublishableKey = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY;
+if (!stripePublishableKey) {
+  console.error("Stripe publishable key is missing");
+}
+const stripePromise = loadStripe(stripePublishableKey);
+
+// Log the Stripe Publishable Key for debugging
+console.log('Stripe Publishable Key:', process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
 const Checkout = ({ cartItems, totalAmount, onApplyPromo }) => {
   const [promoCode, setPromoCode] = useState("");
   const [discount, setDiscount] = useState(0);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [clientSecret, setClientSecret] = useState(""); // To hold clientSecret from your server
+  const stripe = useStripe();
+  const elements = useElements();
+
+  // Fetch client secret from the server to create the payment intent
+  useEffect(() => {
+    const fetchClientSecret = async () => {
+      try {
+        const response = await fetch("/api/create-payment-intent", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ amount: totalAmount * 100 }), // Convert to cents
+        });
+        const data = await response.json();
+        if (data.clientSecret) {
+          setClientSecret(data.clientSecret);
+        } else {
+          console.error("No client secret received");
+        }
+      } catch (error) {
+        console.error("Error fetching client secret", error);
+      }
+    };
+
+    if (totalAmount > 0) {
+      fetchClientSecret();
+    }
+  }, [totalAmount]);
 
   const handleApplyPromo = () => {
     if (promoCode.trim() === "DRUM10") {
@@ -25,7 +66,7 @@ const Checkout = ({ cartItems, totalAmount, onApplyPromo }) => {
 
   const handleCheckout = async () => {
     setLoading(true);
-    
+
     if (!window.grecaptcha) {
       alert("⚠️ reCAPTCHA not loaded. Please refresh and try again.");
       setLoading(false);
@@ -36,7 +77,10 @@ const Checkout = ({ cartItems, totalAmount, onApplyPromo }) => {
       // Execute reCAPTCHA v3 in the background
       const token = await window.grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: "checkout" });
 
-      // Verify reCAPTCHA token with Firebase Cloud Function
+      // Log token to check it's being generated
+      console.log("reCAPTCHA Token:", token);
+
+      // Continue with the fetch request to verify reCAPTCHA
       const response = await fetch(VERIFY_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -50,8 +94,22 @@ const Checkout = ({ cartItems, totalAmount, onApplyPromo }) => {
         return;
       }
 
-      alert("✅ Checkout successful! Proceeding to payment...");
-      // Continue with checkout process here
+      // Use Stripe's confirmCardPayment with the clientSecret and cardElement
+      const cardElement = elements.getElement(CardElement); // Get the CardElement
+      const { error: stripeError, paymentIntent } = await stripe.confirmCardPayment(
+        clientSecret, // Use the clientSecret received from your server
+        {
+          payment_method: {
+            card: cardElement,
+          },
+        }
+      );
+
+      if (stripeError) {
+        alert(`❌ Payment failed: ${stripeError.message}`);
+      } else {
+        alert("✅ Checkout successful! Proceeding to payment...");
+      }
 
     } catch (error) {
       console.error("❌ Error verifying reCAPTCHA:", error);
@@ -117,6 +175,9 @@ const Checkout = ({ cartItems, totalAmount, onApplyPromo }) => {
           <span>${finalAmount}</span>
         </div>
       </div>
+
+      {/* Card Element */}
+      <CardElement />
 
       {/* Checkout Button with reCAPTCHA v3 */}
       <button className="checkout-btn" onClick={handleCheckout} disabled={loading}>

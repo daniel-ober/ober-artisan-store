@@ -1,4 +1,3 @@
-// src/components/CartPreview.js
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
@@ -11,36 +10,47 @@ const CartPreview = ({ onClose }) => {
     removeFromCart(itemId);
   };
 
+  let quantityTimeout = null;
+
   const handleQuantityChange = (itemId, change) => {
-    const item = cart.find((i) => i._id === itemId);
+    const item = cart.find((i) => i.id === itemId);
     if (!item) return;
 
     const minQuantity = 1;
     const maxQuantity = item.currentQuantity || 1;
-    const newQuantity = item.quantity + change;
+    const newQuantity = Math.min(
+      Math.max(item.quantity + change, minQuantity),
+      maxQuantity
+    );
 
-    if (newQuantity < minQuantity) {
-      removeFromCart(itemId);
-    } else if (
-      newQuantity <= maxQuantity &&
-      !['one of a kind', 'custom shop'].includes(item.category)
-    ) {
-      updateQuantity(itemId, newQuantity);
+    if (newQuantity !== item.quantity) {
+      // Clear any existing timeout before setting a new one
+      clearTimeout(quantityTimeout);
+
+      quantityTimeout = setTimeout(() => {
+        updateQuantity(itemId, newQuantity);
+      }, 250); // Delays the function execution by 250ms to prevent rapid multiple calls
     }
   };
 
-  const cartTotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+  // ✅ Ensure price is a valid number before calling `.toFixed(2)`
+  const cartTotal = cart.reduce(
+    (total, item) => total + (Number(item.price) || 0) * (item.quantity || 1),
+    0
+  );
 
   return (
     <div className="cart-preview">
       <div className="cart-preview-header">
         <h3>Cart Preview</h3>
-        <button className="close-preview" onClick={onClose}>✕</button>
+        <button className="close-preview" onClick={onClose}>
+          ✕
+        </button>
       </div>
       {cart.length > 0 ? (
         <>
           {cart.map((item) => (
-            <div key={item._id} className="cart-preview-item">
+            <div key={item.id} className="cart-preview-item">
               <img
                 src={item.images?.[0] || 'https://i.imgur.com/eoKsILV.png'}
                 alt={item.name}
@@ -48,18 +58,20 @@ const CartPreview = ({ onClose }) => {
               />
               <div className="cart-item-details">
                 <p>{item.name}</p>
-                <span className="item-price">${item.price.toFixed(2)}</span>
+                <span className="item-price">
+                  ${Number(item.price || 0).toFixed(2)}
+                </span>
                 {item.category !== 'artisan' ? (
                   <div className="quantity-buttons">
                     <button
-                      onClick={() => handleQuantityChange(item._id, -1)}
+                      onClick={() => handleQuantityChange(item.id, -1)}
                       disabled={item.quantity <= 1}
                     >
                       -
                     </button>
                     <span>{item.quantity}</span>
                     <button
-                      onClick={() => handleQuantityChange(item._id, 1)}
+                      onClick={() => handleQuantityChange(item.id, 1)}
                       disabled={item.quantity >= (item.currentQuantity || 1)}
                     >
                       +
@@ -71,7 +83,7 @@ const CartPreview = ({ onClose }) => {
               </div>
               <button
                 className="remove-item red"
-                onClick={() => handleRemoveItem(item._id)}
+                onClick={() => handleRemoveItem(item.id)}
               >
                 ✕
               </button>
