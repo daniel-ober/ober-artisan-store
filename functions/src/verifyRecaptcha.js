@@ -1,37 +1,38 @@
-// functions/src/verifyRecaptcha.js
+const functions = require('firebase-functions');
+const fetch = require('node-fetch');
 
-const functions = require("firebase-functions");
-const admin = require("firebase-admin");
-const fetch = require("node-fetch");
-
-if (!admin.apps.length) {
-    admin.initializeApp();
-}
-
-const RECAPTCHA_SECRET_KEY = functions.config().recaptcha.secret;
-
+// Firebase Function to verify reCAPTCHA token
 exports.verifyRecaptcha = functions.https.onRequest(async (req, res) => {
-    try {
-        const { token } = req.body;
+  const { token } = req.body;
 
-        if (!token) {
-            return res.status(400).json({ success: false, error: "Missing reCAPTCHA token." });
-        }
+  if (!token) {
+    return res.status(400).json({ success: false, message: "No token provided" });
+  }
 
-        // Verify reCAPTCHA with Google API
-        const response = await fetch(`https://www.google.com/recaptcha/api/siteverify?secret=${RECAPTCHA_SECRET_KEY}&response=${token}`, {
-            method: "POST",
-        });
+  const secretKey = functions.config().recaptcha.secret_key; // Ensure this is set in your Firebase config
+  const verifyUrl = `https://www.google.com/recaptcha/api/siteverify`;
 
-        const data = await response.json();
+  try {
+    const response = await fetch(verifyUrl, {
+      method: "POST",
+      body: new URLSearchParams({
+        secret: secretKey,
+        response: token,
+      }),
+    });
 
-        if (!data.success || data.score < 0.5) {
-            return res.status(403).json({ success: false, error: "reCAPTCHA verification failed." });
-        }
-
-        return res.status(200).json({ success: true, message: "reCAPTCHA verified." });
-    } catch (error) {
-        console.error("Error verifying reCAPTCHA:", error);
-        return res.status(500).json({ success: false, error: "Internal Server Error" });
+    const verificationResult = await response.json();
+    
+    // Debugging log to check the response from Google
+    console.log("reCAPTCHA Verification Result:", verificationResult); // Added this line for debugging
+    
+    if (verificationResult.success) {
+      return res.status(200).json({ success: true });
+    } else {
+      return res.status(400).json({ success: false, message: "reCAPTCHA verification failed" });
     }
+  } catch (error) {
+    console.error("Error verifying reCAPTCHA:", error);
+    return res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
 });

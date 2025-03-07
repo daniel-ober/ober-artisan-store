@@ -21,181 +21,105 @@ body.light {
   color: #000000;
 }
 
-body.light * {
-  color: #000000;
+/* ✅ Dim White Background */
+body.light .background-overlay {
+  background-color: rgba(255, 255, 255, 0.85); /* Adjust transparency */
 }
 
 /* ✅ Dark Mode Styles */
 body.dark {
   background-color: #111111;
-  /* color: #ffffff; */
 }
 
-/* 🔥 OVERRIDE: Cart Title */
-body.dark .cart-title {
+/* ✅ Ensure White Text in Light Mode Bottom Section */
+body.light .bottom-section {
+  background-color: rgba(0, 0, 0, 0.9); /* Darker background */
   color: white !important;
 }
 
-body.light .cart-title {
-  color: black !important;
-}
-
-/* 🔥 OVERRIDE: Pre-Order Subtitle */
-body.dark .subtitle {
+body.light .bottom-section a,
+body.light .bottom-section p {
   color: white !important;
 }
 
-body.light .subtitle {
-  color: black !important;
+/* ✅ Ensure White Text on Buttons in Light Mode */
+body.light button,
+body.light .preorder-button {
+  background-color: #b65454 !important;
+  color: white !important;
+  border: none !important;
 }
 
-/* ✅ Fix Pre-Order Cards in Dark Mode */
-body.dark .pre-order-item {
-  background-color: white !important;
+body.light .preorder-button:hover {
+  background-color: #9e4545 !important;
+}
+
+/* ✅ Ensure Pre-Order Cards Text is Visible */
+body.light .pre-order-item {
+  background-color: rgba(255, 255, 255, 0.95) !important;
   color: black !important;
   border-radius: 8px;
   padding: 15px;
 }
 
-body.dark .pre-order-item *,
-body.dark .pre-order-item h2,
-body.dark .pre-order-item p,
-body.dark .pre-order-item .delivery,
-body.dark .pre-order-item .price {
+body.light .pre-order-item h2,
+body.light .pre-order-item p,
+body.light .pre-order-item .delivery,
+body.light .pre-order-item .price {
   color: black !important;
 }
 
-/* ✅ Fix Pre-Order Buttons */
-body.dark .pre-order-item button,
-body.dark .pre-order-item .pre-order-button {
-  background-color: #333 !important;
+/* ✅ Fix Pre-Order Buttons in Light Mode */
+body.light .pre-order-item button,
+body.light .pre-order-item .pre-order-button {
+  background-color: #b65454 !important;
   color: white !important;
-  border: 2px solid #555 !important;
+  border: 2px solid #9e4545 !important;
 }
 
-body.dark .pre-order-item button:hover,
-body.dark .pre-order-item .pre-order-button:hover {
-  background-color: #222 !important;
+body.light .pre-order-item button:hover,
+body.light .pre-order-item .pre-order-button:hover {
+  background-color: #9e4545 !important;
 }
 
 /* ✅ Ensure Cart Buttons are Visible */
-body.dark .cart-table button,
-body.dark .cart-table .quantity-adjust {
-  /* background-color: #333 !important; */
-  color: white !important;
-  /* border: 2px solid #555 !important; */
-}
-
-body.dark .cart-table button:hover,
-body.dark .cart-table .quantity-adjust:hover {
-  background-color: #222 !important;
-}
-
-/* ✅ Ensure Cart Table Text is Black on White Background */
-body.dark .cart-table {
-  background-color: white !important;
-  color: black !important;
-  border: 1px solid #dddddd;
-}
-
-body.dark .cart-table th,
-body.dark .cart-table td {
-  color: black !important;
-}
-
-/* ✅ Ensure Cart Product Details Stay Black */
-body.dark .cart-table td.product-name,
-body.dark .cart-table td.product-description,
-body.dark .cart-table td.quantity-value {
-  color: black !important;
-}
-
-/* ✅ Fix Product Details Page in Dark Mode */
-body.dark .product-details {
-  background-color: #111 !important;
+body.light .cart-table button,
+body.light .cart-table .quantity-adjust {
   color: white !important;
 }
 
-body.dark .product-details h2,
-body.dark .product-details p,
-body.dark .product-details span {
+/* ✅ Ensure Light Mode Footer is Visible */
+body.light .footer {
+  background-color: #111111 !important;
   color: white !important;
 }
 
-/* ✅ Fix Contact Page Background */
-body.dark .contact-container {
-  background-color: #222 !important;
-  padding: 20px;
-  border-radius: 10px;
-}
-
-/* ✅ Fix Contact Form Dropdown */
-body.dark .MuiInputBase-root,
-body.dark .MuiInputBase-input {
-  background-color: #222 !important;
+body.light .footer a {
   color: white !important;
 }
 
-body.dark .MuiInputBase-input::placeholder {
-  color: #ccc !important;
-}
-
-body.dark .MuiFormLabel-root {
+/* ✅ Light/Dark Mode Toggle Button */
+.theme-toggle-button {
+  background-color: #b65454 !important; /* Same as dark mode button */
   color: white !important;
+  border: none;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
 }
 
-/* ✅ Ensure Home Page Text is White */
-.hero-overlay h1,
-.hero-overlay p,
-.hero-overlay a {
-  color: white !important;
-}
-
-.highlights-section .highlight h2,
-.highlights-section .highlight p {
-  color: white !important;
-}
-
-body.light .highlights-section .highlight h2,
-body.light .highlights-section .highlight p {
-  color: black !important;
-}
-
-/* ✅ Fix CTA Button */
-.hero-overlay .cta-button,
-.hero-overlay .cta-button:hover {
-  color: white !important;
-  background-color: #ff6600 !important;
-}
-
-/* ✅ Ensure Highlight Buttons Are Visible */
-.highlight button {
-  color: white !important;
-}
-
-/* ✅ Fix Modals and Popups */
-body.dark .MuiDialog-paper {
-  background-color: #222222 !important;
-  color: #ffffff !important;
-}
-
-body.dark .MuiDialogTitle-root {
-  color: #ffffff !important;
-}
-
-body.dark .MuiDialogContent-root {
-  color: #ffffff !important;
-}
-
-body.dark .MuiDialogActions-root button {
-  color: white !important;
+.theme-toggle-button:hover {
+  background-color: #9e4545 !important;
 }
 
 /* ✅ Fix About Page Text */
 .about-page .section-content h2,
 .about-page .section-content h3,
 .about-page .section-content p {
-  color: #ffffff !important;
+  color: white !important;
 }
 
 /* ✅ Responsive Fixes */
@@ -216,9 +140,9 @@ body.dark .MuiDialogActions-root button {
 }
 
 .footer-theme-toggle {
-  background-color: #222;
-  color: white;
-  border: 2px solid #555;
+  background-color: #b65454 !important;
+  color: white !important;
+  border: 2px solid #9e4545;
   padding: 8px 15px;
   font-size: 1rem;
   font-weight: bold;
@@ -228,6 +152,6 @@ body.dark .MuiDialogActions-root button {
 }
 
 .footer-theme-toggle:hover {
-  background-color: #111;
+  background-color: #9e4545;
   transform: scale(1.05);
 }
