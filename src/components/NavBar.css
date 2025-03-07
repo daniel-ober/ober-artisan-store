@@ -38,6 +38,26 @@ body.dark .navbar-background {
   max-height: 50%;
 }
 
+/* ✅ Navbar Links - Adjusts for Light & Dark Mode */
+body.light .nav-link {
+  color: black !important;
+}
+
+body.dark .nav-link {
+  color: white !important;
+}
+
+/* ✅ Active Links Follow Theme */
+body.light .nav-link.active {
+  color: black !important;
+  text-decoration: underline;
+}
+
+body.dark .nav-link.active {
+  color: white !important;
+  text-decoration: underline;
+}
+
 /* Navbar Links */
 .navbar-links {
   display: flex;
@@ -46,7 +66,6 @@ body.dark .navbar-background {
 }
 
 .nav-link {
-  color: #000000;
   text-decoration: none;
   font-size: 16px;
   padding: 15px 12px;
@@ -59,44 +78,41 @@ body.dark .navbar-background {
   transition: ease-in-out 0.3;
 }
 
-.nav-link.active {
-  color: hsl(48, 62%, 91%);
-  text-decoration: underline;
+/* ✅ Fix for Cart Icon & Badge */
+body.light .cart-icon {
+  color: black !important;
+  background: none !important;
 }
 
-/* Cart Link Container */
-.cart-link-container {
-  position: relative;
+body.dark .cart-icon {
+  color: white !important;
+  background: none !important;
 }
 
-/* Cart Preview Window */
+body.light .cart-badge {
+  color: white !important;
+  background: red !important;
+}
+
+body.dark .cart-badge {
+  color: black !important;
+  background: red !important;
+}
+
+/* ✅ Cart Preview Container Styling */
 .cart-preview-container {
-  position: fixed;
-  top: 60px;
-  right: 20px;
-  width: 360px;
-  background-color: white;
+  background-color: white !important;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  z-index: 1050;
-  animation: fadeIn 0.3s ease-out;
 }
 
-.cart-preview-container .close-btn {
-  position: absolute;
-  top: 8px;
-  right: 12px;
-  background: none;
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
+/* ✅ Cart Preview Buttons Visible */
+body.dark .cart-preview-container,
+body.dark .cart-preview-container button {
+  background-color: #222 !important;
+  color: white !important;
 }
 
-.nav-link-signout {
-  background-color: transparent !important;
-}
-
-/* 🔥 FIX: Menu Button Always Fully Transparent (No Background, No Border, No Outline) */
+/* ✅ Remove Background from Menu Button in Both Modes */
 .navbar-menu-container {
   display: none;
   align-items: center;
@@ -104,45 +120,39 @@ body.dark .navbar-background {
   flex-direction: column;
   cursor: pointer;
   border: none !important;
-  background: none !important;
+  background: none !important; /* ✅ Fully Transparent */
   outline: none !important;
   box-shadow: none !important;
 }
 
-/* 🔥 Ensure Dark Mode Menu Button is Fully Transparent */
+/* ✅ Ensure Menu Button in Light Mode Stays Transparent */
+body.light .navbar-menu-container {
+  background: none !important;
+  border: none !important;
+}
+
+/* ✅ Ensure Menu Button in Dark Mode Stays Transparent */
 body.dark .navbar-menu-container {
   background: none !important;
   border: none !important;
-  outline: none !important;
-  box-shadow: none !important;
 }
 
-/* 🔥 Prevent Hover from Changing Menu Button in Dark Mode */
+/* ✅ Ensure Hover Doesn't Change Button */
 .navbar-menu-container:hover,
+body.light .navbar-menu-container:hover,
 body.dark .navbar-menu-container:hover {
   background: none !important;
   border: none !important;
-  outline: none !important;
-  box-shadow: none !important;
 }
 
-/* 🔥 Prevent Hover from Changing Menu Button in Light Mode */
-body.light .navbar-menu-container:hover {
-  background: none !important;
-  border: none !important;
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-/* 🔥 Ensure Menu Icon (Image) is Visible */
+/* ✅ Ensure Menu Icon (Image) is Visible */
 .menu-arrow-icon {
   width: 40px;
   height: 40px;
-  margin: -8.4px;
   transition: transform 0.3s ease;
 }
 
-/* Menu Button Animation */
+/* ✅ Menu Button Animation */
 .menu-arrow-icon.open {
   transform: rotate(360deg);
 }
@@ -205,7 +215,6 @@ body.light .navbar-menu-container:hover {
     font-size: 1rem;
     line-height: 1.5;
     margin-bottom: 1rem;
-    color: #222;
     font-weight: 500;
     text-align: center;
   }

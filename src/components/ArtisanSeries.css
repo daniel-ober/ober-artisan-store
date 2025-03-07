@@ -7,10 +7,10 @@
 .artisanseries-container {
   position: relative;
   width: 100%;
-  overflow-y: auto; /* Ensures full scrolling */
+  overflow-y: auto;
   min-height: 100vh;
   scroll-behavior: smooth;
-  scroll-snap-type: y mandatory; /* Enables snapping */
+  scroll-snap-type: y mandatory; 
   background-color: #000000c3;
 }
 
@@ -23,7 +23,7 @@
   justify-content: space-between;
   overflow: hidden;
   padding: 0 4vw;
-  scroll-snap-align: start; /* Ensures section snaps into place */
+  scroll-snap-align: start;
   opacity: 0;
   transform: translateY(50px);
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
@@ -54,6 +54,7 @@
   width: 100%;
   height: auto;
   object-fit: cover;
+  background-color: inherit; /* Ensures background color matches the section */
 }
 
 /* ✏️ Text Layer */
@@ -64,7 +65,7 @@
   flex-direction: column;
   justify-content: center;
   z-index: 4;
-  color: white; /* Ensure text is always visible */
+  color: white;
 }
 
 /* 🔠 Header Image */
@@ -89,14 +90,28 @@
   position: relative;
   width: 100%;
   text-align: center;
-  /* padding: 4vh 2vw; */
-  /* background-color: #373737; Dark background for contrast */
-  color: white; /* Ensures text is visible */
-  /* min-height: 100vh; Ensures proper spacing */
   display: flex;
   flex-direction: column;
   justify-content: center;
-  scroll-snap-align: start; /* Fixes scrolling issue */
+  scroll-snap-align: start;
+}
+
+/* 📸 Sticky Drum Image (Releases on Scroll) */
+.drum-final-image {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  z-index: -1;
+  transition: position 0.3s ease-out;
+}
+
+.drum-final-image img {
+  width: 100vw;
+  height: auto;
+  display: block;
 }
 
 /* 🛠 Drum Labels & Logos */
@@ -104,21 +119,19 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  /* padding-top: 3vh; */
   width: 100%;
   margin: 0 auto;
-  background-color: #373737; /* Dark background for contrast */
-  padding-left: auto;
-  padding-right: auto;
-  padding-bottom: 160px;
+  background-color: #373737;
+  padding: 20px;
+  border-radius: 10px;
 }
 
 /* 🏆 Individual Drum Logo Adjustments */
 .drum-logo {
-  width: 150px; /* Ensures consistent size */
+  width: 150px;
   height: auto;
   margin-bottom: 10px;
-  filter: brightness(0) invert(1); /* Forces white in all modes */
+  filter: brightness(0) invert(1);
 }
 
 /* 🥁 Drum Information Box */
@@ -136,9 +149,10 @@
   transform: translateY(0);
 }
 
+/* 🔥 Ensure Text & Description are Readable */
 .description-list,
 .text-layer {
-  color: white;
+  color: rgb(255, 255, 255);
 }
 
 ul,
@@ -166,83 +180,88 @@ ul,
   font-size: 16px;
   font-weight: bold;
   color: white;
-  background: #d9534f; /* Reddish Accent */
+  background: #d9534f;
   text-decoration: none;
   border-radius: 5px;
   transition: background 0.3s ease;
 }
 
 .preorder-button:hover {
-  background: #c9302c; /* Darker Red */
-}
-
-/* 📸 FIX: Final Image Now Fills Full Screen Width */
-.drum-final-image {
-  display: flex;
-  justify-content: center;
-  width: 100vw; /* Ensures full-width */
-  margin-top: 10vh;
-  overflow: hidden;
-}
-
-.drum-final-image img {
-  width: 100vw; /* Ensures it stretches fully */
-  height: auto;
-  display: block;
-  /* border-radius: 8px; */
+  background: #c9302c;
 }
 
 /* 🛠 Mobile Responsiveness Fixes */
 @media (max-width: 768px) {
-  .artisanseries-container {
-    scroll-snap-type: none; /* Disable snap scrolling on mobile */
-  }
-
   .drum-section {
-    flex-direction: column; /* Stack elements */
+    flex-direction: column;
     height: auto;
     padding: 5vh 6vw;
     text-align: center;
   }
 
+  /* 🏆 Ensure Drum Image is in the Same Container as Text */
+  .drum-section.left, .drum-section.right {
+    flex-direction: column !important;
+  }
+
   .text-layer {
     width: 100%;
-    max-width: 90%;
-    margin: 0 auto;
-    padding-bottom: 2vh;
+    max-width: 100%;
+    padding: 5vh 6vw;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    text-align: center;
+    border-radius: 10px;
   }
 
-  .text-layer .artisanseries-header-image {
-    max-width: 250px; /* Reduce logo size for better balance */
-    margin: 0 auto 10px;
-  }
-
-  .text-layer .description {
-    font-size: 0.9rem;
-    line-height: 1.4;
-    margin-bottom: 1rem;
-  }
-
+  /* 📸 Ensure Drum Image is Sized Correctly */
   .drum-layer {
     width: 100%;
+    max-width: 100%;
     text-align: center;
-    padding-top: 1vh;
+    margin-bottom: 20px;
   }
 
   .drum-layer img {
-    width: 80%;
-    max-width: 350px; /* Ensure image scales properly */
-    margin: 0 auto;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    background-color: inherit; /* Ensures background color matches the section */
   }
 
+  /* 🎨 Header Image Adjustments */
+  .text-layer .artisanseries-header-image {
+    max-width: 250px;
+    margin-bottom: 15px;
+  }
+
+  /* 📝 Adjust Text Readability */
+  .text-layer .description {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  /* 🏆 Ensure Feature List is Visible */
+  .description-list {
+    text-align: left;
+    font-size: 0.9rem;
+    padding-left: 10px;
+    margin-top: 10px;
+  }
+
+  /* 🔥 Ensure the final drum lineup displays properly */
   .drum-final-text {
     flex-direction: column;
     align-items: center;
     gap: 2vh;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 10px;
   }
 
   .drum-logo {
-    width: 110px; /* Reduce logo size */
+    width: 110px;
   }
 
   .drum-info {
@@ -250,32 +269,42 @@ ul,
     padding-bottom: 3vh;
   }
 
+  .drum-final-image {
+    position: relative;
+    bottom: 0;
+  }
+
   .drum-final-image img {
     width: 100vw;
-    max-height: 400px; /* Prevent oversized images */
+    max-height: 400px;
   }
 }
 
-/* For ultra-small devices */
+/* 📱 Extra Small Screens */
 @media (max-width: 480px) {
   .drum-section {
     padding: 4vh 5vw;
   }
 
   .text-layer {
-    max-width: 95%;
+    max-width: 100%;
+    padding: 4vh 6vw;
   }
 
-  .text-layer .artisanseries-header-image  {
+  .text-layer .artisanseries-header-image {
     max-width: 220px;
   }
 
   .text-layer .description {
     font-size: 0.85rem;
+    line-height: 1.5;
   }
 
   .drum-layer img {
-    max-width: 300px;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    background-color: inherit; /* Ensures background color matches the section */
   }
 
   .drum-info {

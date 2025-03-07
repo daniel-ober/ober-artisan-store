@@ -67,7 +67,7 @@ const ArtisanSeries = ({ product = {} }) => {
             <li>Available Sizes: 12”, 13”, 14”</li>
             <li>Finish: Light gloss, Medium gloss, Torch-scorched aesthetic</li>
             <li>Wood Selection: Northern Red Oak</li>
-            <li>Price Range: <strong>$850 - $1,400</strong></li>
+            <li>Starting Price: <strong>$850</strong></li>
           </ul>
         </div>
         <div className="drum-layer">
@@ -95,7 +95,7 @@ const ArtisanSeries = ({ product = {} }) => {
             <li>Available Sizes: 12”, 13”, 14”</li>
             <li>Finish: Natural or Stained</li>
             <li>Wood Selection: Stave (varied) + limited steam bent woods</li>
-            <li>Price Range: <strong>$1,050 - $1,600</strong></li>
+            <li>Starting Price: <strong>$1,050</strong></li>
           </ul>
         </div>
         <div className="drum-layer">

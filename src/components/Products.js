@@ -65,7 +65,7 @@ const Products = () => {
 
   return (
     <div className="products-container">
-      <h1 className="page-title">Manage Products</h1>
+      <h1 className="page-title">Products</h1>
 
       {isAdmin ? (
         <div className="admin-section">

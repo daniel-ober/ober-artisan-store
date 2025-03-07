@@ -37,9 +37,10 @@ router.post("/", express.raw({ type: "application/json" }), async (req, res) => 
 
       // Extract ordered products (Only using Stripe Product ID)
       const orderedItems = lineItems.data.map((item) => ({
-        productId: item.price.product.id || null,
+        name: item.price.product.name || "Unknown Product",
+        price: item.amount_total / 100, // Convert to dollars
         quantity: item.quantity,
-      })).filter((item) => item.productId !== null);
+      }));
 
       console.log("🛒 Extracted Ordered Items:", orderedItems);
 
@@ -51,20 +52,38 @@ router.post("/", express.raw({ type: "application/json" }), async (req, res) => 
         customerName: session.customer_details?.name || "Guest",
         customerEmail: session.customer_details?.email || "No email provided",
         customerPhone: session.customer_details?.phone || "No phone provided",
-        totalAmount: session.amount_total / 100,
+        customerAddress: session.shipping?.address
+          ? `${session.shipping.address.line1}, ${session.shipping.address.city}, ${session.shipping.address.state}, ${session.shipping.address.postal_code}, ${session.shipping.address.country}`
+          : "No Shipping Details Provided",
+        totalAmount: session.amount_total / 100, // Convert to dollars
+        currency: session.currency || "usd",
+        paymentMethod: session.payment_method_types[0] || "card",
         status: session.payment_status,
-        products: orderedItems,
+        items: orderedItems,
+        stripeSessionId: session.id,
         createdAt: admin.firestore.FieldValue.serverTimestamp(),
+        shippingDetails: session.shipping ? session.shipping.address : "No Shipping Details Provided",
+        relatedProjects: [], // Can be populated if related projects exist
+        systemHistory: [
+          {
+            event: `Project created: ${orderedItems.map(item => item.name).join(", ")}`,
+            timestamp: new Date().toISOString(),
+          },
+        ],
       };
 
       console.log("📦 Order Data Prepared:", orderData);
 
       const db = admin.firestore();
-      const batch = db.batch();
 
-      // 📉 **Update Inventory for Each Product**
+      // Save the order in Firestore
+      await db.collection("orders").doc(session.id).set(orderData);
+      console.log("✅ Order successfully saved to Firestore with ID:", session.id);
+
+      // **Update Inventory for Each Product**
+      const batch = db.batch();
       for (const item of orderedItems) {
-        // 🔍 Fetch product from Firestore using Stripe Product ID
+        // Fetch product from Firestore using Stripe Product ID
         const productSnapshot = await db.collection("products")
           .where("stripeProductId", "==", item.productId)
           .limit(1)
@@ -79,7 +98,7 @@ router.post("/", express.raw({ type: "application/json" }), async (req, res) => 
         const productRef = productDoc.ref;
         const productData = productDoc.data();
 
-        // 🔄 Update inventory
+        // Update inventory
         const currentStock = productData.currentQuantity || 0;
         const newStock = Math.max(0, currentStock - item.quantity);
 
@@ -88,14 +107,14 @@ router.post("/", express.raw({ type: "application/json" }), async (req, res) => 
         batch.update(productRef, { currentQuantity: newStock });
       }
 
-      // 💨 **Clear the User's Cart**
+      // Clear the User's Cart if it's not a guest
       if (orderData.userId !== "guest") {
         const cartRef = db.collection("carts").doc(orderData.userId);
         console.log(`🛒 Clearing cart for user: ${orderData.userId}`);
         batch.delete(cartRef);
       }
 
-      // ✅ **Commit Firestore Batch**
+      // Commit Firestore batch
       try {
         await batch.commit();
         console.log("✅ Firestore Batch Commit Successful!");
@@ -103,9 +122,6 @@ router.post("/", express.raw({ type: "application/json" }), async (req, res) => 
         console.error("❌ Firestore Batch Commit Failed:", err.message);
       }
 
-      // ✅ **Save the Order**
-      await db.collection("orders").doc(session.id).set(orderData);
-      console.log("✅ Order successfully saved to Firestore with ID:", session.id);
     } else {
       console.log(`ℹ️ Unhandled event type: ${event.type}`);
     }
