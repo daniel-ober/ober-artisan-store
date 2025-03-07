@@ -10,15 +10,16 @@ import './Cart.css';
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
 const Cart = () => {
-  const { cart, cartId, removeFromCart, setCart, updateFirestoreCart } = useCart();
+  const { cart, cartId, removeFromCart, setCart, updateFirestoreCart } =
+    useCart();
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
   const [shippingEstimate, setShippingEstimate] = useState(0);
   const [unavailableProducts, setUnavailableProducts] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
-  console.log("🛒 Cart from Context:", cart);
-  console.log("🆔 Cart ID:", cartId);
+  console.log('🛒 Cart from Context:', cart);
+  console.log('🆔 Cart ID:', cartId);
 
   // ✅ Ensure unavailable products are removed before checkout
   useEffect(() => {
@@ -51,7 +52,9 @@ const Cart = () => {
           const availableStock = productData.currentQuantity || 0;
 
           if (availableStock === 0) {
-            console.warn(`🚨 ${productData.name} is out of stock. Removing from cart.`);
+            console.warn(
+              `🚨 ${productData.name} is out of stock. Removing from cart.`
+            );
             unavailable.push({ id: item.id, name: item.name });
             updatedCart = updatedCart.filter((i) => i.id !== item.id);
             cartChanged = true;
@@ -91,8 +94,10 @@ const Cart = () => {
     setUnavailableProducts([]);
   };
 
-  const getItemTotal = (item) => (Number(item.price) || 0) * (item.quantity || 1);
-  const getTotalAmount = () => cart.reduce((total, item) => total + getItemTotal(item), 0);
+  const getItemTotal = (item) =>
+    (Number(item.price) || 0) * (item.quantity || 1);
+  const getTotalAmount = () =>
+    cart.reduce((total, item) => total + getItemTotal(item), 0);
 
   const handleCheckout = async () => {
     setLoading(true);
@@ -105,14 +110,21 @@ const Cart = () => {
         stripePriceId: product.stripePriceId,
       }));
 
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/create-checkout-session`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ products: productsPayload, userId: user?.uid || cartId }),
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/create-checkout-session`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            products: productsPayload,
+            userId: user?.uid || cartId,
+          }),
+        }
+      );
 
       const session = await response.json();
-      if (!response.ok) throw new Error(session.error || 'Failed to create checkout session');
+      if (!response.ok)
+        throw new Error(session.error || 'Failed to create checkout session');
 
       window.location.href = session.url;
     } catch (error) {
@@ -125,7 +137,9 @@ const Cart = () => {
   return (
     <div className="cart-container">
       <h1 className="cart-title">Shopping Cart</h1>
-      <p className="cart-id">Cart ID: {(cartId || user?.uid || 'guest').slice(-5)}</p>
+      <p className="cart-id">
+        Cart ID: {(cartId || user?.uid || 'guest').slice(-5)}
+      </p>
 
       {cart.length === 0 ? (
         <div className="cart-empty">Your cart is empty.</div>
@@ -148,7 +162,10 @@ const Cart = () => {
                   <td>
                     <Link to={`/products/${item.id}`}>
                       <img
-                        src={item.image || "/fallback-images/image-not-available.png"}
+                        src={
+                          item.image ||
+                          '/fallback-images/image-not-available.png'
+                        }
                         alt={item.name}
                         className="cart-item-image"
                       />
@@ -157,31 +174,57 @@ const Cart = () => {
                   <td>
                     <p>{item.name}</p>
                     <p className="cart-sub-description">
-                      {item.size}&quot; Diameter | {item.depth}&quot; Depth | {item.lugQuantity}-lug | {item.reRing ? 'With Re-Ring' : 'Re-Rings: None'}
+                      {item.size}&quot; Diameter | {item.depth}&quot; Depth |{' '}
+                      {item.lugQuantity}-lug |{' '}
+                      {item.reRing ? 'With Re-Ring' : 'Re-Rings: None'}
                     </p>
                   </td>
-                  <td>${(Number(item.price) || 0).toFixed(2)}</td>
                   <td>
-                    {item.category === "artisan" ? (
-                      "1"
+                    {item.price !== undefined ? (
+                      `$${Number(item.price).toFixed(2)}`
                     ) : (
-                      <input
-                        type="number"
-                        value={item.quantity}
-                        min="1"
-                        max={item.currentQuantity}
-                        onChange={(e) => {
-                          const newQty = parseInt(e.target.value, 10);
-                          if (!isNaN(newQty)) {
-                            updateQuantity(item.id, newQty);
+                      <span style={{ color: 'red' }}>⚠️ Missing Price</span>
+                    )}
+                  </td>{' '}
+                  <td>
+                    {item.category === 'artisan' ? (
+                      <span className="quantity-value">1</span>
+                    ) : (
+                      <div className="quantity-control">
+                        <button
+                          className="quantity-btn"
+                          onClick={() =>
+                            updateQuantity(
+                              item.id,
+                              Math.max(item.quantity - 1, 1)
+                            )
                           }
-                        }}
-                      />
+                          disabled={item.quantity <= 1}
+                        >
+                          -
+                        </button>
+                        <span className="quantity-value">{item.quantity}</span>
+                        <button
+                          className="quantity-btn"
+                          onClick={() =>
+                            updateQuantity(
+                              item.id,
+                              Math.min(item.quantity + 1, item.currentQuantity)
+                            )
+                          }
+                          disabled={item.quantity >= item.currentQuantity}
+                        >
+                          +
+                        </button>
+                      </div>
                     )}
                   </td>
                   <td>${getItemTotal(item).toFixed(2)}</td>
                   <td>
-                    <button onClick={() => removeFromCart(item.id)} className="remove-btn">
+                    <button
+                      onClick={() => removeFromCart(item.id)}
+                      className="remove-btn"
+                    >
                       Remove
                     </button>
                   </td>
@@ -193,8 +236,12 @@ const Cart = () => {
             <p>Estimated Shipping: ${shippingEstimate.toFixed(2)}</p>
             <p>Total: ${(getTotalAmount() + shippingEstimate).toFixed(2)}</p>
           </div>
-          <button onClick={handleCheckout} className="checkout-button" disabled={loading}>
-            {loading ? "Processing..." : "Checkout"}
+          <button
+            onClick={handleCheckout}
+            className="checkout-button"
+            disabled={loading}
+          >
+            {loading ? 'Processing...' : 'Checkout'}
           </button>
         </>
       )}
@@ -203,9 +250,18 @@ const Cart = () => {
         <div className="modal-overlay">
           <div className="modal-content">
             <h2>Unavailable Products</h2>
-            <p>The following items were removed because they are no longer available:</p>
-            <ul>{unavailableProducts.map((product) => <li key={product.id}>{product.name}</li>)}</ul>
-            <button onClick={closeModal} className="modal-close-button">OK</button>
+            <p>
+              The following items were removed because they are no longer
+              available:
+            </p>
+            <ul>
+              {unavailableProducts.map((product) => (
+                <li key={product.id}>{product.name}</li>
+              ))}
+            </ul>
+            <button onClick={closeModal} className="modal-close-button">
+              OK
+            </button>
           </div>
         </div>
       )}

@@ -268,6 +268,28 @@ app.post(
   }
 );
 
+// New Route for creating Stripe payment intents
+app.post('/api/create-payment-intent', async (req, res) => {
+  try {
+    const { amount } = req.body;  // Amount in cents
+    if (!amount) {
+      return res.status(400).json({ error: 'Amount is required' });
+    }
+
+    // Create payment intent with the specified amount
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount,
+      currency: 'usd',  // Set the currency to USD
+      payment_method_types: ['card'],
+    });
+
+    res.status(200).json({ clientSecret: paymentIntent.client_secret });
+  } catch (error) {
+    console.error('Error creating payment intent:', error.message);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 // Route for creating Stripe checkout sessions
 app.post('/api/create-checkout-session', async (req, res) => {
   try {
@@ -370,7 +392,7 @@ app.use((err, req, res, next) => {
 });
 
 // Start the server, default to 4949 for local dev, but use PORT for cloud environments like Cloud Run
-const PORT = process.env.PORT || 4949;
+const PORT = process.env.PORT || 8080; // Make sure this is set to 8080 for Cloud Run
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

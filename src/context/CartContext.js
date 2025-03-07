@@ -1,6 +1,5 @@
-// src/context/CartContext.js
 import React, { createContext, useState, useContext, useEffect } from "react";
-import { doc, setDoc, getDoc, serverTimestamp } from "firebase/firestore";
+import { doc, setDoc, getDoc, updateDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import { useAuth } from "./AuthContext";
 
@@ -9,9 +8,16 @@ const CartContext = createContext();
 export const CartProvider = ({ children }) => {
     const { user } = useAuth();
     const [cartId, setCartId] = useState("");
-    const [cart, setCart] = useState([]);
+    const [cart, setCart] = useState([]); // ✅ Ensure cart is always an array
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
+    /** ✅ Generate Unique Cart ID (Fully Alphanumeric, No `cart-` Prefix) */
+    const generateCartId = () => {
+        const timestamp = Date.now().toString(36); // Base36 timestamp
+        const randomChars = Math.random().toString(36).substring(2, 10); // 8 random chars
+        return `${timestamp}${randomChars}`; // Example: "2wvmy8k3z9"
+    };
 
     /** ✅ Initialize Cart from Firestore or LocalStorage */
     useEffect(() => {
@@ -20,8 +26,9 @@ export const CartProvider = ({ children }) => {
             try {
                 let cartUserId = user?.uid || localStorage.getItem("cartId");
 
+                // ✅ If no cart ID exists, generate a new one
                 if (!cartUserId) {
-                    cartUserId = `guest_${Math.random().toString(36).substring(2, 12)}`;
+                    cartUserId = generateCartId();
                     localStorage.setItem("cartId", cartUserId);
                 }
 
@@ -31,12 +38,10 @@ export const CartProvider = ({ children }) => {
                 const cartDoc = await getDoc(cartRef);
 
                 if (cartDoc.exists()) {
-                    const firestoreCart = Array.isArray(cartDoc.data()?.cart) ? cartDoc.data().cart : [];
-                    console.log("🛒 Firestore Cart Loaded:", firestoreCart);
-                    setCart(firestoreCart);
+                    const firestoreCart = cartDoc.data().cart;
+                    setCart(Array.isArray(firestoreCart) ? firestoreCart : []); // ✅ Ensure cart is always an array
                 } else {
-                    console.warn("⚠️ No cart found in Firestore, initializing empty cart.");
-                    setCart([]);
+                    setCart([]); // ✅ Initialize as empty array
                 }
             } catch (err) {
                 console.error("❌ Error initializing cart:", err);
@@ -49,145 +54,134 @@ export const CartProvider = ({ children }) => {
         initializeCart();
     }, [user]);
 
-    /**
-     * ✅ Sync Cart to Firestore
-     */
+    /** ✅ Sync Cart to Firestore */
     const updateFirestoreCart = async (updatedCart) => {
-        if (!cartId) {
-            console.warn("❌ Cannot update Firestore: No cartId found.");
-            return;
-        }
-
-        console.log("🔥 Attempting to save to Firestore:", updatedCart);
-
-        const cartRef = doc(db, "carts", cartId);
-
-        try {
-            // Ensure Firestore document exists before updating
-            const cartSnapshot = await getDoc(cartRef);
-            if (!cartSnapshot.exists()) {
-                console.warn("⚠️ Cart document does not exist. Creating new cart document.");
-                await setDoc(cartRef, { cart: [], userId: cartId, lastUpdated: serverTimestamp() });
-            }
-
-            // 🔄 Remove `undefined` fields from cart items
-            const sanitizedCart = updatedCart.map(item => 
-                Object.fromEntries(Object.entries(item).filter(([_, value]) => value !== undefined))
-            );
-
-            console.log("🔥 Firestore Data After Cleaning:", sanitizedCart);
-
-            // ✅ Save sanitized cart
-            await setDoc(cartRef, { 
-                cart: sanitizedCart, 
-                userId: cartId, 
-                lastUpdated: serverTimestamp() 
-            }, { merge: true });
-
-            console.log("✅ Firestore Cart Successfully Updated!");
-            setCart(updatedCart); // ✅ Only update local state after Firestore success
-
-        } catch (err) {
-            console.error("❌ Firestore Update Error:", err);
-        }
-    };
-
-    /**
-     * ✅ Add Product to Cart
-     */
-    const addToCart = async (updatedCart) => {
-        console.log("🛒 Attempting to add/update product in cart:", updatedCart);
-    
-        if (!Array.isArray(updatedCart)) {
-            console.error("❌ addToCart Error: updatedCart is not an array!", updatedCart);
-            alert("An unexpected error occurred while adding the item to the cart.");
-            return;
-        }
-    
-        // 🚨 Validate Stripe Price ID for all items before proceeding
-        for (const item of updatedCart) {
-            if (!item.stripePriceId) {
-                console.error("❌ Missing Stripe Price ID for item:", item);
-                alert("A product is missing required payment information. Please refresh the page and try again.");
-                return;
-            }
-        }
-    
-        console.log("✅ All products have valid Stripe Price IDs!");
+        console.log("🔥 Saving Cart to Firestore:", updatedCart);
     
         if (!cartId) {
             console.warn("❌ Cannot update Firestore: No cartId found.");
             return;
         }
     
-        console.log("🔥 Attempting to save to Firestore:", updatedCart);
+        // 🚨 Remove undefined or null values
+        const sanitizedCart = updatedCart.map((item) => ({
+            id: item.id || "N/A",
+            name: item.name || "Unnamed Product",
+            category: item.category || "unknown",
+            quantity: item.quantity || 1,
+            price: Number(item.price) || 0, 
+            size: item.size || "N/A",
+            depth: item.depth || "N/A",
+            lugQuantity: item.lugQuantity || "N/A",
+            staveQuantity: item.staveQuantity || "N/A",
+            reRing: item.reRing ?? false,
+            stripePriceId: item.stripePriceId || "",
+            timestamp: new Date().toISOString()
+        }));
     
-        const cartRef = doc(db, "carts", cartId);
-    
-        try {
-            // ✅ Ensure Firestore document exists before updating
-            const cartSnapshot = await getDoc(cartRef);
-            if (!cartSnapshot.exists()) {
-                console.warn("⚠️ Cart document does not exist. Creating new cart document.");
-                await setDoc(cartRef, { cart: [], userId: cartId, lastUpdated: serverTimestamp() });
-            }
-    
-            // 🔄 **Remove `undefined` fields from cart items**
-            const sanitizedCart = updatedCart.map(item => 
-                Object.fromEntries(Object.entries(item).filter(([_, value]) => value !== undefined))
-            );
-    
-            console.log("🔥 Firestore Data After Cleaning:", sanitizedCart);
-    
-            // ✅ Save the sanitized cart
-            await setDoc(cartRef, { 
-                cart: sanitizedCart, 
-                userId: cartId, 
-                lastUpdated: serverTimestamp() 
-            }, { merge: true });
-    
-            console.log("✅ Firestore Cart Successfully Updated!");
-            setCart(sanitizedCart); // ✅ Only update local state after Firestore success
-    
-        } catch (err) {
-            console.error("❌ Firestore Update Error:", err);
-        }
-    };
-  
-    /**
-     * ✅ Remove Product from Cart
-     */
-    const removeFromCart = async (productId) => {
-        console.log(`🛑 Removing item: ${productId}`);
-
-        const updatedCart = cart.filter((item) => item.id !== productId);
-
-        console.log("🛒 Updated Cart after Removal:", updatedCart.map(item => item.id));
-
-        await updateFirestoreCart(updatedCart); // ✅ Sync Firestore before updating local state
-        setCart(updatedCart);
-    };
-
-    /**
-     * ✅ Clear Cart on Checkout
-     */
-    const clearCartOnCheckout = async () => {
-        setCart([]);
         try {
             const cartRef = doc(db, "carts", cartId);
-            await setDoc(cartRef, { cart: [], userId: user?.uid || "guest", lastUpdated: serverTimestamp() }, { merge: true });
-
-            console.log("✅ Cart cleared after checkout");
-        } catch (err) {
-            console.error("❌ Error clearing cart on checkout:", err);
-            setError("Error clearing cart.");
+            await updateDoc(cartRef, { cart: sanitizedCart, lastUpdated: new Date() });
+            console.log("✅ Cart successfully updated in Firestore!");
+        } catch (error) {
+            console.error("❌ Firestore Update Error:", error);
         }
     };
 
-    /** ✅ Track when Cart Updates in Firestore */
-    useEffect(() => {
-        console.log("🛒 Cart Updated in Context:", cart);
-    }, [cart]);
+    /** ✅ Add Product to Cart */
+    /** ✅ Add Product to Cart */
+const addToCart = async (product, selectedOptions = {}) => {
+    console.log("🛒 Adding Product to Cart", { product, selectedOptions });
+
+    if (!product || typeof product !== "object") {
+        console.error("❌ addToCart Error: product is not an object!", product);
+        alert("An unexpected error occurred while adding the item to the cart.");
+        return;
+    }
+
+    if (!cartId) {
+        console.warn("❌ Cannot update Firestore: No cartId found.");
+        alert("Cart ID is missing. Please reload the page.");
+        return;
+    }
+
+    let updatedCart = [...cart];
+
+    // 🔍 Check if the item already exists in the cart
+    const existingItemIndex = updatedCart.findIndex((item) =>
+        item.productId === product.productId &&
+        item.size === selectedOptions.size &&
+        item.depth === selectedOptions.depth &&
+        item.lugQuantity === selectedOptions.lugQuantity &&
+        item.staveQuantity === selectedOptions.staveQuantity &&
+        item.reRing === selectedOptions.reRing
+    );
+
+    if (existingItemIndex > -1) {
+        // ✅ If product exists, update quantity instead of duplicating
+        updatedCart[existingItemIndex].quantity = Math.min(
+            updatedCart[existingItemIndex].quantity + 1,
+            product.maxQuantity || 1
+        );
+    } else {
+        // ✅ Ensure price is a valid number
+        const finalPrice = Number(selectedOptions.totalPrice) || Number(product.price) || 0;
+
+        let newItem = {
+            id: `${selectedOptions.stripePriceId}-${selectedOptions.size}-${selectedOptions.depth}-${selectedOptions.reRing}-${selectedOptions.lugQuantity}-${selectedOptions.staveQuantity}`,
+            productId: product.productId,
+            name: product.name || "Unnamed Product",
+            category: product.category || "artisan",
+            quantity: 1,
+            price: finalPrice, // ✅ Fix: Ensure price is set
+            size: selectedOptions.size || "N/A",
+            depth: selectedOptions.depth || "N/A",
+            lugQuantity: selectedOptions.lugQuantity || "N/A",
+            staveQuantity: selectedOptions.staveQuantity || "N/A",
+            reRing: selectedOptions.reRing ?? false,
+            stripePriceId: selectedOptions.stripePriceId || "",
+            currentQuantity: product.currentQuantity || 1,
+            maxQuantity: product.maxQuantity || 1,
+            timestamp: new Date().toISOString()
+        };
+
+        updatedCart.push(newItem);
+    }
+
+    console.log("✅ Final Cart State Before Saving to Firestore:", updatedCart);
+
+    try {
+        await updateFirestoreCart(updatedCart);
+        setCart(updatedCart);
+    } catch (error) {
+        console.error("❌ Firestore Update Error:", error);
+    }
+};
+
+    /** ✅ Increment or Decrement Quantity */
+    const updateQuantity = async (productId, newQuantity) => {
+        setCart((prevCart) => {
+          const updatedCart = prevCart.map((item) =>
+            item.id === productId
+              ? { ...item, quantity: newQuantity }
+              : item
+          );
+          updateFirestoreCart(updatedCart); // Firestore update only happens after state update
+          return updatedCart;
+        });
+      };
+
+    /** ✅ Remove Product from Cart */
+const removeFromCart = async (productId) => {
+    console.log("🗑 Removing item from cart:", productId);
+
+    let updatedCart = cart.filter((item) => item.id !== productId);
+
+    setCart(updatedCart);
+    await updateFirestoreCart(updatedCart);
+
+    console.log("✅ Updated Cart State After Removal:", updatedCart);
+};
 
     return (
         <CartContext.Provider
@@ -196,11 +190,11 @@ export const CartProvider = ({ children }) => {
                 cartId,
                 loading,
                 error,
-                setCart,
-                updateFirestoreCart,
+                setCart, // ✅ Ensure setCart is provided!
                 addToCart,
+                updateQuantity,
                 removeFromCart,
-                clearCartOnCheckout,
+                updateFirestoreCart,
             }}
         >
             {children}

@@ -47,7 +47,7 @@ const HeritageProductDetail = () => {
   });
 
   // ✅ Use Cart Context
-  const { addToCart } = useCart(); 
+  const { addToCart, cart } = useCart(); // De-structure `cart` from the `useCart` hook
 
   const handleAddToCart = () => {
     console.log("🛒 Add to Cart Clicked");
@@ -60,7 +60,6 @@ const HeritageProductDetail = () => {
     const normalizedSize = String(size).trim();
     const normalizedDepth = String(depth).trim();
 
-    // ✅ More reliable way to check if Re-Rings are required
     const hasReRing = staveOption.includes("Re-Rings") || staveOption.includes("+ $150");
 
     console.log("🔍 Searching for:", { size: normalizedSize, depth: normalizedDepth, reRing: hasReRing });
@@ -70,7 +69,6 @@ const HeritageProductDetail = () => {
         return;
     }
 
-    // ✅ Find the correct pricing option
     const selectedOption = heritageSummaries.pricingOptions.find(option =>
         String(option.size).trim() === normalizedSize &&
         String(option.depth).trim() === normalizedDepth &&
@@ -79,46 +77,27 @@ const HeritageProductDetail = () => {
 
     if (!selectedOption) {
         console.error("❌ No matching pricing option found for:", { size: normalizedSize, depth: normalizedDepth, reRing: hasReRing });
-        console.log("Available options:", heritageSummaries.pricingOptions);
         return;
     }
 
     console.log("✅ Selected Pricing Option:", selectedOption);
 
-   // ✅ Extract lugQuantity and staveQuantity safely
-const lugQuantity = selectedOption.lugQuantity !== undefined ? selectedOption.lugQuantity : (Number(lugs) || 6);
-const staveQuantity = selectedOption.staveQuantity !== undefined ? selectedOption.staveQuantity : (Number(staveOption.split(" - ")[0]) || 12);
-
-    // ✅ Generate a **proper** unique ID for this variant
-    const uniqueItemId = `${selectedOption.stripePriceId}-${normalizedSize}-${normalizedDepth}-${hasReRing}-${lugQuantity}-${staveQuantity}`;
-
-    // ✅ Format the cart item correctly
     const cartItem = {
-        id: uniqueItemId,
+        id: `${selectedOption.stripePriceId}-${normalizedSize}-${normalizedDepth}-${hasReRing}-${selectedOption.lugQuantity}-${selectedOption.staveQuantity}`,
         productId: "heritage",
         name: "HERÌTAGE",
         size: normalizedSize,
         depth: normalizedDepth,
         reRing: hasReRing,
-        lugQuantity,
-        staveQuantity,
-        price: selectedOption.price,
+        lugQuantity: selectedOption.lugQuantity,
+        staveQuantity: selectedOption.staveQuantity,
+        price: selectedOption.price, // ✅ Ensure price is correctly passed
         stripePriceId: selectedOption.stripePriceId,
         quantity: 1
     };
 
     console.log("🛒 Cart Item Data:", cartItem);
-
-    // ✅ Add to cart using Context API
-    addToCart(cartItem);
-    console.log("🔎 Debugging Unique ID:", {
-      stripePriceId: selectedOption.stripePriceId,
-      size: normalizedSize,
-      depth: normalizedDepth,
-      reRing: hasReRing,
-      lugQuantity,
-      staveQuantity
-  });
+    addToCart(cartItem, cartItem);
 };
 
   useEffect(() => {
@@ -286,7 +265,7 @@ const staveQuantity = selectedOption.staveQuantity !== undefined ? selectedOptio
 
       {/* 📌 Drum Summary Section */}
       <div className="drum-summary">
-      <SpiderChart data={[soundProfile.projection, soundProfile.sustain, soundProfile.brightness, soundProfile.warmth, soundProfile.attack]} />
+      {/* <SpiderChart data={[soundProfile.projection, soundProfile.sustain, soundProfile.brightness, soundProfile.warmth, soundProfile.attack]} /> */}
       {/* <BarChart data={soundProfile} /> */}
       <h1>Artisan Notes</h1>
         <h3>🎛️ Highlighted Characteristics</h3>

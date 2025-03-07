@@ -36,6 +36,20 @@
   box-sizing: border-box;
 }
 
+/* ✅ Ensure Product Details Text is Black in Light Mode */
+body.light .product-info,
+body.light .artisan-specs,
+body.light .artisan-specs-table td {
+  color: black !important;
+}
+
+/* ✅ Ensure Product Details Text is White in Dark Mode */
+body.dark .product-info,
+body.dark .artisan-specs,
+body.dark .artisan-specs-table td {
+  color: white !important;
+}
+
 /* Product Gallery & Info Section */
 .product-gallery-info {
   display: flex;
