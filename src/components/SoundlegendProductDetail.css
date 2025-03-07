@@ -1,0 +1,184 @@
+/* 📌 Main Page Container */
+.soundlegend-product-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 25px;
+    max-width: 1500px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    background: #0e0e0e;
+    color: white;
+    text-align: center;
+}
+
+/* 📌 Title Styling */
+.soundlegend-product-detail h1 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #ffcc00;
+}
+
+/* 🔄 Main Content Layout */
+.soundlegend-product-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    gap: 60px;
+    max-width: 1300px;
+    box-sizing: border-box;
+}
+
+/* 📌 Left Side: Product Image */
+.soundlegend-product-image {
+    flex: 1;
+    max-width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.soundlegend-product-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 7px;
+    box-shadow: 20px rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.soundlegend-product-image img:hover {
+    transform: scale(1.05);
+}
+
+/* 📌 Right Side: Customization & Features */
+.soundlegend-product-options {
+    flex: 1;
+    max-width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 24px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 204, 0, 0.4);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 0 20px rgba(255, 204, 0, 0.2);
+}
+
+/* 📌 Features Section */
+.soundlegend-features h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffcc00;
+    margin-bottom: 10px;
+}
+
+.soundlegend-features p {
+    font-size: 16px;
+    color: #ddd;
+    line-height: 1.5;
+    text-align: left;
+}
+
+/* 📌 Labels for Form Fields */
+.soundlegend-product-options label {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #ffcc00;
+    text-align: left;
+}
+
+/* 📌 Dropdown & Input Fields */
+.soundlegend-product-options select,
+.soundlegend-product-options input {
+    width: 100%;
+    padding: 10px;
+    font-size: 15px;
+    border-radius: 6px;
+    border: 1px solid #666;
+    background: #1a1a1a;
+    color: white;
+    cursor: pointer;
+    margin-bottom: 12px;
+    transition: border 0.3s ease;
+}
+
+.soundlegend-product-options select:focus,
+.soundlegend-product-options input:focus {
+    border: 1px solid #ffcc00;
+    outline: none;
+}
+
+/* 📌 Snare Bed Description */
+.snare-bed-description {
+    font-size: 14px;
+    color: #aaa;
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+/* 📌 Submit Button */
+.soundlegend-product-options button {
+    background-color: #ffcc00;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%;
+}
+
+.soundlegend-product-options button:hover {
+    background-color: #e6b800;
+    transform: scale(1.05);
+}
+
+/* 📌 Responsive Design */
+@media (max-width: 1024px) {
+    .soundlegend-product-content {
+        flex-direction: column;
+        align-items: center;
+        gap: 35px;
+    }
+
+    .soundlegend-product-image {
+        max-width: 100%;
+    }
+
+    .soundlegend-product-options {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .soundlegend-product-detail h1 {
+        font-size: 28px;
+    }
+
+    .soundlegend-product-options {
+        padding: 18px;
+    }
+
+    .soundlegend-product-options h2 {
+        font-size: 20px;
+    }
+
+    .soundlegend-product-options select,
+    .soundlegend-product-options input {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .soundlegend-product-options button {
+        font-size: 15px;
+        padding: 12px;
+    }
+}
