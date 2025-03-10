@@ -110,92 +110,92 @@ const Contact = () => {
 
   return (
     <div className="contact-container">
-      <Typography variant="h4" component="h1" gutterBottom>
+      <Typography variant="h4" component="h1" gutterBottom className="contact-header">
         Contact Us
       </Typography>
+
       <form onSubmit={handleSubmit}>
         {/* Category Dropdown */}
-        <FormControl fullWidth margin="normal" required>
-          <Select
-            name="category"
-            value={formData.category}
-            onChange={handleChange}
-            displayEmpty
-            className="contact-input"
-          >
-            <MenuItem value="">
-              <div>Select a category</div>
-            </MenuItem>
-            {inquiryCategories.map((category) => (
-              <MenuItem key={category.value} value={category.value}>
-                {category.label}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+        <FormControl fullWidth margin="normal" required className="contact-dropdown">
+  <Select
+    name="category"
+    value={formData.category}
+    onChange={handleChange}
+    displayEmpty
+    className="contact-select"
+  >
+    <MenuItem value="">
+      <div>Select a category</div>
+    </MenuItem>
+    {inquiryCategories.map((category) => (
+      <MenuItem key={category.value} value={category.value} className="contact-menu-item">
+        {category.label}
+      </MenuItem>
+    ))}
+  </Select>
+</FormControl>
 
-        {/* Form Fields */}
-        <TextField
-          label="First Name"
-          name="first_name"
-          value={formData.first_name}
-          onChange={handleChange}
-          fullWidth
-          margin="normal"
-          required
-          className="contact-input"
-        />
-        <TextField
-          label="Last Name"
-          name="last_name"
-          value={formData.last_name}
-          onChange={handleChange}
-          fullWidth
-          margin="normal"
-          required
-          className="contact-input"
-        />
-        <TextField
-          label="Email"
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          fullWidth
-          margin="normal"
-          required
-          className="contact-input"
-        />
-        <TextField
-          label="Phone (Optional)"
-          name="phone"
-          value={formData.phone}
-          onChange={handleChange}
-          fullWidth
-          margin="normal"
-          className="contact-input"
-        />
-        <TextField
-          label="Message"
-          name="message"
-          value={formData.message}
-          onChange={handleChange}
-          fullWidth
-          margin="normal"
-          required
-          multiline
-          rows={4}
-          className="contact-input"
-        />
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          className="contact-button"
-          disabled={loading}
-        >
-          {loading ? 'Sending...' : 'Send Message'}
-        </Button>
+<TextField
+  label="First Name"
+  name="first_name"
+  value={formData.first_name}
+  onChange={handleChange}
+  fullWidth
+  margin="normal"
+  required
+  className="contact-input"
+/>
+<TextField
+  label="Last Name"
+  name="last_name"
+  value={formData.last_name}
+  onChange={handleChange}
+  fullWidth
+  margin="normal"
+  required
+  className="contact-input"
+/>
+<TextField
+  label="Email"
+  type="email"
+  name="email"
+  value={formData.email}
+  onChange={handleChange}
+  fullWidth
+  margin="normal"
+  required
+  className="contact-input"
+/>
+<TextField
+  label="Phone (Optional)"
+  name="phone"
+  value={formData.phone}
+  onChange={handleChange}
+  fullWidth
+  margin="normal"
+  className="contact-input"
+/>
+<TextField
+  label="Message"
+  name="message"
+  value={formData.message}
+  onChange={handleChange}
+  fullWidth
+  margin="normal"
+  required
+  multiline
+  rows={4}
+  className="contact-input"
+/>
+<Button
+  type="submit"
+  variant="contained"
+  color="primary"
+  className="contact-button"
+  disabled={loading}
+>
+  {loading ? 'Sending...' : 'Send Message'}
+</Button>
       </form>
 
       {/* Success Dialog */}
@@ -203,7 +203,7 @@ const Contact = () => {
         <DialogTitle>Message Sent</DialogTitle>
         <DialogContent>
           <Typography variant="body1">
-            Thank you for reaching out! We&apos;ll get back to you within 1-2 business days. Feel free to explore our current Pre-Order options while you wait.
+            Thank you for reaching out! We&apos;ll get back to you within 2-3 business days. Feel free to explore our current Pre-Order options while you wait.
           </Typography>
         </DialogContent>
         <DialogActions>
