@@ -61,34 +61,28 @@ const app = express();
 // Trust Proxy for Firebase Hosting
 app.set('trust proxy', true);
 
-// CORS Configuration
-const allowedOrigins =
-  {
-    dev: [
-      'http://localhost:3000',
-      'http://localhost:4949',
-      'https://dev.danoberartisan.com',
-    ],
-    stg: ['http://localhost:3001', 'https://stg.danoberartisan.com'],
-    prod: ['https://danoberartisan.com'],
-  }[env] || [];
+// Allow requests from frontend environments
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://danoberartisandrums-dev.web.app",
+  "https://danoberartisandrums-stg.web.app",
+  "https://danoberartisandrums.web.app"
+];
 
 app.use(
   cors({
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) callback(null, true);
-      else callback(new Error('Not allowed by CORS'));
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
     },
-    methods: ['GET', 'POST', 'OPTIONS'],
-    credentials: true,
+    credentials: true, // Allows cookies and authentication headers
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"]
   })
 );
-
-// Middleware: Log all incoming requests
-app.use((req, res, next) => {
-  console.log(`[${new Date().toISOString()}] ${req.method} ${req.originalUrl}`);
-  next();
-});
 
 // Middleware: JSON Parsing
 app.use((req, res, next) => {
@@ -325,7 +319,7 @@ app.post('/api/create-checkout-session', async (req, res) => {
       payment_method_types: ['card'],
       line_items: lineItems,
       mode: 'payment',
-      success_url: `http://localhost:3000/checkout-summary?session_id={CHECKOUT_SESSION_ID}&guest_token=${guestToken}`,
+      success_url: `${process.env.CLIENT_URL}/checkout-summary?session_id={CHECKOUT_SESSION_ID}&guest_token=${guestToken}`,
       cancel_url: `${process.env.CLIENT_URL}/cart`,
       metadata: {
         userId: userId || 'guest',
