@@ -1,33 +1,136 @@
-/* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"); */
-
 /* src/components/Contact.css */
+
+/* Light Mode Styling */
 .contact-container {
-  /* font-family: "Poppins"; */
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 40px;
-  background-color: #f9f9f9;
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #ffffff; /* White background for light mode */
+  color: #000000; /* Black text for light mode */
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-top: 25px;
-  margin-bottom: 60px;
 }
 
-.contact-input {
-  /* margin-bottom: 16px; */
+/* Contact Header */
+.contact-header {
+  color: #000000; /* Black in light mode */
 }
 
+/* Form Fields */
+.contact-input .MuiOutlinedInput-root {
+  background-color: #ffffff; /* White input fields */
+  color: #000000 !important; /* Black text */
+}
+
+.contact-input label {
+  color: #000000 !important; /* Ensure input labels are black */
+}
+
+
+/* Dropdown Styling */
+.contact-dropdown .MuiSelect-root {
+  background-color: #ffffff !important;
+  color: #000000 !important; /* Black text */
+}
+
+.contact-dropdown .MuiOutlinedInput-root {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+/* Dropdown Menu Items */
+.contact-dropdown .MuiMenuItem-root {
+  background-color: #ffffff !important;
+  color: #000000 !important; /* Black text */
+}
+
+.contact-dropdown .MuiMenuItem-root:hover {
+  background-color: #f0f0f0 !important;
+}
+
+/* Fix Material UI Dropdown Popups */
+.MuiPopover-paper {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+/* Ensure Dropdown Selection Text is Visible */
+.contact-select .MuiSelect-select {
+  color: #000000 !important;
+}
+
+/* Button Styling */
 .contact-button {
   margin-top: 16px;
+  background-color: #222;
+  color: #ffffff;
+  padding: 12px;
+  border-radius: 5px;
 }
 
-.contact-status {
-  margin-top: 16px;
-  text-align: center;
+.contact-button:hover {
+  background-color: #333;
 }
 
+/* Dark Mode Styling */
+@media (prefers-color-scheme: dark) {
+  /* Dark mode background */
+  .contact-container {
+    background-color: #222 !important;
+    color: #ffffff !important;
+  }
+
+  /* Contact Header */
+  .contact-header {
+    color: #ffffff !important;
+  }
+
+  /* Input Fields */
+  .contact-input .MuiOutlinedInput-root {
+    background-color: #444 !important;
+    color: #ffffff !important;
+  }
+
+  .contact-input label {
+    color: #ffffff !important; /* Ensure input labels are white */
+  }
+
+  /* Dropdown Styling */
+  .MuiPopover-paper {
+    background-color: #333 !important;
+    color: #ffffff !important;
+  }
+
+  .contact-dropdown .MuiMenuItem-root {
+    background-color: #333 !important;
+    color: #ffffff !important; /* White text in dark mode */
+  }
+
+  .contact-dropdown .MuiMenuItem-root:hover {
+    background-color: #444 !important;
+  }
+
+  /* Ensure Dropdown Selection Text is Visible */
+  .contact-select .MuiSelect-select {
+    /* color: #ffffff !important; */
+  }
+
+  /* Button Styling */
+  .contact-button {
+    background-color: #555 !important;
+    color: #ffffff !important;
+  }
+
+  .contact-button:hover {
+    background-color: #777 !important;
+  }
+}
+
+/* Adjust for smaller screens */
 @media (max-width: 768px) {
   .contact-container {
-    margin: 0px 20px 20px 20px;
+    width: 90%;
+    margin: 20px auto;
+    padding: 20px;
   }
 }

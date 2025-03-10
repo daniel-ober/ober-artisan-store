@@ -46,28 +46,40 @@ const CheckoutSummary = () => {
     const updateProductInventory = async (items) => {
         try {
             console.log("🔍 Starting inventory update for items:", items);
-
+    
             for (const item of items) {
+                if (!item.productId) {
+                    console.warn("⚠️ Skipping item due to missing productId:", item);
+                    continue; // Skip this item
+                }
+    
                 console.log(`📌 Checking product ID: ${item.productId}`);
-
-                const productRef = doc(db, "products", item.productId);
+    
+                // Ensure correct Firestore reference
+                let productRef;
+                if (item.productId === "feuzon" || item.productId === "heritage") {
+                    productRef = doc(db, "products", item.productId);
+                } else {
+                    productRef = doc(db, "products", item.productId);
+                }
+    
                 const productSnap = await getDoc(productRef);
-
+    
                 if (!productSnap.exists()) {
                     console.warn(`⚠️ Product not found in Firestore: ${item.productId}`);
                     continue;
                 }
-
+    
                 const productData = productSnap.data();
                 console.log(`📊 Current stock for ${item.productId}: ${productData.currentQuantity}`);
-
-                const newQuantity = Math.max(0, productData.currentQuantity - item.quantity);
+    
+                const newQuantity = Math.max(0, (productData.currentQuantity || 0) - (item.quantity || 1));
                 console.log(`🔄 Updating stock: ${productData.currentQuantity} -> ${newQuantity}`);
-
+    
                 await updateDoc(productRef, { currentQuantity: newQuantity });
                 console.log(`✅ Inventory updated for ${item.productId}`);
             }
-
+    
             console.log("✅ Finished updating inventory!");
         } catch (error) {
             console.error("❌ Error updating inventory:", error);
@@ -150,11 +162,6 @@ const CheckoutSummary = () => {
                 <p><strong>Card Used:</strong> {paymentMethod.brand || "N/A"} •••• {paymentMethod.last4 || "XXXX"}</p>
 
                 <button className="print-receipt" onClick={printReceipt}>🖨️ Print Receipt</button>
-            </div>
-
-            <div className="signup-banner">
-                <p>Want to track your order? Sign up for an account now!</p>
-                <a href="/signup" className="signup-button">Create an Account</a>
             </div>
         </div>
     );

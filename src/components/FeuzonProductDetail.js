@@ -531,14 +531,15 @@ const FeuzonProductDetail = () => {
               <h2>FEUZØN Series Features</h2>
               <ul>
                 <li>Hybrid Shell Construction</li>
+                <li>Combines Various Wood Species For A Unique Tone</li>
                 <li>Double Ended Tube Lugs</li>
-                <li>Roundover Outer / 45° Inner Bearing Edge</li>
-                <li>Custom-Tuned for Maximum Projection</li>
-                <li>Handcrafted Semi-Gloss Finish</li>
-                <li>Precision Cut Snare Beds</li>
-                <li>Trick Snare Throw-Off</li>
-                <li>Puresound Snare Wires</li>
-                <li>Remo Coated Ambassador Batter & Clear Snare Side</li>
+              <li>Roundover Outer / 45° Inner Bearing Edge</li>
+              <li>Precision Cut Snare Beds</li>
+              <li>Stained or Natural Semi-Gloss Finish</li>
+              <li>Torch Tuned for Maximum Resonance</li>
+              <li>Trick Snare Throw-Off</li>
+              <li>Puresound Snare Wires</li>
+              <li>Remo Coated Ambassador Batter & Clear Snare Side</li>
               </ul>
             </div>
   
