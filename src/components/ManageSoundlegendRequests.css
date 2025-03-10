@@ -1,0 +1,32 @@
+.soundlegend-container {
+    padding: 20px;
+  }
+  
+  .submissions-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .submissions-table th,
+  .submissions-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .submissions-table th {
+    background-color: #f4f4f4;
+  }
+  
+  .loading {
+    text-align: center;
+    font-size: 18px;
+  }
+  
+  select {
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: white;
+  }

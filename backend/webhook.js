@@ -29,7 +29,6 @@ router.post(
       const session = event.data.object;
       console.log('✅ Checkout session completed:', session);
 
-      // Ensure session contains necessary metadata
       if (!session.metadata || !session.metadata.userId) {
         console.error('❌ Missing user metadata in session.');
         return res.status(400).send('Missing user metadata.');
@@ -39,7 +38,6 @@ router.post(
       const userEmail = session.customer_email;
       const totalAmount = session.amount_total / 100;
 
-      // Fetch line items for the session
       let lineItems;
       try {
         const lineItemsResponse = await stripe.checkout.sessions.listLineItems(
@@ -47,12 +45,18 @@ router.post(
           { expand: ['data.price.product'] }
         );
 
-        lineItems = lineItemsResponse.data.map((item) => ({
-          stripeProductId: item.price.product?.id || null,
-          stripePriceId: item.price.id || null,
-          quantity: item.quantity,
-          price: item.amount_total / 100,
-        }));
+        // ✅ Ensure productId is included
+        lineItems = lineItemsResponse.data.map((item) => {
+          console.log("🛒 Raw Line Item from Stripe:", item);
+
+          return {
+            stripeProductId: item.price.product?.id || null,
+            stripePriceId: item.price.id || null,
+            name: item.description || null,
+            quantity: item.quantity,
+            price: item.amount_total / 100,
+          };
+        });
 
         console.log('✅ Processed Line Items:', JSON.stringify(lineItems, null, 2));
       } catch (error) {
@@ -73,9 +77,33 @@ router.post(
             .limit(1)
             .get();
 
+          // ✅ Fallback: If `stripeProductId` fails, try matching `name.toLowerCase()`
           if (!productSnapshot || productSnapshot.empty) {
-            console.error(`❌ No product found for Stripe Product ID: ${item.stripeProductId}. Skipping inventory update.`);
-            continue;
+            console.error(`❌ No product found for Stripe Product ID: ${item.stripeProductId}`);
+
+            if (item.name) {
+              console.warn(`⚠️ Attempting fallback lookup for product name: ${item.name}`);
+
+              const formattedName = item.name.toLowerCase().replace(/\s+/g, ''); // Normalize name
+              const fallbackSnapshot = await admin
+                .firestore()
+                .collection('products')
+                .where('name', '>=', formattedName)
+                .where('name', '<=', formattedName + '\uf8ff')
+                .limit(1)
+                .get();
+
+              if (!fallbackSnapshot.empty) {
+                console.log(`✅ Fallback Matched Product: ${formattedName}`);
+                productSnapshot = fallbackSnapshot;
+              } else {
+                console.error(`❌ Fallback failed. Product '${item.name}' not found in Firestore.`);
+                continue;
+              }
+            } else {
+              console.error(`❌ Skipping product due to missing name.`);
+              continue;
+            }
           }
 
           const productDoc = productSnapshot.docs[0];
@@ -84,7 +112,7 @@ router.post(
 
           console.log(`✅ Matched Product: ${productData.name} (Current Quantity: ${productData.currentQuantity})`);
 
-          // Update inventory using transaction
+          // ✅ Update inventory using transaction
           await admin.firestore().runTransaction(async (transaction) => {
             const freshProductDoc = await transaction.get(productRef);
             if (!freshProductDoc.exists) {
@@ -117,7 +145,10 @@ router.post(
           orderId,
           userId,
           email: userEmail,
-          items: lineItems,
+          items: lineItems.map((item) => ({
+            ...item,
+            productId: item.stripeProductId || item.name?.toLowerCase()?.replace(/\s+/g, ''),
+          })), // Ensure productId is added
           totalAmount,
           currency: session.currency,
           status: 'Processing',

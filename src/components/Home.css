@@ -124,9 +124,10 @@ body.dark .hero-overlay {
   text-align: center;
   flex: 1;
   min-width: 280px;
-  max-width: 320px;
-  padding: 20px; /* ✅ Reduced excess padding */
-  background: #fff;
+  max-width: 400px; /* ✅ Increased width to match hero card */
+  padding: 30px;
+  background: #ffffff; /* ✅ Light mode default background */
+  color: #000000; /* ✅ Black text for light mode */
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
   border-radius: 12px;
   transition: transform 0.3s ease-in-out, background-color 0.4s ease-in-out;
@@ -139,34 +140,41 @@ body.dark .hero-overlay {
 
 /* Dark Mode Highlight */
 body.dark .highlight {
-  background: #2a2a2a;
+  background: #2a2a2a; /* ✅ Dark mode background */
+  color: #ffffff; /* ✅ White text for dark mode */
   box-shadow: 0 8px 12px rgba(255, 255, 255, 0.1);
-  color: white;
 }
 
-/* Hover Effect on Highlights */
-.highlight:hover {
-  transform: translateY(-5px);
-}
-
-/* Highlight Titles */
+/* Ensure h2 Titles Have Proper Contrast */
 .highlight h2 {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   margin-bottom: 10px;
+  color: #000000; /* ✅ Default black for light mode */
 }
 
-/* Highlight Text */
+/* Ensure Proper Contrast in Dark Mode */
+body.dark .highlight h2 {
+  color: #ffffff !important; /* ✅ White in dark mode */
+}
+
+/* Ensure Paragraph Text Is Legible */
 .highlight p {
   font-size: 1rem;
-  margin-bottom: 10px; /* ✅ Adjusted spacing */
+  color: #333; /* ✅ Dark gray for readability in light mode */
+  margin-bottom: 15px;
 }
 
-/* Highlight Buttons */
+/* Dark Mode Paragraph Text */
+body.dark .highlight p {
+  color: #ddd; /* ✅ Lighter gray for readability */
+}
+
+/* Ensure Highlight Buttons Stand Out */
 .highlight button {
   background-color: #333;
   color: white;
   border: none;
-  padding: 10px 22px;
+  padding: 12px 24px;
   border-radius: 6px;
   cursor: pointer;
   font-size: 1rem;
@@ -191,63 +199,26 @@ body.dark .highlight button:hover {
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-  .hero-overlay {
-    padding: 25px;
+  .highlights-section {
+    flex-direction: row;
+    justify-content: center;
   }
 
-  .hero-overlay h1 {
-    font-size: 2.5rem;
-  }
-
-  .hero-overlay p {
-    font-size: 1.2rem;
-  }
-
-  .hero-overlay .cta-button {
-    padding: 12px 25px;
-    font-size: 0.9rem;
+  .highlight {
+    max-width: 360px; /* ✅ Adjust for tablet screens */
   }
 }
 
 @media (max-width: 768px) {
-  .hero-overlay {
-    max-width: 90%;
-    padding: 25px;
-  }
-
   .highlights-section {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    min-height: auto;
   }
 
   .highlight {
     width: 100%;
     max-width: 90%;
-    padding: 15px; /* ✅ Reduced excess padding */
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-overlay {
-    padding: 20px;
-  }
-
-  .hero-overlay h1 {
-    font-size: 2rem;
-  }
-
-  .hero-overlay p {
-    font-size: 1.1rem;
-  }
-
-  .hero-overlay .cta-button {
-    padding: 10px 20px;
-    font-size: 0.85rem;
-  }
-
-  .highlight {
-    min-height: auto; /* ✅ Allows it to shrink naturally */
+    padding: 20px; /* ✅ Reduced padding for better spacing */
   }
 }

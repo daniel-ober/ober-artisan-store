@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "./ProductCard.css"; // Reusing ProductCard styling
+import "./PreOrderCard.css";
 
 const PreOrderCard = ({ product }) => {
   const navigate = useNavigate();
@@ -13,24 +13,25 @@ const PreOrderCard = ({ product }) => {
     buttonText = "Pre-Order Now";
   } else if (product.id === "soundlegend") {
     buttonText = "Request Consultation";
-  } else if (product.type === "dreamfeather") {
-    buttonText = "Own This One-of-a-Kind Snare";
   } else {
     buttonText = "Pre-Order Now";
   }
 
   return (
-    <div className="product-card">
+    <div className="preorder-card">
       {/* Product Image */}
       <div
         className="preorder-image-container"
         onClick={() => navigate(`/products/${product.id}`)}
-        onKeyDown={(e) => e.key === "Enter" && navigate(`/products/${product.id}`)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            navigate(`/products/${product.id}`);
+          }
+        }}
         role="button"
         tabIndex={0}
         aria-label={`View details of ${product.name}`}
       >
-        {/* Use product.id for PreOrderCard images */}
         <img
           src={product.thumbnail || product.images?.[0] || "/fallback.jpg"}
           alt={product.name}
@@ -39,13 +40,16 @@ const PreOrderCard = ({ product }) => {
         />
       </div>
 
+      {/* Artisan Series Logo */}
+      <img
+        src={`/artisanseries/${product.id}-black.png`} 
+        alt={`${product.name} logo`}
+        className="preorder-header-logo"
+      />
+
       {/* Product Info */}
-      <div className="product-info">
-        <img
-          src={`/artisanseries/${product.id}-black.png`}
-          alt={product.id}
-          className="preorder-header-image"
-        />
+      <div className="preorder-info">
+        {/* <h2 className="preorder-title">{product.name}</h2> */}
         <p className="preorder-description">{product.description}</p>
         <div className="card-preorder-price">Starting Price: ${product.price}</div>
         <p className="delivery-time">Delivery: {product.deliveryTime}</p>
@@ -53,7 +57,7 @@ const PreOrderCard = ({ product }) => {
         {/* Product Action Buttons */}
         <div className="preorder-button-container">
           <button
-            className={product.currentQuantity === 0 ? "prod-card-view-details-button" : "preorder-card-preorder-button"}
+            className={product.currentQuantity === 0 ? "preorder-card-view-details-button" : "preorder-card-preorder-button"}
             onClick={() => navigate(`/products/${product.id}`)}
           >
             {buttonText}
