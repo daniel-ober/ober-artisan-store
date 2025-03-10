@@ -62,7 +62,7 @@ const ReturnPolicy = () => {
         <br />
         <br />
 
-        <strong>Contact Us:</strong> Email us at <strong>support@danoberartisan.com</strong> with your order number, a description of the issue, and photos if necessary.
+        <strong>Contact Us:</strong> Email us at <strong>support@oberartisandrums.com</strong> with your order number, a description of the issue, and photos if necessary.
         <br />
         <br />
 
@@ -88,12 +88,12 @@ const ReturnPolicy = () => {
         <br />
         <br />
 
-        <strong>Other Products:</strong> For all other items, you may cancel your order as long as it has not yet shipped. Please contact us at support@danoberartisan.com for assistance.
+        <strong>Other Products:</strong> For all other items, you may cancel your order as long as it has not yet shipped. Please contact us at support@oberartisandrums.com for assistance.
       </p>
 
       <h2>7. Contact Information</h2>
       <p>
-        If you have any questions about our return policy or need assistance with a return, please contact us at support@danoberartisan.com.
+        If you have any questions about our return policy or need assistance with a return, please contact us at support@oberartisandrums.com.
       </p>
     </div>
   );

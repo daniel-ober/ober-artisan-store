@@ -3,59 +3,27 @@
     {
       "target": "prod",
       "public": "build",
-      "ignore": [
-        "firebase.json",
-        "**/.*",
-        "**/node_modules/**"
-      ],
-      "rewrites": [
-        {
-          "source": "**",
-          "destination": "/index.html"
-        }
-      ]
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+      "rewrites": [{ "source": "**", "destination": "/index.html" }]
     },
     {
       "target": "stg",
       "public": "build",
-      "ignore": [
-        "firebase.json",
-        "**/.*",
-        "**/node_modules/**"
-      ],
-      "rewrites": [
-        {
-          "source": "**",
-          "destination": "/index.html"
-        }
-      ]
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+      "rewrites": [{ "source": "**", "destination": "/index.html" }]
     },
     {
       "target": "dev",
       "public": "build",
-      "ignore": [
-        "firebase.json",
-        "**/.*",
-        "**/node_modules/**"
-      ],
-      "rewrites": [
-        {
-          "source": "**",
-          "destination": "/index.html"
-        }
-      ]
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+      "rewrites": [{ "source": "**", "destination": "/index.html" }]
     }
   ],
   "functions": [
     {
       "source": "functions",
-      "ignore": [
-        "node_modules",
-        ".git"
-      ],
-      "predeploy": [
-        "npm --prefix \"$RESOURCE_DIR\" run lint"
-      ],
+      "ignore": ["node_modules", ".git"],
+      "predeploy": ["npm --prefix \"$RESOURCE_DIR\" run lint"],
       "runtime": "nodejs18",
       "codebase": "default"
     },
@@ -76,24 +44,12 @@
     "indexes": "firestore.indexes.json"
   },
   "emulators": {
-    "functions": {
-      "port": 5001
-    },
-    "firestore": {
-      "port": 8080
-    },
-    "database": {
-      "port": 9000
-    },
-    "hosting": {
-      "port": 5002
-    },
-    "storage": {
-      "port": 9199
-    },
-    "ui": {
-      "enabled": true
-    },
+    "functions": { "port": 5001 },
+    "firestore": { "port": 8080 },
+    "database": { "port": 9000 },
+    "hosting": { "port": 5002 },
+    "storage": { "port": 9199 },
+    "ui": { "enabled": true },
     "singleProjectMode": true
   },
   "storage": {
