@@ -64,7 +64,7 @@ const TermsOfService = forwardRef((props, ref) => {
 
       <h2>12. Contact Us</h2>
       <p>
-        If you have any questions or concerns about these Terms of Service, please contact us at support@danoberartisan.com.
+        If you have any questions or concerns about these Terms of Service, please contact us at support@oberartisandrums.com.
       </p>
     </div>
   );

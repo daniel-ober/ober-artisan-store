@@ -54,7 +54,7 @@ const PrivacyPolicy = forwardRef((props, ref) => {
       </p>
       <h2>8. Contact Us</h2>
       <p>
-        If you have any questions or concerns about this Privacy Policy, please contact us at support@danoberartisan.com.
+        If you have any questions or concerns about this Privacy Policy, please contact us at support@oberartisandrums.com.
       </p>
     </div>
   );

@@ -48,6 +48,7 @@ const SoundLegendProductDetail = () => {
       woodSpecies,
       snareBedDepth,
       consultationDate,
+      status: "New",
       submittedAt: Timestamp.now(), // Firestore timestamp
     };
 
