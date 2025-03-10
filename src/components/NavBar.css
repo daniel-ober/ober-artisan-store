@@ -92,11 +92,15 @@ body.dark .cart-icon {
 body.light .cart-badge {
   color: white !important;
   background: red !important;
+  padding: 5px;
+  border-radius: 15px;
 }
 
 body.dark .cart-badge {
-  color: black !important;
+  color: rgb(255, 255, 255) !important;
   background: red !important;
+  padding: 5px;
+  border-radius: 15px;
 }
 
 /* ✅ Cart Preview Container Styling */

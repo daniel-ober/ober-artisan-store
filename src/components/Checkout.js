@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import { useCart } from "../context/CartContext"; // ✅ Import Cart Context
 import "./Checkout.css";
 
 // Use your REACT_APP_RECAPTCHA_SITE_KEY and VERIFY_URL
@@ -15,9 +16,10 @@ if (!stripePublishableKey) {
 const stripePromise = loadStripe(stripePublishableKey);
 
 // Log the Stripe Publishable Key for debugging
-console.log('Stripe Publishable Key:', process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
+console.log("Stripe Publishable Key:", process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
 const Checkout = ({ cartItems, totalAmount, onApplyPromo }) => {
+  const { clearCartOnCheckout } = useCart(); // ✅ Ensure useCart() is properly placed at the top
   const [promoCode, setPromoCode] = useState("");
   const [discount, setDiscount] = useState(0);
   const [error, setError] = useState("");
@@ -95,9 +97,9 @@ const Checkout = ({ cartItems, totalAmount, onApplyPromo }) => {
       }
 
       // Use Stripe's confirmCardPayment with the clientSecret and cardElement
-      const cardElement = elements.getElement(CardElement); // Get the CardElement
+      const cardElement = elements.getElement(CardElement);
       const { error: stripeError, paymentIntent } = await stripe.confirmCardPayment(
-        clientSecret, // Use the clientSecret received from your server
+        clientSecret,
         {
           payment_method: {
             card: cardElement,
@@ -108,7 +110,14 @@ const Checkout = ({ cartItems, totalAmount, onApplyPromo }) => {
       if (stripeError) {
         alert(`❌ Payment failed: ${stripeError.message}`);
       } else {
-        alert("✅ Checkout successful! Proceeding to payment...");
+        alert("✅ Payment successful! Clearing cart...");
+
+        try {
+          await clearCartOnCheckout(); // ✅ Cart will be cleared after successful checkout
+          console.log("🛒 Cart successfully cleared.");
+        } catch (error) {
+          console.error("❌ Error clearing cart:", error);
+        }
       }
 
     } catch (error) {

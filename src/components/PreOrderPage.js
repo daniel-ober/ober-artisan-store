@@ -1,8 +1,7 @@
-// src/components/PreOrderPage.js
 import React, { useEffect, useState } from "react";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../firebaseConfig";
-import PreOrderCard from "./PreOrderCard"; // ✅ Import new PreOrderCard component
+import PreOrderCard from "./PreOrderCard";
 import "./PreOrderPage.css";
 
 const PreOrderPage = () => {
@@ -40,7 +39,7 @@ const PreOrderPage = () => {
 
   return (
     <div className="pre-order-page">
-      <h1>Pre-Order Your Handcrafted Drum</h1>
+      <h1 className="pre-order-page-header">Pre-Order Your Handcrafted Drum</h1>
       <p className="subtitle">Limited quantities available. Reserve yours today!</p>
 
       <div className="pre-order-items">

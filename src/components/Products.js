@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import { collection, getDocs, updateDoc, doc } from "firebase/firestore";
+import { collection, getDocs, updateDoc, doc, query, where } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import ProductCard from "./ProductCard";
 import "./Products.css";
@@ -13,14 +13,19 @@ const Products = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        console.log("📥 Fetching all products...");
-        const querySnapshot = await getDocs(collection(db, "products"));
+        console.log("📥 Fetching active products...");
+
+        // Firestore query: Only fetch products where status is "active"
+        const productsRef = collection(db, "products");
+        const activeProductsQuery = query(productsRef, where("status", "==", "active"));
+        const querySnapshot = await getDocs(activeProductsQuery);
+
         let productsList = querySnapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
 
-        // Sort by displayOrder
+        // Sort products by displayOrder (defaulting to 0 if not present)
         productsList = productsList.sort((a, b) => (a.displayOrder || 0) - (b.displayOrder || 0));
 
         setProducts(productsList);

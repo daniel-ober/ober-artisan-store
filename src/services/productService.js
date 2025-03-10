@@ -78,7 +78,7 @@ export const deleteProduct = async (productId) => {
 export const updateProductInventory = async (cartItems) => {
   if (!Array.isArray(cartItems) || cartItems.length === 0) {
     console.warn("⚠️ No cart items provided for inventory update. Skipping.");
-    return { success: false, message: 'No valid cart items to update.' };
+    return { success: false, message: "No valid cart items to update." };
   }
 
   try {
@@ -87,25 +87,29 @@ export const updateProductInventory = async (cartItems) => {
     await runTransaction(db, async (transaction) => {
       for (const item of cartItems) {
         if (!item.productId) {
-          throw new Error(`❌ Invalid product in cart: Missing productId.`);
+          console.error("❌ Invalid product in cart: Missing productId.");
+          continue;
         }
 
-        const productRef = doc(db, 'products', item.productId);
+        // ✅ Get Firestore product reference
+        const productRef = doc(db, "products", item.productId);
         const productDoc = await transaction.get(productRef);
 
         if (!productDoc.exists()) {
-          throw new Error(`❌ Product with ID ${item.productId} does not exist.`);
+          console.warn(`⚠️ Product not found in Firestore: ${item.productId}`);
+          continue;
         }
 
         const productData = productDoc.data();
         console.log(`🔍 Checking inventory for ${productData.name}: ${productData.currentQuantity} in stock`);
 
-        // **Ensure we don't allow overselling**
+        // **Prevent Overselling** (but don't stop the transaction)
         if (productData.currentQuantity < item.quantity) {
-          throw new Error(`⚠️ Not enough stock for ${productData.name}. Requested: ${item.quantity}, Available: ${productData.currentQuantity}`);
+          console.warn(`⚠️ Not enough stock for ${productData.name}. Requested: ${item.quantity}, Available: ${productData.currentQuantity}`);
+          continue; // Skip updating this product, but continue others
         }
 
-        const newQuantity = productData.currentQuantity - item.quantity;
+        const newQuantity = Math.max(0, productData.currentQuantity - item.quantity);
         const isAvailable = newQuantity > 0;
         const availabilityMessage = isAvailable ? "In Stock" : "Out of Stock";
 
@@ -121,9 +125,9 @@ export const updateProductInventory = async (cartItems) => {
     });
 
     console.log("✅ Inventory successfully updated!");
-    return { success: true, message: 'Inventory updated successfully.' };
+    return { success: true, message: "Inventory updated successfully." };
   } catch (error) {
-    console.error('❌ Error updating inventory:', error.message);
-    throw new Error(error.message);
+    console.error("❌ Error updating inventory:", error.message);
+    return { success: false, message: error.message };
   }
 };

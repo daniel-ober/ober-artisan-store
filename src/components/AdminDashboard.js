@@ -8,16 +8,17 @@ import {
   FaEnvelope,
   FaCog,
   FaImages,
+  FaStar, // Icon for SoundLegend
 } from 'react-icons/fa';
 import ManageProducts from './ManageProducts';
 import ManageUsers from './ManageUsers';
 import ManageOrders from './ManageOrders';
-// import SalesPipeline from './SalesPipeline';
 import ManageInquiries from './ManageInquiries';
 import ManageGallery from './ManageGallery';
 import SiteSettings from './SiteSettings';
 import ManageCarts from './ManageCarts';
 import ManageProjects from './ManageProjects';
+import ManageSoundlegendRequests from './ManageSoundlegendRequests';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import './AdminDashboard.css';
@@ -30,7 +31,8 @@ const AdminDashboard = () => {
     manageProducts: 0,
     manageCarts: 0,
     manageOrders: 0,
-    manageInquiries: 0, // For "New" inquiries only
+    manageInquiries: 0,
+    manageSoundlegendRequests: 0, // New notification count for SoundLegend submissions
   });
 
   useEffect(() => {
@@ -40,20 +42,23 @@ const AdminDashboard = () => {
           productsOutOfStock,
           unfulfilledOrders,
           newInquiriesCount,
+          soundLegendRequestsCount,
         ] = await Promise.all([
           getOutOfStockProductsCount(),
           getUnfulfilledOrdersCount(),
           getNewInquiriesCount(),
+          getNewSoundlegendRequestsCount(),
         ]);
 
         setNotifications((prev) => ({
           ...prev,
           manageProducts: productsOutOfStock,
           manageOrders: unfulfilledOrders,
-          manageInquiries: newInquiriesCount, // Badge count for Manage Inquiries
+          manageInquiries: newInquiriesCount,
+          manageSoundlegendRequests: soundLegendRequestsCount,
         }));
       } catch (error) {
-        console.error('Error fetching notifications:', error.message);
+        console.error('❌ Error fetching notifications:', error.message);
       }
     };
 
@@ -70,7 +75,7 @@ const AdminDashboard = () => {
       return data.products.filter((product) => product.currentQuantity === 0)
         .length;
     } catch (error) {
-      console.error('Error fetching products:', error.message);
+      console.error('❌ Error fetching products:', error.message);
       return 0;
     }
   };
@@ -82,11 +87,11 @@ const AdminDashboard = () => {
       const orderSnapshot = await getDocs(ordersCollection);
       const orders = orderSnapshot.docs.map((doc) => doc.data());
 
-      // Count orders not equal to "Order Fulfilled"
+      // Count orders that are NOT "Order Fulfilled"
       return orders.filter((order) => order.currentStage !== 'Order Fulfilled')
         .length;
     } catch (error) {
-      console.error('Error fetching orders:', error.message);
+      console.error('❌ Error fetching orders:', error.message);
       return 0;
     }
   };
@@ -101,7 +106,24 @@ const AdminDashboard = () => {
       // Count inquiries with the status "New"
       return inquiries.filter((inquiry) => inquiry.status === 'New').length;
     } catch (error) {
-      console.error('Error fetching inquiries:', error.message);
+      console.error('❌ Error fetching inquiries:', error.message);
+      return 0;
+    }
+  };
+
+  // Fetch count of SoundLegend requests with status "New" or "Prospecting"
+  const getNewSoundlegendRequestsCount = async () => {
+    try {
+      const soundlegendCollection = collection(db, 'soundlegend_submissions');
+      const soundlegendSnapshot = await getDocs(soundlegendCollection);
+      const soundlegendRequests = soundlegendSnapshot.docs.map((doc) => doc.data());
+
+      // Count requests with status "New" or "Prospecting"
+      return soundlegendRequests.filter(
+        (request) => request.status === 'New' || request.status === 'Prospecting'
+      ).length;
+    } catch (error) {
+      console.error('❌ Error fetching SoundLegend requests:', error.message);
       return 0;
     }
   };
@@ -124,6 +146,8 @@ const AdminDashboard = () => {
         return <ManageGallery />;
       case 'siteSettings':
         return <SiteSettings />;
+      case 'manageSoundlegendRequests':
+        return <ManageSoundlegendRequests />;
       default:
         return <div>Select a management option above.</div>;
     }
@@ -134,24 +158,13 @@ const AdminDashboard = () => {
       <h1>Admin Dashboard</h1>
       <div className="admin-cards">
         {[
-          {
-            name: 'Manage Inquiries',
-            icon: FaEnvelope,
-            stateKey: 'manageInquiries',
-          },
-          {
-            name: 'Manage Projects',
-            icon: FaHammer,
-            stateKey: 'manageProjects',
-          },
+          { name: 'SoundLegend Submissions', icon: FaStar, stateKey: 'manageSoundlegendRequests' }, 
+          { name: 'Support Inquiries', icon: FaEnvelope, stateKey: 'manageInquiries' },
+          { name: 'Manage Projects', icon: FaHammer, stateKey: 'manageProjects' },
           { name: 'Manage Orders', icon: FaBox, stateKey: 'manageOrders' },
           { name: 'Manage Products', icon: FaDrum, stateKey: 'manageProducts' },
           { name: 'Manage Users', icon: FaUsers, stateKey: 'manageUsers' },
-          {
-            name: 'Manage Carts',
-            icon: FaShoppingCart,
-            stateKey: 'manageCarts',
-          },
+          { name: 'Manage Carts', icon: FaShoppingCart, stateKey: 'manageCarts' },
           { name: 'Manage Gallery', icon: FaImages, stateKey: 'manageGallery' },
           { name: 'Site Settings', icon: FaCog, stateKey: 'siteSettings' },
         ].map(({ name, icon: Icon, stateKey }) => (

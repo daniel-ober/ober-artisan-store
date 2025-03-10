@@ -53,8 +53,8 @@ const Home = () => {
         <div className="highlight">
           <h2>Soundlegend</h2>
           <p>Build your dream drum, customized to perfection.</p>
-          <Link to="/soundlegend" className="highlight-button">
-            <button>Custom Shop</button>
+          <Link to="/products/soundlegend" className="highlight-button">
+            <button>Learn More</button>
           </Link>
         </div>
         <div className="highlight">
