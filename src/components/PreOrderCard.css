@@ -85,7 +85,7 @@
   border: none;
   padding: 10px;
   cursor: pointer;
-  width: 100%;
+  width:auto;
   font-size: 14px;
   font-weight: bold;
   border-radius: 4px;
