@@ -204,6 +204,7 @@ ul,
   /* 🏆 Ensure Drum Image is in the Same Container as Text */
   .drum-section.left, .drum-section.right {
     flex-direction: column !important;
+    align-items: center;
   }
 
   .text-layer {

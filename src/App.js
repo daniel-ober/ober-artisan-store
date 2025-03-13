@@ -141,7 +141,7 @@ function App() {
         <Route path="/artisanseries" element={<ArtisanSeries isDarkMode={isDarkMode} />} />
 
         <Route path="/about" element={isLinkEnabled('about') ? <About /> : <NotFound />} />
-        <Route path="/cart" element={isLinkEnabled('cart') ? <Cart /> : <NotFound />} />
+        <Route path="/cart" element={<Cart />} />
         <Route path="/contact" element={isLinkEnabled('contact') ? <Contact /> : <NotFound />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/return-policy" element={<ReturnPolicy />} />
