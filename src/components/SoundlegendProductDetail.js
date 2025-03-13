@@ -135,7 +135,7 @@ const SoundLegendProductDetail = () => {
     className="country-code-select"
   >
     <option value="US">🇺🇸 +1</option>
-    <option value="CA">🇨🇦 +1</option>
+    {/* <option value="CA">🇨🇦 +1</option> */}
   </select>
 
   <input
@@ -161,7 +161,7 @@ const SoundLegendProductDetail = () => {
 </div>
 <p className="phone-hint">Enter a valid 10-digit phone number.</p>
 
-            <h2>Custom Build Details</h2>
+            <h2>Select Core Build Details</h2>
 
             {/* Snare Size */}
             <label htmlFor="size">Snare Size (Diameter)</label>
@@ -205,12 +205,12 @@ const SoundLegendProductDetail = () => {
             <p className="snare-bed-description">{snareBedDescriptions[snareBedDepth]}</p> */}
 
             {/* Consultation Date */}
-            <label htmlFor="consultationDate">Book a Free Consultation</label>
-            <input type="text" id="consultationDate" placeholder="Select a date (Placeholder)" value={consultationDate} onChange={(e) => setConsultationDate(e.target.value)} />
+            {/* <label htmlFor="consultationDate">Book a Free Consultation</label>
+            <input type="text" id="consultationDate" placeholder="Select a date (Placeholder)" value={consultationDate} onChange={(e) => setConsultationDate(e.target.value)} /> */}
 
             {/* Submit Button */}
             <button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? "Submitting..." : "Submit Custom Request"}
+              {isSubmitting ? "Submitting..." : "Request Project Consulation"}
             </button>
           </form>
         </div>
