@@ -88,8 +88,8 @@ function App() {
 
   // ✅ Apply dark mode class to <body> on load and state changes
   useEffect(() => {
-    document.body.classList.toggle("dark", isDarkMode);
     document.body.classList.toggle("light", !isDarkMode);
+    document.body.classList.toggle("dark", isDarkMode);
   }, [isDarkMode]);
 
   // ✅ Toggle Dark Mode Function

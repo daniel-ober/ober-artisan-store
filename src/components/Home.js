@@ -52,9 +52,9 @@ const Home = () => {
       <div className="highlights-section">
         <div className="highlight">
           <h2>SoundLegend</h2>
-          <p>Collaborate directly with a drum artisan.</p>
+          <p>Collaborate directly with our Artisan to build your dream snare drum.</p>
           <Link to="/products/soundlegend" className="highlight-button">
-            <button>Request Consultation</button>
+            <button>Learn More</button>
           </Link>
         </div>
         <div className="highlight">
