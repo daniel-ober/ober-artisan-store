@@ -6,7 +6,11 @@
   },
   "targets": {
     "danoberartisandrums": {
-      "hosting": {}
+      "hosting": {
+        "prod": [
+          "build"
+        ]
+      }
     },
     "danoberartisandrums-stg": {
       "hosting": {
