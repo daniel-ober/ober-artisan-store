@@ -30,7 +30,7 @@
     align-items: center;
     width: 200%;
     gap: 60px;
-    max-width: 1300px;
+    /* max-width: 1300px; */
     box-sizing: border-box;
 }
 
