@@ -614,7 +614,7 @@ const FeuzonProductDetail = () => {
         </div>
   
         {/* 📌 Drum Summary Section */}
-        <div className="drum-summary">
+        {/* <div className="drum-summary">
           <h1>Artisan Notes</h1>
           <h3>🎛️ Tonal Characteristics</h3>
           <p>{selectedDrumSummary?.highlightedCharacteristics || "Select options to view summary"}</p>
@@ -629,10 +629,10 @@ const FeuzonProductDetail = () => {
   
           <h3>🎙 Recording Mic Top Picks</h3>
           <p>{selectedDrumSummary?.recordingMic || "Select options to view summary"}</p>
-        </div>
+        </div> */}
   
         {/* ✅ Button Actions - Manage UI Based on Cart & Stock State */}
-        <div className="button-group">
+        {/* <div className="button-group">
           {productQuantity === 0 ? (
             <button className="notify-button" onClick={handleNotifyMe}>
               Sold Out - Notify Me When Available
@@ -673,7 +673,7 @@ const FeuzonProductDetail = () => {
               Add to Cart
             </button>
           )}
-        </div>
+        </div> */}
       </div>
     );
 };
