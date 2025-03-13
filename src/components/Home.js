@@ -51,24 +51,24 @@ const Home = () => {
       {/* Highlights Section */}
       <div className="highlights-section">
         <div className="highlight">
-          <h2>Soundlegend</h2>
-          <p>Build your dream drum, customized to perfection.</p>
+          <h2>SoundLegend</h2>
+          <p>Collaborate directly with a drum artisan.</p>
           <Link to="/products/soundlegend" className="highlight-button">
-            <button>Learn More</button>
-          </Link>
-        </div>
-        <div className="highlight">
-          <h2>Gallery</h2>
-          <p>Discover our creations, built with precision and care.</p>
-          <Link to="/gallery" className="highlight-button">
-            <button>View Gallery</button>
+            <button>Request Consultation</button>
           </Link>
         </div>
         <div className="highlight">
           <h2>Pre-Order</h2>
-          <p>Reserve your spot for upcoming limited batches.</p>
+          <p>Reserve your ready-to-be-made snare today!</p>
           <Link to="/pre-order" className="highlight-button">
             <button>Pre-Order Now</button>
+          </Link>
+        </div>
+        <div className="highlight">
+          <h2>Share Feedback</h2>
+          <p>Comments, questions, feedback?</p>
+          <Link to="/contact" className="highlight-button">
+            <button>Contact Us</button>
           </Link>
         </div>
       </div>

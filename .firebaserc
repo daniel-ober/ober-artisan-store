@@ -2,16 +2,17 @@
   "projects": {
     "prod": "danoberartisandrums",
     "stg": "danoberartisandrums-stg",
-    "dev": "danoberartisandrums-dev"
+    "dev": "danoberartisandrums-dev",
+    "default": "danoberartisandrums"
   },
   "targets": {
     "danoberartisandrums": {
       "hosting": {
-        "prod": [
-          "build"
-        ],
         "stg": [
           "prod"
+        ],
+        "prod": [
+          "build"
         ]
       }
     },

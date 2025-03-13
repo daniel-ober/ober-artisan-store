@@ -331,7 +331,7 @@ const HeritageProductDetail = () => {
       <div className="drum-summary">
         {/* <SpiderChart data={[soundProfile.projection, soundProfile.sustain, soundProfile.brightness, soundProfile.warmth, soundProfile.attack]} /> */}
         {/* <BarChart data={soundProfile} /> */}
-        <h1>Artisan Notes</h1>
+        {/* <h1>Artisan Notes</h1>
         <h3>🎛️ Highlighted Characteristics</h3>
         <p>
           {selectedDrumSummary.highlightedCharacteristics ||
@@ -344,14 +344,14 @@ const HeritageProductDetail = () => {
           {selectedDrumSummary.secondaryGenres?.map((genre, idx) => (
             <li key={idx}>{genre}</li>
           )) || 'Select options to view summary'}
-        </ul>
+        </ul> */}
         {/* <h3>🎤 Playing Situations</h3>
         <p>{selectedDrumSummary.playingSituation || "Select options to view summary"}</p> */}
 
-        <h3>🎙 Recording Mic Top Picks</h3>
+        {/* <h3>🎙 Recording Mic Top Picks</h3>
         <p>
           {selectedDrumSummary.recordingMic || 'Select options to view summary'}
-        </p>
+        </p> */}
       </div>
     </div>
   );
