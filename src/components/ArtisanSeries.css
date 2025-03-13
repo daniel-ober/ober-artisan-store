@@ -54,7 +54,7 @@
   width: 100%;
   height: auto;
   object-fit: cover;
-  background-color: inherit; /* Ensures background color matches the section */
+  /* background-color: inherit; Ensures background color matches the section */
 }
 
 /* ✏️ Text Layer */
@@ -207,13 +207,13 @@ ul,
   }
 
   .text-layer {
-    width: 100%;
+    width: 90%;
     max-width: 100%;
     padding: 5vh 6vw;
     background: rgba(0, 0, 0, 0.6);
     color: white;
     text-align: center;
-    border-radius: 10px;
+    /* border-radius: 10px; */
   }
 
   /* 📸 Ensure Drum Image is Sized Correctly */
@@ -228,7 +228,7 @@ ul,
     width: 100%;
     height: auto;
     object-fit: cover;
-    background-color: inherit; /* Ensures background color matches the section */
+    /* background-color: inherit; Ensures background color matches the section */
   }
 
   /* 🎨 Header Image Adjustments */
@@ -303,10 +303,8 @@ ul,
   }
 
   .drum-layer img {
-    width: 100%;
-    height: auto;
     object-fit: cover;
-    background-color: inherit; /* Ensures background color matches the section */
+    /* background-color: inherit; Ensures background color matches the section */
   }
 
   .drum-info {

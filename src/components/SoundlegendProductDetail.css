@@ -1,7 +1,7 @@
 /* 📌 Main Page Container */
 .soundlegend-product-detail {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     align-items: center;
     padding: 50px 25px;
     max-width: auto;
@@ -58,7 +58,7 @@
 /* 📌 Right Side: Customization & Features */
 .soundlegend-product-options {
     flex: 1;
-    max-width: 50%;
+    /* max-width: 50%; */
     display: flex;
     flex-direction: column;
     gap: 25px;
@@ -106,7 +106,7 @@
 /* 📌 Dropdown & Input Fields */
 .soundlegend-product-options select,
 .soundlegend-product-options input {
-    width: 100%;
+    width: 96%;
     padding: 10px;
     font-size: 15px;
     border-radius: 6px;
@@ -149,6 +149,10 @@
     display: flex;
     align-items: center;
     gap: 8px;
+  }
+
+  .country-code-select {
+max-width: 75px;
   }
   
   .phone-input-container select {
