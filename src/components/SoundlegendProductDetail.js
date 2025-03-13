@@ -81,7 +81,14 @@ const SoundLegendProductDetail = () => {
       {/* 🔥 SoundLegend Experience Section */}
       <div className="soundlegend-product-content">
         {/* 📌 Left Side: Product Image */}
-        <div className="soundlegend-product-image">
+        <div
+          className="soundlegend-product-image"
+          role="button"
+          tabIndex="0"
+          onClick={() => window.open('https://www.youtube.com/watch?v=PW28PjMCpxg', '_blank')}
+          onKeyDown={(e) => e.key === "Enter" && window.open('https://www.youtube.com/watch?v=PW28PjMCpxg', '_blank')}
+          style={{ cursor: 'pointer' }}
+        >
           <img
             src="https://firebasestorage.googleapis.com/v0/b/danoberartisandrums-dev.firebasestorage.app/o/Gallery%2FDrum%20Your%20Truth.16.png?alt=media&token=9ae6304b-91d1-42b6-9f7e-1ea4ed321e8f"
             alt="SOUNDLEGEND Experience"
@@ -122,44 +129,44 @@ const SoundLegendProductDetail = () => {
             <label htmlFor="email">Email</label>
             <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
 
-{/* Phone Number with Country Flag Selector */}
-<label htmlFor="phone">Phone</label>
-<div className="phone-input-container">
-  <select
-    id="countryCode"
-    value={phone.startsWith("+1") ? "US" : "CA"}
-    onChange={(e) => {
-      const country = e.target.value;
-      setPhone(country === "US" ? "+1 " : "+1 ");
-    }}
-    className="country-code-select"
-  >
-    <option value="US">🇺🇸 +1</option>
-    {/* <option value="CA">🇨🇦 +1</option> */}
-  </select>
+            {/* Phone Number with Country Flag Selector */}
+            <label htmlFor="phone">Phone</label>
+            <div className="phone-input-container">
+              <select
+                id="countryCode"
+                value={phone.startsWith("+1") ? "US" : "CA"}
+                onChange={(e) => {
+                  const country = e.target.value;
+                  setPhone(country === "US" ? "+1 " : "+1 ");
+                }}
+                className="country-code-select"
+              >
+                <option value="US">🇺🇸 +1</option>
+                {/* <option value="CA">🇨🇦 +1</option> */}
+              </select>
 
-  <input
-    type="tel"
-    id="phone"
-    value={phone.replace("+1 ", "")} // Remove "+1" from display in input field
-    onChange={(e) => {
-      let input = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
-      if (input.length > 10) input = input.slice(0, 10); // Limit to 10 digits
+              <input
+                type="tel"
+                id="phone"
+                value={phone.replace("+1 ", "")} // Remove "+1" from display in input field
+                onChange={(e) => {
+                  let input = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
+                  if (input.length > 10) input = input.slice(0, 10); // Limit to 10 digits
 
-      // Format as xxx-xxx-xxxx
-      if (input.length >= 6) {
-        input = `${input.slice(0, 3)}-${input.slice(3, 6)}-${input.slice(6, 10)}`;
-      } else if (input.length >= 3) {
-        input = `${input.slice(0, 3)}-${input.slice(3)}`;
-      }
+                  // Format as xxx-xxx-xxxx
+                  if (input.length >= 6) {
+                    input = `${input.slice(0, 3)}-${input.slice(3, 6)}-${input.slice(6, 10)}`;
+                  } else if (input.length >= 3) {
+                    input = `${input.slice(0, 3)}-${input.slice(3)}`;
+                  }
 
-      setPhone("+1 " + input); // Keep "+1" stored but not displayed
-    }}
-    required
-    placeholder="123-456-7890"
-  />
-</div>
-<p className="phone-hint">Enter a valid 10-digit phone number.</p>
+                  setPhone("+1 " + input); // Keep "+1" stored but not displayed
+                }}
+                required
+                placeholder="123-456-7890"
+              />
+            </div>
+            <p className="phone-hint">Enter a valid 10-digit phone number.</p>
 
             <h2>Select Core Build Details</h2>
 

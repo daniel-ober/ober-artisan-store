@@ -160,7 +160,7 @@ const Cart = () => {
               {cart.map((item) => (
                 <tr key={item.id}>
                   <td>
-                    <Link to={`/products/${item.id}`}>
+                    {/* <Link to={`/products/${item.id}`}> */}
                       <img
                         src={
                           item.image ||
@@ -169,7 +169,7 @@ const Cart = () => {
                         alt={item.name}
                         className="cart-item-image"
                       />
-                    </Link>
+                    {/* </Link> */}
                   </td>
                   <td>
                     <p>{item.name}</p>
