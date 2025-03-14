@@ -16,7 +16,7 @@ if (!stripePublishableKey) {
 const stripePromise = loadStripe(stripePublishableKey);
 
 // Log the Stripe Publishable Key for debugging
-console.log("Stripe Publishable Key:", process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
+// console.log("Stripe Publishable Key:", process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
 const Checkout = ({ cartItems, totalAmount, onApplyPromo }) => {
   const { clearCartOnCheckout } = useCart(); // ✅ Ensure useCart() is properly placed at the top

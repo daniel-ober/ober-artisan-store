@@ -53,7 +53,7 @@ const firebaseConfig = firebaseConfigs[environment];
 
 // Debugging: Log Firebase configuration in development
 if (process.env.NODE_ENV === 'development') {
-  console.log('Firebase Config for Environment:', environment, firebaseConfig);
+  // console.log('Firebase Config for Environment:', environment, firebaseConfig);
 }
 
 // Validate Firebase configuration
@@ -199,9 +199,9 @@ export const clearCart = async (userId) => {
 };
 export { app }; // ✅ Ensure this is exported
 
-console.log('Environment:', environment);
-console.log('Firebase Project:', firebaseConfig.projectId);
-console.log("REACT_APP_FIREBASE_PROJECT_ID:", process.env.REACT_APP_FIREBASE_PROJECT_ID);
-console.log("Firebase Config:", firebaseConfigs);
-console.log("Selected Environment:", environment);
-console.log("Firebase Config for Environment:", firebaseConfigs[environment]);
+// console.log('Environment:', environment);
+// console.log('Firebase Project:', firebaseConfig.projectId);
+// console.log("REACT_APP_FIREBASE_PROJECT_ID:", process.env.REACT_APP_FIREBASE_PROJECT_ID);
+// console.log("Firebase Config:", firebaseConfigs);
+// console.log("Selected Environment:", environment);
+// console.log("Firebase Config for Environment:", firebaseConfigs[environment]);
