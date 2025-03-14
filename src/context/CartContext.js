@@ -61,7 +61,7 @@ export const CartProvider = ({ children }) => {
 
   /** ✅ Sync Cart to Firestore */
   const updateFirestoreCart = async (updatedCart) => {
-    console.log('🔥 Saving Cart to Firestore:', updatedCart);
+    // console.log('🔥 Saving Cart to Firestore:', updatedCart);
 
     if (!cartId) {
       console.warn('❌ Cannot update Firestore: No cartId found.');
@@ -128,7 +128,7 @@ export const CartProvider = ({ children }) => {
       timestamp: new Date().toISOString(),
     };
 
-    console.log("🛒 Cart Item Data Before Adding:", cartItem);
+    // console.log("🛒 Cart Item Data Before Adding:", cartItem);
 
     let updatedCart = [...cart];
 
@@ -151,7 +151,7 @@ export const CartProvider = ({ children }) => {
       updatedCart.push(cartItem);
     }
 
-    console.log('✅ Final Cart State Before Saving to Firestore:', updatedCart);
+    // console.log('✅ Final Cart State Before Saving to Firestore:', updatedCart);
 
     try {
       await updateFirestoreCart(updatedCart);

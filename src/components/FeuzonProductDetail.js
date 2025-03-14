@@ -77,12 +77,12 @@ const FeuzonProductDetail = () => {
 
   const handleNotifyMe = () => {
     alert('You will be notified when this drum is available for order!');
-    console.log('📩 User signed up for availability notifications.');
+    // console.log('📩 User signed up for availability notifications.');
     // 🚀 Future Implementation: Store this in Firestore for email notifications
   };
 
   const handleChangeSelections = () => {
-    console.log('🔄 Changing Selections - Resetting Cart State');
+    // console.log('🔄 Changing Selections - Resetting Cart State');
 
     // ✅ Reset the `productInCart` state
     setProductInCart(false);
@@ -92,9 +92,9 @@ const FeuzonProductDetail = () => {
       (item) => item.productId === 'feuzon'
     );
     if (existingItemIndex !== -1) {
-      console.log(
-        '♻️ Removing Feuzon item temporarily to allow selection update.'
-      );
+      // console.log(
+      //   '♻️ Removing Feuzon item temporarily to allow selection update.'
+      // );
       const updatedCart = cart.filter((item) => item.productId !== 'feuzon');
 
       // ✅ Update the Firestore cart first, then local state
@@ -106,7 +106,7 @@ const FeuzonProductDetail = () => {
   };
 
   const handleAddToCart = async (addAsSeparateItem = false) => {
-    console.log('🛒 Add to Cart button clicked!');
+    // console.log('🛒 Add to Cart button clicked!');
   
     if (!stripePriceId) {
       console.error('❌ Missing Stripe Price ID! Firestore update may fail.');
@@ -116,8 +116,8 @@ const FeuzonProductDetail = () => {
   
     // ✅ Generate a valid unique ID for the cart item
     const generatedId = `feuzon-${size}-${depth}-${lugs}-${staveQuantity}`;
-    console.log('🆔 Generated ID:', generatedId);
-    console.log('💳 Stripe Price ID:', stripePriceId);
+    // console.log('🆔 Generated ID:', generatedId);
+    // console.log('💳 Stripe Price ID:', stripePriceId);
   
     // ✅ Construct selectedOptions to pass necessary details
     const selectedOptions = {
@@ -144,8 +144,8 @@ const FeuzonProductDetail = () => {
       timestamp: new Date().toISOString(),
     };
   
-    console.log('🛠️ Cart Item before adding:', cartItem);
-    console.log('🔍 Debugging Selected Options:', selectedOptions);
+    // console.log('🛠️ Cart Item before adding:', cartItem);
+    // console.log('🔍 Debugging Selected Options:', selectedOptions);
   
     let updatedCart = [...cart];
   
@@ -163,20 +163,20 @@ const FeuzonProductDetail = () => {
     if (existingCustomProductIndex !== -1 && !addAsSeparateItem) {
       // ✅ Increase quantity instead of adding duplicate
       updatedCart[existingCustomProductIndex].quantity += 1;
-      console.log('♻️ Updated existing Feuzon quantity in cart:', updatedCart);
+      // console.log('♻️ Updated existing Feuzon quantity in cart:', updatedCart);
     } else {
       // ✅ Add as new separate Feuzon drum
       updatedCart.push(cartItem);
-      console.log('➕ Adding new Feuzon drum as separate item:', cartItem);
+      // console.log('➕ Adding new Feuzon drum as separate item:', cartItem);
     }
   
-    console.log('📢 Updated Cart Before Firestore Save:', updatedCart);
+    // console.log('📢 Updated Cart Before Firestore Save:', updatedCart);
   
     try {
       await addToCart(cartItem, selectedOptions); // ✅ Pass correct arguments
-      console.log('✅ Firestore updated successfully!');
+      // console.log('✅ Firestore updated successfully!');
     } catch (error) {
-      console.error('❌ Error updating Firestore:', error);
+      // console.error('❌ Error updating Firestore:', error);
       alert('An error occurred while updating the cart. Please try again.');
       return;
     }
@@ -188,41 +188,41 @@ const FeuzonProductDetail = () => {
       return;
     }
   
-    console.log('🔄 Checking Firestore for updated cart...');
+    // console.log('🔄 Checking Firestore for updated cart...');
     try {
       setTimeout(async () => {
         const cartRef = doc(db, 'carts', cartId);
         const cartDoc = await getDoc(cartRef);
         if (cartDoc.exists()) {
-          console.log('✅ Firestore Cart Updated:', cartDoc.data().cart);
+          // console.log('✅ Firestore Cart Updated:', cartDoc.data().cart);
   
           const updatedCartData = cartDoc.data().cart || [];
           const isProductInCart = updatedCartData.some(
             (item) => item.id === generatedId
           );
           setProductInCart(isProductInCart);
-          console.log('🛒 isProductInCart:', isProductInCart);
+          // console.log('🛒 isProductInCart:', isProductInCart);
         } else {
-          console.error('❌ Firestore Cart Update Failed.');
+          // console.error('❌ Firestore Cart Update Failed.');
         }
       }, 1000);
     } catch (error) {
-      console.error('❌ Error retrieving cart data from Firestore:', error);
+      // console.error('❌ Error retrieving cart data from Firestore:', error);
     }
   };
 
   useEffect(() => {
-    console.log('🔄 Updating Price, Stave Options & Sound Profile...');
+    // console.log('🔄 Updating Price, Stave Options & Sound Profile...');
 
     if (!feuzonSummaries || Object.keys(feuzonSummaries).length === 0) {
-      console.warn('⚠️ feuzonSummaries is empty or not loaded yet!');
+      // console.warn('⚠️ feuzonSummaries is empty or not loaded yet!');
       return;
     }
 
-    console.log(
-      '🗂️ Available keys in feuzonSummaries:',
-      Object.keys(feuzonSummaries)
-    ); // ✅ Debugging log
+    // console.log(
+    //   '🗂️ Available keys in feuzonSummaries:',
+    //   Object.keys(feuzonSummaries)
+    // ); // ✅ Debugging log
 
     const normalizedSize = String(size).trim();
     const normalizedDepth = String(depth).trim();
@@ -240,8 +240,8 @@ const FeuzonProductDetail = () => {
 
     // ✅ Fetch Valid Stave Options
     let updatedStaveOptions = staveMapping[size]?.[lugs] || [];
-    console.log('🧐 Checking stave options for size:', size, 'lugs:', lugs);
-    console.log('✅ Retrieved Stave Options:', updatedStaveOptions);
+    // console.log('🧐 Checking stave options for size:', size, 'lugs:', lugs);
+    // console.log('✅ Retrieved Stave Options:', updatedStaveOptions);
 
     // ✅ Ensure stave option is valid
     if (!updatedStaveOptions.includes(staveOption) || staveOption === '') {
@@ -280,7 +280,7 @@ const FeuzonProductDetail = () => {
       return;
     }
 
-    console.log('✅ Selected Pricing Option:', selectedOption);
+    // console.log('✅ Selected Pricing Option:', selectedOption);
 
     // ✅ Extract pricing and stripePriceId
     setTotalPrice(selectedOption.price);
@@ -295,9 +295,9 @@ const FeuzonProductDetail = () => {
 
     const finalPrice = selectedOption.price + (reRing ? reRingCost : 0);
     setTotalPrice(finalPrice);
-    console.log(
-      `💰 Updated Price (including reRing if applicable): $${finalPrice}`
-    );
+    // console.log(
+    //   `💰 Updated Price (including reRing if applicable): $${finalPrice}`
+    // );
 
     // ✅ Ensure correct lookup key for artisan notes
     const formattedSize = `${size}"`;
@@ -313,11 +313,11 @@ const FeuzonProductDetail = () => {
     // ✅ Generate the correctly formatted key
     const generatedKey = `${formattedSize} - Base Price: ${formattedBasePrice}-${formattedDepth}-${formattedLugs}-${formattedStaveQuantity} - ${formattedStaveThickness}-${formattedOuterShell}-${formattedInnerStave}`;
 
-    console.log('🧐 Checking feuzonSummaries for generated key:', generatedKey);
-    console.log(
-      '🔎 Available feuzonSummaries keys:',
-      Object.keys(feuzonSummaries)
-    );
+    // console.log('🧐 Checking feuzonSummaries for generated key:', generatedKey);
+    // console.log(
+    //   '🔎 Available feuzonSummaries keys:',
+    //   Object.keys(feuzonSummaries)
+    // );
 
     // ✅ Normalize function to prevent minor mismatches
     const normalizeKey = (key) => key.toLowerCase().replace(/\s+/g, ' ').trim(); // Normalize spaces
@@ -329,7 +329,7 @@ const FeuzonProductDetail = () => {
     const exactMatchIndex = availableKeys.indexOf(normalizedGeneratedKey);
     if (exactMatchIndex !== -1) {
       const exactKey = Object.keys(feuzonSummaries)[exactMatchIndex];
-      console.log('✅ Exact Match Found:', exactKey);
+      // console.log('✅ Exact Match Found:', exactKey);
       setSelectedDrumSummary(feuzonSummaries[exactKey]);
       return;
     }
@@ -343,7 +343,7 @@ const FeuzonProductDetail = () => {
     if (closestMatch) {
       const closestKey =
         Object.keys(feuzonSummaries)[availableKeys.indexOf(closestMatch)];
-      console.log('🟢 Using Closest Match:', closestKey);
+      // console.log('🟢 Using Closest Match:', closestKey);
       setSelectedDrumSummary(feuzonSummaries[closestKey]);
     } else {
       console.error('❌ No match found. Displaying fallback summary.');
@@ -359,11 +359,11 @@ const FeuzonProductDetail = () => {
 
   // ✅ This must be at the top level, NOT inside another function!
   useEffect(() => {
-    console.log(
-      '🗂️ Available feuzonSummaries keys:',
-      Object.keys(feuzonSummaries)
-    );
-    console.log('🛒 Cart Updated:', cart);
+    // console.log(
+    //   '🗂️ Available feuzonSummaries keys:',
+    //   Object.keys(feuzonSummaries)
+    // );
+    // console.log('🛒 Cart Updated:', cart);
 
     // ✅ Generate the exact ID format used when adding the product
     const generatedId = `feuzon-${size}-${depth}-${lugs}-${staveQuantity}`;
@@ -371,36 +371,36 @@ const FeuzonProductDetail = () => {
     // ✅ Check if this specific product is in the cart
     const isInCart = cart.some((item) => item.id === generatedId);
 
-    console.log(
-      '🔍 Checking if product is in cart:',
-      isInCart,
-      'for ID:',
-      generatedId
-    );
-    console.log(
-      '🔍 Current Cart Contents:',
-      cart.map((item) => item.id)
-    );
+    // console.log(
+    //   '🔍 Checking if product is in cart:',
+    //   isInCart,
+    //   'for ID:',
+    //   generatedId
+    // );
+    // console.log(
+    //   '🔍 Current Cart Contents:',
+    //   cart.map((item) => item.id)
+    // );
 
     setProductInCart(cart.some((item) => item.id === generatedId));
-        console.log('✅ productInCart Updated to:', isInCart);
+        // console.log('✅ productInCart Updated to:', isInCart);
   }, [cart, size, depth, lugs, staveQuantity]);
 
   // ✅ **New Effect to Reset `innerStave` When `outerShell` Changes**
   useEffect(() => {
     if (staveOptions[outerShell] && staveOptions[outerShell].length > 0) {
-      console.log(
-        `🔄 Resetting Inner Stave due to Outer Shell change: ${outerShell}`
-      );
+      // console.log(
+      //   `🔄 Resetting Inner Stave due to Outer Shell change: ${outerShell}`
+      // );
       setInnerStave(staveOptions[outerShell][0]); // Auto-select the first valid inner stave
     }
   }, [outerShell]); // Trigger only when outerShell changes
 
   // ✅ **New Effect to Reset `depth`, `lugs`, and `staveOption` When `size` Changes**
   useEffect(() => {
-    console.log(
-      `🔄 Resetting Depth, Lugs, and Stave Option due to Snare Size or Lug Change: ${size}, ${lugs}`
-    );
+    // console.log(
+    //   `🔄 Resetting Depth, Lugs, and Stave Option due to Snare Size or Lug Change: ${size}, ${lugs}`
+    // );
 
     // ✅ Auto-select first valid depth
     if (depthPrices[size]) {
@@ -429,7 +429,7 @@ const FeuzonProductDetail = () => {
         const defaultStaveOption =
           validStaveOptions.length > 0 ? validStaveOptions[0] : '';
         setStaveOption(defaultStaveOption);
-        console.log(`✅ Stave Option reset to ${defaultStaveOption}`);
+        // console.log(`✅ Stave Option reset to ${defaultStaveOption}`);
       }
     }
   }, [size, lugs]);
@@ -446,13 +446,13 @@ const FeuzonProductDetail = () => {
 
         if (productSnap.exists()) {
           const productData = productSnap.data();
-          console.log('📦 Firestore Product Data:', productData);
+          // console.log('📦 Firestore Product Data:', productData);
 
           const fetchedQuantity = productData.currentQuantity ?? 0; // Ensure it's not null
           setCurrentQuantity(fetchedQuantity);
-          console.log('✅ Successfully set currentQuantity:', fetchedQuantity);
+          // console.log('✅ Successfully set currentQuantity:', fetchedQuantity);
         } else {
-          console.warn('⚠️ Product not found in Firestore');
+          // console.warn('⚠️ Product not found in Firestore');
           setCurrentQuantity(0);
         }
       } catch (error) {
