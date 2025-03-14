@@ -65,7 +65,7 @@ const HeritageProductDetail = () => {
   };
 
   const handleAddToCart = async () => {
-    console.log('🛒 Add to Cart Clicked');
+    // console.log('🛒 Add to Cart Clicked');
 
     if (!size || !depth) {
         console.error('❌ Missing selection: Size or Depth not chosen');
@@ -114,7 +114,7 @@ const HeritageProductDetail = () => {
         quantity: 1,
     };
 
-    console.log('🛒 Adding item to cart:', cartItem);
+    // console.log('🛒 Adding item to cart:', cartItem);
     await addToCart(cartItem, cartItem);
 };
 
@@ -127,7 +127,7 @@ const HeritageProductDetail = () => {
 
         if (productSnap.exists()) {
           const productData = productSnap.data();
-          console.log('📦 Firestore Product Data:', productData);
+          // console.log('📦 Firestore Product Data:', productData);
           setCurrentQuantity(productData.currentQuantity ?? 0);
         } else {
           console.warn('⚠️ Heritage product not found in Firestore.');
@@ -202,10 +202,10 @@ const HeritageProductDetail = () => {
     // 🔄 **Generated Key Format with Base Price and Stave Details**
     const generatedKey = `${size}" - Base Price: $${newPrice}-${depth}"-${lugCount}-${staveThickness}`;
 
-    console.log('🔎 Generated Summary Key:', generatedKey); // Debugging log
+    // console.log('🔎 Generated Summary Key:', generatedKey); // Debugging log
 
     if (heritageSummaries[generatedKey]) {
-      console.log('✅ Drum Summary Found:', heritageSummaries[generatedKey]); // Debugging log
+      // console.log('✅ Drum Summary Found:', heritageSummaries[generatedKey]); // Debugging log
       setSelectedDrumSummary(heritageSummaries[generatedKey]);
     } else {
       console.error('❌ Summary not found for the key:', generatedKey); // Error if no summary is found
