@@ -11,7 +11,7 @@ const PreOrderPage = () => {
   useEffect(() => {
     const fetchPreOrderItems = async () => {
       try {
-        console.log("📥 Fetching pre-order items...");
+        // console.log("📥 Fetching pre-order items...");
         const preOrderQuery = query(collection(db, "products"), where("isPreOrder", "==", true));
         const querySnapshot = await getDocs(preOrderQuery);
         let items = querySnapshot.docs.map((doc) => ({

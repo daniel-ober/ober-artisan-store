@@ -13,10 +13,10 @@ const stripePublishableKey = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY;
 if (!stripePublishableKey) {
   console.error("Stripe publishable key is missing");
 }
-const stripePromise = loadStripe(stripePublishableKey);
+const stripePromise = loadStripe(stripePublishableKey); // Loads Stripe with the correct publishable key
 
 // Log the Stripe Publishable Key for debugging
-console.log("Stripe Publishable Key:", process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
+console.log("Stripe Publishable Key:", stripePublishableKey);
 
 const Checkout = ({ cartItems, totalAmount, onApplyPromo }) => {
   const { clearCartOnCheckout } = useCart(); // ✅ Ensure useCart() is properly placed at the top

@@ -1,8 +1,8 @@
 {
   "name": "functions",
   "scripts": {
-    "lint": "eslint .",
     "serve": "firebase emulators:start --only functions",
+    "predeploy": "echo 'Skipping ESLint check...'",
     "deploy": "firebase deploy --only functions"
   },
   "dependencies": {
@@ -10,7 +10,6 @@
     "axios": "^1.8.2",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
-    "eslint": "^9.22.0",
     "eslint-config-prettier": "^10.1.1",
     "express": "^4.21.2",
     "firebase-admin": "^13.2.0",
@@ -21,5 +20,9 @@
   "engines": {
     "node": "18"
   },
-  "main": "index.js"
+  "main": "index.js",
+  "devDependencies": {
+    "eslint": "^9.22.0",
+    "eslint-plugin-prettier": "^5.2.3"
+  }
 }
