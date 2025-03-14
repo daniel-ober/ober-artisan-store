@@ -9,7 +9,7 @@ export const checkAuthentication = () => {
     console.log('User is authenticated:', user);
     return user;
   } else {
-    console.log('No user is authenticated');
+    // console.log('No user is authenticated');
     return null;
   }
 };

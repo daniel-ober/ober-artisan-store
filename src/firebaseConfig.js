@@ -198,10 +198,3 @@ export const clearCart = async (userId) => {
   }
 };
 export { app }; // ✅ Ensure this is exported
-
-console.log('Environment:', environment);
-console.log('Firebase Project:', firebaseConfig.projectId);
-console.log("REACT_APP_FIREBASE_PROJECT_ID:", process.env.REACT_APP_FIREBASE_PROJECT_ID);
-console.log("Firebase Config:", firebaseConfigs);
-console.log("Selected Environment:", environment);
-console.log("Firebase Config for Environment:", firebaseConfigs[environment]);

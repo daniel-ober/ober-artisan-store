@@ -43,7 +43,6 @@ export const AuthProvider = ({ children }) => {
         setUser(currentUser);
         await fetchUserData(currentUser); // Fetch admin status from Firestore
       } else {
-        console.log('❌ User Signed Out');
         setUser(null);
         setIsAdmin(false);
         setLoading(false);

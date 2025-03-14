@@ -55,12 +55,6 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Debugging logs
-  console.log("reCAPTCHA Site Key:", process.env.REACT_APP_RECAPTCHA_SITE_KEY);
-  console.log('🔍 User from AuthContext:', user);
-  console.log('🔍 Admin Status in App.js:', isAdmin);
-  console.log('🌓 Global Dark Mode State:', isDarkMode);
-
   // Route to tab mapping for tracking navigation changes
   const routeToTabMap = useMemo(() => ({
     '/': 'Home',
@@ -83,7 +77,7 @@ function App() {
 
   useEffect(() => {
     const activeTab = routeToTabMap[location.pathname] || 'NotFound';
-    console.log(`📌 Current Tab changed to: ${activeTab}`);
+    // console.log(`📌 Current Tab changed to: ${activeTab}`);
   }, [location.pathname, routeToTabMap]);
 
   // ✅ Apply dark mode class to <body> on load and state changes
@@ -106,7 +100,7 @@ function App() {
   useEffect(() => {
     const fetchSettings = async () => {
       try {
-        console.log('📥 Fetching Navbar Links...');
+        // console.log('📥 Fetching Navbar Links...');
         const navbarLinksCollection = collection(db, 'settings', 'site', 'navbarLinks');
         const navbarLinksSnapshot = await getDocs(navbarLinksCollection);
         const navbarLinks = navbarLinksSnapshot.docs.map((doc) => doc.data());
