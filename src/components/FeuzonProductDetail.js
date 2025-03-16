@@ -232,7 +232,7 @@ const FeuzonProductDetail = () => {
     // ✅ Ensure valid lug count
     if (!lugOptions[size]?.includes(lugs)) {
       console.warn(
-        `⚠️ Invalid lug count (${lugs}) for size ${size}. Resetting to default.`
+        // `⚠️ Invalid lug count (${lugs}) for size ${size}. Resetting to default.`
       );
       setLugs(lugOptions[size][0]);
       return;
@@ -245,14 +245,14 @@ const FeuzonProductDetail = () => {
 
     // ✅ Ensure stave option is valid
     if (!updatedStaveOptions.includes(staveOption) || staveOption === '') {
-      console.warn(`⚠️ Invalid or empty stave option detected. Resetting...`);
+      // console.warn(`⚠️ Invalid or empty stave option detected. Resetting...`);
       setStaveOption(
         updatedStaveOptions.length > 0 ? updatedStaveOptions[0] : ''
       );
     }
 
     if (!staveQuantities.includes(staveOption)) {
-      console.warn(`⚠️ Stave Option Not Found. Resetting to default.`);
+      // console.warn(`⚠️ Stave Option Not Found. Resetting to default.`);
       setStaveOption(staveQuantities[0] || '');
     }
 
@@ -335,7 +335,7 @@ const FeuzonProductDetail = () => {
     }
 
     // ❌ If no exact match, attempt fuzzy matching for close keys
-    console.warn('⚠️ No exact match. Attempting closest match...');
+    // console.warn('⚠️ No exact match. Attempting closest match...');
     const closestMatch = availableKeys.find(
       (key) => key.includes(formattedSize) && key.includes(formattedBasePrice)
     );
