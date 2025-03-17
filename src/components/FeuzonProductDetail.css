@@ -112,19 +112,27 @@
     text-align: center;
 }
 
+.feuzon-detail-price {
+    font-size: 25px;
+    font-weight: 400;
+    color: #08ff3a;
+
+}
+
 .add-to-cart-button {
-    background-color: #1D1D1D;
-    color: white;
+    background-color: #4135ea;
+    color: rgb(255, 255, 255);
     font-size: 18px;
     font-weight: bold;
     padding: 12px 20px;
-    border-radius: 8px;
+    /* border-radius: 8px; */
+    width: auto;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 .add-to-cart-button:hover {
-    background-color: #333;
+    background-color: rgb(43, 82, 255);
 }
 
 .notify-me-button {

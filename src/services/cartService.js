@@ -14,7 +14,7 @@ import {
 import axios from 'axios'; // Added for making API requests
 
 // Ensure Axios is configured with the correct base URL
-axios.defaults.baseURL = 'http://localhost:4949'; // Update this if your backend URL is different
+axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
 
 const cartCollection = (userId) => collection(firestore, 'carts', userId, 'items');
 const productCollection = collection(firestore, 'products'); // Assumes products are stored in a Firestore collection

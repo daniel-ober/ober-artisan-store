@@ -359,7 +359,7 @@ app.get('/api/orders/by-session/:sessionId', async (req, res) => {
     const orderDoc = ordersSnapshot.docs[0];
     return res.status(200).json({ id: orderDoc.id, ...orderDoc.data() });
   } catch (err) {
-    console.error('Error fetching order:', err.message);
+    console.error('❌ Error fetching order:', err.message);
     res.status(500).json({ error: 'Failed to fetch order' });
   }
 });
@@ -385,7 +385,7 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Internal Server Error' });
 });
 
-// Start the server, default to 4949 for local dev, but use PORT for cloud environments like Cloud Run
+// Start the server, default to port for local dev, but use PORT for cloud environments like Cloud Run
 const PORT = process.env.PORT || 8080; // Make sure this is set to 8080 for Cloud Run
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
