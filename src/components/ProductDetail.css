@@ -305,7 +305,7 @@ body.dark .artisan-specs-table td {
   }
 
   .product-image-gallery {
-    max-width: 90%;
+    max-width: 100%;
   }
 
   .artisan-specs {
@@ -323,7 +323,7 @@ body.dark .artisan-specs-table td {
 
   .add-to-cart-button,
   .remove-from-cart-button {
-    width: 90%;
+    width: 100%;
   }
 }
 

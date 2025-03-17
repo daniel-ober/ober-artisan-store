@@ -60,7 +60,7 @@
   text-align: justify;
   color: #222;
   letter-spacing: 0.5px;
-  margin-bottom: 8px;
+  margin-bottom: 27px;
 }
 
 .card-preorder-price {
@@ -85,7 +85,7 @@
   border: none;
   padding: 10px;
   cursor: pointer;
-  width:auto;
+  width:100%;
   font-size: 14px;
   font-weight: bold;
   border-radius: 4px;
