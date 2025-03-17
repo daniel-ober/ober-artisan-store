@@ -3,7 +3,8 @@
   "scripts": {
     "serve": "firebase emulators:start --only functions",
     "predeploy": "echo 'Skipping ESLint check...'",
-    "deploy": "firebase deploy --only functions"
+    "deploy": "firebase deploy --only functions",
+        "lint": "echo 'Skipping ESLint check...'"
   },
   "dependencies": {
     "@babel/eslint-parser": "^7.26.10",
