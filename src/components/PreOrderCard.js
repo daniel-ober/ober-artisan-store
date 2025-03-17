@@ -51,6 +51,7 @@ const PreOrderCard = ({ product }) => {
       <div className="preorder-info">
         {/* <h2 className="preorder-title">{product.name}</h2> */}
         <p className="preorder-description">{product.description}</p>
+        <div className="preorder-card-bottom">
         <div className="card-preorder-price">Starting Price: ${product.price}</div>
         <p className="delivery-time">Delivery: {product.deliveryTime}</p>
 
@@ -62,6 +63,7 @@ const PreOrderCard = ({ product }) => {
           >
             {buttonText}
           </button>
+          </div>
         </div>
       </div>
     </div>

@@ -13,7 +13,9 @@ const stripePublishableKey = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY;
 if (!stripePublishableKey) {
   console.error("⚠️ Stripe publishable key is missing. Check your .env file.");
 }
-const stripePromise = loadStripe(stripePublishableKey);
+console.log("Stripe Publishable Key in Checkout:", process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
+
+const stripePromise = loadStripe(`${process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY}`);
 
 const Checkout = ({ cartItems, totalAmount, onApplyPromo }) => {
   const { clearCartOnCheckout } = useCart(); // ✅ Ensure useCart() is properly placed at the top

@@ -606,10 +606,10 @@ const FeuzonProductDetail = () => {
             </select>
   
             {/* Total Price */}
-            <h3>Total Price: ${totalPrice}</h3>
+            <p className="feuzon-detail-price">${totalPrice}</p>
   
             {/* Add to Cart */}
-            <button onClick={handleAddToCart}>Add to Cart</button>
+            <button className="add-to-cart-button" onClick={handleAddToCart}>Add to Cart</button>
           </div>
         </div>
   
