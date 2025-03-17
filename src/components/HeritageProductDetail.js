@@ -272,6 +272,8 @@ const HeritageProductDetail = () => {
               <li>Trick Snare Throw-Off</li>
               <li>Puresound Snare Wires</li>
               <li>Remo Coated Ambassador Batter & Clear Snare Side</li>
+              <li>Estimated Delivery: 5-7 weeks</li>
+              <p className="order-to-build-disclaimer">*Note: All Ober Artisan drums are on an "order-to-build" basis, offering various configuration options. Finsihed product will appear different than the image shown.</p>
             </ul>
           </div>
           <h2>Build Options</h2>
@@ -314,21 +316,16 @@ const HeritageProductDetail = () => {
               </option>
             ))}
           </select>
-          {/* Total Price */}
-          <h3>Total Price: ${totalPrice}</h3>
+            {/* Total Price */}
+            <p className="feuzon-detail-price">${totalPrice}</p>
+            <p className="delivery-time">Est Delivery: 5-7 weeks</p>
           {/* Add to Cart */}
-          {isLoading ? (
-            <p>🔄 Checking stock availability...</p>
-          ) : currentQuantity > 0 ? (
-            <button onClick={handleAddToCart}>Add to Cart</button>
-          ) : (
-            <button disabled>❌ Sold Out</button>
-          )}{' '}
+          <button className="heritage-add-to-cart-button" onClick={handleAddToCart}>Add to Cart</button>
         </div>
       </div>
 
       {/* 📌 Drum Summary Section */}
-      <div className="drum-summary">
+      {/* <div className="drum-summary"> */}
         {/* <SpiderChart data={[soundProfile.projection, soundProfile.sustain, soundProfile.brightness, soundProfile.warmth, soundProfile.attack]} /> */}
         {/* <BarChart data={soundProfile} /> */}
         {/* <h1>Artisan Notes</h1>
@@ -352,7 +349,7 @@ const HeritageProductDetail = () => {
         <p>
           {selectedDrumSummary.recordingMic || 'Select options to view summary'}
         </p> */}
-      </div>
+      {/* </div> */}
     </div>
   );
 };

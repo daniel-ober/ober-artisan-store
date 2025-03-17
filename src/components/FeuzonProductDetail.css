@@ -11,6 +11,10 @@
     color: white;
 }
 
+.order-to-build-disclaimer {
+    font-size: 12px;
+}
+
 /* 🔄 Main Content Layout - Adjusted for Proper Balance */
 .feuzon-product-content {
     display: flex;
@@ -114,9 +118,9 @@
 
 .feuzon-detail-price {
     font-size: 25px;
-    font-weight: 400;
-    color: #08ff3a;
-
+    font-weight: 800;
+    color: #ffde08;
+    text-align: center;
 }
 
 .add-to-cart-button {
