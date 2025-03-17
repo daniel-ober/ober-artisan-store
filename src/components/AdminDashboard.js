@@ -1,3 +1,5 @@
+// src/components/AdminDashboard.js
+
 import React, { useState, useEffect } from 'react';
 import {
   FaUsers,
@@ -68,7 +70,9 @@ const AdminDashboard = () => {
   // Fetch out-of-stock products count
   const getOutOfStockProductsCount = async () => {
     try {
-      const response = await fetch('http://localhost:4949/api/products');
+      const response = await fetch(
+        `${process.env.REACT_APP_API_BASE_URL}/api/products`
+      );
       if (!response.ok) throw new Error('Failed to fetch products');
       const data = await response.json();
 
@@ -116,11 +120,14 @@ const AdminDashboard = () => {
     try {
       const soundlegendCollection = collection(db, 'soundlegend_submissions');
       const soundlegendSnapshot = await getDocs(soundlegendCollection);
-      const soundlegendRequests = soundlegendSnapshot.docs.map((doc) => doc.data());
+      const soundlegendRequests = soundlegendSnapshot.docs.map((doc) =>
+        doc.data()
+      );
 
       // Count requests with status "New" or "Prospecting"
       return soundlegendRequests.filter(
-        (request) => request.status === 'New' || request.status === 'Prospecting'
+        (request) =>
+          request.status === 'New' || request.status === 'Prospecting'
       ).length;
     } catch (error) {
       console.error('❌ Error fetching SoundLegend requests:', error.message);
@@ -158,13 +165,29 @@ const AdminDashboard = () => {
       <h1>Admin Dashboard</h1>
       <div className="admin-cards">
         {[
-          { name: 'SoundLegend Submissions', icon: FaStar, stateKey: 'manageSoundlegendRequests' }, 
-          { name: 'Support Inquiries', icon: FaEnvelope, stateKey: 'manageInquiries' },
-          { name: 'Manage Projects', icon: FaHammer, stateKey: 'manageProjects' },
+          {
+            name: 'SoundLegend Submissions',
+            icon: FaStar,
+            stateKey: 'manageSoundlegendRequests',
+          },
+          {
+            name: 'Support Inquiries',
+            icon: FaEnvelope,
+            stateKey: 'manageInquiries',
+          },
+          {
+            name: 'Manage Projects',
+            icon: FaHammer,
+            stateKey: 'manageProjects',
+          },
           { name: 'Manage Orders', icon: FaBox, stateKey: 'manageOrders' },
           { name: 'Manage Products', icon: FaDrum, stateKey: 'manageProducts' },
           { name: 'Manage Users', icon: FaUsers, stateKey: 'manageUsers' },
-          { name: 'Manage Carts', icon: FaShoppingCart, stateKey: 'manageCarts' },
+          {
+            name: 'Manage Carts',
+            icon: FaShoppingCart,
+            stateKey: 'manageCarts',
+          },
           { name: 'Manage Gallery', icon: FaImages, stateKey: 'manageGallery' },
           { name: 'Site Settings', icon: FaCog, stateKey: 'siteSettings' },
         ].map(({ name, icon: Icon, stateKey }) => (
