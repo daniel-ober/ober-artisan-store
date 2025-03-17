@@ -11,6 +11,10 @@
   color: white;
 }
 
+.order-to-build-disclaimer {
+  font-size: 12px;
+}
+
 /* 🔄 Main Content Layout - Balanced for More Spacing */
 .heritage-product-content {
   display: flex;
@@ -132,24 +136,39 @@
 
 /* 📌 Total Price Styling */
 .heritage-product-options .total-price {
-  font-size: 20px;
-  font-weight: bold;
-  margin-top: 14px;
-  color: #f0f0f0;
+  font-size: 25px;
+  font-weight: 800;
+  /* color: #ffde08; */
   text-align: center;
+}
+
+.heritage-add-to-cart-button {
+  background-color: #4135ea;
+  color: rgb(255, 255, 255);
+  font-size: 18px;
+  font-weight: bold;
+  padding: 12px 20px;
+  /* border-radius: 8px; */
+  width: auto;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-to-cart-button:hover {
+  background-color: rgb(43, 82, 255);
 }
 
 /* 📌 Add to Cart Button */
 .heritage-product-options button {
   width: 100%;
-  padding: 14px;
+  padding: 4px;
   font-size: 16px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   text-align: center;
   margin-top: 12px;
-  background: linear-gradient(90deg, #ffcc00, #ff9900);
+  /* background: linear-gradient(90deg, #ffcc00, #ff9900); */
   color: white;
   font-weight: bold;
 }
