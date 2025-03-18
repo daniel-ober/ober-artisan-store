@@ -13,7 +13,6 @@ const stripePublishableKey = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY;
 if (!stripePublishableKey) {
   console.error("⚠️ Stripe publishable key is missing. Check your .env file.");
 }
-console.log("Stripe Publishable Key in Checkout:", process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
 const stripePromise = loadStripe(`${process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY}`);
 
