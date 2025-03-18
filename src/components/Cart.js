@@ -6,7 +6,6 @@ import { loadStripe } from '@stripe/stripe-js';
 import { doc, getDoc, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import './Cart.css';
-console.log("Stripe Publishable Key in Checkout:", process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
 const stripePromise = loadStripe(`${process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY}`);
 
