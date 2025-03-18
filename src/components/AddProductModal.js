@@ -103,7 +103,7 @@ const AddProductModal = ({ onClose }) => {
     setSuccessProductId(null);
   
     try {
-      console.log(`[handleArtisanSubmit] Called at ${new Date().toISOString()}`);
+      // console.log(`[handleArtisanSubmit] Called at ${new Date().toISOString()}`);
   
       if (
         !newProduct.name ||
@@ -122,11 +122,11 @@ const AddProductModal = ({ onClose }) => {
       const generatedSku = generateSku(newProduct.category, newProduct.artisanLine);
   
       // **STEP 1: Upload Images to Firebase Storage**
-      console.log("[handleArtisanSubmit] Uploading images to Firebase Storage...");
+      // console.log("[handleArtisanSubmit] Uploading images to Firebase Storage...");
       const uploadedImageUrls = await Promise.all(
         imageFiles.map((file) => uploadImage(file, 'products'))
       );
-      console.log("[handleArtisanSubmit] Uploaded image URLs:", uploadedImageUrls);
+      // console.log("[handleArtisanSubmit] Uploaded image URLs:", uploadedImageUrls);
   
       // **STEP 2: Create Product in Stripe with Firebase Image URLs**
       const stripeProduct = await createStripeProduct(
@@ -140,10 +140,10 @@ const AddProductModal = ({ onClose }) => {
         throw new Error('Failed to create Stripe product.');
       }
   
-      console.log(
-        '[handleArtisanSubmit] Saving Product to Firestore with Stripe Product ID:',
-        stripeProduct.id
-      );
+      // console.log(
+      //   '[handleArtisanSubmit] Saving Product to Firestore with Stripe Product ID:',
+      //   stripeProduct.id
+      // );
   
       // **STEP 3: Save Product to Firestore**
       const docRef = await addDoc(collection(db, 'products'), {
@@ -156,7 +156,7 @@ const AddProductModal = ({ onClose }) => {
         isOutOfStock: newProduct.maxQuantity === 0, // Automatically set out-of-stock flag
       });
   
-      console.log('[handleArtisanSubmit] Firestore Document Created:', docRef.id);
+      // console.log('[handleArtisanSubmit] Firestore Document Created:', docRef.id);
       setSuccessProductId(docRef.id);
   
       // **Reset Form After Successful Submission**

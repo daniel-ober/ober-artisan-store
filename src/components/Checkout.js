@@ -107,7 +107,7 @@ const Checkout = ({ cartItems, totalAmount, onApplyPromo }) => {
 
         try {
           await clearCartOnCheckout(); // ✅ Cart will be cleared after successful checkout
-          console.log("🛒 Cart successfully cleared.");
+          // console.log("🛒 Cart successfully cleared.");
         } catch (error) {
           console.error("❌ Error clearing cart:", error);
         }

@@ -37,11 +37,11 @@ router.post('/', async (req, res) => {
         };
 
         // Log contactData to verify
-        console.log('Contact Data:', contactData);
+        // console.log('Contact Data:', contactData);
 
         // Add document to Firestore
         const docRef = await db.collection('inquiries').add(contactData);
-        console.log('Document written with ID:', docRef.id);
+        // console.log('Document written with ID:', docRef.id);
 
         res.status(201).json({ message: 'Contact message saved successfully', data: contactData });
     } catch (error) {

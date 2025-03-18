@@ -124,13 +124,13 @@ const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
     setIsSubmitting(true);
   
     try {
-      console.log("🔄 Updating product in Firestore...");
+      // console.log("🔄 Updating product in Firestore...");
   
       let stripeProductId = product.stripeProductId;
   
       // ✅ Step 1: Ensure Stripe Product Exists
       if (!stripeProductId) {
-        console.log("⚠️ No Stripe Product ID found. Creating a new Stripe product...");
+        // console.log("⚠️ No Stripe Product ID found. Creating a new Stripe product...");
   
         const newStripeProduct = await createStripeProduct(
           product.name,
@@ -143,7 +143,7 @@ const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
         }
   
         stripeProductId = newStripeProduct.id;
-        console.log(`✅ Created Stripe Product: ${stripeProductId}`);
+        // console.log(`✅ Created Stripe Product: ${stripeProductId}`);
   
         // ✅ Update Firestore with the new Stripe Product ID
         await updateProduct(productId, { ...product, stripeProductId });
@@ -153,11 +153,11 @@ const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
       const updatedPricingOptions = await Promise.all(
         pricingOptions.map(async (option) => {
           if (option.stripePriceId) {
-            console.log(`🔄 Updating existing Stripe price: ${option.stripePriceId}`);
+            // console.log(`🔄 Updating existing Stripe price: ${option.stripePriceId}`);
             return option; // Keep existing price ID
           } else {
-            console.log(`➕ Creating new Stripe price for:`, option);
-            const newStripePrice = await createStripePrice(stripeProductId, option.price * 100);
+            // console.log(`➕ Creating new Stripe price for:`, option);
+            // const newStripePrice = await createStripePrice(stripeProductId, option.price * 100);
             return { ...option, stripePriceId: newStripePrice.id };
           }
         })
@@ -166,7 +166,7 @@ const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
       // ✅ Step 3: Save Updated Product to Firestore
       const updatedProduct = { ...product, pricingOptions: updatedPricingOptions, stripeProductId };
       await updateProduct(productId, updatedProduct);
-      console.log("✅ Product updated in Firestore with Stripe Prices:", updatedProduct);
+      // console.log("✅ Product updated in Firestore with Stripe Prices:", updatedProduct);
   
       onProductUpdated(updatedProduct);
       onClose();

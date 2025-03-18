@@ -14,7 +14,7 @@ exports.printifyWebhookListener = onRequest(
   async (req, res) => {
     try {
       const event = req.body;
-      console.log("📢 Printify Webhook Event Received:", event);
+      // console.log("📢 Printify Webhook Event Received:", event);
 
       if (!event || !event.data || !event.data.id) {
         return res.status(400).send("Invalid webhook event.");
@@ -24,11 +24,11 @@ exports.printifyWebhookListener = onRequest(
       const productStatus = event.data.status;
 
       if (productStatus !== "publishing") {
-        console.log(`❌ Product ${productId} is not being published, skipping.`);
+        // console.log(`❌ Product ${productId} is not being published, skipping.`);
         return res.status(200).send("No action needed.");
       }
 
-      console.log(`✅ Product ${productId} is being published. Creating Stripe product...`);
+      // console.log(`✅ Product ${productId} is being published. Creating Stripe product...`);
 
       const apiKey = STRIPE_SECRET_KEY.value();
       if (!apiKey) {
@@ -48,7 +48,7 @@ exports.printifyWebhookListener = onRequest(
       );
 
       const product = printifyResponse.data;
-      console.log("✅ Retrieved Printify Product:", product);
+      // console.log("✅ Retrieved Printify Product:", product);
 
       // Create product in Stripe
       const stripeResponse = await axios.post(
@@ -67,7 +67,7 @@ exports.printifyWebhookListener = onRequest(
       );
 
       const stripeProduct = stripeResponse.data;
-      console.log("✅ Created Stripe Product:", stripeProduct);
+      // console.log("✅ Created Stripe Product:", stripeProduct);
 
       // Create price in Stripe (assuming only one price for now)
       const stripePriceResponse = await axios.post(
@@ -86,7 +86,7 @@ exports.printifyWebhookListener = onRequest(
       );
 
       const stripePrice = stripePriceResponse.data;
-      console.log("✅ Created Stripe Price:", stripePrice);
+      // console.log("✅ Created Stripe Price:", stripePrice);
 
       // Store Stripe product & price IDs in Firestore
       await admin.firestore().collection("products").doc(productId).set(
@@ -128,7 +128,7 @@ exports.createPrintifyOrder = onRequest(
         return res.status(500).json({ error: "Server misconfiguration: Missing Printify API Key." });
       }
 
-      console.log("📢 Creating Printify Order:", orderData);
+      // console.log("📢 Creating Printify Order:", orderData);
 
       // Send order request to Printify API
       const response = await axios.post(
@@ -142,7 +142,7 @@ exports.createPrintifyOrder = onRequest(
         }
       );
 
-      console.log("✅ Printify Order Created:", response.data);
+      // console.log("✅ Printify Order Created:", response.data);
 
       return res.status(200).json(response.data);
     } catch (error) {

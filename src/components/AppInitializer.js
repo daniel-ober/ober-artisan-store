@@ -16,7 +16,7 @@ const AppInitializer = () => {
     const unsubscribe = onSnapshot(cartRef, (cartSnapshot) => {
       if (cartSnapshot.exists()) {
         const cartData = cartSnapshot.data();
-        console.log('✅ Real-time cart update received:', cartData);
+        // console.log('✅ Real-time cart update received:', cartData);
         setCart(Object.values(cartData.cart || {})); // Convert Firestore object to array
       } else {
         console.warn('⚠️ No cart found in Firestore');

@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
         const cartsSnapshot = await db.collection("carts").get();
 
         if (cartsSnapshot.empty) {
-            console.log("No carts found in Firestore.");
+            // console.log("No carts found in Firestore.");
             return res.status(200).json({ totalCount: 0, carts: [] });
         }
 
@@ -45,8 +45,8 @@ router.get("/", async (req, res) => {
             };
         });
 
-        console.log("All Carts Count:", allCarts.length); // Debugging
-        console.log("All Carts Details:", allCarts); // Debugging
+        // console.log("All Carts Count:", allCarts.length); // Debugging
+        // console.log("All Carts Details:", allCarts); // Debugging
 
         // Return the count of all carts, along with the cart details
         res.status(200).json({

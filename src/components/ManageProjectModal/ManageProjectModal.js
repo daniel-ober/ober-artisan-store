@@ -19,7 +19,7 @@ const ManageProjectModal = ({ isOpen, onClose, projectData }) => {
 
   useEffect(() => {
     if (projectData) {
-      console.log("Project Data:", projectData); // Debugging
+      // console.log("Project Data:", projectData); // Debugging
       setEditableData({
         ...projectData,
         woodPreparation: projectData?.woodPreparation || {
@@ -66,7 +66,7 @@ const ManageProjectModal = ({ isOpen, onClose, projectData }) => {
       };
       await updateDoc(projectRef, dataToSave);
 
-      console.log("Project updated successfully!");
+      // console.log("Project updated successfully!");
     } catch (error) {
       console.error("Error updating project:", error);
     }
@@ -103,8 +103,8 @@ const ManageProjectModal = ({ isOpen, onClose, projectData }) => {
 
   if (!isOpen) return null;
 
-  console.log("Current Tab:", selectedTab); // Debugging
-  console.log("Customer Data:", customerData); // Debugging
+  // console.log("Current Tab:", selectedTab); // Debugging
+  // console.log("Customer Data:", customerData); // Debugging
 
   return (
     <div className="manage-project-modal-overlay">
