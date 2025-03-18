@@ -9,7 +9,7 @@ const TermsOfService = forwardRef((props, ref) => {
 
       <h2>1. Acceptance of Terms</h2>
       <p>
-        By accessing or using the Dan Ober Artisan Drums website, you agree to be bound by these Terms of Service and our Privacy Policy. If you do not agree, please do not use our website.
+        By accessing or using the Ober Artisan Drums website, you agree to be bound by these Terms of Service and our Privacy Policy. If you do not agree, please do not use our website.
       </p>
 
       <h2>2. Use of the Website</h2>
@@ -44,12 +44,12 @@ const TermsOfService = forwardRef((props, ref) => {
 
       <h2>8. Intellectual Property</h2>
       <p>
-        All content on our website, including text, images, and logos, is owned by Dan Ober Artisan Drums or its licensors and is protected by intellectual property laws. You may not use or reproduce any content without our permission.
+        All content on our website, including text, images, and logos, is owned by Ober Artisan Drums or its licensors and is protected by intellectual property laws. You may not use or reproduce any content without our permission.
       </p>
 
       <h2>9. Limitation of Liability</h2>
       <p>
-        To the fullest extent permitted by law, Dan Ober Artisan Drums shall not be liable for any indirect, incidental, consequential, or punitive damages arising out of or related to your use of the website or our products.
+        To the fullest extent permitted by law, Ober Artisan Drums shall not be liable for any indirect, incidental, consequential, or punitive damages arising out of or related to your use of the website or our products.
       </p>
 
       <h2>10. Governing Law</h2>

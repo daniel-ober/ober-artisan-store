@@ -62,14 +62,15 @@
 /* Button Styling */
 .contact-button {
   margin-top: 16px;
-  background-color: #222;
   color: #ffffff;
   padding: 12px;
   border-radius: 5px;
+  width: 20%;
+  background-color:#2b52ff; 
 }
 
 .contact-button:hover {
-  background-color: #333;
+  background-color: #333; 
 }
 
 /* Dark Mode Styling */

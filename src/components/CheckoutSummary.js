@@ -4,6 +4,7 @@ import { db } from '../firebaseConfig';
 import { useCart } from '../context/CartContext';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import './CheckoutSummary.css';
+import ProductDetail from './ProductDetail';
 
 const CheckoutSummary = () => {
   const location = useLocation();
@@ -144,32 +145,30 @@ const CheckoutSummary = () => {
         <p>
           <strong>Address:</strong> {orderDetails.customerAddress || 'N/A'}
         </p>
-        <p>
+        {/* <p>
           <strong>Estimated Delivery:</strong>{' '}
           {orderDetails.shippingDetails || 'N/A'}
-        </p>
+        </p> */}
         <h3>Payment Info</h3>
         <p>
-          <strong>Payment Method:</strong> {orderDetails.paymentMethod || 'N/A'}
+          <strong>Payment Method:</strong> {orderDetails.paymentMethod.charAt(0).toUpperCase() +
+            orderDetails.paymentMethod.slice(1).toLowerCase() || 'N/A'}
         </p>
         <p>
-          <strong>Card Used:</strong>
+          <strong>Payment Details: </strong>
           {orderDetails.cardDetails?.brand
             ? orderDetails.cardDetails.brand.charAt(0).toUpperCase() +
               orderDetails.cardDetails.brand.slice(1).toLowerCase()
             : 'N/A'} ****{orderDetails.cardDetails?.lastFour || 'XXXX'}
         </p>{' '}
         <h3>Order Items</h3>
-        <ul>
+        <ul className="checkout-summary-items">
           {orderDetails.items.length > 0 ? (
             orderDetails.items.map((item, index) => (
-              <li key={index} className="product-card">
-                <strong>{item.name}</strong>
-                <p>💰 Price: ${item.price.toFixed(2)}</p>
-                <p>🛒 Quantity: {item.quantity}</p>
-                <p>
-                  🚚 Estimated Delivery:{' '}
-                  {orderDetails.shippingDetails || 'Not available'}
+              <li key={index} className="checkout-summary-item">
+                <strong>{item.name}</strong> - ${item.price.toFixed(2)} x {item.quantity}
+                <p>Estimated Delivery: {item.shippingDetails}
+                  {item.shippingDetails || 'Not available'}
                 </p>
               </li>
             ))

@@ -60,14 +60,14 @@ const ArtisanSeries = ({ product = {} }) => {
           <p className="description">
             The HERÌTAGE Series embodies the soul of hand-crafted percussion. Designed and built in Nashville, TN, this stave snare drum is a testament to the artistry and dedication behind every Ober Artisan Drum.
             Each stave is meticulously hand-tuned using an exclusive torch tuning process, bringing out the natural resonance and warmth of the wood while enhancing its striking scorched finish.
-            Available in multiple stave configurations and carefully selected wood species, the HERÌTAGE Series delivers a dynamic response, crisp attack, and balanced tonal complexity.
+            Available in multiple stave configurations and carefully selected Oak, the HERÌTAGE Series delivers a dynamic response, crisp attack, and balanced tonal complexity.
           </p>
           <ul className="description-list">
             <li>Shell Construction: Stave</li>
             <li>Available Sizes: 12”, 13”, 14”</li>
             <li>Finish: Light gloss, Medium gloss, Torch-scorched aesthetic</li>
             <li>Wood Selection: Northern Red Oak</li>
-            <li>Starting Price: <strong>$850</strong></li>
+            {/* <li>Starting Price: <strong>$850</strong></li> */}
           </ul>
         </div>
         <div className="drum-layer">
@@ -95,7 +95,7 @@ const ArtisanSeries = ({ product = {} }) => {
             <li>Available Sizes: 12”, 13”, 14”</li>
             <li>Finish: Natural or Stained</li>
             <li>Wood Selection: Stave (varied) + limited steam bent woods</li>
-            <li>Starting Price: <strong>$1,050</strong></li>
+            {/* <li>Starting Price: <strong>$1,050</strong></li> */}
           </ul>
         </div>
         <div className="drum-layer">
@@ -123,7 +123,7 @@ const ArtisanSeries = ({ product = {} }) => {
             <li>Shell Construction: Stave, Steam-Bent, or Hybrid</li>
             <li>Fully Customizable: Size, Lugs, Finish, Wood</li>
             <li>Hands-on experience: Consultation + Concept Renders</li>
-            <li>Starting Price: <strong>$1,250</strong></li>
+            {/* <li>Starting Price: <strong>$1,250</strong></li> */}
           </ul>
         </div>
         <div className="drum-layer">
@@ -146,11 +146,11 @@ const ArtisanSeries = ({ product = {} }) => {
               <li>Available Sizes: 12”, 13”, 14”</li>
               <li>Finish: Natural semi-gloss, Torch-scorched aesthetic</li>
               <li>Wood Selection: Northern Red Oak</li>
-              <li>Starting Price: <strong>$850</strong></li>
+              {/* <li>Starting Price: <strong>$850</strong></li> */}
             </ul>
             <button
 className={product?.currentQuantity === 0 ? "prod-card-view-details-button" : "preorder-card-preorder-button"}
-              onClick={() => navigate("/pre-order")}
+              onClick={() => navigate("/products/heritage")} key="artisanseries-final-section-button"
             >
               {preOrderButton}
             </button>
@@ -163,13 +163,13 @@ className={product?.currentQuantity === 0 ? "prod-card-view-details-button" : "p
               <li>Shell Construction: Stave, Steam-Bent, or Hybrid</li>
               <li>Fully Customizable: Size, Lugs, Finish, Wood</li>
               <li>Unforgettable Experience: Consultation + Concept Renders, Special Web Access, Swag, and more! </li>
-              <li>Starting Price: <strong>$1,250</strong></li>
+              {/* <li>Starting Price: <strong>$1,250</strong></li> */}
             </ul>
             <button
               className={product.currentQuantity === 0 ? "prod-card-view-details-button" : "preorder-card-preorder-button"}
-              onClick={() => navigate("/pre-order")}
+              onClick={() => navigate("/products/soundlegend")}
             >
-              {preOrderButton}
+              Learn More
             </button>
           </div>
 
@@ -181,11 +181,11 @@ className={product?.currentQuantity === 0 ? "prod-card-view-details-button" : "p
               <li>Available Sizes: 12”, 13”, 14”</li>
               <li>Finish: Natural or Stained</li>
               <li>Wood Selection: Stave (varied) + limited steam bent woods</li>
-              <li>Starting Price: <strong>$1,050</strong></li>
+              {/* <li>Starting Price: <strong>$1,050</strong></li> */}
             </ul>
             <button
               className={product.currentQuantity === 0 ? "prod-card-view-details-button" : "preorder-card-preorder-button"}
-              onClick={() => navigate("/pre-order")}
+              onClick={() => navigate("/products/feuzon")}
             >
               {preOrderButton}
             </button>
