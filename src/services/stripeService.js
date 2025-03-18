@@ -1,9 +1,7 @@
 // src/services/stripeService.js
 import stripePackage from 'stripe';
-console.log('STRIPE PUBLISHABLE KEY IN REACT:', process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 // Load Stripe secret key from environment variables
 const stripeSecretKey = process.env.REACT_APP_STRIPE_SECRET_KEY;
-console.log("Stripe Secret Key:", stripeSecretKey); // Debugging
 if (!stripeSecretKey) {
   throw new Error("Stripe secret key is missing. Please check your environment variables.");
 }
