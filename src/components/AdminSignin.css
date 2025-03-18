@@ -1,14 +1,17 @@
 .admin-signin-container {
     background-color: #f4f4f4;
-    padding-bottom: 80px;
+    padding-bottom: 60px;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom:60px;
   }
   
   .admin-signin-title {
     text-align: center;
     font-weight: bold;
-    margin-bottom: 20px;
+    padding-top:35px;
+    padding-bottom:10px;
+
     /* padding-bottom: 20px; */
 
   }
