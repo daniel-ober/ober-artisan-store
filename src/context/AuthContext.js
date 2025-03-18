@@ -16,14 +16,14 @@ export const AuthProvider = ({ children }) => {
   const fetchUserData = async (currentUser) => {
     setLoading(true);
     try {
-      console.log('Fetching user data for UID:', currentUser.uid);
+      // console.log('Fetching user data for UID:', currentUser.uid);
 
       const userData = await fetchUserDoc(currentUser.uid);
-      console.log('Fetched User Data:', userData);
+      // console.log('Fetched User Data:', userData);
 
       if (userData) {
         setIsAdmin(userData.isAdmin || false);
-        console.log('✅ Updated isAdmin state:', userData.isAdmin);
+        // console.log('✅ Updated isAdmin state:', userData.isAdmin);
       } else {
         console.warn('⚠️ User data not found in Firestore. Setting isAdmin to false.');
         setIsAdmin(false);
@@ -39,7 +39,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
-        console.log('✅ User Signed In:', currentUser);
+        // console.log('✅ User Signed In:', currentUser);
         setUser(currentUser);
         await fetchUserData(currentUser); // Fetch admin status from Firestore
       } else {
@@ -58,7 +58,7 @@ export const AuthProvider = ({ children }) => {
       await signOut(auth);
       setUser(null);
       setIsAdmin(false);
-      console.log("✅ Successfully signed out.");
+      // console.log("✅ Successfully signed out.");
     } catch (error) {
       console.error("❌ Error logging out:", error.message);
     }

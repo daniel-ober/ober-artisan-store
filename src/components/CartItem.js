@@ -9,7 +9,7 @@ const CartItem = ({ item }) => {
   const minQuantity = 1;
 
   const handleRemove = () => {
-    console.log('Removing item with ID:', item._id); // Log the ID being removed
+    // console.log('Removing item with ID:', item._id); // Log the ID being removed
     removeFromCart(item._id); // Use item._id instead of item.id
   };
 

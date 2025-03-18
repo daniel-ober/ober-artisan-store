@@ -183,7 +183,7 @@ const ManageGallery = () => {
       });
       try {
         await batch.commit();
-        console.log("✅ Firestore Batch Commit Successful!");
+        // console.log("✅ Firestore Batch Commit Successful!");
       } catch (err) {
         console.error("❌ Firestore Batch Commit Failed:", err.message);
       }

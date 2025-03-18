@@ -408,7 +408,7 @@ const FeuzonProductDetail = () => {
       if (!validDepths.includes(depth)) {
         const defaultDepth = validDepths[0];
         setDepth(defaultDepth);
-        console.log(`✅ Depth reset to ${defaultDepth}"`);
+        // console.log(`✅ Depth reset to ${defaultDepth}"`);
       }
     }
 
@@ -418,7 +418,7 @@ const FeuzonProductDetail = () => {
       if (!validLugs.includes(lugs)) {
         const defaultLugs = validLugs[0];
         setLugs(defaultLugs);
-        console.log(`✅ Lugs reset to ${defaultLugs}`);
+        // console.log(`✅ Lugs reset to ${defaultLugs}`);
       }
     }
 
@@ -468,7 +468,7 @@ const FeuzonProductDetail = () => {
 
   // ✅ Handle modifying an existing Feuzon selection
   const handleModifySelection = () => {
-    console.log('♻️ Updating Feuzon configuration in the cart...');
+    // console.log('♻️ Updating Feuzon configuration in the cart...');
 
     // ✅ Reset states to ensure correct re-addition of modified product
     setProductInCart(false);
@@ -481,20 +481,20 @@ const FeuzonProductDetail = () => {
 
   // ✅ Handle adding a separate Feuzon drum if stock allows
   const handleAddSeparateItem = async () => {
-    console.log('➕ Attempting to add a separate Feuzon drum to the cart...');
+    // console.log('➕ Attempting to add a separate Feuzon drum to the cart...');
 
     // ✅ Fetch total Feuzon quantity currently in the cart
     const feuzonQuantityInCart = cart
       .filter((item) => item.productId === 'feuzon')
       .reduce((total, item) => total + item.quantity, 0); // Sum all Feuzon quantities
 
-    console.log('🛒 Cart Contents:', cart); // Debugging
-    console.log('📦 Feuzon Quantity in Cart:', feuzonQuantityInCart);
-    console.log('📦 Firestore Current Quantity:', currentQuantity);
+    // console.log('🛒 Cart Contents:', cart); // Debugging
+    // console.log('📦 Feuzon Quantity in Cart:', feuzonQuantityInCart);
+    // console.log('📦 Firestore Current Quantity:', currentQuantity);
 
     // ✅ Check if enough stock is available
     if (currentQuantity > feuzonQuantityInCart) {
-      console.log('✅ Stock is available! Proceeding to add another Feuzon...');
+      // console.log('✅ Stock is available! Proceeding to add another Feuzon...');
       await handleAddToCart(true);
       setShowAddSeparateModal(false);
     } else {
@@ -659,7 +659,6 @@ const FeuzonProductDetail = () => {
               <button
                 className="remove-from-cart-button"
                 onClick={async () => {
-                  console.log('🛑 Removing custom product from cart...');
                   const generatedId = `feuzon-${size}-${depth}-${lugs}-${staveQuantity}`;
                   await removeFromCart(generatedId);
                   setProductInCart(false);

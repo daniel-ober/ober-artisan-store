@@ -93,7 +93,7 @@ function App() {
     localStorage.setItem("darkMode", newMode.toString());
     document.body.classList.toggle("dark", newMode);
     document.body.classList.toggle("light", !newMode);
-    console.log("🌓 Dark Mode Toggled in App.js:", newMode);
+    // console.log("🌓 Dark Mode Toggled in App.js:", newMode);
   };
 
   // Fetch Navbar Links from Firestore

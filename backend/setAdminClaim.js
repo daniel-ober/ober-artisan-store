@@ -15,7 +15,7 @@ const setAdminClaim = async (userId) => {
     try {
         // Add 'admin' custom claim to the user
         await admin.auth().setCustomUserClaims(userId, { admin: true });
-        console.log(`Admin claim set for user: ${userId}`);
+        // console.log(`Admin claim set for user: ${userId}`);
     } catch (error) {
         console.error('Error setting admin claim:', error.message);
     }

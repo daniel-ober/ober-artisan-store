@@ -30,7 +30,7 @@ const CheckoutSummary = () => {
         if (!response.ok) throw new Error('Failed to fetch order details');
 
         const data = await response.json();
-        console.log('✅ Full Order Details from API:', data); // DEBUGGING
+        // console.log('✅ Full Order Details from API:', data); // DEBUGGING
 
         setOrderDetails(data);
       } catch (error) {
@@ -43,7 +43,7 @@ const CheckoutSummary = () => {
 
   const updateProductInventory = async (items) => {
     try {
-      console.log('🔍 Starting inventory update for items:', items);
+    //   console.log('🔍 Starting inventory update for items:', items);
 
       for (const item of items) {
         if (!item.productId) {
@@ -51,7 +51,7 @@ const CheckoutSummary = () => {
           continue; // Skip this item
         }
 
-        console.log(`📌 Checking product ID: ${item.productId}`);
+        // console.log(`📌 Checking product ID: ${item.productId}`);
 
         // Ensure correct Firestore reference
         let productRef;
@@ -69,23 +69,23 @@ const CheckoutSummary = () => {
         }
 
         const productData = productSnap.data();
-        console.log(
-          `📊 Current stock for ${item.productId}: ${productData.currentQuantity}`
-        );
+        // console.log(
+        //   `📊 Current stock for ${item.productId}: ${productData.currentQuantity}`
+        // );
 
         const newQuantity = Math.max(
           0,
           (productData.currentQuantity || 0) - (item.quantity || 1)
         );
-        console.log(
-          `🔄 Updating stock: ${productData.currentQuantity} -> ${newQuantity}`
-        );
+        // console.log(
+        //   `🔄 Updating stock: ${productData.currentQuantity} -> ${newQuantity}`
+        // );
 
         await updateDoc(productRef, { currentQuantity: newQuantity });
-        console.log(`✅ Inventory updated for ${item.productId}`);
+        // console.log(`✅ Inventory updated for ${item.productId}`);
       }
 
-      console.log('✅ Finished updating inventory!');
+    //   console.log('✅ Finished updating inventory!');
     } catch (error) {
       console.error('❌ Error updating inventory:', error);
     }

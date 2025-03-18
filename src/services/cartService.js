@@ -44,7 +44,7 @@ export const addItemToCart = async (userId, productId, quantity) => {
     const itemRef = doc(cartCollection(userId), productId);
     await setDoc(itemRef, { quantity }, { merge: true });
 
-    console.log(`✅ Item ${productId} added to cart for user: ${userId}`);
+    // console.log(`✅ Item ${productId} added to cart for user: ${userId}`);
 
     return { success: true, message: 'Item added to cart successfully' };
   } catch (error) {
@@ -62,7 +62,7 @@ export const getCartItems = async (userId) => {
     const q = query(itemsRef);
     const querySnapshot = await getDocs(q);
 
-    console.log(`📦 Retrieved ${querySnapshot.size} items from cart for user: ${userId}`);
+    // console.log(`📦 Retrieved ${querySnapshot.size} items from cart for user: ${userId}`);
 
     return querySnapshot.docs.map((doc) => ({ productId: doc.id, ...doc.data() }));
   } catch (error) {
@@ -79,7 +79,7 @@ export const removeItemFromCart = async (userId, productId) => {
     const itemRef = doc(cartCollection(userId), productId);
     await deleteDoc(itemRef);
 
-    console.log(`🗑️ Removed item ${productId} from cart for user: ${userId}`);
+    // console.log(`🗑️ Removed item ${productId} from cart for user: ${userId}`);
 
     return { success: true, message: 'Item removed from cart' };
   } catch (error) {
@@ -93,27 +93,27 @@ export const removeItemFromCart = async (userId, productId) => {
  */
 export const clearCart = async (userId) => {
   try {
-    console.log(`🗑️ Clearing cart for user: ${userId}...`);
+    // console.log(`🗑️ Clearing cart for user: ${userId}...`);
 
     const itemsRef = cartCollection(userId);
     const q = query(itemsRef);
     const querySnapshot = await getDocs(q);
 
     if (querySnapshot.empty) {
-      console.log(`🛒 No items found in cart for user: ${userId}, nothing to clear.`);
+      // console.log(`🛒 No items found in cart for user: ${userId}, nothing to clear.`);
       return { success: true, message: 'Cart was already empty.' };
     }
 
     const batch = writeBatch(firestore);
     querySnapshot.docs.forEach((doc) => {
-      console.log(`❌ Deleting cart item: ${doc.id}`);
+      // console.log(`❌ Deleting cart item: ${doc.id}`);
       batch.delete(doc.ref);
     });
 
     // Commit batch
     try {
       await batch.commit();
-      console.log(`✅ Cart successfully cleared for user: ${userId}`);
+      // console.log(`✅ Cart successfully cleared for user: ${userId}`);
     } catch (err) {
       console.error("❌ Firestore Batch Commit Failed when clearing cart:", err.message);
     }
@@ -130,9 +130,9 @@ export const clearCart = async (userId) => {
  */
 export const getCartsWithNotificationCount = async () => {
   try {
-    console.log('Fetching carts with notification count...');
+    // console.log('Fetching carts with notification count...');
     const response = await axios.get('/api/carts'); // Ensure baseURL is configured
-    console.log('📊 Carts API Response:', response.data);
+    // console.log('📊 Carts API Response:', response.data);
     return response.data; // Returns an object with totalCount and carts
   } catch (error) {
     console.error('❌ Error in getCartsWithNotificationCount:', error.response?.data || error.message);

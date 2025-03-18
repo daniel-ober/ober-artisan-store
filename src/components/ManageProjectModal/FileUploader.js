@@ -87,7 +87,7 @@ const FileUploader = ({ projectId }) => {
           ...prev,
           [category]: prev[category].filter((f) => f.name !== file.name), // Remove from UI
         }));
-        console.log(`${file.name} deleted successfully.`);
+        // console.log(`${file.name} deleted successfully.`);
       } catch (error) {
         console.error(`Error deleting ${file.name}:`, error);
       }

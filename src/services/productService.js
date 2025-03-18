@@ -82,7 +82,7 @@ export const updateProductInventory = async (cartItems) => {
   }
 
   try {
-    console.log("📦 Processing inventory update for cart items:", cartItems);
+    // console.log("📦 Processing inventory update for cart items:", cartItems);
 
     await runTransaction(db, async (transaction) => {
       for (const item of cartItems) {
@@ -101,7 +101,7 @@ export const updateProductInventory = async (cartItems) => {
         }
 
         const productData = productDoc.data();
-        console.log(`🔍 Checking inventory for ${productData.name}: ${productData.currentQuantity} in stock`);
+        // console.log(`🔍 Checking inventory for ${productData.name}: ${productData.currentQuantity} in stock`);
 
         // **Prevent Overselling** (but don't stop the transaction)
         if (productData.currentQuantity < item.quantity) {
@@ -120,11 +120,11 @@ export const updateProductInventory = async (cartItems) => {
           availabilityMessage,
         });
 
-        console.log(`✅ Inventory updated for ${productData.name}: New Quantity = ${newQuantity}`);
+        // console.log(`✅ Inventory updated for ${productData.name}: New Quantity = ${newQuantity}`);
       }
     });
 
-    console.log("✅ Inventory successfully updated!");
+    // console.log("✅ Inventory successfully updated!");
     return { success: true, message: "Inventory updated successfully." };
   } catch (error) {
     console.error("❌ Error updating inventory:", error.message);

@@ -20,7 +20,7 @@ if (!userId) {
 (async () => {
     try {
         const user = await admin.auth().getUser(userId);
-        console.log('User Claims:', user.customClaims || 'No custom claims set.');
+        // console.log('User Claims:', user.customClaims || 'No custom claims set.');
     } catch (error) {
         console.error('Error fetching user:', error.message);
     }

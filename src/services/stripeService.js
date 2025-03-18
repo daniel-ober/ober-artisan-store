@@ -21,7 +21,7 @@ let isCreatingProduct = false;
  * @returns {Promise<object>} - The created product object.
  */
 export const createStripeProduct = async (name, description, images = [], metadata = {}) => {
-  console.log(`[createStripeProduct] Called with: ${JSON.stringify({ name, description, images, metadata })}`);
+  // console.log(`[createStripeProduct] Called with: ${JSON.stringify({ name, description, images, metadata })}`);
 
   if (isCreatingProduct) {
     console.warn('[createStripeProduct] Another product creation is already in progress.');
@@ -39,14 +39,14 @@ export const createStripeProduct = async (name, description, images = [], metada
       throw new Error('Invalid input: Images must be an array of URLs.');
     }
 
-    console.log(`[createStripeProduct] Creating Stripe product...`);
+    // console.log(`[createStripeProduct] Creating Stripe product...`);
     const product = await stripe.products.create({
       name,
       description,
       images,
       metadata, // Include metadata (e.g., SKU, firestoreProductId)
     });
-    console.log(`[createStripeProduct] Product created: ${JSON.stringify(product)}`);
+    // console.log(`[createStripeProduct] Product created: ${JSON.stringify(product)}`);
 
     return product;
   } catch (error) {
@@ -75,7 +75,7 @@ export const createStripePrice = async (productId, unitAmount) => {
       currency: 'usd',
     });
 
-    console.log(`✅ Stripe Price Created: ${price.id} for Product: ${productId}`);
+    // console.log(`✅ Stripe Price Created: ${price.id} for Product: ${productId}`);
     return price;
   } catch (error) {
     console.error("❌ Error creating Stripe price:", error);
@@ -126,14 +126,14 @@ export const createStripeProductWithPrices = async (name, description, images = 
 export const updateStripeProductWithPrices = async (productId, name, description, images = [], pricingOptions = []) => {
   try {
     // Update the product details
-    console.log(`[updateStripeProductWithPrices] Updating product ID: ${productId}`);
+    // console.log(`[updateStripeProductWithPrices] Updating product ID: ${productId}`);
     await stripe.products.update(productId, {
       name,
       description,
       images,
     });
 
-    console.log(`[updateStripeProductWithPrices] Product updated successfully.`);
+    // console.log(`[updateStripeProductWithPrices] Product updated successfully.`);
 
     // Update pricing options
     const newPrices = await Promise.all(
@@ -142,7 +142,7 @@ export const updateStripeProductWithPrices = async (productId, name, description
           // Fetch current price to check if an update is needed
           const currentPrice = await stripe.prices.retrieve(option.stripePriceId);
           if (currentPrice.unit_amount !== option.price * 100) {
-            console.log(`🔄 Updating Stripe Price: ${option.stripePriceId}`);
+            // console.log(`🔄 Updating Stripe Price: ${option.stripePriceId}`);
             return {
               ...option,
               stripePriceId: (await createStripePrice(productId, option.price * 100)).id,
@@ -151,7 +151,7 @@ export const updateStripeProductWithPrices = async (productId, name, description
           return option;
         } else {
           // Create a new price if there's no existing Stripe Price ID
-          console.log(`➕ Creating new Stripe Price for product: ${productId}`);
+          // console.log(`➕ Creating new Stripe Price for product: ${productId}`);
           return {
             ...option,
             stripePriceId: (await createStripePrice(productId, option.price * 100)).id,
@@ -174,7 +174,7 @@ export const updateStripeProductWithPrices = async (productId, name, description
  */
 export const fetchStripePrices = async (productId) => {
   try {
-    console.log("[fetchStripePrices] Fetching prices for product ID:", productId);
+    // console.log("[fetchStripePrices] Fetching prices for product ID:", productId);
 
     if (!productId) {
       throw new Error('Invalid input: Product ID is required.');
@@ -185,7 +185,7 @@ export const fetchStripePrices = async (productId) => {
       active: true,
     });
 
-    console.log("[fetchStripePrices] Prices retrieved:", prices.data);
+    // console.log("[fetchStripePrices] Prices retrieved:", prices.data);
     return prices.data;
   } catch (error) {
     console.error("[fetchStripePrices] Error:", error.message);
@@ -200,9 +200,9 @@ export const fetchStripePrices = async (productId) => {
  */
 export const deleteStripeProduct = async (productId) => {
   try {
-    console.log("[deleteStripeProduct] Deleting product with ID:", productId);
+    // console.log("[deleteStripeProduct] Deleting product with ID:", productId);
     await stripe.products.del(productId);
-    console.log("[deleteStripeProduct] Product deleted:", productId);
+    // console.log("[deleteStripeProduct] Product deleted:", productId);
   } catch (error) {
     console.error("[deleteStripeProduct] Error:", error.message);
     throw new Error('Failed to delete Stripe product.');

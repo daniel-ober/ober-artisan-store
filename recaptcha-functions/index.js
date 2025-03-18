@@ -20,7 +20,7 @@ exports.verifyRecaptcha = functions.onRequest(async (req, res) => {
   });
 
   const data = await response.json();
-  console.log("🛡️ Google reCAPTCHA Verification Response:", data);
+  // console.log("🛡️ Google reCAPTCHA Verification Response:", data);
 
   if (data.success) {
     return res.json({ success: true, score: data.score });

@@ -13,7 +13,7 @@ const db = admin.firestore();
 exports.updateInventory = functions
     .region("us-central1")
     .https.onCall(async (data) => { // Removed 'context' parameter
-        console.log("🔥 updateInventory function triggered.");
+        // console.log("🔥 updateInventory function triggered.");
 
         if (!data || !data.cartItems || !data.userId) {
             console.error("❌ Invalid data received.");
@@ -21,8 +21,8 @@ exports.updateInventory = functions
         }
 
         const { cartItems, userId } = data;
-        console.log("📦 Received Cart Items:", cartItems);
-        console.log("👤 User ID:", userId);
+        // console.log("📦 Received Cart Items:", cartItems);
+        // console.log("👤 User ID:", userId);
 
         const batch = db.batch();
 
@@ -46,19 +46,19 @@ exports.updateInventory = functions
 
                 // Update Inventory
                 const newStock = Math.max(0, productData.currentQuantity - item.quantity);
-                console.log(`🔄 Updating stock for ${productData.name} (${item.productId}): ${productData.currentQuantity} -> ${newStock}`);
+                // console.log(`🔄 Updating stock for ${productData.name} (${item.productId}): ${productData.currentQuantity} -> ${newStock}`);
 
                 batch.update(productRef, { currentQuantity: newStock });
             }
 
             // 💨 **Clear User's Cart**
             const cartRef = db.collection("carts").doc(userId);
-            console.log(`🛒 Clearing cart for user: ${userId}`);
+            // console.log(`🛒 Clearing cart for user: ${userId}`);
             batch.delete(cartRef);
 
             // ✅ Commit Firestore Batch
             await batch.commit();
-            console.log("✅ Firestore Batch Commit Successful! Cart cleared.");
+            // console.log("✅ Firestore Batch Commit Successful! Cart cleared.");
 
             return { success: true, message: "Inventory updated and cart cleared." };
         } catch (error) {

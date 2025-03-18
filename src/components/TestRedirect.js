@@ -8,8 +8,8 @@ const TestRedirect = () => {
     useEffect(() => {
         // Log the query parameters for testing
         const params = new URLSearchParams(location.search);
-        console.log('Session ID:', params.get('session_id'));
-        console.log('Guest Token:', params.get('guest_token'));
+        // console.log('Session ID:', params.get('session_id'));
+        // console.log('Guest Token:', params.get('guest_token'));
     }, [location]);
 
     return (

@@ -90,7 +90,7 @@ export const CartProvider = ({ children }) => {
         cart: sanitizedCart,
         lastUpdated: serverTimestamp(),
       });
-      console.log('✅ Cart successfully updated in Firestore!');
+      // console.log('✅ Cart successfully updated in Firestore!');
     } catch (error) {
       console.error('❌ Firestore Update Error:', error);
     }
@@ -174,18 +174,18 @@ export const CartProvider = ({ children }) => {
 
   /** ✅ Remove Product from Cart */
   const removeFromCart = async (productId) => {
-    console.log('🗑 Removing item from cart:', productId);
+    // console.log('🗑 Removing item from cart:', productId);
 
     let updatedCart = cart.filter((item) => item.id !== productId);
 
     setCart(updatedCart);
     await updateFirestoreCart(updatedCart);
-    console.log("🛒 Item removed from cart:", productId);
+    // console.log("🛒 Item removed from cart:", productId);
   };
 
   /** ✅ Clear Cart After Checkout */
   const clearCartOnCheckout = async () => {
-    console.log("🚀 Clearing cart after successful checkout...");
+    // console.log("🚀 Clearing cart after successful checkout...");
 
     if (!cartId) {
         console.warn("❌ Cannot clear cart: No cartId found.");
@@ -197,7 +197,7 @@ export const CartProvider = ({ children }) => {
         await updateDoc(cartRef, { cart: [] }); // ✅ Clear Firestore cart
         setCart([]); // ✅ Clear React state
         localStorage.removeItem("cartId"); // ✅ Remove cartId from localStorage
-        console.log("✅ Cart successfully cleared.");
+        // console.log("✅ Cart successfully cleared.");
     } catch (error) {
         console.error("❌ Error clearing cart:", error);
     }

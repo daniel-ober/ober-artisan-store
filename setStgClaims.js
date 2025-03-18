@@ -19,10 +19,10 @@ const uid = '7r6TtlaePfYcLeNKkLjajJK5ZDJ2';  // Staging admin UID
 const setCustomClaims = async () => {
   try {
     await admin.auth().setCustomUserClaims(uid, { admin: true });
-    console.log(`Admin claim set for user: ${uid}`);
+    // console.log(`Admin claim set for user: ${uid}`);
 
     const updatedUser = await admin.auth().getUser(uid);
-    console.log('Updated user claims:', updatedUser.customClaims);
+    // console.log('Updated user claims:', updatedUser.customClaims);
   } catch (error) {
     console.error('Error setting custom claims:', error);
   }
