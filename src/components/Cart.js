@@ -18,8 +18,8 @@ const Cart = () => {
   const [unavailableProducts, setUnavailableProducts] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
-  console.log('🛒 Cart from Context:', cart);
-  console.log('🆔 Cart ID:', cartId);
+  // console.log('🛒 Cart from Context:', cart);
+  // console.log('🆔 Cart ID:', cartId);
 
   // ✅ Ensure unavailable products are removed before checkout
   useEffect(() => {

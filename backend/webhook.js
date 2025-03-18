@@ -23,14 +23,14 @@ router.post(
       return res.status(400).send(`Webhook Error: ${err.message}`);
     }
 
-    console.log(`📩 Received Stripe event: ${event.type}`);
+    // console.log(`📩 Received Stripe event: ${event.type}`);
 
     if (event.type === 'checkout.session.completed') {
       const session = event.data.object;
-      console.log('✅ Checkout session completed:', session);
+      // console.log('✅ Checkout session completed:', session);
 
       if (!session.metadata || !session.metadata.userId) {
-        console.error('❌ Missing user metadata in session.');
+        // console.error('❌ Missing user metadata in session.');
         return res.status(400).send('Missing user metadata.');
       }
 
@@ -47,7 +47,7 @@ router.post(
 
         // ✅ Ensure productId is included
         lineItems = lineItemsResponse.data.map((item) => {
-          console.log("🛒 Raw Line Item from Stripe:", item);
+          // console.log("🛒 Raw Line Item from Stripe:", item);
 
           return {
             stripeProductId: item.price.product?.id || null,
@@ -58,17 +58,17 @@ router.post(
           };
         });
 
-        console.log('✅ Processed Line Items:', JSON.stringify(lineItems, null, 2));
+        // console.log('✅ Processed Line Items:', JSON.stringify(lineItems, null, 2));
       } catch (error) {
         console.error('❌ Error fetching line items:', error.message);
         return res.status(500).send('Error fetching line items.');
       }
 
       try {
-        console.log('📦 Updating Inventory for Ordered Items...');
+        // console.log('📦 Updating Inventory for Ordered Items...');
 
         for (const item of lineItems) {
-          console.log(`🔍 Searching for product with stripeProductId: ${item.stripeProductId}`);
+          // console.log(`🔍 Searching for product with stripeProductId: ${item.stripeProductId}`);
 
           let productSnapshot = await admin
             .firestore()
@@ -94,7 +94,7 @@ router.post(
                 .get();
 
               if (!fallbackSnapshot.empty) {
-                console.log(`✅ Fallback Matched Product: ${formattedName}`);
+                // console.log(`✅ Fallback Matched Product: ${formattedName}`);
                 productSnapshot = fallbackSnapshot;
               } else {
                 console.error(`❌ Fallback failed. Product '${item.name}' not found in Firestore.`);
@@ -110,7 +110,7 @@ router.post(
           const productRef = productDoc.ref;
           const productData = productDoc.data();
 
-          console.log(`✅ Matched Product: ${productData.name} (Current Quantity: ${productData.currentQuantity})`);
+          // console.log(`✅ Matched Product: ${productData.name} (Current Quantity: ${productData.currentQuantity})`);
 
           // ✅ Update inventory using transaction
           await admin.firestore().runTransaction(async (transaction) => {
@@ -126,18 +126,18 @@ router.post(
               (freshProductData.currentQuantity || 0) - item.quantity
             );
 
-            console.log(`🔄 Updating stock for ${productData.id}: ${freshProductData.currentQuantity} -> ${newQuantity}`);
+            // console.log(`🔄 Updating stock for ${productData.id}: ${freshProductData.currentQuantity} -> ${newQuantity}`);
 
             transaction.update(productRef, {
               currentQuantity: newQuantity,
               isAvailable: newQuantity > 0,
             });
 
-            console.log(`✅ Inventory Updated for ${productData.name} - New Quantity: ${newQuantity}`);
+            // console.log(`✅ Inventory Updated for ${productData.name} - New Quantity: ${newQuantity}`);
           });
         }
 
-        console.log('✅ Inventory Updated Successfully!');
+        // console.log('✅ Inventory Updated Successfully!');
 
         // ✅ CREATE ORDER IN FIRESTORE
         const orderId = generateCustomId();
@@ -157,7 +157,7 @@ router.post(
         };
 
         await admin.firestore().collection('orders').doc(orderId).set(orderData);
-        console.log(`✅ Order Created Successfully: ${orderId}`);
+        // console.log(`✅ Order Created Successfully: ${orderId}`);
 
         res.status(200).send('✅ Event processed successfully.');
       } catch (error) {
@@ -165,7 +165,7 @@ router.post(
         res.status(500).send('Internal Server Error');
       }
     } else {
-      console.log(`⚠️ Unhandled Stripe event type: ${event.type}`);
+      // console.log(`⚠️ Unhandled Stripe event type: ${event.type}`);
       res.status(200).send('Event received.');
     }
   }

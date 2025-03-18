@@ -35,7 +35,7 @@ const checkUserRole = async (uid) => {
 const setCustomClaims = async (uid, claims) => {
   try {
     await admin.auth().setCustomUserClaims(uid, claims);
-    console.log(`Claims set for user ${uid}:`, claims);
+    // console.log(`Claims set for user ${uid}:`, claims);
   } catch (error) {
     console.error('Error setting custom claims:', error);
   }

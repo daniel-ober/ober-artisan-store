@@ -12,12 +12,12 @@ admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
 
-console.log(`Using project: ${admin.app().options.projectId}`);
+// console.log(`Using project: ${admin.app().options.projectId}`);
 
 admin.auth().listUsers(10)
   .then((listUsersResult) => {
-    console.log('Users:', listUsersResult.users);
+    // console.log('Users:', listUsersResult.users);
   })
   .catch((error) => {
-    console.log('Error listing users:', error);
+    // console.log('Error listing users:', error);
   });

@@ -91,7 +91,7 @@ const ManageOrders = () => {
 
     try {
       await deleteDoc(doc(db, "orders", orderId));
-      console.log(`✅ Order ${orderId} deleted successfully`);
+      // console.log(`✅ Order ${orderId} deleted successfully`);
       fetchOrders(); // Refresh the order list after deletion
     } catch (error) {
       console.error("❌ Error deleting order:", error);

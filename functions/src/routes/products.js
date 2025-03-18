@@ -9,7 +9,7 @@ const router = express.Router();
 // Retrieve Stripe API Key properly from Firebase config
 const stripeKey = process.env.STRIPE_SECRET_KEY || functions.config().stripe.secret;
 
-console.log("🔍 Stripe API Key Loaded:", stripeKey ? "✅ YES" : "❌ NO");
+// console.log("🔍 Stripe API Key Loaded:", stripeKey ? "✅ YES" : "❌ NO");
 
 if (!stripeKey) {
     console.error("❌ Stripe API Key Missing");
@@ -27,7 +27,7 @@ router.post("/create-product", async (req, res) => {
             return res.status(400).json({ error: "Missing required fields" });
         }
 
-        console.log("🔹 Creating product in Stripe...");
+        // console.log("🔹 Creating product in Stripe...");
 
         // Create the product in Stripe
         const stripeProduct = await stripe.products.create({
@@ -36,7 +36,7 @@ router.post("/create-product", async (req, res) => {
             metadata: { category },
         });
 
-        console.log(`✅ Stripe product created: ${stripeProduct.id}`);
+        // console.log(`✅ Stripe product created: ${stripeProduct.id}`);
 
         // Create Stripe Prices dynamically
         let stripePrices = {};
@@ -51,7 +51,7 @@ router.post("/create-product", async (req, res) => {
                     metadata: { size, depth, reRing: "false" },
                 });
 
-                console.log(`✅ Created Stripe price: ${stripePrice.id} for ${size}, ${depth}`);
+                // console.log(`✅ Created Stripe price: ${stripePrice.id} for ${size}, ${depth}`);
                 stripePrices[`${size}_${depth}`] = stripePrice.id;
             }
         }
@@ -68,7 +68,7 @@ router.post("/create-product", async (req, res) => {
                     metadata: { size, depth, reRing: "true" },
                 });
 
-                console.log(`✅ Created Stripe price: ${stripePrice.id} for ${size}, ${depth} with ReRing`);
+                // console.log(`✅ Created Stripe price: ${stripePrice.id} for ${size}, ${depth} with ReRing`);
                 stripePrices[`${size}_${depth}_reRing`] = stripePrice.id;
             }
         }
@@ -87,7 +87,7 @@ router.post("/create-product", async (req, res) => {
         };
 
         const productRef = await db.collection("products").add(newProduct);
-        console.log(`✅ Product saved in Firestore with ID: ${productRef.id}`);
+        // console.log(`✅ Product saved in Firestore with ID: ${productRef.id}`);
 
         res.status(201).json({
             success: true,

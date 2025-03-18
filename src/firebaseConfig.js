@@ -85,7 +85,7 @@ export const fetchGalleryImages = async () => {
       galleryList.items.map((item) => getDownloadURL(item))
     );
 
-    console.log('Fetched Gallery Images:', imageUrls);
+    // console.log('Fetched Gallery Images:', imageUrls);
     return imageUrls;
   } catch (error) {
     console.error('Error fetching gallery images:', error);
@@ -122,7 +122,7 @@ export const createCart = async (userId) => {
   try {
     const cartRef = doc(db, 'carts', userId);
     await setDoc(cartRef, { items: [], createdAt: Timestamp.now() });
-    console.log(`Cart created for user: ${userId}`);
+    // console.log(`Cart created for user: ${userId}`);
     return userId;
   } catch (error) {
     console.error('Error creating cart:', error);
@@ -139,7 +139,7 @@ export const addItemToCart = async (userId, item) => {
   try {
     const cartRef = doc(db, 'carts', userId);
     await updateDoc(cartRef, { items: arrayUnion(item) });
-    console.log(`Item added to cart for user: ${userId}`, item);
+    // console.log(`Item added to cart for user: ${userId}`, item);
   } catch (error) {
     console.error('Error adding item to cart:', error);
     throw error;
@@ -175,7 +175,7 @@ export const saveOrder = async (orderData) => {
   try {
     const ordersRef = collection(db, 'orders');
     const orderDoc = await addDoc(ordersRef, { ...orderData, createdAt: Timestamp.now() });
-    console.log('Order saved with ID:', orderDoc.id);
+    // console.log('Order saved with ID:', orderDoc.id);
     return orderDoc.id;
   } catch (error) {
     console.error('Error saving order:', error);
@@ -191,7 +191,7 @@ export const clearCart = async (userId) => {
   try {
     const cartRef = doc(db, 'carts', userId);
     await deleteDoc(cartRef);
-    console.log(`Cart cleared for user: ${userId}`);
+    // console.log(`Cart cleared for user: ${userId}`);
   } catch (error) {
     console.error('Error clearing cart:', error);
     throw error;

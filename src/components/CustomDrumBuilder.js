@@ -141,14 +141,14 @@ const CustomDrumBuilder = () => {
       high: 0
     };
 
-    console.log("Starting full sound profile calculation...");
+    // console.log("Starting full sound profile calculation...");
 
     // Handle wood species separately
     specs.species.forEach((species) => {
       const woodData = woodSpecies.find(item => item.woodSpecies.includes(species));
       if (woodData) {
         const weighted = calculateWeightedProfile('Wood Species', woodData.soundProfile);
-        console.log('Wood Species Contribution:', weighted);
+        // console.log('Wood Species Contribution:', weighted);
         for (let key in profile) profile[key] += weighted[key];
         
         // Add frequency response for wood species
@@ -168,7 +168,7 @@ const CustomDrumBuilder = () => {
     // Add frequency response from drum depth
     if (depthData) {
       const weightedDepth = calculateWeightedProfile('Depth', depthData.soundProfile);
-      console.log('Depth Contribution:', weightedDepth);
+      // console.log('Depth Contribution:', weightedDepth);
       for (let key in profile) profile[key] += weightedDepth[key];
 
       if (depthData.frequencyResponse) {
@@ -181,7 +181,7 @@ const CustomDrumBuilder = () => {
     // Add frequency response from shell diameter
     if (widthData) {
       const weightedWidth = calculateWeightedProfile('Width', widthData.soundProfile);
-      console.log('Width Contribution:', weightedWidth);
+      // console.log('Width Contribution:', weightedWidth);
       for (let key in profile) profile[key] += weightedWidth[key];
 
       if (widthData.frequencyResponse) {
@@ -194,7 +194,7 @@ const CustomDrumBuilder = () => {
     // Add frequency response from shell thickness
     if (thicknessData) {
       const weightedThickness = calculateWeightedProfile('Shell Thickness', thicknessData.soundProfile);
-      console.log('Thickness Contribution:', weightedThickness);
+      // console.log('Thickness Contribution:', weightedThickness);
       for (let key in profile) profile[key] += weightedThickness[key];
 
       if (thicknessData.frequencyResponse) {
@@ -210,7 +210,7 @@ const CustomDrumBuilder = () => {
         const itemData = data.find(item => item[dataKeyForKey(key)] === specs[key]);
         if (itemData) {
           const weighted = calculateWeightedProfile(label, itemData.soundProfile);
-          console.log(`${label} Contribution:`, weighted);
+          // console.log(`${label} Contribution:`, weighted);
           for (let prop in profile) profile[prop] += weighted[prop];
 
           // Add frequency response for each category
@@ -252,8 +252,8 @@ const CustomDrumBuilder = () => {
     // Normalize frequency response data before applying it
     frequencyResponseData = normalizeFrequencyResponse(frequencyResponseData);
 
-    console.log("Final Calculated Sound Profile:", profile);
-    console.log("Final Frequency Response Data:", frequencyResponseData);
+    // console.log("Final Calculated Sound Profile:", profile);
+    // console.log("Final Frequency Response Data:", frequencyResponseData);
 
     setSoundProfile(profile);
     setFrequencyResponseData(frequencyResponseData);  // Store frequency response data for further use
