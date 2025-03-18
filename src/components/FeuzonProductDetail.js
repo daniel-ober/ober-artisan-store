@@ -518,12 +518,11 @@ const FeuzonProductDetail = () => {
         <h1>FEUZØN Series Snare Drum</h1>
   
         <div className="feuzon-product-content">
-          <div className="feuzon-product-image">
-            <img
+            <img 
+             className="feuzon-product-image"
               src="https://firebasestorage.googleapis.com/v0/b/danoberartisandrums-dev.firebasestorage.app/o/products%2F67c255d1-a9ca-4f5d-80af-ddeee6a424e1_IMG_6133.png?alt=media&token=a15b2e68-d34b-44fa-bf33-eccc4a025331"
               alt="FEUZON Snare Drum"
             />
-          </div>
   
           <div className="feuzon-product-options">
             {/* 📌 Default Features List */}

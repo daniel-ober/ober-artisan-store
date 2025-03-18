@@ -1,10 +1,14 @@
-/* 📌 Main Page Container - Slightly Widened for Better Balance */
+/* 📌 Main Page Container */
+.heritage-product-image {
+  width: 100%;
+}
+
 .heritage-product-detail {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 50px 25px;
-  max-width: 1500px; /* Increased from 1400px */
+  padding: 50px 50px;
+  max-width: 1500px;
   margin: 0 auto;
   box-sizing: border-box;
   background: #121212;
@@ -15,14 +19,14 @@
   font-size: 12px;
 }
 
-/* 🔄 Main Content Layout - Balanced for More Spacing */
+/* 🔄 Main Content Layout - Adjusted for Proper Balance */
 .heritage-product-content {
-  display: flex;
+  /* display: flex; */
   justify-content: space-between;
   align-items: flex-start;
   width: 100%;
-  gap: 60px; /* Increased from 50px */
-  max-width: 1300px; /* Increased from 1200px */
+  gap: 60px;
+  max-width: 1200px;
   box-sizing: border-box;
 }
 
@@ -48,52 +52,25 @@
   transform: scale(1.02);
 }
 
-/* 📌 Sound Profile Charts - More Space Below */
+/* 📌 Sound Profile Charts */
 .heritage-sound-charts {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 20px; /* Increased spacing between charts */
+  gap: 20px;
   margin-top: 25px;
 }
 
-/* 📌 Right Side: Features + Customization - Slightly Wider */
+/* 📌 Right Side: Features + Customization */
 .heritage-product-details {
   flex: 1;
-  max-width: 42%; /* Increased from 45% */
+  max-width: 42%;
   display: flex;
   flex-direction: column;
   gap: 25px;
 }
 
-/* 📌 Artisan Notes - Spaced Better */
-.artisan-notes {
-  padding: 18px;
-  border-radius: 6px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: white;
-  font-size: 14px;
-  line-height: 1.6; /* Increased line height for better readability */
-  box-sizing: border-box;
-}
-
-.artisan-notes h3 {
-  font-size: 18px;
-  margin-bottom: 10px;
-  color: #f0f0f0;
-  text-transform: uppercase;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  padding-bottom: 5px;
-}
-
-.artisan-notes p {
-  margin-bottom: 10px;
-  color: #ccc;
-  font-size: 14px;
-}
-
-/* 📌 Customization Panel - Adjusted for Better Layout */
+/* 📌 Customization Panel */
 .heritage-product-options {
   background: rgba(255, 255, 255, 0.08);
   padding: 22px;
@@ -103,6 +80,7 @@
   color: white;
   box-sizing: border-box;
   backdrop-filter: blur(8px);
+  margin-top:20px
 }
 
 /* 📌 Section Titles */
@@ -136,20 +114,28 @@
 
 /* 📌 Total Price Styling */
 .heritage-product-options .total-price {
-  font-size: 25px;
-  font-weight: 800;
-  /* color: #ffde08; */
+  font-size: 22px;
+  font-weight: bold;
+  margin-top: 14px;
+  color: #f0f0f0;
   text-align: center;
 }
 
-.heritage-add-to-cart-button {
+.heritage-detail-price {
+  font-size: 25px;
+  font-weight: 600;
+  color: #ffde08;
+  text-align: center;
+}
+
+.add-to-cart-button {
   background-color: #4135ea;
   color: rgb(255, 255, 255);
   font-size: 18px;
   font-weight: bold;
   padding: 12px 20px;
   /* border-radius: 8px; */
-  width: auto;
+  width: 100%;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
@@ -158,28 +144,45 @@
   background-color: rgb(43, 82, 255);
 }
 
-/* 📌 Add to Cart Button */
-.heritage-product-options button {
-  width: 100%;
-  padding: 4px;
-  font-size: 16px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  text-align: center;
-  margin-top: 12px;
-  /* background: linear-gradient(90deg, #ffcc00, #ff9900); */
+.notify-me-button {
+  background-color: #888;
   color: white;
+  font-size: 18px;
   font-weight: bold;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: not-allowed;
+  opacity: 0.7;
 }
 
-.heritage-product-options button:hover {
-  background: linear-gradient(90deg, #ff9900, #cc6600);
+.loading-button {
+  background-color: #ddd;
+  color: black;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
-/* 📌 Footer Adjustments - More Spacing */
+/* Grey out locked dropdowns */
+.disabled-dropdown {
+  background-color: #ddd !important;
+  color: #666 !important;
+  cursor: not-allowed;
+}
+
+/* Change Selection Button Flicker */
+@keyframes flicker {
+  0% { background-color: #ffcc00; }
+  50% { background-color: #ffaa00; }
+  100% { background-color: #ffcc00; }
+}
+
+/* 📌 Footer Adjustments */
 .footer {
-  margin-top: 40px; /* Increased spacing from the last section */
+  margin-top: 40px;
   padding: 20px;
   background: #181818;
   text-align: center;
@@ -189,54 +192,48 @@
 /* 📌 Responsive Adjustments */
 @media (max-width: 1024px) {
   .heritage-product-detail {
-    padding: 30px;
+      padding: 40px;
   }
 
   .heritage-product-content {
-    flex-direction: column;
-    align-items: center;
-    gap: 35px;
+      flex-direction: column;
+      align-items: center;
+      gap: 35px;
   }
 
   .heritage-product-visuals {
-    max-width: 100%;
+      max-width: 100%;
   }
 
   .heritage-product-details {
-    max-width: 100%;
+      max-width: 100%;
   }
 
   .heritage-sound-charts {
-    gap: 15px;
+      gap: 15px;
   }
 }
 
 @media (max-width: 768px) {
   .heritage-product-detail h1 {
-    font-size: 28px;
+      font-size: 28px;
   }
 
   .heritage-product-options {
-    padding: 18px;
+      padding: 18px;
   }
 
   .heritage-product-options h2 {
-    font-size: 20px;
+      font-size: 20px;
   }
 
   .heritage-product-options select {
-    font-size: 14px;
-    padding: 8px;
+      font-size: 14px;
+      padding: 8px;
   }
 
   .heritage-product-options button {
-    font-size: 15px;
-    padding: 12px;
-  }
-
-  .artisan-notes,
-  .heritage-product-options {
-    font-size: 14px;
-    padding: 14px;
+      font-size: 15px;
+      padding: 12px;
   }
 }

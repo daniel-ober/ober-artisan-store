@@ -12,7 +12,7 @@ const PreOrderCard = ({ product }) => {
   } else if (product.id === "heritage" || product.id === "feuzon") {
     buttonText = "Pre-Order Now";
   } else if (product.id === "soundlegend") {
-    buttonText = "Request Consultation";
+    buttonText = "Learn More";
   } else {
     buttonText = "Pre-Order Now";
   }

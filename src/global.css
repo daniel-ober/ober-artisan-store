@@ -48,7 +48,7 @@ body.light .preorder-button {
   /* background-color: #b65454 !important; */
   color: white !important;
   border: none !important;
-  width: auto;
+  /* width: auto; */
 }
 
 body.light .preorder-button:hover {
