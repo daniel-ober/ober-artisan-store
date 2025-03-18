@@ -12,9 +12,9 @@ if (!admin.apps.length) {
 const checkUserClaims = async (uid) => {
   try {
     const user = await admin.auth().getUser(uid);
-    console.log('User Claims:', user.customClaims);
+    // console.log('User Claims:', user.customClaims);
   } catch (error) {
-    console.error('Error fetching user:', error);
+    // console.error('Error fetching user:', error);
   }
 };
 
