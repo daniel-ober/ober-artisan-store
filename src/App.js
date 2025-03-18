@@ -153,9 +153,9 @@ function App() {
         <Route path="/account" element={<PrivateRoute element={<AccountPage />} />} />
         <Route path="/admin" element={<PrivateRoute element={<AdminDashboard />} adminOnly />} />
         <Route path="/admin/update-carts" element={<UpdateCartsPage />} />
-        <Route path="/signin" element={user ? <Navigate to="/account" /> : <SignInEmail />} />
-        <Route path="/register" element={user ? <Navigate to="/account" /> : <Register />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
+        {/* <Route path="/signin" element={user ? <Navigate to="/account" /> : <SignInEmail />} /> */}
+        {/* <Route path="/register" element={user ? <Navigate to="/account" /> : <Register />} /> */}
+        {/* <Route path="/forgot-password" element={<ForgotPassword />} /> */}
         <Route path="/admin-signin" element={<AdminSignin />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/checkout-summary" element={<CheckoutSummary />} />

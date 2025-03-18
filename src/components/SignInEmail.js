@@ -68,12 +68,12 @@ const SignInEmail = () => {
         </form>
         {/* Forgot Password and Register Here links */}
         <Box mt={2} display="flex" justifyContent="space-between">
-          <Link href="/forgot-password" variant="body2">
+          {/* <Link href="/forgot-password" variant="body2">
             Forgot password?
           </Link>
           <Link href="/register" variant="body2">
             Don&apos;t have an account? Register here
-          </Link>
+          </Link> */}
         </Box>
       </Box>
     </Container>
