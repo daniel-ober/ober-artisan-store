@@ -320,7 +320,7 @@ const HeritageProductDetail = () => {
             <p className="feuzon-detail-price">${totalPrice}</p>
             <p className="delivery-time">Est Delivery: 5-7 weeks</p>
           {/* Add to Cart */}
-          <button className="heritage-add-to-cart-button" onClick={handleAddToCart}>Add to Cart</button>
+          <button className="add-to-cart-button" onClick={handleAddToCart}>Add to Cart</button>
         </div>
       </div>
 
