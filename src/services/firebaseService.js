@@ -24,12 +24,12 @@ export const fetchProducts = async () => {
     if (productSnapshot.empty) {
       console.warn('No products found in Firestore.');
     } else {
-      console.log('Fetched product documents:', productSnapshot.size);
+      // console.log('Fetched product documents:', productSnapshot.size);
     }
 
     const products = productSnapshot.docs.map((doc) => {
       const productData = doc.data();
-      console.log(`Product ID: ${doc.id}`, productData);  // Log each product
+      // console.log(`Product ID: ${doc.id}`, productData);  // Log each product
       return {
         id: doc.id,
         ...productData,
@@ -51,7 +51,7 @@ export const fetchProducts = async () => {
 export const deleteProduct = async (productId) => {
   const productRef = doc(db, 'products', productId);
   await deleteDoc(productRef);
-  console.log(`Product deleted successfully: ${productId}`);
+  // console.log(`Product deleted successfully: ${productId}`);
 };
 
 /**
@@ -76,7 +76,7 @@ export const deleteImage = async (imageUrl) => {
     const storagePath = decodeURIComponent(imageUrl.split('/o/')[1].split('?')[0]);
     const imageRef = ref(storage, storagePath);
     await deleteObject(imageRef);
-    console.log(`Image deleted successfully: ${imageUrl}`);
+    // console.log(`Image deleted successfully: ${imageUrl}`);
   } catch (error) {
     console.error(`Error deleting image: ${error.message}`);
     throw new Error('Failed to delete image from Firebase Storage');

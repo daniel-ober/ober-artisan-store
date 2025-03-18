@@ -27,7 +27,7 @@ const EmailSMSPreferences = () => {
 
   const handleSaveChanges = () => {
     // Add the logic to save preferences, e.g., update the database.
-    console.log('Saved preferences:', preferences);
+    // console.log('Saved preferences:', preferences);
     alert('Preferences saved successfully!');
   };
 

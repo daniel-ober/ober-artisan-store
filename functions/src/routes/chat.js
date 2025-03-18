@@ -9,7 +9,7 @@ const router = express.Router();
 // Retrieve OpenAI API key
 const openaiKey = process.env.OPENAI_API_KEY || functions.config()?.openai?.key;
 
-console.log("🔍 OpenAI API Key Loaded:", openaiKey ? "✅ YES" : "❌ NO");
+// console.log("🔍 OpenAI API Key Loaded:", openaiKey ? "✅ YES" : "❌ NO");
 
 if (!openaiKey) {
     console.error("❌ OpenAI API Key Missing");

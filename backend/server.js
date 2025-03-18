@@ -1,7 +1,7 @@
 require('dotenv').config({ path: `.env.${process.env.NODE_ENV}` });
 
-console.log('NODE_ENV:', process.env.NODE_ENV);
-console.log('Loaded STRIPE_SECRET_KEY:', process.env.STRIPE_SECRET_KEY);
+// console.log('NODE_ENV:', process.env.NODE_ENV);
+// console.log('Loaded STRIPE_SECRET_KEY:', process.env.STRIPE_SECRET_KEY);
 
 const express = require('express');
 const cors = require('cors');
@@ -25,7 +25,7 @@ requiredEnvVars.forEach((key) => {
 
 // Determine the environment (dev, stg, prod)
 const env = process.env.NODE_ENV || 'dev';
-console.log(`Using Firebase environment: ${env}`);
+// console.log(`Using Firebase environment: ${env}`);
 
 // Load the correct service account key
 let serviceAccount;
@@ -34,9 +34,9 @@ try {
     __dirname,
     `./serviceAccountKey-${env}.json`
   );
-  console.log(
-    `Loading Firebase Service Account Key from: ${serviceAccountPath}`
-  );
+  // console.log(
+  //   `Loading Firebase Service Account Key from: ${serviceAccountPath}`
+  // );
   serviceAccount = require(serviceAccountPath);
 } catch (error) {
   console.error(`Failed to load service account key for environment: ${env}`);
@@ -52,9 +52,9 @@ if (!admin.apps.length) {
 }
 
 const db = admin.firestore();
-console.log(
-  `Firestore initialized for project: ${process.env.FIREBASE_PROJECT_ID}`
-);
+// console.log(
+//   `Firestore initialized for project: ${process.env.FIREBASE_PROJECT_ID}`
+// );
 
 const app = express();
 
@@ -121,12 +121,12 @@ app.post(
       return res.status(400).send(`Webhook Error: ${err.message}`);
     }
 
-    console.log(`Received Stripe event: ${event.type}`);
+    // console.log(`Received Stripe event: ${event.type}`);
 
     if (event.type === 'checkout.session.completed') {
       const session = event.data.object;
 
-      console.log('Checkout session completed:', session);
+      // console.log('Checkout session completed:', session);
 
       // Fetch line items for the session
       const lineItems = await stripe.checkout.sessions.listLineItems(
@@ -153,7 +153,7 @@ app.post(
             }
           );
 
-          console.log('Fetched Payment Intent:', paymentIntent);
+          // console.log('Fetched Payment Intent:', paymentIntent);
 
           if (
             paymentIntent.payment_method &&
@@ -180,7 +180,7 @@ app.post(
         console.error('Payment intent ID is missing in session');
       }
 
-      console.log('Card Details Fetched:', cardDetails);
+      // console.log('Card Details Fetched:', cardDetails);
 
       // Update product quantities in Firestore
       try {
@@ -207,9 +207,9 @@ app.post(
             console.warn(`Insufficient stock for product "${item.name}".`);
           } else {
             await productDoc.ref.update({ currentQuantity: newQuantity });
-            console.log(
-              `Updated quantity for product "${item.name}" to ${newQuantity}.`
-            );
+            // console.log(
+            //   `Updated quantity for product "${item.name}" to ${newQuantity}.`
+            // );
           }
         }
       } catch (error) {
@@ -239,7 +239,7 @@ app.post(
         createdAt: admin.firestore.FieldValue.serverTimestamp(), // Firestore timestamp
       };
 
-      console.log('Order Data Prepared:', orderData);
+      // console.log('Order Data Prepared:', orderData);
 
       try {
         // Generate custom ID
@@ -248,7 +248,7 @@ app.post(
         // Save the order to Firestore
         const orderRef = db.collection('orders').doc(customId); // Use custom ID as document ID
         await orderRef.set(orderData);
-        console.log('Order successfully saved to Firestore with ID:', customId);
+        // console.log('Order successfully saved to Firestore with ID:', customId);
 
         res.status(200).send('Event processed successfully');
       } catch (error) {
@@ -256,7 +256,7 @@ app.post(
         res.status(500).send('Internal Server Error');
       }
     } else {
-      console.log(`Unhandled event type: ${event.type}`);
+      // console.log(`Unhandled event type: ${event.type}`);
       res.status(200).send('Event received');
     }
   }
@@ -388,5 +388,5 @@ app.use((err, req, res, next) => {
 // Start the server, default to port for local dev, but use PORT for cloud environments like Cloud Run
 const PORT = process.env.PORT || 8080; // Make sure this is set to 8080 for Cloud Run
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  // console.log(`Server is running on port ${PORT}`);
 });

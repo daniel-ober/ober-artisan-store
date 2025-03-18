@@ -8,14 +8,14 @@ import { db } from '../firebaseConfig';
  */
 export const fetchUserDoc = async (userId) => {
     try {
-        console.log('🔍 Fetching Firestore User Data for UID:', userId);
+        // console.log('🔍 Fetching Firestore User Data for UID:', userId);
         
         const userDocRef = doc(db, 'users', userId);
         const userDocSnap = await getDoc(userDocRef);
 
         if (userDocSnap.exists()) {
             const userData = userDocSnap.data();
-            console.log('✅ Firestore User Data:', userData);
+            // console.log('✅ Firestore User Data:', userData);
             
             if (!Object.prototype.hasOwnProperty.call(userData, 'isAdmin')) {
                 console.warn(`⚠️ User ${userId} does not have an 'isAdmin' field.`);
@@ -23,11 +23,11 @@ export const fetchUserDoc = async (userId) => {
             
             return userData;
         } else {
-            console.error('❌ No user document found for userId:', userId);
+            // console.error('❌ No user document found for userId:', userId);
             return null;
         }
     } catch (error) {
-        console.error('❌ Error fetching user document:', error);
+        // console.error('❌ Error fetching user document:', error);
         return null;
     }
 };
@@ -40,14 +40,14 @@ export const fetchUserDoc = async (userId) => {
  */
 export const updateUserInFirestore = async (userId, updatedData) => {
     try {
-        console.log(`🔄 Updating Firestore User: ${userId} with Data:`, updatedData);
+        // console.log(`🔄 Updating Firestore User: ${userId} with Data:`, updatedData);
 
         const userRef = doc(db, 'users', userId);
         await updateDoc(userRef, updatedData);
 
-        console.log('✅ User successfully updated in Firestore.');
+        // console.log('✅ User successfully updated in Firestore.');
     } catch (error) {
-        console.error('❌ Error updating user in Firestore:', error);
+        // console.error('❌ Error updating user in Firestore:', error);
         throw error;
     }
 };
@@ -58,16 +58,16 @@ export const updateUserInFirestore = async (userId, updatedData) => {
  */
 export const fetchUsers = async () => {
     try {
-        console.log('🔍 Fetching all users from Firestore...');
+        // console.log('🔍 Fetching all users from Firestore...');
         
         const usersRef = collection(db, 'users');
         const snapshot = await getDocs(usersRef);
         const users = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 
-        console.log(`✅ Fetched ${users.length} users.`);
+        // console.log(`✅ Fetched ${users.length} users.`);
         return users;
     } catch (error) {
-        console.error('❌ Error fetching users:', error);
+        // console.error('❌ Error fetching users:', error);
         throw error;
     }
 };
@@ -80,7 +80,7 @@ export const fetchUsers = async () => {
  */
 export const ensureAdminField = async (userId) => {
     try {
-        console.log(`🔍 Checking if user ${userId} has 'isAdmin' field...`);
+        // console.log(`🔍 Checking if user ${userId} has 'isAdmin' field...`);
         
         const userDocRef = doc(db, 'users', userId);
         const userDocSnap = await getDoc(userDocRef);
@@ -91,15 +91,15 @@ export const ensureAdminField = async (userId) => {
             if (!Object.prototype.hasOwnProperty.call(userData, 'isAdmin')) {
                 console.warn(`⚠️ User ${userId} missing 'isAdmin' field. Updating Firestore...`);
                 await updateDoc(userDocRef, { isAdmin: false });
-                console.log(`✅ 'isAdmin' field set to false for user ${userId}`);
+                // console.log(`✅ 'isAdmin' field set to false for user ${userId}`);
             } else {
-                console.log(`✅ User ${userId} already has 'isAdmin':`, userData.isAdmin);
+                // console.log(`✅ User ${userId} already has 'isAdmin':`, userData.isAdmin);
             }
         } else {
-            console.error(`❌ User ${userId} does not exist in Firestore.`);
+            // console.error(`❌ User ${userId} does not exist in Firestore.`);
         }
     } catch (error) {
-        console.error('❌ Error checking/updating isAdmin field:', error);
+        // console.error('❌ Error checking/updating isAdmin field:', error);
     }
 };
 
@@ -110,14 +110,14 @@ export const ensureAdminField = async (userId) => {
  */
 export const grantAdminAccess = async (userId) => {
     try {
-        console.log(`🚀 Granting admin access to user ${userId}...`);
+        // console.log(`🚀 Granting admin access to user ${userId}...`);
         
         const userRef = doc(db, 'users', userId);
         await updateDoc(userRef, { isAdmin: true });
 
-        console.log(`✅ User ${userId} is now an admin.`);
+        // console.log(`✅ User ${userId} is now an admin.`);
     } catch (error) {
-        console.error(`❌ Error granting admin access to ${userId}:`, error);
+        // console.error(`❌ Error granting admin access to ${userId}:`, error);
     }
 };
 
@@ -128,13 +128,13 @@ export const grantAdminAccess = async (userId) => {
  */
 export const revokeAdminAccess = async (userId) => {
     try {
-        console.log(`🚫 Revoking admin access for user ${userId}...`);
+        // console.log(`🚫 Revoking admin access for user ${userId}...`);
         
         const userRef = doc(db, 'users', userId);
         await updateDoc(userRef, { isAdmin: false });
 
-        console.log(`✅ User ${userId} is no longer an admin.`);
+        // console.log(`✅ User ${userId} is no longer an admin.`);
     } catch (error) {
-        console.error(`❌ Error revoking admin access for ${userId}:`, error);
+        // console.error(`❌ Error revoking admin access for ${userId}:`, error);
     }
 };

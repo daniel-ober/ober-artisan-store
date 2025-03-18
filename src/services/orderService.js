@@ -24,7 +24,7 @@ router.post("/", express.raw({ type: "application/json" }), async (req, res) => 
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }
 
-  console.log(`📢 Received Stripe event: ${event.type}`);
+  // console.log(`📢 Received Stripe event: ${event.type}`);
 
   try {
     if (event.type === "checkout.session.completed") {
@@ -42,7 +42,7 @@ router.post("/", express.raw({ type: "application/json" }), async (req, res) => 
         quantity: item.quantity,
       }));
 
-      console.log("🛒 Extracted Ordered Items:", orderedItems);
+      // console.log("🛒 Extracted Ordered Items:", orderedItems);
 
       // Prepare order data
       const orderData = {
@@ -72,13 +72,13 @@ router.post("/", express.raw({ type: "application/json" }), async (req, res) => 
         ],
       };
 
-      console.log("📦 Order Data Prepared:", orderData);
+      // console.log("📦 Order Data Prepared:", orderData);
 
       const db = admin.firestore();
 
       // Save the order in Firestore
       await db.collection("orders").doc(session.id).set(orderData);
-      console.log("✅ Order successfully saved to Firestore with ID:", session.id);
+      // console.log("✅ Order successfully saved to Firestore with ID:", session.id);
 
       // **Update Inventory for Each Product**
       const batch = db.batch();
@@ -102,7 +102,7 @@ router.post("/", express.raw({ type: "application/json" }), async (req, res) => 
         const currentStock = productData.currentQuantity || 0;
         const newStock = Math.max(0, currentStock - item.quantity);
 
-        console.log(`🔄 Updating stock for ${productData.name} (${item.productId}): ${currentStock} -> ${newStock}`);
+        // console.log(`🔄 Updating stock for ${productData.name} (${item.productId}): ${currentStock} -> ${newStock}`);
 
         batch.update(productRef, { currentQuantity: newStock });
       }
@@ -110,20 +110,20 @@ router.post("/", express.raw({ type: "application/json" }), async (req, res) => 
       // Clear the User's Cart if it's not a guest
       if (orderData.userId !== "guest") {
         const cartRef = db.collection("carts").doc(orderData.userId);
-        console.log(`🛒 Clearing cart for user: ${orderData.userId}`);
+        // console.log(`🛒 Clearing cart for user: ${orderData.userId}`);
         batch.delete(cartRef);
       }
 
       // Commit Firestore batch
       try {
         await batch.commit();
-        console.log("✅ Firestore Batch Commit Successful!");
+        // console.log("✅ Firestore Batch Commit Successful!");
       } catch (err) {
         console.error("❌ Firestore Batch Commit Failed:", err.message);
       }
 
     } else {
-      console.log(`ℹ️ Unhandled event type: ${event.type}`);
+      // console.log(`ℹ️ Unhandled event type: ${event.type}`);
     }
   } catch (err) {
     console.error("❌ Error processing webhook event:", err.message);

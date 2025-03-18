@@ -6,7 +6,7 @@ export const checkAuthentication = () => {
   const user = auth.currentUser;
 
   if (user) {
-    console.log('User is authenticated:', user);
+    // console.log('User is authenticated:', user);
     return user;
   } else {
     // console.log('No user is authenticated');

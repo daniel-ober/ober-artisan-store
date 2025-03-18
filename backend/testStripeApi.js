@@ -2,7 +2,7 @@
 require('dotenv').config({ path: `.env.dev` });
 
 // Log to confirm the key is being loaded
-console.log('Loaded Stripe Key:', process.env.STRIPE_SECRET_KEY);
+// console.log('Loaded Stripe Key:', process.env.STRIPE_SECRET_KEY);
 
 // Import Stripe library
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
@@ -10,7 +10,7 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 // Function to fetch line items and card details for a given session ID
 async function testFetchLineItems(sessionId) {
   try {
-    console.log('Fetching line items for session ID:', sessionId);
+    // console.log('Fetching line items for session ID:', sessionId);
 
     // Step 1: Fetch the checkout session
     const session = await stripe.checkout.sessions.retrieve(sessionId);
@@ -20,14 +20,14 @@ async function testFetchLineItems(sessionId) {
       expand: ['data.price.product'],
     });
 
-    console.log('Fetched Line Items:');
+    // console.log('Fetched Line Items:');
     lineItems.data.forEach((item) => {
-      console.log('Item Details:');
-      console.log('  - Name:', item.price.product.name);
-      console.log('  - Description:', item.price.product.description);
-      console.log('  - Quantity:', item.quantity);
-      console.log('  - Unit Price:', item.price.unit_amount / 100, item.price.currency.toUpperCase());
-      console.log('  - Total Amount:', item.amount_total / 100, item.currency.toUpperCase());
+      // console.log('Item Details:');
+      // console.log('  - Name:', item.price.product.name);
+      // console.log('  - Description:', item.price.product.description);
+      // console.log('  - Quantity:', item.quantity);
+      // console.log('  - Unit Price:', item.price.unit_amount / 100, item.price.currency.toUpperCase());
+      // console.log('  - Total Amount:', item.amount_total / 100, item.currency.toUpperCase());
     });
 
     // Step 3: Retrieve payment intent details to get card info
@@ -35,11 +35,11 @@ async function testFetchLineItems(sessionId) {
       const paymentIntent = await stripe.paymentIntents.retrieve(session.payment_intent);
       const paymentMethod = await stripe.paymentMethods.retrieve(paymentIntent.payment_method);
 
-      console.log('Card Details:');
-      console.log('  - Brand:', paymentMethod.card.brand);
-      console.log('  - Last Four:', paymentMethod.card.last4);
+      // console.log('Card Details:');
+      // console.log('  - Brand:', paymentMethod.card.brand);
+      // console.log('  - Last Four:', paymentMethod.card.last4);
     } else {
-      console.log('No payment_intent associated with this session.');
+      // console.log('No payment_intent associated with this session.');
     }
   } catch (error) {
     console.error('Error:', error.message);

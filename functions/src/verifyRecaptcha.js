@@ -24,7 +24,7 @@ exports.verifyRecaptcha = functions.https.onRequest(async (req, res) => {
     const verificationResult = await response.json();
     
     // Debugging log to check the response from Google
-    console.log("reCAPTCHA Verification Result:", verificationResult); // Added this line for debugging
+    // console.log("reCAPTCHA Verification Result:", verificationResult); // Added this line for debugging
     
     if (verificationResult.success) {
       return res.status(200).json({ success: true });

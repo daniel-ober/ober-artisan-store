@@ -14,7 +14,7 @@ const CheckUserClaims = async () => {
       return null; // Return null in case of error
     }
   } else {
-    console.log('No user is signed in.');
+    // console.log('No user is signed in.');
     return null; // Return null if no user is signed in
   }
 };

@@ -19,7 +19,7 @@ const ManageSoundlegendRequests = () => {
   useEffect(() => {
     const fetchSubmissions = async () => {
       try {
-        console.log("📥 Fetching SoundLegend Submissions...");
+        // console.log("📥 Fetching SoundLegend Submissions...");
         const submissionsRef = collection(db, "soundlegend_submissions");
         const querySnapshot = await getDocs(submissionsRef);
 

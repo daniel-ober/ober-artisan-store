@@ -13,7 +13,7 @@ const Products = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        console.log("📥 Fetching active products...");
+        // console.log("📥 Fetching active products...");
 
         // Firestore query: Only fetch products where status is "active"
         const productsRef = collection(db, "products");

@@ -58,7 +58,7 @@ const HeritageProductDetail = () => {
       const safeQuantity = Math.max(0, newQuantity); // Prevents negative values
       const productRef = doc(db, 'products', 'heritage');
       await updateDoc(productRef, { currentQuantity: safeQuantity });
-      console.log('✅ Heritage stock updated in Firestore:', safeQuantity);
+      // console.log('✅ Heritage stock updated in Firestore:', safeQuantity);
     } catch (error) {
       console.error('❌ Error updating stock in Firestore:', error);
     }

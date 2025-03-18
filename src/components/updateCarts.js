@@ -10,12 +10,12 @@ const updateCarts = async () => {
       const cartData = cartDoc.data();
 
       if (!cartData.userId) {
-        console.log(`Updating cart ${cartDoc.id} with default userId`);
+        // console.log(`Updating cart ${cartDoc.id} with default userId`);
         await updateDoc(cartDoc.ref, { userId: "guest" });
       }
     });
 
-    console.log("Finished updating carts.");
+    // console.log("Finished updating carts.");
   } catch (error) {
     console.error("Error updating carts:", error);
   }

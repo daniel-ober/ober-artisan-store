@@ -14,7 +14,7 @@ const PrivateRoute = ({ element, adminOnly = false, redirectAuthenticated = fals
   }
 
   if (!user && !redirectAuthenticated) {
-    console.log("User not authenticated - Redirecting to Sign In");
+    // console.log("User not authenticated - Redirecting to Sign In");
     return <Navigate to="/signin" />;
   }
 
