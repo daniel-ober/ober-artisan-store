@@ -21,14 +21,14 @@ admin.initializeApp({
 const checkUserRole = async (uid) => {
   try {
     const user = await admin.auth().getUser(uid);
-    console.log('User data:', user.toJSON());
+    // console.log('User data:', user.toJSON());
     if (user.customClaims) {
-      console.log('Custom claims:', user.customClaims);
+      // console.log('Custom claims:', user.customClaims);
     } else {
-      console.log('No custom claims found.');
+      // console.log('No custom claims found.');
     }
   } catch (error) {
-    console.error('Error fetching user data:', error);
+    // console.error('Error fetching user data:', error);
   }
 };
 
