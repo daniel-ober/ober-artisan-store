@@ -14,7 +14,6 @@ const CheckoutSummary = () => {
   const [inventoryUpdated, setInventoryUpdated] = useState(false); // ✅ Prevent duplicate stock updates
 
   // ✅ Debugging Log: Ensure API URL is correctly loaded
-  console.log("🌍 API Base URL:", process.env.REACT_APP_API_URL);
 
   useEffect(() => {
     const fetchOrderDetails = async () => {

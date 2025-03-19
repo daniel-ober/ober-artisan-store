@@ -8,7 +8,6 @@ import { db } from '../firebaseConfig';
 import './Cart.css';
 
 // ✅ Debugging: Log Stripe Key to ensure it's being loaded
-console.log("🔑 Stripe Publishable Key:", process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
 const stripePromise = loadStripe(`${process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY}`);
 
@@ -19,10 +18,6 @@ const Cart = () => {
   const [shippingEstimate, setShippingEstimate] = useState(0);
   const [unavailableProducts, setUnavailableProducts] = useState([]);
   const [showModal, setShowModal] = useState(false);
-
-  console.log('🛒 Cart from Context:', cart);
-  console.log('🆔 Cart ID:', cartId);
-  console.log("🌍 API Base URL:", process.env.REACT_APP_API_URL); // ✅ Debugging Log
 
   useEffect(() => {
     const checkInventory = async () => {
