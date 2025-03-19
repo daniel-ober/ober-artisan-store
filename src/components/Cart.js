@@ -103,9 +103,6 @@ const Cart = () => {
         stripePriceId: product.stripePriceId,
       }));
 
-      console.log("📡 Sending Checkout Request to:", process.env.REACT_APP_API_URL);
-      console.log("🛒 Cart Payload:", JSON.stringify({ products: productsPayload, userId: user?.uid || cartId }, null, 2));
-
       const response = await fetch(`${process.env.REACT_APP_API_URL}/createCheckoutSession`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
