@@ -334,19 +334,28 @@ app.post('/api/createCheckoutSession', async (req, res) => {
       mode: 'payment',
       success_url: `${process.env.CLIENT_URL}/checkout-summary?session_id={CHECKOUT_SESSION_ID}&guest_token=${guestToken}`,
       cancel_url: `${process.env.CLIENT_URL}/cart`,
-      
+    
+      // ✅ Collect customer email (for guest users)
+      customer_email: customerEmail,
+    
+      // ✅ Enable collection of shipping address
+      shipping_address_collection: {
+        allowed_countries: ['US', 'CA', 'GB'], // Add more countries if needed
+      },
+    
+      // ✅ Allow customers to enter promo codes
+      allow_promotion_codes: true,
+    
+      // ✅ Store extra metadata for reference
       metadata: {
         userId: userId || 'guest',
         guestToken,
-        customerFirstName,
-        customerLastName,
-        customerEmail,
+        customerFirstName: customerFirstName || 'Guest',
+        customerLastName: customerLastName || '',
+        customerEmail: customerEmail || '',
         customerPhone: customerPhone || 'No phone provided',
         shippingAddress: JSON.stringify(shippingAddress || {}),
       },
-      customer_email: customerEmail,
-      shipping_address_collection: { allowed_countries: ['US', 'CA'] },
-      allow_promotion_codes: true,
     });
 
     res.status(200).json({ url: session.url, id: session.id, guestToken });
