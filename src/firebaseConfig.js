@@ -15,12 +15,11 @@ import {
 } from 'firebase/firestore';
 import { getStorage, ref, listAll, getDownloadURL } from 'firebase/storage';
 
-// Debug: Log environment variables before Firebase initializes
-console.log("🔥 Loading Firebase Configuration...");
-console.log("REACT_APP_ENV:", process.env.REACT_APP_ENV);
-console.log("REACT_APP_FIREBASE_PROJECT_ID:", process.env.REACT_APP_FIREBASE_PROJECT_ID);
+// ✅ Log environment details ONLY in development mode
+if (process.env.NODE_ENV === 'development') {
+}
 
-// Firebase configurations for different environments
+// Firebase configuration
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
@@ -31,7 +30,7 @@ const firebaseConfig = {
   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 };
 
-// Validate Firebase config
+// Validate Firebase configuration
 if (!firebaseConfig.projectId) {
   console.error("🚨 ERROR: Firebase 'projectId' is missing! Check your environment variables.");
   throw new Error('Firebase configuration is missing the "projectId" value.');
@@ -41,26 +40,24 @@ if (!firebaseConfig.projectId) {
 const app = initializeApp(firebaseConfig);
 const analytics = firebaseConfig.measurementId ? getAnalytics(app) : null;
 
+// ✅ Log Firebase initialization ONLY in development mode
+if (process.env.NODE_ENV === 'development') {
+  // console.log("✅ Firebase Initialized with Project ID:", firebaseConfig.projectId);
+}
+
+// Firestore, Auth, Storage exports
 export const db = getFirestore(app);
 export const auth = getAuth(app);
 export const storage = getStorage(app);
 export const signOut = firebaseSignOut;
 
-// ✅ Debugging: Ensure Firebase is initialized correctly
-console.log("✅ Firebase Initialized with Project ID:", firebaseConfig.projectId);
-
-// Utility Functions
+// 🚀 Utility Functions
 
 export const fetchGalleryImages = async () => {
   try {
     const galleryRef = ref(storage, 'Gallery/');
     const galleryList = await listAll(galleryRef);
-
-    const imageUrls = await Promise.all(
-      galleryList.items.map((item) => getDownloadURL(item))
-    );
-
-    return imageUrls;
+    return await Promise.all(galleryList.items.map((item) => getDownloadURL(item)));
   } catch (error) {
     console.error('❌ Error fetching gallery images:', error);
     throw error;
@@ -131,4 +128,5 @@ export const clearCart = async (userId) => {
   }
 };
 
+// ✅ Export Firebase app instance
 export { app };
