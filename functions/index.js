@@ -2,13 +2,84 @@ const { onRequest } = require("firebase-functions/v2/https");
 const { defineSecret } = require("firebase-functions/params");
 const admin = require("firebase-admin");
 const axios = require("axios");
+const stripeLib = require("stripe");
 
+// ✅ Define Secrets
+const STRIPE_SECRET_KEY = defineSecret("STRIPE_SECRET_KEY");
+const PRINTIFY_API_KEY = defineSecret("PRINTIFY_API_KEY");
+
+// ✅ Initialize Firebase
 admin.initializeApp();
 
-const PRINTIFY_SHOP_ID = "20308920";
-const PRINTIFY_API_KEY = defineSecret("PRINTIFY_API_KEY");
-const STRIPE_SECRET_KEY = defineSecret("STRIPE_SECRET_KEY");
+// ✅ Allowed Frontend Origins for CORS
+const allowedOrigins = [
+  "https://oberartisandrums.com",
+  "https://danoberartisandrums.web.app"
+];
 
+// ✅ Stripe Checkout Session Creation (Fixed CORS)
+exports.createCheckoutSession = onRequest(
+  { region: "us-central1", secrets: [STRIPE_SECRET_KEY] },
+  async (req, res) => {
+    // Handle CORS preflight request (OPTIONS method)
+    if (req.method === "OPTIONS") {
+      res.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+      res.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
+
+      if (allowedOrigins.includes(req.headers.origin)) {
+        res.set("Access-Control-Allow-Origin", req.headers.origin);
+      }
+      return res.status(204).send("");
+    }
+
+    try {
+      // Retrieve Stripe Secret Key
+      const stripeKey = STRIPE_SECRET_KEY.value();
+      const stripe = stripeLib(stripeKey);
+
+      const { products, userId } = req.body || {};
+
+      if (!products || !Array.isArray(products) || products.length === 0) {
+        return res.status(400).json({ error: "Invalid or empty cart." });
+      }
+
+      const lineItems = products.map((product) => ({
+        price_data: {
+          currency: "usd",
+          product_data: { name: product.name },
+          unit_amount: Math.round(product.price * 100),
+        },
+        quantity: product.quantity,
+      }));
+
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ["card"],
+        mode: "payment",
+        line_items: lineItems,
+        success_url: `https://oberartisandrums.com/success?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `https://oberartisandrums.com/cart`,
+        metadata: { userId: userId || "guest" },
+      });
+
+      console.log("✅ Stripe Checkout Session Created:", session.id);
+
+      if (allowedOrigins.includes(req.headers.origin)) {
+        res.set("Access-Control-Allow-Origin", req.headers.origin);
+      }
+
+      return res.status(200).json({ url: session.url });
+    } catch (error) {
+      console.error("❌ Error Creating Stripe Checkout Session:", error);
+
+      if (allowedOrigins.includes(req.headers.origin)) {
+        res.set("Access-Control-Allow-Origin", req.headers.origin);
+      }
+      return res.status(500).json({ error: error.message });
+    }
+  }
+);
+
+// ✅ Printify Webhook Listener
 exports.printifyWebhookListener = onRequest(
   { region: "us-central1", secrets: [PRINTIFY_API_KEY, STRIPE_SECRET_KEY] },
   async (req, res) => {
@@ -30,8 +101,8 @@ exports.printifyWebhookListener = onRequest(
 
       // console.log(`✅ Product ${productId} is being published. Creating Stripe product...`);
 
-      const apiKey = STRIPE_SECRET_KEY.value();
-      if (!apiKey) {
+      const stripeKey = STRIPE_SECRET_KEY.value();
+      if (!stripeKey) {
         console.error("❌ Missing Stripe API Key.");
         return res.status(500).send("Server misconfiguration: Missing Stripe API Key.");
       }
@@ -60,7 +131,7 @@ exports.printifyWebhookListener = onRequest(
         }),
         {
           headers: {
-            Authorization: `Bearer ${apiKey}`,
+            Authorization: `Bearer ${stripeKey}`,
             "Content-Type": "application/x-www-form-urlencoded",
           },
         }
@@ -69,17 +140,17 @@ exports.printifyWebhookListener = onRequest(
       const stripeProduct = stripeResponse.data;
       // console.log("✅ Created Stripe Product:", stripeProduct);
 
-      // Create price in Stripe (assuming only one price for now)
+      // Create price in Stripe
       const stripePriceResponse = await axios.post(
         "https://api.stripe.com/v1/prices",
         new URLSearchParams({
-          unit_amount: (product.variants[0].price * 100).toString(), // Stripe uses cents
+          unit_amount: (product.variants[0].price * 100).toString(),
           currency: "usd",
           product: stripeProduct.id,
         }),
         {
           headers: {
-            Authorization: `Bearer ${apiKey}`,
+            Authorization: `Bearer ${stripeKey}`,
             "Content-Type": "application/x-www-form-urlencoded",
           },
         }
@@ -110,6 +181,7 @@ exports.printifyWebhookListener = onRequest(
     }
   }
 );
+<<<<<<< HEAD
 
 // ✅ Restored createPrintifyOrder function
 exports.createPrintifyOrder = onRequest(
@@ -151,3 +223,5 @@ exports.createPrintifyOrder = onRequest(
     }
   }
 );
+=======
+>>>>>>> 171bfa47 (WORKING PRODUCTION SITE WITH STRIPE CHECKOUTgit status)

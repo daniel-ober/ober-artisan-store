@@ -1,7 +1,12 @@
-require('dotenv').config({ path: `.env.${process.env.NODE_ENV}` });
+require('dotenv').config({ path: __dirname + '/.env.prod' });
 
+<<<<<<< HEAD
 // console.log('NODE_ENV:', process.env.NODE_ENV);
 // console.log('Loaded STRIPE_SECRET_KEY:', process.env.STRIPE_SECRET_KEY);
+=======
+console.log('NODE_ENV:', process.env.NODE_ENV);
+console.log("Loaded STRIPE_SECRET_KEY:", process.env.STRIPE_SECRET_KEY ? "✅ Exists" : "❌ Missing");
+>>>>>>> 171bfa47 (WORKING PRODUCTION SITE WITH STRIPE CHECKOUTgit status)
 
 const express = require('express');
 const cors = require('cors');
@@ -66,7 +71,15 @@ const allowedOrigins = [
   "http://localhost:3000",
   "https://danoberartisandrums-dev.web.app",
   "https://danoberartisandrums-stg.web.app",
-  "https://danoberartisandrums.web.app"
+  "https://danoberartisandrums.web.app",
+  "https://oberartisandrums.com",
+  "https://oberdrums.com",
+  "https://danoberartisan.com",
+  "https://oberartisan.com",
+  "https://us-central1-danoberartisandrums.cloudfunctions.net",
+  "https://us-central1-danoberartisandrums.cloudfunctions.net/",
+  "https://us-central1-danoberartisandrums.cloudfunctions.net/createCheckoutSession",
+  "https://us-central1-danoberartisandrums.cloudfunctions.net/createCheckoutSession/"
 ];
 
 app.use(
@@ -265,27 +278,32 @@ app.post(
 // New Route for creating Stripe payment intents
 app.post('/api/create-payment-intent', async (req, res) => {
   try {
-    const { amount } = req.body;  // Amount in cents
+    const { amount } = req.body;
+
     if (!amount) {
+      console.error("🚨 Error: Amount is missing from request!");
       return res.status(400).json({ error: 'Amount is required' });
     }
 
-    // Create payment intent with the specified amount
+    console.log("🟢 Creating payment intent for amount:", amount);
+
     const paymentIntent = await stripe.paymentIntents.create({
       amount,
-      currency: 'usd',  // Set the currency to USD
+      currency: 'usd',
       payment_method_types: ['card'],
     });
 
+    console.log("✅ Payment intent created successfully:", paymentIntent.id);
     res.status(200).json({ clientSecret: paymentIntent.client_secret });
   } catch (error) {
-    console.error('Error creating payment intent:', error.message);
-    res.status(500).json({ error: 'Internal Server Error' });
+    console.error("🔥 Stripe API Error:", error); // Log full error details
+    res.status(500).json({ error: error.message });
   }
 });
 
+
 // Route for creating Stripe checkout sessions
-app.post('/api/create-checkout-session', async (req, res) => {
+app.post('/api/createCheckoutSession', async (req, res) => {
   try {
     const {
       products,
