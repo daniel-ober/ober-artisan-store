@@ -10,8 +10,6 @@ const VERIFY_URL = process.env.REACT_APP_RECAPTCHA_VERIFY_URL;
 const stripePublishableKey = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY;
 
 // ✅ Debugging Log: Ensure the API URL is correctly loaded
-console.log("🌍 API Base URL:", process.env.REACT_APP_API_URL);
-console.log("🔑 Stripe Publishable Key:", stripePublishableKey);
 
 const stripePromise = loadStripe(stripePublishableKey);
 
