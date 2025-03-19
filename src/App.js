@@ -124,41 +124,34 @@ function App() {
   return (
     <DarkModeProvider>
     <div className="app-container">
-      {/* ✅ Pass toggleDarkMode and isDarkMode to Navbar */}
       <NavBar navbarLinks={navbarLinks} isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
       
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="*" element={<Navigate to="/" replace />} />
-        
-        {/* ✅ Pass isDarkMode to ArtisanSeries */}
         <Route path="/artisanseries" element={<ArtisanSeries isDarkMode={isDarkMode} />} />
-
-        <Route path="/about" element={isLinkEnabled('about') ? <About /> : <NotFound />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/about" element={isLinkEnabled('about') ? <About /> : <NotFound />} />
         <Route path="/contact" element={isLinkEnabled('contact') ? <Contact /> : <NotFound />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/return-policy" element={<ReturnPolicy />} />
         <Route path="/terms-of-service" element={<TermsOfService />} />
-        <Route path="/custom-drum-builder" element={<CustomDrumBuilder />} />
-        <Route path="/artisan-shop" element={<ArtisanShop />} />
+        <Route path="/custom-drum-builder" element={isLinkEnabled('custom-drum-builder') ? <CustomDrumBuilder /> : <NotFound />} />
+        <Route path="/artisan-shop" element={isLinkEnabled('artisan-shop') ? <ArtisanShop /> : <NotFound />} />
         <Route path="/gallery" element={isLinkEnabled('gallery') ? <Gallery /> : <NotFound />} />
         <Route path="/custom-shop" element={isLinkEnabled('custom-shop') ? <CustomShop /> : <NotFound />} />
         <Route path="/products" element={isLinkEnabled('products') ? <Products /> : <NotFound />} />
         <Route path="/products/:productId" element={<ProductDetail />} />
-
-        {/* ✅ Pass isDarkMode to PreOrderPage */}
         <Route path="/pre-order" element={<PreOrderPage isAdmin={isAdmin} isDarkMode={isDarkMode} />} />
-
         <Route path="/account" element={<PrivateRoute element={<AccountPage />} />} />
         <Route path="/admin" element={<PrivateRoute element={<AdminDashboard />} adminOnly />} />
-        <Route path="/admin/update-carts" element={<UpdateCartsPage />} />
-        {/* <Route path="/signin" element={user ? <Navigate to="/account" /> : <SignInEmail />} /> */}
-        {/* <Route path="/register" element={user ? <Navigate to="/account" /> : <Register />} /> */}
-        {/* <Route path="/forgot-password" element={<ForgotPassword />} /> */}
         <Route path="/admin-signin" element={<AdminSignin />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/checkout-summary" element={<CheckoutSummary />} />
+        {/* <Route path="/admin/update-carts" element={<UpdateCartsPage />} /> */}
+        {/* <Route path="/signin" element={user ? <Navigate to="/account" /> : <SignInEmail />} /> */}
+        {/* <Route path="/register" element={user ? <Navigate to="/account" /> : <Register />} /> */}
+        {/* <Route path="/forgot-password" element={<ForgotPassword />} /> */}
       </Routes>
 
       <Footer navbarLinks={navbarLinks} />
