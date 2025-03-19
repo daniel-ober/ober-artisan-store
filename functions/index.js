@@ -181,7 +181,6 @@ exports.printifyWebhookListener = onRequest(
     }
   }
 );
-<<<<<<< HEAD
 
 // ✅ Restored createPrintifyOrder function
 exports.createPrintifyOrder = onRequest(
@@ -223,5 +222,3 @@ exports.createPrintifyOrder = onRequest(
     }
   }
 );
-=======
->>>>>>> 171bfa47 (WORKING PRODUCTION SITE WITH STRIPE CHECKOUTgit status)
