@@ -1,21 +1,17 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
-import { Link } from 'react-router-dom';
 import { loadStripe } from '@stripe/stripe-js';
-import { doc, getDoc, onSnapshot } from 'firebase/firestore';
+import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import './Cart.css';
 
-// ✅ Debugging: Log Stripe Key to ensure it's being loaded
-
-const stripePromise = loadStripe(`${process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY}`);
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
 const Cart = () => {
   const { cart, cartId, removeFromCart, setCart, updateFirestoreCart } = useCart();
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
-  const [shippingEstimate, setShippingEstimate] = useState(0);
   const [unavailableProducts, setUnavailableProducts] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
@@ -61,7 +57,7 @@ const Cart = () => {
 
       if (cartChanged) {
         setCart(updatedCart);
-        await updateFirestoreCart(updatedCart); // ✅ Ensure `await` is used
+        await updateFirestoreCart(updatedCart);
         setUnavailableProducts(unavailable);
         setShowModal(true);
       }
@@ -94,6 +90,12 @@ const Cart = () => {
   const handleCheckout = async () => {
     setLoading(true);
     try {
+      if (!cart || cart.length === 0) {
+        alert("Your cart is empty!");
+        setLoading(false);
+        return;
+      }
+
       const productsPayload = cart.map((product) => ({
         name: product.name,
         price: product.price,
@@ -101,25 +103,24 @@ const Cart = () => {
         stripePriceId: product.stripePriceId,
       }));
 
-      console.log("📡 Sending Checkout Request to:", process.env.REACT_APP_API_URL); // ✅ Debugging
+      console.log("📡 Sending Checkout Request to:", process.env.REACT_APP_API_URL);
+      console.log("🛒 Cart Payload:", JSON.stringify({ products: productsPayload, userId: user?.uid || cartId }, null, 2));
 
-      const response = await fetch(
-        `${process.env.REACT_APP_API_URL}createCheckoutSession`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            products: productsPayload,
-            userId: user?.uid || cartId,
-          }),
-        }
-      );
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/createCheckoutSession`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          products: productsPayload,
+          userId: user?.uid || cartId,
+        }),
+      });
 
       const session = await response.json();
       if (!response.ok) throw new Error(session.error || 'Failed to create checkout session');
 
       window.location.href = session.url;
     } catch (error) {
+      console.error("❌ Checkout error:", error);
       alert(`Checkout error: ${error.message}`);
     } finally {
       setLoading(false);
@@ -185,6 +186,20 @@ const Cart = () => {
           </table>
           <button onClick={handleCheckout} className="checkout-button" disabled={loading}>{loading ? 'Processing...' : 'Checkout'}</button>
         </>
+      )}
+
+      {showModal && (
+        <div className="modal">
+          <div className="modal-content">
+            <h3>Some items are unavailable and have been removed</h3>
+            <ul>
+              {unavailableProducts.map((item) => (
+                <li key={item.id}>{item.name}</li>
+              ))}
+            </ul>
+            <button onClick={closeModal}>OK</button>
+          </div>
+        </div>
       )}
     </div>
   );
