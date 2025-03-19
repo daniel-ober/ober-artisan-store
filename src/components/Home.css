@@ -55,11 +55,11 @@ body.dark .home-container {
   justify-content: center;
   width: 90%;
   max-width: 800px;
-  background: rgba(0, 0, 0, 0.75);
+  background: rgba(0, 0, 0, 0.795);
   padding: 30px;
   border-radius: 12px;
   text-align: center;
-  z-index: 1;
+  /* z-index: 1; */
   position: relative;
   box-sizing: border-box;
 }
