@@ -28,7 +28,6 @@ const CheckoutForm = ({ cart }) => {
   const navigate = useNavigate();
 
   // ✅ Ensure API URL is correctly loaded
-  console.log("🌍 API Base URL:", process.env.REACT_APP_API_URL);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
