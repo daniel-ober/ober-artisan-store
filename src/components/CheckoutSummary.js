@@ -35,11 +35,8 @@ const CheckoutSummary = () => {
         if (!response.ok) throw new Error("Failed to fetch order details");
 
         const data = await response.json();
-<<<<<<< HEAD
-        // console.log('✅ Full Order Details from API:', data); // DEBUGGING
-=======
+
         console.log("✅ Order Details from API:", data);
->>>>>>> 171bfa47 (WORKING PRODUCTION SITE WITH STRIPE CHECKOUTgit status)
 
         setOrderDetails(data);
       } catch (error) {
@@ -54,11 +51,8 @@ const CheckoutSummary = () => {
     if (inventoryUpdated) return; // ✅ Prevent duplicate inventory updates
 
     try {
-<<<<<<< HEAD
-    //   console.log('🔍 Starting inventory update for items:', items);
-=======
+
       console.log("🔍 Starting inventory update for items:", items);
->>>>>>> 171bfa47 (WORKING PRODUCTION SITE WITH STRIPE CHECKOUTgit status)
 
       for (const item of items) {
         if (!item.productId) {
@@ -77,35 +71,19 @@ const CheckoutSummary = () => {
         }
 
         const productData = productSnap.data();
-<<<<<<< HEAD
-        // console.log(
-        //   `📊 Current stock for ${item.productId}: ${productData.currentQuantity}`
-        // );
 
-        const newQuantity = Math.max(
-          0,
-          (productData.currentQuantity || 0) - (item.quantity || 1)
-        );
-        // console.log(
-        //   `🔄 Updating stock: ${productData.currentQuantity} -> ${newQuantity}`
-        // );
-=======
         console.log(`📊 Current stock for ${item.productId}: ${productData.currentQuantity}`);
 
         const newQuantity = Math.max(0, (productData.currentQuantity || 0) - (item.quantity || 1));
         console.log(`🔄 Updating stock: ${productData.currentQuantity} -> ${newQuantity}`);
->>>>>>> 171bfa47 (WORKING PRODUCTION SITE WITH STRIPE CHECKOUTgit status)
 
         await updateDoc(productRef, { currentQuantity: newQuantity });
         // console.log(`✅ Inventory updated for ${item.productId}`);
       }
 
-<<<<<<< HEAD
-    //   console.log('✅ Finished updating inventory!');
-=======
+
       setInventoryUpdated(true); // ✅ Prevent multiple updates
       console.log("✅ Finished updating inventory!");
->>>>>>> 171bfa47 (WORKING PRODUCTION SITE WITH STRIPE CHECKOUTgit status)
     } catch (error) {
       console.error("❌ Error updating inventory:", error);
     }

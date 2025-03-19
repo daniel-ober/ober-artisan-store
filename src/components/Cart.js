@@ -20,14 +20,9 @@ const Cart = () => {
   const [unavailableProducts, setUnavailableProducts] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
-<<<<<<< HEAD
-  // console.log('🛒 Cart from Context:', cart);
-  // console.log('🆔 Cart ID:', cartId);
-=======
   console.log('🛒 Cart from Context:', cart);
   console.log('🆔 Cart ID:', cartId);
   console.log("🌍 API Base URL:", process.env.REACT_APP_API_URL); // ✅ Debugging Log
->>>>>>> 171bfa47 (WORKING PRODUCTION SITE WITH STRIPE CHECKOUTgit status)
 
   useEffect(() => {
     const checkInventory = async () => {

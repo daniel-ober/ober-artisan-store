@@ -102,7 +102,7 @@ const Checkout = ({ cartItems, totalAmount, onApplyPromo }) => {
       if (stripeError) {
         alert(`❌ Payment failed: ${stripeError.message}`);
       } else if (paymentIntent && paymentIntent.status === "succeeded") {
-<<<<<<< HEAD
+
         alert("✅ Payment successful! Clearing cart...");
 
         try {
@@ -111,10 +111,8 @@ const Checkout = ({ cartItems, totalAmount, onApplyPromo }) => {
         } catch (error) {
           console.error("❌ Error clearing cart:", error);
         }
-=======
         alert("✅ Payment successful!");
         await clearCartOnCheckout(); // Clear cart after successful checkout
->>>>>>> 171bfa47 (WORKING PRODUCTION SITE WITH STRIPE CHECKOUTgit status)
       }
     } catch (error) {
       console.error("❌ Payment processing error:", error);
