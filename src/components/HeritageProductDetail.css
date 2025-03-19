@@ -43,7 +43,7 @@
 .heritage-product-image img {
   width: 100%;
   height: auto;
-  border-radius: 10px;
+  border-radius: 4px;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease;
 }
@@ -192,7 +192,7 @@
 /* 📌 Responsive Adjustments */
 @media (max-width: 1024px) {
   .heritage-product-detail {
-      padding: 40px;
+      padding: 21px;
   }
 
   .heritage-product-content {
@@ -220,7 +220,7 @@
   }
 
   .heritage-product-options {
-      padding: 18px;
+      padding: 10px;
   }
 
   .heritage-product-options h2 {
