@@ -7,21 +7,28 @@ import { doc, getDoc, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import './Cart.css';
 
+// ✅ Debugging: Log Stripe Key to ensure it's being loaded
+console.log("🔑 Stripe Publishable Key:", process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
+
 const stripePromise = loadStripe(`${process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY}`);
 
 const Cart = () => {
-  const { cart, cartId, removeFromCart, setCart, updateFirestoreCart } =
-    useCart();
+  const { cart, cartId, removeFromCart, setCart, updateFirestoreCart } = useCart();
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
   const [shippingEstimate, setShippingEstimate] = useState(0);
   const [unavailableProducts, setUnavailableProducts] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
+<<<<<<< HEAD
   // console.log('🛒 Cart from Context:', cart);
   // console.log('🆔 Cart ID:', cartId);
+=======
+  console.log('🛒 Cart from Context:', cart);
+  console.log('🆔 Cart ID:', cartId);
+  console.log("🌍 API Base URL:", process.env.REACT_APP_API_URL); // ✅ Debugging Log
+>>>>>>> 171bfa47 (WORKING PRODUCTION SITE WITH STRIPE CHECKOUTgit status)
 
-  // ✅ Ensure unavailable products are removed before checkout
   useEffect(() => {
     const checkInventory = async () => {
       if (!cart || cart.length === 0 || !cartId) return;
@@ -33,7 +40,7 @@ const Cart = () => {
       for (const item of updatedCart) {
         if (!item || !item.stripePriceId || !item.productId) {
           console.warn(`⚠️ Skipping item with missing productId:`, item);
-          continue; // Skip items that don't have a productId
+          continue;
         }
 
         try {
@@ -52,9 +59,7 @@ const Cart = () => {
           const availableStock = productData.currentQuantity || 0;
 
           if (availableStock === 0) {
-            console.warn(
-              `🚨 ${productData.name} is out of stock. Removing from cart.`
-            );
+            console.warn(`🚨 ${productData.name} is out of stock. Removing from cart.`);
             unavailable.push({ id: item.id, name: item.name });
             updatedCart = updatedCart.filter((i) => i.id !== item.id);
             cartChanged = true;
@@ -66,7 +71,7 @@ const Cart = () => {
 
       if (cartChanged) {
         setCart(updatedCart);
-        await updateFirestoreCart(updatedCart);
+        await updateFirestoreCart(updatedCart); // ✅ Ensure `await` is used
         setUnavailableProducts(unavailable);
         setShowModal(true);
       }
@@ -75,9 +80,8 @@ const Cart = () => {
     checkInventory();
   }, [cart, cartId, setCart, updateFirestoreCart]);
 
-  // ✅ Update quantity but enforce limits
   const updateQuantity = (productId, newQuantity) => {
-    if (newQuantity < 1) return; // Prevent negative/zero quantity
+    if (newQuantity < 1) return;
 
     const updatedCart = cart.map((item) =>
       item.id === productId
@@ -94,14 +98,11 @@ const Cart = () => {
     setUnavailableProducts([]);
   };
 
-  const getItemTotal = (item) =>
-    (Number(item.price) || 0) * (item.quantity || 1);
-  const getTotalAmount = () =>
-    cart.reduce((total, item) => total + getItemTotal(item), 0);
+  const getItemTotal = (item) => (Number(item.price) || 0) * (item.quantity || 1);
+  const getTotalAmount = () => cart.reduce((total, item) => total + getItemTotal(item), 0);
 
   const handleCheckout = async () => {
     setLoading(true);
-
     try {
       const productsPayload = cart.map((product) => ({
         name: product.name,
@@ -110,8 +111,10 @@ const Cart = () => {
         stripePriceId: product.stripePriceId,
       }));
 
+      console.log("📡 Sending Checkout Request to:", process.env.REACT_APP_API_URL); // ✅ Debugging
+
       const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/create-checkout-session`,
+        `${process.env.REACT_APP_API_URL}createCheckoutSession`,
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -123,8 +126,7 @@ const Cart = () => {
       );
 
       const session = await response.json();
-      if (!response.ok)
-        throw new Error(session.error || 'Failed to create checkout session');
+      if (!response.ok) throw new Error(session.error || 'Failed to create checkout session');
 
       window.location.href = session.url;
     } catch (error) {
@@ -137,9 +139,7 @@ const Cart = () => {
   return (
     <div className="cart-container">
       <h1 className="cart-title">Shopping Cart</h1>
-      <p className="cart-id">
-        Cart ID: {(cartId || user?.uid || 'guest').slice(-5)}
-      </p>
+      <p className="cart-id">Cart ID: {(cartId || user?.uid || 'guest').slice(-5)}</p>
 
       {cart.length === 0 ? (
         <div className="cart-empty">Your cart is empty.</div>
@@ -160,110 +160,41 @@ const Cart = () => {
               {cart.map((item) => (
                 <tr key={item.id}>
                   <td>
-                    {/* <Link to={`/products/${item.id}`}> */}
-                      <img
-                        src={
-                          item.image ||
-                          '/fallback-images/image-not-available.png'
-                        }
-                        alt={item.name}
-                        className="cart-item-image"
-                      />
-                    {/* </Link> */}
+                    <img
+                      src={item.image || '/fallback-images/image-not-available.png'}
+                      alt={item.name}
+                      className="cart-item-image"
+                    />
                   </td>
                   <td>
                     <p>{item.name}</p>
                     <p className="cart-sub-description">
-                      {item.size}&quot; Diameter | {item.depth}&quot; Depth |{' '}
-                      {item.lugQuantity}-lug |{' '}
+                      {item.size}" Diameter | {item.depth}" Depth | {item.lugQuantity}-lug |{' '}
                       {item.reRing ? 'With Re-Ring' : 'Re-Rings: None'}
                     </p>
                   </td>
-                  <td>
-  {item.price !== undefined ? (
-    `$${Number(item.price).toFixed(2)}`
-  ) : (
-    <span style={{ color: "red" }}>⚠️ Missing Price</span>
-  )}
-</td>
+                  <td>{item.price !== undefined ? `$${Number(item.price).toFixed(2)}` : <span style={{ color: "red" }}>⚠️ Missing Price</span>}</td>
                   <td>
                     {item.category === 'artisan' ? (
                       <span className="quantity-value">1</span>
                     ) : (
                       <div className="quantity-control">
-                        <button
-                          className="quantity-btn"
-                          onClick={() =>
-                            updateQuantity(
-                              item.id,
-                              Math.max(item.quantity - 1, 1)
-                            )
-                          }
-                          disabled={item.quantity <= 1}
-                        >
-                          -
-                        </button>
+                        <button className="quantity-btn" onClick={() => updateQuantity(item.id, Math.max(item.quantity - 1, 1))} disabled={item.quantity <= 1}>-</button>
                         <span className="quantity-value">{item.quantity}</span>
-                        <button
-                          className="quantity-btn"
-                          onClick={() =>
-                            updateQuantity(
-                              item.id,
-                              Math.min(item.quantity + 1, item.currentQuantity)
-                            )
-                          }
-                          disabled={item.quantity >= item.currentQuantity}
-                        >
-                          +
-                        </button>
+                        <button className="quantity-btn" onClick={() => updateQuantity(item.id, Math.min(item.quantity + 1, item.currentQuantity))} disabled={item.quantity >= item.currentQuantity}>+</button>
                       </div>
                     )}
                   </td>
                   <td>${getItemTotal(item).toFixed(2)}</td>
                   <td>
-                    <button
-                      onClick={() => removeFromCart(item.id)}
-                      className="remove-btn"
-                    >
-                      Remove
-                    </button>
+                    <button onClick={() => removeFromCart(item.id)} className="remove-btn">Remove</button>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
-          <div className="cart-summary">
-            <p>Estimated Shipping: ${shippingEstimate.toFixed(2)}</p>
-            <p>Total: ${(getTotalAmount() + shippingEstimate).toFixed(2)}</p>
-          </div>
-          <button
-            onClick={handleCheckout}
-            className="checkout-button"
-            disabled={loading}
-          >
-            {loading ? 'Processing...' : 'Checkout'}
-          </button>
+          <button onClick={handleCheckout} className="checkout-button" disabled={loading}>{loading ? 'Processing...' : 'Checkout'}</button>
         </>
-      )}
-
-      {showModal && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <h2>Unavailable Products</h2>
-            <p>
-              The following items were removed because they are no longer
-              available:
-            </p>
-            <ul>
-              {unavailableProducts.map((product) => (
-                <li key={product.id}>{product.name}</li>
-              ))}
-            </ul>
-            <button onClick={closeModal} className="modal-close-button">
-              OK
-            </button>
-          </div>
-        </div>
       )}
     </div>
   );

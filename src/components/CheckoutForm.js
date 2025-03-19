@@ -27,14 +27,18 @@ const CheckoutForm = ({ cart }) => {
 
   const navigate = useNavigate();
 
+  // ✅ Ensure API URL is correctly loaded
+  console.log("🌍 API Base URL:", process.env.REACT_APP_API_URL);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
 
     try {
-      // Validate product quantities before proceeding
+      // ✅ Validate product quantities before proceeding
+      console.log("📡 Sending Cart Validation Request...");
       const validationResponse = await fetch(
-        "http://localhost:5959/api/validate-cart-before-checkout",
+        `${process.env.REACT_APP_API_URL}/api/validate-cart-before-checkout`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -46,13 +50,15 @@ const CheckoutForm = ({ cart }) => {
 
       if (validationResponse.status === 400 && validationResult.invalidItems) {
         // Redirect back to cart and show unavailable products
+        console.warn("⚠️ Some items are unavailable:", validationResult.invalidItems);
         navigate("/cart", { state: { invalidItems: validationResult.invalidItems } });
         return;
       }
 
-      // Proceed to create Stripe checkout session if validation passes
+      // ✅ Proceed to create Stripe checkout session
+      console.log("📡 Creating Stripe Checkout Session...");
       const checkoutResponse = await fetch(
-        "http://localhost:5959/api/create-checkout-session",
+        `${process.env.REACT_APP_API_URL}createCheckoutSession`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -70,12 +76,16 @@ const CheckoutForm = ({ cart }) => {
       );
 
       const session = await checkoutResponse.json();
-      if (session.url) {
-        window.location.href = session.url;
+
+      if (!checkoutResponse.ok) {
+        throw new Error(session.error || "Failed to create checkout session");
       }
+
+      console.log("✅ Redirecting to Stripe Checkout:", session.url);
+      window.location.href = session.url;
     } catch (error) {
-      console.error("Checkout error:", error.message);
-      alert("An error occurred. Please try again.");
+      console.error("❌ Checkout error:", error);
+      alert(`An error occurred: ${error.message}`);
     } finally {
       setLoading(false);
     }
@@ -271,19 +281,6 @@ const CheckoutForm = ({ cart }) => {
                     ...billingAddress,
                     postal_code: e.target.value,
                   })
-                }
-                required
-              />
-            </label>
-          </div>
-          <div>
-            <label>
-              Country:
-              <input
-                type="text"
-                value={billingAddress.country}
-                onChange={(e) =>
-                  setBillingAddress({ ...billingAddress, country: e.target.value })
                 }
                 required
               />
