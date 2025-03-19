@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import { useCart } from "../context/CartContext"; // ✅ Import Cart Context
+import { useCart } from "../context/CartContext";
 import "./Checkout.css";
 
 // Environment Variables
@@ -9,34 +9,52 @@ const RECAPTCHA_SITE_KEY = process.env.REACT_APP_RECAPTCHA_SITE_KEY;
 const VERIFY_URL = process.env.REACT_APP_RECAPTCHA_VERIFY_URL;
 const stripePublishableKey = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY;
 
-// Stripe Initialization
-if (!stripePublishableKey) {
-  console.error("⚠️ Stripe publishable key is missing. Check your .env file.");
-}
+// ✅ Debugging Log: Ensure the API URL is correctly loaded
+console.log("🌍 API Base URL:", process.env.REACT_APP_API_URL);
+console.log("🔑 Stripe Publishable Key:", stripePublishableKey);
 
-const stripePromise = loadStripe(`${process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY}`);
+const stripePromise = loadStripe(stripePublishableKey);
 
 const Checkout = ({ cartItems, totalAmount, onApplyPromo }) => {
-  const { clearCartOnCheckout } = useCart(); // ✅ Ensure useCart() is properly placed at the top
+  const { clearCartOnCheckout } = useCart();
   const [promoCode, setPromoCode] = useState("");
   const [discount, setDiscount] = useState(0);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [clientSecret, setClientSecret] = useState(""); // Holds clientSecret from your server
+  const [clientSecret, setClientSecret] = useState("");
   const stripe = useStripe();
   const elements = useElements();
 
-  // Fetch client secret from the server
+  // ✅ Ensure reCAPTCHA script is loaded dynamically
+  useEffect(() => {
+    if (RECAPTCHA_SITE_KEY) {
+      const script = document.createElement("script");
+      script.src = `https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}`;
+      script.async = true;
+      script.defer = true;
+      document.body.appendChild(script);
+    } else {
+      console.warn("⚠️ reCAPTCHA site key is missing.");
+    }
+  }, []);
+
+  // ✅ Fetch client secret from the backend
   useEffect(() => {
     const fetchClientSecret = async () => {
+      if (totalAmount <= 0) return; // Ensure totalAmount is greater than 0
+    
       try {
-        const response = await fetch("/api/create-payment-intent", {
+        console.log("📡 Sending Payment Intent Request to:", process.env.REACT_APP_API_URL);
+
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/create-payment-intent`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ amount: totalAmount * 100 }), // Convert to cents
         });
 
         const data = await response.json();
+        console.log("✅ Payment Intent Response:", data);
+
         if (data.clientSecret) {
           setClientSecret(data.clientSecret);
         } else {
@@ -47,11 +65,10 @@ const Checkout = ({ cartItems, totalAmount, onApplyPromo }) => {
       }
     };
 
-    if (totalAmount > 0) {
-      fetchClientSecret();
-    }
+    fetchClientSecret();
   }, [totalAmount]);
 
+  // ✅ Handle Promo Code Application
   const handleApplyPromo = () => {
     if (promoCode.trim() === "DRUM10") {
       setDiscount(0.1); // 10% discount
@@ -65,34 +82,16 @@ const Checkout = ({ cartItems, totalAmount, onApplyPromo }) => {
 
   const finalAmount = (totalAmount * (1 - discount)).toFixed(2);
 
+  // ✅ Handle Checkout with Stripe
   const handleCheckout = async () => {
-    setLoading(true);
-
-    if (!window.grecaptcha) {
-      alert("⚠️ reCAPTCHA not loaded. Please refresh and try again.");
-      setLoading(false);
+    if (!clientSecret) {
+      console.error("❌ No client secret. Payment cannot proceed.");
       return;
     }
 
+    setLoading(true);
+
     try {
-      // Execute reCAPTCHA v3
-      const token = await window.grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: "checkout" });
-
-      // Verify reCAPTCHA token
-      const response = await fetch(VERIFY_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ token }),
-      });
-
-      const data = await response.json();
-      if (!data.success) {
-        alert("❌ reCAPTCHA verification failed. Please try again.");
-        setLoading(false);
-        return;
-      }
-
-      // Confirm payment with Stripe
       const cardElement = elements.getElement(CardElement);
       const { error: stripeError, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
@@ -103,6 +102,7 @@ const Checkout = ({ cartItems, totalAmount, onApplyPromo }) => {
       if (stripeError) {
         alert(`❌ Payment failed: ${stripeError.message}`);
       } else if (paymentIntent && paymentIntent.status === "succeeded") {
+<<<<<<< HEAD
         alert("✅ Payment successful! Clearing cart...");
 
         try {
@@ -111,10 +111,14 @@ const Checkout = ({ cartItems, totalAmount, onApplyPromo }) => {
         } catch (error) {
           console.error("❌ Error clearing cart:", error);
         }
+=======
+        alert("✅ Payment successful!");
+        await clearCartOnCheckout(); // Clear cart after successful checkout
+>>>>>>> 171bfa47 (WORKING PRODUCTION SITE WITH STRIPE CHECKOUTgit status)
       }
     } catch (error) {
-      console.error("❌ Error verifying reCAPTCHA:", error);
-      alert("❌ Error verifying reCAPTCHA.");
+      console.error("❌ Payment processing error:", error);
+      alert("❌ Payment failed. Please try again.");
     }
 
     setLoading(false);
@@ -135,9 +139,6 @@ const Checkout = ({ cartItems, totalAmount, onApplyPromo }) => {
               <p>Price: ${item.price}</p>
               <p>Quantity: {item.quantity}</p>
               <p>Total: ${(item.price * item.quantity).toFixed(2)}</p>
-            </div>
-            <div className="item-actions">
-              <button className="remove-btn">Remove</button>
             </div>
           </div>
         ))}
@@ -180,13 +181,10 @@ const Checkout = ({ cartItems, totalAmount, onApplyPromo }) => {
       {/* Card Element */}
       <CardElement />
 
-      {/* Checkout Button with reCAPTCHA v3 */}
+      {/* Checkout Button */}
       <button className="checkout-btn" onClick={handleCheckout} disabled={loading}>
         {loading ? "Processing..." : "Proceed to Payment"}
       </button>
-
-      {/* reCAPTCHA v3 Script */}
-      <script src={`https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}`} async defer></script>
     </div>
   );
 };

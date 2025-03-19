@@ -19,7 +19,7 @@
     "stripe": "^17.7.0"
   },
   "engines": {
-    "node": "18"
+    "node": "20"
   },
   "main": "index.js",
   "devDependencies": {
