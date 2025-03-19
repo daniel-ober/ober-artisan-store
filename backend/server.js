@@ -334,6 +334,7 @@ app.post('/api/createCheckoutSession', async (req, res) => {
       mode: 'payment',
       success_url: `${process.env.CLIENT_URL}/checkout-summary?session_id={CHECKOUT_SESSION_ID}&guest_token=${guestToken}`,
       cancel_url: `${process.env.CLIENT_URL}/cart`,
+      
       metadata: {
         userId: userId || 'guest',
         guestToken,

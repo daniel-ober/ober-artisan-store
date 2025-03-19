@@ -43,7 +43,7 @@
 .feuzon-product-image img {
     width: 100%;
     height: auto;
-    border-radius: 10px;
+    border-radius: 4px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease;
 }
@@ -73,7 +73,7 @@
 /* 📌 Customization Panel */
 .feuzon-product-options {
     background: rgba(255, 255, 255, 0.08);
-    padding: 22px;
+    padding: 10px;
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.15);
     width: 100%;
@@ -192,7 +192,7 @@
 /* 📌 Responsive Adjustments */
 @media (max-width: 1024px) {
     .feuzon-product-detail {
-        padding: 40px;
+        padding: 21px;
     }
 
     .feuzon-product-content {
@@ -220,7 +220,7 @@
     }
 
     .feuzon-product-options {
-        padding: 18px;
+        padding: 10px;
     }
 
     .feuzon-product-options h2 {
