@@ -41,8 +41,8 @@ const Home = () => {
 
       {/* Hero Section */}
       <div className="hero-overlay">
-        <h1>Ober Artisan Drums</h1>
-        <p>Handcrafted Excellence, Nashville TN</p>
+        <h1>OBER ARTISAN DRUMS</h1>
+        <p>Handcrafted Excellence in Nashville, TN</p>
         <Link to="/artisanseries" className="cta-button">
           Explore Drums
         </Link>

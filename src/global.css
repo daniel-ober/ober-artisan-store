@@ -46,7 +46,7 @@ body.light .bottom-section p {
 body.light button,
 body.light .preorder-button {
   /* background-color: #b65454 !important; */
-  color: white !important;
+  /* color: white !important; */
   border: none !important;
   /* width: auto; */
 }
