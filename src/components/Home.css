@@ -54,12 +54,11 @@ body.dark .home-container {
   align-items: center;
   justify-content: center;
   width: 90%;
-  max-width: 800px;
+  max-width: 1000px;
   background: rgba(0, 0, 0, 0.795);
   padding: 30px;
   border-radius: 12px;
   text-align: center;
-  /* z-index: 1; */
   position: relative;
   box-sizing: border-box;
 }
@@ -74,16 +73,18 @@ body.dark .hero-overlay {
   font-size: 3rem;
   font-weight: bold;
   color: white;
-  margin-bottom: 15px;
+  margin:0px;
+  margin-bottom: 12px;
   transition: color 0.4s ease-in-out;
 }
 
 /* Hero Subtitle */
 .hero-overlay p {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   color: white;
-  margin-bottom: 20px;
   transition: color 0.4s ease-in-out;
+  margin-bottom:15px;
+  margin-top:0px;
 }
 
 /* CTA Button */
@@ -97,6 +98,7 @@ body.dark .hero-overlay {
   cursor: pointer;
   border-radius: 8px;
   text-decoration: none;
+  margin-top:10px;
   transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
 }
 
@@ -109,10 +111,10 @@ body.dark .hero-overlay {
 .highlights-section {
   display: flex;
   justify-content: center;
-  gap: 20px;
-  padding: 50px 20px;
+  gap: 30px;
+  padding: 30px 0px;
   width: 90%;
-  max-width: 1200px;
+  max-width: 1000px;
   flex-wrap: wrap;
   box-sizing: border-box;
   align-items: stretch;
@@ -148,7 +150,7 @@ body.dark .highlight {
 /* Ensure h2 Titles Have Proper Contrast */
 .highlight h2 {
   font-size: 1.8rem;
-  margin-bottom: 10px;
+  margin: 0px;
   color: #000000; /* ✅ Default black for light mode */
 }
 
@@ -161,7 +163,7 @@ body.dark .highlight h2 {
 .highlight p {
   font-size: 1rem;
   color: #333; /* ✅ Dark gray for readability in light mode */
-  margin-bottom: 15px;
+  margin-bottom: 25px;
 }
 
 /* Dark Mode Paragraph Text */

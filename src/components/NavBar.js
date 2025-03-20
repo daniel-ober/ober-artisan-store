@@ -1,13 +1,13 @@
-import React, { useRef, useState, useEffect, useContext } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { FaCartPlus, FaSignOutAlt, FaUserAlt, FaCog } from "react-icons/fa";
-import { useAuth } from "../context/AuthContext";
-import { useCart } from "../context/CartContext";
-import { DarkModeContext } from "../context/DarkModeContext";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../firebaseConfig";
-import CartPreview from "./CartPreview"; // ✅ Import CartPreview
-import "./NavBar.css";
+import React, { useRef, useState, useEffect, useContext } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { FaCartPlus, FaSignOutAlt, FaUserAlt, FaCog } from 'react-icons/fa';
+import { useAuth } from '../context/AuthContext';
+import { useCart } from '../context/CartContext';
+import { DarkModeContext } from '../context/DarkModeContext';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../firebaseConfig';
+import CartPreview from './CartPreview'; // ✅ Import CartPreview
+import './NavBar.css';
 
 const NavBar = () => {
   const [navbarLinks, setNavbarLinks] = useState([]);
@@ -33,22 +33,29 @@ const NavBar = () => {
       if (!isMobileView) setIsMenuOpen(false);
     };
 
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   useEffect(() => {
     const fetchNavbarLinks = async () => {
       try {
-        const navbarLinksCollection = collection(db, "settings", "site", "navbarLinks");
+        const navbarLinksCollection = collection(
+          db,
+          'settings',
+          'site',
+          'navbarLinks'
+        );
         const navbarLinksSnapshot = await getDocs(navbarLinksCollection);
         const fetchedLinks = navbarLinksSnapshot.docs
           .map((doc) => ({ id: doc.id, ...doc.data() }))
           .sort((a, b) => a.order - b.order);
 
-        setNavbarLinks(fetchedLinks.length ? fetchedLinks.filter((link) => link.enabled) : []);
+        setNavbarLinks(
+          fetchedLinks.length ? fetchedLinks.filter((link) => link.enabled) : []
+        );
       } catch (error) {
-        console.error("Error fetching navbar links:", error);
+        console.error('Error fetching navbar links:', error);
       }
     };
 
@@ -57,11 +64,11 @@ const NavBar = () => {
 
   useEffect(() => {
     if (isDarkMode) {
-      document.body.classList.add("dark");
-      document.body.classList.remove("light");
+      document.body.classList.add('dark');
+      document.body.classList.remove('light');
     } else {
-      document.body.classList.add("light");
-      document.body.classList.remove("dark");
+      document.body.classList.add('light');
+      document.body.classList.remove('dark');
     }
   }, [isDarkMode]);
 
@@ -95,41 +102,55 @@ const NavBar = () => {
       if (
         cartRef.current &&
         !cartRef.current.contains(event.target) &&
-        !event.target.closest(".cart-icon")
+        !event.target.closest('.cart-icon')
       ) {
         setIsCartPreviewOpen(false);
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   const handleSignOut = async () => {
     try {
       await logout();
     } catch (error) {
-      console.error("Error signing out:", error.message);
+      console.error('Error signing out:', error.message);
     }
   };
 
   const handleNavLinkClick = (path) => {
     if (location.pathname === path) {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     setIsMenuOpen(false);
   };
 
   return (
     <nav className="navbar">
-      <video key={isDarkMode ? "dark" : "light"} className="navbar-background" autoPlay loop muted playsInline>
-        <source src={isDarkMode ? "/hero-dark.mp4" : "/hero-light.mp4"} type="video/mp4" />
+      <video
+        key={isDarkMode ? 'dark' : 'light'}
+        className="navbar-background"
+        autoPlay
+        loop
+        muted
+        playsInline
+      >
+        <source
+          src={isDarkMode ? '/hero-dark.mp4' : '/hero-light.mp4'}
+          type="video/mp4"
+        />
       </video>
 
       <div className="navbar-logo">
-        <Link to="/" replace onClick={() => handleNavLinkClick("/")}>
+        <Link to="/" replace onClick={() => handleNavLinkClick('/')}>
           <img
-            src={isDarkMode ? process.env.REACT_APP_LOGO_LIGHT : process.env.REACT_APP_LOGO_DARK}
+            src={
+              isDarkMode
+                ? process.env.REACT_APP_LOGO_LIGHT
+                : process.env.REACT_APP_LOGO_DARK
+            }
             alt="Logo"
             className="logo-img"
           />
@@ -151,8 +172,8 @@ const NavBar = () => {
                   ? '/menu/close-button-dark-mode.png'
                   : '/menu/menu-button-dark-mode.png'
                 : isMenuOpen
-                ? '/menu/close-button-light-mode.png'
-                : '/menu/menu-button-light-mode.png'
+                  ? '/menu/close-button-light-mode.png'
+                  : '/menu/menu-button-light-mode.png'
             }
             alt="Menu Toggle"
             className={`menu-arrow-icon ${isMenuOpen ? 'open' : ''}`}
@@ -161,33 +182,53 @@ const NavBar = () => {
       )}
 
       {(isMenuOpen || !isMobileView) && (
-        <div className={`navbar-links ${isMobileView && isMenuOpen ? "open" : ""}`} ref={menuRef}>
-          <Link to="/" replace onClick={() => handleNavLinkClick("/")} className="nav-link">
+        <div
+          className={`navbar-links ${isMobileView && isMenuOpen ? 'open' : ''}`}
+          ref={menuRef}
+        >
+          <Link
+            to="/"
+            replace
+            onClick={() => handleNavLinkClick('/')}
+            className="nav-link"
+          >
             Home
           </Link>
 
           {navbarLinks
-            .filter((link) => link.name.toLowerCase() !== "home")
+            .filter((link) => link.name.toLowerCase() !== 'home')
             .map((link) => (
               <Link
                 key={link.id}
-                to={`/${link.name.toLowerCase().replace(/\s+/g, "-")}`}
+                to={`/${link.name.toLowerCase().replace(/\s+/g, '-')}`}
                 className="nav-link"
-                onClick={() => handleNavLinkClick(`/${link.name.toLowerCase().replace(/\s+/g, "-")}`)}
+                onClick={() =>
+                  handleNavLinkClick(
+                    `/${link.name.toLowerCase().replace(/\s+/g, '-')}`
+                  )
+                }
               >
                 {link.label}
               </Link>
             ))}
 
           {user && isAdmin && (
-            <Link to="/admin" className="nav-link" onClick={() => handleNavLinkClick("/admin")}>
+            <Link
+              to="/admin"
+              className="nav-link"
+              onClick={() => handleNavLinkClick('/admin')}
+            >
               <FaCog /> Admin
             </Link>
           )}
 
           {user && (
             <>
-              <Link to="/account" className="nav-link" onClick={() => handleNavLinkClick("/account")}>
+              <Link
+                to="/account"
+                className="nav-link"
+                onClick={() => handleNavLinkClick('/account')}
+              >
                 <FaUserAlt /> Account
               </Link>
               <button className="nav-link-signout" onClick={handleSignOut}>
@@ -199,13 +240,15 @@ const NavBar = () => {
           {/* ✅ Move Cart Inside Menu */}
           <button className="cart-icon nav-link" onClick={toggleCartPreview}>
             <FaCartPlus />
-            {cartItemCount > 0 && <span className="cart-badge">{cartItemCount}</span>}
+            {cartItemCount > 0 && (
+              <span className="cart-badge">{cartItemCount}</span>
+            )}
           </button>
 
           {/* ✅ Conditionally Render Cart Preview */}
           {isCartPreviewOpen && (
             <div className="cart-preview-container" ref={cartRef}>
-              <CartPreview onClose={closeCartPreview} />
+              <CartPreview onClose={closeCartPreview} closeMenu={closeMenu} />
             </div>
           )}
         </div>

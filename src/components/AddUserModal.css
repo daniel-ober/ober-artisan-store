@@ -93,13 +93,14 @@
   }
   
   button[type="submit"] {
-    background: #007bff;
+    background: #4135EA;
     color: #fff;
     font-weight: 600;
+    margin-top:16px;
   }
   
   button[type="submit"]:hover {
-    background: #0056b3;
+    background: #2b52ff;
   }
   
   button[type="button"] {

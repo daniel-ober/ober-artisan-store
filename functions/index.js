@@ -37,28 +37,90 @@ exports.createCheckoutSession = onRequest(
       const stripeKey = STRIPE_SECRET_KEY.value();
       const stripe = stripeLib(stripeKey);
 
-      const { products, userId } = req.body || {};
+      const {
+        products,
+        userId,
+        customerFirstName,
+        customerLastName,
+        customerEmail,
+        customerPhone,
+        shippingAddress,
+      } = req.body;
+
+      const guestToken = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
       if (!products || !Array.isArray(products) || products.length === 0) {
         return res.status(400).json({ error: "Invalid or empty cart." });
       }
 
-      const lineItems = products.map((product) => ({
-        price_data: {
-          currency: "usd",
-          product_data: { name: product.name },
-          unit_amount: Math.round(product.price * 100),
-        },
-        quantity: product.quantity,
-      }));
+      const lineItems = products.map((product) => {
+        console.log(`🟢 Processing Product: ${product.name || "Unnamed"}`);
+        console.log(`   ➝ ID: ${product.id || "No ID"}`);
+        console.log(`   ➝ Price: ${product.price}`);
+        console.log(`   ➝ Quantity: ${product.quantity}`);
+      
+        if (!product.price || product.price <= 0) {
+          console.error(`❌ Error: Invalid price for ${product.name}`);
+        }
+      
+        if (!product.quantity || product.quantity < 1) {
+          console.error(`❌ Error: Invalid quantity for ${product.name}`);
+        }
+      
+        return {
+          price_data: {
+            currency: "usd",
+            product_data: {
+              name: product.name || "Unnamed Product",
+              description: product.description || "No description available",
+              metadata: { productId: product.id },
+            },
+            unit_amount: Math.round(product.price * 100), // Stripe requires cents
+          },
+          quantity: product.quantity || 1,
+        };
+      });
 
       const session = await stripe.checkout.sessions.create({
-        payment_method_types: ["card"],
-        mode: "payment",
+        payment_method_types: ['card'],
         line_items: lineItems,
+        mode: 'payment',
         success_url: `https://oberartisandrums.com/success?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `https://oberartisandrums.com/cart`,
-        metadata: { userId: userId || "guest" },
+
+        metadata: {
+          userId: userId || 'guest',
+          guestToken,
+          customerFirstName,
+          customerLastName,
+          customerEmail,
+          customerPhone: customerPhone || 'No phone provided',
+          shippingAddress: JSON.stringify(shippingAddress || {}),
+        },
+        customer_email: customerEmail,
+
+        // ✅ Collect shipping address during checkout
+        shipping_address_collection: {
+          allowed_countries: ['US', 'CA'],
+        },
+
+        // ✅ Define shipping options
+        shipping_options: [
+          {
+            shipping_rate_data: {
+              type: 'fixed_amount',
+              fixed_amount: { amount: 0, currency: 'usd' }, // Free shipping
+              display_name: 'Standard Shipping',
+              // delivery_estimate: {
+              //   minimum: { unit: 'business_day', value: 3 },
+              //   maximum: { unit: 'business_day', value: 7 },
+              // },
+            },
+          },
+        ],
+
+        // ✅ Apply coupon codes if available
+        allow_promotion_codes: true,
       });
 
       console.log("✅ Stripe Checkout Session Created:", session.id);

@@ -309,10 +309,44 @@ app.post('/api/createCheckoutSession', async (req, res) => {
       customerPhone,
       shippingAddress,
     } = req.body;
+    
     const guestToken = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
     if (!products || products.length === 0) {
       return res.status(400).json({ error: 'Invalid products array' });
+    }
+
+    let maxMinDays = 0; // Minimum shipping time in days
+    let maxMaxDays = 0; // Maximum shipping time in days
+
+    // Fetch product details from Firestore to get deliveryTime
+    for (const product of products) {
+      const productRef = db.collection('products').doc(product.id);
+      const productSnapshot = await productRef.get();
+
+      if (productSnapshot.exists) {
+        const productData = productSnapshot.data();
+        
+        if (productData.deliveryTime) {
+          const match = productData.deliveryTime.match(/(\d+)-(\d+) (business|weeks|days)/);
+
+          if (match) {
+            let minDays = parseInt(match[1]);
+            let maxDays = parseInt(match[2]);
+            const unit = match[3];
+
+            // Convert weeks to business days (assuming 5 business days per week)
+            if (unit === 'weeks') {
+              minDays *= 5;
+              maxDays *= 5;
+            }
+
+            // Track the longest delivery time
+            maxMinDays = Math.max(maxMinDays, minDays);
+            maxMaxDays = Math.max(maxMaxDays, maxDays);
+          }
+        }
+      }
     }
 
     const lineItems = products.map((product) => ({
@@ -321,7 +355,7 @@ app.post('/api/createCheckoutSession', async (req, res) => {
         product_data: {
           name: product.name || 'Unnamed Product',
           description: product.description || 'No description available',
-          metadata: { productId: product.id }, // ✅ Ensure productId is included!
+          metadata: { productId: product.id },
         },
         unit_amount: Math.round(product.price * 100),
       },
@@ -334,56 +368,46 @@ app.post('/api/createCheckoutSession', async (req, res) => {
       mode: 'payment',
       success_url: `${process.env.CLIENT_URL}/checkout-summary?session_id={CHECKOUT_SESSION_ID}&guest_token=${guestToken}`,
       cancel_url: `${process.env.CLIENT_URL}/cart`,
-    
-      // ✅ Collect customer email (for guest users)
-      customer_email: customerEmail,
-    
-      // ✅ Enable collection of shipping address
-      shipping_address_collection: {
-        allowed_countries: ['US', 'CA', 'GB'], // Add more countries if needed
-      },
-    
-      // ✅ Allow customers to enter promo codes
-      allow_promotion_codes: true,
-    
-      // ✅ Store extra metadata for reference
+      
       metadata: {
         userId: userId || 'guest',
         guestToken,
-        customerFirstName: customerFirstName || 'Guest',
-        customerLastName: customerLastName || '',
-        customerEmail: customerEmail || '',
+        customerFirstName,
+        customerLastName,
+        customerEmail,
         customerPhone: customerPhone || 'No phone provided',
         shippingAddress: JSON.stringify(shippingAddress || {}),
       },
+      customer_email: customerEmail,
+
+      // ✅ Collect shipping address during checkout
+      shipping_address_collection: {
+        allowed_countries: ['US', 'CA'],
+      },
+
+      // ✅ Dynamically calculated shipping estimate
+      shipping_options: [
+        {
+          shipping_rate_data: {
+            type: 'fixed_amount',
+            fixed_amount: { amount: 0, currency: 'usd' }, // Free shipping
+            display_name: 'Standard Shipping',
+            // delivery_estimate: {
+            //   minimum: { unit: 'business_day', value: maxMinDays },
+            //   maximum: { unit: 'business_day', value: maxMaxDays },
+            // },
+          },
+        },
+      ],
+
+      // ✅ Apply promo codes
+      allow_promotion_codes: true,
     });
 
     res.status(200).json({ url: session.url, id: session.id, guestToken });
   } catch (err) {
     console.error('Error creating Stripe session:', err.message);
     res.status(500).json({ error: err.message });
-  }
-});
-
-// New Route for Fetching Orders by Stripe Session ID
-app.get('/api/orders/by-session/:sessionId', async (req, res) => {
-  const { sessionId } = req.params;
-  try {
-    const ordersSnapshot = await db
-      .collection('orders')
-      .where('stripeSessionId', '==', sessionId)
-      .limit(1)
-      .get();
-
-    if (ordersSnapshot.empty) {
-      return res.status(404).json({ error: 'Order not found' });
-    }
-
-    const orderDoc = ordersSnapshot.docs[0];
-    return res.status(200).json({ id: orderDoc.id, ...orderDoc.data() });
-  } catch (err) {
-    console.error('❌ Error fetching order:', err.message);
-    res.status(500).json({ error: 'Failed to fetch order' });
   }
 });
 

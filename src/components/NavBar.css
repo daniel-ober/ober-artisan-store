@@ -89,17 +89,12 @@ body.dark .cart-icon {
   background: none !important;
 }
 
-body.light .cart-badge {
+body.light .cart-badge,
+body.dark .cart-badge {
+  font-size: 11px;
   color: white !important;
   background: red !important;
-  padding: 5px;
-  border-radius: 15px;
-}
-
-body.dark .cart-badge {
-  color: rgb(255, 255, 255) !important;
-  background: red !important;
-  padding: 5px;
+  padding: 4px 9px 5px 8px;
   border-radius: 15px;
 }
 
@@ -112,8 +107,8 @@ body.dark .cart-badge {
 /* ✅ Cart Preview Buttons Visible */
 body.dark .cart-preview-container,
 body.dark .cart-preview-container button {
-  background-color: #222 !important;
-  color: white !important;
+  /* background-color: #222 !important;
+  color: white !important; */
 }
 
 /* ✅ Remove Background from Menu Button in Both Modes */
