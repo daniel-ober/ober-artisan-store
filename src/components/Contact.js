@@ -114,7 +114,7 @@ const Contact = () => {
         Contact Us
       </Typography>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} >
         {/* Category Dropdown */}
         <FormControl fullWidth margin="normal" required className="contact-dropdown">
   <Select

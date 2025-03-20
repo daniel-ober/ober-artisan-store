@@ -233,10 +233,10 @@ const SoundLegendProductDetail = () => {
             </div>
             <p className="phone-hint">Enter a valid 10-digit phone number.</p>
 
-            <h2>Select Core Build Details</h2>
+            {/* <h2>Select Core Build Details</h2> */}
 
             {/* Snare Size */}
-            <label htmlFor="size">Snare Size (Diameter)</label>
+            {/* <label htmlFor="size">Snare Size (Diameter)</label>
             <select
               id="size"
               value={size}
@@ -247,10 +247,10 @@ const SoundLegendProductDetail = () => {
                   {option}&quot;
                 </option>
               ))}
-            </select>
+            </select> */}
 
             {/* Snare Depth */}
-            <label htmlFor="depth">Depth</label>
+            {/* <label htmlFor="depth">Depth</label>
             <select
               id="depth"
               value={depth}
@@ -273,10 +273,10 @@ const SoundLegendProductDetail = () => {
                   {option}&quot;
                 </option>
               ))}
-            </select>
+            </select> */}
 
             {/* Shell Construction */}
-            <label htmlFor="shellConstruction">Shell Construction</label>
+            {/* <label htmlFor="shellConstruction">Shell Construction</label>
             <select
               id="shellConstruction"
               value={shellConstruction}
@@ -291,10 +291,10 @@ const SoundLegendProductDetail = () => {
                   {option}
                 </option>
               ))}
-            </select>
+            </select> */}
 
             {/* Wood Species */}
-            <label htmlFor="woodSpecies">Wood Species</label>
+            {/* <label htmlFor="woodSpecies">Wood Species</label>
             <select
               id="woodSpecies"
               value={woodSpecies}
@@ -305,7 +305,7 @@ const SoundLegendProductDetail = () => {
                   {option}
                 </option>
               ))}
-            </select>
+            </select> */}
 
             {/* Snare Bed Depth */}
             {/* <label htmlFor="snareBedDepth">Snare Bed Depth</label>
