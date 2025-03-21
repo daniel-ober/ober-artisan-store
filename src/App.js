@@ -42,6 +42,8 @@ import CustomDrumBuilder from './components/CustomDrumBuilder';
 import SoundProfileRecommendations from './components/SoundProfileRecommendations';
 import UpdateCartsPage from "./components/UpdateCartsPage";
 import { DarkModeProvider } from "./context/DarkModeContext";
+import { Toaster } from 'react-hot-toast';
+
 
 import './App.css';
 
@@ -123,6 +125,8 @@ function App() {
 
   return (
     <DarkModeProvider>
+          <Toaster position="bottom-center" />
+
     <div className="app-container">
       <NavBar navbarLinks={navbarLinks} isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
       
