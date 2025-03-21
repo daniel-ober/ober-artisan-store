@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../firebaseConfig'; // Import Firestore configuration
-import { doc, getDoc } from 'firebase/firestore'; // Add Firestore imports
+import { doc, getDoc, setDoc, collection } from 'firebase/firestore'; // ✅ MOVE THIS TO THE TOP
 import { useCart } from '../context/CartContext'; // Adjust path if needed
 import SpiderChart from './SpiderChart';
 import BarChart from './BarChart';
 import feuzonSummaries from '../data/feuzonSummaries';
 import './FeuzonProductDetail.css';
+import toast from 'react-hot-toast'; // ✅ Import toast
 
 const FeuzonProductDetail = () => {
   const [outerShell, setOuterShell] = useState('Maple');
@@ -105,111 +106,79 @@ const FeuzonProductDetail = () => {
     }
   };
 
-  const handleAddToCart = async (addAsSeparateItem = false) => {
-    // console.log('🛒 Add to Cart button clicked!');
+  useEffect(() => {
+    const generatedId = `${stripePriceId}-${size}-${depth}-${reRing}-${lugs}-${staveQuantity}`;
+    const isInCart = cart.some((item) => item.id === generatedId);
   
+    if (isInCart !== productInCart) {
+      // ✅ Debounce the state update slightly to prevent flickering
+      setTimeout(() => {
+        setProductInCart(isInCart);
+      }, 500); // 🔄 Delays UI update slightly
+    }
+  }, [cart, stripePriceId, size, depth, reRing, lugs, staveQuantity, productInCart]);
+  
+  
+  const handleAddToCart = async () => {
     if (!stripePriceId) {
-      console.error('❌ Missing Stripe Price ID! Firestore update may fail.');
-      alert('Stripe Payment ID is missing. Please refresh the page and try again.');
+      toast.error('Stripe Payment ID is missing. Please refresh the page and try again.');
       return;
     }
   
-    // ✅ Generate a valid unique ID for the cart item
-    const generatedId = `feuzon-${size}-${depth}-${lugs}-${staveQuantity}`;
-    // console.log('🆔 Generated ID:', generatedId);
-    // console.log('💳 Stripe Price ID:', stripePriceId);
-  
-    // ✅ Construct selectedOptions to pass necessary details
-    const selectedOptions = {
-      size: size || "N/A",
-      depth: depth || "N/A",
-      lugQuantity: lugs || "N/A",
-      staveQuantity: staveQuantity || "N/A",
-      reRing: reRing ?? false,
-      outerShell: outerShell || "N/A",
-      innerStave: innerStave || "N/A",
-      stripePriceId: stripePriceId || "",
-      totalPrice: Number(totalPrice) || 0, // 🔥 Ensure price is correctly stored
-    };
-  
-    // ✅ Construct the cartItem object
     const cartItem = {
-      id: `${stripePriceId || "no-stripe-id"}-${size}-${depth}-${reRing}-${lugs}-${staveQuantity}`,
+      id: `${stripePriceId}-${size}-${depth}-${reRing}-${lugs}-${staveQuantity}`,
       productId: "feuzon",
       name: "FEUZØN",
-      category: "artisan",
+      size,
+      depth,
+      reRing,
+      lugQuantity: lugs,
+      staveQuantity,
+      price: totalPrice,
+      stripePriceId,
       quantity: 1,
-      price: selectedOptions.totalPrice, // ✅ Fix price assignment
-      ...selectedOptions, // ✅ Spread all selectedOptions to ensure values are passed
-      timestamp: new Date().toISOString(),
     };
   
-    // console.log('🛠️ Cart Item before adding:', cartItem);
-    // console.log('🔍 Debugging Selected Options:', selectedOptions);
-  
-    let updatedCart = [...cart];
-  
-    // ✅ Check if product already exists in the cart
-    const existingCustomProductIndex = updatedCart.findIndex(
-      (item) =>
-        item.productId === 'feuzon' &&
-        item.size === size &&
-        item.depth === depth &&
-        item.lugQuantity === lugs &&
-        item.staveQuantity === staveQuantity &&
-        item.reRing === reRing
-    );
-  
-    if (existingCustomProductIndex !== -1 && !addAsSeparateItem) {
-      // ✅ Increase quantity instead of adding duplicate
-      updatedCart[existingCustomProductIndex].quantity += 1;
-      // console.log('♻️ Updated existing Feuzon quantity in cart:', updatedCart);
-    } else {
-      // ✅ Add as new separate Feuzon drum
-      updatedCart.push(cartItem);
-      // console.log('➕ Adding new Feuzon drum as separate item:', cartItem);
-    }
-  
-    // console.log('📢 Updated Cart Before Firestore Save:', updatedCart);
-  
     try {
-      await addToCart(cartItem, selectedOptions); // ✅ Pass correct arguments
-      // console.log('✅ Firestore updated successfully!');
+      await addToCart(cartItem, cartItem);
+      setTimeout(() => {
+        setProductInCart(true); // ✅ Prevents flickering
+      }, 300);
+      
+      toast.success("🛒 Item added to cart!");
     } catch (error) {
-      // console.error('❌ Error updating Firestore:', error);
-      alert('An error occurred while updating the cart. Please try again.');
-      return;
-    }
-  
-    setSelectionChanged(false);
-  
-    if (!cartId) {
-      console.error('❌ cartId is missing! Firestore may not update.');
-      return;
-    }
-  
-    // console.log('🔄 Checking Firestore for updated cart...');
-    try {
-      setTimeout(async () => {
-        const cartRef = doc(db, 'carts', cartId);
-        const cartDoc = await getDoc(cartRef);
-        if (cartDoc.exists()) {
-          // console.log('✅ Firestore Cart Updated:', cartDoc.data().cart);
-  
-          const updatedCartData = cartDoc.data().cart || [];
-          const isProductInCart = updatedCartData.some(
-            (item) => item.id === generatedId
-          );
-          setProductInCart(isProductInCart);
-          // console.log('🛒 isProductInCart:', isProductInCart);
-        } else {
-          // console.error('❌ Firestore Cart Update Failed.');
-        }
-      }, 1000);
-    } catch (error) {
-      // console.error('❌ Error retrieving cart data from Firestore:', error);
+      console.error('❌ Error adding to cart:', error);
+      toast.error("❌ Failed to add item to cart.");
     }
   };
+  
+  
+  
+
+  //   if (!cartId) {
+  //     console.error('❌ cartId is missing! Firestore may not update.');
+  //     return;
+  //   }
+  
+  //   // ✅ Sync with Firestore after a short delay to verify the update
+  //   setTimeout(async () => {
+  //     try {
+  //       const cartRef = doc(db, 'carts', cartId);
+  //       const cartDoc = await getDoc(cartRef);
+  //       if (cartDoc.exists()) {
+  //         const updatedCartData = cartDoc.data().cart || [];
+  //         const isProductInCart = updatedCartData.some((item) => item.id === generatedId);
+          
+  //         // ✅ Ensure the button reflects the correct state
+  //         setProductInCart(isProductInCart);
+  //       }
+  //     } catch (error) {
+  //       console.error('❌ Error retrieving cart data from Firestore:', error);
+  //     }
+  //   }, 1000);
+  // };
+  
+  
 
   useEffect(() => {
     // console.log('🔄 Updating Price, Stave Options & Sound Profile...');
@@ -382,8 +351,8 @@ const FeuzonProductDetail = () => {
     //   cart.map((item) => item.id)
     // );
 
-    setProductInCart(cart.some((item) => item.id === generatedId));
-        // console.log('✅ productInCart Updated to:', isInCart);
+    setProductInCart(cart.some((item) => item.productId === "feuzon"));
+    // console.log('✅ productInCart Updated to:', isInCart);
   }, [cart, size, depth, lugs, staveQuantity]);
 
   // ✅ **New Effect to Reset `innerStave` When `outerShell` Changes**
@@ -478,6 +447,21 @@ const FeuzonProductDetail = () => {
     // ✅ Add the updated product to cart
     handleAddToCart(false);
   };
+
+  const handleRemoveFromCart = async () => {
+    const generatedId = `feuzon-${size}-${depth}-${lugs}-${staveQuantity}`;
+  
+    try {
+      await removeFromCart(generatedId);
+      setProductInCart(false); // ✅ Instant UI update
+      toast.success("🗑️ Item removed from cart.");
+    } catch (error) {
+      console.error('❌ Error removing item from cart:', error);
+      toast.error("❌ Failed to remove item. Try again!");
+    }
+  };
+  
+  
 
   // ✅ Handle adding a separate Feuzon drum if stock allows
   const handleAddSeparateItem = async () => {
@@ -612,7 +596,23 @@ const FeuzonProductDetail = () => {
 
   
             {/* Add to Cart */}
-            <button className="add-to-cart-button" onClick={handleAddToCart}>Add to Cart</button>
+{/* Add to Cart */}
+{productInCart ? (
+  <div className="cart-hover-container">
+    <button className="in-cart-button" disabled>
+      ✔ In Cart
+    </button>
+    <div className="cart-hover-options">
+      <span onClick={() => window.location.href = '/cart'}>View Cart</span>
+      <span onClick={handleRemoveFromCart}>Remove</span> {/* ✅ Use the function */}
+    </div>
+  </div>
+) : (
+  <button className="add-to-cart-button" onClick={handleAddToCart}>
+    Add to Cart
+  </button>
+)}
+
           </div>
         </div>
   

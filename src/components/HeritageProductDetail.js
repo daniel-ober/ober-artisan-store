@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import SpiderChart from './SpiderChart';
 import BarChart from './BarChart';
-import { doc, getDoc, updateDoc } from 'firebase/firestore'; // Add Firestore functions
+import { doc, getDoc, updateDoc, setDoc } from 'firebase/firestore';
 import { db } from '../firebaseConfig'; // Make sure Firestore is imported
 import heritageSummaries from '../data/heritageSummaries'; // Ensure the import is correct
 import { useCart } from '../context/CartContext'; // ✅ Use Context API
 import './HeritageProductDetail.css';
+import toast from 'react-hot-toast';
 
 const HeritageProductDetail = () => {
   const [size, setSize] = useState('12');
@@ -17,8 +19,10 @@ const HeritageProductDetail = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [selectedDrumSummary, setSelectedDrumSummary] = useState({});
   const reRingCost = 150;
-
+  const [buttonText, setButtonText] = useState('Add to Cart');
   const basePrices = { 12: 850, 13: 950, 14: 1050 };
+  const [cartItemId, setCartItemId] = useState(null);
+  const navigate = useNavigate();
 
   const depthPrices = {
     12: { '5.0': 0, '6.0': 100, '7.0': 200 },
@@ -50,8 +54,15 @@ const HeritageProductDetail = () => {
     projection: 8,
   });
 
+  const handleRemoveFromCart = () => {
+    if (cartItemId) {
+      removeFromCart(cartItemId);
+      toast.success('Removed from cart');
+    }
+  };
+
   // ✅ Use Cart Context
-  const { addToCart, cart } = useCart(); // De-structure `cart` from the `useCart` hook
+  const { addToCart, removeFromCart, cart } = useCart();
 
   const updateProductStock = async (newQuantity) => {
     try {
@@ -65,58 +76,68 @@ const HeritageProductDetail = () => {
   };
 
   const handleAddToCart = async () => {
-    // console.log('🛒 Add to Cart Clicked');
-
     if (!size || !depth) {
-        console.error('❌ Missing selection: Size or Depth not chosen');
-        return;
+      console.error('❌ Missing selection: Size or Depth not chosen');
+      return;
     }
 
     if (currentQuantity <= 0) {
-        alert('❌ This drum is out of stock.');
-        return;
+      alert('❌ This drum is out of stock.');
+      return;
     }
 
-    // ✅ Count the total quantity of heritage drums in the cart
     const cartItemCount = cart
-        .filter((item) => item.productId === 'heritage')
-        .reduce((total, item) => total + item.quantity, 0);
+      .filter((item) => item.productId === 'heritage')
+      .reduce((total, item) => total + item.quantity, 0);
 
     if (cartItemCount >= currentQuantity) {
-        alert('❌ Not enough stock available to add this item.');
-        return;
+      alert('❌ Not enough stock available to add this item.');
+      return;
     }
 
-    const hasReRing = staveOption.includes('Re-Rings') || staveOption.includes('+ $150');
+    const hasReRing =
+      staveOption.includes('Re-Rings') || staveOption.includes('+ $150');
+
     const selectedOption = heritageSummaries.pricingOptions.find(
-        (option) =>
-            option.size === size &&
-            option.depth === depth &&
-            option.reRing === hasReRing
+      (option) =>
+        option.size === size &&
+        option.depth === depth &&
+        option.reRing === hasReRing
     );
 
     if (!selectedOption) {
-        console.error('❌ No matching pricing option found.');
-        return;
+      console.error('❌ No matching pricing option found.');
+      return;
     }
 
     const cartItem = {
-        id: `${selectedOption.stripePriceId}-${size}-${depth}-${hasReRing}-${selectedOption.lugQuantity}-${selectedOption.staveQuantity}`,
-        productId: 'heritage',
-        name: 'HERÌTAGE',
-        size,
-        depth,
-        reRing: hasReRing,
-        lugQuantity: selectedOption.lugQuantity,
-        staveQuantity: selectedOption.staveQuantity,
-        price: selectedOption.price,
-        stripePriceId: selectedOption.stripePriceId,
-        quantity: 1,
+      id: `${selectedOption.stripePriceId}-${size}-${depth}-${hasReRing}-${selectedOption.lugQuantity}-${selectedOption.staveQuantity}`,
+      productId: 'heritage',
+      name: 'HERÌTAGE',
+      size,
+      depth,
+      reRing: hasReRing,
+      lugQuantity: selectedOption.lugQuantity,
+      staveQuantity: selectedOption.staveQuantity,
+      price: selectedOption.price,
+      stripePriceId: selectedOption.stripePriceId,
+      quantity: 1,
     };
 
-    // console.log('🛒 Adding item to cart:', cartItem);
     await addToCart(cartItem, cartItem);
-};
+    toast.success('Added to cart!');
+  };
+
+  useEffect(() => {
+    const matchingItem = cart.find((item) => item.productId === 'heritage');
+    if (matchingItem) {
+      setButtonText('In Cart');
+      setCartItemId(matchingItem.id);
+    } else {
+      setButtonText('Add to Cart');
+      setCartItemId(null);
+    }
+  }, [cart]);
 
   useEffect(() => {
     const fetchProductAvailability = async () => {
@@ -273,7 +294,11 @@ const HeritageProductDetail = () => {
               <li>Puresound Snare Wires</li>
               <li>Remo Coated Ambassador Batter & Clear Snare Side</li>
               <li>Estimated Delivery: 5-7 weeks</li>
-              <p className="order-to-build-disclaimer">*Note: All Ober Artisan drums are on an "order-to-build" basis, offering various configuration options. Finsihed product will appear different than the image shown.</p>
+              <p className="order-to-build-disclaimer">
+                *Note: All Ober Artisan drums are on an "order-to-build" basis,
+                offering various configuration options. Finsihed product will
+                appear different than the image shown.
+              </p>
             </ul>
           </div>
           <h2>Build Options</h2>
@@ -316,19 +341,33 @@ const HeritageProductDetail = () => {
               </option>
             ))}
           </select>
-            {/* Total Price */}
-            <p className="feuzon-detail-price">${totalPrice}</p>
-            <p className="delivery-time">Est Delivery: 5-7 weeks</p>
+          {/* Total Price */}
+          <p className="feuzon-detail-price">${totalPrice}</p>
+          <p className="delivery-time">Est Delivery: 5-7 weeks</p>
           {/* Add to Cart */}
-          <button className="add-to-cart-button" onClick={handleAddToCart}>Add to Cart</button>
+          {buttonText === 'In Cart' ? (
+            <div className="cart-hover-container">
+              <button className="in-cart-button" disabled>
+                ✔ In Cart
+              </button>
+              <div className="cart-hover-options">
+                <span onClick={() => navigate('/cart')}>View Cart</span>
+                <span onClick={handleRemoveFromCart}>Remove</span>
+              </div>
+            </div>
+          ) : (
+            <button className="add-to-cart-button" onClick={handleAddToCart}>
+              {buttonText}
+            </button>
+          )}
         </div>
       </div>
 
       {/* 📌 Drum Summary Section */}
       {/* <div className="drum-summary"> */}
-        {/* <SpiderChart data={[soundProfile.projection, soundProfile.sustain, soundProfile.brightness, soundProfile.warmth, soundProfile.attack]} /> */}
-        {/* <BarChart data={soundProfile} /> */}
-        {/* <h1>Artisan Notes</h1>
+      {/* <SpiderChart data={[soundProfile.projection, soundProfile.sustain, soundProfile.brightness, soundProfile.warmth, soundProfile.attack]} /> */}
+      {/* <BarChart data={soundProfile} /> */}
+      {/* <h1>Artisan Notes</h1>
         <h3>🎛️ Highlighted Characteristics</h3>
         <p>
           {selectedDrumSummary.highlightedCharacteristics ||
@@ -342,10 +381,10 @@ const HeritageProductDetail = () => {
             <li key={idx}>{genre}</li>
           )) || 'Select options to view summary'}
         </ul> */}
-        {/* <h3>🎤 Playing Situations</h3>
+      {/* <h3>🎤 Playing Situations</h3>
         <p>{selectedDrumSummary.playingSituation || "Select options to view summary"}</p> */}
 
-        {/* <h3>🎙 Recording Mic Top Picks</h3>
+      {/* <h3>🎙 Recording Mic Top Picks</h3>
         <p>
           {selectedDrumSummary.recordingMic || 'Select options to view summary'}
         </p> */}

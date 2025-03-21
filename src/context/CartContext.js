@@ -31,30 +31,30 @@ export const CartProvider = ({ children }) => {
       setLoading(true);
       try {
         let cartUserId = user?.uid || localStorage.getItem('cartId');
-
+    
         if (!cartUserId) {
           cartUserId = generateCartId();
           localStorage.setItem('cartId', cartUserId);
         }
-
+    
         setCartId(cartUserId);
-
+    
         const cartRef = doc(db, 'carts', cartUserId);
         const cartDoc = await getDoc(cartRef);
-
+    
         if (cartDoc.exists()) {
-          const firestoreCart = cartDoc.data().cart;
-          setCart(Array.isArray(firestoreCart) ? firestoreCart : []);
+          setCart(cartDoc.data().cart || []);
         } else {
+          await setDoc(cartRef, { cart: [] }); // ✅ Auto-create cart if missing
           setCart([]);
         }
       } catch (err) {
         console.error('❌ Error initializing cart:', err);
-        setError('Error loading cart.');
       } finally {
         setLoading(false);
       }
     };
+    
 
     initializeCart();
   }, [user]);

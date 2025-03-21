@@ -21,7 +21,6 @@
 
 /* 🔄 Main Content Layout - Adjusted for Proper Balance */
 .heritage-product-content {
-  /* display: flex; */
   justify-content: space-between;
   align-items: flex-start;
   width: 100%;
@@ -80,7 +79,7 @@
   color: white;
   box-sizing: border-box;
   backdrop-filter: blur(8px);
-  margin-top:20px
+  margin-top: 20px;
 }
 
 /* 📌 Section Titles */
@@ -128,22 +127,78 @@
   text-align: center;
 }
 
-.add-to-cart-button {
+/* 📌 Add to Cart / In Cart Button Styles */
+.add-to-cart-button, .in-cart-button {
   background-color: #4135ea;
   color: rgb(255, 255, 255);
   font-size: 18px;
   font-weight: bold;
   padding: 12px 20px;
-  /* border-radius: 8px; */
   width: 100%;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-radius: 6px;
+  box-sizing: border-box;
 }
 
-.add-to-cart-button:hover {
-  background-color: rgb(43, 82, 255);
+/* 📌 Hover Dropdown for In Cart */
+.cart-hover-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
 }
 
+/* 🔥 Fixes width issue & prevents overflow */
+.cart-hover-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: inherit; /* ✅ Matches button width perfectly */
+  background: #fff;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  display: none;
+  padding: 8px 0;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  border-radius: 6px;
+  box-sizing: border-box; /* ✅ Prevents extra spacing */
+  z-index: 10;
+}
+
+/* Keep dropdown visible when hovering over the container */
+.cart-hover-container:hover .cart-hover-options {
+  display: block;
+  margin-top: -4px; /* ✅ Eliminates any gap */
+}
+
+/* Options inside dropdown */
+.cart-hover-options span {
+  display: block;
+  padding: 12px;
+  cursor: pointer;
+  color: #333;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+  width: 100%;
+}
+
+.cart-hover-options span:hover {
+  background-color: #f5f5f5;
+}
+
+
+
+.cart-hover-container:hover .cart-hover-options {
+  display: block;
+}
+
+/* 📌 Other Buttons */
 .notify-me-button {
   background-color: #888;
   color: white;
@@ -166,18 +221,11 @@
   opacity: 0.5;
 }
 
-/* Grey out locked dropdowns */
+/* 📌 Grey out locked dropdowns */
 .disabled-dropdown {
   background-color: #ddd !important;
   color: #666 !important;
   cursor: not-allowed;
-}
-
-/* Change Selection Button Flicker */
-@keyframes flicker {
-  0% { background-color: #ffcc00; }
-  50% { background-color: #ffaa00; }
-  100% { background-color: #ffcc00; }
 }
 
 /* 📌 Footer Adjustments */
