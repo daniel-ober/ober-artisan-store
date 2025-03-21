@@ -4,8 +4,8 @@ import { FaCartPlus, FaSignOutAlt, FaUserAlt, FaCog } from 'react-icons/fa';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import { DarkModeContext } from '../context/DarkModeContext';
-import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../firebaseConfig';
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firebaseConfig";
 import CartPreview from './CartPreview'; // ✅ Import CartPreview
 import './NavBar.css';
 
@@ -37,30 +37,49 @@ const NavBar = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  useEffect(() => {
-    const fetchNavbarLinks = async () => {
-      try {
-        const navbarLinksCollection = collection(
-          db,
-          'settings',
-          'site',
-          'navbarLinks'
-        );
-        const navbarLinksSnapshot = await getDocs(navbarLinksCollection);
-        const fetchedLinks = navbarLinksSnapshot.docs
-          .map((doc) => ({ id: doc.id, ...doc.data() }))
-          .sort((a, b) => a.order - b.order);
+useEffect(() => {
+  const fetchNavbarLinks = async () => {
+    try {
+      const navbarLinksCollection = collection(
+        db,
+        "settings",
+        "site",
+        "navbarLinks"
+      );
+      const navbarLinksSnapshot = await getDocs(navbarLinksCollection);
+      const fetchedLinks = navbarLinksSnapshot.docs
+        .map((doc) => ({ id: doc.id, ...doc.data() }))
+        .filter((link) => link.enabled === true) // ✅ Only enabled links
+        .sort((a, b) => a.order - b.order);
 
-        setNavbarLinks(
-          fetchedLinks.length ? fetchedLinks.filter((link) => link.enabled) : []
-        );
-      } catch (error) {
-        console.error('Error fetching navbar links:', error);
+      // ✅ Fallback to hardcoded links if Firestore fails
+      if (fetchedLinks.length === 0) {
+        console.warn("⚠️ Firestore navbar links not found. Using fallback.");
+        setNavbarLinks([
+          { id: "home", name: "home", label: "Home", order: 0 },
+          { id: "products", name: "products", label: "Products", order: 1 },
+          { id: "contact", name: "contact", label: "Contact", order: 2 },
+          { id: "pre-order", name: "pre-order", label: "Pre-Order", order: 3 },
+        ]);
+      } else {
+        setNavbarLinks(fetchedLinks);
       }
-    };
+    } catch (error) {
+      console.error("❌ Error fetching navbar links:", error);
+      // ✅ If Firestore fails, use hardcoded fallback
+      setNavbarLinks([
+        { id: "home", name: "home", label: "Home", order: 0 },
+        { id: "products", name: "products", label: "Products", order: 1 },
+        { id: "contact", name: "contact", label: "Contact", order: 2 },
+        { id: "pre-order", name: "pre-order", label: "Pre-Order", order: 3 },
+      ]);
+    }
+  };
 
-    fetchNavbarLinks();
-  }, [user]);
+  fetchNavbarLinks();
+}, []);
+
+  
 
   useEffect(() => {
     if (isDarkMode) {
