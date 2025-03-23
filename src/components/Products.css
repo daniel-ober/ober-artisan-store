@@ -1,3 +1,12 @@
+.products-container {
+  background-color: #f8f8f890;
+  padding: 20px;
+}
+
+.products-page-title {
+  color: #383838;
+}
+
 /* Admin Product Grid */
 .admin-product-grid {
   display: flex;
@@ -7,6 +16,8 @@
   padding: 0 20px; /* Align items */
   width: 100%;
 }
+
+
 
 /* Product Grid for Non-Admins */
 .product-grid {
