@@ -449,7 +449,7 @@ const FeuzonProductDetail = () => {
   };
 
   const handleRemoveFromCart = async () => {
-    const generatedId = `feuzon-${size}-${depth}-${lugs}-${staveQuantity}`;
+    const generatedId = `${stripePriceId}-${size}-${depth}-${reRing}-${lugs}-${staveQuantity}`;
   
     try {
       await removeFromCart(generatedId);
@@ -598,17 +598,17 @@ const FeuzonProductDetail = () => {
             {/* Add to Cart */}
 {/* Add to Cart */}
 {productInCart ? (
-  <div className="cart-hover-container">
-    <button className="in-cart-button" disabled>
+  <div className="artisan-cart-hover-container">
+    <button className="artisan-in-cart-button" disabled>
       ✔ In Cart
     </button>
-    <div className="cart-hover-options">
+    <div className="artisan-cart-hover-options">
       <span onClick={() => window.location.href = '/cart'}>View Cart</span>
       <span onClick={handleRemoveFromCart}>Remove</span> {/* ✅ Use the function */}
     </div>
   </div>
 ) : (
-  <button className="add-to-cart-button" onClick={handleAddToCart}>
+  <button className="artisan-add-to-cart-button" onClick={handleAddToCart}>
     Add to Cart
   </button>
 )}

@@ -11,6 +11,7 @@ const ProductCard = ({ product }) => {
   const { cart, setCart, cartId } = useCart();
   const navigate = useNavigate();
   const [inCart, setInCart] = useState(false);
+  const [cartItemId, setCartItemId] = useState(null);
 
   useEffect(() => {
     checkIfInCart();
@@ -22,12 +23,20 @@ const ProductCard = ({ product }) => {
     const cartSnap = await getDoc(cartRef);
 
     if (cartSnap.exists() && Array.isArray(cartSnap.data().cart)) {
-      setInCart(cartSnap.data().cart.some(item => item.id === product.id));
+      const foundItem = cartSnap.data().cart.find((item) => item.id === product.id);
+      if (foundItem) {
+        setInCart(true);
+        setCartItemId(foundItem.id);
+      } else {
+        setInCart(false);
+        setCartItemId(null);
+      }
     }
   };
 
   const handleCartAction = async () => {
-    if (!cartId) return;
+    if (!cartId || product.currentQuantity === 0) return; // Prevent adding out-of-stock items
+
     const cartRef = doc(db, "carts", cartId);
 
     try {
@@ -37,7 +46,7 @@ const ProductCard = ({ product }) => {
         : [];
 
       if (inCart) {
-        updatedCart = updatedCart.filter(item => item.id !== product.id);
+        updatedCart = updatedCart.filter((item) => item.id !== product.id);
       } else {
         updatedCart.push({
           id: product.id,
@@ -70,30 +79,9 @@ const ProductCard = ({ product }) => {
     }
   };
 
-  let buttonText;
-  let buttonAction;
-  let buttonClass = "prod-card-button";
-
-  if (product.id === "soundlegend") {
-    buttonText = "Request Consultation";
-    buttonAction = () => navigate("/products/soundlegend");
-  } else if (product.isPreOrder) {
-    buttonText = "Pre-Order Now";
-    buttonAction = () => navigate(`/products/${product.id}`);
-  } else if (product.currentQuantity === 0) {
-    buttonText = "Notify Me When Available";
-    buttonAction = null;
-    buttonClass = "prod-card-notify-me-button";
-  } else if (inCart) {
-    buttonText = "Remove from Cart";
-    buttonAction = handleCartAction;
-  } else {
-    buttonText = "Add to Cart";
-    buttonAction = handleCartAction;
-  }
-
   return (
     <div className="product-card">
+      {/* Product Image - Ensures Full View */}
       <div
         className="product-image-container"
         onClick={() => navigate(`/products/${product.id}`)}
@@ -110,25 +98,47 @@ const ProductCard = ({ product }) => {
         />
       </div>
 
+      {/* Product Info */}
       <div className="product-info">
-        <h3 className="product-name">{product.name}</h3>
-        <p className="product-description">{product.description}</p>
-        <p className="delivery-time">Delivery: {product.deliveryTime}</p>
-        <p className="card-product-price">${product.price}</p>
+      <h2 className="product-name">{product.name}</h2>
+<p className="product-description">{product.description}</p>
 
-        <button
-          className="view-details-button"
-          onClick={() => navigate(`/products/${product.id}`)}
-        >
-          Click for Product Details
-        </button>
 
-        <div className="product-button-container">
-          <button className={buttonClass} onClick={buttonAction} disabled={!buttonAction}>
-            {buttonText}
-          </button>
+
+        <div className="product-card-bottom">
+          <p className="card-product-price">${product.price}</p>
+          <p className="delivery-time">Delivery: {product.deliveryTime}</p>
+
+          {/* Cart Button Logic */}
+          {product.currentQuantity === 0 ? (
+            <button className="out-of-stock-button" disabled>
+              Out of Stock
+            </button>
+          ) : inCart ? (
+
+<div className="cart-hover-wrapper">
+  <button className="in-cart-button">✔ In Cart</button>
+  <div className="cart-hover-options">
+    <span onClick={() => navigate("/cart")}>View Cart</span>
+    <span onClick={handleCartAction}>Remove</span>
+  </div>
+</div>
+
+
+          ) : (
+            <button className="add-to-cart-button" onClick={handleCartAction}>
+              Add to Cart
+            </button>
+          )}
         </div>
       </div>
+        {/* More Info Link */}
+        <p 
+          className="more-info-link"
+          onClick={() => navigate(`/products/${product.id}`)}
+        >
+          More Info
+        </p>
     </div>
   );
 };
