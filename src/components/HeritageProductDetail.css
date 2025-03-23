@@ -128,7 +128,7 @@
 }
 
 /* 📌 Add to Cart / In Cart Button Styles */
-.add-to-cart-button, .in-cart-button {
+.artisan-add-to-cart-button, .artisan-in-cart-button {
   background-color: #4135ea;
   color: rgb(255, 255, 255);
   font-size: 18px;
@@ -147,14 +147,14 @@
 }
 
 /* 📌 Hover Dropdown for In Cart */
-.cart-hover-container {
+.artisan-cart-hover-container {
   position: relative;
   display: inline-block;
   width: 100%;
 }
 
 /* 🔥 Fixes width issue & prevents overflow */
-.cart-hover-options {
+.artisan-cart-hover-options {
   position: absolute;
   top: 100%;
   left: 0;
@@ -172,13 +172,13 @@
 }
 
 /* Keep dropdown visible when hovering over the container */
-.cart-hover-container:hover .cart-hover-options {
+.artisan-cart-hover-container:hover .artisan-cart-hover-options {
   display: block;
   margin-top: -4px; /* ✅ Eliminates any gap */
 }
 
 /* Options inside dropdown */
-.cart-hover-options span {
+.artisan-cart-hover-options span {
   display: block;
   padding: 12px;
   cursor: pointer;
@@ -188,13 +188,13 @@
   width: 100%;
 }
 
-.cart-hover-options span:hover {
+.artisan-cart-hover-options span:hover {
   background-color: #f5f5f5;
 }
 
 
 
-.cart-hover-container:hover .cart-hover-options {
+.artisan-cart-hover-container:hover .artisan-cart-hover-options {
   display: block;
 }
 

@@ -57,7 +57,7 @@ const HeritageProductDetail = () => {
   const handleRemoveFromCart = () => {
     if (cartItemId) {
       removeFromCart(cartItemId);
-      toast.success('Removed from cart');
+      toast.success('🗑️ Item removed from cart.');
     }
   };
 
@@ -125,7 +125,7 @@ const HeritageProductDetail = () => {
     };
 
     await addToCart(cartItem, cartItem);
-    toast.success('Added to cart!');
+    toast.success('🛒 Item added to cart!');
   };
 
   useEffect(() => {
@@ -346,17 +346,17 @@ const HeritageProductDetail = () => {
           <p className="delivery-time">Est Delivery: 5-7 weeks</p>
           {/* Add to Cart */}
           {buttonText === 'In Cart' ? (
-            <div className="cart-hover-container">
-              <button className="in-cart-button" disabled>
+            <div className="artisan-cart-hover-container">
+              <button className="artisan-in-cart-button" disabled>
                 ✔ In Cart
               </button>
-              <div className="cart-hover-options">
+              <div className="artisan-cart-hover-options">
                 <span onClick={() => navigate('/cart')}>View Cart</span>
                 <span onClick={handleRemoveFromCart}>Remove</span>
               </div>
             </div>
           ) : (
-            <button className="add-to-cart-button" onClick={handleAddToCart}>
+            <button className="artisan-add-to-cart-button" onClick={handleAddToCart}>
               {buttonText}
             </button>
           )}
