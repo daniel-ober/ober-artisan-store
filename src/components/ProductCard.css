@@ -1,26 +1,35 @@
+/* ✅ Ensure Product Cards Have a Consistent Layout */
+.products-container {
+  background-color: #f8f8f890;
+  padding: 20px;
+}
+
+/* ✅ Product Grid to Align Everything */
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 0 20px;
+  align-items: stretch;
+}
+
+/* ✅ Product Card */
 .product-card {
   display: flex;
   flex-direction: column;
   width: 100%;
   max-width: 340px;
-  background: #f9f9f9; /* Softer background */
+  background: #f9f9f9;
   border-radius: 6px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Subtle depth */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   text-align: center;
-  height: auto; /* Ensures it adapts to max height */
+  height: auto;
   transition: transform 0.2s ease, box-shadow 0.3s ease;
   position: relative;
-  border: 1px solid #e0e0e0; /* Subtle border */
-}
-
-/* Ensure cards have equal height dynamically */
-.product-card-group-preorder {
-  min-height: var(--max-card-height-preorder, auto);
-}
-
-.product-card-group-regular {
-  min-height: var(--max-card-height-regular, auto);
+  border: 1px solid #e0e0e0;
+  align-items: center;
 }
 
 /* Hover Effect */
@@ -29,116 +38,105 @@
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
 }
 
-/* Image Container */
+/* ✅ Image Container (Ensures Full Image View) */
 .product-image-container {
   height: 250px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
-  cursor: pointer;
 }
 
 .product-image {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
+  object-fit: contain;
+  max-height: 100%;
   transition: transform 0.3s ease;
 }
 
-/* Slight zoom effect on hover */
+/* Image Hover Effect */
 .product-card:hover .product-image {
   transform: scale(1.05);
 }
 
-/* Product Info - Clean Layout */
+/* ✅ Product Info - Clean Layout */
 .product-info {
   flex-grow: 1;
   padding: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Ensures all elements stay aligned */
+  justify-content: space-between;
   align-items: center;
 }
 
-/* Product Name */
+/* ✅ Product Name */
+/* 🆕 Product Name (MERCH ONLY) */
 .product-name {
-  font-size: 26px;
-  font-weight: 800;
-  font-family: "Poppins", sans-serif;
-  text-transform: uppercase;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 12px 0 8px;
   color: #222;
-  letter-spacing: 1px;
-  margin-bottom: 8px;
-  margin-top: 0px;
-  min-height: 50px; /* Ensures all names are the same height */
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  min-height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Product Description */
+/* 🔁 Truncated Description (starts at top, 3 lines only) */
 .product-description {
   font-size: 14px;
   font-family: sans-serif;
   text-align: justify;
   color: #222;
-  letter-spacing: 1px;
-  margin-bottom: 8px;
-  min-height: var(--min-description-height, auto); /* Dynamically set */
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  line-height: 1.4;
+  margin-bottom: 10px;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3;     /* ⏳ Show only first 3 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 72px; /* fallback for cross-browser line clipping */
 }
 
-/* Delivery Time */
-.delivery-time {
-  font-size: 14px;
-  color: #666;
-  min-height: 20px; /* Ensures delivery times align */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Price Styling */
+/* ✅ Price Styling */
 .card-product-price {
   font-size: 20px;
   font-weight: 500;
-  color: #27AE60; /* Sophisticated green */
+  color: #27AE60;
   margin: 10px 0;
-  min-height: 30px; /* Ensures prices align */
+  min-height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* View Details Button */
-.view-details-button {
+/* ✅ Delivery Time */
+.delivery-time {
   font-size: 14px;
   color: #666;
-  background: none;
-  border: none;
-  text-decoration: underline;
-  cursor: pointer;
-  transition: color 0.3s ease;
+  min-height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.view-details-button:hover {
-  color: black;
-}
-
-/* Button Container - Aligns Buttons */
-.product-button-container {
+/* ✅ Button Container - Ensures Bottom Alignment */
+.product-card-bottom {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
   justify-content: flex-end;
-  min-height: 80px; /* Ensures buttons align */
+  min-height: 80px;
 }
 
-/* Uniform Button Sizing */
-.prod-card-add-to-cart-button,
-.prod-card-view-in-cart-button,
-.prod-card-notify-me-button {
+/* ✅ Add to Cart Button */
+.add-to-cart-button {
   font-size: 16px;
   font-weight: bold;
   width: 95%;
@@ -146,32 +144,224 @@
   border-radius: 8px;
   border: none;
   cursor: pointer;
+  background-color: #1D1D1D;
+  color: white;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-/* Button Colors */
-.prod-card-add-to-cart-button,
-.prod-card-view-in-cart-button {
-  background-color: #1D1D1D; /* Dark, modern feel */
-  color: white;
-}
-
-.prod-card-add-to-cart-button:hover,
-.prod-card-view-in-cart-button:hover {
+.add-to-cart-button:hover {
   background-color: #333;
 }
 
-/* Notify Me Button */
-.prod-card-notify-me-button {
-  background-color: #888; /* Neutral color */
+/* ✅ In Cart Button */
+/* ✅ In Cart Button */
+.in-cart-button {
+  font-size: 16px;
+  font-weight: bold;
+  width: 100%;
+  min-height: 50px;
+  border-radius: 8px;
+  border: none;
+  cursor: default;
+  background-color: #1d1d1d;
   color: white;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  position: relative;
+  z-index: 1;
 }
 
-.prod-card-notify-me-button:hover {
-  background-color: #666;
+/* ✅ Hover Wrapper: wraps both button + hover options */
+/* ✅ Hover Wrapper - Contains both button + hover options */
+.cart-hover-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 95%;
 }
 
-/* Responsive Adjustments */
+/* ✅ In-Cart Button (now part of hover trigger area) */
+.in-cart-button {
+  font-size: 16px;
+  font-weight: bold;
+  width: 100%;
+  min-height: 50px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background-color: #1d1d1d;
+  color: white;
+  text-align: center;
+  padding: 14px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ✅ Hover Options */
+.cart-hover-options {
+  position: absolute;
+  bottom: 50px; /* exact height of button */
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 6px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 2;
+  pointer-events: none;
+  width: 95%;
+  white-space: nowrap;
+}
+
+/* ✅ Show dropdown on hover of wrapper */
+.cart-hover-wrapper:hover .cart-hover-options {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* ✅ Options styling */
+.cart-hover-options span {
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 4px;
+  text-align: center;
+  transition: background-color 0.2s ease;
+}
+
+.cart-hover-options span:hover {
+  background-color: #f2f2f2;
+}
+
+/* ✅ Optional Arrow */
+.cart-hover-options::before {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: white transparent transparent transparent;
+}
+
+/* ✅ Show Hover on Wrapper */
+.cart-hover-wrapper:hover .cart-hover-options {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* ✅ Hover Items */
+.cart-hover-options span {
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 4px;
+  text-align: center;
+  transition: background-color 0.2s ease;
+}
+
+.cart-hover-options span:hover {
+  background-color: #f2f2f2;
+}
+
+/* ✅ Arrow Indicator */
+.cart-hover-options::before {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: white transparent transparent transparent;
+}
+
+
+/* ✅ Hover Options Text Styling */
+.cart-hover-options span {
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 4px;
+  text-align: center;
+  transition: background-color 0.2s ease;
+}
+
+.cart-hover-options span:hover {
+  background-color: #f2f2f2;
+}
+
+/* ✅ Arrow Indicator */
+.cart-hover-options::before {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: white transparent transparent transparent;
+}
+
+/* ✅ Add to Cart Button */
+.add-to-cart-button {
+  font-size: 16px;
+  font-weight: bold;
+  width: 95%;
+  min-height: 50px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background-color: #1d1d1d;
+  color: white;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.add-to-cart-button:hover {
+  background-color: #333;
+}
+
+
+/* ✅ More Info Link */
+.more-info-link {
+  font-size: 14px;
+  color: #666;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-top: 5px;
+  transition: color 0.3s ease;
+}
+
+.more-info-link:hover {
+  color: black;
+}
+
+/* ✅ Out of Stock Button */
+.out-of-stock-button {
+  font-size: 16px;
+  font-weight: bold;
+  width: 95%;
+  min-height: 50px;
+  border-radius: 8px;
+  border: none;
+  background-color: #888;
+  color: white;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* ✅ Responsive Adjustments */
 @media (max-width: 768px) {
   .product-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -186,8 +376,8 @@
     padding: 15px;
   }
 
-  .prod-card-add-to-cart-button,
-  .prod-card-view-in-cart-button {
+  .add-to-cart-button,
+  .in-cart-button {
     padding: 12px;
     font-size: 14px;
   }
