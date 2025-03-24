@@ -118,8 +118,7 @@ stripeWebhookApp.post("/", async (req, res) => {
     }
 
     // ✅ Verify the webhook signature with the raw body
-    event = stripe.webhooks.constructEvent(req.body, sig, STRIPE_WEBHOOK_SECRET.value());
-  } catch (err) {
+    event = stripe.webhooks.constructEvent(req.rawBody, sig, STRIPE_WEBHOOK_SECRET.value());  } catch (err) {
     console.error("❌ Webhook signature verification failed:", err.message);
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }
