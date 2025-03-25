@@ -42,7 +42,7 @@ const PreOrderCard = ({ product }) => {
 
       {/* Artisan Series Logo */}
       <img
-        src={`/artisanseries/${product.id}-black.png`} 
+        src={`/v2logo-large/${product.id}-black.png`} 
         alt={`${product.name} logo`}
         className="preorder-header-logo"
       />

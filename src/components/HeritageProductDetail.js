@@ -113,7 +113,7 @@ const HeritageProductDetail = () => {
     const cartItem = {
       id: `${selectedOption.stripePriceId}-${size}-${depth}-${hasReRing}-${selectedOption.lugQuantity}-${selectedOption.staveQuantity}`,
       productId: 'heritage',
-      name: 'HERÌTAGE',
+      name: 'HERITAGE',
       size,
       depth,
       reRing: hasReRing,
@@ -268,20 +268,24 @@ const HeritageProductDetail = () => {
 
   return (
     <div className="heritage-product-detail">
-      <h1>HERÍTAGE Series Snare Drum</h1>
+         <img
+            src="/resized-logos/heritage-white.png"
+            alt="HERITAGE Series"
+            className="artisanseries-header-image"
+          />
 
       <div className="heritage-product-content">
         <div className="heritage-product-image">
           <img
             src="https://firebasestorage.googleapis.com/v0/b/danoberartisandrums-dev.firebasestorage.app/o/products%2FIMG_6123.png?alt=media&token=ec8d40b8-ebae-41dc-93c6-e7936055ead7"
-            alt="HERÍTAGE Snare Drum"
+            alt="HERITAGE Snare Drum"
           />
         </div>
 
         <div className="heritage-product-options">
           {/* 📌 Default Features List */}
           <div className="heritage-features">
-            <h2>HERÍTAGE Series Features</h2>
+            <h2>HERITAGE Series Features</h2>
             <ul>
               <li>Northern Red Oak</li>
               <li>Stave Construction</li>
