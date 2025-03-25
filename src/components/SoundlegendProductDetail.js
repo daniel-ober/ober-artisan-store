@@ -94,6 +94,11 @@ const SoundLegendProductDetail = () => {
 
   return (
     <div className="soundlegend-product-detail">
+             <img
+            src="/resized-logos/soundlegend-white.png"
+            alt="SOUNDLEGEND Series"
+            className="artisanseries-header-image"
+          />
       {/* 🔥 SoundLegend Experience Section */}
       <div className="soundlegend-product-content">
         {/* 📌 Left Side: Product Image */}

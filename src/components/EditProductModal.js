@@ -54,7 +54,7 @@ const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
         let firestorePricingOptions = fetchedProduct.pricingOptions || [];
         let stripePricingOptions = [];
 
-        if (["HERÌTAGE", "FEUZØN", "SOUNDLEGEND"].includes(fetchedProduct.name)) {
+        if (["HERITAGE", "FEUZØN", "SOUNDLEGEND"].includes(fetchedProduct.name)) {
           if (fetchedProduct.stripeProductId) {
             const stripePrices = await fetchStripePrices(fetchedProduct.stripeProductId);
 
