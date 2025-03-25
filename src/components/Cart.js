@@ -103,7 +103,7 @@ const Cart = () => {
         stripePriceId: product.stripePriceId,
       }));
 
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/createCheckoutSession`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/createCheckoutSession`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -156,32 +156,74 @@ const Cart = () => {
                   </td>
                   <td>
                     <p>{item.name}</p>
-                    <p className="cart-sub-description">
-                      {item.size}" Diameter | {item.depth}" Depth | {item.lugQuantity}-lug |{' '}
-                      {item.reRing ? 'With Re-Ring' : 'Re-Rings: None'}
-                    </p>
+                    {item.category === 'artisan' ? (
+                      <p className="cart-sub-description">
+                        {item.size}" Diameter | {item.depth}" Depth | {item.lugQuantity}-lug |{' '}
+                        {item.reRing ? 'With Re-Ring' : 'Re-Rings: None'}
+                      </p>
+                    ) : (
+                      <p className="cart-sub-description">
+                        {(item.size || item.color) ? (
+                          <>
+                            {item.size && <span>Size: {item.size}</span>}
+                            {item.color && (
+                              <span>
+                                {item.size && ' | '}Color: {item.color}
+                              </span>
+                            )}
+                            {/* Add additional user selection details as needed */}
+                          </>
+                        ) : (
+                          item.name
+                        )}
+                      </p>
+                    )}
                   </td>
-                  <td>{item.price !== undefined ? `$${Number(item.price).toFixed(2)}` : <span style={{ color: "red" }}>⚠️ Missing Price</span>}</td>
+                  <td>
+                    {item.price !== undefined ? (
+                      `$${Number(item.price).toFixed(2)}`
+                    ) : (
+                      <span style={{ color: 'red' }}>⚠️ Missing Price</span>
+                    )}
+                  </td>
                   <td>
                     {item.category === 'artisan' ? (
                       <span className="quantity-value">1</span>
                     ) : (
                       <div className="quantity-control">
-                        <button className="quantity-btn" onClick={() => updateQuantity(item.id, Math.max(item.quantity - 1, 1))} disabled={item.quantity <= 1}>-</button>
+                        <button
+                          className="quantity-btn"
+                          onClick={() => updateQuantity(item.id, Math.max(item.quantity - 1, 1))}
+                          disabled={item.quantity <= 1}
+                        >
+                          -
+                        </button>
                         <span className="quantity-value">{item.quantity}</span>
-                        <button className="quantity-btn" onClick={() => updateQuantity(item.id, Math.min(item.quantity + 1, item.currentQuantity))} disabled={item.quantity >= item.currentQuantity}>+</button>
+                        <button
+                          className="quantity-btn"
+                          onClick={() =>
+                            updateQuantity(item.id, Math.min(item.quantity + 1, item.currentQuantity))
+                          }
+                          disabled={item.quantity >= item.currentQuantity}
+                        >
+                          +
+                        </button>
                       </div>
                     )}
                   </td>
                   <td>${getItemTotal(item).toFixed(2)}</td>
                   <td>
-                    <button onClick={() => removeFromCart(item.id)} className="remove-btn">Remove</button>
+                    <button onClick={() => removeFromCart(item.id)} className="remove-btn">
+                      Remove
+                    </button>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
-          <button onClick={handleCheckout} className="checkout-button" disabled={loading}>{loading ? 'Processing...' : 'Checkout'}</button>
+          <button onClick={handleCheckout} className="checkout-button" disabled={loading}>
+            {loading ? 'Processing...' : 'Checkout'}
+          </button>
         </>
       )}
 

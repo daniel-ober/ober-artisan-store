@@ -9,6 +9,16 @@
     text-align: center;
 }
 
+.print-logo-wrapper {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  .print-logo {
+    max-width: 200px;
+    height: auto;
+  }
+
 .transaction-success h1 {
     font-size: 2.5rem;
     color: #4caf50;
@@ -90,3 +100,62 @@ color: #000000;
 .signup-button:hover {
     background: #e0e0e0;
 }
+
+.print-logo-wrapper {
+    display: none;
+  }
+  
+
+@media print {
+
+    .print-logo-wrapper {
+        display: block;
+        margin-bottom: 1rem;
+      }
+    
+      .print-logo {
+        max-width: 180px;
+      }
+    
+    body * {
+      visibility: hidden;
+    }
+  
+    .transaction-success, .transaction-success * {
+      visibility: hidden;
+    }
+  
+    .transaction-success {
+      visibility: hidden;
+    }
+  
+    .transaction-success h1 {
+      font-size: 12pt;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+  
+    .transaction-success h2,
+    .transaction-success h3 {
+      font-size: 10pt;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+    }
+  
+    .transaction-success p,
+    .transaction-success li {
+      font-size: 10pt;
+      line-height: 1.5;
+    }
+  
+    .print-btn,
+    footer,
+    nav,
+    .menu-toggle {
+      display: none !important;
+    }
+  
+    .checkout-summary-items {
+      page-break-inside: avoid;
+    }
+  }
