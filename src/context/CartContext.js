@@ -14,18 +14,18 @@ const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const { user } = useAuth();
   const [cartId, setCartId] = useState('');
-  const [cart, setCart] = useState([]); // ✅ Ensure cart is always an array
+  const [cart, setCart] = useState([]); // Ensure cart is always an array
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  /** ✅ Generate Unique Cart ID */
+  /** Generate Unique Cart ID */
   const generateCartId = () => {
     const timestamp = Date.now().toString(36);
     const randomChars = Math.random().toString(36).substring(2, 10);
     return `${timestamp}${randomChars}`;
   };
 
-  /** ✅ Initialize Cart from Firestore or LocalStorage */
+  /** Initialize Cart from Firestore or LocalStorage */
   useEffect(() => {
     const initializeCart = async () => {
       setLoading(true);
@@ -45,11 +45,11 @@ export const CartProvider = ({ children }) => {
         if (cartDoc.exists()) {
           setCart(cartDoc.data().cart || []);
         } else {
-          await setDoc(cartRef, { cart: [] }); // ✅ Auto-create cart if missing
+          await setDoc(cartRef, { cart: [] }); // Auto-create cart if missing
           setCart([]);
         }
       } catch (err) {
-        console.error('❌ Error initializing cart:', err);
+        console.error('Error initializing cart:', err);
       } finally {
         setLoading(false);
       }
@@ -58,18 +58,17 @@ export const CartProvider = ({ children }) => {
     initializeCart();
   }, [user]);
 
-  /** ✅ Sync Cart to Firestore */
+  /** Sync Cart to Firestore */
   const updateFirestoreCart = async (updatedCart) => {
-    // console.log('🔥 Saving Cart to Firestore:', updatedCart);
-
     if (!cartId) {
-      console.warn('❌ Cannot update Firestore: No cartId found.');
+      console.warn('Cannot update Firestore: No cartId found.');
       return;
     }
 
+    // Preserve currentQuantity and maxQuantity for each item
     const sanitizedCart = updatedCart.map((item) => ({
       id: item.id || 'N/A',
-productId: item.productId || item.id || "unknown",
+      productId: item.productId || item.id || "unknown",
       name: item.name || 'Unnamed Product',
       category: item.category || 'unknown',
       quantity: item.quantity || 1,
@@ -80,6 +79,8 @@ productId: item.productId || item.id || "unknown",
       staveQuantity: item.staveQuantity || 'N/A',
       reRing: item.reRing ?? false,
       stripePriceId: item.stripePriceId || '',
+      currentQuantity: item.currentQuantity || 1,  // Added here
+      maxQuantity: item.maxQuantity || 1,           // And here, if needed
       timestamp: new Date().toISOString(),
     }));
 
@@ -89,47 +90,39 @@ productId: item.productId || item.id || "unknown",
         cart: sanitizedCart,
         lastUpdated: serverTimestamp(),
       });
-      // console.log('✅ Cart successfully updated in Firestore!');
     } catch (error) {
-      console.error('❌ Firestore Update Error:', error);
+      console.error('Firestore Update Error:', error);
     }
   };
 
-  /** ✅ Add Product to Cart */
+  /** Add Product to Cart */
   const addToCart = async (product, selectedOptions) => {
     if (!product || typeof product !== 'object') {
-      console.error('❌ addToCart Error: product is not an object!', product);
+      console.error('addToCart Error: product is not an object!', product);
       alert('An unexpected error occurred while adding the item to the cart.');
       return;
     }
 
     if (!cartId) {
-      console.warn('❌ Cannot update Firestore: No cartId found.');
+      console.warn('Cannot update Firestore: No cartId found.');
       alert('Cart ID is missing. Please reload the page.');
       return;
     }
 
-    // Ensure the product has images; otherwise, fetch from Firestore
-    let productImages =
-      product.images && product.images.length > 0 ? product.images : [];
+    let productImages = product.images && product.images.length > 0 ? product.images : [];
 
     if (productImages.length === 0) {
       try {
         const productRef = doc(db, 'products', product.productId);
         const productSnap = await getDoc(productRef);
-
         if (productSnap.exists() && productSnap.data().images?.length > 0) {
           productImages = productSnap.data().images;
         }
       } catch (error) {
-        console.error(
-          '❌ Error fetching product images from Firestore:',
-          error
-        );
+        console.error('Error fetching product images from Firestore:', error);
       }
     }
 
-    // Construct the cart item
     const cartItem = {
       id: `${selectedOptions.stripePriceId}-${selectedOptions.size}-${selectedOptions.depth}-${selectedOptions.reRing}-${selectedOptions.lugQuantity}-${selectedOptions.staveQuantity}`,
       productId: product.productId || product.id || selectedOptions.productId || "unknown",
@@ -145,10 +138,7 @@ productId: item.productId || item.id || "unknown",
       stripePriceId: selectedOptions.stripePriceId || '',
       currentQuantity: product.currentQuantity || 1,
       maxQuantity: product.maxQuantity || 1,
-      images:
-        productImages.length > 0
-          ? productImages
-          : ['https://i.imgur.com/eoKsILV.png'], // ✅ Use Firestore images or fallback
+      images: productImages.length > 0 ? productImages : ['https://i.imgur.com/eoKsILV.png'],
       timestamp: new Date().toISOString(),
     };
 
@@ -177,10 +167,11 @@ productId: item.productId || item.id || "unknown",
       await updateFirestoreCart(updatedCart);
       setCart(updatedCart);
     } catch (error) {
-      console.error('❌ Firestore Update Error:', error);
+      console.error('Firestore Update Error:', error);
     }
   };
-  /** ✅ Increment or Decrement Quantity */
+
+  /** Increment or Decrement Quantity */
   const updateQuantity = async (productId, newQuantity) => {
     setCart((prevCart) => {
       const updatedCart = prevCart.map((item) =>
@@ -191,34 +182,27 @@ productId: item.productId || item.id || "unknown",
     });
   };
 
-  /** ✅ Remove Product from Cart */
+  /** Remove Product from Cart */
   const removeFromCart = async (productId) => {
-    // console.log('🗑 Removing item from cart:', productId);
-
     let updatedCart = cart.filter((item) => item.id !== productId);
-
     setCart(updatedCart);
     await updateFirestoreCart(updatedCart);
-    // console.log("🛒 Item removed from cart:", productId);
   };
 
-  /** ✅ Clear Cart After Checkout */
+  /** Clear Cart After Checkout */
   const clearCartOnCheckout = async () => {
-    // console.log("🚀 Clearing cart after successful checkout...");
-
     if (!cartId) {
-      console.warn('❌ Cannot clear cart: No cartId found.');
+      console.warn('Cannot clear cart: No cartId found.');
       return;
     }
 
     try {
       const cartRef = doc(db, 'carts', cartId);
-      await updateDoc(cartRef, { cart: [] }); // ✅ Clear Firestore cart
-      setCart([]); // ✅ Clear React state
-      localStorage.removeItem('cartId'); // ✅ Remove cartId from localStorage
-      // console.log("✅ Cart successfully cleared.");
+      await updateDoc(cartRef, { cart: [] });
+      setCart([]);
+      localStorage.removeItem('cartId');
     } catch (error) {
-      console.error('❌ Error clearing cart:', error);
+      console.error('Error clearing cart:', error);
     }
   };
 

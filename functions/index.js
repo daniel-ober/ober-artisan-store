@@ -1,179 +1,171 @@
-const { onRequest } = require("firebase-functions/v2/https");
-const { defineSecret } = require("firebase-functions/params");
-const admin = require("firebase-admin");
-const express = require("express");
-const axios = require("axios");
-const stripeLib = require("stripe");
+/*******************************************************
+ * functions/index.js
+ *******************************************************/
+const { onRequest } = require('firebase-functions/v2/https');
+const { defineSecret } = require('firebase-functions/params');
+const admin = require('firebase-admin');
+const express = require('express');
+const stripeLib = require('stripe');
 
-// ✅ Load Secrets
-const STRIPE_SECRET_KEY = defineSecret("STRIPE_SECRET_KEY");
-const STRIPE_WEBHOOK_SECRET = defineSecret("STRIPE_WEBHOOK_SECRET");
-const PRINTIFY_API_KEY = defineSecret("PRINTIFY_API_KEY");
+const STRIPE_SECRET_KEY = defineSecret('STRIPE_SECRET_KEY');
+const STRIPE_WEBHOOK_SECRET = defineSecret('STRIPE_WEBHOOK_SECRET');
+const CLIENT_URL = defineSecret('CLIENT_URL');
 
-// ✅ Initialize Firebase
 admin.initializeApp();
 const db = admin.firestore();
-
-// ✅ Initialize Express App for Regular API Endpoints
 const app = express();
-app.use(express.json()); // ✅ Standard JSON body parsing
+app.use(express.json());
 
-// ✅ CORS Middleware
 const allowedOrigins = [
-  "https://oberartisandrums.com",
-  "https://danoberartisandrums.web.app"
+  'http://localhost:3000',
+  'https://oberartisandrums.com',
+  'https://danoberartisandrums.web.app',
 ];
-
 app.use((req, res, next) => {
-  if (allowedOrigins.includes(req.headers.origin)) {
-    res.set("Access-Control-Allow-Origin", req.headers.origin);
-    res.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-    res.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  const origin = req.headers.origin;
+  if (!origin || allowedOrigins.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin || '*');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   }
-
-  if (req.method === "OPTIONS") {
-    return res.status(204).send("");
-  }
-
+  if (req.method === 'OPTIONS') return res.sendStatus(204);
   next();
 });
 
-// ✅ Stripe Checkout Session Creation
-app.post("/createCheckoutSession", async (req, res) => {
+app.post('/createCheckoutSession', async (req, res) => {
   try {
-    console.log("🛒 Received Checkout Request:", req.body);
-
     const stripe = stripeLib(STRIPE_SECRET_KEY.value());
+    const clientUrl = CLIENT_URL.value().trim();
+    const { products, userId, customerEmail } = req.body;
 
-    const {
-      products,
-      userId,
-      customerFirstName,
-      customerLastName,
-      customerEmail,
-      customerPhone,
-      shippingAddress,
-    } = req.body;
-
-    if (!products || !Array.isArray(products) || products.length === 0) {
-      return res.status(400).json({ error: "Invalid or empty cart." });
+    if (!Array.isArray(products) || products.length === 0) {
+      return res.status(400).json({ error: 'Invalid or empty cart.' });
     }
 
-    const lineItems = products.map((product) => ({
+    const guestToken = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    const lineItems = products.map(p => ({
       price_data: {
-        currency: "usd",
-        product_data: {
-          name: product.name || "Unnamed Product",
-          description: product.description || "No description available",
-          metadata: { productId: product.id },
-        },
-        unit_amount: Math.round(product.price * 100),
+        currency: 'usd',
+        product_data: { name: p.name, metadata: { productId: p.id } },
+        unit_amount: Math.round(p.price * 100),
       },
-      quantity: product.quantity || 1,
+      quantity: p.quantity || 1,
     }));
 
+    const successUrl = `${clientUrl}/checkout-summary?session_id={CHECKOUT_SESSION_ID}&guest_token=${guestToken}`;
+    const cancelUrl = `${clientUrl}/cart`;
+
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card"],
+      payment_method_types: ['card'],
       line_items: lineItems,
-      mode: "payment",
-      success_url: `https://oberartisandrums.com/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `https://oberartisandrums.com/cart`,
-      metadata: {
-        userId: userId || "guest",
-        customerFirstName,
-        customerLastName,
-        customerEmail,
-        customerPhone: customerPhone || "No phone provided",
-        shippingAddress: JSON.stringify(shippingAddress || {}),
-      },
+      mode: 'payment',
+      success_url: successUrl,
+      cancel_url: cancelUrl,
       customer_email: customerEmail,
-      shipping_address_collection: { allowed_countries: ["US", "CA"] },
+      shipping_address_collection: { allowed_countries: ['US', 'CA'] },
       allow_promotion_codes: true,
+      metadata: { userId: userId || 'guest', guestToken }
     });
 
-    console.log("✅ Stripe Checkout Session Created:", session.url);
-    return res.status(200).json({ url: session.url });
-  } catch (error) {
-    console.error("❌ Error Creating Stripe Checkout Session:", error);
-    return res.status(500).json({ error: error.message });
+    res.status(200).json({ url: session.url });
+  } catch (err) {
+    console.error('Error creating checkout session:', err);
+    res.status(500).json({ error: err.message });
   }
 });
 
-// ✅ Stripe Webhook Handling - **Ensuring Proper Raw Body**
-const stripeWebhookApp = express();
-stripeWebhookApp.use(express.raw({ type: "application/json" })); // 🔥 Prevent JSON parsing
-
-stripeWebhookApp.post("/", async (req, res) => {
-  console.log("📩 Incoming Stripe Webhook Request");
-
-  const sig = req.headers["stripe-signature"];
-  let event;
-
+app.get('/orders/by-session/:sessionId', async (req, res) => {
   try {
-    const stripe = stripeLib(STRIPE_SECRET_KEY.value());
+    const snapshot = await db.collection('orders')
+      .where('stripeSessionId', '==', req.params.sessionId)
+      .limit(1)
+      .get();
+    if (snapshot.empty) return res.status(404).json({ error: 'Order not found' });
+    res.json(snapshot.docs[0].data());
+  } catch (err) {
+    console.error('Error fetching order:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
 
-    if (!sig || !req.body) {
-      console.error("❌ Missing rawBody or signature for Stripe verification.");
-      return res.status(400).send("Missing rawBody or signature.");
-    }
+const stripeWebhookApp = express();
+stripeWebhookApp.use(express.raw({ type: 'application/json' }));
 
-    // ✅ Verify the webhook signature with the raw body
-    event = stripe.webhooks.constructEvent(req.rawBody, sig, STRIPE_WEBHOOK_SECRET.value());  } catch (err) {
-    console.error("❌ Webhook signature verification failed:", err.message);
+stripeWebhookApp.post('/', async (req, res) => {
+  const stripe = stripeLib(STRIPE_SECRET_KEY.value());
+  let event;
+  try {
+    event = stripe.webhooks.constructEvent(req.rawBody, req.headers['stripe-signature'], STRIPE_WEBHOOK_SECRET.value());
+  } catch (err) {
+    console.error('Webhook verification failed:', err.message);
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }
 
-  console.log(`📩 Received Stripe Webhook Event: ${event.type}`);
-
-  // ✅ Handle Checkout Session Completion
-  if (event.type === "checkout.session.completed") {
-    console.log("✅ Checkout Session Completed Event Received");
-
-    const session = event.data.object;
-    if (!session.metadata || !session.metadata.userId) {
-      console.error("❌ Missing user metadata in session.");
-      return res.status(400).send("Missing user metadata.");
-    }
-
-    console.log("✅ Creating Order in Firestore...");
-    const orderId = `ORD-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
-
-    const orderData = {
-      orderId,
-      userId: session.metadata.userId || "guest",
-      email: session.customer_email || "unknown",
-      totalAmount: session.amount_total / 100,
-      currency: session.currency || "usd",
-      status: "Processing",
-      createdAt: admin.firestore.FieldValue.serverTimestamp(),
-      paymentIntentId: session.payment_intent,
-    };
+  if (event.type === 'checkout.session.completed') {
+    const sessionId = event.data.object.id;
 
     try {
-      await db.collection("orders").doc(orderId).set(orderData);
-      console.log(`✅ Order Created in Firestore: ${orderId}`);
-      return res.status(200).send("✅ Webhook processed successfully.");
+      // Expand session to get full customer and payment details
+      const session = await stripe.checkout.sessions.retrieve(sessionId, {
+        expand: ['customer', 'payment_intent.payment_method'],
+      });
+
+      const paymentIntent = session.payment_intent;
+      const card = paymentIntent?.payment_method?.card || {};
+
+      const customer = session.customer || {};
+      const shipping = session.customer_details?.address || {};
+
+      const lineItems = await stripe.checkout.sessions.listLineItems(session.id, { expand: ['data.price.product'] });
+
+      const items = lineItems.data.map(item => ({
+        name: item.price.product?.name || item.description,
+        quantity: item.quantity,
+        price: item.amount_total / 100,
+        shippingDetails: 'No Shipping Details Provided',
+        status: 'Delivered'
+      }));
+
+      const orderData = {
+        stripeSessionId: session.id,
+        userId: session.metadata?.userId || 'guest',
+        guestToken: session.metadata?.guestToken || null,
+        customerName: customer.name || session.customer_details?.name || '',
+        customerEmail: customer.email || session.customer_details?.email || '',
+        customerPhone: customer.phone || session.customer_details?.phone || '',
+        customerAddress: shipping
+          ? `${shipping.line1}, ${shipping.city}, ${shipping.postal_code}, ${shipping.country}`
+          : '',
+        paymentMethod: session.payment_method_types[0],
+        cardDetails: {
+          brand: card.brand || '',
+          lastFour: card.last4 || '',
+          expMonth: card.exp_month || null,
+          expYear: card.exp_year || null
+        },
+        items,
+        totalAmount: session.amount_total / 100,
+        currency: session.currency,
+        status: 'Order Completed',
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+        systemHistory: [{
+          event: 'Order created from Stripe checkout session',
+          timestamp: new Date().toISOString()
+        }]
+      };
+
+      const orderId = `ORD-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
+      orderData.orderId = orderId; 
+      await db.collection('orders').doc(orderId).set(orderData);
+      console.log(`✅ Order created: ${orderId}`);
     } catch (error) {
-      console.error("❌ Error writing to Firestore:", error);
-      return res.status(500).send("Error saving order.");
+      console.error('❌ Failed to enrich and save order:', error.message);
+      return res.status(500).send('Internal error processing order.');
     }
   }
 
-  res.status(200).send("✅ Event received.");
+  res.sendStatus(200);
 });
 
-// ✅ Deploy Firebase Functions
-exports.api = onRequest(
-  { region: "us-central1", secrets: [STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, PRINTIFY_API_KEY] },
-  app
-);
-
-exports.stripeWebhook = onRequest(
-  { 
-    region: "us-central1", 
-    secrets: [STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET], 
-    cors: true, 
-    maxInstances: 10 
-  },
-  stripeWebhookApp
-);
+exports.api = onRequest({ region: 'us-central1', secrets: [STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, CLIENT_URL] }, app);
+exports.stripeWebhook = onRequest({ region: 'us-central1', secrets: [STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET], cors: true }, stripeWebhookApp);

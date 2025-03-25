@@ -1,7 +1,10 @@
 require('dotenv').config({ path: __dirname + '/.env.prod' });
 
 console.log('NODE_ENV:', process.env.NODE_ENV);
-console.log("Loaded STRIPE_SECRET_KEY:", process.env.STRIPE_SECRET_KEY ? "✅ Exists" : "❌ Missing");
+console.log(
+  'Loaded STRIPE_SECRET_KEY:',
+  process.env.STRIPE_SECRET_KEY ? '✅ Exists' : '❌ Missing'
+);
 
 const express = require('express');
 const cors = require('cors');
@@ -63,18 +66,18 @@ app.set('trust proxy', true);
 
 // Allow requests from frontend environments
 const allowedOrigins = [
-  "http://localhost:3000",
-  "https://danoberartisandrums-dev.web.app",
-  "https://danoberartisandrums-stg.web.app",
-  "https://danoberartisandrums.web.app",
-  "https://oberartisandrums.com",
-  "https://oberdrums.com",
-  "https://danoberartisan.com",
-  "https://oberartisan.com",
-  "https://us-central1-danoberartisandrums.cloudfunctions.net",
-  "https://us-central1-danoberartisandrums.cloudfunctions.net/",
-  "https://us-central1-danoberartisandrums.cloudfunctions.net/createCheckoutSession",
-  "https://us-central1-danoberartisandrums.cloudfunctions.net/createCheckoutSession/"
+  'http://localhost:3000',
+  'https://danoberartisandrums-dev.web.app',
+  'https://danoberartisandrums-stg.web.app',
+  'https://danoberartisandrums.web.app',
+  'https://oberartisandrums.com',
+  'https://oberdrums.com',
+  'https://danoberartisan.com',
+  'https://oberartisan.com',
+  'https://us-central1-danoberartisandrums.cloudfunctions.net',
+  'https://us-central1-danoberartisandrums.cloudfunctions.net/',
+  'https://us-central1-danoberartisandrums.cloudfunctions.net/createCheckoutSession',
+  'https://us-central1-danoberartisandrums.cloudfunctions.net/createCheckoutSession/',
 ];
 
 app.use(
@@ -83,12 +86,12 @@ app.use(
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
-        callback(new Error("Not allowed by CORS"));
+        callback(new Error('Not allowed by CORS'));
       }
     },
     credentials: true, // Allows cookies and authentication headers
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"]
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
   })
 );
 
@@ -111,6 +114,7 @@ const generateCustomId = () => {
 };
 
 // Webhook Route for Stripe
+// Webhook Route for Stripe
 app.post(
   '/api/webhook',
   express.raw({ type: 'application/json' }),
@@ -129,14 +133,11 @@ app.post(
       return res.status(400).send(`Webhook Error: ${err.message}`);
     }
 
-    // console.log(`Received Stripe event: ${event.type}`);
-
+    // Process only the checkout.session.completed event
     if (event.type === 'checkout.session.completed') {
       const session = event.data.object;
 
-      // console.log('Checkout session completed:', session);
-
-      // Fetch line items for the session
+      // Retrieve line items (expanding product details)
       const lineItems = await stripe.checkout.sessions.listLineItems(
         session.id,
         {
@@ -144,36 +145,38 @@ app.post(
         }
       );
 
+      // Map line items with enriched details
       const items = lineItems.data.map((item) => ({
-        name: item.description, // ❌ Incorrect - Using Stripe's name
+        // Use the expanded product name if available, otherwise fall back to description
+        name:
+          (item.price && item.price.product && item.price.product.name) ||
+          item.description ||
+          'Unnamed Product',
         quantity: item.quantity,
         price: item.amount_total / 100, // Convert to dollars
+        status: 'Delivered', // Set default status for each item
+        shippingDetails: 'No Shipping Details Provided', // Default shipping details per item
       }));
 
-      // Fetch payment intent to get card details
+      // Retrieve payment intent to get card details
       let cardDetails = {};
       if (session.payment_intent) {
         try {
           const paymentIntent = await stripe.paymentIntents.retrieve(
             session.payment_intent,
-            {
-              expand: ['payment_method'], // Expand payment method to get card details
-            }
+            { expand: ['payment_method'] }
           );
-
-          // console.log('Fetched Payment Intent:', paymentIntent);
 
           if (
             paymentIntent.payment_method &&
             paymentIntent.payment_method.card
           ) {
             const card = paymentIntent.payment_method.card;
-
             cardDetails = {
               brand: card.brand || 'Unknown',
               lastFour: card.last4 || 'XXXX',
-              expMonth: card.exp_month || 'XX',
-              expYear: card.exp_year || 'XXXX',
+              expMonth: card.exp_month || null,
+              expYear: card.exp_year || null,
             };
           } else {
             console.error('Card details are missing in payment intent');
@@ -187,8 +190,6 @@ app.post(
       } else {
         console.error('Payment intent ID is missing in session');
       }
-
-      // console.log('Card Details Fetched:', cardDetails);
 
       // Update product quantities in Firestore
       try {
@@ -215,16 +216,13 @@ app.post(
             console.warn(`Insufficient stock for product "${item.name}".`);
           } else {
             await productDoc.ref.update({ currentQuantity: newQuantity });
-            // console.log(
-            //   `Updated quantity for product "${item.name}" to ${newQuantity}.`
-            // );
           }
         }
       } catch (error) {
         console.error('Error updating product quantities:', error.message);
       }
 
-      // Prepare order data
+      // Prepare enriched order data with all required fields
       const orderData = {
         stripeSessionId: session.id || null,
         userId: session.metadata?.userId || 'guest',
@@ -238,33 +236,34 @@ app.post(
         shippingDetails: session.shipping?.address
           ? `${session.shipping.address.line1 || ''}, ${session.shipping.address.city || ''}, ${session.shipping.address.state || ''}, ${session.shipping.address.country || ''}, ${session.shipping.address.postal_code || ''}`
           : 'No Shipping Details Provided',
-        paymentMethod: session.payment_method_types?.[0] || 'Unknown',
-        cardDetails, // Include card details
+        paymentMethod: session.payment_method_types?.[0] || 'card',
+        cardDetails, // Captured card details
         totalAmount: session.amount_total / 100 || 0, // Convert to dollars
         currency: session.currency || 'usd',
-        status: 'Order Started', // Set to "Order Started" by default
-        items, // Include line items
+        status: 'Order Completed', // Update order status as desired
+        items, // Enriched line items array
         createdAt: admin.firestore.FieldValue.serverTimestamp(), // Firestore timestamp
+        systemHistory: [
+          {
+            event: `Order created from Stripe checkout session`,
+            timestamp: new Date().toISOString(),
+          },
+        ],
       };
 
-      // console.log('Order Data Prepared:', orderData);
-
       try {
-        // Generate custom ID
+        // Generate a custom ID for the order document
         const customId = generateCustomId();
-
-        // Save the order to Firestore
-        const orderRef = db.collection('orders').doc(customId); // Use custom ID as document ID
+        const orderRef = db.collection('orders').doc(customId);
         await orderRef.set(orderData);
-        // console.log('Order successfully saved to Firestore with ID:', customId);
-
+        console.log('Order successfully saved to Firestore with ID:', customId);
         res.status(200).send('Event processed successfully');
       } catch (error) {
         console.error('Error saving order to Firestore:', error.message);
         res.status(500).send('Internal Server Error');
       }
     } else {
-      // console.log(`Unhandled event type: ${event.type}`);
+      // For unhandled event types, simply acknowledge receipt.
       res.status(200).send('Event received');
     }
   }
@@ -276,11 +275,11 @@ app.post('/api/create-payment-intent', async (req, res) => {
     const { amount } = req.body;
 
     if (!amount) {
-      console.error("🚨 Error: Amount is missing from request!");
+      console.error('🚨 Error: Amount is missing from request!');
       return res.status(400).json({ error: 'Amount is required' });
     }
 
-    console.log("🟢 Creating payment intent for amount:", amount);
+    console.log('🟢 Creating payment intent for amount:', amount);
 
     const paymentIntent = await stripe.paymentIntents.create({
       amount,
@@ -288,14 +287,13 @@ app.post('/api/create-payment-intent', async (req, res) => {
       payment_method_types: ['card'],
     });
 
-    console.log("✅ Payment intent created successfully:", paymentIntent.id);
+    console.log('✅ Payment intent created successfully:', paymentIntent.id);
     res.status(200).json({ clientSecret: paymentIntent.client_secret });
   } catch (error) {
-    console.error("🔥 Stripe API Error:", error); // Log full error details
+    console.error('🔥 Stripe API Error:', error); // Log full error details
     res.status(500).json({ error: error.message });
   }
 });
-
 
 // Route for creating Stripe checkout sessions
 app.post('/api/createCheckoutSession', async (req, res) => {
@@ -309,7 +307,7 @@ app.post('/api/createCheckoutSession', async (req, res) => {
       customerPhone,
       shippingAddress,
     } = req.body;
-    
+
     const guestToken = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
     if (!products || products.length === 0) {
@@ -326,9 +324,11 @@ app.post('/api/createCheckoutSession', async (req, res) => {
 
       if (productSnapshot.exists) {
         const productData = productSnapshot.data();
-        
+
         if (productData.deliveryTime) {
-          const match = productData.deliveryTime.match(/(\d+)-(\d+) (business|weeks|days)/);
+          const match = productData.deliveryTime.match(
+            /(\d+)-(\d+) (business|weeks|days)/
+          );
 
           if (match) {
             let minDays = parseInt(match[1]);
@@ -367,11 +367,9 @@ app.post('/api/createCheckoutSession', async (req, res) => {
       line_items: lineItems,
       mode: 'payment',
       success_url: `${process.env.CLIENT_URL}/checkout-summary?session_id={CHECKOUT_SESSION_ID}&guest_token=${guestToken}`,
-      cancel_url: `${process.env.CLIENT_URL}/cart`,
-      
+      cancel_url: `${process.env.CLIENT_URL}/checkout-summary?session_id={CHECKOUT_SESSION_ID}&guest_token=${guestToken}`,
       metadata: {
         userId: userId || 'guest',
-        guestToken,
         customerFirstName,
         customerLastName,
         customerEmail,
@@ -379,31 +377,10 @@ app.post('/api/createCheckoutSession', async (req, res) => {
         shippingAddress: JSON.stringify(shippingAddress || {}),
       },
       customer_email: customerEmail,
-
-      // ✅ Collect shipping address during checkout
-      shipping_address_collection: {
-        allowed_countries: ['US', 'CA'],
-      },
-
-      // ✅ Dynamically calculated shipping estimate
-      shipping_options: [
-        {
-          shipping_rate_data: {
-            type: 'fixed_amount',
-            fixed_amount: { amount: 0, currency: 'usd' }, // Free shipping
-            display_name: 'Standard Shipping',
-            // delivery_estimate: {
-            //   minimum: { unit: 'business_day', value: maxMinDays },
-            //   maximum: { unit: 'business_day', value: maxMaxDays },
-            // },
-          },
-        },
-      ],
-
-      // ✅ Apply promo codes
+      shipping_address_collection: { allowed_countries: ['US', 'CA'] },
       allow_promotion_codes: true,
     });
-
+    
     res.status(200).json({ url: session.url, id: session.id, guestToken });
   } catch (err) {
     console.error('Error creating Stripe session:', err.message);
