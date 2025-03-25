@@ -46,21 +46,21 @@ const ArtisanSeries = ({ product = {} }) => {
 
   return (
     <div className="artisanseries-container">
-      {/* HERÌTAGE Series Section */}
+      {/* HERITAGE Series Section */}
       <section className="drum-section left">
         <div className="text-layer">
           <img
-            src={isDarkMode ? "/artisanseries/heritage-white.png" : "/artisanseries/heritage-white.png"}
-            alt="HERÌTAGE Series"
+            src={isDarkMode ? "/resized-logos/heritage-white.png" : "/resized-logos/heritage-white.png"}
+            alt="HERITAGE Series"
             className="artisanseries-header-image "
           />
           <p className="description">
             <strong>“The drum that started it all—classic craftsmanship, timeless sound.”</strong>
           </p>
           <p className="description">
-            The HERÌTAGE Series embodies the soul of hand-crafted percussion. Designed and built in Nashville, TN, this stave snare drum is a testament to the artistry and dedication behind every Ober Artisan Drum.
+            The HERITAGE Series embodies the soul of hand-crafted percussion. Designed and built in Nashville, TN, this stave snare drum is a testament to the artistry and dedication behind every Ober Artisan Drum.
             Each stave is meticulously hand-tuned using an exclusive torch tuning process, bringing out the natural resonance and warmth of the wood while enhancing its striking scorched finish.
-            Available in multiple stave configurations and carefully selected Oak, the HERÌTAGE Series delivers a dynamic response, crisp attack, and balanced tonal complexity.
+            Available in multiple stave configurations and carefully selected Oak, the HERITAGE Series delivers a dynamic response, crisp attack, and balanced tonal complexity.
           </p>
           <ul className="description-list">
             <li>Shell Construction: Stave</li>
@@ -71,7 +71,7 @@ const ArtisanSeries = ({ product = {} }) => {
           </ul>
         </div>
         <div className="drum-layer">
-          <img src="/artisan-shop/heritage-left.png" alt="HERÌTAGE Snare" />
+          <img src="/artisan-shop/heritage-left.png" alt="HERITAGE Snare" />
         </div>
       </section>
 
@@ -79,7 +79,7 @@ const ArtisanSeries = ({ product = {} }) => {
       <section className="drum-section right">
         <div className="text-layer">
           <img
-            src={isDarkMode ? "/artisanseries/feuzon-white.png" : "/artisanseries/feuzon-white.png"}
+            src={isDarkMode ? "/resized-logos/feuzon-white.png" : "/resized-logos/feuzon-white.png"}
             alt="FEUZØN Series"
             className="artisanseries-header-image"
           />
@@ -91,7 +91,7 @@ const ArtisanSeries = ({ product = {} }) => {
             This innovative design enhances warmth, articulation, and dynamic response, offering a snare drum unlike any other. Each drum is torch-tuned to refine its sonic character, bringing out the rich harmonics and bold presence that drummers crave.
           </p>
           <ul className="description-list">
-            <li>Shell Construction: Stave + Steam Bent</li>
+            <li>Shell Construction: Hybrid (Stave + Steam Bent)</li>
             <li>Available Sizes: 12”, 13”, 14”</li>
             <li>Finish: Natural or Stained</li>
             <li>Wood Selection: Stave (varied) + limited steam bent woods</li>
@@ -107,7 +107,7 @@ const ArtisanSeries = ({ product = {} }) => {
       <section className="drum-section left">
         <div className="text-layer">
           <img
-            src={isDarkMode ? "/artisanseries/soundlegend-white.png" : "/artisanseries/soundlegend-white.png"}
+            src={isDarkMode ? "/resized-logos/soundlegend-white.png" : "/resized-logos/soundlegend-white.png"}
             alt="SoundLegend Series"
             className="artisanseries-header-image"
           />
@@ -140,7 +140,7 @@ const ArtisanSeries = ({ product = {} }) => {
         <div className="drum-final-text">
           {/* HERITAGE */}
           <div className="drum-info">
-            <img src="/artisanseries/heritage-white.png" alt="Heritage" className="drum-logo" />
+            <img src="/v2logo-large/heritage-white.png" alt="Heritage" className="drum-logo" />
             <ul className="description-list">
               <li>Shell Construction: Stave</li>
               <li>Available Sizes: 12”, 13”, 14”</li>
@@ -158,7 +158,7 @@ className={product?.currentQuantity === 0 ? "prod-card-view-details-button" : "p
 
           {/* SOUNDLEGEND */}
           <div className="drum-info">
-            <img src="/artisanseries/soundlegend-white.png" alt="SoundLegend" className="drum-logo" />
+            <img src="/v2logo-large/soundlegend-white.png" alt="SoundLegend" className="drum-logo" />
             <ul className="description-list">
               <li>Shell Construction: Stave, Steam-Bent, or Hybrid</li>
               <li>Fully Customizable: Size, Lugs, Finish, Wood</li>
@@ -175,7 +175,7 @@ className={product?.currentQuantity === 0 ? "prod-card-view-details-button" : "p
 
           {/* FEUZØN */}
           <div className="drum-info">
-            <img src="/artisanseries/feuzon-white.png" alt="Feuzon" className="drum-logo" />
+            <img src="/v2logo-large/feuzon-white.png" alt="Feuzon" className="drum-logo" />
             <ul className="description-list">
               <li>Shell Construction: Stave + Steam Bent</li>
               <li>Available Sizes: 12”, 13”, 14”</li>

@@ -499,7 +499,11 @@ const FeuzonProductDetail = () => {
 
     return (
       <div className="feuzon-product-detail">
-        <h1>FEUZØN Series Snare Drum</h1>
+         <img
+            src="/resized-logos/feuzon-white.png"
+            alt="FEUZØN Series"
+            className="artisanseries-header-image"
+          />
   
         <div className="feuzon-product-content">
             <img 
