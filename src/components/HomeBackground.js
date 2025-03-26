@@ -15,22 +15,20 @@ const HomeBackground = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // We'll pass the scrollOffset as a CSS variable
   return (
-    <div
-      className="layered-background"
-      style={{ "--scrollOffset": scrollOffset }}
-    >
+    <div className="layered-background" style={{ "--scrollOffset": scrollOffset }}>
+      {/* 🔽 New bottom blending layer */}
       <img
-        src="/home-background/home-background-bottom.png"
-        className="table-layer"
-        alt="Drum base"
+        src="/home-background/home-background-all.png"
+        className="blending-layer"
+        alt="Background blend"
       />
-      <img
-        src="/home-background/home-background-top.png"
-        className="outline-layer"
-        alt="Drum outlines"
-      />
+
+      {/* Optional haze */}
+      <img src="/home-background/haze.png" className="haze-layer" alt="Hazy overlay" />
+
+      <img src="/home-background/home-background-bottom.png" className="table-layer" alt="Drum base" />
+      <img src="/home-background/home-background-top.png" className="outline-layer" alt="Drum outline" />
     </div>
   );
 };
