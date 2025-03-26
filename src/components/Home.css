@@ -1,11 +1,11 @@
 .home-container {
   width: 100%;
   min-height: 100vh;
-  padding: 100px 0px 60px;
+  padding: 20px 0px 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  z-index: 4;
+  z-index: 0;
   position: relative;
   gap: 40px;
 }
@@ -16,7 +16,7 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 30px;
-  width: 100%;
+  width: 90%;
   max-width: 1000px;
 }
 
@@ -137,5 +137,6 @@ body.dark .card p {
 
   .home-container .cta-button {
     font-size: 1rem;
+    margin:10px;
   }
 }
