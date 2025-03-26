@@ -9,49 +9,55 @@
     overflow: hidden;
   }
   
-  /* Optional: smokey haze overlay */
-  .haze-layer {
+  /* Base alignment for ALL layers */
+  .blending-layer,
+  .haze-layer,
+  .table-layer,
+  .outline-layer {
     position: absolute;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    opacity: 0.25;
     object-fit: cover;
-    z-index: 1;
     pointer-events: none;
   }
   
-  /* Shared drum layer styles (with scroll-responsive movement) */
-  .table-layer,
-  .outline-layer {
+  /* Layer z-index order */
+  .blending-layer {
     position: absolute;
-    top: 55%;
-    left: 50%;
-    transform: translate(-50%, calc(-45% - var(--scrollOffset, 0) * 10vh));
-    width: auto;
-    max-width: 100%;
-    height: auto;
-    object-fit: contain;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
     pointer-events: none;
-    transition: transform 0.1s ease-out;
+    z-index: 0;
+    opacity: 0.55; /* 👈 Adjust between 0.1 (faint) to 1 (fully visible) */
   }
   
-  /* Z-index for proper stacking */
+  .haze-layer {
+    z-index: 1;
+    opacity: 0.25; /* adjust haze strength */
+  }
+  
+  /* These two will scroll upward slightly with parallax */
   .table-layer {
     z-index: 2;
+    transform: translateY(calc(var(--scrollOffset, 0) * -10vh));
+    transition: transform 0.1s ease-out;
   }
   
   .outline-layer {
     z-index: 3;
+    transform: translateY(calc(var(--scrollOffset, 0) * -10vh));
+    transition: transform 0.1s ease-out;
   }
   
-  /* Responsive mobile adjustment */
+  /* Mobile adjustments */
   @media (max-width: 768px) {
     .table-layer,
     .outline-layer {
-      top: 60%;
-      transform: translate(-50%, calc(-40% - var(--scrollOffset, 0) * 8vh));
-      max-width: 95vw;
+      transform: translateY(calc(var(--scrollOffset, 0) * -8vh));
     }
   }
