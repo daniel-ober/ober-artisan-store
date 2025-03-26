@@ -50,13 +50,13 @@ const Home = () => {
             <button>Pre-Order Now</button>
           </Link>
         </div>
-        <div className="highlight">
+        {/* <div className="highlight">
           <h2>Share Feedback</h2>
           <p>Comments, questions, feedback?</p>
           <Link to="/contact" className="highlight-button">
             <button>Contact Us</button>
           </Link>
-        </div>
+        </div> */}
       </div>
     </div>
   );
