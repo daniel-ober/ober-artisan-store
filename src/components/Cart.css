@@ -11,14 +11,14 @@
 .cart-title {
   font-size: 2rem;
   text-align: center;
-  color: var(--text-color, #555);
+  /* color: var(--text-color, #555); */
   font-weight: 550;
   margin-bottom: 20px;
 }
 
 .cart-id {
   font-size: 1rem;
-  color: var(--secondary-text-color, #555);
+  color: var(--secondary-text-color, #ffffff);
   margin-bottom: 20px;
 }
 
