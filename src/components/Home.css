@@ -7,12 +7,11 @@ body {
   transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out;
 }
 
-/* Prevent Flash Before React Loads */
 body.dark {
   background-color: #1a1a1a !important;
 }
 
-/* Home Container - Transparent Background */
+/* Home Container */
 .home-container {
   display: flex;
   flex-direction: column;
@@ -20,31 +19,15 @@ body.dark {
   width: 100vw;
   max-width: 100%;
   padding: 0;
-  background-color: transparent; /* ✅ Blank / Transparent */
+  background-color: transparent;
   box-sizing: border-box;
   transition: background-color 0.4s ease-in-out;
   position: relative;
   overflow-x: hidden;
 }
 
-/* Dark Mode - Smooth Background Transition */
 body.dark .home-container {
   background-color: transparent;
-}
-
-/* Hero Section */
-.hero-section {
-  position: relative;
-  width: 100vw;
-  max-width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  background: rgba(0, 0, 0, 0.6);
-  overflow: hidden;
-  margin-top: 80px; /* ✅ Adds space below the navbar */
 }
 
 /* Hero Overlay */
@@ -53,38 +36,30 @@ body.dark .home-container {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 90%;
-  max-width: 1000px;
-  background: rgba(0, 0, 0, 0.795);
-  padding: 30px;
-  border-radius: 12px;
   text-align: center;
+  width: 90%;
+  max-width: 900px;
+  margin-top: 10vh;
+  background: rgba(0, 0, 0, 0.65); /* Polished opacity */
+  padding: 32px;
+  border-radius: 14px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+  z-index: 5;
   position: relative;
-  box-sizing: border-box;
+  backdrop-filter: blur(4px); /* Slight blur for clarity */
 }
 
-/* Dark Mode Hero Background */
 body.dark .hero-overlay {
-  background: rgba(0, 0, 0, 0.85);
-}
-
-/* Hero Title */
-.hero-overlay h1 {
-  font-size: 3rem;
-  font-weight: bold;
-  color: white;
-  margin:0px;
-  margin-bottom: 12px;
-  transition: color 0.4s ease-in-out;
+  background: rgba(0, 0, 0, 0.75);
 }
 
 /* Hero Subtitle */
 .hero-overlay p {
-  font-size: 1.6rem;
-  color: white;
-  transition: color 0.4s ease-in-out;
-  margin-bottom:15px;
-  margin-top:0px;
+  font-size: 1.7rem;
+  color: #fff;
+  margin: 0 0 16px 0;
+  line-height: 1.4;
+  font-weight: 500;
 }
 
 /* CTA Button */
@@ -92,14 +67,13 @@ body.dark .hero-overlay {
   background-color: #ff6600;
   color: white;
   border: none;
-  padding: 14px 30px;
-  font-size: 1.1rem;
-  font-weight: bold;
-  cursor: pointer;
+  padding: 14px 32px;
+  font-size: 1.15rem;
+  font-weight: 600;
   border-radius: 8px;
   text-decoration: none;
-  margin-top:10px;
   transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+  cursor: pointer;
 }
 
 .hero-overlay .cta-button:hover {
@@ -107,29 +81,28 @@ body.dark .hero-overlay {
   transform: scale(1.05);
 }
 
-/* Highlights Section - Adjusted Spacing */
+/* Highlights Section */
 .highlights-section {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
+  align-items: stretch;
   gap: 30px;
-  padding: 30px 0px;
+  padding: 40px 0;
   width: 90%;
   max-width: 1000px;
-  flex-wrap: wrap;
   box-sizing: border-box;
-  align-items: stretch;
-  min-height: auto; /* ✅ Adjusted to remove excess space */
 }
 
-/* Highlight Containers */
+/* Highlight Cards */
 .highlight {
   text-align: center;
   flex: 1;
   min-width: 280px;
-  max-width: 400px; /* ✅ Increased width to match hero card */
+  max-width: 400px;
   padding: 30px;
-  background: #ffffff; /* ✅ Light mode default background */
-  color: #000000; /* ✅ Black text for light mode */
+  background: #ffffff;
+  color: #000000;
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
   border-radius: 12px;
   transition: transform 0.3s ease-in-out, background-color 0.4s ease-in-out;
@@ -137,60 +110,47 @@ body.dark .hero-overlay {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-sizing: border-box;
 }
 
-/* Dark Mode Highlight */
 body.dark .highlight {
-  background: #2a2a2a; /* ✅ Dark mode background */
-  color: #ffffff; /* ✅ White text for dark mode */
-  box-shadow: 0 8px 12px rgba(255, 255, 255, 0.1);
+  background: #2a2a2a;
+  color: #ffffff;
+  box-shadow: 0 8px 12px rgba(255, 255, 255, 0.08);
 }
 
-/* Ensure h2 Titles Have Proper Contrast */
+/* Highlight Title */
 .highlight h2 {
   font-size: 1.8rem;
-  margin: 0px;
-  color: #000000; /* ✅ Default black for light mode */
+  margin: 0 0 10px;
+  color: inherit;
 }
 
-/* Ensure Proper Contrast in Dark Mode */
-body.dark .highlight h2 {
-  color: #ffffff !important; /* ✅ White in dark mode */
-}
-
-/* Ensure Paragraph Text Is Legible */
+/* Highlight Paragraph */
 .highlight p {
   font-size: 1rem;
-  color: #333; /* ✅ Dark gray for readability in light mode */
   margin-bottom: 25px;
+  color: inherit;
+  line-height: 1.5;
 }
 
-/* Dark Mode Paragraph Text */
-body.dark .highlight p {
-  color: #ddd; /* ✅ Lighter gray for readability */
-}
-
-/* Ensure Highlight Buttons Stand Out */
+/* Highlight Button */
 .highlight button {
   background-color: #333;
   color: white;
   border: none;
   padding: 12px 24px;
   border-radius: 6px;
-  cursor: pointer;
   font-size: 1rem;
   font-weight: bold;
+  cursor: pointer;
   transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
 }
 
-/* Button Hover Effect */
 .highlight button:hover {
   background-color: #555;
   transform: scale(1.05);
 }
 
-/* Dark Mode Highlight Buttons */
 body.dark .highlight button {
   background-color: #ff6600;
 }
@@ -201,13 +161,8 @@ body.dark .highlight button:hover {
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-  .highlights-section {
-    flex-direction: row;
-    justify-content: center;
-  }
-
   .highlight {
-    max-width: 360px; /* ✅ Adjust for tablet screens */
+    max-width: 360px;
   }
 }
 
@@ -221,6 +176,20 @@ body.dark .highlight button:hover {
   .highlight {
     width: 100%;
     max-width: 90%;
-    padding: 20px; /* ✅ Reduced padding for better spacing */
+    padding: 24px;
+  }
+
+  .hero-overlay {
+    margin-top: 6vh;
+    padding: 24px;
+  }
+
+  .hero-overlay p {
+    font-size: 1.3rem;
+  }
+
+  .cta-button {
+    font-size: 1rem;
+    padding: 12px 24px;
   }
 }
