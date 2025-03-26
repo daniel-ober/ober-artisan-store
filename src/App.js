@@ -39,6 +39,7 @@ import SupportChatModal from './components/SupportChatModal';
 import AdminSignin from './components/AdminSignin';
 import PathSelection from './components/PathSelection';
 import CustomDrumBuilder from './components/CustomDrumBuilder';
+import HomeBackground from './components/HomeBackground';
 import SoundProfileRecommendations from './components/SoundProfileRecommendations';
 import UpdateCartsPage from "./components/UpdateCartsPage";
 import { DarkModeProvider } from "./context/DarkModeContext";
@@ -129,7 +130,7 @@ function App() {
 
     <div className="app-container">
       <NavBar navbarLinks={navbarLinks} isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
-      
+      {location.pathname === '/' && <HomeBackground />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="*" element={<Navigate to="/" replace />} />

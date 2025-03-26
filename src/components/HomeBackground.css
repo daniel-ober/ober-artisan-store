@@ -1,0 +1,57 @@
+.layered-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+  }
+  
+  /* Optional: smokey haze overlay */
+  .haze-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    opacity: 0.25;
+    object-fit: cover;
+    z-index: 1;
+    pointer-events: none;
+  }
+  
+  /* Shared drum layer styles (with scroll-responsive movement) */
+  .table-layer,
+  .outline-layer {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, calc(-45% - var(--scrollOffset, 0) * 10vh));
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    pointer-events: none;
+    transition: transform 0.1s ease-out;
+  }
+  
+  /* Z-index for proper stacking */
+  .table-layer {
+    z-index: 2;
+  }
+  
+  .outline-layer {
+    z-index: 3;
+  }
+  
+  /* Responsive mobile adjustment */
+  @media (max-width: 768px) {
+    .table-layer,
+    .outline-layer {
+      top: 60%;
+      transform: translate(-50%, calc(-40% - var(--scrollOffset, 0) * 8vh));
+      max-width: 95vw;
+    }
+  }
