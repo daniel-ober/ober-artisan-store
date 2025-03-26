@@ -130,8 +130,8 @@ function App() {
 
     <div className="app-container">
       <NavBar navbarLinks={navbarLinks} isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
-      {location.pathname === '/' && <HomeBackground />}
-      <Routes>
+      <HomeBackground />
+            <Routes>
         <Route path="/" element={<Home />} />
         <Route path="*" element={<Navigate to="/" replace />} />
         <Route path="/artisanseries" element={<ArtisanSeries isDarkMode={isDarkMode} />} />
