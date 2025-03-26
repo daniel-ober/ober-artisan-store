@@ -33,7 +33,7 @@ body.dark .about-banner img {
 .about-inner {
   display: flex;
   gap: 48px;
-  max-width: 1200px;
+  max-width: 1000px;
   width: 100%;
   flex-wrap: wrap;
   justify-content: center;
@@ -48,7 +48,7 @@ body.dark .about-banner img {
   backdrop-filter: blur(4px);
   color: #ffffff;
   padding: 48px;
-  border-radius: 16px;
+  /* border-radius: 16px; */
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
   font-family: 'Inter', sans-serif;
   line-height: 1.7;

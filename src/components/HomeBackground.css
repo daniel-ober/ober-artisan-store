@@ -33,12 +33,12 @@
     object-fit: cover;
     pointer-events: none;
     z-index: 0;
-    opacity: 0.6;
+    opacity: 0.2;
   }
   
   .haze-layer {
     z-index: 3;
-    opacity: 0.015;
+    opacity: 0.01;
     position: absolute;
     top: 0;
     left: 0;

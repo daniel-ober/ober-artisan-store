@@ -4,14 +4,14 @@
 
 .pre-order-page {
   padding: 14px;
-  background-color: #f8f8f890;
+  background-color: #000000c3;
   text-align: center;
 }
 
 .pre-order-page-header{
   font-size: 2rem;
   margin-bottom: 10px;
-  color: rgb(0, 0, 0);
+  /* color: rgb(0, 0, 0); */
 }
 
 .pre-order-page-header .dark {
@@ -23,7 +23,7 @@
 .subtitle {
   font-size: 1.2rem;
   margin-bottom: 30px;
-  color: #474747;
+  color: #ffffff;
 }
 
 .pre-order-items {
