@@ -1,195 +1,141 @@
-/* General Styles */
-body {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-  box-sizing: border-box;
-  transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out;
-}
-
-body.dark {
-  background-color: #1a1a1a !important;
-}
-
-/* Home Container */
 .home-container {
+  width: 100%;
+  min-height: 100vh;
+  padding: 120px 24px 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100vw;
-  max-width: 100%;
-  padding: 0;
-  background-color: transparent;
-  box-sizing: border-box;
-  transition: background-color 0.4s ease-in-out;
+  z-index: 4;
   position: relative;
-  overflow-x: hidden;
+  gap: 40px;
 }
 
-body.dark .home-container {
-  background-color: transparent;
-}
-
-/* Hero Overlay */
-.hero-overlay {
+/* Shared row styling */
+.home-row {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-wrap: wrap;
   justify-content: center;
+  gap: 30px;
+  width: 100%;
+  max-width: 1000px;
+}
+
+/* Explore Drums Card (full-width) */
+.explore-card {
+  flex: 1 1 100%;
+  max-width: 100%;
   text-align: center;
-  width: 90%;
-  max-width: 900px;
-  margin-top: 10vh;
-  background: rgba(0, 0, 0, 0.65); /* Polished opacity */
-  padding: 32px;
-  border-radius: 14px;
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
-  z-index: 5;
-  position: relative;
-  backdrop-filter: blur(4px); /* Slight blur for clarity */
+  padding: 40px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease-in-out;
 }
 
-body.dark .hero-overlay {
-  background: rgba(0, 0, 0, 0.75);
+.explore-card:hover {
+  background: rgba(0, 0, 0, 0.85);
 }
 
-/* Hero Subtitle */
-.hero-overlay p {
-  font-size: 1.7rem;
-  color: #fff;
-  margin: 0 0 16px 0;
-  line-height: 1.4;
-  font-weight: 500;
+.card-subtitle {
+  font-size: 1.4rem;
+  color: #ccc;
+  margin-bottom: 20px;
 }
 
-/* CTA Button */
-.hero-overlay .cta-button {
+/* CTA Button (scoped and safe) */
+.home-container .cta-button {
+  all: unset;
   background-color: #ff6600;
   color: white;
   border: none;
-  padding: 14px 32px;
-  font-size: 1.15rem;
-  font-weight: 600;
+  padding: 14px 30px;
+  font-size: 1.1rem;
+  font-weight: bold;
   border-radius: 8px;
-  text-decoration: none;
-  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
   cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+  display: inline-block;
 }
 
-.hero-overlay .cta-button:hover {
+.home-container .cta-button:hover {
   background-color: #ff4500;
   transform: scale(1.05);
 }
 
-/* Highlights Section */
-.highlights-section {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  align-items: stretch;
-  gap: 30px;
-  padding: 40px 0;
-  width: 90%;
-  max-width: 1000px;
-  box-sizing: border-box;
-}
-
-/* Highlight Cards */
-.highlight {
-  text-align: center;
-  flex: 1;
-  min-width: 280px;
-  max-width: 400px;
-  padding: 30px;
-  background: #ffffff;
-  color: #000000;
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+/* Highlight Cards Below */
+.highlight-row .card {
+  flex: 1 1 280px;
+  max-width: 257px;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(4px);
   border-radius: 12px;
-  transition: transform 0.3s ease-in-out, background-color 0.4s ease-in-out;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  padding: 28px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  color: #fff;
+  text-align: center;
+  transition: transform 0.2s ease, background-color 0.4s ease;
 }
 
-body.dark .highlight {
-  background: #2a2a2a;
-  color: #ffffff;
-  box-shadow: 0 8px 12px rgba(255, 255, 255, 0.08);
+.highlight-row .card:hover {
+  transform: translateY(-6px);
+  background: rgba(0, 0, 0, 0.8);
 }
 
-/* Highlight Title */
-.highlight h2 {
-  font-size: 1.8rem;
-  margin: 0 0 10px;
-  color: inherit;
+.card h2 {
+  font-size: 1.6rem;
+  margin-bottom: 16px;
 }
 
-/* Highlight Paragraph */
-.highlight p {
+.card p {
   font-size: 1rem;
-  margin-bottom: 25px;
-  color: inherit;
-  line-height: 1.5;
+  color: #ddd;
+  margin-bottom: 20px;
 }
 
-/* Highlight Button */
-.highlight button {
+.card button {
   background-color: #333;
   color: white;
   border: none;
-  padding: 12px 24px;
-  border-radius: 6px;
+  padding: 12px 20px;
+  border-radius: 8px;
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
 }
 
-.highlight button:hover {
+.card button:hover {
   background-color: #555;
   transform: scale(1.05);
 }
 
-body.dark .highlight button {
-  background-color: #ff6600;
+/* Dark Mode */
+body.dark .card {
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
 }
 
-body.dark .highlight button:hover {
-  background-color: #ff4500;
-}
-
-/* Responsive Design */
-@media (max-width: 1024px) {
-  .highlight {
-    max-width: 360px;
-  }
+body.dark .card p {
+  color: #ccc;
 }
 
 @media (max-width: 768px) {
-  .highlights-section {
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
+  .home-row {
+    gap: 20px;
   }
 
-  .highlight {
-    width: 100%;
-    max-width: 90%;
-    padding: 24px;
+  .highlight-row .card {
+    flex: 1 1 100%;
+    max-width: 100%;
   }
 
-  .hero-overlay {
-    margin-top: 6vh;
-    padding: 24px;
+  .card-subtitle {
+    font-size: 1.2rem;
   }
 
-  .hero-overlay p {
-    font-size: 1.3rem;
-  }
-
-  .cta-button {
+  .home-container .cta-button {
     font-size: 1rem;
-    padding: 12px 24px;
   }
 }

@@ -1,139 +1,181 @@
-/* General Page Styling */
-.about-page {
+/* .about-banner {
   width: 100%;
-  min-height: 100vh;
-  overflow-x: hidden;
-  overflow-y: auto;
-  scroll-snap-type: y mandatory; /* Enables smooth snap-scrolling */
-  scroll-behavior: smooth;
-  background-size: cover; /* Ensures full coverage */
-  background-position: center top; /* ✅ Aligns image to the top */
-  background-attachment: fixed; /* ✅ FIXED BACKGROUND */
-  position: relative;
-  padding-top: var(--navbar-height); /* ✅ Ensures it starts below navbar */
+  max-height: 220px;
+  overflow: hidden;
+  margin-bottom: 60px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
-/* Full-Screen Sections */
-.about-section {
-  width: 100%;
-  min-height: 100vh; /* ✅ Ensures full viewport height */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  position: relative;
-  scroll-snap-align: start; /* ✅ Snap-scrolling */
-}
-
-/* Dark Overlay for Readability */
-.about-section::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
+.about-banner img {
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5); /* Dark overlay */
-  z-index: 1;
+  object-fit: cover;
+  display: block;
 }
 
-/* Content Styling */
-.section-content {
+body.dark .about-banner img {
+  filter: brightness(0.9) contrast(1.1);
+} */
+
+.about-container {
+  width: 100%;
+  min-height: 100vh;
+  /* padding: 100px 24px 60px; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   position: relative;
-  z-index: 2;
+  z-index: 5;
+  box-sizing: border-box;
+}
+
+.about-inner {
+  display: flex;
+  gap: 48px;
+  max-width: 1200px;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Text Block Styling */
+.about-text {
+  flex: 1;
+  min-width: 320px;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  color: #ffffff;
+  padding: 48px;
+  border-radius: 16px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.7;
+  letter-spacing: 0.1px;
+}
+
+.about-text h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 28px;
+  color: #ffffff;
+}
+
+.about-text p {
+  font-size: 1.1rem;
+  margin-bottom: 24px;
+  color: #dddddd;
+}
+
+/* Signature Block Section */
+.about-signoff {
+  /* margin-top: 80px; */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 0 24px 80px;
+}
+
+.about-signoff-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   max-width: 800px;
-  padding: 20px;
-  animation: fadeIn 1.5s ease-in-out;
+  width: 100%;
+  gap: 32px;
 }
 
-/* Section Title */
-.section-content h2 {
-  font-size: 3rem;
-  margin-bottom: 15px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: rgba(255, 255, 255, 0.9);
+.about-signoff-inner img {
+  width: 750px;
+  max-width: 100%;
+  height: auto;
+  /* border-radius: 12px; */
+  /* box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5); */
+  margin-bottom: -30px;
+  transition: transform 0.3s ease;
 }
 
-/* Section Subtitle */
-.section-content h3 {
-  font-size: 1.8rem;
-  margin-bottom: 20px;
-  font-weight: 300;
-  color: rgba(255, 255, 255, 0.8);
+.about-signoff-inner img:hover {
+  transform: scale(1.015);
 }
 
-/* Section Paragraph */
-.section-content p {
+.about-quote {
+  background: rgba(0, 0, 0, 0.8);
+  padding: 36px;
+  border-radius: 14px;
+  backdrop-filter: blur(4px);
+  text-align: center;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+}
+
+.about-quote .quote-text {
   font-size: 1.2rem;
-  line-height: 1.8;
-  margin-bottom: 20px;
-  color: rgba(255, 255, 255, 0.85);
+  color: #ddd;
+  font-style: italic;
+  margin-bottom: 16px;
+  line-height: 1.6;
 }
 
-/* Smooth Fade-in Animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
+.about-quote .quote-author {
+  font-size: 1rem;
+  color: #aaa;
+  font-weight: 500;
+}
+
+/* Dark Mode Adjustment */
+body.dark .about-text {
+  background: rgba(0, 0, 0, 0.85);
+  color: #f0f0f0;
+}
+
+body.dark .about-text p {
+  color: #cccccc;
+}
+
+body.dark .about-quote {
+  background: rgba(0, 0, 0, 0.85);
+}
+
+body.dark .about-quote .quote-text {
+  color: #eee;
+}
+
+
+/* Responsive */
+@media (max-width: 960px) {
+  .about-inner {
+    flex-direction: column;
+    align-items: center;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  .about-text {
+    padding: 32px;
   }
 }
 
-/* 🎯 Responsive Adjustments */
-@media (max-width: 1024px) {
-  .section-content {
-    max-width: 90%;
+@media (max-width: 600px) {
+  .about-signoff-inner img {
+    width: 240px;
   }
 
-  .section-content h2 {
-    font-size: 2.5rem;
+  .about-quote {
+    padding: 24px;
   }
 
-  .section-content h3 {
-    font-size: 1.6rem;
+  .about-quote .quote-text {
+    font-size: 1rem;
   }
 
-  .section-content p {
-    font-size: 1.1rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .section-content {
-    max-width: 95%;
-  }
-
-  .section-content h2 {
+  .about-text h1 {
     font-size: 2rem;
   }
 
-  .section-content h3 {
-    font-size: 1.4rem;
-  }
-
-  .section-content p {
+  .about-text p {
     font-size: 1rem;
   }
-}
 
-@media (max-width: 480px) {
-  .section-content {
-    padding: 40px 15px;
-  }
-
-  .section-content h2 {
-    font-size: 1.8rem;
-  }
-
-  .section-content h3 {
-    font-size: 1.2rem;
-  }
-
-  .section-content p {
-    font-size: 0.95rem;
+  .about-text {
+    padding: 24px;
   }
 }
