@@ -74,7 +74,7 @@ body.dark .about-banner img {
   width: 100%;
   display: flex;
   justify-content: center;
-  padding: 0 24px 80px;
+  padding: 0 0px 80px;
 }
 
 .about-signoff-inner {
@@ -92,7 +92,7 @@ body.dark .about-banner img {
   height: auto;
   /* border-radius: 12px; */
   /* box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5); */
-  margin-bottom: -30px;
+  margin-bottom: -40px;
   transition: transform 0.3s ease;
 }
 
@@ -134,7 +134,7 @@ body.dark .about-text p {
 }
 
 body.dark .about-quote {
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(0, 0, 0, 0.75);
 }
 
 body.dark .about-quote .quote-text {
@@ -147,20 +147,25 @@ body.dark .about-quote .quote-text {
   .about-inner {
     flex-direction: column;
     align-items: center;
+    border-radius: 0;
   }
 
   .about-text {
     padding: 32px;
+    border-radius: 0;
   }
 }
 
 @media (max-width: 600px) {
   .about-signoff-inner img {
-    width: 240px;
+    width: auto;
+    background: rgba(0, 0, 0, 0.75);
+    border-radius: 0;
   }
 
   .about-quote {
     padding: 24px;
+    border-radius: 0;
   }
 
   .about-quote .quote-text {
