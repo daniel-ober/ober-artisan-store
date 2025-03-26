@@ -1,8 +1,11 @@
 .cart-container {
-  margin: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: 80vh; /* 👈 Ensures cart section fills screen vertically */
+  padding: 40px 20px;
+  box-sizing: border-box;
+  position: relative;
 }
 
 .cart-title {
