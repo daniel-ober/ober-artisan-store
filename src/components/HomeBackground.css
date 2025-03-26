@@ -33,12 +33,19 @@
     object-fit: cover;
     pointer-events: none;
     z-index: 0;
-    opacity: 0.55; /* 👈 Adjust between 0.1 (faint) to 1 (fully visible) */
+    opacity: 0.2;
   }
   
   .haze-layer {
-    z-index: 1;
-    opacity: 0.25; /* adjust haze strength */
+    z-index: 3;
+    opacity: 0.015;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    pointer-events: none;
   }
   
   /* These two will scroll upward slightly with parallax */
