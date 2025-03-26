@@ -19,12 +19,12 @@
   height: 100%;
   object-fit: cover;
   z-index: -1;
-  opacity: 0.75;
+  opacity: 0.6;
 }
 
 /* Dark Mode - Override background video opacity */
 body.dark .navbar-background {
-  opacity: 0.85;
+  opacity: 1;
 }
 
 /* Logo Section */

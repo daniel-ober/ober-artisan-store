@@ -25,10 +25,18 @@ const HomeBackground = () => {
       />
 
       {/* Optional haze */}
-      <img src="/home-background/haze.png" className="haze-layer" alt="Hazy overlay" />
 
       <img src="/home-background/home-background-bottom.png" className="table-layer" alt="Drum base" />
       <img src="/home-background/home-background-top.png" className="outline-layer" alt="Drum outline" />
+      <video
+  className="haze-layer"
+  autoPlay
+  loop
+  muted
+  playsInline
+>
+  <source src="/vid2.mp4" type="video/mp4" />
+</video>
     </div>
   );
 };
