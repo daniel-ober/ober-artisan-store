@@ -1,314 +1,196 @@
-:root {
-  --scroll: 0;
-  --section-height: 100vh; /* Full viewport height */
-}
-
-/* 🏠 Main Container - Enables Snap Scrolling */
 .artisanseries-container {
   position: relative;
   width: 100%;
-  overflow-y: auto;
-  min-height: 100vh;
-  scroll-behavior: smooth;
-  scroll-snap-type: y mandatory; 
-  background-color: #000000c3;
+  background-color: #111;
+  overflow-x: hidden;
+  color: white;
 }
 
-/* 🥁 Drum Section */
-.drum-section {
-  position: relative;
-  height: var(--section-height);
+.drum-display {
+  padding-bottom: 500px;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.text-layer {
+  padding: 2rem;
+}
+
+.artisanseries-header-image {
+  max-width: 240px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.description {
+  font-size: 1rem;
+  margin: 1rem 0;
+  line-height: 1.6;
+}
+
+.description-list {
+  list-style: none;
+  font-size: 0.9rem;
+  padding: 0;
+  margin: 0 auto 1.5rem;
+  text-align: left;
+  max-width: 700px;
+}
+
+.preorder-card-preorder-button {
+  padding: 10px 18px;
+  background: #b3544b;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  margin: 1rem 0 2rem;
+}
+
+/* 📸 Image Gallery */
+.gallery-strip {
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+  padding: 0.5rem 1rem 1rem;
+  margin: 0 auto 1.5rem;
+  max-width: 900px;
+}
+
+.gallery-strip img {
+  height: 120px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+/* 🎧 Audio Sample Section */
+.audio-samples {
+  padding: 0 1rem 2rem;
+  margin: 0 auto;
+  max-width: 900px;
+}
+
+.audio-sample-item {
+  margin-bottom: 12px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  overflow: hidden;
-  padding: 0 4vw;
-  scroll-snap-align: start;
-  opacity: 0;
-  transform: translateY(50px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  gap: 12px;
+  justify-content: flex-start;
 }
 
-/* 🏆 Active State for Scroll Animation */
-.drum-section.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ✅ Adjustments to prevent images from “kissing” the edge */
-.drum-layer {
-  width: 52vw;
-  z-index: 3;
-}
-
-.drum-section.left .drum-layer {
-  transform: translateX(-4vw);
-}
-
-.drum-section.right .drum-layer {
-  transform: translateX(4vw);
-}
-
-/* 🎨 Drum Image */
-.drum-layer img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  /* background-color: inherit; Ensures background color matches the section */
-}
-
-/* ✏️ Text Layer */
-.text-layer {
-  width: 30vw;
-  max-width: 450px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  z-index: 4;
+.audio-sample-item button {
+  background: transparent;
+  border: 1px solid #888;
   color: white;
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
 }
 
-/* 🔠 Header Image */
-.artisanseries-header-image {
+.audio-sample-item button:hover {
+  background: #b3544b;
+}
+
+.audio-sample-item span {
+  font-size: 0.9rem;
+  flex: 1;
+  text-align: left;
+}
+
+/* 🥁 Drum Image Layers */
+.drum-layers {
   width: 100%;
-  max-width: 400px;
-  height: auto;
-  margin-bottom: 35px;
+  z-index: 9;
+  pointer-events: none;
 }
 
-/* 🔄 Alternating Layout */
-.drum-section.right {
-  flex-direction: row;
-}
-
-.drum-section.left {
-  flex-direction: row-reverse;
-}
-
-/* 🏆 FINAL IMAGE SECTION - SCROLLING FIX */
-.drum-final-section {
-  position: relative;
-  width: 100%;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  scroll-snap-align: start;
-}
-
-/* 📸 Sticky Drum Image (Releases on Scroll) */
-.drum-final-image {
-  display: flex;
-  justify-content: center;
-  width: 100vw;
-  overflow: hidden;
-  /* position: fixed; */
+.drum-layers.fixed {
+  position: fixed;
   bottom: 0;
-  /* z-index: -1; */
-  transition: position 0.3s ease-out;
+  left: 0;
 }
 
-.drum-final-image img {
-  width: 100vw;
+.drum-layers.scrolling {
+  position: relative;
+}
+
+.drum-layers .layer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
   height: auto;
-  display: block;
+  object-fit: contain;
 }
 
-/* 🛠 Drum Labels & Logos */
-.drum-final-text {
+/* 🔘 Transparent Zones */
+.drum-click-zones {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 140px;
+  z-index: 20;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+}
+
+.drum-click-zones .zone {
+  flex: 1;
+  cursor: pointer;
+}
+
+/* 📌 Footer Trigger */
+.footer-trigger-marker {
+  height: 1px;
   width: 100%;
-  margin: 0 auto;
-  background-color: #373737;
-  /* padding: 20px; */
-  /* border-radius: 10px; */
+  background: transparent;
 }
 
-/* 🏆 Individual Drum Logo Adjustments */
-.drum-logo {
-  width: 150px;
-  height: auto;
-  margin-bottom: 10px;
-  filter: brightness(0) invert(1);
+/* 🖼️ Lightbox Fullscreen Modal */
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
 }
 
-/* 🥁 Drum Information Box */
-.drum-info {
-  text-align: center;
-  width: 30%;
-  opacity: 0;
-  transform: translateY(30px);
-  /* padding: 20px; */
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+.lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 8px;
 }
 
-/* ✅ Active State for Scroll Animation */
-.drum-info.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* 🔥 Ensure Text & Description are Readable */
-.description-list,
-.text-layer {
-  color: rgb(255, 255, 255);
-}
-
-ul,
-.description-list,
-.drum-final-section {
-  color: white;
-}
-
-.drum-info ul {
-  list-style: none;
-  padding: 0;
-  text-align: center;
-}
-
-.drum-info li {
-  font-size: 16px;
-  margin-bottom: 6px;
-}
-
-/* 🔘 Pre-Order Button */
-.preorder-button {
-  display: inline-block;
-  padding: 10px 15px;
-  margin-top: 10px;
-  font-size: 16px;
-  font-weight: bold;
-  color: white;
-  background: #d9534f;
-  text-decoration: none;
-  border-radius: 5px;
-  width: 50%;
-  transition: background 0.3s ease;
-}
-
-.preorder-button:hover {
-  background: #c9302c;
-}
-
-/* 🛠 Mobile Responsiveness Fixes */
+/* 📱 Mobile Styles */
 @media (max-width: 768px) {
-  .drum-section {
-    flex-direction: column;
-    height: auto;
-    padding: 5vh 6vw;
-    text-align: center;
+  .artisanseries-header-image {
+    max-width: 180px;
   }
 
-  /* 🏆 Ensure Drum Image is in the Same Container as Text */
-  .drum-section.left, .drum-section.right {
-    flex-direction: column !important;
-    align-items: center;
+  .description {
+    font-size: 0.95rem;
   }
 
-  .text-layer {
-    width: 90%;
-    max-width: 100%;
-    padding: 5vh 6vw;
-    background: rgba(0, 0, 0, 0.6);
-    color: white;
-    text-align: center;
-    /* border-radius: 10px; */
-  }
-
-  /* 📸 Ensure Drum Image is Sized Correctly */
-  .drum-layer {
-    width: 100%;
-    max-width: 100%;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-
-  .drum-layer img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    /* background-color: inherit; Ensures background color matches the section */
-  }
-
-  /* 🎨 Header Image Adjustments */
-  .text-layer .artisanseries-header-image {
-    max-width: 250px;
-    margin-bottom: 15px;
-  }
-
-  /* 📝 Adjust Text Readability */
-  .text-layer .description {
-    font-size: 1rem;
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-  }
-
-  /* 🏆 Ensure Feature List is Visible */
   .description-list {
-    text-align: left;
-    font-size: 0.9rem;
-    padding-left: 10px;
-    margin-top: 10px;
-  }
-
-  /* 🔥 Ensure the final drum lineup displays properly */
-  .drum-final-text {
-    flex-direction: column;
-    align-items: center;
-    gap: 2vh;
-    /* background: rgba(0, 0, 0, 0.6); */
-    padding-top: 20px;
-    /* border-radius: 10px; */
-  }
-
-  .drum-logo {
-    width: 110px;
-  }
-
-  .drum-info {
-    width: 100%;
-    padding-bottom: 3vh;
-  }
-
-  .drum-final-image {
-    position: relative;
-    bottom: 0;
-  }
-
-  .drum-final-image img {
-    width: 100vw;
-    max-height: 400px;
-  }
-}
-
-/* 📱 Extra Small Screens */
-@media (max-width: 480px) {
-  .drum-section {
-    padding: 4vh 5vw;
-  }
-
-  .text-layer {
-    max-width: 100%;
-    padding: 4vh 6vw;
-  }
-
-  .text-layer .artisanseries-header-image {
-    max-width: 220px;
-  }
-
-  .text-layer .description {
     font-size: 0.85rem;
-    line-height: 1.5;
   }
 
-  .drum-layer img {
-    object-fit: cover;
-    /* background-color: inherit; Ensures background color matches the section */
+  .gallery-strip img {
+    height: 100px;
   }
 
-  .drum-info {
-    font-size: 0.9rem;
+  .drum-click-zones {
+    height: 100px;
   }
 }
