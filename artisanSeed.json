@@ -1,0 +1,40 @@
+{
+  "heritage": {
+    "name": "HERITAGE",
+    "quote": "“The drum that started it all—classic craftsmanship, timeless sound.”",
+    "description": "The HERITAGE Series embodies the soul of hand-crafted percussion...",
+    "specs": [
+      "Shell Construction: Stave",
+      "Available Sizes: 12”, 13”, 14”",
+      "Finish: Light gloss, Medium gloss, Torch-scorched aesthetic",
+      "Wood Selection: Northern Red Oak"
+    ],
+    "images": [
+      "gs://danoberartisandrums.appspot.com/artisan/heritage1.jpg",
+      "gs://danoberartisandrums.appspot.com/artisan/heritage2.jpg"
+    ],
+    "audioSamples": [
+      {
+        "name": "Dry Center Hit",
+        "url": "gs://danoberartisandrums.appspot.com/artisan/heritage-hit.mp3"
+      },
+      {
+        "name": "Buzz Roll",
+        "url": "gs://danoberartisandrums.appspot.com/artisan/heritage-roll.mp3"
+      }
+    ]
+  },
+  "feuzon": {
+    "name": "FEUZØN",
+    "quote": "“Blending tradition and innovation into one harmonious voice.”",
+    "description": "The FEUZØN Series is a revolutionary hybrid snare drum...",
+    "specs": [
+      "Shell Construction: Hybrid (Stave + Steam Bent)",
+      "Available Sizes: 12”, 13”, 14”",
+      "Finish: Natural or Stained",
+      "Wood Selection: Stave (varied) + steam bent outer shell"
+    ],
+    "images": [],
+    "audioSamples": []
+  }
+}
