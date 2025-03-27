@@ -1,267 +1,175 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
-
-/* General styles for the navbar */
-.navbar {
-  font-family: "Poppins", sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.artisanseries-container {
   position: relative;
-  padding: 20px;
+  width: 100%;
+  background-color: #111;
+  overflow-x: hidden;
+  color: white;
 }
 
-/* Background video styling - Default (light mode) */
-.navbar-background {
-  position: fixed;
-  top: 0;
-  left: 0;
+/* Main Content Section */
+.drum-display {
+  padding-bottom: 360px; /* Less space but still room for drum overlays */
+  text-align: center;
+}
+
+.text-layer {
+  padding: 1.5rem 1rem 1rem;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.artisanseries-header-image {
+  max-width: 220px;
+  margin-bottom: 12px;
   width: 100%;
-  height: 100%;
+}
+
+.description {
+  font-size: 0.95rem;
+  margin: 0.75rem 0;
+}
+
+.description-list {
+  list-style: none;
+  font-size: 0.85rem;
+  padding: 0;
+  margin-bottom: 0.5rem;
+}
+
+/* Gallery */
+.drum-gallery {
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+  padding: 0.5rem 1rem;
+  margin-top: 12px;
+  justify-content: center;
+}
+
+.drum-gallery img {
+  height: 120px;
+  border-radius: 6px;
   object-fit: cover;
-  z-index: -1;
-  opacity: 0.5;
 }
 
-/* Dark Mode - Override background video opacity */
-body.dark .navbar-background {
-  opacity: 0.5;
+/* Audio Samples */
+.audio-sample-section {
+  padding: 0.5rem 1rem;
+  margin-top: 10px;
+  text-align: left;
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-/* Logo Section */
-.navbar-logo {
+.audio-sample-section h3 {
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+}
+
+.audio-sample-section ul {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+.audio-sample-section li {
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.audio-sample-section button {
+  background: #222;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.audio-sample-section button:hover {
+  background: #444;
+}
+
+/* Layered Images */
+.drum-layers {
   width: 100%;
-  max-width: 500px;
+  z-index: 9;
+  pointer-events: none;
 }
 
-.logo-img {
-  min-width: 75%;
-  max-height: 50%;
+.drum-layers.fixed {
+  position: fixed;
+  bottom: 0;
+  left: 0;
 }
 
-/* ✅ Navbar Links - Adjusts for Light & Dark Mode */
-body.light .nav-link {
-  color: black !important;
+.drum-layers.scrolling {
+  position: relative;
 }
 
-body.dark .nav-link {
-  color: white !important;
+.drum-layers .layer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 
-/* ✅ Active Links Follow Theme */
-body.light .nav-link.active {
-  color: black !important;
-  text-decoration: underline;
-}
-
-body.dark .nav-link.active {
-  color: white !important;
-  text-decoration: underline;
-}
-
-/* Navbar Links */
-.navbar-links {
+/* Click Zones */
+.drum-click-zones {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 120px;
+  z-index: 20;
   display: flex;
   justify-content: space-between;
+}
+
+.drum-click-zones .zone {
+  flex: 1;
+  cursor: pointer;
+}
+
+/* Footer trigger marker */
+.footer-trigger-marker {
+  height: 1px;
   width: 100%;
+  background: transparent;
 }
 
-.nav-link {
-  text-decoration: none;
-  font-size: 16px;
-  padding: 15px 12px;
-  cursor: pointer;
-}
-
-.nav-link:hover {
-  color: hsl(46, 100%, 89%);
-  border-radius: 10px;
-  transition: ease-in-out 0.3;
-}
-
-/* ✅ Fix for Cart Icon & Badge */
-body.light .cart-icon {
-  color: black !important;
-  background: none !important;
-}
-
-body.dark .cart-icon {
-  color: white !important;
-  background: none !important;
-}
-
-body.light .cart-badge,
-body.dark .cart-badge {
-  font-size: 11px;
-  color: white !important;
-  background: red !important;
-  padding: 4px 9px 5px 8px;
-  border-radius: 15px;
-}
-
-/* ✅ Cart Preview Container Styling */
-.cart-preview-container {
-  background-color: white !important;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-}
-
-/* ✅ Cart Preview Buttons Visible */
-body.dark .cart-preview-container,
-body.dark .cart-preview-container button {
-  /* background-color: #222 !important;
-  color: white !important; */
-}
-
-/* ✅ Remove Background from Menu Button in Both Modes */
-.navbar-menu-container {
-  display: none;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  cursor: pointer;
-  border: none !important;
-  background: none !important; /* ✅ Fully Transparent */
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-/* ✅ Ensure Menu Button in Light Mode Stays Transparent */
-body.light .navbar-menu-container {
-  background: none !important;
-  border: none !important;
-}
-
-/* ✅ Ensure Menu Button in Dark Mode Stays Transparent */
-body.dark .navbar-menu-container {
-  background: none !important;
-  border: none !important;
-}
-
-/* ✅ Ensure Hover Doesn't Change Button */
-.navbar-menu-container:hover,
-body.light .navbar-menu-container:hover,
-body.dark .navbar-menu-container:hover {
-  background: none !important;
-  border: none !important;
-}
-
-/* ✅ Ensure Menu Icon (Image) is Visible */
-.menu-arrow-icon {
-  width: 40px;
-  height: 40px;
-  transition: transform 0.3s ease;
-}
-
-/* ✅ Menu Button Animation */
-.menu-arrow-icon.open {
-  transform: rotate(360deg);
-}
-
-/* Mobile View Styles */
-@media (max-width: 767px) {
-  .artisanseries-container {
-    scroll-snap-type: none; /* Disable snap scrolling */
-    background-color: #f4f4f4;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .artisanseries-header-image {
+    max-width: 180px;
   }
 
-  /* 🏆 Full-width logo/title section */
-  .logo-container {
-    width: 100%;
-    text-align: center;
-    padding: 2vh 0;
-  }
-
-  .logo-container img {
-    width: 85%;
-    max-width: 500px;
-    height: auto;
-  }
-
-  /* 📸 Image between header and text */
-  .drum-layer {
-    width: 100%;
-    text-align: center;
-    padding: 2vh 0;
-  }
-
-  .drum-layer img {
-    width: 92%;
-    max-width: 600px;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-
-  /* 🔹 Full-width text/description section */
-  .text-layer {
-    width: 100%;
-    padding: 3vh 6vw;
-    background-color: white;
-    text-align: center;
-  }
-
-  .text-layer .header-image {
-    max-width: 250px;
-    margin: 0 auto 10px;
-  }
-
-  .text-layer .description {
-    font-size: 1rem;
-    line-height: 1.5;
-    margin-bottom: 1rem;
-    font-weight: 500;
-    text-align: center;
-  }
-
-  /* 📝 Full-width specs section */
-  .drum-specs {
-    width: 100%;
-    padding: 3vh 6vw;
-    background-color: white;
-    text-align: left;
-  }
-
-  .drum-specs ul {
-    list-style-type: none;
-    padding: 0;
-  }
-
-  .drum-specs li {
-    margin-bottom: 8px;
-    font-size: 1rem;
-    color: #444;
-  }
-
-  .drum-specs li strong {
-    color: black;
-  }
-}
-
-/* For Ultra-Small Devices */
-@media (max-width: 480px) {
-  .logo-container img {
-    width: 80%;
-  }
-
-  .text-layer {
-    padding: 2vh 5vw;
-  }
-
-  .text-layer .header-image {
-    max-width: 220px;
-  }
-
-  .text-layer .description {
+  .description {
     font-size: 0.9rem;
   }
 
-  .drum-layer img {
-    width: 95%;
-    max-width: 400px;
+  .description-list {
+    font-size: 0.8rem;
+  }
+
+  .drum-click-zones {
+    height: 90px;
+  }
+
+  .drum-gallery img {
+    height: 100px;
+  }
+
+  .audio-sample-section h3 {
+    font-size: 0.95rem;
+  }
+
+  .audio-sample-section button {
+    font-size: 0.8rem;
+    padding: 5px 8px;
   }
 }
