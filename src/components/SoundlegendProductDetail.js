@@ -1,5 +1,14 @@
 import React, { useState } from 'react';
 import { db } from '../firebaseConfig'; // Firestore config
+import { useNavigate } from 'react-router-dom';
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Button,
+  Typography,
+} from '@mui/material';
 import { collection, addDoc, Timestamp } from 'firebase/firestore'; // Firestore methods
 import './SoundlegendProductDetail.css';
 
@@ -9,6 +18,7 @@ const SoundLegendProductDetail = () => {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [open, setOpen] = useState(false);
 
   // Custom Snare Specifications
   const [size, setSize] = useState('14');
@@ -17,8 +27,15 @@ const SoundLegendProductDetail = () => {
   const [woodSpecies, setWoodSpecies] = useState('Maple');
   const [snareBedDepth, setSnareBedDepth] = useState('Medium');
   const [consultationDate, setConsultationDate] = useState('');
-
   const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  const navigate = useNavigate();
+
+// 🔽 Add this here
+const handleClose = () => {
+  setOpen(false);
+  navigate('/pre-order');
+};
 
   // Full list of available wood species
   const woodSpeciesOptions = [
@@ -50,7 +67,7 @@ const SoundLegendProductDetail = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-
+  
     const submissionData = {
       firstName,
       lastName,
@@ -63,16 +80,13 @@ const SoundLegendProductDetail = () => {
       snareBedDepth,
       consultationDate,
       status: 'New',
-      submittedAt: Timestamp.now(), // Firestore timestamp
+      submittedAt: Timestamp.now(),
     };
-
+  
     try {
-      // Save submission to Firestore
       await addDoc(collection(db, 'soundlegend_submissions'), submissionData);
-      alert(
-        "Your custom snare request has been submitted! We'll be in touch soon."
-      );
-
+      setOpen(true); // 🔥 Show the success Dialog
+  
       // Reset form fields
       setFirstName('');
       setLastName('');
@@ -331,6 +345,19 @@ const SoundLegendProductDetail = () => {
                 ? 'Submitting...'
                 : 'Start Your Custom Snare Journey'}
             </button>
+                  <Dialog open={open} onClose={handleClose}>
+                    <DialogTitle>Request Sent</DialogTitle>
+                    <DialogContent>
+                      <Typography variant="body1">
+                        Thank you for reaching out! We&apos;ll get back to you within 1-2 business days. Feel free to explore our other Pre-Order options while you wait.
+                      </Typography>
+                    </DialogContent>
+                    <DialogActions>
+                      <Button onClick={handleClose} color="primary">
+                        Continue
+                      </Button>
+                    </DialogActions>
+                  </Dialog>
           </form>
         </div>
       </div>
