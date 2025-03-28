@@ -6,21 +6,40 @@
   color: white;
 }
 
+/* -------------------------------
+   HEADER: Logo + Title
+-------------------------------- */
+.logo-single-wrapper {
+  text-align: center;
+  padding: 2rem 0 1rem;
+}
+
+.artisanseries-header-image {
+  max-width: 320px;
+  width: 100%;
+  margin: 0 auto 0.5rem;
+}
+
+.series-title-text {
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #bbb;
+  margin-bottom: 0.5rem;
+}
+
+/* -------------------------------
+   DRUM DISPLAY + TEXT SECTION
+-------------------------------- */
 .drum-display {
   padding-bottom: 500px;
   text-align: center;
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
 .text-layer {
   padding: 2rem;
-}
-
-.artisanseries-header-image {
-  max-width: 240px;
-  width: 100%;
-  margin-bottom: 20px;
 }
 
 .description {
@@ -38,48 +57,55 @@
   max-width: 700px;
 }
 
-.preorder-card-preorder-button {
-  padding: 10px 18px;
-  background: #b3544b;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.95rem;
-  margin: 1rem 0 2rem;
-}
-
-/* 📸 Image Gallery */
-.gallery-strip {
+/* -------------------------------
+   KEY FEATURES + AUDIO SECTION
+-------------------------------- */
+.features-audio-wrapper {
   display: flex;
-  overflow-x: auto;
-  gap: 10px;
-  padding: 0.5rem 1rem 1rem;
-  margin: 0 auto 1.5rem;
-  max-width: 900px;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 2rem;
 }
 
-.gallery-strip img {
-  height: 120px;
+.key-features {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1.5rem;
   border-radius: 8px;
-  object-fit: cover;
-  flex-shrink: 0;
-  cursor: pointer;
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: left;
 }
 
-/* 🎧 Audio Sample Section */
-.audio-samples {
-  padding: 0 1rem 2rem;
+.key-features h3 {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.audio-box {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1.5rem;
+  border-radius: 8px;
+  max-width: 400px;
   margin: 0 auto;
-  max-width: 900px;
+  text-align: left;
+}
+
+.audio-box h4 {
+  margin-bottom: 0.8rem;
+  color: #fff;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .audio-sample-item {
-  margin-bottom: 12px;
   display: flex;
   align-items: center;
   gap: 12px;
-  justify-content: flex-start;
+  margin-top: 0.5rem;
 }
 
 .audio-sample-item button {
@@ -99,15 +125,34 @@
 
 .audio-sample-item span {
   font-size: 0.9rem;
-  flex: 1;
-  text-align: left;
 }
 
-/* 🥁 Drum Image Layers */
+/* -------------------------------
+   GALLERY STRIP
+-------------------------------- */
+.gallery-strip {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 2rem;
+}
+
+.gallery-strip img {
+  width: 150px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* -------------------------------
+   DRUM LAYERED IMAGE SECTION
+-------------------------------- */
 .drum-layers {
+  position: relative;
   width: 100%;
-  z-index: 9;
   pointer-events: none;
+  z-index: 9;
 }
 
 .drum-layers.fixed {
@@ -128,69 +173,201 @@
   object-fit: contain;
 }
 
-/* 🔘 Transparent Zones */
 .drum-click-zones {
-  position: fixed;
+  position: absolute;
   bottom: 0;
   width: 100%;
-  height: 140px;
-  z-index: 20;
+  height: 160px;
   display: flex;
   justify-content: space-between;
+  pointer-events: auto;
+  z-index: 10;
 }
 
 .drum-click-zones .zone {
   flex: 1;
   cursor: pointer;
+  height: 100%;
+  background: transparent;
 }
 
-/* 📌 Footer Trigger */
+/* -------------------------------
+   PAGINATION DOTS
+-------------------------------- */
+.bullet-nav {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.pagination-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #777;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.pagination-dot.active {
+  background: white;
+  opacity: 1;
+  transform: scale(1.4);
+}
+
+/* -------------------------------
+   LIGHTBOX
+-------------------------------- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: grab;
+}
+
+.lightbox.zoomed {
+  cursor: zoom-out;
+}
+
+.lightbox-image-container {
+  max-width: 90%;
+  max-height: 90%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+  user-select: none;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 2rem;
+  color: white;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.lightbox-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 3rem;
+  color: white;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+  padding: 0 10px;
+}
+
+.lightbox-arrow.left {
+  left: 10px;
+}
+
+.lightbox-arrow.right {
+  right: 10px;
+}
+
+/* -------------------------------
+   MISC
+-------------------------------- */
 .footer-trigger-marker {
   height: 1px;
   width: 100%;
   background: transparent;
 }
 
-/* 🖼️ Lightbox Fullscreen Modal */
-.lightbox {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 9999;
-  background: rgba(0, 0, 0, 0.95);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: zoom-out;
+.preorder-card-preorder-button {
+  padding: 10px 18px;
+  background: #b3544b;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  margin: 1rem 0 2rem;
 }
 
-.lightbox img {
-  max-width: 90%;
-  max-height: 90%;
-  border-radius: 8px;
-}
-
-/* 📱 Mobile Styles */
+/* -------------------------------
+   📱 Mobile Styles
+-------------------------------- */
 @media (max-width: 768px) {
   .artisanseries-header-image {
     max-width: 180px;
   }
 
-  .description {
-    font-size: 0.95rem;
+  .logo-selector {
+    gap: 15px;
   }
 
-  .description-list {
-    font-size: 0.85rem;
+  .logo-item {
+    height: 60px;
+  }
+
+  .media-flex-row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .gallery-strip {
+    flex-direction: column;
+    align-items: center;
   }
 
   .gallery-strip img {
-    height: 100px;
+    width: 100%;
+    height: auto;
   }
 
   .drum-click-zones {
-    height: 100px;
+    height: 120px;
+  }
+}
+
+/* -------------------------------
+   💻 Desktop Styles
+-------------------------------- */
+@media (min-width: 769px) {
+  .features-audio-wrapper {
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .key-features,
+  .audio-box {
+    margin: 0;
+  }
+
+  .gallery-strip {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 2rem;
+  }
+
+  .gallery-strip img {
+    width: 200px;
+    height: 130px;
   }
 }

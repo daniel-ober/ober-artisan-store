@@ -26,31 +26,23 @@ const DRUM_SERIES = [
         name: "Dry Hit - Snares On",
         url: "https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/artisan%2Fheritage%2F14x6.20-stave%2Fwave%2FIMG_5847.78.wav?alt=media&token=5399e30f-d688-4837-bd13-fb3f0cefe6c5",
       },
-      {
-        name: "Dry Hit - Snares Off",
-        url: "https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/artisan%2Fheritage%2F14x6.20-stave%2Fwave%2Fsnaresoff.wav?alt=media&token=b8b5809f-d324-44e2-a479-a2474ca4a7c7",
-      },
-      {
-        name: "Rimshot - Snares On",
-        url: "https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/artisan%2Fheritage%2F14x6.20-stave%2Fwave%2Fsnares-withrim.wav?alt=media&token=1d59600b-c2fe-45c8-84bd-1d530d5471b1",
-      },
-      {
-        name: "Rimshot - Snares Off",
-        url: "https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/artisan%2Fheritage%2F14x6.20-stave%2Fwave%2Fsnaresoff-rim.wav?alt=media&token=217767bf-7b2e-4b93-9e5b-28903c3763bf",
-      },
-      {
-        name: "Sidestick - Full",
-        url: "https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/artisan%2Fheritage%2F14x6.20-stave%2Fwave%2FIMG_5847.57.wav?alt=media&token=58c9dae6-1c99-4ad6-a921-f43897697623",
-      },
-      {
-        name: "Sidestick - Soft",
-        url: "https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/artisan%2Fheritage%2F14x6.20-stave%2Fwave%2FIMG_5847.23.wav?alt=media&token=b952a02e-7228-4767-860d-c6d0e36b36ec",
-      },
-      {
-        name: "Sidestick - Thin",
-        url: "https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/artisan%2Fheritage%2F14x6.20-stave%2Fwave%2Fclick-thin.wav?alt=media&token=ac5007d1-5f97-4713-a29a-b8cbd7482894",
-      },
     ],
+  },
+  {
+    id: "soundlegend",
+    name: "SOUNDLEGEND",
+    logo: "/resized-logos/soundlegend-white.png",
+    overlay: "/artisanseries-bottom-layers/top-layer-middle-drum-highlighted.png",
+    quote: "“Every drum tells a story—let’s craft yours together.”",
+    description:
+      "The SoundLegend Series is more than just a drum—it’s an experience. Designed for drummers who want to collaborate directly with a master artisan, this fully custom shop offering gives you the freedom to explore new sonic possibilities.",
+    specs: [
+      "Shell Construction: Stave, Steam-Bent, or Hybrid",
+      "Fully Customizable: Size, Lugs, Finish, Wood",
+      "Hands-on experience: Consultation + Concept Renders",
+    ],
+    images: [],
+    audioSamples: [],
   },
   {
     id: "feuzon",
@@ -59,7 +51,7 @@ const DRUM_SERIES = [
     overlay: "/artisanseries-bottom-layers/top-layer-right-drum-highlighted.png",
     quote: "“Blending tradition and innovation into one harmonious voice.”",
     description:
-      "The FEUZØN Series is a revolutionary hybrid snare drum that fuses the precision of stave construction with the controlled resonance of a steam bent outer shell. This innovative design enhances warmth, articulation, and dynamic response, offering a snare drum unlike any other. Each drum is torch-tuned to refine its sonic character, bringing out the rich harmonics and bold presence that drummers crave.",
+      "The FEUZØN Series is a revolutionary hybrid snare drum that fuses the precision of stave construction with the controlled resonance of a steam bent outer shell. This innovative design enhances warmth, articulation, and dynamic response, offering a snare drum unlike any other.",
     specs: [
       "Shell Construction: Hybrid (Stave + Steam Bent)",
       "Available Sizes: 12”, 13”, 14”",
@@ -69,30 +61,19 @@ const DRUM_SERIES = [
     images: [],
     audioSamples: [],
   },
-  {
-    id: "soundlegend",
-    name: "SOUNDLEGEND",
-    logo: "/resized-logos/soundlegend-white.png",
-    overlay: "/artisanseries-bottom-layers/top-layer-middle-drum-highlighted.png",
-    quote: "“Every drum tells a story—let’s craft yours together.”",
-    description:
-      "The SoundLegend Series is more than just a drum—it’s an experience. Designed for drummers who want to collaborate directly with a master artisan, this fully custom shop offering gives you the freedom to explore new sonic possibilities. Through a hands-on process that includes consultation calls, high-resolution concept renders, and build updates, you’ll watch your dream snare drum take shape before your eyes.",
-    specs: [
-      "Shell Construction: Stave, Steam-Bent, or Hybrid",
-      "Fully Customizable: Size, Lugs, Finish, Wood",
-      "Hands-on experience: Consultation + Concept Renders",
-    ],
-    images: [],
-    audioSamples: [],
-  },
 ];
 
 const ArtisanSeries = () => {
   const { isDarkMode } = useContext(DarkModeContext);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [lightboxIndex, setLightboxIndex] = useState(null);
+  const [zoomed, setZoomed] = useState(false);
   const footerRef = useRef(null);
+  const touchStartX = useRef(null);
+  const lightboxImgRef = useRef(null);
   const [isFooterVisible, setFooterVisible] = useState(false);
-  const [lightboxImg, setLightboxImg] = useState(null);
+
+  const active = DRUM_SERIES[activeIndex];
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -103,79 +84,120 @@ const ArtisanSeries = () => {
     return () => observer.disconnect();
   }, []);
 
-  const active = DRUM_SERIES[activeIndex];
+  useEffect(() => {
+    const handleTouchEnd = (e) => {
+      if (touchStartX.current === null) return;
+      const touchEndX = e.changedTouches[0].clientX;
+      const deltaX = touchStartX.current - touchEndX;
+      if (Math.abs(deltaX) > 50) {
+        if (deltaX > 0) {
+          setActiveIndex((prev) => (prev + 1) % DRUM_SERIES.length);
+        } else {
+          setActiveIndex((prev) => (prev - 1 + DRUM_SERIES.length) % DRUM_SERIES.length);
+        }
+      }
+      touchStartX.current = null;
+    };
 
-  const playAudio = (url) => {
-    const audio = new Audio(url);
-    audio.play();
-  };
+    window.addEventListener("touchstart", (e) => {
+      touchStartX.current = e.touches[0].clientX;
+    });
+    window.addEventListener("touchend", handleTouchEnd);
+
+    return () => {
+      window.removeEventListener("touchend", handleTouchEnd);
+    };
+  }, []);
+
+  const playAudio = (url) => new Audio(url).play();
 
   return (
     <>
       <div className="artisanseries-container">
+        <div className="logo-single-wrapper">
+          <img src={active.logo} alt={active.name} className="artisanseries-header-image" />
+          <div className="bullet-nav">
+          {DRUM_SERIES.map((_, i) => (
+            <span
+              key={i}
+              className={`pagination-dot ${i === activeIndex ? "active" : ""}`}
+              onClick={() => setActiveIndex(i)}
+            />
+          ))}
+        </div>        </div>
+
         <div className="drum-display">
           <div className="text-layer">
-            <img src={active.logo} alt={active.name} className="artisanseries-header-image" />
             <p className="description"><strong>{active.quote}</strong></p>
             <p className="description">{active.description}</p>
-            <ul className="description-list">
-              {active.specs.map((item, i) => (
-                <li key={i}>{item}</li>
-              ))}
-            </ul>
 
-            {/* 📸 Image Gallery */}
+            <div className="features-audio-wrapper">
+              <div className="key-features">
+                <h3>Key Features</h3>
+                <ul className="description-list">
+                  {active.specs.map((item, i) => <li key={i}>{item}</li>)}
+                </ul>
+              </div>
+
+              {active.audioSamples?.length > 0 && (
+                <div className="audio-box">
+                  <h4>Audio Sample</h4>
+                  {active.audioSamples.map((sample, i) => (
+                    <div className="audio-sample-item" key={i}>
+                      <button onClick={() => playAudio(sample.url)}>▶</button>
+                      <span>{sample.name}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
             {active.images?.length > 0 && (
               <div className="gallery-strip">
                 {active.images.map((img, i) => (
                   <img
                     key={i}
                     src={img}
-                    alt={`Drum image ${i}`}
-                    onClick={() => setLightboxImg(img)}
+                    alt={`Drum ${i}`}
+                    onClick={() => setLightboxIndex(i)}
                   />
-                ))}
-              </div>
-            )}
-
-            {/* 🎧 Audio Samples */}
-            {active.audioSamples?.length > 0 && (
-              <div className="audio-samples">
-                {active.audioSamples.map((sample, i) => (
-                  <div className="audio-sample-item" key={i}>
-                    <button onClick={() => playAudio(sample.url)}>▶</button>
-                    <span>{sample.name}</span>
-                  </div>
                 ))}
               </div>
             )}
           </div>
         </div>
 
-        {/* 🥁 Drum Layers */}
         <div className={`drum-layers ${isFooterVisible ? "scrolling" : "fixed"}`}>
           <img src="/artisanseries-bottom-layers/base-layer-bottom.png" alt="Base Bottom" className="layer" />
           <img src="/artisanseries-bottom-layers/base-layer-front.png" alt="Base Front" className="layer" />
           <img src={active.overlay} alt="Overlay" className="layer" />
-        </div>
 
-        {/* 🔘 Click Zones */}
-        <div className="drum-click-zones">
-          <div className="zone left" onClick={() => setActiveIndex(0)} />
-          <div className="zone middle" onClick={() => setActiveIndex(2)} />
-          <div className="zone right" onClick={() => setActiveIndex(1)} />
+          <div className="drum-click-zones">
+            <div className="zone" onClick={() => setActiveIndex(0)} />
+            <div className="zone" onClick={() => setActiveIndex(1)} />
+            <div className="zone" onClick={() => setActiveIndex(2)} />
+          </div>
         </div>
       </div>
 
-      {/* 📌 Footer Visibility Trigger */}
-      <div ref={footerRef} className="footer-trigger-marker" />
-
-      {/* 🔍 Lightbox Modal */}
-      {lightboxImg && (
-        <div className="lightbox" onClick={() => setLightboxImg(null)}>
-          <img src={lightboxImg} alt="Enlarged Drum" />
+      {lightboxIndex !== null && (
+        <div className={`lightbox ${zoomed ? "zoomed" : ""}`} onClick={() => setLightboxIndex(null)}>
+          <button className="lightbox-close" onClick={(e) => { e.stopPropagation(); setLightboxIndex(null); }}>×</button>
+          <button className="lightbox-arrow left" onClick={(e) => { e.stopPropagation(); setLightboxIndex((lightboxIndex - 1 + active.images.length) % active.images.length); }}>‹</button>
+          <div className="lightbox-image-container">
+            <img
+              ref={lightboxImgRef}
+              src={active.images[lightboxIndex]}
+              alt={`Zoomed ${lightboxIndex}`}
+              onDoubleClick={(e) => { e.stopPropagation(); setZoomed(!zoomed); }}
+              draggable="false"
+            />
+          </div>
+          <button className="lightbox-arrow right" onClick={(e) => { e.stopPropagation(); setLightboxIndex((lightboxIndex + 1) % active.images.length); }}>›</button>
         </div>
       )}
+
+      <div ref={footerRef} className="footer-trigger-marker" />
     </>
   );
 };
