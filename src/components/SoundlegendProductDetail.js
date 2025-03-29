@@ -11,6 +11,8 @@ import {
 } from '@mui/material';
 import { collection, addDoc, Timestamp } from 'firebase/firestore'; // Firestore methods
 import './SoundlegendProductDetail.css';
+import YouTubeEmbeded from './YouTubeEmbeded';
+
 
 const SoundLegendProductDetail = () => {
   // User Details

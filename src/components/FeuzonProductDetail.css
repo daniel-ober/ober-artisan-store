@@ -153,9 +153,8 @@
   
   /* 📌 Hover Dropdown for In Cart */
   .artisan-cart-hover-container {
-    position: relative;
-    display: inline-block;
-    width: 100%;
+    position: relative; /* ⬅️ Required for absolute dropdown to position correctly */
+    z-index: 9998; /* Optional: ensure container is above most elements */
   }
   
   /* 🔥 Fixes width issue & prevents overflow */
@@ -163,19 +162,19 @@
     position: absolute;
     top: 100%;
     left: 0;
-    width: inherit; /* ✅ Matches button width perfectly */
+    right: 0; /* ✅ Ensures it doesn't overflow horizontally */
     background: #fff;
     border: 1px solid #ccc;
     font-size: 14px;
     display: none;
-    padding: 8px 0;
+    padding: 0;
     text-align: center;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
     border-radius: 6px;
-    box-sizing: border-box; /* ✅ Prevents extra spacing */
-    z-index: 10;
+    box-sizing: border-box;
+    z-index: 9999;
+    overflow: hidden; /* ✅ Trims any child hover weirdness */
   }
-  
   /* Keep dropdown visible when hovering over the container */
   .artisan-cart-hover-container:hover .artisan-cart-hover-options {
     display: block;
@@ -225,6 +224,14 @@
     color: #666 !important;
     cursor: not-allowed;
   }
+
+  .feuzon-product-detail,
+.feuzon-product-content,
+.feuzon-product-details {
+  overflow: visible !important;
+  position: relative;
+  z-index: 1;
+}
   
   /* Change Selection Button Flicker */
   @keyframes flicker {
@@ -235,12 +242,9 @@
 
 /* 📌 Footer Adjustments */
 .footer {
-    margin-top: 40px;
-    padding: 20px;
-    background: #181818;
-    text-align: center;
-    color: white;
-}
+    z-index: 0;
+    position: relative;
+  }
 
 /* 📌 Responsive Adjustments */
 @media (max-width: 1024px) {
