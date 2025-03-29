@@ -6,6 +6,10 @@
   color: white;
 }
 
+.cart-icon.nav-link {
+  background-color: #ffffff00;
+}
+
 /* Main Content Section */
 .drum-display {
   /* padding-bottom: 250px; */

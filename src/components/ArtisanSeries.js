@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect, useRef } from 'react';
 import './ArtisanSeries.css';
 import { DarkModeContext } from '../context/DarkModeContext';
-import YouTubeEmbeded from './YouTubeEmbeded';
 
 const DRUM_SERIES = [
   {
