@@ -32,7 +32,7 @@
 }
 
 .artisanseries-header-image {
-  max-width: 320px;
+  max-width: 500px;
   width: 100%;
   margin: 0 auto 0.5rem;
 }
@@ -42,19 +42,20 @@
 -------------------------------- */
 .drum-display {
   text-align: center;
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
-  opacity: 1;
   transition: opacity 0.5s ease-in-out;
+  opacity: 1;
+  min-height: 600px; /* prevent layout jump */
 }
 
 .drum-display.fade-out {
   opacity: 0;
 }
 
-.text-layer {
-  padding: 2rem;
-}
+/* .text-layer {
+  padding: 10px;
+} */
 
 .description {
   font-size: 1rem;
@@ -69,6 +70,26 @@
   margin: 0 auto 1.5rem;
   text-align: left;
   max-width: 700px;
+}
+
+.soundlegend-video-wrapper {
+  margin: 40px auto;
+  padding-bottom: 56.25%; /* 16:9 */
+  position: relative;
+  height: 0;
+  width: 100%;
+  max-width: 1000px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.soundlegend-video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 /* -------------------------------
@@ -123,31 +144,90 @@
 }
 
 /* -------------------------------
-   GALLERY STRIP
+   SCROLLABLE GALLERY STRIP (below description)
 -------------------------------- */
-.gallery-strip {
+.gallery-scroll-strip {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 15px;
-  margin-top: 2rem;
+  overflow-x: auto;
+  padding: 1.5rem 0;
+  gap: 16px;
+  scrollbar-width: thin;
+  scrollbar-color: #555 transparent;
+  margin-top: 1rem;
 }
 
-.gallery-strip img {
-  width: 200px;
-  height: 130px;
+.gallery-scroll-strip::-webkit-scrollbar {
+  height: 6px;
+}
+
+.gallery-scroll-strip::-webkit-scrollbar-thumb {
+  background-color: #555;
+  border-radius: 4px;
+}
+
+.gallery-scroll-strip::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.gallery-thumb {
+  flex: 0 0 auto;
+  width: 220px;
+  height: 140px;
   object-fit: cover;
   border-radius: 6px;
   cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.gallery-thumb:hover {
+  transform: scale(1.03);
+}
+
+.gallery-strip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 2rem;
+  gap: 1.5rem;
+}
+
+.gallery-strip img {
+  width: 100%;
+  display: block;
+  border-radius: 8px;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+
+.gallery-strip img.visible {
+  opacity: 1;
+  transform: translateY(0);
+  height: 100%;
+  width: 100%;
 }
 
 /* Fade utilities */
 .fade-transition {
-  transition: opacity 300ms ease-in-out;
+  opacity: 1;
+  transition: opacity 600ms ease-in-out;
+  will-change: opacity;
 }
-.fade-transition.fade-out {
-  opacity: 0;
+
+/* Drum Layers - Smooth GPU acceleration */
+.drum-layers .layer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  opacity: 1;
+  transition: opacity 0.6s ease-in-out;
+  will-change: opacity, transform;
+  transform: translateZ(0); /* force GPU compositing */
+  z-index: 2;
   pointer-events: none;
 }
 
@@ -207,6 +287,30 @@
   z-index: 3;
 }
 
+/* Bottom overlay image transitions */
+.layer.overlay-image {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.4s ease-in-out;
+  z-index: 3;
+}
+
+/* Remove blend mode entirely */
+
+.layer.overlay-image.fade-in {
+  opacity: 1;
+}
+
+.layer.overlay-image.fade-out {
+  opacity: 0;
+  z-index: 2;
+}
+
 /* -------------------------------
    DRUM CLICK + HOVER ZONES
 -------------------------------- */
@@ -237,56 +341,61 @@
 -------------------------------- */
 .drum-final-text-section {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  justify-content:space-around;
   align-items: flex-start;
-  gap: 40px;
-  background: #1a1a1a;
-  padding: 4rem 2rem 5rem;
   flex-wrap: wrap;
+  gap: 2rem;
+  background: #1a1a1a;
+  padding: 3rem 1.5rem 4rem;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
+
 }
 
 .drum-final-card {
-  flex: 1 1 280px;
-  max-width: 320px;
-  color: white;
+  /* flex: 1 1 280px; */
+  max-width: 300px;
+  /* background: rgba(255, 255, 255, 0.02); */
+  padding: 1.5rem 1rem 2rem;
+  border-radius: 8px;
   text-align: center;
-  padding: 1rem 1rem 2rem;
+  color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.drum-final-card:hover {
+  transform: translateY(-4px);
 }
 
 .final-logo {
-  max-width: 160px;
-  width: 100%;
-  margin-bottom: 1.5rem;
+  max-width: 150px;
+  margin-bottom: 1rem;
 }
 
 .drum-final-card ul.description-list {
-  text-align: center;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
   padding: 0;
+  list-style: none;
 }
 
 .drum-final-card ul.description-list li {
-  list-style: none;
   margin-bottom: 0.5rem;
 }
 
 .drum-final-card .preorder-card-preorder-button,
 .drum-final-card .learn-more-button {
-  padding: 10px 18px;
+  padding: 10px 16px;
   background: #b3544b;
-  color: white;
   border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.95rem;
-  margin-top: 0.5rem;
+  border-radius: 5px;
+  color: white;
+  font-size: 0.9rem;
+  margin-top: auto;
   transition: background 0.3s ease;
 }
 
@@ -389,18 +498,20 @@
 }
 
 .drum-layers-spacer {
-  height: 600px;
+  height: 200px; /* matches the height of .drum-layers */
   width: 100%;
+  background: transparent;
 }
+
 
 /* -------------------------------
    RESPONSIVE
 -------------------------------- */
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   .drum-final-text-section {
     flex-direction: column;
     align-items: center;
-    padding: 3rem 1rem;
+    padding: 2.5rem 1rem;
   }
 
   .drum-final-card {
@@ -427,7 +538,7 @@
   }
 
   .artisanseries-header-image {
-    max-width: 180px;
+    max-width: 280px;
   }
 }
 
@@ -448,7 +559,7 @@
     justify-content: center;
     flex-wrap: wrap;
     gap: 15px;
-    margin-top: 2rem;
+    margin-bottom: 2rem;
   }
 
   .gallery-strip img {
