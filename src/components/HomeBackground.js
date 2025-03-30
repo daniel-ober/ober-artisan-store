@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { DarkModeContext } from "../context/DarkModeContext"; // ← add this
 import "./HomeBackground.css";
 
-const HomeBackground = () => {
-  const [scrollOffset, setScrollOffset] = useState(0);
+  const HomeBackground = () => {
+    const { isDarkMode } = useContext(DarkModeContext); // ← use it here
+    const [scrollOffset, setScrollOffset] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,26 +19,47 @@ const HomeBackground = () => {
 
   return (
     <div className="layered-background" style={{ "--scrollOffset": scrollOffset }}>
-      {/* 🔽 New bottom blending layer */}
       <img
         src="/home-background/home-background-all.png"
         className="blending-layer"
         alt="Background blend"
       />
-
-      {/* Optional haze */}
-
-      <img src="/home-background/home-background-bottom.png" className="table-layer" alt="Drum base" />
-      <img src="/home-background/home-background-top.png" className="outline-layer" alt="Drum outline" />
+      <img
+        src="/home-background/home-background-bottom.png"
+        className="table-layer"
+        alt="Drum base"
+      />
+      <img
+        src="/home-background/home-background-top.png"
+        className="outline-layer"
+        alt="Drum outline"
+      />
+  
+      {/* Your navbar background video, sitting in the foreground of this stack */}
       <video
-  className="haze-layer"
-  autoPlay
-  loop
-  muted
-  playsInline
->
-  <source src="/vid2.mp4" type="video/mp4" />
-</video>
+        key={isDarkMode ? 'dark' : 'light'}
+        className="navbar-background"
+        autoPlay
+        loop
+        muted
+        playsInline
+      >
+        <source
+          src={isDarkMode ? '/hero-dark.mp4' : '/hero-light.mp4'}
+          type="video/mp4"
+        />
+      </video>
+  
+      {/* Optional haze if still desired */}
+      <video
+        className="haze-layer"
+        autoPlay
+        loop
+        muted
+        playsInline
+      >
+        <source src="/vid2.mp4" type="video/mp4" />
+      </video>
     </div>
   );
 };

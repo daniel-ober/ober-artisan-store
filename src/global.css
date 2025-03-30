@@ -93,6 +93,18 @@ body.dark .about-page .section-content p {
   color: white;
 }
 
+body.light .navbar-links .nav-link {
+  color: black !important;
+}
+
+body.dark .navbar-links .nav-link {
+  color: white !important;
+}
+
+body.light .navbar-links.open .nav-link {
+  color: white !important;
+}
+
 /* Responsive Fixes */
 @media (max-width: 768px) {
   .pre-order-item {
