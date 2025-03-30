@@ -176,4 +176,8 @@
     font-size: 0.8rem;
     padding: 5px 8px;
   }
+
+  body.light .navbar-links .nav-link {
+    color: black !important;
+  }
 }

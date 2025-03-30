@@ -1,4 +1,4 @@
-/* Main admin dashboard container */
+Main admin dashboard container
 .admin-dashboard {
   max-width: 1200px; /* Adjusted for better centering */
   margin: 0 auto; /* Centers the container horizontally */
@@ -84,12 +84,12 @@
 }
 
 /* Center logo styling */
-.navbar-logo img {
+/* .navbar-logo img {
   display: block;
   margin: 0 auto;
-  max-width: 350px; /* Adjust based on your logo dimensions */
+  max-width: 350px;
   height: auto;
-}
+} */
 
 /* Center heading */
 h1 {
