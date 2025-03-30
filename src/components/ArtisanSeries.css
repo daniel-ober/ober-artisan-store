@@ -21,7 +21,7 @@
   position: sticky;
   top: 0;
   background: #111;
-  z-index: 99;
+  z-index: 0;
   padding: 1.5rem 1rem 1rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
@@ -46,16 +46,12 @@
   margin: 0 auto;
   transition: opacity 0.5s ease-in-out;
   opacity: 1;
-  min-height: 600px; /* prevent layout jump */
+  min-height: 600px;
 }
 
 .drum-display.fade-out {
   opacity: 0;
 }
-
-/* .text-layer {
-  padding: 10px;
-} */
 
 .description {
   font-size: 1rem;
@@ -73,13 +69,13 @@
 }
 
 .soundlegend-video-wrapper {
-  margin: 40px auto;
-  padding-bottom: 56.25%; /* 16:9 */
+  /* margin: 40px auto; */
+  padding-bottom: 56.25%;
   position: relative;
   height: 0;
   width: 100%;
   max-width: 1000px;
-  border-radius: 12px;
+
   overflow: hidden;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
@@ -144,7 +140,7 @@
 }
 
 /* -------------------------------
-   SCROLLABLE GALLERY STRIP (below description)
+   SCROLLABLE GALLERY STRIP
 -------------------------------- */
 .gallery-scroll-strip {
   display: flex;
@@ -201,7 +197,6 @@
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
-
 .gallery-strip img.visible {
   opacity: 1;
   transform: translateY(0);
@@ -216,7 +211,7 @@
   will-change: opacity;
 }
 
-/* Drum Layers - Smooth GPU acceleration */
+/* Drum Layers */
 .drum-layers .layer {
   position: absolute;
   bottom: 0;
@@ -226,12 +221,11 @@
   opacity: 1;
   transition: opacity 0.6s ease-in-out;
   will-change: opacity, transform;
-  transform: translateZ(0); /* force GPU compositing */
+  transform: translateZ(0);
   z-index: 2;
   pointer-events: none;
 }
 
-/* Apply to logo and content wrapper */
 .sticky-logo-wrapper,
 .drum-display,
 .layer {
@@ -242,6 +236,7 @@
 .drum-display {
   opacity: 1;
 }
+
 /* -------------------------------
    DRUM LAYERED IMAGE SECTION
 -------------------------------- */
@@ -250,6 +245,12 @@
   height: 600px;
   width: 100%;
   overflow: visible;
+}
+
+.drum-layers.stuck-top {
+  position: sticky;
+  top: 0;
+  bottom: unset;
 }
 
 .drum-layers {
@@ -265,19 +266,6 @@
   position: relative;
 }
 
-.drum-layers .layer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  opacity: 1;
-  transition: opacity 0.4s ease-in-out;
-  will-change: opacity;
-  z-index: 2;
-  pointer-events: none;
-}
-
 .drum-layers .layer.fade-out {
   opacity: 0;
   pointer-events: none;
@@ -287,7 +275,6 @@
   z-index: 3;
 }
 
-/* Bottom overlay image transitions */
 .layer.overlay-image {
   position: absolute;
   bottom: 0;
@@ -299,8 +286,6 @@
   transition: opacity 0.4s ease-in-out;
   z-index: 3;
 }
-
-/* Remove blend mode entirely */
 
 .layer.overlay-image.fade-in {
   opacity: 1;
@@ -329,34 +314,27 @@
   height: 100%;
   cursor: pointer;
   transition: background 0.3s ease;
-  pointer-events: auto; /* CRITICAL FIX */
-}
-
-.drum-click-zones .zone:hover {
-  /* background: rgba(255, 255, 255, 0.05); */
+  pointer-events: auto;
 }
 
 /* -------------------------------
-   FINAL DRUM INFO SECTION
+   FINAL DRUM INFO SECTION (Updated)
 -------------------------------- */
-.drum-final-text-section {
+.drum-final-text {
   display: flex;
   flex-direction: row;
-  justify-content:space-around;
+  justify-content: space-around;
   align-items: flex-start;
   flex-wrap: wrap;
-  gap: 2rem;
+  /* gap: 2rem; */
   background: #1a1a1a;
-  padding: 3rem 1.5rem 4rem;
+  /* padding: 3rem 1.5rem 4rem; */
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-
 }
 
-.drum-final-card {
-  /* flex: 1 1 280px; */
+.drum-info {
   max-width: 300px;
-  /* background: rgba(255, 255, 255, 0.02); */
-  padding: 1.5rem 1rem 2rem;
+  /* padding: 1.5rem 1rem 2rem; */
   border-radius: 8px;
   text-align: center;
   color: white;
@@ -364,31 +342,40 @@
   flex-direction: column;
   align-items: center;
   transition: transform 0.3s ease;
+  background-color: #5555552b;
+  padding-top: 20px;
+  margin-bottom: 10px;
+  padding-left: auto;
+  padding-right: auto;
 }
 
-.drum-final-card:hover {
+.drum-info:hover {
   transform: translateY(-4px);
 }
 
-.final-logo {
+.drum-info .drum-logo {
   max-width: 150px;
   margin-bottom: 1rem;
 }
 
-.drum-final-card ul.description-list {
+.drum-info .description-list {
   font-size: 0.9rem;
   line-height: 1.5;
   margin-bottom: 1rem;
   padding: 0;
   list-style: none;
+  text-align: left;
+  align-items: center;
+  text-align: center;
+
 }
 
-.drum-final-card ul.description-list li {
+.drum-info .description-list li {
   margin-bottom: 0.5rem;
 }
 
-.drum-final-card .preorder-card-preorder-button,
-.drum-final-card .learn-more-button {
+.drum-info .preorder-card-preorder-button,
+.drum-info .learn-more-button {
   padding: 10px 16px;
   background: #b3544b;
   border: none;
@@ -399,12 +386,12 @@
   transition: background 0.3s ease;
 }
 
-.drum-final-card .learn-more-button {
+.drum-info .learn-more-button {
   background: #cc4e4e;
 }
 
-.drum-final-card .preorder-card-preorder-button:hover,
-.drum-final-card .learn-more-button:hover {
+.drum-info .preorder-card-preorder-button:hover,
+.drum-info .learn-more-button:hover {
   background: #a14242;
 }
 
@@ -498,28 +485,27 @@
 }
 
 .drum-layers-spacer {
-  height: 200px; /* matches the height of .drum-layers */
+  height: 200px;
   width: 100%;
   background: transparent;
 }
-
 
 /* -------------------------------
    RESPONSIVE
 -------------------------------- */
 @media (max-width: 600px) {
-  .drum-final-text-section {
+  .drum-final-text {
     flex-direction: column;
     align-items: center;
-    padding: 2.5rem 1rem;
+    padding: 1.5rem;
   }
 
-  .drum-final-card {
+  .drum-info {
     max-width: 100%;
     width: 100%;
   }
 
-  .final-logo {
+  .drum-logo {
     max-width: 140px;
   }
 

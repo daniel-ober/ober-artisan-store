@@ -148,20 +148,6 @@ useEffect(() => {
 
   return (
     <nav className="navbar">
-      <video
-        key={isDarkMode ? 'dark' : 'light'}
-        className="navbar-background"
-        autoPlay
-        loop
-        muted
-        playsInline
-      >
-        <source
-          src={isDarkMode ? '/hero-dark.mp4' : '/hero-light.mp4'}
-          type="video/mp4"
-        />
-      </video>
-
       <div className="navbar-logo">
         <Link to="/" replace onClick={() => handleNavLinkClick('/')}>
           <img
