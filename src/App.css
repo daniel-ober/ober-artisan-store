@@ -1,16 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
 
-/* General styles for the navbar */
-.navbar {
+/* === GENERAL APP STYLES === */
+
+body {
   font-family: "Poppins", sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  padding: 20px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background: #fff;
 }
 
-/* Background video styling - Default (light mode) */
+/* Background video default */
 .navbar-background {
   position: fixed;
   top: 0;
@@ -22,58 +22,8 @@
   opacity: 0.6;
 }
 
-/* Dark Mode - Override background video opacity */
 body.dark .navbar-background {
   opacity: 1;
-}
-
-/* Logo Section */
-.navbar-logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  max-width: 500px;
-  margin: 0 auto;
-  padding: 8px 0;
-}
-
-.logo-img {
-  display: block;
-  max-width: 100%;
-  height: auto;
-  object-fit: contain;
-}
-
-/* Navbar Links */
-.navbar-links {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.nav-link {
-  color: #ffffff;
-  text-decoration: none;
-  font-size: 16px;
-  padding: 15px 12px;
-  cursor: pointer;
-}
-
-.nav-link:hover {
-  color: hsl(46, 100%, 89%);
-  border-radius: 10px;
-  transition: ease-in-out 0.3;
-}
-
-.nav-link.active {
-  color: hsl(48, 62%, 91%);
-  text-decoration: underline;
-}
-
-/* Cart Link Container */
-.cart-link-container {
-  position: relative;
 }
 
 /* Cart Preview Window */
@@ -99,134 +49,6 @@ body.dark .navbar-background {
   cursor: pointer;
 }
 
-.nav-link-signout {
-  /* color: white; */
-  /* background-color: transparent !important; */
-}
-
-/* 🔥 FIX: Menu Button Always Fully Transparent (No Background, No Border, No Outline) */
-.navbar-menu-container {
-  display: none;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  cursor: pointer;
-  border: none !important;
-  background: none !important;
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-/* 🔥 Ensure Dark Mode Menu Button is Fully Transparent */
-body.dark .navbar-menu-container {
-  background: none !important;
-  border: none !important;
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-/* 🔥 Prevent Hover from Changing Menu Button in Dark Mode */
-.navbar-menu-container:hover,
-body.dark .navbar-menu-container:hover {
-  background: none !important;
-  border: none !important;
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-/* 🔥 Prevent Hover from Changing Menu Button in Light Mode */
-body.light .navbar-menu-container:hover {
-  background: none !important;
-  border: none !important;
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-/* 🔥 Ensure Menu Icon (Image) is Visible */
-.menu-arrow-icon {
-  width: 40px;
-  height: 40px;
-  margin: -8.4px;
-  transition: transform 0.3s ease;
-}
-
-/* Menu Button Animation */
-.menu-arrow-icon.open {
-  transform: rotate(360deg);
-}
-
-/* Mobile View Styles */
-@media (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-    align-items: center;
-    padding: 20px 10px;
-  }
-
-  .navbar-logo {
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    /* margin-bottom: 10px; */
-    width: 60%;
-  }
-
-  .navbar-menu-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* 🔥 Ensure Mobile Navbar Links are White in Light Mode */
-  body.light .navbar-links .nav-link {
-    color: white !important;
-  }
-
-  .navbar-links {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 2000;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease-in-out;
-  }
-
-  .navbar-links.open {
-    max-height: 1200px;
-    background-color: rgba(20, 20, 20, 0.995);
-    padding: 20px 0px 20px 0px;
-  }
-
-  /* Hover & Active States */
-  .nav-link.active,
-  .nav-link:hover {
-    color: #69b0fc;
-  }
-
-  .cart-preview-container {
-    top: 100px;
-    width: 25%;
-    transform: translateX(50%);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
-  }
-}
-
-/* Desktop View */
-@media (min-width: 768px) {
-  .navbar-links {
-    display: flex;
-    justify-content: center;
-  }
-}
-
-/* 🔥 Fade In Animation for Cart */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -236,6 +58,4 @@ body.light .navbar-menu-container:hover {
     opacity: 1;
     transform: translateY(0);
   }
-
-  
 }

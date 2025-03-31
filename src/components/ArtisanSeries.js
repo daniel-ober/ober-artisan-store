@@ -52,12 +52,12 @@ const DRUM_SERIES = [
 const ArtisanSeries = () => {
   const { isDarkMode } = useContext(DarkModeContext);
   const navigate = useNavigate();
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(1);
   const [hoverIndex, setHoverIndex] = useState(null);
   const [isFading, setIsFading] = useState(false);
   const [isOverlayFading, setIsOverlayFading] = useState(false);
   const [previousOverlay, setPreviousOverlay] = useState(null);
-  const [overlayImage, setOverlayImage] = useState(DRUM_SERIES[0].overlay);
+  const [overlayImage, setOverlayImage] = useState(DRUM_SERIES[1].overlay);
   const [lightboxIndex, setLightboxIndex] = useState(null);
   const [zoomed, setZoomed] = useState(false);
   const [isTriggerActive, setIsTriggerActive] = useState(false);
@@ -223,12 +223,12 @@ const ArtisanSeries = () => {
         {/* HERITAGE */}
         <div className="drum-info">
           <img src="/v2logo-large/heritage-white.png" alt="Heritage" className="drum-logo" />
-          <ul className="description-list">
+          {/* <ul className="description-list">
             <li>Stave Construction</li>
             <li>Wood Selection: Northern Red Oak</li>
             <li>Available Sizes: 12”, 13”, 14”</li>
             <li>Torch-scorched aesthetic</li>
-          </ul>
+          </ul> */}
           <button
             className={product.currentQuantity === 0 ? "prod-card-view-details-button" : "preorder-card-preorder-button"}
             onClick={() => navigate("/products/heritage")}
@@ -240,14 +240,14 @@ const ArtisanSeries = () => {
         {/* SOUNDLEGEND */}
         <div className="drum-info">
           <img src="/v2logo-large/soundlegend-white.png" alt="SoundLegend" className="drum-logo" />
-          <ul className="description-list">
+          {/* <ul className="description-list">
             <li>Various Shell Consttruction Options</li>
             <li>Fully Customizable: Size, Lugs, Finish, Wood</li>
             <li>Direct Collaboration with Artisan, Dan Ober</li>
             <li>SoundLegend Journey Web Access</li>
             <li>High Resolution Concept Renders</li>
             <li>Limited Edition Gift Item and more!</li>
-          </ul>
+          </ul> */}
           <button
             className={product.currentQuantity === 0 ? "prod-card-view-details-button" : "preorder-card-preorder-button"}
             onClick={() => navigate("/products/soundlegend")}
@@ -259,12 +259,12 @@ const ArtisanSeries = () => {
         {/* FEUZØN */}
         <div className="drum-info">
           <img src="/v2logo-large/feuzon-white.png" alt="Feuzon" className="drum-logo" />
-          <ul className="description-list">
+          {/* <ul className="description-list">
             <li>Hybrid Shell Construction</li>
             <li>Various Wood Combinations Available</li>
             <li>Available Sizes: 12”, 13”, 14”</li>
             <li>Torch-tuned to perfection</li>
-          </ul>
+          </ul> */}
           <button
             className={product.currentQuantity === 0 ? "prod-card-view-details-button" : "preorder-card-preorder-button"}
             onClick={() => navigate("/products/feuzon")}
