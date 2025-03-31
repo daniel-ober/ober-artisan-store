@@ -118,7 +118,7 @@
   transform: rotate(360deg);
 }
 
-/* === STICKY MINI NAVBAR (PORTRAIT & LANDSCAPE) === */
+/* === STICKY MINI NAVBAR === */
 .navbar-sticky-mini {
   position: fixed;
   top: 0;
@@ -147,14 +147,20 @@ body.dark .navbar-sticky-mini {
   display: block;
 }
 
-/* Sticky Menu Toggle */
+.navbar-sticky-wrapper {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 3000;
+  display: flex;
+  flex-direction: column;
+}
+
 .navbar-sticky-menu-wrapper {
   display: flex;
   justify-content: center;
   width: 100%;
   background: transparent;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
   position: relative;
   padding: 0;
   margin-top: -2px;
@@ -182,15 +188,7 @@ body.dark .navbar-sticky-mini {
   transform: rotate(360deg);
 }
 
-.navbar-sticky-wrapper {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 3000;
-  display: flex;
-  flex-direction: column;
-}
-
+/* === STICKY DROPDOWN === */
 .navbar-links.sticky-dropdown {
   position: absolute;
   top: 100%;
@@ -210,50 +208,27 @@ body.dark .navbar-sticky-mini {
   max-height: 1200px;
 }
 
-.navbar-sticky-wrapper {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 3000;
-  display: flex;
-  flex-direction: column;
-}
-
-/* NEW wrapper that makes menu open directly under navbar */
+/* === STICKY MENU WRAPPER === */
 .navbar-sticky-dropdown-wrapper {
   position: absolute;
-  top: 120px; /* push dropdown below sticky navbar */
+  top: 120px;
   left: 0;
   width: 100%;
   z-index: 2998;
-}
-
-/* Adjust dropdown menu appearance */
-.navbar-links.sticky-dropdown.open {
-  background-color: rgba(20, 20, 20, 0.99);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  padding: 20px 0;
-  z-index: 3001;
 }
 
 @media (min-width: 769px) {
   .navbar-links.sticky-dropdown {
     display: none !important;
   }
-}
 
-@media (min-width: 769px) {
   .navbar-sticky-mini,
   .navbar-sticky-menu-wrapper {
     display: none !important;
   }
 }
 
-/* === LANDSCAPE MOBILE === */
+/* === LANDSCAPE VIEW FIX === */
 @media screen and (max-width: 1024px) and (orientation: landscape) {
   .navbar {
     position: sticky;
@@ -277,7 +252,7 @@ body.dark .navbar-sticky-mini {
   .logo-img {
     max-height: 50px;
     width: auto;
-    filter: brightness(0) invert(1) !important; /* ensures white logo */
+    filter: brightness(0) invert(1) !important;
   }
 
   .navbar-links {
@@ -292,6 +267,7 @@ body.dark .navbar-sticky-mini {
     width: auto;
   }
 
+  /* 🔥 Explicitly set nav link colors to white, always */
   .navbar-links .nav-link,
   .navbar-links .cart-icon.nav-link {
     color: white !important;
@@ -399,13 +375,6 @@ body.dark .navbar-sticky-mini {
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@media screen and (max-width: 1024px) and (orientation: landscape) {
-  body.dark .navbar {
-    background: rgba(0, 0, 0, 0.85) !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
 }
 
