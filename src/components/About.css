@@ -163,7 +163,7 @@ body.dark .about-quote .quote-text {
 @media (max-width: 600px) {
   .about-signoff-inner img {
     width: auto;
-    background: rgba(0, 0, 0, 0.75);
+    background: rgba(0, 0, 0, 0.341);
     border-radius: 0;
   }
 
