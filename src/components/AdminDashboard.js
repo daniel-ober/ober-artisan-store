@@ -9,6 +9,7 @@ import {
   FaCog,
   FaImages,
   FaStar,
+  FaRegChartBar,
 } from 'react-icons/fa';
 import ManageProducts from './ManageProducts';
 import ManageUsers from './ManageUsers';
@@ -165,10 +166,10 @@ const AdminDashboard = () => {
       <h1>Admin Dashboard</h1>
       <div className="admin-cards">
         {[
-          { name: 'Overview', icon: FaHammer, stateKey: 'overview' },
+          { name: 'Overview', icon: FaRegChartBar, stateKey: 'overview' },
+          { name: 'Manage Orders', icon: FaBox, stateKey: 'manageOrders' },
           { name: 'SL Submissions', icon: FaStar, stateKey: 'manageSoundlegendRequests' },
           { name: 'Support Inquiries', icon: FaEnvelope, stateKey: 'manageInquiries' },
-          { name: 'Manage Orders', icon: FaBox, stateKey: 'manageOrders' },
           { name: 'Manage Projects', icon: FaHammer, stateKey: 'manageProjects' },
           { name: 'Manage Products', icon: FaDrum, stateKey: 'manageProducts' },
           { name: 'Manage Users', icon: FaUsers, stateKey: 'manageUsers' },
