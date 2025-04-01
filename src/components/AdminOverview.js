@@ -35,7 +35,7 @@ const AdminOverview = () => {
         const id = doc.id;
         const itemStatuses = (order.items || []).map(item => item.status);
 
-        if (itemStatuses.some(status => status === 'New')) {
+        if (itemStatuses.some(status => status === 'Order Successful')) {
           newItems.push({ id, type: 'order', ...order });
         } else if (itemStatuses.some(status => ['Preparing', 'Packaged', 'Ready for Shipment', 'Back Ordered'].includes(status))) {
           inProgressItems.push({ id, type: 'order', ...order });
