@@ -28,7 +28,7 @@
   color: white;
   font-size: 12px;
   font-weight: bold;
-  padding: 2px 7px;
+  padding: 2px 8px;
   border-radius: 50%;
   display: inline-block;
   z-index: 1;
@@ -39,7 +39,7 @@
 }
 
 .notification-badge-secondary {
-  background-color: orange;
+  background-color: rgb(175, 114, 0);
 }
 
 .admin-card.selected {
