@@ -341,7 +341,7 @@ body.dark .navbar-sticky-mini {
 
   .navbar-sticky-mini {
     justify-content: center;
-    padding: 12px 0px;
+    padding: 12px 0px 3px;
   }
 
   .navbar-sticky-menu-wrapper {
