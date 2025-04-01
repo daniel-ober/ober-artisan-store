@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { collection, getDocs, query, orderBy, limit } from 'firebase/firestore';
+import { MdContentCopy } from 'react-icons/md';
+import { getDoc, doc, updateDoc, arrayUnion, collection, getDocs, query, orderBy, limit } from 'firebase/firestore';  // Updated import
 import { db } from '../firebaseConfig';
+import ViewOrderModal from './ViewOrderModal';
+import ViewInquiryModal from './ViewInquiryModal';
+import ViewSoundlegendModal from './ViewSoundlegendModal';
 import './AdminOverview.css';
 
 const AdminOverview = () => {
@@ -9,6 +13,9 @@ const AdminOverview = () => {
     inProgress: [],
     completed: [],
   });
+
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [modalType, setModalType] = useState(null);
 
   useEffect(() => {
     const fetchOverview = async () => {
@@ -22,7 +29,7 @@ const AdminOverview = () => {
       const inProgressItems = [];
       const completedItems = [];
 
-      // Orders
+      // Handle orders
       orders.forEach((doc) => {
         const order = doc.data();
         const id = doc.id;
@@ -37,7 +44,7 @@ const AdminOverview = () => {
         }
       });
 
-      // Inquiries
+      // Handle inquiries
       inquiries.forEach((doc) => {
         const inquiry = doc.data();
         const id = doc.id;
@@ -52,7 +59,7 @@ const AdminOverview = () => {
         }
       });
 
-      // SoundLegend
+      // Handle soundlegend submissions
       submissions.forEach((doc) => {
         const submission = doc.data();
         const id = doc.id;
@@ -77,14 +84,44 @@ const AdminOverview = () => {
     fetchOverview();
   }, []);
 
+  const handleItemClick = async (item) => {
+    try {
+      const ref = doc(
+        db,
+        item.type === 'order'
+          ? 'orders'
+          : item.type === 'inquiry'
+          ? 'inquiries'
+          : 'soundlegend_submissions',
+        item.id
+      );
+      const snap = await getDoc(ref);
+      if (snap.exists()) {
+        const data = snap.data();
+  
+        // Safeguard: Ensure 'items' exists as an array for orders
+        if (item.type === 'order' && !Array.isArray(data.items)) {
+          data.items = [];
+        }
+  
+        // Update state to render the appropriate modal
+        setSelectedItem({ id: snap.id, ...data });
+        setModalType(item.type);  // Ensure the correct modal type is set
+      }
+    } catch (error) {
+      console.error('Error fetching item details:', error);
+    }
+  };
+
   const renderItem = (item) => {
-    const label = `${item.type.toUpperCase()} • ${item.id.slice(0, 6)}`;
+    const labelType = item.type === 'order' ? 'ORDER' : item.type === 'inquiry' ? 'SUPPORT' : 'SOUNDLEGEND';
+    const label = `${labelType} • ${item.id.slice(0, 6)}`;
     const desc = item.customerName || item.name || item.email || item.status;
     return (
       <div
         key={`${item.type}-${item.id}`}
         className="overview-item"
-        onClick={() => console.log('Open modal for:', item)}
+        onClick={() => handleItemClick(item)} // Ensure that clicking triggers the handleItemClick
       >
         <strong>{label}</strong>
         <div>{desc}</div>
@@ -94,19 +131,44 @@ const AdminOverview = () => {
 
   return (
     <div className="admin-overview">
-      <h1>📊 Admin Overview</h1>
-      <div className="overview-section">
-        <h2 className="new">🆕 New</h2>
-        {data.new.length === 0 ? <p>No new items</p> : data.new.map(renderItem)}
+      <h1 className="overview-title">📊 Admin Overview</h1>
+      <div className="overview-columns">
+        <div className="overview-section">
+          <h2 className="new">🆕 New</h2>
+          {data.new.length === 0 ? <p>No new items</p> : data.new.map(renderItem)}
+        </div>
+        <div className="overview-section">
+          <h2 className="in-progress">⏳ In Progress</h2>
+          {data.inProgress.length === 0 ? <p>No items in progress</p> : data.inProgress.map(renderItem)}
+        </div>
+        <div className="overview-section">
+          <h2 className="completed">✅ Completed</h2>
+          {data.completed.length === 0 ? <p>No completed items</p> : data.completed.map(renderItem)}
+        </div>
       </div>
-      <div className="overview-section">
-        <h2 className="in-progress">⏳ In Progress</h2>
-        {data.inProgress.length === 0 ? <p>No items in progress</p> : data.inProgress.map(renderItem)}
-      </div>
-      <div className="overview-section">
-        <h2 className="completed">✅ Completed</h2>
-        {data.completed.length === 0 ? <p>No completed items</p> : data.completed.map(renderItem)}
-      </div>
+
+      {/* Render Modals */}
+      {modalType === 'order' && selectedItem && (
+        <ViewOrderModal
+          isOpen={true}
+          onClose={() => setSelectedItem(null)}
+          orderDetails={selectedItem}
+        />
+      )}
+      {modalType === 'inquiry' && selectedItem && (
+        <ViewInquiryModal
+          isOpen={true}
+          onClose={() => setSelectedItem(null)}
+          inquiry={selectedItem}  // Ensure inquiry is passed properly
+        />
+      )}
+      {modalType === 'submission' && selectedItem && (
+        <ViewSoundlegendModal
+          isOpen={true}
+          onClose={() => setSelectedItem(null)}
+          submission={selectedItem}
+        />
+      )}
     </div>
   );
 };

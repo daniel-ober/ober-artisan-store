@@ -128,6 +128,12 @@ const ManageInquiries = () => {
     }
   };
 
+  // Open inquiry modal when row is clicked
+  const handleRowClick = (inquiry) => {
+    setSelectedInquiry(inquiry);
+    setIsModalOpen(true);
+  };
+
   return (
     <div className="manage-inquiries">
       <h2>Manage Inquiries</h2>
@@ -146,27 +152,19 @@ const ManageInquiries = () => {
             <th>Name</th>
             <th>Category</th>
             <th>Status</th>
-            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {filteredInquiries.map((inquiry) => (
-            <tr key={inquiry.id}>
+            <tr
+              key={inquiry.id}
+              className="overview-item"
+              onClick={() => handleRowClick(inquiry)}  // Row click triggers the modal
+            >
               <td>{inquiry.createdAt}</td>
               <td>{inquiry.name}</td>
               <td>{inquiry.category}</td>
               <td>{inquiry.status}</td>
-              <td>
-                <button
-                  className="view-btn"
-                  onClick={() => {
-                    setSelectedInquiry(inquiry);
-                    setIsModalOpen(true);
-                  }}
-                >
-                  View
-                </button>
-              </td>
             </tr>
           ))}
         </tbody>
