@@ -109,7 +109,7 @@ const AdminDashboard = () => {
     const snapshot = await getDocs(collection(db, 'inquiries'));
     return snapshot.docs.filter(doc => doc.data().status?.trim().toLowerCase() === 'new').length;
   };
-  
+
   const getInProgressInquiriesCount = async () => {
     const snapshot = await getDocs(collection(db, 'inquiries'));
     return snapshot.docs.filter(doc => {
@@ -117,7 +117,7 @@ const AdminDashboard = () => {
       return ['support - in progress', 'sales - prospecting'].includes(status);
     }).length;
   };
-  
+
   const getCompletedInquiriesCount = async () => {
     const snapshot = await getDocs(collection(db, 'inquiries'));
     return snapshot.docs.filter(doc => {
@@ -168,8 +168,8 @@ const AdminDashboard = () => {
           { name: 'Overview', icon: FaHammer, stateKey: 'overview' },
           { name: 'SL Submissions', icon: FaStar, stateKey: 'manageSoundlegendRequests' },
           { name: 'Support Inquiries', icon: FaEnvelope, stateKey: 'manageInquiries' },
-          { name: 'Manage Projects', icon: FaHammer, stateKey: 'manageProjects' },
           { name: 'Manage Orders', icon: FaBox, stateKey: 'manageOrders' },
+          { name: 'Manage Projects', icon: FaHammer, stateKey: 'manageProjects' },
           { name: 'Manage Products', icon: FaDrum, stateKey: 'manageProducts' },
           { name: 'Manage Users', icon: FaUsers, stateKey: 'manageUsers' },
           { name: 'Manage Carts', icon: FaShoppingCart, stateKey: 'manageCarts' },
@@ -184,30 +184,30 @@ const AdminDashboard = () => {
             onClick={() => setActiveComponent(stateKey)}
             onKeyDown={(e) => e.key === 'Enter' && setActiveComponent(stateKey)}
           >
-<div className="admin-card-icon">
-  <Icon />
-  {(notifications[stateKey] > 0 ||
-    secondaryNotifications[stateKey] > 0 ||
-    tertiaryNotifications[stateKey] > 0) && (
-    <div className="badge-wrapper">
-      {notifications[stateKey] > 0 && (
-        <span className="notification-badge">
-          {notifications[stateKey]}
-        </span>
-      )}
-      {secondaryNotifications[stateKey] > 0 && (
-        <span className="notification-badge-secondary">
-          {secondaryNotifications[stateKey]}
-        </span>
-      )}
-      {tertiaryNotifications[stateKey] > 0 && (
-        <span className="notification-badge-tertiary">
-          {tertiaryNotifications[stateKey]}
-        </span>
-      )}
-    </div>
-  )}
-</div>
+            <div className="admin-card-icon">
+              <Icon />
+              {(notifications[stateKey] > 0 ||
+                secondaryNotifications[stateKey] > 0 ||
+                tertiaryNotifications[stateKey] > 0) && (
+                <div className="badge-wrapper">
+                  {notifications[stateKey] > 0 && (
+                    <span className="notification-badge">
+                      {notifications[stateKey]}
+                    </span>
+                  )}
+                  {secondaryNotifications[stateKey] > 0 && (
+                    <span className="notification-badge-secondary">
+                      {secondaryNotifications[stateKey]}
+                    </span>
+                  )}
+                  {tertiaryNotifications[stateKey] > 0 && (
+                    <span className="notification-badge-tertiary">
+                      {tertiaryNotifications[stateKey]}
+                    </span>
+                  )}
+                </div>
+              )}
+            </div>
             <h3 style={{ whiteSpace: 'nowrap' }}>{name}</h3>
           </div>
         ))}

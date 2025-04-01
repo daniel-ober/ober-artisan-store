@@ -1,0 +1,75 @@
+.admin-overview {
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+    margin-top: 25px;
+  }
+  
+  .overview-title {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    font-weight: 600;
+  }
+  
+  .overview-columns {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .overview-section {
+    flex: 1;
+    min-width: 280px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  }
+  
+  .overview-section h2 {
+    margin-top: 0;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  
+  .overview-item {
+    background: white;
+    border: 1px solid #eee;
+    padding: 12px 14px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  
+  
+  .overview-item:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .overview-desc {
+    font-size: 0.9rem;
+    color: #555;
+    margin-top: 4px;
+  }
+  
+  .new {
+    color: #1a73e8;
+  }
+  
+  .in-progress {
+    color: #e67e22;
+  }
+  
+  .completed {
+    color: #27ae60;
+  }
+  
+  @media (max-width: 768px) {
+    .overview-columns {
+      flex-direction: column;
+    }
+  }
