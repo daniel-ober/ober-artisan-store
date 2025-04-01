@@ -31,7 +31,7 @@ const Home = () => {
       {/* Highlight Row - 3 Cards in a Single Line */}
       <div className="home-row highlight-row">
         <div className="card">
-          <h2>SoundLegend</h2>
+          <h2 className="highlight-card-header">SoundLegend</h2>
           <p>
             Collaborate directly with our Artisan to build your dream snare
             drum.
@@ -41,14 +41,14 @@ const Home = () => {
           </Link>
         </div>
         <div className="card">
-          <h2>Pre-Order</h2>
+          <h2 className="highlight-card-header">Pre-Order</h2>
           <p>Reserve your ready-to-be-made snare today.</p>
           <Link to="/pre-order">
             <button>Pre-Order Now</button>
           </Link>
         </div>
         <div className="card">
-          <h2>Share Feedback</h2>
+          <h2 className="highlight-card-header">Share Feedback</h2>
           <p>Comments, questions, feedback?</p>
           <Link to="/contact">
             <button>Contact Us</button>

@@ -1,70 +1,56 @@
 .layered-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    pointer-events: none;
-    z-index: -1;
-    overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.layer-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+}
+
+/* Layer z-index order */
+.blending-layer {
+  z-index: 0;
+  opacity: 0.2;
+}
+
+.haze-layer {
+  z-index: 3;
+  opacity: 0.01;
+}
+
+.table-layer {
+  z-index: 2;
+  transform: translateY(calc(var(--scrollOffset, 0) * -10vh));
+  transition: transform 0.1s ease-out;
+}
+
+.outline-layer {
+  z-index: 3;
+  transform: translateY(calc(var(--scrollOffset, 0) * -10vh));
+  transition: transform 0.1s ease-out;
+}
+
+/* ✅ Mobile + iPad viewports: focus left drum, reduce scroll parallax */
+@media (max-width: 1024px) {
+  .layer-image {
+    object-position: left center;
   }
-  
-  /* Base alignment for ALL layers */
-  .blending-layer,
-  .haze-layer,
+
   .table-layer,
   .outline-layer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    pointer-events: none;
+    transform: translateY(calc(var(--scrollOffset, 0) * -6vh));
   }
-  
-  /* Layer z-index order */
-  .blending-layer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.2;
-  }
-  
-  .haze-layer {
-    z-index: 3;
-    opacity: 0.01;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    pointer-events: none;
-  }
-  
-  /* These two will scroll upward slightly with parallax */
-  .table-layer {
-    z-index: 2;
-    transform: translateY(calc(var(--scrollOffset, 0) * -10vh));
-    transition: transform 0.1s ease-out;
-  }
-  
-  .outline-layer {
-    z-index: 3;
-    transform: translateY(calc(var(--scrollOffset, 0) * -10vh));
-    transition: transform 0.1s ease-out;
-  }
-  
-  /* Mobile adjustments */
-  @media (max-width: 768px) {
-    .table-layer,
-    .outline-layer {
-      transform: translateY(calc(var(--scrollOffset, 0) * -8vh));
-    }
-  }
+}
