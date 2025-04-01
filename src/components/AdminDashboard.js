@@ -93,7 +93,7 @@ const AdminDashboard = () => {
 
   const getNewOrdersCount = async () => {
     const snapshot = await getDocs(collection(db, 'orders'));
-    return snapshot.docs.filter(doc => (doc.data().items || []).some(item => item.status === 'New')).length;
+    return snapshot.docs.filter(doc => (doc.data().items || []).some(item => item.status === 'Order Successful')).length;
   };
 
   const getInProgressOrdersCount = async () => {
