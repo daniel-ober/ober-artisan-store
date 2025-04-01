@@ -1,16 +1,45 @@
 .admin-card {
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  width: 220px;        /* 👈 force equal width */
+  height: 150px;       /* 👈 force equal height */
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  width: 150px; /* Adjust as necessary */
-  height: 150px; /* Adjust as necessary */
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 16px;
-  margin: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s;
+  align-items: center;  /* 👈 ensures content is vertically centered */
+}
+
+.badge-wrapper {
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  display: flex;
+  gap: 4px;
+}
+
+.notification-badge,
+.notification-badge-secondary {
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 2px 7px;
+  border-radius: 50%;
+  display: inline-block;
+  z-index: 1;
+}
+
+.notification-badge {
+  background-color: red;
+}
+
+.notification-badge-secondary {
+  background-color: orange;
 }
 
 .admin-card.selected {
@@ -20,7 +49,13 @@
 }
 
 .admin-card-icon {
-  font-size: 2rem; /* Adjust as necessary */
+  position: relative;
+  font-size: 2.0rem;
+  margin-bottom: 10px;
+  color: #444;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .admin-card-title {

@@ -3,8 +3,8 @@ import './AdminCard.css';
 import AdminModal from './AdminModal'; // AdminModal component
 import { useAuth } from '../context/AuthContext'; // Access auth context
 
-const AdminCard = ({ title, icon, isSelected }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+const AdminCard = ({ title, icon, isSelected, primaryCount, secondaryCount }) => { 
+   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState('');
   const { isAdmin } = useAuth(); // Check if the user is an admin
 
@@ -25,7 +25,17 @@ const AdminCard = ({ title, icon, isSelected }) => {
       tabIndex={0}
       aria-pressed={isSelected}
     >
-      <div className="admin-card-icon">{icon}</div>
+      <div className="admin-card-icon">
+  {icon}
+  <div className="badge-wrapper">
+    {primaryCount > 0 && (
+      <span className="notification-badge">{primaryCount}</span>
+    )}
+    {secondaryCount > 0 && (
+      <span className="notification-badge-secondary">{secondaryCount}</span>
+    )}
+  </div>
+</div>
       <h2 className="admin-card-title">{title}</h2>
 
       {isAdmin && ( // Render buttons only for admin users
