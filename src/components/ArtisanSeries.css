@@ -382,10 +382,10 @@
   padding: 10px 16px;
   background: #b3544b;
   border: none;
-  width: 130px;
+  width: 120px;
   border-radius: 5px;
   color: white;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   margin-top: auto;
   transition: background 0.3s ease;
 }
@@ -499,19 +499,30 @@
 -------------------------------- */
 @media (max-width: 600px) {
   .drum-final-text {
-    flex-direction: column;
-    align-items: center;
-    /* background-color: #383838; */
-    /* padding: 1.5rem; */
+    flex-direction: row;
+    justify-content: space-between; /* 🔄 evenly spaced */
+    align-items: flex-start;
+    flex-wrap: wrap; /* ✅ Allows row-wrap without forcing scroll */
+    overflow-x: unset; /* ❌ remove horizontal scroll */
+    padding: 0.5rem;
+    gap: 0;
   }
 
   .drum-info {
-    max-width: 100%;
-    width: 100%;
+    flex: 1 1 30%;
+    max-width: 33%;
+    text-align: center;
+    /* padding: 10px; */
   }
 
   .drum-logo {
-    max-width: 140px;
+    max-width: 100px;
+    margin-bottom: 0.5rem;
+  }
+
+  .preorder-card-preorder-button {
+    font-size: 0.75rem;
+    padding: 8px 12px;
   }
 
   .gallery-strip {
