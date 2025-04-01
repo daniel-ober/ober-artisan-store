@@ -60,7 +60,7 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails }) => {
     if (statuses.some((status) => status === "Back Ordered"))
       return "Partially Fulfilled / Back Ordered";
     if (statuses.every((status) => status === "Canceled")) return "Canceled";
-    if (statuses.every((status) => status === "Preparing")) return "Order Started";
+    if (statuses.every((status) => status === "Preparing")) return "Order Successful";
     return "Processing";
   };
 

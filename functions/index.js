@@ -123,7 +123,7 @@ stripeWebhookApp.post('/', async (req, res) => {
         quantity: item.quantity,
         price: item.amount_total / 100,
         shippingDetails: 'No Shipping Details Provided',
-        status: 'Delivered'
+        status: 'Order Successful'
       }));
 
       const orderData = {
@@ -146,7 +146,7 @@ stripeWebhookApp.post('/', async (req, res) => {
         items,
         totalAmount: session.amount_total / 100,
         currency: session.currency,
-        status: 'Order Completed',
+        status: 'Order Successful',
         createdAt: admin.firestore.FieldValue.serverTimestamp(),
         systemHistory: [{
           event: 'Order created from Stripe checkout session',

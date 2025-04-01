@@ -154,7 +154,7 @@ app.post(
           'Unnamed Product',
         quantity: item.quantity,
         price: item.amount_total / 100, // Convert to dollars
-        status: 'Delivered', // Set default status for each item
+        status: 'Order Successful', // Set default status for each item
         shippingDetails: 'No Shipping Details Provided', // Default shipping details per item
       }));
 
@@ -240,7 +240,7 @@ app.post(
         cardDetails, // Captured card details
         totalAmount: session.amount_total / 100 || 0, // Convert to dollars
         currency: session.currency || 'usd',
-        status: 'Order Completed', // Update order status as desired
+        status: 'Order Started', // Update order status as desired
         items, // Enriched line items array
         createdAt: admin.firestore.FieldValue.serverTimestamp(), // Firestore timestamp
         systemHistory: [
