@@ -1,3 +1,4 @@
+/* Home Page */
 .home-container {
   width: 100%;
   min-height: 100vh;
@@ -56,6 +57,12 @@
   gap: 30px;
   width: 90%;
   max-width: 1000px;
+}
+
+.highlight-row .card h2 {
+  font-size: 1.6rem;
+  margin-bottom: 16px;
+  color: white; /* Set the color to white */
 }
 
 /* Explore Drums Card (full-width) */

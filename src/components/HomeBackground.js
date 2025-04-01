@@ -19,21 +19,21 @@ import "./HomeBackground.css";
 
   return (
     <div className="layered-background" style={{ "--scrollOffset": scrollOffset }}>
-      <img
-        src="/home-background/home-background-all.png"
-        className="blending-layer"
-        alt="Background blend"
-      />
-      <img
-        src="/home-background/home-background-bottom.png"
-        className="table-layer"
-        alt="Drum base"
-      />
-      <img
-        src="/home-background/home-background-top.png"
-        className="outline-layer"
-        alt="Drum outline"
-      />
+<img
+  src="/home-background/home-background-all.png"
+  className="layer-image blending-layer"
+  alt="Background blend"
+/>
+<img
+  src="/home-background/home-background-bottom.png"
+  className="layer-image table-layer"
+  alt="Drum base"
+/>
+<img
+  src="/home-background/home-background-top.png"
+  className="layer-image outline-layer"
+  alt="Drum outline"
+/>
   
       {/* Your navbar background video, sitting in the foreground of this stack */}
       <video
