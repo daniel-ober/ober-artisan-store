@@ -131,18 +131,18 @@ const AdminOverview = () => {
 
   return (
     <div className="admin-overview">
-      <h1 className="overview-title">📊 Admin Overview</h1>
+      <h1 className="overview-title">Admin Overview</h1>
       <div className="overview-columns">
         <div className="overview-section">
-          <h2 className="new">🆕 New</h2>
+          <h2 className="new">🟢 New</h2>
           {data.new.length === 0 ? <p>No new items</p> : data.new.map(renderItem)}
         </div>
         <div className="overview-section">
-          <h2 className="in-progress">⏳ In Progress</h2>
+          <h2 className="in-progress">🟠 In Progress</h2>
           {data.inProgress.length === 0 ? <p>No items in progress</p> : data.inProgress.map(renderItem)}
         </div>
         <div className="overview-section">
-          <h2 className="completed">✅ Completed</h2>
+          <h2 className="completed">✔️ Completed</h2>
           {data.completed.length === 0 ? <p>No completed items</p> : data.completed.map(renderItem)}
         </div>
       </div>
