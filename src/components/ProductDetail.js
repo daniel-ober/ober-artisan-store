@@ -1,4 +1,3 @@
-// src/components/ProductDetail.js
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { fetchProductById } from '../services/productService';
@@ -7,6 +6,7 @@ import { FaArrowLeft } from 'react-icons/fa';
 import HeritageProductDetail from './HeritageProductDetail';
 import FeuzonProductDetail from './FeuzonProductDetail';
 import SoundlegendProductDetail from './SoundlegendProductDetail';
+import { fetchPrintifyProductOptions } from '../services/printifyService'; // New service for Printify API
 import './ProductDetail.css';
 
 const ProductDetail = () => {
@@ -19,7 +19,9 @@ const ProductDetail = () => {
   const [inCart, setInCart] = useState(null);
   const [mainImage, setMainImage] = useState('');
   const [quantity, setQuantity] = useState(1);
-  const [notifyMe, setNotifyMe] = useState(false);
+  const [selectedColor, setSelectedColor] = useState('');
+  const [selectedSize, setSelectedSize] = useState('');
+  const [merchOptions, setMerchOptions] = useState(null); // For storing Printify options
   const thumbnailContainerRef = useRef(null);
 
   // Fetch product details
@@ -30,9 +32,15 @@ const ProductDetail = () => {
         if (productData) {
           setProduct(productData);
           setMainImage(
-            productData.images?.[0] ||
-              '/fallback-images/images-coming-soon-regular.png'
+            productData.images?.[0] || '/fallback-images/images-coming-soon-regular.png'
           );
+          // Only fetch size/color options if the product is a "merch" category
+          if (productData.category === 'merch') {
+            const printifyOptions = await fetchPrintifyProductOptions(
+              productData.printifyProductId
+            );
+            setMerchOptions(printifyOptions);
+          }
         } else {
           setError('Product not found.');
         }
@@ -73,6 +81,7 @@ const ProductDetail = () => {
 
   if (!product) return <div>Product not found</div>;
 
+  // For artisan products
   if (productId === 'heritage')
     return <HeritageProductDetail product={product} />;
   if (productId === 'feuzon') return <FeuzonProductDetail product={product} />;
@@ -82,6 +91,27 @@ const ProductDetail = () => {
   const isSoldOut = product.currentQuantity === 0;
   const isArtisan = product.category === 'artisan';
   const maxQuantity = product.currentQuantity || 1;
+
+  // Handle color selection change
+  const handleColorChange = (color) => {
+    setSelectedColor(color);
+    const imageForColor = product.images.find((img) => img.includes(color));
+    setMainImage(imageForColor || product.images[0]);
+  };
+
+  // Handle size selection change
+  const handleSizeChange = (size) => {
+    setSelectedSize(size);
+  };
+
+  const addToCartWithOptions = () => {
+    const selectedOptions = {
+      size: selectedSize || 'N/A',
+      color: selectedColor || 'N/A',
+      quantity,
+    };
+    addToCart(product, selectedOptions);
+  };
 
   return (
     <div className="product-detail-container">
@@ -117,47 +147,86 @@ const ProductDetail = () => {
             <h2>Product Specifications</h2>
             <p className="product-price">${product?.price}</p>
 
-            {/* SoundLegend Custom Handling */}
-            {product.id === 'soundlegend' ? (
-              <button
-                className="prod-detail-request-consultation-button"
-                onClick={() => navigate('/products/soundlegend')}
-              >
-                Request Consultation
-              </button>
-            ) : isSoldOut ? (
+            {/* Merch product options */}
+            {product.category === 'merch' && merchOptions && (
+              <>
+                {/* Color Options Dropdown */}
+                {merchOptions.colors && merchOptions.colors.length > 0 && (
+                  <div className="product-options">
+                    <label htmlFor="color-select">Color</label>
+                    <select
+                      id="color-select"
+                      value={selectedColor}
+                      onChange={(e) => handleColorChange(e.target.value)}
+                    >
+                      {merchOptions.colors.map((color, index) => (
+                        <option
+                          key={index}
+                          value={color.name}
+                          disabled={!color.available} // Disable unavailable colors
+                        >
+                          {color.name} {color.available ? '' : '(Out of Stock)'}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                )}
+
+                {/* Size Options Dropdown */}
+                {merchOptions.sizes && merchOptions.sizes.length > 0 && (
+                  <div className="product-options">
+                    <label htmlFor="size-select">Size</label>
+                    <select
+                      id="size-select"
+                      value={selectedSize}
+                      onChange={(e) => handleSizeChange(e.target.value)}
+                    >
+                      {merchOptions.sizes.map((size, index) => (
+                        <option
+                          key={index}
+                          value={size.name}
+                          disabled={!size.available} // Disable unavailable sizes
+                        >
+                          {size.name} {size.available ? '' : '(Out of Stock)'}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                )}
+              </>
+            )}
+
+            {/* Action Buttons */}
+            {isSoldOut ? (
               <button className="prod-detail-sold-out-button" disabled>
                 Sold Out - Notify Me When Available
               </button>
             ) : inCart ? (
               <>
-                {/* Quantity Control for Non-Artisan Items */}
-                {!isArtisan && (
-                  <div className="quantity-control">
-                    <button
-                      className="quantity-btn"
-                      onClick={() =>
-                        updateQuantity(product.id, Math.max(quantity - 1, 1))
-                      }
-                      disabled={quantity <= 1}
-                    >
-                      -
-                    </button>
-                    <span className="quantity-value">{quantity}</span>
-                    <button
-                      className="quantity-btn"
-                      onClick={() =>
-                        updateQuantity(
-                          product.id,
-                          Math.min(quantity + 1, maxQuantity)
-                        )
-                      }
-                      disabled={quantity >= maxQuantity}
-                    >
-                      +
-                    </button>
-                  </div>
-                )}
+                <div className="quantity-control">
+                  <button
+                    className="quantity-btn"
+                    onClick={() =>
+                      updateQuantity(product.id, Math.max(quantity - 1, 1))
+                    }
+                    disabled={quantity <= 1}
+                  >
+                    -
+                  </button>
+                  <span className="quantity-value">{quantity}</span>
+                  <button
+                    className="quantity-btn"
+                    onClick={() =>
+                      updateQuantity(
+                        product.id,
+                        Math.min(quantity + 1, maxQuantity)
+                      )
+                    }
+                    disabled={quantity >= maxQuantity}
+                  >
+                    +
+                  </button>
+                </div>
 
                 <button
                   className="prod-detail-view-cart-button"
@@ -175,28 +244,7 @@ const ProductDetail = () => {
             ) : (
               <button
                 className={`prod-detail-${inCart ? 'remove-cart' : 'add-to-cart'}-button`}
-                onClick={() => {
-                  if (inCart) {
-                    removeFromCart(product.id);
-                  } else {
-                    const selectedOptions = {
-                      size: product.size || 'N/A',
-                      depth: product.depth || 'N/A',
-                      lugQuantity: product.lugQuantity || 'N/A',
-                      staveQuantity: product.staveQuantity || 'N/A',
-                      reRing: product.reRing ?? false,
-                      stripePriceId: product.stripePriceId || '',
-                      totalPrice: Number(product.price) || 0, // 🔥 Ensure price is correctly passed
-                    };
-
-                    console.log('🛒 Adding Artisan Product to Cart:', {
-                      product,
-                      selectedOptions,
-                    });
-
-                    addToCart(product, selectedOptions);
-                  }
-                }}
+                onClick={addToCartWithOptions}
               >
                 {inCart ? 'Remove from Cart' : 'Add to Cart'}
               </button>

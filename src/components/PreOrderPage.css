@@ -43,6 +43,18 @@
   background: white;
 }
 
+.pre-order-page-header {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: white; /* Set text color to white */
+}
+
+.pre-order-page-header .dark {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: white; /* Ensure that dark mode also uses white color */
+}
+
 .pre-order-description {
   flex-grow: 1; /* Allows it to expand and fill space */
   min-height: 60px; /* Ensures consistent height across cards */
