@@ -55,7 +55,7 @@
 
 .soundlegend-product-image img:hover {
     transform: scale(1.06);
-    box-shadow: 0px 12px 30px rgba(255, 204, 0, 0.3);
+    /* box-shadow: 0px 12px 30px rgba(255, 204, 0, 0.3); */
 }
 
 /* 📌 Right Side: Customization & Features */

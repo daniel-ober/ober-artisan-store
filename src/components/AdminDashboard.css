@@ -1,23 +1,85 @@
-Main admin dashboard container
+/* Main admin dashboard container */
 .admin-dashboard {
-  max-width: 1200px; /* Adjusted for better centering */
-  margin: 0 auto; /* Centers the container horizontally */
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 25px;
   background-color: #f9f9f9;
   border-radius: 10px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-  text-align: center; /* Ensures text and components are centered */
-  overflow: hidden; /* Prevent content overflow */
+  text-align: center;
+  overflow: hidden;
+  color: #222; /* default readable text */
+}
+
+/* Force all headings and components to use readable text */
+.admin-dashboard h1,
+.admin-dashboard h2,
+.admin-dashboard h3,
+.component-container h2,
+.component-container h3 {
+  color: #222 !important;
+}
+
+.component-container,
+.admin-card {
+  color: #222;
+}
+
+.component-container * {
+  color: inherit;
+}
+
+/* Badge Wrapper Styling */
+.badge-wrapper {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  z-index: 2;
+}
+
+/* Notification Badges */
+.notification-badge,
+.notification-badge-secondary,
+.notification-badge-tertiary {
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 2px 7px;
+  border-radius: 50%;
+  z-index: 10;
+  display: inline-block;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.notification-badge {
+  background-color: rgb(8, 151, 0);
+  z-index: 3;
+  top: 0;
+}
+
+.notification-badge-secondary {
+  background-color: orange;
+  z-index: 2;
+  margin-left: -6px; /* overlap effect */
+}
+
+.notification-badge-tertiary {
+  display: none !important; /* Hide green badges for select cards */
 }
 
 /* Cards container styling */
 .admin-cards {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center; /* Centers cards horizontally */
-  align-items: center; /* Centers cards vertically */
+  justify-content: center;
+  align-items: center;
   gap: 25px;
-  padding-top: 20px; /* Adds spacing above the cards */
+  padding-top: 20px;
 }
 
 /* Individual card styling */
@@ -34,36 +96,19 @@ Main admin dashboard container
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
 }
 
-.notification-badge {
-  position: absolute; /* Ensures the badge is positioned relative to its container */
-  top: -10px; /* Adjust badge alignment to the icon */
-  right: -10px; /* Adjust badge alignment to the icon */
-  background-color: red; /* Badge color */
-  color: white; /* Text color inside the badge */
-  border-radius: 50%; /* Circular badge */
-  padding: 5px 8px; /* Padding to fit text size */
-  font-size: 0.8rem; /* Font size inside the badge */
-  font-weight: bold; /* Bold text for visibility */
-  z-index: 1; /* Ensures badge is above other elements */
-  display: inline-block; /* Ensures badge is always visible */
-}
-
-/* Card hover effect */
 .admin-card:hover {
   background-color: #e7e7e7;
   transform: scale(1.05);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Icon styling */
 .admin-card-icon {
-  position: relative; /* Allows notification badge to position relative to the icon */
+  position: relative;
   font-size: 2.0rem;
   margin-bottom: 12px;
   color: #444;
 }
 
-/* Card title styling */
 .admin-card h3 {
   font-size: 1.2rem;
   color: #333;
@@ -71,7 +116,6 @@ Main admin dashboard container
   text-align: center;
 }
 
-/* Component container styling */
 .component-container {
   margin-top: 30px;
   padding: 20px;
@@ -81,76 +125,60 @@ Main admin dashboard container
   border: 1px solid #ddd;
   max-height: 550px;
   overflow: auto;
+  color: #222;
 }
 
-/* Center logo styling */
-/* .navbar-logo img {
-  display: block;
-  margin: 0 auto;
-  max-width: 350px;
-  height: auto;
-} */
-
-/* Center heading */
 h1 {
   font-size: 2rem;
   text-align: center;
   margin-bottom: 20px;
+  color: #222;
 }
 
-/* Mobile Responsive Adjustments */
 @media (max-width: 768px) {
   .admin-dashboard {
     padding: 20px;
-    box-shadow: none; /* Remove shadow for simpler mobile look */
+    box-shadow: none;
   }
-
   .admin-cards {
-    flex-direction: column; /* Stack cards vertically */
+    flex-direction: column;
     gap: 20px;
-    align-items: center; /* Ensures cards are centered */
+    align-items: center;
   }
-
   .admin-card {
-    width: 100%; /* Full-width for smaller screens */
+    width: 100%;
   }
-
   .admin-card-icon {
-    font-size: 2rem; /* Slightly smaller icons for smaller screens */
+    font-size: 2rem;
     margin-bottom: 8px;
   }
-
   .admin-card h3 {
-    font-size: 1rem; /* Adjusted font size for readability */
+    font-size: 1rem;
   }
-
   .component-container {
     padding: 15px;
     margin-top: 20px;
     border: none;
-    box-shadow: none; /* Simplify for smaller screens */
-    max-height: auto; /* Allow full height for content */
+    box-shadow: none;
+    max-height: auto;
   }
 }
 
-/* Tablet Responsive Adjustments */
 @media (min-width: 768px) and (max-width: 1024px) {
   .admin-cards {
     justify-content: space-around;
   }
-
   .admin-card {
-    min-width: 180px; /* Adjust card size for tablets */
+    min-width: 180px;
     max-width: 220px;
   }
 }
 
-/* Add padding and spacing adjustments */
 .admin-dashboard h1 {
   margin-top: 0;
   margin-bottom: 20px;
   font-size: 2.0rem;
-  color: #333;
+  color: #222;
 }
 
 .admin-dashboard .admin-cards {
