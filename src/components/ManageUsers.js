@@ -84,7 +84,7 @@ const ManageUsers = () => {
 
   return (
     <div className="manage-users">
-      <h2>Manage Users</h2>
+      <div className="manage-users-header">Manage Users</div>
       <button className="add-btn" onClick={handleAddUser}>
         Add User
       </button>
