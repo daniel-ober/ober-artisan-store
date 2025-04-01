@@ -174,14 +174,21 @@ body.dark .navbar-sticky-mini {
   border: none;
   cursor: pointer;
   padding: 6px;
-  z-index: 3000;
+  z-index: 9999; /* BOOST z-index to guarantee it's on top */
+  position: relative;
 }
 
+
 .navbar-sticky-menu .menu-arrow-icon {
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   transition: transform 0.3s ease;
-  filter: invert(1);
+  z-index: 9999; /* force it above any accidental background elements */
+  position: relative;
+  pointer-events: auto;
+  filter: brightness(1) contrast(100%) saturate(120%);
+  background: none !important;
+  object-fit: contain;
 }
 
 .navbar-sticky-menu .menu-arrow-icon.open {
@@ -247,6 +254,9 @@ body.dark .navbar-sticky-mini {
   .navbar-logo {
     max-width: 160px;
     justify-content: flex-start;
+    align-items: center;
+    padding-left: 0;
+    margin-left: 10px;
   }
 
   .logo-img {
