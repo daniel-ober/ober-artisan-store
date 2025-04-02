@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { db } from '../firebaseConfig';
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { uploadImage } from '../services/firebaseService';
 import { createStripeProduct } from '../services/stripeService';
 import './AddProductModal.css';
 import ArtisanSpecsForm from './ArtisanSpecsForm';
@@ -28,20 +28,38 @@ const AddProductModal = ({ onClose }) => {
   });
 
   const [imageFiles, setImageFiles] = useState([]);
+  const [imagePreviews, setImagePreviews] = useState([]);
   const [isUploading, setIsUploading] = useState(false);
   const [successProductId, setSuccessProductId] = useState(null);
   const [error, setError] = useState('');
   let isSubmitting = false; // Lock mechanism to prevent duplicate submissions
 
-  const categories = ['artisan', 'merch', 'accessories'];
+  const categories = ['artisan', 'merch', 'accessories', 'soundlegend'];
   const artisanLines = [
-    'HERiTAGE',
-    'HybridX',
-    'Limited Batch',
+    'Feuzon',
+    'Heritage',
     'ONE',
-    'Custom Shop',
-    'Dreamfeather',
   ];
+
+  const soundlegendLines = [
+    'SoundLegend',
+  ];
+
+  // Function to upload an image to Firebase Storage (updated for Firebase v9+)
+  const uploadImage = async (file, folder) => {
+    const storage = getStorage();
+    const storageRef = ref(storage, `${folder}/${file.name}`);
+    
+    // Upload file and get the URL
+    try {
+      const snapshot = await uploadBytes(storageRef, file);
+      const downloadURL = await getDownloadURL(snapshot.ref);
+      return downloadURL;
+    } catch (error) {
+      console.error("Error uploading file:", error);
+      throw new Error("Error uploading image");
+    }
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -57,6 +75,10 @@ const AddProductModal = ({ onClose }) => {
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
     setImageFiles(files);
+
+    // Generate previews of the selected images
+    const previews = files.map((file) => URL.createObjectURL(file));
+    setImagePreviews(previews);
   };
 
   const handleNextStep = () => {
@@ -72,20 +94,18 @@ const AddProductModal = ({ onClose }) => {
       artisan: 'ART',
       merch: 'MER',
       accessories: 'ACC',
+      soundlegend: 'SLD', // SoundLegend SKU prefix
     };
 
     const artisanLinePrefixes = {
-      HERiTAGE: 'H',
-      HybridX: 'HX',
-      'Limited Batch': 'B',
+      Feuzon: 'FZ',
+      Heritage: 'H',
       ONE: '1',
-      'Custom Shop': 'CS',
-      Dreamfeather: 'D',
+      SoundLegend: 'SLD', // SoundLegend SKU line prefix
     };
 
     const categoryPrefix = categoryPrefixes[category] || 'GEN';
-    const artisanPrefix =
-      category === 'artisan' ? artisanLinePrefixes[artisanLine] || '' : '';
+    const artisanPrefix = artisanLinePrefixes[artisanLine] || '';
 
     const timestamp = Date.now().toString().slice(-6); // Shorten timestamp for SKU suffix
     return `${categoryPrefix}${artisanPrefix ? `-${artisanPrefix}` : ''}-${timestamp}`;
@@ -103,8 +123,6 @@ const AddProductModal = ({ onClose }) => {
     setSuccessProductId(null);
   
     try {
-      // console.log(`[handleArtisanSubmit] Called at ${new Date().toISOString()}`);
-  
       if (
         !newProduct.name ||
         !newProduct.description ||
@@ -122,41 +140,44 @@ const AddProductModal = ({ onClose }) => {
       const generatedSku = generateSku(newProduct.category, newProduct.artisanLine);
   
       // **STEP 1: Upload Images to Firebase Storage**
-      // console.log("[handleArtisanSubmit] Uploading images to Firebase Storage...");
-      const uploadedImageUrls = await Promise.all(
-        imageFiles.map((file) => uploadImage(file, 'products'))
-      );
-      // console.log("[handleArtisanSubmit] Uploaded image URLs:", uploadedImageUrls);
+      const uploadedImageUrls = [];
+      for (let i = 0; i < imageFiles.length; i++) {
+        const file = imageFiles[i];
+        const downloadURL = await uploadImage(file, 'products');
+        uploadedImageUrls.push(downloadURL); // Collect the URLs of uploaded images
+      }
   
-      // **STEP 2: Create Product in Stripe with Firebase Image URLs**
+      // **STEP 2: Create Product in Stripe**
       const stripeProduct = await createStripeProduct(
         newProduct.name,
         newProduct.description,
-        uploadedImageUrls, // Pass only URLs here
-        { SKU: generatedSku } // Pass metadata
+        uploadedImageUrls,
+        { SKU: generatedSku }
       );
   
       if (!stripeProduct || !stripeProduct.id) {
         throw new Error('Failed to create Stripe product.');
       }
   
-      // console.log(
-      //   '[handleArtisanSubmit] Saving Product to Firestore with Stripe Product ID:',
-      //   stripeProduct.id
-      // );
+      // **STEP 3: Create Price for the Product**
+      const price = await createStripePrice(stripeProduct.id, newProduct.price);
   
-      // **STEP 3: Save Product to Firestore**
+      if (!price || !price.id) {
+        throw new Error('Failed to create Stripe price.');
+      }
+  
+      // **STEP 4: Save Product and Price to Firestore**
       const docRef = await addDoc(collection(db, 'products'), {
         ...newProduct,
         ...artisanData,
         sku: generatedSku,
-        images: uploadedImageUrls, // Ensure images are Firebase Storage URLs
+        images: uploadedImageUrls,
         createdAt: serverTimestamp(),
         stripeProductId: stripeProduct.id,
-        isOutOfStock: newProduct.maxQuantity === 0, // Automatically set out-of-stock flag
+        stripePriceId: price.id, // Store the Stripe price ID in Firestore
+        isOutOfStock: newProduct.maxQuantity === 0,
       });
   
-      // console.log('[handleArtisanSubmit] Firestore Document Created:', docRef.id);
       setSuccessProductId(docRef.id);
   
       // **Reset Form After Successful Submission**
@@ -182,7 +203,7 @@ const AddProductModal = ({ onClose }) => {
       console.error('[handleArtisanSubmit] Error:', err.message);
       setError(err.message || 'Failed to add product.');
     } finally {
-      isSubmitting = false; // Release lock
+      isSubmitting = false;
       setIsUploading(false);
     }
   };
@@ -222,9 +243,9 @@ const AddProductModal = ({ onClose }) => {
                       </select>
                     </div>
 
-                    {newProduct.category === 'artisan' && (
+                    {(newProduct.category === 'artisan' || newProduct.category === 'soundlegend') && (
                       <div className="form-group">
-                        <label htmlFor="artisanLine">Artisan Line*</label>
+                        <label htmlFor="artisanLine">Product Line*</label>
                         <select
                           id="artisanLine"
                           name="artisanLine"
@@ -232,8 +253,8 @@ const AddProductModal = ({ onClose }) => {
                           onChange={handleInputChange}
                           required
                         >
-                          <option value="">Select Artisan Line</option>
-                          {artisanLines.map((line) => (
+                          <option value="">Select Product Line</option>
+                          {(newProduct.category === 'artisan' ? artisanLines : soundlegendLines).map((line) => (
                             <option key={line} value={line}>
                               {line}
                             </option>
@@ -351,8 +372,16 @@ const AddProductModal = ({ onClose }) => {
                       />
                     </div>
 
+                    {imagePreviews.length > 0 && (
+                      <div className="image-previews">
+                        {imagePreviews.map((preview, index) => (
+                          <img key={index} src={preview} alt={`preview-${index}`} />
+                        ))}
+                      </div>
+                    )}
+
                     <div className="button-group">
-                      {newProduct.category === 'artisan' ? (
+                      {newProduct.category === 'artisan' || newProduct.category === 'soundlegend' ? (
                         <button type="button" onClick={handleNextStep}>
                           Next
                         </button>

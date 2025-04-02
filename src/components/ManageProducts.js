@@ -106,7 +106,7 @@ const ManageProducts = () => {
   return (
     <div className="manage-products-container">
       <h2>Manage Products</h2>
-      <button className="add-btn" onClick={() => setIsAddModalOpen(true)}>
+      <button className="add-product-btn" onClick={() => setIsAddModalOpen(true)}>
         Add Product
       </button>
       {loading && <p>Loading products...</p>}
