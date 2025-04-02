@@ -6,13 +6,18 @@ const { defineSecret } = require('firebase-functions/params');
 const admin = require('firebase-admin');
 const express = require('express');
 const stripeLib = require('stripe');
+const axios = require('axios');
 
+// Define Firebase secrets
 const STRIPE_SECRET_KEY = defineSecret('STRIPE_SECRET_KEY');
 const STRIPE_WEBHOOK_SECRET = defineSecret('STRIPE_WEBHOOK_SECRET');
 const CLIENT_URL = defineSecret('CLIENT_URL');
 
+// Initialize Firebase Admin
 admin.initializeApp();
 const db = admin.firestore();
+
+// Express app for the main API (Stripe, etc.)
 const app = express();
 app.use(express.json());
 
@@ -32,6 +37,7 @@ app.use((req, res, next) => {
   next();
 });
 
+// Stripe checkout session creation endpoint
 app.post('/createCheckoutSession', async (req, res) => {
   try {
     const stripe = stripeLib(STRIPE_SECRET_KEY.value());
@@ -74,6 +80,7 @@ app.post('/createCheckoutSession', async (req, res) => {
   }
 });
 
+// Fetch order details by Stripe session ID
 app.get('/orders/by-session/:sessionId', async (req, res) => {
   try {
     const snapshot = await db.collection('orders')
@@ -88,6 +95,7 @@ app.get('/orders/by-session/:sessionId', async (req, res) => {
   }
 });
 
+// Stripe webhook listener to handle events such as checkout.session.completed
 const stripeWebhookApp = express();
 stripeWebhookApp.use(express.raw({ type: 'application/json' }));
 
@@ -167,5 +175,46 @@ stripeWebhookApp.post('/', async (req, res) => {
   res.sendStatus(200);
 });
 
+// Printify Webhook Listener
+const printifyWebhookApp = express();
+printifyWebhookApp.use(express.raw({ type: 'application/json' }));
+
+printifyWebhookApp.post('/printify-webhook', async (req, res) => {
+  try {
+    console.log('Received Printify webhook:', req.body);  // Log the incoming webhook data for debugging
+
+    // Process Printify event data
+    const event = JSON.parse(req.body);
+    if (event.type === 'product.created') {
+      const product = event.data;
+      await handleProductCreated(product); // Save the product to Firestore
+    }
+
+    // Respond to Printify
+    res.status(200).send('Webhook received successfully');
+  } catch (error) {
+    console.error('Error processing Printify webhook:', error);
+    res.status(500).send('Error processing webhook');
+  }
+});
+
+// Function to handle product creation event
+const handleProductCreated = async (product) => {
+  try {
+    await db.collection('products').doc(product.id.toString()).set({
+      name: product.title,
+      description: product.description,
+      price: product.price,
+      status: product.status,
+      createdAt: admin.firestore.FieldValue.serverTimestamp(),
+    });
+    console.log(`Product ${product.title} saved to Firestore.`);
+  } catch (error) {
+    console.error('Error saving product to Firestore:', error);
+  }
+};
+
+// Export the functions to Firebase
 exports.api = onRequest({ region: 'us-central1', secrets: [STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, CLIENT_URL] }, app);
 exports.stripeWebhook = onRequest({ region: 'us-central1', secrets: [STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET], cors: true }, stripeWebhookApp);
+exports.printifyWebhookListener = onRequest({ region: 'us-central1' }, printifyWebhookApp);
