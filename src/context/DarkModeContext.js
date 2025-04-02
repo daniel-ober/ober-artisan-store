@@ -5,8 +5,8 @@ export const DarkModeContext = createContext();
 export const DarkModeProvider = ({ children }) => {
   // ✅ Check localStorage; Default to "false" (light mode)
   const storedMode = localStorage.getItem("darkMode");
-  const initialMode = storedMode === "true" ? true : false;
-
+  const initialMode = storedMode !== null ? storedMode === "true" : true;
+  
   const [isDarkMode, setIsDarkMode] = useState(initialMode);
 
   useEffect(() => {

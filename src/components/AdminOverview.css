@@ -33,6 +33,18 @@
     margin-top: 0;
     font-size: 1.2rem;
     margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .badge {
+    background-color: #d5d5ff;
+    color: white;
+    padding: 5px 10px;
+    /* border-radius: 12px; */
+    font-size: 0.9rem;
+    margin-left: 8px;
   }
   
   .overview-item {
@@ -44,7 +56,6 @@
     cursor: pointer;
     transition: background 0.2s;
   }
-  
   
   .overview-item:hover {
     background-color: #f0f0f0;
