@@ -1,41 +1,73 @@
 .privacy-policy-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    font-family: 'Arial', sans-serif;
-    color: #333; /* Darker text color for better readability */
-    background-color: #ffffff; /* Clean white background for better readability */
-    border-radius: 8px; /* Slight rounding of corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for a polished look */
+  max-width: 800px;
+  margin: 80px auto 40px auto;
+  padding: 40px 30px;
+  color: #333;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  line-height: 1.8;
+}
+
+.privacy-policy-container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  color: #222;
+  text-align: center;
+}
+
+.privacy-policy-container h2 {
+  font-size: 1.5rem;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  color: #444;
+  border-left: 4px solid tomato;
+  padding-left: 12px;
+}
+
+.privacy-policy-container p {
+  font-size: 1rem;
+  margin-bottom: 16px;
+  color: #555;
+}
+
+.privacy-policy-container strong {
+  color: #000;
+  font-weight: bold;
+}
+
+.privacy-policy-container ul {
+  padding-left: 20px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.privacy-policy-container ul li {
+  margin-bottom: 8px;
+  font-size: 1rem;
+  color: #444;
+}
+
+.privacy-policy-container br {
+  line-height: 2;
+}
+
+@media screen and (max-width: 600px) {
+  .privacy-policy-container {
+    padding: 20px 15px;
+    margin: 60px 10px 30px 10px;
   }
-  
+
   .privacy-policy-container h1 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    color: #222; /* Darker heading for contrast */
-    text-align: center; /* Centering the main title */
+    font-size: 2rem;
   }
-  
+
   .privacy-policy-container h2 {
-    font-size: 1.5rem;
-    margin-top: 20px;
-    margin-bottom: 15px; /* Add more space between heading and paragraphs */
-    color: #444; /* Slight contrast between main and subheadings */
+    font-size: 1.25rem;
   }
-  
-  .privacy-policy-container p {
-    font-size: 1rem;
-    line-height: 1.8;
-    margin-bottom: 15px; /* Add space between paragraphs for better readability */
-    color: #555; /* Softer text color for readability */
+
+  .privacy-policy-container p,
+  .privacy-policy-container ul li {
+    font-size: 0.95rem;
   }
-  
-  .privacy-policy-container strong {
-    color: #333; /* Emphasizing important points */
-    font-weight: bold;
-  }
-  
-  .privacy-policy-container br {
-    line-height: 2; /* Ensures line breaks don't look cramped */
-  }
-  
+}
