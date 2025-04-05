@@ -5,95 +5,82 @@ const ReturnPolicy = () => {
   return (
     <div className="return-policy-container">
       <h1>Return Policy</h1>
-      <p>Effective Date: January 1, 2025</p>
+      <p><strong>Last Updated:</strong> April 5, 2025</p>
+
+      <p>
+        This Return Policy outlines our policies regarding returns, exchanges, and cancellations. 
+        By making a purchase on this site, you acknowledge and agree to these terms. 
+        Please read carefully to understand what is eligible for return or refund.
+      </p>
+
       <h2>1. Handcrafted Drums</h2>
       <p>
-        Each of our handcrafted drums is custom-made with meticulous care. Because of the unique and personalized nature of these items, returns are limited to the following circumstances:
-        <br />
-        <br />
-        <strong>Damaged or Defective Items:</strong> If your drum arrives damaged or defective, you must contact us within <strong>7 days</strong> of receiving the item. We will work with you to either repair or replace the drum. Please provide photographic evidence of the damage for a swift resolution.
-        <br />
-        <br />
-        <strong>Non-Refundable:</strong> Due to the custom craftsmanship involved, returns or refunds for reasons other than damage or defect will not be accepted.
-        <br />
-        <br />
-
-        <strong>Repairs and Adjustments:</strong> If adjustments are needed after delivery, we offer repair services at an additional cost. Please contact us for details.
+        Our handcrafted drums are custom-built and one-of-a-kind. As such, they are <strong>non-refundable</strong> except in the following cases:
+        <br /><br />
+        <strong>Damaged or Defective Items:</strong> If your drum arrives damaged or with a defect, contact us within <strong>7 days</strong> of delivery with photos and a description of the issue. We will work with you to resolve it via repair or replacement.
+        <br /><br />
+        <strong>Post-Delivery Repairs:</strong> We offer post-delivery adjustments and repairs for a fee. Please contact us to inquire about services.
       </p>
-      <h2>2. Apparel & Merchandise (T-Shirts, Stickers, Tools, etc.)</h2>
+
+      <h2>2. Apparel & Merchandise</h2>
       <p>
-        We offer returns and exchanges for apparel and merchandise under the following conditions:
-        <br />
-        <br />
-
-        <strong>Return Window:</strong> You may return or exchange any item (excluding drums) within <strong>30 days</strong> of purchase.
-        <br />
-        <br />
-
-        <strong>Condition:</strong> Items must be in their original, unworn condition with tags still attached (where applicable). Items showing signs of wear, damage, or modification will not be accepted for return.
-        <br />
-        <br />
-
-        <strong>Exchanges:</strong> If you need to exchange an item for a different size or style, please initiate the exchange within the 30-day window. You will be responsible for return shipping costs unless the item arrived damaged or incorrect.
-        <br />
-        <br />
-
-        <strong>Refunds:</strong> Once your return is received and inspected, we will issue a refund to your original payment method. Refunds may take up to <strong>7 business days</strong> to process.
-        <br />
-        <br />
-
-        <strong>Non-Returnable Items:</strong> Stickers, tools, and other small accessories are not eligible for return unless damaged or defective.
+        We accept returns and exchanges on apparel and eligible merchandise under the following conditions:
+        <br /><br />
+        <strong>Return Window:</strong> Returns must be initiated within <strong>30 days</strong> of the purchase date.
+        <br /><br />
+        <strong>Item Condition:</strong> Items must be unworn, unwashed, and in original condition with all tags attached. Used or damaged items will not be accepted.
+        <br /><br />
+        <strong>Exchanges:</strong> Exchanges are permitted within the return window. Customers are responsible for return shipping unless the item was defective or incorrect.
+        <br /><br />
+        <strong>Refunds:</strong> Upon inspection and approval of the return, refunds will be issued to the original payment method. Please allow up to <strong>7 business days</strong> for processing.
+        <br /><br />
+        <strong>Non-Returnable:</strong> Items such as stickers, tools, or other small accessories are final sale and may not be returned unless defective.
       </p>
+
       <h2>3. Services</h2>
       <p>
-        For any services provided, such as drum tuning, workshops, or custom consultations:
-        <br />
-        <br />
-
-        <strong>Non-Refundable:</strong> Once a service has been rendered or initiated, refunds are not available. However, if you are unsatisfied with the service, please contact us within <strong>7 days</strong> so we can work with you to address any concerns.
-        <br />
-        <br />
-
-        <strong>Rescheduling:</strong> For workshops or custom consultations, you may reschedule with at least <strong>48 hours</strong> notice. Failure to attend or reschedule within the designated time will result in a forfeiture of the service without refund.
-      </p>
-      <h2>4. Return Process</h2>
-      <p>
-        To initiate a return, please follow these steps:
-        <br />
-        <br />
-
-        <strong>Contact Us:</strong> Email us at <strong>support@oberartisandrums.com</strong> with your order number, a description of the issue, and photos if necessary.
-        <br />
-        <br />
-
-        <strong>Approval:</strong> We will provide return instructions if your return is eligible. Please do not return any items without prior authorization.
-        <br />
-        <br />
-
-        <strong>Return Shipping:</strong> For eligible returns, you are responsible for return shipping costs unless the item arrived damaged or incorrect.
-        <br />
-        <br />
-
-        <strong>Refund or Exchange:</strong> Once we receive your returned item and verify its condition, we will process your refund or exchange as applicable.
+        All service purchases (e.g., consultations, workshops, drum tuning) are <strong>non-refundable</strong> once booked or rendered.
+        <br /><br />
+        <strong>Dissatisfaction:</strong> If you are unhappy with a completed service, contact us within <strong>7 days</strong> and we will attempt to address your concerns.
+        <br /><br />
+        <strong>Rescheduling:</strong> Appointments may be rescheduled with <strong>at least 48 hours’ notice</strong>. No-shows or last-minute cancellations are forfeited.
       </p>
 
-      <h2>5. Pre-Orders and Custom Orders</h2>
+      <h2>4. Pre-Orders and Custom Orders</h2>
       <p>
-        Custom products, including but not limited to custom drums, pre-order drums, drum kits, or custom-engraved merchandise, are <strong>non-returnable</strong> unless defective or damaged upon arrival.
+        All custom and pre-order items are <strong>non-refundable</strong> once production has begun. This includes:
+        <ul>
+          <li>Custom drum builds</li>
+          <li>Drum kits</li>
+          <li>Engraved or limited-edition items</li>
+        </ul>
+        <br />
+        If your custom item is damaged upon arrival, please contact us within <strong>7 days</strong> for a resolution.
       </p>
 
-      <h2>6. Cancellations</h2>
+      <h2>5. Order Cancellations</h2>
       <p>
-        <strong>Drums and Custom Orders:</strong> Due to the made-to-order nature of our drums and certain custom products, cancellations are not allowed once production has begun. If you wish to cancel before production starts, please contact us within <strong>48 hours</strong> of placing your order.
-        <br />
-        <br />
-
-        <strong>Other Products:</strong> For all other items, you may cancel your order as long as it has not yet shipped. Please contact us at support@oberartisandrums.com for assistance.
+        <strong>Custom Drums:</strong> May be canceled within <strong>48 hours</strong> of ordering if production has not started. After that, cancellations are not permitted.
+        <br /><br />
+        <strong>All Other Items:</strong> Orders for in-stock merchandise may be canceled any time before shipment. Please email <strong>support@oberartisandrums.com</strong> as soon as possible.
       </p>
 
-      <h2>7. Contact Information</h2>
+      <h2>6. Return Instructions</h2>
       <p>
-        If you have any questions about our return policy or need assistance with a return, please contact us at support@oberartisandrums.com.
+        To request a return or exchange, follow these steps:
+        <br /><br />
+        <strong>Step 1 – Contact:</strong> Email <strong>support@oberartisandrums.com</strong> with your order number and reason for return. Attach photos if applicable.
+        <br /><br />
+        <strong>Step 2 – Authorization:</strong> If eligible, we will provide return instructions. Unauthorized returns will not be processed.
+        <br /><br />
+        <strong>Step 3 – Shipping:</strong> Return shipping is the customer’s responsibility unless the item arrived damaged or incorrect.
+        <br /><br />
+        <strong>Step 4 – Inspection & Refund:</strong> Once received and approved, we’ll issue a refund or send a replacement. Refunds may take up to <strong>7 business days</strong> to reflect.
+      </p>
+
+      <h2>7. Contact Us</h2>
+      <p>
+        For questions or support with a return, please reach out to us at <strong>support@oberartisandrums.com</strong>. We’re here to help.
       </p>
     </div>
   );

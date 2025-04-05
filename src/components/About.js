@@ -35,7 +35,8 @@ const About = () => {
       <p className="quote-text">
         "Every instrument I send into the world is a reflection of the standard I hold myself to — sonically, visually, and spiritually. This work is a responsibility and a privilege. If it bears the Ober name, it has to speak with truth."
       </p>
-      <p className="quote-author">— Founder, Ober Artisan Drums</p>
+      <p className="quote-author">— Dan Ober</p>
+      <p className="quote-author">Founder, Ober Artisan Drums</p>
     </div>
   </div>
 </div>

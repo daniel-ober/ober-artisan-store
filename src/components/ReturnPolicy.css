@@ -1,23 +1,74 @@
 .return-policy-container {
-    background-color: #ffffff;
-    color: #333;
-    padding: 20px;
-    margin: 0 auto;
-    max-width: 800px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 80px auto 40px auto;
+  padding: 40px 30px;
+  color: #333;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  line-height: 1.8;
+}
+
+.return-policy-container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  color: #222;
+  text-align: center;
+}
+
+.return-policy-container h2 {
+  font-size: 1.5rem;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  color: #444;
+  border-left: 4px solid tomato;
+  padding-left: 12px;
+}
+
+.return-policy-container p {
+  font-size: 1rem;
+  margin-bottom: 16px;
+  color: #555;
+}
+
+.return-policy-container strong {
+  color: #000;
+  font-weight: bold;
+}
+
+.return-policy-container ul {
+  padding-left: 20px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.return-policy-container li {
+  margin-bottom: 8px;
+  font-size: 1rem;
+  color: #444;
+}
+
+.return-policy-container br {
+  line-height: 2;
+}
+
+/* Mobile responsiveness */
+@media screen and (max-width: 600px) {
+  .return-policy-container {
+    padding: 20px 15px;
+    margin: 60px 10px 30px 10px;
   }
-  
-  .return-policy-container h1,
+
+  .return-policy-container h1 {
+    font-size: 2rem;
+  }
+
   .return-policy-container h2 {
-    color: #333;
+    font-size: 1.25rem;
   }
-  
-  .return-policy-container p {
-    line-height: 1.6;
+
+  .return-policy-container p,
+  .return-policy-container li {
+    font-size: 0.95rem;
   }
-  
-  .return-policy-container strong {
-    font-weight: bold;
-  }
-  
+}

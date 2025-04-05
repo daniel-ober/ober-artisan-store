@@ -54,7 +54,7 @@
 }
 
 .soundlegend-product-image img:hover {
-    transform: scale(1.06);
+    transform: scale(1.01);
     /* box-shadow: 0px 12px 30px rgba(255, 204, 0, 0.3); */
 }
 
@@ -116,6 +116,10 @@
     margin-bottom: 15px;
     transition: border 0.3s ease, box-shadow 0.3s ease;
     box-sizing: border-box; /* Prevents overflow issues */
+}
+
+.soundlegend-header {
+    color:#FFCC01;
 }
 
 /* 🔹 Improve Dropdown Field Styling */

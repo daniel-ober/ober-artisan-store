@@ -132,10 +132,10 @@ const handleClose = () => {
           style={{ cursor: 'pointer' }}
         >
           <img
-            src="https://firebasestorage.googleapis.com/v0/b/danoberartisandrums-dev.firebasestorage.app/o/Gallery%2FDrum%20Your%20Truth.16.png?alt=media&token=9ae6304b-91d1-42b6-9f7e-1ea4ed321e8f"
+            src="https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/artisan%2Fsoundlegend%2F6.png?alt=media&token=e87598bf-fd0f-4724-8cbf-8822dccdfda6"
             alt="SOUNDLEGEND Experience"
           />
-          <h2>Build Your Custom SoundLegend Snare</h2>
+          <h2 className="soundlegend-header">Build Your Custom SoundLegend Snare</h2>
           <p>
             Your sound is unique—your snare should be too. The{' '}
             <strong>SoundLegend Series</strong> is a fully custom, handcrafted
