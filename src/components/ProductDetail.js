@@ -6,7 +6,6 @@ import { FaArrowLeft } from 'react-icons/fa';
 import HeritageProductDetail from './HeritageProductDetail';
 import FeuzonProductDetail from './FeuzonProductDetail';
 import SoundlegendProductDetail from './SoundlegendProductDetail';
-import { fetchPrintifyProductOptions } from '../services/printifyService'; // New service for Printify API
 import './ProductDetail.css';
 
 const ProductDetail = () => {
@@ -21,10 +20,9 @@ const ProductDetail = () => {
   const [quantity, setQuantity] = useState(1);
   const [selectedColor, setSelectedColor] = useState('');
   const [selectedSize, setSelectedSize] = useState('');
-  const [merchOptions, setMerchOptions] = useState(null); // For storing Printify options
+  const [selectedVariant, setSelectedVariant] = useState(null);
   const thumbnailContainerRef = useRef(null);
 
-  // Fetch product details
   useEffect(() => {
     const fetchProductData = async () => {
       try {
@@ -34,13 +32,6 @@ const ProductDetail = () => {
           setMainImage(
             productData.images?.[0] || '/fallback-images/images-coming-soon-regular.png'
           );
-          // Only fetch size/color options if the product is a "merch" category
-          if (productData.category === 'merch') {
-            const printifyOptions = await fetchPrintifyProductOptions(
-              productData.printifyProductId
-            );
-            setMerchOptions(printifyOptions);
-          }
         } else {
           setError('Product not found.');
         }
@@ -55,19 +46,30 @@ const ProductDetail = () => {
     fetchProductData();
   }, [productId]);
 
-  // Sync cart state
   useEffect(() => {
     if (product) {
       const cartItem = cart.find((item) => item.id === product.id);
       if (cartItem) {
         setInCart(cartItem);
-        setQuantity(Math.min(cartItem.quantity, product.currentQuantity));
+        setQuantity(Math.min(cartItem.quantity, product.currentQuantity || 1));
       } else {
         setInCart(null);
         setQuantity(1);
       }
     }
   }, [cart, product]);
+
+  useEffect(() => {
+    if (product?.variants) {
+      const variant = product.variants.find(
+        (v) =>
+          v.color === selectedColor &&
+          v.size === selectedSize &&
+          v.isAvailable
+      );
+      setSelectedVariant(variant || null);
+    }
+  }, [selectedColor, selectedSize, product]);
 
   if (loading) return <p>Loading product details...</p>;
   if (error) {
@@ -82,35 +84,39 @@ const ProductDetail = () => {
   if (!product) return <div>Product not found</div>;
 
   // For artisan products
-  if (productId === 'heritage')
-    return <HeritageProductDetail product={product} />;
+  if (productId === 'heritage') return <HeritageProductDetail product={product} />;
   if (productId === 'feuzon') return <FeuzonProductDetail product={product} />;
-  if (productId === 'soundlegend')
-    return <SoundlegendProductDetail product={product} />;
+  if (productId === 'soundlegend') return <SoundlegendProductDetail product={product} />;
 
   const isSoldOut = product.currentQuantity === 0;
-  const isArtisan = product.category === 'artisan';
   const maxQuantity = product.currentQuantity || 1;
 
-  // Handle color selection change
-  const handleColorChange = (color) => {
-    setSelectedColor(color);
-    const imageForColor = product.images.find((img) => img.includes(color));
-    setMainImage(imageForColor || product.images[0]);
-  };
+  const availableColors = [
+    ...new Set(product.variants.map((v) => v.color)),
+  ];
+  const availableSizes = [
+    ...new Set(product.variants.map((v) => v.size)),
+  ];
 
-  // Handle size selection change
-  const handleSizeChange = (size) => {
-    setSelectedSize(size);
+  const isOptionAvailable = (color, size) => {
+    return product.variants.some(
+      (v) => v.color === color && v.size === size && v.isAvailable
+    );
   };
 
   const addToCartWithOptions = () => {
-    const selectedOptions = {
-      size: selectedSize || 'N/A',
-      color: selectedColor || 'N/A',
+    if (!selectedVariant) return;
+
+    addToCart({
+      ...product,
+      price: selectedVariant.price,
+      stripePriceId: selectedVariant.stripePriceId,
+    }, {
+      color: selectedColor,
+      size: selectedSize,
       quantity,
-    };
-    addToCart(product, selectedOptions);
+      variantId: selectedVariant.variantId,
+    });
   };
 
   return (
@@ -126,10 +132,7 @@ const ProductDetail = () => {
               className="product-main-image"
             />
             <div className="thumbnail-scroll-container">
-              <div
-                className="product-thumbnail-gallery"
-                ref={thumbnailContainerRef}
-              >
+              <div className="product-thumbnail-gallery" ref={thumbnailContainerRef}>
                 {product?.images?.map((image, index) => (
                   <button
                     key={index}
@@ -145,56 +148,47 @@ const ProductDetail = () => {
 
           <div className="product-info">
             <h2>Product Specifications</h2>
-            <p className="product-price">${product?.price}</p>
+            <p className="product-price">
+              {selectedVariant ? `$${selectedVariant.price.toFixed(2)}` : `$${product?.price}`}
+            </p>
 
-            {/* Merch product options */}
-            {product.category === 'merch' && merchOptions && (
-              <>
-                {/* Color Options Dropdown */}
-                {merchOptions.colors && merchOptions.colors.length > 0 && (
-                  <div className="product-options">
-                    <label htmlFor="color-select">Color</label>
-                    <select
-                      id="color-select"
-                      value={selectedColor}
-                      onChange={(e) => handleColorChange(e.target.value)}
-                    >
-                      {merchOptions.colors.map((color, index) => (
-                        <option
-                          key={index}
-                          value={color.name}
-                          disabled={!color.available} // Disable unavailable colors
-                        >
-                          {color.name} {color.available ? '' : '(Out of Stock)'}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                )}
+            {/* Color Options */}
+            <div className="product-options">
+              <label>Color</label>
+              <div className="option-grid">
+                {availableColors.map((color) => (
+                  <button
+                    key={color}
+                    onClick={() => setSelectedColor(color)}
+                    disabled={!isOptionAvailable(color, selectedSize)}
+                    className={`option-button ${
+                      selectedColor === color ? 'selected' : ''
+                    } ${!isOptionAvailable(color, selectedSize) ? 'disabled' : ''}`}
+                  >
+                    {color}
+                  </button>
+                ))}
+              </div>
+            </div>
 
-                {/* Size Options Dropdown */}
-                {merchOptions.sizes && merchOptions.sizes.length > 0 && (
-                  <div className="product-options">
-                    <label htmlFor="size-select">Size</label>
-                    <select
-                      id="size-select"
-                      value={selectedSize}
-                      onChange={(e) => handleSizeChange(e.target.value)}
-                    >
-                      {merchOptions.sizes.map((size, index) => (
-                        <option
-                          key={index}
-                          value={size.name}
-                          disabled={!size.available} // Disable unavailable sizes
-                        >
-                          {size.name} {size.available ? '' : '(Out of Stock)'}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                )}
-              </>
-            )}
+            {/* Size Options */}
+            <div className="product-options">
+              <label>Size</label>
+              <div className="option-grid">
+                {availableSizes.map((size) => (
+                  <button
+                    key={size}
+                    onClick={() => setSelectedSize(size)}
+                    disabled={!isOptionAvailable(selectedColor, size)}
+                    className={`option-button ${
+                      selectedSize === size ? 'selected' : ''
+                    } ${!isOptionAvailable(selectedColor, size) ? 'disabled' : ''}`}
+                  >
+                    {size}
+                  </button>
+                ))}
+              </div>
+            </div>
 
             {/* Action Buttons */}
             {isSoldOut ? (
@@ -243,10 +237,11 @@ const ProductDetail = () => {
               </>
             ) : (
               <button
-                className={`prod-detail-${inCart ? 'remove-cart' : 'add-to-cart'}-button`}
+                className="prod-detail-add-to-cart-button"
                 onClick={addToCartWithOptions}
+                disabled={!selectedVariant}
               >
-                {inCart ? 'Remove from Cart' : 'Add to Cart'}
+                Add to Cart
               </button>
             )}
           </div>
