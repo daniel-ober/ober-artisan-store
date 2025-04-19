@@ -8,6 +8,9 @@ import './Cart.css';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
+// ✅ Use your known-good deployed backend URL directly
+const API_BASE_URL = 'https://us-central1-danoberartisandrums.cloudfunctions.net/api';
+
 const Cart = () => {
   const { cart, cartId, removeFromCart, setCart, updateFirestoreCart } = useCart();
   const { user } = useAuth();
@@ -103,7 +106,7 @@ const Cart = () => {
         stripePriceId: product.stripePriceId,
       }));
 
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/createCheckoutSession`, {
+      const response = await fetch(`${API_BASE_URL}/createCheckoutSession`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -171,7 +174,6 @@ const Cart = () => {
                                 {item.size && ' | '}Color: {item.color}
                               </span>
                             )}
-                            {/* Add additional user selection details as needed */}
                           </>
                         ) : (
                           item.name
