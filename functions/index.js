@@ -1,43 +1,44 @@
-/*******************************************************
- * functions/index.js
- *******************************************************/
 const { onRequest } = require('firebase-functions/v2/https');
 const { defineSecret } = require('firebase-functions/params');
 const admin = require('firebase-admin');
 const express = require('express');
 const stripeLib = require('stripe');
 const axios = require('axios');
+const crypto = require('crypto');
 
-// Define Firebase secrets
 const STRIPE_SECRET_KEY = defineSecret('STRIPE_SECRET_KEY');
 const STRIPE_WEBHOOK_SECRET = defineSecret('STRIPE_WEBHOOK_SECRET');
 const CLIENT_URL = defineSecret('CLIENT_URL');
+const PRINTIFY_API_KEY = defineSecret('PRINTIFY_API_KEY');
+const PRINTIFY_SHOP_ID = defineSecret('PRINTIFY_SHOP_ID');
+const PRINTIFY_WEBHOOK_SECRET = defineSecret('PRINTIFY_WEBHOOK_SECRET');
 
-// Initialize Firebase Admin
 admin.initializeApp();
 const db = admin.firestore();
 
-// Express app for the main API (Stripe, etc.)
+// API App (Stripe)
 const app = express();
 app.use(express.json());
 
 const allowedOrigins = [
   'http://localhost:3000',
   'https://oberartisandrums.com',
+  'https://www.oberartisandrums.com',
   'https://danoberartisandrums.web.app',
 ];
+
 app.use((req, res, next) => {
   const origin = req.headers.origin;
-  if (!origin || allowedOrigins.includes(origin)) {
-    res.header('Access-Control-Allow-Origin', origin || '*');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  if (origin && allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
   }
-  if (req.method === 'OPTIONS') return res.sendStatus(204);
+  if (req.method === 'OPTIONS') return res.status(204).end();
   next();
 });
 
-// Stripe checkout session creation endpoint
 app.post('/createCheckoutSession', async (req, res) => {
   try {
     const stripe = stripeLib(STRIPE_SECRET_KEY.value());
@@ -58,15 +59,12 @@ app.post('/createCheckoutSession', async (req, res) => {
       quantity: p.quantity || 1,
     }));
 
-    const successUrl = `${clientUrl}/checkout-summary?session_id={CHECKOUT_SESSION_ID}&guest_token=${guestToken}`;
-    const cancelUrl = `${clientUrl}/cart`;
-
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: lineItems,
       mode: 'payment',
-      success_url: successUrl,
-      cancel_url: cancelUrl,
+      success_url: `${clientUrl}/checkout-summary?session_id={CHECKOUT_SESSION_ID}&guest_token=${guestToken}`,
+      cancel_url: `${clientUrl}/cart`,
       customer_email: customerEmail,
       shipping_address_collection: { allowed_countries: ['US', 'CA'] },
       allow_promotion_codes: true,
@@ -80,7 +78,6 @@ app.post('/createCheckoutSession', async (req, res) => {
   }
 });
 
-// Fetch order details by Stripe session ID
 app.get('/orders/by-session/:sessionId', async (req, res) => {
   try {
     const snapshot = await db.collection('orders')
@@ -95,7 +92,7 @@ app.get('/orders/by-session/:sessionId', async (req, res) => {
   }
 });
 
-// Stripe webhook listener to handle events such as checkout.session.completed
+// Stripe Webhook
 const stripeWebhookApp = express();
 stripeWebhookApp.use(express.raw({ type: 'application/json' }));
 
@@ -110,111 +107,128 @@ stripeWebhookApp.post('/', async (req, res) => {
   }
 
   if (event.type === 'checkout.session.completed') {
-    const sessionId = event.data.object.id;
-
-    try {
-      // Expand session to get full customer and payment details
-      const session = await stripe.checkout.sessions.retrieve(sessionId, {
-        expand: ['customer', 'payment_intent.payment_method'],
-      });
-
-      const paymentIntent = session.payment_intent;
-      const card = paymentIntent?.payment_method?.card || {};
-
-      const customer = session.customer || {};
-      const shipping = session.customer_details?.address || {};
-
-      const lineItems = await stripe.checkout.sessions.listLineItems(session.id, { expand: ['data.price.product'] });
-
-      const items = lineItems.data.map(item => ({
-        name: item.price.product?.name || item.description,
-        quantity: item.quantity,
-        price: item.amount_total / 100,
-        shippingDetails: 'No Shipping Details Provided',
-        status: 'Order Successful'
-      }));
-
-      const orderData = {
-        stripeSessionId: session.id,
-        userId: session.metadata?.userId || 'guest',
-        guestToken: session.metadata?.guestToken || null,
-        customerName: customer.name || session.customer_details?.name || '',
-        customerEmail: customer.email || session.customer_details?.email || '',
-        customerPhone: customer.phone || session.customer_details?.phone || '',
-        customerAddress: shipping
-          ? `${shipping.line1}, ${shipping.city}, ${shipping.postal_code}, ${shipping.country}`
-          : '',
-        paymentMethod: session.payment_method_types[0],
-        cardDetails: {
-          brand: card.brand || '',
-          lastFour: card.last4 || '',
-          expMonth: card.exp_month || null,
-          expYear: card.exp_year || null
-        },
-        items,
-        totalAmount: session.amount_total / 100,
-        currency: session.currency,
-        status: 'Order Successful',
-        createdAt: admin.firestore.FieldValue.serverTimestamp(),
-        systemHistory: [{
-          event: 'Order created from Stripe checkout session',
-          timestamp: new Date().toISOString()
-        }]
-      };
-
-      const orderId = `ORD-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
-      orderData.orderId = orderId; 
-      await db.collection('orders').doc(orderId).set(orderData);
-      console.log(`✅ Order created: ${orderId}`);
-    } catch (error) {
-      console.error('❌ Failed to enrich and save order:', error.message);
-      return res.status(500).send('Internal error processing order.');
-    }
+    res.sendStatus(200);
+  } else {
+    res.sendStatus(200);
   }
-
-  res.sendStatus(200);
 });
 
-// Printify Webhook Listener
+// 🔍 Printify Webhook Listener
 const printifyWebhookApp = express();
-printifyWebhookApp.use(express.raw({ type: 'application/json' }));
+printifyWebhookApp.use(express.raw({ type: '*/*' }));
 
-printifyWebhookApp.post('/printify-webhook', async (req, res) => {
-  try {
-    console.log('Received Printify webhook:', req.body);  // Log the incoming webhook data for debugging
+printifyWebhookApp.post('/', async (req, res) => {
+  const raw = req.rawBody?.toString('utf8');
+  const signatureHeader = req.headers['x-pfy-signature'];
+  const secret = PRINTIFY_WEBHOOK_SECRET.value();
 
-    // Process Printify event data
-    const event = JSON.parse(req.body);
-    if (event.type === 'product.created') {
-      const product = event.data;
-      await handleProductCreated(product); // Save the product to Firestore
-    }
+  console.log('--- Printify Webhook Incoming ---');
+  console.log('🟨 RAW BODY:', raw);
+  console.log('🟥 Signature Header:', signatureHeader);
+  console.log('🟩 HEADERS:', JSON.stringify(req.headers, null, 2));
 
-    // Respond to Printify
-    res.status(200).send('Webhook received successfully');
-  } catch (error) {
-    console.error('Error processing Printify webhook:', error);
-    res.status(500).send('Error processing webhook');
+  if (!signatureHeader && (!raw || raw.trim() === '' || raw.trim() === '{}')) {
+    console.log('✅ Printify validation ping received — responding with secret');
+    res.setHeader('Content-Type', 'text/plain');
+    return res.status(200).send(secret);
   }
+
+  if (!signatureHeader || !signatureHeader.startsWith('sha256=')) {
+    console.error('❌ Missing or malformed signature');
+    return res.status(400).send('Missing or malformed signature');
+  }
+
+  const receivedSignature = signatureHeader.split('=')[1];
+  const expectedSignature = crypto
+    .createHmac('sha256', secret)
+    .update(raw, 'utf8')
+    .digest('hex');
+
+  const isValid = crypto.timingSafeEqual(
+    Buffer.from(receivedSignature),
+    Buffer.from(expectedSignature)
+  );
+
+  if (!isValid) {
+    console.error('❌ Signature mismatch');
+    return res.status(401).send('Invalid signature');
+  }
+
+  console.log('✅ Signature verified');
+
+  let event;
+  try {
+    event = JSON.parse(raw);
+  } catch (e) {
+    console.error('❌ Failed to parse body as JSON:', raw);
+    return res.status(400).send('Invalid JSON');
+  }
+
+  if (event.topic === 'product.publish' || event.topic === 'product:publish:started') {
+    const productId = event.resource?.id || event.data?.id;
+    console.log('📌 Handling Printify product publish for ID:', productId);
+    if (productId) {
+      await handlePrintifyProductPublished(productId);
+    } else {
+      console.warn('⚠️ No product ID found in event:', JSON.stringify(event));
+    }
+  } else {
+    console.log('📭 Unhandled Printify webhook topic:', event.topic);
+  }
+
+  res.status(200).send('Webhook received');
 });
 
-// Function to handle product creation event
-const handleProductCreated = async (product) => {
+const handlePrintifyProductPublished = async (productId) => {
   try {
-    await db.collection('products').doc(product.id.toString()).set({
-      name: product.title,
+    const shopId = PRINTIFY_SHOP_ID.value();
+    const apiKey = PRINTIFY_API_KEY.value();
+
+    console.log(`🔍 Fetching product from Printify API for ID: ${productId}`);
+    const response = await axios.get(
+      `https://api.printify.com/v1/shops/${shopId}/products/${productId}.json`,
+      {
+        headers: {
+          Authorization: `Bearer ${apiKey}`
+        }
+      }
+    );
+
+    console.log(`📡 Printify API response status: ${response.status}`);
+    const product = response.data;
+
+    if (!product || !product.id) {
+      console.error('❌ No product data returned from Printify');
+      return;
+    }
+
+    const payload = {
+      id: product.id,
+      title: product.title,
       description: product.description,
-      price: product.price,
-      status: product.status,
-      createdAt: admin.firestore.FieldValue.serverTimestamp(),
-    });
-    console.log(`Product ${product.title} saved to Firestore.`);
+      images: product.images,
+      tags: product.tags,
+      variants: product.variants,
+      options: product.options,
+      visible: product.visible,
+      syncedAt: admin.firestore.FieldValue.serverTimestamp()
+    };
+
+    console.log('📦 Product payload to be saved:', JSON.stringify(payload, null, 2));
+
+    await db.collection('merchProducts').doc(productId).set(payload);
+    console.log(`✅ Product ${productId} synced to Firestore`);
+
   } catch (error) {
-    console.error('Error saving product to Firestore:', error);
+    console.error('❌ Failed to sync Printify product:', error.message);
+    console.error('🛠 Error detail:', error.response?.data || error.stack || error);
   }
 };
 
-// Export the functions to Firebase
+// Final exports
 exports.api = onRequest({ region: 'us-central1', secrets: [STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, CLIENT_URL] }, app);
 exports.stripeWebhook = onRequest({ region: 'us-central1', secrets: [STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET], cors: true }, stripeWebhookApp);
-exports.printifyWebhookListener = onRequest({ region: 'us-central1' }, printifyWebhookApp);
+exports.printifyWebhookListener = onRequest({
+  region: 'us-central1',
+  secrets: [PRINTIFY_API_KEY, PRINTIFY_SHOP_ID, PRINTIFY_WEBHOOK_SECRET]
+}, printifyWebhookApp);
