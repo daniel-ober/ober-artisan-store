@@ -51,11 +51,7 @@ app.post('/createCheckoutSession', async (req, res) => {
 
     const guestToken = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
     const lineItems = products.map(p => ({
-      price_data: {
-        currency: 'usd',
-        product_data: { name: p.name, metadata: { productId: p.id } },
-        unit_amount: Math.round(p.price * 100),
-      },
+      price: p.stripePriceId,
       quantity: p.quantity || 1,
     }));
 
@@ -113,7 +109,7 @@ stripeWebhookApp.post('/', async (req, res) => {
   }
 });
 
-// 🔍 Printify Webhook Listener
+// Printify Webhook Listener
 const printifyWebhookApp = express();
 printifyWebhookApp.use(express.raw({ type: '*/*' }));
 
@@ -183,6 +179,7 @@ const handlePrintifyProductPublished = async (productId) => {
   try {
     const shopId = PRINTIFY_SHOP_ID.value();
     const apiKey = PRINTIFY_API_KEY.value();
+    const stripe = stripeLib(STRIPE_SECRET_KEY.value());
 
     console.log(`🔍 Fetching product from Printify API for ID: ${productId}`);
     const response = await axios.get(
@@ -194,31 +191,65 @@ const handlePrintifyProductPublished = async (productId) => {
       }
     );
 
-    console.log(`📡 Printify API response status: ${response.status}`);
     const product = response.data;
-
     if (!product || !product.id) {
       console.error('❌ No product data returned from Printify');
       return;
     }
 
+    const title = product.title;
+    const description = product.description || '';
+    const imageUrl = product.images?.[0]?.src || '';
+
+    // Create Stripe Product
+    const stripeProduct = await stripe.products.create({
+      name: title,
+      description,
+      images: imageUrl ? [imageUrl] : [],
+      metadata: {
+        printifyProductId: product.id
+      }
+    });
+
+    // Create Stripe Prices for each enabled variant
+    const stripePriceIds = {};
+    for (const variant of product.variants) {
+      if (!variant.is_enabled) continue;
+
+      const price = await stripe.prices.create({
+        unit_amount: Math.round(variant.price),
+        currency: 'usd',
+        product: stripeProduct.id,
+        metadata: {
+          variantId: variant.id.toString(),
+          title: variant.title,
+          sku: variant.sku
+        }
+      });
+
+      stripePriceIds[variant.id] = {
+        priceId: price.id,
+        unitAmount: price.unit_amount
+      };
+    }
+
     const payload = {
       id: product.id,
-      title: product.title,
-      description: product.description,
+      title,
+      description,
       images: product.images,
       tags: product.tags,
       variants: product.variants,
       options: product.options,
       visible: product.visible,
-      syncedAt: admin.firestore.FieldValue.serverTimestamp()
+      syncedAt: admin.firestore.FieldValue.serverTimestamp(),
+      stripeProductId: stripeProduct.id,
+      stripePriceIds
     };
 
-    console.log('📦 Product payload to be saved:', JSON.stringify(payload, null, 2));
-
+    console.log('📦 Saving merch product to Firestore:', JSON.stringify(payload, null, 2));
     await db.collection('merchProducts').doc(productId).set(payload);
-    console.log(`✅ Product ${productId} synced to Firestore`);
-
+    console.log(`✅ Product ${productId} synced to Firestore and Stripe`);
   } catch (error) {
     console.error('❌ Failed to sync Printify product:', error.message);
     console.error('🛠 Error detail:', error.response?.data || error.stack || error);
@@ -226,9 +257,23 @@ const handlePrintifyProductPublished = async (productId) => {
 };
 
 // Final exports
-exports.api = onRequest({ region: 'us-central1', secrets: [STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, CLIENT_URL] }, app);
-exports.stripeWebhook = onRequest({ region: 'us-central1', secrets: [STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET], cors: true }, stripeWebhookApp);
+exports.api = onRequest({
+  region: 'us-central1',
+  secrets: [STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, CLIENT_URL]
+}, app);
+
+exports.stripeWebhook = onRequest({
+  region: 'us-central1',
+  secrets: [STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET],
+  cors: true
+}, stripeWebhookApp);
+
 exports.printifyWebhookListener = onRequest({
   region: 'us-central1',
-  secrets: [PRINTIFY_API_KEY, PRINTIFY_SHOP_ID, PRINTIFY_WEBHOOK_SECRET]
+  secrets: [
+    PRINTIFY_API_KEY,
+    PRINTIFY_SHOP_ID,
+    PRINTIFY_WEBHOOK_SECRET,
+    STRIPE_SECRET_KEY
+  ]
 }, printifyWebhookApp);
