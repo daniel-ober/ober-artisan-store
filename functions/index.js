@@ -1,5 +1,7 @@
+// functions/index.js
 const { onRequest } = require('firebase-functions/v2/https');
 const { defineSecret } = require('firebase-functions/params');
+const { onSchedule } = require('firebase-functions/v2/scheduler');
 const admin = require('firebase-admin');
 const express = require('express');
 const stripeLib = require('stripe');
@@ -16,7 +18,6 @@ const PRINTIFY_WEBHOOK_SECRET = defineSecret('PRINTIFY_WEBHOOK_SECRET');
 admin.initializeApp();
 const db = admin.firestore();
 
-// API App (Stripe)
 const app = express();
 app.use(express.json());
 
@@ -88,7 +89,6 @@ app.get('/orders/by-session/:sessionId', async (req, res) => {
   }
 });
 
-// Stripe Webhook
 const stripeWebhookApp = express();
 stripeWebhookApp.use(express.raw({ type: 'application/json' }));
 
@@ -109,7 +109,6 @@ stripeWebhookApp.post('/', async (req, res) => {
   }
 });
 
-// Printify Webhook Listener
 const printifyWebhookApp = express();
 printifyWebhookApp.use(express.raw({ type: '*/*' }));
 
@@ -118,19 +117,12 @@ printifyWebhookApp.post('/', async (req, res) => {
   const signatureHeader = req.headers['x-pfy-signature'];
   const secret = PRINTIFY_WEBHOOK_SECRET.value();
 
-  console.log('--- Printify Webhook Incoming ---');
-  console.log('🟨 RAW BODY:', raw);
-  console.log('🟥 Signature Header:', signatureHeader);
-  console.log('🟩 HEADERS:', JSON.stringify(req.headers, null, 2));
-
   if (!signatureHeader && (!raw || raw.trim() === '' || raw.trim() === '{}')) {
-    console.log('✅ Printify validation ping received — responding with secret');
     res.setHeader('Content-Type', 'text/plain');
     return res.status(200).send(secret);
   }
 
   if (!signatureHeader || !signatureHeader.startsWith('sha256=')) {
-    console.error('❌ Missing or malformed signature');
     return res.status(400).send('Missing or malformed signature');
   }
 
@@ -146,30 +138,21 @@ printifyWebhookApp.post('/', async (req, res) => {
   );
 
   if (!isValid) {
-    console.error('❌ Signature mismatch');
     return res.status(401).send('Invalid signature');
   }
-
-  console.log('✅ Signature verified');
 
   let event;
   try {
     event = JSON.parse(raw);
   } catch (e) {
-    console.error('❌ Failed to parse body as JSON:', raw);
     return res.status(400).send('Invalid JSON');
   }
 
   if (event.topic === 'product.publish' || event.topic === 'product:publish:started') {
     const productId = event.resource?.id || event.data?.id;
-    console.log('📌 Handling Printify product publish for ID:', productId);
     if (productId) {
       await handlePrintifyProductPublished(productId);
-    } else {
-      console.warn('⚠️ No product ID found in event:', JSON.stringify(event));
     }
-  } else {
-    console.log('📭 Unhandled Printify webhook topic:', event.topic);
   }
 
   res.status(200).send('Webhook received');
@@ -181,41 +164,43 @@ const handlePrintifyProductPublished = async (productId) => {
     const apiKey = PRINTIFY_API_KEY.value();
     const stripe = stripeLib(STRIPE_SECRET_KEY.value());
 
-    console.log(`🔍 Fetching product from Printify API for ID: ${productId}`);
-    const response = await axios.get(
-      `https://api.printify.com/v1/shops/${shopId}/products/${productId}.json`,
-      {
-        headers: {
-          Authorization: `Bearer ${apiKey}`
-        }
-      }
-    );
-
-    const product = response.data;
-    if (!product || !product.id) {
-      console.error('❌ No product data returned from Printify');
-      return;
-    }
-
-    const title = product.title;
-    const description = product.description || '';
-    const imageUrl = product.images?.[0]?.src || '';
-
-    // Create Stripe Product
-    const stripeProduct = await stripe.products.create({
-      name: title,
-      description,
-      images: imageUrl ? [imageUrl] : [],
-      metadata: {
-        printifyProductId: product.id
-      }
+    const response = await axios.get(`https://api.printify.com/v1/shops/${shopId}/products/${productId}.json`, {
+      headers: { Authorization: `Bearer ${apiKey}` }
     });
 
-    // Create Stripe Prices for each enabled variant
-    const stripePriceIds = {};
-    for (const variant of product.variants) {
-      if (!variant.is_enabled) continue;
+    const product = response.data;
+    if (!product || !product.id) return;
 
+    const variantMetaRes = await axios.get(
+      `https://api.printify.com/v1/catalog/blueprints/${product.blueprint_id}/print_providers/${product.print_provider_id}/variants.json`,
+      { headers: { Authorization: `Bearer ${apiKey}` } }
+    );
+
+    const variantMeta = variantMetaRes.data;
+    const enrichedVariants = product.variants.map((variant) => {
+      const matchingMeta = Array.isArray(variantMeta)
+        ? variantMeta.find((meta) => meta.id === variant.id)
+        : null;
+      return {
+        ...variant,
+        ...(matchingMeta?.options?.reduce((acc, opt) => {
+          acc[opt.name.toLowerCase()] = opt.value;
+          return acc;
+        }, {}) || {})
+      };
+    });
+
+    const filteredVariants = enrichedVariants.filter(v => v.is_enabled);
+
+    const stripeProduct = await stripe.products.create({
+      name: product.title,
+      description: product.description || '',
+      images: product.images?.[0]?.src ? [product.images[0].src] : [],
+      metadata: { printifyProductId: product.id }
+    });
+
+    const stripePriceIds = {};
+    for (const variant of filteredVariants) {
       const price = await stripe.prices.create({
         unit_amount: Math.round(variant.price),
         currency: 'usd',
@@ -235,28 +220,62 @@ const handlePrintifyProductPublished = async (productId) => {
 
     const payload = {
       id: product.id,
-      title,
-      description,
+      title: product.title,
+      description: product.description || '',
       images: product.images,
       tags: product.tags,
-      variants: product.variants,
+      variants: filteredVariants,
       options: product.options,
       visible: product.visible,
       syncedAt: admin.firestore.FieldValue.serverTimestamp(),
       stripeProductId: stripeProduct.id,
-      stripePriceIds
+      stripePriceIds,
+      status: 'inactive'
     };
 
-    console.log('📦 Saving merch product to Firestore:', JSON.stringify(payload, null, 2));
     await db.collection('merchProducts').doc(productId).set(payload);
-    console.log(`✅ Product ${productId} synced to Firestore and Stripe`);
   } catch (error) {
     console.error('❌ Failed to sync Printify product:', error.message);
     console.error('🛠 Error detail:', error.response?.data || error.stack || error);
   }
 };
 
-// Final exports
+exports.refreshPrintifyStock = onSchedule({
+  schedule: '0 * * * *',
+  timeZone: 'America/Chicago',
+  secrets: [PRINTIFY_API_KEY, PRINTIFY_SHOP_ID]
+}, async () => {
+  const shopId = PRINTIFY_SHOP_ID.value();
+  const apiKey = PRINTIFY_API_KEY.value();
+
+  const merchSnapshot = await db.collection('merchProducts').get();
+
+  for (const doc of merchSnapshot.docs) {
+    const productId = doc.id;
+    try {
+      const response = await axios.get(`https://api.printify.com/v1/shops/${shopId}/products/${productId}.json`, {
+        headers: { Authorization: `Bearer ${apiKey}` }
+      });
+
+      const printifyProduct = response.data;
+      const variants = printifyProduct.variants
+        .filter(v => v.is_enabled)
+        .map((v) => ({
+          id: v.id,
+          is_enabled: v.is_enabled,
+          is_available: v.is_available,
+        }));
+
+      await doc.ref.update({
+        variants,
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+      });
+    } catch (err) {
+      console.error(`❌ Failed to update ${productId}:`, err.message);
+    }
+  }
+});
+
 exports.api = onRequest({
   region: 'us-central1',
   secrets: [STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, CLIENT_URL]
@@ -270,10 +289,5 @@ exports.stripeWebhook = onRequest({
 
 exports.printifyWebhookListener = onRequest({
   region: 'us-central1',
-  secrets: [
-    PRINTIFY_API_KEY,
-    PRINTIFY_SHOP_ID,
-    PRINTIFY_WEBHOOK_SECRET,
-    STRIPE_SECRET_KEY
-  ]
+  secrets: [PRINTIFY_API_KEY, PRINTIFY_SHOP_ID, PRINTIFY_WEBHOOK_SECRET, STRIPE_SECRET_KEY]
 }, printifyWebhookApp);

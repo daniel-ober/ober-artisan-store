@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { db } from '../firebaseConfig';
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { createStripeProduct } from '../services/stripeService';
+// import { createStripeProduct } from '../services/stripeService';
 import './AddProductModal.css';
 import ArtisanSpecsForm from './ArtisanSpecsForm';
 import LoadingSpinner from './LoadingSpinner';

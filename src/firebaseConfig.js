@@ -1,3 +1,4 @@
+// src/firebaseConfig.js
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 import { getAuth, signOut as firebaseSignOut } from 'firebase/auth';
@@ -15,11 +16,6 @@ import {
 } from 'firebase/firestore';
 import { getStorage, ref, listAll, getDownloadURL } from 'firebase/storage';
 
-// ✅ Log environment details ONLY in development mode
-if (process.env.NODE_ENV === 'development') {
-}
-
-// Firebase configuration
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
@@ -30,28 +26,13 @@ const firebaseConfig = {
   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 };
 
-// Validate Firebase configuration
-if (!firebaseConfig.projectId) {
-  console.error("🚨 ERROR: Firebase 'projectId' is missing! Check your environment variables.");
-  throw new Error('Firebase configuration is missing the "projectId" value.');
-}
-
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = firebaseConfig.measurementId ? getAnalytics(app) : null;
 
-// ✅ Log Firebase initialization ONLY in development mode
-if (process.env.NODE_ENV === 'development') {
-  // console.log("✅ Firebase Initialized with Project ID:", firebaseConfig.projectId);
-}
-
-// Firestore, Auth, Storage exports
 export const db = getFirestore(app);
 export const auth = getAuth(app);
 export const storage = getStorage(app);
 export const signOut = firebaseSignOut;
-
-// 🚀 Utility Functions
 
 export const fetchGalleryImages = async () => {
   try {
@@ -128,5 +109,4 @@ export const clearCart = async (userId) => {
   }
 };
 
-// ✅ Export Firebase app instance
 export { app };
