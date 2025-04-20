@@ -70,7 +70,7 @@
   "build": "react-scripts build",
   "start:dev": "env-cmd -f .env.dev react-scripts start",
   "start:stg": "env-cmd -f .env.stg react-scripts start",
-  "start:prod": "env-cmd -f .env.prod react-scripts start",
+  "start:prod": "env-cmd -f .env.production react-scripts start",
   "build:dev": "env-cmd -f .env.dev react-scripts build",
   "build:stg": "env-cmd -f .env.stg react-scripts build",
   "build:prod": "env-cmd -f .env.prod react-scripts build",

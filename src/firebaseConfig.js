@@ -1,6 +1,6 @@
 // src/firebaseConfig.js
 import { initializeApp } from 'firebase/app';
-import { getAnalytics } from 'firebase/analytics';
+// ❌ Removed: import { getAnalytics } from 'firebase/analytics';
 import { getAuth, signOut as firebaseSignOut } from 'firebase/auth';
 import {
   getFirestore,
@@ -27,7 +27,9 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const analytics = firebaseConfig.measurementId ? getAnalytics(app) : null;
+
+// ❌ Removed analytics initialization to eliminate "installations" dependency
+// const analytics = firebaseConfig.measurementId ? getAnalytics(app) : null;
 
 export const db = getFirestore(app);
 export const auth = getAuth(app);

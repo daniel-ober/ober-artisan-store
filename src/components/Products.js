@@ -13,22 +13,26 @@ const Products = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        // console.log("📥 Fetching active products...");
+        const collections = ['products', 'merchProducts'];
+        let allProducts = [];
 
-        // Firestore query: Only fetch products where status is "active"
-        const productsRef = collection(db, "products");
-        const activeProductsQuery = query(productsRef, where("status", "==", "active"));
-        const querySnapshot = await getDocs(activeProductsQuery);
+        for (const name of collections) {
+          const ref = collection(db, name);
+          const q = query(ref, where("status", "==", "active"));
+          const snapshot = await getDocs(q);
 
-        let productsList = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
+          const items = snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+            collection: name,
+          }));
 
-        // Sort products by displayOrder (defaulting to 0 if not present)
-        productsList = productsList.sort((a, b) => (a.displayOrder || 0) - (b.displayOrder || 0));
+          allProducts = allProducts.concat(items);
+        }
 
-        setProducts(productsList);
+        // Sort products by displayOrder (if present)
+        allProducts.sort((a, b) => (a.displayOrder || 0) - (b.displayOrder || 0));
+        setProducts(allProducts);
       } catch (error) {
         console.error("❌ Error fetching products:", error);
       } finally {
@@ -54,7 +58,7 @@ const Products = () => {
 
     try {
       const batchUpdates = updatedProducts.map((item) => {
-        const productRef = doc(db, "products", item.id);
+        const productRef = doc(db, item.collection || "products", item.id);
         return updateDoc(productRef, { displayOrder: item.displayOrder });
       });
 
