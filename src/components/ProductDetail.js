@@ -14,12 +14,10 @@ const ProductDetail = () => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const { addToCart, updateQuantity, removeFromCart, cart } = useCart();
+  const { addToCart, removeFromCart, cart } = useCart();
   const [inCart, setInCart] = useState(null);
   const [mainImage, setMainImage] = useState('');
-  const [quantity, setQuantity] = useState(1);
-  const [selectedColor, setSelectedColor] = useState('');
-  const [selectedSize, setSelectedSize] = useState('');
+  const [selectedOptions, setSelectedOptions] = useState({});
   const [selectedVariant, setSelectedVariant] = useState(null);
   const thumbnailContainerRef = useRef(null);
 
@@ -27,16 +25,55 @@ const ProductDetail = () => {
     const fetchProductData = async () => {
       try {
         const productData = await fetchProductById(productId);
-        if (productData) {
-          setProduct(productData);
-          setMainImage(
-            productData.images?.[0] || '/fallback-images/images-coming-soon-regular.png'
-          );
+        console.log('🧾 Fetched product:', productData);
+
+        if (!productData) throw new Error('Product not found');
+
+        // Check if this is a merch product (with variants)
+        const isMerch = !!productData.variants && Array.isArray(productData.variants);
+
+        if (isMerch) {
+          if (!productData.options) throw new Error('Product is missing required fields.');
+
+          const enabledVariants = productData.variants.filter(v => v.is_enabled);
+
+          const enrichedVariants = enabledVariants.map(v => {
+            const normalizedOptions = {};
+            productData.options.forEach(opt => {
+              const match = opt.values.find(val => v.options.includes(val.id));
+              if (match) normalizedOptions[opt.name] = match.title;
+            });
+            return { ...v, normalizedOptions };
+          });
+
+          const enabledOptionIds = new Set(enabledVariants.flatMap(v => v.options));
+          const filteredOptions = productData.options.map(opt => ({
+            ...opt,
+            values: opt.values.filter(v => enabledOptionIds.has(v.id))
+          }));
+
+          setProduct({ ...productData, variants: enrichedVariants, options: filteredOptions });
+
+          const defaultVariant = enrichedVariants.find(v => v.is_available);
+          if (defaultVariant) {
+            const initialOptions = {};
+            productData.options.forEach(opt => {
+              const selectedVal = defaultVariant.normalizedOptions?.[opt.name];
+              if (selectedVal) initialOptions[opt.title] = selectedVal;
+            });
+            setSelectedOptions(initialOptions);
+
+            if (defaultVariant.images?.length) {
+              setMainImage(defaultVariant.images[0]);
+            }
+          }
         } else {
-          setError('Product not found.');
+          // Non-merch product (artisan or misc)
+          setProduct(productData);
+          if (productData.images?.length) setMainImage(productData.images[0]);
         }
       } catch (fetchError) {
-        console.error('Error fetching product:', fetchError.message);
+        console.error('❌ Error fetching product:', fetchError);
         setError('Unable to fetch product details. Please try again later.');
       } finally {
         setLoading(false);
@@ -48,28 +85,74 @@ const ProductDetail = () => {
 
   useEffect(() => {
     if (product) {
-      const cartItem = cart.find((item) => item.id === product.id);
-      if (cartItem) {
-        setInCart(cartItem);
-        setQuantity(Math.min(cartItem.quantity, product.currentQuantity || 1));
-      } else {
-        setInCart(null);
-        setQuantity(1);
-      }
+      const cartItem = cart.find(item => item.id === product.id);
+      setInCart(cartItem || null);
     }
   }, [cart, product]);
 
   useEffect(() => {
-    if (product?.variants) {
-      const variant = product.variants.find(
-        (v) =>
-          v.color === selectedColor &&
-          v.size === selectedSize &&
-          v.isAvailable
-      );
-      setSelectedVariant(variant || null);
+    if (!product?.variants || !product?.stripePriceIds || !product?.options?.length) return;
+
+    const match = product.variants.find(v =>
+      v.is_available &&
+      product.options.every(opt => {
+        const selected = selectedOptions[opt.title];
+        return selected && v.normalizedOptions?.[opt.name] === selected;
+      })
+    );
+
+    if (match && product.stripePriceIds[match.id]) {
+      const stripeData = product.stripePriceIds[match.id];
+      setSelectedVariant({
+        ...match,
+        stripePriceId: stripeData.priceId,
+        price: stripeData.unitAmount / 100,
+      });
+      if (match.images?.length) setMainImage(match.images[0]);
+    } else {
+      setSelectedVariant(null);
     }
-  }, [selectedColor, selectedSize, product]);
+  }, [selectedOptions, product]);
+
+  const handleOptionSelect = (optionTitle, valueTitle) => {
+    setSelectedOptions(prev => ({ ...prev, [optionTitle]: valueTitle }));
+  };
+
+  const isOptionValueAvailable = (optionTitle, valueTitle) => {
+    if (!optionTitle || !valueTitle || !product?.variants?.length) return false;
+    const optionMeta = product.options.find(o => o.title === optionTitle);
+    if (!optionMeta) return false;
+    const key = optionMeta.name;
+    const val = valueTitle.toLowerCase().trim();
+    const match = product.variants.find(v => {
+      const variantVal = v.normalizedOptions?.[key]?.toLowerCase().trim();
+      return variantVal === val && v.is_enabled && v.is_available;
+    });
+    return !!match;
+  };
+
+  const addToCartWithOptions = () => {
+    if (!selectedVariant) return;
+    addToCart(
+      {
+        id: product.id,
+        name: product.title || product.name,
+        description: product.description || '',
+        images: selectedVariant.images || product.images,
+        price: selectedVariant.price,
+        stripePriceId: selectedVariant.stripePriceId,
+        isPreOrder: false,
+        deliveryTime: product.deliveryTime || '2–5 business days',
+        currentQuantity: 1,
+        maxQuantity: 1,
+      },
+      {
+        quantity: 1,
+        ...selectedOptions,
+        variantId: selectedVariant.id,
+      }
+    );
+  };
 
   if (loading) return <p>Loading product details...</p>;
   if (error) {
@@ -83,63 +166,27 @@ const ProductDetail = () => {
 
   if (!product) return <div>Product not found</div>;
 
-  // For artisan products
   if (productId === 'heritage') return <HeritageProductDetail product={product} />;
   if (productId === 'feuzon') return <FeuzonProductDetail product={product} />;
   if (productId === 'soundlegend') return <SoundlegendProductDetail product={product} />;
 
-  const isSoldOut = product.currentQuantity === 0;
-  const maxQuantity = product.currentQuantity || 1;
-
-  const availableColors = [
-    ...new Set(product.variants.map((v) => v.color)),
-  ];
-  const availableSizes = [
-    ...new Set(product.variants.map((v) => v.size)),
-  ];
-
-  const isOptionAvailable = (color, size) => {
-    return product.variants.some(
-      (v) => v.color === color && v.size === size && v.isAvailable
-    );
-  };
-
-  const addToCartWithOptions = () => {
-    if (!selectedVariant) return;
-
-    addToCart({
-      ...product,
-      price: selectedVariant.price,
-      stripePriceId: selectedVariant.stripePriceId,
-    }, {
-      color: selectedColor,
-      size: selectedSize,
-      quantity,
-      variantId: selectedVariant.variantId,
-    });
-  };
-
   return (
     <div className="product-detail-container">
-      <h1 className="product-title">{product?.name || 'Unnamed Product'}</h1>
+      <h1 className="product-title">{product?.title || product?.name || 'Unnamed Product'}</h1>
 
       <div className="product-content">
         <div className="product-gallery-info">
           <div className="product-image-gallery">
             <img
               src={mainImage}
-              alt={product?.name || 'Product'}
+              alt={product?.title || product?.name}
               className="product-main-image"
             />
             <div className="thumbnail-scroll-container">
               <div className="product-thumbnail-gallery" ref={thumbnailContainerRef}>
-                {product?.images?.map((image, index) => (
-                  <button
-                    key={index}
-                    className="product-thumbnail"
-                    onClick={() => setMainImage(image)}
-                  >
-                    <img src={image} alt={`Thumbnail ${index + 1}`} />
+                {(selectedVariant?.images || product?.images || []).map((src, index) => (
+                  <button key={`thumb-${index}`} className="product-thumbnail" onClick={() => setMainImage(src)}>
+                    <img src={src} alt={`Thumbnail ${index + 1}`} />
                   </button>
                 ))}
               </div>
@@ -149,101 +196,52 @@ const ProductDetail = () => {
           <div className="product-info">
             <h2>Product Specifications</h2>
             <p className="product-price">
-              {selectedVariant ? `$${selectedVariant.price.toFixed(2)}` : `$${product?.price}`}
+              {selectedVariant ? `$${selectedVariant.price.toFixed(2)}` : product.price ? `$${product.price.toFixed(2)}` : 'Select options'}
             </p>
 
-            {/* Color Options */}
-            <div className="product-options">
-              <label>Color</label>
-              <div className="option-grid">
-                {availableColors.map((color) => (
-                  <button
-                    key={color}
-                    onClick={() => setSelectedColor(color)}
-                    disabled={!isOptionAvailable(color, selectedSize)}
-                    className={`option-button ${
-                      selectedColor === color ? 'selected' : ''
-                    } ${!isOptionAvailable(color, selectedSize) ? 'disabled' : ''}`}
-                  >
-                    {color}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Size Options */}
-            <div className="product-options">
-              <label>Size</label>
-              <div className="option-grid">
-                {availableSizes.map((size) => (
-                  <button
-                    key={size}
-                    onClick={() => setSelectedSize(size)}
-                    disabled={!isOptionAvailable(selectedColor, size)}
-                    className={`option-button ${
-                      selectedSize === size ? 'selected' : ''
-                    } ${!isOptionAvailable(selectedColor, size) ? 'disabled' : ''}`}
-                  >
-                    {size}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Action Buttons */}
-            {isSoldOut ? (
-              <button className="prod-detail-sold-out-button" disabled>
-                Sold Out - Notify Me When Available
-              </button>
-            ) : inCart ? (
-              <>
-                <div className="quantity-control">
-                  <button
-                    className="quantity-btn"
-                    onClick={() =>
-                      updateQuantity(product.id, Math.max(quantity - 1, 1))
-                    }
-                    disabled={quantity <= 1}
-                  >
-                    -
-                  </button>
-                  <span className="quantity-value">{quantity}</span>
-                  <button
-                    className="quantity-btn"
-                    onClick={() =>
-                      updateQuantity(
-                        product.id,
-                        Math.min(quantity + 1, maxQuantity)
-                      )
-                    }
-                    disabled={quantity >= maxQuantity}
-                  >
-                    +
-                  </button>
+            {product.options?.map((option, optionIdx) => (
+              <div key={`option-${option.id || option.title || optionIdx}`} className="product-options">
+                <label>{option.title}</label>
+                <div className="option-grid">
+                  {option.values.map((value, idx) => {
+                    const isSelected = selectedOptions[option.title] === value.title;
+                    const isAvailable = isOptionValueAvailable(option.title, value.title);
+                    return (
+                      <button
+                        key={`option-${option.id}-value-${value.id || value.title}-${idx}`}
+                        onClick={() => handleOptionSelect(option.title, value.title)}
+                        disabled={!isAvailable}
+                        className={`option-button${isSelected ? ' selected' : ''}${!isAvailable ? ' disabled' : ''}`}
+                      >
+                        {value.title}
+                      </button>
+                    );
+                  })}
                 </div>
+              </div>
+            ))}
 
+            <div className="product-action">
+              {inCart ? (
+                <div className="artisan-cart-hover-container">
+                  <button className="artisan-in-cart-button" disabled>
+                    ✔ In Cart
+                  </button>
+                  <div className="artisan-cart-hover-options">
+                    <span onClick={() => navigate('/cart')}>View Cart</span>
+                    <span onClick={() => removeFromCart(product.id)}>Remove</span>
+                  </div>
+                </div>
+              ) : (
                 <button
-                  className="prod-detail-view-cart-button"
-                  onClick={() => navigate('/cart')}
+                  className="artisan-add-to-cart-button"
+                  onClick={addToCartWithOptions}
+                  disabled={!!product.variants && !selectedVariant}
                 >
-                  View in Cart
+                  Add to Cart
                 </button>
-                <button
-                  className="prod-detail-remove-cart-button"
-                  onClick={() => removeFromCart(product.id)}
-                >
-                  Remove from Cart
-                </button>
-              </>
-            ) : (
-              <button
-                className="prod-detail-add-to-cart-button"
-                onClick={addToCartWithOptions}
-                disabled={!selectedVariant}
-              >
-                Add to Cart
-              </button>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </div>

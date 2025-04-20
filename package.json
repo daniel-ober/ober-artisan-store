@@ -65,20 +65,21 @@
     "web-vitals": "^2.1.4",
     "webpack": "^5.94.0"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "start:dev": "env-cmd -f .env.dev react-scripts start",
-    "start:stg": "env-cmd -f .env.stg react-scripts start",
-    "start:prod": "env-cmd -f .env.prod react-scripts start",
-    "build:dev": "env-cmd -f .env.dev react-scripts build",
-    "build:stg": "env-cmd -f .env.stg react-scripts build",
-    "build:prod": "env-cmd -f .env.prod react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
-    "prettier": "prettier --check 'src/**/*.{js,jsx,ts,tsx}'"
-  },
+"scripts": {
+  "start": "react-scripts start",
+  "build": "react-scripts build",
+  "start:dev": "env-cmd -f .env.dev react-scripts start",
+  "start:stg": "env-cmd -f .env.stg react-scripts start",
+  "start:prod": "env-cmd -f .env.prod react-scripts start",
+  "build:dev": "env-cmd -f .env.dev react-scripts build",
+  "build:stg": "env-cmd -f .env.stg react-scripts build",
+  "build:prod": "env-cmd -f .env.prod react-scripts build",
+  "build:prod:alt": "dotenv -e .env.prod -- npm run build",
+  "test": "react-scripts test",
+  "eject": "react-scripts eject",
+  "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
+  "prettier": "prettier --check 'src/**/*.{js,jsx,ts,tsx}'"
+},
   "browserslist": {
     "production": [
       ">0.2%",
