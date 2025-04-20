@@ -1,15 +1,26 @@
+// src/components/ManageProducts.js
 import React, { useState, useEffect } from 'react';
 import {
   fetchProducts,
   deleteProduct,
   updateProductStatus,
   updateProductInventory,
-} from '../services/productService'; // Assuming inventory update logic is in productService
+} from '../services/productService';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../firebaseConfig';
 import './ManageProducts.css';
 import AddProductModal from './AddProductModal';
 import EditProductModal from './EditProductModal';
 
 const FALLBACK_IMAGE_URL = 'https://i.imgur.com/eoKsILV.png';
+
+const getPreviewImage = (product) => {
+  const match =
+    product.images?.find(
+      (img) => img.is_default && img.position === 'front'
+    ) || product.images?.[0];
+  return match?.src || FALLBACK_IMAGE_URL;
+};
 
 const ManageProducts = () => {
   const [products, setProducts] = useState([]);
@@ -22,9 +33,19 @@ const ManageProducts = () => {
     const fetchAllProducts = async () => {
       setLoading(true);
       try {
-        const fetchedProducts = await fetchProducts();
-        setProducts(fetchedProducts);
+        const collections = ['products', 'merchProducts'];
+        const allDocs = [];
+
+        for (const name of collections) {
+          const snapshot = await getDocs(collection(db, name));
+          snapshot.forEach((doc) => {
+            allDocs.push({ id: doc.id, ...doc.data(), _source: name });
+          });
+        }
+
+        setProducts(allDocs);
       } catch (err) {
+        console.error(err);
         setError('Failed to fetch products. Please try again later.');
       } finally {
         setLoading(false);
@@ -124,81 +145,90 @@ const ManageProducts = () => {
             </tr>
           </thead>
           <tbody>
-            {products.map((product) => (
-              <tr key={product.id}>
-                <td>
-                  <button
-                    className="thumbnail-btn"
-                    onClick={() => openProductDetail(product.id)}
-                    aria-label={`View details for ${product.name}`}
-                  >
-                    <img
-                      src={
-                        product.images && product.images.length > 0
-                          ? product.images[0]
-                          : FALLBACK_IMAGE_URL
-                      }
-                      alt={product.name || 'No Image Available'}
-                      className="thumbnail"
-                    />
-                  </button>
-                </td>
-                <td>{product.name}</td>
-                <td>
-                  <select
-                    value={product.status}
-                    onChange={(e) =>
-                      handleStatusChange(product.id, e.target.value)
-                    }
-                  >
-                    <option value="active">Active</option>
-                    <option value="inactive">Inactive</option>
-                  </select>
-                </td>
-                <td>
-                  <select
-                    value={product.maxQuantity}
-                    onChange={(e) =>
-                      handleMaxInventoryChange(product.id, parseInt(e.target.value))
-                    }
-                  >
-                    {Array.from({ length: 21 }, (_, i) => (
-                      <option key={i} value={i}>
-                        {i}
-                      </option>
-                    ))}
-                  </select>
-                </td>
-                <td>
-                  <input
-                    type="number"
-                    value={product.currentQuantity}
-                    min="0"
-                    max={product.maxQuantity}
-                    onChange={(e) =>
-                      handleCurrentInventoryChange(
-                        product.id,
-                        parseInt(e.target.value) || 0
-                      )
-                    }
-                  />
-                </td>
-                <td>
-                  <button
-                    className="edit-btn"
-                    onClick={() => setEditProductId(product.id)}
-                  >
-                    Edit
-                  </button>
-                  <button
-                    className="delete-btn"
-                    onClick={() => handleDeleteProduct(product.id)}
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
+            {products.map((product) => {
+              const isMerch = product._source === 'merchProducts';
+              const title = product.title || product.name || 'Unnamed';
+              const imageUrl = getPreviewImage(product);
+
+              return (
+                <tr key={product.id}>
+                  <td>
+                    <button
+                      className="thumbnail-btn"
+                      onClick={() => openProductDetail(product.id)}
+                      aria-label={`View details for ${title}`}
+                    >
+                      <img
+                        src={imageUrl}
+                        alt={title}
+                        className="thumbnail"
+                      />
+                    </button>
+                  </td>
+                  <td>{title}</td>
+                  <td>
+                    <select
+                      value={product.status || 'active'}
+                      onChange={(e) => handleStatusChange(product.id, e.target.value)}
+                    >
+                      <option value="active">Active</option>
+                      <option value="inactive">Inactive</option>
+                    </select>
+                  </td>
+                  <td>
+                    {isMerch ? (
+                      <span>Managed by Printify</span>
+                    ) : (
+                      <select
+                        value={product.maxQuantity || 0}
+                        onChange={(e) =>
+                          handleMaxInventoryChange(product.id, parseInt(e.target.value))
+                        }
+                      >
+                        {Array.from({ length: 21 }, (_, i) => (
+                          <option key={i} value={i}>
+                            {i}
+                          </option>
+                        ))}
+                      </select>
+                    )}
+                  </td>
+                  <td>
+                    {isMerch ? (
+                      <span>Auto Synced</span>
+                    ) : (
+                      <input
+                        type="number"
+                        value={product.currentQuantity || 0}
+                        min="0"
+                        max={product.maxQuantity || 0}
+                        onChange={(e) =>
+                          handleCurrentInventoryChange(
+                            product.id,
+                            parseInt(e.target.value) || 0
+                          )
+                        }
+                      />
+                    )}
+                  </td>
+                  <td>
+                    <button
+                      className="edit-btn"
+                      onClick={() => setEditProductId(product.id)}
+                      disabled={isMerch}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="delete-btn"
+                      onClick={() => handleDeleteProduct(product.id)}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       )}

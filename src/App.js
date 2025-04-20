@@ -145,8 +145,7 @@ function App() {
         <Route path="/artisan-shop" element={isLinkEnabled('artisan-shop') ? <ArtisanShop /> : <NotFound />} />
         <Route path="/gallery" element={isLinkEnabled('gallery') ? <Gallery /> : <NotFound />} />
         <Route path="/custom-shop" element={isLinkEnabled('custom-shop') ? <CustomShop /> : <NotFound />} />
-        <Route path="/products" element={isLinkEnabled('products') ? <Products /> : <NotFound />} />
-        <Route path="/products/:productId" element={<ProductDetail />} />
+        <Route path="/products" element={isLinkEnabled('products') || isAdmin ? <Products /> : <NotFound />} />        <Route path="/products/:productId" element={<ProductDetail />} />
         <Route path="/pre-order" element={<PreOrderPage isAdmin={isAdmin} isDarkMode={isDarkMode} />} />
         <Route path="/account" element={<PrivateRoute element={<AccountPage />} />} />
         <Route path="/admin" element={<PrivateRoute element={<AdminDashboard />} adminOnly />} />

@@ -8,17 +8,26 @@ import {
   addDoc,
   updateDoc,
   deleteDoc,
-  runTransaction, // ✅ Firestore transaction for safe inventory updates
+  runTransaction,
 } from 'firebase/firestore';
 
 // **Fetch all products**
 export const fetchProducts = async () => {
-  const productsCollection = collection(db, 'products');
-  const productsSnapshot = await getDocs(productsCollection);
-  return productsSnapshot.docs.map((doc) => ({
-    id: doc.id,
-    ...doc.data(),
-  }));
+  const collectionsToFetch = ['products', 'merchProducts'];
+  let allProducts = [];
+
+  for (const collectionName of collectionsToFetch) {
+    const col = collection(db, collectionName);
+    const snapshot = await getDocs(col);
+    const products = snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data(),
+      collection: collectionName, // 🔍 add context to help admin screen
+    }));
+    allProducts = allProducts.concat(products);
+  }
+
+  return allProducts;
 };
 
 // **Fetch a single product by ID**
@@ -59,12 +68,25 @@ export const updateProduct = async (productId, updatedData) => {
 
 // **Update product status (Active/Inactive)**
 export const updateProductStatus = async (productId, newStatus) => {
-  if (!productId) {
-    throw new Error("❌ Product ID is required.");
-  }
+  if (!productId) throw new Error("❌ Product ID is required.");
 
-  const productRef = doc(db, 'products', productId);
-  await updateDoc(productRef, { status: newStatus });
+  const tryUpdate = async (collectionName) => {
+    const ref = doc(db, collectionName, productId);
+    const snap = await getDoc(ref);
+    if (snap.exists()) {
+      await updateDoc(ref, { status: newStatus });
+      return true;
+    }
+    return false;
+  };
+
+  const updatedInProducts = await tryUpdate("products");
+  if (updatedInProducts) return;
+
+  const updatedInMerch = await tryUpdate("merchProducts");
+  if (updatedInMerch) return;
+
+  throw new Error(`❌ Product with ID ${productId} not found in any collection.`);
 };
 
 // **Delete a product**
@@ -85,8 +107,6 @@ export const updateProductInventory = async (cartItems) => {
   }
 
   try {
-    // console.log("📦 Processing inventory update for cart items:", cartItems);
-
     await runTransaction(db, async (transaction) => {
       for (const item of cartItems) {
         if (!item.productId) {
@@ -94,7 +114,6 @@ export const updateProductInventory = async (cartItems) => {
           continue;
         }
 
-        // ✅ Get Firestore product reference
         const productRef = doc(db, "products", item.productId);
         const productDoc = await transaction.get(productRef);
 
@@ -104,30 +123,24 @@ export const updateProductInventory = async (cartItems) => {
         }
 
         const productData = productDoc.data();
-        // console.log(`🔍 Checking inventory for ${productData.name}: ${productData.currentQuantity} in stock`);
 
-        // **Prevent Overselling** (but don't stop the transaction)
         if (productData.currentQuantity < item.quantity) {
           console.warn(`⚠️ Not enough stock for ${productData.name}. Requested: ${item.quantity}, Available: ${productData.currentQuantity}`);
-          continue; // Skip updating this product, but continue others
+          continue;
         }
 
         const newQuantity = Math.max(0, productData.currentQuantity - item.quantity);
         const isAvailable = newQuantity > 0;
         const availabilityMessage = isAvailable ? "In Stock" : "Out of Stock";
 
-        // ✅ **Update the product's inventory**
         transaction.update(productRef, {
           currentQuantity: newQuantity,
           isAvailable,
           availabilityMessage,
         });
-
-        // console.log(`✅ Inventory updated for ${productData.name}: New Quantity = ${newQuantity}`);
       }
     });
 
-    // console.log("✅ Inventory successfully updated!");
     return { success: true, message: "Inventory updated successfully." };
   } catch (error) {
     console.error("❌ Error updating inventory:", error.message);
