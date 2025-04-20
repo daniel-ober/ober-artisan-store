@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { fetchProductById, updateProduct } from '../services/productService';
-import { createStripeProduct, createStripePrice, updateStripeProductWithPrices, fetchStripePrices } from '../services/stripeService';
+// import { createStripeProduct, createStripePrice, updateStripeProductWithPrices, fetchStripePrices } from '../services/stripeService';
 import './EditProductModal.css';
 
 const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
