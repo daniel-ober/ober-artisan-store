@@ -181,8 +181,15 @@ const handlePrintifyProductPublished = async (productId) => {
       const matchingMeta = Array.isArray(variantMeta)
         ? variantMeta.find((meta) => meta.id === variant.id)
         : null;
+    
+      // Find all images where variant_ids includes this variant.id
+      const variantImages = (product.images || []).filter((img) =>
+        Array.isArray(img.variant_ids) && img.variant_ids.includes(variant.id)
+      );
+    
       return {
         ...variant,
+        images: variantImages.map((img) => ({ src: img.src, position: img.position })),
         ...(matchingMeta?.options?.reduce((acc, opt) => {
           acc[opt.name.toLowerCase()] = opt.value;
           return acc;
@@ -191,6 +198,22 @@ const handlePrintifyProductPublished = async (productId) => {
     });
 
     const filteredVariants = enrichedVariants.filter(v => v.is_enabled);
+
+    const enrichedOptions = (product.options || []).map((opt) => {
+      const enrichedValues = opt.values.map((val) => {
+        const usedColors = new Set();
+        for (const variant of filteredVariants) {
+          if (variant.options?.includes(val.id) && variant.color) {
+            usedColors.add(variant.color);
+          }
+        }
+        return {
+          ...val,
+          colors: [...usedColors]
+        };
+      });
+      return { ...opt, values: enrichedValues };
+    });
 
     const stripeProduct = await stripe.products.create({
       name: product.title,
@@ -211,7 +234,6 @@ const handlePrintifyProductPublished = async (productId) => {
           sku: variant.sku
         }
       });
-
       stripePriceIds[variant.id] = {
         priceId: price.id,
         unitAmount: price.unit_amount
@@ -225,7 +247,7 @@ const handlePrintifyProductPublished = async (productId) => {
       images: product.images,
       tags: product.tags,
       variants: filteredVariants,
-      options: product.options,
+      options: enrichedOptions,
       visible: product.visible,
       syncedAt: admin.firestore.FieldValue.serverTimestamp(),
       stripeProductId: stripeProduct.id,
@@ -234,6 +256,7 @@ const handlePrintifyProductPublished = async (productId) => {
     };
 
     await db.collection('merchProducts').doc(productId).set(payload);
+    console.log(`✅ Created merchProduct: ${productId}`);
   } catch (error) {
     console.error('❌ Failed to sync Printify product:', error.message);
     console.error('🛠 Error detail:', error.response?.data || error.stack || error);
@@ -260,16 +283,43 @@ exports.refreshPrintifyStock = onSchedule({
       const printifyProduct = response.data;
       const variants = printifyProduct.variants
         .filter(v => v.is_enabled)
-        .map((v) => ({
-          id: v.id,
-          is_enabled: v.is_enabled,
-          is_available: v.is_available,
-        }));
+        .map((v) => {
+          const normalizedOptions = {};
+          if (Array.isArray(v.options)) {
+            for (const opt of productDoc.options || []) {
+              const valMatch = opt.values.find(val => v.options.includes(val.id));
+              if (valMatch) {
+                normalizedOptions[opt.title] = valMatch.title;
+              }
+            }
+          }
+          return {
+            id: v.id,
+            is_enabled: v.is_enabled,
+            is_available: v.is_available,
+            options: v.options,
+            normalizedOptions,
+          };
+        });
 
-      await doc.ref.update({
-        variants,
-        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-      });
+        const productDoc = doc.data();
+        const enrichedOptions = (productDoc.options || []).map((opt) => {
+          const enrichedValues = opt.values.map((val) => {
+            const matchingOriginal = opt.values.find(v => v.id === val.id);
+            const originalColors = matchingOriginal?.colors || [];
+            return {
+              ...val,
+              colors: Array.isArray(originalColors) ? originalColors : [],
+            };
+          });
+          return { ...opt, values: enrichedValues };
+        });
+        
+        await doc.ref.update({
+          variants,
+          options: enrichedOptions,
+          updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+        });
     } catch (err) {
       console.error(`❌ Failed to update ${productId}:`, err.message);
     }
@@ -291,3 +341,16 @@ exports.printifyWebhookListener = onRequest({
   region: 'us-central1',
   secrets: [PRINTIFY_API_KEY, PRINTIFY_SHOP_ID, PRINTIFY_WEBHOOK_SECRET, STRIPE_SECRET_KEY]
 }, printifyWebhookApp);
+
+exports.refreshPrintifyStockNow = onRequest({
+  region: 'us-central1',
+  secrets: [PRINTIFY_API_KEY, PRINTIFY_SHOP_ID]
+}, async (req, res) => {
+  try {
+    await exports.refreshPrintifyStock.run();
+    res.status(200).send('✅ Manual refreshPrintifyStock executed successfully.');
+  } catch (error) {
+    console.error('❌ Manual refresh failed:', error);
+    res.status(500).send('❌ Manual refresh failed.');
+  }
+});
