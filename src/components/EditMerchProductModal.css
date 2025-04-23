@@ -1,0 +1,83 @@
+.edit-merch-modal {
+    background-color: white;
+    padding: 24px;
+    max-width: 700px;
+    margin: 0 auto;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    font-family: inherit;
+  }
+  
+  .edit-merch-modal h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .image-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  
+  .image-card {
+    border: 2px solid transparent;
+    border-radius: 8px;
+    padding: 6px;
+    text-align: center;
+    width: 120px;
+    transition: border 0.2s ease;
+  }
+  
+  .image-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    object-fit: cover;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  }
+  
+  .image-card.active {
+    border-color: #1e398a;
+    background-color: #f0f4ff;
+  }
+  
+  .toggle-btn {
+    margin-top: 8px;
+    padding: 6px 10px;
+    font-size: 12px;
+    border-radius: 4px;
+    background-color: #ddd;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .toggle-btn.active {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 24px;
+  }
+  
+  .modal-footer button {
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+  }
+  
+  .modal-footer .save-btn {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .modal-footer .cancel-btn {
+    background-color: #ccc;
+  }

@@ -300,24 +300,21 @@ const ProductDetail = () => {
                 className="product-thumbnail-gallery"
                 ref={thumbnailContainerRef}
               >
-               {(() => {
+{(() => {
   const selectedColor = selectedOptions['Colors'];
 
-  // ✅ Find a variant with this color (regardless of size availability)
   const colorVariantWithImages = product.variants.find(
     (v) =>
       v.is_enabled &&
       v.normalizedOptions?.['Colors'] === selectedColor &&
-      Array.isArray(v.images) &&
-      v.images.some((img) => {
-        const url = typeof img === 'string' ? img : img?.src;
-        return url?.startsWith('http');
-      })
+      Array.isArray(v.images)
   );
 
   const validImages = (colorVariantWithImages?.images || []).filter((img) => {
     const url = typeof img === 'string' ? img : img?.src;
-    return url?.startsWith('http');
+    const displayFlag =
+      typeof img === 'object' ? img.displayInGallery !== false : true;
+    return url?.startsWith('http') && displayFlag;
   });
 
   return validImages.length > 0
