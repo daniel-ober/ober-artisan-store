@@ -36,6 +36,13 @@
   box-sizing: border-box;
 }
 
+.option-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
 /* ✅ Ensure Product Details Text is Black in Light Mode */
 body.light .product-info,
 body.light .artisan-specs,
