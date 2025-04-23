@@ -160,6 +160,7 @@ const ProductCard = ({ product }) => {
     });
   };
 
+  console.log("🧠 product.id type:", typeof product.id, "value:", product.id);
   return (
     <div className="product-card">
       <div
