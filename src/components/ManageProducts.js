@@ -121,7 +121,12 @@ const ManageProducts = () => {
   };
 
   const openProductDetail = (productId) => {
-    window.open(`/products/${productId}`, '_blank');
+    const id = typeof productId === 'string' ? productId : productId?.id || '';
+    if (id) {
+      window.open(`/products/${id}`, '_blank');
+    } else {
+      console.warn("Invalid productId passed to openProductDetail:", productId);
+    }
   };
 
   return (
