@@ -33,7 +33,10 @@ app.use((req, res, next) => {
   if (origin && allowedOrigins.includes(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin);
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader(
+      'Access-Control-Allow-Headers',
+      'Content-Type, Authorization'
+    );
     res.setHeader('Access-Control-Allow-Credentials', 'true');
   }
   if (req.method === 'OPTIONS') return res.status(204).end();
@@ -51,7 +54,7 @@ app.post('/createCheckoutSession', async (req, res) => {
     }
 
     const guestToken = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
-    const lineItems = products.map(p => ({
+    const lineItems = products.map((p) => ({
       price: p.stripePriceId,
       quantity: p.quantity || 1,
     }));
@@ -65,7 +68,7 @@ app.post('/createCheckoutSession', async (req, res) => {
       customer_email: customerEmail,
       shipping_address_collection: { allowed_countries: ['US', 'CA'] },
       allow_promotion_codes: true,
-      metadata: { userId: userId || 'guest', guestToken }
+      metadata: { userId: userId || 'guest', guestToken },
     });
 
     res.status(200).json({ url: session.url });
@@ -77,11 +80,13 @@ app.post('/createCheckoutSession', async (req, res) => {
 
 app.get('/orders/by-session/:sessionId', async (req, res) => {
   try {
-    const snapshot = await db.collection('orders')
+    const snapshot = await db
+      .collection('orders')
       .where('stripeSessionId', '==', req.params.sessionId)
       .limit(1)
       .get();
-    if (snapshot.empty) return res.status(404).json({ error: 'Order not found' });
+    if (snapshot.empty)
+      return res.status(404).json({ error: 'Order not found' });
     res.json(snapshot.docs[0].data());
   } catch (err) {
     console.error('Error fetching order:', err);
@@ -96,7 +101,11 @@ stripeWebhookApp.post('/', async (req, res) => {
   const stripe = stripeLib(STRIPE_SECRET_KEY.value());
   let event;
   try {
-    event = stripe.webhooks.constructEvent(req.rawBody, req.headers['stripe-signature'], STRIPE_WEBHOOK_SECRET.value());
+    event = stripe.webhooks.constructEvent(
+      req.rawBody,
+      req.headers['stripe-signature'],
+      STRIPE_WEBHOOK_SECRET.value()
+    );
   } catch (err) {
     console.error('Webhook verification failed:', err.message);
     return res.status(400).send(`Webhook Error: ${err.message}`);
@@ -148,7 +157,10 @@ printifyWebhookApp.post('/', async (req, res) => {
     return res.status(400).send('Invalid JSON');
   }
 
-  if (event.topic === 'product.publish' || event.topic === 'product:publish:started') {
+  if (
+    event.topic === 'product.publish' ||
+    event.topic === 'product:publish:started'
+  ) {
     const productId = event.resource?.id || event.data?.id;
     if (productId) {
       await handlePrintifyProductPublished(productId);
@@ -164,9 +176,12 @@ const handlePrintifyProductPublished = async (productId) => {
     const apiKey = PRINTIFY_API_KEY.value();
     const stripe = stripeLib(STRIPE_SECRET_KEY.value());
 
-    const response = await axios.get(`https://api.printify.com/v1/shops/${shopId}/products/${productId}.json`, {
-      headers: { Authorization: `Bearer ${apiKey}` }
-    });
+    const response = await axios.get(
+      `https://api.printify.com/v1/shops/${shopId}/products/${productId}.json`,
+      {
+        headers: { Authorization: `Bearer ${apiKey}` },
+      }
+    );
 
     const product = response.data;
     if (!product || !product.id) return;
@@ -181,23 +196,28 @@ const handlePrintifyProductPublished = async (productId) => {
       const matchingMeta = Array.isArray(variantMeta)
         ? variantMeta.find((meta) => meta.id === variant.id)
         : null;
-    
+
       // Find all images where variant_ids includes this variant.id
-      const variantImages = (product.images || []).filter((img) =>
-        Array.isArray(img.variant_ids) && img.variant_ids.includes(variant.id)
+      const variantImages = (product.images || []).filter(
+        (img) =>
+          Array.isArray(img.variant_ids) && img.variant_ids.includes(variant.id)
       );
-    
+
       return {
         ...variant,
-        images: variantImages.map((img) => ({ src: img.src, position: img.position })),
+        images: variantImages.map((img) => ({
+          src: img.src,
+          position: img.position,
+          displayInGallery: true,
+        })),
         ...(matchingMeta?.options?.reduce((acc, opt) => {
           acc[opt.name.toLowerCase()] = opt.value;
           return acc;
-        }, {}) || {})
+        }, {}) || {}),
       };
     });
 
-    const filteredVariants = enrichedVariants.filter(v => v.is_enabled);
+    const filteredVariants = enrichedVariants.filter((v) => v.is_enabled);
 
     const enrichedOptions = (product.options || []).map((opt) => {
       const enrichedValues = opt.values.map((val) => {
@@ -209,7 +229,7 @@ const handlePrintifyProductPublished = async (productId) => {
         }
         return {
           ...val,
-          colors: [...usedColors]
+          colors: [...usedColors],
         };
       });
       return { ...opt, values: enrichedValues };
@@ -219,7 +239,7 @@ const handlePrintifyProductPublished = async (productId) => {
       name: product.title,
       description: product.description || '',
       images: product.images?.[0]?.src ? [product.images[0].src] : [],
-      metadata: { printifyProductId: product.id }
+      metadata: { printifyProductId: product.id },
     });
 
     const stripePriceIds = {};
@@ -231,12 +251,12 @@ const handlePrintifyProductPublished = async (productId) => {
         metadata: {
           variantId: variant.id.toString(),
           title: variant.title,
-          sku: variant.sku
-        }
+          sku: variant.sku,
+        },
       });
       stripePriceIds[variant.id] = {
         priceId: price.id,
-        unitAmount: price.unit_amount
+        unitAmount: price.unit_amount,
       };
     }
 
@@ -244,7 +264,10 @@ const handlePrintifyProductPublished = async (productId) => {
       id: product.id,
       title: product.title,
       description: product.description || '',
-      images: product.images,
+      images: product.images?.map((img) => ({
+        ...img,
+        displayInGallery: true,
+      })) || [],
       tags: product.tags,
       variants: filteredVariants,
       options: enrichedOptions,
@@ -252,60 +275,70 @@ const handlePrintifyProductPublished = async (productId) => {
       syncedAt: admin.firestore.FieldValue.serverTimestamp(),
       stripeProductId: stripeProduct.id,
       stripePriceIds,
-      status: 'inactive'
+      status: 'inactive',
     };
 
     await db.collection('merchProducts').doc(productId).set(payload);
     console.log(`✅ Created merchProduct: ${productId}`);
   } catch (error) {
     console.error('❌ Failed to sync Printify product:', error.message);
-    console.error('🛠 Error detail:', error.response?.data || error.stack || error);
+    console.error(
+      '🛠 Error detail:',
+      error.response?.data || error.stack || error
+    );
   }
 };
 
-exports.refreshPrintifyStock = onSchedule({
-  schedule: '0 * * * *',
-  timeZone: 'America/Chicago',
-  secrets: [PRINTIFY_API_KEY, PRINTIFY_SHOP_ID]
-}, async () => {
-  const shopId = PRINTIFY_SHOP_ID.value();
-  const apiKey = PRINTIFY_API_KEY.value();
+exports.refreshPrintifyStock = onSchedule(
+  {
+    schedule: '0 * * * *',
+    timeZone: 'America/Chicago',
+    secrets: [PRINTIFY_API_KEY, PRINTIFY_SHOP_ID],
+  },
+  async () => {
+    const shopId = PRINTIFY_SHOP_ID.value();
+    const apiKey = PRINTIFY_API_KEY.value();
 
-  const merchSnapshot = await db.collection('merchProducts').get();
+    const merchSnapshot = await db.collection('merchProducts').get();
 
-  for (const doc of merchSnapshot.docs) {
-    const productId = doc.id;
-    try {
-      const response = await axios.get(`https://api.printify.com/v1/shops/${shopId}/products/${productId}.json`, {
-        headers: { Authorization: `Bearer ${apiKey}` }
-      });
+    for (const doc of merchSnapshot.docs) {
+      const productId = doc.id;
+      try {
+        const response = await axios.get(
+          `https://api.printify.com/v1/shops/${shopId}/products/${productId}.json`,
+          {
+            headers: { Authorization: `Bearer ${apiKey}` },
+          }
+        );
 
-      const printifyProduct = response.data;
-      const variants = printifyProduct.variants
-        .filter(v => v.is_enabled)
-        .map((v) => {
-          const normalizedOptions = {};
-          if (Array.isArray(v.options)) {
-            for (const opt of productDoc.options || []) {
-              const valMatch = opt.values.find(val => v.options.includes(val.id));
-              if (valMatch) {
-                normalizedOptions[opt.title] = valMatch.title;
+        const printifyProduct = response.data;
+        const variants = printifyProduct.variants
+          .filter((v) => v.is_enabled)
+          .map((v) => {
+            const normalizedOptions = {};
+            if (Array.isArray(v.options)) {
+              for (const opt of productDoc.options || []) {
+                const valMatch = opt.values.find((val) =>
+                  v.options.includes(val.id)
+                );
+                if (valMatch) {
+                  normalizedOptions[opt.title] = valMatch.title;
+                }
               }
             }
-          }
-          return {
-            id: v.id,
-            is_enabled: v.is_enabled,
-            is_available: v.is_available,
-            options: v.options,
-            normalizedOptions,
-          };
-        });
+            return {
+              id: v.id,
+              is_enabled: v.is_enabled,
+              is_available: v.is_available,
+              options: v.options,
+              normalizedOptions,
+            };
+          });
 
         const productDoc = doc.data();
         const enrichedOptions = (productDoc.options || []).map((opt) => {
           const enrichedValues = opt.values.map((val) => {
-            const matchingOriginal = opt.values.find(v => v.id === val.id);
+            const matchingOriginal = opt.values.find((v) => v.id === val.id);
             const originalColors = matchingOriginal?.colors || [];
             return {
               ...val,
@@ -314,43 +347,63 @@ exports.refreshPrintifyStock = onSchedule({
           });
           return { ...opt, values: enrichedValues };
         });
-        
+
         await doc.ref.update({
           variants,
           options: enrichedOptions,
           updatedAt: admin.firestore.FieldValue.serverTimestamp(),
         });
-    } catch (err) {
-      console.error(`❌ Failed to update ${productId}:`, err.message);
+      } catch (err) {
+        console.error(`❌ Failed to update ${productId}:`, err.message);
+      }
     }
   }
-});
+);
 
-exports.api = onRequest({
-  region: 'us-central1',
-  secrets: [STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, CLIENT_URL]
-}, app);
+exports.api = onRequest(
+  {
+    region: 'us-central1',
+    secrets: [STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, CLIENT_URL],
+  },
+  app
+);
 
-exports.stripeWebhook = onRequest({
-  region: 'us-central1',
-  secrets: [STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET],
-  cors: true
-}, stripeWebhookApp);
+exports.stripeWebhook = onRequest(
+  {
+    region: 'us-central1',
+    secrets: [STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET],
+    cors: true,
+  },
+  stripeWebhookApp
+);
 
-exports.printifyWebhookListener = onRequest({
-  region: 'us-central1',
-  secrets: [PRINTIFY_API_KEY, PRINTIFY_SHOP_ID, PRINTIFY_WEBHOOK_SECRET, STRIPE_SECRET_KEY]
-}, printifyWebhookApp);
+exports.printifyWebhookListener = onRequest(
+  {
+    region: 'us-central1',
+    secrets: [
+      PRINTIFY_API_KEY,
+      PRINTIFY_SHOP_ID,
+      PRINTIFY_WEBHOOK_SECRET,
+      STRIPE_SECRET_KEY,
+    ],
+  },
+  printifyWebhookApp
+);
 
-exports.refreshPrintifyStockNow = onRequest({
-  region: 'us-central1',
-  secrets: [PRINTIFY_API_KEY, PRINTIFY_SHOP_ID]
-}, async (req, res) => {
-  try {
-    await exports.refreshPrintifyStock.run();
-    res.status(200).send('✅ Manual refreshPrintifyStock executed successfully.');
-  } catch (error) {
-    console.error('❌ Manual refresh failed:', error);
-    res.status(500).send('❌ Manual refresh failed.');
+exports.refreshPrintifyStockNow = onRequest(
+  {
+    region: 'us-central1',
+    secrets: [PRINTIFY_API_KEY, PRINTIFY_SHOP_ID],
+  },
+  async (req, res) => {
+    try {
+      await exports.refreshPrintifyStock.run();
+      res
+        .status(200)
+        .send('✅ Manual refreshPrintifyStock executed successfully.');
+    } catch (error) {
+      console.error('❌ Manual refresh failed:', error);
+      res.status(500).send('❌ Manual refresh failed.');
+    }
   }
-});
+);
