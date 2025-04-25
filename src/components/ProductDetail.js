@@ -246,10 +246,11 @@ const ProductDetail = () => {
         price: selectedVariant.price,
         stripePriceId: selectedVariant.stripePriceId,
         isPreOrder: false,
-        deliveryTime: product.deliveryTime || '2–5 business days',
-        currentQuantity: 1,
-        maxQuantity: 1,
+        deliveryTime: product.deliveryTime || '7–10 business days',
+        currentQuantity: 10,
+        maxQuantity: 10,
         variantId: selectedVariant.id,
+        category: 'merch',
       },
       {
         quantity: 1,
@@ -281,7 +282,7 @@ const ProductDetail = () => {
       <h1 className="product-title">
         {product?.title || product?.name || 'Unnamed Product'}
       </h1>
-  
+
       <div className="product-content">
         <div className="product-gallery-info">
           <div className="product-image-gallery">
@@ -299,9 +300,12 @@ const ProductDetail = () => {
                 onError={(e) => (e.currentTarget.src = FALLBACK_IMAGE)}
               />
             </div>
-  
+
             <div className="thumbnail-scroll-container">
-              <div className="product-thumbnail-gallery" ref={thumbnailContainerRef}>
+              <div
+                className="product-thumbnail-gallery"
+                ref={thumbnailContainerRef}
+              >
                 {(() => {
                   const selectedColor = selectedOptions['Colors'];
                   const colorVariantWithImages = product.variants.find(
@@ -310,17 +314,22 @@ const ProductDetail = () => {
                       v.normalizedOptions?.['Colors'] === selectedColor &&
                       Array.isArray(v.images)
                   );
-  
-                  const validImages = (colorVariantWithImages?.images || []).filter((img) => {
+
+                  const validImages = (
+                    colorVariantWithImages?.images || []
+                  ).filter((img) => {
                     const url = typeof img === 'string' ? img : img?.src;
                     const displayFlag =
-                      typeof img === 'object' ? img.displayInGallery !== false : true;
+                      typeof img === 'object'
+                        ? img.displayInGallery !== false
+                        : true;
                     return url?.startsWith('http') && displayFlag;
                   });
-  
+
                   return validImages.length > 0
                     ? validImages.map((img, index) => {
-                        const imageUrl = typeof img === 'string' ? img : img?.src;
+                        const imageUrl =
+                          typeof img === 'string' ? img : img?.src;
                         return (
                           <button
                             key={`thumb-${index}`}
@@ -332,14 +341,19 @@ const ProductDetail = () => {
                           >
                             <img
                               src={imageUrl}
-                              onError={(e) => (e.currentTarget.src = FALLBACK_IMAGE)}
+                              onError={(e) =>
+                                (e.currentTarget.src = FALLBACK_IMAGE)
+                              }
                               alt={`Thumbnail ${index + 1}`}
                             />
                           </button>
                         );
                       })
                     : [
-                        <button key="thumb-fallback" className="product-thumbnail disabled">
+                        <button
+                          key="thumb-fallback"
+                          className="product-thumbnail disabled"
+                        >
                           <img src={FALLBACK_IMAGE} alt="No image available" />
                         </button>,
                       ];
@@ -347,17 +361,17 @@ const ProductDetail = () => {
               </div>
             </div>
           </div>
-  
+
           <div className="product-info">
             <h2>Product Specifications</h2>
             <p className="product-price">
               {selectedVariant
                 ? `$${selectedVariant.price.toFixed(2)}`
                 : product.price
-                ? `$${product.price.toFixed(2)}`
-                : 'Select options'}
+                  ? `$${product.price.toFixed(2)}`
+                  : 'Select options'}
             </p>
-  
+
             {!!product?.options?.length &&
               [...product.options]
                 .sort((a, b) => {
@@ -372,34 +386,42 @@ const ProductDetail = () => {
                     <label>{option.name}</label>
                     <div className="option-grid">
                       {option.values.map((value, idx) => {
-                        const isSelected = selectedOptions[option.name] === value.title;
+                        const isSelected =
+                          selectedOptions[option.name] === value.title;
                         const hasColors =
-                          Array.isArray(value.colors) && value.colors.length > 0;
+                          Array.isArray(value.colors) &&
+                          value.colors.length > 0;
                         const swatchBackground = hasColors
                           ? value.colors.length === 1
                             ? value.colors[0]
                             : `linear-gradient(to right, ${value.colors[0]} 50%, ${value.colors[1]} 50%)`
                           : '#ccc';
-  
+
                         const disabled = (() => {
                           if (option.name === 'Colors') {
-                            return isColorOptionCompletelyUnavailable(option.name, value.title);
+                            return isColorOptionCompletelyUnavailable(
+                              option.name,
+                              value.title
+                            );
                           }
                           const selectedColor = selectedOptions['Colors'];
                           const variantExists = product.variants.some(
                             (v) =>
                               v.is_enabled &&
                               v.is_available &&
-                              v.normalizedOptions?.['Colors'] === selectedColor &&
+                              v.normalizedOptions?.['Colors'] ===
+                                selectedColor &&
                               v.normalizedOptions?.[option.name] === value.title
                           );
                           return !variantExists;
                         })();
-  
+
                         return (
                           <button
                             key={`swatch-${value.id || value.title}-${idx}`}
-                            onClick={() => handleOptionSelect(option.name, value.title)}
+                            onClick={() =>
+                              handleOptionSelect(option.name, value.title)
+                            }
                             onMouseEnter={() => {
                               if (option.name !== 'Colors') return;
                               const hoveredColor = value.title;
@@ -407,12 +429,14 @@ const ProductDetail = () => {
                                 (v) =>
                                   v.is_enabled &&
                                   v.is_available &&
-                                  v.normalizedOptions?.['Colors'] === hoveredColor
+                                  v.normalizedOptions?.['Colors'] ===
+                                    hoveredColor
                               );
                               if (hoverVariant?.images?.length) {
                                 const hoverImages = hoverVariant.images;
                                 const hoverImageAtIndex =
-                                  hoverImages[selectedImageIndex] || hoverImages[0];
+                                  hoverImages[selectedImageIndex] ||
+                                  hoverImages[0];
                                 const src =
                                   typeof hoverImageAtIndex === 'string'
                                     ? hoverImageAtIndex
@@ -424,13 +448,17 @@ const ProductDetail = () => {
                             disabled={disabled}
                             title={value.title}
                             className={`option-button ${isSelected ? 'selected' : ''} ${
-                              isSelected && disabled ? 'selected-unavailable' : ''
+                              isSelected && disabled
+                                ? 'selected-unavailable'
+                                : ''
                             }`}
                             style={{
                               width: hasColors ? 32 : 'auto',
                               height: hasColors ? 32 : 'auto',
                               borderRadius: hasColors ? '50%' : '4px',
-                              background: hasColors ? swatchBackground : undefined,
+                              background: hasColors
+                                ? swatchBackground
+                                : undefined,
                               color: hasColors ? 'transparent' : undefined,
                             }}
                           >
@@ -441,38 +469,32 @@ const ProductDetail = () => {
                     </div>
                   </div>
                 ))}
-  
-            <div className="product-action">
-              {inCart ? (
-                <div className="cart-button-group">
-                  <button className="artisan-in-cart-button" disabled>
-                    ✔ In Cart
-                  </button>
-                  <div className="artisan-cart-hover-options">
-                    <span onClick={() => navigate('/cart')}>View Cart</span>
-                    <span
-                      onClick={() =>
-                        removeFromCart(
-                          `merch-${selectedVariant.stripePriceId}-${selectedVariant.id}`
-                        )
-                      }
-                    >
-                      Remove
-                    </span>
-                  </div>
-                </div>
-              ) : (
-                <button
-                  className="artisan-add-to-cart-button"
-                  onClick={addToCartWithOptions}
-                  disabled={!selectedVariant || !selectedVariant.is_available}
-                >
-                  {!selectedVariant || !selectedVariant.is_available
-                    ? 'Unavailable'
-                    : 'Add to Cart'}
-                </button>
-              )}
-            </div>
+
+                <div className="product-action">
+                {inCart ? (
+  <div className="artisan-cart-hover-container">
+    <button className="artisan-in-cart-button" disabled>
+      ✔ In Cart
+    </button>
+    <div className="artisan-cart-hover-options">
+      <span onClick={() => navigate('/cart')}>View Cart</span>
+      <span onClick={() => removeFromCart(`merch-${selectedVariant.stripePriceId}-${selectedVariant.id}`)}>
+        Remove
+      </span>
+    </div>
+  </div>
+) : (
+  <button
+    className="artisan-add-to-cart-button"
+    onClick={addToCartWithOptions}
+    disabled={!selectedVariant || !selectedVariant.is_available}
+  >
+    {!selectedVariant || !selectedVariant.is_available
+      ? 'Unavailable'
+      : 'Add to Cart'}
+  </button>
+)}
+</div>
           </div>
         </div>
       </div>
