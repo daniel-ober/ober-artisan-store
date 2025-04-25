@@ -15,13 +15,14 @@ const HeritageProductDetail = () => {
   const [lugs, setLugs] = useState('8');
   const [staveOption, setStaveOption] = useState('16 - 13mm');
   const [totalPrice, setTotalPrice] = useState(850);
-  const [currentQuantity, setCurrentQuantity] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedDrumSummary, setSelectedDrumSummary] = useState({});
   const reRingCost = 150;
+  const [product, setProduct] = useState(null);
   const [buttonText, setButtonText] = useState('Add to Cart');
   const basePrices = { 12: 850, 13: 950, 14: 1050 };
   const [cartItemId, setCartItemId] = useState(null);
+  const [pendingCartItemId, setPendingCartItemId] = useState(null);
   const navigate = useNavigate();
 
   const depthPrices = {
@@ -64,54 +65,43 @@ const HeritageProductDetail = () => {
   // ✅ Use Cart Context
   const { addToCart, removeFromCart, cart } = useCart();
 
-  const updateProductStock = async (newQuantity) => {
-    try {
-      const safeQuantity = Math.max(0, newQuantity); // Prevents negative values
-      const productRef = doc(db, 'products', 'heritage');
-      await updateDoc(productRef, { currentQuantity: safeQuantity });
-      // console.log('✅ Heritage stock updated in Firestore:', safeQuantity);
-    } catch (error) {
-      console.error('❌ Error updating stock in Firestore:', error);
-    }
-  };
-
   const handleAddToCart = async () => {
     if (!size || !depth) {
       console.error('❌ Missing selection: Size or Depth not chosen');
       return;
     }
-
-    if (currentQuantity <= 0) {
-      alert('❌ This drum is out of stock.');
+  
+    if (product.status !== 'active' && !product.isPreOrder) {
+      toast.error('❌ This drum is currently unavailable.');
       return;
     }
-
-    const cartItemCount = cart
-      .filter((item) => item.productId === 'heritage')
-      .reduce((total, item) => total + item.quantity, 0);
-
-    if (cartItemCount >= currentQuantity) {
-      alert('❌ Not enough stock available to add this item.');
-      return;
-    }
-
+  
     const hasReRing =
       staveOption.includes('Re-Rings') || staveOption.includes('+ $150');
-
+  
     const selectedOption = heritageSummaries.pricingOptions.find(
       (option) =>
         option.size === size &&
         option.depth === depth &&
         option.reRing === hasReRing
     );
-
+  
     if (!selectedOption) {
       console.error('❌ No matching pricing option found.');
       return;
     }
-
+  
+    const newCartItemId = generateCartItemId({
+      stripePriceId: selectedOption.stripePriceId,
+      size,
+      depth,
+      reRing: hasReRing,
+      lugQuantity: selectedOption.lugQuantity,
+      staveQuantity: selectedOption.staveQuantity,
+    });
+  
     const cartItem = {
-      id: `${selectedOption.stripePriceId}-${size}-${depth}-${hasReRing}-${selectedOption.lugQuantity}-${selectedOption.staveQuantity}`,
+      id: newCartItemId,
       productId: 'heritage',
       name: 'HERITAGE',
       size,
@@ -123,50 +113,72 @@ const HeritageProductDetail = () => {
       stripePriceId: selectedOption.stripePriceId,
       quantity: 1,
     };
-
+  
     await addToCart(cartItem, cartItem);
     toast.success('🛒 Item added to cart!');
+    setPendingCartItemId(cartItem.id); // let useEffect detect this as a signal  
+    // ✅ Manually reflect new ID locally for instant feedback
+    setCartItemId(newCartItemId);
+    setButtonText('In Cart');
+  };
+
+  const generateCartItemId = (option) => {
+    return `${option.stripePriceId}-${option.size}-${option.depth}-${String(option.reRing)}-${option.lugQuantity}-${option.staveQuantity}`;
   };
 
   useEffect(() => {
-    const matchingItem = cart.find((item) => item.productId === 'heritage');
-    if (matchingItem) {
+    const hasReRing =
+      staveOption.includes('Re-Rings') || staveOption.includes('+ $150');
+  
+    const selectedOption = heritageSummaries.pricingOptions.find(
+      (option) =>
+        option.size === size &&
+        option.depth === depth &&
+        option.reRing === hasReRing
+    );
+  
+    if (!selectedOption) return;
+  
+    const expectedId = generateCartItemId({
+      stripePriceId: selectedOption.stripePriceId,
+      size,
+      depth,
+      reRing: hasReRing,
+      lugQuantity: selectedOption.lugQuantity,
+      staveQuantity: selectedOption.staveQuantity,
+    });
+  
+    const isInCart = cart.some((item) => item.id === expectedId);
+  
+    if (isInCart) {
+      setCartItemId(expectedId);
       setButtonText('In Cart');
-      setCartItemId(matchingItem.id);
+      setPendingCartItemId(null); // ✅ clear pending once detected
     } else {
-      setButtonText('Add to Cart');
       setCartItemId(null);
+      setButtonText('Add to Cart');
     }
-  }, [cart]);
+  }, [cart, size, depth, staveOption, lugs, pendingCartItemId]);
 
   useEffect(() => {
-    const fetchProductAvailability = async () => {
+    const fetchProductStatus = async () => {
       setIsLoading(true);
       try {
         const productRef = doc(db, 'products', 'heritage');
         const productSnap = await getDoc(productRef);
-
         if (productSnap.exists()) {
           const productData = productSnap.data();
-          // console.log('📦 Firestore Product Data:', productData);
-          setCurrentQuantity(productData.currentQuantity ?? 0);
-        } else {
-          console.warn('⚠️ Heritage product not found in Firestore.');
-          setCurrentQuantity(0);
+          setProduct(productData); // ✅ This line sets the product in state
         }
       } catch (error) {
-        console.error(
-          '❌ Error fetching Heritage product availability:',
-          error
-        );
-        setCurrentQuantity(0);
+        console.error('❌ Error fetching product status:', error);
       } finally {
         setIsLoading(false);
       }
     };
-
-    fetchProductAvailability();
-  }, [size, depth, lugs]); // ✅ Re-fetch if the selection changes
+  
+    fetchProductStatus();
+  }, []);
 
   useEffect(() => {
     let newPrice = basePrices[size];
@@ -348,22 +360,26 @@ const HeritageProductDetail = () => {
           {/* Total Price */}
           <p className="feuzon-detail-price">${totalPrice}</p>
           <p className="delivery-time">Est Delivery: 5-7 weeks</p>
-          {/* Add to Cart */}
-          {buttonText === 'In Cart' ? (
-            <div className="artisan-cart-hover-container">
-              <button className="artisan-in-cart-button" disabled>
-                ✔ In Cart
-              </button>
-              <div className="artisan-cart-hover-options">
-                <span onClick={() => navigate('/cart')}>View Cart</span>
-                <span onClick={handleRemoveFromCart}>Remove</span>
-              </div>
-            </div>
-          ) : (
-            <button className="artisan-add-to-cart-button" onClick={handleAddToCart}>
-              {buttonText}
-            </button>
-          )}
+          {product?.status === 'active' || product?.isPreOrder ? (  buttonText === 'In Cart' ? (
+    <div className="artisan-cart-hover-container">
+      <button className="artisan-in-cart-button" disabled>
+        ✔ In Cart
+      </button>
+      <div className="artisan-cart-hover-options">
+        <span onClick={() => navigate('/cart')}>View Cart</span>
+        <span onClick={handleRemoveFromCart}>Remove</span>
+      </div>
+    </div>
+  ) : (
+    <button className="artisan-add-to-cart-button" onClick={handleAddToCart}>
+      {buttonText}
+    </button>
+  )
+) : (
+  <button className="artisan-add-to-cart-button" disabled>
+    Currently Unavailable
+  </button>
+)}
         </div>
       </div>
 

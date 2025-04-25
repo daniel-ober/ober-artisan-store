@@ -17,15 +17,19 @@ const PreOrderCard = ({ product }) => {
     buttonText = "Pre-Order Now";
   }
 
+  // Determine destination route
+  const isArtisan = ["heritage", "feuzon", "soundlegend"].includes(product.id);
+  const productUrl = isArtisan ? `/artisanseries/${product.id}` : `/merch/${product.id}`;
+
   return (
     <div className="preorder-card">
       {/* Product Image */}
       <div
         className="preorder-image-container"
-        onClick={() => navigate(`/products/${product.id}`)}
+        onClick={() => navigate(productUrl)}
         onKeyDown={(e) => {
           if (e.key === "Enter" || e.key === " ") {
-            navigate(`/products/${product.id}`);
+            navigate(productUrl);
           }
         }}
         role="button"
@@ -49,20 +53,19 @@ const PreOrderCard = ({ product }) => {
 
       {/* Product Info */}
       <div className="preorder-info">
-        {/* <h2 className="preorder-title">{product.name}</h2> */}
         <p className="preorder-description">{product.description}</p>
         <div className="preorder-card-bottom">
-        {/* <div className="card-preorder-price">Starting Price: ${product.price}</div> */}
-        {/* <p className="delivery-time">Delivery: {product.deliveryTime}</p> */}
-
-        {/* Product Action Buttons */}
-        <div className="preorder-button-container">
-          <button
-            className={product.currentQuantity === 0 ? "preorder-card-view-details-button" : "preorder-card-preorder-button"}
-            onClick={() => navigate(`/products/${product.id}`)}
-          >
-            {buttonText}
-          </button>
+          <div className="preorder-button-container">
+            <button
+              className={
+                product.currentQuantity === 0
+                  ? "preorder-card-view-details-button"
+                  : "preorder-card-preorder-button"
+              }
+              onClick={() => navigate(productUrl)}
+            >
+              {buttonText}
+            </button>
           </div>
         </div>
       </div>

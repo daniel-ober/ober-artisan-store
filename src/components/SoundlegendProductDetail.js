@@ -35,7 +35,7 @@ const SoundLegendProductDetail = () => {
 // 🔽 Add this here
 const handleClose = () => {
   setOpen(false);
-  navigate('/pre-order');
+  navigate('/artisanseries/pre-order');
 };
 
   // Full list of available wood species
