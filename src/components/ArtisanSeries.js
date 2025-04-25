@@ -231,7 +231,7 @@ const ArtisanSeries = () => {
           </ul> */}
           <button
             className={product.currentQuantity === 0 ? "prod-card-view-details-button" : "preorder-card-preorder-button"}
-            onClick={() => navigate("/products/heritage")}
+            onClick={() => navigate("/artisanseries/heritage")}
           >
             {preOrderButton}
           </button>
@@ -250,7 +250,7 @@ const ArtisanSeries = () => {
           </ul> */}
           <button
             className={product.currentQuantity === 0 ? "prod-card-view-details-button" : "preorder-card-preorder-button"}
-            onClick={() => navigate("/products/soundlegend")}
+            onClick={() => navigate("/artisanseries/soundlegend")}
           >
             Learn More
           </button>
@@ -267,7 +267,7 @@ const ArtisanSeries = () => {
           </ul> */}
           <button
             className={product.currentQuantity === 0 ? "prod-card-view-details-button" : "preorder-card-preorder-button"}
-            onClick={() => navigate("/products/feuzon")}
+            onClick={() => navigate("/artisanseries/feuzon")}
           >
             {preOrderButton}
           </button>

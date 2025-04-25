@@ -33,6 +33,13 @@ const FeuzonProductDetail = () => {
   const [productInCart, setProductInCart] = useState(false);
   const [flickerChangeSelection, setFlickerChangeSelection] = useState(false);
 
+  // ✅ ADD THIS BLOCK HERE
+  useEffect(() => {
+    const isReRingRequired =
+      staveOption.includes('Re-Rings') || staveOption.includes('+ $150');
+    setReRing(isReRingRequired);
+  }, [staveOption]);
+  
   const basePrices = { 12: 1050, 13: 1150, 14: 1250 };
 
   const depthPrices = {
@@ -107,16 +114,16 @@ const FeuzonProductDetail = () => {
   };
 
   useEffect(() => {
-    const generatedId = `${stripePriceId}-${size}-${depth}-${reRing}-${lugs}-${staveQuantity}`;
+    
+    const generatedId = `feuzon-${stripePriceId}-${size}-${depth}-${reRing}-${lugs}-${staveQuantity}`;
     const isInCart = cart.some((item) => item.id === generatedId);
   
     if (isInCart !== productInCart) {
-      // ✅ Debounce the state update slightly to prevent flickering
       setTimeout(() => {
         setProductInCart(isInCart);
-      }, 500); // 🔄 Delays UI update slightly
+      }, 200); // debounce slightly
     }
-  }, [cart, stripePriceId, size, depth, reRing, lugs, staveQuantity, productInCart]);
+  }, [cart, stripePriceId, size, depth, reRing, lugs, staveQuantity]);
   
   
   const handleAddToCart = async () => {
@@ -126,17 +133,25 @@ const FeuzonProductDetail = () => {
     }
   
     const cartItem = {
-      id: `${stripePriceId}-${size}-${depth}-${reRing}-${lugs}-${staveQuantity}`,
+      id: `feuzon-${stripePriceId}-${size}-${depth}-${reRing}-${lugs}-${staveQuantity}`,
       productId: "feuzon",
       name: "FEUZØN",
       size,
       depth,
-      reRing,
+      reRing: !!reRing, // ✅ force real boolean
       lugQuantity: lugs,
       staveQuantity,
       price: totalPrice,
       stripePriceId,
       quantity: 1,
+      images: [
+        // optional: you can place the main variant image here if needed
+      ],
+      category: "artisan",
+      options: {
+        outerShell,
+        innerStave,
+      },
     };
   
     try {
@@ -351,8 +366,8 @@ const FeuzonProductDetail = () => {
     //   cart.map((item) => item.id)
     // );
 
-    setProductInCart(cart.some((item) => item.productId === "feuzon"));
     // console.log('✅ productInCart Updated to:', isInCart);
+    
   }, [cart, size, depth, lugs, staveQuantity]);
 
   // ✅ **New Effect to Reset `innerStave` When `outerShell` Changes**
@@ -403,37 +418,14 @@ const FeuzonProductDetail = () => {
     }
   }, [size, lugs]);
 
-  // ✅ Fetch Product Availability from Firestore
   useEffect(() => {
-    const fetchProductAvailability = async () => {
-      if (!size || !depth || !lugs) return;
-      setIsLoadingProductAvailability(true);
-
-      try {
-        const productRef = doc(db, 'products', 'feuzon');
-        const productSnap = await getDoc(productRef);
-
-        if (productSnap.exists()) {
-          const productData = productSnap.data();
-          // console.log('📦 Firestore Product Data:', productData);
-
-          const fetchedQuantity = productData.currentQuantity ?? 0; // Ensure it's not null
-          setCurrentQuantity(fetchedQuantity);
-          // console.log('✅ Successfully set currentQuantity:', fetchedQuantity);
-        } else {
-          // console.warn('⚠️ Product not found in Firestore');
-          setCurrentQuantity(0);
-        }
-      } catch (error) {
-        console.error('❌ Error fetching product availability:', error);
-        setCurrentQuantity(0);
-      } finally {
-        setIsLoadingProductAvailability(false);
-      }
-    };
-
-    fetchProductAvailability(); // ✅ Ensure function is defined before being called
-  }, [size, depth, lugs]); // ✅ Runs when size, depth, or lugs change
+    if (!stripePriceId) return;
+  
+    const generatedId = `feuzon-${stripePriceId}-${size}-${depth}-${reRing}-${lugs}-${staveQuantity}-${outerShell}-${innerStave}`;
+    const isInCart = cart.some((item) => item.id === generatedId);
+  
+    setProductInCart(isInCart);
+  }, [cart, stripePriceId, size, depth, reRing, lugs, staveQuantity, outerShell, innerStave]);
 
   // ✅ Handle modifying an existing Feuzon selection
   const handleModifySelection = () => {
@@ -449,16 +441,10 @@ const FeuzonProductDetail = () => {
   };
 
   const handleRemoveFromCart = async () => {
-    const generatedId = `${stripePriceId}-${size}-${depth}-${reRing}-${lugs}-${staveQuantity}`;
-  
-    try {
-      await removeFromCart(generatedId);
-      setProductInCart(false); // ✅ Instant UI update
-      toast.success("🗑️ Item removed from cart.");
-    } catch (error) {
-      console.error('❌ Error removing item from cart:', error);
-      toast.error("❌ Failed to remove item. Try again!");
-    }
+    const generatedId = `feuzon-${stripePriceId}-${size}-${depth}-${reRing}-${lugs}-${staveQuantity}`;
+    setProductInCart(false); // ✅ Instant UI feedback
+    await removeFromCart(generatedId);
+    toast.success("🗑️ Item removed from cart.");
   };
   
   

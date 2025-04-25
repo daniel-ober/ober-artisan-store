@@ -71,18 +71,18 @@ const ProductCard = ({ product }) => {
       updatedCart = updatedCart.filter((item) => item.id !== product.id);
     } else {
       updatedCart.push({
-        id: product.id,
-        name: product.title || product.name || "Product",
-        price: getLowestPrice(product),
-        thumbnail: getImageSrc(product),
+        id: product.id ?? "unknown",
+        name: product.title ?? product.name ?? "Product",
+        price: getLowestPrice(product) ?? 0,
+        thumbnail: getImageSrc(product) ?? fallbackImage,
         quantity: 1,
-        category: product.category,
-        isPreOrder: product.isPreOrder || false,
-        currentQuantity: product.currentQuantity || 0,
-        maxQuantity: product.maxQuantity || 0,
-        description: product.description || "",
-        deliveryTime: product.deliveryTime || "",
-        status: product.status || "active",
+        category: product.category ?? "misc",
+        isPreOrder: product.isPreOrder ?? false,
+        currentQuantity: typeof product.currentQuantity === "number" ? product.currentQuantity : 0,
+        maxQuantity: typeof product.maxQuantity === "number" ? product.maxQuantity : 0,
+        description: product.description ?? "",
+        deliveryTime: product.deliveryTime ?? "",
+        status: product.status ?? "active",
         createdAt: new Date(),
       });
     }
