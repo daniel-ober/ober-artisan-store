@@ -138,14 +138,14 @@ const FeuzonProductDetail = () => {
       name: "FEUZØN",
       size,
       depth,
-      reRing: !!reRing, // ✅ force real boolean
+      reRing: !!reRing,
       lugQuantity: lugs,
       staveQuantity,
       price: totalPrice,
       stripePriceId,
       quantity: 1,
       images: [
-        // optional: you can place the main variant image here if needed
+        "https://firebasestorage.googleapis.com/v0/b/danoberartisandrums-dev.firebasestorage.app/o/products%2F67c255d1-a9ca-4f5d-80af-ddeee6a424e1_IMG_6133.png?alt=media&token=a15b2e68-d34b-44fa-bf33-eccc4a025331"
       ],
       category: "artisan",
       options: {
@@ -485,62 +485,60 @@ const FeuzonProductDetail = () => {
 
     return (
       <div className="feuzon-product-detail">
-         <img
-            src="/resized-logos/feuzon-white.png"
-            alt="FEUZØN Series"
-            className="artisanseries-header-image"
-          />
-  
+        <img
+          src="/resized-logos/feuzon-white.png"
+          alt="FEUZØN Series"
+          className="artisanseries-header-image"
+        />
+    
         <div className="feuzon-product-content">
-            <img 
-             className="feuzon-product-image"
-              src="https://firebasestorage.googleapis.com/v0/b/danoberartisandrums-dev.firebasestorage.app/o/products%2F67c255d1-a9ca-4f5d-80af-ddeee6a424e1_IMG_6133.png?alt=media&token=a15b2e68-d34b-44fa-bf33-eccc4a025331"
-              alt="FEUZON Snare Drum"
-            />
-  
+          <img
+            className="feuzon-product-image"
+            src="https://firebasestorage.googleapis.com/v0/b/danoberartisandrums-dev.firebasestorage.app/o/products%2F67c255d1-a9ca-4f5d-80af-ddeee6a424e1_IMG_6133.png?alt=media&token=a15b2e68-d34b-44fa-bf33-eccc4a025331"
+            alt="FEUZON Snare Drum"
+          />
+    
           <div className="feuzon-product-options">
-            {/* 📌 Default Features List */}
             <div className="feuzon-features">
               <h2>FEUZØN Series Features</h2>
               <ul>
                 <li>Hybrid Shell Construction</li>
                 <li>Combines Various Wood Species For A Unique Tone</li>
                 <li>Double Ended Tube Lugs</li>
-              <li>Roundover Outer / 45° Inner Bearing Edge</li>
-              <li>Precision Cut Snare Beds</li>
-              <li>Stained or Natural Semi-Gloss Finish</li>
-              <li>Torch Tuned for Maximum Resonance</li>
-              <li>Trick Snare Throw-Off</li>
-              <li>Puresound Snare Wires</li>
-              <li>Remo Coated Ambassador Batter & Clear Snare Side</li>
-              <li>Estimated Delivery: 6-8 weeks</li>
-              <p className="order-to-build-disclaimer">*Note: All Ober Artisan drums are on an "order-to-build" basis, offering various configuration options. Finsihed product will appear different than the image shown.</p>
+                <li>Roundover Outer / 45° Inner Bearing Edge</li>
+                <li>Precision Cut Snare Beds</li>
+                <li>Stained or Natural Semi-Gloss Finish</li>
+                <li>Torch Tuned for Maximum Resonance</li>
+                <li>Trick Snare Throw-Off</li>
+                <li>Puresound Snare Wires</li>
+                <li>Remo Coated Ambassador Batter & Clear Snare Side</li>
+                <li>Estimated Delivery: 6–8 weeks</li>
+                <p className="order-to-build-disclaimer">
+                  *Note: All Ober Artisan drums are on an "order-to-build" basis, offering various configuration options. Finished product will appear different than the image shown.
+                </p>
               </ul>
             </div>
-  
+    
             <h2>Build Options</h2>
-  
-            {/* Snare Size */}
+    
             <label htmlFor="size">Snare Size (Diameter)</label>
             <select id="size" value={size} onChange={(e) => setSize(e.target.value)}>
               {Object.keys(basePrices).map((sizeOption) => (
                 <option key={sizeOption} value={sizeOption}>
-                  {sizeOption}&quot; - Base Price: ${basePrices[sizeOption]}
+                  {sizeOption}" - Base Price: ${basePrices[sizeOption]}
                 </option>
               ))}
             </select>
-  
-            {/* Snare Depth */}
+    
             <label htmlFor="depth">Depth</label>
             <select id="depth" value={depth} onChange={(e) => setDepth(e.target.value)}>
               {Object.keys(depthPrices[size]).map((depthOption) => (
                 <option key={depthOption} value={depthOption}>
-                  {depthOption}&quot; {depthPrices[size][depthOption] > 0 ? `+ $${depthPrices[size][depthOption]}` : ""}
+                  {depthOption}" {depthPrices[size][depthOption] > 0 ? `+ $${depthPrices[size][depthOption]}` : ''}
                 </option>
               ))}
             </select>
-  
-            {/* Exterior Shell Selection */}
+    
             <label htmlFor="outerShell">Exterior Shell (Steam Bent)</label>
             <select id="outerShell" value={outerShell} onChange={(e) => setOuterShell(e.target.value)}>
               {Object.keys(staveOptions).map((shell) => (
@@ -549,8 +547,7 @@ const FeuzonProductDetail = () => {
                 </option>
               ))}
             </select>
-  
-            {/* Interior Shell Selection */}
+    
             <label htmlFor="innerStave">Interior Shell (Stave)</label>
             <select id="innerStave" value={innerStave} onChange={(e) => setInnerStave(e.target.value)}>
               {staveOptions[outerShell].map((option) => (
@@ -559,8 +556,7 @@ const FeuzonProductDetail = () => {
                 </option>
               ))}
             </select>
-  
-            {/* Lug Quantity */}
+    
             <label htmlFor="lugs">Lug Quantity</label>
             <select id="lugs" value={lugs} onChange={(e) => setLugs(e.target.value)}>
               {lugOptions[size].map((lugOption) => (
@@ -569,8 +565,7 @@ const FeuzonProductDetail = () => {
                 </option>
               ))}
             </select>
-  
-            {/* Stave Quantity & Shell Thickness */}
+    
             <label htmlFor="staves">Stave Quantity & Shell Thickness</label>
             <select id="staves" value={staveOption} onChange={(e) => setStaveOption(e.target.value)}>
               {staveQuantities.map((option) => (
@@ -579,93 +574,27 @@ const FeuzonProductDetail = () => {
                 </option>
               ))}
             </select>
-  
-            {/* Total Price */}
+    
             <p className="feuzon-detail-price">${totalPrice}</p>
-            <p className="delivery-time">Est Delivery: 6-8 weeks</p>
-
-  
-            {/* Add to Cart */}
-{/* Add to Cart */}
-{productInCart ? (
-  <div className="artisan-cart-hover-container">
-    <button className="artisan-in-cart-button" disabled>
-      ✔ In Cart
-    </button>
-    <div className="artisan-cart-hover-options">
-      <span onClick={() => window.location.href = '/cart'}>View Cart</span>
-      <span onClick={handleRemoveFromCart}>Remove</span> {/* ✅ Use the function */}
-    </div>
-  </div>
-) : (
-  <button className="artisan-add-to-cart-button" onClick={handleAddToCart}>
-    Add to Cart
+            <p className="delivery-time">Est Delivery: 6–8 weeks</p>
+    
+            {productInCart ? (
+              <div className="artisan-cart-hover-container">
+  <button className="artisan-in-cart-button" disabled>
+    ✔ In Cart
   </button>
-)}
-
+  <div className="artisan-cart-hover-options">
+    <span onClick={() => navigate('/cart')}>View Cart</span>
+    <span onClick={handleRemoveFromCart}>Remove</span>
+  </div>
+</div>
+            ) : (
+              <button className="artisan-add-to-cart-button" onClick={handleAddToCart}>
+                Add to Cart
+              </button>
+            )}
           </div>
         </div>
-  
-        {/* 📌 Drum Summary Section */}
-        {/* <div className="drum-summary">
-          <h1>Artisan Notes</h1>
-          <h3>🎛️ Tonal Characteristics</h3>
-          <p>{selectedDrumSummary?.highlightedCharacteristics || "Select options to view summary"}</p>
-  
-          <h3>🎵 Genre Top Picks</h3>
-          <p>{selectedDrumSummary?.primaryGenre || "Select options to view summary"}</p>
-          <ul>
-            {selectedDrumSummary?.secondaryGenres?.length > 0
-              ? selectedDrumSummary.secondaryGenres.map((genre, idx) => <li key={idx}>{genre}</li>)
-              : <li>Select options to view summary</li>}
-          </ul>
-  
-          <h3>🎙 Recording Mic Top Picks</h3>
-          <p>{selectedDrumSummary?.recordingMic || "Select options to view summary"}</p>
-        </div> */}
-  
-        {/* ✅ Button Actions - Manage UI Based on Cart & Stock State */}
-        {/* <div className="button-group">
-          {productQuantity === 0 ? (
-            <button className="notify-button" onClick={handleNotifyMe}>
-              Sold Out - Notify Me When Available
-            </button>
-          ) : productInCart ? (
-            <>
-              <button
-                className="go-to-checkout-button"
-                onClick={() => (window.location.href = '/cart')}
-              >
-                Go to Checkout
-              </button>
-  
-              <button
-                className="change-selections-button"
-                onClick={() => setShowModifyModal(true)}
-              >
-                Change Selections
-              </button>
-  
-              <button
-                className="remove-from-cart-button"
-                onClick={async () => {
-                  const generatedId = `feuzon-${size}-${depth}-${lugs}-${staveQuantity}`;
-                  await removeFromCart(generatedId);
-                  setProductInCart(false);
-                }}
-              >
-                Remove from Cart
-              </button>
-            </>
-          ) : (
-            <button
-              onClick={() => handleAddToCart()}
-              className="add-to-cart-button"
-            >
-              Add to Cart
-            </button>
-          )}
-        </div> */}
       </div>
     );
 };

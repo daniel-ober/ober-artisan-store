@@ -29,22 +29,38 @@ export const CartProvider = ({ children }) => {
       setLoading(true);
       try {
         let cartUserId = user?.uid || localStorage.getItem('cartId');
-
+  
         if (!cartUserId) {
           cartUserId = generateCartId();
           localStorage.setItem('cartId', cartUserId);
         }
-
+  
         setCartId(cartUserId);
-
+  
+        // ✅ 1. Load from localStorage first
+        const storedCart = localStorage.getItem('cart');
+        if (storedCart) {
+          try {
+            setCart(JSON.parse(storedCart));
+            setLoading(false); // return early after localStorage load
+            return;
+          } catch (err) {
+            console.warn('Failed to parse localStorage cart:', err);
+          }
+        }
+  
+        // ✅ 2. Fallback: Load from Firestore
         const cartRef = doc(db, 'carts', cartUserId);
         const cartDoc = await getDoc(cartRef);
-
+  
         if (cartDoc.exists()) {
-          setCart(cartDoc.data().cart || []);
+          const firestoreCart = cartDoc.data().cart || [];
+          setCart(firestoreCart);
+          localStorage.setItem('cart', JSON.stringify(firestoreCart)); // sync localStorage too
         } else {
           await setDoc(cartRef, { cart: [] });
           setCart([]);
+          localStorage.setItem('cart', JSON.stringify([]));
         }
       } catch (err) {
         console.error('Error initializing cart:', err);
@@ -52,9 +68,16 @@ export const CartProvider = ({ children }) => {
         setLoading(false);
       }
     };
-
+  
     initializeCart();
   }, [user]);
+
+  // ✅ Save cart to localStorage on updates
+  useEffect(() => {
+    if (cart && Array.isArray(cart)) {
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+  }, [cart]);
 
   const updateFirestoreCart = async (updatedCart) => {
     if (!cartId) {
@@ -79,10 +102,11 @@ export const CartProvider = ({ children }) => {
       maxQuantity: item.maxQuantity || 1,
       variantId: item.variantId || '',
       options: item.options || {},
+      config: item.config || {}, // ✅ Persist variant config
       deliveryTime: item.deliveryTime || '',
       description: item.description || '',
       images: item.images || [],
-      timestamp: new Date().toISOString(),
+      timestamp: item.timestamp || new Date().toISOString(),
     }));
 
     try {
@@ -96,25 +120,42 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  const addToCart = async (product, selectedOptions) => {
+  const addToCart = async (product, selectedOptions = {}) => {
     if (!product || typeof product !== 'object') return;
     if (!cartId) return;
 
+    const mergedOptions = {
+      ...(product.options || {}),
+      ...selectedOptions,
+    };
+
     const cartItem = {
       id: product.id,
-      productId: product.id,
+      productId: product.productId || product.id,
       name: product.name || 'Unnamed Product',
       category: product.category || 'merch',
       quantity: 1,
       price: product.price,
-      stripePriceId: selectedOptions.stripePriceId || '',
+      stripePriceId: product.stripePriceId || mergedOptions.stripePriceId || '',
       currentQuantity: product.currentQuantity || 1,
       maxQuantity: product.maxQuantity || 1,
       deliveryTime: product.deliveryTime || '',
       description: product.description || '',
       images: product.images || [],
-      variantId: selectedOptions.variantId,
-      options: selectedOptions,
+      variantId: product.variantId || mergedOptions.variantId,
+
+      config: {
+        ...mergedOptions,
+        size: product.size || mergedOptions.size,
+        depth: product.depth || mergedOptions.depth,
+        color: mergedOptions.color || product.color,
+        reRing: product.reRing ?? mergedOptions.reRing,
+        lugQuantity: product.lugQuantity ?? mergedOptions.lugQuantity,
+        staveQuantity: product.staveQuantity ?? mergedOptions.staveQuantity,
+        outerShell: mergedOptions.outerShell,
+        innerStave: mergedOptions.innerStave,
+      },
+
       timestamp: new Date().toISOString(),
     };
 
@@ -149,7 +190,7 @@ export const CartProvider = ({ children }) => {
   };
 
   const removeFromCart = async (productId) => {
-    let updatedCart = cart.filter((item) => item.id !== productId);
+    const updatedCart = cart.filter((item) => item.id !== productId);
     setCart(updatedCart);
     await updateFirestoreCart(updatedCart);
   };

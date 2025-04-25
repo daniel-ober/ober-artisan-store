@@ -15,7 +15,7 @@ const CartPreview = ({ onClose, closeMenu }) => {
     if (!item) return;
 
     const minQuantity = 1;
-    const maxQuantity = item.currentQuantity || 1;
+    const maxQuantity = item.currentQuantity || 10;
     const newQuantity = Math.min(
       Math.max(item.quantity + change, minQuantity),
       maxQuantity
@@ -51,29 +51,31 @@ const CartPreview = ({ onClose, closeMenu }) => {
                 price,
                 quantity,
                 category,
-                options = {},
+                config = {},
               } = item;
 
-              const size = item.size || options.size || options.Sizes;
-              const depth = item.depth || options.depth;
-              const lugQuantity = item.lugQuantity || options.lugQuantity;
-              const staveQuantity = item.staveQuantity || options.staveQuantity;
-              const reRingRaw = item.reRing ?? options.reRing;
-              const isReRing = String(reRingRaw) === 'true' || reRingRaw === true;
-              const outerShell = options.outerShell;
-              const innerStave = options.innerStave;
+              const {
+                color,
+                size,
+                depth,
+                lugQuantity,
+                staveQuantity,
+                reRing,
+                outerShell,
+                innerStave,
+              } = config;
 
               const configLines = [];
 
-              if (options.Colors) configLines.push(`Colors: ${options.Colors}`);
-              if (options.Sizes) configLines.push(`Sizes: ${options.Sizes}`);
+              if (color) configLines.push(`Colors: ${color}`);
+              if (size) configLines.push(`Sizes: ${size}`);
               if (size && depth) configLines.push(`${size}" x ${depth}"`);
 
               const line2 = [];
               if (lugQuantity) line2.push(`${lugQuantity} Lugs`);
               if (staveQuantity) line2.push(`${staveQuantity} Staves`);
-              if (typeof reRingRaw !== 'undefined')
-                line2.push(isReRing ? 'Re-Rings' : 'No Re-Rings');
+              if (typeof reRing !== 'undefined')
+                line2.push(reRing ? 'Re-Rings' : 'No Re-Rings');
               if (line2.length > 0) configLines.push(line2.join(' • '));
 
               if (outerShell || innerStave) {
@@ -85,17 +87,19 @@ const CartPreview = ({ onClose, closeMenu }) => {
               let previewImage = fallback;
 
               if (Array.isArray(images)) {
-                const variantImage = images.find((img) => {
-                  if (!img?.src?.startsWith('http')) return false;
-                  if (!img?.variant_ids?.length) return false;
-                  return img.variant_ids.includes(String(options.variantId));
+                const firstValid = images.find((img) => {
+                  if (typeof img === 'string') return img.startsWith('http');
+                  if (typeof img === 'object')
+                    return img?.src?.startsWith('http');
+                  return false;
                 });
 
-                const generalImage = images.find(
-                  (img) => typeof img?.src === 'string' && img.src.startsWith('http')
-                );
-
-                previewImage = variantImage?.src || generalImage?.src || fallback;
+                if (firstValid) {
+                  previewImage =
+                    typeof firstValid === 'string'
+                      ? firstValid
+                      : firstValid.src || fallback;
+                }
               }
 
               return (
@@ -110,13 +114,15 @@ const CartPreview = ({ onClose, closeMenu }) => {
                   <div className="cart-item-details">
                     <p className="item-name">{name}</p>
                     {configLines.map((line, idx) => (
-                      <p key={idx} className="item-config">{line}</p>
+                      <p key={idx} className="item-config">
+                        {line}
+                      </p>
                     ))}
                     <p className="item-price">
                       ${Number(price || 0).toFixed(2)}
                     </p>
 
-                    {category !== 'artisan' ? (
+                    {category !== 'artisan' && (
                       <div className="quantity-buttons">
                         <button
                           onClick={() => handleQuantityChange(id, -1)}
@@ -127,13 +133,11 @@ const CartPreview = ({ onClose, closeMenu }) => {
                         <span>{quantity}</span>
                         <button
                           onClick={() => handleQuantityChange(id, 1)}
-                          disabled={quantity >= (item.currentQuantity || 1)}
+                          disabled={quantity >= (item.currentQuantity || 10)}
                         >
                           +
                         </button>
                       </div>
-                    ) : (
-                      <span className="quantity-value">Qty: {quantity}</span>
                     )}
                   </div>
 

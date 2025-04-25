@@ -151,35 +151,15 @@
   position: relative;
   display: inline-block;
   width: 100%;
-  z-index: 9998; /* Optional but ensures stacking consistency */
+  z-index: 9998; /* Ensures it stacks above other elements */
 }
 
-/* Keep dropdown visible when hovering over the container */
-.artisan-cart-hover-container:hover .artisan-cart-hover-options {
-  display: block;
-  margin-top: -4px; /* ✅ Eliminates any gap */
-}
-
-/* Options inside dropdown */
-.artisan-cart-hover-options span {
-  display: block;
-  padding: 12px;
-  cursor: pointer;
-  color: #333;
-  font-weight: 600;
-  transition: background-color 0.2s ease;
-  width: 100%;
-}
-
-.artisan-cart-hover-options span:hover {
-  background-color: #f5f5f5;
-}
-
+/* Options container (initially hidden) */
 .artisan-cart-hover-options {
   position: absolute;
   top: 100%;
   left: 0;
-  right: 0; /* ✅ Ensures it doesn't overflow horizontally */
+  right: 0; /* Ensures full width matching the parent */
   background: #fff;
   border: 1px solid #ccc;
   font-size: 14px;
@@ -190,11 +170,29 @@
   border-radius: 6px;
   box-sizing: border-box;
   z-index: 9999;
-  overflow: hidden; /* ✅ Trims any child hover weirdness */
+  overflow: hidden; /* Prevents dropdown overflow */
 }
 
+/* Show options on hover */
 .artisan-cart-hover-container:hover .artisan-cart-hover-options {
   display: block;
+  margin-top: -4px; /* Optional: adjust spacing between button and dropdown */
+}
+
+/* Each option in the dropdown */
+.artisan-cart-hover-options span {
+  display: block;
+  padding: 12px;
+  cursor: pointer;
+  color: #333;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+  width: 100%;
+}
+
+/* Hover effect on options */
+.artisan-cart-hover-options span:hover {
+  background-color: #f5f5f5;
 }
 
 /* 📌 Other Buttons */

@@ -70,27 +70,27 @@ const HeritageProductDetail = () => {
       console.error('❌ Missing selection: Size or Depth not chosen');
       return;
     }
-  
+
     if (product.status !== 'active' && !product.isPreOrder) {
       toast.error('❌ This drum is currently unavailable.');
       return;
     }
-  
+
     const hasReRing =
       staveOption.includes('Re-Rings') || staveOption.includes('+ $150');
-  
+
     const selectedOption = heritageSummaries.pricingOptions.find(
       (option) =>
         option.size === size &&
         option.depth === depth &&
         option.reRing === hasReRing
     );
-  
+
     if (!selectedOption) {
       console.error('❌ No matching pricing option found.');
       return;
     }
-  
+
     const newCartItemId = generateCartItemId({
       stripePriceId: selectedOption.stripePriceId,
       size,
@@ -99,7 +99,7 @@ const HeritageProductDetail = () => {
       lugQuantity: selectedOption.lugQuantity,
       staveQuantity: selectedOption.staveQuantity,
     });
-  
+
     const cartItem = {
       id: newCartItemId,
       productId: 'heritage',
@@ -112,11 +112,15 @@ const HeritageProductDetail = () => {
       price: selectedOption.price,
       stripePriceId: selectedOption.stripePriceId,
       quantity: 1,
+      images: [
+        'https://firebasestorage.googleapis.com/v0/b/danoberartisandrums-dev.firebasestorage.app/o/products%2FIMG_6123.png?alt=media&token=ec8d40b8-ebae-41dc-93c6-e7936055ead7',
+      ],
+      category: 'artisan',
     };
-  
+
     await addToCart(cartItem, cartItem);
     toast.success('🛒 Item added to cart!');
-    setPendingCartItemId(cartItem.id); // let useEffect detect this as a signal  
+    setPendingCartItemId(cartItem.id); // let useEffect detect this as a signal
     // ✅ Manually reflect new ID locally for instant feedback
     setCartItemId(newCartItemId);
     setButtonText('In Cart');
@@ -129,16 +133,16 @@ const HeritageProductDetail = () => {
   useEffect(() => {
     const hasReRing =
       staveOption.includes('Re-Rings') || staveOption.includes('+ $150');
-  
+
     const selectedOption = heritageSummaries.pricingOptions.find(
       (option) =>
         option.size === size &&
         option.depth === depth &&
         option.reRing === hasReRing
     );
-  
+
     if (!selectedOption) return;
-  
+
     const expectedId = generateCartItemId({
       stripePriceId: selectedOption.stripePriceId,
       size,
@@ -147,9 +151,9 @@ const HeritageProductDetail = () => {
       lugQuantity: selectedOption.lugQuantity,
       staveQuantity: selectedOption.staveQuantity,
     });
-  
+
     const isInCart = cart.some((item) => item.id === expectedId);
-  
+
     if (isInCart) {
       setCartItemId(expectedId);
       setButtonText('In Cart');
@@ -176,7 +180,7 @@ const HeritageProductDetail = () => {
         setIsLoading(false);
       }
     };
-  
+
     fetchProductStatus();
   }, []);
 
@@ -280,12 +284,12 @@ const HeritageProductDetail = () => {
 
   return (
     <div className="heritage-product-detail">
-         <img
-            src="/resized-logos/heritage-white.png"
-            alt="HERITAGE Series"
-            className="artisanseries-header-image"
-          />
-
+      <img
+        src="/resized-logos/heritage-white.png"
+        alt="HERITAGE Series"
+        className="artisanseries-header-image"
+      />
+  
       <div className="heritage-product-content">
         <div className="heritage-product-image">
           <img
@@ -293,9 +297,8 @@ const HeritageProductDetail = () => {
             alt="HERITAGE Snare Drum"
           />
         </div>
-
+  
         <div className="heritage-product-options">
-          {/* 📌 Default Features List */}
           <div className="heritage-features">
             <h2>HERITAGE Series Features</h2>
             <ul>
@@ -309,37 +312,33 @@ const HeritageProductDetail = () => {
               <li>Trick Snare Throw-Off</li>
               <li>Puresound Snare Wires</li>
               <li>Remo Coated Ambassador Batter & Clear Snare Side</li>
-              <li>Estimated Delivery: 5-7 weeks</li>
+              <li>Estimated Delivery: 5–7 weeks</li>
               <p className="order-to-build-disclaimer">
-                *Note: All Ober Artisan drums are on an "order-to-build" basis,
-                offering various configuration options. Finsihed product will
-                appear different than the image shown.
+                *Note: All Ober Artisan drums are on an "order-to-build" basis, offering various configuration options. Finished product will appear different than the image shown.
               </p>
             </ul>
           </div>
+  
           <h2>Build Options</h2>
-          {/* Snare Size */}
+  
           <label htmlFor="size">Snare Size (Diameter)</label>
           <select id="size" value={size} onChange={handleSizeChange}>
             {Object.keys(basePrices).map((sizeOption) => (
               <option key={sizeOption} value={sizeOption}>
-                {sizeOption}&quot; - Base Price: ${basePrices[sizeOption]}
+                {sizeOption}" - Base Price: ${basePrices[sizeOption]}
               </option>
             ))}
           </select>
-          {/* Snare Depth */}
+  
           <label htmlFor="depth">Depth</label>
           <select id="depth" value={depth} onChange={handleDepthChange}>
             {Object.keys(depthPrices[size]).map((depthOption) => (
               <option key={depthOption} value={depthOption}>
-                {depthOption}&quot;{' '}
-                {depthPrices[size][depthOption] > 0
-                  ? `+ $${depthPrices[size][depthOption]}`
-                  : ''}
+                {depthOption}" {depthPrices[size][depthOption] > 0 ? `+ $${depthPrices[size][depthOption]}` : ''}
               </option>
             ))}
           </select>
-          {/* Lug Quantity */}
+  
           <label htmlFor="lugs">Lug Quantity</label>
           <select id="lugs" value={lugs} onChange={handleLugChange}>
             {lugOptions[size].map((lugOption) => (
@@ -348,7 +347,7 @@ const HeritageProductDetail = () => {
               </option>
             ))}
           </select>
-          {/* Stave Quantity & Shell Thickness */}
+  
           <label htmlFor="staves">Stave Quantity & Shell Thickness</label>
           <select id="staves" value={staveOption} onChange={handleStaveChange}>
             {(staveOptions[size]?.[lugs] || []).map((staveOption) => (
@@ -357,58 +356,27 @@ const HeritageProductDetail = () => {
               </option>
             ))}
           </select>
-          {/* Total Price */}
+  
           <p className="feuzon-detail-price">${totalPrice}</p>
-          <p className="delivery-time">Est Delivery: 5-7 weeks</p>
-          {product?.status === 'active' || product?.isPreOrder ? (  buttonText === 'In Cart' ? (
-    <div className="artisan-cart-hover-container">
-      <button className="artisan-in-cart-button" disabled>
-        ✔ In Cart
-      </button>
-      <div className="artisan-cart-hover-options">
-        <span onClick={() => navigate('/cart')}>View Cart</span>
-        <span onClick={handleRemoveFromCart}>Remove</span>
-      </div>
-    </div>
-  ) : (
-    <button className="artisan-add-to-cart-button" onClick={handleAddToCart}>
-      {buttonText}
-    </button>
-  )
-) : (
-  <button className="artisan-add-to-cart-button" disabled>
-    Currently Unavailable
+          <p className="delivery-time">Est Delivery: 5–7 weeks</p>
+  
+          {buttonText === 'In Cart' ? (
+            <div className="artisan-cart-hover-container">
+  <button className="artisan-in-cart-button" disabled>
+    ✔ In Cart
   </button>
-)}
+  <div className="artisan-cart-hover-options">
+    <span onClick={() => navigate('/cart')}>View Cart</span>
+    <span onClick={handleRemoveFromCart}>Remove</span>
+  </div>
+</div>
+          ) : (
+            <button className="artisan-add-to-cart-button" onClick={handleAddToCart}>
+              Add to Cart
+            </button>
+          )}
         </div>
       </div>
-
-      {/* 📌 Drum Summary Section */}
-      {/* <div className="drum-summary"> */}
-      {/* <SpiderChart data={[soundProfile.projection, soundProfile.sustain, soundProfile.brightness, soundProfile.warmth, soundProfile.attack]} /> */}
-      {/* <BarChart data={soundProfile} /> */}
-      {/* <h1>Artisan Notes</h1>
-        <h3>🎛️ Highlighted Characteristics</h3>
-        <p>
-          {selectedDrumSummary.highlightedCharacteristics ||
-            'Select options to view summary'}
-        </p>
-
-        <h3>🎵 Genre Top Picks</h3>
-        {selectedDrumSummary.primaryGenre || 'Select options to view summary'}
-        <ul>
-          {selectedDrumSummary.secondaryGenres?.map((genre, idx) => (
-            <li key={idx}>{genre}</li>
-          )) || 'Select options to view summary'}
-        </ul> */}
-      {/* <h3>🎤 Playing Situations</h3>
-        <p>{selectedDrumSummary.playingSituation || "Select options to view summary"}</p> */}
-
-      {/* <h3>🎙 Recording Mic Top Picks</h3>
-        <p>
-          {selectedDrumSummary.recordingMic || 'Select options to view summary'}
-        </p> */}
-      {/* </div> */}
     </div>
   );
 };
