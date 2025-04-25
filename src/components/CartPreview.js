@@ -4,7 +4,7 @@ import { useCart } from '../context/CartContext';
 import './CartPreview.css';
 
 const CartPreview = ({ onClose, closeMenu }) => {
-  const { cart, removeFromCart, updateQuantity } = useCart();
+  const { cart, cartId, removeFromCart, updateQuantity } = useCart();
 
   const handleRemoveItem = (itemId) => {
     removeFromCart(itemId);
@@ -171,6 +171,11 @@ const CartPreview = ({ onClose, closeMenu }) => {
       ) : (
         <p className="empty-cart">Your cart is empty.</p>
       )}
+      {cartId && (
+  <p className="cart-id-preview">
+    Cart ID: {cartId.slice(-5)}
+  </p>
+)}
     </div>
   );
 };
