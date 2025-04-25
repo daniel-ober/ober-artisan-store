@@ -105,7 +105,7 @@ const Contact = () => {
 
   const handleClose = () => {
     setOpen(false);
-    navigate('/pre-order'); // Redirect to the "Pre-Order" page after success
+    navigate('/artisanseries/pre-order'); // Redirect to the "Pre-Order" page after success
   };
 
   return (
