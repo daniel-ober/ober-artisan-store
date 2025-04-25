@@ -11,6 +11,7 @@ import { db } from '../firebaseConfig';
 import './ManageProducts.css';
 import AddProductModal from './AddProductModal';
 import EditProductModal from './EditProductModal';
+import EditMerchProductModal from './EditMerchProductModal';
 
 const FALLBACK_IMAGE_URL = 'https://i.imgur.com/eoKsILV.png';
 
@@ -120,14 +121,23 @@ const ManageProducts = () => {
     }
   };
 
-  const openProductDetail = (productId) => {
-    const id = typeof productId === 'string' ? productId : productId?.id || '';
-    if (id) {
-      window.open(`/products/${id}`, '_blank');
-    } else {
-      console.warn("Invalid productId passed to openProductDetail:", productId);
+  const openProductDetail = (productOrId) => {
+    const product = typeof productOrId === 'object' ? productOrId : products.find((p) => p.id === productOrId);
+    if (!product) {
+      console.warn("Invalid productOrId passed to openProductDetail:", productOrId);
+      return;
     }
+  
+    const url = product._source === 'merchProducts'
+      ? `/merch/${product.id}`
+      : `/products/${product.id}`;
+  
+    window.open(url, '_blank');
   };
+
+  const productToEdit = editProductId
+    ? products.find((p) => p.id === editProductId)
+    : null;
 
   return (
     <div className="manage-products-container">
@@ -180,47 +190,38 @@ const ManageProducts = () => {
                       <option value="inactive">Inactive</option>
                     </select>
                   </td>
-                  <td>
-                    {isMerch ? (
-                      <span>Managed by Printify</span>
-                    ) : (
-                      <select
-                        value={product.maxQuantity || 0}
-                        onChange={(e) =>
-                          handleMaxInventoryChange(product.id, parseInt(e.target.value))
-                        }
-                      >
-                        {Array.from({ length: 21 }, (_, i) => (
-                          <option key={i} value={i}>
-                            {i}
-                          </option>
-                        ))}
-                      </select>
-                    )}
-                  </td>
-                  <td>
-                    {isMerch ? (
-                      <span>Auto Synced</span>
-                    ) : (
-                      <input
-                        type="number"
-                        value={product.currentQuantity || 0}
-                        min="0"
-                        max={product.maxQuantity || 0}
-                        onChange={(e) =>
-                          handleCurrentInventoryChange(
-                            product.id,
-                            parseInt(e.target.value) || 0
-                          )
-                        }
-                      />
-                    )}
-                  </td>
+                  <td>{isMerch ? 'Managed by Printify' : (
+                    <select
+                      value={product.maxQuantity || 0}
+                      onChange={(e) =>
+                        handleMaxInventoryChange(product.id, parseInt(e.target.value))
+                      }
+                    >
+                      {Array.from({ length: 21 }, (_, i) => (
+                        <option key={i} value={i}>
+                          {i}
+                        </option>
+                      ))}
+                    </select>
+                  )}</td>
+                  <td>{isMerch ? 'Auto Synced' : (
+                    <input
+                      type="number"
+                      value={product.currentQuantity || 0}
+                      min="0"
+                      max={product.maxQuantity || 0}
+                      onChange={(e) =>
+                        handleCurrentInventoryChange(
+                          product.id,
+                          parseInt(e.target.value) || 0
+                        )
+                      }
+                    />
+                  )}</td>
                   <td>
                     <button
                       className="edit-btn"
                       onClick={() => setEditProductId(product.id)}
-                      disabled={isMerch}
                     >
                       Edit
                     </button>
@@ -237,6 +238,7 @@ const ManageProducts = () => {
           </tbody>
         </table>
       )}
+
       {isAddModalOpen && (
         <AddProductModal
           onClose={handleAddProductClose}
@@ -245,13 +247,21 @@ const ManageProducts = () => {
           }
         />
       )}
-      {editProductId && (
-        <EditProductModal
-          productId={editProductId}
-          onClose={() => setEditProductId(null)}
-          onProductUpdated={handleProductUpdate}
-        />
-      )}
+
+      {productToEdit &&
+        (productToEdit._source === 'merchProducts' ? (
+          <EditMerchProductModal
+            productId={productToEdit.id}
+            onClose={() => setEditProductId(null)}
+            onProductUpdated={handleProductUpdate}
+          />
+        ) : (
+          <EditProductModal
+            productId={editProductId}
+            onClose={() => setEditProductId(null)}
+            onProductUpdated={handleProductUpdate}
+          />
+        ))}
     </div>
   );
 };
