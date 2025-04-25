@@ -144,6 +144,12 @@
     font-size: 14px;
     color: #777;
   }
+
+  .cart-id-preview {
+    font-size: 0.75rem;
+    text-align: center;
+    color: #999;
+  }
   
   @keyframes slideDown {
     from {
