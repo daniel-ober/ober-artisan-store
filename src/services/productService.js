@@ -30,21 +30,22 @@ export const fetchProducts = async () => {
   return allProducts;
 };
 
-// **Fetch a single product by ID**
+// ✅ **Fetch a single product by ID (searches both collections)**
 export const fetchProductById = async (productId) => {
-  if (!productId) throw new Error("❌ Product ID is required.");
+  console.log('🔍 Fetching productId:', productId);
 
   const tryFetch = async (collectionName) => {
     const ref = doc(db, collectionName, productId);
     const snapshot = await getDoc(ref);
+    console.log(`🔎 Checked ${collectionName} for ID ${productId} — Exists?`, snapshot.exists());
     return snapshot.exists() ? { id: snapshot.id, ...snapshot.data() } : null;
   };
 
-  const fromProducts = await tryFetch("products");
-  if (fromProducts) return fromProducts;
-
   const fromMerch = await tryFetch("merchProducts");
   if (fromMerch) return fromMerch;
+
+  const fromProducts = await tryFetch("products");
+  if (fromProducts) return fromProducts;
 
   throw new Error(`❌ Product with ID ${productId} not found in any collection.`);
 };

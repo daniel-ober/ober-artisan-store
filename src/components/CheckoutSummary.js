@@ -91,7 +91,7 @@ const CheckoutSummary = () => {
           className="print-logo"
         />
       </div>
-      <h1>Order {status === 'Order Completed' ? 'Successful!' : status}</h1>
+      <h1>Order Success</h1>
 
       <div className="order-details">
         <h2>Order Summary</h2>
@@ -121,20 +121,12 @@ const CheckoutSummary = () => {
         <h3>Shipping Address</h3>
         <p>{customerAddress || 'N/A'}</p>
 
-        <h3>Payment Info</h3>
-        <p>
-          <strong>Method:</strong> {paymentMethod.charAt(0).toUpperCase() + paymentMethod.slice(1) || 'N/A'}
-        </p>
-        <p>
-          <strong>Card:</strong> {formattedCardBrand} ****
-          {cardDetails.lastFour || 'XXXX'}
-        </p>
-
         <h3>Items</h3>
         <ul className="checkout-summary-items">
           {items.map((item, idx) => (
             <li key={idx} className="checkout-summary-item">
-              <strong>{item.name}</strong> — ${item.price.toFixed(2)} ×{' '}
+              <strong>{item.description || item.name || 'Item'}</strong> — $
+              {(typeof item.price === 'number' ? item.price : 0).toFixed(2)} ×{' '}
               {item.quantity}
             </li>
           ))}

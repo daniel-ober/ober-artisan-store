@@ -33,10 +33,7 @@ app.use((req, res, next) => {
   if (origin && allowedOrigins.includes(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin);
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    res.setHeader(
-      'Access-Control-Allow-Headers',
-      'Content-Type, Authorization'
-    );
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     res.setHeader('Access-Control-Allow-Credentials', 'true');
   }
   if (req.method === 'OPTIONS') return res.status(204).end();
@@ -47,7 +44,17 @@ app.post('/createCheckoutSession', async (req, res) => {
   try {
     const stripe = stripeLib(STRIPE_SECRET_KEY.value());
     const clientUrl = CLIENT_URL.value().trim();
-    const { products, userId, customerEmail } = req.body;
+    const {
+      products,
+      userId,
+      customerEmail,
+      customerPhone,
+      firstName,
+      lastName,
+      promoCode,
+      shippingAddress,
+      billingAddress,
+    } = req.body;
 
     if (!Array.isArray(products) || products.length === 0) {
       return res.status(400).json({ error: 'Invalid or empty cart.' });
@@ -68,12 +75,19 @@ app.post('/createCheckoutSession', async (req, res) => {
       customer_email: customerEmail,
       shipping_address_collection: { allowed_countries: ['US', 'CA'] },
       allow_promotion_codes: true,
-      metadata: { userId: userId || 'guest', guestToken },
+      metadata: {
+        userId: userId || 'guest',
+        guestToken,
+        customerPhone: customerPhone || '',
+        customerName: `${firstName} ${lastName}`.trim(),
+        promoCode: promoCode || '',
+        address: shippingAddress?.line1 || '',
+      },
     });
 
     res.status(200).json({ url: session.url });
   } catch (err) {
-    console.error('Error creating checkout session:', err);
+    console.error('❌ Error creating checkout session:', err.message);
     res.status(500).json({ error: err.message });
   }
 });
@@ -89,7 +103,7 @@ app.get('/orders/by-session/:sessionId', async (req, res) => {
       return res.status(404).json({ error: 'Order not found' });
     res.json(snapshot.docs[0].data());
   } catch (err) {
-    console.error('Error fetching order:', err);
+    console.error('❌ Error fetching order:', err.message);
     res.status(500).json({ error: err.message });
   }
 });
@@ -100,6 +114,7 @@ stripeWebhookApp.use(express.raw({ type: 'application/json' }));
 stripeWebhookApp.post('/', async (req, res) => {
   const stripe = stripeLib(STRIPE_SECRET_KEY.value());
   let event;
+
   try {
     event = stripe.webhooks.constructEvent(
       req.rawBody,
@@ -107,15 +122,72 @@ stripeWebhookApp.post('/', async (req, res) => {
       STRIPE_WEBHOOK_SECRET.value()
     );
   } catch (err) {
-    console.error('Webhook verification failed:', err.message);
+    console.error('❌ Webhook signature verification failed:', err.message);
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }
 
   if (event.type === 'checkout.session.completed') {
-    res.sendStatus(200);
-  } else {
-    res.sendStatus(200);
+    const session = event.data.object;
+
+    try {
+      const lineItems = await stripe.checkout.sessions.listLineItems(session.id);
+
+      const items = lineItems.data.map((item) => {
+        const metadata = item.price?.metadata || {};
+        return {
+          priceId: item.price?.id || '',
+          description: item.description,
+          quantity: item.quantity,
+          price: item.amount_total ? item.amount_total / 100 : 0,
+          variant: {
+            size: metadata.size || '',
+            color: metadata.color || '',
+            other: metadata.other || '',
+            sku: metadata.sku || '',
+            title: metadata.title || '',
+          },
+        };
+      });
+
+      const orderId = `ORD-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
+
+      const orderDoc = {
+        stripeSessionId: session.id,
+        customerEmail: session.customer_details?.email || '',
+        customerPhone: session.metadata?.customerPhone || '',
+        customerName: session.customer_details?.name || '',
+        customerAddress: session.shipping_details?.address
+          ? `${session.shipping_details.address.line1}, ${session.shipping_details.address.city}, ${session.shipping_details.address.state} ${session.shipping_details.address.postal_code}, ${session.shipping_details.address.country}`
+          : '',
+        amountTotal: session.amount_total || 0,
+        totalAmount: session.amount_total ? session.amount_total / 100 : 0,
+        currency: session.currency || 'usd',
+        paymentMethod: '', // No card brand available unless explicitly expanded
+        cardDetails: {
+          brand: '',
+          lastFour: '',
+        },
+        status: 'paid',
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+        userId: session.metadata?.userId || 'guest',
+        guestToken: session.metadata?.guestToken || '',
+        items,
+        orderId,
+        promoCode: session.total_details?.amount_discount
+          ? (session.discounts?.[0]?.promotion_code || '')
+          : '',
+      };
+
+      await db.collection('orders').doc(orderId).set(orderDoc);
+      console.log(`✅ Order created: ${orderId}`);
+      return res.status(200).send('Order created');
+    } catch (err) {
+      console.error('❌ Failed processing checkout.session.completed:', err.message);
+      return res.status(500).send('Internal Server Error');
+    }
   }
+
+  res.status(200).send('Event received');
 });
 
 const printifyWebhookApp = express();
@@ -178,9 +250,7 @@ const handlePrintifyProductPublished = async (productId) => {
 
     const response = await axios.get(
       `https://api.printify.com/v1/shops/${shopId}/products/${productId}.json`,
-      {
-        headers: { Authorization: `Bearer ${apiKey}` },
-      }
+      { headers: { Authorization: `Bearer ${apiKey}` } }
     );
 
     const product = response.data;
@@ -197,7 +267,6 @@ const handlePrintifyProductPublished = async (productId) => {
         ? variantMeta.find((meta) => meta.id === variant.id)
         : null;
 
-      // Find all images where variant_ids includes this variant.id
       const variantImages = (product.images || []).filter(
         (img) =>
           Array.isArray(img.variant_ids) && img.variant_ids.includes(variant.id)
@@ -282,10 +351,6 @@ const handlePrintifyProductPublished = async (productId) => {
     console.log(`✅ Created merchProduct: ${productId}`);
   } catch (error) {
     console.error('❌ Failed to sync Printify product:', error.message);
-    console.error(
-      '🛠 Error detail:',
-      error.response?.data || error.stack || error
-    );
   }
 };
 
@@ -306,50 +371,15 @@ exports.refreshPrintifyStock = onSchedule(
       try {
         const response = await axios.get(
           `https://api.printify.com/v1/shops/${shopId}/products/${productId}.json`,
-          {
-            headers: { Authorization: `Bearer ${apiKey}` },
-          }
+          { headers: { Authorization: `Bearer ${apiKey}` } }
         );
 
         const printifyProduct = response.data;
-        const variants = printifyProduct.variants
-          .filter((v) => v.is_enabled)
-          .map((v) => {
-            const normalizedOptions = {};
-            if (Array.isArray(v.options)) {
-              for (const opt of productDoc.options || []) {
-                const valMatch = opt.values.find((val) =>
-                  v.options.includes(val.id)
-                );
-                if (valMatch) {
-                  normalizedOptions[opt.title] = valMatch.title;
-                }
-              }
-            }
-            return {
-              id: v.id,
-              is_enabled: v.is_enabled,
-              is_available: v.is_available,
-              options: v.options,
-              normalizedOptions,
-            };
-          });
-
         const productDoc = doc.data();
-        const enrichedOptions = (productDoc.options || []).map((opt) => {
-          const enrichedValues = opt.values.map((val) => {
-            const matchingOriginal = opt.values.find((v) => v.id === val.id);
-            const originalColors = matchingOriginal?.colors || [];
-            return {
-              ...val,
-              colors: Array.isArray(originalColors) ? originalColors : [],
-            };
-          });
-          return { ...opt, values: enrichedValues };
-        });
+        const enrichedOptions = productDoc.options || [];
 
         await doc.ref.update({
-          variants,
+          variants: printifyProduct.variants.filter((v) => v.is_enabled),
           options: enrichedOptions,
           updatedAt: admin.firestore.FieldValue.serverTimestamp(),
         });
@@ -380,12 +410,7 @@ exports.stripeWebhook = onRequest(
 exports.printifyWebhookListener = onRequest(
   {
     region: 'us-central1',
-    secrets: [
-      PRINTIFY_API_KEY,
-      PRINTIFY_SHOP_ID,
-      PRINTIFY_WEBHOOK_SECRET,
-      STRIPE_SECRET_KEY,
-    ],
+    secrets: [PRINTIFY_API_KEY, PRINTIFY_SHOP_ID, PRINTIFY_WEBHOOK_SECRET, STRIPE_SECRET_KEY],
   },
   printifyWebhookApp
 );
@@ -398,9 +423,7 @@ exports.refreshPrintifyStockNow = onRequest(
   async (req, res) => {
     try {
       await exports.refreshPrintifyStock.run();
-      res
-        .status(200)
-        .send('✅ Manual refreshPrintifyStock executed successfully.');
+      res.status(200).send('✅ Manual refreshPrintifyStock executed successfully.');
     } catch (error) {
       console.error('❌ Manual refresh failed:', error);
       res.status(500).send('❌ Manual refresh failed.');
