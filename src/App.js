@@ -232,6 +232,7 @@ function App() {
             path="/admin"
             element={<PrivateRoute element={<AdminDashboard />} adminOnly />}
           />
+          
           <Route path="/admin-signin" element={<AdminSignin />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/checkout-summary" element={<CheckoutSummary />} />

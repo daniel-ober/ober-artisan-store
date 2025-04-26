@@ -96,7 +96,7 @@
   margin-bottom: 10px;
 
   display: -webkit-box;
-  -webkit-line-clamp: 3;     /* ⏳ Show only first 3 lines */
+  /* -webkit-line-clamp: 3;     ⏳ Show only first 3 lines */
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;

@@ -133,16 +133,17 @@ const HeritageProductDetail = () => {
   useEffect(() => {
     const hasReRing =
       staveOption.includes('Re-Rings') || staveOption.includes('+ $150');
-
-    const selectedOption = heritageSummaries.pricingOptions.find(
-      (option) =>
-        option.size === size &&
-        option.depth === depth &&
-        option.reRing === hasReRing
-    );
-
+  
+      const selectedOption = heritageSummaries.pricingOptions.find(
+        (option) =>
+          option.size === size &&
+          option.depth === depth &&
+          option.reRing === hasReRing &&
+          option.lugQuantity.toString() === lugs
+      );
+  
     if (!selectedOption) return;
-
+  
     const expectedId = generateCartItemId({
       stripePriceId: selectedOption.stripePriceId,
       size,
@@ -151,9 +152,9 @@ const HeritageProductDetail = () => {
       lugQuantity: selectedOption.lugQuantity,
       staveQuantity: selectedOption.staveQuantity,
     });
-
+  
     const isInCart = cart.some((item) => item.id === expectedId);
-
+  
     if (isInCart) {
       setCartItemId(expectedId);
       setButtonText('In Cart');
@@ -162,7 +163,14 @@ const HeritageProductDetail = () => {
       setCartItemId(null);
       setButtonText('Add to Cart');
     }
-  }, [cart, size, depth, staveOption, lugs, pendingCartItemId]);
+  }, [
+    cart,
+    size,
+    depth,
+    staveOption,
+    lugs,
+    pendingCartItemId,
+  ]);
 
   useEffect(() => {
     const fetchProductStatus = async () => {

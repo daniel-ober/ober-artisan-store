@@ -3,6 +3,7 @@ import { db } from '../firebaseConfig'; // Import Firestore configuration
 import { doc, getDoc, setDoc, collection } from 'firebase/firestore'; // ✅ MOVE THIS TO THE TOP
 import { useCart } from '../context/CartContext'; // Adjust path if needed
 import SpiderChart from './SpiderChart';
+import { useNavigate } from 'react-router-dom';
 import BarChart from './BarChart';
 import feuzonSummaries from '../data/feuzonSummaries';
 import './FeuzonProductDetail.css';
@@ -32,6 +33,7 @@ const FeuzonProductDetail = () => {
   const { cart, cartId, addToCart, removeFromCart } = useCart();
   const [productInCart, setProductInCart] = useState(false);
   const [flickerChangeSelection, setFlickerChangeSelection] = useState(false);
+  
 
   // ✅ ADD THIS BLOCK HERE
   useEffect(() => {
@@ -39,6 +41,8 @@ const FeuzonProductDetail = () => {
       staveOption.includes('Re-Rings') || staveOption.includes('+ $150');
     setReRing(isReRingRequired);
   }, [staveOption]);
+
+  const navigate = useNavigate();
   
   const basePrices = { 12: 1050, 13: 1150, 14: 1250 };
 
@@ -114,16 +118,12 @@ const FeuzonProductDetail = () => {
   };
 
   useEffect(() => {
-    
-    const generatedId = `feuzon-${stripePriceId}-${size}-${depth}-${reRing}-${lugs}-${staveQuantity}`;
-    const isInCart = cart.some((item) => item.id === generatedId);
+    if (!stripePriceId || !outerShell || !innerStave) return;
   
-    if (isInCart !== productInCart) {
-      setTimeout(() => {
-        setProductInCart(isInCart);
-      }, 200); // debounce slightly
-    }
-  }, [cart, stripePriceId, size, depth, reRing, lugs, staveQuantity]);
+    const generatedId = `feuzon-${stripePriceId}-${size}-${depth}-${reRing}-${lugs}-${staveQuantity}-${outerShell}-${innerStave}`;
+    const isInCart = cart.some((item) => item.id === generatedId);
+    setProductInCart(isInCart);
+  }, [cart, stripePriceId, size, depth, reRing, lugs, staveQuantity, outerShell, innerStave]);
   
   
   const handleAddToCart = async () => {
@@ -133,7 +133,7 @@ const FeuzonProductDetail = () => {
     }
   
     const cartItem = {
-      id: `feuzon-${stripePriceId}-${size}-${depth}-${reRing}-${lugs}-${staveQuantity}`,
+id: `feuzon-${stripePriceId}-${size}-${depth}-${reRing}-${lugs}-${staveQuantity}-${outerShell}-${innerStave}`,
       productId: "feuzon",
       name: "FEUZØN",
       size,
@@ -424,8 +424,20 @@ const FeuzonProductDetail = () => {
     const generatedId = `feuzon-${stripePriceId}-${size}-${depth}-${reRing}-${lugs}-${staveQuantity}-${outerShell}-${innerStave}`;
     const isInCart = cart.some((item) => item.id === generatedId);
   
-    setProductInCart(isInCart);
-  }, [cart, stripePriceId, size, depth, reRing, lugs, staveQuantity, outerShell, innerStave]);
+    if (isInCart !== productInCart) {
+      setProductInCart(isInCart);
+    }
+  }, [
+    cart,
+    stripePriceId,
+    size,
+    depth,
+    reRing,
+    lugs,
+    staveQuantity,
+    outerShell,
+    innerStave,
+  ]);
 
   // ✅ Handle modifying an existing Feuzon selection
   const handleModifySelection = () => {

@@ -160,12 +160,16 @@ const ProductCard = ({ product }) => {
     });
   };
 
-  console.log("🧠 product.id type:", typeof product.id, "value:", product.id);
+  const getDetailPath = () =>
+    product.collection === "merchProducts"
+      ? `/merch/${product.id}`
+      : `/products/${product.id}`;
+
   return (
     <div className="product-card">
       <div
         className="product-image-container"
-        onClick={() => navigate(`/products/${product.id}`)}
+        onClick={() => navigate(getDetailPath())}
         role="button"
         tabIndex={0}
         aria-label={`View details of ${product.title || product.name}`}
@@ -211,7 +215,7 @@ const ProductCard = ({ product }) => {
         </div>
       </div>
 
-      <p className="more-info-link" onClick={() => navigate(`/products/${product.id}`)}>
+      <p className="more-info-link" onClick={() => navigate(getDetailPath())}>
         More Info
       </p>
     </div>

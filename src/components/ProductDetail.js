@@ -128,12 +128,24 @@ const ProductDetail = () => {
   }, [productId]);
 
   useEffect(() => {
-    if (!selectedVariant) return;
+    if (!selectedVariant || !selectedOptions) {
+      setInCart(null);
+      return;
+    }
 
     const variantId = `merch-${selectedVariant.stripePriceId}-${selectedVariant.id}`;
-    const existingItem = cart.find((item) => item.id === variantId);
+
+    const existingItem = cart.find((item) => {
+      return (
+        item.id === variantId &&
+        Object.entries(selectedOptions).every(
+          ([key, value]) => item.config?.[key] === value
+        )
+      );
+    });
+
     setInCart(existingItem || null);
-  }, [cart, selectedVariant]);
+  }, [cart, selectedVariant, selectedOptions]);
 
   useEffect(() => {
     if (
@@ -237,26 +249,34 @@ const ProductDetail = () => {
 
     const cartItemId = `merch-${selectedVariant.stripePriceId}-${selectedVariant.id}`;
 
-    addToCart(
-      {
-        id: cartItemId,
-        name: product.title || product.name,
-        description: product.description || '',
-        images: selectedVariant.images || product.images,
-        price: selectedVariant.price,
-        stripePriceId: selectedVariant.stripePriceId,
-        isPreOrder: false,
-        deliveryTime: product.deliveryTime || '7–10 business days',
-        currentQuantity: 10,
-        maxQuantity: 10,
-        variantId: selectedVariant.id,
-        category: 'merch',
-      },
-      {
-        quantity: 1,
-        ...selectedOptions,
-      }
-    );
+    const cartItem = {
+      id: cartItemId,
+      productId: product.id,
+      name: product.title || product.name,
+      description: product.description || '',
+      images: selectedVariant.images || product.images,
+      price: selectedVariant.price,
+      stripePriceId: selectedVariant.stripePriceId,
+      isPreOrder: false,
+      deliveryTime: product.deliveryTime || '7–10 business days',
+      currentQuantity: 10,
+      maxQuantity: 10,
+      variantId: selectedVariant.id,
+      category: 'merch',
+    };
+
+    const cartMetadata = {
+      quantity: 1,
+      ...selectedOptions,
+    };
+
+    addToCart(cartItem, cartMetadata);
+
+    // 🔧 Manually set cart state immediately for UI sync
+    setInCart({
+      ...cartItem,
+      options: { ...selectedOptions },
+    });
   };
 
   if (loading) return <p>Loading product details...</p>;
@@ -363,15 +383,6 @@ const ProductDetail = () => {
           </div>
 
           <div className="product-info">
-            <h2>Product Specifications</h2>
-            <p className="product-price">
-              {selectedVariant
-                ? `$${selectedVariant.price.toFixed(2)}`
-                : product.price
-                  ? `$${product.price.toFixed(2)}`
-                  : 'Select options'}
-            </p>
-
             {!!product?.options?.length &&
               [...product.options]
                 .sort((a, b) => {
@@ -470,31 +481,55 @@ const ProductDetail = () => {
                   </div>
                 ))}
 
-                <div className="product-action">
-                {inCart ? (
-  <div className="artisan-cart-hover-container">
-    <button className="artisan-in-cart-button" disabled>
-      ✔ In Cart
-    </button>
-    <div className="artisan-cart-hover-options">
-      <span onClick={() => navigate('/cart')}>View Cart</span>
-      <span onClick={() => removeFromCart(`merch-${selectedVariant.stripePriceId}-${selectedVariant.id}`)}>
-        Remove
-      </span>
-    </div>
-  </div>
-) : (
-  <button
-    className="artisan-add-to-cart-button"
-    onClick={addToCartWithOptions}
-    disabled={!selectedVariant || !selectedVariant.is_available}
-  >
-    {!selectedVariant || !selectedVariant.is_available
-      ? 'Unavailable'
-      : 'Add to Cart'}
-  </button>
-)}
-</div>
+                {product.description && (
+              <div className="product-description-wrapper">
+                <div
+                  className="product-description-html"
+                  dangerouslySetInnerHTML={{ __html: product.description }}
+                />
+              </div>
+            )}
+
+            <p className="product-price">
+              {selectedVariant
+                ? `$${selectedVariant.price.toFixed(2)}`
+                : product.price
+                  ? `$${product.price.toFixed(2)}`
+                  : 'Select options'}
+            </p>
+            
+
+            <div className="product-action full-width-button">
+              {inCart ? (
+                <div className="artisan-cart-hover-container">
+                  <button className="artisan-in-cart-button" disabled>
+                    ✔ In Cart
+                  </button>
+                  <div className="artisan-cart-hover-options">
+                    <span onClick={() => navigate('/cart')}>View Cart</span>
+                    <span
+                      onClick={() =>
+                        removeFromCart(
+                          `merch-${selectedVariant.stripePriceId}-${selectedVariant.id}`
+                        )
+                      }
+                    >
+                      Remove
+                    </span>
+                  </div>
+                </div>
+              ) : (
+                <button
+                  className="artisan-add-to-cart-button"
+                  onClick={addToCartWithOptions}
+                  disabled={!selectedVariant || !selectedVariant.is_available}
+                >
+                  {!selectedVariant || !selectedVariant.is_available
+                    ? 'Unavailable'
+                    : 'Add to Cart'}
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </div>

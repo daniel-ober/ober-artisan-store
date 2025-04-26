@@ -136,29 +136,33 @@ app.post(
     // Process only the checkout.session.completed event
     if (event.type === 'checkout.session.completed') {
       const session = event.data.object;
-
-      // Retrieve line items (expanding product details)
-      const lineItems = await stripe.checkout.sessions.listLineItems(
-        session.id,
-        {
-          expand: ['data.price.product'],
-        }
-      );
-
-      // Map line items with enriched details
-      const items = lineItems.data.map((item) => ({
-        // Use the expanded product name if available, otherwise fall back to description
-        name:
-          (item.price && item.price.product && item.price.product.name) ||
-          item.description ||
-          'Unnamed Product',
-        quantity: item.quantity,
-        price: item.amount_total / 100, // Convert to dollars
-        status: 'Order Successful', // Set default status for each item
-        shippingDetails: 'No Shipping Details Provided', // Default shipping details per item
-      }));
-
-      // Retrieve payment intent to get card details
+    
+      // ✅ Retrieve enriched line items (with expanded product metadata)
+      const lineItems = await stripe.checkout.sessions.listLineItems(session.id, {
+        expand: ['data.price.product'],
+      });
+    
+      const items = lineItems.data.map((item) => {
+        const metadata = item.price?.product?.metadata || {};
+    
+        return {
+          name: item.price?.product?.name || item.description || 'Unnamed Product',
+          quantity: item.quantity,
+          price: item.amount_total / 100,
+          variantId: metadata.variantId || '',
+          size: metadata.size || '',
+          depth: metadata.depth || '',
+          color: metadata.color || '',
+          reRing: metadata.reRing || '',
+          lugQuantity: metadata.lugQuantity || '',
+          staveQuantity: metadata.staveQuantity || '',
+          outerShell: metadata.outerShell || '',
+          innerStave: metadata.innerStave || '',
+          status: 'Order Successful',
+        };
+      });
+    
+      // ✅ Retrieve card details from payment intent
       let cardDetails = {};
       if (session.payment_intent) {
         try {
@@ -166,65 +170,23 @@ app.post(
             session.payment_intent,
             { expand: ['payment_method'] }
           );
-
-          if (
-            paymentIntent.payment_method &&
-            paymentIntent.payment_method.card
-          ) {
-            const card = paymentIntent.payment_method.card;
+          const card = paymentIntent.payment_method?.card;
+          if (card) {
             cardDetails = {
-              brand: card.brand || 'Unknown',
-              lastFour: card.last4 || 'XXXX',
-              expMonth: card.exp_month || null,
-              expYear: card.exp_year || null,
+              brand: card.brand,
+              lastFour: card.last4,
+              expMonth: card.exp_month,
+              expYear: card.exp_year,
             };
-          } else {
-            console.error('Card details are missing in payment intent');
           }
         } catch (error) {
-          console.error(
-            'Error fetching payment intent for card details:',
-            error.message
-          );
+          console.error('❌ Error fetching payment intent card details:', error.message);
         }
-      } else {
-        console.error('Payment intent ID is missing in session');
       }
-
-      // Update product quantities in Firestore
-      try {
-        for (const item of items) {
-          const productSnapshot = await db
-            .collection('products')
-            .where('name', '==', item.name)
-            .limit(1)
-            .get();
-
-          if (productSnapshot.empty) {
-            console.error(
-              `Product "${item.name}" does not exist in Firestore.`
-            );
-            continue;
-          }
-
-          const productDoc = productSnapshot.docs[0];
-          const productData = productDoc.data();
-          const newQuantity =
-            (productData.currentQuantity || 0) - item.quantity;
-
-          if (newQuantity < 0) {
-            console.warn(`Insufficient stock for product "${item.name}".`);
-          } else {
-            await productDoc.ref.update({ currentQuantity: newQuantity });
-          }
-        }
-      } catch (error) {
-        console.error('Error updating product quantities:', error.message);
-      }
-
-      // Prepare enriched order data with all required fields
+    
+      // ✅ Final order data
       const orderData = {
-        stripeSessionId: session.id || null,
+        stripeSessionId: session.id,
         userId: session.metadata?.userId || 'guest',
         guestToken: session.metadata?.guestToken || null,
         customerName: session.customer_details?.name || 'No Name Provided',
@@ -237,12 +199,12 @@ app.post(
           ? `${session.shipping.address.line1 || ''}, ${session.shipping.address.city || ''}, ${session.shipping.address.state || ''}, ${session.shipping.address.country || ''}, ${session.shipping.address.postal_code || ''}`
           : 'No Shipping Details Provided',
         paymentMethod: session.payment_method_types?.[0] || 'card',
-        cardDetails, // Captured card details
-        totalAmount: session.amount_total / 100 || 0, // Convert to dollars
+        cardDetails,
+        totalAmount: session.amount_total / 100 || 0,
         currency: session.currency || 'usd',
-        status: 'Order Started', // Update order status as desired
-        items, // Enriched line items array
-        createdAt: admin.firestore.FieldValue.serverTimestamp(), // Firestore timestamp
+        status: 'Order Started',
+        items,
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
         systemHistory: [
           {
             event: `Order created from Stripe checkout session`,
@@ -250,16 +212,14 @@ app.post(
           },
         ],
       };
-
+    
       try {
-        // Generate a custom ID for the order document
         const customId = generateCustomId();
-        const orderRef = db.collection('orders').doc(customId);
-        await orderRef.set(orderData);
-        console.log('Order successfully saved to Firestore with ID:', customId);
+        await db.collection('orders').doc(customId).set(orderData);
+        console.log('✅ Order saved to Firestore with ID:', customId);
         res.status(200).send('Event processed successfully');
       } catch (error) {
-        console.error('Error saving order to Firestore:', error.message);
+        console.error('❌ Error saving order to Firestore:', error.message);
         res.status(500).send('Internal Server Error');
       }
     } else {
@@ -310,80 +270,56 @@ app.post('/api/createCheckoutSession', async (req, res) => {
 
     const guestToken = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
-    if (!products || products.length === 0) {
-      return res.status(400).json({ error: 'Invalid products array' });
-    }
-
-    let maxMinDays = 0; // Minimum shipping time in days
-    let maxMaxDays = 0; // Maximum shipping time in days
-
-    // Fetch product details from Firestore to get deliveryTime
-    for (const product of products) {
-      const productRef = db.collection('products').doc(product.id);
-      const productSnapshot = await productRef.get();
-
-      if (productSnapshot.exists) {
-        const productData = productSnapshot.data();
-
-        if (productData.deliveryTime) {
-          const match = productData.deliveryTime.match(
-            /(\d+)-(\d+) (business|weeks|days)/
-          );
-
-          if (match) {
-            let minDays = parseInt(match[1]);
-            let maxDays = parseInt(match[2]);
-            const unit = match[3];
-
-            // Convert weeks to business days (assuming 5 business days per week)
-            if (unit === 'weeks') {
-              minDays *= 5;
-              maxDays *= 5;
-            }
-
-            // Track the longest delivery time
-            maxMinDays = Math.max(maxMinDays, minDays);
-            maxMaxDays = Math.max(maxMaxDays, maxDays);
-          }
-        }
-      }
+    if (!Array.isArray(products) || products.length === 0) {
+      return res.status(400).json({ error: 'Invalid or empty cart.' });
     }
 
     const lineItems = products.map((product) => ({
       price_data: {
         currency: 'usd',
+        unit_amount: Math.round(product.price * 100),
         product_data: {
           name: product.name || 'Unnamed Product',
-          description: product.description || 'No description available',
-          metadata: { productId: product.id },
+          description: product.description || '',
+          metadata: {
+            productId: product.productId || product.id || '',
+            variantId: product.variantId || '',
+            size: product.config?.size || '',
+            depth: product.config?.depth || '',
+            color: product.config?.color || '',
+            reRing: product.config?.reRing ? 'Yes' : 'No',
+            lugQuantity: product.config?.lugQuantity || '',
+            staveQuantity: product.config?.staveQuantity || '',
+            outerShell: product.config?.outerShell || '',
+            innerStave: product.config?.innerStave || '',
+          },
         },
-        unit_amount: Math.round(product.price * 100),
       },
       quantity: product.quantity || 1,
     }));
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
-      line_items: lineItems,
       mode: 'payment',
+      line_items: lineItems,
       success_url: `${process.env.CLIENT_URL}/checkout-summary?session_id={CHECKOUT_SESSION_ID}&guest_token=${guestToken}`,
-      cancel_url: `${process.env.CLIENT_URL}/checkout-summary?session_id={CHECKOUT_SESSION_ID}&guest_token=${guestToken}`,
-      metadata: {
-        userId: userId || 'guest',
-        customerFirstName,
-        customerLastName,
-        customerEmail,
-        customerPhone: customerPhone || 'No phone provided',
-        shippingAddress: JSON.stringify(shippingAddress || {}),
-      },
+      cancel_url: `${process.env.CLIENT_URL}/cart`,
       customer_email: customerEmail,
       shipping_address_collection: { allowed_countries: ['US', 'CA'] },
       allow_promotion_codes: true,
+      metadata: {
+        userId: userId || 'guest',
+        guestToken,
+        customerFirstName,
+        customerLastName,
+        customerPhone: customerPhone || '',
+        shippingAddress: JSON.stringify(shippingAddress || {}),
+      },
     });
-    
+
     res.status(200).json({ url: session.url, id: session.id, guestToken });
   } catch (err) {
-    console.error('Error creating Stripe session:', err.message);
+    console.error('❌ Error creating checkout session:', err.message);
     res.status(500).json({ error: err.message });
   }
 });
