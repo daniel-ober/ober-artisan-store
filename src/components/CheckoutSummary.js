@@ -136,10 +136,6 @@ const CheckoutSummary = () => {
         <p>
           ${totalAmount.toFixed(2)} {currency.toUpperCase()}
         </p>
-
-        <button onClick={printReceipt} className="print-btn">
-          Print Receipt
-        </button>
       </div>
     </div>
   );

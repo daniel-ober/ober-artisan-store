@@ -77,6 +77,7 @@
   font-size: 18px;
   font-weight: 700;
   margin: 12px 0 8px;
+  padding: 0px 20px;
   color: #222;
   text-align: center;
   font-family: "Poppins", sans-serif;
@@ -87,20 +88,15 @@
 }
 
 /* 🔁 Truncated Description (starts at top, 3 lines only) */
-.product-description {
+.product-card-description {
   font-size: 14px;
   font-family: sans-serif;
   text-align: justify;
   color: #222;
   line-height: 1.4;
   margin-bottom: 10px;
-
-  display: -webkit-box;
-  /* -webkit-line-clamp: 3;     ⏳ Show only first 3 lines */
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-height: 72px; /* fallback for cross-browser line clipping */
+  max-height: 72px;
+  padding: 0 24px; /* 🔥 ADD THIS */
 }
 
 /* ✅ Price Styling */
@@ -193,6 +189,24 @@
   padding: 14px;
   position: relative;
   z-index: 1;
+}
+
+/* ✅ View Details Button */
+.view-details-button {
+  font-size: 16px;
+  font-weight: bold;
+  width: 95%;
+  min-height: 50px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background-color: #1d1d1d;
+  color: white;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.view-details-button:hover {
+  background-color: #333;
 }
 
 /* ✅ Hover Options */
