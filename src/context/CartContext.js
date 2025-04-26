@@ -29,34 +29,32 @@ export const CartProvider = ({ children }) => {
       setLoading(true);
       try {
         let cartUserId = user?.uid || localStorage.getItem('cartId');
-  
+
         if (!cartUserId) {
           cartUserId = generateCartId();
           localStorage.setItem('cartId', cartUserId);
         }
-  
+
         setCartId(cartUserId);
-  
-        // ✅ 1. Load from localStorage first
+
         const storedCart = localStorage.getItem('cart');
         if (storedCart) {
           try {
             setCart(JSON.parse(storedCart));
-            setLoading(false); // return early after localStorage load
+            setLoading(false);
             return;
           } catch (err) {
             console.warn('Failed to parse localStorage cart:', err);
           }
         }
-  
-        // ✅ 2. Fallback: Load from Firestore
+
         const cartRef = doc(db, 'carts', cartUserId);
         const cartDoc = await getDoc(cartRef);
-  
+
         if (cartDoc.exists()) {
           const firestoreCart = cartDoc.data().cart || [];
           setCart(firestoreCart);
-          localStorage.setItem('cart', JSON.stringify(firestoreCart)); // sync localStorage too
+          localStorage.setItem('cart', JSON.stringify(firestoreCart));
         } else {
           await setDoc(cartRef, { cart: [] });
           setCart([]);
@@ -68,11 +66,10 @@ export const CartProvider = ({ children }) => {
         setLoading(false);
       }
     };
-  
+
     initializeCart();
   }, [user]);
 
-  // ✅ Save cart to localStorage on updates
   useEffect(() => {
     if (cart && Array.isArray(cart)) {
       localStorage.setItem('cart', JSON.stringify(cart));
@@ -102,7 +99,7 @@ export const CartProvider = ({ children }) => {
       maxQuantity: item.maxQuantity || 1,
       variantId: item.variantId || '',
       options: item.options || {},
-      config: item.config || {}, // ✅ Persist variant config
+      config: item.config || {},
       deliveryTime: item.deliveryTime || '',
       description: item.description || '',
       images: item.images || [],
@@ -131,8 +128,7 @@ export const CartProvider = ({ children }) => {
 
     const cartItem = {
       id: product.id,
-      productId: product.productId || product.id,
-      name: product.name || 'Unnamed Product',
+productId: String(product.productId ?? product.originalProductId ?? product.id),      name: product.name || 'Unnamed Product',
       category: product.category || 'merch',
       quantity: 1,
       price: product.price,

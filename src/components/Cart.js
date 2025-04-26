@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { loadStripe } from '@stripe/stripe-js';
@@ -9,10 +10,12 @@ import './Cart.css';
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
 // ✅ Use your known-good deployed backend URL directly
-const API_BASE_URL = 'https://us-central1-danoberartisandrums.cloudfunctions.net/api';
+const API_BASE_URL =
+  'https://us-central1-danoberartisandrums.cloudfunctions.net/api';
 
 const Cart = () => {
-  const { cart, cartId, removeFromCart, setCart, updateFirestoreCart } = useCart();
+  const { cart, cartId, removeFromCart, setCart, updateFirestoreCart } =
+    useCart();
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
   const [unavailableProducts, setUnavailableProducts] = useState([]);
@@ -33,9 +36,19 @@ const Cart = () => {
         }
 
         try {
-          const productRef = doc(db, 'products', item.productId);
+          const isMerch = item.category === 'merch';
+          const collectionName = isMerch ? 'merchProducts' : 'products';
+
+          const productId = String(item.productId); // 🔥 force string ID
+          const productRef = doc(db, collectionName, productId);
           const productSnapshot = await getDoc(productRef);
 
+          console.log('🧪 Inventory check:', {
+            productId: item.productId,
+            category: item.category,
+            collection: collectionName,
+          });
+          console.log('📁 productSnapshot.exists:', productSnapshot.exists());
           if (!productSnapshot.exists()) {
             console.warn(`⚠️ Product not found: ${item.name}`);
             unavailable.push({ id: item.id, name: item.name });
@@ -44,14 +57,18 @@ const Cart = () => {
             continue;
           }
 
-          const productData = productSnapshot.data();
-          const availableStock = productData.currentQuantity || 0;
+          if (!isMerch) {
+            const productData = productSnapshot.data();
+            const availableStock = productData.currentQuantity ?? 0;
 
-          if (availableStock === 0) {
-            console.warn(`🚨 ${productData.name} is out of stock. Removing from cart.`);
-            unavailable.push({ id: item.id, name: item.name });
-            updatedCart = updatedCart.filter((i) => i.id !== item.id);
-            cartChanged = true;
+            if (availableStock <= 0) {
+              console.warn(
+                `🚨 ${productData.name} is out of stock. Removing from cart.`
+              );
+              unavailable.push({ id: item.id, name: item.name });
+              updatedCart = updatedCart.filter((i) => i.id !== item.id);
+              cartChanged = true;
+            }
           }
         } catch (error) {
           console.error(`❌ Error fetching product ${item.productId}:`, error);
@@ -87,14 +104,16 @@ const Cart = () => {
     setUnavailableProducts([]);
   };
 
-  const getItemTotal = (item) => (Number(item.price) || 0) * (item.quantity || 1);
-  const getTotalAmount = () => cart.reduce((total, item) => total + getItemTotal(item), 0);
+  const getItemTotal = (item) =>
+    (Number(item.price) || 0) * (item.quantity || 1);
+  const getTotalAmount = () =>
+    cart.reduce((total, item) => total + getItemTotal(item), 0);
 
   const handleCheckout = async () => {
     setLoading(true);
     try {
       if (!cart || cart.length === 0) {
-        alert("Your cart is empty!");
+        alert('Your cart is empty!');
         setLoading(false);
         return;
       }
@@ -116,11 +135,12 @@ const Cart = () => {
       });
 
       const session = await response.json();
-      if (!response.ok) throw new Error(session.error || 'Failed to create checkout session');
+      if (!response.ok)
+        throw new Error(session.error || 'Failed to create checkout session');
 
       window.location.href = session.url;
     } catch (error) {
-      console.error("❌ Checkout error:", error);
+      console.error('❌ Checkout error:', error);
       alert(`Checkout error: ${error.message}`);
     } finally {
       setLoading(false);
@@ -130,8 +150,6 @@ const Cart = () => {
   return (
     <div className="cart-container">
       <h1 className="cart-title">Shopping Cart</h1>
-      <p className="cart-id">Cart ID: {(cartId || user?.uid || 'guest').slice(-5)}</p>
-
       {cart.length === 0 ? (
         <div className="cart-empty">Your cart is empty.</div>
       ) : (
@@ -148,84 +166,148 @@ const Cart = () => {
               </tr>
             </thead>
             <tbody>
-              {cart.map((item) => (
-                <tr key={item.id}>
-                  <td>
-                    <img
-                      src={item.image || '/fallback-images/image-not-available.png'}
-                      alt={item.name}
-                      className="cart-item-image"
-                    />
-                  </td>
-                  <td>
-                    <p>{item.name}</p>
-                    {item.category === 'artisan' ? (
+              {cart.map((item) => {
+                const fallback = '/fallback-images/image-not-available.png';
+                const previewImage = Array.isArray(item.images)
+                  ? item.images.find((img) =>
+                      typeof img === 'string'
+                        ? img.startsWith('http')
+                        : img?.src?.startsWith('http')
+                    )
+                  : null;
+
+                const config = item.config || {};
+
+                return (
+                  <tr key={item.id}>
+                    <td>
+                      <Link
+                        to={
+                          item.category === 'artisan'
+                            ? `/artisanseries/${item.productId}`
+                            : `/merch/${item.productId}`
+                        }
+                      >
+                        <img
+                          src={
+                            typeof previewImage === 'string'
+                              ? previewImage
+                              : previewImage?.src || fallback
+                          }
+                          alt={item.name}
+                          className="cart-item-image"
+                          onError={(e) => (e.currentTarget.src = fallback)}
+                        />
+                      </Link>
+                    </td>
+                    <td>
+                      <p>
+                        {item.name ||
+                          item.title ||
+                          item.config?.title ||
+                          'Unnamed Product'}
+                      </p>{' '}
                       <p className="cart-sub-description">
-                        {item.size}" Diameter | {item.depth}" Depth | {item.lugQuantity}-lug |{' '}
-                        {item.reRing ? 'With Re-Ring' : 'Re-Rings: None'}
-                      </p>
-                    ) : (
-                      <p className="cart-sub-description">
-                        {(item.size || item.color) ? (
+                        {item.category === 'artisan' ? (
                           <>
-                            {item.size && <span>Size: {item.size}</span>}
-                            {item.color && (
-                              <span>
-                                {item.size && ' | '}Color: {item.color}
-                              </span>
+                            {config.size && config.depth && (
+                              <>
+                                {config.size}" x {config.depth}" |{' '}
+                              </>
+                            )}
+                            {config.lugQuantity && (
+                              <>{config.lugQuantity}-lug | </>
+                            )}
+                            {typeof config.reRing !== 'undefined' &&
+                              (config.reRing
+                                ? 'With Re-Ring'
+                                : 'Re-Rings: None')}
+                            {(config.outerShell || config.innerStave) && (
+                              <>
+                                <br />
+                                {config.outerShell} / {config.innerStave}
+                              </>
                             )}
                           </>
                         ) : (
-                          item.name
+                          <>
+                            {config.Sizes && <span>Size: {config.Sizes}</span>}
+                            {config.Colors && (
+                              <span>
+                                {config.Sizes && ' | '}Color: {config.Colors}
+                              </span>
+                            )}
+                            {(config.outerShell || config.innerStave) && (
+                              <>
+                                <br />
+                                {config.outerShell} / {config.innerStave}
+                              </>
+                            )}
+                          </>
                         )}
                       </p>
-                    )}
-                  </td>
-                  <td>
-                    {item.price !== undefined ? (
-                      `$${Number(item.price).toFixed(2)}`
-                    ) : (
-                      <span style={{ color: 'red' }}>⚠️ Missing Price</span>
-                    )}
-                  </td>
-                  <td>
-                    {item.category === 'artisan' ? (
-                      <span className="quantity-value">1</span>
-                    ) : (
-                      <div className="quantity-control">
-                        <button
-                          className="quantity-btn"
-                          onClick={() => updateQuantity(item.id, Math.max(item.quantity - 1, 1))}
-                          disabled={item.quantity <= 1}
-                        >
-                          -
-                        </button>
-                        <span className="quantity-value">{item.quantity}</span>
-                        <button
-                          className="quantity-btn"
-                          onClick={() =>
-                            updateQuantity(item.id, Math.min(item.quantity + 1, item.currentQuantity))
-                          }
-                          disabled={item.quantity >= item.currentQuantity}
-                        >
-                          +
-                        </button>
-                      </div>
-                    )}
-                  </td>
-                  <td>${getItemTotal(item).toFixed(2)}</td>
-                  <td>
-                    <button onClick={() => removeFromCart(item.id)} className="remove-btn">
-                      Remove
-                    </button>
-                  </td>
-                </tr>
-              ))}
+                    </td>
+                    <td>
+                      {item.price !== undefined ? (
+                        `$${Number(item.price).toFixed(2)}`
+                      ) : (
+                        <span style={{ color: 'red' }}>⚠️ Missing Price</span>
+                      )}
+                    </td>
+                    <td>
+  {item.category === 'artisan' ? (
+    <span className="quantity-value">1</span>
+  ) : (
+    <div className="quantity-control">
+      <button
+        className="quantity-btn"
+        onClick={() =>
+          updateQuantity(item.id, Math.max(item.quantity - 1, 1))
+        }
+        disabled={item.quantity <= 1}
+      >
+        -
+      </button>
+      <span className="quantity-value">{item.quantity}</span>
+      <button
+        className="quantity-btn"
+        onClick={() =>
+          updateQuantity(
+            item.id,
+            Math.min(item.quantity + 1, item.currentQuantity)
+          )
+        }
+        disabled={item.quantity >= item.currentQuantity}
+      >
+        +
+      </button>
+    </div>
+  )}
+</td>
+                    <td>${getItemTotal(item).toFixed(2)}</td>
+                    <td>
+                      <button
+                        onClick={() => removeFromCart(item.id)}
+                        className="remove-btn"
+                      >
+                        Remove
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
-          <button onClick={handleCheckout} className="checkout-button" disabled={loading}>
+          <button
+            onClick={handleCheckout}
+            className="checkout-button"
+            disabled={loading}
+          >
             {loading ? 'Processing...' : 'Checkout'}
           </button>
+          <p className="cart-id">
+        Cart ID: {(cartId || user?.uid || 'guest').slice(-5)}
+      </p>
         </>
       )}
 

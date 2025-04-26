@@ -54,32 +54,27 @@ const CartPreview = ({ onClose, closeMenu }) => {
                 config = {},
               } = item;
 
-              const {
-                color,
-                size,
-                depth,
-                lugQuantity,
-                staveQuantity,
-                reRing,
-                outerShell,
-                innerStave,
-              } = config;
-
               const configLines = [];
 
-              if (color) configLines.push(`Colors: ${color}`);
-              if (size) configLines.push(`Sizes: ${size}`);
-              if (size && depth) configLines.push(`${size}" x ${depth}"`);
+              if (category === 'artisan') {
+                if (config.size && config.depth) {
+                  configLines.push(`${config.size}" x ${config.depth}"`);
+                }
 
-              const line2 = [];
-              if (lugQuantity) line2.push(`${lugQuantity} Lugs`);
-              if (staveQuantity) line2.push(`${staveQuantity} Staves`);
-              if (typeof reRing !== 'undefined')
-                line2.push(reRing ? 'Re-Rings' : 'No Re-Rings');
-              if (line2.length > 0) configLines.push(line2.join(' • '));
+                const line2 = [];
+                if (config.lugQuantity) line2.push(`${config.lugQuantity} Lugs`);
+                if (config.staveQuantity) line2.push(`${config.staveQuantity} Staves`);
+                if (typeof config.reRing !== 'undefined') {
+                  line2.push(config.reRing ? 'Re-Rings' : 'No Re-Rings');
+                }
+                if (line2.length > 0) configLines.push(line2.join(' • '));
 
-              if (outerShell || innerStave) {
-                configLines.push(`${outerShell || '?'} / ${innerStave || '?'}`);
+                if (config.outerShell || config.innerStave) {
+                  configLines.push(`${config.outerShell || '?'} / ${config.innerStave || '?'}`);
+                }
+              } else {
+                if (config.Sizes) configLines.push(`Size: ${config.Sizes}`);
+                if (config.Colors) configLines.push(`Color: ${config.Colors}`);
               }
 
               // Determine preview image
@@ -89,8 +84,7 @@ const CartPreview = ({ onClose, closeMenu }) => {
               if (Array.isArray(images)) {
                 const firstValid = images.find((img) => {
                   if (typeof img === 'string') return img.startsWith('http');
-                  if (typeof img === 'object')
-                    return img?.src?.startsWith('http');
+                  if (typeof img === 'object') return img?.src?.startsWith('http');
                   return false;
                 });
 
@@ -113,14 +107,14 @@ const CartPreview = ({ onClose, closeMenu }) => {
 
                   <div className="cart-item-details">
                     <p className="item-name">{name}</p>
-                    {configLines.map((line, idx) => (
-                      <p key={idx} className="item-config">
-                        {line}
-                      </p>
-                    ))}
-                    <p className="item-price">
-                      ${Number(price || 0).toFixed(2)}
-                    </p>
+                    <div className="item-config-block">
+                      {configLines.map((line, idx) => (
+                        <p key={idx} className="item-config">
+                          {line}
+                        </p>
+                      ))}
+                    </div>
+                    <p className="item-price">${Number(price || 0).toFixed(2)}</p>
 
                     {category !== 'artisan' && (
                       <div className="quantity-buttons">
@@ -141,10 +135,7 @@ const CartPreview = ({ onClose, closeMenu }) => {
                     )}
                   </div>
 
-                  <button
-                    className="remove-item"
-                    onClick={() => handleRemoveItem(id)}
-                  >
+                  <button className="remove-item" onClick={() => handleRemoveItem(id)}>
                     ✕
                   </button>
                 </div>
@@ -171,11 +162,10 @@ const CartPreview = ({ onClose, closeMenu }) => {
       ) : (
         <p className="empty-cart">Your cart is empty.</p>
       )}
+
       {cartId && (
-  <p className="cart-id-preview">
-    Cart ID: {cartId.slice(-5)}
-  </p>
-)}
+        <p className="cart-id-preview">Cart ID: {cartId.slice(-5)}</p>
+      )}
     </div>
   );
 };
