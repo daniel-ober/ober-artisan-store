@@ -80,6 +80,7 @@ function App() {
       '/custom-shop': 'CustomShop',
       '/artisanseries': 'ArtisanSeries',
       '/products': 'Products',
+      '/merch': 'Merch',
       '/signin': 'SignIn',
       '/terms-of-service': 'TermsOfService',
       '/register': 'Register',
@@ -206,6 +207,7 @@ function App() {
               isLinkEnabled('products') || isAdmin ? <Products /> : <NotFound />
             }
           />
+          <Route path="/merch" element={<Products isMerchPage={true} />} />
           <Route
             path="/artisanseries/heritage"
             element={<HeritageProductDetail />}
@@ -223,7 +225,10 @@ function App() {
             path="/products/:productId"
             element={<Navigate to="/merch/:productId" replace />}
           />
-<Route path="/artisanseries/pre-order" element={<PreOrderPage isAdmin={isAdmin} isDarkMode={isDarkMode} />} />
+          <Route
+            path="/artisanseries/pre-order"
+            element={<PreOrderPage isAdmin={isAdmin} isDarkMode={isDarkMode} />}
+          />
           <Route
             path="/account"
             element={<PrivateRoute element={<AccountPage />} />}
@@ -232,7 +237,7 @@ function App() {
             path="/admin"
             element={<PrivateRoute element={<AdminDashboard />} adminOnly />}
           />
-          
+
           <Route path="/admin-signin" element={<AdminSignin />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/checkout-summary" element={<CheckoutSummary />} />
