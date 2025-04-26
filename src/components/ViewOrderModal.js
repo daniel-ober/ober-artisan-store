@@ -1,47 +1,60 @@
-import React, { useEffect, useState } from "react";
-import { doc, getDoc, updateDoc, arrayUnion, collection, addDoc } from "firebase/firestore";
-import { db } from "../firebaseConfig";
-import "./ViewOrderModal.css";
+import React, { useEffect, useState } from 'react';
+import {
+  doc,
+  getDoc,
+  updateDoc,
+  arrayUnion,
+  collection,
+  addDoc,
+} from 'firebase/firestore';
+import { db } from '../firebaseConfig';
+import './ViewOrderModal.css';
 
 const ITEM_STATUSES = [
-  "Preparing",
-  "Back Ordered",
-  "Packaged",
-  "Ready for Shipment",
-  "Shipped",
-  "Delivered",
-  "Canceled",
+  'Preparing',
+  'Back Ordered',
+  'Packaged',
+  'Ready for Shipment',
+  'Shipped',
+  'Delivered',
+  'Canceled',
 ];
 
 const ViewOrderModal = ({ isOpen, onClose, orderDetails }) => {
   const [internalNotes, setInternalNotes] = useState([]);
   const [systemHistory, setSystemHistory] = useState([]);
-  const [newNote, setNewNote] = useState("");
+  const [newNote, setNewNote] = useState('');
   const [loading, setLoading] = useState(false);
   const [items, setItems] = useState(orderDetails.items || []);
-  const [orderStatus, setOrderStatus] = useState(orderDetails.status || "Order Started");
+  const [orderStatus, setOrderStatus] = useState(
+    orderDetails.status || 'Order Started'
+  );
   const [relatedProjects, setRelatedProjects] = useState([]);
 
   // Fetch order details when the modal opens
   useEffect(() => {
     const fetchOrderDetails = async () => {
       try {
-        const orderRef = doc(db, "orders", orderDetails.id);
+        const orderRef = doc(db, 'orders', orderDetails.id);
         const orderDoc = await getDoc(orderRef);
         if (orderDoc.exists()) {
           const data = orderDoc.data();
           setInternalNotes(
-            data.internalNotes?.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)) || []
+            data.internalNotes?.sort(
+              (a, b) => new Date(b.timestamp) - new Date(a.timestamp)
+            ) || []
           );
           setSystemHistory(
-            data.systemHistory?.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)) || []
+            data.systemHistory?.sort(
+              (a, b) => new Date(b.timestamp) - new Date(a.timestamp)
+            ) || []
           );
           setItems(data.items || []);
-          setOrderStatus(data.status || "Order Started");
+          setOrderStatus(data.status || 'Order Started');
           setRelatedProjects(data.relatedProjects || []);
         }
       } catch (error) {
-        console.error("Error fetching order details:", error);
+        console.error('Error fetching order details:', error);
       }
     };
 
@@ -53,15 +66,22 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails }) => {
   // Function to dynamically determine the order status based on item statuses
   const calculateOrderStatus = (items) => {
     const statuses = items.map((item) => item.status);
-    if (statuses.every((status) => status === "Delivered")) return "Order Completed";
-    if (statuses.every((status) => ["Ready for Shipment", "Shipped"].includes(status)))
-      return "Ready for Shipment";
-    if (statuses.some((status) => status === "Shipped")) return "Partially Fulfilled";
-    if (statuses.some((status) => status === "Back Ordered"))
-      return "Partially Fulfilled / Back Ordered";
-    if (statuses.every((status) => status === "Canceled")) return "Canceled";
-    if (statuses.every((status) => status === "Preparing")) return "Order Successful";
-    return "Processing";
+    if (statuses.every((status) => status === 'Delivered'))
+      return 'Order Completed';
+    if (
+      statuses.every((status) =>
+        ['Ready for Shipment', 'Shipped'].includes(status)
+      )
+    )
+      return 'Ready for Shipment';
+    if (statuses.some((status) => status === 'Shipped'))
+      return 'Partially Fulfilled';
+    if (statuses.some((status) => status === 'Back Ordered'))
+      return 'Partially Fulfilled / Back Ordered';
+    if (statuses.every((status) => status === 'Canceled')) return 'Canceled';
+    if (statuses.every((status) => status === 'Preparing'))
+      return 'Order Successful';
+    return 'Processing';
   };
 
   // Update item status and recalculate order status
@@ -74,7 +94,7 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails }) => {
       const newOrderStatus = calculateOrderStatus(updatedItems);
 
       // Update Firestore
-      const orderRef = doc(db, "orders", orderDetails.id);
+      const orderRef = doc(db, 'orders', orderDetails.id);
       await updateDoc(orderRef, {
         items: updatedItems,
         status: newOrderStatus,
@@ -95,18 +115,18 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails }) => {
         ...prevHistory,
       ]);
     } catch (error) {
-      console.error("Error updating item status:", error);
-      alert("Failed to update item status. Please try again.");
+      console.error('Error updating item status:', error);
+      alert('Failed to update item status. Please try again.');
     }
   };
 
   // Add a new internal note
   const handleAddNote = async () => {
-    if (!newNote.trim()) return alert("Note cannot be empty.");
+    if (!newNote.trim()) return alert('Note cannot be empty.');
     setLoading(true);
 
     try {
-      const orderRef = doc(db, "orders", orderDetails.id);
+      const orderRef = doc(db, 'orders', orderDetails.id);
       const note = {
         text: newNote,
         timestamp: new Date().toISOString(),
@@ -117,10 +137,10 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails }) => {
       });
 
       setInternalNotes((prevNotes) => [note, ...prevNotes]);
-      setNewNote("");
+      setNewNote('');
     } catch (error) {
-      console.error("Error adding note:", error);
-      alert("Failed to add note. Please try again.");
+      console.error('Error adding note:', error);
+      alert('Failed to add note. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -129,27 +149,30 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails }) => {
   // Create a new project from an item or as a blank project
   const createProject = async (item = null) => {
     const confirmCreation = window.confirm(
-      `Create Project for ${item?.name || "Blank Project"}?`
+      `Create Project for ${item?.name || 'Blank Project'}?`
     );
     if (!confirmCreation) return;
 
     try {
       const projectData = {
         orderId: orderDetails.id,
-        customerName: orderDetails.customerName || "N/A",
+        customerName: orderDetails.customerName || 'N/A',
         startDate: new Date().toISOString(),
         itemDetails: item || null,
-        status: "Not Started",
+        status: 'Not Started',
         phases: [],
         notes: [],
       };
 
-      const projectRef = await addDoc(collection(db, "projects"), projectData);
+      const projectRef = await addDoc(collection(db, 'projects'), projectData);
       const projectId = projectRef.id;
 
-      const projectEntry = { projectId, itemName: item?.name || "Blank Project" };
+      const projectEntry = {
+        projectId,
+        itemName: item?.name || 'Blank Project',
+      };
 
-      const orderRef = doc(db, "orders", orderDetails.id);
+      const orderRef = doc(db, 'orders', orderDetails.id);
       await updateDoc(orderRef, {
         relatedProjects: arrayUnion(projectEntry),
         systemHistory: arrayUnion({
@@ -169,8 +192,8 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails }) => {
 
       alert(`Project created successfully! Project ID: ${projectId}`);
     } catch (error) {
-      console.error("Error creating project:", error);
-      alert("Failed to create project. Please try again.");
+      console.error('Error creating project:', error);
+      alert('Failed to create project. Please try again.');
     }
   };
 
@@ -190,7 +213,8 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails }) => {
             <strong>Order ID:</strong> <span>{orderDetails.id}</span>
           </div>
           <div className="detail-group">
-            <strong>Customer Name:</strong> <span>{orderDetails.customerName || "N/A"}</span>
+            <strong>Customer Name:</strong>{' '}
+            <span>{orderDetails.customerName || 'N/A'}</span>
           </div>
           <div className="detail-group">
             <strong>Order Status:</strong> <span>{orderStatus}</span>
@@ -212,13 +236,16 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails }) => {
             <tbody>
               {items.map((item, index) => (
                 <tr key={index}>
-                  <td>{item.name}</td>
-                  <td>{item.quantity}</td>
-                  <td>${item.price.toFixed(2)}</td>
+                  <td>{item.description || item.name || 'N/A'}</td>
+                  {/* Product Name */}
+                  <td>{item.quantity || 0}</td> {/* Quantity */}
+                  <td>${(item.price ?? 0).toFixed(2)}</td> {/* Price */}
                   <td>
                     <select
-                      value={item.status || "Preparing"}
-                      onChange={(e) => handleItemStatusChange(index, e.target.value)}
+                      value={item.status || 'Preparing'}
+                      onChange={(e) =>
+                        handleItemStatusChange(index, e.target.value)
+                      }
                       className="status-select"
                     >
                       {ITEM_STATUSES.map((status) => (
@@ -239,8 +266,11 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails }) => {
                 </tr>
               ))}
               <tr>
-                <td colSpan="5" style={{ textAlign: "center" }}>
-                  <button onClick={() => createProject()} className="create-project-btn">
+                <td colSpan="5" style={{ textAlign: 'center' }}>
+                  <button
+                    onClick={() => createProject()}
+                    className="create-project-btn"
+                  >
                     Create Blank Project
                   </button>
                 </td>
@@ -296,8 +326,12 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails }) => {
           onChange={(e) => setNewNote(e.target.value)}
           className="note-input"
         />
-        <button onClick={handleAddNote} disabled={loading} className="add-note-btn">
-          {loading ? "Adding Note..." : "Add Note"}
+        <button
+          onClick={handleAddNote}
+          disabled={loading}
+          className="add-note-btn"
+        >
+          {loading ? 'Adding Note...' : 'Add Note'}
         </button>
 
         <div className="history-log">

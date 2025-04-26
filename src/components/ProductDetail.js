@@ -299,6 +299,11 @@ const ProductDetail = () => {
 
   return (
     <div className="product-detail-container">
+    <div className="back-to-merch">
+  <Link to="/merch" className="back-link">
+    ← Back to Merch
+  </Link>
+</div>
       <h1 className="product-title">
         {product?.title || product?.name || 'Unnamed Product'}
       </h1>

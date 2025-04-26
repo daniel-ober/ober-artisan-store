@@ -5,7 +5,7 @@ import { db } from "../firebaseConfig";
 import ProductCard from "./ProductCard";
 import "./Products.css";
 
-const Products = () => {
+const Products = ({ isMerchPage = false }) => {
   const { isAdmin } = useAuth();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -13,26 +13,22 @@ const Products = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const collections = ['products', 'merchProducts'];
-        let allProducts = [];
+        const collectionName = isMerchPage ? "merchProducts" : "products";
 
-        for (const name of collections) {
-          const ref = collection(db, name);
-          const q = query(ref, where("status", "==", "active"));
-          const snapshot = await getDocs(q);
+        const ref = collection(db, collectionName);
+        const q = query(ref, where("status", "==", "active"));
+        const snapshot = await getDocs(q);
 
-          const items = snapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-            collection: name,
-          }));
+        const items = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+          collection: collectionName,
+        }));
 
-          allProducts = allProducts.concat(items);
-        }
+        // Sort products by displayOrder if available
+        items.sort((a, b) => (a.displayOrder || 0) - (b.displayOrder || 0));
 
-        // Sort products by displayOrder (if present)
-        allProducts.sort((a, b) => (a.displayOrder || 0) - (b.displayOrder || 0));
-        setProducts(allProducts);
+        setProducts(items);
       } catch (error) {
         console.error("❌ Error fetching products:", error);
       } finally {
@@ -41,7 +37,7 @@ const Products = () => {
     };
 
     fetchProducts();
-  }, []);
+  }, [isMerchPage]); // ✅ Depend on isMerchPage
 
   const moveProduct = async (index, direction) => {
     const newIndex = index + direction;
@@ -74,7 +70,7 @@ const Products = () => {
 
   return (
     <div className="products-container">
-      <h1 className="products-page-title">Products</h1>
+      <h1 className="products-page-title">{isMerchPage ? "Merch" : "Products"}</h1>
 
       {isAdmin ? (
         <div className="admin-section">

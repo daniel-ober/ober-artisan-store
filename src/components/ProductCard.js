@@ -1,7 +1,8 @@
+// src/components/ProductCard.js
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { db } from "../firebaseConfig";
-import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { useAuth } from "../context/AuthContext";
 import { useCart } from "../context/CartContext";
 import "./ProductCard.css";
@@ -38,64 +39,8 @@ const getImageSrc = (product) => {
 };
 
 const ProductCard = ({ product }) => {
-  const { currentUser } = useAuth();
-  const { cart, setCart, cartId } = useCart();
+  const { cartId } = useCart();
   const navigate = useNavigate();
-  const [inCart, setInCart] = useState(false);
-
-  useEffect(() => {
-    checkIfInCart();
-  }, [cart]);
-
-  const checkIfInCart = async () => {
-    if (!cartId) return;
-    const cartRef = doc(db, "carts", cartId);
-    const cartSnap = await getDoc(cartRef);
-
-    if (cartSnap.exists() && Array.isArray(cartSnap.data().cart)) {
-      const foundItem = cartSnap.data().cart.find((item) => item.id === product.id);
-      setInCart(!!foundItem);
-    }
-  };
-
-  const handleCartAction = async () => {
-    if (!cartId || product.currentQuantity === 0) return;
-
-    const cartRef = doc(db, "carts", cartId);
-    const cartSnap = await getDoc(cartRef);
-    let updatedCart = cartSnap.exists() && Array.isArray(cartSnap.data().cart)
-      ? cartSnap.data().cart
-      : [];
-
-    if (inCart) {
-      updatedCart = updatedCart.filter((item) => item.id !== product.id);
-    } else {
-      updatedCart.push({
-        id: product.id ?? "unknown",
-        name: product.title ?? product.name ?? "Product",
-        price: getLowestPrice(product) ?? 0,
-        thumbnail: getImageSrc(product) ?? fallbackImage,
-        quantity: 1,
-        category: product.category ?? "misc",
-        isPreOrder: product.isPreOrder ?? false,
-        currentQuantity: typeof product.currentQuantity === "number" ? product.currentQuantity : 0,
-        maxQuantity: typeof product.maxQuantity === "number" ? product.maxQuantity : 0,
-        description: product.description ?? "",
-        deliveryTime: product.deliveryTime ?? "",
-        status: product.status ?? "active",
-        createdAt: new Date(),
-      });
-    }
-
-    if (cartSnap.exists()) {
-      await updateDoc(cartRef, { cart: updatedCart });
-    } else {
-      await setDoc(cartRef, { cart: updatedCart });
-    }
-
-    setCart(updatedCart);
-    setInCart(!inCart);
-  };
 
   const imageUrl = getImageSrc(product);
   const price = getLowestPrice(product);
@@ -185,7 +130,7 @@ const ProductCard = ({ product }) => {
 
       <div className="product-info">
         <h2 className="product-name">{product.title || product.name}</h2>
-        <p className="product-description">{stripHtml(product.description)}</p>
+        <p className="product-card-description">{stripHtml(product.description)}</p>
 
         <div className="color-swatches">{renderColorDots()}</div>
 
@@ -195,29 +140,14 @@ const ProductCard = ({ product }) => {
           </p>
           <p className="delivery-time">Delivery: {delivery}</p>
 
-          {product.currentQuantity === 0 ? (
-            <button className="out-of-stock-button" disabled>
-              Out of Stock
-            </button>
-          ) : inCart ? (
-            <div className="cart-hover-wrapper">
-              <button className="in-cart-button">✔ In Cart</button>
-              <div className="cart-hover-options">
-                <span onClick={() => navigate("/cart")}>View Cart</span>
-                <span onClick={handleCartAction}>Remove</span>
-              </div>
-            </div>
-          ) : (
-            <button className="add-to-cart-button" onClick={handleCartAction}>
-              Add to Cart
-            </button>
-          )}
+          <button
+            className="add-to-cart-button" 
+            onClick={() => navigate(getDetailPath())}
+          >
+            Choose Yours
+          </button>
         </div>
       </div>
-
-      <p className="more-info-link" onClick={() => navigate(getDetailPath())}>
-        More Info
-      </p>
     </div>
   );
 };

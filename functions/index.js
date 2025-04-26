@@ -126,10 +126,19 @@ stripeWebhookApp.post('/', async (req, res) => {
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }
 
-  if (event.type === 'checkout.session.completed') {
-    const session = event.data.object;
+  let session = event.data.object;
 
-    try {
+  // If session includes a payment_intent, expand it
+  if (session.payment_intent) {
+    const stripe = stripeLib(STRIPE_SECRET_KEY.value());
+    session = await stripe.checkout.sessions.retrieve(session.id, {
+      expand: ['payment_intent.payment_method'],
+    });
+  }
+  
+  try {
+    if (event.type === 'checkout.session.completed') {
+      // ✅ Payment Successful
       const lineItems = await stripe.checkout.sessions.listLineItems(session.id);
 
       const items = lineItems.data.map((item) => {
@@ -162,12 +171,12 @@ stripeWebhookApp.post('/', async (req, res) => {
         amountTotal: session.amount_total || 0,
         totalAmount: session.amount_total ? session.amount_total / 100 : 0,
         currency: session.currency || 'usd',
-        paymentMethod: '', // No card brand available unless explicitly expanded
+        paymentMethod: '', // Not expanded yet
         cardDetails: {
           brand: '',
           lastFour: '',
         },
-        status: 'paid',
+        status: 'order successful', // ✅ Now correctly set
         createdAt: admin.firestore.FieldValue.serverTimestamp(),
         userId: session.metadata?.userId || 'guest',
         guestToken: session.metadata?.guestToken || '',
@@ -181,13 +190,44 @@ stripeWebhookApp.post('/', async (req, res) => {
       await db.collection('orders').doc(orderId).set(orderDoc);
       console.log(`✅ Order created: ${orderId}`);
       return res.status(200).send('Order created');
-    } catch (err) {
-      console.error('❌ Failed processing checkout.session.completed:', err.message);
-      return res.status(500).send('Internal Server Error');
     }
-  }
 
-  res.status(200).send('Event received');
+    if (event.type === 'checkout.session.expired' || event.type === 'checkout.session.async_payment_failed') {
+      // ❌ Payment Failed or Session Expired
+      const orderId = `ORD-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
+
+      const failedOrderDoc = {
+        stripeSessionId: session.id,
+        customerEmail: session.customer_details?.email || '',
+        customerPhone: session.metadata?.customerPhone || '',
+        customerName: session.customer_details?.name || '',
+        customerAddress: session.shipping_details?.address
+          ? `${session.shipping_details.address.line1}, ${session.shipping_details.address.city}, ${session.shipping_details.address.state} ${session.shipping_details.address.postal_code}, ${session.shipping_details.address.country}`
+          : '',
+        amountTotal: session.amount_total || 0,
+        totalAmount: session.amount_total ? session.amount_total / 100 : 0,
+        currency: session.currency || 'usd',
+        status: 'order failed', // ❌ Failed
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+        userId: session.metadata?.userId || 'guest',
+        guestToken: session.metadata?.guestToken || '',
+        orderId,
+        promoCode: session.total_details?.amount_discount
+          ? (session.discounts?.[0]?.promotion_code || '')
+          : '',
+      };
+
+      await db.collection('orders').doc(orderId).set(failedOrderDoc);
+      console.log(`❌ Order failed: ${orderId}`);
+      return res.status(200).send('Order failure recorded');
+    }
+
+    // If not one of the above types
+    res.status(200).send('Unhandled event received');
+  } catch (err) {
+    console.error('❌ Failed processing event:', err.message);
+    return res.status(500).send('Internal Server Error');
+  }
 });
 
 const printifyWebhookApp = express();
@@ -389,6 +429,74 @@ exports.refreshPrintifyStock = onSchedule(
     }
   }
 );
+
+// app.get('/api/admin/getPrintifyProducts', async (req, res) => {
+//   try {
+//     console.log('🟡 Hitting Printify API...');
+//     const response = await axios.get(
+//       'https://api.printify.com/v1/shops/20308920/products.json?status=published',
+//       {
+//         headers: {
+//           Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzN2Q0YmQzMDM1ZmUxMWU5YTgwM2FiN2VlYjNjY2M5NyIsImp0aSI6ImExNzMzODQ1Y2U3MzAzYTY0ZjY1Y2ZjZDRkOWIwMGYwNjVkNjM0NzY2ZTJhMGU0Zjg5ZjIyZTJjMzMwNjE4MzI2MThiODZiYjY1ZWNiNzZmIiwiaWF0IjoxNzQ1MDM0MDI0LjE4MTM4NCwibmJmIjoxNzQ1MDM0MDI0LjE4MTM4NiwiZXhwIjoxNzc2NTcwMDI0LjE3NDM5Nywic3ViIjoiMjE1MzcyNDMiLCJzY29wZXMiOlsic2hvcHMubWFuYWdlIiwic2hvcHMucmVhZCIsImNhdGFsb2cucmVhZCIsIm9yZGVycy5yZWFkIiwib3JkZXJzLndyaXRlIiwicHJvZHVjdHMucmVhZCIsInByb2R1Y3RzLndyaXRlIiwid2ViaG9va3MucmVhZCIsIndlYmhvb2tzLndyaXRlIiwidXBsb2Fkcy5yZWFkIiwidXBsb2Fkcy53cml0ZSIsInByaW50X3Byb3ZpZGVycy5yZWFkIiwidXNlci5pbmZvIl19.AvUcYuhOMtEV6ovGENBmveyRk5-zySqeggUHgsefA2T2XhmtqlH2oVArWxj3NBgYX8errG30vPjxNDBrltA`
+//         },
+//         timeout: 10000,
+//       }
+//     );
+
+//     console.log('✅ Printify response received');
+//     const products = response.data || [];
+//     console.log('🟢 Number of products returned:', products.length);
+//     res.status(200).json({ products });
+//   } catch (error) {
+//     console.error('❌ Printify fetch failed:', error.message);
+//     res.status(500).json({ error: 'Printify fetch failed' });
+//   }
+// });
+
+// app.post('/api/admin/importPrintifyProduct', async (req, res) => {
+//   const { printifyProductId } = req.body;
+
+//   if (!printifyProductId) {
+//     return res.status(400).json({ error: 'Missing printifyProductId' });
+//   }
+
+//   try {
+//     const response = await axios.get(
+//       `https://api.printify.com/v1/shops/${PRINTIFY_SHOP_ID.value()}/products/${printifyProductId}.json`,
+//       {
+//         headers: {
+//           Authorization: `Bearer ${PRINTIFY_API_KEY.value()}`,
+//         },
+//       }
+//     );
+
+//     const product = response.data;
+
+//     const payload = {
+//       id: product.id,
+//       title: product.title,
+//       description: product.description || '',
+//       images: (product.images || []).map((img) => ({
+//         ...img,
+//         displayInGallery: true,
+//       })),
+//       tags: product.tags || [],
+//       variants: product.variants.filter(v => v.is_enabled),
+//       options: product.options || [],
+//       visible: product.visible,
+//       syncedAt: admin.firestore.FieldValue.serverTimestamp(),
+//       status: 'inactive',
+//     };
+
+//     await db.collection('merchProducts').doc(product.id).set(payload);
+
+//     console.log(`✅ Imported Printify product: ${product.id}`);
+//     res.status(200).json({ success: true, productId: product.id });
+//   } catch (error) {
+//     console.error('❌ Error importing Printify product:', error.message);
+//     res.status(500).json({ error: 'Failed to import Printify product' });
+//   }
+// });
 
 exports.api = onRequest(
   {
