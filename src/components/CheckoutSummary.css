@@ -1,161 +1,217 @@
 .transaction-success {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #f9f9f9;
-    padding: 30px;
-    font-family: 'Arial', sans-serif;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f9f9f9;
+  padding: 30px;
+  font-family: 'Arial', sans-serif;
+  text-align: center;
 }
 
 .print-logo-wrapper {
-    text-align: center;
-    margin-bottom: 1rem;
-  }
-  
-  .print-logo {
-    max-width: 200px;
-    height: auto;
-  }
+  text-align: center;
+  margin-bottom: 1rem;
+  display: none;
+}
+
+.print-logo {
+  max-width: 200px;
+  height: auto;
+}
 
 .transaction-success h1 {
-    font-size: 2.5rem;
-    color: #4caf50;
-    margin-bottom: 15px;
+  font-size: 2.5rem;
+  color: #4caf50;
+  margin-bottom: 15px;
 }
 
 .confirmation-msg {
-    font-size: 1.3rem;
-    color: #333;
-    margin-bottom: 20px;
+  font-size: 1.3rem;
+  color: #333;
+  margin-bottom: 25px;
+  text-align: center;
 }
 
 .order-details {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 800px;
-    text-align: left;
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 800px;
+  text-align: left;
+}
+
+.order-details h2,
+.order-details h3 {
+  color: #333;
+  margin-bottom: 12px;
 }
 
 .checkout-summary-items {
-color: #000000;
+  color: #000;
+  padding-left: 20px;
+  list-style-type: disc;
+  margin-top: 10px;
 }
 
-.order-details h2, .order-details h3 {
-    color: #333;
-    margin-bottom: 10px;
+.checkout-summary-item {
+  margin-bottom: 10px;
 }
 
-.item-list {
-    list-style: none;
-    padding: 0;
+.variant-details {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 4px;
+  margin-left: 10px;
 }
 
-.item-list li {
-    background: #f5f5f5;
-    margin: 5px 0;
-    padding: 8px;
-    border-radius: 5px;
+.total-amount {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: 15px;
 }
 
-.total {
-    font-size: 1.3rem;
-    font-weight: bold;
+.checkout-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-top: 30px;
+  width: 100%;
+}
+
+.print-receipt,
+.continue-shopping {
+  width: 100%;
+  max-width: 300px;
+  text-align: center;
+  padding: 12px 0;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
 }
 
 .print-receipt {
-    margin-top: 15px;
-    padding: 10px 20px;
-    background: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+  background: #4caf50;
+  color: white;
 }
 
-.signup-banner {
-    background: #4caf50;
-    color: white;
-    padding: 15px;
-    border-radius: 5px;
-    margin-top: 20px;
-    text-align: center;
-    max-width: 600px;
+.print-receipt:hover {
+  background: #45a049;
 }
 
-.signup-button {
-    background: white;
-    color: #4caf50;
-    padding: 10px 15px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: 0.3s;
+.continue-shopping {
+  background: #4135ea;
+  color: white;
+  text-decoration: none;
 }
 
-.signup-button:hover {
-    background: #e0e0e0;
+.continue-shopping:hover {
+  background: #2f27c7;
 }
 
-.print-logo-wrapper {
-    display: none;
+.support-contact {
+  margin-top: 30px;
+  font-size: 0.95rem;
+  text-align: center;
+  color: #666;
+}
+
+.support-contact a {
+  color: #4caf50;
+  text-decoration: underline;
+}
+
+.support-contact a:hover {
+  color: #388e3c;
+}
+
+.item-list {
+  list-style: none;
+  padding: 0;
+}
+
+.item-list li {
+  background: #f5f5f5;
+  margin: 5px 0;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+.total {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+/* 🔥 Responsive for mobile devices */
+@media (max-width: 768px) {
+  .order-details {
+    padding: 20px;
   }
-  
 
+  .transaction-success h1 {
+    font-size: 2rem;
+  }
+
+  .confirmation-msg {
+    font-size: 1.1rem;
+  }
+
+  .total-amount {
+    font-size: 1.3rem;
+  }
+
+  .print-receipt,
+  .continue-shopping {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+/* 📄 Print styles */
 @media print {
-
-    .print-logo-wrapper {
-        display: block;
-        margin-bottom: 1rem;
-      }
-    
-      .print-logo {
-        max-width: 180px;
-      }
-    
-    body * {
-      visibility: hidden;
-    }
-  
-    .transaction-success, .transaction-success * {
-      visibility: hidden;
-    }
-  
-    .transaction-success {
-      visibility: hidden;
-    }
-  
-    .transaction-success h1 {
-      font-size: 12pt;
-      font-weight: bold;
-      margin-bottom: 1rem;
-    }
-  
-    .transaction-success h2,
-    .transaction-success h3 {
-      font-size: 10pt;
-      margin-top: 1rem;
-      margin-bottom: 0.5rem;
-    }
-  
-    .transaction-success p,
-    .transaction-success li {
-      font-size: 10pt;
-      line-height: 1.5;
-    }
-  
-    .print-btn,
-    footer,
-    nav,
-    .menu-toggle {
-      display: none !important;
-    }
-  
-    .checkout-summary-items {
-      page-break-inside: avoid;
-    }
+  body * {
+    visibility: hidden;
   }
+
+  .transaction-success, 
+  .transaction-success * {
+    visibility: visible;
+  }
+
+  .transaction-success {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: 20px;
+    background: white;
+    text-align: left;
+  }
+
+  .print-logo-wrapper {
+    display: block;
+    margin-bottom: 20px;
+  }
+
+  .print-logo {
+    max-width: 180px;
+  }
+
+  .checkout-summary-items {
+    page-break-inside: avoid;
+  }
+
+  .print-receipt,
+  .continue-shopping,
+  footer,
+  nav,
+  .menu-toggle {
+    display: none !important;
+  }
+}
