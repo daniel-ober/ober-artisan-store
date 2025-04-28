@@ -128,18 +128,26 @@ stripeWebhookApp.post('/', async (req, res) => {
 
   let session = event.data.object;
 
-  // If session includes a payment_intent, expand it
   if (session.payment_intent) {
-    const stripe = stripeLib(STRIPE_SECRET_KEY.value());
     session = await stripe.checkout.sessions.retrieve(session.id, {
       expand: ['payment_intent.payment_method'],
     });
   }
-  
+
   try {
     if (event.type === 'checkout.session.completed') {
-      // ✅ Payment Successful
       const lineItems = await stripe.checkout.sessions.listLineItems(session.id);
+
+      // Defensive Check
+      if (
+        !session.customer_details?.email ||
+        !session.customer_details?.name ||
+        !session.shipping_details?.address ||
+        lineItems.data.length === 0
+      ) {
+        console.warn('⚠️ Skipping incomplete order creation. Missing important customer info.');
+        return res.status(200).send('Skipped: Incomplete session, no order created.');
+      }
 
       const items = lineItems.data.map((item) => {
         const metadata = item.price?.metadata || {};
@@ -162,21 +170,19 @@ stripeWebhookApp.post('/', async (req, res) => {
 
       const orderDoc = {
         stripeSessionId: session.id,
-        customerEmail: session.customer_details?.email || '',
+        customerEmail: session.customer_details.email,
         customerPhone: session.metadata?.customerPhone || '',
-        customerName: session.customer_details?.name || '',
-        customerAddress: session.shipping_details?.address
-          ? `${session.shipping_details.address.line1}, ${session.shipping_details.address.city}, ${session.shipping_details.address.state} ${session.shipping_details.address.postal_code}, ${session.shipping_details.address.country}`
-          : '',
+        customerName: session.customer_details.name,
+        customerAddress: `${session.shipping_details.address.line1}, ${session.shipping_details.address.city}, ${session.shipping_details.address.state} ${session.shipping_details.address.postal_code}, ${session.shipping_details.address.country}`,
         amountTotal: session.amount_total || 0,
         totalAmount: session.amount_total ? session.amount_total / 100 : 0,
         currency: session.currency || 'usd',
-        paymentMethod: '', // Not expanded yet
+        paymentMethod: '',
         cardDetails: {
           brand: '',
           lastFour: '',
         },
-        status: 'order successful', // ✅ Now correctly set
+        status: 'order successful',
         createdAt: admin.firestore.FieldValue.serverTimestamp(),
         userId: session.metadata?.userId || 'guest',
         guestToken: session.metadata?.guestToken || '',
@@ -193,36 +199,10 @@ stripeWebhookApp.post('/', async (req, res) => {
     }
 
     if (event.type === 'checkout.session.expired' || event.type === 'checkout.session.async_payment_failed') {
-      // ❌ Payment Failed or Session Expired
-      const orderId = `ORD-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
-
-      const failedOrderDoc = {
-        stripeSessionId: session.id,
-        customerEmail: session.customer_details?.email || '',
-        customerPhone: session.metadata?.customerPhone || '',
-        customerName: session.customer_details?.name || '',
-        customerAddress: session.shipping_details?.address
-          ? `${session.shipping_details.address.line1}, ${session.shipping_details.address.city}, ${session.shipping_details.address.state} ${session.shipping_details.address.postal_code}, ${session.shipping_details.address.country}`
-          : '',
-        amountTotal: session.amount_total || 0,
-        totalAmount: session.amount_total ? session.amount_total / 100 : 0,
-        currency: session.currency || 'usd',
-        status: 'order failed', // ❌ Failed
-        createdAt: admin.firestore.FieldValue.serverTimestamp(),
-        userId: session.metadata?.userId || 'guest',
-        guestToken: session.metadata?.guestToken || '',
-        orderId,
-        promoCode: session.total_details?.amount_discount
-          ? (session.discounts?.[0]?.promotion_code || '')
-          : '',
-      };
-
-      await db.collection('orders').doc(orderId).set(failedOrderDoc);
-      console.log(`❌ Order failed: ${orderId}`);
-      return res.status(200).send('Order failure recorded');
+      console.warn('⚠️ Stripe session failed or expired, no order created.');
+      return res.status(200).send('Skipped: Session failed or expired.');
     }
 
-    // If not one of the above types
     res.status(200).send('Unhandled event received');
   } catch (err) {
     console.error('❌ Failed processing event:', err.message);
