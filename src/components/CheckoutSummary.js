@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import './CheckoutSummary.css';
 
@@ -50,31 +50,16 @@ const CheckoutSummary = () => {
     customerEmail,
     customerPhone,
     customerAddress,
-    paymentMethod,
-    cardDetails = {},
     status,
     items = [],
     totalAmount = 0,
     currency = 'usd',
     createdAt,
-    systemHistory = [],
   } = orderDetails;
 
   const orderId = fullOrderId?.startsWith('ORD-')
     ? fullOrderId.slice(4)
     : fullOrderId;
-
-  const cardBrandMap = {
-    visa: 'VISA',
-    mastercard: 'MC',
-    amex: 'AMEX',
-    discover: 'DISC',
-  };
-
-  const formattedCardBrand =
-    cardBrandMap[cardDetails.brand?.toLowerCase()] ||
-    cardDetails.brand?.toUpperCase() ||
-    'N/A';
 
   const orderDate = createdAt?._seconds
     ? new Date(createdAt._seconds * 1000).toLocaleString()
@@ -91,7 +76,12 @@ const CheckoutSummary = () => {
           className="print-logo"
         />
       </div>
+
       <h1>Order Success</h1>
+      <p className="confirmation-msg">
+        Thank you for your order! A confirmation email has been sent to{' '}
+        <strong>{customerEmail}</strong>.
+      </p>
 
       <div className="order-details">
         <h2>Order Summary</h2>
@@ -121,21 +111,62 @@ const CheckoutSummary = () => {
         <h3>Shipping Address</h3>
         <p>{customerAddress || 'N/A'}</p>
 
-        <h3>Items</h3>
+        <h3>Items Ordered</h3>
         <ul className="checkout-summary-items">
-          {items.map((item, idx) => (
-            <li key={idx} className="checkout-summary-item">
-              <strong>{item.description || item.name || 'Item'}</strong> — $
-              {(typeof item.price === 'number' ? item.price : 0).toFixed(2)} ×{' '}
-              {item.quantity}
-            </li>
-          ))}
-        </ul>
+  {items.map((item, idx) => (
+    <li key={idx} className="checkout-summary-item">
+      <div>
+        <strong>{item.description || item.name || 'Item'}</strong> — ${item.price?.toFixed(2)} × {item.quantity}
+      </div>
+
+      {/* Friendly, clean variant info */}
+      {item.variant && (
+        <div className="variant-details">
+          {item.variant.title ? (
+            <div><strong>Options:</strong> {item.variant.title}</div>
+          ) : (
+            <>
+              {(item.variant.color || item.variant.size || item.variant.other) && (
+                <div>
+                  <strong>Options:</strong>{' '}
+                  {[item.variant.color, item.variant.size, item.variant.other]
+                    .filter(Boolean)
+                    .join(' / ')}
+                </div>
+              )}
+            </>
+          )}
+        </div>
+      )}
+    </li>
+  ))}
+</ul>
 
         <h3>Total Amount</h3>
-        <p>
+        <p className="total-amount">
           ${totalAmount.toFixed(2)} {currency.toUpperCase()}
         </p>
+
+        <div className="checkout-actions">
+          <button onClick={printReceipt} className="print-receipt">
+            📄 Print / Download Receipt
+          </button>
+
+          <Link to="/" className="continue-shopping">
+            🛒 Continue Exploring
+          </Link>
+        </div>
+
+        <div className="support-contact">
+          <p>
+            Have questions about your order? <br />
+            Contact us at{' '}
+            <a href="mailto:support@oberartisandrums.com">
+              support@oberartisandrums.com
+            </a>{' '}
+            and we'll be happy to assist you!
+          </p>
+        </div>
       </div>
     </div>
   );
