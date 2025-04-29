@@ -31,6 +31,20 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails }) => {
   );
   const [relatedProjects, setRelatedProjects] = useState([]);
 
+  const formatFirestoreTimestamp = (timestamp) => {
+    if (timestamp?.seconds) {
+      return new Date(timestamp.seconds * 1000).toLocaleString();
+    }
+    if (timestamp?._seconds) {
+      return new Date(timestamp._seconds * 1000).toLocaleString();
+    }
+    if (typeof timestamp === 'string') {
+      // If systemHistory has a raw ISO string timestamp
+      return new Date(timestamp).toLocaleString();
+    }
+    return 'Invalid Date';
+  };
+
   // Fetch order details when the modal opens
   useEffect(() => {
     const fetchOrderDetails = async () => {
@@ -213,12 +227,35 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails }) => {
             <strong>Order ID:</strong> <span>{orderDetails.id}</span>
           </div>
           <div className="detail-group">
-            <strong>Customer Name:</strong>{' '}
-            <span>{orderDetails.customerName || 'N/A'}</span>
+            <strong>Order Date:</strong>{' '}
+            <span>
+              {orderDetails.createdAt
+                ? formatFirestoreTimestamp(orderDetails.createdAt)
+                : 'N/A'}
+            </span>
           </div>
           <div className="detail-group">
             <strong>Order Status:</strong> <span>{orderStatus}</span>
           </div>
+          <div className="detail-group">
+            <strong>Customer Name:</strong>{' '}
+            <span>{orderDetails.customerName || 'N/A'}</span>
+          </div>
+          <div className="detail-group">
+            <strong>Email:</strong>{' '}
+            <span>{orderDetails.customerEmail || 'N/A'}</span>
+          </div>
+          {orderDetails.customerPhone && (
+            <div className="detail-group">
+              <strong>Phone:</strong> <span>{orderDetails.customerPhone}</span>
+            </div>
+          )}
+          {orderDetails.customerAddress && (
+            <div className="detail-group">
+              <strong>Shipping Address:</strong>{' '}
+              <span>{orderDetails.customerAddress}</span>
+            </div>
+          )}
         </div>
 
         <h3>Products Ordered:</h3>
@@ -236,10 +273,40 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails }) => {
             <tbody>
               {items.map((item, index) => (
                 <tr key={index}>
-                  <td>{item.description || item.name || 'N/A'}</td>
+                  <td>
+                    <div>
+                      <strong>{item.description || item.name || 'N/A'}</strong>
+                    </div>
+                    {item.variant && (
+                      <div className="variant-details">
+                        {item.variant.title ? (
+                          <div>
+                            <em>Options:</em> {item.variant.title}
+                          </div>
+                        ) : (
+                          <>
+                            {(item.variant.color ||
+                              item.variant.size ||
+                              item.variant.other) && (
+                              <div>
+                                <em>Options:</em>{' '}
+                                {[
+                                  item.variant.color,
+                                  item.variant.size,
+                                  item.variant.other,
+                                ]
+                                  .filter(Boolean)
+                                  .join(' / ')}
+                              </div>
+                            )}
+                          </>
+                        )}
+                      </div>
+                    )}
+                  </td>
                   {/* Product Name */}
                   <td>{item.quantity || 0}</td> {/* Quantity */}
-                  <td>${(item.price ?? 0).toFixed(2)}</td> {/* Price */}
+                  <td>${Math.abs(item.price ?? 0).toFixed(2)}</td>
                   <td>
                     <select
                       value={item.status || 'Preparing'}
