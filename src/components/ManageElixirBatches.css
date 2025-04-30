@@ -1,0 +1,164 @@
+.elixir-batch-container {
+    padding: 2rem;
+    font-family: 'Poppins', sans-serif;
+    color: #222;
+  }
+  
+  .elixir-batch-container h2 {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .add-batch-form,
+  .essential-oils-section,
+  .notes-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    align-items: center;
+  }
+  
+  .add-batch-form input,
+  .essential-oils-section input,
+  .notes-section textarea {
+    padding: 0.4rem 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    flex: unset;
+  }
+  
+  .essential-oils-section input[type="text"] {
+    width: 160px;
+  }
+  
+  .essential-oils-section input[type="number"] {
+    width: 100px;
+  }
+  
+  .notes-section textarea {
+    flex-basis: 100%;
+    resize: vertical;
+    min-height: 50px;
+  }
+  
+  .elixir-button {
+    background-color: #6e3eff;
+    color: white !important;
+    border: none;
+    padding: 0.45rem 0.9rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    white-space: nowrap;
+  }
+  
+  .elixir-button:hover {
+    background-color: #5931cc;
+  }
+  
+  .batch-card {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 1.2rem 1.25rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  }
+  
+  .batch-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.25rem;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .batch-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+  }
+  
+  .batch-header strong {
+    display: inline-block;
+    width: 130px;
+  }
+  
+  .batch-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0.5rem 0;
+  }
+  
+  .essential-oils-section ul,
+  .notes-section ul {
+    list-style: none;
+    padding-left: 1rem;
+    margin: 0.25rem 0;
+  }
+  
+  .essential-oils-section ul li,
+  .notes-section ul li {
+    padding-left: 0.25rem;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: flex-start;
+  }
+  
+  .note-date {
+    font-weight: 600;
+    margin-right: 0.35rem;
+    color: #555;
+    white-space: nowrap;
+  }
+  
+  .delete-link {
+    color: crimson;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 0.85rem;
+  }
+  
+  .delete-link:hover {
+    text-decoration: underline;
+  }
+  
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    font-weight: 600;
+    margin-top: 1rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  .section-body {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 0.25rem;
+  }
+  
+  .add-link {
+    color: green;
+    font-weight: bold;
+    font-size: 1.25rem;
+    cursor: pointer;
+    padding-left: 0.5rem;
+  }
+  
+  .add-link:hover {
+    text-decoration: underline;
+  }
+  

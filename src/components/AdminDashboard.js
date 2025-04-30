@@ -10,7 +10,7 @@ import {
   FaImages,
   FaStar,
   FaRegChartBar,
-  FaPrint,
+  FaFlask,
 } from 'react-icons/fa'; // Added FaPrint for Printify Manager
 import ManageProducts from './ManageProducts';
 import ManageUsers from './ManageUsers';
@@ -20,6 +20,7 @@ import ManageGallery from './ManageGallery';
 import SiteSettings from './SiteSettings';
 import ManageCarts from './ManageCarts';
 import ManageProjects from './ManageProjects';
+import ManageElixirBatches from './ManageElixirBatches';
 import ManageSoundlegendRequests from './ManageSoundlegendRequests';
 import AdminOverview from './AdminOverview';
 // import PrintifyManager from './PrintifyManager';
@@ -188,6 +189,8 @@ const AdminDashboard = () => {
         return <ManageCarts />;
       case 'manageGallery':
         return <ManageGallery />;
+      case 'manageElixirBatches':
+        return <ManageElixirBatches />;
       case 'siteSettings':
         return <SiteSettings />;
       case 'manageSoundlegendRequests':
@@ -228,6 +231,11 @@ const AdminDashboard = () => {
             stateKey: 'manageCarts',
           },
           { name: 'Manage Gallery', icon: FaImages, stateKey: 'manageGallery' },
+          {
+            name: 'Elixir Batches',
+            icon: FaFlask,
+            stateKey: 'manageElixirBatches',
+          },
 
           { name: 'Site Settings', icon: FaCog, stateKey: 'siteSettings' },
         ].map(({ name, icon: Icon, stateKey }) => (
