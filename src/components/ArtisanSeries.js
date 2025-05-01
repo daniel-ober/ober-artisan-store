@@ -183,7 +183,7 @@ const ArtisanSeries = () => {
             </div>
           )} */}
 
-          {active.images?.length > 0 && (
+          {/* {active.images?.length > 0 && (
             <div className="gallery-strip">
               {active.images.map((img, idx) => (
                 <img
@@ -199,7 +199,7 @@ const ArtisanSeries = () => {
                 />
               ))}
             </div>
-          )}
+          )} */}
         </div>
       </div>
 

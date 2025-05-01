@@ -85,13 +85,12 @@ body.dark .about-banner img {
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 800px;
+  /* max-width: 800px; */
   width: 100%;
   gap: 32px;
 }
 
 .about-signoff-inner img {
-  width: 750px;
   max-width: 100%;
   height: auto;
   /* border-radius: 12px; */
