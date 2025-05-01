@@ -132,7 +132,7 @@ const handleClose = () => {
           style={{ cursor: 'pointer' }}
         >
           <img
-            src="https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/artisan%2Fsoundlegend%2F6.png?alt=media&token=e87598bf-fd0f-4724-8cbf-8822dccdfda6"
+            src="https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/artisan%2Fsoundlegend%2FIMG_1803.jpeg?alt=media&token=0dd78f95-2101-44e7-b95f-2b7cbe3c01a1"
             alt="SOUNDLEGEND Experience"
           />
           <h2 className="soundlegend-header">Build Your Custom SoundLegend Snare</h2>

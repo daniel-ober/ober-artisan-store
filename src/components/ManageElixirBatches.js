@@ -149,7 +149,7 @@ const ManageElixirBatches = () => {
       {batches.map((batch, index) => (
         <div className="batch-card" key={batch.id}>
           <h3>
-            Batch {batch.batchNumber} - {batch.dateCaptured}
+            Batch #{batch.batchNumber} - {batch.dateCaptured}
             <button className="elixir-button" style={{ marginLeft: '1rem' }} onClick={() => toggleExpand(index)}>
               {expandedIndex === index ? 'Collapse' : 'Expand'}
             </button>
