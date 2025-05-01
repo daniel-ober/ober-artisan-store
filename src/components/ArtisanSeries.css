@@ -46,7 +46,7 @@
   margin: 0 auto;
   transition: opacity 0.5s ease-in-out;
   opacity: 1;
-  min-height: 600px;
+  min-height: 400px;
 }
 
 .drum-display.fade-out {

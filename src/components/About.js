@@ -30,7 +30,7 @@ const About = () => {
 
       <div className="about-signoff">
   <div className="about-signoff-inner">
-    <img src="/about/dan-ober-founder.png" alt="Founder portrait" />
+    <img src="/about/toastforbreakfast.png" alt="Founder portrait" />
     <div className="about-quote">
       <p className="quote-text">
         "Every instrument I send into the world is a reflection of the standard I hold myself to — sonically, visually, and spiritually. This work is a responsibility and a privilege. If it bears the Ober name, it has to speak with truth."
