@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect, useRef } from 'react';
-import './ArtisanSeries.css';
+import './ArtisanDrums.css';
 import { DarkModeContext } from '../context/DarkModeContext';
 import { useNavigate } from 'react-router-dom';
 
@@ -49,7 +49,7 @@ const DRUM_SERIES = [
   },
 ];
 
-const ArtisanSeries = () => {
+const ArtisanDrums = () => {
   const { isDarkMode } = useContext(DarkModeContext);
   const navigate = useNavigate();
   const [activeIndex, setActiveIndex] = useState(1);
@@ -161,7 +161,8 @@ const ArtisanSeries = () => {
   }, []);
 
   return (
-    <div className="artisanseries-container">
+  <div className="artisanseries-container">
+  <h1 className="artisanseries-page-title">Explore Our Artisan Drums</h1>
       <div className={`logo-single-wrapper sticky-logo-wrapper fade-transition ${isFading ? 'fade-out' : ''}`}>
         <img src={active.logo} alt={active.name} className="artisanseries-header-image" />
       </div>
@@ -288,4 +289,4 @@ const ArtisanSeries = () => {
   );
 };
 
-export default ArtisanSeries;
+export default ArtisanDrums;
