@@ -1,0 +1,166 @@
+/* 📌 Main Container */
+.founders-toast-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px;
+  max-width: 1500px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  background: #121212;
+  color: white;
+}
+
+.founders-toast-header-logo {
+  height: 90px; /* Matches Heritage visual block height */
+  object-fit: contain;
+  margin-bottom: 30px;
+  align-self: center;
+}
+
+/* 📌 Content Layout */
+.founders-toast-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  gap: 60px;
+  max-width: 1200px;
+  box-sizing: border-box;
+}
+
+/* 📌 Image Section */
+.founders-toast-image {
+  flex: 1;
+  max-width: 50%;
+}
+
+.founders-toast-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.founders-toast-image img:hover {
+  transform: scale(1.02);
+}
+
+/* 📌 Details Section */
+.founders-toast-details {
+  flex: 1;
+  max-width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-bottom: 60px;
+}
+
+/* 📌 Product Name */
+.founders-toast-details h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+/* 📌 Product Description */
+.founders-toast-details p {
+  color: #ccc;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* 📌 Delivery Estimate */
+.founders-toast-delivery {
+  font-size: 14px;
+  color: #aaa;
+  margin-top: -15px;
+}
+
+/* 📌 Add to Cart & Hover Logic */
+.artisan-add-to-cart-button,
+.artisan-in-cart-button {
+  background-color: #4135ea;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 12px 20px;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.artisan-cart-hover-container {
+  position: relative;
+  width: 100%;
+}
+
+.artisan-cart-hover-options {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  text-align: center;
+  z-index: 9999;
+}
+
+.artisan-cart-hover-container:hover .artisan-cart-hover-options {
+  display: block;
+}
+
+.artisan-cart-hover-options span {
+  display: block;
+  padding: 10px;
+  font-weight: 600;
+  color: #333;
+  cursor: pointer;
+}
+
+.artisan-cart-hover-options span:hover {
+  background-color: #f5f5f5;
+}
+
+.founders-toast-eta {
+    font-size: 14px;
+    font-weight: 500;
+    color: #aaa;
+    text-align: center;
+    margin-bottom: 35px;
+  }
+
+  .founders-toast-details .founders-toast-price {
+    font-size: 25px;
+    font-weight: 600;
+    color: #ffde08;
+    text-align: center;
+    margin: 20px 0 6px 0;
+  }
+
+/* 📌 Responsive */
+@media (max-width: 1024px) {
+  .founders-toast-content {
+    flex-direction: column;
+    gap: 35px;
+  }
+
+  .founders-toast-image,
+  .founders-toast-details {
+    max-width: 100%;
+  }
+
+@media (max-width: 768px) {
+    .founders-toast-header-logo {
+      height: 80px;
+    }
+  }
+}
