@@ -18,7 +18,7 @@ import PreOrderPage from './components/PreOrderPage';
 import About from './components/About';
 import Contact from './components/Contact';
 import Cart from './components/Cart';
-import ArtisanSeries from './components/ArtisanSeries';
+import ArtisanDrums from './components/ArtisanDrums';
 import Register from './components/Register';
 import ForgotPassword from './components/ForgotPassword';
 import Checkout from './components/Checkout';
@@ -160,8 +160,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="*" element={<Navigate to="/" replace />} />
           <Route
-            path="/artisanseries"
-            element={<ArtisanSeries isDarkMode={isDarkMode} />}
+            path="/artisan-drums"
+            element={<ArtisanDrums isDarkMode={isDarkMode} />}
           />
           <Route path="/cart" element={<Cart />} />
           <Route
