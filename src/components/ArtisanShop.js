@@ -1,115 +1,54 @@
-import React, { useState, useEffect } from 'react';
-import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../firebaseConfig';
-import './ArtisanShop.css';
+import React, { useEffect, useState } from "react";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { db } from "../firebaseConfig";
+import PreOrderCard from "./PreOrderCard";
+import "./ArtisanShop.css";
 
-const ArtisanShop = () => {
-  const [hoveredDrum, setHoveredDrum] = useState(null);
-  const [drumDetails, setDrumDetails] = useState({});
+const PreOrderPage = () => {
+  const [preOrderItems, setPreOrderItems] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchDrumDetails = async () => {
+    const fetchPreOrderItems = async () => {
       try {
-        const productsCollection = collection(db, 'products');
-        const snapshot = await getDocs(productsCollection);
-        const fetchedDrumDetails = {};
+        // console.log("📥 Fetching pre-order items...");
+        const preOrderQuery = query(collection(db, "products"), where("isPreOrder", "==", true));
+        const querySnapshot = await getDocs(preOrderQuery);
+        let items = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
 
-        snapshot.forEach((doc) => {
-          const product = doc.data();
-          if (['HERITAGE', 'ONE', 'VAPRE'].includes(product.name.toUpperCase())) {
-            fetchedDrumDetails[product.name.toUpperCase()] = {
-              description: product.description,
-              price: `$${product.price.toFixed(2)}`,
-              status: product.status || 'available',
-              imageUrl: product.images?.[0] || '/fallback-images/image-coming-soon.png',
-              overlayImageUrl: `/artisan-shop/artisan-showroom-option-${product.name.toLowerCase()}.png`,
-              id: doc.id,
-            };
-          }
-        });
+        // Sort by displayOrder
+        items = items.sort((a, b) => (a.displayOrder || 0) - (b.displayOrder || 0));
 
-        setDrumDetails(fetchedDrumDetails);
+        setPreOrderItems(items);
       } catch (error) {
-        console.error('Error fetching drum details:', error);
+        console.error("❌ Error fetching pre-order items:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchDrumDetails();
+    fetchPreOrderItems();
   }, []);
 
-  const handleHover = (drum) => {
-    setHoveredDrum(drum);
-  };
+  if (loading) {
+    return <div className="loading">Loading Pre-Order Items...</div>;
+  }
 
   return (
-    <div className="artisan-shop">
-      {/* Base Hero Image */}
-      <div
-        className="image-layer base"
-        style={{
-          backgroundImage: "url('/artisan-shop/artisan-showroom-bottom.png')",
-        }}
-      />
+    <div className="pre-order-page">
+      <h1 className="pre-order-page-header">Pre-Order Your Handcrafted Drum</h1>
+      <p className="subtitle">Limited quantities available. Reserve yours today!</p>
 
-      {/* Highlighted Images */}
-      {Object.keys(drumDetails).map((drumKey) => (
-        <div
-          key={drumKey}
-          className={`image-layer ${
-            hoveredDrum === drumKey ? 'visible' : ''
-          }`}
-          style={{
-            backgroundImage: `url('${drumDetails[drumKey]?.overlayImageUrl}')`,
-          }}
-        />
-      ))}
-
-      {/* Hover Zones */}
-   {/* Hover Zones */}
-<div className="hover-zones">
-  {Object.keys(drumDetails).map((drumKey) => (
-    <div
-      key={drumKey}
-      className={`hover-zone ${drumKey.toLowerCase()}`}
-      role="button"
-      tabIndex="0"
-      onMouseEnter={() => handleHover(drumKey)}
-      onMouseLeave={() => setHoveredDrum(null)}
-      onClick={() => handleHover(drumKey)} // For touch devices
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          handleHover(drumKey);
-        }
-      }}
-    />
-  ))}
-</div>
-
-      {/* Popup Section */}
-      {hoveredDrum && drumDetails[hoveredDrum] && (
-        <div className="popup-container">
-          <div className="info-popup">
-            <img
-              src={drumDetails[hoveredDrum].imageUrl}
-              alt={`${hoveredDrum} Drum`}
-              className="popup-image"
-            />
-            <h2>{hoveredDrum}</h2>
-            <p>{drumDetails[hoveredDrum].description}</p>
-            <p className="popup-price">{drumDetails[hoveredDrum].price}</p>
-            <button
-              className="more-info"
-              onClick={() =>
-                (window.location.href = `/products/${drumDetails[hoveredDrum].id}`)
-              }
-            >
-              More Info
-            </button>
-          </div>
-        </div>
-      )}
+      <div className="pre-order-items">
+        {preOrderItems.map((item) => (
+          <PreOrderCard key={item.id} product={item} />
+        ))}
+      </div>
     </div>
   );
 };
 
-export default ArtisanShop;
+export default PreOrderPage;
