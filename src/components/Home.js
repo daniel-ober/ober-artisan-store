@@ -23,7 +23,7 @@ const Home = () => {
           <div className="card-subtitle">
             Handcrafted Excellence in Nashville, TN
           </div>
-          <Link to="/artisanseries">
+          <Link to="/artisan-drums">
             <button className="cta-button">Explore Drums</button>
           </Link>
         </div>

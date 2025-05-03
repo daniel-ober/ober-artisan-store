@@ -14,7 +14,7 @@ import Home from './components/Home';
 import Products from './components/Products';
 import ProductDetail from './components/ProductDetail';
 import TestRedirect from './components/TestRedirect';
-import PreOrderPage from './components/PreOrderPage';
+import PreOrderPage from './components/ArtisanShop';
 import About from './components/About';
 import Contact from './components/Contact';
 import Cart from './components/Cart';
@@ -26,7 +26,7 @@ import AccountPage from './components/AccountPage';
 import CheckoutSummary from './components/CheckoutSummary';
 import Gallery from './components/Gallery';
 import AdminDashboard from './components/AdminDashboard';
-import ArtisanShop from './components/ArtisanShop';
+import OriginalArtisanShop from './components/OriginalArtisanShop';
 import ManageUsers from './components/ManageUsers';
 import ManageProducts from './components/ManageProducts';
 import ManageOrders from './components/ManageOrders';
@@ -186,9 +186,9 @@ function App() {
             }
           />
           <Route
-            path="/artisan-shop"
+            path="/original-artisan-shop"
             element={
-              isLinkEnabled('artisan-shop') ? <ArtisanShop /> : <NotFound />
+              isLinkEnabled('artisan-shop') ? <OriginalArtisanShop /> : <NotFound />
             }
           />
           <Route

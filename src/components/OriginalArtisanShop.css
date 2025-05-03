@@ -1,0 +1,234 @@
+.original-artisan-shop {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 70px); /* Adjust height to remove white gap */
+    overflow: hidden;
+    text-align: center;
+    background: black;
+    margin: 0;
+  }
+  
+  /* Hero Image Layers */
+  .original-image-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 2;
+  }
+  
+  .original-image-layer.base {
+    opacity: 1;
+    z-index: 1;
+  }
+  
+  .original-image-layer.visible {
+    opacity: 1;
+    z-index: 3; /* Ensure it appears on top */
+  }
+  
+  /* Hover Zones */
+  .original-hover-zones {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 4;
+  }
+  
+  .original-hover-zone {
+    position: absolute;
+    cursor: pointer;
+  }
+  
+  .original-hover-zone.heritage {
+    top: 40%;
+    left: 5%;
+    width: 30%;
+    height: 50%;
+  }
+  
+  .original-hover-zone.one {
+    top: 35%;
+    left: 35%;
+    width: 30%;
+    height: 50%;
+  }
+  
+  .original-hover-zone.vapre {
+    top: 40%;
+    left: 65%;
+    width: 30%;
+    height: 50%;
+  }
+  
+  /* Popup Container */
+  .original-popup-container {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    padding: 1rem 2rem;
+    text-align: center;
+    z-index: 6; /* Ensure above the overlay */
+  }
+  
+  /* Popup Window */
+  .original-info-popup {
+    color: white;
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .original-popup-image {
+    width: 300px;
+    border-radius: 8px;
+  }
+  
+  .original-info-popup h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .original-info-popup .popup-price {
+    font-size: 1.2rem;
+    color: #f0b040;
+  }
+  
+  .original-more-info {
+    display: inline-block;
+    margin-top: 0.5rem;
+    color: #69b0fc;
+    background: none;
+    border: none;
+    font-size: 1rem;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
+  .original-more-info:hover {
+    color: #ffffff;
+  }
+  
+  /* Mobile Responsiveness */
+  @media (max-width: 768px) {
+    .original-artisan-shop {
+      height: auto; /* Let content determine height */
+      padding: 1.2rem 1rem;
+    }
+  
+    .original-hero-logo {
+      max-width: 80%;
+      margin: 0 auto;
+    }
+  
+    .original-hero-title {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+  
+    .original-hero-subtitle {
+      font-size: 1rem;
+      line-height: 1.3;
+      max-width: 90%;
+      margin: 0 auto 1rem;
+    }
+  
+    .original-drum-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      gap: 1rem;
+    }
+  
+    .original-drum-heading {
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+    }
+  
+    .original-drum-subheading {
+      font-size: 1rem;
+      line-height: 1.4;
+      max-width: 90%;
+      margin-bottom: 1rem;
+    }
+  
+    .original-drum-description {
+      font-size: 0.9rem;
+      line-height: 1.5;
+      max-width: 85%;
+      margin-bottom: 1rem;
+    }
+  
+    .original-drum-image {
+      width: 90%;
+      max-width: 280px; /* Keep it compact */
+      height: auto;
+      margin: 0 auto 1rem;
+    }
+  
+    .original-drum-specs {
+      font-size: 0.9rem;
+      text-align: left;
+      max-width: 350px;
+      margin: 0 auto;
+    }
+  
+    .original-drum-specs ul {
+      padding-left: 1rem;
+    }
+  }
+  
+  /* For ultra-small devices */
+  @media (max-width: 480px) {
+    .original-artisan-shop {
+      padding: 1rem 0.8rem;
+    }
+  
+    .original-drum-section {
+      padding: 1rem 0.8rem;
+      gap: 0.75rem;
+    }
+  
+    .original-hero-title {
+      font-size: 1.6rem;
+    }
+  
+    .original-hero-subtitle {
+      font-size: 0.95rem;
+    }
+  
+    .original-drum-heading {
+      font-size: 1.4rem;
+    }
+  
+    .original-drum-subheading {
+      font-size: 0.9rem;
+    }
+  
+    .original-drum-description {
+      font-size: 0.85rem;
+      max-width: 90%;
+    }
+  
+    .original-drum-image {
+      max-width: 240px;
+    }
+  
+    .original-drum-specs {
+      font-size: 0.85rem;
+    }
+  }
