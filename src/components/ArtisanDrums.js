@@ -162,7 +162,6 @@ const ArtisanDrums = () => {
 
   return (
   <div className="artisanseries-container">
-  <h1 className="artisanseries-page-title">Explore Our Artisan Drums</h1>
       <div className={`logo-single-wrapper sticky-logo-wrapper fade-transition ${isFading ? 'fade-out' : ''}`}>
         <img src={active.logo} alt={active.name} className="artisanseries-header-image" />
       </div>
