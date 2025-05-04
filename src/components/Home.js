@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
+import HomeCarousel from './HomeCarousel';
 
 const Home = () => {
   return (
     <div className="home-container">
+    <HomeCarousel />
       {/* Explore Drums - Full Width Card */}
 
       {/* ✅ SoundLegend Video Section */}
@@ -19,17 +21,25 @@ const Home = () => {
       </div>
 
       <div className="home-row">
-        <div className="card explore-card">
+        {/* <div className="card explore-card">
           <div className="card-subtitle">
             Handcrafted Excellence in Nashville, TN
           </div>
           <Link to="/artisan-drums">
             <button className="cta-button">Explore Drums</button>
           </Link>
-        </div>
+        </div> */}
       </div>
       {/* Highlight Row - 3 Cards in a Single Line */}
       <div className="home-row highlight-row">
+
+        <div className="card">
+          <h2 className="highlight-card-header">Pre-Order</h2>
+          <p>Reserve your ready-to-be-made snare today.</p>
+          <Link to="/artisanseries/pre-order">
+            <button>Pre-Order Now</button>
+          </Link>
+        </div>
         <div className="card">
           <h2 className="highlight-card-header">SoundLegend</h2>
           <p>
@@ -38,13 +48,6 @@ const Home = () => {
           </p>
           <Link to="/artisanseries/soundlegend">
             <button>Learn More</button>
-          </Link>
-        </div>
-        <div className="card">
-          <h2 className="highlight-card-header">Pre-Order</h2>
-          <p>Reserve your ready-to-be-made snare today.</p>
-          <Link to="/artisanseries/pre-order">
-            <button>Pre-Order Now</button>
           </Link>
         </div>
         <div className="card">
