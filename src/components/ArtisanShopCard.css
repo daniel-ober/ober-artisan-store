@@ -1,6 +1,7 @@
 .preorder-card {
   display: flex;
   flex-direction: column;
+  justify-content: space-between; /* 💡 push content to top and bottom */
   align-items: center;
   background: white;
   border-radius: 8px;
@@ -8,6 +9,7 @@
   text-align: center;
   width: 100%;
   max-width: 400px;
+  min-height: 100%; /* ⚠️ allow full-height within row */
   overflow: hidden;
   transition: transform 0.2s ease;
 }
@@ -35,17 +37,22 @@
 
 /* Artisan Series Logo */
 .preorder-header-logo {
+  height: 75px;
+  max-height: 75px;
+  width: auto;
   max-width: 180px;
-  /* max-height: 30px; */
+  object-fit: contain;
   display: block;
-  /* margin: 0 auto 10px auto; */
-  padding-top: 30px;
+  margin: 10px auto 0px auto; /* ⬅️ top: 15px, bottom: 5px (reduced from 30px / 10px) */
 }
 
 /* Product Info */
 .preorder-info {
-  padding: 15px;
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
+  flex-grow: 1; /* 💡 takes remaining space */
+  padding: 0px 21px 15px 21px;
 }
 
 .preorder-title {
@@ -61,7 +68,7 @@
   text-align: justify;
   color: #222;
   letter-spacing: 0.5px;
-  margin-bottom: 27px;
+  margin: 0 0 27px 0; /* 🔧 Remove top margin (was 14px) */
 }
 
 .card-preorder-price {
@@ -77,7 +84,8 @@
 
 /* Buttons */
 .preorder-button-container {
-  margin-top: 10px;
+  margin-top: auto;
+  /* padding-top: 15px; */
 }
 
 .preorder-card-preorder-button {
