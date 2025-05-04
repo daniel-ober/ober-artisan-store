@@ -27,7 +27,7 @@
   width: 100%;
   max-width: 1200px;
   box-sizing: border-box;
-  text-align: center;
+  /* text-align: center; */
 }
 
 .founders-toast-image {
