@@ -1,0 +1,190 @@
+.home-carousel-wrapper {
+  position: relative;
+  width: 90%;
+  max-width: 1000px; /* Match YouTube + CTA */
+  margin: 0 auto;
+  padding: 1rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-carousel {
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  background-size: cover;
+  background-position: center;
+  border-radius: 16px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-image 1s ease-in-out;
+  animation: kenBurnsZoom 12s ease-in-out infinite alternate;
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes kenBurnsZoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.04); }
+}
+
+.carousel-overlay {
+  position: relative;
+  text-align: center;
+  color: #fff;
+  width: fit-content;
+  max-width: 90%;
+  padding: 2rem 2.5rem;
+  margin: auto;
+  z-index: 2;
+}
+
+.carousel-overlay::before {
+  content: "";
+  position: absolute;
+  top: -20%;
+  left: -20%;
+  right: -20%;
+  bottom: -20%;
+  background: inherit;
+  backdrop-filter: blur(4px);
+  mask-image: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 1) 22%,
+    rgba(0, 0, 0, 0) 60%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 1) 22%,
+    rgba(0, 0, 0, 0) 60%
+  );
+  z-index: -1;
+  border-radius: 50%;
+}
+
+.carousel-overlay h1 {
+  font-size: 2.8rem;
+  font-weight: 800;
+  margin-bottom: 1.25rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  text-shadow:
+    0 0 6px rgba(0, 0, 0, 0.6),
+    0 2px 16px rgba(0, 0, 0, 0.5);
+}
+
+.carousel-overlay p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  line-height: 1.5;
+  opacity: 0.95;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.carousel-overlay button {
+  background: #ff6600;
+  color: white;
+  padding: 14px 28px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-bottom: 2rem; /* Avoid overlapping dots */
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease,
+    opacity 1.6s ease; /* match fade duration */
+  opacity: 0; /* initial state */
+}
+
+.carousel-overlay button.fade-in {
+  opacity: 1;
+}
+
+.carousel-overlay button.fade-out {
+  opacity: 0;
+}
+.carousel-text {
+  opacity: 0;
+  transition: opacity 1.6s ease;
+}
+
+.carousel-text.fade-in {
+  opacity: 1;
+}
+
+.carousel-text.fade-out {
+  opacity: 0;
+}
+
+.carousel-dots {
+  position: absolute;
+  bottom: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  z-index: 10;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.dot.active {
+  background-color: #ff6600;
+  transform: scale(1.25);
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .home-carousel-wrapper {
+    max-width: 100%;
+    padding: 1rem 0;
+  }
+
+  .home-carousel {
+    width: 100%;
+    aspect-ratio: 1.5 / 1;
+    border-radius: 0;
+  }
+
+  .carousel-overlay {
+    padding: 1.25rem;
+  }
+
+  .carousel-overlay h1 {
+    font-size: 1.65rem; /* was 2rem */
+    margin-bottom: 0.75rem;
+  }
+
+  .carousel-overlay p {
+    font-size: 0.95rem; /* was 1rem */
+    margin-bottom: 1.25rem;
+  }
+
+  .carousel-overlay button {
+    font-size: 0.95rem; /* was 1rem */
+    padding: 10px 20px;
+    margin-bottom: 1.5rem;
+  }
+
+  .carousel-dots {
+    bottom: 28px;
+    gap: 8px;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+  }
+}

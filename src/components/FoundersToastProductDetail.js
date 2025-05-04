@@ -111,13 +111,10 @@ const FoundersToastProductDetail = () => {
             exteriors, and hand-scorched finishes.
           </span>
 
-          <span>
-            <strong>
-              {' '}
+          <span><strong>Important: </strong>
               Not recommended for use on high-gloss, lacquered, or
               polyurethane-coated finishes, as it may affect the clarity or
               sheen. Always test on an inconspicuous area first.
-            </strong>
           </span>
           <div>
             <p className="founders-toast-price">
