@@ -97,7 +97,7 @@ const FoundersToastProductDetail = () => {
             <p className="founders-toast-price">
               ${Number(product.price).toFixed(2)}
             </p>
-            <p className="founders-toast-eta">Est Delivery: 3–5 business days</p>
+            <p className="founders-toast-eta">Est Delivery: 5–7 business days</p>
           </div>
 
           {/* Quantity Selector */}
