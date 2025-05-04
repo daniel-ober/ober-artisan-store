@@ -181,13 +181,15 @@ const Cart = () => {
                 return (
                   <tr key={item.id}>
                     <td>
-                      <Link
-                        to={
-                          item.category === 'artisan'
-                            ? `/artisanseries/${item.productId}`
-                            : `/merch/${item.productId}`
-                        }
-                      >
+                    <Link
+  to={
+    item.productId === 'founders-toast'
+      ? '/artisan-shop/founders-toast'
+      : item.category === 'artisan'
+      ? `/artisanseries/${item.productId}`
+      : `/merch/${item.productId}`
+  }
+>
                         <img
                           src={
                             typeof previewImage === 'string'
