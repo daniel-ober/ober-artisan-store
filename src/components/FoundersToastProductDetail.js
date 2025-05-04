@@ -1,3 +1,4 @@
+// FoundersToastProductDetail.js
 import React, { useEffect, useState } from 'react';
 import { useCart } from '../context/CartContext';
 import { useNavigate } from 'react-router-dom';
@@ -9,6 +10,7 @@ import './FoundersToastProductDetail.css';
 const FoundersToastProductDetail = () => {
   const [product, setProduct] = useState(null);
   const [buttonText, setButtonText] = useState('Add to Cart');
+  const [quantity, setQuantity] = useState(1);
   const navigate = useNavigate();
   const { cart, addToCart, removeFromCart } = useCart();
   const productId = 'founders-toast';
@@ -30,23 +32,34 @@ const FoundersToastProductDetail = () => {
     fetchProduct();
   }, []);
 
+  const isInCart = cart.some((item) => item.id === (product?.stripePriceId || `simple-${productId}`));
+
   const cartItem = {
     id: product?.stripePriceId || `simple-${productId}`,
     productId,
     name: product?.name || 'Founder’s Toast',
-    quantity: 1,
+    quantity,
     price: product?.price || 1200,
     stripePriceId: product?.stripePriceId || '',
     images: product?.images?.length ? [product.images[0]] : [],
-    category: 'artisan',
+    category: 'merch',
+    currentQuantity: product?.currentQuantity ?? 10,
   };
-
-  const isInCart = cart.some((item) => item.id === cartItem.id);
 
   const handleAddToCart = () => {
     if (!product) return;
-    addToCart(cartItem, cartItem);
-    toast.success('🧴 Added to cart!');
+  
+    const existingItem = cart.find((item) => item.id === cartItem.id);
+  
+    const updatedCartItem = {
+      ...cartItem,
+      quantity: existingItem
+        ? Math.min(existingItem.quantity + quantity, product.currentQuantity ?? 10)
+        : quantity,
+    };
+  
+    addToCart(updatedCartItem); // ✅ Pass only the final item
+    toast.success('🛒 Item added to cart!');
     setButtonText('In Cart');
   };
 
@@ -66,24 +79,50 @@ const FoundersToastProductDetail = () => {
 
   return (
     <div className="founders-toast-detail">
-      {' '}
       <img
         src="/resized-logos/founders-toast-white.png"
         alt="Founder’s Toast Logo"
         className="founders-toast-header-logo"
       />
+
       <div className="founders-toast-content">
         <div className="founders-toast-image">
           <img src={product.images?.[0]} alt={product.name} />
         </div>
 
         <div className="founders-toast-details">
-          {' '}
           <p className="founders-toast-description">{product.description}</p>
+
           <div>
-  <p className="founders-toast-price">${Number(product.price).toFixed(2)}</p>
-  <p className="founders-toast-eta">Est Delivery: 3–5 business days</p>
-</div>
+            <p className="founders-toast-price">
+              ${Number(product.price).toFixed(2)}
+            </p>
+            <p className="founders-toast-eta">Est Delivery: 3–5 business days</p>
+          </div>
+
+          {/* Quantity Selector */}
+          {!isInCart && (
+            <div className="quantity-selector">
+              <button
+                onClick={() => setQuantity((prev) => Math.max(prev - 1, 1))}
+                disabled={quantity <= 1}
+              >
+                -
+              </button>
+              <span>{quantity}</span>
+              <button
+                onClick={() =>
+                  setQuantity((prev) =>
+                    Math.min(prev + 1, product.currentQuantity ?? 10)
+                  )
+                }
+                disabled={quantity >= (product.currentQuantity ?? 10)}
+              >
+                +
+              </button>
+            </div>
+          )}
+
           {buttonText === 'In Cart' ? (
             <div className="artisan-cart-hover-container">
               <button className="artisan-in-cart-button" disabled>

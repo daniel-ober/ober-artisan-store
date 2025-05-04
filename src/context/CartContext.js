@@ -128,9 +128,10 @@ export const CartProvider = ({ children }) => {
 
     const cartItem = {
       id: product.id,
-productId: String(product.productId ?? product.originalProductId ?? product.id),      name: product.name || 'Unnamed Product',
+      productId: String(product.productId ?? product.originalProductId ?? product.id),
+      name: product.name || 'Unnamed Product',
       category: product.category || 'merch',
-      quantity: 1,
+      quantity: product.quantity || 1, // ✅ FIXED
       price: product.price,
       stripePriceId: product.stripePriceId || mergedOptions.stripePriceId || '',
       currentQuantity: product.currentQuantity || 1,
@@ -139,7 +140,7 @@ productId: String(product.productId ?? product.originalProductId ?? product.id),
       description: product.description || '',
       images: product.images || [],
       variantId: product.variantId || mergedOptions.variantId,
-
+    
       config: {
         ...mergedOptions,
         size: product.size || mergedOptions.size,
@@ -151,7 +152,7 @@ productId: String(product.productId ?? product.originalProductId ?? product.id),
         outerShell: mergedOptions.outerShell,
         innerStave: mergedOptions.innerStave,
       },
-
+    
       timestamp: new Date().toISOString(),
     };
 
