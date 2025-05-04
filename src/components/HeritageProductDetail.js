@@ -322,7 +322,7 @@ const HeritageProductDetail = () => {
               <li>Remo Coated Ambassador Batter & Clear Snare Side</li>
               <li>Estimated Delivery: 5–7 weeks</li>
               <p className="order-to-build-disclaimer">
-                *Note: All Ober Artisan drums are on an "order-to-build" basis, offering various configuration options. Finished product will appear different than the image shown.
+                *Note: Each Ober Artisan Drum is built to order. The drum you receive will closely reflect the design shown, but natural wood grain patterns and dimensions may vary depending on your selected size and configuration.
               </p>
             </ul>
           </div>
