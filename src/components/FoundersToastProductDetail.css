@@ -146,6 +146,40 @@
     margin: 20px 0 6px 0;
   }
 
+  .quantity-selector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: -10px;
+    margin-bottom: 15px;
+  }
+  
+  .quantity-selector button {
+    padding: 6px 12px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #2e2e2e;
+    color: white;
+    border: 1px solid #444;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .quantity-selector button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  
+  .quantity-selector span {
+    min-width: 24px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 18px;
+    color: white;
+  }
+
 /* 📌 Responsive */
 @media (max-width: 1024px) {
   .founders-toast-content {
