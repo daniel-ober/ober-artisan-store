@@ -32,7 +32,9 @@ const FoundersToastProductDetail = () => {
     fetchProduct();
   }, []);
 
-  const isInCart = cart.some((item) => item.id === (product?.stripePriceId || `simple-${productId}`));
+  const isInCart = cart.some(
+    (item) => item.id === (product?.stripePriceId || `simple-${productId}`)
+  );
 
   const cartItem = {
     id: product?.stripePriceId || `simple-${productId}`,
@@ -48,16 +50,19 @@ const FoundersToastProductDetail = () => {
 
   const handleAddToCart = () => {
     if (!product) return;
-  
+
     const existingItem = cart.find((item) => item.id === cartItem.id);
-  
+
     const updatedCartItem = {
       ...cartItem,
       quantity: existingItem
-        ? Math.min(existingItem.quantity + quantity, product.currentQuantity ?? 10)
+        ? Math.min(
+            existingItem.quantity + quantity,
+            product.currentQuantity ?? 10
+          )
         : quantity,
     };
-  
+
     addToCart(updatedCartItem); // ✅ Pass only the final item
     toast.success('🛒 Item added to cart!');
     setButtonText('In Cart');
@@ -91,13 +96,36 @@ const FoundersToastProductDetail = () => {
         </div>
 
         <div className="founders-toast-details">
-          <p className="founders-toast-description">{product.description}</p>
+          <span>
+            A nourishing blend of natural oils and hand-melted beeswax,
+            Founder’s Toast conditions and revives fine wood surfaces with a
+            subtle, smoky-vanilla finish. This artisan-crafted formula is
+            specially designed for our natural and matte-finished drum shells,
+            enhancing the grain without adding unwanted gloss.
+          </span>
 
+          <span>
+            <strong>Recommended Use:</strong> Ideal for raw, satin, or
+            matte-finished woods such as walnut, cherry, birch, oak, or maple.
+            Safe for most fine woods including aged tonewoods, soft shell
+            exteriors, and hand-scorched finishes.
+          </span>
+
+          <span>
+            <strong>
+              {' '}
+              Not recommended for use on high-gloss, lacquered, or
+              polyurethane-coated finishes, as it may affect the clarity or
+              sheen. Always test on an inconspicuous area first.
+            </strong>
+          </span>
           <div>
             <p className="founders-toast-price">
               ${Number(product.price).toFixed(2)}
             </p>
-            <p className="founders-toast-eta">Est Delivery: 5–7 business days</p>
+            <p className="founders-toast-eta">
+              Est Delivery: 5–7 business days
+            </p>
           </div>
 
           {/* Quantity Selector */}
