@@ -453,8 +453,8 @@ id: `feuzon-${stripePriceId}-${size}-${depth}-${reRing}-${lugs}-${staveQuantity}
   };
 
   const handleRemoveFromCart = async () => {
-    const generatedId = `feuzon-${stripePriceId}-${size}-${depth}-${reRing}-${lugs}-${staveQuantity}`;
-    setProductInCart(false); // ✅ Instant UI feedback
+    const generatedId = `feuzon-${stripePriceId}-${size}-${depth}-${reRing}-${lugs}-${staveQuantity}-${outerShell}-${innerStave}`;
+    setProductInCart(false); // Instant UI feedback
     await removeFromCart(generatedId);
     toast.success("🗑️ Item removed from cart.");
   };
