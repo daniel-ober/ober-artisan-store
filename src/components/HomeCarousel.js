@@ -4,13 +4,6 @@ import './HomeCarousel.css';
 
 const slides = [
   {
-    title: 'Artisan Shop',
-    subtitle: 'Pre-order your drum today',
-    buttonText: 'Pre-Order Now',
-    link: '/artisan-shop',
-    background: '/carousel/artisan-shop.webp',
-  },
-  {
     title: 'Artisan Drums',
     subtitle: 'Explore our handcrafted snare drums',
     buttonText: 'Explore Drums',
@@ -23,6 +16,13 @@ const slides = [
     buttonText: 'Learn More',
     link: '/artisanseries/soundlegend',
     background: '/carousel/soundlegend.webp',
+  },
+  {
+    title: 'Artisan Shop',
+    subtitle: 'Pre-order your drum today',
+    buttonText: 'Pre-Order Now',
+    link: '/artisan-shop',
+    background: '/carousel/artisan-shop.webp',
   },
   {
     title: "Founder's Toast",
