@@ -56,9 +56,7 @@ export const CartProvider = ({ children }) => {
           setCart(firestoreCart);
           localStorage.setItem('cart', JSON.stringify(firestoreCart));
         } else {
-          await setDoc(cartRef, { cart: [] });
           setCart([]);
-          localStorage.setItem('cart', JSON.stringify([]));
         }
       } catch (err) {
         console.error('Error initializing cart:', err);
@@ -81,6 +79,9 @@ export const CartProvider = ({ children }) => {
       console.warn('Cannot update Firestore: No cartId found.');
       return;
     }
+
+    const cartRef = doc(db, 'carts', cartId);
+    const cartDoc = await getDoc(cartRef);
 
     const sanitizedCart = updatedCart.map((item) => ({
       id: item.id || 'N/A',
@@ -106,20 +107,36 @@ export const CartProvider = ({ children }) => {
       timestamp: item.timestamp || new Date().toISOString(),
     }));
 
-    try {
-      const cartRef = doc(db, 'carts', cartId);
-      await updateDoc(cartRef, {
-        cart: sanitizedCart,
-        lastUpdated: serverTimestamp(),
-      });
-    } catch (error) {
-      console.error('Firestore Update Error:', error);
+    const cartTotal = sanitizedCart.reduce(
+      (sum, item) => sum + (item.price || 0) * (item.quantity || 1),
+      0
+    );
+
+    const payload = {
+      cart: sanitizedCart,
+      cartTotal,
+      lastUpdated: serverTimestamp(),
+    };
+
+    if (!cartDoc.exists()) {
+      payload.createdAt = serverTimestamp();
+      await setDoc(cartRef, payload);
+      console.log('🆕 Created new Firestore cart document:', cartId);
+    } else {
+      await updateDoc(cartRef, payload);
+      console.log('✅ Updated Firestore cart document:', cartId);
     }
   };
 
   const addToCart = async (product, selectedOptions = {}) => {
     if (!product || typeof product !== 'object') return;
-    if (!cartId) return;
+
+    let currentCartId = cartId;
+    if (!currentCartId) {
+      currentCartId = generateCartId();
+      localStorage.setItem('cartId', currentCartId);
+      setCartId(currentCartId);
+    }
 
     const mergedOptions = {
       ...(product.options || {}),
@@ -131,7 +148,7 @@ export const CartProvider = ({ children }) => {
       productId: String(product.productId ?? product.originalProductId ?? product.id),
       name: product.name || 'Unnamed Product',
       category: product.category || 'merch',
-      quantity: product.quantity || 1, // ✅ FIXED
+      quantity: 1,
       price: product.price,
       stripePriceId: product.stripePriceId || mergedOptions.stripePriceId || '',
       currentQuantity: product.currentQuantity || 1,
@@ -140,7 +157,6 @@ export const CartProvider = ({ children }) => {
       description: product.description || '',
       images: product.images || [],
       variantId: product.variantId || mergedOptions.variantId,
-    
       config: {
         ...mergedOptions,
         size: product.size || mergedOptions.size,
@@ -152,15 +168,12 @@ export const CartProvider = ({ children }) => {
         outerShell: mergedOptions.outerShell,
         innerStave: mergedOptions.innerStave,
       },
-    
       timestamp: new Date().toISOString(),
     };
 
     let updatedCart = [...cart];
 
-    const existingItemIndex = updatedCart.findIndex(
-      (item) => item.id === cartItem.id
-    );
+    const existingItemIndex = updatedCart.findIndex((item) => item.id === cartItem.id);
 
     if (existingItemIndex > -1) {
       updatedCart[existingItemIndex].quantity += 1;
@@ -168,11 +181,25 @@ export const CartProvider = ({ children }) => {
       updatedCart.push(cartItem);
     }
 
+    // ✅ Set cart state BEFORE Firestore update
+    setCart(updatedCart);
+
     try {
+      const cartRef = doc(db, 'carts', currentCartId);
+      const docSnap = await getDoc(cartRef);
+
+      if (!docSnap.exists()) {
+        await setDoc(cartRef, {
+          cart: [],
+          createdAt: serverTimestamp(),
+          lastUpdated: serverTimestamp(),
+        });
+        console.log('🆕 Created empty Firestore cart before update');
+      }
+
       await updateFirestoreCart(updatedCart);
-      setCart(updatedCart);
     } catch (error) {
-      console.error('Firestore Update Error:', error);
+      console.error('Firestore Add Error:', error);
     }
   };
 

@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { collection, getDocs, doc, getDoc } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  doc,
+  getDoc,
+  deleteDoc,
+} from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import ManageCartsModal from "./ManageCartsModal";
 import "./ManageCarts.css";
@@ -11,6 +17,7 @@ const ManageCarts = () => {
   const [selectedCart, setSelectedCart] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: null });
+  const [showOnlyWithItems, setShowOnlyWithItems] = useState(false);
 
   useEffect(() => {
     const fetchCarts = async () => {
@@ -59,7 +66,7 @@ const ManageCarts = () => {
         );
 
         setCarts(cartList);
-        setFilteredCarts(cartList.filter(cart => cart.totalAmount > 0));
+        applyFiltersAndSort(cartList, searchQuery, showOnlyWithItems, sortConfig);
       } catch (error) {
         console.error("Error fetching carts:", error);
       }
@@ -68,19 +75,74 @@ const ManageCarts = () => {
     fetchCarts();
   }, []);
 
-  const handleSearch = (event) => {
-    const query = event.target.value.trim();
-    setSearchQuery(query);
-
-    let results = carts;
+  const applyFiltersAndSort = (cartList, query, onlyWithItems, sortCfg) => {
+    let results = [...cartList];
 
     if (query.length >= 3) {
-      results = carts.filter((cart) =>
+      results = results.filter((cart) =>
         cart.id.toLowerCase().includes(query.toLowerCase())
       );
     }
 
-    setFilteredCarts(results.filter(cart => cart.totalAmount > 0));
+    if (onlyWithItems) {
+      results = results.filter((cart) => cart.totalItems > 0);
+    }
+
+    if (sortCfg.key) {
+      const direction = sortCfg.direction === "asc" ? 1 : -1;
+      results.sort((a, b) => {
+        if (sortCfg.key === "user") {
+          const emailA = a.userDetails.email.toLowerCase();
+          const emailB = b.userDetails.email.toLowerCase();
+          return emailA < emailB ? -1 * direction : emailA > emailB ? 1 * direction : 0;
+        }
+        if (sortCfg.key === "lastUpdated") {
+          const dateA = a.lastUpdated?.toDate() || new Date(0);
+          const dateB = b.lastUpdated?.toDate() || new Date(0);
+          return (dateA - dateB) * direction;
+        }
+        if (["totalItems", "totalAmount"].includes(sortCfg.key)) {
+          return (a[sortCfg.key] - b[sortCfg.key]) * direction;
+        }
+        return 0;
+      });
+    }
+
+    setFilteredCarts(results);
+  };
+
+  const handleSearch = (event) => {
+    const query = event.target.value.trim();
+    setSearchQuery(query);
+    applyFiltersAndSort(carts, query, showOnlyWithItems, sortConfig);
+  };
+
+  const handleToggleFilter = () => {
+    const next = !showOnlyWithItems;
+    setShowOnlyWithItems(next);
+    applyFiltersAndSort(carts, searchQuery, next, sortConfig);
+  };
+
+  const sortCarts = (key) => {
+    let direction = "asc";
+    if (sortConfig.key === key && sortConfig.direction === "asc") {
+      direction = "desc";
+    }
+    const newSortConfig = { key, direction };
+    setSortConfig(newSortConfig);
+    applyFiltersAndSort(filteredCarts, searchQuery, showOnlyWithItems, newSortConfig);
+  };
+
+  const deleteCart = async (cartIdToDelete) => {
+    try {
+      await deleteDoc(doc(db, "carts", cartIdToDelete));
+      const updated = carts.filter((cart) => cart.id !== cartIdToDelete);
+      setCarts(updated);
+      applyFiltersAndSort(updated, searchQuery, showOnlyWithItems, sortConfig);
+      closeModal();
+    } catch (error) {
+      console.error("Error deleting cart:", error);
+    }
   };
 
   const handleRowClick = (cart) => {
@@ -91,38 +153,6 @@ const ManageCarts = () => {
   const closeModal = () => {
     setSelectedCart(null);
     setIsModalOpen(false);
-  };
-
-  const sortCarts = (key) => {
-    let direction = "asc";
-    if (sortConfig.key === key && sortConfig.direction === "asc") {
-      direction = "desc";
-    }
-    setSortConfig({ key, direction });
-
-    const sortedCarts = [...filteredCarts].sort((a, b) => {
-      if (key === "user") {
-        const emailA = a.userDetails.email.toLowerCase();
-        const emailB = b.userDetails.email.toLowerCase();
-        if (emailA < emailB) return direction === "asc" ? -1 : 1;
-        if (emailA > emailB) return direction === "asc" ? 1 : -1;
-        return 0;
-      }
-
-      if (key === "lastUpdated") {
-        const dateA = a.lastUpdated?.toDate() || new Date(0);
-        const dateB = b.lastUpdated?.toDate() || new Date(0);
-        return direction === "asc" ? dateA - dateB : dateB - dateA;
-      }
-
-      if (key === "totalAmount" || key === "totalItems") {
-        return direction === "asc" ? a[key] - b[key] : b[key] - a[key];
-      }
-
-      return 0;
-    });
-
-    setFilteredCarts(sortedCarts);
   };
 
   const getSortIndicator = (key) => {
@@ -148,6 +178,14 @@ const ManageCarts = () => {
           onChange={handleSearch}
           className="search-input"
         />
+        <label className="checkbox-label">
+          <input
+            type="checkbox"
+            checked={showOnlyWithItems}
+            onChange={handleToggleFilter}
+          />
+          Show only carts with items
+        </label>
       </div>
 
       <table className="cart-table">
@@ -158,13 +196,14 @@ const ManageCarts = () => {
             <th onClick={() => sortCarts("totalItems")}>Number of Items {getSortIndicator("totalItems")}</th>
             <th onClick={() => sortCarts("totalAmount")}>Total Amount ($) {getSortIndicator("totalAmount")}</th>
             <th onClick={() => sortCarts("lastUpdated")}>Last Updated {getSortIndicator("lastUpdated")}</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody>
           {filteredCarts.length > 0 ? (
             filteredCarts.map((cart) => (
-              <tr key={cart.id} onClick={() => handleRowClick(cart)}>
-                <td>
+              <tr key={cart.id}>
+                <td onClick={() => handleRowClick(cart)}>
                   {cart.shortId}{" "}
                   <button
                     onClick={(e) => {
@@ -177,15 +216,28 @@ const ManageCarts = () => {
                     📋
                   </button>
                 </td>
-                <td>{cart.userDetails.email}</td>
-                <td>{cart.totalItems}</td>
-                <td>${cart.totalAmount.toFixed(2)}</td>
-                <td>{cart.lastUpdated?.toDate().toLocaleString() || "N/A"}</td>
+                <td onClick={() => handleRowClick(cart)}>{cart.userDetails.email}</td>
+                <td onClick={() => handleRowClick(cart)}>{cart.totalItems}</td>
+                <td onClick={() => handleRowClick(cart)}>${cart.totalAmount.toFixed(2)}</td>
+                <td onClick={() => handleRowClick(cart)}>
+                  {cart.lastUpdated?.toDate().toLocaleString() || "N/A"}
+                </td>
+                <td>
+                  <button
+                    onClick={() => deleteCart(cart.id)}
+                    className="delete-cart-icon-button"
+                    title="Delete this cart"
+                  >
+                    🗑
+                  </button>
+                </td>
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan="5" style={{ textAlign: "center" }}>No carts found.</td>
+              <td colSpan="6" style={{ textAlign: "center" }}>
+                No carts found.
+              </td>
             </tr>
           )}
         </tbody>
@@ -197,6 +249,7 @@ const ManageCarts = () => {
           onClose={closeModal}
           cartDetails={selectedCart}
           userDetails={selectedCart.userDetails}
+          onDelete={() => deleteCart(selectedCart.id)}
         />
       )}
     </div>
