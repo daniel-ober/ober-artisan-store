@@ -58,3 +58,11 @@
     background-color: #f4f4f4;
     font-weight: bold;
 }
+
+.delete-cart-icon-button {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #c62828;
+  }
