@@ -1,32 +1,38 @@
-import React, { useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { DarkModeContext } from "../context/DarkModeContext";
-import "./Footer.css";
+import React, { useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { DarkModeContext } from '../context/DarkModeContext';
+import './Footer.css';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faFacebookF,
+  faInstagram,
+  faYoutube,
+} from "@fortawesome/free-brands-svg-icons";
 
 const Footer = ({ navbarLinks = [] }) => {
   const sortedNavbarLinks = navbarLinks
-    .filter((link) => link.enabled && link.name.toLowerCase() !== "home") // ✅ Filter out Home
+    .filter((link) => link.enabled && link.name.toLowerCase() !== 'home') // ✅ Filter out Home
     .sort((a, b) => a.order - b.order);
 
   const { isDarkMode, setIsDarkMode } = useContext(DarkModeContext);
 
   useEffect(() => {
     // ✅ Ensure light mode is default
-    const savedMode = localStorage.getItem("darkMode");
-    const defaultMode = savedMode === "true";
-    
+    const savedMode = localStorage.getItem('darkMode');
+    const defaultMode = savedMode === 'true';
+
     setIsDarkMode(defaultMode);
-    document.body.classList.remove("dark", "light"); // Reset first
-    document.body.classList.add(defaultMode ? "dark" : "light");
+    document.body.classList.remove('dark', 'light'); // Reset first
+    document.body.classList.add(defaultMode ? 'dark' : 'light');
   }, [setIsDarkMode]);
 
   const toggleDarkMode = () => {
     const newMode = !isDarkMode;
     setIsDarkMode(newMode);
-    localStorage.setItem("darkMode", newMode.toString());
+    localStorage.setItem('darkMode', newMode.toString());
 
-    document.body.classList.remove("dark", "light");
-    document.body.classList.add(newMode ? "dark" : "light");
+    document.body.classList.remove('dark', 'light');
+    document.body.classList.add(newMode ? 'dark' : 'light');
   };
 
   return (
@@ -43,30 +49,66 @@ const Footer = ({ navbarLinks = [] }) => {
           {/* ✅ Render the remaining navbar links from Firebase */}
           {sortedNavbarLinks.map((link, index) => (
             <li key={index}>
-              <Link to={`/${link.name.toLowerCase().replace(/\s+/g, "-")}`}>
+              <Link to={`/${link.name.toLowerCase().replace(/\s+/g, '-')}`}>
                 {link.label}
               </Link>
             </li>
           ))}
 
           {/* Additional fixed footer links */}
-          <li><Link to="/return-policy">Return Policy</Link></li>
-          <li><Link to="/privacy-policy">Privacy Policy</Link></li>
-          <li><Link to="/terms-of-service">Terms of Service</Link></li>
+          <li>
+            <Link to="/return-policy">Return Policy</Link>
+          </li>
+          <li>
+            <Link to="/privacy-policy">Privacy Policy</Link>
+          </li>
+          <li>
+            <Link to="/terms-of-service">Terms of Service</Link>
+          </li>
         </ul>
       </div>
 
-
+      {/* Social Media Links */}
+{/* Social Media Icons */}
+<div className="footer-socials">
+  <a
+    href="https://www.facebook.com/profile.php?id=61570228293616"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Facebook"
+  >
+    <FontAwesomeIcon icon={faFacebookF} />
+  </a>
+  <a
+    href="https://www.instagram.com/oberartisandrums/"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Instagram"
+  >
+    <FontAwesomeIcon icon={faInstagram} />
+  </a>
+  <a
+    href="https://www.youtube.com/@oberartisandrums"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="YouTube"
+  >
+    <FontAwesomeIcon icon={faYoutube} />
+  </a>
+</div>
       {/* Bottom Row: Contact & Copyright */}
       <div className="footer-bottom">
         <div className="footer-copyright">
-          <p>&copy; {new Date().getFullYear()} Dan Ober Artisan Drums. All rights reserved.</p>
+          <p>
+            &copy; {new Date().getFullYear()} Dan Ober Artisan Drums. All rights
+            reserved.
+          </p>
         </div>
       </div>
       {/* 🔥 Move Dark Mode Toggle Here */}
       <div className="footer-darkmode-toggle">
         <button className="footer-theme-toggle" onClick={toggleDarkMode}>
-          {isDarkMode ? "Light Mode" : "Dark Mode"}
+          {isDarkMode ? 'Light Mode' : 'Dark Mode'}
         </button>
       </div>
     </footer>

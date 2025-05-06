@@ -55,6 +55,25 @@ body,
   text-decoration: underline;
 }
 
+.footer-socials {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.footer-socials a {
+  color: #ccc;
+  font-size: 20px;
+  transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.footer-socials a:hover {
+  color: white;
+  transform: scale(1.2);
+}
+
 /* Bottom row: Contact and Copyright */
 .footer-bottom {
   margin-top: 15px;
