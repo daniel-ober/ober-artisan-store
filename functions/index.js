@@ -61,9 +61,25 @@ app.post('/createCheckoutSession', async (req, res) => {
     }
 
     const guestToken = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
-    const lineItems = products.map((p) => ({
-      price: p.stripePriceId,
-      quantity: p.quantity || 1,
+    const lineItems = await Promise.all(products.map(async (p) => {
+      const price = await stripe.prices.retrieve(p.stripePriceId);
+    
+      return {
+        price_data: {
+          currency: 'usd',
+          unit_amount: price.unit_amount,
+          product_data: {
+            name: p.name,
+            images: p.image ? [p.image] : [],
+            metadata: {
+              variantId: p.variantId || '',
+              color: p.config?.Colors || '',
+              size: p.config?.Sizes || '',
+            },
+          },
+        },
+        quantity: p.quantity || 1,
+      };
     }));
 
     const session = await stripe.checkout.sessions.create({
@@ -150,7 +166,7 @@ stripeWebhookApp.post('/', async (req, res) => {
       }
 
       const items = lineItems.data.map((item) => {
-        const metadata = item.price?.metadata || {};
+        const metadata = item.price?.product?.metadata || {};
         return {
           priceId: item.price?.id || '',
           description: item.description,
