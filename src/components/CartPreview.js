@@ -106,6 +106,36 @@ const CartPreview = ({ onClose, closeMenu }) => {
               // ✅ Final working fix: variant ID match with string coercion
               let previewImage = fallback;
 
+if (category === 'artisan') {
+  previewImage = item.image || (Array.isArray(item.images) && item.images[0]) || fallback;
+} else if (category === 'merch') {
+  const product = productDataMap[productId];
+  const variantId = String(item.variantId || config?.variantId || '');
+  const selectedColor = config.Colors?.toLowerCase().replace(/\s+/g, '').replace(/\//g, '') || '';
+
+  if (product && Array.isArray(product.images)) {
+    const matchedImage =
+      product.images.find((img) =>
+        Array.isArray(img.variant_ids)
+          ? img.variant_ids.map(String).includes(variantId)
+          : false
+      ) ||
+      product.images.find((img) =>
+        Array.isArray(img.colors)
+          ? img.colors
+              .map((c) => c.toLowerCase().replace(/\s+/g, '').replace(/\//g, ''))
+              .includes(selectedColor)
+          : false
+      ) ||
+      product.images.find((img) => img.is_default) ||
+      product.images[0];
+
+    if (matchedImage?.src?.startsWith('http')) {
+      previewImage = matchedImage.src;
+    }
+  }
+}
+
               if (category === 'merch') {
                 const product = productDataMap[productId];
                 const variantId = String(item.variantId || config?.variantId || '');

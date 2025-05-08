@@ -14,6 +14,7 @@ const API_BASE_URL =
   'https://us-central1-danoberartisandrums.cloudfunctions.net/api';
 
 const Cart = () => {
+  const fallback = '/fallback-images/fallback_image1.png';
   const { cart, cartId, removeFromCart, setCart, updateFirestoreCart } =
     useCart();
   const { user } = useAuth();
@@ -151,10 +152,15 @@ const Cart = () => {
         const normalize = (str) =>
           (str || '').toLowerCase().replace(/[^a-z0-9]/g, '');
         const selectedColor = normalize(selectedColorRaw);
-      
-        let previewImage = '/fallback-images/fallback_image1.png';
-      
-        if (item.category === 'merch') {
+
+        let previewImage = fallback;
+
+        if (item.category === 'artisan') {
+          previewImage =
+            item.image ||
+            (Array.isArray(item.images) && item.images[0]) ||
+            fallback;
+        } else if (item.category === 'merch') {
           const product = productDataMap[item.productId];
           if (product && Array.isArray(product.images)) {
             const matchedImage =
@@ -163,9 +169,7 @@ const Cart = () => {
                   Array.isArray(img.variant_ids) &&
                   img.variant_ids.includes(Number(variantId)) &&
                   Array.isArray(img.colors) &&
-                  img.colors.some(
-                    (color) => normalize(color) === selectedColor
-                  )
+                  img.colors.some((color) => normalize(color) === selectedColor)
               ) ||
               product.images.find(
                 (img) =>
@@ -175,21 +179,25 @@ const Cart = () => {
               product.images.find(
                 (img) =>
                   Array.isArray(img.colors) &&
-                  img.colors.some(
-                    (color) => normalize(color) === selectedColor
-                  )
+                  img.colors.some((color) => normalize(color) === selectedColor)
               ) ||
               product.images.find((img) => img.is_default) ||
               product.images[0];
-      
+
             if (matchedImage?.src?.startsWith('http')) {
               previewImage = matchedImage.src;
             }
           }
         }
-      
-        return {
-          name: item.name,
+
+        // 🔒 Safely handle optional description
+        const rawDescription =
+          item.description || config.description || config.title || item.title;
+        const trimmedDescription =
+          typeof rawDescription === 'string' ? rawDescription.trim() : null;
+
+        const payloadItem = {
+          name: item.name || item.title || config.title || 'Untitled Product',
           price: item.price,
           quantity: item.quantity || 1,
           stripePriceId: item.stripePriceId,
@@ -197,6 +205,13 @@ const Cart = () => {
           variantId: item.variantId || config?.variantId || '',
           config,
         };
+
+        // ✅ Only add if non-empty
+        if (trimmedDescription && trimmedDescription !== '') {
+          payloadItem.description = trimmedDescription;
+        }
+
+        return payloadItem;
       });
 
       const response = await fetch(`${API_BASE_URL}/createCheckoutSession`, {
@@ -251,7 +266,12 @@ const Cart = () => {
 
                 let previewImage = fallback;
 
-                if (item.category === 'merch') {
+                if (item.category === 'artisan') {
+                  previewImage =
+                    item.image ||
+                    (Array.isArray(item.images) && item.images[0]) ||
+                    fallback;
+                } else if (item.category === 'merch') {
                   const product = productDataMap[item.productId];
                   if (product && Array.isArray(product.images)) {
                     const matchedImage =
@@ -327,7 +347,10 @@ const Cart = () => {
                               </>
                             )}
                             {config.lugQuantity && (
-                              <>{config.lugQuantity}-lug | </>
+                              <>{config.lugQuantity}-Lug | </>
+                            )}
+                            {config.staveQuantity && (
+                              <>{config.staveQuantity}-Stave | </>
                             )}
                             {typeof config.reRing !== 'undefined' &&
                               (config.reRing

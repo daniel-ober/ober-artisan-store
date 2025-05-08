@@ -33,7 +33,10 @@ app.use((req, res, next) => {
   if (origin && allowedOrigins.includes(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin);
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader(
+      'Access-Control-Allow-Headers',
+      'Content-Type, Authorization'
+    );
     res.setHeader('Access-Control-Allow-Credentials', 'true');
   }
   if (req.method === 'OPTIONS') return res.status(204).end();
@@ -61,26 +64,43 @@ app.post('/createCheckoutSession', async (req, res) => {
     }
 
     const guestToken = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
-    const lineItems = await Promise.all(products.map(async (p) => {
-      const price = await stripe.prices.retrieve(p.stripePriceId);
-    
-      return {
-        price_data: {
-          currency: 'usd',
-          unit_amount: price.unit_amount,
-          product_data: {
-            name: p.name,
-            images: p.image ? [p.image] : [],
-            metadata: {
-              variantId: p.variantId || '',
-              color: p.config?.Colors || '',
-              size: p.config?.Sizes || '',
+    const lineItems = await Promise.all(
+      products.map(async (p) => {
+        const price = await stripe.prices.retrieve(p.stripePriceId);
+        const config = p.config || {};
+      
+        const staveQuantity = config.staveQuantity ?? config.StaveQuantity;
+      
+        return {
+          price_data: {
+            currency: 'usd',
+            unit_amount: price.unit_amount,
+            product_data: {
+              name: p.name,
+              description: [
+                config.Sizes ? `Size: ${config.Sizes}` : '',
+                config.Colors ? `Color: ${config.Colors}` : '',
+                config.depth ? `Depth: ${config.depth}"` : '',
+                config.lugQuantity ? `${config.lugQuantity} Lugs` : '',
+                staveQuantity ? `${staveQuantity} Staves` : '',
+                config.reRing !== undefined
+                  ? config.reRing
+                    ? 'Re-Rings'
+                    : 'No Re-Rings'
+                  : '',
+              ]
+                .filter(Boolean)
+                .join(' • '),
+              images:
+                typeof p.image === 'string' && p.image.startsWith('http')
+                  ? [p.image]
+                  : ['https://oberartisandrums.com/fallback-images/fallback_image1.png'],
             },
           },
-        },
-        quantity: p.quantity || 1,
-      };
-    }));
+          quantity: p.quantity || 1,
+        };
+      })
+    );
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -152,7 +172,9 @@ stripeWebhookApp.post('/', async (req, res) => {
 
   try {
     if (event.type === 'checkout.session.completed') {
-      const lineItems = await stripe.checkout.sessions.listLineItems(session.id);
+      const lineItems = await stripe.checkout.sessions.listLineItems(
+        session.id
+      );
 
       // Defensive Check
       if (
@@ -161,8 +183,12 @@ stripeWebhookApp.post('/', async (req, res) => {
         !session.shipping_details?.address ||
         lineItems.data.length === 0
       ) {
-        console.warn('⚠️ Skipping incomplete order creation. Missing important customer info.');
-        return res.status(200).send('Skipped: Incomplete session, no order created.');
+        console.warn(
+          '⚠️ Skipping incomplete order creation. Missing important customer info.'
+        );
+        return res
+          .status(200)
+          .send('Skipped: Incomplete session, no order created.');
       }
 
       const items = lineItems.data.map((item) => {
@@ -205,7 +231,7 @@ stripeWebhookApp.post('/', async (req, res) => {
         items,
         orderId,
         promoCode: session.total_details?.amount_discount
-          ? (session.discounts?.[0]?.promotion_code || '')
+          ? session.discounts?.[0]?.promotion_code || ''
           : '',
       };
 
@@ -214,7 +240,10 @@ stripeWebhookApp.post('/', async (req, res) => {
       return res.status(200).send('Order created');
     }
 
-    if (event.type === 'checkout.session.expired' || event.type === 'checkout.session.async_payment_failed') {
+    if (
+      event.type === 'checkout.session.expired' ||
+      event.type === 'checkout.session.async_payment_failed'
+    ) {
       console.warn('⚠️ Stripe session failed or expired, no order created.');
       return res.status(200).send('Skipped: Session failed or expired.');
     }
@@ -369,10 +398,11 @@ const handlePrintifyProductPublished = async (productId) => {
       id: product.id,
       title: product.title,
       description: product.description || '',
-      images: product.images?.map((img) => ({
-        ...img,
-        displayInGallery: true,
-      })) || [],
+      images:
+        product.images?.map((img) => ({
+          ...img,
+          displayInGallery: true,
+        })) || [],
       tags: product.tags,
       variants: filteredVariants,
       options: enrichedOptions,
@@ -515,7 +545,12 @@ exports.stripeWebhook = onRequest(
 exports.printifyWebhookListener = onRequest(
   {
     region: 'us-central1',
-    secrets: [PRINTIFY_API_KEY, PRINTIFY_SHOP_ID, PRINTIFY_WEBHOOK_SECRET, STRIPE_SECRET_KEY],
+    secrets: [
+      PRINTIFY_API_KEY,
+      PRINTIFY_SHOP_ID,
+      PRINTIFY_WEBHOOK_SECRET,
+      STRIPE_SECRET_KEY,
+    ],
   },
   printifyWebhookApp
 );
@@ -530,15 +565,16 @@ exports.refreshPrintifyStockNow = onRequest(
     const allowedOrigins = [
       'http://localhost:3000',
       'https://oberartisandrums.com',
-      'https://www.oberartisandrums.com'
+      'https://www.oberartisandrums.com',
     ];
-    
+
     const origin = req.headers.origin;
     if (allowedOrigins.includes(origin)) {
       res.set('Access-Control-Allow-Origin', origin);
     }
     res.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
-    res.set('Access-Control-Allow-Headers', 'Content-Type');    res.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    res.set('Access-Control-Allow-Headers', 'Content-Type');
+    res.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
     res.set('Access-Control-Allow-Headers', 'Content-Type');
 
     // Handle preflight OPTIONS
@@ -548,7 +584,9 @@ exports.refreshPrintifyStockNow = onRequest(
 
     try {
       await exports.refreshPrintifyStock.run();
-      res.status(200).send('✅ Manual refreshPrintifyStock executed successfully.');
+      res
+        .status(200)
+        .send('✅ Manual refreshPrintifyStock executed successfully.');
     } catch (error) {
       console.error('❌ Manual refresh failed:', error);
       res.status(500).send('❌ Manual refresh failed.');

@@ -105,7 +105,7 @@ const Contact = () => {
 
   const handleClose = () => {
     setOpen(false);
-    navigate('/artisanseries/pre-order'); // Redirect to the "Pre-Order" page after success
+    navigate('/artisan-shop'); // Redirect to the "Pre-Order" page after success
   };
 
   return (
@@ -203,7 +203,7 @@ const Contact = () => {
         <DialogTitle>Message Sent</DialogTitle>
         <DialogContent>
           <Typography variant="body1">
-            Thank you for reaching out! We&apos;ll get back to you within 1-2 business days. Feel free to explore our current Pre-Order options while you wait.
+            Thank you for reaching out! We&apos;ll get back to you within 1-2 business days. Feel free to explore our Artisan Shop.
           </Typography>
         </DialogContent>
         <DialogActions>
