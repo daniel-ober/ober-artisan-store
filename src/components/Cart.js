@@ -20,6 +20,7 @@ const Cart = () => {
   const [loading, setLoading] = useState(false);
   const [unavailableProducts, setUnavailableProducts] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [productDataMap, setProductDataMap] = useState({});
 
   useEffect(() => {
     const checkInventory = async () => {
@@ -85,6 +86,31 @@ const Cart = () => {
 
     checkInventory();
   }, [cart, cartId, setCart, updateFirestoreCart]);
+
+  useEffect(() => {
+    const fetchAllMerchProducts = async () => {
+      const newMap = {};
+      const merchItems = cart.filter((item) => item.category === 'merch');
+      for (const item of merchItems) {
+        if (!item.productId || newMap[item.productId]) continue;
+        try {
+          const ref = doc(db, 'merchProducts', String(item.productId));
+          const snap = await getDoc(ref);
+          if (snap.exists()) {
+            newMap[item.productId] = snap.data();
+          }
+        } catch (err) {
+          console.warn(
+            `❌ Error fetching merch product ${item.productId}:`,
+            err
+          );
+        }
+      }
+      setProductDataMap(newMap);
+    };
+
+    fetchAllMerchProducts();
+  }, [cart]);
 
   const updateQuantity = (productId, newQuantity) => {
     if (newQuantity < 1) return;
@@ -168,24 +194,50 @@ const Cart = () => {
             <tbody>
               {cart.map((item) => {
                 const fallback = '/fallback-images/fallback_image1.png';
-                const variantId = Number(
-                  item.variantId || item.config?.variantId
-                );
-                const variantImage = Array.isArray(item.images)
-                  ? item.images.find((img) =>
-                      Array.isArray(img.variant_ids)
-                        ? img.variant_ids.includes(Number(variantId)) ||
-                          img.is_default
-                        : img.is_default
-                    ) || item.images[0]
-                  : null;
-
-                const previewImage =
-                  variantImage?.src && typeof variantImage.src === 'string'
-                    ? variantImage.src
-                    : fallback;
-
                 const config = item.config || {};
+                const variantId = Number(item.variantId || config?.variantId);
+                const selectedColorRaw = config.Colors || '';
+                const normalize = (str) =>
+                  (str || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+                const selectedColor = normalize(selectedColorRaw);
+
+                let previewImage = fallback;
+
+                if (item.category === 'merch') {
+                  const product = productDataMap[item.productId];
+                  if (product && Array.isArray(product.images)) {
+                    const matchedImage =
+                      product.images.find(
+                        (img) =>
+                          Array.isArray(img.variant_ids) &&
+                          img.variant_ids.includes(Number(variantId)) &&
+                          Array.isArray(img.colors) &&
+                          img.colors.some(
+                            (color) => normalize(color) === selectedColor
+                          )
+                      ) ||
+                      product.images.find(
+                        (img) =>
+                          Array.isArray(img.variant_ids) &&
+                          img.variant_ids
+                            .map(String)
+                            .includes(String(variantId))
+                      ) ||
+                      product.images.find(
+                        (img) =>
+                          Array.isArray(img.colors) &&
+                          img.colors.some(
+                            (color) => normalize(color) === selectedColor
+                          )
+                      ) ||
+                      product.images.find((img) => img.is_default) ||
+                      product.images[0];
+
+                    if (matchedImage?.src?.startsWith('http')) {
+                      previewImage = matchedImage.src;
+                    }
+                  }
+                }
 
                 return (
                   <tr key={item.id}>
