@@ -148,3 +148,11 @@ export const updateProductInventory = async (cartItems) => {
     return { success: false, message: error.message };
   }
 };
+
+export const triggerPrintifyStockRefresh = async () => {
+  const response = await fetch('https://us-central1-danoberartisandrums.cloudfunctions.net/refreshPrintifyStockNow', {
+    method: 'POST',
+  });
+  if (!response.ok) throw new Error('Failed to refresh Printify stock');
+  return response.text(); // <-- fixes the bug
+};
