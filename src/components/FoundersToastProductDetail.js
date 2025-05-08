@@ -38,17 +38,18 @@ const FoundersToastProductDetail = () => {
   const handleAddToCart = () => {
     if (!product) return;
 
-        const cartItem = {
-          id: product?.stripePriceId || `simple-founders-toast`,
-          productId: 'founders-toast', // ✅ CRUCIAL
-          name: product?.name || 'Founder’s Toast',
-          quantity,
-          price: product?.price || 1200,
-          stripePriceId: product?.stripePriceId || '',
-          images: product?.images?.length ? [product.images[0]] : [],
-          category: 'artisan',
-          currentQuantity: product?.currentQuantity ?? 10,
-        };
+    const cartItem = {
+      id: product?.stripePriceId || `simple-founders-toast`,
+      productId: 'founders-toast',
+      name: product?.name || 'Founder’s Toast',
+      quantity,
+      price: product?.price || 1200,
+      stripePriceId: product?.stripePriceId || '',
+      images: product?.images?.length ? [product.images[0]] : [],
+      image: typeof product.images?.[0] === 'string' ? product.images[0] : product.images?.[0]?.src,
+      category: 'artisan',
+      currentQuantity: product?.currentQuantity ?? 10,
+    };
 
     const existingItem = cart.find((item) => item.id === cartItem.id);
 
@@ -134,27 +135,6 @@ const FoundersToastProductDetail = () => {
             </p>
           </div>
 
-          {!isInCart && (
-            <div className="quantity-selector">
-              <button
-                onClick={() => setQuantity((prev) => Math.max(prev - 1, 1))}
-                disabled={quantity <= 1}
-              >
-                -
-              </button>
-              <span>{quantity}</span>
-              <button
-                onClick={() =>
-                  setQuantity((prev) =>
-                    Math.min(prev + 1, product.currentQuantity ?? 10)
-                  )
-                }
-                disabled={quantity >= (product.currentQuantity ?? 10)}
-              >
-                +
-              </button>
-            </div>
-          )}
 
           {buttonText === 'In Cart' ? (
             <div className="artisan-cart-hover-container">
