@@ -11,25 +11,29 @@ const CartPreview = ({ onClose, closeMenu }) => {
   const [productDataMap, setProductDataMap] = useState({});
 
   useEffect(() => {
-    const fetchAllMerchProducts = async () => {
+    const fetchAllProductData = async () => {
       const newMap = {};
       const merchItems = cart.filter((item) => item.category === 'merch');
       for (const item of merchItems) {
         if (!item.productId || newMap[item.productId]) continue;
         try {
-          const ref = doc(db, 'merchProducts', String(item.productId));
-          const snap = await getDoc(ref);
+          let ref = doc(db, 'merchProducts', String(item.productId));
+          let snap = await getDoc(ref);
+          if (!snap.exists()) {
+            ref = doc(db, 'products', String(item.productId));
+            snap = await getDoc(ref);
+          }
           if (snap.exists()) {
             newMap[item.productId] = snap.data();
           }
         } catch (err) {
-          console.warn(`❌ Error fetching merch product ${item.productId}:`, err);
+          console.warn(`❌ Error fetching product ${item.productId}:`, err);
         }
       }
       setProductDataMap(newMap);
     };
 
-    fetchAllMerchProducts();
+    fetchAllProductData();
   }, [cart]);
 
   const handleRemoveItem = (itemId) => {
@@ -89,77 +93,75 @@ const CartPreview = ({ onClose, closeMenu }) => {
                   configLines.push(`${config.size}" x ${config.depth}"`);
                 }
                 const line2 = [];
-                if (config.lugQuantity) line2.push(`${config.lugQuantity} Lugs`);
-                if (config.staveQuantity) line2.push(`${config.staveQuantity} Staves`);
+                if (config.lugQuantity)
+                  line2.push(`${config.lugQuantity} Lugs`);
+                if (config.staveQuantity)
+                  line2.push(`${config.staveQuantity} Staves`);
                 if (typeof config.reRing !== 'undefined') {
                   line2.push(config.reRing ? 'Re-Rings' : 'No Re-Rings');
                 }
                 if (line2.length > 0) configLines.push(line2.join(' • '));
                 if (config.outerShell || config.innerStave) {
-                  configLines.push(`${config.outerShell || '?'} / ${config.innerStave || '?'}`);
+                  configLines.push(
+                    `${config.outerShell || '?'} / ${config.innerStave || '?'}`
+                  );
                 }
               } else {
                 if (config.Sizes) configLines.push(`Size: ${config.Sizes}`);
                 if (config.Colors) configLines.push(`Color: ${config.Colors}`);
               }
 
-              // ✅ Final working fix: variant ID match with string coercion
               let previewImage = fallback;
 
-if (category === 'artisan') {
-  previewImage = item.image || (Array.isArray(item.images) && item.images[0]) || fallback;
-} else if (category === 'merch') {
-  const product = productDataMap[productId];
-  const variantId = String(item.variantId || config?.variantId || '');
-  const selectedColor = config.Colors?.toLowerCase().replace(/\s+/g, '').replace(/\//g, '') || '';
-
-  if (product && Array.isArray(product.images)) {
-    const matchedImage =
-      product.images.find((img) =>
-        Array.isArray(img.variant_ids)
-          ? img.variant_ids.map(String).includes(variantId)
-          : false
-      ) ||
-      product.images.find((img) =>
-        Array.isArray(img.colors)
-          ? img.colors
-              .map((c) => c.toLowerCase().replace(/\s+/g, '').replace(/\//g, ''))
-              .includes(selectedColor)
-          : false
-      ) ||
-      product.images.find((img) => img.is_default) ||
-      product.images[0];
-
-    if (matchedImage?.src?.startsWith('http')) {
-      previewImage = matchedImage.src;
-    }
-  }
-}
-
-              if (category === 'merch') {
+              if (category === 'artisan') {
+                previewImage =
+                  item.image ||
+                  (Array.isArray(item.images) && item.images[0]) ||
+                  fallback;
+              } else if (category === 'merch') {
                 const product = productDataMap[productId];
-                const variantId = String(item.variantId || config?.variantId || '');
-                const selectedColor = config.Colors?.toLowerCase().replace(/\s+/g, '').replace(/\//g, '') || '';
-
                 if (product && Array.isArray(product.images)) {
-                  const matchedImage =
-                    product.images.find((img) =>
-                      Array.isArray(img.variant_ids)
-                        ? img.variant_ids.map(String).includes(variantId)
-                        : false
-                    ) ||
-                    product.images.find((img) =>
-                      Array.isArray(img.colors)
-                        ? img.colors
-                            .map((c) => c.toLowerCase().replace(/\s+/g, '').replace(/\//g, ''))
-                            .includes(selectedColor)
-                        : false
-                    ) ||
-                    product.images.find((img) => img.is_default) ||
-                    product.images[0];
+                  const first = product.images[0];
 
-                  if (matchedImage?.src?.startsWith('http')) {
-                    previewImage = matchedImage.src;
+                  // Case: Founder's Toast or string-based images
+                  if (typeof first === 'string' && first.startsWith('http')) {
+                    previewImage = first;
+                  }
+
+                  // Case: merchProduct variant-based images
+                  else if (typeof first === 'object') {
+                    const variantId = String(
+                      item.variantId || config?.variantId || ''
+                    );
+                    const selectedColor =
+                      config.Colors?.toLowerCase()
+                        .replace(/\s+/g, '')
+                        .replace(/\//g, '') || '';
+
+                    const matchedImage =
+                      product.images.find((img) =>
+                        Array.isArray(img.variant_ids)
+                          ? img.variant_ids.map(String).includes(variantId)
+                          : false
+                      ) ||
+                      product.images.find((img) =>
+                        Array.isArray(img.colors)
+                          ? img.colors
+                              .map((c) =>
+                                c
+                                  .toLowerCase()
+                                  .replace(/\s+/g, '')
+                                  .replace(/\//g, '')
+                              )
+                              .includes(selectedColor)
+                          : false
+                      ) ||
+                      product.images.find((img) => img.is_default) ||
+                      product.images[0];
+
+                    if (matchedImage?.src?.startsWith('http')) {
+                      previewImage = matchedImage.src;
+                    }
                   }
                 }
               }
@@ -181,7 +183,9 @@ if (category === 'artisan') {
                         </p>
                       ))}
                     </div>
-                    <p className="item-price">${Number(price || 0).toFixed(2)}</p>
+                    <p className="item-price">
+                      ${Number(price || 0).toFixed(2)}
+                    </p>
 
                     {category !== 'artisan' && (
                       <div className="quantity-buttons">
@@ -201,7 +205,10 @@ if (category === 'artisan') {
                       </div>
                     )}
                   </div>
-                  <button className="remove-item" onClick={() => handleRemoveItem(id)}>
+                  <button
+                    className="remove-item"
+                    onClick={() => handleRemoveItem(id)}
+                  >
                     ✕
                   </button>
                 </div>

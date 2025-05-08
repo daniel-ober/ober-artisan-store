@@ -1,4 +1,3 @@
-// FoundersToastProductDetail.js
 import React, { useEffect, useState } from 'react';
 import { useCart } from '../context/CartContext';
 import { useNavigate } from 'react-router-dom';
@@ -36,20 +35,20 @@ const FoundersToastProductDetail = () => {
     (item) => item.id === (product?.stripePriceId || `simple-${productId}`)
   );
 
-  const cartItem = {
-    id: product?.stripePriceId || `simple-${productId}`,
-    productId,
-    name: product?.name || 'Founder’s Toast',
-    quantity,
-    price: product?.price || 1200,
-    stripePriceId: product?.stripePriceId || '',
-    images: product?.images?.length ? [product.images[0]] : [],
-    category: 'merch',
-    currentQuantity: product?.currentQuantity ?? 10,
-  };
-
   const handleAddToCart = () => {
     if (!product) return;
+
+        const cartItem = {
+          id: product?.stripePriceId || `simple-founders-toast`,
+          productId: 'founders-toast', // ✅ CRUCIAL
+          name: product?.name || 'Founder’s Toast',
+          quantity,
+          price: product?.price || 1200,
+          stripePriceId: product?.stripePriceId || '',
+          images: product?.images?.length ? [product.images[0]] : [],
+          category: 'artisan',
+          currentQuantity: product?.currentQuantity ?? 10,
+        };
 
     const existingItem = cart.find((item) => item.id === cartItem.id);
 
@@ -63,13 +62,14 @@ const FoundersToastProductDetail = () => {
         : quantity,
     };
 
-    addToCart(updatedCartItem); // ✅ Pass only the final item
+    addToCart(updatedCartItem);
     toast.success('🛒 Item added to cart!');
     setButtonText('In Cart');
   };
 
   const handleRemove = () => {
-    removeFromCart(cartItem.id);
+    const itemId = product?.stripePriceId || `simple-${productId}`;
+    removeFromCart(itemId);
     toast.success('🗑️ Removed from cart.');
     setButtonText('Add to Cart');
   };
@@ -92,7 +92,15 @@ const FoundersToastProductDetail = () => {
 
       <div className="founders-toast-content">
         <div className="founders-toast-image">
-          <img src={product.images?.[0]} alt={product.name} />
+          <img
+            src={
+              typeof product.images?.[0] === 'string'
+                ? product.images[0]
+                : product.images?.[0]?.src ||
+                  '/fallback-images/fallback_image1.png'
+            }
+            alt={product.name}
+          />
         </div>
 
         <div className="founders-toast-details">
@@ -111,10 +119,11 @@ const FoundersToastProductDetail = () => {
             exteriors, and hand-scorched finishes.
           </span>
 
-          <span><strong>Important: </strong>
-              Not recommended for use on high-gloss, lacquered, or
-              polyurethane-coated finishes, as it may affect the clarity or
-              sheen. Always test on an inconspicuous area first.
+          <span>
+            <strong>Important: </strong>
+            Not recommended for use on high-gloss, lacquered, or
+            polyurethane-coated finishes, as it may affect the clarity or sheen.
+            Always test on an inconspicuous area first.
           </span>
           <div>
             <p className="founders-toast-price">
@@ -125,7 +134,6 @@ const FoundersToastProductDetail = () => {
             </p>
           </div>
 
-          {/* Quantity Selector */}
           {!isInCart && (
             <div className="quantity-selector">
               <button
