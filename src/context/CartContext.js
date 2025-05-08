@@ -98,7 +98,7 @@ export const CartProvider = ({ children }) => {
       stripePriceId: item.stripePriceId || '',
       currentQuantity: item.currentQuantity || 1,
       maxQuantity: item.maxQuantity || 1,
-      variantId: item.variantId || '',
+      variantId: item.variantId !== undefined ? item.variantId : '',
       options: item.options || {},
       config: item.config || {},
       deliveryTime: item.deliveryTime || '',
@@ -145,7 +145,9 @@ export const CartProvider = ({ children }) => {
 
     const cartItem = {
       id: product.id,
-      productId: String(product.productId ?? product.originalProductId ?? product.id),
+      productId: String(
+        product.productId ?? product.originalProductId ?? product.id
+      ),
       name: product.name || 'Unnamed Product',
       category: product.category || 'merch',
       quantity: 1,
@@ -173,7 +175,9 @@ export const CartProvider = ({ children }) => {
 
     let updatedCart = [...cart];
 
-    const existingItemIndex = updatedCart.findIndex((item) => item.id === cartItem.id);
+    const existingItemIndex = updatedCart.findIndex(
+      (item) => item.id === cartItem.id
+    );
 
     if (existingItemIndex > -1) {
       updatedCart[existingItemIndex].quantity += 1;

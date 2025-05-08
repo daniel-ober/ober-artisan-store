@@ -9,37 +9,54 @@ const CartItem = ({ item }) => {
   const minQuantity = 1;
 
   const handleRemove = () => {
-    // console.log('Removing item with ID:', item._id); // Log the ID being removed
-    removeFromCart(item._id); // Use item._id instead of item.id
+    removeFromCart(item._id); // Use item._id if that's how it's stored
   };
 
   const handleIncrease = () => {
     if (item.quantity >= minQuantity) {
-      updateQuantity(item._id, item.quantity + 1); // Update to item._id
+      updateQuantity(item._id, item.quantity + 1);
     }
   };
 
   const handleDecrease = () => {
-    if (item.quantity > minQuantity && !['one of a kind', 'custom shop'].includes(item.category)) {
-      updateQuantity(item._id, item.quantity - 1); // Update to item._id
+    if (
+      item.quantity > minQuantity &&
+      !['one of a kind', 'custom shop'].includes(item.category)
+    ) {
+      updateQuantity(item._id, item.quantity - 1);
     }
   };
 
-  // Update these properties based on the structure of your items
   const quantity = item.quantity || minQuantity;
   const price = item.price || 0;
   const subtotal = (price * quantity).toFixed(2);
-  
-  // Check if item has a name and description
   const name = item.name || 'Unnamed Product';
   const description = item.description || 'No description available.';
 
+  // ✅ Per-variant preview image logic
+  const fallback = '/fallback-images/fallback_image1.png';
+  const variantId = item.variantId || item.config?.variantId;
+
+  const variantImage = Array.isArray(item.images)
+    ? item.images.find((img) =>
+        Array.isArray(img.variant_ids)
+          ? img.variant_ids.includes(Number(variantId)) || img.is_default
+          : img.is_default
+      ) || item.images[0]
+    : null;
+
+  const previewImage =
+    variantImage?.src && typeof variantImage.src === 'string'
+      ? variantImage.src
+      : fallback;
+
   return (
     <div className="cart-item">
-      <img 
-        src={item.images?.[0] || 'https://i.imgur.com/eoKsILV.png'} 
-        alt={name} 
-        className="cart-item-image" 
+      <img
+        src={previewImage}
+        alt={name}
+        className="cart-item-image"
+        onError={(e) => (e.currentTarget.src = fallback)}
       />
       <div className="cart-item-details">
         <div>
@@ -64,8 +81,8 @@ const CartItem = ({ item }) => {
           >
             +
           </button>
-          <button 
-            className="remove-btn" 
+          <button
+            className="remove-btn"
             onClick={handleRemove}
             data-tooltip="Remove item"
           >
