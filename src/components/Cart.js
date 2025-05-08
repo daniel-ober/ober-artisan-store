@@ -298,14 +298,14 @@ const Cart = () => {
                   <tr key={item.id} className="cart-row">
                     {' '}
                     <td className="remove-cell">
-  <button
-    className="remove-icon-button"
-    onClick={() => removeFromCart(item.id)}
-    aria-label="Remove from cart"
-  >
-    <Trash2 size={18} strokeWidth={2} />
-  </button>
-</td>
+                      <button
+                        className="remove-icon-button"
+                        onClick={() => removeFromCart(item.id)}
+                        aria-label="Remove from cart"
+                      >
+                        <Trash2 size={18} strokeWidth={2} />
+                      </button>
+                    </td>
                     <td>
                       <Link
                         to={
