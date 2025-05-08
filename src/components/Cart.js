@@ -5,6 +5,7 @@ import { useAuth } from '../context/AuthContext';
 import { loadStripe } from '@stripe/stripe-js';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
+import CheckoutModal from './CheckoutModal';
 import './Cart.css';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
@@ -20,7 +21,9 @@ const Cart = () => {
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
   const [unavailableProducts, setUnavailableProducts] = useState([]);
-  const [showModal, setShowModal] = useState(false);
+  const [showInventoryModal, setShowInventoryModal] = useState(false);
+  const [showCheckoutModal, setShowCheckoutModal] = useState(false);
+
   const [productDataMap, setProductDataMap] = useState({});
 
   useEffect(() => {
@@ -81,7 +84,7 @@ const Cart = () => {
         setCart(updatedCart);
         await updateFirestoreCart(updatedCart);
         setUnavailableProducts(unavailable);
-        setShowModal(true);
+        setShowInventoryModal(true);
       }
     };
 
@@ -127,7 +130,7 @@ const Cart = () => {
   };
 
   const closeModal = () => {
-    setShowModal(false);
+    setShowInventoryModal(false);
     setUnavailableProducts([]);
   };
 
@@ -137,20 +140,21 @@ const Cart = () => {
     cart.reduce((total, item) => total + getItemTotal(item), 0);
 
   const handleCheckout = async () => {
-    setLoading(true);
+    setShowCheckoutModal(true);
     try {
       if (!cart || cart.length === 0) {
         alert('Your cart is empty!');
-        setLoading(false);
+        setShowModal(false);
         return;
       }
+
+      const normalize = (str) =>
+        (str || '').toLowerCase().replace(/[^a-z0-9]/g, '');
 
       const productsPayload = cart.map((item) => {
         const config = item.config || {};
         const variantId = Number(item.variantId || config?.variantId);
         const selectedColorRaw = config.Colors || '';
-        const normalize = (str) =>
-          (str || '').toLowerCase().replace(/[^a-z0-9]/g, '');
         const selectedColor = normalize(selectedColorRaw);
 
         let previewImage = fallback;
@@ -190,49 +194,30 @@ const Cart = () => {
           }
         }
 
-        // 🔒 Safely handle optional description
-        const rawDescription =
-          item.description || config.description || config.title || item.title;
-        const trimmedDescription =
-          typeof rawDescription === 'string' ? rawDescription.trim() : null;
-
-        const payloadItem = {
-          name: item.name || item.title || config.title || 'Untitled Product',
-          price: item.price,
-          quantity: item.quantity || 1,
-          stripePriceId: item.stripePriceId,
+        return {
+          ...item,
           image: previewImage,
-          variantId: item.variantId || config?.variantId || '',
-          config,
         };
-
-        // ✅ Only add if non-empty
-        if (trimmedDescription && trimmedDescription !== '') {
-          payloadItem.description = trimmedDescription;
-        }
-
-        return payloadItem;
       });
 
+      // 🔒 Make your checkout API call here
       const response = await fetch(`${API_BASE_URL}/createCheckoutSession`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          products: productsPayload,
-          userId: user?.uid || cartId,
-        }),
+        body: JSON.stringify({ products: productsPayload }),
       });
 
-      const session = await response.json();
-      if (!response.ok)
-        throw new Error(session.error || 'Failed to create checkout session');
+      const data = await response.json();
 
-      window.location.href = session.url;
+      if (data?.url) {
+        window.location.href = data.url;
+      } else {
+        throw new Error('No redirect URL returned');
+      }
     } catch (error) {
-      console.error('❌ Checkout error:', error);
-      alert(`Checkout error: ${error.message}`);
-    } finally {
-      setLoading(false);
+      console.error('Checkout failed:', error);
+      alert('There was a problem initiating checkout.');
+      setShowCheckoutModal(false);
     }
   };
 
@@ -453,7 +438,7 @@ const Cart = () => {
         </>
       )}
 
-      {showModal && (
+      {showInventoryModal && (
         <div className="modal">
           <div className="modal-content">
             <h3>Some items are unavailable and have been removed</h3>
@@ -466,6 +451,8 @@ const Cart = () => {
           </div>
         </div>
       )}
+
+      <CheckoutModal visible={showCheckoutModal} />
     </div>
   );
 };
