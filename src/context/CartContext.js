@@ -83,29 +83,50 @@ export const CartProvider = ({ children }) => {
     const cartRef = doc(db, 'carts', cartId);
     const cartDoc = await getDoc(cartRef);
 
-    const sanitizedCart = updatedCart.map((item) => ({
-      id: item.id || 'N/A',
-      productId: item.productId || item.id || 'unknown',
-      name: item.name || 'Unnamed Product',
-      category: item.category || 'unknown',
-      quantity: item.quantity || 1,
-      price: item.price !== undefined ? Number(item.price) : 0,
-      size: item.size || 'N/A',
-      depth: item.depth || 'N/A',
-      lugQuantity: item.lugQuantity || 'N/A',
-      staveQuantity: item.staveQuantity || 'N/A',
-      reRing: item.reRing ?? false,
-      stripePriceId: item.stripePriceId || '',
-      currentQuantity: item.currentQuantity || 1,
-      maxQuantity: item.maxQuantity || 1,
-      variantId: item.variantId !== undefined ? item.variantId : '',
-      options: item.options || {},
-      config: item.config || {},
-      deliveryTime: item.deliveryTime || '',
-      description: item.description || '',
-      images: item.images || [],
-      timestamp: item.timestamp || new Date().toISOString(),
-    }));
+    const deepSanitize = (obj) => {
+      if (Array.isArray(obj)) {
+        return obj.map(deepSanitize);
+      }
+
+      if (obj && typeof obj === 'object') {
+        const result = {};
+        for (const key in obj) {
+          const value = obj[key];
+          if (value !== undefined) {
+            result[key] = deepSanitize(value);
+          }
+        }
+        return result;
+      }
+
+      return obj;
+    };
+
+    const sanitizedCart = updatedCart.map((item) =>
+      deepSanitize({
+        id: item.id || 'N/A',
+        productId: item.productId || item.id || 'unknown',
+        name: item.name || 'Unnamed Product',
+        category: item.category || 'unknown',
+        quantity: item.quantity || 1,
+        price: item.price !== undefined ? Number(item.price) : 0,
+        size: item.size || 'N/A',
+        depth: item.depth || 'N/A',
+        lugQuantity: item.lugQuantity || 'N/A',
+        staveQuantity: item.staveQuantity || 'N/A',
+        reRing: item.reRing ?? false,
+        stripePriceId: item.stripePriceId || '',
+        currentQuantity: item.currentQuantity || 1,
+        maxQuantity: item.maxQuantity || 1,
+        variantId: item.variantId !== undefined ? item.variantId : '',
+        options: item.options || {},
+        config: item.config || {},
+        deliveryTime: item.deliveryTime || '',
+        description: item.description || '',
+        images: item.images || [],
+        timestamp: item.timestamp || new Date().toISOString(),
+      })
+    );
 
     const cartTotal = sanitizedCart.reduce(
       (sum, item) => sum + (item.price || 0) * (item.quantity || 1),
