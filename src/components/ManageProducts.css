@@ -60,8 +60,8 @@
 .add-product-btn {
   margin-bottom: 20px;
   padding: 12px 20px;
-  background-color: #3cdb34;
-  color: white;
+  background-color: #3439db !important;
+  color: white !important;
   border: none;
   border-radius: 4px;
   cursor: pointer;
