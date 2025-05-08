@@ -144,12 +144,60 @@ const Cart = () => {
         return;
       }
 
-      const productsPayload = cart.map((product) => ({
-        name: product.name,
-        price: product.price,
-        quantity: product.quantity || 1,
-        stripePriceId: product.stripePriceId,
-      }));
+      const productsPayload = cart.map((item) => {
+        const config = item.config || {};
+        const variantId = Number(item.variantId || config?.variantId);
+        const selectedColorRaw = config.Colors || '';
+        const normalize = (str) =>
+          (str || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+        const selectedColor = normalize(selectedColorRaw);
+      
+        let previewImage = '/fallback-images/fallback_image1.png';
+      
+        if (item.category === 'merch') {
+          const product = productDataMap[item.productId];
+          if (product && Array.isArray(product.images)) {
+            const matchedImage =
+              product.images.find(
+                (img) =>
+                  Array.isArray(img.variant_ids) &&
+                  img.variant_ids.includes(Number(variantId)) &&
+                  Array.isArray(img.colors) &&
+                  img.colors.some(
+                    (color) => normalize(color) === selectedColor
+                  )
+              ) ||
+              product.images.find(
+                (img) =>
+                  Array.isArray(img.variant_ids) &&
+                  img.variant_ids.map(String).includes(String(variantId))
+              ) ||
+              product.images.find(
+                (img) =>
+                  Array.isArray(img.colors) &&
+                  img.colors.some(
+                    (color) => normalize(color) === selectedColor
+                  )
+              ) ||
+              product.images.find((img) => img.is_default) ||
+              product.images[0];
+      
+            if (matchedImage?.src?.startsWith('http')) {
+              previewImage = matchedImage.src;
+            }
+          }
+        }
+      
+        return {
+          name: item.name,
+          price: item.price,
+          quantity: item.quantity || 1,
+          stripePriceId: item.stripePriceId,
+          image: previewImage,
+          variantId: item.variantId || config?.variantId || '',
+          config,
+        };
+      });
 
       const response = await fetch(`${API_BASE_URL}/createCheckoutSession`, {
         method: 'POST',
