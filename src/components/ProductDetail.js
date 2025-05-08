@@ -174,9 +174,17 @@ const ProductDetail = () => {
         price: stripeData.unitAmount / 100,
       });
 
-      const image = exactMatch.images?.[0];
-      const src = typeof image === 'string' ? image : image?.src;
-      setMainImage(src?.startsWith('http') ? src : '');
+      const variantId = exactMatch.id.toString();
+      const matchedImage = (product.images || []).find(
+        (img) =>
+          img.variant_ids?.includes(variantId) && img.displayInGallery !== false
+      );
+      const src =
+        typeof matchedImage === 'string'
+          ? matchedImage
+          : matchedImage?.src || '';
+
+      setMainImage(src.startsWith('http') ? src : FALLBACK_IMAGE);
     } else {
       setSelectedVariant(null);
 
@@ -299,11 +307,11 @@ const ProductDetail = () => {
 
   return (
     <div className="product-detail-container">
-    <div className="back-to-merch">
-  <Link to="/merch" className="back-link">
-    ← Back to Merch
-  </Link>
-</div>
+      <div className="back-to-merch">
+        <Link to="/merch" className="back-link">
+          ← Back to Merch
+        </Link>
+      </div>
       <h1 className="product-title">
         {product?.title || product?.name || 'Unnamed Product'}
       </h1>
@@ -333,24 +341,22 @@ const ProductDetail = () => {
               >
                 {(() => {
                   const selectedColor = selectedOptions['Colors'];
-                  const colorVariantWithImages = product.variants.find(
-                    (v) =>
-                      v.is_enabled &&
-                      v.normalizedOptions?.['Colors'] === selectedColor &&
-                      Array.isArray(v.images)
-                  );
+                  const variantId = selectedVariant?.id?.toString();
 
-                  const validImages = (
-                    colorVariantWithImages?.images || []
-                  ).filter((img) => {
+                  const validImages = (product.images || []).filter((img) => {
                     const url = typeof img === 'string' ? img : img?.src;
                     const displayFlag =
                       typeof img === 'object'
                         ? img.displayInGallery !== false
                         : true;
-                    return url?.startsWith('http') && displayFlag;
+                    const variantIds = img.variant_ids || [];
+                    return (
+                      url?.startsWith('http') &&
+                      displayFlag &&
+                      variantId &&
+                      variantIds.includes(variantId)
+                    );
                   });
-
                   return validImages.length > 0
                     ? validImages.map((img, index) => {
                         const imageUrl =
@@ -440,25 +446,46 @@ const ProductDetail = () => {
                             }
                             onMouseEnter={() => {
                               if (option.name !== 'Colors') return;
+
                               const hoveredColor = value.title;
-                              const hoverVariant = product.variants.find(
+                              const hoveredVariant = product.variants.find(
                                 (v) =>
                                   v.is_enabled &&
                                   v.is_available &&
                                   v.normalizedOptions?.['Colors'] ===
                                     hoveredColor
                               );
-                              if (hoverVariant?.images?.length) {
-                                const hoverImages = hoverVariant.images;
-                                const hoverImageAtIndex =
-                                  hoverImages[selectedImageIndex] ||
-                                  hoverImages[0];
-                                const src =
-                                  typeof hoverImageAtIndex === 'string'
-                                    ? hoverImageAtIndex
-                                    : hoverImageAtIndex?.src;
-                                setHoverImage(src || FALLBACK_IMAGE);
-                              }
+
+                              if (!hoveredVariant) return;
+
+                              const variantId = hoveredVariant.id.toString();
+
+                              const hoverCandidates = (
+                                product.images || []
+                              ).filter((img) => {
+                                const variantIds = img.variant_ids || [];
+                                const displayFlag =
+                                  typeof img === 'object'
+                                    ? img.displayInGallery !== false
+                                    : true;
+                                const url =
+                                  typeof img === 'string' ? img : img?.src;
+                                return (
+                                  url?.startsWith('http') &&
+                                  displayFlag &&
+                                  variantIds.includes(variantId)
+                                );
+                              });
+
+                              const hoverImageObj =
+                                hoverCandidates[selectedImageIndex] ||
+                                hoverCandidates[0];
+                              const src =
+                                typeof hoverImageObj === 'string'
+                                  ? hoverImageObj
+                                  : hoverImageObj?.src;
+
+                              setHoverImage(src || FALLBACK_IMAGE);
                             }}
                             onMouseLeave={() => setHoverImage(null)}
                             disabled={disabled}
@@ -486,7 +513,7 @@ const ProductDetail = () => {
                   </div>
                 ))}
 
-                {product.description && (
+            {product.description && (
               <div className="product-description-wrapper">
                 <div
                   className="product-description-html"
@@ -502,7 +529,6 @@ const ProductDetail = () => {
                   ? `$${product.price.toFixed(2)}`
                   : 'Select options'}
             </p>
-            
 
             <div className="product-action full-width-button">
               {inCart ? (
