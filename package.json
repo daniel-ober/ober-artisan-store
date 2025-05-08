@@ -5,6 +5,7 @@
   "dependencies": {
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.14.0",
+    "@fortawesome/fontawesome-free": "^6.7.2",
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/free-brands-svg-icons": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.1",
@@ -37,6 +38,7 @@
     "http-proxy-middleware": "^3.0.2",
     "joi": "^17.13.3",
     "jspdf": "^2.5.2",
+    "lucide-react": "^0.508.0",
     "mongodb": "^6.8.0",
     "mongoose": "^8.6.0",
     "node-fetch": "^3.3.2",

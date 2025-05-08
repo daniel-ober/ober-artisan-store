@@ -7,6 +7,8 @@ import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import CheckoutModal from './CheckoutModal';
 import './Cart.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import { Trash2 } from 'lucide-react';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
@@ -231,12 +233,12 @@ const Cart = () => {
           <table className="cart-table">
             <thead>
               <tr>
+                <th>Remove</th>
                 <th>Product</th>
                 <th>Description</th>
                 <th>Price</th>
                 <th>Quantity</th>
                 <th>Subtotal</th>
-                <th>Remove</th>
               </tr>
             </thead>
             <tbody>
@@ -293,7 +295,17 @@ const Cart = () => {
                 }
 
                 return (
-                  <tr key={item.id}>
+                  <tr key={item.id} className="cart-row">
+                    {' '}
+                    <td className="remove-cell">
+  <button
+    className="remove-icon-button"
+    onClick={() => removeFromCart(item.id)}
+    aria-label="Remove from cart"
+  >
+    <Trash2 size={18} strokeWidth={2} />
+  </button>
+</td>
                     <td>
                       <Link
                         to={
@@ -311,7 +323,7 @@ const Cart = () => {
                               : previewImage?.src || fallback
                           }
                           alt={item.name}
-                          className="cart-item-image"
+                          className="cart-product-image"
                           onError={(e) => (e.currentTarget.src = fallback)}
                         />
                       </Link>
@@ -412,26 +424,49 @@ const Cart = () => {
                       )}
                     </td>
                     <td>${getItemTotal(item).toFixed(2)}</td>
-                    <td>
-                      <button
-                        onClick={() => removeFromCart(item.id)}
-                        className="remove-btn"
-                      >
-                        Remove
-                      </button>
-                    </td>
                   </tr>
                 );
               })}
+
+              {/* ✅ Subtotal Row with Checkout Button */}
+              {/* Subtotal Row */}
+              <tr className="cart-subtotal-row">
+                <td colSpan="5"></td>
+                <td className="subtotal-cell">
+                  <span className="subtotal-amount">
+                    ${getTotalAmount().toFixed(2)}
+                  </span>
+                </td>
+              </tr>
+              {/* Checkout Button Row aligned under subtotal */}
+              <tr className="cart-checkout-row desktop-checkout-row">
+                <td colSpan="6">
+                  <div className="checkout-footer-row">
+                    <button
+                      onClick={handleCheckout}
+                      className="checkout-button-inline"
+                      disabled={loading}
+                    >
+                      {loading ? 'Processing...' : '🔒 Checkout'}
+                    </button>
+                  </div>
+                </td>
+              </tr>
             </tbody>
           </table>
-          <button
-            onClick={handleCheckout}
-            className="checkout-button"
-            disabled={loading}
-          >
-            {loading ? 'Processing...' : 'Checkout'}
-          </button>
+          {/* Mobile checkout button */}
+          <div className="mobile-checkout-wrapper">
+            <button
+              onClick={handleCheckout}
+              className="checkout-button-inline"
+              disabled={loading}
+            >
+              {loading ? 'Processing...' : '🔒 Checkout'}
+            </button>
+          </div>
+          <p className="checkout-note-below">
+            Taxes, shipping, and promo codes applied at checkout
+          </p>
           <p className="cart-id">
             Cart ID: {(cartId || user?.uid || 'guest').slice(-5)}
           </p>
