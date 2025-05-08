@@ -122,7 +122,9 @@ export const CartProvider = ({ children }) => {
         options: item.options || {},
         config: item.config || {},
         deliveryTime: item.deliveryTime || '',
-        description: item.description || '',
+        ...(item.description?.trim()
+          ? { description: item.description.trim() }
+          : {}),
         images: item.images || [],
         timestamp: item.timestamp || new Date().toISOString(),
       })
@@ -179,6 +181,7 @@ export const CartProvider = ({ children }) => {
       deliveryTime: product.deliveryTime || '',
       description: product.description || '',
       images: product.images || [],
+      image: product.image || '', // ✅ <-- ADD THIS LINE
       variantId: product.variantId || mergedOptions.variantId,
       config: {
         ...mergedOptions,
