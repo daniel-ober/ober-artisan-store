@@ -402,6 +402,7 @@ exports.refreshPrintifyStock = onSchedule(
           variants: printifyProduct.variants.filter((v) => v.is_enabled),
           options: enrichedOptions,
           updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+          syncedAt: admin.firestore.FieldValue.serverTimestamp(), // ✅ ADD THIS
         });
       } catch (err) {
         console.error(`❌ Failed to update ${productId}:`, err.message);
@@ -509,6 +510,26 @@ exports.refreshPrintifyStockNow = onRequest(
     secrets: [PRINTIFY_API_KEY, PRINTIFY_SHOP_ID],
   },
   async (req, res) => {
+    // 👇 Add CORS headers manually
+    const allowedOrigins = [
+      'http://localhost:3000',
+      'https://oberartisandrums.com',
+      'https://www.oberartisandrums.com'
+    ];
+    
+    const origin = req.headers.origin;
+    if (allowedOrigins.includes(origin)) {
+      res.set('Access-Control-Allow-Origin', origin);
+    }
+    res.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    res.set('Access-Control-Allow-Headers', 'Content-Type');    res.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    res.set('Access-Control-Allow-Headers', 'Content-Type');
+
+    // Handle preflight OPTIONS
+    if (req.method === 'OPTIONS') {
+      return res.status(204).send('');
+    }
+
     try {
       await exports.refreshPrintifyStock.run();
       res.status(200).send('✅ Manual refreshPrintifyStock executed successfully.');

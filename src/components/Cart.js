@@ -167,29 +167,38 @@ const Cart = () => {
             </thead>
             <tbody>
               {cart.map((item) => {
-                const fallback = '/fallback-images/image-not-available.png';
-                const previewImage = Array.isArray(item.images)
+                const fallback = '/fallback-images/fallback_image1.png';
+                const variantId = Number(
+                  item.variantId || item.config?.variantId
+                );
+                const variantImage = Array.isArray(item.images)
                   ? item.images.find((img) =>
-                      typeof img === 'string'
-                        ? img.startsWith('http')
-                        : img?.src?.startsWith('http')
-                    )
+                      Array.isArray(img.variant_ids)
+                        ? img.variant_ids.includes(Number(variantId)) ||
+                          img.is_default
+                        : img.is_default
+                    ) || item.images[0]
                   : null;
+
+                const previewImage =
+                  variantImage?.src && typeof variantImage.src === 'string'
+                    ? variantImage.src
+                    : fallback;
 
                 const config = item.config || {};
 
                 return (
                   <tr key={item.id}>
                     <td>
-                    <Link
-  to={
-    item.productId === 'founders-toast'
-      ? '/artisan-shop/founders-toast'
-      : item.category === 'artisan'
-      ? `/artisanseries/${item.productId}`
-      : `/merch/${item.productId}`
-  }
->
+                      <Link
+                        to={
+                          item.productId === 'founders-toast'
+                            ? '/artisan-shop/founders-toast'
+                            : item.category === 'artisan'
+                              ? `/artisanseries/${item.productId}`
+                              : `/merch/${item.productId}`
+                        }
+                      >
                         <img
                           src={
                             typeof previewImage === 'string'
@@ -257,35 +266,43 @@ const Cart = () => {
                       )}
                     </td>
                     <td>
-  {item.category === 'artisan' ? (
-    <span className="quantity-value">1</span>
-  ) : (
-    <div className="quantity-control">
-      <button
-        className="quantity-btn"
-        onClick={() =>
-          updateQuantity(item.id, Math.max(item.quantity - 1, 1))
-        }
-        disabled={item.quantity <= 1}
-      >
-        -
-      </button>
-      <span className="quantity-value">{item.quantity}</span>
-      <button
-        className="quantity-btn"
-        onClick={() =>
-          updateQuantity(
-            item.id,
-            Math.min(item.quantity + 1, item.currentQuantity)
-          )
-        }
-        disabled={item.quantity >= item.currentQuantity}
-      >
-        +
-      </button>
-    </div>
-  )}
-</td>
+                      {item.category === 'artisan' ? (
+                        <span className="quantity-value">1</span>
+                      ) : (
+                        <div className="quantity-control">
+                          <button
+                            className="quantity-btn"
+                            onClick={() =>
+                              updateQuantity(
+                                item.id,
+                                Math.max(item.quantity - 1, 1)
+                              )
+                            }
+                            disabled={item.quantity <= 1}
+                          >
+                            -
+                          </button>
+                          <span className="quantity-value">
+                            {item.quantity}
+                          </span>
+                          <button
+                            className="quantity-btn"
+                            onClick={() =>
+                              updateQuantity(
+                                item.id,
+                                Math.min(
+                                  item.quantity + 1,
+                                  item.currentQuantity
+                                )
+                              )
+                            }
+                            disabled={item.quantity >= item.currentQuantity}
+                          >
+                            +
+                          </button>
+                        </div>
+                      )}
+                    </td>
                     <td>${getItemTotal(item).toFixed(2)}</td>
                     <td>
                       <button
@@ -308,8 +325,8 @@ const Cart = () => {
             {loading ? 'Processing...' : 'Checkout'}
           </button>
           <p className="cart-id">
-        Cart ID: {(cartId || user?.uid || 'guest').slice(-5)}
-      </p>
+            Cart ID: {(cartId || user?.uid || 'guest').slice(-5)}
+          </p>
         </>
       )}
 

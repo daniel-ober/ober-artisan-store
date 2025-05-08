@@ -1,10 +1,36 @@
-import React from 'react';
+// src/components/CartPreview.js
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import { db } from '../firebaseConfig';
+import { doc, getDoc } from 'firebase/firestore';
 import './CartPreview.css';
 
 const CartPreview = ({ onClose, closeMenu }) => {
   const { cart, cartId, removeFromCart, updateQuantity } = useCart();
+  const [productDataMap, setProductDataMap] = useState({});
+
+  useEffect(() => {
+    const fetchAllMerchProducts = async () => {
+      const newMap = {};
+      const merchItems = cart.filter((item) => item.category === 'merch');
+      for (const item of merchItems) {
+        if (!item.productId || newMap[item.productId]) continue;
+        try {
+          const ref = doc(db, 'merchProducts', String(item.productId));
+          const snap = await getDoc(ref);
+          if (snap.exists()) {
+            newMap[item.productId] = snap.data();
+          }
+        } catch (err) {
+          console.warn(`❌ Error fetching merch product ${item.productId}:`, err);
+        }
+      }
+      setProductDataMap(newMap);
+    };
+
+    fetchAllMerchProducts();
+  }, [cart]);
 
   const handleRemoveItem = (itemId) => {
     removeFromCart(itemId);
@@ -31,6 +57,8 @@ const CartPreview = ({ onClose, closeMenu }) => {
     0
   );
 
+  const fallback = '/fallback-images/fallback_image1.png';
+
   return (
     <div className="cart-preview">
       <div className="cart-preview-header">
@@ -47,11 +75,11 @@ const CartPreview = ({ onClose, closeMenu }) => {
               const {
                 id,
                 name,
-                images,
                 price,
                 quantity,
                 category,
                 config = {},
+                productId,
               } = item;
 
               const configLines = [];
@@ -60,7 +88,6 @@ const CartPreview = ({ onClose, closeMenu }) => {
                 if (config.size && config.depth) {
                   configLines.push(`${config.size}" x ${config.depth}"`);
                 }
-
                 const line2 = [];
                 if (config.lugQuantity) line2.push(`${config.lugQuantity} Lugs`);
                 if (config.staveQuantity) line2.push(`${config.staveQuantity} Staves`);
@@ -68,7 +95,6 @@ const CartPreview = ({ onClose, closeMenu }) => {
                   line2.push(config.reRing ? 'Re-Rings' : 'No Re-Rings');
                 }
                 if (line2.length > 0) configLines.push(line2.join(' • '));
-
                 if (config.outerShell || config.innerStave) {
                   configLines.push(`${config.outerShell || '?'} / ${config.innerStave || '?'}`);
                 }
@@ -77,22 +103,34 @@ const CartPreview = ({ onClose, closeMenu }) => {
                 if (config.Colors) configLines.push(`Color: ${config.Colors}`);
               }
 
-              // Determine preview image
-              const fallback = '/fallback-images/fallback_image1.png';
+              // ✅ Final working fix: variant ID match with string coercion
               let previewImage = fallback;
 
-              if (Array.isArray(images)) {
-                const firstValid = images.find((img) => {
-                  if (typeof img === 'string') return img.startsWith('http');
-                  if (typeof img === 'object') return img?.src?.startsWith('http');
-                  return false;
-                });
+              if (category === 'merch') {
+                const product = productDataMap[productId];
+                const variantId = String(item.variantId || config?.variantId || '');
+                const selectedColor = config.Colors?.toLowerCase().replace(/\s+/g, '').replace(/\//g, '') || '';
 
-                if (firstValid) {
-                  previewImage =
-                    typeof firstValid === 'string'
-                      ? firstValid
-                      : firstValid.src || fallback;
+                if (product && Array.isArray(product.images)) {
+                  const matchedImage =
+                    product.images.find((img) =>
+                      Array.isArray(img.variant_ids)
+                        ? img.variant_ids.map(String).includes(variantId)
+                        : false
+                    ) ||
+                    product.images.find((img) =>
+                      Array.isArray(img.colors)
+                        ? img.colors
+                            .map((c) => c.toLowerCase().replace(/\s+/g, '').replace(/\//g, ''))
+                            .includes(selectedColor)
+                        : false
+                    ) ||
+                    product.images.find((img) => img.is_default) ||
+                    product.images[0];
+
+                  if (matchedImage?.src?.startsWith('http')) {
+                    previewImage = matchedImage.src;
+                  }
                 }
               }
 
@@ -104,7 +142,6 @@ const CartPreview = ({ onClose, closeMenu }) => {
                     className="cart-item-image"
                     onError={(e) => (e.currentTarget.src = fallback)}
                   />
-
                   <div className="cart-item-details">
                     <p className="item-name">{name}</p>
                     <div className="item-config-block">
@@ -134,7 +171,6 @@ const CartPreview = ({ onClose, closeMenu }) => {
                       </div>
                     )}
                   </div>
-
                   <button className="remove-item" onClick={() => handleRemoveItem(id)}>
                     ✕
                   </button>
@@ -163,9 +199,7 @@ const CartPreview = ({ onClose, closeMenu }) => {
         <p className="empty-cart">Your cart is empty.</p>
       )}
 
-      {cartId && (
-        <p className="cart-id-preview">Cart ID: {cartId.slice(-5)}</p>
-      )}
+      {cartId && <p className="cart-id-preview">Cart ID: {cartId.slice(-5)}</p>}
     </div>
   );
 };

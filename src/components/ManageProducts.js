@@ -12,14 +12,14 @@ import './ManageProducts.css';
 import AddProductModal from './AddProductModal';
 import EditProductModal from './EditProductModal';
 import EditMerchProductModal from './EditMerchProductModal';
+import { triggerPrintifyStockRefresh } from '../services/productService';
 
 const FALLBACK_IMAGE_URL = 'https://i.imgur.com/eoKsILV.png';
 
 const getPreviewImage = (product) => {
   const match =
-    product.images?.find(
-      (img) => img.is_default && img.position === 'front'
-    ) || product.images?.[0];
+    product.images?.find((img) => img.is_default && img.position === 'front') ||
+    product.images?.[0];
   return match?.src || FALLBACK_IMAGE_URL;
 };
 
@@ -29,31 +29,43 @@ const ManageProducts = () => {
   const [error, setError] = useState(null);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [editProductId, setEditProductId] = useState(null);
+  const [isRefreshingStock, setIsRefreshingStock] = useState(false);
+  const [printifyLastUpdated, setPrintifyLastUpdated] = useState(null);
 
-  useEffect(() => {
-    const fetchAllProducts = async () => {
-      setLoading(true);
-      try {
-        const collections = ['products', 'merchProducts'];
-        const allDocs = [];
-
-        for (const name of collections) {
-          const snapshot = await getDocs(collection(db, name));
-          snapshot.forEach((doc) => {
-            allDocs.push({ id: doc.id, ...doc.data(), _source: name });
-          });
-        }
-
-        setProducts(allDocs);
-      } catch (err) {
-        console.error(err);
-        setError('Failed to fetch products. Please try again later.');
-      } finally {
-        setLoading(false);
+  const fetchAllProducts = async () => {
+    setLoading(true);
+    try {
+      const collections = ['products', 'merchProducts'];
+      const allDocs = [];
+      let latestSync = null;
+  
+      for (const name of collections) {
+        const snapshot = await getDocs(collection(db, name));
+        snapshot.forEach((doc) => {
+          const data = doc.data();
+          allDocs.push({ id: doc.id, ...data, _source: name });
+  
+          if (name === 'merchProducts' && data.updatedAt?.toDate) {
+            const updatedTime = data.updatedAt.toDate();
+            if (!latestSync || updatedTime > latestSync) {
+              latestSync = updatedTime;
+            }
+          }
+        });
       }
-    };
-
-    fetchAllProducts();
+  
+      setProducts(allDocs);
+      if (latestSync) setPrintifyLastUpdated(latestSync);
+    } catch (err) {
+      console.error(err);
+      setError('Failed to fetch products. Please try again later.');
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+  useEffect(() => {
+    fetchAllProducts(); // now works in both useEffect AND refresh
   }, []);
 
   const handleDeleteProduct = async (productId) => {
@@ -104,7 +116,10 @@ const ManageProducts = () => {
     }
   };
 
-  const handleCurrentInventoryChange = async (productId, newCurrentInventory) => {
+  const handleCurrentInventoryChange = async (
+    productId,
+    newCurrentInventory
+  ) => {
     try {
       await updateProductInventory(productId, {
         currentQuantity: newCurrentInventory,
@@ -122,16 +137,23 @@ const ManageProducts = () => {
   };
 
   const openProductDetail = (productOrId) => {
-    const product = typeof productOrId === 'object' ? productOrId : products.find((p) => p.id === productOrId);
+    const product =
+      typeof productOrId === 'object'
+        ? productOrId
+        : products.find((p) => p.id === productOrId);
     if (!product) {
-      console.warn("Invalid productOrId passed to openProductDetail:", productOrId);
+      console.warn(
+        'Invalid productOrId passed to openProductDetail:',
+        productOrId
+      );
       return;
     }
-  
-    const url = product._source === 'merchProducts'
-      ? `/merch/${product.id}`
-      : `/products/${product.id}`;
-  
+
+    const url =
+      product._source === 'merchProducts'
+        ? `/merch/${product.id}`
+        : `/products/${product.id}`;
+
     window.open(url, '_blank');
   };
 
@@ -139,12 +161,40 @@ const ManageProducts = () => {
     ? products.find((p) => p.id === editProductId)
     : null;
 
+  const handleRefreshPrintifyStock = async () => {
+    setIsRefreshingStock(true);
+    try {
+      await triggerPrintifyStockRefresh();
+      await fetchAllProducts(); // ✅ refresh UI with latest Firestore timestamps
+      alert('✅ Printify stock refresh triggered successfully.');
+    } catch (err) {
+      console.error('❌ Failed to refresh stock:', err);
+      alert('❌ Failed to trigger Printify stock refresh.');
+    } finally {
+      setIsRefreshingStock(false);
+    }
+  };
+
   return (
     <div className="manage-products-container">
       <h2>Manage Products</h2>
-      <button className="add-product-btn" onClick={() => setIsAddModalOpen(true)}>
-        Add Product
+      <button
+        className="add-product-btn"
+        onClick={handleRefreshPrintifyStock}
+        disabled={isRefreshingStock}
+        style={{ marginLeft: '12px', backgroundColor: '#444' }}
+      >
+        {isRefreshingStock ? 'Refreshing...' : 'Refresh Printify Stock'}
       </button>
+      {printifyLastUpdated && (
+        <p style={{ marginTop: '0.5rem', fontSize: '0.9rem', color: '#555' }}>
+          Printify Stock Last Updated:{' '}
+          {printifyLastUpdated.toLocaleString('en-US', {
+            dateStyle: 'long',
+            timeStyle: 'short',
+          })}
+        </p>
+      )}
       {loading && <p>Loading products...</p>}
       {error && <p>{error}</p>}
       {!loading && !error && (
@@ -173,51 +223,60 @@ const ManageProducts = () => {
                       onClick={() => openProductDetail(product.id)}
                       aria-label={`View details for ${title}`}
                     >
-                      <img
-                        src={imageUrl}
-                        alt={title}
-                        className="thumbnail"
-                      />
+                      <img src={imageUrl} alt={title} className="thumbnail" />
                     </button>
                   </td>
                   <td>{title}</td>
                   <td>
                     <select
                       value={product.status || 'active'}
-                      onChange={(e) => handleStatusChange(product.id, e.target.value)}
+                      onChange={(e) =>
+                        handleStatusChange(product.id, e.target.value)
+                      }
                     >
                       <option value="active">Active</option>
                       <option value="inactive">Inactive</option>
                     </select>
                   </td>
-                  <td>{isMerch ? 'Managed by Printify' : (
-                    <select
-                      value={product.maxQuantity || 0}
-                      onChange={(e) =>
-                        handleMaxInventoryChange(product.id, parseInt(e.target.value))
-                      }
-                    >
-                      {Array.from({ length: 21 }, (_, i) => (
-                        <option key={i} value={i}>
-                          {i}
-                        </option>
-                      ))}
-                    </select>
-                  )}</td>
-                  <td>{isMerch ? 'Auto Synced' : (
-                    <input
-                      type="number"
-                      value={product.currentQuantity || 0}
-                      min="0"
-                      max={product.maxQuantity || 0}
-                      onChange={(e) =>
-                        handleCurrentInventoryChange(
-                          product.id,
-                          parseInt(e.target.value) || 0
-                        )
-                      }
-                    />
-                  )}</td>
+                  <td>
+                    {isMerch ? (
+                      'Managed by Printify'
+                    ) : (
+                      <select
+                        value={product.maxQuantity || 0}
+                        onChange={(e) =>
+                          handleMaxInventoryChange(
+                            product.id,
+                            parseInt(e.target.value)
+                          )
+                        }
+                      >
+                        {Array.from({ length: 21 }, (_, i) => (
+                          <option key={i} value={i}>
+                            {i}
+                          </option>
+                        ))}
+                      </select>
+                    )}
+                  </td>
+                  <td>
+                    {isMerch ? (
+                      'Auto Synced'
+                    ) : (
+                      <input
+                        type="number"
+                        value={product.currentQuantity || 0}
+                        min="0"
+                        max={product.maxQuantity || 0}
+                        onChange={(e) =>
+                          handleCurrentInventoryChange(
+                            product.id,
+                            parseInt(e.target.value) || 0
+                          )
+                        }
+                      />
+                    )}
+                  </td>
                   <td>
                     <button
                       className="edit-btn"
