@@ -149,22 +149,29 @@ const Cart = () => {
         setShowModal(false);
         return;
       }
-
+  
       const normalize = (str) =>
         (str || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-
+  
       const productsPayload = cart.map((item) => {
         const config = item.config || {};
         const variantId = Number(item.variantId || config?.variantId);
         const selectedColorRaw = config.Colors || '';
         const selectedColor = normalize(selectedColorRaw);
-
+  
         let previewImage = fallback;
-
-        if (item.category === 'artisan') {
+  
+        if (item.image?.startsWith('http')) {
+          previewImage = item.image;
+        } else if (item.category === 'artisan') {
           previewImage =
-            item.image ||
-            (Array.isArray(item.images) && item.images[0]) ||
+            (Array.isArray(item.images) &&
+              item.images[0]?.src?.startsWith('http') &&
+              item.images[0].src) ||
+            (Array.isArray(item.images) &&
+              typeof item.images[0] === 'string' &&
+              item.images[0].startsWith('http') &&
+              item.images[0]) ||
             fallback;
         } else if (item.category === 'merch') {
           const product = productDataMap[item.productId];
@@ -173,44 +180,47 @@ const Cart = () => {
               product.images.find(
                 (img) =>
                   Array.isArray(img.variant_ids) &&
-                  img.variant_ids.includes(Number(variantId)) &&
+                  img.variant_ids.map(String).includes(String(variantId)) &&
                   Array.isArray(img.colors) &&
-                  img.colors.some((color) => normalize(color) === selectedColor)
+                  img.colors
+                    .map((c) => normalize(c))
+                    .includes(selectedColor)
+              ) ||
+              product.images.find(
+                (img) =>
+                  Array.isArray(img.colors) &&
+                  img.colors
+                    .map((c) => normalize(c))
+                    .includes(selectedColor)
               ) ||
               product.images.find(
                 (img) =>
                   Array.isArray(img.variant_ids) &&
                   img.variant_ids.map(String).includes(String(variantId))
               ) ||
-              product.images.find(
-                (img) =>
-                  Array.isArray(img.colors) &&
-                  img.colors.some((color) => normalize(color) === selectedColor)
-              ) ||
               product.images.find((img) => img.is_default) ||
               product.images[0];
-
+        
             if (matchedImage?.src?.startsWith('http')) {
               previewImage = matchedImage.src;
             }
           }
         }
-
+  
         return {
           ...item,
-          image: previewImage,
+          image: previewImage.startsWith('http') ? previewImage : undefined,
         };
       });
-
-      // 🔒 Make your checkout API call here
+  
       const response = await fetch(`${API_BASE_URL}/createCheckoutSession`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ products: productsPayload }),
       });
-
+  
       const data = await response.json();
-
+  
       if (data?.url) {
         window.location.href = data.url;
       } else {
@@ -251,8 +261,7 @@ const Cart = () => {
                   (str || '').toLowerCase().replace(/[^a-z0-9]/g, '');
                 const selectedColor = normalize(selectedColorRaw);
 
-                let previewImage = fallback;
-
+                let previewImage = item.image || fallback;
                 if (item.category === 'artisan') {
                   previewImage =
                     item.image ||
@@ -386,43 +395,35 @@ const Cart = () => {
                       )}
                     </td>
                     <td>
-                      {item.category === 'artisan' ? (
-                        <span className="quantity-value">1</span>
-                      ) : (
-                        <div className="quantity-control">
-                          <button
-                            className="quantity-btn"
-                            onClick={() =>
-                              updateQuantity(
-                                item.id,
-                                Math.max(item.quantity - 1, 1)
-                              )
-                            }
-                            disabled={item.quantity <= 1}
-                          >
-                            -
-                          </button>
-                          <span className="quantity-value">
-                            {item.quantity}
-                          </span>
-                          <button
-                            className="quantity-btn"
-                            onClick={() =>
-                              updateQuantity(
-                                item.id,
-                                Math.min(
-                                  item.quantity + 1,
-                                  item.currentQuantity
-                                )
-                              )
-                            }
-                            disabled={item.quantity >= item.currentQuantity}
-                          >
-                            +
-                          </button>
-                        </div>
-                      )}
-                    </td>
+  {item.productId === 'founders-toast' || item.category !== 'artisan' ? (
+    <div className="quantity-control">
+      <button
+        className="quantity-btn"
+        onClick={() =>
+          updateQuantity(item.id, Math.max(item.quantity - 1, 1))
+        }
+        disabled={item.quantity <= 1}
+      >
+        -
+      </button>
+      <span className="quantity-value">{item.quantity}</span>
+      <button
+        className="quantity-btn"
+        onClick={() =>
+          updateQuantity(
+            item.id,
+            Math.min(item.quantity + 1, item.currentQuantity)
+          )
+        }
+        disabled={item.quantity >= item.currentQuantity}
+      >
+        +
+      </button>
+    </div>
+  ) : (
+    <span className="quantity-value">1</span>
+  )}
+</td>
                     <td>${getItemTotal(item).toFixed(2)}</td>
                   </tr>
                 );
