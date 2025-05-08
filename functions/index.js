@@ -68,34 +68,38 @@ app.post('/createCheckoutSession', async (req, res) => {
       products.map(async (p) => {
         const price = await stripe.prices.retrieve(p.stripePriceId);
         const config = p.config || {};
-      
         const staveQuantity = config.staveQuantity ?? config.StaveQuantity;
-      
+
+        const descriptionParts = [
+          config.Sizes ? `Size: ${config.Sizes}` : '',
+          config.Colors ? `Color: ${config.Colors}` : '',
+          config.depth ? `Depth: ${config.depth}"` : '',
+          config.lugQuantity ? `${config.lugQuantity} Lugs` : '',
+          staveQuantity ? `${staveQuantity} Staves` : '',
+          config.reRing !== undefined
+            ? config.reRing
+              ? 'Re-Rings'
+              : 'No Re-Rings'
+            : '',
+        ].filter(Boolean);
+
+        const productData = {
+          name: p.name,
+          images:
+            typeof p.image === 'string' && p.image.startsWith('http')
+              ? [p.image]
+              : ['https://oberartisandrums.com/fallback-images/fallback_image1.png'],
+        };
+
+        if (descriptionParts.length > 0) {
+          productData.description = descriptionParts.join(' • ');
+        }
+
         return {
           price_data: {
             currency: 'usd',
             unit_amount: price.unit_amount,
-            product_data: {
-              name: p.name,
-              description: [
-                config.Sizes ? `Size: ${config.Sizes}` : '',
-                config.Colors ? `Color: ${config.Colors}` : '',
-                config.depth ? `Depth: ${config.depth}"` : '',
-                config.lugQuantity ? `${config.lugQuantity} Lugs` : '',
-                staveQuantity ? `${staveQuantity} Staves` : '',
-                config.reRing !== undefined
-                  ? config.reRing
-                    ? 'Re-Rings'
-                    : 'No Re-Rings'
-                  : '',
-              ]
-                .filter(Boolean)
-                .join(' • '),
-              images:
-                typeof p.image === 'string' && p.image.startsWith('http')
-                  ? [p.image]
-                  : ['https://oberartisandrums.com/fallback-images/fallback_image1.png'],
-            },
+            product_data: productData,
           },
           quantity: p.quantity || 1,
         };
