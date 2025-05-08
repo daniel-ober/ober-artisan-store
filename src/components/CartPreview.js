@@ -187,7 +187,8 @@ const CartPreview = ({ onClose, closeMenu }) => {
                       ${Number(price || 0).toFixed(2)}
                     </p>
 
-                    {category !== 'artisan' && (
+                    {productId === 'founders-toast' ||
+                    category !== 'artisan' ? (
                       <div className="quantity-buttons">
                         <button
                           onClick={() => handleQuantityChange(id, -1)}
@@ -203,7 +204,7 @@ const CartPreview = ({ onClose, closeMenu }) => {
                           +
                         </button>
                       </div>
-                    )}
+                    ) : null}
                   </div>
                   <button
                     className="remove-item"
