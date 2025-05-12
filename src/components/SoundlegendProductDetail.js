@@ -35,7 +35,7 @@ const SoundLegendProductDetail = () => {
 // 🔽 Add this here
 const handleClose = () => {
   setOpen(false);
-  navigate('/artisanseries');
+  navigate('/artisan-shop');
 };
 
   // Full list of available wood species
@@ -350,7 +350,7 @@ const handleClose = () => {
                     <DialogTitle>Request Sent</DialogTitle>
                     <DialogContent>
                       <Typography variant="body1">
-                        Thank you for reaching out! We&apos;ll get back to you within 1-2 business days. Feel free to explore our other Pre-Order options while you wait.
+                        Thank you for reaching out! We&apos;ll get back to you within 1-2 business days. Feel free to explore our other Artisan Products while you wait.
                       </Typography>
                     </DialogContent>
                     <DialogActions>
