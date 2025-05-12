@@ -1,6 +1,6 @@
 // src/firebaseConfig.js
 import { initializeApp } from 'firebase/app';
-// ❌ Removed: import { getAnalytics } from 'firebase/analytics';
+import { getAnalytics, logEvent, isSupported, setUserProperties } from 'firebase/analytics';
 import { getAuth, signOut as firebaseSignOut } from 'firebase/auth';
 import {
   getFirestore,
@@ -28,8 +28,33 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-// ❌ Removed analytics initialization to eliminate "installations" dependency
-// const analytics = firebaseConfig.measurementId ? getAnalytics(app) : null;
+let analytics = null;
+
+if (
+  typeof window !== 'undefined' &&
+  process.env.NODE_ENV === 'production' &&
+  firebaseConfig.measurementId
+) {
+  isSupported().then((supported) => {
+    if (supported) {
+      analytics = getAnalytics(app);
+      logEvent(analytics, 'page_view');
+      // console.log('✅ Firebase Analytics initialized');
+    } else {
+      console.warn('⚠️ Firebase Analytics not supported in this browser');
+    }
+  });
+}
+
+// ✅ Exported function to tag admin/test/real users in Analytics
+export const setAnalyticsUserProperties = (userType) => {
+  if (analytics && typeof userType === 'string') {
+    // console.log('🔍 Setting user_type in analytics:', userType);
+    setUserProperties(analytics, { user_type: userType });
+  } else {
+    console.warn('⚠️ Could not set user_type – analytics not ready or invalid input:', userType);
+  }
+};
 
 export const db = getFirestore(app);
 export const auth = getAuth(app);
@@ -111,4 +136,4 @@ export const clearCart = async (userId) => {
   }
 };
 
-export { app };
+export { app, analytics };

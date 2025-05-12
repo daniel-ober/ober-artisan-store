@@ -32,12 +32,12 @@ export const fetchProducts = async () => {
 
 // ✅ **Fetch a single product by ID (searches both collections)**
 export const fetchProductById = async (productId) => {
-  console.log('🔍 Fetching productId:', productId);
+  // console.log('🔍 Fetching productId:', productId);
 
   const tryFetch = async (collectionName) => {
     const ref = doc(db, collectionName, productId);
     const snapshot = await getDoc(ref);
-    console.log(`🔎 Checked ${collectionName} for ID ${productId} — Exists?`, snapshot.exists());
+    // console.log(`🔎 Checked ${collectionName} for ID ${productId} — Exists?`, snapshot.exists());
     return snapshot.exists() ? { id: snapshot.id, ...snapshot.data() } : null;
   };
 

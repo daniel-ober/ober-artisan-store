@@ -42,7 +42,7 @@ const Checkout = ({ cartItems, totalAmount, onApplyPromo }) => {
       if (totalAmount <= 0) return; // Ensure totalAmount is greater than 0
     
       try {
-        console.log("📡 Sending Payment Intent Request to:", process.env.REACT_APP_API_URL);
+        // console.log("📡 Sending Payment Intent Request to:", process.env.REACT_APP_API_URL);
 
         const response = await fetch(`${process.env.REACT_APP_API_URL}/create-payment-intent`, {
           method: "POST",
@@ -51,7 +51,7 @@ const Checkout = ({ cartItems, totalAmount, onApplyPromo }) => {
         });
 
         const data = await response.json();
-        console.log("✅ Payment Intent Response:", data);
+        // console.log("✅ Payment Intent Response:", data);
 
         if (data.clientSecret) {
           setClientSecret(data.clientSecret);

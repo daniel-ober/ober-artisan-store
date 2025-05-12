@@ -1,10 +1,10 @@
 require('dotenv').config({ path: __dirname + '/.env.prod' });
 
-console.log('NODE_ENV:', process.env.NODE_ENV);
-console.log(
-  'Loaded STRIPE_SECRET_KEY:',
-  process.env.STRIPE_SECRET_KEY ? '✅ Exists' : '❌ Missing'
-);
+// console.log('NODE_ENV:', process.env.NODE_ENV);
+// console.log(
+//   'Loaded STRIPE_SECRET_KEY:',
+//   process.env.STRIPE_SECRET_KEY ? '✅ Exists' : '❌ Missing'
+// );
 
 const express = require('express');
 const cors = require('cors');
