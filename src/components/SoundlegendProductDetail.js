@@ -12,7 +12,6 @@ import {
 import { collection, addDoc, Timestamp } from 'firebase/firestore'; // Firestore methods
 import './SoundlegendProductDetail.css';
 
-
 const SoundLegendProductDetail = () => {
   // User Details
   const [firstName, setFirstName] = useState('');
@@ -29,14 +28,14 @@ const SoundLegendProductDetail = () => {
   const [snareBedDepth, setSnareBedDepth] = useState('Medium');
   const [consultationDate, setConsultationDate] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  
+
   const navigate = useNavigate();
 
-// 🔽 Add this here
-const handleClose = () => {
-  setOpen(false);
-  navigate('/artisan-shop');
-};
+  // 🔽 Add this here
+  const handleClose = () => {
+    setOpen(false);
+    setTimeout(() => navigate('/artisan-shop'), 200); // slight delay for UI smoothness
+  };
 
   // Full list of available wood species
   const woodSpeciesOptions = [
@@ -68,7 +67,7 @@ const handleClose = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-  
+
     const submissionData = {
       firstName,
       lastName,
@@ -83,11 +82,11 @@ const handleClose = () => {
       status: 'New',
       submittedAt: Timestamp.now(),
     };
-  
+
     try {
       await addDoc(collection(db, 'soundlegend_submissions'), submissionData);
       setOpen(true); // 🔥 Show the success Dialog
-  
+
       // Reset form fields
       setFirstName('');
       setLastName('');
@@ -109,11 +108,11 @@ const handleClose = () => {
 
   return (
     <div className="soundlegend-product-detail">
-             <img
-            src="/resized-logos/soundlegend-white.png"
-            alt="SOUNDLEGEND Series"
-            className="artisanseries-header-image"
-          />
+      <img
+        src="/resized-logos/soundlegend-white.png"
+        alt="SOUNDLEGEND Series"
+        className="artisanseries-header-image"
+      />
       {/* 🔥 SoundLegend Experience Section */}
       <div className="soundlegend-product-content">
         {/* 📌 Left Side: Product Image */}
@@ -135,7 +134,9 @@ const handleClose = () => {
             src="https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/artisan%2Fsoundlegend%2FIMG_1803.jpeg?alt=media&token=0dd78f95-2101-44e7-b95f-2b7cbe3c01a1"
             alt="SOUNDLEGEND Experience"
           />
-          <h2 className="soundlegend-header">Build Your Custom SoundLegend Snare</h2>
+          <h2 className="soundlegend-header">
+            Build Your Custom SoundLegend Snare
+          </h2>
           <p>
             Your sound is unique—your snare should be too. The{' '}
             <strong>SoundLegend Series</strong> is a fully custom, handcrafted
@@ -346,20 +347,22 @@ const handleClose = () => {
                 ? 'Submitting...'
                 : 'Start Your Custom Snare Journey'}
             </button>
-                  <Dialog open={open} onClose={handleClose}>
-                    <DialogTitle>Request Sent</DialogTitle>
-                    <DialogContent>
-                      <Typography variant="body1">
-                        Thank you for reaching out! We&apos;ll get back to you within 1-2 business days. Feel free to explore our other Artisan Products while you wait.
-                      </Typography>
-                    </DialogContent>
-                    <DialogActions>
-                      <Button onClick={handleClose} color="primary">
-                        Continue
-                      </Button>
-                    </DialogActions>
-                  </Dialog>
           </form>
+          <Dialog open={open} onClose={handleClose}>
+            <DialogTitle>Request Sent</DialogTitle>
+            <DialogContent>
+              <Typography variant="body1">
+                Thank you for reaching out! We&apos;ll get back to you within
+                1–2 business days. Feel free to explore our other Artisan
+                Products while you wait.
+              </Typography>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose} color="primary">
+                Continue
+              </Button>
+            </DialogActions>
+          </Dialog>
         </div>
       </div>
     </div>
