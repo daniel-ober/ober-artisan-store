@@ -144,10 +144,10 @@ export const CartProvider = ({ children }) => {
     if (!cartDoc.exists()) {
       payload.createdAt = serverTimestamp();
       await setDoc(cartRef, payload);
-      console.log('🆕 Created new Firestore cart document:', cartId);
+      // console.log('🆕 Created new Firestore cart document:', cartId);
     } else {
       await updateDoc(cartRef, payload);
-      console.log('✅ Updated Firestore cart document:', cartId);
+      // console.log('✅ Updated Firestore cart document:', cartId);
     }
   };
 
@@ -222,7 +222,7 @@ export const CartProvider = ({ children }) => {
           createdAt: serverTimestamp(),
           lastUpdated: serverTimestamp(),
         });
-        console.log('🆕 Created empty Firestore cart before update');
+        // console.log('🆕 Created empty Firestore cart before update');
       }
 
       await updateFirestoreCart(updatedCart);

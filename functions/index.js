@@ -240,7 +240,7 @@ stripeWebhookApp.post('/', async (req, res) => {
       };
 
       await db.collection('orders').doc(orderId).set(orderDoc);
-      console.log(`✅ Order created: ${orderId}`);
+      // console.log(`✅ Order created: ${orderId}`);
       return res.status(200).send('Order created');
     }
 
@@ -418,7 +418,7 @@ const handlePrintifyProductPublished = async (productId) => {
     };
 
     await db.collection('merchProducts').doc(productId).set(payload);
-    console.log(`✅ Created merchProduct: ${productId}`);
+    // console.log(`✅ Created merchProduct: ${productId}`);
   } catch (error) {
     console.error('❌ Failed to sync Printify product:', error.message);
   }

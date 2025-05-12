@@ -36,7 +36,7 @@ const Home = () => {
         <div className="card">
           <h2 className="highlight-card-header">Pre-Order</h2>
           <p>Reserve your ready-to-be-made snare today.</p>
-          <Link to="/artisanseries/pre-order">
+          <Link to="/artisan-shop">
             <button>Pre-Order Now</button>
           </Link>
         </div>
