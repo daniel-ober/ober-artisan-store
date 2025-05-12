@@ -27,13 +27,13 @@ const AdminCard = ({ title, icon, isSelected, primaryCount, secondaryCount }) =>
         const newSubmissions = submissions.size;
 
         // Log the fetched data for debugging
-        console.log('Fetched Data:', { newOrders, newInquiries, newSubmissions });
+        // console.log('Fetched Data:', { newOrders, newInquiries, newSubmissions });
 
         // Calculate the total count of new items across all categories
         setTotalCount(newOrders + newInquiries + newSubmissions);
 
         // Log the final total count
-        console.log('Total Count:', newOrders + newInquiries + newSubmissions);
+        // console.log('Total Count:', newOrders + newInquiries + newSubmissions);
 
       } catch (error) {
         console.error("Error fetching data for admin overview:", error);

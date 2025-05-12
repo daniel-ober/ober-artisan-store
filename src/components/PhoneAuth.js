@@ -28,7 +28,7 @@ function PhoneAuth() {
           window.confirmationResult = confirmationResult;
           setConfirmationResult(confirmationResult);
         }).catch((error) => {
-          console.log(error);
+          // console.log(error);
           setError(error.message);
         });
     }
@@ -38,10 +38,10 @@ function PhoneAuth() {
     confirmationResult.confirm(verificationCode).then((result) => {
       // User signed in successfully.
       const user = result.user;
-      console.log(user);
+      // console.log(user);
     }).catch((error) => {
       // User couldn't sign in (bad verification code, invalid request, etc.)
-      console.log(error);
+      // console.log(error);
       setError(error.message);
     });
   };

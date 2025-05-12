@@ -35,7 +35,7 @@ const CheckoutForm = ({ cart }) => {
 
     try {
       // ✅ Validate product quantities before proceeding
-      console.log("📡 Sending Cart Validation Request...");
+      // console.log("📡 Sending Cart Validation Request...");
       const validationResponse = await fetch(
         `${process.env.REACT_APP_API_URL}/api/validate-cart-before-checkout`,
         {
@@ -55,7 +55,7 @@ const CheckoutForm = ({ cart }) => {
       }
 
       // ✅ Proceed to create Stripe checkout session
-      console.log("📡 Creating Stripe Checkout Session...");
+      // console.log("📡 Creating Stripe Checkout Session...");
       const checkoutResponse = await fetch(
         `${process.env.REACT_APP_API_URL}createCheckoutSession`,
         {
@@ -80,7 +80,7 @@ const CheckoutForm = ({ cart }) => {
         throw new Error(session.error || "Failed to create checkout session");
       }
 
-      console.log("✅ Redirecting to Stripe Checkout:", session.url);
+      // console.log("✅ Redirecting to Stripe Checkout:", session.url);
       window.location.href = session.url;
     } catch (error) {
       console.error("❌ Checkout error:", error);

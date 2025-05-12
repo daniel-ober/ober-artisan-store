@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 import { getDocs, collection } from 'firebase/firestore';
 import { db } from './firebaseConfig';
-
+import DrumViewer from './components/DrumViewer';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import Home from './components/Home';
@@ -154,6 +154,8 @@ function App() {
           />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/return-policy" element={<ReturnPolicy />} />
+         {/* <Route path="/builder" element={<DrumViewer />} /> */}
+
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route
             path="/custom-drum-builder"
