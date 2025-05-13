@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect, useRef } from 'react';
 import './ArtisanDrums.css';
 import { DarkModeContext } from '../context/DarkModeContext';
+import { analytics, logEvent } from '../firebaseConfig';
 import { useNavigate } from 'react-router-dom';
 
 const DRUM_SERIES = [
@@ -104,6 +105,12 @@ const ArtisanDrums = () => {
 
   const handleHover = (index) => {
     if (index === activeIndex) return;
+  
+    const hoveredSeries = DRUM_SERIES[index].name;
+    if (analytics) {
+      logEvent(analytics, 'view_drum_series', { series: hoveredSeries });
+    }
+  
     startFade(DRUM_SERIES[index].overlay);
     setHoverIndex(index);
     if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
@@ -120,6 +127,12 @@ const ArtisanDrums = () => {
 
   const handleDrumSwitch = (index) => {
     if (index === activeIndex) return;
+  
+    const clickedSeries = DRUM_SERIES[index].name;
+    if (analytics) {
+      logEvent(analytics, 'click_drum_series', { series: clickedSeries });
+    }
+  
     setActiveIndex(index);
     setHoverIndex(null);
     setPreviousOverlay(null);

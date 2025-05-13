@@ -136,4 +136,4 @@ export const clearCart = async (userId) => {
   }
 };
 
-export { app, analytics };
+export { app, analytics, logEvent };
