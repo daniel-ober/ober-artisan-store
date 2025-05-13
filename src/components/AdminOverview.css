@@ -37,6 +37,37 @@
     justify-content: space-between;
     align-items: center;
   }
+
+  .overview-section.drag-over {
+    outline: 3px dotted #1a73e8;
+    outline-offset: -8px;
+    background-color: #eef5ff;
+    transition: background-color 0.2s, outline 0.2s;
+  }
+
+  /* Style
+Visual Description
+solid
+A single solid line
+dotted
+A series of round dots
+dashed
+A series of short dashes
+double
+Two solid lines with space between them
+groove
+Looks carved into the page (depends on border color)
+ridge
+Looks raised from the page
+inset
+Makes the box appear embedded
+outset
+Makes the box appear popped out
+none
+No border/outline
+hidden
+Same as none, but used in specific layout cases */
+
   
   .badge {
     background-color: #d5d5ff;
