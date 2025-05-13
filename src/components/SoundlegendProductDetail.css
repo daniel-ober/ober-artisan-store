@@ -3,13 +3,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 60px 20px;
+    padding: 50px 20px;
     max-width: 1200px;
     margin: 0 auto;
     box-sizing: border-box;
     background: #0e0e0e;
     color: white;
-    text-align: center;
+    /* text-align: center; */
     overflow-x: hidden; /* Prevents horizontal overflow */
 }
 
@@ -125,6 +125,13 @@
 /* 🔹 Improve Dropdown Field Styling */
 .soundlegend-product-options select {
     height: 48px; /* Matches input fields for consistency */
+}
+
+.customer-header {
+    color: #a4a4a4;
+    /* text-align: start; */
+    font-weight: bold;
+    font-size: 22px;
 }
 
 /* 📌 Phone Input Container */
