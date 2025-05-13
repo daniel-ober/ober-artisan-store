@@ -20,6 +20,7 @@ const ManageInquiries = () => {
         const data = docSnapshot.data();
         return {
           id: docSnapshot.id,
+          overviewStatus: data.overviewStatus || 'new',
           createdAt: data.createdAt
             ? new Date(data.createdAt.seconds * 1000).toLocaleString()
             : 'No date',
@@ -50,18 +51,10 @@ const ManageInquiries = () => {
   }, [showClosedItems, inquiries]);
 
   const filterInquiries = (inquiriesList, showClosed) => {
-    if (showClosed) {
-      setFilteredInquiries(inquiriesList);
-    } else {
-      setFilteredInquiries(
-        inquiriesList.filter(
-          (inquiry) =>
-            inquiry.status !== 'Support - Closed' &&
-            inquiry.status !== 'Sales - Closed Won' &&
-            inquiry.status !== 'Sales - Closed Lost'
-        )
-      );
-    }
+    const filtered = showClosed
+      ? inquiriesList
+      : inquiriesList.filter((inquiry) => inquiry.overviewStatus !== 'completed');
+    setFilteredInquiries(filtered);
   };
 
   // Update inquiry status

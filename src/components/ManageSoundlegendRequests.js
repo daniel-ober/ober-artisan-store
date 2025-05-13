@@ -27,6 +27,7 @@ const ManageSoundlegendRequests = () => {
 
         const submissionsList = querySnapshot.docs.map((doc) => ({
           id: doc.id,
+          overviewStatus: doc.data().overviewStatus || 'new',
           ...doc.data(),
         }));
 
@@ -59,10 +60,8 @@ const ManageSoundlegendRequests = () => {
   };
 
   const filteredSubmissions = hideClosed
-    ? submissions.filter(
-        (submission) => !submission.status?.toLowerCase().includes("closed")
-      )
-    : submissions;
+  ? submissions.filter((s) => s.overviewStatus !== 'completed')
+  : submissions;
 
   const handleRowClick = (submission) => {
     setSelectedSubmission(submission);
