@@ -1,27 +1,29 @@
 // src/components/ProductCard.js
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { db } from "../firebaseConfig";
-import { doc, getDoc } from "firebase/firestore";
-import { useAuth } from "../context/AuthContext";
-import { useCart } from "../context/CartContext";
-import "./ProductCard.css";
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { db } from '../firebaseConfig';
+import { doc, getDoc } from 'firebase/firestore';
+import { useAuth } from '../context/AuthContext';
+import { useCart } from '../context/CartContext';
+import { analytics, logEvent } from '../firebaseConfig';
+import './ProductCard.css';
 
-const fallbackImage = "/fallback.jpg";
+const fallbackImage = '/fallback.jpg';
 
 const stripHtml = (html) => {
-  const div = document.createElement("div");
-  div.innerHTML = html || "";
-  return div.textContent || div.innerText || "";
+  const div = document.createElement('div');
+  div.innerHTML = html || '';
+  return div.textContent || div.innerText || '';
 };
 
 const getLowestPrice = (product) => {
   if (product.variants?.length > 0) {
     const prices = product.variants
-      .map((v) =>
-        v.price ??
-        product.stripePriceIds?.[v.id]?.unitAmount ??
-        product.stripePriceIds?.[v.id]?.price
+      .map(
+        (v) =>
+          v.price ??
+          product.stripePriceIds?.[v.id]?.unitAmount ??
+          product.stripePriceIds?.[v.id]?.price
       )
       .filter(Boolean)
       .map((p) => p / 100);
@@ -33,7 +35,7 @@ const getLowestPrice = (product) => {
 const getImageSrc = (product) => {
   if (Array.isArray(product.images)) {
     const img = product.images.find((img) => img?.src) || product.images[0];
-    return typeof img === "string" ? img : img?.src || fallbackImage;
+    return typeof img === 'string' ? img : img?.src || fallbackImage;
   }
   return fallbackImage;
 };
@@ -44,13 +46,13 @@ const ProductCard = ({ product }) => {
 
   const imageUrl = getImageSrc(product);
   const price = getLowestPrice(product);
-  const delivery = product.deliveryTime || "Varies";
+  const delivery = product.deliveryTime || 'Varies';
 
   const enabledVariantIds = (product.variants || [])
     .filter((v) => v.is_enabled && v.is_available !== false)
     .map((v) => v.id);
 
-  const colorOption = product.options?.find((opt) => opt.name === "Colors");
+  const colorOption = product.options?.find((opt) => opt.name === 'Colors');
 
   const renderColorDots = () => {
     if (!colorOption || !Array.isArray(colorOption.values)) return null;
@@ -75,10 +77,10 @@ const ProductCard = ({ product }) => {
               backgroundColor: colors[0],
               width: 16,
               height: 16,
-              borderRadius: "50%",
-              border: "1px solid #ccc",
-              margin: "2px",
-              display: "inline-block",
+              borderRadius: '50%',
+              border: '1px solid #ccc',
+              margin: '2px',
+              display: 'inline-block',
             }}
           />
         );
@@ -91,11 +93,11 @@ const ProductCard = ({ product }) => {
             style={{
               width: 16,
               height: 16,
-              borderRadius: "50%",
-              border: "1px solid #ccc",
-              margin: "2px",
-              display: "inline-block",
-              background: `linear-gradient(to right, ${colors[0]} 50%, ${colors[1]} 50%)`
+              borderRadius: '50%',
+              border: '1px solid #ccc',
+              margin: '2px',
+              display: 'inline-block',
+              background: `linear-gradient(to right, ${colors[0]} 50%, ${colors[1]} 50%)`,
             }}
           />
         );
@@ -106,7 +108,7 @@ const ProductCard = ({ product }) => {
   };
 
   const getDetailPath = () =>
-    product.collection === "merchProducts"
+    product.collection === 'merchProducts'
       ? `/merch/${product.id}`
       : `/products/${product.id}`;
 
@@ -114,7 +116,15 @@ const ProductCard = ({ product }) => {
     <div className="product-card">
       <div
         className="product-image-container"
-        onClick={() => navigate(getDetailPath())}
+        onClick={() => {
+          if (analytics) {
+            logEvent(analytics, 'click_merch_product', {
+              productId: product.id,
+              productName: product.title || product.name,
+            });
+          }
+          navigate(getDetailPath());
+        }}
         role="button"
         tabIndex={0}
         aria-label={`View details of ${product.title || product.name}`}
@@ -130,19 +140,29 @@ const ProductCard = ({ product }) => {
 
       <div className="product-info">
         <h2 className="product-name">{product.title || product.name}</h2>
-        <p className="product-card-description">{stripHtml(product.description)}</p>
+        <p className="product-card-description">
+          {stripHtml(product.description)}
+        </p>
 
         <div className="color-swatches">{renderColorDots()}</div>
 
         <div className="product-card-bottom">
           <p className="card-product-price">
-            {price ? `$${price.toFixed(2)}` : "Price Unavailable"}
+            {price ? `$${price.toFixed(2)}` : 'Price Unavailable'}
           </p>
           <p className="delivery-time">Delivery: {delivery}</p>
 
           <button
-            className="add-to-cart-button" 
-            onClick={() => navigate(getDetailPath())}
+            className="add-to-cart-button"
+            onClick={() => {
+              if (analytics) {
+                logEvent(analytics, 'click_merch_product', {
+                  productId: product.id,
+                  productName: product.title || product.name,
+                });
+              }
+              navigate(getDetailPath());
+            }}
           >
             Choose Yours
           </button>

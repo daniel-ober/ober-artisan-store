@@ -16,25 +16,18 @@ export const AuthProvider = ({ children }) => {
     setLoading(true);
     try {
       const userData = await fetchUserDoc(currentUser.uid);
-
       const adminStatus = userData?.isAdmin || false;
       setIsAdmin(adminStatus);
 
-      // ✅ Set Firebase Analytics user_type (admin/test/real)
       if (adminStatus) {
         setAnalyticsUserProperties('admin');
-      } else if (
-        currentUser.email?.includes('test') || // customize for test account logic
-        userData?.isTestUser
-      ) {
-        setAnalyticsUserProperties('test');
       } else {
-        setAnalyticsUserProperties('real');
+        setAnalyticsUserProperties('guest');
       }
     } catch (error) {
       console.error('❌ Error fetching user data:', error);
       setIsAdmin(false);
-      setAnalyticsUserProperties('unknown');
+      setAnalyticsUserProperties('guest'); // fallback to guest
     } finally {
       setLoading(false);
     }
@@ -48,8 +41,8 @@ export const AuthProvider = ({ children }) => {
       } else {
         setUser(null);
         setIsAdmin(false);
+        setAnalyticsUserProperties('guest'); // ✅ set guests on init
         setLoading(false);
-        setAnalyticsUserProperties('logged_out');
       }
     });
 
@@ -61,7 +54,7 @@ export const AuthProvider = ({ children }) => {
       await signOut(auth);
       setUser(null);
       setIsAdmin(false);
-      setAnalyticsUserProperties('logged_out');
+      setAnalyticsUserProperties('guest'); // revert to guest on logout
     } catch (error) {
       console.error('❌ Error logging out:', error.message);
     }

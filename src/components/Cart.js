@@ -25,8 +25,15 @@ const Cart = () => {
   const [unavailableProducts, setUnavailableProducts] = useState([]);
   const [showInventoryModal, setShowInventoryModal] = useState(false);
   const [showCheckoutModal, setShowCheckoutModal] = useState(false);
-
   const [productDataMap, setProductDataMap] = useState({});
+
+  useEffect(() => {
+    const wasRedirected = sessionStorage.getItem('checkoutStarted');
+    if (wasRedirected) {
+      sessionStorage.removeItem('checkoutStarted');
+      setShowCheckoutModal(false);
+    }
+  }, []);
 
   useEffect(() => {
     const checkInventory = async () => {
@@ -218,6 +225,7 @@ const Cart = () => {
       const data = await response.json();
 
       if (data?.url) {
+        sessionStorage.setItem('checkoutStarted', 'true');
         window.location.href = data.url;
       } else {
         throw new Error('No redirect URL returned');
