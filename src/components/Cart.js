@@ -28,8 +28,17 @@ const Cart = () => {
   const [productDataMap, setProductDataMap] = useState({});
 
   useEffect(() => {
+    window.addEventListener('pageshow', (event) => {
+      if (event.persisted) {
+        window.location.reload(); // Force full reload on back navigation
+      }
+    });
+  }, []);
+
+  useEffect(() => {
     const wasRedirected = sessionStorage.getItem('checkoutStarted');
     if (wasRedirected) {
+      console.log('🔁 Back from Stripe: clearing checkout modal flag');
       sessionStorage.removeItem('checkoutStarted');
       setShowCheckoutModal(false);
     }
@@ -226,6 +235,7 @@ const Cart = () => {
 
       if (data?.url) {
         sessionStorage.setItem('checkoutStarted', 'true');
+        setShowCheckoutModal(false); // proactively turn off before navigation
         window.location.href = data.url;
       } else {
         throw new Error('No redirect URL returned');
@@ -501,7 +511,7 @@ const Cart = () => {
         </div>
       )}
 
-      <CheckoutModal visible={showCheckoutModal} />
+      {showCheckoutModal && <CheckoutModal visible={true} />}
     </div>
   );
 };
