@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import {
+  collection,
+  onSnapshot,
+  query,
+} from 'firebase/firestore';
+import {
   FaUsers,
   FaDrum,
   FaShoppingCart,
@@ -11,7 +16,7 @@ import {
   FaStar,
   FaRegChartBar,
   FaFlask,
-} from 'react-icons/fa'; // Added FaPrint for Printify Manager
+} from 'react-icons/fa';
 import ManageProducts from './ManageProducts';
 import ManageUsers from './ManageUsers';
 import ManageOrders from './ManageOrders';
@@ -23,8 +28,6 @@ import ManageProjects from './ManageProjects';
 import ManageElixirBatches from './ManageElixirBatches';
 import ManageSoundlegendRequests from './ManageSoundlegendRequests';
 import AdminOverview from './AdminOverview';
-// import PrintifyManager from './PrintifyManager';
-import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import './AdminDashboard.css';
 
@@ -35,169 +38,65 @@ const AdminDashboard = () => {
   const [tertiaryNotifications, setTertiaryNotifications] = useState({});
 
   useEffect(() => {
-    const fetchNotifications = async () => {
-      try {
-        const [
-          productsOutOfStock,
-          newOrders,
-          inProgressOrders,
-          newInquiries,
-          inProgressInquiries,
-          newSoundlegend,
-          inProgressSoundlegend,
-          completedInquiries,
-          completedSoundlegend,
-        ] = await Promise.all([
-          getOutOfStockProductsCount(),
-          getNewOrdersCount(),
-          getInProgressOrdersCount(),
-          getNewInquiriesCount(),
-          getInProgressInquiriesCount(),
-          getNewSoundlegendRequestsCount(),
-          getInProgressSoundlegendCount(),
-          getCompletedInquiriesCount(),
-          getCompletedSoundlegendCount(),
-        ]);
+    const unsubOrders = onSnapshot(query(collection(db, 'orders')), (snapshot) => {
+      const counts = { new: 0, inProgress: 0, completed: 0 };
+      snapshot.forEach((doc) => {
+        const status = doc.data().overviewStatus;
+        if (status === 'new') counts.new++;
+        else if (status === 'inProgress') counts.inProgress++;
+        else if (status === 'completed') counts.completed++;
+      });
+      setNotifications((prev) => ({ ...prev, manageOrders: counts.new }));
+      setSecondaryNotifications((prev) => ({ ...prev, manageOrders: counts.inProgress }));
+      setTertiaryNotifications((prev) => ({ ...prev, manageOrders: counts.completed }));
+    });
 
-        setNotifications({
-          manageProducts: productsOutOfStock,
-          manageOrders: newOrders,
-          manageInquiries: newInquiries,
-          manageSoundlegendRequests: newSoundlegend,
-        });
+    const unsubInquiries = onSnapshot(query(collection(db, 'inquiries')), (snapshot) => {
+      const counts = { new: 0, inProgress: 0, completed: 0 };
+      snapshot.forEach((doc) => {
+        const status = doc.data().overviewStatus;
+        if (status === 'new') counts.new++;
+        else if (status === 'inProgress') counts.inProgress++;
+        else if (status === 'completed') counts.completed++;
+      });
+      setNotifications((prev) => ({ ...prev, manageInquiries: counts.new }));
+      setSecondaryNotifications((prev) => ({ ...prev, manageInquiries: counts.inProgress }));
+      setTertiaryNotifications((prev) => ({ ...prev, manageInquiries: counts.completed }));
+    });
 
-        setSecondaryNotifications({
-          manageOrders: inProgressOrders,
-          manageInquiries: inProgressInquiries,
-          manageSoundlegendRequests: inProgressSoundlegend,
-        });
+    const unsubSoundlegend = onSnapshot(query(collection(db, 'soundlegend_submissions')), (snapshot) => {
+      const counts = { new: 0, inProgress: 0, completed: 0 };
+      snapshot.forEach((doc) => {
+        const status = doc.data().overviewStatus;
+        if (status === 'new') counts.new++;
+        else if (status === 'inProgress') counts.inProgress++;
+        else if (status === 'completed') counts.completed++;
+      });
+      setNotifications((prev) => ({ ...prev, manageSoundlegendRequests: counts.new }));
+      setSecondaryNotifications((prev) => ({ ...prev, manageSoundlegendRequests: counts.inProgress }));
+      setTertiaryNotifications((prev) => ({ ...prev, manageSoundlegendRequests: counts.completed }));
+    });
 
-        setTertiaryNotifications({
-          manageInquiries: completedInquiries,
-          manageSoundlegendRequests: completedSoundlegend,
-        });
-      } catch (error) {
-        console.error('❌ Error fetching notifications:', error.message);
-      }
+    return () => {
+      unsubOrders();
+      unsubInquiries();
+      unsubSoundlegend();
     };
-
-    fetchNotifications();
   }, []);
-
-  const getOutOfStockProductsCount = async () => {
-    try {
-      const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/api/products`
-      );
-      const data = await response.json();
-      return data.products.filter((p) => p.currentQuantity === 0).length;
-    } catch (error) {
-      return 0;
-    }
-  };
-
-  const getNewOrdersCount = async () => {
-    const snapshot = await getDocs(collection(db, 'orders'));
-    return snapshot.docs.filter((doc) =>
-      (doc.data().items || []).some(
-        (item) => item.status === 'Order Successful'
-      )
-    ).length;
-  };
-
-  const getInProgressOrdersCount = async () => {
-    const snapshot = await getDocs(collection(db, 'orders'));
-    return snapshot.docs.filter((doc) => {
-      const statuses = (doc.data().items || []).map((item) => item.status);
-      return statuses.some((status) =>
-        [
-          'Preparing',
-          'Packaged',
-          'Ready for Shipment',
-          'Back Ordered',
-        ].includes(status)
-      );
-    }).length;
-  };
-
-  const getNewInquiriesCount = async () => {
-    const snapshot = await getDocs(collection(db, 'inquiries'));
-    return snapshot.docs.filter(
-      (doc) => doc.data().status?.trim().toLowerCase() === 'new'
-    ).length;
-  };
-
-  const getInProgressInquiriesCount = async () => {
-    const snapshot = await getDocs(collection(db, 'inquiries'));
-    return snapshot.docs.filter((doc) => {
-      const status = doc.data().status?.trim().toLowerCase();
-      return ['support - in progress', 'sales - prospecting'].includes(status);
-    }).length;
-  };
-
-  const getCompletedInquiriesCount = async () => {
-    const snapshot = await getDocs(collection(db, 'inquiries'));
-    return snapshot.docs.filter((doc) => {
-      const status = doc.data().status?.trim().toLowerCase();
-      return [
-        'support - closed',
-        'sales - closed won',
-        'sales - closed lost',
-      ].includes(status);
-    }).length;
-  };
-
-  const getNewSoundlegendRequestsCount = async () => {
-    const snapshot = await getDocs(collection(db, 'soundlegend_submissions'));
-    return snapshot.docs.filter((doc) => doc.data().status === 'New').length;
-  };
-
-  const getInProgressSoundlegendCount = async () => {
-    const snapshot = await getDocs(collection(db, 'soundlegend_submissions'));
-    return snapshot.docs.filter((doc) =>
-      ['Prospecting', 'Consulting', 'Design', 'Building'].includes(
-        doc.data().status
-      )
-    ).length;
-  };
-
-  const getCompletedSoundlegendCount = async () => {
-    const snapshot = await getDocs(collection(db, 'soundlegend_submissions'));
-    return snapshot.docs.filter((doc) =>
-      [
-        'Closed - Won',
-        'Closed - Lost',
-        'Closed - No Response',
-        'Closed - Incomplete Form',
-      ].includes(doc.data().status)
-    ).length;
-  };
 
   const renderActiveComponent = () => {
     switch (activeComponent) {
-      case 'manageOrders':
-        return <ManageOrders />;
-      case 'manageInquiries':
-        return <ManageInquiries />;
-      case 'manageProducts':
-        return <ManageProducts />;
-      case 'manageProjects':
-        return <ManageProjects />;
-      case 'manageUsers':
-        return <ManageUsers />;
-      case 'manageCarts':
-        return <ManageCarts />;
-      case 'manageGallery':
-        return <ManageGallery />;
-      case 'manageElixirBatches':
-        return <ManageElixirBatches />;
-      case 'siteSettings':
-        return <SiteSettings />;
-      case 'manageSoundlegendRequests':
-        return <ManageSoundlegendRequests />;
-      // case 'managePrintifyProducts': return <PrintifyManager />; // <-- NEW
-      default:
-        return <AdminOverview />;
+      case 'manageOrders': return <ManageOrders />;
+      case 'manageInquiries': return <ManageInquiries />;
+      case 'manageProducts': return <ManageProducts />;
+      case 'manageProjects': return <ManageProjects />;
+      case 'manageUsers': return <ManageUsers />;
+      case 'manageCarts': return <ManageCarts />;
+      case 'manageGallery': return <ManageGallery />;
+      case 'manageElixirBatches': return <ManageElixirBatches />;
+      case 'siteSettings': return <SiteSettings />;
+      case 'manageSoundlegendRequests': return <ManageSoundlegendRequests />;
+      default: return <AdminOverview />;
     }
   };
 
@@ -208,35 +107,14 @@ const AdminDashboard = () => {
         {[
           { name: 'Overview', icon: FaRegChartBar, stateKey: 'overview' },
           { name: 'Manage Orders', icon: FaBox, stateKey: 'manageOrders' },
-          {
-            name: 'SL Submissions',
-            icon: FaStar,
-            stateKey: 'manageSoundlegendRequests',
-          },
-          {
-            name: 'Support Inquiries',
-            icon: FaEnvelope,
-            stateKey: 'manageInquiries',
-          },
-          {
-            name: 'Manage Projects',
-            icon: FaHammer,
-            stateKey: 'manageProjects',
-          },
+          { name: 'SL Submissions', icon: FaStar, stateKey: 'manageSoundlegendRequests' },
+          { name: 'Support Inquiries', icon: FaEnvelope, stateKey: 'manageInquiries' },
+          { name: 'Manage Projects', icon: FaHammer, stateKey: 'manageProjects' },
           { name: 'Manage Products', icon: FaDrum, stateKey: 'manageProducts' },
           { name: 'Manage Users', icon: FaUsers, stateKey: 'manageUsers' },
-          {
-            name: 'Manage Carts',
-            icon: FaShoppingCart,
-            stateKey: 'manageCarts',
-          },
+          { name: 'Manage Carts', icon: FaShoppingCart, stateKey: 'manageCarts' },
           { name: 'Manage Gallery', icon: FaImages, stateKey: 'manageGallery' },
-          {
-            name: 'Elixir Batches',
-            icon: FaFlask,
-            stateKey: 'manageElixirBatches',
-          },
-
+          { name: 'Elixir Batches', icon: FaFlask, stateKey: 'manageElixirBatches' },
           { name: 'Site Settings', icon: FaCog, stateKey: 'siteSettings' },
         ].map(({ name, icon: Icon, stateKey }) => (
           <div

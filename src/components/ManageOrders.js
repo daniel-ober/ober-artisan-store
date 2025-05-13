@@ -35,6 +35,7 @@ const ManageOrders = () => {
         const data = doc.data();
         return {
           id: doc.id,
+          overviewStatus: data.overviewStatus || 'new',
           orderDate: data.createdAt?.toDate().toLocaleString() || "No date available",
           customerName: data.customerName || "No name available",
           total: typeof data.totalAmount === "number" ? data.totalAmount.toFixed(2) : "N/A",
@@ -51,9 +52,7 @@ const ManageOrders = () => {
 
   const applyFilters = (ordersList) => {
     const filtered = ordersList.filter((order) => {
-      if (hideFulfilled && ["Order Completed", "Canceled"].includes(order.status)) {
-        return false;
-      }
+      if (hideFulfilled && order.overviewStatus === 'completed') return false;
       return true;
     });
     setFilteredOrders(filtered);
