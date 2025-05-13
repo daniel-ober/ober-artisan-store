@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { analytics, logEvent } from '../firebaseConfig';
 import './HomeCarousel.css';
 
 const slides = [
@@ -91,10 +92,29 @@ const HomeCarousel = () => {
         style={{ backgroundImage: `url(${background})` }}
       >
         <div className="carousel-overlay">
-          <h1 className={`carousel-text ${animating ? 'fade-out delay-1' : 'fade-in delay-1'}`}>{title}</h1>
-          <p className={`carousel-text ${animating ? 'fade-out delay-2' : 'fade-in delay-2'}`}>{subtitle}</p>
-          <Link to={link}>
-            <button className={`carousel-text ${animating ? 'fade-out delay-3' : 'fade-in delay-3'}`}>{buttonText}</button>
+          <h1
+            className={`carousel-text ${animating ? 'fade-out delay-1' : 'fade-in delay-1'}`}
+          >
+            {title}
+          </h1>
+          <p
+            className={`carousel-text ${animating ? 'fade-out delay-2' : 'fade-in delay-2'}`}
+          >
+            {subtitle}
+          </p>
+          <Link
+            to={link}
+            onClick={() => {
+              if (analytics) {
+                logEvent(analytics, 'click_carousel_slide', { slide: title });
+              }
+            }}
+          >
+            <button
+              className={`carousel-text ${animating ? 'fade-out delay-3' : 'fade-in delay-3'}`}
+            >
+              {buttonText}
+            </button>
           </Link>
         </div>
 
@@ -111,15 +131,25 @@ const HomeCarousel = () => {
 
         {/* Navigation + pause below */}
         <div className="carousel-nav">
-          <button className="carousel-control-button" onClick={goToPrevSlide}>‹</button>
-          <button className="carousel-control-button" onClick={togglePaused}>{isPaused ? '▶' : '❚❚'}</button>
-          <button className="carousel-control-button" onClick={goToNextSlide}>›</button>
+          <button className="carousel-control-button" onClick={goToPrevSlide}>
+            ‹
+          </button>
+          <button className="carousel-control-button" onClick={togglePaused}>
+            {isPaused ? '▶' : '❚❚'}
+          </button>
+          <button className="carousel-control-button" onClick={goToNextSlide}>
+            ›
+          </button>
         </div>
-
 
         <div style={{ display: 'none' }}>
           {slides.map((slide) => (
-            <img key={slide.background} src={slide.background} alt="" loading="eager" />
+            <img
+              key={slide.background}
+              src={slide.background}
+              alt=""
+              loading="eager"
+            />
           ))}
         </div>
       </div>

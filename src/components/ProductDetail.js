@@ -5,6 +5,7 @@ import { useCart } from '../context/CartContext';
 import HeritageProductDetail from './HeritageProductDetail';
 import FeuzonProductDetail from './FeuzonProductDetail';
 import SoundlegendProductDetail from './SoundlegendProductDetail';
+import { analytics, logEvent } from '../firebaseConfig';
 import './ProductDetail.css';
 
 const FALLBACK_IMAGE = '/fallback-images/fallback_image1.png';
@@ -278,6 +279,16 @@ const ProductDetail = () => {
       ...selectedOptions,
     };
 
+    if (analytics) {
+      logEvent(analytics, 'add_to_cart', {
+        productId: product.id,
+        productName: product.title || product.name,
+        variantId: selectedVariant?.id || null,
+        price: selectedVariant?.price || 0,
+        category: 'merch',
+      });
+    }
+    
     addToCart(cartItem, cartMetadata);
 
     // 🔧 Manually set cart state immediately for UI sync
