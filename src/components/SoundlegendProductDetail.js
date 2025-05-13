@@ -117,19 +117,7 @@ const SoundLegendProductDetail = () => {
       <div className="soundlegend-product-content">
         {/* 📌 Left Side: Product Image */}
 
-        <div
-          className="soundlegend-product-image"
-          role="button"
-          tabIndex="0"
-          onClick={() =>
-            window.open('https://www.youtube.com/watch?v=PW28PjMCpxg', '_blank')
-          }
-          onKeyDown={(e) =>
-            e.key === 'Enter' &&
-            window.open('https://www.youtube.com/watch?v=PW28PjMCpxg', '_blank')
-          }
-          style={{ cursor: 'pointer' }}
-        >
+        <div className="soundlegend-product-image">
           <img
             src="https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/artisan%2Fsoundlegend%2FIMG_1803.jpeg?alt=media&token=0dd78f95-2101-44e7-b95f-2b7cbe3c01a1"
             alt="SOUNDLEGEND Experience"
@@ -183,7 +171,7 @@ const SoundLegendProductDetail = () => {
             </ul>
           </div>
 
-          <h2>Customer Information</h2>
+          <div className="customer-header">Customer Information</div>
           <form onSubmit={handleSubmit}>
             {/* First Name */}
             <label htmlFor="firstName">First Name</label>
