@@ -77,17 +77,21 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
+  
     try {
       const inquiryId = nanoid();
       await addInquiry({
         id: inquiryId,
         ...formData,
-        origin: 'web-contact', // Add the origin field
-        status: 'New', // Ensure the status is explicitly added
+        origin: 'web-contact',
+        status: 'New',
         createdAt: new Date(),
       });
-      setOpen(true); // Open success dialog
+  
+      // Add delay to simulate sending feedback
+      await new Promise((resolve) => setTimeout(resolve, 700));
+  
+      setOpen(true);
       setFormData({
         first_name: '',
         last_name: '',
