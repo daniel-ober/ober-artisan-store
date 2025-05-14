@@ -4,10 +4,10 @@ import {
   doc,
   updateDoc,
   collection,
-  getDocs,
   query,
   orderBy,
   limit,
+  onSnapshot,
 } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import ViewOrderModal from './ViewOrderModal';
@@ -20,78 +20,77 @@ const AdminOverview = () => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [modalType, setModalType] = useState(null);
 
+  const updateColumnState = (type, items) => {
+    const newItems = items.filter(i => (i.overviewStatus || 'new') === 'new');
+    const inProgressItems = items.filter(i => i.overviewStatus === 'inProgress');
+    const completedItems = items.filter(i => i.overviewStatus === 'completed');
+
+    setData(prev => ({
+      new: [
+        ...prev.new.filter(i => i.type !== type),
+        ...newItems,
+      ],
+      inProgress: [
+        ...prev.inProgress.filter(i => i.type !== type),
+        ...inProgressItems,
+      ],
+      completed: [
+        ...prev.completed.filter(i => i.type !== type),
+        ...completedItems,
+      ],
+    }));
+  };
+
   useEffect(() => {
-    const fetchOverview = async () => {
-      const [orders, inquiries, submissions] = await Promise.all([
-        getDocs(query(collection(db, 'orders'), orderBy('createdAt', 'desc'), limit(15))),
-        getDocs(query(collection(db, 'inquiries'), orderBy('createdAt', 'desc'), limit(15))),
-        getDocs(query(collection(db, 'soundlegend_submissions'), orderBy('submittedAt', 'desc'), limit(15))),
-      ]);
+    const unsubOrders = onSnapshot(
+      query(collection(db, 'orders'), orderBy('createdAt', 'desc'), limit(15)),
+      (snapshot) => {
+        const orders = snapshot.docs.map(doc => ({
+          id: doc.id,
+          type: 'order',
+          overviewStatus: doc.data().overviewStatus || null,
+          ...doc.data(),
+        }));
+        updateColumnState('order', orders);
+      }
+    );
 
-      const newItems = [];
-      const inProgressItems = [];
-      const completedItems = [];
+    const unsubInquiries = onSnapshot(
+      query(collection(db, 'inquiries'), orderBy('createdAt', 'desc'), limit(15)),
+      (snapshot) => {
+        const inquiries = snapshot.docs.map(doc => {
+          const data = doc.data();
+          return {
+            id: doc.id,
+            type: 'inquiry',
+            customerName: `${data.first_name || ''} ${data.last_name || ''}`.trim(),
+            email: data.email || '',
+            status: data.status || '',
+            overviewStatus: data.overviewStatus,
+          };
+        });
+        updateColumnState('inquiry', inquiries);
+      }
+    );
 
-      orders.forEach((doc) => {
-        const order = doc.data();
-        const id = doc.id;
-        const overviewStatus = order.overviewStatus || null;
-        const item = { id, type: 'order', overviewStatus, ...order };
+    const unsubSubmissions = onSnapshot(
+      query(collection(db, 'soundlegend_submissions'), orderBy('submittedAt', 'desc'), limit(15)),
+      (snapshot) => {
+        const submissions = snapshot.docs.map(doc => ({
+          id: doc.id,
+          type: 'submission',
+          overviewStatus: doc.data().overviewStatus || null,
+          ...doc.data(),
+        }));
+        updateColumnState('submission', submissions);
+      }
+    );
 
-        if (overviewStatus === 'inProgress') {
-          inProgressItems.push(item);
-        } else if (overviewStatus === 'completed') {
-          completedItems.push(item);
-        } else {
-          newItems.push(item);
-        }
-      });
-
-      inquiries.forEach((docSnap) => {
-        const inquiry = docSnap.data();
-        const firestoreId = docSnap.id;
-        const overviewStatus = inquiry.overviewStatus;
-        const item = {
-          id: firestoreId,
-          type: 'inquiry',
-          customerName: `${inquiry.first_name || ''} ${inquiry.last_name || ''}`.trim(),
-          email: inquiry.email || '',
-          status: inquiry.status || '',
-          overviewStatus,
-        };
-
-        if (overviewStatus === 'inProgress') {
-          inProgressItems.push(item);
-        } else if (overviewStatus === 'completed') {
-          completedItems.push(item);
-        } else {
-          newItems.push(item);
-        }
-      });
-
-      submissions.forEach((doc) => {
-        const submission = doc.data();
-        const id = doc.id;
-        const overviewStatus = submission.overviewStatus || null;
-        const item = { id, type: 'submission', overviewStatus, ...submission };
-
-        if (overviewStatus === 'inProgress') {
-          inProgressItems.push(item);
-        } else if (overviewStatus === 'completed') {
-          completedItems.push(item);
-        } else {
-          newItems.push(item);
-        }
-      });
-
-      setData({
-        new: newItems,
-        inProgress: inProgressItems,
-        completed: completedItems,
-      });
+    return () => {
+      unsubOrders();
+      unsubInquiries();
+      unsubSubmissions();
     };
-
-    fetchOverview();
   }, []);
 
   const handleItemClick = async (item) => {
@@ -152,7 +151,6 @@ const AdminOverview = () => {
     try {
       const updateFields = { overviewStatus: targetStatus };
 
-      // 🔧 If it's a SoundLegend submission, also update `status`
       if (type === 'submission') {
         if (targetStatus === 'inProgress') {
           updateFields.status = 'Prospecting';
@@ -164,20 +162,6 @@ const AdminOverview = () => {
       }
 
       await updateDoc(ref, updateFields);
-
-      setData((prev) => {
-        const updated = { ...prev };
-        const index = updated[sourceStatus].findIndex((i) => i.id === id && i.type === type);
-        if (index > -1) {
-          const [movedItem] = updated[sourceStatus].splice(index, 1);
-          movedItem.overviewStatus = targetStatus;
-          if (type === 'submission') {
-            movedItem.status = updateFields.status;
-          }
-          updated[targetStatus].unshift(movedItem);
-        }
-        return updated;
-      });
     } catch (err) {
       console.error('❌ Error updating overview status:', err.message);
     }

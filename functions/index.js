@@ -7,6 +7,11 @@ const express = require('express');
 const stripeLib = require('stripe');
 const axios = require('axios');
 const crypto = require('crypto');
+const functions = require('firebase-functions/v2');
+const { onDocumentCreated } = require('firebase-functions/v2/firestore');
+const sgMail = require('@sendgrid/mail');
+
+const SENDGRID_API_KEY = defineSecret('SENDGRID_API_KEY');
 
 const STRIPE_SECRET_KEY = defineSecret('STRIPE_SECRET_KEY');
 const STRIPE_WEBHOOK_SECRET = defineSecret('STRIPE_WEBHOOK_SECRET');
@@ -528,6 +533,149 @@ exports.refreshPrintifyStock = onSchedule(
 //     res.status(500).json({ error: 'Failed to import Printify product' });
 //   }
 // });
+
+exports.autoReplyInquiry = onDocumentCreated(
+  {
+    document: 'inquiries/{docId}',
+    secrets: [SENDGRID_API_KEY],
+  },
+  async (event) => {
+    const sgMail = require('@sendgrid/mail');
+    sgMail.setApiKey(SENDGRID_API_KEY.value());
+
+    const data = event.data.data();
+    const { email, firstName } = data;
+
+    console.log('📬 New inquiry received:', data);
+
+    const msg = {
+      to: email,
+      from: {
+        name: 'Ober Artisan Drums',
+        email: 'support@oberartisandrums.com',
+      },
+      replyTo: 'support@oberartisandrums.com',
+      bcc: ['support@oberartisandrums.com'],
+      subject: `We've Received Your Message`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee; border-radius: 8px;">
+          <div style="text-align: center; margin-bottom: 20px;">
+            <img src="https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/SendGridEmail%2Fblack_logo.png?alt=media&token=850410a6-4373-4194-803e-808c49cbc626" alt="Ober Artisan Drums" style="width: 180px; margin-bottom: 10px;" />
+          </div>
+
+          <p style="font-size: 16px; color: #444;">Hi ${firstName || 'there'},</p>
+
+          <p style="font-size: 16px; color: #444;">
+            Thanks for reaching out. Your message has been received, and we're looking forward to connecting with you.
+          </p>
+
+          <p style="font-size: 16px; color: #444;">
+            At Ober Artisan Drums, every note and detail matters. Whether you're exploring a new build, asking a question, or simply saying hello, we treat it with the same level of care we bring to our instruments.
+          </p>
+
+          <p style="font-size: 16px; color: #444;">
+            We typically respond within 24–48 hours. In the meantime, feel free to browse the shop or explore the stories behind our drums.
+          </p>
+
+          <p style="text-align: center; margin: 30px 0;">
+            <a href="https://oberartisandrums.com" style="display: inline-block; padding: 12px 20px; background-color: #111; color: white; text-decoration: none; border-radius: 5px;">Visit Our Site</a>
+          </p>
+
+          <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ccc; text-align: center;">
+            <p style="font-size: 14px; color: #888;">
+              In craft,<br/>
+              – The Ober Artisan Team<br/>
+              <a href="https://oberartisandrums.com" style="color: #888; text-decoration: none;">www.oberartisandrums.com</a><br/>
+              <span style="font-size: 12px; color: #aaa;">Handcrafted in Nashville, TN</span>
+            </p>
+          </div>
+        </div>
+      `,
+    };
+
+    try {
+      const response = await sgMail.send(msg);
+      console.log('✅ Auto-reply sent:', response);
+    } catch (error) {
+      console.error('❌ Error sending auto-reply:', error);
+    }
+  }
+);
+
+exports.autoReplySoundlegend = onDocumentCreated(
+  {
+    document: 'soundlegend_submissions/{docId}',
+    secrets: [SENDGRID_API_KEY],
+  },
+  async (event) => {
+    const sgMail = require('@sendgrid/mail');
+    sgMail.setApiKey(SENDGRID_API_KEY.value());
+
+    const data = event.data.data();
+    const { email, firstName } = data;
+
+    console.log('📬 New SoundLegend submission received:', data);
+
+    const msg = {
+      to: email,
+      from: {
+        name: 'Ober Artisan Drums',
+        email: 'soundlegend@oberartisandrums.com',
+      },
+      bcc: ['soundlegend@oberartisandrums.com'],
+      subject: `Welcome to the SoundLegend Experience`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 650px; margin: auto; padding: 24px; border: 1px solid #eee; border-radius: 8px;">
+          <div style="text-align: center;">
+            <img 
+              src="https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/SendGridEmail%2Fsoundlegend-email.png?alt=media&token=2929bea0-5d78-4143-ab61-c4d543671a33" 
+              alt="SoundLegend Experience" 
+              style="max-width: 500px; width: 100%; height: auto; margin-bottom: 20px;" 
+            />
+          </div>
+
+          <p style="font-size: 16px; color: #333;">Hi ${firstName || 'there'},</p>
+
+          <p style="font-size: 16px; color: #444;">
+            You're in. We've received your SoundLegend submission — and we’re excited to hear your story.
+          </p>
+
+          <p style="font-size: 16px; color: #444;">
+            This next chapter isn’t just about building a snare. It’s about honoring your legacy through sound — captured in wood, crafted by hand, and designed to last a lifetime.
+          </p>
+
+          <p style="font-size: 16px; color: #444;">
+            We typically follow up within 24–48 hours to learn more about your vision. In the meantime, here’s a short video to get us both amped up about what’s ahead:
+          </p>
+
+          <div style="text-align: center; margin: 30px 0;">
+            <a 
+              href="https://www.youtube.com/watch?v=PW28PjMCpxg" 
+              target="_blank" 
+              style="display: inline-block; padding: 12px 20px; background-color: #111; color: #fff; text-decoration: none; border-radius: 5px;"
+            >Watch the Teaser</a>
+          </div>
+
+          <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ccc; text-align: center;">
+            <p style="font-size: 14px; color: #888;">
+              In craft and legacy,<br/>
+              – The Ober Artisan Team<br/>
+              <a href="https://oberartisandrums.com" style="color: #888; text-decoration: none;">www.oberartisandrums.com</a><br/>
+              <span style="font-size: 12px; color: #aaa;">Handcrafted in Nashville, TN</span>
+            </p>
+          </div>
+        </div>
+      `,
+    };
+
+    try {
+      const response = await sgMail.send(msg);
+      console.log('✅ Auto-reply sent (SoundLegend):', response);
+    } catch (error) {
+      console.error('❌ Error sending SoundLegend auto-reply:', error);
+    }
+  }
+);
 
 exports.api = onRequest(
   {
