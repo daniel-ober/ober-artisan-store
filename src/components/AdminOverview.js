@@ -76,12 +76,16 @@ const AdminOverview = () => {
     const unsubSubmissions = onSnapshot(
       query(collection(db, 'soundlegend_submissions'), orderBy('submittedAt', 'desc'), limit(15)),
       (snapshot) => {
-        const submissions = snapshot.docs.map(doc => ({
-          id: doc.id,
-          type: 'submission',
-          overviewStatus: doc.data().overviewStatus || null,
-          ...doc.data(),
-        }));
+        const submissions = snapshot.docs.map(doc => {
+          const data = doc.data();
+          return {
+            id: doc.id,
+            type: 'submission',
+            overviewStatus: data.overviewStatus || null,
+            customerName: `${data.firstName || ''} ${data.lastName || ''}`.trim(),
+            ...data,
+          };
+        });
         updateColumnState('submission', submissions);
       }
     );
