@@ -4,10 +4,11 @@
     "serve": "firebase emulators:start --only functions",
     "predeploy": "echo 'Skipping ESLint check...'",
     "deploy": "firebase deploy --only functions",
-        "lint": "echo 'Skipping ESLint check...'"
+    "lint": "echo 'Skipping ESLint check...'"
   },
   "dependencies": {
     "@babel/eslint-parser": "^7.26.10",
+    "@sendgrid/mail": "^8.1.5",
     "axios": "^1.8.2",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",

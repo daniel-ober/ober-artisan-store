@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { doc, updateDoc, getDoc, arrayUnion } from 'firebase/firestore';
+import React, { useState } from 'react';
+import { doc, updateDoc, arrayUnion } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import './ViewSoundlegendModal.css';
 
@@ -10,7 +10,15 @@ const statusOptions = [
   'Closed - Lost',
   'Closed - Incomplete Form',
   'Closed - No Response',
+  'Closed - Duplicate/Spam',
 ];
+
+const getOverviewStatus = (status) => {
+  const s = status.toLowerCase();
+  if (s === 'prospecting') return 'inProgress';
+  if (s.startsWith('closed')) return 'completed';
+  return 'new';
+};
 
 const ViewSoundlegendModal = ({ submission, onClose, onStatusUpdate }) => {
   const [selectedStatus, setSelectedStatus] = useState(submission.status || '');
@@ -29,21 +37,31 @@ const ViewSoundlegendModal = ({ submission, onClose, onStatusUpdate }) => {
     inspiration,
     submittedAt
   } = submission;
-
+ 
   const handleStatusUpdate = async (newStatus) => {
     setSelectedStatus(newStatus);
     try {
       const submissionRef = doc(db, 'soundlegend_submissions', id);
       const timestamp = new Date().toISOString();
       const historyEntry = { type: 'status', value: newStatus, timestamp };
-
+  
+      // Normalize status into overviewStatus
+      let overviewStatus = 'new';
+      const lower = newStatus.toLowerCase();
+      if (lower === 'prospecting') {
+        overviewStatus = 'inProgress';
+      } else if (lower.startsWith('closed')) {
+        overviewStatus = 'completed';
+      }
+  
       await updateDoc(submissionRef, {
         status: newStatus,
+        overviewStatus,
         history: arrayUnion(historyEntry),
       });
-
+  
       setHistory((prev) => [...prev, historyEntry]);
-
+  
       if (onStatusUpdate) {
         onStatusUpdate(id, newStatus);
       }
