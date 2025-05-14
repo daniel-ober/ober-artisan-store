@@ -67,10 +67,12 @@ const AdminDashboard = () => {
     const unsubSoundlegend = onSnapshot(query(collection(db, 'soundlegend_submissions')), (snapshot) => {
       const counts = { new: 0, inProgress: 0, completed: 0 };
       snapshot.forEach((doc) => {
-        const status = doc.data().overviewStatus;
+        const raw = doc.data().status || doc.data().overviewStatus || '';
+        const status = raw.toLowerCase();
+    
         if (status === 'new') counts.new++;
-        else if (status === 'inProgress') counts.inProgress++;
-        else if (status === 'completed') counts.completed++;
+        else if (status === 'prospecting' || status === 'inprogress') counts.inProgress++;
+        else if (status.includes('closed') || status === 'completed') counts.completed++;
       });
       setNotifications((prev) => ({ ...prev, manageSoundlegendRequests: counts.new }));
       setSecondaryNotifications((prev) => ({ ...prev, manageSoundlegendRequests: counts.inProgress }));
