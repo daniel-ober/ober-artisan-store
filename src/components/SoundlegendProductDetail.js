@@ -85,9 +85,13 @@ const SoundLegendProductDetail = () => {
 
     try {
       await addDoc(collection(db, 'soundlegend_submissions'), submissionData);
-      setOpen(true); // 🔥 Show the success Dialog
-
-      // Reset form fields
+    
+      // Simulate "sending" for 700ms
+      await new Promise((resolve) => setTimeout(resolve, 700));
+    
+      setOpen(true);
+    
+      // Reset form
       setFirstName('');
       setLastName('');
       setEmail('');
