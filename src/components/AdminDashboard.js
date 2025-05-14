@@ -54,9 +54,10 @@ const AdminDashboard = () => {
     const unsubInquiries = onSnapshot(query(collection(db, 'inquiries')), (snapshot) => {
       const counts = { new: 0, inProgress: 0, completed: 0 };
       snapshot.forEach((doc) => {
-        const status = doc.data().overviewStatus;
+        const raw = doc.data().overviewStatus || doc.data().status || '';
+        const status = raw.toLowerCase();
         if (status === 'new') counts.new++;
-        else if (status === 'inProgress') counts.inProgress++;
+        else if (status === 'inprogress') counts.inProgress++;
         else if (status === 'completed') counts.completed++;
       });
       setNotifications((prev) => ({ ...prev, manageInquiries: counts.new }));
