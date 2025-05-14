@@ -88,6 +88,14 @@ const ViewSoundlegendModal = ({ submission, onClose, onStatusUpdate }) => {
     }
   };
 
+  const copyToClipboard = (text) => {
+    navigator.clipboard.writeText(text).then(() => {
+      console.log(`📋 Copied: ${text}`);
+    }).catch(err => {
+      console.error('❌ Copy failed:', err);
+    });
+  };
+
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
@@ -108,13 +116,37 @@ const ViewSoundlegendModal = ({ submission, onClose, onStatusUpdate }) => {
         </div>
 
         <div className="compact-inquiry-details">
-          <div className="detail-group"><strong>Name:</strong> {firstName} {lastName}</div>
-          <div className="detail-group"><strong>Email:</strong> {email}</div>
-          {phone && <div className="detail-group"><strong>Phone:</strong> {phone}</div>}
-          {submittedAt?.seconds && (
-            <div className="detail-group"><strong>Submitted:</strong> {new Date(submittedAt.seconds * 1000).toLocaleString()}</div>
-          )}
-        </div>
+  <div className="detail-group">
+    <strong>Name:</strong> {firstName} {lastName}
+    <button
+      className="copy-btn"
+      onClick={() => copyToClipboard(`${firstName} ${lastName}`)}
+      title="Copy name"
+    >
+      📋
+    </button>
+  </div>
+  <div className="detail-group">
+    <strong>Email:</strong> {email}
+    <button
+      className="copy-btn"
+      onClick={() => copyToClipboard(email)}
+      title="Copy email"
+    >
+      📋
+    </button>
+  </div>
+  {phone && (
+    <div className="detail-group">
+      <strong>Phone:</strong> {phone}
+    </div>
+  )}
+  {submittedAt?.seconds && (
+    <div className="detail-group">
+      <strong>Submitted:</strong> {new Date(submittedAt.seconds * 1000).toLocaleString()}
+    </div>
+  )}
+</div>
 
         {artistBio && (
           <div className="modal-item">

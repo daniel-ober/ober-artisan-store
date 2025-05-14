@@ -102,6 +102,21 @@
     margin-bottom: 10px;
     font-size: 0.9rem;
   }
+
+  .copy-btn {
+    margin-left: 8px;
+    padding: 2px 6px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: background 0.2s ease;
+  }
+  
+  .copy-btn:hover {
+    background-color: #e0e0e0;
+  }
   
   @keyframes fadeIn {
     from {
