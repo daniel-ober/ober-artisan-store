@@ -13,6 +13,13 @@ const statusOptions = [
   "Closed - No Response",
 ];
 
+const getOverviewStatus = (status) => {
+  const s = status.toLowerCase();
+  if (s === "prospecting") return "inProgress";
+  if (s.startsWith("closed")) return "completed";
+  return "new";
+};
+
 const ManageSoundlegendRequests = () => {
   const [submissions, setSubmissions] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -25,11 +32,17 @@ const ManageSoundlegendRequests = () => {
         const submissionsRef = collection(db, "soundlegend_submissions");
         const querySnapshot = await getDocs(submissionsRef);
 
-        const submissionsList = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          overviewStatus: doc.data().overviewStatus || 'new',
-          ...doc.data(),
-        }));
+        const submissionsList = querySnapshot.docs.map((doc) => {
+          const data = doc.data();
+          const status = (data.status || "New");
+          const overviewStatus = getOverviewStatus(status);
+          return {
+            id: doc.id,
+            status,
+            overviewStatus,
+            ...data,
+          };
+        });
 
         setSubmissions(submissionsList);
       } catch (error) {
@@ -43,14 +56,19 @@ const ManageSoundlegendRequests = () => {
   }, []);
 
   const handleStatusChange = async (submissionId, newStatus) => {
+    const newOverviewStatus = getOverviewStatus(newStatus);
+
     try {
       const submissionRef = doc(db, "soundlegend_submissions", submissionId);
-      await updateDoc(submissionRef, { status: newStatus });
+      await updateDoc(submissionRef, {
+        status: newStatus,
+        overviewStatus: newOverviewStatus,
+      });
 
       setSubmissions((prevSubmissions) =>
         prevSubmissions.map((submission) =>
           submission.id === submissionId
-            ? { ...submission, status: newStatus }
+            ? { ...submission, status: newStatus, overviewStatus: newOverviewStatus }
             : submission
         )
       );
@@ -60,8 +78,8 @@ const ManageSoundlegendRequests = () => {
   };
 
   const filteredSubmissions = hideClosed
-  ? submissions.filter((s) => s.overviewStatus !== 'completed')
-  : submissions;
+    ? submissions.filter((s) => s.overviewStatus !== "completed")
+    : submissions;
 
   const handleRowClick = (submission) => {
     setSelectedSubmission(submission);

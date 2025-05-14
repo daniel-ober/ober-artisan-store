@@ -35,7 +35,6 @@ const AdminOverview = () => {
       orders.forEach((doc) => {
         const order = doc.data();
         const id = doc.id;
-        const itemStatuses = (order.items || []).map((item) => item.status);
         const overviewStatus = order.overviewStatus || null;
         const item = { id, type: 'order', overviewStatus, ...order };
 
@@ -151,7 +150,20 @@ const AdminOverview = () => {
     );
 
     try {
-      await updateDoc(ref, { overviewStatus: targetStatus });
+      const updateFields = { overviewStatus: targetStatus };
+
+      // 🔧 If it's a SoundLegend submission, also update `status`
+      if (type === 'submission') {
+        if (targetStatus === 'inProgress') {
+          updateFields.status = 'Prospecting';
+        } else if (targetStatus === 'completed') {
+          updateFields.status = 'Closed - Won';
+        } else {
+          updateFields.status = 'New';
+        }
+      }
+
+      await updateDoc(ref, updateFields);
 
       setData((prev) => {
         const updated = { ...prev };
@@ -159,6 +171,9 @@ const AdminOverview = () => {
         if (index > -1) {
           const [movedItem] = updated[sourceStatus].splice(index, 1);
           movedItem.overviewStatus = targetStatus;
+          if (type === 'submission') {
+            movedItem.status = updateFields.status;
+          }
           updated[targetStatus].unshift(movedItem);
         }
         return updated;
