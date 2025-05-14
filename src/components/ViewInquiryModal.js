@@ -128,9 +128,11 @@ const ViewInquiryModal = ({ inquiry, onClose, onStatusChange, onCategoryChange }
               <option value="New">New</option>
               <option value="Support - In Progress">Support - In Progress</option>
               <option value="Support - Closed">Support - Closed</option>
+              <option value="Support - Duplicate/Spam">Support - Duplicate/Spam</option>
               <option value="Sales - Prospecting">Sales - Prospecting</option>
               <option value="Sales - Closed Won">Sales - Closed Won</option>
               <option value="Sales - Closed Lost">Sales - Closed Lost</option>
+              <option value="Sales - Duplicate/Spam">Support - Duplicate/Spam</option>
             </select>
           </div>
           <div className="detail-group">
