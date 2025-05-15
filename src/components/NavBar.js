@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect, useContext } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { FaCartPlus, FaSignOutAlt, FaUserAlt, FaCog } from 'react-icons/fa';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
@@ -21,11 +21,15 @@ const NavBar = () => {
   const { cart } = useCart();
   const location = useLocation();
 
-  const cartItemCount = Object.values(cart).reduce((total, item) => total + item.quantity, 0);
+  const cartItemCount = Object.values(cart).reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
   const menuRef = useRef(null);
   const buttonRef = useRef(null);
   const cartRef = useRef(null);
   const navbarRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -49,20 +53,35 @@ const NavBar = () => {
   useEffect(() => {
     const fetchNavbarLinks = async () => {
       try {
-        const navbarLinksCollection = collection(db, 'settings', 'site', 'navbarLinks');
+        const navbarLinksCollection = collection(
+          db,
+          'settings',
+          'site',
+          'navbarLinks'
+        );
         const snapshot = await getDocs(navbarLinksCollection);
         const links = snapshot.docs
-          .map(doc => ({ id: doc.id, ...doc.data() }))
-          .filter(link => link.enabled)
+          .map((doc) => ({ id: doc.id, ...doc.data() }))
+          .filter((link) => link.enabled)
           .sort((a, b) => a.order - b.order);
         setNavbarLinks(
           links.length > 0
             ? links
             : [
                 { id: 'home', name: 'home', label: 'Home', order: 0 },
-                { id: 'products', name: 'products', label: 'Products', order: 1 },
+                {
+                  id: 'products',
+                  name: 'products',
+                  label: 'Products',
+                  order: 1,
+                },
                 { id: 'contact', name: 'contact', label: 'Contact', order: 2 },
-                { id: 'pre-order', name: 'pre-order', label: 'Pre-Order', order: 3 },
+                {
+                  id: 'pre-order',
+                  name: 'pre-order',
+                  label: 'Pre-Order',
+                  order: 3,
+                },
               ]
         );
       } catch (err) {
@@ -73,7 +92,7 @@ const NavBar = () => {
   }, []);
 
   useEffect(() => {
-    const handleClickOutside = event => {
+    const handleClickOutside = (event) => {
       if (
         menuRef.current &&
         !menuRef.current.contains(event.target) &&
@@ -102,9 +121,12 @@ const NavBar = () => {
     }
   };
 
-  const handleNavLinkClick = path => {
+  const handleNavLinkClick = (path) => {
     if (location.pathname === path) {
+      navigate(path, { replace: true });
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      navigate(path);
     }
     setIsMenuOpen(false);
   };
@@ -115,13 +137,18 @@ const NavBar = () => {
   const renderCartButton = () => (
     <button
       className="cart-icon nav-link"
-      onClick={e => {
+      onClick={(e) => {
         e.stopPropagation();
-        setIsCartPreviewOpen(prev => !prev);
+        setIsCartPreviewOpen((prev) => !prev);
       }}
     >
       <FaCartPlus />
-      <span className="cart-badge" style={{ display: cartItemCount > 0 ? 'inline-block' : 'none' }}>{cartItemCount}</span>
+      <span
+        className="cart-badge"
+        style={{ display: cartItemCount > 0 ? 'inline-block' : 'none' }}
+      >
+        {cartItemCount}
+      </span>
     </button>
   );
 
@@ -137,11 +164,11 @@ const NavBar = () => {
                 className="sticky-logo-img"
               />
             </Link>
-  
+
             {isMobileView ? (
               <button
                 className="navbar-sticky-menu"
-                onClick={() => setIsMenuOpen(prev => !prev)}
+                onClick={() => setIsMenuOpen((prev) => !prev)}
                 aria-expanded={isMenuOpen}
                 aria-label="Toggle menu"
                 ref={buttonRef}
@@ -149,8 +176,12 @@ const NavBar = () => {
                 <img
                   src={
                     isDarkMode
-                      ? (isMenuOpen ? '/menu/close-button-dark-mode.png' : '/menu/menu-button-dark-mode.png')
-                      : (isMenuOpen ? '/menu/close-button-light-mode.png' : '/menu/menu-button-light-mode.png')
+                      ? isMenuOpen
+                        ? '/menu/close-button-dark-mode.png'
+                        : '/menu/menu-button-dark-mode.png'
+                      : isMenuOpen
+                        ? '/menu/close-button-light-mode.png'
+                        : '/menu/menu-button-light-mode.png'
                   }
                   alt="Menu Toggle"
                   className={`menu-arrow-icon ${isMenuOpen ? 'open' : ''}`}
@@ -158,48 +189,69 @@ const NavBar = () => {
               </button>
             ) : (
               <div className={`navbar-links sticky-dropdown`} ref={menuRef}>
-                <Link to="/" replace onClick={() => handleNavLinkClick('/')} className="nav-link">
+                <Link
+                  to="/"
+                  className="nav-link"
+                  onClick={() => handleNavLinkClick('/')}
+                >
                   Home
                 </Link>
-                {navbarLinks.filter(l => l.name.toLowerCase() !== 'home').map(link => (
-                  <Link
-                    key={link.id}
-                    to={`/${link.name.toLowerCase().replace(/\s+/g, '-')}`}
-                    className="nav-link"
-                    onClick={() => handleNavLinkClick(`/${link.name.toLowerCase().replace(/\s+/g, '-')}`)}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-  
+                {navbarLinks
+                  .filter((l) => l.name.toLowerCase() !== 'home')
+                  .map((link) => (
+                    <Link
+                      to={`/${link.name.toLowerCase().replace(/\s+/g, '-')}`}
+                      className="nav-link"
+                      onClick={() => {
+                        // Delay closing the menu until after the route change settles
+                        setTimeout(() => setIsMenuOpen(false), 50);
+                      }}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+
                 {user && isAdmin && (
-                  <Link to="/admin" className="nav-link" onClick={() => handleNavLinkClick('/admin')}>
+                  <Link
+                    to="/admin"
+                    className="nav-link"
+                    onClick={() => handleNavLinkClick('/admin')}
+                  >
                     <FaCog /> Admin
                   </Link>
                 )}
-  
+
                 {user && (
                   <>
-                    <Link to="/account" className="nav-link" onClick={() => handleNavLinkClick('/account')}>
+                    <Link
+                      to="/account"
+                      className="nav-link"
+                      onClick={() => handleNavLinkClick('/account')}
+                    >
                       <FaUserAlt /> Account
                     </Link>
-                    <button className="nav-link-signout" onClick={handleSignOut}>
+                    <button
+                      className="nav-link-signout"
+                      onClick={handleSignOut}
+                    >
                       <FaSignOutAlt /> Sign Out
                     </button>
                   </>
                 )}
-  
+
                 <button
                   className="cart-icon nav-link"
-                  onClick={e => {
+                  onClick={(e) => {
                     e.stopPropagation();
-                    setIsCartPreviewOpen(prev => !prev);
+                    setIsCartPreviewOpen((prev) => !prev);
                   }}
                 >
                   <FaCartPlus />
-                  {cartItemCount > 0 && <span className="cart-badge">{cartItemCount}</span>}
+                  {cartItemCount > 0 && (
+                    <span className="cart-badge">{cartItemCount}</span>
+                  )}
                 </button>
-  
+
                 {isCartPreviewOpen && showStickyHeader && (
                   <div className="cart-preview-container" ref={cartRef}>
                     <CartPreview
@@ -211,52 +263,73 @@ const NavBar = () => {
               </div>
             )}
           </div>
-  
+
           {isMobileView && isMenuOpen && (
             <div className="navbar-sticky-dropdown-wrapper">
               <div className="navbar-links sticky-dropdown open" ref={menuRef}>
-                <Link to="/" replace onClick={() => handleNavLinkClick('/')} className="nav-link">
+                <Link
+                  to="/"
+                  className="nav-link"
+                  onClick={() => handleNavLinkClick('/')}
+                >
                   Home
                 </Link>
-                {navbarLinks.filter(l => l.name.toLowerCase() !== 'home').map(link => (
-                  <Link
-                    key={link.id}
-                    to={`/${link.name.toLowerCase().replace(/\s+/g, '-')}`}
-                    className="nav-link"
-                    onClick={() => handleNavLinkClick(`/${link.name.toLowerCase().replace(/\s+/g, '-')}`)}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-  
+                {navbarLinks
+                  .filter((l) => l.name.toLowerCase() !== 'home')
+                  .map((link) => (
+                    <Link
+                      to={`/${link.name.toLowerCase().replace(/\s+/g, '-')}`}
+                      className="nav-link"
+                      onClick={() => {
+                        // Delay closing the menu until after the route change settles
+                        setTimeout(() => setIsMenuOpen(false), 50);
+                      }}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+
                 {user && isAdmin && (
-                  <Link to="/admin" className="nav-link" onClick={() => handleNavLinkClick('/admin')}>
+                  <Link
+                    to="/admin"
+                    className="nav-link"
+                    onClick={() => handleNavLinkClick('/admin')}
+                  >
                     <FaCog /> Admin
                   </Link>
                 )}
-  
+
                 {user && (
                   <>
-                    <Link to="/account" className="nav-link" onClick={() => handleNavLinkClick('/account')}>
+                    <Link
+                      to="/account"
+                      className="nav-link"
+                      onClick={() => handleNavLinkClick('/account')}
+                    >
                       <FaUserAlt /> Account
                     </Link>
-                    <button className="nav-link-signout" onClick={handleSignOut}>
+                    <button
+                      className="nav-link-signout"
+                      onClick={handleSignOut}
+                    >
                       <FaSignOutAlt /> Sign Out
                     </button>
                   </>
                 )}
-  
+
                 <button
                   className="cart-icon nav-link"
-                  onClick={e => {
+                  onClick={(e) => {
                     e.stopPropagation();
-                    setIsCartPreviewOpen(prev => !prev);
+                    setIsCartPreviewOpen((prev) => !prev);
                   }}
                 >
                   <FaCartPlus />
-                  {cartItemCount > 0 && <span className="cart-badge">{cartItemCount}</span>}
+                  {cartItemCount > 0 && (
+                    <span className="cart-badge">{cartItemCount}</span>
+                  )}
                 </button>
-  
+
                 {isCartPreviewOpen && showStickyHeader && (
                   <div className="cart-preview-container" ref={cartRef}>
                     <CartPreview
@@ -270,22 +343,26 @@ const NavBar = () => {
           )}
         </div>
       )}
-  
+
       <nav className="navbar" ref={navbarRef}>
         <div className="navbar-logo">
           <Link to="/" replace onClick={() => handleNavLinkClick('/')}>
             <img
-              src={isDarkMode ? process.env.REACT_APP_LOGO_LIGHT : process.env.REACT_APP_LOGO_DARK}
+              src={
+                isDarkMode
+                  ? process.env.REACT_APP_LOGO_LIGHT
+                  : process.env.REACT_APP_LOGO_DARK
+              }
               alt="Logo"
               className="logo-img"
             />
           </Link>
         </div>
-  
+
         {isMobileView && !showStickyHeader && (
           <button
             className="navbar-menu-container"
-            onClick={() => setIsMenuOpen(prev => !prev)}
+            onClick={() => setIsMenuOpen((prev) => !prev)}
             aria-expanded={isMenuOpen}
             aria-label="Toggle menu"
             ref={buttonRef}
@@ -293,41 +370,64 @@ const NavBar = () => {
             <img
               src={
                 isDarkMode
-                  ? (isMenuOpen ? '/menu/close-button-dark-mode.png' : '/menu/menu-button-dark-mode.png')
-                  : (isMenuOpen ? '/menu/close-button-light-mode.png' : '/menu/menu-button-light-mode.png')
+                  ? isMenuOpen
+                    ? '/menu/close-button-dark-mode.png'
+                    : '/menu/menu-button-dark-mode.png'
+                  : isMenuOpen
+                    ? '/menu/close-button-light-mode.png'
+                    : '/menu/menu-button-light-mode.png'
               }
               alt="Menu Toggle"
               className={`menu-arrow-icon ${isMenuOpen ? 'open' : ''}`}
             />
           </button>
         )}
-  
-        {(isMenuOpen || !isMobileView) && (
-          <div className={`navbar-links-wrapper ${showStickyHeader ? 'sticky-mode' : ''}`}>
-            <div className={`navbar-links ${isMobileView && isMenuOpen ? 'open' : ''}`} ref={menuRef}>
-              <Link to="/" replace onClick={() => handleNavLinkClick('/')} className="nav-link">
+
+        {!showStickyHeader && (isMenuOpen || !isMobileView) && (
+  <div className="navbar-links-wrapper">
+            <div
+              className={`navbar-links ${isMobileView && isMenuOpen ? 'open' : ''}`}
+              ref={menuRef}
+            >
+              <Link
+                to="/"
+                className="nav-link"
+                onClick={() => handleNavLinkClick('/')}
+              >
                 Home
               </Link>
-              {navbarLinks.filter(l => l.name.toLowerCase() !== 'home').map(link => (
-                <Link
-                  key={link.id}
-                  to={`/${link.name.toLowerCase().replace(/\s+/g, '-')}`}
-                  className="nav-link"
-                  onClick={() => handleNavLinkClick(`/${link.name.toLowerCase().replace(/\s+/g, '-')}`)}
-                >
-                  {link.label}
-                </Link>
-              ))}
-  
+              {navbarLinks
+                .filter((l) => l.name.toLowerCase() !== 'home')
+                .map((link) => (
+                  <Link
+                    to={`/${link.name.toLowerCase().replace(/\s+/g, '-')}`}
+                    className="nav-link"
+                    onClick={() => {
+                      // Delay closing the menu until after the route change settles
+                      setTimeout(() => setIsMenuOpen(false), 50);
+                    }}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+
               {user && isAdmin && (
-                <Link to="/admin" className="nav-link" onClick={() => handleNavLinkClick('/admin')}>
+                <Link
+                  to="/admin"
+                  className="nav-link"
+                  onClick={() => handleNavLinkClick('/admin')}
+                >
                   <FaCog /> Admin
                 </Link>
               )}
-  
+
               {user && (
                 <>
-                  <Link to="/account" className="nav-link" onClick={() => handleNavLinkClick('/account')}>
+                  <Link
+                    to="/account"
+                    className="nav-link"
+                    onClick={() => handleNavLinkClick('/account')}
+                  >
                     <FaUserAlt /> Account
                   </Link>
                   <button className="nav-link-signout" onClick={handleSignOut}>
@@ -335,18 +435,20 @@ const NavBar = () => {
                   </button>
                 </>
               )}
-  
+
               <button
                 className="cart-icon nav-link"
-                onClick={e => {
+                onClick={(e) => {
                   e.stopPropagation();
-                  setIsCartPreviewOpen(prev => !prev);
+                  setIsCartPreviewOpen((prev) => !prev);
                 }}
               >
                 <FaCartPlus />
-                {cartItemCount > 0 && <span className="cart-badge">{cartItemCount}</span>}
+                {cartItemCount > 0 && (
+                  <span className="cart-badge">{cartItemCount}</span>
+                )}
               </button>
-  
+
               {isCartPreviewOpen && !showStickyHeader && (
                 <div className="cart-preview-container" ref={cartRef}>
                   <CartPreview

@@ -1,8 +1,8 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
 /* === GENERAL NAVBAR STYLES === */
 .navbar {
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -218,10 +218,10 @@ body.dark .navbar-sticky-mini {
 /* === STICKY MENU WRAPPER === */
 .navbar-sticky-dropdown-wrapper {
   position: absolute; /* ← changed from fixed */
-  top: 100%;           /* ← ensures it appears just below sticky mini */
+  top: 100%; /* ← ensures it appears just below sticky mini */
   left: 0;
   width: 100%;
-  z-index: 2998;       /* ← just under the sticky-mini (which is 3000) */
+  z-index: 2998; /* ← just under the sticky-mini (which is 3000) */
 }
 
 /* === MOBILE (portrait) DROPDOWN + MENU BEHAVIOR === */
@@ -255,7 +255,9 @@ body.dark .navbar-sticky-mini {
     padding: 0;
     overflow: hidden;
     max-height: 0;
-    transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+    transition:
+      max-height 0.3s ease-in-out,
+      padding 0.3s ease-in-out;
   }
 
   .navbar-links.open {
@@ -284,7 +286,6 @@ body.dark .navbar-sticky-mini {
     justify-content: center;
     padding: 12px 0px 3px;
     z-index: 9000;
-
   }
 
   .navbar-sticky-dropdown-wrapper {
@@ -304,7 +305,9 @@ body.dark .navbar-sticky-mini {
   }
 
   .navbar-links.sticky-dropdown.open {
-    max-height: none;
+    pointer-events: auto !important;
+    z-index: 10002 !important;
+    position: relative !important;
   }
 
   .cart-icon.nav-link {
@@ -323,6 +326,10 @@ body.dark .navbar-sticky-mini {
     left: 0;
     width: 100%;
     z-index: 4000 !important;
+  }
+
+  body.menu-open .navbar-sticky-mini {
+    pointer-events: auto !important;
   }
 }
 
@@ -395,7 +402,7 @@ body.dark .navbar-sticky-mini {
   .navbar-links.sticky-dropdown .nav-link {
     all: unset;
     display: inline-block;
-    font-family: "Poppins", sans-serif;
+    font-family: 'Poppins', sans-serif;
     color: white !important;
     font-size: 15px;
     font-weight: 600;
@@ -404,7 +411,9 @@ body.dark .navbar-sticky-mini {
     letter-spacing: 0.4px;
     text-transform: uppercase;
     cursor: pointer;
-    transition: background 0.2s ease, color 0.2s ease;
+    transition:
+      background 0.2s ease,
+      color 0.2s ease;
   }
 
   .navbar-links.sticky-dropdown .nav-link:hover {
