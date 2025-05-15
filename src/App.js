@@ -17,6 +17,7 @@ import ProductDetail from './components/ProductDetail';
 import PreOrderPage from './components/ArtisanShop';
 import About from './components/About';
 import Contact from './components/Contact';
+import OurCraft from './components/OurCraft';
 import Cart from './components/Cart';
 import ArtisanDrums from './components/ArtisanDrums';
 import Register from './components/Register';
@@ -139,6 +140,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="/our-craft" element={<OurCraft />} />
           <Route
             path="/artisan-drums"
             element={<ArtisanDrums isDarkMode={isDarkMode} />}
