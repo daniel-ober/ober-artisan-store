@@ -1,0 +1,144 @@
+.ourcraft-drum-interactive-section {
+    position: relative;
+    background: #0d0d0d;
+    color: white;
+    scroll-snap-align: start;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 80px 24px;
+    text-align: center;
+    z-index: 1;
+  }
+  
+  .ourcraft-drum-text {
+    z-index: 5;
+    max-width: 900px;
+  }
+  
+  .ourcraft-drum-logo {
+    max-width: 200px;
+    margin-bottom: 20px;
+  }
+  
+  .ourcraft-drum-quote {
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+    color: #ccc;
+  }
+  
+  .ourcraft-drum-description {
+    max-width: 700px;
+    margin: 0 auto 24px;
+    font-size: 1.1rem;
+    color: #bbb;
+  }
+  
+  .ourcraft-drum-button {
+    padding: 12px 26px;
+    font-size: 1rem;
+    border: none;
+    background: #b3544b;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .ourcraft-drum-button:hover {
+    background: #9e3e3e;
+  }
+  
+  .ourcraft-drum-layers {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 40px auto 0;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+  
+  .ourcraft-drum-layers .layer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    pointer-events: none;
+    z-index: 1;
+  }
+  
+  .overlay {
+    transition: opacity 0.4s ease-in-out;
+  }
+  
+  .fade-out {
+    opacity: 0;
+  }
+  
+  .fade-in {
+    opacity: 1;
+  }
+  
+  .ourcraft-drum-zones {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    z-index: 10;
+  }
+  
+  .zone {
+    flex: 1;
+    cursor: pointer;
+  }
+
+  .ourcraft-drum-cta-row {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto 40px;
+    z-index: 10;
+    position: relative;
+  }
+  
+  .drum-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30%;
+    text-align: center;
+  }
+  
+  .drum-cta-logo {
+    max-width: 120px;
+    margin-bottom: 12px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+  }
+  
+  .drum-cta-quote {
+    font-style: italic;
+    font-size: 0.95rem;
+    color: #ccc;
+    margin-bottom: 12px;
+  }
+  
+  .drum-cta-button {
+    padding: 10px 20px;
+    background: #b3544b;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .drum-cta-button:hover {
+    background: #9e3e3e;
+  }
