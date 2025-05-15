@@ -217,11 +217,11 @@ body.dark .navbar-sticky-mini {
 
 /* === STICKY MENU WRAPPER === */
 .navbar-sticky-dropdown-wrapper {
-  position: fixed;
-  top: 72px;
+  position: absolute; /* ← changed from fixed */
+  top: 100%;           /* ← ensures it appears just below sticky mini */
   left: 0;
   width: 100%;
-  z-index: 2999;
+  z-index: 2998;       /* ← just under the sticky-mini (which is 3000) */
 }
 
 /* === MOBILE (portrait) DROPDOWN + MENU BEHAVIOR === */
@@ -234,29 +234,33 @@ body.dark .navbar-sticky-mini {
     display: flex;
   }
 
+  body.menu-open {
+    overflow: hidden; /* Prevent background scroll */
+  }
+
   .navbar-links-wrapper {
-    position: fixed;
-    top: 72px;
+    position: absolute;
+    top: 100%;
     left: 0;
     width: 100%;
     z-index: 4000;
   }
 
   .navbar-links {
+    display: flex;
     flex-direction: column;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.95);
     width: 100%;
+    padding: 0;
     overflow: hidden;
     max-height: 0;
     transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
-    padding: 0;
-    z-index: 4000;
   }
 
   .navbar-links.open {
-    max-height: 1000px;
     padding: 20px 0;
+    max-height: 1000px; /* You can keep this or remove for natural height */
   }
 
   .navbar-links .nav-link {
@@ -279,28 +283,43 @@ body.dark .navbar-sticky-mini {
   .navbar-sticky-mini {
     justify-content: center;
     padding: 12px 0px 3px;
+    z-index: 9000;
+
   }
 
-  .navbar-sticky-menu-wrapper {
-    display: flex;
-    position: fixed;
-    top: 65px;
+  .navbar-sticky-dropdown-wrapper {
+    position: absolute;
+    top: 100px; /* ← offsets just below sticky mini */
+    left: 0;
     width: 100%;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.92);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    z-index: 2999;
-    padding: 8px 0;
+    z-index: 4000;
   }
 
-  body.dark .navbar-sticky-menu-wrapper {
-    background: rgba(0, 0, 0, 0.85);
+  .navbar-links.sticky-dropdown {
+    flex-direction: column;
+    align-items: center;
+    background-color: black;
+    padding: 20px 0 40px;
+    overflow: visible;
+  }
+
+  .navbar-links.sticky-dropdown.open {
+    max-height: none;
+  }
+
+  .cart-icon.nav-link {
+    margin-top: 12px;
+    margin-bottom: 16px;
+  }
+
+  .cart-badge {
+    top: -10px;
+    right: -12px;
   }
 
   .navbar-links-wrapper.sticky-mode {
-    position: fixed !important;
-    top: 72px !important;
+    position: absolute !important;
+    top: 100% !important;
     left: 0;
     width: 100%;
     z-index: 4000 !important;
@@ -316,7 +335,12 @@ body.dark .navbar-sticky-mini {
 }
 
 /* === LANDSCAPE FIX (iPad / horizontal tablets) === */
-
+@media screen and (max-width: 1024px) and (orientation: landscape) {
+  .navbar-links .nav-link,
+  .navbar-links .cart-icon.nav-link {
+    color: white !important;
+  }
+}
 
 /* === STICKY NAVBAR WEB (desktop ≥769px) === */
 @media screen and (min-width: 769px) {
@@ -402,11 +426,9 @@ body.dark .navbar-sticky-mini {
     top: -8px;
     right: -10px;
     background: red;
-    /* color: white; */
     font-size: 12px;
     font-weight: bold;
     padding: 2px 6px;
     border-radius: 50%;
-    /* z-index: 10000; */
   }
 }

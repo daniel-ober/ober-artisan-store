@@ -105,6 +105,11 @@ body.light .navbar-links.open .nav-link {
   color: white !important;
 }
 
+body.menu-open {
+  overflow: hidden;
+  height: 100vh;
+}
+
 /* ✅ MOBILE DROPDOWN: force light mode to use white links on dark background */
 @media (max-width: 768px) {
   body.light .navbar-links.open .nav-link,
