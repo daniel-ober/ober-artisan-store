@@ -1,23 +1,17 @@
 /* Global scroll container */
 .ourcraft-container {
     height: 100vh;
-    overflow-y: scroll;
-    scroll-snap-type: y mandatory;
+    overflow-y: scroll;                /* REQUIRED */
+    scroll-snap-type: y mandatory;     /* REQUIRED */
     scroll-behavior: smooth;
-    background-color: #111;
-    color: #fff;
-    font-family: "Poppins", sans-serif;
   }
-  
+
   /* Snap section layout */
   .ourcraft-section {
     scroll-snap-align: start;
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0 24px;
-    box-sizing: border-box;
+    height: 100vh;
+    flex-shrink: 0;
   }
   
   /* Hero Section with background image */
@@ -144,17 +138,10 @@
   }
 
   /* Philosophy Section */
-.philosophy-section {
-    position: relative;
-    height: 100vh;
+  .philosophy-section {
     scroll-snap-align: start;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: #111;
-    padding: 80px 24px 60px;
-    text-align: center;
+    min-height: 100vh;
+    height: auto; /* ✅ let it grow naturally */
   }
   
   .philosophy-inner {
@@ -241,18 +228,20 @@
 
   /* Sticky Drum Display */
   .sticky-drum-display-wrapper {
-    position: relative;
-    height: 100vh;
     scroll-snap-align: start;
+    background: #0d0d0d;
+    padding: 0; /* ensure no padding adds extra space */
+    margin: 0;
   }
   
   .sticky-drum-display-inner {
-    position: sticky;
-    bottom: 0;
-    width: 100%;
-    background: #111;
-    z-index: 5;
-    padding-bottom: 24px;
+    position: relative;
+    height: 100vh; /* ✅ Full viewport height */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #0d0d0d;
+    padding: 0;
   }
   
   /* Series Sections */
@@ -391,7 +380,7 @@
   }
   
   .heritage-logo {
-    max-width: 180px;
+    max-width: 240px;
     margin-bottom: 20px;
   }
   
@@ -569,82 +558,48 @@
     background: #9a3e3e;
   }
   
-  @media (max-width: 900px) {
-    .soundlegend-grid {
-      grid-template-columns: 1fr;
-      text-align: center;
-    }
   
-    .soundlegend-text {
-      text-align: center;
-    }
-  
-    .soundlegend-logo {
-      margin: 0 auto 20px;
-    }
-  }
-  
-  @media (max-width: 900px) {
-    .feuzon-grid {
-      grid-template-columns: 1fr;
-      text-align: center;
-    }
-  
-    .feuzon-text {
-      text-align: center;
-    }
-  
-    .feuzon-logo {
-      margin: 0 auto 20px;
-    }
-  }
-
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(40px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @media (max-width: 900px) {
-    .heritage-grid {
-      grid-template-columns: 1fr;
-      text-align: center;
-    }
-  
-    .heritage-text {
-      text-align: center;
-    }
-  
-    .heritage-logo {
-      margin: 0 auto 20px;
-    }
-  }
-  
-  /* Responsive */
   @media (max-width: 768px) {
+    .craft-hero-section {
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start; /* 👈 KEY CHANGE to reduce top gap */
+      background-position: center center;
+      background-size: cover;
+      padding-top: 4vh; /* 👈 optional fine-tuned offset for better top alignment */
+    }
+  
+    .craft-hero-overlay {
+      max-height: 92vh;
+      overflow-y: auto;
+      padding: 24px 16px;
+      border-radius: 12px;
+      margin: 0 auto;
+      max-width: 92%;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  
     .craft-hero-overlay h1 {
-      font-size: 2.6rem;
+      font-size: 2.2rem;
+      margin-bottom: 0.75rem;
     }
   
     .craft-hero-overlay p {
-      font-size: 1.1rem;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin: 0.5rem 0;
     }
   
-    .drum-logo-parallax {
-      max-width: 140px;
+    .scroll-indicator {
+      font-size: 0.9rem;
+      margin-top: auto;
+      padding: 8px 0;
+      flex-shrink: 0;
     }
-  
-    .drum-description {
-      font-size: 1rem;
-      padding: 0 16px;
-    }
-  
-    .drum-image-parallax {
-      max-width: 90%;
-    }
-  }
+}

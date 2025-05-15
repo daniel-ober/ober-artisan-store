@@ -38,12 +38,13 @@ const NavBar = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobileView(window.innerWidth <= 768);
-      if (!isMobileView) setIsMenuOpen(false);
+      const isNowMobile = window.innerWidth <= 768;
+      setIsMobileView(isNowMobile);
+      if (!isNowMobile) setIsMenuOpen(false);
     };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, [isMobileView]);
+  }, []);
 
   useEffect(() => {
     const fetchNavbarLinks = async () => {
@@ -108,9 +109,25 @@ const NavBar = () => {
     setIsMenuOpen(false);
   };
 
+  const isWebSticky = showStickyHeader && window.innerWidth >= 769;
+  const isMobileSticky = showStickyHeader && isMobileView;
+
+  const renderCartButton = () => (
+    <button
+      className="cart-icon nav-link"
+      onClick={e => {
+        e.stopPropagation();
+        setIsCartPreviewOpen(prev => !prev);
+      }}
+    >
+      <FaCartPlus />
+      <span className="cart-badge" style={{ display: cartItemCount > 0 ? 'inline-block' : 'none' }}>{cartItemCount}</span>
+    </button>
+  );
+
   return (
     <>
-      {showStickyHeader && isMobileView && (
+      {showStickyHeader && (
         <div className="navbar-sticky-wrapper">
           <div className="navbar-sticky-mini">
             <Link to="/" onClick={() => handleNavLinkClick('/')}>
@@ -120,59 +137,47 @@ const NavBar = () => {
                 className="sticky-logo-img"
               />
             </Link>
-
-            <button
-              className="navbar-sticky-menu"
-              onClick={() => setIsMenuOpen(prev => !prev)}
-              aria-expanded={isMenuOpen}
-              aria-label="Toggle menu"
-            >
-              <img
-                src={
-                  isMenuOpen
-                    ? '/menu/close-button-dark-mode.png'
-                    : '/menu/menu-button-dark-mode.png'
-                }
-                alt="Menu Toggle"
-                className={`menu-arrow-icon ${isMenuOpen ? 'open' : ''}`}
-                style={{
-                  zIndex: 9999,
-                  position: 'relative',
-                  pointerEvents: 'auto',
-                  width: '40px',
-                  height: '40px',
-                }}
-              />
-            </button>
-          </div>
-
-          {isMenuOpen && (
-            <div className="navbar-sticky-dropdown-wrapper">
-              <div className="navbar-links sticky-dropdown open" ref={menuRef}>
+  
+            {isMobileView ? (
+              <button
+                className="navbar-sticky-menu"
+                onClick={() => setIsMenuOpen(prev => !prev)}
+                aria-expanded={isMenuOpen}
+                aria-label="Toggle menu"
+                ref={buttonRef}
+              >
+                <img
+                  src={
+                    isDarkMode
+                      ? (isMenuOpen ? '/menu/close-button-dark-mode.png' : '/menu/menu-button-dark-mode.png')
+                      : (isMenuOpen ? '/menu/close-button-light-mode.png' : '/menu/menu-button-light-mode.png')
+                  }
+                  alt="Menu Toggle"
+                  className={`menu-arrow-icon ${isMenuOpen ? 'open' : ''}`}
+                />
+              </button>
+            ) : (
+              <div className={`navbar-links sticky-dropdown`} ref={menuRef}>
                 <Link to="/" replace onClick={() => handleNavLinkClick('/')} className="nav-link">
                   Home
                 </Link>
-                {navbarLinks
-                  .filter(l => l.name.toLowerCase() !== 'home')
-                  .map(link => (
-                    <Link
-                      key={link.id}
-                      to={`/${link.name.toLowerCase().replace(/\s+/g, '-')}`}
-                      className="nav-link"
-                      onClick={() =>
-                        handleNavLinkClick(`/${link.name.toLowerCase().replace(/\s+/g, '-')}`)
-                      }
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
-
+                {navbarLinks.filter(l => l.name.toLowerCase() !== 'home').map(link => (
+                  <Link
+                    key={link.id}
+                    to={`/${link.name.toLowerCase().replace(/\s+/g, '-')}`}
+                    className="nav-link"
+                    onClick={() => handleNavLinkClick(`/${link.name.toLowerCase().replace(/\s+/g, '-')}`)}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+  
                 {user && isAdmin && (
                   <Link to="/admin" className="nav-link" onClick={() => handleNavLinkClick('/admin')}>
                     <FaCog /> Admin
                   </Link>
                 )}
-
+  
                 {user && (
                   <>
                     <Link to="/account" className="nav-link" onClick={() => handleNavLinkClick('/account')}>
@@ -183,7 +188,7 @@ const NavBar = () => {
                     </button>
                   </>
                 )}
-
+  
                 <button
                   className="cart-icon nav-link"
                   onClick={e => {
@@ -194,8 +199,65 @@ const NavBar = () => {
                   <FaCartPlus />
                   {cartItemCount > 0 && <span className="cart-badge">{cartItemCount}</span>}
                 </button>
-
-                {isCartPreviewOpen && (
+  
+                {isCartPreviewOpen && showStickyHeader && (
+                  <div className="cart-preview-container" ref={cartRef}>
+                    <CartPreview
+                      onClose={() => setIsCartPreviewOpen(false)}
+                      closeMenu={() => setIsMenuOpen(false)}
+                    />
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+  
+          {isMobileView && isMenuOpen && (
+            <div className="navbar-sticky-dropdown-wrapper">
+              <div className="navbar-links sticky-dropdown open" ref={menuRef}>
+                <Link to="/" replace onClick={() => handleNavLinkClick('/')} className="nav-link">
+                  Home
+                </Link>
+                {navbarLinks.filter(l => l.name.toLowerCase() !== 'home').map(link => (
+                  <Link
+                    key={link.id}
+                    to={`/${link.name.toLowerCase().replace(/\s+/g, '-')}`}
+                    className="nav-link"
+                    onClick={() => handleNavLinkClick(`/${link.name.toLowerCase().replace(/\s+/g, '-')}`)}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+  
+                {user && isAdmin && (
+                  <Link to="/admin" className="nav-link" onClick={() => handleNavLinkClick('/admin')}>
+                    <FaCog /> Admin
+                  </Link>
+                )}
+  
+                {user && (
+                  <>
+                    <Link to="/account" className="nav-link" onClick={() => handleNavLinkClick('/account')}>
+                      <FaUserAlt /> Account
+                    </Link>
+                    <button className="nav-link-signout" onClick={handleSignOut}>
+                      <FaSignOutAlt /> Sign Out
+                    </button>
+                  </>
+                )}
+  
+                <button
+                  className="cart-icon nav-link"
+                  onClick={e => {
+                    e.stopPropagation();
+                    setIsCartPreviewOpen(prev => !prev);
+                  }}
+                >
+                  <FaCartPlus />
+                  {cartItemCount > 0 && <span className="cart-badge">{cartItemCount}</span>}
+                </button>
+  
+                {isCartPreviewOpen && showStickyHeader && (
                   <div className="cart-preview-container" ref={cartRef}>
                     <CartPreview
                       onClose={() => setIsCartPreviewOpen(false)}
@@ -208,7 +270,7 @@ const NavBar = () => {
           )}
         </div>
       )}
-
+  
       <nav className="navbar" ref={navbarRef}>
         <div className="navbar-logo">
           <Link to="/" replace onClick={() => handleNavLinkClick('/')}>
@@ -219,58 +281,50 @@ const NavBar = () => {
             />
           </Link>
         </div>
-
+  
         {isMobileView && !showStickyHeader && (
-  <button
-    className="navbar-menu-container"
-    onClick={() => setIsMenuOpen(prev => !prev)}
-    aria-expanded={isMenuOpen}
-    aria-label="Toggle menu"
-    ref={buttonRef}
-  >
-    <img
-      src={
-        isDarkMode
-          ? (isMenuOpen
-              ? '/menu/close-button-dark-mode.png'
-              : '/menu/menu-button-dark-mode.png')
-          : (isMenuOpen
-              ? '/menu/close-button-light-mode.png'
-              : '/menu/menu-button-light-mode.png')
-      }
-      alt="Menu Toggle"
-      className={`menu-arrow-icon ${isMenuOpen ? 'open' : ''}`}
-    />
-  </button>
-)}
-
+          <button
+            className="navbar-menu-container"
+            onClick={() => setIsMenuOpen(prev => !prev)}
+            aria-expanded={isMenuOpen}
+            aria-label="Toggle menu"
+            ref={buttonRef}
+          >
+            <img
+              src={
+                isDarkMode
+                  ? (isMenuOpen ? '/menu/close-button-dark-mode.png' : '/menu/menu-button-dark-mode.png')
+                  : (isMenuOpen ? '/menu/close-button-light-mode.png' : '/menu/menu-button-light-mode.png')
+              }
+              alt="Menu Toggle"
+              className={`menu-arrow-icon ${isMenuOpen ? 'open' : ''}`}
+            />
+          </button>
+        )}
+  
         {(isMenuOpen || !isMobileView) && (
           <div className={`navbar-links-wrapper ${showStickyHeader ? 'sticky-mode' : ''}`}>
             <div className={`navbar-links ${isMobileView && isMenuOpen ? 'open' : ''}`} ref={menuRef}>
               <Link to="/" replace onClick={() => handleNavLinkClick('/')} className="nav-link">
                 Home
               </Link>
-              {navbarLinks
-                .filter(l => l.name.toLowerCase() !== 'home')
-                .map(link => (
-                  <Link
-                    key={link.id}
-                    to={`/${link.name.toLowerCase().replace(/\s+/g, '-')}`}
-                    className="nav-link"
-                    onClick={() =>
-                      handleNavLinkClick(`/${link.name.toLowerCase().replace(/\s+/g, '-')}`)
-                    }
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-
+              {navbarLinks.filter(l => l.name.toLowerCase() !== 'home').map(link => (
+                <Link
+                  key={link.id}
+                  to={`/${link.name.toLowerCase().replace(/\s+/g, '-')}`}
+                  className="nav-link"
+                  onClick={() => handleNavLinkClick(`/${link.name.toLowerCase().replace(/\s+/g, '-')}`)}
+                >
+                  {link.label}
+                </Link>
+              ))}
+  
               {user && isAdmin && (
                 <Link to="/admin" className="nav-link" onClick={() => handleNavLinkClick('/admin')}>
                   <FaCog /> Admin
                 </Link>
               )}
-
+  
               {user && (
                 <>
                   <Link to="/account" className="nav-link" onClick={() => handleNavLinkClick('/account')}>
@@ -281,7 +335,7 @@ const NavBar = () => {
                   </button>
                 </>
               )}
-
+  
               <button
                 className="cart-icon nav-link"
                 onClick={e => {
@@ -292,8 +346,8 @@ const NavBar = () => {
                 <FaCartPlus />
                 {cartItemCount > 0 && <span className="cart-badge">{cartItemCount}</span>}
               </button>
-
-              {isCartPreviewOpen && (
+  
+              {isCartPreviewOpen && !showStickyHeader && (
                 <div className="cart-preview-container" ref={cartRef}>
                   <CartPreview
                     onClose={() => setIsCartPreviewOpen(false)}

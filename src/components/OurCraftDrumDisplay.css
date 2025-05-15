@@ -1,52 +1,79 @@
 .ourcraft-drum-interactive-section {
-    position: relative;
+    height: 100vh; /* use full viewport height */
     background: #0d0d0d;
     color: white;
-    scroll-snap-align: start;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-between; /* distribute top and bottom */
     align-items: center;
-    padding: 80px 24px;
+    padding: 60px 24px 0;
+    position: relative;
+    box-sizing: border-box;
+  }
+  
+  .drum-comparison-heading {
+    font-size: 2.4rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 40px;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  }
+  
+  .drum-upper-content {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 12px; /* tighter margin */
+  }
+  
+  .ourcraft-drum-cta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1200px;
+    gap: 20px;
+    margin-bottom: 8px; /* tighter spacing between CTA and image */
+  }
+  
+  .drum-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 33.33%;
     text-align: center;
-    z-index: 1;
+    padding: 0 12px;
+    animation: fadeInUp 1s ease-out;
   }
   
-  .ourcraft-drum-text {
-    z-index: 5;
-    max-width: 900px;
-  }
-  
-  .ourcraft-drum-logo {
-    max-width: 200px;
-    margin-bottom: 20px;
-  }
-  
-  .ourcraft-drum-quote {
-    font-size: 1.3rem;
+  .drum-cta-logo {
+    max-width: 110px;
     margin-bottom: 12px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+  }
+  
+  .drum-cta-quote {
+    font-style: italic;
+    font-size: 0.95rem;
     color: #ccc;
+    margin-bottom: 10px;
+    line-height: 1.4;
+    min-height: 40px;
   }
   
-  .ourcraft-drum-description {
-    max-width: 700px;
-    margin: 0 auto 24px;
-    font-size: 1.1rem;
-    color: #bbb;
-  }
-  
-  .ourcraft-drum-button {
-    padding: 12px 26px;
-    font-size: 1rem;
-    border: none;
+  .drum-cta-button {
+    padding: 10px 22px;
     background: #b3544b;
     color: white;
+    border: none;
     border-radius: 6px;
+    font-size: 0.95rem;
     cursor: pointer;
+    transition: background 0.3s ease;
   }
   
-  .ourcraft-drum-button:hover {
+  .drum-cta-button:hover {
     background: #9e3e3e;
   }
   
@@ -54,11 +81,12 @@
     position: relative;
     width: 100%;
     max-width: 1200px;
-    margin: 40px auto 0;
-    height: 300px;
+    height: 320px;
     display: flex;
     justify-content: center;
     align-items: flex-end;
+    padding-bottom: 0;
+    margin-bottom: 0;
   }
   
   .ourcraft-drum-layers .layer {
@@ -66,7 +94,7 @@
     bottom: 0;
     width: 100%;
     height: auto;
-    pointer-events: none;
+    object-fit: contain;
     z-index: 1;
   }
   
@@ -89,56 +117,61 @@
     height: 100%;
     width: 100%;
     display: flex;
-    z-index: 10;
+    z-index: 20;
   }
   
   .zone {
     flex: 1;
     cursor: pointer;
   }
-
-  .ourcraft-drum-cta-row {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto 40px;
-    z-index: 10;
-    position: relative;
-  }
   
-  .drum-cta {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 30%;
-    text-align: center;
-  }
+  @media (max-width: 768px) {
+    .ourcraft-drum-cta-row {
+      flex-direction: column;
+      align-items: center;
+      gap: 36px;
+      margin-bottom: 100px;
+      padding: 0;
+    }
   
-  .drum-cta-logo {
-    max-width: 120px;
-    margin-bottom: 12px;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
-  }
+    .drum-cta {
+      width: 100%;
+      max-width: 280px;
+    }
   
-  .drum-cta-quote {
-    font-style: italic;
-    font-size: 0.95rem;
-    color: #ccc;
-    margin-bottom: 12px;
-  }
+    .drum-cta-logo {
+      max-width: 80px;
+      margin-bottom: 8px;
+    }
   
-  .drum-cta-button {
-    padding: 10px 20px;
-    background: #b3544b;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 0.95rem;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
+    .drum-cta-quote {
+      font-size: 0.85rem;
+      min-height: auto;
+      padding: 0 8px;
+    }
   
-  .drum-cta-button:hover {
-    background: #9e3e3e;
+    .drum-cta-button {
+      font-size: 0.85rem;
+      padding: 8px 18px;
+    }
+  
+    .ourcraft-drum-layers {
+      height: 180px;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  
+    .ourcraft-drum-layers .layer {
+      width: 100%;
+      max-width: 90%;
+    }
+  
+    .drum-comparison-heading {
+      font-size: 1.8rem;
+      margin-bottom: 28px;
+    }
+  
+    .drum-upper-content {
+      padding-bottom: 0;
+    }
   }
