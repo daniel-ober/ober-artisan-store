@@ -1,0 +1,650 @@
+/* Global scroll container */
+.ourcraft-container {
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    background-color: #111;
+    color: #fff;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  /* Snap section layout */
+  .ourcraft-section {
+    scroll-snap-align: start;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 24px;
+    box-sizing: border-box;
+  }
+  
+  /* Hero Section with background image */
+  .craft-hero-section {
+    background-image: url("/public/about/toastforbreakfast.png");
+    background-size: cover;
+    background-position: center top;
+    background-attachment: fixed;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Hero Content Box */
+  .craft-hero-overlay {
+    background: rgba(0, 0, 0, 0.82);
+    padding: 48px 32px;
+    border-radius: 16px;
+    max-width: 90%;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  /* Hero Title */
+  .craft-hero-overlay h1 {
+    font-size: 3.6rem;
+    color: #ffffff;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+    text-shadow: 0 3px 12px rgba(0, 0, 0, 0.7);
+    position: relative;
+  }
+  
+  .craft-hero-overlay h1::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 4px;
+    margin: 12px auto 0;
+    background: linear-gradient(90deg, #e6b980, #b3544b);
+    border-radius: 2px;
+  }
+  
+  /* Hero Subtitle */
+  .craft-hero-overlay p {
+    font-size: 1.25rem;
+    font-style: italic;
+    color: #e0e0e0;
+    margin-top: 0.5rem;
+    margin-bottom: 1.6rem;
+  }
+  
+  /* Scroll cue */
+  .scroll-indicator {
+    font-size: 1rem;
+    color: #ccc;
+    opacity: 0.8;
+    animation: bounceDown 2s infinite;
+  }
+  
+  @keyframes bounceDown {
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(5px); }
+    100% { transform: translateY(0); }
+  }
+  
+  /* Story Section */
+/* Story Section */
+.story-section {
+    position: relative;
+    height: 100vh;
+    scroll-snap-align: start;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #111;
+    padding: 80px 24px 60px;
+    text-align: center;
+  }
+  
+  .story-inner {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 48px 32px;
+    border-radius: 16px;
+    max-width: 850px;
+    margin: 0 auto;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5);
+    animation: fadeInUp 1.2s ease-out;
+  }
+  
+  .story-inner h2 {
+    font-size: 2.4rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 28px;
+    position: relative;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+  }
+  
+  .story-inner h2::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #e6b980, #b3544b);
+    margin: 12px auto 0;
+    border-radius: 2px;
+  }
+  
+  .story-inner p {
+    font-size: 1.1rem;
+    line-height: 1.75;
+    color: #ccc;
+    margin-bottom: 20px;
+  }
+
+  /* Philosophy Section */
+.philosophy-section {
+    position: relative;
+    height: 100vh;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #111;
+    padding: 80px 24px 60px;
+    text-align: center;
+  }
+  
+  .philosophy-inner {
+    background: rgba(0, 0, 0, 0.82);
+    padding: 48px 32px;
+    border-radius: 16px;
+    max-width: 850px;
+    margin: 0 auto;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5);
+    animation: fadeInUp 1.2s ease-out;
+  }
+  
+  .philosophy-inner h2 {
+    font-size: 2.4rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 28px;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+    position: relative;
+  }
+  
+  .philosophy-inner h2::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #e6b980, #b3544b);
+    margin: 12px auto 0;
+    border-radius: 2px;
+  }
+  
+  .philosophy-inner p {
+    font-size: 1.1rem;
+    line-height: 1.75;
+    color: #ccc;
+    margin-bottom: 20px;
+  }
+  
+  .philosophy-inner .quote {
+    font-style: italic;
+    font-size: 1.2rem;
+    color: #bbb;
+    margin-top: 16px;
+  }
+  
+  .craft-image img {
+    width: 320px;
+    max-width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    margin: 36px auto 0;
+    display: block;
+    animation: fadeInUp 1.2s ease-out;
+  }
+
+  .craft-values {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 32px;
+    margin-top: 36px;
+    animation: fadeInUp 1.2s ease-out;
+  }
+  
+  .value-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    color: #e0e0e0;
+    font-size: 1rem;
+    width: 140px;
+    text-align: center;
+  }
+  
+  .value-item svg {
+    stroke: #e6b980;
+    transition: transform 0.3s ease;
+  }
+  
+  .value-item:hover svg {
+    transform: scale(1.15);
+  }
+
+  /* Sticky Drum Display */
+  .sticky-drum-display-wrapper {
+    position: relative;
+    height: 100vh;
+    scroll-snap-align: start;
+  }
+  
+  .sticky-drum-display-inner {
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    background: #111;
+    z-index: 5;
+    padding-bottom: 24px;
+  }
+  
+  /* Series Sections */
+  .drum-section-parallax {
+    background: #0d0d0d;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  
+  .drum-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .drum-logo-parallax {
+    max-width: 200px;
+    margin-bottom: 24px;
+  }
+  
+  .drum-quote {
+    font-style: italic;
+    font-size: 1.2rem;
+    color: #ccc;
+    margin-bottom: 16px;
+  }
+  
+  .drum-description {
+    font-size: 1.1rem;
+    color: #bbb;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto 40px;
+  }
+  
+  .drum-image-parallax {
+    width: 100%;
+    max-width: 800px;
+    border-radius: 12px;
+    margin: 30px auto;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+  
+  .drum-button {
+    padding: 12px 28px;
+    background: #b3544b;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .drum-button:hover {
+    background: #9a3e3e;
+  }
+
+  .artisan-intro-section {
+    scroll-snap-align: start;
+    background: #0d0d0d;
+    color: #fff;
+    padding: 80px 24px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+  
+  .artisan-intro-inner {
+    max-width: 850px;
+    margin: 0 auto;
+    animation: fadeInUp 1.2s ease-out;
+  }
+  
+  .artisan-intro-inner h2 {
+    font-size: 2.4rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #fff;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+  }
+  
+  .artisan-tagline,
+  .artisan-intro-tagline {
+    font-style: italic;
+    font-size: 1.2rem;
+    color: #bbb;
+    margin: 20px 0;
+  }
+  
+  .artisan-intro-paragraph {
+    font-size: 1.1rem;
+    line-height: 1.75;
+    color: #ccc;
+    margin-bottom: 18px;
+  }
+
+  .heritage-reveal-section {
+    scroll-snap-align: start;
+    background: #0d0d0d;
+    color: #fff;
+    padding: 80px 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  .heritage-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    max-width: 1200px;
+    width: 100%;
+    align-items: center;
+  }
+  
+  .heritage-image-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .heritage-drum-img {
+    max-width: 100%;
+    height: auto;
+    filter: drop-shadow(0 24px 24px rgba(0, 0, 0, 0.9));
+    animation: fadeInUp 1s ease-out;
+  }
+  
+  .heritage-text {
+    text-align: left;
+    animation: fadeInUp 1.3s ease-out;
+  }
+  
+  .heritage-logo {
+    max-width: 180px;
+    margin-bottom: 20px;
+  }
+  
+  .heritage-quote {
+    font-size: 1.2rem;
+    font-style: italic;
+    color: #bbb;
+    margin-bottom: 20px;
+  }
+  
+  .heritage-description {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #ccc;
+    margin-bottom: 18px;
+  }
+  
+  .heritage-button {
+    padding: 12px 28px;
+    background: #b3544b;
+    color: #fff;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .heritage-button:hover {
+    background: #9a3e3e;
+  }
+
+  /* Feuzon Reveal Section */
+.feuzon-reveal-section {
+    scroll-snap-align: start;
+    background: #0d0d0d;
+    color: #fff;
+    padding: 80px 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  .feuzon-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    max-width: 1200px;
+    width: 100%;
+    align-items: center;
+  }
+  
+  .feuzon-image-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .feuzon-drum-img {
+    max-width: 100%;
+    height: auto;
+    filter: drop-shadow(0 24px 24px rgba(0, 0, 0, 0.9));
+    animation: fadeInUp 1s ease-out;
+  }
+  
+  .feuzon-text {
+    text-align: left;
+    animation: fadeInUp 1.3s ease-out;
+  }
+  
+  .feuzon-logo {
+    max-width: 180px;
+    margin-bottom: 20px;
+  }
+  
+  .feuzon-quote {
+    font-size: 1.2rem;
+    font-style: italic;
+    color: #bbb;
+    margin-bottom: 20px;
+  }
+  
+  .feuzon-description {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #ccc;
+    margin-bottom: 18px;
+  }
+  
+  .feuzon-button {
+    padding: 12px 28px;
+    background: #b3544b;
+    color: #fff;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .feuzon-button:hover {
+    background: #9a3e3e;
+  }
+
+  .soundlegend-reveal-section {
+    scroll-snap-align: start;
+    background: #0d0d0d;
+    color: #fff;
+    padding: 80px 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  .soundlegend-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    max-width: 1200px;
+    width: 100%;
+    align-items: center;
+  }
+  
+  .soundlegend-image-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .soundlegend-drum-img {
+    max-width: 100%;
+    height: auto;
+    filter: drop-shadow(0 24px 24px rgba(0, 0, 0, 0.9));
+    animation: fadeInUp 1s ease-out;
+  }
+  
+  .soundlegend-text {
+    text-align: left;
+    animation: fadeInUp 1.3s ease-out;
+  }
+  
+  .soundlegend-logo {
+    max-width: 180px;
+    margin-bottom: 20px;
+  }
+  
+  .soundlegend-quote {
+    font-size: 1.2rem;
+    font-style: italic;
+    color: #bbb;
+    margin-bottom: 20px;
+  }
+  
+  .soundlegend-description {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #ccc;
+    margin-bottom: 18px;
+  }
+  
+  .soundlegend-button {
+    padding: 12px 28px;
+    background: #b3544b;
+    color: #fff;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .soundlegend-button:hover {
+    background: #9a3e3e;
+  }
+  
+  @media (max-width: 900px) {
+    .soundlegend-grid {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+  
+    .soundlegend-text {
+      text-align: center;
+    }
+  
+    .soundlegend-logo {
+      margin: 0 auto 20px;
+    }
+  }
+  
+  @media (max-width: 900px) {
+    .feuzon-grid {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+  
+    .feuzon-text {
+      text-align: center;
+    }
+  
+    .feuzon-logo {
+      margin: 0 auto 20px;
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 900px) {
+    .heritage-grid {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+  
+    .heritage-text {
+      text-align: center;
+    }
+  
+    .heritage-logo {
+      margin: 0 auto 20px;
+    }
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .craft-hero-overlay h1 {
+      font-size: 2.6rem;
+    }
+  
+    .craft-hero-overlay p {
+      font-size: 1.1rem;
+    }
+  
+    .drum-logo-parallax {
+      max-width: 140px;
+    }
+  
+    .drum-description {
+      font-size: 1rem;
+      padding: 0 16px;
+    }
+  
+    .drum-image-parallax {
+      max-width: 90%;
+    }
+  }
