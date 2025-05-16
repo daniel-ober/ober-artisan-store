@@ -1,605 +1,877 @@
 /* Global scroll container */
 .ourcraft-container {
-    height: 100vh;
-    overflow-y: scroll;                /* REQUIRED */
-    scroll-snap-type: y mandatory;     /* REQUIRED */
-    scroll-behavior: smooth;
-  }
+  height: 100vh;
+  overflow-y: scroll; /* REQUIRED */
+  scroll-snap-type: y mandatory; /* REQUIRED */
+  scroll-behavior: smooth;
+}
 
-  /* Snap section layout */
-  .ourcraft-section {
-    scroll-snap-align: start;
-    min-height: 100vh;
-    height: 100vh;
-    flex-shrink: 0;
+/* Snap section layout */
+.ourcraft-section {
+  scroll-snap-align: start;
+  min-height: 100vh;
+  height: 100vh;
+  flex-shrink: 0;
+}
+
+/* Hero Section with background image */
+.craft-hero-section {
+  background-image: url('/public/about/toastforbreakfast.png');
+  background-size: cover;
+  background-position: center top;
+  background-attachment: fixed;
+  height: 100vh;
+  /* display: flex; */
+  align-items: center;
+  justify-content: center;
+  text-align:justify;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hero Content Box */
+.craft-hero-overlay {
+  background: rgba(0, 0, 0, 0.82);
+  padding: 48px 32px;
+  /* border-radius: 16px; */
+  /* max-width: 850px; */
+  margin: 0 auto;
+  /* box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5); */
+  animation: fadeInUp 1.2s ease-out;
+}
+
+/* Hero Title */
+.craft-hero-overlay h1 {
+  font-size: 3.6rem;
+  color: #ffffff;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.7);
+  position: relative;
+}
+
+.craft-hero-overlay h1::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  margin: 12px auto 0;
+  background: linear-gradient(90deg, #e6b980, #b3544b);
+  border-radius: 2px;
+}
+
+/* Hero Subtitle */
+.craft-hero-overlay p {
+  font-size: 1.25rem;
+  /* font-style: italic; */
+  color: #e0e0e0;
+  margin-top: 0.5rem;
+  margin-bottom: 1.6rem;
+}
+
+/* Scroll cue */
+.scroll-indicator {
+  font-size: 1rem;
+  color: #ccc;
+  opacity: 0.8;
+  animation: bounceDown 2s infinite;
+}
+
+@keyframes bounceDown {
+  0% {
+    transform: translateY(0);
   }
-  
-  /* Hero Section with background image */
-  .craft-hero-section {
-    background-image: url("/public/about/toastforbreakfast.png");
-    background-size: cover;
-    background-position: center top;
-    background-attachment: fixed;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
+  50% {
+    transform: translateY(5px);
   }
-  
-  /* Hero Content Box */
-  .craft-hero-overlay {
-    background: rgba(0, 0, 0, 0.82);
-    padding: 48px 32px;
-    border-radius: 16px;
-    max-width: 90%;
-    margin: 0 auto;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+  100% {
+    transform: translateY(0);
   }
-  
-  /* Hero Title */
-  .craft-hero-overlay h1 {
-    font-size: 3.6rem;
-    color: #ffffff;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    margin-bottom: 1rem;
-    text-shadow: 0 3px 12px rgba(0, 0, 0, 0.7);
-    position: relative;
-  }
-  
-  .craft-hero-overlay h1::after {
-    content: "";
-    display: block;
-    width: 60px;
-    height: 4px;
-    margin: 12px auto 0;
-    background: linear-gradient(90deg, #e6b980, #b3544b);
-    border-radius: 2px;
-  }
-  
-  /* Hero Subtitle */
-  .craft-hero-overlay p {
-    font-size: 1.25rem;
-    font-style: italic;
-    color: #e0e0e0;
-    margin-top: 0.5rem;
-    margin-bottom: 1.6rem;
-  }
-  
-  /* Scroll cue */
-  .scroll-indicator {
-    font-size: 1rem;
-    color: #ccc;
-    opacity: 0.8;
-    animation: bounceDown 2s infinite;
-  }
-  
-  @keyframes bounceDown {
-    0%   { transform: translateY(0); }
-    50%  { transform: translateY(5px); }
-    100% { transform: translateY(0); }
-  }
-  
-  /* Story Section */
+}
+
+/* Story Section */
 /* Story Section */
 .story-section {
-    position: relative;
-    height: 100vh;
-    scroll-snap-align: start;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #111;
-    padding: 80px 24px 60px;
-    text-align: center;
-  }
-  
-  .story-inner {
-    background: rgba(0, 0, 0, 0.8);
-    padding: 48px 32px;
-    border-radius: 16px;
-    max-width: 850px;
-    margin: 0 auto;
-    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5);
-    animation: fadeInUp 1.2s ease-out;
-  }
-  
-  .story-inner h2 {
-    font-size: 2.4rem;
-    font-weight: 600;
+  position: relative;
+  height: 100vh;
+  scroll-snap-align: start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #111;
+  padding: 80px 24px 60px;
+  text-align: center;
+}
+
+.story-inner {
+  background: rgba(0, 0, 0, 0.8);
+  padding: 48px 32px;
+  border-radius: 16px;
+  /* max-width: 850px; */
+  margin: 0 auto;
+  /* box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5); */
+  animation: fadeInUp 1.2s ease-out;
+}
+
+.story-inner h2 {
+  font-size: 2.4rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 28px;
+  position: relative;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+.story-inner h2::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, #e6b980, #b3544b);
+  margin: 12px auto 0;
+  border-radius: 2px;
+}
+
+.story-inner p {
+  font-size: 1.1rem;
+  line-height: 1.75;
+  color: #ccc;
+  margin-bottom: 20px;
+}
+
+/* Philosophy Section */
+.philosophy-section {
+  scroll-snap-align: start;
+  min-height: 100vh;
+  height: auto; /* ✅ let it grow naturally */
+}
+
+.philosophy-inner {
+  background: rgba(0, 0, 0, 0.82);
+  padding: 48px 32px;
+  /* border-radius: 16px; */
+  /* max-width: 850px; */
+  margin: 0 auto;
+  /* box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5); */
+  animation: fadeInUp 1.2s ease-out;
+    text-align:justify;
+
+}
+
+.philosophy-inner h2 {
+  font-size: 2.4rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 28px;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+  position: relative;
+}
+
+.philosophy-inner h2::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, #e6b980, #b3544b);
+  margin: 12px auto 0;
+  border-radius: 2px;
+}
+
+.philosophy-inner p {
+  font-size: 1.1rem;
+  line-height: 1.75;
+  color: #ccc;
+  margin-bottom: 20px;
+}
+
+.philosophy-inner .quote {
+  font-style: italic;
+  font-size: 1.2rem;
+  color: #bbb;
+  margin-top: 16px;
+}
+
+.craft-image img {
+  width: 320px;
+  max-width: 100%;
+  border-radius: 12px;
+  /* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6); */
+  margin: 36px auto 0;
+  display: block;
+  animation: fadeInUp 1.2s ease-out;
+}
+
+.craft-values {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 32px;
+  margin-top: 36px;
+  animation: fadeInUp 1.2s ease-out;
+}
+
+.value-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  color: #e0e0e0;
+  font-size: 1rem;
+  width: 140px;
+  text-align: center;
+}
+
+.value-item svg {
+  stroke: #e6b980;
+  transition: transform 0.3s ease;
+}
+
+.value-item:hover svg {
+  transform: scale(1.15);
+}
+
+/* Sticky Drum Display */
+.sticky-drum-display-wrapper {
+  scroll-snap-align: start;
+  background: #0d0d0d;
+  padding: 0; /* ensure no padding adds extra space */
+  margin: 0;
+}
+
+.sticky-drum-display-inner {
+  position: relative;
+  height: 100vh; /* ✅ Full viewport height */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #0d0d0d;
+  padding: 0;
+}
+
+/* Series Sections */
+.drum-section-parallax {
+  background: #0d0d0d;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.drum-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.drum-logo-parallax {
+  max-width: 200px;
+  margin-bottom: 24px;
+}
+
+.drum-quote {
+  font-style: italic;
+  font-size: 1.2rem;
+  color: #ccc;
+  margin-bottom: 16px;
+}
+
+.drum-description {
+  font-size: 1.1rem;
+  color: #bbb;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto 40px;
+}
+
+.drum-image-parallax {
+  width: 100%;
+  max-width: 800px;
+  border-radius: 12px;
+  margin: 30px auto;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.drum-button {
+  padding: 12px 28px;
+  background: #b3544b;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.drum-button:hover {
+  background: #9a3e3e;
+}
+
+.artisan-intro-section {
+  scroll-snap-align: start;
+  background: rgba(0, 0, 0, 0.82);
+  color: #fff;
+  /* padding: 80px 24px; */
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.artisan-intro-inner {
+  max-width: 850px;
+  margin: 0 auto;
+  animation: fadeInUp 1.2s ease-out;
+}
+
+.artisan-intro-inner h2 {
+  font-size: 2.4rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #fff;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+.artisan-tagline,
+.artisan-intro-tagline {
+  font-style: italic;
+  font-size: 1.2rem;
+  color: #bbb;
+  margin: 20px 0;
+}
+
+.artisan-intro-paragraph {
+  font-size: 1.1rem;
+  line-height: 1.75;
+  color: #ccc;
+  margin-bottom: 18px;
+}
+
+.heritage-grid,
+.feuzon-grid,
+.soundlegend-grid {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  /* max-width: 1200px; */
+  width: 100%;
+  gap: 60px;
+  height: 100vh;
+  padding: 0 40px;
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.82)
+}
+
+.heritage-text,
+.feuzon-text,
+.soundlegend-text {
+  flex: 1;
+  text-align: left;
+}
+
+.heritage-image-wrapper,
+.feuzon-image-wrapper,
+.soundlegend-image-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.heritage-drum-img,
+.feuzon-drum-img,
+.soundlegend-drum-img {
+  max-width: 100%;
+  max-height: 70vh;
+  height: auto;
+  border-radius: 12px;
+  /* box-shadow: 0 20px 32px rgba(0, 0, 0, 0.6); */
+}
+
+/* Text styling */
+.heritage-logo,
+.feuzon-logo,
+.soundlegend-logo {
+  max-width: 220px;
+  margin-bottom: 16px;
+}
+
+.heritage-quote,
+.feuzon-quote,
+.soundlegend-quote {
+  font-size: 1.2rem;
+  font-style: italic;
+  color: #bbb;
+  margin-bottom: 16px;
+}
+
+.heritage-description,
+.feuzon-description,
+.soundlegend-description {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #ccc;
+  margin-bottom: 16px;
+}
+
+.heritage-button,
+.feuzon-button,
+.soundlegend-button {
+  padding: 12px 28px;
+  background: #b3544b;
+  color: #fff;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.heritage-button:hover,
+.feuzon-button:hover,
+.soundlegend-button:hover {
+  background: #9a3e3e;
+}
+
+/* ===== FEUZON: Desktop Styling ===== */
+.feuzon-reveal-section {
+  scroll-snap-align: start;
+  /* background: rgba(0, 0, 0, 0.82); */
     color: #fff;
-    margin-bottom: 28px;
-    position: relative;
-    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
-  }
-  
-  .story-inner h2::after {
-    content: "";
-    display: block;
-    width: 60px;
-    height: 4px;
-    background: linear-gradient(90deg, #e6b980, #b3544b);
-    margin: 12px auto 0;
-    border-radius: 2px;
-  }
-  
-  .story-inner p {
-    font-size: 1.1rem;
-    line-height: 1.75;
-    color: #ccc;
-    margin-bottom: 20px;
+  padding: 80px 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.feuzon-grid {
+    background: rgba(0, 0, 0, 0.82);
+    display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  /* max-width: 1200px; */
+  width: 100%;
+  gap: 60px;
+  height: 100%;
+  padding: 0 40px;
+  box-sizing: border-box;
+}
+
+.feuzon-image-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.feuzon-drum-img {
+  max-width: 100%;
+  max-height: 70vh;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 20px 32px rgba(0, 0, 0, 0.6);
+  animation: fadeInUp 1s ease-out;
+}
+
+.feuzon-text {
+  flex: 1;
+  text-align: left;
+  animation: fadeInUp 1.3s ease-out;
+}
+
+.feuzon-logo {
+  max-width: 220px;
+  margin-bottom: 16px;
+}
+
+.feuzon-quote {
+  font-size: 1.2rem;
+  font-style: italic;
+  color: #bbb;
+  margin-bottom: 16px;
+}
+
+.feuzon-description {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #ccc;
+  margin-bottom: 16px;
+}
+
+.feuzon-button {
+  padding: 12px 28px;
+  background: #b3544b;
+  color: #fff;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.feuzon-button:hover {
+  background: #9a3e3e;
+}
+
+.soundlegend-reveal-section {
+  scroll-snap-align: start;
+  background: #0d0d0d;
+  color: #fff;
+  padding: 80px 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.soundlegend-grid {
+  display: flex;
+  flex-direction: row; /* ✅ image left, text right */
+  align-items: center;
+  justify-content: center;
+  /* max-width: 1200px; */
+  width: 100%;
+  gap: 60px;
+  height: 100vh;
+  padding: 0 40px;
+  box-sizing: border-box;
+}
+
+.soundlegend-image-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.soundlegend-drum-img {
+  max-width: 100%;
+  max-height: 70vh;
+  height: auto;
+  border-radius: 12px;
+  /* box-shadow: 0 20px 32px rgba(0, 0, 0, 0.6); */
+}
+
+.soundlegend-text {
+  flex: 1;
+  text-align: left;
+  animation: fadeInUp 1.3s ease-out;
+}
+
+.soundlegend-logo {
+  max-width: 180px;
+  margin-bottom: 20px;
+}
+
+.soundlegend-quote {
+  font-size: 1.2rem;
+  font-style: italic;
+  color: #bbb;
+  margin-bottom: 20px;
+}
+
+.soundlegend-description {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #ccc;
+  margin-bottom: 18px;
+}
+
+.soundlegend-button {
+  padding: 12px 28px;
+  background: #b3544b;
+  color: #fff;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.soundlegend-button:hover {
+  background: #9a3e3e;
+}
+
+@media (max-width: 768px) {
+  .craft-hero-section {
+    background-position: center top;
+    /* padding: 0 12px; */
+    height: 100vh;
+    align-items: flex-start;
   }
 
-  /* Philosophy Section */
-  .philosophy-section {
-    scroll-snap-align: start;
-    min-height: 100vh;
-    height: auto; /* ✅ let it grow naturally */
+  .craft-hero-overlay {
+    padding: 32px 20px;
+    max-width: 100%;
+    border-radius: 0;
+    /* margin-top: 12vh; */
   }
-  
-  .philosophy-inner {
-    background: rgba(0, 0, 0, 0.82);
-    padding: 48px 32px;
-    border-radius: 16px;
-    max-width: 850px;
-    margin: 0 auto;
-    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5);
-    animation: fadeInUp 1.2s ease-out;
-  }
-  
-  .philosophy-inner h2 {
+
+  .craft-hero-overlay h1 {
     font-size: 2.4rem;
-    font-weight: 600;
-    color: #fff;
-    margin-bottom: 28px;
-    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
-    position: relative;
+    margin-bottom: 0.6rem;
   }
-  
-  .philosophy-inner h2::after {
-    content: "";
-    display: block;
-    width: 60px;
-    height: 4px;
-    background: linear-gradient(90deg, #e6b980, #b3544b);
-    margin: 12px auto 0;
-    border-radius: 2px;
+
+  .craft-hero-overlay h1::after {
+    width: 40px;
+    height: 3px;
+    margin-top: 10px;
   }
-  
-  .philosophy-inner p {
-    font-size: 1.1rem;
-    line-height: 1.75;
-    color: #ccc;
-    margin-bottom: 20px;
+
+  .craft-hero-overlay p {
+    font-size: 1rem;
+    margin-top: 0.4rem;
+    margin-bottom: 1rem;
+    line-height: 1.6;
   }
-  
-  .philosophy-inner .quote {
-    font-style: italic;
-    font-size: 1.2rem;
-    color: #bbb;
+
+  .scroll-indicator {
+    font-size: 0.9rem;
     margin-top: 16px;
   }
-  
-  .craft-image img {
-    width: 320px;
-    max-width: 100%;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-    margin: 36px auto 0;
-    display: block;
-    animation: fadeInUp 1.2s ease-out;
+
+  .heritage-text {
+    text-align: center;
+    padding: 0;
+  }
+
+  .heritage-grid {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    /* background: #0d0d0d; */
+    padding: 24px 16px;
+    height: 100vh;
+    gap: 12px;
+  }
+
+  .heritage-logo {
+    max-width: 140px;
+    margin-bottom: 4px;
+  }
+
+  .heritage-quote {
+    font-size: 1rem;
+    font-style: italic;
+    color: #aaa;
+    margin: 0 0 8px;
+  }
+
+  .heritage-description {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: #ccc;
+    margin-bottom: 8px;
+  }
+
+  .heritage-button {
+    font-size: 0.9rem;
+    padding: 10px 20px;
+    margin-bottom: 8px;
+  }
+
+  .heritage-drum-img {
+    max-height: 26vh;
+    width: auto;
+    margin-top: 4px;
+    box-shadow: 0 14px 20px rgba(0, 0, 0, 0.5);
+  }
+
+  .feuzon-grid {
+    flex-direction: column-reverse; /* ✅ IMAGE first, text second */
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    /* background: #0d0d0d; */
+    padding: 24px 16px;
+    height: 100vh;
+    gap: 12px;
+  }
+
+  .feuzon-text {
+    text-align: center;
+    padding: 0;
+  }
+
+  .feuzon-logo {
+    max-width: 140px;
+    margin-bottom: 4px;
+  }
+
+  .feuzon-quote {
+    font-size: 1rem;
+    font-style: italic;
+    color: #aaa;
+    margin: 0 0 8px;
+  }
+
+  .feuzon-description {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: #ccc;
+    margin-bottom: 8px;
+  }
+
+  .feuzon-button {
+    font-size: 0.9rem;
+    padding: 10px 20px;
+    margin-bottom: 8px;
+  }
+
+  .feuzon-drum-img {
+    max-height: 26vh;
+    width: auto;
+    margin-top: 4px;
+    box-shadow: 0 14px 20px rgba(0, 0, 0, 0.5);
+  }
+
+  .soundlegend-grid {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    /* background: #0d0d0d; */
+    padding: 24px 16px;
+    height: 100vh;
+    gap: 12px;
+    box-sizing: border-box;
+  }
+
+  .soundlegend-logo {
+    max-width: 140px;
+    margin-bottom: 4px;
+  }
+
+  .soundlegend-quote {
+    font-size: 1rem;
+    font-style: italic;
+    color: #aaa;
+    margin: 0 0 8px;
+  }
+
+  .soundlegend-description {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: #ccc;
+    margin-bottom: 8px;
+    padding: 0;
+  }
+
+  .soundlegend-button {
+    font-size: 0.9rem;
+    padding: 10px 20px;
+    margin-bottom: 8px;
+  }
+
+  .soundlegend-drum-img {
+    max-height: 26vh;
+    width: auto;
+    margin-top: 4px;
+    box-shadow: 0 14px 20px rgba(0, 0, 0, 0.5);
+  }
+
+  .philosophy-section {
+    /* padding: 24px 16px; */
+  }
+
+  .philosophy-inner {
+    /* padding: 32px 20px; */
+    /* border-radius: 12px; */
+    
+  }
+
+  .philosophy-inner h2 {
+    font-size: 2rem;
+    margin-bottom: 18px;
+    
+  }
+
+  .philosophy-inner h2::after {
+    width: 40px;
+    height: 3px;
+    margin: 10px auto 0;
+  }
+
+  .philosophy-inner p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+
+  .philosophy-inner .quote {
+    font-size: 1rem;
+    margin-top: 12px;
+    color: #aaa;
   }
 
   .craft-values {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 32px;
-    margin-top: 36px;
-    animation: fadeInUp 1.2s ease-out;
+    gap: 24px;
+    margin-top: 24px;
   }
-  
+
   .value-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    color: #e0e0e0;
-    font-size: 1rem;
-    width: 140px;
-    text-align: center;
+    width: 100px;
+    font-size: 0.85rem;
+    gap: 8px;
   }
-  
+
   .value-item svg {
-    stroke: #e6b980;
-    transition: transform 0.3s ease;
-  }
-  
-  .value-item:hover svg {
-    transform: scale(1.15);
+    width: 28px;
+    height: 28px;
   }
 
-  /* Sticky Drum Display */
-  .sticky-drum-display-wrapper {
-    scroll-snap-align: start;
-    background: #0d0d0d;
-    padding: 0; /* ensure no padding adds extra space */
-    margin: 0;
-  }
-  
-  .sticky-drum-display-inner {
-    position: relative;
-    height: 100vh; /* ✅ Full viewport height */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background: #0d0d0d;
-    padding: 0;
-  }
-  
-  /* Series Sections */
-  .drum-section-parallax {
-    background: #0d0d0d;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-  }
-  
-  .drum-content {
-    max-width: 1000px;
-    margin: 0 auto;
-    text-align: center;
-  }
-  
-  .drum-logo-parallax {
-    max-width: 200px;
-    margin-bottom: 24px;
-  }
-  
-  .drum-quote {
-    font-style: italic;
-    font-size: 1.2rem;
+  .value-description {
+    font-size: 0.9rem;
+    margin-top: 20px;
     color: #ccc;
-    margin-bottom: 16px;
+    text-align: center;
+    padding: 0 10px;
   }
-  
-  .drum-description {
-    font-size: 1.1rem;
-    color: #bbb;
-    line-height: 1.6;
-    max-width: 800px;
-    margin: 0 auto 40px;
-  }
-  
-  .drum-image-parallax {
-    width: 100%;
-    max-width: 800px;
-    border-radius: 12px;
-    margin: 30px auto;
-    display: block;
-    transition: transform 0.5s ease;
-  }
-  
-  .drum-button {
-    padding: 12px 28px;
-    background: #b3544b;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  
-  .drum-button:hover {
-    background: #9a3e3e;
+  .artisan-intro-section {
+    padding: 32px 16px;
+    height: 100vh;
+    align-items: flex-start;
   }
 
-  .artisan-intro-section {
-    scroll-snap-align: start;
-    background: #0d0d0d;
-    color: #fff;
-    padding: 80px 24px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-  }
-  
   .artisan-intro-inner {
-    max-width: 850px;
-    margin: 0 auto;
+    padding-top: 12vh;
     animation: fadeInUp 1.2s ease-out;
   }
-  
+
   .artisan-intro-inner h2 {
-    font-size: 2.4rem;
-    font-weight: 600;
-    margin-bottom: 10px;
-    color: #fff;
-    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+    font-size: 2rem;
+    margin-bottom: 12px;
+    text-align: center;
   }
-  
+
+  .artisan-intro-inner h2::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 3px;
+    margin: 10px auto 0;
+    background: linear-gradient(90deg, #e6b980, #b3544b);
+    border-radius: 2px;
+  }
+
   .artisan-tagline,
   .artisan-intro-tagline {
-    font-style: italic;
-    font-size: 1.2rem;
+    font-size: 1rem;
+    margin: 10px 0;
     color: #bbb;
-    margin: 20px 0;
+    font-style: italic;
+    text-align: center;
   }
-  
+
   .artisan-intro-paragraph {
-    font-size: 1.1rem;
-    line-height: 1.75;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 12px;
+    text-align: center;
     color: #ccc;
-    margin-bottom: 18px;
+    padding: 0 8px;
   }
-
-  .heritage-reveal-section {
-    scroll-snap-align: start;
-    background: #0d0d0d;
-    color: #fff;
-    padding: 80px 24px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-  }
-  
-  .heritage-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    max-width: 1200px;
-    width: 100%;
-    align-items: center;
-  }
-  
-  .heritage-image-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .heritage-drum-img {
-    max-width: 100%;
-    height: auto;
-    filter: drop-shadow(0 24px 24px rgba(0, 0, 0, 0.9));
-    animation: fadeInUp 1s ease-out;
-  }
-  
-  .heritage-text {
-    text-align: left;
-    animation: fadeInUp 1.3s ease-out;
-  }
-  
-  .heritage-logo {
-    max-width: 240px;
-    margin-bottom: 20px;
-  }
-  
-  .heritage-quote {
-    font-size: 1.2rem;
-    font-style: italic;
-    color: #bbb;
-    margin-bottom: 20px;
-  }
-  
-  .heritage-description {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    color: #ccc;
-    margin-bottom: 18px;
-  }
-  
-  .heritage-button {
-    padding: 12px 28px;
-    background: #b3544b;
-    color: #fff;
-    font-size: 1rem;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  
-  .heritage-button:hover {
-    background: #9a3e3e;
-  }
-
-  /* Feuzon Reveal Section */
-.feuzon-reveal-section {
-    scroll-snap-align: start;
-    background: #0d0d0d;
-    color: #fff;
-    padding: 80px 24px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-  }
-  
-  .feuzon-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    max-width: 1200px;
-    width: 100%;
-    align-items: center;
-  }
-  
-  .feuzon-image-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .feuzon-drum-img {
-    max-width: 100%;
-    height: auto;
-    filter: drop-shadow(0 24px 24px rgba(0, 0, 0, 0.9));
-    animation: fadeInUp 1s ease-out;
-  }
-  
-  .feuzon-text {
-    text-align: left;
-    animation: fadeInUp 1.3s ease-out;
-  }
-  
-  .feuzon-logo {
-    max-width: 180px;
-    margin-bottom: 20px;
-  }
-  
-  .feuzon-quote {
-    font-size: 1.2rem;
-    font-style: italic;
-    color: #bbb;
-    margin-bottom: 20px;
-  }
-  
-  .feuzon-description {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    color: #ccc;
-    margin-bottom: 18px;
-  }
-  
-  .feuzon-button {
-    padding: 12px 28px;
-    background: #b3544b;
-    color: #fff;
-    font-size: 1rem;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  
-  .feuzon-button:hover {
-    background: #9a3e3e;
-  }
-
-  .soundlegend-reveal-section {
-    scroll-snap-align: start;
-    background: #0d0d0d;
-    color: #fff;
-    padding: 80px 24px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-  }
-  
-  .soundlegend-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    max-width: 1200px;
-    width: 100%;
-    align-items: center;
-  }
-  
-  .soundlegend-image-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .soundlegend-drum-img {
-    max-width: 100%;
-    height: auto;
-    filter: drop-shadow(0 24px 24px rgba(0, 0, 0, 0.9));
-    animation: fadeInUp 1s ease-out;
-  }
-  
-  .soundlegend-text {
-    text-align: left;
-    animation: fadeInUp 1.3s ease-out;
-  }
-  
-  .soundlegend-logo {
-    max-width: 180px;
-    margin-bottom: 20px;
-  }
-  
-  .soundlegend-quote {
-    font-size: 1.2rem;
-    font-style: italic;
-    color: #bbb;
-    margin-bottom: 20px;
-  }
-  
-  .soundlegend-description {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    color: #ccc;
-    margin-bottom: 18px;
-  }
-  
-  .soundlegend-button {
-    padding: 12px 28px;
-    background: #b3544b;
-    color: #fff;
-    font-size: 1rem;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  
-  .soundlegend-button:hover {
-    background: #9a3e3e;
-  }
-  
-  
-  @media (max-width: 768px) {
-    .craft-hero-section {
-      height: 100vh;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start; /* 👈 KEY CHANGE to reduce top gap */
-      background-position: center center;
-      background-size: cover;
-      padding-top: 4vh; /* 👈 optional fine-tuned offset for better top alignment */
-    }
-  
-    .craft-hero-overlay {
-      max-height: 92vh;
-      overflow-y: auto;
-      padding: 24px 16px;
-      border-radius: 12px;
-      margin: 0 auto;
-      max-width: 92%;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-  
-    .craft-hero-overlay h1 {
-      font-size: 2.2rem;
-      margin-bottom: 0.75rem;
-    }
-  
-    .craft-hero-overlay p {
-      font-size: 0.95rem;
-      line-height: 1.5;
-      margin: 0.5rem 0;
-    }
-  
-    .scroll-indicator {
-      font-size: 0.9rem;
-      margin-top: auto;
-      padding: 8px 0;
-      flex-shrink: 0;
-    }
 }
