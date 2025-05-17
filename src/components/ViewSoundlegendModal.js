@@ -20,6 +20,28 @@ const getOverviewStatus = (status) => {
   return 'new';
 };
 
+const generateAndDownloadVCard = ({ firstName, lastName, email, phone }) => {
+  const vCard = `
+BEGIN:VCARD
+VERSION:3.0
+N:${lastName};${firstName}
+FN:${firstName} ${lastName}
+EMAIL:${email}
+${phone ? `TEL;TYPE=CELL:${phone}` : ''}
+END:VCARD
+  `.trim();
+
+  const blob = new Blob([vCard], { type: 'text/vcard' });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${firstName}_${lastName}_OberContact.vcf`;
+  a.click();
+
+  URL.revokeObjectURL(url);
+};
+
 const ViewSoundlegendModal = ({ submission, onClose, onStatusUpdate }) => {
   const [selectedStatus, setSelectedStatus] = useState(submission.status || '');
   const [notes, setNotes] = useState('');
@@ -146,6 +168,12 @@ const ViewSoundlegendModal = ({ submission, onClose, onStatusUpdate }) => {
       <strong>Submitted:</strong> {new Date(submittedAt.seconds * 1000).toLocaleString()}
     </div>
   )}
+  <button
+  className="add-contact-btn"
+  onClick={() => generateAndDownloadVCard({ firstName, lastName, email, phone })}
+>
+  Download Contact Card
+</button>
 </div>
 
         {artistBio && (
