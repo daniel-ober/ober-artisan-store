@@ -117,6 +117,21 @@
   .copy-btn:hover {
     background-color: #e0e0e0;
   }
+
+  .add-contact-btn {
+    margin-top: 10px;
+    padding: 6px 12px;
+    background-color: #00b80c;
+    color: white !important;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .add-contact-btn:hover {
+    background-color: #00990a; /* darker green hover */
+  }
   
   @keyframes fadeIn {
     from {
