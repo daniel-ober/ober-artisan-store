@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './OurCraftDrumDisplay.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,9 +9,10 @@ const DRUM_SERIES = [
     logo: '/resized-logos/heritage-white.png',
     overlay: '/artisanseries-bottom-layers/top-layer-left-drum-highlighted.png',
     quote: '“The drum that started it all—classic craftsmanship, timeless sound.”',
-    description: 'The HERITAGE Series embodies the soul of hand-crafted percussion. Each stave is meticulously hand-tuned using an exclusive torch tuning process, bringing out natural resonance and warmth while enhancing a striking scorched finish.',
+    description:
+      'The HERITAGE Series embodies the soul of hand-crafted percussion. Each stave is meticulously hand-tuned using an exclusive torch tuning process, bringing out natural resonance and warmth while enhancing a striking scorched finish.',
     route: '/artisanseries/heritage',
-    cta: 'Pre-Order Now',
+    cta: 'Order Yours Today',
   },
   {
     id: 'soundlegend',
@@ -19,9 +20,10 @@ const DRUM_SERIES = [
     logo: '/resized-logos/soundlegend-white.png',
     overlay: '/artisanseries-bottom-layers/top-layer-middle-drum-highlighted.png',
     quote: '“Every drum tells a story — let’s craft yours together.”',
-    description: 'The SoundLegend Series is more than just a drum — it’s a collaborative experience. From concept to creation, you’re part of the journey.',
-    route: '/soundlegend',
-    cta: 'Learn More',
+    description:
+      'The SoundLegend Series is more than just a drum — it’s a collaborative experience. From concept to creation, you’re part of the journey.',
+    route: '/artisanseries/soundlegend',
+    cta: 'Schedule Your FREE Consultation',
   },
   {
     id: 'feuzon',
@@ -29,31 +31,54 @@ const DRUM_SERIES = [
     logo: '/resized-logos/feuzon-white.png',
     overlay: '/artisanseries-bottom-layers/top-layer-right-drum-highlighted.png',
     quote: '“Blending tradition and innovation into one harmonious voice.”',
-    description: 'The FEUZØN Series fuses stave construction with a steam-bent outer shell for warm, articulate, and bold tone. Torch-tuned for harmonic richness.',
+    description:
+      'The FEUZØN Series fuses stave construction with a steam-bent outer shell for warm, articulate, and bold tone. Torch-tuned for harmonic richness.',
     route: '/artisanseries/feuzon',
-    cta: 'Pre-Order Now',
+    cta: 'Order Yours Today',
   },
 ];
 
 const OurCraftDrumDisplay = () => {
-  const [activeIndex, setActiveIndex] = useState(1);
-  const [overlayImage, setOverlayImage] = useState(DRUM_SERIES[1].overlay);
-  const [isFading, setIsFading] = useState(false);
   const navigate = useNavigate();
+  const [activeIndex, setActiveIndex] = useState(1);
+  const [hoverIndex, setHoverIndex] = useState(null);
+  const [isFading, setIsFading] = useState(false);
+  const [overlayImage, setOverlayImage] = useState(DRUM_SERIES[1].overlay);
+  const [previousOverlay, setPreviousOverlay] = useState(null);
+  const hoverTimeoutRef = useRef(null);
 
-  const handleDrumSwitch = (index) => {
+  const handleHover = (index) => {
     if (index === activeIndex) return;
+    setPreviousOverlay(overlayImage);
+    setOverlayImage(DRUM_SERIES[index].overlay);
     setIsFading(true);
-    setTimeout(() => {
-      setOverlayImage(DRUM_SERIES[index].overlay);
+    if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+    hoverTimeoutRef.current = setTimeout(() => {
       setActiveIndex(index);
+      setHoverIndex(null);
       setIsFading(false);
     }, 300);
+    setHoverIndex(index);
   };
+
+  const clearHover = () => {
+    if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+    setHoverIndex(null);
+  };
+
+  const handleClick = (index) => {
+    setPreviousOverlay(null);
+    setOverlayImage(DRUM_SERIES[index].overlay);
+    setActiveIndex(index);
+    setHoverIndex(null);
+    setIsFading(false);
+  };
+
+  const active = DRUM_SERIES[activeIndex];
 
   return (
     <div className="ourcraft-drum-interactive-section">
-      <h2 className="drum-comparison-heading">Our Founding Line</h2>
+      <h2 className="drum-comparison-heading">Founder's Batch</h2>
 
       <div className="drum-upper-content">
         <div className="ourcraft-drum-cta-row">
@@ -67,16 +92,33 @@ const OurCraftDrumDisplay = () => {
             </div>
           ))}
         </div>
+        <div className="drum-description-area">
+          <p className="description">{active.description}</p>
+        </div>
       </div>
 
       <div className="ourcraft-drum-layers">
-        <img src="/artisanseries-bottom-layers/base-layer-bottom.png" className="layer" alt="base bottom" />
-        <img src="/artisanseries-bottom-layers/base-layer-front.png" className="layer" alt="base front" />
-        <img src={overlayImage} className={`layer overlay ${isFading ? 'fade-out' : 'fade-in'}`} alt="overlay" />
-        <img src="/artisanseries-bottom-layers/top-layer-alldrums-color.png" className="layer top-fade" alt="top color" />
+        <img src="/artisanseries-bottom-layers/base-layer-bottom.png" className="layer" alt="base-bottom" />
+        <img src="/artisanseries-bottom-layers/base-layer-front.png" className="layer" alt="base-front" />
+        <img
+          src={overlayImage}
+          className={`layer overlay-image ${isFading ? 'fade-out' : 'fade-in'}`}
+          alt="overlay"
+        />
+        <img
+          src="/artisanseries-bottom-layers/top-layer-alldrums-color.png"
+          className="layer top-fade"
+          alt="top color"
+        />
         <div className="ourcraft-drum-zones">
           {[0, 1, 2].map((i) => (
-            <div key={i} className={`zone zone-${i}`} onClick={() => handleDrumSwitch(i)} />
+            <div
+              key={i}
+              className={`zone zone-${i}`}
+              onMouseEnter={() => handleHover(i)}
+              onMouseLeave={clearHover}
+              onClick={() => handleClick(i)}
+            />
           ))}
         </div>
       </div>

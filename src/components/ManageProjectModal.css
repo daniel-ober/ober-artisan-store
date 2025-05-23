@@ -26,7 +26,6 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
     border-bottom: 1px solid #ddd;
 }
 
@@ -53,14 +52,12 @@ header h2 {
     border-right: 1px solid #ddd;
     display: flex;
     flex-direction: column;
-    padding: 10px;
 }
 
 .sidebar button {
     background: none;
     border: none;
     text-align: left;
-    padding: 10px;
     cursor: pointer;
 }
 
@@ -69,11 +66,6 @@ header h2 {
     background: #e0e0e0;
 }
 
-main {
-    padding: 20px;
-    flex: 1;
-    overflow-y: auto;
-}
 
 .project-overview-content,
 .phase-details {
@@ -85,7 +77,6 @@ main {
 .project-details,
 .customer-details {
     background: #f9f9f9;
-    padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
 }
@@ -109,7 +100,6 @@ form textarea {
 
 form button {
     margin-top: 10px;
-    padding: 10px 20px;
     background: #4caf50;
     color: white;
     border: none;

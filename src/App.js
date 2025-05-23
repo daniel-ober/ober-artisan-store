@@ -8,6 +8,7 @@ import {
 } from 'react-router-dom';
 import { getDocs, collection } from 'firebase/firestore';
 import { db } from './firebaseConfig';
+
 import DrumViewer from './components/DrumViewer';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
@@ -47,9 +48,9 @@ import FoundersToastProductDetail from './components/FoundersToastProductDetail'
 import HeritageProductDetail from './components/HeritageProductDetail';
 import FeuzonProductDetail from './components/FeuzonProductDetail';
 import SoundlegendProductDetail from './components/SoundlegendProductDetail';
+
 import { DarkModeProvider } from './context/DarkModeContext';
 import { Toaster } from 'react-hot-toast';
-
 import './App.css';
 
 function App() {
@@ -156,8 +157,6 @@ function App() {
           />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/return-policy" element={<ReturnPolicy />} />
-         {/* <Route path="/builder" element={<DrumViewer />} /> */}
-
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route
             path="/custom-drum-builder"
@@ -196,7 +195,6 @@ function App() {
             }
           />
           <Route path="/merch" element={<Products isMerchPage={true} />} />
-          {/* Artisan Shop Product Detail Pages */}
           <Route
             path="/artisan-shop"
             element={<PreOrderPage isAdmin={isAdmin} isDarkMode={isDarkMode} />}
@@ -213,11 +211,12 @@ function App() {
             path="/artisan-shop/soundlegend"
             element={<SoundlegendProductDetail />}
           />
-          <Route path="/artisan-shop/founders-toast" element={<FoundersToastProductDetail />} />
+          <Route
+            path="/artisan-shop/founders-toast"
+            element={<FoundersToastProductDetail />}
+          />
           <Route path="/artisan-shop/:productId" element={<ProductDetail />} />
-          {/* Merch Product Detail */}
           <Route path="/merch/:productId" element={<ProductDetail />} />
-          {/* Legacy redirects */}
           <Route
             path="/artisanseries/:productId"
             element={
@@ -226,7 +225,7 @@ function App() {
                 replace
               />
             }
-          />{' '}
+          />
           <Route
             path="/products/:productId"
             element={
