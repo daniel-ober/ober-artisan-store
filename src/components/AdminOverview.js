@@ -129,7 +129,21 @@ const AdminOverview = () => {
           }));
         }
 
-        setSelectedItem({ id: snap.id, ...data });
+        setSelectedItem({
+          id: snap.id,
+          overviewStatus: data.overviewStatus || 'new',
+          createdAt: data.createdAt?.seconds
+            ? new Date(data.createdAt.seconds * 1000).toLocaleString()
+            : 'No date',
+          status: data.status || 'New',
+          internalNotes: data.internalNotes || [],
+          systemHistory: data.systemHistory || [],
+          category: data.category || 'General',
+          origin: data.origin || 'Contact Form',
+          name: `${data.first_name || ''} ${data.last_name || ''}`.trim(),
+          email: data.email || 'N/A',
+          message: data.message || '',
+        });
         setModalType(item.type);
       }
     } catch (error) {
@@ -221,6 +235,54 @@ const AdminOverview = () => {
     </div>
   );
 
+  const handleStatusChange = (id, newStatus) => {
+    const statusLower = newStatus.toLowerCase();
+    let newOverviewStatus;
+  
+    if (statusLower === 'new') {
+      newOverviewStatus = 'new';
+    } else if (statusLower.includes('in progress') || statusLower.includes('prospecting')) {
+      newOverviewStatus = 'inProgress';
+    } else {
+      newOverviewStatus = 'completed';
+    }
+  
+    // Update the modal view
+    setSelectedItem((prev) => {
+      if (!prev || prev.id !== id) return prev;
+      return {
+        ...prev,
+        status: newStatus,
+        overviewStatus: newOverviewStatus,
+      };
+    });
+  
+    // Re-bucket the item in overview columns
+    setData((prev) => {
+      const updatedItem = {
+        ...prev.new.find(i => i.id === id) ||
+        prev.inProgress.find(i => i.id === id) ||
+        prev.completed.find(i => i.id === id),
+        id,
+        status: newStatus,
+        overviewStatus: newOverviewStatus,
+      };
+  
+      return {
+        new: newOverviewStatus === 'new' ? [updatedItem, ...prev.new.filter(i => i.id !== id)] : prev.new.filter(i => i.id !== id),
+        inProgress: newOverviewStatus === 'inProgress' ? [updatedItem, ...prev.inProgress.filter(i => i.id !== id)] : prev.inProgress.filter(i => i.id !== id),
+        completed: newOverviewStatus === 'completed' ? [updatedItem, ...prev.completed.filter(i => i.id !== id)] : prev.completed.filter(i => i.id !== id),
+      };
+    });
+  };
+  
+  const handleCategoryChange = (id, newCategory) => {
+    setSelectedItem(prev => prev?.id === id
+      ? { ...prev, category: newCategory }
+      : prev
+    );
+  };
+
   return (
     <div className="admin-overview">
       <h1 className="overview-title">Admin Overview</h1>
@@ -238,12 +300,14 @@ const AdminOverview = () => {
         />
       )}
       {modalType === 'inquiry' && selectedItem && (
-        <ViewInquiryModal
-          isOpen={true}
-          onClose={() => setSelectedItem(null)}
-          inquiry={selectedItem}
-        />
-      )}
+  <ViewInquiryModal
+    isOpen={true}
+    onClose={() => setSelectedItem(null)}
+    inquiry={selectedItem}
+    onStatusChange={handleStatusChange}
+    onCategoryChange={handleCategoryChange}
+  />
+)}
       {modalType === 'submission' && selectedItem && (
         <ViewSoundlegendModal
           isOpen={true}

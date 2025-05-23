@@ -529,19 +529,7 @@
 //     </button>
 //   ))}
 // </aside>
-//           <main>
-//             {renderContent()}
-//             {isEditing && (
-//   <button onClick={handleSave} className="save-button">
-//     Save
-//   </button>
-//             )}
-//             {!isEditing && (
-//               <button onClick={handleEditToggle} className="edit-button">
-//                 Edit
-//               </button>
-//             )}
-//           </main>
+
 //         </div>
 //       </div>
 //     </div>
