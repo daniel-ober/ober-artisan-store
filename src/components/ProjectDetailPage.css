@@ -1,0 +1,22 @@
+.project-page {
+    max-width: 860px;
+    margin: 48px auto;
+    padding: 0 24px;
+    font-family: sans-serif;
+  }
+  
+  .project-section {
+    background: #f8f8f8;
+    padding: 24px;
+    margin-bottom: 24px;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  }
+  
+  .project-section h3 {
+    margin-top: 0;
+  }
+  
+  .project-section p {
+    margin: 8px 0;
+  }

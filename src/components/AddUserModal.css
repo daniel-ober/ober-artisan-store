@@ -1,141 +1,198 @@
 .add-user-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3999;
+  animation: fadeIn 0.25s ease-in-out;
+  font-family: 'Inter', sans-serif;
+}
 
-  .add-user-modal .error-message {
-    background-color: #f8d7da;
-    color: #721c24;
-    padding: 10px;
-    border-radius: 4px;
-    margin-bottom: 15px;
-    font-size: 0.9rem;
+.modal-content {
+  background: #fff;
+  border-radius: 10px;
+  padding: 24px;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.modal-content h2 {
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #222;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  font-size: 0.95rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #f9f9f9;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #4135EA;
+  outline: none;
+  background-color: #fff;
+}
+
+.form-group input[type='checkbox'] {
+  margin-right: 8px;
+  transform: scale(1.1);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.modal-actions button {
+  padding: 10px 16px;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.modal-actions button[type='submit'] {
+  background-color: #4135EA;
+  color: white;
+  font-weight: 600;
+}
+
+.modal-actions button[type='submit']:hover {
+  background-color: #2e28d9;
+}
+
+.modal-actions button[type='button'] {
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+.modal-actions button[type='button']:hover {
+  background-color: #e4e4e4;
+}
+
+.error-message {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.password-popup {
+  background: #fff4e5;
+  border: 1px solid #ffc107;
+  border-radius: 6px;
+  padding: 14px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.password-popup h4 {
+  color: #856404;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.password-display {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  justify-content: center;
+}
+
+.password-display input {
+  font-family: monospace;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  width: auto;
+  background: #fff;
+}
+
+.password-display button {
+  background: #eee;
+  border: 1px solid #ccc;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.password-display button:hover {
+  background: #ddd;
+}
+
+.password-popup-display {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  background: #fff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.password-popup-display code {
+  font-family: monospace;
+  font-size: 1rem;
+  color: #333;
+}
+
+.password-popup-display .copy-btn {
+  background: #f0f0f0;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.password-popup-display .copy-btn:hover {
+  background: #e0e0e0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
   }
-  
-  
-  .modal-content {
-    background: #ffffff;
-    border-radius: 8px;
-    max-width: 500px;
-    width: 100%;
-    padding: 20px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
-    animation: fadeIn 0.3s ease-in-out;
-    position: relative;
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
-  
-  .modal-content h2 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 20px;
-    text-align: center;
-    color: #333;
-  }
-  
-  .error-message {
-    background: #f8d7da;
-    color: #721c24;
-    padding: 10px;
-    border-radius: 6px;
-    margin-bottom: 15px;
-    font-size: 0.9rem;
-  }
-  
-  .success-message {
-    background: #d4edda;
-    color: #155724;
-    padding: 10px;
-    border-radius: 6px;
-    margin-bottom: 15px;
-    font-size: 0.9rem;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  .form-group label {
-    font-size: 0.9rem;
-    font-weight: 500;
-    margin-bottom: 5px;
-    display: block;
-  }
-  
-  .form-group input {
-    width: 100%;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 8px;
-    font-size: 0.9rem;
-    outline: none;
-  }
-  
-  .form-group input:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-  }
-  
-  button {
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
-  }
-  
-  button[type="submit"] {
-    background: #4135EA;
-    color: #fff;
-    font-weight: 600;
-    margin-top:16px;
-  }
-  
-  button[type="submit"]:hover {
-    background: #2b52ff;
-  }
-  
-  button[type="button"] {
-    background: #f4f4f4;
-    color: #333;
-  }
-  
-  button[type="button"]:hover {
-    background: #e4e4e4;
-  }
-  
-  .adduser-close-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    color: #333;
-    cursor: pointer;
-    transition: color 0.3s ease-in-out;
-  }
-  
-  .adduser-close-btn:hover {
-    color: #d9534f;
-  }
-  
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: scale(0.9);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-  
+}

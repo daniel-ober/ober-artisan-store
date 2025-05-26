@@ -8,8 +8,11 @@ import {
 } from 'react-router-dom';
 import { getDocs, collection } from 'firebase/firestore';
 import { db } from './firebaseConfig';
-
+import ProjectRoute from './components/ProjectRoute';
+import ProjectDetailPage from './components/ProjectDetailPage';
 import DrumViewer from './components/DrumViewer';
+import SoundlegendSignin from './components/SoundlegendSignin';
+
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import Home from './components/Home';
@@ -199,6 +202,11 @@ function App() {
             path="/artisan-shop"
             element={<PreOrderPage isAdmin={isAdmin} isDarkMode={isDarkMode} />}
           />
+<Route
+  path="/projects/:projectId"
+  element={<ProjectRoute element={ProjectDetailPage} />}
+/>
+<Route path="/signin" element={<SoundlegendSignin />} />
           <Route
             path="/artisan-shop/heritage"
             element={<HeritageProductDetail />}
