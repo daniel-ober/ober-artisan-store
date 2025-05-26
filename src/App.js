@@ -202,11 +202,11 @@ function App() {
             path="/artisan-shop"
             element={<PreOrderPage isAdmin={isAdmin} isDarkMode={isDarkMode} />}
           />
-<Route
-  path="/projects/:projectId"
-  element={<ProjectRoute element={ProjectDetailPage} />}
-/>
-<Route path="/signin" element={<SoundlegendSignin />} />
+          <Route
+            path="/projects/:projectId"
+            element={<ProjectRoute element={ProjectDetailPage} />}
+          />
+          <Route path="/signin" element={<SoundlegendSignin />} />
           <Route
             path="/artisan-shop/heritage"
             element={<HeritageProductDetail />}

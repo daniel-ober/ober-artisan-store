@@ -10,47 +10,43 @@ const DRUM_SERIES = [
     name: 'HERITAGE',
     logo: '/resized-logos/heritage-white.png',
     overlay: '/artisanseries-bottom-layers/top-layer-left-drum-highlighted.png',
-    quote: '“The drum that started it all—classic craftsmanship, timeless sound.”',
+    quote:
+      '“The drum that started it all—classic craftsmanship, timeless sound.”',
     description:
       'The HERITAGE Series embodies the soul of hand-crafted percussion. Designed and built in Nashville, TN, this stave snare drum is a testament to the artistry and dedication behind every Ober Artisan Drum. Each stave is meticulously hand-tuned using an exclusive torch tuning process, bringing out the natural resonance and warmth of the wood while enhancing its striking scorched finish. Available in multiple stave configurations and carefully selected Oak, the HERITAGE Series delivers a dynamic response, crisp attack, and balanced tonal complexity.',
     specs: [],
-    images: [
-      '/artisan-shop/heritage-left.png'
-    ],
+    images: ['/artisan-shop/heritage-left.png'],
     audioSamples: [],
   },
   {
     id: 'soundlegend',
     name: 'SOUNDLEGEND',
     logo: '/resized-logos/soundlegend-white.png',
-    overlay: '/artisanseries-bottom-layers/top-layer-middle-drum-highlighted.png',
+    overlay:
+      '/artisanseries-bottom-layers/top-layer-middle-drum-highlighted.png',
     quote: '“Every drum tells a story—let’s craft yours together.”',
     description:
       'The SoundLegend Series is more than just a drum—it’s an experience. Designed for drummers who want to collaborate directly with a master artisan, this fully custom shop offering gives you the freedom to explore new sonic possibilities. Through a hands-on process that includes consultation calls, high-resolution concept renders, and build updates, you’ll watch your dream snare drum take shape before your eyes.',
     specs: [],
-    images: [
-      '/artisan-shop/soundlegend-left.png'
-    ],
-    // videoUrl: 'https://www.youtube.com/embed/PW28PjMCpxg?rel=0&vq=hd2160',
+    images: ['/artisan-shop/soundlegend-left.png'],
     audioSamples: [],
   },
   {
     id: 'feuzon',
     name: 'FEUZØN',
     logo: '/resized-logos/feuzon-white.png',
-    overlay: '/artisanseries-bottom-layers/top-layer-right-drum-highlighted.png',
+    overlay:
+      '/artisanseries-bottom-layers/top-layer-right-drum-highlighted.png',
     quote: '“Blending tradition and innovation into one harmonious voice.”',
     description:
       'The FEUZØN Series is a revolutionary hybrid snare drum that fuses the precision of stave construction with the controlled resonance of a steam bent outer shell. This innovative design enhances warmth, articulation, and dynamic response, offering a snare drum unlike any other. Each drum is torch-tuned to refine its sonic character, bringing out the rich harmonics and bold presence that drummers crave.',
     specs: [],
-    images: [
-      '/artisan-shop/feuzon-right.png'
-    ],
+    images: ['/artisan-shop/feuzon-right.png'],
     audioSamples: [],
   },
 ];
 
-const ArtisanDrums = () => {
+const ArtisanDrums = ({ showAll = false }) => {
   const { isDarkMode } = useContext(DarkModeContext);
   const navigate = useNavigate();
   const [activeIndex, setActiveIndex] = useState(1);
@@ -61,15 +57,10 @@ const ArtisanDrums = () => {
   const [overlayImage, setOverlayImage] = useState(DRUM_SERIES[1].overlay);
   const [lightboxIndex, setLightboxIndex] = useState(null);
   const [zoomed, setZoomed] = useState(false);
-  const [isTriggerActive, setIsTriggerActive] = useState(false);
-  const [isFinalSectionVisible, setFinalSectionVisible] = useState(false);
-  const [finalOverlayOpacity, setFinalOverlayOpacity] = useState(0);
+  const [isStuck, setIsStuck] = useState(true);
 
   const hoverTimeoutRef = useRef(null);
   const footerRef = useRef(null);
-  const finalSectionRef = useRef(null);
-  const product = { currentQuantity: 1 };
-  const preOrderButton = "Pre-Order Now";
 
   const active = DRUM_SERIES[activeIndex];
 
@@ -83,7 +74,6 @@ const ArtisanDrums = () => {
       setIsFading(false);
     }, 600);
   };
-  
 
   useEffect(() => {
     const galleryObserver = new IntersectionObserver(
@@ -105,12 +95,12 @@ const ArtisanDrums = () => {
 
   const handleHover = (index) => {
     if (index === activeIndex) return;
-  
+
     const hoveredSeries = DRUM_SERIES[index].name;
     if (analytics) {
       logEvent(analytics, 'view_drum_series', { series: hoveredSeries });
     }
-  
+
     startFade(DRUM_SERIES[index].overlay);
     setHoverIndex(index);
     if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
@@ -127,12 +117,12 @@ const ArtisanDrums = () => {
 
   const handleDrumSwitch = (index) => {
     if (index === activeIndex) return;
-  
+
     const clickedSeries = DRUM_SERIES[index].name;
     if (analytics) {
       logEvent(analytics, 'click_drum_series', { series: clickedSeries });
     }
-  
+
     setActiveIndex(index);
     setHoverIndex(null);
     setPreviousOverlay(null);
@@ -142,159 +132,120 @@ const ArtisanDrums = () => {
   };
 
   useEffect(() => {
-    const triggerObserver = new IntersectionObserver(
-      ([entry]) => setIsTriggerActive(entry.isIntersecting),
-      { threshold: 0.5 }
-    );
-    const finalObserver = new IntersectionObserver(
-      ([entry]) => setFinalSectionVisible(entry.isIntersecting),
-      { threshold: 0.4 }
-    );
-    if (footerRef.current) triggerObserver.observe(footerRef.current);
-    if (finalSectionRef.current) finalObserver.observe(finalSectionRef.current);
-    return () => {
-      triggerObserver.disconnect();
-      finalObserver.disconnect();
-    };
-  }, []);
-
-  useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        const ratio = entry.intersectionRatio;
-        const clamped = ratio >= 0.95 ? 1 : ratio <= 0.05 ? 0 : ratio;
-        setFinalOverlayOpacity(clamped);
+        setIsStuck(!entry.isIntersecting);
       },
-      {
-        threshold: Array.from({ length: 21 }, (_, i) => i * 0.05),
-      }
+      { threshold: 0.01 }
     );
-    if (finalSectionRef.current) observer.observe(finalSectionRef.current);
+
+    if (footerRef.current) {
+      observer.observe(footerRef.current);
+    }
+
     return () => observer.disconnect();
   }, []);
 
   return (
-  <div className="artisanseries-container">
-      <div className={`logo-single-wrapper sticky-logo-wrapper fade-transition ${isFading ? 'fade-out' : ''}`}>
-        <img src={active.logo} alt={active.name} className="artisanseries-header-image" />
+    <div className="artisanseries-container">
+      <div
+        className={`logo-single-wrapper sticky-logo-wrapper fade-transition ${isFading ? 'fade-out' : ''}`}
+      >
+        <img
+          src={active.logo}
+          alt={active.name}
+          className="artisanseries-header-image"
+        />
       </div>
 
-      <div className={`drum-display fade-transition ${isFading ? 'fade-out' : ''}`}>
+      <div
+        className={`drum-display fade-transition ${isFading ? 'fade-out' : ''}`}
+      >
         <div className="text-layer">
-          <p className="description"><strong>{active.quote}</strong></p>
+          <p className="description">
+            <strong>{active.quote}</strong>
+          </p>
           <p className="description">{active.description}</p>
-
-          {/* {active.id === 'soundlegend' && (
-            <div className="soundlegend-video-wrapper">
-              <iframe
-                src={active.videoUrl}
-                title="SoundLegend Demo"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              ></iframe>
-            </div>
-          )} */}
-
-          {/* {active.images?.length > 0 && (
-            <div className="gallery-strip">
-              {active.images.map((img, idx) => (
-                <img
-                  key={idx}
-                  src={img}
-                  alt={`${active.name} gallery ${idx + 1}`}
-                  className="gallery-image fade-lazy"
-                  loading="lazy"
-                  onClick={() => {
-                    setLightboxIndex(idx);
-                    setZoomed(false);
-                  }}
-                />
-              ))}
-            </div>
-          )} */}
         </div>
       </div>
 
-      {!isTriggerActive && <div className="drum-layers-spacer" />}
-      <div className={`drum-layers ${isTriggerActive ? 'scrolling' : 'fixed'}`}>
-        <img src="/artisanseries-bottom-layers/base-layer-bottom.png" className="layer" />
-        <img src="/artisanseries-bottom-layers/base-layer-front.png" className="layer" />
-        <img src={overlayImage} className="layer overlay-image" style={{ opacity: 1 - finalOverlayOpacity }} />
-        <img src="/artisanseries-bottom-layers/top-layer-alldrums-color.png" className="layer overlay-image" style={{ opacity: finalOverlayOpacity }} />
+      <div className={`drum-layers ${isStuck ? 'stuck' : ''}`}>
+        <img
+          src="/artisanseries-bottom-layers/base-layer-bottom.png"
+          className="layer"
+        />
+        <img
+          src="/artisanseries-bottom-layers/base-layer-front.png"
+          className="layer"
+        />
+        <img src={overlayImage} className="layer overlay-image" />
+        <img
+          src="/artisanseries-bottom-layers/top-layer-alldrums-color.png"
+          className={`layer overlay-image ${
+            hoverIndex !== null && hoverIndex !== activeIndex ? 'grayscale' : ''
+          }`}
+        />{' '}
         <div className="drum-click-zones">
           {[0, 1, 2].map((i) => (
-            <div key={i} className={`zone zone-${i}`} onMouseEnter={() => handleHover(i)} onMouseLeave={clearHover} onClick={() => handleDrumSwitch(i)} />
+            <div
+              key={i}
+              className={`zone zone-${i}`}
+              onMouseEnter={() => handleHover(i)}
+              onMouseLeave={clearHover}
+              onClick={() => handleDrumSwitch(i)}
+            />
           ))}
         </div>
       </div>
 
       <div ref={footerRef} className="footer-trigger-marker" />
 
-      {/* ✅ Final Section: Your layout */}
-      <div className="drum-final-text" ref={finalSectionRef}>
-        {/* HERITAGE */}
-        <div className="drum-info">
-          <img src="/v2logo-large/heritage-white.png" alt="Heritage" className="drum-logo" />
-          {/* <ul className="description-list">
-            <li>Stave Construction</li>
-            <li>Wood Selection: Northern Red Oak</li>
-            <li>Available Sizes: 12”, 13”, 14”</li>
-            <li>Torch-scorched aesthetic</li>
-          </ul> */}
-          <button
-            className={product.currentQuantity === 0 ? "prod-card-view-details-button" : "preorder-card-preorder-button"}
-            onClick={() => navigate("/artisanseries/heritage")}
-          >
-            {preOrderButton}
-          </button>
-        </div>
-
-        {/* SOUNDLEGEND */}
-        <div className="drum-info">
-          <img src="/v2logo-large/soundlegend-white.png" alt="SoundLegend" className="drum-logo" />
-          {/* <ul className="description-list">
-            <li>Various Shell Consttruction Options</li>
-            <li>Fully Customizable: Size, Lugs, Finish, Wood</li>
-            <li>Direct Collaboration with Artisan, Dan Ober</li>
-            <li>SoundLegend Journey Web Access</li>
-            <li>High Resolution Concept Renders</li>
-            <li>Limited Edition Gift Item and more!</li>
-          </ul> */}
-          <button
-            className={product.currentQuantity === 0 ? "prod-card-view-details-button" : "preorder-card-preorder-button"}
-            onClick={() => navigate("/artisanseries/soundlegend")}
-          >
-            Learn More
-          </button>
-        </div>
-
-        {/* FEUZØN */}
-        <div className="drum-info">
-          <img src="/v2logo-large/feuzon-white.png" alt="Feuzon" className="drum-logo" />
-          {/* <ul className="description-list">
-            <li>Hybrid Shell Construction</li>
-            <li>Various Wood Combinations Available</li>
-            <li>Available Sizes: 12”, 13”, 14”</li>
-            <li>Torch-tuned to perfection</li>
-          </ul> */}
-          <button
-            className={product.currentQuantity === 0 ? "prod-card-view-details-button" : "preorder-card-preorder-button"}
-            onClick={() => navigate("/artisanseries/feuzon")}
-          >
-            {preOrderButton}
-          </button>
-        </div>
-      </div>
-
       {lightboxIndex !== null && (
-        <div className={`lightbox ${zoomed ? 'zoomed' : ''}`} onClick={() => setLightboxIndex(null)}>
-          <button className="lightbox-close" onClick={(e) => { e.stopPropagation(); setLightboxIndex(null); }}>×</button>
-          <button className="lightbox-arrow left" onClick={(e) => { e.stopPropagation(); setLightboxIndex((prev) => prev === 0 ? active.images.length - 1 : prev - 1); }}>‹</button>
-          <div className="lightbox-image-container" onClick={(e) => e.stopPropagation()}>
-            <img src={active.images[lightboxIndex]} alt={`Zoom ${lightboxIndex + 1}`} onClick={() => setZoomed((z) => !z)} />
+        <div
+          className={`lightbox ${zoomed ? 'zoomed' : ''}`}
+          onClick={() => setLightboxIndex(null)}
+        >
+          <button
+            className="lightbox-close"
+            onClick={(e) => {
+              e.stopPropagation();
+              setLightboxIndex(null);
+            }}
+          >
+            ×
+          </button>
+          <button
+            className="lightbox-arrow left"
+            onClick={(e) => {
+              e.stopPropagation();
+              setLightboxIndex((prev) =>
+                prev === 0 ? active.images.length - 1 : prev - 1
+              );
+            }}
+          >
+            ‹
+          </button>
+          <div
+            className="lightbox-image-container"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={active.images[lightboxIndex]}
+              alt={`Zoom ${lightboxIndex + 1}`}
+              onClick={() => setZoomed((z) => !z)}
+            />
           </div>
-          <button className="lightbox-arrow right" onClick={(e) => { e.stopPropagation(); setLightboxIndex((prev) => prev === active.images.length - 1 ? 0 : prev + 1); }}>›</button>
+          <button
+            className="lightbox-arrow right"
+            onClick={(e) => {
+              e.stopPropagation();
+              setLightboxIndex((prev) =>
+                prev === active.images.length - 1 ? 0 : prev + 1
+              );
+            }}
+          >
+            ›
+          </button>
         </div>
       )}
     </div>

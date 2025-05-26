@@ -1,4 +1,5 @@
 /* Reset */
+
 html,
 body {
   height: 100%;
@@ -6,7 +7,7 @@ body {
   padding: 0;
   scroll-behavior: smooth;
   overflow: visible;
-  scroll-padding-top: 140px; /* adjust based on estimated mobile UI height */
+  scroll-padding-top: 100px;
 }
 
 /* Main wrapper - no scroll trap */
@@ -15,21 +16,27 @@ body {
   overflow: visible;
 }
 
-/* Container - allow natural flow */
 .ourcraft-container {
   height: auto;
   overflow: visible;
-  background: rgba(0, 0, 0, 0.82);
+  padding: 0;
+  background: rgba(0, 0, 0, 0.892);
 }
 
-/* Scroll snapping is handled by body.scroll-snap-enabled */
+/* Scroll snapping */
 .ourcraft-section {
+    scroll-snap-align: start;
+    min-height: 100vh;
+    height: 100vh;
+    position: relative;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
-    position: relative;
+    /* justify-content: flex-start; */
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    box-sizing: border-box;
   }
-  
 
 .ourcraft-section-inner {
   padding: 48px 32px;
@@ -38,12 +45,25 @@ body {
   flex-grow: 1;
 }
 
-/* Hero section */
-.craft-hero-section {
-  background-size: cover;
-  background-position: center top;
-  background-attachment: fixed;
-  background-blend-mode: multiply;
+.craft-hero-section::before,
+.philosophy-section::before,
+.artisan-intro-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.81); /* adjust darkness here */
+  z-index: -2;
+}
+
+/* Make sure the content stays above the overlay */
+.craft-hero-section,
+.philosophy-section,
+.artisan-intro-section {
+  position: relative;
+  z-index: 1;
 }
 
 /* Section wrappers */
@@ -53,7 +73,7 @@ body {
   padding: 48px 32px;
   max-width: 850px;
   margin: 0 auto;
-  text-align: justify;
+  /* text-align: justify; */
 }
 
 /* Headings */
@@ -64,7 +84,7 @@ body {
   font-size: 2.4rem;
   font-weight: 600;
   color: #fff;
-  margin-bottom: 28px;
+  /* margin-bottom: 28px; */
   text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
   text-align: center;
 }
@@ -96,7 +116,7 @@ body {
   font-style: italic;
   font-size: 1.2rem;
   color: #bbb;
-  margin-top: 16px;
+  /* margin-top: 16px; */
 }
 
 .artisan-tagline,
@@ -109,19 +129,31 @@ body {
 
 /* Scroll cue */
 .scroll-indicator {
-  font-size: 1rem;
-  color: #ccc;
-  opacity: 0.9;
-  text-align: center;
-  animation: bounceDown 2s infinite;
-  cursor: pointer;
-}
+    pointer-events: auto;
+    font-size: 1.15rem;
+    color: #ccc;
+    opacity: 0.98;
+    text-align: center;
+    animation: bounceDown 2s infinite;
+    cursor: pointer;
+    margin-bottom: 16px;
+    background: none;
+    border: none;
+  }
 
 .section-content {
-    display: flex;
-    flex-direction: column;
-    /* REMOVE flex: 1 0 auto; */
-    justify-content: flex-start;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: flex-start; */
+}
+
+.artisan-final-section {
+    background: black;
+    position: relative;
+    padding-top: 60px;
+    padding-bottom: 100px;
+    overflow: hidden;
+    z-index: 1;
   }
 
 @keyframes bounceDown {
@@ -138,30 +170,40 @@ body {
 
 /* Value icons (philosophy section) */
 .craft-values {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 12px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0 12px;
+  /* justify-items: center; */
+  align-items: start;
+  max-width: 950px;
+  margin: 0 auto 20px auto;
 }
 
 .value-item {
-  position: relative; /* <-- ensures child z-index works */
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
-  color: #e0e0e0;
-  font-size: 1rem;
-  width: 100px;
+  justify-content: flex-start;
   text-align: center;
-  cursor: pointer;
-  padding: 12px;
+  font-size: 0.98rem;
+  color: #e0e0e0;
+  padding: 10px 2px;
   border-radius: 12px;
+  cursor: pointer;
   transition:
-    background 0.3s ease,
-    box-shadow 0.3s ease,
-    transform 0.3s ease;
-  z-index: 1; /* base level */
+    background 0.2s,
+    box-shadow 0.2s,
+    transform 0.2s;
+  min-width: 90px;
+  max-width: 120px;
+}
+
+.value-item p {
+  margin: 0;
+  width: 100%;
+  text-align: center;
+  white-space: normal;
+  word-break: break-word;
 }
 
 .value-item:hover {
@@ -171,19 +213,18 @@ body {
 }
 
 .value-item:hover svg {
-  transform: scale(1.15);
   stroke: #f3c694;
+  transform: scale(1.15);
 }
 
 .value-item svg {
+  width: 25px !important;
+  height: 25px !important;
+  margin-bottom: 5px;
   stroke: #e6b980;
   transition:
-    transform 0.3s ease,
-    stroke 0.3s ease;
-}
-
-.value-item p {
-  margin: 0;
+    stroke 0.2s,
+    transform 0.2s;
 }
 
 .icon-wrapper {
@@ -200,7 +241,6 @@ body {
   transform: translateX(-50%) translateY(8px);
   opacity: 0;
   visibility: hidden;
-  /* background-color: #111; */
   color: #fff;
   padding: 14px 18px;
   border-radius: 10px;
@@ -213,7 +253,7 @@ body {
     opacity 0.35s ease 0.15s,
     transform 0.35s ease 0.15s;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
-  z-index: 9999; /* ensures it's on top of all items */
+  z-index: 9999;
   backdrop-filter: blur(6px);
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
@@ -239,7 +279,6 @@ body {
 .heritage-reveal-section,
 .feuzon-reveal-section,
 .soundlegend-reveal-section {
-  /* background-color: rgba(0, 0, 0, 0.82); */
   min-height: 100vh;
   scroll-snap-align: start;
   display: flex;
@@ -258,40 +297,63 @@ body {
   justify-content: center;
   max-width: 1200px;
   gap: 60px;
-  /* padding: 0 40px; */
-  box-sizing: border-box;
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
+  position: relative;
+  box-sizing: border-box;
 }
 
-.hero-grid,
-.philosophy-grid,
-.founder-grid {
+.drum-image-col {
+  flex: 1 1 0;
+  max-width: 48%;
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
-  max-width: 1200px;
-  gap: 60px;
-  padding: 0 40px;
-  box-sizing: border-box;
-  width: 100%;
-  height: 100%;
+  min-width: 320px;
 }
 
-.hero-text,
-.philosophy-text,
-.founder-text {
-  flex: 1;
+.drum-text-col {
+  flex: 1 1 0;
+  max-width: 48%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  min-width: 320px;
+}
+
+.heritage-drum-img,
+.feuzon-drum-img,
+.soundlegend-drum-img {
+  width: 100%;
+  max-width: 510px;
+  max-height: 60vh;
+  border-radius: 12px;
+  object-fit: contain;
+  display: block;
+  box-shadow: 0 6px 48px 0 rgba(0, 0, 0, 0.22);
+  margin: 0 auto;
+}
+
+.heritage-logo,
+.feuzon-logo,
+.soundlegend-logo {
+  max-width: 350px;
+  width: 100%;
+  margin-bottom: 24px;
+  margin-top: 0;
+  display: block;
+}
+
+.heritage-text,
+.feuzon-text,
+.soundlegend-text {
+  width: 100%;
   text-align: left;
-}
-
-.heritage-image-wrapper,
-.feuzon-image-wrapper,
-.soundlegend-image-wrapper {
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   justify-content: center;
-  align-items: center;
 }
 
 .heritage-drum-img,
@@ -305,21 +367,13 @@ body {
   transition: transform 0.5s ease;
 }
 
-.heritage-logo,
-.feuzon-logo,
-.soundlegend-logo {
-  max-width: 200px;
-  margin-bottom: 16px;
-  margin-top: 40px;
-}
-
 .heritage-quote,
 .feuzon-quote,
 .soundlegend-quote {
   font-style: italic;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   color: #bbb;
-  margin-bottom: 16px;
+  margin-bottom: 26px;
 }
 
 .heritage-description,
@@ -329,6 +383,25 @@ body {
   color: #ccc;
   line-height: 1.6;
   margin-bottom: 16px;
+}
+
+.heritage-description-list,
+.feuzon-description-list,
+.soundlegend-description-list {
+  color: #eaeaea;               /* Light text color */
+  list-style-type: disc;        /* Visible bullets */
+  padding-left: 1.0rem;         /* Space for bullets */
+  /* margin-top: 12px; */
+  /* margin-bottom: 24px; */
+  font-size: 1rem;
+  line-height: 1;
+  text-align: left;
+}
+
+.heritage-description-list li,
+.feuzon-description-list li,
+.soundlegend-description-list li {
+  margin-bottom: 10px;
 }
 
 .heritage-button,
@@ -351,33 +424,77 @@ body {
 }
 
 .scroll-indicator-wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: 16px; /* set as tight as you want */
-    margin-bottom: 16px;
-  }
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  /* margin-top: 16px; */
+  margin-bottom: 16px;
+}
 
 .scroll-indicator {
-  pointer-events: auto; /* restore click */
+  pointer-events: auto;
   font-size: 1.15rem;
   color: #ccc;
   opacity: 0.98;
   text-align: center;
   animation: bounceDown 2s infinite;
   cursor: pointer;
-  margin-bottom: 16px; /* fine-tune for spacing from the very bottom */
+  margin-bottom: 16px;
   background: none;
   border: none;
 }
 
 .mobile-scroll-indicator {
-    display: none;
+  display: none;
+}
+
+.desktop-scroll-indicator {
+  display: flex;
+  justify-content: center;
+}
+
+.feuzon-grid {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* justify-content: center; */
+  max-width: 1200px;
+  gap: 60px;
+  width: 100%;
+  /* height: 100%; */
+  position: relative;
+  box-sizing: border-box;
+}
+.feuzon-text-col {
+  order: 1; /* Text comes first on desktop */
+}
+.feuzon-image-wrapper {
+  order: 2; /* Image comes second (right) on desktop */
+}
+
+.craft-hero-section {
+    background-image: url('/public/our-craft/1.png');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
   }
   
-  .desktop-scroll-indicator {
-    display: flex;
-    justify-content: center;
+  .philosophy-section {
+    background-image: url('/public/our-craft/2.png');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+  }
+  
+  .artisan-intro-section {
+    background-image: url('/public/our-craft/3.png');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
   }
 
   @media (max-width: 768px) {
@@ -387,9 +504,41 @@ body {
       display: flex !important;
       flex-direction: column !important;
       justify-content: flex-start !important;
-      padding-bottom: 0 !important;
-      margin-bottom: 0 !important;
+      padding: 0 !important;
+      margin: 0 !important;
       overflow: hidden;
+    }
+  
+    /* ✅ PATCH: Remove top spacing from Founder's Batch */
+    .artisan-intro-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center !important; /* Center the content vertically */
+        align-items: center;
+        height: 100vh !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        overflow: hidden;
+      }
+  
+      .founder-grid.section-content {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0 16px !important;
+      }
+  
+      .founder-text {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+  
+    .artisan-intro-inner {
+      margin-top: 0 !important;
+      padding-top: 0 !important;
     }
   
     /* Drum Reveal Sections — force full-screen and flex layout */
@@ -410,54 +559,76 @@ body {
     .heritage-grid,
     .feuzon-grid,
     .soundlegend-grid {
-      flex-direction: column;
-      gap: 0;
-      padding: 0 12px;
-      min-height: 0;
+      flex-direction: column !important;
+      gap: 0 !important;
+      padding: 0 12px !important;
+      min-height: 0 !important;
       height: 100%;
       width: 100%;
       box-sizing: border-box;
-      justify-content: flex-start;
-      align-items: center;
+      justify-content: flex-start !important;
+      align-items: center !important;
+      display: flex !important;
     }
   
+    /* IMAGE WRAPPERS - FORCE IMAGE TOP ON MOBILE */
     .heritage-image-wrapper,
     .feuzon-image-wrapper,
-    .soundlegend-image-wrapper {
-      flex: 0 0 auto;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-      max-height: 36vh; /* Adjust if you want more or less image visible */
-      overflow: hidden;
+    .soundlegend-image-wrapper,
+    .drum-image-col {
+      order: 1 !important;
+      width: 100% !important;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: flex-end !important;
+      max-height: 36vh !important;
+      overflow: hidden !important;
+      margin-bottom: 0 !important;
+    }
+  
+    /* LOGOS */
+    .heritage-logo,
+    .feuzon-logo,
+    .soundlegend-logo {
+      order: 2 !important;
+      max-width: 50vw !important;
+      width: 100% !important;
+      margin-bottom: 20px !important;
+      margin-top: 24px !important;
+      display: block !important;
+      height: auto !important;
+      align-self: center !important;
+    }
+  
+    /* TEXT COLUMNS */
+    .heritage-text,
+    .feuzon-text,
+    .soundlegend-text,
+    .drum-text-col,
+    .feuzon-text-col {
+      order: 3 !important;
+      flex: 1 1 auto !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      text-align: center !important;
+      width: 100% !important;
+      justify-content: flex-start !important;
+      padding-bottom: 18px !important;
+      overflow-y: auto !important;
+      max-height: 58vh !important;
     }
   
     .heritage-drum-img,
     .feuzon-drum-img,
     .soundlegend-drum-img {
-      width: auto;
-      height: auto;
-      max-width: 98vw;
-      max-height: 32vh;
-      object-fit: contain;
-      border-radius: 12px;
-      display: block;
-    }
-  
-    .heritage-text,
-    .feuzon-text,
-    .soundlegend-text {
-      flex: 1 1 auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      width: 100%;
-      justify-content: flex-start;
-      padding-bottom: 18px;
-      overflow-y: auto;
-      max-height: 58vh; /* Ensures text+button don't overflow screen */
+      width: auto !important;
+      height: auto !important;
+      max-width: 98vw !important;
+      max-height: 32vh !important;
+      object-fit: contain !important;
+      border-radius: 12px !important;
+      display: block !important;
     }
   
     /* General Section Content for all */
@@ -485,43 +656,42 @@ body {
       margin-bottom: 16px;
     }
   
+    .scroll-indicator-wrapper {
+      position: absolute;
+      bottom: 12px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      pointer-events: none;
+    }
+  
     .scroll-indicator {
-      font-size: 0.9rem;
+      pointer-events: auto;
+      font-size: 0.95rem;
+      padding: 8px 16px;
+      background: rgba(255, 255, 255, 0.904);
+      color: #000000;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(4px);
     }
   
     .craft-values {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0;
-      overflow: visible;
-      position: relative;
-      z-index: 0;
+      max-width: 98vw;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px 0;
     }
   
     .value-item {
-      flex: 0 0 30%;
+      font-size: 0.85rem;
+      padding: 6px 1px;
+      min-width: 70px;
       max-width: 100px;
-      min-width: 90px;
-      text-align: center;
-      font-size: 0.9rem;
-      gap: 8px;
-      padding: 10px;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      z-index: 2;
-    }
-  
-    .value-item:nth-child(4),
-    .value-item:nth-child(5) {
-      flex: 0 0 40%;
-      justify-content: center;
     }
   
     .value-item svg {
-      width: 28px;
-      height: 28px;
+      width: 19px !important;
+      height: 19px !important;
     }
   
     .value-description {
@@ -558,7 +728,6 @@ body {
       border-color: #111 transparent transparent transparent;
     }
   
-    /* Flex column for intro sections */
     .hero-grid,
     .philosophy-grid,
     .founder-grid {
@@ -590,14 +759,6 @@ body {
       padding: 10px 20px;
     }
   
-    .feuzon-img {
-      order: 0;
-    }
-  
-    .feuzon-copy {
-      order: 1;
-    }
-  
     .mobile-scroll-indicator-wrapper {
       position: fixed;
       bottom: 16px;
@@ -606,11 +767,11 @@ body {
       display: flex;
       justify-content: center;
       z-index: 999;
-      pointer-events: none; /* prevents accidental blocking of page */
+      pointer-events: none;
     }
   
     .mobile-scroll-indicator-wrapper .scroll-indicator {
-      pointer-events: auto; /* allow button clicking */
+      pointer-events: auto;
       font-size: 1rem;
       color: #ccc;
       opacity: 0.9;
@@ -625,8 +786,61 @@ body {
     .desktop-scroll-indicator {
       display: none !important;
     }
+  
     .mobile-scroll-indicator {
       display: block !important;
       margin-top: 12px;
+    }
+  
+    .craft-values .value-item .tooltip {
+      left: 50%;
+      transform: translateX(-50%) translateY(0);
+    }
+  
+    .craft-values .value-item:first-child .tooltip {
+      left: 0;
+      transform: translateX(0) translateY(0);
+    }
+  
+    .craft-values .value-item:nth-child(2) .tooltip {
+      left: 10px;
+      transform: translateX(0) translateY(0);
+    }
+  
+    .craft-values .value-item:last-child .tooltip {
+      left: auto;
+      right: 0;
+      transform: translateX(0) translateY(0);
+    }
+  
+    .craft-values .value-item:nth-last-child(2) .tooltip {
+      left: auto;
+      right: 10px;
+      transform: translateX(0) translateY(0);
+    }
+  
+    .craft-values .value-item:nth-child(3n + 1) .tooltip {
+      left: 0;
+      transform: translateX(0) translateY(0);
+    }
+  
+    .craft-values .value-item:nth-child(3n) .tooltip {
+      left: auto;
+      right: 0;
+      transform: translateX(0) translateY(0);
+    }
+  
+    .craft-values .value-item:nth-child(3n + 2) .tooltip {
+      left: 50%;
+      transform: translateX(-50%) translateY(0);
+    }
+  
+    .heritage-quote,
+    .feuzon-quote,
+    .soundlegend-quote {
+      font-style: italic;
+      font-size: 1rem;
+      color: #bbb;
+      margin-bottom: 16px;
     }
   }
