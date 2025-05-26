@@ -1,8 +1,17 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
 import './OurCraft.css';
 import { useNavigate } from 'react-router-dom';
-import OurCraftDrumDisplay from './OurCraftDrumDisplay';
-import { Flame, Hammer, Ear, Hand, Sparkles } from 'lucide-react';
+// import OurCraftDrumDisplay from './OurCraftDrumDisplay';
+import ArtisanDrums from './ArtisanDrums';
+import {
+  Sparkles,
+  HandHeart,
+  Flame,
+  Music,
+  TreeDeciduous,
+  SearchCheck,
+} from 'lucide-react';
 
 const OurCraft = () => {
   const navigate = useNavigate();
@@ -12,6 +21,7 @@ const OurCraft = () => {
   const heritageRef = useRef(null);
   const feuzonRef = useRef(null);
   const soundlegendRef = useRef(null);
+  const finalSectionRef = useRef(null);
 
   const scrollToRef = (ref) => {
     if (ref?.current) {
@@ -24,28 +34,49 @@ const OurCraft = () => {
       label: 'Creative Spark',
       description:
         'Every drum starts with a spark — inspiration that shapes everything.',
+      icon: Sparkles,
     },
     {
-      label: 'Intentional Design',
-      description: 'Purposeful choices, never rushed. Built for personality.',
-    },
-    {
-      label: 'Handcrafted Connection',
-      description: 'Real hands, real craft — every drum feels alive.',
-    },
-    {
-      label: 'Torch-Tuned',
+      label: 'Maker’s Touch',
       description:
-        'Controlled flame reveals the wood’s voice and true resonance.',
+        'Crafted by real hands, not robots — every drum bears a maker’s mark.',
+      icon: HandHeart,
     },
     {
-      label: 'Sound First',
+      label: 'Torch-Tuned Resonance',
       description:
-        'Built to serve the drummer — translating emotion into tone.',
+        'Proprietary process — controlled flame reveals the wood’s truest voice.',
+      icon: Flame,
+    },
+    {
+      label: 'Built for Expression',
+      description:
+        'Inspiring playability, unmatched tone — every drum is made to move you.',
+      icon: Music,
+    },
+    {
+      label: 'Timeless Materials',
+      description:
+        'Premium woods and honest hardware, chosen for sound, not shortcuts.',
+      icon: TreeDeciduous,
+    },
+    {
+      label: 'Obsessive Detail',
+      description:
+        'From edge to finish, every detail is pored over for perfection.',
+      icon: SearchCheck,
     },
   ];
 
   const [hoveredValue, setHoveredValue] = useState(null);
+  const [showDrumLayers, setShowDrumLayers] = useState(false);
+  const [soundlegendTriggerRef, inView] = useInView({ threshold: 0 });
+
+  useEffect(() => {
+    if (inView) {
+      setShowDrumLayers(true);
+    }
+  }, [inView]);
 
   return (
     <div className="ourcraft-scroll-wrapper">
@@ -53,8 +84,6 @@ const OurCraft = () => {
         {/* HERO */}
         <section ref={heroRef} className="ourcraft-section craft-hero-section">
           <div className="hero-grid section-content">
-            {/* You can add an image/logo here if you want */}
-            {/* <div className="hero-image-wrapper"></div> */}
             <div className="hero-text">
               <div className="story-inner">
                 <h1>Our Story</h1>
@@ -93,14 +122,12 @@ const OurCraft = () => {
             </div>
           </div>
         </section>
-
+        {/* PHILOSOPHY */}
         <section
           ref={philosophyRef}
           className="ourcraft-section philosophy-section"
         >
           <div className="philosophy-grid section-content">
-            {/* Optional: Add an image, icon, or leave empty */}
-            {/* <div className="philosophy-image-wrapper"></div> */}
             <div className="philosophy-text">
               <div className="philosophy-inner">
                 <h2>Our Philosophy</h2>
@@ -114,22 +141,25 @@ const OurCraft = () => {
                   <em>“I’m ready.”</em>
                 </p>
                 <div className="craft-values">
-                  {[Sparkles, Hammer, Hand, Flame, Ear].map((Icon, i) => (
-                    <div
-                      key={i}
-                      className="value-item"
-                      onMouseEnter={() => setHoveredValue(i)}
-                      onMouseLeave={() => setHoveredValue(null)}
-                    >
-                      <div className="icon-wrapper">
-                        <Icon size={32} />
-                        {hoveredValue === i && (
-                          <div className="tooltip">{values[i].description}</div>
-                        )}
+                  {values.map((val, i) => {
+                    const Icon = val.icon;
+                    return (
+                      <div
+                        key={i}
+                        className="value-item"
+                        onMouseEnter={() => setHoveredValue(i)}
+                        onMouseLeave={() => setHoveredValue(null)}
+                      >
+                        <div className="icon-wrapper">
+                          <Icon size={32} />
+                          {hoveredValue === i && (
+                            <div className="tooltip">{val.description}</div>
+                          )}
+                        </div>
+                        <p>{val.label}</p>
                       </div>
-                      <p>{values[i].label}</p>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
                 {/* Mobile scroll indicator INSIDE text */}
                 <div className="mobile-scroll-indicator">
@@ -153,15 +183,12 @@ const OurCraft = () => {
             </div>
           </div>
         </section>
-
         {/* FOUNDER'S BATCH */}
         <section
           ref={founderRef}
           className="ourcraft-section artisan-intro-section"
         >
           <div className="founder-grid section-content">
-            {/* Optional: Add an image, or leave empty */}
-            {/* <div className="founder-image-wrapper"></div> */}
             <div className="founder-text">
               <div className="artisan-intro-inner">
                 <h2>Our Founder's Batch</h2>
@@ -199,48 +226,55 @@ const OurCraft = () => {
             </div>
           </div>
         </section>
-
-        {/* HERITAGE */}
+        {/* HERITAGE SECTION - IMAGE LEFT, TEXT RIGHT */}
         <section
           ref={heritageRef}
           className="ourcraft-section heritage-reveal-section"
         >
           <div className="heritage-grid section-content">
-            <div className="heritage-image-wrapper">
+            {/* IMAGE COLUMN */}
+            <div className="drum-image-col">
               <img
                 src="/artisan-shop/heritage-left.png"
                 alt="Heritage Drum"
                 className="heritage-drum-img"
               />
             </div>
-            <div className="heritage-text">
+            {/* TEXT COLUMN */}
+            <div className="drum-text-col">
               <img
                 src="/resized-logos/heritage-white.png"
                 alt="Heritage Logo"
                 className="heritage-logo"
               />
-              <p className="heritage-quote">
-                “The drum that started it all — classic craftsmanship, timeless
-                sound.”
-              </p>
-              <p className="heritage-description">
-                The <strong>HERITAGE</strong> Series: torch-tuned, hand-built,
-                full of soul.
-              </p>
-              <button
-                className="heritage-button"
-                onClick={() => navigate('/artisan-shop/heritage')}
-              >
-                Pre-Order Heritage
-              </button>
+              <div className="heritage-text">
+                <p className="heritage-quote">
+                  “The drum that started it all — classic craftsmanship,
+                  timeless sound.”
+                </p>
 
-              {/* Mobile scroll indicator INSIDE the text */}
-              <div className="mobile-scroll-indicator">
-                <div
-                  className="scroll-indicator"
-                  onClick={() => scrollToRef(feuzonRef)}
+                <ul className="heritage-description-list">
+                  <li>Northern Red Oak shell</li>
+                  <li>Stave-built for pure resonance</li>
+                  <li>45°/Roundover bearing edges</li>
+                  <li>Torch-fired for tonal depth</li>
+                  <li>Trick throw-off + Puresound wires</li>
+                  <li>Handmade in Nashville, TN</li>
+                </ul>
+                {/* <button
+                  className="heritage-button"
+                  onClick={() => navigate('/artisan-shop/heritage')}
                 >
-                  ↓ FEUZØN Series
+                  Learn More
+                </button> */}
+                {/* Mobile scroll indicator INSIDE the text */}
+                <div className="mobile-scroll-indicator">
+                  <div
+                    className="scroll-indicator"
+                    onClick={() => scrollToRef(feuzonRef)}
+                  >
+                    ↓ FEUZØN Series
+                  </div>
                 </div>
               </div>
             </div>
@@ -255,104 +289,129 @@ const OurCraft = () => {
             </div>
           </div>
         </section>
-
-        {/* FEUZON */}
+        {/* FEUZON SECTION - IMAGE RIGHT ON DESKTOP, IMAGE TOP ON MOBILE */}
         <section
           ref={feuzonRef}
           className="ourcraft-section feuzon-reveal-section"
         >
           <div className="feuzon-grid section-content">
-            <div className="feuzon-text feuzon-copy">
-              <img
-                src="/resized-logos/feuzon-white.png"
-                alt="Feuzon Logo"
-                className="feuzon-logo"
-              />
-              <p className="feuzon-quote">
-                “Blending tradition and innovation into one harmonious voice.”
-              </p>
-              <p className="feuzon-description">
-                The <strong>FEUZØN</strong> Series merges stave precision with
-                steam-bent boldness.
-              </p>
-              <button
-                className="feuzon-button"
-                onClick={() => navigate('/artisan-shop/feuzon')}
-              >
-                Pre-Order Now
-              </button>
-              {/* Mobile scroll indicator INSIDE the text */}
-              <div className="mobile-scroll-indicator">
-                <div
-                  className="scroll-indicator"
-                  onClick={() => scrollToRef(soundlegendRef)}
-                >
-                  ↓ SoundLegend Experience
-                </div>
-              </div>
-            </div>
-            <div className="feuzon-image-wrapper feuzon-img">
+            {/* IMAGE COLUMN -- move this to the top like Heritage */}
+            <div className="drum-image-col feuzon-image-wrapper">
               <img
                 src="/artisan-shop/feuzon-right.png"
                 alt="Feuzon Drum"
                 className="feuzon-drum-img"
               />
             </div>
-          </div>
-          {/* Desktop scroll indicator OUTSIDE text */}
-          <div className="desktop-scroll-indicator scroll-indicator-wrapper">
-            <div
-              className="scroll-indicator"
-              onClick={() => scrollToRef(soundlegendRef)}
-            >
-              ↓ SoundLegend Experience
+            {/* TEXT COLUMN */}
+            <div className="drum-text-col feuzon-text-col">
+              <img
+                src="/resized-logos/feuzon-white.png"
+                alt="Feuzon Logo"
+                className="feuzon-logo"
+              />
+              <div className="feuzon-text">
+                <p className="feuzon-quote">
+                  “Blending tradition and innovation into one harmonious voice.”
+                </p>
+
+                <ul className="feuzon-description-list">
+                  <li>Hybrid shell: stave + steam-bent</li>
+                  <li>Multi-wood blend for bold tone</li>
+                  <li>45°/Roundover edges for range</li>
+                  <li>Torch-tuned for clarity + balance</li>
+                  <li>Stained or natural semi-gloss</li>
+                  <li>Made for dynamic expression</li>
+                </ul>
+                {/* <button
+                  className="feuzon-button"
+                  onClick={() => navigate('/artisan-shop/feuzon')}
+                >
+                  Learn More
+                </button> */}
+                <div className="mobile-scroll-indicator">
+                  <div
+                    className="scroll-indicator"
+                    onClick={() => scrollToRef(soundlegendRef)}
+                  >
+                    ↓ SoundLegend Experience
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
+          <div className="mobile-scroll-indicator"></div>
         </section>
-
-        {/* SOUNDLEGEND */}
+        {/* SOUNDLEGEND SECTION - IMAGE LEFT, TEXT RIGHT */}
+        {/* SOUNDLEGEND SECTION */}
         <section
           ref={soundlegendRef}
           className="ourcraft-section soundlegend-reveal-section"
         >
           <div className="soundlegend-grid section-content">
-            <div className="soundlegend-image-wrapper">
+            {/* IMAGE COLUMN */}
+            <div className="drum-image-col">
               <img
                 src="/artisan-shop/soundlegend-left.png"
                 alt="SoundLegend Drum"
                 className="soundlegend-drum-img"
               />
             </div>
-            <div className="soundlegend-text">
+            {/* TEXT COLUMN */}
+            <div className="drum-text-col">
               <img
                 src="/resized-logos/soundlegend-white.png"
                 alt="SoundLegend Logo"
                 className="soundlegend-logo"
               />
-              <p className="soundlegend-quote">
-                “Every drum tells a story — let’s craft yours together.”
-              </p>
-              <p className="soundlegend-description">
-                The <strong>SoundLegend</strong> Series: a true collaboration,
-                custom-built from your vision.
-              </p>
-              <button
-                className="soundlegend-button"
-                onClick={() => navigate('/artisan-shop/soundlegend')}
-              >
-                Begin the Journey
-              </button>
-              {/* No scroll indicator needed here */}
+              <div className="soundlegend-text">
+                <p className="soundlegend-quote">
+                  “Every drum tells a story — let’s craft yours together.”
+                </p>
+
+                <ul className="soundlegend-description-list">
+                  <li>Custom-built from your vision</li>
+                  <li>Work 1-on-1 with Dan Ober</li>
+                  <li>Mockups before final build</li>
+                  <li>Choose woods, edges, finish</li>
+                  <li>Pro-grade hardware + detail</li>
+                  <li>Tuned to your style + goals</li>
+                  <li>Includes gift + Ober swag</li>
+                  <li>Track progress in your portal</li>
+                </ul>
+                <div
+            className="scroll-indicator"
+            onClick={() => scrollToRef(finalSectionRef)}
+          >
+            ↓ Begin Your Journey
+          </div>
+                {/* <button
+          className="soundlegend-button"
+          onClick={() => navigate('/artisan-shop/soundlegend')}
+        >
+          Begin the Journey
+        </button> */}
+              </div>
             </div>
           </div>
-        </section>
 
-        {/* DRUM DISPLAY */}
-        <section className="ourcraft-section">
-          <div className="section-content">
-            <OurCraftDrumDisplay />
-          </div>
         </section>
+        {/* 👇 This is the trigger element to detect when SoundLegend leaves viewport */}
+        <div ref={soundlegendTriggerRef} style={{ height: '1px' }} />
+        {/* 👇 This trigger activates AFTER SoundLegend has left the viewport */}
+        <div ref={soundlegendTriggerRef} style={{ height: '1px' }} />{' '}
+        {/* 👇 This is the actual trigger placed AFTER SoundLegend */}
+        <div ref={soundlegendTriggerRef} style={{ height: '1px' }} />{' '}
+        {/* Place the trigger AFTER the section */}
+        <div ref={soundlegendTriggerRef} style={{ height: '1px' }} />{' '}
+        {/* DRUM DISPLAY */}
+        {showDrumLayers && (
+          <section ref={finalSectionRef} className="ourcraft-section">
+            <div className="artisanseries-wrapper">
+              <ArtisanDrums />
+            </div>
+          </section>
+        )}
       </main>
     </div>
   );

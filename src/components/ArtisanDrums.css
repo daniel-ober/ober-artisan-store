@@ -34,7 +34,7 @@
 .artisanseries-header-image {
   max-width: 500px;
   width: 100%;
-  margin: 0 auto 2rem;
+  /* margin: 0 auto 2rem; */
 }
 
 /* -------------------------------
@@ -46,7 +46,7 @@
   margin: 0 auto;
   transition: opacity 0.5s ease-in-out;
   opacity: 1;
-  min-height: 400px;
+  min-height: 580px;
 }
 
 .drum-display.fade-out {
@@ -250,20 +250,23 @@
   overflow: visible;
 }
 
-.drum-layers.stuck-top {
+/* .drum-layers.stuck-top {
   position: sticky;
   top: 0;
   bottom: unset;
-}
+} */
 
 .drum-layers {
-  position: fixed;
+  position: absolute;
   bottom: 0;
   left: 0;
-  height: 200px;
   width: 100%;
+  height: 200px;
   z-index: 9;
 }
+
+
+
 
 .drum-layers.scrolling {
   position: relative;
@@ -276,6 +279,12 @@
 
 .drum-layers .final-overlay {
   z-index: 3;
+}
+
+.drum-layers.fade-out {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease-in-out;
 }
 
 .layer.overlay-image {
@@ -333,6 +342,12 @@
   background: #1a1a1a;
   /* padding: 3rem 1.5rem 4rem; */
   border-top: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  padding-top: 200px;
+}
+
+.text-layer {
+  text-align: center;
 }
 
 .drum-info {
@@ -359,6 +374,11 @@
 .drum-info .drum-logo {
   max-width: 100px;
   margin-bottom: 1rem;
+}
+
+.description {
+  /* font-size: 1.5rem; */
+  text-align: center;
 }
 
 .drum-info .description-list {
@@ -397,6 +417,28 @@
 .drum-info .preorder-card-preorder-button:hover,
 .drum-info .learn-more-button:hover {
   background: #a14242;
+}
+
+.layer {
+  transition: opacity 0.6s ease-in-out;
+  opacity: 0; /* Start hidden by default */
+  position: absolute;
+  width: 100%;
+  height: auto;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.layer.active {
+  opacity: 1;
+  z-index: 3;
+  pointer-events: auto;
+}
+
+.layer.inactive {
+  opacity: 1;
+  filter: grayscale(100%);
+  z-index: 2;
 }
 
 /* -------------------------------
@@ -508,11 +550,16 @@
     gap: 0.5rem;
   }
 
+  .description {
+    font-size: 1rem;
+    text-align: center;
+    text-align: justify;
+  }
+
   .drum-info {
     flex: 1 1 30%;
     max-width: 33%;
-    text-align: center;
-    /* padding: 10px; */
+text-align: center;    /* padding: 10px; */
   }
 
   .drum-logo {
@@ -551,6 +598,11 @@
     align-items: flex-start;
   }
 
+  .description {
+    /* font-size: 0.9rem; */
+    /* text-align: center; */
+  }
+
   .key-features,
   .audio-box {
     margin: 0;
@@ -568,4 +620,6 @@
     width: 200px;
     height: 130px;
   }
+
+
 }
