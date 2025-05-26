@@ -1,4 +1,3 @@
-// src/checkUserClaims.js
 import { getAuth } from 'firebase/auth';
 
 const CheckUserClaims = async () => {
@@ -7,15 +6,15 @@ const CheckUserClaims = async () => {
 
   if (user) {
     try {
-      const tokenResult = await user.getIdTokenResult();
-      return tokenResult.claims; // Return the token claims
+      // ✅ FORCE REFRESH to pull in latest custom claims
+      const tokenResult = await user.getIdTokenResult(true);
+      return tokenResult.claims;
     } catch (error) {
       console.error('Error fetching token claims:', error);
-      return null; // Return null in case of error
+      return null;
     }
   } else {
-    // console.log('No user is signed in.');
-    return null; // Return null if no user is signed in
+    return null;
   }
 };
 

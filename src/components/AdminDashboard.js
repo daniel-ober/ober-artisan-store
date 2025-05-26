@@ -17,6 +17,7 @@ import {
   FaRegChartBar,
   FaFlask,
 } from 'react-icons/fa';
+import { getAuth } from "firebase/auth";
 import ManageProducts from './ManageProducts';
 import ManageUsers from './ManageUsers';
 import ManageOrders from './ManageOrders';
@@ -36,6 +37,30 @@ const AdminDashboard = () => {
   const [notifications, setNotifications] = useState({});
   const [secondaryNotifications, setSecondaryNotifications] = useState({});
   const [tertiaryNotifications, setTertiaryNotifications] = useState({});
+
+  // Debug: Log Firebase custom claims when the dashboard loads
+  useEffect(() => {
+    const auth = getAuth();
+    // Sometimes, especially on first load, auth.currentUser might not be immediately available
+    // Let's handle both cases (immediate and delayed sign-in)
+    const logClaims = (user) => {
+      if (user) {
+        user.getIdTokenResult().then((idTokenResult) => {
+          console.log('Custom Claims:', idTokenResult.claims);
+        });
+      }
+    };
+
+    // Try immediately
+    logClaims(auth.currentUser);
+
+    // Also listen for changes (e.g., user signs in after initial render)
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      logClaims(user);
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   useEffect(() => {
     const unsubOrders = onSnapshot(query(collection(db, 'orders')), (snapshot) => {
