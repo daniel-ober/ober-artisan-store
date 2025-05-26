@@ -1,4 +1,8 @@
-/* .manage-project-modal-overlay {
+.main {
+    padding: 0;
+}
+
+.manage-project-modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -105,4 +109,4 @@ form button {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-} */
+}

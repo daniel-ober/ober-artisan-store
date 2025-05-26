@@ -1,7 +1,6 @@
 // src/context/AuthContext.js
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { auth, setAnalyticsUserProperties } from '../firebaseConfig';
-import { fetchUserDoc } from '../services/userService';
 import { signOut, onAuthStateChanged } from 'firebase/auth';
 
 const AuthContext = createContext();
@@ -12,11 +11,13 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
 
-  const fetchUserData = async (currentUser) => {
+  // Get admin status from Firebase Auth custom claims, not Firestore
+  const checkAdminClaim = async (currentUser) => {
     setLoading(true);
     try {
-      const userData = await fetchUserDoc(currentUser.uid);
-      const adminStatus = userData?.isAdmin || false;
+      // Force refresh of token to get the latest custom claims
+      const idTokenResult = await currentUser.getIdTokenResult(true); // true = force refresh
+      const adminStatus = !!idTokenResult.claims.admin;
       setIsAdmin(adminStatus);
 
       if (adminStatus) {
@@ -25,9 +26,9 @@ export const AuthProvider = ({ children }) => {
         setAnalyticsUserProperties('guest');
       }
     } catch (error) {
-      console.error('❌ Error fetching user data:', error);
+      console.error('❌ Error checking admin claim:', error);
       setIsAdmin(false);
-      setAnalyticsUserProperties('guest'); // fallback to guest
+      setAnalyticsUserProperties('guest');
     } finally {
       setLoading(false);
     }
@@ -37,11 +38,11 @@ export const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
-        await fetchUserData(currentUser);
+        await checkAdminClaim(currentUser);
       } else {
         setUser(null);
         setIsAdmin(false);
-        setAnalyticsUserProperties('guest'); // ✅ set guests on init
+        setAnalyticsUserProperties('guest');
         setLoading(false);
       }
     });
@@ -54,7 +55,7 @@ export const AuthProvider = ({ children }) => {
       await signOut(auth);
       setUser(null);
       setIsAdmin(false);
-      setAnalyticsUserProperties('guest'); // revert to guest on logout
+      setAnalyticsUserProperties('guest');
     } catch (error) {
       console.error('❌ Error logging out:', error.message);
     }

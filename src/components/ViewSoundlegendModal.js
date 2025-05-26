@@ -1,5 +1,12 @@
-import React, { useState } from 'react';
-import { doc, updateDoc, arrayUnion } from 'firebase/firestore';
+import React, { useState, useEffect } from 'react';
+import {
+  addDoc,
+  collection,
+  doc,
+  updateDoc,
+  arrayUnion,
+  getDoc,
+} from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import './ViewSoundlegendModal.css';
 
@@ -42,31 +49,38 @@ END:VCARD
   URL.revokeObjectURL(url);
 };
 
-const ViewSoundlegendModal = ({ submission, onClose, onStatusUpdate }) => {
-  const [selectedStatus, setSelectedStatus] = useState(submission.status || '');
+const ViewSoundlegendModal = ({ submission, onClose, onStatusUpdate, onUpdateSubmission }) => {  const [selectedStatus, setSelectedStatus] = useState(submission.status || '');
   const [notes, setNotes] = useState('');
   const [history, setHistory] = useState(submission.history || []);
+  const [projectId, setProjectId] = useState(submission.projectId || null);
+  const [fullSubmission, setFullSubmission] = useState({
+    ...submission,
+    id: submission.id,
+  });
 
   if (!submission) return null;
 
   const {
-    id,
     firstName,
     lastName,
     email,
     phone,
     artistBio,
     inspiration,
-    submittedAt
-  } = submission;
- 
+    submittedAt,
+  } = fullSubmission;
+
   const handleStatusUpdate = async (newStatus) => {
     setSelectedStatus(newStatus);
     try {
-      const submissionRef = doc(db, 'soundlegend_submissions', id);
+      const submissionRef = doc(
+        db,
+        'soundlegend_submissions',
+        fullSubmission.id
+      );
       const timestamp = new Date().toISOString();
       const historyEntry = { type: 'status', value: newStatus, timestamp };
-  
+
       // Normalize status into overviewStatus
       let overviewStatus = 'new';
       const lower = newStatus.toLowerCase();
@@ -75,17 +89,17 @@ const ViewSoundlegendModal = ({ submission, onClose, onStatusUpdate }) => {
       } else if (lower.startsWith('closed')) {
         overviewStatus = 'completed';
       }
-  
+
       await updateDoc(submissionRef, {
         status: newStatus,
         overviewStatus,
         history: arrayUnion(historyEntry),
       });
-  
+
       setHistory((prev) => [...prev, historyEntry]);
-  
+
       if (onStatusUpdate) {
-        onStatusUpdate(id, newStatus);
+        onStatusUpdate(fullSubmission.id, newStatus);
       }
     } catch (err) {
       console.error('❌ Failed to update status in modal:', err);
@@ -95,7 +109,7 @@ const ViewSoundlegendModal = ({ submission, onClose, onStatusUpdate }) => {
   const handleNoteSubmit = async () => {
     if (!notes.trim()) return;
     try {
-      const submissionRef = doc(db, 'soundlegend_submissions', id);
+      const submissionRef = doc(db, 'soundlegend_submissions', fullSubmission.id);
       const timestamp = new Date().toISOString();
       const noteEntry = { type: 'note', value: notes.trim(), timestamp };
 
@@ -111,70 +125,219 @@ const ViewSoundlegendModal = ({ submission, onClose, onStatusUpdate }) => {
   };
 
   const copyToClipboard = (text) => {
-    navigator.clipboard.writeText(text).then(() => {
-      console.log(`📋 Copied: ${text}`);
-    }).catch(err => {
-      console.error('❌ Copy failed:', err);
-    });
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        console.log(`📋 Copied: ${text}`);
+      })
+      .catch((err) => {
+        console.error('❌ Copy failed:', err);
+      });
   };
+
+  const createProject = async () => {
+    const confirmCreation = window.confirm(
+      `Create Project for ${firstName} ${lastName}?`
+    );
+    if (!confirmCreation) return;
+
+    try {
+      const projectData = {
+        source: 'SoundLegend',
+        submissionId: fullSubmission.id,
+        customerName: `${firstName} ${lastName}`,
+        email,
+        phone: phone || '',
+        startDate: new Date().toISOString(),
+        status: 'Not Started',
+        phases: [],
+        notes: [],
+      };
+
+      const projectRef = await addDoc(collection(db, 'projects'), projectData);
+      const projectId = projectRef.id;
+
+      const submissionRef = doc(db, 'soundlegend_submissions', fullSubmission.id);
+      await updateDoc(submissionRef, {
+        projectId,
+        history: arrayUnion({
+          type: 'system',
+          value: `Project created: ${projectId}`,
+          timestamp: new Date().toISOString(),
+        }),
+      });
+
+      setHistory((prev) => [
+        {
+          type: 'system',
+          value: `Project created: ${projectId}`,
+          timestamp: new Date().toISOString(),
+        },
+        ...prev,
+      ]);
+
+      setProjectId(projectId); // 🟢 Update local state to reflect new project in modal
+      alert(`✅ Project created successfully!\n\nID: ${projectId}`);
+      if (onUpdateSubmission) {
+        const systemEntry = {
+          type: 'system',
+          value: `Project created: ${projectId}`,
+          timestamp: new Date().toISOString(),
+        };
+      
+        onUpdateSubmission({
+          ...fullSubmission,
+          projectId,
+          history: [systemEntry, ...history],
+        });
+      }
+    } catch (err) {
+      console.error('❌ Failed to create project:', err);
+      alert('Failed to create project. Please try again.');
+    }
+  };
+
+  useEffect(() => {
+    const fetchAndValidateSubmission = async () => {
+      try {
+        const ref = doc(db, 'soundlegend_submissions', submission.id);
+        const snap = await getDoc(ref);
+
+        if (!snap.exists()) {
+          console.warn('❌ Submission no longer exists.');
+          return;
+        }
+
+        const data = snap.data();
+        let validProjectId = data.projectId || null;
+
+        // Check if project exists
+        if (validProjectId) {
+          const projectRef = doc(db, 'projects', validProjectId);
+          const projectSnap = await getDoc(projectRef);
+          if (!projectSnap.exists()) {
+            console.warn(`❌ Linked project not found: ${validProjectId}`);
+            validProjectId = null;
+
+            // Optional: remove reference from submission
+            await updateDoc(ref, { projectId: null });
+          }
+        }
+
+        setFullSubmission({ ...data, id: submission.id });
+        setProjectId(validProjectId);
+        setHistory(data.history || []);
+        setSelectedStatus(data.status || 'New');
+      } catch (err) {
+        console.error('❌ Error loading/validating submission:', err);
+      }
+    };
+
+    fetchAndValidateSubmission();
+  }, [submission.id]);
 
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <button className="close-button" onClick={onClose}>✕</button>
+        <button className="close-button" onClick={onClose}>
+          ✕
+        </button>
         <h2 className="modal-title">SoundLegend Submission</h2>
 
         <div className="modal-status-update">
-          <label><strong>Status:</strong></label>
+          <label>
+            <strong>Status:</strong>
+          </label>
           <select
             value={selectedStatus}
             onChange={(e) => handleStatusUpdate(e.target.value)}
             className="status-select"
           >
             {statusOptions.map((status) => (
-              <option key={status} value={status}>{status}</option>
+              <option key={status} value={status}>
+                {status}
+              </option>
             ))}
           </select>
         </div>
 
         <div className="compact-inquiry-details">
-  <div className="detail-group">
-    <strong>Name:</strong> {firstName} {lastName}
-    <button
-      className="copy-btn"
-      onClick={() => copyToClipboard(`${firstName} ${lastName}`)}
-      title="Copy name"
-    >
-      📋
-    </button>
-  </div>
-  <div className="detail-group">
-    <strong>Email:</strong> {email}
-    <button
-      className="copy-btn"
-      onClick={() => copyToClipboard(email)}
-      title="Copy email"
-    >
-      📋
-    </button>
-  </div>
-  {phone && (
-    <div className="detail-group">
-      <strong>Phone:</strong> {phone}
-    </div>
-  )}
-  {submittedAt?.seconds && (
-    <div className="detail-group">
-      <strong>Submitted:</strong> {new Date(submittedAt.seconds * 1000).toLocaleString()}
-    </div>
-  )}
-  <button
-  className="add-contact-btn"
-  onClick={() => generateAndDownloadVCard({ firstName, lastName, email, phone })}
->
-  Download Contact Card
-</button>
-</div>
+          <div className="detail-group">
+            <strong>Name:</strong> {firstName} {lastName}
+            <button
+              className="copy-btn"
+              onClick={() => copyToClipboard(`${firstName} ${lastName}`)}
+              title="Copy name"
+            >
+              📋
+            </button>
+          </div>
+          <div className="detail-group">
+            <strong>Email:</strong> {email}
+            <button
+              className="copy-btn"
+              onClick={() => copyToClipboard(email)}
+              title="Copy email"
+            >
+              📋
+            </button>
+          </div>
+          {phone && (
+            <div className="detail-group">
+              <strong>Phone:</strong> {phone}
+            </div>
+          )}
+          {submittedAt?.seconds && (
+            <div className="detail-group">
+              <strong>Submitted:</strong>{' '}
+              {new Date(submittedAt.seconds * 1000).toLocaleString()}
+            </div>
+          )}
+          {projectId ? (
+            <div className="detail-group">
+              <strong>Linked Project:</strong>{' '}
+              <a
+                href={`/projects/${projectId}`}
+                target="_blank"
+                rel="noreferrer"
+                className="project-link"
+              >
+                Open Project ↗
+              </a>
+              <button
+                className="copy-btn"
+                onClick={() => copyToClipboard(projectId)}
+                title="Copy Project ID"
+              >
+                📋
+              </button>
+            </div>
+          ) : (
+            <button className="create-project-btn" onClick={createProject}>
+              Create Project
+            </button>
+          )}
+          <button
+            className="add-contact-btn"
+            onClick={() =>
+              generateAndDownloadVCard({ firstName, lastName, email, phone })
+            }
+          >
+            Download Contact Card
+          </button>
+          {projectId && (
+            <div className="detail-group">
+              <strong>Project ID:</strong> {projectId}
+              <button
+                className="copy-btn"
+                onClick={() => copyToClipboard(projectId)}
+                title="Copy Project ID"
+              >
+                📋
+              </button>
+            </div>
+          )}
+        </div>
 
         {artistBio && (
           <div className="modal-item">
@@ -191,7 +354,9 @@ const ViewSoundlegendModal = ({ submission, onClose, onStatusUpdate }) => {
         )}
 
         <div className="modal-item">
-          <label><strong>Add Note:</strong></label>
+          <label>
+            <strong>Add Note:</strong>
+          </label>
           <textarea
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
@@ -199,7 +364,11 @@ const ViewSoundlegendModal = ({ submission, onClose, onStatusUpdate }) => {
             placeholder="Write an internal note..."
             rows={3}
           />
-          <button className="add-note-btn" onClick={handleNoteSubmit} disabled={!notes.trim()}>
+          <button
+            className="add-note-btn"
+            onClick={handleNoteSubmit}
+            disabled={!notes.trim()}
+          >
             Save Note
           </button>
         </div>
@@ -230,7 +399,9 @@ const ViewSoundlegendModal = ({ submission, onClose, onStatusUpdate }) => {
           )}
         </div>
 
-        <button className="inquiry-close-btn" onClick={onClose}>Close</button>
+        <button className="inquiry-close-btn" onClick={onClose}>
+          Close
+        </button>
       </div>
     </div>
   );

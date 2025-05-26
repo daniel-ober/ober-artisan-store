@@ -23,27 +23,25 @@ const OurCraft = () => {
     {
       label: 'Creative Spark',
       description:
-        'Every drum begins with a spark — a flash of inspiration that guides the build. It’s not just about specs, but the story that drives them.',
+        'Every drum starts with a spark — inspiration that shapes everything.',
     },
     {
       label: 'Intentional Design',
-      description:
-        'Every element is shaped with care — never mass-produced, never rushed. A drum that begins with purpose ends with personality.',
+      description: 'Purposeful choices, never rushed. Built for personality.',
     },
     {
       label: 'Handcrafted Connection',
-      description:
-        'Your drum is made by real hands. The same ones that listen, adjust, and shape until it feels alive.',
+      description: 'Real hands, real craft — every drum feels alive.',
     },
     {
       label: 'Torch-Tuned',
       description:
-        'Using controlled flame, we refine the wood’s voice — not to impose a tone, but to reveal its natural resonance.',
+        'Controlled flame reveals the wood’s voice and true resonance.',
     },
     {
       label: 'Sound First',
       description:
-        'We build to serve the drummer’s voice — to translate emotion into tone, not just decibels into air.',
+        'Built to serve the drummer — translating emotion into tone.',
     },
   ];
 
@@ -52,31 +50,41 @@ const OurCraft = () => {
   return (
     <div className="ourcraft-scroll-wrapper">
       <main className="ourcraft-container">
+        {/* HERO */}
         <section ref={heroRef} className="ourcraft-section craft-hero-section">
-          <div className="craft-hero-overlay">
-            <div className="story-inner">
-              <h1>Our Story</h1>
-              <p>Where timeless sound meets modern soul</p>
-              <p>
-                Ober Artisan Drums is a boundary-pushing instrument company rooted
-                in sonic detail, craftsmanship, and individuality. Based in
-                Nashville, every drum is handcrafted to serve as a meaningful
-                extension of the artist behind it.
-              </p>
-              <p>
-                These are not mass-produced instruments — they’re built for
-                drummers who demand more: more character, more clarity, and more
-                connection to their sound.
-              </p>
-              <p>
-                Founder Dan Ober studied Film Scoring at Berklee and trained under
-                legends like Mike Mangini. With 30+ years behind the kit, he
-                brings a unique blend of sound design, engineering, and soul to
-                every build.
-              </p>
+          <div className="hero-grid section-content">
+            {/* You can add an image/logo here if you want */}
+            {/* <div className="hero-image-wrapper"></div> */}
+            <div className="hero-text">
+              <div className="story-inner">
+                <h1>Our Story</h1>
+                <p>Where timeless sound meets modern soul.</p>
+                <p>
+                  Ober Artisan Drums is a boundary-pushing company rooted in
+                  sonic detail, craftsmanship, and individuality.
+                </p>
+                <p>
+                  Every drum is handcrafted for drummers who want more
+                  character, clarity, and connection to their sound.
+                </p>
+                <p>
+                  Founder Dan Ober brings 30+ years of experience and a blend of
+                  sound design, engineering, and soul to every build.
+                </p>
+                {/* Mobile scroll indicator INSIDE text */}
+                <div className="mobile-scroll-indicator">
+                  <div
+                    className="scroll-indicator"
+                    onClick={() => scrollToRef(philosophyRef)}
+                  >
+                    ↓ Our Philosophy
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="mobile-scroll-indicator-wrapper">
+          {/* Desktop scroll indicator OUTSIDE text */}
+          <div className="desktop-scroll-indicator scroll-indicator-wrapper">
             <div
               className="scroll-indicator"
               onClick={() => scrollToRef(philosophyRef)}
@@ -85,38 +93,58 @@ const OurCraft = () => {
             </div>
           </div>
         </section>
-  
-        <section ref={philosophyRef} className="ourcraft-section philosophy-section">
-          <div className="philosophy-inner">
-            <h2>Our Philosophy</h2>
-            <p className="quote">“A drum doesn’t need to be told what to be — it needs to be listened to.”</p>
-            <p>
-              Like a luthier tapping the top of a violin, or a mastering engineer knowing the exact moment to print the final mix — we listen for that signal only the instrument can give. That’s when the drum says: <em>“I’m ready.”</em>
-            </p>
-            <p>
-              It’s not about formulas — it’s about feel, intuition, and the soul we pour into every cut, curve, and contour.
-            </p>
-  
-            <div className="craft-values">
-              {[Sparkles, Hammer, Hand, Flame, Ear].map((Icon, i) => (
-                <div
-                  key={i}
-                  className="value-item"
-                  onMouseEnter={() => setHoveredValue(i)}
-                  onMouseLeave={() => setHoveredValue(null)}
-                >
-                  <div className="icon-wrapper">
-                    <Icon size={32} />
-                    {hoveredValue === i && (
-                      <div className="tooltip">{values[i].description}</div>
-                    )}
-                  </div>
-                  <p>{values[i].label}</p>
+
+        <section
+          ref={philosophyRef}
+          className="ourcraft-section philosophy-section"
+        >
+          <div className="philosophy-grid section-content">
+            {/* Optional: Add an image, icon, or leave empty */}
+            {/* <div className="philosophy-image-wrapper"></div> */}
+            <div className="philosophy-text">
+              <div className="philosophy-inner">
+                <h2>Our Philosophy</h2>
+                <p className="quote">
+                  “A drum doesn’t need to be told what to be — it needs to be
+                  listened to.”
+                </p>
+                <p>
+                  Like a luthier tapping a violin, or a mastering engineer
+                  knowing when a mix is done — we listen until the drum says,{' '}
+                  <em>“I’m ready.”</em>
+                </p>
+                <div className="craft-values">
+                  {[Sparkles, Hammer, Hand, Flame, Ear].map((Icon, i) => (
+                    <div
+                      key={i}
+                      className="value-item"
+                      onMouseEnter={() => setHoveredValue(i)}
+                      onMouseLeave={() => setHoveredValue(null)}
+                    >
+                      <div className="icon-wrapper">
+                        <Icon size={32} />
+                        {hoveredValue === i && (
+                          <div className="tooltip">{values[i].description}</div>
+                        )}
+                      </div>
+                      <p>{values[i].label}</p>
+                    </div>
+                  ))}
                 </div>
-              ))}
+                {/* Mobile scroll indicator INSIDE text */}
+                <div className="mobile-scroll-indicator">
+                  <div
+                    className="scroll-indicator"
+                    onClick={() => scrollToRef(founderRef)}
+                  >
+                    ↓ Our Founder's Batch
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="mobile-scroll-indicator-wrapper">
+          {/* Desktop scroll indicator OUTSIDE text */}
+          <div className="desktop-scroll-indicator scroll-indicator-wrapper">
             <div
               className="scroll-indicator"
               onClick={() => scrollToRef(founderRef)}
@@ -125,26 +153,44 @@ const OurCraft = () => {
             </div>
           </div>
         </section>
-  
-        <section ref={founderRef} className="ourcraft-section artisan-intro-section">
-          <div className="artisan-intro-inner">
-            <h2>Our Founder's Batch</h2>
-            <p className="artisan-tagline">“Every journey begins with a single voice.”</p>
-            <p className="artisan-intro-paragraph">
-              Before there was a name, before there was a brand — there was one
-              drum. Built by hand in a quiet workshop late at night. Not to prove
-              anything, but to explore a question: <em>what does it mean to build with soul?</em>
-            </p>
-            <p className="artisan-intro-paragraph">
-              That first drum sparked a path that would shape the heart of Ober
-              Artisan Drums. A foundation built on fire, intuition, and relentless
-              curiosity. One voice. One vision. And soon — a legacy.
-            </p>
-            <p className="artisan-intro-tagline">
-              The drum that started it all is just ahead.
-            </p>
+
+        {/* FOUNDER'S BATCH */}
+        <section
+          ref={founderRef}
+          className="ourcraft-section artisan-intro-section"
+        >
+          <div className="founder-grid section-content">
+            {/* Optional: Add an image, or leave empty */}
+            {/* <div className="founder-image-wrapper"></div> */}
+            <div className="founder-text">
+              <div className="artisan-intro-inner">
+                <h2>Our Founder's Batch</h2>
+                <p className="artisan-tagline">
+                  “Every journey begins with a single voice.”
+                </p>
+                <p className="artisan-intro-paragraph">
+                  Before the brand, there was one drum. Built by hand, late at
+                  night, to answer a question:{' '}
+                  <em>What does it mean to build with soul?</em>
+                </p>
+                <p className="artisan-intro-tagline">
+                  That drum sparked the path and philosophy for Ober Artisan
+                  Drums.
+                </p>
+                {/* Mobile scroll indicator INSIDE text */}
+                <div className="mobile-scroll-indicator">
+                  <div
+                    className="scroll-indicator"
+                    onClick={() => scrollToRef(heritageRef)}
+                  >
+                    ↓ Heritage Series
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="mobile-scroll-indicator-wrapper">
+          {/* Desktop scroll indicator OUTSIDE text */}
+          <div className="desktop-scroll-indicator scroll-indicator-wrapper">
             <div
               className="scroll-indicator"
               onClick={() => scrollToRef(heritageRef)}
@@ -153,9 +199,13 @@ const OurCraft = () => {
             </div>
           </div>
         </section>
-  
-        <section ref={heritageRef} className="ourcraft-section heritage-reveal-section">
-          <div className="heritage-grid">
+
+        {/* HERITAGE */}
+        <section
+          ref={heritageRef}
+          className="ourcraft-section heritage-reveal-section"
+        >
+          <div className="heritage-grid section-content">
             <div className="heritage-image-wrapper">
               <img
                 src="/artisan-shop/heritage-left.png"
@@ -170,13 +220,12 @@ const OurCraft = () => {
                 className="heritage-logo"
               />
               <p className="heritage-quote">
-                “The drum that started it all — classic craftsmanship, timeless sound.”
+                “The drum that started it all — classic craftsmanship, timeless
+                sound.”
               </p>
               <p className="heritage-description">
-                The <strong>HERITAGE</strong> Series is where it all began — torch-tuned, hand-built, and full of soul.
-              </p>
-              <p className="heritage-description">
-                Crafted to reveal the wood’s voice with a signature scorched finish.
+                The <strong>HERITAGE</strong> Series: torch-tuned, hand-built,
+                full of soul.
               </p>
               <button
                 className="heritage-button"
@@ -184,9 +233,20 @@ const OurCraft = () => {
               >
                 Pre-Order Heritage
               </button>
+
+              {/* Mobile scroll indicator INSIDE the text */}
+              <div className="mobile-scroll-indicator">
+                <div
+                  className="scroll-indicator"
+                  onClick={() => scrollToRef(feuzonRef)}
+                >
+                  ↓ FEUZØN Series
+                </div>
+              </div>
             </div>
           </div>
-          <div className="mobile-scroll-indicator-wrapper">
+          {/* Desktop scroll indicator OUTSIDE text */}
+          <div className="desktop-scroll-indicator scroll-indicator-wrapper">
             <div
               className="scroll-indicator"
               onClick={() => scrollToRef(feuzonRef)}
@@ -195,9 +255,13 @@ const OurCraft = () => {
             </div>
           </div>
         </section>
-  
-        <section ref={feuzonRef} className="ourcraft-section feuzon-reveal-section">
-          <div className="feuzon-grid">
+
+        {/* FEUZON */}
+        <section
+          ref={feuzonRef}
+          className="ourcraft-section feuzon-reveal-section"
+        >
+          <div className="feuzon-grid section-content">
             <div className="feuzon-text feuzon-copy">
               <img
                 src="/resized-logos/feuzon-white.png"
@@ -208,10 +272,8 @@ const OurCraft = () => {
                 “Blending tradition and innovation into one harmonious voice.”
               </p>
               <p className="feuzon-description">
-                The <strong>FEUZØN</strong> Series merges stave precision with a steam-bent shell for bold, responsive tone.
-              </p>
-              <p className="feuzon-description">
-                Torch-tuned and hand-finished to balance warmth and clarity.
+                The <strong>FEUZØN</strong> Series merges stave precision with
+                steam-bent boldness.
               </p>
               <button
                 className="feuzon-button"
@@ -219,6 +281,15 @@ const OurCraft = () => {
               >
                 Pre-Order Now
               </button>
+              {/* Mobile scroll indicator INSIDE the text */}
+              <div className="mobile-scroll-indicator">
+                <div
+                  className="scroll-indicator"
+                  onClick={() => scrollToRef(soundlegendRef)}
+                >
+                  ↓ SoundLegend Experience
+                </div>
+              </div>
             </div>
             <div className="feuzon-image-wrapper feuzon-img">
               <img
@@ -228,7 +299,8 @@ const OurCraft = () => {
               />
             </div>
           </div>
-          <div className="mobile-scroll-indicator-wrapper">
+          {/* Desktop scroll indicator OUTSIDE text */}
+          <div className="desktop-scroll-indicator scroll-indicator-wrapper">
             <div
               className="scroll-indicator"
               onClick={() => scrollToRef(soundlegendRef)}
@@ -237,9 +309,13 @@ const OurCraft = () => {
             </div>
           </div>
         </section>
-  
-        <section ref={soundlegendRef} className="ourcraft-section soundlegend-reveal-section">
-          <div className="soundlegend-grid">
+
+        {/* SOUNDLEGEND */}
+        <section
+          ref={soundlegendRef}
+          className="ourcraft-section soundlegend-reveal-section"
+        >
+          <div className="soundlegend-grid section-content">
             <div className="soundlegend-image-wrapper">
               <img
                 src="/artisan-shop/soundlegend-left.png"
@@ -257,10 +333,8 @@ const OurCraft = () => {
                 “Every drum tells a story — let’s craft yours together.”
               </p>
               <p className="soundlegend-description">
-                The <strong>SoundLegend</strong> Series is a true collaboration — custom-built from your vision, tone, and story.
-              </p>
-              <p className="soundlegend-description">
-                From concept to delivery, every detail reflects your voice.
+                The <strong>SoundLegend</strong> Series: a true collaboration,
+                custom-built from your vision.
               </p>
               <button
                 className="soundlegend-button"
@@ -268,12 +342,16 @@ const OurCraft = () => {
               >
                 Begin the Journey
               </button>
+              {/* No scroll indicator needed here */}
             </div>
           </div>
         </section>
-  
+
+        {/* DRUM DISPLAY */}
         <section className="ourcraft-section">
-          {/* <OurCraftDrumDisplay /> */}
+          <div className="section-content">
+            <OurCraftDrumDisplay />
+          </div>
         </section>
       </main>
     </div>

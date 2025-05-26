@@ -745,3 +745,36 @@ exports.refreshPrintifyStockNow = onRequest(
     }
   }
 );
+
+exports.adminCreateUser = functions.https.onCall(async (data, context) => {
+  if (!context.auth || !context.auth.token.admin) {
+    throw new functions.https.HttpsError('permission-denied', 'Not authorized');
+  }
+
+  const { email, password, firstName, lastName, phone, isSoundlegend, status } = data;
+
+  try {
+    // 1. Create Firebase Auth user
+    const userRecord = await admin.auth().createUser({
+      email,
+      password,
+      displayName: `${firstName} ${lastName}`,
+      phoneNumber: phone && phone.length > 0 ? phone : undefined,
+    });
+
+    // 2. Add user doc to Firestore
+    await admin.firestore().collection('users').doc(userRecord.uid).set({
+      email,
+      firstName,
+      lastName,
+      phone,
+      isSoundlegend: !!isSoundlegend,
+      status: status || 'active',
+      createdAt: admin.firestore.FieldValue.serverTimestamp(),
+    });
+
+    return { uid: userRecord.uid };
+  } catch (error) {
+    throw new functions.https.HttpsError('internal', error.message);
+  }
+});

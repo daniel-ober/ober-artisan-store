@@ -7,6 +7,8 @@ const EditUserModal = ({ user, onClose, onUserUpdated }) => {
   const [lastName, setLastName] = useState(user?.lastName || '');
   const [email, setEmail] = useState(user?.email || '');
   const [phone, setPhone] = useState(user?.phone || '');
+  const [isAdmin, setIsAdmin] = useState(!!user?.isAdmin);            // <--- Add this
+  const [isSoundlegend, setIsSoundlegend] = useState(!!user?.isSoundlegend);  // <--- Add this
   const [error, setError] = useState('');
 
   const handleSave = async () => {
@@ -17,8 +19,10 @@ const EditUserModal = ({ user, onClose, onUserUpdated }) => {
         lastName,
         email,
         phone,
+        isAdmin,           // <--- Save these fields
+        isSoundlegend,     // <--- Save these fields
       });
-      onUserUpdated({ ...user, firstName, lastName, email, phone });
+      onUserUpdated({ ...user, firstName, lastName, email, phone, isAdmin, isSoundlegend });
       onClose();
     } catch (error) {
       console.error('Error updating user:', error.message);
@@ -66,6 +70,27 @@ const EditUserModal = ({ user, onClose, onUserUpdated }) => {
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
           />
+        </div>
+        {/* New Fields Below */}
+        <div className="form-group">
+          <label>
+            <input
+              type="checkbox"
+              checked={isAdmin}
+              onChange={() => setIsAdmin((prev) => !prev)}
+            />
+            Admin Access
+          </label>
+        </div>
+        <div className="form-group">
+          <label>
+            <input
+              type="checkbox"
+              checked={isSoundlegend}
+              onChange={() => setIsSoundlegend((prev) => !prev)}
+            />
+            SoundLegend Access
+          </label>
         </div>
         <button type="submit" onClick={handleSave}>
           Save

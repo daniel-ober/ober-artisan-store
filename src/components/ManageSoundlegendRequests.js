@@ -1,24 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { collection, getDocs, updateDoc, doc } from "firebase/firestore";
-import { db } from "../firebaseConfig";
-import ViewSoundlegendModal from "./ViewSoundlegendModal";
-import "./ManageSoundlegendRequests.css";
+import React, { useEffect, useState } from 'react';
+import { collection, getDocs, updateDoc, doc } from 'firebase/firestore';
+import { db } from '../firebaseConfig';
+import ViewSoundlegendModal from './ViewSoundlegendModal';
+import './ManageSoundlegendRequests.css';
 
 const statusOptions = [
-  "New",
-  "Prospecting",
-  "Closed - Won",
-  "Closed - Lost",
-  "Closed - Incomplete Form",
-  "Closed - No Response",
-  "Closed - Duplicate/Spam",
+  'New',
+  'Prospecting',
+  'Closed - Won',
+  'Closed - Lost',
+  'Closed - Incomplete Form',
+  'Closed - No Response',
+  'Closed - Duplicate/Spam',
 ];
 
 const getOverviewStatus = (status) => {
   const lower = status.toLowerCase();
-  if (lower === "prospecting") return "inProgress";
-  if (lower.startsWith("closed")) return "completed";
-  return "new";
+  if (lower === 'prospecting') return 'inProgress';
+  if (lower.startsWith('closed')) return 'completed';
+  return 'new';
 };
 
 const ManageSoundlegendRequests = () => {
@@ -30,11 +30,11 @@ const ManageSoundlegendRequests = () => {
   useEffect(() => {
     const fetchSubmissions = async () => {
       try {
-        const submissionsRef = collection(db, "soundlegend_submissions");
+        const submissionsRef = collection(db, 'soundlegend_submissions');
         const querySnapshot = await getDocs(submissionsRef);
 
         const submissionsList = querySnapshot.docs.map((doc) => {
-          const rawStatus = doc.data().status || "New";
+          const rawStatus = doc.data().status || 'New';
           return {
             id: doc.id,
             status: rawStatus,
@@ -45,7 +45,7 @@ const ManageSoundlegendRequests = () => {
 
         setSubmissions(submissionsList);
       } catch (error) {
-        console.error("❌ Error fetching SoundLegend submissions:", error);
+        console.error('❌ Error fetching SoundLegend submissions:', error);
       } finally {
         setLoading(false);
       }
@@ -56,17 +56,18 @@ const ManageSoundlegendRequests = () => {
 
   const handleStatusChange = async (submissionId, newStatus) => {
     try {
-      const overviewStatus = 
-        newStatus.toLowerCase().startsWith('closed') ? 'completed'
-        : newStatus.toLowerCase() === 'prospecting' ? 'inProgress'
-        : 'new';
-  
-      const submissionRef = doc(db, "soundlegend_submissions", submissionId);
+      const overviewStatus = newStatus.toLowerCase().startsWith('closed')
+        ? 'completed'
+        : newStatus.toLowerCase() === 'prospecting'
+          ? 'inProgress'
+          : 'new';
+
+      const submissionRef = doc(db, 'soundlegend_submissions', submissionId);
       await updateDoc(submissionRef, {
         status: newStatus,
-        overviewStatus: overviewStatus
+        overviewStatus: overviewStatus,
       });
-  
+
       setSubmissions((prevSubmissions) =>
         prevSubmissions.map((submission) =>
           submission.id === submissionId
@@ -75,12 +76,12 @@ const ManageSoundlegendRequests = () => {
         )
       );
     } catch (error) {
-      console.error("❌ Error updating status:", error);
+      console.error('❌ Error updating status:', error);
     }
   };
 
   const filteredSubmissions = hideClosed
-    ? submissions.filter((s) => s.overviewStatus !== "completed")
+    ? submissions.filter((s) => s.overviewStatus !== 'completed')
     : submissions;
 
   const handleRowClick = (submission) => {
@@ -116,6 +117,7 @@ const ManageSoundlegendRequests = () => {
               <th>Name</th>
               <th>Email</th>
               <th>Status</th>
+              <th>Project</th>
             </tr>
           </thead>
           <tbody>
@@ -130,13 +132,15 @@ const ManageSoundlegendRequests = () => {
                     ? new Date(
                         submission.submittedAt.seconds * 1000
                       ).toLocaleString()
-                    : "N/A"}
+                    : 'N/A'}
                 </td>
-                <td>{submission.firstName} {submission.lastName}</td>
+                <td>
+                  {submission.firstName} {submission.lastName}
+                </td>
                 <td>{submission.email}</td>
                 <td onClick={(e) => e.stopPropagation()}>
                   <select
-                    value={submission.status || "New"}
+                    value={submission.status || 'New'}
                     onChange={(e) =>
                       handleStatusChange(submission.id, e.target.value)
                     }
@@ -148,6 +152,19 @@ const ManageSoundlegendRequests = () => {
                     ))}
                   </select>
                 </td>
+                <td>
+                  {submission.projectId ? (
+                    <a
+                      href={`/projects/${submission.projectId}`}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      View Project
+                    </a>
+                  ) : (
+                    <em>No project</em>
+                  )}
+                </td>
               </tr>
             ))}
           </tbody>
@@ -156,9 +173,16 @@ const ManageSoundlegendRequests = () => {
 
       {selectedSubmission && (
         <ViewSoundlegendModal
-          submission={selectedSubmission}
-          onClose={closeModal}
-        />
+  submission={selectedSubmission}
+  onClose={closeModal}
+  onUpdateSubmission={(updatedSubmission) => {
+    setSubmissions((prev) =>
+      prev.map((s) =>
+        s.id === updatedSubmission.id ? { ...s, ...updatedSubmission } : s
+      )
+    );
+  }}
+/>
       )}
     </div>
   );

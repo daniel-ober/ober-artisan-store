@@ -92,9 +92,9 @@ const OurCraftDrumDisplay = () => {
             </div>
           ))}
         </div>
-        <div className="drum-description-area">
+        {/* <div className="drum-description-area">
           <p className="description">{active.description}</p>
-        </div>
+        </div> */}
       </div>
 
       <div className="ourcraft-drum-layers">

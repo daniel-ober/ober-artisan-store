@@ -8,7 +8,7 @@
   align-items: center;
   position: relative;
   padding: 20px;
-  z-index: 1000;
+  z-index: 2999;
 }
 
 .navbar-logo {
@@ -175,7 +175,7 @@ body.dark .navbar-sticky-mini {
   border: none;
   cursor: pointer;
   padding: 6px;
-  z-index: 9999;
+  z-index: 2999;
   position: relative;
 }
 
@@ -183,7 +183,7 @@ body.dark .navbar-sticky-mini {
   width: 40px;
   height: 40px;
   transition: transform 0.3s ease;
-  z-index: 9999;
+  z-index: 2999;
   position: relative;
   pointer-events: auto;
   filter: brightness(1) contrast(100%) saturate(120%);
@@ -221,7 +221,7 @@ body.dark .navbar-sticky-mini {
   top: 100%; /* ← ensures it appears just below sticky mini */
   left: 0;
   width: 100%;
-  z-index: 2998; /* ← just under the sticky-mini (which is 3000) */
+  z-index: 2995; /* ← just under the sticky-mini (which is 3000) */
 }
 
 /* === MOBILE (portrait) DROPDOWN + MENU BEHAVIOR === */
@@ -243,7 +243,7 @@ body.dark .navbar-sticky-mini {
     top: 100%;
     left: 0;
     width: 100%;
-    z-index: 4000;
+    z-index: 2999;
   }
 
   .navbar-links {
@@ -293,7 +293,7 @@ body.dark .navbar-sticky-mini {
     top: 100px; /* ← offsets just below sticky mini */
     left: 0;
     width: 100%;
-    z-index: 4000;
+    z-index: 2999;
   }
 
   .navbar-links.sticky-dropdown {
@@ -306,7 +306,7 @@ body.dark .navbar-sticky-mini {
 
   .navbar-links.sticky-dropdown.open {
     pointer-events: auto !important;
-    z-index: 10002 !important;
+    z-index: 2999 !important;
     position: relative !important;
   }
 
@@ -325,7 +325,7 @@ body.dark .navbar-sticky-mini {
     top: 100% !important;
     left: 0;
     width: 100%;
-    z-index: 4000 !important;
+    z-index: 2999 !important;
   }
 
   body.menu-open .navbar-sticky-mini {
