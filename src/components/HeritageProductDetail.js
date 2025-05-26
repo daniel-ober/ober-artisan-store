@@ -315,7 +315,7 @@ const HeritageProductDetail = () => {
               <li>Double Ended Tube Lugs</li>
               <li>Roundover Outer / 45° Inner Bearing Edge</li>
               <li>Precision Cut Snare Beds</li>
-              <li>Natural Semi-Gloss Finish</li>
+              <li>Natural Matte Finish</li>
               <li>Torch Tuned for Maximum Resonance</li>
               <li>Trick Snare Throw-Off</li>
               <li>Puresound Snare Wires</li>
