@@ -91,13 +91,13 @@ const OurCraft = () => {
   }, [inView]);
 
   useEffect(() => {
-    if (shouldScrollToFinalSection) {
+    if (showDrumLayers && shouldScrollToFinalSection) {
       const timeout = setTimeout(() => {
         if (finalSectionRef.current) {
           finalSectionRef.current.scrollIntoView({ behavior: 'smooth' });
-          setShouldScrollToFinalSection(false);
         }
-      }, 200);
+        setShouldScrollToFinalSection(false);
+      }, 100); // slight delay after render
       return () => clearTimeout(timeout);
     }
   }, [showDrumLayers, shouldScrollToFinalSection]);
@@ -398,71 +398,83 @@ const OurCraft = () => {
           </div>
         </section>
 
-        {/* SOUNDLEGEND SECTION */}
-        <section
-          ref={soundlegendRef}
-          className="ourcraft-section soundlegend-reveal-section"
-        >
-          <div className="soundlegend-grid section-content">
-            {/* IMAGE COLUMN */}
-            <div className="drum-image-col">
-              <img
-                src="/artisan-shop/soundlegend-left.png"
-                alt="SoundLegend Drum"
-                className="soundlegend-drum-img"
-              />
-            </div>
+{/* SOUNDLEGEND SECTION */}
+<section
+  ref={soundlegendRef}
+  className="ourcraft-section soundlegend-reveal-section"
+>
+  <div className="soundlegend-grid section-content">
+    {/* IMAGE COLUMN */}
+    <div className="drum-image-col">
+      <img
+        src="/artisan-shop/soundlegend-left.png"
+        alt="SoundLegend Drum"
+        className="soundlegend-drum-img"
+      />
+    </div>
 
-            {/* TEXT COLUMN */}
-            <div className="drum-text-col">
-              <img
-                src="/resized-logos/soundlegend-white.png"
-                alt="SoundLegend Logo"
-                className="soundlegend-logo"
-              />
-              <div className="soundlegend-text">
-                <p className="soundlegend-quote">
-                  “Every drum tells a story — let’s craft yours together.”
-                </p>
+    {/* TEXT COLUMN */}
+    <div className="drum-text-col">
+      <img
+        src="/resized-logos/soundlegend-white.png"
+        alt="SoundLegend Logo"
+        className="soundlegend-logo"
+      />
+      <div className="soundlegend-text">
+        <p className="soundlegend-quote">
+          “Every drum tells a story — let’s craft yours together.”
+        </p>
 
-                <ul className="soundlegend-description-list">
-                  <li>Custom-built from your vision</li>
-                  <li>1-on-1 with Dan Ober</li>
-                  <li>Concept mockups included</li>
-                  <li>Behind-the-scenes access</li>
-                  <li>Limited Edition gift item included</li>
-                  <li>Builds starting at $1250</li>
-                </ul>
+        <ul className="soundlegend-description-list">
+          <li>Custom-built from your vision</li>
+          <li>1-on-1 with Dan Ober</li>
+          <li>Concept mockups included</li>
+          <li>Behind-the-scenes access</li>
+          <li>Limited Edition gift item included</li>
+          <li>Builds starting at $1250</li>
+        </ul>
 
-                {/* Mobile scroll indicator */}
-                <div className="mobile-scroll-indicator">
-                  <div
-                    className="scroll-indicator"
-                    onClick={() => {
-                      setShowDrumLayers(true); // Force it to mount now
-                      setShouldScrollToFinalSection(true); // Scroll once ready
-                    }}
-                  >
-                    ↓ Learn More
-                  </div>
-                </div>
-              </div>
-            </div>
+        {/* Mobile scroll indicator */}
+        <div className="mobile-scroll-indicator">
+          <div
+            className="scroll-indicator"
+            onClick={() => {
+              if (!showDrumLayers) {
+                setShowDrumLayers(true);
+                setTimeout(() => {
+                  finalSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+                }, 150);
+              } else {
+                finalSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
+          >
+            ↓ Learn More
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-          {/* Desktop scroll indicator */}
-          <div className="desktop-scroll-indicator scroll-indicator-wrapper">
-            <div
-              className="scroll-indicator"
-              onClick={() => {
-                setShowDrumLayers(true); // Force it to mount now
-                setShouldScrollToFinalSection(true); // Scroll once ready
-              }}
-            >
-              ↓ Learn More
-            </div>
-          </div>
-        </section>
+  {/* Desktop scroll indicator */}
+  <div className="desktop-scroll-indicator scroll-indicator-wrapper">
+    <div
+      className="scroll-indicator"
+      onClick={() => {
+        if (!showDrumLayers) {
+          setShowDrumLayers(true);
+          setTimeout(() => {
+            finalSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+          }, 150);
+        } else {
+          finalSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+        }
+      }}
+    >
+      ↓ Learn More
+    </div>
+  </div>
+</section>
 
         {/* Trigger element AFTER SoundLegend for inView tracking */}
         <div ref={soundlegendTriggerRef} style={{ height: '1px' }} />
