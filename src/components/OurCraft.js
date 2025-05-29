@@ -23,9 +23,12 @@ const OurCraft = () => {
   const soundlegendRef = useRef(null);
   const finalSectionRef = useRef(null);
 
-  const scrollToRef = (ref) => {
+  const scrollToRef = (ref, override = false) => {
     if (ref?.current) {
-      ref.current.scrollIntoView({ behavior: 'smooth' });
+      ref.current.scrollIntoView({
+        behavior: 'smooth',
+        block: override ? 'start' : 'nearest',
+      });
     }
   };
 
@@ -71,12 +74,26 @@ const OurCraft = () => {
   const [hoveredValue, setHoveredValue] = useState(null);
   const [showDrumLayers, setShowDrumLayers] = useState(false);
   const [soundlegendTriggerRef, inView] = useInView({ threshold: 0 });
+  const [shouldScrollToFinalSection, setShouldScrollToFinalSection] =
+    useState(false);
 
   useEffect(() => {
     if (inView) {
       setShowDrumLayers(true);
     }
   }, [inView]);
+
+  useEffect(() => {
+    if (shouldScrollToFinalSection) {
+      const timeout = setTimeout(() => {
+        if (finalSectionRef.current) {
+          finalSectionRef.current.scrollIntoView({ behavior: 'smooth' });
+          setShouldScrollToFinalSection(false);
+        }
+      }, 200);
+      return () => clearTimeout(timeout);
+    }
+  }, [showDrumLayers, shouldScrollToFinalSection]);
 
   return (
     <div className="ourcraft-scroll-wrapper">
@@ -122,6 +139,7 @@ const OurCraft = () => {
             </div>
           </div>
         </section>
+
         {/* PHILOSOPHY */}
         <section
           ref={philosophyRef}
@@ -165,24 +183,27 @@ const OurCraft = () => {
                 <div className="mobile-scroll-indicator">
                   <div
                     className="scroll-indicator"
-                    onClick={() => scrollToRef(founderRef)}
-                  >
+                    onClick={() => scrollToRef(founderRef, true)}                  >
                     ↓ Our Founder's Batch
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          {/* Desktop scroll indicator OUTSIDE text */}
-          <div className="desktop-scroll-indicator scroll-indicator-wrapper">
-            <div
-              className="scroll-indicator"
-              onClick={() => scrollToRef(founderRef)}
-            >
-              ↓ Our Founder's Batch
+
+            {/* Spacer to ensure scroll indicator isn't pushed out */}
+            <div className="scroll-spacer" />
+
+            {/* Desktop scroll indicator OUTSIDE text */}
+            <div className="desktop-scroll-indicator scroll-indicator-wrapper">
+              <div
+                className="scroll-indicator"
+                onClick={() => scrollToRef(founderRef, true)}              >
+                ↓ Our Founder's Batch
+              </div>
             </div>
           </div>
         </section>
+
         {/* FOUNDER'S BATCH */}
         <section
           ref={founderRef}
@@ -192,19 +213,33 @@ const OurCraft = () => {
             <div className="founder-text">
               <div className="artisan-intro-inner">
                 <h2>Our Founder's Batch</h2>
-                <p className="artisan-tagline">
+                {/* <p className="artisan-tagline">
                   “Every journey begins with a single voice.”
                 </p>
                 <p className="artisan-intro-paragraph">
                   Before the brand, there was one drum. Built by hand, late at
                   night, to answer a question:{' '}
                   <em>What does it mean to build with soul?</em>
-                </p>
-                <p className="artisan-intro-tagline">
-                  That drum sparked the path and philosophy for Ober Artisan
-                  Drums.
-                </p>
-                {/* Mobile scroll indicator INSIDE text */}
+                </p> */}
+
+                {/* IMAGE DISPLAY */}
+                <img
+                  className="founder-wide-img"
+                  src="/our-craft/wide.png"
+                  alt="Founder's Batch Wide Drum"
+                />
+
+                {/* ✅ Desktop scroll indicator now correctly inside layout flow */}
+                <div className="desktop-scroll-indicator scroll-indicator-wrapper">
+                  <div
+                    className="scroll-indicator"
+                    onClick={() => scrollToRef(heritageRef)}
+                  >
+                    ↓ Heritage Series
+                  </div>
+                </div>
+
+                {/* Mobile scroll indicator */}
                 <div className="mobile-scroll-indicator">
                   <div
                     className="scroll-indicator"
@@ -216,16 +251,8 @@ const OurCraft = () => {
               </div>
             </div>
           </div>
-          {/* Desktop scroll indicator OUTSIDE text */}
-          <div className="desktop-scroll-indicator scroll-indicator-wrapper">
-            <div
-              className="scroll-indicator"
-              onClick={() => scrollToRef(heritageRef)}
-            >
-              ↓ Heritage Series
-            </div>
-          </div>
         </section>
+
         {/* HERITAGE SECTION - IMAGE LEFT, TEXT RIGHT */}
         <section
           ref={heritageRef}
@@ -259,7 +286,7 @@ const OurCraft = () => {
                   <li>45°/Roundover bearing edges</li>
                   <li>Torch-fired for tonal depth</li>
                   <li>Trick throw-off + Puresound wires</li>
-                  <li>Handmade in Nashville, TN</li>
+                  <li>Builds starting at $850</li>
                 </ul>
                 {/* <button
                   className="heritage-button"
@@ -317,11 +344,12 @@ const OurCraft = () => {
 
                 <ul className="feuzon-description-list">
                   <li>Hybrid shell: stave + steam-bent</li>
-                  <li>Multi-wood blend for bold tone</li>
+                  <li>Multi-wood blend for original tone</li>
                   <li>45°/Roundover edges for range</li>
                   <li>Torch-tuned for clarity + balance</li>
-                  <li>Stained or natural semi-gloss</li>
-                  <li>Made for dynamic expression</li>
+                  <li>Stained or natural natural matte</li>
+                  <li>Builds starting at $1050</li>
+
                 </ul>
                 {/* <button
                   className="feuzon-button"
@@ -334,15 +362,23 @@ const OurCraft = () => {
                     className="scroll-indicator"
                     onClick={() => scrollToRef(soundlegendRef)}
                   >
-                    ↓ SoundLegend Experience
+                    ↓ Soundlegend Series
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div className="mobile-scroll-indicator"></div>
+          {/* Desktop scroll indicator OUTSIDE text */}
+          <div className="desktop-scroll-indicator scroll-indicator-wrapper">
+            <div
+              className="scroll-indicator"
+              onClick={() => scrollToRef(soundlegendRef)}
+            >
+              ↓ Soundlegend Series
+            </div>
+          </div>
         </section>
-        {/* SOUNDLEGEND SECTION - IMAGE LEFT, TEXT RIGHT */}
+
         {/* SOUNDLEGEND SECTION */}
         <section
           ref={soundlegendRef}
@@ -357,6 +393,7 @@ const OurCraft = () => {
                 className="soundlegend-drum-img"
               />
             </div>
+
             {/* TEXT COLUMN */}
             <div className="drum-text-col">
               <img
@@ -371,45 +408,54 @@ const OurCraft = () => {
 
                 <ul className="soundlegend-description-list">
                   <li>Custom-built from your vision</li>
-                  <li>Work 1-on-1 with Dan Ober</li>
-                  <li>Mockups before final build</li>
-                  <li>Choose woods, edges, finish</li>
-                  <li>Pro-grade hardware + detail</li>
-                  <li>Tuned to your style + goals</li>
-                  <li>Includes gift + Ober swag</li>
-                  <li>Track progress in your portal</li>
+                  <li>1-on-1 with Dan Ober</li>
+                  <li>Concept mockups included</li>
+                  <li>Behind-the-scenes access</li>
+                  <li>Limited Edition gift item included</li>
+                  <li>Builds starting at $1250</li>
                 </ul>
-                <div
-            className="scroll-indicator"
-            onClick={() => scrollToRef(finalSectionRef)}
-          >
-            ↓ Begin Your Journey
-          </div>
-                {/* <button
-          className="soundlegend-button"
-          onClick={() => navigate('/artisan-shop/soundlegend')}
-        >
-          Begin the Journey
-        </button> */}
+
+                {/* Mobile scroll indicator */}
+                <div className="mobile-scroll-indicator">
+                  <div
+                    className="scroll-indicator"
+                    onClick={() => {
+                      setShowDrumLayers(true); // Force it to mount now
+                      setShouldScrollToFinalSection(true); // Scroll once ready
+                    }}
+                  >
+                    ↓ Learn More
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
+          {/* Desktop scroll indicator */}
+          <div className="desktop-scroll-indicator scroll-indicator-wrapper">
+            <div
+              className="scroll-indicator"
+              onClick={() => {
+                setShowDrumLayers(true); // Force it to mount now
+                setShouldScrollToFinalSection(true); // Scroll once ready
+              }}
+            >
+              ↓ Learn More
+            </div>
+          </div>
         </section>
-        {/* 👇 This is the trigger element to detect when SoundLegend leaves viewport */}
+
+        {/* Trigger element AFTER SoundLegend for inView tracking */}
         <div ref={soundlegendTriggerRef} style={{ height: '1px' }} />
-        {/* 👇 This trigger activates AFTER SoundLegend has left the viewport */}
-        <div ref={soundlegendTriggerRef} style={{ height: '1px' }} />{' '}
-        {/* 👇 This is the actual trigger placed AFTER SoundLegend */}
-        <div ref={soundlegendTriggerRef} style={{ height: '1px' }} />{' '}
-        {/* Place the trigger AFTER the section */}
-        <div ref={soundlegendTriggerRef} style={{ height: '1px' }} />{' '}
+
         {/* DRUM DISPLAY */}
         {showDrumLayers && (
-          <section ref={finalSectionRef} className="ourcraft-section">
-            <div className="artisanseries-wrapper">
-              <ArtisanDrums />
-            </div>
+          <section
+            ref={finalSectionRef}
+            className="ourcraft-section artisan-final-section"
+            style={{ padding: 0, margin: 0 }}
+          >
+            <ArtisanDrums />
           </section>
         )}
       </main>

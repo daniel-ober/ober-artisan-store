@@ -168,10 +168,10 @@ const SoundLegendProductDetail = () => {
               <li>Custom Handcrafted Snare Drum</li>
               <li>Collaborate directly with Artisan, Dan Ober</li>
               <li>High-Resolution Mockup Renders</li>
-              <li>Special Web Access</li>
-              <li>Limited Edition Gift</li>
-              <li>A FREE Swag Item</li>
-              <li>AND MORE!</li>
+              <li>Behind-the-scenes access</li>
+              <li>Limited Edition gift item</li>
+              <li>Builds starting at $1250</li>
+
             </ul>
           </div>
 

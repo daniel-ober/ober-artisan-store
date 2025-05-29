@@ -147,7 +147,7 @@ const AdminDashboard = () => {
         ].map(({ name, icon: Icon, stateKey }) => (
           <div
             key={stateKey}
-            className="admin-card"
+            className={`admin-card ${stateKey === 'overview' ? 'full-width-mobile' : ''}`}
             role="button"
             tabIndex={0}
             onClick={() => setActiveComponent(stateKey)}
