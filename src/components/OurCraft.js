@@ -98,50 +98,58 @@ const OurCraft = () => {
   return (
     <div className="ourcraft-scroll-wrapper">
       <main className="ourcraft-container">
-      
-  {/* HERO */}
-<section ref={heroRef} className="ourcraft-section craft-hero-section">
-  <div className="hero-grid section-content">
-    <div className="hero-text">
-      <div className="story-inner">
-        <h1>Our Story</h1>
-        <p>Crafted in Nashville. Rooted in sound and built by hand — every part of it.</p>
-        <p>
-          Ober Artisan Drums is the work of Dan Ober, a Boston native who studied composition and film scoring at Berklee College of Music, and sharpened his drumming under world-class players like Mike Mangini and Kim Plainfield.
-        </p>
-        <p>
-        Now based in Nashville, Dan doesn’t just build drums — he builds the entire experience. From hand-shaping every shell to torch-tuning the tone, designing the site from scratch, and even 3D modeling to prototype and build better tools — all in pursuit of a single mission: to craft timeless instruments with soul, originality, and character that resonate with each drummer’s unique journey.
-        </p>
-        <p>
-          The same hands behind the drums are behind the photography, videography, and sound production. Even the demos (coming soon) are created in-house.
-        </p>
-        <p>
-          This is small-batch drum making driven by obsession — sound, feel, design, and craft — with nothing outsourced, and nothing phoned in.
-        </p>
+        {/* HERO */}
+        <section ref={heroRef} className="ourcraft-section craft-hero-section">
+          <div className="hero-grid section-content">
+            <div className="hero-text">
+              <div className="story-inner">
+                <h1>Our Story</h1>
+                <p>
+                  Crafted in Nashville. Rooted in sound and built by hand —
+                  every part of it.
+                </p>
+                <p>
+                  Ober Artisan Drums is the work of Dan Ober, a Boston native
+                  who studied composition and film scoring at Berklee College of
+                  Music, and sharpened his drumming under world-class players
+                  like Mike Mangini and Kim Plainfield.
+                </p>
+                <p>
+                  Now based in Nashville, Dan doesn’t just build drums — he
+                  builds the entire experience. From shaping shells and
+                  designing the site, to 3D modeling tools and producing all
+                  photography, video, and sound in-house — it’s all part of one
+                  mission: to craft timeless instruments with soul, originality,
+                  and character that resonate with every drummer’s journey.
+                </p>
+                <p>
+                  This is small-batch drum making - fueled by obsession, built
+                  by hand.
+                </p>
 
-        {/* Mobile scroll indicator INSIDE text */}
-        <div className="mobile-scroll-indicator">
-          <div
-            className="scroll-indicator"
-            onClick={() => scrollToRef(philosophyRef)}
-          >
-            ↓ Our Philosophy
+                {/* Mobile scroll indicator INSIDE text */}
+                <div className="mobile-scroll-indicator">
+                  <div
+                    className="scroll-indicator"
+                    onClick={() => scrollToRef(philosophyRef)}
+                  >
+                    ↓ Our Philosophy
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  {/* Desktop scroll indicator OUTSIDE text */}
-  <div className="desktop-scroll-indicator scroll-indicator-wrapper">
-    <div
-      className="scroll-indicator"
-      onClick={() => scrollToRef(philosophyRef)}
-    >
-      ↓ Our Philosophy
-    </div>
-  </div>
-</section>
+          {/* Desktop scroll indicator OUTSIDE text */}
+          <div className="desktop-scroll-indicator scroll-indicator-wrapper">
+            <div
+              className="scroll-indicator"
+              onClick={() => scrollToRef(philosophyRef)}
+            >
+              ↓ Our Philosophy
+            </div>
+          </div>
+        </section>
 
         {/* PHILOSOPHY */}
         <section
@@ -186,7 +194,8 @@ const OurCraft = () => {
                 <div className="mobile-scroll-indicator">
                   <div
                     className="scroll-indicator"
-                    onClick={() => scrollToRef(founderRef, true)}                  >
+                    onClick={() => scrollToRef(founderRef, true)}
+                  >
                     ↓ Our Founder's Batch
                   </div>
                 </div>
@@ -200,7 +209,8 @@ const OurCraft = () => {
             <div className="desktop-scroll-indicator scroll-indicator-wrapper">
               <div
                 className="scroll-indicator"
-                onClick={() => scrollToRef(founderRef, true)}              >
+                onClick={() => scrollToRef(founderRef, true)}
+              >
                 ↓ Our Founder's Batch
               </div>
             </div>
@@ -352,7 +362,6 @@ const OurCraft = () => {
                   <li>Torch-tuned for clarity + balance</li>
                   <li>Stained or natural natural matte</li>
                   <li>Builds starting at $1050</li>
-
                 </ul>
                 {/* <button
                   className="feuzon-button"
