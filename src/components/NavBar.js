@@ -196,15 +196,13 @@ const NavBar = () => {
                   .filter((l) => l.name.toLowerCase() !== 'home')
                   .map((link) => (
                     <Link
-                      to={`/${link.name.toLowerCase().replace(/\s+/g, '-')}`}
-                      className="nav-link"
-                      onClick={() => {
-                        // Delay closing the menu until after the route change settles
-                        setTimeout(() => setIsMenuOpen(false), 50);
-                      }}
-                    >
-                      {link.label}
-                    </Link>
+  key={link.id}
+  to={`/${link.name}`}
+  className="nav-link"
+  onClick={() => handleNavLinkClick(`/${link.name}`)}
+>
+  {link.label}
+</Link>
                   ))}
 
                 {user && isAdmin && (
@@ -274,15 +272,13 @@ const NavBar = () => {
                   .filter((l) => l.name.toLowerCase() !== 'home')
                   .map((link) => (
                     <Link
-                      to={`/${link.name.toLowerCase().replace(/\s+/g, '-')}`}
-                      className="nav-link"
-                      onClick={() => {
-                        // Delay closing the menu until after the route change settles
-                        setTimeout(() => setIsMenuOpen(false), 50);
-                      }}
-                    >
-                      {link.label}
-                    </Link>
+  key={link.id}
+  to={`/${link.name}`}
+  className="nav-link"
+  onClick={() => handleNavLinkClick(`/${link.name}`)}
+>
+  {link.label}
+</Link>
                   ))}
 
                 {user && isAdmin && (
@@ -396,15 +392,13 @@ const NavBar = () => {
                 .filter((l) => l.name.toLowerCase() !== 'home')
                 .map((link) => (
                   <Link
-                    to={`/${link.name.toLowerCase().replace(/\s+/g, '-')}`}
-                    className="nav-link"
-                    onClick={() => {
-                      // Delay closing the menu until after the route change settles
-                      setTimeout(() => setIsMenuOpen(false), 50);
-                    }}
-                  >
-                    {link.label}
-                  </Link>
+  key={link.id}
+  to={`/${link.name}`}
+  className="nav-link"
+  onClick={() => handleNavLinkClick(`/${link.name}`)}
+>
+  {link.label}
+</Link>
                 ))}
 
               {user && isAdmin && (

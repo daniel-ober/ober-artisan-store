@@ -59,12 +59,22 @@ const SiteSettings = () => {
 
   const handleDragEnd = (result) => {
     if (!result.destination) return;
-
-    const reorderedLinks = Array.from(navbarLinks);
-    const [moved] = reorderedLinks.splice(result.source.index, 1);
-    reorderedLinks.splice(result.destination.index, 0, moved);
-
-    setNavbarLinks(reorderedLinks);
+  
+    const activeLinks = navbarLinks.filter((link) => link.enabled);
+    const inactiveLinks = navbarLinks.filter((link) => !link.enabled);
+  
+    // Rearrange active links only
+    const reorderedActive = Array.from(activeLinks);
+    const [moved] = reorderedActive.splice(result.source.index, 1);
+    reorderedActive.splice(result.destination.index, 0, moved);
+  
+    // Rebuild the full navbarLinks array with updated order
+    const newNavbarLinks = [...reorderedActive, ...inactiveLinks].map((link, idx) => ({
+      ...link,
+      order: idx,
+    }));
+  
+    setNavbarLinks(newNavbarLinks);
     setUnsavedChanges(true);
   };
 
@@ -121,10 +131,11 @@ const SiteSettings = () => {
             </div>
           ))}
         </div>
-
+  
         <h3>Manage Navbar</h3>
-        <div className="navbar-preview-container">
-          <DragDropContext onDragEnd={handleDragEnd}>
+        <DragDropContext onDragEnd={handleDragEnd}>
+          {/* Preview Strip */}
+          <div className="navbar-preview-container">
             <Droppable droppableId="navbar-preview" direction="horizontal">
               {(provided) => (
                 <div
@@ -132,33 +143,29 @@ const SiteSettings = () => {
                   ref={provided.innerRef}
                   {...provided.droppableProps}
                 >
-                  {activeNavbarLinks
-                    .map((link, index) => (
-                      <Draggable key={link.id} draggableId={link.id} index={index}>
-                        {(provided) => (
-                          <div
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                            className="navbar-preview-item"
-                          >
-                            {link.label}
-                          </div>
-                        )}
-                      </Draggable>
-                    ))}
+                  {activeNavbarLinks.map((link, index) => (
+                    <Draggable key={link.id} draggableId={`preview-${link.id}`} index={index}>
+                      {(provided) => (
+                        <div
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          className="navbar-preview-item"
+                        >
+                          {link.label}
+                        </div>
+                      )}
+                    </Draggable>
+                  ))}
                   {provided.placeholder}
                 </div>
               )}
             </Droppable>
-          </DragDropContext>
-        </div>
-
-        {/* Display list of all navbar links with toggle buttons */}
-        <div className="navbar-links-container">
-          {/* Active Navbar Links */}
-          <h4>Active Navbar Links</h4>
-          <DragDropContext onDragEnd={handleDragEnd}>
+          </div>
+  
+          {/* Active/Inactive Lists */}
+          <div className="navbar-links-container">
+            <h4>Active Navbar Links</h4>
             <Droppable droppableId="active-navbar-links">
               {(provided) => (
                 <div
@@ -193,31 +200,30 @@ const SiteSettings = () => {
                 </div>
               )}
             </Droppable>
-          </DragDropContext>
-
-          {/* Inactive Navbar Links */}
-          <h4>Inactive Navbar Links</h4>
-          {inactiveNavbarLinks.map((link) => (
-            <div key={link.id} className="navbar-link-item">
-              <span>{link.label}</span>
-              <label className="toggle-switch" htmlFor={`navbar-link-${link.id}`} aria-label={`Toggle ${link.label}`}>
-                <input
-                  type="checkbox"
-                  checked={link.enabled}
-                  onChange={() => handleToggleNavbarLink(link.id)}
-                  id={`navbar-link-${link.id}`}
-                />
-                <span className="slider"></span>
-              </label>
-            </div>
-          ))}
-        </div>
-
+  
+            <h4>Inactive Navbar Links</h4>
+            {inactiveNavbarLinks.map((link) => (
+              <div key={link.id} className="navbar-link-item">
+                <span>{link.label}</span>
+                <label className="toggle-switch" htmlFor={`navbar-link-${link.id}`} aria-label={`Toggle ${link.label}`}>
+                  <input
+                    type="checkbox"
+                    checked={link.enabled}
+                    onChange={() => handleToggleNavbarLink(link.id)}
+                    id={`navbar-link-${link.id}`}
+                  />
+                  <span className="slider"></span>
+                </label>
+              </div>
+            ))}
+          </div>
+        </DragDropContext>
+  
         <button type="submit" className="settings-save-btn" disabled={!unsavedChanges}>
           Save Changes
         </button>
       </form>
-
+  
       <Snackbar
         open={snackbar.open}
         autoHideDuration={6000}
