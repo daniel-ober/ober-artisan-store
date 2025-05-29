@@ -28,7 +28,7 @@ const DRUM_SERIES = [
     quote: '“Every drum tells a story—let’s craft yours together.”',
     startingPrice: 'Builds starting at $1200',
     description:
-      'The SoundLegend Series is more than just a drum—it’s an experience. Designed for drummers who want to collaborate directly with a master artisan, this fully custom shop offering gives you the freedom to explore new sonic possibilities. Through a hands-on process that includes consultation calls, high-resolution concept renders, and build updates, you’ll watch your dream snare drum take shape before your eyes.',
+      'The SoundLegend Series is more than just a drum—it’s an experience. Designed for drummers who want to collaborate directly with a master artisan, this fully custom shop offering gives you the freedom to explore new sonic possibilities. Through a hands-on process that includes consultation calls, high-resolution concept renders, and live build updates, you’ll watch your dream snare drum take shape before your eyes.',
     specs: [],
     images: ['/artisan-shop/soundlegend-left.png'],
     audioSamples: [],
