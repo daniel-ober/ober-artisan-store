@@ -22,7 +22,7 @@ const AdminRoute = ({ element }) => {
   }
 
   // Redirect to sign-in if the user is not an admin
-  return user && isAdmin ? element : <Navigate to="/signin" />;
+  return user && isAdmin ? element : <Navigate to="/admin-signin" />;
 };
 
 export default AdminRoute;
