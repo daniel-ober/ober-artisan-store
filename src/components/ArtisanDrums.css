@@ -34,7 +34,7 @@
 .artisanseries-header-image {
   max-width: 500px;
   width: 100%;
-  /* margin: 0 auto 2rem; */
+  margin: 0 auto 2rem;
 }
 
 /* -------------------------------
@@ -308,6 +308,16 @@
   z-index: 2;
 }
 
+.layer.overlay-image.grayscale {
+  filter: grayscale(100%);
+  transition: filter 0.3s ease;
+}
+
+.overlay-image.grayscale {
+  filter: grayscale(100%);
+  transition: filter 0.3s ease;
+}
+
 /* -------------------------------
    DRUM CLICK + HOVER ZONES
 -------------------------------- */
@@ -510,6 +520,13 @@
   right: 10px;
 }
 
+.starting-price {
+  color: #6dff63;
+  font-weight: bold;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
 /* -------------------------------
    MISC
 -------------------------------- */
@@ -536,6 +553,23 @@
   background: transparent;
 }
 
+.drum-hover-instruction {
+  text-align: center;
+  color: #ccc;
+  font-size: 0.9rem;
+  margin: 0.5rem auto 1.25rem;
+  font-style: italic;
+  opacity: 0.85;
+  max-width: 100%;
+  animation: pulseText 2s infinite ease-in-out;
+
+}
+
+@keyframes pulseText {
+  0%, 100% { opacity: 0.85; }
+  50% { opacity: 1; color: #fff; }
+}
+
 /* -------------------------------
    RESPONSIVE
 -------------------------------- */
@@ -551,7 +585,7 @@
   }
 
   .description {
-    font-size: 1rem;
+    font-size: 0.9rem;
     text-align: center;
     text-align: justify;
   }
