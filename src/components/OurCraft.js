@@ -304,8 +304,7 @@ const OurCraft = () => {
                   <li>Northern Red Oak shell</li>
                   <li>Stave-built for pure resonance</li>
                   <li>45°/Roundover bearing edges</li>
-                  <li>Torch-fired for tonal depth</li>
-                  <li>Trick throw-off + Puresound wires</li>
+                  <li>Hand-scorched for visual depth + warmth</li>
                   <li>Builds starting at $850</li>
                 </ul>
                 {/* <button
@@ -364,10 +363,9 @@ const OurCraft = () => {
 
                 <ul className="feuzon-description-list">
                   <li>Hybrid shell: stave + steam-bent</li>
-                  <li>Multi-wood blend for original tone</li>
-                  <li>45°/Roundover edges for range</li>
+                  <li>150+ unique build variations to fit your voice</li>
+                  <li>45°/Roundover bearing edges</li>
                   <li>Torch-tuned for clarity + balance</li>
-                  <li>Stained or natural natural matte</li>
                   <li>Builds starting at $1050</li>
                 </ul>
                 {/* <button
@@ -428,9 +426,9 @@ const OurCraft = () => {
         <ul className="soundlegend-description-list">
           <li>Custom-built from your vision</li>
           <li>1-on-1 with Dan Ober</li>
-          <li>Concept mockups included</li>
+          <li>High resolution concept mockups</li>
           <li>Behind-the-scenes access</li>
-          <li>Limited Edition gift item included</li>
+          <li>Limited Edition gift item</li>
           <li>Builds starting at $1250</li>
         </ul>
 
