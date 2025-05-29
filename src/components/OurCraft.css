@@ -165,15 +165,23 @@ body {
 }
 
 .artisan-final-section {
-    scroll-snap-align: start;
-    min-height: 100vh;
-    height: 100vh;
     display: flex;
-    align-items: center; /* fixes vertical shift */
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-end; /* ✅ ensures drum-layers hugs the bottom */
+    align-items: center;
     padding: 0;
     margin: 0;
+    height: 100vh;
     position: relative;
+  }
+
+  .drum-final-text {
+    padding-top: 0 !important;
+  }
+
+  .text-layer {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
   }
 
 @keyframes bounceDown {
@@ -621,7 +629,7 @@ body {
   .craft-hero-section,
   .philosophy-section,
   .artisan-intro-section {
-    background-attachment: fixed !important;
+    background-attachment: scroll !important; /* <-- FIXED */
     background-size: cover !important;
     background-position: center top !important;
     background-repeat: no-repeat !important;
