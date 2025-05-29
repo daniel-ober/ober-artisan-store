@@ -10,7 +10,8 @@ const DRUM_SERIES = [
     name: 'HERITAGE',
     logo: '/resized-logos/heritage-white.png',
     overlay: '/artisanseries-bottom-layers/top-layer-left-drum-highlighted.png',
-    quote: '“The drum that started it all—classic craftsmanship, timeless sound.”',
+    quote:
+      '“The drum that started it all—classic craftsmanship, timeless sound.”',
     startingPrice: 'Heritage builds starting at $850',
     description:
       'The HERITAGE Series is a tribute to the roots of handcrafted snare drums—where tradition, tone, and touch converge. Built from select Northern Red Oak using time-honored stave techniques, each drum is torch-tuned to unlock natural warmth and resonance. The scorched finish enhances both sonic depth and visual character. With crisp attack, focused mids, and a balanced low end, the HERITAGE Series delivers timeless tone for drummers who seek legacy in every stroke.',
@@ -22,7 +23,8 @@ const DRUM_SERIES = [
     id: 'soundlegend',
     name: 'SOUNDLEGEND',
     logo: '/resized-logos/soundlegend-white.png',
-    overlay: '/artisanseries-bottom-layers/top-layer-middle-drum-highlighted.png',
+    overlay:
+      '/artisanseries-bottom-layers/top-layer-middle-drum-highlighted.png',
     quote: '“Every drum tells a story—let’s craft yours together.”',
     startingPrice: 'Builds starting at $1200',
     description:
@@ -35,7 +37,8 @@ const DRUM_SERIES = [
     id: 'feuzon',
     name: 'FEUZØN',
     logo: '/resized-logos/feuzon-white.png',
-    overlay: '/artisanseries-bottom-layers/top-layer-right-drum-highlighted.png',
+    overlay:
+      '/artisanseries-bottom-layers/top-layer-right-drum-highlighted.png',
     quote: '“Blending tradition and innovation into one harmonious voice.”',
     startingPrice: 'FEUZØN builds starting at $1050',
     description:
@@ -148,17 +151,23 @@ const ArtisanDrums = ({ showAll = false }) => {
 
   return (
     <div className="artisanseries-container">
-      <div className={`logo-single-wrapper sticky-logo-wrapper fade-transition ${isFading ? 'fade-out' : ''}`}>
+      <div
+        className={`logo-single-wrapper sticky-logo-wrapper fade-transition ${isFading ? 'fade-out' : ''}`}
+      >
         <img
           src={active.logo}
           alt={active.name}
           className="artisanseries-header-image"
         />
       </div>
-  
-      <div className={`drum-display fade-transition ${isFading ? 'fade-out' : ''}`}>
+
+      <div
+        className={`drum-display fade-transition ${isFading ? 'fade-out' : ''}`}
+      >
         <div className="text-layer">
-          <p className="description"><strong>{active.quote}</strong></p>
+          <p className="description">
+            <strong>{active.quote}</strong>
+          </p>
           <p className="description">{active.description}</p>
           {/* <p className="starting-price">{active.startingPrice}</p> */}
           <button
@@ -175,45 +184,51 @@ const ArtisanDrums = ({ showAll = false }) => {
               ? 'Request Your FREE 1-on-1 Consultation'
               : `Order Your ${active.name} Today`}
           </button>
-          <p className="drum-hover-instruction">Click or hover on a drum to explore each series.</p>
+          <p className="drum-hover-instruction">
+            Click or hover on a drum to explore each series.
+          </p>
+        </div>
+      </div>
 
+      {/* ✳️ Instructional Message */}
+      <div className="drum-layers-block">
+        <div className={`drum-layers ${isStuck ? 'stuck' : ''}`}>
+          <img
+            src="/artisanseries-bottom-layers/base-layer-bottom.png"
+            className="layer"
+          />
+          <img
+            src="/artisanseries-bottom-layers/base-layer-front.png"
+            className="layer"
+          />
+          <img
+            src="/artisanseries-bottom-layers/top-layer-alldrums-color.png"
+            className="layer overlay-image grayscale"
+          />
+          <img
+            src={overlayImage}
+            className="layer overlay-image"
+            style={{ zIndex: 4 }}
+          />
+          <div className="drum-click-zones">
+            {[0, 1, 2].map((i) => (
+              <div
+                key={i}
+                className={`zone zone-${i}`}
+                onMouseEnter={() => handleHover(i)}
+                onMouseLeave={clearHover}
+                onClick={() => handleDrumSwitch(i)}
+              />
+            ))}
+          </div>
         </div>
+        <p className="drum-hover-instruction">
+          Click or hover on a drum to explore each series.
+        </p>
       </div>
-  
-      {/* ✳️ Instructional Message */}  
-      <div className={`drum-layers ${isStuck ? 'stuck' : ''}`}>
-        <img
-          src="/artisanseries-bottom-layers/base-layer-bottom.png"
-          className="layer"
-        />
-        <img
-          src="/artisanseries-bottom-layers/base-layer-front.png"
-          className="layer"
-        />
-        <img
-          src="/artisanseries-bottom-layers/top-layer-alldrums-color.png"
-          className="layer overlay-image grayscale"
-        />
-        <img
-          src={overlayImage}
-          className="layer overlay-image"
-          style={{ zIndex: 4 }}
-        />
-        <div className="drum-click-zones">
-          {[0, 1, 2].map((i) => (
-            <div
-              key={i}
-              className={`zone zone-${i}`}
-              onMouseEnter={() => handleHover(i)}
-              onMouseLeave={clearHover}
-              onClick={() => handleDrumSwitch(i)}
-            />
-          ))}
-        </div>
-      </div>
-  
+
       <div ref={footerRef} className="footer-trigger-marker" />
-  
+
       {lightboxIndex !== null && (
         <div
           className={`lightbox ${zoomed ? 'zoomed' : ''}`}
@@ -264,7 +279,6 @@ const ArtisanDrums = ({ showAll = false }) => {
       )}
     </div>
   );
-  
 };
 
 export default ArtisanDrums;
