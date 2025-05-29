@@ -32,6 +32,13 @@ const OurCraft = () => {
     }
   };
 
+  useEffect(() => {
+    document.body.classList.add('our-craft-page');
+    return () => {
+      document.body.classList.remove('our-craft-page');
+    };
+  }, []);
+
   const values = [
     {
       label: 'Creative Spark',
