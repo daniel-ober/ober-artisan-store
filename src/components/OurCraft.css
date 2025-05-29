@@ -25,18 +25,18 @@ body {
 
 /* Scroll snapping */
 .ourcraft-section {
-    scroll-snap-align: start;
-    min-height: 100vh;
-    height: 100vh;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    /* justify-content: flex-start; */
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    box-sizing: border-box;
-  }
+  scroll-snap-align: start;
+  min-height: 100vh;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: flex-start; */
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+}
 
 .ourcraft-section-inner {
   padding: 48px 32px;
@@ -74,6 +74,23 @@ body {
   max-width: 850px;
   margin: 0 auto;
   /* text-align: justify; */
+}
+
+.artisan-intro-inner {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 64px; /* Keep spacing clean */
+  }
+
+.philosophy-inner {
+  text-align: center;
+  align-items: center;
+  padding-top: 32px; /* instead of 48px */
+  padding-bottom: 32px;
+  max-width: 850px;
+  margin: 0 auto;
 }
 
 /* Headings */
@@ -129,17 +146,17 @@ body {
 
 /* Scroll cue */
 .scroll-indicator {
-    pointer-events: auto;
-    font-size: 1.15rem;
-    color: #ccc;
-    opacity: 0.98;
-    text-align: center;
-    animation: bounceDown 2s infinite;
-    cursor: pointer;
-    margin-bottom: 16px;
-    background: none;
-    border: none;
-  }
+  pointer-events: auto;
+  font-size: 1.15rem;
+  color: #ccc;
+  opacity: 0.98;
+  text-align: center;
+  animation: bounceDown 2s infinite;
+  cursor: pointer;
+  margin-bottom: 16px;
+  background: none;
+  border: none;
+}
 
 .section-content {
   display: flex;
@@ -148,12 +165,15 @@ body {
 }
 
 .artisan-final-section {
-    background: black;
+    scroll-snap-align: start;
+    min-height: 100vh;
+    height: 100vh;
+    display: flex;
+    align-items: center; /* fixes vertical shift */
+    justify-content: center;
+    padding: 0;
+    margin: 0;
     position: relative;
-    padding-top: 60px;
-    padding-bottom: 100px;
-    overflow: hidden;
-    z-index: 1;
   }
 
 @keyframes bounceDown {
@@ -388,9 +408,9 @@ body {
 .heritage-description-list,
 .feuzon-description-list,
 .soundlegend-description-list {
-  color: #eaeaea;               /* Light text color */
-  list-style-type: disc;        /* Visible bullets */
-  padding-left: 1.0rem;         /* Space for bullets */
+  color: #eaeaea; /* Light text color */
+  list-style-type: disc; /* Visible bullets */
+  padding-left: 1rem; /* Space for bullets */
   /* margin-top: 12px; */
   /* margin-bottom: 24px; */
   font-size: 1rem;
@@ -444,6 +464,11 @@ body {
   border: none;
 }
 
+.scroll-spacer {
+  height: 40px;
+  flex-shrink: 0;
+}
+
 .mobile-scroll-indicator {
   display: none;
 }
@@ -472,375 +497,517 @@ body {
   order: 2; /* Image comes second (right) on desktop */
 }
 
+.philosophy-grid.section-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 48px 16px;
+  min-height: 100%;
+  position: relative;
+}
+
+/* Add this new class */
+.philosophy-inner::after {
+  content: '';
+  display: block;
+  height: 40px; /* Gives space for the scroll indicator */
+}
+
+.founder-text {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+.philosophy-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
 .craft-hero-section {
-    background-image: url('/public/our-craft/1.png');
-    background-attachment: fixed;
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
+  background-image: url('/public/our-craft/1.png');
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.philosophy-section {
+  background-image: url('/public/our-craft/2.png');
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.philosophy-section {
+  scroll-margin-top: 100px; /* same as your global scroll-padding-top */
+}
+
+.founder-grid.section-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 64px 16px 0;
+    height: 100%;
+
   }
-  
+
+.artisan-intro-section {
+  background-image: url('/public/our-craft/3.png');
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  scroll-margin-top: 100px;
+}
+
+.craft-hero-section {
+  background-image: url('/public/our-craft/1.png');
+  /* ... other properties */
+}
+
+.philosophy-section {
+  background-image: url('/public/our-craft/2.png');
+  /* ... other properties */
+}
+
+.artisan-intro-section {
+  background-image: url('/public/our-craft/3.png');
+  /* ... other properties */
+}
+
+.founder-wide-img {
+  width: 100%;
+  max-width: 850px;
+  height: auto;
+  margin: 24px auto;
+  display: block;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: inset 0 0 80px 15px rgba(0, 0, 0, 0.5); /* vignette effect */
+}
+
+.ourcraft-section.philosophy-section,
+.ourcraft-section.artisan-intro-section,
+.ourcraft-section.heritage-reveal-section {
+  margin-top: -1px;
+  padding-top: 1px;
+}
+
+.artisan-intro-section {
+    scroll-margin-top: 0 !important;
+  }
+
+@media (max-width: 768px) {
+  .craft-hero-section {
+    background-image: url('/public/our-craft/1m.png') !important;
+  }
   .philosophy-section {
-    background-image: url('/public/our-craft/2.png');
-    background-attachment: fixed;
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-
+    background-image: url('/public/our-craft/2m.png') !important;
   }
-  
   .artisan-intro-section {
-    background-image: url('/public/our-craft/3.png');
-    background-attachment: fixed;
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
+    background-image: url('/public/our-craft/3m.png') !important;
   }
 
-  @media (max-width: 768px) {
-    .ourcraft-section {
-      min-height: 100vh !important;
-      height: 100vh !important;
-      display: flex !important;
-      flex-direction: column !important;
-      justify-content: flex-start !important;
-      padding: 0 !important;
-      margin: 0 !important;
-      overflow: hidden;
-    }
-  
-    /* ✅ PATCH: Remove top spacing from Founder's Batch */
-    .artisan-intro-section {
-        display: flex;
-        flex-direction: column;
-        justify-content: center !important; /* Center the content vertically */
-        align-items: center;
-        height: 100vh !important;
-        padding: 0 !important;
-        margin: 0 !important;
-        overflow: hidden;
-      }
-  
-      .founder-grid.section-content {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding: 0 16px !important;
-      }
-  
-      .founder-text {
-        flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-  
-    .artisan-intro-inner {
-      margin-top: 0 !important;
-      padding-top: 0 !important;
-    }
-  
-    /* Drum Reveal Sections — force full-screen and flex layout */
-    .heritage-reveal-section,
-    .feuzon-reveal-section,
-    .soundlegend-reveal-section {
-      min-height: 100vh;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: stretch;
-      padding-bottom: 0;
-      margin-bottom: 0;
-      overflow: hidden;
-    }
-  
-    .heritage-grid,
-    .feuzon-grid,
-    .soundlegend-grid {
-      flex-direction: column !important;
-      gap: 0 !important;
-      padding: 0 12px !important;
-      min-height: 0 !important;
-      height: 100%;
-      width: 100%;
-      box-sizing: border-box;
-      justify-content: flex-start !important;
-      align-items: center !important;
-      display: flex !important;
-    }
-  
-    /* IMAGE WRAPPERS - FORCE IMAGE TOP ON MOBILE */
-    .heritage-image-wrapper,
-    .feuzon-image-wrapper,
-    .soundlegend-image-wrapper,
-    .drum-image-col {
-      order: 1 !important;
-      width: 100% !important;
-      display: flex !important;
-      justify-content: center !important;
-      align-items: flex-end !important;
-      max-height: 36vh !important;
-      overflow: hidden !important;
-      margin-bottom: 0 !important;
-    }
-  
-    /* LOGOS */
-    .heritage-logo,
-    .feuzon-logo,
-    .soundlegend-logo {
-      order: 2 !important;
-      max-width: 50vw !important;
-      width: 100% !important;
-      margin-bottom: 20px !important;
-      margin-top: 24px !important;
-      display: block !important;
-      height: auto !important;
-      align-self: center !important;
-    }
-  
-    /* TEXT COLUMNS */
-    .heritage-text,
-    .feuzon-text,
-    .soundlegend-text,
-    .drum-text-col,
-    .feuzon-text-col {
-      order: 3 !important;
-      flex: 1 1 auto !important;
-      display: flex !important;
-      flex-direction: column !important;
-      align-items: center !important;
-      text-align: center !important;
-      width: 100% !important;
-      justify-content: flex-start !important;
-      padding-bottom: 18px !important;
-      overflow-y: auto !important;
-      max-height: 58vh !important;
-    }
-  
-    .heritage-drum-img,
-    .feuzon-drum-img,
-    .soundlegend-drum-img {
-      width: auto !important;
-      height: auto !important;
-      max-width: 98vw !important;
-      max-height: 32vh !important;
-      object-fit: contain !important;
-      border-radius: 12px !important;
-      display: block !important;
-    }
-  
-    /* General Section Content for all */
-    .story-inner,
-    .philosophy-inner,
-    .artisan-intro-inner {
-      padding-left: 12px;
-      padding-right: 12px;
-      max-width: 100%;
-    }
-  
-    .story-inner h1,
-    .story-inner h2,
-    .philosophy-inner h2,
-    .artisan-intro-inner h2 {
-      font-size: 2rem;
-      margin-bottom: 16px;
-    }
-  
-    .story-inner p,
-    .philosophy-inner p,
-    .artisan-intro-paragraph {
-      font-size: 0.95rem;
-      line-height: 1.6;
-      margin-bottom: 16px;
-    }
-  
-    .scroll-indicator-wrapper {
-      position: absolute;
-      bottom: 12px;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      pointer-events: none;
-    }
-  
-    .scroll-indicator {
-      pointer-events: auto;
-      font-size: 0.95rem;
-      padding: 8px 16px;
-      background: rgba(255, 255, 255, 0.904);
-      color: #000000;
-      border-radius: 20px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(4px);
-    }
-  
-    .craft-values {
-      max-width: 98vw;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 3px 0;
-    }
-  
-    .value-item {
-      font-size: 0.85rem;
-      padding: 6px 1px;
-      min-width: 70px;
-      max-width: 100px;
-    }
-  
-    .value-item svg {
-      width: 19px !important;
-      height: 19px !important;
-    }
-  
-    .value-description {
-      font-size: 0.95rem;
-      margin-top: 20px;
-      padding: 0 12px;
-    }
-  
-    .tooltip {
-      bottom: 150%;
-      left: 50%;
-      transform: translateX(-50%) translateY(0);
-      width: 240px;
-      max-width: 80vw;
-      font-size: 0.85rem;
-      padding: 12px 14px;
-      line-height: 1.5;
-      text-align: left;
-      backdrop-filter: blur(6px);
-      border-radius: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
-      z-index: 9999;
-    }
-  
-    .tooltip::after {
-      content: '';
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      margin-left: -6px;
-      border-width: 6px;
-      border-style: solid;
-      border-color: #111 transparent transparent transparent;
-    }
-  
-    .hero-grid,
-    .philosophy-grid,
-    .founder-grid {
-      flex-direction: column;
-      gap: 0;
-      padding: 0 12px;
-      min-height: unset;
-    }
-  
-    .hero-text,
-    .philosophy-text,
-    .founder-text {
-      text-align: center;
-      width: 100%;
-    }
-  
-    .heritage-description,
-    .feuzon-description,
-    .soundlegend-description {
-      font-size: 0.95rem;
-      line-height: 1.5;
-      margin-bottom: 12px;
-    }
-  
-    .heritage-button,
-    .feuzon-button,
-    .soundlegend-button {
-      font-size: 0.9rem;
-      padding: 10px 20px;
-    }
-  
-    .mobile-scroll-indicator-wrapper {
-      position: fixed;
-      bottom: 16px;
-      left: 0;
-      right: 0;
-      display: flex;
-      justify-content: center;
-      z-index: 999;
-      pointer-events: none;
-    }
-  
-    .mobile-scroll-indicator-wrapper .scroll-indicator {
-      pointer-events: auto;
-      font-size: 1rem;
-      color: #ccc;
-      opacity: 0.9;
-      background: rgba(0, 0, 0, 0.6);
-      padding: 8px 16px;
-      border-radius: 20px;
-      animation: bounceDown 2s infinite;
-      backdrop-filter: blur(4px);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-    }
-  
-    .desktop-scroll-indicator {
-      display: none !important;
-    }
-  
-    .mobile-scroll-indicator {
-      display: block !important;
-      margin-top: 12px;
-    }
-  
-    .craft-values .value-item .tooltip {
-      left: 50%;
-      transform: translateX(-50%) translateY(0);
-    }
-  
-    .craft-values .value-item:first-child .tooltip {
-      left: 0;
-      transform: translateX(0) translateY(0);
-    }
-  
-    .craft-values .value-item:nth-child(2) .tooltip {
-      left: 10px;
-      transform: translateX(0) translateY(0);
-    }
-  
-    .craft-values .value-item:last-child .tooltip {
-      left: auto;
-      right: 0;
-      transform: translateX(0) translateY(0);
-    }
-  
-    .craft-values .value-item:nth-last-child(2) .tooltip {
-      left: auto;
-      right: 10px;
-      transform: translateX(0) translateY(0);
-    }
-  
-    .craft-values .value-item:nth-child(3n + 1) .tooltip {
-      left: 0;
-      transform: translateX(0) translateY(0);
-    }
-  
-    .craft-values .value-item:nth-child(3n) .tooltip {
-      left: auto;
-      right: 0;
-      transform: translateX(0) translateY(0);
-    }
-  
-    .craft-values .value-item:nth-child(3n + 2) .tooltip {
-      left: 50%;
-      transform: translateX(-50%) translateY(0);
-    }
-  
-    .heritage-quote,
-    .feuzon-quote,
-    .soundlegend-quote {
-      font-style: italic;
-      font-size: 1rem;
-      color: #bbb;
-      margin-bottom: 16px;
-    }
+  /* ✅ FIX: Ensure background does not stick/bleed on mobile */
+  .craft-hero-section,
+  .philosophy-section,
+  .artisan-intro-section {
+    background-attachment: fixed !important;
+    background-size: cover !important;
+    background-position: center top !important;
+    background-repeat: no-repeat !important;
+    width: 100% !important;
   }
+
+  .ourcraft-section {
+    min-height: 100vh !important;
+    height: 100vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden;
+  }
+
+  .artisan-intro-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start !important;
+    align-items: center;
+    height: 100vh !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden;
+  }
+
+  .artisan-intro-section::before {
+    background: rgba(0, 0, 0, 0.88);
+  }
+
+  .founder-grid.section-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start !important; /* ✅ top-align the content */
+    padding: 64px 16px 0 16px !important; /* Adds vertical space at the top */
+  }
+
+  .founder-text {
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+
+.artisan-intro-inner {
+  margin-top: 0 !important;
+  padding-top: 64px !important; /* Restores spacing like Philosophy */
+}
+
+  .philosophy-section {
+    scroll-margin-top: 120px; /* adjust as needed for sticky nav */
+  }
+
+  .heritage-reveal-section,
+  .feuzon-reveal-section,
+  .soundlegend-reveal-section {
+    min-height: 100vh;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    overflow: hidden;
+  }
+
+  .heritage-grid,
+  .feuzon-grid,
+  .soundlegend-grid {
+    flex-direction: column !important;
+    gap: 0 !important;
+    padding: 0 12px !important;
+    min-height: 0 !important;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    display: flex !important;
+  }
+
+  .heritage-image-wrapper,
+  .feuzon-image-wrapper,
+  .soundlegend-image-wrapper,
+  .drum-image-col {
+    order: 1 !important;
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: flex-end !important;
+    max-height: 36vh !important;
+    overflow: hidden !important;
+    margin-bottom: 0 !important;
+  }
+
+  .heritage-logo,
+  .feuzon-logo,
+  .soundlegend-logo {
+    order: 2 !important;
+    max-width: 50vw !important;
+    width: 100% !important;
+    margin-bottom: 20px !important;
+    margin-top: 24px !important;
+    display: block !important;
+    height: auto !important;
+    align-self: center !important;
+  }
+
+  .heritage-text,
+  .feuzon-text,
+  .soundlegend-text,
+  .drum-text-col,
+  .feuzon-text-col {
+    order: 3 !important;
+    flex: 1 1 auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    width: 100% !important;
+    justify-content: flex-start !important;
+    padding-bottom: 18px !important;
+    overflow-y: auto !important;
+    max-height: 58vh !important;
+  }
+
+  .heritage-drum-img,
+  .feuzon-drum-img,
+  .soundlegend-drum-img {
+    width: auto !important;
+    height: auto !important;
+    max-width: 98vw !important;
+    max-height: 32vh !important;
+    object-fit: contain !important;
+    border-radius: 12px !important;
+    display: block !important;
+  }
+
+  .story-inner,
+  .philosophy-inner,
+  .artisan-intro-inner {
+    padding-left: 12px;
+    padding-right: 12px;
+    max-width: 100%;
+  }
+
+  .story-inner h1,
+  .story-inner h2,
+  .philosophy-inner h2,
+  .artisan-intro-inner h2 {
+    font-size: 2rem;
+    margin-bottom: 16px;
+  }
+
+  .story-inner p,
+  .philosophy-inner p,
+  .artisan-intro-paragraph {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  .philosophy-inner {
+    padding-top: 64px !important; /* or adjust slightly (e.g. 72px) as needed */
+  }
+
+  .scroll-indicator-wrapper {
+    position: absolute;
+    bottom: 12px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+  }
+
+  .scroll-indicator {
+    pointer-events: auto;
+    font-size: 0.95rem;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.904);
+    color: #000000;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+  }
+
+  .craft-values {
+    max-width: 98vw;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px 0;
+  }
+
+  .value-item {
+    font-size: 0.85rem;
+    padding: 6px 1px;
+    min-width: 70px;
+    max-width: 100px;
+  }
+
+  .value-item svg {
+    width: 19px !important;
+    height: 19px !important;
+  }
+
+  .value-description {
+    font-size: 0.95rem;
+    margin-top: 20px;
+    padding: 0 12px;
+  }
+
+  .tooltip {
+    bottom: 150%;
+    left: 50%;
+    transform: translateX(-50%) translateY(0);
+    width: 240px;
+    max-width: 80vw;
+    font-size: 0.85rem;
+    padding: 12px 14px;
+    line-height: 1.5;
+    text-align: left;
+    backdrop-filter: blur(6px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    z-index: 9999;
+  }
+
+  .tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -6px;
+    border-width: 6px;
+    border-style: solid;
+    border-color: #111 transparent transparent transparent;
+  }
+
+  .hero-grid,
+  .philosophy-grid,
+  .founder-grid {
+    flex-direction: column;
+    gap: 0;
+    padding: 0 12px;
+    min-height: unset;
+  }
+
+  .philosophy-grid.section-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* centers vertically */
+    padding: 0 16px !important;
+  }
+
+  .hero-text,
+  .philosophy-text,
+  .founder-text {
+    text-align: center;
+    width: 100%;
+  }
+
+  .heritage-description,
+  .feuzon-description,
+  .soundlegend-description {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+
+  .heritage-button,
+  .feuzon-button,
+  .soundlegend-button {
+    font-size: 0.9rem;
+    padding: 10px 20px;
+  }
+
+  .mobile-scroll-indicator-wrapper {
+    position: fixed;
+    bottom: 16px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    z-index: 999;
+    pointer-events: none;
+  }
+
+  .mobile-scroll-indicator-wrapper .scroll-indicator {
+    pointer-events: auto;
+    font-size: 1rem;
+    color: #ccc;
+    opacity: 0.9;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 8px 16px;
+    border-radius: 20px;
+    animation: bounceDown 2s infinite;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  }
+
+  .desktop-scroll-indicator {
+    display: none !important;
+  }
+
+  .mobile-scroll-indicator {
+    display: block !important;
+    margin-top: 12px;
+  }
+
+  .craft-values .value-item .tooltip {
+    left: 50%;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .craft-values .value-item:first-child .tooltip {
+    left: 0;
+    transform: translateX(0) translateY(0);
+  }
+
+  .craft-values .value-item:nth-child(2) .tooltip {
+    left: 10px;
+    transform: translateX(0) translateY(0);
+  }
+
+  .craft-values .value-item:last-child .tooltip {
+    left: auto;
+    right: 0;
+    transform: translateX(0) translateY(0);
+  }
+
+  .craft-values .value-item:nth-last-child(2) .tooltip {
+    left: auto;
+    right: 10px;
+    transform: translateX(0) translateY(0);
+  }
+
+  .craft-values .value-item:nth-child(3n + 1) .tooltip {
+    left: 0;
+    transform: translateX(0) translateY(0);
+  }
+
+  .craft-values .value-item:nth-child(3n) .tooltip {
+    left: auto;
+    right: 0;
+    transform: translateX(0) translateY(0);
+  }
+
+  .craft-values .value-item:nth-child(3n + 2) .tooltip {
+    left: 50%;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .heritage-quote,
+  .feuzon-quote,
+  .soundlegend-quote {
+    font-style: italic;
+    font-size: 1rem;
+    color: #bbb;
+    margin-bottom: 16px;
+  }
+
+  .ourcraft-section,
+  .craft-hero-section,
+  .philosophy-section,
+  .artisan-intro-section,
+  .heritage-reveal-section,
+  .feuzon-reveal-section,
+  .soundlegend-reveal-section {
+    min-height: 100dvh !important;
+    height: 100dvh !important;
+    scroll-snap-align: start !important;
+    scroll-snap-stop: always !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    position: relative !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+  }
+  .founder-wide-img {
+    max-width: 95vw;
+    margin: 20px auto;
+    /* box-shadow: inset 0 0 60px 10px rgba(0, 0, 0, 0.5); */
+  }
+}

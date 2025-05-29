@@ -158,48 +158,38 @@ h1 {
     padding: 20px;
     box-shadow: none;
   }
+
   .admin-cards {
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
   }
+
   .admin-card {
+    width: calc(50% - 12px); /* 2 per row */
+    min-width: unset;
+    max-width: unset;
+    box-sizing: border-box;
+  }
+
+  .admin-card.full-width-mobile {
     width: 100%;
   }
+
   .admin-card-icon {
     font-size: 2rem;
     margin-bottom: 8px;
   }
+
   .admin-card h3 {
     font-size: 1rem;
   }
+
   .component-container {
     padding: 15px;
     margin-top: 20px;
     border: none;
     box-shadow: none;
-    max-height: auto;
+    max-height: none;
   }
-}
-
-@media (min-width: 768px) and (max-width: 1024px) {
-  .admin-cards {
-    justify-content: space-around;
-  }
-  .admin-card {
-    min-width: 180px;
-    max-width: 220px;
-  }
-}
-
-.admin-dashboard h1 {
-  margin-top: 0;
-  margin-bottom: 20px;
-  font-size: 2.0rem;
-  color: #222;
-}
-
-.admin-dashboard .admin-cards {
-  margin: 0 auto;
-  padding-top: 20px;
 }

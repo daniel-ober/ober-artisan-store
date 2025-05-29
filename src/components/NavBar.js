@@ -175,13 +175,9 @@ const NavBar = () => {
               >
                 <img
                   src={
-                    isDarkMode
-                      ? isMenuOpen
-                        ? '/menu/close-button-dark-mode.png'
-                        : '/menu/menu-button-dark-mode.png'
-                      : isMenuOpen
-                        ? '/menu/close-button-light-mode.png'
-                        : '/menu/menu-button-light-mode.png'
+                    isMenuOpen
+                      ? '/menu/close-button-dark-mode.png'
+                      : '/menu/menu-button-dark-mode.png'
                   }
                   alt="Menu Toggle"
                   className={`menu-arrow-icon ${isMenuOpen ? 'open' : ''}`}
@@ -384,7 +380,7 @@ const NavBar = () => {
         )}
 
         {!showStickyHeader && (isMenuOpen || !isMobileView) && (
-  <div className="navbar-links-wrapper">
+          <div className="navbar-links-wrapper">
             <div
               className={`navbar-links ${isMobileView && isMenuOpen ? 'open' : ''}`}
               ref={menuRef}
