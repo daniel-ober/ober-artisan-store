@@ -213,7 +213,7 @@ const AdminOverview = () => {
       (snapshot) => {
         const submissions = snapshot.docs.map((doc) => {
           const data = doc.data();
-          const overviewStatus = data.overviewStatus || 'new';
+          const rawStatus = (data.status || '').toLowerCase().trim(); // ✅ ADD THIS LINE
           const derivedStatus =
             data.overviewStatus ||
             (rawStatus.includes('prospecting')
@@ -221,14 +221,11 @@ const AdminOverview = () => {
               : rawStatus.includes('closed')
                 ? 'completed'
                 : 'new');
-          console.log(
-            `🔥 SUBMISSION ${doc.id.slice(-6)} | status: "${data.status}" | derived: "${derivedStatus}"`
-          );
+        
           return {
             id: doc.id,
             type: 'submission',
-            customerName:
-              `${data.firstName || ''} ${data.lastName || ''}`.trim(),
+            customerName: `${data.firstName || ''} ${data.lastName || ''}`.trim(),
             overviewStatus: derivedStatus,
             ...data,
           };
