@@ -33,15 +33,21 @@ const ManageSoundlegendRequests = () => {
         const submissionsRef = collection(db, 'soundlegend_submissions');
         const querySnapshot = await getDocs(submissionsRef);
 
-        const submissionsList = querySnapshot.docs.map((doc) => {
-          const rawStatus = doc.data().status || 'New';
-          return {
-            id: doc.id,
-            status: rawStatus,
-            overviewStatus: getOverviewStatus(rawStatus),
-            ...doc.data(),
-          };
-        });
+        const submissionsList = querySnapshot.docs
+          .map((doc) => {
+            const rawStatus = doc.data().status || 'New';
+            return {
+              id: doc.id,
+              status: rawStatus,
+              overviewStatus: getOverviewStatus(rawStatus),
+              ...doc.data(),
+            };
+          })
+          .sort((a, b) => {
+            const aTime = a.submittedAt?.seconds || 0;
+            const bTime = b.submittedAt?.seconds || 0;
+            return bTime - aTime; // 🔽 Newest first
+          });
 
         setSubmissions(submissionsList);
       } catch (error) {
@@ -81,19 +87,18 @@ const ManageSoundlegendRequests = () => {
   };
 
   const handleStatusSave = async () => {
-    const overviewStatus =
-      newStatus.toLowerCase().startsWith('closed')
-        ? 'completed'
-        : newStatus.toLowerCase() === 'prospecting'
+    const overviewStatus = newStatus.toLowerCase().startsWith('closed')
+      ? 'completed'
+      : newStatus.toLowerCase() === 'prospecting'
         ? 'inProgress'
         : 'new';
-  
+
     const submissionRef = doc(db, 'soundlegend_submissions', submission.id);
     await updateDoc(submissionRef, {
       status: newStatus,
       overviewStatus,
     });
-  
+
     // 🔥 Ensure parent gets the updated data
     if (onUpdateSubmission) {
       onUpdateSubmission({
@@ -102,7 +107,7 @@ const ManageSoundlegendRequests = () => {
         overviewStatus,
       });
     }
-  
+
     onClose();
   };
 
@@ -161,13 +166,17 @@ const ManageSoundlegendRequests = () => {
                 onClick={() => handleRowClick(submission)}
               >
                 <td>
-                  <span className={`status-badge ${getBadgeClass(submission.status)}`}>
+                  <span
+                    className={`status-badge ${getBadgeClass(submission.status)}`}
+                  >
                     {submission.status}
                   </span>
                 </td>
                 <td>
                   {submission.submittedAt?.seconds
-                    ? new Date(submission.submittedAt.seconds * 1000).toLocaleString()
+                    ? new Date(
+                        submission.submittedAt.seconds * 1000
+                      ).toLocaleString()
                     : 'N/A'}
                 </td>
                 <td>
@@ -200,7 +209,9 @@ const ManageSoundlegendRequests = () => {
           onUpdateSubmission={(updatedSubmission) => {
             setSubmissions((prev) =>
               prev.map((s) =>
-                s.id === updatedSubmission.id ? { ...s, ...updatedSubmission } : s
+                s.id === updatedSubmission.id
+                  ? { ...s, ...updatedSubmission }
+                  : s
               )
             );
           }}
