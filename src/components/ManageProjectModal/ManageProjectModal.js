@@ -9,6 +9,7 @@ import FileUploader from "./FileUploader";
 import Step1WoodPreparation from "./Step1WoodPreparation";
 import { db } from "../../firebaseConfig";
 import "./ManageProjectModal.css";
+import { formatDate } from './utils';
 
 const ManageProjectModal = ({ isOpen, onClose, projectData }) => {
   const [editableData, setEditableData] = useState({});
