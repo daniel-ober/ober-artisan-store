@@ -1,47 +1,58 @@
 .manage-projects {
-    padding: 20px;
-  }
-  
-  .filters {
-    margin-bottom: 20px;
-  }
-  
-  .filters label {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 1rem;
-  }
-  
-  .projects-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-    cursor: pointer;
-  }
-  
-  .projects-table th,
-  .projects-table td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: left;
-  }
-  
-  .projects-table tr:hover {
-    background-color: #f4f4f4;
-  }
-  
-  .progress-bar {
-    width: 100%;
-    background-color: #f4f4f4;
-    border-radius: 5px;
-    overflow: hidden;
-    position: relative;
-    height: 15px;
-  }
-  
-  .progress {
-    background-color: #4caf50;
-    height: 100%;
-    transition: width 0.3s;
-  }
+  padding: 24px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.filters {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 12px;
+}
+
+.filters label {
+  font-size: 1rem;
+  color: #333;
+}
+
+.projects-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.projects-table th,
+.projects-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #e0e0e0;
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+.projects-table th {
+  background-color: #f9f9f9;
+  font-weight: 600;
+}
+
+.projects-table tr:hover {
+  background-color: #f5f7fa;
+  cursor: pointer;
+}
+
+.progress-bar {
+  width: 100%;
+  background-color: #eaeaea;
+  border-radius: 6px;
+  height: 14px;
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  background-color: #00b894;
+  transition: width 0.4s ease;
+}
