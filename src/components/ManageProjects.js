@@ -30,11 +30,17 @@ const ManageProjects = () => {
       try {
         const projectsCollection = collection(db, "projects");
         const projectsSnapshot = await getDocs(projectsCollection);
-        const projectsList = projectsSnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-
+        const projectsList = projectsSnapshot.docs
+          .map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }))
+          .sort((a, b) => {
+            const dateA = a.startDate?.seconds || 0;
+            const dateB = b.startDate?.seconds || 0;
+            return dateB - dateA; // 🔽 Sort newest to oldest
+          });
+    
         setProjects(projectsList);
         setFilteredProjects(projectsList);
       } catch (error) {

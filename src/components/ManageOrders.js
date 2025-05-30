@@ -50,13 +50,13 @@ const ManageOrders = () => {
     try {
       const ordersCollection = collection(db, 'orders');
       const orderSnapshot = await getDocs(ordersCollection);
-      const ordersList = orderSnapshot.docs.map((doc) => {
+      const ordersList = orderSnapshot.docs
+      .map((doc) => {
         const data = doc.data();
         return {
           id: doc.id,
           overviewStatus: data.overviewStatus || 'new',
-          orderDate:
-            data.createdAt?.toDate().toLocaleString() || 'No date available',
+          orderDate: data.createdAt?.toDate().toLocaleString() || 'No date available',
           customerName: data.customerName || 'No name available',
           total:
             typeof data.totalAmount === 'number'
@@ -65,6 +65,11 @@ const ManageOrders = () => {
           status: determineOrderStatus(data.items || []),
           ...data,
         };
+      })
+      .sort((a, b) => {
+        const aTime = a.createdAt?.seconds || 0;
+        const bTime = b.createdAt?.seconds || 0;
+        return bTime - aTime; // 🔽 Newest first
       });
       setOrders(ordersList);
       applyFilters(ordersList);

@@ -15,19 +15,21 @@ const ManageInquiries = () => {
     try {
       const inquiriesCollection = collection(db, 'inquiries');
       const inquirySnapshot = await getDocs(inquiriesCollection);
-      const inquiriesList = inquirySnapshot.docs.map((docSnapshot) => {
+      const inquiriesList = inquirySnapshot.docs
+      .map((docSnapshot) => {
         const data = docSnapshot.data();
         const statusRaw = (data.status || '').toLowerCase();
         let overviewStatus = 'new';
         if (statusRaw.includes('progress')) overviewStatus = 'inProgress';
         else if (statusRaw.includes('closed')) overviewStatus = 'completed';
-
+    
         return {
           id: docSnapshot.id,
           overviewStatus,
           createdAt: data.createdAt
             ? new Date(data.createdAt.seconds * 1000).toLocaleString()
             : 'No date',
+          createdTimestamp: data.createdAt?.seconds || 0, // ✅ raw timestamp for sorting
           status: data.status || 'New',
           notes: data.internalNotes || [],
           systemHistory: data.systemHistory || [],
@@ -37,7 +39,8 @@ const ManageInquiries = () => {
           email: data.email || 'N/A',
           message: data.message || '',
         };
-      });
+      })
+      .sort((a, b) => b.createdTimestamp - a.createdTimestamp);
 
       setInquiries(inquiriesList);
       filterInquiries(inquiriesList, hideClosedItems);
