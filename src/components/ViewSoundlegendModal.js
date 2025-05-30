@@ -80,7 +80,7 @@ const ViewSoundlegendModal = ({ submission, onClose, onStatusUpdate, onUpdateSub
       );
       const timestamp = new Date().toISOString();
       const historyEntry = { type: 'status', value: newStatus, timestamp };
-
+  
       // Normalize status into overviewStatus
       let overviewStatus = 'new';
       const lower = newStatus.toLowerCase();
@@ -89,15 +89,25 @@ const ViewSoundlegendModal = ({ submission, onClose, onStatusUpdate, onUpdateSub
       } else if (lower.startsWith('closed')) {
         overviewStatus = 'completed';
       }
-
+  
       await updateDoc(submissionRef, {
         status: newStatus,
         overviewStatus,
         history: arrayUnion(historyEntry),
       });
-
+  
       setHistory((prev) => [...prev, historyEntry]);
-
+  
+      // 🔥 THIS is what updates the status on the main table:
+      if (onUpdateSubmission) {
+        onUpdateSubmission({
+          ...fullSubmission,
+          status: newStatus,
+          overviewStatus,
+          history: [...history, historyEntry],
+        });
+      }
+  
       if (onStatusUpdate) {
         onStatusUpdate(fullSubmission.id, newStatus);
       }

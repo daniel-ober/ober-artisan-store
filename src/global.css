@@ -8,9 +8,6 @@ body {
   scroll-behavior: smooth;
   overflow-y: auto;
 }
-body.our-craft-page .grecaptcha-badge {
-  visibility: hidden;
-}
 
 body {
   font-family:

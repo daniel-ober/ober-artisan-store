@@ -146,6 +146,7 @@ const ViewInquiryModal = ({
   return (
     <div className="modal-overlay">
       <div className="modal-content">
+      <button onClick={onClose} className="modal-close">✕</button>
         <h3 className="modal-title">Inquiry Details</h3>
 
         <div className="compact-inquiry-details">

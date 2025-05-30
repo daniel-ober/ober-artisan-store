@@ -19,6 +19,7 @@ const CLIENT_URL = defineSecret('CLIENT_URL');
 const PRINTIFY_API_KEY = defineSecret('PRINTIFY_API_KEY');
 const PRINTIFY_SHOP_ID = defineSecret('PRINTIFY_SHOP_ID');
 const PRINTIFY_WEBHOOK_SECRET = defineSecret('PRINTIFY_WEBHOOK_SECRET');
+const RECAPTCHA_SECRET_KEY = defineSecret('RECAPTCHA_SECRET_KEY');
 
 admin.initializeApp();
 const db = admin.firestore();
@@ -134,6 +135,53 @@ app.post('/createCheckoutSession', async (req, res) => {
   } catch (err) {
     console.error('❌ Error creating checkout session:', err.message);
     res.status(500).json({ error: err.message });
+  }
+});
+
+app.post('/createCheckoutSession', async (req, res) => {
+  // your Stripe checkout logic
+});
+
+// ✅ Add reCAPTCHA verification endpoint HERE
+app.post('/verifyRecaptcha', async (req, res) => {
+  const token = req.body.token;
+  const email = req.body.email || 'unknown';
+
+  if (!token) {
+    return res.status(400).json({ success: false, message: 'Missing token' });
+  }
+
+  try {
+    const response = await axios.post(
+      'https://www.google.com/recaptcha/api/siteverify',
+      null,
+      {
+        params: {
+          secret: RECAPTCHA_SECRET_KEY.value(),
+          response: token,
+        },
+      }
+    );
+
+    const { success, score } = response.data;
+
+    if (!success || score < 0.5) {
+      // 🚨 Log risky attempt to Firestore
+      await admin.firestore().collection('risk_notifications').add({
+        type: 'login',
+        source: 'admin-signin',
+        email,
+        score,
+        timestamp: admin.firestore.FieldValue.serverTimestamp(),
+      });
+
+      return res.status(403).json({ success: false, score });
+    }
+
+    return res.status(200).json({ success: true, score });
+  } catch (err) {
+    console.error('❌ reCAPTCHA verification failed:', err.message);
+    return res.status(500).json({ success: false, message: 'Server error' });
   }
 });
 
@@ -680,7 +728,12 @@ exports.autoReplySoundlegend = onDocumentCreated(
 exports.api = onRequest(
   {
     region: 'us-central1',
-    secrets: [STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, CLIENT_URL],
+    secrets: [
+      STRIPE_SECRET_KEY,
+      STRIPE_WEBHOOK_SECRET,
+      CLIENT_URL,
+      RECAPTCHA_SECRET_KEY,
+    ],
   },
   app
 );
