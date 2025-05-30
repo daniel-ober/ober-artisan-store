@@ -1,47 +1,43 @@
 import React, { useState, useEffect } from 'react';
 import './AdminCard.css';
-import AdminModal from './AdminModal'; // AdminModal component
-import { useAuth } from '../context/AuthContext'; // Access auth context
+import AdminModal from './AdminModal';
+import { useAuth } from '../context/AuthContext';
 import { db } from '../firebaseConfig';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 
-const AdminCard = ({ title, icon, isSelected, primaryCount, secondaryCount }) => { 
+const AdminCard = ({ title, icon, isSelected }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState('');
-  const { isAdmin } = useAuth(); // Check if the user is an admin
-  const [totalCount, setTotalCount] = useState(0);
+  const { isAdmin } = useAuth();
+  const [highSeverityCount, setHighSeverityCount] = useState(0);
+  const [mediumSeverityCount, setMediumSeverityCount] = useState(0);
 
-  // Fetch combined count for support inquiries, orders, and soundlegend submissions
   useEffect(() => {
-    const fetchCombinedCount = async () => {
+    const fetchRiskCounts = async () => {
       try {
-        // Fetch new orders, inquiries, and soundlegend submissions
-        const [orders, inquiries, submissions] = await Promise.all([
-          getDocs(query(collection(db, 'orders'), where('status', '==', 'new'))),
-          getDocs(query(collection(db, 'inquiries'), where('status', '==', 'new'))),
-          getDocs(query(collection(db, 'soundlegend_submissions'), where('status', '==', 'new')))
-        ]);
+        const q = query(collection(db, 'risk_notifications'));
+        const snapshot = await getDocs(q);
 
-        const newOrders = orders.size;
-        const newInquiries = inquiries.size;
-        const newSubmissions = submissions.size;
+        let high = 0;
+        let medium = 0;
 
-        // Log the fetched data for debugging
-        // console.log('Fetched Data:', { newOrders, newInquiries, newSubmissions });
+        snapshot.forEach((doc) => {
+          const score = doc.data().score || 0;
+          if (score >= 0.85) high++;
+          else if (score >= 0.5) medium++;
+        });
 
-        // Calculate the total count of new items across all categories
-        setTotalCount(newOrders + newInquiries + newSubmissions);
-
-        // Log the final total count
-        // console.log('Total Count:', newOrders + newInquiries + newSubmissions);
-
+        setHighSeverityCount(high);
+        setMediumSeverityCount(medium);
       } catch (error) {
-        console.error("Error fetching data for admin overview:", error);
+        console.error('Error fetching risk notification counts:', error);
       }
     };
 
-    fetchCombinedCount();
-  }, []);
+    if (title === 'Risk Alerts') {
+      fetchRiskCounts();
+    }
+  }, [title]);
 
   const handleAddClick = (type) => {
     setModalType(type);
@@ -50,7 +46,7 @@ const AdminCard = ({ title, icon, isSelected, primaryCount, secondaryCount }) =>
 
   const closeModal = () => {
     setIsModalOpen(false);
-    setModalType(''); // Reset modal type
+    setModalType('');
   };
 
   return (
@@ -63,14 +59,17 @@ const AdminCard = ({ title, icon, isSelected, primaryCount, secondaryCount }) =>
       <div className="admin-card-icon">
         {icon}
         <div className="badge-wrapper">
-          {totalCount > 0 && (
-            <span className="notification-badge">{totalCount}</span> 
+          {highSeverityCount > 0 && (
+            <span className="notification-badge">{highSeverityCount}</span>
+          )}
+          {mediumSeverityCount > 0 && (
+            <span className="notification-badge-secondary">{mediumSeverityCount}</span>
           )}
         </div>
       </div>
       <h2 className="admin-card-title">{title}</h2>
 
-      {isAdmin && ( // Render buttons only for admin users
+      {isAdmin && (
         <div className="admin-card-buttons">
           <button onClick={() => handleAddClick('user')}>Add User</button>
           <button onClick={() => handleAddClick('product')}>Add Product</button>

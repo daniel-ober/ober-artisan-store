@@ -1,44 +1,67 @@
-import React, { useEffect, useState } from "react";
-import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
-import { db } from "../firebaseConfig";
-import ViewOrderModal from "./ViewOrderModal";
-import "./ManageOrders.css";
+import React, { useEffect, useState } from 'react';
+import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
+import { db } from '../firebaseConfig';
+import ViewOrderModal from './ViewOrderModal';
+import './ManageOrders.css';
 
 const ManageOrders = () => {
   const [orders, setOrders] = useState([]);
   const [filteredOrders, setFilteredOrders] = useState([]);
-  const [searchId, setSearchId] = useState("");
+  const [searchId, setSearchId] = useState('');
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [hideFulfilled, setHideFulfilled] = useState(true);
 
   const determineOrderStatus = (items) => {
-    if (!items || items.length === 0) return "No Items";
-    const statuses = items.map((item) => item.status || "Preparing");
-    if (statuses.every((status) => status === "Shipped")) return "Order Completed";
-    if (statuses.every((status) => status === "Canceled")) return "Canceled";
-    if (statuses.some((status) => status === "Back Ordered")) return "Partially Fulfilled / Back Ordered";
-    if (statuses.some((status) => status === "Ready for Shipment")) return "Ready for Shipment";
-    if (statuses.some((status) => status === "Packaged")) return "Order Started";
-    return "Order Started";
+    if (!items || items.length === 0) return 'No Items';
+    const statuses = items.map((item) => item.status || 'Preparing');
+    if (statuses.every((status) => ['Shipped', 'Delivered'].includes(status)))
+      return 'Fulfilled';
+    if (statuses.every((status) => status === 'Canceled')) return 'Canceled';
+    if (statuses.some((status) => status === 'Back Ordered'))
+      return 'Partially Fulfilled / Back Ordered';
+    if (statuses.some((status) => status === 'Ready for Shipment'))
+      return 'Ready for Shipment';
+    if (statuses.some((status) => status === 'Packaged'))
+      return 'Order Started';
+    return 'Order Started';
   };
 
   useEffect(() => {
     fetchOrders();
   }, [hideFulfilled]);
 
+  const getOrderBadgeClass = (status) => {
+    const lower = status.toLowerCase();
+
+    if (lower === 'fulfilled') return 'badge-green';
+    if (
+      lower.includes('partial') ||
+      lower.includes('started') ||
+      lower.includes('shipment')
+    )
+      return 'badge-yellow';
+    if (lower.includes('canceled')) return 'badge-red';
+
+    return 'badge-yellow';
+  };
+
   const fetchOrders = async () => {
     try {
-      const ordersCollection = collection(db, "orders");
+      const ordersCollection = collection(db, 'orders');
       const orderSnapshot = await getDocs(ordersCollection);
       const ordersList = orderSnapshot.docs.map((doc) => {
         const data = doc.data();
         return {
           id: doc.id,
           overviewStatus: data.overviewStatus || 'new',
-          orderDate: data.createdAt?.toDate().toLocaleString() || "No date available",
-          customerName: data.customerName || "No name available",
-          total: typeof data.totalAmount === "number" ? data.totalAmount.toFixed(2) : "N/A",
+          orderDate:
+            data.createdAt?.toDate().toLocaleString() || 'No date available',
+          customerName: data.customerName || 'No name available',
+          total:
+            typeof data.totalAmount === 'number'
+              ? data.totalAmount.toFixed(2)
+              : 'N/A',
           status: determineOrderStatus(data.items || []),
           ...data,
         };
@@ -46,13 +69,16 @@ const ManageOrders = () => {
       setOrders(ordersList);
       applyFilters(ordersList);
     } catch (error) {
-      console.error("Error fetching orders:", error);
+      console.error('Error fetching orders:', error);
     }
   };
 
   const applyFilters = (ordersList) => {
     const filtered = ordersList.filter((order) => {
-      if (hideFulfilled && order.overviewStatus === 'completed') return false;
+      if (hideFulfilled) {
+        const status = (order.status || '').toLowerCase();
+        if (status === 'fulfilled' || status === 'canceled') return false;
+      }
       return true;
     });
     setFilteredOrders(filtered);
@@ -63,7 +89,7 @@ const ManageOrders = () => {
     setSearchId(searchQuery);
 
     const filtered = orders.filter((order) => {
-      const orderIdRaw = order.id.replace(/-/g, "").toLowerCase();
+      const orderIdRaw = order.id.replace(/-/g, '').toLowerCase();
       return orderIdRaw.includes(searchQuery);
     });
 
@@ -71,7 +97,7 @@ const ManageOrders = () => {
   };
 
   const handleClearSearch = () => {
-    setSearchId("");
+    setSearchId('');
     applyFilters(orders);
   };
 
@@ -85,46 +111,53 @@ const ManageOrders = () => {
   };
 
   const handleDeleteOrder = async (orderId) => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this order?");
+    const confirmDelete = window.confirm(
+      'Are you sure you want to delete this order?'
+    );
     if (!confirmDelete) return;
 
     try {
-      await deleteDoc(doc(db, "orders", orderId));
+      await deleteDoc(doc(db, 'orders', orderId));
       // console.log(`✅ Order ${orderId} deleted successfully`);
       fetchOrders(); // Refresh the order list after deletion
     } catch (error) {
-      console.error("❌ Error deleting order:", error);
+      console.error('❌ Error deleting order:', error);
     }
   };
 
   return (
     <div className="manage-orders">
       <h2>Manage Orders</h2>
-      <div className="controls">
-        <label className="hide-fulfilled-label">
+      <div className="controls-container">
+        <div className="search-controls">
           <input
-            type="checkbox"
-            checked={hideFulfilled}
-            onChange={toggleHideFulfilled}
+            type="text"
+            placeholder="Search by Firestore ID"
+            value={searchId}
+            onChange={handleSearch}
           />
-          Hide Completed/Canceled
-        </label>
-        <input
-          type="text"
-          placeholder="Search by Firestore ID"
-          value={searchId}
-          onChange={handleSearch}
-        />
-        <button onClick={handleClearSearch}>Clear</button>
+          <button onClick={handleClearSearch}>Clear</button>
+        </div>
+
+        <div className="filter-controls">
+          <label className="hide-fulfilled-label">
+            <input
+              type="checkbox"
+              checked={hideFulfilled}
+              onChange={toggleHideFulfilled}
+            />
+            Hide Completed/Canceled
+          </label>
+        </div>
       </div>
       <table className="manage-orders-table">
         <thead>
           <tr>
+            <th>Order Status</th>
             <th>Order ID</th>
             <th>Date</th>
             <th>Customer Name</th>
             <th>Total</th>
-            <th>Order Status</th>
             <th>Actions</th> {/* New column for actions */}
           </tr>
         </thead>
@@ -136,11 +169,19 @@ const ManageOrders = () => {
           ) : (
             filteredOrders.map((order) => (
               <tr key={order.id}>
+                <td onClick={() => handleRowClick(order)}>
+                  <span
+                    className={`status-badge ${getOrderBadgeClass(order.status)}`}
+                  >
+                    {order.status}
+                  </span>
+                </td>
                 <td onClick={() => handleRowClick(order)}>{order.id}</td>
                 <td onClick={() => handleRowClick(order)}>{order.orderDate}</td>
-                <td onClick={() => handleRowClick(order)}>{order.customerName}</td>
+                <td onClick={() => handleRowClick(order)}>
+                  {order.customerName}
+                </td>
                 <td onClick={() => handleRowClick(order)}>${order.total}</td>
-                <td onClick={() => handleRowClick(order)}>{order.status}</td>
                 <td>
                   <button
                     className="delete-button"
@@ -160,6 +201,13 @@ const ManageOrders = () => {
           orderDetails={selectedOrder}
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
+          onUpdateOrder={(updatedOrder) => {
+            const updatedOrders = orders.map((o) =>
+              o.id === updatedOrder.id ? updatedOrder : o
+            );
+            setOrders(updatedOrders);
+            applyFilters(updatedOrders); // ✅ use updatedOrders, not stale state
+          }}
         />
       )}
     </div>

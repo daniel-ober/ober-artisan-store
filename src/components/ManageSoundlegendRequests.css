@@ -1,32 +1,113 @@
+/* === Container === */
 .soundlegend-container {
-    padding: 20px;
-  }
-  
-  .submissions-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
+  padding: 32px;
+  background: #fff;
+  border-radius: 8px;
+  margin-top: 20px;
+  overflow-x: auto;
+  font-family: 'Arial', sans-serif;
+}
+
+/* === Header === */
+.soundlegend-container h1 {
+  margin-bottom: 12px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+/* === Toggle Checkbox === */
+.hide-closed-filter {
+  display: inline-block;
+  margin-bottom: 16px;
+  font-size: 14px;
+  user-select: none;
+}
+
+/* === Table === */
+.submissions-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+  margin-top: 10px;
+}
+
+.submissions-table th {
+  background-color: #f8f8f8;
+  text-align: center;
+  padding: 12px 16px;
+  font-weight: 600;
+  color: #333;
+  border-bottom: 2px solid #ddd;
+  white-space: nowrap;
+}
+
+.submissions-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #eee;
+  color: #222;
+  vertical-align: middle;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.submissions-table tr.submission-row {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.submissions-table tr.submission-row:hover {
+  background-color: #fafafa;
+}
+
+/* === Select Dropdown === */
+.submissions-table select {
+  padding: 6px 10px;
+  font-size: 13px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+  color: #222;
+  cursor: pointer;
+}
+
+/* === Link Styling === */
+.submissions-table a {
+  color: #3498db;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.submissions-table a:hover {
+  text-decoration: underline;
+}
+
+/* === Responsive Adjustments === */
+@media (max-width: 768px) {
   .submissions-table th,
   .submissions-table td {
-    border: 1px solid #ddd;
+    font-size: 13px;
     padding: 10px;
-    text-align: left;
   }
-  
-  .submissions-table th {
-    background-color: #f4f4f4;
-  }
-  
-  .loading {
-    text-align: center;
-    font-size: 18px;
-  }
-  
-  select {
+
+  .submissions-table select {
+    font-size: 12px;
     padding: 5px;
-    font-size: 14px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    background: white;
   }
+
+  .soundlegend-container h1 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .submissions-table th,
+  .submissions-table td {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .submissions-table select {
+    width: 100%;
+  }
+}

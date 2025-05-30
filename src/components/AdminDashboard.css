@@ -153,6 +153,33 @@ h1 {
   color: #721c24;
 }
 
+.notification-badge-high {
+  background-color: #e74c3c; /* 🔴 RED for High severity */
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 2px 9px;
+  border-radius: 50%;
+  z-index: 10;
+  display: inline-block;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.notification-badge-medium {
+  background-color: orange; /* 🟠 ORANGE for Medium severity */
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 2px 9px;
+  border-radius: 50%;
+  z-index: 9;
+  display: inline-block;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
+  position: relative;
+  margin-left: -10px;
+}
+
 @media (max-width: 768px) {
   .admin-dashboard {
     padding: 20px;

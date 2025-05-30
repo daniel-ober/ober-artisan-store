@@ -1,0 +1,206 @@
+/* General Modal Styles */
+.risk-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3999;
+}
+
+.risk-modal-container {
+  background: white;
+  padding: 20px 30px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+/* Compact Risk Details */
+.compact-inquiry-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.detail-group {
+  flex: 1 1 45%;
+  display: flex;
+  align-items: center;
+}
+
+.detail-group strong {
+  margin-right: 10px;
+}
+
+.status-select {
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 0.9rem;
+}
+
+/* Modal Item */
+.modal-item {
+  margin-bottom: 20px;
+}
+
+.modal-item strong {
+  color: #222;
+  font-weight: bold;
+}
+
+.copyable-field {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.copy-icon {
+  font-size: 1rem;
+  cursor: pointer;
+  color: #3498db;
+  transition: color 0.2s;
+}
+
+.copy-icon:hover {
+  color: #2980b9;
+}
+
+/* Text Input Styling */
+.note-input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  resize: none;
+  font-size: 1rem;
+  font-family: 'Arial', sans-serif;
+}
+
+.add-note-btn {
+  margin-top: 10px;
+  background-color: #4caf50;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.add-note-btn:hover {
+  background-color: #45a049;
+}
+
+.add-note-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Notes Table */
+.history-log {
+  margin-top: 20px;
+}
+
+.history-log h4 {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.notes-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.notes-table th,
+.notes-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.notes-table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.notes-table td {
+  font-size: 0.9rem;
+  color: #444;
+}
+
+/* Close Button */
+.inquiry-close-btn,
+.risk-modal-button {
+  margin-top: 20px;
+  background-color: #3498db;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  text-align: center;
+  display: block;
+  width: 100%;
+}
+
+.inquiry-close-btn:hover,
+.risk-modal-button:hover {
+  background-color: #2980b9;
+}
+
+.clickable-row {
+  cursor: pointer;
+}
+
+.clickable-row:hover {
+  background-color: #f0f0f0;
+}
+
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 22px;
+  font-weight: bold;
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.modal-close:hover {
+  color: #000;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

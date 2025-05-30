@@ -15,23 +15,28 @@ const SoundlegendSignin = () => {
   const handleSignin = async (e) => {
     e.preventDefault();
     setErrorMsg('');
-
+  
     try {
+      // 🧠 Get reCAPTCHA token before login
+      const token = await window.grecaptcha.enterprise.execute(
+        '6LcneU4rAAAAAFxByZg23EkC0nwO50mdJ-vfeQ3u',
+        { action: 'login' }
+      );
+  
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-
+  
       const userDoc = await fetchUserDoc(user.uid);
-
+  
       if (!userDoc || !userDoc.isSoundlegend) {
         setErrorMsg('You are not authorized for SoundLegend access.');
         return;
       }
-
-      // Redirect to first project (or a landing page)
+  
       if (userDoc.projects?.length > 0) {
         navigate(`/projects/${userDoc.projects[0].projectId}`);
       } else {
-        navigate('/projects'); // Or a generic SoundLegend landing page
+        navigate('/projects');
       }
     } catch (err) {
       console.error('❌ Sign-in error:', err);

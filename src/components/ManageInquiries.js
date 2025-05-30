@@ -9,18 +9,22 @@ const ManageInquiries = () => {
   const [filteredInquiries, setFilteredInquiries] = useState([]);
   const [selectedInquiry, setSelectedInquiry] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [showClosedItems, setShowClosedItems] = useState(false); // Toggle for showing closed items
+  const [hideClosedItems, setHideClosedItems] = useState(true); // ✅ renamed + default checked
 
-  // Fetch inquiries from Firestore
   const fetchInquiries = async () => {
     try {
       const inquiriesCollection = collection(db, 'inquiries');
       const inquirySnapshot = await getDocs(inquiriesCollection);
       const inquiriesList = inquirySnapshot.docs.map((docSnapshot) => {
         const data = docSnapshot.data();
+        const statusRaw = (data.status || '').toLowerCase();
+        let overviewStatus = 'new';
+        if (statusRaw.includes('progress')) overviewStatus = 'inProgress';
+        else if (statusRaw.includes('closed')) overviewStatus = 'completed';
+
         return {
           id: docSnapshot.id,
-          overviewStatus: data.overviewStatus || 'new',
+          overviewStatus,
           createdAt: data.createdAt
             ? new Date(data.createdAt.seconds * 1000).toLocaleString()
             : 'No date',
@@ -29,14 +33,14 @@ const ManageInquiries = () => {
           systemHistory: data.systemHistory || [],
           category: data.category || 'General',
           origin: data.origin || 'Contact Form',
-          name: `${data.first_name || ''} ${data.last_name || ''}`,
+          name: `${data.first_name || ''} ${data.last_name || ''}`.trim(),
           email: data.email || 'N/A',
           message: data.message || '',
         };
       });
 
       setInquiries(inquiriesList);
-      filterInquiries(inquiriesList, showClosedItems); // Filter based on the toggle state
+      filterInquiries(inquiriesList, hideClosedItems);
     } catch (error) {
       console.error('Error fetching inquiries:', error);
     }
@@ -47,17 +51,16 @@ const ManageInquiries = () => {
   }, []);
 
   useEffect(() => {
-    filterInquiries(inquiries, showClosedItems);
-  }, [showClosedItems, inquiries]);
+    filterInquiries(inquiries, hideClosedItems);
+  }, [hideClosedItems, inquiries]);
 
-  const filterInquiries = (inquiriesList, showClosed) => {
-    const filtered = showClosed
-      ? inquiriesList
-      : inquiriesList.filter((inquiry) => inquiry.overviewStatus !== 'completed');
+  const filterInquiries = (inquiriesList, hideClosed) => {
+    const filtered = hideClosed
+      ? inquiriesList.filter((inquiry) => inquiry.overviewStatus !== 'completed')
+      : inquiriesList;
     setFilteredInquiries(filtered);
   };
 
-  // Update inquiry status
   const handleStatusUpdate = async (inquiryId, newStatus) => {
     try {
       const inquiryRef = doc(db, 'inquiries', inquiryId);
@@ -71,11 +74,10 @@ const ManageInquiries = () => {
         systemHistory: arrayUnion(statusChangeEvent),
       });
 
-      const updatedInquiries = inquiries.map((inquiry) =>
-        inquiry.id === inquiryId ? { ...inquiry, status: newStatus } : inquiry
+      const updated = inquiries.map((i) =>
+        i.id === inquiryId ? { ...i, status: newStatus } : i
       );
-
-      setInquiries(updatedInquiries);
+      setInquiries(updated);
 
       if (selectedInquiry?.id === inquiryId) {
         setSelectedInquiry((prev) => ({
@@ -89,31 +91,29 @@ const ManageInquiries = () => {
     }
   };
 
-  // Update inquiry category
   const handleCategoryUpdate = async (inquiryId, newCategory) => {
     try {
       const inquiryRef = doc(db, 'inquiries', inquiryId);
-      const categoryChangeEvent = {
+      const changeEvent = {
         event: `Category changed to "${newCategory}"`,
         timestamp: new Date().toISOString(),
       };
 
       await updateDoc(inquiryRef, {
         category: newCategory,
-        systemHistory: arrayUnion(categoryChangeEvent),
+        systemHistory: arrayUnion(changeEvent),
       });
 
-      const updatedInquiries = inquiries.map((inquiry) =>
-        inquiry.id === inquiryId ? { ...inquiry, category: newCategory } : inquiry
+      const updated = inquiries.map((i) =>
+        i.id === inquiryId ? { ...i, category: newCategory } : i
       );
-
-      setInquiries(updatedInquiries);
+      setInquiries(updated);
 
       if (selectedInquiry?.id === inquiryId) {
         setSelectedInquiry((prev) => ({
           ...prev,
           category: newCategory,
-          systemHistory: [categoryChangeEvent, ...prev.systemHistory],
+          systemHistory: [changeEvent, ...prev.systemHistory],
         }));
       }
     } catch (error) {
@@ -121,47 +121,61 @@ const ManageInquiries = () => {
     }
   };
 
-  // Open inquiry modal when row is clicked
-  const handleRowClick = (inquiry) => {
-    setSelectedInquiry(inquiry);
-    setIsModalOpen(true);
-  };
-
   return (
     <div className="manage-inquiries">
       <h2>Manage Inquiries</h2>
-      <label>
+
+      <label className="toggle-low">
         <input
           type="checkbox"
-          checked={showClosedItems}
-          onChange={(e) => setShowClosedItems(e.target.checked)}
+          checked={hideClosedItems}
+          onChange={(e) => setHideClosedItems(e.target.checked)}
         />
-        Show Closed Items
+        Hide Closed Items
       </label>
-      <table className="manage-inquiries-table">
-        <thead>
-          <tr>
-            <th>Created At</th>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredInquiries.map((inquiry) => (
-            <tr
-              key={inquiry.id}
-              className="overview-item"
-              onClick={() => handleRowClick(inquiry)}  // Row click triggers the modal
-            >
-              <td>{inquiry.createdAt}</td>
-              <td>{inquiry.name}</td>
-              <td>{inquiry.category}</td>
-              <td>{inquiry.status}</td>
+
+      <div className="inquiries-table-wrapper">
+        <table className="inquiries-table">
+          <thead>
+            <tr>
+              <th>Status</th>
+              <th>Created At</th>
+              <th>Name</th>
+              <th>Category</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {filteredInquiries.map((inq) => (
+              <tr
+                key={inq.id}
+                onClick={() => {
+                  setSelectedInquiry(inq);
+                  setIsModalOpen(true);
+                }}
+                className="clickable-row"
+              >
+                <td>
+                  <span
+                    className={`status-badge ${
+                      inq.status.toLowerCase().includes('prospecting') ||
+                      inq.status.toLowerCase().includes('in progress')
+                        ? 'in-progress'
+                        : inq.status.toLowerCase().includes('closed')
+                        ? 'closed'
+                        : 'new'
+                    }`}
+                  >
+                    {inq.status}
+                  </span>
+                </td>
+                <td>{inq.createdAt}</td>
+                <td>{inq.name}</td>
+                <td>{inq.category}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
       {isModalOpen && selectedInquiry && (
         <ViewInquiryModal

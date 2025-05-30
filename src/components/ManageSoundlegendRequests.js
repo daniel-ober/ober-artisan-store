@@ -80,6 +80,32 @@ const ManageSoundlegendRequests = () => {
     }
   };
 
+  const handleStatusSave = async () => {
+    const overviewStatus =
+      newStatus.toLowerCase().startsWith('closed')
+        ? 'completed'
+        : newStatus.toLowerCase() === 'prospecting'
+        ? 'inProgress'
+        : 'new';
+  
+    const submissionRef = doc(db, 'soundlegend_submissions', submission.id);
+    await updateDoc(submissionRef, {
+      status: newStatus,
+      overviewStatus,
+    });
+  
+    // 🔥 Ensure parent gets the updated data
+    if (onUpdateSubmission) {
+      onUpdateSubmission({
+        ...submission,
+        status: newStatus,
+        overviewStatus,
+      });
+    }
+  
+    onClose();
+  };
+
   const filteredSubmissions = hideClosed
     ? submissions.filter((s) => s.overviewStatus !== 'completed')
     : submissions;
@@ -90,6 +116,13 @@ const ManageSoundlegendRequests = () => {
 
   const closeModal = () => {
     setSelectedSubmission(null);
+  };
+
+  const getBadgeClass = (status) => {
+    const lower = status.toLowerCase();
+    if (lower === 'prospecting') return 'badge-yellow';
+    if (lower.startsWith('closed')) return 'badge-gray';
+    return 'badge-green';
   };
 
   return (
@@ -113,10 +146,10 @@ const ManageSoundlegendRequests = () => {
         <table className="submissions-table">
           <thead>
             <tr>
+              <th>Status</th>
               <th>Submitted At</th>
               <th>Name</th>
               <th>Email</th>
-              <th>Status</th>
               <th>Project</th>
             </tr>
           </thead>
@@ -128,30 +161,19 @@ const ManageSoundlegendRequests = () => {
                 onClick={() => handleRowClick(submission)}
               >
                 <td>
+                  <span className={`status-badge ${getBadgeClass(submission.status)}`}>
+                    {submission.status}
+                  </span>
+                </td>
+                <td>
                   {submission.submittedAt?.seconds
-                    ? new Date(
-                        submission.submittedAt.seconds * 1000
-                      ).toLocaleString()
+                    ? new Date(submission.submittedAt.seconds * 1000).toLocaleString()
                     : 'N/A'}
                 </td>
                 <td>
                   {submission.firstName} {submission.lastName}
                 </td>
                 <td>{submission.email}</td>
-                <td onClick={(e) => e.stopPropagation()}>
-                  <select
-                    value={submission.status || 'New'}
-                    onChange={(e) =>
-                      handleStatusChange(submission.id, e.target.value)
-                    }
-                  >
-                    {statusOptions.map((status) => (
-                      <option key={status} value={status}>
-                        {status}
-                      </option>
-                    ))}
-                  </select>
-                </td>
                 <td>
                   {submission.projectId ? (
                     <a
@@ -173,16 +195,16 @@ const ManageSoundlegendRequests = () => {
 
       {selectedSubmission && (
         <ViewSoundlegendModal
-  submission={selectedSubmission}
-  onClose={closeModal}
-  onUpdateSubmission={(updatedSubmission) => {
-    setSubmissions((prev) =>
-      prev.map((s) =>
-        s.id === updatedSubmission.id ? { ...s, ...updatedSubmission } : s
-      )
-    );
-  }}
-/>
+          submission={selectedSubmission}
+          onClose={closeModal}
+          onUpdateSubmission={(updatedSubmission) => {
+            setSubmissions((prev) =>
+              prev.map((s) =>
+                s.id === updatedSubmission.id ? { ...s, ...updatedSubmission } : s
+              )
+            );
+          }}
+        />
       )}
     </div>
   );

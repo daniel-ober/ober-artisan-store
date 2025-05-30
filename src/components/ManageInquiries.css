@@ -1,141 +1,99 @@
-/* Shared container styling for consistency */
-.manage-orders,
-.manage-users,
-.manage-products-container,
-.manage-inquiries,
-.manage-gallery,
-.site-settings-container {
-  padding: 20px;
-  background-color: #f9f9f9;
-  font-family: Arial, sans-serif;
-}
-
-/* Make table rows appear clickable */
-.manage-inquiries-table tr {
-  cursor: pointer;
-}
-
-.manage-inquiries-table tr:hover {
-  background-color: #f5f5f5;
-}
-
-/* ========================= */
-/* Manage Inquiries Styles   */
-/* ========================= */
-
-/* Table */
-.manage-inquiries-table {
-  width: 100%; /* Ensure table takes full width */
-  border-collapse: collapse;
+/* === Container === */
+.manage-inquiries {
+  padding: 32px;
+  background: #fff;
+  border-radius: 8px;
   margin-top: 20px;
+  overflow-x: auto;
+  font-family: 'Arial', sans-serif;
 }
 
-.manage-inquiries-table th,
-.manage-inquiries-table td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left; /* Align text for better readability */
+/* === Header === */
+.manage-inquiries h2 {
+  margin-bottom: 12px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+/* === Toggle Checkbox === */
+.manage-inquiries label {
+  display: inline-block;
+  margin-bottom: 16px;
   font-size: 14px;
+  user-select: none;
 }
 
-.manage-inquiries-table th {
-  background-color: #f2f2f2;
-  font-weight: bold;
+/* === Table === */
+.inquiries-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+  margin-top: 10px;
 }
 
-/* Responsive scroll behavior */
-.manage-inquiries-container {
-  overflow-x: auto; /* Enable horizontal scrolling */
-  max-width: 100%; /* Ensure container fits within the viewport */
-  margin: 0 auto; /* Center the container */
+.inquiries-table th {
+  background-color: #f8f8f8;
+  text-align: center;
+  padding: 12px 16px;
+  font-weight: 600;
+  color: #333;
+  border-bottom: 2px solid #ddd;
+  white-space: nowrap;
 }
 
-/* Badge for new inquiries */
-.manage-inquiries .badge {
-  background-color: #e74c3c; /* Red badge color */
-  color: white; /* White text */
-  font-size: 12px; /* Adjust font size */
-  padding: 5px 10px; /* Add padding for better visibility */
-  border-radius: 12px; /* Rounded badge */
-  margin-left: 10px; /* Add spacing from the header text */
+.inquiries-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #eee;
+  color: #222;
+  vertical-align: middle;
+  text-align: center;
+  white-space: nowrap;
 }
 
-/* Filter checkboxes */
-.manage-inquiries .filters {
-  margin-bottom: 15px; /* Add spacing below filters */
-}
-
-.filter-checkbox {
-  display: inline-flex; /* Align checkbox and text horizontally */
-  align-items: center; /* Vertically align the text */
-  margin-right: 15px; /* Add spacing between checkboxes */
-}
-
-.filter-checkbox input {
-  margin-right: 5px; /* Add space between checkbox and label */
-}
-
-.filter-checkbox label {
-  color: black; /* Ensure the text is visible */
-  font-size: 14px; /* Set readable font size */
-  font-weight: normal; /* Normal font weight */
-  text-shadow: none; /* Remove any shadows */
-}
-
-/* Buttons */
-.refresh-btn {
-  margin-bottom: 20px;
-  padding: 10px 15px;
-  background-color: #3498db;
-  color: white;
-  border: none;
-  border-radius: 4px;
+.inquiries-table tr.clickable-row {
   cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
-.refresh-btn:hover {
-  background-color: #2980b9;
+.inquiries-table tr.clickable-row:hover {
+  background-color: #fafafa;
 }
 
-.view-btn {
-  padding: 6px 12px;
-  background-color: #3498db;
+/* === Status Badges === */
+.status-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
   color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+  border-radius: 999px;
+  text-transform: capitalize;
+  white-space: nowrap;
 }
 
-.view-btn:hover {
-  background-color: #2980b9;
+.status-badge.new {
+  background-color: #2ecc71; /* Green */
 }
 
-/* ========================= */
-/* Responsive Styling        */
-/* ========================= */
+.status-badge.in-progress {
+  background-color: #f1c40f; /* Yellow */
+}
+
+.status-badge.closed {
+  background-color: #95a5a6; /* Gray */
+}
+
+/* === Responsive Adjustments === */
 @media (max-width: 768px) {
-  .manage-inquiries-table th,
-  .manage-inquiries-table td {
-    font-size: 12px;
-    padding: 6px;
-  }
-  .refresh-btn {
-    font-size: 14px;
-    padding: 8px 12px;
-  }
-}
-
-@media (max-width: 480px) {
-  .manage-inquiries-container {
+  .inquiries-table th,
+  .inquiries-table td {
+    font-size: 13px;
     padding: 10px;
   }
-  .refresh-btn {
-    width: 100%; /* Ensure button fits the screen */
-    margin-bottom: 10px;
-  }
-  .manage-inquiries-table th,
-  .manage-inquiries-table td {
-    font-size: 10px;
-    padding: 4px;
+
+  .status-badge {
+    font-size: 12px;
+    padding: 5px 10px;
   }
 }

@@ -20,7 +20,7 @@ const ITEM_STATUSES = [
   'Canceled',
 ];
 
-const ViewOrderModal = ({ isOpen, onClose, orderDetails }) => {
+const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder}) => {
   const [internalNotes, setInternalNotes] = useState([]);
   const [systemHistory, setSystemHistory] = useState([]);
   const [newNote, setNewNote] = useState('');
@@ -30,6 +30,7 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails }) => {
     orderDetails.status || 'Order Started'
   );
   const [relatedProjects, setRelatedProjects] = useState([]);
+  
 
   const formatFirestoreTimestamp = (timestamp) => {
     if (timestamp?.seconds) {
@@ -79,23 +80,21 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails }) => {
 
   // Function to dynamically determine the order status based on item statuses
   const calculateOrderStatus = (items) => {
-    const statuses = items.map((item) => item.status);
-    if (statuses.every((status) => status === 'Delivered'))
-      return 'Order Completed';
-    if (
-      statuses.every((status) =>
-        ['Ready for Shipment', 'Shipped'].includes(status)
-      )
-    )
-      return 'Ready for Shipment';
-    if (statuses.some((status) => status === 'Shipped'))
-      return 'Partially Fulfilled';
-    if (statuses.some((status) => status === 'Back Ordered'))
-      return 'Partially Fulfilled / Back Ordered';
-    if (statuses.every((status) => status === 'Canceled')) return 'Canceled';
-    if (statuses.every((status) => status === 'Preparing'))
-      return 'Order Successful';
-    return 'Processing';
+    const statuses = items.map((item) => item.status || 'Preparing');
+  
+    if (statuses.length === 0) return 'No Items';
+  
+    const allIn = (targets) => statuses.every((st) => targets.includes(st));
+    const some = (s) => statuses.some((st) => st === s);
+  
+    if (allIn(['Shipped', 'Delivered'])) return 'Fulfilled';
+    if (statuses.every((st) => st === 'Canceled')) return 'Canceled';
+    if (some('Shipped') || some('Delivered')) return 'Partially Fulfilled';
+    if (some('Back Ordered')) return 'Partially Fulfilled / Back Ordered';
+    if (some('Ready for Shipment')) return 'Ready for Shipment';
+    if (some('Packaged')) return 'Order Started';
+  
+    return 'Order Started';
   };
 
   // Update item status and recalculate order status
@@ -103,10 +102,10 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails }) => {
     try {
       const updatedItems = [...items];
       updatedItems[index].status = newStatus;
-
+  
       // Recalculate the order status
       const newOrderStatus = calculateOrderStatus(updatedItems);
-
+  
       // Update Firestore
       const orderRef = doc(db, 'orders', orderDetails.id);
       await updateDoc(orderRef, {
@@ -117,7 +116,7 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails }) => {
           timestamp: new Date().toISOString(),
         }),
       });
-
+  
       // Update local state
       setItems(updatedItems);
       setOrderStatus(newOrderStatus);
@@ -128,6 +127,15 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails }) => {
         },
         ...prevHistory,
       ]);
+  
+      // 🔁 Trigger real-time update in ManageOrders
+      if (onUpdateOrder) {
+        onUpdateOrder({
+          ...orderDetails,
+          items: updatedItems,
+          status: newOrderStatus,
+        });
+      }
     } catch (error) {
       console.error('Error updating item status:', error);
       alert('Failed to update item status. Please try again.');
@@ -220,6 +228,8 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails }) => {
   return (
     <div className="modal-overlay">
       <div className="modal-content">
+      <button onClick={onClose} className="modal-close">✕</button>
+
         <h3 className="modal-title">Order Details</h3>
 
         <div className="compact-order-details">

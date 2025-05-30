@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { arrayUnion } from 'firebase/firestore';
 import {
   getDoc,
   doc,
@@ -13,11 +14,25 @@ import { db } from '../firebaseConfig';
 import ViewOrderModal from './ViewOrderModal';
 import ViewInquiryModal from './ViewInquiryModal';
 import ViewSoundlegendModal from './ViewSoundlegendModal';
-import { FaBox, FaHeadset, FaStar } from 'react-icons/fa';
+import ViewRiskDetailModal from './ViewRiskDetailModal';
+import {
+  FaBox,
+  FaHeadset,
+  FaStar,
+  FaExclamationTriangle,
+} from 'react-icons/fa';
 import './AdminOverview.css';
 
 const AdminOverview = () => {
-  const [data, setData] = useState({ new: [], inProgress: [], completed: [] });
+  const [data, setData] = useState({
+    new: [],
+    inProgress: [],
+    completed: [],
+    risks: [],
+  });
+  const activeRiskCount = [...data.new, ...data.inProgress].filter(
+    (item) => item.type === 'risk'
+  ).length;
   const [selectedItem, setSelectedItem] = useState(null);
   const [modalType, setModalType] = useState(null);
   const [newPage, setNewPage] = useState(1);
@@ -29,43 +44,67 @@ const AdminOverview = () => {
     orders: true,
     support: true,
     slRequests: true,
+    risk: true,
   });
 
   // Always update state with raw data per type; don't early-return based on filters.
   const updateColumnState = (type, items) => {
-    const newItems = items.filter((i) => {
-      const status = (i.overviewStatus || i.status || 'new').toLowerCase();
-      return status === 'new';
-    });
+    const newItems = [];
+    const inProgressItems = [];
+    const completedItems = [];
 
-    const inProgressItems = items.filter((i) => {
-      const status = (i.overviewStatus || i.status || '').toLowerCase();
-      return status === 'prospecting' || status === 'inprogress';
-    });
+    for (const item of items) {
+      let status = (item.overviewStatus || item.status || '').toLowerCase();
+      if (item.type === 'risk') {
+        if (status === 'in review') status = 'inprogress';
+        else if (status === 'resolved' || status === 'completed')
+          status = 'completed';
+        else status = 'new';
+      }
+      if (status === 'new') newItems.push(item);
+      else if (status === 'prospecting' || status === 'inprogress')
+        inProgressItems.push(item);
+      else if (
+        [
+          'closed - won',
+          'closed - lost',
+          'closed - incomplete form',
+          'closed - no response',
+          'closed - duplicate/spam',
+          'completed',
+        ].includes(status)
+      ) {
+        completedItems.push(item);
+      }
+    }
 
-    const completedItems = items.filter((i) => {
-      const status = (i.overviewStatus || i.status || '').toLowerCase();
-      return [
-        'closed - won',
-        'closed - lost',
-        'closed - incomplete form',
-        'closed - no response',
-        'closed - duplicate/spam',
-        'completed',
-      ].includes(status);
-    });
+    setData((prev) => {
+      // Remove all items of this type from each column
+      const filterOut = (arr) => arr.filter((i) => i.type !== type);
 
-    setData((prev) => ({
-      new: [...prev.new.filter((i) => i.type !== type), ...newItems],
-      inProgress: [
-        ...prev.inProgress.filter((i) => i.type !== type),
-        ...inProgressItems,
-      ],
-      completed: [
-        ...prev.completed.filter((i) => i.type !== type),
-        ...completedItems,
-      ],
-    }));
+      // Prevent duplicates by checking id+type combo
+      const uniqueById = (arr) => {
+        const seen = new Set();
+        return arr.filter((item) => {
+          const key = `${item.type}-${item.id}`;
+          if (seen.has(key)) return false;
+          seen.add(key);
+          return true;
+        });
+      };
+
+      return {
+        new: uniqueById([...filterOut(prev.new), ...newItems]),
+        inProgress: uniqueById([
+          ...filterOut(prev.inProgress),
+          ...inProgressItems,
+        ]),
+        completed: uniqueById([
+          ...filterOut(prev.completed),
+          ...completedItems,
+        ]),
+      };
+    });
   };
 
   useEffect(() => {
@@ -81,6 +120,25 @@ const AdminOverview = () => {
         updateColumnState('order', orders);
       }
     );
+
+    const normalizeStatus = (status = '') =>
+      status.toLowerCase().replace(/\s+/g, '');
+
+    const getDisplayStatus = (status) => {
+      const normalized = normalizeStatus(status);
+      if (normalized === 'inprogress') return 'In Progress';
+      if (normalized === 'completed' || normalized === 'resolved')
+        return 'Completed';
+      return 'New';
+    };
+
+    const getStatusBadgeClass = (status) => {
+      const normalized = normalizeStatus(status);
+      if (normalized === 'inprogress') return 'badge-yellow';
+      if (normalized === 'completed' || normalized === 'resolved')
+        return 'badge-gray';
+      return 'badge-green';
+    };
 
     const unsubInquiries = onSnapshot(
       query(
@@ -111,6 +169,41 @@ const AdminOverview = () => {
       }
     );
 
+    const unsubRisks = onSnapshot(
+      query(
+        collection(db, 'risk_notifications'),
+        orderBy('timestamp', 'desc'),
+        limit(100)
+      ),
+      (snapshot) => {
+        const risks = snapshot.docs.map((doc) => {
+          const data = doc.data();
+          const rawStatus = (data.status || '').toLowerCase().trim();
+          const derivedStatus =
+            rawStatus === 'in review'
+              ? 'inProgress'
+              : rawStatus === 'resolved' || rawStatus === 'completed'
+                ? 'completed'
+                : 'new';
+
+          return {
+            id: doc.id,
+            type: 'risk',
+            overviewStatus: derivedStatus,
+            status: data.status || 'Unclassified Risk',
+            customerName:
+              data.assessment?.username ||
+              data.assessment?.email ||
+              'Unverified Login',
+            email: data.email || 'N/A',
+            ...data,
+          };
+        });
+
+        updateColumnState('risk', risks);
+      }
+    );
+
     const unsubSubmissions = onSnapshot(
       query(
         collection(db, 'soundlegend_submissions'),
@@ -120,7 +213,7 @@ const AdminOverview = () => {
       (snapshot) => {
         const submissions = snapshot.docs.map((doc) => {
           const data = doc.data();
-          const rawStatus = (data.status || '').toLowerCase().trim();
+          const overviewStatus = data.overviewStatus || 'new';
           const derivedStatus =
             data.overviewStatus ||
             (rawStatus.includes('prospecting')
@@ -148,6 +241,7 @@ const AdminOverview = () => {
       unsubOrders();
       unsubInquiries();
       unsubSubmissions();
+      unsubRisks();
     };
   }, []);
 
@@ -159,77 +253,178 @@ const AdminOverview = () => {
           ? 'orders'
           : item.type === 'inquiry'
             ? 'inquiries'
-            : 'soundlegend_submissions',
+            : item.type === 'submission'
+              ? 'soundlegend_submissions'
+              : 'risk_notifications',
         item.id
       );
       const snap = await getDoc(ref);
-      if (snap.exists()) {
-        const data = snap.data();
-        if (item.type === 'order' && !Array.isArray(data.items)) {
-          data.items = [];
-        }
-        if (data.createdAt?.seconds) {
-          data.createdAt = new Date(
-            data.createdAt.seconds * 1000
-          ).toLocaleString();
-        }
-        if (Array.isArray(data.systemHistory)) {
-          data.systemHistory = data.systemHistory.map((entry) => ({
-            ...entry,
-            timestamp: entry.timestamp?.seconds
-              ? new Date(entry.timestamp.seconds * 1000).toLocaleString()
-              : entry.timestamp,
-          }));
-        }
+      if (!snap.exists()) return;
+
+      const data = snap.data();
+
+      if (item.type === 'risk') {
+        const timestamp = data.timestamp?.seconds
+          ? new Date(data.timestamp.seconds * 1000)
+          : new Date();
+      
+        const severity =
+          data.score >= 0.85 ? 'High' : data.score >= 0.5 ? 'Medium' : 'Low';
+      
         setSelectedItem({
           id: snap.id,
-          overviewStatus: data.overviewStatus || 'new',
-          createdAt: data.createdAt?.seconds
-            ? new Date(data.createdAt.seconds * 1000).toLocaleString()
-            : 'No date',
-          status: data.status || 'New',
-          internalNotes: data.internalNotes || [],
+          email: data.email || data.assessment?.email || 'N/A',
+          type: data.type || 'Unknown',
+          score: data.score || 0,
+          timestamp,
+          severity,
+          source: data.source || 'N/A',
           systemHistory: data.systemHistory || [],
-          category: data.category || 'General',
-          origin: data.origin || 'Contact Form',
-          name: `${data.first_name || ''} ${data.last_name || ''}`.trim(),
-          email: data.email || 'N/A',
-          message: data.message || '',
+          status: data.status || 'New',
+          overviewStatus:
+            data.status?.toLowerCase().includes('in progress') ? 'inProgress'
+            : data.status?.toLowerCase().includes('completed') || data.status?.toLowerCase().includes('resolved') ? 'completed'
+            : 'new',
+          assessment: data.assessment || {},
         });
-        setModalType(item.type);
+      
+        setModalType('risk');
+        return;
       }
+
+      // For all other item types
+      if (item.type === 'order' && !Array.isArray(data.items)) {
+        data.items = [];
+      }
+
+      if (data.createdAt?.seconds) {
+        data.createdAt = new Date(
+          data.createdAt.seconds * 1000
+        ).toLocaleString();
+      }
+
+      if (Array.isArray(data.systemHistory)) {
+        data.systemHistory = data.systemHistory.map((entry) => ({
+          ...entry,
+          timestamp: entry.timestamp?.seconds
+            ? new Date(entry.timestamp.seconds * 1000).toLocaleString()
+            : entry.timestamp,
+        }));
+      }
+
+      setSelectedItem({
+        id: snap.id,
+        overviewStatus: data.overviewStatus || 'new',
+        createdAt: data.createdAt || 'No date',
+        status: data.status || 'New',
+        internalNotes: data.internalNotes || [],
+        systemHistory: data.systemHistory || [],
+        category: data.category || 'General',
+        origin: data.origin || 'Contact Form',
+        name: `${data.first_name || ''} ${data.last_name || ''}`.trim(),
+        email: data.email || 'N/A',
+        message: data.message || '',
+      });
+
+      setModalType(item.type);
     } catch (error) {
-      console.error('Error fetching item details:', error);
+      console.error('❌ Error fetching item details:', error);
     }
   };
 
   const handleDrop = async (event, targetStatus) => {
     event.preventDefault();
     const dataString = event.dataTransfer.getData('text/plain');
-    const { id, type, sourceStatus } = JSON.parse(dataString);
+    const { id, type } = JSON.parse(dataString);
+
     const ref = doc(
       db,
       type === 'order'
         ? 'orders'
         : type === 'inquiry'
           ? 'inquiries'
-          : 'soundlegend_submissions',
+          : type === 'submission'
+            ? 'soundlegend_submissions'
+            : 'risk_notifications',
       id
     );
+
     try {
-      const updateFields = { overviewStatus: targetStatus };
+      let normalizedStatus = 'New';
+
       if (type === 'submission') {
         if (targetStatus === 'inProgress') {
-          updateFields.status = 'Prospecting';
+          normalizedStatus = 'Prospecting';
         } else if (targetStatus === 'completed') {
-          updateFields.status = 'Closed - No Response';
-        } else {
-          updateFields.status = 'New';
+          normalizedStatus = 'Closed - No Response';
         }
+      } else if (type === 'risk') {
+        if (targetStatus === 'inProgress') {
+          normalizedStatus = 'In Progress'; // ✅ Correct casing for dropdown
+        } else if (targetStatus === 'completed') {
+          normalizedStatus = 'Resolved'; // ✅ Also support "Dismissed" in logic elsewhere
+        } else {
+          normalizedStatus = 'New';
+        }
+      } else {
+        // Generic fallback for orders/inquiries
+        normalizedStatus = targetStatus;
       }
+
+      const updateFields = {
+        overviewStatus: targetStatus,
+        status: normalizedStatus,
+        systemHistory: arrayUnion({
+          event: `Status changed to "${normalizedStatus}" via drag-and-drop`,
+          timestamp: new Date().toISOString(),
+        }),
+      };
+
       await updateDoc(ref, updateFields);
+
+      setSelectedItem((prev) => {
+        if (!prev || prev.id !== id || prev.type !== type) return prev;
+        return {
+          ...prev,
+          status: normalizedStatus,
+          overviewStatus: targetStatus,
+        };
+      });
+
+      // Update local state
+      setData((prev) => {
+        const allItems = [...prev.new, ...prev.inProgress, ...prev.completed];
+        const movedItem = allItems.find(
+          (item) => item.id === id && item.type === type
+        );
+        if (!movedItem) return prev;
+
+        const updatedItem = {
+          ...movedItem,
+          overviewStatus: targetStatus,
+          status: normalizedStatus,
+        };
+
+        const filterOut = (items) =>
+          items.filter((i) => i.id !== id || i.type !== type);
+
+        return {
+          new:
+            targetStatus === 'new'
+              ? [updatedItem, ...filterOut(prev.new)]
+              : filterOut(prev.new),
+          inProgress:
+            targetStatus === 'inProgress'
+              ? [updatedItem, ...filterOut(prev.inProgress)]
+              : filterOut(prev.inProgress),
+          completed:
+            targetStatus === 'completed'
+              ? [updatedItem, ...filterOut(prev.completed)]
+              : filterOut(prev.completed),
+        };
+      });
     } catch (err) {
-      console.error('❌ Error updating overview status:', err.message);
+      console.error('❌ Error updating Firestore in handleDrop:', err.message);
     }
   };
 
@@ -239,9 +434,13 @@ const AdminOverview = () => {
         ? 'ORDER'
         : item.type === 'inquiry'
           ? 'SUPPORT'
-          : 'SOUNDLEGEND';
+          : item.type === 'submission'
+            ? 'SOUNDLEGEND'
+            : 'RISK';
+
     const label = `${labelType} • ${item.id.slice(-6)}`;
     const desc = item.customerName || item.name || item.email || item.status;
+
     return (
       <div
         key={`${item.type}-${item.id}`}
@@ -256,7 +455,20 @@ const AdminOverview = () => {
         onClick={() => handleItemClick(item)}
       >
         <strong>{label}</strong>
-        <div>{desc}</div>
+        <div className="overview-item-desc">
+          {item.type === 'risk' ? (
+            <>
+              <span
+                className={`risk-status-badge ${getStatusBadgeClass(item.status)}`}
+              >
+                {getDisplayStatus(item.status)}
+              </span>
+              <span>{desc}</span>
+            </>
+          ) : (
+            desc
+          )}
+        </div>
       </div>
     );
   };
@@ -268,6 +480,7 @@ const AdminOverview = () => {
       if (item.type === 'order' && !filters.orders) return false;
       if (item.type === 'inquiry' && !filters.support) return false;
       if (item.type === 'submission' && !filters.slRequests) return false;
+      if (item.type === 'risk' && !filters.risk) return false;
       return true;
     });
 
@@ -356,7 +569,7 @@ const AdminOverview = () => {
     );
   };
 
-  const handleStatusChange = (id, newStatus) => {
+  const handleStatusChange = async (id, newStatus) => {
     const statusLower = newStatus.toLowerCase();
     let newOverviewStatus;
     if (statusLower === 'new') {
@@ -369,6 +582,20 @@ const AdminOverview = () => {
     } else {
       newOverviewStatus = 'completed';
     }
+
+    const ref = doc(db, 'risk_notifications', id);
+    try {
+      await updateDoc(ref, {
+        status: newStatus,
+        overviewStatus: newOverviewStatus,
+        systemHistory: arrayUnion({
+          event: `Status changed to "${newStatus}"`,
+          timestamp: new Date().toISOString(),
+        }),
+      });
+    } catch (err) {
+      console.error('❌ Failed to update Firestore status:', err.message);
+    }
     setSelectedItem((prev) => {
       if (!prev || prev.id !== id) return prev;
       return {
@@ -377,6 +604,7 @@ const AdminOverview = () => {
         overviewStatus: newOverviewStatus,
       };
     });
+
     setData((prev) => {
       const updatedItem = {
         ...(prev.new.find((i) => i.id === id) ||
@@ -422,26 +650,32 @@ const AdminOverview = () => {
         />
         <FaBox
           title="Orders"
-          onClick={() =>
-            setFilters((f) => ({ ...f, orders: !f.orders }))
-          }
+          onClick={() => setFilters((f) => ({ ...f, orders: !f.orders }))}
           className={`filter-icon ${filters.orders ? 'enabled' : 'disabled'}`}
         />
         <FaHeadset
           title="Support"
-          onClick={() =>
-            setFilters((f) => ({ ...f, support: !f.support }))
-          }
+          onClick={() => setFilters((f) => ({ ...f, support: !f.support }))}
           className={`filter-icon ${filters.support ? 'enabled' : 'disabled'}`}
         />
+        <div className="risk-alert-wrapper">
+          <FaExclamationTriangle
+            title="Risk Alerts"
+            onClick={() => setFilters((f) => ({ ...f, risk: !f.risk }))}
+            className={`filter-icon ${filters.risk ? 'enabled' : 'disabled'}`}
+          />
+          {activeRiskCount > 0 && (
+            <span className="risk-alert-badge">{activeRiskCount}</span>
+          )}
+        </div>
       </div>
-  
+
       <div className="overview-columns">
         {renderColumn('🟢 New', data.new, 'new')}
         {renderColumn('🟠 In Progress', data.inProgress, 'inProgress')}
         {renderColumn('✔️ Completed', data.completed, 'completed')}
       </div>
-  
+
       {modalType === 'order' && selectedItem && (
         <ViewOrderModal
           isOpen={true}
@@ -463,6 +697,14 @@ const AdminOverview = () => {
           isOpen={true}
           onClose={() => setSelectedItem(null)}
           submission={selectedItem}
+        />
+      )}
+      {modalType === 'risk' && selectedItem && (
+        <ViewRiskDetailModal
+          isOpen={true}
+          onClose={() => setSelectedItem(null)}
+          risk={selectedItem}
+          onStatusChange={handleStatusChange} // 👈 include this if your modal has an editable dropdown
         />
       )}
     </div>

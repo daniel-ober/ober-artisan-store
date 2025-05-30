@@ -38,10 +38,9 @@ const Contact = () => {
     category: '',
   });
   const [loading, setLoading] = useState(false);
-  const [open, setOpen] = useState(false); // Popup dialog state
+  const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
-  // Populate form with user profile if authenticated
   useEffect(() => {
     const fetchUserData = async () => {
       const user = checkAuthentication();
@@ -77,39 +76,61 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-  
+
     try {
-      const inquiryId = nanoid();
-      await addInquiry({
-        id: inquiryId,
-        ...formData,
-        origin: 'web-contact',
-        status: 'New',
-        createdAt: new Date(),
-      });
-  
-      // Add delay to simulate sending feedback
-      await new Promise((resolve) => setTimeout(resolve, 700));
-  
-      setOpen(true);
-      setFormData({
-        first_name: '',
-        last_name: '',
-        email: '',
-        phone: '',
-        message: '',
-        category: '',
+      console.log('📡 Preparing to execute reCAPTCHA...');
+      window.grecaptcha.enterprise.ready(async () => {
+        console.log('📡 Executing reCAPTCHA for contact form...');
+        const token = await window.grecaptcha.enterprise.execute(
+          '6LcneU4rAAAAAFxByZg23EkC0nwO50mdJ-vfeQ3u',
+          { action: 'submit_contact' }
+        );
+
+        const verifyResponse = await fetch('https://api-eef4a3tgna-uc.a.run.app/verifyRecaptcha', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ token, email: formData.email }),
+        });
+
+        const verifyResult = await verifyResponse.json();
+        if (!verifyResult.success) {
+          setLoading(false);
+          alert('Submission blocked due to suspicious activity.');
+          return;
+        }
+
+        const inquiryId = nanoid();
+        await addInquiry({
+          id: inquiryId,
+          ...formData,
+          origin: 'web-contact',
+          status: 'New',
+          createdAt: new Date(),
+        });
+
+        await new Promise((resolve) => setTimeout(resolve, 700));
+
+        setOpen(true);
+        setFormData({
+          first_name: '',
+          last_name: '',
+          email: '',
+          phone: '',
+          message: '',
+          category: '',
+        });
       });
     } catch (error) {
       console.error('Error sending message:', error);
-    } finally {
       setLoading(false);
     }
   };
 
   const handleClose = () => {
     setOpen(false);
-    navigate('/artisan-shop'); // Redirect to the "Pre-Order" page after success
+    navigate('/artisan-shop');
   };
 
   return (
@@ -118,91 +139,37 @@ const Contact = () => {
         Contact Us
       </Typography>
 
-      <form onSubmit={handleSubmit} >
-        {/* Category Dropdown */}
+      <form onSubmit={handleSubmit}>
         <FormControl fullWidth margin="normal" required className="contact-dropdown">
-  <Select
-    name="category"
-    value={formData.category}
-    onChange={handleChange}
-    displayEmpty
-    className="contact-select"
-  >
-    <MenuItem value="">
-      <div>Select a category</div>
-    </MenuItem>
-    {inquiryCategories.map((category) => (
-      <MenuItem key={category.value} value={category.value} className="contact-menu-item">
-        {category.label}
-      </MenuItem>
-    ))}
-  </Select>
-</FormControl>
+          <Select
+            name="category"
+            value={formData.category}
+            onChange={handleChange}
+            displayEmpty
+            className="contact-select"
+          >
+            <MenuItem value="">
+              <div>Select a category</div>
+            </MenuItem>
+            {inquiryCategories.map((category) => (
+              <MenuItem key={category.value} value={category.value} className="contact-menu-item">
+                {category.label}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
 
-<TextField
-  label="First Name"
-  name="first_name"
-  value={formData.first_name}
-  onChange={handleChange}
-  fullWidth
-  margin="normal"
-  required
-  className="contact-input"
-/>
-<TextField
-  label="Last Name"
-  name="last_name"
-  value={formData.last_name}
-  onChange={handleChange}
-  fullWidth
-  margin="normal"
-  required
-  className="contact-input"
-/>
-<TextField
-  label="Email"
-  type="email"
-  name="email"
-  value={formData.email}
-  onChange={handleChange}
-  fullWidth
-  margin="normal"
-  required
-  className="contact-input"
-/>
-<TextField
-  label="Phone (Optional)"
-  name="phone"
-  value={formData.phone}
-  onChange={handleChange}
-  fullWidth
-  margin="normal"
-  className="contact-input"
-/>
-<TextField
-  label="Message"
-  name="message"
-  value={formData.message}
-  onChange={handleChange}
-  fullWidth
-  margin="normal"
-  required
-  multiline
-  rows={4}
-  className="contact-input"
-/>
-<Button
-  type="submit"
-  variant="contained"
-  color="primary"
-  className="contact-button"
-  disabled={loading}
->
-  {loading ? 'Sending...' : 'Send Message'}
-</Button>
+        <TextField label="First Name" name="first_name" value={formData.first_name} onChange={handleChange} fullWidth margin="normal" required className="contact-input" />
+        <TextField label="Last Name" name="last_name" value={formData.last_name} onChange={handleChange} fullWidth margin="normal" required className="contact-input" />
+        <TextField label="Email" type="email" name="email" value={formData.email} onChange={handleChange} fullWidth margin="normal" required className="contact-input" />
+        <TextField label="Phone (Optional)" name="phone" value={formData.phone} onChange={handleChange} fullWidth margin="normal" className="contact-input" />
+        <TextField label="Message" name="message" value={formData.message} onChange={handleChange} fullWidth margin="normal" required multiline rows={4} className="contact-input" />
+
+        <Button type="submit" variant="contained" color="primary" className="contact-button" disabled={loading}>
+          {loading ? 'Sending...' : 'Send Message'}
+        </Button>
       </form>
 
-      {/* Success Dialog */}
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Message Sent</DialogTitle>
         <DialogContent>
