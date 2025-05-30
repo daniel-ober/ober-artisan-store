@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { db } from '../firebaseConfig'; // Firestore config
 import { useNavigate } from 'react-router-dom';
 import {
@@ -11,6 +11,7 @@ import {
 } from '@mui/material';
 import { collection, addDoc, Timestamp } from 'firebase/firestore'; // Firestore methods
 import './SoundlegendProductDetail.css';
+import axios from 'axios';
 
 const SoundLegendProductDetail = () => {
   // User Details
@@ -30,6 +31,14 @@ const SoundLegendProductDetail = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (window.grecaptcha && window.grecaptcha.enterprise) {
+      window.grecaptcha.enterprise.ready(() => {
+        console.log('✅ reCAPTCHA is ready');
+      });
+    }
+  }, []);
 
   // 🔽 Add this here
   const handleClose = () => {
@@ -67,30 +76,38 @@ const SoundLegendProductDetail = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-
-    const submissionData = {
-      firstName,
-      lastName,
-      email,
-      phone,
-      size,
-      depth,
-      shellConstruction,
-      woodSpecies,
-      snareBedDepth,
-      consultationDate,
-      status: 'New',
-      submittedAt: Timestamp.now(),
-    };
-
+  
     try {
+      // ✅ Get token from reCAPTCHA Enterprise
+      const token = await window.grecaptcha.enterprise.execute('6LcneU4rAAAAAFxByZg23EkC0nwO50mdJ-vfeQ3u', { action: 'submit' });
+  
+      // ✅ Verify token with your backend function
+      const verifyResponse = await axios.post('https://api-eef4a3tgna-uc.a.run.app/verifyRecaptcha', { token });  
+      if (!verifyResponse.data.success) {
+        alert('reCAPTCHA verification failed. Please try again.');
+        setIsSubmitting(false);
+        return;
+      }
+  
+      const submissionData = {
+        firstName,
+        lastName,
+        email,
+        phone,
+        size,
+        depth,
+        shellConstruction,
+        woodSpecies,
+        snareBedDepth,
+        consultationDate,
+        status: 'New',
+        submittedAt: Timestamp.now(),
+      };
+  
       await addDoc(collection(db, 'soundlegend_submissions'), submissionData);
-    
-      // Simulate "sending" for 700ms
       await new Promise((resolve) => setTimeout(resolve, 700));
-    
       setOpen(true);
-    
+  
       // Reset form
       setFirstName('');
       setLastName('');
