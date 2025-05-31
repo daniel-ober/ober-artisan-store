@@ -1,4 +1,4 @@
-.manage-project-modal-overlay {
+/* .manage-project-modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -84,7 +84,6 @@ header h2 {
 }
 
 main {
-    padding: 20px;
     flex: 1;
     overflow-y: auto;
 }
@@ -96,7 +95,6 @@ main {
     gap: 15px;
 }
 
-/* Flex container for Project and Customer Details */
 .overview-details {
     display: flex;
     gap: 20px;
@@ -297,4 +295,4 @@ form button {
   
   .file-category li {
     margin-bottom: 0.5rem;
-  }
+  } */
