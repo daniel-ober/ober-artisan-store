@@ -1,4 +1,4 @@
-.file-uploader {
+/* .file-uploader {
     margin-top: 1rem;
   }
   
@@ -17,7 +17,7 @@
   }
   
   .file-category-expanded {
-    grid-column: span 3; /* Expands across the full width */
+    grid-column: span 3;
   }
   
   .file-category h4 {
@@ -78,4 +78,4 @@
     color: #555;
     margin-top: 5px;
     word-wrap: break-word;
-  }
+  } */
