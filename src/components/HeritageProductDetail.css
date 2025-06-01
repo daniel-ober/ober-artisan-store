@@ -48,7 +48,13 @@
 }
 
 .heritage-product-image img:hover {
-  transform: scale(1.02);
+  /* transform: scale(1.02); */
+}
+
+.heritage-header-image {
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto 2rem;
 }
 
 /* 📌 Sound Profile Charts */
@@ -262,6 +268,11 @@
   .heritage-sound-charts {
       gap: 15px;
   }
+
+  .heritage-header-image {
+    max-width: 500px;
+    margin: 20px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -285,5 +296,10 @@
   .heritage-product-options button {
       font-size: 15px;
       padding: 12px;
+  }
+
+    .heritage-header-image {
+    max-width: 300px;
+    margin-bottom: 20px;
   }
 }

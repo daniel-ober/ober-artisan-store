@@ -500,7 +500,7 @@ id: `feuzon-${stripePriceId}-${size}-${depth}-${reRing}-${lugs}-${staveQuantity}
         <img
           src="/resized-logos/feuzon-white.png"
           alt="FEUZØN Series"
-          className="artisanseries-header-image"
+          className="feuzon-header-image"
         />
     
         <div className="feuzon-product-content">
