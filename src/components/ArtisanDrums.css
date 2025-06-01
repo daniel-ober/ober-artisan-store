@@ -62,7 +62,8 @@
   margin: 1rem auto;
   padding: 0 1rem;
   max-width: 750px;
-  text-align: left; /* ← changed from justify */
+  text-align: left;
+  
 }
 
 .description-list {
