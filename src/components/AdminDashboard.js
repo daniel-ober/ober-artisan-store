@@ -6,7 +6,7 @@ import {
   FaShoppingCart,
   FaBox,
   FaHammer,
-  FaEnvelope,
+  FaHeadset,
   FaCog,
   FaImages,
   FaStar,
@@ -188,7 +188,7 @@ const AdminDashboard = () => {
           },
           {
             name: 'Support Inquiries',
-            icon: FaEnvelope,
+            icon: FaHeadset,
             stateKey: 'manageInquiries',
           },
           {

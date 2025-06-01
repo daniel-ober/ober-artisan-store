@@ -9,6 +9,8 @@ import {
 } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import './ViewOrderModal.css';
+import { Timestamp } from "firebase/firestore"; // Add to top if not already
+
 
 const ITEM_STATUSES = [
   'Preparing',
@@ -174,26 +176,43 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder}) => {
       `Create Project for ${item?.name || 'Blank Project'}?`
     );
     if (!confirmCreation) return;
-
+  
     try {
+      const parsedAddress = (orderDetails.customerAddress || "").split(",");
+      const street = parsedAddress[0]?.trim() || "";
+      const city = parsedAddress[1]?.trim() || "";
+      const [state, zip] = parsedAddress[2]?.trim().split(" ") || [];
+  
       const projectData = {
         orderId: orderDetails.id,
         customerName: orderDetails.customerName || 'N/A',
-        startDate: new Date().toISOString(),
+        customer: {
+          name: orderDetails.customerName || "N/A",
+          email: orderDetails.customerEmail || "N/A",
+          phone: orderDetails.customerPhone || "",
+          address: {
+            street,
+            city,
+            state,
+            zip,
+          },
+        },
+        startDate: Timestamp.now(),
+        currentPhase: "Step 1. Wood Preparation",
+        artisanLine: item?.name?.includes("Soundlegend") ? "SoundLegend" : "",
+        width: "14\"",
+        shellDepth: "8\"",
         itemDetails: item || null,
-        status: 'Not Started',
-        phases: [],
-        notes: [],
       };
-
+  
       const projectRef = await addDoc(collection(db, 'projects'), projectData);
       const projectId = projectRef.id;
-
+  
       const projectEntry = {
         projectId,
         itemName: item?.name || 'Blank Project',
       };
-
+  
       const orderRef = doc(db, 'orders', orderDetails.id);
       await updateDoc(orderRef, {
         relatedProjects: arrayUnion(projectEntry),
@@ -202,7 +221,7 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder}) => {
           timestamp: new Date().toISOString(),
         }),
       });
-
+  
       setRelatedProjects((prev) => [...prev, projectEntry]);
       setSystemHistory((prev) => [
         {
@@ -211,11 +230,11 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder}) => {
         },
         ...prev,
       ]);
-
-      alert(`Project created successfully! Project ID: ${projectId}`);
+  
+      alert(`✅ Project created successfully!\n\nProject ID: ${projectId}`);
     } catch (error) {
       console.error('Error creating project:', error);
-      alert('Failed to create project. Please try again.');
+      alert('❌ Failed to create project. Please try again.');
     }
   };
 

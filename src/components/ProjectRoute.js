@@ -4,14 +4,14 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 
-const ProjectRoute = ({ element: Component }) => {
+const ProjectRoute = ({ element: Element }) => {
   const { user, isAdmin, authIsReady } = useAuth();
   const { projectId } = useParams();
   const navigate = useNavigate();
   const [authorized, setAuthorized] = useState(null); // null = loading
 
   useEffect(() => {
-    if (!authIsReady) return; // wait for auth to be initialized
+    if (!authIsReady) return;
 
     const checkAccess = async () => {
       if (!user) {
@@ -50,7 +50,7 @@ const ProjectRoute = ({ element: Component }) => {
 
   if (!authIsReady || authorized === null) return <div>Loading project...</div>;
 
-  return <Component />;
+  return <Element />;
 };
 
 export default ProjectRoute;
