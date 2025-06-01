@@ -7,7 +7,6 @@ const ArtisanShopCard = ({ product }) => {
 
   // Determine button text dynamically
   let buttonText;
-
   if (product.currentQuantity === 0) {
     buttonText = 'Out of Stock';
   } else if (product.id === 'founders-toast') {
@@ -20,7 +19,6 @@ const ArtisanShopCard = ({ product }) => {
     buttonText = 'Pre-Order Now';
   }
 
-  // 🔽 ⬅️ Put it here, right before return()
   let buttonClass;
   if (product.currentQuantity === 0) {
     buttonClass = 'preorder-card-out-of-stock-button';
@@ -28,27 +26,40 @@ const ArtisanShopCard = ({ product }) => {
     buttonClass = 'preorder-card-preorder-button';
   }
 
-  // Determine destination route
-  const isArtisan = [
-    'heritage',
-    'feuzon',
-    'soundlegend',
-    'founders-toast',
-  ].includes(product.id);
+  const isArtisan = ['heritage', 'feuzon', 'soundlegend', 'founders-toast'].includes(product.id);
+  const productUrl = isArtisan ? `/artisan-shop/${product.id}` : `/merch/${product.id}`;
 
-  const productUrl = isArtisan
-    ? `/artisan-shop/${product.id}`
-    : `/merch/${product.id}`;
+  // ✅ Scroll-to-top wrapper
+  const handleNavigate = () => {
+    navigate(productUrl, { replace: false });
+  
+    // Wait for route to render before scrolling
+    const scrollToTopAfterRender = () => {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          const scrollContainer =
+            document.querySelector('.app-container') ||
+            document.querySelector('.ourcraft-container') ||
+            document.documentElement || // <html>
+            document.body;
+  
+          scrollContainer.scrollTo({ top: 0, behavior: 'auto' });
+        });
+      });
+    };
+  
+    scrollToTopAfterRender();
+  };
 
   return (
     <div className="preorder-card">
       {/* Product Image */}
       <div
         className="preorder-image-container"
-        onClick={() => navigate(productUrl)}
+        onClick={handleNavigate}
         onKeyDown={(e) => {
           if (e.key === 'Enter' || e.key === ' ') {
-            navigate(productUrl);
+            handleNavigate();
           }
         }}
         role="button"
@@ -77,7 +88,7 @@ const ArtisanShopCard = ({ product }) => {
           <div className="preorder-button-container">
             <button
               className={buttonClass}
-              onClick={() => navigate(productUrl)}
+              onClick={handleNavigate}
               disabled={product.currentQuantity === 0}
             >
               {buttonText}

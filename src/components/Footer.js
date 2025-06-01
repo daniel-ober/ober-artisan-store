@@ -11,18 +11,16 @@ import {
 
 const Footer = ({ navbarLinks = [] }) => {
   const sortedNavbarLinks = navbarLinks
-    .filter((link) => link.enabled && link.name.toLowerCase() !== 'home') // ✅ Filter out Home
+    .filter((link) => link.enabled && link.name.toLowerCase() !== 'home')
     .sort((a, b) => a.order - b.order);
 
   const { isDarkMode, setIsDarkMode } = useContext(DarkModeContext);
 
   useEffect(() => {
-    // ✅ Ensure light mode is default
     const savedMode = localStorage.getItem('darkMode');
     const defaultMode = savedMode === 'true';
-
     setIsDarkMode(defaultMode);
-    document.body.classList.remove('dark', 'light'); // Reset first
+    document.body.classList.remove('dark', 'light');
     document.body.classList.add(defaultMode ? 'dark' : 'light');
   }, [setIsDarkMode]);
 
@@ -30,9 +28,18 @@ const Footer = ({ navbarLinks = [] }) => {
     const newMode = !isDarkMode;
     setIsDarkMode(newMode);
     localStorage.setItem('darkMode', newMode.toString());
-
     document.body.classList.remove('dark', 'light');
     document.body.classList.add(newMode ? 'dark' : 'light');
+  };
+
+  const handleScrollTop = () => {
+    setTimeout(() => {
+      const html = document.documentElement;
+      const body = document.body;
+  
+      html.scrollTop = 0;
+      body.scrollTop = 0;
+    }, 10);
   };
 
   return (
@@ -41,62 +48,60 @@ const Footer = ({ navbarLinks = [] }) => {
       <div className="footer-sitemap">
         <div className="footer-title">Sitemap</div>
         <ul>
-          {/* ✅ Manually added "Home" link */}
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/" onClick={handleScrollTop}>Home</Link>
           </li>
-
-          {/* ✅ Render the remaining navbar links from Firebase */}
           {sortedNavbarLinks.map((link, index) => (
             <li key={index}>
-              <Link to={`/${link.name.toLowerCase().replace(/\s+/g, '-')}`}>
+              <Link
+                to={`/${link.name.toLowerCase().replace(/\s+/g, '-')}`}
+                onClick={handleScrollTop}
+              >
                 {link.label}
               </Link>
             </li>
           ))}
-
-          {/* Additional fixed footer links */}
           <li>
-            <Link to="/return-policy">Return Policy</Link>
+            <Link to="/return-policy" onClick={handleScrollTop}>Return Policy</Link>
           </li>
           <li>
-            <Link to="/privacy-policy">Privacy Policy</Link>
+            <Link to="/privacy-policy" onClick={handleScrollTop}>Privacy Policy</Link>
           </li>
           <li>
-            <Link to="/terms-of-service">Terms of Service</Link>
+            <Link to="/terms-of-service" onClick={handleScrollTop}>Terms of Service</Link>
           </li>
         </ul>
       </div>
 
-      {/* Social Media Links */}
-{/* Social Media Icons */}
-<div className="footer-socials">
-  <a
-    href="https://www.facebook.com/profile.php?id=61570228293616"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Facebook"
-  >
-    <FontAwesomeIcon icon={faFacebookF} />
-  </a>
-  <a
-    href="https://www.instagram.com/oberartisandrums/"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Instagram"
-  >
-    <FontAwesomeIcon icon={faInstagram} />
-  </a>
-  <a
-    href="https://www.youtube.com/@oberartisandrums"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="YouTube"
-  >
-    <FontAwesomeIcon icon={faYoutube} />
-  </a>
-</div>
-      {/* Bottom Row: Contact & Copyright */}
+      {/* Social Media Icons */}
+      <div className="footer-socials">
+        <a
+          href="https://www.facebook.com/profile.php?id=61570228293616"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Facebook"
+        >
+          <FontAwesomeIcon icon={faFacebookF} />
+        </a>
+        <a
+          href="https://www.instagram.com/oberartisandrums/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram"
+        >
+          <FontAwesomeIcon icon={faInstagram} />
+        </a>
+        <a
+          href="https://www.youtube.com/@oberartisandrums"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="YouTube"
+        >
+          <FontAwesomeIcon icon={faYoutube} />
+        </a>
+      </div>
+
+      {/* Footer Bottom */}
       <div className="footer-bottom">
         <div className="footer-copyright">
           <p>
@@ -105,7 +110,8 @@ const Footer = ({ navbarLinks = [] }) => {
           </p>
         </div>
       </div>
-      {/* 🔥 Move Dark Mode Toggle Here */}
+
+      {/* Dark Mode Toggle */}
       <div className="footer-darkmode-toggle">
         <button className="footer-theme-toggle" onClick={toggleDarkMode}>
           {isDarkMode ? 'Light Mode' : 'Dark Mode'}
