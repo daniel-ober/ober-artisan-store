@@ -82,7 +82,12 @@ const ManageOrders = () => {
     const filtered = ordersList.filter((order) => {
       if (hideFulfilled) {
         const status = (order.status || '').toLowerCase();
-        if (status === 'fulfilled' || status === 'canceled') return false;
+        if (
+          status === 'fulfilled' ||
+          status === 'completed' || // 🔧 ADD THIS
+          status === 'canceled'
+        )
+          return false;
       }
       return true;
     });

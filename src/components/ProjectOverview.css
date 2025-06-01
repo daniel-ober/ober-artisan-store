@@ -1,0 +1,84 @@
+/* ProjectOverview.css */
+
+.project-overview-wrapper {
+    padding: 1.5rem;
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    overflow-y: auto;
+  }
+  
+  .project-overview-section {
+    margin-bottom: 2rem;
+  }
+  
+  .project-overview-section h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #333;
+    padding-bottom: 0.5rem;
+  }
+  
+  .project-overview-section p {
+    margin: 0.5rem 0;
+  }
+  
+  .project-overview-section strong {
+    display: inline-block;
+    width: 180px;
+    font-weight: 600;
+    color: #ccc;
+  }
+  
+  .project-overview-input,
+  .project-overview-select {
+    background-color: #111;
+    color: #fff;
+    border: 1px solid #444;
+    border-radius: 4px;
+    padding: 0.4rem 0.6rem;
+    margin-left: 0.5rem;
+    width: 200px;
+    font-size: 0.95rem;
+  }
+  
+  .project-overview-section input[type="text"],
+  .project-overview-section input[type="email"],
+  .project-overview-section input[type="tel"],
+  .project-overview-section input[type="file"],
+  .project-overview-section input[type="number"] {
+    background-color: #111;
+    color: #fff;
+    border: 1px solid #444;
+    border-radius: 4px;
+    padding: 0.4rem 0.6rem;
+    width: 220px;
+    font-size: 0.95rem;
+    margin-left: 0.5rem;
+  }
+  
+  .project-overview-section input[type="file"] {
+    padding: 0.2rem;
+    margin-top: 0.4rem;
+  }
+  
+  .project-overview-section textarea {
+    background-color: #111;
+    color: #fff;
+    border: 1px solid #444;
+    border-radius: 4px;
+    padding: 0.6rem;
+    width: 100%;
+    font-size: 0.95rem;
+  }
+  
+  .project-overview-section select {
+    background-color: #111;
+    color: #fff;
+    border: 1px solid #444;
+    border-radius: 4px;
+    padding: 0.4rem;
+    margin-left: 0.5rem;
+    font-size: 0.95rem;
+  }

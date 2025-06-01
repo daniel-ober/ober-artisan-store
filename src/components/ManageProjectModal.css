@@ -12,13 +12,13 @@
   }
   
   .manage-project-modal-content {
-    background: white;
+    background: #fff;
     width: 90%;
     height: 90%;
-    border-radius: 10px;
+    border-radius: 12px;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
     overflow: hidden;
     font-family: 'Inter', sans-serif;
   }
@@ -29,37 +29,41 @@
     align-items: center;
     padding: 1rem 1.5rem;
     border-bottom: 1px solid #ddd;
+    background-color: #fafafa;
   }
   
   header h2 {
     margin: 0;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
+    font-weight: 600;
   }
   
   .close-modal-btn {
     background: none;
     border: none;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
+    font-weight: 400;
     cursor: pointer;
   }
   
   .modal-body {
     display: flex;
     flex: 1;
-    overflow: auto;
+    overflow: hidden;
   }
   
   .sidebar {
     width: 240px;
-    background: #f8f8f8;
-    border-right: 1px solid #ddd;
+    background: #f4f4f4;
+    border-right: 1px solid #e0e0e0;
     padding: 1rem 0;
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
   }
   
   .sidebar button {
-    padding: 0.75rem 1.25rem;
+    padding: 0.85rem 1.25rem;
     border: none;
     background: none;
     text-align: left;
@@ -69,7 +73,7 @@
   }
   
   .sidebar button:hover {
-    background-color: #eee;
+    background-color: #e9e9e9;
   }
   
   .sidebar button.active {
@@ -91,17 +95,17 @@
   
   .project-details,
   .customer-details {
-    background: #f9f9f9;
-    padding: 1rem 1.25rem;
-    border: 1px solid #ccc;
-    border-radius: 6px;
+    background: #fcfcfc;
+    padding: 1.2rem 1.4rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
     font-size: 0.95rem;
     line-height: 1.6;
   }
   
   .project-details p,
   .customer-details p {
-    margin: 0.25rem 0;
+    margin: 0.4rem 0;
   }
   
   .artisan-notes {
@@ -114,9 +118,12 @@
   select,
   textarea {
     width: 100%;
-    padding: 0.4rem;
-    border-radius: 4px;
+    padding: 0.5rem;
+    border-radius: 5px;
     border: 1px solid #ccc;
+    font-size: 0.9rem;
+    background-color: #fff;
+    color: #222;
   }
   
   textarea {
@@ -126,17 +133,59 @@
   
   .save-button,
   .edit-button {
-    margin-top: 1.5rem;
-    padding: 0.6rem 1.2rem;
+    margin-top: 2rem;
+    padding: 0.65rem 1.5rem;
     font-weight: 600;
     border: none;
     background-color: #111;
     color: #fff;
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
+    transition: background-color 0.2s ease;
   }
   
   .save-button:hover,
   .edit-button:hover {
     background-color: #333;
+  }
+  
+  /* Upload section cleanup */
+  label {
+    display: block;
+    margin-top: 1.2rem;
+    font-weight: 500;
+    color: #333;
+  }
+  
+  input[type="file"] {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .uploaded-files {
+    margin-top: 1rem;
+  }
+  
+  .upload-list-label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  
+  .uploaded-files ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+  }
+  
+  .uploaded-files li {
+    margin: 0.3rem 0;
+  }
+  
+  .uploaded-files a {
+    color: #0073e6;
+    text-decoration: none;
+  }
+  
+  .uploaded-files a:hover {
+    text-decoration: underline;
   }

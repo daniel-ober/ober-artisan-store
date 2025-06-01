@@ -1,11 +1,11 @@
-// src/components/ManageProjectModal.js
+// Updated ManageProjectModal.js with Overview split out
 
 import React, { useState, useEffect } from 'react';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
-import Step1WoodPreparation from './Step1WoodPreparation';
-import { storage } from '../firebaseConfig';
 import { doc, setDoc } from 'firebase/firestore';
-import { db } from '../firebaseConfig';
+import { storage, db } from '../firebaseConfig';
+import Step1WoodPreparation from './Step1WoodPreparation';
+import ProjectOverview from './ProjectOverview';
 import './ManageProjectModal.css';
 
 const buildPhases = [
@@ -13,647 +13,108 @@ const buildPhases = [
   { key: 'Step 1. Wood Preparation', label: 'Step 1. Wood Preparation' },
   { key: 'Step 2. Shell Construction', label: 'Step 2. Shell Construction' },
   { key: 'Step 3. Fine-Tuning', label: 'Step 3. Fine-Tuning' },
-  {
-    key: 'Step 4. Shell Exterior Finish',
-    label: 'Step 4. Shell Exterior Finish',
-  },
+  { key: 'Step 4. Shell Exterior Finish', label: 'Step 4. Shell Exterior Finish' },
   { key: 'Step 5. Bearing Edges', label: 'Step 5. Bearing Edges' },
   { key: 'Step 6. Snare Bed Cutting', label: 'Step 6. Snare Bed Cutting' },
   { key: 'Step 7. Hardware Drilling', label: 'Step 7. Hardware Drilling' },
   { key: 'Step 8. Hardware Assembly', label: 'Step 8. Hardware Assembly' },
-  {
-    key: 'Step 9. Tuning and Detailing',
-    label: 'Step 9. Tuning and Detailing',
-  },
+  { key: 'Step 9. Tuning and Detailing', label: 'Step 9. Tuning and Detailing' },
   { key: 'Step 10. Quality Check', label: 'Step 10. Quality Check' },
-];
-
-const woodSpeciesOptions = [
-  'Ash',
-  'Beech',
-  'Birch',
-  'Bubinga',
-  'Cherry',
-  'Jatoba',
-  'Kapur',
-  'Leopardwood',
-  'Mahogany',
-  'Mango',
-  'Maple',
-  'Oak',
-  'Padauk',
-  'Poplar',
-  'Purpleheart',
-  'Sapele',
-  'Walnut',
-  'Other',
 ];
 
 const ManageProjectModal = ({ isOpen, onClose, projectData, onSave }) => {
   const [selectedTab, setSelectedTab] = useState('overview');
   const [editableData, setEditableData] = useState({});
-  const [highResMockups, setHighResMockups] = useState([]);
-  const [uploadedDocuments, setUploadedDocuments] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
-    console.log('Initial projectData:', projectData);
+    if (!projectData) return;
 
     const convertTimestamps = (obj) => {
-        if (!obj || typeof obj !== 'object') return obj;
-      
-        // Detect Firestore Timestamp
-        if (Object.prototype.hasOwnProperty.call(obj, 'seconds') &&
-            Object.prototype.hasOwnProperty.call(obj, 'nanoseconds')) {
-          return new Date(obj.seconds * 1000).toISOString(); // ISO string ensures safe rendering
-        }
-      
-        if (Array.isArray(obj)) {
-          return obj.map(convertTimestamps);
-        }
-      
-        const newObj = {};
-        for (const key in obj) {
-          newObj[key] = convertTimestamps(obj[key]);
-        }
-        return newObj;
-      };
+      if (!obj || typeof obj !== 'object') return obj;
+      if ('seconds' in obj && 'nanoseconds' in obj) {
+        return new Date(obj.seconds * 1000).toISOString();
+      }
+      if (Array.isArray(obj)) return obj.map(convertTimestamps);
+      const newObj = {};
+      for (const key in obj) {
+        newObj[key] = convertTimestamps(obj[key]);
+      }
+      return newObj;
+    };
 
-    if (projectData) {
-      const normalizedData = convertTimestamps(projectData);
-
-      const updatedData = {
-        ...normalizedData,
-        customer: {
-          name: normalizedData?.customerName || 'N/A',
-          email: normalizedData?.customer?.email || 'N/A',
-          phone: normalizedData?.customer?.phone || 'N/A',
-          address: normalizedData?.customer?.address || {
-            street: 'N/A',
-            city: 'N/A',
-            state: 'N/A',
-            zip: 'N/A',
-          },
-        },
-        woodPreparation: {
-          checklist: normalizedData?.woodPreparation?.checklist || [
-            { task: 'Verify wood species and grade.', completed: false },
-            {
-              task: 'Inspect the wood for defects (knots, cracks, warping).',
-              completed: false,
-            },
-            {
-              task: 'Moisture content testing (ensure wood is within acceptable moisture range).',
-              completed: false,
-            },
-            {
-              task: 'Measure and cut wood to required dimensions.',
-              completed: false,
-            },
-            {
-              task: 'Label and sort wood for specific parts (e.g., shell, staves).',
-              completed: false,
-            },
-            {
-              task: 'Sand and smooth surfaces for bonding or assembly.',
-              completed: false,
-            },
-            {
-              task: 'Seal or stabilize wood, if required (optional for some projects).',
-              completed: false,
-            },
-          ],
-          notes: normalizedData?.woodPreparation?.notes || '',
-          startTime: normalizedData?.woodPreparation?.startTime || null,
-          completeTime: normalizedData?.woodPreparation?.completeTime || null,
-        },
-      };
-
-      console.log('Normalized + Updated Editable Data:', updatedData);
-      setEditableData(updatedData);
-    }
+    const normalizedData = convertTimestamps(projectData);
+    setEditableData(normalizedData);
   }, [projectData]);
-
-  const formatDate = (value) => {
-    if (!value) return 'N/A';
-    if (typeof value === 'string') return new Date(value).toLocaleString();
-    if (value?.seconds) return new Date(value.seconds * 1000).toLocaleString();
-    if (value instanceof Date) return value.toLocaleString();
-    return 'Invalid date';
-  };
-
-  const handleEditToggle = () => {
-    setIsEditing(!isEditing);
-  };
-
-  const handleChange = (field, value) => {
-    setEditableData((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
-  };
-
-  const handleFileUpload = async (files, folder) => {
-    const projectId = projectData.id;
-    const uploadPromises = Array.from(files).map((file) => {
-      const storageRef = ref(
-        storage,
-        `projects/${projectId}/${folder}/${file.name}`
-      );
-      return uploadBytesResumable(storageRef, file).then((snapshot) =>
-        getDownloadURL(snapshot.ref)
-      );
-    });
-
-    return Promise.all(uploadPromises);
-  };
-
-  const handleMockupUpload = async (e) => {
-    const files = e.target.files;
-    const urls = await handleFileUpload(files, 'mockups');
-    setHighResMockups((prev) => [...prev, ...urls]);
-  };
-
-  const handleDocumentUpload = async (e) => {
-    const files = e.target.files;
-    const urls = await handleFileUpload(files, 'documents');
-    setUploadedDocuments((prev) => [...prev, ...urls]);
-  };
-
-  const handleSave = async () => {
-    try {
-      const projectRef = doc(db, 'projects', projectData.id);
-      await setDoc(projectRef, editableData, { merge: true }); // Save entire editableData object to Firestore
-      console.log('Data saved successfully!');
-      setIsEditing(false); // Set editing mode to false after saving
-    } catch (error) {
-      console.error('Error saving data to Firestore:', error);
-    }
-  };
-
-  const handleChecklistToggle = (stepKey, itemIndex) => {
-    const updatedChecklist = editableData[stepKey]?.checklist.map(
-      (item, index) =>
-        index === itemIndex ? { ...item, completed: !item.completed } : item
-    );
-
-    setEditableData((prev) => ({
-      ...prev,
-      [stepKey]: {
-        ...prev[stepKey],
-        checklist: updatedChecklist,
-      },
-    }));
-
-    saveData({
-      [stepKey]: { ...editableData[stepKey], checklist: updatedChecklist },
-    });
-  };
-
-  const handleStepNotes = (stepKey, notes) => {
-    setEditableData((prev) => ({
-      ...prev,
-      [stepKey]: {
-        ...prev[stepKey],
-        notes,
-      },
-    }));
-  };
-
-  const handleStepTimestamp = (stepKey, type) => {
-    const currentTime = new Date().toISOString();
-
-    setEditableData((prev) => ({
-      ...prev,
-      [stepKey]: {
-        ...prev[stepKey],
-        [`${type}Time`]: currentTime,
-      },
-    }));
-
-    saveData({
-      [stepKey]: { ...editableData[stepKey], [`${type}Time`]: currentTime },
-    });
-  };
-
-  const saveData = async (updatedFields) => {
-    try {
-      await setDoc(doc(db, 'projects', projectData.id), updatedFields, {
-        merge: true,
-      });
-    } catch (error) {
-      console.error('Error saving data:', error);
-    }
-  };
-
-  if (!isOpen) return null;
 
   const saveToFirestore = async (updatedData = {}) => {
     try {
-      const projectRef = doc(db, "projects", editableData.id);
+      const projectRef = doc(db, 'projects', editableData.id);
       const dataToSave = {
         ...editableData,
         ...updatedData,
       };
-      await setDoc(projectRef, dataToSave);
-      console.log("Data saved successfully!");
+      await setDoc(projectRef, dataToSave, { merge: true });
+      console.log('Data saved successfully!');
     } catch (error) {
-      console.error("Error updating project:", error);
+      console.error('Error updating project:', error);
     }
+  };
+
+  const handleChecklistToggle = (stepKey, itemIndex) => {
+    const updatedChecklist = editableData[stepKey]?.checklist.map((item, i) =>
+      i === itemIndex ? { ...item, completed: !item.completed } : item
+    );
+    const updatedStepData = {
+      ...editableData[stepKey],
+      checklist: updatedChecklist,
+    };
+    setEditableData((prev) => ({
+      ...prev,
+      [stepKey]: updatedStepData,
+    }));
+    saveToFirestore({ [stepKey]: updatedStepData });
   };
 
   const renderContent = () => {
     if (selectedTab === 'overview') {
       return (
-        <>
-          <div className="project-overview-content">
-            <h3>Project Details</h3>
-            <div className="project-details">
-              <p>
-                <strong>Project ID:</strong> {editableData?.id || 'N/A'}
-              </p>
-              <p>
-                <strong>Parent Order ID:</strong>{' '}
-                {isEditing ? (
-                  <input
-                    type="text"
-                    value={editableData?.orderId || ''}
-                    onChange={(e) => handleChange('orderId', e.target.value)}
-                  />
-                ) : (
-                  <a
-                    href={`/orders/${editableData?.orderId}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {editableData?.orderId || 'N/A'}
-                  </a>
-                )}
-              </p>
-              <p>
-                <strong>Start Date:</strong>{' '}
-                {formatDate(editableData?.startDate)}
-              </p>
-              <p>
-                <strong>Target Completion:</strong>{' '}
-                {formatDate(editableData?.targetCompletion)}
-              </p>
-            </div>
-
-            <h3>Artisan Notes</h3>
-            <div className="artisan-notes">
-              <p>
-                <strong>Artisan Line:</strong>{' '}
-                {isEditing ? (
-                  <select
-                    value={editableData?.artisanLine || ''}
-                    onChange={(e) =>
-                      handleChange('artisanLine', e.target.value)
-                    }
-                  >
-                    <option value="">Select Artisan Line</option>
-                    <option value="Heritage">Heritage</option>
-                    <option value="Heritage+">Heritage+</option>
-                    <option value="FEUZON">FEUZON</option>
-                    <option value="ONE">ONE</option>
-                    <option value="DREAMFEATHER">DREAMFEATHER</option>
-                    <option value="Custom Shop">Custom Shop</option>
-                  </select>
-                ) : (
-                  editableData?.artisanLine || 'N/A'
-                )}
-              </p>
-              <p>
-                <strong>Shell Depth:</strong>{' '}
-                {isEditing ? (
-                  <select
-                    value={editableData?.shellDepth || ''}
-                    onChange={(e) => handleChange('shellDepth', e.target.value)}
-                  >
-                    {[...Array(18).keys()].map((i) => (
-                      <option key={i + 3} value={`${i + 3}"`}>
-                        {i + 3}&quot;
-                      </option>
-                    ))}
-                  </select>
-                ) : (
-                  editableData?.shellDepth || 'N/A'
-                )}
-              </p>
-              <p>
-                <strong>Width:</strong>{' '}
-                {isEditing ? (
-                  <select
-                    value={editableData?.width || ''}
-                    onChange={(e) => handleChange('width', e.target.value)}
-                  >
-                    {[...Array(19).keys()].map((i) => (
-                      <option key={i + 6} value={`${i + 6}"`}>
-                        {i + 6}&quot;
-                      </option>
-                    ))}
-                  </select>
-                ) : (
-                  editableData?.width || 'N/A'
-                )}
-              </p>
-              <p>
-                <strong>Weight:</strong>{' '}
-                {isEditing ? (
-                  <input
-                    type="text"
-                    value={editableData?.weight || ''}
-                    onChange={(e) => handleChange('weight', e.target.value)}
-                  />
-                ) : (
-                  editableData?.weight || 'N/A'
-                )}
-              </p>
-              <p>
-                <strong>Thickness:</strong>{' '}
-                {isEditing ? (
-                  <input
-                    type="text"
-                    value={editableData?.thickness || ''}
-                    onChange={(e) => handleChange('thickness', e.target.value)}
-                  />
-                ) : (
-                  editableData?.thickness || 'N/A'
-                )}
-              </p>
-              <p>
-                <strong>Bearing Edge:</strong>{' '}
-                {isEditing ? (
-                  <select
-                    value={editableData?.bearingEdge || ''}
-                    onChange={(e) =>
-                      handleChange('bearingEdge', e.target.value)
-                    }
-                  >
-                    <option value="">Select Edge</option>
-                    <option value="30 degrees">30 degrees</option>
-                    <option value="45 degrees">45 degrees</option>
-                    <option value="60 degrees">60 degrees</option>
-                    <option value="Round Over">Round Over</option>
-                    <option value="Double 45 degrees">Double 45 degrees</option>
-                    <option value="Other">Other</option>
-                  </select>
-                ) : (
-                  editableData?.bearingEdge || 'N/A'
-                )}
-              </p>
-              <p>
-                <strong>Wood Species:</strong>{' '}
-                {isEditing ? (
-                  <select
-                    value={editableData?.woodSpecies || ''}
-                    onChange={(e) =>
-                      handleChange('woodSpecies', e.target.value)
-                    }
-                  >
-                    {woodSpeciesOptions.map((wood) => (
-                      <option key={wood} value={wood}>
-                        {wood}
-                      </option>
-                    ))}
-                  </select>
-                ) : (
-                  editableData?.woodSpecies || 'N/A'
-                )}
-              </p>
-              <p>
-                <strong>Custom Wood Species:</strong>{' '}
-                {isEditing ? (
-                  <input
-                    type="text"
-                    value={editableData?.customWoodSpecies || ''}
-                    onChange={(e) =>
-                      handleChange('customWoodSpecies', e.target.value)
-                    }
-                  />
-                ) : (
-                  editableData?.customWoodSpecies || 'N/A'
-                )}
-              </p>
-            </div>
-
-            <h3>Customer Details</h3>
-            <div className="customer-details">
-              <p>
-                <strong>Name:</strong>{' '}
-                {isEditing ? (
-                  <input
-                    type="text"
-                    value={editableData?.customer?.name || ''}
-                    onChange={(e) =>
-                      handleChange('customer', {
-                        ...editableData.customer,
-                        name: e.target.value,
-                      })
-                    }
-                  />
-                ) : (
-                  editableData?.customer?.name || 'N/A'
-                )}
-              </p>
-              <p>
-                <strong>Email:</strong>{' '}
-                {isEditing ? (
-                  <input
-                    type="email"
-                    value={editableData?.customer?.email || ''}
-                    onChange={(e) =>
-                      handleChange('customer', {
-                        ...editableData.customer,
-                        email: e.target.value,
-                      })
-                    }
-                  />
-                ) : (
-                  editableData?.customer?.email || 'N/A'
-                )}
-              </p>
-              <p>
-                <strong>Phone:</strong>{' '}
-                {isEditing ? (
-                  <input
-                    type="tel"
-                    value={editableData?.customer?.phone || ''}
-                    onChange={(e) =>
-                      handleChange('customer', {
-                        ...editableData.customer,
-                        phone: e.target.value,
-                      })
-                    }
-                  />
-                ) : (
-                  editableData?.customer?.phone || 'N/A'
-                )}
-              </p>
-              <p>
-                <strong>Address:</strong>{' '}
-                {isEditing ? (
-                  <>
-                    <input
-                      type="text"
-                      placeholder="Street"
-                      value={editableData?.customer?.address?.street || ''}
-                      onChange={(e) =>
-                        handleChange('customer', {
-                          ...editableData.customer,
-                          address: {
-                            ...editableData.customer.address,
-                            street: e.target.value,
-                          },
-                        })
-                      }
-                    />
-                    <input
-                      type="text"
-                      placeholder="City"
-                      value={editableData?.customer?.address?.city || ''}
-                      onChange={(e) =>
-                        handleChange('customer', {
-                          ...editableData.customer,
-                          address: {
-                            ...editableData.customer.address,
-                            city: e.target.value,
-                          },
-                        })
-                      }
-                    />
-                    <input
-                      type="text"
-                      placeholder="State"
-                      value={editableData?.customer?.address?.state || ''}
-                      onChange={(e) =>
-                        handleChange('customer', {
-                          ...editableData.customer,
-                          address: {
-                            ...editableData.customer.address,
-                            state: e.target.value,
-                          },
-                        })
-                      }
-                    />
-                    <input
-                      type="text"
-                      placeholder="Zip"
-                      value={editableData?.customer?.address?.zip || ''}
-                      onChange={(e) =>
-                        handleChange('customer', {
-                          ...editableData.customer,
-                          address: {
-                            ...editableData.customer.address,
-                            zip: e.target.value,
-                          },
-                        })
-                      }
-                    />
-                  </>
-                ) : (
-                  [
-                    editableData?.customer?.address?.street,
-                    editableData?.customer?.address?.city,
-                    editableData?.customer?.address?.state,
-                    editableData?.customer?.address?.zip,
-                  ]
-                    .filter(Boolean)
-                    .map((v) => String(v))
-                    .join(', ')
-                )}
-              </p>
-            </div>
-          </div>
-
-          <div>
-            <h3>Uploads</h3>
-            <label>
-              High Resolution Mockups:
-              <input
-                type="file"
-                multiple
-                accept="image/*"
-                onChange={handleMockupUpload}
-              />
-            </label>
-            <label>
-              Documents:
-              <input type="file" multiple onChange={handleDocumentUpload} />
-            </label>
-          </div>
-        </>
+        <ProjectOverview
+          editableData={editableData}
+          isEditing={isEditing}
+          onEditToggle={() => setIsEditing(!isEditing)}
+          onChange={(field, value) =>
+            setEditableData((prev) => ({
+              ...prev,
+              [field]: value,
+            }))
+          }
+          onSave={saveToFirestore}
+        />
       );
     }
 
     if (selectedTab === 'Step 1. Wood Preparation') {
       return (
         <Step1WoodPreparation
-  stepData={editableData.woodPreparation}
-  relatedData={{
-    woodSpecies: editableData.woodSpecies,
-    thickness: editableData.thickness,
-    bearingEdge: editableData.bearingEdge,
-  }}
-  onToggleChecklist={(index) => {
-    const updatedChecklist = editableData.woodPreparation.checklist.map((item, i) =>
-      i === index ? { ...item, completed: !item.completed } : item
-    );
-
-    setEditableData((prev) => ({
-      ...prev,
-      woodPreparation: {
-        ...prev.woodPreparation,
-        checklist: updatedChecklist,
-      },
-    }));
-
-    saveToFirestore({
-      woodPreparation: {
-        ...editableData.woodPreparation,
-        checklist: updatedChecklist,
-      },
-    });
-  }}
-  onStart={(startTime) => {
-    setEditableData((prev) => ({
-      ...prev,
-      woodPreparation: {
-        ...prev.woodPreparation,
-        startTime,
-      },
-    }));
-
-    saveToFirestore({
-      woodPreparation: {
-        ...editableData.woodPreparation,
-        startTime,
-      },
-    });
-  }}
-  onComplete={(completeTime) => {
-    setEditableData((prev) => ({
-      ...prev,
-      woodPreparation: {
-        ...prev.woodPreparation,
-        completeTime,
-      },
-    }));
-
-    saveToFirestore({
-      woodPreparation: {
-        ...editableData.woodPreparation,
-        completeTime,
-      },
-    });
-  }}
-  onSaveToFirestore={saveToFirestore}
-/>
+          stepData={editableData.woodPreparation}
+          relatedData={{
+            woodSpecies: editableData.woodSpecies,
+            thickness: editableData.thickness,
+            bearingEdge: editableData.bearingEdge,
+          }}
+          onToggleChecklist={(index) =>
+            handleChecklistToggle('woodPreparation', index)
+          }
+          onSaveToFirestore={saveToFirestore}
+        />
       );
     }
 
-    return <div>Other tab content...</div>;
+    return <div style={{ padding: '1rem' }}>Coming soon...</div>;
   };
+
+  if (!isOpen) return null;
 
   return (
     <div className="manage-project-modal-overlay">
@@ -678,14 +139,9 @@ const ManageProjectModal = ({ isOpen, onClose, projectData, onSave }) => {
           </aside>
           <main>
             {renderContent()}
-            {isEditing && (
-              <button onClick={handleSave} className="save-button">
+            {isEditing && selectedTab === 'overview' && (
+              <button onClick={() => saveToFirestore()} className="save-button">
                 Save
-              </button>
-            )}
-            {!isEditing && (
-              <button onClick={handleEditToggle} className="edit-button">
-                Edit
               </button>
             )}
           </main>

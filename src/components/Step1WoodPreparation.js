@@ -1,174 +1,116 @@
-import React, { useState } from 'react';
-import { formatDate } from './ManageProjectModal/utils';
+import React, { useState, useEffect, useRef } from 'react';
+import './Step1WoodPreparation.css';
 
-const Step1WoodPreparation = ({
-  stepData,
-  onToggleChecklist,
-  onSaveToFirestore,
-  relatedData,
-}) => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [editedData, setEditedData] = useState(stepData);
-  const [currentSessionStart, setCurrentSessionStart] = useState(null);
+const Step1WoodPreparation = ({ stepData, onToggleChecklist, relatedData, onSaveToFirestore }) => {
+  const [timers, setTimers] = useState([]);
+  const intervals = useRef({});
 
-  const handleStart = () => {
-    setCurrentSessionStart(new Date().toISOString());
+  useEffect(() => {
+    const initialTimers = stepData?.checklist?.map((item) => ({
+      running: false,
+      seconds: item.totalSeconds || 0,
+    })) || [];
+    setTimers(initialTimers);
+  }, [stepData]);
+
+  const toggleTimer = (index) => {
+    setTimers((prev) => {
+      const updated = [...prev];
+      updated[index].running = !updated[index].running;
+      return updated;
+    });
+
+    if (!intervals.current[index]) {
+      intervals.current[index] = setInterval(() => {
+        setTimers((prev) => {
+          const updated = [...prev];
+          if (updated[index].running) {
+            updated[index].seconds += 1;
+          }
+          return updated;
+        });
+      }, 1000);
+    }
   };
 
-  const handleStop = async () => {
-    if (!currentSessionStart) return;
+  const handleCheckboxToggle = (index) => {
+    const updatedTimers = [...timers];
+    updatedTimers[index].running = false;
+    clearInterval(intervals.current[index]);
 
-    const stopTime = new Date().toISOString();
-    const newSession = {
-      startTime: currentSessionStart,
-      stopTime,
+    // Update local state
+    setTimers(updatedTimers);
+
+    // Update checklist item with completion + total time
+    const updatedItem = {
+      ...stepData.checklist[index],
+      completed: true,
+      totalSeconds: updatedTimers[index]?.seconds || 0,
     };
 
-    const updatedSessions = [...(stepData.workSessions || []), newSession];
+    const updatedChecklist = stepData.checklist.map((item, i) =>
+      i === index ? updatedItem : item
+    );
 
+    // Persist full woodPreparation object
     const updatedStepData = {
       ...stepData,
-      workSessions: updatedSessions,
+      checklist: updatedChecklist,
     };
 
-    await onSaveToFirestore({ woodPreparation: updatedStepData });
-    setCurrentSessionStart(null);
-  };
-
-  const handleComplete = async () => {
-    const completeTime = new Date().toISOString();
-    const updatedStepData = {
-      ...stepData,
-      completeTime,
-    };
-    await onSaveToFirestore({ woodPreparation: updatedStepData });
-  };
-
-  const handleSessionDelete = async (index) => {
-    const updatedSessions = [...(stepData.workSessions || [])];
-    updatedSessions.splice(index, 1);
-
-    await onSaveToFirestore({
-      woodPreparation: {
-        ...stepData,
-        workSessions: updatedSessions,
-      },
+    // Update parent and Firestore
+    onToggleChecklist(index); // for local UI
+    onSaveToFirestore({
+      woodPreparation: updatedStepData,
     });
   };
 
-  const calculateMinutes = (start, stop) => {
-    const startTime = new Date(start);
-    const stopTime = new Date(stop);
-    return Math.round((stopTime - startTime) / 60000);
-  };
-
-  const totalTime = (stepData.workSessions || []).reduce((total, session) => {
-    return total + calculateMinutes(session.startTime, session.stopTime);
-  }, 0);
-
-  const handleSave = async () => {
-    setIsEditing(false);
-    await onSaveToFirestore({
-      woodPreparation: {
-        ...stepData,
-        ...editedData,
-      },
-    });
-  };
-
-  const handleCancel = () => {
-    setEditedData(stepData);
-    setIsEditing(false);
-  };
-
-  const handleInputChange = (field, value) => {
-    setEditedData((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
+  const formatTime = (seconds) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
   };
 
   return (
-    <div>
-      <h3>Step 1: Wood Preparation</h3>
+    <div className="step1-container">
+      <h3 className="step1-title">Step 1: Wood Preparation</h3>
 
-      <div className="related-details">
-        <p><strong>Wood Species:</strong> {relatedData?.woodSpecies || 'N/A'}</p>
-        <p><strong>Thickness:</strong> {relatedData?.thickness || 'N/A'}</p>
-        <p><strong>Bearing Edge:</strong> {relatedData?.bearingEdge || 'N/A'}</p>
-      </div>
-
-      <div className="stage-buttons">
-        <button onClick={handleStart} disabled={!!currentSessionStart}>
-          {currentSessionStart
-            ? `Started: ${formatDate(currentSessionStart)}`
-            : 'Start'}
-        </button>
-
-        <button
-          onClick={handleStop}
-          disabled={!currentSessionStart}
-        >
-          Stop
-        </button>
-
-        <button
-          onClick={handleComplete}
-          disabled={!!stepData.completeTime}
-        >
-          {stepData.completeTime
-            ? `Completed: ${formatDate(stepData.completeTime)}`
-            : 'Mark as Complete'}
-        </button>
-      </div>
-
-      <ul>
-        {stepData.checklist?.map((item, index) => (
-          <li key={index}>
-            <label>
-              <input
-                type="checkbox"
-                checked={item.completed}
-                onChange={() => onToggleChecklist(index)}
-              />
-              {item.task}
-            </label>
-          </li>
-        ))}
-      </ul>
-
-      <textarea
-        placeholder="Notes"
-        value={isEditing ? editedData.notes || '' : stepData.notes || ''}
-        onChange={(e) => handleInputChange('notes', e.target.value)}
-        disabled={!isEditing}
-      />
-
-      <div className="edit-buttons">
-        {isEditing ? (
-          <>
-            <button onClick={handleSave}>Save</button>
-            <button onClick={handleCancel}>Cancel</button>
-          </>
-        ) : (
-          <button onClick={() => setIsEditing(true)}>Edit</button>
-        )}
-      </div>
-
-      <div className="work-session-log">
-        <h4>Work Sessions</h4>
-        {(stepData.workSessions || []).map((session, index) => (
-          <div key={index}>
-            <p>
-              <strong>Start:</strong> {formatDate(session.startTime)}<br />
-              <strong>Stop:</strong> {formatDate(session.stopTime)}<br />
-              <strong>Duration:</strong> {calculateMinutes(session.startTime, session.stopTime)} min
-            </p>
-            <button onClick={() => handleSessionDelete(index)}>Delete</button>
-            {/* Edit functionality could be added here if needed */}
-          </div>
-        ))}
-        <p><strong>Total Time:</strong> {totalTime} minutes</p>
+      <div className="step1-checklist">
+        <table className="step1-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th></th>
+              <th>Task</th>
+              <th>Total Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            {stepData?.checklist?.map((item, index) => (
+              <tr key={index}>
+                <td>
+                  {!item.completed && (
+                    <button
+                      onClick={() => toggleTimer(index)}
+                      className="timer-toggle"
+                    >
+                      {timers[index]?.running ? 'Stop' : 'Start'}
+                    </button>
+                  )}
+                </td>
+                <td>
+                  <input
+                    type="checkbox"
+                    checked={item.completed}
+                    onChange={() => handleCheckboxToggle(index)}
+                  />
+                </td>
+                <td>{item.task}</td>
+                <td>{formatTime(timers[index]?.seconds || 0)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
