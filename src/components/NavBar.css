@@ -261,8 +261,9 @@ body.dark .navbar-sticky-mini {
   }
 
   .navbar-links.open {
-    padding: 20px 0;
-    max-height: 1000px; /* You can keep this or remove for natural height */
+    padding: 32px 0 48px;
+  max-height: 1000px;
+  gap: 16px;
   }
 
   .navbar-links .nav-link {
