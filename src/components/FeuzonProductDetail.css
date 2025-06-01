@@ -52,6 +52,12 @@
     transform: scale(1.02);
 }
 
+.feuzon-header-image {
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto 2rem;
+  }
+
 /* 📌 Sound Profile Charts */
 .feuzon-sound-charts {
     width: 100%;
@@ -273,6 +279,15 @@
     .feuzon-sound-charts {
         gap: 15px;
     }
+
+    .feuzon-header-image {
+        max-width: 400px;
+      }
+
+      .feuzon-header-image {
+        max-width: 500px;
+        margin: 20px;
+      }
 }
 
 @media (max-width: 768px) {
@@ -296,5 +311,6 @@
     .feuzon-product-options button {
         font-size: 15px;
         padding: 12px;
+        margin-bottom: 20px;
     }
 }

@@ -295,7 +295,7 @@ const HeritageProductDetail = () => {
       <img
         src="/resized-logos/heritage-white.png"
         alt="HERITAGE Series"
-        className="artisanseries-header-image"
+        className="heritage-header-image"
       />
   
       <div className="heritage-product-content">
