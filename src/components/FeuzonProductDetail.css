@@ -281,12 +281,7 @@
     }
 
     .feuzon-header-image {
-        max-width: 400px;
-      }
-
-      .feuzon-header-image {
         max-width: 500px;
-        margin: 20px;
       }
 }
 
@@ -313,4 +308,9 @@
         padding: 12px;
         margin-bottom: 20px;
     }
+
+    .feuzon-header-image {
+        max-width: 300px;
+        margin-bottom: 15px;
+      }
 }
