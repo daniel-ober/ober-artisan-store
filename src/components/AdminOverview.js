@@ -20,6 +20,7 @@ import {
   FaHeadset,
   FaStar,
   FaExclamationTriangle,
+  FaThLarge,
 } from 'react-icons/fa';
 import './AdminOverview.css';
 
@@ -40,12 +41,26 @@ const AdminOverview = () => {
   const [completedPage, setCompletedPage] = useState(1);
   const itemsPerPage = 10;
 
-  const [filters, setFilters] = useState({
-    orders: true,
-    support: true,
-    slRequests: true,
-    risk: true,
-  });
+  const [activeFilter, setActiveFilter] = useState('all'); // 'all', 'orders', 'support', 'slRequests', 'risk'
+
+  const normalizeStatus = (status = '') =>
+    status.toLowerCase().replace(/\s+/g, '');
+
+  const getDisplayStatus = (status) => {
+    const normalized = normalizeStatus(status);
+    if (normalized === 'inprogress') return 'In Progress';
+    if (normalized === 'completed' || normalized === 'resolved')
+      return 'Completed';
+    return 'New';
+  };
+
+  const getStatusBadgeClass = (status) => {
+    const normalized = normalizeStatus(status);
+    if (normalized === 'inprogress') return 'badge-yellow';
+    if (normalized === 'completed' || normalized === 'resolved')
+      return 'badge-gray';
+    return 'badge-green';
+  };
 
   // Always update state with raw data per type; don't early-return based on filters.
   const updateColumnState = (type, items) => {
@@ -54,6 +69,8 @@ const AdminOverview = () => {
     const completedItems = [];
 
     for (const item of items) {
+      item.type = type; // ✅ Force type assignment so filtering works correctly
+
       let status = (item.overviewStatus || item.status || '').toLowerCase();
       if (item.type === 'risk') {
         if (status === 'in review') status = 'inprogress';
@@ -61,6 +78,7 @@ const AdminOverview = () => {
           status = 'completed';
         else status = 'new';
       }
+
       if (status === 'new') newItems.push(item);
       else if (status === 'prospecting' || status === 'inprogress')
         inProgressItems.push(item);
@@ -221,11 +239,12 @@ const AdminOverview = () => {
               : rawStatus.includes('closed')
                 ? 'completed'
                 : 'new');
-        
+
           return {
             id: doc.id,
             type: 'submission',
-            customerName: `${data.firstName || ''} ${data.lastName || ''}`.trim(),
+            customerName:
+              `${data.firstName || ''} ${data.lastName || ''}`.trim(),
             overviewStatus: derivedStatus,
             ...data,
           };
@@ -264,10 +283,10 @@ const AdminOverview = () => {
         const timestamp = data.timestamp?.seconds
           ? new Date(data.timestamp.seconds * 1000)
           : new Date();
-      
+
         const severity =
           data.score >= 0.85 ? 'High' : data.score >= 0.5 ? 'Medium' : 'Low';
-      
+
         setSelectedItem({
           id: snap.id,
           email: data.email || data.assessment?.email || 'N/A',
@@ -278,13 +297,15 @@ const AdminOverview = () => {
           source: data.source || 'N/A',
           systemHistory: data.systemHistory || [],
           status: data.status || 'New',
-          overviewStatus:
-            data.status?.toLowerCase().includes('in progress') ? 'inProgress'
-            : data.status?.toLowerCase().includes('completed') || data.status?.toLowerCase().includes('resolved') ? 'completed'
-            : 'new',
+          overviewStatus: data.status?.toLowerCase().includes('in progress')
+            ? 'inProgress'
+            : data.status?.toLowerCase().includes('completed') ||
+                data.status?.toLowerCase().includes('resolved')
+              ? 'completed'
+              : 'new',
           assessment: data.assessment || {},
         });
-      
+
         setModalType('risk');
         return;
       }
@@ -474,11 +495,12 @@ const AdminOverview = () => {
   const renderColumn = (title, items, statusKey) => {
     // First, filter items based on type:
     const filteredItems = items.filter((item) => {
-      if (item.type === 'order' && !filters.orders) return false;
-      if (item.type === 'inquiry' && !filters.support) return false;
-      if (item.type === 'submission' && !filters.slRequests) return false;
-      if (item.type === 'risk' && !filters.risk) return false;
-      return true;
+      if (activeFilter === 'all') return true;
+      if (activeFilter === 'orders') return item.type === 'order';
+      if (activeFilter === 'support') return item.type === 'inquiry';
+      if (activeFilter === 'slRequests') return item.type === 'submission';
+      if (activeFilter === 'risk') return item.type === 'risk';
+      return false;
     });
 
     let page = 1;
@@ -638,33 +660,31 @@ const AdminOverview = () => {
     <div className="admin-overview">
       <h1 className="overview-title">Admin Overview</h1>
       <div className="overview-filters-icons">
+        <FaThLarge
+          title="All"
+          onClick={() => setActiveFilter('all')}
+          className={`filter-icon ${activeFilter === 'all' ? 'enabled' : 'disabled'}`}
+        />
         <FaStar
           title="SL Requests"
-          onClick={() =>
-            setFilters((f) => ({ ...f, slRequests: !f.slRequests }))
-          }
-          className={`filter-icon ${filters.slRequests ? 'enabled' : 'disabled'}`}
+          onClick={() => setActiveFilter('slRequests')}
+          className={`filter-icon ${activeFilter === 'slRequests' ? 'enabled' : 'disabled'}`}
         />
         <FaBox
           title="Orders"
-          onClick={() => setFilters((f) => ({ ...f, orders: !f.orders }))}
-          className={`filter-icon ${filters.orders ? 'enabled' : 'disabled'}`}
+          onClick={() => setActiveFilter('orders')}
+          className={`filter-icon ${activeFilter === 'orders' ? 'enabled' : 'disabled'}`}
         />
         <FaHeadset
           title="Support"
-          onClick={() => setFilters((f) => ({ ...f, support: !f.support }))}
-          className={`filter-icon ${filters.support ? 'enabled' : 'disabled'}`}
+          onClick={() => setActiveFilter('support')}
+          className={`filter-icon ${activeFilter === 'support' ? 'enabled' : 'disabled'}`}
         />
-        <div className="risk-alert-wrapper">
-          <FaExclamationTriangle
-            title="Risk Alerts"
-            onClick={() => setFilters((f) => ({ ...f, risk: !f.risk }))}
-            className={`filter-icon ${filters.risk ? 'enabled' : 'disabled'}`}
-          />
-          {activeRiskCount > 0 && (
-            <span className="risk-alert-badge">{activeRiskCount}</span>
-          )}
-        </div>
+        <FaExclamationTriangle
+          title="Risk Alerts"
+          onClick={() => setActiveFilter('risk')}
+          className={`filter-icon ${activeFilter === 'risk' ? 'enabled' : 'disabled'}`}
+        />
       </div>
 
       <div className="overview-columns">

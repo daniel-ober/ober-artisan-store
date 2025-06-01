@@ -1,0 +1,144 @@
+.soundlegend-signin {
+    min-height: 100vh;
+    background: linear-gradient(to bottom right, #0f0f0f, #1c1c1c);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    color: #ffffff;
+    padding: 6vh 1.5rem 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .signin-logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2vh;
+    margin-bottom: 2rem;
+    width: 100%;
+  }
+  
+  .signin-logo {
+    max-width: 300px;
+    width: 90%;
+    height: auto;
+    filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.6));
+  }
+  
+  .soundlegend-signin form {
+    background: rgba(26, 26, 26, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 2rem 1.75rem;
+    border-radius: 12px;
+    box-shadow: 0 0 24px rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 320px; /* tightened */
+    margin: 0 auto;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  
+  .soundlegend-signin input {
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.1rem;
+    border: none;
+    border-radius: 6px;
+    background-color: #2a2a2a;
+    color: #fff;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .soundlegend-signin input::placeholder {
+    color: #bbbbbb;
+  }
+  
+  .soundlegend-signin input:focus {
+    outline: 2px solid #666;
+    background-color: #333;
+  }
+  
+  .soundlegend-signin button {
+    padding: 0.75rem;
+    background-color: #0070f3;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+  }
+  
+  .soundlegend-signin button:hover {
+    background-color: #005ac1;
+  }
+  
+  .soundlegend-signin .error {
+    color: #ff5f5f;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .signin-info {
+    color: #ccc;
+    font-size: 0.9rem;
+    max-width: 360px;
+    margin-top: 1.75rem;
+    text-align: center;
+    line-height: 1.6;
+  }
+  
+  .signin-info a {
+    color: #58aaff;
+    text-decoration: underline;
+    transition: color 0.2s ease;
+  }
+  
+  .signin-info a:hover {
+    color: #0070f3;
+  }
+  
+  .signin-info ul {
+    margin-top: 0.5rem;
+    padding-left: 1.2rem;
+    text-align: left;
+    list-style: disc;
+    color: #aaa;
+  }
+  
+  .signin-info li {
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Responsive Tuning */
+  @media (max-width: 480px) {
+    .soundlegend-signin {
+      padding-top: 6vh;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      padding-bottom: 3rem;
+    }
+  
+    .signin-logo {
+      max-width: 200px;
+    }
+  
+    .soundlegend-signin form {
+      padding: 1.5rem 1rem;
+      width: 100%;
+      max-width: 320px;
+      margin: 0 auto 2rem auto;
+    }
+  
+    .soundlegend-signin input,
+    .soundlegend-signin button {
+      font-size: 0.95rem;
+    }
+  }
