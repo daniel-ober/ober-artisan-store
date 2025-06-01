@@ -46,7 +46,10 @@ const FoundersToastProductDetail = () => {
       price: product?.price || 1200,
       stripePriceId: product?.stripePriceId || '',
       images: product?.images?.length ? [product.images[0]] : [],
-      image: typeof product.images?.[0] === 'string' ? product.images[0] : product.images?.[0]?.src,
+      image:
+        typeof product.images?.[0] === 'string'
+          ? product.images[0]
+          : product.images?.[0]?.src,
       category: 'artisan',
       currentQuantity: product?.currentQuantity ?? 10,
     };
@@ -88,7 +91,7 @@ const FoundersToastProductDetail = () => {
       <img
         src="/resized-logos/founders-toast-white.png"
         alt="Founder’s Toast Logo"
-        className="founders-toast-header-logo"
+        className="founders-toast-header-image"
       />
 
       <div className="founders-toast-content">
@@ -134,7 +137,6 @@ const FoundersToastProductDetail = () => {
               Est Delivery: 5–7 business days
             </p>
           </div>
-
 
           {buttonText === 'In Cart' ? (
             <div className="artisan-cart-hover-container">
