@@ -1,22 +1,154 @@
+/* ===============================
+   PROJECT DETAIL PAGE
+================================= */
+
 .project-page {
-    max-width: 860px;
-    margin: 48px auto;
-    padding: 0 24px;
-    font-family: sans-serif;
+    font-family: 'Poppins', sans-serif;
+    background-color: #111;
+    color: #f5f5f5;
+    padding: 2rem 1rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    line-height: 1.6;
   }
   
+  /* Header */
+  .project-page h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #ffffff;
+  }
+  
+  /* Section Blocks */
   .project-section {
-    background: #f8f8f8;
-    padding: 24px;
-    margin-bottom: 24px;
-    border-radius: 8px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+    background: #1a1a1a;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.05);
   }
   
+  /* Section Headings */
   .project-section h3 {
-    margin-top: 0;
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    color: #e3e3e3;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 0.5rem;
   }
   
+  /* Paragraph / Labels */
   .project-section p {
-    margin: 8px 0;
+    margin: 0.5rem 0;
+    font-size: 0.95rem;
+    color: #cccccc;
+  }
+  
+  .project-section strong {
+    font-weight: 500;
+    color: #ffffff;
+  }
+  
+  /* Dropzone Styles */
+  .dropzone {
+    border: 2px dashed #888;
+    background-color: #1c1c1c;
+    padding: 2rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    color: #ccc;
+  }
+  
+  .dropzone p {
+    margin: 0;
+    font-size: 0.95rem;
+  }
+  
+  .dropzone:hover {
+    background-color: #2a2a2a;
+    cursor: pointer;
+  }
+  
+  .dropzone.drag-active {
+    background-color: #292929;
+    border-color: #6fe0b5;
+    color: #ffffff;
+  }
+  
+  /* Upload Progress */
+  .upload-progress {
+    color: #6fe0b5;
+    font-size: 0.9rem;
+    margin-top: 0.75rem;
+  }
+  
+  /* Uploaded Files List */
+  .uploaded-files {
+    margin-top: 1rem;
+    text-align: left;
+  }
+  
+  .upload-list-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #6fe0b5;
+    margin-bottom: 0.25rem;
+  }
+  
+  .uploaded-files ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+  }
+  
+  .uploaded-files li {
+    font-size: 0.85rem;
+    margin: 0.25rem 0;
+  }
+  
+  .uploaded-files a {
+    color: #91c8ff;
+    text-decoration: underline;
+    word-break: break-word;
+  }
+  
+  /* Responsive Styling */
+  @media (max-width: 600px) {
+    .project-page {
+      padding: 1.5rem 1rem;
+    }
+  
+    .project-page h2 {
+      font-size: 1.5rem;
+    }
+  
+    .project-section {
+      padding: 1.25rem;
+    }
+  
+    .project-section h3 {
+      font-size: 1.1rem;
+    }
+  
+    .project-section p {
+      font-size: 0.9rem;
+    }
+  
+    .dropzone {
+      padding: 1.5rem;
+    }
+  
+    .dropzone p {
+      font-size: 0.85rem;
+    }
+  
+    .uploaded-files li {
+      font-size: 0.8rem;
+    }
   }
