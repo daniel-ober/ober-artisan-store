@@ -4,7 +4,7 @@
 .artisanseries-container {
   position: relative;
   width: 100%;
-  background-color: #111;
+  /* background-color: #111; */
   overflow-x: hidden;
   color: white;
 }
@@ -20,7 +20,7 @@
 .sticky-logo-wrapper {
   position: sticky;
   top: 0;
-  background: #111;
+  /* background: #111; */
   z-index: 0;
   padding: 1.5rem 1rem 1rem;
   /* border-bottom: 1px solid rgba(255, 255, 255, 0.1); */
@@ -44,9 +44,12 @@
   display: block; /* ← changed from flex */
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem 1rem 0;
+  /* padding: 2rem 1rem 0; */
   opacity: 1;
   transition: opacity 0.5s ease-in-out;
+  position: relative;
+  z-index: 100;
+  min-height: 480px;
 }
 
 .drum-display.fade-out {
@@ -273,7 +276,8 @@
   width: 100%;
   max-width: 1000px;
   height: 200px;
-  z-index: 9;
+  z-index: 1999;
+  pointer-events: none; /* 🔥 disable pointer events on container */
 }
 
 .drum-layers.scrolling {
@@ -335,11 +339,11 @@
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
-  max-width: 1000px; /* ✅ same as image layer width */
-  height: 180px; /* ✅ matches image height */
-  z-index: 10;
+  max-width: 1000px;
+  height: 160px;
+  z-index: 10; /* ✅ ensure it's above all .layer elements */
   display: flex;
-  pointer-events: none;
+  pointer-events: auto;
 }
 
 
@@ -464,6 +468,11 @@
   z-index: 2;
 }
 
+.layer,
+.layer.overlay-image {
+  pointer-events: none;
+}
+
 /* -------------------------------
    LIGHTBOX
 -------------------------------- */
@@ -575,6 +584,7 @@
   opacity: 0.85;
   max-width: 100%;
   animation: pulseText 2s infinite ease-in-out;
+  margin-top: 8px;
 }
 
 .drum-layers-block {
@@ -583,14 +593,30 @@
   align-items: center;
   justify-content: flex-end;
   padding: 0;
-  margin: 0;
+  margin-top: 1.5rem;
   width: 100%;
 }
 
 .drum-layers-block .drum-hover-instruction {
-  margin-top: 8px;
-  margin-bottom: 24px;
+  margin-top: 40px; /* ✅ pushes it down */
+  margin-bottom: 0; /* ✅ keeps it from floating too high */
+  font-size: 0.9rem;
+  text-align: center;
+  color: #ccc;
+  font-style: italic;
+  opacity: 0.85;
+  animation: pulseText 2s infinite ease-in-out;
 }
+
+/* Add this rule to control spacing on all screens */
+.drum-display .preorder-card-preorder-button {
+  margin-bottom: 1rem; /* default for mobile */
+}
+
+.artisan-final-section {
+  justify-content: center;
+}
+
 
 @keyframes pulseText {
   0%,
@@ -609,25 +635,31 @@
 @media (max-width: 600px) {
   .drum-final-text {
     flex-direction: row;
-    justify-content: space-between; /* 🔄 evenly spaced */
+    justify-content: space-between;
     align-items: flex-start;
-    flex-wrap: wrap; /* ✅ Allows row-wrap without forcing scroll */
-    overflow-x: unset; /* ❌ remove horizontal scroll */
+    flex-wrap: wrap;
+    overflow-x: unset;
     padding: 0.75rem;
     gap: 0.5rem;
+  }
+
+  .text-layer {
+    text-align: center; /* ✅ center all content */
+    padding: 0 1rem;
   }
 
   .description {
     font-size: 0.95rem;
     line-height: 1.6;
-    text-align: left;
-    padding: 0 1rem;
+    text-align: center; /* ✅ center paragraph text */
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .drum-info {
     flex: 1 1 30%;
     max-width: 33%;
-    text-align: center; /* padding: 10px; */
+    text-align: center;
   }
 
   .drum-logo {
@@ -636,12 +668,17 @@
   }
 
   .drum-display {
-    min-height: 580px;
+    min-height: 500px;
   }
 
   .preorder-card-preorder-button {
     font-size: 0.75rem;
     padding: 8px 12px;
+    margin-bottom: 0.5rem;
+  }
+
+  .drum-layers-block {
+    margin-top: 0.25rem;
   }
 
   .gallery-strip {
@@ -660,41 +697,5 @@
 
   .artisanseries-header-image {
     max-width: 280px;
-  }
-}
-
-@media (min-width: 769px) {
-  .features-audio-wrapper {
-    flex-direction: row;
-    justify-content: center;
-    align-items: flex-start;
-  }
-
-  .drum-layers-block .drum-hover-instruction {
-    margin-top: 24px;
-    margin-bottom: 40px;
-  }
-
-  .description {
-    /* font-size: 0.9rem; */
-    /* text-align: center; */
-  }
-
-  .key-features,
-  .audio-box {
-    margin: 0;
-  }
-
-  .gallery-strip {
-    flex-direction: row;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin-bottom: 2rem;
-  }
-
-  .gallery-strip img {
-    width: 200px;
-    height: 130px;
   }
 }
