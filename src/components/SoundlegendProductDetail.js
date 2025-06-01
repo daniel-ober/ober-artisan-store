@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../firebaseConfig'; // Firestore config
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import {
   Dialog,
   DialogTitle,
@@ -30,14 +30,16 @@ const SoundLegendProductDetail = () => {
   const [consultationDate, setConsultationDate] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (window.grecaptcha && window.grecaptcha.enterprise) {
-      window.grecaptcha.enterprise.ready(() => {
-        console.log('✅ reCAPTCHA is ready');
-      });
-    }
+    const scrollContainer =
+      document.querySelector('.soundlegend-product-detail') ||
+      document.documentElement ||
+      document.body;
+  
+    scrollContainer.scrollTo({ top: 0, behavior: 'auto' });
   }, []);
 
   // 🔽 Add this here
@@ -132,7 +134,7 @@ const SoundLegendProductDetail = () => {
       <img
         src="/resized-logos/soundlegend-white.png"
         alt="SOUNDLEGEND Series"
-        className="artisanseries-header-image"
+        className="soundlegend-header-image"
       />
       {/* 🔥 SoundLegend Experience Section */}
       <div className="soundlegend-product-content">

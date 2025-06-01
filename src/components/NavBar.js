@@ -122,12 +122,10 @@ const NavBar = () => {
   };
 
   const handleNavLinkClick = (path) => {
-    if (location.pathname === path) {
-      navigate(path, { replace: true });
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      navigate(path);
-    }
+    navigate(path);
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'auto' });
+    }, 10);
     setIsMenuOpen(false);
   };
 

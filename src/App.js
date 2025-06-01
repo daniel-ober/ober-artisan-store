@@ -12,7 +12,7 @@ import ProjectRoute from './components/ProjectRoute';
 import ProjectDetailPage from './components/ProjectDetailPage';
 import DrumViewer from './components/DrumViewer';
 import SoundlegendSignin from './components/SoundlegendSignin';
-
+import ScrollToTop from './components/ScrollToTop';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import Home from './components/Home';
@@ -133,6 +133,7 @@ function App() {
 
   return (
     <DarkModeProvider>
+     <ScrollToTop />
       <Toaster position="bottom-center" />
       <div className="app-container">
         <NavBar

@@ -13,6 +13,12 @@
     overflow-x: hidden; /* Prevents horizontal overflow */
 }
 
+.soundlegend-header-image {
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto 2rem;
+}
+
 /* 📌 Title Styling */
 .soundlegend-product-detail h1 {
     font-size: 40px;
