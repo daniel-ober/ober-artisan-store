@@ -271,7 +271,6 @@
 
   .heritage-header-image {
     max-width: 500px;
-    margin: 20px;
   }
 }
 
@@ -300,6 +299,6 @@
 
     .heritage-header-image {
     max-width: 300px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
   }
 }
