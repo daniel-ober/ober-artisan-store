@@ -9,6 +9,8 @@ import {
 } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import './ViewSoundlegendModal.css';
+import { Timestamp } from "firebase/firestore";
+
 
 const statusOptions = [
   'New',
@@ -150,51 +152,50 @@ const ViewSoundlegendModal = ({ submission, onClose, onStatusUpdate, onUpdateSub
       `Create Project for ${firstName} ${lastName}?`
     );
     if (!confirmCreation) return;
-
+  
     try {
       const projectData = {
         source: 'SoundLegend',
         submissionId: fullSubmission.id,
         customerName: `${firstName} ${lastName}`,
-        email,
-        phone: phone || '',
-        startDate: new Date().toISOString(),
-        status: 'Not Started',
-        phases: [],
-        notes: [],
+        customer: {
+          name: `${firstName} ${lastName}`,
+          email,
+          phone: phone || '',
+          address: {
+            street: '',
+            city: '',
+            state: '',
+            zip: '',
+          },
+        },
+        artisanLine: "SoundLegend",
+        width: "14\"",
+        shellDepth: "8\"",
+        startDate: Timestamp.now(),
+        currentPhase: "Step 1. Wood Preparation",
       };
-
+  
       const projectRef = await addDoc(collection(db, 'projects'), projectData);
       const projectId = projectRef.id;
-
+  
       const submissionRef = doc(db, 'soundlegend_submissions', fullSubmission.id);
+      const systemEntry = {
+        type: 'system',
+        value: `Project created: ${projectId}`,
+        timestamp: new Date().toISOString(),
+      };
+  
       await updateDoc(submissionRef, {
         projectId,
-        history: arrayUnion({
-          type: 'system',
-          value: `Project created: ${projectId}`,
-          timestamp: new Date().toISOString(),
-        }),
+        history: arrayUnion(systemEntry),
       });
-
-      setHistory((prev) => [
-        {
-          type: 'system',
-          value: `Project created: ${projectId}`,
-          timestamp: new Date().toISOString(),
-        },
-        ...prev,
-      ]);
-
-      setProjectId(projectId); // 🟢 Update local state to reflect new project in modal
+  
+      setProjectId(projectId);
+      setHistory((prev) => [systemEntry, ...prev]);
+  
       alert(`✅ Project created successfully!\n\nID: ${projectId}`);
       if (onUpdateSubmission) {
-        const systemEntry = {
-          type: 'system',
-          value: `Project created: ${projectId}`,
-          timestamp: new Date().toISOString(),
-        };
-      
         onUpdateSubmission({
           ...fullSubmission,
           projectId,

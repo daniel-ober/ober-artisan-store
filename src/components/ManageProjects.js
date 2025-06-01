@@ -1,64 +1,85 @@
-import React, { useState, useEffect } from "react";
-import { collection, getDocs, updateDoc, doc } from "firebase/firestore";
-import { db } from "../firebaseConfig";
-import ManageProjectModal from "./ManageProjectModal/ManageProjectModal"; // Updated import path
-import "./ManageProjects.css";
+import React, { useState, useEffect } from 'react';
+import {
+  collection,
+  getDocs,
+  updateDoc,
+  doc,
+  Timestamp,
+} from 'firebase/firestore';
+import { db } from '../firebaseConfig';
+import ManageProjectModal from './ManageProjectModal';
+import './ManageProjects.css';
 
 const buildPhases = [
-  "Step 1. Wood Preparation",
-  "Step 2. Shell Construction",
-  "Step 3. Fine-Tuning",
-  "Step 4. Shell Exterior Finish",
-  "Step 5. Bearing Edges",
-  "Step 6. Snare Bed Cutting",
-  "Step 7. Hardware Drilling",
-  "Step 8. Hardware Assembly",
-  "Step 9. Tuning and Detailing",
-  "Step 10. Quality Check",
+  'Step 1. Wood Preparation',
+  'Step 2. Shell Construction',
+  'Step 3. Fine-Tuning',
+  'Step 4. Shell Exterior Finish',
+  'Step 5. Bearing Edges',
+  'Step 6. Snare Bed Cutting',
+  'Step 7. Hardware Drilling',
+  'Step 8. Hardware Assembly',
+  'Step 9. Tuning and Detailing',
+  'Step 10. Quality Check',
 ];
 
 const ManageProjects = () => {
   const [projects, setProjects] = useState([]);
   const [filteredProjects, setFilteredProjects] = useState([]);
-  const [filter, setFilter] = useState(""); // Filter for build phases
-  const [selectedProject, setSelectedProject] = useState(null); // Selected project for modal
+  const [filter, setFilter] = useState('');
+  const [selectedProject, setSelectedProject] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Fetch projects from Firestore
+  const formatDate = (timestamp) => {
+    if (!timestamp) return 'N/A';
+    if (timestamp instanceof Date) return timestamp.toLocaleString();
+    if (timestamp?.seconds)
+      return new Date(timestamp.seconds * 1000).toLocaleString();
+    return 'Invalid date';
+  };
+
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const projectsCollection = collection(db, "projects");
+        const projectsCollection = collection(db, 'projects');
         const projectsSnapshot = await getDocs(projectsCollection);
         const projectsList = projectsSnapshot.docs
-          .map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }))
+          .map((doc) => {
+            const data = doc.data();
+            return {
+              id: doc.id,
+              ...data,
+            };
+          })
           .sort((a, b) => {
-            const dateA = a.startDate?.seconds || 0;
-            const dateB = b.startDate?.seconds || 0;
-            return dateB - dateA; // 🔽 Sort newest to oldest
+            const getDate = (project) => {
+              if (project.startDate?.seconds) return project.startDate.seconds;
+              if (project.startDate instanceof Timestamp)
+                return project.startDate.toMillis();
+              if (project.startDate instanceof Date)
+                return project.startDate.getTime();
+              return 0;
+            };
+            return getDate(b) - getDate(a);
           });
-    
+
         setProjects(projectsList);
         setFilteredProjects(projectsList);
       } catch (error) {
-        console.error("Error fetching projects:", error);
+        console.error('Error fetching projects:', error);
       }
     };
 
     fetchProjects();
   }, []);
 
-  // Filter projects dynamically
   useEffect(() => {
     if (filter) {
       setFilteredProjects(
         projects.filter(
           (project) =>
             project.currentPhase === filter ||
-            (filter === "Overdue" && isOverdue(project))
+            (filter === 'Overdue' && isOverdue(project))
         )
       );
     } else {
@@ -66,45 +87,37 @@ const ManageProjects = () => {
     }
   }, [filter, projects]);
 
-  // Check if a project is overdue
   const isOverdue = (project) => {
     const phaseIndex = buildPhases.indexOf(project.currentPhase);
-    const phaseStartDate = new Date(project.startDate.seconds * 1000); // Convert Firestore timestamp
-    phaseStartDate.setDate(phaseStartDate.getDate() + phaseIndex * 2); // Assume 2 days per phase
+    if (!project.startDate?.seconds) return false;
+    const phaseStartDate = new Date(project.startDate.seconds * 1000);
+    phaseStartDate.setDate(phaseStartDate.getDate() + phaseIndex * 2);
     return new Date() > phaseStartDate;
   };
 
-  // Open the modal for a specific project
   const openModal = (project) => {
     setSelectedProject(project);
     setIsModalOpen(true);
   };
 
-  // Close the modal
   const closeModal = () => {
     setSelectedProject(null);
     setIsModalOpen(false);
   };
 
-  // Handle save updates in the modal
   const handleSave = async (updatedData) => {
     try {
       if (!selectedProject) return;
-
-      const projectRef = doc(db, "projects", selectedProject.id);
+      const projectRef = doc(db, 'projects', selectedProject.id);
       await updateDoc(projectRef, updatedData);
-
-      // Update state with the new data
       setProjects((prev) =>
-        prev.map((project) =>
-          project.id === selectedProject.id ? { ...project, ...updatedData } : project
+        prev.map((p) =>
+          p.id === selectedProject.id ? { ...p, ...updatedData } : p
         )
       );
-
-      // Close the modal after saving
       closeModal();
     } catch (error) {
-      console.error("Error saving project updates:", error);
+      console.error('Error saving project updates:', error);
     }
   };
 
@@ -112,7 +125,6 @@ const ManageProjects = () => {
     <div className="manage-projects">
       <h2>Manage Projects</h2>
 
-      {/* Filters */}
       <div className="filters">
         <label>
           Filter by Phase:
@@ -128,12 +140,12 @@ const ManageProjects = () => {
         </label>
       </div>
 
-      {/* Projects Table */}
       <table className="projects-table">
         <thead>
           <tr>
             <th>Project ID</th>
             <th>Customer Name</th>
+            <th>Created At</th>
             <th>Current Phase</th>
             <th>Progress</th>
             <th>Status</th>
@@ -142,12 +154,18 @@ const ManageProjects = () => {
         <tbody>
           {filteredProjects.map((project) => {
             const phaseIndex = buildPhases.indexOf(project.currentPhase);
-            const progress = ((phaseIndex + 1) / buildPhases.length) * 100;
+            const progress =
+              phaseIndex >= 0
+                ? ((phaseIndex + 1) / buildPhases.length) * 100
+                : 0;
+
+            const createdAt = formatDate(project.startDate);
 
             return (
               <tr key={project.id} onClick={() => openModal(project)}>
                 <td>{project.id}</td>
-                <td>{project.customerName || "N/A"}</td>
+                <td>{project.customerName || 'N/A'}</td>
+                <td>{createdAt}</td>
                 <td>{project.currentPhase}</td>
                 <td>
                   <div className="progress-bar">
@@ -157,20 +175,19 @@ const ManageProjects = () => {
                     ></div>
                   </div>
                 </td>
-                <td>{isOverdue(project) ? "Overdue" : "On Track"}</td>
+                <td>{isOverdue(project) ? 'Overdue' : 'On Track'}</td>
               </tr>
             );
           })}
         </tbody>
       </table>
 
-      {/* Project Modal */}
       {isModalOpen && (
         <ManageProjectModal
           isOpen={isModalOpen}
           onClose={closeModal}
           projectData={selectedProject}
-          onSave={handleSave} // Pass the save handler to the modal
+          onSave={handleSave}
         />
       )}
     </div>

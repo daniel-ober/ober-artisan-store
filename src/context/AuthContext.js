@@ -8,15 +8,13 @@ export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [authIsReady, setAuthIsReady] = useState(false); // ✅ add this
 
-  // Get admin status from Firebase Auth custom claims, not Firestore
+  // Check Firebase Auth custom claims for admin role
   const checkAdminClaim = async (currentUser) => {
-    setLoading(true);
     try {
-      // Force refresh of token to get the latest custom claims
-      const idTokenResult = await currentUser.getIdTokenResult(true); // true = force refresh
+      const idTokenResult = await currentUser.getIdTokenResult(true);
       const adminStatus = !!idTokenResult.claims.admin;
       setIsAdmin(adminStatus);
 
@@ -29,8 +27,6 @@ export const AuthProvider = ({ children }) => {
       console.error('❌ Error checking admin claim:', error);
       setIsAdmin(false);
       setAnalyticsUserProperties('guest');
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -43,8 +39,9 @@ export const AuthProvider = ({ children }) => {
         setUser(null);
         setIsAdmin(false);
         setAnalyticsUserProperties('guest');
-        setLoading(false);
       }
+
+      setAuthIsReady(true); // ✅ mark auth system as initialized
     });
 
     return () => unsubscribe();
@@ -62,8 +59,15 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, isAdmin, loading, logout }}>
-      {!loading && children}
+    <AuthContext.Provider
+      value={{
+        user,
+        isAdmin,
+        logout,
+        authIsReady, // ✅ expose to consumers
+      }}
+    >
+      {children}
     </AuthContext.Provider>
   );
 };

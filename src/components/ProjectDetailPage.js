@@ -49,7 +49,12 @@ const ProjectDetailPage = () => {
   }, [user, isAdmin, projectId, navigate]);
 
   if (loading) return <div className="project-page">Loading...</div>;
-  if (unauthorized) return <div className="project-page">You are not authorized to view this project.</div>;
+  if (unauthorized)
+    return (
+      <div className="project-page">
+        You are not authorized to view this project.
+      </div>
+    );
   if (!project) return <div className="project-page">Project not found.</div>;
 
   const {
@@ -70,32 +75,73 @@ const ProjectDetailPage = () => {
 
       <section className="project-section">
         <h3>Project Details</h3>
-        <p><strong>Project ID:</strong> {project.id}</p>
-        <p><strong>Order ID:</strong> {orderId || 'N/A'}</p>
-        <p><strong>Start Date:</strong> {startDate || 'N/A'}</p>
-        <p><strong>Target Completion:</strong> {targetCompletion || 'N/A'}</p>
-        <p><strong>Current Phase:</strong> {currentPhase || 'N/A'}</p>
-        <p><strong>Status:</strong> {status || 'N/A'}</p>
+        <p>
+          <strong>Project ID:</strong> {project.id}
+        </p>
+        <p>
+          <strong>Order ID:</strong> {orderId || 'N/A'}
+        </p>
+        <p>
+          <strong>Start Date:</strong>{' '}
+          {startDate?.seconds
+            ? new Date(startDate.seconds * 1000).toLocaleString()
+            : startDate || 'N/A'}
+        </p>
+        <p>
+          <strong>Target Completion:</strong> {targetCompletion || 'N/A'}
+        </p>
+        <p>
+          <strong>Current Phase:</strong> {currentPhase || 'N/A'}
+        </p>
+        <p>
+          <strong>Status:</strong> {status || 'N/A'}
+        </p>
       </section>
 
       <section className="project-section">
         <h3>Scope of Work</h3>
-        <p><strong>Artisan Line:</strong> {artisanLine || 'N/A'}</p>
-        <p><strong>Wood Species:</strong> {woodSpecies || 'N/A'}</p>
-        <p><strong>Bearing Edge:</strong> {bearingEdge || 'N/A'}</p>
+        <p>
+          <strong>Artisan Line:</strong> {artisanLine || 'N/A'}
+        </p>
+        <p>
+          <strong>Wood Species:</strong> {woodSpecies || 'N/A'}
+        </p>
+        <p>
+          <strong>Bearing Edge:</strong> {bearingEdge || 'N/A'}
+        </p>
       </section>
 
       <section className="project-section">
         <h3>Customer</h3>
-        <p><strong>Name:</strong> {customer.name || 'N/A'}</p>
-        <p><strong>Email:</strong> {customer.email || 'N/A'}</p>
-        <p><strong>Phone:</strong> {customer.phone || 'N/A'}</p>
-        <p><strong>Shipping Address:</strong> {customer.address || 'N/A'}</p>
+        <p>
+          <strong>Name:</strong> {customer.name || 'N/A'}
+        </p>
+        <p>
+          <strong>Email:</strong> {customer.email || 'N/A'}
+        </p>
+        <p>
+          <strong>Phone:</strong> {customer.phone || 'N/A'}
+        </p>
+        <p>
+          <strong>Shipping Address:</strong>{' '}
+          {customer.address
+            ? [
+                customer.address.street,
+                customer.address.city,
+                customer.address.state,
+                customer.address.zip,
+              ]
+                .filter(Boolean)
+                .join(', ')
+            : 'N/A'}
+        </p>
       </section>
 
       <section className="project-section">
         <h3>Attachments</h3>
-        <p>Coming soon — download links, mockups, and files will appear here.</p>
+        <p>
+          Coming soon — download links, mockups, and files will appear here.
+        </p>
       </section>
     </div>
   );
