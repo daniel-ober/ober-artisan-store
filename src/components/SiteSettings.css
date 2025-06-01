@@ -173,10 +173,6 @@ h2, h3, h4 {
     font-size: 14px;
     padding: 10px 15px;
   }
-
-  .settings-save-btn {
-    /* width: 100%; */
-  }
 }
 
 @media (max-width: 480px) {
