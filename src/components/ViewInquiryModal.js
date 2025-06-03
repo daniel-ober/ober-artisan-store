@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { MdContentCopy } from 'react-icons/md';
 import { getDoc, doc, updateDoc, arrayUnion } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
+import { STATUS_OPTIONS, getOverviewStatus } from '../utils/statusConfig';
 import './ViewInquiryModal.css';
 
 const ViewInquiryModal = ({
@@ -44,32 +45,32 @@ const ViewInquiryModal = ({
   const handleAddNote = async () => {
     if (!note.trim()) return alert('Note cannot be empty.');
     setLoading(true);
-  
+
     try {
       const inquiryRef = doc(db, 'inquiries', inquiry.id);
       const inquirySnap = await getDoc(inquiryRef);
-  
+
       if (!inquirySnap.exists()) {
         alert('Inquiry document not found.');
         setLoading(false);
         return;
       }
-  
+
       const data = inquirySnap.data();
-  
+
       if (!Array.isArray(data.internalNotes)) {
         await updateDoc(inquiryRef, { internalNotes: [] });
       }
-  
+
       const newNote = {
         text: note,
         timestamp: new Date().toISOString(),
       };
-  
+
       await updateDoc(inquiryRef, {
         internalNotes: arrayUnion(newNote),
       });
-  
+
       setInternalNotes((prevNotes) => [newNote, ...prevNotes]);
       setNote('');
     } catch (error) {
@@ -82,24 +83,26 @@ const ViewInquiryModal = ({
 
   const handleStatusChange = async (newStatus) => {
     try {
+      const overviewStatus = getOverviewStatus('inquiry', newStatus);
       const inquiryRef = doc(db, 'inquiries', inquiry.id);
       const inquirySnap = await getDoc(inquiryRef);
       const data = inquirySnap.data();
-  
+
       if (!Array.isArray(data.systemHistory)) {
         await updateDoc(inquiryRef, { systemHistory: [] });
       }
-  
+
       const statusChangeEvent = {
         event: `Status changed to "${newStatus}"`,
         timestamp: new Date().toISOString(),
       };
-  
+
       await updateDoc(inquiryRef, {
         status: newStatus,
+        overviewStatus,
         systemHistory: arrayUnion(statusChangeEvent),
       });
-  
+
       setSystemHistory((prevHistory) => [statusChangeEvent, ...prevHistory]);
       onStatusChange(inquiry.id, newStatus);
     } catch (error) {
@@ -113,21 +116,21 @@ const ViewInquiryModal = ({
       const inquiryRef = doc(db, 'inquiries', inquiry.id);
       const inquirySnap = await getDoc(inquiryRef);
       const data = inquirySnap.data();
-  
+
       if (!Array.isArray(data.systemHistory)) {
         await updateDoc(inquiryRef, { systemHistory: [] });
       }
-  
+
       const categoryChangeEvent = {
         event: `Category changed to "${newCategory}"`,
         timestamp: new Date().toISOString(),
       };
-  
+
       await updateDoc(inquiryRef, {
         category: newCategory,
         systemHistory: arrayUnion(categoryChangeEvent),
       });
-  
+
       setSystemHistory((prevHistory) => [categoryChangeEvent, ...prevHistory]);
       if (onCategoryChange) {
         onCategoryChange(inquiry.id, newCategory);
@@ -146,7 +149,7 @@ const ViewInquiryModal = ({
   return (
     <div className="modal-overlay">
       <div className="modal-content">
-      <button onClick={onClose} className="modal-close">✕</button>
+        <button onClick={onClose} className="modal-close">✕</button>
         <h3 className="modal-title">Inquiry Details</h3>
 
         <div className="compact-inquiry-details">
@@ -163,20 +166,11 @@ const ViewInquiryModal = ({
               onChange={(e) => handleStatusChange(e.target.value)}
               className="status-select"
             >
-              <option value="New">New</option>
-              <option value="Support - In Progress">
-                Support - In Progress
-              </option>
-              <option value="Support - Closed">Support - Closed</option>
-              <option value="Support - Duplicate/Spam">
-                Support - Duplicate/Spam
-              </option>
-              <option value="Sales - Prospecting">Sales - Prospecting</option>
-              <option value="Sales - Closed Won">Sales - Closed Won</option>
-              <option value="Sales - Closed Lost">Sales - Closed Lost</option>
-              <option value="Sales - Duplicate/Spam">
-                Support - Duplicate/Spam
-              </option>
+              {STATUS_OPTIONS.inquiry.map((status) => (
+                <option key={status} value={status}>
+                  {status}
+                </option>
+              ))}
             </select>
           </div>
           <div className="detail-group">

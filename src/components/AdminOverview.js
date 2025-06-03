@@ -23,6 +23,23 @@ import {
   FaThLarge,
 } from 'react-icons/fa';
 import './AdminOverview.css';
+import { getOverviewStatus, getBadgeClass } from '../utils/statusConfig';
+
+
+const getCollectionPath = (type) => {
+  switch (type) {
+    case 'order':
+      return 'orders';
+    case 'inquiry':
+      return 'inquiries';
+    case 'submission':
+      return 'soundlegend_submissions';
+    case 'risk':
+      return 'risk_notifications';
+    default:
+      return '';
+  }
+};
 
 const AdminOverview = () => {
   const [data, setData] = useState({
@@ -43,25 +60,6 @@ const AdminOverview = () => {
 
   const [activeFilter, setActiveFilter] = useState('all'); // 'all', 'orders', 'support', 'slRequests', 'risk'
 
-  const normalizeStatus = (status = '') =>
-    status.toLowerCase().replace(/\s+/g, '');
-
-  const getDisplayStatus = (status) => {
-    const normalized = normalizeStatus(status);
-    if (normalized === 'inprogress') return 'In Progress';
-    if (normalized === 'completed' || normalized === 'resolved')
-      return 'Completed';
-    return 'New';
-  };
-
-  const getStatusBadgeClass = (status) => {
-    const normalized = normalizeStatus(status);
-    if (normalized === 'inprogress') return 'badge-yellow';
-    if (normalized === 'completed' || normalized === 'resolved')
-      return 'badge-gray';
-    return 'badge-green';
-  };
-
   // Always update state with raw data per type; don't early-return based on filters.
   const updateColumnState = (type, items) => {
     const newItems = [];
@@ -71,29 +69,14 @@ const AdminOverview = () => {
     for (const item of items) {
       item.type = type; // ✅ Force type assignment so filtering works correctly
 
-      let status = (item.overviewStatus || item.status || '').toLowerCase();
-      if (item.type === 'risk') {
-        if (status === 'in review') status = 'inprogress';
-        else if (status === 'resolved' || status === 'completed')
-          status = 'completed';
-        else status = 'new';
-      }
+      const overview = getOverviewStatus(
+        item.type,
+        item.status || item.overviewStatus
+      );
 
-      if (status === 'new') newItems.push(item);
-      else if (status === 'prospecting' || status === 'inprogress')
-        inProgressItems.push(item);
-      else if (
-        [
-          'closed - won',
-          'closed - lost',
-          'closed - incomplete form',
-          'closed - no response',
-          'closed - duplicate/spam',
-          'completed',
-        ].includes(status)
-      ) {
-        completedItems.push(item);
-      }
+      if (overview === 'new') newItems.push(item);
+      else if (overview === 'inProgress') inProgressItems.push(item);
+      else completedItems.push(item);
     }
 
     setData((prev) => {
@@ -139,25 +122,6 @@ const AdminOverview = () => {
       }
     );
 
-    const normalizeStatus = (status = '') =>
-      status.toLowerCase().replace(/\s+/g, '');
-
-    const getDisplayStatus = (status) => {
-      const normalized = normalizeStatus(status);
-      if (normalized === 'inprogress') return 'In Progress';
-      if (normalized === 'completed' || normalized === 'resolved')
-        return 'Completed';
-      return 'New';
-    };
-
-    const getStatusBadgeClass = (status) => {
-      const normalized = normalizeStatus(status);
-      if (normalized === 'inprogress') return 'badge-yellow';
-      if (normalized === 'completed' || normalized === 'resolved')
-        return 'badge-gray';
-      return 'badge-green';
-    };
-
     const unsubInquiries = onSnapshot(
       query(
         collection(db, 'inquiries'),
@@ -174,13 +138,10 @@ const AdminOverview = () => {
               `${data.first_name || ''} ${data.last_name || ''}`.trim(),
             email: data.email || '',
             status: data.status || '',
-            overviewStatus:
-              data.overviewStatus ||
-              (data.status?.toLowerCase().includes('prospecting')
-                ? 'inProgress'
-                : data.status?.toLowerCase().includes('closed')
-                  ? 'completed'
-                  : 'new'),
+            overviewStatus: getOverviewStatus(
+              'inquiry',
+              data.status || data.overviewStatus
+            ),
           };
         });
         updateColumnState('inquiry', inquiries);
@@ -196,18 +157,12 @@ const AdminOverview = () => {
       (snapshot) => {
         const risks = snapshot.docs.map((doc) => {
           const data = doc.data();
-          const rawStatus = (data.status || '').toLowerCase().trim();
-          const derivedStatus =
-            rawStatus === 'in review'
-              ? 'inProgress'
-              : rawStatus === 'resolved' || rawStatus === 'completed'
-                ? 'completed'
-                : 'new';
-
+          const overviewStatus = getOverviewStatus('risk', data.status || data.overviewStatus);
+    
           return {
             id: doc.id,
             type: 'risk',
-            overviewStatus: derivedStatus,
+            overviewStatus,
             status: data.status || 'Unclassified Risk',
             customerName:
               data.assessment?.username ||
@@ -217,7 +172,7 @@ const AdminOverview = () => {
             ...data,
           };
         });
-
+    
         updateColumnState('risk', risks);
       }
     );
@@ -231,21 +186,14 @@ const AdminOverview = () => {
       (snapshot) => {
         const submissions = snapshot.docs.map((doc) => {
           const data = doc.data();
-          const rawStatus = (data.status || '').toLowerCase().trim(); // ✅ ADD THIS LINE
-          const derivedStatus =
-            data.overviewStatus ||
-            (rawStatus.includes('prospecting')
-              ? 'inProgress'
-              : rawStatus.includes('closed')
-                ? 'completed'
-                : 'new');
-
+          const overviewStatus = getOverviewStatus('submission', data.status || data.overviewStatus);
+    
           return {
             id: doc.id,
             type: 'submission',
             customerName:
               `${data.firstName || ''} ${data.lastName || ''}`.trim(),
-            overviewStatus: derivedStatus,
+            overviewStatus,
             ...data,
           };
         });
@@ -263,19 +211,12 @@ const AdminOverview = () => {
 
   const handleItemClick = async (item) => {
     try {
-      const ref = doc(
-        db,
-        item.type === 'order'
-          ? 'orders'
-          : item.type === 'inquiry'
-            ? 'inquiries'
-            : item.type === 'submission'
-              ? 'soundlegend_submissions'
-              : 'risk_notifications',
-        item.id
-      );
+      const ref = doc(db, getCollectionPath(item.type), item.id);
       const snap = await getDoc(ref);
-      if (!snap.exists()) return;
+      if (!snap.exists()) {
+        console.warn('❗ Document not found in Firestore for', item);
+        return;
+      }
 
       const data = snap.data();
 
@@ -297,13 +238,7 @@ const AdminOverview = () => {
           source: data.source || 'N/A',
           systemHistory: data.systemHistory || [],
           status: data.status || 'New',
-          overviewStatus: data.status?.toLowerCase().includes('in progress')
-            ? 'inProgress'
-            : data.status?.toLowerCase().includes('completed') ||
-                data.status?.toLowerCase().includes('resolved')
-              ? 'completed'
-              : 'new',
-          assessment: data.assessment || {},
+          overviewStatus: getOverviewStatus('risk', data.status),
         });
 
         setModalType('risk');
@@ -355,39 +290,17 @@ const AdminOverview = () => {
     const dataString = event.dataTransfer.getData('text/plain');
     const { id, type } = JSON.parse(dataString);
 
-    const ref = doc(
-      db,
-      type === 'order'
-        ? 'orders'
-        : type === 'inquiry'
-          ? 'inquiries'
-          : type === 'submission'
-            ? 'soundlegend_submissions'
-            : 'risk_notifications',
-      id
-    );
+    const ref = doc(db, getCollectionPath(type), id);
 
     try {
-      let normalizedStatus = 'New';
-
-      if (type === 'submission') {
-        if (targetStatus === 'inProgress') {
-          normalizedStatus = 'Prospecting';
-        } else if (targetStatus === 'completed') {
-          normalizedStatus = 'Closed - No Response';
-        }
-      } else if (type === 'risk') {
-        if (targetStatus === 'inProgress') {
-          normalizedStatus = 'In Progress'; // ✅ Correct casing for dropdown
-        } else if (targetStatus === 'completed') {
-          normalizedStatus = 'Resolved'; // ✅ Also support "Dismissed" in logic elsewhere
-        } else {
-          normalizedStatus = 'New';
-        }
-      } else {
-        // Generic fallback for orders/inquiries
-        normalizedStatus = targetStatus;
-      }
+      const normalizedStatus =
+        type === 'submission'
+          ? 'Prospecting'
+          : type === 'risk' && targetStatus === 'completed'
+            ? 'Resolved'
+            : type === 'risk' && targetStatus === 'inProgress'
+              ? 'In Progress'
+              : 'New';
 
       const updateFields = {
         overviewStatus: targetStatus,
@@ -477,9 +390,9 @@ const AdminOverview = () => {
           {item.type === 'risk' ? (
             <>
               <span
-                className={`risk-status-badge ${getStatusBadgeClass(item.status)}`}
+                className={`risk-status-badge ${getBadgeClass(item.status)}`}
               >
-                {getDisplayStatus(item.status)}
+                {item.status}
               </span>
               <span>{desc}</span>
             </>
@@ -590,17 +503,7 @@ const AdminOverview = () => {
 
   const handleStatusChange = async (id, newStatus) => {
     const statusLower = newStatus.toLowerCase();
-    let newOverviewStatus;
-    if (statusLower === 'new') {
-      newOverviewStatus = 'new';
-    } else if (
-      statusLower.includes('in progress') ||
-      statusLower.includes('prospecting')
-    ) {
-      newOverviewStatus = 'inProgress';
-    } else {
-      newOverviewStatus = 'completed';
-    }
+    const newOverviewStatus = getOverviewStatus('risk', newStatus);
 
     const ref = doc(db, 'risk_notifications', id);
     try {
