@@ -6,28 +6,11 @@ import {
   updateDoc,
   arrayUnion,
   getDoc,
+  Timestamp,
 } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import './ViewSoundlegendModal.css';
-import { Timestamp } from "firebase/firestore";
-
-
-const statusOptions = [
-  'New',
-  'Prospecting',
-  'Closed - Won',
-  'Closed - Lost',
-  'Closed - Incomplete Form',
-  'Closed - No Response',
-  'Closed - Duplicate/Spam',
-];
-
-const getOverviewStatus = (status) => {
-  const s = status.toLowerCase();
-  if (s === 'prospecting') return 'inProgress';
-  if (s.startsWith('closed')) return 'completed';
-  return 'new';
-};
+import { STATUS_OPTIONS, getOverviewStatus } from '../utils/statusConfig';
 
 const generateAndDownloadVCard = ({ firstName, lastName, email, phone }) => {
   const vCard = `
@@ -51,14 +34,12 @@ END:VCARD
   URL.revokeObjectURL(url);
 };
 
-const ViewSoundlegendModal = ({ submission, onClose, onStatusUpdate, onUpdateSubmission }) => {  const [selectedStatus, setSelectedStatus] = useState(submission.status || '');
+const ViewSoundlegendModal = ({ submission, onClose, onStatusUpdate, onUpdateSubmission }) => {
+  const [selectedStatus, setSelectedStatus] = useState(submission.status || '');
   const [notes, setNotes] = useState('');
   const [history, setHistory] = useState(submission.history || []);
   const [projectId, setProjectId] = useState(submission.projectId || null);
-  const [fullSubmission, setFullSubmission] = useState({
-    ...submission,
-    id: submission.id,
-  });
+  const [fullSubmission, setFullSubmission] = useState({ ...submission, id: submission.id });
 
   if (!submission) return null;
 
@@ -72,35 +53,127 @@ const ViewSoundlegendModal = ({ submission, onClose, onStatusUpdate, onUpdateSub
     submittedAt,
   } = fullSubmission;
 
+  const defaultStepData = {
+    woodPreparation: {
+      checklist: [
+        { task: "Select and inspect raw wood blanks", completed: false, totalSeconds: 0 },
+        { task: "Cut wood to stave or segment shapes", completed: false, totalSeconds: 0 },
+        { task: "Check moisture content (8–12%)", completed: false, totalSeconds: 0 },
+        { task: "Bookmatch or orientation layout", completed: false, totalSeconds: 0 },
+        { task: "Joint and plane each piece", completed: false, totalSeconds: 0 },
+        { task: "Pre-glue test assembly", completed: false, totalSeconds: 0 }
+      ]
+    },
+    shellConstruction: {
+      checklist: [
+        { task: "Glue-up and clamp process", completed: false, totalSeconds: 0 },
+        { task: "Lathe or sand to round", completed: false, totalSeconds: 0 },
+        { task: "Wall thickness verification", completed: false, totalSeconds: 0 },
+        { task: "Interior surface prep", completed: false, totalSeconds: 0 },
+        { task: "Reinforcement rings cut & glued (if applicable)", completed: false, totalSeconds: 0 },
+        { task: "Initial bearing edge marking", completed: false, totalSeconds: 0 }
+      ]
+    },
+    fineTuning: {
+      checklist: [
+        { task: "Check roundness tolerance", completed: false, totalSeconds: 0 },
+        { task: "Verify wall uniformity", completed: false, totalSeconds: 0 },
+        { task: "Tap test for frequency balance", completed: false, totalSeconds: 0 },
+        { task: "Edge re-level if needed", completed: false, totalSeconds: 0 },
+        { task: "Moisture re-check", completed: false, totalSeconds: 0 },
+        { task: "Mark phase complete", completed: false, totalSeconds: 0 }
+      ]
+    },
+    shellExteriorFinish: {
+      checklist: [
+        { task: "Sanding shell exterior (progressive grits)", completed: false, totalSeconds: 0 },
+        { task: "Inspect for surface defects", completed: false, totalSeconds: 0 },
+        { task: "Apply requested finish or stain", completed: false, totalSeconds: 0 },
+        { task: "Cure/dry between coats", completed: false, totalSeconds: 0 },
+        { task: "Final clear coat (oil, lacquer, etc.)", completed: false, totalSeconds: 0 },
+        { task: "Buff/polish exterior surface", completed: false, totalSeconds: 0 }
+      ]
+    },
+    bearingEdges: {
+      checklist: [
+        { task: "Confirm edge spec (45°, roundover, etc.)", completed: false, totalSeconds: 0 },
+        { task: "Rout or cut bearing edges", completed: false, totalSeconds: 0 },
+        { task: "Hand-sand edges smooth", completed: false, totalSeconds: 0 },
+        { task: "Apply wax or edge treatment (if applicable)", completed: false, totalSeconds: 0 },
+        { task: "Final edge inspection", completed: false, totalSeconds: 0 },
+        { task: "Mark edges as complete", completed: false, totalSeconds: 0 }
+      ]
+    },
+    snareBedCutting: {
+      checklist: [
+        { task: "Measure and mark snare bed location", completed: false, totalSeconds: 0 },
+        { task: "Cut snare beds to spec", completed: false, totalSeconds: 0 },
+        { task: "Check symmetry and depth", completed: false, totalSeconds: 0 },
+        { task: "Test with snare wire fitment", completed: false, totalSeconds: 0 },
+        { task: "Smooth and blend edges", completed: false, totalSeconds: 0 },
+        { task: "Approve beds for hardware", completed: false, totalSeconds: 0 }
+      ]
+    },
+    hardwareDrilling: {
+      checklist: [
+        { task: "Layout lugs and throwoff spacing", completed: false, totalSeconds: 0 },
+        { task: "Center punch all holes", completed: false, totalSeconds: 0 },
+        { task: "Drill pilot holes cleanly", completed: false, totalSeconds: 0 },
+        { task: "Deburr all hardware holes", completed: false, totalSeconds: 0 },
+        { task: "Confirm fit with hardware samples", completed: false, totalSeconds: 0 },
+        { task: "Prep for final assembly", completed: false, totalSeconds: 0 }
+      ]
+    },
+    hardwareAssembly: {
+      checklist: [
+        { task: "Install all lugs, throw, butt plate", completed: false, totalSeconds: 0 },
+        { task: "Install air vent grommet", completed: false, totalSeconds: 0 },
+        { task: "Verify hardware alignment", completed: false, totalSeconds: 0 },
+        { task: "Torque hardware as needed", completed: false, totalSeconds: 0 },
+        { task: "Attach badges / brand markings", completed: false, totalSeconds: 0 },
+        { task: "Inspect for rattle or loose fit", completed: false, totalSeconds: 0 }
+      ]
+    },
+    tuningDetailing: {
+      checklist: [
+        { task: "Seat heads and tune evenly", completed: false, totalSeconds: 0 },
+        { task: "Adjust snare wire tension", completed: false, totalSeconds: 0 },
+        { task: "Check for unwanted buzz or rattle", completed: false, totalSeconds: 0 },
+        { task: "Play test: tonal and dynamic response", completed: false, totalSeconds: 0 },
+        { task: "Detail clean shell and hardware", completed: false, totalSeconds: 0 },
+        { task: "Confirm tuning stability", completed: false, totalSeconds: 0 }
+      ]
+    },
+    qualityCheck: {
+      checklist: [
+        { task: "Final shell inspection (interior + exterior)", completed: false, totalSeconds: 0 },
+        { task: "Check for visual defects or inconsistencies", completed: false, totalSeconds: 0 },
+        { task: "Confirm bearing edge cleanliness and integrity", completed: false, totalSeconds: 0 },
+        { task: "Inspect hardware tightness and alignment", completed: false, totalSeconds: 0 },
+        { task: "Ensure snare wire response is consistent", completed: false, totalSeconds: 0 },
+        { task: "Full test-play to confirm tonal balance", completed: false, totalSeconds: 0 },
+        { task: "Clean and polish entire drum for delivery", completed: false, totalSeconds: 0 },
+        { task: "Mark drum as production complete", completed: false, totalSeconds: 0 }
+      ]
+    }
+  };
+
   const handleStatusUpdate = async (newStatus) => {
     setSelectedStatus(newStatus);
     try {
-      const submissionRef = doc(
-        db,
-        'soundlegend_submissions',
-        fullSubmission.id
-      );
+      const overviewStatus = getOverviewStatus('soundlegend', newStatus);
+      const submissionRef = doc(db, 'soundlegend_submissions', fullSubmission.id);
       const timestamp = new Date().toISOString();
       const historyEntry = { type: 'status', value: newStatus, timestamp };
-  
-      // Normalize status into overviewStatus
-      let overviewStatus = 'new';
-      const lower = newStatus.toLowerCase();
-      if (lower === 'prospecting') {
-        overviewStatus = 'inProgress';
-      } else if (lower.startsWith('closed')) {
-        overviewStatus = 'completed';
-      }
-  
+
       await updateDoc(submissionRef, {
         status: newStatus,
         overviewStatus,
         history: arrayUnion(historyEntry),
       });
-  
+
       setHistory((prev) => [...prev, historyEntry]);
-  
-      // 🔥 THIS is what updates the status on the main table:
+
       if (onUpdateSubmission) {
         onUpdateSubmission({
           ...fullSubmission,
@@ -109,7 +182,7 @@ const ViewSoundlegendModal = ({ submission, onClose, onStatusUpdate, onUpdateSub
           history: [...history, historyEntry],
         });
       }
-  
+
       if (onStatusUpdate) {
         onStatusUpdate(fullSubmission.id, newStatus);
       }
@@ -139,20 +212,14 @@ const ViewSoundlegendModal = ({ submission, onClose, onStatusUpdate, onUpdateSub
   const copyToClipboard = (text) => {
     navigator.clipboard
       .writeText(text)
-      .then(() => {
-        console.log(`📋 Copied: ${text}`);
-      })
-      .catch((err) => {
-        console.error('❌ Copy failed:', err);
-      });
+      .then(() => console.log(`📋 Copied: ${text}`))
+      .catch((err) => console.error('❌ Copy failed:', err));
   };
 
   const createProject = async () => {
-    const confirmCreation = window.confirm(
-      `Create Project for ${firstName} ${lastName}?`
-    );
+    const confirmCreation = window.confirm(`Create Project for ${firstName} ${lastName}?`);
     if (!confirmCreation) return;
-  
+
     try {
       const projectData = {
         source: 'SoundLegend',
@@ -170,30 +237,31 @@ const ViewSoundlegendModal = ({ submission, onClose, onStatusUpdate, onUpdateSub
           },
         },
         artisanLine: "SoundLegend",
-        width: "14\"",
-        shellDepth: "8\"",
+        width: '14"',
+        shellDepth: '8"',
         startDate: Timestamp.now(),
-        currentPhase: "Step 1. Wood Preparation",
+        currentPhase: 'Step 1. Wood Preparation',
+        ...defaultStepData  // ⬅️ ADD THIS
       };
-  
+
       const projectRef = await addDoc(collection(db, 'projects'), projectData);
       const projectId = projectRef.id;
-  
+
       const submissionRef = doc(db, 'soundlegend_submissions', fullSubmission.id);
       const systemEntry = {
         type: 'system',
         value: `Project created: ${projectId}`,
         timestamp: new Date().toISOString(),
       };
-  
+
       await updateDoc(submissionRef, {
         projectId,
         history: arrayUnion(systemEntry),
       });
-  
+
       setProjectId(projectId);
       setHistory((prev) => [systemEntry, ...prev]);
-  
+
       alert(`✅ Project created successfully!\n\nID: ${projectId}`);
       if (onUpdateSubmission) {
         onUpdateSubmission({
@@ -222,15 +290,12 @@ const ViewSoundlegendModal = ({ submission, onClose, onStatusUpdate, onUpdateSub
         const data = snap.data();
         let validProjectId = data.projectId || null;
 
-        // Check if project exists
         if (validProjectId) {
           const projectRef = doc(db, 'projects', validProjectId);
           const projectSnap = await getDoc(projectRef);
           if (!projectSnap.exists()) {
             console.warn(`❌ Linked project not found: ${validProjectId}`);
             validProjectId = null;
-
-            // Optional: remove reference from submission
             await updateDoc(ref, { projectId: null });
           }
         }
@@ -250,21 +315,17 @@ const ViewSoundlegendModal = ({ submission, onClose, onStatusUpdate, onUpdateSub
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <button className="close-button" onClick={onClose}>
-          ✕
-        </button>
+        <button className="close-button" onClick={onClose}>✕</button>
         <h2 className="modal-title">SoundLegend Submission</h2>
 
         <div className="modal-status-update">
-          <label>
-            <strong>Status:</strong>
-          </label>
+          <label><strong>Status:</strong></label>
           <select
             value={selectedStatus}
             onChange={(e) => handleStatusUpdate(e.target.value)}
             className="status-select"
           >
-            {statusOptions.map((status) => (
+            {STATUS_OPTIONS.soundlegend.map((status) => (
               <option key={status} value={status}>
                 {status}
               </option>
@@ -300,19 +361,13 @@ const ViewSoundlegendModal = ({ submission, onClose, onStatusUpdate, onUpdateSub
           )}
           {submittedAt?.seconds && (
             <div className="detail-group">
-              <strong>Submitted:</strong>{' '}
-              {new Date(submittedAt.seconds * 1000).toLocaleString()}
+              <strong>Submitted:</strong> {new Date(submittedAt.seconds * 1000).toLocaleString()}
             </div>
           )}
           {projectId ? (
             <div className="detail-group">
               <strong>Linked Project:</strong>{' '}
-              <a
-                href={`/projects/${projectId}`}
-                target="_blank"
-                rel="noreferrer"
-                className="project-link"
-              >
+              <a href={`/projects/${projectId}`} target="_blank" rel="noreferrer" className="project-link">
                 Open Project ↗
               </a>
               <button
@@ -336,18 +391,6 @@ const ViewSoundlegendModal = ({ submission, onClose, onStatusUpdate, onUpdateSub
           >
             Download Contact Card
           </button>
-          {projectId && (
-            <div className="detail-group">
-              <strong>Project ID:</strong> {projectId}
-              <button
-                className="copy-btn"
-                onClick={() => copyToClipboard(projectId)}
-                title="Copy Project ID"
-              >
-                📋
-              </button>
-            </div>
-          )}
         </div>
 
         {artistBio && (
@@ -365,9 +408,7 @@ const ViewSoundlegendModal = ({ submission, onClose, onStatusUpdate, onUpdateSub
         )}
 
         <div className="modal-item">
-          <label>
-            <strong>Add Note:</strong>
-          </label>
+          <label><strong>Add Note:</strong></label>
           <textarea
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
@@ -400,7 +441,7 @@ const ViewSoundlegendModal = ({ submission, onClose, onStatusUpdate, onUpdateSub
               <tbody>
                 {history.map((entry, index) => (
                   <tr key={index}>
-                    <td>{entry.type === 'status' ? 'Status' : 'Note'}</td>
+                    <td>{entry.type === 'status' ? 'Status' : entry.type}</td>
                     <td>{entry.value}</td>
                     <td>{new Date(entry.timestamp).toLocaleString()}</td>
                   </tr>

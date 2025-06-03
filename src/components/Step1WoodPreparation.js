@@ -1,16 +1,28 @@
+// src/components/Step1WoodPreparation.js
 import React, { useState, useEffect, useRef } from 'react';
 import './Step1WoodPreparation.css';
 
-const Step1WoodPreparation = ({ stepData, onToggleChecklist, relatedData, onSaveToFirestore }) => {
+const defaultChecklist = [
+  { task: 'Inspect raw wood for defects or warping', completed: false, totalSeconds: 0 },
+  { task: 'Verify moisture content (8–12%)', completed: false, totalSeconds: 0 },
+  { task: 'Rough cut to stave or segment lengths', completed: false, totalSeconds: 0 },
+  { task: 'Joint edges and flatten faces', completed: false, totalSeconds: 0 },
+  { task: 'Run through planer to thickness spec', completed: false, totalSeconds: 0 },
+  { task: 'Arrange for grain direction / visual layout', completed: false, totalSeconds: 0 },
+];
+
+const Step1WoodPreparation = ({ stepData = {}, onToggleChecklist }) => {
+  const checklist = stepData?.checklist?.length ? stepData.checklist : defaultChecklist;
   const [timers, setTimers] = useState([]);
   const intervals = useRef({});
 
   useEffect(() => {
-    const initialTimers = stepData?.checklist?.map((item) => ({
-      running: false,
-      seconds: item.totalSeconds || 0,
-    })) || [];
-    setTimers(initialTimers);
+    setTimers(
+      checklist.map((item) => ({
+        running: false,
+        seconds: item.totalSeconds || 0,
+      }))
+    );
   }, [stepData]);
 
   const toggleTimer = (index) => {
@@ -24,7 +36,7 @@ const Step1WoodPreparation = ({ stepData, onToggleChecklist, relatedData, onSave
       intervals.current[index] = setInterval(() => {
         setTimers((prev) => {
           const updated = [...prev];
-          if (updated[index].running) {
+          if (updated[index]?.running) {
             updated[index].seconds += 1;
           }
           return updated;
@@ -34,35 +46,16 @@ const Step1WoodPreparation = ({ stepData, onToggleChecklist, relatedData, onSave
   };
 
   const handleCheckboxToggle = (index) => {
-    const updatedTimers = [...timers];
-    updatedTimers[index].running = false;
-    clearInterval(intervals.current[index]);
+    const isNowCompleted = !checklist[index]?.completed;
+    const seconds = timers[index]?.seconds || 0;
 
-    // Update local state
-    setTimers(updatedTimers);
+    if (isNowCompleted) {
+      timers[index].running = false;
+      clearInterval(intervals.current[index]);
+      delete intervals.current[index];
+    }
 
-    // Update checklist item with completion + total time
-    const updatedItem = {
-      ...stepData.checklist[index],
-      completed: true,
-      totalSeconds: updatedTimers[index]?.seconds || 0,
-    };
-
-    const updatedChecklist = stepData.checklist.map((item, i) =>
-      i === index ? updatedItem : item
-    );
-
-    // Persist full woodPreparation object
-    const updatedStepData = {
-      ...stepData,
-      checklist: updatedChecklist,
-    };
-
-    // Update parent and Firestore
-    onToggleChecklist(index); // for local UI
-    onSaveToFirestore({
-      woodPreparation: updatedStepData,
-    });
+    onToggleChecklist(index, isNowCompleted, seconds);
   };
 
   const formatTime = (seconds) => {
@@ -74,7 +67,6 @@ const Step1WoodPreparation = ({ stepData, onToggleChecklist, relatedData, onSave
   return (
     <div className="step1-container">
       <h3 className="step1-title">Step 1: Wood Preparation</h3>
-
       <div className="step1-checklist">
         <table className="step1-table">
           <thead>
@@ -86,7 +78,7 @@ const Step1WoodPreparation = ({ stepData, onToggleChecklist, relatedData, onSave
             </tr>
           </thead>
           <tbody>
-            {stepData?.checklist?.map((item, index) => (
+            {checklist.map((item, index) => (
               <tr key={index}>
                 <td>
                   {!item.completed && (

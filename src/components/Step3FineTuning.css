@@ -1,0 +1,47 @@
+.step3-container {
+    padding: 1rem;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .step3-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .step3-checklist {
+    width: 100%;
+    overflow-x: auto;
+  }
+  
+  .step3-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #1e1e1e;
+    color: #fff;
+  }
+  
+  .step3-table th,
+  .step3-table td {
+    border: 1px solid #333;
+    padding: 12px 16px;
+    text-align: left;
+  }
+  
+  .step3-table input[type='checkbox'] {
+    transform: scale(1.2);
+  }
+  
+  .timer-toggle {
+    background-color: #444;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .timer-toggle:hover {
+    background-color: #666;
+  }
