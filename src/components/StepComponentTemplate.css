@@ -1,0 +1,165 @@
+.step-container {
+    padding: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    font-family: 'Poppins', sans-serif;
+    color: #111;
+  }
+  
+  .step-title {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  
+  .step-checklist {
+    margin-top: 1.5rem;
+  }
+  
+  .step-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .step-table th,
+  .step-table td {
+    border-bottom: 1px solid #ddd;
+    padding: 0.75rem;
+    vertical-align: top;
+    font-size: 0.95rem;
+  }
+  
+  .step-table th {
+    text-align: left;
+    font-weight: 600;
+    color: #444;
+  }
+  
+  .step-table td:first-child {
+    width: 20px;
+    text-align: center;
+  }
+  
+  .step-table input[type="checkbox"] {
+    transform: scale(1.2);
+    accent-color: #6fe0b5;
+    cursor: pointer;
+  }
+  
+  .timer-toggle {
+    all: unset;
+    background-color: #6fe0b5;
+    color: #111;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+  }
+  
+  .timer-toggle:hover {
+    background-color: #5bcc9c;
+  }
+
+  .step-total-time {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .timer-toggle {
+    all: unset;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background-color 0.2s ease;
+  }
+  
+  .timer-toggle.start {
+    background-color: #6fe0b5;
+    color: #111;
+  }
+  
+  .timer-toggle.stop {
+    background-color: #f45c5c;
+    color: white;
+  }
+
+  .clear-time-btn {
+    all: unset;
+    font-size: 0.75rem;
+    color: #888;
+    cursor: pointer;
+    margin-top: 2px;
+  }
+  
+  .clear-time-btn:hover {
+    text-decoration: underline;
+    color: #e74c3c;
+  }
+
+  .manual-time-input {
+    width: 60px;
+    font-size: 0.85rem;
+    padding: 2px 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .time-display {
+    cursor: pointer;
+    display: inline-block;
+  }
+
+  .time-input-group {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 4px;
+  }
+  
+  .manual-time-input {
+    width: 20px;
+    font-size: 0.85rem;
+    padding: 3px 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .time-input-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  
+  .time-input-actions button {
+    all: unset;
+    font-size: 0.8rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #6fe0b5;
+    font-weight: 600;
+    color: #111;
+    border: 1px solid transparent;
+  }
+  
+  .time-input-actions button:hover {
+    background-color: #5bcc9c;
+  }
+  
+  .time-input-actions button.cancel-btn {
+    background-color: #eee;
+    color: #333;
+  }
+  
+  .time-input-actions button.cancel-btn:hover {
+    background-color: #ddd;
+  }
