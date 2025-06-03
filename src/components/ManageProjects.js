@@ -7,7 +7,7 @@ import {
   Timestamp,
 } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
-import ManageProjectModal from './ManageProjectModal';
+import ManageProjectModal from './ManageProjectModal'
 import './ManageProjects.css';
 
 const buildPhases = [
@@ -22,6 +22,19 @@ const buildPhases = [
   'Step 9. Tuning and Detailing',
   'Step 10. Quality Check',
 ];
+
+const stepWeights = {
+  woodPreparation: 0.05,
+  shellConstruction: 0.2,
+  fineTuning: 0.1,
+  shellExteriorFinish: 0.2,
+  bearingEdges: 0.1,
+  snareBedCutting: 0.1,
+  hardwareDrilling: 0.1,
+  hardwareAssembly: 0.05,
+  tuningAndDetailing: 0.05,
+  qualityCheck: 0.05,
+};
 
 const ManageProjects = () => {
   const [projects, setProjects] = useState([]);
@@ -115,10 +128,49 @@ const ManageProjects = () => {
           p.id === selectedProject.id ? { ...p, ...updatedData } : p
         )
       );
+      setFilteredProjects((prev) =>
+        prev.map((p) =>
+          p.id === selectedProject.id ? { ...p, ...updatedData } : p
+        )
+      );
       closeModal();
     } catch (error) {
       console.error('Error saving project updates:', error);
     }
+  };
+
+  const calculateProjectProgress = (project) => {
+    let total = 0;
+
+    for (const [stepKey, weight] of Object.entries(stepWeights)) {
+      const checklist = project[stepKey]?.checklist;
+      if (!checklist || checklist.length === 0) continue;
+
+      const completedCount = checklist.filter((item) => item.completed).length;
+      const percentComplete = completedCount / checklist.length;
+
+      total += percentComplete * weight;
+    }
+
+    return Math.round(total * 100); // percent
+  };
+
+  const handleLiveUpdate = (partialUpdate) => {
+    setProjects((prev) =>
+      prev.map((p) =>
+        p.id === partialUpdate.id ? { ...p, ...partialUpdate } : p
+      )
+    );
+    setFilteredProjects((prev) =>
+      prev.map((p) =>
+        p.id === partialUpdate.id ? { ...p, ...partialUpdate } : p
+      )
+    );
+    setSelectedProject((prev) =>
+      prev && prev.id === partialUpdate.id
+        ? { ...prev, ...partialUpdate }
+        : prev
+    );
   };
 
   return (
@@ -168,11 +220,20 @@ const ManageProjects = () => {
                 <td>{createdAt}</td>
                 <td>{project.currentPhase}</td>
                 <td>
-                  <div className="progress-bar">
-                    <div
-                      className="progress"
-                      style={{ width: `${progress}%` }}
-                    ></div>
+                  <div className="project-progress-bar">
+                    <div className="progress-bar-wrapper">
+                      <div className="progress-bar-track">
+                        <div
+                          className="progress-bar-fill"
+                          style={{
+                            width: `${calculateProjectProgress(project)}%`,
+                          }}
+                        />
+                      </div>
+                    </div>
+                    <span className="progress-percent">
+                      {calculateProjectProgress(project)}%
+                    </span>
                   </div>
                 </td>
                 <td>{isOverdue(project) ? 'Overdue' : 'On Track'}</td>
@@ -188,6 +249,7 @@ const ManageProjects = () => {
           onClose={closeModal}
           projectData={selectedProject}
           onSave={handleSave}
+          onProjectUpdate={handleLiveUpdate}
         />
       )}
     </div>

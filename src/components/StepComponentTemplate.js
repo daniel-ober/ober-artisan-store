@@ -7,7 +7,7 @@ const StepComponentTemplate = ({
   stepData = {},
   onToggleChecklist,
 }) => {
-  const checklist = stepData?.checklist || [];
+  const [localChecklist, setLocalChecklist] = useState([]);
   const [timers, setTimers] = useState([]);
   const intervals = useRef({});
   const [editingIndex, setEditingIndex] = useState(null);
@@ -16,13 +16,17 @@ const StepComponentTemplate = ({
   const [editSs, setEditSs] = useState('00');
 
   useEffect(() => {
+    setLocalChecklist(stepData?.checklist || []);
+  }, [stepData?.checklist]);
+
+  useEffect(() => {
     setTimers(
-      checklist.map((item) => ({
+      localChecklist.map((item) => ({
         running: false,
         seconds: item.totalSeconds || 0,
       }))
     );
-  }, [stepData]);
+  }, [JSON.stringify(localChecklist)]);
 
   const toggleTimer = (index) => {
     setTimers((prev) => {
@@ -32,7 +36,7 @@ const StepComponentTemplate = ({
 
       if (wasRunning) {
         const seconds = updated[index].seconds;
-        onToggleChecklist(index, checklist[index]?.completed || false, seconds);
+        onToggleChecklist(index, localChecklist[index]?.completed || false, seconds);
       }
 
       return updated;
@@ -52,7 +56,7 @@ const StepComponentTemplate = ({
   };
 
   const handleCheckboxToggle = (index) => {
-    const isNowCompleted = !checklist[index]?.completed;
+    const isNowCompleted = !localChecklist[index]?.completed;
     const seconds = timers[index]?.seconds || 0;
 
     if (isNowCompleted) {
@@ -75,7 +79,7 @@ const StepComponentTemplate = ({
       return updated;
     });
 
-    onToggleChecklist(index, checklist[index]?.completed || false, 0);
+    onToggleChecklist(index, localChecklist[index]?.completed || false, 0);
   };
 
   const formatTime = (seconds) => {
@@ -106,7 +110,7 @@ const StepComponentTemplate = ({
       return updated;
     });
 
-    onToggleChecklist(index, checklist[index]?.completed || false, totalSeconds);
+    onToggleChecklist(index, localChecklist[index]?.completed || false, totalSeconds);
     setEditingIndex(null);
   };
 
@@ -120,11 +124,11 @@ const StepComponentTemplate = ({
         const isInsideTimeInputs = e.target.closest('.time-input-group') || e.target.closest('.time-input-actions');
         if (!isInsideTimeInputs) {
           alert('Please save or cancel your time edit first.');
-          e.stopPropagation(); // prevent other actions
+          e.stopPropagation();
         }
       }
     };
-  
+
     document.addEventListener('click', handleClickOutside, true);
     return () => document.removeEventListener('click', handleClickOutside, true);
   }, [editingIndex]);
@@ -135,7 +139,7 @@ const StepComponentTemplate = ({
       <p className="step-total-time">
         <strong>Total Time:</strong> {formatTime(totalStepTime)}
       </p>
-  
+
       <div className="step-checklist">
         <table className="step-table">
           <thead>
@@ -147,7 +151,7 @@ const StepComponentTemplate = ({
             </tr>
           </thead>
           <tbody>
-            {checklist.map((item, index) => (
+            {localChecklist.map((item, index) => (
               <tr key={index}>
                 <td>
                   {!item.completed && (
@@ -228,7 +232,6 @@ const StepComponentTemplate = ({
                       {formatTime(timers[index]?.seconds || 0)}
                     </span>
                   )}
-  
                   <div>
                     <button
                       onClick={() => handleClear(index)}

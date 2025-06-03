@@ -43,17 +43,38 @@
   cursor: pointer;
 }
 
-.progress-bar {
-  width: 100%;
-  background-color: #e0e0e0;
-  border-radius: 6px;
-  overflow: hidden;
-  height: 14px;
+/* Updated progress bar styling */
+.project-progress-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 140px; /* enough room for bar + text */
 }
 
-.progress {
+.progress-percent {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #333;
+  min-width: 32px;
+  text-align: right;
+}
+
+.progress-bar-wrapper {
+  width: 100%;
+  height: 10px;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.progress-bar-track {
+  width: 100%;
   height: 100%;
-  background-color: #00b894; /* or any other visible color */
-  width: 0%; /* dynamically updated inline */
+  background-color: #e0e0e0;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background-color: #05c46b;
   transition: width 0.3s ease-in-out;
 }

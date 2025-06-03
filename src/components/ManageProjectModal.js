@@ -1,14 +1,13 @@
-// src/components/ManageProjectModal.js
+// ManageProjectModal.js
 import React, { useState, useEffect } from 'react';
-import { doc, setDoc } from 'firebase/firestore';
+import { doc, setDoc, getDoc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
-
 import StepComponentTemplate from './StepComponentTemplate';
 import ProjectOverview from './ProjectOverview';
+import defaultStepData from '../utils/defaultStepData';
 import './ManageProjectModal.css';
 
 const buildPhases = [
-  { key: 'overview', label: 'Overview' },
   { key: 'woodPreparation', label: 'Step 1: Wood Preparation' },
   { key: 'shellConstruction', label: 'Step 2: Shell Construction' },
   { key: 'fineTuning', label: 'Step 3: Fine-Tuning' },
@@ -21,81 +20,135 @@ const buildPhases = [
   { key: 'qualityCheck', label: 'Step 10: Quality Check' },
 ];
 
-const removeUndefined = (obj) => {
-  if (Array.isArray(obj)) return obj.map(removeUndefined);
-  if (obj && typeof obj === 'object') {
-    const cleaned = {};
-    for (const key in obj) {
-      if (obj[key] !== undefined) cleaned[key] = removeUndefined(obj[key]);
+const ensureChecklistStructure = (data) => {
+  const fixed = { ...data };
+
+  for (const [stepKey, stepValue] of Object.entries(defaultStepData)) {
+    if (!fixed[stepKey]) {
+      fixed[stepKey] = stepValue;
+    } else if (!Array.isArray(fixed[stepKey].checklist)) {
+      fixed[stepKey].checklist = stepValue.checklist;
+    } else {
+      const existingTasks = fixed[stepKey].checklist.map((item) => item.task);
+      const mergedChecklist = [...fixed[stepKey].checklist];
+      stepValue.checklist.forEach((defaultItem) => {
+        if (!existingTasks.includes(defaultItem.task)) {
+          mergedChecklist.push(defaultItem);
+        }
+      });
+      fixed[stepKey].checklist = mergedChecklist;
     }
-    return cleaned;
   }
-  return obj;
+  return fixed;
 };
 
-const ManageProjectModal = ({ isOpen, onClose, projectData, onSave }) => {
-  const [selectedTab, setSelectedTab] = useState('overview');
+const determineCurrentPhase = (data = editableData) => {
+    for (const phase of buildPhases) {
+      const checklist = data[phase.key]?.checklist;
+      if (!checklist || checklist.some((item) => !item.completed)) {
+        return phase.label;
+      }
+    }
+    return 'All Steps Complete';
+  };
+
+const ManageProjectModal = ({
+  isOpen,
+  onClose,
+  projectData,
+  onProjectUpdate,
+}) => {
+  const [selectedTab, setSelectedTab] = useState('details');
   const [editableData, setEditableData] = useState({});
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     if (!projectData) return;
-    const convertTimestamps = (obj) => {
-      if (!obj || typeof obj !== 'object') return obj;
-      if ('seconds' in obj && 'nanoseconds' in obj) return new Date(obj.seconds * 1000).toISOString();
-      if (Array.isArray(obj)) return obj.map(convertTimestamps);
-      const newObj = {};
-      for (const key in obj) newObj[key] = convertTimestamps(obj[key]);
-      return newObj;
-    };
-    setEditableData(convertTimestamps(projectData));
+    const hydrate = ensureChecklistStructure(projectData);
+    setEditableData(hydrate);
   }, [projectData]);
 
-  const saveToFirestore = async (updatedData = {}) => {
-    try {
-      const projectRef = doc(db, 'projects', projectData.id);
-      const dataToSave = removeUndefined({ ...editableData, ...updatedData });
-      await setDoc(projectRef, dataToSave, { merge: true });
-      console.log('✅ Data saved successfully!');
-    } catch (error) {
-      console.error('❌ Error updating project:', error);
-    }
-  };
-
-  const handleChecklistToggle = (stepKey, index, completed, totalSeconds) => {
-    const stepData = editableData[stepKey] || {};
-    const checklist = stepData.checklist || [];
-    const updatedChecklist = checklist.map((item, i) =>
-      i === index ? { ...item, completed, totalSeconds } : item
-    );
-    const updatedStep = { ...stepData, checklist: updatedChecklist };
-    const updatedData = { ...editableData, [stepKey]: updatedStep };
-    setEditableData(updatedData);
-    saveToFirestore({ [stepKey]: updatedStep });
-  };
-
-  const calculateProjectTotalTime = () => {
+  const calculateProjectTotalTime = (data = editableData) => {
     let total = 0;
-    for (const key in editableData) {
-      if (editableData[key]?.checklist) {
-        total += editableData[key].checklist.reduce((sum, item) => sum + (item.totalSeconds || 0), 0);
+    for (const key in data) {
+      if (data[key]?.checklist) {
+        total += data[key].checklist.reduce(
+          (sum, item) => sum + (item.totalSeconds || 0),
+          0
+        );
       }
     }
     return total;
   };
 
+  const determineOverallStatus = (data = editableData) => {
+    const allTasks = buildPhases.flatMap((p) => data[p.key]?.checklist || []);
+    const total = allTasks.length;
+    const completed = allTasks.filter((t) => t.completed).length;
+    if (completed === 0) return 'Initial Planning';
+    if (completed === total) return 'Finished';
+    return 'In Production';
+  };
+
+  const saveToFirestore = async (updatedPartial = {}) => {
+    try {
+      const merged = { ...editableData, ...updatedPartial };
+      const totalTimeSeconds = calculateProjectTotalTime(merged);
+      const status = determineOverallStatus(merged);
+      const currentPhase = determineCurrentPhase(merged);
+
+      const dataToSave = {
+        ...merged,
+        totalTimeSeconds,
+        status,
+        currentPhase, 
+      };
+
+      const projectRef = doc(db, 'projects', projectData.id);
+      await setDoc(projectRef, dataToSave, { merge: true });
+
+      const refreshed = await getDoc(projectRef);
+      const rehydrated = ensureChecklistStructure(refreshed.data());
+      setEditableData(rehydrated);
+    } catch (err) {
+      console.error('❌ Failed to save project data:', err);
+    }
+  };
+
+  const handleChecklistToggle = (stepKey, index, completed, totalSeconds) => {
+    const step = editableData[stepKey] || { checklist: [] };
+    const updatedChecklist = step.checklist.map((item, i) =>
+      i === index ? { ...item, completed, totalSeconds } : item
+    );
+
+    const updatedStep = { ...step, checklist: updatedChecklist };
+    const update = { [stepKey]: updatedStep };
+    setEditableData((prev) => ({ ...prev, ...update }));
+    if (onProjectUpdate) {
+        onProjectUpdate({
+          id: projectData.id,
+          [stepKey]: updatedStep,
+        });
+      }
+    saveToFirestore(update);
+  };
+
+  const isStepComplete = (key) => {
+    const list = editableData[key]?.checklist;
+    return list?.length > 0 && list.every((item) => item.completed);
+  };
+
   const renderContent = () => {
-    if (selectedTab === 'overview') {
+    if (selectedTab === 'details') {
       return (
         <ProjectOverview
           editableData={editableData}
           isEditing={isEditing}
           onEditToggle={() => setIsEditing(!isEditing)}
-          onChange={(field, value) =>
+          handleChange={(field, value) =>
             setEditableData((prev) => ({ ...prev, [field]: value }))
           }
           onSave={saveToFirestore}
-          totalTime={calculateProjectTotalTime()}
         />
       );
     }
@@ -103,7 +156,9 @@ const ManageProjectModal = ({ isOpen, onClose, projectData, onSave }) => {
     return (
       <StepComponentTemplate
         stepKey={selectedTab}
-        stepLabel={buildPhases.find((p) => p.key === selectedTab)?.label || selectedTab}
+        stepLabel={
+          buildPhases.find((p) => p.key === selectedTab)?.label || selectedTab
+        }
         stepData={editableData[selectedTab]}
         onToggleChecklist={(index, completed, seconds) =>
           handleChecklistToggle(selectedTab, index, completed, seconds)
@@ -118,29 +173,50 @@ const ManageProjectModal = ({ isOpen, onClose, projectData, onSave }) => {
     <div className="manage-project-modal-overlay">
       <div className="manage-project-modal-content">
         <header>
-          <h2>Project Overview</h2>
-          <button onClick={onClose} className="close-modal-btn">&times;</button>
+          <div className="header-left">
+            <h2>Project Overview</h2>
+            <button
+              className="link-button"
+              onClick={() => setSelectedTab('details')}
+            >
+              Project Details
+            </button>
+          </div>
+          <div className="total-time-wrapper">
+            <span className="total-time-label">Total Time Spent:</span>
+            <span className="total-time-value">
+              {Math.floor(calculateProjectTotalTime() / 3600)} hrs
+            </span>
+            <button onClick={onClose} className="close-modal-btn">
+              &times;
+            </button>
+          </div>
         </header>
         <div className="modal-body">
           <aside className="sidebar">
-            {buildPhases.map((phase) => (
-              <button
-                key={phase.key}
-                className={selectedTab === phase.key ? 'active' : ''}
-                onClick={() => setSelectedTab(phase.key)}
-              >
-                {phase.label}
-              </button>
-            ))}
+          {buildPhases.map((phase, index) => {
+  const allPriorComplete = buildPhases
+    .slice(0, index)
+    .every((p) =>
+      editableData[p.key]?.checklist?.every((item) => item.completed)
+    );
+
+  const isActive = selectedTab === phase.key;
+
+  return (
+    <button
+      key={phase.key}
+      disabled={!allPriorComplete}
+      className={isActive ? 'active' : ''}
+      onClick={() => setSelectedTab(phase.key)}
+    >
+      {isStepComplete(phase.key) ? '✅ ' : ''}
+      {phase.label}
+    </button>
+  );
+})}
           </aside>
-          <main>
-            {renderContent()}
-            {isEditing && selectedTab === 'overview' && (
-              <button onClick={() => saveToFirestore()} className="save-button">
-                Save
-              </button>
-            )}
-          </main>
+          <main>{renderContent()}</main>
         </div>
       </div>
     </div>
