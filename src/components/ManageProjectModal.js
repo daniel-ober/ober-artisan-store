@@ -3,44 +3,30 @@ import React, { useState, useEffect } from 'react';
 import { doc, setDoc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 
-import Step1WoodPreparation from './Step1WoodPreparation';
-import Step2ShellConstruction from './Step2ShellConstruction';
-import Step3FineTuning from './Step3FineTuning';
-import Step4ShellExteriorFinish from './Step4ShellExteriorFinish';
-import Step5BearingEdges from './Step5BearingEdges';
-import Step6SnareBedCutting from './Step6SnareBedCutting';
-import Step7HardwareDrilling from './Step7HardwareDrilling';
-import Step8HardwareAssembly from './Step8HardwareAssembly';
-import Step9TuningDetailing from './Step9TuningDetailing';
-import Step10QualityCheck from './Step10QualityCheck';
-
+import StepComponentTemplate from './StepComponentTemplate';
 import ProjectOverview from './ProjectOverview';
 import './ManageProjectModal.css';
 
 const buildPhases = [
   { key: 'overview', label: 'Overview' },
-  { key: 'Step 1. Wood Preparation', label: 'Step 1. Wood Preparation' },
-  { key: 'Step 2. Shell Construction', label: 'Step 2. Shell Construction' },
-  { key: 'Step 3. Fine-Tuning', label: 'Step 3. Fine-Tuning' },
-  { key: 'Step 4. Shell Exterior Finish', label: 'Step 4. Shell Exterior Finish' },
-  { key: 'Step 5. Bearing Edges', label: 'Step 5. Bearing Edges' },
-  { key: 'Step 6. Snare Bed Cutting', label: 'Step 6. Snare Bed Cutting' },
-  { key: 'Step 7. Hardware Drilling', label: 'Step 7. Hardware Drilling' },
-  { key: 'Step 8. Hardware Assembly', label: 'Step 8. Hardware Assembly' },
-  { key: 'Step 9. Tuning and Detailing', label: 'Step 9. Tuning and Detailing' },
-  { key: 'Step 10. Quality Check', label: 'Step 10. Quality Check' },
+  { key: 'woodPreparation', label: 'Step 1: Wood Preparation' },
+  { key: 'shellConstruction', label: 'Step 2: Shell Construction' },
+  { key: 'fineTuning', label: 'Step 3: Fine-Tuning' },
+  { key: 'shellExteriorFinish', label: 'Step 4: Shell Exterior Finish' },
+  { key: 'bearingEdges', label: 'Step 5: Bearing Edges' },
+  { key: 'snareBedCutting', label: 'Step 6: Snare Bed Cutting' },
+  { key: 'hardwareDrilling', label: 'Step 7: Hardware Drilling' },
+  { key: 'hardwareAssembly', label: 'Step 8: Hardware Assembly' },
+  { key: 'tuningDetailing', label: 'Step 9: Tuning and Detailing' },
+  { key: 'qualityCheck', label: 'Step 10: Quality Check' },
 ];
 
-// 🔧 Utility to remove undefined values before Firestore write
 const removeUndefined = (obj) => {
-  if (Array.isArray(obj)) {
-    return obj.map(removeUndefined);
-  } else if (obj && typeof obj === 'object') {
+  if (Array.isArray(obj)) return obj.map(removeUndefined);
+  if (obj && typeof obj === 'object') {
     const cleaned = {};
     for (const key in obj) {
-      if (obj[key] !== undefined) {
-        cleaned[key] = removeUndefined(obj[key]);
-      }
+      if (obj[key] !== undefined) cleaned[key] = removeUndefined(obj[key]);
     }
     return cleaned;
   }
@@ -56,18 +42,13 @@ const ManageProjectModal = ({ isOpen, onClose, projectData, onSave }) => {
     if (!projectData) return;
     const convertTimestamps = (obj) => {
       if (!obj || typeof obj !== 'object') return obj;
-      if ('seconds' in obj && 'nanoseconds' in obj) {
-        return new Date(obj.seconds * 1000).toISOString();
-      }
+      if ('seconds' in obj && 'nanoseconds' in obj) return new Date(obj.seconds * 1000).toISOString();
       if (Array.isArray(obj)) return obj.map(convertTimestamps);
       const newObj = {};
-      for (const key in obj) {
-        newObj[key] = convertTimestamps(obj[key]);
-      }
+      for (const key in obj) newObj[key] = convertTimestamps(obj[key]);
       return newObj;
     };
-    const normalizedData = convertTimestamps(projectData);
-    setEditableData(normalizedData);
+    setEditableData(convertTimestamps(projectData));
   }, [projectData]);
 
   const saveToFirestore = async (updatedData = {}) => {
@@ -93,104 +74,42 @@ const ManageProjectModal = ({ isOpen, onClose, projectData, onSave }) => {
     saveToFirestore({ [stepKey]: updatedStep });
   };
 
-  const renderContent = () => {
-    const sharedProps = (stepKey) => ({
-      onToggleChecklist: (index, completed, seconds) =>
-        handleChecklistToggle(stepKey, index, completed, seconds),
-      onSaveToFirestore: saveToFirestore,
-    });
-
-    switch (selectedTab) {
-      case 'overview':
-        return (
-          <ProjectOverview
-            editableData={editableData}
-            isEditing={isEditing}
-            onEditToggle={() => setIsEditing(!isEditing)}
-            onChange={(field, value) =>
-              setEditableData((prev) => ({ ...prev, [field]: value }))
-            }
-            onSave={saveToFirestore}
-          />
-        );
-      case 'Step 1. Wood Preparation':
-        return (
-          <Step1WoodPreparation
-            stepData={editableData.woodPreparation}
-            relatedData={{
-              woodSpecies: editableData.woodSpecies,
-              thickness: editableData.thickness,
-              bearingEdge: editableData.bearingEdge,
-            }}
-            {...sharedProps('woodPreparation')}
-          />
-        );
-      case 'Step 2. Shell Construction':
-        return (
-          <Step2ShellConstruction
-            stepData={editableData.shellConstruction}
-            {...sharedProps('shellConstruction')}
-          />
-        );
-      case 'Step 3. Fine-Tuning':
-        return (
-          <Step3FineTuning
-            stepData={editableData.fineTuning}
-            {...sharedProps('fineTuning')}
-          />
-        );
-      case 'Step 4. Shell Exterior Finish':
-        return (
-          <Step4ShellExteriorFinish
-            stepData={editableData.shellExteriorFinish}
-            {...sharedProps('shellExteriorFinish')}
-          />
-        );
-      case 'Step 5. Bearing Edges':
-        return (
-          <Step5BearingEdges
-            stepData={editableData.bearingEdges}
-            {...sharedProps('bearingEdges')}
-          />
-        );
-      case 'Step 6. Snare Bed Cutting':
-        return (
-          <Step6SnareBedCutting
-            stepData={editableData.snareBedCutting}
-            {...sharedProps('snareBedCutting')}
-          />
-        );
-      case 'Step 7. Hardware Drilling':
-        return (
-          <Step7HardwareDrilling
-            stepData={editableData.hardwareDrilling}
-            {...sharedProps('hardwareDrilling')}
-          />
-        );
-      case 'Step 8. Hardware Assembly':
-        return (
-          <Step8HardwareAssembly
-            stepData={editableData.hardwareAssembly}
-            {...sharedProps('hardwareAssembly')}
-          />
-        );
-      case 'Step 9. Tuning and Detailing':
-        return (
-          <Step9TuningDetailing
-            stepData={editableData.tuningDetailing}
-            {...sharedProps('tuningDetailing')}
-          />
-        );
-      case 'Step 10. Quality Check':
-        return (
-          <Step10QualityCheck
-            stepData={editableData.qualityCheck}
-            {...sharedProps('qualityCheck')}
-          />
-        );
-      default:
-        return <div style={{ padding: '1rem' }}>Coming soon...</div>;
+  const calculateProjectTotalTime = () => {
+    let total = 0;
+    for (const key in editableData) {
+      if (editableData[key]?.checklist) {
+        total += editableData[key].checklist.reduce((sum, item) => sum + (item.totalSeconds || 0), 0);
+      }
     }
+    return total;
+  };
+
+  const renderContent = () => {
+    if (selectedTab === 'overview') {
+      return (
+        <ProjectOverview
+          editableData={editableData}
+          isEditing={isEditing}
+          onEditToggle={() => setIsEditing(!isEditing)}
+          onChange={(field, value) =>
+            setEditableData((prev) => ({ ...prev, [field]: value }))
+          }
+          onSave={saveToFirestore}
+          totalTime={calculateProjectTotalTime()}
+        />
+      );
+    }
+
+    return (
+      <StepComponentTemplate
+        stepKey={selectedTab}
+        stepLabel={buildPhases.find((p) => p.key === selectedTab)?.label || selectedTab}
+        stepData={editableData[selectedTab]}
+        onToggleChecklist={(index, completed, seconds) =>
+          handleChecklistToggle(selectedTab, index, completed, seconds)
+        }
+      />
+    );
   };
 
   if (!isOpen) return null;
