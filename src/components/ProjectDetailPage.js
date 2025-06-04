@@ -16,6 +16,7 @@ const ProjectDetailPage = () => {
   const [unauthorized, setUnauthorized] = useState(false);
   const [uploadingZone, setUploadingZone] = useState(null);
   const [uploadProgress, setUploadProgress] = useState(0);
+  const [modalPreview, setModalPreview] = useState(null);
   const [dragging, setDragging] = useState({
     mockups: false,
     documents: false,
@@ -47,7 +48,7 @@ const ProjectDetailPage = () => {
           setProject({ id: snap.id, ...data });
           setUploadedFiles({
             mockups: data.attachments?.mockups || [],
-            documents: data.attachments?.documents || [],
+            documents: data.attachments?.overview || [],
           });
         } else {
           setUnauthorized(true);
@@ -227,13 +228,20 @@ const ProjectDetailPage = () => {
           {project?.artisanLine?.trim() ? project.artisanLine : 'N/A'}
         </p>
         <p>
-          <strong>Wood Species:</strong>{' '}
-          {project?.woodPrimary?.trim() ? project.woodPrimary : 'N/A'}
+          <strong>Shell Construction:</strong>{' '}
+          {project?.shellConstructionName?.trim()
+            ? project.shellConstructionName
+            : 'N/A'}
         </p>
-        <p>
-          <strong>Bearing Edge:</strong>{' '}
-          {project?.bearingEdge?.trim() ? project.bearingEdge : 'N/A'}
-        </p>
+
+        {['Stave', 'Hybrid'].includes(project?.shellConstructionName) && (
+          <>
+            <p>
+              <strong>Stave Quantity:</strong>{' '}
+              {project?.staveCount ? project.staveCount : 'N/A'}
+            </p>
+          </>
+        )}
         <p>
           <strong>Diameter:</strong> {project?.width ? project.width : 'N/A'}
         </p>
@@ -242,10 +250,18 @@ const ProjectDetailPage = () => {
           {project?.shellDepth ? project.shellDepth : 'N/A'}
         </p>
         <p>
-          <strong>Shell Construction:</strong>{' '}
-          {project?.shellConstructionName?.trim()
-            ? project.shellConstructionName
+          <strong>Wood Species:</strong>{' '}
+          {project?.woodPrimary?.trim() ? project.woodPrimary : 'N/A'}
+        </p>
+        <p>
+          <strong>Target Shell Thickness:</strong>{' '}
+          {project?.targetShellThickness?.trim()
+            ? `${project.targetShellThickness} mm`
             : 'N/A'}
+        </p>
+        <p>
+          <strong>Bearing Edge:</strong>{' '}
+          {project?.bearingEdge?.trim() ? project.bearingEdge : 'N/A'}
         </p>
         <p>
           <strong>Quantity Lugs:</strong>{' '}
@@ -376,58 +392,87 @@ const ProjectDetailPage = () => {
       </section> */}
 
       <section className="project-section">
-        <h3>Uploaded Files</h3>
-
-        <div
-          className={`dropzone ${dragging.mockups ? 'drag-active' : ''}`}
-          onDrop={(e) => handleDrop(e, 'mockups')}
-          onDragOver={allowDrag}
-          onDragEnter={() => handleDragEnter('mockups')}
-          onDragLeave={() => handleDragLeave('mockups')}
-        >
-          <p>Drag & drop mockups here (admin only)</p>
-          {uploadingZone === 'mockups' && (
-            <p className="upload-progress">Uploading... {uploadProgress}%</p>
-          )}
+        <h3>Project Files (Uploaded Documents)</h3>
+        <div className="file-preview-grid">
+          {uploadedFiles.documents.map((url, i) => {
+            const fileType = url.split('.').pop().toLowerCase();
+            const isImage = ['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(
+              fileType
+            );
+            const isPDF = fileType === 'pdf';
+            const isAudio = ['mp3', 'wav', 'ogg'].includes(fileType);
+            const isVideo = ['mp4', 'webm', 'mov'].includes(fileType);
+            {
+              isImage && (
+                <img
+                  src={url}
+                  alt={`Uploaded ${i}`}
+                  className="file-preview-image"
+                  onClick={() => setModalPreview(url)}
+                  style={{ cursor: 'pointer' }}
+                />
+              );
+            }
+            return (
+              <div key={i} className="file-preview-item">
+                {isImage && (
+                  <img
+                    src={url}
+                    alt={`Uploaded ${i}`}
+                    className="file-preview-image"
+                  />
+                )}
+                {isPDF && (
+                  <iframe
+                    src={url}
+                    title={`PDF ${i}`}
+                    className="file-preview-pdf"
+                  />
+                )}
+                {isAudio && (
+                  <audio controls src={url} className="file-preview-audio">
+                    Your browser does not support the audio tag.
+                  </audio>
+                )}
+                {isVideo && (
+                  <video controls className="file-preview-video">
+                    <source src={url} />
+                    Your browser does not support the video tag.
+                  </video>
+                )}
+                {!isImage && !isPDF && !isAudio && !isVideo && (
+                  <a href={url} target="_blank" rel="noopener noreferrer">
+                    {decodeURIComponent(
+                      url.split('/').pop().split('?')[0].split('%2F').pop()
+                    )}
+                  </a>
+                )}
+              </div>
+            );
+          })}
         </div>
-
-        {uploadedFiles.mockups.length > 0 && (
-          <ul>
-            {uploadedFiles.mockups.map((url, i) => (
-              <li key={i}>
-                <a href={url} target="_blank" rel="noopener noreferrer">
-                  {url.split('/').pop().split('?')[0]}
-                </a>
-              </li>
-            ))}
-          </ul>
-        )}
-
-        <div
-          className={`dropzone ${dragging.documents ? 'drag-active' : ''}`}
-          onDrop={(e) => handleDrop(e, 'documents')}
-          onDragOver={allowDrag}
-          onDragEnter={() => handleDragEnter('documents')}
-          onDragLeave={() => handleDragLeave('documents')}
-        >
-          <p>Drag & drop documents here (admin only)</p>
-          {uploadingZone === 'documents' && (
-            <p className="upload-progress">Uploading... {uploadProgress}%</p>
-          )}
-        </div>
-
-        {uploadedFiles.documents.length > 0 && (
-          <ul>
-            {uploadedFiles.documents.map((url, i) => (
-              <li key={i}>
-                <a href={url} target="_blank" rel="noopener noreferrer">
-                  {decodeURIComponent(
-                    url.split('/').pop().split('?')[0].split('%2F').pop()
-                  )}
-                </a>
-              </li>
-            ))}
-          </ul>
+        {modalPreview && (
+          <div
+            className="file-preview-modal"
+            onClick={() => setModalPreview(null)}
+          >
+            <div
+              className="file-preview-modal-content"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                className="modal-close-button"
+                onClick={() => setModalPreview(null)}
+              >
+                &times;
+              </button>
+              <img
+                src={modalPreview}
+                alt="Preview"
+                style={{ maxWidth: '100%' }}
+              />
+            </div>
+          </div>
         )}
       </section>
     </div>
