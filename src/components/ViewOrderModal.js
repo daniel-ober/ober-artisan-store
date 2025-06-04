@@ -12,6 +12,7 @@ import './ViewOrderModal.css';
 import { Timestamp } from 'firebase/firestore';
 import { getOrderStatusFromItems } from '../utils/statusConfig';
 import defaultStepData from '../utils/defaultStepData';
+import defaultProjectFields from '../utils/defaultProjectFields';
 
 const ITEM_STATUSES = [
   'Preparing',
@@ -172,10 +173,11 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
         startDate: Timestamp.now(),
         currentPhase: 'Step 1. Wood Preparation',
         artisanLine: item?.name?.includes('Soundlegend') ? 'SoundLegend' : '',
-        width: '14"',
-        shellDepth: '8"',
+        width: '',
+        shellDepth: '',
         itemDetails: item || null,
-        ...defaultStepData, // ✅ inject full drum build workflow
+        ...defaultStepData,         // ✅ workflow
+        ...defaultProjectFields     // ✅ proposal specs
       };
   
       const projectRef = await addDoc(collection(db, 'projects'), projectData);
