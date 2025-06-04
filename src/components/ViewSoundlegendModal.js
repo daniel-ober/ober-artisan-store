@@ -11,6 +11,7 @@ import {
 import { db } from '../firebaseConfig';
 import './ViewSoundlegendModal.css';
 import { STATUS_OPTIONS, getOverviewStatus } from '../utils/statusConfig';
+import defaultProjectFields from '../utils/defaultProjectFields';
 
 const generateAndDownloadVCard = ({ firstName, lastName, email, phone }) => {
   const vCard = `
@@ -229,19 +230,15 @@ const ViewSoundlegendModal = ({ submission, onClose, onStatusUpdate, onUpdateSub
           name: `${firstName} ${lastName}`,
           email,
           phone: phone || '',
-          address: {
-            street: '',
-            city: '',
-            state: '',
-            zip: '',
-          },
+          address: { street: '', city: '', state: '', zip: '' },
         },
         artisanLine: "SoundLegend",
         width: '14"',
         shellDepth: '8"',
         startDate: Timestamp.now(),
         currentPhase: 'Step 1. Wood Preparation',
-        ...defaultStepData  // ⬅️ ADD THIS
+        ...defaultStepData,         // ✅ workflow
+        ...defaultProjectFields     // ✅ proposal specs
       };
 
       const projectRef = await addDoc(collection(db, 'projects'), projectData);

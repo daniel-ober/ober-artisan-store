@@ -6,6 +6,7 @@ const StepComponentTemplate = ({
   stepLabel,
   stepData = {},
   onToggleChecklist,
+  isLocked,
 }) => {
   const [localChecklist, setLocalChecklist] = useState([]);
   const [timers, setTimers] = useState([]);
@@ -20,34 +21,54 @@ const StepComponentTemplate = ({
   }, [stepData?.checklist]);
 
   useEffect(() => {
-    setTimers(
-      localChecklist.map((item) => ({
-        running: false,
-        seconds: item.totalSeconds || 0,
+    setTimers((prevTimers) =>
+      localChecklist.map((item, i) => ({
+        running: prevTimers[i]?.running || false,
+        seconds: extractValidSeconds(item.totalSeconds),
       }))
     );
   }, [JSON.stringify(localChecklist)]);
 
   const toggleTimer = (index) => {
-    setTimers((prev) => {
-      const updated = [...prev];
-      const wasRunning = updated[index].running;
-      updated[index].running = !wasRunning;
+    const isRunning = timers[index]?.running;
 
-      if (wasRunning) {
-        const seconds = updated[index].seconds;
-        onToggleChecklist(index, localChecklist[index]?.completed || false, seconds);
-      }
+    if (isRunning) {
+      clearInterval(intervals.current[index]);
+      delete intervals.current[index];
 
-      return updated;
-    });
+      setTimers((prevTimers) => {
+        const updated = [...prevTimers];
+        updated[index] = {
+          ...updated[index],
+          running: false,
+        };
+        return updated;
+      });
 
-    if (!intervals.current[index]) {
+      const finalSeconds =
+        typeof timers[index]?.seconds === 'number'
+          ? timers[index].seconds
+          : extractValidSeconds(localChecklist[index]?.totalSeconds);
+
+      onToggleChecklist(index, localChecklist[index]?.completed || false, finalSeconds);
+    } else {
+      setTimers((prevTimers) => {
+        const updated = [...prevTimers];
+        updated[index] = {
+          ...updated[index],
+          running: true,
+        };
+        return updated;
+      });
+
       intervals.current[index] = setInterval(() => {
-        setTimers((prev) => {
-          const updated = [...prev];
+        setTimers((prevTimers) => {
+          const updated = [...prevTimers];
           if (updated[index]?.running) {
-            updated[index].seconds += 1;
+            updated[index] = {
+              ...updated[index],
+              seconds: (updated[index].seconds || 0) + 1,
+            };
           }
           return updated;
         });
@@ -56,43 +77,60 @@ const StepComponentTemplate = ({
   };
 
   const handleCheckboxToggle = (index) => {
-    const isNowCompleted = !localChecklist[index]?.completed;
-    const seconds = timers[index]?.seconds || 0;
-
-    if (isNowCompleted) {
+    if (timers[index]) {
       timers[index].running = false;
       clearInterval(intervals.current[index]);
       delete intervals.current[index];
     }
 
-    onToggleChecklist(index, isNowCompleted, seconds);
+    const raw =
+      timers[index]?.seconds ?? localChecklist[index]?.totalSeconds ?? 0;
+
+    const totalSeconds =
+      typeof raw === 'number' ? raw : extractValidSeconds(raw);
+
+    onToggleChecklist(index, !localChecklist[index]?.completed, totalSeconds);
   };
 
   const handleClear = (index) => {
-    timers[index].running = false;
-    clearInterval(intervals.current[index]);
-    delete intervals.current[index];
+    if (timers[index]) {
+      timers[index].running = false;
+      clearInterval(intervals.current[index]);
+      delete intervals.current[index];
+    }
 
-    setTimers((prev) => {
-      const updated = [...prev];
-      updated[index].seconds = 0;
-      return updated;
-    });
+    const updatedTimers = [...timers];
+    updatedTimers[index].seconds = 0;
+    setTimers(updatedTimers);
 
     onToggleChecklist(index, localChecklist[index]?.completed || false, 0);
   };
 
+  const extractValidSeconds = (val) => {
+    if (typeof val === 'number') return val;
+    if (val?.seconds && typeof val.seconds === 'number') return val.seconds;
+    if (typeof val === 'object') {
+      const nested = Object.values(val).find((v) => typeof v === 'number');
+      return typeof nested === 'number' ? nested : 0;
+    }
+    return 0;
+  };
+
   const formatTime = (seconds) => {
-    const hrs = Math.floor(seconds / 3600);
-    const mins = Math.floor((seconds % 3600) / 60);
-    const secs = seconds % 60;
+    const safeSeconds = isNaN(seconds) ? 0 : seconds;
+    const hrs = Math.floor(safeSeconds / 3600);
+    const mins = Math.floor((safeSeconds % 3600) / 60);
+    const secs = safeSeconds % 60;
     return `${hrs}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
-  const totalStepTime = timers.reduce(
-    (acc, timer) => acc + (timer?.seconds || 0),
-    0
-  );
+  const totalStepTime = localChecklist.reduce((acc, item, idx) => {
+    const t =
+      typeof timers[idx]?.seconds === 'number'
+        ? timers[idx].seconds
+        : extractValidSeconds(item?.totalSeconds);
+    return acc + t;
+  }, 0);
 
   const handleManualTimeSave = (index) => {
     const hh = parseInt(editHh, 10) || 0;
@@ -100,15 +138,15 @@ const StepComponentTemplate = ({
     const ss = Math.min(parseInt(editSs, 10) || 0, 59);
     const totalSeconds = hh * 3600 + mm * 60 + ss;
 
-    timers[index].running = false;
-    clearInterval(intervals.current[index]);
-    delete intervals.current[index];
+    if (timers[index]) {
+      timers[index].running = false;
+      clearInterval(intervals.current[index]);
+      delete intervals.current[index];
+    }
 
-    setTimers((prev) => {
-      const updated = [...prev];
-      updated[index].seconds = totalSeconds;
-      return updated;
-    });
+    const updatedTimers = [...timers];
+    updatedTimers[index].seconds = totalSeconds;
+    setTimers(updatedTimers);
 
     onToggleChecklist(index, localChecklist[index]?.completed || false, totalSeconds);
     setEditingIndex(null);
@@ -121,7 +159,8 @@ const StepComponentTemplate = ({
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (editingIndex !== null) {
-        const isInsideTimeInputs = e.target.closest('.time-input-group') || e.target.closest('.time-input-actions');
+        const isInsideTimeInputs =
+          e.target.closest('.time-input-group') || e.target.closest('.time-input-actions');
         if (!isInsideTimeInputs) {
           alert('Please save or cancel your time edit first.');
           e.stopPropagation();
@@ -166,8 +205,10 @@ const StepComponentTemplate = ({
                 <td>
                   <input
                     type="checkbox"
+                    disabled={isLocked}
                     checked={item.completed}
                     onChange={() => handleCheckboxToggle(index)}
+                    className={isLocked ? 'locked-task' : ''}
                   />
                 </td>
                 <td>{item.task}</td>
@@ -212,16 +253,27 @@ const StepComponentTemplate = ({
                       </div>
                       <div className="time-input-actions">
                         <button onClick={() => handleManualTimeSave(index)}>Save</button>
-                        <button className="cancel-btn" onClick={handleCancelEdit}>Cancel</button>
+                        <button className="cancel-btn" onClick={handleCancelEdit}>
+                          Cancel
+                        </button>
                       </div>
                     </>
                   ) : (
                     <span
                       className="time-display"
                       onClick={() => {
-                        const total = timers[index]?.seconds || 0;
-                        const hh = Math.floor(total / 3600).toString().padStart(2, '0');
-                        const mm = Math.floor((total % 3600) / 60).toString().padStart(2, '0');
+                        const raw =
+                          timers[index]?.seconds ??
+                          localChecklist[index]?.totalSeconds ??
+                          0;
+                        const total =
+                          typeof raw === 'number' ? raw : extractValidSeconds(raw);
+                        const hh = Math.floor(total / 3600)
+                          .toString()
+                          .padStart(2, '0');
+                        const mm = Math.floor((total % 3600) / 60)
+                          .toString()
+                          .padStart(2, '0');
                         const ss = (total % 60).toString().padStart(2, '0');
                         setEditHh(hh);
                         setEditMm(mm);
@@ -229,7 +281,11 @@ const StepComponentTemplate = ({
                         setEditingIndex(index);
                       }}
                     >
-                      {formatTime(timers[index]?.seconds || 0)}
+                      {formatTime(
+                        typeof timers[index]?.seconds === 'number'
+                          ? timers[index].seconds
+                          : extractValidSeconds(localChecklist[index]?.totalSeconds)
+                      )}
                     </span>
                   )}
                   <div>
