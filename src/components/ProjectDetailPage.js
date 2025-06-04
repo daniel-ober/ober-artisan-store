@@ -127,13 +127,13 @@ const ProjectDetailPage = () => {
     targetCompletion,
     currentPhase,
     status,
-    woodSpecies,
+    woodPrimary,
     artisanLine,
     bearingEdge,
-    diameter,
+    width,
     depth,
-    shellConstruction,
-    quantityLugs,
+    shellConstructionName,
+    lugCount,
     lugType,
     hardwareColor,
     hoops,
@@ -146,12 +146,45 @@ const ProjectDetailPage = () => {
     customer = {},
   } = project;
 
-  const formatDate = (value) =>
-    value?.seconds
-      ? new Date(value.seconds * 1000).toLocaleDateString()
-      : typeof value === 'string'
-      ? new Date(value).toLocaleDateString()
-      : 'N/A';
+  const formatDate = (value) => {
+    if (!value) return 'N/A';
+    let date;
+
+    if (value?.seconds) {
+      date = new Date(value.seconds * 1000);
+    } else if (typeof value === 'string') {
+      date = new Date(value);
+    } else {
+      date = new Date(value);
+    }
+
+    return isNaN(date.getTime())
+      ? 'N/A'
+      : date.toLocaleDateString(undefined, {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+        });
+  };
+
+  const getBufferedDate = (original) => {
+    try {
+      const base =
+        original?.seconds && typeof original.seconds === 'number'
+          ? new Date(original.seconds * 1000)
+          : typeof original === 'string'
+            ? new Date(original)
+            : null;
+
+      if (!base || isNaN(base.getTime())) return 'N/A';
+
+      const buffered = new Date(base);
+      buffered.setDate(buffered.getDate() + 14);
+      return buffered.toLocaleDateString();
+    } catch {
+      return 'N/A';
+    }
+  };
 
   return (
     <div className="project-page">
@@ -173,7 +206,9 @@ const ProjectDetailPage = () => {
           <strong>Start Date:</strong> {formatDate(startDate)}
         </p>
         <p>
-          <strong>Target Completion:</strong> {targetCompletion || 'N/A'}
+          <strong>Estimated Completion:</strong>{' '}
+          {formatDate(project?.targetCompletion)} –{' '}
+          {formatDate(getBufferedDate(project?.targetCompletion))}
         </p>
         <p>
           <strong>Status:</strong> {status || 'N/A'}
@@ -183,104 +218,108 @@ const ProjectDetailPage = () => {
         <p>
           <strong>Current Stage:</strong> {currentPhase || 'N/A'}
         </p>
-
       </section>
 
       <section className="project-section">
         <h3>Scope of Work</h3>
         <p>
           <strong>Artisan Line:</strong>{' '}
-          {typeof artisanLine === 'string' ? artisanLine : 'N/A'}
+          {project?.artisanLine?.trim() ? project.artisanLine : 'N/A'}
         </p>
         <p>
           <strong>Wood Species:</strong>{' '}
-          {typeof woodSpecies === 'string' ? woodSpecies : 'N/A'}
+          {project?.woodPrimary?.trim() ? project.woodPrimary : 'N/A'}
         </p>
         <p>
           <strong>Bearing Edge:</strong>{' '}
-          {typeof bearingEdge === 'string' ? bearingEdge : 'N/A'}
+          {project?.bearingEdge?.trim() ? project.bearingEdge : 'N/A'}
         </p>
         <p>
-          <strong>Diameter:</strong>{' '}
-          {typeof diameter === 'string' || typeof diameter === 'number'
-            ? diameter
-            : 'N/A'}
+          <strong>Diameter:</strong> {project?.width ? project.width : 'N/A'}
         </p>
         <p>
           <strong>Depth:</strong>{' '}
-          {typeof depth === 'string' || typeof depth === 'number'
-            ? depth
-            : 'N/A'}
+          {project?.shellDepth ? project.shellDepth : 'N/A'}
         </p>
         <p>
           <strong>Shell Construction:</strong>{' '}
-          {typeof shellConstruction === 'string' ? shellConstruction : 'N/A'}
+          {project?.shellConstructionName?.trim()
+            ? project.shellConstructionName
+            : 'N/A'}
         </p>
         <p>
           <strong>Quantity Lugs:</strong>{' '}
-          {typeof quantityLugs === 'string' || typeof quantityLugs === 'number'
-            ? quantityLugs
-            : 'N/A'}
+          {project?.lugCount ? project.lugCount : 'N/A'}
         </p>
         <p>
           <strong>Lug Type:</strong>{' '}
-          {typeof lugType === 'string' ? lugType : 'N/A'}
+          {project?.lugType?.trim() ? project.lugType : 'N/A'}
         </p>
         <p>
           <strong>Hardware Color:</strong>{' '}
-          {typeof hardwareColor === 'string' ? hardwareColor : 'N/A'}
+          {project?.hardwareColor?.trim() ? project.hardwareColor : 'N/A'}
         </p>
         <p>
-          <strong>Hoops:</strong> {typeof hoops === 'string' ? hoops : 'N/A'}
+          <strong>Hoops:</strong>{' '}
+          {project?.hoops?.trim() ? project.hoops : 'N/A'}
         </p>
         <p>
           <strong>Reinforcement Rings:</strong>{' '}
-          {typeof reinforcementRings === 'string' ? reinforcementRings : 'N/A'}
-        </p>
-        <p>
-          <strong>Throw-off:</strong>{' '}
-          {typeof throwOff === 'string' ? throwOff : 'N/A'}
-        </p>
-        <p>
-          <strong>Snare Wires:</strong>{' '}
-          {typeof snareWires === 'string' ? snareWires : 'N/A'}
-        </p>
-        <p>
-          <strong>Snare Bed Depth:</strong>{' '}
-          {typeof snareBedDepth === 'string' ||
-          typeof snareBedDepth === 'number'
-            ? snareBedDepth
+          {project?.reinforcementRings?.trim()
+            ? project.reinforcementRings
             : 'N/A'}
         </p>
         <p>
+          {project?.reinforcementRings !== 'None' && (
+            <p>
+              <strong>Re-Rings Wood Species:</strong>{' '}
+              {project?.reringsSpecies && project.reringsSpecies !== 'None'
+                ? project.reringsSpecies
+                : 'N/A'}
+            </p>
+          )}
+        </p>
+        <p>
+          <strong>Throw-off:</strong>{' '}
+          {project?.snareThrowOff?.trim() ? project.snareThrowOff : 'N/A'}
+        </p>
+        <p>
+          <strong>Snare Wires:</strong>{' '}
+          {project?.snareWires?.trim() ? project.snareWires : 'N/A'}
+        </p>
+        <p>
+          <strong>Snare Bed Depth:</strong>{' '}
+          {project?.snareBedDepth ? project.snareBedDepth : 'N/A'}
+        </p>
+        <p>
           <strong>Finish Details:</strong>{' '}
-          {typeof finishDetails === 'string' ? finishDetails : 'N/A'}
+          {project?.finishDetails?.trim() ? project.finishDetails : 'N/A'}
         </p>
         <p>
           <strong>Additional Notes:</strong>{' '}
-          {typeof additionalNotes === 'string' ? additionalNotes : 'N/A'}
+          {project?.additionalNotes?.trim() ? project.additionalNotes : 'N/A'}
         </p>
       </section>
 
       <section className="project-section">
         <h3>Customer </h3>
         <p>
-          <strong>Name:</strong> {customer.name || 'N/A'}
+          <strong>Name:</strong> {project?.customer?.name || 'N/A'}
         </p>
         <p>
-          <strong>Email:</strong> {customer.email || 'N/A'}
+          <strong>Email:</strong> {project?.customer?.email || 'N/A'}
         </p>
         <p>
-          <strong>Phone:</strong> {customer.phone || 'N/A'}
+          <strong>Phone:</strong> {project?.customer?.phone || 'N/A'}
         </p>
         <p>
           <strong>Shipping Address:</strong>{' '}
-          {customer.address
+          {project?.customer?.address
             ? [
-                customer.address.street,
-                customer.address.city,
-                customer.address.state,
-                customer.address.zip,
+                project.customer.address.street,
+                project.customer.address.city,
+                project.customer.address.state,
+                project.customer.address.zip,
               ]
                 .filter(Boolean)
                 .join(', ')
