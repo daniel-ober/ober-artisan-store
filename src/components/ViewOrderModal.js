@@ -315,7 +315,7 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
             </td>
           </tr>
         ))}
-        <tr>
+        {/* <tr>
           <td colSpan="5" style={{ textAlign: 'center' }}>
             <button
               className="create-project-btn"
@@ -324,7 +324,7 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
               Create Blank Project
             </button>
           </td>
-        </tr>
+        </tr> */}
       </tbody>
     </table>
   ) : (

@@ -38,7 +38,11 @@ const stepWeights = {
 };
 
 const normalize = (str) =>
-  str?.toLowerCase().replace(/[^a-z0-9 ]/gi, '').replace(/\s+/g, ' ').trim() || '';
+  str
+    ?.toLowerCase()
+    .replace(/[^a-z0-9 ]/gi, '')
+    .replace(/\s+/g, ' ')
+    .trim() || '';
 
 const ManageProjects = () => {
   const [projects, setProjects] = useState([]);
@@ -109,7 +113,7 @@ const ManageProjects = () => {
       setFilteredProjects(
         projects.filter(
           (p) =>
-            normalize(p.currentPhase) === filter||
+            normalize(p.currentPhase) === filter ||
             (normalize(filter) === 'overdue' && isOverdue(p))
         )
       );
@@ -190,10 +194,10 @@ const ManageProjects = () => {
           <select value={filter} onChange={(e) => setFilter(e.target.value)}>
             <option value="">All Phases</option>
             {buildPhases.map((phase) => (
-  <option key={phase} value={normalize(phase)}>
-    {phase}
-  </option>
-))}
+              <option key={phase} value={normalize(phase)}>
+                {phase}
+              </option>
+            ))}
             <option value="overdue">Overdue</option>
           </select>
         </label>
@@ -215,16 +219,16 @@ const ManageProjects = () => {
         <tbody>
           {filteredProjects.map((project) => (
             <tr key={project.id} onClick={() => openModal(project)}>
-            {(() => {
-  try {
-    const time = calculateTotalProjectTime(project);
-    console.log('🧪 Project Time for:', project.id, time);
-    return <td>{time}</td>;
-  } catch (err) {
-    console.error('❌ Error in time calc for:', project.id, err);
-    return <td>Error</td>;
-  }
-})()}
+              {/* {(() => {
+                try {
+                  const time = calculateTotalProjectTime(project);
+                  console.log('🧪 Project Time for:', project.id, time);
+                  return <td>{time}</td>;
+                } catch (err) {
+                  console.error('❌ Error in time calc for:', project.id, err);
+                  return <td>Error</td>;
+                }
+              })()} */}
               <td>{project.id}</td>
               <td>{project.customerName || 'N/A'}</td>
               <td>{formatDate(project.startDate)}</td>

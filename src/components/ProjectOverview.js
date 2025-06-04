@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import './ProjectOverview.css';
 
-const ProjectOverview = ({ editableData, isEditing, onEditToggle, handleChange, onSave, onCancel }) => {
+const ProjectOverview = ({
+  editableData,
+  isEditing,
+  onEditToggle,
+  handleChange,
+  onSave,
+  onCancel,
+}) => {
   const [overallStatus, setOverallStatus] = useState('Unknown');
   const [secondWood, setSecondWood] = useState(false);
 
@@ -18,25 +25,77 @@ const ProjectOverview = ({ editableData, isEditing, onEditToggle, handleChange, 
     'Rosewood',
   ];
 
+  const getDateInputValue = (val) => {
+    if (!val) return '';
+    try {
+      if (typeof val === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(val))
+        return val;
+
+      let d;
+      if (val.toDate) d = val.toDate();
+      else if (val.seconds) d = new Date(val.seconds * 1000);
+      else d = new Date(val);
+
+      if (isNaN(d)) return '';
+      return d.toISOString().split('T')[0]; // returns YYYY-MM-DD
+    } catch {
+      return '';
+    }
+  };
+
   const formatDate = (value) => {
     if (!value) return 'N/A';
-    if (typeof value === 'string') return new Date(value).toLocaleDateString();
-    if (value?.seconds) return new Date(value.seconds * 1000).toLocaleDateString();
-    if (value instanceof Date) return value.toLocaleDateString();
-    return 'Invalid date';
+
+    let date;
+
+    if (value.toDate) {
+      // Firestore Timestamp
+      date = value.toDate();
+    } else if (value.seconds) {
+      // Firestore Timestamp (alternate)
+      date = new Date(value.seconds * 1000);
+    } else if (typeof value === 'string') {
+      const parsed = new Date(value);
+      if (isNaN(parsed)) return 'N/A';
+      date = parsed;
+    } else if (value instanceof Date) {
+      date = value;
+    } else {
+      return 'N/A';
+    }
+
+    // ✅ Local browser timezone rendering
+    return date.toLocaleDateString(undefined, {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    });
   };
 
   const calculateStatus = (data) => {
-    const allChecklists = Object.values(data || {}).flatMap((section) =>
-      Array.isArray(section?.checklist) ? section.checklist : []
-    );
-    const total = allChecklists.length;
-    const completed = allChecklists.filter((t) => t.completed).length;
+    if (!data || !data.currentPhase) return 'Unknown';
 
-    if (total === 0) return 'Unknown';
-    if (completed === 0) return 'Initial Planning';
-    if (completed === total) return 'Finished';
-    return 'In Production';
+    const phases = [
+      'Step 1. Wood Preparation',
+      'Step 2. Shell Construction',
+      'Step 3. Fine-Tuning',
+      'Step 4. Shell Exterior Finish',
+      'Step 5. Bearing Edges',
+      'Step 6. Snare Bed Cutting',
+      'Step 7. Hardware Drilling',
+      'Step 8. Hardware Assembly',
+      'Step 9. Tuning and Detailing',
+      'Step 10. Quality Check',
+    ];
+
+    const currentIndex = phases.indexOf(data.currentPhase);
+
+    if (currentIndex === -1) return 'Unknown';
+    if (currentIndex === phases.length - 1) return 'Final Check';
+    if (currentIndex >= 0 && currentIndex < phases.length - 1)
+      return 'In Progress';
+
+    return 'Unknown';
   };
 
   useEffect(() => {
@@ -56,15 +115,17 @@ const ProjectOverview = ({ editableData, isEditing, onEditToggle, handleChange, 
         >
           <option value="">-- Select --</option>
           {options.map((opt) => (
-            <option key={opt} value={opt}>{opt}</option>
+            <option key={opt} value={opt}>
+              {opt}
+            </option>
           ))}
         </select>
       ) : (
         <span className="project-value">
-  {typeof editableData?.[key] === 'object'
-    ? JSON.stringify(editableData[key])
-    : editableData?.[key] || 'N/A'}
-</span>
+          {typeof editableData?.[key] === 'object'
+            ? JSON.stringify(editableData[key])
+            : editableData?.[key] || 'N/A'}
+        </span>
       )}
     </div>
   );
@@ -81,10 +142,10 @@ const ProjectOverview = ({ editableData, isEditing, onEditToggle, handleChange, 
         />
       ) : (
         <span className="project-value">
-  {typeof editableData?.[key] === 'object'
-    ? JSON.stringify(editableData[key])
-    : editableData?.[key] || 'N/A'}
-</span>
+          {typeof editableData?.[key] === 'object'
+            ? JSON.stringify(editableData[key])
+            : editableData?.[key] || 'N/A'}
+        </span>
       )}
     </div>
   );
@@ -124,69 +185,100 @@ const ProjectOverview = ({ editableData, isEditing, onEditToggle, handleChange, 
         </div>
 
         <div className="project-field-row">
-  <label className="project-label">Start Date:</label>
-  {isEditing ? (
-    <input
-      className="project-input"
-      type="date"
-      value={
-        editableData?.startDate
-          ? new Date(editableData.startDate).toISOString().split('T')[0]
-          : ''
-      }
-      onChange={(e) => handleChange('startDate', e.target.value)}
-    />
-  ) : (
-    <span className="project-value">{formatDate(editableData?.startDate)}</span>
-  )}
-</div>
+          <label className="project-label">Start Date:</label>
+          {isEditing ? (
+            <input
+              className="project-input"
+              type="date"
+              value={getDateInputValue(editableData?.startDate)}
+              onChange={(e) => handleChange('startDate', e.target.value)}
+            />
+          ) : (
+            <span className="project-value">
+              {formatDate(editableData?.startDate)}
+            </span>
+          )}
+        </div>
 
-<div className="project-field-row">
-  <label className="project-label">Target Completion:</label>
-  {isEditing ? (
-    <>
-      <input
-        className="project-input"
-        type="date"
-        value={
-          editableData?.targetCompletion
-            ? new Date(editableData.targetCompletion).toISOString().split('T')[0]
-            : ''
-        }
-        onChange={(e) => handleChange('targetCompletion', e.target.value)}
-      />
-      <span className="project-value" style={{ marginLeft: '1rem' }}>
-        →
-        {editableData?.targetCompletion
-          ? ` ${new Date(
-              new Date(editableData.targetCompletion).getTime() + 14 * 24 * 60 * 60 * 1000
-            ).toLocaleDateString()}`
-          : ' N/A'}
-        {' '} (2-week buffer)
-      </span>
-    </>
-  ) : (
-    <span className="project-value">
-      {formatDate(editableData?.targetCompletion)} →
-      {editableData?.targetCompletion
-        ? ` ${new Date(
-            new Date(editableData.targetCompletion).getTime() + 14 * 24 * 60 * 60 * 1000
-          ).toLocaleDateString()}`
-        : ' N/A'}
-      {' '} (2-week buffer)
-    </span>
-  )}
-</div>
+        <div className="project-field-row">
+          <label className="project-label">Target Completion:</label>
+          {isEditing ? (
+            <>
+              <input
+                className="project-input"
+                type="date"
+                value={getDateInputValue(editableData?.targetCompletion)}
+                onChange={(e) =>
+                  handleChange('targetCompletion', e.target.value)
+                }
+              />
+              <span className="project-value" style={{ marginLeft: '1rem' }}>
+                →
+                {editableData?.targetCompletion
+                  ? ` ${new Date(
+                      new Date(
+                        getDateInputValue(editableData.targetCompletion)
+                      ).getTime() +
+                        14 * 24 * 60 * 60 * 1000
+                    ).toLocaleDateString()}`
+                  : ' N/A'}{' '}
+                (2-week buffer)
+              </span>
+            </>
+          ) : (
+            <span className="project-value">
+              {formatDate(editableData?.targetCompletion)} →
+              {editableData?.targetCompletion
+                ? ` ${new Date(
+                    new Date(
+                      getDateInputValue(editableData.targetCompletion)
+                    ).getTime() +
+                      14 * 24 * 60 * 60 * 1000
+                  ).toLocaleDateString()}`
+                : ' N/A'}{' '}
+              (2-week buffer)
+            </span>
+          )}
+        </div>
 
-        {renderDropdownField('Shell Construction', 'shellConstruction', ['stave', 'hybrid', 'steam bent'])}
+        {renderDropdownField('Artisan Line', 'artisanLine', [
+          'Soundlegend',
+          'Heritage',
+          'Feuzon Hybrid',
+        ])}
 
-        {editableData?.shellConstruction === 'stave' || editableData?.shellConstruction === 'hybrid' ? (
+        {renderDropdownField('Bearing Edge', 'bearingEdge', [
+          'Double 45',
+          'Double Rounded',
+          '45 Inner + Rounded Outer',
+        ])}
+
+        {renderDropdownField('Shell Construction', 'shellConstructionName', [
+          'Stave',
+          'Hybrid',
+          'Steam-bent',
+        ])}
+
+        {editableData?.shellConstruction === 'stave' ||
+        editableData?.shellConstruction === 'hybrid' ? (
           <>
-            {renderDropdownField('Quantity Staves', 'staveCount', ['8', '10', '12', '16', '20'])}
-            {renderDropdownField('Primary Wood Species', 'woodPrimary', woodSpeciesOptions)}
+            {renderDropdownField('Quantity Staves', 'staveCount', [
+              '8',
+              '10',
+              '12',
+              '16',
+              '20',
+            ])}
+            {renderDropdownField(
+              'Primary Wood Species',
+              'woodPrimary',
+              woodSpeciesOptions
+            )}
             {isEditing && (
               <>
-                <label className="project-label">Add Second Wood Species?</label>
+                <label className="project-label">
+                  Add Second Wood Species?
+                </label>
                 <input
                   type="checkbox"
                   checked={secondWood}
@@ -194,29 +286,80 @@ const ProjectOverview = ({ editableData, isEditing, onEditToggle, handleChange, 
                 />
                 {secondWood && (
                   <>
-                    {renderDropdownField('Secondary Wood Species', 'woodSecondary', woodSpeciesOptions)}
-                    {renderTextField('% of Secondary Wood', 'woodSecondaryPercent')}
+                    {renderDropdownField(
+                      'Secondary Wood Species',
+                      'woodSecondary',
+                      woodSpeciesOptions
+                    )}
+                    {renderTextField(
+                      '% of Secondary Wood',
+                      'woodSecondaryPercent'
+                    )}
                   </>
                 )}
               </>
             )}
-            {editableData?.shellConstruction === 'hybrid' && renderDropdownField('Steam Bent Wood Species', 'hybridSteamBentSpecies', woodSpeciesOptions)}
+            {editableData?.shellConstruction === 'hybrid' &&
+              renderDropdownField(
+                'Steam Bent Wood Species',
+                'hybridSteamBentSpecies',
+                woodSpeciesOptions
+              )}
           </>
         ) : null}
 
         {editableData?.shellConstruction === 'steam bent' &&
-          renderDropdownField('Steam Bent Wood Species', 'woodPrimary', woodSpeciesOptions)}
+          renderDropdownField(
+            'Steam Bent Wood Species',
+            'woodPrimary',
+            woodSpeciesOptions
+          )}
 
-        {renderDropdownField('Width (Diameter)', 'width', ['10"', '12"', '13"', '14"', '15"'])}
-        {renderDropdownField('Depth', 'shellDepth', ['5"', '5.5"', '6"', '6.5"', '7"', '7.5"', '8"'])}
+        {renderDropdownField('Width (Diameter)', 'width', [
+          '10"',
+          '12"',
+          '13"',
+          '14"',
+          '15"',
+        ])}
+        {renderDropdownField('Depth', 'shellDepth', [
+          '5"',
+          '5.5"',
+          '6"',
+          '6.5"',
+          '7"',
+          '7.5"',
+          '8"',
+        ])}
         {renderDropdownField('Lug Count', 'lugCount', ['5', '6', '8', '10'])}
-        {renderDropdownField('Lug Type', 'lugType', ['Single-end point bullet', 'Single-end point tube', 'Double-end tube', 'Other'])}
-        {renderDropdownField('Hardware Color', 'hardwareColor', ['Chrome', 'Brass/Gold', 'Black Nickel', 'Other'])}
-        {renderDropdownField('Hoops', 'hoops', ['Die-Cast', '2.3mm Triple Flange', '3.0mm Triple Flange'])}
-        {renderDropdownField('Reinforcement Rings', 'reinforcementRings', ['Re-Rings', 'None'])}
+        {renderDropdownField('Lug Type', 'lugType', [
+          'Single-end point bullet',
+          'Single-end point tube',
+          'Double-end tube',
+          'Other',
+        ])}
+        {renderDropdownField('Hardware Color', 'hardwareColor', [
+          'Chrome',
+          'Brass/Gold',
+          'Black Nickel',
+          'Other',
+        ])}
+        {renderDropdownField('Hoops', 'hoops', [
+          'Die-Cast',
+          '2.3mm Triple Flange',
+          '3.0mm Triple Flange',
+        ])}
+        {renderDropdownField('Reinforcement Rings', 'reinforcementRings', [
+          'Yes',
+          'None',
+        ])}
 
-        {editableData?.reinforcementRings === 'Re-Rings' &&
-          renderDropdownField('Re-Rings Wood Species', 'reringsSpecies', woodSpeciesOptions)}
+        {editableData?.reinforcementRings === 'Yes' &&
+          renderDropdownField(
+            'Re-Rings Wood Species',
+            'reringsSpecies',
+            woodSpeciesOptions
+          )}
 
         {renderDropdownField('Throw-off', 'snareThrowOff', [
           'Trick Percussion GS007AM (Multi-Step)',
@@ -236,7 +379,12 @@ const ProjectOverview = ({ editableData, isEditing, onEditToggle, handleChange, 
           'Puresound Twisted',
           'Puresound Concert',
         ])}
-        {renderDropdownField('Snare Bed Depth', 'snareBedDepth', ['Low', 'Medium', 'Deep', 'None'])}
+        {renderDropdownField('Snare Bed Depth', 'snareBedDepth', [
+          'Low',
+          'Medium',
+          'Deep',
+          'None',
+        ])}
         {renderDropdownField('Finish Details', 'finishDetails', [
           'Natural',
           'Veneer (Standard)',
@@ -249,16 +397,22 @@ const ProjectOverview = ({ editableData, isEditing, onEditToggle, handleChange, 
         {renderTextField('Additional Notes', 'additionalNotes')}
 
         <div className="project-buttons">
-        <div className="project-buttons">
-  {isEditing ? (
-    <>
-      <button className="save-btn" onClick={onSave}>Save Changes</button>
-      <button className="edit-toggle-btn" onClick={onCancel}>Cancel Edit</button>
-    </>
-  ) : (
-    <button className="edit-toggle-btn" onClick={onEditToggle}>Edit</button>
-  )}
-</div>
+          <div className="project-buttons">
+            {isEditing ? (
+              <>
+                <button className="save-btn" onClick={onSave}>
+                  Save Changes
+                </button>
+                <button className="edit-toggle-btn" onClick={onCancel}>
+                  Cancel Edit
+                </button>
+              </>
+            ) : (
+              <button className="edit-toggle-btn" onClick={onEditToggle}>
+                Edit
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>
