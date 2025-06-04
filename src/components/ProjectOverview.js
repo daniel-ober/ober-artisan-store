@@ -1,20 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import './ProjectOverview.css';
 
-const ProjectOverview = ({
-  editableData,
-  isEditing,
-  onEditToggle,
-  handleChange,
-  onSave,
-}) => {
+const ProjectOverview = ({ editableData, isEditing, onEditToggle, handleChange, onSave, onCancel }) => {
   const [overallStatus, setOverallStatus] = useState('Unknown');
+  const [secondWood, setSecondWood] = useState(false);
+
+  const woodSpeciesOptions = [
+    'Maple',
+    'Walnut',
+    'Cherry',
+    'Birch',
+    'Oak',
+    'Ash',
+    'Mahogany',
+    'Bubinga',
+    'Purpleheart',
+    'Rosewood',
+  ];
 
   const formatDate = (value) => {
     if (!value) return 'N/A';
-    if (typeof value === 'string') return new Date(value).toLocaleString();
-    if (value?.seconds) return new Date(value.seconds * 1000).toLocaleString();
-    if (value instanceof Date) return value.toLocaleString();
+    if (typeof value === 'string') return new Date(value).toLocaleDateString();
+    if (value?.seconds) return new Date(value.seconds * 1000).toLocaleDateString();
+    if (value instanceof Date) return value.toLocaleDateString();
     return 'Invalid date';
   };
 
@@ -37,96 +45,221 @@ const ProjectOverview = ({
     }
   }, [editableData]);
 
+  const renderDropdownField = (label, key, options) => (
+    <div className="project-field-row" key={key}>
+      <label className="project-label">{label}:</label>
+      {isEditing ? (
+        <select
+          className="project-input"
+          value={editableData?.[key] || ''}
+          onChange={(e) => handleChange(key, e.target.value)}
+        >
+          <option value="">-- Select --</option>
+          {options.map((opt) => (
+            <option key={opt} value={opt}>{opt}</option>
+          ))}
+        </select>
+      ) : (
+        <span className="project-value">
+  {typeof editableData?.[key] === 'object'
+    ? JSON.stringify(editableData[key])
+    : editableData?.[key] || 'N/A'}
+</span>
+      )}
+    </div>
+  );
+
+  const renderTextField = (label, key) => (
+    <div className="project-field-row" key={key}>
+      <label className="project-label">{label}:</label>
+      {isEditing ? (
+        <input
+          className="project-input"
+          type="text"
+          value={editableData?.[key] || ''}
+          onChange={(e) => handleChange(key, e.target.value)}
+        />
+      ) : (
+        <span className="project-value">
+  {typeof editableData?.[key] === 'object'
+    ? JSON.stringify(editableData[key])
+    : editableData?.[key] || 'N/A'}
+</span>
+      )}
+    </div>
+  );
+
   return (
     <div className="project-overview-content">
-      <h3>Project Details</h3>
+      <h3 className="project-title">Project Details</h3>
       <div className="project-details">
-        <p>
-          <strong>Project ID:</strong> {editableData?.id || 'N/A'}
-        </p>
-
-        <p>
-          <strong>Parent Order ID:</strong>{' '}
-          {isEditing ? (
-            <input
-              type="text"
-              value={editableData?.orderId || ''}
-              onChange={(e) => handleChange('orderId', e.target.value)}
-            />
-          ) : (
-            <a
-              href={`/orders/${editableData?.orderId}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {editableData?.orderId || 'N/A'}
-            </a>
+        <div className="project-field-row">
+          {editableData?.id && (
+            <p>
+              <strong>View as Customer: </strong>
+              <a
+                href={`/projects/${editableData.id}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="customer-view-link"
+              >
+                Open Project View ↗
+              </a>
+            </p>
           )}
-        </p>
+          <label className="project-label">Project ID:</label>
+          <span className="project-value">{editableData?.id || 'N/A'}</span>
+        </div>
 
-        <p>
-          <strong>Start Date:</strong> {formatDate(editableData?.startDate)}
-        </p>
-        <p>
-          <strong>Target Completion:</strong>{' '}
-          {formatDate(editableData?.targetCompletion)}
-        </p>
+        <div className="project-field-row">
+          <label className="project-label">Parent Order ID:</label>
+          <a
+            className="project-link"
+            href={`/orders/${editableData?.orderId}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {editableData?.orderId || 'N/A'}
+          </a>
+        </div>
 
-        <p>
-          <strong>Overall Project Status:</strong>{' '}
-          {overallStatus || 'Unknown'}
-        </p>
+        <div className="project-field-row">
+  <label className="project-label">Start Date:</label>
+  {isEditing ? (
+    <input
+      className="project-input"
+      type="date"
+      value={
+        editableData?.startDate
+          ? new Date(editableData.startDate).toISOString().split('T')[0]
+          : ''
+      }
+      onChange={(e) => handleChange('startDate', e.target.value)}
+    />
+  ) : (
+    <span className="project-value">{formatDate(editableData?.startDate)}</span>
+  )}
+</div>
 
-        <p>
-          <strong>Current Phase:</strong>{' '}
-          {isEditing ? (
-            <select
-              value={editableData?.currentPhase || ''}
-              onChange={(e) => handleChange('currentPhase', e.target.value)}
-            >
-              <option value="">-- Select Phase --</option>
-              <option value="Step 1. Wood Preparation">
-                Step 1. Wood Preparation
-              </option>
-              <option value="Step 2. Shell Construction">
-                Step 2. Shell Construction
-              </option>
-              <option value="Step 3. Fine-Tuning">Step 3. Fine-Tuning</option>
-              <option value="Step 4. Shell Exterior Finish">
-                Step 4. Shell Exterior Finish
-              </option>
-              <option value="Step 5. Bearing Edges">
-                Step 5. Bearing Edges
-              </option>
-              <option value="Step 6. Snare Bed Cutting">
-                Step 6. Snare Bed Cutting
-              </option>
-              <option value="Step 7. Hardware Drilling">
-                Step 7. Hardware Drilling
-              </option>
-              <option value="Step 8. Hardware Assembly">
-                Step 8. Hardware Assembly
-              </option>
-              <option value="Step 9. Tuning and Detailing">
-                Step 9. Tuning and Detailing
-              </option>
-              <option value="Step 10. Quality Check">
-                Step 10. Quality Check
-              </option>
-            </select>
-          ) : (
-            editableData?.currentPhase || 'N/A'
-          )}
-        </p>
+<div className="project-field-row">
+  <label className="project-label">Target Completion:</label>
+  {isEditing ? (
+    <>
+      <input
+        className="project-input"
+        type="date"
+        value={
+          editableData?.targetCompletion
+            ? new Date(editableData.targetCompletion).toISOString().split('T')[0]
+            : ''
+        }
+        onChange={(e) => handleChange('targetCompletion', e.target.value)}
+      />
+      <span className="project-value" style={{ marginLeft: '1rem' }}>
+        →
+        {editableData?.targetCompletion
+          ? ` ${new Date(
+              new Date(editableData.targetCompletion).getTime() + 14 * 24 * 60 * 60 * 1000
+            ).toLocaleDateString()}`
+          : ' N/A'}
+        {' '} (2-week buffer)
+      </span>
+    </>
+  ) : (
+    <span className="project-value">
+      {formatDate(editableData?.targetCompletion)} →
+      {editableData?.targetCompletion
+        ? ` ${new Date(
+            new Date(editableData.targetCompletion).getTime() + 14 * 24 * 60 * 60 * 1000
+          ).toLocaleDateString()}`
+        : ' N/A'}
+      {' '} (2-week buffer)
+    </span>
+  )}
+</div>
 
-        {isEditing && (
-          <button className="save-btn" onClick={onSave}>
-            Save Changes
-          </button>
-        )}
-        <button className="edit-toggle-btn" onClick={onEditToggle}>
-          {isEditing ? 'Cancel Edit' : 'Edit'}
-        </button>
+        {renderDropdownField('Shell Construction', 'shellConstruction', ['stave', 'hybrid', 'steam bent'])}
+
+        {editableData?.shellConstruction === 'stave' || editableData?.shellConstruction === 'hybrid' ? (
+          <>
+            {renderDropdownField('Quantity Staves', 'staveCount', ['8', '10', '12', '16', '20'])}
+            {renderDropdownField('Primary Wood Species', 'woodPrimary', woodSpeciesOptions)}
+            {isEditing && (
+              <>
+                <label className="project-label">Add Second Wood Species?</label>
+                <input
+                  type="checkbox"
+                  checked={secondWood}
+                  onChange={() => setSecondWood(!secondWood)}
+                />
+                {secondWood && (
+                  <>
+                    {renderDropdownField('Secondary Wood Species', 'woodSecondary', woodSpeciesOptions)}
+                    {renderTextField('% of Secondary Wood', 'woodSecondaryPercent')}
+                  </>
+                )}
+              </>
+            )}
+            {editableData?.shellConstruction === 'hybrid' && renderDropdownField('Steam Bent Wood Species', 'hybridSteamBentSpecies', woodSpeciesOptions)}
+          </>
+        ) : null}
+
+        {editableData?.shellConstruction === 'steam bent' &&
+          renderDropdownField('Steam Bent Wood Species', 'woodPrimary', woodSpeciesOptions)}
+
+        {renderDropdownField('Width (Diameter)', 'width', ['10"', '12"', '13"', '14"', '15"'])}
+        {renderDropdownField('Depth', 'shellDepth', ['5"', '5.5"', '6"', '6.5"', '7"', '7.5"', '8"'])}
+        {renderDropdownField('Lug Count', 'lugCount', ['5', '6', '8', '10'])}
+        {renderDropdownField('Lug Type', 'lugType', ['Single-end point bullet', 'Single-end point tube', 'Double-end tube', 'Other'])}
+        {renderDropdownField('Hardware Color', 'hardwareColor', ['Chrome', 'Brass/Gold', 'Black Nickel', 'Other'])}
+        {renderDropdownField('Hoops', 'hoops', ['Die-Cast', '2.3mm Triple Flange', '3.0mm Triple Flange'])}
+        {renderDropdownField('Reinforcement Rings', 'reinforcementRings', ['Re-Rings', 'None'])}
+
+        {editableData?.reinforcementRings === 'Re-Rings' &&
+          renderDropdownField('Re-Rings Wood Species', 'reringsSpecies', woodSpeciesOptions)}
+
+        {renderDropdownField('Throw-off', 'snareThrowOff', [
+          'Trick Percussion GS007AM (Multi-Step)',
+          'Trick Percussion GS007AS (Single-Step)',
+          'Dunnett R5 Swivel',
+          'Gibraltar Dunnett R7',
+          'Gibraltar George Way Beer Tap',
+          'DW MAG',
+        ])}
+        {renderDropdownField('Snare Wires', 'snareWires', [
+          'Puresound Custom',
+          'Puresound Custom Pro (Steel)',
+          'Puresound Custom Pro (Brass)',
+          'Puresound Super 30',
+          'Puresound Equalizer',
+          'Puresound Blaster',
+          'Puresound Twisted',
+          'Puresound Concert',
+        ])}
+        {renderDropdownField('Snare Bed Depth', 'snareBedDepth', ['Low', 'Medium', 'Deep', 'None'])}
+        {renderDropdownField('Finish Details', 'finishDetails', [
+          'Natural',
+          'Veneer (Standard)',
+          'Veneer (Exotic)',
+          'Stained',
+          'Spray',
+          'Epoxy',
+          'Wrap',
+        ])}
+        {renderTextField('Additional Notes', 'additionalNotes')}
+
+        <div className="project-buttons">
+        <div className="project-buttons">
+  {isEditing ? (
+    <>
+      <button className="save-btn" onClick={onSave}>Save Changes</button>
+      <button className="edit-toggle-btn" onClick={onCancel}>Cancel Edit</button>
+    </>
+  ) : (
+    <button className="edit-toggle-btn" onClick={onEditToggle}>Edit</button>
+  )}
+</div>
+        </div>
       </div>
     </div>
   );
