@@ -102,7 +102,7 @@
   .edit-toggle-btn:active {
     background-color: #d5d5d5;
   }
-
+  
   .customer-view-link {
     color: #096dd9;
     font-weight: 500;
@@ -112,4 +112,142 @@
   
   .customer-view-link:hover {
     text-decoration: underline;
+  }
+  
+  /* File Preview Section */
+  .file-preview-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .file-preview-item {
+    flex: 1 1 250px;
+    max-width: 300px;
+    background: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .file-preview-inner {
+    margin-bottom: 0.75rem;
+  }
+  
+  .file-preview-image,
+  .file-preview-pdf,
+  .file-preview-video {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+  
+  .file-preview-pdf {
+    height: 400px;
+  }
+  
+  .file-preview-audio {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+  
+  .file-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+  
+  .file-action-link {
+    font-size: 0.85rem;
+    color: #007acc;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
+  .file-action-link:hover {
+    color: #005b99;
+  }
+
+  .file-preview-modal {
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .file-preview-modal-content {
+    max-width: 90%;
+    max-height: 90%;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    padding: 1rem;
+  }
+  
+  .file-preview-modal-content img,
+  .file-preview-modal-content iframe,
+  .file-preview-modal-content video,
+  .file-preview-modal-content audio {
+    max-width: 100%;
+    max-height: 80vh;
+  }
+  
+  .modal-close-button {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    background: transparent;
+    color: #000;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  .download-button {
+    display: inline-block;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: #096dd9;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .file-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #096dd9;
+    text-decoration: underline;
+    margin-bottom: 0.25rem;
+  }
+  
+  .file-name:hover {
+    color: #005b99;
+  }
+
+  .file-preview-image,
+.file-preview-pdf,
+.file-preview-video {
+  max-height: 160px;
+  object-fit: cover;
+}
+
+.file-preview-image {
+    width: 100%;
+    max-height: 160px;
+    object-fit: contain;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    display: block;
   }

@@ -1,5 +1,50 @@
 import React, { useEffect, useState } from 'react';
 import './ProjectOverview.css';
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import { doc, updateDoc } from 'firebase/firestore';
+import { storage, db } from '../firebaseConfig';
+
+const handleDrop = async (e) => {
+  e.preventDefault();
+  setDragging(false);
+
+  const file = e.dataTransfer?.files?.[0];
+  if (!file || !editableData?.id) return;
+
+  const path = `projects/${editableData.id}/overview/${file.name}`;
+  const fileRef = ref(storage, path);
+  const uploadTask = uploadBytesResumable(fileRef, file);
+
+  setUploading(true);
+  setUploadProgress(0);
+
+  uploadTask.on(
+    'state_changed',
+    (snapshot) => {
+      const pct = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      setUploadProgress(pct.toFixed(0));
+    },
+    (error) => {
+      console.error('❌ Upload failed:', error);
+      setUploading(false);
+    },
+    async () => {
+      const url = await getDownloadURL(uploadTask.snapshot.ref);
+      const updated = [...(editableData.attachments?.overview || []), url];
+
+      try {
+        await updateDoc(doc(db, 'projects', editableData.id), {
+          'attachments.overview': updated,
+        });
+      } catch (err) {
+        console.error('❌ Firestore update failed:', err);
+      }
+
+      setUploading(false);
+      setUploadProgress(0);
+    }
+  );
+};
 
 const ProjectOverview = ({
   editableData,
@@ -11,6 +56,13 @@ const ProjectOverview = ({
 }) => {
   const [overallStatus, setOverallStatus] = useState('Unknown');
   const [secondWood, setSecondWood] = useState(false);
+  const [dragging, setDragging] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [modalPreview, setModalPreview] = useState(null);
+  const [uploadedFiles, setUploadedFiles] = useState({
+    overview: editableData?.attachments?.overview || [],
+  });
 
   const woodSpeciesOptions = [
     'Maple',
@@ -104,6 +156,12 @@ const ProjectOverview = ({
     }
   }, [editableData]);
 
+  useEffect(() => {
+    if (editableData?.attachments?.overview) {
+      setUploadedFiles({ overview: editableData.attachments.overview });
+    }
+  }, [editableData]);
+
   const renderDropdownField = (label, key, options) => (
     <div className="project-field-row" key={key}>
       <label className="project-label">{label}:</label>
@@ -149,6 +207,53 @@ const ProjectOverview = ({
       )}
     </div>
   );
+
+  const handleDrop = async (e) => {
+    e.preventDefault();
+    setDragging(false);
+
+    const file = e.dataTransfer?.files?.[0];
+    if (!file || !editableData?.id) return;
+
+    const path = `projects/${editableData.id}/overview/${file.name}`;
+    const fileRef = ref(storage, path);
+    const uploadTask = uploadBytesResumable(fileRef, file);
+
+    setUploading(true);
+    setUploadProgress(0);
+
+    uploadTask.on(
+      'state_changed',
+      (snapshot) => {
+        const pct = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        setUploadProgress(pct.toFixed(0));
+      },
+      (error) => {
+        console.error('❌ Upload failed:', error);
+        setUploading(false);
+      },
+      async () => {
+        const url = await getDownloadURL(uploadTask.snapshot.ref);
+        const updated = [...(uploadedFiles.overview || []), url];
+
+        setUploadedFiles((prev) => ({
+          ...prev,
+          overview: updated,
+        }));
+
+        try {
+          await updateDoc(doc(db, 'projects', editableData.id), {
+            'attachments.overview': updated,
+          });
+        } catch (err) {
+          console.error('❌ Firestore update failed:', err);
+        }
+
+        setUploading(false);
+        setUploadProgress(0);
+      }
+    );
+  };
 
   return (
     <div className="project-overview-content">
@@ -259,8 +364,11 @@ const ProjectOverview = ({
           'Steam-bent',
         ])}
 
-        {editableData?.shellConstruction === 'stave' ||
-        editableData?.shellConstruction === 'hybrid' ? (
+        {['stave', 'hybrid'].includes(
+          typeof editableData?.shellConstructionName === 'string'
+            ? editableData.shellConstructionName.toLowerCase()
+            : ''
+        ) ? (
           <>
             {renderDropdownField('Quantity Staves', 'staveCount', [
               '8',
@@ -269,6 +377,12 @@ const ProjectOverview = ({
               '16',
               '20',
             ])}
+
+            {renderTextField(
+              'Target Shell Thickness (mm)',
+              'targetShellThickness'
+            )}
+
             {renderDropdownField(
               'Primary Wood Species',
               'woodPrimary',
@@ -281,25 +395,23 @@ const ProjectOverview = ({
                 </label>
                 <input
                   type="checkbox"
-                  checked={secondWood}
+                  checked={secondWood || !!editableData?.woodSecondary}
                   onChange={() => setSecondWood(!secondWood)}
                 />
-                {secondWood && (
-                  <>
-                    {renderDropdownField(
-                      'Secondary Wood Species',
-                      'woodSecondary',
-                      woodSpeciesOptions
-                    )}
-                    {renderTextField(
-                      '% of Secondary Wood',
-                      'woodSecondaryPercent'
-                    )}
-                  </>
-                )}
               </>
             )}
-            {editableData?.shellConstruction === 'hybrid' &&
+            {(secondWood || !!editableData?.woodSecondary) && (
+              <>
+                {renderDropdownField(
+                  'Secondary Wood Species',
+                  'woodSecondary',
+                  woodSpeciesOptions
+                )}
+                {renderTextField('% of Secondary Wood', 'woodSecondaryPercent')}
+              </>
+            )}
+            {(editableData?.shellConstructionName || '').toLowerCase() ===
+              'hybrid' &&
               renderDropdownField(
                 'Steam Bent Wood Species',
                 'hybridSteamBentSpecies',
@@ -308,7 +420,8 @@ const ProjectOverview = ({
           </>
         ) : null}
 
-        {editableData?.shellConstruction === 'steam bent' &&
+        {typeof editableData?.shellConstruction === 'string' &&
+          editableData.shellConstructionName.toLowerCase() === 'steam-bent' &&
           renderDropdownField(
             'Steam Bent Wood Species',
             'woodPrimary',
@@ -413,6 +526,148 @@ const ProjectOverview = ({
               </button>
             )}
           </div>
+        </div>
+        <div className="project-upload-section">
+          <h4>Upload Files</h4>
+          <div
+            className={`dropzone ${dragging ? 'drag-active' : ''}`}
+            onDrop={(e) => handleDrop(e)}
+            onDragOver={(e) => e.preventDefault()}
+            onDragEnter={() => setDragging(true)}
+            onDragLeave={() => setDragging(false)}
+          >
+            <p>Drag & drop files here (PDF, audio, images, video)</p>
+            {uploading && (
+              <p className="upload-progress">Uploading... {uploadProgress}%</p>
+            )}
+          </div>
+
+          {uploadedFiles?.overview?.length > 0 && (
+            <>
+              <div className="file-preview-grid">
+                {uploadedFiles.overview.map((url, i) => {
+                  const fileType = url.split('.').pop().toLowerCase();
+                  const isImage = [
+                    'jpg',
+                    'jpeg',
+                    'png',
+                    'gif',
+                    'webp',
+                  ].includes(fileType);
+                  const isPDF = fileType === 'pdf';
+                  const isAudio = ['mp3', 'wav', 'ogg'].includes(fileType);
+                  const isVideo = ['mp4', 'webm', 'mov'].includes(fileType);
+                  const filename = decodeURIComponent(
+                    url.split('/').pop().split('?')[0].split('%2F').pop()
+                  );
+
+                  return (
+                    <div key={i} className="file-preview-item">
+                      <div
+                        className="file-preview-inner"
+                        onClick={() => setModalPreview(url)}
+                        style={{ cursor: 'pointer' }}
+                      >
+                        {isImage && (
+                          <img
+                            src={url}
+                            alt="Thumbnail"
+                            className="file-preview-image"
+                          />
+                        )}
+                        {isPDF && (
+                          <iframe
+                            src={url}
+                            className="file-preview-pdf"
+                            title={`pdf-${i}`}
+                          />
+                        )}
+                        {isAudio && (
+                          <audio controls className="file-preview-audio">
+                            <source src={url} />
+                          </audio>
+                        )}
+                        {isVideo && (
+                          <video
+                            muted
+                            autoPlay
+                            loop
+                            className="file-preview-video"
+                            title={`video-${i}`}
+                          >
+                            <source src={url} />
+                          </video>
+                        )}
+                        {!isImage && !isPDF && !isAudio && !isVideo && (
+                          <p className="file-name">{filename}</p>
+                        )}
+                      </div>
+                      <div className="file-actions">
+                        {(isImage || isPDF || isAudio || isVideo) && (
+                          <span
+                            className="file-action-link"
+                            onClick={() => setModalPreview(url)}
+                          >
+                            Preview
+                          </span>
+                        )}
+                        <a
+                          href={url}
+                          download={filename}
+                          className="file-action-link"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          Download
+                        </a>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {modalPreview && (
+                <div
+                  className="file-preview-modal"
+                  onClick={() => setModalPreview(null)}
+                >
+                  <div
+                    className="file-preview-modal-content"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <button
+                      className="modal-close-button"
+                      onClick={() => setModalPreview(null)}
+                    >
+                      &times;
+                    </button>
+                    {['jpg', 'jpeg', 'png', 'gif', 'webp'].some((ext) =>
+                      modalPreview.toLowerCase().includes(`.${ext}`)
+                    ) && <img src={modalPreview} alt="Preview" />}
+                    {modalPreview.toLowerCase().endsWith('.pdf') && (
+                      <iframe
+                        src={modalPreview}
+                        title="PDF Preview"
+                        width="100%"
+                        height="600px"
+                      />
+                    )}
+                    {['mp4', 'webm', 'mov'].some((ext) =>
+                      modalPreview.toLowerCase().includes(`.${ext}`)
+                    ) && (
+                      <video
+                        controls
+                        style={{ maxWidth: '100%', maxHeight: '80vh' }}
+                      >
+                        <source src={modalPreview} />
+                      </video>
+                    )}
+                  </div>
+                </div>
+              )}
+            </>
+          )}
         </div>
       </div>
     </div>
