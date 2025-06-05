@@ -282,7 +282,34 @@ const ProjectOverview = ({
 
   return (
     <div className="project-overview-content">
-      <h3 className="project-title">Project Details</h3>
+      <div className="admin-project-title">Project Details</div>
+      <label className="project-label">
+        Project ID: {editableData?.id || 'N/A'}
+      </label>
+        <label className="project-label">
+          Parent Order ID:{' '}
+          <a
+            className="project-link"
+            href={`/orders/${editableData?.orderId}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {editableData?.orderId || 'N/A'}
+          </a>
+        </label>
+      {editableData?.id && (
+        <p>
+          <strong>View as Customer: </strong>
+          <a
+            href={`/projects/${editableData.id}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="customer-view-link"
+          >
+            Open Project View ↗
+          </a>
+        </p>
+      )}
       <div className="project-details">
         <div className="section-divider">
           <h4>Customer Info</h4>
@@ -295,35 +322,6 @@ const ProjectOverview = ({
           {renderTextField('Zip Code', 'customer.address.zip')}
           {renderCheckboxField('Contact by Email', 'customer.prefersEmail')}
           {renderCheckboxField('Contact by Text', 'customer.prefersText')}
-        </div>
-        <div className="project-field-row">
-          {editableData?.id && (
-            <p>
-              <strong>View as Customer: </strong>
-              <a
-                href={`/projects/${editableData.id}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="customer-view-link"
-              >
-                Open Project View ↗
-              </a>
-            </p>
-          )}
-          <label className="project-label">Project ID:</label>
-          <span className="project-value">{editableData?.id || 'N/A'}</span>
-        </div>
-
-        <div className="project-field-row">
-          <label className="project-label">Parent Order ID:</label>
-          <a
-            className="project-link"
-            href={`/orders/${editableData?.orderId}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {editableData?.orderId || 'N/A'}
-          </a>
         </div>
 
         <div className="project-field-row">
@@ -382,6 +380,7 @@ const ProjectOverview = ({
             </span>
           )}
         </div>
+        <h4>Drum Build Details</h4>
 
         {renderDropdownField('Artisan Line', 'artisanLine', [
           'Soundlegend',
