@@ -202,6 +202,32 @@ const ProjectDetailPage = () => {
       <h2>Project Overview</h2>
 
       <section className="project-section">
+        <h3>Customer </h3>
+        <p>
+          <strong>Name:</strong> {project?.customer?.name || 'N/A'}
+        </p>
+        <p>
+          <strong>Phone:</strong> {project?.customer?.phone || 'N/A'}
+        </p>
+        <p>
+          <strong>Email:</strong> {project?.customer?.email || 'N/A'}
+        </p>
+        <p>
+          <strong>Shipping Address:</strong>{' '}
+          {project?.customer?.address
+            ? [
+                project.customer.address.street,
+                project.customer.address.city,
+                project.customer.address.state,
+                project.customer.address.zip,
+              ]
+                .filter(Boolean)
+                .join(', ')
+            : 'N/A'}
+        </p>
+      </section>
+
+      <section className="project-section">
         <h3>Key Details</h3>
         <p>
           <strong>Start Date:</strong> {formatDate(startDate)}
@@ -314,32 +340,6 @@ const ProjectDetailPage = () => {
         <p>
           <strong>Additional Notes:</strong>{' '}
           {project?.additionalNotes?.trim() ? project.additionalNotes : 'N/A'}
-        </p>
-      </section>
-
-      <section className="project-section">
-        <h3>Customer </h3>
-        <p>
-          <strong>Name:</strong> {project?.customer?.name || 'N/A'}
-        </p>
-        <p>
-          <strong>Email:</strong> {project?.customer?.email || 'N/A'}
-        </p>
-        <p>
-          <strong>Phone:</strong> {project?.customer?.phone || 'N/A'}
-        </p>
-        <p>
-          <strong>Shipping Address:</strong>{' '}
-          {project?.customer?.address
-            ? [
-                project.customer.address.street,
-                project.customer.address.city,
-                project.customer.address.state,
-                project.customer.address.zip,
-              ]
-                .filter(Boolean)
-                .join(', ')
-            : 'N/A'}
         </p>
       </section>
 

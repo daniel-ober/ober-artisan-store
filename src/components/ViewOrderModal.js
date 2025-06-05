@@ -149,16 +149,26 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
       `Create Project for ${item?.name || 'Blank Project'}?`
     );
     if (!confirmCreation) return;
-  
+
     try {
       const parsedAddress = (orderDetails.customerAddress || '').split(',');
       const street = parsedAddress[0]?.trim() || '';
       const city = parsedAddress[1]?.trim() || '';
-      const [state, zip] = parsedAddress[2]?.trim().split(' ') || [];
-  
+      let state = '';
+      let zip = '';
+      if (parsedAddress[2]) {
+        const parts = parsedAddress[2].trim().split(' ');
+        state = parts[0] || '';
+        zip = parts[1] || '';
+      }
+
       const projectData = {
         orderId: orderDetails.id,
-        customerName: orderDetails.customerName || 'N/A',
+        customerName:
+          orderDetails.customerName ||
+          item?.description?.split('-')[0]?.trim() || // e.g. "Danny Lopez"
+          item?.name?.split('-')[0]?.trim() || // fallback
+          'N/A',
         customer: {
           name: orderDetails.customerName || 'N/A',
           email: orderDetails.customerEmail || 'N/A',
@@ -176,18 +186,18 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
         width: '',
         shellDepth: '',
         itemDetails: item || null,
-        ...defaultStepData,         // ✅ workflow
-        ...defaultProjectFields     // ✅ proposal specs
+        ...defaultStepData, // ✅ workflow
+        ...defaultProjectFields, // ✅ proposal specs
       };
-  
+
       const projectRef = await addDoc(collection(db, 'projects'), projectData);
       const projectId = projectRef.id;
-  
+
       const projectEntry = {
         projectId,
         itemName: item?.name || 'Blank Project',
       };
-  
+
       const orderRef = doc(db, 'orders', orderDetails.id);
       await updateDoc(orderRef, {
         relatedProjects: arrayUnion(projectEntry),
@@ -196,7 +206,7 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
           timestamp: new Date().toISOString(),
         }),
       });
-  
+
       setRelatedProjects((prev) => [...prev, projectEntry]);
       setSystemHistory((prev) => [
         {
@@ -205,7 +215,7 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
         },
         ...prev,
       ]);
-  
+
       alert(`✅ Project created successfully!\n\nProject ID: ${projectId}`);
     } catch (error) {
       console.error('Error creating project:', error);
@@ -221,101 +231,105 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
 
   return (
     <div className="modal-overlay">
-<div className="modal-content">
-  <button onClick={onClose} className="modal-close">✕</button>
-  <h3 className="modal-title">Order Details</h3>
+      <div className="modal-content">
+        <button onClick={onClose} className="modal-close">
+          ✕
+        </button>
+        <h3 className="modal-title">Order Details</h3>
 
-  <div className="compact-order-details">
-    <div className="detail-group">
-      <strong>Order ID:</strong> <span>{orderDetails.id}</span>
-    </div>
-    <div className="detail-group">
-      <strong>Order Date:</strong>{' '}
-      <span>
-        {orderDetails.createdAt
-          ? formatFirestoreTimestamp(orderDetails.createdAt)
-          : 'N/A'}
-      </span>
-    </div>
-    <div className="detail-group">
-      <strong>Order Status:</strong> <span>{orderStatus}</span>
-    </div>
-    <div className="detail-group">
-      <strong>Customer Name:</strong> <span>{orderDetails.customerName || 'N/A'}</span>
-    </div>
-    <div className="detail-group">
-      <strong>Email:</strong> <span>{orderDetails.customerEmail || 'N/A'}</span>
-    </div>
-    {orderDetails.customerPhone && (
-      <div className="detail-group">
-        <strong>Phone:</strong> <span>{orderDetails.customerPhone}</span>
-      </div>
-    )}
-    {orderDetails.customerAddress && (
-      <div className="detail-group">
-        <strong>Shipping Address:</strong>{' '}
-        <span>{orderDetails.customerAddress}</span>
-      </div>
-    )}
-  </div>
+        <div className="compact-order-details">
+          <div className="detail-group">
+            <strong>Order ID:</strong> <span>{orderDetails.id}</span>
+          </div>
+          <div className="detail-group">
+            <strong>Order Date:</strong>{' '}
+            <span>
+              {orderDetails.createdAt
+                ? formatFirestoreTimestamp(orderDetails.createdAt)
+                : 'N/A'}
+            </span>
+          </div>
+          <div className="detail-group">
+            <strong>Order Status:</strong> <span>{orderStatus}</span>
+          </div>
+          <div className="detail-group">
+            <strong>Customer Name:</strong>{' '}
+            <span>{orderDetails.customerName || 'N/A'}</span>
+          </div>
+          <div className="detail-group">
+            <strong>Email:</strong>{' '}
+            <span>{orderDetails.customerEmail || 'N/A'}</span>
+          </div>
+          {orderDetails.customerPhone && (
+            <div className="detail-group">
+              <strong>Phone:</strong> <span>{orderDetails.customerPhone}</span>
+            </div>
+          )}
+          {orderDetails.customerAddress && (
+            <div className="detail-group">
+              <strong>Shipping Address:</strong>{' '}
+              <span>{orderDetails.customerAddress}</span>
+            </div>
+          )}
+        </div>
 
-  <h3>Products Ordered:</h3>
-  {items.length > 0 ? (
-    <table className="order-details-table">
-      <thead>
-        <tr>
-          <th>Product</th>
-          <th>Qty</th>
-          <th>Price</th>
-          <th>Status</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {items.map((item, index) => (
-          <tr key={index}>
-            <td>
-              <strong>{item.description || item.name || 'N/A'}</strong>
-              {item.variant && (
-                <div className="variant-details">
-                  {[
-                    item.variant.color,
-                    item.variant.size,
-                    item.variant.other,
-                  ]
-                    .filter(Boolean)
-                    .join(' / ')}
-                </div>
-              )}
-            </td>
-            <td>{item.quantity || 0}</td>
-            <td>${Math.abs(item.price ?? 0).toFixed(2)}</td>
-            <td>
-              <select
-                value={item.status || 'Preparing'}
-                onChange={(e) =>
-                  handleItemStatusChange(index, e.target.value)
-                }
-                className="status-select"
-              >
-                {ITEM_STATUSES.map((status) => (
-                  <option key={status} value={status}>
-                    {status}
-                  </option>
-                ))}
-              </select>
-            </td>
-            <td>
-              <button
-                className="create-project-btn"
-                onClick={() => createProject(item)}
-              >
-                Create Project
-              </button>
-            </td>
-          </tr>
-        ))}
-        {/* <tr>
+        <h3>Products Ordered:</h3>
+        {items.length > 0 ? (
+          <table className="order-details-table">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Qty</th>
+                <th>Price</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {items.map((item, index) => (
+                <tr key={index}>
+                  <td>
+                    <strong>{item.description || item.name || 'N/A'}</strong>
+                    {item.variant && (
+                      <div className="variant-details">
+                        {[
+                          item.variant.color,
+                          item.variant.size,
+                          item.variant.other,
+                        ]
+                          .filter(Boolean)
+                          .join(' / ')}
+                      </div>
+                    )}
+                  </td>
+                  <td>{item.quantity || 0}</td>
+                  <td>${Math.abs(item.price ?? 0).toFixed(2)}</td>
+                  <td>
+                    <select
+                      value={item.status || 'Preparing'}
+                      onChange={(e) =>
+                        handleItemStatusChange(index, e.target.value)
+                      }
+                      className="status-select"
+                    >
+                      {ITEM_STATUSES.map((status) => (
+                        <option key={status} value={status}>
+                          {status}
+                        </option>
+                      ))}
+                    </select>
+                  </td>
+                  <td>
+                    <button
+                      className="create-project-btn"
+                      onClick={() => createProject(item)}
+                    >
+                      Create Project
+                    </button>
+                  </td>
+                </tr>
+              ))}
+              {/* <tr>
           <td colSpan="5" style={{ textAlign: 'center' }}>
             <button
               className="create-project-btn"
@@ -325,93 +339,93 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
             </button>
           </td>
         </tr> */}
-      </tbody>
-    </table>
-  ) : (
-    <p>No products in this order.</p>
-  )}
+            </tbody>
+          </table>
+        ) : (
+          <p>No products in this order.</p>
+        )}
 
-  <h3>Related Projects</h3>
-  {relatedProjects.length > 0 ? (
-    <ul className="related-projects-list">
-      {relatedProjects.map((p) => (
-        <li key={p.projectId}>
-          <button
-            className="related-project-link"
-            onClick={() => redirectToProject(p.projectId)}
-          >
-            {p.itemName} (ID: {p.projectId})
-          </button>
-        </li>
-      ))}
-    </ul>
-  ) : (
-    <p>No related projects.</p>
-  )}
+        <h3>Related Projects</h3>
+        {relatedProjects.length > 0 ? (
+          <ul className="related-projects-list">
+            {relatedProjects.map((p) => (
+              <li key={p.projectId}>
+                <button
+                  className="related-project-link"
+                  onClick={() => redirectToProject(p.projectId)}
+                >
+                  {p.itemName} (ID: {p.projectId})
+                </button>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No related projects.</p>
+        )}
 
-  <h3>Internal Notes</h3>
-  {internalNotes.length > 0 ? (
-    <table className="notes-table">
-      <thead>
-        <tr>
-          <th>Note</th>
-          <th>Timestamp</th>
-        </tr>
-      </thead>
-      <tbody>
-        {internalNotes.map((note, index) => (
-          <tr key={index}>
-            <td>{note.text}</td>
-            <td>{new Date(note.timestamp).toLocaleString()}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  ) : (
-    <p>No internal notes yet.</p>
-  )}
-  <textarea
-    placeholder="Add a note..."
-    value={newNote}
-    onChange={(e) => setNewNote(e.target.value)}
-    className="note-input"
-  />
-  <button
-    className="add-note-btn"
-    onClick={handleAddNote}
-    disabled={loading}
-  >
-    {loading ? 'Adding Note...' : 'Add Note'}
-  </button>
+        <h3>Internal Notes</h3>
+        {internalNotes.length > 0 ? (
+          <table className="notes-table">
+            <thead>
+              <tr>
+                <th>Note</th>
+                <th>Timestamp</th>
+              </tr>
+            </thead>
+            <tbody>
+              {internalNotes.map((note, index) => (
+                <tr key={index}>
+                  <td>{note.text}</td>
+                  <td>{new Date(note.timestamp).toLocaleString()}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <p>No internal notes yet.</p>
+        )}
+        <textarea
+          placeholder="Add a note..."
+          value={newNote}
+          onChange={(e) => setNewNote(e.target.value)}
+          className="note-input"
+        />
+        <button
+          className="add-note-btn"
+          onClick={handleAddNote}
+          disabled={loading}
+        >
+          {loading ? 'Adding Note...' : 'Add Note'}
+        </button>
 
-  <div className="history-log">
-    <h4>System History</h4>
-    {systemHistory.length > 0 ? (
-      <table className="notes-table">
-        <thead>
-          <tr>
-            <th>Event</th>
-            <th>Timestamp</th>
-          </tr>
-        </thead>
-        <tbody>
-          {systemHistory.map((event, index) => (
-            <tr key={index}>
-              <td>{event.event}</td>
-              <td>{new Date(event.timestamp).toLocaleString()}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    ) : (
-      <p>No system history available.</p>
-    )}
-  </div>
+        <div className="history-log">
+          <h4>System History</h4>
+          {systemHistory.length > 0 ? (
+            <table className="notes-table">
+              <thead>
+                <tr>
+                  <th>Event</th>
+                  <th>Timestamp</th>
+                </tr>
+              </thead>
+              <tbody>
+                {systemHistory.map((event, index) => (
+                  <tr key={index}>
+                    <td>{event.event}</td>
+                    <td>{new Date(event.timestamp).toLocaleString()}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <p>No system history available.</p>
+          )}
+        </div>
 
-  <button className="order-close-btn" onClick={onClose}>
-    Close
-  </button>
-</div>
+        <button className="order-close-btn" onClick={onClose}>
+          Close
+        </button>
+      </div>
     </div>
   );
 };
