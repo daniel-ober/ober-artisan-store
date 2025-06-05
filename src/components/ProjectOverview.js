@@ -188,25 +188,50 @@ const ProjectOverview = ({
     </div>
   );
 
-  const renderTextField = (label, key) => (
-    <div className="project-field-row" key={key}>
-      <label className="project-label">{label}:</label>
-      {isEditing ? (
-        <input
-          className="project-input"
-          type="text"
-          value={editableData?.[key] || ''}
-          onChange={(e) => handleChange(key, e.target.value)}
-        />
-      ) : (
-        <span className="project-value">
-          {typeof editableData?.[key] === 'object'
-            ? JSON.stringify(editableData[key])
-            : editableData?.[key] || 'N/A'}
-        </span>
-      )}
-    </div>
-  );
+  const renderTextField = (label, key) => {
+    const getValue = (obj, path) =>
+      path.split('.').reduce((o, p) => o?.[p], obj);
+
+    return (
+      <div className="project-field-row" key={key}>
+        <label className="project-label">{label}:</label>
+        {isEditing ? (
+          <input
+            className="project-input"
+            type="text"
+            value={getValue(editableData, key) || ''}
+            onChange={(e) => handleChange(key, e.target.value)}
+          />
+        ) : (
+          <span className="project-value">
+            {getValue(editableData, key) || 'N/A'}
+          </span>
+        )}
+      </div>
+    );
+  };
+
+  const renderCheckboxField = (label, key) => {
+    const getValue = (obj, path) =>
+      path.split('.').reduce((o, p) => o?.[p], obj);
+
+    return (
+      <div className="project-field-row" key={key}>
+        <label className="project-label">{label}:</label>
+        {isEditing ? (
+          <input
+            type="checkbox"
+            checked={!!getValue(editableData, key)}
+            onChange={(e) => handleChange(key, e.target.checked)}
+          />
+        ) : (
+          <span className="project-value">
+            {getValue(editableData, key) ? 'Yes' : 'No'}
+          </span>
+        )}
+      </div>
+    );
+  };
 
   const handleDrop = async (e) => {
     e.preventDefault();
@@ -259,6 +284,18 @@ const ProjectOverview = ({
     <div className="project-overview-content">
       <h3 className="project-title">Project Details</h3>
       <div className="project-details">
+        <div className="section-divider">
+          <h4>Customer Info</h4>
+          {renderTextField('Customer Name', 'customer.name')}
+          {renderTextField('Email', 'customer.email')}
+          {renderTextField('Phone', 'customer.phone')}
+          {renderTextField('Street', 'customer.address.street')}
+          {renderTextField('City', 'customer.address.city')}
+          {renderTextField('State', 'customer.address.state')}
+          {renderTextField('Zip Code', 'customer.address.zip')}
+          {renderCheckboxField('Contact by Email', 'customer.prefersEmail')}
+          {renderCheckboxField('Contact by Text', 'customer.prefersText')}
+        </div>
         <div className="project-field-row">
           {editableData?.id && (
             <p>

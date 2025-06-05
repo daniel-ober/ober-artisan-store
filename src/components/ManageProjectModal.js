@@ -155,9 +155,21 @@ const ManageProjectModal = ({ isOpen, onClose, projectData, onProjectUpdate }) =
           editableData={editableData}
           isEditing={isEditing}
           onEditToggle={() => setIsEditing(!isEditing)}
-          handleChange={(field, value) =>
-            setEditableData((prev) => ({ ...prev, [field]: value }))
-          }
+          handleChange={(path, value) => {
+  setEditableData((prev) => {
+    const updated = { ...prev };
+    const keys = path.split('.');
+    let current = updated;
+
+    for (let i = 0; i < keys.length - 1; i++) {
+      if (!current[keys[i]]) current[keys[i]] = {};
+      current = current[keys[i]];
+    }
+
+    current[keys[keys.length - 1]] = value;
+    return updated;
+  });
+}}
           onSave={() => {
             saveToFirestore(editableData);
             setIsEditing(false);
