@@ -281,7 +281,7 @@ const ProjectOverview = ({
   };
 
   return (
-    <div className="project-overview-content">
+    <div className="admin-project-overview-content">
       <div className="admin-project-title">Project Details</div>
       <label className="project-label">
         Project ID: {editableData?.id || 'N/A'}
@@ -310,7 +310,7 @@ const ProjectOverview = ({
           </a>
         </p>
       )}
-      <div className="project-details">
+      <div className="admin-project-details">
         <div className="section-divider">
           <h4>Customer Info</h4>
           {renderTextField('Customer Name', 'customer.name')}
@@ -553,12 +553,12 @@ const ProjectOverview = ({
                 <button className="save-btn" onClick={onSave}>
                   Save Changes
                 </button>
-                <button className="edit-toggle-btn" onClick={onCancel}>
+                <button className="admin-edit-toggle-btn" onClick={onCancel}>
                   Cancel Edit
                 </button>
               </>
             ) : (
-              <button className="edit-toggle-btn" onClick={onEditToggle}>
+              <button className="admin-edit-toggle-btn" onClick={onEditToggle}>
                 Edit
               </button>
             )}
