@@ -324,6 +324,8 @@ const ProjectOverview = ({
           {renderCheckboxField('Contact by Text', 'customer.prefersText')}
         </div>
 
+        <h4>Drum Build Details</h4>
+
         <div className="project-field-row">
           <label className="project-label">Start Date:</label>
           {isEditing ? (
@@ -380,7 +382,6 @@ const ProjectOverview = ({
             </span>
           )}
         </div>
-        <h4>Drum Build Details</h4>
 
         {renderDropdownField('Artisan Line', 'artisanLine', [
           'Soundlegend',
