@@ -1,4 +1,4 @@
-.project-overview-content {
+.admin-project-overview-content {
     padding: 1.5rem;
     font-family: 'Poppins', sans-serif;
     color: #ffffff;
@@ -7,6 +7,8 @@
     max-width: 1200px;
     margin: auto;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    overflow-y: auto;
+    max-height: 90vh;
   }
   
   .admin-project-title {
@@ -17,11 +19,11 @@
     color: rgb(255, 255, 255);
   }
   
-  .project-details {
+  .admin-project-details {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    background-color: #1a1a1a;
+    /* background-color: #1a1a1a; */
   }
   
   /* Field Row Styling */
@@ -52,7 +54,7 @@
   }
   
   .project-input {
-    background-color: #2a2a2a;
+    /* background-color: #2a2a2a; */
     padding: 0.5rem 0.75rem;
     border-radius: 6px;
     border: 1px solid #444;
@@ -94,9 +96,11 @@
     background-color: #32a35f;
   }
   
-  .edit-toggle-btn {
-    background-color: #666;
-    color: #fff;
+  .admin-edit-toggle-btn {
+    background-color: #e7e7e7;
+    width: 100px;
+    color: white;
+
   }
   
   .edit-toggle-btn:hover {
@@ -118,7 +122,7 @@
   }
   
   .dropzone.drag-active {
-    background-color: rgba(255, 255, 255, 0.05);
+    /* background-color: rgba(255, 255, 255, 0.05); */
     border-color: #88ccff;
     color: #fff;
   }
@@ -137,7 +141,7 @@
   }
   
   .file-preview-item {
-    background: #222;
+    background: #61460018;
     border-radius: 8px;
     padding: 0.75rem;
     text-align: center;
@@ -211,28 +215,80 @@
   }
   
   /* Responsive Tweaks */
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
+    .project-overview-content {
+      padding: 1rem;
+      border-radius: 8px;
+    }
+  
+    .admin-project-title {
+      font-size: 1.5rem;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+  
+    .project-field-row {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
     .project-label {
-      flex: 1 1 100%;
+      font-size: 0.9rem;
+      margin-bottom: 0.25rem;
     }
   
     .project-input,
     .project-value {
-      flex: 1 1 100%;
-      min-width: unset;
+      width: 100%;
+    }
+  
+    .project-buttons {
+      gap: 0.75rem;
+      margin-top: 1rem;
     }
   
     .file-preview-grid {
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    }
+  
+    .file-preview-modal-content {
+      width: 95vw;
+      height: auto;
+      max-height: 90vh;
+    }
+  
+    .project-upload-section {
+      margin-top: 1.5rem;
     }
   }
   
-  @media (max-width: 480px) {
+  @media (max-width: 600px) {
+    .admin-project-title {
+      font-size: 1.3rem;
+    }
+  
+    .project-label {
+      font-size: 0.85rem;
+    }
+  
+    .project-input {
+      font-size: 0.85rem;
+      padding: 0.4rem 0.6rem;
+    }
+  
     .file-preview-grid {
       grid-template-columns: 1fr;
     }
   
     .project-buttons {
       flex-direction: column;
+      align-items: stretch;
+    }
+  
+    .save-btn,
+    .edit-toggle-btn {
+      width: 100%;
+      font-size: 0.9rem;
+      padding: 0.5rem 1rem;
     }
   }
