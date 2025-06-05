@@ -338,3 +338,50 @@ input[type="file"] {
   color: #1b5e20;
   font-weight: 600;
 }
+
+.manage-project-modal-content {
+  background: #ffffff; /* Match the ProjectOverview background */
+  color: #f5f5f5;       /* Default light text for modal */
+}
+
+/* Fix visibility, spacing, and layout for mobile dropdown */
+.mobile-phase-selector-wrapper {
+  display: none;
+  padding: 1rem 1.5rem 0;
+  background-color: #fafafa;
+  z-index: 10;
+}
+
+.phase-selector-dropdown {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+  color: #111;
+  appearance: none;
+
+  text-align: center;
+  text-align-last: center;
+}
+
+/* On mobile, reveal the dropdown and hide sidebar */
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+
+  .mobile-phase-selector-wrapper {
+    display: block;
+  }
+
+  .modal-body {
+    flex-direction: column;
+    overflow-y: auto;
+  }
+
+  main {
+    padding: 1rem;
+  }
+}
