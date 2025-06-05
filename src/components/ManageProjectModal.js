@@ -53,7 +53,12 @@ const ensureChecklistStructure = (data) => {
   return fixed;
 };
 
-const ManageProjectModal = ({ isOpen, onClose, projectData, onProjectUpdate }) => {
+const ManageProjectModal = ({
+  isOpen,
+  onClose,
+  projectData,
+  onProjectUpdate,
+}) => {
   const [selectedTab, setSelectedTab] = useState('details');
   const [editableData, setEditableData] = useState({});
   const [isEditing, setIsEditing] = useState(false);
@@ -74,7 +79,9 @@ const ManageProjectModal = ({ isOpen, onClose, projectData, onProjectUpdate }) =
     for (const key in data) {
       if (data[key]?.checklist) {
         total += data[key].checklist.reduce(
-          (sum, item) => sum + (typeof item.totalSeconds === 'number' ? item.totalSeconds : 0),
+          (sum, item) =>
+            sum +
+            (typeof item.totalSeconds === 'number' ? item.totalSeconds : 0),
           0
         );
       }
@@ -156,20 +163,20 @@ const ManageProjectModal = ({ isOpen, onClose, projectData, onProjectUpdate }) =
           isEditing={isEditing}
           onEditToggle={() => setIsEditing(!isEditing)}
           handleChange={(path, value) => {
-  setEditableData((prev) => {
-    const updated = { ...prev };
-    const keys = path.split('.');
-    let current = updated;
+            setEditableData((prev) => {
+              const updated = { ...prev };
+              const keys = path.split('.');
+              let current = updated;
 
-    for (let i = 0; i < keys.length - 1; i++) {
-      if (!current[keys[i]]) current[keys[i]] = {};
-      current = current[keys[i]];
-    }
+              for (let i = 0; i < keys.length - 1; i++) {
+                if (!current[keys[i]]) current[keys[i]] = {};
+                current = current[keys[i]];
+              }
 
-    current[keys[keys.length - 1]] = value;
-    return updated;
-  });
-}}
+              current[keys[keys.length - 1]] = value;
+              return updated;
+            });
+          }}
           onSave={() => {
             saveToFirestore(editableData);
             setIsEditing(false);
@@ -183,18 +190,24 @@ const ManageProjectModal = ({ isOpen, onClose, projectData, onProjectUpdate }) =
       );
     }
 
-    const currentStepIndex = buildPhases.findIndex((p) => p.key === selectedTab);
+    const currentStepIndex = buildPhases.findIndex(
+      (p) => p.key === selectedTab
+    );
     const isLocked =
       selectedTab !== 'details' &&
       currentStepIndex > 0 &&
       !buildPhases
         .slice(0, currentStepIndex)
-        .every((prev) => editableData[prev.key]?.checklist?.every((i) => i.completed));
+        .every((prev) =>
+          editableData[prev.key]?.checklist?.every((i) => i.completed)
+        );
 
     return (
       <StepComponentTemplate
         stepKey={selectedTab}
-        stepLabel={buildPhases.find((p) => p.key === selectedTab)?.label || selectedTab}
+        stepLabel={
+          buildPhases.find((p) => p.key === selectedTab)?.label || selectedTab
+        }
         stepData={editableData[selectedTab]}
         onToggleChecklist={(index, completed, seconds) =>
           handleChecklistToggle(selectedTab, index, completed, seconds)
@@ -209,7 +222,9 @@ const ManageProjectModal = ({ isOpen, onClose, projectData, onProjectUpdate }) =
   const currentStepName = determineCurrentPhase(editableData);
 
   const getCurrentStepProgress = () => {
-    const currentKey = buildPhases.find((p) => p.label === currentStepName)?.key;
+    const currentKey = buildPhases.find(
+      (p) => p.label === currentStepName
+    )?.key;
     const checklist = editableData?.[currentKey]?.checklist || [];
     const completed = checklist.filter((t) => t.completed).length;
     const total = checklist.length || 1;
@@ -230,7 +245,9 @@ const ManageProjectModal = ({ isOpen, onClose, projectData, onProjectUpdate }) =
       <div className="manage-project-modal-content">
         <header className="modal-header">
           <h2 className="modal-title">Admin Project View</h2>
-          <div className={`status-chip ${status.toLowerCase().replace(/\s+/g, '-')}`}>
+          <div
+            className={`status-chip ${status.toLowerCase().replace(/\s+/g, '-')}`}
+          >
             Status: {status}
           </div>
           <div className={getStepProgressClass()}>
@@ -247,6 +264,42 @@ const ManageProjectModal = ({ isOpen, onClose, projectData, onProjectUpdate }) =
           </div>
         </header>
         <div className="modal-body">
+          {/* MOBILE DROPDOWN SELECTOR */}
+          <div className="mobile-phase-selector-wrapper">
+            <select
+              className="phase-selector-dropdown"
+              value={selectedTab}
+              onChange={(e) => setSelectedTab(e.target.value)}
+            >
+              <option value="details">📝 Overview</option>
+              {buildPhases.map((phase, idx) => {
+                const isUnlocked = buildPhases
+                  .slice(0, idx)
+                  .every((prev) =>
+                    editableData[prev.key]?.checklist?.every((i) => i.completed)
+                  );
+
+                return (
+                  <option
+                    key={phase.key}
+                    value={phase.key}
+                    disabled={!isUnlocked}
+                  >
+                    {editableData[phase.key]?.checklist?.every(
+                      (i) => i.completed
+                    )
+                      ? '✅ '
+                      : !isUnlocked
+                        ? '🔒 '
+                        : ''}
+                    {phase.label}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+
+          {/* DESKTOP SIDEBAR */}
           <aside className="sidebar">
             <button
               className={selectedTab === 'details' ? 'active' : ''}
@@ -257,25 +310,33 @@ const ManageProjectModal = ({ isOpen, onClose, projectData, onProjectUpdate }) =
             {buildPhases.map((phase, idx) => {
               const isUnlocked = buildPhases
                 .slice(0, idx)
-                .every((prev) => editableData[prev.key]?.checklist?.every((i) => i.completed));
+                .every((prev) =>
+                  editableData[prev.key]?.checklist?.every((i) => i.completed)
+                );
               const isActive = selectedTab === phase.key;
+
               return (
                 <button
                   key={phase.key}
-                  className={`${isActive ? 'active' : ''} ${!isUnlocked ? 'locked' : ''}`}
+                  className={`${isActive ? 'active' : ''} ${
+                    !isUnlocked ? 'locked' : ''
+                  }`}
                   onClick={() => setSelectedTab(phase.key)}
-                  title={!isUnlocked ? 'Complete the previous step to unlock' : ''}
+                  title={
+                    !isUnlocked ? 'Complete the previous step to unlock' : ''
+                  }
                 >
                   {editableData[phase.key]?.checklist?.every((i) => i.completed)
                     ? '✅ '
                     : !isUnlocked
-                    ? '🔒 '
-                    : ''}
+                      ? '🔒 '
+                      : ''}
                   {phase.label}
                 </button>
               );
             })}
           </aside>
+
           <main>{renderContent()}</main>
         </div>
       </div>
