@@ -38,17 +38,12 @@
   font-weight: 600;
 }
 
-.projects-table tr:hover {
-  background-color: #f5f7fa;
-  cursor: pointer;
-}
-
-/* Updated progress bar styling */
+/* Progress bar */
 .project-progress-bar {
   display: flex;
   align-items: center;
   gap: 8px;
-  width: 140px; /* enough room for bar + text */
+  width: 140px;
 }
 
 .progress-percent {
@@ -77,4 +72,41 @@
   height: 100%;
   background-color: #05c46b;
   transition: width 0.3s ease-in-out;
+}
+
+/* === Status Row Background Colors with Specificity === */
+.projects-table tr.status-row.ahead-of-schedule {
+  background-color: #d4f8d4;
+}
+
+.projects-table tr.status-row.on-pace {
+  background-color: #e5fbe5;
+}
+
+.projects-table tr.status-row.slightly-behind {
+  background-color: #fff4d4;
+}
+
+.projects-table tr.status-row.behind-schedule {
+  background-color: #ffe3e3;
+}
+
+.projects-table tr.status-row.at-risk {
+  background-color: #ffd1d1;
+}
+
+/* Maintain background on hover */
+.projects-table tr.status-row:hover {
+  filter: brightness(0.985);
+}
+
+/* Improve text legibility */
+.projects-table tr.status-row td {
+  color: #222;
+}
+
+/* Remove default hover override */
+.projects-table tr:hover {
+  background-color: transparent;
+  cursor: pointer;
 }

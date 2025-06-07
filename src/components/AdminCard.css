@@ -63,6 +63,27 @@
   text-align: center;
 }
 
+.project-badge {
+  font-size: 12px;
+  font-weight: bold;
+  padding: 2px 8px;
+  border-radius: 50%;
+  display: inline-block;
+  color: white;
+}
+
+.green-badge {
+  background-color: #0f9d58;
+}
+
+.yellow-badge {
+  background-color: #f4b400;
+}
+
+.red-badge {
+  background-color: #db4437;
+}
+
 /* Mobile View */
 @media screen and (max-width: 767px) {
   .admin-dashboard {
