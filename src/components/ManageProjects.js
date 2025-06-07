@@ -41,8 +41,8 @@ const normalize = (str) =>
   str
     ?.toLowerCase()
     .replace(/[^a-z0-9 ]/gi, '')
-    .replace(/\s+/g, ' ')
-    .trim() || '';
+    .trim()
+    .replace(/\s+/g, '-') || '';
 
 const ManageProjects = () => {
   const [projects, setProjects] = useState([]);
@@ -65,18 +65,75 @@ const ManageProjects = () => {
     return date.toLocaleDateString();
   };
 
+  const getExpectedPhase = (project) => {
+    let createdAt = null;
+    if (project.startDate?.seconds) {
+      createdAt = new Date(project.startDate.seconds * 1000);
+    } else if (typeof project.startDate === 'string') {
+      const parsed = new Date(project.startDate);
+      if (!isNaN(parsed)) createdAt = parsed;
+    }
+  
+    if (!createdAt) return 'Unknown';
+  
+    let target = null;
+    if (project.targetCompletion?.seconds) {
+      target = new Date(project.targetCompletion.seconds * 1000);
+    } else {
+      target = new Date(createdAt);
+      target.setDate(target.getDate() + 35);
+    }
+  
+    const now = new Date();
+    const elapsedDays = (now - createdAt) / (1000 * 60 * 60 * 24);
+    const totalDays = (target - createdAt) / (1000 * 60 * 60 * 24);
+  
+    if (totalDays <= 0 || elapsedDays < 0) return 'Unknown';
+  
+    const progressPercent = elapsedDays / totalDays;
+  
+    // Map that % to phase index
+    const index = Math.min(
+      buildPhases.length - 1,
+      Math.floor(progressPercent * buildPhases.length)
+    );
+  
+    return buildPhases[index] || 'Unknown';
+  };
+
+  const determineStatus = (project) => {
+    const expectedPhase = getExpectedPhase(project);
+    const expectedIndex = buildPhases.findIndex(
+      (p) => normalize(p) === normalize(expectedPhase)
+    );
+    const actualIndex = buildPhases.findIndex(
+      (p) => normalize(p) === normalize(project.currentPhase)
+    );
+  
+    if (expectedIndex === -1 || actualIndex === -1) return 'Unknown';
+  
+    const delta = actualIndex - expectedIndex;
+  
+    if (delta >= 2) return 'Ahead of Schedule';
+    if (delta === 1 || delta === 0) return 'On Pace';
+    if (delta === -1) return 'Slightly Behind';
+    return 'Behind Schedule';
+  };
+
   const formatTargetCompletion = (timestamp) => {
     if (!timestamp) return 'N/A';
+
     let date;
     if (timestamp?.seconds) {
       date = new Date(timestamp.seconds * 1000);
     } else if (typeof timestamp === 'string') {
       date = new Date(timestamp);
-      if (isNaN(date.getTime())) return 'Invalid';
+      if (isNaN(date)) return 'Invalid';
     } else {
       return 'Invalid';
     }
-    date.setDate(date.getDate() + 35);
+
+    date.setDate(date.getDate() + 35); // fallback for display
     return date.toLocaleDateString();
   };
 
@@ -206,19 +263,24 @@ const ManageProjects = () => {
       <table className="projects-table">
         <thead>
           <tr>
-            <th>Project ID</th>
+            {/* <th>Project ID</th> */}
             <th>Customer Name</th>
             <th>Created At</th>
             <th>Target Completion</th>
             <th>Total Time Spent</th>
             <th>Current Phase</th>
+            <th>Expected On Pace (EOP)</th>
             <th>Progress</th>
             <th>Status</th>
           </tr>
         </thead>
         <tbody>
           {filteredProjects.map((project) => (
-            <tr key={project.id} onClick={() => openModal(project)}>
+            <tr
+              key={project.id}
+              onClick={() => openModal(project)}
+              className={`status-row ${normalize(determineStatus(project))}`}
+            >
               {/* {(() => {
                 try {
                   const time = calculateTotalProjectTime(project);
@@ -229,12 +291,13 @@ const ManageProjects = () => {
                   return <td>Error</td>;
                 }
               })()} */}
-              <td>{project.id}</td>
+              {/* <td>{project.id}</td> */}
               <td>{project.customerName || 'N/A'}</td>
               <td>{formatDate(project.startDate)}</td>
               <td>{formatTargetCompletion(project.startDate)}</td>
               <td>{calculateTotalProjectTime(project)}</td>
               <td>{project.currentPhase}</td>
+              <td>{getExpectedPhase(project)}</td>
               <td>
                 <div className="project-progress-bar">
                   <div className="progress-bar-wrapper">
@@ -252,7 +315,7 @@ const ManageProjects = () => {
                   </span>
                 </div>
               </td>
-              <td>{isOverdue(project) ? 'Overdue' : 'On Track'}</td>
+              <td>{determineStatus(project)}</td>
             </tr>
           ))}
         </tbody>
