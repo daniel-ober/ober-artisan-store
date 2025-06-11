@@ -5,6 +5,28 @@ import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { db, storage } from '../firebaseConfig';
 import { useAuth } from '../context/AuthContext';
 import './ProjectDetailPage.css';
+import {
+  FaTree,
+  FaTools,
+  FaSlidersH,
+  FaPaintBrush,
+  FaCircleNotch,
+  FaCut,
+  FaWrench,
+  FaCogs,
+  FaDrum,
+  FaClipboardCheck,
+} from 'react-icons/fa';
+import {
+  Hammer,
+  Flame,
+  Scissors,
+  Droplet,
+  Settings,
+  Wrench,
+  Beaker,
+  Hand,
+} from 'lucide-react';
 
 const ProjectDetailPage = () => {
   const { projectId } = useParams();
@@ -25,6 +47,55 @@ const ProjectDetailPage = () => {
     mockups: [],
     documents: [],
   });
+  const [isEditingCustomer, setIsEditingCustomer] = useState(false);
+  const [editableCustomer, setEditableCustomer] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    address: {
+      street: '',
+      city: '',
+      state: '',
+      zip: '',
+    },
+  });
+
+  const stepIcons = {
+    woodPreparation: <FaTree />,
+    shellConstruction: <FaTools />,
+    fineTuning: <FaSlidersH />,
+    shellExteriorFinish: <FaPaintBrush />,
+    bearingEdges: <FaCircleNotch />,
+    snareBedCutting: <FaCut />,
+    hardwareDrilling: <FaWrench />,
+    hardwareAssembly: <FaCogs />,
+    tuningAndDetailing: <FaDrum />,
+    qualityCheck: <FaClipboardCheck />,
+  };
+
+  const stepWeights = {
+    woodPreparation: 0.05,
+    shellConstruction: 0.2,
+    fineTuning: 0.1,
+    shellExteriorFinish: 0.2,
+    bearingEdges: 0.1,
+    snareBedCutting: 0.1,
+    hardwareDrilling: 0.1,
+    hardwareAssembly: 0.05,
+    tuningAndDetailing: 0.05,
+    qualityCheck: 0.05,
+  };
+
+  const calculateProjectProgress = (project) => {
+    let total = 0;
+    for (const [key, weight] of Object.entries(stepWeights)) {
+      const checklist = project[key]?.checklist;
+      if (!checklist?.length) continue;
+      const completed = checklist.filter((item) => item.completed).length;
+      total += (completed / checklist.length) * weight;
+    }
+    return Math.round(total * 100);
+  };
 
   useEffect(() => {
     const fetchProject = async () => {
@@ -62,6 +133,23 @@ const ProjectDetailPage = () => {
 
     fetchProject();
   }, [user, isAdmin, projectId, navigate]);
+
+  // ✅ Separate hook: Sync editableCustomer
+  useEffect(() => {
+    if (project?.customer) {
+      setEditableCustomer({
+        name: project.customer.name || '',
+        phone: project.customer.phone || '',
+        email: project.customer.email || '',
+        address: {
+          street: project.customer.address?.street || '',
+          city: project.customer.address?.city || '',
+          state: project.customer.address?.state || '',
+          zip: project.customer.address?.zip || '',
+        },
+      });
+    }
+  }, [project]);
 
   const handleDrop = async (e, type) => {
     e.preventDefault();
@@ -202,7 +290,71 @@ const ProjectDetailPage = () => {
       <h2>Project Overview</h2>
 
       <section className="project-section">
-        <h3>Customer </h3>
+        <h3>Progress</h3>
+
+        <p>
+          <strong>Project Completion:</strong>{' '}
+          {calculateProjectProgress(project)}%
+        </p>
+        <p>
+          <strong>Current Step:</strong> {currentPhase || 'N/A'}
+        </p>
+
+        <div className="customer-progress-container">
+          <div className="customer-progress-track">
+            <div
+              className="customer-progress-fill"
+              style={{ width: `${calculateProjectProgress(project)}%` }}
+            />
+            <div
+              className="customer-current-indicator"
+              style={{ left: `${calculateProjectProgress(project)}%` }}
+            />
+          </div>
+
+          <div className="customer-progress-timeline">
+            {Object.entries(stepWeights).map(([key, weight], index) => {
+              const step = project[key];
+              const completed =
+                step?.checklist?.filter((i) => i.completed).length || 0;
+              const total = step?.checklist?.length || 0;
+
+              let status = 'Not Started';
+              let className = '';
+              if (completed === total && total > 0) {
+                status = 'Completed';
+                className = 'complete';
+              } else if (completed > 0) {
+                status = 'In Progress';
+                className = 'in-progress';
+              }
+
+              const left =
+                Object.values(stepWeights)
+                  .slice(0, index)
+                  .reduce((sum, w) => sum + w, 0) * 100;
+
+              const readable = key
+                .replace(/([A-Z])/g, ' $1')
+                .replace(/^./, (c) => c.toUpperCase());
+
+              return (
+                <div
+                  key={key}
+                  className={`customer-timeline-step ${className}`}
+                  style={{ left: `${left}%` }}
+                  data-tooltip={`${readable} — ${status}`}
+                >
+                  <div className="step-pill">{index + 1}</div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="project-section">
+        <h3>Customer</h3>
         <p>
           <strong>Name:</strong> {project?.customer?.name || 'N/A'}
         </p>
@@ -225,26 +377,20 @@ const ProjectDetailPage = () => {
                 .join(', ')
             : 'N/A'}
         </p>
-      </section>
 
-      <section className="project-section">
-        <h3>Key Details</h3>
-        <p>
-          <strong>Start Date:</strong> {formatDate(startDate)}
-        </p>
-        <p>
-          <strong>Estimated Completion:</strong>{' '}
-          {formatDate(project?.targetCompletion)} –{' '}
-          {formatDate(getBufferedDate(project?.targetCompletion))}
-        </p>
-        <p>
-          <strong>Status:</strong> {status || 'N/A'}
-        </p>
-        {/* <p><strong>Project ID:</strong> {project.id}</p> */}
-        {/* <p><strong>Order ID:</strong> {orderId || 'N/A'}</p> */}
-        <p>
-          <strong>Current Stage:</strong> {currentPhase || 'N/A'}
-        </p>
+        {!isAdmin && (
+          <button
+            className="edit-button"
+            onClick={() =>
+              window.open(
+                'mailto:support@oberdrums.com?subject=Request to update customer info',
+                '_blank'
+              )
+            }
+          >
+            Request Changes
+          </button>
+        )}
       </section>
 
       <section className="project-section">
@@ -394,86 +540,111 @@ const ProjectDetailPage = () => {
       <section className="project-section">
         <h3>Project Files (Uploaded Documents)</h3>
         <div className="file-preview-grid">
-          {uploadedFiles.documents.map((url, i) => {
-            const fileType = url.split('.').pop().toLowerCase();
-            const isImage = ['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(
-              fileType
-            );
-            const isPDF = fileType === 'pdf';
-            const isAudio = ['mp3', 'wav', 'ogg'].includes(fileType);
-            const isVideo = ['mp4', 'webm', 'mov'].includes(fileType);
-            {
-              isImage && (
-                <img
-                  src={url}
-                  alt={`Uploaded ${i}`}
-                  className="file-preview-image"
-                  onClick={() => setModalPreview(url)}
-                  style={{ cursor: 'pointer' }}
-                />
-              );
-            }
-            return (
-              <div key={i} className="file-preview-item">
-                {isImage && (
-                  <img
-                    src={url}
-                    alt={`Uploaded ${i}`}
-                    className="file-preview-image"
-                  />
-                )}
-                {isPDF && (
-                  <iframe
-                    src={url}
-                    title={`PDF ${i}`}
-                    className="file-preview-pdf"
-                  />
-                )}
-                {isAudio && (
-                  <audio controls src={url} className="file-preview-audio">
-                    Your browser does not support the audio tag.
-                  </audio>
-                )}
-                {isVideo && (
-                  <video controls className="file-preview-video">
-                    <source src={url} />
-                    Your browser does not support the video tag.
-                  </video>
-                )}
-                {!isImage && !isPDF && !isAudio && !isVideo && (
-                  <a href={url} target="_blank" rel="noopener noreferrer">
-                    {decodeURIComponent(
-                      url.split('/').pop().split('?')[0].split('%2F').pop()
-                    )}
-                  </a>
-                )}
-              </div>
-            );
-          })}
-        </div>
-        {modalPreview && (
-          <div
-            className="file-preview-modal"
-            onClick={() => setModalPreview(null)}
-          >
-            <div
-              className="file-preview-modal-content"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button
-                className="modal-close-button"
-                onClick={() => setModalPreview(null)}
-              >
-                &times;
-              </button>
-              <img
-                src={modalPreview}
-                alt="Preview"
-                style={{ maxWidth: '100%' }}
-              />
-            </div>
+  {uploadedFiles.documents.map((url, i) => {
+    const ext = url.split('.').pop().toLowerCase();
+    const isImage = ['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(ext);
+    const isPDF = ext === 'pdf';
+    const isAudio = ['mp3', 'wav', 'ogg'].includes(ext);
+    const isVideo = ['mp4', 'webm', 'mov'].includes(ext);
+    const fileName = decodeURIComponent(
+      url.split('/').pop().split('?')[0].split('%2F').pop()
+    );
+
+    return (
+      <div
+        key={i}
+        className="file-preview-item"
+        onClick={() => setModalPreview({ url })}
+        style={{ cursor: 'pointer' }}
+      >
+        {isImage ? (
+          <img
+            src={url}
+            alt={fileName}
+            className="file-preview-image"
+            style={{ maxHeight: '160px', objectFit: 'cover' }}
+          />
+        ) : (
+          <div className="file-preview-thumbnail">
+            <span className="file-label">{fileName}</span>
+            <span className="file-format">
+              {isPDF
+                ? 'PDF'
+                : isAudio
+                ? 'Audio'
+                : isVideo
+                ? 'Video'
+                : 'File'}
+            </span>
           </div>
         )}
+      </div>
+    );
+  })}
+</div>
+
+        {modalPreview?.url && (
+  <div
+    className="file-preview-modal"
+    onClick={() => setModalPreview(null)}
+  >
+    <div
+      className="file-preview-modal-content"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <button
+        className="modal-close-button"
+        onClick={() => setModalPreview(null)}
+      >
+        &times;
+      </button>
+
+      {(() => {
+        const url = modalPreview.url;
+        const filename = url.split('/').pop()?.split('?')[0] || '';
+        const ext = filename.includes('.') ? filename.split('.').pop().toLowerCase() : '';
+
+        const isImage = ['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(ext);
+        const isPDF = ext === 'pdf';
+        const isAudio = ['mp3', 'wav', 'ogg'].includes(ext);
+        const isVideo = ['mp4', 'webm', 'mov'].includes(ext);
+
+        if (isImage) {
+          return <img src={url} alt="Preview" style={{ maxWidth: '100%' }} />;
+        } else if (isPDF) {
+          return (
+            <iframe
+              src={url}
+              title="PDF Preview"
+              style={{ width: '100%', height: '90vh' }}
+            />
+          );
+        } else if (isAudio) {
+          return (
+            <audio controls style={{ width: '100%' }}>
+              <source src={url} />
+            </audio>
+          );
+        } else if (isVideo) {
+          return (
+            <video controls style={{ width: '100%' }}>
+              <source src={url} />
+            </video>
+          );
+        } else {
+          return (
+            <div style={{ padding: '1rem', textAlign: 'center' }}>
+              <p>Unable to preview this file type.</p>
+              <a href={url} target="_blank" rel="noopener noreferrer">
+                Open file
+              </a>
+            </div>
+          );
+        }
+      })()}
+    </div>
+  </div>
+)}
       </section>
     </div>
   );
