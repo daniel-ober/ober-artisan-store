@@ -35,6 +35,7 @@ const ProjectDetailPage = () => {
 
   const [project, setProject] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isPreviewLoaded, setIsPreviewLoaded] = useState(false);
   const [unauthorized, setUnauthorized] = useState(false);
   const [uploadingZone, setUploadingZone] = useState(null);
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -43,10 +44,7 @@ const ProjectDetailPage = () => {
     mockups: false,
     documents: false,
   });
-  const [uploadedFiles, setUploadedFiles] = useState({
-    mockups: [],
-    documents: [],
-  });
+  const [uploadedFiles, setUploadedFiles] = useState({});
   const [isEditingCustomer, setIsEditingCustomer] = useState(false);
   const [editableCustomer, setEditableCustomer] = useState({
     name: '',
@@ -72,6 +70,17 @@ const ProjectDetailPage = () => {
     tuningAndDetailing: <FaDrum />,
     qualityCheck: <FaClipboardCheck />,
   };
+
+  const allFileSections = [
+    'build_proposal',
+    'wood_selection',
+    'early_mockups_(pre-production)',
+    'stave_construction_(pre-milling)',
+    'stave_construction_(post-milling)',
+    'final_mockups_(mid-production)',
+    'media_files_(audio/video)',
+    'other',
+  ];
 
   const stepWeights = {
     woodPreparation: 0.05,
@@ -103,24 +112,43 @@ const ProjectDetailPage = () => {
         navigate('/signin');
         return;
       }
-
+  
       try {
         const ref = doc(db, 'projects', projectId);
         const snap = await getDoc(ref);
-
+  
         if (!snap.exists()) {
           navigate('/not-found');
           return;
         }
-
+  
         const data = snap.data();
-
+  
         if (isAdmin || data.ownerUid === user.uid) {
           setProject({ id: snap.id, ...data });
-          setUploadedFiles({
-            mockups: data.attachments?.mockups || [],
-            documents: data.attachments?.overview || [],
+  
+          // ✅ Correct file extraction logic
+          const rawAttachments = data.attachments || {};
+          const groupedVisible = {};
+  
+          Object.entries(rawAttachments).forEach(([key, files]) => {
+            if (!Array.isArray(files)) return;
+            files.forEach((file) => {
+              const fileObj =
+                typeof file === 'string'
+                  ? { url: file, hidden: false, category: key }
+                  : file;
+  
+              if (!fileObj?.url || fileObj.hidden) return;
+  
+              const cat = fileObj.category || key || 'other';
+              if (!groupedVisible[cat]) groupedVisible[cat] = [];
+              groupedVisible[cat].push(fileObj);
+            });
           });
+  
+          setUploadedFiles(groupedVisible);
+          console.log('✅ Grouped visible attachments:', groupedVisible);
         } else {
           setUnauthorized(true);
         }
@@ -130,7 +158,7 @@ const ProjectDetailPage = () => {
         setLoading(false);
       }
     };
-
+  
     fetchProject();
   }, [user, isAdmin, projectId, navigate]);
 
@@ -489,163 +517,155 @@ const ProjectDetailPage = () => {
         </p>
       </section>
 
-      {/* <section className="project-section">
-        <h3>Build Progress</h3>
-        {[
-          'woodPreparation',
-          'shellConstruction',
-          'fineTuning',
-          'shellExteriorFinish',
-          'bearingEdges',
-          'snareBedCutting',
-          'hardwareDrilling',
-          'hardwareAssembly',
-          'tuningDetailing',
-          'qualityCheck',
-        ].map((stepKey) => {
-          const step = project?.[stepKey];
-          if (!step?.checklist || !Array.isArray(step.checklist)) return null;
 
-          const stepLabel =
-            typeof stepKey === 'string'
-              ? stepKey
-                  .replace(/([A-Z])/g, ' $1')
-                  .replace(/^./, (c) => c.toUpperCase())
-              : '[Invalid Step]';
+{allFileSections.map((sectionKey) => {
+  const files = uploadedFiles?.[sectionKey] || [];
+  if (!files.length) return null;
 
-          return (
-            <div key={stepKey} className="build-step-summary">
-              <h4>{String(stepLabel)}</h4>
-              <ul>
-                {step.checklist.map((item, i) => {
-                  const safeTask =
-                    typeof item.task === 'string'
-                      ? item.task
-                      : '[Invalid Task]';
-                  const minutes = isNaN(item.totalSeconds)
-                    ? 0
-                    : Math.round(item.totalSeconds / 60);
-                  return (
-                    <li key={i}>
-                      {item.completed ? '✅' : '⬜'} {safeTask} — {minutes} min
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          );
+  const sectionTitle = sectionKey
+    .replace(/_/g, ' ')
+    .replace(/\b\w/g, (l) => l.toUpperCase());
+
+  return (
+    <section className="project-section" key={sectionKey}>
+      <h3>{sectionTitle}</h3>
+      <div className="file-preview-grid">
+        {files.map((file, i) => {
+  const fileObj = typeof file === 'string' ? { url: file, hidden: false } : file;
+
+  const { url } = fileObj;
+  if (!url || typeof url !== 'string') return null;
+
+  const fileName = decodeURIComponent(
+    url.split('/').pop().split('?')[0].split('%2F').pop()
+  );
+  const ext = fileName.includes('.') ? fileName.split('.').pop().toLowerCase() : '';
+  const isImage = ['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(ext);
+  const isPDF = ext === 'pdf';
+  const isAudio = ['mp3', 'wav', 'ogg'].includes(ext);
+  const isVideo = ['mp4', 'webm', 'mov'].includes(ext);
+
+  return (
+    <div
+      key={i}
+      className="file-preview-item"
+      onClick={() => setModalPreview({ url, ext })}
+      style={{ cursor: 'pointer' }}
+    >
+      {isImage ? (
+        <img
+          src={url}
+          alt={fileName}
+          className="file-preview-image"
+          style={{
+            height: '160px',
+            objectFit: 'cover',
+            borderRadius: '8px',
+            border: '1px solid #444',
+          }}
+        />
+      ) : (
+        <div className="file-preview-thumbnail">
+          {isPDF && (
+            <img
+              src="/icons/pdf-icon.png"
+              alt="PDF"
+              className="pdf-icon"
+            />
+          )}
+          <span className="file-label">{fileName}</span>
+          <span className="file-format">
+            {isPDF
+              ? 'PDF'
+              : isAudio
+              ? 'Audio'
+              : isVideo
+              ? 'Video'
+              : 'File'}
+          </span>
+        </div>
+      )}
+    </div>
+  );
         })}
-      </section> */}
-
-      <section className="project-section">
-        <h3>Project Files (Uploaded Documents)</h3>
-        <div className="file-preview-grid">
-  {uploadedFiles.documents.map((url, i) => {
-    const ext = url.split('.').pop().toLowerCase();
-    const isImage = ['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(ext);
-    const isPDF = ext === 'pdf';
-    const isAudio = ['mp3', 'wav', 'ogg'].includes(ext);
-    const isVideo = ['mp4', 'webm', 'mov'].includes(ext);
-    const fileName = decodeURIComponent(
-      url.split('/').pop().split('?')[0].split('%2F').pop()
-    );
-
-    return (
-      <div
-        key={i}
-        className="file-preview-item"
-        onClick={() => setModalPreview({ url })}
-        style={{ cursor: 'pointer' }}
-      >
-        {isImage ? (
-          <img
-            src={url}
-            alt={fileName}
-            className="file-preview-image"
-            style={{ maxHeight: '160px', objectFit: 'cover' }}
-          />
-        ) : (
-          <div className="file-preview-thumbnail">
-            <span className="file-label">{fileName}</span>
-            <span className="file-format">
-              {isPDF
-                ? 'PDF'
-                : isAudio
-                ? 'Audio'
-                : isVideo
-                ? 'Video'
-                : 'File'}
-            </span>
-          </div>
-        )}
       </div>
-    );
-  })}
-</div>
-
-        {modalPreview?.url && (
-  <div
-    className="file-preview-modal"
-    onClick={() => setModalPreview(null)}
-  >
+    </section>
+  );
+})}
+{modalPreview && (
+  <div className="file-preview-modal" onClick={() => setModalPreview(null)}>
     <div
       className="file-preview-modal-content"
       onClick={(e) => e.stopPropagation()}
     >
-      <button
-        className="modal-close-button"
-        onClick={() => setModalPreview(null)}
-      >
-        &times;
+      <button className="modal-close-button" onClick={() => setModalPreview(null)}>
+        ✕
       </button>
 
-      {(() => {
-        const url = modalPreview.url;
-        const filename = url.split('/').pop()?.split('?')[0] || '';
-        const ext = filename.includes('.') ? filename.split('.').pop().toLowerCase() : '';
+      {!isPreviewLoaded && (
+        <div className="preview-loading-spinner">
+          Loading...
+        </div>
+      )}
 
-        const isImage = ['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(ext);
-        const isPDF = ext === 'pdf';
-        const isAudio = ['mp3', 'wav', 'ogg'].includes(ext);
-        const isVideo = ['mp4', 'webm', 'mov'].includes(ext);
-
-        if (isImage) {
-          return <img src={url} alt="Preview" style={{ maxWidth: '100%' }} />;
-        } else if (isPDF) {
-          return (
-            <iframe
-              src={url}
-              title="PDF Preview"
-              style={{ width: '100%', height: '90vh' }}
-            />
-          );
-        } else if (isAudio) {
-          return (
-            <audio controls style={{ width: '100%' }}>
-              <source src={url} />
-            </audio>
-          );
-        } else if (isVideo) {
-          return (
-            <video controls style={{ width: '100%' }}>
-              <source src={url} />
-            </video>
-          );
-        } else {
-          return (
-            <div style={{ padding: '1rem', textAlign: 'center' }}>
-              <p>Unable to preview this file type.</p>
-              <a href={url} target="_blank" rel="noopener noreferrer">
-                Open file
-              </a>
-            </div>
-          );
-        }
-      })()}
+      {modalPreview.ext === 'pdf' ? (
+        <>
+          <a
+            href={modalPreview.url}
+            download
+            target="_blank"
+            rel="noopener noreferrer"
+            className="modal-download-button"
+          >
+            ⬇ Download
+          </a>
+          <iframe
+            src={modalPreview.url}
+            title="PDF Preview"
+            className="file-preview-pdf"
+            onLoad={() => setIsPreviewLoaded(true)}
+          />
+        </>
+      ) : modalPreview.ext === 'mp4' || modalPreview.ext === 'webm' || modalPreview.ext === 'mov' ? (
+        <video
+          controls
+          autoPlay
+          loop
+          className="file-preview-video"
+          onLoadedData={() => setIsPreviewLoaded(true)}
+        >
+          <source src={modalPreview.url} />
+        </video>
+      ) : modalPreview.ext === 'mp3' || modalPreview.ext === 'wav' || modalPreview.ext === 'ogg' ? (
+        <audio
+          controls
+          className="file-preview-audio"
+          onLoadedData={() => setIsPreviewLoaded(true)}
+        >
+          <source src={modalPreview.url} />
+        </audio>
+      ) : (
+        <>
+          <a
+            href={modalPreview.url}
+            download
+            target="_blank"
+            rel="noopener noreferrer"
+            className="modal-download-button"
+          >
+            ⬇ Download
+          </a>
+          <img
+            src={modalPreview.url}
+            alt="Preview"
+            className="file-preview-image"
+            onLoad={() => setIsPreviewLoaded(true)}
+          />
+        </>
+      )}
     </div>
   </div>
 )}
-      </section>
     </div>
   );
 };
