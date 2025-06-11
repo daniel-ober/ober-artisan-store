@@ -712,24 +712,26 @@ const ProjectOverview = ({
         ⬇ Download
       </a>
 
-      {!isPreviewLoaded && modalPreview.ext !== 'pdf' && (
+      {!isPreviewLoaded && (
         <div className="preview-loading-spinner">Loading...</div>
       )}
 
       {modalPreview.ext === 'pdf' ? (
-        <div style={{ textAlign: 'center', padding: '2rem' }}>
-          <p style={{ color: '#ccc' }}>
-            Preview not available due to browser restrictions.
-          </p>
-          <a
-            href={modalPreview.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="modal-download-button"
-          >
-            Open PDF in New Tab ↗
-          </a>
-        </div>
+        <iframe
+          src={modalPreview.url}
+          title="PDF Preview"
+          className="file-preview-pdf"
+          style={{
+            visibility: isPreviewLoaded ? 'visible' : 'hidden',
+            opacity: isPreviewLoaded ? 1 : 0,
+            transition: 'opacity 0.4s ease',
+            width: '100%',
+            height: '80vh',
+            border: 'none',
+            borderRadius: '8px'
+          }}
+          onLoad={() => setIsPreviewLoaded(true)}
+        />
       ) : modalPreview.ext === 'mp4' ||
         modalPreview.ext === 'webm' ||
         modalPreview.ext === 'mov' ? (
@@ -741,7 +743,7 @@ const ProjectOverview = ({
           style={{
             visibility: isPreviewLoaded ? 'visible' : 'hidden',
             opacity: isPreviewLoaded ? 1 : 0,
-            transition: 'opacity 0.4s ease',
+            transition: 'opacity 0.4s ease'
           }}
           onLoadedData={() => setIsPreviewLoaded(true)}
         >
@@ -756,7 +758,7 @@ const ProjectOverview = ({
           style={{
             visibility: isPreviewLoaded ? 'visible' : 'hidden',
             opacity: isPreviewLoaded ? 1 : 0,
-            transition: 'opacity 0.4s ease',
+            transition: 'opacity 0.4s ease'
           }}
           onLoadedData={() => setIsPreviewLoaded(true)}
         >
@@ -770,7 +772,7 @@ const ProjectOverview = ({
           style={{
             visibility: isPreviewLoaded ? 'visible' : 'hidden',
             opacity: isPreviewLoaded ? 1 : 0,
-            transition: 'opacity 0.4s ease',
+            transition: 'opacity 0.4s ease'
           }}
           onLoad={() => setIsPreviewLoaded(true)}
         />
@@ -778,6 +780,7 @@ const ProjectOverview = ({
     </div>
   </div>
 )}
+
       </div>
     </div>
   );
