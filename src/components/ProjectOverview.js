@@ -18,6 +18,7 @@ const ProjectOverview = ({
   const [uploading, setUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [modalPreview, setModalPreview] = useState(null);
+  const [isPreviewLoaded, setIsPreviewLoaded] = useState(false);
   const [uploadedFiles, setUploadedFiles] = useState(
     editableData?.attachments || { other: [] }
   );
@@ -128,8 +129,8 @@ const ProjectOverview = ({
   }, [editableData]);
 
   useEffect(() => {
-    if (editableData?.attachments?.overview) {
-      setUploadedFiles({ overview: editableData.attachments.overview });
+    if (editableData?.attachments) {
+      setUploadedFiles(editableData.attachments);
     }
   }, [editableData]);
 
@@ -604,6 +605,14 @@ const ProjectOverview = ({
                         <div
                           className="file-preview-inner"
                           style={{ cursor: 'pointer' }}
+                          onClick={() => {
+                            setIsPreviewLoaded(false);
+                            const filename = url.split('/').pop().split('?')[0];
+                            const ext = filename.includes('.')
+                              ? filename.split('.').pop().toLowerCase()
+                              : '';
+                            setModalPreview({ url, ext });
+                          }}
                         >
                           {isImage && (
                             <img
@@ -678,6 +687,97 @@ const ProjectOverview = ({
             ) : null
           )}
         </div>
+        {modalPreview && (
+  <div
+    className="file-preview-modal"
+    onClick={() => setModalPreview(null)}
+  >
+    <div
+      className="file-preview-modal-content"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <button
+        className="modal-close-button"
+        onClick={() => setModalPreview(null)}
+      >
+        ✕
+      </button>
+      <a
+        href={modalPreview.url}
+        download
+        target="_blank"
+        rel="noopener noreferrer"
+        className="modal-download-button"
+      >
+        ⬇ Download
+      </a>
+
+      {!isPreviewLoaded && modalPreview.ext !== 'pdf' && (
+        <div className="preview-loading-spinner">Loading...</div>
+      )}
+
+      {modalPreview.ext === 'pdf' ? (
+        <div style={{ textAlign: 'center', padding: '2rem' }}>
+          <p style={{ color: '#ccc' }}>
+            Preview not available due to browser restrictions.
+          </p>
+          <a
+            href={modalPreview.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="modal-download-button"
+          >
+            Open PDF in New Tab ↗
+          </a>
+        </div>
+      ) : modalPreview.ext === 'mp4' ||
+        modalPreview.ext === 'webm' ||
+        modalPreview.ext === 'mov' ? (
+        <video
+          controls
+          autoPlay
+          loop
+          className="file-preview-video"
+          style={{
+            visibility: isPreviewLoaded ? 'visible' : 'hidden',
+            opacity: isPreviewLoaded ? 1 : 0,
+            transition: 'opacity 0.4s ease',
+          }}
+          onLoadedData={() => setIsPreviewLoaded(true)}
+        >
+          <source src={modalPreview.url} />
+        </video>
+      ) : modalPreview.ext === 'mp3' ||
+        modalPreview.ext === 'wav' ||
+        modalPreview.ext === 'ogg' ? (
+        <audio
+          controls
+          className="file-preview-audio"
+          style={{
+            visibility: isPreviewLoaded ? 'visible' : 'hidden',
+            opacity: isPreviewLoaded ? 1 : 0,
+            transition: 'opacity 0.4s ease',
+          }}
+          onLoadedData={() => setIsPreviewLoaded(true)}
+        >
+          <source src={modalPreview.url} />
+        </audio>
+      ) : (
+        <img
+          src={modalPreview.url}
+          alt="Preview"
+          className="file-preview-image"
+          style={{
+            visibility: isPreviewLoaded ? 'visible' : 'hidden',
+            opacity: isPreviewLoaded ? 1 : 0,
+            transition: 'opacity 0.4s ease',
+          }}
+          onLoad={() => setIsPreviewLoaded(true)}
+        />
+      )}
+    </div>
+  </div>
+)}
       </div>
     </div>
   );

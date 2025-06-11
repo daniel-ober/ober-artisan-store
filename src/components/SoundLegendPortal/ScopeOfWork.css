@@ -1,0 +1,42 @@
+/* src/components/SoundLegendPortal/ScopeOfWork.css */
+
+.scope-section {
+    padding: 1.5rem;
+    background-color: #1a1a1a;
+    color: #f0f0f0;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+  }
+  
+  .scope-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+  
+  .scope-section p {
+    font-size: 1rem;
+    margin: 0.4rem 0;
+    line-height: 1.5;
+  }
+  
+  .scope-section strong {
+    color: #ffffff;
+    font-weight: 600;
+  }
+  
+  .scope-section .edit-button {
+    margin-top: 1rem;
+    background-color: #0078ff;
+    color: #fff;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .scope-section .edit-button:hover {
+    background-color: #005ec4;
+  }
