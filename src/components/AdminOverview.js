@@ -1,5 +1,6 @@
+// src/components/AdminOverview.js
+
 import React, { useEffect, useState } from 'react';
-import { arrayUnion } from 'firebase/firestore';
 import {
   getDoc,
   doc,
@@ -9,6 +10,7 @@ import {
   orderBy,
   limit,
   onSnapshot,
+  arrayUnion,
 } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import ViewOrderModal from './ViewOrderModal';
@@ -22,9 +24,13 @@ import {
   FaExclamationTriangle,
   FaThLarge,
 } from 'react-icons/fa';
+import {
+  getOverviewStatus,
+  getBadgeClass,
+  getOrderStatusFromItems,
+  STATUS_SCHEMA,
+} from '../utils/statusConfig';
 import './AdminOverview.css';
-import { getOverviewStatus, getBadgeClass } from '../utils/statusConfig';
-
 
 const getCollectionPath = (type) => {
   switch (type) {
@@ -41,7 +47,41 @@ const getCollectionPath = (type) => {
   }
 };
 
-const AdminOverview = () => {
+const inferStatusFromTarget = (type, targetStatus, currentItem = null) => {
+  const schema = STATUS_SCHEMA[type];
+  if (!schema) return 'New';
+
+  if (type === 'order') {
+    if (targetStatus === 'new') return 'new';
+    if (targetStatus === 'completed') return 'fulfilled';
+    return getOrderStatusFromItems(currentItem?.items || []);
+  }
+
+  switch (targetStatus) {
+    case 'new':
+      return schema.new?.[0] || 'New';
+    case 'inProgress':
+      return schema.inProgress?.[0] || 'In Progress';
+    case 'completed':
+      return schema.completed?.[0] || 'Completed';
+    default:
+      return 'New';
+  }
+};
+
+const normalizeStatusAndOverview = (type, data) => {
+  let status = data.status;
+
+  // Only auto-infer order status from items if it's missing or marked as 'order started'
+  if (type === 'order' && (!status || status === 'order started')) {
+    status = getOrderStatusFromItems(data.items || []);
+  }
+
+  const overviewStatus = getOverviewStatus(type, status);
+  return { status, overviewStatus };
+};
+
+const AdminOverview = ({ notifications = {}, secondaryNotifications = {}, setOverviewBadgeCounts }) => {
   const [data, setData] = useState({
     new: [],
     inProgress: [],
@@ -57,33 +97,24 @@ const AdminOverview = () => {
   const [inProgressPage, setInProgressPage] = useState(1);
   const [completedPage, setCompletedPage] = useState(1);
   const itemsPerPage = 10;
+  const [activeFilter, setActiveFilter] = useState('all');
 
-  const [activeFilter, setActiveFilter] = useState('all'); // 'all', 'orders', 'support', 'slRequests', 'risk'
-
-  // Always update state with raw data per type; don't early-return based on filters.
   const updateColumnState = (type, items) => {
     const newItems = [];
     const inProgressItems = [];
     const completedItems = [];
-
+  
     for (const item of items) {
-      item.type = type; // ✅ Force type assignment so filtering works correctly
-
-      const overview = getOverviewStatus(
-        item.type,
-        item.status || item.overviewStatus
-      );
-
-      if (overview === 'new') newItems.push(item);
-      else if (overview === 'inProgress') inProgressItems.push(item);
+      item.type = type;
+  
+      // ✅ Only use item.overviewStatus directly — do NOT recalculate
+      if (item.overviewStatus === 'new') newItems.push(item);
+      else if (item.overviewStatus === 'inProgress') inProgressItems.push(item);
       else completedItems.push(item);
     }
-
+  
     setData((prev) => {
-      // Remove all items of this type from each column
       const filterOut = (arr) => arr.filter((i) => i.type !== type);
-
-      // Prevent duplicates by checking id+type combo
       const uniqueById = (arr) => {
         const seen = new Set();
         return arr.filter((item) => {
@@ -93,17 +124,11 @@ const AdminOverview = () => {
           return true;
         });
       };
-
+  
       return {
         new: uniqueById([...filterOut(prev.new), ...newItems]),
-        inProgress: uniqueById([
-          ...filterOut(prev.inProgress),
-          ...inProgressItems,
-        ]),
-        completed: uniqueById([
-          ...filterOut(prev.completed),
-          ...completedItems,
-        ]),
+        inProgress: uniqueById([...filterOut(prev.inProgress), ...inProgressItems]),
+        completed: uniqueById([...filterOut(prev.completed), ...completedItems]),
       };
     });
   };
@@ -111,13 +136,35 @@ const AdminOverview = () => {
   useEffect(() => {
     const unsubOrders = onSnapshot(
       query(collection(db, 'orders'), orderBy('createdAt', 'desc'), limit(100)),
-      (snapshot) => {
-        const orders = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          type: 'order',
-          overviewStatus: doc.data().overviewStatus || null,
-          ...doc.data(),
-        }));
+      async (snapshot) => {
+        const orders = await Promise.all(
+          snapshot.docs.map(async (docSnap) => {
+            const data = docSnap.data();
+            let status = data.status;
+            let overviewStatus = data.overviewStatus;
+            
+            // ✅ Only infer if they're missing (for backward compatibility)
+            if (!status || !overviewStatus) {
+              status = getOrderStatusFromItems(data.items || []);
+              overviewStatus = getOverviewStatus('order', status);
+            
+              // ✅ Only save to Firestore if it was actually missing
+              await updateDoc(doc(db, 'orders', docSnap.id), {
+                status,
+                overviewStatus,
+              });
+            }
+            
+            // ✅ Never override manual status/overviewStatus if already present
+            return {
+              id: docSnap.id,
+              type: 'order',
+              ...data,
+              status,
+              overviewStatus,
+            };
+          })
+        );
         updateColumnState('order', orders);
       }
     );
@@ -157,8 +204,11 @@ const AdminOverview = () => {
       (snapshot) => {
         const risks = snapshot.docs.map((doc) => {
           const data = doc.data();
-          const overviewStatus = getOverviewStatus('risk', data.status || data.overviewStatus);
-    
+          const overviewStatus = getOverviewStatus(
+            'risk',
+            data.status || data.overviewStatus
+          );
+
           return {
             id: doc.id,
             type: 'risk',
@@ -172,7 +222,7 @@ const AdminOverview = () => {
             ...data,
           };
         });
-    
+
         updateColumnState('risk', risks);
       }
     );
@@ -186,8 +236,11 @@ const AdminOverview = () => {
       (snapshot) => {
         const submissions = snapshot.docs.map((doc) => {
           const data = doc.data();
-          const overviewStatus = getOverviewStatus('submission', data.status || data.overviewStatus);
-    
+          const overviewStatus = getOverviewStatus(
+            'submission',
+            data.status || data.overviewStatus
+          );
+
           return {
             id: doc.id,
             type: 'submission',
@@ -208,6 +261,26 @@ const AdminOverview = () => {
       unsubRisks();
     };
   }, []);
+
+  useEffect(() => {
+    const calcOverviewCounts = () => {
+      const green =
+        (notifications.manageOrders || 0) +
+        (notifications.manageInquiries || 0) +
+        (notifications.manageSoundlegendRequests || 0) +
+        (notifications.manageRiskAlerts || 0);
+  
+      const yellow =
+        (secondaryNotifications.manageOrders || 0) +
+        (secondaryNotifications.manageInquiries || 0) +
+        (secondaryNotifications.manageSoundlegendRequests || 0) +
+        (secondaryNotifications.manageRiskAlerts || 0);
+  
+      setOverviewBadgeCounts({ green, yellow });
+    };
+  
+    calcOverviewCounts();
+  }, [notifications, secondaryNotifications]);
 
   const handleItemClick = async (item) => {
     try {
@@ -245,7 +318,6 @@ const AdminOverview = () => {
         return;
       }
 
-      // For all other item types
       if (item.type === 'order' && !Array.isArray(data.items)) {
         data.items = [];
       }
@@ -293,15 +365,17 @@ const AdminOverview = () => {
     const ref = doc(db, getCollectionPath(type), id);
 
     try {
-      const normalizedStatus =
-        type === 'submission'
-          ? 'Prospecting'
-          : type === 'risk' && targetStatus === 'completed'
-            ? 'Resolved'
-            : type === 'risk' && targetStatus === 'inProgress'
-              ? 'In Progress'
-              : 'New';
+      const allItems = [...data.new, ...data.inProgress, ...data.completed];
+      const currentItem = allItems.find(
+        (item) => item.id === id && item.type === type
+      );
+      let normalizedStatus = inferStatusFromTarget(type, targetStatus, currentItem);
 
+      // ⚠️ Force manual override of status if dragging order to new/completed
+      if (type === 'order') {
+        if (targetStatus === 'new') normalizedStatus = 'new';
+        else if (targetStatus === 'completed') normalizedStatus = 'fulfilled';
+      }
       const updateFields = {
         overviewStatus: targetStatus,
         status: normalizedStatus,
@@ -322,7 +396,6 @@ const AdminOverview = () => {
         };
       });
 
-      // Update local state
       setData((prev) => {
         const allItems = [...prev.new, ...prev.inProgress, ...prev.completed];
         const movedItem = allItems.find(
@@ -335,6 +408,7 @@ const AdminOverview = () => {
           overviewStatus: targetStatus,
           status: normalizedStatus,
         };
+        updatedItem._manuallyUpdated = true;
 
         const filterOut = (items) =>
           items.filter((i) => i.id !== id || i.type !== type);
@@ -404,9 +478,7 @@ const AdminOverview = () => {
     );
   };
 
-  // Apply filtering on render based on the current filters.
   const renderColumn = (title, items, statusKey) => {
-    // First, filter items based on type:
     const filteredItems = items.filter((item) => {
       if (activeFilter === 'all') return true;
       if (activeFilter === 'orders') return item.type === 'order';
@@ -421,7 +493,6 @@ const AdminOverview = () => {
     else if (statusKey === 'inProgress') page = inProgressPage;
     else if (statusKey === 'completed') page = completedPage;
 
-    // Always apply pagination (for all columns)
     const paginatedItems = filteredItems.slice(
       (page - 1) * itemsPerPage,
       page * itemsPerPage
@@ -502,10 +573,9 @@ const AdminOverview = () => {
   };
 
   const handleStatusChange = async (id, newStatus) => {
-    const statusLower = newStatus.toLowerCase();
     const newOverviewStatus = getOverviewStatus('risk', newStatus);
-
     const ref = doc(db, 'risk_notifications', id);
+
     try {
       await updateDoc(ref, {
         status: newStatus,
@@ -518,6 +588,7 @@ const AdminOverview = () => {
     } catch (err) {
       console.error('❌ Failed to update Firestore status:', err.message);
     }
+
     setSelectedItem((prev) => {
       if (!prev || prev.id !== id) return prev;
       return {
@@ -536,6 +607,7 @@ const AdminOverview = () => {
         status: newStatus,
         overviewStatus: newOverviewStatus,
       };
+
       return {
         new:
           newOverviewStatus === 'new'
@@ -624,7 +696,7 @@ const AdminOverview = () => {
           isOpen={true}
           onClose={() => setSelectedItem(null)}
           risk={selectedItem}
-          onStatusChange={handleStatusChange} // 👈 include this if your modal has an editable dropdown
+          onStatusChange={handleStatusChange}
         />
       )}
     </div>

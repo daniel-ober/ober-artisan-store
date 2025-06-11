@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
+import { collection, getDocs, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
+import { getBadgeClass } from '../utils/statusConfig';
+import {
+  getOrderStatusFromItems,
+  getOverviewStatus
+} from '../utils/statusConfig';
 import ViewOrderModal from './ViewOrderModal';
 import './ManageOrders.css';
 
@@ -50,27 +55,46 @@ const ManageOrders = () => {
     try {
       const ordersCollection = collection(db, 'orders');
       const orderSnapshot = await getDocs(ordersCollection);
-      const ordersList = orderSnapshot.docs
-      .map((doc) => {
-        const data = doc.data();
-        return {
-          id: doc.id,
-          overviewStatus: data.overviewStatus || 'new',
-          orderDate: data.createdAt?.toDate().toLocaleString() || 'No date available',
-          customerName: data.customerName || 'No name available',
-          total:
-            typeof data.totalAmount === 'number'
-              ? data.totalAmount.toFixed(2)
-              : 'N/A',
-          status: determineOrderStatus(data.items || []),
-          ...data,
-        };
-      })
-      .sort((a, b) => {
+      const ordersList = await Promise.all(
+        orderSnapshot.docs.map(async (docSnap) => {
+          const data = docSnap.data();
+          let derivedStatus = data.status;
+          let derivedOverview = data.overviewStatus;
+          
+          if (!derivedStatus || derivedStatus === 'order started') {
+            derivedStatus = getOrderStatusFromItems(data.items || []);
+          }
+          
+          if (!derivedOverview) {
+            derivedOverview = getOverviewStatus('order', derivedStatus);
+            await updateDoc(doc(db, 'orders', docSnap.id), {
+              overviewStatus: derivedOverview,
+              status: derivedStatus, // optional: ensure Firestore keeps in sync
+            });
+          }
+  
+          return {
+            id: docSnap.id,
+            orderDate:
+              data.createdAt?.toDate().toLocaleString() || 'No date available',
+            customerName: data.customerName || 'No name available',
+            total:
+              typeof data.totalAmount === 'number'
+                ? data.totalAmount.toFixed(2)
+                : 'N/A',
+            status: derivedStatus,
+            overviewStatus: derivedOverview,
+            ...data,
+          };
+        })
+      );
+  
+      ordersList.sort((a, b) => {
         const aTime = a.createdAt?.seconds || 0;
         const bTime = b.createdAt?.seconds || 0;
-        return bTime - aTime; // 🔽 Newest first
+        return bTime - aTime;
       });
+  
       setOrders(ordersList);
       applyFilters(ordersList);
     } catch (error) {
@@ -80,14 +104,8 @@ const ManageOrders = () => {
 
   const applyFilters = (ordersList) => {
     const filtered = ordersList.filter((order) => {
-      if (hideFulfilled) {
-        const status = (order.status || '').toLowerCase();
-        if (
-          status === 'fulfilled' ||
-          status === 'completed' || // 🔧 ADD THIS
-          status === 'canceled'
-        )
-          return false;
+      if (hideFulfilled && order.overviewStatus === 'completed') {
+        return false;
       }
       return true;
     });
@@ -181,7 +199,7 @@ const ManageOrders = () => {
               <tr key={order.id}>
                 <td onClick={() => handleRowClick(order)}>
                   <span
-                    className={`status-badge ${getOrderBadgeClass(order.status)}`}
+                    className={`status-badge ${getBadgeClass(order.status)}`}
                   >
                     {order.status}
                   </span>
