@@ -1,0 +1,136 @@
+/* src/components/SoundLegendPortal/Attachments.css */
+
+.scope-section {
+    padding: 1.5rem;
+    background-color: #1a1a1a;
+    color: #f0f0f0;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+  }
+  
+  .scope-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+  
+  .file-preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .file-preview-item {
+    position: relative;
+    background-color: #2a2a2a;
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 0.5rem;
+    transition: transform 0.2s ease;
+  }
+  
+  .file-preview-item:hover {
+    transform: scale(1.03);
+    border-color: #0078ff;
+  }
+  
+  .file-preview-image {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+  
+  .file-preview-thumbnail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 160px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #ccc;
+  }
+  
+  .file-label {
+    margin-top: 0.4rem;
+    word-break: break-word;
+  }
+  
+  .file-format {
+    font-size: 0.8rem;
+    color: #888;
+  }
+  
+  .pdf-icon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .file-preview-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 10, 10, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+  }
+  
+  .file-preview-modal-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    background: #111;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+  }
+  
+  .file-preview-modal-content iframe,
+  .file-preview-modal-content video,
+  .file-preview-modal-content img,
+  .file-preview-modal-content audio {
+    width: 100%;
+    max-height: 70vh;
+    border-radius: 6px;
+    background: #000;
+  }
+  
+  .modal-close-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.8rem;
+    background: none;
+    color: #fff;
+    border: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+  }
+  
+  .modal-download-button {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.8rem;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2rem;
+    background: #0078ff;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    transition: background 0.3s ease;
+  }
+  
+  .modal-download-button:hover {
+    background: #005ec4;
+  }
+  
+  .preview-loading-spinner {
+    color: #aaa;
+    text-align: center;
+    padding: 1rem;
+  }

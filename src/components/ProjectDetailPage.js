@@ -112,25 +112,25 @@ const ProjectDetailPage = () => {
         navigate('/signin');
         return;
       }
-  
+
       try {
         const ref = doc(db, 'projects', projectId);
         const snap = await getDoc(ref);
-  
+
         if (!snap.exists()) {
           navigate('/not-found');
           return;
         }
-  
+
         const data = snap.data();
-  
+
         if (isAdmin || data.ownerUid === user.uid) {
           setProject({ id: snap.id, ...data });
-  
+
           // ✅ Correct file extraction logic
           const rawAttachments = data.attachments || {};
           const groupedVisible = {};
-  
+
           Object.entries(rawAttachments).forEach(([key, files]) => {
             if (!Array.isArray(files)) return;
             files.forEach((file) => {
@@ -138,15 +138,15 @@ const ProjectDetailPage = () => {
                 typeof file === 'string'
                   ? { url: file, hidden: false, category: key }
                   : file;
-  
+
               if (!fileObj?.url || fileObj.hidden) return;
-  
+
               const cat = fileObj.category || key || 'other';
               if (!groupedVisible[cat]) groupedVisible[cat] = [];
               groupedVisible[cat].push(fileObj);
             });
           });
-  
+
           setUploadedFiles(groupedVisible);
           console.log('✅ Grouped visible attachments:', groupedVisible);
         } else {
@@ -158,7 +158,7 @@ const ProjectDetailPage = () => {
         setLoading(false);
       }
     };
-  
+
     fetchProject();
   }, [user, isAdmin, projectId, navigate]);
 
@@ -517,155 +517,181 @@ const ProjectDetailPage = () => {
         </p>
       </section>
 
+      {allFileSections.map((sectionKey) => {
+        const files = uploadedFiles?.[sectionKey] || [];
+        if (!files.length) return null;
 
-{allFileSections.map((sectionKey) => {
-  const files = uploadedFiles?.[sectionKey] || [];
-  if (!files.length) return null;
+        const sectionTitle = sectionKey
+          .replace(/_/g, ' ')
+          .replace(/\b\w/g, (l) => l.toUpperCase());
 
-  const sectionTitle = sectionKey
-    .replace(/_/g, ' ')
-    .replace(/\b\w/g, (l) => l.toUpperCase());
+        return (
+          <section className="project-section" key={sectionKey}>
+            <h3>{sectionTitle}</h3>
+            <div className="file-preview-grid">
+              {files.map((file, i) => {
+                const fileObj =
+                  typeof file === 'string'
+                    ? { url: file, hidden: false }
+                    : file;
 
-  return (
-    <section className="project-section" key={sectionKey}>
-      <h3>{sectionTitle}</h3>
-      <div className="file-preview-grid">
-        {files.map((file, i) => {
-  const fileObj = typeof file === 'string' ? { url: file, hidden: false } : file;
+                const { url } = fileObj;
+                if (!url || typeof url !== 'string') return null;
 
-  const { url } = fileObj;
-  if (!url || typeof url !== 'string') return null;
+                const fileName = decodeURIComponent(
+                  url.split('/').pop().split('?')[0].split('%2F').pop()
+                );
+                const ext = fileName.includes('.')
+                  ? fileName.split('.').pop().toLowerCase()
+                  : '';
+                const isImage = ['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(
+                  ext
+                );
+                const isPDF = ext === 'pdf';
+                const isAudio = ['mp3', 'wav', 'ogg'].includes(ext);
+                const isVideo = ['mp4', 'webm', 'mov'].includes(ext);
 
-  const fileName = decodeURIComponent(
-    url.split('/').pop().split('?')[0].split('%2F').pop()
-  );
-  const ext = fileName.includes('.') ? fileName.split('.').pop().toLowerCase() : '';
-  const isImage = ['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(ext);
-  const isPDF = ext === 'pdf';
-  const isAudio = ['mp3', 'wav', 'ogg'].includes(ext);
-  const isVideo = ['mp4', 'webm', 'mov'].includes(ext);
+                return (
+                  <div
+                    key={i}
+                    className="file-preview-item"
+                    onClick={() => {
+                      setIsPreviewLoaded(false); // <-- reset loading state BEFORE opening modal
+                      setModalPreview({ url, ext });
+                    }}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    {isImage ? (
+                      <img
+                        src={url}
+                        alt={fileName}
+                        className="file-preview-image"
+                        style={{
+                          height: '160px',
+                          objectFit: 'cover',
+                          borderRadius: '8px',
+                          border: '1px solid #444',
+                        }}
+                      />
+                    ) : (
+                      <div className="file-preview-thumbnail">
+                        {isPDF && (
+                          <img
+                            src="/icons/pdf-icon.png"
+                            alt="PDF"
+                            className="pdf-icon"
+                          />
+                        )}
+                        <span className="file-label">{fileName}</span>
+                        <span className="file-format">
+                          {isPDF
+                            ? 'PDF'
+                            : isAudio
+                              ? 'Audio'
+                              : isVideo
+                                ? 'Video'
+                                : 'File'}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+        );
+      })}
 
-  return (
-    <div
-      key={i}
-      className="file-preview-item"
-      onClick={() => setModalPreview({ url, ext })}
-      style={{ cursor: 'pointer' }}
-    >
-      {isImage ? (
-        <img
-          src={url}
-          alt={fileName}
-          className="file-preview-image"
-          style={{
-            height: '160px',
-            objectFit: 'cover',
-            borderRadius: '8px',
-            border: '1px solid #444',
-          }}
-        />
-      ) : (
-        <div className="file-preview-thumbnail">
-          {isPDF && (
-            <img
-              src="/icons/pdf-icon.png"
-              alt="PDF"
-              className="pdf-icon"
-            />
-          )}
-          <span className="file-label">{fileName}</span>
-          <span className="file-format">
-            {isPDF
-              ? 'PDF'
-              : isAudio
-              ? 'Audio'
-              : isVideo
-              ? 'Video'
-              : 'File'}
-          </span>
+      {modalPreview && (
+        <div
+          className="file-preview-modal"
+          onClick={() => setModalPreview(null)}
+        >
+          <div
+            className="file-preview-modal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className="modal-close-button"
+              onClick={() => setModalPreview(null)}
+            >
+              ✕
+            </button>
+
+            <a
+              href={modalPreview.url}
+              download
+              target="_blank"
+              rel="noopener noreferrer"
+              className="modal-download-button"
+            >
+              ⬇ Download
+            </a>
+
+            {!isPreviewLoaded && (
+              <div className="preview-loading-spinner">Loading...</div>
+            )}
+
+            {modalPreview.ext === 'pdf' ? (
+              <iframe
+                src={modalPreview.url}
+                title="PDF Preview"
+                className="file-preview-pdf"
+                style={{
+                  visibility: isPreviewLoaded ? 'visible' : 'hidden',
+                  opacity: isPreviewLoaded ? 1 : 0,
+                  transition: 'opacity 0.4s ease',
+                }}
+                onLoad={() => setIsPreviewLoaded(true)}
+              />
+            ) : modalPreview.ext === 'mp4' ||
+              modalPreview.ext === 'webm' ||
+              modalPreview.ext === 'mov' ? (
+              <video
+                controls
+                autoPlay
+                loop
+                className="file-preview-video"
+                style={{
+                  visibility: isPreviewLoaded ? 'visible' : 'hidden',
+                  opacity: isPreviewLoaded ? 1 : 0,
+                  transition: 'opacity 0.4s ease',
+                }}
+                onLoadedData={() => setIsPreviewLoaded(true)}
+              >
+                <source src={modalPreview.url} />
+              </video>
+            ) : modalPreview.ext === 'mp3' ||
+              modalPreview.ext === 'wav' ||
+              modalPreview.ext === 'ogg' ? (
+              <audio
+                controls
+                className="file-preview-audio"
+                style={{
+                  visibility: isPreviewLoaded ? 'visible' : 'hidden',
+                  opacity: isPreviewLoaded ? 1 : 0,
+                  transition: 'opacity 0.4s ease',
+                }}
+                onLoadedData={() => setIsPreviewLoaded(true)}
+              >
+                <source src={modalPreview.url} />
+              </audio>
+            ) : (
+              <img
+                src={modalPreview.url}
+                alt="Preview"
+                className="file-preview-image"
+                style={{
+                  visibility: isPreviewLoaded ? 'visible' : 'hidden',
+                  opacity: isPreviewLoaded ? 1 : 0,
+                  transition: 'opacity 0.4s ease',
+                }}
+                onLoad={() => setIsPreviewLoaded(true)}
+              />
+            )}
+          </div>
         </div>
       )}
-    </div>
-  );
-        })}
-      </div>
-    </section>
-  );
-})}
-{modalPreview && (
-  <div className="file-preview-modal" onClick={() => setModalPreview(null)}>
-    <div
-      className="file-preview-modal-content"
-      onClick={(e) => e.stopPropagation()}
-    >
-      <button className="modal-close-button" onClick={() => setModalPreview(null)}>
-        ✕
-      </button>
-
-      {!isPreviewLoaded && (
-        <div className="preview-loading-spinner">
-          Loading...
-        </div>
-      )}
-
-      {modalPreview.ext === 'pdf' ? (
-        <>
-          <a
-            href={modalPreview.url}
-            download
-            target="_blank"
-            rel="noopener noreferrer"
-            className="modal-download-button"
-          >
-            ⬇ Download
-          </a>
-          <iframe
-            src={modalPreview.url}
-            title="PDF Preview"
-            className="file-preview-pdf"
-            onLoad={() => setIsPreviewLoaded(true)}
-          />
-        </>
-      ) : modalPreview.ext === 'mp4' || modalPreview.ext === 'webm' || modalPreview.ext === 'mov' ? (
-        <video
-          controls
-          autoPlay
-          loop
-          className="file-preview-video"
-          onLoadedData={() => setIsPreviewLoaded(true)}
-        >
-          <source src={modalPreview.url} />
-        </video>
-      ) : modalPreview.ext === 'mp3' || modalPreview.ext === 'wav' || modalPreview.ext === 'ogg' ? (
-        <audio
-          controls
-          className="file-preview-audio"
-          onLoadedData={() => setIsPreviewLoaded(true)}
-        >
-          <source src={modalPreview.url} />
-        </audio>
-      ) : (
-        <>
-          <a
-            href={modalPreview.url}
-            download
-            target="_blank"
-            rel="noopener noreferrer"
-            className="modal-download-button"
-          >
-            ⬇ Download
-          </a>
-          <img
-            src={modalPreview.url}
-            alt="Preview"
-            className="file-preview-image"
-            onLoad={() => setIsPreviewLoaded(true)}
-          />
-        </>
-      )}
-    </div>
-  </div>
-)}
     </div>
   );
 };

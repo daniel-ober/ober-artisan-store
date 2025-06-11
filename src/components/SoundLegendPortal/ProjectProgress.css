@@ -1,0 +1,101 @@
+/* src/components/SoundLegendPortal/ProjectProgress.css */
+
+.scope-section {
+    padding: 1.5rem;
+    background-color: #1a1a1a;
+    color: #f0f0f0;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+  }
+  
+  .scope-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+  
+  .scope-section p {
+    font-size: 1rem;
+    margin: 0.25rem 0;
+  }
+  
+  .customer-progress-container {
+    margin-top: 1.5rem;
+    position: relative;
+  }
+  
+  .customer-progress-track {
+    height: 10px;
+    background: #444;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .customer-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #00c3ff, #0078ff);
+    transition: width 0.4s ease-in-out;
+  }
+  
+  .customer-current-indicator {
+    position: absolute;
+    top: -6px;
+    width: 12px;
+    height: 22px;
+    background: #fff;
+    border-radius: 3px;
+    transform: translateX(-50%);
+    box-shadow: 0 0 6px #00c3ff;
+    transition: left 0.4s ease;
+    z-index: 2;
+  }
+  
+  .customer-progress-timeline {
+    position: relative;
+    height: 50px;
+    margin-top: 1.5rem;
+  }
+  
+  .customer-timeline-step {
+    position: absolute;
+    top: 0;
+    transform: translateX(-50%);
+    text-align: center;
+    cursor: default;
+  }
+  
+  .customer-timeline-step .step-pill {
+    background-color: #555;
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    transition: background 0.3s ease;
+    border: 1px solid #777;
+  }
+  
+  .customer-timeline-step.complete .step-pill {
+    background-color: #28a745;
+  }
+  
+  .customer-timeline-step.in-progress .step-pill {
+    background-color: #ffc107;
+    color: #000;
+  }
+  
+  .customer-timeline-step[data-tooltip]:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: -32px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #222;
+    color: #fff;
+    padding: 6px 10px;
+    font-size: 0.75rem;
+    border-radius: 4px;
+    white-space: nowrap;
+    z-index: 10;
+    pointer-events: none;
+  }

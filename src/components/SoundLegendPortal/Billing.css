@@ -1,0 +1,26 @@
+/* src/components/SoundLegendPortal/Billing.css */
+
+.scope-section {
+    padding: 1.5rem;
+    background-color: #1a1a1a;
+    color: #f0f0f0;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+  }
+  
+  .scope-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+  
+  .billing-placeholder {
+    background: #2a2a2a;
+    border: 1px dashed #444;
+    padding: 2rem;
+    border-radius: 8px;
+    color: #bbb;
+    font-style: italic;
+    text-align: center;
+    font-size: 1rem;
+  }
