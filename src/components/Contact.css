@@ -1,42 +1,51 @@
 /* src/components/Contact.css */
 
-/* Light Mode Styling */
+/* Container Styling */
 .contact-container {
   max-width: 800px;
   margin: 40px auto;
   padding: 30px;
   padding-bottom: 40px;
-  background-color: #ffffff; /* White background for light mode */
-  color: #000000; /* Black text for light mode */
-  /* border-radius: 8px; */
+  background-color: #ffffff;
+  color: #000000;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   align-items: center;
 }
 
 .form-container {
-  background-color: #00000000;
+  background-color: transparent;
 }
 
 /* Contact Header */
 .contact-header {
-  color: #000000; /* Black in light mode */
+  color: #000000;
 }
 
-/* Form Fields */
+/* Input Fields */
 .contact-input .MuiOutlinedInput-root {
-  background-color: #ffffff; /* White input fields */
-  color: #000000 !important; /* Black text */
+  background-color: #ffffff;
+  color: #000000 !important;
 }
 
 .contact-input label {
-  color: #000000 !important; /* Ensure input labels are black */
+  color: #000000 !important;
+  font-size: 14px;
 }
 
+/* ✅ Fix autofill background */
+.contact-input input:-webkit-autofill,
+.contact-input input:-webkit-autofill:focus,
+.contact-input input:-webkit-autofill:hover,
+.contact-input textarea:-webkit-autofill {
+  box-shadow: 0 0 0px 1000px #ffffff inset !important;
+  -webkit-text-fill-color: #000000 !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
 
 /* Dropdown Styling */
 .contact-dropdown .MuiSelect-root {
   background-color: #ffffff !important;
-  color: #000000 !important; /* Black text */
+  color: #000000 !important;
 }
 
 .contact-dropdown .MuiOutlinedInput-root {
@@ -44,24 +53,18 @@
   color: #000000 !important;
 }
 
-/* Dropdown Menu Items */
 .contact-dropdown .MuiMenuItem-root {
   background-color: #ffffff !important;
-  color: #000000 !important; /* Black text */
+  color: #000000 !important;
 }
 
 .contact-dropdown .MuiMenuItem-root:hover {
   background-color: #f0f0f0 !important;
 }
 
-/* Fix Material UI Dropdown Popups */
+/* Dropdown Popups */
 .MuiPopover-paper {
   background-color: #ffffff !important;
-  color: #000000 !important;
-}
-
-/* Ensure Dropdown Selection Text is Visible */
-.contact-select .MuiSelect-select {
   color: #000000 !important;
 }
 
@@ -71,42 +74,58 @@
   color: #ffffff;
   padding: 12px;
   border-radius: 5px;
-  width: 100%; /* Make the button width 100% */
+  width: 100%;
   height: 50px;
   background-color: #4135EA;
   display: flex;
   align-items: center;
-  justify-content: center; /* Ensure the text is centered */
+  justify-content: center;
 }
 
 .contact-button:hover {
-  background-color: #333; /* Optional: change the hover effect */
+  background-color: #333;
 }
 
-/* Dark Mode Styling */
+/* Fix label float position */
+.contact-input label.MuiInputLabel-outlined {
+  transform: translate(14px, 10px) scale(1);
+  transition: all 0.2s ease;
+}
+
+/* When the label is shrunk (text is present or field is focused) */
+.contact-input label.MuiInputLabel-shrink {
+  transform: translate(14px, -17px) scale(0.85); /* slightly higher */
+}
+
+/* Dark Mode Support */
 @media (prefers-color-scheme: dark) {
-  /* Dark mode background */
   .contact-container {
     background-color: #222 !important;
     color: #ffffff !important;
   }
 
-  /* Contact Header */
   .contact-header {
     color: #ffffff !important;
   }
 
-  /* Input Fields */
   .contact-input .MuiOutlinedInput-root {
     background-color: #444 !important;
     color: #ffffff !important;
   }
 
   .contact-input label {
-    color: #ffffff !important; /* Ensure input labels are white */
+    color: #ffffff !important;
   }
 
-  /* Dropdown Styling */
+  .contact-input input:-webkit-autofill,
+  .contact-input input:-webkit-autofill:focus,
+  .contact-input input:-webkit-autofill:hover,
+  .contact-input textarea:-webkit-autofill {
+    box-shadow: 0 0 0px 1000px #444 inset !important;
+    -webkit-text-fill-color: #ffffff !important;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+
   .MuiPopover-paper {
     background-color: #333 !important;
     color: #ffffff !important;
@@ -114,24 +133,19 @@
 
   .contact-dropdown .MuiMenuItem-root {
     background-color: #333 !important;
-    color: #ffffff !important; /* White text in dark mode */
+    color: #ffffff !important;
   }
 
   .contact-dropdown .MuiMenuItem-root:hover {
     background-color: #444 !important;
   }
 
-  /* Ensure Dropdown Selection Text is Visible */
-
-
-  /* Button Styling */
   .contact-button {
-    /* background-color: #555 !important; */
     color: #ffffff !important;
   }
 }
 
-/* Adjust for smaller screens */
+/* Responsive Layout */
 @media (max-width: 768px) {
   .contact-container {
     width: 90%;

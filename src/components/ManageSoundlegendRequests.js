@@ -2,24 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { collection, getDocs, updateDoc, doc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import ViewSoundlegendModal from './ViewSoundlegendModal';
+import { getOverviewStatus } from '../utils/statusConfig';
 import './ManageSoundlegendRequests.css';
-
-const statusOptions = [
-  'New',
-  'Prospecting',
-  'Closed - Won',
-  'Closed - Lost',
-  'Closed - Incomplete Form',
-  'Closed - No Response',
-  'Closed - Duplicate/Spam',
-];
-
-const getOverviewStatus = (status) => {
-  const lower = status.toLowerCase();
-  if (lower === 'prospecting') return 'inProgress';
-  if (lower.startsWith('closed')) return 'completed';
-  return 'new';
-};
 
 const ManageSoundlegendRequests = () => {
   const [submissions, setSubmissions] = useState([]);
@@ -35,18 +19,21 @@ const ManageSoundlegendRequests = () => {
 
         const submissionsList = querySnapshot.docs
           .map((doc) => {
-            const rawStatus = doc.data().status || 'New';
+            const data = doc.data();
+            const rawStatus = data.status || 'New';
+            const overviewStatus = getOverviewStatus('soundlegend', rawStatus);
+
             return {
               id: doc.id,
+              ...data,
               status: rawStatus,
-              overviewStatus: getOverviewStatus(rawStatus),
-              ...doc.data(),
+              overviewStatus,
             };
           })
           .sort((a, b) => {
             const aTime = a.submittedAt?.seconds || 0;
             const bTime = b.submittedAt?.seconds || 0;
-            return bTime - aTime; // 🔽 Newest first
+            return bTime - aTime;
           });
 
         setSubmissions(submissionsList);
@@ -62,16 +49,12 @@ const ManageSoundlegendRequests = () => {
 
   const handleStatusChange = async (submissionId, newStatus) => {
     try {
-      const overviewStatus = newStatus.toLowerCase().startsWith('closed')
-        ? 'completed'
-        : newStatus.toLowerCase() === 'prospecting'
-          ? 'inProgress'
-          : 'new';
-
+      const overviewStatus = getOverviewStatus('soundlegend', newStatus);
       const submissionRef = doc(db, 'soundlegend_submissions', submissionId);
+
       await updateDoc(submissionRef, {
         status: newStatus,
-        overviewStatus: overviewStatus,
+        overviewStatus,
       });
 
       setSubmissions((prevSubmissions) =>
@@ -84,31 +67,6 @@ const ManageSoundlegendRequests = () => {
     } catch (error) {
       console.error('❌ Error updating status:', error);
     }
-  };
-
-  const handleStatusSave = async () => {
-    const overviewStatus = newStatus.toLowerCase().startsWith('closed')
-      ? 'completed'
-      : newStatus.toLowerCase() === 'prospecting'
-        ? 'inProgress'
-        : 'new';
-
-    const submissionRef = doc(db, 'soundlegend_submissions', submission.id);
-    await updateDoc(submissionRef, {
-      status: newStatus,
-      overviewStatus,
-    });
-
-    // 🔥 Ensure parent gets the updated data
-    if (onUpdateSubmission) {
-      onUpdateSubmission({
-        ...submission,
-        status: newStatus,
-        overviewStatus,
-      });
-    }
-
-    onClose();
   };
 
   const filteredSubmissions = hideClosed
@@ -166,30 +124,20 @@ const ManageSoundlegendRequests = () => {
                 onClick={() => handleRowClick(submission)}
               >
                 <td>
-                  <span
-                    className={`status-badge ${getBadgeClass(submission.status)}`}
-                  >
+                  <span className={`status-badge ${getBadgeClass(submission.status)}`}>
                     {submission.status}
                   </span>
                 </td>
                 <td>
                   {submission.submittedAt?.seconds
-                    ? new Date(
-                        submission.submittedAt.seconds * 1000
-                      ).toLocaleString()
+                    ? new Date(submission.submittedAt.seconds * 1000).toLocaleString()
                     : 'N/A'}
                 </td>
-                <td>
-                  {submission.firstName} {submission.lastName}
-                </td>
+                <td>{submission.firstName} {submission.lastName}</td>
                 <td>{submission.email}</td>
                 <td>
                   {submission.projectId ? (
-                    <a
-                      href={`/projects/${submission.projectId}`}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
+                    <a href={`/projects/${submission.projectId}`} target="_blank" rel="noreferrer">
                       View Project
                     </a>
                   ) : (
@@ -209,9 +157,7 @@ const ManageSoundlegendRequests = () => {
           onUpdateSubmission={(updatedSubmission) => {
             setSubmissions((prev) =>
               prev.map((s) =>
-                s.id === updatedSubmission.id
-                  ? { ...s, ...updatedSubmission }
-                  : s
+                s.id === updatedSubmission.id ? { ...s, ...updatedSubmission } : s
               )
             );
           }}
