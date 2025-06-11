@@ -33,7 +33,6 @@ const FeuzonProductDetail = () => {
   const { cart, cartId, addToCart, removeFromCart } = useCart();
   const [productInCart, setProductInCart] = useState(false);
   const [flickerChangeSelection, setFlickerChangeSelection] = useState(false);
-  
 
   // ✅ ADD THIS BLOCK HERE
   useEffect(() => {
@@ -43,7 +42,7 @@ const FeuzonProductDetail = () => {
   }, [staveOption]);
 
   const navigate = useNavigate();
-  
+
   const basePrices = { 12: 1050, 13: 1150, 14: 1250 };
 
   const depthPrices = {
@@ -119,23 +118,34 @@ const FeuzonProductDetail = () => {
 
   useEffect(() => {
     if (!stripePriceId || !outerShell || !innerStave) return;
-  
+
     const generatedId = `feuzon-${stripePriceId}-${size}-${depth}-${reRing}-${lugs}-${staveQuantity}-${outerShell}-${innerStave}`;
     const isInCart = cart.some((item) => item.id === generatedId);
     setProductInCart(isInCart);
-  }, [cart, stripePriceId, size, depth, reRing, lugs, staveQuantity, outerShell, innerStave]);
-  
-  
+  }, [
+    cart,
+    stripePriceId,
+    size,
+    depth,
+    reRing,
+    lugs,
+    staveQuantity,
+    outerShell,
+    innerStave,
+  ]);
+
   const handleAddToCart = async () => {
     if (!stripePriceId) {
-      toast.error('Stripe Payment ID is missing. Please refresh the page and try again.');
+      toast.error(
+        'Stripe Payment ID is missing. Please refresh the page and try again.'
+      );
       return;
     }
-  
+
     const cartItem = {
-id: `feuzon-${stripePriceId}-${size}-${depth}-${reRing}-${lugs}-${staveQuantity}-${outerShell}-${innerStave}`,
-      productId: "feuzon",
-      name: "FEUZØN",
+      id: `feuzon-${stripePriceId}-${size}-${depth}-${reRing}-${lugs}-${staveQuantity}-${outerShell}-${innerStave}`,
+      productId: 'feuzon',
+      name: 'FEUZØN',
       size,
       depth,
       reRing: !!reRing,
@@ -145,36 +155,33 @@ id: `feuzon-${stripePriceId}-${size}-${depth}-${reRing}-${lugs}-${staveQuantity}
       stripePriceId,
       quantity: 1,
       images: [
-        "https://firebasestorage.googleapis.com/v0/b/danoberartisandrums-dev.firebasestorage.app/o/products%2F67c255d1-a9ca-4f5d-80af-ddeee6a424e1_IMG_6133.png?alt=media&token=a15b2e68-d34b-44fa-bf33-eccc4a025331"
+        'https://firebasestorage.googleapis.com/v0/b/danoberartisandrums-dev.firebasestorage.app/o/products%2F67c255d1-a9ca-4f5d-80af-ddeee6a424e1_IMG_6133.png?alt=media&token=a15b2e68-d34b-44fa-bf33-eccc4a025331',
       ],
-      category: "artisan",
+      category: 'artisan',
       options: {
         outerShell,
         innerStave,
       },
     };
-  
+
     try {
       await addToCart(cartItem, cartItem);
       setTimeout(() => {
         setProductInCart(true); // ✅ Prevents flickering
       }, 300);
-      
-      toast.success("🛒 Item added to cart!");
+
+      toast.success('🛒 Item added to cart!');
     } catch (error) {
       console.error('❌ Error adding to cart:', error);
-      toast.error("❌ Failed to add item to cart.");
+      toast.error('❌ Failed to add item to cart.');
     }
   };
-  
-  
-  
 
   //   if (!cartId) {
   //     console.error('❌ cartId is missing! Firestore may not update.');
   //     return;
   //   }
-  
+
   //   // ✅ Sync with Firestore after a short delay to verify the update
   //   setTimeout(async () => {
   //     try {
@@ -183,7 +190,7 @@ id: `feuzon-${stripePriceId}-${size}-${depth}-${reRing}-${lugs}-${staveQuantity}
   //       if (cartDoc.exists()) {
   //         const updatedCartData = cartDoc.data().cart || [];
   //         const isProductInCart = updatedCartData.some((item) => item.id === generatedId);
-          
+
   //         // ✅ Ensure the button reflects the correct state
   //         setProductInCart(isProductInCart);
   //       }
@@ -192,8 +199,6 @@ id: `feuzon-${stripePriceId}-${size}-${depth}-${reRing}-${lugs}-${staveQuantity}
   //     }
   //   }, 1000);
   // };
-  
-  
 
   useEffect(() => {
     // console.log('🔄 Updating Price, Stave Options & Sound Profile...');
@@ -215,9 +220,10 @@ id: `feuzon-${stripePriceId}-${size}-${depth}-${reRing}-${lugs}-${staveQuantity}
 
     // ✅ Ensure valid lug count
     if (!lugOptions[size]?.includes(lugs)) {
-      console.warn(
+      console
+        .warn
         // `⚠️ Invalid lug count (${lugs}) for size ${size}. Resetting to default.`
-      );
+        ();
       setLugs(lugOptions[size][0]);
       return;
     }
@@ -264,33 +270,23 @@ id: `feuzon-${stripePriceId}-${size}-${depth}-${reRing}-${lugs}-${staveQuantity}
       return;
     }
 
-    // console.log('✅ Selected Pricing Option:', selectedOption);
+    // ✅ Calculate first
+    const finalPrice = selectedOption.price;
+    setTotalPrice(finalPrice);
 
-    // ✅ Extract pricing and stripePriceId
-    setTotalPrice(selectedOption.price);
+    // ✅ Then update state
+    setTotalPrice(finalPrice);
     setStripePriceId(selectedOption.stripePriceId);
     setStaveQuantity(selectedOption.staveQuantity);
 
-    // ✅ Extract stave thickness
-    let staveParts = staveOption.split(' - ');
-    let staveCount = staveParts[0]?.trim() || 'UNKNOWN_STAVE_COUNT';
-    let staveThickness =
-      staveParts.length > 1 ? staveParts[1]?.trim() : 'UNKNOWN_THICKNESS';
-
-    const finalPrice = selectedOption.price + (reRing ? reRingCost : 0);
-    setTotalPrice(finalPrice);
-    // console.log(
-    //   `💰 Updated Price (including reRing if applicable): $${finalPrice}`
-    // );
-
     // ✅ Ensure correct lookup key for artisan notes
     const formattedSize = `${size}"`;
-    const formattedBasePrice = `$${totalPrice}`;
+    const formattedBasePrice = `$${selectedOption.price}`;
     const formattedDepth = `${depth}"`;
     const formattedLugs = `${lugs} Lugs`;
     const formattedOuterShell = outerShell.trim(); // Remove any extra spaces
     const formattedInnerStave = innerStave.trim();
-
+    const staveParts = staveOption.split(' - ');
     const formattedStaveQuantity = staveParts[0]?.trim();
     const formattedStaveThickness = staveParts[1]?.trim();
 
@@ -367,7 +363,6 @@ id: `feuzon-${stripePriceId}-${size}-${depth}-${reRing}-${lugs}-${staveQuantity}
     // );
 
     // console.log('✅ productInCart Updated to:', isInCart);
-    
   }, [cart, size, depth, lugs, staveQuantity]);
 
   // ✅ **New Effect to Reset `innerStave` When `outerShell` Changes**
@@ -420,10 +415,10 @@ id: `feuzon-${stripePriceId}-${size}-${depth}-${reRing}-${lugs}-${staveQuantity}
 
   useEffect(() => {
     if (!stripePriceId) return;
-  
+
     const generatedId = `feuzon-${stripePriceId}-${size}-${depth}-${reRing}-${lugs}-${staveQuantity}-${outerShell}-${innerStave}`;
     const isInCart = cart.some((item) => item.id === generatedId);
-  
+
     if (isInCart !== productInCart) {
       setProductInCart(isInCart);
     }
@@ -456,10 +451,8 @@ id: `feuzon-${stripePriceId}-${size}-${depth}-${reRing}-${lugs}-${staveQuantity}
     const generatedId = `feuzon-${stripePriceId}-${size}-${depth}-${reRing}-${lugs}-${staveQuantity}-${outerShell}-${innerStave}`;
     setProductInCart(false); // Instant UI feedback
     await removeFromCart(generatedId);
-    toast.success("🗑️ Item removed from cart.");
+    toast.success('🗑️ Item removed from cart.');
   };
-  
-  
 
   // ✅ Handle adding a separate Feuzon drum if stock allows
   const handleAddSeparateItem = async () => {
@@ -495,120 +488,153 @@ id: `feuzon-${stripePriceId}-${size}-${depth}-${reRing}-${lugs}-${staveQuantity}
     .filter((item) => item.productId === 'feuzon')
     .reduce((sum, item) => sum + (item.quantity || 1), 0); // Sum quantities
 
-    return (
-      <div className="feuzon-product-detail">
+  return (
+    <div className="feuzon-product-detail">
+      <img
+        src="/resized-logos/feuzon-white.png"
+        alt="FEUZØN Series"
+        className="feuzon-header-image"
+      />
+
+      <div className="feuzon-product-content">
         <img
-          src="/resized-logos/feuzon-white.png"
-          alt="FEUZØN Series"
-          className="feuzon-header-image"
+          className="feuzon-product-image"
+          src="https://firebasestorage.googleapis.com/v0/b/danoberartisandrums-dev.firebasestorage.app/o/products%2F67c255d1-a9ca-4f5d-80af-ddeee6a424e1_IMG_6133.png?alt=media&token=a15b2e68-d34b-44fa-bf33-eccc4a025331"
+          alt="FEUZON Snare Drum"
         />
-    
-        <div className="feuzon-product-content">
-          <img
-            className="feuzon-product-image"
-            src="https://firebasestorage.googleapis.com/v0/b/danoberartisandrums-dev.firebasestorage.app/o/products%2F67c255d1-a9ca-4f5d-80af-ddeee6a424e1_IMG_6133.png?alt=media&token=a15b2e68-d34b-44fa-bf33-eccc4a025331"
-            alt="FEUZON Snare Drum"
-          />
-    
-          <div className="feuzon-product-options">
-            <div className="feuzon-features">
-              <h2>FEUZØN Series Features</h2>
-              <ul>
-                <li>Hybrid Shell Construction</li>
-                <li>Combines Various Wood Species For A Unique Tone</li>
-                <li>Double Ended Tube Lugs</li>
-                <li>Roundover Outer / 45° Inner Bearing Edge</li>
-                <li>Precision Cut Snare Beds</li>
-                <li>Stained or Natural Semi-Gloss Finish</li>
-                <li>Torch Tuned for Maximum Resonance</li>
-                <li>Trick Snare Throw-Off</li>
-                <li>Puresound Snare Wires</li>
-                <li>Remo Coated Ambassador Batter & Clear Snare Side</li>
-                <li>Estimated Delivery: 6–8 weeks</li>
-                <p className="order-to-build-disclaimer">
-                  *Note: Each Ober Artisan Drum is built to order. The drum you receive will closely reflect the design shown, but natural wood grain patterns and dimensions may vary depending on your selected size and configuration.
-                </p>
-              </ul>
-            </div>
-    
-            <h2>Build Options</h2>
-    
-            <label htmlFor="size">Snare Size (Diameter)</label>
-            <select id="size" value={size} onChange={(e) => setSize(e.target.value)}>
-              {Object.keys(basePrices).map((sizeOption) => (
-                <option key={sizeOption} value={sizeOption}>
-                  {sizeOption}" - Base Price: ${basePrices[sizeOption]}
-                </option>
-              ))}
-            </select>
-    
-            <label htmlFor="depth">Depth</label>
-            <select id="depth" value={depth} onChange={(e) => setDepth(e.target.value)}>
-              {Object.keys(depthPrices[size]).map((depthOption) => (
-                <option key={depthOption} value={depthOption}>
-                  {depthOption}" {depthPrices[size][depthOption] > 0 ? `+ $${depthPrices[size][depthOption]}` : ''}
-                </option>
-              ))}
-            </select>
-    
-            <label htmlFor="outerShell">Exterior Shell (Steam Bent)</label>
-            <select id="outerShell" value={outerShell} onChange={(e) => setOuterShell(e.target.value)}>
-              {Object.keys(staveOptions).map((shell) => (
-                <option key={shell} value={shell}>
-                  {shell}
-                </option>
-              ))}
-            </select>
-    
-            <label htmlFor="innerStave">Interior Shell (Stave)</label>
-            <select id="innerStave" value={innerStave} onChange={(e) => setInnerStave(e.target.value)}>
-              {staveOptions[outerShell].map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-    
-            <label htmlFor="lugs">Lug Quantity</label>
-            <select id="lugs" value={lugs} onChange={(e) => setLugs(e.target.value)}>
-              {lugOptions[size].map((lugOption) => (
-                <option key={lugOption} value={lugOption}>
-                  {lugOption} Lugs
-                </option>
-              ))}
-            </select>
-    
-            <label htmlFor="staves">Stave Quantity & Shell Thickness</label>
-            <select id="staves" value={staveOption} onChange={(e) => setStaveOption(e.target.value)}>
-              {staveQuantities.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-    
-            <p className="feuzon-detail-price">${totalPrice}</p>
-            <p className="delivery-time">Est Delivery: 6–8 weeks</p>
-    
-            {productInCart ? (
-              <div className="artisan-cart-hover-container">
-  <button className="artisan-in-cart-button" disabled>
-    ✔ In Cart
-  </button>
-  <div className="artisan-cart-hover-options">
-    <span onClick={() => navigate('/cart')}>View Cart</span>
-    <span onClick={handleRemoveFromCart}>Remove</span>
-  </div>
-</div>
-            ) : (
-              <button className="artisan-add-to-cart-button" onClick={handleAddToCart}>
-                Add to Cart
-              </button>
-            )}
+
+        <div className="feuzon-product-options">
+          <div className="feuzon-features">
+            <h2>FEUZØN Series Features</h2>
+            <ul>
+              <li>Hybrid Shell Construction</li>
+              <li>Combines Various Wood Species For A Unique Tone</li>
+              <li>Double Ended Tube Lugs</li>
+              <li>Roundover Outer / 45° Inner Bearing Edge</li>
+              <li>Precision Cut Snare Beds</li>
+              <li>Stained or Natural Semi-Gloss Finish</li>
+              <li>Torch Tuned for Maximum Resonance</li>
+              <li>Trick Snare Throw-Off</li>
+              <li>Puresound Snare Wires</li>
+              <li>Remo Coated Ambassador Batter & Clear Snare Side</li>
+              <li>Estimated Delivery: 6–8 weeks</li>
+              <p className="order-to-build-disclaimer">
+                *Note: Each Ober Artisan Drum is built to order. The drum you
+                receive will closely reflect the design shown, but natural wood
+                grain patterns and dimensions may vary depending on your
+                selected size and configuration.
+              </p>
+            </ul>
           </div>
+
+          <h2>Build Options</h2>
+
+          <label htmlFor="size">Snare Size (Diameter)</label>
+          <select
+            id="size"
+            value={size}
+            onChange={(e) => setSize(e.target.value)}
+          >
+            {Object.keys(basePrices).map((sizeOption) => (
+              <option key={sizeOption} value={sizeOption}>
+                {sizeOption}" - Base Price: ${basePrices[sizeOption]}
+              </option>
+            ))}
+          </select>
+
+          <label htmlFor="depth">Depth</label>
+          <select
+            id="depth"
+            value={depth}
+            onChange={(e) => setDepth(e.target.value)}
+          >
+            {Object.keys(depthPrices[size]).map((depthOption) => (
+              <option key={depthOption} value={depthOption}>
+                {depthOption}"{' '}
+                {depthPrices[size][depthOption] > 0
+                  ? `+ $${depthPrices[size][depthOption]}`
+                  : ''}
+              </option>
+            ))}
+          </select>
+
+          <label htmlFor="outerShell">Exterior Shell (Steam Bent)</label>
+          <select
+            id="outerShell"
+            value={outerShell}
+            onChange={(e) => setOuterShell(e.target.value)}
+          >
+            {Object.keys(staveOptions).map((shell) => (
+              <option key={shell} value={shell}>
+                {shell}
+              </option>
+            ))}
+          </select>
+
+          <label htmlFor="innerStave">Interior Shell (Stave)</label>
+          <select
+            id="innerStave"
+            value={innerStave}
+            onChange={(e) => setInnerStave(e.target.value)}
+          >
+            {staveOptions[outerShell].map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+
+          <label htmlFor="lugs">Lug Quantity</label>
+          <select
+            id="lugs"
+            value={lugs}
+            onChange={(e) => setLugs(e.target.value)}
+          >
+            {lugOptions[size].map((lugOption) => (
+              <option key={lugOption} value={lugOption}>
+                {lugOption} Lugs
+              </option>
+            ))}
+          </select>
+
+          <label htmlFor="staves">Stave Quantity & Shell Thickness</label>
+          <select
+            id="staves"
+            value={staveOption}
+            onChange={(e) => setStaveOption(e.target.value)}
+          >
+            {staveQuantities.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+
+          <p className="feuzon-detail-price">${totalPrice}</p>
+          <p className="delivery-time">Est Delivery: 6–8 weeks</p>
+
+          {productInCart ? (
+            <div className="artisan-cart-hover-container">
+              <button className="artisan-in-cart-button" disabled>
+                ✔ In Cart
+              </button>
+              <div className="artisan-cart-hover-options">
+                <span onClick={() => navigate('/cart')}>View Cart</span>
+                <span onClick={handleRemoveFromCart}>Remove</span>
+              </div>
+            </div>
+          ) : (
+            <button
+              className="artisan-add-to-cart-button"
+              onClick={handleAddToCart}
+            >
+              Add to Cart
+            </button>
+          )}
         </div>
       </div>
-    );
+    </div>
+  );
 };
 
 export default FeuzonProductDetail;
