@@ -58,10 +58,11 @@ const ViewSoundlegendModal = ({ submission, onClose, onStatusUpdate, onUpdateSub
     woodPreparation: {
       checklist: [
         { task: "Select and inspect raw wood blanks", completed: false, totalSeconds: 0 },
-        { task: "Cut wood to stave or segment shapes", completed: false, totalSeconds: 0 },
         { task: "Check moisture content (8–12%)", completed: false, totalSeconds: 0 },
-        { task: "Bookmatch or orientation layout", completed: false, totalSeconds: 0 },
+        { task: "Cut wood to stave or segment shapes", completed: false, totalSeconds: 0 },
+        { task: "  Pencil in measurements", completed: false, totalSeconds: 0 },
         { task: "Joint and plane each piece", completed: false, totalSeconds: 0 },
+        { task: "Bookmatch or orientation layout", completed: false, totalSeconds: 0 },
         { task: "Pre-glue test assembly", completed: false, totalSeconds: 0 }
       ]
     },

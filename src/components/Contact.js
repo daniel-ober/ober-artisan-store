@@ -18,13 +18,34 @@ import { nanoid } from 'nanoid';
 import './Contact.css';
 
 const inquiryCategories = [
-  { value: 'Billing', label: 'Billing – Update billing or inquire about payments' },
-  { value: 'Custom Shop', label: 'Custom Shop – Custom drum builds or modifications' },
-  { value: 'Partner Relations', label: 'Partner Relations – Vendor inquiries or partnership opportunities' },
-  { value: 'Product Information', label: 'Product Information – Ask about products or specifications' },
-  { value: 'Shipping & Delivery', label: 'Shipping & Delivery – Shipping updates or tracking info' },
-  { value: 'Technical Assistance', label: 'Technical Assistance – Account and login issues' },
-  { value: 'Website Feedback', label: 'Website Feedback – Share feedback or ideas' },
+  {
+    value: 'Billing',
+    label: 'Billing – Update billing or inquire about payments',
+  },
+  {
+    value: 'Custom Shop',
+    label: 'Custom Shop – Custom drum builds or modifications',
+  },
+  {
+    value: 'Partner Relations',
+    label: 'Partner Relations – Vendor inquiries or partnership opportunities',
+  },
+  {
+    value: 'Product Information',
+    label: 'Product Information – Ask about products or specifications',
+  },
+  {
+    value: 'Shipping & Delivery',
+    label: 'Shipping & Delivery – Shipping updates or tracking info',
+  },
+  {
+    value: 'Technical Assistance',
+    label: 'Technical Assistance – Account and login issues',
+  },
+  {
+    value: 'Website Feedback',
+    label: 'Website Feedback – Share feedback or ideas',
+  },
   { value: 'Other', label: 'Other' },
 ];
 
@@ -86,13 +107,16 @@ const Contact = () => {
           { action: 'submit_contact' }
         );
 
-        const verifyResponse = await fetch('https://api-eef4a3tgna-uc.a.run.app/verifyRecaptcha', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ token, email: formData.email }),
-        });
+        const verifyResponse = await fetch(
+          'https://api-eef4a3tgna-uc.a.run.app/verifyRecaptcha',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ token, email: formData.email }),
+          }
+        );
 
         const verifyResult = await verifyResponse.json();
         if (!verifyResult.success) {
@@ -135,12 +159,23 @@ const Contact = () => {
 
   return (
     <div className="contact-container">
-      <Typography variant="h4" component="h1" gutterBottom className="contact-header">
+      <Typography
+        variant="h4"
+        component="h1"
+        gutterBottom
+        className="contact-header"
+      >
         Contact Us
       </Typography>
-
-      <form onSubmit={handleSubmit}>
-        <FormControl fullWidth margin="normal" required className="contact-dropdown">
+  
+      <form onSubmit={handleSubmit} className="form-container">
+        <FormControl
+          fullWidth
+          margin="normal"
+          required
+          variant="outlined"
+          className="contact-dropdown"
+        >
           <Select
             name="category"
             value={formData.category}
@@ -149,32 +184,100 @@ const Contact = () => {
             className="contact-select"
           >
             <MenuItem value="">
-              <div>Select a category</div>
+              <em>Select a category</em>
             </MenuItem>
             {inquiryCategories.map((category) => (
-              <MenuItem key={category.value} value={category.value} className="contact-menu-item">
+              <MenuItem
+                key={category.value}
+                value={category.value}
+                className="contact-menu-item"
+              >
                 {category.label}
               </MenuItem>
             ))}
           </Select>
         </FormControl>
-
-        <TextField label="First Name" name="first_name" value={formData.first_name} onChange={handleChange} fullWidth margin="normal" required className="contact-input" />
-        <TextField label="Last Name" name="last_name" value={formData.last_name} onChange={handleChange} fullWidth margin="normal" required className="contact-input" />
-        <TextField label="Email" type="email" name="email" value={formData.email} onChange={handleChange} fullWidth margin="normal" required className="contact-input" />
-        <TextField label="Phone (Optional)" name="phone" value={formData.phone} onChange={handleChange} fullWidth margin="normal" className="contact-input" />
-        <TextField label="Message" name="message" value={formData.message} onChange={handleChange} fullWidth margin="normal" required multiline rows={4} className="contact-input" />
-
-        <Button type="submit" variant="contained" color="primary" className="contact-button" disabled={loading}>
+  
+        <TextField
+          variant="outlined"
+          label="First Name"
+          name="first_name"
+          value={formData.first_name}
+          onChange={handleChange}
+          fullWidth
+          margin="normal"
+          required
+          className="contact-input"
+          InputLabelProps={{ shrink: true }}
+        />
+        <TextField
+          variant="outlined"
+          label="Last Name"
+          name="last_name"
+          value={formData.last_name}
+          onChange={handleChange}
+          fullWidth
+          margin="normal"
+          required
+          className="contact-input"
+          InputLabelProps={{ shrink: true }}
+        />
+        <TextField
+          variant="outlined"
+          label="Email"
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          fullWidth
+          margin="normal"
+          required
+          className="contact-input"
+          InputLabelProps={{ shrink: true }}
+        />
+        <TextField
+          variant="outlined"
+          label="Phone (Optional)"
+          name="phone"
+          value={formData.phone}
+          onChange={handleChange}
+          fullWidth
+          margin="normal"
+          className="contact-input"
+          InputLabelProps={{ shrink: true }}
+        />
+        <TextField
+          variant="outlined"
+          label="Message"
+          name="message"
+          value={formData.message}
+          onChange={handleChange}
+          fullWidth
+          margin="normal"
+          required
+          multiline
+          rows={4}
+          className="contact-input"
+          InputLabelProps={{ shrink: true }}
+        />
+  
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          className="contact-button"
+          disabled={loading}
+        >
           {loading ? 'Sending...' : 'Send Message'}
         </Button>
       </form>
-
+  
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Message Sent</DialogTitle>
         <DialogContent>
           <Typography variant="body1">
-            Thank you for reaching out! We&apos;ll get back to you within 1-2 business days. Feel free to explore our Artisan Shop.
+            Thank you for reaching out! We&apos;ll get back to you within 1–2
+            business days. Feel free to explore our Artisan Shop.
           </Typography>
         </DialogContent>
         <DialogActions>

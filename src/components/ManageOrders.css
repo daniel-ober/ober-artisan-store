@@ -130,22 +130,22 @@
 /* ======================== */
 
 .badge-green {
-  background-color: #4caf50;
+  background-color: #28a745; /* used for "New" */
   color: white;
 }
 
 .badge-yellow {
-  background-color: #fbc02d;
+  background-color: #f0ad4e; /* used for "In Progress" like "Packaged", "Production" */
   color: black;
 }
 
 .badge-gray {
-  background-color: #9e9e9e;
+  background-color: #6c757d; /* used for Closed, Fulfilled, etc */
   color: white;
 }
 
 .badge-red {
-  background-color: #dc3545;
+  background-color: #dc3545; /* optional for errors */
   color: white;
 }
 
