@@ -3,122 +3,57 @@
 ================================= */
 
 .project-page {
-    font-family: 'Poppins', sans-serif;
-    background-color: #111;
-    color: #f5f5f5;
-    padding: 2rem 1rem;
-    max-width: 1000px;
-    margin: 0 auto;
-    line-height: 1.6;
-  }
-  
-  /* Header */
-  .project-page h2 {
-    font-size: 2rem;
-    font-weight: 600;
-    text-align: center;
-    margin-bottom: 2rem;
-    color: #ffffff;
-  }
-  
-  /* Section Blocks */
-  .project-section {
-    background: #1a1a1a;
-    padding: 1.5rem;
-    margin-bottom: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-  }
-  
-  /* Section Headings */
-  .project-section h3 {
-    font-size: 1.25rem;
-    font-weight: 500;
-    margin-bottom: 1rem;
-    color: #e3e3e3;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 0.5rem;
-  }
-  
-  /* Paragraph / Labels */
-  .project-section p {
-    margin: 0.5rem 0;
-    font-size: 0.95rem;
-    color: #cccccc;
-  }
-  
-  .project-section strong {
-    font-weight: 500;
-    color: #ffffff;
-  }
-  
-  /* Dropzone Styles */
-  .dropzone {
-    border: 2px dashed #888;
-    /* background-color: #1c1c1c; */
-    padding: 2rem;
-    text-align: center;
-    margin-bottom: 1.5rem;
-    border-radius: 8px;
-    transition: background-color 0.2s ease, border-color 0.2s ease;
-    color: #ccc;
-  }
-  
-  .dropzone p {
-    margin: 0;
-    font-size: 0.95rem;
-  }
-  
-  .dropzone:hover {
-    background-color: #697ba127;
-    cursor: pointer;
-  }
-  
-  .dropzone.drag-active {
-    background-color: #292929;
-    border-color: #6fe0b5;
-    color: #ffffff;
-  }
-  
-  /* Upload Progress */
-  .upload-progress {
-    color: #6fe0b5;
-    font-size: 0.9rem;
-    margin-top: 0.75rem;
-  }
-  
-  /* Uploaded Files List */
-  .uploaded-files {
-    margin-top: 1rem;
-    text-align: left;
-  }
-  
-  .upload-list-label {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: #6fe0b5;
-    margin-bottom: 0.25rem;
-  }
-  
-  .uploaded-files ul {
-    list-style: none;
-    padding-left: 0;
-    margin: 0;
-  }
-  
-  .uploaded-files li {
-    font-size: 0.85rem;
-    margin: 0.25rem 0;
-  }
-  
-  .uploaded-files a {
-    color: #91c8ff;
-    text-decoration: underline;
-    word-break: break-word;
-  }
+  font-family: 'Poppins', sans-serif;
+  background-color: #111;
+  color: #f5f5f5;
+  padding: 2rem 1rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
 
-  .file-preview-grid {
+/* Header */
+.project-page h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #ffffff;
+}
+
+/* Section Blocks */
+.project-section {
+  background: #1a1a1a;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Section Headings */
+.project-section h3 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  color: #e3e3e3;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 0.5rem;
+}
+
+/* Paragraph / Labels */
+.project-section p {
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+  color: #cccccc;
+}
+
+.project-section strong {
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.file-preview-grid {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
@@ -127,7 +62,20 @@
   
   .file-preview-item {
     flex: 1 1 250px;
-    max-width: 300px;
+    max-width: 280px;
+    background: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 1rem;
+    transition: background 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .file-preview-item:hover {
+    background-color: #2a2a2a;
   }
   
   .file-preview-image,
@@ -135,18 +83,56 @@
   .file-preview-video {
     width: 100%;
     height: auto;
-    border: 1px solid #ccc;
     border-radius: 8px;
+    border: 1px solid #555;
+    object-fit: contain;
   }
-  
-  .file-preview-pdf {
-    height: 400px;
+
+  .file-preview-image {
+    width: 100%;
+    border-radius: 6px;
+    border: 1px solid #444;
+    object-fit: cover;
+    max-height: 160px;
   }
   
   .file-preview-audio {
     width: 100%;
+    margin-top: 0.5rem;
   }
-
+  
+  .file-preview-thumbnail {
+    width: 100%;
+    height: 160px;
+    border-radius: 8px;
+    background: #111;
+    border: 1px solid #444;
+    color: #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-align: center;
+    padding: 0.5rem;
+  }
+  
+  .file-label {
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+    text-align: center;
+    color: #eee;
+    word-break: break-word;
+  }
+  
+  .file-format {
+    margin-top: 0.3rem;
+    font-size: 0.7rem;
+    color: #6fe0b5;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  
   .file-preview-modal {
     position: fixed;
     z-index: 9999;
@@ -154,10 +140,11 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.85);
+    background: rgba(0, 0, 0, 0.9);
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 1rem;
   }
   
   .file-preview-modal-content {
@@ -166,14 +153,18 @@
     max-height: 90%;
     background: #1a1a1a;
     border-radius: 8px;
-    padding: 1rem;
-    box-shadow: 0 0 20px rgba(0,0,0,0.8);
+    padding: 1.5rem;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.8);
+    overflow: auto;
   }
   
-  .file-preview-modal-content img {
+  .file-preview-modal-content img,
+  .file-preview-modal-content video,
+  .file-preview-modal-content iframe,
+  .file-preview-modal-content audio {
     max-width: 100%;
-    max-height: 80vh;
-    object-fit: contain;
+    max-height: 75vh;
+    border-radius: 8px;
   }
   
   .modal-close-button {
@@ -186,37 +177,231 @@
     border: none;
     cursor: pointer;
   }
-  /* Responsive Styling */
+
+.customer-progress-container {
+    position: relative;
+    width: 100%;
+    margin: 2.5rem 0 3.5rem;
+  }
+  
+  .customer-progress-track {
+    background-color: #2a2a2a;
+    height: 12px;
+    border-radius: 999px;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .customer-progress-fill {
+    background-color: #24c16c;
+    height: 100%;
+    transition: width 0.4s ease-in-out;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+  }
+  
+  .customer-current-indicator {
+    position: absolute;
+    top: -6px;
+    width: 2px;
+    height: 26px;
+    background-color: #ffffffaa;
+    z-index: 3;
+    transform: translateX(-50%);
+  }
+  
+  .customer-progress-percent {
+    margin-top: 0.75rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: #aaa;
+    text-align: right;
+  }
+  
+  .customer-progress-timeline {
+    position: relative;
+    /* margin-top: 1.25rem; */
+    z-index: 4;
+    height: 40px;
+  }
+  
+  .customer-timeline-step {
+    position: absolute;
+    top: 4px; /* bring closer to progress bar */
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: default;
+    white-space: nowrap;
+    max-width: 80px;
+  }
+  
+  /* Hide default span labels */
+  .customer-timeline-step span {
+    display: none;
+  }
+  
+  .customer-timeline-step::before {
+    content: "";
+    width: 2px; /* thinner */
+    height: 18px; /* shorter */
+    background-color: #888;
+    border-radius: 1px; /* minimal rounding */
+    transition: background-color 0.3s;
+  }
+  
+  .customer-timeline-step.complete::before {
+    background-color: #24c16c;
+    box-shadow: 0 0 5px #24c16c;
+  }
+  
+  .customer-timeline-step.in-progress::before {
+    background-color: #24c16c;
+    animation: blink 2.4s ease-in-out infinite;
+  }
+  
+  .step-pill {
+    width: 20px;
+    height: 20px;
+    background-color: #888;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: #111;
+    position: relative;
+    z-index: 5;
+    transition: background-color 0.3s ease;
+  }
+  
+  .customer-timeline-step.complete .step-pill {
+    background-color: #24c16c;
+    color: #fff;
+    box-shadow: 0 0 4px #24c16c;
+  }
+  
+  .customer-timeline-step.in-progress .step-pill {
+    background-color: #24c16c;
+    color: #fff;
+    animation: blink 2.4s ease-in-out infinite;
+  }
+  
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+  
+  .customer-timeline-step:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    background-color: #222;
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    white-space: nowrap;
+    transform: translateY(-6px);
+    opacity: 1;
+    pointer-events: none;
+    z-index: 10;
+  }
+  
+  .step-icon {
+    font-size: 1rem;
+    color: #888;
+    transition: color 0.3s;
+  }
+  
+  .customer-timeline-step.complete .step-icon {
+    color: #24c16c;
+    text-shadow: 0 0 4px #24c16c;
+  }
+  
+  .customer-timeline-step.in-progress .step-icon {
+    color: #24c16c;
+    animation: blink 2.4s ease-in-out infinite;
+  }
+
+  .edit-button {
+    background-color: #444;
+    color: #fff;
+    border: none;
+    padding: 4px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background-color 0.2s;
+  }
+  
+  .edit-button:hover {
+    background-color: #666;
+  }
+
+/* Responsive Styling */
+@media (max-width: 600px) {
+  .project-page {
+    padding: 1.5rem 1rem;
+  }
+
+  .project-page h2 {
+    font-size: 1.5rem;
+  }
+
+  .project-section {
+    padding: 1.25rem;
+  }
+
+  .project-section h3 {
+    font-size: 1.1rem;
+  }
+
+  .project-section p {
+    font-size: 0.9rem;
+  }
+
+  .dropzone {
+    padding: 1.5rem;
+  }
+
+  .dropzone p {
+    font-size: 0.85rem;
+  }
+
+  .uploaded-files li {
+    font-size: 0.8rem;
+  }
+
+  .progress-marker {
+    width: 60px;
+  }
+
+  .progress-label {
+    font-size: 0.6rem;
+  }
+
+  .customer-timeline-step {
+    font-size: 0.55rem;
+    max-width: 50px;
+    white-space: nowrap;
+  }
+
   @media (max-width: 600px) {
-    .project-page {
-      padding: 1.5rem 1rem;
+    .customer-timeline-step {
+      font-size: 0.55rem;
+      width: 50px;
+      max-width: 50px;
+      white-space: normal;
     }
   
-    .project-page h2 {
-      font-size: 1.5rem;
-    }
-  
-    .project-section {
-      padding: 1.25rem;
-    }
-  
-    .project-section h3 {
-      font-size: 1.1rem;
-    }
-  
-    .project-section p {
-      font-size: 0.9rem;
-    }
-  
-    .dropzone {
-      padding: 1.5rem;
-    }
-  
-    .dropzone p {
-      font-size: 0.85rem;
-    }
-  
-    .uploaded-files li {
-      font-size: 0.8rem;
+    .customer-progress-container {
+      margin-bottom: 3rem;
     }
   }
+}

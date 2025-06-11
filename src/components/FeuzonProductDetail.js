@@ -293,12 +293,6 @@ const FeuzonProductDetail = () => {
     // ✅ Generate the correctly formatted key
     const generatedKey = `${formattedSize} - Base Price: ${formattedBasePrice}-${formattedDepth}-${formattedLugs}-${formattedStaveQuantity} - ${formattedStaveThickness}-${formattedOuterShell}-${formattedInnerStave}`;
 
-    // console.log('🧐 Checking feuzonSummaries for generated key:', generatedKey);
-    // console.log(
-    //   '🔎 Available feuzonSummaries keys:',
-    //   Object.keys(feuzonSummaries)
-    // );
-
     // ✅ Normalize function to prevent minor mismatches
     const normalizeKey = (key) => key.toLowerCase().replace(/\s+/g, ' ').trim(); // Normalize spaces
 
