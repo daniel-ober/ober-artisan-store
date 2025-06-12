@@ -613,9 +613,9 @@ const ProjectOverview = ({
                     const category = file.category || sectionKey || 'other';
 
                     const filename = decodeURIComponent(
-  url.split('/').pop().split('?')[0].split('%2F').pop()
-);
-const fileType = filename.split('.').pop().toLowerCase();
+                      url.split('/').pop().split('?')[0].split('%2F').pop()
+                    );
+                    const fileType = filename.split('.').pop().toLowerCase();
                     const isImage = [
                       'jpg',
                       'jpeg',
