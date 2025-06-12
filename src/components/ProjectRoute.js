@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 
-const ProjectRoute = ({ element: Element }) => {
+const ProjectRoute = ({ element: Component }) => {
   const { user, isAdmin, authIsReady } = useAuth();
   const { projectId } = useParams();
   const navigate = useNavigate();
@@ -18,25 +18,33 @@ const ProjectRoute = ({ element: Element }) => {
         navigate('/signin');
         return;
       }
-
+    
       if (isAdmin) {
         setAuthorized(true);
         return;
       }
-
+    
       try {
         const projectRef = doc(db, 'projects', projectId);
         const snapshot = await getDoc(projectRef);
-
+    
         if (!snapshot.exists()) {
           navigate('/not-found');
           return;
         }
-
+    
         const data = snapshot.data();
-        if (data.ownerUid === user.uid) {
+    
+        const projectEmail = data?.customer?.email?.toLowerCase()?.trim();
+        const userEmail = user?.email?.toLowerCase()?.trim();
+    
+        console.log('✅ Project email:', projectEmail);
+        console.log('✅ User email:', userEmail);
+    
+        if (projectEmail && userEmail && projectEmail === userEmail) {
           setAuthorized(true);
         } else {
+          console.warn('🚫 Authorization failed');
           navigate('/unauthorized');
         }
       } catch (err) {
@@ -50,7 +58,7 @@ const ProjectRoute = ({ element: Element }) => {
 
   if (!authIsReady || authorized === null) return <div>Loading project...</div>;
 
-  return <Element />;
+  return <Component />;
 };
 
 export default ProjectRoute;

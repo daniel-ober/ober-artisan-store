@@ -18,34 +18,13 @@ import { nanoid } from 'nanoid';
 import './Contact.css';
 
 const inquiryCategories = [
-  {
-    value: 'Billing',
-    label: 'Billing – Update billing or inquire about payments',
-  },
-  {
-    value: 'Custom Shop',
-    label: 'Custom Shop – Custom drum builds or modifications',
-  },
-  {
-    value: 'Partner Relations',
-    label: 'Partner Relations – Vendor inquiries or partnership opportunities',
-  },
-  {
-    value: 'Product Information',
-    label: 'Product Information – Ask about products or specifications',
-  },
-  {
-    value: 'Shipping & Delivery',
-    label: 'Shipping & Delivery – Shipping updates or tracking info',
-  },
-  {
-    value: 'Technical Assistance',
-    label: 'Technical Assistance – Account and login issues',
-  },
-  {
-    value: 'Website Feedback',
-    label: 'Website Feedback – Share feedback or ideas',
-  },
+  { value: 'Billing', label: 'Billing – Update billing or inquire about payments' },
+  { value: 'Custom Shop', label: 'Custom Shop – Custom drum builds or modifications' },
+  { value: 'Partner Relations', label: 'Partner Relations – Vendor inquiries or partnership opportunities' },
+  { value: 'Product Information', label: 'Product Information – Ask about products or specifications' },
+  { value: 'Shipping & Delivery', label: 'Shipping & Delivery – Shipping updates or tracking info' },
+  { value: 'Technical Assistance', label: 'Technical Assistance – Account and login issues' },
+  { value: 'Website Feedback', label: 'Website Feedback – Share feedback or ideas' },
   { value: 'Other', label: 'Other' },
 ];
 
@@ -88,10 +67,10 @@ const Contact = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
+    setFormData((prev) => ({
+      ...prev,
       [name]: value,
-    });
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -99,55 +78,29 @@ const Contact = () => {
     setLoading(true);
 
     try {
-      console.log('📡 Preparing to execute reCAPTCHA...');
-      window.grecaptcha.enterprise.ready(async () => {
-        console.log('📡 Executing reCAPTCHA for contact form...');
-        const token = await window.grecaptcha.enterprise.execute(
-          '6LcneU4rAAAAAFxByZg23EkC0nwO50mdJ-vfeQ3u',
-          { action: 'submit_contact' }
-        );
+      const inquiryId = nanoid();
+      await addInquiry({
+        id: inquiryId,
+        ...formData,
+        origin: 'web-contact',
+        status: 'New',
+        createdAt: new Date(),
+      });
 
-        const verifyResponse = await fetch(
-          'https://api-eef4a3tgna-uc.a.run.app/verifyRecaptcha',
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ token, email: formData.email }),
-          }
-        );
+      await new Promise((resolve) => setTimeout(resolve, 700));
 
-        const verifyResult = await verifyResponse.json();
-        if (!verifyResult.success) {
-          setLoading(false);
-          alert('Submission blocked due to suspicious activity.');
-          return;
-        }
-
-        const inquiryId = nanoid();
-        await addInquiry({
-          id: inquiryId,
-          ...formData,
-          origin: 'web-contact',
-          status: 'New',
-          createdAt: new Date(),
-        });
-
-        await new Promise((resolve) => setTimeout(resolve, 700));
-
-        setOpen(true);
-        setFormData({
-          first_name: '',
-          last_name: '',
-          email: '',
-          phone: '',
-          message: '',
-          category: '',
-        });
+      setOpen(true);
+      setFormData({
+        first_name: '',
+        last_name: '',
+        email: '',
+        phone: '',
+        message: '',
+        category: '',
       });
     } catch (error) {
       console.error('Error sending message:', error);
+    } finally {
       setLoading(false);
     }
   };
@@ -159,23 +112,12 @@ const Contact = () => {
 
   return (
     <div className="contact-container">
-      <Typography
-        variant="h4"
-        component="h1"
-        gutterBottom
-        className="contact-header"
-      >
+      <Typography variant="h4" component="h1" gutterBottom className="contact-header">
         Contact Us
       </Typography>
-  
+
       <form onSubmit={handleSubmit} className="form-container">
-        <FormControl
-          fullWidth
-          margin="normal"
-          required
-          variant="outlined"
-          className="contact-dropdown"
-        >
+        <FormControl fullWidth margin="normal" required variant="outlined" className="contact-dropdown">
           <Select
             name="category"
             value={formData.category}
@@ -183,21 +125,15 @@ const Contact = () => {
             displayEmpty
             className="contact-select"
           >
-            <MenuItem value="">
-              <em>Select a category</em>
-            </MenuItem>
-            {inquiryCategories.map((category) => (
-              <MenuItem
-                key={category.value}
-                value={category.value}
-                className="contact-menu-item"
-              >
-                {category.label}
+            <MenuItem value=""><em>Select a category</em></MenuItem>
+            {inquiryCategories.map((cat) => (
+              <MenuItem key={cat.value} value={cat.value} className="contact-menu-item">
+                {cat.label}
               </MenuItem>
             ))}
           </Select>
         </FormControl>
-  
+
         <TextField
           variant="outlined"
           label="First Name"
@@ -260,30 +196,21 @@ const Contact = () => {
           className="contact-input"
           InputLabelProps={{ shrink: true }}
         />
-  
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          className="contact-button"
-          disabled={loading}
-        >
+
+        <Button type="submit" variant="contained" color="primary" className="contact-button" disabled={loading}>
           {loading ? 'Sending...' : 'Send Message'}
         </Button>
       </form>
-  
+
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Message Sent</DialogTitle>
         <DialogContent>
           <Typography variant="body1">
-            Thank you for reaching out! We&apos;ll get back to you within 1–2
-            business days. Feel free to explore our Artisan Shop.
+            Thank you for reaching out! We'll get back to you within 1–2 business days. Feel free to explore our Artisan Shop.
           </Typography>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Continue
-          </Button>
+          <Button onClick={handleClose} color="primary">Continue</Button>
         </DialogActions>
       </Dialog>
     </div>

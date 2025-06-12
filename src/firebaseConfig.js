@@ -1,7 +1,8 @@
-// src/firebaseConfig.js
+// firebaseConfig.js
 import { initializeApp } from 'firebase/app';
 import { getAnalytics, logEvent, isSupported, setUserProperties } from 'firebase/analytics';
 import { getAuth, signOut as firebaseSignOut } from 'firebase/auth';
+import { getFunctions } from 'firebase/functions';
 import {
   getFirestore,
   doc,
@@ -15,6 +16,7 @@ import {
   Timestamp,
 } from 'firebase/firestore';
 import { getStorage, ref, listAll, getDownloadURL } from 'firebase/storage';
+import { initializeAppCheck, ReCaptchaV3Provider, getToken } from 'firebase/app-check';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -28,8 +30,19 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-let analytics = null;
+// ✅ App Check Init
+let appCheck;
+if (typeof window !== 'undefined') {
+  if (location.hostname === 'localhost') {
+    self.FIREBASE_APPCHECK_DEBUG_TOKEN = true;
+  }
+  appCheck = initializeAppCheck(app, {
+    provider: new ReCaptchaV3Provider('6LcneU4rAAAAAFxByZg23EkC0nwO50mdJ-vfeQ3u'),
+    isTokenAutoRefreshEnabled: true,
+  });
+}
 
+let analytics = null;
 if (
   typeof window !== 'undefined' &&
   process.env.NODE_ENV === 'production' &&
@@ -39,28 +52,26 @@ if (
     if (supported) {
       analytics = getAnalytics(app);
       logEvent(analytics, 'page_view');
-      // console.log('✅ Firebase Analytics initialized');
-    } else {
-      console.warn('⚠️ Firebase Analytics not supported in this browser');
     }
   });
 }
 
-// ✅ Exported function to tag admin/test/real users in Analytics
 export const setAnalyticsUserProperties = (userType) => {
   if (analytics && typeof userType === 'string') {
-    // console.log('🔍 Setting user_type in analytics:', userType);
     setUserProperties(analytics, { user_type: userType });
-  } else {
-    console.warn('⚠️ Could not set user_type – analytics not ready or invalid input:', userType);
   }
 };
 
+// ✅ Core Services
 export const db = getFirestore(app);
 export const auth = getAuth(app);
 export const storage = getStorage(app);
+export const functions = getFunctions(app, 'us-central1');
 export const signOut = firebaseSignOut;
+export const appCheckInstance = appCheck;
+export { app, analytics, logEvent };
 
+// ✅ Utility Methods
 export const fetchGalleryImages = async () => {
   try {
     const galleryRef = ref(storage, 'Gallery/');
@@ -135,5 +146,3 @@ export const clearCart = async (userId) => {
     throw error;
   }
 };
-
-export { app, analytics, logEvent };

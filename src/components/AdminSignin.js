@@ -3,7 +3,7 @@ import { Container, Box, Typography, TextField, Button } from '@mui/material';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../firebaseConfig';
-import { fetchUserDoc } from '../services/userService'; // Ensure path is correct
+import { fetchUserDoc } from '../services/userService';
 import './AdminSignin.css';
 
 const AdminSignin = () => {
@@ -17,25 +17,6 @@ const AdminSignin = () => {
     setError(null);
 
     try {
-      // 🧠 Get reCAPTCHA Enterprise token
-      const token = await window.grecaptcha.enterprise.execute(
-        '6LcneU4rAAAAAFxByZg23EkC0nwO50mdJ-vfeQ3u',
-        { action: 'login' }
-      );
-
-      // 🚧 Verify with backend for Account Defender
-      const verifyResponse = await fetch('https://api-eef4a3tgna-uc.a.run.app/verifyRecaptcha', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ token, email }),
-      });
-
-      const verifyResult = await verifyResponse.json();
-      if (!verifyResult.success) {
-        setError('Login blocked due to suspicious behavior.');
-        return;
-      }
-
       // ✅ Firebase sign in
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;

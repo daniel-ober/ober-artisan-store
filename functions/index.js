@@ -800,14 +800,28 @@ exports.refreshPrintifyStockNow = onRequest(
 );
 
 exports.adminCreateUser = functions.https.onCall(async (data, context) => {
-  if (!context.auth || !context.auth.token.admin) {
-    throw new functions.https.HttpsError('permission-denied', 'Not authorized');
+  const {
+    email,
+    password,
+    firstName,
+    lastName,
+    phone,
+    isSoundlegend,
+    status,
+  } = data;
+
+  // ✅ Ensure user is authenticated
+  if (!context.auth) {
+    throw new functions.https.HttpsError('unauthenticated', 'User must be signed in.');
   }
 
-  const { email, password, firstName, lastName, phone, isSoundlegend, status } = data;
+  // ✅ Ensure user has admin privileges
+  if (!context.auth.token.admin) {
+    throw new functions.https.HttpsError('permission-denied', 'Admin privileges required.');
+  }
 
   try {
-    // 1. Create Firebase Auth user
+    // ✅ Create user in Firebase Auth
     const userRecord = await admin.auth().createUser({
       email,
       password,
@@ -815,21 +829,23 @@ exports.adminCreateUser = functions.https.onCall(async (data, context) => {
       phoneNumber: phone && phone.length > 0 ? phone : undefined,
     });
 
-    // 2. Save Firestore doc using same UID
+    console.log(`✅ Created user ${userRecord.uid} (${email})`);
+
+    // ✅ Create corresponding Firestore doc
     await admin.firestore().collection('users').doc(userRecord.uid).set({
-      email,
       firstName,
       lastName,
+      email,
       phone,
-      isSoundlegend: !!isSoundlegend,
+      isAdmin: false,
+      isSoundlegend: isSoundlegend || false,
       status: status || 'active',
-      createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      createdAt: admin.firestore.Timestamp.now(),
     });
 
-    // ✅ Explicit UID return
     return { uid: userRecord.uid };
-  } catch (error) {
-    console.error('❌ adminCreateUser error:', error.message);
-    throw new functions.https.HttpsError('internal', error.message);
+  } catch (err) {
+    console.error('❌ Error during user creation:', err.message);
+    throw new functions.https.HttpsError('internal', err.message);
   }
 });
