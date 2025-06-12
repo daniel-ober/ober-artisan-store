@@ -1,11 +1,11 @@
 const admin = require('firebase-admin');
-const serviceAccount = require('./rick_ressner.json'); // ← this is the key you saved to Desktop
+const serviceAccount = require('./serviceAccountKey.json'); // ← this is the key you saved to Desktop
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
 
-const email = 'eressner@gmail.com';
+const email = 'arrasandonorte@gmail.com';
 
 async function setSoundlegendClaim() {
   try {
