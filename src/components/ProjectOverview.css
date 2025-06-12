@@ -143,6 +143,27 @@
     border-radius: 6px;
     padding: 0.25rem 0.5rem;
   }
+
+  .file-preview-pdf.file-preview-clickable {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 160px;
+    width: 100%;
+    background: #222;
+    border: 1px solid #444;
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  .file-preview-label {
+    font-size: 0.85rem;
+    color: #88ccff;
+    margin-top: 0.5rem;
+  }
   
   .delete-file-btn {
     background: #300000;
