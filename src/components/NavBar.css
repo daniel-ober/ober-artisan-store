@@ -224,6 +224,38 @@ body.dark .navbar-sticky-mini {
   z-index: 2995; /* ← just under the sticky-mini (which is 3000) */
 }
 
+.soundlegend-dropdown {
+  position: relative;
+  cursor: pointer;
+}
+
+.soundlegend-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: var(--background-color);
+  padding: 0.5rem 0;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  display: none;
+  z-index: 1000;
+  white-space: nowrap;
+  min-width: 200px;
+}
+
+.soundlegend-dropdown:hover .soundlegend-dropdown-menu {
+  display: block;
+}
+
+.soundlegend-dropdown-menu .nav-link {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: var(--text-color);
+}
+
+.soundlegend-dropdown-menu .nav-link:hover {
+  background-color: var(--hover-bg-color);
+}
+
 /* === MOBILE (portrait) DROPDOWN + MENU BEHAVIOR === */
 @media (max-width: 768px) {
   .navbar {

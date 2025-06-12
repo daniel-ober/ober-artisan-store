@@ -815,7 +815,7 @@ exports.adminCreateUser = functions.https.onCall(async (data, context) => {
       phoneNumber: phone && phone.length > 0 ? phone : undefined,
     });
 
-    // 2. Add user doc to Firestore
+    // 2. Save Firestore doc using same UID
     await admin.firestore().collection('users').doc(userRecord.uid).set({
       email,
       firstName,
@@ -826,8 +826,10 @@ exports.adminCreateUser = functions.https.onCall(async (data, context) => {
       createdAt: admin.firestore.FieldValue.serverTimestamp(),
     });
 
+    // ✅ Explicit UID return
     return { uid: userRecord.uid };
   } catch (error) {
+    console.error('❌ adminCreateUser error:', error.message);
     throw new functions.https.HttpsError('internal', error.message);
   }
 });

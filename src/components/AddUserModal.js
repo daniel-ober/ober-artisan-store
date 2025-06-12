@@ -62,7 +62,10 @@ const AddUserModal = ({ onClose, onUserAdded }) => {
       console.debug('[AddUserModal] TokenResult.claims:', tokenResult.claims);
 
       // Show all claims for your debug sanity
-      if (!tokenResult.claims || typeof tokenResult.claims.admin === 'undefined') {
+      if (
+        !tokenResult.claims ||
+        typeof tokenResult.claims.admin === 'undefined'
+      ) {
         setError(
           'No admin claim found in your Firebase Auth token. Try signing out and back in after being promoted to admin.'
         );
@@ -109,18 +112,16 @@ const AddUserModal = ({ onClose, onUserAdded }) => {
         setLoading(false);
         return;
       }
-
-      const newUser = {
+      await setDoc(doc(db, 'users', uid), {
         ...formData,
         createdAt: Timestamp.now(),
         isAdmin: false,
         isSoundlegend: formData.isSoundlegend || false,
-        uid,
-      };
+      });
 
       setGeneratedPassword(password);
       setPasswordNoticeVisible(true);
-      onUserAdded({ ...newUser, id: uid });
+      onUserAdded({ ...formData, id: uid });
     } catch (err) {
       console.error('❌ Failed to add user:', err);
       // Provide better error messages if known errors
@@ -147,19 +148,39 @@ const AddUserModal = ({ onClose, onUserAdded }) => {
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label>First Name *</label>
-            <input name="firstName" value={formData.firstName} onChange={handleChange} required />
+            <input
+              name="firstName"
+              value={formData.firstName}
+              onChange={handleChange}
+              required
+            />
           </div>
           <div className="form-group">
             <label>Last Name *</label>
-            <input name="lastName" value={formData.lastName} onChange={handleChange} required />
+            <input
+              name="lastName"
+              value={formData.lastName}
+              onChange={handleChange}
+              required
+            />
           </div>
           <div className="form-group">
             <label>Email *</label>
-            <input type="email" name="email" value={formData.email} onChange={handleChange} required />
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
           </div>
           <div className="form-group">
             <label>Phone</label>
-            <input name="phone" value={formData.phone} onChange={handleChange} />
+            <input
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+            />
           </div>
           <div className="form-group">
             <label>
@@ -174,7 +195,11 @@ const AddUserModal = ({ onClose, onUserAdded }) => {
           </div>
           <div className="form-group">
             <label>Status</label>
-            <select name="status" value={formData.status} onChange={handleChange}>
+            <select
+              name="status"
+              value={formData.status}
+              onChange={handleChange}
+            >
               <option value="active">Active</option>
               <option value="inactive">Inactive</option>
             </select>
@@ -183,16 +208,23 @@ const AddUserModal = ({ onClose, onUserAdded }) => {
             <button type="submit" disabled={loading}>
               {loading ? 'Adding...' : 'Add User'}
             </button>
-            <button type="button" onClick={onClose}>Cancel</button>
+            <button type="button" onClick={onClose}>
+              Cancel
+            </button>
           </div>
         </form>
 
         {passwordNoticeVisible && (
           <div className="password-popup">
-            <strong>Important:</strong> Save this password to share with the user:
+            <strong>Important:</strong> Save this password to share with the
+            user:
             <div className="password-popup-display">
               <code>{generatedPassword}</code>
-              <button onClick={() => navigator.clipboard.writeText(generatedPassword)}>Copy</button>
+              <button
+                onClick={() => navigator.clipboard.writeText(generatedPassword)}
+              >
+                Copy
+              </button>
             </div>
             <p style={{ fontSize: '0.85rem', marginTop: '8px' }}>
               They can change it later via password reset.

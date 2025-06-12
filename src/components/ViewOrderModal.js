@@ -13,6 +13,7 @@ import { Timestamp } from 'firebase/firestore';
 import { getOrderStatusFromItems } from '../utils/statusConfig';
 import defaultStepData from '../utils/defaultStepData';
 import defaultProjectFields from '../utils/defaultProjectFields';
+import { linkProjectToUserByEmail } from '../services/userService';
 
 const ITEM_STATUSES = [
   'Preparing',
@@ -23,6 +24,18 @@ const ITEM_STATUSES = [
   'Delivered',
   'Canceled',
 ];
+
+
+const formatFirestoreTimestamp = (ts) => {
+  if (!ts) return 'N/A';
+  try {
+    if (ts.toDate) return ts.toDate().toLocaleDateString();
+    if (ts.seconds) return new Date(ts.seconds * 1000).toLocaleDateString();
+    return new Date(ts).toLocaleDateString();
+  } catch {
+    return 'Invalid Date';
+  }
+};
 
 const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
   const [internalNotes, setInternalNotes] = useState([]);
@@ -35,115 +48,6 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
   );
   const [relatedProjects, setRelatedProjects] = useState([]);
 
-  const formatFirestoreTimestamp = (timestamp) => {
-    if (timestamp?.seconds) {
-      return new Date(timestamp.seconds * 1000).toLocaleString();
-    }
-    if (timestamp?._seconds) {
-      return new Date(timestamp._seconds * 1000).toLocaleString();
-    }
-    if (typeof timestamp === 'string') {
-      return new Date(timestamp).toLocaleString();
-    }
-    return 'Invalid Date';
-  };
-
-  useEffect(() => {
-    const fetchOrderDetails = async () => {
-      try {
-        const orderRef = doc(db, 'orders', orderDetails.id);
-        const orderDoc = await getDoc(orderRef);
-        if (orderDoc.exists()) {
-          const data = orderDoc.data();
-          setInternalNotes(
-            data.internalNotes?.sort(
-              (a, b) => new Date(b.timestamp) - new Date(a.timestamp)
-            ) || []
-          );
-          setSystemHistory(
-            data.systemHistory?.sort(
-              (a, b) => new Date(b.timestamp) - new Date(a.timestamp)
-            ) || []
-          );
-          setItems(data.items || []);
-          setOrderStatus(data.status || 'Order Started');
-          setRelatedProjects(data.relatedProjects || []);
-        }
-      } catch (error) {
-        console.error('Error fetching order details:', error);
-      }
-    };
-
-    if (isOpen) {
-      fetchOrderDetails();
-    }
-  }, [orderDetails.id, isOpen]);
-
-  const handleItemStatusChange = async (index, newStatus) => {
-    try {
-      const updatedItems = [...items];
-      updatedItems[index].status = newStatus;
-
-      const newOrderStatus = getOrderStatusFromItems(updatedItems);
-
-      const orderRef = doc(db, 'orders', orderDetails.id);
-      await updateDoc(orderRef, {
-        items: updatedItems,
-        status: newOrderStatus,
-        systemHistory: arrayUnion({
-          event: `Item status updated: ${items[index].name} to "${newStatus}"`,
-          timestamp: new Date().toISOString(),
-        }),
-      });
-
-      setItems(updatedItems);
-      setOrderStatus(newOrderStatus);
-      setSystemHistory((prevHistory) => [
-        {
-          event: `Item status updated: ${items[index].name} to "${newStatus}"`,
-          timestamp: new Date().toISOString(),
-        },
-        ...prevHistory,
-      ]);
-
-      if (onUpdateOrder) {
-        onUpdateOrder({
-          ...orderDetails,
-          items: updatedItems,
-          status: newOrderStatus,
-        });
-      }
-    } catch (error) {
-      console.error('Error updating item status:', error);
-      alert('Failed to update item status. Please try again.');
-    }
-  };
-
-  const handleAddNote = async () => {
-    if (!newNote.trim()) return alert('Note cannot be empty.');
-    setLoading(true);
-
-    try {
-      const orderRef = doc(db, 'orders', orderDetails.id);
-      const note = {
-        text: newNote,
-        timestamp: new Date().toISOString(),
-      };
-
-      await updateDoc(orderRef, {
-        internalNotes: arrayUnion(note),
-      });
-
-      setInternalNotes((prevNotes) => [note, ...prevNotes]);
-      setNewNote('');
-    } catch (error) {
-      console.error('Error adding note:', error);
-      alert('Failed to add note. Please try again.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const createProject = async (item = null) => {
     const confirmCreation = window.confirm(
       `Create Project for ${item?.name || 'Blank Project'}?`
@@ -151,6 +55,7 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
     if (!confirmCreation) return;
 
     try {
+      const customerEmail = orderDetails.customerEmail || '';
       const parsedAddress = (orderDetails.customerAddress || '').split(',');
       const street = parsedAddress[0]?.trim() || '';
       const city = parsedAddress[1]?.trim() || '';
@@ -166,12 +71,13 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
         orderId: orderDetails.id,
         customerName:
           orderDetails.customerName ||
-          item?.description?.split('-')[0]?.trim() || // e.g. "Danny Lopez"
-          item?.name?.split('-')[0]?.trim() || // fallback
+          item?.description?.split('-')[0]?.trim() ||
+          item?.name?.split('-')[0]?.trim() ||
           'N/A',
+        ownerEmail: customerEmail, // ✅ ADD THIS LINE
         customer: {
           name: orderDetails.customerName || 'N/A',
-          email: orderDetails.customerEmail || 'N/A',
+          email: customerEmail,
           phone: orderDetails.customerPhone || '',
           address: {
             street,
@@ -186,8 +92,8 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
         width: '',
         shellDepth: '',
         itemDetails: item || null,
-        ...defaultStepData, // ✅ workflow
-        ...defaultProjectFields, // ✅ proposal specs
+        ...defaultStepData,
+        ...defaultProjectFields,
       };
 
       const projectRef = await addDoc(collection(db, 'projects'), projectData);
@@ -206,6 +112,17 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
           timestamp: new Date().toISOString(),
         }),
       });
+      console.log('🟢 relatedProjects updated in Firestore:', projectEntry);
+      // 🔗 Link the project to a user doc via email
+      if (customerEmail) {
+        const label = item?.name?.trim() ||
+        item?.description?.split('-')[0]?.trim() ||
+        orderDetails.customerName?.trim() ||
+        'Custom Drum Project';
+
+        await linkProjectToUserByEmail(customerEmail, projectId, label);
+        console.log(`📁 User ${customerEmail} linked to project ${projectId}`);
+      }
 
       setRelatedProjects((prev) => [...prev, projectEntry]);
       setSystemHistory((prev) => [
@@ -223,11 +140,89 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
     }
   };
 
+  useEffect(() => {
+    const fetchOrderData = async () => {
+      try {
+        const orderRef = doc(db, 'orders', orderDetails.id);
+        const docSnap = await getDoc(orderRef);
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          setInternalNotes(data.internalNotes || []);
+          setSystemHistory(data.systemHistory || []);
+          setRelatedProjects(data.relatedProjects || []);
+        }
+      } catch (err) {
+        console.error('❌ Failed to load order data:', err);
+      }
+    };
+
+    if (isOpen) fetchOrderData();
+  }, [isOpen, orderDetails.id]);
+
   const redirectToProject = (projectId) => {
     window.location.href = `/projects/${projectId}`;
   };
 
   if (!isOpen) return null;
+
+  const handleAddNote = async () => {
+    if (!newNote.trim()) return;
+    const note = {
+      text: newNote.trim(),
+      timestamp: new Date().toISOString(),
+    };
+
+    setInternalNotes((prev) => [note, ...prev]);
+    setSystemHistory((prev) => [
+      { event: `Internal note added`, timestamp: note.timestamp },
+      ...prev,
+    ]);
+    setNewNote('');
+
+    try {
+      const orderRef = doc(db, 'orders', orderDetails.id);
+      await updateDoc(orderRef, {
+        internalNotes: arrayUnion(note),
+        systemHistory: arrayUnion({
+          event: 'Internal note added',
+          timestamp: note.timestamp,
+        }),
+      });
+    } catch (error) {
+      console.error('❌ Failed to save note to Firestore:', error);
+    }
+  };
+
+  const handleItemStatusChange = async (index, newStatus) => {
+    try {
+      const updatedItems = [...items];
+      updatedItems[index].status = newStatus;
+
+      const newOrderStatus = getOrderStatusFromItems(updatedItems);
+      setItems(updatedItems);
+      setOrderStatus(newOrderStatus);
+
+      const orderRef = doc(db, 'orders', orderDetails.id);
+      await updateDoc(orderRef, {
+        items: updatedItems,
+        status: newOrderStatus,
+        systemHistory: arrayUnion({
+          event: `Item status changed to "${newStatus}"`,
+          timestamp: new Date().toISOString(),
+        }),
+      });
+
+      setSystemHistory((prev) => [
+        {
+          event: `Item status changed to "${newStatus}"`,
+          timestamp: new Date().toISOString(),
+        },
+        ...prev,
+      ]);
+    } catch (err) {
+      console.error('❌ Failed to update item status:', err);
+    }
+  };
 
   return (
     <div className="modal-overlay">

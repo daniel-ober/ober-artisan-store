@@ -14,31 +14,35 @@ const SoundlegendSignin = () => {
   const handleSignin = async (e) => {
     e.preventDefault();
     setErrorMsg('');
-
+  
     try {
       const token = await window.grecaptcha.enterprise.execute(
         '6LcneU4rAAAAAFxByZg23EkC0nwO50mdJ-vfeQ3u',
         { action: 'login' }
       );
-
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
+  
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-      const userDoc = await fetchUserDoc(user.uid);
-
-      if (!userDoc || !userDoc.isSoundlegend) {
+  
+      const idTokenResult = await user.getIdTokenResult(true);
+      const claims = idTokenResult.claims;
+  
+      if (!claims.soundlegend) {
+        await auth.signOut();
         setErrorMsg('You are not authorized for SoundLegend access.');
         return;
       }
-
-      if (userDoc.projects?.length > 0) {
-        navigate(`/projects/${userDoc.projects[0].projectId}`);
+  
+      const userDoc = await fetchUserDoc(user.uid);
+  
+      // 🔁 Redirect to the first linked project (or fallback)
+      if (userDoc?.projects?.length > 0) {
+        const firstProjectId = userDoc.projects[0].projectId;
+        navigate(`/projects/${firstProjectId}`);
       } else {
-        navigate('/projects');
+        navigate('/projects'); // fallback page if they have no linked projects
       }
+  
     } catch (err) {
       console.error('❌ Sign-in error:', err);
       setErrorMsg('Invalid credentials or access denied.');
