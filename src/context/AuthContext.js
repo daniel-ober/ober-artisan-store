@@ -9,20 +9,16 @@ export const useAuth = () => useContext(AuthContext);
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
-  const [authIsReady, setAuthIsReady] = useState(false); // ✅ add this
+  const [authIsReady, setAuthIsReady] = useState(false);
 
-  // Check Firebase Auth custom claims for admin role
   const checkAdminClaim = async (currentUser) => {
     try {
       const idTokenResult = await currentUser.getIdTokenResult(true);
-      const adminStatus = !!idTokenResult.claims.admin;
+      const claims = idTokenResult.claims;
+      const adminStatus = !!claims.admin || !!claims.isAdmin; // ✅ fallback to isAdmin if admin is missing
       setIsAdmin(adminStatus);
 
-      if (adminStatus) {
-        setAnalyticsUserProperties('admin');
-      } else {
-        setAnalyticsUserProperties('guest');
-      }
+      setAnalyticsUserProperties(adminStatus ? 'admin' : 'guest');
     } catch (error) {
       console.error('❌ Error checking admin claim:', error);
       setIsAdmin(false);
@@ -41,7 +37,7 @@ export const AuthProvider = ({ children }) => {
         setAnalyticsUserProperties('guest');
       }
 
-      setAuthIsReady(true); // ✅ mark auth system as initialized
+      setAuthIsReady(true);
     });
 
     return () => unsubscribe();
@@ -64,7 +60,7 @@ export const AuthProvider = ({ children }) => {
         user,
         isAdmin,
         logout,
-        authIsReady, // ✅ expose to consumers
+        authIsReady,
       }}
     >
       {children}

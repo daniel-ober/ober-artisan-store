@@ -6,6 +6,7 @@ import { useCart } from '../context/CartContext';
 import { DarkModeContext } from '../context/DarkModeContext';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
+import { doc, getDoc } from 'firebase/firestore';
 import CartPreview from './CartPreview';
 import './NavBar.css';
 
@@ -15,6 +16,8 @@ const NavBar = () => {
   const [isCartPreviewOpen, setIsCartPreviewOpen] = useState(false);
   const [showStickyHeader, setShowStickyHeader] = useState(false);
   const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 768);
+  const [userProjects, setUserProjects] = useState([]);
+  const [isSoundlegend, setIsSoundlegend] = useState(false);
 
   const { isDarkMode } = useContext(DarkModeContext);
   const { user, isAdmin, logout } = useAuth();
@@ -30,6 +33,26 @@ const NavBar = () => {
   const cartRef = useRef(null);
   const navbarRef = useRef(null);
   const navigate = useNavigate();
+
+  const fetchUserProjects = async () => {
+    if (!user?.uid) return;
+    try {
+      const docRef = doc(db, 'users', user.uid);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        console.log("✅ SoundLegend user profile:", data); // ✅ add this
+        setUserProjects(data.projects || []);
+        setIsSoundlegend(!!data.isSoundlegend);
+      }
+    } catch (err) {
+      console.error('Failed to fetch user projects:', err);
+    }
+  };
+
+  useEffect(() => {
+    if (user?.uid) fetchUserProjects();
+  }, [user]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -150,6 +173,38 @@ const NavBar = () => {
     </button>
   );
 
+  const renderSoundLegendTab = () => {
+    console.log('🎯 renderSoundLegendTab called');
+    console.log('🧩 isSoundlegend:', isSoundlegend);
+    console.log('📦 userProjects:', userProjects);
+  
+    if (!user || !isSoundlegend || userProjects.length === 0) return null;
+
+    return (
+      <div className="nav-link soundlegend-dropdown">
+        <span>SoundLegend ▾</span>
+        <div className="soundlegend-dropdown-menu">
+          {userProjects.map((proj) => {
+            if (!proj.projectId || !proj.diameter || !proj.depth || !proj.staveQuantity) return null;
+const label = `${proj.diameter}"x${proj.depth}" // ${proj.staveQuantity}-Stave`;
+            return (
+              <Link
+                key={proj.projectId}
+                to={`/projects/${proj.projectId}`}
+                className="nav-link"
+                onClick={() =>
+                  handleNavLinkClick(`/projects/${proj.projectId}`)
+                }
+              >
+                {label}
+              </Link>
+            );
+          })}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <>
       {showStickyHeader && (
@@ -162,7 +217,7 @@ const NavBar = () => {
                 className="sticky-logo-img"
               />
             </Link>
-
+  
             {isMobileView ? (
               <button
                 className="navbar-sticky-menu"
@@ -194,15 +249,17 @@ const NavBar = () => {
                   .filter((l) => l.name.toLowerCase() !== 'home')
                   .map((link) => (
                     <Link
-  key={link.id}
-  to={`/${link.name}`}
-  className="nav-link"
-  onClick={() => handleNavLinkClick(`/${link.name}`)}
->
-  {link.label}
-</Link>
+                      key={link.id}
+                      to={`/${link.name}`}
+                      className="nav-link"
+                      onClick={() => handleNavLinkClick(`/${link.name}`)}
+                    >
+                      {link.label}
+                    </Link>
                   ))}
-
+  
+                {renderSoundLegendTab()}
+  
                 {user && isAdmin && (
                   <Link
                     to="/admin"
@@ -212,7 +269,7 @@ const NavBar = () => {
                     <FaCog /> Admin
                   </Link>
                 )}
-
+  
                 {user && (
                   <>
                     <Link
@@ -230,20 +287,9 @@ const NavBar = () => {
                     </button>
                   </>
                 )}
-
-                <button
-                  className="cart-icon nav-link"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setIsCartPreviewOpen((prev) => !prev);
-                  }}
-                >
-                  <FaCartPlus />
-                  {cartItemCount > 0 && (
-                    <span className="cart-badge">{cartItemCount}</span>
-                  )}
-                </button>
-
+  
+                {renderCartButton()}
+  
                 {isCartPreviewOpen && showStickyHeader && (
                   <div className="cart-preview-container" ref={cartRef}>
                     <CartPreview
@@ -255,7 +301,7 @@ const NavBar = () => {
               </div>
             )}
           </div>
-
+  
           {isMobileView && isMenuOpen && (
             <div className="navbar-sticky-dropdown-wrapper">
               <div className="navbar-links sticky-dropdown open" ref={menuRef}>
@@ -270,15 +316,17 @@ const NavBar = () => {
                   .filter((l) => l.name.toLowerCase() !== 'home')
                   .map((link) => (
                     <Link
-  key={link.id}
-  to={`/${link.name}`}
-  className="nav-link"
-  onClick={() => handleNavLinkClick(`/${link.name}`)}
->
-  {link.label}
-</Link>
+                      key={link.id}
+                      to={`/${link.name}`}
+                      className="nav-link"
+                      onClick={() => handleNavLinkClick(`/${link.name}`)}
+                    >
+                      {link.label}
+                    </Link>
                   ))}
-
+  
+                {renderSoundLegendTab()}
+  
                 {user && isAdmin && (
                   <Link
                     to="/admin"
@@ -288,7 +336,7 @@ const NavBar = () => {
                     <FaCog /> Admin
                   </Link>
                 )}
-
+  
                 {user && (
                   <>
                     <Link
@@ -306,20 +354,9 @@ const NavBar = () => {
                     </button>
                   </>
                 )}
-
-                <button
-                  className="cart-icon nav-link"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setIsCartPreviewOpen((prev) => !prev);
-                  }}
-                >
-                  <FaCartPlus />
-                  {cartItemCount > 0 && (
-                    <span className="cart-badge">{cartItemCount}</span>
-                  )}
-                </button>
-
+  
+                {renderCartButton()}
+  
                 {isCartPreviewOpen && showStickyHeader && (
                   <div className="cart-preview-container" ref={cartRef}>
                     <CartPreview
@@ -333,7 +370,7 @@ const NavBar = () => {
           )}
         </div>
       )}
-
+  
       <nav className="navbar" ref={navbarRef}>
         <div className="navbar-logo">
           <Link to="/" replace onClick={() => handleNavLinkClick('/')}>
@@ -348,7 +385,7 @@ const NavBar = () => {
             />
           </Link>
         </div>
-
+  
         {isMobileView && !showStickyHeader && (
           <button
             className="navbar-menu-container"
@@ -372,13 +409,13 @@ const NavBar = () => {
             />
           </button>
         )}
-
+  
         {!showStickyHeader && (isMenuOpen || !isMobileView) && (
-          <div className="navbar-links-wrapper">
-            <div
-              className={`navbar-links ${isMobileView && isMenuOpen ? 'open' : ''}`}
-              ref={menuRef}
-            >
+  <div className="navbar-links-wrapper">
+    <div
+      className={`navbar-links ${isMobileView && isMenuOpen ? 'open' : ''}`}
+      ref={menuRef}
+    >
               <Link
                 to="/"
                 className="nav-link"
@@ -390,15 +427,17 @@ const NavBar = () => {
                 .filter((l) => l.name.toLowerCase() !== 'home')
                 .map((link) => (
                   <Link
-  key={link.id}
-  to={`/${link.name}`}
-  className="nav-link"
-  onClick={() => handleNavLinkClick(`/${link.name}`)}
->
-  {link.label}
-</Link>
+                    key={link.id}
+                    to={`/${link.name}`}
+                    className="nav-link"
+                    onClick={() => handleNavLinkClick(`/${link.name}`)}
+                  >
+                    {link.label}
+                  </Link>
                 ))}
-
+  
+              {renderSoundLegendTab()}
+  
               {user && isAdmin && (
                 <Link
                   to="/admin"
@@ -408,7 +447,7 @@ const NavBar = () => {
                   <FaCog /> Admin
                 </Link>
               )}
-
+  
               {user && (
                 <>
                   <Link
@@ -423,20 +462,9 @@ const NavBar = () => {
                   </button>
                 </>
               )}
-
-              <button
-                className="cart-icon nav-link"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setIsCartPreviewOpen((prev) => !prev);
-                }}
-              >
-                <FaCartPlus />
-                {cartItemCount > 0 && (
-                  <span className="cart-badge">{cartItemCount}</span>
-                )}
-              </button>
-
+  
+              {renderCartButton()}
+  
               {isCartPreviewOpen && !showStickyHeader && (
                 <div className="cart-preview-container" ref={cartRef}>
                   <CartPreview
