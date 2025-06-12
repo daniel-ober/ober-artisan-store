@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   collection,
   query,
   where,
   getDocs,
   Timestamp,
+  doc,
+  setDoc,
 } from 'firebase/firestore';
-import { getFunctions, httpsCallable } from 'firebase/functions';
-import { getAuth } from 'firebase/auth';
-import { db } from '../firebaseConfig';
+import { httpsCallable } from 'firebase/functions';
+import { auth, db, functions } from '../firebaseConfig'; // ✅ Now importing shared functions instance
 import './AddUserModal.css';
 
 const generateSimplePassword = () => {
@@ -33,6 +34,7 @@ const AddUserModal = ({ onClose, onUserAdded }) => {
   const [passwordNoticeVisible, setPasswordNoticeVisible] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [authReady, setAuthReady] = useState(false);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -47,9 +49,7 @@ const AddUserModal = ({ onClose, onUserAdded }) => {
     setError('');
     setLoading(true);
 
-    const auth = getAuth();
     const currentUser = auth.currentUser;
-
     if (!currentUser) {
       setError('User not signed in.');
       setLoading(false);
@@ -57,30 +57,14 @@ const AddUserModal = ({ onClose, onUserAdded }) => {
     }
 
     try {
-      // Always force refresh for latest custom claims
       const tokenResult = await currentUser.getIdTokenResult(true);
-      console.debug('[AddUserModal] TokenResult.claims:', tokenResult.claims);
-
-      // Show all claims for your debug sanity
-      if (
-        !tokenResult.claims ||
-        typeof tokenResult.claims.admin === 'undefined'
-      ) {
-        setError(
-          'No admin claim found in your Firebase Auth token. Try signing out and back in after being promoted to admin.'
-        );
-        setLoading(false);
-        return;
-      }
-
-      const isAdmin = !!tokenResult.claims.admin;
+      const isAdmin = !!tokenResult.claims?.admin;
       if (!isAdmin) {
-        setError('Not authorized. You do not have admin access.');
+        setError('Not authorized. Your account does not have admin privileges.');
         setLoading(false);
         return;
       }
 
-      // Prevent duplicate users by email
       const usersRef = collection(db, 'users');
       const emailQuery = query(usersRef, where('email', '==', formData.email));
       const existingUsers = await getDocs(emailQuery);
@@ -91,9 +75,7 @@ const AddUserModal = ({ onClose, onUserAdded }) => {
         return;
       }
 
-      // Cloud Function: Create Auth User
       const password = generateSimplePassword();
-      const functions = getFunctions(undefined, 'us-central1');
       const createUser = httpsCallable(functions, 'adminCreateUser');
 
       const result = await createUser({
@@ -106,12 +88,13 @@ const AddUserModal = ({ onClose, onUserAdded }) => {
         status: formData.status,
       });
 
-      const uid = result.data.uid;
+      const { uid } = result.data;
       if (!uid) {
         setError('User created in Auth, but UID missing from response.');
         setLoading(false);
         return;
       }
+
       await setDoc(doc(db, 'users', uid), {
         ...formData,
         createdAt: Timestamp.now(),
@@ -124,7 +107,6 @@ const AddUserModal = ({ onClose, onUserAdded }) => {
       onUserAdded({ ...formData, id: uid });
     } catch (err) {
       console.error('❌ Failed to add user:', err);
-      // Provide better error messages if known errors
       if (
         err.message?.includes('PERMISSION_DENIED') ||
         err.message?.toLowerCase().includes('permission')
@@ -140,84 +122,96 @@ const AddUserModal = ({ onClose, onUserAdded }) => {
     }
   };
 
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setAuthReady(true);
+      if (!user) {
+        setError('You are not signed in.');
+      }
+    });
+    return () => unsubscribe();
+  }, []);
+
   return (
     <div className="add-user-modal">
       <div className="modal-content">
         <h2>Add User</h2>
         {error && <div className="error-message">{error}</div>}
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label>First Name *</label>
-            <input
-              name="firstName"
-              value={formData.firstName}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label>Last Name *</label>
-            <input
-              name="lastName"
-              value={formData.lastName}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label>Email *</label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label>Phone</label>
-            <input
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-group">
-            <label>
+        {!authReady ? (
+          <div className="loading-message">Checking authentication…</div>
+        ) : (
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label>First Name *</label>
               <input
-                type="checkbox"
-                name="isSoundlegend"
-                checked={formData.isSoundlegend}
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label>Last Name *</label>
+              <input
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label>Email *</label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label>Phone</label>
+              <input
+                name="phone"
+                value={formData.phone}
                 onChange={handleChange}
               />
-              SoundLegend Access
-            </label>
-          </div>
-          <div className="form-group">
-            <label>Status</label>
-            <select
-              name="status"
-              value={formData.status}
-              onChange={handleChange}
-            >
-              <option value="active">Active</option>
-              <option value="inactive">Inactive</option>
-            </select>
-          </div>
-          <div className="modal-actions">
-            <button type="submit" disabled={loading}>
-              {loading ? 'Adding...' : 'Add User'}
-            </button>
-            <button type="button" onClick={onClose}>
-              Cancel
-            </button>
-          </div>
-        </form>
-
+            </div>
+            <div className="form-group">
+              <label>
+                <input
+                  type="checkbox"
+                  name="isSoundlegend"
+                  checked={formData.isSoundlegend}
+                  onChange={handleChange}
+                />
+                SoundLegend Access
+              </label>
+            </div>
+            <div className="form-group">
+              <label>Status</label>
+              <select
+                name="status"
+                value={formData.status}
+                onChange={handleChange}
+              >
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+              </select>
+            </div>
+            <div className="modal-actions">
+              <button type="submit" disabled={loading}>
+                {loading ? 'Adding...' : 'Add User'}
+              </button>
+              <button type="button" onClick={onClose}>
+                Cancel
+              </button>
+            </div>
+          </form>
+        )}
         {passwordNoticeVisible && (
           <div className="password-popup">
-            <strong>Important:</strong> Save this password to share with the
-            user:
+            <strong>Important:</strong> Save this password to share with the user:
             <div className="password-popup-display">
               <code>{generatedPassword}</code>
               <button
