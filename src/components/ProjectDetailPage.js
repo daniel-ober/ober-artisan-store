@@ -310,7 +310,7 @@ const ProjectDetailPage = () => {
           <p>
             You’re viewing your custom SoundLegend drum build in progress. This
             page is read-only. Questions? Contact us at{' '}
-            <a href="mailto:support@oberdrums.com">support@oberdrums.com</a>.
+            <a href="mailto:support@oberdrums.com">soundlegend@oberartisandrums.com</a>.
           </p>
         </div>
       )}
