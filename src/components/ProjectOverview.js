@@ -47,6 +47,32 @@ const ProjectOverview = ({
     'Other',
   ];
 
+  const handleDeleteFile = (sectionKey, index) => {
+    const file = uploadedFiles[sectionKey]?.[index];
+    if (!file || !file.url) return;
+
+    const confirm = window.confirm(
+      'Are you sure you want to delete this file?'
+    );
+    if (!confirm) return;
+
+    const updatedSection = [...uploadedFiles[sectionKey]];
+    updatedSection.splice(index, 1);
+
+    const updatedAll = {
+      ...uploadedFiles,
+      [sectionKey]: updatedSection,
+    };
+
+    setUploadedFiles(updatedAll);
+
+    updateDoc(doc(db, 'projects', editableData.id), {
+      [`attachments.${sectionKey}`]: updatedSection,
+    }).catch((err) =>
+      console.error('❌ Failed to delete file from Firestore:', err)
+    );
+  };
+
   const [selectedCategory, setSelectedCategory] = useState(fileCategories[0]);
 
   const getDateInputValue = (val) => {
@@ -61,7 +87,7 @@ const ProjectOverview = ({
       else d = new Date(val);
 
       if (isNaN(d)) return '';
-      return d.toISOString().split('T')[0]; // returns YYYY-MM-DD
+      return d.toISOString().split('T')[0];
     } catch {
       return '';
     }
@@ -73,10 +99,8 @@ const ProjectOverview = ({
     let date;
 
     if (value.toDate) {
-      // Firestore Timestamp
       date = value.toDate();
     } else if (value.seconds) {
-      // Firestore Timestamp (alternate)
       date = new Date(value.seconds * 1000);
     } else if (typeof value === 'string') {
       const parsed = new Date(value);
@@ -88,7 +112,6 @@ const ProjectOverview = ({
       return 'N/A';
     }
 
-    // ✅ Local browser timezone rendering
     return date.toLocaleDateString(undefined, {
       year: 'numeric',
       month: 'short',
@@ -260,6 +283,21 @@ const ProjectOverview = ({
     );
   };
 
+  const regroupFilesByCategory = (allFiles) => {
+    const grouped = {};
+
+    Object.entries(allFiles || {}).forEach(([key, fileArray]) => {
+      (fileArray || []).forEach((file) => {
+        const category = file?.category || key || 'other';
+        if (!grouped[category]) grouped[category] = [];
+        grouped[category].push(file);
+      });
+    });
+
+    return grouped;
+  };
+
+  const groupedFiles = regroupFilesByCategory(uploadedFiles);
   return (
     <div className="admin-project-overview-content">
       <div className="admin-project-title">Project Details</div>
@@ -559,18 +597,25 @@ const ProjectOverview = ({
             )}
           </div>
 
-          {Object.entries(uploadedFiles).map(([sectionKey, fileArray]) =>
+          {Object.entries(groupedFiles).map(([sectionKey, fileArray]) =>
             fileArray?.length > 0 ? (
               <div key={sectionKey}>
-                <h4>{sectionKey.replace(/_/g, ' ').toUpperCase()}</h4>
+                <h4>
+                  {sectionKey
+                    .replace(/_/g, ' ')
+                    .replace(/\b\w/g, (c) => c.toUpperCase())}
+                </h4>
                 <div className="file-preview-grid">
                   {fileArray.map((file, i) => {
                     const url =
-                      typeof file === 'string' ? file : file?.url || '';
+                      file?.url || (typeof file === 'string' ? file : '');
                     const hidden = file.hidden ?? true;
                     const category = file.category || sectionKey || 'other';
 
-                    const fileType = url.split('.').pop().toLowerCase();
+                    const filename = decodeURIComponent(
+  url.split('/').pop().split('?')[0].split('%2F').pop()
+);
+const fileType = filename.split('.').pop().toLowerCase();
                     const isImage = [
                       'jpg',
                       'jpeg',
@@ -581,20 +626,31 @@ const ProjectOverview = ({
                     const isPDF = fileType === 'pdf';
                     const isAudio = ['mp3', 'wav', 'ogg'].includes(fileType);
                     const isVideo = ['mp4', 'webm', 'mov'].includes(fileType);
-                    const filename = decodeURIComponent(
-                      url.split('/').pop().split('?')[0].split('%2F').pop()
-                    );
 
                     const updateFile = (updates) => {
-                      const newFiles = [...fileArray];
-                      newFiles[i] = { ...newFiles[i], ...updates };
-                      setUploadedFiles((prev) => ({
-                        ...prev,
-                        [sectionKey]: newFiles,
-                      }));
+                      const updatedFile = { ...file, ...updates };
+                      const updatedArray = [...fileArray];
+                      updatedArray[i] = updatedFile;
+
+                      const updatedAll = {
+                        ...groupedFiles,
+                        [sectionKey]: updatedArray,
+                      };
+
+                      // Reconstruct back to Firestore-compatible structure
+                      const flattened = Object.values(updatedAll).flat();
+                      const groupedForFirestore = {};
+                      flattened.forEach((f) => {
+                        const cat = f.category || 'other';
+                        if (!groupedForFirestore[cat])
+                          groupedForFirestore[cat] = [];
+                        groupedForFirestore[cat].push(f);
+                      });
+
+                      setUploadedFiles(groupedForFirestore);
 
                       updateDoc(doc(db, 'projects', editableData.id), {
-                        [`attachments.${sectionKey}`]: newFiles,
+                        attachments: groupedForFirestore,
                       }).catch((err) =>
                         console.error('❌ Firestore update failed:', err)
                       );
@@ -607,10 +663,7 @@ const ProjectOverview = ({
                           style={{ cursor: 'pointer' }}
                           onClick={() => {
                             setIsPreviewLoaded(false);
-                            const filename = url.split('/').pop().split('?')[0];
-                            const ext = filename.includes('.')
-                              ? filename.split('.').pop().toLowerCase()
-                              : '';
+                            const ext = url.split('.').pop().toLowerCase();
                             setModalPreview({ url, ext });
                           }}
                         >
@@ -655,7 +708,9 @@ const ProjectOverview = ({
                             <select
                               value={category}
                               onChange={(e) =>
-                                updateFile({ category: e.target.value })
+                                updateFile({
+                                  category: e.target.value,
+                                })
                               }
                             >
                               {fileCategories.map((cat) => (
@@ -678,6 +733,21 @@ const ProjectOverview = ({
                             />
                             Visible to Customer
                           </label>
+                          <button
+                            className="delete-file-btn"
+                            onClick={() => handleDeleteFile(sectionKey, i)}
+                            style={{
+                              marginLeft: '1rem',
+                              background: 'transparent',
+                              border: '1px solid #aa3333',
+                              color: '#ff6666',
+                              padding: '4px 8px',
+                              borderRadius: '4px',
+                              cursor: 'pointer',
+                            }}
+                          >
+                            Delete
+                          </button>
                         </div>
                       </div>
                     );
@@ -688,99 +758,98 @@ const ProjectOverview = ({
           )}
         </div>
         {modalPreview && (
-  <div
-    className="file-preview-modal"
-    onClick={() => setModalPreview(null)}
-  >
-    <div
-      className="file-preview-modal-content"
-      onClick={(e) => e.stopPropagation()}
-    >
-      <button
-        className="modal-close-button"
-        onClick={() => setModalPreview(null)}
-      >
-        ✕
-      </button>
-      <a
-        href={modalPreview.url}
-        download
-        target="_blank"
-        rel="noopener noreferrer"
-        className="modal-download-button"
-      >
-        ⬇ Download
-      </a>
+          <div
+            className="file-preview-modal"
+            onClick={() => setModalPreview(null)}
+          >
+            <div
+              className="file-preview-modal-content"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                className="modal-close-button"
+                onClick={() => setModalPreview(null)}
+              >
+                ✕
+              </button>
+              <a
+                href={modalPreview.url}
+                download
+                target="_blank"
+                rel="noopener noreferrer"
+                className="modal-download-button"
+              >
+                ⬇ Download
+              </a>
 
-      {!isPreviewLoaded && (
-        <div className="preview-loading-spinner">Loading...</div>
-      )}
+              {!isPreviewLoaded && (
+                <div className="preview-loading-spinner">Loading...</div>
+              )}
 
-      {modalPreview.ext === 'pdf' ? (
-        <iframe
-          src={modalPreview.url}
-          title="PDF Preview"
-          className="file-preview-pdf"
-          style={{
-            visibility: isPreviewLoaded ? 'visible' : 'hidden',
-            opacity: isPreviewLoaded ? 1 : 0,
-            transition: 'opacity 0.4s ease',
-            width: '100%',
-            height: '80vh',
-            border: 'none',
-            borderRadius: '8px'
-          }}
-          onLoad={() => setIsPreviewLoaded(true)}
-        />
-      ) : modalPreview.ext === 'mp4' ||
-        modalPreview.ext === 'webm' ||
-        modalPreview.ext === 'mov' ? (
-        <video
-          controls
-          autoPlay
-          loop
-          className="file-preview-video"
-          style={{
-            visibility: isPreviewLoaded ? 'visible' : 'hidden',
-            opacity: isPreviewLoaded ? 1 : 0,
-            transition: 'opacity 0.4s ease'
-          }}
-          onLoadedData={() => setIsPreviewLoaded(true)}
-        >
-          <source src={modalPreview.url} />
-        </video>
-      ) : modalPreview.ext === 'mp3' ||
-        modalPreview.ext === 'wav' ||
-        modalPreview.ext === 'ogg' ? (
-        <audio
-          controls
-          className="file-preview-audio"
-          style={{
-            visibility: isPreviewLoaded ? 'visible' : 'hidden',
-            opacity: isPreviewLoaded ? 1 : 0,
-            transition: 'opacity 0.4s ease'
-          }}
-          onLoadedData={() => setIsPreviewLoaded(true)}
-        >
-          <source src={modalPreview.url} />
-        </audio>
-      ) : (
-        <img
-          src={modalPreview.url}
-          alt="Preview"
-          className="file-preview-image"
-          style={{
-            visibility: isPreviewLoaded ? 'visible' : 'hidden',
-            opacity: isPreviewLoaded ? 1 : 0,
-            transition: 'opacity 0.4s ease'
-          }}
-          onLoad={() => setIsPreviewLoaded(true)}
-        />
-      )}
-    </div>
-  </div>
-)}
-
+              {modalPreview.ext === 'pdf' ? (
+                <iframe
+                  src={modalPreview.url}
+                  title="PDF Preview"
+                  className="file-preview-pdf"
+                  style={{
+                    visibility: isPreviewLoaded ? 'visible' : 'hidden',
+                    opacity: isPreviewLoaded ? 1 : 0,
+                    transition: 'opacity 0.4s ease',
+                    width: '100%',
+                    height: '80vh',
+                    border: 'none',
+                    borderRadius: '8px',
+                  }}
+                  onLoad={() => setIsPreviewLoaded(true)}
+                />
+              ) : modalPreview.ext === 'mp4' ||
+                modalPreview.ext === 'webm' ||
+                modalPreview.ext === 'mov' ? (
+                <video
+                  controls
+                  autoPlay
+                  loop
+                  className="file-preview-video"
+                  style={{
+                    visibility: isPreviewLoaded ? 'visible' : 'hidden',
+                    opacity: isPreviewLoaded ? 1 : 0,
+                    transition: 'opacity 0.4s ease',
+                  }}
+                  onLoadedData={() => setIsPreviewLoaded(true)}
+                >
+                  <source src={modalPreview.url} />
+                </video>
+              ) : modalPreview.ext === 'mp3' ||
+                modalPreview.ext === 'wav' ||
+                modalPreview.ext === 'ogg' ? (
+                <audio
+                  controls
+                  className="file-preview-audio"
+                  style={{
+                    visibility: isPreviewLoaded ? 'visible' : 'hidden',
+                    opacity: isPreviewLoaded ? 1 : 0,
+                    transition: 'opacity 0.4s ease',
+                  }}
+                  onLoadedData={() => setIsPreviewLoaded(true)}
+                >
+                  <source src={modalPreview.url} />
+                </audio>
+              ) : (
+                <img
+                  src={modalPreview.url}
+                  alt="Preview"
+                  className="file-preview-image"
+                  style={{
+                    visibility: isPreviewLoaded ? 'visible' : 'hidden',
+                    opacity: isPreviewLoaded ? 1 : 0,
+                    transition: 'opacity 0.4s ease',
+                  }}
+                  onLoad={() => setIsPreviewLoaded(true)}
+                />
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
