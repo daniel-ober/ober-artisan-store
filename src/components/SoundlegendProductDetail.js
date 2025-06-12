@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { db } from '../firebaseConfig'; // Firestore config
+import { db } from '../firebaseConfig';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
   Dialog,
@@ -9,19 +9,16 @@ import {
   Button,
   Typography,
 } from '@mui/material';
-import { collection, addDoc, Timestamp } from 'firebase/firestore'; // Firestore methods
+import { collection, addDoc, Timestamp } from 'firebase/firestore';
 import './SoundlegendProductDetail.css';
-import axios from 'axios';
 
 const SoundLegendProductDetail = () => {
-  // User Details
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [open, setOpen] = useState(false);
 
-  // Custom Snare Specifications
   const [size, setSize] = useState('14');
   const [depth, setDepth] = useState('6.5');
   const [shellConstruction, setShellConstruction] = useState('Stave');
@@ -38,59 +35,19 @@ const SoundLegendProductDetail = () => {
       document.querySelector('.soundlegend-product-detail') ||
       document.documentElement ||
       document.body;
-  
     scrollContainer.scrollTo({ top: 0, behavior: 'auto' });
   }, []);
 
-  // 🔽 Add this here
   const handleClose = () => {
     setOpen(false);
-    setTimeout(() => navigate('/artisan-shop'), 200); // slight delay for UI smoothness
-  };
-
-  // Full list of available wood species
-  const woodSpeciesOptions = [
-    'Maple',
-    'Birch',
-    'Walnut',
-    'Mahogany',
-    'Cherry',
-    'Oak',
-    'Bubinga',
-    'Zebrawood',
-    'Padauk',
-    'Ash',
-    'Wenge',
-    'Purpleheart',
-    'Other',
-  ];
-
-  // Snare Bed Depth Descriptions
-  const snareBedDescriptions = {
-    Small:
-      'A shallow snare bed results in more sensitivity and crisp articulation, ideal for jazz and orchestral applications.',
-    Medium:
-      'A balanced snare bed depth provides a blend of sensitivity and projection, making it versatile for multiple styles.',
-    Large:
-      'A deeper snare bed offers enhanced snare response and reduces sympathetic buzz, great for high-energy playing and rimshot-heavy styles.',
+    setTimeout(() => navigate('/artisan-shop'), 200);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-  
+
     try {
-      // ✅ Get token from reCAPTCHA Enterprise
-      const token = await window.grecaptcha.enterprise.execute('6LcneU4rAAAAAFxByZg23EkC0nwO50mdJ-vfeQ3u', { action: 'submit' });
-  
-      // ✅ Verify token with your backend function
-      const verifyResponse = await axios.post('https://api-eef4a3tgna-uc.a.run.app/verifyRecaptcha', { token });  
-      if (!verifyResponse.data.success) {
-        alert('reCAPTCHA verification failed. Please try again.');
-        setIsSubmitting(false);
-        return;
-      }
-  
       const submissionData = {
         firstName,
         lastName,
@@ -105,12 +62,11 @@ const SoundLegendProductDetail = () => {
         status: 'New',
         submittedAt: Timestamp.now(),
       };
-  
+
       await addDoc(collection(db, 'soundlegend_submissions'), submissionData);
       await new Promise((resolve) => setTimeout(resolve, 700));
       setOpen(true);
-  
-      // Reset form
+
       setFirstName('');
       setLastName('');
       setEmail('');
@@ -136,10 +92,8 @@ const SoundLegendProductDetail = () => {
         alt="SOUNDLEGEND Series"
         className="soundlegend-header-image"
       />
-      {/* 🔥 SoundLegend Experience Section */}
-      <div className="soundlegend-product-content">
-        {/* 📌 Left Side: Product Image */}
 
+      <div className="soundlegend-product-content">
         <div className="soundlegend-product-image">
           <img
             src="https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/artisan%2Fsoundlegend%2FIMG_1803.jpeg?alt=media&token=0dd78f95-2101-44e7-b95f-2b7cbe3c01a1"
@@ -156,9 +110,7 @@ const SoundLegendProductDetail = () => {
           <p>
             In a one-on-one collaboration with{' '}
             <strong>Ober Artisan founder, Dan Ober</strong>, you'll design a
-            snare drum that reflects your playing style and sonic identity. From
-            premium wood selections to shell construction and finish, every
-            detail is chosen by you and crafted to perfection.
+            snare drum that reflects your playing style and sonic identity.
           </p>
           <p>
             With high-resolution concept renderings, VIP access to
@@ -179,7 +131,6 @@ const SoundLegendProductDetail = () => {
           </p>
         </div>
 
-        {/* 📌 Right Side: Custom Build Form */}
         <div className="soundlegend-product-options">
           <div className="soundlegend-features">
             <h2>Key Features</h2>
@@ -190,13 +141,11 @@ const SoundLegendProductDetail = () => {
               <li>Behind-the-scenes access</li>
               <li>Limited Edition gift item</li>
               <li>Builds starting at $1250</li>
-
             </ul>
           </div>
 
           <div className="customer-header">Customer Information</div>
           <form onSubmit={handleSubmit}>
-            {/* First Name */}
             <label htmlFor="firstName">First Name</label>
             <input
               type="text"
@@ -206,7 +155,6 @@ const SoundLegendProductDetail = () => {
               required
             />
 
-            {/* Last Name */}
             <label htmlFor="lastName">Last Name</label>
             <input
               type="text"
@@ -216,7 +164,6 @@ const SoundLegendProductDetail = () => {
               required
             />
 
-            {/* Email */}
             <label htmlFor="email">Email</label>
             <input
               type="email"
@@ -226,38 +173,21 @@ const SoundLegendProductDetail = () => {
               required
             />
 
-            {/* Phone Number with Country Flag Selector */}
             <label htmlFor="phone">Phone</label>
             <div className="phone-input-container">
-              {/* <select
-                id="countryCode"
-                value={phone.startsWith("+1") ? "US" : "CA"}
-                onChange={(e) => {
-                  const country = e.target.value;
-                  setPhone(country === "US" ? "+1 " : "+1 ");
-                }}
-                className="country-code-select"
-              >
-                <option value="US">🇺🇸 +1</option>
-                <option value="CA">🇨🇦 +1</option>
-              </select> */}
-
               <input
                 type="tel"
                 id="phone"
-                value={phone.replace('+1 ', '')} // Remove "+1" from display in input field
+                value={phone.replace('+1 ', '')}
                 onChange={(e) => {
-                  let input = e.target.value.replace(/\D/g, ''); // Remove non-numeric characters
-                  if (input.length > 10) input = input.slice(0, 10); // Limit to 10 digits
-
-                  // Format as xxx-xxx-xxxx
+                  let input = e.target.value.replace(/\D/g, '');
+                  if (input.length > 10) input = input.slice(0, 10);
                   if (input.length >= 6) {
                     input = `${input.slice(0, 3)}-${input.slice(3, 6)}-${input.slice(6, 10)}`;
                   } else if (input.length >= 3) {
                     input = `${input.slice(0, 3)}-${input.slice(3)}`;
                   }
-
-                  setPhone('+1 ' + input); // Keep "+1" stored but not displayed
+                  setPhone('+1 ' + input);
                 }}
                 required
                 placeholder="123-456-7890"
@@ -265,113 +195,20 @@ const SoundLegendProductDetail = () => {
             </div>
             <p className="phone-hint">Enter a valid 10-digit phone number.</p>
 
-            {/* <h2>Select Core Build Details</h2> */}
-
-            {/* Snare Size */}
-            {/* <label htmlFor="size">Snare Size (Diameter)</label>
-            <select
-              id="size"
-              value={size}
-              onChange={(e) => setSize(e.target.value)}
-            >
-              {['10', '12', '13', '14', '15'].map((option) => (
-                <option key={option} value={option}>
-                  {option}&quot;
-                </option>
-              ))}
-            </select> */}
-
-            {/* Snare Depth */}
-            {/* <label htmlFor="depth">Depth</label>
-            <select
-              id="depth"
-              value={depth}
-              onChange={(e) => setDepth(e.target.value)}
-            >
-              {[
-                '3.5',
-                '4.0',
-                '4.5',
-                '5.0',
-                '5.5',
-                '6.0',
-                '6.5',
-                '7.0',
-                '7.5',
-                '8.0',
-                'Other',
-              ].map((option) => (
-                <option key={option} value={option}>
-                  {option}&quot;
-                </option>
-              ))}
-            </select> */}
-
-            {/* Shell Construction */}
-            {/* <label htmlFor="shellConstruction">Shell Construction</label>
-            <select
-              id="shellConstruction"
-              value={shellConstruction}
-              onChange={(e) => setShellConstruction(e.target.value)}
-            >
-              {[
-                'Stave',
-                'Steam Bent',
-                'Hybrid FEUZØN (Stave + Steam Bent)',
-              ].map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select> */}
-
-            {/* Wood Species */}
-            {/* <label htmlFor="woodSpecies">Wood Species</label>
-            <select
-              id="woodSpecies"
-              value={woodSpecies}
-              onChange={(e) => setWoodSpecies(e.target.value)}
-            >
-              {woodSpeciesOptions.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select> */}
-
-            {/* Snare Bed Depth */}
-            {/* <label htmlFor="snareBedDepth">Snare Bed Depth</label>
-            <select id="snareBedDepth" value={snareBedDepth} onChange={(e) => setSnareBedDepth(e.target.value)}>
-              {Object.keys(snareBedDescriptions).map((option) => (
-                <option key={option} value={option}>{option}</option>
-              ))}
-            </select>
-            <p className="snare-bed-description">{snareBedDescriptions[snareBedDepth]}</p> */}
-
-            {/* Consultation Date */}
-            {/* <label htmlFor="consultationDate">Book a Free Consultation</label>
-            <input type="text" id="consultationDate" placeholder="Select a date (Placeholder)" value={consultationDate} onChange={(e) => setConsultationDate(e.target.value)} /> */}
-
-            {/* Submit Button */}
             <button type="submit" disabled={isSubmitting}>
-              {isSubmitting
-                ? 'Submitting...'
-                : 'Start Your Custom Snare Journey'}
+              {isSubmitting ? 'Submitting...' : 'Start Your Custom Snare Journey'}
             </button>
           </form>
+
           <Dialog open={open} onClose={handleClose}>
             <DialogTitle>Request Sent</DialogTitle>
             <DialogContent>
               <Typography variant="body1">
-                Thank you for reaching out! We&apos;ll get back to you within
-                1–2 business days. Feel free to explore our other Artisan
-                Products while you wait.
+                Thank you for reaching out! We'll get back to you within 1–2 business days.
               </Typography>
             </DialogContent>
             <DialogActions>
-              <Button onClick={handleClose} color="primary">
-                Continue
-              </Button>
+              <Button onClick={handleClose} color="primary">Continue</Button>
             </DialogActions>
           </Dialog>
         </div>
