@@ -17,6 +17,6 @@ admin
     process.exit(0);
   })
   .catch((error) => {
-    console.error("❌ Error setting custom claims:", error);
+    // console.error("❌ Error setting custom claims:", error);
     process.exit(1);
   });
