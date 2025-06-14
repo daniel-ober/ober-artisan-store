@@ -1,57 +1,57 @@
 // shellThickness.js
 
 const shellThickness = [
-    {
-      thickness: '4mm',
-      soundProfile: {
-        attack: 5,      // Softer attack, less mass for quick energy absorption.
-        sustain: 9,     // Long sustain due to thinner shell resonance.
-        warmth: 9,      // High warmth, focuses on lower frequencies.
-        projection: 5,  // Lower projection, sound disperses quickly.
-        brightness: 7,  // Bright overtones, resonant highs.
-      },
-      frequencyResponse: {
-        low: 0.70,      // Present low-end frequencies with a focus on warmth.
-        lowMid: 0.75,   // Low-mid frequencies resonate well with warmth.
-        mid: 0.80,      // Mid frequencies are clear and full.
-        midHigh: 0.85,  // High-mids have some presence, giving the drum a bright feel.
-        high: 0.90,     // High frequencies are present, providing clear overtones.
-      },
-    },
-    {
-      thickness: '5mm',
-      soundProfile: {
-        attack: 7,      // Moderate attack, good balance of energy transfer.
-        sustain: 8,     // Slightly shorter sustain compared to 4mm.
-        warmth: 8,      // Balanced warmth, retains lower frequency focus.
-        projection: 6,  // Moderate projection, not as powerful as thicker shells.
-        brightness: 8,  // Crisp and clear highs.
-      },
-      frequencyResponse: {
-        low: 0.65,      // Low-end frequencies are present but not overpowering.
-        lowMid: 0.70,   // Low-mid frequencies are well-defined with good balance.
-        mid: 0.75,      // Mids are present, offering a clean, balanced tone.
-        midHigh: 0.80,  // High-mids are pronounced, adding clarity.
-        high: 0.85,     // High frequencies are bright and clear.
-      },
-    },
-    {
-      thickness: '6mm',
-      soundProfile: {
-        attack: 8,      // Stronger attack with enhanced projection.
-        sustain: 7,     // Moderate sustain, more controlled decay.
-        warmth: 8,      // Retains warmth but introduces more clarity.
-        projection: 7,  // Good projection, excellent for live settings.
-        brightness: 7,  // Balanced brightness, not overly sharp.
-      },
-      frequencyResponse: {
-        low: 0.75,      // Low frequencies are more pronounced and full.
-        lowMid: 0.80,   // Low-mid frequencies are solid, adding warmth and body.
-        mid: 0.85,      // Mid-range frequencies are full and defined.
-        midHigh: 0.75,  // High mids are slightly reduced, offering smoothness.
-        high: 0.70,     // High frequencies are present but less sharp.
-      },
-    },
+    // {
+    //   thickness: '4mm',
+    //   soundProfile: {
+    //     attack: 5,      // Softer attack, less mass for quick energy absorption.
+    //     sustain: 9,     // Long sustain due to thinner shell resonance.
+    //     warmth: 9,      // High warmth, focuses on lower frequencies.
+    //     projection: 5,  // Lower projection, sound disperses quickly.
+    //     brightness: 7,  // Bright overtones, resonant highs.
+    //   },
+    //   frequencyResponse: {
+    //     low: 0.70,      // Present low-end frequencies with a focus on warmth.
+    //     lowMid: 0.75,   // Low-mid frequencies resonate well with warmth.
+    //     mid: 0.80,      // Mid frequencies are clear and full.
+    //     midHigh: 0.85,  // High-mids have some presence, giving the drum a bright feel.
+    //     high: 0.90,     // High frequencies are present, providing clear overtones.
+    //   },
+    // },
+    // {
+    //   thickness: '5mm',
+    //   soundProfile: {
+    //     attack: 7,      // Moderate attack, good balance of energy transfer.
+    //     sustain: 8,     // Slightly shorter sustain compared to 4mm.
+    //     warmth: 8,      // Balanced warmth, retains lower frequency focus.
+    //     projection: 6,  // Moderate projection, not as powerful as thicker shells.
+    //     brightness: 8,  // Crisp and clear highs.
+    //   },
+    //   frequencyResponse: {
+    //     low: 0.65,      // Low-end frequencies are present but not overpowering.
+    //     lowMid: 0.70,   // Low-mid frequencies are well-defined with good balance.
+    //     mid: 0.75,      // Mids are present, offering a clean, balanced tone.
+    //     midHigh: 0.80,  // High-mids are pronounced, adding clarity.
+    //     high: 0.85,     // High frequencies are bright and clear.
+    //   },
+    // },
+    // {
+    //   thickness: '6mm',
+    //   soundProfile: {
+    //     attack: 8,      // Stronger attack with enhanced projection.
+    //     sustain: 7,     // Moderate sustain, more controlled decay.
+    //     warmth: 8,      // Retains warmth but introduces more clarity.
+    //     projection: 7,  // Good projection, excellent for live settings.
+    //     brightness: 7,  // Balanced brightness, not overly sharp.
+    //   },
+    //   frequencyResponse: {
+    //     low: 0.75,      // Low frequencies are more pronounced and full.
+    //     lowMid: 0.80,   // Low-mid frequencies are solid, adding warmth and body.
+    //     mid: 0.85,      // Mid-range frequencies are full and defined.
+    //     midHigh: 0.75,  // High mids are slightly reduced, offering smoothness.
+    //     high: 0.70,     // High frequencies are present but less sharp.
+    //   },
+    // },
     {
       thickness: '7mm',
       soundProfile: {
@@ -171,23 +171,23 @@ const shellThickness = [
       high: 0.30,     // Very little high-end presence, focusing on low-mids and low-end.
     },
   },
-  {
-    thickness: '25mm',
-    soundProfile: {
-      attack: 10,     // Maximum attack, highly aggressive and punchy.
-      sustain: 1,     // No sustain, extremely dry sound.
-      warmth: 3,      // Minimal warmth, little resonance.
-      projection: 10, // Extreme projection, best for highly percussive setups.
-      brightness: 2,  // Dark and low-frequency dominant.
-    },
-    frequencyResponse: {
-      low: 1.0,       // Very strong low-end frequencies with intense presence.
-      lowMid: 0.95,   // Low-mid frequencies are extremely present.
-      mid: 0.85,      // Mids are punchy but quick to decay.
-      midHigh: 0.70,  // High mids are present but muted.
-      high: 0.20,     // Very little high-end presence, focusing purely on low-mids and low-end.
-    },
-  },
+  // {
+  //   thickness: '25mm',
+  //   soundProfile: {
+  //     attack: 10,     // Maximum attack, highly aggressive and punchy.
+  //     sustain: 1,     // No sustain, extremely dry sound.
+  //     warmth: 3,      // Minimal warmth, little resonance.
+  //     projection: 10, // Extreme projection, best for highly percussive setups.
+  //     brightness: 2,  // Dark and low-frequency dominant.
+  //   },
+  //   frequencyResponse: {
+  //     low: 1.0,       // Very strong low-end frequencies with intense presence.
+  //     lowMid: 0.95,   // Low-mid frequencies are extremely present.
+  //     mid: 0.85,      // Mids are punchy but quick to decay.
+  //     midHigh: 0.70,  // High mids are present but muted.
+  //     high: 0.20,     // Very little high-end presence, focusing purely on low-mids and low-end.
+  //   },
+  // },
 ];
 
 export default shellThickness;

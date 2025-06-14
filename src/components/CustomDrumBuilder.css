@@ -111,20 +111,134 @@
   }
   
   .randomizer-toggle {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 16px;
+    text-align: center;
+    margin-bottom: 25px;
   }
   
-  .randomizer-toggle button,
-  button[type="button"] {
-    padding: 6px 12px;
-    font-size: 14px;
-    border-radius: 6px;
-    background-color: #00bcd4;
-    color: #000;
+  .randomizer-button {
+    background-color: #2a2a2a;
+    color: #ffffff;
+    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: 10px;
     border: none;
+    font-size: 1rem;
+    transition: all 0.3s ease;
     cursor: pointer;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  }
+  
+  .randomizer-button.engaged {
+    background-color: #00c2df;
+    color: #fff;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+  }
+
+  .randomizer-controls {
+    display: flex;
+    align-items: stretch;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  
+  .randomizer-toggle {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    background-color: #00bcd4;
+    color: white;
+  }
+  
+  .randomizer-toggle.enabled {
+    background-color: #f44336; /* red when enabled to imply power/active */
+    color: white;
+  }
+  
+  .randomize-dice {
+    all: unset; /* wipe inherited button styles safely */
+    font-size: 1.25rem;
+    padding: 10px 12px;
+    color: #fff !important;
+    background-color: transparent !important;
+    border: none !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+  
+  @keyframes wiggle-loop {
+    0%   { transform: rotate(0deg); }
+    10%  { transform: rotate(-10deg); }
+    20%  { transform: rotate(14deg); }
+    30%  { transform: rotate(-8deg); }
+    40%  { transform: rotate(12deg); }
+    50%  { transform: rotate(-15deg); }
+    60%  { transform: rotate(9deg); }
+    70%  { transform: rotate(-6deg); }
+    80%  { transform: rotate(7deg); }
+    90%  { transform: rotate(-4deg); }
+    100% { transform: rotate(0deg); }
+  }
+  
+  .randomize-dice:hover {
+    animation: wiggle-loop 0.8s ease-in-out;
+  }
+  @keyframes spin-fast {
+    0%   { transform: rotate(0deg); }
+    100% { transform: rotate(720deg); } /* 2 full spins */
+  }
+  
+  .randomize-dice.spin {
+    animation: spin-fast 0.35s ease-in-out;
+  }
+  
+  .lock-icon {
+    font-size: 1.25rem;
+    margin-left: 10px;
+    cursor: pointer;
+    user-select: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .additional-toggle {
+    text-align: center;
+    margin-top: 20px;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    gap: 6px;
+  }
+  
+  .additional-toggle-link {
+    font-size: 0.9rem;
+    color: #00bcd4;
+    cursor: pointer;
+    text-decoration: underline dotted;
+    transition: color 0.2s ease;
+  }
+  
+  .additional-toggle-link:hover {
+    color: #03e1ff;
+    text-decoration: underline solid;
+  }
+  
+  .additional-tooltip-icon {
+    font-size: 1rem;
+    color: #888;
+    cursor: default; /* disables the pointer icon */
+    transition: color 0.2s ease;
+  }
+  
+  .additional-tooltip-icon:hover {
+    color: #ccc;
   }
   
   .additional-factors {
@@ -147,62 +261,252 @@
   }
   
   /* Responsive layout */
-  @media (max-width: 768px) {
-    .custom-drum-builder {
-      padding: 20px 10px;
-      background-color: #111;
-      color: #fff;
-    }
+/* Custom Drum Builder – Dark Themed with Mobile Responsiveness */
+
+.custom-drum-builder {
+    padding: 2rem;
+    background-color: #111;
+    color: #fff;
+    min-height: 100vh;
+  }
   
+  h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    color: #fff;
+  }
+  
+  .builder-container {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+  }
+  
+  .chart-container {
+    flex: 1;
+    background-color: #1a1a1a;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.4);
+  }
+  
+  .chart-container h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #fff;
+  }
+  
+  .form-container {
+    flex: 1;
+    background-color: #1a1a1a;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.4);
+    color: #fff;
+  }
+  
+  .form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+  
+  .input-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .form-group select,
+  .form-control {
+    width: 100%;
+    padding: 8px;
+    background: #333;
+    border: 1px solid #555;
+    color: #fff;
+    border-radius: 4px;
+  }
+
+  select:focus,
+.form-control:focus {
+  background-color: #222;
+  color: #fff;
+  border-color: #555;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 188, 212, 0.4); /* Optional: subtle cyan glow */
+}
+  
+  .lock-icon {
+    cursor: pointer;
+    font-size: 1.2rem;
+    margin-left: 0.5rem;
+  }
+  
+  .locked {
+    color: #4caf50;
+  }
+  
+  .unlocked {
+    color: #aaa;
+  }
+  
+  .randomizer-toggle button {
+    background-color: #00bcd4;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  .randomizer-toggle:not(.enabled):hover {
+    background-color: #0097a7;
+  }
+  
+  .randomizer-toggle.enabled:hover {
+    background-color: #d32f2f; /* Slightly darker red on hover */
+  }
+  
+  .view-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .view-btn {
+    padding: 0.5rem 1rem;
+    background-color: #2b2b2b;
+    color: #fff;
+    border: 1px solid #555;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .view-btn.active {
+    background-color: #00bcd4;
+    color: #000;
+    border-color: #00acc1;
+  }
+  
+  .additional-factors {
+    margin-top: 2rem;
+  }
+  
+  .additional-factors h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #fff;
+  }
+  
+  /* Tooltip style if needed */
+  .tooltip-inner {
+    background-color: #333;
+    color: #fff;
+    border-radius: 5px;
+    padding: 0.5rem;
+  }
+
+  select,
+.form-control {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: #222;
+  color: #fff;
+  border: 1px solid #555;
+  border-radius: 4px;
+  padding: 8px;
+}
+
+select:focus,
+.form-control:focus {
+  background-color: #222 !important;
+  color: #fff !important;
+  border: 1px solid #00bcd4 !important;
+  outline: none !important;
+  box-shadow: 0 0 0 2px rgba(0, 188, 212, 0.3);
+}
+
+.secondary-toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.secondary-label {
+  font-weight: 500;
+}
+
+.toggle-switch {
+  width: 36px;
+  height: 20px;
+  background-color: #666;
+  border-radius: 12px;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.toggle-switch.enabled {
+  background-color: #28a745;
+}
+
+.toggle-knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  background-color: #fff;
+  border-radius: 50%;
+  transition: left 0.2s;
+}
+
+.toggle-switch.enabled .toggle-knob {
+  left: 18px;
+}
+
+.tooltip-icon {
+  margin-left: 6px;
+  color: var(--gray-500);
+  cursor: pointer;
+}
+
+  /* Responsive layout adjustments */
+  @media (max-width: 600px) {
     .builder-container {
-      flex-direction: column;
-    }
-  
-    .chart-container,
-    .form-container {
       width: 100%;
-      margin-bottom: 20px;
+      padding: 0 12px;
+      margin: 0 auto;
+      box-sizing: border-box;
     }
   
-    .view-toggle {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 15px;
-    }
-  
-    .view-btn {
-      padding: 8px 12px;
-      font-size: 14px;
-    }
-  
-    .form-group label,
-    .additional-factors label {
-      font-size: 14px;
-    }
-  
-    .input-group {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-  
-    select.form-control {
+    .chart-container {
       width: 100%;
-      margin-right: 10px;
+      max-width: 100%;
+      padding: 16px;
+      box-sizing: border-box;
+      margin: 0 auto;
     }
   
-    .lock-icon {
-      font-size: 18px;
-      padding-left: 10px;
-      cursor: pointer;
+    canvas {
+      width: 100% !important;
+      height: auto !important;
+      max-width: 100% !important;
+      display: block;
+      margin: 0 auto;
     }
   
-    .additional-factors {
-      margin-top: 20px;
-    }
-  
-    .additional-factors h3 {
-      font-size: 16px;
+    .bar-chart {
+      width: 100%;
+      padding: 16px;
+      box-sizing: border-box;
     }
   }

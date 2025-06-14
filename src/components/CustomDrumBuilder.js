@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import SpiderChart from './SpiderChart';
-import BarChart from './BarChart';  // Import BarChart component
-import { Tooltip, Modal, Button } from 'react-bootstrap';  // Added Tooltip and Modal from react-bootstrap
-import FrequencySpectrum from './FrequencySpectrum';  // Import Frequency Spectrum component
+import BarChart from './BarChart'; // Import BarChart component
+import { Tooltip, Modal, Button } from 'react-bootstrap'; // Added Tooltip and Modal from react-bootstrap
+import FrequencySpectrum from './FrequencySpectrum'; // Import Frequency Spectrum component
+import { FaDice } from 'react-icons/fa';
+import { FaQuestionCircle } from 'react-icons/fa';
 
 // Importing data files for dropdowns
 import woodSpecies from '../data/profiles/woodSpecies';
@@ -24,7 +26,7 @@ import sustainValues from '../data/distributions/sustainValues';
 import warmthValues from '../data/distributions/warmthValues';
 import projectionValues from '../data/distributions/projectionValues';
 import brightnessValues from '../data/distributions/brightnessValues';
-import frequencyResponse from '../data/distributions/frequencyResponseValues'; 
+import frequencyResponse from '../data/distributions/frequencyResponseValues';
 
 import './CustomDrumBuilder.css';
 
@@ -32,6 +34,9 @@ const CustomDrumBuilder = () => {
   const [specs, setSpecs] = useState({
     construction: 'Stave',
     species: ['Maple'],
+    secondarySpecies: '',
+    innerSpecies: '',
+    outerSpecies: '',
     width: 14,
     depth: 6.5,
     bearingEdge: '45 Degree',
@@ -50,13 +55,17 @@ const CustomDrumBuilder = () => {
     lowMid: 0,
     mid: 0,
     midHigh: 0,
-    high: 0
+    high: 0,
   });
-  const [viewMode, setViewMode] = useState('spider');  // Default to 'spider' view
+  const [viewMode, setViewMode] = useState('spider'); // Default to 'spider' view
   const [randomizerEnabled, setRandomizerEnabled] = useState(false);
+  const [hasRandomized, setHasRandomized] = useState(false);
   const [lockedFields, setLockedFields] = useState({
     construction: false,
-    species: false,
+    species: false, // for Stave builds
+    innerSpecies: false, // for Feuzon Hybrid
+    outerSpecies: false, // for Feuzon Hybrid
+    secondarySpecies: false, // shared logic (if secondary toggle is enabled)
     width: false,
     depth: false,
     bearingEdge: false,
@@ -70,56 +79,110 @@ const CustomDrumBuilder = () => {
   });
   const [showRandomizerModal, setShowRandomizerModal] = useState(false);
   const [hasSeenModal, setHasSeenModal] = useState(false);
+  const [showAdditional, setShowAdditional] = useState(false);
+  const [enableSecondaryStave, setEnableSecondaryStave] = useState(false);
+
+  const handleRandomizerClick = () => {
+    if (!randomizerEnabled) {
+      setRandomizerEnabled(true);
+      setHasRandomized(false);
+      if (!hasSeenModal) {
+        setShowRandomizerModal(true);
+        setHasSeenModal(true);
+      }
+    } else if (!hasRandomized) {
+      handleRandomizeNow();
+      setHasRandomized(true);
+    } else {
+      setRandomizerEnabled(false);
+      setHasRandomized(false);
+    }
+  };
 
   // Handle dropdown change
   const handleInputChange = (e, specType) => {
     const value = e.target.value;
 
-    // If the spec is 'species' and it's a string, convert it to an array
-    setSpecs((prevSpecs) => ({
-      ...prevSpecs,
-      [specType]: specType === 'species' && !Array.isArray(value) ? [value] : value,
-    }));
+    setSpecs((prevSpecs) => {
+      if (specType === 'species') {
+        return {
+          ...prevSpecs,
+          [specType]: Array.isArray(value) ? value : [value],
+        };
+      } else {
+        return {
+          ...prevSpecs,
+          [specType]: value,
+        };
+      }
+    });
   };
 
   // Map category keys to correct data keys
   const dataKeyForKey = (key) => {
     switch (key) {
-      case 'species': return 'woodSpecies';
-      case 'width': return 'diameter';
-      case 'depth': return 'depth';
-      case 'thickness': return 'thickness';
-      case 'drumheadTension': return 'tension';
-      case 'construction': return 'constructionType';
-      case 'hardwareType': return 'hardware';
-      case 'environmental': return 'factor';
-      default: return key;
+      case 'species':
+        return 'woodSpecies';
+      case 'width':
+        return 'diameter';
+      case 'depth':
+        return 'depth';
+      case 'thickness':
+        return 'thickness';
+      case 'drumheadTension':
+        return 'tension';
+      case 'construction':
+        return 'constructionType';
+      case 'hardwareType':
+        return 'hardware';
+      case 'environmental':
+        return 'factor';
+      default:
+        return key;
     }
   };
 
   // Define categories for the form
   const categories = [
-    { key: 'construction', data: constructionTypes, label: 'Shell Construction' },
-    { key: 'species', data: woodSpecies, label: 'Wood Species' },
-    { key: 'tension', data: drumheadTensions, label: 'Drumhead Tension' },
-    { key: 'drumhead', data: drumheadTypes, label: 'Drumhead Type' },
-    { key: 'bearingEdge', data: bearingEdgesTypes, label: 'Bearing Edge' },
-    { key: 'thickness', data: shellThickness, label: 'Shell Thickness' },
-    { key: 'width', data: shellDiameters, label: 'Width (Diameter)' },
-    { key: 'depth', data: drumDepths, label: 'Depth' },
-    { key: 'finish', data: finishTypes, label: 'Finish Type' },
-    { key: 'hoopType', data: hoopRimTypes, label: 'Hoop Type' },
-    { key: 'hardwareType', data: hardwareTypes, label: 'Hardware Type' },
-    { key: 'environmental', data: environmentalFactors, label: 'Environmental Factors' },
+    {
+      key: 'construction',
+      data: constructionTypes,
+      label: 'Shell Construction',
+    }, // 🔊 structural + resonance backbone
+    { key: 'species', data: woodSpecies, label: 'Wood Species' }, // 🔊 tone color, density
+    { key: 'depth', data: drumDepths, label: 'Depth' }, // 🔊 body, low-end, decay
+    { key: 'width', data: shellDiameters, label: 'Width (Diameter)' }, // 🥁 pitch, tuning range
+    { key: 'thickness', data: shellThickness, label: 'Shell Thickness' }, // 📏 stiffness, projection
+    { key: 'bearingEdge', data: bearingEdgesTypes, label: 'Bearing Edge' }, // 🎯 attack, sensitivity
+    { key: 'tension', data: drumheadTensions, label: 'Drumhead Tension' }, // 🪕 head feel, head resonance
+    { key: 'drumhead', data: drumheadTypes, label: 'Drumhead Type' }, // 🪗 flavor, ring, dampening
+    { key: 'finish', data: finishTypes, label: 'Finish Type' }, // 🎨 minor resonance effect
+    { key: 'hoopType', data: hoopRimTypes, label: 'Hoop Type' }, // ⭕ edge articulation
+    { key: 'hardwareType', data: hardwareTypes, label: 'Hardware Type' }, // 🔩 negligible tonal influence
+    {
+      key: 'environmental',
+      data: environmentalFactors,
+      label: 'Environmental Factors',
+    }, // 🌡️ situational context
   ];
 
   // Calculate weighted profile
   const calculateWeightedProfile = (category, profileValues) => {
-    const attackDist = attackValues.find(d => d.characteristic === category) || { percentage: 0 };
-    const sustainDist = sustainValues.find(d => d.characteristic === category) || { percentage: 0 };
-    const warmthDist = warmthValues.find(d => d.characteristic === category) || { percentage: 0 };
-    const projectionDist = projectionValues.find(d => d.characteristic === category) || { percentage: 0 };
-    const brightnessDist = brightnessValues.find(d => d.characteristic === category) || { percentage: 0 };
+    const attackDist = attackValues.find(
+      (d) => d.characteristic === category
+    ) || { percentage: 0 };
+    const sustainDist = sustainValues.find(
+      (d) => d.characteristic === category
+    ) || { percentage: 0 };
+    const warmthDist = warmthValues.find(
+      (d) => d.characteristic === category
+    ) || { percentage: 0 };
+    const projectionDist = projectionValues.find(
+      (d) => d.characteristic === category
+    ) || { percentage: 0 };
+    const brightnessDist = brightnessValues.find(
+      (d) => d.characteristic === category
+    ) || { percentage: 0 };
 
     return {
       attack: profileValues.attack * (attackDist.percentage / 100),
@@ -132,25 +195,36 @@ const CustomDrumBuilder = () => {
 
   // Main calculation for sound profile
   const calculateSoundProfile = () => {
-    let profile = { attack: 0, sustain: 0, warmth: 0, projection: 0, brightness: 0 };
+    let profile = {
+      attack: 0,
+      sustain: 0,
+      warmth: 0,
+      projection: 0,
+      brightness: 0,
+    };
     let frequencyResponseData = {
       low: 0,
       lowMid: 0,
       mid: 0,
       midHigh: 0,
-      high: 0
+      high: 0,
     };
 
     // console.log("Starting full sound profile calculation...");
 
     // Handle wood species separately
     specs.species.forEach((species) => {
-      const woodData = woodSpecies.find(item => item.woodSpecies.includes(species));
+      const woodData = woodSpecies.find((item) =>
+        item.woodSpecies.includes(species)
+      );
       if (woodData) {
-        const weighted = calculateWeightedProfile('Wood Species', woodData.soundProfile);
+        const weighted = calculateWeightedProfile(
+          'Wood Species',
+          woodData.soundProfile
+        );
         // console.log('Wood Species Contribution:', weighted);
         for (let key in profile) profile[key] += weighted[key];
-        
+
         // Add frequency response for wood species
         if (woodData.frequencyResponse) {
           for (let key in frequencyResponseData) {
@@ -161,13 +235,20 @@ const CustomDrumBuilder = () => {
     });
 
     // Process depth, width, and thickness explicitly
-    const depthData = drumDepths.find(item => item.depth == specs.depth);
-    const widthData = shellDiameters.find(item => item.diameter == specs.width);
-    const thicknessData = shellThickness.find(item => item.thickness == specs.thickness);
+    const depthData = drumDepths.find((item) => item.depth == specs.depth);
+    const widthData = shellDiameters.find(
+      (item) => item.diameter == specs.width
+    );
+    const thicknessData = shellThickness.find(
+      (item) => item.thickness == specs.thickness
+    );
 
     // Add frequency response from drum depth
     if (depthData) {
-      const weightedDepth = calculateWeightedProfile('Depth', depthData.soundProfile);
+      const weightedDepth = calculateWeightedProfile(
+        'Depth',
+        depthData.soundProfile
+      );
       // console.log('Depth Contribution:', weightedDepth);
       for (let key in profile) profile[key] += weightedDepth[key];
 
@@ -180,7 +261,10 @@ const CustomDrumBuilder = () => {
 
     // Add frequency response from shell diameter
     if (widthData) {
-      const weightedWidth = calculateWeightedProfile('Width', widthData.soundProfile);
+      const weightedWidth = calculateWeightedProfile(
+        'Width',
+        widthData.soundProfile
+      );
       // console.log('Width Contribution:', weightedWidth);
       for (let key in profile) profile[key] += weightedWidth[key];
 
@@ -193,13 +277,17 @@ const CustomDrumBuilder = () => {
 
     // Add frequency response from shell thickness
     if (thicknessData) {
-      const weightedThickness = calculateWeightedProfile('Shell Thickness', thicknessData.soundProfile);
+      const weightedThickness = calculateWeightedProfile(
+        'Shell Thickness',
+        thicknessData.soundProfile
+      );
       // console.log('Thickness Contribution:', weightedThickness);
       for (let key in profile) profile[key] += weightedThickness[key];
 
       if (thicknessData.frequencyResponse) {
         for (let key in frequencyResponseData) {
-          frequencyResponseData[key] += thicknessData.frequencyResponse[key] || 0;
+          frequencyResponseData[key] +=
+            thicknessData.frequencyResponse[key] || 0;
         }
       }
     }
@@ -207,16 +295,22 @@ const CustomDrumBuilder = () => {
     // Iterate through other categories and add their contributions
     categories.forEach(({ key, data, label }) => {
       if (!['species', 'depth', 'width', 'thickness'].includes(key)) {
-        const itemData = data.find(item => item[dataKeyForKey(key)] === specs[key]);
+        const itemData = data.find(
+          (item) => item[dataKeyForKey(key)] === specs[key]
+        );
         if (itemData) {
-          const weighted = calculateWeightedProfile(label, itemData.soundProfile);
+          const weighted = calculateWeightedProfile(
+            label,
+            itemData.soundProfile
+          );
           // console.log(`${label} Contribution:`, weighted);
           for (let prop in profile) profile[prop] += weighted[prop];
 
           // Add frequency response for each category
           if (itemData.frequencyResponse) {
             for (let key in frequencyResponseData) {
-              frequencyResponseData[key] += itemData.frequencyResponse[key] || 0;
+              frequencyResponseData[key] +=
+                itemData.frequencyResponse[key] || 0;
             }
           }
         }
@@ -225,7 +319,10 @@ const CustomDrumBuilder = () => {
 
     // Normalize or adjust frequency response values for smoother output
     for (let band in frequencyResponseData) {
-      frequencyResponseData[band] = Math.min(Math.max(frequencyResponseData[band] / 10, 0), 1); // Normalize to 0-1 range
+      frequencyResponseData[band] = Math.min(
+        Math.max(frequencyResponseData[band] / 10, 0),
+        1
+      ); // Normalize to 0-1 range
     }
 
     // Normalize frequency response data to ensure they are in the 0-1 range
@@ -235,14 +332,20 @@ const CustomDrumBuilder = () => {
 
       // Normalize to the range of 0 to 1
       for (let key in frequencyResponseData) {
-        frequencyResponseData[key] = (frequencyResponseData[key] - minResponse) / (maxResponse - minResponse);
+        frequencyResponseData[key] =
+          (frequencyResponseData[key] - minResponse) /
+          (maxResponse - minResponse);
       }
 
       // Optional: Smooth out the transitions by applying a simple smoothing function
       const smoothResponse = { ...frequencyResponseData };
       Object.keys(smoothResponse).forEach((key, index, array) => {
         if (index > 0 && index < array.length - 1) {
-          smoothResponse[key] = (frequencyResponseData[key] + frequencyResponseData[array[index - 1]] + frequencyResponseData[array[index + 1]]) / 3;
+          smoothResponse[key] =
+            (frequencyResponseData[key] +
+              frequencyResponseData[array[index - 1]] +
+              frequencyResponseData[array[index + 1]]) /
+            3;
         }
       });
 
@@ -256,7 +359,7 @@ const CustomDrumBuilder = () => {
     // console.log("Final Frequency Response Data:", frequencyResponseData);
 
     setSoundProfile(profile);
-    setFrequencyResponseData(frequencyResponseData);  // Store frequency response data for further use
+    setFrequencyResponseData(frequencyResponseData); // Store frequency response data for further use
   };
 
   useEffect(() => {
@@ -268,7 +371,7 @@ const CustomDrumBuilder = () => {
     setRandomizerEnabled(!randomizerEnabled);
     if (!randomizerEnabled && !hasSeenModal) {
       setShowRandomizerModal(true);
-      setHasSeenModal(true);  // Ensure modal doesn't appear again
+      setHasSeenModal(true); // Ensure modal doesn't appear again
     }
   };
 
@@ -276,20 +379,79 @@ const CustomDrumBuilder = () => {
   const handleRandomizeNow = () => {
     const randomizedSpecs = { ...specs };
 
+    // Randomize all main categories that aren't locked or additional
     categories.forEach(({ key, data }) => {
-      if (!lockedFields[key]) {
+      const isAdditional = [
+        'environmental',
+        'hardwareType',
+        'hoopType',
+        'finish',
+      ].includes(key);
+      if (!lockedFields[key] && !isAdditional) {
         const randomItem = data[Math.floor(Math.random() * data.length)];
         randomizedSpecs[key] = randomItem[dataKeyForKey(key)];
       }
     });
+
+    const isFeuzonHybrid = normalize(specs.construction).includes('feuzon');
+
+    // Randomize Feuzon-specific species if applicable and unlocked
+    if (isFeuzonHybrid) {
+      if (!lockedFields.innerSpecies) {
+        randomizedSpecs.innerSpecies =
+          woodSpecies[
+            Math.floor(Math.random() * woodSpecies.length)
+          ].woodSpecies;
+      }
+      if (!lockedFields.outerSpecies) {
+        randomizedSpecs.outerSpecies =
+          woodSpecies[
+            Math.floor(Math.random() * woodSpecies.length)
+          ].woodSpecies;
+      }
+      if (enableSecondaryStave && !lockedFields.secondarySpecies) {
+        randomizedSpecs.secondarySpecies =
+          woodSpecies[
+            Math.floor(Math.random() * woodSpecies.length)
+          ].woodSpecies;
+      }
+    } else {
+      // Stave construction fallback
+      if (!lockedFields.species) {
+        randomizedSpecs.species = [
+          woodSpecies[Math.floor(Math.random() * woodSpecies.length)]
+            .woodSpecies,
+        ];
+      }
+      if (enableSecondaryStave && !lockedFields.secondarySpecies) {
+        randomizedSpecs.secondarySpecies =
+          woodSpecies[
+            Math.floor(Math.random() * woodSpecies.length)
+          ].woodSpecies;
+      }
+    }
 
     setSpecs(randomizedSpecs);
   };
 
   // Handle Lock/Unlock of Fields
   const toggleLockField = (field) => {
-    setLockedFields(prev => ({ ...prev, [field]: !prev[field] }));
+    setLockedFields((prev) => ({ ...prev, [field]: !prev[field] }));
   };
+
+  const toggleAdditionalFactors = () => {
+    setShowAdditional((prev) => !prev);
+  };
+
+  // Normalize helper (handles Ø, accents, etc.)
+  const normalize = (str) =>
+    str
+      ?.normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '') // remove accents
+      .replace(/[Øø]/g, 'o') // handle special Nordic O
+      .toLowerCase();
+
+  const isFeuzonHybrid = normalize(specs.construction).includes('hybrid');
 
   return (
     <div className="custom-drum-builder">
@@ -297,94 +459,428 @@ const CustomDrumBuilder = () => {
       <div className="builder-container">
         <div className="chart-container">
           <div className="view-toggle">
-            <button className={`view-btn ${viewMode === 'spider' ? 'active' : ''}`} onClick={() => setViewMode('spider')}>
+            <button
+              className={`view-btn ${viewMode === 'spider' ? 'active' : ''}`}
+              onClick={() => setViewMode('spider')}
+            >
               Spider Chart
             </button>
-            <button className={`view-btn ${viewMode === 'bar' ? 'active' : ''}`} onClick={() => setViewMode('bar')}>
+            <button
+              className={`view-btn ${viewMode === 'bar' ? 'active' : ''}`}
+              onClick={() => setViewMode('bar')}
+            >
               Bar Chart
             </button>
           </div>
-          {viewMode === 'spider' && <SpiderChart data={Object.values(soundProfile)} />}
+          {viewMode === 'spider' && (
+            <SpiderChart data={Object.values(soundProfile)} />
+          )}
           {viewMode === 'bar' && <BarChart data={soundProfile} />}
-          <FrequencySpectrum drumSpecs={specs} frequencyResponse={frequencyResponseData} />
+          <FrequencySpectrum
+            drumSpecs={specs}
+            frequencyResponse={frequencyResponseData}
+          />
         </div>
 
         <div className="form-container">
           <form className="drum-builder-form">
-            <div className="randomizer-toggle">
-              <button type="button" onClick={toggleRandomizer}>
-                Randomizer
+            <div className="randomizer-controls">
+              <button
+                type="button"
+                className={`randomizer-toggle ${randomizerEnabled ? 'enabled' : ''}`}
+                onClick={() => setRandomizerEnabled(!randomizerEnabled)}
+              >
+                {randomizerEnabled
+                  ? 'Disable Randomize Tools'
+                  : 'Enable Randomize Tools'}
               </button>
-            </div>
 
-            {randomizerEnabled && (
-              <button type="button" onClick={handleRandomizeNow}>
-                Randomize Now
-              </button>
-            )}
+              {randomizerEnabled && (
+                <button
+                  type="button"
+                  className="randomize-dice"
+                  onClick={handleRandomizeNow}
+                  aria-label="Randomize Now"
+                >
+                  <FaDice />
+                </button>
+              )}
+            </div>
 
             {categories
-              .filter(({ key }) => !['environmental', 'hardwareType', 'hoopType', 'finish'].includes(key))
-              .map(({ key, data, label }) => (
-                <div key={key} className="form-group">
-                  <label htmlFor={key}>{label}</label>
-                  <div className="input-group">
-                    <select
-                      id={key}
-                      value={specs[key]}
-                      onChange={(e) => handleInputChange(e, key)}
-                      className="form-control"
-                      disabled={lockedFields[key] && randomizerEnabled}
-                    >
-                      {Array.isArray(data) && data.map((item, idx) => (
-                        <option key={idx} value={item[dataKeyForKey(key)]}>
-                          {item[dataKeyForKey(key)]}
-                        </option>
-                      ))}
-                    </select>
-                    {randomizerEnabled && (
+              .filter(
+                ({ key }) =>
+                  ![
+                    'environmental',
+                    'hardwareType',
+                    'hoopType',
+                    'finish',
+                  ].includes(key)
+              )
+              .map(({ key, data, label }) => {
+                if (key === 'species') {
+                  if (isFeuzonHybrid) {
+                    return (
                       <div
-                        className={`lock-icon ${lockedFields[key] ? 'locked' : 'unlocked'}`}
-                        onClick={() => toggleLockField(key)}
-                        role="button"
-                        tabIndex="0"
-                        onKeyDown={(e) => {
-                          if (e.key === 'Enter' || e.key === ' ') toggleLockField(key);
-                        }}
+                        key="hybrid-species"
+                        className="form-group hybrid-species-group"
                       >
-                        {lockedFields[key] ? '🔒' : '🔓'}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              ))}
+                        <label htmlFor="innerSpecies">
+                          Primary Wood Species - Inner Staves
+                        </label>
+                        <div className="input-group">
+                          <select
+                            id="innerSpecies"
+                            value={specs.innerSpecies}
+                            onChange={(e) =>
+                              setSpecs((prev) => ({
+                                ...prev,
+                                innerSpecies: e.target.value,
+                              }))
+                            }
+                            className="form-control"
+                            disabled={
+                              lockedFields.innerSpecies && randomizerEnabled
+                            }
+                          >
+                            {woodSpecies.map((item, idx) => (
+                              <option key={idx} value={item.woodSpecies}>
+                                {item.woodSpecies}
+                              </option>
+                            ))}
+                          </select>
+                          {randomizerEnabled && (
+                            <div
+                              className={`lock-icon ${lockedFields.innerSpecies ? 'locked' : 'unlocked'}`}
+                              onClick={() => toggleLockField('innerSpecies')}
+                            >
+                              {lockedFields.innerSpecies ? '🔒' : '🔓'}
+                            </div>
+                          )}
+                        </div>
 
-            <div className="additional-factors">
-              <h3>Additional Factors</h3>
-              <Tooltip id="tooltip-additional-factors" title="These factors affect the overall sound profile but are not considered key factors.">
-                <span>❓</span>
-              </Tooltip>
-              {['environmental', 'hardwareType', 'hoopType', 'finish'].map((key) => (
-                <div key={key} className="form-group">
-                  <label htmlFor={key}>{categories.find((c) => c.key === key).label}</label>
-                  <select
-                    id={key}
-                    value={specs[key]}
-                    onChange={(e) => handleInputChange(e, key)}
-                    className="form-control"
-                    disabled={lockedFields[key] && randomizerEnabled}
-                  >
-                    {categories
-                      .find((c) => c.key === key)
-                      .data.map((item, idx) => (
-                        <option key={idx} value={item[dataKeyForKey(key)]}>
-                          {item[dataKeyForKey(key)]}
-                        </option>
-                      ))}
-                  </select>
-                </div>
-              ))}
+                        <div className="form-group">
+                          <div className="secondary-toggle-row">
+                            <label className="secondary-label">
+                              Secondary Wood Species - Inner Staves (optional)
+                            </label>
+                            <FaQuestionCircle
+                              className="tooltip-icon"
+                              title="Assumes a 50/50 stave split (e.g., 8+8 for a 16-stave shell)."
+                            />
+                            <div
+                              className={`toggle-switch ${enableSecondaryStave ? 'enabled' : ''}`}
+                              onClick={() => {
+                                setEnableSecondaryStave((prev) => {
+                                  const next = !prev;
+                                  if (!next) {
+                                    setSpecs((prevSpecs) => ({
+                                      ...prevSpecs,
+                                      secondarySpecies: '',
+                                    }));
+                                  } else {
+                                    setSpecs((prevSpecs) => ({
+                                      ...prevSpecs,
+                                      secondarySpecies:
+                                        woodSpecies[0].woodSpecies,
+                                    }));
+                                  }
+                                  return next;
+                                });
+                              }}
+                            >
+                              <div className="toggle-knob" />
+                            </div>
+                          </div>
+
+                          <div className="input-group">
+                            <select
+                              id="secondarySpecies"
+                              value={specs.secondarySpecies}
+                              onChange={(e) =>
+                                setSpecs((prev) => ({
+                                  ...prev,
+                                  secondarySpecies: e.target.value,
+                                }))
+                              }
+                              className="form-control"
+                              disabled={
+                                !enableSecondaryStave ||
+                                (lockedFields.secondarySpecies &&
+                                  randomizerEnabled)
+                              }
+                            >
+                              <option value="">— None —</option>
+                              {woodSpecies.map((item, idx) => (
+                                <option key={idx} value={item.woodSpecies}>
+                                  {item.woodSpecies}
+                                </option>
+                              ))}
+                            </select>
+                            {randomizerEnabled && (
+                              <div
+                                className={`lock-icon ${lockedFields.secondarySpecies ? 'locked' : 'unlocked'}`}
+                                onClick={() =>
+                                  toggleLockField('secondarySpecies')
+                                }
+                                role="button"
+                                tabIndex="0"
+                                onKeyDown={(e) => {
+                                  if (e.key === 'Enter' || e.key === ' ')
+                                    toggleLockField('secondarySpecies');
+                                }}
+                              >
+                                {lockedFields.secondarySpecies ? '🔒' : '🔓'}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+
+                        <label htmlFor="outerSpecies">
+                          Exterior Wood Species – Steam Bent
+                        </label>
+                        <div className="input-group">
+                          <select
+                            id="outerSpecies"
+                            value={specs.outerSpecies}
+                            onChange={(e) =>
+                              setSpecs((prev) => ({
+                                ...prev,
+                                outerSpecies: e.target.value,
+                              }))
+                            }
+                            className="form-control"
+                            disabled={
+                              lockedFields.outerSpecies && randomizerEnabled
+                            }
+                          >
+                            {woodSpecies
+                              .filter((item) => {
+                                const name = String(item.woodSpecies || '')
+                                  .trim()
+                                  .toLowerCase();
+                                return ['maple', 'cherry', 'walnut'].includes(
+                                  name
+                                );
+                              })
+                              .map((item, idx) => (
+                                <option key={idx} value={item.woodSpecies}>
+                                  {item.woodSpecies}
+                                </option>
+                              ))}
+                          </select>
+                          {randomizerEnabled && (
+                            <div
+                              className={`lock-icon ${lockedFields.outerSpecies ? 'locked' : 'unlocked'}`}
+                              onClick={() => toggleLockField('outerSpecies')}
+                              role="button"
+                              tabIndex="0"
+                              onKeyDown={(e) => {
+                                if (e.key === 'Enter' || e.key === ' ')
+                                  toggleLockField('outerSpecies');
+                              }}
+                            >
+                              {lockedFields.outerSpecies ? '🔒' : '🔓'}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  } else {
+                    // stave construction
+                    return (
+                      <div key="species" className="form-group">
+                        <label htmlFor="species">Primary Wood Species</label>
+                        <div className="input-group">
+                          <select
+                            id="species"
+                            value={specs.species}
+                            onChange={(e) => handleInputChange(e, 'species')}
+                            className="form-control"
+                            disabled={lockedFields.species && randomizerEnabled}
+                          >
+                            {woodSpecies.map((item, idx) => (
+                              <option key={idx} value={item.woodSpecies}>
+                                {item.woodSpecies}
+                              </option>
+                            ))}
+                          </select>
+                          {randomizerEnabled && (
+                            <div
+                              className={`lock-icon ${lockedFields.species ? 'locked' : 'unlocked'}`}
+                              onClick={() => toggleLockField('species')}
+                              role="button"
+                              tabIndex="0"
+                              onKeyDown={(e) => {
+                                if (e.key === 'Enter' || e.key === ' ')
+                                  toggleLockField('species');
+                              }}
+                            >
+                              {lockedFields.species ? '🔒' : '🔓'}
+                            </div>
+                          )}
+                        </div>
+
+                        <div className="secondary-toggle-row">
+                          <label className="secondary-label">
+                            Secondary Wood Species (optional)
+                          </label>
+                          <FaQuestionCircle
+                            className="tooltip-icon"
+                            title="Assumes a 50/50 stave split (e.g., 8+8 for a 16-stave shell)."
+                          />
+                          <div
+                            className={`toggle-switch ${enableSecondaryStave ? 'enabled' : ''}`}
+                            onClick={() => {
+                              setEnableSecondaryStave((prev) => {
+                                const next = !prev;
+                                setSpecs((prevSpecs) => ({
+                                  ...prevSpecs,
+                                  secondarySpecies: next
+                                    ? woodSpecies[0].woodSpecies
+                                    : '',
+                                }));
+                                return next;
+                              });
+                            }}
+                          >
+                            <div className="toggle-knob" />
+                          </div>
+                        </div>
+
+                        <div className="input-group">
+                          <select
+                            id="secondarySpecies"
+                            value={specs.secondarySpecies}
+                            onChange={(e) =>
+                              setSpecs((prev) => ({
+                                ...prev,
+                                secondarySpecies: e.target.value,
+                              }))
+                            }
+                            className="form-control"
+                            disabled={
+                              !enableSecondaryStave ||
+                              (lockedFields.secondarySpecies &&
+                                randomizerEnabled)
+                            }
+                          >
+                            <option value="">— None —</option>
+                            {woodSpecies.map((item, idx) => (
+                              <option key={idx} value={item.woodSpecies}>
+                                {item.woodSpecies}
+                              </option>
+                            ))}
+                          </select>
+                          {randomizerEnabled && (
+                            <div
+                              className={`lock-icon ${lockedFields.secondarySpecies ? 'locked' : 'unlocked'}`}
+                              onClick={() =>
+                                toggleLockField('secondarySpecies')
+                              }
+                              role="button"
+                              tabIndex="0"
+                              onKeyDown={(e) => {
+                                if (e.key === 'Enter' || e.key === ' ')
+                                  toggleLockField('secondarySpecies');
+                              }}
+                            >
+                              {lockedFields.secondarySpecies ? '🔒' : '🔓'}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  }
+                }
+
+                // all other default category dropdowns
+                return (
+                  <div key={key} className="form-group">
+                    <label htmlFor={key}>{label}</label>
+                    <div className="input-group">
+                      <select
+                        id={key}
+                        value={specs[key]}
+                        onChange={(e) => handleInputChange(e, key)}
+                        className="form-control"
+                        disabled={lockedFields[key] && randomizerEnabled}
+                      >
+                        {data.map((item, idx) => (
+                          <option key={idx} value={item[dataKeyForKey(key)]}>
+                            {item[dataKeyForKey(key)]}
+                          </option>
+                        ))}
+                      </select>
+                      {randomizerEnabled && (
+                        <div
+                          className={`lock-icon ${lockedFields[key] ? 'locked' : 'unlocked'}`}
+                          onClick={() => toggleLockField(key)}
+                          role="button"
+                          tabIndex="0"
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ')
+                              toggleLockField(key);
+                          }}
+                        >
+                          {lockedFields[key] ? '🔒' : '🔓'}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+
+            <div className="additional-toggle">
+              <span
+                className="additional-toggle-link"
+                onClick={toggleAdditionalFactors}
+              >
+                {showAdditional
+                  ? 'Hide less common / less weighted factors'
+                  : 'Show less common / less weighted factors'}
+              </span>
+              <FaQuestionCircle
+                className="additional-tooltip-icon"
+                title="These factors influence tone but are not included in the Randomizer tool. You can manually adjust them to shape your sound further."
+              />
             </div>
+
+            {showAdditional && (
+              <div className="additional-factors">
+                <h3>Additional Factors</h3>
+                <Tooltip
+                  id="tooltip-additional-factors"
+                  title="These factors affect the overall sound profile but are not considered key factors."
+                >
+                  <span>❓</span>
+                </Tooltip>
+
+                {['environmental', 'hardwareType', 'hoopType', 'finish'].map(
+                  (key) => (
+                    <div key={key} className="form-group">
+                      <label htmlFor={key}>
+                        {categories.find((c) => c.key === key).label}
+                      </label>
+                      <select
+                        id={key}
+                        value={specs[key]}
+                        onChange={(e) => handleInputChange(e, key)}
+                        className="form-control"
+                      >
+                        {categories
+                          .find((c) => c.key === key)
+                          .data.map((item, idx) => (
+                            <option key={idx} value={item[dataKeyForKey(key)]}>
+                              {item[dataKeyForKey(key)]}
+                            </option>
+                          ))}
+                      </select>
+                    </div>
+                  )
+                )}
+              </div>
+            )}
           </form>
         </div>
       </div>
