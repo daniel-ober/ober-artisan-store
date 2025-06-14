@@ -50,6 +50,16 @@ const NavBar = () => {
     }
   };
 
+  const filteredLinks = navbarLinks.filter((link) => {
+    const access = link.access || [];
+  
+    if (link.enabled && access.includes('public')) return true;
+    if (user && isAdmin && access.includes('admin')) return true;
+    if (user && isSoundlegend && access.includes('soundlegend')) return true;
+  
+    return false;
+  });
+
   useEffect(() => {
     if (user?.uid) fetchUserProjects();
   }, [user]);
@@ -85,28 +95,8 @@ const NavBar = () => {
         const snapshot = await getDocs(navbarLinksCollection);
         const links = snapshot.docs
           .map((doc) => ({ id: doc.id, ...doc.data() }))
-          .filter((link) => link.enabled)
           .sort((a, b) => a.order - b.order);
-        setNavbarLinks(
-          links.length > 0
-            ? links
-            : [
-                { id: 'home', name: 'home', label: 'Home', order: 0 },
-                {
-                  id: 'products',
-                  name: 'products',
-                  label: 'Products',
-                  order: 1,
-                },
-                { id: 'contact', name: 'contact', label: 'Contact', order: 2 },
-                {
-                  id: 'pre-order',
-                  name: 'pre-order',
-                  label: 'Pre-Order',
-                  order: 3,
-                },
-              ]
-        );
+        setNavbarLinks(links);
       } catch (err) {
         console.error('❌ Navbar fetch error:', err);
       }
@@ -242,7 +232,7 @@ const NavBar = () => {
                 >
                   Home
                 </Link>
-                {navbarLinks
+                {filteredLinks
                   .filter((l) => l.name.toLowerCase() !== 'home')
                   .map((link) => (
                     <Link
@@ -310,7 +300,7 @@ const NavBar = () => {
                 >
                   Home
                 </Link>
-                {navbarLinks
+                {filteredLinks
                   .filter((l) => l.name.toLowerCase() !== 'home')
                   .map((link) => (
                     <Link
@@ -421,7 +411,7 @@ const NavBar = () => {
               >
                 Home
               </Link>
-              {navbarLinks
+              {filteredLinks
                 .filter((l) => l.name.toLowerCase() !== 'home')
                 .map((link) => (
                   <Link

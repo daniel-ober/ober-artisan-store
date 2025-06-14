@@ -149,6 +149,74 @@ h2, h3, h4 {
   padding: 12px 20px;
 }
 
+/* Align restricted link layout to match active layout */
+/* 🔁 3-column layout for restricted links */
+.restricted-layout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f9f9f9;
+  padding: 12px 20px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 12px;
+}
+
+/* Three equal columns */
+.restricted-col {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+/* Label on left */
+.restricted-col.link-label {
+  justify-content: flex-start;
+  font-size: 16px;
+}
+
+/* Checkboxes center aligned */
+.restricted-col.access-wrapper {
+  justify-content: center;
+}
+
+/* Toggle aligned right */
+.restricted-col.toggle-wrapper {
+  justify-content: flex-end;
+}
+
+/* Center checkbox group */
+.access-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+/* Already defined; refine as needed */
+.access-checkbox-group {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.access-checkbox {
+  font-size: 13px;
+  background: #e9eef6;
+  padding: 5px 10px;
+  border-radius: 4px;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  
+}
+
+.access-checkbox input {
+  accent-color: #4CAF50;
+  cursor: pointer;
+}
+
 /* Responsive Styling */
 @media (max-width: 768px) {
   .site-settings-container {

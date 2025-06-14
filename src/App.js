@@ -126,7 +126,13 @@ function App() {
     const link = navbarLinks.find(
       (l) => l.name?.toLowerCase() === linkName.toLowerCase()
     );
-    return link?.enabled || false;
+  
+    if (!link) return false;
+    if (link.enabled && link.access?.includes('public')) return true;
+    if (user && isAdmin && link.access?.includes('admin')) return true;
+    if (user && link.access?.includes('soundlegend')) return true;
+  
+    return false;
   };
 
   if (loading) return <div>Loading...</div>;

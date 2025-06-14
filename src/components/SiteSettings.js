@@ -5,26 +5,34 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Snackbar, Alert } from '@mui/material';
 import './SiteSettings.css';
 
+const ROLES = ['soundlegend', 'admin'];
+
 const SiteSettings = () => {
   const [navbarLinks, setNavbarLinks] = useState([]);
   const [features, setFeatures] = useState({});
-  const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: '',
+    severity: 'success',
+  });
   const [unsavedChanges, setUnsavedChanges] = useState(false);
 
   useEffect(() => {
     const fetchSettings = async () => {
       try {
-        // Fetch navbar links from Firebase
-        const navbarLinksCollection = collection(db, 'settings', 'site', 'navbarLinks');
-        const navbarLinksSnapshot = await getDocs(navbarLinksCollection);
-        const navbarLinks = navbarLinksSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-
-        // Sort navbar links by the 'order' field (only for enabled links)
+        const navbarLinksSnapshot = await getDocs(
+          collection(db, 'settings', 'site', 'navbarLinks')
+        );
+        const navbarLinks = navbarLinksSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          access: ['public'],
+          ...doc.data(),
+        }));
         navbarLinks.sort((a, b) => a.order - b.order);
 
-        // Fetch feature toggles from Firebase
-        const featuresCollection = collection(db, 'settings', 'site', 'features');
-        const featuresSnapshot = await getDocs(featuresCollection);
+        const featuresSnapshot = await getDocs(
+          collection(db, 'settings', 'site', 'features')
+        );
         const featuresData = {};
         featuresSnapshot.forEach((doc) => {
           featuresData[doc.id] = doc.data();
@@ -40,75 +48,93 @@ const SiteSettings = () => {
     fetchSettings();
   }, []);
 
-  const handleToggleFeature = (featureId) => {
-    setFeatures((prev) => ({
-      ...prev,
-      [featureId]: { ...prev[featureId], enabled: !prev[featureId].enabled },
-    }));
+  const handleAccessChange = (id, role) => {
+    setNavbarLinks((prev) =>
+      prev.map((link) =>
+        link.id === id
+          ? {
+              ...link,
+              access: link.access.includes(role)
+                ? link.access.filter((r) => r !== role)
+                : [...link.access, role],
+            }
+          : link
+      )
+    );
     setUnsavedChanges(true);
   };
 
   const handleToggleNavbarLink = (id) => {
-    const updatedLinks = navbarLinks.map((link) =>
-      link.id === id ? { ...link, enabled: !link.enabled } : link
-    );
-    updatedLinks.sort((a, b) => a.order - b.order); // Maintain the correct order for active links
-    setNavbarLinks(updatedLinks);
+    setNavbarLinks((prev) => {
+      const updated = prev.map((link) => {
+        if (link.id === id) {
+          const toggled = !link.enabled;
+          return {
+            ...link,
+            enabled: toggled,
+            access: toggled ? ['public', 'soundlegend', 'admin'] : link.access,
+          };
+        }
+        return link;
+      });
+      updated.sort((a, b) => a.order - b.order);
+      return updated;
+    });
     setUnsavedChanges(true);
   };
 
   const handleDragEnd = (result) => {
     if (!result.destination) return;
-  
-    const activeLinks = navbarLinks.filter((link) => link.enabled);
-    const inactiveLinks = navbarLinks.filter((link) => !link.enabled);
-  
-    // Rearrange active links only
-    const reorderedActive = Array.from(activeLinks);
-    const [moved] = reorderedActive.splice(result.source.index, 1);
-    reorderedActive.splice(result.destination.index, 0, moved);
-  
-    // Rebuild the full navbarLinks array with updated order
-    const newNavbarLinks = [...reorderedActive, ...inactiveLinks].map((link, idx) => ({
+    const active = navbarLinks.filter((l) => l.enabled);
+    const inactive = navbarLinks.filter((l) => !l.enabled);
+    const reordered = [...active];
+    const [moved] = reordered.splice(result.source.index, 1);
+    reordered.splice(result.destination.index, 0, moved);
+    const newLinks = [...reordered, ...inactive].map((link, idx) => ({
       ...link,
       order: idx,
     }));
-  
-    setNavbarLinks(newNavbarLinks);
+    setNavbarLinks(newLinks);
     setUnsavedChanges(true);
   };
 
   const handleSave = async (e) => {
     e.preventDefault();
     try {
-      // Save updated navbar links to Firebase
-      const navbarLinksCollection = collection(db, 'settings', 'site', 'navbarLinks');
+      const navbarRef = collection(db, 'settings', 'site', 'navbarLinks');
       navbarLinks.forEach(async (link) => {
-        const linkRef = doc(navbarLinksCollection, link.id);
-        await updateDoc(linkRef, { enabled: link.enabled, order: navbarLinks.indexOf(link) }); // Save order
+        const linkRef = doc(navbarRef, link.id);
+        await updateDoc(linkRef, {
+          enabled: link.enabled,
+          order: navbarLinks.indexOf(link),
+          access: link.access || ['public'],
+        });
       });
 
-      // Save updated features to Firebase
-      const featuresCollection = collection(db, 'settings', 'site', 'features');
+      const featuresRef = collection(db, 'settings', 'site', 'features');
       Object.entries(features).forEach(async ([key, feature]) => {
-        const featureRef = doc(featuresCollection, key);
-        await updateDoc(featureRef, { enabled: feature.enabled }); // Save feature state
+        const featureRef = doc(featuresRef, key);
+        await updateDoc(featureRef, { enabled: feature.enabled });
       });
 
       setUnsavedChanges(false);
-      setSnackbar({ open: true, message: 'Settings saved successfully!', severity: 'success' });
+      setSnackbar({
+        open: true,
+        message: 'Settings saved successfully!',
+        severity: 'success',
+      });
     } catch (error) {
       console.error('Error saving settings:', error);
-      setSnackbar({ open: true, message: 'Error saving settings.', severity: 'error' });
+      setSnackbar({
+        open: true,
+        message: 'Error saving settings.',
+        severity: 'error',
+      });
     }
   };
 
-  // Separate active and inactive navbar links
-  const activeNavbarLinks = navbarLinks.filter((link) => link.enabled);
-  const inactiveNavbarLinks = navbarLinks.filter((link) => !link.enabled);
-
-  // Sort inactive links alphabetically by label
-  inactiveNavbarLinks.sort((a, b) => a.label.localeCompare(b.label));
+  const activeLinks = navbarLinks.filter((l) => l.enabled);
+  const restrictedLinks = navbarLinks.filter((l) => !l.enabled);
 
   return (
     <div className="site-settings-container">
@@ -119,115 +145,108 @@ const SiteSettings = () => {
           {Object.entries(features).map(([key, feature]) => (
             <div key={key} className="feature-item">
               <span>{feature.label}</span>
-              <label className="toggle-switch" htmlFor={`feature-${key}`} aria-label={`Toggle ${feature.label}`}>
+              <label className="toggle-switch">
                 <input
                   type="checkbox"
                   checked={feature.enabled}
-                  onChange={() => handleToggleFeature(key)}
-                  id={`feature-${key}`}
+                  onChange={() =>
+                    setFeatures((prev) => ({
+                      ...prev,
+                      [key]: { ...feature, enabled: !feature.enabled },
+                    }))
+                  }
                 />
                 <span className="slider"></span>
               </label>
             </div>
           ))}
         </div>
-  
-        <h3>Manage Navbar</h3>
+
+        <h3>Active Navbar Links</h3>
         <DragDropContext onDragEnd={handleDragEnd}>
-          {/* Preview Strip */}
-          <div className="navbar-preview-container">
-            <Droppable droppableId="navbar-preview" direction="horizontal">
-              {(provided) => (
-                <div
-                  className="navbar-preview"
-                  ref={provided.innerRef}
-                  {...provided.droppableProps}
-                >
-                  {activeNavbarLinks.map((link, index) => (
-                    <Draggable key={link.id} draggableId={`preview-${link.id}`} index={index}>
-                      {(provided) => (
-                        <div
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                          className="navbar-preview-item"
-                        >
-                          {link.label}
-                        </div>
-                      )}
-                    </Draggable>
+          <Droppable droppableId="active-navbar-links">
+            {(provided) => (
+              <div
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+                className="navbar-links-list"
+              >
+                {activeLinks.map((link, index) => (
+                  <Draggable key={link.id} draggableId={link.id} index={index}>
+                    {(provided) => (
+                      <div
+                        className="navbar-link-item"
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                      >
+                        <span>{link.label}</span>
+                        <label className="toggle-switch">
+                          <input
+                            type="checkbox"
+                            checked={link.enabled}
+                            onChange={() => handleToggleNavbarLink(link.id)}
+                          />
+                          <span className="slider"></span>
+                        </label>
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
+
+        <h4>Restricted (Admin/SoundLegend Only)</h4>
+        <div className="navbar-links-list">
+          {restrictedLinks.map((link) => (
+            <div key={link.id} className="navbar-link-item restricted-layout">
+              <div className="restricted-col link-label">{link.label}</div>
+              <div className="restricted-col access-wrapper">
+                <div className="access-checkbox-group">
+                  {ROLES.map((role) => (
+                    <label key={role} className="access-checkbox">
+                      <input
+                        type="checkbox"
+                        checked={link.access?.includes(role)}
+                        onChange={() => handleAccessChange(link.id, role)}
+                      />
+                      {role.charAt(0).toUpperCase() + role.slice(1)}
+                    </label>
                   ))}
-                  {provided.placeholder}
                 </div>
-              )}
-            </Droppable>
-          </div>
-  
-          {/* Active/Inactive Lists */}
-          <div className="navbar-links-container">
-            <h4>Active Navbar Links</h4>
-            <Droppable droppableId="active-navbar-links">
-              {(provided) => (
-                <div
-                  className="navbar-links-list"
-                  ref={provided.innerRef}
-                  {...provided.droppableProps}
-                >
-                  {activeNavbarLinks.map((link, index) => (
-                    <Draggable key={link.id} draggableId={link.id} index={index}>
-                      {(provided) => (
-                        <div
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                          className="navbar-link-item"
-                        >
-                          <span>{link.label}</span>
-                          <label className="toggle-switch" htmlFor={`navbar-link-${link.id}`} aria-label={`Toggle ${link.label}`}>
-                            <input
-                              type="checkbox"
-                              checked={link.enabled}
-                              onChange={() => handleToggleNavbarLink(link.id)}
-                              id={`navbar-link-${link.id}`}
-                            />
-                            <span className="slider"></span>
-                          </label>
-                        </div>
-                      )}
-                    </Draggable>
-                  ))}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-  
-            <h4>Inactive Navbar Links</h4>
-            {inactiveNavbarLinks.map((link) => (
-              <div key={link.id} className="navbar-link-item">
-                <span>{link.label}</span>
-                <label className="toggle-switch" htmlFor={`navbar-link-${link.id}`} aria-label={`Toggle ${link.label}`}>
+              </div>
+              <div className="restricted-col toggle-wrapper">
+                <label className="toggle-switch">
                   <input
                     type="checkbox"
                     checked={link.enabled}
                     onChange={() => handleToggleNavbarLink(link.id)}
-                    id={`navbar-link-${link.id}`}
                   />
                   <span className="slider"></span>
                 </label>
               </div>
-            ))}
-          </div>
-        </DragDropContext>
-  
-        <button type="submit" className="settings-save-btn" disabled={!unsavedChanges}>
+            </div>
+          ))}
+        </div>
+
+        <button
+          type="submit"
+          className="settings-save-btn"
+          disabled={!unsavedChanges}
+        >
           Save Changes
         </button>
       </form>
-  
+
       <Snackbar
         open={snackbar.open}
         autoHideDuration={6000}
-        onClose={() => setSnackbar({ open: false, message: '', severity: 'success' })}
+        onClose={() =>
+          setSnackbar({ open: false, message: '', severity: 'success' })
+        }
       >
         <Alert severity={snackbar.severity}>{snackbar.message}</Alert>
       </Snackbar>
