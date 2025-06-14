@@ -228,26 +228,39 @@ const CustomDrumBuilder = () => {
     // console.log("Starting full sound profile calculation...");
 
     // Handle wood species separately
-    specs.species.forEach((species) => {
-      const woodData = woodSpecies.find((item) =>
-        item.woodSpecies.includes(species)
-      );
-      if (woodData) {
-        const weighted = calculateWeightedProfile(
-          'Wood Species',
-          woodData.soundProfile
-        );
-        // console.log('Wood Species Contribution:', weighted);
-        for (let key in profile) profile[key] += weighted[key];
+// 🔄 Determine if hybrid construction is selected
+const isHybrid = normalize(specs.construction).includes('hybrid');
 
-        // Add frequency response for wood species
-        if (woodData.frequencyResponse) {
-          for (let key in frequencyResponseData) {
-            frequencyResponseData[key] += woodData.frequencyResponse[key] || 0;
-          }
-        }
+// ✅ Gather species based on mode
+let speciesToEvaluate = [];
+
+if (isHybrid) {
+  if (specs.innerSpecies) speciesToEvaluate.push(specs.innerSpecies);
+  if (specs.secondarySpecies) speciesToEvaluate.push(specs.secondarySpecies);
+  if (specs.outerSpecies) speciesToEvaluate.push(specs.outerSpecies);
+} else {
+  speciesToEvaluate = specs.species || [];
+}
+
+// ✅ Loop over all selected species
+speciesToEvaluate.forEach((species) => {
+  const woodData = woodSpecies.find((item) =>
+    item.woodSpecies.includes(species)
+  );
+  if (woodData) {
+    const weighted = calculateWeightedProfile(
+      'Wood Species',
+      woodData.soundProfile
+    );
+    for (let key in profile) profile[key] += weighted[key];
+
+    if (woodData.frequencyResponse) {
+      for (let key in frequencyResponseData) {
+        frequencyResponseData[key] += woodData.frequencyResponse[key] || 0;
       }
-    });
+    }
+  }
+});
 
     // Process depth, width, and thickness explicitly
     const depthData = drumDepths.find((item) => item.depth == specs.depth);

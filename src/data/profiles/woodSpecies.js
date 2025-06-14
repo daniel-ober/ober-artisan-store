@@ -291,6 +291,35 @@ const woodSpecies = [
     },
   },
   {
+    woodSpecies: ['Wenge'],
+    soundProfile: {
+      attack: 8,      // Sharp, defined attack—excellent responsiveness.
+      sustain: 8,     // Strong sustain with resonant tap tone.
+      warmth: 7,      // Warm low-mid presence but crisp overall.
+      projection: 8,  // Very good projection, articulate in larger spaces.
+      brightness: 7,  // Bright enough to be clear without harshness.
+    },
+    frequencyResponse: {
+      low: 0.80,      // Robust low-end presence.
+      lowMid: 0.85,   // Rich, emphasized low-mid warmth.
+      mid: 0.80,      // Full-bodied mids with clarity.
+      midHigh: 0.75,  // Clean, defined high-mids.
+      high: 0.75,     // Articulate highs with a sweet tap tone.
+    },
+    physical: {
+      density: 0.87,  // g/cm³ (870 kg/m³)  [oai_citation:0‡prosono-hardwoods.com](https://www.prosono-hardwoods.com/blog/wenge-for-guitar-an-amazing-and-often-overlooked-acoustic-tonewood/?utm_source=chatgpt.com)
+      JankaHardness: 8600,  // lbf 
+      modulusRatio: 17.6,   // E/d from tonewood table 
+    },
+    notes: `
+  - Known for its crystalline "tap-tone" or vitreous ring, similar to Brazilian rosewood  [oai_citation:1‡prosono-hardwoods.com](https://www.prosono-hardwoods.com/blog/wenge-for-guitar-an-amazing-and-often-overlooked-acoustic-tonewood/?utm_source=chatgpt.com).
+  - Offers a balanced blend: strong lows, full middles, crisp highs—excellent projection and clarity  [oai_citation:2‡prosono-hardwoods.com](https://www.prosono-hardwoods.com/blog/wenge-for-guitar-an-amazing-and-often-overlooked-acoustic-tonewood/?utm_source=chatgpt.com).
+  - Structurally brittle and prone to cracking or splintering if mishandled; requires careful bonding and bending  [oai_citation:3‡premierguitar.com](https://www.premierguitar.com/wenge-the-new-brazilian?utm_source=chatgpt.com).
+  - Wilde used in necks and backs/sides by luthiers; dimensionally stable and lighter than maple  [oai_citation:4‡en.wikipedia.org](https://en.wikipedia.org/wiki/Millettia_laurentii?utm_source=chatgpt.com).
+  - Endangered species (IUCN), sometimes called African rosewood; note sanding dust can irritate skin and respiratory system .
+  `,
+  },
+  {
     woodSpecies: ['Walnut'],
     soundProfile: {
       attack: 7,      // Rounded attack with moderate punch.

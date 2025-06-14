@@ -37,7 +37,7 @@ const SpiderChart = ({ data }) => {
         scales: {
           r: {
             beginAtZero: false,
-            suggestedMin: 1,
+            suggestedMin: 4,
             suggestedMax: 10,
             ticks: {
               stepSize: 1,
