@@ -14,7 +14,7 @@ export const backfillOverviewStatus = async () => {
         const rawStatus = data.status || 'New';
         const overviewStatus = getOverviewStatus('soundlegend', rawStatus);
   
-        console.log(`🧪 ${docSnap.id}: status="${rawStatus}" → overview="${overviewStatus}"`);
+        // console.log(`🧪 ${docSnap.id}: status="${rawStatus}" → overview="${overviewStatus}"`);
   
         if (!data.overviewStatus || data.overviewStatus !== overviewStatus) {
           await updateDoc(doc(db, 'soundlegend_submissions', docSnap.id), {
@@ -26,7 +26,7 @@ export const backfillOverviewStatus = async () => {
   
       await Promise.all(promises);
   
-      console.log(`✅ Backfill complete. Updated ${updatedCount} documents.`);
+      // console.log(`✅ Backfill complete. Updated ${updatedCount} documents.`);
     } catch (err) {
       console.error('❌ Backfill failed:', err);
     }

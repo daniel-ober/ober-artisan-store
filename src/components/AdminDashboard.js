@@ -36,7 +36,7 @@ const AdminDashboard = () => {
     const logClaims = (user) => {
       if (user) {
         user.getIdTokenResult().then((idTokenResult) => {
-          console.log('Custom Claims:', idTokenResult.claims);
+          // console.log('Custom Claims:', idTokenResult.claims);
         });
       }
     };

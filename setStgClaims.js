@@ -24,7 +24,7 @@ const setCustomClaims = async () => {
     const updatedUser = await admin.auth().getUser(uid);
     // console.log('Updated user claims:', updatedUser.customClaims);
   } catch (error) {
-    console.error('Error setting custom claims:', error);
+    // console.error('Error setting custom claims:', error);
   }
 };
 
