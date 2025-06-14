@@ -1,12 +1,12 @@
 /* src/components/Contact.css */
 
 /* Container Styling */
-.contact-container {
+.contact-form-container {
   max-width: 800px;
   margin: 40px auto;
   padding: 30px;
   padding-bottom: 40px;
-  background-color: #ffffff;
+  background-color: #000000;
   color: #000000;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   align-items: center;
@@ -19,6 +19,7 @@
 /* Contact Header */
 .contact-header {
   color: #000000;
+  font-family: 'Poppins';
 }
 
 /* Input Fields */
@@ -99,7 +100,7 @@
 
 /* Dark Mode Support */
 @media (prefers-color-scheme: dark) {
-  .contact-container {
+  .contact-form-container {
     background-color: #222 !important;
     color: #ffffff !important;
   }
@@ -147,7 +148,7 @@
 
 /* Responsive Layout */
 @media (max-width: 768px) {
-  .contact-container {
+  .contact-form-container {
     width: 90%;
     margin: 20px auto;
     padding: 20px;
