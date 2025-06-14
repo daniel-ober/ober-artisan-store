@@ -256,7 +256,7 @@
   .additional-factors span {
     margin-left: 8px;
     font-size: 14px;
-    cursor: help;
+    cursor: pointer;
     color: #ccc;
   }
   
@@ -477,6 +477,25 @@ select:focus,
   margin-left: 6px;
   color: var(--gray-500);
   cursor: pointer;
+}
+
+.additional-factors-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.reset-additional-link {
+  font-size: 0.85rem;
+  color: #42aaff;
+  cursor: pointer;
+  text-decoration: underline;
+  margin-left: 1rem;
+}
+
+.reset-additional-link:hover {
+  color: #1e90ff;
 }
 
   /* Responsive layout adjustments */

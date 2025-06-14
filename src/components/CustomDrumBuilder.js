@@ -62,10 +62,7 @@ const CustomDrumBuilder = () => {
   const [hasRandomized, setHasRandomized] = useState(false);
   const [lockedFields, setLockedFields] = useState({
     construction: false,
-    species: false, // for Stave builds
-    innerSpecies: false, // for Feuzon Hybrid
-    outerSpecies: false, // for Feuzon Hybrid
-    secondarySpecies: false, // shared logic (if secondary toggle is enabled)
+    species: false,
     width: false,
     depth: false,
     bearingEdge: false,
@@ -76,11 +73,29 @@ const CustomDrumBuilder = () => {
     hoopType: false,
     hardwareType: false,
     environmental: false,
+    innerSpecies: false, // ✅ must be present
+    outerSpecies: false, // ✅ add this!
+    secondarySpecies: false, // ✅ already needed for toggle
   });
   const [showRandomizerModal, setShowRandomizerModal] = useState(false);
   const [hasSeenModal, setHasSeenModal] = useState(false);
   const [showAdditional, setShowAdditional] = useState(false);
   const [enableSecondaryStave, setEnableSecondaryStave] = useState(false);
+
+  const handleSecondaryToggle = () => {
+    setEnableSecondaryStave((prev) => {
+      const newValue = !prev;
+
+      if (!newValue) {
+        setSpecs((prevSpecs) => ({
+          ...prevSpecs,
+          secondarySpecies: '',
+        }));
+      }
+
+      return newValue;
+    });
+  };
 
   const handleRandomizerClick = () => {
     if (!randomizerEnabled) {
@@ -375,9 +390,41 @@ const CustomDrumBuilder = () => {
     }
   };
 
-  // Handle Randomization
+  const resetAdditionalFactors = () => {
+    setSpecs((prev) => ({
+      ...prev,
+      environmental: 'Average Setting',
+      hardwareType: 'Standard Lugs',
+      hoopType: 'Die-Cast',
+      finish: 'Glossy',
+    }));
+  };
+
+  const getRandomValidWoodSpecies = (filterFn = () => true) => {
+    const list = woodSpecies.filter(
+      (item) => item && item.woodSpecies && filterFn(item)
+    );
+    if (list.length === 0) return '';
+    const selected = list[Math.floor(Math.random() * list.length)];
+    return Array.isArray(selected.woodSpecies)
+      ? selected.woodSpecies[0]
+      : selected.woodSpecies;
+  };
+
   const handleRandomizeNow = () => {
     const randomizedSpecs = { ...specs };
+    const isHybridConstruction = normalize(specs.construction).includes(
+      'hybrid'
+    );
+    randomizedSpecs.innerSpecies = getRandomValidWoodSpecies();
+    randomizedSpecs.secondarySpecies = getRandomValidWoodSpecies();
+    randomizedSpecs.outerSpecies = getRandomValidWoodSpecies(
+      (item) =>
+        ['Maple', 'Cherry', 'Walnut'].includes(item.woodSpecies) &&
+        !(Array.isArray(item.woodSpecies)
+          ? item.woodSpecies.includes(specs.outerSpecies)
+          : item.woodSpecies === specs.outerSpecies)
+    );
 
     // Randomize all main categories that aren't locked or additional
     categories.forEach(({ key, data }) => {
@@ -387,47 +434,117 @@ const CustomDrumBuilder = () => {
         'hoopType',
         'finish',
       ].includes(key);
-      if (!lockedFields[key] && !isAdditional) {
+
+      // ❗️Avoid interfering with hybrid-specific fields
+      if (
+        !lockedFields[key] &&
+        !isAdditional &&
+        key !== 'outerSpecies' && // <== skip this to avoid overriding it
+        key !== 'innerSpecies' &&
+        key !== 'secondarySpecies'
+      ) {
         const randomItem = data[Math.floor(Math.random() * data.length)];
         randomizedSpecs[key] = randomItem[dataKeyForKey(key)];
       }
     });
 
-    const isFeuzonHybrid = normalize(specs.construction).includes('feuzon');
-
-    // Randomize Feuzon-specific species if applicable and unlocked
-    if (isFeuzonHybrid) {
+    if (isHybridConstruction) {
+      // Inner Species (staves)
       if (!lockedFields.innerSpecies) {
-        randomizedSpecs.innerSpecies =
-          woodSpecies[
-            Math.floor(Math.random() * woodSpecies.length)
-          ].woodSpecies;
+        const validSpecies = woodSpecies.filter(
+          (item) => item && item.woodSpecies
+        );
+        if (validSpecies.length > 0) {
+          randomizedSpecs.innerSpecies =
+            validSpecies[
+              Math.floor(Math.random() * validSpecies.length)
+            ].woodSpecies;
+        }
       }
+
+      // Outer Species (steam bent)
       if (!lockedFields.outerSpecies) {
-        randomizedSpecs.outerSpecies =
-          woodSpecies[
-            Math.floor(Math.random() * woodSpecies.length)
-          ].woodSpecies;
+        const allowedExteriorSpecies = ['Maple', 'Cherry', 'Walnut'];
+
+        // Exclude current value so we force a visual change
+        const validOptions = woodSpecies.filter(
+          (item) =>
+            allowedExteriorSpecies.some((allowed) =>
+              Array.isArray(item.woodSpecies)
+                ? item.woodSpecies.includes(allowed)
+                : item.woodSpecies === allowed
+            ) &&
+            !(Array.isArray(item.woodSpecies)
+              ? item.woodSpecies.includes(specs.outerSpecies)
+              : item.woodSpecies === specs.outerSpecies) // exclude current selection
+        );
+
+        // If no other option left, fallback to full list
+        const optionsToUse =
+          validOptions.length > 0
+            ? validOptions
+            : woodSpecies.filter((item) =>
+                allowedExteriorSpecies.some((allowed) =>
+                  Array.isArray(item.woodSpecies)
+                    ? item.woodSpecies.includes(allowed)
+                    : item.woodSpecies === allowed
+                )
+              );
+
+        const safeOptions = optionsToUse.filter(
+          (item) => item && item.woodSpecies
+        );
+        if (safeOptions.length > 0) {
+          randomizedSpecs.outerSpecies =
+            safeOptions[
+              Math.floor(Math.random() * safeOptions.length)
+            ].woodSpecies;
+        }
       }
-      if (enableSecondaryStave && !lockedFields.secondarySpecies) {
-        randomizedSpecs.secondarySpecies =
-          woodSpecies[
-            Math.floor(Math.random() * woodSpecies.length)
-          ].woodSpecies;
+      // Secondary stave species (optional)
+      if (enableSecondaryStave) {
+        if (!lockedFields.secondarySpecies) {
+          const validSecondary = woodSpecies.filter(
+            (item) => item && item.woodSpecies
+          );
+          if (validSecondary.length > 0) {
+            randomizedSpecs.secondarySpecies =
+              validSecondary[Math.floor(Math.random() * validSecondary.length)]
+                .woodSpecies;
+          }
+        } else {
+          // If locked, preserve the existing value
+          randomizedSpecs.secondarySpecies = specs.secondarySpecies;
+        }
       }
     } else {
       // Stave construction fallback
       if (!lockedFields.species) {
-        randomizedSpecs.species = [
-          woodSpecies[Math.floor(Math.random() * woodSpecies.length)]
-            .woodSpecies,
-        ];
+        const validSpecies = woodSpecies.filter(
+          (item) => item && item.woodSpecies
+        );
+        if (validSpecies.length > 0) {
+          randomizedSpecs.species =
+            validSpecies[
+              Math.floor(Math.random() * validSpecies.length)
+            ].woodSpecies;
+        }
       }
-      if (enableSecondaryStave && !lockedFields.secondarySpecies) {
-        randomizedSpecs.secondarySpecies =
-          woodSpecies[
-            Math.floor(Math.random() * woodSpecies.length)
-          ].woodSpecies;
+
+      if (enableSecondaryStave) {
+        if (!lockedFields.secondarySpecies) {
+          const validSecondary = woodSpecies.filter(
+            (item) => item && item.woodSpecies
+          );
+          if (validSecondary.length > 0) {
+            randomizedSpecs.secondarySpecies =
+              validSecondary[Math.floor(Math.random() * validSecondary.length)]
+                .woodSpecies;
+          }
+        } else {
+          // If locked, preserve the existing value
+          randomizedSpecs.secondarySpecies = specs.secondarySpecies;
+        }
       }
     }
 
@@ -450,8 +567,6 @@ const CustomDrumBuilder = () => {
       .replace(/[\u0300-\u036f]/g, '') // remove accents
       .replace(/[Øø]/g, 'o') // handle special Nordic O
       .toLowerCase();
-
-  const isFeuzonHybrid = normalize(specs.construction).includes('hybrid');
 
   return (
     <div className="custom-drum-builder">
@@ -519,7 +634,7 @@ const CustomDrumBuilder = () => {
               )
               .map(({ key, data, label }) => {
                 if (key === 'species') {
-                  if (isFeuzonHybrid) {
+                  if (normalize(specs.construction).includes('hybrid')) {
                     return (
                       <div
                         key="hybrid-species"
@@ -596,7 +711,11 @@ const CustomDrumBuilder = () => {
                           <div className="input-group">
                             <select
                               id="secondarySpecies"
-                              value={specs.secondarySpecies}
+                              value={
+                                enableSecondaryStave
+                                  ? specs.secondarySpecies
+                                  : ''
+                              }
                               onChange={(e) =>
                                 setSpecs((prev) => ({
                                   ...prev,
@@ -751,7 +870,7 @@ const CustomDrumBuilder = () => {
                         <div className="input-group">
                           <select
                             id="secondarySpecies"
-                            value={specs.secondarySpecies}
+                            value={enableSecondaryStave ? specs.secondarySpecies : ''}
                             onChange={(e) =>
                               setSpecs((prev) => ({
                                 ...prev,
@@ -848,7 +967,21 @@ const CustomDrumBuilder = () => {
 
             {showAdditional && (
               <div className="additional-factors">
-                <h3>Additional Factors</h3>
+                <div className="additional-factors-header">
+                  <h3>Additional Factors</h3>
+                  <span
+                    className="reset-additional-link"
+                    onClick={resetAdditionalFactors}
+                    role="button"
+                    tabIndex="0"
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ')
+                        resetAdditionalFactors();
+                    }}
+                  >
+                    Reset Additional Factors
+                  </span>
+                </div>
                 <Tooltip
                   id="tooltip-additional-factors"
                   title="These factors affect the overall sound profile but are not considered key factors."

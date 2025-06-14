@@ -1,6 +1,6 @@
 const finishTypes = [
   {
-    finish: 'Glossy',
+    finish: 'Gloss',
     soundProfile: {
       attack: 7,      // Glossy finishes enhance attack slightly by providing a sharper, more defined sound.
       sustain: 6,     // Slightly increased sustain due to the more resonant surface.
