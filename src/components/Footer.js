@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { DarkModeContext } from '../context/DarkModeContext';
+import { useAuth } from '../context/AuthContext';
 import './Footer.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -10,8 +11,24 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 
 const Footer = ({ navbarLinks = [] }) => {
-  const sortedNavbarLinks = navbarLinks
-    .filter((link) => link.enabled && link.name.toLowerCase() !== 'home')
+  const { user, isAdmin } = useAuth();
+  const isSoundlegend = user?.isSoundlegend || false;
+
+  const filteredLinks = navbarLinks.filter((link) => {
+    const access = link.access || [];
+
+    if (!link.enabled) return false;
+
+    if (!user && access.includes('public')) return true;
+    if (user && isAdmin && access.includes('admin')) return true;
+    if (user && isSoundlegend && access.includes('soundlegend')) return true;
+    if (access.includes('public')) return true;
+
+    return false;
+  });
+
+  const sortedFilteredLinks = [...filteredLinks]
+    .filter((link) => link.name.toLowerCase() !== 'home')
     .sort((a, b) => a.order - b.order);
 
   const { isDarkMode, setIsDarkMode } = useContext(DarkModeContext);
@@ -36,7 +53,6 @@ const Footer = ({ navbarLinks = [] }) => {
     setTimeout(() => {
       const html = document.documentElement;
       const body = document.body;
-  
       html.scrollTop = 0;
       body.scrollTop = 0;
     }, 10);
@@ -51,7 +67,7 @@ const Footer = ({ navbarLinks = [] }) => {
           <li>
             <Link to="/" onClick={handleScrollTop}>Home</Link>
           </li>
-          {sortedNavbarLinks.map((link, index) => (
+          {sortedFilteredLinks.map((link, index) => (
             <li key={index}>
               <Link
                 to={`/${link.name.toLowerCase().replace(/\s+/g, '-')}`}
