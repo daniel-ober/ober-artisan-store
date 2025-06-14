@@ -1,8 +1,13 @@
 .chart-container {
     text-align: center;
-    margin: 40px 0;
     color: #ffffff;
-}
+    margin: 40px auto;
+    padding: 0 20px;
+    max-width: 100%;
+    box-sizing: border-box;
+    background-color: #1a1a1a;
+    overflow-x: hidden;
+  }
 
 canvas {
     max-width: 500px;
@@ -82,7 +87,14 @@ canvas {
 
 /* Responsive Design */
 @media (max-width: 600px) {
-    .definitions {
-        padding: 15px;
+    .chart-container {
+      margin: 20px 10px;
+      padding: 0 10px;
     }
-}
+  
+    canvas {
+      width: 100% !important;
+      height: auto !important;
+      max-width: 100%;
+    }
+  }
