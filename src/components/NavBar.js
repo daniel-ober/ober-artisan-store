@@ -41,7 +41,6 @@ const NavBar = () => {
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         const data = docSnap.data();
-        console.log('✅ SoundLegend user profile:', data); // ✅ add this
         setUserProjects(data.projects || []);
         setIsSoundlegend(!!data.isSoundlegend);
       }
@@ -164,9 +163,9 @@ const NavBar = () => {
   );
 
   const renderSoundLegendTab = () => {
-    console.log('🎯 renderSoundLegendTab called');
-    console.log('🧩 isSoundlegend:', isSoundlegend);
-    console.log('📦 userProjects:', userProjects);
+    // console.log('🎯 renderSoundLegendTab called');
+    // console.log('🧩 isSoundlegend:', isSoundlegend);
+    // console.log('📦 userProjects:', userProjects);
 
     if (!user || !isSoundlegend || userProjects.length === 0) return null;
 
