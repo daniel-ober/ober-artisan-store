@@ -124,11 +124,6 @@ const SoundLegendProductDetail = () => {
           <p>
             <strong>Your Story. Your Sound. Your Legacy.</strong>
           </p>
-          <p>
-            <em>
-              Limited spots available—secure your free consultation today.
-            </em>
-          </p>
         </div>
 
         <div className="soundlegend-product-options">

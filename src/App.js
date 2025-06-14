@@ -153,7 +153,7 @@ function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
           <Route path="/our-craft" element={<OurCraft />} />
           <Route
-            path="/artisan-drums"
+            path="/founders-batch"
             element={<ArtisanDrums isDarkMode={isDarkMode} />}
           />
           <Route path="/cart" element={<Cart />} />
