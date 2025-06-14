@@ -147,7 +147,13 @@
   }
   
   /* Responsive layout */
-  @media (max-width: 960px) {
+  @media (max-width: 768px) {
+    .custom-drum-builder {
+      padding: 20px 10px;
+      background-color: #111;
+      color: #fff;
+    }
+  
     .builder-container {
       flex-direction: column;
     }
@@ -155,5 +161,48 @@
     .chart-container,
     .form-container {
       width: 100%;
+      margin-bottom: 20px;
+    }
+  
+    .view-toggle {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+  
+    .view-btn {
+      padding: 8px 12px;
+      font-size: 14px;
+    }
+  
+    .form-group label,
+    .additional-factors label {
+      font-size: 14px;
+    }
+  
+    .input-group {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  
+    select.form-control {
+      width: 100%;
+      margin-right: 10px;
+    }
+  
+    .lock-icon {
+      font-size: 18px;
+      padding-left: 10px;
+      cursor: pointer;
+    }
+  
+    .additional-factors {
+      margin-top: 20px;
+    }
+  
+    .additional-factors h3 {
+      font-size: 16px;
     }
   }
