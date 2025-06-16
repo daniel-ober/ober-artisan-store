@@ -1,0 +1,55 @@
+/* src/components/admin/ArtisanTools.css */
+
+.artisan-tools-container {
+    padding: 32px;
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .artisan-tools-container h2 {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    text-align: center;
+  }
+  
+  .tool-cards-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+  }
+  
+  .tool-card {
+    background: #f9f9f9;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid #eee;
+  }
+  
+  .tool-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .tool-icon {
+    font-size: 36px;
+    display: block;
+    margin-bottom: 12px;
+  }
+  
+  .tool-card h3 {
+    font-size: 20px;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  
+  .tool-card p {
+    font-size: 14px;
+    color: #666;
+  }
