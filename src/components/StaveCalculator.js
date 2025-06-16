@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import './StaveCalculator.css';
 import StaveDiagram from './StaveDiagram';
 
-const commonStaves = [10, 16, 20, 6, 8, 12, 24, 32, 36, 40];
-const commonDiameters = [14, 13, 12, 8, 10, 15, 16, 18, 20, 22, 24];
+const commonStaves = [10, 16, 20];
+const commonDiameters = [12, 13, 14, 15];
 const units = ['in', 'mm', 'cm', 'fraction'];
 
 const StaveCalculator = () => {
@@ -66,7 +66,7 @@ const StaveCalculator = () => {
       <div className="input-grid">
         <label>
           Number of Staves
-          <select className="select-field" value={staveCount} onChange={(e) => setStaveCount(e.target.value)}>
+          <select className="calculator-select-field" value={staveCount} onChange={(e) => setStaveCount(e.target.value)}>
             <option value="">Select</option>
             {commonStaves.map((count) => (
               <option key={count} value={count}>{count}</option>
@@ -75,7 +75,7 @@ const StaveCalculator = () => {
         </label>
         <label>
           Drum Diameter (in)
-          <select className="select-field" value={diameter} onChange={(e) => setDiameter(e.target.value)}>
+          <select className="calculator-select-field" value={diameter} onChange={(e) => setDiameter(e.target.value)}>
             <option value="">Select</option>
             {commonDiameters.map((dia) => (
               <option key={dia} value={dia}>{dia}"</option>

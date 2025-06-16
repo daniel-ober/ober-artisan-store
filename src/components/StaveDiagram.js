@@ -54,18 +54,21 @@ const StaveDiagram = ({ diameter, staveCount, thickness, buffer = 0.125 }) => {
 
   return (
     <div className="diagram-wrapper">
-      <div className="diagram-controls">
-        {Object.entries(visible).map(([key, val]) => (
-          <label key={key}>
-            <input
-              type="checkbox"
-              checked={val}
-              onChange={() => setVisible((v) => ({ ...v, [key]: !v[key] }))}
-            />{' '}
-            {key.replace(/([A-Z])/g, ' $1')}
-          </label>
-        ))}
-      </div>
+     <div className="diagram-controls-wrap">
+    <div className="diagram-controls">
+      {Object.entries(visible).map(([key, val]) => (
+        <label key={key}>
+          <input
+            type="checkbox"
+            className="stave-diagram-filters"
+            checked={val}
+            onChange={() => setVisible((v) => ({ ...v, [key]: !v[key] }))}
+          />
+          {key.replace(/([A-Z])/g, ' $1')}
+        </label>
+      ))}
+    </div>
+  </div>
 
       <svg width="300" height="300" viewBox="0 0 300 300" className="stave-svg">
         {visible.preMillOuter && (
