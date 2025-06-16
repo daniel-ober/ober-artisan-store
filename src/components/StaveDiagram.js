@@ -13,16 +13,31 @@ const StaveDiagram = ({ diameter, staveCount, thickness, buffer = 0.125 }) => {
   const scale = 10;
   const angle = (2 * Math.PI) / staveCount;
 
-  // Pre-mill outer and inner radii
-  const preMillOuterRadius = ((diameter + buffer) * scale) / 2;
+  // === PRE-MILL DIMENSIONS ===
+  const bufferedDiameter = diameter + buffer;
+  const preMillOuterRadius = (bufferedDiameter * scale) / 2;
   const preMillInnerRadius = preMillOuterRadius - thickness * scale;
 
-  // Post-mill outer: INSCRIBED in pre-mill outer polygon
-  const postMillOuterRadius = preMillOuterRadius * Math.cos(Math.PI / staveCount);
+  // === POST-MILL OUTER AND INNER RADII ===
+  const postMillOuterRadius = ((diameter - 0.125) * scale) / 2;
+  const postMillInnerDiameter = diameter - 0.125 - 2 * thickness + 0.25;
+  const postMillInnerRadius = (postMillInnerDiameter * scale) / 2;
 
-  // Post-mill inner: CIRCUMSCRIBED to pre-mill inner polygon
-  const postMillInnerRadius = preMillInnerRadius / Math.cos(Math.PI / staveCount);
+  const finalShellThickness = (
+    (postMillOuterRadius - postMillInnerRadius) /
+    scale
+  ).toFixed(3);
 
+  // === FACE WIDTHS ===
+  const outerFaceWidth = (
+    (diameter + buffer) *
+    Math.tan(Math.PI / staveCount)
+  ).toFixed(3);
+  const innerFaceWidth = (
+    postMillInnerDiameter * Math.tan(Math.PI / staveCount)
+  ).toFixed(3);
+
+  // === POLYGON POINT GENERATION ===
   const createPolygonPoints = (radius) =>
     Array.from({ length: staveCount }, (_, i) => {
       const theta = i * angle;
@@ -36,9 +51,6 @@ const StaveDiagram = ({ diameter, staveCount, thickness, buffer = 0.125 }) => {
   const preMillInnerPoints = createPolygonPoints(preMillInnerRadius);
 
   const miter = (180 / staveCount).toFixed(2);
-  const faceWidth = (
-    2 * (diameter / 2 - thickness) * Math.sin(Math.PI / staveCount)
-  ).toFixed(3);
 
   return (
     <div className="diagram-wrapper">
@@ -48,9 +60,7 @@ const StaveDiagram = ({ diameter, staveCount, thickness, buffer = 0.125 }) => {
             <input
               type="checkbox"
               checked={val}
-              onChange={() =>
-                setVisible((v) => ({ ...v, [key]: !v[key] }))
-              }
+              onChange={() => setVisible((v) => ({ ...v, [key]: !v[key] }))}
             />{' '}
             {key.replace(/([A-Z])/g, ' $1')}
           </label>
@@ -71,9 +81,8 @@ const StaveDiagram = ({ diameter, staveCount, thickness, buffer = 0.125 }) => {
           <polygon
             points={preMillInnerPoints.map((p) => `${p.x},${p.y}`).join(' ')}
             fill="none"
-            stroke="blue"
-            strokeDasharray="4 2"
-            strokeWidth="1.2"
+            stroke="#000"
+            strokeWidth="1.4"
           />
         )}
 
@@ -83,8 +92,9 @@ const StaveDiagram = ({ diameter, staveCount, thickness, buffer = 0.125 }) => {
             cy={center}
             r={postMillOuterRadius}
             fill="none"
-            stroke="#333"
-            strokeWidth="1.2"
+            stroke="red"
+            strokeDasharray="4,2"
+            strokeWidth="1.4"
           />
         )}
 
@@ -120,17 +130,59 @@ const StaveDiagram = ({ diameter, staveCount, thickness, buffer = 0.125 }) => {
           </>
         )}
 
-        <line x1={center} y1={center - 100} x2={center} y2={center + 100} stroke="#ccc" strokeWidth="1" />
-        <line x1={center - 100} y1={center} x2={center + 100} y2={center} stroke="#ccc" strokeWidth="1" />
+        {/* Reference Lines */}
+        <line
+          x1={center}
+          y1={center - 100}
+          x2={center}
+          y2={center + 100}
+          stroke="#ccc"
+          strokeWidth="1"
+        />
+        <line
+          x1={center - 100}
+          y1={center}
+          x2={center + 100}
+          y2={center}
+          stroke="#ccc"
+          strokeWidth="1"
+        />
 
-        <text x={center - 25} y={center - preMillOuterRadius - 10} fontSize="12" fill="#000">
-          {(diameter + buffer).toFixed(3)}"
+        {/* Text Labels */}
+        <text
+          x={center - 25}
+          y={center - preMillOuterRadius - 10}
+          fontSize="12"
+          fill="#000"
+        >
+          {bufferedDiameter.toFixed(3)}"
         </text>
-        <text x={center + 10} y={center + 55} fontSize="10" fill="#666">
+        <text x={center + 10} y={center + 50} fontSize="10" fill="#666">
           Miter Angle: {miter}°
         </text>
-        <text x={center - 45} y={center + preMillOuterRadius + 25} fontSize="10" fill="#666">
-          Inner Face Width: {faceWidth}"
+        <text
+          x={center - 50}
+          y={center + preMillOuterRadius + 15}
+          fontSize="10"
+          fill="#666"
+        >
+          Outer Face Width: {outerFaceWidth}"
+        </text>
+        <text
+          x={center - 50}
+          y={center + preMillOuterRadius + 30}
+          fontSize="10"
+          fill="#666"
+        >
+          Inner Face Width: {innerFaceWidth}"
+        </text>
+        <text
+          x={center - 50}
+          y={center + preMillOuterRadius + 45}
+          fontSize="10"
+          fill="#666"
+        >
+          Final Shell Thickness: {finalShellThickness}"
         </text>
         <text x={center - 60} y={290} fontSize="10" fill="#888">
           * Diagram not to scale
