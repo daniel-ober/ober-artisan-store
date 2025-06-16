@@ -1,0 +1,180 @@
+/* src/components/admin/StaveCalculator.css */
+
+.stave-calculator {
+    max-width: 800px;
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 32px;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  }
+  
+  .stave-calculator h2 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 24px;
+    font-weight: 600;
+  }
+  
+  .input-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+  
+  .input-grid label {
+    display: flex;
+    flex-direction: column;
+    font-weight: 500;
+    font-size: 14px;
+  }
+  
+  .input-grid input {
+    padding: 10px;
+    margin-top: 8px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+  }
+  
+  button {
+    display: block;
+    margin: 0 auto;
+    padding: 12px 28px;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: #111827;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  
+  button:hover {
+    background-color: #1f2937;
+  }
+  
+  .results-panel {
+    margin-top: 32px;
+    padding: 24px;
+    background-color: #f4f4f4;
+    border-radius: 12px;
+  }
+  
+  .results-panel h3 {
+    font-size: 20px;
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+  
+  .results-panel p {
+    font-size: 16px;
+    margin: 8px 0;
+  }
+
+  .stave-diagram-wrapper {
+    margin-top: 24px;
+    text-align: center;
+  }
+  
+  .stave-diagram {
+    width: 220px;
+    height: 220px;
+    border: 1px solid #e0e0e0;
+    background: #fafafa;
+    border-radius: 12px;
+    padding: 8px;
+  }
+
+  .results-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  
+  .unit-selector {
+    font-size: 14px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background: #f5f5f5;
+  }
+
+  .unit-toggle {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .unit-toggle button {
+    background: #e5e5e5;
+    border: none;
+    padding: 6px 10px;
+    font-size: 13px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  
+  .unit-toggle button.active {
+    background: #111827;
+    color: white;
+  }
+
+  .select-field {
+    padding: 10px;
+    margin-top: 8px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    color: #111;
+    appearance: none;
+  }
+  
+  .select-field:focus {
+    outline: none;
+    border-color: #888;
+  }
+  
+  .calculate-button {
+    display: block;
+    margin: 0 auto;
+    padding: 12px 28px;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: #111827;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  
+  .calculate-button:hover {
+    background-color: #1f2937;
+  }
+  
+  .unit-toggle {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .unit-button {
+    background: #668fed;
+    border: none;
+    padding: 6px 10px;
+    font-size: 13px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    color: #111111;
+  }
+  
+  .unit-button.active {
+    background: #111827;
+    color: white;
+  }

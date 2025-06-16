@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { collection, onSnapshot, query } from 'firebase/firestore';
 import { backfillOverviewStatus } from '../utils/backfillOverviewStatus';
+import { FaToolbox } from 'react-icons/fa';
 import {
   FaUsers, FaDrum, FaShoppingCart, FaBox, FaHammer, FaHeadset,
   FaCog, FaImages, FaStar, FaRegChartBar, FaFlask, FaExclamationTriangle,
@@ -18,6 +19,7 @@ import ManageElixirBatches from './ManageElixirBatches';
 import ManageSoundlegendRequests from './ManageSoundlegendRequests';
 import AdminOverview from './AdminOverview';
 import AdminRiskNotifications from './AdminRiskNotifications';
+import ArtisanTools from './ArtisanTools';
 import { db } from '../firebaseConfig';
 import './AdminDashboard.css';
 
@@ -145,6 +147,7 @@ const AdminDashboard = () => {
       case 'siteSettings': return <SiteSettings />;
       case 'manageSoundlegendRequests': return <ManageSoundlegendRequests />;
       case 'manageRiskAlerts': return <AdminRiskNotifications />;
+      case 'artisanTools': return <ArtisanTools />;
       default: return (
         <AdminOverview
           notifications={notifications}
@@ -171,6 +174,7 @@ const AdminDashboard = () => {
           { name: 'Manage Gallery', icon: FaImages, stateKey: 'manageGallery' },
           { name: 'Elixir Batches', icon: FaFlask, stateKey: 'manageElixirBatches' },
           { name: 'Risk Alerts', icon: FaExclamationTriangle, stateKey: 'manageRiskAlerts' },
+          { name: 'Artisan Tools', icon: FaHammer, stateKey: 'artisanTools' },
           { name: 'Site Settings', icon: FaCog, stateKey: 'siteSettings' },
         ].map(({ name, icon: Icon, stateKey }) => (
           <div

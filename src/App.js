@@ -16,6 +16,7 @@ import ScrollToTop from './components/ScrollToTop';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import Home from './components/Home';
+import StaveCalculator from './components/StaveCalculator';
 import Products from './components/Products';
 import ProductDetail from './components/ProductDetail';
 import PreOrderPage from './components/ArtisanShop';
@@ -126,12 +127,12 @@ function App() {
     const link = navbarLinks.find(
       (l) => l.name?.toLowerCase() === linkName.toLowerCase()
     );
-  
+
     if (!link) return false;
     if (link.enabled && link.access?.includes('public')) return true;
     if (user && isAdmin && link.access?.includes('admin')) return true;
     if (user && link.access?.includes('soundlegend')) return true;
-  
+
     return false;
   };
 
@@ -139,7 +140,7 @@ function App() {
 
   return (
     <DarkModeProvider>
-     <ScrollToTop />
+      <ScrollToTop />
       <Toaster position="bottom-center" />
       <div className="app-container">
         <NavBar
@@ -191,6 +192,10 @@ function App() {
           <Route
             path="/gallery"
             element={isLinkEnabled('gallery') ? <Gallery /> : <NotFound />}
+          />
+          <Route
+            path="/admin/artisan-tools/stave-calculator"
+            element={<PrivateRoute element={<StaveCalculator />} adminOnly />}
           />
           <Route
             path="/custom-shop"
