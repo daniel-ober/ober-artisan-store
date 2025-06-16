@@ -1,3 +1,4 @@
+// StaveCalculator.js
 import React, { useState } from 'react';
 import './StaveCalculator.css';
 import StaveDiagram from './StaveDiagram';
@@ -28,26 +29,20 @@ const StaveCalculator = () => {
     const angle = 360 / n;
     const miterAngle = angle / 2;
 
-    const preMillOuterRadius = preMillDiameter / 2;
-    const preMillInnerRadius = preMillOuterRadius - t;
+    const outerFaceWidth = preMillDiameter * Math.tan(Math.PI / n);
+    const innerFaceWidth = (preMillDiameter - 2 * t) * Math.tan(Math.PI / n);
 
-    const outerChord = 2 * preMillOuterRadius * Math.sin(Math.PI / n);
-    const innerChord = 2 * preMillInnerRadius * Math.sin(Math.PI / n);
-
-    // Post-mill logic
-    const staveFlatInnerRadius = preMillOuterRadius - t;
-    const inscribedInnerRadius = staveFlatInnerRadius * Math.cos(Math.PI / n);
-    const roundedOuterRadius = postMillDiameter / 2;
-    const finalShellThickness = roundedOuterRadius - inscribedInnerRadius;
+    const postMillInnerDiameter = (preMillDiameter - 2 * t) / Math.cos(Math.PI / n);
+    const shellThickness = (postMillDiameter - postMillInnerDiameter) / 2;
 
     setResults({
       miterAngle: miterAngle.toFixed(3),
-      faceWidth: outerChord.toFixed(3),
-      innerWidth: innerChord.toFixed(3),
+      faceWidth: outerFaceWidth.toFixed(3),
+      innerWidth: innerFaceWidth.toFixed(3),
       bufferedDiameter: preMillDiameter.toFixed(3),
       postMillDiameter: postMillDiameter.toFixed(3),
       postMillCircumference: postMillCircumference.toFixed(3),
-      finalShellThickness: finalShellThickness.toFixed(3),
+      finalShellThickness: shellThickness.toFixed(3),
     });
   };
 
@@ -71,46 +66,28 @@ const StaveCalculator = () => {
       <div className="input-grid">
         <label>
           Number of Staves
-          <select
-            className="select-field"
-            value={staveCount}
-            onChange={(e) => setStaveCount(e.target.value)}
-          >
+          <select className="select-field" value={staveCount} onChange={(e) => setStaveCount(e.target.value)}>
             <option value="">Select</option>
             {commonStaves.map((count) => (
-              <option key={count} value={count}>
-                {count}
-              </option>
+              <option key={count} value={count}>{count}</option>
             ))}
           </select>
         </label>
         <label>
           Drum Diameter (in)
-          <select
-            className="select-field"
-            value={diameter}
-            onChange={(e) => setDiameter(e.target.value)}
-          >
+          <select className="select-field" value={diameter} onChange={(e) => setDiameter(e.target.value)}>
             <option value="">Select</option>
             {commonDiameters.map((dia) => (
-              <option key={dia} value={dia}>
-                {dia}"
-              </option>
+              <option key={dia} value={dia}>{dia}"</option>
             ))}
           </select>
         </label>
         <label>
           Shell Thickness (in)
-          <input
-            type="number"
-            value={thickness}
-            onChange={(e) => setThickness(e.target.value)}
-          />
+          <input type="number" value={thickness} onChange={(e) => setThickness(e.target.value)} />
         </label>
       </div>
-      <button className="calculate-button" onClick={calculate}>
-        Calculate
-      </button>
+      <button className="calculate-button" onClick={calculate}>Calculate</button>
 
       {results && (
         <div className="results-panel">
@@ -122,37 +99,17 @@ const StaveCalculator = () => {
                   key={u}
                   className={`unit-button ${unit === u ? 'active' : ''}`}
                   onClick={() => setUnit(u)}
-                >
-                  {u}
-                </button>
+                >{u}</button>
               ))}
             </div>
           </div>
-          <p>
-            <strong>Miter Angle:</strong> {results.miterAngle}°
-          </p>
-          <p>
-            <strong>Outer Face Width:</strong> {convert(results.faceWidth)}
-          </p>
-          <p>
-            <strong>Inner Face Width:</strong> {convert(results.innerWidth)}
-          </p>
-          <p>
-            <strong>Buffered Diameter Used:</strong>{' '}
-            {convert(results.bufferedDiameter)}
-          </p>
-          <p>
-            <strong>Post-Mill Diameter:</strong>{' '}
-            {convert(results.postMillDiameter)}
-          </p>
-          <p>
-            <strong>Target Circumference (Post-Mill):</strong>{' '}
-            {convert(results.postMillCircumference)}
-          </p>
-          <p>
-            <strong>Final Shell Thickness (Post-Mill):</strong>{' '}
-            {convert(results.finalShellThickness)}
-          </p>
+          <p><strong>Miter Angle:</strong> {results.miterAngle}°</p>
+          <p><strong>Outer Face Width:</strong> {convert(results.faceWidth)}</p>
+          <p><strong>Inner Face Width:</strong> {convert(results.innerWidth)}</p>
+          <p><strong>Buffered Diameter Used:</strong> {convert(results.bufferedDiameter)}</p>
+          <p><strong>Post-Mill Diameter:</strong> {convert(results.postMillDiameter)}</p>
+          <p><strong>Target Circumference (Post-Mill):</strong> {convert(results.postMillCircumference)}</p>
+          <p><strong>Final Shell Thickness (Post-Mill):</strong> {convert(results.finalShellThickness)}</p>
 
           <StaveDiagram
             diameter={parseFloat(diameter)}
