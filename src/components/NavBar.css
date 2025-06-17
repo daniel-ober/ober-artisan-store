@@ -36,15 +36,18 @@
 }
 
 .nav-link {
-  color: #ffffff;
+  color: #222;
   text-decoration: none;
   font-size: 16px;
   padding: 15px 12px;
   cursor: pointer;
+  font-weight: 600;
+  text-transform: uppercase;
+  /* text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.375); */
 }
 
 .nav-link:hover {
-  color: hsl(46, 100%, 89%);
+  /* color: hsl(46, 100%, 89%); */
   border-radius: 10px;
   transition: ease-in-out 0.3s;
 }
@@ -304,8 +307,8 @@ body.dark .navbar-sticky-mini {
 
   .navbar-links.open {
     padding: 32px 0 48px;
-  max-height: 1000px;
-  gap: 16px;
+    max-height: 1000px;
+    gap: 16px;
   }
 
   .navbar-links .nav-link {
