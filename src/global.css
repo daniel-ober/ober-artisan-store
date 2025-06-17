@@ -121,7 +121,7 @@ body.light .navbar-links:not(.sticky-dropdown) .nav-link {
 }
 
 body.dark .navbar-links .nav-link {
-  color: rgba(193, 193, 193, 0.923) !important;
+  color: rgba(245, 245, 245, 0.857) !important;
   letter-spacing: 2px;
 }
 
