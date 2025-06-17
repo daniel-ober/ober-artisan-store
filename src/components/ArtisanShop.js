@@ -54,7 +54,7 @@ const ArtisanShop = () => {
     <div className="pre-order-page">
       <h1 className="pre-order-page-header">Explore the Artisan Shop</h1>
       <p className="subtitle">
-        Reserve your handcrafted drum or specialty item — limited availability.
+        Order your handcrafted drum or specialty item — limited availability.
       </p>
 
       <div className="pre-order-items">
