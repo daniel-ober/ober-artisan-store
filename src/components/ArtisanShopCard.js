@@ -10,13 +10,13 @@ const ArtisanShopCard = ({ product }) => {
   if (product.currentQuantity === 0) {
     buttonText = 'Out of Stock';
   } else if (product.id === 'founders-toast') {
-    buttonText = 'Order Now';
+    buttonText = 'Order Today';
   } else if (product.id === 'heritage' || product.id === 'feuzon') {
-    buttonText = 'Pre-Order Now';
+    buttonText = 'Order Today';
   } else if (product.id === 'soundlegend') {
-    buttonText = 'Learn More';
+    buttonText = 'Start Your Build';
   } else {
-    buttonText = 'Pre-Order Now';
+    buttonText = 'Pre-Order Yours';
   }
 
   let buttonClass;
