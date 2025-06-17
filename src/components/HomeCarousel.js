@@ -47,13 +47,6 @@ const HomeCarousel = () => {
   const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
-    slides.forEach((slide) => {
-      const img = new Image();
-      img.src = slide.background;
-    });
-  }, []);
-
-  useEffect(() => {
     if (isPaused) return;
     const interval = setInterval(() => {
       setAnimating(true);
@@ -63,7 +56,7 @@ const HomeCarousel = () => {
       }, 400);
     }, 6000);
     return () => clearInterval(interval);
-  }, [isPaused]);
+  }, [current, isPaused]);
 
   const goToNextSlide = () => {
     setAnimating(true);
@@ -83,77 +76,68 @@ const HomeCarousel = () => {
 
   const togglePaused = () => setIsPaused((prev) => !prev);
 
-  const { title, subtitle, buttonText, link, background } = slides[current];
-
   return (
-    <div className="home-carousel-wrapper">
+<div className="home-carousel-wrapper">
+  {/* 🔒 LCP-locking <img> visible on initial load only */}
+  {current === 0 && (
+    <img
+      src={slides[0].background}
+      alt=""
+      className="carousel-lcp-img"
+      loading="eager"
+      decoding="async"
+    />
+  )}
+
+  <div className="home-carousel">
+    {slides.map((slide, index) => (
       <div
-        className="home-carousel"
-        style={{ backgroundImage: `url(${background})` }}
+        key={slide.title}
+        className={`carousel-slide ${index === current ? 'active' : 'inactive'}`}
+        style={{ backgroundImage: `url(${slide.background})` }}
       >
         <div className="carousel-overlay">
-          <h1
-            className={`carousel-text ${animating ? 'fade-out delay-1' : 'fade-in delay-1'}`}
-          >
-            {title}
+          <h1 className={`carousel-text ${animating ? 'fade-out delay-1' : 'fade-in delay-1'}`}>
+            {slide.title}
           </h1>
-          <p
-            className={`carousel-text ${animating ? 'fade-out delay-2' : 'fade-in delay-2'}`}
-          >
-            {subtitle}
+          <p className={`carousel-text ${animating ? 'fade-out delay-2' : 'fade-in delay-2'}`}>
+            {slide.subtitle}
           </p>
           <Link
-            to={link}
+            to={slide.link}
             onClick={() => {
               if (analytics) {
-                logEvent(analytics, 'click_carousel_slide', { slide: title });
+                logEvent(analytics, 'click_carousel_slide', { slide: slide.title });
               }
             }}
           >
-            <button
-              className={`carousel-text ${animating ? 'fade-out delay-3' : 'fade-in delay-3'}`}
-            >
-              {buttonText}
+            <button className={`carousel-text ${animating ? 'fade-out delay-3' : 'fade-in delay-3'}`}>
+              {slide.buttonText}
             </button>
           </Link>
         </div>
-
-        {/* Dots in original position */}
-        <div className="carousel-dots">
-          {slides.map((_, index) => (
-            <span
-              key={index}
-              className={`dot ${index === current ? 'active' : ''}`}
-              onClick={() => setCurrent(index)}
-            ></span>
-          ))}
-        </div>
-
-        {/* Navigation + pause below */}
-        <div className="carousel-nav">
-          <button className="carousel-control-button" onClick={goToPrevSlide}>
-            ‹
-          </button>
-          <button className="carousel-control-button" onClick={togglePaused}>
-            {isPaused ? '▶' : '❚❚'}
-          </button>
-          <button className="carousel-control-button" onClick={goToNextSlide}>
-            ›
-          </button>
-        </div>
-
-        <div style={{ display: 'none' }}>
-          {slides.map((slide) => (
-            <img
-              key={slide.background}
-              src={slide.background}
-              alt=""
-              loading="eager"
-            />
-          ))}
-        </div>
       </div>
+    ))}
+
+    <div className="carousel-dots">
+      {slides.map((_, index) => (
+        <span
+          key={index}
+          className={`dot ${index === current ? 'active' : ''}`}
+          onClick={() => setCurrent(index)}
+        ></span>
+      ))}
     </div>
+
+    <div className="carousel-nav">
+      <button className="carousel-control-button" onClick={goToPrevSlide}>‹</button>
+      <button className="carousel-control-button" onClick={togglePaused}>
+        {isPaused ? '▶' : '❚❚'}
+      </button>
+      <button className="carousel-control-button" onClick={goToNextSlide}>›</button>
+    </div>
+  </div>
+</div>
   );
 };
 
