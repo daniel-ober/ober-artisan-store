@@ -116,11 +116,13 @@ body.dark .about-page .section-content p {
 }
 
 body.light .navbar-links:not(.sticky-dropdown) .nav-link {
-  color: black !important;
+  color: rgb(14, 14, 14) !important;
+  letter-spacing: 2px;
 }
 
 body.dark .navbar-links .nav-link {
-  color: white !important;
+  color: rgba(193, 193, 193, 0.923) !important;
+  letter-spacing: 2px;
 }
 
 body.light .navbar-links.open .nav-link {

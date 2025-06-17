@@ -64,21 +64,21 @@ const StaveCalculator = () => {
     <div className="stave-calculator">
       <h2>Stave Drum Calculator</h2>
       <div className="input-grid">
+      <label>
+          Drum Diameter (in)
+          <select className="calculator-select-field" value={diameter} onChange={(e) => setDiameter(e.target.value)}>
+            <option value="">Select</option>
+            {commonDiameters.map((dia) => (
+              <option key={dia} value={dia}>{dia}"</option>
+            ))}
+          </select>
+        </label>
         <label>
           Number of Staves
           <select className="calculator-select-field" value={staveCount} onChange={(e) => setStaveCount(e.target.value)}>
             <option value="">Select</option>
             {commonStaves.map((count) => (
               <option key={count} value={count}>{count}</option>
-            ))}
-          </select>
-        </label>
-        <label>
-          Drum Diameter (in)
-          <select className="calculator-select-field" value={diameter} onChange={(e) => setDiameter(e.target.value)}>
-            <option value="">Select</option>
-            {commonDiameters.map((dia) => (
-              <option key={dia} value={dia}>{dia}"</option>
             ))}
           </select>
         </label>
