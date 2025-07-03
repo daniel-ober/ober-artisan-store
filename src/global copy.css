@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  overflow-y: auto;
+}
+
+body {
+  font-family:
+    'Poppins',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    'Roboto',
+    'Oxygen',
+    'Ubuntu',
+    'Cantarell',
+    'Fira Sans',
+    'Droid Sans',
+    'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition:
+    background-color 0.4s ease-in-out,
+    color 0.4s ease-in-out;
+}
+
+/* Scroll snapping only when enabled manually */
+body.scroll-snap-enabled {
+  scroll-snap-type: y mandatory;
+}
+
+/* Light Mode */
+body.light {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+body.light .background-overlay {
+  background-color: rgba(255, 255, 255, 0.85);
+}
+
+body.light .bottom-section,
+body.light .bottom-section a,
+body.light .bottom-section p,
+body.light .footer,
+body.light .footer a {
+  color: white;
+}
+
+body.light .pre-order-item {
+  background-color: rgba(255, 255, 255, 0.95);
+  color: black;
+  border-radius: 8px;
+  padding: 15px;
+}
+
+body.light .pre-order-item h2,
+body.light .pre-order-item p,
+body.light .pre-order-item .delivery,
+body.light .pre-order-item .price {
+  color: black;
+}
+
+body.light .pre-order-item button,
+body.light .pre-order-item .pre-order-button {
+  background-color: #b65454;
+  color: white;
+  border: 2px solid #9e4545;
+}
+
+body.light .pre-order-item button:hover,
+body.light .pre-order-item .pre-order-button:hover {
+  background-color: #9e4545;
+}
+
+/* Cart + Theme Buttons */
+body.light .cart-table button,
+body.light .cart-table .quantity-adjust {
+  color: white;
+}
+
+.theme-toggle-button,
+.footer-theme-toggle {
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease-in-out,
+    transform 0.2s ease-in-out;
+}
+
+.theme-toggle-button:hover,
+.footer-theme-toggle:hover {
+  transform: scale(1.05);
+}
+
+/* Dark Mode */
+body.dark {
+  background-color: #111111;
+}
+
+body.dark .about-page .section-content h2,
+body.dark .about-page .section-content h3,
+body.dark .about-page .section-content p {
+  color: white;
+}
+
+body.light .navbar-links:not(.sticky-dropdown) .nav-link {
+  color: rgb(14, 14, 14) !important;
+  text-shadow: -3px 2px 25px rgba(0, 0, 0, 0.245) !important;
+}
+
+body.dark .navbar-links .nav-link {
+  color: rgba(237, 237, 237, 0.848) !important;
+  text-shadow: -3px 2px 25px rgba(126, 126, 126, 0.92) !important;
+}
+
+body.light .navbar-links.open .nav-link {
+  color: white !important;
+}
+
+body.menu-open {
+  overflow: hidden;
+  height: 100vh;
+}
+
+/* ✅ MOBILE DROPDOWN: force light mode to use white links on dark background */
+@media (max-width: 768px) {
+  body.light .navbar-links.open .nav-link,
+  body.dark .navbar-links.open .nav-link {
+    color: white !important;
+  }
+
+  .navbar-links.open .nav-link:hover {
+    color: hsl(46, 100%, 89%) !important;
+  }
+}
+
+@media screen and (max-width: 1024px) and (orientation: landscape) {
+  body.light .navbar-links .nav-link,
+  body.light .navbar-links {
+    color: white !important;
+  }
+
+  body.light .navbar-links .nav-link:hover,
+  body.light .navbar-links .nav-link.active {
+    color: hsl(46, 100%, 89%) !important;
+  }
+}

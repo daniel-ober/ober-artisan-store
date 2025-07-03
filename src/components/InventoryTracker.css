@@ -1,0 +1,33 @@
+/* /src/components/Admin/InventoryTracker.css */
+
+.inventory-tracker {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .inventory-tracker table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .inventory-tracker th, .inventory-tracker td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .inventory-tracker th {
+    background-color: #f4f4f4;
+  }
+  
+  .inventory-tracker input {
+    margin: 5px;
+    padding: 5px;
+  }
+  
+  .inventory-tracker button {
+    margin: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }

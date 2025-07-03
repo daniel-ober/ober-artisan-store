@@ -123,11 +123,12 @@ export const STATUS_SCHEMA = {
   
   export const getOrderStatusFromItems = (items) => {
     const statuses = items.map((item) => item.status || 'Preparing');
-    if (statuses.length === 0) return 'No Items';
+    if (statuses.length === 0) return 'new';
   
     const allIn = (targets) => statuses.every((s) => targets.includes(s));
     const some = (target) => statuses.includes(target);
   
+    if (allIn(['Preparing'])) return 'new';
     if (allIn(['Shipped', 'Delivered'])) return 'Fulfilled';
     if (statuses.every((s) => s === 'Canceled')) return 'Canceled';
     if (some('Shipped') || some('Delivered')) return 'Partially Fulfilled';
@@ -135,5 +136,6 @@ export const STATUS_SCHEMA = {
     if (some('Ready for Shipment')) return 'Ready for Shipment';
     if (some('In Production')) return 'In Production';
     if (some('Packaged')) return 'Packaged';
-    return 'order started';
+  
+    return 'new';
   };
