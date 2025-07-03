@@ -290,17 +290,17 @@ const AdminOverview = ({ notifications = {}, secondaryNotifications = {}, setOve
         console.warn('❗ Document not found in Firestore for', item);
         return;
       }
-
+  
       const data = snap.data();
-
+  
       if (item.type === 'risk') {
         const timestamp = data.timestamp?.seconds
           ? new Date(data.timestamp.seconds * 1000)
           : new Date();
-
+  
         const severity =
           data.score >= 0.85 ? 'High' : data.score >= 0.5 ? 'Medium' : 'Low';
-
+  
         setSelectedItem({
           id: snap.id,
           email: data.email || data.assessment?.email || 'N/A',
@@ -313,19 +313,17 @@ const AdminOverview = ({ notifications = {}, secondaryNotifications = {}, setOve
           status: data.status || 'New',
           overviewStatus: getOverviewStatus('risk', data.status),
         });
-
+  
         setModalType('risk');
         return;
       }
-
+  
       if (item.type === 'order') {
-        // Convert Firestore timestamp if needed
         let createdAt = data.createdAt;
         if (createdAt?.seconds) {
           createdAt = new Date(createdAt.seconds * 1000);
         }
-      
-        // Format systemHistory timestamps
+  
         const systemHistory = Array.isArray(data.systemHistory)
           ? data.systemHistory.map((entry) => ({
               ...entry,
@@ -334,7 +332,7 @@ const AdminOverview = ({ notifications = {}, secondaryNotifications = {}, setOve
                 : entry.timestamp,
             }))
           : [];
-      
+  
         setSelectedItem({
           id: snap.id,
           createdAt,
@@ -349,11 +347,27 @@ const AdminOverview = ({ notifications = {}, secondaryNotifications = {}, setOve
           systemHistory,
           relatedProjects: data.relatedProjects || [],
         });
-      
+  
         setModalType('order');
         return;
       }
-
+  
+      if (item.type === 'submission') {
+        const submittedAt = data.submittedAt?.seconds
+          ? new Date(data.submittedAt.seconds * 1000)
+          : null;
+  
+        setSelectedItem({
+          id: snap.id,
+          ...data,
+          submittedAt,
+        });
+  
+        setModalType('submission');
+        return;
+      }
+  
+      // fallback
       setModalType(item.type);
     } catch (error) {
       console.error('❌ Error fetching item details:', error);
