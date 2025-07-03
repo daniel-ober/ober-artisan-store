@@ -318,38 +318,41 @@ const AdminOverview = ({ notifications = {}, secondaryNotifications = {}, setOve
         return;
       }
 
-      if (item.type === 'order' && !Array.isArray(data.items)) {
-        data.items = [];
+      if (item.type === 'order') {
+        // Convert Firestore timestamp if needed
+        let createdAt = data.createdAt;
+        if (createdAt?.seconds) {
+          createdAt = new Date(createdAt.seconds * 1000);
+        }
+      
+        // Format systemHistory timestamps
+        const systemHistory = Array.isArray(data.systemHistory)
+          ? data.systemHistory.map((entry) => ({
+              ...entry,
+              timestamp: entry.timestamp?.seconds
+                ? new Date(entry.timestamp.seconds * 1000).toISOString()
+                : entry.timestamp,
+            }))
+          : [];
+      
+        setSelectedItem({
+          id: snap.id,
+          createdAt,
+          status: data.status || 'New',
+          overviewStatus: data.overviewStatus || 'new',
+          items: data.items || [],
+          customerName: data.customerName || 'N/A',
+          customerEmail: data.customerEmail || 'N/A',
+          customerPhone: data.customerPhone || '',
+          customerAddress: data.customerAddress || '',
+          internalNotes: data.internalNotes || [],
+          systemHistory,
+          relatedProjects: data.relatedProjects || [],
+        });
+      
+        setModalType('order');
+        return;
       }
-
-      if (data.createdAt?.seconds) {
-        data.createdAt = new Date(
-          data.createdAt.seconds * 1000
-        ).toLocaleString();
-      }
-
-      if (Array.isArray(data.systemHistory)) {
-        data.systemHistory = data.systemHistory.map((entry) => ({
-          ...entry,
-          timestamp: entry.timestamp?.seconds
-            ? new Date(entry.timestamp.seconds * 1000).toLocaleString()
-            : entry.timestamp,
-        }));
-      }
-
-      setSelectedItem({
-        id: snap.id,
-        overviewStatus: data.overviewStatus || 'new',
-        createdAt: data.createdAt || 'No date',
-        status: data.status || 'New',
-        internalNotes: data.internalNotes || [],
-        systemHistory: data.systemHistory || [],
-        category: data.category || 'General',
-        origin: data.origin || 'Contact Form',
-        name: `${data.first_name || ''} ${data.last_name || ''}`.trim(),
-        email: data.email || 'N/A',
-        message: data.message || '',
-      });
 
       setModalType(item.type);
     } catch (error) {
