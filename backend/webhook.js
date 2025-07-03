@@ -23,14 +23,10 @@ router.post(
       return res.status(400).send(`Webhook Error: ${err.message}`);
     }
 
-    // console.log(`📩 Received Stripe event: ${event.type}`);
-
     if (event.type === 'checkout.session.completed') {
       const session = event.data.object;
-      // console.log('✅ Checkout session completed:', session);
 
       if (!session.metadata || !session.metadata.userId) {
-        // console.error('❌ Missing user metadata in session.');
         return res.status(400).send('Missing user metadata.');
       }
 
@@ -45,10 +41,7 @@ router.post(
           { expand: ['data.price.product'] }
         );
 
-        // ✅ Ensure productId is included
         lineItems = lineItemsResponse.data.map((item) => {
-          // console.log("🛒 Raw Line Item from Stripe:", item);
-
           return {
             stripeProductId: item.price.product?.id || null,
             stripePriceId: item.price.id || null,
@@ -57,19 +50,13 @@ router.post(
             price: item.amount_total / 100,
           };
         });
-
-        // console.log('✅ Processed Line Items:', JSON.stringify(lineItems, null, 2));
       } catch (error) {
         console.error('❌ Error fetching line items:', error.message);
         return res.status(500).send('Error fetching line items.');
       }
 
       try {
-        // console.log('📦 Updating Inventory for Ordered Items...');
-
         for (const item of lineItems) {
-          // console.log(`🔍 Searching for product with stripeProductId: ${item.stripeProductId}`);
-
           let productSnapshot = await admin
             .firestore()
             .collection('products')
@@ -77,14 +64,10 @@ router.post(
             .limit(1)
             .get();
 
-          // ✅ Fallback: If `stripeProductId` fails, try matching `name.toLowerCase()`
           if (!productSnapshot || productSnapshot.empty) {
             console.error(`❌ No product found for Stripe Product ID: ${item.stripeProductId}`);
-
             if (item.name) {
-              console.warn(`⚠️ Attempting fallback lookup for product name: ${item.name}`);
-
-              const formattedName = item.name.toLowerCase().replace(/\s+/g, ''); // Normalize name
+              const formattedName = item.name.toLowerCase().replace(/\s+/g, '');
               const fallbackSnapshot = await admin
                 .firestore()
                 .collection('products')
@@ -94,7 +77,6 @@ router.post(
                 .get();
 
               if (!fallbackSnapshot.empty) {
-                // console.log(`✅ Fallback Matched Product: ${formattedName}`);
                 productSnapshot = fallbackSnapshot;
               } else {
                 console.error(`❌ Fallback failed. Product '${item.name}' not found in Firestore.`);
@@ -108,15 +90,11 @@ router.post(
 
           const productDoc = productSnapshot.docs[0];
           const productRef = productDoc.ref;
-          const productData = productDoc.data();
 
-          // console.log(`✅ Matched Product: ${productData.name} (Current Quantity: ${productData.currentQuantity})`);
-
-          // ✅ Update inventory using transaction
           await admin.firestore().runTransaction(async (transaction) => {
             const freshProductDoc = await transaction.get(productRef);
             if (!freshProductDoc.exists) {
-              console.error(`❌ Firestore product missing: ${productData.id}`);
+              console.error(`❌ Firestore product missing: ${productRef.id}`);
               return;
             }
 
@@ -126,38 +104,54 @@ router.post(
               (freshProductData.currentQuantity || 0) - item.quantity
             );
 
-            // console.log(`🔄 Updating stock for ${productData.id}: ${freshProductData.currentQuantity} -> ${newQuantity}`);
-
             transaction.update(productRef, {
               currentQuantity: newQuantity,
               isAvailable: newQuantity > 0,
             });
-
-            // console.log(`✅ Inventory Updated for ${productData.name} - New Quantity: ${newQuantity}`);
           });
         }
 
-        // console.log('✅ Inventory Updated Successfully!');
+        // ✅ Calculate final order status + overviewStatus correctly:
+        const itemsWithStatus = lineItems.map((item) => ({
+          ...item,
+          status: 'Preparing',
+          productId: item.stripeProductId || item.name?.toLowerCase()?.replace(/\s+/g, ''),
+        }));
+        const finalStatus = getOrderStatusFromItems(itemsWithStatus);
+        const finalOverview = getOverviewStatus('order', finalStatus);
 
-        // ✅ CREATE ORDER IN FIRESTORE
         const orderId = generateCustomId();
         const orderData = {
           orderId,
+          stripeSessionId: session.id,
           userId,
-          email: userEmail,
-          items: lineItems.map((item) => ({
-            ...item,
-            productId: item.stripeProductId || item.name?.toLowerCase()?.replace(/\s+/g, ''),
-          })), // Ensure productId is added
-          totalAmount,
-          currency: session.currency,
-          status: 'Processing',
-          createdAt: admin.firestore.FieldValue.serverTimestamp(),
+          guestToken: session.metadata?.guestToken || null,
+          customerName:
+            session.customer_details?.name ||
+            `${session.metadata?.customerFirstName || ''} ${session.metadata?.customerLastName || ''}`.trim() ||
+            'No Name Provided',
+          customerEmail: userEmail || session.metadata?.customerEmail || 'No Email Provided',
+          customerPhone:
+            session.customer_details?.phone || session.metadata?.customerPhone || 'No Phone Provided',
+          customerAddress: session.customer_details?.address
+            ? `${session.customer_details.address.line1 || ''}, ${session.customer_details.address.city || ''}, ${session.customer_details.address.postal_code || ''}, ${session.customer_details.address.country || ''}`
+            : 'No Address Provided',
           paymentIntentId: session.payment_intent,
+          totalAmount,
+          currency: session.currency || 'usd',
+          status: finalStatus,
+          overviewStatus: finalOverview,
+          items: itemsWithStatus,
+          createdAt: admin.firestore.FieldValue.serverTimestamp(),
+          systemHistory: [
+            {
+              event: 'Order created from Stripe checkout session',
+              timestamp: new Date().toISOString(),
+            },
+          ],
         };
 
         await admin.firestore().collection('orders').doc(orderId).set(orderData);
-        // console.log(`✅ Order Created Successfully: ${orderId}`);
 
         res.status(200).send('✅ Event processed successfully.');
       } catch (error) {
@@ -165,13 +159,11 @@ router.post(
         res.status(500).send('Internal Server Error');
       }
     } else {
-      // console.log(`⚠️ Unhandled Stripe event type: ${event.type}`);
       res.status(200).send('Event received.');
     }
   }
 );
 
-// Function to generate a unique order ID
 function generateCustomId() {
   return `ORD-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
 }
