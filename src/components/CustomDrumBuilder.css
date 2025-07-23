@@ -330,7 +330,7 @@
 
   select:focus,
 .form-control:focus {
-  background-color: #222;
+  /* background-color: #222; */
   color: #fff;
   border-color: #555;
   outline: none;
@@ -417,7 +417,7 @@
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  background-color: #222;
+  /* background-color: #222; */
   color: #fff;
   border: 1px solid #555;
   border-radius: 4px;

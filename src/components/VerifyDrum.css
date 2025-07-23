@@ -1,0 +1,21 @@
+.verify-container {
+  text-align: center;
+  padding: 2rem;
+  font-family: sans-serif;
+}
+
+.verify-container button {
+  font-size: 1.2rem;
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  border: none;
+  background-color: #222;
+  color: white;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.verify-container button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
