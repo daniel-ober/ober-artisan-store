@@ -232,55 +232,64 @@ const ProjectOverview = ({
     e.preventDefault();
     setDragging(false);
 
-    const file = e.dataTransfer?.files?.[0];
-    if (!file || !editableData?.id) return;
+    const files = Array.from(e.dataTransfer?.files || []);
+    if (files.length === 0 || !editableData?.id) return;
 
     const safeCategory = 'other';
-    const path = `projects/${editableData.id}/attachments/${safeCategory}/${file.name}`;
-    const fileRef = ref(storage, path);
-    const uploadTask = uploadBytesResumable(fileRef, file);
+    const projectId = editableData.id;
 
-    setUploading(true);
-    setUploadProgress(0);
+    for (const file of files) {
+      const path = `projects/${projectId}/attachments/${safeCategory}/${file.name}`;
+      const fileRef = ref(storage, path);
+      const uploadTask = uploadBytesResumable(fileRef, file);
 
-    uploadTask.on(
-      'state_changed',
-      (snapshot) => {
-        const pct = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        setUploadProgress(pct.toFixed(0));
-      },
-      (error) => {
-        console.error('❌ Upload failed:', error);
-        setUploading(false);
-      },
-      async () => {
-        const url = await getDownloadURL(uploadTask.snapshot.ref);
-        const newFile = {
-          url,
-          category: safeCategory,
-          hidden: true,
-        };
+      setUploading(true);
+      setUploadProgress(0);
 
-        const updated = [...(uploadedFiles[safeCategory] || []), newFile];
-        const updatedFiles = {
-          ...uploadedFiles,
-          [safeCategory]: updated,
-        };
+      await new Promise((resolve, reject) => {
+        uploadTask.on(
+          'state_changed',
+          (snapshot) => {
+            const pct = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            setUploadProgress(pct.toFixed(0));
+          },
+          (error) => {
+            console.error('❌ Upload failed:', error);
+            setUploading(false);
+            reject(error);
+          },
+          async () => {
+            const url = await getDownloadURL(uploadTask.snapshot.ref);
+            const newFile = {
+              url,
+              category: safeCategory,
+              hidden: true,
+            };
 
-        setUploadedFiles(updatedFiles);
+            const updated = [...(uploadedFiles[safeCategory] || []), newFile];
+            const updatedFiles = {
+              ...uploadedFiles,
+              [safeCategory]: updated,
+            };
 
-        try {
-          await updateDoc(doc(db, 'projects', editableData.id), {
-            [`attachments.${safeCategory}`]: updated,
-          });
-        } catch (err) {
-          console.error('❌ Firestore update failed:', err);
-        }
+            setUploadedFiles(updatedFiles);
 
-        setUploading(false);
-        setUploadProgress(0);
-      }
-    );
+            try {
+              await updateDoc(doc(db, 'projects', projectId), {
+                [`attachments.${safeCategory}`]: updated,
+              });
+            } catch (err) {
+              console.error('❌ Firestore update failed:', err);
+            }
+
+            setUploadProgress(0);
+            resolve();
+          }
+        );
+      });
+    }
+
+    setUploading(false);
   };
 
   const regroupFilesByCategory = (allFiles) => {
@@ -591,6 +600,21 @@ const ProjectOverview = ({
             onDragEnter={() => setDragging(true)}
             onDragLeave={() => setDragging(false)}
           >
+          <div className="manual-upload-input">
+  <label htmlFor="manual-file-input" className="project-label">
+    Or choose files:
+  </label>
+  <input
+    id="manual-file-input"
+    type="file"
+    multiple
+    onChange={(e) => {
+      const dt = new DataTransfer();
+      Array.from(e.target.files).forEach((f) => dt.items.add(f));
+      handleDrop({ dataTransfer: dt, preventDefault: () => {} });
+    }}
+  />
+</div>
             <p>Drag & drop files here (PDF, audio, images, video)</p>
             {uploading && (
               <p className="upload-progress">Uploading... {uploadProgress}%</p>
