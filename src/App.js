@@ -43,6 +43,7 @@ import PrivacyPolicy from './components/PrivacyPolicy';
 import TermsOfService from './components/TermsOfService';
 import ReturnPolicy from './components/ReturnPolicy';
 import NotFound from './components/NotFound';
+import InventoryTracker from './components/InventoryTracker';
 import PrivateRoute from './components/PrivateRoute';
 import { useAuth } from './context/AuthContext';
 import AdminSignin from './components/AdminSignin';
@@ -52,7 +53,7 @@ import FoundersToastProductDetail from './components/FoundersToastProductDetail'
 import HeritageProductDetail from './components/HeritageProductDetail';
 import FeuzonProductDetail from './components/FeuzonProductDetail';
 import SoundlegendProductDetail from './components/SoundlegendProductDetail';
-
+import VerifyDrum from './components/VerifyDrum';
 import { DarkModeProvider } from './context/DarkModeContext';
 import { Toaster } from 'react-hot-toast';
 import './App.css';
@@ -235,6 +236,10 @@ function App() {
             path="/artisan-shop/founders-toast"
             element={<FoundersToastProductDetail />}
           />
+          <Route
+            path="/admin/artisan-tools/inventory-tracker"
+            element={<PrivateRoute element={<InventoryTracker />} adminOnly />}
+          />
           <Route path="/artisan-shop/:productId" element={<ProductDetail />} />
           <Route path="/merch/:productId" element={<ProductDetail />} />
           <Route
@@ -266,6 +271,7 @@ function App() {
           <Route path="/admin-signin" element={<AdminSignin />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/checkout-summary" element={<CheckoutSummary />} />
+          <Route path="/verify" element={<VerifyDrum />} />
         </Routes>
         <Footer navbarLinks={navbarLinks} />
       </div>

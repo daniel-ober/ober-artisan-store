@@ -179,49 +179,65 @@ const ProjectDetailPage = () => {
     }
   }, [project]);
 
-  const handleDrop = async (e, type) => {
-    e.preventDefault();
-    setDragging((prev) => ({ ...prev, [type]: false }));
+const handleDrop = async (e) => {
+  e.preventDefault();
+  setDragging(false);
 
-    const file = e.dataTransfer?.files?.[0];
-    if (!file || !projectId) return;
+  const files = Array.from(e.dataTransfer.files);
+  if (files.length === 0) return;
 
-    const path = `projects/${projectId}/${type}/${file.name}`;
-    const fileRef = ref(storage, path);
-    const uploadTask = uploadBytesResumable(fileRef, file);
+  setUploading(true);
+  let currentProgress = 0;
 
-    setUploadingZone(type);
-    setUploadProgress(0);
+  const newUploads = [];
 
-    uploadTask.on(
-      'state_changed',
-      (snapshot) => {
-        const pct = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        setUploadProgress(pct.toFixed(0));
-      },
-      (error) => {
-        console.error(`Upload to ${type} failed:`, error);
-        setUploadingZone(null);
-      },
-      async () => {
-        const url = await getDownloadURL(uploadTask.snapshot.ref);
-        const updated = [...uploadedFiles[type], url];
-
-        setUploadedFiles((prev) => ({ ...prev, [type]: updated }));
-
-        try {
-          await updateDoc(doc(db, 'projects', projectId), {
-            [`attachments.${type}`]: updated,
-          });
-        } catch (err) {
-          console.error(`❌ Failed to save ${type} URL to Firestore:`, err);
-        }
-
-        setUploadingZone(null);
-        setUploadProgress(0);
-      }
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i];
+    const storageRef = ref(
+      storage,
+      `projects/${editableData.id}/${Date.now()}_${file.name}`
     );
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    await new Promise((resolve, reject) => {
+      uploadTask.on(
+        'state_changed',
+        (snapshot) => {
+          const progress = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
+          currentProgress = Math.round((progress * (i + 1)) / files.length);
+          setUploadProgress(currentProgress);
+        },
+        (error) => reject(error),
+        async () => {
+          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+          newUploads.push({
+            url: downloadURL,
+            category: currentCategory || 'other',
+            hidden: true,
+          });
+          resolve();
+        }
+      );
+    });
+  }
+
+  const updatedAll = [...(uploadedFiles[currentCategory] || []), ...newUploads];
+  const updatedGrouped = {
+    ...uploadedFiles,
+    [currentCategory]: updatedAll,
   };
+
+  setUploadedFiles(updatedGrouped);
+
+  await updateDoc(doc(db, 'projects', editableData.id), {
+    attachments: updatedGrouped,
+  }).catch((err) => console.error('❌ Firestore update failed:', err));
+
+  setUploading(false);
+  setUploadProgress(0);
+};
 
   const allowDrag = (e) => e.preventDefault();
   const handleDragEnter = (type) =>

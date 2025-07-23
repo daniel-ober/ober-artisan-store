@@ -1,33 +1,92 @@
-/* /src/components/Admin/InventoryTracker.css */
+/* ✅ /src/components/Admin/InventoryTracker.css */
 
 .inventory-tracker {
-    padding: 20px;
+    padding: 40px;
     font-family: Arial, sans-serif;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 12px;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+  
+  .inventory-tracker h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .inventory-tracker .filter {
+    margin: 20px 0;
+  }
+  
+  .inventory-tracker .filter label {
+    margin-right: 10px;
   }
   
   .inventory-tracker table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    background: #fff;
   }
   
-  .inventory-tracker th, .inventory-tracker td {
-    border: 1px solid #ccc;
-    padding: 8px;
+  .inventory-tracker th,
+  .inventory-tracker td {
+    border: 1px solid #ddd;
+    padding: 10px;
     text-align: left;
   }
   
   .inventory-tracker th {
-    background-color: #f4f4f4;
+    background-color: #f8f8f8;
+    color: #333;
+  }
+  
+  .inventory-tracker tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .inventory-tracker tr:hover {
+    background-color: #f1f1f1;
   }
   
   .inventory-tracker input {
-    margin: 5px;
-    padding: 5px;
+    margin: 2px;
+    padding: 6px;
+    width: 100%;
+    box-sizing: border-box;
   }
   
   .inventory-tracker button {
-    margin: 5px;
-    padding: 5px 10px;
+    margin: 4px 0;
+    padding: 8px 12px;
     cursor: pointer;
+    background: #333;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+  }
+  
+  .inventory-tracker button:hover {
+    background: #555;
+  }
+  
+  .inventory-tracker .pagination {
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .inventory-tracker .form {
+    margin-top: 30px;
+  }
+  
+  .inventory-tracker .form input {
+    display: block;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+  
+  .inventory-tracker select {
+    padding: 8px;
+    margin-left: 10px;
   }
