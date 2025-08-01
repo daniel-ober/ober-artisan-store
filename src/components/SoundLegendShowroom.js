@@ -149,7 +149,7 @@ const SoundLegendShowroom = () => {
 
       {/* NFC Info */}
       <section className="showroom-legacy">
-        <p>This drum carries a digital signature. Tap the SoundLegend badge or bookmark this page to revisit anytime.</p>
+        <p>This drum carries a digital signature for SoundLegend Artists. Hover your mobile device over your SoundLegend badge or simply bookmark this page to revisit anytime .</p>
       </section>
 
       {/* CTA */}
