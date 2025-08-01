@@ -1,0 +1,45 @@
+.verify-drum-container {
+  max-width: 500px;
+  margin: 4rem auto;
+  padding: 2rem;
+  text-align: center;
+  background-color: var(--color-bg, #121212);
+  color: var(--color-text, #f0f0f0);
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+.verify-drum-container h1 {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}
+
+.verify-drum-container p {
+  font-size: 1.1rem;
+  margin-top: 1rem;
+}
+
+.auth-valid {
+  color: #00e676;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-top: 1rem;
+}
+
+.auth-invalid {
+  color: #ff5252;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-top: 1rem;
+}
+
+@media (max-width: 500px) {
+  .verify-drum-container {
+    padding: 1.5rem 1rem;
+    margin-top: 2rem;
+  }
+
+  .verify-drum-container h1 {
+    font-size: 1.4rem;
+  }
+}

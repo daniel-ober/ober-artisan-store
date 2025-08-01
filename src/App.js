@@ -53,8 +53,10 @@ import FoundersToastProductDetail from './components/FoundersToastProductDetail'
 import HeritageProductDetail from './components/HeritageProductDetail';
 import FeuzonProductDetail from './components/FeuzonProductDetail';
 import SoundlegendProductDetail from './components/SoundlegendProductDetail';
-import VerifyDrum from './components/VerifyDrum';
 import { DarkModeProvider } from './context/DarkModeContext';
+import VerifySerial from './components/VerifySerial';
+import VerifyDrumBySerial from './components/VerifyDrumBySerial';
+import SoundLegendShowroom from './components/SoundLegendShowroom';
 import { Toaster } from 'react-hot-toast';
 import './App.css';
 
@@ -80,7 +82,7 @@ function App() {
       '/artisanseries': 'ArtisanSeries',
       '/products': 'Products',
       '/merch': 'Merch',
-      '/signin': 'SignIn',
+      '/soundlegends/signin': 'SignIn',
       '/terms-of-service': 'TermsOfService',
       '/register': 'Register',
       '/forgot-password': 'ForgotPassword',
@@ -219,7 +221,7 @@ function App() {
             path="/projects/:projectId"
             element={<ProjectRoute element={ProjectDetailPage} />}
           />
-          <Route path="/signin" element={<SoundlegendSignin />} />
+          <Route path="/soundlegends/signin" element={<SoundlegendSignin />} />
           <Route
             path="/artisan-shop/heritage"
             element={<HeritageProductDetail />}
@@ -271,7 +273,9 @@ function App() {
           <Route path="/admin-signin" element={<AdminSignin />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/checkout-summary" element={<CheckoutSummary />} />
-          <Route path="/verify" element={<VerifyDrum />} />
+          <Route path="/verify" element={<VerifySerial />} />
+          <Route path="/verify/:serial" element={<VerifyDrumBySerial />} />
+          <Route path="/artisan-shop/soundlegend/:serial" element={<SoundLegendShowroom />} />
         </Routes>
         <Footer navbarLinks={navbarLinks} />
       </div>
