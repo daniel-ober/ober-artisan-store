@@ -13,9 +13,9 @@ const db = admin.firestore();
 const drumData = {
   name: 'Danny Lopez – SoundLegend Original',
   heroImage:
-    'https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/artisan%2FSL-002%2FIMG_1585.jpeg?alt=media&token=76f4daf9-cd02-4a5e-8d9c-abbbb5a31932',
-  gallery: [
     'https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/artisan%2FSL-002%2FIMG_1582.jpeg?alt=media&token=98290c5f-df32-445d-8793-c669b8bd7976',
+  gallery: [
+    'https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/artisan%2FSL-002%2FIMG_1585.jpeg?alt=media&token=76f4daf9-cd02-4a5e-8d9c-abbbb5a31932',
     'https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/artisan%2FSL-002%2FIMG_1575.jpeg?alt=media&token=920d3534-174a-49b4-b555-5bd8c8ef8d8c',
     'https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/artisan%2FSL-002%2FIMG_1584.jpeg?alt=media&token=76b4b876-df1a-43d4-a5ac-12de458b0a17',
     'https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/artisan%2FSL-002%2FIMG_1572.JPG?alt=media&token=e8b2f374-1b8e-4150-b020-5d5898ce2138',
