@@ -315,6 +315,17 @@
   color: #ffffff;        /* ✅ highlight only the arrow */
 }
 
+.portal-link {
+  color: #ffcc00;
+  font-weight: bold;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.portal-link:hover {
+  color: #fff176;
+}
+
 /* 🔹 Responsive */
 @media (max-width: 768px) {
   .modal-prev,

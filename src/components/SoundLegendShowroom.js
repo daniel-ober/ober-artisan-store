@@ -148,9 +148,17 @@ const SoundLegendShowroom = () => {
 )}
 
       {/* NFC Info */}
-      <section className="showroom-legacy">
-        <p>This SoundLegend drum is digitally authenticated and part of an exclusive artist series. While anyone can view its legacy here, only its SoundLegend owner enjoys full access to its private build journey and artist perks. Interested in joining the SoundLegend experience?</p>
-      </section>
+<section className="showroom-legacy">
+  <p>
+    This SoundLegend drum is digitally authenticated and part of an exclusive artist series. 
+    While anyone is welcome to explore its legacy here, SoundLegend artists enjoy a deeper 
+    connection — with private access to their full build journey, behind-the-scenes content, 
+    and exclusive perks through the SoundLegend online portal. 
+    <br/><br/>
+    <a href="/soundlegends/signin" className="portal-link">Sign in here</a> to access your portal, 
+    or <a href="/artisan-shop/soundlegend" className="portal-link">learn more about joining the SoundLegend Experience</a>.
+  </p>
+</section>
 
       {/* CTA */}
       <div className="showroom-cta">

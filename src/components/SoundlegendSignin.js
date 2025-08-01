@@ -78,7 +78,7 @@ const SoundlegendSignin = () => {
       </form>
       <div className="signin-info">
         <p>
-          <strong>Note:</strong> Web portal access is only available to clients
+          <strong>Note:</strong> Web portal access is only available to artists
           who’ve joined the{' '}
           <a
             href="/artisan-shop/soundlegend"
@@ -89,7 +89,7 @@ const SoundlegendSignin = () => {
           </a>
           .
         </p>
-        <p>As a SoundLegend client, you’ll get secure access to:</p>
+        <p>As a SoundLegend artist, you’ll get secure access to:</p>
         <ul>
           <li>Live build updates & milestone tracking</li>
           <li>Mockups, design approvals & progress photos</li>
