@@ -20,15 +20,15 @@ const slides = [
   },
   {
     title: 'Artisan Shop',
-    subtitle: 'Pre-order your drum today',
-    buttonText: 'Pre-Order Now',
+    subtitle: 'Order your snare today',
+    buttonText: 'Shop Now',
     link: '/artisan-shop',
     background: '/carousel/artisan-shop.webp',
   },
   {
     title: "Founder's Toast",
     subtitle: 'Conditioning wax for natural wood finishes',
-    buttonText: 'Order Yours Today',
+    buttonText: 'Order Now',
     link: '/artisan-shop/founders-toast',
     background: '/carousel/founders-toast.webp',
   },
