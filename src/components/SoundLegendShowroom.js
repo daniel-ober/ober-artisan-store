@@ -124,23 +124,23 @@ const SoundLegendShowroom = () => {
 
       {/* Modal */}
 {modalIndex !== null && (
-  <div className="modal-overlay" onClick={() => setModalIndex(null)}>
-    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+  <div className="showroom-modal-overlay" onClick={() => setModalIndex(null)}>
+    <div className="showroom-modal-content" onClick={(e) => e.stopPropagation()}>
       {/* Close Button */}
-      <button className="modal-close" onClick={() => setModalIndex(null)}>✕</button>
+      <button className="showroom-modal-close" onClick={() => setModalIndex(null)}>✕</button>
 
       {/* Prev Button */}
       <button
-        className="modal-prev"
+        className="showroom-modal-prev"
         onClick={() => setModalIndex(modalIndex === 0 ? gallery.length - 1 : modalIndex - 1)}
       >‹</button>
 
       {/* Image */}
-      <img src={gallery[modalIndex]} alt="Preview" className="modal-image" />
+      <img src={gallery[modalIndex]} alt="Preview" className="showroom-modal-image" />
 
       {/* Next Button */}
       <button
-        className="modal-next"
+        className="showroom-modal-next"
         onClick={() => setModalIndex((modalIndex + 1) % gallery.length)}
       >›</button>
     </div>

@@ -239,7 +239,7 @@
 }
 
 /* 🔹 Modal Overlay */
-.modal-overlay {
+.showroom-modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -253,7 +253,7 @@
 }
 
 /* 🔹 Modal Content */
-.modal-content {
+.showroom-modal-content {
   position: relative;
   max-width: 90%;
   max-height: 90%;
@@ -264,7 +264,7 @@
 }
 
 /* 🔹 Modal Image (ensure no overflow on mobile) */
-.modal-image {
+.showroom-modal-image {
   max-width: 95vw;        /* ✅ fits within screen width */
   max-height: 85vh;
   width: auto;
@@ -275,7 +275,7 @@
 }
 
 /* 🔹 Close Button (Minimal, Noticeable) */
-.modal-close {
+.showroom-modal-close {
   position: absolute;
   top: 15px;
   right: 15px;
@@ -287,13 +287,13 @@
   transition: color 0.2s ease;
   z-index: 10001;
 }
-.modal-close:hover {
+.showroom-modal-close:hover {
   color: #ffcc00; /* ✅ subtle highlight on hover */
 }
 
 /* 🔹 Navigation Arrows (Minimal, No Background) */
-.modal-prev,
-.modal-next {
+.showroom-modal-prev,
+.showroom-modal-next {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -307,11 +307,11 @@
   transition: color 0.2s ease, transform 0.1s ease;
   z-index: 10001;
 }
-.modal-prev { left: 15px; }
+.showroom-modal-prev { left: 15px; }
 .modal-next { right: 15px; }
 
-.modal-prev:hover,
-.modal-next:hover {
+.showroom-modal-prev:hover,
+.showroom-modal-next:hover {
   color: #ffffff;        /* ✅ highlight only the arrow */
 }
 
@@ -328,11 +328,11 @@
 
 /* 🔹 Responsive */
 @media (max-width: 768px) {
-  .modal-prev,
-  .modal-next {
+  .showroom-modal-prev,
+  .showroom-modal-next {
     font-size: 32px; /* ✅ smaller but still noticeable */
   }
-  .modal-image {
+  .showroom-modal-image {
     max-width: 90vw; /* ✅ slightly tighter on mobile */
     max-height: 75vh;
   }
