@@ -8,7 +8,7 @@ const slides = [
     title: 'Artisan Drums',
     subtitle: 'Explore our handcrafted snare drums',
     buttonText: 'Explore Drums',
-    link: '/artisan-drums',
+    link: '/founders-batch',
     background: '/carousel/artisan-drums.webp',
   },
   {
