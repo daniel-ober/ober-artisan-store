@@ -119,31 +119,30 @@ const ProjectOverview = ({
     });
   };
 
-  const calculateStatus = (data) => {
-    if (!data || !data.currentPhase) return 'Unknown';
+const calculateStatus = (data) => {
+  if (!data || !data.currentPhase) return 'Unknown';
+  
+  // ✅ Handle fully completed projects
+  if (data.currentPhase === 'All Steps Complete') return 'Finished';
 
-    const phases = [
-      'Step 1. Wood Preparation',
-      'Step 2. Shell Construction',
-      'Step 3. Fine-Tuning',
-      'Step 4. Shell Exterior Finish',
-      'Step 5. Bearing Edges',
-      'Step 6. Snare Bed Cutting',
-      'Step 7. Hardware Drilling',
-      'Step 8. Hardware Assembly',
-      'Step 9. Tuning and Detailing',
-      'Step 10. Quality Check',
-    ];
+  const phases = [
+    'Step 1. Wood Preparation',
+    'Step 2. Shell Construction',
+    'Step 3. Fine-Tuning',
+    'Step 4. Shell Exterior Finish',
+    'Step 5. Bearing Edges',
+    'Step 6. Snare Bed Cutting',
+    'Step 7. Hardware Drilling',
+    'Step 8. Hardware Assembly',
+    'Step 9. Tuning and Detailing',
+    'Step 10. Quality Check',
+  ];
 
-    const currentIndex = phases.indexOf(data.currentPhase);
-
-    if (currentIndex === -1) return 'Unknown';
-    if (currentIndex === phases.length - 1) return 'Final Check';
-    if (currentIndex >= 0 && currentIndex < phases.length - 1)
-      return 'In Progress';
-
-    return 'Unknown';
-  };
+  const currentIndex = phases.indexOf(data.currentPhase);
+  if (currentIndex === phases.length - 1) return 'Final Check';
+  if (currentIndex >= 0) return 'In Progress';
+  return 'Unknown';
+};
 
   useEffect(() => {
     if (editableData) {
@@ -600,21 +599,21 @@ const ProjectOverview = ({
             onDragEnter={() => setDragging(true)}
             onDragLeave={() => setDragging(false)}
           >
-          <div className="manual-upload-input">
-  <label htmlFor="manual-file-input" className="project-label">
-    Or choose files:
-  </label>
-  <input
-    id="manual-file-input"
-    type="file"
-    multiple
-    onChange={(e) => {
-      const dt = new DataTransfer();
-      Array.from(e.target.files).forEach((f) => dt.items.add(f));
-      handleDrop({ dataTransfer: dt, preventDefault: () => {} });
-    }}
-  />
-</div>
+            <div className="manual-upload-input">
+              <label htmlFor="manual-file-input" className="project-label">
+                Or choose files:
+              </label>
+              <input
+                id="manual-file-input"
+                type="file"
+                multiple
+                onChange={(e) => {
+                  const dt = new DataTransfer();
+                  Array.from(e.target.files).forEach((f) => dt.items.add(f));
+                  handleDrop({ dataTransfer: dt, preventDefault: () => {} });
+                }}
+              />
+            </div>
             <p>Drag & drop files here (PDF, audio, images, video)</p>
             {uploading && (
               <p className="upload-progress">Uploading... {uploadProgress}%</p>
