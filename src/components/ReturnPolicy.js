@@ -5,12 +5,15 @@ const ReturnPolicy = () => {
   return (
     <div className="return-policy-container">
       <h1>Return Policy</h1>
-      <p><strong>Last Updated:</strong> April 5, 2025</p>
 
       <p>
-        This Return Policy outlines our policies regarding returns, exchanges, and cancellations. 
+        This Return Policy applies to all purchases made through Ober Artisan Drums. 
         By making a purchase on this site, you acknowledge and agree to these terms. 
-        Please read carefully to understand what is eligible for return or refund.
+        We may update this policy at any time without prior notice, and the version in effect 
+        at the time of your payment will apply. 
+        For the purposes of this policy, "payment" refers to the date 
+        on which your first payment (whether partial or full) is processed, not the date of any agreed-upon 
+        build proposals or quotes. Please read carefully to understand what is eligible for return or refund.
       </p>
 
       <h2>1. Handcrafted Drums</h2>
@@ -54,13 +57,12 @@ const ReturnPolicy = () => {
           <li>Drum kits</li>
           <li>Engraved or limited-edition items</li>
         </ul>
-        <br />
         If your custom item is damaged upon arrival, please contact us within <strong>7 days</strong> for a resolution.
       </p>
 
       <h2>5. Order Cancellations</h2>
       <p>
-        <strong>Custom Drums:</strong> May be canceled within <strong>48 hours</strong> of ordering if production has not started. After that, cancellations are not permitted.
+        <strong>Custom Drums:</strong> May be canceled within <strong>48 hours</strong> of payment initiation if production has not started. After that, cancellations are not permitted.
         <br /><br />
         <strong>All Other Items:</strong> Orders for in-stock merchandise may be canceled any time before shipment. Please email <strong>support@oberartisandrums.com</strong> as soon as possible.
       </p>
@@ -78,7 +80,22 @@ const ReturnPolicy = () => {
         <strong>Step 4 – Inspection & Refund:</strong> Once received and approved, we’ll issue a refund or send a replacement. Refunds may take up to <strong>7 business days</strong> to reflect.
       </p>
 
-      <h2>7. Contact Us</h2>
+      <h2>7. Payment Plans, Promotions, and Bundle Discounts</h2>
+      <p>
+        <strong>Payment Plans:</strong> From time to time, we may offer payment plans as part of special promotions or at our sole discretion. 
+        These plans are extended as a courtesy and are not guaranteed. All scheduled payments must be made on time. Failure to complete payments as agreed may result 
+        in production delays, suspension of work, and/or forfeiture of your order without refund of amounts already paid.
+        <br /><br />
+        <strong>Promotional & Early-Bird Pricing:</strong> Early-bird and promotional offers are time-limited 
+        and only valid if the initial payment is received by the stated deadline. Once production begins, all 
+        payments are <strong>non-refundable</strong>, and promotional pricing cannot be applied retroactively.
+        <br /><br />
+        <strong>Bundle Discounts:</strong> Bundle-specific discounts (e.g., drum + side snare promotions) only 
+        apply if the bundled items are purchased and paid for together. If the bundle is broken or altered, the 
+        discount is void and standard pricing applies to any remaining items.
+      </p>
+
+      <h2>8. Contact Us</h2>
       <p>
         For questions or support with a return, please reach out to us at <strong>support@oberartisandrums.com</strong>. We’re here to help.
       </p>

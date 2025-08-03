@@ -70,19 +70,17 @@ const ManageSoundlegendRequests = () => {
   };
 
   const handleCheckboxChange = async (submissionId, field, value) => {
-  try {
-    const submissionRef = doc(db, 'soundlegend_submissions', submissionId);
-    await updateDoc(submissionRef, { [field]: value });
+    try {
+      const submissionRef = doc(db, 'soundlegend_submissions', submissionId);
+      await updateDoc(submissionRef, { [field]: value });
 
-    setSubmissions((prev) =>
-      prev.map((s) =>
-        s.id === submissionId ? { ...s, [field]: value } : s
-      )
-    );
-  } catch (error) {
-    console.error(`❌ Error updating ${field}:`, error);
-  }
-};
+      setSubmissions((prev) =>
+        prev.map((s) => (s.id === submissionId ? { ...s, [field]: value } : s))
+      );
+    } catch (error) {
+      console.error(`❌ Error updating ${field}:`, error);
+    }
+  };
 
   const filteredSubmissions = hideClosed
     ? submissions.filter((s) => s.overviewStatus !== 'completed')
@@ -122,56 +120,74 @@ const ManageSoundlegendRequests = () => {
         <p>No submissions found.</p>
       ) : (
         <table className="submissions-table">
-<thead>
-  <tr>
-    <th>Status</th>
-    <th>Submitted At</th>
-    <th>Name</th>
-    <th>Email</th>
-    <th>Phone</th>
-    <th>Email Sent</th>
-    <th>Text Sent</th>
-  </tr>
-</thead>
-<tbody>
-  {filteredSubmissions.map((submission) => (
-    <tr
-      key={submission.id}
-      className="submission-row"
-      onClick={() => handleRowClick(submission)}
-    >
-      <td>
-        <span className={`status-badge ${getBadgeClass(submission.status)}`}>
-          {submission.status}
-        </span>
-      </td>
-      <td>
-        {submission.submittedAt?.seconds
-          ? new Date(submission.submittedAt.seconds * 1000).toLocaleString()
-          : 'N/A'}
-      </td>
-      <td>{submission.firstName} {submission.lastName}</td>
-      <td>{submission.email}</td>
-      <td>{submission.phone || 'N/A'}</td>
-      <td>
-        <input
-          type="checkbox"
-          checked={submission.emailed || false}
-          onChange={(e) => handleCheckboxChange(submission.id, 'emailed', e.target.checked)}
-          onClick={(e) => e.stopPropagation()}
-        />
-      </td>
-      <td>
-        <input
-          type="checkbox"
-          checked={submission.texted || false}
-          onChange={(e) => handleCheckboxChange(submission.id, 'texted', e.target.checked)}
-          onClick={(e) => e.stopPropagation()}
-        />
-      </td>
-    </tr>
-  ))}
-</tbody>
+          <thead>
+            <tr>
+              <th>Status</th>
+              <th>Submitted At</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Email Sent</th>
+              <th>Text Sent</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredSubmissions.map((submission) => (
+              <tr
+                key={submission.id}
+                className="submission-row"
+                onClick={() => handleRowClick(submission)}
+              >
+                <td>
+                  <span
+                    className={`status-badge ${getBadgeClass(submission.status)}`}
+                  >
+                    {submission.status}
+                  </span>
+                </td>
+                <td>
+                  {submission.submittedAt?.seconds
+                    ? new Date(
+                        submission.submittedAt.seconds * 1000
+                      ).toLocaleString()
+                    : 'N/A'}
+                </td>
+                <td>
+                  {submission.firstName} {submission.lastName}
+                </td>
+                <td>{submission.email}</td>
+                <td>{submission.phone || 'N/A'}</td>
+                <td>
+                  <input
+                    type="checkbox"
+                    checked={submission.emailed || false}
+                    onChange={(e) =>
+                      handleCheckboxChange(
+                        submission.id,
+                        'emailed',
+                        e.target.checked
+                      )
+                    }
+                    onClick={(e) => e.stopPropagation()}
+                  />
+                </td>
+                <td>
+                  <input
+                    type="checkbox"
+                    checked={submission.texted || false}
+                    onChange={(e) =>
+                      handleCheckboxChange(
+                        submission.id,
+                        'texted',
+                        e.target.checked
+                      )
+                    }
+                    onClick={(e) => e.stopPropagation()}
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       )}
 
@@ -182,7 +198,9 @@ const ManageSoundlegendRequests = () => {
           onUpdateSubmission={(updatedSubmission) => {
             setSubmissions((prev) =>
               prev.map((s) =>
-                s.id === updatedSubmission.id ? { ...s, ...updatedSubmission } : s
+                s.id === updatedSubmission.id
+                  ? { ...s, ...updatedSubmission }
+                  : s
               )
             );
           }}
