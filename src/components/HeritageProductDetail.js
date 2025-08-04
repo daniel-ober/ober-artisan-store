@@ -17,6 +17,7 @@ const HeritageProductDetail = () => {
   const [totalPrice, setTotalPrice] = useState(850);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedDrumSummary, setSelectedDrumSummary] = useState({});
+  const [hardwareColor, setHardwareColor] = useState('Chrome');
   const reRingCost = 150;
   const [product, setProduct] = useState(null);
   const [buttonText, setButtonText] = useState('Add to Cart');
@@ -116,6 +117,7 @@ const HeritageProductDetail = () => {
         'https://firebasestorage.googleapis.com/v0/b/danoberartisandrums-dev.firebasestorage.app/o/products%2FIMG_6123.png?alt=media&token=ec8d40b8-ebae-41dc-93c6-e7936055ead7',
       ],
       category: 'artisan',
+      hardwareColor,
     };
 
     await addToCart(cartItem, cartItem);
@@ -133,17 +135,17 @@ const HeritageProductDetail = () => {
   useEffect(() => {
     const hasReRing =
       staveOption.includes('Re-Rings') || staveOption.includes('+ $150');
-  
-      const selectedOption = heritageSummaries.pricingOptions.find(
-        (option) =>
-          option.size === size &&
-          option.depth === depth &&
-          option.reRing === hasReRing &&
-          option.lugQuantity.toString() === lugs
-      );
-  
+
+    const selectedOption = heritageSummaries.pricingOptions.find(
+      (option) =>
+        option.size === size &&
+        option.depth === depth &&
+        option.reRing === hasReRing &&
+        option.lugQuantity.toString() === lugs
+    );
+
     if (!selectedOption) return;
-  
+
     const expectedId = generateCartItemId({
       stripePriceId: selectedOption.stripePriceId,
       size,
@@ -152,9 +154,9 @@ const HeritageProductDetail = () => {
       lugQuantity: selectedOption.lugQuantity,
       staveQuantity: selectedOption.staveQuantity,
     });
-  
+
     const isInCart = cart.some((item) => item.id === expectedId);
-  
+
     if (isInCart) {
       setCartItemId(expectedId);
       setButtonText('In Cart');
@@ -163,14 +165,7 @@ const HeritageProductDetail = () => {
       setCartItemId(null);
       setButtonText('Add to Cart');
     }
-  }, [
-    cart,
-    size,
-    depth,
-    staveOption,
-    lugs,
-    pendingCartItemId,
-  ]);
+  }, [cart, size, depth, staveOption, lugs, pendingCartItemId]);
 
   useEffect(() => {
     const fetchProductStatus = async () => {
@@ -297,7 +292,7 @@ const HeritageProductDetail = () => {
         alt="HERITAGE Series"
         className="heritage-header-image"
       />
-  
+
       <div className="heritage-product-content">
         <div className="heritage-product-image">
           <img
@@ -305,7 +300,7 @@ const HeritageProductDetail = () => {
             alt="HERITAGE Snare Drum"
           />
         </div>
-  
+
         <div className="heritage-product-options">
           <div className="heritage-features">
             <h2>HERITAGE Series Features</h2>
@@ -322,13 +317,16 @@ const HeritageProductDetail = () => {
               <li>Remo Coated Ambassador Batter & Clear Snare Side</li>
               <li>Estimated Delivery: 5–7 weeks</li>
               <p className="order-to-build-disclaimer">
-                *Note: Each Ober Artisan Drum is built to order. The drum you receive will closely reflect the design shown, but natural wood grain patterns and dimensions may vary depending on your selected size and configuration.
+                *Note: Each Ober Artisan Drum is built to order. The drum you
+                receive will closely reflect the design shown, but natural wood
+                grain patterns and dimensions may vary depending on your
+                selected size and configuration.
               </p>
             </ul>
           </div>
-  
+
           <h2>Build Options</h2>
-  
+
           <label htmlFor="size">Snare Size (Diameter)</label>
           <select id="size" value={size} onChange={handleSizeChange}>
             {Object.keys(basePrices).map((sizeOption) => (
@@ -337,16 +335,19 @@ const HeritageProductDetail = () => {
               </option>
             ))}
           </select>
-  
+
           <label htmlFor="depth">Depth</label>
           <select id="depth" value={depth} onChange={handleDepthChange}>
             {Object.keys(depthPrices[size]).map((depthOption) => (
               <option key={depthOption} value={depthOption}>
-                {depthOption}" {depthPrices[size][depthOption] > 0 ? `+ $${depthPrices[size][depthOption]}` : ''}
+                {depthOption}"{' '}
+                {depthPrices[size][depthOption] > 0
+                  ? `+ $${depthPrices[size][depthOption]}`
+                  : ''}
               </option>
             ))}
           </select>
-  
+
           <label htmlFor="lugs">Lug Quantity</label>
           <select id="lugs" value={lugs} onChange={handleLugChange}>
             {lugOptions[size].map((lugOption) => (
@@ -355,7 +356,7 @@ const HeritageProductDetail = () => {
               </option>
             ))}
           </select>
-  
+
           <label htmlFor="staves">Stave Quantity & Shell Thickness</label>
           <select id="staves" value={staveOption} onChange={handleStaveChange}>
             {(staveOptions[size]?.[lugs] || []).map((staveOption) => (
@@ -364,22 +365,36 @@ const HeritageProductDetail = () => {
               </option>
             ))}
           </select>
-  
+
+            <label htmlFor="hardwareColor">Hardware Finish</label>
+          <select
+            id="hardwareColor"
+            value={hardwareColor}
+            onChange={(e) => setHardwareColor(e.target.value)}
+          >
+            <option value="Chrome">Chrome</option>
+            <option value="Black Nickel">Black Nickel</option>
+            <option value="Brass/Gold">Brass/Gold</option>
+          </select>
+
           <p className="feuzon-detail-price">${totalPrice}</p>
           <p className="delivery-time">Est Delivery: 5–7 weeks</p>
-  
+
           {buttonText === 'In Cart' ? (
             <div className="artisan-cart-hover-container">
-  <button className="artisan-in-cart-button" disabled>
-    ✔ In Cart
-  </button>
-  <div className="artisan-cart-hover-options">
-    <span onClick={() => navigate('/cart')}>View Cart</span>
-    <span onClick={handleRemoveFromCart}>Remove</span>
-  </div>
-</div>
+              <button className="artisan-in-cart-button" disabled>
+                ✔ In Cart
+              </button>
+              <div className="artisan-cart-hover-options">
+                <span onClick={() => navigate('/cart')}>View Cart</span>
+                <span onClick={handleRemoveFromCart}>Remove</span>
+              </div>
+            </div>
           ) : (
-            <button className="artisan-add-to-cart-button" onClick={handleAddToCart}>
+            <button
+              className="artisan-add-to-cart-button"
+              onClick={handleAddToCart}
+            >
               Add to Cart
             </button>
           )}

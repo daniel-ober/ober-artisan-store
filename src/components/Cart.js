@@ -376,6 +376,12 @@ const Cart = () => {
                               (config.reRing
                                 ? 'With Re-Ring'
                                 : 'Re-Rings: None')}
+
+                            {/* ✅ Add Hardware Color Here */}
+                            {config.hardwareColor && (
+                              <> | Hardware: {config.hardwareColor}</>
+                            )}
+
                             {(config.outerShell || config.innerStave) && (
                               <>
                                 <br />

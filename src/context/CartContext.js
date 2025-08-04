@@ -193,6 +193,7 @@ export const CartProvider = ({ children }) => {
         staveQuantity: product.staveQuantity ?? mergedOptions.staveQuantity,
         outerShell: mergedOptions.outerShell,
         innerStave: mergedOptions.innerStave,
+        hardwareColor: mergedOptions.hardwareColor || 'Chrome',
       },
       timestamp: new Date().toISOString(),
     };

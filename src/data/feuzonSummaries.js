@@ -1,24 +1,50 @@
 const feuzonSummaries = {
-  pricingOptions: [
-    { size: "12", depth: "5.0", price: 1050, reRing: false, stripePriceId: "price_1R27SWJbbx8jAR4NEF9lvUsT", lugQuantity: 6, staveQuantity: 12 },
-    { size: "12", depth: "6.0", price: 1150, reRing: false, stripePriceId: "price_1R27SXJbbx8jAR4NXYEVF1QG", lugQuantity: 6, staveQuantity: 12 },
-    { size: "12", depth: "7.0", price: 1250, reRing: false, stripePriceId: "price_1R27SWJbbx8jAR4NM6z6jrHA", lugQuantity: 6, staveQuantity: 12 },
-    { size: "13", depth: "5.0", price: 1150, reRing: false, stripePriceId: "price_1R27SXJbbx8jAR4NXYEVF1QG", lugQuantity: 8, staveQuantity: 16 },
-    { size: "13", depth: "6.0", price: 1250, reRing: false, stripePriceId: "price_1R27SWJbbx8jAR4NM6z6jrHA", lugQuantity: 8, staveQuantity: 16 },
-    { size: "13", depth: "7.0", price: 1350, reRing: false, stripePriceId: "price_1R27SWJbbx8jAR4NMiSM1GeA", lugQuantity: 8, staveQuantity: 16 },
-    { size: "14", depth: "5.0", price: 1250, reRing: false, stripePriceId: "price_1R27SWJbbx8jAR4NM6z6jrHA", lugQuantity: 8, staveQuantity: 16 },
-    { size: "14", depth: "6.0", price: 1350, reRing: false, stripePriceId: "price_1R27SWJbbx8jAR4NMiSM1GeA", lugQuantity: 8, staveQuantity: 16 },
-    { size: "14", depth: "7.0", price: 1450, reRing: false, stripePriceId: "price_1R27SWJbbx8jAR4N7TIJ9lke", lugQuantity: 8, staveQuantity: 16 },
-    { size: "14", depth: "5.0", price: 1400, reRing: true,  stripePriceId: "price_1R27SWJbbx8jAR4NdqYjsTu4", lugQuantity: 10, staveQuantity: 10 },
-    { size: "14", depth: "6.0", price: 1500, reRing: true,  stripePriceId: "price_1R27SWJbbx8jAR4NdqKf4xVY", lugQuantity: 10, staveQuantity: 10 },
-    { size: "14", depth: "7.0", price: 1600, reRing: true,  stripePriceId: "price_1R27SWJbbx8jAR4N4gpm2LxA", lugQuantity: 10, staveQuantity: 10 },
-    { size: "12", depth: "5.0", price: 1050, reRing: false, stripePriceId: "price_1R27SWJbbx8jAR4NEF9lvUsT", lugQuantity: 8, staveQuantity: 16 },
-    { size: "12", depth: "6.0", price: 1150, reRing: false, stripePriceId: "price_1R27SXJbbx8jAR4NXYEVF1QG", lugQuantity: 8, staveQuantity: 16 },
-    { size: "12", depth: "7.0", price: 1250, reRing: false, stripePriceId: "price_1R27SWJbbx8jAR4NM6z6jrHA", lugQuantity: 8, staveQuantity: 16 },
-    { size: "14", depth: "5.0", price: 1250, reRing: false, stripePriceId: "price_1R27SWJbbx8jAR4NM6z6jrHA", lugQuantity: 10, staveQuantity: 20 },
-    { size: "14", depth: "6.0", price: 1350, reRing: false, stripePriceId: "price_1R27SWJbbx8jAR4NMiSM1GeA", lugQuantity: 10, staveQuantity: 20 },
-    { size: "14", depth: "7.0", price: 1450, reRing: false, stripePriceId: "price_1R27SWJbbx8jAR4N7TIJ9lke", lugQuantity: 10, staveQuantity: 20 },
-  ],
+pricingOptions: [
+  // === Size 12 (6 Lugs) ===
+  { size: "12", depth: "5.0", price: 1050, reRing: false, stripePriceId: "price_1R27SWJbbx8jAR4NEF9lvUsT", lugQuantity: 6, staveQuantity: 12 },
+  { size: "12", depth: "5.5", price: 1100, reRing: false, stripePriceId: "price_1RsDmXJbbx8jAR4NQo5qBz1b", lugQuantity: 6, staveQuantity: 12 },
+  { size: "12", depth: "6.0", price: 1150, reRing: false, stripePriceId: "price_1R27SXJbbx8jAR4NXYEVF1QG", lugQuantity: 6, staveQuantity: 12 },
+  { size: "12", depth: "6.5", price: 1200, reRing: false, stripePriceId: "price_1RsDtxJbbx8jAR4NTBqywXSW", lugQuantity: 6, staveQuantity: 12 },
+  { size: "12", depth: "7.0", price: 1250, reRing: false, stripePriceId: "price_1R27SWJbbx8jAR4NM6z6jrHA", lugQuantity: 6, staveQuantity: 12 },
+  { size: "12", depth: "7.5", price: 1300, reRing: false, stripePriceId: "price_1RsDuZJbbx8jAR4N8CLUfiRE", lugQuantity: 6, staveQuantity: 12 },
+  { size: "12", depth: "8.0", price: 1350, reRing: false, stripePriceId: "price_1R27SWJbbx8jAR4NMiSM1GeA", lugQuantity: 6, staveQuantity: 12 },
+
+  // === Size 13 (8 Lugs) ===
+  { size: "13", depth: "5.0", price: 1150, reRing: false, stripePriceId: "price_1R27SXJbbx8jAR4NXYEVF1QG", lugQuantity: 8, staveQuantity: 16 },
+  { size: "13", depth: "5.5", price: 1200, reRing: false, stripePriceId: "price_1RsDtxJbbx8jAR4NTBqywXSW", lugQuantity: 8, staveQuantity: 16 },
+  { size: "13", depth: "6.0", price: 1250, reRing: false, stripePriceId: "price_1R27SWJbbx8jAR4NM6z6jrHA", lugQuantity: 8, staveQuantity: 16 },
+  { size: "13", depth: "6.5", price: 1300, reRing: false, stripePriceId: "price_1RsDuZJbbx8jAR4N8CLUfiRE", lugQuantity: 8, staveQuantity: 16 },
+  { size: "13", depth: "7.0", price: 1350, reRing: false, stripePriceId: "price_1R27SWJbbx8jAR4NMiSM1GeA", lugQuantity: 8, staveQuantity: 16 },
+  { size: "13", depth: "7.5", price: 1400, reRing: false, stripePriceId: "price_1R27SWJbbx8jAR4NdqYjsTu4", lugQuantity: 8, staveQuantity: 16 },
+  { size: "13", depth: "8.0", price: 1450, reRing: false, stripePriceId: "price_1RsDvdJbbx8jAR4N6UnNUg6G", lugQuantity: 8, staveQuantity: 16 },
+
+  // === Size 14 (8 Lugs) ===
+  { size: "14", depth: "5.0", price: 1250, reRing: false, stripePriceId: "price_1R27SWJbbx8jAR4NM6z6jrHA", lugQuantity: 8, staveQuantity: 16 },
+  { size: "14", depth: "5.5", price: 1300, reRing: false, stripePriceId: "price_1RsDuZJbbx8jAR4N8CLUfiRE", lugQuantity: 8, staveQuantity: 16 },
+  { size: "14", depth: "6.0", price: 1350, reRing: false, stripePriceId: "price_1R27SWJbbx8jAR4NMiSM1GeA", lugQuantity: 8, staveQuantity: 16 },
+  { size: "14", depth: "6.5", price: 1400, reRing: false, stripePriceId: "price_1R27SWJbbx8jAR4NdqYjsTu4", lugQuantity: 8, staveQuantity: 16 },
+  { size: "14", depth: "7.0", price: 1450, reRing: false, stripePriceId: "price_1R27SWJbbx8jAR4N7TIJ9lke", lugQuantity: 8, staveQuantity: 16 },
+  { size: "14", depth: "7.5", price: 1500, reRing: false, stripePriceId: "price_1R27SWJbbx8jAR4NdqKf4xVY", lugQuantity: 8, staveQuantity: 16 },
+  { size: "14", depth: "8.0", price: 1550, reRing: false, stripePriceId: "price_1RsDw7Jbbx8jAR4N1ZV8C9oJ", lugQuantity: 8, staveQuantity: 16 },
+
+  // === Size 14 (10 Lugs) ===
+  { size: "14", depth: "5.0", price: 1250, reRing: false, stripePriceId: "price_1R27SWJbbx8jAR4NM6z6jrHA", lugQuantity: 10, staveQuantity: 20 },
+  { size: "14", depth: "5.5", price: 1300, reRing: false, stripePriceId: "price_1RsDuZJbbx8jAR4N8CLUfiRE", lugQuantity: 10, staveQuantity: 20 },
+  { size: "14", depth: "6.0", price: 1350, reRing: false, stripePriceId: "price_1R27SWJbbx8jAR4NMiSM1GeA", lugQuantity: 10, staveQuantity: 20 },
+  { size: "14", depth: "6.5", price: 1400, reRing: false, stripePriceId: "price_1R27SWJbbx8jAR4NdqYjsTu4", lugQuantity: 10, staveQuantity: 20 },
+  { size: "14", depth: "7.0", price: 1450, reRing: false, stripePriceId: "price_1R27SWJbbx8jAR4N7TIJ9lke", lugQuantity: 10, staveQuantity: 20 },
+  { size: "14", depth: "7.5", price: 1500, reRing: false, stripePriceId: "price_1R27SWJbbx8jAR4NdqKf4xVY", lugQuantity: 10, staveQuantity: 20 },
+  { size: "14", depth: "8.0", price: 1550, reRing: false, stripePriceId: "price_1RsDw7Jbbx8jAR4N1ZV8C9oJ", lugQuantity: 10, staveQuantity: 20 },
+
+  // === Size 14 (10 Lugs with Re-Rings) ===
+  { size: "14", depth: "5.0", price: 1400, reRing: true,  stripePriceId: "price_1R27SWJbbx8jAR4NdqYjsTu4", lugQuantity: 10, staveQuantity: 10 },
+  { size: "14", depth: "5.5", price: 1450, reRing: true,  stripePriceId: "price_1RsDvdJbbx8jAR4N6UnNUg6G", lugQuantity: 10, staveQuantity: 10 },
+  { size: "14", depth: "6.0", price: 1500, reRing: true,  stripePriceId: "price_1R27SWJbbx8jAR4NdqKf4xVY", lugQuantity: 10, staveQuantity: 10 },
+  { size: "14", depth: "6.5", price: 1550, reRing: true,  stripePriceId: "price_1RsDw7Jbbx8jAR4N1ZV8C9oJ", lugQuantity: 10, staveQuantity: 10 },
+  { size: "14", depth: "7.0", price: 1600, reRing: true,  stripePriceId: "price_1R27SWJbbx8jAR4N4gpm2LxA", lugQuantity: 10, staveQuantity: 10 },
+  { size: "14", depth: "7.5", price: 1650, reRing: true,  stripePriceId: "price_1RsEGxJbbx8jAR4NixjRKB7U", lugQuantity: 10, staveQuantity: 10 },
+  { size: "14", depth: "8.0", price: 1700, reRing: true,  stripePriceId: "price_1RsEHVJbbx8jAR4Nv75VZFJC", lugQuantity: 10, staveQuantity: 10 },
+],
   '12" - Base Price: $1050-5.0"-6 Lugs-12 - 10mm-Maple-Walnut + Birch': {
     highlightedCharacteristics:
       'Crisp attack with balanced sustain, ideal for tight articulation.',
