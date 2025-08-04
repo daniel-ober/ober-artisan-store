@@ -26,11 +26,35 @@ const HeritageProductDetail = () => {
   const [pendingCartItemId, setPendingCartItemId] = useState(null);
   const navigate = useNavigate();
 
-const depthPrices = {
-  12: { '5.0': 0, '5.5': 50, '6.0': 100, '6.5': 150, '7.0': 200, '7.5': 250, '8.0': 300 },
-  13: { '5.0': 0, '5.5': 50, '6.0': 100, '6.5': 150, '7.0': 200, '7.5': 250, '8.0': 300 },
-  14: { '5.0': 0, '5.5': 50, '6.0': 100, '6.5': 150, '7.0': 200, '7.5': 250, '8.0': 300 },
-};
+  const depthPrices = {
+    12: {
+      '5.0': 0,
+      5.5: 50,
+      '6.0': 100,
+      6.5: 150,
+      '7.0': 200,
+      7.5: 250,
+      '8.0': 300,
+    },
+    13: {
+      '5.0': 0,
+      5.5: 50,
+      '6.0': 100,
+      6.5: 150,
+      '7.0': 200,
+      7.5: 250,
+      '8.0': 300,
+    },
+    14: {
+      '5.0': 0,
+      5.5: 50,
+      '6.0': 100,
+      6.5: 150,
+      '7.0': 200,
+      7.5: 250,
+      '8.0': 300,
+    },
+  };
 
   const staveOptions = {
     12: { 6: ['12 - 10mm'], 8: ['16 - 13mm'] },
@@ -110,7 +134,7 @@ const depthPrices = {
       reRing: hasReRing,
       lugQuantity: selectedOption.lugQuantity,
       staveQuantity: selectedOption.staveQuantity,
-      price: selectedOption.price,
+      price: totalPrice,
       stripePriceId: selectedOption.stripePriceId,
       quantity: 1,
       images: [
@@ -366,7 +390,7 @@ const depthPrices = {
             ))}
           </select>
 
-            <label htmlFor="hardwareColor">Hardware Finish</label>
+          <label htmlFor="hardwareColor">Hardware Finish</label>
           <select
             id="hardwareColor"
             value={hardwareColor}
