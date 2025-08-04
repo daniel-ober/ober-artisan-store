@@ -100,6 +100,9 @@ const CartPreview = ({ onClose, closeMenu }) => {
                 if (typeof config.reRing !== 'undefined') {
                   line2.push(config.reRing ? 'Re-Rings' : 'No Re-Rings');
                 }
+                if (config.hardwareColor) {
+                  line2.push(`Hardware: ${config.hardwareColor}`);
+                }
                 if (line2.length > 0) configLines.push(line2.join(' • '));
                 if (config.outerShell || config.innerStave) {
                   configLines.push(

@@ -87,6 +87,7 @@ app.post('/createCheckoutSession', async (req, res) => {
               ? 'Re-Rings'
               : 'No Re-Rings'
             : '',
+          config.hardwareColor ? `Hardware: ${config.hardwareColor}` : '', // ✅ NEW
         ].filter(Boolean);
 
         const productData = {
@@ -94,18 +95,23 @@ app.post('/createCheckoutSession', async (req, res) => {
           images:
             typeof p.image === 'string' && p.image.startsWith('http')
               ? [p.image]
-              : ['https://oberartisandrums.com/fallback-images/fallback_image1.png'],
+              : [
+                  'https://oberartisandrums.com/fallback-images/fallback_image1.png',
+                ],
+          description: descriptionParts.join(' • '),
         };
-
-        if (descriptionParts.length > 0) {
-          productData.description = descriptionParts.join(' • ');
-        }
 
         return {
           price_data: {
             currency: 'usd',
             unit_amount: price.unit_amount,
-            product_data: productData,
+            product_data: {
+              ...productData,
+              metadata: {
+                // ✅ send hardwareColor in metadata too
+                hardwareColor: config.hardwareColor || '',
+              },
+            },
           },
           quantity: p.quantity || 1,
         };
@@ -800,24 +806,23 @@ exports.refreshPrintifyStockNow = onRequest(
 );
 
 exports.adminCreateUser = functions.https.onCall(async (data, context) => {
-  const {
-    email,
-    password,
-    firstName,
-    lastName,
-    phone,
-    isSoundlegend,
-    status,
-  } = data;
+  const { email, password, firstName, lastName, phone, isSoundlegend, status } =
+    data;
 
   // ✅ Ensure user is authenticated
   if (!context.auth) {
-    throw new functions.https.HttpsError('unauthenticated', 'User must be signed in.');
+    throw new functions.https.HttpsError(
+      'unauthenticated',
+      'User must be signed in.'
+    );
   }
 
   // ✅ Ensure user has admin privileges
   if (!context.auth.token.admin) {
-    throw new functions.https.HttpsError('permission-denied', 'Admin privileges required.');
+    throw new functions.https.HttpsError(
+      'permission-denied',
+      'Admin privileges required.'
+    );
   }
 
   try {
@@ -832,16 +837,20 @@ exports.adminCreateUser = functions.https.onCall(async (data, context) => {
     console.log(`✅ Created user ${userRecord.uid} (${email})`);
 
     // ✅ Create corresponding Firestore doc
-    await admin.firestore().collection('users').doc(userRecord.uid).set({
-      firstName,
-      lastName,
-      email,
-      phone,
-      isAdmin: false,
-      isSoundlegend: isSoundlegend || false,
-      status: status || 'active',
-      createdAt: admin.firestore.Timestamp.now(),
-    });
+    await admin
+      .firestore()
+      .collection('users')
+      .doc(userRecord.uid)
+      .set({
+        firstName,
+        lastName,
+        email,
+        phone,
+        isAdmin: false,
+        isSoundlegend: isSoundlegend || false,
+        status: status || 'active',
+        createdAt: admin.firestore.Timestamp.now(),
+      });
 
     return { uid: userRecord.uid };
   } catch (err) {

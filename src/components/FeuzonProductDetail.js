@@ -17,6 +17,7 @@ const FeuzonProductDetail = () => {
   const [lugs, setLugs] = useState('8');
   const [showModifyModal, setShowModifyModal] = useState(false);
   const [showAddSeparateModal, setShowAddSeparateModal] = useState(false);
+  const [hardwareColor, setHardwareColor] = useState('Chrome');
   const [staveOption, setStaveOption] = useState('');
   const [staveQuantities, setStaveQuantities] = useState([]);
   const [totalPrice, setTotalPrice] = useState(1050);
@@ -45,11 +46,11 @@ const FeuzonProductDetail = () => {
 
   const basePrices = { 12: 1050, 13: 1150, 14: 1250 };
 
-  const depthPrices = {
-    12: { '5.0': 0, '6.0': 100, '7.0': 200 },
-    13: { '5.0': 0, '6.0': 100, '7.0': 200 },
-    14: { '5.0': 0, '6.0': 100, '7.0': 200 },
-  };
+const depthPrices = {
+  12: { '5.0': 0, '5.5': 50, '6.0': 100, '6.5': 150, '7.0': 200, '7.5': 250, '8.0': 300 },
+  13: { '5.0': 0, '5.5': 50, '6.0': 100, '6.5': 150, '7.0': 200, '7.5': 250, '8.0': 300 },
+  14: { '5.0': 0, '5.5': 50, '6.0': 100, '6.5': 150, '7.0': 200, '7.5': 250, '8.0': 300 },
+};
 
   const staveOptions = {
     Maple: ['Walnut + Birch', 'Oak + Cherry', 'Maple + Bubinga'],
@@ -161,6 +162,7 @@ const FeuzonProductDetail = () => {
       options: {
         outerShell,
         innerStave,
+        hardwareColor,
       },
     };
 
@@ -602,6 +604,17 @@ const FeuzonProductDetail = () => {
                 {option}
               </option>
             ))}
+          </select>
+
+          <label htmlFor="hardwareColor">Hardware Finish</label>
+          <select
+            id="hardwareColor"
+            value={hardwareColor}
+            onChange={(e) => setHardwareColor(e.target.value)}
+          >
+            <option value="Chrome">Chrome</option>
+            <option value="Black Nickel">Black Nickel</option>
+            <option value="Brass/Gold">Brass/Gold</option>
           </select>
 
           <p className="feuzon-detail-price">${totalPrice}</p>
