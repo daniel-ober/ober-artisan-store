@@ -176,7 +176,6 @@ const Cart = () => {
         const selectedColor = normalize(selectedColorRaw);
 
         let previewImage = fallback;
-
         if (item.image?.startsWith('http')) {
           previewImage = item.image;
         } else if (item.category === 'artisan') {
@@ -212,18 +211,35 @@ const Cart = () => {
               ) ||
               product.images.find((img) => img.is_default) ||
               product.images[0];
-
             if (matchedImage?.src?.startsWith('http')) {
               previewImage = matchedImage.src;
             }
           }
         }
 
+        // ✅ Build correct payload with lugQuantity explicitly included
         return {
-          ...item,
+          productId: item.productId,
+          name: item.name || 'HERITAGE',
+          stripePriceId: item.stripePriceId,
+          price: item.price,
+          quantity: item.quantity || 1,
           image: previewImage.startsWith('http') ? previewImage : undefined,
+          config: {
+            size: config.size || '',
+            depth: config.depth || '',
+            lugQuantity: config.lugQuantity || '', // ✅ FIXED
+            staveQuantity: config.staveQuantity || '',
+            reRing: typeof config.reRing !== 'undefined' ? config.reRing : '',
+            hardwareColor: config.hardwareColor || '',
+            outerShell: config.outerShell || '',
+            innerStave: config.innerStave || '',
+          },
         };
       });
+
+      console.log('🧾 Payload being sent to Stripe API:', productsPayload);
+
 
       const response = await fetch(`${API_BASE_URL}/createCheckoutSession`, {
         method: 'POST',
