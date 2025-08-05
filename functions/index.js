@@ -70,53 +70,50 @@ app.post('/createCheckoutSession', async (req, res) => {
     }
 
     const guestToken = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
-    const lineItems = await Promise.all(
-      products.map(async (p) => {
-        const price = await stripe.prices.retrieve(p.stripePriceId);
-        const config = p.config || {};
-        const staveQuantity = config.staveQuantity ?? config.StaveQuantity;
 
-        const descriptionParts = [
-          config.Sizes ? `Size: ${config.Sizes}` : '',
-          config.Colors ? `Color: ${config.Colors}` : '',
-          config.depth ? `Depth: ${config.depth}"` : '',
-          config.lugQuantity ? `${config.lugQuantity} Lugs` : '',
-          staveQuantity ? `${staveQuantity} Staves` : '',
-          config.reRing !== undefined
-            ? config.reRing
-              ? 'Re-Rings'
-              : 'No Re-Rings'
-            : '',
-          config.hardwareColor ? `Hardware: ${config.hardwareColor}` : '', // ✅ NEW
-        ].filter(Boolean);
+    const lineItems = products.map((p) => {
+      const config = p.config || {};
+      const staveQuantity = config.staveQuantity ?? config.StaveQuantity;
 
-        const productData = {
-          name: p.name,
-          images:
-            typeof p.image === 'string' && p.image.startsWith('http')
-              ? [p.image]
-              : [
-                  'https://oberartisandrums.com/fallback-images/fallback_image1.png',
-                ],
-          description: descriptionParts.join(' • '),
-        };
+      const descriptionParts = [
+        config.size ? `Size: ${config.size}"` : '',
+        config.depth ? `Depth: ${config.depth}"` : '',
+        config.lugQuantity ? `${config.lugQuantity}-Lug` : '',
+        staveQuantity ? `${staveQuantity}-Stave` : '',
+        config.reRing !== undefined ? (config.reRing ? 'Re-Rings' : 'No Re-Rings') : '',
+        config.hardwareColor ? `Hardware: ${config.hardwareColor}` : '',
+      ].filter(Boolean);
 
-        return {
-          price_data: {
-            currency: 'usd',
-            unit_amount: price.unit_amount,
-            product_data: {
-              ...productData,
-              metadata: {
-                // ✅ send hardwareColor in metadata too
-                hardwareColor: config.hardwareColor || '',
-              },
+      const productData = {
+        name: p.name,
+        images: (typeof p.image === 'string' && p.image.startsWith('http'))
+          ? [p.image]
+          : ['https://oberartisandrums.com/fallback-images/fallback_image1.png'],
+        description: descriptionParts.join(' | '),
+      };
+
+      return {
+        price_data: {
+          currency: 'usd',
+          // ✅ use frontend-calculated price, not Stripe Price object
+          unit_amount: Math.round((p.price || 0) * 100),
+          product_data: {
+            ...productData,
+            metadata: {
+              productId: p.productId || p.id || '',
+              variantId: p.variantId || '',
+              size: config.size || '',
+              depth: config.depth || '',
+              reRing: config.reRing ? 'Yes' : 'No',
+              lugQuantity: config.lugQuantity || '',
+              staveQuantity: staveQuantity || '',
+              hardwareColor: config.hardwareColor || '',
             },
           },
-          quantity: p.quantity || 1,
-        };
-      })
-    );
+        },
+        quantity: p.quantity || 1,
+      };
+    });
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
