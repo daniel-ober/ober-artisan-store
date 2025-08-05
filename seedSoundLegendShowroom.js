@@ -1,6 +1,6 @@
 // seedSoundLegendShowroom.js
 const admin = require('firebase-admin');
-const serviceAccount = require('./serviceAccountKey.json'); // Make sure this file is in the same directory
+const serviceAccount = require('./serviceAccountKey.json'); // Ensure this file is in the same directory
 
 // ✅ Initialize Firebase Admin SDK
 admin.initializeApp({
@@ -9,44 +9,58 @@ admin.initializeApp({
 
 const db = admin.firestore();
 
-// ✅ Updated Drum Data (with URLs from screenshot)
+// ✅ Drum Data for SL-003 (Rick Ressner)
 const drumData = {
-  name: 'Danny Lopez – SoundLegend Original',
+  name: 'Rick Ressner – SoundLegend Original',
   heroImage:
-    'https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/artisan%2FSL-002%2FIMG_1582.jpeg?alt=media&token=98290c5f-df32-445d-8793-c669b8bd7976',
+    'https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/artisan%2FSL-003%2Fhero.jpeg?alt=media&token=YOUR_TOKEN_HERE',
   gallery: [
-    'https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/artisan%2FSL-002%2FIMG_1585.jpeg?alt=media&token=76f4daf9-cd02-4a5e-8d9c-abbbb5a31932',
-    'https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/artisan%2FSL-002%2FIMG_1575.jpeg?alt=media&token=920d3534-174a-49b4-b555-5bd8c8ef8d8c',
-    'https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/artisan%2FSL-002%2FIMG_1584.jpeg?alt=media&token=76b4b876-df1a-43d4-a5ac-12de458b0a17',
-    'https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/artisan%2FSL-002%2FIMG_1572.JPG?alt=media&token=e8b2f374-1b8e-4150-b020-5d5898ce2138',
-    'https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/artisan%2FSL-002%2FIMG_1594.jpeg?alt=media&token=40c39658-95ac-4497-bc27-f9c92a7d22ea',
-    'https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/artisan%2FSL-002%2FIMG_1581.JPG?alt=media&token=cb6a0141-b850-417d-8b15-9dc9f2b79ff3',
-    'https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/artisan%2FSL-002%2FIMG_1602.jpg?alt=media&token=ab8399aa-c0dc-4bac-a076-2952892d39bd',
-    'https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/artisan%2FSL-002%2FIMG_1599.JPG?alt=media&token=9da0c228-c67b-42a5-9ed3-caf6e1ff6631',
+    'https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/artisan%2FSL-003%2Fimg1.jpeg?alt=media&token=YOUR_TOKEN_HERE',
+    'https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/artisan%2FSL-003%2Fimg2.jpeg?alt=media&token=YOUR_TOKEN_HERE',
+    'https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/artisan%2FSL-003%2Fimg3.jpeg?alt=media&token=YOUR_TOKEN_HERE',
+    'https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/artisan%2FSL-003%2Fimg4.jpeg?alt=media&token=YOUR_TOKEN_HERE',
+    'https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/artisan%2FSL-003%2Fimg5.jpeg?alt=media&token=YOUR_TOKEN_HERE',
   ],
   specs: {
-    size: '14x8',
-    shell: 'Maple + Cherry Stave',
+    size: '14x5.25',
+    shell: 'Birch + Cherry Stave',
     finish: 'Mappa Burl Poly Gloss',
-    hardware: 'Brass Diecast Hoops, Vintage Tube Lugs',
+    hardware: 'Brass/Gold Diecast Hoops, Vintage Tube Lugs',
     bearingEdges: '45° Inner / Rounded Outer',
     snareWires: 'Puresound Custom 20-strand',
   },
-  story:
-    'For Daniel El Travieso Lopez, drummer for Arrasando Norte, drumming is more than rhythm—it is a narrative that unfolds with every stroke. After years of performing, Daniel sought a sound that could carry both the intensity of the stage and the soul of his musical heritage. When he discovered the SoundLegend Original, it resonated deeply with his vision. This collaboration resulted in a snare that is both commanding and nuanced, reflecting his artistry and dedication. The SoundLegend Original built for Daniel is not just an instrument; it is a testament to craftsmanship and the story of an artist finding his voice anew.',
+  story: `🥁 Some Rhythms Never Fade. 🎶
+
+For Rick Ressner, music was once a language he spoke fluently. As a young drummer, he played snare in the All City Orchestra and later in the Charleston Band of Doctors. Life, career, and arthritis slowly pushed the sticks out of his hands. Wrists and spine pain made even the simplest rudiments a challenge. Decades passed without a backbeat.
+
+Then one day, Rick saw my SoundLegend Original online. Something about it — the craftsmanship, the voice of the wood — stirred a rhythm he thought was gone. It sparked the question: What’s really stopping me?
+
+We connected, and our stories aligned. Like Rick, I live with arthritis. I know the frustration, the fear of losing music to pain, and the joy of rediscovering it with the right tools. So alongside building his snare, I’m sending Rick my personal booklet on adaptive drumming — tips and tricks I’ve learned through my own journey to keep playing despite the pain.
+
+🔥 Rick Ressner’s Custom SoundLegend Snare
+• Size: 14” x 5.25” — compact, fast, and responsive for intricate ghost notes
+• Shell: Birch + Cherry stave construction — birch articulation meets cherry warmth
+• Finish: Mappa Burl veneer, hand-polished to a glassy polyurethane sheen
+• Hardware: 8 vintage tube lugs, diecast hoops, gold/brass finish — elegant and road-ready
+• Edges: Precision 45° inner, rounded outer — a perfect balance of attack and resonance
+• Voice: Tight, articulate, and effortlessly dynamic — built for a jazz player’s finesse
+
+Rick’s new snare isn’t just an instrument. It’s a bridge back to the music that shaped him.
+
+🎼 For those who think arthritis means the music stops — Rick’s story says otherwise.`,
   links: {
-    spotify: 'https://open.spotify.com/artist/6eYZ04cc9tUzgqeadLu4B7',
-    itunes: 'https://music.apple.com/us/artist/arrasando-norte/1725755717',
-    youtube: 'https://www.youtube.com/@ARRASANDONORTE',
-    instagram: 'https://www.instagram.com/daniel_lopez_arrasando_norte/',
-    facebook: 'https://www.facebook.com/daniel.el.travieso.lopez.2025',
+    spotify: '',
+    itunes: '',
+    youtube: '',
+    instagram: '',
+    facebook: '',
   },
 };
 
 async function seed() {
   try {
-    await db.collection('soundlegend_showroom').doc('SL-002').set(drumData);
-    console.log('✅ Successfully seeded: SL-002');
+    await db.collection('soundlegend_showroom').doc('SL-003').set(drumData);
+    console.log('✅ Successfully seeded: SL-003');
     process.exit(0);
   } catch (error) {
     console.error('❌ Error seeding data:', error);
