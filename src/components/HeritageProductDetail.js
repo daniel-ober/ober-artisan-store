@@ -122,9 +122,12 @@ const HeritageProductDetail = () => {
       size,
       depth,
       reRing: hasReRing,
-      lugQuantity: selectedOption.lugQuantity,
-      staveQuantity: selectedOption.staveQuantity,
+      lugQuantity: lugs, // ✅ make sure lug count is passed here
+      staveQuantity: staveOption.split(' - ')[0],
+      hardwareColor, // ✅ make sure hardwareColor is included
     });
+
+    const correctedPrice = totalPrice; // ✅ use the calculated totalPrice
 
     const cartItem = {
       id: newCartItemId,
@@ -133,10 +136,10 @@ const HeritageProductDetail = () => {
       size,
       depth,
       reRing: hasReRing,
-      lugQuantity: selectedOption.lugQuantity,
-      staveQuantity: selectedOption.staveQuantity,
-      price: selectedOption.price,
-      stripePriceId: selectedOption.stripePriceId,
+      lugQuantity: lugs, // ✅ use the actual user selection
+      staveQuantity: staveOption.split(' - ')[0],
+      price: correctedPrice, // ✅ always use calculated totalPrice
+      stripePriceId: null, // ✅ prevent old Stripe price mismatch
       quantity: 1,
       images: [
         'https://firebasestorage.googleapis.com/v0/b/danoberartisandrums-dev.firebasestorage.app/o/products%2FIMG_6123.png?alt=media&token=ec8d40b8-ebae-41dc-93c6-e7936055ead7',
@@ -145,7 +148,14 @@ const HeritageProductDetail = () => {
       hardwareColor,
     };
 
-    await addToCart(cartItem, cartItem);
+    await addToCart(cartItem, {
+      lugQuantity: lugs,
+      size,
+      depth,
+      reRing: hasReRing,
+      staveQuantity: staveOption.split(' - ')[0],
+      hardwareColor,
+    });
     toast.success('🛒 Item added to cart!');
     setPendingCartItemId(cartItem.id); // let useEffect detect this as a signal
     // ✅ Manually reflect new ID locally for instant feedback
@@ -153,50 +163,50 @@ const HeritageProductDetail = () => {
     setButtonText('In Cart');
   };
 
-  const generateCartItemId = (option) => {
-    return `${option.stripePriceId}-${option.size}-${option.depth}-${String(option.reRing)}-${option.lugQuantity}-${option.staveQuantity}`;
-  };
+const generateCartItemId = (option) => {
+  const normalizedStave = String(option.staveQuantity).trim();
+  const normalizedHardware = String(option.hardwareColor)
+    .toLowerCase()
+    .replace(/\s+/g, '-');
 
-  useEffect(() => {
-    const hasReRing =
-      staveOption.includes('Re-Rings') || staveOption.includes('+ $150');
+  // ✅ Always use empty string when stripePriceId is missing to match CartContext
+  const priceId = option.stripePriceId ?? '';
 
-    const matchedOption = heritageSummaries.pricingOptions.find(
-      (option) =>
-        option.size === size &&
-        option.depth === depth &&
-        option.reRing === hasReRing &&
-        option.lugQuantity.toString() === lugs
+  return `${priceId}-${option.size}-${option.depth}-${String(option.reRing)}-${option.lugQuantity}-${normalizedStave}-${normalizedHardware}`;
+};
+
+useEffect(() => {
+  const hasReRing = staveOption.includes('Re-Rings') || staveOption.includes('+ $150');
+  const normalizedStave = staveOption.split(' - ')[0].trim();
+  const normalizedHardware = hardwareColor.toLowerCase().replace(/\s+/g, '-');
+
+  const matchingItem = cart.find(item => {
+    const iSize = item.size || item.config?.size;
+    const iDepth = item.depth || item.config?.depth;
+    const iLugs = item.lugQuantity || item.config?.lugQuantity;
+    const iStave = item.staveQuantity || item.config?.staveQuantity;
+    const iHardware = (item.hardwareColor || item.config?.hardwareColor || '')
+      .toLowerCase()
+      .replace(/\s+/g, '-');
+
+    return (
+      String(iSize) === String(size) &&
+      String(iDepth) === String(depth) &&
+      Boolean(item.reRing) === Boolean(hasReRing) &&
+      String(iLugs) === String(lugs) &&
+      String(iStave).trim() === normalizedStave &&
+      iHardware === normalizedHardware
     );
+  });
 
-    if (!matchedOption) {
-      setSelectedOption(null);
-      return;
-    }
-
-    // ✅ Update state so UI uses the correct price
-    setSelectedOption(matchedOption);
-
-    const expectedId = generateCartItemId({
-      stripePriceId: matchedOption.stripePriceId,
-      size,
-      depth,
-      reRing: hasReRing,
-      lugQuantity: matchedOption.lugQuantity,
-      staveQuantity: matchedOption.staveQuantity,
-    });
-
-    const isInCart = cart.some((item) => item.id === expectedId);
-
-    if (isInCart) {
-      setCartItemId(expectedId);
-      setButtonText('In Cart');
-      setPendingCartItemId(null); // ✅ clear pending once detected
-    } else {
-      setCartItemId(null);
-      setButtonText('Add to Cart');
-    }
-  }, [cart, size, depth, staveOption, lugs, pendingCartItemId]);
+  if (matchingItem) {
+    setCartItemId(matchingItem.id);
+    setButtonText('In Cart');
+  } else {
+    setCartItemId(null);
+    setButtonText('Add to Cart');
+  }
+}, [cart, size, depth, staveOption, lugs, hardwareColor]);
 
   useEffect(() => {
     const fetchProductStatus = async () => {
@@ -219,67 +229,47 @@ const HeritageProductDetail = () => {
   }, []);
 
   useEffect(() => {
+    // ✅ Start with correct base price
     let newPrice = basePrices[size];
+
+    // ✅ Add depth upcharge
     newPrice += depthPrices[size][depth];
 
-    // ✅ Add Re-Ring Cost if applicable
-    if (staveOption.includes('Re-Rings')) {
+    // ✅ Add re-ring cost only if explicitly required
+    const hasReRingOption =
+      staveOption.includes('Re-Rings') || staveOption.includes('+ $150');
+    if (hasReRingOption) {
       newPrice += reRingCost;
+    }
+
+    // ✅ Ensure lug count does NOT incorrectly add cost
+    if (lugs === '10') {
+      newPrice += 0; // adjust here if 10 lugs adds cost later
     }
 
     setTotalPrice(newPrice);
 
-    // 🔄 **Update Sound Profile Dynamically**
-    let updatedProfile = {
-      attack: 8, // Oak shell naturally has strong attack
-      sustain: 7, // Medium tuning provides moderate sustain
-      brightness: 7, // Oak is balanced but leans slightly bright
-      warmth: 7, // Roundover bearing edge helps with warmth
-      projection: 8, // Stave construction offers excellent projection
+    // 🔄 Update Sound Profile dynamically
+    const updatedProfile = {
+      attack: 8,
+      sustain: depth >= '7.0' ? 9 : depth >= '6.0' ? 8 : 7,
+      brightness: lugs === '8' ? 6 : 7,
+      warmth: 7,
+      projection: size === '14' ? 9 : size === '13' ? 8 : 7,
     };
-
-    // Adjust sustain based on depth
-    updatedProfile.sustain = depth >= '7.0' ? 9 : depth >= '6.0' ? 8 : 7;
-
-    // Adjust attack based on stave selection
-    updatedProfile.attack = staveOption.includes('8')
-      ? 9
-      : staveOption.includes('10')
-        ? 8
-        : 7;
-
-    // Adjust brightness based on stave selection
-    updatedProfile.brightness = staveOption.includes('8')
-      ? 6
-      : staveOption.includes('10')
-        ? 7
-        : 8;
-
-    // Adjust projection (larger shells = more projection)
-    updatedProfile.projection = size === '14' ? 9 : size === '13' ? 8 : 7;
-
     setSoundProfile(updatedProfile);
 
-    // ✅ **Standardize Key Formatting to Match heritageSummaries Object**
+    // ✅ Generate correct summary key for heritageSummaries lookup
     const staveParts = staveOption.split(' - ');
-    let staveThickness = staveParts[1];
-
-    // 🔄 **Fix Thickness Formatting**
-    staveThickness = staveThickness.replace(' + $150 (Re-Rings Required)', ''); // Remove unnecessary text
-
-    // 🔄 **Ensure lug format is correct**
+    const staveThickness =
+      staveParts[1]?.replace(' + $150 (Re-Rings Required)', '') || '';
     const lugCount = `${lugs} Lugs`;
-
-    // 🔄 **Generated Key Format with Base Price and Stave Details**
-    const generatedKey = `${size}" - Base Price: $${newPrice}-${depth}"-${lugCount}-${staveThickness}`;
-
-    // console.log('🔎 Generated Summary Key:', generatedKey); // Debugging log
+    const generatedKey = `${size}" - Base Price: $${basePrices[size]}-${depth}"-${lugCount}-${staveThickness}`;
 
     if (heritageSummaries[generatedKey]) {
-      // console.log('✅ Drum Summary Found:', heritageSummaries[generatedKey]); // Debugging log
       setSelectedDrumSummary(heritageSummaries[generatedKey]);
     } else {
-      console.error('❌ Summary not found for the key:', generatedKey); // Error if no summary is found
+      console.warn('❌ Summary not found for key:', generatedKey);
       setSelectedDrumSummary({});
     }
   }, [size, depth, lugs, staveOption]);
@@ -408,9 +398,7 @@ const HeritageProductDetail = () => {
             <option value="Brass/Gold">Brass/Gold</option>
           </select>
 
-          <p className="heritage-detail-price">
-            ${selectedOption?.price ?? totalPrice}
-          </p>
+          <p className="heritage-detail-price">${totalPrice}</p>
           <p className="delivery-time">Est Delivery: 5–7 weeks</p>
 
           {buttonText === 'In Cart' ? (

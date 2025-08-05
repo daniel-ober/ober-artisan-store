@@ -152,85 +152,86 @@ export const CartProvider = ({ children }) => {
   };
 
   const addToCart = async (product, selectedOptions = {}) => {
-    if (!product || typeof product !== 'object') return;
+  if (!product || typeof product !== 'object') return;
 
-    let currentCartId = cartId;
-    if (!currentCartId) {
-      currentCartId = generateCartId();
-      localStorage.setItem('cartId', currentCartId);
-      setCartId(currentCartId);
-    }
+  let currentCartId = cartId;
+  if (!currentCartId) {
+    currentCartId = generateCartId();
+    localStorage.setItem('cartId', currentCartId);
+    setCartId(currentCartId);
+  }
 
-    const mergedOptions = {
-      ...(product.options || {}),
-      ...selectedOptions,
-    };
-
-    const cartItem = {
-      id: product.id,
-      productId: String(
-        product.productId ?? product.originalProductId ?? product.id
-      ),
-      name: product.name || 'Unnamed Product',
-      category: product.category || 'merch',
-      quantity: 1,
-      price: product.price,
-      stripePriceId: product.stripePriceId || mergedOptions.stripePriceId || '',
-      currentQuantity: product.currentQuantity || 1,
-      maxQuantity: product.maxQuantity || 1,
-      deliveryTime: product.deliveryTime || '',
-      description: product.description || '',
-      images: product.images || [],
-      image: product.image || '', // ✅ <-- ADD THIS LINE
-      variantId: product.variantId || mergedOptions.variantId,
-      config: {
-        ...mergedOptions,
-        size: product.size || mergedOptions.size,
-        depth: product.depth || mergedOptions.depth,
-        color: mergedOptions.color || product.color,
-        reRing: product.reRing ?? mergedOptions.reRing,
-        lugQuantity: product.lugQuantity ?? mergedOptions.lugQuantity,
-        staveQuantity: product.staveQuantity ?? mergedOptions.staveQuantity,
-        outerShell: mergedOptions.outerShell,
-        innerStave: mergedOptions.innerStave,
-        hardwareColor: mergedOptions.hardwareColor || 'Chrome',
-      },
-      timestamp: new Date().toISOString(),
-    };
-
-    let updatedCart = [...cart];
-
-    const existingItemIndex = updatedCart.findIndex(
-      (item) => item.id === cartItem.id
-    );
-
-    if (existingItemIndex > -1) {
-      updatedCart[existingItemIndex].quantity += 1;
-    } else {
-      updatedCart.push(cartItem);
-    }
-
-    // ✅ Set cart state BEFORE Firestore update
-    setCart(updatedCart);
-
-    try {
-      const cartRef = doc(db, 'carts', currentCartId);
-      const docSnap = await getDoc(cartRef);
-
-      if (!docSnap.exists()) {
-        await setDoc(cartRef, {
-          cart: [],
-          createdAt: serverTimestamp(),
-          lastUpdated: serverTimestamp(),
-        });
-        // console.log('🆕 Created empty Firestore cart before update');
-      }
-
-      await updateFirestoreCart(updatedCart);
-    } catch (error) {
-      console.error('Firestore Add Error:', error);
-    }
+  // ✅ Merge options and ensure lugQuantity is preserved
+  const mergedOptions = {
+    ...(product.options || {}),
+    ...selectedOptions,
   };
+
+  const lugQty = mergedOptions.lugQuantity || product.lugQuantity || '';
+
+  const cartItem = {
+    id: product.id,
+    productId: String(product.productId ?? product.originalProductId ?? product.id),
+    name: product.name || 'Unnamed Product',
+    category: product.category || 'merch',
+    quantity: 1,
+    price: product.price,
+    stripePriceId: product.stripePriceId || mergedOptions.stripePriceId || '',
+    currentQuantity: product.currentQuantity || 1,
+    maxQuantity: product.maxQuantity || 1,
+    deliveryTime: product.deliveryTime || '',
+    description: product.description || '',
+    images: product.images || [],
+    image: product.image || '',
+    variantId: product.variantId || mergedOptions.variantId,
+    lugQuantity: lugQty, // ✅ ensure saved at top-level
+    config: {
+      ...mergedOptions,
+      size: product.size || mergedOptions.size,
+      depth: product.depth || mergedOptions.depth,
+      color: mergedOptions.color || product.color,
+      reRing: product.reRing ?? mergedOptions.reRing,
+      lugQuantity: lugQty, // ✅ ensure preserved in config
+      staveQuantity: product.staveQuantity ?? mergedOptions.staveQuantity,
+      outerShell: mergedOptions.outerShell,
+      innerStave: mergedOptions.innerStave,
+      hardwareColor: mergedOptions.hardwareColor || 'Chrome',
+    },
+    timestamp: new Date().toISOString(),
+  };
+
+  console.log('🟢 Adding to Cart with lugQuantity:', lugQty);
+
+  let updatedCart = [...cart];
+  const existingItemIndex = updatedCart.findIndex(
+    (item) => item.id === cartItem.id
+  );
+
+  if (existingItemIndex > -1) {
+    updatedCart[existingItemIndex].quantity += 1;
+  } else {
+    updatedCart.push(cartItem);
+  }
+
+  setCart(updatedCart);
+
+  try {
+    const cartRef = doc(db, 'carts', currentCartId);
+    const docSnap = await getDoc(cartRef);
+
+    if (!docSnap.exists()) {
+      await setDoc(cartRef, {
+        cart: [],
+        createdAt: serverTimestamp(),
+        lastUpdated: serverTimestamp(),
+      });
+    }
+
+    await updateFirestoreCart(updatedCart);
+  } catch (error) {
+    console.error('Firestore Add Error:', error);
+  }
+};
 
   const updateQuantity = async (productId, newQuantity) => {
     setCart((prevCart) => {
