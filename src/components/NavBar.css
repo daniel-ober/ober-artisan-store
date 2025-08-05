@@ -79,14 +79,30 @@
 /* === CART PREVIEW === */
 .cart-preview-container {
   position: fixed;
-  top: 60px;
-  right: 20px;
-  width: 360px;
-  background-color: white;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  z-index: 1050;
-  animation: fadeIn 0.3s ease-out;
+  top: 75px;
+  right: 0; /* stick to viewport */
+  left: auto;
+  width: auto;
+  max-width: 100vw;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  z-index: 10001 !important; /* ✅ ensure it's always on top */
+  display: block;
+  padding-right: 10px; /* ✅ creates the margin buffer */
+  margin: 0;
+  transform: none;
+}
+
+.cart-preview-container .cart-preview {
+  top: 0;
+  right: 0; /* align to the padded edge */
+  width: 350px;
+  max-width: 100%;
+  margin: 0;
+  transform: none;
+  z-index: 10002 !important; /* ✅ top layer */
+  position: relative;
 }
 
 .cart-preview-container .close-btn {
@@ -130,7 +146,7 @@
   background: black;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  z-index: 3000;
+  /* z-index: 3000; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -331,7 +347,7 @@ body.dark .navbar-sticky-mini {
   .navbar-sticky-mini {
     justify-content: center;
     padding: 12px 0px 3px;
-    z-index: 9000;
+    /* z-index: 9000; */
   }
 
   .navbar-sticky-dropdown-wrapper {
@@ -485,5 +501,16 @@ body.dark .navbar-sticky-mini {
     font-weight: bold;
     padding: 2px 6px;
     border-radius: 50%;
+  }
+}
+
+@media (max-width: 400px) {
+  .cart-preview-container {
+    right: 0;
+    left: 0;
+  }
+  .cart-preview-container .cart-preview {
+    margin: 0 auto; /* ✅ centers properly */
+    width: 90vw;
   }
 }
