@@ -17,6 +17,7 @@ const HeritageProductDetail = () => {
   const [totalPrice, setTotalPrice] = useState(850);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedDrumSummary, setSelectedDrumSummary] = useState({});
+  const [selectedOption, setSelectedOption] = useState(null);
   const [hardwareColor, setHardwareColor] = useState('Chrome');
   const reRingCost = 150;
   const [product, setProduct] = useState(null);
@@ -134,7 +135,7 @@ const HeritageProductDetail = () => {
       reRing: hasReRing,
       lugQuantity: selectedOption.lugQuantity,
       staveQuantity: selectedOption.staveQuantity,
-      price: totalPrice,
+      price: selectedOption.price,
       stripePriceId: selectedOption.stripePriceId,
       quantity: 1,
       images: [
@@ -160,7 +161,7 @@ const HeritageProductDetail = () => {
     const hasReRing =
       staveOption.includes('Re-Rings') || staveOption.includes('+ $150');
 
-    const selectedOption = heritageSummaries.pricingOptions.find(
+    const matchedOption = heritageSummaries.pricingOptions.find(
       (option) =>
         option.size === size &&
         option.depth === depth &&
@@ -168,15 +169,21 @@ const HeritageProductDetail = () => {
         option.lugQuantity.toString() === lugs
     );
 
-    if (!selectedOption) return;
+    if (!matchedOption) {
+      setSelectedOption(null);
+      return;
+    }
+
+    // ✅ Update state so UI uses the correct price
+    setSelectedOption(matchedOption);
 
     const expectedId = generateCartItemId({
-      stripePriceId: selectedOption.stripePriceId,
+      stripePriceId: matchedOption.stripePriceId,
       size,
       depth,
       reRing: hasReRing,
-      lugQuantity: selectedOption.lugQuantity,
-      staveQuantity: selectedOption.staveQuantity,
+      lugQuantity: matchedOption.lugQuantity,
+      staveQuantity: matchedOption.staveQuantity,
     });
 
     const isInCart = cart.some((item) => item.id === expectedId);
@@ -401,7 +408,9 @@ const HeritageProductDetail = () => {
             <option value="Brass/Gold">Brass/Gold</option>
           </select>
 
-          <p className="feuzon-detail-price">${totalPrice}</p>
+          <p className="heritage-detail-price">
+            ${selectedOption?.price ?? totalPrice}
+          </p>
           <p className="delivery-time">Est Delivery: 5–7 weeks</p>
 
           {buttonText === 'In Cart' ? (

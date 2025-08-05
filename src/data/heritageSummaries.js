@@ -1,5 +1,5 @@
 const drumSummaries = {
-pricingOptions: [
+  pricingOptions: [
     // === Size 12 (6 Lugs) ===
     { size: "12", depth: "5.0", price: 850, reRing: false, stripePriceId: "price_1R4Z2bJbbx8jAR4NGZOLBvNz", lugQuantity: 6, staveQuantity: 12 },
     { size: "12", depth: "5.5", price: 900, reRing: false, stripePriceId: "price_1RsF6gJbbx8jAR4NUt7ZzVSF", lugQuantity: 6, staveQuantity: 12 },
