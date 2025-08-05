@@ -131,13 +131,14 @@ const SoundLegendShowroom = () => {
   className="showroom-story elegant-font fade-in-section loading"
   ref={(el) => (sectionsRef.current[2] = el)}
 >
-          <h1>{name}</h1>
-          <p className="serial-tag">{serial.toUpperCase()}</p>
-          <div
-            className="showroom-story-content"
-            dangerouslySetInnerHTML={{ __html: drumData.story }}
-          ></div>
-        </section>
+  <h1 className="artist-name">{name}</h1>
+  <p className="legacy-subtitle">SoundLegend Legacy Artist ({serial.toUpperCase()})</p>
+  
+  <div
+    className="showroom-story-content"
+    dangerouslySetInnerHTML={{ __html: drumData.story }}
+  ></div>
+</section>
       )}
 
       {/* Gallery */}
