@@ -14,9 +14,9 @@
 
 /* 🔹 Logo */
 .showroom-logo {
-  max-width: 260px;
+  max-width: 300px;
   width: 100%;
-  margin: 30px auto 10px;
+  margin: 40px;
   display: block;
 }
 
@@ -100,7 +100,7 @@
   line-height: 2;
   color: #e0e0e0;
   letter-spacing: 0.4px;
-  text-align: justify;
+  /* text-align: justify; */
 }
 
 
