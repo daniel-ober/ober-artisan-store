@@ -240,7 +240,6 @@ const Cart = () => {
 
       console.log('🧾 Payload being sent to Stripe API:', productsPayload);
 
-
       const response = await fetch(`${API_BASE_URL}/createCheckoutSession`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -374,54 +373,45 @@ const Cart = () => {
                           item.config?.title ||
                           'Unnamed Product'}
                       </p>{' '}
-                      <p className="cart-sub-description">
-                        {item.category === 'artisan' ? (
-                          <>
-                            {config.size && config.depth && (
-                              <>
-                                {config.size}" x {config.depth}" |{' '}
-                              </>
-                            )}
-                            {config.lugQuantity && (
-                              <>{config.lugQuantity}-Lug | </>
-                            )}
-                            {config.staveQuantity && (
-                              <>{config.staveQuantity}-Stave | </>
-                            )}
-                            {typeof config.reRing !== 'undefined' &&
-                              (config.reRing
-                                ? 'With Re-Ring'
-                                : 'Re-Rings: None')}
-
-                            {/* ✅ Add Hardware Color Here */}
-                            {config.hardwareColor && (
-                              <> | Hardware: {config.hardwareColor}</>
-                            )}
-
-                            {(config.outerShell || config.innerStave) && (
-                              <>
-                                <br />
-                                {config.outerShell} / {config.innerStave}
-                              </>
-                            )}
-                          </>
-                        ) : (
-                          <>
-                            {config.Sizes && <span>Size: {config.Sizes}</span>}
-                            {config.Colors && (
-                              <span>
-                                {config.Sizes && ' | '}Color: {config.Colors}
-                              </span>
-                            )}
-                            {(config.outerShell || config.innerStave) && (
-                              <>
-                                <br />
-                                {config.outerShell} / {config.innerStave}
-                              </>
-                            )}
-                          </>
-                        )}
-                      </p>
+                <p className="cart-sub-description">
+  {item.category === 'artisan' && item.productId !== 'founders-toast' ? (
+    <>
+      {config.size && config.depth && (
+        <>
+          {config.size}" x {config.depth}" |{' '}
+        </>
+      )}
+      {config.lugQuantity && <>{config.lugQuantity}-Lug | </>}
+      {config.staveQuantity && <>{config.staveQuantity}-Stave | </>}
+      {typeof config.reRing !== 'undefined' &&
+        (config.reRing ? 'With Re-Ring' : 'Re-Rings: None')}
+      {item.productId !== 'founders-toast' && config.hardwareColor && (
+  <> | Hardware: {config.hardwareColor}</>
+)}
+      {(config.outerShell || config.innerStave) && (
+        <>
+          <br />
+          {config.outerShell} / {config.innerStave}
+        </>
+      )}
+    </>
+  ) : (
+    <>
+      {config.Sizes && <span>Size: {config.Sizes}</span>}
+      {config.Colors && (
+        <span>
+          {config.Sizes && ' | '}Color: {config.Colors}
+        </span>
+      )}
+      {(config.outerShell || config.innerStave) && (
+        <>
+          <br />
+          {config.outerShell} / {config.innerStave}
+        </>
+      )}
+    </>
+  )}
+</p>
                     </td>
                     <td>
                       {item.price !== undefined ? (
