@@ -277,45 +277,52 @@
 }
 
 /* 🔹 Close Button (Minimal, Noticeable) */
+/* 🔹 Close Button (Fixed Outside Image) */
 .showroom-modal-close {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  background: transparent; /* ✅ no background */
+  position: fixed;           /* ✅ fixed to viewport */
+  top: 25px;                 /* ✅ consistent spacing */
+  right: 30px;               /* ✅ away from edges */
+  background: none;
   border: none;
-  color: #fff;
-  font-size: 26px;
+  color: #fff;               /* ✅ pure white */
+  font-size: 24px;           /* ✅ slightly larger */
+  font-weight: bold;
   cursor: pointer;
-  transition: color 0.2s ease;
-  z-index: 10001;
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.7); /* ✅ glow for visibility */
+  transition: color 0.2s ease, transform 0.1s ease;
+  z-index: 10003;            /* ✅ above arrows and image */
 }
+
 .showroom-modal-close:hover {
-  color: #ffcc00; /* ✅ subtle highlight on hover */
+  color: #ffcc00;            /* ✅ golden highlight on hover */
+  transform: scale(1.15);    /* ✅ subtle enlargement */
 }
 
 /* 🔹 Navigation Arrows (Minimal, No Background) */
+/* 🔹 Navigation Arrows (Fixed Outside Image) */
 .showroom-modal-prev,
 .showroom-modal-next {
-  position: absolute;
+  position: fixed;             /* ✅ fixed to viewport, not modal content */
   top: 50%;
   transform: translateY(-50%);
   background: none;
   border: none;
-  color: #878787;
-  font-size: 40px;
+  color: #fff;                 /* ✅ pure white */
+  font-size: 48px;             /* ✅ slightly larger */
   font-weight: bold;
   cursor: pointer;
   line-height: 1;
-  transition:
-    color 0.2s ease,
-    transform 0.1s ease;
-  z-index: 10001;
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.7); /* ✅ glow for visibility */
+  transition: color 0.2s ease, transform 0.1s ease;
+  z-index: 10002;              /* ✅ higher than image */
 }
-.showroom-modal-prev {
-  left: 15px;
-}
-.modal-next {
-  right: 15px;
+.showroom-modal-prev { left: 40px; }   /* ✅ further from the image */
+.showroom-modal-next { right: 40px; }  /* ✅ further from the image */
+
+.showroom-modal-prev:hover,
+.showroom-modal-next:hover {
+  color: #ffcc00;              /* ✅ highlight on hover */
+  transform: translateY(-50%) scale(1.15);
 }
 
 .showroom-modal-prev:hover,
