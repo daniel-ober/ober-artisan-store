@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { db } from '../firebaseConfig';
 import { doc, getDoc } from 'firebase/firestore';
@@ -8,8 +8,15 @@ const SoundLegendShowroom = () => {
   const { serial } = useParams();
   const [drumData, setDrumData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [modalIndex, setModalIndex] = useState(null); // ✅ track which image is open
+  const [modalIndex, setModalIndex] = useState(null);
+  const [logoLoaded, setLogoLoaded] = useState(false);
+  const [heroLoaded, setHeroLoaded] = useState(false);
+  const sectionsRef = useRef([]); // ✅ track sections for fade-in animation
 
+  const handleLogoLoad = () => setLogoLoaded(true);
+  const handleHeroLoad = () => setHeroLoaded(true);
+
+  // ✅ Fetch drum data
   useEffect(() => {
     const fetchDrumData = async () => {
       try {
@@ -27,7 +34,7 @@ const SoundLegendShowroom = () => {
     window.scrollTo(0, 0);
   }, [serial]);
 
-  // ✅ Keyboard Navigation
+  // ✅ Keyboard navigation for modal
   const handleKeyDown = useCallback(
     (e) => {
       if (modalIndex === null) return;
@@ -47,6 +54,37 @@ const SoundLegendShowroom = () => {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [handleKeyDown]);
 
+  // ✅ Intersection Observer for Fade-In with "loading" → "is-visible" transition
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.remove('loading');
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: '0px 0px -10% 0px', threshold: 0.15 }
+    );
+
+    sectionsRef.current.forEach((el) => el && observer.observe(el));
+
+    // ✅ Fallback: if observer fails, make all visible after 2s
+    const fallbackTimer = setTimeout(() => {
+      sectionsRef.current.forEach((el) => {
+        el?.classList.remove('loading');
+        el?.classList.add('is-visible');
+      });
+    }, 2000);
+
+    return () => {
+      observer.disconnect();
+      clearTimeout(fallbackTimer);
+    };
+  }, []);
+
   if (loading)
     return <div className="showroom-loading">Loading drum details...</div>;
   if (drumData?.notFound)
@@ -65,98 +103,49 @@ const SoundLegendShowroom = () => {
     <div className="soundlegend-showroom">
       {/* Header Logo */}
       <img
-        src="/resized-logos/soundlegend-white.png"
+        src="/logos/sl-vault-white.png"
         alt="SoundLegend Series"
-        className="showroom-logo"
+        className={`showroom-logo fade-in-section ${logoLoaded ? 'is-visible' : 'loading'}`}
+        onLoad={handleLogoLoad}
+        ref={(el) => (sectionsRef.current[0] = el)}
       />
 
       {/* Hero Section */}
-      <div className="showroom-hero">
+      <div
+        className={`showroom-hero fade-in-section ${heroLoaded ? 'is-visible' : 'loading'}`}
+        ref={(el) => (sectionsRef.current[1] = el)}
+      >
         {heroImage && (
-          <img src={heroImage} alt={name} className="showroom-hero-image" />
+          <img
+            src={heroImage}
+            alt={name}
+            className="showroom-hero-image"
+            onLoad={handleHeroLoad}
+          />
         )}
-        <div className="showroom-hero-overlay">
-          <h1>{name}</h1>
-          <p className="serial-tag">{serial.toUpperCase()}</p>
-        </div>
       </div>
-
-      {/* Specs */}
-      {/* <section className="showroom-specs">
-        <h2>Build Specifications</h2>
-        <ul>
-          <li>
-            <strong>Size:</strong> {specs.size}
-          </li>
-          <li>
-            <strong>Shell:</strong> {specs.shell}
-          </li>
-          <li>
-            <strong>Finish:</strong> {specs.finish}
-          </li>
-          <li>
-            <strong>Hardware:</strong> {specs.hardware}
-          </li>
-          <li>
-            <strong>Bearing Edges:</strong> {specs.bearingEdges}
-          </li>
-          <li>
-            <strong>Snare Wires:</strong> {specs.snareWires}
-          </li>
-        </ul>
-      </section> */}
 
       {/* Story Section */}
       {story && (
-        <section className="showroom-story elegant-font">
-          <h2>The Story Behind This Build</h2>
+<section
+  className="showroom-story elegant-font fade-in-section loading"
+  ref={(el) => (sectionsRef.current[2] = el)}
+>
+          <h1>{name}</h1>
+          <p className="serial-tag">{serial.toUpperCase()}</p>
           <div
             className="showroom-story-content"
             dangerouslySetInnerHTML={{ __html: drumData.story }}
           ></div>
-
-          {/* {(links.spotify ||
-            links.itunes ||
-            links.youtube ||
-            links.instagram ||
-            links.facebook) && (
-            <div className="artist-links">
-              <h3>Connect with the Artist</h3>
-              <div className="links-row">
-                {links.spotify && (
-                  <a href={links.spotify} target="_blank" rel="noreferrer">
-                    <i className="fab fa-spotify"></i>
-                  </a>
-                )}
-                {links.itunes && (
-                  <a href={links.itunes} target="_blank" rel="noreferrer">
-                    <i className="fab fa-apple"></i>
-                  </a>
-                )}
-                {links.youtube && (
-                  <a href={links.youtube} target="_blank" rel="noreferrer">
-                    <i className="fab fa-youtube"></i>
-                  </a>
-                )}
-                {links.instagram && (
-                  <a href={links.instagram} target="_blank" rel="noreferrer">
-                    <i className="fab fa-instagram"></i>
-                  </a>
-                )}
-                {links.facebook && (
-                  <a href={links.facebook} target="_blank" rel="noreferrer">
-                    <i className="fab fa-facebook"></i>
-                  </a>
-                )}
-              </div>
-            </div>
-          )} */}
         </section>
       )}
 
       {/* Gallery */}
       {gallery.length > 0 && (
-        <section className="showroom-gallery">
+        <section
+          className="showroom-gallery fade-in-section loading"
+          ref={(el) => (sectionsRef.current[3] = el)}
+        >
           <h2>Gallery</h2>
           <div className="gallery-grid">
             {gallery.map((img, i) => (
@@ -221,7 +210,10 @@ const SoundLegendShowroom = () => {
       )}
 
       {/* NFC Info */}
-      <section className="showroom-legacy">
+      <section
+        className="showroom-legacy fade-in-section loading"
+        ref={(el) => (sectionsRef.current[4] = el)}
+      >
         <p>
           This SoundLegend drum is digitally authenticated and part of an
           exclusive artist series. While anyone is welcome to explore its legacy
@@ -233,8 +225,9 @@ const SoundLegendShowroom = () => {
           <a href="/soundlegends/signin" className="portal-link">
             Sign in here
           </a>{' '}
-          to access your portal, or{' '}
+          to access your portal, or
           <a href="/artisan-shop/soundlegend" className="portal-link">
+            {' '}
             learn more about joining the SoundLegend Experience
           </a>
           .
@@ -242,7 +235,10 @@ const SoundLegendShowroom = () => {
       </section>
 
       {/* CTA */}
-      <div className="showroom-cta">
+      <div
+        className="showroom-cta fade-in-section loading"
+        ref={(el) => (sectionsRef.current[5] = el)}
+      >
         <a href="/artisan-shop/soundlegend" className="cta-button">
           Start Your Custom Snare Journey
         </a>

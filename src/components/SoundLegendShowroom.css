@@ -14,7 +14,7 @@
 
 /* 🔹 Logo */
 .showroom-logo {
-  max-width: 300px;
+  max-width: 500px;
   width: 100%;
   margin: 40px;
   display: block;
@@ -224,8 +224,9 @@
 /* 🔹 Legacy Info */
 .showroom-legacy {
   max-width: 700px;
-  text-align: center;
+  text-align: justify;
   margin: 40px auto;
+  padding: 40px;
   font-size: 18px;
   line-height: 1.6;
   color: #ccc;
@@ -363,6 +364,30 @@
 
 .portal-link:hover {
   color: #fff176;
+}
+
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.fade-in-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ✅ Elements are slightly visible during load */
+.fade-in-section.loading {
+  opacity: 0.3;          /* ✅ faintly visible while loading */
+  transform: translateY(10px);
+  transition: opacity 0.3s linear; /* ✅ allows transition to start */
+}
+
+/* ✅ Smooth, slower fade when fully visible */
+.fade-in-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 2s ease-out, transform 1.5s ease-out; /* ✅ Slow fade */
 }
 
 /* 🔹 Responsive */
