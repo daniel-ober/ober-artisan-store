@@ -163,50 +163,51 @@ const HeritageProductDetail = () => {
     setButtonText('In Cart');
   };
 
-const generateCartItemId = (option) => {
-  const normalizedStave = String(option.staveQuantity).trim();
-  const normalizedHardware = String(option.hardwareColor)
-    .toLowerCase()
-    .replace(/\s+/g, '-');
-
-  // ✅ Always use empty string when stripePriceId is missing to match CartContext
-  const priceId = option.stripePriceId ?? '';
-
-  return `${priceId}-${option.size}-${option.depth}-${String(option.reRing)}-${option.lugQuantity}-${normalizedStave}-${normalizedHardware}`;
-};
-
-useEffect(() => {
-  const hasReRing = staveOption.includes('Re-Rings') || staveOption.includes('+ $150');
-  const normalizedStave = staveOption.split(' - ')[0].trim();
-  const normalizedHardware = hardwareColor.toLowerCase().replace(/\s+/g, '-');
-
-  const matchingItem = cart.find(item => {
-    const iSize = item.size || item.config?.size;
-    const iDepth = item.depth || item.config?.depth;
-    const iLugs = item.lugQuantity || item.config?.lugQuantity;
-    const iStave = item.staveQuantity || item.config?.staveQuantity;
-    const iHardware = (item.hardwareColor || item.config?.hardwareColor || '')
+  const generateCartItemId = (option) => {
+    const normalizedStave = String(option.staveQuantity).trim();
+    const normalizedHardware = String(option.hardwareColor)
       .toLowerCase()
       .replace(/\s+/g, '-');
 
-    return (
-      String(iSize) === String(size) &&
-      String(iDepth) === String(depth) &&
-      Boolean(item.reRing) === Boolean(hasReRing) &&
-      String(iLugs) === String(lugs) &&
-      String(iStave).trim() === normalizedStave &&
-      iHardware === normalizedHardware
-    );
-  });
+    // ✅ Always use empty string when stripePriceId is missing to match CartContext
+    const priceId = option.stripePriceId ?? '';
 
-  if (matchingItem) {
-    setCartItemId(matchingItem.id);
-    setButtonText('In Cart');
-  } else {
-    setCartItemId(null);
-    setButtonText('Add to Cart');
-  }
-}, [cart, size, depth, staveOption, lugs, hardwareColor]);
+    return `${priceId}-${option.size}-${option.depth}-${String(option.reRing)}-${option.lugQuantity}-${normalizedStave}-${normalizedHardware}`;
+  };
+
+  useEffect(() => {
+    const hasReRing =
+      staveOption.includes('Re-Rings') || staveOption.includes('+ $150');
+    const normalizedStave = staveOption.split(' - ')[0].trim();
+    const normalizedHardware = hardwareColor.toLowerCase().replace(/\s+/g, '-');
+
+    const matchingItem = cart.find((item) => {
+      const iSize = item.size || item.config?.size;
+      const iDepth = item.depth || item.config?.depth;
+      const iLugs = item.lugQuantity || item.config?.lugQuantity;
+      const iStave = item.staveQuantity || item.config?.staveQuantity;
+      const iHardware = (item.hardwareColor || item.config?.hardwareColor || '')
+        .toLowerCase()
+        .replace(/\s+/g, '-');
+
+      return (
+        String(iSize) === String(size) &&
+        String(iDepth) === String(depth) &&
+        Boolean(item.reRing) === Boolean(hasReRing) &&
+        String(iLugs) === String(lugs) &&
+        String(iStave).trim() === normalizedStave &&
+        iHardware === normalizedHardware
+      );
+    });
+
+    if (matchingItem) {
+      setCartItemId(matchingItem.id);
+      setButtonText('In Cart');
+    } else {
+      setCartItemId(null);
+      setButtonText('Add to Cart');
+    }
+  }, [cart, size, depth, staveOption, lugs, hardwareColor]);
 
   useEffect(() => {
     const fetchProductStatus = async () => {
@@ -328,9 +329,10 @@ useEffect(() => {
             <ul>
               <li>Northern Red Oak</li>
               <li>Stave Construction</li>
-              <li>Double Ended Tube Lugs</li>
               <li>Roundover Outer / 45° Inner Bearing Edge</li>
               <li>Precision Cut Snare Beds</li>
+              <li>Die-cast Hoops</li>
+              <li>Double Ended Tube Lugs</li>
               <li>Natural Matte Finish</li>
               <li>Torch Tuned for Maximum Resonance</li>
               <li>Trick Snare Throw-Off</li>
