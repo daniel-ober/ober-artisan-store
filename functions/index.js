@@ -53,6 +53,7 @@ app.post('/createCheckoutSession', async (req, res) => {
   try {
     const stripe = stripeLib(STRIPE_SECRET_KEY.value());
     const clientUrl = CLIENT_URL.value().trim();
+
     const {
       products,
       userId,
@@ -71,11 +72,12 @@ app.post('/createCheckoutSession', async (req, res) => {
 
     const guestToken = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
 
+    // ✅ Build Stripe line items safely
     const lineItems = products.map((p) => {
       const config = p.config || {};
-
       const staveQuantity = config.staveQuantity ?? config.StaveQuantity;
 
+      // ✅ Construct description only if it has actual content
       const descriptionParts = [
         config.size ? `Size: ${config.size}"` : '',
         config.depth ? `Depth: ${config.depth}"` : '',
@@ -89,28 +91,32 @@ app.post('/createCheckoutSession', async (req, res) => {
         config.hardwareColor ? `Hardware: ${config.hardwareColor}` : '',
       ].filter(Boolean);
 
+      const productData = {
+        name: p.name || 'Ober Artisan Product',
+        images:
+          typeof p.image === 'string' && p.image.startsWith('http')
+            ? [p.image]
+            : ['https://oberartisandrums.com/fallback-images/fallback_image1.png'],
+        metadata: {
+          size: config.size || '',
+          depth: config.depth || '',
+          lugQuantity: config.lugQuantity || '',
+          staveQuantity: staveQuantity || '',
+          reRing: config.reRing ? 'Yes' : 'No',
+          hardwareColor: config.hardwareColor || '',
+        },
+      };
+
+      // ✅ Only attach description if not empty
+      if (descriptionParts.length > 0) {
+        productData.description = descriptionParts.join(' • ');
+      }
+
       return {
         price_data: {
           currency: 'usd',
-          unit_amount: Math.round(p.price * 100), // ✅ use dynamic frontend price
-          product_data: {
-            name: p.name,
-            description: descriptionParts.join(' • '),
-            images:
-              typeof p.image === 'string' && p.image.startsWith('http')
-                ? [p.image]
-                : [
-                    'https://oberartisandrums.com/fallback-images/fallback_image1.png',
-                  ],
-            metadata: {
-              size: config.size || '',
-              depth: config.depth || '',
-              lugQuantity: config.lugQuantity || '',
-              staveQuantity: staveQuantity || '',
-              reRing: config.reRing ? 'Yes' : 'No',
-              hardwareColor: config.hardwareColor || '',
-            },
-          },
+          unit_amount: Math.round(p.price * 100),
+          product_data: productData,
         },
         quantity: p.quantity || 1,
       };
@@ -142,9 +148,7 @@ app.post('/createCheckoutSession', async (req, res) => {
   }
 });
 
-app.post('/createCheckoutSession', async (req, res) => {
-  // your Stripe checkout logic
-});
+
 
 // ✅ Add reCAPTCHA verification endpoint HERE
 app.post('/verifyRecaptcha', async (req, res) => {
