@@ -505,8 +505,10 @@ const depthPrices = {
             <ul>
               <li>Hybrid Shell Construction</li>
               <li>Combines Various Wood Species For A Unique Tone</li>
-              <li>Double Ended Tube Lugs</li>
               <li>Roundover Outer / 45° Inner Bearing Edge</li>
+              <li>Precision Cut Snare Beds</li>
+              <li>Die-cast Hoops</li>
+              <li>Double Ended Tube Lugs</li>
               <li>Precision Cut Snare Beds</li>
               <li>Stained or Natural Semi-Gloss Finish</li>
               <li>Torch Tuned for Maximum Resonance</li>
