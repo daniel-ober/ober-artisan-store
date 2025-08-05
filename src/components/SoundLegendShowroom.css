@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Gentium+Book+Plus&display=swap');
+
 /* 🔹 Page Container */
 .soundlegend-showroom {
   display: flex;
@@ -74,25 +76,47 @@
   color: #ddd;
 }
 
-/* 🔹 Story Section */
+/* 🔹 Story Section (Container) */
 .showroom-story {
-  max-width: 800px;
-  text-align: center;
-  margin: 30px auto;
-  padding: 20px;
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 30px;
+  text-align: left;              /* ✅ align text for better readability */
 }
 
+/* 🔹 Story Title */
 .showroom-story h2 {
-  font-size: 28px;
+  font-size: 32px;
   color: #ffcc00;
-  margin-bottom: 12px;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
-.showroom-story p {
-  font-family: 'Georgia', serif; /* ✅ Elegant storytelling font */
-  font-size: 19px;
-  line-height: 1.8;
+/* 🔹 Story Content */
+.showroom-story-content {
+  font-family: 'Gentium Book Plus', cursive;
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 2;
   color: #e0e0e0;
+  letter-spacing: 0.4px;
+  text-align: justify;
+}
+
+
+.showroom-story-content p {
+  margin-bottom: 22px;
+}
+
+.showroom-story-content ul {
+  margin: 18px 0 28px 40px;
+  padding: 0;
+  list-style-type: disc;
+}
+
+.showroom-story-content li {
+  margin-bottom: 12px;
+  line-height: 1.9;
 }
 
 /* 🔹 Artist Links */
