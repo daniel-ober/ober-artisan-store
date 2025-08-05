@@ -157,7 +157,7 @@ const Cart = () => {
   const getTotalAmount = () =>
     cart.reduce((total, item) => total + getItemTotal(item), 0);
 
-  const handleCheckout = async () => {
+   const handleCheckout = async () => {
     setShowCheckoutModal(true);
     try {
       if (!cart || cart.length === 0) {
@@ -180,65 +180,54 @@ const Cart = () => {
           previewImage = item.image;
         } else if (item.category === 'artisan') {
           previewImage =
-            (Array.isArray(item.images) &&
-              item.images[0]?.src?.startsWith('http') &&
-              item.images[0].src) ||
-            (Array.isArray(item.images) &&
-              typeof item.images[0] === 'string' &&
-              item.images[0].startsWith('http') &&
-              item.images[0]) ||
-            fallback;
+            (Array.isArray(item.images) && item.images[0]) || fallback;
         } else if (item.category === 'merch') {
           const product = productDataMap[item.productId];
           if (product && Array.isArray(product.images)) {
-            const matchedImage =
-              product.images.find(
-                (img) =>
-                  Array.isArray(img.variant_ids) &&
-                  img.variant_ids.map(String).includes(String(variantId)) &&
-                  Array.isArray(img.colors) &&
-                  img.colors.map((c) => normalize(c)).includes(selectedColor)
-              ) ||
-              product.images.find(
-                (img) =>
-                  Array.isArray(img.colors) &&
-                  img.colors.map((c) => normalize(c)).includes(selectedColor)
-              ) ||
-              product.images.find(
-                (img) =>
-                  Array.isArray(img.variant_ids) &&
-                  img.variant_ids.map(String).includes(String(variantId))
-              ) ||
-              product.images.find((img) => img.is_default) ||
-              product.images[0];
-            if (matchedImage?.src?.startsWith('http')) {
-              previewImage = matchedImage.src;
+            const first = product.images[0];
+            if (typeof first === 'string' && first.startsWith('http')) {
+              previewImage = first;
             }
           }
         }
 
-        // ✅ Build correct payload with lugQuantity explicitly included
+        // ✅ Always include keys, but set empty/default values for Founder's Toast
+        const isFoundersToast = item.productId === 'founders-toast';
+
+        let configPayload = {};
+
+        if (item.category === 'artisan' && !isFoundersToast) {
+          configPayload = {
+            size: config.size || '',
+            depth: config.depth || '',
+            lugQuantity: config.lugQuantity || '',
+            staveQuantity: config.staveQuantity || '',
+            reRing: typeof config.reRing !== 'undefined' ? config.reRing : '',
+            hardwareColor: config.hardwareColor || '',
+          };
+        } else if (item.category === 'merch') {
+          configPayload = {
+            size: config.Sizes || '',
+            color: config.Colors || '',
+          };
+        } else if (isFoundersToast) {
+          configPayload = {}; // no metadata for accessories
+        }
+
         return {
           productId: item.productId,
           name: item.name || 'HERITAGE',
+          category: item.category,
           stripePriceId: item.stripePriceId,
           price: item.price,
           quantity: item.quantity || 1,
           image: previewImage.startsWith('http') ? previewImage : undefined,
-          config: {
-            size: config.size || '',
-            depth: config.depth || '',
-            lugQuantity: config.lugQuantity || '', // ✅ FIXED
-            staveQuantity: config.staveQuantity || '',
-            reRing: typeof config.reRing !== 'undefined' ? config.reRing : '',
-            hardwareColor: config.hardwareColor || '',
-            outerShell: config.outerShell || '',
-            innerStave: config.innerStave || '',
-          },
+          config: configPayload,
         };
       });
 
-      console.log('🧾 Payload being sent to Stripe API:', productsPayload);
+      // ✅ Log payload BEFORE sending
+      console.log('🧾 FULL PRODUCTS PAYLOAD to Stripe API:', JSON.stringify(productsPayload, null, 2));
 
       const response = await fetch(`${API_BASE_URL}/createCheckoutSession`, {
         method: 'POST',
@@ -246,18 +235,27 @@ const Cart = () => {
         body: JSON.stringify({ products: productsPayload }),
       });
 
+      console.log('📡 Stripe API raw response:', response);
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('❌ Stripe API Error Response:', errorText);
+        throw new Error(`Checkout session creation failed: ${errorText}`);
+      }
+
       const data = await response.json();
+      console.log('✅ Stripe API parsed response:', data);
 
       if (data?.url) {
         sessionStorage.setItem('checkoutStarted', 'true');
-        setShowCheckoutModal(false); // proactively turn off before navigation
+        setShowCheckoutModal(false);
         window.location.href = data.url;
       } else {
-        throw new Error('No redirect URL returned');
+        throw new Error('No redirect URL returned from API');
       }
     } catch (error) {
-      console.error('Checkout failed:', error);
-      alert('There was a problem initiating checkout.');
+      console.error('🔥 Checkout failed with error:', error);
+      alert('There was a problem initiating checkout. Check console logs.');
       setShowCheckoutModal(false);
     }
   };
@@ -373,45 +371,53 @@ const Cart = () => {
                           item.config?.title ||
                           'Unnamed Product'}
                       </p>{' '}
-                <p className="cart-sub-description">
-  {item.category === 'artisan' && item.productId !== 'founders-toast' ? (
-    <>
-      {config.size && config.depth && (
-        <>
-          {config.size}" x {config.depth}" |{' '}
-        </>
-      )}
-      {config.lugQuantity && <>{config.lugQuantity}-Lug | </>}
-      {config.staveQuantity && <>{config.staveQuantity}-Stave | </>}
-      {typeof config.reRing !== 'undefined' &&
-        (config.reRing ? 'With Re-Ring' : 'Re-Rings: None')}
-      {item.productId !== 'founders-toast' && config.hardwareColor && (
-  <> | Hardware: {config.hardwareColor}</>
-)}
-      {(config.outerShell || config.innerStave) && (
-        <>
-          <br />
-          {config.outerShell} / {config.innerStave}
-        </>
-      )}
-    </>
-  ) : (
-    <>
-      {config.Sizes && <span>Size: {config.Sizes}</span>}
-      {config.Colors && (
-        <span>
-          {config.Sizes && ' | '}Color: {config.Colors}
-        </span>
-      )}
-      {(config.outerShell || config.innerStave) && (
-        <>
-          <br />
-          {config.outerShell} / {config.innerStave}
-        </>
-      )}
-    </>
-  )}
-</p>
+                      <p className="cart-sub-description">
+                        {item.category === 'artisan' &&
+                        item.productId !== 'founders-toast' ? (
+                          <>
+                            {config.size && config.depth && (
+                              <>
+                                {config.size}" x {config.depth}" |{' '}
+                              </>
+                            )}
+                            {config.lugQuantity && (
+                              <>{config.lugQuantity}-Lug | </>
+                            )}
+                            {config.staveQuantity && (
+                              <>{config.staveQuantity}-Stave | </>
+                            )}
+                            {typeof config.reRing !== 'undefined' &&
+                              (config.reRing
+                                ? 'With Re-Ring'
+                                : 'Re-Rings: None')}
+                            {item.productId !== 'founders-toast' &&
+                              config.hardwareColor && (
+                                <> | Hardware: {config.hardwareColor}</>
+                              )}
+                            {(config.outerShell || config.innerStave) && (
+                              <>
+                                <br />
+                                {config.outerShell} / {config.innerStave}
+                              </>
+                            )}
+                          </>
+                        ) : (
+                          <>
+                            {config.Sizes && <span>Size: {config.Sizes}</span>}
+                            {config.Colors && (
+                              <span>
+                                {config.Sizes && ' | '}Color: {config.Colors}
+                              </span>
+                            )}
+                            {(config.outerShell || config.innerStave) && (
+                              <>
+                                <br />
+                                {config.outerShell} / {config.innerStave}
+                              </>
+                            )}
+                          </>
+                        )}
+                      </p>
                     </td>
                     <td>
                       {item.price !== undefined ? (

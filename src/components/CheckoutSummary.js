@@ -113,34 +113,65 @@ const CheckoutSummary = () => {
 
         <h3>Items Ordered</h3>
         <ul className="checkout-summary-items">
-  {items.map((item, idx) => (
-    <li key={idx} className="checkout-summary-item">
-      <div>
-        <strong>{item.description || item.name || 'Item'}</strong> — ${item.price?.toFixed(2)} × {item.quantity}
-      </div>
+          {items.map((item, idx) => (
+            <li key={idx} className="checkout-summary-item">
+              <div>
+                <strong>{item.description || item.name || 'Item'}</strong> — $
+                {item.price?.toFixed(2)} × {item.quantity}
+              </div>
 
-      {/* Friendly, clean variant info */}
-      {item.variant && (
-        <div className="variant-details">
-          {item.variant.title ? (
-            <div><strong>Options:</strong> {item.variant.title}</div>
-          ) : (
-            <>
-              {(item.variant.color || item.variant.size || item.variant.other) && (
-                <div>
-                  <strong>Options:</strong>{' '}
-                  {[item.variant.color, item.variant.size, item.variant.other]
-                    .filter(Boolean)
-                    .join(' / ')}
-                </div>
-              )}
-            </>
-          )}
-        </div>
-      )}
-    </li>
-  ))}
-</ul>
+              {/* Friendly, clean variant info */}
+              {item.variant &&
+                (() => {
+                  const v = item.variant;
+                  const category =
+                    v.category ||
+                    (item.name?.toLowerCase().includes('heritage')
+                      ? 'artisan'
+                      : 'merch');
+
+                  // ✅ Founder's Toast: no options displayed
+                  if (item.name?.toLowerCase().includes("founder's toast")) {
+                    return null;
+                  }
+
+                  // ✅ Merch: show only size and color
+                  if (category === 'merch') {
+                    return (
+                      <div className="variant-details">
+                        <strong>Options:</strong>{' '}
+                        {[v.size, v.color].filter(Boolean).join(' / ') ||
+                          'Standard'}
+                      </div>
+                    );
+                  }
+
+                  // ✅ Artisan Drums: show drum-specific metadata
+                  if (category === 'artisan') {
+                    const drumOptions = [
+                      v.size && `${v.size}" x ${v.depth}"`,
+                      v.lugQuantity && `${v.lugQuantity} Lugs`,
+                      v.staveQuantity && `${v.staveQuantity} Staves`,
+                      v.reRing !== undefined
+                        ? v.reRing
+                          ? 'With Re-Rings'
+                          : 'No Re-Rings'
+                        : '',
+                      v.hardwareColor && `Hardware: ${v.hardwareColor}`,
+                    ].filter(Boolean);
+
+                    return (
+                      <div className="variant-details">
+                        <strong>Specs:</strong> {drumOptions.join(' • ')}
+                      </div>
+                    );
+                  }
+
+                  return null;
+                })()}
+            </li>
+          ))}
+        </ul>
 
         <h3>Total Amount</h3>
         <p className="total-amount">
