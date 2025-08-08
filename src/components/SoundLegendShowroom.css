@@ -409,33 +409,138 @@
   transition: opacity 2s ease-out, transform 1.5s ease-out; /* ✅ Slow fade */
 }
 
-/* 🔹 Responsive */
-@media (max-width: 768px) {
-  .showroom-modal-prev,
-  .showroom-modal-next {
-    font-size: 32px; /* ✅ smaller but still noticeable */
+/* 📱 Mobile — full-bleed gallery, no horizontal sliver, clean modal controls, CTA tightened */
+@media (max-width: 600px) {
+  /* Kill any horizontal scroll from ANY child (incl. reCAPTCHA badge) */
+  html, body {
+    margin: 0;
+    width: 100%;
+    overflow-x: hidden;
   }
-  .showroom-modal-image {
-    max-width: 90vw; /* ✅ slightly tighter on mobile */
-    max-height: 75vh;
+
+  /* Make children span the viewport; no side padding that can create gutters */
+  .soundlegend-showroom {
+    padding: 0 0 60px;
+    align-items: stretch; /* avoid centering width quirks */
+  }
+
+  /* Hero */
+  .showroom-logo {
+    max-width: 300px;
+    margin: 20px auto;
+  }
+  .showroom-hero {
+    margin: 0 auto 24px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: none;
+  }
+  .showroom-hero-overlay {
+    bottom: 12px;
+    left: 12px;
+    padding: 10px 16px;
   }
   .showroom-hero-overlay h1 {
-    font-size: 24px;
-  }
-  .showroom-story h2,
-  .showroom-gallery h2 {
-    font-size: 22px;
-  }
-  .cta-button {
-    font-size: 18px;
-    padding: 12px 24px;
+    font-size: 20px;
+    line-height: 1.2;
   }
 
-  .showroom-gallery {
-    padding: 0;
+  /* Header text */
+  .artist-name { font-size: 1.6rem; }
+  .legacy-subtitle { font-size: 0.95rem; margin-bottom: 1rem; }
+
+  /* Text sections keep small gutters (not full-bleed) */
+  .showroom-story {
+    padding: 18px;
+    margin: 24px 12px;
   }
+  .showroom-story h2 { font-size: 20px; margin-bottom: 14px; }
+  .showroom-story-content { font-size: 18px; line-height: 1.7; }
 
   .showroom-specs {
-    margin: 20px;
+    margin: 16px 12px;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  .showroom-specs h2 { font-size: 20px; }
+  .showroom-specs li { font-size: 15px; }
+
+  /* 🎯 Gallery — true edge-to-edge without overflow */
+  .showroom-gallery {
+    padding: 0;
+    margin: 24px 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin: 0;
+  }
+  .gallery-grid img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 10px;
+  }
+
+  /* Legacy info */
+  .showroom-legacy {
+    padding: 20px;
+    margin: 20px 12px;
+    font-size: 16px;
+  }
+
+  /* CTA — tighten width with side margins */
+  .cta-button {
+    font-size: 16px;
+    padding: 12px 20px;
+    display: block;
+    width: calc(100% - 24px); /* full width minus side gutters */
+    margin: 0 auto;           /* center horizontally */
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  /* 🎯 Modal controls — non-overlapping, touch-friendly */
+  .showroom-modal-close {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    font-size: 20px;
+    z-index: 10005;
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    backdrop-filter: blur(4px);
+  }
+  .showroom-modal-prev,
+  .showroom-modal-next {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 28px;
+    z-index: 10004;
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    backdrop-filter: blur(4px);
+  }
+  .showroom-modal-prev { left: 10px; }
+  .showroom-modal-next { right: 10px; }
+
+  .showroom-modal-prev:hover,
+  .showroom-modal-next:hover,
+  .showroom-modal-close:hover {
+    background: rgba(255, 204, 0, 0.3);
+  }
+
+  /* Modal image sizing */
+  .showroom-modal-image {
+    max-width: 88vw;
+    max-height: 70vh;
   }
 }
