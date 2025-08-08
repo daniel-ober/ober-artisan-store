@@ -226,10 +226,10 @@ const SoundLegendShowroom = () => {
           <a href="/soundlegends/signin" className="portal-link">
             Sign in here
           </a>{' '}
-          to access your portal, or
+          to access your portal, or 
+          {' '}
           <a href="/artisan-shop/soundlegend" className="portal-link">
-            {' '}
-            learn more about joining the SoundLegend Experience
+             learn more about joining the SoundLegend Experience
           </a>
           .
         </p>
