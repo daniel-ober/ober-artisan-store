@@ -426,8 +426,8 @@
 
   /* Hero */
   .showroom-logo {
-    max-width: 360px;
-    margin: 24px auto;
+    max-width: 340px;
+    margin: 26px auto;
   }
   .showroom-hero {
     margin: 0 auto 24px;
@@ -532,11 +532,11 @@
   .showroom-modal-prev { left: 10px; }
   .showroom-modal-next { right: 10px; }
 
-  .showroom-modal-prev:hover,
+  /* .showroom-modal-prev:hover,
   .showroom-modal-next:hover,
   .showroom-modal-close:hover {
     background: rgba(255, 204, 0, 0.3);
-  }
+  } */
 
   /* Modal image sizing */
   .showroom-modal-image {
