@@ -326,7 +326,7 @@ const handleDrop = async (e) => {
           <p>
             You’re viewing your custom SoundLegend drum build in progress. This
             page is read-only. Questions? Contact us at{' '}
-            <a href="mailto:support@oberdrums.com">soundlegend@oberartisandrums.com</a>.
+            <a href="mailto:soundlegend@oberartisandrums.com">soundlegend@oberartisandrums.com</a>.
           </p>
         </div>
       )}
@@ -427,7 +427,7 @@ const handleDrop = async (e) => {
             className="edit-button"
             onClick={() =>
               window.open(
-                'mailto:support@oberdrums.com?subject=Request to update customer info',
+                'mailto:soundlegend@oberartisandrums.com?subject=Request to update customer info',
                 '_blank'
               )
             }
