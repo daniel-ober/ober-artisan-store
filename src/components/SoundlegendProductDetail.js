@@ -14,11 +14,16 @@ import './SoundlegendProductDetail.css';
 
 const SoundLegendProductDetail = () => {
   const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
+  const [lastName, setLastName]   = useState('');
+  const [email, setEmail]         = useState('');
+
+  // Phone: digits-only while typing; dashed on blur
+  const [phoneDigits, setPhoneDigits]   = useState('');
+  const [phoneFocused, setPhoneFocused] = useState(false);
+
   const [open, setOpen] = useState(false);
 
+  // (kept from your original state — not shown in the form here)
   const [size, setSize] = useState('14');
   const [depth, setDepth] = useState('6.5');
   const [shellConstruction, setShellConstruction] = useState('Stave');
@@ -43,16 +48,58 @@ const SoundLegendProductDetail = () => {
     setTimeout(() => navigate('/artisan-shop'), 200);
   };
 
+  // ---------- helpers ----------
+  const onlyDigits   = (s = '') => s.replace(/\D/g, '').slice(0, 10);
+  const formatDashed = (d) => {
+    if (!d) return '';
+    if (d.length >= 6) return `${d.slice(0,3)}-${d.slice(3,6)}-${d.slice(6)}`;
+    if (d.length >= 3) return `${d.slice(0,3)}-${d.slice(3)}`;
+    return d;
+  };
+  const isPhoneValid = phoneDigits.length === 10;
+  const isEmailFormat = (val) =>
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((val || '').trim());
+
+  // Validate visible fields (add more keys here if you add more inputs)
+  const validate = () => {
+    const missing = [];
+    if (!firstName.trim()) missing.push('First Name');
+    if (!lastName.trim())  missing.push('Last Name');
+    if (!email.trim())     missing.push('Email');
+    if (!phoneDigits)      missing.push('Phone');
+
+    const issues = [];
+    if (email && !isEmailFormat(email)) issues.push('Valid Email');
+    if (phoneDigits && !isPhoneValid)   issues.push('Valid 10-digit Phone');
+
+    return { missing, issues };
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const { missing, issues } = validate();
+    if (missing.length || issues.length) {
+      const lines = [];
+      if (missing.length) lines.push(`Missing required: ${missing.join(', ')}`);
+      if (issues.length)  lines.push(`Please fix: ${issues.join(', ')}`);
+      alert(lines.join('\n'));
+      return; // stop submission
+    }
+
     setIsSubmitting(true);
 
     try {
+      const dashed      = formatDashed(phoneDigits); // "123-456-7890"
+      const phonePretty = `+1 ${dashed}`;           // "+1 123-456-7890"
+      const phoneE164   = `+1${phoneDigits}`;       // "+11234567890" (handy for querying)
+
       const submissionData = {
         firstName,
         lastName,
         email,
-        phone,
+        phone: phonePretty,
+        phoneE164,
         size,
         depth,
         shellConstruction,
@@ -64,13 +111,14 @@ const SoundLegendProductDetail = () => {
       };
 
       await addDoc(collection(db, 'soundlegend_submissions'), submissionData);
-      await new Promise((resolve) => setTimeout(resolve, 700));
+      await new Promise((r) => setTimeout(r, 700));
       setOpen(true);
 
+      // resets
       setFirstName('');
       setLastName('');
       setEmail('');
-      setPhone('');
+      setPhoneDigits('');
       setSize('14');
       setDepth('6.5');
       setShellConstruction('Stave');
@@ -140,7 +188,8 @@ const SoundLegendProductDetail = () => {
           </div>
 
           <div className="customer-header">Customer Information</div>
-          <form onSubmit={handleSubmit}>
+          {/* Keep the button enabled so clicking Submit shows a clear alert when fields are missing */}
+          <form onSubmit={handleSubmit} noValidate>
             <label htmlFor="firstName">First Name</label>
             <input
               type="text"
@@ -148,6 +197,7 @@ const SoundLegendProductDetail = () => {
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               required
+              aria-required="true"
             />
 
             <label htmlFor="lastName">Last Name</label>
@@ -157,6 +207,7 @@ const SoundLegendProductDetail = () => {
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
               required
+              aria-required="true"
             />
 
             <label htmlFor="email">Email</label>
@@ -166,6 +217,8 @@ const SoundLegendProductDetail = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
+              aria-required="true"
+              autoComplete="email"
             />
 
             <label htmlFor="phone">Phone</label>
@@ -173,24 +226,22 @@ const SoundLegendProductDetail = () => {
               <input
                 type="tel"
                 id="phone"
-                value={phone.replace('+1 ', '')}
-                onChange={(e) => {
-                  let input = e.target.value.replace(/\D/g, '');
-                  if (input.length > 10) input = input.slice(0, 10);
-                  if (input.length >= 6) {
-                    input = `${input.slice(0, 3)}-${input.slice(3, 6)}-${input.slice(6, 10)}`;
-                  } else if (input.length >= 3) {
-                    input = `${input.slice(0, 3)}-${input.slice(3)}`;
-                  }
-                  setPhone('+1 ' + input);
-                }}
-                required
+                inputMode="numeric"
+                autoComplete="tel"
                 placeholder="123-456-7890"
+                // While typing, show raw digits; on blur, show dashed (adds "-" automatically)
+                value={phoneFocused ? phoneDigits : formatDashed(phoneDigits)}
+                onFocus={() => setPhoneFocused(true)}
+                onBlur={() => setPhoneFocused(false)}
+                onChange={(e) => setPhoneDigits(onlyDigits(e.target.value))}
+                required
+                aria-required="true"
+                aria-invalid={phoneDigits ? !isPhoneValid : undefined}
               />
             </div>
             <p className="phone-hint">Enter a valid 10-digit phone number.</p>
 
-            <button type="submit" disabled={isSubmitting}>
+            <button type="submit">
               {isSubmitting ? 'Submitting...' : 'Start Your Custom Snare Journey'}
             </button>
           </form>
