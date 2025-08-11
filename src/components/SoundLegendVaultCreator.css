@@ -1,0 +1,271 @@
+/* ====== SoundLegend Vault Creator (polished dark UI) ====== */
+
+.slvc {
+  --bg: #0e0e0e;
+  --panel: #161616;
+  --border: #2a2a2a;
+  --border-2: #333;
+  --muted: #a7a7a7;
+  --muted2: #8b8b8b;
+  --focus: #2563eb;
+  --focus-ring: rgba(37, 99, 235, .28);
+  --text: #eaeaea;
+
+  max-width: 1000px;
+  margin: 32px auto;
+  padding: 16px;
+  color: var(--text);
+  background: var(--bg);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, sans-serif;
+}
+
+.slvc h1 { margin: 0 0 16px; font-size: 24px; font-weight: 800; letter-spacing: .2px; }
+.slvc h2 { margin: 0 0 12px; font-size: 18px; font-weight: 700; }
+
+/* Cards */
+.slvc-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 14px;
+  box-shadow: 0 2px 0 rgba(0,0,0,.25) inset;
+}
+
+/* Labels / hints */
+.slvc-label { display: inline-block; font-size: 12.5px; color: #dcdcdc; margin-bottom: 6px; }
+.slvc-label-muted { color: var(--muted2); font-weight: 400; }
+.slvc-hint { color: var(--muted); font-size: 12px; margin-top: 6px; }
+.slvc-empty { color: var(--muted); font-size: 13px; padding: 12px; text-align: center; }
+
+.slvc-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.slvc-row--gap { gap: 8px; }
+.slvc-field { display: grid; gap: 6px; }
+
+/* Inputs */
+.slvc-input,
+.slvc-textarea {
+  width: 100%;
+  background: #111;
+  color: #fff;
+  border: 1px solid var(--border-2);
+  border-radius: 10px;
+  padding: 10px 12px;
+  outline: none;
+  transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
+}
+.slvc-input:focus,
+.slvc-textarea:focus {
+  border-color: var(--focus);
+  box-shadow: 0 0 0 3px var(--focus-ring);
+}
+.slvc-textarea {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  min-height: 180px;
+  resize: vertical;
+}
+
+/* ID group */
+.slvc-idGroup { display: flex; align-items: center; gap: 8px; }
+.slvc-prefix {
+  background: #111;
+  color: #bbb;
+  border: 1px solid var(--border-2);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-weight: 800;
+  letter-spacing: .5px;
+  user-select: none;
+}
+.slvc-digits { width: 90px; text-align: center; font-variant-numeric: tabular-nums; }
+
+/* Buttons */
+.slvc-btn,
+.slvc-btnGhost,
+.slvc-btnPrimary,
+.slvc-btnSm {
+  border-radius: 10px;
+  border: 1px solid var(--border-2);
+  background: #212121;
+  color: #fff;
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: transform .04s ease, filter .15s ease, border-color .15s ease;
+}
+.slvc-btn:hover { filter: brightness(1.06); }
+.slvc-btn:active { transform: translateY(1px); }
+
+.slvc-btnGhost { background: transparent; color: #ddd; }
+.slvc-btnGhost:hover { background: #1a1a1a; }
+
+.slvc-btnPrimary {
+  background: var(--focus);
+  border-color: #1d4ed8;
+  font-weight: 800;
+}
+.slvc-btnPrimary:hover { filter: brightness(1.07); }
+.slvc-btnPrimary:active { transform: translateY(1px); }
+
+.slvc-btnSm {
+  padding: 4px 8px;
+  font-size: 12px;
+  line-height: 1;
+  border-radius: 8px;
+}
+
+/* Hero */
+.slvc-hero { display: grid; grid-template-columns: 320px 1fr; gap: 16px; align-items: center; }
+@media (max-width: 720px) { .slvc-hero { grid-template-columns: 1fr; } }
+
+.slvc-heroPreview {
+  width: 100%;
+  height: 180px;
+  background: #111;
+  border: 1px solid var(--border-2);
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+.slvc-heroImg { width: 100%; height: 100%; object-fit: cover; }
+.slvc-heroFallback { text-align: center; font-size: 12px; color: var(--muted); }
+
+/* Gallery */
+.slvc-galleryGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+.slvc-galleryItem {
+  position: relative;
+  background: #111;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  outline: 1px dashed transparent;
+  transition: outline-color .15s ease, border-color .15s ease, transform .06s ease;
+}
+.slvc-galleryItem.drag-over { outline-color: var(--focus); border-color: var(--focus); }
+.slvc-galleryItem:active { transform: scale(.998); }
+
+.slvc-galleryImg { width: 100%; height: 120px; object-fit: cover; display: block; }
+.slvc-galleryControls {
+  display: flex; gap: 8px; align-items: center; justify-content: center;
+  padding: 6px; border-top: 1px solid #222;
+}
+.slvc-index { opacity: .7; font-size: 12px; }
+
+.slvc-removeBtn {
+  position: absolute; top: 6px; right: 6px;
+  background: rgba(0,0,0,.65);
+  color: #fff;
+  border: 1px solid #444;
+  border-radius: 10px;
+  padding: 6px 8px;
+  cursor: pointer;
+  font-size: 12px;
+}
+.slvc-removeBtn:hover { background: rgba(0,0,0,.78); }
+
+/* ===== Hard overrides to isolate the creator UI ===== */
+.slvc * { box-sizing: border-box; }
+
+/* Headings / labels — force left, full contrast */
+.slvc h1,
+.slvc h2,
+.slvc .slvc-label {
+  text-align: left !important;
+  color: #e5e7eb !important;   /* slate-200 */
+  opacity: 1 !important;
+  letter-spacing: 0 !important;
+}
+
+/* Panels */
+.slvc .slvc-card {
+  background: #141414 !important;
+  border-color: #2b2b2b !important;
+  box-shadow: none !important;
+}
+
+/* Inputs */
+.slvc input,
+.slvc textarea,
+.slvc select {
+  background: #0f0f0f !important;
+  border: 1px solid #3a3a3a !important;
+  color: #f3f4f6 !important;   /* slate-100 */
+  border-radius: 10px !important;
+  height: 42px !important;
+  line-height: 1.15 !important;
+  text-align: left !important;
+  box-shadow: none !important;
+}
+.slvc input::placeholder,
+.slvc textarea::placeholder { color: #8b8b8b !important; }
+
+.slvc textarea {
+  height: auto !important;
+  min-height: 180px !important;
+  padding: 12px !important;
+  resize: vertical !important;
+}
+
+/* Hero + gallery frames */
+.slvc .slvc-heroPreview { background: #0f0f0f !important; border-color: #333 !important; }
+.slvc .slvc-galleryItem { border-color: #2b2b2b !important; }
+
+/* Buttons */
+.slvc button {
+  border: 1px solid #333 !important;
+  background: #222 !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+.slvc .slvc-btnPrimary {
+  background: #2563eb !important;
+  border-color: #1d4ed8 !important;
+  font-weight: 800 !important;
+}
+
+/* Layout spacing */
+.slvc .slvc-grid2 { gap: 14px !important; }
+.slvc .slvc-row { gap: 12px !important; }
+
+/* Ensure all text inside creator view is readable */
+.soundlegend-vault-creator {
+  color: #f5f5f5; /* Light text globally */
+}
+
+/* Make headings a bit bolder and brighter */
+.soundlegend-vault-creator h1,
+.soundlegend-vault-creator h2,
+.soundlegend-vault-creator h3,
+.soundlegend-vault-creator h4,
+.soundlegend-vault-creator h5 {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Labels for form fields */
+.soundlegend-vault-creator label {
+  color: #e0e0e0;
+  font-weight: 500;
+}
+
+/* Input + textarea text color */
+.soundlegend-vault-creator input,
+.soundlegend-vault-creator textarea,
+.soundlegend-vault-creator select {
+  color: #ffffff;
+  background-color: #1a1a1a;
+  border: 1px solid #333;
+}
+
+/* Placeholder text */
+.soundlegend-vault-creator input::placeholder,
+.soundlegend-vault-creator textarea::placeholder {
+  color: #aaaaaa;
+}
+
+/* Two-column fields */
+.slvc-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 720px) { .slvc-grid2 { grid-template-columns: 1fr; } }
+
+/* Footer actions */
+.slvc-actions { display: flex; gap: 12px; justify-content: flex-end; margin: 18px 0 48px; }

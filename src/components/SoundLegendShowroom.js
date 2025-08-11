@@ -124,30 +124,12 @@ const SoundLegendShowroom = () => {
           />
         )}
       </div>
-
-      {/* Story Section */}
-      {story && (
-<section
-  className="showroom-story elegant-font fade-in-section loading"
-  ref={(el) => (sectionsRef.current[2] = el)}
->
-  <h1 className="artist-name">{name}</h1>
-  <p className="legacy-subtitle">SoundLegend Legacy Artist ({serial.toUpperCase()})</p>
-  
-  <div
-    className="showroom-story-content"
-    dangerouslySetInnerHTML={{ __html: drumData.story }}
-  ></div>
-</section>
-      )}
-
       {/* Gallery */}
       {gallery.length > 0 && (
         <section
           className="showroom-gallery fade-in-section loading"
           ref={(el) => (sectionsRef.current[3] = el)}
         >
-          <h2>Gallery</h2>
           <div className="gallery-grid">
             {gallery.map((img, i) => (
               <img
@@ -208,6 +190,22 @@ const SoundLegendShowroom = () => {
             </button>
           </div>
         </div>
+      )}
+
+      {/* Story Section */}
+      {story && (
+<section
+  className="showroom-story elegant-font fade-in-section loading"
+  ref={(el) => (sectionsRef.current[2] = el)}
+>
+  <h1 className="artist-name">{name}</h1>
+  <p className="legacy-subtitle">SoundLegend Legacy Artist ({serial.toUpperCase()})</p>
+  
+  <div
+    className="showroom-story-content"
+    dangerouslySetInnerHTML={{ __html: drumData.story }}
+  ></div>
+</section>
       )}
 
       {/* NFC Info */}

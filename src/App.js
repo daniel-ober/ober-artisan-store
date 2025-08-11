@@ -57,6 +57,7 @@ import { DarkModeProvider } from './context/DarkModeContext';
 import VerifySerial from './components/VerifySerial';
 import VerifyDrumBySerial from './components/VerifyDrumBySerial';
 import SoundLegendShowroom from './components/SoundLegendShowroom';
+import SoundLegendVaultCreator from './components/SoundLegendVaultCreator';
 import { Toaster } from 'react-hot-toast';
 import './App.css';
 
@@ -275,7 +276,16 @@ function App() {
           <Route path="/checkout-summary" element={<CheckoutSummary />} />
           <Route path="/verify" element={<VerifySerial />} />
           <Route path="/verify/:serial" element={<VerifyDrumBySerial />} />
-          <Route path="/artisan-shop/soundlegend/:serial" element={<SoundLegendShowroom />} />
+          <Route
+            path="/artisan-shop/soundlegend/:serial"
+            element={<SoundLegendShowroom />}
+          />
+          <Route
+            path="/admin/soundlegend-vault"
+            element={
+              <PrivateRoute element={<SoundLegendVaultCreator />} adminOnly />
+            }
+          />{' '}
         </Routes>
         <Footer navbarLinks={navbarLinks} />
       </div>
