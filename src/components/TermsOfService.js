@@ -5,16 +5,17 @@ const TermsOfService = forwardRef((props, ref) => {
   return (
     <div ref={ref} className="terms-of-service-container">
       <h1>Terms of Service</h1>
-      <p><strong>Last Updated:</strong> April 5, 2025</p>
 
       <p>
-        These Terms of Service outline the rules and responsibilities when using our site or making a purchase.
-        By continuing to use our services, you agree to abide by these terms in full. We recommend reviewing them carefully.
+        These Terms of Service outline the rules and responsibilities when using our site or making a purchase. 
+        By continuing to use our services, you agree to abide by these terms in full. 
+        We may update these terms at any time without prior notice, and the version in effect at the time of your interaction or transaction will apply. 
+        We recommend reviewing them carefully.
       </p>
 
       <h2>1. Agreement to Terms</h2>
       <p>
-        By accessing or using the Ober Artisan Drums website or services, you agree to these Terms and our Privacy Policy.
+        By accessing or using the Ober Artisan Drums website or services, you agree to these Terms and our Privacy Policy. 
         If you do not agree, you must not use this site.
       </p>
 
@@ -30,7 +31,8 @@ const TermsOfService = forwardRef((props, ref) => {
 
       <h2>4. Orders and Product Information</h2>
       <p>
-        We strive for accuracy in product listings but do not guarantee it. We reserve the right to cancel or modify orders at our discretion, particularly in cases of suspected misuse or fraud.
+        We strive for accuracy in product listings but do not guarantee it. We reserve the right to cancel or modify orders at our discretion, 
+        particularly in cases of suspected misuse or fraud.
       </p>
 
       <h2>5. Payments</h2>
@@ -40,17 +42,19 @@ const TermsOfService = forwardRef((props, ref) => {
 
       <h2>6. Shipping and Delivery</h2>
       <p>
-        Orders are typically fulfilled and shipped promptly, but we cannot guarantee delivery times. Shipping costs and timelines may vary by location.
+        Orders are typically fulfilled and shipped promptly, but we cannot guarantee delivery times. 
+        Shipping costs and timelines may vary by location.
       </p>
 
       <h2>7. Returns and Refunds</h2>
       <p>
-        Our refund and return policy is available on our site. By placing an order, you acknowledge and agree to those terms.
+        Our refund and return policy is available on our site. By placing an order, you acknowledge and agree to those terms, 
+        including all provisions related to payment plans, promotional pricing, and non-refundable items.
       </p>
 
       <h2>8. Intellectual Property</h2>
       <p>
-        All site content—including text, graphics, media, and design—is the exclusive property of Ober Artisan Drums or its licensors.
+        All site content—including text, graphics, media, and design—is the exclusive property of Ober Artisan Drums or its licensors. 
         No content may be reused, distributed, or reproduced without written permission.
       </p>
 
@@ -69,7 +73,8 @@ const TermsOfService = forwardRef((props, ref) => {
 
       <h2>10. Limitation of Liability</h2>
       <p>
-        Use of this site is at your own risk. We are not liable for indirect, incidental, or consequential damages, or for service interruptions, data loss, or third-party breaches.
+        Use of this site is at your own risk. We are not liable for indirect, incidental, or consequential damages, 
+        or for service interruptions, data loss, or third-party breaches.
       </p>
 
       <h2>11. Governing Law</h2>
@@ -79,8 +84,7 @@ const TermsOfService = forwardRef((props, ref) => {
 
       <h2>12. Modifications to Terms</h2>
       <p>
-        We may update these Terms at any time. Updated versions will be posted here with a new “Last Updated” date.
-        Continued use of the site implies agreement to the revised terms.
+        We may update these Terms periodically. The most current version will always appear here, and your continued use of the site implies agreement to the current version.
       </p>
 
       <h2>13. Contact Us</h2>
