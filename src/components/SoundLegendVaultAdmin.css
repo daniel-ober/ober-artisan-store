@@ -1,0 +1,157 @@
+/* ---------- SoundLegend Vault Admin (list page) ---------- */
+
+.slv-wrap {
+  --bg: #0e0e0e;
+  --panel: #151515;
+  --border: #2a2a2a;
+  --border-2: #333;
+  --text: #eaeaea;
+  --muted: #a7a7a7;
+  --focus: #2563eb;
+
+  max-width: 1200px;
+  margin: 32px auto;
+  padding: 16px;
+  color: var(--text);
+  background: var(--bg);
+  border-radius: 12px;
+  border: 1px solid #222;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, sans-serif;
+}
+
+.slv-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.slv-h1 { margin: 0; font-size: 24px; font-weight: 800; }
+.slv-hint { opacity: 0.75; font-size: 13px; margin-bottom: 12px; }
+.slv-empty {
+  opacity: 0.9;
+  font-size: 14px;
+  padding: 24px;
+  text-align: center;
+  border: 1px dashed var(--border-2);
+  border-radius: 12px;
+}
+
+.slv-actionsRow { display: flex; gap: 8px; }
+
+.slv-btn,
+.slv-btnPrimary {
+  border-radius: 10px;
+  padding: 10px 12px;
+  cursor: pointer;
+  border: 1px solid var(--border-2);
+  background: #222;
+  color: #fff;
+  transition: transform .04s ease, filter .15s ease, border-color .15s ease;
+}
+.slv-btn:hover { filter: brightness(1.05); }
+.slv-btn:active { transform: translateY(1px); }
+
+.slv-btnPrimary {
+  background: var(--focus);
+  border-color: #1d4ed8;
+  font-weight: 800;
+}
+.slv-btnPrimary:hover { filter: brightness(1.06); }
+.slv-btnPrimary:active { transform: translateY(1px); }
+
+.slv-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+}
+
+.slv-cardWrap { position: relative; }
+
+.slv-card {
+  text-align: left;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  padding: 0;
+  width: 100%;
+  cursor: pointer;
+  transition: border-color .15s ease, transform .06s ease;
+}
+.slv-card:hover { border-color: #3b3b3b; }
+.slv-card:active { transform: scale(.997); }
+
+.slv-thumbWrap {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #0f0f0f;
+  overflow: hidden;
+}
+.slv-thumb { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.slv-meta {
+  padding: 10px 12px 12px;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.slv-name {
+  font-size: 15px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.slv-slug { font-size: 12px; opacity: .8; display: flex; align-items: center; gap: 6px; }
+
+.slv-openLink {
+  font-size: 14px;
+  text-decoration: none;
+  color: #bbb;
+  padding: 2px 4px;
+  border-radius: 6px;
+  border: 1px solid var(--border-2);
+  background: #1a1a1a;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}
+.slv-openLink:hover { background: #222; color: #fff; }
+
+/* Force readable text in admin wrapper */
+.slv-wrap {
+  color: #f3f4f6 !important; /* light gray for body text */
+  background: #0e0e0e;        /* your dark bg */
+}
+
+/* Headings: bright + not faded */
+.slv-wrap h1,
+.slv-wrap h2,
+.slv-wrap .slv-h1 {
+  color: #ffffff !important;
+  opacity: 1 !important;       /* kill any inherited opacity */
+  text-shadow: none;
+}
+
+/* Subtle help text only (keeps existing .slv-hint look) */
+.slv-hint {
+  color: #a3a3a3 !important;
+  opacity: 1 !important;       /* explicit so it’s never ultra-dim */
+}
+
+/* Buttons: keep text visible on dark buttons */
+.slv-btn,
+.slv-btnPrimary {
+  color: #ffffff !important;
+}
+
+/* Inputs in the admin list view (if any appear later) */
+.slv-wrap input,
+.slv-wrap select,
+.slv-wrap textarea {
+  color: #ffffff !important;
+  background: #111 !important;
+  border-color: #333 !important;
+}

@@ -3,15 +3,25 @@ import { collection, onSnapshot, query } from 'firebase/firestore';
 import { backfillOverviewStatus } from '../utils/backfillOverviewStatus';
 import { FaToolbox } from 'react-icons/fa';
 import {
-  FaUsers, FaDrum, FaShoppingCart, FaBox, FaHammer, FaHeadset,
-  FaCog, FaImages, FaStar, FaRegChartBar, FaFlask, FaExclamationTriangle,
+  FaUsers,
+  FaDrum,
+  FaShoppingCart,
+  FaBox,
+  FaHammer,
+  FaHeadset,
+  FaCog,
+  FaImages,
+  FaStar,
+  FaRegChartBar,
+  FaFlask,
+  FaExclamationTriangle,
 } from 'react-icons/fa';
 import { getAuth } from 'firebase/auth';
 import ManageProducts from './ManageProducts';
 import ManageUsers from './ManageUsers';
 import ManageOrders from './ManageOrders';
 import ManageInquiries from './ManageInquiries';
-import ManageGallery from './ManageGallery';
+// import ManageGallery from './ManageGallery';
 import SiteSettings from './SiteSettings';
 import ManageCarts from './ManageCarts';
 import ManageProjects from './ManageProjects';
@@ -20,6 +30,8 @@ import ManageSoundlegendRequests from './ManageSoundlegendRequests';
 import AdminOverview from './AdminOverview';
 import AdminRiskNotifications from './AdminRiskNotifications';
 import ArtisanTools from './ArtisanTools';
+import SoundLegendVaultCreator from './SoundLegendVaultCreator';
+import SoundLegendVaultAdmin from './SoundLegendVaultAdmin';
 import { db } from '../firebaseConfig';
 import './AdminDashboard.css';
 
@@ -27,7 +39,10 @@ const AdminDashboard = () => {
   const [activeComponent, setActiveComponent] = useState('overview');
   const [notifications, setNotifications] = useState({});
   const [secondaryNotifications, setSecondaryNotifications] = useState({});
-  const [overviewBadgeCounts, setOverviewBadgeCounts] = useState({ green: 0, yellow: 0 });
+  const [overviewBadgeCounts, setOverviewBadgeCounts] = useState({
+    green: 0,
+    yellow: 0,
+  });
 
   useEffect(() => {
     backfillOverviewStatus();
@@ -60,7 +75,8 @@ const AdminDashboard = () => {
     const unsubOrders = onSnapshot(
       query(collection(db, 'orders')),
       (snapshot) => {
-        let green = 0, yellow = 0;
+        let green = 0,
+          yellow = 0;
         snapshot.forEach((doc) => {
           const status = doc.data().overviewStatus;
           if (status === 'new') green++;
@@ -69,7 +85,10 @@ const AdminDashboard = () => {
         greenTotal += green;
         yellowTotal += yellow;
         setNotifications((prev) => ({ ...prev, manageOrders: green }));
-        setSecondaryNotifications((prev) => ({ ...prev, manageOrders: yellow }));
+        setSecondaryNotifications((prev) => ({
+          ...prev,
+          manageOrders: yellow,
+        }));
         updateOverviewBadges();
       }
     );
@@ -77,16 +96,24 @@ const AdminDashboard = () => {
     const unsubInquiries = onSnapshot(
       query(collection(db, 'inquiries')),
       (snapshot) => {
-        let green = 0, yellow = 0;
+        let green = 0,
+          yellow = 0;
         snapshot.forEach((doc) => {
-          const status = (doc.data().overviewStatus || doc.data().status || '').toLowerCase();
+          const status = (
+            doc.data().overviewStatus ||
+            doc.data().status ||
+            ''
+          ).toLowerCase();
           if (status === 'new') green++;
           else if (status === 'inprogress') yellow++;
         });
         greenTotal += green;
         yellowTotal += yellow;
         setNotifications((prev) => ({ ...prev, manageInquiries: green }));
-        setSecondaryNotifications((prev) => ({ ...prev, manageInquiries: yellow }));
+        setSecondaryNotifications((prev) => ({
+          ...prev,
+          manageInquiries: yellow,
+        }));
         updateOverviewBadges();
       }
     );
@@ -94,16 +121,28 @@ const AdminDashboard = () => {
     const unsubSoundlegend = onSnapshot(
       query(collection(db, 'soundlegend_submissions')),
       (snapshot) => {
-        let green = 0, yellow = 0;
+        let green = 0,
+          yellow = 0;
         snapshot.forEach((doc) => {
-          const status = (doc.data().status || doc.data().overviewStatus || '').toLowerCase();
+          const status = (
+            doc.data().status ||
+            doc.data().overviewStatus ||
+            ''
+          ).toLowerCase();
           if (status === 'new') green++;
-          else if (status === 'prospecting' || status === 'inprogress') yellow++;
+          else if (status === 'prospecting' || status === 'inprogress')
+            yellow++;
         });
         greenTotal += green;
         yellowTotal += yellow;
-        setNotifications((prev) => ({ ...prev, manageSoundlegendRequests: green }));
-        setSecondaryNotifications((prev) => ({ ...prev, manageSoundlegendRequests: yellow }));
+        setNotifications((prev) => ({
+          ...prev,
+          manageSoundlegendRequests: green,
+        }));
+        setSecondaryNotifications((prev) => ({
+          ...prev,
+          manageSoundlegendRequests: yellow,
+        }));
         updateOverviewBadges();
       }
     );
@@ -111,7 +150,8 @@ const AdminDashboard = () => {
     const unsubRisk = onSnapshot(
       query(collection(db, 'risk_notifications')),
       (snapshot) => {
-        let green = 0, yellow = 0;
+        let green = 0,
+          yellow = 0;
         snapshot.forEach((doc) => {
           const status = (doc.data().status || '').toLowerCase().trim();
           const score = doc.data().score || 0;
@@ -121,7 +161,10 @@ const AdminDashboard = () => {
         greenTotal += green;
         yellowTotal += yellow;
         setNotifications((prev) => ({ ...prev, manageRiskAlerts: green }));
-        setSecondaryNotifications((prev) => ({ ...prev, manageRiskAlerts: yellow }));
+        setSecondaryNotifications((prev) => ({
+          ...prev,
+          manageRiskAlerts: yellow,
+        }));
         updateOverviewBadges();
       }
     );
@@ -136,25 +179,42 @@ const AdminDashboard = () => {
 
   const renderActiveComponent = () => {
     switch (activeComponent) {
-      case 'manageOrders': return <ManageOrders />;
-      case 'manageInquiries': return <ManageInquiries />;
-      case 'manageProducts': return <ManageProducts />;
-      case 'manageProjects': return <ManageProjects />;
-      case 'manageUsers': return <ManageUsers />;
-      case 'manageCarts': return <ManageCarts />;
-      case 'manageGallery': return <ManageGallery />;
-      case 'manageElixirBatches': return <ManageElixirBatches />;
-      case 'siteSettings': return <SiteSettings />;
-      case 'manageSoundlegendRequests': return <ManageSoundlegendRequests />;
-      case 'manageRiskAlerts': return <AdminRiskNotifications />;
-      case 'artisanTools': return <ArtisanTools />;
-      default: return (
-        <AdminOverview
-          notifications={notifications}
-          secondaryNotifications={secondaryNotifications}
-          setOverviewBadgeCounts={setOverviewBadgeCounts}
-        />
-      );
+      case 'manageOrders':
+        return <ManageOrders />;
+      case 'manageInquiries':
+        return <ManageInquiries />;
+      case 'manageProducts':
+        return <ManageProducts />;
+      case 'manageProjects':
+        return <ManageProjects />;
+      case 'manageUsers':
+        return <ManageUsers />;
+      case 'manageCarts':
+        return <ManageCarts />;
+      case 'manageGallery':
+        return <ManageGallery />;
+      case 'manageElixirBatches':
+        return <ManageElixirBatches />;
+      case 'siteSettings':
+        return <SiteSettings />;
+      case 'manageSoundlegendRequests':
+        return <ManageSoundlegendRequests />;
+      case 'manageRiskAlerts':
+        return <AdminRiskNotifications />;
+      case 'artisanTools':
+        return <ArtisanTools />;
+        case 'manageSLVault':
+  return <SoundLegendVaultAdmin />;
+      case 'manageSLVault':
+        return <SoundLegendVaultCreator />;
+      default:
+        return (
+          <AdminOverview
+            notifications={notifications}
+            secondaryNotifications={secondaryNotifications}
+            setOverviewBadgeCounts={setOverviewBadgeCounts}
+          />
+        );
     }
   };
 
@@ -165,16 +225,40 @@ const AdminDashboard = () => {
         {[
           { name: 'Overview', icon: FaRegChartBar, stateKey: 'overview' },
           { name: 'Manage Orders', icon: FaBox, stateKey: 'manageOrders' },
-          { name: 'SL Submissions', icon: FaStar, stateKey: 'manageSoundlegendRequests' },
-          { name: 'Support Inquiries', icon: FaHeadset, stateKey: 'manageInquiries' },
-          { name: 'Manage Projects', icon: FaHammer, stateKey: 'manageProjects' },
+          {
+            name: 'SL Submissions',
+            icon: FaStar,
+            stateKey: 'manageSoundlegendRequests',
+          },
+          {
+            name: 'Support Inquiries',
+            icon: FaHeadset,
+            stateKey: 'manageInquiries',
+          },
+          {
+            name: 'Manage Projects',
+            icon: FaHammer,
+            stateKey: 'manageProjects',
+          },
           { name: 'Manage Products', icon: FaDrum, stateKey: 'manageProducts' },
           { name: 'Manage Users', icon: FaUsers, stateKey: 'manageUsers' },
-          { name: 'Manage Carts', icon: FaShoppingCart, stateKey: 'manageCarts' },
-          { name: 'Manage Gallery', icon: FaImages, stateKey: 'manageGallery' },
-          { name: 'Elixir Batches', icon: FaFlask, stateKey: 'manageElixirBatches' },
-          { name: 'Risk Alerts', icon: FaExclamationTriangle, stateKey: 'manageRiskAlerts' },
+          {
+            name: 'Manage Carts',
+            icon: FaShoppingCart,
+            stateKey: 'manageCarts',
+          },
+          {
+            name: 'Elixir Batches',
+            icon: FaFlask,
+            stateKey: 'manageElixirBatches',
+          },
           { name: 'Artisan Tools', icon: FaHammer, stateKey: 'artisanTools' },
+          { name: 'SL Vault Artists', icon: FaToolbox, stateKey: 'manageSLVault' },
+          {
+            name: 'Risk Alerts',
+            icon: FaExclamationTriangle,
+            stateKey: 'manageRiskAlerts',
+          },
           { name: 'Site Settings', icon: FaCog, stateKey: 'siteSettings' },
         ].map(({ name, icon: Icon, stateKey }) => (
           <div
@@ -219,9 +303,11 @@ const AdminDashboard = () => {
                     {notifications[stateKey] > 0 && (
                       <span
                         className={`notification-badge ${
-                          stateKey === 'manageOrders' ? 'badge-green' :
-                          stateKey === 'manageInquiries' ? 'badge-orange' :
-                          'badge-yellow'
+                          stateKey === 'manageOrders'
+                            ? 'badge-green'
+                            : stateKey === 'manageInquiries'
+                              ? 'badge-orange'
+                              : 'badge-yellow'
                         }`}
                       >
                         {notifications[stateKey]}
