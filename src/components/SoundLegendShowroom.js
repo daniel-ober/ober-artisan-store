@@ -11,12 +11,11 @@ const SoundLegendShowroom = () => {
   const [modalIndex, setModalIndex] = useState(null);
   const [logoLoaded, setLogoLoaded] = useState(false);
   const [heroLoaded, setHeroLoaded] = useState(false);
-  const sectionsRef = useRef([]); // ✅ track sections for fade-in animation
+  const sectionsRef = useRef([]);
 
   const handleLogoLoad = () => setLogoLoaded(true);
   const handleHeroLoad = () => setHeroLoaded(true);
 
-  // ✅ Fetch drum data
   useEffect(() => {
     const fetchDrumData = async () => {
       try {
@@ -34,7 +33,6 @@ const SoundLegendShowroom = () => {
     window.scrollTo(0, 0);
   }, [serial]);
 
-  // ✅ Keyboard navigation for modal
   const handleKeyDown = useCallback(
     (e) => {
       if (modalIndex === null) return;
@@ -54,7 +52,6 @@ const SoundLegendShowroom = () => {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [handleKeyDown]);
 
-  // ✅ Intersection Observer for Fade-In with "loading" → "is-visible" transition
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -71,7 +68,6 @@ const SoundLegendShowroom = () => {
 
     sectionsRef.current.forEach((el) => el && observer.observe(el));
 
-    // ✅ Fallback: if observer fails, make all visible after 2s
     const fallbackTimer = setTimeout(() => {
       sectionsRef.current.forEach((el) => {
         el?.classList.remove('loading');
@@ -85,10 +81,8 @@ const SoundLegendShowroom = () => {
     };
   }, []);
 
-  if (loading)
-    return <div className="showroom-loading">Loading drum details...</div>;
-  if (drumData?.notFound)
-    return <div className="showroom-not-found">❌ Drum not found.</div>;
+  if (loading) return <div className="showroom-loading">Loading drum details...</div>;
+  if (drumData?.notFound) return <div className="showroom-not-found">❌ Drum not found.</div>;
 
   const {
     name = 'Unknown Drum',
@@ -98,6 +92,11 @@ const SoundLegendShowroom = () => {
     story,
     links = {},
   } = drumData;
+
+  // ✅ Always run this — hides hero image from gallery
+  const filteredGallery = heroImage
+    ? gallery.filter((img) => img !== heroImage)
+    : gallery;
 
   return (
     <div className="soundlegend-showroom">
@@ -124,14 +123,15 @@ const SoundLegendShowroom = () => {
           />
         )}
       </div>
+
       {/* Gallery */}
-      {gallery.length > 0 && (
+      {filteredGallery.length > 0 && (
         <section
           className="showroom-gallery fade-in-section loading"
           ref={(el) => (sectionsRef.current[3] = el)}
         >
           <div className="gallery-grid">
-            {gallery.map((img, i) => (
+            {filteredGallery.map((img, i) => (
               <img
                 key={i}
                 src={img}
@@ -146,45 +146,28 @@ const SoundLegendShowroom = () => {
 
       {/* Modal */}
       {modalIndex !== null && (
-        <div
-          className="showroom-modal-overlay"
-          onClick={() => setModalIndex(null)}
-        >
+        <div className="showroom-modal-overlay" onClick={() => setModalIndex(null)}>
           <div
             className="showroom-modal-content"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Close Button */}
-            <button
-              className="showroom-modal-close"
-              onClick={() => setModalIndex(null)}
-            >
-              ✕
-            </button>
-
-            {/* Prev Button */}
+            <button className="showroom-modal-close" onClick={() => setModalIndex(null)}>✕</button>
             <button
               className="showroom-modal-prev"
               onClick={() =>
-                setModalIndex(
-                  modalIndex === 0 ? gallery.length - 1 : modalIndex - 1
-                )
+                setModalIndex(modalIndex === 0 ? filteredGallery.length - 1 : modalIndex - 1)
               }
             >
               ‹
             </button>
-
-            {/* Image */}
             <img
-              src={gallery[modalIndex]}
+              src={filteredGallery[modalIndex]}
               alt="Preview"
               className="showroom-modal-image"
             />
-
-            {/* Next Button */}
             <button
               className="showroom-modal-next"
-              onClick={() => setModalIndex((modalIndex + 1) % gallery.length)}
+              onClick={() => setModalIndex((modalIndex + 1) % filteredGallery.length)}
             >
               ›
             </button>
@@ -194,18 +177,17 @@ const SoundLegendShowroom = () => {
 
       {/* Story Section */}
       {story && (
-<section
-  className="showroom-story elegant-font fade-in-section loading"
-  ref={(el) => (sectionsRef.current[2] = el)}
->
-  <h1 className="artist-name">{name}</h1>
-  <p className="legacy-subtitle">SoundLegend Legacy Artist ({serial.toUpperCase()})</p>
-  
-  <div
-    className="showroom-story-content"
-    dangerouslySetInnerHTML={{ __html: drumData.story }}
-  ></div>
-</section>
+        <section
+          className="showroom-story elegant-font fade-in-section loading"
+          ref={(el) => (sectionsRef.current[2] = el)}
+        >
+          <h1 className="artist-name">{name}</h1>
+          <p className="legacy-subtitle">SoundLegend Legacy Artist ({serial.toUpperCase()})</p>
+          <div
+            className="showroom-story-content"
+            dangerouslySetInnerHTML={{ __html: drumData.story }}
+          ></div>
+        </section>
       )}
 
       {/* NFC Info */}
@@ -219,17 +201,12 @@ const SoundLegendShowroom = () => {
           here, SoundLegend artists enjoy a deeper connection — with private
           access to their full build journey, behind-the-scenes content, and
           exclusive perks through the SoundLegend online portal.
-          <br />
-          <br />
-          <a href="/soundlegends/signin" className="portal-link">
-            Sign in here
-          </a>{' '}
-          to access your portal, or 
-          {' '}
+          <br /><br />
+          <a href="/soundlegends/signin" className="portal-link">Sign in here</a>{' '}
+          to access your portal, or{' '}
           <a href="/artisan-shop/soundlegend" className="portal-link">
-             learn more about joining the SoundLegend Experience
-          </a>
-          .
+            learn more about joining the SoundLegend Experience
+          </a>.
         </p>
       </section>
 

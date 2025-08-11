@@ -1,0 +1,122 @@
+/* src/components/LegacyVaultEditor.css */
+.legacyvault-card {
+  background: #111;
+  color: #eee;
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid #2a2a2a;
+}
+.legacyvault-header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  align-items: center;
+}
+.legacyvault-hero {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #2a2a2a;
+  min-height: 120px;
+}
+.legacyvault-hero img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  max-height: 240px;
+}
+.legacyvault-hero-fallback {
+  display: grid;
+  place-items: center;
+  height: 180px;
+  color: #aaa;
+  background: #1a1a1a;
+}
+.legacyvault-hero-note {
+  font-size: 12px;
+  color: #bbb;
+  padding: 8px 4px;
+}
+.legacyvault-upload .legacyvault-file-label {
+  display: inline-block;
+  padding: 8px 12px;
+  background: #222;
+  border: 1px solid #444;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.legacyvault-upload input[type="file"] {
+  display: none;
+}
+.legacyvault-upload-help {
+  font-size: 12px;
+  color: #aaa;
+  margin-top: 6px;
+  text-align: right;
+}
+.legacyvault-section { margin-top: 18px; }
+.legacyvault-section-header { display:flex; align-items:baseline; gap:12px; }
+.legacyvault-section-sub { font-size:12px; color:#aaa; }
+.legacyvault-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  margin-top: 10px;
+}
+.legacyvault-thumb {
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #141414;
+}
+.legacyvault-thumb img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  display: block;
+}
+.legacyvault-thumb-actions {
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+}
+.legacyvault-thumb-actions button {
+  flex: 1;
+  font-size: 12px;
+  padding: 6px 8px;
+  background: #222;
+  color: #ddd;
+  border: 1px solid #3a3a3a;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.legacyvault-thumb-actions button.primary {
+  background: #0b64d7;
+  border-color: #0b64d7;
+  color: #fff;
+}
+.legacyvault-reorder {
+  display:flex; gap:8px; padding: 6px 8px 10px;
+}
+.legacyvault-reorder button {
+  flex:1;
+  font-size: 12px;
+  padding: 4px 6px;
+  background:#191919;
+  border:1px solid #333;
+  color:#ccc;
+  border-radius:6px;
+  cursor:pointer;
+}
+.legacyvault-empty { color:#aaa; padding: 10px 0; }
+.legacyvault-error { color: #ff6b6b; margin-top: 8px; }
+.legacyvault-actions { margin-top: 16px; display: flex; justify-content: flex-end; }
+.legacyvault-actions button {
+  padding: 10px 14px;
+  background: #0b64d7;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.legacyvault-actions button[disabled] { opacity: .7; cursor: default; }
