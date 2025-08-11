@@ -10,7 +10,7 @@ import {
   FaHammer,
   FaHeadset,
   FaCog,
-  FaImages,
+  FaGem,
   FaStar,
   FaRegChartBar,
   FaFlask,
@@ -241,6 +241,7 @@ const AdminDashboard = () => {
             stateKey: 'manageProjects',
           },
           { name: 'Manage Products', icon: FaDrum, stateKey: 'manageProducts' },
+          { name: 'SL Vault Artists', icon: FaGem, stateKey: 'manageSLVault' },
           { name: 'Manage Users', icon: FaUsers, stateKey: 'manageUsers' },
           {
             name: 'Manage Carts',
@@ -253,7 +254,6 @@ const AdminDashboard = () => {
             stateKey: 'manageElixirBatches',
           },
           { name: 'Artisan Tools', icon: FaHammer, stateKey: 'artisanTools' },
-          { name: 'SL Vault Artists', icon: FaToolbox, stateKey: 'manageSLVault' },
           {
             name: 'Risk Alerts',
             icon: FaExclamationTriangle,

@@ -6,6 +6,7 @@ import "./SoundLegendVaultCreator.css";
 
 const FALLBACK_HERO = "/fallback-images/images-coming-soon-regular.png";
 const DOC_ID_REGEX = /^SL-\d{3}$/; // e.g., SL-000
+const MAX_IMAGES = 9;
 
 const emptyLinks = { facebook: "", instagram: "", youtube: "", spotify: "", itunes: "" };
 const emptySpecs = {
@@ -27,15 +28,19 @@ export default function SoundLegendVaultCreator({ prefillId = "" }) {
   const [specs, setSpecs] = useState({ ...emptySpecs });
   const [story, setStory] = useState("");
 
-  const [heroFile, setHeroFile] = useState(null);
-  const [heroPreview, setHeroPreview] = useState("");
-  const [gallery, setGallery] = useState([]); // [{id, file?, url}]
+  // Gallery items: { id, file?, url, isHero? }
+  const [gallery, setGallery] = useState([]);
+  // Persist the hero URL that existed in Firestore when we loaded (used to preserve if user doesn't change hero)
+  const [existingHeroUrl, setExistingHeroUrl] = useState("");
 
   const [saving, setSaving] = useState(false);
   const [loadingExisting, setLoadingExisting] = useState(false);
   const fileInputRef = useRef(null);
 
-  const remainingSlots = useMemo(() => Math.max(0, 8 - gallery.length), [gallery.length]);
+  const remainingSlots = useMemo(
+    () => Math.max(0, MAX_IMAGES - gallery.length),
+    [gallery.length]
+  );
 
   // digits only, max 3
   const onChangeDigits = (val) => {
@@ -43,19 +48,13 @@ export default function SoundLegendVaultCreator({ prefillId = "" }) {
     setSerial3(digits);
   };
 
-  const onPickHero = (e) => {
-    const f = e.target.files?.[0];
-    if (!f) return;
-    setHeroFile(f);
-    setHeroPreview(URL.createObjectURL(f));
-  };
-
   const addGalleryFiles = (files) => {
     const incoming = Array.from(files || []);
-    const toAdd = incoming.slice(0, 8 - gallery.length).map((file, i) => ({
+    const toAdd = incoming.slice(0, remainingSlots).map((file, i) => ({
       id: `${Date.now()}-${i}-${file.name}`,
       file,
       url: URL.createObjectURL(file),
+      isHero: false,
     }));
     setGallery((g) => [...g, ...toAdd]);
   };
@@ -81,7 +80,17 @@ export default function SoundLegendVaultCreator({ prefillId = "" }) {
     dragItemIndex.current = null;
   };
 
-  const removeGalleryItem = (idx) => setGallery((g) => g.filter((_, i) => i !== idx));
+  const removeGalleryItem = (idx) =>
+    setGallery((g) => {
+      const wasHero = g[idx]?.isHero;
+      const next = g.filter((_, i) => i !== idx);
+      // If we removed the hero, don't auto-pick a new hero here; preview will show fallback unless user sets a new one.
+      if (wasHero) {
+        return next.map((it) => ({ ...it, isHero: false }));
+      }
+      return next;
+    });
+
   const moveUp = (idx) =>
     setGallery((g) => {
       if (idx === 0) return g;
@@ -89,6 +98,7 @@ export default function SoundLegendVaultCreator({ prefillId = "" }) {
       [c[idx - 1], c[idx]] = [c[idx], c[idx - 1]];
       return c;
     });
+
   const moveDown = (idx) =>
     setGallery((g) => {
       if (idx === g.length - 1) return g;
@@ -96,6 +106,9 @@ export default function SoundLegendVaultCreator({ prefillId = "" }) {
       [c[idx + 1], c[idx]] = [c[idx], c[idx + 1]];
       return c;
     });
+
+  const setAsHero = (idx) =>
+    setGallery((g) => g.map((it, i) => ({ ...it, isHero: i === idx })));
 
   const updateLink = (key, val) => setLinks((l) => ({ ...l, [key]: val }));
   const updateSpec = (key, val) => setSpecs((s) => ({ ...s, [key]: val }));
@@ -105,7 +118,7 @@ export default function SoundLegendVaultCreator({ prefillId = "" }) {
     if (!DOC_ID_REGEX.test(docId)) errors.push("ID must match format SL-000 (e.g., SL-007).");
     if (!serial3 || serial3.length !== 3) errors.push("Enter the 3 digits for the ID.");
     if (!name.trim()) errors.push("Legacy artist name is required.");
-    if (gallery.length > 8) errors.push("Gallery can contain up to 8 images.");
+    if (gallery.length > MAX_IMAGES) errors.push(`Gallery can contain up to ${MAX_IMAGES} images.`);
     return errors;
   };
 
@@ -126,40 +139,51 @@ export default function SoundLegendVaultCreator({ prefillId = "" }) {
     try {
       // quick sanity write
       try {
-        await setDoc(doc(db, "__sanity_checks", "can_write"), { t: Date.now() });
+        await setDoc(doc(db, "__sanity_checks", "can_write"), { t: Date.now() }, { merge: true });
       } catch (e) {
         alert("Firestore write blocked (rules/auth). Are you signed in as admin?");
         return;
       }
 
-      // hero
-      let heroUrl = FALLBACK_HERO;
-      if (heroFile) {
-        heroUrl = await uploadToStorage(
-          `soundlegend_showroom/${docId}/hero/${heroFile.name}`,
-          heroFile
-        );
-      }
+      // Upload gallery files in order; keep remote URLs as-is
+      const uploadedUrls = [];
+      let heroIndex = gallery.findIndex((g) => g.isHero);
 
-      // gallery
-      const galleryUrls = [];
       for (let i = 0; i < gallery.length; i++) {
         const item = gallery[i];
         if (item.file) {
+          const safeName = item.file.name?.replace(/\s+/g, "_") || `image_${Date.now()}_${i}.jpg`;
           const url = await uploadToStorage(
-            `soundlegend_showroom/${docId}/gallery/${i}-${item.file.name}`,
+            `soundlegend_showroom/${docId}/gallery/${i}-${safeName}`,
             item.file
           );
-          galleryUrls.push(url);
-        } else if (item.url?.startsWith("http")) {
-          galleryUrls.push(item.url);
+          uploadedUrls.push(url);
+        } else {
+          // Existing remote URL or objectURL (when editing but not reuploading)
+          uploadedUrls.push(item.url);
         }
       }
 
-      // payload
+      // Determine heroImage URL with robust fallback/preserve behavior
+      let heroImageUrl = null;
+
+      if (heroIndex >= 0) {
+        // Hero explicitly selected now
+        heroImageUrl = uploadedUrls[heroIndex] || null;
+      } else if (existingHeroUrl && uploadedUrls.includes(existingHeroUrl)) {
+        // Preserve previously stored hero if it's still in gallery and user didn't change it
+        heroImageUrl = existingHeroUrl;
+      } else if (uploadedUrls.length > 0) {
+        // Default: first image becomes hero to avoid unintended fallback
+        heroImageUrl = uploadedUrls[0];
+      } else {
+        // No images at all -> fallback
+        heroImageUrl = FALLBACK_HERO;
+      }
+
       const payload = {
-        heroImage: heroUrl || FALLBACK_HERO,
-        gallery: galleryUrls,
+        heroImage: heroImageUrl || FALLBACK_HERO,
+        gallery: uploadedUrls, // in drag-sorted order
         links: {
           facebook: links.facebook?.trim() || "",
           instagram: links.instagram?.trim() || "",
@@ -181,6 +205,16 @@ export default function SoundLegendVaultCreator({ prefillId = "" }) {
 
       await setDoc(doc(db, "soundlegend_showroom", docId), payload, { merge: true });
       alert(`Saved ✅  Document ID: ${docId}`);
+
+      // Update local state after save (normalize URLs back into gallery with hero flag)
+      setGallery(
+        uploadedUrls.map((url, i) => ({
+          id: `${Date.now()}-${i}`,
+          url,
+          isHero: url === (heroImageUrl || FALLBACK_HERO),
+        }))
+      );
+      setExistingHeroUrl(heroImageUrl || FALLBACK_HERO);
     } catch (err) {
       console.error(err);
       alert(`Save failed: ${err?.message || "Unknown error"}. See console.`);
@@ -206,11 +240,18 @@ export default function SoundLegendVaultCreator({ prefillId = "" }) {
       setLinks({ ...emptyLinks, ...(data.links || {}) });
       setSpecs({ ...emptySpecs, ...(data.specs || {}) });
       setStory(data.story || "");
-      setHeroFile(null);
-      setHeroPreview(data.heroImage || "");
+
+      const hero = data.heroImage || "";
+      setExistingHeroUrl(hero);
+
       const gal = Array.isArray(data.gallery)
-        ? data.gallery.map((url, i) => ({ id: `${Date.now()}-${i}`, url }))
+        ? data.gallery.map((url, i) => ({
+            id: `${Date.now()}-${i}`,
+            url,
+            isHero: url === hero, // mark existing hero
+          }))
         : [];
+
       setGallery(gal);
 
       const m = id.match(/^SL-(\d{3})$/i);
@@ -241,11 +282,20 @@ export default function SoundLegendVaultCreator({ prefillId = "" }) {
     setLinks({ ...emptyLinks });
     setSpecs({ ...emptySpecs });
     setStory("");
-    setHeroFile(null);
-    setHeroPreview("");
     setGallery([]);
+    setExistingHeroUrl("");
     setSerial3("");
   };
+
+  // Derived hero preview (do not persist fallback; display-only)
+  const heroPreviewUrl = useMemo(() => {
+    const selected = gallery.find((g) => g.isHero)?.url;
+    if (selected) return selected;
+    // if no selected hero, show existingHeroUrl if present in gallery (still loaded)
+    if (existingHeroUrl && gallery.some((g) => g.url === existingHeroUrl)) return existingHeroUrl;
+    // else fallback
+    return FALLBACK_HERO;
+  }, [gallery, existingHeroUrl]);
 
   return (
     <div className="slvc">
@@ -289,13 +339,13 @@ export default function SoundLegendVaultCreator({ prefillId = "" }) {
         </div>
       </div>
 
-      {/* Hero */}
+      {/* Hero Preview (derived) */}
       <div className="slvc-card">
         <h2>Hero Image</h2>
         <div className="slvc-hero">
           <div className="slvc-heroPreview">
-            {heroPreview ? (
-              <img src={heroPreview} alt="hero preview" className="slvc-heroImg" />
+            {heroPreviewUrl ? (
+              <img src={heroPreviewUrl} alt="hero preview" className="slvc-heroImg" />
             ) : (
               <div className="slvc-heroFallback">
                 <div>Using fallback:</div>
@@ -303,10 +353,9 @@ export default function SoundLegendVaultCreator({ prefillId = "" }) {
               </div>
             )}
           </div>
-
-          <div>
-            <input type="file" accept="image/*" onChange={onPickHero} />
-            <div className="slvc-hint">If you don’t upload, we’ll store the fallback URL.</div>
+          <div className="slvc-hint">
+            The hero is chosen from your gallery below. Click “Set as Hero” on any image to change it.
+            (If you don’t select one, your previously saved hero is preserved.)
           </div>
         </div>
       </div>
@@ -314,7 +363,7 @@ export default function SoundLegendVaultCreator({ prefillId = "" }) {
       {/* Gallery */}
       <div className="slvc-card">
         <h2>
-          Gallery <span className="slvc-label-muted">(up to 8, drag to sort)</span>
+          Gallery <span className="slvc-label-muted">(up to {MAX_IMAGES}, drag to sort)</span>
         </h2>
 
         <div className="slvc-row slvc-row--gap">
@@ -327,7 +376,9 @@ export default function SoundLegendVaultCreator({ prefillId = "" }) {
             disabled={remainingSlots === 0}
           />
           <div className="slvc-hint">
-            {remainingSlots > 0 ? `${remainingSlots} slots remaining` : "Max 8 images reached"}
+            {remainingSlots > 0
+              ? `${remainingSlots} slot${remainingSlots === 1 ? "" : "s"} remaining`
+              : `Max ${MAX_IMAGES} images reached`}
           </div>
         </div>
 
@@ -358,9 +409,18 @@ export default function SoundLegendVaultCreator({ prefillId = "" }) {
                   <div className="slvc-index">{idx + 1}</div>
                   <button className="slvc-btnSm" onClick={() => moveDown(idx)}>↓</button>
                 </div>
-                <button className="slvc-removeBtn" onClick={() => removeGalleryItem(idx)}>
-                  Remove
-                </button>
+
+                <div className="slvc-galleryActions">
+                  <button
+                    className={`slvc-btnSm ${item.isHero ? "slvc-btnPrimary" : ""}`}
+                    onClick={() => setAsHero(idx)}
+                  >
+                    {item.isHero ? "Hero ✓" : "Set as Hero"}
+                  </button>
+                  <button className="slvc-removeBtn" onClick={() => removeGalleryItem(idx)}>
+                    Remove
+                  </button>
+                </div>
               </div>
             ))}
           </div>
