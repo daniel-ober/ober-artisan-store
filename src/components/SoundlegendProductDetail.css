@@ -1,225 +1,420 @@
-/* 📌 Main Page Container */
+@import url('https://fonts.googleapis.com/css2?family=Gentium+Book+Plus:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+/* ===============  THEME  =============== */
+:root {
+  --bg: #0b0b0c;
+  --panel: #111114;
+  --ink: #f5f7f9;
+  --ink-dim: #cfd3d7;
+  --ink-mute: #9aa3ad;
+  --brand: #9ad4ff;   /* subtle electric ice */
+  --brand-2: #ffd18f; /* warm accent */
+  --line: #1b1b1f;
+  --radius: 16px;
+  --radius-lg: 20px;
+  --shadow: 0 10px 30px rgba(0,0,0,0.45);
+}
+
+/* ===============  PAGE  =============== */
 .soundlegend-product-detail {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 50px 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-    box-sizing: border-box;
-    background: #0e0e0e;
-    color: white;
-    /* text-align: center; */
-    overflow-x: hidden; /* Prevents horizontal overflow */
+  --maxw: 1400px;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, 'Gentium Book Plus', sans-serif;
+  min-height: 100dvh;
+  padding: 32px 16px 72px;
+  display: grid;
+  gap: 40px;
+  justify-items: center;
 }
 
 .soundlegend-header-image {
-    max-width: 500px;
-    width: 100%;
-    margin: 0 auto 2rem;
+  max-width: 540px;
+  width: 100%;
+  margin: 0 auto 6px;
+  display: block;
+  filter: drop-shadow(0 6px 32px rgba(0,0,0,0.25));
 }
 
-/* 📌 Title Styling */
-.soundlegend-product-detail h1 {
-    font-size: 40px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: #ffcc00;
+/* ===============  HERO  =============== */
+.sl-hero {
+  width: 100%;
+  max-width: min(1800px, 98vw);
+  display: grid;
+  gap: 28px;
+  grid-template-columns: 1.5fr 0.5fr;  /* give media more room */
+  align-items: stretch;
 }
 
-/* 🔄 Main Content Layout */
-.soundlegend-product-content {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 40px;
-    max-width: 1100px;
-    width: 100%;
-    box-sizing: border-box;
-    flex-wrap: wrap; /* Ensures elements don't overflow */
+@media (max-width: 980px) {
+  .sl-hero { grid-template-columns: 1fr; gap: 18px; }
 }
 
-/* 📌 Left Side: Product Image */
-.soundlegend-product-image {
-    flex: 1;
-    max-width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.sl-hero-media { position: relative; }
+
+/* Cinematic frame */
+.sl-hero-frame {
+  position: relative;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(120% 120% at 20% 10%, #16171a, transparent 60%),
+              radial-gradient(120% 120% at 80% 90%, #0d0e10, transparent 60%),
+              #0c0c0e;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+
+  height: clamp(640px, 88vh, 1200px);
+  aspect-ratio: auto;
+
+  /* keep scrolling natural on touch/trackpads */
+  touch-action: pan-y;
+  overscroll-behavior: contain;
 }
 
-.soundlegend-product-image img {
-    width: 100%;
-    height: auto;
-    border-radius: 12px;
-    /* box-shadow: 0px 8px 20px rgba(255, 255, 255, 0.1); */
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+/* Fill the viewer canvas/img */
+.sl-viewer {
+  position: absolute; inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
+.sl-viewer > canvas,
+.sl-viewer > img,
+.sl-viewer canvas,
+.sl-viewer img {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  display: block;
+  object-fit: contain; /* switch to 'cover' for tighter crop */
 }
 
-/* 📌 Right Side: Customization & Features */
-.soundlegend-product-options {
-    flex: 1;
-    max-width: 500px; /* Ensures it does not stretch beyond 500px */
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    background: rgba(255, 255, 255, 0.08);
-    padding: 30px;
+/* CSS zoom + pan wrapper
+   NOTE the transform order: scale() then translate().
+   Because transforms execute right-to-left, this applies translate FIRST,
+   then scales it — which keeps our max-pan math correct. */
+.sl-zoom-wrap {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  transform: scale(var(--slZoom, 1)) translate(var(--slPanX, 0%), var(--slPanY, 0%));
+  transform-origin: center center;
+  transition: transform .22s ease;
+}
+
+/* Controls */
+.sl-hero-controls {
+  position: absolute;
+  left: 14px;
+  bottom: 12px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 6px 8px;
+  background: rgba(10,10,12,0.55);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+}
+
+.sl-ghost-btn {
+  appearance: none;
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: border-color .15s ease, background .15s ease, transform .05s ease;
+}
+.sl-ghost-btn:hover { border-color: var(--brand); background: rgba(154,212,255,0.08); }
+.sl-ghost-btn:active { transform: translateY(1px); }
+
+.sl-hero-hint { font-size: 12px; color: var(--ink-mute); }
+
+/* Zoom preset group */
+.sl-zoom-group {
+  display: inline-flex;
+  gap: 6px;
+  margin-left: 8px;
+  background: rgba(10,10,12,0.45);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 999px;
+  padding: 3px;
+}
+.sl-zoom-btn {
+  appearance: none;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--ink);
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.sl-zoom-btn:hover { border-color: rgba(255,255,255,0.25); }
+.sl-zoom-btn.is-active {
+  background: linear-gradient(135deg, var(--brand), var(--brand-2));
+  color: #101114;
+}
+
+/* Pan arrows (shown only when zoom > 1 via JSX) */
+.sl-pan-arrows {
+  position: absolute;
+  inset: 0;
+  pointer-events: none; /* container is transparent to drag */
+}
+.sl-pan-btn {
+  pointer-events: auto; /* buttons clickable */
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(10,10,12,0.55);
+  color: var(--ink);
+  cursor: pointer;
+  font-weight: 700;
+  user-select: none;
+  backdrop-filter: blur(6px);
+  transition: transform .05s ease, border-color .15s ease, background .15s ease;
+}
+.sl-pan-btn:hover { border-color: var(--brand); background: rgba(154,212,255,0.08); }
+.sl-pan-btn:active { transform: translateY(1px); }
+
+/* positions */
+.sl-pan-up    { top: 12px;  left: 50%; transform: translateX(-50%); }
+.sl-pan-down  { bottom: 12px; left: 50%; transform: translateX(-50%); }
+.sl-pan-left  { left: 12px; top: 50%; transform: translateY(-50%); }
+.sl-pan-right { right: 12px; top: 50%; transform: translateY(-50%); }
+
+/* Copy column */
+.sl-hero-copy { padding: 8px 4px; }
+
+.sl-title {
+  font-size: clamp(26px, 3.2vw, 40px);
+  line-height: 1.1;
+  margin: 0 0 8px;
+  letter-spacing: 0.2px;
+}
+
+.sl-subtitle {
+  font-size: clamp(15px, 1.5vw, 18px);
+  color: var(--ink-dim);
+  margin: 0 0 14px;
+}
+
+.sl-highlights {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 6px 14px;
+  margin: 12px 0 16px;
+  padding: 0;
+  list-style: none;
+}
+.sl-highlights li {
+  padding-left: 18px;
+  position: relative;
+  font-size: 14.5px;
+  color: var(--ink);
+}
+.sl-highlights li::before {
+  content: '';
+  width: 8px; height: 8px;
+  border-radius: 2px;
+  background: linear-gradient(135deg, var(--brand), var(--brand-2));
+  position: absolute; left: 0; top: 7px;
+}
+
+.sl-cta-row { display: flex; flex-wrap: wrap; gap: 10px; margin: 8px 0 14px; }
+
+.sl-primary-cta, .sl-secondary-cta {
+  text-decoration: none;
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-weight: 600;
+  border: 1px solid rgba(255,255,255,0.18);
+  transition: transform .05s ease, border-color .15s ease, background .15s ease;
+}
+.sl-primary-cta {
+  background: linear-gradient(135deg, var(--brand), var(--brand-2));
+  color: #101114;
+  border-color: transparent;
+}
+.sl-primary-cta:hover { transform: translateY(-1px); }
+.sl-secondary-cta { background: transparent; color: var(--ink); }
+.sl-secondary-cta:hover { border-color: var(--brand); background: rgba(154,212,255,0.08); }
+
+.sl-badges { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+.sl-badge {
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 8px 10px;
+  font-size: 12px;
+  color: var(--ink-dim);
+}
+.sl-badge strong { display: block; color: var(--ink); font-size: 14px; }
+
+/* ===============  LEGACY CAROUSEL  =============== */
+.sl-legacy { width: 100%; max-width: var(--maxw); }
+
+.sl-section-head { display: grid; gap: 4px; margin-bottom: 12px; }
+.sl-section-head h2 { margin: 0; font-size: clamp(20px, 2.4vw, 28px); }
+.sl-section-kicker { color: var(--ink-dim); font-size: 14px; }
+
+.sl-carousel {
+  position: relative;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.sl-carousel-track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(240px, 1fr);
+  gap: 14px;
+  overflow-x: auto;
+  padding: 14px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+}
+.sl-carousel-track::-webkit-scrollbar { height: 8px; }
+.sl-carousel-track::-webkit-scrollbar-thumb { background: #1a1a20; border-radius: 8px; }
+
+.sl-card {
+  scroll-snap-align: start;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+  outline: none;
+  display: grid;
+  grid-template-rows: 160px auto;
+  transition: transform .15s ease, border-color .2s ease;
+}
+.sl-card:focus-visible { transform: translateY(-2px); border-color: var(--brand); }
+
+.sl-card-media { background: #0f1013; }
+.sl-card-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.sl-card-body { display: grid; gap: 6px; padding: 12px; }
+.sl-card-name { margin: 0; font-size: 16px; }
+.sl-card-role { margin: 0; color: var(--ink-dim); font-size: 13px; }
+.sl-card-quote { margin: 4px 0 8px; font-size: 14px; color: var(--ink); }
+.sl-card-link { place-self: start; text-decoration: none; font-weight: 600; font-size: 13.5px; color: var(--brand); border-bottom: 1px solid transparent; }
+.sl-card-link:hover { border-bottom-color: var(--brand); }
+
+/* ===============  COPY  =============== */
+.sl-copy {
+  width: 100%;
+  max-width: var(--maxw);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  color: var(--ink-dim);
+}
+
+/* ===============  FEATURES + FORM STACK  =============== */
+.sl-stack {
+  width: 100%;
+  max-width: var(--maxw);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+@media (max-width: 980px) { .sl-stack { grid-template-columns: 1fr; } }
+
+.sl-features, .sl-form {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+
+.sl-features h2 { margin: 0 0 10px; }
+.sl-features ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.sl-features li {
+  position: relative; padding-left: 16px; font-size: 15px;
+}
+.sl-features li::before {
+  content: '';
+  position: absolute; left: 0; top: 7px;
+  width: 8px; height: 8px; border-radius: 2px;
+  background: linear-gradient(135deg, var(--brand), var(--brand-2));
+}
+
+/* ===============  FORM  =============== */
+.sl-form .customer-header { font-weight: 700; margin-bottom: 10px; font-size: 16px; }
+.sl-form form { display: grid; gap: 10px; }
+.sl-form label { font-size: 13px; color: var(--ink-dim); }
+
+.sl-form input[type="text"],
+.sl-form input[type="email"],
+.sl-form input[type="tel"],
+.sl-form input[type="date"] {
+  background: #0f1013;
+  color: var(--ink);
+  border: 1px solid #1a1b20;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 15px;
+  outline: none;
+  transition: border-color .15s ease, background .15s ease, box-shadow .15s ease;
+}
+.sl-form input:focus { border-color: var(--brand); box-shadow: 0 0 0 3px rgba(154,212,255,0.15); }
+
+.phone-input-container { display: contents; }
+.phone-hint { margin: -6px 0 2px; color: var(--ink-mute); font-size: 12px; }
+
+.sl-submit {
+  appearance: none;
+  background: linear-gradient(135deg, var(--brand), var(--brand-2));
+  color: #101114;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform .05s ease, filter .15s ease;
+}
+.sl-submit:hover { transform: translateY(-1px); filter: brightness(1.03); }
+
+.sl-disclaimer { color: var(--ink-mute); font-size: 12px; margin: 6px 2px 0; }
+
+.sl-hidden-context { display: none; }
+
+/* ===============  RESPONSIVE  =============== */
+@media (max-width: 600px) {
+  html, body { margin: 0; width: 100%; overflow-x: hidden; }
+
+  .soundlegend-product-detail { padding: 22px 12px 56px; gap: 28px; }
+  .soundlegend-header-image { max-width: 320px; }
+
+  .sl-hero-frame {
+    height: clamp(420px, 64vh, 720px);
     border-radius: 14px;
-    border: 1px solid rgba(255, 204, 0, 0.5);
-    backdrop-filter: blur(10px);
-    box-shadow: 0px 8px 24px rgba(255, 204, 0, 0.2);
-    margin: 0 auto; /* Ensures centering on mobile */
-    box-sizing: border-box;
-}
+  }
 
-/* 📌 Features Section */
-.soundlegend-features h2 {
-    font-size: 26px;
-    font-weight: bold;
-    color: #ffcc00;
-    margin-bottom: 12px;
-}
+  .sl-highlights { grid-template-columns: 1fr; }
+  .sl-cta-row { gap: 8px; }
+  .sl-primary-cta, .sl-secondary-cta { padding: 10px 14px; }
+  .sl-badges { gap: 8px; }
 
-.soundlegend-features p,
-.soundlegend-features li {
-    font-size: 17px;
-    color: #ddd;
-    line-height: 1.6;
-    text-align: left;
-}
+  .sl-carousel-track { grid-auto-columns: 78%; padding: 12px; gap: 12px; }
+  .sl-card { grid-template-rows: 150px auto; }
 
-/* 📌 Labels for Form Fields */
-.soundlegend-product-options label {
-    display: block;
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 8px;
-    color: #ffcc00;
-    text-align: left;
-}
-
-/* 🔹 Adjust Form Field Width for Consistency */
-.soundlegend-product-options select,
-.soundlegend-product-options input {
-    width: 100%; /* Ensures even alignment */
-    padding: 12px;
-    font-size: 16px;
-    border-radius: 8px;
-    border: 1px solid #666;
-    background: #1a1a1a;
-    color: white;
-    cursor: pointer;
-    margin-bottom: 15px;
-    transition: border 0.3s ease, box-shadow 0.3s ease;
-    box-sizing: border-box; /* Prevents overflow issues */
-}
-
-.soundlegend-header {
-    color:#FFCC01;
-}
-
-/* 🔹 Improve Dropdown Field Styling */
-.soundlegend-product-options select {
-    height: 48px; /* Matches input fields for consistency */
-}
-
-.customer-header {
-    color: #a4a4a4;
-    /* text-align: start; */
-    font-weight: bold;
-    font-size: 22px;
-}
-
-/* 📌 Phone Input Container */
-.phone-input-container {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.country-code-select {
-    max-width: 80px;
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 6px;
-    background: #1a1a1a;
-    color: white;
-    border: 1px solid #666;
-    cursor: pointer;
-}
-
-.phone-input-container input {
-    flex-grow: 1;
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-}
-
-/* 📌 Submit Button */
-.soundlegend-product-options button {
-    background-color: #ffcc00;
-    color: black;
-    font-size: 20px;
-    font-weight: bold;
-    padding: 14px 20px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-    width: 100%;
-    box-shadow: 0px 6px 12px rgba(255, 204, 0, 0.2);
-}
-
-.soundlegend-product-options button:hover {
-    background-color: #e6b800;
-    transform: scale(1.07);
-    box-shadow: 0px 8px 18px rgba(255, 204, 0, 0.3);
-}
-
-/* 📌 Responsive Design */
-@media (max-width: 1024px) {
-    .soundlegend-product-content {
-        flex-direction: column;
-        align-items: center;
-        gap: 30px;
-    }
-
-    .soundlegend-product-image {
-        max-width: 100%;
-    }
-
-    .soundlegend-product-options {
-        max-width: 90%; /* Prevents overflow */
-    }
-}
-
-@media (max-width: 768px) {
-    .soundlegend-product-detail h1 {
-        font-size: 32px;
-    }
-
-    .soundlegend-product-options {
-        padding: 20px;
-        max-width: 100%;
-    }
-
-    .soundlegend-product-options h2 {
-        font-size: 22px;
-    }
-
-    .soundlegend-product-options select,
-    .soundlegend-product-options input {
-        font-size: 15px;
-        padding: 10px;
-    }
-
-    .soundlegend-product-options button {
-        font-size: 17px;
-        padding: 14px;
-    }
+  .sl-stack { gap: 14px; }
+  .sl-form, .sl-features { padding: 14px; }
+  .sl-submit { width: 100%; }
 }

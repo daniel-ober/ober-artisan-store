@@ -53,7 +53,7 @@ const Cart = () => {
       let cartChanged = false;
 
       for (const item of updatedCart) {
-        if (!item || !item.stripePriceId || !item.productId) {
+        if (!item || !item.productId) {
           console.warn(`⚠️ Skipping item with missing productId:`, item);
           continue;
         }
@@ -66,12 +66,6 @@ const Cart = () => {
           const productRef = doc(db, collectionName, productId);
           const productSnapshot = await getDoc(productRef);
 
-          // console.log('🧪 Inventory check:', {
-          //   productId: item.productId,
-          //   category: item.category,
-          //   collection: collectionName,
-          // });
-          // console.log('📁 productSnapshot.exists:', productSnapshot.exists());
           if (!productSnapshot.exists()) {
             console.warn(`⚠️ Product not found: ${item.name}`);
             unavailable.push({ id: item.id, name: item.name });
@@ -157,108 +151,109 @@ const Cart = () => {
   const getTotalAmount = () =>
     cart.reduce((total, item) => total + getItemTotal(item), 0);
 
-   const handleCheckout = async () => {
-    setShowCheckoutModal(true);
-    try {
-      if (!cart || cart.length === 0) {
-        alert('Your cart is empty!');
-        setShowModal(false);
-        return;
-      }
-
-      const normalize = (str) =>
-        (str || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-
-      const productsPayload = cart.map((item) => {
-        const config = item.config || {};
-        const variantId = Number(item.variantId || config?.variantId);
-        const selectedColorRaw = config.Colors || '';
-        const selectedColor = normalize(selectedColorRaw);
-
-        let previewImage = fallback;
-        if (item.image?.startsWith('http')) {
-          previewImage = item.image;
-        } else if (item.category === 'artisan') {
-          previewImage =
-            (Array.isArray(item.images) && item.images[0]) || fallback;
-        } else if (item.category === 'merch') {
-          const product = productDataMap[item.productId];
-          if (product && Array.isArray(product.images)) {
-            const first = product.images[0];
-            if (typeof first === 'string' && first.startsWith('http')) {
-              previewImage = first;
-            }
-          }
-        }
-
-        // ✅ Always include keys, but set empty/default values for Founder's Toast
-        const isFoundersToast = item.productId === 'founders-toast';
-
-        let configPayload = {};
-
-        if (item.category === 'artisan' && !isFoundersToast) {
-          configPayload = {
-            size: config.size || '',
-            depth: config.depth || '',
-            lugQuantity: config.lugQuantity || '',
-            staveQuantity: config.staveQuantity || '',
-            reRing: typeof config.reRing !== 'undefined' ? config.reRing : '',
-            hardwareColor: config.hardwareColor || '',
-          };
-        } else if (item.category === 'merch') {
-          configPayload = {
-            size: config.Sizes || '',
-            color: config.Colors || '',
-          };
-        } else if (isFoundersToast) {
-          configPayload = {}; // no metadata for accessories
-        }
-
-        return {
-          productId: item.productId,
-          name: item.name || 'HERITAGE',
-          category: item.category,
-          stripePriceId: item.stripePriceId,
-          price: item.price,
-          quantity: item.quantity || 1,
-          image: previewImage.startsWith('http') ? previewImage : undefined,
-          config: configPayload,
-        };
-      });
-
-      // ✅ Log payload BEFORE sending
-      console.log('🧾 FULL PRODUCTS PAYLOAD to Stripe API:', JSON.stringify(productsPayload, null, 2));
-
-      const response = await fetch(`${API_BASE_URL}/createCheckoutSession`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ products: productsPayload }),
-      });
-
-      console.log('📡 Stripe API raw response:', response);
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error('❌ Stripe API Error Response:', errorText);
-        throw new Error(`Checkout session creation failed: ${errorText}`);
-      }
-
-      const data = await response.json();
-      console.log('✅ Stripe API parsed response:', data);
-
-      if (data?.url) {
-        sessionStorage.setItem('checkoutStarted', 'true');
-        setShowCheckoutModal(false);
-        window.location.href = data.url;
-      } else {
-        throw new Error('No redirect URL returned from API');
-      }
-    } catch (error) {
-      console.error('🔥 Checkout failed with error:', error);
-      alert('There was a problem initiating checkout. Check console logs.');
+ // ⬇️ REPLACE your whole handleCheckout with this version
+const handleCheckout = async () => {
+  setShowCheckoutModal(true);
+  try {
+    if (!cart || cart.length === 0) {
+      alert('Your cart is empty!');
       setShowCheckoutModal(false);
+      return;
     }
-  };
+
+    const normalize = (str) => (str || '').toString().trim();
+
+    // Build the snapshot we save before Stripe
+    const productsPayload = cart.map((item) => {
+      const config = item.config || {};
+      const isMerch = item.category === 'merch';
+      const isFoundersToast = item.productId === 'founders-toast';
+
+      // Image (safe fallback)
+      const fb = '/fallback-images/fallback_image1.png';
+      let previewImage = item.image || fb;
+      if (item.category === 'artisan') {
+        previewImage =
+          item.image ||
+          (Array.isArray(item.images) && item.images[0]) ||
+          fb;
+      } else if (isMerch) {
+        const productDoc = productDataMap[item.productId];
+        if (productDoc?.images?.[0]?.src) previewImage = productDoc.images[0].src;
+      }
+
+      // Canonical config payloads
+      let configPayload = {};
+      if (item.category === 'artisan' && !isFoundersToast) {
+        configPayload = {
+          size: normalize(config.size),
+          depth: normalize(config.depth),
+          lugQuantity: normalize(config.lugQuantity),
+          staveQuantity: normalize(config.staveQuantity),
+          reRing: typeof config.reRing !== 'undefined' ? !!config.reRing : undefined,
+          hardwareColor: normalize(config.hardwareColor),
+          outerShell: normalize(config.outerShell),
+          innerStave: normalize(config.innerStave),
+        };
+      } else if (isMerch) {
+        // Accept all common key shapes from UI/state
+        const sizeValue  = config.Sizes || config.size || config.sizeName || '';
+        const colorValue = config.Colors || config.color || config.colorName || '';
+        const variantId  = item.variantId || config.variantId || '';
+        configPayload = {
+          sizeName:  String(sizeValue).trim(),
+          colorName: String(colorValue).trim(),
+          variantId: variantId ? String(variantId).trim() : '',
+        };
+      }
+
+      // IMPORTANT: we are using price_data for merch (so Stripe can show variant text).
+      // That creates an ephemeral price on Stripe, so DO NOT include a saved stripePriceId
+      // for merch in the snapshot—this lets the webhook match by unit_amount.
+      let stripePriceId = item.stripePriceId || '';
+      if (isMerch) stripePriceId = '';
+
+      return {
+        productId: String(item.productId),
+        name: item.name || item.title || 'Ober Product',
+        category: item.category,                     // "artisan" | "merch" | etc
+        stripePriceId,                               // intentionally blank for merch
+        price: Number(item.price) || 0,              // used when no priceId
+        quantity: item.quantity || 1,
+        image: typeof previewImage === 'string' ? previewImage : previewImage?.src,
+        config: configPayload,
+      };
+    });
+
+    // Helpful log when verifying end-to-end
+    console.log('🧾 productsPayload →', productsPayload);
+
+    const response = await fetch(`${API_BASE_URL}/createCheckoutSession`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ products: productsPayload }),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('❌ Checkout session create failed:', errorText);
+      throw new Error('Failed to create checkout session');
+    }
+
+    const data = await response.json();
+    if (data?.url) {
+      sessionStorage.setItem('checkoutStarted', 'true');
+      setShowCheckoutModal(false);
+      window.location.href = data.url;
+    } else {
+      throw new Error('No redirect URL returned from API');
+    }
+  } catch (error) {
+    console.error('🔥 Checkout failed:', error);
+    alert('There was a problem initiating checkout. Check console logs.');
+    setShowCheckoutModal(false);
+  }
+};
 
   return (
     <div className="cart-container">
@@ -332,7 +327,6 @@ const Cart = () => {
 
                 return (
                   <tr key={item.id} className="cart-row">
-                    {' '}
                     <td className="remove-cell">
                       <button
                         className="remove-icon-button"
@@ -370,7 +364,7 @@ const Cart = () => {
                           item.title ||
                           item.config?.title ||
                           'Unnamed Product'}
-                      </p>{' '}
+                      </p>
                       <p className="cart-sub-description">
                         {item.category === 'artisan' &&
                         item.productId !== 'founders-toast' ? (
@@ -471,7 +465,6 @@ const Cart = () => {
               })}
 
               {/* ✅ Subtotal Row with Checkout Button */}
-              {/* Subtotal Row */}
               <tr className="cart-subtotal-row">
                 <td colSpan="5"></td>
                 <td className="subtotal-cell">
@@ -480,6 +473,7 @@ const Cart = () => {
                   </span>
                 </td>
               </tr>
+
               {/* Checkout Button Row aligned under subtotal */}
               <tr className="cart-checkout-row desktop-checkout-row">
                 <td colSpan="6">
@@ -496,6 +490,7 @@ const Cart = () => {
               </tr>
             </tbody>
           </table>
+
           {/* Mobile checkout button */}
           <div className="mobile-checkout-wrapper">
             <button
@@ -506,6 +501,7 @@ const Cart = () => {
               {loading ? 'Processing...' : '🔒 Checkout'}
             </button>
           </div>
+
           <p className="checkout-note-below">
             Taxes, shipping, and promo codes applied at checkout
           </p>
