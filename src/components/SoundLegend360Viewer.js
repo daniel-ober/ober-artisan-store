@@ -1,418 +1,312 @@
-// src/components/SoundLegend360Viewer.jsx
 import React, {
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-  useCallback,
-  useImperativeHandle,
-  forwardRef,
-} from "react";
+  useRef, useEffect, useImperativeHandle, useState, forwardRef, useCallback,
+} from 'react';
 
-function useInView(ref, rootMargin = "100px") {
-  const [inView, setInView] = useState(false);
-  useEffect(() => {
-    if (!ref.current) return;
-    const io = new IntersectionObserver(
-      (entries) => entries.forEach((e) => setInView(e.isIntersecting)),
-      { root: null, rootMargin, threshold: 0.01 }
-    );
-    io.observe(ref.current);
-    return () => io.disconnect();
-  }, [ref, rootMargin]);
-  return inView;
-}
+const MAX_CONCURRENT = 8;
+const CACHE_RADIUS_FRAMES = 48;
+const EVICT_MARGIN = 12;
+const SEAM_GUARD = 8;         // if we're within ±8 frames of seam, prewarm other side
+const MISSING = Symbol('missing');
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 
-const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
-
-const SoundLegend360Viewer = forwardRef(function SoundLegend360Viewer(
-  {
+const SoundLegend360Viewer = forwardRef(function Viewer(props, ref) {
+  const {
     frameCount,
-    srcPattern,
-    indexStart = 0,
-    zeroPad = 0,
-    className = "",
-    width,
-    height,
-    autoRotate = true,
-    autoRotateRps = 0.25,
-    dragSensitivity = 4,
-    initialFrame = 0,
-    hiDPIPattern,
-    showLoadingRing = true,
-    onFrameChange,
-  },
-  ref
-) {
-  // Resolve URLs
-  const resolve = useCallback(
-    (idx, pattern = srcPattern) => {
-      const n = idx + indexStart;
-      const padded = zeroPad > 0 ? String(n).padStart(zeroPad, "0") : String(n);
-      if (typeof pattern === "function") return pattern(padded);
-      return pattern.replace("{index}", padded);
-    },
-    [indexStart, zeroPad, srcPattern]
-  );
+    indexStart = 1,
+    zeroPad = 3,
+    srcPattern,                 // expects a 3-digit string like "001" -> returns full URL
+    className,
+    style,
+    autoRotate = false,         // keep available, but we'll pass false from the page
+    autoRotateRps = 0,
+    dragSensitivity = 3,        // viewer-internal scale (frames per pixel ~ sensitivity*0.4)
+    onPointerDown,
+    onPointerUp,
+  } = props;
 
-  const containerRef = useRef(null);
+  // Canvas
   const canvasRef = useRef(null);
-  const isPointerDown = useRef(false);
-  const lastX = useRef(0);
+  const ctxRef = useRef(null);
 
-  const [frame, setFrame] = useState(clamp(initialFrame, 0, frameCount - 1));
-  const [loaded, setLoaded] = useState(() => new Array(frameCount).fill(false));
-  const [images, setImages] = useState(() => new Array(frameCount).fill(null));
+  // Playback
+  const [playing, setPlaying] = useState(!!autoRotate);
+  const rpsRef = useRef(Math.max(0, Number(autoRotateRps) || 0));
+  const rafRef = useRef(null);
+  const lastTsRef = useRef(0);
 
-  // Optional hires/2x layer
-  const [loaded2x, setLoaded2x] = useState(() => new Array(frameCount).fill(false));
-  const [images2x, setImages2x] = useState(() => new Array(frameCount).fill(null));
+  // Index
+  const idxRef = useRef(0);                   // float 0..f
+  const lastDrawnIdxRef = useRef(null);       // int
 
-  const [loadingProgress, setLoadingProgress] = useState(0);
-  const [zoom, setZoom] = useState(1);
-  const [isInView, setIsInView] = useState(false);
+  // Caching
+  const cacheRef = useRef(new Map());         // int -> ImageBitmap | MISSING
+  const inflightRef = useRef(new Set());      // int
+  const queueRef = useRef([]);                // ints waiting to fetch
+  const abortsRef = useRef(new Map());        // int -> AbortController
 
-  // External control state
-  const [autoOn, setAutoOn] = useState(!!autoRotate);
-  const [rps, setRps] = useState(autoRotateRps);
+  // Drag
+  const draggingRef = useRef(false);
+  const lastXRef = useRef(0);
 
-  useEffect(() => setAutoOn(!!autoRotate), [autoRotate]);
-  useEffect(() => setRps(autoRotateRps), [autoRotateRps]);
-
-  const inView = useInView(containerRef, "200px");
-  useEffect(() => setIsInView(inView), [inView]);
-
-  // Progressive loader
-  useEffect(() => {
-    if (!isInView) return;
-
-    let cancelled = false;
-
-    const coarseStep = frameCount >= 120 ? 6 : frameCount >= 72 ? 4 : 2;
-    const order = [];
-    for (let i = 0; i < frameCount; i += coarseStep) order.push(i);
-    const remaining = [];
-    for (let i = 0; i < frameCount; i++) if (!order.includes(i)) remaining.push(i);
-    remaining.sort((a, b) => Math.abs(a - frame) - Math.abs(b - frame));
-    order.push(...remaining);
-
-    let completed = 0;
-
-    const load1x = (idx) =>
-      new Promise((done) => {
-        if (cancelled || loaded[idx]) return done();
-        const img = new Image();
-        img.decoding = "async";
-        img.loading = "eager";
-        img.src = resolve(idx);
-        img.onload = () => {
-          if (cancelled) return done();
-          setImages((prev) => {
-            const next = prev.slice();
-            next[idx] = img;
-            return next;
-          });
-          setLoaded((prev) => {
-            const next = prev.slice();
-            if (!next[idx]) {
-              next[idx] = true;
-              completed += 1;
-              setLoadingProgress(Math.round((completed / frameCount) * 100));
-            }
-            return next;
-          });
-          done();
-        };
-        img.onerror = () => done();
-      });
-
-    const load2x = (idx) =>
-      new Promise((done) => {
-        if (cancelled || !hiDPIPattern || loaded2x[idx]) return done();
-        const img = new Image();
-        img.decoding = "async";
-        img.loading = "eager";
-        img.src = resolve(idx, hiDPIPattern);
-        img.onload = () => {
-          if (cancelled) return done();
-          setImages2x((prev) => {
-            const next = prev.slice();
-            next[idx] = img;
-            return next;
-          });
-          setLoaded2x((prev) => {
-            const next = prev.slice();
-            next[idx] = true;
-            return next;
-          });
-          done();
-        };
-        img.onerror = () => done();
-      });
-
-    const queue = async () => {
-      for (const idx of order) {
-        if (cancelled) break;
-        await load1x(idx);
-        await new Promise((r) => setTimeout(r, 0));
-      }
-
-      if (hiDPIPattern && (window.devicePixelRatio > 1 || zoom > 1)) {
-        for (const idx of order) {
-          if (cancelled) break;
-          await load2x(idx);
-          await new Promise((r) => setTimeout(r, 0));
-        }
-      }
-    };
-
-    queue();
-    return () => {
-      cancelled = true;
-    };
-  }, [isInView, frameCount, frame, resolve, hiDPIPattern, zoom, loaded, loaded2x]);
-
-  // Helper: get best image for an index (fallback to nearest loaded so we never "stall")
-  const getBestImageFor = useCallback(
-    (idx) => {
-      const hi = images2x[idx];
-      const base = images[idx];
-      const chosen = (zoom > 1 && hi) || base;
-      if (chosen) return chosen;
-
-      // search nearby (up to ±12 frames) for the closest loaded frame
-      const maxOffset = Math.min(12, Math.floor(frameCount / 8));
-      for (let k = 1; k <= maxOffset; k++) {
-        const a = (idx + k) % frameCount;
-        const b = (idx - k + frameCount) % frameCount;
-        const ca = (zoom > 1 && images2x[a]) || images[a];
-        if (ca) return ca;
-        const cb = (zoom > 1 && images2x[b]) || images[b];
-        if (cb) return cb;
-      }
-      return null;
-    },
-    [images, images2x, zoom, frameCount]
-  );
-
-  // Draw
-  const draw = useCallback(
-    (idx) => {
-      const cvs = canvasRef.current;
-      if (!cvs) return;
-      const img = getBestImageFor(idx);
-      if (!img) return;
-
-      const ctx = cvs.getContext("2d");
-      const dpr = window.devicePixelRatio || 1;
-      const w = cvs.clientWidth;
-      const h = cvs.clientHeight;
-      const needW = Math.round(w * dpr);
-      const needH = Math.round(h * dpr);
-      if (cvs.width !== needW || cvs.height !== needH) {
-        cvs.width = needW;
-        cvs.height = needH;
-      }
-      ctx.save();
-      ctx.scale(dpr, dpr);
-      ctx.clearRect(0, 0, w, h);
-      const scale = Math.min(w / img.width, h / img.height) * zoom;
-      const iw = img.width * scale;
-      const ih = img.height * scale;
-      const x = (w - iw) / 2;
-      const y = (h - ih) / 2;
-      ctx.imageSmoothingEnabled = true;
-      ctx.imageSmoothingQuality = "high";
-      ctx.drawImage(img, x, y, iw, ih);
-      ctx.restore();
-    },
-    [getBestImageFor, zoom]
-  );
-
-  useEffect(() => {
-    draw(frame);
-    onFrameChange && onFrameChange(frame);
-  }, [frame, draw, onFrameChange]);
-
-  // ✅ Smooth auto-rotate: fixed tick + fractional accumulator
-  // Works great for very slow speeds (no "burst" frames), and handles fast too.
-  useEffect(() => {
-    if (!autoOn || !isInView) return;
-
-    // “Ready” threshold: wait until we have a decent ring to avoid early stutter
-    const loadedCount = loaded.reduce((n, v) => n + (v ? 1 : 0), 0);
-    const ready = loadedCount >= Math.min(60, frameCount);
-    if (!ready) return;
-
-    const desiredFps = rps * frameCount; // frames per second we want
-    const tickHz = 60;                   // run a steady 60Hz timer
-    const intervalMs = 1000 / tickHz;
-    let acc = 0;                         // fractional frames accumulator
-    let id = 0;
-
-    const tick = () => {
-      acc += desiredFps / tickHz;        // how many frames should pass this tick
-      let steps = Math.floor(acc);
-      if (steps > 0) {
-        acc -= steps;
-        // if desired fps exceeds 60, 'steps' will be 2+ sometimes — smooth & even
-        setFrame((f) => (f + steps) % frameCount);
-      }
-    };
-
-    id = window.setInterval(tick, intervalMs);
-    return () => window.clearInterval(id);
-  }, [autoOn, isInView, rps, frameCount, loaded]);
-
-  // Stop auto-rotate on user interaction
-  const stopAuto = () => {
-    setAutoOn(false);
+  const wrap = (n) => {
+    const f = frameCount;
+    return ((n % f) + f) % f;
+  };
+  const to1Based = (zeroBased) => zeroBased + indexStart;
+  const formatUrl = (zeroBased) => {
+    const s = String(to1Based(zeroBased)).padStart(zeroPad, '0');
+    return srcPattern(s);
   };
 
-  // Pointer handlers
-  const onPointerDown = (e) => {
-    stopAuto();
-    isPointerDown.current = true;
-    lastX.current = e.clientX || (e.touches && e.touches[0]?.clientX) || 0;
-  };
-  const onPointerMove = (e) => {
-    if (!isPointerDown.current) return;
-    const x = e.clientX || (e.touches && e.touches[0]?.clientX) || lastX.current;
-    const dx = x - lastX.current;
-    lastX.current = x;
-    const deltaFrames = Math.round(dx / dragSensitivity);
-    if (deltaFrames) {
-      setFrame((f) => (f - deltaFrames + frameCount) % frameCount);
+  // ---- draw
+  const draw = useCallback((intIdx) => {
+    const canvas = canvasRef.current;
+    const ctx = ctxRef.current;
+    if (!canvas || !ctx) return;
+
+    const entry = cacheRef.current.get(intIdx);
+    const bmp = entry && entry !== MISSING ? entry : null;
+
+    // Fallback to last good
+    const fallback =
+      bmp ??
+      (lastDrawnIdxRef.current != null
+        ? cacheRef.current.get(lastDrawnIdxRef.current)
+        : null);
+
+    if (!fallback || fallback === MISSING) return; // keep last pixels
+
+    const useBmp = bmp || fallback;
+
+    const cw = canvas.width;
+    const ch = canvas.height;
+    const iw = useBmp.width;
+    const ih = useBmp.height;
+    const scale = Math.min(cw / iw, ch / ih);
+    const w = Math.round(iw * scale);
+    const h = Math.round(ih * scale);
+    const x = Math.floor((cw - w) / 2);
+    const y = Math.floor((ch - h) / 2);
+
+    ctx.clearRect(0, 0, cw, ch);
+    ctx.drawImage(useBmp, x, y, w, h);
+
+    if (bmp) lastDrawnIdxRef.current = intIdx;
+  }, []);
+
+  // ---- fetch + decode
+  const ensureFrame = useCallback(async (intIdx) => {
+    const i = wrap(intIdx);
+    if (cacheRef.current.has(i) || inflightRef.current.has(i)) return;
+
+    inflightRef.current.add(i);
+    const url = formatUrl(i);
+    const ctrl = new AbortController();
+    abortsRef.current.set(i, ctrl);
+
+    try {
+      const res = await fetch(url, { signal: ctrl.signal, cache: 'force-cache' });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const blob = await res.blob();
+      const bmp = await createImageBitmap(blob);
+      cacheRef.current.set(i, bmp);
+
+      // If this is the one we want now, paint it immediately
+      const want = wrap(Math.floor(idxRef.current));
+      if (want === i || lastDrawnIdxRef.current == null) draw(i);
+    } catch {
+      // Mark as missing so we don't hammer it
+      cacheRef.current.set(i, MISSING);
+    } finally {
+      abortsRef.current.delete(i);
+      inflightRef.current.delete(i);
     }
-  };
-  const onPointerUp = () => {
-    isPointerDown.current = false;
-  };
+  }, [draw]);
 
-  // Keyboard
-  useEffect(() => {
-    const onKey = (e) => {
-      if (e.key === "ArrowLeft") {
-        stopAuto();
-        setFrame((f) => (f + 1) % frameCount);
-      } else if (e.key === "ArrowRight") {
-        stopAuto();
-        setFrame((f) => (f - 1 + frameCount) % frameCount);
+  const pumpQueue = useCallback(() => {
+    const running = inflightRef.current.size;
+    const room = Math.max(0, MAX_CONCURRENT - running);
+    if (room === 0) return;
+
+    let started = 0;
+    while (started < room && queueRef.current.length) {
+      const next = queueRef.current.shift();
+      if (next == null) break;
+      if (cacheRef.current.has(next) || inflightRef.current.has(next)) continue;
+      ensureFrame(next);
+      started++;
+    }
+  }, [ensureFrame]);
+
+  const scheduleWindow = useCallback((centerIdx) => {
+    // Evict far frames (keep seam neighbors)
+    for (const key of cacheRef.current.keys()) {
+      const dist = Math.min(
+        Math.abs(key - centerIdx),
+        frameCount - Math.abs(key - centerIdx)
+      );
+      if (dist > CACHE_RADIUS_FRAMES + EVICT_MARGIN) {
+        const v = cacheRef.current.get(key);
+        cacheRef.current.delete(key);
+        if (v && v !== MISSING) { try { v.close?.(); } catch {} }
       }
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [frameCount]);
+    }
 
-  // Zoom controls
-  const onWheel = (e) => {
-    if (!e.ctrlKey && Math.abs(e.deltaY) < 1) return;
-    stopAuto();
-    const next = clamp(zoom + (e.deltaY > 0 ? -0.1 : 0.1), 1, 3);
-    setZoom(next);
-  };
-  const onDouble = () => {
-    stopAuto();
-    setZoom((z) => (z === 1 ? 2 : 1));
-  };
+    // Request nearest-first
+    const want = [];
+    for (let r = 0; r <= CACHE_RADIUS_FRAMES; r++) {
+      const a = wrap(centerIdx + r);
+      const b = wrap(centerIdx - r);
+      if (!cacheRef.current.has(a)) want.push(a);
+      if (r !== 0 && !cacheRef.current.has(b)) want.push(b);
+    }
 
-  // Redraw on container resize
+    // Seam guard
+    if (centerIdx <= SEAM_GUARD) {
+      for (let k = frameCount - SEAM_GUARD; k < frameCount; k++) {
+        if (!cacheRef.current.has(k)) want.unshift(k);
+      }
+    } else if (centerIdx >= frameCount - 1 - SEAM_GUARD) {
+      for (let k = 0; k < SEAM_GUARD; k++) {
+        if (!cacheRef.current.has(k)) want.unshift(k);
+      }
+    }
+
+    // Unique queue
+    const set = new Set(queueRef.current);
+    for (const k of want) set.add(k);
+    queueRef.current = Array.from(set);
+
+    pumpQueue();
+  }, [frameCount, pumpQueue]);
+
+  // ---- advance + render loop
+  const tick = useCallback((ts) => {
+    const last = lastTsRef.current || ts;
+    lastTsRef.current = ts;
+
+    if (playing && rpsRef.current > 0) {
+      const dt = (ts - last) / 1000;
+      const framesPerSecond = rpsRef.current * frameCount;
+      idxRef.current += framesPerSecond * dt;
+    }
+
+    // Resolve target int index; if missing, walk to nearest valid
+    let intIdx = wrap(Math.floor(idxRef.current));
+    let guard = 0;
+    while (cacheRef.current.get(intIdx) === MISSING && guard < frameCount) {
+      intIdx = wrap(intIdx + 1); // skip hole
+      guard++;
+    }
+
+    draw(intIdx);
+    scheduleWindow(intIdx);
+
+    rafRef.current = requestAnimationFrame(tick);
+  }, [draw, scheduleWindow, frameCount, playing]);
+
+  // ---- init
   useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    const ro = new ResizeObserver(() => draw(frame));
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, [draw, frame]);
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d', { alpha: false, desynchronized: true });
+    ctxRef.current = ctx;
 
-  const style = useMemo(
-    () => ({
-      width: width ? `${width}px` : undefined,
-      height: height ? `${height}px` : undefined,
-    }),
-    [width, height]
-  );
+    const resize = () => {
+      const dpr = clamp(window.devicePixelRatio || 1, 1, 2);
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = Math.round(rect.width * dpr);
+      canvas.height = Math.round(rect.height * dpr);
+      const now = wrap(Math.floor(idxRef.current));
+      draw(now);
+    };
+    resize();
 
-  const anyLoaded = loaded.some(Boolean);
+    // Prewarm both ends to make the seam invisible
+    idxRef.current = 0;
+    ensureFrame(0);
+    ensureFrame(frameCount - 1);
+    scheduleWindow(0);
 
-  // Expose control methods
+    rafRef.current = requestAnimationFrame(tick);
+
+    window.addEventListener('resize', resize);
+    return () => {
+      window.removeEventListener('resize', resize);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      for (const [, ctrl] of abortsRef.current) ctrl.abort();
+      abortsRef.current.clear();
+      for (const v of cacheRef.current.values()) {
+        if (v && v !== MISSING) { try { v.close?.(); } catch {} }
+      }
+      cacheRef.current.clear();
+    };
+  }, [draw, ensureFrame, scheduleWindow, tick, frameCount]);
+
+  // external prop updates
+  useEffect(() => { setPlaying(!!autoRotate); }, [autoRotate]);
+  useEffect(() => { rpsRef.current = Math.max(0, Number(autoRotateRps) || 0); }, [autoRotateRps]);
+
+  // ---- drag (pointer)
+  const setPointerCaptureSafe = (el, e) => { try { el.setPointerCapture?.(e.pointerId); } catch {} };
+  const releasePointerCaptureSafe = (el, e) => { try { el.releasePointerCapture?.(e.pointerId); } catch {} };
+
+  const onDown = (e) => {
+    draggingRef.current = true;
+    lastXRef.current = e.clientX ?? (e.touches ? e.touches[0].clientX : 0);
+    setPointerCaptureSafe(e.currentTarget, e);
+    onPointerDown && onPointerDown(e);
+  };
+
+  const onMove = (e) => {
+    if (!draggingRef.current) return;
+    const x = e.clientX ?? (e.touches ? e.touches[0].clientX : 0);
+    const dx = x - lastXRef.current;
+    lastXRef.current = x;
+
+    const framesPerPixel = dragSensitivity * 0.4;
+    idxRef.current -= dx * framesPerPixel;
+
+    // draw immediately; if target is missing, nearest neighbor will be shown
+    let intIdx = wrap(Math.floor(idxRef.current));
+    let guard = 0;
+    while (cacheRef.current.get(intIdx) === MISSING && guard < frameCount) {
+      intIdx = wrap(intIdx + (dx > 0 ? -1 : 1)); // search opposite to drag direction
+      guard++;
+    }
+    draw(intIdx);
+    scheduleWindow(intIdx);
+  };
+
+  const onUp = (e) => {
+    draggingRef.current = false;
+    releasePointerCaptureSafe(e.currentTarget, e);
+    onPointerUp && onPointerUp(e);
+  };
+
+  // ---- API
   useImperativeHandle(ref, () => ({
-    play() {
-      setAutoOn(true);
-    },
-    pause() {
-      setAutoOn(false);
-    },
-    setSpeed(value) {
-      setRps(Math.max(0, Number(value) || 0));
-    },
-    next() {
-      setFrame((f) => (f + 1) % frameCount);
-    },
-    prev() {
-      setFrame((f) => (f - 1 + frameCount) % frameCount);
-    },
-    setFrameIndex(i) {
-      const n = ((i % frameCount) + frameCount) % frameCount;
-      setFrame(n);
-    },
-    resetZoom() {
-      setZoom(1);
-    },
-    zoomIn(step = 0.2) {
-      setZoom((z) => clamp(z + step, 1, 3));
-    },
-    zoomOut(step = 0.2) {
-      setZoom((z) => clamp(z - step, 1, 3));
-    },
-    getFrame() {
-      return frame;
-    },
+    play() { setPlaying(true); },
+    pause() { setPlaying(false); },
+    setSpeed(rps) { rpsRef.current = Math.max(0, Number(rps) || 0); },
+    step(n = 1) { idxRef.current += n; },
+    nudge(n = 1) { idxRef.current += n; },
+    prev() { idxRef.current -= 1; },
+    next() { idxRef.current += 1; },
   }));
 
   return (
     <div
-      ref={containerRef}
-      className={`relative select-none ${className}`}
-      style={style}
-      onMouseDown={onPointerDown}
-      onMouseMove={onPointerMove}
-      onMouseUp={onPointerUp}
-      onMouseLeave={onPointerUp}
-      onTouchStart={onPointerDown}
-      onTouchMove={onPointerMove}
-      onTouchEnd={onPointerUp}
-      onWheel={onWheel}
-      onDoubleClick={onDouble}
+      className={className}
+      style={{ ...style, userSelect: 'none', WebkitUserSelect: 'none', touchAction: 'none' }}
+      onPointerDown={onDown}
+      onPointerMove={onMove}
+      onPointerUp={onUp}
+      onPointerCancel={onUp}
+      onContextMenu={(e) => e.preventDefault()}
       role="img"
-      aria-label="Interactive 360 degree view of the snare drum"
+      aria-label="360 degree product viewer"
     >
-      <canvas ref={canvasRef} className="w-full h-full block rounded-2xl bg-black/70" />
-
-      <div className="pointer-events-none absolute inset-x-0 bottom-2 flex items-center justify-center gap-2 text-white/80">
-        <div className="rounded-full bg-black/40 backdrop-blur px-3 py-1 text-xs leading-none">
-        </div>
-      </div>
-
-      {showLoadingRing && !anyLoaded && (
-        <div className="absolute inset-0 grid place-items-center">
-          <div className="relative h-16 w-16">
-            <div className="absolute inset-0 rounded-full border-2 border-white/20" />
-            <div
-              className="absolute inset-0 rounded-full border-2 border-white"
-              style={{
-                clipPath:
-                  "polygon(50% 50%, 50% 0, 100% 0, 100% 100%, 0 100%, 0 0, 50% 0)",
-                transform: `rotate(${(loadingProgress / 100) * 360}deg)`,
-                transition: "transform 0.2s linear",
-              }}
-            />
-            <div className="absolute inset-0 grid place-items-center text-white text-xs">
-              {loadingProgress}%
-            </div>
-          </div>
-        </div>
-      )}
+      <canvas ref={canvasRef} style={{ width: '100%', height: '100%', display: 'block' }} />
     </div>
   );
 });
