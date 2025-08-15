@@ -429,7 +429,7 @@ const OurCraft = () => {
           <li>High resolution concept mockups</li>
           <li>Behind-the-scenes access</li>
           <li>Limited Edition gift item</li>
-          <li>Builds starting at $1250</li>
+          <li>Builds starting at $1499</li>
         </ul>
 
         {/* Mobile scroll indicator */}
