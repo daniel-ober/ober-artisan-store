@@ -151,144 +151,158 @@ const Cart = () => {
   const getTotalAmount = () =>
     cart.reduce((total, item) => total + getItemTotal(item), 0);
 
- // ⬇️ REPLACE your whole handleCheckout with this version
-const handleCheckout = async () => {
-  setShowCheckoutModal(true);
-  try {
-    if (!cart || cart.length === 0) {
-      alert('Your cart is empty!');
-      setShowCheckoutModal(false);
-      return;
-    }
-
-    const normalize = (str) => (str || '').toString().trim();
-
-    // Build the snapshot we save before Stripe
-    const productsPayload = cart.map((item) => {
-      const config = item.config || {};
-      const isMerch = item.category === 'merch';
-      const isFoundersToast = item.productId === 'founders-toast';
-
-      // Image (safe fallback)
-      const fb = '/fallback-images/fallback_image1.png';
-      let previewImage = item.image || fb;
-      if (item.category === 'artisan') {
-        previewImage =
-          item.image ||
-          (Array.isArray(item.images) && item.images[0]) ||
-          fb;
-} else if (isMerch) {
-  const productDoc = productDataMap[item.productId];
-
-  // Normalizers
-  const normalize = (s) =>
-    (s || '').toString().toLowerCase().replace(/\s+|\/|-/g, '');
-  const variantId = String(item.variantId || config.variantId || '').trim();
-  const selectedColor = normalize(config.Colors || config.colorName || config.color);
-
-  if (productDoc && Array.isArray(productDoc.images) && productDoc.images.length) {
-    // 1) Try image tied to this variantId
-    let matchedImage =
-      productDoc.images.find((img) =>
-        Array.isArray(img.variant_ids)
-          ? img.variant_ids.map(String).includes(variantId)
-          : false
-      );
-
-    // 2) Otherwise try by color match (Printify-enriched .colors array)
-    if (!matchedImage) {
-      matchedImage = productDoc.images.find((img) =>
-        Array.isArray(img.colors)
-          ? img.colors.some((c) => normalize(c) === selectedColor)
-          : false
-      );
-    }
-
-    // 3) Fallbacks: default image, then first image
-    if (!matchedImage) {
-      matchedImage =
-        productDoc.images.find((img) => img.is_default) ||
-        productDoc.images[0];
-    }
-
-    if (matchedImage?.src?.startsWith('http')) {
-      previewImage = matchedImage.src;
-    }
-  }
-}
-
-      // Canonical config payloads
-      let configPayload = {};
-      if (item.category === 'artisan' && !isFoundersToast) {
-        configPayload = {
-          size: normalize(config.size),
-          depth: normalize(config.depth),
-          lugQuantity: normalize(config.lugQuantity),
-          staveQuantity: normalize(config.staveQuantity),
-          reRing: typeof config.reRing !== 'undefined' ? !!config.reRing : undefined,
-          hardwareColor: normalize(config.hardwareColor),
-          outerShell: normalize(config.outerShell),
-          innerStave: normalize(config.innerStave),
-        };
-      } else if (isMerch) {
-        // Accept all common key shapes from UI/state
-        const sizeValue  = config.Sizes || config.size || config.sizeName || '';
-        const colorValue = config.Colors || config.color || config.colorName || '';
-        const variantId  = item.variantId || config.variantId || '';
-        configPayload = {
-          sizeName:  String(sizeValue).trim(),
-          colorName: String(colorValue).trim(),
-          variantId: variantId ? String(variantId).trim() : '',
-        };
+  // ⬇️ REPLACE your whole handleCheckout with this version
+  const handleCheckout = async () => {
+    setShowCheckoutModal(true);
+    try {
+      if (!cart || cart.length === 0) {
+        alert('Your cart is empty!');
+        setShowCheckoutModal(false);
+        return;
       }
 
-      // IMPORTANT: we are using price_data for merch (so Stripe can show variant text).
-      // That creates an ephemeral price on Stripe, so DO NOT include a saved stripePriceId
-      // for merch in the snapshot—this lets the webhook match by unit_amount.
-      let stripePriceId = item.stripePriceId || '';
-      if (isMerch) stripePriceId = '';
+      const normalize = (str) => (str || '').toString().trim();
 
-      return {
-        productId: String(item.productId),
-        name: item.name || item.title || 'Ober Product',
-        category: item.category,                     // "artisan" | "merch" | etc
-        stripePriceId,                               // intentionally blank for merch
-        price: Number(item.price) || 0,              // used when no priceId
-        quantity: item.quantity || 1,
-        image: typeof previewImage === 'string' ? previewImage : previewImage?.src,
-        config: configPayload,
-      };
-    });
+      // Build the snapshot we save before Stripe
+      const productsPayload = cart.map((item) => {
+        const config = item.config || {};
+        const isMerch = item.category === 'merch';
+        const isFoundersToast = item.productId === 'founders-toast';
 
-    // Helpful log when verifying end-to-end
-    console.log('🧾 productsPayload →', productsPayload);
+        // Image (safe fallback)
+        const fb = '/fallback-images/fallback_image1.png';
+        let previewImage = item.image || fb;
+        if (item.category === 'artisan') {
+          previewImage =
+            item.image || (Array.isArray(item.images) && item.images[0]) || fb;
+        } else if (isMerch) {
+          const productDoc = productDataMap[item.productId];
 
-    const response = await fetch(`${API_BASE_URL}/createCheckoutSession`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ products: productsPayload }),
-    });
+          // Normalizers
+          const normalize = (s) =>
+            (s || '')
+              .toString()
+              .toLowerCase()
+              .replace(/\s+|\/|-/g, '');
+          const variantId = String(
+            item.variantId || config.variantId || ''
+          ).trim();
+          const selectedColor = normalize(
+            config.Colors || config.colorName || config.color
+          );
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error('❌ Checkout session create failed:', errorText);
-      throw new Error('Failed to create checkout session');
-    }
+          if (
+            productDoc &&
+            Array.isArray(productDoc.images) &&
+            productDoc.images.length
+          ) {
+            // 1) Try image tied to this variantId
+            let matchedImage = productDoc.images.find((img) =>
+              Array.isArray(img.variant_ids)
+                ? img.variant_ids.map(String).includes(variantId)
+                : false
+            );
 
-    const data = await response.json();
-    if (data?.url) {
-      sessionStorage.setItem('checkoutStarted', 'true');
+            // 2) Otherwise try by color match (Printify-enriched .colors array)
+            if (!matchedImage) {
+              matchedImage = productDoc.images.find((img) =>
+                Array.isArray(img.colors)
+                  ? img.colors.some((c) => normalize(c) === selectedColor)
+                  : false
+              );
+            }
+
+            // 3) Fallbacks: default image, then first image
+            if (!matchedImage) {
+              matchedImage =
+                productDoc.images.find((img) => img.is_default) ||
+                productDoc.images[0];
+            }
+
+            if (matchedImage?.src?.startsWith('http')) {
+              previewImage = matchedImage.src;
+            }
+          }
+        }
+
+        // Canonical config payloads
+        let configPayload = {};
+        if (item.category === 'artisan' && !isFoundersToast) {
+          configPayload = {
+            size: normalize(config.size),
+            depth: normalize(config.depth),
+            lugQuantity: normalize(config.lugQuantity),
+            staveQuantity: normalize(config.staveQuantity),
+            reRing:
+              typeof config.reRing !== 'undefined'
+                ? !!config.reRing
+                : undefined,
+            hardwareColor: normalize(config.hardwareColor),
+            outerShell: normalize(config.outerShell),
+            innerStave: normalize(config.innerStave),
+          };
+        } else if (isMerch) {
+          // Accept all common key shapes from UI/state
+          const sizeValue =
+            config.Sizes || config.size || config.sizeName || '';
+          const colorValue =
+            config.Colors || config.color || config.colorName || '';
+          const variantId = item.variantId || config.variantId || '';
+          configPayload = {
+            sizeName: String(sizeValue).trim(),
+            colorName: String(colorValue).trim(),
+            variantId: variantId ? String(variantId).trim() : '',
+          };
+        }
+
+        // IMPORTANT: we are using price_data for merch (so Stripe can show variant text).
+        // That creates an ephemeral price on Stripe, so DO NOT include a saved stripePriceId
+        // for merch in the snapshot—this lets the webhook match by unit_amount.
+        let stripePriceId = item.stripePriceId || '';
+        if (isMerch) stripePriceId = '';
+
+        return {
+          productId: String(item.productId),
+          name: item.name || item.title || 'Ober Product',
+          category: item.category, // "artisan" | "merch" | etc
+          stripePriceId, // intentionally blank for merch
+          price: Number(item.price) || 0, // used when no priceId
+          quantity: item.quantity || 1,
+          image:
+            typeof previewImage === 'string' ? previewImage : previewImage?.src,
+          config: configPayload,
+        };
+      });
+
+      // Helpful log when verifying end-to-end
+      console.log('🧾 productsPayload →', productsPayload);
+
+      const response = await fetch(`${API_BASE_URL}/createCheckoutSession`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ products: productsPayload }),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('❌ Checkout session create failed:', errorText);
+        throw new Error('Failed to create checkout session');
+      }
+
+      const data = await response.json();
+      if (data?.url) {
+        sessionStorage.setItem('checkoutStarted', 'true');
+        setShowCheckoutModal(false);
+        window.location.href = data.url;
+      } else {
+        throw new Error('No redirect URL returned from API');
+      }
+    } catch (error) {
+      console.error('🔥 Checkout failed:', error);
+      alert('There was a problem initiating checkout. Check console logs.');
       setShowCheckoutModal(false);
-      window.location.href = data.url;
-    } else {
-      throw new Error('No redirect URL returned from API');
     }
-  } catch (error) {
-    console.error('🔥 Checkout failed:', error);
-    alert('There was a problem initiating checkout. Check console logs.');
-    setShowCheckoutModal(false);
-  }
-};
+  };
 
   return (
     <div className="cart-container">
