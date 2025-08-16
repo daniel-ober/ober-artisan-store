@@ -177,10 +177,45 @@ const handleCheckout = async () => {
           item.image ||
           (Array.isArray(item.images) && item.images[0]) ||
           fb;
-      } else if (isMerch) {
-        const productDoc = productDataMap[item.productId];
-        if (productDoc?.images?.[0]?.src) previewImage = productDoc.images[0].src;
-      }
+} else if (isMerch) {
+  const productDoc = productDataMap[item.productId];
+
+  // Normalizers
+  const normalize = (s) =>
+    (s || '').toString().toLowerCase().replace(/\s+|\/|-/g, '');
+  const variantId = String(item.variantId || config.variantId || '').trim();
+  const selectedColor = normalize(config.Colors || config.colorName || config.color);
+
+  if (productDoc && Array.isArray(productDoc.images) && productDoc.images.length) {
+    // 1) Try image tied to this variantId
+    let matchedImage =
+      productDoc.images.find((img) =>
+        Array.isArray(img.variant_ids)
+          ? img.variant_ids.map(String).includes(variantId)
+          : false
+      );
+
+    // 2) Otherwise try by color match (Printify-enriched .colors array)
+    if (!matchedImage) {
+      matchedImage = productDoc.images.find((img) =>
+        Array.isArray(img.colors)
+          ? img.colors.some((c) => normalize(c) === selectedColor)
+          : false
+      );
+    }
+
+    // 3) Fallbacks: default image, then first image
+    if (!matchedImage) {
+      matchedImage =
+        productDoc.images.find((img) => img.is_default) ||
+        productDoc.images[0];
+    }
+
+    if (matchedImage?.src?.startsWith('http')) {
+      previewImage = matchedImage.src;
+    }
+  }
+}
 
       // Canonical config payloads
       let configPayload = {};
