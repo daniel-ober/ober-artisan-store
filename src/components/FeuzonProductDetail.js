@@ -35,7 +35,7 @@ const FeuzonProductDetail = () => {
   const [productInCart, setProductInCart] = useState(false);
   const [flickerChangeSelection, setFlickerChangeSelection] = useState(false);
 
-  // ✅ ADD THIS BLOCK HERE
+  // Derive re-ring from label
   useEffect(() => {
     const isReRingRequired =
       staveOption.includes('Re-Rings') || staveOption.includes('+ $150');
@@ -52,7 +52,7 @@ const FeuzonProductDetail = () => {
     14: { '5.0': 0, '5.5': 50, '6.0': 100, '6.5': 150, '7.0': 200, '7.5': 250, '8.0': 300 },
   };
 
-  // 🔹 Fallback price helper (base + depth upcharge + re-ring if present)
+  // 🔹 Fallback price (base + depth + re-ring upcharge)
   const computeFallbackPrice = (sizeVal, depthVal, hasReRing) => {
     const b = basePrices[String(sizeVal)] ?? 0;
     const d = depthPrices[String(sizeVal)]?.[String(depthVal)] ?? 0;
@@ -106,11 +106,11 @@ const FeuzonProductDetail = () => {
     );
     if (existingItemIndex !== -1) {
       const updatedCart = cart.filter((item) => item.productId !== 'feuzon');
-      removeFromCart('feuzon');
-      setTimeout(() => {
-        setProductInCart(false);
-      }, 500);
     }
+    removeFromCart('feuzon');
+    setTimeout(() => {
+      setProductInCart(false);
+    }, 500);
   };
 
   useEffect(() => {
@@ -134,7 +134,7 @@ const FeuzonProductDetail = () => {
   const handleAddToCart = async () => {
     if (!stripePriceId) {
       toast.error(
-        'Stripe Payment ID is missing. Please refresh the page and try again.'
+        'Stripe Payment ID is missing for this configuration. Try changing lugs/depth, or refresh.'
       );
       return;
     }
@@ -208,39 +208,49 @@ const FeuzonProductDetail = () => {
     // ✅ Update Stave Quantities
     setStaveQuantities(updatedStaveOptions);
 
-    // ✅ Find the correct pricing option
-    const selectedOption = feuzonSummaries.pricingOptions.find(
-      (option) =>
-        String(option.size).trim() === normalizedSize &&
-        String(option.depth).trim() === normalizedDepth &&
-        option.reRing === hasReRing &&
-        option.lugQuantity.toString() === lugs
-    );
+    // ---------- PRICE & STRIPE ID RESOLUTION ----------
+    // Always set a visible fallback price first (prevents $0)
+    const fallback = computeFallbackPrice(normalizedSize, normalizedDepth, hasReRing);
+    setTotalPrice(fallback);
 
-    if (!selectedOption) {
-      // 🔹 Use fallback (so we never show $0)
-      const fallback = computeFallbackPrice(normalizedSize, normalizedDepth, hasReRing);
-      setTotalPrice(fallback);
+    // Progressive match: exact → relax
+    const list = feuzonSummaries.pricingOptions || [];
+    const exact =
+      list.find(
+        (o) =>
+          String(o.size).trim() === normalizedSize &&
+          String(o.depth).trim() === normalizedDepth &&
+          String(o.lugQuantity) === String(lugs) &&
+          Boolean(o.reRing) === Boolean(hasReRing)
+      ) ||
+      list.find(
+        (o) =>
+          String(o.size).trim() === normalizedSize &&
+          String(o.depth).trim() === normalizedDepth &&
+          Boolean(o.reRing) === Boolean(hasReRing)
+      ) ||
+      list.find(
+        (o) =>
+          String(o.size).trim() === normalizedSize &&
+          String(o.depth).trim() === normalizedDepth
+      ) ||
+      list.find((o) => String(o.size).trim() === normalizedSize);
+
+    if (exact) {
+      setTotalPrice(exact.price);
+      setStripePriceId(exact.stripePriceId || null);
+      setStaveQuantity(exact.staveQuantity ?? staveQuantity);
+    } else {
+      // keep fallback price; no Stripe ID for this combo
       setStripePriceId(null);
-      // try to keep a sensible stave quantity if we can parse it
       const qtyFromLabel =
         (staveOption.split(' - ')[0] || '').replace(/\D/g, '') || 16;
       setStaveQuantity(Number(qtyFromLabel));
-      return;
     }
-
-    // ✅ Calculate first
-    const finalPrice = selectedOption.price;
-    setTotalPrice(finalPrice);
-
-    // ✅ Then update state
-    setTotalPrice(finalPrice);
-    setStripePriceId(selectedOption.stripePriceId);
-    setStaveQuantity(selectedOption.staveQuantity);
 
     // ✅ Ensure correct lookup key for artisan notes
     const formattedSize = `${size}"`;
-    const formattedBasePrice = `$${selectedOption.price}`;
+    const formattedBasePrice = `$${(exact?.price ?? fallback)}`;
     const formattedDepth = `${depth}"`;
     const formattedLugs = `${lugs} Lugs`;
     const formattedOuterShell = outerShell.trim();
@@ -282,20 +292,20 @@ const FeuzonProductDetail = () => {
     }
   }, [size, depth, lugs, staveOption, outerShell, innerStave]);
 
-  // ✅ This must be at the top level, NOT inside another function!
+  // cart id check (kept as-is)
   useEffect(() => {
     const generatedId = `feuzon-${size}-${depth}-${lugs}-${staveQuantity}`;
     const isInCart = cart.some((item) => item.id === generatedId);
   }, [cart, size, depth, lugs, staveQuantity]);
 
-  // ✅ **New Effect to Reset `innerStave` When `outerShell` Changes**
+  // reset inner stave when outer shell changes
   useEffect(() => {
     if (staveOptions[outerShell] && staveOptions[outerShell].length > 0) {
-      setInnerStave(staveOptions[outerShell][0]); // Auto-select the first valid inner stave
+      setInnerStave(staveOptions[outerShell][0]);
     }
-  }, [outerShell]); // Trigger only when outerShell changes
+  }, [outerShell]);
 
-  // ✅ **New Effect to Reset `depth`, `lugs`, and `staveOption` When `size` Changes**
+  // reset depth/lugs/stave option when size or lugs change
   useEffect(() => {
     if (depthPrices[size]) {
       const validDepths = Object.keys(depthPrices[size]);
@@ -344,7 +354,6 @@ const FeuzonProductDetail = () => {
     innerStave,
   ]);
 
-  // ✅ Handle modifying an existing Feuzon selection
   const handleModifySelection = () => {
     setProductInCart(false);
     setShowModifyModal(false);
@@ -354,12 +363,11 @@ const FeuzonProductDetail = () => {
 
   const handleRemoveFromCart = async () => {
     const generatedId = `feuzon-${stripePriceId}-${size}-${depth}-${reRing}-${lugs}-${staveQuantity}-${outerShell}-${innerStave}`;
-    setProductInCart(false); // Instant UI feedback
+    setProductInCart(false);
     await removeFromCart(generatedId);
     toast.success('🗑️ Item removed from cart.');
   };
 
-  // ✅ Handle adding a separate Feuzon drum if stock allows
   const handleAddSeparateItem = async () => {
     const feuzonQuantityInCart = cart
       .filter((item) => item.productId === 'feuzon')
