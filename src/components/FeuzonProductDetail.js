@@ -46,11 +46,19 @@ const FeuzonProductDetail = () => {
 
   const basePrices = { 12: 1050, 13: 1150, 14: 1250 };
 
-const depthPrices = {
-  12: { '5.0': 0, '5.5': 50, '6.0': 100, '6.5': 150, '7.0': 200, '7.5': 250, '8.0': 300 },
-  13: { '5.0': 0, '5.5': 50, '6.0': 100, '6.5': 150, '7.0': 200, '7.5': 250, '8.0': 300 },
-  14: { '5.0': 0, '5.5': 50, '6.0': 100, '6.5': 150, '7.0': 200, '7.5': 250, '8.0': 300 },
-};
+  const depthPrices = {
+    12: { '5.0': 0, '5.5': 50, '6.0': 100, '6.5': 150, '7.0': 200, '7.5': 250, '8.0': 300 },
+    13: { '5.0': 0, '5.5': 50, '6.0': 100, '6.5': 150, '7.0': 200, '7.5': 250, '8.0': 300 },
+    14: { '5.0': 0, '5.5': 50, '6.0': 100, '6.5': 150, '7.0': 200, '7.5': 250, '8.0': 300 },
+  };
+
+  // 🔹 Fallback price helper (base + depth upcharge + re-ring if present)
+  const computeFallbackPrice = (sizeVal, depthVal, hasReRing) => {
+    const b = basePrices[String(sizeVal)] ?? 0;
+    const d = depthPrices[String(sizeVal)]?.[String(depthVal)] ?? 0;
+    const r = hasReRing ? reRingCost : 0;
+    return b + d + r;
+  };
 
   const staveOptions = {
     Maple: ['Walnut + Birch', 'Oak + Cherry', 'Maple + Bubinga'],
@@ -89,27 +97,15 @@ const depthPrices = {
 
   const handleNotifyMe = () => {
     alert('You will be notified when this drum is available for order!');
-    // console.log('📩 User signed up for availability notifications.');
-    // 🚀 Future Implementation: Store this in Firestore for email notifications
   };
 
   const handleChangeSelections = () => {
-    // console.log('🔄 Changing Selections - Resetting Cart State');
-
-    // ✅ Reset the `productInCart` state
     setProductInCart(false);
-
-    // ✅ Ensure the cart updates correctly when modifying the product
     const existingItemIndex = cart.findIndex(
       (item) => item.productId === 'feuzon'
     );
     if (existingItemIndex !== -1) {
-      // console.log(
-      //   '♻️ Removing Feuzon item temporarily to allow selection update.'
-      // );
       const updatedCart = cart.filter((item) => item.productId !== 'feuzon');
-
-      // ✅ Update the Firestore cart first, then local state
       removeFromCart('feuzon');
       setTimeout(() => {
         setProductInCart(false);
@@ -179,41 +175,10 @@ const depthPrices = {
     }
   };
 
-  //   if (!cartId) {
-  //     console.error('❌ cartId is missing! Firestore may not update.');
-  //     return;
-  //   }
-
-  //   // ✅ Sync with Firestore after a short delay to verify the update
-  //   setTimeout(async () => {
-  //     try {
-  //       const cartRef = doc(db, 'carts', cartId);
-  //       const cartDoc = await getDoc(cartRef);
-  //       if (cartDoc.exists()) {
-  //         const updatedCartData = cartDoc.data().cart || [];
-  //         const isProductInCart = updatedCartData.some((item) => item.id === generatedId);
-
-  //         // ✅ Ensure the button reflects the correct state
-  //         setProductInCart(isProductInCart);
-  //       }
-  //     } catch (error) {
-  //       console.error('❌ Error retrieving cart data from Firestore:', error);
-  //     }
-  //   }, 1000);
-  // };
-
   useEffect(() => {
-    // console.log('🔄 Updating Price, Stave Options & Sound Profile...');
-
     if (!feuzonSummaries || Object.keys(feuzonSummaries).length === 0) {
-      // console.warn('⚠️ feuzonSummaries is empty or not loaded yet!');
       return;
     }
-
-    // console.log(
-    //   '🗂️ Available keys in feuzonSummaries:',
-    //   Object.keys(feuzonSummaries)
-    // ); // ✅ Debugging log
 
     const normalizedSize = String(size).trim();
     const normalizedDepth = String(depth).trim();
@@ -222,29 +187,21 @@ const depthPrices = {
 
     // ✅ Ensure valid lug count
     if (!lugOptions[size]?.includes(lugs)) {
-      console
-        .warn
-        // `⚠️ Invalid lug count (${lugs}) for size ${size}. Resetting to default.`
-        ();
       setLugs(lugOptions[size][0]);
       return;
     }
 
     // ✅ Fetch Valid Stave Options
     let updatedStaveOptions = staveMapping[size]?.[lugs] || [];
-    // console.log('🧐 Checking stave options for size:', size, 'lugs:', lugs);
-    // console.log('✅ Retrieved Stave Options:', updatedStaveOptions);
 
     // ✅ Ensure stave option is valid
     if (!updatedStaveOptions.includes(staveOption) || staveOption === '') {
-      // console.warn(`⚠️ Invalid or empty stave option detected. Resetting...`);
       setStaveOption(
         updatedStaveOptions.length > 0 ? updatedStaveOptions[0] : ''
       );
     }
 
     if (!staveQuantities.includes(staveOption)) {
-      // console.warn(`⚠️ Stave Option Not Found. Resetting to default.`);
       setStaveOption(staveQuantities[0] || '');
     }
 
@@ -261,14 +218,14 @@ const depthPrices = {
     );
 
     if (!selectedOption) {
-      console.error('❌ No matching pricing option found for:', {
-        size: normalizedSize,
-        depth: normalizedDepth,
-        reRing: hasReRing,
-        lugs,
-      });
-      setTotalPrice(0);
+      // 🔹 Use fallback (so we never show $0)
+      const fallback = computeFallbackPrice(normalizedSize, normalizedDepth, hasReRing);
+      setTotalPrice(fallback);
       setStripePriceId(null);
+      // try to keep a sensible stave quantity if we can parse it
+      const qtyFromLabel =
+        (staveOption.split(' - ')[0] || '').replace(/\D/g, '') || 16;
+      setStaveQuantity(Number(qtyFromLabel));
       return;
     }
 
@@ -286,32 +243,26 @@ const depthPrices = {
     const formattedBasePrice = `$${selectedOption.price}`;
     const formattedDepth = `${depth}"`;
     const formattedLugs = `${lugs} Lugs`;
-    const formattedOuterShell = outerShell.trim(); // Remove any extra spaces
+    const formattedOuterShell = outerShell.trim();
     const formattedInnerStave = innerStave.trim();
     const staveParts = staveOption.split(' - ');
     const formattedStaveQuantity = staveParts[0]?.trim();
     const formattedStaveThickness = staveParts[1]?.trim();
 
-    // ✅ Generate the correctly formatted key
     const generatedKey = `${formattedSize} - Base Price: ${formattedBasePrice}-${formattedDepth}-${formattedLugs}-${formattedStaveQuantity} - ${formattedStaveThickness}-${formattedOuterShell}-${formattedInnerStave}`;
 
-    // ✅ Normalize function to prevent minor mismatches
-    const normalizeKey = (key) => key.toLowerCase().replace(/\s+/g, ' ').trim(); // Normalize spaces
+    const normalizeKey = (key) => key.toLowerCase().replace(/\s+/g, ' ').trim();
 
     const normalizedGeneratedKey = normalizeKey(generatedKey);
     const availableKeys = Object.keys(feuzonSummaries).map(normalizeKey);
 
-    // ✅ Find an exact match in normalized keys
     const exactMatchIndex = availableKeys.indexOf(normalizedGeneratedKey);
     if (exactMatchIndex !== -1) {
       const exactKey = Object.keys(feuzonSummaries)[exactMatchIndex];
-      // console.log('✅ Exact Match Found:', exactKey);
       setSelectedDrumSummary(feuzonSummaries[exactKey]);
       return;
     }
 
-    // ❌ If no exact match, attempt fuzzy matching for close keys
-    // console.warn('⚠️ No exact match. Attempting closest match...');
     const closestMatch = availableKeys.find(
       (key) => key.includes(formattedSize) && key.includes(formattedBasePrice)
     );
@@ -319,10 +270,8 @@ const depthPrices = {
     if (closestMatch) {
       const closestKey =
         Object.keys(feuzonSummaries)[availableKeys.indexOf(closestMatch)];
-      // console.log('🟢 Using Closest Match:', closestKey);
       setSelectedDrumSummary(feuzonSummaries[closestKey]);
     } else {
-      console.error('❌ No match found. Displaying fallback summary.');
       setSelectedDrumSummary({
         highlightedCharacteristics: 'N/A',
         primaryGenre: 'N/A',
@@ -335,76 +284,41 @@ const depthPrices = {
 
   // ✅ This must be at the top level, NOT inside another function!
   useEffect(() => {
-    // console.log(
-    //   '🗂️ Available feuzonSummaries keys:',
-    //   Object.keys(feuzonSummaries)
-    // );
-    // console.log('🛒 Cart Updated:', cart);
-
-    // ✅ Generate the exact ID format used when adding the product
     const generatedId = `feuzon-${size}-${depth}-${lugs}-${staveQuantity}`;
-
-    // ✅ Check if this specific product is in the cart
     const isInCart = cart.some((item) => item.id === generatedId);
-
-    // console.log(
-    //   '🔍 Checking if product is in cart:',
-    //   isInCart,
-    //   'for ID:',
-    //   generatedId
-    // );
-    // console.log(
-    //   '🔍 Current Cart Contents:',
-    //   cart.map((item) => item.id)
-    // );
-
-    // console.log('✅ productInCart Updated to:', isInCart);
   }, [cart, size, depth, lugs, staveQuantity]);
 
   // ✅ **New Effect to Reset `innerStave` When `outerShell` Changes**
   useEffect(() => {
     if (staveOptions[outerShell] && staveOptions[outerShell].length > 0) {
-      // console.log(
-      //   `🔄 Resetting Inner Stave due to Outer Shell change: ${outerShell}`
-      // );
       setInnerStave(staveOptions[outerShell][0]); // Auto-select the first valid inner stave
     }
   }, [outerShell]); // Trigger only when outerShell changes
 
   // ✅ **New Effect to Reset `depth`, `lugs`, and `staveOption` When `size` Changes**
   useEffect(() => {
-    // console.log(
-    //   `🔄 Resetting Depth, Lugs, and Stave Option due to Snare Size or Lug Change: ${size}, ${lugs}`
-    // );
-
-    // ✅ Auto-select first valid depth
     if (depthPrices[size]) {
       const validDepths = Object.keys(depthPrices[size]);
       if (!validDepths.includes(depth)) {
         const defaultDepth = validDepths[0];
         setDepth(defaultDepth);
-        // console.log(`✅ Depth reset to ${defaultDepth}"`);
       }
     }
 
-    // ✅ Auto-select first valid lug count
     if (lugOptions[size]) {
       const validLugs = lugOptions[size];
       if (!validLugs.includes(lugs)) {
         const defaultLugs = validLugs[0];
         setLugs(defaultLugs);
-        // console.log(`✅ Lugs reset to ${defaultLugs}`);
       }
     }
 
-    // ✅ Auto-select first valid stave option when `lugs` changes
     if (staveMapping[size]?.[lugs]) {
       const validStaveOptions = staveMapping[size][lugs];
       if (!validStaveOptions.includes(staveOption)) {
         const defaultStaveOption =
           validStaveOptions.length > 0 ? validStaveOptions[0] : '';
         setStaveOption(defaultStaveOption);
-        // console.log(`✅ Stave Option reset to ${defaultStaveOption}`);
       }
     }
   }, [size, lugs]);
@@ -432,14 +346,9 @@ const depthPrices = {
 
   // ✅ Handle modifying an existing Feuzon selection
   const handleModifySelection = () => {
-    // console.log('♻️ Updating Feuzon configuration in the cart...');
-
-    // ✅ Reset states to ensure correct re-addition of modified product
     setProductInCart(false);
     setShowModifyModal(false);
     setSelectionChanged(false);
-
-    // ✅ Add the updated product to cart
     handleAddToCart(false);
   };
 
@@ -452,20 +361,11 @@ const depthPrices = {
 
   // ✅ Handle adding a separate Feuzon drum if stock allows
   const handleAddSeparateItem = async () => {
-    // console.log('➕ Attempting to add a separate Feuzon drum to the cart...');
-
-    // ✅ Fetch total Feuzon quantity currently in the cart
     const feuzonQuantityInCart = cart
       .filter((item) => item.productId === 'feuzon')
-      .reduce((total, item) => total + item.quantity, 0); // Sum all Feuzon quantities
+      .reduce((total, item) => total + item.quantity, 0);
 
-    // console.log('🛒 Cart Contents:', cart); // Debugging
-    // console.log('📦 Feuzon Quantity in Cart:', feuzonQuantityInCart);
-    // console.log('📦 Firestore Current Quantity:', currentQuantity);
-
-    // ✅ Check if enough stock is available
     if (currentQuantity > feuzonQuantityInCart) {
-      // console.log('✅ Stock is available! Proceeding to add another Feuzon...');
       await handleAddToCart(true);
       setShowAddSeparateModal(false);
     } else {
@@ -479,10 +379,9 @@ const depthPrices = {
     }
   };
 
-  // ✅ Calculate total Feuzon drums currently in the cart
   const totalFeuzonInCart = cart
     .filter((item) => item.productId === 'feuzon')
-    .reduce((sum, item) => sum + (item.quantity || 1), 0); // Sum quantities
+    .reduce((sum, item) => sum + (item.quantity || 1), 0);
 
   return (
     <div className="feuzon-product-detail">
