@@ -50,8 +50,24 @@ app.use((req, res, next) => {
 
 app.post('/createCheckoutSession', async (req, res) => {
   try {
-    const stripe = stripeLib(STRIPE_SECRET_KEY.value());
-    const clientUrl = CLIENT_URL.value().trim();
+    // ---- Guard: secrets present
+    const stripeKey = STRIPE_SECRET_KEY.value();
+    const clientUrlRaw = CLIENT_URL.value();
+    if (!stripeKey) {
+      console.error('❌ Missing STRIPE_SECRET_KEY secret');
+      return res
+        .status(500)
+        .json({ error: 'Server misconfiguration (stripe key).' });
+    }
+    if (!clientUrlRaw) {
+      console.error('❌ Missing CLIENT_URL secret');
+      return res
+        .status(500)
+        .json({ error: 'Server misconfiguration (client url).' });
+    }
+
+    const stripe = stripeLib(stripeKey);
+    const clientUrl = clientUrlRaw.trim().replace(/\/+$/, ''); // no trailing slash
 
     const {
       products,
@@ -61,14 +77,16 @@ app.post('/createCheckoutSession', async (req, res) => {
       firstName,
       lastName,
       promoCode,
-      shippingAddress,
-      billingAddress,
-    } = req.body;
+      shippingAddress, // optional
+      billingAddress, // optional (unused by Stripe Checkout create call)
+    } = req.body || {};
+
+    // ---- Guard: products
     if (!Array.isArray(products) || products.length === 0) {
       return res.status(400).json({ error: 'Invalid or empty cart.' });
     }
 
-    // 🔐 Stable token to join Stripe session ↔ our cart snapshot later
+    // 🔐 Stable token to join Stripe session ↔ cart snapshot later
     const guestToken = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
 
     // 📝 Save the entire cart snapshot BEFORE creating Stripe session
@@ -77,93 +95,96 @@ app.post('/createCheckoutSession', async (req, res) => {
       .doc(guestToken)
       .set({
         createdAt: admin.firestore.FieldValue.serverTimestamp(),
-        products, // <-- full snapshot with variant info
+        products,
         userId: userId || 'guest',
       });
 
-    // 🧾 Build Stripe line items
-    // 🧾 Build Stripe line items
-    // --- REPLACE the whole "build Stripe line items" loop ---
-// --- inside app.post('/createCheckoutSession' ... ) ---
-// Build Stripe line items
-const lineItems = [];
+    // 🧾 Build Stripe line items (defensive)
+    const lineItems = [];
+    for (const p of products) {
+      const isMerch = p?.category === 'merch';
+      const cfg = p?.config || {};
+      const priceNumber = Number(p?.price || 0);
+      const unitAmount = Math.round(priceNumber * 100);
 
-for (const p of products) {
-  const isMerch = p.category === 'merch';
-  const cfg = p.config || {};
+      if (!Number.isFinite(unitAmount) || unitAmount <= 0) {
+        console.error('❌ Bad unit_amount for product:', p);
+        return res.status(400).json({ error: 'Invalid item price.' });
+      }
 
-  if (isMerch) {
-    // normalize values from whatever keys your cart uses
-    const color = (cfg.colorName || cfg.color || cfg.Colors || '').toString().trim();
-    const size  = (cfg.sizeName  || cfg.size  || cfg.Sizes  || '').toString().trim();
-    const vId   = (cfg.variantId || '').toString().trim();
+      const images =
+        typeof p?.image === 'string' && /^https?:\/\//i.test(p.image)
+          ? [p.image]
+          : [];
 
-    const parts = [];
-    if (color) parts.push(`Color: ${color}`);
-    if (size)  parts.push(`Size: ${size}`);
-    const variantSummary = parts.length ? parts.join(' • ') : 'Options: Standard';
+      if (isMerch) {
+        const color = String(
+          cfg.colorName || cfg.color || cfg.Colors || ''
+        ).trim();
+        const size = String(cfg.sizeName || cfg.size || cfg.Sizes || '').trim();
+        const vId = String(cfg.variantId || '').trim();
+        const parts = [];
+        if (color) parts.push(`Color: ${color}`);
+        if (size) parts.push(`Size: ${size}`);
+        const variantSummary = parts.length ? parts.join(' • ') : undefined;
 
-    const images =
-      typeof p.image === 'string' && p.image.startsWith('http') ? [p.image] : [];
+        lineItems.push({
+          price_data: {
+            currency: 'usd',
+            unit_amount: unitAmount,
+            product_data: {
+              name: p?.name || 'Ober Merch',
+              ...(images.length ? { images } : {}),
+              ...(variantSummary ? { description: variantSummary } : {}),
+              metadata: {
+                category: 'merch',
+                productId: String(p?.productId || ''),
+                variantId: vId,
+                sizeName: size,
+                colorName: color,
+              },
+            },
+          },
+          quantity: Math.max(1, parseInt(p?.quantity || 1, 10)),
+        });
+      } else {
+        const cfgA = cfg;
+        const descParts = [
+          cfgA.size ? `Size: ${cfgA.size}"` : '',
+          cfgA.depth ? `Depth: ${cfgA.depth}"` : '',
+          cfgA.lugQuantity ? `${cfgA.lugQuantity} Lugs` : '',
+          cfgA.staveQuantity ? `${cfgA.staveQuantity} Staves` : '',
+          typeof cfgA.reRing !== 'undefined'
+            ? cfgA.reRing
+              ? 'Re-Rings'
+              : 'No Re-Rings'
+            : '',
+          cfgA.hardwareColor ? `Hardware: ${cfgA.hardwareColor}` : '',
+        ].filter(Boolean);
 
-    // ✅ Use price_data so we can control the description text
-    // ✅ Put all variant info in product_data.metadata so the webhook can read it back
-    lineItems.push({
-      price_data: {
-        currency: 'usd',
-        unit_amount: Math.round(Number(p.price || 0) * 100),
-        product_data: {
-          name: p.name || 'Ober Merch',
-          images,
-          description: variantSummary, // shows on Stripe Checkout UI
-          metadata: {
-            category: 'merch',
-            productId: String(p.productId || ''),
-            variantId: vId,
-            sizeName: size,
-            colorName: color
-          }
-        }
-      },
-      quantity: p.quantity || 1
-    });
-  } else {
-    // (leave your artisan branch as-is)
-    const images =
-      typeof p.image === 'string' && p.image.startsWith('http') ? [p.image] : [];
+        lineItems.push({
+          price_data: {
+            currency: 'usd',
+            unit_amount: unitAmount,
+            product_data: {
+              name: p?.name || 'Ober Artisan Product',
+              ...(images.length ? { images } : {}),
+              ...(descParts.length
+                ? { description: descParts.join(' • ') }
+                : {}),
+            },
+          },
+          quantity: Math.max(1, parseInt(p?.quantity || 1, 10)),
+        });
+      }
+    }
 
-    const cfgA = p.config || {};
-    const descParts = [
-      cfgA.size ? `Size: ${cfgA.size}"` : '',
-      cfgA.depth ? `Depth: ${cfgA.depth}"` : '',
-      cfgA.lugQuantity ? `${cfgA.lugQuantity} Lugs` : '',
-      cfgA.staveQuantity ? `${cfgA.staveQuantity} Staves` : '',
-      typeof cfgA.reRing !== 'undefined' ? (cfgA.reRing ? 'Re-Rings' : 'No Re-Rings') : '',
-      cfgA.hardwareColor ? `Hardware: ${cfgA.hardwareColor}` : ''
-    ].filter(Boolean);
-
-    lineItems.push({
-      price_data: {
-        currency: 'usd',
-        unit_amount: Math.round(Number(p.price || 0) * 100),
-        product_data: {
-          name: p.name || 'Ober Artisan Product',
-          images,
-          ...(descParts.length ? { description: descParts.join(' • ') } : {})
-        }
-      },
-      quantity: p.quantity || 1
-    });
-  }
-}
-    const session = await stripe.checkout.sessions.create({
+    // Build session params, only include optional fields when present
+    const sessionParams = {
       mode: 'payment',
-      payment_method_types: ['card'],
       line_items: lineItems,
       success_url: `${clientUrl}/checkout-summary?session_id={CHECKOUT_SESSION_ID}&guest_token=${guestToken}`,
       cancel_url: `${clientUrl}/cart`,
-      customer_email: customerEmail,
-      shipping_address_collection: { allowed_countries: ['US', 'CA'] },
       allow_promotion_codes: true,
       metadata: {
         userId: userId || 'guest',
@@ -173,12 +194,28 @@ for (const p of products) {
         promoCode: promoCode || '',
         shipTo: shippingAddress?.line1 || '',
       },
-    });
+    };
+
+    if (customerEmail && /\S+@\S+\.\S+/.test(customerEmail)) {
+      sessionParams.customer_email = customerEmail;
+    }
+
+    // Only require shipping address if you actually need it up front
+    sessionParams.shipping_address_collection = {
+      allowed_countries: ['US', 'CA'],
+    };
+
+    const session = await stripe.checkout.sessions.create(sessionParams);
 
     return res.status(200).json({ url: session.url });
   } catch (err) {
-    console.error('❌ Error creating checkout session:', err);
-    return res.status(500).json({ error: err.message });
+    // Surface the real Stripe error to your frontend console
+    const msg =
+      err?.raw?.message ||
+      err?.message ||
+      'Unknown error creating checkout session';
+    console.error('❌ Error creating checkout session:', msg, err);
+    return res.status(500).json({ error: msg });
   }
 });
 
@@ -283,7 +320,12 @@ stripeWebhookApp.post('/', async (req, res) => {
   }
 
   try {
-    if (event.type === 'checkout.session.completed') {
+    // ✅ Handle successful checkouts (including async methods like Klarna)
+    // ✅ Handle successful checkouts (includes async methods like Klarna)
+    if (
+      event.type === 'checkout.session.completed' ||
+      event.type === 'checkout.session.async_payment_succeeded'
+    ) {
       // 👉 Expand price.product so we at least have product info;
       // we will still fetch the Price directly to get metadata.
       const lineItems = await stripe.checkout.sessions.listLineItems(
@@ -293,7 +335,17 @@ stripeWebhookApp.post('/', async (req, res) => {
         }
       );
 
-      // Defensive check (unchanged)
+      // 🛡️ Idempotency guard: skip if we already wrote an order for this session
+      const existing = await db
+        .collection('orders')
+        .where('stripeSessionId', '==', session.id)
+        .limit(1)
+        .get();
+      if (!existing.empty) {
+        return res.status(200).send('Order already recorded for this session.');
+      }
+
+      // Defensive check
       if (
         !session.customer_details?.email ||
         !session.customer_details?.name ||
@@ -334,103 +386,141 @@ stripeWebhookApp.post('/', async (req, res) => {
       }
 
       // 🧩 Build final items array
-  // --- inside stripeWebhookApp.post('/', ... ) after you fetched lineItems ---
-const items = [];
-for (const li of lineItems.data) {
-  const priceId     = li.price?.id || '';
-  const unitAmount  = li.price?.unit_amount ?? null;
-  const productObj  = li.price?.product || {};
-  const pMeta       = productObj?.metadata || {};        // 👈 our metadata from product_data.metadata
-  const pDesc       = productObj?.description || '';     // "Color: X • Size: Y" we set earlier
-  const pImages     = Array.isArray(productObj?.images) ? productObj.images : [];
+      const items = [];
+      for (const li of lineItems.data) {
+        const priceId = li.price?.id || '';
+        const unitAmount = li.price?.unit_amount ?? null;
+        const productObj = li.price?.product || {};
+        const pMeta = productObj?.metadata || {}; // metadata we set in product_data.metadata
+        const pDesc = productObj?.description || ''; // "Color: X • Size: Y" we set earlier
+        const pImages = Array.isArray(productObj?.images)
+          ? productObj.images
+          : [];
 
-  // Try to match to snapshot (still useful for artisan etc.)
-  let matched =
-    (Array.isArray(snapshotProducts) ? snapshotProducts : []).find(
-      (p) => p.stripePriceId && p.stripePriceId === priceId
-    ) ||
-    (Array.isArray(snapshotProducts) ? snapshotProducts : []).find(
-      (p) => !p.stripePriceId && Math.round(Number(p.price || 0) * 100) === unitAmount
-    );
+        // Try to match to snapshot (still useful for artisan etc.)
+        let matched =
+          (Array.isArray(snapshotProducts) ? snapshotProducts : []).find(
+            (p) => p.stripePriceId && p.stripePriceId === priceId
+          ) ||
+          (Array.isArray(snapshotProducts) ? snapshotProducts : []).find(
+            (p) =>
+              !p.stripePriceId &&
+              Math.round(Number(p.price || 0) * 100) === unitAmount
+          );
 
-  // Price metadata fallback (for legacy Stripe saved prices)
-  let stripePriceMeta = { variantId: '', title: '', sku: '' };
-  try {
-    if (priceId) {
-      const priceObj = await stripe.prices.retrieve(priceId);
-      const md = priceObj?.metadata || {};
-      stripePriceMeta.variantId = md.variantId || '';
-      stripePriceMeta.title     = md.title || '';
-      stripePriceMeta.sku       = md.sku || '';
-    }
-  } catch (e) {
-    console.warn('⚠️ Could not retrieve Stripe Price metadata for', priceId, e.message);
-  }
+        // Price metadata fallback (for legacy Stripe saved prices)
+        let stripePriceMeta = { variantId: '', title: '', sku: '' };
+        try {
+          if (priceId) {
+            const priceObj = await stripe.prices.retrieve(priceId);
+            const md = priceObj?.metadata || {};
+            stripePriceMeta.variantId = md.variantId || '';
+            stripePriceMeta.title = md.title || '';
+            stripePriceMeta.sku = md.sku || '';
+          }
+        } catch (e) {
+          console.warn(
+            '⚠️ Could not retrieve Stripe Price metadata for',
+            priceId,
+            e.message
+          );
+        }
 
-  // Build variant (prefer metadata we set during session creation)
-  let variant = {
-    variantId: pMeta.variantId || '',
-    size:      pMeta.sizeName  || '',
-    color:     pMeta.colorName || '',
-    sku:       stripePriceMeta.sku   || '',
-    title:     stripePriceMeta.title || ''
-  };
+        // Build variant (prefer metadata we set during session creation)
+        let variant = {
+          variantId: pMeta.variantId || '',
+          size: pMeta.sizeName || '',
+          color: pMeta.colorName || '',
+          sku: stripePriceMeta.sku || '',
+          title: stripePriceMeta.title || '',
+        };
 
-  // If we matched snapshot and it’s merch, prefer the snapshot’s friendly names
-  if (matched?.category === 'merch') {
-    const cfg = matched.config || {};
-    variant.variantId = variant.variantId || (cfg.variantId ? String(cfg.variantId) : '');
-    variant.size      = variant.size      || (cfg.sizeName || cfg.size || cfg.Sizes || '');
-    variant.color     = variant.color     || (cfg.colorName || cfg.color || cfg.Colors || '');
-  } else if (matched) {
-    // artisan path
-    const cfg = matched.config || {};
-    variant = {
-      ...variant,
-      size:         variant.size || (cfg.size || ''),
-      color:        variant.color || (cfg.hardwareColor || ''),
-      lugQuantity:  cfg.lugQuantity || '',
-      staveQuantity:cfg.staveQuantity || '',
-      depth:        cfg.depth || '',
-      reRing:       typeof cfg.reRing !== 'undefined' ? (cfg.reRing ? 'Yes' : 'No') : ''
-    };
-  }
+        // If we matched snapshot and it’s merch, prefer the snapshot’s friendly names
+        if (matched?.category === 'merch') {
+          const cfg = matched.config || {};
+          variant.variantId =
+            variant.variantId || (cfg.variantId ? String(cfg.variantId) : '');
+          variant.size =
+            variant.size || cfg.sizeName || cfg.size || cfg.Sizes || '';
+          variant.color =
+            variant.color || cfg.colorName || cfg.color || cfg.Colors || '';
+        } else if (matched) {
+          // artisan path
+          const cfg = matched.config || {};
+          variant = {
+            ...variant,
+            size: variant.size || cfg.size || '',
+            color: variant.color || cfg.hardwareColor || '',
+            lugQuantity: cfg.lugQuantity || '',
+            staveQuantity: cfg.staveQuantity || '',
+            depth: cfg.depth || '',
+            reRing:
+              typeof cfg.reRing !== 'undefined'
+                ? cfg.reRing
+                  ? 'Yes'
+                  : 'No'
+                : '',
+          };
+        }
 
-  // Backfill from "Color: X • Size: Y" description if still missing
-  if ((!variant.color || !variant.size) && pDesc) {
-    const parts = pDesc.split('•').map(s => s.trim());
-    for (const part of parts) {
-      if (part.toLowerCase().startsWith('color:')) variant.color = variant.color || part.split(':')[1].trim();
-      if (part.toLowerCase().startsWith('size:'))  variant.size  = variant.size  || part.split(':')[1].trim();
-    }
-  }
+        // Backfill from "Color: X • Size: Y" description if still missing
+        if ((!variant.color || !variant.size) && pDesc) {
+          const parts = pDesc.split('•').map((s) => s.trim());
+          for (const part of parts) {
+            if (part.toLowerCase().startsWith('color:'))
+              variant.color = variant.color || part.split(':')[1].trim();
+            if (part.toLowerCase().startsWith('size:'))
+              variant.size = variant.size || part.split(':')[1].trim();
+          }
+        }
 
-  // As a last fallback, try the saved Price metadata title ("Black / L")
-  if ((!variant.color || !variant.size) && stripePriceMeta.title) {
-    const t = stripePriceMeta.title.split('/').map(s => s.trim());
-    if (!variant.color && t[0]) variant.color = t[0];
-    if (!variant.size  && t[t.length - 1]) variant.size = t[t.length - 1];
-  }
+        // As a last fallback, try the saved Price metadata title ("Black / L")
+        if ((!variant.color || !variant.size) && stripePriceMeta.title) {
+          const t = stripePriceMeta.title.split('/').map((s) => s.trim());
+          if (!variant.color && t[0]) variant.color = t[0];
+          if (!variant.size && t[t.length - 1]) variant.size = t[t.length - 1];
+        }
 
-  // Final fields (prefer snapshot, then product metadata)
-  const finalCategory = matched?.category || pMeta.category || '';
-  const finalProductId = matched?.productId || pMeta.productId || '';
-  const finalName = matched?.name || productObj?.name || li.description || 'Ober Product';
-  const finalImage = matched?.image || (pImages[0] || '');
+        // Final fields (prefer snapshot, then product metadata)
+        const finalCategory = matched?.category || pMeta.category || '';
+        const finalProductId = matched?.productId || pMeta.productId || '';
+        const finalName =
+          matched?.name || productObj?.name || li.description || 'Ober Product';
+        const finalImage = matched?.image || pImages[0] || '';
 
-  items.push({
-    priceId,
-    description: li.description, // Stripe’s own line description (usually the product name)
-    quantity: li.quantity,
-    price: (li.amount_total || 0) / 100,
-    name: finalName,
-    category: finalCategory,
-    productId: finalProductId,
-    image: finalImage,
-    variant
-  });
-}
+        items.push({
+          priceId,
+          description: li.description, // Stripe’s own line description (usually the product name)
+          quantity: li.quantity,
+          price: (li.amount_total || 0) / 100,
+          name: finalName,
+          category: finalCategory,
+          productId: finalProductId,
+          image: finalImage,
+          variant,
+        });
+      }
 
+      // 🔎 Identify the payment method used (card, klarna, afterpay_clearpay, etc.)
+      const pm = session.payment_intent?.payment_method || null; // expanded above via retrieve(..., { expand: ['payment_intent.payment_method'] })
+      const paymentMethodType = pm?.type || ''; // e.g., 'card', 'klarna', 'afterpay_clearpay'
+
+      // Normalize a couple of common details for convenience
+      let cardDetails = null;
+      if (paymentMethodType === 'card' && pm?.card) {
+        cardDetails = {
+          brand: pm.card.brand || '',
+          lastFour: pm.card.last4 || '',
+        };
+      }
+
+      // Optional: raw details object for non-card methods (Klarna won’t have card numbers)
+      const paymentMethodDetails =
+        paymentMethodType && pm && pm[paymentMethodType]
+          ? pm[paymentMethodType]
+          : null;
+
+      // ✅ Now build and persist the order
       const orderId = `ORD-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
 
       const orderDoc = {
@@ -442,8 +532,13 @@ for (const li of lineItems.data) {
         amountTotal: session.amount_total || 0,
         totalAmount: session.amount_total ? session.amount_total / 100 : 0,
         currency: session.currency || 'usd',
-        paymentMethod: '',
-        cardDetails: { brand: '', lastFour: '' },
+
+        // 🧾 Payment method info (dynamic methods-friendly)
+        paymentMethod: paymentMethodType, // 'card' | 'klarna' | 'afterpay_clearpay' | ...
+        cardDetails: cardDetails, // null unless it's a card
+        paymentMethodDetails: paymentMethodDetails, // raw details object for the method (optional)
+        stripePaymentStatus: session.payment_status || '', // 'paid' | 'unpaid' | 'no_payment_required'
+
         status: 'order successful',
         createdAt: admin.firestore.FieldValue.serverTimestamp(),
         userId: session.metadata?.userId || 'guest',
