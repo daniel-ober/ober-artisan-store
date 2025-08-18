@@ -16,6 +16,7 @@ const SoundLegendShowroom = () => {
   const handleLogoLoad = () => setLogoLoaded(true);
   const handleHeroLoad = () => setHeroLoaded(true);
 
+  // Fetch
   useEffect(() => {
     const fetchDrumData = async () => {
       try {
@@ -33,18 +34,33 @@ const SoundLegendShowroom = () => {
     window.scrollTo(0, 0);
   }, [serial]);
 
+  // ---- Build derived values with safe defaults (must be BEFORE any returns)
+  const name = drumData?.name ?? 'Unknown Drum';
+  const heroImage = drumData?.heroImage ?? null;
+  const gallery = Array.isArray(drumData?.gallery) ? drumData.gallery : [];
+  const story = drumData?.story ?? '';
+  const filteredGallery = gallery
+    .filter(Boolean)
+    .filter((u) => u !== heroImage)
+    .filter((u, i, arr) => arr.indexOf(u) === i);
+  const slideCount = filteredGallery.length;
+
+  // Keep modal index valid if data changes (always called)
+  useEffect(() => {
+    if (modalIndex !== null && slideCount > 0 && modalIndex >= slideCount) {
+      setModalIndex(0);
+    }
+  }, [modalIndex, slideCount]);
+
+  // Keyboard nav (always called)
   const handleKeyDown = useCallback(
     (e) => {
-      if (modalIndex === null) return;
+      if (modalIndex === null || slideCount === 0) return;
       if (e.key === 'Escape') setModalIndex(null);
-      if (e.key === 'ArrowRight')
-        setModalIndex((prev) => (prev + 1) % drumData.gallery.length);
-      if (e.key === 'ArrowLeft')
-        setModalIndex((prev) =>
-          prev === 0 ? drumData.gallery.length - 1 : prev - 1
-        );
+      if (e.key === 'ArrowRight') setModalIndex((prev) => (prev + 1) % slideCount);
+      if (e.key === 'ArrowLeft') setModalIndex((prev) => (prev - 1 + slideCount) % slideCount);
     },
-    [modalIndex, drumData]
+    [modalIndex, slideCount]
   );
 
   useEffect(() => {
@@ -52,6 +68,7 @@ const SoundLegendShowroom = () => {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [handleKeyDown]);
 
+  // Section fade-ins (always called)
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -81,22 +98,9 @@ const SoundLegendShowroom = () => {
     };
   }, []);
 
+  // ---- Now it’s safe to early-return UI (no hooks below this line)
   if (loading) return <div className="showroom-loading">Loading drum details...</div>;
   if (drumData?.notFound) return <div className="showroom-not-found">❌ Drum not found.</div>;
-
-  const {
-    name = 'Unknown Drum',
-    heroImage,
-    gallery = [],
-    specs = {},
-    story,
-    links = {},
-  } = drumData;
-
-  // ✅ Always run this — hides hero image from gallery
-  const filteredGallery = heroImage
-    ? gallery.filter((img) => img !== heroImage)
-    : gallery;
 
   return (
     <div className="soundlegend-showroom">
@@ -109,7 +113,7 @@ const SoundLegendShowroom = () => {
         ref={(el) => (sectionsRef.current[0] = el)}
       />
 
-      {/* Hero Section */}
+      {/* Hero */}
       <div
         className={`showroom-hero fade-in-section ${heroLoaded ? 'is-visible' : 'loading'}`}
         ref={(el) => (sectionsRef.current[1] = el)}
@@ -120,12 +124,13 @@ const SoundLegendShowroom = () => {
             alt={name}
             className="showroom-hero-image"
             onLoad={handleHeroLoad}
+            draggable={false}
           />
         )}
       </div>
 
       {/* Gallery */}
-      {filteredGallery.length > 0 && (
+      {slideCount > 0 && (
         <section
           className="showroom-gallery fade-in-section loading"
           ref={(el) => (sectionsRef.current[3] = el)}
@@ -133,11 +138,12 @@ const SoundLegendShowroom = () => {
           <div className="gallery-grid">
             {filteredGallery.map((img, i) => (
               <img
-                key={i}
+                key={img}
                 src={img}
-                alt={`${name} - ${i}`}
+                alt={`${name} - ${i + 1}`}
                 onClick={() => setModalIndex(i)}
                 className="gallery-thumb"
+                draggable={false}
               />
             ))}
           </div>
@@ -145,18 +151,13 @@ const SoundLegendShowroom = () => {
       )}
 
       {/* Modal */}
-      {modalIndex !== null && (
+      {modalIndex !== null && slideCount > 0 && (
         <div className="showroom-modal-overlay" onClick={() => setModalIndex(null)}>
-          <div
-            className="showroom-modal-content"
-            onClick={(e) => e.stopPropagation()}
-          >
+          <div className="showroom-modal-content" onClick={(e) => e.stopPropagation()}>
             <button className="showroom-modal-close" onClick={() => setModalIndex(null)}>✕</button>
             <button
               className="showroom-modal-prev"
-              onClick={() =>
-                setModalIndex(modalIndex === 0 ? filteredGallery.length - 1 : modalIndex - 1)
-              }
+              onClick={() => setModalIndex((modalIndex - 1 + slideCount) % slideCount)}
             >
               ‹
             </button>
@@ -164,10 +165,11 @@ const SoundLegendShowroom = () => {
               src={filteredGallery[modalIndex]}
               alt="Preview"
               className="showroom-modal-image"
+              draggable={false}
             />
             <button
               className="showroom-modal-next"
-              onClick={() => setModalIndex((modalIndex + 1) % filteredGallery.length)}
+              onClick={() => setModalIndex((modalIndex + 1) % slideCount)}
             >
               ›
             </button>
@@ -175,7 +177,7 @@ const SoundLegendShowroom = () => {
         </div>
       )}
 
-      {/* Story Section */}
+      {/* Story */}
       {story && (
         <section
           className="showroom-story elegant-font fade-in-section loading"
@@ -185,8 +187,8 @@ const SoundLegendShowroom = () => {
           <p className="legacy-subtitle">SoundLegend Legacy Artist ({serial.toUpperCase()})</p>
           <div
             className="showroom-story-content"
-            dangerouslySetInnerHTML={{ __html: drumData.story }}
-          ></div>
+            dangerouslySetInnerHTML={{ __html: story }}
+          />
         </section>
       )}
 
@@ -196,11 +198,7 @@ const SoundLegendShowroom = () => {
         ref={(el) => (sectionsRef.current[4] = el)}
       >
         <p>
-          This SoundLegend drum is digitally authenticated and part of an
-          exclusive artist series. While anyone is welcome to explore its legacy
-          here, SoundLegend artists enjoy a deeper connection — with private
-          access to their full build journey, behind-the-scenes content, and
-          exclusive perks through the SoundLegend online portal.
+          This SoundLegend drum is digitally authenticated and part of an exclusive artist series...
           <br /><br />
           <a href="/soundlegends/signin" className="portal-link">Sign in here</a>{' '}
           to access your portal, or{' '}
