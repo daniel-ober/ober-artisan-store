@@ -83,7 +83,8 @@
 .slvc-btn,
 .slvc-btnGhost,
 .slvc-btnPrimary,
-.slvc-btnSm {
+.slvc-btnSm,
+.slvc-removeBtn {
   border-radius: 10px;
   border: 1px solid var(--border-2);
   background: #212121;
@@ -111,7 +112,22 @@
   font-size: 12px;
   line-height: 1;
   border-radius: 8px;
+  background: #1f1f1f;
+  color: #ddd;
+  border: 1px solid #3a3a3a;
 }
+.slvc-btnSm:disabled { opacity: .5; cursor: not-allowed; }
+
+/* Delete buttons (both "Delete" and "Delete Now") */
+.slvc-removeBtn {
+  background: #2c1f1f;
+  border: 1px solid #6a2b2b;
+  color: #ffdddd;
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+.slvc-removeBtn:hover { background: #3a2626; border-color: #8a3535; }
 
 /* Hero */
 .slvc-hero { display: grid; grid-template-columns: 320px 1fr; gap: 16px; align-items: center; }
@@ -151,121 +167,68 @@
 }
 .slvc-index { opacity: .7; font-size: 12px; }
 
-.slvc-removeBtn {
-  position: absolute; top: 6px; right: 6px;
-  background: rgba(0,0,0,.65);
-  color: #fff;
-  border: 1px solid #444;
-  border-radius: 10px;
-  padding: 6px 8px;
-  cursor: pointer;
-  font-size: 12px;
+/* Audio rows */
+.slvc-audioRow {
+  background: #121317;
+  border: 1px solid #24262b;
+  border-radius: 12px;
+  padding: 12px;
+  margin-top: 10px;
 }
-.slvc-removeBtn:hover { background: rgba(0,0,0,.78); }
+.slvc-audioHr {
+  border-top: 1px dashed #2a2c31;
+  margin-top: 10px;
+}
+.slvc-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #cfd3d8;
+}
+.slvc-check input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #0b64d7;
+}
+
+/* Actions row at bottom of cards */
+.slvc-actions { display: flex; gap: 12px; justify-content: flex-end; margin: 18px 0 48px; }
 
 /* ===== Hard overrides to isolate the creator UI ===== */
 .slvc * { box-sizing: border-box; }
 
-/* Headings / labels — force left, full contrast */
 .slvc h1,
 .slvc h2,
 .slvc .slvc-label {
-  text-align: left !important;
-  color: #e5e7eb !important;   /* slate-200 */
-  opacity: 1 !important;
-  letter-spacing: 0 !important;
+  text-align: left;
+  color: #e5e7eb;
 }
 
 /* Panels */
 .slvc .slvc-card {
-  background: #141414 !important;
-  border-color: #2b2b2b !important;
-  box-shadow: none !important;
+  background: #141414;
+  border-color: #2b2b2b;
+  box-shadow: none;
 }
 
-/* Inputs */
+/* Inputs overrides */
 .slvc input,
 .slvc textarea,
 .slvc select {
-  background: #0f0f0f !important;
-  border: 1px solid #3a3a3a !important;
-  color: #f3f4f6 !important;   /* slate-100 */
-  border-radius: 10px !important;
-  height: 42px !important;
-  line-height: 1.15 !important;
-  text-align: left !important;
-  box-shadow: none !important;
+  background: #0f0f0f;
+  border: 1px solid #3a3a3a;
+  color: #f3f4f6;
+  border-radius: 10px;
+  height: 42px;
+  line-height: 1.15;
+  text-align: left;
 }
 .slvc input::placeholder,
-.slvc textarea::placeholder { color: #8b8b8b !important; }
-
+.slvc textarea::placeholder { color: #8b8b8b; }
 .slvc textarea {
-  height: auto !important;
-  min-height: 180px !important;
-  padding: 12px !important;
-  resize: vertical !important;
+  height: auto;
+  min-height: 180px;
+  padding: 12px;
+  resize: vertical;
 }
-
-/* Hero + gallery frames */
-.slvc .slvc-heroPreview { background: #0f0f0f !important; border-color: #333 !important; }
-.slvc .slvc-galleryItem { border-color: #2b2b2b !important; }
-
-/* Buttons */
-.slvc button {
-  border: 1px solid #333 !important;
-  background: #222 !important;
-  color: #fff !important;
-  box-shadow: none !important;
-}
-.slvc .slvc-btnPrimary {
-  background: #2563eb !important;
-  border-color: #1d4ed8 !important;
-  font-weight: 800 !important;
-}
-
-/* Layout spacing */
-.slvc .slvc-grid2 { gap: 14px !important; }
-.slvc .slvc-row { gap: 12px !important; }
-
-/* Ensure all text inside creator view is readable */
-.soundlegend-vault-creator {
-  color: #f5f5f5; /* Light text globally */
-}
-
-/* Make headings a bit bolder and brighter */
-.soundlegend-vault-creator h1,
-.soundlegend-vault-creator h2,
-.soundlegend-vault-creator h3,
-.soundlegend-vault-creator h4,
-.soundlegend-vault-creator h5 {
-  color: #ffffff;
-  font-weight: 600;
-}
-
-/* Labels for form fields */
-.soundlegend-vault-creator label {
-  color: #e0e0e0;
-  font-weight: 500;
-}
-
-/* Input + textarea text color */
-.soundlegend-vault-creator input,
-.soundlegend-vault-creator textarea,
-.soundlegend-vault-creator select {
-  color: #ffffff;
-  background-color: #1a1a1a;
-  border: 1px solid #333;
-}
-
-/* Placeholder text */
-.soundlegend-vault-creator input::placeholder,
-.soundlegend-vault-creator textarea::placeholder {
-  color: #aaaaaa;
-}
-
-/* Two-column fields */
-.slvc-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-@media (max-width: 720px) { .slvc-grid2 { grid-template-columns: 1fr; } }
-
-/* Footer actions */
-.slvc-actions { display: flex; gap: 12px; justify-content: flex-end; margin: 18px 0 48px; }
