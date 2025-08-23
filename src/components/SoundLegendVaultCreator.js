@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { db, storage } from "../firebaseConfig";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
 import "./SoundLegendVaultCreator.css";
 
 const FALLBACK_HERO = "/fallback-images/images-coming-soon-regular.png";
-const DOC_ID_REGEX = /^SL-\d{3}$/; // e.g., SL-000
+const DOC_ID_REGEX = /^SL-\d{3}$/; // e.g., SL-003
 const MAX_IMAGES = 9;
 
 const emptyLinks = { facebook: "", instagram: "", youtube: "", spotify: "", itunes: "" };
@@ -16,33 +16,45 @@ const emptySpecs = {
   shell: "",
   size: "",
   snareWires: "",
+  // NEW
+  fundamentalPitch: "",     // e.g., "A2 (110 Hz)"
+  legacyTuningNotes: "",    // freeform blurb about the reference tuning
 };
 
 export default function SoundLegendVaultCreator({ prefillId = "" }) {
-  // DIGITS ONLY (we display SL- prefix fixed)
+  // --- ID / doc
   const [serial3, setSerial3] = useState("");
   const docId = useMemo(() => `SL-${String(serial3 || "").padStart(3, "0")}`, [serial3]);
 
+  // --- Form fields
   const [name, setName] = useState("");
   const [links, setLinks] = useState({ ...emptyLinks });
   const [specs, setSpecs] = useState({ ...emptySpecs });
   const [story, setStory] = useState("");
 
-  // Gallery items: { id, file?, url, isHero? }
+  // --- Gallery (local preview + persisted URLs)
+  // item: { id, file?, url, isHero? }
   const [gallery, setGallery] = useState([]);
-  // Persist the hero URL that existed in Firestore when we loaded (used to preserve if user doesn't change hero)
   const [existingHeroUrl, setExistingHeroUrl] = useState("");
 
+  // --- Audio samples
+  // row: { id, title, description, url, file?, cueStart, cueEnd, storagePath?, visible, variant? }
+  const [audioSamples, setAudioSamples] = useState([]);
+
+  // queue of storage paths to delete after successful Save()
+  const [audioDeleteQueue, setAudioDeleteQueue] = useState([]);
+
+  // immediate delete state
+  const [deletingIdx, setDeletingIdx] = useState(null);
+
+  // misc
   const [saving, setSaving] = useState(false);
   const [loadingExisting, setLoadingExisting] = useState(false);
   const fileInputRef = useRef(null);
 
-  const remainingSlots = useMemo(
-    () => Math.max(0, MAX_IMAGES - gallery.length),
-    [gallery.length]
-  );
+  // --- helpers
+  const remainingSlots = Math.max(0, MAX_IMAGES - gallery.length);
 
-  // digits only, max 3
   const onChangeDigits = (val) => {
     const digits = String(val).replace(/\D/g, "").slice(0, 3);
     setSerial3(digits);
@@ -58,7 +70,6 @@ export default function SoundLegendVaultCreator({ prefillId = "" }) {
     }));
     setGallery((g) => [...g, ...toAdd]);
   };
-
   const onPickGallery = (e) => addGalleryFiles(e.target.files);
 
   // drag sort
@@ -84,11 +95,7 @@ export default function SoundLegendVaultCreator({ prefillId = "" }) {
     setGallery((g) => {
       const wasHero = g[idx]?.isHero;
       const next = g.filter((_, i) => i !== idx);
-      // If we removed the hero, don't auto-pick a new hero here; preview will show fallback unless user sets a new one.
-      if (wasHero) {
-        return next.map((it) => ({ ...it, isHero: false }));
-      }
-      return next;
+      return wasHero ? next.map((it) => ({ ...it, isHero: false })) : next;
     });
 
   const moveUp = (idx) =>
@@ -113,6 +120,110 @@ export default function SoundLegendVaultCreator({ prefillId = "" }) {
   const updateLink = (key, val) => setLinks((l) => ({ ...l, [key]: val }));
   const updateSpec = (key, val) => setSpecs((s) => ({ ...s, [key]: val }));
 
+  // --- AUDIO: row ops
+  const addEmptyAudioRow = () => {
+    setAudioSamples((rows) => [
+      ...rows,
+      {
+        id: `${Date.now()}-${Math.random().toString(36).slice(2)}`,
+        title: "",
+        description: "",
+        url: "",
+        cueStart: "",
+        cueEnd: "",
+        storagePath: "",
+        visible: true,
+        variant: "other", // NEW (legacy | adjacent-low | adjacent-high | other)
+      },
+    ]);
+  };
+
+  const removeAudioRow = (idx) =>
+    setAudioSamples((rows) => {
+      const row = rows[idx];
+      if (row?.storagePath) {
+        // schedule the current blob for deletion on Save
+        setAudioDeleteQueue((q) => [...q, row.storagePath]);
+      }
+      return rows.filter((_, i) => i !== idx);
+    });
+
+  const moveAudioUp = (idx) =>
+    setAudioSamples((rows) => {
+      if (idx === 0) return rows;
+      const copy = [...rows];
+      [copy[idx - 1], copy[idx]] = [copy[idx], copy[idx - 1]];
+      return copy;
+    });
+
+  const moveAudioDown = (idx) =>
+    setAudioSamples((rows) => {
+      if (idx === rows.length - 1) return rows;
+      const copy = [...rows];
+      [copy[idx + 1], copy[idx]] = [copy[idx], copy[idx + 1]];
+      return copy;
+    });
+
+  const updateAudioField = (idx, key, val) =>
+    setAudioSamples((rows) => {
+      const copy = [...rows];
+      copy[idx] = { ...copy[idx], [key]: val };
+      return copy;
+    });
+
+  // immediate delete (Storage + Firestore) for a specific row
+  const trimAudioForFirestore = (a) => ({
+    title: a.title?.trim() || "",
+    description: a.description?.trim() || "",
+    url: a.url || "",
+    storagePath: a.storagePath || "",
+    cueStart: Number(a.cueStart || 0),
+    cueEnd: Number(a.cueEnd || 0),
+    visible: a.visible !== false,
+    variant: a.variant || "other",
+  });
+
+  const deleteAudioNow = async (idx) => {
+    const row = audioSamples[idx];
+    if (!row) return;
+    const label = row.title || `Sample ${idx + 1}`;
+    if (
+      !window.confirm(
+        `Delete "${label}" now?\n\nThis will remove the file from Storage (if any) and update Firestore immediately.`
+      )
+    ) {
+      return;
+    }
+
+    setDeletingIdx(idx);
+    try {
+      if (row.storagePath) {
+        try {
+          await deleteObject(ref(storage, row.storagePath));
+        } catch (e) {
+          console.warn("Storage delete failed (continuing):", e);
+        }
+      }
+
+      const next = audioSamples.filter((_, i) => i !== idx);
+      setAudioSamples(next);
+
+      await setDoc(
+        doc(db, "soundlegend_showroom", docId),
+        { audioSamples: next.map(trimAudioForFirestore) },
+        { merge: true }
+      );
+
+      alert("Audio deleted.");
+    } catch (err) {
+      console.error(err);
+      alert(`Delete failed: ${err?.message || "Unknown error"}`);
+    } finally {
+      setDeletingIdx(null);
+    }
+  };
+
+  // --- validation, upload helpers
   const validate = () => {
     const errors = [];
     if (!DOC_ID_REGEX.test(docId)) errors.push("ID must match format SL-000 (e.g., SL-007).");
@@ -124,10 +235,11 @@ export default function SoundLegendVaultCreator({ prefillId = "" }) {
 
   const uploadToStorage = async (path, file) => {
     const r = ref(storage, path);
-    await uploadBytes(r, file);
+    await uploadBytes(r, file, { contentType: file.type || undefined });
     return await getDownloadURL(r);
   };
 
+  // --- SAVE
   const save = async () => {
     const errors = validate();
     if (errors.length) {
@@ -137,17 +249,17 @@ export default function SoundLegendVaultCreator({ prefillId = "" }) {
 
     setSaving(true);
     try {
-      // quick sanity write
+      // sanity write (perm check)
       try {
         await setDoc(doc(db, "__sanity_checks", "can_write"), { t: Date.now() }, { merge: true });
-      } catch (e) {
+      } catch {
         alert("Firestore write blocked (rules/auth). Are you signed in as admin?");
         return;
       }
 
-      // Upload gallery files in order; keep remote URLs as-is
+      // 1) Gallery upload
       const uploadedUrls = [];
-      let heroIndex = gallery.findIndex((g) => g.isHero);
+      const heroIndex = gallery.findIndex((g) => g.isHero);
 
       for (let i = 0; i < gallery.length; i++) {
         const item = gallery[i];
@@ -159,31 +271,54 @@ export default function SoundLegendVaultCreator({ prefillId = "" }) {
           );
           uploadedUrls.push(url);
         } else {
-          // Existing remote URL or objectURL (when editing but not reuploading)
           uploadedUrls.push(item.url);
         }
       }
 
-      // Determine heroImage URL with robust fallback/preserve behavior
-      let heroImageUrl = null;
+      let heroImageUrl;
+      if (heroIndex >= 0) heroImageUrl = uploadedUrls[heroIndex] || null;
+      else if (existingHeroUrl && uploadedUrls.includes(existingHeroUrl)) heroImageUrl = existingHeroUrl;
+      else if (uploadedUrls.length > 0) heroImageUrl = uploadedUrls[0];
+      else heroImageUrl = FALLBACK_HERO;
 
-      if (heroIndex >= 0) {
-        // Hero explicitly selected now
-        heroImageUrl = uploadedUrls[heroIndex] || null;
-      } else if (existingHeroUrl && uploadedUrls.includes(existingHeroUrl)) {
-        // Preserve previously stored hero if it's still in gallery and user didn't change it
-        heroImageUrl = existingHeroUrl;
-      } else if (uploadedUrls.length > 0) {
-        // Default: first image becomes hero to avoid unintended fallback
-        heroImageUrl = uploadedUrls[0];
-      } else {
-        // No images at all -> fallback
-        heroImageUrl = FALLBACK_HERO;
+      // 2) Audio upload + replacement queue
+      const uploadedAudio = [];
+      const localDeleteQueue = [...audioDeleteQueue]; // rows removed with pending blobs
+
+      for (let i = 0; i < audioSamples.length; i++) {
+        const row = audioSamples[i];
+        let finalUrl = row.url?.trim() || "";
+        let storagePath = row.storagePath || "";
+
+        if (row.file) {
+          // if replacing, queue old blob for deletion
+          if (row.storagePath) localDeleteQueue.push(row.storagePath);
+
+          const ext = (row.file.name?.split(".").pop() || "wav").toLowerCase();
+          const safe = row.file.name?.replace(/\s+/g, "_") || `sample_${Date.now()}_${i}.${ext}`;
+          const path = `soundlegend_showroom/${docId}/audio/${i}-${safe}`;
+          const r = ref(storage, path);
+          await uploadBytes(r, row.file, { contentType: row.file.type || `audio/${ext}` });
+          finalUrl = await getDownloadURL(r);
+          storagePath = path;
+        }
+
+        uploadedAudio.push({
+          title: row.title?.trim() || `Sample ${i + 1}`,
+          description: row.description?.trim() || "",
+          url: finalUrl,
+          storagePath,
+          cueStart: Number(row.cueStart || 0),
+          cueEnd: Number(row.cueEnd || 0),
+          visible: row.visible !== false,
+          variant: row.variant || "other",
+        });
       }
 
+      // 3) Write Firestore (note the NEW specs fields)
       const payload = {
         heroImage: heroImageUrl || FALLBACK_HERO,
-        gallery: uploadedUrls, // in drag-sorted order
+        gallery: uploadedUrls,
         links: {
           facebook: links.facebook?.trim() || "",
           instagram: links.instagram?.trim() || "",
@@ -199,14 +334,28 @@ export default function SoundLegendVaultCreator({ prefillId = "" }) {
           shell: specs.shell?.trim() || "",
           size: specs.size?.trim() || "",
           snareWires: specs.snareWires?.trim() || "",
+          fundamentalPitch: specs.fundamentalPitch?.trim() || "",
+          legacyTuningNotes: specs.legacyTuningNotes?.trim() || "",
         },
         story: story || "",
+        audioSamples: uploadedAudio,
       };
 
       await setDoc(doc(db, "soundlegend_showroom", docId), payload, { merge: true });
+
+      // 4) After successful write, delete queued blobs
+      for (const p of localDeleteQueue) {
+        try {
+          await deleteObject(ref(storage, p));
+        } catch (e) {
+          console.warn("Could not delete old audio blob:", p, e);
+        }
+      }
+      setAudioDeleteQueue([]);
+
       alert(`Saved ✅  Document ID: ${docId}`);
 
-      // Update local state after save (normalize URLs back into gallery with hero flag)
+      // 5) Normalize local state
       setGallery(
         uploadedUrls.map((url, i) => ({
           id: `${Date.now()}-${i}`,
@@ -215,6 +364,7 @@ export default function SoundLegendVaultCreator({ prefillId = "" }) {
         }))
       );
       setExistingHeroUrl(heroImageUrl || FALLBACK_HERO);
+      setAudioSamples(uploadedAudio);
     } catch (err) {
       console.error(err);
       alert(`Save failed: ${err?.message || "Unknown error"}. See console.`);
@@ -223,6 +373,7 @@ export default function SoundLegendVaultCreator({ prefillId = "" }) {
     }
   };
 
+  // --- Load existing
   const fetchAndPopulate = useCallback(async (id) => {
     if (!/^(SL-\d{3})$/i.test(id)) {
       alert("Enter a valid ID (e.g., SL-003) to load.");
@@ -236,8 +387,10 @@ export default function SoundLegendVaultCreator({ prefillId = "" }) {
         return;
       }
       const data = snap.data();
+
       setName(data.name || "");
       setLinks({ ...emptyLinks, ...(data.links || {}) });
+      // merge NEW spec fields safely
       setSpecs({ ...emptySpecs, ...(data.specs || {}) });
       setStory(data.story || "");
 
@@ -248,11 +401,25 @@ export default function SoundLegendVaultCreator({ prefillId = "" }) {
         ? data.gallery.map((url, i) => ({
             id: `${Date.now()}-${i}`,
             url,
-            isHero: url === hero, // mark existing hero
+            isHero: url === hero,
           }))
         : [];
-
       setGallery(gal);
+
+      const incoming = Array.isArray(data.audioSamples) ? data.audioSamples : [];
+      setAudioSamples(
+        incoming.map((a, i) => ({
+          id: `${Date.now()}-${i}`,
+          title: a.title || "",
+          description: a.description || "",
+          url: a.url || "",
+          storagePath: a.storagePath || "",
+          cueStart: a.cueStart ?? "",
+          cueEnd: a.cueEnd ?? "",
+          visible: a.visible !== false,
+          variant: a.variant || "other",
+        }))
+      );
 
       const m = id.match(/^SL-(\d{3})$/i);
       if (m) setSerial3(m[1]);
@@ -277,6 +444,7 @@ export default function SoundLegendVaultCreator({ prefillId = "" }) {
     }
   }, [prefillId, fetchAndPopulate]);
 
+  // --- clear form
   const clearForm = () => {
     setName("");
     setLinks({ ...emptyLinks });
@@ -285,23 +453,24 @@ export default function SoundLegendVaultCreator({ prefillId = "" }) {
     setGallery([]);
     setExistingHeroUrl("");
     setSerial3("");
+    setAudioSamples([]);
+    setAudioDeleteQueue([]);
   };
 
-  // Derived hero preview (do not persist fallback; display-only)
+  // --- Derived hero preview
   const heroPreviewUrl = useMemo(() => {
     const selected = gallery.find((g) => g.isHero)?.url;
     if (selected) return selected;
-    // if no selected hero, show existingHeroUrl if present in gallery (still loaded)
     if (existingHeroUrl && gallery.some((g) => g.url === existingHeroUrl)) return existingHeroUrl;
-    // else fallback
     return FALLBACK_HERO;
   }, [gallery, existingHeroUrl]);
 
+  // --- render
   return (
     <div className="slvc">
       <h1>SoundLegend Vault — Create/Update Showroom</h1>
 
-      {/* ID + actions */}
+      {/* ID */}
       <div className="slvc-card">
         <label className="slvc-label">
           Document ID <span className="slvc-label-muted">(format SL-000)</span>
@@ -339,7 +508,7 @@ export default function SoundLegendVaultCreator({ prefillId = "" }) {
         </div>
       </div>
 
-      {/* Hero Preview (derived) */}
+      {/* Hero */}
       <div className="slvc-card">
         <h2>Hero Image</h2>
         <div className="slvc-hero">
@@ -355,7 +524,6 @@ export default function SoundLegendVaultCreator({ prefillId = "" }) {
           </div>
           <div className="slvc-hint">
             The hero is chosen from your gallery below. Click “Set as Hero” on any image to change it.
-            (If you don’t select one, your previously saved hero is preserved.)
           </div>
         </div>
       </div>
@@ -410,7 +578,7 @@ export default function SoundLegendVaultCreator({ prefillId = "" }) {
                   <button className="slvc-btnSm" onClick={() => moveDown(idx)}>↓</button>
                 </div>
 
-                <div className="slvc-galleryActions">
+                <div className="slvc-galleryActions" style={{ display: "flex", gap: 8, padding: 8 }}>
                   <button
                     className={`slvc-btnSm ${item.isHero ? "slvc-btnPrimary" : ""}`}
                     onClick={() => setAsHero(idx)}
@@ -456,59 +624,157 @@ export default function SoundLegendVaultCreator({ prefillId = "" }) {
       <div className="slvc-card">
         <h2>Specs</h2>
         <div className="slvc-grid2">
-          <LabeledInput
-            label="Bearing Edges"
-            value={specs.bearingEdges}
-            onChange={(v) => updateSpec("bearingEdges", v)}
-            placeholder="e.g., 45° Inner / Rounded Outer"
-          />
-          <LabeledInput
-            label="Finish"
-            value={specs.finish}
-            onChange={(v) => updateSpec("finish", v)}
-            placeholder="e.g., Mappa Burl Poly Gloss"
-          />
-          <LabeledInput
-            label="Hardware"
-            value={specs.hardware}
-            onChange={(v) => updateSpec("hardware", v)}
-            placeholder="e.g., Brass/Gold Diecast Hoops, Vintage Tube Lugs"
-          />
-          <LabeledInput
-            label="Shell"
-            value={specs.shell}
-            onChange={(v) => updateSpec("shell", v)}
-            placeholder="e.g., Birch + Cherry Stave"
-          />
-          <LabeledInput
-            label="Size"
-            value={specs.size}
-            onChange={(v) => updateSpec("size", v)}
-            placeholder="e.g., 14x5"
-          />
-          <LabeledInput
-            label="Snare Wires"
-            value={specs.snareWires}
-            onChange={(v) => updateSpec("snareWires", v)}
-            placeholder="e.g., Puresound Custom 20-strand"
-          />
+          <LabeledInput label="Bearing Edges" value={specs.bearingEdges} onChange={(v) => updateSpec("bearingEdges", v)} placeholder="e.g., 45° Inner / Rounded Outer" />
+          <LabeledInput label="Finish"        value={specs.finish}        onChange={(v) => updateSpec("finish", v)}        placeholder="e.g., Mappa Burl Poly Gloss" />
+          <LabeledInput label="Hardware"      value={specs.hardware}      onChange={(v) => updateSpec("hardware", v)}      placeholder="e.g., Brass/Gold Diecast Hoops, Vintage Tube Lugs" />
+          <LabeledInput label="Shell"         value={specs.shell}         onChange={(v) => updateSpec("shell", v)}         placeholder="e.g., Birch + Cherry Stave" />
+          <LabeledInput label="Size"          value={specs.size}          onChange={(v) => updateSpec("size", v)}          placeholder="e.g., 14x5" />
+          <LabeledInput label="Snare Wires"   value={specs.snareWires}    onChange={(v) => updateSpec("snareWires", v)}    placeholder="e.g., Puresound Custom 20-strand" />
+          {/* NEW fields */}
+          <LabeledInput label="Fundamental Pitch" value={specs.fundamentalPitch} onChange={(v) => updateSpec("fundamentalPitch", v)} placeholder='e.g., A2 (110 Hz)' />
+          <LabeledInput label="Legacy Tuning Notes" value={specs.legacyTuningNotes} onChange={(v) => updateSpec("legacyTuningNotes", v)} placeholder="Short blurb about the drum’s reference tuning" />
         </div>
       </div>
 
-      {/* Story */}
+      {/* AUDIO */}
       <div className="slvc-card">
-        <h2>
-          Story <span className="slvc-label-muted">(HTML allowed)</span>
-        </h2>
-        <textarea
-          className="slvc-textarea"
-          value={story}
-          onChange={(e) => setStory(e.target.value)}
-          placeholder="<p>Your story...</p>"
-          rows={12}
-        />
+        <h2>Audio Samples <span className="slvc-label-muted">(optional)</span></h2>
         <div className="slvc-hint">
-          Paste HTML (e.g., paragraphs, lists). It will be stored as-is in <code>story</code>.
+          Mark which clip represents the drum’s <b>Legacy</b> (reference) tuning. Others can be adjacent (low/high) or miscellaneous.
+        </div>
+
+        {audioSamples.length === 0 ? (
+          <div className="slvc-empty">No audio yet. Click “+ Add Audio Sample”.</div>
+        ) : null}
+
+        {audioSamples.map((row, idx) => (
+          <div key={row.id} className="slvc-audioRow">
+            <div className="slvc-grid2">
+              <div className="slvc-field">
+                <label className="slvc-label">Title</label>
+                <input
+                  className="slvc-input"
+                  value={row.title}
+                  onChange={(e) => updateAudioField(idx, "title", e.target.value)}
+                  placeholder={`e.g., Legacy Tuning — Rimshots (${idx + 1})`}
+                />
+              </div>
+
+              {/* NEW: Variant */}
+              <div className="slvc-field">
+                <label className="slvc-label">Variant</label>
+                <select
+                  className="slvc-input"
+                  value={row.variant || "other"}
+                  onChange={(e) => updateAudioField(idx, "variant", e.target.value)}
+                >
+                  <option value="legacy">Legacy (reference)</option>
+                  <option value="adjacent-low">Adjacent — Low</option>
+                  <option value="adjacent-high">Adjacent — High</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="slvc-grid2">
+              <div className="slvc-field">
+                <label className="slvc-label">Cue Start / End (seconds)</label>
+                <div className="slvc-row slvc-row--gap">
+                  <input
+                    className="slvc-input"
+                    type="number"
+                    min="0"
+                    value={row.cueStart}
+                    onChange={(e) => updateAudioField(idx, "cueStart", e.target.value)}
+                    placeholder="e.g., 12.5"
+                  />
+                  <input
+                    className="slvc-input"
+                    type="number"
+                    min="0"
+                    value={row.cueEnd}
+                    onChange={(e) => updateAudioField(idx, "cueEnd", e.target.value)}
+                    placeholder="e.g., 19.8"
+                  />
+                </div>
+              </div>
+
+              <div className="slvc-field">
+                <label className="slvc-label">Description <span className="slvc-label-muted">(optional)</span></label>
+                <input
+                  className="slvc-input"
+                  value={row.description}
+                  onChange={(e) => updateAudioField(idx, "description", e.target.value)}
+                  placeholder="e.g., Natural rimshot crack with musical decay"
+                />
+              </div>
+            </div>
+
+            <div className="slvc-grid2">
+              <div className="slvc-field">
+                <label className="slvc-label">External URL <span className="slvc-label-muted">(https://…)</span></label>
+                <input
+                  className="slvc-input"
+                  value={row.url}
+                  onChange={(e) => updateAudioField(idx, "url", e.target.value)}
+                  placeholder="Paste a direct audio file URL (mp3/m4a/wav)…"
+                />
+              </div>
+              <div className="slvc-field">
+                <label className="slvc-label">Or Upload File</label>
+                <input
+                  type="file"
+                  accept="audio/*"
+                  onChange={(e) => {
+                    const f = e.target.files?.[0];
+                    if (!f) return;
+                    updateAudioField(idx, "file", f); // replacement (old blob gets queued on Save)
+                  }}
+                />
+              </div>
+            </div>
+
+            {/* controls */}
+            <div className="slvc-row slvc-row--space">
+              <label className="slvc-check">
+                <input
+                  type="checkbox"
+                  checked={row.visible !== false}
+                  onChange={(e) => updateAudioField(idx, "visible", e.target.checked)}
+                />
+                <span>Show on site</span>
+              </label>
+
+              <div className="slvc-row slvc-row--gap">
+                <button className="slvc-btnSm" onClick={() => moveAudioUp(idx)} disabled={idx === 0}>↑</button>
+                <div className="slvc-index">#{idx + 1}</div>
+                <button className="slvc-btnSm" onClick={() => moveAudioDown(idx)} disabled={idx === audioSamples.length - 1}>↓</button>
+
+                {/* Remove locally (deletes blob on Save) */}
+                <button className="slvc-removeBtn" onClick={() => removeAudioRow(idx)}>
+                  Delete
+                </button>
+
+                {/* Delete Storage + Firestore immediately */}
+                <button
+                  className="slvc-removeBtn"
+                  onClick={() => deleteAudioNow(idx)}
+                  disabled={deletingIdx === idx}
+                  title={row.storagePath ? "Delete file from Storage and Firestore now" : "Remove from Firestore now"}
+                >
+                  {deletingIdx === idx ? "Deleting…" : "Delete Now"}
+                </button>
+              </div>
+            </div>
+
+            <div className="slvc-audioHr" />
+          </div>
+        ))}
+
+        <div className="slvc-actions">
+          <button className="slvc-btn" type="button" onClick={addEmptyAudioRow}>
+            + Add Audio Sample
+          </button>
         </div>
       </div>
 
@@ -526,7 +792,7 @@ export default function SoundLegendVaultCreator({ prefillId = "" }) {
   );
 }
 
-/* small helper control */
+/* helper */
 function LabeledInput({ label, value, onChange, placeholder }) {
   return (
     <div className="slvc-field">
