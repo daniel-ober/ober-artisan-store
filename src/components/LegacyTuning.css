@@ -1,0 +1,56 @@
+/* src/components/LegacyTuning.css */
+.lt-section { margin: 0 auto 16px; max-width: 980px; }
+.sl-h2 { text-align: center; opacity: .95; margin-bottom: 12px; letter-spacing: .02em; }
+
+.lt-pill{
+  margin: 0 auto 8px;
+  display:inline-block;
+  background: rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+  padding:6px 10px; border-radius:999px; font-weight:700; letter-spacing:.02em;
+}
+
+.lt-ruler{
+  position:relative;
+  height:72px;
+  margin: 8px 0 6px;
+}
+.lt-tick{
+  position:absolute; top:0; transform:translateX(-50%); text-align:center; pointer-events:none;
+}
+.lt-tick-line{ width:2px; height:10px; background: rgba(255,255,255,.25); margin:0 auto 4px; }
+.lt-tick-label{ font-size:.8rem; opacity:.75; }
+
+.lt-full{
+  position:absolute; top:28px; height:16px;
+  background: rgba(40,180,120,.28);
+  border:1px solid rgba(40,180,120,.55);
+  border-radius: 10px;
+}
+
+.lt-band{
+  position:absolute; top:30px; height:10px; border-radius:999px; opacity:.95;
+}
+.lt-band.low    { background: rgba(  0,184,124,.35); }
+.lt-band.legacy { background: rgba(255,204,  0,.45); box-shadow: 0 0 0 1px rgba(255,204,0,.55) inset; }
+.lt-band.high   { background: rgba( 64,129,255,.35); }
+
+.lt-marker{
+  position:absolute; top:12px; transform: translateX(-50%);
+}
+.lt-marker.star{ color:#ffcc00; font-size:22px; text-shadow: 0 0 6px rgba(0,0,0,.6); }
+.lt-marker.dot{ width:12px; height:12px; border-radius:50%; background:#9be7a0; }
+.lt-marker.dot.low{  background:#00b87c; }
+.lt-marker.dot.high{ background:#4081ff; }
+
+.lt-legend{ display:flex; gap:10px; justify-content:center; margin: 6px 0 8px; }
+.chip{
+  display:inline-flex; align-items:center; gap:8px; padding:6px 10px;
+  border-radius:999px; border:1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.06); font-weight:700; letter-spacing:.02em;
+}
+.chip.range  { box-shadow: inset 0 0 0 12px rgba(40,180,120,.24); }
+.chip.spot   { box-shadow: inset 0 0 0 12px rgba(255,255,255,.10); }
+.chip.legacy { box-shadow: inset 0 0 0 12px rgba(255,204,0,.28); }
+
+.lt-notes{ text-align:center; margin-top:6px; opacity:.95; font-weight:700; }

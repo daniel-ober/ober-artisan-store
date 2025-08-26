@@ -1,9 +1,41 @@
-import React, { useEffect, useState, useCallback, useRef } from 'react';
+import React, {
+  useEffect,
+  useState,
+  useRef,
+  useCallback,
+  useLayoutEffect,
+} from 'react';
 import { useParams } from 'react-router-dom';
 import { db } from '../firebaseConfig';
 import { doc, getDoc } from 'firebase/firestore';
+import LegacyTuning from '../components/LegacyTuning';
+import { computeBandsFromSpec } from '../utils/tuningMath';
 import './SoundLegendShowroom.css';
+import LegacyTuningChart from '../components/LegacyTuningChart';
 
+/* =============== helpers =============== */
+const parseLegacyHzRange = (txt = '') => {
+  const m = txt
+    .replace(/[–—]/g, '-')
+    .match(/(\d+(?:\.\d+)?)\s*-\s*(\d+(?:\.\d+)?)\s*hz/i);
+  return m ? { lowHz: Number(m[1]), highHz: Number(m[2]) } : null;
+};
+const parseFundamentalHz = (txt = '') => {
+  const m = String(txt).match(/(\d+(?:\.\d+)?)\s*hz/i);
+  return m ? Number(m[1]) : null;
+};
+const labelForVariant = (v) => {
+  switch ((v || '').toLowerCase()) {
+    case 'legacy':
+      return 'Legacy Tuning';
+    case 'adjacent-low':
+      return 'Lower Tuning';
+    case 'adjacent-high':
+      return 'Higher Tuning';
+    default:
+      return 'Other';
+  }
+};
 function guessMime(url = '') {
   const u = url.toLowerCase().split('?')[0];
   if (u.endsWith('.mp3')) return 'audio/mpeg';
@@ -14,20 +46,40 @@ function guessMime(url = '') {
   return '';
 }
 
+/** Return a snapshot only if it is explicitly published */
+function getPublishedSnapshot(d) {
+  const top = d?.publishedSnapshot;
+  if (top && String(top.status).toLowerCase() === 'published') return top;
+
+  const prism = d?.soundprism?.publishedSnapshot;
+  if (prism && String(prism.status).toLowerCase() === 'published') return prism;
+
+  // nothing published
+  return null;
+}
+
+/* =============== audio card (unchanged) =============== */
 function AudioSampleCard({ sample, index, onAnyPlay }) {
-  const { title, url, description, cueStart = 0, cueEnd = 0 } = sample || {};
+  const {
+    title,
+    url,
+    description,
+    cueStart = 0,
+    cueEnd = 0,
+    variant,
+  } = sample || {};
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [cur, setCur] = useState(0);
   const [dur, setDur] = useState(0);
   const [errText, setErrText] = useState('');
-  const start = Number(cueStart) || 0;
   const [loadedOnce, setLoadedOnce] = useState(false);
+  const start = Number(cueStart) || 0;
 
   useEffect(() => {
     const handler = (e) => {
       if (e.detail?.index !== index && isPlaying) {
-        if (audioRef.current) audioRef.current.pause();
+        audioRef.current?.pause();
         setIsPlaying(false);
       }
     };
@@ -46,19 +98,13 @@ function AudioSampleCard({ sample, index, onAnyPlay }) {
     const el = audioRef.current;
     if (!el) return;
     setDur(el.duration || 0);
-    if (
-      !loadedOnce &&
-      start > 0 &&
-      isFinite(start) &&
-      start < (el.duration || start + 0.1)
-    ) {
+    if (!loadedOnce && start > 0 && start < (el.duration || start + 0.1)) {
       try {
         el.currentTime = start;
       } catch {}
     }
     setLoadedOnce(true);
   };
-
   const onTimeUpdate = () => {
     const el = audioRef.current;
     if (!el) return;
@@ -71,13 +117,10 @@ function AudioSampleCard({ sample, index, onAnyPlay }) {
       setCur(el.currentTime);
     }
   };
-
   const onEnded = () => {
     setIsPlaying(false);
-    const el = audioRef.current;
-    if (el && start) el.currentTime = start;
+    if (audioRef.current && start) audioRef.current.currentTime = start;
   };
-
   const onError = () => {
     const el = audioRef.current;
     let msg = 'Audio failed to load.';
@@ -89,7 +132,6 @@ function AudioSampleCard({ sample, index, onAnyPlay }) {
         4: 'Unsupported audio format or MIME type.',
       };
       msg = codes[el.error.code] || msg;
-      console.error('Audio error', { code: el.error.code, msg, sample });
     }
     setErrText(msg + ' Please use mp3/m4a/wav/ogg.');
     setDur(0);
@@ -118,8 +160,7 @@ function AudioSampleCard({ sample, index, onAnyPlay }) {
       await el.play();
       setIsPlaying(true);
       onAnyPlay?.(index, true);
-    } catch (e) {
-      console.warn('Audio play() rejected:', e);
+    } catch {
       setErrText(
         'Unable to start playback. Check format and that the file loaded.'
       );
@@ -135,8 +176,7 @@ function AudioSampleCard({ sample, index, onAnyPlay }) {
 
   const onScrub = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const r = Math.max(0, Math.min(1, x / rect.width));
+    const r = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
     const t = start + r * span;
     if (audioRef.current) {
       try {
@@ -145,6 +185,10 @@ function AudioSampleCard({ sample, index, onAnyPlay }) {
       setCur(t);
     }
   };
+
+  const showSnareHeader = ['legacy', 'adjacent-low', 'adjacent-high'].includes(
+    variant || ''
+  );
 
   return (
     <div className="sl-audio-card">
@@ -189,6 +233,7 @@ function AudioSampleCard({ sample, index, onAnyPlay }) {
         </button>
 
         <div className="sl-audio-meta">
+          {showSnareHeader && <div className="sl-snare-h">Wire tension</div>}
           <div className="sl-audio-title">{title || `Sample ${index + 1}`}</div>
           {description ? (
             <div className="sl-audio-desc">{description}</div>
@@ -217,24 +262,39 @@ function AudioSampleCard({ sample, index, onAnyPlay }) {
   );
 }
 
+/* =============== page =============== */
 const SoundLegendShowroom = () => {
   const params = useParams();
-  const serialRaw = (params?.serial ?? '').toString().trim();
-  const serial = serialRaw.toUpperCase();
+  const serial = String(params?.serial ?? '')
+    .trim()
+    .toUpperCase();
 
-  const shouldFetch = Boolean(serial);
   const [drumData, setDrumData] = useState(null);
-  const [loading, setLoading] = useState(shouldFetch);
+  const [loading, setLoading] = useState(Boolean(serial));
   const [modalIndex, setModalIndex] = useState(null);
   const [logoLoaded, setLogoLoaded] = useState(false);
   const [heroLoaded, setHeroLoaded] = useState(false);
-  const sectionsRef = useRef([]);
+
+  // anchors
+  const artistRef = useRef(null);
+  const tuningRef = useRef(null);
+  const galleryRef = useRef(null);
+  const audioRef = useRef(null);
+
+  // sticky pills
+  const viewbarRef = useRef(null);
+  const [headerTop, setHeaderTop] = useState(72);
+  const headerElRef = useRef(null);
+  const [active, setActive] = useState('artist');
+  const [isLocked, setIsLocked] = useState(false);
+  const lockTimerRef = useRef(null);
 
   const handleLogoLoad = () => setLogoLoaded(true);
   const handleHeroLoad = () => setHeroLoaded(true);
 
+  // fetch drum doc
   useEffect(() => {
-    if (!shouldFetch) return;
+    if (!serial) return;
     let alive = true;
     (async () => {
       try {
@@ -242,8 +302,7 @@ const SoundLegendShowroom = () => {
         const snap = await getDoc(ref);
         if (!alive) return;
         setDrumData(snap.exists() ? snap.data() : { notFound: true });
-      } catch (err) {
-        console.error('Error fetching drum data:', err);
+      } catch {
         if (alive) setDrumData({ notFound: true });
       } finally {
         if (alive) setLoading(false);
@@ -253,127 +312,289 @@ const SoundLegendShowroom = () => {
     return () => {
       alive = false;
     };
-  }, [serial, shouldFetch]);
+  }, [serial]);
 
-  if (!shouldFetch) return null;
+  // neutralize fade-ins
+  useEffect(() => {
+    document.querySelectorAll('.fade-in-section').forEach((el) => {
+      el.classList.remove('loading');
+      el.classList.add('is-visible');
+    });
+  }, [loading]);
 
-  // ---- Derived values
-  const name = drumData?.name ?? 'Unknown Drum';
+  // measure sticky top and expose CSS vars
+  const measureStickyTop = useCallback(() => {
+    const candidates = [
+      document.querySelector('.navbar-sticky-wrapper'),
+      document.querySelector('.site-header'),
+      document.querySelector('header'),
+      document.querySelector('.navbar'),
+    ].filter(Boolean);
+
+    let chosen = candidates[0] || null;
+    for (const el of candidates) {
+      const cs = getComputedStyle(el);
+      if (
+        (cs.position === 'fixed' || cs.position === 'sticky') &&
+        el.offsetHeight > 0
+      ) {
+        chosen = el;
+        break;
+      }
+    }
+    headerElRef.current = chosen;
+
+    let navH = 0;
+    if (chosen)
+      navH = Math.max(
+        0,
+        Math.round(chosen.getBoundingClientRect().height || 0)
+      );
+    const top = Math.max(56, navH);
+    setHeaderTop(top);
+
+    const pillsH = viewbarRef.current
+      ? Math.max(
+          36,
+          Math.round(viewbarRef.current.getBoundingClientRect().height || 40)
+        )
+      : 40;
+
+    const fullOffset = top + pillsH + 14;
+    document.documentElement.style.setProperty('--sl-navbar', `${top}px`);
+    document.documentElement.style.setProperty(
+      '--sl-offset',
+      `${fullOffset}px`
+    );
+  }, []);
+
+  useLayoutEffect(() => {
+    measureStickyTop();
+    const onResizeOrScroll = () => measureStickyTop();
+    window.addEventListener('resize', onResizeOrScroll, { passive: true });
+    window.addEventListener('scroll', onResizeOrScroll, { passive: true });
+
+    let ro = null;
+    if (headerElRef.current && 'ResizeObserver' in window) {
+      ro = new ResizeObserver(() => measureStickyTop());
+      ro.observe(headerElRef.current);
+    }
+    return () => {
+      window.removeEventListener('resize', onResizeOrScroll);
+      window.removeEventListener('scroll', onResizeOrScroll);
+      if (ro) ro.disconnect();
+    };
+  }, [measureStickyTop]);
+
+  // ---------- DERIVED ----------
+  const name = drumData?.name ?? '';
   const heroImage = drumData?.heroImage ?? null;
   const gallery = Array.isArray(drumData?.gallery) ? drumData.gallery : [];
-  const story = drumData?.story ?? '';
+  const storyHtml = drumData?.story ?? drumData?.specs?.story ?? '';
   const specs = drumData?.specs || {};
-  const fundamentalPitch = (specs.fundamentalPitch || '').trim(); // e.g., "206.7 Hz – G#3"
-  const legacyTuningNotes = (specs.legacyTuningNotes || '').trim(); // e.g., "G3–A♭3 (196–208 Hz)"
-  const size = (specs.size || '').trim();
 
-  // Filter & SORT audio
+  // Only use a snapshot if it's explicitly published
+  const publishedSnapshot = getPublishedSnapshot(drumData);
+  const spBands = Array.isArray(publishedSnapshot?.sweetSpots)
+    ? publishedSnapshot.sweetSpots
+    : [];
+  const spPalette = publishedSnapshot?.palette || drumData?.palette || null;
+
+  // Build sweet spots for chart
+  const sweetSpots = spBands.length
+    ? spBands.map(({ id, label, loHz, hiHz }) => ({
+        id,
+        label,
+        loHz: Number(loHz),
+        hiHz: Number(hiHz),
+      }))
+    : (() => {
+        // fallback to computed/specs when no published snapshot
+        const legacyText = (specs.legacyTuningNotes || '').trim();
+        const legacyParsed = parseLegacyHzRange(legacyText) || {};
+        const comp = computeBandsFromSpec(specs, drumData);
+        const legacyLo = Number(comp.legacyLowHz ?? legacyParsed.lowHz ?? 200);
+        const legacyHi = Number(
+          comp.legacyHighHz ?? legacyParsed.highHz ?? 220
+        );
+        return [
+          {
+            id: 'low',
+            label: 'Low',
+            loHz: Math.max(100, legacyLo - 50),
+            hiHz: Math.max(legacyLo - 10, legacyLo - 5),
+          },
+          { id: 'legacy', label: 'Legacy', loHz: legacyLo, hiHz: legacyHi },
+          {
+            id: 'high',
+            label: 'High',
+            loHz: legacyHi + 10,
+            hiHz: Math.min(750, legacyHi + 90),
+          },
+        ];
+      })();
+
+  // Fundamental for chart marker (inputs.fundamentalHz preferred)
+  const shellFundHz =
+    Number(drumData?.inputs?.fundamentalHz) ||
+    Number(specs.shellFundHz) ||
+    parseFundamentalHz(specs.fundamentalPitch || '') ||
+    null;
+
+  // Audio samples
   const rawSamples = Array.isArray(drumData?.audioSamples)
     ? drumData.audioSamples
     : [];
   const visibleSamples = rawSamples.filter(
     (s) => s && s.url && s.visible !== false
   );
-
   const order = { legacy: 0, 'adjacent-low': 1, 'adjacent-high': 2, other: 3 };
   const audioSamples = visibleSamples
     .map((s, i) => ({ ...s, _i: i }))
     .sort((a, b) => {
       const ra = order[a.variant || 'other'] ?? 3;
       const rb = order[b.variant || 'other'] ?? 3;
-      if (ra !== rb) return ra - rb;
-      return a._i - b._i;
+      return ra !== rb ? ra - rb : a._i - b._i;
     });
 
-  // Gallery (exclude hero)
-  const filteredGallery = gallery
+  const filteredGallery = (Array.isArray(gallery) ? gallery : [])
     .filter(Boolean)
     .filter((u) => u !== heroImage)
     .filter((u, i, arr) => arr.indexOf(u) === i);
-  const slideCount = filteredGallery.length;
 
-  useEffect(() => {
-    if (modalIndex !== null && slideCount > 0 && modalIndex >= slideCount) {
-      setModalIndex(0);
-    }
-  }, [modalIndex, slideCount]);
-
-  const handleKeyDown = useCallback(
-    (e) => {
-      if (modalIndex === null || slideCount === 0) return;
-      if (e.key === 'Escape') setModalIndex(null);
-      if (e.key === 'ArrowRight')
-        setModalIndex((prev) => (prev + 1) % slideCount);
-      if (e.key === 'ArrowLeft')
-        setModalIndex((prev) => (prev - 1 + slideCount) % slideCount);
-    },
-    [modalIndex, slideCount]
+  const showArtist = Boolean(
+    (name && name.trim()) || (storyHtml && storyHtml.trim())
   );
-  useEffect(() => {
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [handleKeyDown]);
+  const showTuning = true;
+  const showGallery = filteredGallery.length > 0;
+  const showAudio = audioSamples.length > 0;
 
-  // Section reveal
+  // ---------- SCROLL SPY ----------
+  const getCssOffset = useCallback(() => {
+    return (
+      parseInt(
+        getComputedStyle(document.documentElement).getPropertyValue(
+          '--sl-offset'
+        )
+      ) || headerTop + 80
+    );
+  }, [headerTop]);
+
   useEffect(() => {
-    const observer = new IntersectionObserver(
+    const map = [
+      showArtist && { key: 'artist', ref: artistRef },
+      showTuning && { key: 'tuning', ref: tuningRef },
+      showGallery && { key: 'gallery', ref: galleryRef },
+      showAudio && { key: 'audio', ref: audioRef },
+    ].filter(Boolean);
+
+    const offset = getCssOffset();
+    const thresholds = Array.from({ length: 11 }, (_, i) => i / 10);
+    const obs = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.remove('loading');
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
+        if (isLocked) return;
+        let bestKey = null;
+        let bestRatio = 0;
+        for (const entry of entries) {
+          const item = map.find((m) => m.ref.current === entry.target);
+          if (!item) continue;
+          const topOK = entry.boundingClientRect.top <= offset;
+          const score = entry.intersectionRatio + (topOK ? 0.01 : 0);
+          if (score > bestRatio) {
+            bestRatio = score;
+            bestKey = item.key;
           }
-        });
+        }
+        if (bestKey) setActive(bestKey);
       },
-      { rootMargin: '0px 0px -10% 0px', threshold: 0.15 }
+      {
+        root: null,
+        rootMargin: `-${offset}px 0px -55% 0px`,
+        threshold: thresholds,
+      }
     );
 
-    sectionsRef.current.forEach((el) => el && observer.observe(el));
+    map.forEach(({ ref }) => {
+      if (ref.current) obs.observe(ref.current);
+    });
 
-    const fallbackTimer = setTimeout(() => {
-      sectionsRef.current.forEach((el) => {
-        el?.classList.remove('loading');
-        el?.classList.add('is-visible');
-      });
-    }, 2000);
-
-    return () => {
-      observer.disconnect();
-      clearTimeout(fallbackTimer);
+    const syncNow = () => {
+      if (isLocked) return;
+      const y = window.scrollY + offset + 1;
+      let current = map[0]?.key || 'artist';
+      for (const { key, ref } of map) {
+        const el = ref.current;
+        if (!el) continue;
+        const top = el.getBoundingClientRect().top + window.scrollY;
+        if (top <= y) current = key;
+        else break;
+      }
+      setActive(current);
     };
-  }, []);
+    syncNow();
 
+    const onScroll = () => requestAnimationFrame(syncNow);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      obs.disconnect();
+    };
+  }, [showArtist, showTuning, showGallery, showAudio, getCssOffset, isLocked]);
+
+// replace the entire scrollToKey with this
+const scrollToKey = (key) => {
+  const map = {
+    artist: artistRef,
+    tuning: tuningRef,
+    gallery: galleryRef,
+    audio: audioRef,
+  };
+  const el = map[key]?.current;
+  if (!el) return;
+
+  setActive(key);
+  setIsLocked(true);
+  if (lockTimerRef.current) clearTimeout(lockTimerRef.current);
+  lockTimerRef.current = setTimeout(() => setIsLocked(false), 500);
+
+  const off = getCssOffset(); // sticky header + pills height
+  const y = el.getBoundingClientRect().top + window.scrollY - off;
+
+  // Always use window.scrollTo with explicit offset (more reliable with sticky)
+  window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+};
+
+  useEffect(
+    () => () => {
+      if (lockTimerRef.current) clearTimeout(lockTimerRef.current);
+    },
+    []
+  );
+
+  if (!serial) return null;
   if (loading)
     return <div className="showroom-loading">Loading drum details...</div>;
   if (drumData?.notFound)
     return <div className="showroom-not-found">❌ Drum not found.</div>;
 
-  // Build headers
-  const audioHeader = 'Audio Samples';
-  const explainer =
-    'Legacy tuning is the builder’s reference for this drum — the pitch where the shell, edges, and heads ‘lock in’ and the instrument projects with maximum character. The fundamental pitch is the lowest resonant frequency the shell-head system naturally emphasizes; moving above/below it changes feel, overtones, and articulation.';
-
   return (
     <div className="soundlegend-showroom">
-      {/* Header Logo */}
+      {/* Top logo */}
       <img
         src="/logos/sl-vault-white.png"
         alt="SoundLegend Series"
         className={`showroom-logo fade-in-section ${logoLoaded ? 'is-visible' : 'loading'}`}
         onLoad={handleLogoLoad}
-        ref={(el) => (sectionsRef.current[0] = el)}
       />
 
       {/* Hero */}
       <div
         className={`showroom-hero fade-in-section ${heroLoaded ? 'is-visible' : 'loading'}`}
-        ref={(el) => (sectionsRef.current[1] = el)}
       >
         {heroImage && (
           <img
             src={heroImage}
-            alt={name}
+            alt={name || 'SoundLegend Snare'}
             className="showroom-hero-image"
             onLoad={handleHeroLoad}
             draggable={false}
@@ -381,91 +602,122 @@ const SoundLegendShowroom = () => {
         )}
       </div>
 
-      {/* Story */}
-      {story && (
-        <section
-          className="showroom-story elegant-font fade-in-section loading"
-          ref={(el) => (sectionsRef.current[2] = el)}
+      {/* Sticky pills */}
+      {(showArtist || showTuning || showGallery || showAudio) && (
+        <nav
+          ref={viewbarRef}
+          className="sl-viewbar"
+          aria-label="Jump to section"
+          style={{ top: headerTop }}
         >
-          <h1 className="artist-name">{name}</h1>
+          {showArtist && (
+            <button
+              className={`sl-pill ${active === 'artist' ? 'active' : ''}`}
+              onClick={() => scrollToKey('artist')}
+            >
+              Legacy Artist
+            </button>
+          )}
+          {showAudio && (
+            <button
+              className={`sl-pill ${active === 'audio' ? 'active' : ''}`}
+              onClick={() => scrollToKey('audio')}
+            >
+              Legacy Sound
+            </button>
+          )}
+          {showGallery && (
+            <button
+              className={`sl-pill ${active === 'gallery' ? 'active' : ''}`}
+              onClick={() => scrollToKey('gallery')}
+            >
+              Legacy Gallery
+            </button>
+          )}
+          {/* {showTuning && (
+            <button
+              className={`sl-pill ${active === 'tuning' ? 'active' : ''}`}
+              onClick={() => scrollToKey('tuning')}
+            >
+              Legacy Tuning
+            </button>
+          )} */}
+        </nav>
+      )}
+
+      {/* Story */}
+      {showArtist && (
+        <section
+          ref={artistRef}
+          className="showroom-story elegant-font fade-in-section is-visible sl-anchor"
+          aria-labelledby="sl-story-h"
+        >
+          {name ? (
+            <h2 id="sl-story-h" className="artist-name">
+              {name}
+            </h2>
+          ) : null}
           <p className="legacy-subtitle">
-            SoundLegend Legacy Artist ({serial})
+            LEGACY ARTIST({serial})
           </p>
-          <div
-            className="showroom-story-content"
-            dangerouslySetInnerHTML={{ __html: story }}
-          />
+          {storyHtml ? (
+            <div
+              className="showroom-story-content"
+              dangerouslySetInnerHTML={{ __html: storyHtml }}
+            />
+          ) : null}
         </section>
       )}
 
-      {/* Audio Samples (sorted) */}
-      {audioSamples.length > 0 && (
+      {/* Audio */}
+      {showAudio && (
         <section
-          className="sl-audio-section fade-in-section loading"
-          ref={(el) => (sectionsRef.current[3] = el)}
+          ref={audioRef}
+          className="sl-audio-section fade-in-section is-visible sl-anchor"
+          aria-labelledby="sl-audio-h"
         >
-          <h2 className="sl-audio-h2">{audioHeader}</h2>
-          <p className="sl-audio-explainer">{explainer}</p>
-
-          {/* Facts bar */}
-          {(fundamentalPitch || legacyTuningNotes || size) && (
-            <div className="sl-audio-facts">
-              {/* <div className="fact">
-                <span className="k">Size</span>
-                <span className="v">{size}</span>
-              </div> */}
-              <div className="fact">
-                <span className="k">Fundamental</span>
-                <span className="v">{fundamentalPitch}</span>
-              </div>
-              {legacyTuningNotes && (
-                <div className="fact">
-                  <span className="k">Legacy Range</span>
-                  <span className="v legacy-range">{legacyTuningNotes}</span>
-                </div>
-              )}
-            </div>
-          )}
-
+          <h2 id="sl-audio-h" className="sl-audio-h2">
+            LEGACY SOUND
+          </h2>
           <div className="sl-audio-grid">
             {audioSamples.map((s, i) => (
               <div
                 key={`${s.url || s.title || 'sample'}-${i}`}
                 className={`sl-audio-cell ${s.variant || 'other'}`}
+                aria-label={labelForVariant(s.variant)}
               >
-                <div className="sl-audio-tag">
-                  {s.variant === 'legacy'
-                    ? 'Legacy Tuning'
-                    : s.variant === 'adjacent-low'
-                      ? 'Adjacent Tuning — Low'
-                      : s.variant === 'adjacent-high'
-                        ? 'Adjacent Tuning — High'
-                        : 'Other'}
+                <div
+                  className={`sl-audio-tag tag-${(s.variant || 'other').replace('adjacent-', '')}`}
+                >
+                  {labelForVariant(s.variant)}
                 </div>
                 <AudioSampleCard sample={s} index={i} onAnyPlay={() => {}} />
               </div>
             ))}
           </div>
-
           <div className="sl-audio-note">
-            Legacy first; adjacent tunings demonstrate useful range around the
-            reference pitch.
+            Legacy first; the other samples show the useful room <em>around</em>{' '}
+            it.
           </div>
         </section>
       )}
 
       {/* Gallery */}
-      {filteredGallery.length > 0 && (
+      {showGallery && (
         <section
-          className="showroom-gallery fade-in-section loading"
-          ref={(el) => (sectionsRef.current[4] = el)}
+          ref={galleryRef}
+          className="showroom-gallery fade-in-section is-visible sl-anchor"
+          aria-labelledby="sl-gallery-h"
         >
+          <h2 id="sl-gallery-h" className="visually-hidden">
+            LEGACY GALLERY
+          </h2>
           <div className="gallery-grid">
             {filteredGallery.map((img, i) => (
               <img
                 key={img}
                 src={img}
-                alt={`${name} - ${i + 1}`}
+                alt={`${name || 'SoundLegend'} - ${i + 1}`}
                 onClick={() => setModalIndex(i)}
                 className="gallery-thumb"
                 draggable={false}
@@ -520,11 +772,33 @@ const SoundLegendShowroom = () => {
         </div>
       )}
 
-      {/* NFC / copy */}
+      {/* ===== Legacy Tuning =====
       <section
-        className="showroom-legacy fade-in-section loading"
-        ref={(el) => (sectionsRef.current[5] = el)}
+        ref={tuningRef}
+        className="showroom-tuning fade-in-section is-visible sl-anchor"
+        aria-labelledby="sl-tuning-h"
       >
+        <h2 id="sl-tuning-h" className="sl-section-title">
+          Legacy Tuning
+        </h2>
+
+        <LegacyTuningChart
+          fundamentalHz={
+            Number(drumData?.inputs?.fundamentalHz) ||
+            Number(specs.shellFundHz) ||
+            parseFundamentalHz(specs.fundamentalPitch || '') ||
+            null
+          }
+          sweetSpots={sweetSpots}
+          palette={spPalette || undefined}
+          showBands={true}
+          size="md"
+          constrain
+        />
+      </section> */}
+
+      {/* NFC / copy */}
+      <section className="showroom-legacy fade-in-section is-visible">
         <p>
           This SoundLegend drum is digitally authenticated and part of an
           exclusive artist series...
@@ -542,10 +816,7 @@ const SoundLegendShowroom = () => {
       </section>
 
       {/* CTA */}
-      <div
-        className="showroom-cta fade-in-section loading"
-        ref={(el) => (sectionsRef.current[6] = el)}
-      >
+      <div className="showroom-cta fade-in-section is-visible">
         <a href="/artisan-shop/soundlegend" className="cta-button">
           Start Your Custom Snare Journey
         </a>

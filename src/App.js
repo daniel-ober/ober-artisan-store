@@ -57,9 +57,18 @@ import { DarkModeProvider } from './context/DarkModeContext';
 import VerifySerial from './components/VerifySerial';
 import VerifyDrumBySerial from './components/VerifyDrumBySerial';
 import SoundLegendShowroom from './components/SoundLegendShowroom';
+import LegacyVaultHome from './components/LegacyVaultHome';
 import SoundLegendVaultCreator from './components/SoundLegendVaultCreator';
 import { Toaster } from 'react-hot-toast';
 import './App.css';
+
+/** Temporary placeholders so new links work; replace with real pages later */
+function LegacyBrowse() {
+  return <div style={{ padding: 20 }}>Browse legacy artists / filters (placeholder)</div>;
+}
+function LegacyTuningLearn() {
+  return <div style={{ padding: 20 }}>What is Legacy Tuning™ (placeholder)</div>;
+}
 
 function App() {
   const { user, isAdmin } = useAuth();
@@ -90,6 +99,7 @@ function App() {
       '/checkout': 'Checkout',
       '/account': 'Account',
       '/admin': 'Admin',
+      '/artisan-shop/soundlegend': 'SoundLegend',
     }),
     []
   );
@@ -218,11 +228,15 @@ function App() {
             path="/artisan-shop"
             element={<PreOrderPage isAdmin={isAdmin} isDarkMode={isDarkMode} />}
           />
+
+          {/* Projects & Auth */}
           <Route
             path="/projects/:projectId"
             element={<ProjectRoute element={ProjectDetailPage} />}
           />
           <Route path="/soundlegends/signin" element={<SoundlegendSignin />} />
+
+          {/* Individual product detail routes */}
           <Route
             path="/artisan-shop/heritage"
             element={<HeritageProductDetail />}
@@ -231,20 +245,44 @@ function App() {
             path="/artisan-shop/feuzon"
             element={<FeuzonProductDetail />}
           />
+
+          {/* Keep SoundLegend overview/builder here */}
           <Route
             path="/artisan-shop/soundlegend"
             element={<SoundlegendProductDetail />}
           />
+
+          {/* Legacy Vault on its own endpoint */}
+          <Route
+            path="/artisan-shop/soundlegend/vault"
+            element={<LegacyVaultHome />}
+          />
+          <Route
+            path="/artisan-shop/soundlegend/vault/browse"
+            element={<LegacyBrowse />}
+          />
+          <Route
+            path="/artisan-shop/soundlegend/vault/learn/legacy-tuning"
+            element={<LegacyTuningLearn />}
+          />
+
+          {/* Founders Toast */}
           <Route
             path="/artisan-shop/founders-toast"
             element={<FoundersToastProductDetail />}
           />
+
+          {/* Inventory Tool (admin) */}
           <Route
             path="/admin/artisan-tools/inventory-tracker"
             element={<PrivateRoute element={<InventoryTracker />} adminOnly />}
           />
+
+          {/* Product detail (general) */}
           <Route path="/artisan-shop/:productId" element={<ProductDetail />} />
           <Route path="/merch/:productId" element={<ProductDetail />} />
+
+          {/* Legacy redirects for old paths */}
           <Route
             path="/artisanseries/:productId"
             element={
@@ -263,6 +301,8 @@ function App() {
               />
             }
           />
+
+          {/* Account & Admin */}
           <Route
             path="/account"
             element={<PrivateRoute element={<AccountPage />} />}
@@ -272,20 +312,28 @@ function App() {
             element={<PrivateRoute element={<AdminDashboard />} adminOnly />}
           />
           <Route path="/admin-signin" element={<AdminSignin />} />
+
+          {/* Checkout */}
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/checkout-summary" element={<CheckoutSummary />} />
+
+          {/* Verify pages */}
           <Route path="/verify" element={<VerifySerial />} />
           <Route path="/verify/:serial" element={<VerifyDrumBySerial />} />
+
+          {/* SoundLegend Showroom (dynamic serial pages) */}
           <Route
             path="/artisan-shop/soundlegend/:serial"
             element={<SoundLegendShowroom />}
           />
+
+          {/* Admin: Vault content creator */}
           <Route
             path="/admin/soundlegend-vault"
             element={
               <PrivateRoute element={<SoundLegendVaultCreator />} adminOnly />
             }
-          />{' '}
+          />
         </Routes>
         <Footer navbarLinks={navbarLinks} />
       </div>

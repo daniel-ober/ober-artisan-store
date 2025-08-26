@@ -1,10 +1,9 @@
-// src/components/ManageProducts.js
 import React, { useState, useEffect } from 'react';
 import {
-  fetchProducts,
   deleteProduct,
   updateProductStatus,
   updateProductInventory,
+  triggerPrintifyStockRefresh,
 } from '../services/productService';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
@@ -12,7 +11,7 @@ import './ManageProducts.css';
 import AddProductModal from './AddProductModal';
 import EditProductModal from './EditProductModal';
 import EditMerchProductModal from './EditMerchProductModal';
-import { triggerPrintifyStockRefresh } from '../services/productService';
+import AddMerchFromPrintifyModal from './AddMerchFromPrintifyModal';
 
 const FALLBACK_IMAGE_URL = 'https://i.imgur.com/eoKsILV.png';
 
@@ -20,7 +19,8 @@ const getPreviewImage = (product) => {
   const match =
     product.images?.find((img) => img.is_default && img.position === 'front') ||
     product.images?.[0];
-  return match?.src || FALLBACK_IMAGE_URL;
+  // Printify images often use { src }; artisan images might be direct URLs
+  return (match && (match.src || match.url)) || product.previewImage || FALLBACK_IMAGE_URL;
 };
 
 const ManageProducts = () => {
@@ -28,6 +28,7 @@ const ManageProducts = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isAddMerchModalOpen, setIsAddMerchModalOpen] = useState(false);
   const [editProductId, setEditProductId] = useState(null);
   const [isRefreshingStock, setIsRefreshingStock] = useState(false);
   const [printifyLastUpdated, setPrintifyLastUpdated] = useState(null);
@@ -35,25 +36,26 @@ const ManageProducts = () => {
   const fetchAllProducts = async () => {
     setLoading(true);
     try {
-      const collections = ['products', 'merchProducts'];
+      const collectionsToRead = ['products', 'merchProducts'];
       const allDocs = [];
       let latestSync = null;
-  
-      for (const name of collections) {
+
+      for (const name of collectionsToRead) {
         const snapshot = await getDocs(collection(db, name));
-        snapshot.forEach((doc) => {
-          const data = doc.data();
-          allDocs.push({ id: doc.id, ...data, _source: name });
-  
+        snapshot.forEach((docRef) => {
+          const data = docRef.data();
+          allDocs.push({ id: docRef.id, ...data, _source: name });
+
           if (name === 'merchProducts' && data.updatedAt?.toDate) {
             const updatedTime = data.updatedAt.toDate();
-            if (!latestSync || updatedTime > latestSync) {
-              latestSync = updatedTime;
-            }
+            if (!latestSync || updatedTime > latestSync) latestSync = updatedTime;
+          } else if (name === 'merchProducts' && data.syncedAt?.toDate) {
+            const syn = data.syncedAt.toDate();
+            if (!latestSync || syn > latestSync) latestSync = syn;
           }
         });
       }
-  
+
       setProducts(allDocs);
       if (latestSync) setPrintifyLastUpdated(latestSync);
     } catch (err) {
@@ -63,15 +65,15 @@ const ManageProducts = () => {
       setLoading(false);
     }
   };
-  
+
   useEffect(() => {
-    fetchAllProducts(); // now works in both useEffect AND refresh
+    fetchAllProducts();
   }, []);
 
   const handleDeleteProduct = async (productId) => {
     try {
       await deleteProduct(productId);
-      setProducts(products.filter((product) => product.id !== productId));
+      setProducts((prev) => prev.filter((p) => p.id !== productId));
     } catch (err) {
       setError('Error deleting product.');
     }
@@ -81,9 +83,7 @@ const ManageProducts = () => {
 
   const handleProductUpdate = (updatedProduct) => {
     setProducts((prevProducts) =>
-      prevProducts.map((product) =>
-        product.id === updatedProduct.id ? updatedProduct : product
-      )
+      prevProducts.map((product) => (product.id === updatedProduct.id ? updatedProduct : product))
     );
     setEditProductId(null);
   };
@@ -91,12 +91,10 @@ const ManageProducts = () => {
   const handleStatusChange = async (productId, newStatus) => {
     try {
       await updateProductStatus(productId, newStatus);
-      setProducts((prevProducts) =>
-        prevProducts.map((product) =>
-          product.id === productId ? { ...product, status: newStatus } : product
-        )
+      setProducts((prev) =>
+        prev.map((p) => (p.id === productId ? { ...p, status: newStatus } : p))
       );
-    } catch (err) {
+    } catch {
       setError('Failed to update product status.');
     }
   };
@@ -104,68 +102,37 @@ const ManageProducts = () => {
   const handleMaxInventoryChange = async (productId, newMaxInventory) => {
     try {
       await updateProductInventory(productId, { maxQuantity: newMaxInventory });
-      setProducts((prevProducts) =>
-        prevProducts.map((product) =>
-          product.id === productId
-            ? { ...product, maxQuantity: newMaxInventory }
-            : product
-        )
-      );
-    } catch (err) {
+      setProducts((prev) => prev.map((p) => (p.id === productId ? { ...p, maxQuantity: newMaxInventory } : p)));
+    } catch {
       setError('Failed to update max inventory.');
     }
   };
 
-  const handleCurrentInventoryChange = async (
-    productId,
-    newCurrentInventory
-  ) => {
+  const handleCurrentInventoryChange = async (productId, newCurrentInventory) => {
     try {
-      await updateProductInventory(productId, {
-        currentQuantity: newCurrentInventory,
-      });
-      setProducts((prevProducts) =>
-        prevProducts.map((product) =>
-          product.id === productId
-            ? { ...product, currentQuantity: newCurrentInventory }
-            : product
-        )
-      );
-    } catch (err) {
+      await updateProductInventory(productId, { currentQuantity: newCurrentInventory });
+      setProducts((prev) => prev.map((p) => (p.id === productId ? { ...p, currentQuantity: newCurrentInventory } : p)));
+    } catch {
       setError('Failed to update current inventory.');
     }
   };
 
   const openProductDetail = (productOrId) => {
     const product =
-      typeof productOrId === 'object'
-        ? productOrId
-        : products.find((p) => p.id === productOrId);
-    if (!product) {
-      console.warn(
-        'Invalid productOrId passed to openProductDetail:',
-        productOrId
-      );
-      return;
-    }
+      typeof productOrId === 'object' ? productOrId : products.find((p) => p.id === productOrId);
+    if (!product) return;
 
-    const url =
-      product._source === 'merchProducts'
-        ? `/merch/${product.id}`
-        : `/products/${product.id}`;
-
+    const url = product._source === 'merchProducts' ? `/merch/${product.id}` : `/products/${product.id}`;
     window.open(url, '_blank');
   };
 
-  const productToEdit = editProductId
-    ? products.find((p) => p.id === editProductId)
-    : null;
+  const productToEdit = editProductId ? products.find((p) => p.id === editProductId) : null;
 
   const handleRefreshPrintifyStock = async () => {
     setIsRefreshingStock(true);
     try {
       await triggerPrintifyStockRefresh();
-      await fetchAllProducts(); // ✅ refresh UI with latest Firestore timestamps
+      await fetchAllProducts();
       alert('✅ Printify stock refresh triggered successfully.');
     } catch (err) {
       console.error('❌ Failed to refresh stock:', err);
@@ -178,25 +145,35 @@ const ManageProducts = () => {
   return (
     <div className="manage-products-container">
       <h2>Manage Products</h2>
-      <button
-        className="add-product-btn"
-        onClick={handleRefreshPrintifyStock}
-        disabled={isRefreshingStock}
-        style={{ marginLeft: '12px', backgroundColor: '#444' }}
-      >
-        {isRefreshingStock ? 'Refreshing...' : 'Refresh Printify Stock'}
-      </button>
+      <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+        <button
+          className="add-product-btn"
+          onClick={handleRefreshPrintifyStock}
+          disabled={isRefreshingStock}
+          style={{ backgroundColor: '#444' }}
+        >
+          {isRefreshingStock ? 'Refreshing...' : 'Refresh Printify Stock'}
+        </button>
+
+        <button className="add-product-btn" onClick={() => setIsAddMerchModalOpen(true)}>
+          + Add Merch from Printify
+        </button>
+
+        <button className="add-product-btn" onClick={() => setIsAddModalOpen(true)} style={{ backgroundColor: '#1363df' }}>
+          + Add Artisan Product
+        </button>
+      </div>
+
       {printifyLastUpdated && (
         <p style={{ marginTop: '0.5rem', fontSize: '0.9rem', color: '#555' }}>
           Printify Stock Last Updated:{' '}
-          {printifyLastUpdated.toLocaleString('en-US', {
-            dateStyle: 'long',
-            timeStyle: 'short',
-          })}
+          {printifyLastUpdated.toLocaleString('en-US', { dateStyle: 'long', timeStyle: 'short' })}
         </p>
       )}
+
       {loading && <p>Loading products...</p>}
       {error && <p>{error}</p>}
+
       {!loading && !error && (
         <table className="manage-products-table">
           <thead>
@@ -218,22 +195,13 @@ const ManageProducts = () => {
               return (
                 <tr key={product.id}>
                   <td>
-                    <button
-                      className="thumbnail-btn"
-                      onClick={() => openProductDetail(product.id)}
-                      aria-label={`View details for ${title}`}
-                    >
+                    <button className="thumbnail-btn" onClick={() => openProductDetail(product.id)} aria-label={`View details for ${title}`}>
                       <img src={imageUrl} alt={title} className="thumbnail" />
                     </button>
                   </td>
                   <td>{title}</td>
                   <td>
-                    <select
-                      value={product.status || 'active'}
-                      onChange={(e) =>
-                        handleStatusChange(product.id, e.target.value)
-                      }
-                    >
+                    <select value={product.status || 'active'} onChange={(e) => handleStatusChange(product.id, e.target.value)}>
                       <option value="active">Active</option>
                       <option value="inactive">Inactive</option>
                     </select>
@@ -244,12 +212,7 @@ const ManageProducts = () => {
                     ) : (
                       <select
                         value={product.maxQuantity || 0}
-                        onChange={(e) =>
-                          handleMaxInventoryChange(
-                            product.id,
-                            parseInt(e.target.value)
-                          )
-                        }
+                        onChange={(e) => handleMaxInventoryChange(product.id, parseInt(e.target.value))}
                       >
                         {Array.from({ length: 21 }, (_, i) => (
                           <option key={i} value={i}>
@@ -268,26 +231,15 @@ const ManageProducts = () => {
                         value={product.currentQuantity || 0}
                         min="0"
                         max={product.maxQuantity || 0}
-                        onChange={(e) =>
-                          handleCurrentInventoryChange(
-                            product.id,
-                            parseInt(e.target.value) || 0
-                          )
-                        }
+                        onChange={(e) => handleCurrentInventoryChange(product.id, parseInt(e.target.value) || 0)}
                       />
                     )}
                   </td>
                   <td>
-                    <button
-                      className="edit-btn"
-                      onClick={() => setEditProductId(product.id)}
-                    >
+                    <button className="edit-btn" onClick={() => setEditProductId(product.id)}>
                       Edit
                     </button>
-                    <button
-                      className="delete-btn"
-                      onClick={() => handleDeleteProduct(product.id)}
-                    >
+                    <button className="delete-btn" onClick={() => handleDeleteProduct(product.id)}>
                       Delete
                     </button>
                   </td>
@@ -300,10 +252,15 @@ const ManageProducts = () => {
 
       {isAddModalOpen && (
         <AddProductModal
-          onClose={handleAddProductClose}
-          onProductAdded={(newProduct) =>
-            setProducts([newProduct, ...products])
-          }
+          onClose={() => setIsAddModalOpen(false)}
+          onProductAdded={(newProduct) => setProducts([newProduct, ...products])}
+        />
+      )}
+
+      {isAddMerchModalOpen && (
+        <AddMerchFromPrintifyModal
+          onClose={() => setIsAddMerchModalOpen(false)}
+          onAdded={(merchProduct) => setProducts((prev) => [{ ...merchProduct, _source: 'merchProducts' }, ...prev])}
         />
       )}
 
@@ -315,11 +272,7 @@ const ManageProducts = () => {
             onProductUpdated={handleProductUpdate}
           />
         ) : (
-          <EditProductModal
-            productId={editProductId}
-            onClose={() => setEditProductId(null)}
-            onProductUpdated={handleProductUpdate}
-          />
+          <EditProductModal productId={productToEdit.id} onClose={() => setEditProductId(null)} onProductUpdated={handleProductUpdate} />
         ))}
     </div>
   );

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../firebaseConfig';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import {
   Dialog,
   DialogTitle,
@@ -265,46 +265,40 @@ const SoundLegendProductDetail = () => {
       />
 
       <div className="soundlegend-product-content">
-        {/* LEFT: 360 viewer replaces the static image */}
+        {/* LEFT: Static hero image instead of 360 viewer */}
         <div className="soundlegend-product-image">
-          <InlineFrame360
-            totalFrames={392} // ✅ exact count you have
-            basePath="/soundlegend360/med" // ✅ adjust to wherever the folder lives under /public
-            prefix="frame_"
-            pad={3}
-            ext="webp"
-            fps={30}
-            dragSensitivity={0.25}
+          <img
+            src="https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/soundlegend_showroom%2FSL-001%2Fgallery%2F0-IMG_1803.jpg?alt=media&token=f84c86d4-f111-4156-87c7-3b5e5992df28"
+            alt="SoundLegend Snare Hero"
+            className="soundlegend-hero-img"
           />
 
-          <h2 className="soundlegend-header">
+          <h2 className="sl-header-section">
             Build Your Custom SoundLegend Snare
           </h2>
-          <p>
+          <div className="sl-desc-section">
             Your sound is unique—your snare should be too. The{' '}
             <strong>SoundLegend Series</strong> is a fully custom, handcrafted
             drum built to bring your artistic vision to life.
-          </p>
-          <p>
-            In a one-on-one collaboration with{' '}
-            <strong>Ober Artisan founder, Dan Ober</strong>, you'll design a
-            snare drum that reflects your playing style and sonic identity.
-          </p>
-          <p>
-            With high-resolution concept renderings, VIP access to
-            behind-the-scenes content, and a personal consultation, you'll see
-            your dream snare come to life before it even hits the workbench.
-          </p>
-          <p>
-            This isn’t about picking from a catalog—it’s about crafting a
-            one-of-a-kind snare that’s truly yours.
-          </p>
-          <p>
-            <strong>Your Story. Your Sound. Your Legacy.</strong>
-          </p>
+            <p>
+              In a one-on-one collaboration with{' '}
+              <strong>Ober Artisan founder, Dan Ober</strong>, you'll design a
+              snare drum that reflects your playing style and sonic identity.
+            </p>
+            <p>
+              With high-resolution concept renderings, VIP access to
+              behind-the-scenes content, and a personal consultation, you'll see
+              your dream snare come to life before it even hits the workbench.
+            </p>
+            <p>
+              This isn’t about picking from a catalog—it’s about crafting a
+              one-of-a-kind snare that’s truly yours.
+            </p>
+            <div className="slogan">Your Story. Your Sound. Your Legacy.</div>
+          </div>
         </div>
 
-        {/* RIGHT: features + form */}
+        {/* RIGHT: features + form stays unchanged */}
         <div className="soundlegend-product-options">
           <div className="soundlegend-features">
             <h2>Key Features</h2>
@@ -393,6 +387,38 @@ const SoundLegendProductDetail = () => {
           </Dialog>
         </div>
       </div>
+      {/* --- Explore Legacy Vault band --- */}
+      <section className="sl-vault-cta">
+        <div className="sl-vault-cta-inner">
+          <div
+            className="sl-vault-logo-bg"
+            role="img"
+            aria-label="Legacy Vault"
+            style={{ backgroundImage: 'url(/legacy-vault-nav/white.png)' }}
+          />
+          <div className="sl-vault-copy">
+            {/* <h3>Explore our Legacy Vault</h3> */}
+            <p>
+              Hear real drums, meet the artists, and dive into specs, stories,
+              photos, and Legacy Tuning™ samples for each instrument.
+            </p>
+          </div>
+          <div className="sl-vault-actions">
+            <Link
+              to="/artisan-shop/soundlegend/vault"
+              className="sl-vault-btn primary"
+            >
+              Explore the Vault
+            </Link>
+            {/* <Link
+              to="/artisan-shop/soundlegend/vault/learn/legacy-tuning"
+              className="sl-vault-btn ghost"
+            >
+              What is Legacy Tuning?
+            </Link> */}
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
