@@ -1,0 +1,171 @@
+.spx-card {
+  margin-top: 16px;
+  padding: 14px;
+  border: 1px solid #1e293b;
+  border-radius: 12px;
+  background: #0f172a;
+}
+.spx-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.spx-status {
+  margin-left: auto;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: #334155;
+  color: #e5e7eb;
+  font-size: 12px;
+}
+.spx-status.published {
+  background: #065f46;
+  color: #ecfdf5;
+}
+.spx-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.spx-form label {
+  display: block;
+  font-size: 12px;
+  margin: 6px 0 4px;
+  color: #93c5fd;
+}
+.spx-form input,
+.spx-form select,
+.spx-form textarea {
+  width: 100%;
+  background: #111827;
+  border: 1px solid #374151;
+  border-radius: 8px;
+  padding: 8px 10px;
+  color: #e5e7eb;
+}
+.spx-row2 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 6px;
+}
+.spx-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+.spx-actions button {
+  padding: 8px 10px;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: #fff;
+}
+.spx-actions button:nth-child(2) {
+  background: #10b981;
+}
+.spx-actions button:nth-child(3) {
+  background: #f59e0b;
+}
+.spx-err {
+  margin-top: 8px;
+  color: #fecaca;
+  background: #7f1d1d;
+  border: 1px solid #991b1b;
+  border-radius: 8px;
+  padding: 6px;
+}
+.spx-preview {
+  background: #0b1220;
+  border: 1px solid #1e293b;
+  border-radius: 12px;
+  padding: 12px;
+}
+.spx-empty {
+  color: #9ca3af;
+}
+.spx {
+  position: relative;
+  height: 78px;
+  margin-top: 8px;
+}
+.spx-track {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 30px;
+  height: 16px;
+  border-radius: 999px;
+  background: #1f2937;
+}
+.spx-tick {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  font-size: 10px;
+  color: #9ca3af;
+  text-align: center;
+}
+.spx-tickLine {
+  position: absolute;
+  top: 22px;
+  width: 1px;
+  height: 8px;
+  background: #374151;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.spx-tickLabel {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.spx-fund {
+  position: absolute;
+  top: 19px;
+  width: 2px;
+  height: 38px;
+  background: #00e0b8;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.35);
+}
+.spx-band {
+  position: absolute;
+  top: 30px;
+  height: 16px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: #0b0f19;
+  font-weight: 700;
+  background: #06d6a0;
+}
+.spx-band.legacy {
+  background: #ffcc00;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.08);
+}
+.spx-why {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #c7d2fe;
+}
+
+.spx-warn {
+  margin: 8px 0 0;
+  padding: 8px 10px;
+  border: 1px solid rgba(255,204,0,.4);
+  background: rgba(255,204,0,.08);
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 1024px) {
+  .spx-grid {
+    grid-template-columns: 1fr;
+  }
+  .spx-row2 {
+    grid-template-columns: 1fr 1fr;
+  }
+}

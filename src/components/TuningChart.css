@@ -1,0 +1,100 @@
+/* ====== Frequency Range Bar ====== */
+
+/* Bar container */
+.sl-rangebar {
+  position: relative;
+  height: 18px;
+  border-radius: 999px;
+  background: #1d2731; /* deep slate */
+  overflow: visible;
+  margin: 10px 0 16px;
+}
+
+/* Segments */
+.sl-seg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-radius: 999px;
+  opacity: 0.9;
+  z-index: 1; /* under markers */
+}
+.sl-seg.below  { background: #27ae60; } /* green */
+.sl-seg.legacy { background: #f1c40f; } /* yellow */
+.sl-seg.above  { background: #3b82f6; } /* blue */
+
+.sl-seg.active::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 999px;
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.07);
+}
+
+/* Shell marker (teal DNA) */
+.sl-shell-mark {
+  position: absolute;
+  top: -6px;
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 3;
+}
+.sl-shell-line {
+  width: 2px;
+  height: 30px;
+  background: #2dd4bf; /* teal */
+  margin: 0 auto;
+  border-radius: 2px;
+  box-shadow: 0 0 4px rgba(0,0,0,0.4);
+}
+.sl-shell-cap {
+  width: 8px;
+  height: 8px;
+  background: #2dd4bf;
+  border-radius: 50%;
+  margin: 2px auto 0;
+  box-shadow: 0 0 2px rgba(0,0,0,0.5);
+}
+
+/* Bottom scale */
+.sl-rangebar-scale {
+  position: relative;
+  margin-top: 6px;
+  height: 16px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.7);
+}
+.sl-rangebar-scale .tick {
+  position: absolute;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+.sl-rangebar-scale .tick:first-child { transform: translateX(0%); }
+.sl-rangebar-scale .tick:last-child  { transform: translateX(-100%); }
+
+/* ===== Legend chips (Hz + note) ===== */
+.sl-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+  align-items: center;
+  justify-content: center;
+  margin: 6px 0 12px;
+}
+.sl-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  font-size: 12px;
+  color: #e6e6e6;
+}
+.sl-chip .k { opacity: 0.82; text-transform: uppercase; letter-spacing: .06em; }
+.sl-chip .v { font-weight: 700; }
+
+.sl-chip.tone-legacy { border-color: rgba(241,196,15,0.6); background: rgba(241,196,15,0.10); }
+.sl-chip.tone-below  { border-color: rgba(39,174,96,0.6);  background: rgba(39,174,96,0.10);  }
+.sl-chip.tone-above  { border-color: rgba(59,130,246,0.6); background: rgba(59,130,246,0.10); }

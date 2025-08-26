@@ -1,14 +1,11 @@
 // src/components/ProductCard.js
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { db } from '../firebaseConfig';
-import { doc, getDoc } from 'firebase/firestore';
-import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import { analytics, logEvent } from '../firebaseConfig';
 import './ProductCard.css';
 
-const fallbackImage = '/fallback.jpg';
+const FALLBACK_IMAGE = '/fallback-images/fallback_image1.png';
 
 const stripHtml = (html) => {
   const div = document.createElement('div');
@@ -17,56 +14,59 @@ const stripHtml = (html) => {
 };
 
 const getLowestPrice = (product) => {
-  if (product.variants?.length > 0) {
+  if (Array.isArray(product.variants) && product.variants.length > 0) {
     const prices = product.variants
       .map(
         (v) =>
           v.price ??
           product.stripePriceIds?.[v.id]?.unitAmount ??
-          product.stripePriceIds?.[v.id]?.price
+          product.stripePriceIds?.[v.id]?.price ??
+          v.printifyPriceCents
       )
-      .filter(Boolean)
+      .filter((p) => Number.isFinite(p))
       .map((p) => p / 100);
     return prices.length ? Math.min(...prices) : null;
   }
-  return product.price;
+  return product.price ?? null;
 };
 
 const getImageSrc = (product) => {
-  if (Array.isArray(product.images)) {
-    const img = product.images.find((img) => img?.src) || product.images[0];
-    return typeof img === 'string' ? img : img?.src || fallbackImage;
-  }
-  return fallbackImage;
+  if (!Array.isArray(product.images) || product.images.length === 0) return FALLBACK_IMAGE;
+  const preferred =
+    product.images.find((img) => typeof img === 'object' && img?.src && img.displayInGallery !== false) ||
+    product.images.find((img) => typeof img === 'object' && img?.src) ||
+    product.images[0];
+
+  const src = typeof preferred === 'string' ? preferred : preferred?.src;
+  return src || FALLBACK_IMAGE;
 };
 
 const ProductCard = ({ product }) => {
-  const { cartId } = useCart();
+  const { cartId } = useCart(); // used elsewhere for analytics; keeping it
   const navigate = useNavigate();
 
   const imageUrl = getImageSrc(product);
   const price = getLowestPrice(product);
   const delivery = product.deliveryTime || 'Varies';
 
+  const colorOption = product.options?.find((opt) => opt.name === 'Colors');
   const enabledVariantIds = (product.variants || [])
     .filter((v) => v.is_enabled && v.is_available !== false)
-    .map((v) => v.id);
-
-  const colorOption = product.options?.find((opt) => opt.name === 'Colors');
+    .map((v) => String(v.id));
 
   const renderColorDots = () => {
-    if (!colorOption || !Array.isArray(colorOption.values)) return null;
+    if (!colorOption?.values) return null;
 
     return colorOption.values.map((val, idx) => {
-      const hasEnabledVariant = (product.images || []).some((img) =>
-        img.variant_ids?.some((id) => enabledVariantIds.includes(id))
+      // only render dot if at least one image maps to an enabled variant
+      const hasEnabledVariantImage = (product.images || []).some((img) =>
+        (img.variant_ids || []).map(String).some((id) => enabledVariantIds.includes(id))
       );
 
       const colors = val.colors || [];
-      if (!hasEnabledVariant || colors.length === 0) return null;
+      if (!hasEnabledVariantImage || colors.length === 0) return null;
 
       const key = `${val.id}-${idx}`;
-
       if (colors.length === 1) {
         return (
           <div
@@ -84,33 +84,28 @@ const ProductCard = ({ product }) => {
             }}
           />
         );
-      } else if (colors.length >= 2) {
-        return (
-          <div
-            key={key}
-            className="color-dot"
-            title={val.title}
-            style={{
-              width: 16,
-              height: 16,
-              borderRadius: '50%',
-              border: '1px solid #ccc',
-              margin: '2px',
-              display: 'inline-block',
-              background: `linear-gradient(to right, ${colors[0]} 50%, ${colors[1]} 50%)`,
-            }}
-          />
-        );
       }
-
-      return null;
+      return (
+        <div
+          key={key}
+          className="color-dot"
+          title={val.title}
+          style={{
+            width: 16,
+            height: 16,
+            borderRadius: '50%',
+            border: '1px solid #ccc',
+            margin: '2px',
+            display: 'inline-block',
+            background: `linear-gradient(to right, ${colors[0]} 50%, ${colors[1]} 50%)`,
+          }}
+        />
+      );
     });
   };
 
   const getDetailPath = () =>
-    product.collection === 'merchProducts'
-      ? `/merch/${product.id}`
-      : `/products/${product.id}`;
+    product.collection === 'merchProducts' ? `/merch/${product.id}` : `/products/${product.id}`;
 
   return (
     <div className="product-card">
@@ -134,22 +129,18 @@ const ProductCard = ({ product }) => {
           alt={product.title || product.name}
           className="product-image"
           loading="lazy"
-          onError={(e) => (e.currentTarget.src = fallbackImage)}
+          onError={(e) => (e.currentTarget.src = FALLBACK_IMAGE)}
         />
       </div>
 
       <div className="product-info">
         <h2 className="product-name">{product.title || product.name}</h2>
-        <p className="product-card-description">
-          {stripHtml(product.description)}
-        </p>
+        <p className="product-card-description">{stripHtml(product.description)}</p>
 
         <div className="color-swatches">{renderColorDots()}</div>
 
         <div className="product-card-bottom">
-          <p className="card-product-price">
-            {price ? `$${price.toFixed(2)}` : 'Price Unavailable'}
-          </p>
+          <p className="card-product-price">{price ? `$${price.toFixed(2)}` : 'Price Unavailable'}</p>
           <p className="delivery-time">Delivery: {delivery}</p>
 
           <button

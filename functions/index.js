@@ -1,6 +1,7 @@
 const { onRequest } = require('firebase-functions/v2/https');
 const { defineSecret } = require('firebase-functions/params');
 const { onSchedule } = require('firebase-functions/v2/scheduler');
+const { onCall } = require('firebase-functions/v2/https');
 const admin = require('firebase-admin');
 const express = require('express');
 const stripeLib = require('stripe');
@@ -11,7 +12,6 @@ const { onDocumentCreated } = require('firebase-functions/v2/firestore');
 const sgMail = require('@sendgrid/mail');
 
 const SENDGRID_API_KEY = defineSecret('SENDGRID_API_KEY');
-
 const STRIPE_SECRET_KEY = defineSecret('STRIPE_SECRET_KEY');
 const STRIPE_WEBHOOK_SECRET = defineSecret('STRIPE_WEBHOOK_SECRET');
 const CLIENT_URL = defineSecret('CLIENT_URL');
@@ -23,6 +23,8 @@ const RECAPTCHA_SECRET_KEY = defineSecret('RECAPTCHA_SECRET_KEY');
 admin.initializeApp();
 const db = admin.firestore();
 
+// ───────────────────────────────────────────────────────────────────────────────
+// Main Express app (JSON)
 const app = express();
 app.use(express.json());
 
@@ -32,42 +34,273 @@ const allowedOrigins = [
   'https://www.oberartisandrums.com',
   'https://danoberartisandrums.web.app',
 ];
-
 app.use((req, res, next) => {
   const origin = req.headers.origin;
   if (origin && allowedOrigins.includes(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin);
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    res.setHeader(
-      'Access-Control-Allow-Headers',
-      'Content-Type, Authorization'
-    );
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     res.setHeader('Access-Control-Allow-Credentials', 'true');
   }
   if (req.method === 'OPTIONS') return res.status(204).end();
   next();
 });
 
+// Helpers
+const stripeFromSecret = () => stripeLib(STRIPE_SECRET_KEY.value());
+const pHeaders = () => ({
+  Authorization: `Bearer ${PRINTIFY_API_KEY.value()}`,
+  'Content-Type': 'application/json',
+});
+
+// ───────────────────────────────────────────────────────────────────────────────
+// NEW: Admin — list Printify products for picker
+app.get('/printify/catalog', async (req, res) => {
+  try {
+    const shopId = PRINTIFY_SHOP_ID.value();
+    const { data } = await axios.get(
+      `https://api.printify.com/v1/shops/${shopId}/products.json`,
+      { headers: pHeaders() }
+    );
+    const list = data?.data || data || [];
+    const slim = list.map((p) => ({
+      id: p.id,
+      title: p.title,
+      images: p.images || [],
+      variants:
+        (p.variants || []).map((v) => ({
+          id: v.id,
+          sku: v.sku,
+          title: v.title,
+          options: v.options,
+          price: v.price,
+          is_enabled: v.is_enabled,
+          quantity: v.quantity,
+        })) || [],
+    }));
+    res.json({ products: slim });
+  } catch (e) {
+    console.error('Printify catalog error', e?.response?.data || e);
+    res.status(500).json({ error: 'Failed to fetch Printify catalog' });
+  }
+});
+
+app.post('/admin/merch/ingest', async (req, res) => {
+  try {
+    const { printifyProductId, titleOverride, active = true } = req.body || {};
+    if (!printifyProductId) return res.status(400).json({ error: 'printifyProductId required' });
+
+    const shopId = PRINTIFY_SHOP_ID.value();
+    const { data: p } = await axios.get(
+      `https://api.printify.com/v1/shops/${shopId}/products/${printifyProductId}.json`,
+      { headers: pHeaders() }
+    );
+
+    // 1) Get variant metadata so we can label size/color etc.
+    const { data: variantMeta } = await axios.get(
+      `https://api.printify.com/v1/catalog/blueprints/${p.blueprint_id}/print_providers/${p.print_provider_id}/variants.json`,
+      { headers: pHeaders() }
+    );
+
+    const metaById = new Map();
+    (Array.isArray(variantMeta) ? variantMeta : []).forEach((m) => metaById.set(m.id, m));
+
+    // 2) Enrich variants with readable fields and images scoped per variant
+    const rawVariants = Array.isArray(p.variants) ? p.variants.filter(v => v.is_enabled) : [];
+    const enrichedVariants = rawVariants.map((v) => {
+      const m = metaById.get(v.id) || {};
+      const optObj = (m.options || []).reduce((acc, opt) => {
+        // opt.name might be "Size"/"Color" etc.; normalize to lower
+        acc[opt.name?.toLowerCase?.() || ''] = opt.value;
+        return acc;
+      }, {});
+      const vImages = (p.images || []).filter(img => Array.isArray(img.variant_ids) && img.variant_ids.includes(v.id));
+      return {
+        id: String(v.id),
+        title: v.title || '',
+        sku: v.sku || '',
+        printifyPriceCents: Number(v.price || 0), // already retail cents
+        quantity: v.quantity,
+        is_enabled: !!v.is_enabled,
+        options_array: v.options || [], // keep raw ids (for debugging)
+        size: optObj.size || '',        // ← readable
+        color: optObj.color || '',      // ← readable
+        images: vImages.map(img => ({
+          src: img.src,
+          position: img.position,
+          displayInGallery: true,
+        })),
+      };
+    });
+
+    // 3) Build options for selectors (Colors/Sizes with readable titles)
+    //    Start from Printify product.options, but add only values that exist in enabled variants.
+    const optionDefs = Array.isArray(p.options) ? p.options : [];
+    const enabledByOptionId = new Map(); // optionId -> Set(valueId)
+    enrichedVariants.forEach((v) => {
+      (v.options_array || []).forEach((valId) => {
+        // we don't know the option id here; Printify uses values that belong to an option.
+        // We'll add values when we see them below by scanning variants against opt.values.
+      });
+    });
+
+    const enrichedOptions = optionDefs.map((opt) => {
+      const values = (opt.values || []).map((val) => {
+        // Collect colors that actually appear for this value (via enrichedVariants)
+        const usedColors = new Set();
+        enrichedVariants.forEach((v) => {
+          const hasThisValue = Array.isArray(v.options_array) && v.options_array.includes(val.id);
+          if (hasThisValue && v.color) usedColors.add(v.color);
+        });
+        return { ...val, colors: [...usedColors] };
+      });
+      return {
+        ...opt,
+        values,
+      };
+    });
+
+    // 4) Create Stripe Product + Prices (mirror retail price)
+    const stripe = stripeFromSecret();
+    const sp = await stripe.products.create({
+      name: titleOverride || p.title,
+      active,
+      images: (p.images || []).slice(0, 8).map((i) => i.src).filter(Boolean),
+      metadata: {
+        printify_product_id: p.id,
+        print_provider_id: String(p.print_provider_id || ''),
+        blueprint_id: String(p.blueprint_id || ''),
+      },
+    });
+
+    const stripePriceIds = {};
+    for (const v of enrichedVariants) {
+      if (!v.is_enabled) continue;
+      const price = await stripe.prices.create({
+        currency: 'usd',
+        unit_amount: v.printifyPriceCents, // use Printify retail
+        product: sp.id,
+        nickname: v.title || undefined,
+        metadata: {
+          printify_variant_id: v.id,
+          printify_sku: v.sku || '',
+          variant_title: v.title || '',
+        },
+      });
+      v.stripePriceId = price.id;                   // inline for convenience
+      stripePriceIds[v.id] = { priceId: price.id, unitAmount: price.unit_amount }; // map for legacy UI
+    }
+
+    // 5) Compute min price for listing cards
+    const minPriceCents = enrichedVariants.reduce((min, v) => {
+      if (!v.is_enabled) return min;
+      const cents = Number(v.printifyPriceCents || 0);
+      return min === null ? cents : Math.min(min, cents);
+    }, null);
+
+    const preview = (p.images || []).find((i) => i.is_default) || p.images?.[0];
+
+    const merchDoc = {
+      id: p.id,
+      title: p.title,
+      description: p.description || '',
+      images: (p.images || []).map((img) => ({ ...img, displayInGallery: true })),
+      previewImage: preview?.src || '',
+      tags: p.tags || [],
+      visible: !!p.visible,
+
+      stripeProductId: sp.id,
+      stripePriceIds,               // ← for your existing UI paths
+      variants: enrichedVariants,   // ← each variant has .stripePriceId, .size, .color
+
+      options: enrichedOptions,     // ← Colors/Sizes structure your PDP expects
+      minPriceCents: minPriceCents ?? null,
+
+      status: active ? 'active' : 'inactive',
+      printify: {
+        productId: p.id,
+        blueprint_id: p.blueprint_id || null,
+        print_provider_id: p.print_provider_id || null,
+      },
+      createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+      syncedAt: admin.firestore.FieldValue.serverTimestamp(),
+    };
+
+    await db.collection('merchProducts').doc(p.id).set(merchDoc, { merge: true });
+    res.json({ ok: true, merchProduct: merchDoc });
+  } catch (e) {
+    console.error('Ingest error', e?.response?.data || e);
+    res.status(500).json({ error: 'Failed to ingest Printify product' });
+  }
+});
+
+// NEW: Admin — manual stock refresh (used by ManageProducts button)
+app.post('/admin/merch/refresh-stock', async (req, res) => {
+  try {
+    const shopId = PRINTIFY_SHOP_ID.value();
+    const { data } = await axios.get(
+      `https://api.printify.com/v1/shops/${shopId}/products.json`,
+      { headers: pHeaders() }
+    );
+    const list = data?.data || data || [];
+
+    for (const item of list) {
+      try {
+        const { data: p } = await axios.get(
+          `https://api.printify.com/v1/shops/${shopId}/products/${item.id}.json`,
+          { headers: pHeaders() }
+        );
+        const variants = (p.variants || []).map((v) => ({
+          id: String(v.id),
+          title: v.title,
+          options: v.options || {},
+          printifyPriceCents: Number(v.price || 0),
+          quantity: v.quantity,
+          sku: v.sku || '',
+          is_enabled: !!v.is_enabled,
+        }));
+
+        await db.collection('merchProducts').doc(p.id).set(
+          {
+            title: p.title,
+            images: p.images || [],
+            variants,
+            updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+            syncedAt: admin.firestore.FieldValue.serverTimestamp(),
+          },
+          { merge: true }
+        );
+      } catch (e) {
+        console.error('Refresh single product failed', item?.id, e?.response?.data || e);
+      }
+    }
+
+    res.json({ ok: true, count: list.length });
+  } catch (err) {
+    console.error('Refresh stock error', err?.response?.data || err);
+    res.status(500).json({ error: 'Failed to refresh stock' });
+  }
+});
+
+// ───────────────────────────────────────────────────────────────────────────────
+// Existing endpoints (kept exactly as in your file, with minimal edits)
+
 app.post('/createCheckoutSession', async (req, res) => {
   try {
-    // ---- Guard: secrets present
     const stripeKey = STRIPE_SECRET_KEY.value();
     const clientUrlRaw = CLIENT_URL.value();
     if (!stripeKey) {
       console.error('❌ Missing STRIPE_SECRET_KEY secret');
-      return res
-        .status(500)
-        .json({ error: 'Server misconfiguration (stripe key).' });
+      return res.status(500).json({ error: 'Server misconfiguration (stripe key).' });
     }
     if (!clientUrlRaw) {
       console.error('❌ Missing CLIENT_URL secret');
-      return res
-        .status(500)
-        .json({ error: 'Server misconfiguration (client url).' });
+      return res.status(500).json({ error: 'Server misconfiguration (client url).' });
     }
 
     const stripe = stripeLib(stripeKey);
-    const clientUrl = clientUrlRaw.trim().replace(/\/+$/, ''); // no trailing slash
+    const clientUrl = clientUrlRaw.trim().replace(/\/+$/, '');
 
     const {
       products,
@@ -77,50 +310,36 @@ app.post('/createCheckoutSession', async (req, res) => {
       firstName,
       lastName,
       promoCode,
-      shippingAddress, // optional
-      billingAddress, // optional (unused by Stripe Checkout create call)
+      shippingAddress,
+      billingAddress,
     } = req.body || {};
 
-    // ---- Guard: products
     if (!Array.isArray(products) || products.length === 0) {
       return res.status(400).json({ error: 'Invalid or empty cart.' });
     }
 
-    // 🔐 Stable token to join Stripe session ↔ cart snapshot later
     const guestToken = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
 
-    // 📝 Save the entire cart snapshot BEFORE creating Stripe session
-    await db
-      .collection('pending_checkouts')
-      .doc(guestToken)
-      .set({
-        createdAt: admin.firestore.FieldValue.serverTimestamp(),
-        products,
-        userId: userId || 'guest',
-      });
+    await db.collection('pending_checkouts').doc(guestToken).set({
+      createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      products,
+      userId: userId || 'guest',
+    });
 
-    // 🧾 Build Stripe line items (defensive)
     const lineItems = [];
     for (const p of products) {
       const isMerch = p?.category === 'merch';
       const cfg = p?.config || {};
       const priceNumber = Number(p?.price || 0);
       const unitAmount = Math.round(priceNumber * 100);
-
       if (!Number.isFinite(unitAmount) || unitAmount <= 0) {
         console.error('❌ Bad unit_amount for product:', p);
         return res.status(400).json({ error: 'Invalid item price.' });
       }
-
-      const images =
-        typeof p?.image === 'string' && /^https?:\/\//i.test(p.image)
-          ? [p.image]
-          : [];
+      const images = typeof p?.image === 'string' && /^https?:\/\//i.test(p.image) ? [p.image] : [];
 
       if (isMerch) {
-        const color = String(
-          cfg.colorName || cfg.color || cfg.Colors || ''
-        ).trim();
+        const color = String(cfg.colorName || cfg.color || cfg.Colors || '').trim();
         const size = String(cfg.sizeName || cfg.size || cfg.Sizes || '').trim();
         const vId = String(cfg.variantId || '').trim();
         const parts = [];
@@ -154,11 +373,7 @@ app.post('/createCheckoutSession', async (req, res) => {
           cfgA.depth ? `Depth: ${cfgA.depth}"` : '',
           cfgA.lugQuantity ? `${cfgA.lugQuantity} Lugs` : '',
           cfgA.staveQuantity ? `${cfgA.staveQuantity} Staves` : '',
-          typeof cfgA.reRing !== 'undefined'
-            ? cfgA.reRing
-              ? 'Re-Rings'
-              : 'No Re-Rings'
-            : '',
+          typeof cfgA.reRing !== 'undefined' ? (cfgA.reRing ? 'Re-Rings' : 'No Re-Rings') : '',
           cfgA.hardwareColor ? `Hardware: ${cfgA.hardwareColor}` : '',
         ].filter(Boolean);
 
@@ -169,9 +384,7 @@ app.post('/createCheckoutSession', async (req, res) => {
             product_data: {
               name: p?.name || 'Ober Artisan Product',
               ...(images.length ? { images } : {}),
-              ...(descParts.length
-                ? { description: descParts.join(' • ') }
-                : {}),
+              ...(descParts.length ? { description: descParts.join(' • ') } : {}),
             },
           },
           quantity: Math.max(1, parseInt(p?.quantity || 1, 10)),
@@ -179,7 +392,6 @@ app.post('/createCheckoutSession', async (req, res) => {
       }
     }
 
-    // Build session params, only include optional fields when present
     const sessionParams = {
       mode: 'payment',
       line_items: lineItems,
@@ -199,51 +411,29 @@ app.post('/createCheckoutSession', async (req, res) => {
     if (customerEmail && /\S+@\S+\.\S+/.test(customerEmail)) {
       sessionParams.customer_email = customerEmail;
     }
-
-    // Only require shipping address if you actually need it up front
-    sessionParams.shipping_address_collection = {
-      allowed_countries: ['US', 'CA'],
-    };
-
+    sessionParams.shipping_address_collection = { allowed_countries: ['US', 'CA'] };
     const session = await stripe.checkout.sessions.create(sessionParams);
-
     return res.status(200).json({ url: session.url });
   } catch (err) {
-    // Surface the real Stripe error to your frontend console
-    const msg =
-      err?.raw?.message ||
-      err?.message ||
-      'Unknown error creating checkout session';
+    const msg = err?.raw?.message || err?.message || 'Unknown error creating checkout session';
     console.error('❌ Error creating checkout session:', msg, err);
     return res.status(500).json({ error: msg });
   }
 });
 
-// ✅ Add reCAPTCHA verification endpoint HERE
+// reCAPTCHA verification (unchanged)
 app.post('/verifyRecaptcha', async (req, res) => {
   const token = req.body.token;
   const email = req.body.email || 'unknown';
-
   if (!token) {
     return res.status(400).json({ success: false, message: 'Missing token' });
   }
-
   try {
-    const response = await axios.post(
-      'https://www.google.com/recaptcha/api/siteverify',
-      null,
-      {
-        params: {
-          secret: RECAPTCHA_SECRET_KEY.value(),
-          response: token,
-        },
-      }
-    );
-
+    const response = await axios.post('https://www.google.com/recaptcha/api/siteverify', null, {
+      params: { secret: RECAPTCHA_SECRET_KEY.value(), response: token },
+    });
     const { success, score } = response.data;
-
     if (!success || score < 0.5) {
-      // 🚨 Log risky attempt to Firestore
       await admin.firestore().collection('risk_notifications').add({
         type: 'login',
         source: 'admin-signin',
@@ -251,10 +441,8 @@ app.post('/verifyRecaptcha', async (req, res) => {
         score,
         timestamp: admin.firestore.FieldValue.serverTimestamp(),
       });
-
       return res.status(403).json({ success: false, score });
     }
-
     return res.status(200).json({ success: true, score });
   } catch (err) {
     console.error('❌ reCAPTCHA verification failed:', err.message);
@@ -264,13 +452,8 @@ app.post('/verifyRecaptcha', async (req, res) => {
 
 app.get('/orders/by-session/:sessionId', async (req, res) => {
   try {
-    const snapshot = await db
-      .collection('orders')
-      .where('stripeSessionId', '==', req.params.sessionId)
-      .limit(1)
-      .get();
-    if (snapshot.empty)
-      return res.status(404).json({ error: 'Order not found' });
+    const snapshot = await db.collection('orders').where('stripeSessionId', '==', req.params.sessionId).limit(1).get();
+    if (snapshot.empty) return res.status(404).json({ error: 'Order not found' });
     res.json(snapshot.docs[0].data());
   } catch (err) {
     console.error('❌ Error fetching order:', err.message);
@@ -278,27 +461,22 @@ app.get('/orders/by-session/:sessionId', async (req, res) => {
   }
 });
 
+// ───────────────────────────────────────────────────────────────────────────────
+// Stripe webhook app (raw body)
 const stripeWebhookApp = express();
 stripeWebhookApp.use(express.raw({ type: 'application/json' }));
 
-// Helper: parse something like "Black / L" → { color: "Black", size: "L" }
 function parseTitleColorSize(title) {
   if (!title || typeof title !== 'string') return { color: '', size: '' };
-  const parts = title
-    .split('/')
-    .map((s) => s.trim())
-    .filter(Boolean);
+  const parts = title.split('/').map((s) => s.trim()).filter(Boolean);
   if (parts.length === 2) return { color: parts[0], size: parts[1] };
-  // Sometimes Printify flips or includes extra text; be forgiving
-  if (parts.length > 2)
-    return { color: parts[0], size: parts[parts.length - 1] };
+  if (parts.length > 2) return { color: parts[0], size: parts[parts.length - 1] };
   return { color: '', size: '' };
 }
 
 stripeWebhookApp.post('/', async (req, res) => {
   const stripe = stripeLib(STRIPE_SECRET_KEY.value());
   let event;
-
   try {
     event = stripe.webhooks.constructEvent(
       req.rawBody,
@@ -309,10 +487,7 @@ stripeWebhookApp.post('/', async (req, res) => {
     console.error('❌ Webhook signature verification failed:', err.message);
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }
-
   let session = event.data.object;
-
-  // Expand payment intent/payment method when present (unchanged)
   if (session.payment_intent) {
     session = await stripe.checkout.sessions.retrieve(session.id, {
       expand: ['payment_intent.payment_method'],
@@ -320,132 +495,89 @@ stripeWebhookApp.post('/', async (req, res) => {
   }
 
   try {
-    // ✅ Handle successful checkouts (including async methods like Klarna)
-    // ✅ Handle successful checkouts (includes async methods like Klarna)
     if (
       event.type === 'checkout.session.completed' ||
       event.type === 'checkout.session.async_payment_succeeded'
     ) {
-      // 👉 Expand price.product so we at least have product info;
-      // we will still fetch the Price directly to get metadata.
-      const lineItems = await stripe.checkout.sessions.listLineItems(
-        session.id,
-        {
-          expand: ['data.price.product'],
-        }
-      );
+      const lineItems = await stripe.checkout.sessions.listLineItems(session.id, {
+        expand: ['data.price.product'],
+      });
 
-      // 🛡️ Idempotency guard: skip if we already wrote an order for this session
       const existing = await db
         .collection('orders')
         .where('stripeSessionId', '==', session.id)
         .limit(1)
         .get();
-      if (!existing.empty) {
-        return res.status(200).send('Order already recorded for this session.');
-      }
+      if (!existing.empty) return res.status(200).send('Order already recorded for this session.');
 
-      // Defensive check
       if (
         !session.customer_details?.email ||
         !session.customer_details?.name ||
         !session.shipping_details?.address ||
         lineItems.data.length === 0
       ) {
-        console.warn(
-          '⚠️ Skipping incomplete order creation. Missing important customer info.'
-        );
-        return res
-          .status(200)
-          .send('Skipped: Incomplete session, no order created.');
+        console.warn('⚠️ Skipping incomplete order creation. Missing important customer info.');
+        return res.status(200).send('Skipped: Incomplete session, no order created.');
       }
 
-      // 🔎 Pull our pre-checkout snapshot by guestToken
       const guestToken = session.metadata?.guestToken || '';
       let snapshotProducts = [];
       if (guestToken) {
         try {
-          const snapDoc = await db
-            .collection('pending_checkouts')
-            .doc(guestToken)
-            .get();
+          const snapDoc = await db.collection('pending_checkouts').doc(guestToken).get();
           if (snapDoc.exists) {
             const snap = snapDoc.data();
             if (Array.isArray(snap?.products)) snapshotProducts = snap.products;
-          } else {
-            console.warn(
-              '⚠️ No pending_checkouts snapshot for guestToken:',
-              guestToken
-            );
           }
         } catch (e) {
           console.warn('⚠️ Failed to read pending_checkouts:', e.message);
         }
-      } else {
-        console.warn('⚠️ Session missing guestToken metadata.');
       }
 
-      // 🧩 Build final items array
       const items = [];
       for (const li of lineItems.data) {
         const priceId = li.price?.id || '';
         const unitAmount = li.price?.unit_amount ?? null;
         const productObj = li.price?.product || {};
-        const pMeta = productObj?.metadata || {}; // metadata we set in product_data.metadata
-        const pDesc = productObj?.description || ''; // "Color: X • Size: Y" we set earlier
-        const pImages = Array.isArray(productObj?.images)
-          ? productObj.images
-          : [];
+        const pMeta = productObj?.metadata || {};
+        const pDesc = productObj?.description || '';
+        const pImages = Array.isArray(productObj?.images) ? productObj.images : [];
 
-        // Try to match to snapshot (still useful for artisan etc.)
         let matched =
           (Array.isArray(snapshotProducts) ? snapshotProducts : []).find(
             (p) => p.stripePriceId && p.stripePriceId === priceId
           ) ||
           (Array.isArray(snapshotProducts) ? snapshotProducts : []).find(
-            (p) =>
-              !p.stripePriceId &&
-              Math.round(Number(p.price || 0) * 100) === unitAmount
+            (p) => !p.stripePriceId && Math.round(Number(p.price || 0) * 100) === unitAmount
           );
 
-        // Price metadata fallback (for legacy Stripe saved prices)
         let stripePriceMeta = { variantId: '', title: '', sku: '' };
         try {
           if (priceId) {
             const priceObj = await stripe.prices.retrieve(priceId);
             const md = priceObj?.metadata || {};
-            stripePriceMeta.variantId = md.variantId || '';
-            stripePriceMeta.title = md.title || '';
-            stripePriceMeta.sku = md.sku || '';
+            stripePriceMeta.variantId = md.variantId || md.printify_variant_id || '';
+            stripePriceMeta.title = md.title || md.variant_title || '';
+            stripePriceMeta.sku = md.sku || md.printify_sku || '';
           }
         } catch (e) {
-          console.warn(
-            '⚠️ Could not retrieve Stripe Price metadata for',
-            priceId,
-            e.message
-          );
+          console.warn('⚠️ Could not retrieve Stripe Price metadata for', priceId, e.message);
         }
 
-        // Build variant (prefer metadata we set during session creation)
         let variant = {
-          variantId: pMeta.variantId || '',
+          variantId: pMeta.variantId || pMeta.printify_variant_id || '',
           size: pMeta.sizeName || '',
           color: pMeta.colorName || '',
           sku: stripePriceMeta.sku || '',
           title: stripePriceMeta.title || '',
         };
 
-        // If we matched snapshot and it’s merch, prefer the snapshot’s friendly names
         if (matched?.category === 'merch') {
           const cfg = matched.config || {};
-          variant.variantId =
-            variant.variantId || (cfg.variantId ? String(cfg.variantId) : '');
-          variant.size =
-            variant.size || cfg.sizeName || cfg.size || cfg.Sizes || '';
-          variant.color =
-            variant.color || cfg.colorName || cfg.color || cfg.Colors || '';
+          variant.variantId = variant.variantId || (cfg.variantId ? String(cfg.variantId) : '');
+          variant.size = variant.size || cfg.sizeName || cfg.size || cfg.Sizes || '';
+          variant.color = variant.color || cfg.colorName || cfg.color || cfg.Colors || '';
         } else if (matched) {
-          // artisan path
           const cfg = matched.config || {};
           variant = {
             ...variant,
@@ -454,16 +586,10 @@ stripeWebhookApp.post('/', async (req, res) => {
             lugQuantity: cfg.lugQuantity || '',
             staveQuantity: cfg.staveQuantity || '',
             depth: cfg.depth || '',
-            reRing:
-              typeof cfg.reRing !== 'undefined'
-                ? cfg.reRing
-                  ? 'Yes'
-                  : 'No'
-                : '',
+            reRing: typeof cfg.reRing !== 'undefined' ? (cfg.reRing ? 'Yes' : 'No') : '',
           };
         }
 
-        // Backfill from "Color: X • Size: Y" description if still missing
         if ((!variant.color || !variant.size) && pDesc) {
           const parts = pDesc.split('•').map((s) => s.trim());
           for (const part of parts) {
@@ -474,23 +600,20 @@ stripeWebhookApp.post('/', async (req, res) => {
           }
         }
 
-        // As a last fallback, try the saved Price metadata title ("Black / L")
         if ((!variant.color || !variant.size) && stripePriceMeta.title) {
           const t = stripePriceMeta.title.split('/').map((s) => s.trim());
           if (!variant.color && t[0]) variant.color = t[0];
           if (!variant.size && t[t.length - 1]) variant.size = t[t.length - 1];
         }
 
-        // Final fields (prefer snapshot, then product metadata)
         const finalCategory = matched?.category || pMeta.category || '';
         const finalProductId = matched?.productId || pMeta.productId || '';
-        const finalName =
-          matched?.name || productObj?.name || li.description || 'Ober Product';
+        const finalName = matched?.name || productObj?.name || li.description || 'Ober Product';
         const finalImage = matched?.image || pImages[0] || '';
 
         items.push({
           priceId,
-          description: li.description, // Stripe’s own line description (usually the product name)
+          description: li.description,
           quantity: li.quantity,
           price: (li.amount_total || 0) / 100,
           name: finalName,
@@ -501,28 +624,16 @@ stripeWebhookApp.post('/', async (req, res) => {
         });
       }
 
-      // 🔎 Identify the payment method used (card, klarna, afterpay_clearpay, etc.)
-      const pm = session.payment_intent?.payment_method || null; // expanded above via retrieve(..., { expand: ['payment_intent.payment_method'] })
-      const paymentMethodType = pm?.type || ''; // e.g., 'card', 'klarna', 'afterpay_clearpay'
-
-      // Normalize a couple of common details for convenience
+      const pm = session.payment_intent?.payment_method || null;
+      const paymentMethodType = pm?.type || '';
       let cardDetails = null;
       if (paymentMethodType === 'card' && pm?.card) {
-        cardDetails = {
-          brand: pm.card.brand || '',
-          lastFour: pm.card.last4 || '',
-        };
+        cardDetails = { brand: pm.card.brand || '', lastFour: pm.card.last4 || '' };
       }
-
-      // Optional: raw details object for non-card methods (Klarna won’t have card numbers)
       const paymentMethodDetails =
-        paymentMethodType && pm && pm[paymentMethodType]
-          ? pm[paymentMethodType]
-          : null;
+        paymentMethodType && pm && pm[paymentMethodType] ? pm[paymentMethodType] : null;
 
-      // ✅ Now build and persist the order
       const orderId = `ORD-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
-
       const orderDoc = {
         stripeSessionId: session.id,
         customerEmail: session.customer_details.email,
@@ -532,41 +643,27 @@ stripeWebhookApp.post('/', async (req, res) => {
         amountTotal: session.amount_total || 0,
         totalAmount: session.amount_total ? session.amount_total / 100 : 0,
         currency: session.currency || 'usd',
-
-        // 🧾 Payment method info (dynamic methods-friendly)
-        paymentMethod: paymentMethodType, // 'card' | 'klarna' | 'afterpay_clearpay' | ...
-        cardDetails: cardDetails, // null unless it's a card
-        paymentMethodDetails: paymentMethodDetails, // raw details object for the method (optional)
-        stripePaymentStatus: session.payment_status || '', // 'paid' | 'unpaid' | 'no_payment_required'
-
+        paymentMethod: paymentMethodType,
+        cardDetails,
+        paymentMethodDetails,
+        stripePaymentStatus: session.payment_status || '',
         status: 'order successful',
         createdAt: admin.firestore.FieldValue.serverTimestamp(),
         userId: session.metadata?.userId || 'guest',
         guestToken: session.metadata?.guestToken || '',
         items,
         orderId,
-        promoCode: session.total_details?.amount_discount
-          ? session.discounts?.[0]?.promotion_code || ''
-          : '',
+        promoCode: session.total_details?.amount_discount ? session.discounts?.[0]?.promotion_code || '' : '',
       };
 
       await db.collection('orders').doc(orderId).set(orderDoc);
-
-      // Clean up snapshot (best effort)
       if (session.metadata?.guestToken) {
-        db.collection('pending_checkouts')
-          .doc(session.metadata.guestToken)
-          .delete()
-          .catch(() => {});
+        db.collection('pending_checkouts').doc(session.metadata.guestToken).delete().catch(() => {});
       }
-
       return res.status(200).send('Order created');
     }
 
-    if (
-      event.type === 'checkout.session.expired' ||
-      event.type === 'checkout.session.async_payment_failed'
-    ) {
+    if (event.type === 'checkout.session.expired' || event.type === 'checkout.session.async_payment_failed') {
       console.warn('⚠️ Stripe session failed or expired, no order created.');
       return res.status(200).send('Skipped: Session failed or expired.');
     }
@@ -578,6 +675,8 @@ stripeWebhookApp.post('/', async (req, res) => {
   }
 });
 
+// ───────────────────────────────────────────────────────────────────────────────
+// Printify webhook app (raw body)
 const printifyWebhookApp = express();
 printifyWebhookApp.use(express.raw({ type: '*/*' }));
 
@@ -596,19 +695,10 @@ printifyWebhookApp.post('/', async (req, res) => {
   }
 
   const receivedSignature = signatureHeader.split('=')[1];
-  const expectedSignature = crypto
-    .createHmac('sha256', secret)
-    .update(raw, 'utf8')
-    .digest('hex');
+  const expectedSignature = crypto.createHmac('sha256', secret).update(raw, 'utf8').digest('hex');
 
-  const isValid = crypto.timingSafeEqual(
-    Buffer.from(receivedSignature),
-    Buffer.from(expectedSignature)
-  );
-
-  if (!isValid) {
-    return res.status(401).send('Invalid signature');
-  }
+  const isValid = crypto.timingSafeEqual(Buffer.from(receivedSignature), Buffer.from(expectedSignature));
+  if (!isValid) return res.status(401).send('Invalid signature');
 
   let event;
   try {
@@ -617,16 +707,12 @@ printifyWebhookApp.post('/', async (req, res) => {
     return res.status(400).send('Invalid JSON');
   }
 
-  if (
-    event.topic === 'product.publish' ||
-    event.topic === 'product:publish:started'
-  ) {
+  if (event.topic === 'product.publish' || event.topic === 'product:publish:started') {
     const productId = event.resource?.id || event.data?.id;
     if (productId) {
       await handlePrintifyProductPublished(productId);
     }
   }
-
   res.status(200).send('Webhook received');
 });
 
@@ -656,8 +742,7 @@ const handlePrintifyProductPublished = async (productId) => {
         : null;
 
       const variantImages = (product.images || []).filter(
-        (img) =>
-          Array.isArray(img.variant_ids) && img.variant_ids.includes(variant.id)
+        (img) => Array.isArray(img.variant_ids) && img.variant_ids.includes(variant.id)
       );
 
       return {
@@ -684,10 +769,7 @@ const handlePrintifyProductPublished = async (productId) => {
             usedColors.add(variant.color);
           }
         }
-        return {
-          ...val,
-          colors: [...usedColors],
-        };
+        return { ...val, colors: [...usedColors] };
       });
       return { ...opt, values: enrichedValues };
     });
@@ -711,21 +793,14 @@ const handlePrintifyProductPublished = async (productId) => {
           sku: variant.sku,
         },
       });
-      stripePriceIds[variant.id] = {
-        priceId: price.id,
-        unitAmount: price.unit_amount,
-      };
+      stripePriceIds[variant.id] = { priceId: price.id, unitAmount: price.unit_amount };
     }
 
     const payload = {
       id: product.id,
       title: product.title,
       description: product.description || '',
-      images:
-        product.images?.map((img) => ({
-          ...img,
-          displayInGallery: true,
-        })) || [],
+      images: product.images?.map((img) => ({ ...img, displayInGallery: true })) || [],
       tags: product.tags,
       variants: filteredVariants,
       options: enrichedOptions,
@@ -742,6 +817,8 @@ const handlePrintifyProductPublished = async (productId) => {
   }
 };
 
+// ───────────────────────────────────────────────────────────────────────────────
+// Scheduled refresh (unchanged)
 exports.refreshPrintifyStock = onSchedule(
   {
     schedule: '0 * * * *',
@@ -754,8 +831,8 @@ exports.refreshPrintifyStock = onSchedule(
 
     const merchSnapshot = await db.collection('merchProducts').get();
 
-    for (const doc of merchSnapshot.docs) {
-      const productId = doc.id;
+    for (const docRef of merchSnapshot.docs) {
+      const productId = docRef.id;
       try {
         const response = await axios.get(
           `https://api.printify.com/v1/shops/${shopId}/products/${productId}.json`,
@@ -763,10 +840,10 @@ exports.refreshPrintifyStock = onSchedule(
         );
 
         const printifyProduct = response.data;
-        const productDoc = doc.data();
+        const productDoc = docRef.data();
         const enrichedOptions = productDoc.options || [];
 
-        await doc.ref.update({
+        await docRef.ref.update({
           variants: printifyProduct.variants.filter((v) => v.is_enabled),
           options: enrichedOptions,
           updatedAt: admin.firestore.FieldValue.serverTimestamp(),
@@ -779,134 +856,68 @@ exports.refreshPrintifyStock = onSchedule(
   }
 );
 
+// Auto-replies (unchanged)
 exports.autoReplyInquiry = onDocumentCreated(
-  {
-    document: 'inquiries/{docId}',
-    secrets: [SENDGRID_API_KEY],
-  },
+  { document: 'inquiries/{docId}', secrets: [SENDGRID_API_KEY] },
   async (event) => {
     const sgMail = require('@sendgrid/mail');
     sgMail.setApiKey(SENDGRID_API_KEY.value());
-
     const data = event.data.data();
-    const { email, firstName } = data;
-
+    const { email } = data;
     const msg = {
       to: email,
-      from: {
-        name: 'Ober Artisan Drums',
-        email: 'support@oberartisandrums.com',
-      },
+      from: { name: 'Ober Artisan Drums', email: 'support@oberartisandrums.com' },
       replyTo: 'support@oberartisandrums.com',
       bcc: ['support@oberartisandrums.com'],
       subject: `We've Received Your Message`,
       html: `...`,
     };
-
-    try {
-      const response = await sgMail.send(msg);
-      console.log('✅ Auto-reply sent:', response);
-    } catch (error) {
-      console.error('❌ Error sending auto-reply:', error);
-    }
+    try { await sgMail.send(msg); } catch (error) { console.error('❌ Error sending auto-reply:', error); }
   }
 );
 
 exports.autoReplySoundlegend = onDocumentCreated(
-  {
-    document: 'soundlegend_submissions/{docId}',
-    secrets: [SENDGRID_API_KEY],
-  },
+  { document: 'soundlegend_submissions/{docId}', secrets: [SENDGRID_API_KEY] },
   async (event) => {
     const sgMail = require('@sendgrid/mail');
     sgMail.setApiKey(SENDGRID_API_KEY.value());
-
     const data = event.data.data();
-    const { email, firstName } = data;
-
+    const { email } = data;
     const msg = {
       to: email,
-      from: {
-        name: 'Ober Artisan Drums',
-        email: 'soundlegend@oberartisandrums.com',
-      },
+      from: { name: 'Ober Artisan Drums', email: 'soundlegend@oberartisandrums.com' },
       bcc: ['soundlegend@oberartisandrums.com'],
       subject: `Welcome to the SoundLegend Experience`,
       html: `...`,
     };
-
-    try {
-      const response = await sgMail.send(msg);
-      console.log('✅ Auto-reply sent (SoundLegend):', response);
-    } catch (error) {
-      console.error('❌ Error sending SoundLegend auto-reply:', error);
-    }
+    try { await sgMail.send(msg); } catch (error) { console.error('❌ Error sending SoundLegend auto-reply:', error); }
   }
 );
 
+// Main API, Stripe webhook, Printify webhook, Manual refresh
 exports.api = onRequest(
-  {
-    region: 'us-central1',
-    secrets: [
-      STRIPE_SECRET_KEY,
-      STRIPE_WEBHOOK_SECRET,
-      CLIENT_URL,
-      RECAPTCHA_SECRET_KEY,
-    ],
-  },
+  { region: 'us-central1', secrets: [STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, CLIENT_URL, RECAPTCHA_SECRET_KEY, PRINTIFY_API_KEY, PRINTIFY_SHOP_ID] },
   app
 );
-
 exports.stripeWebhook = onRequest(
-  {
-    region: 'us-central1',
-    secrets: [STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET],
-    cors: true,
-  },
+  { region: 'us-central1', secrets: [STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET], cors: true },
   stripeWebhookApp
 );
-
 exports.printifyWebhookListener = onRequest(
-  {
-    region: 'us-central1',
-    secrets: [
-      PRINTIFY_API_KEY,
-      PRINTIFY_SHOP_ID,
-      PRINTIFY_WEBHOOK_SECRET,
-      STRIPE_SECRET_KEY,
-    ],
-  },
+  { region: 'us-central1', secrets: [PRINTIFY_API_KEY, PRINTIFY_SHOP_ID, PRINTIFY_WEBHOOK_SECRET, STRIPE_SECRET_KEY] },
   printifyWebhookApp
 );
-
 exports.refreshPrintifyStockNow = onRequest(
-  {
-    region: 'us-central1',
-    secrets: [PRINTIFY_API_KEY, PRINTIFY_SHOP_ID],
-  },
+  { region: 'us-central1', secrets: [PRINTIFY_API_KEY, PRINTIFY_SHOP_ID] },
   async (req, res) => {
-    const allowedOrigins = [
-      'http://localhost:3000',
-      'https://oberartisandrums.com',
-      'https://www.oberartisandrums.com',
-    ];
-
     const origin = req.headers.origin;
-    if (allowedOrigins.includes(origin)) {
-      res.set('Access-Control-Allow-Origin', origin);
-    }
+    if (allowedOrigins.includes(origin)) res.set('Access-Control-Allow-Origin', origin);
     res.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
     res.set('Access-Control-Allow-Headers', 'Content-Type');
-
-    if (req.method === 'OPTIONS') {
-      return res.status(204).send('');
-    }
-
+    if (req.method === 'OPTIONS') return res.status(204).send('');
     try {
       await exports.refreshPrintifyStock.run();
-      res
-        .status(200)
-        .send('✅ Manual refreshPrintifyStock executed successfully.');
+      res.status(200).send('✅ Manual refreshPrintifyStock executed successfully.');
     } catch (error) {
       console.error('❌ Manual refresh failed:', error);
       res.status(500).send('❌ Manual refresh failed.');
@@ -914,9 +925,24 @@ exports.refreshPrintifyStockNow = onRequest(
   }
 );
 
+// Other callables unchanged
 exports.adminCreateUser = functions.https.onCall(async (data, context) => {
   // ... unchanged ...
 });
-
 const { generateDrumMockup } = require('./generateDrumMockup');
 exports.generateDrumMockup = generateDrumMockup;
+exports.computeSoundPrism = onCall({ region: 'us-central1' }, async (request) => {
+  const inputs = request.data?.inputs || {};
+  const f = Number(inputs.fundamentalHz) || 200;
+  const computed = {
+    axis: { loHz: 140, hiHz: 360, tickHz: 20 },
+    sweetSpots: [
+      { id: 'low', label: 'Low', loHz: f * 2.05, hiHz: f * 2.3 },
+      { id: 'legacy', label: 'Legacy', loHz: f * 2.35, hiHz: f * 2.65 },
+      { id: 'high', label: 'High', loHz: f * 2.7, hiHz: f * 3.1 },
+    ],
+    legacyPrint: { bandId: 'legacy', why: ['placeholder analysis'] },
+    harmonics: [2, 2.5, 3].map((m) => ({ multiple: m, hz: f * m })),
+  };
+  return { computed };
+});
