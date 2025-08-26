@@ -1,0 +1,39 @@
+.sr { position: relative; height: 100px; margin: 10px auto 6px; max-width: 980px; }
+.sr-track { position: absolute; left: 0; right: 0; top: 36px; height: 6px; background: rgba(255,255,255,0.09); border-radius: 4px; }
+
+/* Axis */
+.sr-tick { position: absolute; top: 0; transform: translateX(-50%); }
+.sr-tickline { width: 1px; height: 10px; background: rgba(255,255,255,0.33); margin: 14px auto 3px; }
+.sr-ticklabel { font-size: 10px; opacity: .72; min-width: 28px; text-align: center; transform: translateX(-50%); }
+
+/* Playable full range (green band) */
+.sr-playable {
+  position: absolute; top: 30px; height: 18px; border-radius: 10px;
+  background: rgba(46, 204, 113, .45);
+  box-shadow: inset 0 0 0 1px rgba(46, 204, 113, .65);
+}
+
+/* Legacy thin highlight on top of the green band */
+.sr-legacywin {
+  position: absolute; top: 30px; height: 18px; border-radius: 10px;
+  background: rgba(255, 213, 79, .38);
+  box-shadow: inset 0 0 0 1px rgba(255, 213, 79, .8);
+}
+.sr-legacywin.active { box-shadow: inset 0 0 0 2px rgba(255, 213, 79, 1); }
+
+/* Markers */
+.sr-star { position: absolute; top: 10px; transform: translateX(-50%); font-size: 20px; line-height: 1; color: #ffd54f; filter: drop-shadow(0 2px 4px rgba(0,0,0,.35)); }
+.sr-star.is-active { transform: translateX(-50%) scale(1.06); }
+
+.sr-dot  { position: absolute; top: 15px; transform: translateX(-50%); width: 12px; height: 12px; border-radius: 999px; box-shadow: 0 1px 2px rgba(0,0,0,.35); }
+.sr-dot.below { background: #00b87c; }
+.sr-dot.above { background: #4081ff; }
+.sr-dot.is-active { transform: translateX(-50%) scale(1.08); }
+
+/* Pins */
+.sr-pin { position: absolute; top: 30px; height: 18px; width: 2px; transform: translateX(-50%); border-radius: 2px; }
+.sr-pin.shell { background: #00e0b8; box-shadow: 0 0 0 1px rgba(0,224,184,.5); }
+.sr-pin.harm  { background: #ffffff; box-shadow: 0 0 0 1px rgba(255,255,255,.35); }
+
+/* Caption */
+.sr-caption { margin-top: 64px; font-size: 12px; opacity: .8; text-align: center; }
