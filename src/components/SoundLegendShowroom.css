@@ -3,9 +3,10 @@
 
 /* Runtime-updated (JS may override these). */
 :root{
-  --sl-navbar: 72px;
-  --sl-offset: 120px;
-  --sl-pills-cushion: 14px;
+  --sl-navbar: 72px;                 /* JS measures your fixed header and sets this */
+  --sl-pills-cushion: 28px;          /* extra gap below the header */
+  --sl-viewbar-h: 52px;              /* approx height of the pill bar */
+  --sl-offset: calc(var(--sl-navbar) + var(--sl-pills-cushion) + var(--sl-viewbar-h));
 }
 
 /* Page */
@@ -21,27 +22,29 @@
 }
 
 /* Ensure anchors land below sticky UI (+ cushion) */
-.sl-anchor { scroll-margin-top: calc(var(--sl-offset, 120px) + var(--sl-pills-cushion, 14px)); }
+.sl-anchor { scroll-margin-top: calc(var(--sl-offset) + 8px); }
 
 /* Logo */
 .showroom-logo { max-width: 500px; width: 100%; margin: 40px auto 16px; display: block; }
 
 /* ===== Sticky pills */
-.sl-viewbar {
+.sl-viewbar{
   position: sticky;
   position: -webkit-sticky;
-  top: calc(var(--sl-navbar, 72px) + var(--sl-pills-cushion, 14px));
+  top: calc(var(--sl-navbar) + var(--sl-pills-cushion)); /* sits below your fixed header */
   z-index: 2500;
   display: flex;
   gap: 10px;
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 70px 0px;
-  margin: 8px 0 18px;
-  background: rgba(14,14,14,.9);
+  padding: 50px 12px;
+  margin: 12px 0 18px;
+  min-height: var(--sl-viewbar-h);
+  background: rgba(14,14,14,.92);
   backdrop-filter: blur(6px) saturate(120%);
   border-bottom: 1px solid rgba(255,255,255,.08);
+  box-shadow: 0 6px 12px rgba(0,0,0,.35);
 }
 
 .sl-pill {
@@ -79,7 +82,7 @@
 .showroom-story-content { font-family: 'Gentium Book Plus', cursive; font-size: 26px; font-weight: 500; line-height: 2; color: #e0e0e0; letter-spacing: .4px; }
 .showroom-story-content p { margin-bottom: 22px; }
 
-/* ===== Section shells (page-level) ===== */
+/* ===== Section shells */
 .sl-audio-section  { max-width: 1060px; margin: 28px auto 40px; padding: 0 16px; }
 .sl-audio-h2 { text-align: center; opacity: .9; margin-bottom: 10px; letter-spacing: .02em; }
 
@@ -143,14 +146,7 @@
 /* Meta */
 .sl-audio-meta { min-width: 0; flex: 1; }
 .sl-snare-h { font-size: 11px; letter-spacing: .04em; opacity: .85; margin-bottom: 2px; text-transform: uppercase; }
-.sl-audio-title {
-  font-weight: 600;
-  letter-spacing: .06em;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  text-transform: uppercase;
-}
+.sl-audio-title { font-weight: 600; letter-spacing: .06em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-transform: uppercase; }
 .sl-audio-desc { margin-top: 2px; font-size: .88rem; opacity: .8; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .sl-audio-time { margin-left: auto; font-variant-numeric: tabular-nums; font-size: .88rem; opacity: .8; white-space: nowrap; }
 
@@ -187,7 +183,11 @@
 
 /* ===== Mobile tweaks ===== */
 @media (max-width: 600px) {
-  :root { --sl-pills-cushion: 16px; }
+  :root {
+    --sl-pills-cushion: 36px;       /* mobile headers are usually taller */
+    --sl-viewbar-h: 54px;
+    --sl-offset: calc(var(--sl-navbar) + var(--sl-pills-cushion) + var(--sl-viewbar-h));
+  }
 
   html, body { margin: 0; width: 100%; overflow-x: hidden; }
   .soundlegend-showroom { padding: 0 0 60px; align-items: stretch; }

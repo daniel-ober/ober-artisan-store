@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
   deleteProduct,
+  hardDeleteProduct, // ⬅️ NEW
   updateProductStatus,
   updateProductInventory,
   triggerPrintifyStockRefresh,
@@ -71,10 +72,26 @@ const ManageProducts = () => {
   }, []);
 
   const handleDeleteProduct = async (productId) => {
+    const target = products.find((p) => p.id === productId);
+    if (!target) return;
+
+    const source = target._source || 'merchProducts';
+    const title = target.title || target.name || 'this product';
+
+    // Ask whether to HARD delete (Stripe + Printify + Firestore) or soft delete (Firestore only)
+    const doHard = window.confirm(
+      `Hard Delete "${title}"?\n\nOK = hard delete (also cleans up Stripe and, for merch, tries to delete in Printify)\nCancel = regular delete (Firestore only)`
+    );
+
     try {
-      await deleteProduct(productId);
+      if (doHard) {
+        await hardDeleteProduct(productId, source);
+      } else {
+        await deleteProduct(productId);
+      }
       setProducts((prev) => prev.filter((p) => p.id !== productId));
     } catch (err) {
+      console.error(err);
       setError('Error deleting product.');
     }
   };
@@ -102,7 +119,9 @@ const ManageProducts = () => {
   const handleMaxInventoryChange = async (productId, newMaxInventory) => {
     try {
       await updateProductInventory(productId, { maxQuantity: newMaxInventory });
-      setProducts((prev) => prev.map((p) => (p.id === productId ? { ...p, maxQuantity: newMaxInventory } : p)));
+      setProducts((prev) =>
+        prev.map((p) => (p.id === productId ? { ...p, maxQuantity: newMaxInventory } : p))
+      );
     } catch {
       setError('Failed to update max inventory.');
     }
@@ -111,7 +130,11 @@ const ManageProducts = () => {
   const handleCurrentInventoryChange = async (productId, newCurrentInventory) => {
     try {
       await updateProductInventory(productId, { currentQuantity: newCurrentInventory });
-      setProducts((prev) => prev.map((p) => (p.id === productId ? { ...p, currentQuantity: newCurrentInventory } : p)));
+      setProducts((prev) =>
+        prev.map((p) =>
+          p.id === productId ? { ...p, currentQuantity: newCurrentInventory } : p
+        )
+      );
     } catch {
       setError('Failed to update current inventory.');
     }
@@ -122,7 +145,8 @@ const ManageProducts = () => {
       typeof productOrId === 'object' ? productOrId : products.find((p) => p.id === productOrId);
     if (!product) return;
 
-    const url = product._source === 'merchProducts' ? `/merch/${product.id}` : `/products/${product.id}`;
+    const url =
+      product._source === 'merchProducts' ? `/merch/${product.id}` : `/products/${product.id}`;
     window.open(url, '_blank');
   };
 
@@ -159,7 +183,11 @@ const ManageProducts = () => {
           + Add Merch from Printify
         </button>
 
-        <button className="add-product-btn" onClick={() => setIsAddModalOpen(true)} style={{ backgroundColor: '#1363df' }}>
+        <button
+          className="add-product-btn"
+          onClick={() => setIsAddModalOpen(true)}
+          style={{ backgroundColor: '#1363df' }}
+        >
           + Add Artisan Product
         </button>
       </div>
@@ -167,7 +195,10 @@ const ManageProducts = () => {
       {printifyLastUpdated && (
         <p style={{ marginTop: '0.5rem', fontSize: '0.9rem', color: '#555' }}>
           Printify Stock Last Updated:{' '}
-          {printifyLastUpdated.toLocaleString('en-US', { dateStyle: 'long', timeStyle: 'short' })}
+          {printifyLastUpdated.toLocaleString('en-US', {
+            dateStyle: 'long',
+            timeStyle: 'short',
+          })}
         </p>
       )}
 
@@ -195,13 +226,20 @@ const ManageProducts = () => {
               return (
                 <tr key={product.id}>
                   <td>
-                    <button className="thumbnail-btn" onClick={() => openProductDetail(product.id)} aria-label={`View details for ${title}`}>
+                    <button
+                      className="thumbnail-btn"
+                      onClick={() => openProductDetail(product.id)}
+                      aria-label={`View details for ${title}`}
+                    >
                       <img src={imageUrl} alt={title} className="thumbnail" />
                     </button>
                   </td>
                   <td>{title}</td>
                   <td>
-                    <select value={product.status || 'active'} onChange={(e) => handleStatusChange(product.id, e.target.value)}>
+                    <select
+                      value={product.status || 'active'}
+                      onChange={(e) => handleStatusChange(product.id, e.target.value)}
+                    >
                       <option value="active">Active</option>
                       <option value="inactive">Inactive</option>
                     </select>
@@ -212,7 +250,9 @@ const ManageProducts = () => {
                     ) : (
                       <select
                         value={product.maxQuantity || 0}
-                        onChange={(e) => handleMaxInventoryChange(product.id, parseInt(e.target.value))}
+                        onChange={(e) =>
+                          handleMaxInventoryChange(product.id, parseInt(e.target.value))
+                        }
                       >
                         {Array.from({ length: 21 }, (_, i) => (
                           <option key={i} value={i}>
@@ -231,7 +271,12 @@ const ManageProducts = () => {
                         value={product.currentQuantity || 0}
                         min="0"
                         max={product.maxQuantity || 0}
-                        onChange={(e) => handleCurrentInventoryChange(product.id, parseInt(e.target.value) || 0)}
+                        onChange={(e) =>
+                          handleCurrentInventoryChange(
+                            product.id,
+                            parseInt(e.target.value) || 0
+                          )
+                        }
                       />
                     )}
                   </td>
@@ -239,7 +284,11 @@ const ManageProducts = () => {
                     <button className="edit-btn" onClick={() => setEditProductId(product.id)}>
                       Edit
                     </button>
-                    <button className="delete-btn" onClick={() => handleDeleteProduct(product.id)}>
+                    <button
+                      className="delete-btn"
+                      onClick={() => handleDeleteProduct(product.id)}
+                      title="Delete (will ask Hard vs Soft delete)"
+                    >
                       Delete
                     </button>
                   </td>
@@ -260,7 +309,9 @@ const ManageProducts = () => {
       {isAddMerchModalOpen && (
         <AddMerchFromPrintifyModal
           onClose={() => setIsAddMerchModalOpen(false)}
-          onAdded={(merchProduct) => setProducts((prev) => [{ ...merchProduct, _source: 'merchProducts' }, ...prev])}
+          onAdded={(merchProduct) =>
+            setProducts((prev) => [{ ...merchProduct, _source: 'merchProducts' }, ...prev])
+          }
         />
       )}
 
@@ -272,7 +323,11 @@ const ManageProducts = () => {
             onProductUpdated={handleProductUpdate}
           />
         ) : (
-          <EditProductModal productId={productToEdit.id} onClose={() => setEditProductId(null)} onProductUpdated={handleProductUpdate} />
+          <EditProductModal
+            productId={productToEdit.id}
+            onClose={() => setEditProductId(null)}
+            onProductUpdated={handleProductUpdate}
+          />
         ))}
     </div>
   );

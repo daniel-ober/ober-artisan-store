@@ -11,13 +11,14 @@ import {
   runTransaction,
 } from 'firebase/firestore';
 
-// Use your hosted Functions base when available; fall back to the deployed URL you already use.
+// Hosted Functions base (override in .env if needed)
 const API_BASE =
   import.meta.env?.VITE_FUNCTIONS_BASE_URL ||
   'https://us-central1-danoberartisandrums.cloudfunctions.net/api';
 
-// ───────────────────────────────────────────────────────────────────────────────
-// Printify ⇄ Stripe admin helpers (used by AddMerchFromPrintifyModal)
+/* ──────────────────────────────────────────────────────────────────────────
+   Printify ⇄ Stripe admin helpers (used by AddMerchFromPrintifyModal)
+   ────────────────────────────────────────────────────────────────────────── */
 
 export async function fetchPrintifyCatalog() {
   const res = await fetch(`${API_BASE}/printify/catalog`, { method: 'GET' });
@@ -25,7 +26,12 @@ export async function fetchPrintifyCatalog() {
   return res.json(); // { products: [...] }
 }
 
-export async function ingestPrintifyProduct({ printifyProductId, titleOverride, marginPercent = 0, active = true }) {
+export async function ingestPrintifyProduct({
+  printifyProductId,
+  titleOverride,
+  marginPercent = 0,
+  active = true,
+}) {
   const res = await fetch(`${API_BASE}/admin/merch/ingest`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -35,27 +41,28 @@ export async function ingestPrintifyProduct({ printifyProductId, titleOverride, 
   return res.json(); // { ok: true, merchProduct }
 }
 
-// Manual stock refresh: prefer new /api route; fall back to your existing refreshPrintifyStockNow endpoint.
+/** Trigger a Printify stock refresh in the backend. */
 export async function triggerPrintifyStockRefresh() {
-  // Try the new fast endpoint first
+  // Preferred endpoint (new)
   try {
     const res = await fetch(`${API_BASE}/admin/merch/refresh-stock`, { method: 'POST' });
     if (res.ok) return res.json();
-  } catch (_) {
-    // ignore and try fallback
+  } catch {
+    /* fall through */
   }
-  // Fallback to your existing function you already wired in the UI
-  const fallback = 'https://us-central1-danoberartisandrums.cloudfunctions.net/refreshPrintifyStockNow';
+  // Fallback to legacy callable HTTP function you already expose
+  const fallback =
+    'https://us-central1-danoberartisandrums.cloudfunctions.net/refreshPrintifyStockNow';
   const r2 = await fetch(fallback, { method: 'POST' });
   if (!r2.ok) throw new Error('Failed to refresh Printify stock');
-  // That endpoint returns text
   return { ok: true, message: await r2.text() };
 }
 
-// ───────────────────────────────────────────────────────────────────────────────
-// Firestore product helpers
+/* ──────────────────────────────────────────────────────────────────────────
+   Firestore product helpers
+   ────────────────────────────────────────────────────────────────────────── */
 
-// Fetch all products from both collections
+/** Fetch all products from both collections for the Admin table. */
 export const fetchProducts = async () => {
   const collectionsToFetch = ['products', 'merchProducts'];
   let allProducts = [];
@@ -73,7 +80,7 @@ export const fetchProducts = async () => {
   return allProducts;
 };
 
-// Fetch a single product by id (checks merchProducts, then products)
+/** Fetch a single product by id (tries merchProducts then products). */
 export const fetchProductById = async (productId) => {
   const tryFetch = async (collectionName) => {
     const ref = doc(db, collectionName, productId);
@@ -87,21 +94,21 @@ export const fetchProductById = async (productId) => {
   throw new Error(`❌ Product with ID ${productId} not found in any collection.`);
 };
 
-// Add a new artisan product
+/** Add a new artisan product. */
 export const addProduct = async (productData) => {
   const productsCollection = collection(db, 'products');
   const docRef = await addDoc(productsCollection, productData);
   return docRef.id;
 };
 
-// Update product (artisan collection)
+/** Update artisan product (products collection). */
 export const updateProduct = async (productId, updatedData) => {
   if (!productId) throw new Error('❌ Product ID is required.');
   const productRef = doc(db, 'products', productId);
   await updateDoc(productRef, updatedData);
 };
 
-// Update status across either collection
+/** Update status for a product in either collection. */
 export const updateProductStatus = async (productId, newStatus) => {
   if (!productId) throw new Error('❌ Product ID is required.');
 
@@ -121,19 +128,19 @@ export const updateProductStatus = async (productId, newStatus) => {
   throw new Error(`❌ Product with ID ${productId} not found in any collection.`);
 };
 
-// Delete (artisan). If you need to delete merch too, you can extend this to check merchProducts.
+/** Soft delete (artisan only). */
 export const deleteProduct = async (productId) => {
   if (!productId) throw new Error('❌ Product ID is required.');
   const productRef = doc(db, 'products', productId);
   await deleteDoc(productRef);
 };
 
-// ───────────────────────────────────────────────────────────────────────────────
-// INVENTORY HELPERS — split into two clear use-cases
+/* ──────────────────────────────────────────────────────────────────────────
+   Inventory helpers
+   ────────────────────────────────────────────────────────────────────────── */
 
-// (A) Single-doc patch (used by ManageProducts for manual edits)
+/** Single-doc patch for artisan inventory (admin edits). */
 export async function updateProductInventory(productId, patch) {
-  // Only touches 'products' collection (artisan path); your merch is auto-synced
   if (!productId || typeof patch !== 'object' || !patch) {
     throw new Error('❌ Missing productId or patch.');
   }
@@ -141,7 +148,7 @@ export async function updateProductInventory(productId, patch) {
   await updateDoc(productRef, patch);
 }
 
-// (B) Transactional decrement after checkout (your previous implementation)
+/** Transactional decrement after checkout (artisan products only). */
 export const decrementInventoryAfterCheckout = async (cartItems) => {
   if (!Array.isArray(cartItems) || cartItems.length === 0) {
     console.warn('⚠️ No cart items provided for inventory update. Skipping.');
@@ -155,7 +162,6 @@ export const decrementInventoryAfterCheckout = async (cartItems) => {
           console.error('❌ Invalid product in cart: Missing productId.');
           continue;
         }
-        // Only artisan inventory is managed here; merch is Printify-managed.
         const productRef = doc(db, 'products', item.productId);
         const productDoc = await transaction.get(productRef);
 
@@ -190,3 +196,48 @@ export const decrementInventoryAfterCheckout = async (cartItems) => {
     return { success: false, message: error.message };
   }
 };
+
+/* ──────────────────────────────────────────────────────────────────────────
+   HARD DELETE (admin only)
+   Calls your Cloud Functions HTTP endpoint to:
+   - remove Firestore doc (products or merchProducts),
+   - clean up Stripe product/prices,
+   - attempt Printify cleanup where applicable.
+   ────────────────────────────────────────────────────────────────────────── */
+
+/**
+ * Hard delete a product by ID.
+ * @param {string} productId - The Firestore doc ID.
+ * @param {'products'|'merchProducts'} source - Which collection the item lives in.
+ * @returns {Promise<object>} backend response
+ */
+export async function hardDeleteProduct(productId, source = 'merchProducts') {
+  if (!productId) throw new Error('❌ productId required');
+
+  // Canonical endpoint; second item is a fallback in case your backend uses the /admin/merch path.
+  const endpoints = [
+    `${API_BASE}/admin/hard-delete`,
+    `${API_BASE}/admin/merch/hard-delete`,
+  ];
+
+  let lastErr;
+  for (const url of endpoints) {
+    try {
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ productId, source }),
+      });
+      if (!res.ok) {
+        const txt = await res.text().catch(() => '');
+        throw new Error(txt || `HTTP ${res.status}`);
+      }
+      return await res.json().catch(() => ({}));
+    } catch (e) {
+      lastErr = e;
+      // try next endpoint in the list
+    }
+  }
+  throw lastErr || new Error('Hard delete failed');
+}
