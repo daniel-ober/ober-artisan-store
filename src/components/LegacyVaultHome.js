@@ -27,10 +27,13 @@ function InlineFrame360({
   const lastXRef = React.useRef(0);
   const carryRef = React.useRef(0);
 
-  const urlFor = React.useCallback((i) => {
-    const n = String(i + 1).padStart(pad, '0');
-    return `${basePath}/${prefix}${n}.${ext}`;
-  }, [basePath, prefix, pad, ext]);
+  const urlFor = React.useCallback(
+    (i) => {
+      const n = String(i + 1).padStart(pad, '0');
+      return `${basePath}/${prefix}${n}.${ext}`;
+    },
+    [basePath, prefix, pad, ext]
+  );
 
   // Preload frames (errors still advance the counter)
   React.useEffect(() => {
@@ -42,11 +45,18 @@ function InlineFrame360({
       img.crossOrigin = 'anonymous';
       const src = urlFor(i);
       img.src = src;
-      const done = () => { if (!cancelled) setLoaded(v => v + 1); };
-      img.onload = done; img.onerror = done; img.onabort = done;
+      const done = () => {
+        if (!cancelled) setLoaded((v) => v + 1);
+      };
+      img.onload = done;
+      img.onerror = done;
+      img.onabort = done;
       return img;
     });
-    return () => { cancelled = true; imgsRef.current = []; };
+    return () => {
+      cancelled = true;
+      imgsRef.current = [];
+    };
   }, [totalFrames, urlFor]);
 
   // Autoplay
@@ -57,7 +67,7 @@ function InlineFrame360({
       const delta = ts - (lastTsRef.current || ts);
       if (delta >= ft) {
         lastTsRef.current = ts;
-        setFrame(f => (f + 1) % totalFrames);
+        setFrame((f) => (f + 1) % totalFrames);
       }
       rafRef.current = requestAnimationFrame(tick);
     };
@@ -65,7 +75,9 @@ function InlineFrame360({
       lastTsRef.current = 0;
       rafRef.current = requestAnimationFrame(tick);
     }
-    return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
   }, [isPlaying, fps, loaded, totalFrames]);
 
   // Pointer (mouse + touch)
@@ -88,7 +100,7 @@ function InlineFrame360({
     carryRef.current = delta - step;
 
     if (step) {
-      setFrame(f => {
+      setFrame((f) => {
         let nf = (f + step) % totalFrames;
         if (nf < 0) nf += totalFrames;
         return nf;
@@ -104,47 +116,67 @@ function InlineFrame360({
   const src = imgsRef.current[frame]?.src || urlFor(0);
 
   return (
-    <div
-      className="sl360-stage lv-hero-360"
-      role="img"
-      aria-label="360 degree product viewer"
-      tabIndex={0}
-      onDragStart={(e) => e.preventDefault()}
-      onPointerDown={onPointerDown}
-      onPointerMove={onPointerMove}
-      onPointerUp={onPointerUp}
-      onPointerCancel={onPointerUp}
-    >
-      <img src={src} alt="SoundLegend 360 preview" draggable={false} />
-      {loaded < totalFrames && (
-        <div className="sl360-loader">
-          <div className="sl360-bar"><div style={{ width: `${pct}%` }} /></div>
-          <span>Loading {pct}%</span>
-        </div>
-      )}
-      <div className="sl360-controls">
-        <span className="sl360-hint">Drag to rotate</span>
+    <>
+      <div
+        className="sl360-stage lv-hero-360"
+        role="img"
+        aria-label="360 degree product viewer"
+        tabIndex={0}
+        onDragStart={(e) => e.preventDefault()}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        onPointerCancel={onPointerUp}
+      >
+        <img src={src} alt="SoundLegend 360 preview" draggable={false} />
+        {loaded < totalFrames && (
+          <div className="sl360-loader">
+            <div className="sl360-bar">
+              <div style={{ width: `${pct}%` }} />
+            </div>
+            <span>Loading {pct}%</span>
+          </div>
+        )}
       </div>
-    </div>
+
+      {/* Centered, under-image note */}
+      <p className="lv-hero-note">
+        Click & drag to rotate — take a moment to admire the craftsmanship.
+      </p>
+    </>
   );
 }
 /* ------------------------------------------------------------------ */
 
 /* ---------- Card for a Vault item ---------- */
-function VaultCard({ serial, name, heroImage, finish, href }) {
-  const fallback = '/placeholder/snare-dark.jpg'; // put a subtle local fallback image if you want
+function VaultCard({ serial, name, heroImage, finish, teaser, href }) {
+  const fallback = '/placeholder/snare-dark.jpg';
   return (
     <Link to={href} className="lv-item">
       <div className="lv-item-media">
-        <img src={heroImage || fallback} alt={`${serial} – ${name || 'SoundLegend'}`} loading="lazy" />
+        <img
+          src={heroImage || fallback}
+          alt={`${serial} – ${name || 'SoundLegend'}`}
+          loading="lazy"
+        />
       </div>
+
       <div className="lv-item-body">
+        {/* Legacy Artisan name (Cinzel Decorative) */}
+        <h3 className="lv-artist">{name || 'Legacy Artisan'}</h3>
+
+        {/* Serial right under the name */}
         <div className="lv-item-top">
           <span className="lv-item-serial">{serial}</span>
-          {name && <h3 className="lv-item-name">{name}</h3>}
         </div>
-        {finish && <div className="lv-item-meta">{finish}</div>}
-        <div className="lv-item-cta">View Page →</div>
+
+        {/* Teaser / quote */}
+        {teaser && <p className="lv-teaser">“{teaser}”</p>}
+
+        {/* Finish (optional)
+        {finish && <div className="lv-item-meta">{finish}</div>} */}
+
+        {/* <div className="lv-item-cta">View Page →</div> */}
       </div>
     </Link>
   );
@@ -160,23 +192,35 @@ export default function LegacyVaultHome() {
       try {
         const snap = await getDocs(collection(db, 'soundlegend_showroom'));
         const rows = [];
-        snap.forEach(doc => {
+        snap.forEach((doc) => {
           const d = doc.data() || {};
-          // fields per your screenshot
           const serial = doc.id;
           const heroImage = d.heroImage || d.gallery?.[0] || '';
           const name = d.name || d.links?.name || '';
           const finish = d.specs?.finish || '';
+
+          // Pull an attention-grabbing teaser if present; otherwise omit
+          const teaser =
+            d.teaser ||
+            d.tagline ||
+            d.quote ||
+            d.testimonial ||
+            d.storyTeaser ||
+            d.specs?.tagline ||
+            '';
+
           rows.push({
             serial,
             heroImage,
             name,
             finish,
+            teaser,
             href: `/artisan-shop/soundlegend/${serial}`,
           });
         });
-        // stable sort by serial number if desired:
-        rows.sort((a,b) => a.serial.localeCompare(b.serial, undefined, { numeric: true }));
+        rows.sort((a, b) =>
+          a.serial.localeCompare(b.serial, undefined, { numeric: true })
+        );
         setItems(rows);
       } catch (e) {
         console.error('Failed to load vault items:', e);
@@ -205,40 +249,40 @@ export default function LegacyVaultHome() {
         </div>
       </section>
 
-      {/* Welcome block (consolidated paragraphs) */}
+      {/* Welcome (story-first tone) */}
       <section className="lv-welcome">
-        <h2>Welcome to the Legacy Vault</h2>
-        <p className="lv-welcome-lead">
-          A living archive of artists and the drums that carry their stories.
+        <h2 className="lv-heading">Welcome to the Legacy Vault</h2>
+        <p className="lv-lede">
+          A living archive where instruments and artists meet their memory.
+        </p>
+        <p className="lv-prose">
+          Step inside, listen close, and read the short stories behind each
+          build. You’ll see the choices that shaped the sound, the hands that
+          shaped the wood, and the moments these drums were born for.
+        </p>
+        <p className="lv-prose">
+          When you’re ready, add your chapter. The Vault is growing—one legend
+          at a time.
         </p>
 
-        <div className="lv-welcome-grid">
-          <p>
-            <strong>What it is —</strong> Each page documents a real SoundLegend instrument:
-            specs, build story, photos, and audio across Legacy Tuning™ ranges.
-          </p>
-          <p>
-            <strong>Why it exists —</strong> To preserve your voice. The Vault connects
-            the player, their instrument, and the music with honest documentation.
-          </p>
-          <p>
-            <strong>How to use it —</strong> Explore artists and hear each drum’s low → high
-            character. Compare builds and learn what choices shape the sound.
-          </p>
-        </div>
-
-        <div className="lv-cta-row center">
-          <Link to="/artisan-shop/soundlegend/vault/learn/legacy-tuning" className="lv-cta-btn ghost">
+        {/* <div className="lv-cta-row center">
+          <Link
+            to="/artisan-shop/soundlegend/vault/learn/legacy-tuning"
+            className="lv-cta-btn ghost"
+          >
             What is Legacy Tuning?
           </Link>
-        </div>
+        </div> */}
       </section>
 
-      {/* Legacy Index (cards from Firestore) */}
+      {/* Legacy Index */}
       <section className="lv-index">
         <div className="lv-index-head">
-          <h2>Legacy Index</h2>
-          <p className="muted">Tap any instrument to open its page.</p>
+          <h2 className="lv-heading">Legacy Index</h2>
+          <p className="muted centerish">
+            Every drum carries a story — tap an instrument to read, hear, and
+            feel its legacy.
+          </p>
         </div>
 
         {loading ? (
@@ -256,41 +300,28 @@ export default function LegacyVaultHome() {
           </div>
         ) : (
           <div className="lv-grid">
-            {items.map(it => (
+            {items.map((it) => (
               <VaultCard key={it.serial} {...it} />
             ))}
           </div>
         )}
       </section>
 
-      {/* How to Join */}
+      {/* How to Join (short, narrative) */}
       <section className="lv-join">
-        <h2>How to Join the SoundLegend Experience</h2>
-        <ol className="lv-steps">
-          <li className="lv-step">
-            <span className="lv-step-num">1</span>
-            <div><strong>Start a Conversation</strong><br/>A short consult to learn your story, hands, genre, and goals.</div>
-          </li>
-          <li className="lv-step">
-            <span className="lv-step-num">2</span>
-            <div><strong>Design Your Voice</strong><br/>We dial in shell method, species, size/depth, hardware, and Legacy Tuning™ targets.</div>
-          </li>
-          <li className="lv-step">
-            <span className="lv-step-num">3</span>
-            <div><strong>Craft & Document</strong><br/>Your build is handcrafted and documented with photos, audio, and notes.</div>
-          </li>
-          <li className="lv-step">
-            <span className="lv-step-num">4</span>
-            <div><strong>Tap to Remember Me</strong><br/>Your drum ships with an NFC-enabled badge linking to its page in this Vault.</div>
-          </li>
-        </ol>
+        <h2 className="lv-heading">Join the Legacy Experience</h2>
+        <p className="lv-prose centerish">
+          It begins with a conversation. We design your voice, craft it by hand,
+          and preserve your story—photos, audio, and a living page here in the
+          Vault. Your drum ships with an NFC badge that always takes you home.
+        </p>
 
         <div className="lv-cta-row center">
-          <Link to="/artisan-shop/soundlegend/soundlegend-form" className="lv-cta-btn primary">
+          <Link to="/artisan-shop/soundlegend" className="lv-cta-btn primary">
             Start Your Build
           </Link>
           <Link to="/soundlegend-portal" className="lv-cta-btn ghost">
-            SoundLegend Portal
+            Artist Portal
           </Link>
         </div>
       </section>
