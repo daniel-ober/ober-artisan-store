@@ -1,54 +1,64 @@
 import React, { useEffect, useState } from 'react';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, updateDoc, doc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
+import { useAuth } from '../context/AuthContext';
 import ArtisanShopCard from './ArtisanShopCard';
 import './ArtisanShop.css';
 
 const ArtisanShop = () => {
-  const [preOrderItems, setPreOrderItems] = useState([]);
+  const { isAdmin } = useAuth();               // ✅ admin gate
+  const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchPreOrderItems = async () => {
+    (async () => {
       try {
-        const productQuery = collection(db, 'products');
-        const querySnapshot = await getDocs(productQuery);
-  
-        let items = querySnapshot.docs
-          .map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }))
-          .filter(
-            (item) =>
-              !item.status || ['available', 'preorder'].includes(item.status)
-          );
-  
-        items = items.sort(
-          (a, b) => (a.displayOrder || 0) - (b.displayOrder || 0)
-        );
-  
-        // Move founders-toast to the end
-        const foundersToast = items.find((item) => item.id === 'founders-toast');
-        if (foundersToast) {
-          items = items.filter((item) => item.id !== 'founders-toast');
-          items.push(foundersToast);
+        const snap = await getDocs(collection(db, 'products'));
+        let rows = snap.docs
+          .map(d => ({ id: d.id, ...d.data() }))
+          .filter(item => !item.status || ['available', 'preorder'].includes(item.status));
+
+        rows.sort((a, b) => (a.displayOrder || 0) - (b.displayOrder || 0));
+
+        // keep Founder’s Toast last (same as before)
+        const ft = rows.find(r => r.id === 'founders-toast');
+        if (ft) {
+          rows = rows.filter(r => r.id !== 'founders-toast');
+          rows.push(ft);
         }
-  
-        setPreOrderItems(items);
-      } catch (error) {
-        console.error('❌ Error fetching artisan shop items:', error);
+
+        setItems(rows);
+      } catch (e) {
+        console.error('❌ Error fetching artisan shop items:', e);
       } finally {
         setLoading(false);
       }
-    };
-  
-    fetchPreOrderItems();
+    })();
   }, []);
 
-  if (loading) {
-    return <div className="loading">Loading Artisan Shop...</div>;
-  }
+  // ===== reorder (admin) =====
+  const moveItem = async (index, dir) => {
+    const next = index + dir;
+    if (next < 0 || next >= items.length) return;
+
+    const updated = [...items];
+    [updated[index], updated[next]] = [updated[next], updated[index]];
+
+    // re-index
+    updated.forEach((it, i) => { it.displayOrder = i; });
+
+    setItems(updated);
+
+    try {
+      await Promise.all(
+        updated.map(it => updateDoc(doc(db, 'products', it.id), { displayOrder: it.displayOrder }))
+      );
+    } catch (e) {
+      console.error('❌ Error updating order:', e);
+    }
+  };
+
+  if (loading) return <div className="loading">Loading Artisan Shop...</div>;
 
   return (
     <div className="pre-order-page">
@@ -57,9 +67,30 @@ const ArtisanShop = () => {
         Order your handcrafted drum or specialty item — limited availability.
       </p>
 
+      {/* Admin view: same grid, with floating arrows above each card */}
       <div className="pre-order-items">
-        {preOrderItems.map((item) => (
-          <ArtisanShopCard key={item.id} product={item} />
+        {items.map((item, i) => (
+          <div key={item.id} className="admin-card-wrap">
+            {isAdmin && (
+              <div className="sort-controls">
+                <button
+                  className="sort-btn"
+                  aria-label="Move left"
+                  onClick={() => moveItem(i, -1)}
+                >
+                  ←
+                </button>
+                <button
+                  className="sort-btn"
+                  aria-label="Move right"
+                  onClick={() => moveItem(i, +1)}
+                >
+                  →
+                </button>
+              </div>
+            )}
+            <ArtisanShopCard product={item} />
+          </div>
         ))}
       </div>
     </div>

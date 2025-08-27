@@ -66,3 +66,58 @@
   justify-content: center;
   padding-top: 10px;
 }
+
+/* --- Admin reorder UI (mirrors Merch page) --- */
+.admin-section {
+  margin: 12px auto 24px;
+  text-align: center;
+  color: #eee;
+}
+
+.admin-product-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (max-width: 1100px) {
+  .admin-product-grid { grid-template-columns: repeat(8, 1fr); }
+}
+@media (max-width: 700px) {
+  .admin-product-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+.product-item {
+  grid-column: span 4;
+  position: relative;
+}
+
+.product-controls {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  gap: 6px;
+  z-index: 5;
+}
+
+.move-button {
+  width: 32px;
+  height: 28px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,.2);
+  background: rgba(255,255,255,.08);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform .12s ease, background .2s ease, border-color .2s ease;
+}
+.move-button:hover {
+  transform: translateY(-1px);
+  background: rgba(255,255,255,.16);
+  border-color: rgba(255,255,255,.35);
+}
+.move-button.left { padding: 0 6px; }
+.move-button.right { padding: 0 6px; }

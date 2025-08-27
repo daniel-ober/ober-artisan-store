@@ -14,7 +14,6 @@ const Products = ({ isMerchPage = false }) => {
     const fetchProducts = async () => {
       try {
         const collectionName = isMerchPage ? "merchProducts" : "products";
-
         const ref = collection(db, collectionName);
         const q = query(ref, where("status", "==", "active"));
         const snapshot = await getDocs(q);
@@ -25,9 +24,7 @@ const Products = ({ isMerchPage = false }) => {
           collection: collectionName,
         }));
 
-        // Sort products by displayOrder if available
         items.sort((a, b) => (a.displayOrder || 0) - (b.displayOrder || 0));
-
         setProducts(items);
       } catch (error) {
         console.error("❌ Error fetching products:", error);
@@ -37,7 +34,7 @@ const Products = ({ isMerchPage = false }) => {
     };
 
     fetchProducts();
-  }, [isMerchPage]); // ✅ Depend on isMerchPage
+  }, [isMerchPage]);
 
   const moveProduct = async (index, direction) => {
     const newIndex = index + direction;
@@ -45,55 +42,41 @@ const Products = ({ isMerchPage = false }) => {
 
     const updatedProducts = [...products];
     [updatedProducts[index], updatedProducts[newIndex]] = [updatedProducts[newIndex], updatedProducts[index]];
-
-    updatedProducts.forEach((item, i) => {
-      item.displayOrder = i;
-    });
-
+    updatedProducts.forEach((item, i) => (item.displayOrder = i));
     setProducts([...updatedProducts]);
 
     try {
-      const batchUpdates = updatedProducts.map((item) => {
-        const productRef = doc(db, item.collection || "products", item.id);
-        return updateDoc(productRef, { displayOrder: item.displayOrder });
-      });
-
-      await Promise.all(batchUpdates);
+      await Promise.all(
+        updatedProducts.map((item) =>
+          updateDoc(doc(db, item.collection || (isMerchPage ? "merchProducts" : "products"), item.id), {
+            displayOrder: item.displayOrder,
+          })
+        )
+      );
     } catch (error) {
       console.error("❌ Error updating product order:", error);
     }
   };
 
-  if (loading) {
-    return <div className="loading">Loading Products...</div>;
-  }
+  if (loading) return <div className="loading">Loading Products...</div>;
 
   return (
     <div className="products-container">
       <h1 className="products-page-title">{isMerchPage ? "Merch" : "Products"}</h1>
 
-      {isAdmin ? (
-        <div className="admin-section">
-          <h2>Admin Mode: Use Arrows to Reorder</h2>
-          <div className="admin-product-grid">
-            {products.map((product, index) => (
-              <div key={product.id} className="product-item">
-                <div className="product-controls">
-                  <button className="move-button left" onClick={() => moveProduct(index, -1)}>&larr;</button>
-                  <button className="move-button right" onClick={() => moveProduct(index, 1)}>&rarr;</button>
-                </div>
-                <ProductCard product={product} isAdmin={isAdmin} />
+      <div className={isAdmin ? "admin-product-grid" : "product-grid"}>
+        {products.map((product, index) => (
+          <div key={product.id} className="product-item">
+            {isAdmin && (
+              <div className="product-controls top">
+                <button className="move-button left" onClick={() => moveProduct(index, -1)}>←</button>
+                <button className="move-button right" onClick={() => moveProduct(index, 1)}>→</button>
               </div>
-            ))}
+            )}
+            <ProductCard product={product} isAdmin={isAdmin} />
           </div>
-        </div>
-      ) : (
-        <div className="product-grid">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
-      )}
+        ))}
+      </div>
     </div>
   );
 };
