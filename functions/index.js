@@ -39,7 +39,10 @@ app.use((req, res, next) => {
   if (origin && allowedOrigins.includes(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin);
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader(
+      'Access-Control-Allow-Headers',
+      'Content-Type, Authorization'
+    );
     res.setHeader('Access-Control-Allow-Credentials', 'true');
   }
   if (req.method === 'OPTIONS') return res.status(204).end();
@@ -85,140 +88,265 @@ app.get('/printify/catalog', async (req, res) => {
   }
 });
 
+// ───────────────────────────────────────────────────────────────────────────────
+// Admin — ingest a single Printify product into Firestore + Stripe (hardened)
 app.post('/admin/merch/ingest', async (req, res) => {
+  const where = 'admin/merch/ingest';
   try {
     const { printifyProductId, titleOverride, active = true } = req.body || {};
-    if (!printifyProductId) return res.status(400).json({ error: 'printifyProductId required' });
+    if (!printifyProductId) {
+      return res.status(400).json({ error: 'printifyProductId required' });
+    }
 
     const shopId = PRINTIFY_SHOP_ID.value();
-    const { data: p } = await axios.get(
-      `https://api.printify.com/v1/shops/${shopId}/products/${printifyProductId}.json`,
-      { headers: pHeaders() }
-    );
 
-    // 1) Get variant metadata so we can label size/color etc.
-    const { data: variantMeta } = await axios.get(
-      `https://api.printify.com/v1/catalog/blueprints/${p.blueprint_id}/print_providers/${p.print_provider_id}/variants.json`,
-      { headers: pHeaders() }
-    );
+    // 1) Fetch full Printify product
+    let p;
+    try {
+      const { data } = await axios.get(
+        `https://api.printify.com/v1/shops/${shopId}/products/${printifyProductId}.json`,
+        { headers: pHeaders() }
+      );
+      p = data;
+    } catch (e) {
+      const detail = e?.response?.data || e?.message;
+      console.error(`[${where}] fetch product failed`, detail);
+      return res.status(e?.response?.status || 500).json({
+        error: 'Failed to fetch Printify product',
+        detail,
+      });
+    }
 
+    if (!p || !p.id) {
+      return res
+        .status(404)
+        .json({ error: 'Printify product not found or malformed' });
+    }
+
+    // 2) Fetch variant meta (optional, shape varies by blueprint/provider)
+    let variantMeta = [];
+    try {
+      const { data } = await axios.get(
+        `https://api.printify.com/v1/catalog/blueprints/${p.blueprint_id}/print_providers/${p.print_provider_id}/variants.json`,
+        { headers: pHeaders() }
+      );
+      variantMeta = Array.isArray(data) ? data : [];
+    } catch (e) {
+      // Don’t fail the whole ingest if meta call fails — we can still proceed
+      console.warn(
+        `[${where}] variant meta fetch warning`,
+        e?.response?.data || e?.message
+      );
+    }
     const metaById = new Map();
-    (Array.isArray(variantMeta) ? variantMeta : []).forEach((m) => metaById.set(m.id, m));
+    variantMeta.forEach((m) => metaById.set(m.id, m));
 
-    // 2) Enrich variants with readable fields and images scoped per variant
-    const rawVariants = Array.isArray(p.variants) ? p.variants.filter(v => v.is_enabled) : [];
+    // Helpers to extract readable size/color safely
+    const readableFromMeta = (meta) => {
+      const out = { size: '', color: '' };
+      const arr = Array.isArray(meta?.options) ? meta.options : [];
+      for (const o of arr) {
+        const name = String(o?.name || '').toLowerCase();
+        if (/size/.test(name)) out.size = o?.value || out.size;
+        if (/colou?r/.test(name)) out.color = o?.value || out.color;
+      }
+      return out;
+    };
+
+    // 3) Enrich variants (guard all fields)
+    const productImages = Array.isArray(p.images) ? p.images : [];
+    const rawVariants = Array.isArray(p.variants) ? p.variants : [];
+
     const enrichedVariants = rawVariants.map((v) => {
-      const m = metaById.get(v.id) || {};
-      const optObj = (m.options || []).reduce((acc, opt) => {
-        // opt.name might be "Size"/"Color" etc.; normalize to lower
-        acc[opt.name?.toLowerCase?.() || ''] = opt.value;
-        return acc;
-      }, {});
-      const vImages = (p.images || []).filter(img => Array.isArray(img.variant_ids) && img.variant_ids.includes(v.id));
+      const mid = Number(v?.id);
+      const m = metaById.get(mid) || null;
+
+      // images that reference this variant
+      const vImages = productImages.filter(
+        (img) =>
+          Array.isArray(img?.variant_ids) && img.variant_ids.includes(mid)
+      );
+
+      const readable = readableFromMeta(m);
+
       return {
-        id: String(v.id),
-        title: v.title || '',
-        sku: v.sku || '',
-        printifyPriceCents: Number(v.price || 0), // already retail cents
-        quantity: v.quantity,
-        is_enabled: !!v.is_enabled,
-        options_array: v.options || [], // keep raw ids (for debugging)
-        size: optObj.size || '',        // ← readable
-        color: optObj.color || '',      // ← readable
-        images: vImages.map(img => ({
-          src: img.src,
-          position: img.position,
+        id: String(v?.id ?? ''),
+        title: String(v?.title || ''),
+        sku: String(v?.sku || ''),
+        // Printify returns "price" already in retail cents; coerce to integer
+        printifyPriceCents: Number.isFinite(Number(v?.price))
+          ? Number(v.price)
+          : null,
+        quantity: Number.isFinite(Number(v?.quantity)) ? Number(v.quantity) : 0,
+        is_enabled: !!v?.is_enabled,
+        is_available: v?.is_available !== false,
+        // raw options array of value IDs (sizeId, colorId, etc)
+        options_array: Array.isArray(v?.options) ? v.options : [],
+        // readable fields when meta is available
+        size: readable.size,
+        color: readable.color,
+        images: vImages.map((img) => ({
+          src: img?.src || '',
+          position: img?.position || '',
           displayInGallery: true,
         })),
       };
     });
 
-    // 3) Build options for selectors (Colors/Sizes with readable titles)
-    //    Start from Printify product.options, but add only values that exist in enabled variants.
-    const optionDefs = Array.isArray(p.options) ? p.options : [];
-    const enabledByOptionId = new Map(); // optionId -> Set(valueId)
-    enrichedVariants.forEach((v) => {
-      (v.options_array || []).forEach((valId) => {
-        // we don't know the option id here; Printify uses values that belong to an option.
-        // We'll add values when we see them below by scanning variants against opt.values.
-      });
-    });
+    // Only enabled & (available !== false)
+    const enabledVariants = enrichedVariants.filter(
+      (v) => v.is_enabled && v.is_available
+    );
 
-    const enrichedOptions = optionDefs.map((opt) => {
-      const values = (opt.values || []).map((val) => {
-        // Collect colors that actually appear for this value (via enrichedVariants)
-        const usedColors = new Set();
-        enrichedVariants.forEach((v) => {
-          const hasThisValue = Array.isArray(v.options_array) && v.options_array.includes(val.id);
-          if (hasThisValue && v.color) usedColors.add(v.color);
-        });
-        return { ...val, colors: [...usedColors] };
+    if (!enabledVariants.length) {
+      return res.status(400).json({
+        error: 'No enabled variants found on this product',
       });
-      return {
-        ...opt,
-        values,
-      };
-    });
-
-    // 4) Create Stripe Product + Prices (mirror retail price)
-    const stripe = stripeFromSecret();
-    const sp = await stripe.products.create({
-      name: titleOverride || p.title,
-      active,
-      images: (p.images || []).slice(0, 8).map((i) => i.src).filter(Boolean),
-      metadata: {
-        printify_product_id: p.id,
-        print_provider_id: String(p.print_provider_id || ''),
-        blueprint_id: String(p.blueprint_id || ''),
-      },
-    });
-
-    const stripePriceIds = {};
-    for (const v of enrichedVariants) {
-      if (!v.is_enabled) continue;
-      const price = await stripe.prices.create({
-        currency: 'usd',
-        unit_amount: v.printifyPriceCents, // use Printify retail
-        product: sp.id,
-        nickname: v.title || undefined,
-        metadata: {
-          printify_variant_id: v.id,
-          printify_sku: v.sku || '',
-          variant_title: v.title || '',
-        },
-      });
-      v.stripePriceId = price.id;                   // inline for convenience
-      stripePriceIds[v.id] = { priceId: price.id, unitAmount: price.unit_amount }; // map for legacy UI
     }
 
-    // 5) Compute min price for listing cards
-    const minPriceCents = enrichedVariants.reduce((min, v) => {
-      if (!v.is_enabled) return min;
-      const cents = Number(v.printifyPriceCents || 0);
-      return min === null ? cents : Math.min(min, cents);
-    }, null);
+    // 4) Build enriched options for UI (Colors/Sizes), but only keep values that
+    // actually occur in an enabled variant. IMPORTANT: preserve Printify's hex colors.
+    const optionDefs = Array.isArray(p.options) ? p.options : [];
+    const enabledOptionValueIds = new Set(
+      enabledVariants.flatMap((v) =>
+        Array.isArray(v.options_array) ? v.options_array : []
+      )
+    );
 
-    const preview = (p.images || []).find((i) => i.is_default) || p.images?.[0];
+    // helper: is a valid hex color
+    const isHex = (s) => /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(String(s || ''));
 
+    const enrichedOptions = optionDefs.map((opt) => {
+      const values = Array.isArray(opt?.values) ? opt.values : [];
+
+      const filteredValues = values
+        .filter((val) => enabledOptionValueIds.has(val.id)) // only values present on enabled variants
+        .map((val) => {
+          const rawColors = Array.isArray(val?.colors) ? val.colors : [];
+          const hexColors = rawColors.filter(isHex);
+
+          const nameTokens = new Set();
+          enabledVariants.forEach((v) => {
+            if (
+              Array.isArray(v.options_array) &&
+              v.options_array.includes(val.id) &&
+              v.color
+            ) {
+              nameTokens.add(String(v.color));
+            }
+          });
+
+          return {
+            // spread FIRST so any existing fields are kept,
+            // then override to guarantee hexes are used
+            ...val,
+            id: val.id,
+            title: val.title,
+            colors: hexColors, // keep hex list here
+            hex_colors: hexColors, // mirror for redundancy
+            name_tokens: Array.from(nameTokens),
+          };
+        });
+
+      return { ...opt, values: filteredValues };
+    });
+
+    // 5) Stripe product
+    let sp;
+    try {
+      sp = await stripeFromSecret().products.create({
+        name: titleOverride || p.title || 'Merch',
+        active: !!active,
+        images: productImages
+          .slice(0, 8)
+          .map((i) => i?.src)
+          .filter(Boolean),
+        metadata: {
+          printify_product_id: String(p.id),
+          print_provider_id: String(p.print_provider_id || ''),
+          blueprint_id: String(p.blueprint_id || ''),
+        },
+      });
+    } catch (e) {
+      const detail = e?.raw || e?.message || e;
+      console.error(`[${where}] Stripe product create failed`, detail);
+      return res
+        .status(500)
+        .json({ error: 'Stripe product create failed', detail });
+    }
+
+    // 6) Stripe prices (guard unit_amount)
+    const stripe = stripeFromSecret();
+    const stripePriceIds = {};
+    for (const v of enabledVariants) {
+      const cents = Number(v.printifyPriceCents);
+      if (!Number.isFinite(cents) || cents < 50) {
+        console.warn(
+          `[${where}] skipping variant without valid price`,
+          v.id,
+          cents
+        );
+        continue; // don’t try to create $0 prices
+      }
+      try {
+        const price = await stripe.prices.create({
+          currency: 'usd',
+          unit_amount: Math.round(cents),
+          product: sp.id,
+          nickname: v.title || undefined,
+          metadata: {
+            variantId: v.id,
+            printify_variant_id: v.id,
+            printify_sku: v.sku || '',
+            variant_title: v.title || '',
+          },
+        });
+        stripePriceIds[v.id] = {
+          priceId: price.id,
+          unitAmount: price.unit_amount,
+        };
+        // carry on the inline id for convenience
+        v.stripePriceId = price.id;
+      } catch (e) {
+        const detail = e?.raw || e?.message || e;
+        console.error(
+          `[${where}] Stripe price create failed for variant ${v.id}`,
+          detail
+        );
+        // don’t fail the whole ingest; just skip the bad variant
+      }
+    }
+
+    // 7) Compute min price among variants we actually priced
+    const pricedCents = Object.values(stripePriceIds).map((o) =>
+      Number(o.unitAmount)
+    );
+    const minPriceCents = pricedCents.length ? Math.min(...pricedCents) : null;
+
+    // 8) Determine preview
+    const preview =
+      productImages.find((i) => i?.is_default) || productImages[0] || null;
+
+    // 9) Build Firestore payload
     const merchDoc = {
-      id: p.id,
-      title: p.title,
+      id: String(p.id),
+      title: p.title || '',
       description: p.description || '',
-      images: (p.images || []).map((img) => ({ ...img, displayInGallery: true })),
+      images: productImages.map((img) => ({ ...img, displayInGallery: true })),
       previewImage: preview?.src || '',
-      tags: p.tags || [],
+      tags: Array.isArray(p.tags) ? p.tags : [],
       visible: !!p.visible,
 
       stripeProductId: sp.id,
-      stripePriceIds,               // ← for your existing UI paths
-      variants: enrichedVariants,   // ← each variant has .stripePriceId, .size, .color
+      stripePriceIds, // map: variantId -> { priceId, unitAmount }
+      variants: enabledVariants, // enriched (some may not have stripePriceId if skipped)
 
-      options: enrichedOptions,     // ← Colors/Sizes structure your PDP expects
-      minPriceCents: minPriceCents ?? null,
+      options: enrichedOptions, // filtered to only enabled/used values
+      minPriceCents,
 
       status: active ? 'active' : 'inactive',
       printify: {
-        productId: p.id,
+        productId: String(p.id),
         blueprint_id: p.blueprint_id || null,
         print_provider_id: p.print_provider_id || null,
       },
@@ -227,11 +355,111 @@ app.post('/admin/merch/ingest', async (req, res) => {
       syncedAt: admin.firestore.FieldValue.serverTimestamp(),
     };
 
-    await db.collection('merchProducts').doc(p.id).set(merchDoc, { merge: true });
-    res.json({ ok: true, merchProduct: merchDoc });
+    await db
+      .collection('merchProducts')
+      .doc(String(p.id))
+      .set(merchDoc, { merge: true });
+    return res.json({ ok: true, merchProduct: merchDoc });
   } catch (e) {
-    console.error('Ingest error', e?.response?.data || e);
-    res.status(500).json({ error: 'Failed to ingest Printify product' });
+    const detail = e?.response?.data || e?.message || e;
+    console.error('[admin/merch/ingest] unhandled error', detail);
+    return res
+      .status(500)
+      .json({ error: 'Failed to ingest Printify product', detail });
+  }
+});
+
+// ───────────────────────────────────────────────────────────────────────────────
+// Admin — HARD DELETE a product (Firestore + Stripe [+ Printify for merch])
+app.post('/admin/hard-delete', async (req, res) => {
+  const { productId, source = 'merchProducts' } = req.body || {};
+  if (!productId) return res.status(400).json({ error: 'productId required' });
+  if (!['merchProducts', 'products'].includes(source)) {
+    return res
+      .status(400)
+      .json({ error: 'source must be "merchProducts" or "products"' });
+  }
+
+  try {
+    const stripe = stripeLib(STRIPE_SECRET_KEY.value());
+    const shopId = PRINTIFY_SHOP_ID.value();
+    const apiKey = PRINTIFY_API_KEY.value();
+
+    // 1) Read the doc
+    const colRef = db.collection(source);
+    const snap = await colRef.doc(productId).get();
+    if (!snap.exists) {
+      // If already gone, do nothing
+      return res.json({
+        ok: true,
+        message: 'Doc not found; nothing to delete.',
+      });
+    }
+    const doc = snap.data();
+
+    // 2) Stripe cleanup (if present)
+    // Prefer explicit product id first, else try to find from any price
+    const stripeProductId = doc.stripeProductId || null;
+
+    if (stripeProductId) {
+      try {
+        // List prices for the product and delete them
+        const prices = await stripe.prices.list({
+          product: stripeProductId,
+          limit: 100,
+        });
+        for (const price of prices.data) {
+          try {
+            await stripe.prices.update(price.id, { active: false });
+            await stripe.prices.del(price.id);
+          } catch (e) {
+            // Not all prices can be deleted (some might be used in payments); make inactive at least
+            try {
+              await stripe.prices.update(price.id, { active: false });
+            } catch {}
+          }
+        }
+        // Deactivate then delete the product
+        try {
+          await stripe.products.update(stripeProductId, { active: false });
+        } catch {}
+        try {
+          await stripe.products.del(stripeProductId);
+        } catch (e) {
+          // If deletion fails (e.g. already used), at least leave it inactive
+        }
+      } catch (e) {
+        console.warn('⚠️ Stripe cleanup warning:', e?.message || e);
+      }
+    }
+
+    // 3) Printify cleanup (merch only) — best-effort
+    if (source === 'merchProducts') {
+      try {
+        await axios.delete(
+          `https://api.printify.com/v1/shops/${shopId}/products/${productId}.json`,
+          { headers: { Authorization: `Bearer ${apiKey}` } }
+        );
+      } catch (e) {
+        // If it 404s or the API forbids delete, just ignore.
+        const code = e?.response?.status;
+        if (code && code !== 404) {
+          console.warn(
+            '⚠️ Printify delete warning:',
+            code,
+            e?.response?.data || e.message
+          );
+        }
+      }
+    }
+
+    // 4) Firestore: delete document
+    await colRef.doc(productId).delete();
+
+    return res.json({ ok: true });
+  } catch (err) {
+    console.error('❌ Hard delete failed:', err?.response?.data || err);
+    return res.status(500).json({ error: 'Hard delete failed' });
   }
 });
 
@@ -261,18 +489,25 @@ app.post('/admin/merch/refresh-stock', async (req, res) => {
           is_enabled: !!v.is_enabled,
         }));
 
-        await db.collection('merchProducts').doc(p.id).set(
-          {
-            title: p.title,
-            images: p.images || [],
-            variants,
-            updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-            syncedAt: admin.firestore.FieldValue.serverTimestamp(),
-          },
-          { merge: true }
-        );
+        await db
+          .collection('merchProducts')
+          .doc(p.id)
+          .set(
+            {
+              title: p.title,
+              images: p.images || [],
+              variants,
+              updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+              syncedAt: admin.firestore.FieldValue.serverTimestamp(),
+            },
+            { merge: true }
+          );
       } catch (e) {
-        console.error('Refresh single product failed', item?.id, e?.response?.data || e);
+        console.error(
+          'Refresh single product failed',
+          item?.id,
+          e?.response?.data || e
+        );
       }
     }
 
@@ -292,11 +527,15 @@ app.post('/createCheckoutSession', async (req, res) => {
     const clientUrlRaw = CLIENT_URL.value();
     if (!stripeKey) {
       console.error('❌ Missing STRIPE_SECRET_KEY secret');
-      return res.status(500).json({ error: 'Server misconfiguration (stripe key).' });
+      return res
+        .status(500)
+        .json({ error: 'Server misconfiguration (stripe key).' });
     }
     if (!clientUrlRaw) {
       console.error('❌ Missing CLIENT_URL secret');
-      return res.status(500).json({ error: 'Server misconfiguration (client url).' });
+      return res
+        .status(500)
+        .json({ error: 'Server misconfiguration (client url).' });
     }
 
     const stripe = stripeLib(stripeKey);
@@ -320,11 +559,14 @@ app.post('/createCheckoutSession', async (req, res) => {
 
     const guestToken = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
 
-    await db.collection('pending_checkouts').doc(guestToken).set({
-      createdAt: admin.firestore.FieldValue.serverTimestamp(),
-      products,
-      userId: userId || 'guest',
-    });
+    await db
+      .collection('pending_checkouts')
+      .doc(guestToken)
+      .set({
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+        products,
+        userId: userId || 'guest',
+      });
 
     const lineItems = [];
     for (const p of products) {
@@ -336,10 +578,15 @@ app.post('/createCheckoutSession', async (req, res) => {
         console.error('❌ Bad unit_amount for product:', p);
         return res.status(400).json({ error: 'Invalid item price.' });
       }
-      const images = typeof p?.image === 'string' && /^https?:\/\//i.test(p.image) ? [p.image] : [];
+      const images =
+        typeof p?.image === 'string' && /^https?:\/\//i.test(p.image)
+          ? [p.image]
+          : [];
 
       if (isMerch) {
-        const color = String(cfg.colorName || cfg.color || cfg.Colors || '').trim();
+        const color = String(
+          cfg.colorName || cfg.color || cfg.Colors || ''
+        ).trim();
         const size = String(cfg.sizeName || cfg.size || cfg.Sizes || '').trim();
         const vId = String(cfg.variantId || '').trim();
         const parts = [];
@@ -373,7 +620,11 @@ app.post('/createCheckoutSession', async (req, res) => {
           cfgA.depth ? `Depth: ${cfgA.depth}"` : '',
           cfgA.lugQuantity ? `${cfgA.lugQuantity} Lugs` : '',
           cfgA.staveQuantity ? `${cfgA.staveQuantity} Staves` : '',
-          typeof cfgA.reRing !== 'undefined' ? (cfgA.reRing ? 'Re-Rings' : 'No Re-Rings') : '',
+          typeof cfgA.reRing !== 'undefined'
+            ? cfgA.reRing
+              ? 'Re-Rings'
+              : 'No Re-Rings'
+            : '',
           cfgA.hardwareColor ? `Hardware: ${cfgA.hardwareColor}` : '',
         ].filter(Boolean);
 
@@ -384,7 +635,9 @@ app.post('/createCheckoutSession', async (req, res) => {
             product_data: {
               name: p?.name || 'Ober Artisan Product',
               ...(images.length ? { images } : {}),
-              ...(descParts.length ? { description: descParts.join(' • ') } : {}),
+              ...(descParts.length
+                ? { description: descParts.join(' • ') }
+                : {}),
             },
           },
           quantity: Math.max(1, parseInt(p?.quantity || 1, 10)),
@@ -411,11 +664,16 @@ app.post('/createCheckoutSession', async (req, res) => {
     if (customerEmail && /\S+@\S+\.\S+/.test(customerEmail)) {
       sessionParams.customer_email = customerEmail;
     }
-    sessionParams.shipping_address_collection = { allowed_countries: ['US', 'CA'] };
+    sessionParams.shipping_address_collection = {
+      allowed_countries: ['US', 'CA'],
+    };
     const session = await stripe.checkout.sessions.create(sessionParams);
     return res.status(200).json({ url: session.url });
   } catch (err) {
-    const msg = err?.raw?.message || err?.message || 'Unknown error creating checkout session';
+    const msg =
+      err?.raw?.message ||
+      err?.message ||
+      'Unknown error creating checkout session';
     console.error('❌ Error creating checkout session:', msg, err);
     return res.status(500).json({ error: msg });
   }
@@ -429,9 +687,13 @@ app.post('/verifyRecaptcha', async (req, res) => {
     return res.status(400).json({ success: false, message: 'Missing token' });
   }
   try {
-    const response = await axios.post('https://www.google.com/recaptcha/api/siteverify', null, {
-      params: { secret: RECAPTCHA_SECRET_KEY.value(), response: token },
-    });
+    const response = await axios.post(
+      'https://www.google.com/recaptcha/api/siteverify',
+      null,
+      {
+        params: { secret: RECAPTCHA_SECRET_KEY.value(), response: token },
+      }
+    );
     const { success, score } = response.data;
     if (!success || score < 0.5) {
       await admin.firestore().collection('risk_notifications').add({
@@ -452,8 +714,13 @@ app.post('/verifyRecaptcha', async (req, res) => {
 
 app.get('/orders/by-session/:sessionId', async (req, res) => {
   try {
-    const snapshot = await db.collection('orders').where('stripeSessionId', '==', req.params.sessionId).limit(1).get();
-    if (snapshot.empty) return res.status(404).json({ error: 'Order not found' });
+    const snapshot = await db
+      .collection('orders')
+      .where('stripeSessionId', '==', req.params.sessionId)
+      .limit(1)
+      .get();
+    if (snapshot.empty)
+      return res.status(404).json({ error: 'Order not found' });
     res.json(snapshot.docs[0].data());
   } catch (err) {
     console.error('❌ Error fetching order:', err.message);
@@ -468,9 +735,13 @@ stripeWebhookApp.use(express.raw({ type: 'application/json' }));
 
 function parseTitleColorSize(title) {
   if (!title || typeof title !== 'string') return { color: '', size: '' };
-  const parts = title.split('/').map((s) => s.trim()).filter(Boolean);
+  const parts = title
+    .split('/')
+    .map((s) => s.trim())
+    .filter(Boolean);
   if (parts.length === 2) return { color: parts[0], size: parts[1] };
-  if (parts.length > 2) return { color: parts[0], size: parts[parts.length - 1] };
+  if (parts.length > 2)
+    return { color: parts[0], size: parts[parts.length - 1] };
   return { color: '', size: '' };
 }
 
@@ -499,16 +770,20 @@ stripeWebhookApp.post('/', async (req, res) => {
       event.type === 'checkout.session.completed' ||
       event.type === 'checkout.session.async_payment_succeeded'
     ) {
-      const lineItems = await stripe.checkout.sessions.listLineItems(session.id, {
-        expand: ['data.price.product'],
-      });
+      const lineItems = await stripe.checkout.sessions.listLineItems(
+        session.id,
+        {
+          expand: ['data.price.product'],
+        }
+      );
 
       const existing = await db
         .collection('orders')
         .where('stripeSessionId', '==', session.id)
         .limit(1)
         .get();
-      if (!existing.empty) return res.status(200).send('Order already recorded for this session.');
+      if (!existing.empty)
+        return res.status(200).send('Order already recorded for this session.');
 
       if (
         !session.customer_details?.email ||
@@ -516,15 +791,22 @@ stripeWebhookApp.post('/', async (req, res) => {
         !session.shipping_details?.address ||
         lineItems.data.length === 0
       ) {
-        console.warn('⚠️ Skipping incomplete order creation. Missing important customer info.');
-        return res.status(200).send('Skipped: Incomplete session, no order created.');
+        console.warn(
+          '⚠️ Skipping incomplete order creation. Missing important customer info.'
+        );
+        return res
+          .status(200)
+          .send('Skipped: Incomplete session, no order created.');
       }
 
       const guestToken = session.metadata?.guestToken || '';
       let snapshotProducts = [];
       if (guestToken) {
         try {
-          const snapDoc = await db.collection('pending_checkouts').doc(guestToken).get();
+          const snapDoc = await db
+            .collection('pending_checkouts')
+            .doc(guestToken)
+            .get();
           if (snapDoc.exists) {
             const snap = snapDoc.data();
             if (Array.isArray(snap?.products)) snapshotProducts = snap.products;
@@ -541,14 +823,18 @@ stripeWebhookApp.post('/', async (req, res) => {
         const productObj = li.price?.product || {};
         const pMeta = productObj?.metadata || {};
         const pDesc = productObj?.description || '';
-        const pImages = Array.isArray(productObj?.images) ? productObj.images : [];
+        const pImages = Array.isArray(productObj?.images)
+          ? productObj.images
+          : [];
 
         let matched =
           (Array.isArray(snapshotProducts) ? snapshotProducts : []).find(
             (p) => p.stripePriceId && p.stripePriceId === priceId
           ) ||
           (Array.isArray(snapshotProducts) ? snapshotProducts : []).find(
-            (p) => !p.stripePriceId && Math.round(Number(p.price || 0) * 100) === unitAmount
+            (p) =>
+              !p.stripePriceId &&
+              Math.round(Number(p.price || 0) * 100) === unitAmount
           );
 
         let stripePriceMeta = { variantId: '', title: '', sku: '' };
@@ -556,12 +842,17 @@ stripeWebhookApp.post('/', async (req, res) => {
           if (priceId) {
             const priceObj = await stripe.prices.retrieve(priceId);
             const md = priceObj?.metadata || {};
-            stripePriceMeta.variantId = md.variantId || md.printify_variant_id || '';
+            stripePriceMeta.variantId =
+              md.variantId || md.printify_variant_id || '';
             stripePriceMeta.title = md.title || md.variant_title || '';
             stripePriceMeta.sku = md.sku || md.printify_sku || '';
           }
         } catch (e) {
-          console.warn('⚠️ Could not retrieve Stripe Price metadata for', priceId, e.message);
+          console.warn(
+            '⚠️ Could not retrieve Stripe Price metadata for',
+            priceId,
+            e.message
+          );
         }
 
         let variant = {
@@ -574,9 +865,12 @@ stripeWebhookApp.post('/', async (req, res) => {
 
         if (matched?.category === 'merch') {
           const cfg = matched.config || {};
-          variant.variantId = variant.variantId || (cfg.variantId ? String(cfg.variantId) : '');
-          variant.size = variant.size || cfg.sizeName || cfg.size || cfg.Sizes || '';
-          variant.color = variant.color || cfg.colorName || cfg.color || cfg.Colors || '';
+          variant.variantId =
+            variant.variantId || (cfg.variantId ? String(cfg.variantId) : '');
+          variant.size =
+            variant.size || cfg.sizeName || cfg.size || cfg.Sizes || '';
+          variant.color =
+            variant.color || cfg.colorName || cfg.color || cfg.Colors || '';
         } else if (matched) {
           const cfg = matched.config || {};
           variant = {
@@ -586,7 +880,12 @@ stripeWebhookApp.post('/', async (req, res) => {
             lugQuantity: cfg.lugQuantity || '',
             staveQuantity: cfg.staveQuantity || '',
             depth: cfg.depth || '',
-            reRing: typeof cfg.reRing !== 'undefined' ? (cfg.reRing ? 'Yes' : 'No') : '',
+            reRing:
+              typeof cfg.reRing !== 'undefined'
+                ? cfg.reRing
+                  ? 'Yes'
+                  : 'No'
+                : '',
           };
         }
 
@@ -608,7 +907,8 @@ stripeWebhookApp.post('/', async (req, res) => {
 
         const finalCategory = matched?.category || pMeta.category || '';
         const finalProductId = matched?.productId || pMeta.productId || '';
-        const finalName = matched?.name || productObj?.name || li.description || 'Ober Product';
+        const finalName =
+          matched?.name || productObj?.name || li.description || 'Ober Product';
         const finalImage = matched?.image || pImages[0] || '';
 
         items.push({
@@ -628,10 +928,15 @@ stripeWebhookApp.post('/', async (req, res) => {
       const paymentMethodType = pm?.type || '';
       let cardDetails = null;
       if (paymentMethodType === 'card' && pm?.card) {
-        cardDetails = { brand: pm.card.brand || '', lastFour: pm.card.last4 || '' };
+        cardDetails = {
+          brand: pm.card.brand || '',
+          lastFour: pm.card.last4 || '',
+        };
       }
       const paymentMethodDetails =
-        paymentMethodType && pm && pm[paymentMethodType] ? pm[paymentMethodType] : null;
+        paymentMethodType && pm && pm[paymentMethodType]
+          ? pm[paymentMethodType]
+          : null;
 
       const orderId = `ORD-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
       const orderDoc = {
@@ -653,17 +958,25 @@ stripeWebhookApp.post('/', async (req, res) => {
         guestToken: session.metadata?.guestToken || '',
         items,
         orderId,
-        promoCode: session.total_details?.amount_discount ? session.discounts?.[0]?.promotion_code || '' : '',
+        promoCode: session.total_details?.amount_discount
+          ? session.discounts?.[0]?.promotion_code || ''
+          : '',
       };
 
       await db.collection('orders').doc(orderId).set(orderDoc);
       if (session.metadata?.guestToken) {
-        db.collection('pending_checkouts').doc(session.metadata.guestToken).delete().catch(() => {});
+        db.collection('pending_checkouts')
+          .doc(session.metadata.guestToken)
+          .delete()
+          .catch(() => {});
       }
       return res.status(200).send('Order created');
     }
 
-    if (event.type === 'checkout.session.expired' || event.type === 'checkout.session.async_payment_failed') {
+    if (
+      event.type === 'checkout.session.expired' ||
+      event.type === 'checkout.session.async_payment_failed'
+    ) {
       console.warn('⚠️ Stripe session failed or expired, no order created.');
       return res.status(200).send('Skipped: Session failed or expired.');
     }
@@ -695,9 +1008,15 @@ printifyWebhookApp.post('/', async (req, res) => {
   }
 
   const receivedSignature = signatureHeader.split('=')[1];
-  const expectedSignature = crypto.createHmac('sha256', secret).update(raw, 'utf8').digest('hex');
+  const expectedSignature = crypto
+    .createHmac('sha256', secret)
+    .update(raw, 'utf8')
+    .digest('hex');
 
-  const isValid = crypto.timingSafeEqual(Buffer.from(receivedSignature), Buffer.from(expectedSignature));
+  const isValid = crypto.timingSafeEqual(
+    Buffer.from(receivedSignature),
+    Buffer.from(expectedSignature)
+  );
   if (!isValid) return res.status(401).send('Invalid signature');
 
   let event;
@@ -707,7 +1026,10 @@ printifyWebhookApp.post('/', async (req, res) => {
     return res.status(400).send('Invalid JSON');
   }
 
-  if (event.topic === 'product.publish' || event.topic === 'product:publish:started') {
+  if (
+    event.topic === 'product.publish' ||
+    event.topic === 'product:publish:started'
+  ) {
     const productId = event.resource?.id || event.data?.id;
     if (productId) {
       await handlePrintifyProductPublished(productId);
@@ -722,98 +1044,167 @@ const handlePrintifyProductPublished = async (productId) => {
     const apiKey = PRINTIFY_API_KEY.value();
     const stripe = stripeLib(STRIPE_SECRET_KEY.value());
 
-    const response = await axios.get(
+    // Fetch product
+    const { data: product } = await axios.get(
       `https://api.printify.com/v1/shops/${shopId}/products/${productId}.json`,
       { headers: { Authorization: `Bearer ${apiKey}` } }
     );
-
-    const product = response.data;
     if (!product || !product.id) return;
 
-    const variantMetaRes = await axios.get(
+    // Variant meta describes readable option values per variant id
+    const { data: variantMeta } = await axios.get(
       `https://api.printify.com/v1/catalog/blueprints/${product.blueprint_id}/print_providers/${product.print_provider_id}/variants.json`,
       { headers: { Authorization: `Bearer ${apiKey}` } }
     );
+    const metaById = new Map();
+    (Array.isArray(variantMeta) ? variantMeta : []).forEach((m) =>
+      metaById.set(m.id, m)
+    );
 
-    const variantMeta = variantMetaRes.data;
-    const enrichedVariants = product.variants.map((variant) => {
-      const matchingMeta = Array.isArray(variantMeta)
-        ? variantMeta.find((meta) => meta.id === variant.id)
-        : null;
-
-      const variantImages = (product.images || []).filter(
-        (img) => Array.isArray(img.variant_ids) && img.variant_ids.includes(variant.id)
+    // Enrich variants: keep original options array, also human fields + images per variant
+    const enrichedVariants = (product.variants || []).map((v) => {
+      const m = metaById.get(v.id) || {};
+      const optHuman = (m.options || []).reduce((acc, opt) => {
+        acc[(opt.name || '').toLowerCase()] = opt.value;
+        return acc;
+      }, {});
+      const vImages = (product.images || []).filter(
+        (img) =>
+          Array.isArray(img.variant_ids) && img.variant_ids.includes(v.id)
       );
-
       return {
-        ...variant,
-        images: variantImages.map((img) => ({
+        id: String(v.id),
+        title: v.title || '',
+        sku: v.sku || '',
+        price: v.price, // Printify retail cents
+        printifyPriceCents: Number(v.price || 0),
+        quantity: v.quantity,
+        is_enabled: !!v.is_enabled,
+        is_available: v.is_available !== false,
+        options: Array.isArray(v.options) ? v.options.slice() : [], // ← keep raw ids (ordered)
+        options_array: Array.isArray(v.options) ? v.options.slice() : [],
+        size: optHuman.size || '',
+        color: optHuman.color || '',
+        images: vImages.map((img) => ({
           src: img.src,
           position: img.position,
           displayInGallery: true,
         })),
-        ...(matchingMeta?.options?.reduce((acc, opt) => {
-          acc[opt.name.toLowerCase()] = opt.value;
-          return acc;
-        }, {}) || {}),
       };
     });
 
-    const filteredVariants = enrichedVariants.filter((v) => v.is_enabled);
+    const enabled = enrichedVariants.filter((v) => v.is_enabled);
+
+    // Enrich product.options, preserving Printify hex colors on each value.
+    // Do NOT overwrite "colors" with names; keep names in a separate field.
+    const isHex = (s) => /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(String(s || ''));
 
     const enrichedOptions = (product.options || []).map((opt) => {
-      const enrichedValues = opt.values.map((val) => {
-        const usedColors = new Set();
-        for (const variant of filteredVariants) {
-          if (variant.options?.includes(val.id) && variant.color) {
-            usedColors.add(variant.color);
+      const values = (opt.values || []).map((val) => {
+        const rawColors = Array.isArray(val?.colors) ? val.colors : [];
+        const hexColors = rawColors.filter(isHex);
+
+        const nameTokens = new Set();
+        enabled.forEach((v) => {
+          if (
+            Array.isArray(v.options) &&
+            v.options.includes(val.id) &&
+            v.color
+          ) {
+            nameTokens.add(String(v.color));
           }
-        }
-        return { ...val, colors: [...usedColors] };
+        });
+
+        return {
+          // spread FIRST
+          ...val,
+          // then override to force hex usage
+          id: val.id,
+          title: val.title,
+          colors: hexColors,
+          hex_colors: hexColors,
+          name_tokens: Array.from(nameTokens),
+        };
       });
-      return { ...opt, values: enrichedValues };
+
+      return { ...opt, values };
     });
 
+    // Stripe product + prices (one per enabled variant)
     const stripeProduct = await stripe.products.create({
       name: product.title,
       description: product.description || '',
       images: product.images?.[0]?.src ? [product.images[0].src] : [],
-      metadata: { printifyProductId: product.id },
+      metadata: {
+        printify_product_id: product.id,
+        blueprint_id: String(product.blueprint_id || ''),
+        print_provider_id: String(product.print_provider_id || ''),
+      },
     });
 
     const stripePriceIds = {};
-    for (const variant of filteredVariants) {
+    for (const v of enabled) {
       const price = await stripe.prices.create({
-        unit_amount: Math.round(variant.price),
         currency: 'usd',
+        unit_amount: Number(v.printifyPriceCents) || 0,
         product: stripeProduct.id,
+        nickname: v.title || undefined,
         metadata: {
-          variantId: variant.id.toString(),
-          title: variant.title,
-          sku: variant.sku,
+          printify_variant_id: v.id,
+          printify_sku: v.sku || '',
+          variant_title: v.title || '',
         },
       });
-      stripePriceIds[variant.id] = { priceId: price.id, unitAmount: price.unit_amount };
+      v.stripePriceId = price.id;
+      stripePriceIds[v.id] = {
+        priceId: price.id,
+        unitAmount: price.unit_amount,
+      };
     }
+
+    // Compute min price cents for listing
+    const minPriceCents = enabled.reduce((min, v) => {
+      const cents = Number(v.printifyPriceCents || 0);
+      return min === null ? cents : Math.min(min, cents);
+    }, null);
 
     const payload = {
       id: product.id,
       title: product.title,
       description: product.description || '',
-      images: product.images?.map((img) => ({ ...img, displayInGallery: true })) || [],
-      tags: product.tags,
-      variants: filteredVariants,
+      images: (product.images || []).map((img) => ({
+        ...img,
+        displayInGallery: true,
+      })),
+      previewImage: (product.images || [])[0]?.src || '',
+      tags: product.tags || [],
+      visible: !!product.visible,
+
+      variants: enabled,
       options: enrichedOptions,
-      visible: product.visible,
-      syncedAt: admin.firestore.FieldValue.serverTimestamp(),
       stripeProductId: stripeProduct.id,
       stripePriceIds,
-      status: 'inactive',
+      minPriceCents,
+
+      status: 'active',
+      printify: {
+        productId: product.id,
+        blueprint_id: product.blueprint_id || null,
+        print_provider_id: product.print_provider_id || null,
+      },
+      syncedAt: admin.firestore.FieldValue.serverTimestamp(),
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
     };
 
-    await db.collection('merchProducts').doc(productId).set(payload);
+    await db
+      .collection('merchProducts')
+      .doc(productId)
+      .set(payload, { merge: true });
   } catch (error) {
-    console.error('❌ Failed to sync Printify product:', error.message);
+    console.error(
+      '❌ Failed to sync Printify product:',
+      error?.response?.data || error
+    );
   }
 };
 
@@ -866,13 +1257,20 @@ exports.autoReplyInquiry = onDocumentCreated(
     const { email } = data;
     const msg = {
       to: email,
-      from: { name: 'Ober Artisan Drums', email: 'support@oberartisandrums.com' },
+      from: {
+        name: 'Ober Artisan Drums',
+        email: 'support@oberartisandrums.com',
+      },
       replyTo: 'support@oberartisandrums.com',
       bcc: ['support@oberartisandrums.com'],
       subject: `We've Received Your Message`,
       html: `...`,
     };
-    try { await sgMail.send(msg); } catch (error) { console.error('❌ Error sending auto-reply:', error); }
+    try {
+      await sgMail.send(msg);
+    } catch (error) {
+      console.error('❌ Error sending auto-reply:', error);
+    }
   }
 );
 
@@ -885,39 +1283,71 @@ exports.autoReplySoundlegend = onDocumentCreated(
     const { email } = data;
     const msg = {
       to: email,
-      from: { name: 'Ober Artisan Drums', email: 'soundlegend@oberartisandrums.com' },
+      from: {
+        name: 'Ober Artisan Drums',
+        email: 'soundlegend@oberartisandrums.com',
+      },
       bcc: ['soundlegend@oberartisandrums.com'],
       subject: `Welcome to the SoundLegend Experience`,
       html: `...`,
     };
-    try { await sgMail.send(msg); } catch (error) { console.error('❌ Error sending SoundLegend auto-reply:', error); }
+    try {
+      await sgMail.send(msg);
+    } catch (error) {
+      console.error('❌ Error sending SoundLegend auto-reply:', error);
+    }
   }
 );
 
 // Main API, Stripe webhook, Printify webhook, Manual refresh
 exports.api = onRequest(
-  { region: 'us-central1', secrets: [STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, CLIENT_URL, RECAPTCHA_SECRET_KEY, PRINTIFY_API_KEY, PRINTIFY_SHOP_ID] },
+  {
+    region: 'us-central1',
+    secrets: [
+      STRIPE_SECRET_KEY,
+      STRIPE_WEBHOOK_SECRET,
+      CLIENT_URL,
+      RECAPTCHA_SECRET_KEY,
+      PRINTIFY_API_KEY,
+      PRINTIFY_SHOP_ID,
+    ],
+  },
   app
 );
 exports.stripeWebhook = onRequest(
-  { region: 'us-central1', secrets: [STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET], cors: true },
+  {
+    region: 'us-central1',
+    secrets: [STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET],
+    cors: true,
+  },
   stripeWebhookApp
 );
 exports.printifyWebhookListener = onRequest(
-  { region: 'us-central1', secrets: [PRINTIFY_API_KEY, PRINTIFY_SHOP_ID, PRINTIFY_WEBHOOK_SECRET, STRIPE_SECRET_KEY] },
+  {
+    region: 'us-central1',
+    secrets: [
+      PRINTIFY_API_KEY,
+      PRINTIFY_SHOP_ID,
+      PRINTIFY_WEBHOOK_SECRET,
+      STRIPE_SECRET_KEY,
+    ],
+  },
   printifyWebhookApp
 );
 exports.refreshPrintifyStockNow = onRequest(
   { region: 'us-central1', secrets: [PRINTIFY_API_KEY, PRINTIFY_SHOP_ID] },
   async (req, res) => {
     const origin = req.headers.origin;
-    if (allowedOrigins.includes(origin)) res.set('Access-Control-Allow-Origin', origin);
+    if (allowedOrigins.includes(origin))
+      res.set('Access-Control-Allow-Origin', origin);
     res.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
     res.set('Access-Control-Allow-Headers', 'Content-Type');
     if (req.method === 'OPTIONS') return res.status(204).send('');
     try {
       await exports.refreshPrintifyStock.run();
-      res.status(200).send('✅ Manual refreshPrintifyStock executed successfully.');
+      res
+        .status(200)
+        .send('✅ Manual refreshPrintifyStock executed successfully.');
     } catch (error) {
       console.error('❌ Manual refresh failed:', error);
       res.status(500).send('❌ Manual refresh failed.');
@@ -931,18 +1361,21 @@ exports.adminCreateUser = functions.https.onCall(async (data, context) => {
 });
 const { generateDrumMockup } = require('./generateDrumMockup');
 exports.generateDrumMockup = generateDrumMockup;
-exports.computeSoundPrism = onCall({ region: 'us-central1' }, async (request) => {
-  const inputs = request.data?.inputs || {};
-  const f = Number(inputs.fundamentalHz) || 200;
-  const computed = {
-    axis: { loHz: 140, hiHz: 360, tickHz: 20 },
-    sweetSpots: [
-      { id: 'low', label: 'Low', loHz: f * 2.05, hiHz: f * 2.3 },
-      { id: 'legacy', label: 'Legacy', loHz: f * 2.35, hiHz: f * 2.65 },
-      { id: 'high', label: 'High', loHz: f * 2.7, hiHz: f * 3.1 },
-    ],
-    legacyPrint: { bandId: 'legacy', why: ['placeholder analysis'] },
-    harmonics: [2, 2.5, 3].map((m) => ({ multiple: m, hz: f * m })),
-  };
-  return { computed };
-});
+exports.computeSoundPrism = onCall(
+  { region: 'us-central1' },
+  async (request) => {
+    const inputs = request.data?.inputs || {};
+    const f = Number(inputs.fundamentalHz) || 200;
+    const computed = {
+      axis: { loHz: 140, hiHz: 360, tickHz: 20 },
+      sweetSpots: [
+        { id: 'low', label: 'Low', loHz: f * 2.05, hiHz: f * 2.3 },
+        { id: 'legacy', label: 'Legacy', loHz: f * 2.35, hiHz: f * 2.65 },
+        { id: 'high', label: 'High', loHz: f * 2.7, hiHz: f * 3.1 },
+      ],
+      legacyPrint: { bandId: 'legacy', why: ['placeholder analysis'] },
+      harmonics: [2, 2.5, 3].map((m) => ({ multiple: m, hz: f * m })),
+    };
+    return { computed };
+  }
+);

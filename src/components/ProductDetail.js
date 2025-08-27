@@ -383,12 +383,11 @@ const ProductDetail = () => {
                     <div className="option-grid">
                       {(option.values || []).map((value, idx) => {
                         const isSelected = selectedOptions[option.name] === value.title;
-                        const hasColors = Array.isArray(value.colors) && value.colors.length > 0;
-                        const swatchBackground = hasColors
-                          ? value.colors.length === 1
-                            ? value.colors[0]
-                            : `linear-gradient(to right, ${value.colors[0]} 50%, ${value.colors[1]} 50%)`
-                          : '#ccc';
+
+                        // Prefer readable token name for colors; otherwise use title.
+                        const displayName =
+                          (Array.isArray(value?.name_tokens) && value.name_tokens[0]) ||
+                          value.title;
 
                         // Disable if no variant exists for this value with current other selections
                         const disabled = (() => {
@@ -409,39 +408,46 @@ const ProductDetail = () => {
                           return !candidate;
                         })();
 
+                        // PDP requirement: show **names only** (no swatches) for Colors;
+                        // for other options (e.g., Sizes), keep text buttons as well.
                         return (
                           <button
-                            key={`swatch-${value.id || value.title}-${idx}`}
+                            key={`opt-${value.id || value.title}-${idx}`}
                             onClick={() => handleOptionSelect(option.name, value.title)}
                             onMouseEnter={() => {
-                              if (option.name !== 'Colors') return;
-                              const hovered = product.variants.find(
-                                (v) => v.is_enabled !== false && v.normalizedOptions?.['Colors'] === value.title
-                              );
-                              const hVid = hovered ? String(hovered.id) : null;
-                              const hoverCandidates = (product.images || []).filter((img) => {
-                                const ids = (img.variant_ids || []).map(String);
-                                const display = typeof img === 'object' ? img.displayInGallery !== false : true;
-                                const url = getImgUrl(img);
-                                return url?.startsWith('http') && display && (hVid ? ids.includes(hVid) : true);
-                              });
-                              const hoverImageObj = hoverCandidates[selectedImageIndex] || hoverCandidates[0];
-                              const src = getImgUrl(hoverImageObj);
-                              if (src) setHoverImage(src);
+                              // For color option, still preview the corresponding image on hover
+                              if (/colou?r/i.test(option.name)) {
+                                const hovered = product.variants.find(
+                                  (v) => v.is_enabled !== false && v.normalizedOptions?.['Colors'] === value.title
+                                );
+                                const hVid = hovered ? String(hovered.id) : null;
+                                const hoverCandidates = (product.images || []).filter((img) => {
+                                  const ids = (img.variant_ids || []).map(String);
+                                  const display = typeof img === 'object' ? img.displayInGallery !== false : true;
+                                  const url = getImgUrl(img);
+                                  return url?.startsWith('http') && display && (hVid ? ids.includes(hVid) : true);
+                                });
+                                const hoverImageObj = hoverCandidates[selectedImageIndex] || hoverCandidates[0];
+                                const src = getImgUrl(hoverImageObj);
+                                if (src) setHoverImage(src);
+                              }
                             }}
                             onMouseLeave={() => setHoverImage(null)}
                             disabled={disabled}
-                            title={value.title}
+                            title={displayName}
                             className={`option-button ${isSelected ? 'selected' : ''} ${isSelected && disabled ? 'selected-unavailable' : ''}`}
                             style={{
-                              width: hasColors ? 32 : 'auto',
-                              height: hasColors ? 32 : 'auto',
-                              borderRadius: hasColors ? '50%' : '4px',
-                              background: hasColors ? swatchBackground : undefined,
-                              color: hasColors ? 'transparent' : undefined,
+                              // force text-chip style: no circular swatch, no color backgrounds
+                              width: 'auto',
+                              height: 'auto',
+                              borderRadius: '4px',
+                              background: undefined,
+                              color: undefined,
+                              padding: '0.35rem 0.6rem',
+                              lineHeight: 1.2
                             }}
                           >
-                            {!hasColors && value.title}
+                            {displayName}
                           </button>
                         );
                       })}

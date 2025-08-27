@@ -8,10 +8,8 @@ import React, {
 import { useParams } from 'react-router-dom';
 import { db } from '../firebaseConfig';
 import { doc, getDoc } from 'firebase/firestore';
-import LegacyTuning from '../components/LegacyTuning';
 import { computeBandsFromSpec } from '../utils/tuningMath';
 import './SoundLegendShowroom.css';
-import LegacyTuningChart from '../components/LegacyTuningChart';
 
 /* =============== helpers =============== */
 const parseLegacyHzRange = (txt = '') => {
@@ -45,20 +43,43 @@ function guessMime(url = '') {
   if (u.endsWith('.wav') || u.endsWith('.wave')) return 'audio/wav';
   return '';
 }
-
-/** Return a snapshot only if it is explicitly published */
 function getPublishedSnapshot(d) {
   const top = d?.publishedSnapshot;
   if (top && String(top.status).toLowerCase() === 'published') return top;
-
   const prism = d?.soundprism?.publishedSnapshot;
   if (prism && String(prism.status).toLowerCase() === 'published') return prism;
-
-  // nothing published
   return null;
 }
 
-/* =============== audio card (unchanged) =============== */
+/* ===== scroll container helpers ===== */
+function isScrollable(el) {
+  if (!el) return false;
+  const cs = getComputedStyle(el);
+  const overflowY = cs.overflowY;
+  const canScroll = /(auto|scroll|overlay)/.test(overflowY);
+  return canScroll && el.scrollHeight > el.clientHeight + 1;
+}
+function findScrollParent(start) {
+  let el = start?.parentElement || document.body;
+  while (el && el !== document.body && el !== document.documentElement) {
+    if (isScrollable(el)) return el;
+    el = el.parentElement;
+  }
+  // if body/html is the scroller OR the site uses window scrolling
+  return window;
+}
+function getAbsTopWithin(el, root) {
+  if (!el) return 0;
+  if (root === window) {
+    const r = el.getBoundingClientRect();
+    return r.top + window.pageYOffset;
+  }
+  const elRect = el.getBoundingClientRect();
+  const rootRect = root.getBoundingClientRect();
+  return elRect.top - rootRect.top + root.scrollTop;
+}
+
+/* =============== audio card =============== */
 function AudioSampleCard({ sample, index, onAnyPlay }) {
   const {
     title,
@@ -209,6 +230,7 @@ function AudioSampleCard({ sample, index, onAnyPlay }) {
           className={`sl-audio-play ${isPlaying ? 'playing' : ''}`}
           onClick={toggle}
           aria-label={isPlaying ? 'Pause' : 'Play'}
+          type="button"
         >
           {isPlaying ? (
             <svg
@@ -264,8 +286,8 @@ function AudioSampleCard({ sample, index, onAnyPlay }) {
 
 /* =============== page =============== */
 const SoundLegendShowroom = () => {
-  const params = useParams();
-  const serial = String(params?.serial ?? '')
+  const { serial: serialParam } = useParams();
+  const serial = String(serialParam ?? '')
     .trim()
     .toUpperCase();
 
@@ -281,7 +303,7 @@ const SoundLegendShowroom = () => {
   const galleryRef = useRef(null);
   const audioRef = useRef(null);
 
-  // sticky pills
+  // sticky pills / scrolling infra
   const viewbarRef = useRef(null);
   const [headerTop, setHeaderTop] = useState(72);
   const headerElRef = useRef(null);
@@ -289,8 +311,7 @@ const SoundLegendShowroom = () => {
   const [isLocked, setIsLocked] = useState(false);
   const lockTimerRef = useRef(null);
 
-  const handleLogoLoad = () => setLogoLoaded(true);
-  const handleHeroLoad = () => setHeroLoaded(true);
+  const [scrollRoot, setScrollRoot] = useState(window); // window or a scrollable div
 
   // fetch drum doc
   useEffect(() => {
@@ -308,11 +329,19 @@ const SoundLegendShowroom = () => {
         if (alive) setLoading(false);
       }
     })();
-    window.scrollTo(0, 0);
+    if (typeof window !== 'undefined') window.scrollTo(0, 0);
     return () => {
       alive = false;
     };
   }, [serial]);
+
+  // after first layout, detect real scroll container
+  useLayoutEffect(() => {
+    // choose an anchor that surely exists
+    const anchor = artistRef.current || viewbarRef.current || document.body;
+    const root = findScrollParent(anchor);
+    setScrollRoot(root);
+  }, []);
 
   // neutralize fade-ins
   useEffect(() => {
@@ -393,14 +422,12 @@ const SoundLegendShowroom = () => {
   const storyHtml = drumData?.story ?? drumData?.specs?.story ?? '';
   const specs = drumData?.specs || {};
 
-  // Only use a snapshot if it's explicitly published
   const publishedSnapshot = getPublishedSnapshot(drumData);
   const spBands = Array.isArray(publishedSnapshot?.sweetSpots)
     ? publishedSnapshot.sweetSpots
     : [];
   const spPalette = publishedSnapshot?.palette || drumData?.palette || null;
 
-  // Build sweet spots for chart
   const sweetSpots = spBands.length
     ? spBands.map(({ id, label, loHz, hiHz }) => ({
         id,
@@ -409,7 +436,6 @@ const SoundLegendShowroom = () => {
         hiHz: Number(hiHz),
       }))
     : (() => {
-        // fallback to computed/specs when no published snapshot
         const legacyText = (specs.legacyTuningNotes || '').trim();
         const legacyParsed = parseLegacyHzRange(legacyText) || {};
         const comp = computeBandsFromSpec(specs, drumData);
@@ -434,14 +460,12 @@ const SoundLegendShowroom = () => {
         ];
       })();
 
-  // Fundamental for chart marker (inputs.fundamentalHz preferred)
   const shellFundHz =
     Number(drumData?.inputs?.fundamentalHz) ||
     Number(specs.shellFundHz) ||
     parseFundamentalHz(specs.fundamentalPitch || '') ||
     null;
 
-  // Audio samples
   const rawSamples = Array.isArray(drumData?.audioSamples)
     ? drumData.audioSamples
     : [];
@@ -469,17 +493,18 @@ const SoundLegendShowroom = () => {
   const showGallery = filteredGallery.length > 0;
   const showAudio = audioSamples.length > 0;
 
-  // ---------- SCROLL SPY ----------
-  const getCssOffset = useCallback(() => {
-    return (
+  /* ===== offset from CSS var ===== */
+  const getCssOffset = useCallback(
+    () =>
       parseInt(
         getComputedStyle(document.documentElement).getPropertyValue(
           '--sl-offset'
         )
-      ) || headerTop + 80
-    );
-  }, [headerTop]);
+      ) || headerTop + 80,
+    [headerTop]
+  );
 
+  /* ===== Scroll spy and active pill ===== */
   useEffect(() => {
     const map = [
       showArtist && { key: 'artist', ref: artistRef },
@@ -490,6 +515,7 @@ const SoundLegendShowroom = () => {
 
     const offset = getCssOffset();
     const thresholds = Array.from({ length: 11 }, (_, i) => i / 10);
+
     const obs = new IntersectionObserver(
       (entries) => {
         if (isLocked) return;
@@ -508,7 +534,7 @@ const SoundLegendShowroom = () => {
         if (bestKey) setActive(bestKey);
       },
       {
-        root: null,
+        root: scrollRoot === window ? null : scrollRoot,
         rootMargin: `-${offset}px 0px -55% 0px`,
         threshold: thresholds,
       }
@@ -520,12 +546,15 @@ const SoundLegendShowroom = () => {
 
     const syncNow = () => {
       if (isLocked) return;
-      const y = window.scrollY + offset + 1;
+      const currentScrollTop =
+        scrollRoot === window ? window.pageYOffset : scrollRoot.scrollTop;
+      const y = currentScrollTop + offset + 1;
+
       let current = map[0]?.key || 'artist';
       for (const { key, ref } of map) {
         const el = ref.current;
         if (!el) continue;
-        const top = el.getBoundingClientRect().top + window.scrollY;
+        const top = getAbsTopWithin(el, scrollRoot);
         if (top <= y) current = key;
         else break;
       }
@@ -534,35 +563,55 @@ const SoundLegendShowroom = () => {
     syncNow();
 
     const onScroll = () => requestAnimationFrame(syncNow);
-    window.addEventListener('scroll', onScroll, { passive: true });
+    (scrollRoot === window ? window : scrollRoot).addEventListener(
+      'scroll',
+      onScroll,
+      { passive: true }
+    );
     return () => {
-      window.removeEventListener('scroll', onScroll);
+      (scrollRoot === window ? window : scrollRoot).removeEventListener(
+        'scroll',
+        onScroll
+      );
       obs.disconnect();
     };
-  }, [showArtist, showTuning, showGallery, showAudio, getCssOffset, isLocked]);
+  }, [
+    showArtist,
+    showTuning,
+    showGallery,
+    showAudio,
+    getCssOffset,
+    isLocked,
+    scrollRoot,
+  ]);
 
-// replace the entire scrollToKey with this
-const scrollToKey = (key) => {
-  const map = {
-    artist: artistRef,
-    tuning: tuningRef,
-    gallery: galleryRef,
-    audio: audioRef,
+  /* ===== Deterministic scroll-to that works in nested scrollers ===== */
+  const scrollToKey = (key) => {
+    const map = {
+      artist: artistRef,
+      tuning: tuningRef,
+      gallery: galleryRef,
+      audio: audioRef,
+    };
+    const el = map[key]?.current;
+    if (!el) return;
+
+    const off = getCssOffset();
+    const targetTop = Math.max(0, getAbsTopWithin(el, scrollRoot) - off);
+
+    setActive(key);
+    setIsLocked(true);
+    if (lockTimerRef.current) clearTimeout(lockTimerRef.current);
+    lockTimerRef.current = setTimeout(() => setIsLocked(false), 800);
+
+    const root = scrollRoot === window ? window : scrollRoot;
+    if ('scrollTo' in root) {
+      root.scrollTo({ top: targetTop, behavior: 'smooth' });
+    } else {
+      // very old fallback
+      root.scrollTop = targetTop;
+    }
   };
-  const el = map[key]?.current;
-  if (!el) return;
-
-  setActive(key);
-  setIsLocked(true);
-  if (lockTimerRef.current) clearTimeout(lockTimerRef.current);
-  lockTimerRef.current = setTimeout(() => setIsLocked(false), 500);
-
-  const off = getCssOffset(); // sticky header + pills height
-  const y = el.getBoundingClientRect().top + window.scrollY - off;
-
-  // Always use window.scrollTo with explicit offset (more reliable with sticky)
-  window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
-};
 
   useEffect(
     () => () => {
@@ -584,7 +633,7 @@ const scrollToKey = (key) => {
         src="/logos/sl-vault-white.png"
         alt="SoundLegend Series"
         className={`showroom-logo fade-in-section ${logoLoaded ? 'is-visible' : 'loading'}`}
-        onLoad={handleLogoLoad}
+        onLoad={() => setLogoLoaded(true)}
       />
 
       {/* Hero */}
@@ -596,7 +645,7 @@ const scrollToKey = (key) => {
             src={heroImage}
             alt={name || 'SoundLegend Snare'}
             className="showroom-hero-image"
-            onLoad={handleHeroLoad}
+            onLoad={() => setHeroLoaded(true)}
             draggable={false}
           />
         )}
@@ -611,43 +660,48 @@ const scrollToKey = (key) => {
           style={{ top: headerTop }}
         >
           {showArtist && (
-            <button
+            <a
+              href="#artist"
               className={`sl-pill ${active === 'artist' ? 'active' : ''}`}
-              onClick={() => scrollToKey('artist')}
+              onClick={() => setActive('artist')}
             >
               Legacy Artist
-            </button>
+            </a>
           )}
           {showAudio && (
-            <button
+            <a
+              href="#audio"
               className={`sl-pill ${active === 'audio' ? 'active' : ''}`}
-              onClick={() => scrollToKey('audio')}
+              onClick={() => setActive('audio')}
             >
               Legacy Sound
-            </button>
+            </a>
           )}
           {showGallery && (
-            <button
+            <a
+              href="#gallery"
               className={`sl-pill ${active === 'gallery' ? 'active' : ''}`}
-              onClick={() => scrollToKey('gallery')}
+              onClick={() => setActive('gallery')}
             >
               Legacy Gallery
-            </button>
+            </a>
           )}
           {/* {showTuning && (
-            <button
-              className={`sl-pill ${active === 'tuning' ? 'active' : ''}`}
-              onClick={() => scrollToKey('tuning')}
-            >
-              Legacy Tuning
-            </button>
-          )} */}
+      <a
+        href="#tuning"
+        className={`sl-pill ${active === 'tuning' ? 'active' : ''}`}
+        onClick={() => setActive('tuning')}
+      >
+        Legacy Tuning
+      </a>
+    )} */}
         </nav>
       )}
 
       {/* Story */}
       {showArtist && (
         <section
+          id="artist"
           ref={artistRef}
           className="showroom-story elegant-font fade-in-section is-visible sl-anchor"
           aria-labelledby="sl-story-h"
@@ -657,9 +711,7 @@ const scrollToKey = (key) => {
               {name}
             </h2>
           ) : null}
-          <p className="legacy-subtitle">
-            LEGACY ARTIST({serial})
-          </p>
+          <p className="legacy-subtitle">LEGACY ARTIST ({serial})</p>
           {storyHtml ? (
             <div
               className="showroom-story-content"
@@ -672,6 +724,7 @@ const scrollToKey = (key) => {
       {/* Audio */}
       {showAudio && (
         <section
+          id="audio"
           ref={audioRef}
           className="sl-audio-section fade-in-section is-visible sl-anchor"
           aria-labelledby="sl-audio-h"
@@ -705,6 +758,7 @@ const scrollToKey = (key) => {
       {/* Gallery */}
       {showGallery && (
         <section
+          id="gallery"
           ref={galleryRef}
           className="showroom-gallery fade-in-section is-visible sl-anchor"
           aria-labelledby="sl-gallery-h"
@@ -771,31 +825,6 @@ const scrollToKey = (key) => {
           </div>
         </div>
       )}
-
-      {/* ===== Legacy Tuning =====
-      <section
-        ref={tuningRef}
-        className="showroom-tuning fade-in-section is-visible sl-anchor"
-        aria-labelledby="sl-tuning-h"
-      >
-        <h2 id="sl-tuning-h" className="sl-section-title">
-          Legacy Tuning
-        </h2>
-
-        <LegacyTuningChart
-          fundamentalHz={
-            Number(drumData?.inputs?.fundamentalHz) ||
-            Number(specs.shellFundHz) ||
-            parseFundamentalHz(specs.fundamentalPitch || '') ||
-            null
-          }
-          sweetSpots={sweetSpots}
-          palette={spPalette || undefined}
-          showBands={true}
-          size="md"
-          constrain
-        />
-      </section> */}
 
       {/* NFC / copy */}
       <section className="showroom-legacy fade-in-section is-visible">
