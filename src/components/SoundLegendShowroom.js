@@ -665,7 +665,7 @@ const SoundLegendShowroom = () => {
               className={`sl-pill ${active === 'artist' ? 'active' : ''}`}
               onClick={() => setActive('artist')}
             >
-              Legacy Artist
+            Artist
             </a>
           )}
           {showAudio && (
@@ -674,7 +674,7 @@ const SoundLegendShowroom = () => {
               className={`sl-pill ${active === 'audio' ? 'active' : ''}`}
               onClick={() => setActive('audio')}
             >
-              Legacy Sound
+              Sound
             </a>
           )}
           {showGallery && (
@@ -683,7 +683,7 @@ const SoundLegendShowroom = () => {
               className={`sl-pill ${active === 'gallery' ? 'active' : ''}`}
               onClick={() => setActive('gallery')}
             >
-              Legacy Gallery
+              Gallery
             </a>
           )}
           {/* {showTuning && (
