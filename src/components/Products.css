@@ -17,8 +17,6 @@
   width: 100%;
 }
 
-
-
 /* Product Grid for Non-Admins */
 .product-grid {
   display: flex;
@@ -28,7 +26,7 @@
   padding: 0 20px; /* Align items */
 }
 
-/* Admin Section */
+/* Admin Section wrapper (kept minimal) */
 .admin-section {
   display: flex;
   flex-wrap: wrap; /* Ensure horizontal layout in admin view */
@@ -41,7 +39,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
+  position: relative;              /* <-- needed to anchor the sort buttons */
   margin-bottom: 10px;
   padding: 10px;
   border: 1px solid #ddd;
@@ -54,8 +52,46 @@
   background-color: #f9f9f9;
 }
 
+/* ===== Sort controls ABOVE each card (admins only) ===== */
+/* ===== Sort controls ABOVE each card (admins only) ===== */
+.product-controls.top {
+  position: absolute;
+  top: -30px;                       /* push them further above the card */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  z-index: 20;                      /* keep above everything */
+}
 
-/* Admin Drag and Drop Container */
+.move-button {
+  width: 34px;
+  height: 32px;
+  padding: 0;
+  border-radius: 50%;               /* circular buttons */
+  border: 1px solid rgba(0,0,0,0.25);
+  background: #fff;
+  color: #333;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  transition: transform 0.12s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.move-button:hover {
+  transform: translateY(-2px);
+  background: #f1f1f1;
+  border-color: rgba(0,0,0,0.4);
+}
+
+.move-button:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 2px;
+}
+
+/* Admin Drag and Drop Container (kept for future use) */
 .droppable-container {
   display: flex;
   flex-direction: row;
@@ -122,10 +158,11 @@
     flex-wrap: wrap;
     gap: 15px;
   }
-
   .droppable-container {
     flex-wrap: wrap;
   }
+  /* bring buttons a touch closer on smaller screens */
+  .product-controls.top { top: -12px; }
 }
 
 @media (max-width: 480px) {
@@ -133,4 +170,5 @@
     flex-wrap: wrap;
     justify-content: center;
   }
+  .product-controls.top { top: -10px; }
 }

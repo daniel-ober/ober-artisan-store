@@ -387,8 +387,9 @@ const SoundLegendProductDetail = () => {
           </Dialog>
         </div>
       </div>
+
       {/* --- Explore Legacy Vault band --- */}
-      <section className="sl-vault-cta">
+      {/* <section className="sl-vault-cta">
         <div className="sl-vault-cta-inner">
           <div
             className="sl-vault-logo-bg"
@@ -397,7 +398,7 @@ const SoundLegendProductDetail = () => {
             style={{ backgroundImage: 'url(/legacy-vault-nav/white.png)' }}
           />
           <div className="sl-vault-copy">
-            {/* <h3>Explore our Legacy Vault</h3> */}
+            <h3>Explore our Legacy Vault</h3>
             <p>
               Hear real drums, meet the artists, and dive into specs, stories,
               photos, and Legacy Tuning™ samples for each instrument.
@@ -410,15 +411,15 @@ const SoundLegendProductDetail = () => {
             >
               Explore the Vault
             </Link>
-            {/* <Link
+            <Link
               to="/artisan-shop/soundlegend/vault/learn/legacy-tuning"
               className="sl-vault-btn ghost"
             >
               What is Legacy Tuning?
-            </Link> */}
+            </Link>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };
