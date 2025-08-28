@@ -42,6 +42,14 @@
       "extensionInstances": {
         "storage-resize-images": "b4ad819abd6d80b5b4a145d1300043e3018e02b83b3f043794946fdc04a1a4a2"
       }
+    },
+    "danoberartisandrums": {
+      "extensionInstances": {
+        "firestore-chatgpt-bot": "1e492de0a82e7a8299a5fbea022b4265dde62c6cbee4ea0342a1458888d0792a",
+        "firestore-stripe-invoices": "9a741e14ac418045f6848c4107461ca822159361de4b04e0dd61ba3b3a977a46",
+        "firestore-stripe-payments": "575da4be76058a81f805f3dda99ceb0092ba8cff87769cf9c67a82422767f908",
+        "storage-resize-images": "2a2b08f651be3a43d4e56e13a930d57c63864cfea9905ff826bedcfa5ea1b81c"
+      }
     }
   },
   "dataconnectEmulatorConfig": {}
