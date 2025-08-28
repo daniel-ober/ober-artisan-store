@@ -56,6 +56,98 @@ const pHeaders = () => ({
   'Content-Type': 'application/json',
 });
 
+// Build Printify line_items from your cart shape
+const toPrintifyLineItems = (products = []) =>
+  products.map((p) => {
+    const quantity = Math.max(1, parseInt(p?.quantity || 1, 10));
+    const variantId = String(p?.config?.variantId || p?.variantId || '').trim();
+    const productId = String(p?.productId || p?.id || '').trim();
+    const sku = String(p?.sku || '').trim();
+
+    if (productId && variantId) {
+      return {
+        product_id: productId,
+        variant_id: Number(variantId),
+        quantity,
+        ...(sku ? { external_id: sku } : {}),
+      };
+    }
+    return {
+      sku: sku || productId,
+      quantity,
+      ...(sku ? { external_id: sku } : {}),
+    };
+  });
+
+// Build Printify address_to from your shippingAddress shape
+const toPrintifyAddress = (
+  addr = {},
+  firstName = 'Customer',
+  lastName = ''
+) => ({
+  first_name: addr.firstName || firstName,
+  last_name: addr.lastName || lastName,
+  email: addr.email || 'customer@example.com',
+  phone: addr.phone || '',
+  country: addr.country,
+  region: addr.state || '',
+  address1: addr.line1,
+  address2: addr.line2 || '',
+  city: addr.city,
+  zip: addr.postal_code || addr.postalCode || addr.zip || '',
+});
+
+// Map Printify rates -> Stripe shipping_options
+const mapRatesToStripeOptions = (rates, currency = 'usd') => {
+  const candidates = [
+    { key: 'economy', label: 'Economy' },
+    { key: 'standard', label: 'Standard' },
+    { key: 'priority', label: 'Priority' },
+    { key: 'express', label: 'Express' },
+    { key: 'printify_express', label: 'Printify Express' },
+  ];
+  const windowFor = (k) => {
+    switch (k) {
+      case 'economy':
+        return {
+          minimum: { unit: 'business_day', value: 5 },
+          maximum: { unit: 'business_day', value: 12 },
+        };
+      case 'standard':
+        return {
+          minimum: { unit: 'business_day', value: 3 },
+          maximum: { unit: 'business_day', value: 7 },
+        };
+      case 'priority':
+        return {
+          minimum: { unit: 'business_day', value: 2 },
+          maximum: { unit: 'business_day', value: 4 },
+        };
+      case 'express':
+      case 'printify_express':
+        return {
+          minimum: { unit: 'business_day', value: 1 },
+          maximum: { unit: 'business_day', value: 2 },
+        };
+      default:
+        return null;
+    }
+  };
+  return candidates
+    .filter(
+      (c) =>
+        rates && rates[c.key] != null && Number.isFinite(Number(rates[c.key]))
+    )
+    .map((c) => ({
+      shipping_rate_data: {
+        type: 'fixed_amount',
+        fixed_amount: { amount: Math.round(Number(rates[c.key])), currency },
+        display_name: c.label,
+        delivery_estimate: windowFor(c.key),
+      },
+    }));
+};
+
 // ───────────────────────────────────────────────────────────────────────────────
 // NEW: Admin — list Printify products for picker
 app.get('/printify/catalog', async (req, res) => {
@@ -527,15 +619,11 @@ app.post('/createCheckoutSession', async (req, res) => {
     const clientUrlRaw = CLIENT_URL.value();
     if (!stripeKey) {
       console.error('❌ Missing STRIPE_SECRET_KEY secret');
-      return res
-        .status(500)
-        .json({ error: 'Server misconfiguration (stripe key).' });
+      return res.status(500).json({ error: 'Server misconfiguration (stripe key).' });
     }
     if (!clientUrlRaw) {
       console.error('❌ Missing CLIENT_URL secret');
-      return res
-        .status(500)
-        .json({ error: 'Server misconfiguration (client url).' });
+      return res.status(500).json({ error: 'Server misconfiguration (client url).' });
     }
 
     const stripe = stripeLib(stripeKey);
@@ -559,14 +647,11 @@ app.post('/createCheckoutSession', async (req, res) => {
 
     const guestToken = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
 
-    await db
-      .collection('pending_checkouts')
-      .doc(guestToken)
-      .set({
-        createdAt: admin.firestore.FieldValue.serverTimestamp(),
-        products,
-        userId: userId || 'guest',
-      });
+    await db.collection('pending_checkouts').doc(guestToken).set({
+      createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      products,
+      userId: userId || 'guest',
+    });
 
     const lineItems = [];
     for (const p of products) {
@@ -579,14 +664,10 @@ app.post('/createCheckoutSession', async (req, res) => {
         return res.status(400).json({ error: 'Invalid item price.' });
       }
       const images =
-        typeof p?.image === 'string' && /^https?:\/\//i.test(p.image)
-          ? [p.image]
-          : [];
+        typeof p?.image === 'string' && /^https?:\/\//i.test(p.image) ? [p.image] : [];
 
       if (isMerch) {
-        const color = String(
-          cfg.colorName || cfg.color || cfg.Colors || ''
-        ).trim();
+        const color = String(cfg.colorName || cfg.color || cfg.Colors || '').trim();
         const size = String(cfg.sizeName || cfg.size || cfg.Sizes || '').trim();
         const vId = String(cfg.variantId || '').trim();
         const parts = [];
@@ -620,11 +701,7 @@ app.post('/createCheckoutSession', async (req, res) => {
           cfgA.depth ? `Depth: ${cfgA.depth}"` : '',
           cfgA.lugQuantity ? `${cfgA.lugQuantity} Lugs` : '',
           cfgA.staveQuantity ? `${cfgA.staveQuantity} Staves` : '',
-          typeof cfgA.reRing !== 'undefined'
-            ? cfgA.reRing
-              ? 'Re-Rings'
-              : 'No Re-Rings'
-            : '',
+          typeof cfgA.reRing !== 'undefined' ? (cfgA.reRing ? 'Re-Rings' : 'No Re-Rings') : '',
           cfgA.hardwareColor ? `Hardware: ${cfgA.hardwareColor}` : '',
         ].filter(Boolean);
 
@@ -635,9 +712,7 @@ app.post('/createCheckoutSession', async (req, res) => {
             product_data: {
               name: p?.name || 'Ober Artisan Product',
               ...(images.length ? { images } : {}),
-              ...(descParts.length
-                ? { description: descParts.join(' • ') }
-                : {}),
+              ...(descParts.length ? { description: descParts.join(' • ') } : {}),
             },
           },
           quantity: Math.max(1, parseInt(p?.quantity || 1, 10)),
@@ -645,6 +720,7 @@ app.post('/createCheckoutSession', async (req, res) => {
       }
     }
 
+    // Build session params (we'll add shipping_options after we compute/quote)
     const sessionParams = {
       mode: 'payment',
       line_items: lineItems,
@@ -659,21 +735,86 @@ app.post('/createCheckoutSession', async (req, res) => {
         promoCode: promoCode || '',
         shipTo: shippingAddress?.line1 || '',
       },
+      shipping_address_collection: { allowed_countries: ['US', 'CA'] },
     };
 
     if (customerEmail && /\S+@\S+\.\S+/.test(customerEmail)) {
       sessionParams.customer_email = customerEmail;
     }
-    sessionParams.shipping_address_collection = {
-      allowed_countries: ['US', 'CA'],
-    };
+
+    // ── Free Shipping Rule: subtotal ≥ $75 → force free shipping
+    const subtotalCents = products.reduce((sum, p) => {
+      const qty = Math.max(1, parseInt(p?.quantity || 1, 10));
+      const priceCents = Math.round(Number(p?.price || 0) * 100);
+      return sum + priceCents * qty;
+    }, 0);
+
+    if (subtotalCents >= 7500) {
+      sessionParams.shipping_options = [
+        {
+          shipping_rate_data: {
+            type: 'fixed_amount',
+            fixed_amount: { amount: 0, currency: 'usd' },
+            display_name: 'Free Shipping (orders over $75)',
+            delivery_estimate: {
+              minimum: { unit: 'business_day', value: 7 },
+              maximum: { unit: 'business_day', value: 10 },
+            },
+          },
+        },
+      ];
+    } else {
+      // 🔎 Live shipping: call Printify for this exact cart + address
+      try {
+        const shopId = PRINTIFY_SHOP_ID.value();
+        const payload = {
+          line_items: toPrintifyLineItems(products),
+          address_to: toPrintifyAddress(
+            shippingAddress || {},
+            firstName || 'Customer',
+            lastName || ''
+          ),
+        };
+        const { data: rates } = await axios.post(
+          `https://api.printify.com/v1/shops/${shopId}/orders/shipping.json`,
+          payload,
+          { headers: pHeaders() }
+        );
+
+        const shipping_options = mapRatesToStripeOptions(rates, 'usd');
+        if (shipping_options.length) {
+          sessionParams.shipping_options = shipping_options;
+        } else {
+          // graceful fallback so Checkout still renders
+          sessionParams.shipping_options = [
+            {
+              shipping_rate_data: {
+                type: 'fixed_amount',
+                fixed_amount: { amount: 0, currency: 'usd' },
+                display_name: 'Shipping calculated at fulfillment',
+              },
+            },
+          ];
+        }
+      } catch (e) {
+        console.warn('⚠️ Printify quote failed, using fallback:', e?.response?.data || e?.message || e);
+        sessionParams.shipping_options = [
+          {
+            shipping_rate_data: {
+              type: 'fixed_amount',
+              fixed_amount: { amount: 0, currency: 'usd' },
+              display_name: 'Shipping calculated at fulfillment',
+            },
+          },
+        ];
+      }
+    }
+
+    // Finally create the session
     const session = await stripe.checkout.sessions.create(sessionParams);
     return res.status(200).json({ url: session.url });
   } catch (err) {
-    const msg =
-      err?.raw?.message ||
-      err?.message ||
-      'Unknown error creating checkout session';
+    const msg = err?.raw?.message || err?.message || 'Unknown error creating checkout session';
     console.error('❌ Error creating checkout session:', msg, err);
     return res.status(500).json({ error: msg });
   }
@@ -1036,6 +1177,59 @@ printifyWebhookApp.post('/', async (req, res) => {
     }
   }
   res.status(200).send('Webhook received');
+});
+
+// ───────────────────────────────────────────────────────────────────────────────
+// Shipping — live Printify quote (returns exact rates for the given address/ZIP)
+//
+// POST /shipping/printify/quote
+// Accepts EITHER:
+//   { line_items: [...], address_to: {...} }
+// OR:
+//   { products: [...], shippingAddress: {...} }   // your cart + address shape
+// Returns (example): { economy: 399, standard: 999, express: 2499, ... }
+app.post('/shipping/printify/quote', async (req, res) => {
+  try {
+    const shopId = PRINTIFY_SHOP_ID.value();
+    if (!shopId || !PRINTIFY_API_KEY.value()) {
+      return res
+        .status(500)
+        .json({ error: 'Printify credentials not available' });
+    }
+
+    const { line_items, address_to, products, shippingAddress } =
+      req.body || {};
+    const payload = {
+      line_items:
+        Array.isArray(line_items) && line_items.length
+          ? line_items
+          : toPrintifyLineItems(products || []),
+      address_to: address_to || toPrintifyAddress(shippingAddress || {}),
+    };
+
+    // basic guardrails
+    if (!Array.isArray(payload.line_items) || !payload.line_items.length) {
+      return res.status(400).json({ error: 'Missing or empty line_items' });
+    }
+    if (!payload.address_to?.country || !payload.address_to?.zip) {
+      return res
+        .status(400)
+        .json({ error: 'address_to must include country and zip' });
+    }
+
+    const { data } = await axios.post(
+      `https://api.printify.com/v1/shops/${shopId}/orders/shipping.json`,
+      payload,
+      { headers: pHeaders() }
+    );
+
+    // data is typically: { standard: 999, economy: 399, ... } (cents)
+    return res.json(data);
+  } catch (e) {
+    const detail = e?.response?.data || e?.message || e;
+    console.error('❌ /shipping/printify/quote error:', detail);
+    return res.status(502).json({ error: 'Failed to fetch shipping rates' });
+  }
 });
 
 const handlePrintifyProductPublished = async (productId) => {
