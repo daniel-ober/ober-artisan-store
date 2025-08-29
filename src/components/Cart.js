@@ -16,6 +16,11 @@ const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 const API_BASE_URL =
   'https://us-central1-danoberartisandrums.cloudfunctions.net/api';
 
+// ── Shipping UI constants
+const FREE_THRESHOLD = 75;          // $75 qualifies for free shipping
+const SHIPPING_COST = 9.99;         // flat rate when under the threshold
+const formatMoney = (n) => `$${Number(n).toFixed(2)}`;
+
 const Cart = () => {
   const fallback = '/fallback-images/fallback_image1.png';
   const { cart, cartId, removeFromCart, setCart, updateFirestoreCart } =
@@ -38,7 +43,6 @@ const Cart = () => {
   useEffect(() => {
     const wasRedirected = sessionStorage.getItem('checkoutStarted');
     if (wasRedirected) {
-      console.log('🔁 Back from Stripe: clearing checkout modal flag');
       sessionStorage.removeItem('checkoutStarted');
       setShowCheckoutModal(false);
     }
@@ -53,21 +57,17 @@ const Cart = () => {
       let cartChanged = false;
 
       for (const item of updatedCart) {
-        if (!item || !item.productId) {
-          console.warn(`⚠️ Skipping item with missing productId:`, item);
-          continue;
-        }
+        if (!item || !item.productId) continue;
 
         try {
           const isMerch = item.category === 'merch';
           const collectionName = isMerch ? 'merchProducts' : 'products';
 
-          const productId = String(item.productId); // 🔥 force string ID
+          const productId = String(item.productId);
           const productRef = doc(db, collectionName, productId);
           const productSnapshot = await getDoc(productRef);
 
           if (!productSnapshot.exists()) {
-            console.warn(`⚠️ Product not found: ${item.name}`);
             unavailable.push({ id: item.id, name: item.name });
             updatedCart = updatedCart.filter((i) => i.id !== item.id);
             cartChanged = true;
@@ -79,9 +79,6 @@ const Cart = () => {
             const availableStock = productData.currentQuantity ?? 0;
 
             if (availableStock <= 0) {
-              console.warn(
-                `🚨 ${productData.name} is out of stock. Removing from cart.`
-              );
               unavailable.push({ id: item.id, name: item.name });
               updatedCart = updatedCart.filter((i) => i.id !== item.id);
               cartChanged = true;
@@ -151,7 +148,16 @@ const Cart = () => {
   const getTotalAmount = () =>
     cart.reduce((total, item) => total + getItemTotal(item), 0);
 
-  // ⬇️ REPLACE your whole handleCheckout with this version
+  // ── Shipping math (derived from cart)
+  const subtotal = getTotalAmount();
+  const qualifiesForFree = subtotal >= FREE_THRESHOLD;
+  const shippingDisplay = qualifiesForFree ? 'FREE' : formatMoney(SHIPPING_COST);
+  const amountToFree = Math.max(0, FREE_THRESHOLD - subtotal);
+  const freeMsg = qualifiesForFree
+    ? 'Congrats! Your order qualifies for FREE shipping.'
+    : `Add ${formatMoney(amountToFree)} more for FREE shipping.`;
+
+  // ⬇️ Checkout
   const handleCheckout = async () => {
     setShowCheckoutModal(true);
     try {
@@ -161,24 +167,19 @@ const Cart = () => {
         return;
       }
 
-      const normalize = (str) => (str || '').toString().trim();
-
-      // Build the snapshot we save before Stripe
       const productsPayload = cart.map((item) => {
         const config = item.config || {};
         const isMerch = item.category === 'merch';
         const isFoundersToast = item.productId === 'founders-toast';
 
-        // Image (safe fallback)
         const fb = '/fallback-images/fallback_image1.png';
         let previewImage = item.image || fb;
+
         if (item.category === 'artisan') {
           previewImage =
             item.image || (Array.isArray(item.images) && item.images[0]) || fb;
         } else if (isMerch) {
           const productDoc = productDataMap[item.productId];
-
-          // Normalizers
           const normalize = (s) =>
             (s || '')
               .toString()
@@ -196,14 +197,12 @@ const Cart = () => {
             Array.isArray(productDoc.images) &&
             productDoc.images.length
           ) {
-            // 1) Try image tied to this variantId
             let matchedImage = productDoc.images.find((img) =>
               Array.isArray(img.variant_ids)
                 ? img.variant_ids.map(String).includes(variantId)
                 : false
             );
 
-            // 2) Otherwise try by color match (Printify-enriched .colors array)
             if (!matchedImage) {
               matchedImage = productDoc.images.find((img) =>
                 Array.isArray(img.colors)
@@ -212,7 +211,6 @@ const Cart = () => {
               );
             }
 
-            // 3) Fallbacks: default image, then first image
             if (!matchedImage) {
               matchedImage =
                 productDoc.images.find((img) => img.is_default) ||
@@ -225,26 +223,23 @@ const Cart = () => {
           }
         }
 
-        // Canonical config payloads
         let configPayload = {};
         if (item.category === 'artisan' && !isFoundersToast) {
           configPayload = {
-            size: normalize(config.size),
-            depth: normalize(config.depth),
-            lugQuantity: normalize(config.lugQuantity),
-            staveQuantity: normalize(config.staveQuantity),
+            size: (config.size || '').toString().trim(),
+            depth: (config.depth || '').toString().trim(),
+            lugQuantity: (config.lugQuantity || '').toString().trim(),
+            staveQuantity: (config.staveQuantity || '').toString().trim(),
             reRing:
               typeof config.reRing !== 'undefined'
                 ? !!config.reRing
                 : undefined,
-            hardwareColor: normalize(config.hardwareColor),
-            outerShell: normalize(config.outerShell),
-            innerStave: normalize(config.innerStave),
+            hardwareColor: (config.hardwareColor || '').toString().trim(),
+            outerShell: (config.outerShell || '').toString().trim(),
+            innerStave: (config.innerStave || '').toString().trim(),
           };
         } else if (isMerch) {
-          // Accept all common key shapes from UI/state
-          const sizeValue =
-            config.Sizes || config.size || config.sizeName || '';
+          const sizeValue = config.Sizes || config.size || config.sizeName || '';
           const colorValue =
             config.Colors || config.color || config.colorName || '';
           const variantId = item.variantId || config.variantId || '';
@@ -255,27 +250,21 @@ const Cart = () => {
           };
         }
 
-        // IMPORTANT: we are using price_data for merch (so Stripe can show variant text).
-        // That creates an ephemeral price on Stripe, so DO NOT include a saved stripePriceId
-        // for merch in the snapshot—this lets the webhook match by unit_amount.
         let stripePriceId = item.stripePriceId || '';
-        if (isMerch) stripePriceId = '';
+        if (isMerch) stripePriceId = ''; // use price_data for merch
 
         return {
           productId: String(item.productId),
-          name: item.name || item.title || 'Ober Product',
-          category: item.category, // "artisan" | "merch" | etc
-          stripePriceId, // intentionally blank for merch
-          price: Number(item.price) || 0, // used when no priceId
+          name: item.name || item.title || item.config?.title || 'Ober Product',
+          category: item.category,
+          stripePriceId,
+          price: Number(item.price) || 0,
           quantity: item.quantity || 1,
           image:
             typeof previewImage === 'string' ? previewImage : previewImage?.src,
           config: configPayload,
         };
       });
-
-      // Helpful log when verifying end-to-end
-      console.log('🧾 productsPayload →', productsPayload);
 
       const response = await fetch(`${API_BASE_URL}/createCheckoutSession`, {
         method: 'POST',
@@ -307,6 +296,17 @@ const Cart = () => {
   return (
     <div className="cart-container">
       <h1 className="cart-title">Shopping Cart</h1>
+
+      {/* Shipping banner */}
+      <div className={`ship-banner ${qualifiesForFree ? 'free' : 'not-free'}`}>
+        <span className="ship-banner-line2">
+          {qualifiesForFree ? 'FREE SHIPPING' : `Shipping: ${shippingDisplay}`}
+        </span>
+        {!qualifiesForFree && (
+          <span className="ship-banner-nudge">{freeMsg}</span>
+        )}
+      </div>
+
       {cart.length === 0 ? (
         <div className="cart-empty">Your cart is empty.</div>
       ) : (
@@ -513,12 +513,25 @@ const Cart = () => {
                 );
               })}
 
-              {/* ✅ Subtotal Row with Checkout Button */}
+              {/* Shipping Row (informational) */}
+              <tr className="cart-shipping-row">
+                <td colSpan="5" className="shipping-label-td">
+                  Shipping (Standard 7–10 business days)
+                  {!qualifiesForFree && (
+                    <div className="ship-nudge-inline">{freeMsg}</div>
+                  )}
+                </td>
+                <td className="shipping-value-td">
+                  <strong>{shippingDisplay}</strong>
+                </td>
+              </tr>
+
+              {/* Subtotal Row */}
               <tr className="cart-subtotal-row">
                 <td colSpan="5"></td>
                 <td className="subtotal-cell">
                   <span className="subtotal-amount">
-                    ${getTotalAmount().toFixed(2)}
+                    {formatMoney(subtotal)}
                   </span>
                 </td>
               </tr>

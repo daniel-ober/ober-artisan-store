@@ -43,7 +43,7 @@ const TermsOfService = forwardRef((props, ref) => {
         your selected payment method for the displayed amount.
       </p>
 
-      {/* NEW: Klarna terms for BNPL + capture window */}
+      {/* Klarna terms */}
       <h2>5A. Klarna “Buy Now, Pay Later” Options</h2>
       <p>
         We offer Klarna through Stripe. When you select Klarna, your payment contract is with Klarna, and additional
@@ -63,6 +63,12 @@ const TermsOfService = forwardRef((props, ref) => {
       <p>
         Orders are typically fulfilled and shipped promptly, but we cannot guarantee delivery times. Shipping costs and
         timelines may vary by location.
+      </p>
+      <p>
+        <strong>Free shipping eligibility:</strong> Free shipping promotions are valid only within the contiguous United States
+        (the “lower 48” states). Orders shipped to Alaska, Hawaii, U.S. territories, APO/FPO addresses, or international
+        destinations do not qualify for free shipping and may incur additional costs. Any applicable shipping fees will
+        be displayed at checkout prior to order completion.
       </p>
 
       <h2>7. Returns and Refunds</h2>
