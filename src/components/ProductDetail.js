@@ -20,6 +20,20 @@ const getImgUrl = (img) => {
   return img.src || img.url || img.previewImage || '';
 };
 
+// Normalize option labels based on type so UI always sees "Colors" / "Sizes"
+const normalizeOptions = (options) =>
+  Array.isArray(options)
+    ? options.map((opt) => ({
+        ...opt,
+        name:
+          opt?.type === 'color'
+            ? 'Colors'
+            : opt?.type === 'size'
+              ? 'Sizes'
+              : opt?.name || '',
+      }))
+    : options;
+
 // ----------------------------------------------------------------------------
 
 const ProductDetail = () => {
@@ -48,39 +62,57 @@ const ProductDetail = () => {
         const productData = await fetchProductById(productId);
         if (!productData) throw new Error('Product not found');
 
-        const isMerch = !!productData.variants && Array.isArray(productData.variants);
+        const isMerch =
+          !!productData.variants && Array.isArray(productData.variants);
 
         if (isMerch) {
-          // Normalize & enrich variants (handle both `options` and `options_array`)
-          const enabledVariantsRaw = (productData.variants || []).filter((v) => v?.is_enabled !== false);
+          // 1) Normalize the product's option headings by TYPE (critical for tank tops)
+          const normalizedOpts = normalizeOptions(productData.options);
+
+          // 2) Enrich variants; build a "normalizedOptions" map keyed by normalized names
+          const enabledVariantsRaw = (productData.variants || []).filter(
+            (v) => v?.is_enabled !== false
+          );
 
           const enrichedVariants = enabledVariantsRaw.map((v) => {
-            const rawOpts = Array.isArray(v.options) ? v.options : (Array.isArray(v.options_array) ? v.options_array : []);
-            const normalizedOptions = {};
+            const rawOpts = Array.isArray(v.options)
+              ? v.options
+              : Array.isArray(v.options_array)
+                ? v.options_array
+                : [];
+            const normalizedOptionsMap = {};
 
-            if (Array.isArray(productData.options)) {
-              productData.options.forEach((opt) => {
-                const match = (opt.values || []).find((val) => rawOpts.includes(val.id));
-                if (match) normalizedOptions[opt.name] = match.title;
+            if (Array.isArray(normalizedOpts)) {
+              normalizedOpts.forEach((opt) => {
+                const match = (opt.values || []).find((val) =>
+                  rawOpts.includes(val.id)
+                );
+                if (match) normalizedOptionsMap[opt.name] = match.title; // keys: "Colors" / "Sizes"
               });
             }
 
             return {
               ...v,
               options: rawOpts,
-              normalizedOptions,
+              normalizedOptions: normalizedOptionsMap,
               images: v.images || [],
               is_available: v.is_available !== false,
             };
           });
 
-          // Filter option values that never appear in any enabled variant
-          let filteredOptions = Array.isArray(productData.options) ? [...productData.options] : [];
+          // 3) Filter option values that never appear in any enabled variant
+          let filteredOptions = Array.isArray(normalizedOpts)
+            ? [...normalizedOpts]
+            : [];
           if (filteredOptions.length > 0) {
-            const enabledIds = new Set(enrichedVariants.flatMap((v) => v.options || []));
+            const enabledIds = new Set(
+              enrichedVariants.flatMap((v) => v.options || [])
+            );
             filteredOptions = filteredOptions.map((opt) => ({
               ...opt,
-              values: (opt.values || []).filter((val) => enabledIds.has(val.id)),
+              values: (opt.values || []).filter((val) =>
+                enabledIds.has(val.id)
+              ),
             }));
           }
 
@@ -103,7 +135,9 @@ const ProductDetail = () => {
             if (filteredOptions.length > 0) {
               const preselect = {};
               filteredOptions.forEach((opt) => {
-                const val = (opt.values || []).find((vv) => (defaultVariant.options || []).includes(vv.id));
+                const val = (opt.values || []).find((vv) =>
+                  (defaultVariant.options || []).includes(vv.id)
+                );
                 if (val) preselect[opt.name] = val.title;
               });
               setSelectedOptions(preselect);
@@ -112,7 +146,8 @@ const ProductDetail = () => {
             }
 
             // Price for default variant
-            const stripeForDefault = enrichedProduct.stripePriceIds?.[defaultVariant.id];
+            const stripeForDefault =
+              enrichedProduct.stripePriceIds?.[defaultVariant.id];
             setSelectedVariant({
               ...defaultVariant,
               stripePriceId: stripeForDefault?.priceId,
@@ -130,12 +165,11 @@ const ProductDetail = () => {
               if (!url?.startsWith('http')) return false;
               const ids = (img.variant_ids || []).map(String);
               // accept images with either matching variant id OR no variant binding at all
-              return ids.length === 0 || ids.includes(String(defaultVariant.id));
+              return (
+                ids.length === 0 || ids.includes(String(defaultVariant.id))
+              );
             });
-            const resolved =
-              fromVariant ||
-              getImgUrl(fromProduct) ||
-              '';
+            const resolved = fromVariant || getImgUrl(fromProduct) || '';
             setMainImage(resolved || FALLBACK_IMAGE);
           } else {
             setMainImage(FALLBACK_IMAGE);
@@ -172,7 +206,9 @@ const ProductDetail = () => {
     const existingItem = cart.find(
       (item) =>
         item.id === variantId &&
-        Object.entries(selectedOptions).every(([k, v]) => item.config?.[k] === v)
+        Object.entries(selectedOptions).every(
+          ([k, v]) => item.config?.[k] === v
+        )
     );
     setInCart(existingItem || null);
   }, [cart, selectedVariant, selectedOptions]);
@@ -188,7 +224,9 @@ const ProductDetail = () => {
       if (v.is_enabled === false || v.is_available === false) return false;
       return product.options.every((opt) => {
         const sel = selectedOptions[opt.name];
-        const match = (opt.values || []).find((val) => (v.options || []).includes(val.id));
+        const match = (opt.values || []).find((val) =>
+          (v.options || []).includes(val.id)
+        );
         return sel && match && match.title === sel;
       });
     });
@@ -198,16 +236,23 @@ const ProductDetail = () => {
       setSelectedVariant({
         ...exact,
         stripePriceId: stripe?.priceId,
-        price: (stripe?.unitAmount ?? exact.price ?? exact.printifyPriceCents ?? 0) / 100,
+        price:
+          (stripe?.unitAmount ?? exact.price ?? exact.printifyPriceCents ?? 0) /
+          100,
       });
 
       // image for this variant (allow unbound images too)
       const vid = String(exact.id);
       const matchedImage = (product.images || []).find((img) => {
         const ids = (img.variant_ids || []).map(String);
-        const display = typeof img === 'object' ? img.displayInGallery !== false : true;
+        const display =
+          typeof img === 'object' ? img.displayInGallery !== false : true;
         const url = getImgUrl(img);
-        return url?.startsWith('http') && display && (ids.length === 0 || ids.includes(vid));
+        return (
+          url?.startsWith('http') &&
+          display &&
+          (ids.length === 0 || ids.includes(vid))
+        );
       });
       const src = getImgUrl(matchedImage);
       setMainImage(src?.startsWith('http') ? src : FALLBACK_IMAGE);
@@ -217,7 +262,10 @@ const ProductDetail = () => {
       const selectedColor = selectedOptions['Colors'];
       if (selectedColor) {
         const colorVariant = product.variants.find(
-          (v) => v.is_enabled !== false && v.normalizedOptions?.['Colors'] === selectedColor && v.images?.length
+          (v) =>
+            v.is_enabled !== false &&
+            v.normalizedOptions?.['Colors'] === selectedColor &&
+            v.images?.length
         );
         const fallbackImage = colorVariant?.images?.[0];
         const fallbackSrc = getImgUrl(fallbackImage);
@@ -287,23 +335,31 @@ const ProductDetail = () => {
   }
   if (!product) return <div>Product not found</div>;
 
-  if (productId === 'heritage') return <HeritageProductDetail product={product} />;
+  if (productId === 'heritage')
+    return <HeritageProductDetail product={product} />;
   if (productId === 'feuzon') return <FeuzonProductDetail product={product} />;
-  if (productId === 'soundlegend') return <SoundlegendProductDetail product={product} />;
+  if (productId === 'soundlegend')
+    return <SoundlegendProductDetail product={product} />;
 
-  const hasOptions = Array.isArray(product?.options) && product.options.length > 0;
+  const hasOptions =
+    Array.isArray(product?.options) && product.options.length > 0;
   const canAdd =
     !!selectedVariant &&
-    (selectedVariant.is_available !== false) &&
-    (!hasOptions || Object.keys(selectedOptions).length === product.options.length);
+    selectedVariant.is_available !== false &&
+    (!hasOptions ||
+      Object.keys(selectedOptions).length === product.options.length);
 
   return (
     <div className="product-detail-container">
       <div className="back-to-merch">
-        <Link to="/merch" className="back-link">← Back to Merch</Link>
+        <Link to="/merch" className="back-link">
+          ← Back to Merch
+        </Link>
       </div>
 
-      <h1 className="product-title">{product?.title || product?.name || 'Unnamed Product'}</h1>
+      <h1 className="product-title">
+        {product?.title || product?.name || 'Unnamed Product'}
+      </h1>
 
       <div className="product-content">
         <div className="product-gallery-info">
@@ -324,15 +380,23 @@ const ProductDetail = () => {
             </div>
 
             <div className="thumbnail-scroll-container">
-              <div className="product-thumbnail-gallery" ref={thumbnailContainerRef}>
+              <div
+                className="product-thumbnail-gallery"
+                ref={thumbnailContainerRef}
+              >
                 {(() => {
-                  const vid = selectedVariant?.id ? String(selectedVariant.id) : null;
+                  const vid = selectedVariant?.id
+                    ? String(selectedVariant.id)
+                    : null;
 
                   // Prefer images tied to the selected variant; if none, show any gallery images
                   const variantScoped = (product.images || []).filter((img) => {
                     const url = getImgUrl(img);
                     if (!url?.startsWith('http')) return false;
-                    const display = typeof img === 'object' ? img.displayInGallery !== false : true;
+                    const display =
+                      typeof img === 'object'
+                        ? img.displayInGallery !== false
+                        : true;
                     if (!display) return false;
                     const ids = (img.variant_ids || []).map(String);
                     return vid ? ids.includes(vid) : false;
@@ -340,31 +404,40 @@ const ProductDetail = () => {
 
                   const galleryScoped = (product.images || []).filter((img) => {
                     const url = getImgUrl(img);
-                    const display = typeof img === 'object' ? img.displayInGallery !== false : true;
+                    const display =
+                      typeof img === 'object'
+                        ? img.displayInGallery !== false
+                        : true;
                     return url?.startsWith('http') && display;
                   });
 
-                  const list = variantScoped.length ? variantScoped : galleryScoped;
+                  const list = variantScoped.length
+                    ? variantScoped
+                    : galleryScoped;
 
-                  return (list.length ? list : []).slice(0, 12).map((img, index) => {
-                    const imageUrl = getImgUrl(img) || FALLBACK_IMAGE;
-                    return (
-                      <button
-                        key={`thumb-${index}`}
-                        className="product-thumbnail"
-                        onClick={() => {
-                          setMainImage(imageUrl);
-                          setSelectedImageIndex(index);
-                        }}
-                      >
-                        <img
-                          src={imageUrl}
-                          onError={(e) => (e.currentTarget.src = FALLBACK_IMAGE)}
-                          alt={`Thumbnail ${index + 1}`}
-                        />
-                      </button>
-                    );
-                  });
+                  return (list.length ? list : [])
+                    .slice(0, 12)
+                    .map((img, index) => {
+                      const imageUrl = getImgUrl(img) || FALLBACK_IMAGE;
+                      return (
+                        <button
+                          key={`thumb-${index}`}
+                          className="product-thumbnail"
+                          onClick={() => {
+                            setMainImage(imageUrl);
+                            setSelectedImageIndex(index);
+                          }}
+                        >
+                          <img
+                            src={imageUrl}
+                            onError={(e) =>
+                              (e.currentTarget.src = FALLBACK_IMAGE)
+                            }
+                            alt={`Thumbnail ${index + 1}`}
+                          />
+                        </button>
+                      );
+                    });
                 })()}
               </div>
             </div>
@@ -378,22 +451,33 @@ const ProductDetail = () => {
                   return (order[a.name] ?? 99) - (order[b.name] ?? 99);
                 })
                 .map((option, optionIdx) => (
-                  <div key={`option-${option.id || option.name || optionIdx}`} className="product-options">
+                  <div
+                    key={`option-${option.id || option.name || optionIdx}`}
+                    className="product-options"
+                  >
                     <label>{option.name}</label>
                     <div className="option-grid">
                       {(option.values || []).map((value, idx) => {
-                        const isSelected = selectedOptions[option.name] === value.title;
+                        const isSelected =
+                          selectedOptions[option.name] === value.title;
 
                         // Prefer readable token name for colors; otherwise use title.
                         const displayName =
-                          (Array.isArray(value?.name_tokens) && value.name_tokens[0]) ||
+                          (Array.isArray(value?.name_tokens) &&
+                            value.name_tokens[0]) ||
                           value.title;
 
                         // Disable if no variant exists for this value with current other selections
                         const disabled = (() => {
                           const candidate = product.variants.find((v) => {
-                            if (v.is_enabled === false || v.is_available === false) return false;
-                            const vHasThisValue = (v.options || []).some((id) => id === value.id);
+                            if (
+                              v.is_enabled === false ||
+                              v.is_available === false
+                            )
+                              return false;
+                            const vHasThisValue = (v.options || []).some(
+                              (id) => id === value.id
+                            );
                             if (!vHasThisValue) return false;
 
                             // Check other options currently picked
@@ -401,7 +485,9 @@ const ProductDetail = () => {
                               if (opt.name === option.name) return true;
                               const selected = selectedOptions[opt.name];
                               if (!selected) return true;
-                              const valObj = (opt.values || []).find((vv) => (v.options || []).includes(vv.id));
+                              const valObj = (opt.values || []).find((vv) =>
+                                (v.options || []).includes(vv.id)
+                              );
                               return valObj?.title === selected;
                             });
                           });
@@ -413,21 +499,41 @@ const ProductDetail = () => {
                         return (
                           <button
                             key={`opt-${value.id || value.title}-${idx}`}
-                            onClick={() => handleOptionSelect(option.name, value.title)}
+                            onClick={() =>
+                              handleOptionSelect(option.name, value.title)
+                            }
                             onMouseEnter={() => {
                               // For color option, still preview the corresponding image on hover
                               if (/colou?r/i.test(option.name)) {
                                 const hovered = product.variants.find(
-                                  (v) => v.is_enabled !== false && v.normalizedOptions?.['Colors'] === value.title
+                                  (v) =>
+                                    v.is_enabled !== false &&
+                                    v.normalizedOptions?.['Colors'] ===
+                                      value.title
                                 );
-                                const hVid = hovered ? String(hovered.id) : null;
-                                const hoverCandidates = (product.images || []).filter((img) => {
-                                  const ids = (img.variant_ids || []).map(String);
-                                  const display = typeof img === 'object' ? img.displayInGallery !== false : true;
+                                const hVid = hovered
+                                  ? String(hovered.id)
+                                  : null;
+                                const hoverCandidates = (
+                                  product.images || []
+                                ).filter((img) => {
+                                  const ids = (img.variant_ids || []).map(
+                                    String
+                                  );
+                                  const display =
+                                    typeof img === 'object'
+                                      ? img.displayInGallery !== false
+                                      : true;
                                   const url = getImgUrl(img);
-                                  return url?.startsWith('http') && display && (hVid ? ids.includes(hVid) : true);
+                                  return (
+                                    url?.startsWith('http') &&
+                                    display &&
+                                    (hVid ? ids.includes(hVid) : true)
+                                  );
                                 });
-                                const hoverImageObj = hoverCandidates[selectedImageIndex] || hoverCandidates[0];
+                                const hoverImageObj =
+                                  hoverCandidates[selectedImageIndex] ||
+                                  hoverCandidates[0];
                                 const src = getImgUrl(hoverImageObj);
                                 if (src) setHoverImage(src);
                               }
@@ -444,7 +550,7 @@ const ProductDetail = () => {
                               background: undefined,
                               color: undefined,
                               padding: '0.35rem 0.6rem',
-                              lineHeight: 1.2
+                              lineHeight: 1.2,
                             }}
                           >
                             {displayName}
@@ -465,20 +571,36 @@ const ProductDetail = () => {
             )}
 
             <p className="product-price">
-              {selectedVariant ? `$${selectedVariant.price.toFixed(2)}` : 'Select options'}
+              {selectedVariant
+                ? `$${selectedVariant.price.toFixed(2)}`
+                : 'Select options'}
             </p>
 
             <div className="product-action full-width-button">
               {inCart ? (
                 <div className="artisan-cart-hover-container">
-                  <button className="artisan-in-cart-button" disabled>✔ In Cart</button>
+                  <button className="artisan-in-cart-button" disabled>
+                    ✔ In Cart
+                  </button>
                   <div className="artisan-cart-hover-options">
                     <span onClick={() => navigate('/cart')}>View Cart</span>
-                    <span onClick={() => removeFromCart(`merch-${selectedVariant.stripePriceId}-${selectedVariant.id}`)}>Remove</span>
+                    <span
+                      onClick={() =>
+                        removeFromCart(
+                          `merch-${selectedVariant.stripePriceId}-${selectedVariant.id}`
+                        )
+                      }
+                    >
+                      Remove
+                    </span>
                   </div>
                 </div>
               ) : (
-                <button className="artisan-add-to-cart-button" onClick={addToCartWithOptions} disabled={!canAdd}>
+                <button
+                  className="artisan-add-to-cart-button"
+                  onClick={addToCartWithOptions}
+                  disabled={!canAdd}
+                >
                   {canAdd ? 'Add to Cart' : 'Unavailable'}
                 </button>
               )}
