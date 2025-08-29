@@ -619,15 +619,11 @@ app.post('/createCheckoutSession', async (req, res) => {
     const clientUrlRaw = CLIENT_URL.value();
     if (!stripeKey) {
       console.error('❌ Missing STRIPE_SECRET_KEY secret');
-      return res
-        .status(500)
-        .json({ error: 'Server misconfiguration (stripe key).' });
+      return res.status(500).json({ error: 'Server misconfiguration (stripe key).' });
     }
     if (!clientUrlRaw) {
       console.error('❌ Missing CLIENT_URL secret');
-      return res
-        .status(500)
-        .json({ error: 'Server misconfiguration (client url).' });
+      return res.status(500).json({ error: 'Server misconfiguration (client url).' });
     }
 
     const stripe = stripeLib(stripeKey);
@@ -651,14 +647,11 @@ app.post('/createCheckoutSession', async (req, res) => {
 
     // Persist snapshot for webhook matching
     const guestToken = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
-    await db
-      .collection('pending_checkouts')
-      .doc(guestToken)
-      .set({
-        createdAt: admin.firestore.FieldValue.serverTimestamp(),
-        products,
-        userId: userId || 'guest',
-      });
+    await db.collection('pending_checkouts').doc(guestToken).set({
+      createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      products,
+      userId: userId || 'guest',
+    });
 
     // Build Stripe line_items from your cart
     const lineItems = [];
@@ -671,16 +664,12 @@ app.post('/createCheckoutSession', async (req, res) => {
         return res.status(400).json({ error: 'Invalid item price.' });
       }
       const images =
-        typeof p?.image === 'string' && /^https?:\/\//i.test(p.image)
-          ? [p.image]
-          : [];
+        typeof p?.image === 'string' && /^https?:\/\//i.test(p.image) ? [p.image] : [];
 
       if (isMerch) {
-        const color = String(
-          cfg.colorName || cfg.color || cfg.Colors || ''
-        ).trim();
+        const color = String(cfg.colorName || cfg.color || cfg.Colors || '').trim();
         const size = String(cfg.sizeName || cfg.size || cfg.Sizes || '').trim();
-        const vId = String(cfg.variantId || '').trim();
+        const vId  = String(cfg.variantId || '').trim();
         const parts = [];
         if (color) parts.push(`Color: ${color}`);
         if (size) parts.push(`Size: ${size}`);
@@ -712,11 +701,7 @@ app.post('/createCheckoutSession', async (req, res) => {
           a.depth ? `Depth: ${a.depth}"` : '',
           a.lugQuantity ? `${a.lugQuantity} Lugs` : '',
           a.staveQuantity ? `${a.staveQuantity} Staves` : '',
-          typeof a.reRing !== 'undefined'
-            ? a.reRing
-              ? 'Re-Rings'
-              : 'No Re-Rings'
-            : '',
+          typeof a.reRing !== 'undefined' ? (a.reRing ? 'Re-Rings' : 'No Re-Rings') : '',
           a.hardwareColor ? `Hardware: ${a.hardwareColor}` : '',
         ].filter(Boolean);
 
@@ -727,9 +712,7 @@ app.post('/createCheckoutSession', async (req, res) => {
             product_data: {
               name: p?.name || 'Ober Artisan Product',
               ...(images.length ? { images } : {}),
-              ...(descParts.length
-                ? { description: descParts.join(' • ') }
-                : {}),
+              ...(descParts.length ? { description: descParts.join(' • ') } : {}),
             },
           },
           quantity: Math.max(1, parseInt(p?.quantity || 1, 10)),
@@ -766,16 +749,13 @@ app.post('/createCheckoutSession', async (req, res) => {
       return sum + (Number.isFinite(priceCents) ? priceCents * qty : 0);
     }, 0);
 
-    const FREE_THRESHOLD = 7500; // $75.00
-    const FALLBACK_UNDER75 = 999; // $9.99 when we can't live-quote
-
-    // Fallback for carts < $75, before Printify quote
+    const FREE_THRESHOLD = 7500;          // $75.00
+    const FALLBACK_UNDER75 = 999;         // $9.99 when we can't live-quote
     const fallbackUnder75Option = {
       shipping_rate_data: {
         type: 'fixed_amount',
         fixed_amount: { amount: FALLBACK_UNDER75, currency: 'usd' },
-        display_name:
-          'Standard (7–10 business days)\nFree Shipping on orders $75+',
+        display_name: 'Standard',
         delivery_estimate: {
           minimum: { unit: 'business_day', value: 7 },
           maximum: { unit: 'business_day', value: 10 },
@@ -790,8 +770,7 @@ app.post('/createCheckoutSession', async (req, res) => {
           shipping_rate_data: {
             type: 'fixed_amount',
             fixed_amount: { amount: 0, currency: 'usd' },
-            display_name:
-              'Standard (7–10 business days)\nFree Shipping on orders $75+',
+            display_name: 'Standard',
             delivery_estimate: {
               minimum: { unit: 'business_day', value: 7 },
               maximum: { unit: 'business_day', value: 10 },
@@ -800,27 +779,20 @@ app.post('/createCheckoutSession', async (req, res) => {
         },
       ];
     } else {
-      // < $75 → live Printify quote or fallback
+      // < $75 → try live Printify quote, otherwise non-zero fallback
       const hasAddress =
         !!(shippingAddress && shippingAddress.country) &&
-        !!(
-          shippingAddress.postal_code ||
-          shippingAddress.postalCode ||
-          shippingAddress.zip
-        );
+        !!(shippingAddress.postal_code || shippingAddress.postalCode || shippingAddress.zip);
 
       if (!hasAddress) {
+        // No address yet: don't show $0
         sessionParams.shipping_options = [fallbackUnder75Option];
       } else {
         try {
           const shopId = PRINTIFY_SHOP_ID.value();
           const payload = {
             line_items: toPrintifyLineItems(products),
-            address_to: toPrintifyAddress(
-              shippingAddress || {},
-              firstName || 'Customer',
-              lastName || ''
-            ),
+            address_to: toPrintifyAddress(shippingAddress || {}, firstName || 'Customer', lastName || ''),
           };
           const { data: rates } = await axios.post(
             `https://api.printify.com/v1/shops/${shopId}/orders/shipping.json`,
@@ -828,24 +800,12 @@ app.post('/createCheckoutSession', async (req, res) => {
             { headers: pHeaders() }
           );
 
-          const shipping_options = mapRatesToStripeOptions(rates, 'usd').map(
-            (opt) => ({
-              ...opt,
-              shipping_rate_data: {
-                ...opt.shipping_rate_data,
-                display_name:
-                  'Standard (7–10 business days)\nFree Shipping on orders $75+',
-              },
-            })
-          );
+          const shipping_options = mapRatesToStripeOptions(rates, 'usd');
           sessionParams.shipping_options = shipping_options.length
             ? shipping_options
             : [fallbackUnder75Option];
         } catch (e) {
-          console.warn(
-            '⚠️ Printify quote failed; using fallback:',
-            e?.response?.data || e?.message || e
-          );
+          console.warn('⚠️ Printify quote failed; using fallback:', e?.response?.data || e?.message || e);
           sessionParams.shipping_options = [fallbackUnder75Option];
         }
       }
@@ -855,10 +815,7 @@ app.post('/createCheckoutSession', async (req, res) => {
     const session = await stripe.checkout.sessions.create(sessionParams);
     return res.status(200).json({ url: session.url });
   } catch (err) {
-    const msg =
-      err?.raw?.message ||
-      err?.message ||
-      'Unknown error creating checkout session';
+    const msg = err?.raw?.message || err?.message || 'Unknown error creating checkout session';
     console.error('❌ Error creating checkout session:', msg, err);
     return res.status(500).json({ error: msg });
   }
