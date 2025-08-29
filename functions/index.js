@@ -755,7 +755,7 @@ app.post('/createCheckoutSession', async (req, res) => {
       shipping_rate_data: {
         type: 'fixed_amount',
         fixed_amount: { amount: FALLBACK_UNDER75, currency: 'usd' },
-        display_name: 'Standard (calculated at fulfillment)',
+        display_name: 'Standard (Free Shipping on orders over $75)',
         delivery_estimate: {
           minimum: { unit: 'business_day', value: 7 },
           maximum: { unit: 'business_day', value: 10 },
