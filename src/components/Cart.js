@@ -12,20 +12,18 @@ import { Trash2 } from 'lucide-react';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
-// ✅ Use your known-good deployed backend URL directly
-const API_BASE_URL =
-  'https://us-central1-danoberartisandrums.cloudfunctions.net/api';
+// Known-good backend URL
+const API_BASE_URL = 'https://us-central1-danoberartisandrums.cloudfunctions.net/api';
 
-// ── Shipping UI constants
-const FREE_THRESHOLD = 75;          // $75 qualifies for free shipping
-const SHIPPING_COST = 9.99;         // flat rate when under the threshold
-const formatMoney = (n) => `$${Number(n).toFixed(2)}`;
+/* Shipping rules */
+const FREE_THRESHOLD = 75;
+const SHIPPING_COST = 9.99;
+const money = (n) => `$${Number(n || 0).toFixed(2)}`;
 
 const Cart = () => {
-  const fallback = '/fallback-images/fallback_image1.png';
-  const { cart, cartId, removeFromCart, setCart, updateFirestoreCart } =
-    useCart();
+  const { cart, cartId, removeFromCart, setCart, updateFirestoreCart } = useCart();
   const { user } = useAuth();
+
   const [loading, setLoading] = useState(false);
   const [unavailableProducts, setUnavailableProducts] = useState([]);
   const [showInventoryModal, setShowInventoryModal] = useState(false);
@@ -33,11 +31,9 @@ const Cart = () => {
   const [productDataMap, setProductDataMap] = useState({});
 
   useEffect(() => {
-    window.addEventListener('pageshow', (event) => {
-      if (event.persisted) {
-        window.location.reload(); // Force full reload on back navigation
-      }
-    });
+    const onShow = (event) => { if (event.persisted) window.location.reload(); };
+    window.addEventListener('pageshow', onShow);
+    return () => window.removeEventListener('pageshow', onShow);
   }, []);
 
   useEffect(() => {
@@ -63,8 +59,7 @@ const Cart = () => {
           const isMerch = item.category === 'merch';
           const collectionName = isMerch ? 'merchProducts' : 'products';
 
-          const productId = String(item.productId);
-          const productRef = doc(db, collectionName, productId);
+          const productRef = doc(db, collectionName, String(item.productId));
           const productSnapshot = await getDoc(productRef);
 
           if (!productSnapshot.exists()) {
@@ -77,15 +72,14 @@ const Cart = () => {
           if (!isMerch) {
             const productData = productSnapshot.data();
             const availableStock = productData.currentQuantity ?? 0;
-
             if (availableStock <= 0) {
               unavailable.push({ id: item.id, name: item.name });
               updatedCart = updatedCart.filter((i) => i.id !== item.id);
               cartChanged = true;
             }
           }
-        } catch (error) {
-          console.error(`❌ Error fetching product ${item.productId}:`, error);
+        } catch (err) {
+          console.error('Inventory check error:', err);
         }
       }
 
@@ -102,40 +96,32 @@ const Cart = () => {
 
   useEffect(() => {
     const fetchAllMerchProducts = async () => {
-      const newMap = {};
-      const merchItems = cart.filter((item) => item.category === 'merch');
+      const map = {};
+      const merchItems = cart.filter((i) => i.category === 'merch');
       for (const item of merchItems) {
-        if (!item.productId || newMap[item.productId]) continue;
+        if (!item.productId || map[item.productId]) continue;
         try {
           const ref = doc(db, 'merchProducts', String(item.productId));
           const snap = await getDoc(ref);
-          if (snap.exists()) {
-            newMap[item.productId] = snap.data();
-          }
+          if (snap.exists()) map[item.productId] = snap.data();
         } catch (err) {
-          console.warn(
-            `❌ Error fetching merch product ${item.productId}:`,
-            err
-          );
+          console.warn('Fetch merch product error:', err);
         }
       }
-      setProductDataMap(newMap);
+      setProductDataMap(map);
     };
-
     fetchAllMerchProducts();
   }, [cart]);
 
   const updateQuantity = (productId, newQuantity) => {
     if (newQuantity < 1) return;
-
-    const updatedCart = cart.map((item) =>
+    const next = cart.map((item) =>
       item.id === productId
         ? { ...item, quantity: Math.min(newQuantity, item.currentQuantity) }
         : item
     );
-
-    setCart(updatedCart);
-    updateFirestoreCart(updatedCart);
+    setCart(next);
+    updateFirestoreCart(next);
   };
 
   const closeModal = () => {
@@ -143,21 +129,13 @@ const Cart = () => {
     setUnavailableProducts([]);
   };
 
-  const getItemTotal = (item) =>
-    (Number(item.price) || 0) * (item.quantity || 1);
-  const getTotalAmount = () =>
-    cart.reduce((total, item) => total + getItemTotal(item), 0);
-
-  // ── Shipping math (derived from cart)
-  const subtotal = getTotalAmount();
+  const getItemTotal = (item) => (Number(item.price) || 0) * (item.quantity || 1);
+  const subtotal = cart.reduce((t, i) => t + getItemTotal(i), 0);
   const qualifiesForFree = subtotal >= FREE_THRESHOLD;
-  const shippingDisplay = qualifiesForFree ? 'FREE' : formatMoney(SHIPPING_COST);
-  const amountToFree = Math.max(0, FREE_THRESHOLD - subtotal);
-  const freeMsg = qualifiesForFree
-    ? 'Congrats! Your order qualifies for FREE shipping.'
-    : `Add ${formatMoney(amountToFree)} more for FREE shipping.`;
+  const shippingAmount = qualifiesForFree ? 0 : SHIPPING_COST;
+  const shippingDisplay = qualifiesForFree ? 'FREE' : money(SHIPPING_COST);
+  const grandTotal = subtotal + shippingAmount;
 
-  // ⬇️ Checkout
   const handleCheckout = async () => {
     setShowCheckoutModal(true);
     try {
@@ -166,6 +144,8 @@ const Cart = () => {
         setShowCheckoutModal(false);
         return;
       }
+
+      const normalize = (s) => (s || '').toString().trim();
 
       const productsPayload = cart.map((item) => {
         const config = item.config || {};
@@ -180,68 +160,43 @@ const Cart = () => {
             item.image || (Array.isArray(item.images) && item.images[0]) || fb;
         } else if (isMerch) {
           const productDoc = productDataMap[item.productId];
-          const normalize = (s) =>
-            (s || '')
-              .toString()
-              .toLowerCase()
-              .replace(/\s+|\/|-/g, '');
-          const variantId = String(
-            item.variantId || config.variantId || ''
-          ).trim();
-          const selectedColor = normalize(
-            config.Colors || config.colorName || config.color
-          );
+          const normalizeKey = (s) => (s || '').toString().toLowerCase().replace(/\s+|\/|-/g, '');
+          const variantId = String(item.variantId || config.variantId || '').trim();
+          const selectedColor = normalizeKey(config.Colors || config.colorName || config.color);
 
-          if (
-            productDoc &&
-            Array.isArray(productDoc.images) &&
-            productDoc.images.length
-          ) {
-            let matchedImage = productDoc.images.find((img) =>
+          if (productDoc?.images?.length) {
+            let matched = productDoc.images.find((img) =>
               Array.isArray(img.variant_ids)
                 ? img.variant_ids.map(String).includes(variantId)
                 : false
             );
-
-            if (!matchedImage) {
-              matchedImage = productDoc.images.find((img) =>
+            if (!matched) {
+              matched = productDoc.images.find((img) =>
                 Array.isArray(img.colors)
-                  ? img.colors.some((c) => normalize(c) === selectedColor)
+                  ? img.colors.some((c) => normalizeKey(c) === selectedColor)
                   : false
               );
             }
-
-            if (!matchedImage) {
-              matchedImage =
-                productDoc.images.find((img) => img.is_default) ||
-                productDoc.images[0];
-            }
-
-            if (matchedImage?.src?.startsWith('http')) {
-              previewImage = matchedImage.src;
-            }
+            if (!matched) matched = productDoc.images.find((img) => img.is_default) || productDoc.images[0];
+            if (matched?.src?.startsWith('http')) previewImage = matched.src;
           }
         }
 
         let configPayload = {};
         if (item.category === 'artisan' && !isFoundersToast) {
           configPayload = {
-            size: (config.size || '').toString().trim(),
-            depth: (config.depth || '').toString().trim(),
-            lugQuantity: (config.lugQuantity || '').toString().trim(),
-            staveQuantity: (config.staveQuantity || '').toString().trim(),
-            reRing:
-              typeof config.reRing !== 'undefined'
-                ? !!config.reRing
-                : undefined,
-            hardwareColor: (config.hardwareColor || '').toString().trim(),
-            outerShell: (config.outerShell || '').toString().trim(),
-            innerStave: (config.innerStave || '').toString().trim(),
+            size: normalize(config.size),
+            depth: normalize(config.depth),
+            lugQuantity: normalize(config.lugQuantity),
+            staveQuantity: normalize(config.staveQuantity),
+            reRing: typeof config.reRing !== 'undefined' ? !!config.reRing : undefined,
+            hardwareColor: normalize(config.hardwareColor),
+            outerShell: normalize(config.outerShell),
+            innerStave: normalize(config.innerStave),
           };
         } else if (isMerch) {
           const sizeValue = config.Sizes || config.size || config.sizeName || '';
-          const colorValue =
-            config.Colors || config.color || config.colorName || '';
+          const colorValue = config.Colors || config.color || config.colorName || '';
           const variantId = item.variantId || config.variantId || '';
           configPayload = {
             sizeName: String(sizeValue).trim(),
@@ -251,17 +206,16 @@ const Cart = () => {
         }
 
         let stripePriceId = item.stripePriceId || '';
-        if (isMerch) stripePriceId = ''; // use price_data for merch
+        if (isMerch) stripePriceId = '';
 
         return {
           productId: String(item.productId),
-          name: item.name || item.title || item.config?.title || 'Ober Product',
+          name: item.name || item.title || 'Ober Product',
           category: item.category,
           stripePriceId,
           price: Number(item.price) || 0,
           quantity: item.quantity || 1,
-          image:
-            typeof previewImage === 'string' ? previewImage : previewImage?.src,
+          image: typeof previewImage === 'string' ? previewImage : previewImage?.src,
           config: configPayload,
         };
       });
@@ -274,7 +228,7 @@ const Cart = () => {
 
       if (!response.ok) {
         const errorText = await response.text();
-        console.error('❌ Checkout session create failed:', errorText);
+        console.error('Checkout session create failed:', errorText);
         throw new Error('Failed to create checkout session');
       }
 
@@ -287,7 +241,7 @@ const Cart = () => {
         throw new Error('No redirect URL returned from API');
       }
     } catch (error) {
-      console.error('🔥 Checkout failed:', error);
+      console.error('Checkout failed:', error);
       alert('There was a problem initiating checkout. Check console logs.');
       setShowCheckoutModal(false);
     }
@@ -296,16 +250,6 @@ const Cart = () => {
   return (
     <div className="cart-container">
       <h1 className="cart-title">Shopping Cart</h1>
-
-      {/* Shipping banner */}
-      <div className={`ship-banner ${qualifiesForFree ? 'free' : 'not-free'}`}>
-        <span className="ship-banner-line2">
-          {qualifiesForFree ? 'FREE SHIPPING' : `Shipping: ${shippingDisplay}`}
-        </span>
-        {!qualifiesForFree && (
-          <span className="ship-banner-nudge">{freeMsg}</span>
-        )}
-      </div>
 
       {cart.length === 0 ? (
         <div className="cart-empty">Your cart is empty.</div>
@@ -322,55 +266,38 @@ const Cart = () => {
                 <th>Subtotal</th>
               </tr>
             </thead>
+
             <tbody>
               {cart.map((item) => {
                 const fallback = '/fallback-images/fallback_image1.png';
                 const config = item.config || {};
                 const variantId = Number(item.variantId || config?.variantId);
-                const selectedColorRaw = config.Colors || '';
-                const normalize = (str) =>
-                  (str || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-                const selectedColor = normalize(selectedColorRaw);
+                const normalize = (s) => (s || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+                const selectedColor = normalize(config.Colors || '');
 
                 let previewImage = item.image || fallback;
+
                 if (item.category === 'artisan') {
-                  previewImage =
-                    item.image ||
-                    (Array.isArray(item.images) && item.images[0]) ||
-                    fallback;
+                  previewImage = item.image || (Array.isArray(item.images) && item.images[0]) || fallback;
                 } else if (item.category === 'merch') {
                   const product = productDataMap[item.productId];
-                  if (product && Array.isArray(product.images)) {
-                    const matchedImage =
+                  if (product?.images) {
+                    const matched =
                       product.images.find(
                         (img) =>
                           Array.isArray(img.variant_ids) &&
-                          img.variant_ids.includes(Number(variantId)) &&
-                          Array.isArray(img.colors) &&
-                          img.colors.some(
-                            (color) => normalize(color) === selectedColor
-                          )
-                      ) ||
-                      product.images.find(
-                        (img) =>
-                          Array.isArray(img.variant_ids) &&
-                          img.variant_ids
-                            .map(String)
-                            .includes(String(variantId))
+                          (img.variant_ids.includes(Number(variantId)) ||
+                           img.variant_ids.map(String).includes(String(variantId)))
                       ) ||
                       product.images.find(
                         (img) =>
                           Array.isArray(img.colors) &&
-                          img.colors.some(
-                            (color) => normalize(color) === selectedColor
-                          )
+                          img.colors.some((c) => normalize(c) === selectedColor)
                       ) ||
                       product.images.find((img) => img.is_default) ||
                       product.images[0];
 
-                    if (matchedImage?.src?.startsWith('http')) {
-                      previewImage = matchedImage.src;
-                    }
+                    if (matched?.src?.startsWith('http')) previewImage = matched.src;
                   }
                 }
 
@@ -385,6 +312,7 @@ const Cart = () => {
                         <Trash2 size={18} strokeWidth={2} />
                       </button>
                     </td>
+
                     <td>
                       <Link
                         to={
@@ -396,47 +324,24 @@ const Cart = () => {
                         }
                       >
                         <img
-                          src={
-                            typeof previewImage === 'string'
-                              ? previewImage
-                              : previewImage?.src || fallback
-                          }
+                          src={typeof previewImage === 'string' ? previewImage : previewImage?.src || fallback}
                           alt={item.name}
                           className="cart-product-image"
                           onError={(e) => (e.currentTarget.src = fallback)}
                         />
                       </Link>
                     </td>
+
                     <td>
-                      <p>
-                        {item.name ||
-                          item.title ||
-                          item.config?.title ||
-                          'Unnamed Product'}
-                      </p>
+                      <p>{item.name || item.title || item.config?.title || 'Unnamed Product'}</p>
                       <p className="cart-sub-description">
-                        {item.category === 'artisan' &&
-                        item.productId !== 'founders-toast' ? (
+                        {item.category === 'artisan' && item.productId !== 'founders-toast' ? (
                           <>
-                            {config.size && config.depth && (
-                              <>
-                                {config.size}" x {config.depth}" |{' '}
-                              </>
-                            )}
-                            {config.lugQuantity && (
-                              <>{config.lugQuantity}-Lug | </>
-                            )}
-                            {config.staveQuantity && (
-                              <>{config.staveQuantity}-Stave | </>
-                            )}
-                            {typeof config.reRing !== 'undefined' &&
-                              (config.reRing
-                                ? 'With Re-Ring'
-                                : 'Re-Rings: None')}
-                            {item.productId !== 'founders-toast' &&
-                              config.hardwareColor && (
-                                <> | Hardware: {config.hardwareColor}</>
-                              )}
+                            {config.size && config.depth && <>{config.size}" x {config.depth}" | </>}
+                            {config.lugQuantity && <>{config.lugQuantity}-Lug | </>}
+                            {config.staveQuantity && <>{config.staveQuantity}-Stave | </>}
+                            {typeof config.reRing !== 'undefined' && (config.reRing ? 'With Re-Ring' : 'Re-Rings: None')}
+                            {item.productId !== 'founders-toast' && config.hardwareColor && <> | Hardware: {config.hardwareColor}</>}
                             {(config.outerShell || config.innerStave) && (
                               <>
                                 <br />
@@ -448,9 +353,7 @@ const Cart = () => {
                           <>
                             {config.Sizes && <span>Size: {config.Sizes}</span>}
                             {config.Colors && (
-                              <span>
-                                {config.Sizes && ' | '}Color: {config.Colors}
-                              </span>
+                              <span>{config.Sizes && ' | '}Color: {config.Colors}</span>
                             )}
                             {(config.outerShell || config.innerStave) && (
                               <>
@@ -462,43 +365,23 @@ const Cart = () => {
                         )}
                       </p>
                     </td>
+
+                    <td>{item.price !== undefined ? `$${Number(item.price).toFixed(2)}` : <span style={{ color: 'red' }}>⚠️ Missing Price</span>}</td>
+
                     <td>
-                      {item.price !== undefined ? (
-                        `$${Number(item.price).toFixed(2)}`
-                      ) : (
-                        <span style={{ color: 'red' }}>⚠️ Missing Price</span>
-                      )}
-                    </td>
-                    <td>
-                      {item.productId === 'founders-toast' ||
-                      item.category !== 'artisan' ? (
+                      {item.productId === 'founders-toast' || item.category !== 'artisan' ? (
                         <div className="quantity-control">
                           <button
                             className="quantity-btn"
-                            onClick={() =>
-                              updateQuantity(
-                                item.id,
-                                Math.max(item.quantity - 1, 1)
-                              )
-                            }
+                            onClick={() => updateQuantity(item.id, Math.max(item.quantity - 1, 1))}
                             disabled={item.quantity <= 1}
                           >
                             -
                           </button>
-                          <span className="quantity-value">
-                            {item.quantity}
-                          </span>
+                          <span className="quantity-value">{item.quantity}</span>
                           <button
                             className="quantity-btn"
-                            onClick={() =>
-                              updateQuantity(
-                                item.id,
-                                Math.min(
-                                  item.quantity + 1,
-                                  item.currentQuantity
-                                )
-                              )
-                            }
+                            onClick={() => updateQuantity(item.id, Math.min(item.quantity + 1, item.currentQuantity))}
                             disabled={item.quantity >= item.currentQuantity}
                           >
                             +
@@ -508,68 +391,46 @@ const Cart = () => {
                         <span className="quantity-value">1</span>
                       )}
                     </td>
+
                     <td>${getItemTotal(item).toFixed(2)}</td>
                   </tr>
                 );
               })}
-
-              {/* Shipping Row (informational) */}
-              <tr className="cart-shipping-row">
-                <td colSpan="5" className="shipping-label-td">
-                  Shipping (Standard 7–10 business days)
-                  {!qualifiesForFree && (
-                    <div className="ship-nudge-inline">{freeMsg}</div>
-                  )}
-                </td>
-                <td className="shipping-value-td">
-                  <strong>{shippingDisplay}</strong>
-                </td>
-              </tr>
-
-              {/* Subtotal Row */}
-              <tr className="cart-subtotal-row">
-                <td colSpan="5"></td>
-                <td className="subtotal-cell">
-                  <span className="subtotal-amount">
-                    {formatMoney(subtotal)}
-                  </span>
-                </td>
-              </tr>
-
-              {/* Checkout Button Row aligned under subtotal */}
-              <tr className="cart-checkout-row desktop-checkout-row">
-                <td colSpan="6">
-                  <div className="checkout-footer-row">
-                    <button
-                      onClick={handleCheckout}
-                      className="checkout-button-inline"
-                      disabled={loading}
-                    >
-                      {loading ? 'Processing...' : '🔒 Checkout'}
-                    </button>
-                  </div>
-                </td>
-              </tr>
             </tbody>
           </table>
 
-          {/* Mobile checkout button */}
-          <div className="mobile-checkout-wrapper">
-            <button
-              onClick={handleCheckout}
-              className="checkout-button-inline"
-              disabled={loading}
-            >
-              {loading ? 'Processing...' : '🔒 Checkout'}
-            </button>
+          {/* Summary card OUTSIDE the table */}
+          <div className="cart-summary">
+            <div className="summary-line">
+              <span className="label">Subtotal</span>
+              <span className="amount">{money(subtotal)}</span>
+            </div>
+
+            <div className="summary-line">
+              <span className="label">
+                Shipping <span className="muted">(Standard 7–10 business days)</span>
+              </span>
+              <span className="amount">{shippingDisplay}</span>
+            </div>
+
+            <div className="summary-note">* Free shipping applies to the contiguous U.S. only.</div>
+
+            <div className="summary-line total">
+              <span className="label">Total</span>
+              <span className="amount">{money(grandTotal)}</span>
+            </div>
+
+            <div className="summary-actions">
+              <button onClick={handleCheckout} className="checkout-button-inline" disabled={loading}>
+                {loading ? 'Processing...' : '🔒 Checkout'}
+              </button>
+            </div>
           </div>
 
           <p className="checkout-note-below">
             Taxes, shipping, and promo codes applied at checkout
           </p>
-          <p className="cart-id">
-            Cart ID: {(cartId || user?.uid || 'guest').slice(-5)}
-          </p>
+          <p className="cart-id">Cart ID: {(cartId || user?.uid || 'guest').slice(-5)}</p>
         </>
       )}
 
