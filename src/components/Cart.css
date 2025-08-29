@@ -13,8 +13,25 @@
   text-align: center;
   color: var(--secondary-text-color, #ffffff);
   font-weight: 550;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
+
+/* Shipping banner */
+.ship-banner {
+  margin: 6px 0 14px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: #f4f7ff;
+  color: #1b1f33;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: center;
+}
+.ship-banner.free { background: #e9f9ef; color: #0f5132; }
+.ship-banner .ship-banner-line1 { font-weight: 600; }
+.ship-banner .ship-banner-line2 { font-weight: 700; }
+.ship-banner .ship-banner-nudge { font-size: 0.92rem; opacity: 0.85; }
 
 .cart-id {
   font-size: 1rem;
@@ -139,6 +156,14 @@
   z-index: 10;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+
+/* Shipping row */
+.cart-shipping-row {
+  background: var(--header-background-color, #f7f7f7);
+}
+.shipping-label-td { color: #333; }
+.shipping-value-td { text-align: right; }
+.ship-nudge-inline { font-size: 0.9rem; color: #666; margin-top: 4px; }
 
 /* Subtotal row */
 .cart-subtotal-row,
@@ -367,7 +392,7 @@
   justify-content: center;
   height: 100%;
   width: 100%;
-  color: #c0392b !important; /* ← override any global styles */
+  color: #c0392b !important;
 }
 
 .remove-icon-button:hover {
@@ -376,7 +401,6 @@
   transition: all 0.2s ease;
 }
 
-/* explicitly target the SVG icon inside Lucide/FontAwesome */
 .remove-icon-button svg {
   stroke: #c0392b !important;
   width: 20px;
@@ -387,147 +411,40 @@
   stroke: #e74c3c !important;
 }
 
-/* Optional: ensure <td> itself has no padding misalignment */
 .cart-table td:first-child {
   text-align: center;
   vertical-align: middle;
 }
 
-
-/* Responsive styles */
+/* Responsive */
 @media screen and (max-width: 1024px) {
-  .cart-table {
-    font-size: 0.9rem;
-  }
-
-  .cart-table th,
-  .cart-table td {
-    padding: 10px;
-  }
+  .cart-table { font-size: 0.9rem; }
+  .cart-table th, .cart-table td { padding: 10px; }
 }
 
 @media screen and (max-width: 768px) {
-  .cart-container {
-    padding-top: 0;
-  }
-
-  .cart-title {
-    font-size: 1.8rem;
-  }
-
-  .cart-id {
-    font-size: 0.9rem;
-  }
-
-  .cart-table {
-    font-size: 0.85rem;
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-  }
-
-  .cart-table th,
-  .cart-table td {
-    padding: 8px;
-  }
-
-  .desktop-checkout-row {
-    display: none;
-  }
-
-  .mobile-checkout-wrapper {
-    display: block;
-    width: 100%;
-    max-width: 1200px;
-    padding: 0 20px;
-    margin-top: 10px;
-  }
-
-  .mobile-checkout-button {
-    width: 100%;
-    background-color: #26c112;
-    color: white;
-    padding: 14px 28px;
-    font-size: 1.1rem;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-
-  .mobile-checkout-button:hover {
-    background-color: #39cb25;
-  }
-
-  .checkout-button-inline {
-    width: 100%;
-    font-size: 1.05rem;
-  }
-
-  .checkout-note-below {
-    text-align: center;
-    font-size: 0.9rem;
-    font-style: italic;
-    color: #ffffff;
-    margin-top: 14px;
-  }
-
-  /* Optional: cleaner trash icon */
-  .remove-icon-button {
-    background: none;
-    border: none;
-    font-size: 1.15rem;
-    cursor: pointer;
-    color: #e74c3c;
-    padding: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .remove-icon-button:hover {
-    color: #c0392b;
-  }
-
-  /* Optional: fade-in Remove text on hover */
-  .cart-remove-hover {
-    font-size: 0.85rem;
-    color: #c0392b;
-    text-decoration: underline;
-    cursor: pointer;
-    opacity: 1;
-    transition: opacity 0.2s ease;
-    text-align: center;
-  }
+  .cart-container { padding-top: 0; }
+  .cart-title { font-size: 1.8rem; }
+  .cart-id { font-size: 0.9rem; }
+  .cart-table { font-size: 0.85rem; display: block; overflow-x: auto; white-space: nowrap; }
+  .cart-table th, .cart-table td { padding: 8px; }
+  .desktop-checkout-row { display: none; }
+  .mobile-checkout-wrapper { display: block; width: 100%; max-width: 1200px; padding: 0 20px; margin-top: 10px; }
+  .mobile-checkout-button { width: 100%; background-color: #26c112; color: white; padding: 14px 28px; font-size: 1.1rem; border: none; border-radius: 6px; cursor: pointer; transition: 0.3s; }
+  .mobile-checkout-button:hover { background-color: #39cb25; }
+  .checkout-button-inline { width: 100%; font-size: 1.05rem; }
+  .checkout-note-below { text-align: center; font-size: 0.9rem; font-style: italic; color: #ffffff; margin-top: 14px; }
+  .remove-icon-button { background: none; border: none; font-size: 1.15rem; cursor: pointer; color: #e74c3c; padding: 4px; display: flex; align-items: center; justify-content: center; }
+  .remove-icon-button:hover { color: #c0392b; }
+  .cart-remove-hover { font-size: 0.85rem; color: #c0392b; text-decoration: underline; cursor: pointer; opacity: 1; transition: opacity 0.2s ease; text-align: center; }
 }
 
 @media screen and (max-width: 480px) {
-  .cart-title {
-    font-size: 1.6rem;
-  }
-
-  .cart-id {
-    font-size: 0.85rem;
-  }
-
-  .cart-table {
-    font-size: 0.8rem;
-  }
-
-  .cart-table th,
-  .cart-table td {
-    padding: 6px;
-  }
-
-  .quantity-control {
-    gap: 5px;
-  }
-
-  .quantity-control button {
-    padding: 4px 8px;
-  }
-
-  .checkout-button-inline {
-    width: 100%;
-  }
+  .cart-title { font-size: 1.6rem; }
+  .cart-id { font-size: 0.85rem; }
+  .cart-table { font-size: 0.8rem; }
+  .cart-table th, .cart-table td { padding: 6px; }
+  .quantity-control { gap: 5px; }
+  .quantity-control button { padding: 4px 8px; }
+  .checkout-button-inline { width: 100%; }
 }
