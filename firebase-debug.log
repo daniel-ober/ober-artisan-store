@@ -1,0 +1,126 @@
+[debug] [2025-08-29T11:50:16.622Z] ----------------------------------------------------------------------
+[debug] [2025-08-29T11:50:16.624Z] Command:       /Users/danober/.nvm/versions/node/v20.19.4/bin/node /opt/homebrew/bin/firebase deploy --only functions:api
+[debug] [2025-08-29T11:50:16.624Z] CLI Version:   13.15.1
+[debug] [2025-08-29T11:50:16.624Z] Platform:      darwin
+[debug] [2025-08-29T11:50:16.624Z] Node Version:  v20.19.4
+[debug] [2025-08-29T11:50:16.624Z] Time:          Fri Aug 29 2025 06:50:16 GMT-0500 (Central Daylight Time)
+[debug] [2025-08-29T11:50:16.624Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-08-29T11:50:16.660Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-08-29T11:50:16.660Z] > authorizing via signed-in user (danober.dev@gmail.com)
+[debug] [2025-08-29T11:50:16.660Z] [iam] checking project danoberartisandrums for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2025-08-29T11:50:16.661Z] > refreshing access token with scopes: []
+[debug] [2025-08-29T11:50:16.661Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-08-29T11:50:16.661Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-08-29T11:50:16.847Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-08-29T11:50:16.847Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-08-29T11:50:16.866Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/danoberartisandrums:testIamPermissions [none]
+[debug] [2025-08-29T11:50:16.867Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/danoberartisandrums:testIamPermissions x-goog-quota-user=projects/danoberartisandrums
+[debug] [2025-08-29T11:50:16.867Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/danoberartisandrums:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2025-08-29T11:50:17.039Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/danoberartisandrums:testIamPermissions 200
+[debug] [2025-08-29T11:50:17.040Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/danoberartisandrums:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2025-08-29T11:50:17.040Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/danoberartisandrums/serviceAccounts/danoberartisandrums@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2025-08-29T11:50:17.040Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/danoberartisandrums/serviceAccounts/danoberartisandrums@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2025-08-29T11:50:17.519Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/danoberartisandrums/serviceAccounts/danoberartisandrums@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2025-08-29T11:50:17.519Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/danoberartisandrums/serviceAccounts/danoberartisandrums@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[info] 
+[info] === Deploying to 'danoberartisandrums'...
+[info] 
+[info] i  deploying functions 
+[info] Running command: npm --prefix "$RESOURCE_DIR" run lint
+[info] ✔  functions: Finished running predeploy script. 
+[debug] [2025-08-29T11:50:17.720Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/danoberartisandrums [none]
+[debug] [2025-08-29T11:50:18.033Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/danoberartisandrums 200
+[debug] [2025-08-29T11:50:18.033Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/danoberartisandrums {"projectId":"danoberartisandrums","projectNumber":"655476766186","displayName":"danoberartisandrums-prod","name":"projects/danoberartisandrums","resources":{"hostingSite":"danoberartisandrums","realtimeDatabaseInstance":"danoberartisandrums-default-rtdb","locationId":"us-central"},"state":"ACTIVE","etag":"1_a59546c1-4a21-4fad-b29f-bb253cb9762f"}
+[info] i  functions: preparing codebase default for deployment 
+[info] i  functions: ensuring required API cloudfunctions.googleapis.com is enabled... 
+[info] i  functions: ensuring required API cloudbuild.googleapis.com is enabled... 
+[info] i  artifactregistry: ensuring required API artifactregistry.googleapis.com is enabled... 
+[debug] [2025-08-29T11:50:18.034Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/danoberartisandrums/services/cloudfunctions.googleapis.com [none]
+[debug] [2025-08-29T11:50:18.034Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/danoberartisandrums/services/cloudfunctions.googleapis.com x-goog-quota-user=projects/danoberartisandrums
+[debug] [2025-08-29T11:50:18.034Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/danoberartisandrums/services/runtimeconfig.googleapis.com [none]
+[debug] [2025-08-29T11:50:18.034Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/danoberartisandrums/services/runtimeconfig.googleapis.com x-goog-quota-user=projects/danoberartisandrums
+[debug] [2025-08-29T11:50:18.035Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/danoberartisandrums/services/cloudbuild.googleapis.com [none]
+[debug] [2025-08-29T11:50:18.035Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/danoberartisandrums/services/cloudbuild.googleapis.com x-goog-quota-user=projects/danoberartisandrums
+[debug] [2025-08-29T11:50:18.035Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/danoberartisandrums/services/artifactregistry.googleapis.com [none]
+[debug] [2025-08-29T11:50:18.035Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/danoberartisandrums/services/artifactregistry.googleapis.com x-goog-quota-user=projects/danoberartisandrums
+[debug] [2025-08-29T11:50:18.459Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/danoberartisandrums/services/runtimeconfig.googleapis.com 200
+[debug] [2025-08-29T11:50:18.459Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/danoberartisandrums/services/runtimeconfig.googleapis.com [omitted]
+[debug] [2025-08-29T11:50:18.696Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/danoberartisandrums/services/cloudfunctions.googleapis.com 200
+[debug] [2025-08-29T11:50:18.697Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/danoberartisandrums/services/cloudfunctions.googleapis.com [omitted]
+[info] ✔  functions: required API cloudfunctions.googleapis.com is enabled 
+[debug] [2025-08-29T11:50:18.708Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/danoberartisandrums/services/artifactregistry.googleapis.com 200
+[debug] [2025-08-29T11:50:18.709Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/danoberartisandrums/services/artifactregistry.googleapis.com [omitted]
+[info] ✔  artifactregistry: required API artifactregistry.googleapis.com is enabled 
+[debug] [2025-08-29T11:50:18.722Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/danoberartisandrums/services/cloudbuild.googleapis.com 200
+[debug] [2025-08-29T11:50:18.722Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/danoberartisandrums/services/cloudbuild.googleapis.com [omitted]
+[info] ✔  functions: required API cloudbuild.googleapis.com is enabled 
+[debug] [2025-08-29T11:50:18.723Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/danoberartisandrums/adminSdkConfig [none]
+[debug] [2025-08-29T11:50:19.154Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/danoberartisandrums/adminSdkConfig 200
+[debug] [2025-08-29T11:50:19.154Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/danoberartisandrums/adminSdkConfig {"projectId":"danoberartisandrums","databaseURL":"https://danoberartisandrums-default-rtdb.firebaseio.com","storageBucket":"danoberartisandrums.appspot.com","locationId":"us-central"}
+[debug] [2025-08-29T11:50:19.154Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/danoberartisandrums/configs [none]
+[debug] [2025-08-29T11:50:19.505Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/danoberartisandrums/configs 200
+[debug] [2025-08-29T11:50:19.505Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/danoberartisandrums/configs {"configs":[{"name":"projects/danoberartisandrums/configs/client"},{"name":"projects/danoberartisandrums/configs/recaptcha"},{"name":"projects/danoberartisandrums/configs/stripe"}]}
+[debug] [2025-08-29T11:50:19.505Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/danoberartisandrums/configs/client/variables [none]
+[debug] [2025-08-29T11:50:19.506Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/danoberartisandrums/configs/recaptcha/variables [none]
+[debug] [2025-08-29T11:50:19.507Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/danoberartisandrums/configs/stripe/variables [none]
+[debug] [2025-08-29T11:50:19.652Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/danoberartisandrums/configs/recaptcha/variables 200
+[debug] [2025-08-29T11:50:19.652Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/danoberartisandrums/configs/recaptcha/variables {"variables":[{"name":"projects/danoberartisandrums/configs/recaptcha/variables/secret_key","updateTime":"2025-05-29T11:12:50.462584794Z"}]}
+[debug] [2025-08-29T11:50:19.653Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/danoberartisandrums/configs/recaptcha/variables/secret_key [none]
+[debug] [2025-08-29T11:50:19.655Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/danoberartisandrums/configs/client/variables 200
+[debug] [2025-08-29T11:50:19.655Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/danoberartisandrums/configs/client/variables {"variables":[{"name":"projects/danoberartisandrums/configs/client/variables/url","updateTime":"2025-03-18T23:43:46.058222351Z"}]}
+[debug] [2025-08-29T11:50:19.656Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/danoberartisandrums/configs/client/variables/url [none]
+[debug] [2025-08-29T11:50:19.774Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/danoberartisandrums/configs/stripe/variables 200
+[debug] [2025-08-29T11:50:19.774Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/danoberartisandrums/configs/stripe/variables {"variables":[{"name":"projects/danoberartisandrums/configs/stripe/variables/webhook","updateTime":"2025-03-23T20:20:06.163660600Z"},{"name":"projects/danoberartisandrums/configs/stripe/variables/publishable_key","updateTime":"2025-03-13T11:51:12.128296497Z"},{"name":"projects/danoberartisandrums/configs/stripe/variables/secret","updateTime":"2025-03-23T20:20:06.258127834Z"}]}
+[debug] [2025-08-29T11:50:19.774Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/danoberartisandrums/configs/stripe/variables/webhook [none]
+[debug] [2025-08-29T11:50:19.775Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/danoberartisandrums/configs/stripe/variables/publishable_key [none]
+[debug] [2025-08-29T11:50:19.777Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/danoberartisandrums/configs/stripe/variables/secret [none]
+[debug] [2025-08-29T11:50:19.780Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/danoberartisandrums/configs/recaptcha/variables/secret_key 200
+[debug] [2025-08-29T11:50:19.780Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/danoberartisandrums/configs/recaptcha/variables/secret_key {"name":"projects/danoberartisandrums/configs/recaptcha/variables/secret_key","updateTime":"2025-05-29T11:12:50.462584794Z","text":"6LcneU4rAAAAAI-iBD_3YGLYRTYmd2j2QwOPWma-"}
+[debug] [2025-08-29T11:50:19.894Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/danoberartisandrums/configs/client/variables/url 200
+[debug] [2025-08-29T11:50:19.894Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/danoberartisandrums/configs/client/variables/url {"name":"projects/danoberartisandrums/configs/client/variables/url","updateTime":"2025-03-18T23:43:46.058222351Z","text":"https://oberartisandrums.com"}
+[debug] [2025-08-29T11:50:19.897Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/danoberartisandrums/configs/stripe/variables/webhook 200
+[debug] [2025-08-29T11:50:19.897Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/danoberartisandrums/configs/stripe/variables/webhook {"name":"projects/danoberartisandrums/configs/stripe/variables/webhook","updateTime":"2025-03-23T20:20:06.163660600Z","text":"whsec_OvMDBSljvB3nceraDos2ydwC7xZV1noj"}
+[debug] [2025-08-29T11:50:19.923Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/danoberartisandrums/configs/stripe/variables/publishable_key 200
+[debug] [2025-08-29T11:50:19.923Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/danoberartisandrums/configs/stripe/variables/publishable_key {"name":"projects/danoberartisandrums/configs/stripe/variables/publishable_key","updateTime":"2025-03-13T11:51:12.128296497Z","text":"pk_live_51PrBd7Jbbx8jAR4Nf062ivUI1xQbSrHGUE7uTntmMY9jPP5eB7DfCVR19TFG5rN6aIfWEQnuihjq4a7X11zQbc3c00ufgqugma"}
+[debug] [2025-08-29T11:50:19.951Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/danoberartisandrums/configs/stripe/variables/secret 200
+[debug] [2025-08-29T11:50:19.951Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/danoberartisandrums/configs/stripe/variables/secret {"name":"projects/danoberartisandrums/configs/stripe/variables/secret","updateTime":"2025-03-23T20:20:06.258127834Z","text":"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"}
+[debug] [2025-08-29T11:50:19.953Z] Validating nodejs source
+[warn] ⚠  functions: Runtime Node.js 18 was deprecated on 2025-04-30 and will be decommissioned on 2025-10-31, after which you will not be able to deploy without upgrading. Consider upgrading now to avoid disruption. See https://cloud.google.com/functions/docs/runtime-support for full details on the lifecycle policy 
+[debug] [2025-08-29T11:50:20.369Z] > [functions] package.json contents: {
+  "name": "functions",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "predeploy": "echo 'Skipping ESLint check...'",
+    "deploy": "firebase deploy --only functions",
+    "lint": "echo 'Skipping ESLint check...'"
+  },
+  "dependencies": {
+    "@babel/eslint-parser": "^7.26.10",
+    "@sendgrid/mail": "^8.1.5",
+    "axios": "^1.8.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "eslint-config-prettier": "^10.1.1",
+    "express": "^4.21.2",
+    "firebase-admin": "^13.2.0",
+    "firebase-functions": "^6.3.2",
+    "openai": "^5.5.1",
+    "stripe": "^17.7.0"
+  },
+  "engines": {
+    "node": "20"
+  },
+  "main": "index.js",
+  "devDependencies": {
+    "eslint": "^9.22.0",
+    "eslint-plugin-prettier": "^5.2.3"
+  }
+}
+[debug] [2025-08-29T11:50:20.369Z] Building nodejs source
+[info] i  functions: Loading and analyzing source code for codebase default to determine what to deploy 
+[debug] [2025-08-29T11:50:20.370Z] Could not find functions.yaml. Must use http discovery
+[debug] [2025-08-29T11:50:20.375Z] Found firebase-functions binary at '/Users/danober/Code/ober-artisan-store/functions/node_modules/.bin/firebase-functions'
+[info] Serving at port 8470
+
+[debug] [2025-08-29T11:50:20.841Z] Got response from /__/functions.yaml {"endpoints":{"refreshPrintifyStock":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","secretEnvironmentVariables":[{"key":"PRINTIFY_API_KEY"},{"key":"PRINTIFY_SHOP_ID"}],"labels":{},"scheduleTrigger":{"schedule":"0 * * * *","retryConfig":{},"timeZone":"America/Chicago"},"entryPoint":"refreshPrintifyStock"},"autoReplyInquiry":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","secretEnvironmentVariables":[{"key":"SENDGRID_API_KEY"}],"labels":{},"eventTrigger":{"eventType":"google.cloud.firestore.document.v1.created","eventFilters":{"database":"(default)","namespace":"(default)"},"eventFilterPathPatterns":{"document":"inquiries/{docId}"},"retry":false},"entryPoint":"autoReplyInquiry"},"autoReplySoundlegend":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","secretEnvironmentVariables":[{"key":"SENDGRID_API_KEY"}],"labels":{},"eventTrigger":{"eventType":"google.cloud.firestore.document.v1.created","eventFilters":{"database":"(default)","namespace":"(default)"},"eventFilterPathPatterns":{"document":"soundlegend_submissions/{docId}"},"retry":false},"entryPoint":"autoReplySoundlegend"},"api":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","region":["us-central1"],"secretEnvironmentVariables":[{"key":"STRIPE_SECRET_KEY"},{"key":"STRIPE_WEBHOOK_SECRET"},{"key":"CLIENT_URL"},{"key":"RECAPTCHA_SECRET_KEY"},{"key":"PRINTIFY_API_KEY"},{"key":"PRINTIFY_SHOP_ID"}],"labels":{},"httpsTrigger":{},"entryPoint":"api"},"stripeWebhook":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","region":["us-central1"],"secretEnvironmentVariables":[{"key":"STRIPE_SECRET_KEY"},{"key":"STRIPE_WEBHOOK_SECRET"}],"labels":{},"httpsTrigger":{},"entryPoint":"stripeWebhook"},"printifyWebhookListener":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","region":["us-central1"],"secretEnvironmentVariables":[{"key":"PRINTIFY_API_KEY"},{"key":"PRINTIFY_SHOP_ID"},{"key":"PRINTIFY_WEBHOOK_SECRET"},{"key":"STRIPE_SECRET_KEY"}],"labels":{},"httpsTrigger":{},"entryPoint":"printifyWebhookListener"},"refreshPrintifyStockNow":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","region":["us-central1"],"secretEnvironmentVariables":[{"key":"PRINTIFY_API_KEY"},{"key":"PRINTIFY_SHOP_ID"}],"labels":{},"httpsTrigger":{},"entryPoint":"refreshPrintifyStockNow"},"adminCreateUser":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"adminCreateUser"},"computeSoundPrism":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","region":["us-central1"],"labels":{},"callableTrigger":{},"entryPoint":"computeSoundPrism"}},"specVersion":"v1alpha1","requiredAPIs":[{"api":"cloudscheduler.googleapis.com","reason":"Needed for scheduled functions."}],"extensions":{},"params":[{"type":"secret","name":"SENDGRID_API_KEY"},{"type":"secret","name":"STRIPE_SECRET_KEY"},{"type":"secret","name":"STRIPE_WEBHOOK_SECRET"},{"type":"secret","name":"CLIENT_URL"},{"type":"secret","name":"PRINTIFY_API_KEY"},{"type":"secret","name":"PRINTIFY_SHOP_ID"},{"type":"secret","name":"PRINTIFY_WEBHOOK_SECRET"},{"type":"secret","name":"RECAPTCHA_SECRET_KEY"}]}

@@ -279,8 +279,8 @@ function App() {
           />
 
           {/* Product detail (general) */}
-          <Route path="/artisan-shop/:productId" element={<ProductDetail />} />
-          <Route path="/merch/:productId" element={<ProductDetail />} />
+          <Route path="/artisan-shop/:productId" element={<ProductDetail key={location.pathname} />} />
+          <Route path="/merch/:productId" element={<ProductDetail key={location.pathname} />} />
 
           {/* Legacy redirects for old paths */}
           <Route
