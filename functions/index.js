@@ -127,7 +127,7 @@ async function gmailSend({
     '',
     html || text || '',
   ].join('\r\n');
-  
+
   const raw = base64Url(headers);
   await gmail.users.messages.send({ userId: 'me', requestBody: { raw } });
 }
@@ -1777,64 +1777,6 @@ exports.computeSoundPrism = onCall(
       harmonics: [2, 2.5, 3].map((m) => ({ multiple: m, hz: f * m })),
     };
     return { computed };
-  }
-);
-
-exports.sendEndorsementAutoReply = onCall(
-  {
-    region: 'us-central1',
-    secrets: [
-      GMAIL_CLIENT_EMAIL,
-      GMAIL_PRIVATE_KEY,
-      GMAIL_SENDER,
-      GMAIL_IMPERSONATE,
-    ],
-  },
-  async (request) => {
-    const { toEmail, fullName, stageName, tierInterest, docId } =
-      request.data || {};
-    if (!toEmail || !fullName) throw new Error('Missing toEmail or fullName');
-
-    const subject = 'Thanks for applying – Ober Artisan Drums Endorsement';
-    const text = `Hi ${fullName},
-
-Thank you for your interest in representing the Ober Artisan Drums brand. We’ve received your application${docId ? ` (Reference: ${docId})` : ''}.
-${tierInterest ? `Tier Interest: ${tierInterest}\n` : ''}${stageName ? `Stage Name: ${stageName}\n` : ''}
-Review timeframe: 5–10 business days.
-
-With gratitude,
-Ober Artisan Drums
-www.oberartisandrums.com`;
-
-    const html = `
-<div style="font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#111;line-height:1.55">
-  <p>Hi ${fullName},</p>
-  <p>Thank you for your interest in <strong>Ober Artisan Drums</strong>. We’ve received your application${docId ? ` (<strong>Reference:</strong> ${docId})` : ''}.</p>
-  ${tierInterest ? `<p><strong>Tier Interest:</strong> ${tierInterest}</p>` : ''}
-  ${stageName ? `<p><strong>Stage Name:</strong> ${stageName}</p>` : ''}
-  <p>Review timeframe: <strong>5–10 business days</strong>.</p>
-  <p style="margin-top:20px">With gratitude,<br/>Ober Artisan Drums<br/>
-  <a href="https://www.oberartisandrums.com">www.oberartisandrums.com</a></p>
-</div>`.trim();
-
-    try {
-      await gmailSend({
-        to: toEmail,
-        subject,
-        text,
-        html,
-        fromEmail: 'endorsements@oberartisandrums.com',
-        replyTo: 'endorsements@oberartisandrums.com',
-        bcc: ['endorsements@oberartisandrums.com', 'dan@oberartisandrums.com'],
-      });
-      return { ok: true };
-    } catch (err) {
-      console.error(
-        'sendEndorsementAutoReply (gmail) failed:',
-        err?.message || err
-      );
-      throw new Error('Auto-reply failed');
-    }
   }
 );
 
