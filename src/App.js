@@ -59,6 +59,8 @@ import VerifyDrumBySerial from './components/VerifyDrumBySerial';
 import SoundLegendShowroom from './components/SoundLegendShowroom';
 import LegacyVaultHome from './components/LegacyVaultHome';
 import SoundLegendVaultCreator from './components/SoundLegendVaultCreator';
+import Endorsements from "./components/Endorsements";
+import EndorsementForm from "./components/EndorsementForm";
 import { Toaster } from 'react-hot-toast';
 import './App.css';
 
@@ -326,6 +328,10 @@ function App() {
             path="/artisan-shop/soundlegend/:serial"
             element={<SoundLegendShowroom />}
           />
+
+          {/* Endorsements */}
+          <Route path="/endorsements" element={<Endorsements />} />
+          <Route path="/endorsements/apply" element={<EndorsementForm />} />
 
           {/* Admin: Vault content creator */}
           <Route

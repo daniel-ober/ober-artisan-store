@@ -1,0 +1,50 @@
+.endorsement-form-wrapper {
+  display: flex; justify-content: center; padding: 24px 16px;
+}
+.endorsement-form {
+  width: 100%; max-width: 860px; background: #111; color: #fff;
+  border: 1px solid #2a2a2a; border-radius: 12px; padding: 24px;
+}
+.endorsement-form h3 { margin: 0 0 8px; }
+.form-subcopy { color: #cfcfcf; margin-bottom: 16px; }
+
+label { display: block; margin-bottom: 14px; font-size: 0.95rem; }
+input, select, textarea {
+  width: 100%; margin-top: 6px; padding: 10px 12px; border-radius: 8px;
+  border: 1px solid #333; background: #0e0e0e; color: #fff;
+}
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+@media (max-width: 720px){
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+}
+
+.file-label input[type="file"] {
+  background: transparent; border: none; padding: 0; color: #ddd;
+}
+
+.agree { display: flex; align-items: flex-start; gap: 10px; }
+.agree input { width: auto; }
+
+.submit {
+  margin-top: 8px; background: #D4AF37; color: #000; border: none; padding: 12px 18px;
+  border-radius: 8px; font-weight: 700; cursor: pointer;
+}
+.submit:disabled { opacity: 0.7; cursor: not-allowed; }
+
+.error {
+  background: #2a0000; color: #ffb3b3; border: 1px solid #662; padding: 8px 12px; border-radius: 8px; margin-bottom: 10px;
+}
+
+/* Success modal */
+.modal {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+  display: flex; align-items: center; justify-content: center; z-index: 1000;
+}
+.modal-card {
+  width: min(520px, 92vw); background: #121212; border: 1px solid #2d2d2d; border-radius: 12px;
+  padding: 20px; text-align: center;
+}
+.modal-card button {
+  margin-top: 10px; background: #FFD700; color: #000; border: 0; padding: 10px 16px; border-radius: 8px; font-weight: 700;
+}
