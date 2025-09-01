@@ -9,9 +9,6 @@ const axios = require('axios');
 const crypto = require('crypto');
 const functions = require('firebase-functions/v2');
 const { onDocumentCreated } = require('firebase-functions/v2/firestore');
-const sgMail = require('@sendgrid/mail');
-
-const SENDGRID_API_KEY = defineSecret('SENDGRID_API_KEY');
 const STRIPE_SECRET_KEY = defineSecret('STRIPE_SECRET_KEY');
 const STRIPE_WEBHOOK_SECRET = defineSecret('STRIPE_WEBHOOK_SECRET');
 const CLIENT_URL = defineSecret('CLIENT_URL');
@@ -22,6 +19,118 @@ const RECAPTCHA_SECRET_KEY = defineSecret('RECAPTCHA_SECRET_KEY');
 
 admin.initializeApp();
 const db = admin.firestore();
+
+// === Gmail API mailer (Workspace via service account DWD) ===
+const { google } = require('googleapis');
+const GMAIL_CLIENT_EMAIL = defineSecret('GMAIL_CLIENT_EMAIL');
+const GMAIL_PRIVATE_KEY = defineSecret('GMAIL_PRIVATE_KEY');
+const GMAIL_SENDER = defineSecret('GMAIL_SENDER'); // fallback
+const GMAIL_IMPERSONATE = defineSecret('GMAIL_IMPERSONATE'); // Workspace user
+
+// branding assets + CTAs
+const LOGO_MAIN =
+  'https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/SendGridEmail%2Fblack_logo.png?alt=media&token=850410a6-4373-4194-803e-808c49cbc626';
+const LOGO_SL =
+  'https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/SendGridEmail%2Fsoundlegend-email.png?alt=media&token=2929bea0-5d78-4143-ab61-c4d543671a33';
+const CTA_SL = 'https://www.youtube.com/watch?v=PW28PjMCpxg';
+const CTA_SITE = 'https://www.oberartisandrums.com';
+
+// email template helpers
+const emailShell = ({ logo, bodyHtml }) => `
+<div style="font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#111;line-height:1.55;background:#fff;padding:0;margin:0">
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:640px;margin:0 auto;border-collapse:collapse">
+    <tr><td style="padding:32px 24px 8px;text-align:center">
+      <img src="${logo}" alt="Ober Artisan Drums" style="max-width:260px;height:auto"/>
+    </td></tr>
+    <tr><td style="padding:8px 24px 24px">${bodyHtml}</td></tr>
+    <tr><td style="padding:24px 24px 48px;border-top:1px solid #eee;color:#6b7280;font-size:13px;text-align:center">
+      In craft and legacy,<br/>— The Ober Artisan Team<br/>
+      <a href="https://www.oberartisandrums.com" style="color:#6b7280;text-decoration:none">www.oberartisandrums.com</a><br/>
+      Handcrafted in Nashville, TN
+    </td></tr>
+  </table>
+</div>
+`;
+const button = (label, href) => `
+  <div style="text-align:center;margin:24px 0 8px">
+    <a href="${href}" style="display:inline-block;padding:10px 18px;border-radius:6px;background:#111;color:#fff;text-decoration:none;font-weight:600">
+      ${label}
+    </a>
+  </div>`;
+const greet = (name) => `Hi ${String(name || '').trim() || 'there'},`;
+
+const bodySoundLegend = (name) => `
+  <p style="margin:0 0 16px">${greet(name)}</p>
+  <p style="margin:0 0 16px">You're in. We've received your SoundLegend submission — and we’re excited to hear your story.</p>
+  <p style="margin:0 0 16px">This next chapter isn’t just about building a snare. It’s about honoring your legacy through sound — captured in wood, crafted by hand, and designed to last a lifetime.</p>
+  <p style="margin:0 0 16px">We typically follow up within 24–48 hours to learn more about your vision. In the meantime, here’s a short video to get us both amped up about what’s ahead:</p>
+  ${button('Watch the Teaser', CTA_SL)}
+`;
+const bodySupport = (name) => `
+  <p style="margin:0 0 16px">${greet(name)}</p>
+  <p style="margin:0 0 16px">Thanks for reaching out. Your message has been received, and we're looking forward to connecting with you.</p>
+  <p style="margin:0 0 16px">At Ober Artisan Drums, every note and detail matters. Whether you're exploring a new build, asking a question, or simply saying hello, we treat it with the same level of care we bring to our instruments.</p>
+  <p style="margin:0 0 16px">We typically respond within 24–48 hours. In the meantime, feel free to browse the shop or explore the stories behind our drums.</p>
+  ${button('Visit Our Site', CTA_SITE)}
+`;
+const bodyEndorsement = (name, docId, tier) => `
+  <p style="margin:0 0 16px">${greet(name)}</p>
+  <p style="margin:0 0 16px">Thank you for your interest in representing the Ober Artisan Drums brand. We’ve received your application${docId ? ` (Reference: <strong>${docId}</strong>)` : ''}${tier ? ` for the <strong>${tier}</strong> tier` : ''}.</p>
+  <p style="margin:0 0 16px">Our team typically reviews applications within <strong>5–10 business days</strong>. We'll reach out if we need anything else.</p>
+  ${button('Visit Our Site', CTA_SITE)}
+`;
+
+function base64Url(str) {
+  return Buffer.from(str)
+    .toString('base64')
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+    .replace(/=+$/g, '');
+}
+
+/** gmailSend with per-message From override */
+async function gmailSend({
+  to,
+  subject,
+  text,
+  html,
+  bcc = [],
+  replyTo,
+  fromName = 'Ober Artisan Drums',
+  fromEmail, // 👈 NEW
+}) {
+  const auth = new google.auth.JWT({
+    email: GMAIL_CLIENT_EMAIL.value(),
+    key: (GMAIL_PRIVATE_KEY.value() || '').replace(/\\n/g, '\n'),
+    scopes: [
+      'https://www.googleapis.com/auth/gmail.send',
+      'https://www.googleapis.com/auth/gmail.modify',
+      'https://www.googleapis.com/auth/gmail.readonly',
+      'https://www.googleapis.com/auth/gmail.compose',
+    ],
+    subject: GMAIL_IMPERSONATE.value(),
+  });
+  const gmail = google.gmail({ version: 'v1', auth });
+  const fromAddr = fromEmail || GMAIL_SENDER.value();
+
+  const headers = [
+    `From: ${encodeRFC2047(fromName)} <${fromAddr}>`,
+    `To: ${Array.isArray(to) ? to.join(', ') : to}`,
+    ...(bcc.length ? [`Bcc: ${bcc.join(', ')}`] : []),
+    ...(replyTo ? [`Reply-To: ${replyTo}`] : []),
+    `Subject: ${encodeRFC2047(subject)}`,
+    'MIME-Version: 1.0',
+    html
+      ? 'Content-Type: text/html; charset=UTF-8'
+      : 'Content-Type: text/plain; charset=UTF-8',
+    'Content-Transfer-Encoding: 8bit',
+    '',
+    html || text || '',
+  ].join('\r\n');
+  
+  const raw = base64Url(headers);
+  await gmail.users.messages.send({ userId: 'me', requestBody: { raw } });
+}
 
 // ───────────────────────────────────────────────────────────────────────────────
 // Main Express app (JSON)
@@ -55,6 +164,13 @@ const pHeaders = () => ({
   Authorization: `Bearer ${PRINTIFY_API_KEY.value()}`,
   'Content-Type': 'application/json',
 });
+
+// Put this near your other helpers
+function encodeRFC2047(str = '') {
+  return /[^\x00-\x7F]/.test(str)
+    ? `=?UTF-8?B?${Buffer.from(String(str), 'utf8').toString('base64')}?=`
+    : String(str);
+}
 
 // Build Printify line_items from your cart shape
 const toPrintifyLineItems = (products = []) =>
@@ -619,11 +735,15 @@ app.post('/createCheckoutSession', async (req, res) => {
     const clientUrlRaw = CLIENT_URL.value();
     if (!stripeKey) {
       console.error('❌ Missing STRIPE_SECRET_KEY secret');
-      return res.status(500).json({ error: 'Server misconfiguration (stripe key).' });
+      return res
+        .status(500)
+        .json({ error: 'Server misconfiguration (stripe key).' });
     }
     if (!clientUrlRaw) {
       console.error('❌ Missing CLIENT_URL secret');
-      return res.status(500).json({ error: 'Server misconfiguration (client url).' });
+      return res
+        .status(500)
+        .json({ error: 'Server misconfiguration (client url).' });
     }
 
     const stripe = stripeLib(stripeKey);
@@ -647,11 +767,14 @@ app.post('/createCheckoutSession', async (req, res) => {
 
     // Persist snapshot for webhook matching
     const guestToken = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
-    await db.collection('pending_checkouts').doc(guestToken).set({
-      createdAt: admin.firestore.FieldValue.serverTimestamp(),
-      products,
-      userId: userId || 'guest',
-    });
+    await db
+      .collection('pending_checkouts')
+      .doc(guestToken)
+      .set({
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+        products,
+        userId: userId || 'guest',
+      });
 
     // Build Stripe line_items from your cart
     const lineItems = [];
@@ -664,12 +787,16 @@ app.post('/createCheckoutSession', async (req, res) => {
         return res.status(400).json({ error: 'Invalid item price.' });
       }
       const images =
-        typeof p?.image === 'string' && /^https?:\/\//i.test(p.image) ? [p.image] : [];
+        typeof p?.image === 'string' && /^https?:\/\//i.test(p.image)
+          ? [p.image]
+          : [];
 
       if (isMerch) {
-        const color = String(cfg.colorName || cfg.color || cfg.Colors || '').trim();
+        const color = String(
+          cfg.colorName || cfg.color || cfg.Colors || ''
+        ).trim();
         const size = String(cfg.sizeName || cfg.size || cfg.Sizes || '').trim();
-        const vId  = String(cfg.variantId || '').trim();
+        const vId = String(cfg.variantId || '').trim();
         const parts = [];
         if (color) parts.push(`Color: ${color}`);
         if (size) parts.push(`Size: ${size}`);
@@ -701,7 +828,11 @@ app.post('/createCheckoutSession', async (req, res) => {
           a.depth ? `Depth: ${a.depth}"` : '',
           a.lugQuantity ? `${a.lugQuantity} Lugs` : '',
           a.staveQuantity ? `${a.staveQuantity} Staves` : '',
-          typeof a.reRing !== 'undefined' ? (a.reRing ? 'Re-Rings' : 'No Re-Rings') : '',
+          typeof a.reRing !== 'undefined'
+            ? a.reRing
+              ? 'Re-Rings'
+              : 'No Re-Rings'
+            : '',
           a.hardwareColor ? `Hardware: ${a.hardwareColor}` : '',
         ].filter(Boolean);
 
@@ -712,7 +843,9 @@ app.post('/createCheckoutSession', async (req, res) => {
             product_data: {
               name: p?.name || 'Ober Artisan Product',
               ...(images.length ? { images } : {}),
-              ...(descParts.length ? { description: descParts.join(' • ') } : {}),
+              ...(descParts.length
+                ? { description: descParts.join(' • ') }
+                : {}),
             },
           },
           quantity: Math.max(1, parseInt(p?.quantity || 1, 10)),
@@ -749,8 +882,8 @@ app.post('/createCheckoutSession', async (req, res) => {
       return sum + (Number.isFinite(priceCents) ? priceCents * qty : 0);
     }, 0);
 
-    const FREE_THRESHOLD = 7500;          // $75.00
-    const FALLBACK_UNDER75 = 999;         // $9.99 when we can't live-quote
+    const FREE_THRESHOLD = 7500; // $75.00
+    const FALLBACK_UNDER75 = 999; // $9.99 when we can't live-quote
     const fallbackUnder75Option = {
       shipping_rate_data: {
         type: 'fixed_amount',
@@ -782,7 +915,11 @@ app.post('/createCheckoutSession', async (req, res) => {
       // < $75 → try live Printify quote, otherwise non-zero fallback
       const hasAddress =
         !!(shippingAddress && shippingAddress.country) &&
-        !!(shippingAddress.postal_code || shippingAddress.postalCode || shippingAddress.zip);
+        !!(
+          shippingAddress.postal_code ||
+          shippingAddress.postalCode ||
+          shippingAddress.zip
+        );
 
       if (!hasAddress) {
         // No address yet: don't show $0
@@ -792,7 +929,11 @@ app.post('/createCheckoutSession', async (req, res) => {
           const shopId = PRINTIFY_SHOP_ID.value();
           const payload = {
             line_items: toPrintifyLineItems(products),
-            address_to: toPrintifyAddress(shippingAddress || {}, firstName || 'Customer', lastName || ''),
+            address_to: toPrintifyAddress(
+              shippingAddress || {},
+              firstName || 'Customer',
+              lastName || ''
+            ),
           };
           const { data: rates } = await axios.post(
             `https://api.printify.com/v1/shops/${shopId}/orders/shipping.json`,
@@ -805,7 +946,10 @@ app.post('/createCheckoutSession', async (req, res) => {
             ? shipping_options
             : [fallbackUnder75Option];
         } catch (e) {
-          console.warn('⚠️ Printify quote failed; using fallback:', e?.response?.data || e?.message || e);
+          console.warn(
+            '⚠️ Printify quote failed; using fallback:',
+            e?.response?.data || e?.message || e
+          );
           sessionParams.shipping_options = [fallbackUnder75Option];
         }
       }
@@ -815,7 +959,10 @@ app.post('/createCheckoutSession', async (req, res) => {
     const session = await stripe.checkout.sessions.create(sessionParams);
     return res.status(200).json({ url: session.url });
   } catch (err) {
-    const msg = err?.raw?.message || err?.message || 'Unknown error creating checkout session';
+    const msg =
+      err?.raw?.message ||
+      err?.message ||
+      'Unknown error creating checkout session';
     console.error('❌ Error creating checkout session:', msg, err);
     return res.status(500).json({ error: msg });
   }
@@ -1442,54 +1589,112 @@ exports.refreshPrintifyStock = onSchedule(
   }
 );
 
-// Auto-replies (unchanged)
 exports.autoReplyInquiry = onDocumentCreated(
-  { document: 'inquiries/{docId}', secrets: [SENDGRID_API_KEY] },
+  {
+    document: 'inquiries/{docId}',
+    region: 'us-central1',
+    secrets: [
+      GMAIL_CLIENT_EMAIL,
+      GMAIL_PRIVATE_KEY,
+      GMAIL_SENDER,
+      GMAIL_IMPERSONATE,
+    ],
+  },
   async (event) => {
-    const sgMail = require('@sendgrid/mail');
-    sgMail.setApiKey(SENDGRID_API_KEY.value());
-    const data = event.data.data();
-    const { email } = data;
-    const msg = {
-      to: email,
-      from: {
-        name: 'Ober Artisan Drums',
-        email: 'support@oberartisandrums.com',
-      },
-      replyTo: 'support@oberartisandrums.com',
-      bcc: ['support@oberartisandrums.com'],
-      subject: `We've Received Your Message`,
-      html: `...`,
-    };
+    const data = event.data?.data();
+    if (!data?.email) return;
+
+    const html = emailShell({
+      logo: LOGO_MAIN,
+      bodyHtml: bodySupport(data.firstName || data.name),
+    });
+
     try {
-      await sgMail.send(msg);
+      await gmailSend({
+        to: data.email,
+        subject: "We've Received Your Message",
+        html,
+        fromEmail: 'support@oberartisandrums.com', // send-as alias
+        replyTo: 'support@oberartisandrums.com',
+        bcc: ['support@oberartisandrums.com'],
+      });
     } catch (error) {
-      console.error('❌ Error sending auto-reply:', error);
+      console.error('autoReplyInquiry (gmail) failed:', error);
     }
   }
 );
 
 exports.autoReplySoundlegend = onDocumentCreated(
-  { document: 'soundlegend_submissions/{docId}', secrets: [SENDGRID_API_KEY] },
+  {
+    document: 'soundlegend_submissions/{docId}',
+    region: 'us-central1',
+    secrets: [
+      GMAIL_CLIENT_EMAIL,
+      GMAIL_PRIVATE_KEY,
+      GMAIL_SENDER,
+      GMAIL_IMPERSONATE,
+    ],
+  },
   async (event) => {
-    const sgMail = require('@sendgrid/mail');
-    sgMail.setApiKey(SENDGRID_API_KEY.value());
-    const data = event.data.data();
-    const { email } = data;
-    const msg = {
-      to: email,
-      from: {
-        name: 'Ober Artisan Drums',
-        email: 'soundlegend@oberartisandrums.com',
-      },
-      bcc: ['soundlegend@oberartisandrums.com'],
-      subject: `Welcome to the SoundLegend Experience`,
-      html: `...`,
-    };
+    const data = event.data?.data();
+    if (!data?.email) return;
+
+    const html = emailShell({
+      logo: LOGO_SL,
+      bodyHtml: bodySoundLegend(data.firstName || data.name),
+    });
+
     try {
-      await sgMail.send(msg);
+      await gmailSend({
+        to: data.email,
+        subject: 'Welcome to the SoundLegend Experience',
+        html,
+        fromEmail: 'soundlegend@oberartisandrums.com', // send-as alias
+        replyTo: 'soundlegend@oberartisandrums.com',
+        bcc: ['soundlegend@oberartisandrums.com'],
+      });
     } catch (error) {
-      console.error('❌ Error sending SoundLegend auto-reply:', error);
+      console.error('autoReplySoundlegend (gmail) failed:', error);
+    }
+  }
+);
+
+exports.autoReplyEndorsement = onDocumentCreated(
+  {
+    document: 'endorsement_applications/{docId}',
+    region: 'us-central1',
+    secrets: [
+      GMAIL_CLIENT_EMAIL,
+      GMAIL_PRIVATE_KEY,
+      GMAIL_SENDER,
+      GMAIL_IMPERSONATE,
+    ],
+  },
+  async (event) => {
+    const id = event.params?.docId || event.params?.id || '';
+    const data = event.data?.data();
+    if (!data?.email) return;
+
+    const html = emailShell({
+      logo: LOGO_MAIN,
+      bodyHtml: bodyEndorsement(
+        data.fullName || data.name,
+        id,
+        data.tierInterest
+      ),
+    });
+
+    try {
+      await gmailSend({
+        to: data.email,
+        subject: 'Thanks for your Endorsement Application',
+        html,
+        fromEmail: 'endorsements@oberartisandrums.com', // send-as alias
+        replyTo: 'endorsements@oberartisandrums.com',
+        bcc: ['endorsements@oberartisandrums.com'],
+      });
+    } catch (err) {
+      console.error('autoReplyEndorsement (gmail) failed:', err);
     }
   }
 );
@@ -1572,5 +1777,110 @@ exports.computeSoundPrism = onCall(
       harmonics: [2, 2.5, 3].map((m) => ({ multiple: m, hz: f * m })),
     };
     return { computed };
+  }
+);
+
+exports.sendEndorsementAutoReply = onCall(
+  {
+    region: 'us-central1',
+    secrets: [
+      GMAIL_CLIENT_EMAIL,
+      GMAIL_PRIVATE_KEY,
+      GMAIL_SENDER,
+      GMAIL_IMPERSONATE,
+    ],
+  },
+  async (request) => {
+    const { toEmail, fullName, stageName, tierInterest, docId } =
+      request.data || {};
+    if (!toEmail || !fullName) throw new Error('Missing toEmail or fullName');
+
+    const subject = 'Thanks for applying – Ober Artisan Drums Endorsement';
+    const text = `Hi ${fullName},
+
+Thank you for your interest in representing the Ober Artisan Drums brand. We’ve received your application${docId ? ` (Reference: ${docId})` : ''}.
+${tierInterest ? `Tier Interest: ${tierInterest}\n` : ''}${stageName ? `Stage Name: ${stageName}\n` : ''}
+Review timeframe: 5–10 business days.
+
+With gratitude,
+Ober Artisan Drums
+www.oberartisandrums.com`;
+
+    const html = `
+<div style="font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#111;line-height:1.55">
+  <p>Hi ${fullName},</p>
+  <p>Thank you for your interest in <strong>Ober Artisan Drums</strong>. We’ve received your application${docId ? ` (<strong>Reference:</strong> ${docId})` : ''}.</p>
+  ${tierInterest ? `<p><strong>Tier Interest:</strong> ${tierInterest}</p>` : ''}
+  ${stageName ? `<p><strong>Stage Name:</strong> ${stageName}</p>` : ''}
+  <p>Review timeframe: <strong>5–10 business days</strong>.</p>
+  <p style="margin-top:20px">With gratitude,<br/>Ober Artisan Drums<br/>
+  <a href="https://www.oberartisandrums.com">www.oberartisandrums.com</a></p>
+</div>`.trim();
+
+    try {
+      await gmailSend({
+        to: toEmail,
+        subject,
+        text,
+        html,
+        fromEmail: 'endorsements@oberartisandrums.com',
+        replyTo: 'endorsements@oberartisandrums.com',
+        bcc: ['endorsements@oberartisandrums.com', 'dan@oberartisandrums.com'],
+      });
+      return { ok: true };
+    } catch (err) {
+      console.error(
+        'sendEndorsementAutoReply (gmail) failed:',
+        err?.message || err
+      );
+      throw new Error('Auto-reply failed');
+    }
+  }
+);
+
+exports.notifyAdminNewEndorsement = onDocumentCreated(
+  {
+    document: 'endorsement_applications/{id}',
+    region: 'us-central1',
+    secrets: [
+      GMAIL_CLIENT_EMAIL,
+      GMAIL_PRIVATE_KEY,
+      GMAIL_SENDER,
+      GMAIL_IMPERSONATE,
+    ],
+  },
+  async (event) => {
+    const data = event.data?.data();
+    if (!data) return;
+
+    const docId = event.params?.id || '';
+    const subject = 'New Endorsement Application Received';
+    const lines = [
+      `<strong>Name:</strong> ${data.fullName || ''}`,
+      data.stageName ? `<strong>Stage:</strong> ${data.stageName}` : '',
+      `<strong>Email:</strong> ${data.email || ''}`,
+      data.tierInterest ? `<strong>Tier:</strong> ${data.tierInterest}` : '',
+      data.instagram ? `<strong>Instagram:</strong> ${data.instagram}` : '',
+      data.youtube ? `<strong>YouTube:</strong> ${data.youtube}` : '',
+      data.city || data.country
+        ? `<strong>Location:</strong> ${[data.city, data.country].filter(Boolean).join(', ')}`
+        : '',
+      `<strong>Doc ID:</strong> ${docId}`,
+    ].filter(Boolean);
+
+    const html = `<div style="font-family:system-ui">
+      <p>A new endorsement application was submitted.</p>
+      <p>${lines.join('<br/>')}</p>
+    </div>`;
+
+    try {
+      await gmailSend({
+        to: 'dan@oberartisandrums.com',
+        subject,
+        html,
+      });
+    } catch (err) {
+      console.error('notifyAdminNewEndorsement (gmail) failed:', err);
+    }
   }
 );
