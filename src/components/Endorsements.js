@@ -24,11 +24,12 @@ const Endorsements = () => {
               <div>PRESTIGE ARTIST</div>
             </div>
           </div>
-          <ul>
-            <li>50% off up to 2 builds/yr</li>
-            <li>Priority Scheduling</li>
-            <li>Roster + Full Marketing</li>
-            <li>Deliverables: 6 posts, 4 photos, 2 videos/yr</li>
+          <ul className="benefits-list">
+            <li>Up to 50% off 1–2 custom builds per year</li>
+            <li>Priority scheduling in our build queue</li>
+            <li>Full roster placement + artist spotlight page</li>
+            <li>Dedicated marketing campaigns & social pushes</li>
+            <li>Access to special collaborations & prototype testing</li>
           </ul>
         </div>
 
@@ -40,11 +41,12 @@ const Endorsements = () => {
               <div>SPOTLIGHT ARTIST</div>
             </div>
           </div>
-          <ul>
-            <li>35% off up to 2 builds/yr</li>
-            <li>Roster Listing</li>
-            <li>Social Shoutouts</li>
-            <li>Deliverables: 4 posts, 2 photos, 1 video/yr</li>
+          <ul className="benefits-list">
+            <li>Up to 35% off 1–2 custom builds per year</li>
+            <li>Official roster listing on our website</li>
+            <li>Regular social media features & shoutouts</li>
+            <li>Priority consideration for media/demo requests</li>
+            <li>Opportunities to progress to Prestige tier</li>
           </ul>
         </div>
 
@@ -56,11 +58,12 @@ const Endorsements = () => {
               <div>RISING ARTIST</div>
             </div>
           </div>
-          <ul>
-            <li>20% off up to 2 builds/yr</li>
-            <li>Social mentions</li>
-            <li>Growth to higher tiers</li>
-            <li>Deliverables: 3 posts, 1 photos, 1 video/yr</li>
+          <ul className="benefits-list">
+            <li>Up to 20% off one custom build per year</li>
+            <li>Recognition as an Ober Rising Artist</li>
+            <li>Social mentions and new build highlights</li>
+            <li>Community connection & growth opportunities</li>
+            <li>Potential advancement to Spotlight & Prestige tiers</li>
           </ul>
         </div>
       </div>
