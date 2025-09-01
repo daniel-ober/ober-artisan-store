@@ -1,50 +1,189 @@
+/* ───── Base typography for labels and inputs ───── */
+label {
+  display: block;
+  margin-bottom: 14px;
+  font-size: 1rem;
+  color: #ffe600c0;              /* high-contrast label text */
+  font-family: 'Poppins', sans-serif;
+}
+
+input, select, textarea {
+  width: 100%;
+  margin-top: 6px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #333;
+  background: #0e0e0e;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #aaa;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+}
+
+/* ───── Layout shell ───── */
 .endorsement-form-wrapper {
-  display: flex; justify-content: center; padding: 24px 16px;
+  display: flex;
+  justify-content: center;
+  padding: 24px 16px;
 }
+
 .endorsement-form {
-  width: 100%; max-width: 860px; background: #111; color: #fff;
-  border: 1px solid #2a2a2a; border-radius: 12px; padding: 24px;
+  width: 100%;
+  max-width: 860px;
+  background: #111;
+  color: #fff;
+  border: 1px solid #2a2a2a;
+  border-radius: 12px;
+  padding: 24px;
 }
+
 .endorsement-form h3 { margin: 0 0 8px; }
 .form-subcopy { color: #cfcfcf; margin-bottom: 16px; }
 
-label { display: block; margin-bottom: 14px; font-size: 0.95rem; }
-input, select, textarea {
-  width: 100%; margin-top: 6px; padding: 10px 12px; border-radius: 8px;
-  border: 1px solid #333; background: #0e0e0e; color: #fff;
+/* ───── Tier notice box ───── */
+.notice {
+  background: #0f1320;
+  border: 1px solid #26304d;
+  color: #d6dcff;
+  padding: 12px 14px;
+  border-radius: 10px;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  font-size: 0.95rem;
 }
+.notice ul { margin: 8px 0 0 18px; }
+
+/* Optional sublabel */
+label .optional { color: #b5b5b5; font-weight: 400; }
+
+/* Focus ring */
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #3a3a3a;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+}
+
+/* Grids */
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
 @media (max-width: 720px){
   .grid-2, .grid-3 { grid-template-columns: 1fr; }
 }
 
+/* File input (keep default but subtle) */
 .file-label input[type="file"] {
-  background: transparent; border: none; padding: 0; color: #ddd;
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: #ddd;
 }
 
-.agree { display: flex; align-items: flex-start; gap: 10px; }
-.agree input { width: auto; }
+/* ───── Center the agreement line ───── */
+.agree {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 16px;
+}
 
+.agree input {
+  width: auto;
+  margin-top: 6px;
+}
+
+.agree-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95rem;
+  color: #ffe600c0;
+  line-height: 1.5;
+}
+
+.agree-text p {
+  margin: 0 0 6px;
+  font-weight: 600;
+  color: #ffd84d;
+}
+
+.agree-text ul {
+  margin: 0;
+  padding-left: 18px;
+  list-style: disc;
+}
+
+.agree-text li {
+  margin-bottom: 6px;
+}
+
+/* ───── Center the submit button ───── */
 .submit {
-  margin-top: 8px; background: #D4AF37; color: #000; border: none; padding: 12px 18px;
-  border-radius: 8px; font-weight: 700; cursor: pointer;
+  display: block;
+  margin: 16px auto 0;       /* centers the button */
+  background: #D4AF37;
+  color: #000;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
 }
+.submit:hover { background: #ffd700; }
 .submit:disabled { opacity: 0.7; cursor: not-allowed; }
 
+/* ───── Bottom error banner near CTA ───── */
 .error {
-  background: #2a0000; color: #ffb3b3; border: 1px solid #662; padding: 8px 12px; border-radius: 8px; margin-bottom: 10px;
+  background: #2a0000;
+  color: #ffb3b3;
+  border: 1px solid #663333;
+  padding: 10px 12px;
+  border-radius: 8px;
+  margin: 10px 0 12px;
+}
+.error-bottom { margin-top: 12px; }
+
+/* ───── Invalid field highlighting ───── */
+label.invalid { font-weight: 700; color: #ffd36e; }
+input.invalid,
+textarea.invalid,
+select.invalid {
+  border-color: #D4AF37;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.18);
 }
 
-/* Success modal */
+/* ───── Success modal ───── */
 .modal {
-  position: fixed; inset: 0; background: rgba(0,0,0,0.7);
-  display: flex; align-items: center; justify-content: center; z-index: 1000;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
 }
 .modal-card {
-  width: min(520px, 92vw); background: #121212; border: 1px solid #2d2d2d; border-radius: 12px;
-  padding: 20px; text-align: center;
+  width: min(520px, 92vw);
+  background: #121212;
+  border: 1px solid #2d2d2d;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
 }
 .modal-card button {
-  margin-top: 10px; background: #FFD700; color: #000; border: 0; padding: 10px 16px; border-radius: 8px; font-weight: 700;
+  margin-top: 10px;
+  background: #FFD700;
+  color: #000;
+  border: 0;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 700;
 }

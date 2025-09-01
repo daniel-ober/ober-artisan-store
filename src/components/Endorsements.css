@@ -55,11 +55,32 @@
 .tier-card ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
-.tier-card li {
-  margin: 6px 0;
+/* Benefits list styling */
+.benefits-list {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+}
+
+.benefits-list li {
+  margin-bottom: 8px;
+  padding-left: 24px;
+  position: relative;
+  color: #eee;
   font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.benefits-list li::before {
+  content: "•"; /* You can swap for ✓ if preferred */
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #D4AF37; /* Gold accent */
+  font-weight: bold;
 }
 
 .legacy { border-top: 4px solid #D4AF37; }
