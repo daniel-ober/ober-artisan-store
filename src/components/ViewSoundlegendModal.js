@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+// src/components/ViewSoundlegendModal.js
+import React, { useState, useEffect, useCallback } from 'react';
+import ReactDOM from 'react-dom';
 import {
   addDoc,
   collection,
@@ -9,7 +11,11 @@ import {
   Timestamp,
 } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
+
+// Load theme first, then component CSS (so component overrides win)
+import './AdminModalTheme.css';
 import './ViewSoundlegendModal.css';
+
 import { STATUS_OPTIONS, getOverviewStatus } from '../utils/statusConfig';
 import defaultProjectFields from '../utils/defaultProjectFields';
 import defaultStepData from '../utils/defaultStepData';
@@ -36,24 +42,36 @@ END:VCARD
   URL.revokeObjectURL(url);
 };
 
-const ViewSoundlegendModal = ({ submission, onClose, onStatusUpdate, onUpdateSubmission }) => {
-  const [selectedStatus, setSelectedStatus] = useState(submission.status || '');
+const ViewSoundlegendModal = ({
+  submission,
+  onClose,
+  onStatusUpdate,
+  onUpdateSubmission,
+}) => {
+  const [selectedStatus, setSelectedStatus] = useState(submission?.status || '');
   const [notes, setNotes] = useState('');
-  const [history, setHistory] = useState(submission.history || []);
-  const [projectId, setProjectId] = useState(submission.projectId || null);
-  const [fullSubmission, setFullSubmission] = useState({ ...submission, id: submission.id });
+  const [history, setHistory] = useState(submission?.history || []);
+  const [projectId, setProjectId] = useState(submission?.projectId || null);
+  const [fullSubmission, setFullSubmission] = useState(
+    submission ? { ...submission, id: submission.id } : null
+  );
 
   if (!submission) return null;
 
-  const {
-    firstName,
-    lastName,
-    email,
-    phone,
-    artistBio,
-    inspiration,
-    submittedAt,
-  } = fullSubmission;
+  const { firstName, lastName, email, phone, artistBio, inspiration, submittedAt } =
+    fullSubmission || submission;
+
+  // Lock body scroll + ESC to close
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const onKey = (e) => e.key === 'Escape' && onClose?.();
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [onClose]);
 
   const handleStatusUpdate = async (newStatus) => {
     setSelectedStatus(newStatus);
@@ -71,18 +89,14 @@ const ViewSoundlegendModal = ({ submission, onClose, onStatusUpdate, onUpdateSub
 
       setHistory((prev) => [...prev, historyEntry]);
 
-      if (onUpdateSubmission) {
-        onUpdateSubmission({
-          ...fullSubmission,
-          status: newStatus,
-          overviewStatus,
-          history: [...history, historyEntry],
-        });
-      }
+      onUpdateSubmission?.({
+        ...fullSubmission,
+        status: newStatus,
+        overviewStatus,
+        history: [...history, historyEntry],
+      });
 
-      if (onStatusUpdate) {
-        onStatusUpdate(fullSubmission.id, newStatus);
-      }
+      onStatusUpdate?.(fullSubmission.id, newStatus);
     } catch (err) {
       console.error('❌ Failed to update status in modal:', err);
     }
@@ -95,9 +109,7 @@ const ViewSoundlegendModal = ({ submission, onClose, onStatusUpdate, onUpdateSub
       const timestamp = new Date().toISOString();
       const noteEntry = { type: 'note', value: notes.trim(), timestamp };
 
-      await updateDoc(submissionRef, {
-        history: arrayUnion(noteEntry),
-      });
+      await updateDoc(submissionRef, { history: arrayUnion(noteEntry) });
 
       setHistory((prev) => [...prev, noteEntry]);
       setNotes('');
@@ -106,15 +118,17 @@ const ViewSoundlegendModal = ({ submission, onClose, onStatusUpdate, onUpdateSub
     }
   };
 
-  const copyToClipboard = (text) => {
+  const copyToClipboard = useCallback((text) => {
     navigator.clipboard
       .writeText(text)
       .then(() => console.log(`📋 Copied: ${text}`))
       .catch((err) => console.error('❌ Copy failed:', err));
-  };
+  }, []);
 
   const createProject = async () => {
-    const confirmCreation = window.confirm(`Create Project for ${firstName} ${lastName}?`);
+    const confirmCreation = window.confirm(
+      `Create Project for ${firstName} ${lastName}?`
+    );
     if (!confirmCreation) return;
 
     try {
@@ -128,41 +142,40 @@ const ViewSoundlegendModal = ({ submission, onClose, onStatusUpdate, onUpdateSub
           phone: phone || '',
           address: { street: '', city: '', state: '', zip: '' },
         },
-        artisanLine: "SoundLegend",
+        artisanLine: 'SoundLegend',
         width: '14"',
         shellDepth: '8"',
         startDate: Timestamp.now(),
         currentPhase: 'Step 1. Wood Preparation',
-        ...defaultStepData,         // ✅ workflow
-        ...defaultProjectFields     // ✅ proposal specs
+        ...defaultStepData,
+        ...defaultProjectFields,
       };
 
       const projectRef = await addDoc(collection(db, 'projects'), projectData);
-      const projectId = projectRef.id;
+      const newProjectId = projectRef.id;
 
       const submissionRef = doc(db, 'soundlegend_submissions', fullSubmission.id);
       const systemEntry = {
         type: 'system',
-        value: `Project created: ${projectId}`,
+        value: `Project created: ${newProjectId}`,
         timestamp: new Date().toISOString(),
       };
 
       await updateDoc(submissionRef, {
-        projectId,
+        projectId: newProjectId,
         history: arrayUnion(systemEntry),
       });
 
-      setProjectId(projectId);
+      setProjectId(newProjectId);
       setHistory((prev) => [systemEntry, ...prev]);
 
-      alert(`✅ Project created successfully!\n\nID: ${projectId}`);
-      if (onUpdateSubmission) {
-        onUpdateSubmission({
-          ...fullSubmission,
-          projectId,
-          history: [systemEntry, ...history],
-        });
-      }
+      alert(`✅ Project created successfully!\n\nID: ${newProjectId}`);
+
+      onUpdateSubmission?.({
+        ...fullSubmission,
+        projectId: newProjectId,
+        history: [systemEntry, ...history],
+      });
     } catch (err) {
       console.error('❌ Failed to create project:', err);
       alert('Failed to create project. Please try again.');
@@ -205,150 +218,203 @@ const ViewSoundlegendModal = ({ submission, onClose, onStatusUpdate, onUpdateSub
     fetchAndValidateSubmission();
   }, [submission.id]);
 
-  return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <button className="close-button" onClick={onClose}>✕</button>
-        <h2 className="modal-title">SoundLegend Submission</h2>
-
-        <div className="modal-status-update">
-          <label><strong>Status:</strong></label>
-          <select
-            value={selectedStatus}
-            onChange={(e) => handleStatusUpdate(e.target.value)}
-            className="status-select"
-          >
-            {STATUS_OPTIONS.soundlegend.map((status) => (
-              <option key={status} value={status}>
-                {status}
-              </option>
-            ))}
-          </select>
+  // ------- PORTAL RENDER: guarantees overlay is above everything -------
+  return ReactDOM.createPortal(
+    <div
+      className="slmodal__backdrop"
+      // inline guards to beat hostile CSS
+      style={{ position: 'fixed', inset: 0, zIndex: 100000 }}
+      onClick={onClose}
+      role="presentation"
+    >
+      {/* LIGHT THEME opt-in */}
+      <div
+        className="slmodal light"
+        onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+      >
+        <div className="slmodal__header">
+          <h3>SoundLegend Submission</h3>
+          <button className="icon-btn" onClick={onClose} aria-label="Close">✕</button>
         </div>
 
-        <div className="compact-inquiry-details">
-          <div className="detail-group">
-            <strong>Name:</strong> {firstName} {lastName}
-            <button
-              className="copy-btn"
-              onClick={() => copyToClipboard(`${firstName} ${lastName}`)}
-              title="Copy name"
-            >
-              📋
-            </button>
-          </div>
-          <div className="detail-group">
-            <strong>Email:</strong> {email}
-            <button
-              className="copy-btn"
-              onClick={() => copyToClipboard(email)}
-              title="Copy email"
-            >
-              📋
-            </button>
-          </div>
-          {phone && (
-            <div className="detail-group">
-              <strong>Phone:</strong> {phone}
+        <div className="slmodal__body">
+          <div className="ea-grid">
+            {/* Status & Quick Actions */}
+            <div className="ea-block">
+              <h4>Status & Actions</h4>
+              <div className="row">
+                <span>Status</span>
+                <select
+                  value={selectedStatus}
+                  onChange={(e) => handleStatusUpdate(e.target.value)}
+                >
+                  {STATUS_OPTIONS.soundlegend.map((status) => (
+                    <option key={status} value={status}>
+                      {status}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {projectId ? (
+                <div className="row">
+                  <span>Linked Project</span>
+                  <div>
+                    <a
+                      href={`/projects/${projectId}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="file-link"
+                    >
+                      Open Project ↗
+                    </a>
+                    <button
+                      className="icon-btn ml-8"
+                      onClick={() => copyToClipboard(projectId)}
+                      title="Copy Project ID"
+                    >
+                      📋
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <button className="btn btn--sm" onClick={createProject}>
+                  Create Project
+                </button>
+              )}
+
+              <div className="row">
+                <span>Contact Card</span>
+                <button
+                  className="btn btn--sm"
+                  onClick={() =>
+                    generateAndDownloadVCard({ firstName, lastName, email, phone })
+                  }
+                >
+                  Download .vcf
+                </button>
+              </div>
             </div>
-          )}
-          {submittedAt?.seconds && (
-            <div className="detail-group">
-              <strong>Submitted:</strong> {new Date(submittedAt.seconds * 1000).toLocaleString()}
+
+            {/* Contact */}
+            <div className="ea-block">
+              <h4>Contact</h4>
+              <div className="row">
+                <span>Name</span>
+                <div>
+                  <span className="text-box">{firstName} {lastName}</span>
+                  <button
+                    className="icon-btn ml-8"
+                    onClick={() => copyToClipboard(`${firstName} ${lastName}`)}
+                    title="Copy name"
+                  >
+                    📋
+                  </button>
+                </div>
+              </div>
+              <div className="row">
+                <span>Email</span>
+                <div>
+                  <span className="text-box">{email}</span>
+                  <button
+                    className="icon-btn ml-8"
+                    onClick={() => copyToClipboard(email)}
+                    title="Copy email"
+                  >
+                    📋
+                  </button>
+                </div>
+              </div>
+              {phone && (
+                <div className="row">
+                  <span>Phone</span>
+                  <span className="text-box">{phone}</span>
+                </div>
+              )}
+              {submittedAt?.seconds && (
+                <div className="row">
+                  <span>Submitted</span>
+                  <span className="muted">
+                    {new Date(submittedAt.seconds * 1000).toLocaleString()}
+                  </span>
+                </div>
+              )}
             </div>
-          )}
-          {projectId ? (
-            <div className="detail-group">
-              <strong>Linked Project:</strong>{' '}
-              <a href={`/projects/${projectId}`} target="_blank" rel="noreferrer" className="project-link">
-                Open Project ↗
-              </a>
-              <button
-                className="copy-btn"
-                onClick={() => copyToClipboard(projectId)}
-                title="Copy Project ID"
-              >
-                📋
-              </button>
+
+            {/* Artist Bio */}
+            {artistBio && (
+              <div className="ea-block col-span-2">
+                <h4>Artist Bio</h4>
+                <div className="text-box">{artistBio}</div>
+              </div>
+            )}
+
+            {/* Inspiration */}
+            {inspiration && (
+              <div className="ea-block col-span-2">
+                <h4>Inspiration</h4>
+                <div className="text-box">{inspiration}</div>
+              </div>
+            )}
+
+            {/* Notes */}
+            <div className="ea-block col-span-2">
+              <h4>Add Note</h4>
+              <textarea
+                rows={3}
+                placeholder="Write an internal note…"
+                value={notes}
+                onChange={(e) => setNotes(e.target.value)}
+              />
+              <div className="right">
+                <button className="btn btn--sm" onClick={handleNoteSubmit} disabled={!notes.trim()}>
+                  Save Note
+                </button>
+                <button className="btn btn--ghost btn--sm" onClick={() => setNotes('')}>
+                  Clear
+                </button>
+              </div>
             </div>
-          ) : (
-            <button className="create-project-btn" onClick={createProject}>
-              Create Project
-            </button>
-          )}
-          <button
-            className="add-contact-btn"
-            onClick={() =>
-              generateAndDownloadVCard({ firstName, lastName, email, phone })
-            }
-          >
-            Download Contact Card
-          </button>
-        </div>
 
-        {artistBio && (
-          <div className="modal-item">
-            <strong>Artist Bio:</strong>
-            <p>{artistBio}</p>
+            {/* History */}
+            <div className="ea-block col-span-2">
+              <h4>History</h4>
+              {history.length === 0 ? (
+                <div className="muted">No history yet.</div>
+              ) : (
+                <div className="table-wrap">
+                  <table className="ea-table">
+                    <thead>
+                      <tr>
+                        <th>Type</th>
+                        <th>Value</th>
+                        <th>Timestamp</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {history.map((entry, i) => (
+                        <tr key={`${entry.timestamp}-${i}`}>
+                          <td>{entry.type === 'status' ? 'Status' : entry.type}</td>
+                          <td className="pre">{entry.value}</td>
+                          <td>{new Date(entry.timestamp).toLocaleString()}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
           </div>
-        )}
-
-        {inspiration && (
-          <div className="modal-item">
-            <strong>Inspiration:</strong>
-            <p>{inspiration}</p>
-          </div>
-        )}
-
-        <div className="modal-item">
-          <label><strong>Add Note:</strong></label>
-          <textarea
-            value={notes}
-            onChange={(e) => setNotes(e.target.value)}
-            className="note-input"
-            placeholder="Write an internal note..."
-            rows={3}
-          />
-          <button
-            className="add-note-btn"
-            onClick={handleNoteSubmit}
-            disabled={!notes.trim()}
-          >
-            Save Note
-          </button>
         </div>
 
-        <div className="history-log">
-          <h4>History</h4>
-          {history.length === 0 ? (
-            <p>No history available.</p>
-          ) : (
-            <table className="notes-table">
-              <thead>
-                <tr>
-                  <th>Type</th>
-                  <th>Value</th>
-                  <th>Timestamp</th>
-                </tr>
-              </thead>
-              <tbody>
-                {history.map((entry, index) => (
-                  <tr key={index}>
-                    <td>{entry.type === 'status' ? 'Status' : entry.type}</td>
-                    <td>{entry.value}</td>
-                    <td>{new Date(entry.timestamp).toLocaleString()}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
+        <div className="slmodal__footer">
+          <button className="btn btn--ghost" onClick={onClose}>Close</button>
         </div>
-
-        <button className="inquiry-close-btn" onClick={onClose}>
-          Close
-        </button>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 

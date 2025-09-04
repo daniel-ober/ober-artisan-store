@@ -3,13 +3,15 @@ import { MdContentCopy } from 'react-icons/md';
 import { getDoc, doc, updateDoc, arrayUnion } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import './ViewRiskDetailModal.css';
+import './AdminModalTheme.css';
+
 
 const ViewRiskDetailModal = ({ risk, isOpen, onClose, onStatusChange }) => {
   const [note, setNote] = useState('');
   const [internalNotes, setInternalNotes] = useState([]);
   const [systemHistory, setSystemHistory] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [status, setStatus] = useState(risk.status || 'New');
+  const [status, setStatus] = useState(risk?.status || 'New');
 
   useEffect(() => {
     if (!risk?.id) return;
@@ -21,14 +23,14 @@ const ViewRiskDetailModal = ({ risk, isOpen, onClose, onStatusChange }) => {
         if (snap.exists()) {
           const data = snap.data();
           setInternalNotes(
-            data.internalNotes?.sort(
+            (data.internalNotes || []).sort(
               (a, b) => new Date(b.timestamp) - new Date(a.timestamp)
-            ) || []
+            )
           );
           setSystemHistory(
-            data.systemHistory?.sort(
+            (data.systemHistory || []).sort(
               (a, b) => new Date(b.timestamp) - new Date(a.timestamp)
-            ) || []
+            )
           );
           setStatus(data.status || 'New');
         }
@@ -45,13 +47,8 @@ const ViewRiskDetailModal = ({ risk, isOpen, onClose, onStatusChange }) => {
     setLoading(true);
     try {
       const ref = doc(db, 'risk_notifications', risk.id);
-      const newNote = {
-        text: note,
-        timestamp: new Date().toISOString(),
-      };
-      await updateDoc(ref, {
-        internalNotes: arrayUnion(newNote),
-      });
+      const newNote = { text: note.trim(), timestamp: new Date().toISOString() };
+      await updateDoc(ref, { internalNotes: arrayUnion(newNote) });
       setInternalNotes((prev) => [newNote, ...prev]);
       setNote('');
     } catch (err) {
@@ -61,45 +58,45 @@ const ViewRiskDetailModal = ({ risk, isOpen, onClose, onStatusChange }) => {
     }
   };
 
-  const handleStatusChange = async (newStatus) => {
+  // Convert stored status into the pretty dropdown label
+  const normalizeStatusForDropdown = (s) => {
+    const cleaned = (s || '').toLowerCase().trim().replace(/\s+/g, '');
+    if (cleaned === 'inprogress') return 'In Progress';
+    if (cleaned === 'resolved' || cleaned === 'completed') return 'Completed';
+    if (cleaned === 'dismissed') return 'Dismissed';
+    return 'New';
+  };
+
+  // Map dropdown label back to stored status + derived overviewStatus
+  const handleStatusChange = async (display) => {
     try {
       const ref = doc(db, 'risk_notifications', risk.id);
-  
-      const statusChangeEvent = {
-        event: `Status changed to "${newStatus}"`,
-        timestamp: new Date().toISOString(),
-      };
-  
-      // Normalize overviewStatus from status
-      const normalized = newStatus.toLowerCase();
-      const newOverview =
+
+      const normalized = display.toLowerCase();
+      const overviewStatus =
         normalized === 'in progress'
           ? 'inProgress'
           : normalized === 'completed' || normalized === 'dismissed'
-            ? 'completed'
-            : 'new';
-  
+          ? 'completed'
+          : 'new';
+
+      const statusChangeEvent = {
+        event: `Status changed to "${display}"`,
+        timestamp: new Date().toISOString(),
+      };
+
       await updateDoc(ref, {
-        status: newStatus,
-        overviewStatus: newOverview,
+        status: display,
+        overviewStatus,
         systemHistory: arrayUnion(statusChangeEvent),
       });
-  
+
       setSystemHistory((prev) => [statusChangeEvent, ...prev]);
-      setStatus(newStatus);
-  
-      // ✅ Pass both status and derived overviewStatus to AdminOverview
-      if (onStatusChange) onStatusChange(risk.id, newStatus);
+      setStatus(display);
+      onStatusChange?.(risk.id, display);
     } catch (err) {
       console.error('Error updating status:', err);
     }
-  };
-
-  const normalizeStatusForDropdown = (status) => {
-    const cleaned = status.toLowerCase().trim().replace(/\s+/g, '');
-    if (cleaned === 'inprogress') return 'In Progress';
-    if (cleaned === 'resolved' || cleaned === 'dismissed') return 'Completed';
-    return 'New';
   };
 
   const copyToClipboard = (text) => {
@@ -110,122 +107,101 @@ const ViewRiskDetailModal = ({ risk, isOpen, onClose, onStatusChange }) => {
   if (!isOpen || !risk) return null;
 
   return (
-    <div className="modal-overlay">
-      <div className="modal-content">
-        <button onClick={onClose} className="modal-close">✕</button>
+    <div className="modal-overlay riskmodal" onClick={onClose}>
+      <div
+        className="modal-content"
+        onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+      >
+        <button onClick={onClose} className="modal-close icon-btn" aria-label="Close">✕</button>
         <h3 className="modal-title">Risk Detail</h3>
 
-        <div className="compact-inquiry-details">
-          <div className="detail-group">
-            <strong>Date:</strong> <span>{risk.timestamp.toLocaleString()}</span>
-          </div>
-          <div className="detail-group">
-            <strong>Score:</strong> <span>{risk.score.toFixed(2)}</span>
-          </div>
-          <div className="detail-group">
-            <strong>Severity:</strong> <span>{risk.severity}</span>
-          </div>
-          <div className="detail-group">
-            <strong>Type:</strong> <span>{risk.type}</span>
-          </div>
+        <div className="compact-risk-details">
+          <div className="detail-group"><strong>Date:</strong> <span>{risk.timestamp?.toLocaleString?.() || String(risk.timestamp)}</span></div>
+          <div className="detail-group"><strong>Score:</strong> <span>{Number(risk.score ?? 0).toFixed(2)}</span></div>
+          <div className="detail-group"><strong>Severity:</strong> <span>{risk.severity}</span></div>
+          <div className="detail-group"><strong>Type:</strong> <span>{risk.type}</span></div>
           <div className="detail-group">
             <strong>Status:</strong>
             <select
-  value={normalizeStatusForDropdown(status)}
-  onChange={(e) => handleStatusChange(e.target.value)}
-  className="status-select"
->
-  <option value="New">New</option>
-  <option value="In Progress">In Progress</option>
-  <option value="Completed">Completed</option>
-  <option value="Dismissed">Dismissed</option>
-</select>
+              value={normalizeStatusForDropdown(status)}
+              onChange={(e) => handleStatusChange(e.target.value)}
+              className="status-select"
+            >
+              <option value="New">New</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Completed">Completed</option>
+              <option value="Dismissed">Dismissed</option>
+            </select>
           </div>
         </div>
 
-        <div className="modal-item">
-          <strong>Email:</strong>
-          <span className="copyable-field">
-            {risk.email}
-            <MdContentCopy
-              className="copy-icon"
-              onClick={() => copyToClipboard(risk.email)}
-              title="Copy Email"
-            />
-          </span>
+        <div className="info-block">
+          <div className="row">
+            <strong>Email:</strong>
+            <span className="copyable-field">
+              {risk.email || 'N/A'}
+              {risk.email && (
+                <MdContentCopy
+                  className="copy-icon"
+                  onClick={() => copyToClipboard(risk.email)}
+                  title="Copy Email"
+                />
+              )}
+            </span>
+          </div>
+          <div className="row">
+            <strong>Source:</strong> <span>{risk.source || 'N/A'}</span>
+          </div>
         </div>
 
-        <div className="modal-item">
-          <strong>Source:</strong>
-          <span>{risk.source || 'N/A'}</span>
-        </div>
-
-        <div className="modal-item">
-          <strong>Add Note:</strong>
-          <textarea
-            className="note-input"
-            placeholder="Add a new internal note..."
-            value={note}
-            onChange={(e) => setNote(e.target.value)}
-          />
-          <button
-            className="add-note-btn"
-            onClick={handleAddNote}
-            disabled={loading}
-          >
-            {loading ? 'Adding...' : 'Add Note'}
-          </button>
-        </div>
+        <h3 className="section-title">Add Note</h3>
+        <textarea
+          className="note-input"
+          placeholder="Add a new internal note..."
+          value={note}
+          onChange={(e) => setNote(e.target.value)}
+        />
+        <button className="add-note-btn" onClick={handleAddNote} disabled={loading}>
+          {loading ? 'Adding...' : 'Add Note'}
+        </button>
 
         <div className="history-log">
-          <h4>Internal Notes</h4>
-          {internalNotes.length > 0 ? (
+          <h3 className="section-title">Internal Notes</h3>
+          {internalNotes.length ? (
             <table className="notes-table">
               <thead>
-                <tr>
-                  <th>Note</th>
-                  <th>Timestamp</th>
-                </tr>
+                <tr><th>Note</th><th>Timestamp</th></tr>
               </thead>
               <tbody>
                 {internalNotes.map((n, i) => (
-                  <tr key={i}>
-                    <td>{n.text}</td>
-                    <td>{new Date(n.timestamp).toLocaleString()}</td>
-                  </tr>
+                  <tr key={i}><td>{n.text}</td><td>{new Date(n.timestamp).toLocaleString()}</td></tr>
                 ))}
               </tbody>
             </table>
           ) : (
-            <p>No internal notes.</p>
+            <p className="muted">No internal notes.</p>
           )}
 
-          <h4>System History</h4>
-          {systemHistory.length > 0 ? (
+          <h3 className="section-title">System History</h3>
+          {systemHistory.length ? (
             <table className="notes-table">
               <thead>
-                <tr>
-                  <th>Event</th>
-                  <th>Timestamp</th>
-                </tr>
+                <tr><th>Event</th><th>Timestamp</th></tr>
               </thead>
               <tbody>
                 {systemHistory.map((e, i) => (
-                  <tr key={i}>
-                    <td>{e.event}</td>
-                    <td>{new Date(e.timestamp).toLocaleString()}</td>
-                  </tr>
+                  <tr key={i}><td>{e.event}</td><td>{new Date(e.timestamp).toLocaleString()}</td></tr>
                 ))}
               </tbody>
             </table>
           ) : (
-            <p>No system history available.</p>
+            <p className="muted">No system history available.</p>
           )}
         </div>
 
-        <button className="inquiry-close-btn" onClick={onClose}>
-          Close
-        </button>
+        <button className="risk-close-btn btn--ghost" onClick={onClose}>Close</button>
       </div>
     </div>
   );

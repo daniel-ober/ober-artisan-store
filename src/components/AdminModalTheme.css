@@ -1,0 +1,35 @@
+/* AdminModalTheme.css */
+
+/* Default = Dark */
+.adminmodal {
+  --bg-1: #0d1220;  /* shell */
+  --bg-2: #111827;  /* blocks */
+  --bg-3: #18263f;  /* inputs */
+  --line-1: #2a3553;
+  --line-2: #1f2945;
+
+  --text-1: #f8faff; --text-2: #e7eeff; --text-3: #c1ccea;
+
+  --btn-bg: #2f5eff; --btn-bg-hover: #3a68ff; --btn-bg-disabled: #2a3a66;
+  --btn-ghost-bg: #1a253f; --btn-ghost-border: #2a3553;
+
+  --focus: rgba(47,94,255,.45);
+  --shadow: rgba(0,0,0,.55);
+}
+
+/* Light theme override */
+.adminmodal.light {
+  --bg-1: #ffffff;
+  --bg-2: #f6f7fb;
+  --bg-3: #eef1f7;
+  --line-1: #d7dbe7;
+  --line-2: #e6e9f2;
+
+  --text-1: #0e1525; --text-2: #24314f; --text-3: #5a6b90;
+
+  --btn-bg: #1a73e8; --btn-bg-hover: #1564c8; --btn-bg-disabled: #c2d5f6;
+  --btn-ghost-bg: #ffffff; --btn-ghost-border: #d7dbe7;
+
+  --focus: rgba(26,115,232,.22);
+  --shadow: rgba(0,0,0,.15);
+}

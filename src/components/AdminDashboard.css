@@ -1,18 +1,23 @@
-/* Main admin dashboard container */
+/* =============== Admin Dashboard Container =============== */
 .admin-dashboard {
   max-width: 1200px;
   margin: 0 auto;
   padding: 25px;
   background-color: #f9f9f9;
-  border-radius: 10px;
+  border-radius: 12px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
   text-align: center;
   overflow: hidden;
-  color: #222; /* default readable text */
+  color: #222;
 }
 
-/* Force all headings and components to use readable text */
-.admin-dashboard h1,
+.admin-dashboard h1 {
+  font-size: 2rem;
+  margin: 0 0 20px 0;
+  color: #222;
+}
+
+/* Ensure headings are readable everywhere */
 .admin-dashboard h2,
 .admin-dashboard h3,
 .component-container h2,
@@ -24,73 +29,29 @@
 .admin-card {
   color: #222;
 }
-
 .component-container * {
   color: inherit;
 }
 
-/* Badge Wrapper Styling */
-.badge-wrapper {
-  position: absolute;
-  top: -6px;
-  right: -6px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 4px;
-  z-index: 2;
-}
-
-/* Notification Badges */
-.notification-badge,
-.notification-badge-secondary,
-.notification-badge-tertiary {
-  color: white;
-  font-size: 12px;
-  font-weight: bold;
-  padding: 2px 9px;
-  border-radius: 50%;
-  z-index: 10;
-  display: inline-block;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
-  position: relative;
-}
-
-.notification-badge {
-  background-color: rgb(8, 151, 0);
-  z-index: 3;
-  top: 0;
-}
-
-.notification-badge-secondary {
-  background-color: orange;
-  z-index: 2;
-  margin-left: -10px; /* overlap effect */
-}
-
-.notification-badge-tertiary {
-  display: none !important; /* Hide green badges for select cards */
-}
-
-/* Cards container styling */
+/* =============== Cards Grid =============== */
 .admin-cards {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
-  gap: 25px;
-  padding-top: 20px;
+  align-items: stretch;
+  gap: 22px;
+  padding-top: 15px;
 }
 
-/* Individual card styling */
+/* Individual Card Styling (shell, not the details – see AdminCard.css) */
 .admin-card {
   background-color: #f0f0f0;
   border: 1px solid #ddd;
-  border-radius: 8px;
+  border-radius: 10px;
   padding: 20px;
   text-align: center;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  transition: background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
   min-width: 200px;
   max-width: 240px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
@@ -98,43 +59,91 @@
 
 .admin-card:hover {
   background-color: #e7e7e7;
-  transform: scale(1.05);
+  transform: scale(1.04);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
+/* Card Icon + Title */
 .admin-card-icon {
   position: relative;
-  font-size: 2.0rem;
-  margin-bottom: 12px;
+  font-size: 2rem;
+  margin-bottom: 10px;
   color: #444;
 }
-
 .admin-card h3 {
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   color: #333;
   margin: 0;
   text-align: center;
+  line-height: 1.2;
 }
 
+/* =============== Badge Styling =============== */
+.badge-wrapper {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  z-index: 2;
+}
+
+.notification-badge,
+.notification-badge-secondary,
+.notification-badge-high,
+.notification-badge-medium {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 2px 9px;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+/* Default (green primary) + secondary stacked badge */
+.notification-badge {
+  background-color: rgb(8, 151, 0);
+  z-index: 3;
+}
+.notification-badge-secondary {
+  background-color: orange;
+  z-index: 2;
+  margin-left: -10px; /* overlap effect */
+}
+
+/* Hide tertiary if not needed */
+.notification-badge-tertiary {
+  display: none !important;
+}
+
+/* Special for Risk Alerts */
+.notification-badge-high {
+  background-color: #e74c3c; /* 🔴 High severity */
+}
+.notification-badge-medium {
+  background-color: orange; /* 🟠 Medium severity */
+  margin-left: -10px;
+}
+
+/* =============== Component Panel =============== */
 .component-container {
   margin-top: 30px;
   padding: 20px;
   background-color: #fff;
-  border-radius: 10px;
+  border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border: 1px solid #ddd;
   max-height: 550px;
   overflow: auto;
   color: #222;
+  text-align: left;
 }
 
-h1 {
-  font-size: 2rem;
-  text-align: center;
-  margin-bottom: 20px;
-  color: #222;
-}
-
+/* Toast Notifications */
 .toast {
   margin-top: 1rem;
   padding: 0.75rem 1rem;
@@ -142,44 +151,16 @@ h1 {
   font-size: 0.9rem;
   text-align: center;
 }
-
 .toast.success {
   background-color: #d4edda;
   color: #155724;
 }
-
 .toast.error {
   background-color: #f8d7da;
   color: #721c24;
 }
 
-.notification-badge-high {
-  background-color: #e74c3c; /* 🔴 RED for High severity */
-  color: white;
-  font-size: 12px;
-  font-weight: bold;
-  padding: 2px 9px;
-  border-radius: 50%;
-  z-index: 10;
-  display: inline-block;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
-  position: relative;
-}
-
-.notification-badge-medium {
-  background-color: orange; /* 🟠 ORANGE for Medium severity */
-  color: white;
-  font-size: 12px;
-  font-weight: bold;
-  padding: 2px 9px;
-  border-radius: 50%;
-  z-index: 9;
-  display: inline-block;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
-  position: relative;
-  margin-left: -10px;
-}
-
+/* =============== Responsive =============== */
 @media (max-width: 768px) {
   .admin-dashboard {
     padding: 20px;
@@ -187,27 +168,24 @@ h1 {
   }
 
   .admin-cards {
-    flex-wrap: wrap;
     justify-content: center;
-    gap: 16px;
+    gap: 14px;
   }
 
   .admin-card {
-    width: calc(50% - 12px); /* 2 per row */
+    width: calc(50% - 10px); /* 2 cards per row */
     min-width: unset;
     max-width: unset;
     box-sizing: border-box;
   }
-
   .admin-card.full-width-mobile {
     width: 100%;
   }
 
   .admin-card-icon {
-    font-size: 2rem;
+    font-size: 1.8rem;
     margin-bottom: 8px;
   }
-
   .admin-card h3 {
     font-size: 1rem;
   }
