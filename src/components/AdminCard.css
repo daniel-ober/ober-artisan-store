@@ -1,121 +1,203 @@
+/* =============== Admin Card (visuals) =============== */
+
+:root {
+  --card-bg: #f0f0f0;
+  --card-bg-hover: #e7e7e7;
+  --card-border: #ddd;
+  --card-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+  --card-shadow-hover: 0 6px 12px rgba(0, 0, 0, 0.15);
+
+  --text: #222;
+  --text-muted: #444;
+
+  --badge-green: #089700;
+  --badge-yellow: #f4b400;
+  --badge-orange: #ff8c00;
+  --badge-red: #e74c3c;
+
+  --project-green: #0f9d58;
+  --project-yellow: #f4b400;
+  --project-red: #db4437;
+}
+
+/* Individual card styling */
 .admin-card {
-  background-color: #f0f0f0;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  position: relative;
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
   padding: 20px;
-  width: 220px;        /* 👈 force equal width */
-  height: 150px;       /* 👈 force equal height */
   text-align: center;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+  transition: background-color .25s ease, transform .25s ease, box-shadow .25s ease,
+    border-color .25s ease;
+  min-width: 200px;
+  max-width: 240px;
+  box-shadow: var(--card-shadow);
+  color: var(--text);
+  user-select: none;
+
+  /* Equal visual rhythm */
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
-  align-items: center;  /* 👈 ensures content is vertically centered */
+  height: 140px;
 }
 
-.badge-wrapper {
-  position: absolute;
-  top: -6px;
-  right: -10px;
-  display: flex;
-  gap: 4px;
+.admin-card:hover {
+  background-color: var(--card-bg-hover);
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: var(--card-shadow-hover);
+  border-color: #cfcfcf;
 }
 
-.notification-badge,
-.notification-badge-secondary {
-  color: white;
-  font-size: 12px;
-  font-weight: bold;
-  padding: 2px 8px;
-  border-radius: 50%;
-  display: inline-block;
-  z-index: 1;
+.admin-card:active {
+  transform: translateY(0) scale(0.995);
 }
 
-.notification-badge {
-  background-color: red;
+/* Keyboard accessibility */
+.admin-card:focus-visible {
+  outline: 3px solid #1a73e8;
+  outline-offset: 3px;
 }
 
-.notification-badge-secondary {
-  background-color: rgb(175, 114, 0);
-}
-
+/* Selected state (optional toggle) */
 .admin-card.selected {
-  background-color: #007bff; /* Highlight color */
-  color: white; /* Text color when selected */
-  transform: scale(1.05); /* Slightly enlarge the card */
+  background-color: #007bff;
+  color: #fff;
+  box-shadow: var(--card-shadow-hover);
+}
+.admin-card.selected .admin-card-icon,
+.admin-card.selected h2,
+.admin-card.selected h3 {
+  color: #fff;
 }
 
+/* Icon + Title */
 .admin-card-icon {
   position: relative;
-  font-size: 2.0rem;
+  font-size: 2rem;
   margin-bottom: 10px;
-  color: #444;
+  color: var(--text-muted);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.admin-card-title {
-  margin-top: 10px;
-  text-align: center;
+.admin-card-title,
+.admin-card h3 {
+  margin: 6px 0 0 0;
+  font-size: 1.1rem;
+  line-height: 1.2;
+  white-space: nowrap;
+  color: var(--text);
 }
 
-.project-badge {
+/* ======= Badges ======= */
+.badge-wrapper {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  z-index: 2;
+}
+
+.notification-badge,
+.notification-badge-secondary,
+.notification-badge-high,
+.notification-badge-medium {
+  color: #fff;
   font-size: 12px;
-  font-weight: bold;
-  padding: 2px 8px;
+  font-weight: 700;
+  padding: 2px 9px;
   border-radius: 50%;
   display: inline-block;
-  color: white;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
+  position: relative;
 }
 
-.green-badge {
-  background-color: #0f9d58;
+/* Generic primary/secondary badges (used by most cards) */
+.notification-badge {
+  background-color: var(--badge-green);
+  z-index: 3;
+}
+.notification-badge-secondary {
+  background-color: var(--badge-yellow);
+  z-index: 2;
+  margin-left: -10px; /* small overlap */
 }
 
-.yellow-badge {
-  background-color: #f4b400;
+/* Special risk severities (high/medium) */
+.notification-badge-high {
+  background-color: var(--badge-red);
+}
+.notification-badge-medium {
+  background-color: var(--badge-orange);
+  margin-left: -10px;
 }
 
-.red-badge {
-  background-color: #db4437;
+/* Per-card color helpers applied by AdminDashboard */
+.badge-green { background-color: var(--badge-green) !important; }
+.badge-yellow { background-color: var(--badge-yellow) !important; }
+.badge-orange { background-color: var(--badge-orange) !important; }
+
+/* Project traffic-light badges */
+.project-badge {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 50%;
+  color: #fff;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
+}
+.green-badge { background-color: var(--project-green); }
+.yellow-badge { background-color: var(--project-yellow); }
+.red-badge { background-color: var(--project-red); }
+
+/* ======= Admin-only quick actions (hidden by default) ======= */
+.admin-card-buttons {
+  margin-top: 12px;
+  display: none;
+  gap: 8px;
+}
+.admin-card:hover .admin-card-buttons {
+  display: flex;
 }
 
-/* Mobile View */
-@media screen and (max-width: 767px) {
-  .admin-dashboard {
-      width: 100%; /* Ensure the dashboard container takes full width */
-      padding: 10px;
-      box-sizing: border-box;
-  }
+.admin-card-buttons button {
+  background: #1d2535;
+  color: #dbe6ff;
+  border: 1px solid #2a3550;
+  border-radius: 10px;
+  padding: 6px 10px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.admin-card-buttons button:hover {
+  background: #202a3e;
+}
 
-  .admin-card-container {
-      display: flex;
-      flex-direction: column; /* Stack the cards vertically */
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 0 10px; /* Prevent overflow with some padding */
-  }
-
+/* ======= Responsive ======= */
+@media (max-width: 768px) {
   .admin-card {
-      width: 100%; /* Full width of the container */
-      max-width: 250px; /* Restrict width to prevent overflow */
-      height: auto; /* Adjust height accordingly */
-      margin: 5px 0; /* Margin to separate cards */
-      padding: 10px; /* Adjust padding for smaller screens */
+    width: calc(50% - 12px); /* 2 per row by default on small screens */
+    max-width: none;
+    height: 120px;
+    box-sizing: border-box;
   }
-
-  .admin-card-title {
-      font-size: 1.2rem; /* Adjust font size */
-      margin-top: 5px;
+  .admin-card.full-width-mobile {
+    width: 100%;
   }
-
-  .admin-content-container {
-      margin-top: 20px;
-      text-align: center;
+  .admin-card-icon {
+    font-size: 1.8rem;
+    margin-bottom: 6px;
+  }
+  .admin-card-title,
+  .admin-card h3 {
+    font-size: 1rem;
   }
 }

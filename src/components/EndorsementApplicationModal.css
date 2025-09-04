@@ -1,0 +1,128 @@
+.eamodal__backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10001; /* sits above ManageEndorsementApplications */
+}
+
+.eamodal {
+  width: min(900px, 96vw);
+  max-height: 92vh;
+  overflow: auto;
+  background: #0c0f14;
+  border: 1px solid #1f2430;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.eamodal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid #1f2430;
+}
+.eamodal__header h3 {
+  color: #e9eefb;
+  margin: 0;
+  font-size: 1.02rem;
+}
+
+.icon-btn {
+  background: #0e131b;
+  color: #cfd7ea;
+  border: 1px solid #2a3550;
+  border-radius: 10px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+.icon-btn:hover {
+  background: #121a27;
+}
+
+.eamodal__body {
+  padding: 14px 16px;
+}
+
+.ea-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.col-span-2 {
+  grid-column: span 2;
+}
+
+.ea-block {
+  background: #0f131b;
+  border: 1px solid #1e2532;
+  border-radius: 12px;
+  padding: 12px;
+}
+.ea-block h4 {
+  margin: 0 0 8px 0;
+  color: #e9eefb;
+  font-size: 0.95rem;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 6px 0;
+  color: #cfd7ea;
+}
+.row span {
+  color: #9fb0d6;
+  font-size: 0.85rem;
+}
+
+.text-box {
+  color: #d7e2ff;
+  white-space: pre-wrap;
+}
+.muted {
+  color: #8fa2c9;
+}
+.file-link {
+  color: #bcd1ff;
+  text-decoration: underline;
+}
+
+textarea,
+select {
+  width: 100%;
+  background: #0e131b;
+  color: #dbe6ff;
+  border: 1px solid #2a3550;
+  border-radius: 10px;
+  padding: 8px 10px;
+}
+
+.eamodal__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 12px 16px;
+  border-top: 1px solid #1f2430;
+}
+.btn {
+  background: #1d2535;
+  color: #dbe6ff;
+  border: 1px solid #2a3550;
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn:hover {
+  background: #202a3e;
+}
+.btn--ghost {
+  background: #0c1017;
+}

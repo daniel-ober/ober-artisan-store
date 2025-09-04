@@ -1,5 +1,3 @@
-// src/components/AdminOverview.js
-
 import React, { useEffect, useState } from 'react';
 import {
   getDoc,
@@ -17,12 +15,14 @@ import ViewOrderModal from './ViewOrderModal';
 import ViewInquiryModal from './ViewInquiryModal';
 import ViewSoundlegendModal from './ViewSoundlegendModal';
 import ViewRiskDetailModal from './ViewRiskDetailModal';
+import EndorsementApplicationModal from './EndorsementApplicationModal';
 import {
   FaBox,
   FaHeadset,
   FaStar,
   FaExclamationTriangle,
   FaThLarge,
+  FaUsers,
 } from 'react-icons/fa';
 import {
   getOverviewStatus,
@@ -42,14 +42,18 @@ const getCollectionPath = (type) => {
       return 'soundlegend_submissions';
     case 'risk':
       return 'risk_notifications';
+    case 'endorsement':
+      return 'endorsement_applications';
     default:
       return '';
   }
 };
 
 const inferStatusFromTarget = (type, targetStatus, currentItem = null) => {
+  if (type === 'endorsement') return targetStatus;
+
   const schema = STATUS_SCHEMA[type];
-  if (!schema) return 'New';
+  if (!schema) return targetStatus;
 
   if (type === 'order') {
     if (targetStatus === 'new') return 'new';
@@ -69,28 +73,17 @@ const inferStatusFromTarget = (type, targetStatus, currentItem = null) => {
   }
 };
 
-const normalizeStatusAndOverview = (type, data) => {
-  let status = data.status;
-
-  // Only auto-infer order status from items if it's missing or marked as 'order started'
-  if (type === 'order' && (!status || status === 'order started')) {
-    status = getOrderStatusFromItems(data.items || []);
-  }
-
-  const overviewStatus = getOverviewStatus(type, status);
-  return { status, overviewStatus };
-};
-
-const AdminOverview = ({ notifications = {}, secondaryNotifications = {}, setOverviewBadgeCounts }) => {
+const AdminOverview = ({
+  notifications = {},
+  secondaryNotifications = {},
+  setOverviewBadgeCounts,
+}) => {
   const [data, setData] = useState({
     new: [],
     inProgress: [],
     completed: [],
-    risks: [],
   });
-  const activeRiskCount = [...data.new, ...data.inProgress].filter(
-    (item) => item.type === 'risk'
-  ).length;
+
   const [selectedItem, setSelectedItem] = useState(null);
   const [modalType, setModalType] = useState(null);
   const [newPage, setNewPage] = useState(1);
@@ -103,16 +96,14 @@ const AdminOverview = ({ notifications = {}, secondaryNotifications = {}, setOve
     const newItems = [];
     const inProgressItems = [];
     const completedItems = [];
-  
+
     for (const item of items) {
       item.type = type;
-  
-      // ✅ Only use item.overviewStatus directly — do NOT recalculate
       if (item.overviewStatus === 'new') newItems.push(item);
       else if (item.overviewStatus === 'inProgress') inProgressItems.push(item);
       else completedItems.push(item);
     }
-  
+
     setData((prev) => {
       const filterOut = (arr) => arr.filter((i) => i.type !== type);
       const uniqueById = (arr) => {
@@ -124,7 +115,7 @@ const AdminOverview = ({ notifications = {}, secondaryNotifications = {}, setOve
           return true;
         });
       };
-  
+
       return {
         new: uniqueById([...filterOut(prev.new), ...newItems]),
         inProgress: uniqueById([...filterOut(prev.inProgress), ...inProgressItems]),
@@ -134,6 +125,7 @@ const AdminOverview = ({ notifications = {}, secondaryNotifications = {}, setOve
   };
 
   useEffect(() => {
+    // Orders
     const unsubOrders = onSnapshot(
       query(collection(db, 'orders'), orderBy('createdAt', 'desc'), limit(100)),
       async (snapshot) => {
@@ -142,20 +134,13 @@ const AdminOverview = ({ notifications = {}, secondaryNotifications = {}, setOve
             const data = docSnap.data();
             let status = data.status;
             let overviewStatus = data.overviewStatus;
-            
-            // ✅ Only infer if they're missing (for backward compatibility)
+
             if (!status || !overviewStatus) {
               status = getOrderStatusFromItems(data.items || []);
               overviewStatus = getOverviewStatus('order', status);
-            
-              // ✅ Only save to Firestore if it was actually missing
-              await updateDoc(doc(db, 'orders', docSnap.id), {
-                status,
-                overviewStatus,
-              });
+              await updateDoc(doc(db, 'orders', docSnap.id), { status, overviewStatus });
             }
-            
-            // ✅ Never override manual status/overviewStatus if already present
+
             return {
               id: docSnap.id,
               type: 'order',
@@ -169,70 +154,50 @@ const AdminOverview = ({ notifications = {}, secondaryNotifications = {}, setOve
       }
     );
 
+    // Inquiries
     const unsubInquiries = onSnapshot(
-      query(
-        collection(db, 'inquiries'),
-        orderBy('createdAt', 'desc'),
-        limit(100)
-      ),
+      query(collection(db, 'inquiries'), orderBy('createdAt', 'desc'), limit(100)),
       (snapshot) => {
         const inquiries = snapshot.docs.map((doc) => {
           const data = doc.data();
           return {
             id: doc.id,
             type: 'inquiry',
-            customerName:
-              `${data.first_name || ''} ${data.last_name || ''}`.trim(),
+            customerName: `${data.first_name || ''} ${data.last_name || ''}`.trim(),
             email: data.email || '',
             status: data.status || '',
-            overviewStatus: getOverviewStatus(
-              'inquiry',
-              data.status || data.overviewStatus
-            ),
+            overviewStatus: getOverviewStatus('inquiry', data.status || data.overviewStatus),
           };
         });
         updateColumnState('inquiry', inquiries);
       }
     );
 
+    // Risk
     const unsubRisks = onSnapshot(
-      query(
-        collection(db, 'risk_notifications'),
-        orderBy('timestamp', 'desc'),
-        limit(100)
-      ),
+      query(collection(db, 'risk_notifications'), orderBy('timestamp', 'desc'), limit(100)),
       (snapshot) => {
         const risks = snapshot.docs.map((doc) => {
           const data = doc.data();
-          const overviewStatus = getOverviewStatus(
-            'risk',
-            data.status || data.overviewStatus
-          );
-
+          const overviewStatus = getOverviewStatus('risk', data.status || data.overviewStatus);
           return {
             id: doc.id,
             type: 'risk',
             overviewStatus,
             status: data.status || 'Unclassified Risk',
             customerName:
-              data.assessment?.username ||
-              data.assessment?.email ||
-              'Unverified Login',
+              data.assessment?.username || data.assessment?.email || 'Unverified Login',
             email: data.email || 'N/A',
             ...data,
           };
         });
-
         updateColumnState('risk', risks);
       }
     );
 
+    // SoundLegend submissions
     const unsubSubmissions = onSnapshot(
-      query(
-        collection(db, 'soundlegend_submissions'),
-        orderBy('submittedAt', 'desc'),
-        limit(100)
-      ),
+      query(collection(db, 'soundlegend_submissions'), orderBy('submittedAt', 'desc'), limit(100)),
       (snapshot) => {
         const submissions = snapshot.docs.map((doc) => {
           const data = doc.data();
@@ -240,12 +205,10 @@ const AdminOverview = ({ notifications = {}, secondaryNotifications = {}, setOve
             'submission',
             data.status || data.overviewStatus
           );
-
           return {
             id: doc.id,
             type: 'submission',
-            customerName:
-              `${data.firstName || ''} ${data.lastName || ''}`.trim(),
+            customerName: `${data.firstName || ''} ${data.lastName || ''}`.trim(),
             overviewStatus,
             ...data,
           };
@@ -254,53 +217,73 @@ const AdminOverview = ({ notifications = {}, secondaryNotifications = {}, setOve
       }
     );
 
+    // Endorsement applications
+    const unsubEndorsements = onSnapshot(
+      query(collection(db, 'endorsement_applications'), orderBy('createdAt', 'desc'), limit(100)),
+      (snapshot) => {
+        const apps = snapshot.docs.map((docSnap) => {
+          const data = docSnap.data();
+          const overviewStatus = getOverviewStatus(
+            'endorsement',
+            data.status || data.overviewStatus || 'inProgress'
+          );
+        return {
+            id: docSnap.id,
+            type: 'endorsement',
+            customerName: data.fullName || data.stageName || 'N/A',
+            email: data.email || '',
+            status: data.status || 'inProgress',
+            overviewStatus,
+            ...data,
+          };
+        });
+        updateColumnState('endorsement', apps);
+      }
+    );
+
     return () => {
       unsubOrders();
       unsubInquiries();
       unsubSubmissions();
       unsubRisks();
+      unsubEndorsements();
     };
   }, []);
 
+  // Overview tile badges
   useEffect(() => {
-    const calcOverviewCounts = () => {
-      const green =
-        (notifications.manageOrders || 0) +
-        (notifications.manageInquiries || 0) +
-        (notifications.manageSoundlegendRequests || 0) +
-        (notifications.manageRiskAlerts || 0);
-  
-      const yellow =
-        (secondaryNotifications.manageOrders || 0) +
-        (secondaryNotifications.manageInquiries || 0) +
-        (secondaryNotifications.manageSoundlegendRequests || 0) +
-        (secondaryNotifications.manageRiskAlerts || 0);
-  
-      setOverviewBadgeCounts({ green, yellow });
-    };
-  
-    calcOverviewCounts();
-  }, [notifications, secondaryNotifications]);
+    const green =
+      (notifications.manageOrders || 0) +
+      (notifications.manageInquiries || 0) +
+      (notifications.manageSoundlegendRequests || 0) +
+      (notifications.manageRiskAlerts || 0) +
+      (notifications.manageEndorsementApplications || 0);
+
+    const yellow =
+      (secondaryNotifications.manageOrders || 0) +
+      (secondaryNotifications.manageInquiries || 0) +
+      (secondaryNotifications.manageSoundlegendRequests || 0) +
+      (secondaryNotifications.manageRiskAlerts || 0) +
+      (secondaryNotifications.manageEndorsementApplications || 0);
+
+    setOverviewBadgeCounts({ green, yellow });
+  }, [notifications, secondaryNotifications, setOverviewBadgeCounts]);
 
   const handleItemClick = async (item) => {
     try {
       const ref = doc(db, getCollectionPath(item.type), item.id);
       const snap = await getDoc(ref);
-      if (!snap.exists()) {
-        console.warn('❗ Document not found in Firestore for', item);
-        return;
-      }
-  
+      if (!snap.exists()) return;
+
       const data = snap.data();
-  
+
+      // RISK
       if (item.type === 'risk') {
         const timestamp = data.timestamp?.seconds
           ? new Date(data.timestamp.seconds * 1000)
           : new Date();
-  
-        const severity =
-          data.score >= 0.85 ? 'High' : data.score >= 0.5 ? 'Medium' : 'Low';
-  
+        const severity = data.score >= 0.85 ? 'High' : data.score >= 0.5 ? 'Medium' : 'Low';
+
         setSelectedItem({
           id: snap.id,
           email: data.email || data.assessment?.email || 'N/A',
@@ -313,17 +296,15 @@ const AdminOverview = ({ notifications = {}, secondaryNotifications = {}, setOve
           status: data.status || 'New',
           overviewStatus: getOverviewStatus('risk', data.status),
         });
-  
         setModalType('risk');
         return;
       }
-  
+
+      // ORDER
       if (item.type === 'order') {
         let createdAt = data.createdAt;
-        if (createdAt?.seconds) {
-          createdAt = new Date(createdAt.seconds * 1000);
-        }
-  
+        if (createdAt?.seconds) createdAt = new Date(createdAt.seconds * 1000);
+
         const systemHistory = Array.isArray(data.systemHistory)
           ? data.systemHistory.map((entry) => ({
               ...entry,
@@ -332,7 +313,7 @@ const AdminOverview = ({ notifications = {}, secondaryNotifications = {}, setOve
                 : entry.timestamp,
             }))
           : [];
-  
+
         setSelectedItem({
           id: snap.id,
           createdAt,
@@ -347,27 +328,56 @@ const AdminOverview = ({ notifications = {}, secondaryNotifications = {}, setOve
           systemHistory,
           relatedProjects: data.relatedProjects || [],
         });
-  
         setModalType('order');
         return;
       }
-  
+
+      // ✅ INQUIRY (Support) — this was missing
+      if (item.type === 'inquiry') {
+        const createdAt =
+          data.createdAt?.seconds
+            ? new Date(data.createdAt.seconds * 1000).toLocaleString()
+            : (data.createdAt || '');
+
+        setSelectedItem({
+          id: snap.id,
+          type: 'inquiry',
+          createdAt,
+          origin: data.origin || data.source || 'web-contact',
+          status: data.status || 'New',
+          overviewStatus: getOverviewStatus('inquiry', data.status || data.overviewStatus),
+          category: data.category || 'Other',
+          name:
+            `${data.first_name || ''} ${data.last_name || ''}`.trim() ||
+            data.name ||
+            'N/A',
+          email: data.email || 'N/A',
+          message: data.message || '',
+          internalNotes: data.internalNotes || [],
+          systemHistory: data.systemHistory || [],
+        });
+        setModalType('inquiry');
+        return;
+      }
+
+      // SOUNDLEGEND SUBMISSION
       if (item.type === 'submission') {
         const submittedAt = data.submittedAt?.seconds
           ? new Date(data.submittedAt.seconds * 1000)
           : null;
-  
-        setSelectedItem({
-          id: snap.id,
-          ...data,
-          submittedAt,
-        });
-  
+
+        setSelectedItem({ id: snap.id, ...data, submittedAt });
         setModalType('submission');
         return;
       }
-  
-      // fallback
+
+      // ENDORSEMENT
+      if (item.type === 'endorsement') {
+        setSelectedItem({ id: snap.id, ...data });
+        setModalType('endorsement');
+        return;
+      }
+
       setModalType(item.type);
     } catch (error) {
       console.error('❌ Error fetching item details:', error);
@@ -383,58 +393,41 @@ const AdminOverview = ({ notifications = {}, secondaryNotifications = {}, setOve
 
     try {
       const allItems = [...data.new, ...data.inProgress, ...data.completed];
-      const currentItem = allItems.find(
-        (item) => item.id === id && item.type === type
-      );
+      const currentItem = allItems.find((i) => i.id === id && i.type === type);
+
       let normalizedStatus = inferStatusFromTarget(type, targetStatus, currentItem);
 
-      // ⚠️ Force manual override of status if dragging order to new/completed
       if (type === 'order') {
         if (targetStatus === 'new') normalizedStatus = 'new';
         else if (targetStatus === 'completed') normalizedStatus = 'fulfilled';
       }
-      const updateFields = {
+
+      await updateDoc(ref, {
         overviewStatus: targetStatus,
         status: normalizedStatus,
         systemHistory: arrayUnion({
           event: `Status changed to "${normalizedStatus}" via drag-and-drop`,
           timestamp: new Date().toISOString(),
         }),
-      };
-
-      await updateDoc(ref, updateFields);
-
-      setSelectedItem((prev) => {
-        if (!prev || prev.id !== id || prev.type !== type) return prev;
-        return {
-          ...prev,
-          status: normalizedStatus,
-          overviewStatus: targetStatus,
-        };
       });
 
+      setSelectedItem((prev) =>
+        prev && prev.id === id && prev.type === type
+          ? { ...prev, status: normalizedStatus, overviewStatus: targetStatus }
+          : prev
+      );
+
       setData((prev) => {
-        const allItems = [...prev.new, ...prev.inProgress, ...prev.completed];
-        const movedItem = allItems.find(
-          (item) => item.id === id && item.type === type
-        );
-        if (!movedItem) return prev;
+        const every = [...prev.new, ...prev.inProgress, ...prev.completed];
+        const moved = every.find((i) => i.id === id && i.type === type);
+        if (!moved) return prev;
 
-        const updatedItem = {
-          ...movedItem,
-          overviewStatus: targetStatus,
-          status: normalizedStatus,
-        };
-        updatedItem._manuallyUpdated = true;
+        const updatedItem = { ...moved, overviewStatus: targetStatus, status: normalizedStatus };
 
-        const filterOut = (items) =>
-          items.filter((i) => i.id !== id || i.type !== type);
+        const filterOut = (items) => items.filter((i) => i.id !== id || i.type !== type);
 
         return {
-          new:
-            targetStatus === 'new'
-              ? [updatedItem, ...filterOut(prev.new)]
-              : filterOut(prev.new),
+          new: targetStatus === 'new' ? [updatedItem, ...filterOut(prev.new)] : filterOut(prev.new),
           inProgress:
             targetStatus === 'inProgress'
               ? [updatedItem, ...filterOut(prev.inProgress)]
@@ -455,10 +448,12 @@ const AdminOverview = ({ notifications = {}, secondaryNotifications = {}, setOve
       item.type === 'order'
         ? 'ORDER'
         : item.type === 'inquiry'
-          ? 'SUPPORT'
-          : item.type === 'submission'
-            ? 'SOUNDLEGEND'
-            : 'RISK';
+        ? 'SUPPORT'
+        : item.type === 'submission'
+        ? 'SOUNDLEGEND'
+        : item.type === 'endorsement'
+        ? 'ENDORSE'
+        : 'RISK';
 
     const label = `${labelType} • ${item.id.slice(-6)}`;
     const desc = item.customerName || item.name || item.email || item.status;
@@ -480,9 +475,7 @@ const AdminOverview = ({ notifications = {}, secondaryNotifications = {}, setOve
         <div className="overview-item-desc">
           {item.type === 'risk' ? (
             <>
-              <span
-                className={`risk-status-badge ${getBadgeClass(item.status)}`}
-              >
+              <span className={`risk-status-badge ${getBadgeClass(item.status)}`}>
                 {item.status}
               </span>
               <span>{desc}</span>
@@ -501,6 +494,7 @@ const AdminOverview = ({ notifications = {}, secondaryNotifications = {}, setOve
       if (activeFilter === 'orders') return item.type === 'order';
       if (activeFilter === 'support') return item.type === 'inquiry';
       if (activeFilter === 'slRequests') return item.type === 'submission';
+      if (activeFilter === 'endorsements') return item.type === 'endorsement';
       if (activeFilter === 'risk') return item.type === 'risk';
       return false;
     });
@@ -510,16 +504,10 @@ const AdminOverview = ({ notifications = {}, secondaryNotifications = {}, setOve
     else if (statusKey === 'inProgress') page = inProgressPage;
     else if (statusKey === 'completed') page = completedPage;
 
-    const paginatedItems = filteredItems.slice(
-      (page - 1) * itemsPerPage,
-      page * itemsPerPage
-    );
-    const startIndex =
-      filteredItems.length > 0 ? (page - 1) * itemsPerPage + 1 : 0;
+    const paginatedItems = filteredItems.slice((page - 1) * itemsPerPage, page * itemsPerPage);
+    const startIndex = filteredItems.length > 0 ? (page - 1) * itemsPerPage + 1 : 0;
     const endIndex =
-      filteredItems.length > 0
-        ? Math.min(page * itemsPerPage, filteredItems.length)
-        : 0;
+      filteredItems.length > 0 ? Math.min(page * itemsPerPage, filteredItems.length) : 0;
 
     return (
       <div
@@ -551,8 +539,7 @@ const AdminOverview = ({ notifications = {}, secondaryNotifications = {}, setOve
             <div className="pagination-controls">
               <button
                 onClick={() => {
-                  if (statusKey === 'new')
-                    setNewPage((p) => Math.max(p - 1, 1));
+                  if (statusKey === 'new') setNewPage((p) => Math.max(p - 1, 1));
                   else if (statusKey === 'inProgress')
                     setInProgressPage((p) => Math.max(p - 1, 1));
                   else if (statusKey === 'completed')
@@ -566,9 +553,7 @@ const AdminOverview = ({ notifications = {}, secondaryNotifications = {}, setOve
               <button
                 onClick={() => {
                   if (statusKey === 'new')
-                    setNewPage((p) =>
-                      p * itemsPerPage < filteredItems.length ? p + 1 : p
-                    );
+                    setNewPage((p) => (p * itemsPerPage < filteredItems.length ? p + 1 : p));
                   else if (statusKey === 'inProgress')
                     setInProgressPage((p) =>
                       p * itemsPerPage < filteredItems.length ? p + 1 : p
@@ -608,11 +593,7 @@ const AdminOverview = ({ notifications = {}, secondaryNotifications = {}, setOve
 
     setSelectedItem((prev) => {
       if (!prev || prev.id !== id) return prev;
-      return {
-        ...prev,
-        status: newStatus,
-        overviewStatus: newOverviewStatus,
-      };
+      return { ...prev, status: newStatus, overviewStatus: newOverviewStatus };
     });
 
     setData((prev) => {
@@ -643,14 +624,13 @@ const AdminOverview = ({ notifications = {}, secondaryNotifications = {}, setOve
   };
 
   const handleCategoryChange = (id, newCategory) => {
-    setSelectedItem((prev) =>
-      prev?.id === id ? { ...prev, category: newCategory } : prev
-    );
+    setSelectedItem((prev) => (prev?.id === id ? { ...prev, category: newCategory } : prev));
   };
 
   return (
     <div className="admin-overview">
       <h1 className="overview-title">Admin Overview</h1>
+
       <div className="overview-filters-icons">
         <FaThLarge
           title="All"
@@ -666,6 +646,11 @@ const AdminOverview = ({ notifications = {}, secondaryNotifications = {}, setOve
           title="Orders"
           onClick={() => setActiveFilter('orders')}
           className={`filter-icon ${activeFilter === 'orders' ? 'enabled' : 'disabled'}`}
+        />
+        <FaUsers
+          title="Endorsements"
+          onClick={() => setActiveFilter('endorsements')}
+          className={`filter-icon ${activeFilter === 'endorsements' ? 'enabled' : 'disabled'}`}
         />
         <FaHeadset
           title="Support"
@@ -714,6 +699,13 @@ const AdminOverview = ({ notifications = {}, secondaryNotifications = {}, setOve
           onClose={() => setSelectedItem(null)}
           risk={selectedItem}
           onStatusChange={handleStatusChange}
+        />
+      )}
+      {modalType === 'endorsement' && selectedItem && (
+        <EndorsementApplicationModal
+          value={selectedItem}
+          appId={selectedItem.id}
+          onClose={() => setSelectedItem(null)}
         />
       )}
     </div>

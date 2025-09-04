@@ -4,6 +4,7 @@ import { getDoc, doc, updateDoc, arrayUnion } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import { STATUS_OPTIONS, getOverviewStatus } from '../utils/statusConfig';
 import './ViewInquiryModal.css';
+import './AdminModalTheme.css';
 
 const ViewInquiryModal = ({
   inquiry,
@@ -24,14 +25,14 @@ const ViewInquiryModal = ({
         if (inquiryDoc.exists()) {
           const data = inquiryDoc.data();
           setInternalNotes(
-            data.internalNotes?.sort(
+            (data.internalNotes || []).sort(
               (a, b) => new Date(b.timestamp) - new Date(a.timestamp)
-            ) || []
+            )
           );
           setSystemHistory(
-            data.systemHistory?.sort(
+            (data.systemHistory || []).sort(
               (a, b) => new Date(b.timestamp) - new Date(a.timestamp)
-            ) || []
+            )
           );
         }
       } catch (error) {
@@ -43,27 +44,16 @@ const ViewInquiryModal = ({
   }, [inquiry.id]);
 
   const handleAddNote = async () => {
-    if (!note.trim()) return alert('Note cannot be empty.');
+    if (!note.trim()) {
+      alert('Note cannot be empty.');
+      return;
+    }
     setLoading(true);
 
     try {
       const inquiryRef = doc(db, 'inquiries', inquiry.id);
-      const inquirySnap = await getDoc(inquiryRef);
-
-      if (!inquirySnap.exists()) {
-        alert('Inquiry document not found.');
-        setLoading(false);
-        return;
-      }
-
-      const data = inquirySnap.data();
-
-      if (!Array.isArray(data.internalNotes)) {
-        await updateDoc(inquiryRef, { internalNotes: [] });
-      }
-
       const newNote = {
-        text: note,
+        text: note.trim(),
         timestamp: new Date().toISOString(),
       };
 
@@ -71,7 +61,7 @@ const ViewInquiryModal = ({
         internalNotes: arrayUnion(newNote),
       });
 
-      setInternalNotes((prevNotes) => [newNote, ...prevNotes]);
+      setInternalNotes((prev) => [newNote, ...prev]);
       setNote('');
     } catch (error) {
       console.error('🔥 Full error adding note:', error);
@@ -85,12 +75,6 @@ const ViewInquiryModal = ({
     try {
       const overviewStatus = getOverviewStatus('inquiry', newStatus);
       const inquiryRef = doc(db, 'inquiries', inquiry.id);
-      const inquirySnap = await getDoc(inquiryRef);
-      const data = inquirySnap.data();
-
-      if (!Array.isArray(data.systemHistory)) {
-        await updateDoc(inquiryRef, { systemHistory: [] });
-      }
 
       const statusChangeEvent = {
         event: `Status changed to "${newStatus}"`,
@@ -103,23 +87,28 @@ const ViewInquiryModal = ({
         systemHistory: arrayUnion(statusChangeEvent),
       });
 
-      setSystemHistory((prevHistory) => [statusChangeEvent, ...prevHistory]);
-      onStatusChange(inquiry.id, newStatus);
+      setSystemHistory((prev) => [statusChangeEvent, ...prev]);
+      onStatusChange?.(inquiry.id, newStatus);
     } catch (error) {
       console.error('Error updating status:', error);
       alert('Failed to update status.');
     }
   };
 
+  const Copyable = ({ text, label }) => (
+  <span className="copyable-field">
+    {text}
+    <MdContentCopy
+      className="copy-icon"
+      onClick={() => copyToClipboard(text)}
+      title={`Copy ${label}`}
+    />
+  </span>
+);
+
   const handleCategoryChange = async (newCategory) => {
     try {
       const inquiryRef = doc(db, 'inquiries', inquiry.id);
-      const inquirySnap = await getDoc(inquiryRef);
-      const data = inquirySnap.data();
-
-      if (!Array.isArray(data.systemHistory)) {
-        await updateDoc(inquiryRef, { systemHistory: [] });
-      }
 
       const categoryChangeEvent = {
         event: `Category changed to "${newCategory}"`,
@@ -131,10 +120,8 @@ const ViewInquiryModal = ({
         systemHistory: arrayUnion(categoryChangeEvent),
       });
 
-      setSystemHistory((prevHistory) => [categoryChangeEvent, ...prevHistory]);
-      if (onCategoryChange) {
-        onCategoryChange(inquiry.id, newCategory);
-      }
+      setSystemHistory((prev) => [categoryChangeEvent, ...prev]);
+      onCategoryChange?.(inquiry.id, newCategory);
     } catch (error) {
       console.error('Error updating category:', error);
       alert('Failed to update category.');
@@ -146,10 +133,23 @@ const ViewInquiryModal = ({
     alert('Copied to clipboard!');
   };
 
+  if (!inquiry) return null;
+
   return (
-    <div className="modal-overlay">
-      <div className="modal-content">
-        <button onClick={onClose} className="modal-close">✕</button>
+    <div className="modal-overlay inquirymodal light" onClick={onClose}>
+      <div
+        className="modal-content"
+        onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+      >
+        <button
+          onClick={onClose}
+          className="modal-close icon-btn"
+          aria-label="Close"
+        >
+          ✕
+        </button>
         <h3 className="modal-title">Inquiry Details</h3>
 
         <div className="compact-inquiry-details">
@@ -192,51 +192,35 @@ const ViewInquiryModal = ({
           </div>
         </div>
 
-        <div className="modal-item">
-          <strong>Name:</strong> {inquiry.name}
-        </div>
-        <div className="modal-item">
-          <strong>Email:</strong>
-          <span className="copyable-field">
-            {inquiry.email}
-            <MdContentCopy
-              className="copy-icon"
-              onClick={() => copyToClipboard(inquiry.email)}
-              title="Copy Email"
-            />
-          </span>
-        </div>
-        <div className="modal-item">
-          <strong>Message:</strong>
-          <span className="copyable-field">
-            {inquiry.message}
-            <MdContentCopy
-              className="copy-icon"
-              onClick={() => copyToClipboard(inquiry.message)}
-              title="Copy Message"
-            />
-          </span>
-        </div>
+<div className="info-block">
+  <div className="row">
+    <strong>Name:</strong> <Copyable text={inquiry.name} label="Name" />
+  </div>
+  <div className="row">
+    <strong>Email:</strong> <Copyable text={inquiry.email} label="Email" />
+  </div>
+  <div className="row">
+    <strong>Message:</strong> <Copyable text={inquiry.message} label="Message" />
+  </div>
+</div>
 
-        <div className="modal-item">
-          <strong>Internal Notes:</strong>
-          <textarea
-            className="note-input"
-            placeholder="Add a new internal note..."
-            value={note}
-            onChange={(e) => setNote(e.target.value)}
-          />
-          <button
-            className="add-note-btn"
-            onClick={handleAddNote}
-            disabled={loading}
-          >
-            {loading ? 'Adding Note...' : 'Add Note'}
-          </button>
-        </div>
+        <h3 className="section-title">Internal Notes</h3>
+        <textarea
+          className="note-input"
+          placeholder="Add a new internal note..."
+          value={note}
+          onChange={(e) => setNote(e.target.value)}
+        />
+        <button
+          className="add-note-btn"
+          onClick={handleAddNote}
+          disabled={loading}
+        >
+          {loading ? 'Adding Note...' : 'Add Note'}
+        </button>
 
         <div className="history-log">
-          <h4>Notes History</h4>
+          <h3 className="section-title">Notes History</h3>
           {internalNotes.length > 0 ? (
             <table className="notes-table">
               <thead>
@@ -246,19 +230,19 @@ const ViewInquiryModal = ({
                 </tr>
               </thead>
               <tbody>
-                {internalNotes.map((note, index) => (
-                  <tr key={index}>
-                    <td>{note.text}</td>
-                    <td>{new Date(note.timestamp).toLocaleString()}</td>
+                {internalNotes.map((n, i) => (
+                  <tr key={i}>
+                    <td>{n.text}</td>
+                    <td>{new Date(n.timestamp).toLocaleString()}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           ) : (
-            <p>No notes available.</p>
+            <p className="muted">No notes available.</p>
           )}
 
-          <h4>System History</h4>
+          <h3 className="section-title">System History</h3>
           {systemHistory.length > 0 ? (
             <table className="notes-table">
               <thead>
@@ -268,20 +252,20 @@ const ViewInquiryModal = ({
                 </tr>
               </thead>
               <tbody>
-                {systemHistory.map((event, index) => (
-                  <tr key={index}>
-                    <td>{event.event}</td>
-                    <td>{new Date(event.timestamp).toLocaleString()}</td>
+                {systemHistory.map((ev, i) => (
+                  <tr key={i}>
+                    <td>{ev.event}</td>
+                    <td>{new Date(ev.timestamp).toLocaleString()}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           ) : (
-            <p>No system history available.</p>
+            <p className="muted">No system history available.</p>
           )}
         </div>
 
-        <button className="inquiry-close-btn" onClick={onClose}>
+        <button className="inquiry-close-btn btn--ghost" onClick={onClose}>
           Close
         </button>
       </div>

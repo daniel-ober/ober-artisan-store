@@ -1,146 +1,265 @@
-.soundlegend-modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 3999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .soundlegend-modal {
-    background: white;
-    padding: 30px;
-    border-radius: 12px;
-    width: 90%;
-    max-width: 600px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    position: relative;
-    animation: fadeIn 0.2s ease-in-out;
-    max-height: 80vh;
-    overflow-y: auto;
-    font-family: 'Inter', sans-serif;
-  }
-  
-  .close-button {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    font-size: 1.2rem;
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .modal-status-update {
-    margin-bottom: 20px;
-  }
-  
-  .modal-status-update label {
-    display: block;
-    font-weight: 600;
-    margin-bottom: 6px;
-  }
-  
-  .modal-status-update select {
-    padding: 6px 12px;
-    font-size: 0.95rem;
-    width: 60%;
-    max-width: 280px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    background: #f9f9f9;
-    appearance: none;
-  }
-  
-  .modal-notes-section {
-    margin-top: 24px;
-  }
-  
-  .modal-notes-section textarea {
-    width: 100%;
-    padding: 8px 12px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 0.95rem;
-    background: #fefefe;
-    resize: vertical;
-    margin-bottom: 10px;
-  }
-  
-  .modal-notes-section button {
-    padding: 6px 14px;
-    font-size: 0.9rem;
-    border: none;
-    border-radius: 6px;
-    background-color: #333;
-    color: #fff;
-    cursor: pointer;
-  }
-  
-  .modal-notes-section button:hover {
-    background-color: #555;
-  }
-  
-  .modal-history {
-    margin-top: 24px;
-  }
-  
-  .modal-history h3 {
-    margin-bottom: 10px;
-  }
-  
-  .modal-history ul {
-    padding-left: 18px;
-    list-style-type: disc;
-  }
-  
-  .modal-history li {
-    margin-bottom: 10px;
-    font-size: 0.9rem;
-  }
+/* ===========================================================
+   ViewSoundlegendModal.css — LIGHT THEME (scoped & resilient)
+   =========================================================== */
 
-  .copy-btn {
-    margin-left: 8px;
-    padding: 2px 6px;
-    font-size: 0.85rem;
-    cursor: pointer;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    transition: background 0.2s ease;
-  }
-  
-  .copy-btn:hover {
-    background-color: #e0e0e0;
-  }
+/* --- Backdrop (kept here so it's always above app chrome) --- */
+.slmodal__backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, .42);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100000;
+}
 
-  .add-contact-btn {
-    margin-top: 10px;
-    padding: 6px 12px;
-    background-color: #00b80c;
-    color: white !important;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
-  
-  .add-contact-btn:hover {
-    background-color: #00990a; /* darker green hover */
-  }
-  
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
+/* --- Light theme tokens (only when .light is present) --- */
+.slmodal.light {
+  --bg-1: #ffffff;        /* modal shell */
+  --bg-2: #f7f9fc;        /* blocks / cards */
+  --bg-3: #ffffff;        /* inputs / fields */
+  --line-1: #e5eaf2;      /* shell/section borders */
+  --line-2: #eef2f7;      /* inner row borders */
+
+  --text-1: #0f172a;      /* headings/body */
+  --text-2: #334155;      /* secondary */
+  --text-3: #64748b;      /* muted labels */
+  --placeholder: #9aa6b2;
+
+  --link: #1d4ed8;
+
+  --btn-bg: #2563eb;
+  --btn-bg-hover: #1d4ed8;
+  --btn-bg-disabled: #93b4f5;
+  --btn-ghost-bg: #ffffff;
+  --btn-ghost-border: #d6dde8;
+
+  --focus: rgba(37, 99, 235, .28);
+  --shadow: 0 24px 70px rgba(2, 6, 23, .18);
+}
+
+/* --- Modal shell --- */
+.slmodal {
+  width: min(980px, 96vw);
+  max-height: 92vh;
+  overflow: auto;
+  background: var(--bg-1);
+  border: 1px solid var(--line-1);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  color: var(--text-1);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Header & footer (LIGHT) --- */
+.slmodal.light .slmodal__header,
+.slmodal.light .slmodal__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 14px 18px;
+  background: var(--bg-1);
+}
+
+.slmodal.light .slmodal__header { border-bottom: 1px solid var(--line-1); }
+.slmodal.light .slmodal__footer { border-top: 1px solid var(--line-1); justify-content: flex-end; }
+
+.slmodal.light .slmodal__header h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--text-1) !important;     /* beat any global dark rules */
+  text-shadow: none !important;
+}
+
+.slmodal.light .icon-btn {
+  background: transparent;
+  color: var(--text-2) !important;
+  border: 1px solid var(--line-1);
+  border-radius: 10px;
+  padding: 6px 10px;
+  cursor: pointer;
+  transition: background .15s ease, border-color .15s ease, box-shadow .15s ease, color .15s ease;
+}
+.slmodal.light .icon-btn:hover {
+  background: #f0f4fa;
+  border-color: #cbd6e6;
+  color: var(--text-1) !important;
+}
+
+/* --- Body layout --- */
+.slmodal.light .slmodal__body { padding: 16px 18px; }
+
+.slmodal.light .ea-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.slmodal.light .col-span-2 { grid-column: span 2; }
+.slmodal.light .right { text-align: right; }
+.slmodal.light .ml-8 { margin-left: 8px; }
+
+/* Panels / cards */
+.slmodal.light .ea-block {
+  background: var(--bg-2);
+  border: 1px solid var(--line-2);
+  border-radius: 12px;
+  padding: 12px;
+}
+.slmodal.light .ea-block h4 {
+  margin: 0 0 10px 0;
+  color: var(--text-1);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+/* --- Rows & labels --- */
+.slmodal.light .row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 10px 0;
+  color: var(--text-2);
+  line-height: 1.35;
+}
+.slmodal.light .row > span:first-child {
+  color: var(--text-3);
+  font-size: .92rem;
+  font-weight: 600;
+}
+
+/* --- Fields (textarea & select) --- */
+.slmodal.light textarea,
+.slmodal.light select {
+  width: 100%;
+  background: var(--bg-3);
+  color: var(--text-1) !important;
+  -webkit-text-fill-color: var(--text-1) !important;
+  border: 1px solid #cfd7e6;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: .96rem;
+  line-height: 1.45;
+  outline: none;
+  transition: box-shadow .15s ease, border-color .15s ease, background .15s ease, color .15s ease;
+  caret-color: var(--text-1);
+}
+
+/* Select arrow (subtle) */
+.slmodal.light select {
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, #667da0 50%),
+    linear-gradient(135deg, #667da0 50%, transparent 50%);
+  background-position: calc(100% - 16px) calc(50% - 3px),
+                       calc(100% - 11px) calc(50% - 3px);
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+  padding-right: 34px;
+}
+.slmodal.light select option {
+  background: #ffffff;
+  color: var(--text-1);
+}
+
+/* Placeholder + focus */
+.slmodal.light textarea::placeholder { color: var(--placeholder) !important; opacity: 1; }
+.slmodal.light textarea:focus,
+.slmodal.light select:focus {
+  border-color: var(--btn-bg);
+  box-shadow: 0 0 0 3px var(--focus);
+  background: #ffffff;
+}
+
+/* --- Buttons --- */
+.slmodal.light .btn {
+  background: var(--btn-bg);
+  color: #fff !important;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background .15s ease, filter .15s ease, transform .02s ease;
+}
+.slmodal.light .btn:hover { background: var(--btn-bg-hover); filter: brightness(1.03); }
+.slmodal.light .btn:active { transform: translateY(1px); }
+.slmodal.light .btn:disabled {
+  background: var(--btn-bg-disabled);
+  color: #fff !important;
+  cursor: not-allowed;
+}
+
+.slmodal.light .btn--ghost {
+  background: var(--btn-ghost-bg);
+  color: var(--text-2) !important;
+  border: 1px solid var(--btn-ghost-border);
+}
+.slmodal.light .btn--ghost:hover {
+  border-color: var(--btn-bg);
+  box-shadow: 0 0 0 3px var(--focus);
+}
+
+.slmodal.light .btn--sm { padding: 8px 11px; font-size: .88rem; }
+
+/* --- Links / helpers --- */
+.slmodal.light .file-link {
+  color: var(--link) !important;
+  text-decoration: underline;
+}
+.slmodal.light .text-box  { color: var(--text-1); white-space: pre-wrap; }
+.slmodal.light .muted     { color: var(--text-3); }
+
+/* --- Tables (light, clean) --- */
+.slmodal.light .table-wrap { overflow: auto; }
+
+.slmodal.light .ea-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--text-1);
+  font-size: .95rem;
+  border: 1px solid var(--line-2);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.slmodal.light .ea-table thead th {
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  font-size: .76rem;
+  color: var(--text-2);
+  background: #eef3fb;                      /* LIGHT header */
+  border-bottom: 1px solid var(--line-1);
+  text-align: left;
+  padding: 10px 8px;
+}
+
+.slmodal.light .ea-table td {
+  border-bottom: 1px solid var(--line-2);
+  padding: 10px 8px;
+  vertical-align: top;
+  color: var(--text-1);
+}
+.slmodal.light .ea-table tr:hover td { background: #f8fbff; }
+.slmodal.light .ea-table td.pre { white-space: pre-wrap; }
+
+/* --- A11y focus --- */
+.slmodal.light .icon-btn:focus,
+.slmodal.light .btn:focus,
+.slmodal.light .file-link:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--focus);
+  border-color: var(--btn-bg);
+}
+
+/* --- Small screens --- */
+@media (max-width: 700px) {
+  .slmodal { width: 98vw; }
+  .slmodal.light .ea-grid { grid-template-columns: 1fr; }
+  .slmodal.light .col-span-2 { grid-column: span 1; }
+}

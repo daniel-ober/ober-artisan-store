@@ -1,57 +1,191 @@
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 3999;
-  }
+/* ===== Manage Carts Modal (theme-aware) ===== */
 
-  .cart-item-image {
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
-    border-radius: 4px;
-    border: 1px solid #ddd;
+/* Overlay inherits theme from: .modal-overlay.cartmodal.adminmodal[.light] */
+.modal-overlay.cartmodal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3999;
+}
+
+/* Shell */
+.cartmodal .modal-content {
+  width: min(920px, 96vw);
+  max-height: 92vh;
+  overflow: auto;
+  overflow-x: hidden;
+  background: var(--bg-1);
+  color: var(--text-1);
+  border: 1px solid var(--line-1);
+  border-radius: 16px;
+  box-shadow: 0 18px 50px var(--shadow);
+  padding: 0; /* sections add their own padding */
+  position: relative;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Header */
+.cartmodal .modal-title {
+  margin: 0;
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--line-1);
+  background: linear-gradient(180deg, #14224a 0%, #0e1833 55%, var(--bg-1) 100%);
+  color: #fff !important;
+  font-size: 1.15rem;
+  font-weight: 800;
+  text-align: center;
+  text-shadow: 0 1px 0 rgba(0,0,0,.55);
+}
+
+/* Close button */
+.cartmodal .modal-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+}
+.cartmodal .icon-btn {
+  background: var(--bg-3);
+  color: var(--text-2) !important;
+  border: 1px solid var(--line-1);
+  border-radius: 10px;
+  padding: 6px 10px;
+  cursor: pointer;
+  transition: background .15s ease, border-color .15s ease, box-shadow .15s ease, color .15s ease;
+}
+.cartmodal .icon-btn:hover {
+  background: #203059;
+  border-color: var(--btn-bg);
+  color: #fff !important;
+}
+
+/* Section spacing */
+.cartmodal .modal-content > * {
+  margin-left: 18px;
+  margin-right: 18px;
+}
+.cartmodal .section-title,
+.cartmodal h3 {
+  color: var(--text-1) !important;
+  font-size: 1rem;
+  font-weight: 800;
+  margin: 18px 18px 10px;
+  text-shadow: 0 1px 0 rgba(0,0,0,.35);
+}
+
+/* Meta card */
+.cart-meta {
+  margin-top: 16px;
+  background: var(--bg-2);
+  border: 1px solid var(--line-2);
+  border-radius: 12px;
+  padding: 14px;
+}
+.cart-meta .meta-row {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  padding: 6px 0;
+  border-bottom: 1px dashed var(--line-2);
+}
+.cart-meta .meta-row:last-child { border-bottom: none; }
+.cart-meta strong { color: var(--text-2); }
+.cart-meta span   { color: var(--text-1); }
+
+/* Danger / delete button */
+.delete-cart-container { display: flex; justify-content: center; margin: 14px 0 8px; }
+.delete-cart-button {
+  background: #cc3b3b;
+  color: #fff !important;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: filter .15s ease, transform .02s ease, box-shadow .15s ease;
+  box-shadow: 0 3px 10px rgba(204, 59, 59, .25);
+}
+.delete-cart-button:hover { filter: brightness(1.05); box-shadow: 0 4px 14px rgba(204, 59, 59, .35); }
+
+/* Table */
+.cart-details-table {
+  table-layout: fixed;           /* keep cells from stretching oddly */
+  width: calc(100% - 36px);
+  border-collapse: collapse;
+  background: var(--bg-2);
+  border: 1px solid var(--line-2);
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 8px 18px 10px;
+}
+.cart-details-table thead th {
+  background: #0e1833;           /* dark header for contrast (light theme will still look good) */
+  color: var(--text-2);
+  text-align: left;
+  padding: 12px 10px;
+  border-bottom: 1px solid var(--line-1);
+  font-size: .88rem;
+  letter-spacing: .02em;
+}
+.cart-details-table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid var(--line-2);
+  color: var(--text-1);
+  vertical-align: middle;
+  font-size: .96rem;
+  word-break: break-word;
+}
+.cart-details-table tr:hover td {
+  background: rgba(255,255,255,.04);
+}
+
+/* Product image and name */
+.cart-item-image {
+  width: 58px;
+  height: 58px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--line-2);
+  background: var(--bg-1);
+}
+.cart-details-table td strong { color: var(--text-1); }
+
+/* Subtotal card */
+.cart-subtotal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin: 12px 18px 18px;
+  padding: 12px 14px;
+  background: var(--bg-2);
+  border: 1px solid var(--line-2);
+  border-radius: 12px;
+  font-weight: 800;
+}
+.cart-subtotal span    { color: var(--text-2); }
+.cart-subtotal strong  { color: var(--text-1); }
+
+/* Muted/empty text */
+.cartmodal .muted { color: var(--text-3); margin: 8px 18px 18px; }
+
+/* Accessibility focus */
+.cartmodal .icon-btn:focus,
+.cartmodal .delete-cart-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--focus);
+  border-color: var(--btn-bg);
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .cartmodal .modal-content { width: 98vw; }
+  .cart-details-table thead { display: none; }
+  .cart-details-table, .cart-details-table tbody, .cart-details-table tr, .cart-details-table td {
+    display: block; width: 100%;
   }
-  
-  .modal-content {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    width: 80%;
-    max-width: 600px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    position: relative;
-  }
-  
-  .close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-  }
-  
-  .cart-details-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-  }
-  
-  .cart-details-table th,
-  .cart-details-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-  }
-  
-  .cart-details-table th {
-    background-color: #f4f4f4;
-  }
+  .cart-details-table tr { border-bottom: 1px solid var(--line-2); }
+  .cart-details-table td { padding: 10px 12px; }
+}
