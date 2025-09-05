@@ -6,16 +6,35 @@ import { STATUS_OPTIONS, getOverviewStatus } from '../utils/statusConfig';
 import './ViewInquiryModal.css';
 import './AdminModalTheme.css';
 
-const ViewInquiryModal = ({
-  inquiry,
-  onClose,
-  onStatusChange,
-  onCategoryChange,
-}) => {
+// Categories in sync with Contact form (Other last)
+const ADMIN_CATEGORIES = [
+  'Custom Shop',
+  'Endorsements',
+  'Partner Relations',
+  'Payments',
+  'Product Information',
+  'Shipping & Delivery',
+  'Technical Assistance',
+  'Website Feedback',
+  'Other',
+];
+
+// legacy -> current
+const normalizeCategory = (c = '') => (c === 'Billing' ? 'Payments' : c);
+
+const ViewInquiryModal = ({ inquiry, onClose, onStatusChange, onCategoryChange }) => {
   const [note, setNote] = useState('');
   const [loading, setLoading] = useState(false);
   const [internalNotes, setInternalNotes] = useState([]);
   const [systemHistory, setSystemHistory] = useState([]);
+
+  // snackbar state
+  const [copyToast, setCopyToast] = useState({ open: false, msg: '' });
+  const openToast = (msg) => {
+    setCopyToast({ open: true, msg });
+    window.clearTimeout(openToast._t);
+    openToast._t = window.setTimeout(() => setCopyToast({ open: false, msg: '' }), 1800);
+  };
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -24,22 +43,13 @@ const ViewInquiryModal = ({
         const inquiryDoc = await getDoc(inquiryRef);
         if (inquiryDoc.exists()) {
           const data = inquiryDoc.data();
-          setInternalNotes(
-            (data.internalNotes || []).sort(
-              (a, b) => new Date(b.timestamp) - new Date(a.timestamp)
-            )
-          );
-          setSystemHistory(
-            (data.systemHistory || []).sort(
-              (a, b) => new Date(b.timestamp) - new Date(a.timestamp)
-            )
-          );
+          setInternalNotes((data.internalNotes || []).sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)));
+          setSystemHistory((data.systemHistory || []).sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)));
         }
       } catch (error) {
         console.error('Error fetching details:', error);
       }
     };
-
     fetchDetails();
   }, [inquiry.id]);
 
@@ -49,18 +59,10 @@ const ViewInquiryModal = ({
       return;
     }
     setLoading(true);
-
     try {
       const inquiryRef = doc(db, 'inquiries', inquiry.id);
-      const newNote = {
-        text: note.trim(),
-        timestamp: new Date().toISOString(),
-      };
-
-      await updateDoc(inquiryRef, {
-        internalNotes: arrayUnion(newNote),
-      });
-
+      const newNote = { text: note.trim(), timestamp: new Date().toISOString() };
+      await updateDoc(inquiryRef, { internalNotes: arrayUnion(newNote) });
       setInternalNotes((prev) => [newNote, ...prev]);
       setNote('');
     } catch (error) {
@@ -75,18 +77,8 @@ const ViewInquiryModal = ({
     try {
       const overviewStatus = getOverviewStatus('inquiry', newStatus);
       const inquiryRef = doc(db, 'inquiries', inquiry.id);
-
-      const statusChangeEvent = {
-        event: `Status changed to "${newStatus}"`,
-        timestamp: new Date().toISOString(),
-      };
-
-      await updateDoc(inquiryRef, {
-        status: newStatus,
-        overviewStatus,
-        systemHistory: arrayUnion(statusChangeEvent),
-      });
-
+      const statusChangeEvent = { event: `Status changed to "${newStatus}"`, timestamp: new Date().toISOString() };
+      await updateDoc(inquiryRef, { status: newStatus, overviewStatus, systemHistory: arrayUnion(statusChangeEvent) });
       setSystemHistory((prev) => [statusChangeEvent, ...prev]);
       onStatusChange?.(inquiry.id, newStatus);
     } catch (error) {
@@ -95,31 +87,11 @@ const ViewInquiryModal = ({
     }
   };
 
-  const Copyable = ({ text, label }) => (
-  <span className="copyable-field">
-    {text}
-    <MdContentCopy
-      className="copy-icon"
-      onClick={() => copyToClipboard(text)}
-      title={`Copy ${label}`}
-    />
-  </span>
-);
-
   const handleCategoryChange = async (newCategory) => {
     try {
       const inquiryRef = doc(db, 'inquiries', inquiry.id);
-
-      const categoryChangeEvent = {
-        event: `Category changed to "${newCategory}"`,
-        timestamp: new Date().toISOString(),
-      };
-
-      await updateDoc(inquiryRef, {
-        category: newCategory,
-        systemHistory: arrayUnion(categoryChangeEvent),
-      });
-
+      const categoryChangeEvent = { event: `Category changed to "${newCategory}"`, timestamp: new Date().toISOString() };
+      await updateDoc(inquiryRef, { category: newCategory, systemHistory: arrayUnion(categoryChangeEvent) });
       setSystemHistory((prev) => [categoryChangeEvent, ...prev]);
       onCategoryChange?.(inquiry.id, newCategory);
     } catch (error) {
@@ -128,81 +100,72 @@ const ViewInquiryModal = ({
     }
   };
 
-  const copyToClipboard = (text) => {
-    navigator.clipboard.writeText(text);
-    alert('Copied to clipboard!');
+  // copy helper (no browser alert)
+  const copyToClipboard = (text, label) => {
+    try {
+      navigator.clipboard.writeText(text ?? '');
+      openToast(`${label} copied to clipboard`);
+    } catch {
+      openToast('Copy failed');
+    }
   };
 
+  // Copyable with icon on the LEFT and preserved spacing
+  const Copyable = ({ text, label }) => (
+    <span className="copyable-field">
+      <MdContentCopy
+        className="copy-icon"
+        onClick={() => copyToClipboard(text, label)}
+        title={`Copy ${label}`}
+        role="button"
+        aria-label={`Copy ${label}`}
+      />
+      <span className="copyable-text">{text}</span>
+    </span>
+  );
+
   if (!inquiry) return null;
+  const currentCategory = normalizeCategory(inquiry.category);
 
   return (
     <div className="modal-overlay inquirymodal light" onClick={onClose}>
-      <div
-        className="modal-content"
-        onClick={(e) => e.stopPropagation()}
-        role="dialog"
-        aria-modal="true"
-      >
-        <button
-          onClick={onClose}
-          className="modal-close icon-btn"
-          aria-label="Close"
-        >
-          ✕
-        </button>
+      <div className="modal-content" onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true">
+        <button onClick={onClose} className="modal-close icon-btn" aria-label="Close">✕</button>
         <h3 className="modal-title">Inquiry Details</h3>
 
         <div className="compact-inquiry-details">
-          <div className="detail-group">
-            <strong>Date:</strong> <span>{inquiry.createdAt}</span>
-          </div>
-          <div className="detail-group">
-            <strong>Origin:</strong> <span>{inquiry.origin}</span>
-          </div>
+          <div className="detail-group"><strong>Date:</strong> <span>{inquiry.createdAt}</span></div>
+          <div className="detail-group"><strong>Origin:</strong> <span>{inquiry.origin}</span></div>
           <div className="detail-group">
             <strong>Status:</strong>
-            <select
-              value={inquiry.status}
-              onChange={(e) => handleStatusChange(e.target.value)}
-              className="status-select"
-            >
-              {STATUS_OPTIONS.inquiry.map((status) => (
-                <option key={status} value={status}>
-                  {status}
-                </option>
-              ))}
+            <select value={inquiry.status} onChange={(e) => handleStatusChange(e.target.value)} className="status-select">
+              {STATUS_OPTIONS.inquiry.map((status) => <option key={status} value={status}>{status}</option>)}
             </select>
           </div>
           <div className="detail-group">
             <strong>Category:</strong>
-            <select
-              value={inquiry.category}
-              onChange={(e) => handleCategoryChange(e.target.value)}
-              className="status-select"
-            >
-              <option value="Billing">Billing</option>
-              <option value="Custom Shop">Custom Shop</option>
-              <option value="Partner Relations">Partner Relations</option>
-              <option value="Product Information">Product Information</option>
-              <option value="Shipping & Delivery">Shipping & Delivery</option>
-              <option value="Technical Assistance">Technical Assistance</option>
-              <option value="Website Feedback">Website Feedback</option>
-              <option value="Other">Other</option>
+            <select value={currentCategory} onChange={(e) => handleCategoryChange(e.target.value)} className="status-select">
+              {ADMIN_CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
             </select>
           </div>
         </div>
 
-<div className="info-block">
-  <div className="row">
-    <strong>Name:</strong> <Copyable text={inquiry.name} label="Name" />
-  </div>
-  <div className="row">
-    <strong>Email:</strong> <Copyable text={inquiry.email} label="Email" />
-  </div>
-  <div className="row">
-    <strong>Message:</strong> <Copyable text={inquiry.message} label="Message" />
-  </div>
-</div>
+        <div className="info-block">
+          <div className="row">
+            <strong>Name:</strong>
+            <Copyable text={inquiry.name} label="Name" />
+          </div>
+          <div className="row">
+            <strong>Email:</strong>
+            <Copyable text={inquiry.email} label="Email" />
+          </div>
+          <div className="row message-row">
+            <strong>Message:</strong>
+            <div className="message-value">
+              <Copyable text={inquiry.message} label="Message" />
+            </div>
+          </div>
+        </div>
 
         <h3 className="section-title">Internal Notes</h3>
         <textarea
@@ -211,11 +174,7 @@ const ViewInquiryModal = ({
           value={note}
           onChange={(e) => setNote(e.target.value)}
         />
-        <button
-          className="add-note-btn"
-          onClick={handleAddNote}
-          disabled={loading}
-        >
+        <button className="add-note-btn" onClick={handleAddNote} disabled={loading}>
           {loading ? 'Adding Note...' : 'Add Note'}
         </button>
 
@@ -223,12 +182,7 @@ const ViewInquiryModal = ({
           <h3 className="section-title">Notes History</h3>
           {internalNotes.length > 0 ? (
             <table className="notes-table">
-              <thead>
-                <tr>
-                  <th>Note</th>
-                  <th>Timestamp</th>
-                </tr>
-              </thead>
+              <thead><tr><th>Note</th><th>Timestamp</th></tr></thead>
               <tbody>
                 {internalNotes.map((n, i) => (
                   <tr key={i}>
@@ -238,19 +192,12 @@ const ViewInquiryModal = ({
                 ))}
               </tbody>
             </table>
-          ) : (
-            <p className="muted">No notes available.</p>
-          )}
+          ) : <p className="muted">No notes available.</p>}
 
           <h3 className="section-title">System History</h3>
           {systemHistory.length > 0 ? (
             <table className="notes-table">
-              <thead>
-                <tr>
-                  <th>Event</th>
-                  <th>Timestamp</th>
-                </tr>
-              </thead>
+              <thead><tr><th>Event</th><th>Timestamp</th></tr></thead>
               <tbody>
                 {systemHistory.map((ev, i) => (
                   <tr key={i}>
@@ -260,14 +207,17 @@ const ViewInquiryModal = ({
                 ))}
               </tbody>
             </table>
-          ) : (
-            <p className="muted">No system history available.</p>
-          )}
+          ) : <p className="muted">No system history available.</p>}
         </div>
 
-        <button className="inquiry-close-btn btn--ghost" onClick={onClose}>
-          Close
-        </button>
+        <button className="inquiry-close-btn btn--ghost" onClick={onClose}>Close</button>
+
+        {/* Copy snackbar */}
+        {copyToast.open && (
+          <div className="copy-snackbar" role="status" aria-live="polite">
+            {copyToast.msg}
+          </div>
+        )}
       </div>
     </div>
   );

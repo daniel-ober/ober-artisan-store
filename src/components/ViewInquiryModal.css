@@ -210,6 +210,80 @@
 }
 .inquirymodal.light .status-select {
   padding: 8px 12px;
+
+  /* Make the message start immediately under the label and left-align it */
+.inquirymodal.light .info-block .row.message-row {
+  align-items: flex-start;          /* label top-aligns with first message line */
+}
+
+/* The message value: wrap, left-align, and use natural spacing */
+.inquirymodal.light .message-value {
+  white-space: pre-wrap;            /* preserve user line breaks */
+  word-break: break-word;           /* long URLs etc. */
+  text-align: left;                 /* force left alignment */
+  margin: 0;                        /* no extra offset */
+  width: 100%;
+}
+
+/* Keep the copy icon snug without centering the block */
+.inquirymodal.light .message-value .copyable-field {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+.inquirymodal.light .message-value .copy-icon {
+  margin-top: 2px;                  /* aligns icon with first text line */
+}
+}
+
+/* Put the copy icon BEFORE the text and preserve spacing */
+.inquirymodal.light .copyable-field {
+  display: inline-flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+.inquirymodal.light .copyable-text {
+  white-space: pre-wrap;     /* keep user line breaks */
+  word-break: break-word;    /* long URLs/strings */
+}
+.inquirymodal.light .copy-icon {
+  font-size: 1rem;
+  cursor: pointer;
+  color: var(--text-2);
+  margin-top: 2px;
+  transition: color .15s, transform .05s;
+}
+.inquirymodal.light .copy-icon:hover { color: var(--text-1); }
+.inquirymodal.light .copy-icon:active { transform: scale(0.94); }
+
+/* Message row stays left-aligned and starts right under its label */
+.inquirymodal.light .info-block .row.message-row { align-items: flex-start; }
+.inquirymodal.light .message-value {
+  white-space: pre-wrap;
+  word-break: break-word;
+  text-align: left;
+  width: 100%;
+}
+
+/* Lightweight snackbar inside modal */
+.inquirymodal.light .copy-snackbar {
+  position: fixed;           /* relative to viewport so it overlays modal cleanly */
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  background: #111827;       /* dark, high contrast */
+  color: #ffffff;
+  padding: 10px 14px;
+  border-radius: 10px;
+  box-shadow: 0 12px 30px rgba(2,6,23,.25);
+  font-weight: 600;
+  letter-spacing: .2px;
+  z-index: 5000;
+  animation: copySnackFade .2s ease-out;
+}
+@keyframes copySnackFade {
+  from { opacity: 0; transform: translateX(-50%) translateY(8px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
 
 /* Mobile */
