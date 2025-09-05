@@ -17,6 +17,7 @@ import {
   Snackbar,
   Alert,
   CircularProgress,
+  ListItemText,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { checkAuthentication } from '../authCheck';
@@ -28,38 +29,49 @@ import './Contact.css';
 const inquiryCategories = [
   {
     value: 'Custom Shop',
-    label: 'Custom Shop – Custom drum builds or modifications',
+    label: 'Custom Shop',
+    desc: 'Custom drum builds or modifications',
   },
   {
     value: 'Endorsements',
-    label: 'Endorsements – Artist relations and endorsement requests',
+    label: 'Endorsements',
+    desc: 'Artist relations and endorsement requests',
   },
   {
     value: 'Partner Relations',
-    label: 'Partner Relations – Vendor inquiries or partnership opportunities',
+    label: 'Partner Relations',
+    desc: 'Vendor inquiries or partnership opportunities',
   },
   {
     value: 'Payments',
-    label: 'Payments – Update billing or inquire about payments',
+    label: 'Payments',
+    desc: 'Update billing or inquire about payments',
   },
   {
     value: 'Product Information',
-    label: 'Product Information – Ask about products or specifications',
+    label: 'Product Information',
+    desc: 'Ask about products or specifications',
   },
   {
     value: 'Shipping & Delivery',
-    label: 'Shipping & Delivery – Shipping updates or tracking info',
+    label: 'Shipping & Delivery',
+    desc: 'Shipping updates or tracking info',
   },
   {
     value: 'Technical Assistance',
-    label:
-      'Technical Assistance – Technical guidance using the website (features, navigation, issues)',
+    label: 'Technical Assistance',
+    desc: 'Technical guidance using the website',
   },
   {
     value: 'Website Feedback',
-    label: 'Website Feedback – Share feedback or ideas',
+    label: 'Website Feedback',
+    desc: 'Share feedback or ideas',
   },
-  { value: 'Other', label: 'Other' },
+  {
+    value: 'Other',
+    label: 'Other',
+    desc: 'Anything that doesn’t fit a category',
+  },
 ].sort((a, b) => {
   if (a.value === 'Other') return 1;
   if (b.value === 'Other') return -1;
@@ -265,274 +277,345 @@ const Contact = () => {
   };
 
   return (
-  <div className="contact-page">
-    <Typography
-      variant="h4"
-      component="h1"
-      gutterBottom
-      className="contact-header"
-    >
-      Contact Us
-    </Typography>
-
-    <form onSubmit={handleSubmit} className="contact-form-container" noValidate>
-      {/* Short intro (fits on one line) */}
-      <Typography variant="subtitle1" align="center" className="contact-intro">
-        Questions or requests? Use this form for builds, orders, partnerships, and support.
+    <div className="contact-page">
+      <Typography
+        variant="h4"
+        component="h1"
+        gutterBottom
+        className="contact-header"
+      >
+        Contact Us
       </Typography>
 
-      {/* Honeypot (hidden) */}
-      <div className="hp-wrapper" aria-hidden>
-        <label htmlFor="company">Company</label>
-        <input
-          id="company"
-          name="company"
-          type="text"
-          autoComplete="organization"
-          tabIndex={-1}
-          value={formData.company}
-          onChange={handleChange}
-        />
-      </div>
-
-      <Grid container spacing={2}>
-        {/* Category */}
-        <Grid item xs={12}>
-          <FormControl
-            fullWidth
-            required
-            error={Boolean(errors.category)}
-            className="contact-dropdown"
-          >
-            <InputLabel id="category-label">Category</InputLabel>
-            <Select
-              labelId="category-label"
-              id="category"
-              name="category"
-              label="Category"
-              value={formData.category}
-              onChange={handleChange}
-              displayEmpty
-              renderValue={(selected) => {
-                if (!selected) return <em>Select a category</em>;
-                const item = inquiryCategories.find((c) => c.value === selected);
-                return item ? item.label : selected;
-              }}
-              inputProps={{
-                'aria-describedby': errors.category ? 'category-helper' : undefined,
-              }}
-            >
-              <MenuItem value="">
-                <em>Select a category</em>
-              </MenuItem>
-              {inquiryCategories.map((cat) => (
-                <MenuItem key={cat.value} value={cat.value} className="contact-menu-item">
-                  {cat.label}
-                </MenuItem>
-              ))}
-            </Select>
-
-            {/* SLA hint under select */}
-            {formData.category && (
-              <Typography variant="caption" sx={{ mt: 0.25, opacity: 0.8 }}>
-                {categorySLA[formData.category] || 'Typical Response: 1–2 business days.'}
-              </Typography>
-            )}
-
-            {errors.category && (
-              <Typography id="category-helper" variant="caption" color="error" sx={{ mt: 0.5 }}>
-                {errors.category}
-              </Typography>
-            )}
-          </FormControl>
-        </Grid>
-
-        {/* First / Last */}
-        <Grid item xs={12} sm={6}>
-          <TextField
-            variant="outlined"
-            label="First Name"
-            name="first_name"
-            value={formData.first_name}
-            onChange={handleChange}
-            fullWidth
-            required
-            className="contact-input"
-            error={Boolean(errors.first_name)}
-            helperText={errors.first_name}
-            autoComplete="given-name"
-            inputProps={{ autoCapitalize: 'words' }}
-            InputLabelProps={{ shrink: true }}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            variant="outlined"
-            label="Last Name"
-            name="last_name"
-            value={formData.last_name}
-            onChange={handleChange}
-            fullWidth
-            required
-            className="contact-input"
-            error={Boolean(errors.last_name)}
-            helperText={errors.last_name}
-            autoComplete="family-name"
-            inputProps={{ autoCapitalize: 'words' }}
-            InputLabelProps={{ shrink: true }}
-          />
-        </Grid>
-
-        {/* Email / Phone */}
-        <Grid item xs={12} sm={6}>
-          <TextField
-            variant="outlined"
-            label="Email"
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            fullWidth
-            required
-            className="contact-input"
-            error={Boolean(errors.email)}
-            helperText={errors.email}
-            autoComplete="email"
-            inputProps={{ inputMode: 'email' }}
-            InputLabelProps={{ shrink: true }}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            variant="outlined"
-            label="Phone (Optional)"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            fullWidth
-            className="contact-input"
-            error={Boolean(errors.phone)}
-            helperText={errors.phone}
-            autoComplete="tel"
-            inputProps={{ inputMode: 'tel' }}
-            InputLabelProps={{ shrink: true }}
-          />
-        </Grid>
-
-        {/* Message */}
-        <Grid item xs={12} className="message-grid">
-          <TextField
-            variant="outlined"
-            label="Message"
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            fullWidth
-            required
-            multiline
-            minRows={4}
-            className="contact-input"
-            error={Boolean(errors.message)}
-            helperText={
-              errors.message
-                ? errors.message
-                : <span className="char-counter">{`${formData.message.trim().length}/${MESSAGE_MAX} characters`}</span>
-            }
-            inputProps={{ maxLength: MESSAGE_MAX }}
-            InputLabelProps={{ shrink: true }}
-          />
-        </Grid>
-
-        {/* Consent (required) */}
-        <Grid item xs={12} className="consent-grid">
-          <div className="consent-row">
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={formData.okToContact}
-                  onChange={handleChange}
-                  name="okToContact"
-                  color="primary"
-                />
-              }
-              label="It's okay to contact me via email or text about this inquiry."
-            />
-          </div>
-          {errors.okToContact && (
-            <Typography variant="caption" color="error" className="consent-error">
-              {errors.okToContact}
-            </Typography>
-          )}
-        </Grid>
-
-        {/* Submit */}
-        <Grid item xs={12}>
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            className="contact-button"
-            disabled={loading || !isValid}
-          >
-            {loading ? <CircularProgress size={22} /> : 'Send Message'}
-          </Button>
-        </Grid>
-      </Grid>
-    </form>
-
-    {/* Success dialog with dynamic SLA */}
-    <Dialog open={open} onClose={handleCloseDialog}>
-      <DialogTitle sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-        <span
-          style={{
-            width: 28,
-            height: 28,
-            borderRadius: '50%',
-            display: 'inline-flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            background: '#22c55e',
-            color: '#fff',
-            fontWeight: 700,
-          }}
-          aria-hidden
-        >
-          ✓
-        </span>
-        Message sent
-      </DialogTitle>
-      <DialogContent>
-        <Typography variant="body1" sx={{ mb: 0.5 }}>
-          Thank you for reaching out! We’ll get back to you within {slaWindow(submittedCategory)}.
-        </Typography>
-        <Typography variant="body1">
-          In the meantime, feel free to explore our Artisan Shop.
-        </Typography>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={handleCloseDialog} color="primary">
-          Continue
-        </Button>
-      </DialogActions>
-    </Dialog>
-
-    <Snackbar
-      open={toast.open}
-      autoHideDuration={4000}
-      onClose={() => setToast((t) => ({ ...t, open: false }))}
-      anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-    >
-      <Alert
-        severity={toast.severity}
-        onClose={() => setToast((t) => ({ ...t, open: false }))}
-        variant="filled"
-        sx={{ width: '100%' }}
+      <form
+        onSubmit={handleSubmit}
+        className="contact-form-container"
+        noValidate
       >
-        {toast.msg}
-      </Alert>
-    </Snackbar>
-  </div>
-);
+        {/* Short intro (fits on one line) */}
+        <Typography
+          variant="subtitle1"
+          align="center"
+          className="contact-intro"
+        >
+          Questions, comments, feedback? Use this form to contact us.
+        </Typography>
+
+        {/* Honeypot (hidden) */}
+        <div className="hp-wrapper" aria-hidden>
+          <label htmlFor="company">Company</label>
+          <input
+            id="company"
+            name="company"
+            type="text"
+            autoComplete="organization"
+            tabIndex={-1}
+            value={formData.company}
+            onChange={handleChange}
+          />
+        </div>
+
+        <Grid container spacing={2}>
+          {/* Category */}
+          <Grid item xs={12}>
+            <FormControl
+              fullWidth
+              required
+              error={Boolean(errors.category)}
+              className="contact-dropdown"
+            >
+              <InputLabel id="category-label">Category</InputLabel>
+              <Select
+                labelId="category-label"
+                id="category"
+                name="category"
+                label="Category"
+                value={formData.category}
+                onChange={handleChange}
+                displayEmpty
+                renderValue={(selected) => {
+                  if (!selected) return <em>Select a category</em>;
+                  const item = inquiryCategories.find(
+                    (c) => c.value === selected
+                  );
+                  return item ? item.label : selected;
+                }}
+                inputProps={{
+                  'aria-describedby': errors.category
+                    ? 'category-helper'
+                    : undefined,
+                }}
+              >
+                <MenuItem value="">
+                  <em>Select a category</em>
+                </MenuItem>
+
+                {inquiryCategories.map((cat) => (
+                  <MenuItem
+                    key={cat.value}
+                    value={cat.value}
+                    className="contact-menu-item"
+                  >
+                    <ListItemText
+                      primary={cat.label}
+                      secondary={cat.desc}
+                      primaryTypographyProps={{
+                        noWrap: true,
+                        sx: { fontWeight: 600 },
+                      }}
+                      secondaryTypographyProps={{
+                        // always show, brighter, up to 2 lines
+                        sx: {
+                          color: 'rgba(183, 183, 183, 0.76)',
+                          display: 'block',
+                          whiteSpace: 'normal',
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                          display: '-webkit-box',
+                          WebkitLineClamp: 2,
+                          WebkitBoxOrient: 'vertical',
+                          lineHeight: 1.2,
+                          mt: 0.5,
+                          fontSize: '0.92rem',
+                        },
+                      }}
+                    />
+                  </MenuItem>
+                ))}
+              </Select>
+
+              {/* Description + SLA under select */}
+              {formData.category &&
+                (() => {
+                  const picked = inquiryCategories.find(
+                    (c) => c.value === formData.category
+                  );
+                  return (
+                    <>
+                      {picked?.desc && (
+                        <Typography
+                          variant="caption"
+                          sx={{ mt: 0.5, display: 'block', opacity: 0.85 }}
+                        >
+                          {picked.desc}
+                        </Typography>
+                      )}
+                      <Typography
+                        variant="caption"
+                        sx={{ mt: 0.25, display: 'block', opacity: 0.8 }}
+                      >
+                        {categorySLA[formData.category] ||
+                          'Typical Response: 1–2 business days.'}
+                      </Typography>
+                    </>
+                  );
+                })()}
+
+              {errors.category && (
+                <Typography
+                  id="category-helper"
+                  variant="caption"
+                  color="error"
+                  sx={{ mt: 0.5 }}
+                >
+                  {errors.category}
+                </Typography>
+              )}
+            </FormControl>
+          </Grid>
+
+          {/* First / Last */}
+          <Grid item xs={12} sm={6}>
+            <TextField
+              variant="outlined"
+              label="First Name"
+              name="first_name"
+              value={formData.first_name}
+              onChange={handleChange}
+              fullWidth
+              required
+              className="contact-input"
+              error={Boolean(errors.first_name)}
+              helperText={errors.first_name}
+              autoComplete="given-name"
+              inputProps={{ autoCapitalize: 'words' }}
+              InputLabelProps={{ shrink: true }}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              variant="outlined"
+              label="Last Name"
+              name="last_name"
+              value={formData.last_name}
+              onChange={handleChange}
+              fullWidth
+              required
+              className="contact-input"
+              error={Boolean(errors.last_name)}
+              helperText={errors.last_name}
+              autoComplete="family-name"
+              inputProps={{ autoCapitalize: 'words' }}
+              InputLabelProps={{ shrink: true }}
+            />
+          </Grid>
+
+          {/* Email / Phone */}
+          <Grid item xs={12} sm={6}>
+            <TextField
+              variant="outlined"
+              label="Email"
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              fullWidth
+              required
+              className="contact-input"
+              error={Boolean(errors.email)}
+              helperText={errors.email}
+              autoComplete="email"
+              inputProps={{ inputMode: 'email' }}
+              InputLabelProps={{ shrink: true }}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              variant="outlined"
+              label="Phone (Optional)"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              fullWidth
+              className="contact-input"
+              error={Boolean(errors.phone)}
+              helperText={errors.phone}
+              autoComplete="tel"
+              inputProps={{ inputMode: 'tel' }}
+              InputLabelProps={{ shrink: true }}
+            />
+          </Grid>
+
+          {/* Message */}
+          <Grid item xs={12} className="message-grid">
+    <TextField
+  variant="outlined"
+  label="Message"
+  name="message"
+  value={formData.message}
+  onChange={handleChange}
+  fullWidth
+  required
+  multiline
+  minRows={2}   // was 4
+  maxRows={4}   // optional: prevents it from expanding too tall
+  className="contact-input"
+  error={Boolean(errors.message)}
+  helperText={
+    errors.message
+      ? errors.message
+      : <span className="char-counter">{`${formData.message.trim().length}/${MESSAGE_MAX} characters`}</span>
+  }
+  inputProps={{ maxLength: MESSAGE_MAX }}
+  InputLabelProps={{ shrink: true }}
+/>
+          </Grid>
+
+          {/* Consent (required) */}
+          <Grid item xs={12} className="consent-grid">
+            <div className="consent-row">
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={formData.okToContact}
+                    onChange={handleChange}
+                    name="okToContact"
+                    color="primary"
+                  />
+                }
+                label="It's okay to contact me via email or text about this inquiry."
+              />
+            </div>
+            {errors.okToContact && (
+              <Typography
+                variant="caption"
+                color="error"
+                className="consent-error"
+              >
+                {errors.okToContact}
+              </Typography>
+            )}
+          </Grid>
+
+          {/* Submit */}
+          <Grid item xs={12}>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              className="contact-button"
+              disabled={loading || !isValid}
+            >
+              {loading ? <CircularProgress size={22} /> : 'Send Message'}
+            </Button>
+          </Grid>
+        </Grid>
+      </form>
+
+      {/* Success dialog with dynamic SLA */}
+      <Dialog open={open} onClose={handleCloseDialog}>
+        <DialogTitle sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+          <span
+            style={{
+              width: 28,
+              height: 28,
+              borderRadius: '50%',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              background: '#22c55e',
+              color: '#fff',
+              fontWeight: 700,
+            }}
+            aria-hidden
+          >
+            ✓
+          </span>
+          Message sent
+        </DialogTitle>
+        <DialogContent>
+          <Typography variant="body1" sx={{ mb: 0.5 }}>
+            Thank you for reaching out! We’ll get back to you within{' '}
+            {slaWindow(submittedCategory)}.
+          </Typography>
+          <Typography variant="body1">
+            In the meantime, feel free to explore our Artisan Shop.
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDialog} color="primary">
+            Continue
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Snackbar
+        open={toast.open}
+        autoHideDuration={4000}
+        onClose={() => setToast((t) => ({ ...t, open: false }))}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
+        <Alert
+          severity={toast.severity}
+          onClose={() => setToast((t) => ({ ...t, open: false }))}
+          variant="filled"
+          sx={{ width: '100%' }}
+        >
+          {toast.msg}
+        </Alert>
+      </Snackbar>
+    </div>
+  );
 };
 
 export default Contact;
