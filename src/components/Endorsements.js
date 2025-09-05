@@ -17,7 +17,7 @@ const Endorsements = () => {
 
       <div className="endorsements-tiers">
         {/* TIER 1 */}
-        <div className="tier-card legacy">
+        <div className="tier-card prestige">
           <div className="tier-ribbon">
             <div className="tier-title">
               <div>TIER 1</div>
