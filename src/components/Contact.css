@@ -28,13 +28,14 @@
 
 /* Intro copy inside card (short, single-line on desktop) */
 .contact-intro {
-  margin: 4px 8px 22px; /* extra breathing room above Category */
+  margin: 40px 8px 22px; /* extra breathing room above Category */
   opacity: 0.9;
   color: #e9e9e9;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: center;
+  padding-bottom: 30px;
 }
 
 /* Tighten grid rhythm */
@@ -206,6 +207,7 @@
   .contact-intro {
     color: #f1f1f1;
     opacity: .9;
+    font-size: smaller;
   }
 
   .contact-input .MuiOutlinedInput-root,
