@@ -83,8 +83,8 @@
   font-weight: bold;
 }
 
-.legacy { border-top: 4px solid #D4AF37; }
-.endorsed { border-top: 4px solid #C9C0BB; }
+.prestige { border-top: 4px solid #D4AF37; }
+.spotlight { border-top: 4px solid #C9C0BB; }
 .rising { border-top: 4px solid #B08D57; }
 
 .endorsements-cta {
