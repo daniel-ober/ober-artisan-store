@@ -7,6 +7,7 @@
   --sl-pills-cushion: 28px;          /* extra gap below the header */
   --sl-viewbar-h: 52px;              /* approx height of the pill bar */
   --sl-offset: calc(var(--sl-navbar) + var(--sl-pills-cushion) + var(--sl-viewbar-h));
+  --sl-pills-cushion: 0px;           /* was 28px */
 }
 
 /* Page */
@@ -31,7 +32,7 @@
 .sl-viewbar{
   position: sticky;
   position: -webkit-sticky;
-  top: calc(var(--sl-navbar) + var(--sl-pills-cushion)); /* sits below your fixed header */
+  top: calc(var(--sl-navbar) + var(--sl-pills-cushion)); /* single source of truth */
   z-index: 2500;
   display: flex;
   gap: 10px;
@@ -118,14 +119,6 @@
 }
 .sl-audio-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.25); border-color: rgba(255,255,255,0.14); background: rgba(255,255,255,0.06); }
 
-/* Legacy emphasis */
-.sl-audio-cell.legacy .sl-audio-tag { border-color: #ffcc00; background: rgba(255,204,0,.12); }
-.sl-audio-cell.legacy .sl-audio-card { border-color: rgba(255,204,0,.55); background: rgba(255,204,0,.08); box-shadow: 0 6px 24px rgba(255,204,0,.12); }
-.sl-audio-cell.legacy .sl-audio-card::before {
-  content: ""; position: absolute; inset: 0; border-radius: 14px;
-  box-shadow: inset 0 0 0 1px rgba(255,204,0,.45); pointer-events: none;
-}
-
 /* Row */
 .sl-audio-top { display: flex; align-items: center; gap: 12px; min-height: 40px; }
 
@@ -141,7 +134,6 @@
 .sl-icon { width: 26px; height: 26px; display: block; }
 .sl-audio-play:hover { transform: scale(1.08); filter: brightness(.98); }
 .sl-audio-play.playing { background: #ffcc00; border-color: #ffcc00; color: #000; }
-.sl-audio-cell.legacy .sl-audio-play { box-shadow: 0 0 0 2px #ffcc00 inset; }
 
 /* Meta */
 .sl-audio-meta { min-width: 0; flex: 1; }
@@ -175,13 +167,22 @@
 .fade-in-section.loading { opacity: 1; transform: none; }
 .fade-in-section.is-visible { opacity: 1; transform: none; }
 
+/* Hero video (desktop default) */
+.showroom-hero-video{
+  width:100%;
+  height:80vh;          /* match your hero image height */
+  object-fit:cover;
+  border-radius:16px;
+  display:block;
+}
+
 /* ===== Desktop tweaks ===== */
 @media (min-width: 1000px) {
   .sl-audio-play { width: 48px; height: 48px; }
   .sl-audio-play > svg, .sl-icon { width: 28px; height: 28px; }
 }
 
-/* ===== Mobile tweaks ===== */
+/* ===== Mobile tweaks (lightweight, non-breaking) ===== */
 @media (max-width: 600px) {
   :root {
     --sl-pills-cushion: 36px;       /* mobile headers are usually taller */
@@ -191,13 +192,37 @@
 
   html, body { margin: 0; width: 100%; overflow-x: hidden; }
   .soundlegend-showroom { padding: 0 0 60px; align-items: stretch; }
+
   .showroom-logo { max-width: 340px; margin: 26px auto 12px; }
-  .sl-viewbar { padding: 8px 10px; gap: 8px; }
+
+  /* .sl-viewbar { padding: 10px 10px; gap: 8px; } */
   .sl-pill { padding: 6px 10px; font-size: 11px; }
+
   .showroom-hero { margin: 0 auto 12px; border-radius: 8px; }
-  .showroom-story { padding: 18px; margin: 24px 12px; }
+  .showroom-hero-video { height: 52vh; border-radius: 8px; }  /* show more content above the fold */
+
+  .showroom-story { padding: 18px; margin: 20px 12px; }
   .showroom-story-content { font-size: 18px; line-height: 1.7; }
 
-  .showroom-gallery { padding: 0; margin: 24px 0; width: 100%; max-width: 100%; }
+  .sl-audio-section { max-width: 100%; padding: 0 12px; margin: 18px auto 28px; }
+  .sl-audio-grid { grid-template-columns: 1fr; gap: 12px; }
+  .sl-audio-card { padding: 10px 10px 12px; border-radius: 12px; }
+
+  .showroom-gallery { padding: 0 12px; margin: 22px 0; width: 100%; max-width: 100%; }
   .gallery-grid { grid-template-columns: 1fr; gap: 12px; margin: 0; }
+
+  .showroom-legacy { max-width: 100%; padding: 22px 16px; margin: 22px 12px; font-size: 16px; line-height: 1.7; text-align: left; }
+
+  .showroom-cta { padding: 0 12px; margin: 8px 0 24px; }
+  .cta-button { display: block; width: 100%; text-align: left; padding: 16px 18px; font-size: 18px; border-radius: 12px; }
 }
+
+/* Tiny screens */
+@media (max-width: 360px){
+  .sl-pill{ letter-spacing: .06em; }
+  .sl-audio-title{ letter-spacing: .04em; }
+}
+
+/* Minor spacing polish */
+.artist-name{ margin-bottom: .35rem; }
+.legacy-subtitle{ margin-bottom: 1.1rem; opacity: .9; }
