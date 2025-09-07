@@ -1,144 +1,493 @@
-.soundlegend-signin {
-    min-height: 100vh;
-    background: linear-gradient(to bottom right, #0f0f0fb6, #1c1c1c);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    color: #ffffff;
-    padding: 6vh 1.5rem 2rem;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-  
-  .signin-logo-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 2vh;
-    margin-bottom: 2rem;
-    width: 100%;
-  }
-  
-  .signin-logo {
-    max-width: 300px;
-    width: 90%;
-    height: auto;
-    filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.6));
-  }
-  
-  .soundlegend-signin form {
-    background: rgba(26, 26, 26, 0.7);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    padding: 2rem 1.75rem;
-    border-radius: 12px;
-    box-shadow: 0 0 24px rgba(0, 0, 0, 0.6);
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 320px; /* tightened */
-    margin: 0 auto;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-  }
-  
-  .soundlegend-signin input {
-    padding: 0.75rem 1rem;
-    margin-bottom: 1.1rem;
-    border: none;
-    border-radius: 6px;
-    background-color: #2a2a2a;
-    color: #fff;
-    font-size: 1rem;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  
-  .soundlegend-signin input::placeholder {
-    color: #bbbbbb;
-  }
-  
-  .soundlegend-signin input:focus {
-    outline: 2px solid #666;
-    background-color: #333;
-  }
-  
-  .soundlegend-signin button {
-    padding: 0.75rem;
-    background-color: #0070f3;
-    color: #fff;
-    font-size: 1rem;
-    font-weight: 600;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    width: 100%;
-  }
-  
-  .soundlegend-signin button:hover {
-    background-color: #005ac1;
-  }
-  
-  .soundlegend-signin .error {
-    color: #ff5f5f;
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
-    text-align: center;
-  }
+:root {
+  --sl-bg-start: #0b0b0f;
+  --sl-bg-end: #17171b;
+  --sl-card: rgba(20, 20, 22, 0.78);
+  --sl-border: rgba(255, 255, 255, 0.08);
+  --sl-text: #ffffff;
+  --sl-muted: #bdbdbd;
+  --sl-muted-2: #9a9a9a;
+  --sl-link: #58aaff;
+  --sl-link-hover: #0070f3;
+  --sl-gold: #ffd700;
+  --sl-gold-warm: #e3b200;
+  --sl-error: #ff6b6b;
+  --sl-info: #8ecbff;
+  --sl-warn: #f7c04a;
+  --sl-focus: #7a7a7a;
+}
 
-  .signin-info {
-    color: #ccc;
-    font-size: 0.9rem;
-    max-width: 360px;
-    margin-top: 1.75rem;
-    text-align: center;
-    line-height: 1.6;
+/* Background */
+.soundlegend-signin {
+  position: relative;
+  min-height: 100vh;
+  background: linear-gradient(
+    to bottom right,
+    var(--sl-bg-start),
+    var(--sl-bg-end)
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--sl-text);
+  padding: 6vh 1.5rem 3rem;
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Helvetica,
+    Arial,
+    'Apple Color Emoji',
+    'Segoe UI Emoji';
+}
+.soundlegend-signin::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(
+      1200px 600px at 50% 30%,
+      rgba(0, 0, 0, 0.35),
+      transparent 60%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.35),
+      rgba(0, 0, 0, 0.15) 35%,
+      rgba(0, 0, 0, 0.35)
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+.signin-logo-container,
+.signin-hero,
+.signin-card,
+.signin-info {
+  z-index: 1;
+}
+
+.signin-logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1vh;
+  margin-bottom: 1.1rem;
+  width: 100%;
+}
+.signin-logo {
+  max-width: 280px;
+  width: 88%;
+  height: auto;
+  filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.6));
+}
+
+/* Hero + divider */
+.signin-hero {
+  position: relative;
+  text-align: center;
+  max-width: 720px;
+  /* margin: 0 auto 1.75rem; */
+  padding: 0 0.5rem 1.25rem;
+}
+.signin-hero::after {
+  content: '';
+  display: block;
+  width: min(520px, 72%);
+  height: 1px;
+  margin: 0.9rem auto 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.22),
+    transparent
+  );
+  border-radius: 1px;
+}
+.signin-subtitle {
+  color: var(--sl-muted);
+  font-size: 0.98rem;
+  line-height: 1.6;
+  margin: 0 auto;
+  max-width: 56ch;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.45);
+}
+
+/* Card */
+.signin-card {
+  background: var(--sl-card);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 1.4rem 1.5rem 1.2rem; /* slightly tighter since labels removed */
+  border-radius: 18px;
+  box-shadow:
+    0 18px 44px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  width: 100%;
+  max-width: 380px;
+  margin: 1rem auto 0;
+  border: 1px solid var(--sl-border);
+}
+
+/* Field wrapper to space controls evenly */
+.field {
+  margin-bottom: 0.9rem;
+}
+
+/* Inputs */
+.signin-card input {
+  padding: 0.95rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  background-color: #1f1f22;
+  color: #fff;
+  font-size: 1.02rem;
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease;
+}
+.signin-card input::placeholder {
+  color: #bfbfbf;
+}
+.signin-card input:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.22);
+  background-color: #26262a;
+}
+
+/* Autofill fix */
+.signin-card input:-webkit-autofill,
+.signin-card input:-webkit-autofill:hover,
+.signin-card input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #fff !important;
+  -webkit-box-shadow: 0 0 0 50px #1f1f22 inset !important;
+  box-shadow: 0 0 0 50px #1f1f22 inset !important;
+  caret-color: #fff !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+/* Show/Hide toggle */
+.pw-wrapper {
+  position: relative;
+}
+.pw-toggle {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--sl-muted);
+  font-size: 0.8rem;
+  border-radius: 999px;
+  padding: 4px 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.pw-toggle:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.24);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Alerts */
+.alert {
+  margin: 0.25rem 0 0.75rem 0;
+  font-size: 0.92rem;
+  line-height: 1.4;
+  text-align: center;
+}
+.alert.error {
+  color: var(--sl-error);
+}
+.alert.info {
+  color: var(--sl-info);
+}
+.alert.warn {
+  color: var(--sl-warn);
+}
+
+/* Row (checkbox + optional forgot) */
+.signin-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin: 0.25rem 0 0.9rem 0;
+}
+
+/* Custom checkbox */
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--sl-muted);
+  font-size: 0.92rem;
+  cursor: pointer;
+  user-select: none;
+}
+.checkbox input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.checkbox-box {
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: #1c1c20;
+  display: grid;
+  place-items: center;
+  transition: all 0.15s ease;
+  color: #0a0a0a;
+}
+.checkbox-check {
+  width: 14px;
+  height: 14px;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+.checkbox:hover .checkbox-box {
+  border-color: rgba(255, 255, 255, 0.35);
+}
+.checkbox input:focus-visible + .checkbox-box {
+  outline: 2px solid rgba(255, 255, 255, 0.35);
+  outline-offset: 2px;
+}
+.checkbox input:checked + .checkbox-box {
+  background: linear-gradient(135deg, var(--sl-gold), var(--sl-gold-warm));
+  border-color: transparent;
+  color: #1b1b1b;
+}
+.checkbox input:checked + .checkbox-box .checkbox-check {
+  opacity: 1;
+}
+.checkbox-label {
+  color: var(--sl-muted);
+}
+
+/* Primary button */
+.btn-primary {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.9rem 1rem;
+  width: 100%;
+  background: linear-gradient(135deg, var(--sl-gold), var(--sl-gold-warm));
+  color: #1b1b1b;
+  font-size: 1rem;
+  font-weight: 800;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition:
+    transform 0.06s ease,
+    box-shadow 0.2s ease;
+  box-shadow: 0 10px 30px rgba(255, 215, 0, 0.22);
+}
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 18px 40px rgba(255, 215, 0, 0.32);
+}
+.btn-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Spinner */
+.spinner {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  margin-right: 8px;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-top-color: rgba(0, 0, 0, 0.6);
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
-  
-  .signin-info a {
-    color: #58aaff;
-    text-decoration: underline;
-    transition: color 0.2s ease;
+}
+
+/* CTA under the form */
+.signin-aux {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 0.9rem;
+  flex-wrap: wrap;
+}
+.join-block {
+  margin-top: 1rem;
+  text-align: center;
+  line-height: 1.5;
+}
+.join-question {
+  display: block;
+  color: var(--sl-muted);
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+}
+.link-gold {
+  color: var(--sl-gold);
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+.link-gold:hover {
+  color: var(--sl-gold-warm);
+}
+.join-link {
+  display: inline-block;
+  font-weight: 600;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+/* Scoped join text */
+.soundlegend-signin .join-text {
+  font-size: 0.85rem; /* smaller font than before */
+  color: var(--sl-muted);
+}
+
+.soundlegend-signin .join-text .join-link {
+  font-size: 0.9rem;  /* slightly larger than body text */
+  font-weight: 600;
+  color: var(--sl-gold);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+}
+
+.soundlegend-signin .join-text .join-link:hover {
+  color: var(--sl-gold-warm);
+}
+
+/* Info block */
+.signin-info {
+  color: #ccc;
+  font-size: 0.95rem;
+  max-width: 460px;
+  margin-top: 1.6rem;
+  text-align: center;
+  line-height: 1.7;
+}
+.signin-info ul {
+  margin-top: 0.5rem;
+  padding-left: 1.2rem;
+  text-align: left;
+  list-style: disc;
+  color: #aaa;
+}
+.signin-info li {
+  margin-bottom: 0.45rem;
+}
+.trust-note {
+  margin-top: 0.9rem;
+  color: var(--sl-muted);
+  font-size: 0.9rem;
+}
+.support-row {
+  margin-top: 0.35rem;
+  color: var(--sl-muted-2);
+  font-size: 0.9rem;
+}
+.support-row a {
+  color: var(--sl-link);
+}
+.support-row a:hover {
+  color: var(--sl-link-hover);
+}
+
+/* --- Hard reset hero block to kill the white rectangle --- */
+.soundlegend-signin .signin-hero,
+.soundlegend-signin .signin-hero * {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+}
+
+/* In case another stylesheet injects a pseudo-element background */
+.soundlegend-signin .signin-hero::before {
+  content: none !important;
+  display: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+}
+
+/* Keep our thin divider only (from ::after) */
+.soundlegend-signin .signin-hero::after {
+  content: '';
+  display: block;
+  width: min(520px, 72%);
+  height: 1px;
+  margin: 0.9rem auto 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.22),
+    transparent
+  );
+  border-radius: 1px;
+}
+
+/* Ensure stacking is above any site-wide header bg layers */
+.soundlegend-signin .signin-hero {
+  position: relative;
+  z-index: 1;
+}
+
+/* Center the remember me row */
+.soundlegend-signin .signin-row {
+  justify-content: center; /* center instead of space-between */
+  margin: 0.5rem 0 1rem;
+}
+
+/* Center the custom checkbox label text */
+.soundlegend-signin .checkbox-label {
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+/* Center and tighten the "What you'll access" list */
+.soundlegend-signin .signin-info ul {
+  margin-top: 0.75rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.2rem; /* keep bullets visible */
+  list-style-position: inside; /* center-align bullets */
+  max-width: 360px; /* tighter block */
+}
+
+.soundlegend-signin .signin-info li {
+  margin-bottom: 0.35rem;
+  text-align: center; /* center-align text */
+  font-size: 0.95rem;
+}
+
+/* Smaller join link text */
+.soundlegend-signin .join-link {
+  font-size: 0.88rem;
+  font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .soundlegend-signin {
+    padding: 6vh 1rem 3rem;
   }
-  
-  .signin-info a:hover {
-    color: #0070f3;
+  .signin-logo {
+    max-width: 200px;
   }
-  
-  .signin-info ul {
-    margin-top: 0.5rem;
-    padding-left: 1.2rem;
-    text-align: left;
-    list-style: disc;
-    color: #aaa;
+  .signin-card {
+    padding: 1.3rem 1rem 1.05rem;
+    max-width: 380px;
   }
-  
-  .signin-info li {
-    margin-bottom: 0.5rem;
-  }
-  
-  /* Responsive Tuning */
-  @media (max-width: 480px) {
-    .soundlegend-signin {
-      padding-top: 6vh;
-      padding-left: 1rem;
-      padding-right: 1rem;
-      padding-bottom: 3rem;
-    }
-  
-    .signin-logo {
-      max-width: 200px;
-    }
-  
-    .soundlegend-signin form {
-      padding: 1.5rem 1rem;
-      width: 100%;
-      max-width: 320px;
-      margin: 0 auto 2rem auto;
-    }
-  
-    .soundlegend-signin input,
-    .soundlegend-signin button {
-      font-size: 0.95rem;
-    }
-  }
+}

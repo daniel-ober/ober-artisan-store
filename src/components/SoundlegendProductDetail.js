@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { db } from '../firebaseConfig';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import {
@@ -12,244 +12,246 @@ import {
 import { collection, addDoc, Timestamp } from 'firebase/firestore';
 import './SoundlegendProductDetail.css';
 
-/* ---------- Minimal inline 360 viewer (no external libs) ---------- */
-const InlineFrame360 = ({
-  totalFrames = 480, // set to your exact count
-  basePath = '/soundlegend360/med', // where frame_001.webp ... live (public/)
-  prefix = 'frame_',
-  pad = 3,
-  ext = 'webp',
-  fps = 30,
-  dragSensitivity = 0.25,
-}) => {
-  const [loaded, setLoaded] = React.useState(0);
-  const [isPlaying, setIsPlaying] = React.useState(true);
-  const [frame, setFrame] = React.useState(0);
-  const imgsRef = React.useRef([]);
-  const rafRef = React.useRef(null);
-  const lastTsRef = React.useRef(0);
-  const draggingRef = React.useRef(false);
-  const lastXRef = React.useRef(0);
-
-  const urlFor = React.useCallback(
-    (i) => {
-      const n = String(i + 1).padStart(pad, '0');
-      return `${basePath}/${prefix}${n}.${ext}`;
-    },
-    [basePath, prefix, pad, ext]
-  );
-
-  // Preload frames once
-  React.useEffect(() => {
-    imgsRef.current = Array.from({ length: totalFrames }, (_, i) => {
-      const img = new Image();
-      img.decoding = 'async';
-      img.loading = 'eager';
-      img.src = urlFor(i);
-      img.onload = () => setLoaded((v) => v + 1);
-      return img;
-    });
-    return () => {
-      imgsRef.current = [];
-    };
-  }, [totalFrames, urlFor]);
-
-  // Autoplay
-  React.useEffect(() => {
-    const tick = (ts) => {
-      if (!isPlaying) return;
-      const ft = 1000 / fps;
-      const delta = ts - (lastTsRef.current || ts);
-      if (delta >= ft) {
-        lastTsRef.current = ts;
-        setFrame((f) => (f + 1) % totalFrames);
-      }
-      rafRef.current = requestAnimationFrame(tick);
-    };
-    if (isPlaying && loaded > 0) {
-      lastTsRef.current = 0;
-      rafRef.current = requestAnimationFrame(tick);
-    }
-    return () => rafRef.current && cancelAnimationFrame(rafRef.current);
-  }, [isPlaying, fps, loaded, totalFrames]);
-
-  // Drag to scrub
-  const onDown = (e) => {
-    draggingRef.current = true;
-    lastXRef.current = e.clientX ?? e.touches?.[0]?.clientX ?? 0;
-    setIsPlaying(false);
+/* ================= Inline Icons (no external deps) ================= */
+const Icon = ({ name, size = 22 }) => {
+  const common = {
+    width: size, height: size, viewBox: '0 0 24 24',
+    fill: 'none', stroke: 'currentColor', strokeWidth: 1.8,
+    strokeLinecap: 'round', strokeLinejoin: 'round'
   };
-  const onMove = (e) => {
-    if (!draggingRef.current) return;
-    const x = e.clientX ?? e.touches?.[0]?.clientX ?? lastXRef.current;
-    const dx = x - lastXRef.current;
-    lastXRef.current = x;
-    if (Math.abs(dx) < 0.01) return;
-    const step = Math.round(-dx * dragSensitivity);
-    if (step) {
-      setFrame((f) => {
-        let nf = (f + step) % totalFrames;
-        if (nf < 0) nf += totalFrames;
-        return nf;
-      });
-    }
-  };
-  const onUp = () => {
-    draggingRef.current = false;
-  };
-
-  const pct = Math.round((loaded / totalFrames) * 100);
-  const src = imgsRef.current[frame]?.src || urlFor(0); // never black
-
-  return (
-    <div
-      className="sl360-stage"
-      onMouseDown={onDown}
-      onMouseMove={onMove}
-      onMouseUp={onUp}
-      onMouseLeave={onUp}
-      onTouchStart={onDown}
-      onTouchMove={onMove}
-      onTouchEnd={onUp}
-      role="img"
-      aria-label="360 degree product viewer"
-      tabIndex={0}
-    >
-      <img src={src} alt="SoundLegend 360 view" draggable={false} />
-      {loaded < totalFrames && (
-        <div className="sl360-loader">
-          <div className="sl360-bar">
-            <div style={{ width: `${pct}%` }} />
-          </div>
-          <span>Loading {pct}%</span>
-        </div>
-      )}
-      <div className="sl360-controls">
-        {/* <button type="button" onClick={() => setIsPlaying((p) => !p)}>
-          {isPlaying ? 'Pause' : 'Play'}
-        </button> */}
-        <span className="sl360-hint">Drag to rotate</span>
-      </div>
-    </div>
-  );
+  switch (name) {
+    case 'phone':
+      return <svg {...common}><path d="M22 16.92v3a2 2 0 0 1-2.18 2c-3.19-.35-6.18-1.86-8.47-4.15S7 12.37 6.64 9.18A2 2 0 0 1 8.63 7h3a1 1 0 0 1 1 .76l.57 2.3a1 1 0 0 1-.29.98l-1.27 1.27a12 12 0 0 0 4.15 4.15l1.27-1.27a1 1 0 0 1 .98-.29l2.3.57a1 1 0 0 1 .76 1z"/></svg>;
+    case 'pen':
+      return <svg {...common}><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>;
+    case 'music':
+      return <svg {...common}><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>;
+    case 'mockup':
+      return <svg {...common}><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 15l5-5 4 4 3-3 6 6"/></svg>;
+    case 'portal':
+      return <svg {...common}><circle cx="12" cy="12" r="3"/><path d="M2 12a10 6 0 0 1 20 0"/><path d="M2 12a10 6 0 0 0 20 0"/></svg>;
+    case 'vault':
+      return <svg {...common}><path d="M4 7h16a2 2 0 0 1 2 2v8H2V9a2 2 0 0 1 2-2z"/><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M8 10h8"/><circle cx="16" cy="13" r="2"/></svg>;
+    case 'box':
+      return <svg {...common}><path d="M21 16V8a2 2 0 0 0-1-1.73L13 2.27a2 2 0 0 0-2 0L4 6.27A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.3 7L12 12l8.7-5M12 22V12"/></svg>;
+    case 'award': // premium bullet
+      return <svg {...common}><circle cx="12" cy="8" r="4"/><path d="M15 11l2 9-5-3-5 3 2-9"/></svg>;
+    case 'laurel': // subtle classy mark for “Artist-first”
+      return <svg {...common}><path d="M8 4c-2 2-3 5-3 8M6 20c1-1 2-3 2-5M16 4c2 2 3 5 3 8M18 20c-1-1-2-3-2-5"/></svg>;
+    default:
+      return null;
+  }
 };
-/* ------------------------------------------------------------------ */
+
+/* ================= Steps data (with extras) ================= */
+const steps = [
+  {
+    id: 1,
+    key: 'phone',
+    title: 'Consultation',
+    blurb:
+      "A relaxed one-on-one with Dan to understand your music, touch, and the exact voice you want this snare to have.",
+    bullets: [
+      'Goals, genres, feel, and tuning preferences',
+      'References you love: records, players, tones',
+      'Sensitivity, rimshot feel, ergonomics',
+    ],
+  },
+  {
+    id: 2,
+    key: 'pen',
+    title: 'Build Proposal',
+    blurb:
+      'We finalize specs together in a clear, sign-off ready proposal—secure and professional from start to finish.',
+    bullets: [
+      'Size, shell construction, bearing edges, beds',
+      'Lugs, hoops, throw-off, hardware finish',
+      'Finish direction and badge treatment',
+    ],
+    signwell: true, // show Powered by SignWell
+  },
+  {
+    id: 3,
+    key: 'music',
+    title: 'Tone-Matched Wood',
+    blurb:
+      'Boards are hand-selected for grain, density, and character that will actually sing for you.',
+    bullets: [
+      'Curate boards that “speak” to your legacy',
+      'Match stiffness/weight to your desired voice',
+      'Photographed + documented selection',
+    ],
+  },
+  {
+    id: 4,
+    key: 'mockup',
+    title: 'Early Mockups',
+    blurb:
+      'High-resolution mockups using the <b>actual wood</b> chosen for your shell—see it before we shape it.',
+    bullets: [
+      'Raw-shell visuals with accurate grain',
+      'Finish previews and layout options',
+      'Iterate quickly before we commit',
+    ],
+    mockImages: [
+      // replace with your own mockup URLs any time
+      'https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=800&q=60',
+      'https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?auto=format&fit=crop&w=800&q=60',
+    ],
+  },
+  {
+    id: 5,
+    key: 'portal',
+    title: 'SoundLegend Portal',
+    blurb:
+      'Follow progress in a private portal—updates, photos, notes, and milestones as your snare comes to life.',
+    bullets: [
+      'Mobile-friendly build timeline',
+      'Behind-the-scenes media drops',
+      'Direct line to Dan throughout the build',
+    ],
+    portalSignin: '/soundlegends/signin',
+  },
+  {
+    id: 6,
+    key: 'vault',
+    title: 'Legacy Vault',
+    blurb:
+      'Your finished instrument gets its own page—artist story, specs, gallery, and sound samples—your legacy, preserved.',
+    bullets: [
+      'Permanent page with photos, specs, audio',
+      'Searchable and shareable for future fans',
+      'A living archive of your sound',
+    ],
+    cta: { label: 'Explore the Vault', to: '/artisan-shop/soundlegend/vault' },
+  },
+  {
+    id: 7,
+    key: 'box',
+    title: 'Ship — Tuned for Legacy',
+    blurb:
+      'Your snare leaves the bench dialed to its most natural voice—ready to record, inspire, and stand the test of time.',
+    bullets: [
+      'Final fine-voicing and torch-tune',
+      'Heads installed, seated, and ready to play',
+      'Packed with care and insured shipment',
+      'SoundLegend gift item',
+      'Resonance Analysis mini-report',
+    ],
+  },
+];
 
 const SoundLegendProductDetail = () => {
   const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-
-  // Phone: digits-only while typing; dashed on blur
+  const [lastName, setLastName]   = useState('');
+  const [email, setEmail]         = useState('');
   const [phoneDigits, setPhoneDigits] = useState('');
   const [phoneFocused, setPhoneFocused] = useState(false);
-
   const [open, setOpen] = useState(false);
-
-  // (kept from your original state — not shown in the form here)
-  const [size, setSize] = useState('14');
-  const [depth, setDepth] = useState('6.5');
-  const [shellConstruction, setShellConstruction] = useState('Stave');
-  const [woodSpecies, setWoodSpecies] = useState('Maple');
-  const [snareBedDepth, setSnareBedDepth] = useState('Medium');
-  const [consultationDate, setConsultationDate] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // schema continuity
+  const [size] = useState('14');
+  const [depth] = useState('6.5');
+  const [shellConstruction] = useState('Stave');
+  const [woodSpecies] = useState('Maple');
+  const [snareBedDepth] = useState('Medium');
+  const [consultationDate] = useState('');
+
+  const [activeStep, setActiveStep] = useState(0);
+  const railRef = useRef(null);
+
+  // mockup modal
+  const [mockOpen, setMockOpen] = useState(false);
+  const [mockSrc, setMockSrc] = useState('');
 
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
-    const scrollContainer =
+    const el =
       document.querySelector('.soundlegend-product-detail') ||
-      document.documentElement ||
-      document.body;
-    scrollContainer.scrollTo({ top: 0, behavior: 'auto' });
+      document.documentElement;
+    el.scrollTo({ top: 0, behavior: 'auto' });
+  }, [location]);
+
+  // keyboard nav
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === 'ArrowRight') setActiveStep((s) => Math.min(s + 1, steps.length - 1));
+      if (e.key === 'ArrowLeft')  setActiveStep((s) => Math.max(s - 1, 0));
+      if (e.key === 'Escape')     setMockOpen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
   }, []);
+
+  // keep active node centered when scrolling
+  useEffect(() => {
+    const rail = railRef.current;
+    if (!rail) return;
+    const node = rail.querySelector(`[data-step="${activeStep}"]`);
+    if (!node) return;
+    const railRect = rail.getBoundingClientRect();
+    const nodeRect = node.getBoundingClientRect();
+    const delta = nodeRect.left - (railRect.left + railRect.width / 2 - nodeRect.width / 2);
+    rail.scrollBy({ left: delta, behavior: 'smooth' });
+  }, [activeStep]);
 
   const handleClose = () => {
     setOpen(false);
     setTimeout(() => navigate('/artisan-shop'), 200);
   };
 
-  // ---------- helpers ----------
+  // helpers
   const onlyDigits = (s = '') => s.replace(/\D/g, '').slice(0, 10);
   const formatDashed = (d) => {
     if (!d) return '';
-    if (d.length >= 6) return `${d.slice(0, 3)}-${d.slice(3, 6)}-${d.slice(6)}`;
-    if (d.length >= 3) return `${d.slice(0, 3)}-${d.slice(3)}`;
+    if (d.length >= 6) return `${d.slice(0,3)}-${d.slice(3,6)}-${d.slice(6)}`;
+    if (d.length >= 3) return `${d.slice(0,3)}-${d.slice(3)}`;
     return d;
   };
   const isPhoneValid = phoneDigits.length === 10;
-  const isEmailFormat = (val) =>
-    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((val || '').trim());
+  const isEmailFormat = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((v||'').trim());
 
-  // Validate visible fields (add more keys here if you add more inputs)
   const validate = () => {
     const missing = [];
     if (!firstName.trim()) missing.push('First Name');
-    if (!lastName.trim()) missing.push('Last Name');
-    if (!email.trim()) missing.push('Email');
-    if (!phoneDigits) missing.push('Phone');
-
+    if (!lastName.trim())  missing.push('Last Name');
+    if (!email.trim())     missing.push('Email');
+    if (!phoneDigits)      missing.push('Phone');
     const issues = [];
     if (email && !isEmailFormat(email)) issues.push('Valid Email');
-    if (phoneDigits && !isPhoneValid) issues.push('Valid 10-digit Phone');
-
+    if (phoneDigits && !isPhoneValid)   issues.push('Valid 10-digit Phone');
     return { missing, issues };
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const { missing, issues } = validate();
     if (missing.length || issues.length) {
       const lines = [];
       if (missing.length) lines.push(`Missing required: ${missing.join(', ')}`);
-      if (issues.length) lines.push(`Please fix: ${issues.join(', ')}`);
+      if (issues.length)  lines.push(`Please fix: ${issues.join(', ')}`);
       alert(lines.join('\n'));
-      return; // stop submission
+      return;
     }
 
     setIsSubmitting(true);
-
     try {
-      const dashed = formatDashed(phoneDigits); // "123-456-7890"
-      const phonePretty = `+1 ${dashed}`; // "+1 123-456-7890"
-      const phoneE164 = `+1${phoneDigits}`; // "+11234567890" (handy for querying)
-
-      const submissionData = {
-        firstName,
-        lastName,
-        email,
-        phone: phonePretty,
-        phoneE164,
-        size,
-        depth,
-        shellConstruction,
-        woodSpecies,
-        snareBedDepth,
-        consultationDate,
-        status: 'New',
-        submittedAt: Timestamp.now(),
-      };
-
-      await addDoc(collection(db, 'soundlegend_submissions'), submissionData);
-      await new Promise((r) => setTimeout(r, 700));
+      const dashed = formatDashed(phoneDigits);
+      const phonePretty = `+1 ${dashed}`;
+      const phoneE164 = `+1${phoneDigits}`;
+      await addDoc(collection(db, 'soundlegend_submissions'), {
+        firstName, lastName, email, phone: phonePretty, phoneE164,
+        size, depth, shellConstruction, woodSpecies, snareBedDepth, consultationDate,
+        status: 'New', submittedAt: Timestamp.now(),
+      });
+      await new Promise((r) => setTimeout(r, 500));
       setOpen(true);
-
-      // resets
-      setFirstName('');
-      setLastName('');
-      setEmail('');
-      setPhoneDigits('');
-      setSize('14');
-      setDepth('6.5');
-      setShellConstruction('Stave');
-      setWoodSpecies('Maple');
-      setSnareBedDepth('Medium');
-      setConsultationDate('');
-    } catch (error) {
-      console.error('Error submitting form:', error);
+      setFirstName(''); setLastName(''); setEmail(''); setPhoneDigits('');
+    } catch (err) {
+      console.error('Error submitting form:', err);
       alert('Submission failed. Please try again later.');
     } finally {
       setIsSubmitting(false);
@@ -258,61 +260,217 @@ const SoundLegendProductDetail = () => {
 
   return (
     <div className="soundlegend-product-detail">
+      {/* Brand */}
       <img
         src="/resized-logos/soundlegend-white.png"
         alt="SOUNDLEGEND Series"
         className="soundlegend-header-image"
       />
 
-      <div className="soundlegend-product-content">
-        {/* LEFT: Static hero image instead of 360 viewer */}
-        <div className="soundlegend-product-image">
-          <img
-            src="https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/soundlegend_showroom%2FSL-001%2Fgallery%2F0-IMG_1803.jpg?alt=media&token=f84c86d4-f111-4156-87c7-3b5e5992df28"
-            alt="SoundLegend Snare Hero"
-            className="soundlegend-hero-img"
-          />
-
-          <h2 className="sl-header-section">
-            Build Your Custom SoundLegend Snare
-          </h2>
-          <div className="sl-desc-section">
-            Your sound is unique—your snare should be too. The{' '}
-            <strong>SoundLegend Series</strong> is a fully custom, handcrafted
-            drum built to bring your artistic vision to life.
-            <p>
-              In a one-on-one collaboration with{' '}
-              <strong>Ober Artisan founder, Dan Ober</strong>, you'll design a
-              snare drum that reflects your playing style and sonic identity.
-            </p>
-            <p>
-              With high-resolution concept renderings, VIP access to
-              behind-the-scenes content, and a personal consultation, you'll see
-              your dream snare come to life before it even hits the workbench.
-            </p>
-            <p>
-              This isn’t about picking from a catalog—it’s about crafting a
-              one-of-a-kind snare that’s truly yours.
-            </p>
-            <div className="slogan">Your Story. Your Sound. Your Legacy.</div>
+      {/* HERO */}
+      <div className="sl-hero-grid">
+        <div className="sl-hero-media">
+          <div className="sl-hero-frame">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/soundlegend_showroom%2FSL-001%2Fgallery%2F0-IMG_1803.jpg?alt=media&token=f84c86d4-f111-4156-87c7-3b5e5992df28"
+              alt="SoundLegend Snare — hero"
+              className="soundlegend-hero-img"
+            />
           </div>
         </div>
 
-        {/* RIGHT: features + form stays unchanged */}
-        <div className="soundlegend-product-options">
-          <div className="soundlegend-features">
-            <h2>Key Features</h2>
+        <div className="sl-hero-copy">
+          <h1 className="sl-title">Build Your Custom SoundLegend Snare</h1>
+          <p className="sl-lede">
+            Your sound is unique—your snare should be too. The
+            <strong> SoundLegend Series</strong> is a fully custom, handcrafted
+            instrument that brings your artistic vision to life.
+          </p>
+          <p>
+            In a one-on-one collaboration with <strong>Dan Ober</strong>, you’ll
+            design a snare that reflects your playing style and sonic identity.
+          </p>
+          <p>
+            With high-resolution concept renders, VIP progress access, and a personal
+            consultation, you’ll see your dream snare long before the final polish.
+          </p>
+
+          {/* Key Features now live here, with the description */}
+          <div className="sl-keyfeatures">
+            <h3>What’s Included</h3>
             <ul>
-              <li>Custom Handcrafted Snare Drum</li>
-              <li>Collaborate directly with Artisan, Dan Ober</li>
-              <li>High-Resolution Mockup Renders</li>
-              <li>Behind-the-scenes access</li>
-              <li>Limited Edition gift item</li>
-              <li>Builds starting at $1499</li>
+              <li>Direct collaboration with Dan Ober</li>
+              <li>High-resolution design mockups</li>
+              <li>Private SoundLegend Portal access</li>
+              <li>Legacy Vault artist page</li>
+              <li>Limited-edition gift item</li>
+              <li>Builds starting at $1,499</li>
             </ul>
           </div>
 
-          <div className="customer-header">Customer Information</div>
+          <p className="sl-closer">Your story. Your sound. Your legacy.</p>
+        </div>
+      </div>
+
+      {/* === TRUST BAND (fills the hero → experience gap) === */}
+      <section className="sl-trustband" aria-label="Assurances">
+        <div className="tb-item">
+          <span className="tb-icon"><Icon name="laurel" size={22} /></span>
+          <span className="tb-text">Artist-first, boutique service</span>
+        </div>
+
+        <div className="tb-item">
+          <span className="tb-icon">🇺🇸</span>
+          <span className="tb-text">Handcrafted in Nashville, TN</span>
+        </div>
+
+        <div className="tb-item">
+          <span className="tb-icon">🎧</span>
+          <span className="tb-text">
+            Legacy Tuning™ voicing
+            <span className="sl-info" title="A final tuning pass to reveal the drum’s most natural, resonant voice—balanced for response, feel, and overtones.">i</span>
+          </span>
+        </div>
+
+        <div className="tb-item">
+          <img className="tb-badge" src="/logos/signwell-logo.svg" alt="SignWell" />
+          <span className="tb-text">Secure e-signing powered by SignWell</span>
+        </div>
+
+        <div className="tb-item">
+          <img className="tb-badge" src="/logos/klarna-logo.png" alt="Klarna" />
+          <span className="tb-text">Flexible payment options with Klarna</span>
+        </div>
+
+        <div className="tb-item">
+          <img className="tb-badge" src="/logos/stripe-light-badge.svg" alt="Stripe" />
+          <span className="tb-text">Secure payments powered by Stripe</span>
+        </div>
+      </section>
+
+      {/* ===== JOURNEY ===== */}
+      <section className="sl-journey" aria-label="SoundLegend Experience">
+        <h2 className="sl-exp-title">Your SoundLegend Experience</h2>
+
+        {/* Rail */}
+        <div className="sl-rail-wrap" ref={railRef}>
+          <div className="sl-rail" role="tablist" aria-label="Experience steps">
+            {steps.map((s, i) => (
+              <button
+                key={s.id}
+                className={`sl-node ${i === activeStep ? 'active' : ''}`}
+                data-step={i}
+                role="tab"
+                aria-selected={i === activeStep}
+                aria-controls={`panel-step-${i}`}
+                onClick={() => setActiveStep(i)}
+              >
+                <span className="sl-node-badge">
+                  <Icon name={s.key} size={18} />
+                </span>
+                <span className="sl-node-caption"><b>{i + 1}.</b> {s.title}</span>
+              </button>
+            ))}
+            <div
+              className="sl-rail-active"
+              style={{ '--i': activeStep, '--n': steps.length }}
+              aria-hidden="true"
+            />
+          </div>
+          <div className="sl-rail-hint">Swipe to explore <span aria-hidden>→</span></div>
+        </div>
+
+        {/* Panel */}
+        <div
+          id={`panel-step-${activeStep}`}
+          className="sl-journey-panel"
+          role="tabpanel"
+          aria-live="polite"
+        >
+          <div className="sl-panel-header">
+            <span className="sl-step-kicker">Step {activeStep + 1} of {steps.length}</span>
+            <span className="sl-panel-icon"><Icon name={steps[activeStep].key} size={22} /></span>
+            <h3 className="sl-panel-title">{steps[activeStep].title}</h3>
+
+            {/* Vault logo (fixed placement, right) */}
+            {steps[activeStep].key === 'vault' && (
+              <img
+                src="/legacy-vault-nav/white2.png"
+                alt="Legacy Vault"
+                className="sl-vault-logo"
+              />
+            )}
+
+            {/* SignWell badge in Proposal step */}
+            {steps[activeStep].signwell && (
+              <span className="sl-badge-signwell" title="Powered by SignWell">
+                <img src="/logos/signwell-logo.svg" alt="SignWell" height="16" />
+                <span>Powered by SignWell</span>
+              </span>
+            )}
+          </div>
+
+          <p
+            className="sl-panel-text"
+            dangerouslySetInnerHTML={{ __html: steps[activeStep].blurb }}
+          />
+
+          {/* Example mockups (click to enlarge in modal) */}
+          {steps[activeStep].mockImages && (
+            <div className="mockup-strip">
+              {steps[activeStep].mockImages.map((src, i) => (
+                <button
+                  key={i}
+                  className="mockup-thumb"
+                  onClick={() => { setMockSrc(src); setMockOpen(true); }}
+                  aria-label={`Open mockup ${i + 1}`}
+                >
+                  <img src={src} alt={`Mockup ${i + 1}`} />
+                </button>
+              ))}
+            </div>
+          )}
+
+          <ul className="sl-panel-bullets">
+            {steps[activeStep].bullets.map((b, idx) => (
+              <li key={idx}>
+                <span className="bullet-award"><Icon name="award" size={13} /></span>
+                <span>{b}</span>
+              </li>
+            ))}
+          </ul>
+
+          {/* Portal sign-in link */}
+          {steps[activeStep].portalSignin && (
+            <Link to={steps[activeStep].portalSignin} className="sl-panel-link">
+              Go to SoundLegend Portal Sign-in →
+            </Link>
+          )}
+
+          {/* Vault CTA */}
+          {steps[activeStep].cta && (
+            <Link to={steps[activeStep].cta.to} className="sl-panel-cta">
+              {steps[activeStep].cta.label}
+            </Link>
+          )}
+        </div>
+      </section>
+
+      {/* Mockup lightbox modal */}
+      {mockOpen && (
+        <div className="mockup-modal" role="dialog" aria-modal="true" onClick={() => setMockOpen(false)}>
+          <img src={mockSrc} alt="Mockup enlarged" onClick={(e) => e.stopPropagation()} />
+          <button className="mockup-close" onClick={() => setMockOpen(false)} aria-label="Close">×</button>
+        </div>
+      )}
+
+      {/* ===== Start Your Journey (Form only) ===== */}
+      <aside className="sl-card sl-form-only">
+        <div className="sl-card-section">
+          <h2 className="sl-card-title">Start Your Journey</h2>
+          <p className="sl-form-sub">
+            Tell us where to reach you. We’ll follow up personally within 1–2 business days.
+          </p>
           <form onSubmit={handleSubmit} noValidate>
             <label htmlFor="firstName">First Name</label>
             <input
@@ -344,6 +502,7 @@ const SoundLegendProductDetail = () => {
               aria-required="true"
               autoComplete="email"
             />
+            <p className="field-note">We never share or sell your email. No spam—ever.</p>
 
             <label htmlFor="phone">Phone</label>
             <div className="phone-input-container">
@@ -362,64 +521,27 @@ const SoundLegendProductDetail = () => {
                 aria-invalid={phoneDigits ? !isPhoneValid : undefined}
               />
             </div>
-            <p className="phone-hint">Enter a valid 10-digit phone number.</p>
+            <p className="field-note">We will only use your number for your build process.</p>
 
-            <button type="submit">
-              {isSubmitting
-                ? 'Submitting...'
-                : 'Start Your Custom Snare Journey'}
+            <button type="submit" className="sl-cta">
+              {isSubmitting ? 'Submitting…' : 'Start Your Custom Snare Journey'}
             </button>
           </form>
-
-          <Dialog open={open} onClose={handleClose}>
-            <DialogTitle>Request Sent</DialogTitle>
-            <DialogContent>
-              <Typography variant="body1">
-                Thank you for reaching out! We'll get back to you within 1–2
-                business days.
-              </Typography>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleClose} color="primary">
-                Continue
-              </Button>
-            </DialogActions>
-          </Dialog>
         </div>
-      </div>
+      </aside>
 
-      {/* --- Explore Legacy Vault band --- */}
-      {/* <section className="sl-vault-cta">
-        <div className="sl-vault-cta-inner">
-          <div
-            className="sl-vault-logo-bg"
-            role="img"
-            aria-label="Legacy Vault"
-            style={{ backgroundImage: 'url(/legacy-vault-nav/white.png)' }}
-          />
-          <div className="sl-vault-copy">
-            <h3>Explore our Legacy Vault</h3>
-            <p>
-              Hear real drums, meet the artists, and dive into specs, stories,
-              photos, and Legacy Tuning™ samples for each instrument.
-            </p>
-          </div>
-          <div className="sl-vault-actions">
-            <Link
-              to="/artisan-shop/soundlegend/vault"
-              className="sl-vault-btn primary"
-            >
-              Explore the Vault
-            </Link>
-            <Link
-              to="/artisan-shop/soundlegend/vault/learn/legacy-tuning"
-              className="sl-vault-btn ghost"
-            >
-              What is Legacy Tuning?
-            </Link>
-          </div>
-        </div>
-      </section> */}
+      {/* Success dialog */}
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Request Sent</DialogTitle>
+        <DialogContent>
+          <Typography variant="body1">
+            Thank you for reaching out! We’ll get back to you within 1–2 business days.
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">Continue</Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };

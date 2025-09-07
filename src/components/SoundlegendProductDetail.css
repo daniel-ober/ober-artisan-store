@@ -1,412 +1,357 @@
-/* ================================
-   SoundlegendProductDetail.css
-   ================================ */
-
-/* 📌 Main Page Container */
-.soundlegend-product-detail {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 50px 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-  box-sizing: border-box;
-  background: #0e0e0e;
-  color: #ffffff;
-  overflow-x: hidden;
+:root{
+  --sl-bg-start:#0b0b0f;
+  --sl-bg-end:#151519;
+  --sl-panel:rgba(255,255,255,.06);
+  --sl-border:rgba(255,204,0,.35);
+  --sl-text:#f4f4f4;
+  --sl-muted:#cfcfcf;
+  --sl-gold:#ffcc00;
+  --sl-gold-2:#e6b800;
+  --sl-ink:#0a0a0a;
 }
 
-.soundlegend-header-image {
-  max-width: 500px;
-  width: 100%;
-  margin: 0 auto 2rem;
-  display: block;
+.soundlegend-product-detail{
+  --maxw:1200px;
+  color:var(--sl-text);
+  background:
+    radial-gradient(1200px 600px at 50% -10%, #1f1f22 0%, #0e0e10 60%),
+    linear-gradient(180deg,var(--sl-bg-start),var(--sl-bg-end));
+  min-height:100dvh;
+  padding:48px 20px 64px;
+  box-sizing:border-box;
+  overflow-x:hidden;
 }
 
-/* 🔤 Optional Page Title */
-.soundlegend-product-detail h1 {
-  font-size: 40px;
-  font-weight: 700;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: #ffcc00;
+.soundlegend-header-image{
+  width:100%;
+  max-width:520px;
+  margin:0 auto 28px;
+  display:block;
+  filter:drop-shadow(0 6px 22px rgba(0,0,0,.55));
 }
 
-/* 🔄 Main Content Layout */
-.soundlegend-product-content {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 40px;
-  max-width: 1100px;
-  width: 100%;
-  box-sizing: border-box;
-  flex-wrap: wrap;
+/* ===== HERO ===== */
+.sl-hero-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.25fr) minmax(0,.95fr);
+  gap:28px;
+  align-items:start;
+  max-width:var(--maxw);
+  margin:0 auto 28px;
+}
+.soundlegend-hero-img{
+  width:100%; height:auto; display:block; object-fit:cover; aspect-ratio:16/10;
+}
+.sl-hero-frame{
+  background:#0a0a0a;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.06);
+  box-shadow:0 14px 32px rgba(0,0,0,.45);
+  overflow:hidden;
+}
+.sl-hero-copy{
+  background:var(--sl-panel);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:14px;
+  padding:24px 22px;
+  box-shadow:0 12px 26px rgba(0,0,0,.35);
+}
+.sl-title{
+  font-size:clamp(1.4rem,1.2rem + 1.2vw,2rem);
+  line-height:1.2; font-weight:800; color:var(--sl-gold); margin:4px 0 12px;
+}
+.sl-lede{font-size:1.06rem;line-height:1.65;margin:0 0 8px;}
+.sl-hero-copy p{color:var(--sl-muted);margin:10px 0;}
+.sl-closer{font-weight:700;color:#eaeaea;margin-top:8px;}
+
+.sl-keyfeatures{margin-top:12px;}
+.sl-keyfeatures h3{margin:6px 0 6px;color:#fff;font-size:1.07rem;}
+.sl-keyfeatures ul{margin:0;padding-left:1.1rem;}
+.sl-keyfeatures li{margin:6px 0;color:#ededed;}
+
+/* ===== JOURNEY ===== */
+.sl-journey{max-width:1100px;margin:48px auto 0;padding:0 4px;}
+.sl-exp-title{
+  text-align:center; font-size:1.8rem; color:var(--sl-gold); margin-bottom:18px;
 }
 
-/* 📌 Left Side: Product (static hero image) */
-.soundlegend-product-image {
-  flex: 1;
-  max-width: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* rail container */
+.sl-rail-wrap{
+  position:relative; overflow-x:auto; scrollbar-width:thin; -webkit-overflow-scrolling:touch;
+  padding-bottom:18px;
+}
+.sl-rail-wrap::-webkit-scrollbar{height:8px;}
+.sl-rail-wrap::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18);border-radius:999px;}
+/* fades indicating overflow */
+.sl-rail-wrap::before,
+.sl-rail-wrap::after{
+  content:""; position:absolute; top:0; bottom:42px; width:36px; pointer-events:none;
+  background:linear-gradient(to right, rgba(15,15,18,1), rgba(15,15,18,0)); z-index:2;
+}
+.sl-rail-wrap::after{ right:0; transform:scaleX(-1); }
+.sl-rail-wrap::before{ left:0; }
+
+/* swipe hint */
+.sl-rail-hint{ display:none; position:absolute; right:10px; bottom:-2px; font-size:.8rem; color:#9f9f9f; user-select:none; }
+
+/* the rail */
+.sl-rail{
+  position:relative; display:grid;
+  grid-template-columns:repeat(7, minmax(180px, 1fr));
+  align-items:center; gap:18px; padding:18px 8px 0;
+  border-top:2px solid rgba(255,255,255,.12);
+}
+.sl-rail-active{
+  --i:0; --n:7;
+  position:absolute; top:-1px; left:0; height:2px;
+  width:calc((100% - 6 * 18px) / var(--n) * (var(--i) + 1) + 18px * var(--i));
+  background:linear-gradient(90deg,var(--sl-gold),#ffd95a);
+  box-shadow:0 0 16px rgba(255,204,0,.45);
+  transition:width .35s ease; z-index:1;
 }
 
-/* 🖼️ Static Hero Image */
-.soundlegend-hero-img {
-  width: 100%;
-  max-width: 600px;
-  height: auto;
-  border-radius: 12px;
-  display: block;
-  margin: 0 auto 20px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+/* nodes */
+.sl-node{
+  position:relative; display:flex; flex-direction:column; align-items:center; gap:8px;
+  background:transparent; border:none; color:#eaeaea; cursor:pointer; padding:0; z-index:3;
+}
+.sl-node:focus-visible{outline:2px solid var(--sl-gold);outline-offset:6px;border-radius:8px;}
+.sl-node-badge{
+  display:grid; place-items:center;
+  width:36px; height:36px; border-radius:999px;
+  background:#222; border:2px solid rgba(255,255,255,.35); color:#ddd;
+}
+.sl-node-caption{font-size:.92rem; max-width:180px; text-align:center; opacity:.9;}
+.sl-node.active .sl-node-badge{
+  background:radial-gradient(100% 100% at 50% 0%, #ffe37a 0%, #e0a800 100%);
+  border-color:var(--sl-gold); color:#000;
+  box-shadow:0 0 0 6px rgba(255,204,0,.12), 0 8px 18px rgba(255,204,0,.28);
+}
+.sl-node.active .sl-node-caption{opacity:1; color:#fff; font-weight:700}
+
+/* panel */
+.sl-journey-panel{
+  margin-top:18px;
+  background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.06));
+  border:1px solid rgba(255,255,255,.10); border-radius:16px;
+  padding:24px 22px;
+  box-shadow:0 18px 40px rgba(0,0,0,.35), 0 8px 22px rgba(255,204,0,.10) inset;
+}
+.sl-panel-header{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:6px; }
+.sl-step-kicker{
+  font-size:.8rem; letter-spacing:.08em; text-transform:uppercase;
+  color:#111; background:var(--sl-gold); padding:4px 8px; border-radius:999px; font-weight:800;
+}
+.sl-panel-icon{ display:grid; place-items:center; width:28px; height:28px; color:#fff; }
+.sl-panel-title{ font-size:1.25rem; margin:0; color:#fff; font-weight:800; }
+.sl-vault-logo{ height:24px; width:auto; margin-left:auto; opacity:.95; filter:drop-shadow(0 2px 8px rgba(0,0,0,.6)); }
+
+.sl-panel-text{ margin:10px 0 14px; color:#e6e6e6; line-height:1.65; font-size:1.02rem; }
+.sl-panel-text b, .sl-panel-text strong{ color:#fff; }
+
+/* premium diamond bullets */
+.sl-panel-bullets{ list-style:none; padding:0; margin:8px 0 10px; display:grid; gap:8px; }
+.sl-panel-bullets li{ display:flex; gap:10px; align-items:flex-start; color:#ededed; line-height:1.5; }
+.bullet-diamond{
+  width:22px; height:22px; display:grid; place-items:center;
+  background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.14); border-radius:6px; color:#fff;
+  box-shadow:inset 0 0 12px rgba(255,204,0,.10);
 }
 
-/* 🏷️ Section headers & copy next to image */
-.sl-header-section {
-  font-size: 1.5rem;
-  font-weight: 700;
-  text-align: left;
-  margin-bottom: 0.3rem;
-  color: #ffcc00;
-  padding-bottom: 20px;
+/* ===== Start Your Journey - Form only ===== */
+.sl-card{
+  position:sticky; top:24px; align-self:start;
+  background:rgba(255,255,255,.08);
+  border:1px solid var(--sl-border); border-radius:16px;
+  padding:22px;
+  box-shadow:0 18px 40px rgba(255,204,0,.14),0 10px 24px rgba(0,0,0,.45);
+  display:flex; flex-direction:column; gap:18px;
+  max-width:1100px; margin:28px auto 0;
+}
+.sl-form-only .sl-card-title{ color:var(--sl-gold); font-size:1.35rem; margin:0 0 6px; }
+.sl-form-sub{ color:var(--sl-muted); margin:0 0 10px; }
+
+.sl-card label{ display:block; font-weight:700; font-size:.95rem; color:var(--sl-gold); margin:10px 0 6px; }
+.sl-card input{
+  width:100%; padding:12px 12px; font-size:16px; border-radius:10px; border:1px solid #565656;
+  background:#161616; color:#fff; transition:border .2s ease, box-shadow .2s ease; box-sizing:border-box;
+}
+.sl-card input:focus{ outline:none; border-color:var(--sl-gold); box-shadow:0 0 0 3px rgba(255,204,0,.2); }
+.phone-hint{ margin:6px 0 12px; font-size:.9rem; color:var(--sl-muted); }
+
+.sl-cta{
+  display:inline-block; width:100%;
+  border:none; background:var(--sl-gold); color:#000;
+  font-weight:800; font-size:1.05rem; padding:14px 16px; border-radius:12px; cursor:pointer;
+  transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+  box-shadow:0 10px 18px rgba(255,204,0,.2);
+}
+.sl-cta:hover{ background:var(--sl-gold-2); transform:translateY(-2px); box-shadow:0 14px 24px rgba(255,204,0,.28); }
+
+/* ==== TRUST BAND (fills hero→experience gap) ==== */
+.sl-trustband{
+  max-width:1100px;
+  margin:18px auto 6px;
+  display:grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap:12px;
+}
+.tb-item{
+  display:flex; align-items:center; gap:10px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:12px;
+  padding:10px 12px;
+}
+.tb-icon{ display:grid; place-items:center; width:24px; height:24px; color:#fff; }
+.tb-text{ font-size:.95rem; color:#eaeaea; }
+.tb-text em{ color:#ffdd66; font-style:normal; }
+
+/* ==== Journey panel extras ==== */
+.sl-badge-signwell{
+  margin-left:auto;
+  display:flex; align-items:center; gap:8px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.14);
+  padding:6px 10px; border-radius:999px; color:#fff;
+  font-size:.85rem; white-space:nowrap;
+}
+.mockup-strip{
+  display:flex; gap:10px; margin:8px 0 6px;
+}
+.mockup-strip img{
+  width:160px; height:100px; object-fit:cover;
+  border-radius:10px; border:1px solid rgba(255,255,255,.14);
+  box-shadow:0 6px 16px rgba(0,0,0,.25);
+}
+.sl-panel-link{
+  display:inline-block; margin-top:2px;
+  color:#ffd95a; text-decoration:none; font-weight:700;
+}
+.sl-panel-link:hover{ text-decoration:underline; }
+
+/* swap diamond bullet → award rosette */
+.bullet-award{
+  width:22px; height:22px; display:grid; place-items:center;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:50%; color:#fff;
+  box-shadow:inset 0 0 10px rgba(255,204,0,.12);
 }
 
-.sl-desc-section {
-  font-family: 'Gentium Book Plus', serif;
-  font-size: 1.25rem;
-  font-weight: 100;
-  text-align: justify;
-  margin-bottom: 0.3rem;
+/* Vault logo placement fix (right of header, vertically centered) */
+.sl-vault-logo{
+  height:26px; width:auto; margin-left:auto;
+  filter:drop-shadow(0 2px 8px rgba(0,0,0,.6));
 }
 
-.slogan {
-  padding-top: 20px;
-  font-family: 'Cinzel Decorative', serif;
-  font-size: 1.4rem;
-  font-weight: 700;
-  text-align: center;
-  color: #4c4c4c;
+/* privacy microcopy */
+.field-note{
+  margin:6px 0 10px;
+  font-size:.85rem;
+  color:#cfcfcf;
 }
 
-/* 📌 Right Side: Features + Form */
-.soundlegend-product-options {
-  flex: 1;
-  max-width: 500px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  background: rgba(255, 255, 255, 0.08);
-  padding: 30px;
-  border-radius: 14px;
-  border: 1px solid rgba(255, 204, 0, 0.5);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 8px 24px rgba(255, 204, 0, 0.2);
-  margin: 0 auto;
-  box-sizing: border-box;
+/* ===== Trust band (6 items, fills gap) ===== */
+.sl-trustband{
+  max-width:1100px;
+  margin:16px auto 0;
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap:12px;
+}
+.tb-item{
+  display:flex; align-items:center; gap:10px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:12px;
+  padding:10px 12px;
+  box-shadow:0 8px 18px rgba(0,0,0,.18);
+}
+.tb-icon{ display:grid; place-items:center; width:24px; height:24px; color:#fff; }
+.tb-badge{ height:18px; width:auto; display:block; }
+.tb-text{ font-size:.95rem; color:#eaeaea; }
+.sl-info{
+  display:inline-grid; place-items:center;
+  width:16px; height:16px; margin-left:8px; border-radius:50%;
+  font-size:.7rem; color:#111; background:#ffd95a; font-weight:800;
+  cursor:help;
 }
 
-/* ⭐ Features list */
-.soundlegend-features h2 {
-  font-size: 26px;
-  font-weight: 700;
-  color: #ffcc00;
-  margin-bottom: 12px;
+@media (max-width:900px){
+  .sl-trustband{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+@media (max-width:520px){
+  .sl-trustband{ grid-template-columns: 1fr; }
 }
 
-.soundlegend-features p,
-.soundlegend-features li {
-  font-size: 1.35rem;
-  font-family: 'Gentium Book Plus', serif;
-  font-weight: 500;
-  color: #dddddd;
-  line-height: 1.6;
-  text-align: left;
+/* ===== Journey extras ===== */
+.bullet-award{
+  width:22px; height:22px; display:grid; place-items:center;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:50%; color:#fff;
+  box-shadow:inset 0 0 10px rgba(255,204,0,.12);
 }
 
-/* 🏷️ Labels */
-.soundlegend-product-options label {
-  display: block;
-  font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 8px;
-  color: #ffcc00;
-  text-align: left;
+.sl-badge-signwell{
+  margin-left:auto;
+  display:flex; align-items:center; gap:8px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.14);
+  padding:6px 10px; border-radius:999px; color:#fff;
+  font-size:.85rem; white-space:nowrap;
 }
 
-/* 🔹 Inputs */
-.soundlegend-product-options select,
-.soundlegend-product-options input {
-  width: 100%;
-  padding: 12px;
-  font-size: 16px;
-  border-radius: 8px;
-  border: 1px solid #666;
-  background: #1a1a1a;
-  color: #ffffff;
-  cursor: pointer;
-  margin-bottom: 15px;
-  transition:
-    border 0.3s ease,
-    box-shadow 0.3s ease;
-  box-sizing: border-box;
+.mockup-strip{ display:flex; gap:10px; margin:8px 0 6px; }
+.mockup-thumb{
+  border:none; padding:0; background:transparent; cursor:pointer;
+}
+.mockup-thumb img{
+  width:160px; height:100px; object-fit:cover;
+  border-radius:10px; border:1px solid rgba(255,255,255,.14);
+  box-shadow:0 6px 16px rgba(0,0,0,.25);
 }
 
-.soundlegend-product-options select {
-  height: 48px;
+/* Lightbox modal */
+.mockup-modal{
+  position:fixed; inset:0; background:rgba(0,0,0,.8);
+  display:grid; place-items:center; z-index:1000;
+}
+.mockup-modal img{
+  max-width:92vw; max-height:85vh; border-radius:12px;
+  box-shadow:0 20px 60px rgba(0,0,0,.6);
+}
+.mockup-close{
+  position:fixed; top:14px; right:14px;
+  width:40px; height:40px; border-radius:999px;
+  background:#111; color:#fff; border:1px solid rgba(255,255,255,.2);
+  font-size:22px; line-height:1; cursor:pointer;
 }
 
-/* ☎️ Phone input */
-.phone-input-container {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+/* Vault logo right alignment inside panel header */
+.sl-vault-logo{
+  height:26px; width:auto; margin-left:auto;
+  filter:drop-shadow(0 2px 8px rgba(0,0,0,.6));
 }
 
-.country-code-select {
-  max-width: 80px;
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 6px;
-  background: #1a1a1a;
-  color: #ffffff;
-  border: 1px solid #666;
-  cursor: pointer;
+/* field notes already present; keep consistent */
+.field-note{ margin:6px 0 10px; font-size:.85rem; color:#cfcfcf; }
+
+/* Trust band responsive */
+@media (max-width:900px){
+  .sl-trustband{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+@media (max-width:520px){
+  .sl-trustband{ grid-template-columns: 1fr; }
 }
 
-.phone-input-container input {
-  flex-grow: 1;
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
+/* ===== Responsive tweaks ===== */
+@media (max-width:1080px){
+  .sl-hero-grid{ grid-template-columns:1fr; }
 }
-
-/* ✅ Submit button */
-.soundlegend-product-options button {
-  background-color: #ffcc00;
-  color: #000000;
-  font-size: 20px;
-  font-weight: 700;
-  padding: 14px 20px;
-  border-radius: 10px;
-  cursor: pointer;
-  transition:
-    background-color 0.3s ease,
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
-  width: 100%;
-  box-shadow: 0 6px 12px rgba(255, 204, 0, 0.2);
-  border: none;
-}
-
-.soundlegend-product-options button:hover {
-  background-color: #e6b800;
-  transform: scale(1.07);
-  box-shadow: 0 8px 18px rgba(255, 204, 0, 0.3);
-}
-
-/* ================================
-   360 Viewer styles (kept for reuse)
-   ================================ */
-.sl360-stage {
-  width: 100%;
-  aspect-ratio: 3 / 2;
-  background: #0a0a0a;
-  border-radius: 12px;
-  overflow: hidden;
-  position: relative;
-  user-select: none;
-  touch-action: pan-y;
-  margin-bottom: 1rem;
-  cursor: grab;
-}
-.sl360-stage:active {
-  cursor: grabbing;
-}
-
-.sl360-stage img,
-.sl360-stage canvas {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
-  pointer-events: none;
-}
-
-.sl360-loader {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  gap: 8px;
-  background: rgba(0, 0, 0, 0.35);
-  backdrop-filter: blur(2px);
-}
-.sl360-bar {
-  width: 60%;
-  height: 6px;
-  background: rgba(255, 255, 255, 0.18);
-  border-radius: 999px;
-  overflow: hidden;
-}
-.sl360-bar > div {
-  height: 100%;
-  width: 0%;
-  background: #ffffff;
-  transition: width 120ms linear;
-}
-.sl360-loader span {
-  font-size: 0.85rem;
-  opacity: 0.9;
-}
-.sl360-controls {
-  position: absolute;
-  left: 12px;
-  bottom: 12px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: rgba(0, 0, 0, 0.35);
-  padding: 8px 10px;
-  border-radius: 999px;
-}
-.sl360-hint {
-  font-size: 0.85rem;
-  color: #ffffff;
-  opacity: 0.85;
-}
-
-/* ================================
-   Legacy Vault CTA Section (stacked)
-   ================================ */
-.sl-vault-cta {
-  width: 100%;
-  margin-top: 40px;
-  padding-bottom: 50px;
-  background: rgba(255, 255, 255, 0.05);
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 16px;
-  box-shadow: inset 0 8px 32px rgba(0, 0, 0, 0.5);
-}
-
-.sl-vault-cta-inner {
-  max-width: 1150px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column; /* ⬅ stack everything */
-  align-items: center; /* ⬅ center within container */
-  text-align: center; /* ⬅ center text */
-}
-
-/* Logo at the top */
-.sl-vault-logo-bg {
-  width: clamp(400px, 50vw, 720px);
-  height: clamp(110px, 15vw, 200px);
-  min-width: 300px;
-  min-height: 90px;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size:cover; /* ✅ keep proportions, prevent zooming */
-  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.7));
-  flex-shrink: 0;
-  margin-inline: auto;
-}
-
-/* Copy directly under the logo */
-.sl-vault-copy {
-  max-width: 820px; /* nice readable line-length */
-}
-
-.sl-vault-copy h3 {
-  font-size: 1.9rem;
-  font-weight: 700;
-  color: #ffffff;
-  margin: 0 0 8px;
-}
-
-.sl-vault-copy p {
-  font-size: 1.2rem;
-  color: #cccccc;
-  line-height: 1.6;
-  margin: 0;
-}
-
-/* Buttons below the copy */
-.sl-vault-actions {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-  justify-content: center; /* ⬅ center buttons */
-}
-
-.sl-vault-btn {
-  display: inline-block;
-  padding: 12px 28px;
-  margin-top: 24px;
-  border-radius: 10px;
-  font-size: 1.05rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.25s ease;
-  border: 1px solid transparent;
-  text-align: center;
-  min-width: 180px;
-}
-.sl-vault-btn.primary {
-  background: linear-gradient(135deg, #4f46e5, #06b6d4);
-  color: #fff;
-}
-.sl-vault-btn.primary:hover {
-  opacity: 0.9;
-  transform: translateY(-3px);
-}
-.sl-vault-btn.ghost {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  color: #fff;
-}
-.sl-vault-btn.ghost:hover {
-  background: rgba(255, 255, 255, 0.15);
-  transform: translateY(-3px);
-}
-
-/* ================================
-   Responsive
-   ================================ */
-@media (max-width: 1024px) {
-  .soundlegend-product-content {
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
-  }
-  .soundlegend-product-image {
-    max-width: 100%;
-  }
-  .soundlegend-product-options {
-    max-width: 90%;
-  }
-}
-
-@media (max-width: 900px) {
-  .sl-vault-logo-bg {
-    width: clamp(280px, 65vw, 520px);
-    height: clamp(80px, 16vw, 140px);
-  }
-}
-@media (max-width: 560px) {
-  .sl-vault-logo-bg {
-    width: min(85vw, 420px);
-    aspect-ratio: 4 / 1; /* keep it tidy on small screens */
-    height: auto;
-  }
-  .sl-vault-btn {
-    width: 100%;
-    max-width: 340px;
-  }
+@media (max-width:820px){
+  .sl-rail{ grid-template-columns:repeat(7, 200px); }
+  .sl-rail-active{ display:none; } /* mobile relies on node highlight */
+  .sl-rail-hint{ display:block; }
 }
