@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 import { DarkModeContext } from '../context/DarkModeContext';
 import { useAuth } from '../context/AuthContext';
 import './Footer.css';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faFacebookF,
   faInstagram,
   faYoutube,
-} from "@fortawesome/free-brands-svg-icons";
+} from '@fortawesome/free-brands-svg-icons';
 
 const Footer = ({ navbarLinks = [] }) => {
   const { user, isAdmin } = useAuth();
@@ -65,8 +65,11 @@ const Footer = ({ navbarLinks = [] }) => {
         <div className="footer-title">Sitemap</div>
         <ul>
           <li>
-            <Link to="/" onClick={handleScrollTop}>Home</Link>
+            <Link to="/" onClick={handleScrollTop}>
+              Home
+            </Link>
           </li>
+
           {sortedFilteredLinks.map((link, index) => (
             <li key={index}>
               <Link
@@ -77,14 +80,36 @@ const Footer = ({ navbarLinks = [] }) => {
               </Link>
             </li>
           ))}
+
+          {/* Footer-only links */}
           <li>
-            <Link to="/return-policy" onClick={handleScrollTop}>Return Policy</Link>
+            <Link
+              to="/artisan-shop/soundlegend/vault"
+              onClick={handleScrollTop}
+            >
+              Legacy Vault
+            </Link>
           </li>
           <li>
-            <Link to="/privacy-policy" onClick={handleScrollTop}>Privacy Policy</Link>
+            <Link to="/endorsements" onClick={handleScrollTop}>
+              Endorsements
+            </Link>
+          </li>
+
+          <li>
+            <Link to="/return-policy" onClick={handleScrollTop}>
+              Return Policy
+            </Link>
           </li>
           <li>
-            <Link to="/terms-of-service" onClick={handleScrollTop}>Terms of Service</Link>
+            <Link to="/privacy-policy" onClick={handleScrollTop}>
+              Privacy Policy
+            </Link>
+          </li>
+          <li>
+            <Link to="/terms-of-service" onClick={handleScrollTop}>
+              Terms of Service
+            </Link>
           </li>
         </ul>
       </div>

@@ -1,14 +1,20 @@
 import React, { useRef, useState, useEffect, useContext } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { FaCartPlus, FaSignOutAlt, FaUserAlt, FaCog } from 'react-icons/fa';
+import { FaCartPlus, FaSignOutAlt, FaCog } from 'react-icons/fa';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import { DarkModeContext } from '../context/DarkModeContext';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, doc, getDoc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
-import { doc, getDoc } from 'firebase/firestore';
 import CartPreview from './CartPreview';
 import './NavBar.css';
+
+/** ⚙️ Paths to the Legacy Vault logo assets in /public */
+const VAULT_LOGO_LIGHT = '/legacy-vault-nav/black2.png'; // LIGHT theme uses black mark
+const VAULT_LOGO_DARK  = '/legacy-vault-nav/white2.png'; // DARK theme uses white mark
+
+/** 🔗 Where the Vault logo should link */
+const VAULT_ROUTE = '/artisan-shop/soundlegend/vault';
 
 const NavBar = () => {
   const [navbarLinks, setNavbarLinks] = useState([]);
@@ -28,6 +34,7 @@ const NavBar = () => {
     (total, item) => total + item.quantity,
     0
   );
+
   const menuRef = useRef(null);
   const buttonRef = useRef(null);
   const cartRef = useRef(null);
@@ -49,13 +56,22 @@ const NavBar = () => {
     }
   };
 
+  /** 🧹 Remove: Contact/Endorsements/Account from navbar set */
   const filteredLinks = navbarLinks.filter((link) => {
     const access = link.access || [];
-  
+    const name = (link.name || '').toLowerCase();
+    const label = (link.label || '').toLowerCase();
+
+    // Exclude from NAVBAR (but can appear in footer): contact, endorsements, account
+    const isContact = name.includes('contact') || label.includes('contact');
+    const isEndorsements = name.includes('endorsement') || label.includes('endorsement');
+    const isAccount = name.includes('account') || label.includes('account');
+    if (isContact || isEndorsements || isAccount) return false;
+
     if (link.enabled && access.includes('public')) return true;
     if (user && isAdmin && access.includes('admin')) return true;
     if (user && isSoundlegend && access.includes('soundlegend')) return true;
-  
+
     return false;
   });
 
@@ -85,15 +101,10 @@ const NavBar = () => {
   useEffect(() => {
     const fetchNavbarLinks = async () => {
       try {
-        const navbarLinksCollection = collection(
-          db,
-          'settings',
-          'site',
-          'navbarLinks'
-        );
+        const navbarLinksCollection = collection(db, 'settings', 'site', 'navbarLinks');
         const snapshot = await getDocs(navbarLinksCollection);
         const links = snapshot.docs
-          .map((doc) => ({ id: doc.id, ...doc.data() }))
+          .map((d) => ({ id: d.id, ...d.data() }))
           .sort((a, b) => a.order - b.order);
         setNavbarLinks(links);
       } catch (err) {
@@ -135,14 +146,9 @@ const NavBar = () => {
 
   const handleNavLinkClick = (path) => {
     navigate(path);
-    setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: 'auto' });
-    }, 10);
+    setTimeout(() => window.scrollTo({ top: 0, behavior: 'auto' }), 10);
     setIsMenuOpen(false);
   };
-
-  const isWebSticky = showStickyHeader && window.innerWidth >= 769;
-  const isMobileSticky = showStickyHeader && isMobileView;
 
   const renderCartButton = () => (
     <button
@@ -163,12 +169,7 @@ const NavBar = () => {
   );
 
   const renderSoundLegendTab = () => {
-    // console.log('🎯 renderSoundLegendTab called');
-    // console.log('🧩 isSoundlegend:', isSoundlegend);
-    // console.log('📦 userProjects:', userProjects);
-
     if (!user || !isSoundlegend || userProjects.length === 0) return null;
-
     return (
       <div className="nav-link dropdown">
         <span className="dropdown-label">SoundLegend ▾</span>
@@ -191,8 +192,26 @@ const NavBar = () => {
     );
   };
 
+  /** 🎯 NEW: Legacy Vault logo link (placed just before the Cart) */
+  const renderLegacyVaultLogo = () => (
+    <Link
+      to={VAULT_ROUTE}
+      className="vault-logo-link"
+      onClick={() => handleNavLinkClick(VAULT_ROUTE)}
+      aria-label="Legacy Vault"
+      title="Legacy Vault"
+    >
+<img
+  src={VAULT_LOGO_DARK}   // always white in sticky mini + mobile
+  alt="Legacy Vault"
+  className="vault-logo-img"
+/>
+    </Link>
+  );
+
   return (
     <>
+      {/* ===== Sticky (mini) navbar ===== */}
       {showStickyHeader && (
         <div className="navbar-sticky-wrapper">
           <div className="navbar-sticky-mini">
@@ -204,7 +223,65 @@ const NavBar = () => {
               />
             </Link>
 
-            {isMobileView ? (
+            {/* Desktop sticky links */}
+            {!isMobileView ? (
+              <div className={`navbar-links sticky-dropdown`} ref={menuRef}>
+                <Link
+                  to="/"
+                  className="nav-link"
+                  onClick={() => handleNavLinkClick('/')}
+                >
+                  Home
+                </Link>
+
+                {filteredLinks
+                  .filter((l) => l.name.toLowerCase() !== 'home')
+                  .map((link) => (
+                    <Link
+                      key={link.id}
+                      to={`/${link.name}`}
+                      className="nav-link"
+                      onClick={() => handleNavLinkClick(`/${link.name}`)}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+
+                {renderSoundLegendTab()}
+
+                {user && isAdmin && (
+                  <Link
+                    to="/admin"
+                    className="nav-link"
+                    onClick={() => handleNavLinkClick('/admin')}
+                  >
+                    <FaCog /> Admin
+                  </Link>
+                )}
+
+                {/* NEW: Legacy Vault logo just before Cart */}
+                {renderLegacyVaultLogo()}
+
+                {/* Sign out (Account removed) */}
+                {user && (
+                  <button className="nav-link-signout" onClick={handleSignOut}>
+                    <FaSignOutAlt /> Sign Out
+                  </button>
+                )}
+
+                {renderCartButton()}
+
+                {isCartPreviewOpen && showStickyHeader && (
+                  <div className="cart-preview-container" ref={cartRef}>
+                    <CartPreview
+                      onClose={() => setIsCartPreviewOpen(false)}
+                      closeMenu={() => setIsMenuOpen(false)}
+                    />
+                  </div>
+                )}
+              </div>
+            ) : (
+              /* Mobile sticky: menu button */
               <button
                 className="navbar-sticky-menu"
                 onClick={() => setIsMenuOpen((prev) => !prev)}
@@ -222,73 +299,10 @@ const NavBar = () => {
                   className={`menu-arrow-icon ${isMenuOpen ? 'open' : ''}`}
                 />
               </button>
-            ) : (
-              <div className={`navbar-links sticky-dropdown`} ref={menuRef}>
-                <Link
-                  to="/"
-                  className="nav-link"
-                  onClick={() => handleNavLinkClick('/')}
-                >
-                  Home
-                </Link>
-                {filteredLinks
-                  .filter((l) => l.name.toLowerCase() !== 'home')
-                  .map((link) => (
-                    <Link
-                      key={link.id}
-                      to={`/${link.name}`}
-                      className="nav-link"
-                      onClick={() => handleNavLinkClick(`/${link.name}`)}
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
-
-                {renderSoundLegendTab()}
-                
-
-                {user && isAdmin && (
-                  <Link
-                    to="/admin"
-                    className="nav-link"
-                    onClick={() => handleNavLinkClick('/admin')}
-                  >
-                    <FaCog /> Admin
-                  </Link>
-                )}
-
-                {user && (
-                  <>
-                    <Link
-                      to="/account"
-                      className="nav-link"
-                      onClick={() => handleNavLinkClick('/account')}
-                    >
-                      <FaUserAlt /> Account
-                    </Link>
-                    <button
-                      className="nav-link-signout"
-                      onClick={handleSignOut}
-                    >
-                      <FaSignOutAlt /> Sign Out
-                    </button>
-                  </>
-                )}
-
-                {renderCartButton()}
-
-                {isCartPreviewOpen && showStickyHeader && (
-                  <div className="cart-preview-container" ref={cartRef}>
-                    <CartPreview
-                      onClose={() => setIsCartPreviewOpen(false)}
-                      closeMenu={() => setIsMenuOpen(false)}
-                    />
-                  </div>
-                )}
-              </div>
             )}
           </div>
 
+          {/* Mobile sticky dropdown */}
           {isMobileView && isMenuOpen && (
             <div className="navbar-sticky-dropdown-wrapper">
               <div className="navbar-links sticky-dropdown open" ref={menuRef}>
@@ -299,6 +313,7 @@ const NavBar = () => {
                 >
                   Home
                 </Link>
+
                 {filteredLinks
                   .filter((l) => l.name.toLowerCase() !== 'home')
                   .map((link) => (
@@ -324,22 +339,13 @@ const NavBar = () => {
                   </Link>
                 )}
 
+                {/* NEW: Legacy Vault logo before Cart */}
+                {renderLegacyVaultLogo()}
+
                 {user && (
-                  <>
-                    <Link
-                      to="/account"
-                      className="nav-link"
-                      onClick={() => handleNavLinkClick('/account')}
-                    >
-                      <FaUserAlt /> Account
-                    </Link>
-                    <button
-                      className="nav-link-signout"
-                      onClick={handleSignOut}
-                    >
-                      <FaSignOutAlt /> Sign Out
-                    </button>
-                  </>
+                  <button className="nav-link-signout" onClick={handleSignOut}>
+                    <FaSignOutAlt /> Sign Out
+                  </button>
                 )}
 
                 {renderCartButton()}
@@ -358,6 +364,7 @@ const NavBar = () => {
         </div>
       )}
 
+      {/* ===== Main (non-sticky) navbar ===== */}
       <nav className="navbar" ref={navbarRef}>
         <div className="navbar-logo">
           <Link to="/" replace onClick={() => handleNavLinkClick('/')}>
@@ -410,6 +417,7 @@ const NavBar = () => {
               >
                 Home
               </Link>
+
               {filteredLinks
                 .filter((l) => l.name.toLowerCase() !== 'home')
                 .map((link) => (
@@ -435,13 +443,13 @@ const NavBar = () => {
                 </Link>
               )}
 
+              {/* NEW: Legacy Vault logo before Cart */}
+              {renderLegacyVaultLogo()}
+
               {user && (
-                <>
-                  {/* Account Link removed temporarily */}
-                  <button className="nav-link-signout" onClick={handleSignOut}>
-                    <FaSignOutAlt /> Sign Out
-                  </button>
-                </>
+                <button className="nav-link-signout" onClick={handleSignOut}>
+                  <FaSignOutAlt /> Sign Out
+                </button>
               )}
 
               {renderCartButton()}

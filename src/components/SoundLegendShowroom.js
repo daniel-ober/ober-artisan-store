@@ -5,7 +5,7 @@ import React, {
   useCallback,
   useLayoutEffect,
 } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { db } from '../firebaseConfig';
 import { doc, getDoc } from 'firebase/firestore';
 import { computeBandsFromSpec } from '../utils/tuningMath';
@@ -343,6 +343,20 @@ const SoundLegendShowroom = () => {
     setScrollRoot(root);
   }, []);
 
+  // after the first useLayoutEffect that sets scrollRoot:
+  useLayoutEffect(() => {
+    // re-check once data is loaded so refs actually exist
+    if (loading) return;
+    const anchor =
+      artistRef.current ||
+      audioRef.current ||
+      galleryRef.current ||
+      viewbarRef.current ||
+      document.body;
+    const root = findScrollParent(anchor);
+    setScrollRoot(root);
+  }, [loading]); // <- re-run when loading flips to false
+
   // neutralize fade-ins
   useEffect(() => {
     document.querySelectorAll('.fade-in-section').forEach((el) => {
@@ -504,88 +518,147 @@ const SoundLegendShowroom = () => {
     [headerTop]
   );
 
-  /* ===== Scroll spy and active pill ===== */
+  /* ===== Mobile-safe scroll spy (no IntersectionObserver) ===== */
   useEffect(() => {
-    const map = [
-      showArtist && { key: 'artist', ref: artistRef },
-      showTuning && { key: 'tuning', ref: tuningRef },
-      showGallery && { key: 'gallery', ref: galleryRef },
-      showAudio && { key: 'audio', ref: audioRef },
+    // Sections in DOM order (as rendered)
+    const sections = [
+      showArtist && { key: 'artist', el: artistRef.current },
+      showAudio && { key: 'audio', el: audioRef.current },
+      showGallery && { key: 'gallery', el: galleryRef.current },
+      showTuning && { key: 'tuning', el: tuningRef.current },
     ].filter(Boolean);
+    if (!sections.length) return;
 
-    const offset = getCssOffset();
-    const thresholds = Array.from({ length: 11 }, (_, i) => i / 10);
+    let raf = null;
+    let curRoot = scrollRoot;
 
-    const obs = new IntersectionObserver(
-      (entries) => {
-        if (isLocked) return;
-        let bestKey = null;
-        let bestRatio = 0;
-        for (const entry of entries) {
-          const item = map.find((m) => m.ref.current === entry.target);
-          if (!item) continue;
-          const topOK = entry.boundingClientRect.top <= offset;
-          const score = entry.intersectionRatio + (topOK ? 0.01 : 0);
-          if (score > bestRatio) {
-            bestRatio = score;
-            bestKey = item.key;
-          }
-        }
-        if (bestKey) setActive(bestKey);
-      },
-      {
-        root: scrollRoot === window ? null : scrollRoot,
-        rootMargin: `-${offset}px 0px -55% 0px`,
-        threshold: thresholds,
+    const getScrollTop = (root) => {
+      if (root === window) {
+        return (
+          window.pageYOffset ??
+          document.documentElement.scrollTop ??
+          document.body.scrollTop ??
+          0
+        );
       }
-    );
+      return root?.scrollTop ?? 0;
+    };
 
-    map.forEach(({ ref }) => {
-      if (ref.current) obs.observe(ref.current);
+    const calcActive = () => {
+      if (isLocked) return;
+
+      // Re-detect the real scrolling container (menu open/close can change it)
+      const maybeNewRoot = findScrollParent(
+        viewbarRef.current || document.body
+      );
+      if (maybeNewRoot !== curRoot) {
+        curRoot = maybeNewRoot;
+        setScrollRoot(maybeNewRoot);
+      }
+
+      const offset = getCssOffset();
+
+      const rootEl = curRoot === window ? document.documentElement : curRoot;
+      const scrollTop = getScrollTop(curRoot);
+      const viewportH =
+        curRoot === window ? window.innerHeight : rootEl?.clientHeight || 0;
+
+      // Probe ~1/3 down the viewport so we pick the section the user is *looking at*
+      const probeY =
+        scrollTop + offset + Math.min(240, Math.max(80, viewportH * 0.33));
+
+      let best = sections[0].key;
+      for (const s of sections) {
+        const top = getAbsTopWithin(s.el, curRoot);
+        const bottom = top + (s.el?.offsetHeight || 0);
+        if (probeY >= top && probeY < bottom) {
+          best = s.key;
+          break;
+        }
+        if (top <= probeY) best = s.key;
+      }
+      setActive(best);
+    };
+
+    const onScrollish = () => {
+      if (!raf)
+        raf = requestAnimationFrame(() => {
+          raf = null;
+          calcActive();
+        });
+    };
+    const onResizeish = () => {
+      measureStickyTop();
+      calcActive();
+    };
+
+    // Observe menu/body class/style changes (overlay open/close)
+    const mo = new MutationObserver(onResizeish);
+    mo.observe(document.body, {
+      attributes: true,
+      attributeFilter: ['class', 'style'],
     });
 
-    const syncNow = () => {
-      if (isLocked) return;
-      const currentScrollTop =
-        scrollRoot === window ? window.pageYOffset : scrollRoot.scrollTop;
-      const y = currentScrollTop + offset + 1;
-
-      let current = map[0]?.key || 'artist';
-      for (const { key, ref } of map) {
-        const el = ref.current;
-        if (!el) continue;
-        const top = getAbsTopWithin(el, scrollRoot);
-        if (top <= y) current = key;
-        else break;
-      }
-      setActive(current);
-    };
-    syncNow();
-
-    const onScroll = () => requestAnimationFrame(syncNow);
-    (scrollRoot === window ? window : scrollRoot).addEventListener(
-      'scroll',
-      onScroll,
-      { passive: true }
+    // Attach listeners to every plausible scroll target
+    const targets = Array.from(
+      new Set(
+        [
+          curRoot === window ? window : curRoot,
+          window,
+          document,
+          document.scrollingElement,
+        ].filter(Boolean)
+      )
     );
+
+    targets.forEach((t) =>
+      t.addEventListener('scroll', onScrollish, { passive: true })
+    );
+    targets.forEach((t) =>
+      t.addEventListener('wheel', onScrollish, { passive: true })
+    );
+    targets.forEach((t) =>
+      t.addEventListener('touchmove', onScrollish, { passive: true })
+    );
+    window.addEventListener('resize', onResizeish, { passive: true });
+    window.addEventListener('orientationchange', onResizeish);
+
+    // Re-sync when images finish loading (gallery)
+    const onImgLoad = (e) => {
+      if (e?.target?.tagName === 'IMG') calcActive();
+    };
+    document.addEventListener('load', onImgLoad, true);
+
+    // Manual “poke” after smooth scroll finishes
+    const onPoke = () => calcActive();
+    window.addEventListener('slv:pokeSpy', onPoke);
+
+    // Initial sync
+    calcActive();
+
     return () => {
-      (scrollRoot === window ? window : scrollRoot).removeEventListener(
-        'scroll',
-        onScroll
-      );
-      obs.disconnect();
+      targets.forEach((t) => t.removeEventListener('scroll', onScrollish));
+      targets.forEach((t) => t.removeEventListener('wheel', onScrollish));
+      targets.forEach((t) => t.removeEventListener('touchmove', onScrollish));
+      window.removeEventListener('resize', onResizeish);
+      window.removeEventListener('orientationchange', onResizeish);
+      window.removeEventListener('slv:pokeSpy', onPoke);
+      document.removeEventListener('load', onImgLoad, true);
+      mo.disconnect();
+      if (raf) cancelAnimationFrame(raf);
     };
   }, [
     showArtist,
-    showTuning,
-    showGallery,
     showAudio,
+    showGallery,
+    showTuning,
     getCssOffset,
     isLocked,
     scrollRoot,
+    measureStickyTop,
   ]);
 
-  /* ===== Deterministic scroll-to that works in nested scrollers ===== */
+  /* ===== Deterministic scroll-to (browser decides the scroller) ===== */
   const scrollToKey = (key) => {
     const map = {
       artist: artistRef,
@@ -596,21 +669,23 @@ const SoundLegendShowroom = () => {
     const el = map[key]?.current;
     if (!el) return;
 
-    const off = getCssOffset();
-    const targetTop = Math.max(0, getAbsTopWithin(el, scrollRoot) - off);
-
     setActive(key);
     setIsLocked(true);
     if (lockTimerRef.current) clearTimeout(lockTimerRef.current);
     lockTimerRef.current = setTimeout(() => setIsLocked(false), 800);
 
-    const root = scrollRoot === window ? window : scrollRoot;
-    if ('scrollTo' in root) {
-      root.scrollTo({ top: targetTop, behavior: 'smooth' });
-    } else {
-      // very old fallback
-      root.scrollTop = targetTop;
+    try {
+      el.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+        inline: 'nearest',
+      });
+    } catch {
+      el.scrollIntoView(true);
     }
+
+    // After smooth scroll completes, poke the spy to resync (iOS timing can vary).
+    setTimeout(() => window.dispatchEvent(new CustomEvent('slv:pokeSpy')), 550);
   };
 
   useEffect(
@@ -629,24 +704,40 @@ const SoundLegendShowroom = () => {
   return (
     <div className="soundlegend-showroom">
       {/* Top logo */}
-      <img
-        src="/logos/sl-vault-white.png"
-        alt="SoundLegend Series"
-        className={`showroom-logo fade-in-section ${logoLoaded ? 'is-visible' : 'loading'}`}
-        onLoad={() => setLogoLoaded(true)}
-      />
-
+      <Link
+        to="/artisan-shop/soundlegend/vault"
+        className="showroom-logo-link"
+        aria-label="Back to Legacy Vault home"
+      >
+        <img
+          src="/logos/sl-vault-white.png"
+          alt="SoundLegend Series"
+          className={`showroom-logo fade-in-section ${logoLoaded ? 'is-visible' : 'loading'}`}
+          onLoad={() => setLogoLoaded(true)}
+        />
+      </Link>
       {/* Hero */}
       <div
         className={`showroom-hero fade-in-section ${heroLoaded ? 'is-visible' : 'loading'}`}
       >
-        {heroImage && (
+        {heroImage ? (
           <img
             src={heroImage}
             alt={name || 'SoundLegend Snare'}
             className="showroom-hero-image"
             onLoad={() => setHeroLoaded(true)}
             draggable={false}
+          />
+        ) : (
+          <video
+            className="showroom-hero-video"
+            src="/craft_in_motion/craftinmotion4k.mp4" // in /public
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            onLoadedData={() => setHeroLoaded(true)}
           />
         )}
       </div>
@@ -657,22 +748,27 @@ const SoundLegendShowroom = () => {
           ref={viewbarRef}
           className="sl-viewbar"
           aria-label="Jump to section"
-          style={{ top: headerTop }}
         >
           {showArtist && (
             <a
               href="#artist"
               className={`sl-pill ${active === 'artist' ? 'active' : ''}`}
-              onClick={() => setActive('artist')}
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToKey('artist');
+              }}
             >
-            Artist
+              Artist
             </a>
           )}
           {showAudio && (
             <a
               href="#audio"
               className={`sl-pill ${active === 'audio' ? 'active' : ''}`}
-              onClick={() => setActive('audio')}
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToKey('audio');
+              }}
             >
               Sound
             </a>
@@ -681,16 +777,20 @@ const SoundLegendShowroom = () => {
             <a
               href="#gallery"
               className={`sl-pill ${active === 'gallery' ? 'active' : ''}`}
-              onClick={() => setActive('gallery')}
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToKey('gallery');
+              }}
             >
               Gallery
             </a>
           )}
-          {/* {showTuning && (
+          {/* If you re-enable tuning later:
+    {showTuning && (
       <a
         href="#tuning"
         className={`sl-pill ${active === 'tuning' ? 'active' : ''}`}
-        onClick={() => setActive('tuning')}
+        onClick={(e) => { e.preventDefault(); scrollToKey('tuning'); }}
       >
         Legacy Tuning
       </a>

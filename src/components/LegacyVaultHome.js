@@ -13,8 +13,10 @@ function InlineFrame360({
   ext = 'webp',
   fps = 30,
   dragSensitivity = 0.22,
+  onProgress, // (loadedCount, total, errorCount) => void
 }) {
   const [loaded, setLoaded] = React.useState(0);
+  const [errors, setErrors] = React.useState(0);
   const [isPlaying, setIsPlaying] = React.useState(true);
   const [frame, setFrame] = React.useState(0);
 
@@ -35,7 +37,7 @@ function InlineFrame360({
     [basePath, prefix, pad, ext]
   );
 
-  // Preload frames (errors still advance the counter)
+  // Preload frames (errors still advance counters)
   React.useEffect(() => {
     let cancelled = false;
     imgsRef.current = Array.from({ length: totalFrames }, (_, i) => {
@@ -45,12 +47,27 @@ function InlineFrame360({
       img.crossOrigin = 'anonymous';
       const src = urlFor(i);
       img.src = src;
-      const done = () => {
-        if (!cancelled) setLoaded((v) => v + 1);
+
+      const handleLoad = () => {
+        if (cancelled) return;
+        setLoaded((v) => {
+          const nv = v + 1;
+          onProgress?.(nv, totalFrames, errors);
+          return nv;
+        });
       };
-      img.onload = done;
-      img.onerror = done;
-      img.onabort = done;
+      const handleFail = () => {
+        if (cancelled) return;
+        setErrors((e) => {
+          const ne = e + 1;
+          onProgress?.(loaded, totalFrames, ne);
+          return ne;
+        });
+      };
+
+      img.onload = handleLoad;
+      img.onerror = handleFail;
+      img.onabort = handleFail;
       return img;
     });
     return () => {
@@ -148,35 +165,62 @@ function InlineFrame360({
 }
 /* ------------------------------------------------------------------ */
 
+function HeroVideoFallback() {
+  // NOTE: file path provided by you (kept verbatim, spaces included)
+  const src = '/craft_in_motion/Drum Your Truth.mp4';
+  // Optional: add a poster image for the first frame if you have one
+  const poster = '/placeholder/snare-dark.jpg';
+
+  return (
+    <div className="lv-hero-fallback">
+      <video
+        className="lv-hero-video"
+        src={src}
+        poster={poster}
+        autoPlay
+        muted
+        playsInline
+        loop
+        preload="auto"
+      />
+      <div className="lv-hero-overlay">
+        <span className="lv-hero-overlay-text">Craft in Motion</span>
+      </div>
+      <p className="lv-hero-note">A glimpse from the artisan’s bench.</p>
+    </div>
+  );
+}
+
 /* ---------- Card for a Vault item ---------- */
 function VaultCard({ serial, name, heroImage, finish, teaser, href }) {
-  const fallback = '/placeholder/snare-dark.jpg';
   return (
     <Link to={href} className="lv-item">
       <div className="lv-item-media">
-        <img
-          src={heroImage || fallback}
-          alt={`${serial} – ${name || 'SoundLegend'}`}
-          loading="lazy"
-        />
+        {heroImage ? (
+          <img
+            src={heroImage}
+            alt={`${serial} – ${name || 'SoundLegend'}`}
+            loading="lazy"
+          />
+        ) : (
+          <video
+            className="lv-item-video"
+            src="/craft_in_motion/craftinmotion1080p.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+          />
+        )}
       </div>
 
       <div className="lv-item-body">
-        {/* Legacy Artisan name (Cinzel Decorative) */}
         <h3 className="lv-artist">{name || 'Legacy Artisan'}</h3>
-
-        {/* Serial right under the name */}
         <div className="lv-item-top">
           <span className="lv-item-serial">{serial}</span>
         </div>
-
-        {/* Teaser / quote */}
         {teaser && <p className="lv-teaser">“{teaser}”</p>}
-
-        {/* Finish (optional)
-        {finish && <div className="lv-item-meta">{finish}</div>} */}
-
-        {/* <div className="lv-item-cta">View Page →</div> */}
       </div>
     </Link>
   );
@@ -186,6 +230,26 @@ function VaultCard({ serial, name, heroImage, finish, teaser, href }) {
 export default function LegacyVaultHome() {
   const [items, setItems] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
+
+  // hero state
+  const [loadedFrames, setLoadedFrames] = React.useState(0);
+  const [errorFrames, setErrorFrames] = React.useState(0);
+  const [showVideoFallback, setShowVideoFallback] = React.useState(false);
+
+  // if nothing loads quickly, show fallback; switch back if frames arrive
+  React.useEffect(() => {
+    const t = setTimeout(() => {
+      if (loadedFrames < 1) setShowVideoFallback(true);
+    }, 4000); // 4s grace period
+    return () => clearTimeout(t);
+  }, [loadedFrames]);
+
+  // switch to 360 once we have a small buffer of frames
+  React.useEffect(() => {
+    if (loadedFrames >= 8) setShowVideoFallback(false);
+    // if too many frames fail, stick with video
+    if (errorFrames > 0 && loadedFrames === 0) setShowVideoFallback(true);
+  }, [loadedFrames, errorFrames]);
 
   React.useEffect(() => {
     (async () => {
@@ -198,8 +262,6 @@ export default function LegacyVaultHome() {
           const heroImage = d.heroImage || d.gallery?.[0] || '';
           const name = d.name || d.links?.name || '';
           const finish = d.specs?.finish || '';
-
-          // Pull an attention-grabbing teaser if present; otherwise omit
           const teaser =
             d.teaser ||
             d.tagline ||
@@ -208,7 +270,6 @@ export default function LegacyVaultHome() {
             d.storyTeaser ||
             d.specs?.tagline ||
             '';
-
           rows.push({
             serial,
             heroImage,
@@ -242,10 +303,21 @@ export default function LegacyVaultHome() {
         />
       </section>
 
-      {/* Big 360 */}
+      {/* Hero: 360 with smart fallback to video */}
       <section className="lv-hero-one">
         <div className="lv-hero-one-inner">
-          <InlineFrame360 totalFrames={392} basePath="/soundlegend360/med" />
+          {showVideoFallback ? (
+            <HeroVideoFallback />
+          ) : (
+            <InlineFrame360
+              totalFrames={392}
+              basePath="/soundlegend360/med"
+              onProgress={(loaded, total, errs) => {
+                setLoadedFrames(loaded);
+                setErrorFrames(errs);
+              }}
+            />
+          )}
         </div>
       </section>
 
@@ -256,23 +328,21 @@ export default function LegacyVaultHome() {
           A living archive where instruments and artists meet their memory.
         </p>
         <p className="lv-prose">
-          Step inside, listen close, and read the short stories behind each
-          build. You’ll see the choices that shaped the sound, the hands that
-          shaped the wood, and the moments these drums were born for.
+          Step inside, listen close, and meet the stories behind each build.
+          Some drums are
+          <strong> craft in motion</strong>—still becoming—while others are
+          awaiting
+          <strong> audio, story, or gallery</strong> updates. Return as the
+          Vault grows and each legend reveals more.
         </p>
         <p className="lv-prose">
-          When you’re ready, add your chapter. The Vault is growing—one legend
-          at a time.
+          If this journey resonates with you, click{' '}
+          <Link to="/artisan-shop/soundlegend" className="lv-link">
+            here
+          </Link>{' '}
+          to begin your custom snare drum journey. The Vault is growing—one
+          legend at a time.
         </p>
-
-        {/* <div className="lv-cta-row center">
-          <Link
-            to="/artisan-shop/soundlegend/vault/learn/legacy-tuning"
-            className="lv-cta-btn ghost"
-          >
-            What is Legacy Tuning?
-          </Link>
-        </div> */}
       </section>
 
       {/* Legacy Index */}
@@ -280,15 +350,16 @@ export default function LegacyVaultHome() {
         <div className="lv-index-head">
           <h2 className="lv-heading">Legacy Index</h2>
           <p className="muted centerish">
-            Every drum carries a story — tap an instrument to read, hear, and
-            feel its legacy.
+            Browse the instruments below. Tap an entry to explore its
+            journey—read, hear, and feel its voice. Pieces marked in progress
+            will update as new media arrives.
           </p>
         </div>
 
         {loading ? (
           <div className="lv-grid">
             {Array.from({ length: 4 }).map((_, i) => (
-              <div key={i} className="lv-item skeleton">
+              <div key={i} className="lv-item skeleton" aria-hidden="true">
                 <div className="lv-item-media" />
                 <div className="lv-item-body">
                   <div className="line w60" />
@@ -311,16 +382,25 @@ export default function LegacyVaultHome() {
       <section className="lv-join">
         <h2 className="lv-heading">Join the Legacy Experience</h2>
         <p className="lv-prose centerish">
-          It begins with a conversation. We design your voice, craft it by hand,
-          and preserve your story—photos, audio, and a living page here in the
-          Vault. Your drum ships with an NFC badge that always takes you home.
+          It begins with a conversation. Together we design your voice, craft it
+          by hand, and preserve your story—photos, audio, and a living page here
+          in the Vault. Your drum ships with an NFC badge that always brings you
+          home.
         </p>
 
         <div className="lv-cta-row center">
-          <Link to="/artisan-shop/soundlegend" className="lv-cta-btn primary">
+          <Link
+            to="/artisan-shop/soundlegend"
+            className="lv-cta-btn primary"
+            aria-label="Start your custom build"
+          >
             Start Your Build
           </Link>
-          <Link to="/soundlegend-portal" className="lv-cta-btn ghost">
+          <Link
+            to="/soundlegends/signin"
+            className="lv-cta-btn ghost"
+            aria-label="Open the artist portal"
+          >
             Artist Portal
           </Link>
         </div>
