@@ -11,7 +11,7 @@ import './NavBar.css';
 
 /** ⚙️ Paths to the Legacy Vault logo assets in /public */
 const VAULT_LOGO_LIGHT = '/legacy-vault-nav/black2.png'; // LIGHT theme uses black mark
-const VAULT_LOGO_DARK  = '/legacy-vault-nav/white2.png'; // DARK theme uses white mark
+const VAULT_LOGO_DARK = '/legacy-vault-nav/white2.png'; // DARK theme uses white mark
 
 /** 🔗 Where the Vault logo should link */
 const VAULT_ROUTE = '/artisan-shop/soundlegend/vault';
@@ -64,7 +64,8 @@ const NavBar = () => {
 
     // Exclude from NAVBAR (but can appear in footer): contact, endorsements, account
     const isContact = name.includes('contact') || label.includes('contact');
-    const isEndorsements = name.includes('endorsement') || label.includes('endorsement');
+    const isEndorsements =
+      name.includes('endorsement') || label.includes('endorsement');
     const isAccount = name.includes('account') || label.includes('account');
     if (isContact || isEndorsements || isAccount) return false;
 
@@ -101,7 +102,12 @@ const NavBar = () => {
   useEffect(() => {
     const fetchNavbarLinks = async () => {
       try {
-        const navbarLinksCollection = collection(db, 'settings', 'site', 'navbarLinks');
+        const navbarLinksCollection = collection(
+          db,
+          'settings',
+          'site',
+          'navbarLinks'
+        );
         const snapshot = await getDocs(navbarLinksCollection);
         const links = snapshot.docs
           .map((d) => ({ id: d.id, ...d.data() }))
@@ -192,22 +198,36 @@ const NavBar = () => {
     );
   };
 
-  /** 🎯 NEW: Legacy Vault logo link (placed just before the Cart) */
-  const renderLegacyVaultLogo = () => (
-    <Link
-      to={VAULT_ROUTE}
-      className="vault-logo-link"
-      onClick={() => handleNavLinkClick(VAULT_ROUTE)}
-      aria-label="Legacy Vault"
-      title="Legacy Vault"
-    >
-<img
-  src={VAULT_LOGO_DARK}   // always white in sticky mini + mobile
-  alt="Legacy Vault"
-  className="vault-logo-img"
-/>
-    </Link>
-  );
+  /** 🎯 Legacy Vault logo link (auto-picks light/dark asset) */
+  const renderLegacyVaultLogo = () => {
+    // Sticky mini (or sticky mobile dropdown) sits on a dark sheet → always white mark
+    const isStickyContext = showStickyHeader;
+
+    // In main (non-sticky) navbar: black in light mode, white in dark mode
+    const vaultLogoSrc = isStickyContext
+      ? VAULT_LOGO_DARK
+      : isDarkMode
+        ? VAULT_LOGO_DARK
+        : VAULT_LOGO_LIGHT;
+
+    return (
+      <Link
+        to={VAULT_ROUTE}
+        className="vault-logo-link"
+        onClick={() => handleNavLinkClick(VAULT_ROUTE)}
+        aria-label="Legacy Vault"
+        title="Legacy Vault"
+      >
+        <img
+          src={vaultLogoSrc}
+          alt="Legacy Vault"
+          className="vault-logo-img"
+          loading="eager"
+          decoding="async"
+        />
+      </Link>
+    );
+  };
 
   return (
     <>
@@ -249,6 +269,8 @@ const NavBar = () => {
 
                 {renderSoundLegendTab()}
 
+                {renderLegacyVaultLogo()}
+
                 {user && isAdmin && (
                   <Link
                     to="/admin"
@@ -258,9 +280,6 @@ const NavBar = () => {
                     <FaCog /> Admin
                   </Link>
                 )}
-
-                {/* NEW: Legacy Vault logo just before Cart */}
-                {renderLegacyVaultLogo()}
 
                 {/* Sign out (Account removed) */}
                 {user && (
@@ -329,6 +348,8 @@ const NavBar = () => {
 
                 {renderSoundLegendTab()}
 
+                {renderLegacyVaultLogo()}
+
                 {user && isAdmin && (
                   <Link
                     to="/admin"
@@ -338,9 +359,6 @@ const NavBar = () => {
                     <FaCog /> Admin
                   </Link>
                 )}
-
-                {/* NEW: Legacy Vault logo before Cart */}
-                {renderLegacyVaultLogo()}
 
                 {user && (
                   <button className="nav-link-signout" onClick={handleSignOut}>
@@ -433,6 +451,8 @@ const NavBar = () => {
 
               {renderSoundLegendTab()}
 
+              {renderLegacyVaultLogo()}
+
               {user && isAdmin && (
                 <Link
                   to="/admin"
@@ -442,9 +462,6 @@ const NavBar = () => {
                   <FaCog /> Admin
                 </Link>
               )}
-
-              {/* NEW: Legacy Vault logo before Cart */}
-              {renderLegacyVaultLogo()}
 
               {user && (
                 <button className="nav-link-signout" onClick={handleSignOut}>

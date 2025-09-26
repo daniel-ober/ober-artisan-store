@@ -30,7 +30,7 @@
   color: #222;
 }
 .component-container * {
-  color: inherit;
+  /* color: inherit; */
 }
 
 /* =============== Cards Grid =============== */
