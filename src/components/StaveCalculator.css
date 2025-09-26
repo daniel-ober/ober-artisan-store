@@ -28,14 +28,29 @@
   font-size: 14px;
 }
 
-.input-grid input,
-.select-field {
+/* Make calculator fields white, text black */
+.stave-calculator .input-grid input,
+.stave-calculator .input-grid select {
   padding: 10px;
   margin-top: 8px;
   font-size: 16px;
   border-radius: 8px;
   border: 1px solid #ccc;
-  background-color: #f9f9f9;
+  background: #fff !important;
+  color: #111 !important;
+}
+
+/* Ensure labels are black here (override yellow from elsewhere) */
+.stave-calculator label {
+  color: #111 !important;
+}
+
+/* Keep the nice focus ring */
+.stave-calculator .input-grid input:focus,
+.stave-calculator .input-grid select:focus {
+  outline: none;
+  border-color: #888;
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.06);
 }
 
 .calculator-select-field:focus {

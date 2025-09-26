@@ -135,13 +135,15 @@ async function gmailSend({
 // ───────────────────────────────────────────────────────────────────────────────
 // Main Express app (JSON)
 const app = express();
-app.use(express.json());
+app.use(express.json({ limit: '12mb' }));
 
 const allowedOrigins = [
   'http://localhost:3000',
+  'http://localhost:5173',
   'https://oberartisandrums.com',
   'https://www.oberartisandrums.com',
   'https://danoberartisandrums.web.app',
+  'https://admin.oberartisandrums.com',
 ];
 app.use((req, res, next) => {
   const origin = req.headers.origin;
@@ -157,6 +159,9 @@ app.use((req, res, next) => {
   if (req.method === 'OPTIONS') return res.status(204).end();
   next();
 });
+
+// 🔹 Healthcheck for Cloud Run
+app.get('/', (_req, res) => res.status(200).send('ok'));
 
 // Helpers
 const stripeFromSecret = () => stripeLib(STRIPE_SECRET_KEY.value());
@@ -1329,13 +1334,6 @@ printifyWebhookApp.post('/', async (req, res) => {
 
 // ───────────────────────────────────────────────────────────────────────────────
 // Shipping — live Printify quote (returns exact rates for the given address/ZIP)
-//
-// POST /shipping/printify/quote
-// Accepts EITHER:
-//   { line_items: [...], address_to: {...} }
-// OR:
-//   { products: [...], shippingAddress: {...} }   // your cart + address shape
-// Returns (example): { economy: 399, standard: 999, express: 2499, ... }
 app.post('/shipping/printify/quote', async (req, res) => {
   try {
     const shopId = PRINTIFY_SHOP_ID.value();
@@ -1355,7 +1353,6 @@ app.post('/shipping/printify/quote', async (req, res) => {
       address_to: address_to || toPrintifyAddress(shippingAddress || {}),
     };
 
-    // basic guardrails
     if (!Array.isArray(payload.line_items) || !payload.line_items.length) {
       return res.status(400).json({ error: 'Missing or empty line_items' });
     }
@@ -1371,7 +1368,6 @@ app.post('/shipping/printify/quote', async (req, res) => {
       { headers: pHeaders() }
     );
 
-    // data is typically: { standard: 999, economy: 399, ... } (cents)
     return res.json(data);
   } catch (e) {
     const detail = e?.response?.data || e?.message || e;
@@ -1403,7 +1399,7 @@ const handlePrintifyProductPublished = async (productId) => {
       metaById.set(m.id, m)
     );
 
-    // Enrich variants: keep original options array, also human fields + images per variant
+    // Enrich variants
     const enrichedVariants = (product.variants || []).map((v) => {
       const m = metaById.get(v.id) || {};
       const optHuman = (m.options || []).reduce((acc, opt) => {
@@ -1418,12 +1414,12 @@ const handlePrintifyProductPublished = async (productId) => {
         id: String(v.id),
         title: v.title || '',
         sku: v.sku || '',
-        price: v.price, // Printify retail cents
+        price: v.price,
         printifyPriceCents: Number(v.price || 0),
         quantity: v.quantity,
         is_enabled: !!v.is_enabled,
         is_available: v.is_available !== false,
-        options: Array.isArray(v.options) ? v.options.slice() : [], // ← keep raw ids (ordered)
+        options: Array.isArray(v.options) ? v.options.slice() : [],
         options_array: Array.isArray(v.options) ? v.options.slice() : [],
         size: optHuman.size || '',
         color: optHuman.color || '',
@@ -1437,8 +1433,6 @@ const handlePrintifyProductPublished = async (productId) => {
 
     const enabled = enrichedVariants.filter((v) => v.is_enabled);
 
-    // Enrich product.options, preserving Printify hex colors on each value.
-    // Do NOT overwrite "colors" with names; keep names in a separate field.
     const isHex = (s) => /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(String(s || ''));
 
     const enrichedOptions = (product.options || []).map((opt) => {
@@ -1458,9 +1452,7 @@ const handlePrintifyProductPublished = async (productId) => {
         });
 
         return {
-          // spread FIRST
           ...val,
-          // then override to force hex usage
           id: val.id,
           title: val.title,
           colors: hexColors,
@@ -1472,7 +1464,6 @@ const handlePrintifyProductPublished = async (productId) => {
       return { ...opt, values };
     });
 
-    // Stripe product + prices (one per enabled variant)
     const stripeProduct = await stripe.products.create({
       name: product.title,
       description: product.description || '',
@@ -1504,7 +1495,6 @@ const handlePrintifyProductPublished = async (productId) => {
       };
     }
 
-    // Compute min price cents for listing
     const minPriceCents = enabled.reduce((min, v) => {
       const cents = Number(v.printifyPriceCents || 0);
       return min === null ? cents : Math.min(min, cents);
@@ -1614,7 +1604,7 @@ exports.autoReplyInquiry = onDocumentCreated(
         to: data.email,
         subject: "We've Received Your Message",
         html,
-        fromEmail: 'support@oberartisandrums.com', // send-as alias
+        fromEmail: 'support@oberartisandrums.com',
         replyTo: 'support@oberartisandrums.com',
         bcc: ['support@oberartisandrums.com'],
       });
@@ -1649,7 +1639,7 @@ exports.autoReplySoundlegend = onDocumentCreated(
         to: data.email,
         subject: 'Welcome to the SoundLegend Experience',
         html,
-        fromEmail: 'soundlegend@oberartisandrums.com', // send-as alias
+        fromEmail: 'soundlegend@oberartisandrums.com',
         replyTo: 'soundlegend@oberartisandrums.com',
         bcc: ['soundlegend@oberartisandrums.com'],
       });
@@ -1689,7 +1679,7 @@ exports.autoReplyEndorsement = onDocumentCreated(
         to: data.email,
         subject: 'Thanks for your Endorsement Application',
         html,
-        fromEmail: 'endorsements@oberartisandrums.com', // send-as alias
+        fromEmail: 'endorsements@oberartisandrums.com',
         replyTo: 'endorsements@oberartisandrums.com',
         bcc: ['endorsements@oberartisandrums.com'],
       });
@@ -1699,10 +1689,13 @@ exports.autoReplyEndorsement = onDocumentCreated(
   }
 );
 
-// Main API, Stripe webhook, Printify webhook, Manual refresh
+// Main API (same URL), but with more headroom for image work
 exports.api = onRequest(
   {
     region: 'us-central1',
+    timeoutSeconds: 300,
+    memory: '1GiB',
+    maxInstances: 2,
     secrets: [
       STRIPE_SECRET_KEY,
       STRIPE_WEBHOOK_SECRET,
@@ -1714,6 +1707,7 @@ exports.api = onRequest(
   },
   app
 );
+
 exports.stripeWebhook = onRequest(
   {
     region: 'us-central1',
@@ -1755,12 +1749,177 @@ exports.refreshPrintifyStockNow = onRequest(
   }
 );
 
-// Other callables unchanged
-exports.adminCreateUser = functions.https.onCall(async (data, context) => {
+// ───────────────────────────────────────────────────────────────────────────────
+// Resin Accent Generator — keep veneer color; fill only darkest pits
+app.post('/resin/generate', async (req, res) => {
+  let sharp;
+  try {
+    sharp = require('sharp');
+  } catch (e) {
+    console.error('Sharp failed to load:', e);
+    return res.status(500).json({ error: 'Image engine unavailable' });
+  }
+
+  try {
+    const {
+      veneerDataUrl,
+      hex = '#1aa7ff',
+      intensity = 'medium',   // 'light' | 'medium' | 'heavy'
+      coverage = 0.45,        // tiny nudge of selectivity
+      size = 1536,
+    } = req.body || {};
+
+    if (!veneerDataUrl || !/^data:image\/(png|jpe?g);base64,/.test(veneerDataUrl)) {
+      return res.status(400).json({ error: 'Missing or invalid veneerDataUrl' });
+    }
+
+    // ~8 MB guard
+    const approxBytes = Math.floor(veneerDataUrl.length * 0.75);
+    if (approxBytes > 8 * 1024 * 1024) {
+      return res.status(413).json({ error: 'Input image too large (max ~8MB).' });
+    }
+
+    // Decode + normalize
+    const b64 = veneerDataUrl.split(',')[1];
+    const inputBuf = Buffer.from(b64, 'base64');
+
+    const base = sharp(inputBuf).rotate().ensureAlpha();
+    const meta = await base.metadata();
+    const maxDim = Math.max(meta.width || 0, meta.height || 0) || size;
+    const scale = Math.min(1, (size || maxDim) / maxDim);
+    const w = Math.round((meta.width || size) * scale);
+    const h = Math.round((meta.height || size) * scale);
+    const img = base.resize({ width: w, height: h });
+
+    // --- Luminance (no heavy global contrast) ---------------------------------
+    const grayRaw = await img
+      .clone()
+      .greyscale()
+      .gamma(1.0)
+      .raw()
+      .toBuffer({ resolveWithObject: true });
+
+    // Pack to 1-channel PNG for sharp ops that need image objects
+    const grayPNG = await sharp(grayRaw.data, {
+      raw: { width: grayRaw.info.width, height: grayRaw.info.height, channels: 1 },
+    }).png().toBuffer();
+
+    // --- Local darkness (black-hat): blur(gray, σ) - gray ----------------------
+    const blurSigma = Math.max(2, Math.round(Math.max(w, h) / 220)); // scale with size
+    const localMeanPNG = await sharp(grayPNG).blur(blurSigma).png().toBuffer();
+
+    // delta = localMean - gray  (positive where pixel is darker than its neighborhood)
+    const deltaRaw = await sharp(localMeanPNG)
+      .composite([{ input: grayPNG, blend: 'subtract' }])
+      .raw()
+      .toBuffer({ resolveWithObject: true });
+
+    // Histogram of delta (0..255)
+    const hist = new Uint32Array(256);
+    const deltaData = deltaRaw.data;
+    for (let i = 0; i < deltaData.length; i++) hist[deltaData[i]]++;
+
+    // Select only the strongest local pits (quantile on tail)
+    const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+    const baseFrac = intensity === 'light' ? 0.010 : intensity === 'heavy' ? 0.040 : 0.020; // 1–4%
+    const frac = clamp(baseFrac + (coverage - 0.45) * 0.020, 0.005, 0.060);
+
+    // Walk the histogram from bright → dark tail to find threshold
+    const total = deltaData.length;
+    let acc = 0, T = 255;
+    for (let t = 255; t >= 0; t--) {
+      acc += hist[t];
+      if (acc / total >= frac) { T = t; break; }
+    }
+
+    // Build mask: (delta >= T) AND (original gray is reasonably dark)
+    const maskBytes = Buffer.alloc(deltaData.length);
+    const g = grayRaw.data;
+    const darkGate = 180; // gate out light flats entirely
+    let whiteCount = 0;
+    for (let i = 0; i < deltaData.length; i++) {
+      const isPit = deltaData[i] >= T && g[i] < darkGate;
+      const v = isPit ? 255 : 0;
+      maskBytes[i] = v;
+      if (v === 255) whiteCount++;
+    }
+
+    // If the mask is still too big (>12%), tighten automatically
+    const whiteRatio = whiteCount / deltaData.length;
+    if (whiteRatio > 0.12) {
+      // raise threshold by 10 levels and rebuild quickly
+      const tightenBy = 10;
+      for (let i = 0; i < deltaData.length; i++) {
+        const isPit = (deltaData[i] >= Math.min(255, T + tightenBy)) && g[i] < darkGate;
+        maskBytes[i] = isPit ? 255 : 0;
+      }
+    }
+
+    // Clean & crisp edges -> just holes/knots
+    const maskPNG = await sharp(maskBytes, {
+      raw: { width: grayRaw.info.width, height: grayRaw.info.height, channels: 1 },
+    })
+      .median(1)
+      .blur(0.6)
+      .threshold(200) // binarize
+      .png()
+      .toBuffer();
+
+    // --- Paint only masked pixels --------------------------------------------
+    const { r, g: gg, b } = hexToRgbSafe(hex);
+    const fillOpacity = intensity === 'light' ? 0.55 : intensity === 'heavy' ? 0.95 : 0.75;
+
+    const fillPlate = await sharp({
+      create: { width: w, height: h, channels: 4, background: { r, g: gg, b, alpha: fillOpacity } },
+    }).png().toBuffer();
+
+    // Keep color only where mask == white
+    const coloredPits = await sharp(fillPlate)
+      .composite([{ input: maskPNG, blend: 'dest-in' }])
+      .png()
+      .toBuffer();
+
+    // Compose over the original veneer (non-masked pixels are untouched)
+    const outBuf = await img
+      .clone()
+      .composite([{ input: coloredPits, blend: 'over' }])
+      .png()
+      .toBuffer();
+
+    const outB64 = `data:image/png;base64,${outBuf.toString('base64')}`;
+    return res.json({ ok: true, jobId: crypto.randomUUID(), resultDataUrl: outB64 });
+  } catch (err) {
+    console.error('❌ /resin/generate failed:', err?.message || err);
+    return res.status(500).json({ error: 'Generation failed' });
+  }
+});
+
+function hexToRgbSafe(hex) {
+  const m = String(hex || '').trim().match(/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i);
+  if (!m) return { r: 26, g: 167, b: 255 };
+  return { r: parseInt(m[1], 16), g: parseInt(m[2], 16), b: parseInt(m[3], 16) };
+}
+
+// Callables
+exports.adminCreateUser = onCall({ region: 'us-central1' }, async (request) => {
+  // Keep your existing handler body; if it referenced (data, context) before, use:
+  const data = request.data;
+  const context = request;
+
   // ... unchanged ...
 });
-const { generateDrumMockup } = require('./generateDrumMockup');
-exports.generateDrumMockup = generateDrumMockup;
+
+// Safe-load generateDrumMockup so a missing/broken file won't crash startup
+let generateDrumMockup;
+try {
+  ({ generateDrumMockup } = require('./generateDrumMockup'));
+} catch (e) {
+  console.warn('generateDrumMockup not loaded:', e?.message || e);
+}
+if (typeof generateDrumMockup === 'function') {
+  exports.generateDrumMockup = generateDrumMockup;
+}
+
 exports.computeSoundPrism = onCall(
   { region: 'us-central1' },
   async (request) => {

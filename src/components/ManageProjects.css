@@ -110,3 +110,57 @@
   background-color: transparent;
   cursor: pointer;
 }
+
+/* --- Fix field styling on Manage Projects page (override global EndorsementForm.css) --- */
+.manage-projects label {
+  color: #111 !important;
+}
+
+/* Text inputs, selects, textareas ONLY — do NOT touch checkboxes */
+.manage-projects .filters select,
+.manage-projects .filters input:not([type="checkbox"]),
+.manage-projects .projects-table select,
+.manage-projects .projects-table input:not([type="checkbox"]),
+.manage-projects .projects-table textarea {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background: #fff !important;
+  color: #111 !important;
+  border: 1px solid #ccc !important;
+  border-radius: 8px !important;
+
+  padding: 8px 10px !important;
+  font-size: 14px !important;
+  box-shadow: none !important;
+}
+
+.manage-projects .filters select:focus,
+.manage-projects .filters input:not([type="checkbox"]):focus,
+.manage-projects .projects-table select:focus,
+.manage-projects .projects-table input:not([type="checkbox"]):focus,
+.manage-projects .projects-table textarea:focus {
+  outline: none;
+  border-color: #888 !important;
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.06) !important;
+}
+
+/* Proper styling/alignment for the "Show completed" checkbox */
+.manage-projects .filters input[type="checkbox"] {
+  appearance: checkbox;
+  -webkit-appearance: checkbox;
+  -moz-appearance: checkbox;
+  width: auto;
+  height: auto;
+  margin-right: 8px;
+  background: transparent !important; /* ensure no dark fill leaks in */
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.manage-projects .filters label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}

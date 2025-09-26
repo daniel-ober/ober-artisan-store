@@ -1,13 +1,15 @@
 /* ───── Base typography for labels and inputs ───── */
-label {
+.endorsement-form label {
   display: block;
   margin-bottom: 14px;
   font-size: 1rem;
-  color: #ffe600c0;              /* high-contrast label text */
+  color: #ffe600c0;
   font-family: 'Poppins', sans-serif;
 }
 
-input, select, textarea {
+.endorsement-form input,
+.endorsement-form select,
+.endorsement-form textarea {
   width: 100%;
   margin-top: 6px;
   padding: 10px 12px;
@@ -21,8 +23,8 @@ input, select, textarea {
   transition: border-color .15s ease, box-shadow .15s ease;
 }
 
-input::placeholder,
-textarea::placeholder {
+.endorsement-form input::placeholder,
+.endorsement-form textarea::placeholder {
   color: #aaa;
   font-family: 'Poppins', sans-serif;
   font-size: 0.9rem;
@@ -65,9 +67,9 @@ textarea::placeholder {
 label .optional { color: #b5b5b5; font-weight: 400; }
 
 /* Focus ring */
-input:focus,
-textarea:focus,
-select:focus {
+.endorsement-form input:focus,
+.endorsement-form textarea:focus,
+.endorsement-form select:focus {
   border-color: #3a3a3a;
   box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
 }
