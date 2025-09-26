@@ -145,10 +145,11 @@
 
   
   .badge {
-    background-color: #d5d5ff;
+    background-color: #4343fd;
     color: white;
     padding: 5px 10px;
     /* border-radius: 12px; */
+    font-weight: 800;
     font-size: 0.9rem;
     margin-left: 8px;
   }

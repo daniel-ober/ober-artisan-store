@@ -87,20 +87,28 @@ const stripHtml = (html) => {
 };
 
 const getLowestPrice = (product) => {
-  if (Array.isArray(product.variants) && product.variants.length > 0) {
-    const prices = product.variants
-      .map(
-        (v) =>
-          v.price ??
-          product.stripePriceIds?.[v.id]?.unitAmount ??
-          product.stripePriceIds?.[v.id]?.price ??
-          v.printifyPriceCents
-      )
-      .filter((p) => Number.isFinite(p))
-      .map((p) => p / 100);
-    return prices.length ? Math.min(...prices) : null;
-  }
-  return product.price ?? null;
+  const vs = Array.isArray(product.variants)
+    ? product.variants.filter(v => v?.is_enabled && v?.is_available !== false)
+    : [];
+
+  const cents = vs.map(v => {
+    const s = product.stripePriceIds?.[v.id];
+    const candidates = [
+      v.price,                     // cents
+      s?.unitAmount ?? s?.price,   // cents (support both shapes)
+      v.printifyPriceCents,        // cents
+    ].map(n => Number.isFinite(n) ? Number(n) : null);
+
+    // choose the first sane cents value
+    return candidates.find(n => n !== null && n >= 100 && n <= 100000);
+  }).filter(n => Number.isFinite(n));
+
+  if (cents.length) return Math.min(...cents) / 100;
+
+  // fallbacks if no variant cents were usable
+  if (Number.isFinite(product.retailPriceCents)) return product.retailPriceCents / 100;
+  if (Number.isFinite(product.price)) return product.price; // already dollars
+  return null;
 };
 
 const baseImageSrc = (product) => {

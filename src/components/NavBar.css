@@ -154,6 +154,12 @@
   box-shadow: none;
 }
 
+/* On the dark sticky mini bar, use a subtle light halo */
+.navbar-sticky-mini .vault-logo-img {
+  filter: drop-shadow(0 0 6px rgba(255,255,255,.18));
+}
+
+
 body.dark .navbar-sticky-mini {
   background: rgba(0, 0, 0, 0.9);
 }
@@ -283,23 +289,27 @@ body.dark .navbar-sticky-mini {
 }
 
 /* ===== Legacy Vault logo link (between Merch and Cart) ===== */
-.vault-logo-link{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:6px 8px;
-  text-decoration:none;
-  cursor:pointer;
+.vault-logo-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 8px;
+  text-decoration: none;
+  cursor: pointer;
 }
 
-.vault-logo-img{
-  height:50px;         /* visually aligned with text */
-  width:auto;
-  display:block;
-  object-fit:contain;
-  vertical-align:middle;
-  padding-bottom:13px;
-  filter:none !important;           /* ← reset: NEVER recolor by default */
+.vault-logo-img {
+  height: 40px;                 /* desktop/main navbar size */
+  margin-bottom: 13px;
+  margin-left: 10px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  vertical-align: middle;
+  padding: 0;
+
+  /* shadow behind the logo */
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,.45));
 }
 
 /* Sticky mini bar (desktop): force white mark on dark background */
@@ -432,7 +442,7 @@ body.dark .navbar-sticky-mini {
     max-width: 250px;
     padding: 4px 0;
   }
-  .vault-logo-img{ height:62px; }
+  .vault-logo-img{ height:40px; }
 }
 
 /* === LANDSCAPE FIX (iPad / horizontal tablets) === */

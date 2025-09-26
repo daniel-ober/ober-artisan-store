@@ -1,343 +1,217 @@
-.home-carousel-wrapper {
-  position: relative;
-  width: 90%;
-  max-width: 1000px; /* Match YouTube + CTA */
-  margin: 0 auto;
-  padding: 1rem 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* ---------- Carousel (fixed layering + consistent framing) ---------- */
+
+.home-carousel-wrapper{
+  position:relative;
+  width:90%;
+  max-width:1000px;            /* match YouTube + CTA */
+  margin:0 auto;
+  padding:1rem 0;
+
+  /* clip the LCP <img> that sits under .home-carousel */
+  overflow:hidden;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
 
-.home-carousel {
-  width: 100%;
-  aspect-ratio: 2 / 1;
-  background-size: cover;
-  background-position: center;
-  border-radius: 16px;
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-image 1s ease-in-out;
-  animation: kenBurnsZoom 12s ease-in-out infinite alternate;
-  position: relative;
-  overflow: hidden;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+.home-carousel{
+  position:relative;
+  width:100%;
+  aspect-ratio:2/1;
+  box-shadow:0 12px 36px rgba(0,0,0,.4);
+  overflow:hidden;
+
+  /* gentle motion for active slide only */
+  animation:kenBurnsZoom 12s ease-in-out infinite alternate;
+
+  /* slides supply their own background */
+  background:none;
 }
 
-.carousel-control-row {
-  position: absolute;
-  bottom: 30px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: 10;
+@keyframes kenBurnsZoom{
+  from{ transform:scale(1); }
+  to  { transform:scale(1.04); }
 }
 
-.carousel-control-nav {
-  display: flex;
-  align-items: center;
-  gap: 16px;
+/* ===== Background layers ===== */
+
+/* Underlay image for LCP — clipped by wrapper */
+.carousel-lcp-img{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:cover;
+  object-position:var(--focal-x,50%) var(--focal-y,50%);
+  z-index:-1; pointer-events:none;
 }
 
-.carousel-arrow {
-  font-size: 1.2rem;
-  background: none;
-  border: none;
-  color: white;
-  cursor: pointer;
-  transition: color 0.3s ease;
+/* Visible slide (one at a time) */
+.carousel-slide{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  background-size:cover;
+  background-position:var(--focal-x,50%) var(--focal-y,50%);
+  opacity:0; visibility:hidden; pointer-events:none;
+  transition:opacity .45s ease;
+  z-index:1;
+}
+.carousel-slide.active{ opacity:1; visibility:visible; pointer-events:auto; }
+.carousel-slide.inactive{ opacity:0; visibility:hidden; }
+
+/* ===== Overlay & content ===== */
+
+/* lock overlay position: centered slightly below midpoint */
+.carousel-overlay{
+  --overlay-top: 56%;               /* adjust 54–58% to taste */
+
+  position:absolute;
+  left:50%;
+  top:var(--overlay-top);
+  transform:translate(-50%, -50%);
+
+  z-index:2;
+  text-align:center;
+  color:#fff;
+
+  width:min(92%, 740px);
+  padding:2.2rem 2.6rem;
 }
 
-.carousel-arrow:hover {
-  color: #ff6600;
+/* Soft vignette behind the text (very subtle) */
+.carousel-overlay::before{
+  content:"";
+  position:absolute; inset:-22%;
+  background:inherit;
+  backdrop-filter:blur(2px);
+  mask-image:radial-gradient(ellipse at center, rgba(0,0,0,.88) 28%, rgba(0,0,0,0) 62%);
+  -webkit-mask-image:radial-gradient(ellipse at center, rgba(0,0,0,.88) 28%, rgba(0,0,0,0) 62%);
+  border-radius:50%;
+  z-index:-1;
 }
 
-.carousel-pause-button {
-  margin-top: 8px;
-  background: none;
-  border: none;
-  color: white;
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-
-.carousel-pause-button:hover {
-  color: #ff6600;
-}
-
-@keyframes kenBurnsZoom {
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(1.04);
-  }
-}
-
-.carousel-overlay {
-  position: relative;
-  text-align: center;
-  color: #fff;
-  width: fit-content;
-  max-width: 90%;
-  padding: 2rem 2.5rem;
-  margin: auto;
-  z-index: 2;
-}
-
-.carousel-overlay::before {
-  content: '';
-  position: absolute;
-  top: -20%;
-  left: -20%;
-  right: -20%;
-  bottom: -20%;
-  background: inherit;
-  backdrop-filter: blur(2px);
-  mask-image: radial-gradient(
-    ellipse at center,
-    rgba(0, 0, 0, 1) 22%,
-    rgba(0, 0, 0, 0) 60%
-  );
-  -webkit-mask-image: radial-gradient(
-    ellipse at center,
-    rgba(0, 0, 0, 1) 22%,
-    rgba(0, 0, 0, 0) 60%
-  );
-  z-index: -1;
-  border-radius: 50%;
-}
-
-.carousel-overlay h1 {
-  font-size: 2.8rem;
-  font-weight: 800;
-  margin-bottom: 1.25rem;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-  color: #ffffff;
+.carousel-overlay h1{
+  font-size:clamp(1.875rem, 4vw, 3rem);
+  font-weight:800;
+  line-height:1.15;
+  letter-spacing:-.02em;
+  color:#fff;
+  margin:0 0 .9rem;
   text-shadow:
-    0 0 6px rgba(0, 0, 0, 0.6),
-    0 2px 16px rgba(0, 0, 0, 0.5);
+    0 0 6px rgba(0,0,0,.6),
+    0 2px 16px rgba(0,0,0,.5);
 }
 
-.carousel-overlay p {
-  font-size: 1.2rem;
-  margin-bottom: 2rem;
-  line-height: 1.5;
-  opacity: 0.95;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+.carousel-overlay p{
+  font-size:clamp(1rem, 2.1vw, 1.375rem);
+  line-height:1.45;
+  opacity:.95;
+  margin:0 0 1.4rem;
+  text-shadow:0 1px 3px rgba(0,0,0,.4);
+  max-width:30ch;                 /* keep to ~2–3 lines */
 }
 
-.carousel-overlay button {
-  background: #ff6600;
-  color: white;
-  padding: 14px 28px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  margin-bottom: 2rem; /* Avoid overlapping dots */
-  transition:
-    background-color 0.3s ease,
-    transform 0.2s ease,
-    opacity 1.6s ease; /* match fade duration */
-  opacity: 0; /* initial state */
+.carousel-overlay button{
+  background:#ff6600;
+  color:#fff;
+  border:0; border-radius:10px;
+  cursor:pointer;
+
+  font-size:clamp(.95rem, 2vw, 1.1rem);
+  font-weight:700;
+  padding:.9rem 1.4rem;
+
+  transition:background-color .25s ease, transform .18s ease, opacity 1.2s ease;
+  margin:.2rem 0 2.2rem;          /* reserve space above dots */
+  opacity:0;
+}
+.carousel-overlay button:hover{ background:#ff6f13; transform:translateY(-1px); }
+
+.carousel-text{ opacity:0; transition:opacity 1.2s ease; }
+.carousel-text.fade-in, .carousel-overlay button.fade-in{ opacity:1; }
+.carousel-text.fade-out, .carousel-overlay button.fade-out{ opacity:0; }
+
+/* ===== Controls ===== */
+
+.carousel-dots{
+  position:absolute; left:0; right:0; bottom:66px;
+  display:flex; justify-content:center; gap:12px;
+  z-index:3;
+}
+.dot{
+  width:12px; height:12px; border-radius:50%;
+  background:rgba(255,255,255,.42);
+  transition:transform .2s ease, background .2s ease;
+  cursor:pointer;
+}
+.dot.active{ background:#ff6600; transform:scale(1.25); }
+
+/* remove “bubble” circles behind nav buttons */
+.carousel-nav{
+  position:absolute; left:0; right:0; bottom:26px;
+  display:flex; justify-content:center; gap:16px; z-index:3;
+}
+.carousel-control-button{
+  padding:0 .6rem;                /* tap area without a circle */
+}
+.carousel-nav button{
+  background:transparent !important;
+  color:#fff;
+  border:0;
+  border-radius:0;
+  width:auto; height:auto;
+  font-size:1.2rem;
+  cursor:pointer;
+  padding:0;
+  box-shadow:none;
+}
+.carousel-nav button:hover{ opacity:.85; }
+
+/* ===== Tablet tweaks ===== */
+@media (max-width: 1024px){
+  .home-carousel{ aspect-ratio: 1.7/1; }
+  .carousel-overlay{ padding:1.8rem 2rem; }
 }
 
-.carousel-overlay button.fade-in {
-  opacity: 1;
-}
+/* ===== Mobile (condensed) ===== */
+@media (max-width: 768px){
+  .home-carousel-wrapper{ width:92%; padding:.5rem 0; }
+  .home-carousel{ aspect-ratio: 1.35/1; border-radius:12px; }
 
-.carousel-overlay button.fade-out {
-  opacity: 0;
-}
-.carousel-text {
-  opacity: 0;
-  transition: opacity 1.6s ease;
-}
-
-.carousel-text.fade-in {
-  opacity: 1;
-}
-
-.carousel-text.fade-out {
-  opacity: 0;
-}
-
-.dot {
-  width: 12px;
-  height: 12px;
-  background-color: rgba(255, 255, 255, 0.4);
-  border-radius: 50%;
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.dot.active {
-  background-color: #ff6600;
-  transform: scale(1.25);
-}
-
-.carousel-dots {
-  position: absolute;
-  bottom: 70px; /* move dots higher */
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  z-index: 10;
-}
-
-.carousel-nav {
-  position: absolute;
-  bottom: 30px; /* nav controls below dots */
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  z-index: 9;
-}
-
-.carousel-control-button {
-padding: 0;
-padding-top: 20px;
-}
-
-.carousel-nav button {
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
-  font-size: 1.2rem;
-  border: none;
-  border-radius: 50%;
-  width: 34px;
-  height: 34px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.carousel-nav button:hover {
-  background: rgba(0, 0, 0, 0.8);
-}
-
-.carousel-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1;
-  pointer-events: none;
-}
-
-.carousel-lcp-img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -3; /* BELOW all slides */
-}
-
-.carousel-slide {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition: opacity 0.5s ease;
-  z-index: 0;
-}
-
-.carousel-slide.active {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-  z-index: 1;
-}
-
-.carousel-slide.inactive {
-  z-index: 0;
-  opacity: 0;
-  transition: opacity 0.3s ease-out;
-}
-
-.carousel-bg {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-}
-
-/* Mobile Styles */
-/* Mobile Styles */
-@media (max-width: 768px) {
-  .home-carousel-wrapper {
-    max-width: 100%;
-    padding: 1rem 0;
+  .carousel-overlay{
+    --overlay-top: 54%;
+    width:92%;
+    padding:1rem 1.1rem;
   }
 
-  .home-carousel {
-    width: 100%;
-    aspect-ratio: 1.5 / 1;
-    border-radius: 0;
+  .carousel-overlay h1{
+    font-size:clamp(1.35rem, 6.2vw, 1.9rem);
+    margin-bottom:.55rem;
+  }
+  .carousel-overlay p{
+    font-size:clamp(.95rem, 4vw, 1.05rem);
+    line-height:1.35;
+    margin-bottom:.9rem;
+    max-width:26ch;
+  }
+  .carousel-overlay button{
+    padding:.7rem 1rem;
+    font-size:.95rem;
+    margin-bottom:3.6rem;          /* keep above dots */
   }
 
-  .carousel-overlay {
-    padding: 1.25rem;
-  }
+  .carousel-dots{ bottom:50px; gap:9px; }
+  .dot{ width:9px; height:9px; }
 
-  .carousel-overlay h1 {
-    font-size: 1.65rem;
-    margin-bottom: 0.75rem;
-  }
+  .carousel-nav{ bottom:10px; gap:12px; }
+  .carousel-nav button{ font-size:1rem; }
+}
 
-  .carousel-overlay p {
-    font-size: 0.95rem;
-    margin-bottom: 1.25rem;
-  }
-
-  .carousel-overlay button {
-    font-size: 0.95rem;
-    padding: 10px 20px;
-    margin-bottom: 4.4rem; /* ⬆️ Extra space above dots */
-  }
-
-  .carousel-dots {
-    bottom: 58px; /* ⬇️ Shift dots down */
-    gap: 8px;
-  }
-
-  .carousel-nav {
-    bottom: 12px; /* ⬇️ Shift controls down */
-    gap: 12px;
-  }
-
-  .carousel-nav button {
-    font-size: 1rem;
-    width: 32px;
-    height: 32px;
-    padding: 0;
-  }
-
-  .dot {
-    width: 8px;
-    height: 8px;
-  }
+/* ===== Very small phones ===== */
+@media (max-width: 380px){
+  .home-carousel{ aspect-ratio: 1.25/1; }
+  .carousel-overlay{ --overlay-top: 53.5%; }
+  .carousel-overlay h1{ font-size:1.25rem; }
+  .carousel-overlay p{ font-size:.9rem; max-width:24ch; }
+  .carousel-overlay button{ font-size:.9rem; padding:.6rem .9rem; margin-bottom:3.8rem; }
+  .carousel-dots{ bottom:46px; }
 }

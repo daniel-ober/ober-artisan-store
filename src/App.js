@@ -1,3 +1,4 @@
+// src/App.js
 import React, { useState, useEffect, useMemo } from 'react';
 import {
   Routes,
@@ -7,69 +8,76 @@ import {
   useLocation,
 } from 'react-router-dom';
 import { getDocs, collection } from 'firebase/firestore';
-import { db } from './firebaseConfig';
-import ProjectRoute from './components/ProjectRoute';
-import ProjectDetailPage from './components/ProjectDetailPage';
-import DrumViewer from './components/DrumViewer';
-import SoundlegendSignin from './components/SoundlegendSignin';
-import ScrollToTop from './components/ScrollToTop';
-import NavBar from './components/NavBar';
-import Footer from './components/Footer';
-import Home from './components/Home';
-import StaveCalculator from './components/StaveCalculator';
-import Products from './components/Products';
-import ProductDetail from './components/ProductDetail';
-import PreOrderPage from './components/ArtisanShop';
-import About from './components/About';
-import Contact from './components/Contact';
-import OurCraft from './components/OurCraft';
-import Cart from './components/Cart';
-import ArtisanDrums from './components/ArtisanDrums';
-import Register from './components/Register';
-import ForgotPassword from './components/ForgotPassword';
-import Checkout from './components/Checkout';
-import AccountPage from './components/AccountPage';
-import CheckoutSummary from './components/CheckoutSummary';
-import Gallery from './components/Gallery';
-import AdminDashboard from './components/AdminDashboard';
-import OriginalArtisanShop from './components/OriginalArtisanShop';
-import ManageUsers from './components/ManageUsers';
-import ManageProducts from './components/ManageProducts';
-import ManageOrders from './components/ManageOrders';
-import SiteSettings from './components/SiteSettings';
-import SignInEmail from './components/SignInEmail';
-import CustomShop from './components/CustomShop/CustomShop';
-import PrivacyPolicy from './components/PrivacyPolicy';
-import TermsOfService from './components/TermsOfService';
-import ReturnPolicy from './components/ReturnPolicy';
-import NotFound from './components/NotFound';
-import InventoryTracker from './components/InventoryTracker';
-import PrivateRoute from './components/PrivateRoute';
-import { useAuth } from './context/AuthContext';
-import AdminSignin from './components/AdminSignin';
-import CustomDrumBuilder from './components/CustomDrumBuilder';
-import HomeBackground from './components/HomeBackground';
-import FoundersToastProductDetail from './components/FoundersToastProductDetail';
-import HeritageProductDetail from './components/HeritageProductDetail';
-import FeuzonProductDetail from './components/FeuzonProductDetail';
-import SoundlegendProductDetail from './components/SoundlegendProductDetail';
-import { DarkModeProvider } from './context/DarkModeContext';
-import VerifySerial from './components/VerifySerial';
-import VerifyDrumBySerial from './components/VerifyDrumBySerial';
-import SoundLegendShowroom from './components/SoundLegendShowroom';
-import LegacyVaultHome from './components/LegacyVaultHome';
-import SoundLegendVaultCreator from './components/SoundLegendVaultCreator';
-import Endorsements from "./components/Endorsements";
-import EndorsementForm from "./components/EndorsementForm";
+import { db } from './firebaseConfig.js';
+import ProjectRoute from './components/ProjectRoute.js';
+import ProjectDetailPage from './components/ProjectDetailPage.js';
+import DrumViewer from './components/DrumViewer.js';
+import SoundlegendSignin from './components/SoundlegendSignin.js';
+import ScrollToTop from './components/ScrollToTop.js';
+import NavBar from './components/NavBar.js';
+import Footer from './components/Footer.js';
+import Home from './components/Home.js';
+import StaveCalculator from './components/StaveCalculator.js';
+import Products from './components/Products.js';
+import ProductDetail from './components/ProductDetail.js';
+import PreOrderPage from './components/ArtisanShop.js';
+import About from './components/About.js';
+import Contact from './components/Contact.js';
+import OurCraft from './components/OurCraft.js';
+import Cart from './components/Cart.js';
+import ArtisanDrums from './components/ArtisanDrums.js';
+import Register from './components/Register.js';
+import ForgotPassword from './components/ForgotPassword.js';
+import Checkout from './components/Checkout.js';
+import AccountPage from './components/AccountPage.js';
+import CheckoutSummary from './components/CheckoutSummary.js';
+import Gallery from './components/Gallery.js';
+import AdminDashboard from './components/AdminDashboard.js';
+import OriginalArtisanShop from './components/OriginalArtisanShop.js';
+import ManageUsers from './components/ManageUsers.js';
+import ManageProducts from './components/ManageProducts.js';
+import ManageOrders from './components/ManageOrders.js';
+import SiteSettings from './components/SiteSettings.js';
+import SignInEmail from './components/SignInEmail.js';
+import CustomShop from './components/CustomShop/CustomShop.js';
+import PrivacyPolicy from './components/PrivacyPolicy.js';
+import TermsOfService from './components/TermsOfService.js';
+import ReturnPolicy from './components/ReturnPolicy.js';
+import NotFound from './components/NotFound.js';
+import InventoryTracker from './components/InventoryTracker.js';
+import PrivateRoute from './components/PrivateRoute.js';
+import { useAuth } from './context/AuthContext.js';
+import AdminSignin from './components/AdminSignin.js';
+import CustomDrumBuilder from './components/CustomDrumBuilder.js';
+import HomeBackground from './components/HomeBackground.js';
+import FoundersToastProductDetail from './components/FoundersToastProductDetail.js';
+import HeritageProductDetail from './components/HeritageProductDetail.js';
+import FeuzonProductDetail from './components/FeuzonProductDetail.js';
+import SoundlegendProductDetail from './components/SoundlegendProductDetail.js';
+import { DarkModeProvider } from './context/DarkModeContext.js';
+import VerifySerial from './components/VerifySerial.js';
+import VerifyDrumBySerial from './components/VerifyDrumBySerial.js';
+import SoundLegendShowroom from './components/SoundLegendShowroom.js';
+import LegacyVaultHome from './components/LegacyVaultHome.js';
+import SoundLegendVaultCreator from './components/SoundLegendVaultCreator.js';
+import Endorsements from './components/Endorsements.js';
+import EndorsementForm from './components/EndorsementForm.js';
+import ResinAccentGenerator from './components/ResinAccentGenerator.js';
 import { Toaster } from 'react-hot-toast';
 import './App.css';
 
 /** Temporary placeholders so new links work; replace with real pages later */
 function LegacyBrowse() {
-  return <div style={{ padding: 20 }}>Browse legacy artists / filters (placeholder)</div>;
+  return (
+    <div style={{ padding: 20 }}>
+      Browse legacy artists / filters (placeholder)
+    </div>
+  );
 }
 function LegacyTuningLearn() {
-  return <div style={{ padding: 20 }}>What is Legacy Tuning™ (placeholder)</div>;
+  return (
+    <div style={{ padding: 20 }}>What is Legacy Tuning™ (placeholder)</div>
+  );
 }
 
 function App() {
@@ -281,8 +289,14 @@ function App() {
           />
 
           {/* Product detail (general) */}
-          <Route path="/artisan-shop/:productId" element={<ProductDetail key={location.pathname} />} />
-          <Route path="/merch/:productId" element={<ProductDetail key={location.pathname} />} />
+          <Route
+            path="/artisan-shop/:productId"
+            element={<ProductDetail key={location.pathname} />}
+          />
+          <Route
+            path="/merch/:productId"
+            element={<ProductDetail key={location.pathname} />}
+          />
 
           {/* Legacy redirects for old paths */}
           <Route
@@ -339,6 +353,10 @@ function App() {
             element={
               <PrivateRoute element={<SoundLegendVaultCreator />} adminOnly />
             }
+          />
+          <Route
+            path="/admin/artisan-tools/resin-accent-generator"
+            element={<ResinAccentGenerator />}
           />
         </Routes>
         <Footer navbarLinks={navbarLinks} />

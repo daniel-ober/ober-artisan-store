@@ -1,0 +1,39 @@
+.resin-tool { padding: 24px; color: var(--sl-text, #fff); }
+.rt-header h1 { margin: 0 0 8px; font-size: 28px; }
+.rt-header p  { margin: 0 0 16px; color: var(--sl-muted, #bdbdbd); }
+
+.rt-grid { display: grid; grid-template-columns: 1.1fr 1fr 1.4fr; gap: 16px; }
+@media (max-width: 1100px) { .rt-grid { grid-template-columns: 1fr; } }
+
+.rt-panel {
+  background: var(--sl-card, rgba(20,20,22,.78));
+  border: 1px solid var(--sl-border, rgba(255,255,255,.08));
+  border-radius: 14px; padding: 16px;
+}
+
+.preview img,.result img { width: 100%; height: auto; border-radius: 10px; display: block; }
+
+.color-row { display: flex; gap: 8px; align-items: center; }
+.hex-input { width: 110px; padding: 6px 8px; background: transparent; border: 1px solid var(--sl-border,#333); border-radius: 8px; color: inherit; }
+.eyedrop { padding: 6px 10px; border: 1px solid var(--sl-border,#333); background: transparent; border-radius: 8px; color: inherit; }
+
+.segmented { display: inline-flex; gap: 6px; margin: 6px 0 12px; }
+.segmented button { padding: 6px 10px; border: 1px solid var(--sl-border,#333); background: transparent; border-radius: 999px; color: inherit; }
+.segmented button.on { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.18); }
+
+.namehint { display:block; margin-top: 8px; }
+.namehint input { width: 100%; margin-top: 4px; padding: 6px 8px; border: 1px solid var(--sl-border,#333); background: transparent; border-radius: 8px; color: inherit; }
+
+.cta-row { display: flex; gap: 8px; margin-top: 12px; }
+.primary { background: var(--sl-link,#58aaff); color:#000; border: none; padding: 10px 14px; border-radius: 10px; }
+.status { margin-top: 10px; min-height: 24px; color: var(--sl-muted,#bdbdbd); display:flex; gap:8px; align-items: center; }
+.status.success { color: #79d38c; } .status.error { color: #ff6b6b; }
+
+.spinner { width: 16px; height: 16px; border: 2px solid #999; border-top-color: transparent; border-radius: 50%; animation: rot .9s linear infinite; }
+@keyframes rot { to { transform: rotate(360deg); } }
+
+.result-empty { opacity: .6; border: 1px dashed var(--sl-border,#333); border-radius: 10px; padding: 24px; text-align: center; }
+.actions { display: flex; gap: 8px; margin-top: 10px; }
+.tweaks { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.tweaks > span { opacity: .7; margin-right: 6px; }
+.tweaks button { padding: 6px 10px; border: 1px solid var(--sl-border,#333); background: transparent; border-radius: 999px; color: inherit; }

@@ -9,6 +9,7 @@ import {
 } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import ManageProjectModal from './ManageProjectModal';
+import { calculateProjectProgress } from '../utils/calculateProjectProgress';
 import './ManageProjects.css';
 
 const buildPhases = [
@@ -38,18 +39,76 @@ const stepWeights = {
 };
 
 const normalize = (str) =>
-  str
-    ?.toLowerCase()
-    .replace(/[^a-z0-9 ]/gi, '')
-    .trim()
-    .replace(/\s+/g, '-') || '';
+  str?.toLowerCase().replace(/[^a-z0-9 ]/gi, '').trim().replace(/\s+/g, '-') || '';
 
 const ManageProjects = () => {
   const [projects, setProjects] = useState([]);
   const [filteredProjects, setFilteredProjects] = useState([]);
   const [filter, setFilter] = useState('');
+  const [showCompleted, setShowCompleted] = useState(false); // default hidden
   const [selectedProject, setSelectedProject] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // sorting
+  const [sort, setSort] = useState({ key: 'startDate', dir: 'desc' });
+
+  const getMillis = (ts) => {
+    if (!ts) return 0;
+    if (typeof ts?.seconds === 'number') return ts.seconds * 1000;
+    const d = new Date(ts);
+    return isNaN(d.getTime()) ? 0 : d.getTime();
+  };
+
+  // numeric seconds for total time spent (used for sort)
+  const totalSecondsFromProject = (project) => {
+    let total = 0;
+    Object.keys(stepWeights).forEach((key) => {
+      const step = project[key];
+      if (step?.checklist?.length) {
+        step.checklist.forEach((item) => {
+          const v = item?.totalSeconds;
+          if (typeof v === 'number') total += v;
+          else if (v?.seconds && typeof v.seconds === 'number') total += v.seconds;
+        });
+      }
+    });
+    return total;
+  };
+
+  const projectValue = (p, key) => {
+    switch (key) {
+      case 'customerName':     return (p.customerName || '').toLowerCase();
+      case 'startDate':        return getMillis(p.startDate);
+      case 'targetCompletion': {
+        // prefer explicit target; otherwise created + 35 days (fallback like UI)
+        const base = p.targetCompletion || p.startDate;
+        const ms = getMillis(base);
+        return p.targetCompletion ? ms : (ms ? ms + 35 * 24 * 60 * 60 * 1000 : 0);
+      }
+      case 'timeSpent':        return totalSecondsFromProject(p);
+      case 'currentPhase':     return p.currentPhase || '';
+      case 'expectedPhase':    return getExpectedPhase(p) || '';
+      case 'progress':         return Number(calculateProjectProgress(p)) || 0;
+      case 'status':           return determineStatus(p) || '';
+      default:                 return '';
+    }
+  };
+
+  const sortProjects = (list) => {
+    const { key, dir } = sort;
+    const mul = dir === 'asc' ? 1 : -1;
+    return [...list].sort((a, b) => {
+      const va = projectValue(a, key);
+      const vb = projectValue(b, key);
+      if (typeof va === 'number' && typeof vb === 'number') return (va - vb) * mul;
+      return String(va).localeCompare(String(vb), undefined, { numeric: true, sensitivity: 'base' }) * mul;
+    });
+  };
+
+  const toggleSort = (key) => {
+    setSort((s) => (s.key === key ? { key, dir: s.dir === 'asc' ? 'desc' : 'asc' } : { key, dir: 'asc' }));
+  };
+  const renderSort = (key) => (sort.key === key ? (sort.dir === 'asc' ? '▲' : '▼') : '↕');
 
   const formatDate = (timestamp) => {
     if (!timestamp) return 'N/A';
@@ -73,9 +132,8 @@ const ManageProjects = () => {
       const parsed = new Date(project.startDate);
       if (!isNaN(parsed)) createdAt = parsed;
     }
-  
     if (!createdAt) return 'Unknown';
-  
+
     let target = null;
     if (project.targetCompletion?.seconds) {
       target = new Date(project.targetCompletion.seconds * 1000);
@@ -83,37 +141,24 @@ const ManageProjects = () => {
       target = new Date(createdAt);
       target.setDate(target.getDate() + 35);
     }
-  
+
     const now = new Date();
     const elapsedDays = (now - createdAt) / (1000 * 60 * 60 * 24);
     const totalDays = (target - createdAt) / (1000 * 60 * 60 * 24);
-  
     if (totalDays <= 0 || elapsedDays < 0) return 'Unknown';
-  
+
     const progressPercent = elapsedDays / totalDays;
-  
-    // Map that % to phase index
-    const index = Math.min(
-      buildPhases.length - 1,
-      Math.floor(progressPercent * buildPhases.length)
-    );
-  
+    const index = Math.min(buildPhases.length - 1, Math.floor(progressPercent * buildPhases.length));
     return buildPhases[index] || 'Unknown';
   };
 
   const determineStatus = (project) => {
     const expectedPhase = getExpectedPhase(project);
-    const expectedIndex = buildPhases.findIndex(
-      (p) => normalize(p) === normalize(expectedPhase)
-    );
-    const actualIndex = buildPhases.findIndex(
-      (p) => normalize(p) === normalize(project.currentPhase)
-    );
-  
+    const expectedIndex = buildPhases.findIndex((p) => normalize(p) === normalize(expectedPhase));
+    const actualIndex = buildPhases.findIndex((p) => normalize(p) === normalize(project.currentPhase));
     if (expectedIndex === -1 || actualIndex === -1) return 'Unknown';
-  
+
     const delta = actualIndex - expectedIndex;
-  
     if (delta >= 2) return 'Ahead of Schedule';
     if (delta === 1 || delta === 0) return 'On Pace';
     if (delta === -1) return 'Slightly Behind';
@@ -122,7 +167,6 @@ const ManageProjects = () => {
 
   const formatTargetCompletion = (timestamp) => {
     if (!timestamp) return 'N/A';
-
     let date;
     if (timestamp?.seconds) {
       date = new Date(timestamp.seconds * 1000);
@@ -132,7 +176,6 @@ const ManageProjects = () => {
     } else {
       return 'Invalid';
     }
-
     date.setDate(date.getDate() + 35); // fallback for display
     return date.toLocaleDateString();
   };
@@ -145,39 +188,45 @@ const ManageProjects = () => {
     return new Date() > phaseStartDate;
   };
 
+  // completed logic + filters
+  const isCompleted = (p) => {
+    const pct = calculateProjectProgress(p);
+    const finishedFlag =
+      p?.status?.toLowerCase?.() === 'finished' ||
+      p?.allStepsComplete === true ||
+      p?.currentStep === 'All Steps Complete' ||
+      p?.currentPhase === 'All Steps Complete';
+    return pct === 100 || finishedFlag;
+  };
+
+  const applyFilters = (list) => {
+    let out = list;
+    if (!showCompleted) out = out.filter((p) => !isCompleted(p));
+    if (filter) {
+      out = out.filter(
+        (p) =>
+          normalize(p.currentPhase) === filter ||
+          (normalize(filter) === 'overdue' && isOverdue(p))
+      );
+    }
+    return out;
+  };
+
+  // subscribe
   useEffect(() => {
     const q = query(collection(db, 'projects'), orderBy('startDate', 'desc'));
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      const liveProjects = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
+      const liveProjects = snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
       setProjects(liveProjects);
-      setFilteredProjects(() => {
-        if (!filter) return liveProjects;
-        return liveProjects.filter(
-          (p) =>
-            normalize(p.currentPhase) === filter ||
-            (normalize(filter) === 'overdue' && isOverdue(p))
-        );
-      });
     });
     return () => unsubscribe();
-  }, [filter]);
+  }, []);
 
+  // recompute filtered + sorted whenever deps change
   useEffect(() => {
-    if (filter) {
-      setFilteredProjects(
-        projects.filter(
-          (p) =>
-            normalize(p.currentPhase) === filter ||
-            (normalize(filter) === 'overdue' && isOverdue(p))
-        )
-      );
-    } else {
-      setFilteredProjects(projects);
-    }
-  }, [filter, projects]);
+    const base = applyFilters(projects);
+    setFilteredProjects(sortProjects(base));
+  }, [projects, filter, showCompleted, sort]); // include sort + showCompleted
 
   const openModal = (project) => {
     setSelectedProject(project);
@@ -199,26 +248,9 @@ const ManageProjects = () => {
   };
 
   const handleLiveUpdate = (updatedProject) => {
-    setProjects((prev) =>
-      prev.map((p) => (p.id === updatedProject.id ? updatedProject : p))
-    );
-    setFilteredProjects((prev) =>
-      prev.map((p) => (p.id === updatedProject.id ? updatedProject : p))
-    );
-    setSelectedProject((prev) =>
-      prev?.id === updatedProject.id ? updatedProject : prev
-    );
-  };
-
-  const calculateProjectProgress = (project) => {
-    let total = 0;
-    for (const [key, weight] of Object.entries(stepWeights)) {
-      const checklist = project[key]?.checklist;
-      if (!checklist?.length) continue;
-      const completed = checklist.filter((item) => item.completed).length;
-      total += (completed / checklist.length) * weight;
-    }
-    return Math.round(total * 100);
+    setProjects((prev) => prev.map((p) => (p.id === updatedProject.id ? updatedProject : p)));
+    setFilteredProjects((prev) => prev.map((p) => (p.id === updatedProject.id ? updatedProject : p)));
+    setSelectedProject((prev) => (prev?.id === updatedProject.id ? updatedProject : prev));
   };
 
   const calculateTotalProjectTime = (project) => {
@@ -229,22 +261,20 @@ const ManageProjects = () => {
         step.checklist.forEach((item) => {
           const val = item.totalSeconds;
           if (typeof val === 'number') total += val;
-          else if (val?.seconds && typeof val.seconds === 'number')
-            total += val.seconds;
+          else if (val?.seconds && typeof val.seconds === 'number') total += val.seconds;
         });
       }
     });
     const hrs = Math.floor(total / 3600);
     const mins = Math.floor((total % 3600) / 60);
     const secs = total % 60;
-    return `${hrs}:${mins.toString().padStart(2, '0')}:${secs
-      .toString()
-      .padStart(2, '0')}`;
+    return `${hrs}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
   return (
     <div className="manage-projects">
       <h2>Manage Projects</h2>
+
       <div className="filters">
         <label>
           Filter by Phase:
@@ -258,20 +288,44 @@ const ManageProjects = () => {
             <option value="overdue">Overdue</option>
           </select>
         </label>
+
+        <label style={{ marginLeft: 12 }}>
+          <input
+            type="checkbox"
+            checked={showCompleted}
+            onChange={(e) => setShowCompleted(e.target.checked)}
+          />{' '}
+          Show completed
+        </label>
       </div>
 
       <table className="projects-table">
         <thead>
           <tr>
-            {/* <th>Project ID</th> */}
-            <th>Customer Name</th>
-            <th>Created At</th>
-            <th>Target Completion</th>
-            <th>Total Time Spent</th>
-            <th>Current Phase</th>
-            <th>Expected On Pace (EOP)</th>
-            <th>Progress</th>
-            <th>Status</th>
+            <th className="sortable" onClick={() => toggleSort('customerName')}>
+              Customer Name <span className="sort-indicator">{renderSort('customerName')}</span>
+            </th>
+            <th className="sortable" onClick={() => toggleSort('startDate')}>
+              Created At <span className="sort-indicator">{renderSort('startDate')}</span>
+            </th>
+            <th className="sortable" onClick={() => toggleSort('targetCompletion')}>
+              Target Completion <span className="sort-indicator">{renderSort('targetCompletion')}</span>
+            </th>
+            <th className="sortable" onClick={() => toggleSort('timeSpent')}>
+              Total Time Spent <span className="sort-indicator">{renderSort('timeSpent')}</span>
+            </th>
+            <th className="sortable" onClick={() => toggleSort('currentPhase')}>
+              Current Phase <span className="sort-indicator">{renderSort('currentPhase')}</span>
+            </th>
+            <th className="sortable" onClick={() => toggleSort('expectedPhase')}>
+              Expected On Pace (EOP) <span className="sort-indicator">{renderSort('expectedPhase')}</span>
+            </th>
+            <th className="sortable" onClick={() => toggleSort('progress')}>
+              Progress <span className="sort-indicator">{renderSort('progress')}</span>
+            </th>
+            <th className="sortable" onClick={() => toggleSort('status')}>
+              Status <span className="sort-indicator">{renderSort('status')}</span>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -281,17 +335,6 @@ const ManageProjects = () => {
               onClick={() => openModal(project)}
               className={`status-row ${normalize(determineStatus(project))}`}
             >
-              {/* {(() => {
-                try {
-                  const time = calculateTotalProjectTime(project);
-                  console.log('🧪 Project Time for:', project.id, time);
-                  return <td>{time}</td>;
-                } catch (err) {
-                  console.error('❌ Error in time calc for:', project.id, err);
-                  return <td>Error</td>;
-                }
-              })()} */}
-              {/* <td>{project.id}</td> */}
               <td>{project.customerName || 'N/A'}</td>
               <td>{formatDate(project.startDate)}</td>
               <td>{formatTargetCompletion(project.startDate)}</td>
@@ -304,9 +347,7 @@ const ManageProjects = () => {
                     <div className="progress-bar-track">
                       <div
                         className="progress-bar-fill"
-                        style={{
-                          width: `${calculateProjectProgress(project)}%`,
-                        }}
+                        style={{ width: `${calculateProjectProgress(project)}%` }}
                       />
                     </div>
                   </div>
