@@ -98,9 +98,13 @@ const ManageProducts = () => {
 
   const handleAddProductClose = () => setIsAddModalOpen(false);
 
-  const handleProductUpdate = (updatedProduct) => {
-    setProducts((prevProducts) =>
-      prevProducts.map((product) => (product.id === updatedProduct.id ? updatedProduct : product))
+  // ✅ Preserve _source (and any untouched fields) when an item is updated
+  const handleProductUpdate = (updated) => {
+    setProducts((prev) =>
+      prev.map((p) => {
+        if (p.id !== updated.id) return p;
+        return { ...p, ...updated, _source: p._source || updated._source };
+      })
     );
     setEditProductId(null);
   };
@@ -145,8 +149,12 @@ const ManageProducts = () => {
       typeof productOrId === 'object' ? productOrId : products.find((p) => p.id === productOrId);
     if (!product) return;
 
-    const url =
-      product._source === 'merchProducts' ? `/merch/${product.id}` : `/products/${product.id}`;
+    // Fallback inference if _source is ever missing
+    const isMerch = product._source
+      ? product._source === 'merchProducts'
+      : Array.isArray(product?.variants);
+
+    const url = isMerch ? `/merch/${product.id}` : `/products/${product.id}`;
     window.open(url, '_blank');
   };
 
@@ -219,7 +227,9 @@ const ManageProducts = () => {
           </thead>
           <tbody>
             {products.map((product) => {
-              const isMerch = product._source === 'merchProducts';
+              const isMerch = product._source
+                ? product._source === 'merchProducts'
+                : Array.isArray(product?.variants);
               const title = product.title || product.name || 'Unnamed';
               const imageUrl = getPreviewImage(product);
 
@@ -302,7 +312,9 @@ const ManageProducts = () => {
       {isAddModalOpen && (
         <AddProductModal
           onClose={() => setIsAddModalOpen(false)}
-          onProductAdded={(newProduct) => setProducts([newProduct, ...products])}
+          onProductAdded={(newProduct) =>
+            setProducts((prev) => [{ ...newProduct, _source: 'products' }, ...prev])
+          }
         />
       )}
 
@@ -315,20 +327,27 @@ const ManageProducts = () => {
         />
       )}
 
-      {productToEdit &&
-        (productToEdit._source === 'merchProducts' ? (
+      {productToEdit && (() => {
+        // Use key to force correct modal to mount fresh each time
+        const isMerch = productToEdit._source
+          ? productToEdit._source === 'merchProducts'
+          : Array.isArray(productToEdit?.variants);
+        return isMerch ? (
           <EditMerchProductModal
+            key={`merch-${productToEdit.id}`}
             productId={productToEdit.id}
             onClose={() => setEditProductId(null)}
             onProductUpdated={handleProductUpdate}
           />
         ) : (
           <EditProductModal
+            key={`artisan-${productToEdit.id}`}
             productId={productToEdit.id}
             onClose={() => setEditProductId(null)}
             onProductUpdated={handleProductUpdate}
           />
-        ))}
+        );
+      })()}
     </div>
   );
 };

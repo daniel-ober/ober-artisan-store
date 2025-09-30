@@ -20,6 +20,61 @@ const getImgUrl = (img) => {
   return img.src || img.url || img.previewImage || '';
 };
 
+// Build the display list for a given variant: prefer variant-scoped images,
+// else fall back to all gallery images. Sort so is_default appears first.
+const buildDisplayList = (product, variantId) => {
+  if (!product) return [];
+  const get = (img) =>
+    typeof img === 'string' ? img : img?.src || img?.url || img?.previewImage || '';
+  const imgs = Array.isArray(product.images) ? product.images : [];
+  const vid = variantId ? String(variantId) : null;
+
+  const isDisplayable = (img) => {
+    const url = get(img);
+    if (!url?.startsWith?.('http')) return false;
+    const display = typeof img === 'object' ? img.displayInGallery !== false : true;
+    return display;
+  };
+
+  const variantScoped = imgs.filter((img) => {
+    if (!isDisplayable(img)) return false;
+    const ids = (img?.variant_ids || []).map(String);
+    return vid ? ids.includes(vid) : false;
+  });
+
+  const galleryScoped = imgs.filter(isDisplayable);
+
+  let list = variantScoped.length ? variantScoped : galleryScoped;
+  // keep the same ordering rule used in thumbnails everywhere
+  list = [...list].sort(
+    (a, b) => (b?.is_default ? 1 : 0) - (a?.is_default ? 1 : 0)
+  );
+  return list;
+};
+
+// Best image for a specific variant: prefer is_default, else first displayable
+const bestVariantImage = (product, variantId) => {
+  if (!product || !variantId) return '';
+  const vid = String(variantId);
+  const imgs = Array.isArray(product.images) ? product.images : [];
+
+  const get = (im) =>
+    typeof im === 'string' ? im : im?.src || im?.url || im?.previewImage || '';
+
+  const scoped = imgs.filter((im) => {
+    const url = get(im);
+    if (!url?.startsWith?.('http')) return false;
+    const display =
+      typeof im === 'object' ? im.displayInGallery !== false : true;
+    if (!display) return false;
+    const ids = (im?.variant_ids || []).map(String);
+    return ids.includes(vid);
+  });
+
+  const def = scoped.find((im) => typeof im === 'object' && im.is_default);
+  return get(def || scoped[0] || null);
+};
+
 // Normalize option labels based on type so UI always sees "Colors" / "Sizes"
 const normalizeOptions = (options) =>
   Array.isArray(options)
@@ -33,6 +88,40 @@ const normalizeOptions = (options) =>
               : opt?.name || '',
       }))
     : options;
+
+// Prefer previewImage / is_default, then variant-scoped, then any gallery img
+const pickPreviewImage = (product, variantId) => {
+  const get = (img) =>
+    typeof img === 'string' ? img : img?.src || img?.url || '';
+  const imgs = Array.isArray(product?.images) ? product.images : [];
+
+  // 1) explicit field
+  if (product?.previewImage) return product.previewImage;
+
+  // 2) image flagged as default
+  const def = imgs.find((i) => typeof i === 'object' && i?.is_default);
+  if (def) return get(def);
+
+  // 3) image tied to a specific variant
+  if (variantId) {
+    const vid = String(variantId);
+    const byVariant = imgs.find((i) =>
+      (i?.variant_ids || []).map(String).includes(vid)
+    );
+    if (byVariant) return get(byVariant);
+  }
+
+  // 4) first gallery image that’s allowed to display
+  const gallery = imgs.find((i) => {
+    const url = get(i);
+    const display = typeof i === 'object' ? i.displayInGallery !== false : true;
+    return url?.startsWith?.('http') && display;
+  });
+  if (gallery) return get(gallery);
+
+  // 5) last resort
+  return '';
+};
 
 /**
  * Cross-fade image manager:
@@ -99,8 +188,12 @@ const ProductDetail = () => {
   const [inCart, setInCart] = useState(null);
 
   // smooth image swapping (no fallback flash)
-  const { currentSrc: mainImage, incomingSrc, incomingVisible, swapTo } =
-    useCrossfadeImage(FALLBACK_IMAGE);
+  const {
+    currentSrc: mainImage,
+    incomingSrc,
+    incomingVisible,
+    swapTo,
+  } = useCrossfadeImage(FALLBACK_IMAGE);
 
   const [hoverImage, setHoverImage] = useState(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -246,7 +339,11 @@ const ProductDetail = () => {
           setProduct(enrichedProduct);
 
           // default variant
+          // default variant
           const defaultVariant =
+            enrichedVariants.find(
+              (v) => String(v.id) === String(productData.defaultVariantId)
+            ) ||
             enrichedVariants.find((v) => v.is_available) ||
             enrichedVariants[0] ||
             null;
@@ -279,19 +376,11 @@ const ProductDetail = () => {
                   0) / 100,
             });
 
-            // choose a suitable image
-            const fromVariant = getImgUrl(defaultVariant.images?.[0]);
-            const fromProduct = (enrichedProduct.images || []).find((img) => {
-              const url = getImgUrl(img);
-              if (!url?.startsWith('http')) return false;
-              const ids = (img.variant_ids || []).map(String);
-              return (
-                ids.length === 0 || ids.includes(String(defaultVariant.id))
-              );
-            });
-            const resolved = fromVariant || getImgUrl(fromProduct) || '';
-            // smooth swap (no flash)
-            swapTo(resolved || FALLBACK_IMAGE, FALLBACK_IMAGE);
+            // choose initial hero that aligns with the default variant
+            const initialHero =
+              pickPreviewImage(enrichedProduct, defaultVariant?.id) ||
+              FALLBACK_IMAGE;
+            swapTo(initialHero, FALLBACK_IMAGE);
           } else {
             swapTo(FALLBACK_IMAGE, FALLBACK_IMAGE);
           }
@@ -316,7 +405,7 @@ const ProductDetail = () => {
     };
 
     if (activeProductId) fetchProductData();
-  }, [activeProductId]); 
+  }, [activeProductId]);
 
   // Keep inCart in sync
   useEffect(() => {
@@ -361,20 +450,12 @@ const ProductDetail = () => {
           100,
       });
 
-      const vid = String(exact.id);
-      const matchedImage = (product.images || []).find((img) => {
-        const ids = (img.variant_ids || []).map(String);
-        const display =
-          typeof img === 'object' ? img.displayInGallery !== false : true;
-        const url = getImgUrl(img);
-        return (
-          url?.startsWith('http') &&
-          display &&
-          (ids.length === 0 || ids.includes(vid))
-        );
-      });
-      const src = getImgUrl(matchedImage);
-      swapTo(src?.startsWith('http') ? src : FALLBACK_IMAGE, FALLBACK_IMAGE);
+      const heroForVariant =
+        bestVariantImage(product, exact.id) ||
+        pickPreviewImage(product, exact.id) ||
+        FALLBACK_IMAGE;
+
+      swapTo(heroForVariant, FALLBACK_IMAGE);
     } else {
       setSelectedVariant(null);
       const selectedColor = selectedOptions['Colors'];
@@ -387,10 +468,11 @@ const ProductDetail = () => {
         );
         const fallbackImage = colorVariant?.images?.[0];
         const fallbackSrc = getImgUrl(fallbackImage);
-        if (fallbackSrc?.startsWith('http')) swapTo(fallbackSrc, FALLBACK_IMAGE);
+        if (fallbackSrc?.startsWith('http'))
+          swapTo(fallbackSrc, FALLBACK_IMAGE);
       }
     }
-  }, [selectedOptions, product]); 
+  }, [selectedOptions, product]);
 
   useEffect(() => {
     if (hoverImage) {
@@ -575,9 +657,14 @@ const ProductDetail = () => {
                       }
                     );
 
-                    const list = variantScoped.length
+                    let list = variantScoped.length
                       ? variantScoped
                       : galleryScoped;
+
+                    list = [...list].sort(
+                      (a, b) =>
+                        (b?.is_default ? 1 : 0) - (a?.is_default ? 1 : 0)
+                    );
 
                     return (list.length ? list : [])
                       .slice(0, 12)

@@ -1764,19 +1764,26 @@ app.post('/resin/generate', async (req, res) => {
     const {
       veneerDataUrl,
       hex = '#1aa7ff',
-      intensity = 'medium',   // 'light' | 'medium' | 'heavy'
-      coverage = 0.45,        // tiny nudge of selectivity
+      intensity = 'medium', // 'light' | 'medium' | 'heavy'
+      coverage = 0.45, // tiny nudge of selectivity
       size = 1536,
     } = req.body || {};
 
-    if (!veneerDataUrl || !/^data:image\/(png|jpe?g);base64,/.test(veneerDataUrl)) {
-      return res.status(400).json({ error: 'Missing or invalid veneerDataUrl' });
+    if (
+      !veneerDataUrl ||
+      !/^data:image\/(png|jpe?g);base64,/.test(veneerDataUrl)
+    ) {
+      return res
+        .status(400)
+        .json({ error: 'Missing or invalid veneerDataUrl' });
     }
 
     // ~8 MB guard
     const approxBytes = Math.floor(veneerDataUrl.length * 0.75);
     if (approxBytes > 8 * 1024 * 1024) {
-      return res.status(413).json({ error: 'Input image too large (max ~8MB).' });
+      return res
+        .status(413)
+        .json({ error: 'Input image too large (max ~8MB).' });
     }
 
     // Decode + normalize
@@ -1801,8 +1808,14 @@ app.post('/resin/generate', async (req, res) => {
 
     // Pack to 1-channel PNG for sharp ops that need image objects
     const grayPNG = await sharp(grayRaw.data, {
-      raw: { width: grayRaw.info.width, height: grayRaw.info.height, channels: 1 },
-    }).png().toBuffer();
+      raw: {
+        width: grayRaw.info.width,
+        height: grayRaw.info.height,
+        channels: 1,
+      },
+    })
+      .png()
+      .toBuffer();
 
     // --- Local darkness (black-hat): blur(gray, σ) - gray ----------------------
     const blurSigma = Math.max(2, Math.round(Math.max(w, h) / 220)); // scale with size
@@ -1821,15 +1834,20 @@ app.post('/resin/generate', async (req, res) => {
 
     // Select only the strongest local pits (quantile on tail)
     const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
-    const baseFrac = intensity === 'light' ? 0.010 : intensity === 'heavy' ? 0.040 : 0.020; // 1–4%
-    const frac = clamp(baseFrac + (coverage - 0.45) * 0.020, 0.005, 0.060);
+    const baseFrac =
+      intensity === 'light' ? 0.01 : intensity === 'heavy' ? 0.04 : 0.02; // 1–4%
+    const frac = clamp(baseFrac + (coverage - 0.45) * 0.02, 0.005, 0.06);
 
     // Walk the histogram from bright → dark tail to find threshold
     const total = deltaData.length;
-    let acc = 0, T = 255;
+    let acc = 0,
+      T = 255;
     for (let t = 255; t >= 0; t--) {
       acc += hist[t];
-      if (acc / total >= frac) { T = t; break; }
+      if (acc / total >= frac) {
+        T = t;
+        break;
+      }
     }
 
     // Build mask: (delta >= T) AND (original gray is reasonably dark)
@@ -1850,14 +1868,19 @@ app.post('/resin/generate', async (req, res) => {
       // raise threshold by 10 levels and rebuild quickly
       const tightenBy = 10;
       for (let i = 0; i < deltaData.length; i++) {
-        const isPit = (deltaData[i] >= Math.min(255, T + tightenBy)) && g[i] < darkGate;
+        const isPit =
+          deltaData[i] >= Math.min(255, T + tightenBy) && g[i] < darkGate;
         maskBytes[i] = isPit ? 255 : 0;
       }
     }
 
     // Clean & crisp edges -> just holes/knots
     const maskPNG = await sharp(maskBytes, {
-      raw: { width: grayRaw.info.width, height: grayRaw.info.height, channels: 1 },
+      raw: {
+        width: grayRaw.info.width,
+        height: grayRaw.info.height,
+        channels: 1,
+      },
     })
       .median(1)
       .blur(0.6)
@@ -1867,11 +1890,19 @@ app.post('/resin/generate', async (req, res) => {
 
     // --- Paint only masked pixels --------------------------------------------
     const { r, g: gg, b } = hexToRgbSafe(hex);
-    const fillOpacity = intensity === 'light' ? 0.55 : intensity === 'heavy' ? 0.95 : 0.75;
+    const fillOpacity =
+      intensity === 'light' ? 0.55 : intensity === 'heavy' ? 0.95 : 0.75;
 
     const fillPlate = await sharp({
-      create: { width: w, height: h, channels: 4, background: { r, g: gg, b, alpha: fillOpacity } },
-    }).png().toBuffer();
+      create: {
+        width: w,
+        height: h,
+        channels: 4,
+        background: { r, g: gg, b, alpha: fillOpacity },
+      },
+    })
+      .png()
+      .toBuffer();
 
     // Keep color only where mask == white
     const coloredPits = await sharp(fillPlate)
@@ -1887,7 +1918,11 @@ app.post('/resin/generate', async (req, res) => {
       .toBuffer();
 
     const outB64 = `data:image/png;base64,${outBuf.toString('base64')}`;
-    return res.json({ ok: true, jobId: crypto.randomUUID(), resultDataUrl: outB64 });
+    return res.json({
+      ok: true,
+      jobId: crypto.randomUUID(),
+      resultDataUrl: outB64,
+    });
   } catch (err) {
     console.error('❌ /resin/generate failed:', err?.message || err);
     return res.status(500).json({ error: 'Generation failed' });
@@ -1895,12 +1930,170 @@ app.post('/resin/generate', async (req, res) => {
 });
 
 function hexToRgbSafe(hex) {
-  const m = String(hex || '').trim().match(/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i);
+  const m = String(hex || '')
+    .trim()
+    .match(/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i);
   if (!m) return { r: 26, g: 167, b: 255 };
-  return { r: parseInt(m[1], 16), g: parseInt(m[2], 16), b: parseInt(m[3], 16) };
+  return {
+    r: parseInt(m[1], 16),
+    g: parseInt(m[2], 16),
+    b: parseInt(m[3], 16),
+  };
 }
 
-// Callables
+exports.syncMerchVariantPrice = onCall(
+  {
+    region: 'us-central1',
+    secrets: [STRIPE_SECRET_KEY, PRINTIFY_API_KEY, PRINTIFY_SHOP_ID],
+  },
+  async (request) => {
+    const ctx = request.auth;
+    const email = ctx?.token?.email || '';
+    const isAdminClaim =
+      ctx?.token?.isAdmin === true || ctx?.token?.admin === true;
+
+    // Simple allowlist (add any editors you trust)
+    const ALLOW = new Set(['dan@oberartisandrums.com']);
+
+    if (!(ctx && (isAdminClaim || ALLOW.has(email)))) {
+      throw new functions.https.HttpsError(
+        'permission-denied',
+        'Admin privileges required.'
+      );
+    }
+
+    const {
+      productId,
+      variantId,
+      newPriceCents,
+      currency = 'usd',
+      stripeProductId,
+      currentStripePriceId,   // not used (Stripe prices are immutable; we create a new one)
+      printify = {},
+    } = request.data || {};
+
+    if (!productId || !variantId || !Number.isFinite(newPriceCents)) {
+      throw new functions.https.HttpsError(
+        'invalid-argument',
+        'Missing required fields.'
+      );
+    }
+
+    const docRef = db.collection('merchProducts').doc(String(productId));
+    const snap = await docRef.get();
+    if (!snap.exists) {
+      throw new functions.https.HttpsError(
+        'not-found',
+        'Product does not exist.'
+      );
+    }
+    const data = snap.data() || {};
+
+    // ---------- Stripe: create a NEW price ----------
+    const stripe = stripeLib(STRIPE_SECRET_KEY.value());
+    const sProdId =
+      stripeProductId ||
+      data.stripeProductId ||
+      (data.stripe && data.stripe.productId) ||
+      data.stripe_product_id;
+
+    if (!sProdId) {
+      throw new functions.https.HttpsError(
+        'failed-precondition',
+        'No stripeProductId on this merch product.'
+      );
+    }
+
+    // Build a friendly "Color / Size" label for this variant
+    const toLabel = (v) => {
+      if (!v) return '';
+      const opts = Array.isArray(data.options) ? data.options : [];
+      const parts = opts
+        .map((opt) => {
+          const match = (opt.values || []).find((val) =>
+            (v.options || []).includes(val.id)
+          );
+          return match?.title || null;
+        })
+        .filter(Boolean);
+      return parts.join(' / ');
+    };
+
+    // find the variant in the stored product (by id)
+    const vObj =
+      (Array.isArray(data.variants) &&
+        data.variants.find((x) => String(x.id) === String(variantId))) ||
+      null;
+
+    const priceNickname = toLabel(vObj) || `Variant ${variantId}`;
+
+    const price = await stripe.prices.create({
+      unit_amount: Math.round(newPriceCents),
+      currency,
+      product: sProdId,
+      nickname: priceNickname, // shows in Stripe "Description"
+      metadata: {
+        merchProductId: String(productId),
+        variantId: String(variantId),
+        description: priceNickname,
+      },
+    });
+
+    // Update mapping { variantId -> { priceId, unitAmount } }
+    const stripePriceIds = { ...(data.stripePriceIds || {}) };
+    stripePriceIds[String(variantId)] = {
+      priceId: price.id,
+      unitAmount: price.unit_amount,
+    };
+
+    await docRef.update({
+      stripePriceIds,
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+    });
+
+    // ---------- Printify: update variant price (best-effort) ----------
+    const shopId =
+      printify.shopId ||
+      data.printifyShopId ||
+      data.printify_shop_id ||
+      PRINTIFY_SHOP_ID.value();
+    const pProductId =
+      printify.productId ||
+      data.printifyProductId ||
+      data.printify_product_id ||
+      (data.printify && data.printify.productId);
+    const pVariantId = printify.variantId || String(variantId);
+
+    let printifyResult = null;
+    if (shopId && pProductId && pVariantId && PRINTIFY_API_KEY.value()) {
+      try {
+        await axios.put(
+          `https://api.printify.com/v1/shops/${shopId}/products/${pProductId}/variants/${pVariantId}.json`,
+          { price: Math.round(newPriceCents) },
+          {
+            headers: {
+              Authorization: `Bearer ${PRINTIFY_API_KEY.value()}`,
+              'Content-Type': 'application/json',
+            },
+          }
+        );
+        printifyResult = { ok: true };
+      } catch (e) {
+        const detail = e?.response?.data || e?.message || String(e);
+        console.error('Printify update failed:', detail);
+        printifyResult = { ok: false, detail };
+      }
+    }
+
+    return {
+      ok: true,
+      stripePriceId: price.id,
+      stripePriceNickname: priceNickname,
+      printify: printifyResult,
+    };
+  }
+);
+
 exports.adminCreateUser = onCall({ region: 'us-central1' }, async (request) => {
   // Keep your existing handler body; if it referenced (data, context) before, use:
   const data = request.data;
