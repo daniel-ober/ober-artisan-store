@@ -23,62 +23,31 @@ import { useNavigate } from 'react-router-dom';
 import { checkAuthentication } from '../authCheck';
 import { addInquiry, fetchUserProfile } from '../services/firebaseService';
 import { nanoid } from 'nanoid';
+import { getRecaptchaToken } from '../utils/loadRecaptchaEnterprise';
 import './Contact.css';
 
-// Keep "Other" last while alphabetizing everything else by label
+/* ---- Config -------------------------------------------------------------- */
+const RECAPTCHA_SITE_KEY =
+  process.env.REACT_APP_RECAPTCHA_ENTERPRISE_SITE_KEY || '';
+
+/* ---- Categories (keep “Other” last) ------------------------------------- */
 const inquiryCategories = [
-  {
-    value: 'Custom Shop',
-    label: 'Custom Shop',
-    desc: 'Custom drum builds or modifications',
-  },
-  {
-    value: 'Endorsements',
-    label: 'Endorsements',
-    desc: 'Artist relations and endorsement requests',
-  },
-  {
-    value: 'Partner Relations',
-    label: 'Partner Relations',
-    desc: 'Vendor inquiries or partnership opportunities',
-  },
-  {
-    value: 'Payments',
-    label: 'Payments',
-    desc: 'Update billing or inquire about payments',
-  },
-  {
-    value: 'Product Information',
-    label: 'Product Information',
-    desc: 'Ask about products or specifications',
-  },
-  {
-    value: 'Shipping & Delivery',
-    label: 'Shipping & Delivery',
-    desc: 'Shipping updates or tracking info',
-  },
-  {
-    value: 'Technical Assistance',
-    label: 'Technical Assistance',
-    desc: 'Technical guidance using the website',
-  },
-  {
-    value: 'Website Feedback',
-    label: 'Website Feedback',
-    desc: 'Share feedback or ideas',
-  },
-  {
-    value: 'Other',
-    label: 'Other',
-    desc: 'Anything that doesn’t fit a category',
-  },
+  { value: 'Custom Shop', label: 'Custom Shop', desc: 'Custom drum builds or modifications' },
+  { value: 'Endorsements', label: 'Endorsements', desc: 'Artist relations and endorsement requests' },
+  { value: 'Partner Relations', label: 'Partner Relations', desc: 'Vendor inquiries or partnership opportunities' },
+  { value: 'Payments', label: 'Payments', desc: 'Update billing or inquire about payments' },
+  { value: 'Product Information', label: 'Product Information', desc: 'Ask about products or specifications' },
+  { value: 'Shipping & Delivery', label: 'Shipping & Delivery', desc: 'Shipping updates or tracking info' },
+  { value: 'Technical Assistance', label: 'Technical Assistance', desc: 'Technical guidance using the website' },
+  { value: 'Website Feedback', label: 'Website Feedback', desc: 'Share feedback or ideas' },
+  { value: 'Other', label: 'Other', desc: 'Anything that doesn’t fit a category' },
 ].sort((a, b) => {
   if (a.value === 'Other') return 1;
   if (b.value === 'Other') return -1;
   return a.label.localeCompare(b.label);
 });
 
-// Category response windows (used in hint + success dialog)
+/* ---- SLA copy ------------------------------------------------------------ */
 const categorySLA = {
   'Custom Shop': 'Typical Response: 1–2 business days.',
   Endorsements: 'Typical Response: 1–2 business days.',
@@ -91,7 +60,7 @@ const categorySLA = {
   'Website Feedback': 'Typical Response: 2–3 business days.',
 };
 
-// helpers
+/* ---- Helpers ------------------------------------------------------------- */
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PHONE_RE = /^[0-9()+\-\s.]{7,20}$/;
 const MESSAGE_MAX = 1500;
@@ -106,6 +75,7 @@ const slaWindow = (category) =>
     ''
   );
 
+/* ---- Component ----------------------------------------------------------- */
 const Contact = () => {
   const [formData, setFormData] = useState({
     first_name: '',
@@ -170,8 +140,8 @@ const Contact = () => {
         name === 'phone'
           ? normalizePhone(value)
           : type === 'checkbox'
-            ? checked
-            : value,
+          ? checked
+          : value,
     }));
   };
 
@@ -232,6 +202,19 @@ const Contact = () => {
     try {
       const inquiryId = nanoid();
 
+      // 🛡️ reCAPTCHA Enterprise (prod only; dev returns mock string)
+      let recaptchaToken = null;
+      if (RECAPTCHA_SITE_KEY) {
+        try {
+          recaptchaToken = await getRecaptchaToken(
+            RECAPTCHA_SITE_KEY,
+            'contact_form'
+          );
+        } catch (tokErr) {
+          console.warn('[recaptcha] token unavailable:', tokErr);
+        }
+      }
+
       await addInquiry({
         id: inquiryId,
         ...formData,
@@ -239,6 +222,7 @@ const Contact = () => {
         status: 'New',
         createdAt: new Date(),
         utm: urlParams,
+        recaptchaToken,
       });
 
       // capture category before resetting so dialog can be dynamic
