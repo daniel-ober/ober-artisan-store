@@ -1,9 +1,16 @@
+// src/components/EndorsementForm.js
 import React, { useState } from 'react';
 import { db, app } from '../firebaseConfig';
 import { useNavigate } from 'react-router-dom';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { getFunctions, httpsCallable } from 'firebase/functions';
+import { getRecaptchaToken } from '../utils/loadRecaptchaEnterprise';
 import './EndorsementForm.css';
+
+const RECAPTCHA_SITE_KEY =
+  process.env.REACT_APP_RECAPTCHA_ENTERPRISE_SITE_KEY ||
+  process.env.REACT_APP_RECAPTCHA_SITE_KEY ||
+  '';
 
 const COUNTRY_US = 'US';
 const US_STATES = [
@@ -34,7 +41,6 @@ const initial = {
 const looksUrlOrHandle = (s) =>
   /^https?:\/\//i.test(s) || /^@?[\w.\-]{2,}$/i.test(s);
 
-/* -------------------- component -------------------- */
 export default function EndorsementForm() {
   const [form, setForm] = useState(initial);
   const [submitting, setSubmitting] = useState(false);
@@ -91,23 +97,7 @@ export default function EndorsementForm() {
 
     if (nextInvalid.size) {
       setInvalid(nextInvalid);
-      const msgs = [];
-      if (nextInvalid.has('fullName')) msgs.push('Full name is required.');
-      if (nextInvalid.has('email')) msgs.push('Enter a valid email address.');
-      if (nextInvalid.has('phone')) msgs.push('Enter a valid U.S. phone number.');
-      if (nextInvalid.has('city')) msgs.push('City is required.');
-      if (nextInvalid.has('state')) msgs.push('Select a valid U.S. state.');
-      if (nextInvalid.has('bands')) msgs.push('Band(s)/Act(s) is required.');
-      if (nextInvalid.has('website') || nextInvalid.has('instagram') || nextInvalid.has('youtube') || nextInvalid.has('tiktok'))
-        msgs.push('Website & social fields must be a URL or @handle.');
-      if (nextInvalid.has('tourSchedule')) msgs.push('Touring schedule is required.');
-      if (nextInvalid.has('currentGear')) msgs.push('Current gear is required.');
-      if (nextInvalid.has('endorsementGoals')) msgs.push('Endorsement goals are required.');
-      if (nextInvalid.has('mediaLinks')) msgs.push('Media links are required.');
-      if (nextInvalid.has('whyOber')) msgs.push('Tell us why Ober resonates with you.');
-      if (nextInvalid.has('heardAboutUs')) msgs.push('Please tell us how you heard about us.');
-      if (nextInvalid.has('agree')) msgs.push('Please confirm your agreement to represent the brand.');
-      setError(msgs.join(' '));
+      setError('Please complete all required fields correctly before submitting.');
       return false;
     }
 
@@ -122,6 +112,16 @@ export default function EndorsementForm() {
 
     setSubmitting(true);
     try {
+      // reCAPTCHA Enterprise token (best-effort)
+      let token = '';
+      if (RECAPTCHA_SITE_KEY) {
+        try {
+          token = await getRecaptchaToken(RECAPTCHA_SITE_KEY, 'endorsement_form');
+        } catch (recaptchaErr) {
+          console.warn('[endorsement] reCAPTCHA token unavailable:', recaptchaErr);
+        }
+      }
+
       // 1) Create Firestore doc
       const colRef = collection(db, 'endorsement_applications');
       const payload = {
@@ -131,6 +131,7 @@ export default function EndorsementForm() {
         createdAt: serverTimestamp(),
         status: 'new',
         source: 'website',
+        recaptchaToken: token,
       };
       const docRef = await addDoc(colRef, payload);
 
@@ -184,6 +185,7 @@ export default function EndorsementForm() {
           </ul>
         </div>
 
+        {/* --- Fields --- */}
         <div className="grid-2">
           <label className={markInvalid('fullName')}>
             Full Name
@@ -351,7 +353,6 @@ export default function EndorsementForm() {
             onChange={onChange}
             rows={3}
             className={markInvalid('endorsementGoals')}
-            placeholder=""
           />
         </label>
 
@@ -363,7 +364,6 @@ export default function EndorsementForm() {
             onChange={onChange}
             rows={2}
             className={markInvalid('mediaLinks')}
-            placeholder=""
           />
         </label>
 
@@ -375,7 +375,6 @@ export default function EndorsementForm() {
             onChange={onChange}
             rows={3}
             className={markInvalid('whyOber')}
-            placeholder="Tell us what resonates with you about our craft and brand."
           />
         </label>
 
@@ -386,11 +385,10 @@ export default function EndorsementForm() {
             value={form.heardAboutUs}
             onChange={onChange}
             className={markInvalid('heardAboutUs')}
-            placeholder="Tour, referral, ad, etc."
           />
         </label>
 
-        {/* Footer: agreement + CTA */}
+        {/* Agreement + CTA */}
         <div className="form-footer-block">
           <label className={`agree ${markInvalid('agree')}`}>
             <input
@@ -413,7 +411,7 @@ export default function EndorsementForm() {
           {error && <div className="error error-bottom">{error}</div>}
 
           <button className="submit" disabled={submitting}>
-            {submitting ? 'Submitting...' : 'Submit Application'}
+            {submitting ? 'Submitting…' : 'Submit Application'}
           </button>
         </div>
 

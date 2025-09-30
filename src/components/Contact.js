@@ -482,27 +482,27 @@ const Contact = () => {
 
           {/* Message */}
           <Grid item xs={12} className="message-grid">
-    <TextField
-  variant="outlined"
-  label="Message"
-  name="message"
-  value={formData.message}
-  onChange={handleChange}
-  fullWidth
-  required
-  multiline
-  minRows={2}   // was 4
-  maxRows={4}   // optional: prevents it from expanding too tall
-  className="contact-input"
-  error={Boolean(errors.message)}
-  helperText={
-    errors.message
-      ? errors.message
-      : <span className="char-counter">{`${formData.message.trim().length}/${MESSAGE_MAX} characters`}</span>
-  }
-  inputProps={{ maxLength: MESSAGE_MAX }}
-  InputLabelProps={{ shrink: true }}
-/>
+            <TextField
+              variant="outlined"
+              label="Message"
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+              fullWidth
+              required
+              multiline
+              minRows={2}   // was 4
+              maxRows={4}   // prevent overly tall field on mobile
+              className="contact-input"
+              error={Boolean(errors.message)}
+              helperText={
+                errors.message
+                  ? errors.message
+                  : <span className="char-counter">{`${formData.message.trim().length}/${MESSAGE_MAX} characters`}</span>
+              }
+              inputProps={{ maxLength: MESSAGE_MAX }}
+              InputLabelProps={{ shrink: true }}
+            />
           </Grid>
 
           {/* Consent (required) */}

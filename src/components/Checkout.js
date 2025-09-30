@@ -1,124 +1,181 @@
-import React, { useState, useEffect } from "react";
+// src/components/Checkout.js
+import React, { useState, useEffect, useMemo } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useCart } from "../context/CartContext";
+import { getRecaptchaToken } from "../utils/loadRecaptchaEnterprise";
 import "./Checkout.css";
 
-// Environment Variables
-const RECAPTCHA_SITE_KEY = process.env.REACT_APP_RECAPTCHA_SITE_KEY;
-const VERIFY_URL = process.env.REACT_APP_RECAPTCHA_VERIFY_URL;
-const stripePublishableKey = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY;
+// Env vars
+const RECAPTCHA_SITE_KEY =
+  process.env.REACT_APP_RECAPTCHA_ENTERPRISE_SITE_KEY ||
+  process.env.REACT_APP_RECAPTCHA_SITE_KEY ||
+  "";
+const API_BASE = process.env.REACT_APP_API_URL; // your backend base url
+const STRIPE_PUBLISHABLE_KEY = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY;
 
-// ✅ Debugging Log: Ensure the API URL is correctly loaded
+// Load Stripe once (parent should wrap with <Elements stripe={stripePromise}>)
+export const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY || "");
 
-const stripePromise = loadStripe(stripePublishableKey);
-
-const Checkout = ({ cartItems, totalAmount, onApplyPromo }) => {
+const Checkout = ({ cartItems = [], totalAmount = 0, onApplyPromo = () => {} }) => {
   const { clearCartOnCheckout } = useCart();
   const [promoCode, setPromoCode] = useState("");
   const [discount, setDiscount] = useState(0);
   const [error, setError] = useState("");
+  const [flowMsg, setFlowMsg] = useState("");
   const [loading, setLoading] = useState(false);
   const [clientSecret, setClientSecret] = useState("");
+
   const stripe = useStripe();
   const elements = useElements();
 
-  // ✅ Ensure reCAPTCHA script is loaded dynamically
-  useEffect(() => {
-    if (RECAPTCHA_SITE_KEY) {
-      const script = document.createElement("script");
-      script.src = `https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}`;
-      script.async = true;
-      script.defer = true;
-      document.body.appendChild(script);
-    } else {
-      console.warn("⚠️ reCAPTCHA site key is missing.");
-    }
-  }, []);
+  // Final amount after discount (in dollars shown to user)
+  const finalAmount = useMemo(() => {
+    const n = Number(totalAmount) || 0;
+    const d = 1 - (Number(discount) || 0);
+    return Math.max(0, n * d);
+  }, [totalAmount, discount]);
 
-  // ✅ Fetch client secret from the backend
+  // Convert to cents (integer) for backend/Stripe
+  const finalAmountCents = useMemo(() => Math.round(finalAmount * 100), [finalAmount]);
+
+  // Create/refresh a PaymentIntent when amount changes
   useEffect(() => {
-    const fetchClientSecret = async () => {
-      if (totalAmount <= 0) return; // Ensure totalAmount is greater than 0
-    
+    const createIntent = async () => {
+      setClientSecret("");
+      setFlowMsg("");
+      if (!API_BASE) {
+        console.error("❌ Missing REACT_APP_API_URL.");
+        return;
+      }
+      if (finalAmountCents <= 0) return;
+
       try {
-        // console.log("📡 Sending Payment Intent Request to:", process.env.REACT_APP_API_URL);
+        // Best-effort reCAPTCHA Enterprise token
+        let recaptchaToken = "";
+        if (RECAPTCHA_SITE_KEY) {
+          try {
+            recaptchaToken = await getRecaptchaToken(
+              RECAPTCHA_SITE_KEY,
+              "create_payment_intent"
+            );
+          } catch (e) {
+            console.warn("⚠️ reCAPTCHA token unavailable (create PI):", e);
+          }
+        }
 
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/create-payment-intent`, {
+        const res = await fetch(`${API_BASE}/create-payment-intent`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ amount: totalAmount * 100 }), // Convert to cents
+          body: JSON.stringify({
+            amount: finalAmountCents, // cents (integer)
+            recaptchaToken,          // let backend verify with Recaptcha Enterprise
+          }),
         });
 
-        const data = await response.json();
-        // console.log("✅ Payment Intent Response:", data);
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) {
+          console.error("❌ create-payment-intent failed:", data);
+          setError(data?.message || "Unable to initialize payment.");
+          return;
+        }
 
-        if (data.clientSecret) {
+        if (data?.clientSecret) {
           setClientSecret(data.clientSecret);
         } else {
-          console.error("⚠️ No client secret received from the backend.");
+          console.error("⚠️ No clientSecret returned.");
+          setError("Unable to initialize payment.");
         }
-      } catch (error) {
-        console.error("❌ Error fetching client secret:", error);
+      } catch (err) {
+        console.error("❌ Error creating PaymentIntent:", err);
+        setError("Unable to initialize payment. Please try again.");
       }
     };
 
-    fetchClientSecret();
-  }, [totalAmount]);
+    createIntent();
+  }, [API_BASE, finalAmountCents]);
 
-  // ✅ Handle Promo Code Application
+  // Promo handling
   const handleApplyPromo = () => {
-    if (promoCode.trim() === "DRUM10") {
-      setDiscount(0.1); // 10% discount
-      setError("");
-      onApplyPromo(0.1);
+    setError("");
+    if (promoCode.trim().toUpperCase() === "DRUM10") {
+      setDiscount(0.10);
+      onApplyPromo(0.10);
     } else {
       setDiscount(0);
+      onApplyPromo(0);
       setError("Invalid promo code.");
     }
   };
 
-  const finalAmount = (totalAmount * (1 - discount)).toFixed(2);
-
-  // ✅ Handle Checkout with Stripe
+  // Checkout flow
   const handleCheckout = async () => {
+    setFlowMsg("");
+    setError("");
+
+    if (!stripe || !elements) {
+      setError("Payment is not ready yet. Please wait a moment.");
+      return;
+    }
     if (!clientSecret) {
-      console.error("❌ No client secret. Payment cannot proceed.");
+      setError("No client secret. Payment cannot proceed.");
       return;
     }
 
     setLoading(true);
 
     try {
+      // Fresh reCAPTCHA token for payment confirmation (best-effort)
+      if (RECAPTCHA_SITE_KEY) {
+        try {
+          await getRecaptchaToken(RECAPTCHA_SITE_KEY, "confirm_payment");
+        } catch (e) {
+          console.warn("⚠️ reCAPTCHA token unavailable (confirm):", e);
+        }
+      }
+
       const cardElement = elements.getElement(CardElement);
-      const { error: stripeError, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
-        payment_method: {
-          card: cardElement,
-        },
-      });
+      if (!cardElement) {
+        setError("Payment form is not ready. Please refresh and try again.");
+        setLoading(false);
+        return;
+      }
+
+      const { error: stripeError, paymentIntent } = await stripe.confirmCardPayment(
+        clientSecret,
+        {
+          payment_method: { card: cardElement },
+        }
+      );
 
       if (stripeError) {
-        alert(`❌ Payment failed: ${stripeError.message}`);
+        setError(stripeError.message || "Payment failed.");
       } else if (paymentIntent && paymentIntent.status === "succeeded") {
-
-        alert("✅ Payment successful! Clearing cart...");
-
+        setFlowMsg("✅ Payment successful! Clearing cart…");
         try {
-          await clearCartOnCheckout(); // ✅ Cart will be cleared after successful checkout
-          // console.log("🛒 Cart successfully cleared.");
-        } catch (error) {
-          console.error("❌ Error clearing cart:", error);
+          await clearCartOnCheckout();
+        } catch (cartErr) {
+          console.error("❌ Error clearing cart:", cartErr);
         }
-        alert("✅ Payment successful!");
-        await clearCartOnCheckout(); // Clear cart after successful checkout
+        setFlowMsg("✅ Payment successful!");
+      } else {
+        setError("Payment was not completed. Please try again.");
       }
-    } catch (error) {
-      console.error("❌ Payment processing error:", error);
-      alert("❌ Payment failed. Please try again.");
+    } catch (err) {
+      console.error("❌ Payment processing error:", err);
+      setError("Payment failed. Please try again.");
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
+
+  const isPayDisabled =
+    loading ||
+    !stripe ||
+    !elements ||
+    !clientSecret ||
+    finalAmountCents <= 0 ||
+    cartItems.length === 0;
 
   return (
     <div className="checkout-container">
@@ -132,15 +189,15 @@ const Checkout = ({ cartItems, totalAmount, onApplyPromo }) => {
             <div className="item-details">
               <h3>{item.name}</h3>
               <p className="description">{item.description}</p>
-              <p>Price: ${item.price}</p>
+              <p>Price: ${Number(item.price).toFixed(2)}</p>
               <p>Quantity: {item.quantity}</p>
-              <p>Total: ${(item.price * item.quantity).toFixed(2)}</p>
+              <p>Total: {(Number(item.price) * Number(item.quantity)).toFixed(2)}</p>
             </div>
           </div>
         ))}
       </div>
 
-      {/* Promo Code Section */}
+      {/* Promo Code */}
       <div className="promo-code-section">
         <h2>Apply Promo Code</h2>
         <div className="promo-input-wrapper">
@@ -149,10 +206,14 @@ const Checkout = ({ cartItems, totalAmount, onApplyPromo }) => {
             value={promoCode}
             onChange={(e) => setPromoCode(e.target.value)}
             placeholder="Enter Promo Code"
+            disabled={loading}
           />
-          <button onClick={handleApplyPromo}>Apply</button>
+          <button onClick={handleApplyPromo} disabled={loading}>
+            Apply
+          </button>
         </div>
         {error && <p className="error-message">{error}</p>}
+        {flowMsg && <p className="info-message">{flowMsg}</p>}
       </div>
 
       {/* Order Summary */}
@@ -160,25 +221,27 @@ const Checkout = ({ cartItems, totalAmount, onApplyPromo }) => {
         <h2>Order Summary</h2>
         <div className="summary-line">
           <span>Subtotal:</span>
-          <span>${totalAmount.toFixed(2)}</span>
+          <span>${Number(totalAmount).toFixed(2)}</span>
         </div>
         {discount > 0 && (
           <div className="summary-line discount">
-            <span>Discount (10%):</span>
-            <span>- ${(totalAmount * discount).toFixed(2)}</span>
+            <span>Discount ({Math.round(discount * 100)}%):</span>
+            <span>- {(Number(totalAmount) * Number(discount)).toFixed(2)}</span>
           </div>
         )}
         <div className="summary-line total">
           <span>Total Amount:</span>
-          <span>${finalAmount}</span>
+          <span>${finalAmount.toFixed(2)}</span>
         </div>
       </div>
 
       {/* Card Element */}
-      <CardElement />
+      <div className="card-element-wrapper">
+        <CardElement options={{ hidePostalCode: true }} />
+      </div>
 
       {/* Checkout Button */}
-      <button className="checkout-btn" onClick={handleCheckout} disabled={loading}>
+      <button className="checkout-btn" onClick={handleCheckout} disabled={isPayDisabled}>
         {loading ? "Processing..." : "Proceed to Payment"}
       </button>
     </div>

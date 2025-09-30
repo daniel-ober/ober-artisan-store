@@ -1,5 +1,5 @@
 // src/components/SoundlegendProductDetail.js
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useMemo } from 'react';
 import { db } from '../firebaseConfig';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import {
@@ -11,10 +11,86 @@ import {
   Typography,
 } from '@mui/material';
 import { collection, addDoc, Timestamp } from 'firebase/firestore';
+import { getRecaptchaToken } from '../utils/loadRecaptchaEnterprise';
 import './SoundlegendProductDetail.css';
 import MockupLightbox from './MockupLightbox';
 
-/* ================= Inline Icons (no external deps) ================= */
+/* ================= Env ================= */
+const RECAPTCHA_SITE_KEY =
+  process.env.REACT_APP_RECAPTCHA_ENTERPRISE_SITE_KEY ||
+  process.env.REACT_APP_RECAPTCHA_SITE_KEY ||
+  "";
+
+/* ================= iOS detection & limits ================= */
+const isIOS =
+  typeof navigator !== 'undefined' &&
+  /iP(hone|ad|od)/.test(navigator.userAgent);
+
+// On iOS we keep concurrent image decodes VERY low to avoid browser crashes
+const MAX_CONCURRENT_THUMBS = isIOS ? 1 : 4;
+const THUMB_BATCH_INCREMENT = isIOS ? 1 : 4;
+
+/* ================= Small helpers ================= */
+const onlyDigits = (s = '') => s.replace(/\D/g, '').slice(0, 10);
+const formatDashed = (d) => {
+  if (!d) return '';
+  if (d.length >= 6) return `${d.slice(0, 3)}-${d.slice(3, 6)}-${d.slice(6)}`;
+  if (d.length >= 3) return `${d.slice(0, 3)}-${d.slice(3)}`;
+  return d;
+};
+const isEmailFormat = (v) =>
+  /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((v || '').trim());
+
+/* ================= Lazy, throttled img ================= */
+function LazyImg({ src, alt, width, height, className, onClick, fetchpriority }) {
+  const ref = useRef(null);
+  const [realSrc, setRealSrc] = useState(null);
+
+  useEffect(() => {
+    let obs;
+    const el = ref.current;
+    if (!el) return;
+    if ('IntersectionObserver' in window) {
+      obs = new IntersectionObserver(
+        (entries) => {
+          for (const en of entries) {
+            if (en.isIntersecting) {
+              setRealSrc(src);
+              obs.disconnect();
+              break;
+            }
+          }
+        },
+        { rootMargin: '200px' }
+      );
+      obs.observe(el);
+      return () => obs && obs.disconnect();
+    } else {
+      setRealSrc(src);
+    }
+  }, [src]);
+
+  return (
+    <img
+      ref={ref}
+      src={realSrc || ''}
+      alt={alt}
+      width={width}
+      height={height}
+      loading="lazy"
+      decoding="async"
+      fetchpriority={fetchpriority}
+      onClick={onClick}
+      draggable={false}
+      className={className}
+      style={{
+        containIntrinsicSize: `${height || 150}px ${width || 220}px`,
+      }}
+    />
+  );
+}
+
+/* ================= Inline Icons ================= */
 const Icon = ({ name, size = 22 }) => {
   const common = {
     width: size,
@@ -78,20 +154,20 @@ const Icon = ({ name, size = 22 }) => {
           <path d="M3.3 7L12 12l8.7-5M12 22V12" />
         </svg>
       );
-    case 'award': // premium bullet
+    case 'award':
       return (
         <svg {...common}>
           <circle cx="12" cy="8" r="4" />
           <path d="M15 11l2 9-5-3-5 3 2-9" />
         </svg>
       );
-    case 'crown': // artist-first service
+    case 'crown':
       return (
         <svg {...common}>
           <path d="M3 8l4 3 5-7 5 7 4-3v9H3z" />
         </svg>
       );
-    case 'wallet': // flexible payments (trust blurb)
+    case 'wallet':
       return (
         <svg {...common}>
           <path d="M3 7h18a2 2 0 0 1 2 2v9H1V9a2 2 0 0 1 2-2z" />
@@ -104,7 +180,9 @@ const Icon = ({ name, size = 22 }) => {
   }
 };
 
-/* ================= Steps data (consolidated Build Proposal + Payment) ================= */
+/* ================= Steps =================
+   Uses your new /mockups/thumbs/*.png thumbnails
+========================================== */
 const steps = [
   {
     id: 1,
@@ -130,23 +208,10 @@ const steps = [
       'Finish direction and badge treatment',
       'Secure Stripe checkout with optional Klarna installments',
     ],
-    signwell: true,
     vendors: {
-      signwell: {
-        img: '/logos/signwell-logo.svg',
-        alt: 'SignWell',
-        label: 'Secure e-signing',
-      },
-      stripe: {
-        img: '/logos/stripe-logo.png',
-        alt: 'Stripe',
-        label: 'Secure checkout',
-      },
-      klarna: {
-        img: '/logos/klarna-logo.png',
-        alt: 'Klarna',
-        label: 'Buy now, pay later',
-      },
+      signwell: { img: '/logos/signwell-logo.svg', alt: 'SignWell', label: 'Secure e-signing' },
+      stripe:   { img: '/logos/stripe-logo.png',  alt: 'Stripe',   label: 'Secure checkout' },
+      klarna:   { img: '/logos/klarna-logo.png',  alt: 'Klarna',   label: 'Buy now, pay later' },
     },
     note: 'Shop securely and choose to pay in full, 4 interest-free payments, in 30 days, or over time. Klarna availability and terms depend on your credit profile and location; approval is not guaranteed.',
   },
@@ -154,8 +219,7 @@ const steps = [
     id: 3,
     key: 'music',
     title: 'Tone-Matched Wood',
-    blurb:
-      'Wood is hand-selected for grain, density, and character that will actually sing for you.',
+    blurb: 'Wood is hand-selected for grain, density, and character that will actually sing for you.',
     bullets: [
       'Curate boards, veneers, or exotic selects that “speak” to your legacy',
       'Match stiffness/weight to your desired voice',
@@ -168,22 +232,18 @@ const steps = [
     title: 'Early Mockups',
     blurb:
       'High-resolution mockups using the <b>actual wood</b> chosen for your shell—see it before we shape it.',
-    bullets: [
-      'Raw-shell visuals with accurate grain',
-      'Finish previews and layout options',
-      'Iterate quickly before we commit',
-    ],
+    bullets: ['Raw-shell visuals with accurate grain', 'Finish previews and layout options', 'Iterate quickly before we commit'],
     mockImages: [
-      '/mockups/2.png',
-      '/mockups/1.png',
-      '/mockups/3.png',
-      '/mockups/4.png',
-      '/mockups/5.png',
-      '/mockups/6.png',
-      '/mockups/7.png',
-      '/mockups/8.png',
-      '/mockups/9.png',
-      '/mockups/10.png',
+      { full: '/mockups/1.png',  thumb: '/mockups/thumbs/1.jpg'  },
+      { full: '/mockups/2.png',  thumb: '/mockups/thumbs/2.jpg'  },
+      { full: '/mockups/3.png',  thumb: '/mockups/thumbs/3.jpg'  },
+      { full: '/mockups/4.png',  thumb: '/mockups/thumbs/4.jpg'  },
+      { full: '/mockups/5.png',  thumb: '/mockups/thumbs/5.jpg'  },
+      { full: '/mockups/6.png',  thumb: '/mockups/thumbs/6.jpg'  },
+      { full: '/mockups/7.png',  thumb: '/mockups/thumbs/7.jpg'  },
+      { full: '/mockups/8.png',  thumb: '/mockups/thumbs/8.jpg'  },
+      { full: '/mockups/9.png',  thumb: '/mockups/thumbs/9.jpg'  },
+      { full: '/mockups/10.png', thumb: '/mockups/thumbs/10.jpg' },
     ],
   },
   {
@@ -266,20 +326,20 @@ const SoundLegendProductDetail = () => {
   // Page-level keyboard nav — disabled while the lightbox is open
   useEffect(() => {
     const onKey = (e) => {
-      if (mockOpen || document.documentElement.getAttribute('data-lightbox-open') === 'true') {
-        return; // Lightbox owns the keyboard
+      if (
+        mockOpen ||
+        document.documentElement.getAttribute('data-lightbox-open') === 'true'
+      ) {
+        return;
       }
-      if (e.key === 'ArrowRight') {
-        setActiveStep((s) => Math.min(s + 1, steps.length - 1));
-      } else if (e.key === 'ArrowLeft') {
-        setActiveStep((s) => Math.max(s - 1, 0));
-      }
+      if (e.key === 'ArrowRight') setActiveStep((s) => Math.min(s + 1, steps.length - 1));
+      else if (e.key === 'ArrowLeft') setActiveStep((s) => Math.max(s - 1, 0));
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, [mockOpen]);
 
-  // keep active node centered when scrolling (mobile/smaller web)
+  // keep active node centered when scrolling
   useEffect(() => {
     const rail = railRef.current;
     if (!rail) return;
@@ -297,17 +357,7 @@ const SoundLegendProductDetail = () => {
     setTimeout(() => navigate('/artisan-shop'), 200);
   };
 
-  // helpers
-  const onlyDigits = (s = '') => s.replace(/\D/g, '').slice(0, 10);
-  const formatDashed = (d) => {
-    if (!d) return '';
-    if (d.length >= 6) return `${d.slice(0, 3)}-${d.slice(3, 6)}-${d.slice(6)}`;
-    if (d.length >= 3) return `${d.slice(0, 3)}-${d.slice(3)}`;
-    return d;
-  };
   const isPhoneValid = phoneDigits.length === 10;
-  const isEmailFormat = (v) =>
-    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((v || '').trim());
 
   const validate = () => {
     const missing = [];
@@ -334,6 +384,19 @@ const SoundLegendProductDetail = () => {
 
     setIsSubmitting(true);
     try {
+      // Best-effort reCAPTCHA Enterprise token
+      let recaptchaToken = '';
+      if (RECAPTCHA_SITE_KEY) {
+        try {
+          recaptchaToken = await getRecaptchaToken(
+            RECAPTCHA_SITE_KEY,
+            'soundlegend_interest'
+          );
+        } catch (tokErr) {
+          console.warn('[soundlegend] recaptcha token unavailable:', tokErr);
+        }
+      }
+
       const dashed = formatDashed(phoneDigits);
       const phonePretty = `+1 ${dashed}`;
       const phoneE164 = `+1${phoneDigits}`;
@@ -351,6 +414,7 @@ const SoundLegendProductDetail = () => {
         consultationDate,
         status: 'New',
         submittedAt: Timestamp.now(),
+        recaptchaToken,
       });
       await new Promise((r) => setTimeout(r, 500));
       setOpen(true);
@@ -371,6 +435,41 @@ const SoundLegendProductDetail = () => {
     setMockOpen(true);
   };
 
+  /* ===== Mockup thumbnails: throttle how many mount at once ===== */
+  const currentMockImages = steps[activeStep].mockImages || [];
+  const [thumbLimit, setThumbLimit] = useState(MAX_CONCURRENT_THUMBS);
+  const mockThumbContainerRef = useRef(null);
+
+  useEffect(() => {
+    // reset limit when changing steps
+    setThumbLimit(MAX_CONCURRENT_THUMBS);
+  }, [activeStep]);
+
+  useEffect(() => {
+    const el = mockThumbContainerRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((en) => {
+          if (en.isIntersecting) {
+            setThumbLimit((n) =>
+              Math.min(n + THUMB_BATCH_INCREMENT, currentMockImages.length)
+            );
+          }
+        });
+      },
+      { root: null, rootMargin: '200px', threshold: 0.01 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [currentMockImages.length]);
+
+  // Full-res list for the lightbox
+  const lightboxImages = useMemo(
+    () => currentMockImages.map((m) => m.full || m),
+    [currentMockImages]
+  );
+
   return (
     <div className="soundlegend-product-detail">
       {/* Brand */}
@@ -378,20 +477,26 @@ const SoundLegendProductDetail = () => {
         src="/resized-logos/soundlegend-white.png"
         alt="SOUNDLEGEND Series"
         className="soundlegend-header-image"
+        width="780"
+        height="120"
+        decoding="async"
       />
 
       {/* HERO */}
       <div className="sl-hero-grid">
         <div className="sl-hero-media">
           <div className="sl-hero-frame">
-            <img
+            <LazyImg
               src="https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/soundlegend_showroom%2FSL-001%2Fgallery%2F0-IMG_1803.jpg?alt=media&token=f84c86d4-f111-4156-87c7-3b5e5992df28"
               alt="SoundLegend Snare — hero"
               className="soundlegend-hero-img"
+              width={1600}
+              height={1200}
+              fetchpriority="low"
             />
           </div>
 
-          {/* === TRUST BAND (desktop under image; mobile collapses) === */}
+          {/* === TRUST BAND === */}
           <section className="sl-trustband" aria-label="Assurances">
             <div className="tb-item">
               <span className="tb-icon">🇺🇸</span>
@@ -419,9 +524,7 @@ const SoundLegendProductDetail = () => {
               <span className="tb-icon">
                 <Icon name="wallet" size={20} />
               </span>
-              <span className="tb-text">
-                Flexible payment options available
-              </span>
+              <span className="tb-text">Flexible payment options available</span>
             </div>
           </section>
         </div>
@@ -496,7 +599,6 @@ const SoundLegendProductDetail = () => {
             />
           </div>
 
-          {/* Centered hint (fixed inside wrapper; hidden on large screens) */}
           <div className="sl-rail-hint">Swipe to explore →</div>
         </div>
 
@@ -525,7 +627,7 @@ const SoundLegendProductDetail = () => {
           />
 
           <ul className="sl-panel-bullets">
-            {steps[activeStep].bullets.map((b, idx) => (
+            {steps[activeStep].bullets?.map((b, idx) => (
               <li key={idx}>
                 <span className="bullet-award">
                   <Icon name="award" size={13} />
@@ -535,21 +637,30 @@ const SoundLegendProductDetail = () => {
             ))}
           </ul>
 
-          {/* Mockups AFTER bullets with helper copy */}
-          {steps[activeStep].mockImages && (
+          {/* Mockups (throttled thumbnails; full-res only in Lightbox) */}
+          {currentMockImages.length > 0 && (
             <>
               <p className="sl-mockup-hint">Tap an image to enlarge</p>
-              <div className="mockup-strip">
-                {steps[activeStep].mockImages.map((src, i) => (
-                  <button
-                    key={i}
-                    className="mockup-thumb"
-                    onClick={() => openMock(i)}
-                    aria-label={`Open mockup ${i + 1}`}
-                  >
-                    <img src={src} alt={`Mockup ${i + 1}`} />
-                  </button>
-                ))}
+              <div className="mockup-strip" ref={mockThumbContainerRef}>
+                {currentMockImages.slice(0, thumbLimit).map((m, i) => {
+                  const thumb = m.thumb || m.full || m;
+                  return (
+                    <button
+                      key={`${i}-${thumb}`}
+                      className="mockup-thumb"
+                      onClick={() => openMock(i)}
+                      aria-label={`Open mockup ${i + 1}`}
+                    >
+                      <LazyImg
+                        src={thumb}
+                        alt={`Mockup ${i + 1}`}
+                        width={220}
+                        height={150}
+                        className="mockup-thumb-img"
+                      />
+                    </button>
+                  );
+                })}
               </div>
             </>
           )}
@@ -559,7 +670,7 @@ const SoundLegendProductDetail = () => {
             <p className="sl-note">* {steps[activeStep].note}</p>
           )}
 
-          {/* Footer badges row (order: SignWell, Stripe, Klarna) */}
+          {/* Vendor badges */}
           {steps[activeStep].vendors && (
             <div className="sl-badges-row">
               {steps[activeStep].vendors.signwell && (
@@ -568,6 +679,9 @@ const SoundLegendProductDetail = () => {
                     src={steps[activeStep].vendors.signwell.img}
                     alt={steps[activeStep].vendors.signwell.alt}
                     height="16"
+                    width="72"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <span>{steps[activeStep].vendors.signwell.label}</span>
                 </span>
@@ -578,6 +692,9 @@ const SoundLegendProductDetail = () => {
                     src={steps[activeStep].vendors.stripe.img}
                     alt={steps[activeStep].vendors.stripe.alt}
                     height="16"
+                    width="64"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <span>{steps[activeStep].vendors.stripe.label}</span>
                 </span>
@@ -588,6 +705,9 @@ const SoundLegendProductDetail = () => {
                     src={steps[activeStep].vendors.klarna.img}
                     alt={steps[activeStep].vendors.klarna.alt}
                     height="16"
+                    width="64"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <span>{steps[activeStep].vendors.klarna.label}</span>
                 </span>
@@ -611,17 +731,24 @@ const SoundLegendProductDetail = () => {
                 className="sl-vault-logo-link"
                 aria-label="Explore the Legacy Vault"
               >
-                <img src="/legacy-vault-nav/white2.png" alt="Legacy Vault" />
+                <img
+                  src="/legacy-vault-nav/white2.png"
+                  alt="Legacy Vault"
+                  width="160"
+                  height="48"
+                  loading="lazy"
+                  decoding="async"
+                />
               </Link>
             </div>
           )}
         </div>
       </section>
 
-      {/* Centralized Lightbox (owns keyboard) */}
+      {/* Lightbox gets full-res list only when opened */}
       <MockupLightbox
         open={mockOpen}
-        images={steps[activeStep].mockImages || []}
+        images={lightboxImages}
         index={mockIdx}
         onChange={setMockIdx}
         onClose={() => setMockOpen(false)}
@@ -684,7 +811,7 @@ const SoundLegendProductDetail = () => {
                 onChange={(e) => setPhoneDigits(onlyDigits(e.target.value))}
                 required
                 aria-required="true"
-                aria-invalid={phoneDigits ? !isPhoneValid : undefined}
+                aria-invalid={phoneDigits ? !(phoneDigits.length === 10) : undefined}
               />
             </div>
             <p className="field-note">
