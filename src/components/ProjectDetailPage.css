@@ -12,6 +12,19 @@
   line-height: 1.6;
 }
 
+/* Accessible links sitewide in this page */
+.project-page a{
+  color:#79B8FF;
+  text-decoration:underline;
+  text-underline-offset:2px;
+}
+.project-page a:hover{ color:#A8CCFF; }
+.project-page a:focus-visible{
+  outline:2px solid #79B8FF;
+  outline-offset:2px;
+  border-radius:4px;
+}
+
 /* Header */
 .project-page h2 {
   font-size: 2rem;
@@ -340,7 +353,6 @@
   .project-page { padding: 1.5rem 1rem; }
   .project-page h2 { font-size: 1.5rem; }
   .project-section { padding: 1.25rem; }
-  .project-section h3 { font-size: 1.1rem; }
   .project-section p { font-size: 0.9rem; }
 
   .file-preview-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }

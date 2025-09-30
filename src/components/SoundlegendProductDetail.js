@@ -1,3 +1,4 @@
+// src/components/SoundlegendProductDetail.js
 import React, { useEffect, useState, useRef } from 'react';
 import { db } from '../firebaseConfig';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
@@ -11,6 +12,7 @@ import {
 } from '@mui/material';
 import { collection, addDoc, Timestamp } from 'firebase/firestore';
 import './SoundlegendProductDetail.css';
+import MockupLightbox from './MockupLightbox';
 
 /* ================= Inline Icons (no external deps) ================= */
 const Icon = ({ name, size = 22 }) => {
@@ -172,13 +174,16 @@ const steps = [
       'Iterate quickly before we commit',
     ],
     mockImages: [
-      '/mockups/bubinga_waterfall.a.jpg',
-      '/mockups/bubinga_waterfall.b.png',
-      '/mockups/mappa-burl-ressner.jpeg',
-      '/mockups/mappa_burl_gensler.png',
-      '/mockups/mappa_burl_lopez_a.jpeg',
-      '/mockups/mockup1.png',
-      '/mockups/mappa-burl-blue-sheet.png',
+      '/mockups/2.png',
+      '/mockups/1.png',
+      '/mockups/3.png',
+      '/mockups/4.png',
+      '/mockups/5.png',
+      '/mockups/6.png',
+      '/mockups/7.png',
+      '/mockups/8.png',
+      '/mockups/9.png',
+      '/mockups/10.png',
     ],
   },
   {
@@ -244,7 +249,7 @@ const SoundLegendProductDetail = () => {
   const [activeStep, setActiveStep] = useState(0);
   const railRef = useRef(null);
 
-  // mockup modal
+  // mockup Lightbox state
   const [mockOpen, setMockOpen] = useState(false);
   const [mockIdx, setMockIdx] = useState(0);
 
@@ -258,26 +263,21 @@ const SoundLegendProductDetail = () => {
     el.scrollTo({ top: 0, behavior: 'auto' });
   }, [location]);
 
-  // keyboard nav
+  // Page-level keyboard nav — disabled while the lightbox is open
   useEffect(() => {
     const onKey = (e) => {
-      if (e.key === 'ArrowRight')
+      if (mockOpen || document.documentElement.getAttribute('data-lightbox-open') === 'true') {
+        return; // Lightbox owns the keyboard
+      }
+      if (e.key === 'ArrowRight') {
         setActiveStep((s) => Math.min(s + 1, steps.length - 1));
-      if (e.key === 'ArrowLeft') setActiveStep((s) => Math.max(s - 1, 0));
-      if (e.key === 'Escape') setMockOpen(false);
-      if (mockOpen && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) {
-        const imgs = steps[activeStep].mockImages || [];
-        if (!imgs.length) return;
-        setMockIdx((i) => {
-          const dir = e.key === 'ArrowRight' ? 1 : -1;
-          const n = imgs.length;
-          return (i + dir + n) % n;
-        });
+      } else if (e.key === 'ArrowLeft') {
+        setActiveStep((s) => Math.max(s - 1, 0));
       }
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [activeStep, mockOpen]);
+  }, [mockOpen]);
 
   // keep active node centered when scrolling (mobile/smaller web)
   useEffect(() => {
@@ -369,11 +369,6 @@ const SoundLegendProductDetail = () => {
   const openMock = (i) => {
     setMockIdx(i);
     setMockOpen(true);
-  };
-  const nextMock = (dir) => {
-    const imgs = steps[activeStep].mockImages || [];
-    if (!imgs.length) return;
-    setMockIdx((idx) => (idx + dir + imgs.length) % imgs.length);
   };
 
   return (
@@ -623,48 +618,14 @@ const SoundLegendProductDetail = () => {
         </div>
       </section>
 
-      {/* Mockup lightbox modal with arrow-only nav + X close */}
-      {mockOpen && (
-        <div
-          className="mockup-modal"
-          role="dialog"
-          aria-modal="true"
-          onClick={() => setMockOpen(false)}
-        >
-          <button
-            className="mockup-close"
-            onClick={() => setMockOpen(false)}
-            aria-label="Close"
-          >
-            ×
-          </button>
-          <button
-            className="mockup-arrow left"
-            aria-label="Previous"
-            onClick={(e) => {
-              e.stopPropagation();
-              nextMock(-1);
-            }}
-          >
-            ‹
-          </button>
-          <img
-            src={(steps[activeStep].mockImages || [])[mockIdx]}
-            alt={`Mockup ${mockIdx + 1}`}
-            onClick={(e) => e.stopPropagation()}
-          />
-          <button
-            className="mockup-arrow right"
-            aria-label="Next"
-            onClick={(e) => {
-              e.stopPropagation();
-              nextMock(1);
-            }}
-          >
-            ›
-          </button>
-        </div>
-      )}
+      {/* Centralized Lightbox (owns keyboard) */}
+      <MockupLightbox
+        open={mockOpen}
+        images={steps[activeStep].mockImages || []}
+        index={mockIdx}
+        onChange={setMockIdx}
+        onClose={() => setMockOpen(false)}
+      />
 
       {/* ===== Start Your Journey (Form only) ===== */}
       <aside className="sl-card sl-form-only">

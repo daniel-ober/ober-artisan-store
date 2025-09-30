@@ -69,7 +69,7 @@
 .sl-info{
   display:inline-grid; place-items:center;
   width:16px; height:16px; margin-left:8px; border-radius:50%;
-  font-size:.7rem; color:#111; background:#cfcfcf; font-weight:800; /* neutral tone */
+  font-size:.7rem; color:#111; background:#cfcfcf; font-weight:800;
   cursor:help;
 }
 
@@ -103,7 +103,7 @@
 /* Rail wrapper */
 .sl-rail-wrap{
   position:relative;
-  overflow-x:auto; /* becomes visible: overflow on lg desktop */
+  overflow-x:auto;
   scrollbar-width:thin; -webkit-overflow-scrolling:touch;
   padding-bottom:22px;
 }
@@ -117,7 +117,7 @@
 .sl-rail-wrap::after{ right:0; transform:scaleX(-1); }
 .sl-rail-wrap::before{ left:0; }
 
-/* centered hint (fixed inside wrapper so it doesn't slide with the rail) */
+/* centered hint */
 .sl-rail-hint{
   position:absolute;
   left:50%; transform:translateX(-50%);
@@ -192,19 +192,60 @@
 }
 .sl-note{ color:#bfbfbf; font-size:.9rem; margin-top:6px; }
 
-/* mockups strip (responsive, no overflow) */
+/* mockups strip (enhanced mobile-first grid & states) */
 .sl-mockup-hint{ color:#bdbdbd; margin:10px 0 6px; font-size:.9rem; }
+
 .mockup-strip{
-  display:flex; flex-wrap:wrap; gap:10px; margin:6px 0 2px;
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(140px,1fr));
+  gap:12px;
+  margin:8px 0 2px;
 }
-.mockup-thumb{ border:none; padding:0; background:transparent; cursor:pointer; }
+
+.mockup-thumb{
+  position:relative;
+  isolation:isolate;
+  border:none;
+  padding:0;
+  background:transparent;
+  cursor:pointer;
+  border-radius:12px;
+  overflow:hidden;
+  outline:0;
+  transition:transform .12s ease, box-shadow .12s ease, outline-color .12s ease;
+  box-shadow:0 8px 18px rgba(0,0,0,.22);
+}
+
 .mockup-thumb img{
-  width:min(220px, 42vw);
-  aspect-ratio:16/10;
+  display:block;
+  width:100%;
   height:auto;
+  aspect-ratio:16/10;
   object-fit:cover;
-  border-radius:10px; border:1px solid rgba(255,255,255,.14);
-  box-shadow:0 6px 16px rgba(0,0,0,.25);
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.14);
+  filter:saturate(1.03);
+  transform:translateZ(0);
+}
+
+/* subtle inner vignette */
+.mockup-thumb::after{
+  content:"";
+  position:absolute; inset:0;
+  border-radius:inherit;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.10), inset 0 -40px 60px rgba(0,0,0,.22);
+  pointer-events:none;
+}
+
+.mockup-thumb:hover,
+.mockup-thumb:active{
+  transform:translateY(-1px);
+  box-shadow:0 12px 26px rgba(0,0,0,.28);
+}
+
+.mockup-thumb:focus-visible{
+  outline:3px solid rgba(255,204,0,.65);
+  outline-offset:2px;
 }
 
 /* vendor badges footer row */
@@ -293,4 +334,13 @@
 @media (max-width:680px){
   .sl-rail{ grid-template-columns:repeat(var(--stepcount, 7), 200px); }
   .sl-rail-active{ display:none; } /* mobile relies on active bubble */
+}
+
+/* Extra mobile tweaks for modal */
+@media (max-width:600px){
+  .mockup-modal img{ max-width:96vw; max-height:80vh; }
+  .mockup-arrow{ font-size:64px; }
+  .mockup-arrow.left{ left:12px; }
+  .mockup-arrow.right{ right:12px; }
+  .mockup-close{ top:10px; right:12px; font-size:32px; }
 }

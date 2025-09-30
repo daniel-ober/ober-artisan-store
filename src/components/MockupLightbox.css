@@ -1,0 +1,31 @@
+/* Fullscreen lightbox */
+.lightbox{
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.9);
+  display: grid; place-items: center;
+  z-index: 9999;
+  outline: none;
+}
+.lightbox img{
+  max-width: 92vw; max-height: 86vh; object-fit: contain;
+}
+
+.lb-prev,.lb-next,.lb-close{
+  position: absolute; top: 50%;
+  transform: translateY(-50%);
+  background: none; color: #fff; border: 0; cursor: pointer;
+  font-size: 48px; line-height: 1;
+  padding: .25rem .5rem;
+}
+.lb-prev{ left: 16px; }
+.lb-next{ right: 16px; }
+.lb-close{
+  top: 18px; right: 18px; transform: none; font-size: 32px;
+}
+
+/* optional: when open, you can dim any fixed headers using the hook */
+html[data-lightbox-open="true"] .NavBar,
+html[data-lightbox-open="true"] .AdminNavBar {
+  pointer-events: none;
+  filter: brightness(.6);
+}
