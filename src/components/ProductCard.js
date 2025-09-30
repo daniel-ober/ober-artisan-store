@@ -38,17 +38,53 @@ const getEnabledVariantIds = (product) => {
 };
 
 /** Map variantId -> first image src that references it */
+/** Map variantId -> best image src for that variant.
+ * Preference order:
+ *   1) image with is_default && includes this variant
+ *   2) first image that includes this variant and displayInGallery !== false
+ */
 const buildVariantImgMap = (product) => {
   const map = new Map();
   const imgs = Array.isArray(product.images) ? product.images : [];
+
+  // Pre-group images by whether they're marked default
+  const defCandidates = new Map();    // variantId -> src
+  const firstCandidates = new Map();  // variantId -> src
+
+  const srcOf = (im) => (typeof im === 'string' ? im : im?.src || im?.url || im?.previewImage || '');
+  const idsOf = (im) => {
+    const raw = im?.variant_ids ?? [];
+    return (Array.isArray(raw) ? raw : [raw]).filter(Boolean).map(String);
+  };
+
   imgs.forEach((im) => {
-    const idsRaw = im?.variant_ids ?? [];
-    const ids = Array.isArray(idsRaw) ? idsRaw : [idsRaw].filter(Boolean);
-    const src = typeof im === 'string' ? im : im?.src;
-    ids.map(String).forEach((id) => {
-      if (src && !map.has(id)) map.set(id, src);
+    const src = srcOf(im);
+    if (!src) return;
+    const display = typeof im === 'object' ? im.displayInGallery !== false : true;
+    const ids = idsOf(im);
+
+    ids.forEach((vid) => {
+      // (2) first seen gallery image for this variant
+      if (display && src && !firstCandidates.has(vid)) {
+        firstCandidates.set(vid, src);
+      }
+      // (1) default image for this variant
+      if (im?.is_default && src && !defCandidates.has(vid)) {
+        defCandidates.set(vid, src);
+      }
     });
   });
+
+  // choose default if present, otherwise first gallery
+  const allVariantIds = new Set([
+    ...Array.from(defCandidates.keys()),
+    ...Array.from(firstCandidates.keys()),
+  ]);
+
+  allVariantIds.forEach((vid) => {
+    map.set(vid, defCandidates.get(vid) || firstCandidates.get(vid) || null);
+  });
+
   return map;
 };
 
@@ -112,13 +148,27 @@ const getLowestPrice = (product) => {
 };
 
 const baseImageSrc = (product) => {
-  if (!Array.isArray(product.images) || product.images.length === 0) return FALLBACK_IMAGE;
-  const preferred =
-    product.images.find((img) => typeof img === 'object' && img?.src && img.displayInGallery !== false) ||
-    product.images.find((img) => typeof img === 'object' && img?.src) ||
-    product.images[0];
-  const src = typeof preferred === 'string' ? preferred : preferred?.src;
-  return src || FALLBACK_IMAGE;
+  // 1) explicit previewImage
+  if (product?.previewImage) return product.previewImage;
+
+  // 2) image flagged as default
+  if (Array.isArray(product?.images)) {
+    const def = product.images.find((i) => typeof i === 'object' && i?.is_default);
+    if (def?.src) return def.src;
+  }
+
+  // 3) first gallery image we can show
+  if (Array.isArray(product?.images) && product.images.length > 0) {
+    const preferred =
+      product.images.find((img) => typeof img === 'object' && img?.src && img.displayInGallery !== false) ||
+      product.images.find((img) => typeof img === 'object' && img?.src) ||
+      product.images[0];
+    const src = typeof preferred === 'string' ? preferred : preferred?.src;
+    return src || FALLBACK_IMAGE;
+  }
+
+  // 4) last resort
+  return FALLBACK_IMAGE;
 };
 
 /* ───────── equalizers ───────── */

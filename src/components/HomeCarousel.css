@@ -58,9 +58,8 @@
 .carousel-slide.active{ opacity:1; visibility:visible; pointer-events:auto; }
 .carousel-slide.inactive{ opacity:0; visibility:hidden; }
 
-/* ===== Overlay & content ===== */
+/* ===== Overlay & content (centered, subtitle fixed) ===== */
 
-/* lock overlay position: centered slightly below midpoint */
 .carousel-overlay{
   --overlay-top: 56%;               /* adjust 54–58% to taste */
 
@@ -70,11 +69,16 @@
   transform:translate(-50%, -50%);
 
   z-index:2;
-  text-align:center;
   color:#fff;
-
   width:min(92%, 740px);
   padding:2.2rem 2.6rem;
+
+  display:flex !important;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  gap:.5rem;
 }
 
 /* Soft vignette behind the text (very subtle) */
@@ -95,7 +99,7 @@
   line-height:1.15;
   letter-spacing:-.02em;
   color:#fff;
-  margin:0 0 .9rem;
+  margin:0;
   text-shadow:
     0 0 6px rgba(0,0,0,.6),
     0 2px 16px rgba(0,0,0,.5);
@@ -105,9 +109,11 @@
   font-size:clamp(1rem, 2.1vw, 1.375rem);
   line-height:1.45;
   opacity:.95;
-  margin:0 0 1.4rem;
+  margin:0 0 1.1rem 0;
   text-shadow:0 1px 3px rgba(0,0,0,.4);
-  max-width:30ch;                 /* keep to ~2–3 lines */
+  max-width:30ch;
+  width:100%;
+  text-align:center;
 }
 
 .carousel-overlay button{
@@ -121,7 +127,7 @@
   padding:.9rem 1.4rem;
 
   transition:background-color .25s ease, transform .18s ease, opacity 1.2s ease;
-  margin:.2rem 0 2.2rem;          /* reserve space above dots */
+  margin:.2rem 0 2.2rem;
   opacity:0;
 }
 .carousel-overlay button:hover{ background:#ff6f13; transform:translateY(-1px); }
@@ -151,7 +157,7 @@
   display:flex; justify-content:center; gap:16px; z-index:3;
 }
 .carousel-control-button{
-  padding:0 .6rem;                /* tap area without a circle */
+  padding:0 .6rem;
 }
 .carousel-nav button{
   background:transparent !important;
@@ -181,22 +187,24 @@
     --overlay-top: 54%;
     width:92%;
     padding:1rem 1.1rem;
+    align-items:center !important;
+    text-align:center !important;
   }
 
   .carousel-overlay h1{
     font-size:clamp(1.35rem, 6.2vw, 1.9rem);
-    margin-bottom:.55rem;
+    margin-bottom:.35rem;
   }
   .carousel-overlay p{
     font-size:clamp(.95rem, 4vw, 1.05rem);
     line-height:1.35;
-    margin-bottom:.9rem;
+    margin-bottom:.8rem;
     max-width:26ch;
   }
   .carousel-overlay button{
     padding:.7rem 1rem;
     font-size:.95rem;
-    margin-bottom:3.6rem;          /* keep above dots */
+    margin-bottom:3.6rem;
   }
 
   .carousel-dots{ bottom:50px; gap:9px; }

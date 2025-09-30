@@ -13,7 +13,8 @@ import { Trash2 } from 'lucide-react';
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
 // Known-good backend URL
-const API_BASE_URL = 'https://us-central1-danoberartisandrums.cloudfunctions.net/api';
+const API_BASE_URL =
+  'https://us-central1-danoberartisandrums.cloudfunctions.net/api';
 
 /* Shipping rules */
 const FREE_THRESHOLD = 75;
@@ -21,7 +22,8 @@ const SHIPPING_COST = 9.99;
 const money = (n) => `$${Number(n || 0).toFixed(2)}`;
 
 const Cart = () => {
-  const { cart, cartId, removeFromCart, setCart, updateFirestoreCart } = useCart();
+  const { cart, cartId, removeFromCart, setCart, updateFirestoreCart } =
+    useCart();
   const { user } = useAuth();
 
   const [loading, setLoading] = useState(false);
@@ -31,7 +33,9 @@ const Cart = () => {
   const [productDataMap, setProductDataMap] = useState({});
 
   useEffect(() => {
-    const onShow = (event) => { if (event.persisted) window.location.reload(); };
+    const onShow = (event) => {
+      if (event.persisted) window.location.reload();
+    };
     window.addEventListener('pageshow', onShow);
     return () => window.removeEventListener('pageshow', onShow);
   }, []);
@@ -129,7 +133,8 @@ const Cart = () => {
     setUnavailableProducts([]);
   };
 
-  const getItemTotal = (item) => (Number(item.price) || 0) * (item.quantity || 1);
+  const getItemTotal = (item) =>
+    (Number(item.price) || 0) * (item.quantity || 1);
   const subtotal = cart.reduce((t, i) => t + getItemTotal(i), 0);
   const qualifiesForFree = subtotal >= FREE_THRESHOLD;
   const shippingAmount = qualifiesForFree ? 0 : SHIPPING_COST;
@@ -160,9 +165,17 @@ const Cart = () => {
             item.image || (Array.isArray(item.images) && item.images[0]) || fb;
         } else if (isMerch) {
           const productDoc = productDataMap[item.productId];
-          const normalizeKey = (s) => (s || '').toString().toLowerCase().replace(/\s+|\/|-/g, '');
-          const variantId = String(item.variantId || config.variantId || '').trim();
-          const selectedColor = normalizeKey(config.Colors || config.colorName || config.color);
+          const normalizeKey = (s) =>
+            (s || '')
+              .toString()
+              .toLowerCase()
+              .replace(/\s+|\/|-/g, '');
+          const variantId = String(
+            item.variantId || config.variantId || ''
+          ).trim();
+          const selectedColor = normalizeKey(
+            config.Colors || config.colorName || config.color
+          );
 
           if (productDoc?.images?.length) {
             let matched = productDoc.images.find((img) =>
@@ -177,7 +190,10 @@ const Cart = () => {
                   : false
               );
             }
-            if (!matched) matched = productDoc.images.find((img) => img.is_default) || productDoc.images[0];
+            if (!matched)
+              matched =
+                productDoc.images.find((img) => img.is_default) ||
+                productDoc.images[0];
             if (matched?.src?.startsWith('http')) previewImage = matched.src;
           }
         }
@@ -189,14 +205,19 @@ const Cart = () => {
             depth: normalize(config.depth),
             lugQuantity: normalize(config.lugQuantity),
             staveQuantity: normalize(config.staveQuantity),
-            reRing: typeof config.reRing !== 'undefined' ? !!config.reRing : undefined,
+            reRing:
+              typeof config.reRing !== 'undefined'
+                ? !!config.reRing
+                : undefined,
             hardwareColor: normalize(config.hardwareColor),
             outerShell: normalize(config.outerShell),
             innerStave: normalize(config.innerStave),
           };
         } else if (isMerch) {
-          const sizeValue = config.Sizes || config.size || config.sizeName || '';
-          const colorValue = config.Colors || config.color || config.colorName || '';
+          const sizeValue =
+            config.Sizes || config.size || config.sizeName || '';
+          const colorValue =
+            config.Colors || config.color || config.colorName || '';
           const variantId = item.variantId || config.variantId || '';
           configPayload = {
             sizeName: String(sizeValue).trim(),
@@ -215,7 +236,8 @@ const Cart = () => {
           stripePriceId,
           price: Number(item.price) || 0,
           quantity: item.quantity || 1,
-          image: typeof previewImage === 'string' ? previewImage : previewImage?.src,
+          image:
+            typeof previewImage === 'string' ? previewImage : previewImage?.src,
           config: configPayload,
         };
       });
@@ -272,13 +294,17 @@ const Cart = () => {
                 const fallback = '/fallback-images/fallback_image1.png';
                 const config = item.config || {};
                 const variantId = Number(item.variantId || config?.variantId);
-                const normalize = (s) => (s || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+                const normalize = (s) =>
+                  (s || '').toLowerCase().replace(/[^a-z0-9]/g, '');
                 const selectedColor = normalize(config.Colors || '');
 
                 let previewImage = item.image || fallback;
 
                 if (item.category === 'artisan') {
-                  previewImage = item.image || (Array.isArray(item.images) && item.images[0]) || fallback;
+                  previewImage =
+                    item.image ||
+                    (Array.isArray(item.images) && item.images[0]) ||
+                    fallback;
                 } else if (item.category === 'merch') {
                   const product = productDataMap[item.productId];
                   if (product?.images) {
@@ -287,7 +313,9 @@ const Cart = () => {
                         (img) =>
                           Array.isArray(img.variant_ids) &&
                           (img.variant_ids.includes(Number(variantId)) ||
-                           img.variant_ids.map(String).includes(String(variantId)))
+                            img.variant_ids
+                              .map(String)
+                              .includes(String(variantId)))
                       ) ||
                       product.images.find(
                         (img) =>
@@ -297,7 +325,8 @@ const Cart = () => {
                       product.images.find((img) => img.is_default) ||
                       product.images[0];
 
-                    if (matched?.src?.startsWith('http')) previewImage = matched.src;
+                    if (matched?.src?.startsWith('http'))
+                      previewImage = matched.src;
                   }
                 }
 
@@ -324,7 +353,11 @@ const Cart = () => {
                         }
                       >
                         <img
-                          src={typeof previewImage === 'string' ? previewImage : previewImage?.src || fallback}
+                          src={
+                            typeof previewImage === 'string'
+                              ? previewImage
+                              : previewImage?.src || fallback
+                          }
                           alt={item.name}
                           className="cart-product-image"
                           onError={(e) => (e.currentTarget.src = fallback)}
@@ -333,15 +366,35 @@ const Cart = () => {
                     </td>
 
                     <td>
-                      <p>{item.name || item.title || item.config?.title || 'Unnamed Product'}</p>
+                      <p>
+                        {item.name ||
+                          item.title ||
+                          item.config?.title ||
+                          'Unnamed Product'}
+                      </p>
                       <p className="cart-sub-description">
-                        {item.category === 'artisan' && item.productId !== 'founders-toast' ? (
+                        {item.category === 'artisan' &&
+                        item.productId !== 'founders-toast' ? (
                           <>
-                            {config.size && config.depth && <>{config.size}" x {config.depth}" | </>}
-                            {config.lugQuantity && <>{config.lugQuantity}-Lug | </>}
-                            {config.staveQuantity && <>{config.staveQuantity}-Stave | </>}
-                            {typeof config.reRing !== 'undefined' && (config.reRing ? 'With Re-Ring' : 'Re-Rings: None')}
-                            {item.productId !== 'founders-toast' && config.hardwareColor && <> | Hardware: {config.hardwareColor}</>}
+                            {config.size && config.depth && (
+                              <>
+                                {config.size}" x {config.depth}" |{' '}
+                              </>
+                            )}
+                            {config.lugQuantity && (
+                              <>{config.lugQuantity}-Lug | </>
+                            )}
+                            {config.staveQuantity && (
+                              <>{config.staveQuantity}-Stave | </>
+                            )}
+                            {typeof config.reRing !== 'undefined' &&
+                              (config.reRing
+                                ? 'With Re-Ring'
+                                : 'Re-Rings: None')}
+                            {item.productId !== 'founders-toast' &&
+                              config.hardwareColor && (
+                                <> | Hardware: {config.hardwareColor}</>
+                              )}
                             {(config.outerShell || config.innerStave) && (
                               <>
                                 <br />
@@ -353,7 +406,9 @@ const Cart = () => {
                           <>
                             {config.Sizes && <span>Size: {config.Sizes}</span>}
                             {config.Colors && (
-                              <span>{config.Sizes && ' | '}Color: {config.Colors}</span>
+                              <span>
+                                {config.Sizes && ' | '}Color: {config.Colors}
+                              </span>
                             )}
                             {(config.outerShell || config.innerStave) && (
                               <>
@@ -366,22 +421,44 @@ const Cart = () => {
                       </p>
                     </td>
 
-                    <td>{item.price !== undefined ? `$${Number(item.price).toFixed(2)}` : <span style={{ color: 'red' }}>⚠️ Missing Price</span>}</td>
+                    <td>
+                      {item.price !== undefined ? (
+                        `$${Number(item.price).toFixed(2)}`
+                      ) : (
+                        <span style={{ color: 'red' }}>⚠️ Missing Price</span>
+                      )}
+                    </td>
 
                     <td>
-                      {item.productId === 'founders-toast' || item.category !== 'artisan' ? (
+                      {item.productId === 'founders-toast' ||
+                      item.category !== 'artisan' ? (
                         <div className="quantity-control">
                           <button
                             className="quantity-btn"
-                            onClick={() => updateQuantity(item.id, Math.max(item.quantity - 1, 1))}
+                            onClick={() =>
+                              updateQuantity(
+                                item.id,
+                                Math.max(item.quantity - 1, 1)
+                              )
+                            }
                             disabled={item.quantity <= 1}
                           >
                             -
                           </button>
-                          <span className="quantity-value">{item.quantity}</span>
+                          <span className="quantity-value">
+                            {item.quantity}
+                          </span>
                           <button
                             className="quantity-btn"
-                            onClick={() => updateQuantity(item.id, Math.min(item.quantity + 1, item.currentQuantity))}
+                            onClick={() =>
+                              updateQuantity(
+                                item.id,
+                                Math.min(
+                                  item.quantity + 1,
+                                  item.currentQuantity
+                                )
+                              )
+                            }
                             disabled={item.quantity >= item.currentQuantity}
                           >
                             +
@@ -408,12 +485,15 @@ const Cart = () => {
 
             <div className="summary-line">
               <span className="label">
-                Shipping <span className="muted">(Standard 7–10 business days)</span>
+                Shipping{' '}
+                <span className="muted">(Standard 7–10 business days)</span>
               </span>
               <span className="amount">{shippingDisplay}</span>
             </div>
 
-            <div className="summary-note">* Free shipping applies to the contiguous U.S. only.</div>
+            <div className="summary-note">
+              * Free shipping on orders over $75 (contiguous U.S. only)
+            </div>
 
             <div className="summary-line total">
               <span className="label">Total</span>
@@ -421,7 +501,11 @@ const Cart = () => {
             </div>
 
             <div className="summary-actions">
-              <button onClick={handleCheckout} className="checkout-button-inline" disabled={loading}>
+              <button
+                onClick={handleCheckout}
+                className="checkout-button-inline"
+                disabled={loading}
+              >
                 {loading ? 'Processing...' : '🔒 Checkout'}
               </button>
             </div>
@@ -430,7 +514,9 @@ const Cart = () => {
           <p className="checkout-note-below">
             Taxes, shipping, and promo codes applied at checkout
           </p>
-          <p className="cart-id">Cart ID: {(cartId || user?.uid || 'guest').slice(-5)}</p>
+          <p className="cart-id">
+            Cart ID: {(cartId || user?.uid || 'guest').slice(-5)}
+          </p>
         </>
       )}
 
