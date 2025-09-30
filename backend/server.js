@@ -1,352 +1,375 @@
-require('dotenv').config({ path: __dirname + '/.env.prod' });
+// backend/server.js
 
-// console.log('NODE_ENV:', process.env.NODE_ENV);
-// console.log(
-//   'Loaded STRIPE_SECRET_KEY:',
-//   process.env.STRIPE_SECRET_KEY ? '✅ Exists' : '❌ Missing'
-// );
+// Load .env.* locally (Cloud Run/Functions will inject envs)
+const path = require('path');
+const fs = require('fs');
+
+const envFileFromNodeEnv = (() => {
+  const env = (process.env.NODE_ENV || '').trim();
+  if (env === 'production' || env === 'prod') return '.env.prod';
+  if (env === 'staging' || env === 'stg') return '.env.stg';
+  return '.env.dev';
+})();
+
+const envPath = path.resolve(__dirname, envFileFromNodeEnv);
+if (fs.existsSync(envPath)) {
+  // eslint-disable-next-line global-require
+  require('dotenv').config({ path: envPath });
+  console.log(`Loaded env file: ${envFileFromNodeEnv}`);
+}
 
 const express = require('express');
 const cors = require('cors');
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const admin = require('firebase-admin');
-const path = require('path');
+const Stripe = require('stripe');
 
-// Validate critical environment variables
-const requiredEnvVars = [
+// ---- Validate required env vars ---------------------------------------------
+const required = [
   'STRIPE_SECRET_KEY',
   'STRIPE_WEBHOOK_SECRET',
   'FIREBASE_PROJECT_ID',
+  'FIREBASE_CLIENT_EMAIL',
+  'FIREBASE_PRIVATE_KEY',
   'CLIENT_URL',
 ];
-requiredEnvVars.forEach((key) => {
-  if (!process.env[key]) {
-    console.error(`Missing required environment variable: ${key}`);
-    process.exit(1);
-  }
-});
 
-// Determine the environment (dev, stg, prod)
-const env = process.env.NODE_ENV || 'dev';
-// console.log(`Using Firebase environment: ${env}`);
-
-// Load the correct service account key
-let serviceAccount;
-try {
-  const serviceAccountPath = path.resolve(
-    __dirname,
-    `./serviceAccountKey-${env}.json`
-  );
-  // console.log(
-  //   `Loading Firebase Service Account Key from: ${serviceAccountPath}`
-  // );
-  serviceAccount = require(serviceAccountPath);
-} catch (error) {
-  console.error(`Failed to load service account key for environment: ${env}`);
+const missing = required.filter((k) => !process.env[k] || `${process.env[k]}`.trim() === '');
+if (missing.length) {
+  console.error('Missing required environment variables:', missing.join(', '));
   process.exit(1);
 }
 
-// Firebase Admin Initialization
+// ---- Stripe init -------------------------------------------------------------
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+  // Keep this aligned with your CLI; if unsure, omit and use account default
+  apiVersion: '2024-06-20',
+});
+
+// ---- Firebase Admin init -----------------------------------------------------
 if (!admin.apps.length) {
+  const privateKey = (process.env.FIREBASE_PRIVATE_KEY || '').replace(/\\n/g, '\n');
+
   admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
+    credential: admin.credential.cert({
+      projectId: process.env.FIREBASE_PROJECT_ID,
+      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+      privateKey,
+    }),
     databaseURL: `https://${process.env.FIREBASE_PROJECT_ID}.firebaseio.com`,
   });
 }
-
 const db = admin.firestore();
-// console.log(
-//   `Firestore initialized for project: ${process.env.FIREBASE_PROJECT_ID}`
-// );
 
+// ---- App + CORS --------------------------------------------------------------
 const app = express();
 
-// Trust Proxy for Firebase Hosting
+// Trust Proxy for hosting behind a proxy (Cloud Run / Functions)
 app.set('trust proxy', true);
 
-// Allow requests from frontend environments
-const allowedOrigins = [
+// Allowed origins for CORS
+const allowedOrigins = new Set([
   'http://localhost:3000',
+  'http://127.0.0.1:3000',
   'https://danoberartisandrums-dev.web.app',
   'https://danoberartisandrums-stg.web.app',
   'https://danoberartisandrums.web.app',
   'https://oberartisandrums.com',
+  'https://www.oberartisandrums.com',
   'https://oberdrums.com',
   'https://danoberartisan.com',
   'https://oberartisan.com',
   'https://us-central1-danoberartisandrums.cloudfunctions.net',
-  'https://us-central1-danoberartisandrums.cloudfunctions.net/',
-  'https://us-central1-danoberartisandrums.cloudfunctions.net/createCheckoutSession',
-  'https://us-central1-danoberartisandrums.cloudfunctions.net/createCheckoutSession/',
-];
+]);
 
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
+    origin(origin, cb) {
+      if (!origin) return cb(null, true);
+      if (allowedOrigins.has(origin)) return cb(null, true);
+      return cb(new Error('Not allowed by CORS'));
     },
-    credentials: true, // Allows cookies and authentication headers
+    credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Stripe-Signature'],
   })
 );
 
-// Middleware: JSON Parsing
+// IMPORTANT: do NOT JSON-parse the Stripe webhook body.
 app.use((req, res, next) => {
-  if (req.originalUrl === '/api/webhook')
-    next(); // Skip JSON parsing for webhook
-  else express.json({ limit: '1mb' })(req, res, next);
+  if (req.originalUrl === '/api/webhook') return next();
+  return express.json({ limit: '2mb' })(req, res, next);
 });
 
-// Function to generate a custom ID
+// ---- Healthcheck -------------------------------------------------------------
+app.get('/', (_req, res) => res.status(200).send('ok'));
+
+// ---- Helpers ----------------------------------------------------------------
 const generateCustomId = () => {
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  let result = '';
-  for (let i = 0; i < 10; i++) {
-    // Length of the ID
-    result += characters.charAt(Math.floor(Math.random() * characters.length));
-  }
-  return result;
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  let out = '';
+  for (let i = 0; i < 10; i++) out += chars.charAt(Math.floor(Math.random() * chars.length));
+  return out;
 };
 
-// Webhook Route for Stripe
-// Webhook Route for Stripe
-app.post(
-  '/api/webhook',
-  express.raw({ type: 'application/json' }),
-  async (req, res) => {
-    const sig = req.headers['stripe-signature'];
-    let event;
+// Small safe getter
+const centsToDollars = (v) => Math.round(Number(v || 0)) / 100;
 
-    try {
-      event = stripe.webhooks.constructEvent(
-        req.body,
-        sig,
-        process.env.STRIPE_WEBHOOK_SECRET
-      );
-    } catch (err) {
-      console.error(`Webhook signature verification failed: ${err.message}`);
-      return res.status(400).send(`Webhook Error: ${err.message}`);
+// ---- Stripe Webhook (RAW BODY) ----------------------------------------------
+app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, res) => {
+  const sig = req.headers['stripe-signature'];
+  let event;
+
+  try {
+    event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
+  } catch (err) {
+    console.error('❌ Webhook signature verification failed:', err.message);
+    return res.status(400).send(`Webhook Error: ${err.message}`);
+  }
+
+  // Minimal event logging
+  try {
+    console.log(`➡️  Received event: ${event.type} (id=${event.id})`);
+
+    if (event.type !== 'checkout.session.completed') {
+      // Acknowledge other events so the CLI shows 200s
+      return res.status(200).send('Event received (ignored).');
     }
 
-    // Process only the checkout.session.completed event
-    if (event.type === 'checkout.session.completed') {
-      const session = event.data.object;
-    
-      // ✅ Retrieve enriched line items (with expanded product metadata)
-      const lineItems = await stripe.checkout.sessions.listLineItems(session.id, {
+    const session = event.data.object;
+
+    // Defensive: log small, safe summary of the session (no PII dump)
+    console.log('🧾 Session summary:', {
+      id: session.id,
+      amount_total: session.amount_total,
+      currency: session.currency,
+      payment_intent: session.payment_intent || null,
+      customer_email: session.customer_details?.email || session.customer_email || null,
+      metadata: session.metadata || {},
+    });
+
+    // Enriched line items with expanded product (metadata)
+    let lineItems;
+    try {
+      const li = await stripe.checkout.sessions.listLineItems(session.id, {
         expand: ['data.price.product'],
       });
-    
-      const items = lineItems.data.map((item) => {
-        const metadata = item.price?.product?.metadata || {};
-    
-        return {
-          name: item.price?.product?.name || item.description || 'Unnamed Product',
-          quantity: item.quantity,
-          price: item.amount_total / 100,
-          variantId: metadata.variantId || '',
-          size: metadata.size || '',
-          depth: metadata.depth || '',
-          color: metadata.color || '',
-          reRing: metadata.reRing || '',
-          lugQuantity: metadata.lugQuantity || '',
-          staveQuantity: metadata.staveQuantity || '',
-          outerShell: metadata.outerShell || '',
-          innerStave: metadata.innerStave || '',
-          status: 'Order Successful',
-        };
-      });
-    
-      // ✅ Retrieve card details from payment intent
-      let cardDetails = {};
-      if (session.payment_intent) {
-        try {
-          const paymentIntent = await stripe.paymentIntents.retrieve(
-            session.payment_intent,
-            { expand: ['payment_method'] }
-          );
-          const card = paymentIntent.payment_method?.card;
-          if (card) {
-            cardDetails = {
-              brand: card.brand,
-              lastFour: card.last4,
-              expMonth: card.exp_month,
-              expYear: card.exp_year,
-            };
-          }
-        } catch (error) {
-          console.error('❌ Error fetching payment intent card details:', error.message);
-        }
-      }
-    
-      // ✅ Final order data
-      const orderData = {
-        stripeSessionId: session.id,
-        userId: session.metadata?.userId || 'guest',
-        guestToken: session.metadata?.guestToken || null,
-        customerName: session.customer_details?.name || 'No Name Provided',
-        customerEmail: session.customer_details?.email || 'No Email Provided',
-        customerPhone: session.customer_details?.phone || 'No Phone Provided',
-        customerAddress: session.customer_details?.address
-          ? `${session.customer_details.address.line1 || ''}, ${session.customer_details.address.city || ''}, ${session.customer_details.address.postal_code || ''}, ${session.customer_details.address.country || ''}`
-          : 'No Address Provided',
-        shippingDetails: session.shipping?.address
-          ? `${session.shipping.address.line1 || ''}, ${session.shipping.address.city || ''}, ${session.shipping.address.state || ''}, ${session.shipping.address.country || ''}, ${session.shipping.address.postal_code || ''}`
-          : 'No Shipping Details Provided',
-        paymentMethod: session.payment_method_types?.[0] || 'card',
-        cardDetails,
-        totalAmount: session.amount_total / 100 || 0,
-        currency: session.currency || 'usd',
-        status: 'Order Started',
-        items,
-        createdAt: admin.firestore.FieldValue.serverTimestamp(),
-        systemHistory: [
-          {
-            event: `Order created from Stripe checkout session`,
-            timestamp: new Date().toISOString(),
-          },
-        ],
+      lineItems = li.data;
+      console.log(`🧺 Got ${lineItems.length} line item(s).`);
+    } catch (e) {
+      console.error('❌ listLineItems failed:', e?.message || e);
+      // Keep going with an empty array rather than 500
+      lineItems = [];
+    }
+
+    const items = lineItems.map((item) => {
+      const product = item.price?.product;
+      const md = product?.metadata || {};
+      // amount_total can be missing on some API versions; fall back safely
+      const cents =
+        (item.amount_total ?? item.amount_subtotal ?? item.price?.unit_amount ?? 0);
+
+      return {
+        name: product?.name || item.description || 'Unnamed Product',
+        quantity: item.quantity ?? 1,
+        price: Math.round(Number(cents)) / 100,
+        variantId: md.variantId || '',
+        size: md.size || md.sizeName || '',
+        depth: md.depth || '',
+        color: md.color || md.colorName || '',
+        reRing: md.reRing || '',
+        lugQuantity: md.lugQuantity || '',
+        staveQuantity: md.staveQuantity || '',
+        outerShell: md.outerShell || '',
+        innerStave: md.innerStave || '',
+        status: 'Order Successful',
       };
-    
+    });
+
+    // Card details (brand/last4) — only if a PI exists
+    let cardDetails = {};
+    if (session.payment_intent) {
       try {
-        const customId = generateCustomId();
-        await db.collection('orders').doc(customId).set(orderData);
-        console.log('✅ Order saved to Firestore with ID:', customId);
-        res.status(200).send('Event processed successfully');
-      } catch (error) {
-        console.error('❌ Error saving order to Firestore:', error.message);
-        res.status(500).send('Internal Server Error');
+        const pi = await stripe.paymentIntents.retrieve(session.payment_intent, {
+          expand: ['payment_method'],
+        });
+        const card = pi.payment_method?.card;
+        if (card) {
+          cardDetails = {
+            brand: card.brand,
+            lastFour: card.last4,
+            expMonth: card.exp_month,
+            expYear: card.exp_year,
+          };
+        }
+      } catch (e) {
+        console.warn('⚠️ Could not fetch payment method details:', e?.message || e);
       }
     } else {
-      // For unhandled event types, simply acknowledge receipt.
-      res.status(200).send('Event received');
+      console.log('ℹ️ Session has no payment_intent (fine for some test fixtures).');
     }
-  }
-);
 
-// New Route for creating Stripe payment intents
+    const order = {
+      stripeSessionId: session.id,
+      userId: session.metadata?.userId || 'guest',
+      guestToken: session.metadata?.guestToken || null,
+      customerName:
+        session.customer_details?.name ||
+        `${session.metadata?.customerFirstName || ''} ${session.metadata?.customerLastName || ''}`.trim() ||
+        'No Name Provided',
+      customerEmail: session.customer_details?.email || session.customer_email || 'No Email Provided',
+      customerPhone: session.customer_details?.phone || session.metadata?.customerPhone || 'No Phone Provided',
+      customerAddress: session.customer_details?.address
+        ? `${session.customer_details.address.line1 || ''}, ${session.customer_details.address.city || ''}, ${session.customer_details.address.postal_code || ''}, ${session.customer_details.address.country || ''}`
+        : 'No Address Provided',
+      shippingDetails: session.shipping?.address
+        ? `${session.shipping.address.line1 || ''}, ${session.shipping.address.city || ''}, ${session.shipping.address.state || ''}, ${session.shipping.address.country || ''}, ${session.shipping.address.postal_code || ''}`
+        : 'No Shipping Details Provided',
+      paymentMethod: session.payment_method_types?.[0] || 'card',
+      cardDetails,
+      totalAmount: Math.round(Number(session.amount_total ?? 0)) / 100,
+      currency: session.currency || 'usd',
+      status: 'order successful',
+      items,
+      createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      systemHistory: [
+        { event: 'Order created from Stripe checkout session', timestamp: new Date().toISOString() },
+      ],
+    };
+
+    try {
+      const id = generateCustomId();
+      await db.collection('orders').doc(id).set(order);
+      console.log('✅ Order saved to Firestore with ID:', id);
+      return res.status(200).send('Event processed successfully');
+    } catch (e) {
+      console.error('❌ Firestore write failed:', e?.message || e);
+      return res.status(500).send('Internal Server Error (Firestore)');
+    }
+  } catch (err) {
+    // Last line of defense: log full error
+    console.error('❌ Webhook handler error (top-level):', err?.stack || err);
+    return res.status(500).send('Internal Server Error');
+  }
+});
+
+// ---- Create Payment Intent ---------------------------------------------------
 app.post('/api/create-payment-intent', async (req, res) => {
   try {
-    const { amount } = req.body;
-
-    if (!amount) {
-      console.error('🚨 Error: Amount is missing from request!');
-      return res.status(400).json({ error: 'Amount is required' });
+    const { amount } = req.body || {};
+    const cents = Math.round(Number(amount));
+    if (!Number.isFinite(cents) || cents <= 0) {
+      return res.status(400).json({ error: 'Amount is required and must be > 0' });
     }
 
-    console.log('🟢 Creating payment intent for amount:', amount);
-
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount,
+    const pi = await stripe.paymentIntents.create({
+      amount: cents,
       currency: 'usd',
       payment_method_types: ['card'],
     });
 
-    console.log('✅ Payment intent created successfully:', paymentIntent.id);
-    res.status(200).json({ clientSecret: paymentIntent.client_secret });
+    return res.status(200).json({ clientSecret: pi.client_secret });
   } catch (error) {
-    console.error('🔥 Stripe API Error:', error); // Log full error details
-    res.status(500).json({ error: error.message });
+    console.error('🔥 Stripe create-payment-intent error:', error?.message || error, error?.stack);
+    return res.status(500).json({ error: error.message || 'Stripe error' });
   }
 });
 
-// Route for creating Stripe checkout sessions
+// ---- Create Checkout Session -------------------------------------------------
 app.post('/api/createCheckoutSession', async (req, res) => {
   try {
     const {
-      products,
+      products = [],
       userId,
       customerFirstName,
       customerLastName,
       customerEmail,
       customerPhone,
       shippingAddress,
-    } = req.body;
-
-    const guestToken = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    } = req.body || {};
 
     if (!Array.isArray(products) || products.length === 0) {
       return res.status(400).json({ error: 'Invalid or empty cart.' });
     }
 
-    const lineItems = products.map((product) => ({
+    const guestToken = `${Date.now()}-${Math.random().toString(36).slice(2, 11)}`;
+
+    const line_items = products.map((p) => ({
       price_data: {
         currency: 'usd',
-        unit_amount: Math.round(product.price * 100),
+        unit_amount: Math.round(Number(p.price || 0) * 100),
         product_data: {
-          name: product.name || 'Unnamed Product',
-          description: product.description || '',
+          name: p.name || 'Unnamed Product',
+          description: p.description || '',
           metadata: {
-            productId: product.productId || product.id || '',
-            variantId: product.variantId || '',
-            size: product.config?.size || '',
-            depth: product.config?.depth || '',
-            color: product.config?.color || '',
-            reRing: product.config?.reRing ? 'Yes' : 'No',
-            lugQuantity: product.config?.lugQuantity || '',
-            staveQuantity: product.config?.staveQuantity || '',
-            outerShell: product.config?.outerShell || '',
-            innerStave: product.config?.innerStave || '',
+            productId: p.productId || p.id || '',
+            variantId: p.variantId || p?.config?.variantId || '',
+            size: p?.config?.size || p?.config?.sizeName || '',
+            depth: p?.config?.depth || '',
+            color: p?.config?.color || p?.config?.colorName || '',
+            reRing: p?.config?.reRing ? 'Yes' : 'No',
+            lugQuantity: p?.config?.lugQuantity || '',
+            staveQuantity: p?.config?.staveQuantity || '',
+            outerShell: p?.config?.outerShell || '',
+            innerStave: p?.config?.innerStave || '',
           },
         },
       },
-      quantity: product.quantity || 1,
+      quantity: Math.max(1, parseInt(p.quantity || 1, 10)),
     }));
 
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
       mode: 'payment',
-      line_items: lineItems,
+      payment_method_types: ['card'],
+      line_items,
       success_url: `${process.env.CLIENT_URL}/checkout-summary?session_id={CHECKOUT_SESSION_ID}&guest_token=${guestToken}`,
       cancel_url: `${process.env.CLIENT_URL}/cart`,
+      allow_promotion_codes: true,
       customer_email: customerEmail,
       shipping_address_collection: { allowed_countries: ['US', 'CA'] },
-      allow_promotion_codes: true,
       metadata: {
         userId: userId || 'guest',
         guestToken,
-        customerFirstName,
-        customerLastName,
+        customerFirstName: customerFirstName || '',
+        customerLastName: customerLastName || '',
         customerPhone: customerPhone || '',
         shippingAddress: JSON.stringify(shippingAddress || {}),
       },
     });
 
-    res.status(200).json({ url: session.url, id: session.id, guestToken });
+    return res.status(200).json({ url: session.url, id: session.id, guestToken });
   } catch (err) {
-    console.error('❌ Error creating checkout session:', err.message);
-    res.status(500).json({ error: err.message });
+    console.error('❌ Error creating checkout session:', err?.message || err, err?.stack);
+    return res.status(500).json({ error: err.message || 'Internal error' });
   }
 });
 
-// Import and mount routes
-const chatRoute = require('../functions/src/routes/chat');
-const inquiriesRoute = require('../functions/src/routes/inquiries');
-const productsRoute = require('../functions/src/routes/products');
-const ordersRoute = require('../functions/src/routes/orders');
-const usersRoute = require('../functions/src/routes/users');
-const cartsRoute = require('../functions/src/routes/carts');
+// ---- Mount other routes (optional) ------------------------------------------
+try {
+  const chatRoute = require('../functions/src/routes/chat');
+  const inquiriesRoute = require('../functions/src/routes/inquiries');
+  const productsRoute = require('../functions/src/routes/products');
+  const ordersRoute = require('../functions/src/routes/orders');
+  const usersRoute = require('../functions/src/routes/users');
+  const cartsRoute = require('../functions/src/routes/carts');
 
-app.use('/api/chat', chatRoute);
-app.use('/api/inquiries', inquiriesRoute);
-app.use('/api/products', productsRoute);
-app.use('/api/orders', ordersRoute);
-app.use('/api/users', usersRoute);
-app.use('/api/carts', cartsRoute);
+  app.use('/api/chat', chatRoute);
+  app.use('/api/inquiries', inquiriesRoute);
+  app.use('/api/products', productsRoute);
+  app.use('/api/orders', ordersRoute);
+  app.use('/api/users', usersRoute);
+  app.use('/api/carts', cartsRoute);
+} catch (e) {
+  console.warn('Optional route modules not found or failed to load:', e?.message);
+}
 
-// Error handling middleware
-app.use((err, req, res, next) => {
-  console.error('Unhandled error:', err.message);
+// ---- Error handler -----------------------------------------------------------
+app.use((err, _req, res, _next) => {
+  console.error('Unhandled error:', err?.message || err, err?.stack);
   res.status(500).json({ error: 'Internal Server Error' });
 });
 
-// Start the server, default to port for local dev, but use PORT for cloud environments like Cloud Run
-const PORT = process.env.PORT || 8080; // Make sure this is set to 8080 for Cloud Run
+// ---- Start server ------------------------------------------------------------
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-  // console.log(`Server is running on port ${PORT}`);
+  console.log(`api listening on ${PORT}`);
 });
