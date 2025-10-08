@@ -100,7 +100,7 @@
   text-align:center; font-size:1.8rem; color:var(--sl-gold); margin-bottom:10px;
 }
 
-/* Rail wrapper */
+/* (legacy rail styles can remain; harmless if unused) */
 .sl-rail-wrap{
   position:relative;
   overflow-x:auto;
@@ -116,8 +116,6 @@
 }
 .sl-rail-wrap::after{ right:0; transform:scaleX(-1); }
 .sl-rail-wrap::before{ left:0; }
-
-/* centered hint */
 .sl-rail-hint{
   position:absolute;
   left:50%; transform:translateX(-50%);
@@ -126,8 +124,6 @@
   user-select:none; pointer-events:none;
 }
 @media (min-width:1024px){ .sl-rail-hint{ display:none; } }
-
-/* the rail */
 .sl-rail{
   position:relative; display:grid;
   grid-template-columns:repeat(var(--stepcount, 7), minmax(150px, 1fr));
@@ -142,8 +138,6 @@
   box-shadow:0 0 16px rgba(255,204,0,.45);
   transition:width .35s ease; z-index:1;
 }
-
-/* nodes */
 .sl-node{
   position:relative; display:flex; flex-direction:column; align-items:center; gap:8px;
   background:transparent; border:none; color:#eaeaea; cursor:pointer; padding:0; z-index:3;
@@ -161,7 +155,7 @@
 }
 .sl-node.active .sl-node-caption{opacity:1; color:#fff; font-weight:700}
 
-/* panel */
+/* panel (legacy) */
 .sl-journey-panel{
   margin-top:12px;
   background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.06));
@@ -192,16 +186,14 @@
 }
 .sl-note{ color:#bfbfbf; font-size:.9rem; margin-top:6px; }
 
-/* mockups strip (enhanced mobile-first grid & states) */
+/* mockups strip */
 .sl-mockup-hint{ color:#bdbdbd; margin:10px 0 6px; font-size:.9rem; }
-
 .mockup-strip{
   display:grid;
   grid-template-columns:repeat(auto-fill, minmax(140px,1fr));
   gap:12px;
   margin:8px 0 2px;
 }
-
 .mockup-thumb{
   position:relative;
   isolation:isolate;
@@ -215,7 +207,6 @@
   transition:transform .12s ease, box-shadow .12s ease, outline-color .12s ease;
   box-shadow:0 8px 18px rgba(0,0,0,.22);
 }
-
 .mockup-thumb img{
   display:block;
   width:100%;
@@ -227,8 +218,6 @@
   filter:saturate(1.03);
   transform:translateZ(0);
 }
-
-/* subtle inner vignette */
 .mockup-thumb::after{
   content:"";
   position:absolute; inset:0;
@@ -236,13 +225,11 @@
   box-shadow:inset 0 0 0 1px rgba(255,255,255,.10), inset 0 -40px 60px rgba(0,0,0,.22);
   pointer-events:none;
 }
-
 .mockup-thumb:hover,
 .mockup-thumb:active{
   transform:translateY(-1px);
   box-shadow:0 12px 26px rgba(0,0,0,.28);
 }
-
 .mockup-thumb:focus-visible{
   outline:3px solid rgba(255,204,0,.65);
   outline-offset:2px;
@@ -259,7 +246,7 @@
 }
 .sl-badge img{ display:block; }
 
-/* Lightbox modal — arrow-only nav + X */
+/* Lightbox modal */
 .mockup-modal{
   position:fixed; inset:0; background:rgba(0,0,0,.8);
   display:grid; place-items:center; z-index:3000;
@@ -317,6 +304,120 @@
   box-shadow:0 10px 18px rgba(255,204,0,.2);
 }
 .sl-cta:hover{ background:var(--sl-gold-2); transform:translateY(-2px); box-shadow:0 14px 24px rgba(255,204,0,.28); }
+
+/* ===== Accordion Timeline ===== */
+.sl-accordion{
+  display:grid;
+  gap:14px;
+  max-width:1100px;
+  margin:12px auto 0;
+}
+
+.sl-acc-item{
+  background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.06));
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:14px;
+  box-shadow:0 12px 28px rgba(0,0,0,.32);
+  overflow:hidden;
+  transition:border-color .2s ease, box-shadow .2s ease;
+}
+.sl-acc-item.open{
+  border-color:rgba(255,204,0,.35);
+  box-shadow:0 16px 36px rgba(0,0,0,.38), 0 8px 20px rgba(255,204,0,.10) inset;
+}
+
+.sl-acc-header{
+  width:100%;
+  display:grid;
+  grid-template-columns:auto auto 1fr auto auto;
+  align-items:center;
+  gap:12px;
+  padding:14px 18px;
+  background:transparent;
+  border:0;
+  color:#fff;
+  cursor:pointer;
+  text-align:left;
+}
+.sl-acc-header:focus-visible{
+  outline:3px solid rgba(255,204,0,.65);
+  outline-offset:2px;
+}
+
+.sl-acc-step{
+  display:grid; place-items:center;
+  width:34px; height:34px; border-radius:50%;
+  background:#222; border:2px solid rgba(255,255,255,.35);
+  box-shadow:0 6px 14px rgba(0,0,0,.35);
+}
+.sl-acc-item.open .sl-acc-step{
+  background:radial-gradient(100% 100% at 50% 0%, #ffe37a 0%, #e0a800 100%);
+  border-color:var(--sl-gold);
+  color:#000;
+  box-shadow:0 0 0 6px rgba(255,204,0,.12), 0 8px 18px rgba(255,204,0,.28);
+}
+.sl-acc-stepnum{ font-weight:900; font-size:.95rem; }
+
+.sl-acc-icon{ display:grid; place-items:center; width:26px; height:26px; }
+.sl-acc-title{ font-weight:800; font-size:1.05rem; }
+.sl-acc-kicker{
+  font-size:.78rem; letter-spacing:.08em; text-transform:uppercase;
+  color:#111; background:var(--sl-gold); padding:4px 8px; border-radius:999px; font-weight:800;
+  justify-self:end;
+}
+.sl-acc-chevron{
+  transition:transform .2s ease, opacity .2s ease;
+  opacity:.9;
+}
+.sl-acc-item.open .sl-acc-chevron{ transform:rotate(180deg); }
+
+/* Accordion body: fully hidden when closed — no sliver */
+.sl-acc-body{
+  max-height: 0;
+  padding: 0 18px;      /* no vertical padding when closed */
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  display: grid;
+  gap: 10px;
+  transition:
+    max-height .28s ease,
+    opacity .18s ease;
+}
+.sl-acc-item.open .sl-acc-body{
+  max-height: 1200px;   /* large enough to fit content */
+  padding: 10px 18px 16px;
+  opacity: 1;
+  visibility: visible;
+}
+/* prevent collapsed child margins from peeking */
+.sl-acc-item:not(.open) .sl-acc-body > * {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+/* comfy edges when open */
+.sl-acc-item.open .sl-acc-body > :first-child { margin-top: 6px; }
+.sl-acc-item.open .sl-acc-body > :last-child  { margin-bottom: 4px; }
+
+/* minor spacing tweaks inside accordion */
+.sl-panel-bullets{ margin-top:4px; }
+.sl-panel-text{ margin-top:6px; }
+
+/* Responsive: split grid into two columns on wide screens for denser look */
+@media (min-width: 960px){
+  .sl-acc-body{
+    grid-template-columns: 1.2fr .8fr;
+    align-items:start;
+  }
+  .sl-acc-body > .sl-panel-text,
+  .sl-acc-body > .sl-panel-bullets,
+  .sl-acc-body > .sl-note { grid-column: 1; }
+  .sl-acc-body > .sl-mockup-hint,
+  .sl-acc-body > .mockup-strip,
+  .sl-acc-body > .sl-badges-row,
+  .sl-acc-body > .sl-panel-link,
+  .sl-acc-body > .sl-vault-cta { grid-column: 2; }
+}
 
 /* ===== Desktop fit: all steps visible without scroll ===== */
 @media (min-width:1024px){
