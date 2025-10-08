@@ -158,7 +158,7 @@ function InlineFrame360({
 
       {/* Centered, under-image note */}
       <p className="lv-hero-note">
-        Click & drag to rotate — take a moment to admire the craftsmanship.
+        Click & drag to rotate.
       </p>
     </>
   );
@@ -166,7 +166,9 @@ function InlineFrame360({
 /* ------------------------------------------------------------------ */
 
 function HeroVideoFallback() {
+  // NOTE: file path provided by you (kept verbatim, spaces included)
   const src = '/craft_in_motion/Drum Your Truth.mp4';
+  // Optional: add a poster image for the first frame if you have one
   const poster = '/placeholder/snare-dark.jpg';
 
   return (
@@ -238,13 +240,14 @@ export default function LegacyVaultHome() {
   React.useEffect(() => {
     const t = setTimeout(() => {
       if (loadedFrames < 1) setShowVideoFallback(true);
-    }, 4000);
+    }, 4000); // 4s grace period
     return () => clearTimeout(t);
   }, [loadedFrames]);
 
   // switch to 360 once we have a small buffer of frames
   React.useEffect(() => {
     if (loadedFrames >= 8) setShowVideoFallback(false);
+    // if too many frames fail, stick with video
     if (errorFrames > 0 && loadedFrames === 0) setShowVideoFallback(true);
   }, [loadedFrames, errorFrames]);
 
@@ -320,31 +323,26 @@ export default function LegacyVaultHome() {
 
       {/* Welcome (story-first tone) */}
       <section className="lv-welcome">
-        <h2 className="lv-heading lv-heading-welcome">
-          Welcome to the Legacy Vault
-        </h2>
-
-        <div className="lv-welcome-copy">
-          <p className="lv-lede">
-            A living archive where instruments and artists meet their memory.
-          </p>
-
-          <p className="lv-prose">
-            Step inside, listen close, and meet the stories behind each build.
-            Some drums are<strong> craft in motion</strong> — still becoming —
-            while others are awaiting<strong> audio, story, or gallery</strong>{' '}
-            updates. Return as the Vault grows and each legend reveals more.
-          </p>
-
-          <p className="lv-prose">
-            If this journey resonates with you, click{' '}
-            <Link to="/artisan-shop/soundlegend" className="lv-link">
-              here
-            </Link>{' '}
-            to begin your custom snare drum journey. The Vault is growing — one
-            legend at a time.
-          </p>
-        </div>
+        <h2 className="lv-heading">Welcome to the Legacy Vault</h2>
+        <p className="lv-lede">
+          A living archive where instruments and artists meet their memory.
+        </p>
+        <p className="lv-prose">
+          Step inside, listen close, and meet the stories behind each build.
+          Some drums are
+          <strong> craft in motion</strong>—still becoming—while others are
+          awaiting
+          <strong> audio, story, or gallery</strong> updates. Return as the
+          Vault grows and each legend reveals more.
+        </p>
+        <p className="lv-prose">
+          If this journey resonates with you, click{' '}
+          <Link to="/artisan-shop/soundlegend" className="lv-link">
+            here
+          </Link>{' '}
+          to begin your custom snare drum journey. The Vault is growing—one
+          legend at a time.
+        </p>
       </section>
 
       {/* Legacy Index */}
