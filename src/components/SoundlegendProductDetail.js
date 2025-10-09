@@ -390,9 +390,8 @@ const SoundLegendProductDetail = () => {
         src="/resized-logos/soundlegend-white.png"
         alt="SOUNDLEGEND Series"
         className="soundlegend-header-image"
-        width="780"
-        height="120"
         decoding="async"
+        fetchpriority="high"
       />
 
       {/* HERO */}

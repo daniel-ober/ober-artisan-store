@@ -23,11 +23,13 @@
 }
 
 .soundlegend-header-image{
-  width:100%;
-  max-width:520px;
-  margin:0 auto 28px;
-  display:block;
-  filter:drop-shadow(0 6px 22px rgba(0,0,0,.55));
+  width: min(88vw, 520px);
+  height: auto !important;        /* override any HTML height attr */
+  max-width: 520px;
+  display: block;
+  margin: 0 auto 28px;
+  object-fit: contain;             /* safety if a height ever gets set */
+  filter: drop-shadow(0 6px 22px rgba(0,0,0,.55));
 }
 
 /* ===== HERO ===== */
