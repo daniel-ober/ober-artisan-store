@@ -123,7 +123,7 @@ html,body{
 .philosophy-section .craft-values .value-item:hover{ transform:translateY(-1px); color:#fff; }
 .philosophy-section .craft-values .value-item svg{
   width:30px!important; height:30px!important; margin-bottom:8px;
-  stroke:var(--accent-1);
+color:#e6b980;
   transition:stroke .18s ease, transform .18s ease, filter .18s ease;
   filter:drop-shadow(0 6px 24px rgba(230,185,128,.18));
 }
