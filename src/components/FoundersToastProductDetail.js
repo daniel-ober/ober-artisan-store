@@ -41,7 +41,7 @@ const FoundersToastProductDetail = () => {
     const cartItem = {
       id: product?.stripePriceId || `simple-founders-toast`,
       productId: 'founders-toast',
-      name: product?.name || 'Founder’s Toast',
+      name: product?.name || 'Founder’s Toast™',
       quantity,
       price: product?.price || 1200,
       stripePriceId: product?.stripePriceId || '',
@@ -109,33 +109,39 @@ const FoundersToastProductDetail = () => {
 
         <div className="founders-toast-details">
           <span>
-            A nourishing blend of natural oils and hand-melted beeswax,
-            Founder’s Toast conditions and revives fine wood surfaces with a
-            subtle, smoky-vanilla finish. This artisan-crafted formula is
-            specially designed for our natural and matte-finished drum shells,
-            enhancing the grain without adding unwanted gloss.
+            Formulated by hand in small batches, <strong>Founder’s Toast™</strong> is a
+            nourishing blend of natural oils and hand-melted beeswax crafted to{' '}
+            <strong>lubricate, protect, and enhance wooden bearing edges</strong>. It
+            promotes a smooth, consistent drumhead-to-shell interface — helping shells
+            speak freely, with improved sensitivity and tonal clarity.
           </span>
 
           <span>
-            <strong>Recommended Use:</strong> Ideal for raw, satin, or
-            matte-finished woods such as walnut, cherry, birch, oak, or maple.
-            Safe for most fine woods including aged tonewoods, soft shell
-            exteriors, and hand-scorched finishes.
+            Beyond bearing edges, Founder’s Toast also <strong>seconds as a conditioning
+            polish</strong> for raw, satin, or matte-finished woods such as walnut,
+            cherry, birch, oak, or maple. The subtle smoky-vanilla aroma and natural sheen
+            bring warmth and depth to fine woods without adding unwanted gloss.
           </span>
 
           <span>
-            <strong>Important: </strong>
-            Not recommended for use on high-gloss, lacquered, or
-            polyurethane-coated finishes, as it may affect the clarity or sheen.
-            Always test on an inconspicuous area first.
+            <strong>Recommended Use:</strong> Apply sparingly to clean bearing edges using
+            a soft cloth or fingertip. Buff lightly until smooth. Suitable for use on most
+            wooden bearing edges and unfinished or matte shell exteriors.
           </span>
+
+          <span>
+            <strong>Important:</strong> Not recommended for use on high-gloss, lacquered,
+            or polyurethane-coated finishes. Always test on an inconspicuous area first.
+            While Founder’s Toast has shown excellent results in both Ober and non-Ober
+            drums during testing, individual results may vary depending on wood species
+            and finish condition.
+          </span>
+
           <div>
             <p className="founders-toast-price">
               ${Number(product.price).toFixed(2)}
             </p>
-            <p className="founders-toast-eta">
-              Est Delivery: 5–7 business days
-            </p>
+            <p className="founders-toast-eta">Est Delivery: 5–7 business days</p>
           </div>
 
           {buttonText === 'In Cart' ? (

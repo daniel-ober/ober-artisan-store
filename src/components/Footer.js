@@ -4,19 +4,15 @@ import { DarkModeContext } from '../context/DarkModeContext';
 import { useAuth } from '../context/AuthContext';
 import './Footer.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faFacebookF,
-  faInstagram,
-  faYoutube,
-} from '@fortawesome/free-brands-svg-icons';
+import { faFacebookF, faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons';
 
 const Footer = ({ navbarLinks = [] }) => {
   const { user, isAdmin } = useAuth();
   const isSoundlegend = user?.isSoundlegend || false;
 
-  const filteredLinks = navbarLinks.filter((link) => {
+  // Base filtering by access controls
+  const baseFiltered = navbarLinks.filter((link) => {
     const access = link.access || [];
-
     if (!link.enabled) return false;
 
     if (!user && access.includes('public')) return true;
@@ -27,9 +23,22 @@ const Footer = ({ navbarLinks = [] }) => {
     return false;
   });
 
-  const sortedFilteredLinks = [...filteredLinks]
-    .filter((link) => link.name.toLowerCase() !== 'home')
-    .sort((a, b) => a.order - b.order);
+  // Transform footer links to reflect new nav rules:
+  // - remove "artisan-shop"
+  // - rename "founders-batch" to "Artisan Drums" (label only)
+  const transformed = baseFiltered
+    .filter((l) => (l.name || '').toLowerCase() !== 'artisan-shop')
+    .map((l) => {
+      if ((l.name || '').toLowerCase() === 'founders-batch') {
+        return { ...l, label: 'Artisan Drums' }; // or 'Our Drums'
+      }
+      return l;
+    });
+
+  // Final ordering (exclude Home from the list – it’s added manually first)
+  const sortedFilteredLinks = [...transformed]
+    .filter((link) => (link.name || '').toLowerCase() !== 'home')
+    .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
 
   const { isDarkMode, setIsDarkMode } = useContext(DarkModeContext);
 
@@ -51,10 +60,8 @@ const Footer = ({ navbarLinks = [] }) => {
 
   const handleScrollTop = () => {
     setTimeout(() => {
-      const html = document.documentElement;
-      const body = document.body;
-      html.scrollTop = 0;
-      body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
     }, 10);
   };
 
@@ -73,7 +80,7 @@ const Footer = ({ navbarLinks = [] }) => {
           {sortedFilteredLinks.map((link, index) => (
             <li key={index}>
               <Link
-                to={`/${link.name.toLowerCase().replace(/\s+/g, '-')}`}
+                to={`/${(link.name || '').toLowerCase().replace(/\s+/g, '-')}`}
                 onClick={handleScrollTop}
               >
                 {link.label}
@@ -81,12 +88,14 @@ const Footer = ({ navbarLinks = [] }) => {
             </li>
           ))}
 
-          {/* Footer-only links */}
+          {/* Explicit additions / footer-only links */}
           <li>
-            <Link
-              to="/artisan-shop/soundlegend/vault"
-              onClick={handleScrollTop}
-            >
+            <Link to="/artisan-shop/founders-toast" onClick={handleScrollTop}>
+              Founder’s Toast
+            </Link>
+          </li>
+          <li>
+            <Link to="/artisan-shop/soundlegend/vault" onClick={handleScrollTop}>
               Legacy Vault
             </Link>
           </li>
@@ -95,7 +104,6 @@ const Footer = ({ navbarLinks = [] }) => {
               Endorsements
             </Link>
           </li>
-
           <li>
             <Link to="/return-policy" onClick={handleScrollTop}>
               Return Policy
@@ -146,8 +154,7 @@ const Footer = ({ navbarLinks = [] }) => {
       <div className="footer-bottom">
         <div className="footer-copyright">
           <p>
-            &copy; {new Date().getFullYear()} Dan Ober Artisan Drums. All rights
-            reserved.
+            &copy; {new Date().getFullYear()} Dan Ober Artisan Drums. All rights reserved.
           </p>
         </div>
       </div>

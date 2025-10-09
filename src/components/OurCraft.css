@@ -42,7 +42,7 @@ html,body{
 .philosophy-section::before,
 .artisan-intro-section::before{
   content:''; position:absolute; inset:0; z-index:-2;
-  background:linear-gradient(0deg, rgba(0,0,0,0.75), rgba(0,0,0,0.75));
+  background:linear-gradient(0deg, rgba(0,0,0,0.70), rgba(0,0,0,0.95));
 }
 .craft-hero-section,.philosophy-section,.artisan-intro-section{ position:relative; z-index:1; }
 
@@ -71,7 +71,7 @@ html,body{
 .story-inner p,.philosophy-inner p,.artisan-intro-paragraph{
   font-size:1.08rem; line-height:1.75; color:var(--subtext); margin:0 0 20px;
 }
-.philosophy-inner .quote{ font-style:italic; font-size:1.2rem; color:var(--muted); }
+.philosophy-inner .quote{ font-style:italic; font-size:1.1rem; color:var(--muted); }
 
 /* ===== Scroll cues ===== */
 .scroll-indicator-wrapper{ width:100%; display:flex; justify-content:center; margin-bottom:16px; }

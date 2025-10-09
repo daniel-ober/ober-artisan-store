@@ -299,8 +299,8 @@ body.dark .navbar-sticky-mini {
 }
 
 .vault-logo-img {
-  height: 40px;                 /* desktop/main navbar size */
-  margin-bottom: 13px;
+  height: 45px;                 /* desktop/main navbar size */
+  margin-bottom: 16px;
   margin-left: 10px;
   width: auto;
   display: block;
