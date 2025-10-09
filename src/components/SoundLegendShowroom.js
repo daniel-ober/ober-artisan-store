@@ -684,13 +684,13 @@ const SoundLegendShowroom = () => {
       </section>
 
 {/* Back to Legacy Vault */}
-<div className="showroom-cta fade-in-section is-visible">
+<div className="showroom-cta showroom-cta--back fade-in-section is-visible">
   <Link
     to="/artisan-shop/soundlegend/vault"
-    className="cta-button"
+    className="cta-back"
     aria-label="Return to the SoundLegend Legacy Vault"
   >
-    ← Back to Legacy Vault
+    Back to Legacy Vault
   </Link>
 </div>
     </div>
