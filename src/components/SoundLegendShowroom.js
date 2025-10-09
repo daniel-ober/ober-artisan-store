@@ -683,10 +683,16 @@ const SoundLegendShowroom = () => {
         </p>
       </section>
 
-      {/* CTA */}
-      <div className="showroom-cta fade-in-section is-visible">
-        <a href="/artisan-shop/soundlegend" className="cta-button">Start Your Custom Snare Journey</a>
-      </div>
+{/* Back to Legacy Vault */}
+<div className="showroom-cta fade-in-section is-visible">
+  <Link
+    to="/artisan-shop/soundlegend/vault"
+    className="cta-button"
+    aria-label="Return to the SoundLegend Legacy Vault"
+  >
+    ← Back to Legacy Vault
+  </Link>
+</div>
     </div>
   );
 };
