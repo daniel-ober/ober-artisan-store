@@ -363,23 +363,73 @@ html { scroll-behavior: smooth; }
 }
 
 /* CTA */
-.showroom-cta { margin-top: 20px; }
-.cta-button {
-  display: inline-block;
-  background: #ffcc00;
-  color: #000;
+/* =====================================================
+   BACK TO LEGACY VAULT — BLUE GRADIENT VARIANT
+   ===================================================== */
+.cta-back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
   padding: 14px 28px;
+  border-radius: 12px;
   font-size: 20px;
-  font-weight: bold;
-  border-radius: 10px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
   text-decoration: none;
-  transition: all 0.3s;
-  box-shadow: 0 6px 12px rgba(255, 204, 0, 0.2);
+  color: #fff;
+  background: linear-gradient(90deg, #3700ff 0%, #0073ff 100%);
+  border: none;
+  box-shadow: 0 6px 14px rgba(0, 102, 255, 0.35);
+  transition: all 0.25s ease;
 }
-.cta-button:hover {
-  background: #e6b800;
-  transform: scale(1.07);
-  box-shadow: 0 8px 18px rgba(255, 204, 0, 0.3);
+
+.cta-back:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 10px 22px rgba(0, 102, 255, 0.45);
+  background: linear-gradient(90deg, #004cff 0%, #0073ff 100%);
+}
+
+.cta-back:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 8px rgba(0, 102, 255, 0.35);
+}
+
+.cta-back:focus-visible {
+  outline: 2px solid rgba(0, 198, 255, 0.6);
+  outline-offset: 3px;
+}
+
+/* Small left chevron icon */
+.cta-back::before {
+  content: "←";
+  font-size: 22px;
+  line-height: 1;
+  display: inline-block;
+  transform: translateY(-1px);
+}
+
+/* Centered wrapper for the CTA */
+.showroom-cta--back {
+  margin: 32px 0 60px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Mobile tweaks */
+@media (max-width: 600px) {
+  .showroom-cta--back {
+    padding: 0 16px;
+    margin: 24px 0 40px;
+  }
+  .cta-back {
+    width: 100%;
+    font-size: 18px;
+    padding: 16px 20px;
+    justify-content: center;
+  }
 }
 
 .showroom-loading,
