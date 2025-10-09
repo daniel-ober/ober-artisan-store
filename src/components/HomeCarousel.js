@@ -7,22 +7,12 @@ const slides = [
   {
     key: 'legacy-vault',
     title: 'Legacy Vault', // keep for analytics/ARIA
-    titleImg: '/logos/legacyvault.a.png', // ← use official logo image
+    titleImg: '/logos/legacyvault.a.png', // official logo image
     subtitle: 'Authenticated, one-of-a-kind artist snares',
     buttonText: 'Enter Vault',
     link: '/artisan-shop/soundlegend/vault',
     background: '/carousel/artisan-shop.webp',
     focalY: 38,
-    focalX: 50,
-  },
-  {
-    key: 'artisan-drums',
-    title: 'Artisan Drums',
-    subtitle: 'Explore our handcrafted snare drums',
-    buttonText: 'Explore Drums',
-    link: '/founders-batch',
-    background: '/carousel/artisan-drums.webp',
-    focalY: 50,
     focalX: 50,
   },
   {
@@ -35,16 +25,16 @@ const slides = [
     focalY: 50,
     focalX: 50,
   },
-  // {
-  //   key: 'artisan-shop',
-  //   title: 'Artisan Shop',
-  //   subtitle: 'Order your snare today',
-  //   buttonText: 'Shop Now',
-  //   link: '/artisan-shop',
-  //   background: '/carousel/artisan-shop.webp',
-  //   focalY: 50,
-  //   focalX: 50,
-  // },
+  {
+    key: 'artisan-drums',
+    title: 'Artisan Drums',
+    subtitle: 'Explore our handcrafted snares',
+    buttonText: 'Explore Drums',
+    link: '/founders-batch',
+    background: '/carousel/artisan-drums.webp',
+    focalY: 50,
+    focalX: 50,
+  },
   {
     key: 'merch',
     title: 'Merch Shop',
@@ -57,7 +47,7 @@ const slides = [
   },
   {
     key: 'founders-toast',
-    titleImg: "/resized-logos/founders-toast-white.png",
+    titleImg: '/resized-logos/founders-toast-white2.png',
     subtitle: 'Conditioning wax for natural wood finishes',
     buttonText: 'Order Now',
     link: '/artisan-shop/founders-toast',
@@ -131,7 +121,7 @@ const HomeCarousel = () => {
               {slide.titleImg ? (
                 <img
                   src={slide.titleImg}
-                  alt={slide.title}
+                  alt={slide.title || slide.key}
                   className={`carousel-title-logo ${animating ? 'fade-out delay-1' : 'fade-in delay-1'}`}
                 />
               ) : (
@@ -147,7 +137,6 @@ const HomeCarousel = () => {
               >
                 {slide.subtitle}
               </p>
-
               <Link
                 to={slide.link}
                 onClick={() =>
