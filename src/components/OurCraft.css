@@ -133,23 +133,26 @@ html,body{
 }
 .philosophy-section .craft-values .value-item p{ margin:0; }
 
-/* ===== Tooltips (desktop/tablet) ===== */
+/* ===== Tooltips (desktop/tablet) — absolute, reliable ===== */
 .icon-wrapper{ position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center; }
 .tooltip{
   position:absolute; bottom:130%; left:50%; transform:translate(-50%, 8px);
-  opacity:0; visibility:hidden; color:#fff; padding:14px 18px; border-radius:12px;
-  font-size:.95rem; line-height:1.5; width:min(320px, 90vw); pointer-events:none;
+  opacity:0; visibility:hidden; color:#fff; padding:14px 18px; border-radius:10px;
+  font-size:.9rem; line-height:1.5; width:280px; max-width:90vw; pointer-events:none;
   transition:opacity .35s ease .15s, transform .35s ease .15s;
   box-shadow:0 8px 24px rgba(0,0,0,.6); z-index:3000; backdrop-filter:blur(6px);
-  border:1px solid var(--ring); background:rgba(10,10,10,.95);
-  white-space:normal; overflow-wrap:break-word;
+  border:1px solid var(--ring); background:rgba(10,10,10,.94);
+  white-space:normal; overflow-wrap:break-word; text-align:left;
 }
 .tooltip::after{
   content:''; position:absolute; top:100%; left:50%; margin-left:-6px;
   border-width:6px; border-style:solid;
-  border-color:rgba(10,10,10,.95) transparent transparent transparent;
+  border-color:rgba(10,10,10,.94) transparent transparent transparent;
 }
-.tooltip--visible{ opacity:1; visibility:visible; transform:translate(-50%, 0); }
+.tooltip--visible,
+.value-item:hover .tooltip{
+  opacity:1; visibility:visible; transform:translate(-50%, 0);
+}
 
 /* ===== Split sections ===== */
 .heritage-reveal-section,.feuzon-reveal-section,.soundlegend-reveal-section{
@@ -219,12 +222,9 @@ html,body{
     overflow:hidden !important; padding:0 !important; margin:0 !important; position:relative !important; display:flex !important; flex-direction:column !important; justify-content:flex-start !important;
   }
 
-  /* OVERRIDE the overflow just for philosophy so fixed tooltips aren't clipped */
+  /* let tooltips overflow freely */
   .ourcraft-section.philosophy-section{ overflow:visible !important; }
-
-  /* prevent any transformed ancestor from “capturing” fixed children */
   .philosophy-grid.reveal, .philosophy-inner.reveal { transform:none !important; }
-
   .philosophy-section, .philosophy-grid, .philosophy-inner{ overflow:visible !important; }
 
   .hero-grid,.philosophy-grid,.founder-grid{ flex-direction:column; gap:0; padding:0 12px; }
@@ -253,42 +253,23 @@ html,body{
     gap:14px 18px; justify-items:center;
   }
 
-  /* ---- MOBILE TOOLTIP: viewport-centered & safe-area aware ---- */
-/* ---- MOBILE TOOLTIP: smart edge-aware positioning ---- */
-.ourcraft-section.philosophy-section .craft-values .value-item .tooltip {
-  position: fixed !important;
-  top: auto !important;
-  bottom: calc(18vh + env(safe-area-inset-bottom, 16px)) !important;
+  /* ---- MOBILE TOOLTIP: edge-aware so it never clips ---- */
+  .tooltip{
+    bottom:150%;
+    width:240px; max-width:80vw;
+    font-size:.85rem; padding:12px 14px; text-align:center;
+  }
+  /* leftmost in row: align to left edge */
+  .philosophy-section .craft-values .value-item:first-child .tooltip,
+  .philosophy-section .craft-values .value-item:nth-child(2n+1) .tooltip{
+    left:0; transform:translateX(0);
+  }
+  /* rightmost in row: align to right edge */
+  .philosophy-section .craft-values .value-item:nth-child(2n) .tooltip,
+  .philosophy-section .craft-values .value-item:last-child .tooltip{
+    left:auto; right:0; transform:translateX(0);
+  }
 
-  /* Center but clamp so it never overflows right edge */
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  translate: clamp(-45vw, -50%, -5vw) 0; /* keeps within viewport */
-
-  box-sizing: border-box;
-  max-width: calc(100vw - env(safe-area-inset-left, 0px)
-                         - env(safe-area-inset-right, 0px)
-                         - 24px) !important;
-  width: auto !important;
-  padding: 14px 18px;
-  border-radius: 12px;
-  text-align: center;
-  background: rgba(10,10,10,.95);
-  color: #fff;
-  z-index: 4000 !important;
-  white-space: normal;
-  opacity: 0;
-  visibility: hidden;
-  overflow-wrap: break-word;
-}
-.ourcraft-section.philosophy-section .craft-values .value-item .tooltip--visible {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(-50%) !important;
-}
-.ourcraft-section.philosophy-section .craft-values .value-item .tooltip::after {
-  display: none !important;
-}
   /* stacked sections */
   .heritage-reveal-section,.feuzon-reveal-section,.soundlegend-reveal-section{
     display:flex; flex-direction:column; justify-content:flex-start; align-items:stretch; overflow:hidden;

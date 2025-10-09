@@ -1,125 +1,169 @@
+// src/components/LegacyVaultHome.js
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import './LegacyVaultHome.css';
 
-/* ---------- Minimal inline 360 viewer (pointer + autoplay) ---------- */
-function InlineFrame360({
+/* =========================
+   Thumbnail helper (safe in dev)
+   - Proxy only in production
+   - Skip relative/same-origin/localhost/data/blob/gs://
+   - Fall back to original on error
+   ========================= */
+const USE_IMAGE_PROXY = typeof process !== 'undefined' && process.env.NODE_ENV === 'production';
+
+function shouldBypassProxy(rawUrl) {
+  if (!rawUrl) return true;
+  if (rawUrl.startsWith('/')) return true;                 // relative to app (dev)
+  if (/^(data:|blob:|gs:\/\/)/i.test(rawUrl)) return true;  // not fetchable by proxy
+  try {
+    const u = new URL(rawUrl, window.location.origin);
+    if (u.host === window.location.host) return true;       // same-origin (dev)
+    if (/localhost(:\d+)?$/i.test(u.hostname)) return true; // localhost anywhere
+    return false;
+  } catch {
+    return true;
+  }
+}
+
+function toProxyUrl(rawUrl, { w = 800, q = 70 } = {}) {
+  if (!rawUrl || !USE_IMAGE_PROXY || shouldBypassProxy(rawUrl)) return rawUrl;
+  try {
+    const u = new URL(rawUrl);
+    const noProtocol = `${u.host}${u.pathname}${u.search}`;
+    return `https://images.weserv.nl/?url=${encodeURIComponent(noProtocol)}&w=${w}&q=${q}&output=webp`;
+  } catch {
+    return rawUrl;
+  }
+}
+
+function buildThumbSet(originalUrl) {
+  if (!originalUrl) return { src: originalUrl, srcSet: undefined };
+  const src400 = toProxyUrl(originalUrl, { w: 400, q: 70 });
+  const src800 = toProxyUrl(originalUrl, { w: 800, q: 70 });
+  return {
+    src: src400,
+    srcSet: src800 && src400 !== src800 ? `${src400} 400w, ${src800} 800w` : undefined,
+  };
+}
+
+/* ===========================================================
+   Minimal, mobile-safe 360 viewer (always on)
+   =========================================================== */
+function InlineFrame360Light({
   totalFrames = 392,
   basePath = '/soundlegend360/med',
   prefix = 'frame_',
   pad = 3,
   ext = 'webp',
-  fps = 30,
+  fps = 24,
+  stride = 4,
+  prefetch = 6,
   dragSensitivity = 0.22,
-  onProgress, // (loadedCount, total, errorCount) => void
 }) {
-  const [loaded, setLoaded] = React.useState(0);
-  const [errors, setErrors] = React.useState(0);
-  const [isPlaying, setIsPlaying] = React.useState(true);
+  const effTotal = Math.max(1, Math.floor(totalFrames / stride));
   const [frame, setFrame] = React.useState(0);
-
-  const imgsRef = React.useRef([]);
+  const [started, setStarted] = React.useState(false);
   const rafRef = React.useRef(null);
   const lastTsRef = React.useRef(0);
 
-  // dragging state
+  const cacheRef = React.useRef(new Map());
+  const loadingRef = React.useRef(new Set());
+  const destroyedRef = React.useRef(false);
+
+  const urlFor = React.useCallback(
+    (i) => {
+      const srcIndex = i * stride;
+      const n = String(srcIndex + 1).padStart(pad, '0');
+      return `${basePath}/${prefix}${n}.${ext}`;
+    },
+    [basePath, prefix, pad, ext, stride]
+  );
+
+  const loadRing = React.useCallback(
+    (center) => {
+      const start = Math.max(0, center - 1);
+      const end = Math.min(effTotal - 1, center + prefetch);
+      for (let i = start; i <= end; i++) {
+        if (cacheRef.current.has(i) || loadingRef.current.has(i)) continue;
+        loadingRef.current.add(i);
+        const img = new Image();
+        img.decoding = 'async';
+        img.loading = 'eager';
+        img.src = urlFor(i);
+        const done = () => {
+          loadingRef.current.delete(i);
+          if (!destroyedRef.current) cacheRef.current.set(i, img);
+        };
+        img.onload = done;
+        img.onerror = done;
+        img.onabort = done;
+      }
+    },
+    [effTotal, prefetch, urlFor]
+  );
+
+  React.useEffect(() => {
+    destroyedRef.current = false;
+    loadRing(0);
+    return () => {
+      destroyedRef.current = true;
+      cacheRef.current.clear();
+      loadingRef.current.clear();
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, [loadRing]);
+
+  React.useEffect(() => {
+    const start = () => {
+      if (started) return;
+      setStarted(true);
+      const ft = 1000 / fps;
+      const tick = (ts) => {
+        const last = lastTsRef.current || ts;
+        const delta = ts - last;
+        if (delta >= ft) {
+          lastTsRef.current = ts;
+          setFrame((f) => (f + 1) % effTotal);
+        }
+        rafRef.current = requestAnimationFrame(tick);
+      };
+      rafRef.current = requestAnimationFrame(tick);
+    };
+    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+      window.requestIdleCallback(start, { timeout: 1200 });
+    } else {
+      setTimeout(start, 300);
+    }
+    return () => rafRef.current && cancelAnimationFrame(rafRef.current);
+  }, [effTotal, fps, started]);
+
+  React.useEffect(() => { loadRing(frame); }, [frame, loadRing]);
+
   const draggingRef = React.useRef(false);
   const lastXRef = React.useRef(0);
   const carryRef = React.useRef(0);
 
-  const urlFor = React.useCallback(
-    (i) => {
-      const n = String(i + 1).padStart(pad, '0');
-      return `${basePath}/${prefix}${n}.${ext}`;
-    },
-    [basePath, prefix, pad, ext]
-  );
-
-  // Preload frames (errors still advance counters)
-  React.useEffect(() => {
-    let cancelled = false;
-    imgsRef.current = Array.from({ length: totalFrames }, (_, i) => {
-      const img = new Image();
-      img.decoding = 'async';
-      img.loading = 'eager';
-      img.crossOrigin = 'anonymous';
-      const src = urlFor(i);
-      img.src = src;
-
-      const handleLoad = () => {
-        if (cancelled) return;
-        setLoaded((v) => {
-          const nv = v + 1;
-          onProgress?.(nv, totalFrames, errors);
-          return nv;
-        });
-      };
-      const handleFail = () => {
-        if (cancelled) return;
-        setErrors((e) => {
-          const ne = e + 1;
-          onProgress?.(loaded, totalFrames, ne);
-          return ne;
-        });
-      };
-
-      img.onload = handleLoad;
-      img.onerror = handleFail;
-      img.onabort = handleFail;
-      return img;
-    });
-    return () => {
-      cancelled = true;
-      imgsRef.current = [];
-    };
-  }, [totalFrames, urlFor]);
-
-  // Autoplay
-  React.useEffect(() => {
-    const tick = (ts) => {
-      if (!isPlaying) return;
-      const ft = 1000 / fps;
-      const delta = ts - (lastTsRef.current || ts);
-      if (delta >= ft) {
-        lastTsRef.current = ts;
-        setFrame((f) => (f + 1) % totalFrames);
-      }
-      rafRef.current = requestAnimationFrame(tick);
-    };
-    if (isPlaying && loaded > 0) {
-      lastTsRef.current = 0;
-      rafRef.current = requestAnimationFrame(tick);
-    }
-    return () => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    };
-  }, [isPlaying, fps, loaded, totalFrames]);
-
-  // Pointer (mouse + touch)
   const onPointerDown = (e) => {
     e.preventDefault();
     e.currentTarget.setPointerCapture?.(e.pointerId);
     draggingRef.current = true;
-    lastXRef.current = e.clientX;
+    lastXRef.current = e.clientX ?? 0;
     carryRef.current = 0;
-    setIsPlaying(false);
   };
   const onPointerMove = (e) => {
     if (!draggingRef.current) return;
     e.preventDefault();
-    const dx = e.clientX - lastXRef.current;
-    lastXRef.current = e.clientX;
-
+    const dx = (e.clientX ?? 0) - lastXRef.current;
+    lastXRef.current = e.clientX ?? 0;
     const delta = -dx * dragSensitivity + carryRef.current;
     const step = delta | 0;
     carryRef.current = delta - step;
-
     if (step) {
       setFrame((f) => {
-        let nf = (f + step) % totalFrames;
-        if (nf < 0) nf += totalFrames;
+        let nf = (f + step) % effTotal;
+        if (nf < 0) nf += effTotal;
         return nf;
       });
     }
@@ -129,8 +173,8 @@ function InlineFrame360({
     e.currentTarget.releasePointerCapture?.(e.pointerId);
   };
 
-  const pct = Math.round((loaded / totalFrames) * 100);
-  const src = imgsRef.current[frame]?.src || urlFor(0);
+  const current = cacheRef.current.get(frame) || cacheRef.current.get(0);
+  const src = current?.src || urlFor(0);
 
   return (
     <>
@@ -146,71 +190,54 @@ function InlineFrame360({
         onPointerCancel={onPointerUp}
       >
         <img src={src} alt="SoundLegend 360 preview" draggable={false} />
-        {loaded < totalFrames && (
-          <div className="sl360-loader">
-            <div className="sl360-bar">
-              <div style={{ width: `${pct}%` }} />
-            </div>
-            <span>Loading {pct}%</span>
-          </div>
-        )}
       </div>
-
-      {/* Centered, under-image note */}
-      <p className="lv-hero-note">
-        Click & drag to rotate.
-      </p>
+      <p className="lv-hero-note">Click &amp; drag to rotate.</p>
     </>
   );
 }
-/* ------------------------------------------------------------------ */
 
-function HeroVideoFallback() {
-  // NOTE: file path provided by you (kept verbatim, spaces included)
-  const src = '/craft_in_motion/Drum Your Truth.mp4';
-  // Optional: add a poster image for the first frame if you have one
-  const poster = '/placeholder/snare-dark.jpg';
+/* ======================
+   Card (fast, resilient)
+   ====================== */
+function VaultCard({ serial, name, heroImage, teaser, href }) {
+  const { src, srcSet } = buildThumbSet(heroImage);
+  const fallbackPoster = '/placeholder/snare-dark.jpg';
 
-  return (
-    <div className="lv-hero-fallback">
-      <video
-        className="lv-hero-video"
-        src={src}
-        poster={poster}
-        autoPlay
-        muted
-        playsInline
-        loop
-        preload="auto"
-      />
-      <div className="lv-hero-overlay">
-        <span className="lv-hero-overlay-text">Craft in Motion</span>
-      </div>
-      <p className="lv-hero-note">A glimpse from the artisan’s bench.</p>
-    </div>
-  );
-}
+  // Swap back to original if the proxy fails (dev/adblock/etc.)
+  const handleImgError = (e) => {
+    if (!heroImage) return;
+    const img = e.currentTarget;
+    // prevent loop
+    img.onerror = null;
+    img.srcset = '';
+    img.src = heroImage;
+  };
 
-/* ---------- Card for a Vault item ---------- */
-function VaultCard({ serial, name, heroImage, finish, teaser, href }) {
   return (
     <Link to={href} className="lv-item">
       <div className="lv-item-media">
         {heroImage ? (
           <img
-            src={heroImage}
+            className="lv-thumb"
+            src={src}
+            srcSet={srcSet}
+            sizes="(max-width: 640px) 90vw, (max-width: 980px) 45vw, 400px"
             alt={`${serial} – ${name || 'SoundLegend'}`}
             loading="lazy"
+            decoding="async"
+            fetchpriority="low"
+            onError={handleImgError}
           />
         ) : (
           <video
             className="lv-item-video"
             src="/craft_in_motion/craftinmotion1080p.mp4"
+            poster={fallbackPoster}
             autoPlay
             muted
             loop
             playsInline
-            preload="auto"
+            preload="metadata"
           />
         )}
       </div>
@@ -226,32 +253,15 @@ function VaultCard({ serial, name, heroImage, finish, teaser, href }) {
   );
 }
 
-/* ---------- Page ---------- */
+/* ======================
+   Page
+   ====================== */
 export default function LegacyVaultHome() {
   const [items, setItems] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
 
-  // hero state
-  const [loadedFrames, setLoadedFrames] = React.useState(0);
-  const [errorFrames, setErrorFrames] = React.useState(0);
-  const [showVideoFallback, setShowVideoFallback] = React.useState(false);
-
-  // if nothing loads quickly, show fallback; switch back if frames arrive
   React.useEffect(() => {
-    const t = setTimeout(() => {
-      if (loadedFrames < 1) setShowVideoFallback(true);
-    }, 4000); // 4s grace period
-    return () => clearTimeout(t);
-  }, [loadedFrames]);
-
-  // switch to 360 once we have a small buffer of frames
-  React.useEffect(() => {
-    if (loadedFrames >= 8) setShowVideoFallback(false);
-    // if too many frames fail, stick with video
-    if (errorFrames > 0 && loadedFrames === 0) setShowVideoFallback(true);
-  }, [loadedFrames, errorFrames]);
-
-  React.useEffect(() => {
+    let alive = true;
     (async () => {
       try {
         const snap = await getDocs(collection(db, 'soundlegend_showroom'));
@@ -261,7 +271,6 @@ export default function LegacyVaultHome() {
           const serial = doc.id;
           const heroImage = d.heroImage || d.gallery?.[0] || '';
           const name = d.name || d.links?.name || '';
-          const finish = d.specs?.finish || '';
           const teaser =
             d.teaser ||
             d.tagline ||
@@ -274,7 +283,6 @@ export default function LegacyVaultHome() {
             serial,
             heroImage,
             name,
-            finish,
             teaser,
             href: `/artisan-shop/soundlegend/${serial}`,
           });
@@ -282,13 +290,16 @@ export default function LegacyVaultHome() {
         rows.sort((a, b) =>
           a.serial.localeCompare(b.serial, undefined, { numeric: true })
         );
-        setItems(rows);
+        if (alive) setItems(rows);
       } catch (e) {
         console.error('Failed to load vault items:', e);
       } finally {
-        setLoading(false);
+        if (alive) setLoading(false);
       }
     })();
+    return () => {
+      alive = false;
+    };
   }, []);
 
   return (
@@ -300,48 +311,31 @@ export default function LegacyVaultHome() {
           src="/logos/legacyvault.d.png"
           alt="SoundLegend Legacy Vault"
           loading="eager"
+          decoding="async"
         />
       </section>
 
-      {/* Hero: 360 with smart fallback to video */}
+      {/* Always show the 360 hero */}
       <section className="lv-hero-one">
         <div className="lv-hero-one-inner">
-          {showVideoFallback ? (
-            <HeroVideoFallback />
-          ) : (
-            <InlineFrame360
-              totalFrames={392}
-              basePath="/soundlegend360/med"
-              onProgress={(loaded, total, errs) => {
-                setLoadedFrames(loaded);
-                setErrorFrames(errs);
-              }}
-            />
-          )}
+          <InlineFrame360Light />
         </div>
       </section>
 
-      {/* Welcome (story-first tone) */}
+      {/* Welcome */}
       <section className="lv-welcome">
         <h2 className="lv-heading">Welcome to the Legacy Vault</h2>
         <p className="lv-lede">
           A living archive where instruments and artists meet their memory.
         </p>
         <p className="lv-prose">
-          Step inside, listen close, and meet the stories behind each build.
-          Some drums are
-          <strong> craft in motion</strong>—still becoming—while others are
-          awaiting
-          <strong> audio, story, or gallery</strong> updates. Return as the
-          Vault grows and each legend reveals more.
+          Step inside, listen close, and read the short stories behind each
+          build. You’ll see the choices that shaped the sound, the hands that
+          shaped the wood, and the moments these drums were born for.
         </p>
         <p className="lv-prose">
-          If this journey resonates with you, click{' '}
-          <Link to="/artisan-shop/soundlegend" className="lv-link">
-            here
-          </Link>{' '}
-          to begin your custom snare drum journey. The Vault is growing—one
-          legend at a time.
+          When you’re ready, add your chapter. The Vault is growing—one legend
+          at a time.
         </p>
       </section>
 
@@ -350,9 +344,8 @@ export default function LegacyVaultHome() {
         <div className="lv-index-head">
           <h2 className="lv-heading">Legacy Index</h2>
           <p className="muted centerish">
-            Browse the instruments below. Tap an entry to explore its
-            journey—read, hear, and feel its voice. Pieces marked in progress
-            will update as new media arrives.
+            Every drum carries a story — tap an instrument to read, hear, and
+            feel its legacy.
           </p>
         </div>
 
@@ -378,29 +371,20 @@ export default function LegacyVaultHome() {
         )}
       </section>
 
-      {/* How to Join (short, narrative) */}
+      {/* Join */}
       <section className="lv-join">
         <h2 className="lv-heading">Join the Legacy Experience</h2>
         <p className="lv-prose centerish">
-          It begins with a conversation. Together we design your voice, craft it
-          by hand, and preserve your story—photos, audio, and a living page here
-          in the Vault. Your drum ships with an NFC badge that always brings you
-          home.
+          It begins with a conversation. We design your voice, craft it by hand,
+          and preserve your story—photos, audio, and a living page here in the
+          Vault. Your drum ships with an NFC badge that always takes you home.
         </p>
 
         <div className="lv-cta-row center">
-          <Link
-            to="/artisan-shop/soundlegend"
-            className="lv-cta-btn primary"
-            aria-label="Start your custom build"
-          >
+          <Link to="/artisan-shop/soundlegend" className="lv-cta-btn primary">
             Start Your Build
           </Link>
-          <Link
-            to="/soundlegends/signin"
-            className="lv-cta-btn ghost"
-            aria-label="Open the artist portal"
-          >
+          <Link to="/soundlegends/signin" className="lv-cta-btn ghost">
             Artist Portal
           </Link>
         </div>
