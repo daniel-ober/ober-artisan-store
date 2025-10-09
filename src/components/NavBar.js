@@ -109,10 +109,25 @@ const NavBar = () => {
           'navbarLinks'
         );
         const snapshot = await getDocs(navbarLinksCollection);
+
+        // Base list from Firestore
         const links = snapshot.docs
           .map((d) => ({ id: d.id, ...d.data() }))
           .sort((a, b) => a.order - b.order);
-        setNavbarLinks(links);
+
+        // Transform:
+        // 1) Rename "founders-batch" label -> "Artisan Drums"
+        // 2) Remove "artisan-shop" from navbar
+        const transformed = links
+          .filter((l) => (l.name || '').toLowerCase() !== 'artisan-shop')
+          .map((l) => {
+            if ((l.name || '').toLowerCase() === 'founders-batch') {
+              return { ...l, label: 'Artisan Drums' }; // or 'Our Drums'
+            }
+            return l;
+          });
+
+        setNavbarLinks(transformed);
       } catch (err) {
         console.error('❌ Navbar fetch error:', err);
       }
@@ -198,6 +213,17 @@ const NavBar = () => {
     );
   };
 
+  /** 🎁 Static link for Founder’s Toast */
+  const renderFoundersToastLink = () => (
+    <Link
+      to="/artisan-shop/founders-toast"
+      className="nav-link"
+      onClick={() => handleNavLinkClick('/artisan-shop/founders-toast')}
+    >
+      Founder’s Toast
+    </Link>
+  );
+
   /** 🎯 Legacy Vault logo link (auto-picks light/dark asset) */
   const renderLegacyVaultLogo = () => {
     // Sticky mini (or sticky mobile dropdown) sits on a dark sheet → always white mark
@@ -267,8 +293,8 @@ const NavBar = () => {
                     </Link>
                   ))}
 
+                {renderFoundersToastLink()}
                 {renderSoundLegendTab()}
-
                 {renderLegacyVaultLogo()}
 
                 {user && isAdmin && (
@@ -346,8 +372,8 @@ const NavBar = () => {
                     </Link>
                   ))}
 
+                {renderFoundersToastLink()}
                 {renderSoundLegendTab()}
-
                 {renderLegacyVaultLogo()}
 
                 {user && isAdmin && (
@@ -449,8 +475,8 @@ const NavBar = () => {
                   </Link>
                 ))}
 
+              {renderFoundersToastLink()}
               {renderSoundLegendTab()}
-
               {renderLegacyVaultLogo()}
 
               {user && isAdmin && (

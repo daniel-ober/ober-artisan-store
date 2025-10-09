@@ -172,6 +172,40 @@
 }
 .carousel-nav button:hover{ opacity:.85; }
 
+.carousel-title-logo {
+  width: min(44vw, 520px);
+  height: auto;
+  display: block;
+  margin: 0 auto 12px auto; /* centers like the H1 */
+  filter: drop-shadow(0 2px 10px rgba(0,0,0,0.45));
+}
+
+/* ===== SoundLegend Experience logo refinement ===== */
+.carousel-slide[data-key="soundlegend"] .carousel-title-logo {
+  width: min(42vw, 480px);
+  height: auto;
+  display: block;
+  margin: 0 auto 14px auto;
+  filter: drop-shadow(0 3px 12px rgba(0, 0, 0, 0.55));
+  opacity: 0.98;
+  transform: translateY(-2px);
+}
+
+/* Optional slightly tighter layout for smaller viewports */
+@media (max-width: 768px) {
+  .carousel-slide[data-key="soundlegend"] .carousel-title-logo {
+    width: min(68vw, 420px);
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-slide[data-key="soundlegend"] .carousel-title-logo {
+    width: min(76vw, 360px);
+    margin-bottom: 8px;
+  }
+}
+
 /* ===== Tablet tweaks ===== */
 @media (max-width: 1024px){
   .home-carousel{ aspect-ratio: 1.7/1; }
