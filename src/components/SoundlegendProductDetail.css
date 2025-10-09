@@ -403,6 +403,22 @@
 .sl-panel-bullets{ margin-top:4px; }
 .sl-panel-text{ margin-top:6px; }
 
+/* keep vendor badges tidy */
+.sl-badge-vendor img {
+  height: 18px;
+  width: auto;            /* never stretch */
+  object-fit: contain;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* optional: if you only want to target Stripe specifically */
+.stripe-logo {
+  height: 18px;
+  width: auto;
+  object-fit: contain;
+}
+
 /* Responsive: split grid into two columns on wide screens for denser look */
 @media (min-width: 960px){
   .sl-acc-body{

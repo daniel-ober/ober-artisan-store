@@ -136,7 +136,7 @@ const steps = [
     bullets: [
       'Goals, genres, feel, and tuning preferences',
       'References you love: records, players, tones',
-      'Sensitivity, rimshot feel, ergonomics',
+      'Sensitivity, feel, ergonomics',
     ],
   },
   {
@@ -604,17 +604,17 @@ const SoundLegendProductDetail = () => {
                             <span>{s.vendors.signwell.label}</span>
                           </span>
                         )}
-                        {s.vendors.stripe && (
+                        {steps[i]?.vendors?.stripe && (
                           <span className="sl-badge sl-badge-vendor">
                             <img
-                              src={s.vendors.stripe.img}
-                              alt={s.vendors.stripe.alt}
-                              height="16"
-                              width="64"
+                              src={steps[i].vendors.stripe.img}
+                              alt={steps[i].vendors.stripe.alt}
+                              className="stripe-logo" // ⟵ add class
+                              height="18" // control by height only
                               loading="lazy"
                               decoding="async"
                             />
-                            <span>{s.vendors.stripe.label}</span>
+                            <span>{steps[i].vendors.stripe.label}</span>
                           </span>
                         )}
                         {s.vendors.klarna && (
