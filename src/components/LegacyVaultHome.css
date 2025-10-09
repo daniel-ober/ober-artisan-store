@@ -82,6 +82,41 @@
 }
 .lv-link:hover { color: #ffa500; text-decoration: underline; }
 
+/* ---- Hero video fallback (size it like the 360) ---- */
+.lv-hero-fallback {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 21 / 9;          /* match .lv-hero-360 */
+  background: #0a0a0a;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 12px 28px rgba(0,0,0,.35);
+}
+
+.lv-hero-video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;             /* fill the frame */
+}
+
+/* optional overlay label if you keep it */
+.lv-hero-overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+.lv-hero-overlay-text {
+  font-family: 'Cinzel Decorative', serif;
+  letter-spacing: .08em;
+  font-weight: 700;
+  font-size: clamp(14px, 2.2vw, 18px);
+  color: rgba(255,255,255,.9);
+  text-transform: uppercase;
+}
+
 /* Base 360 viewer bits */
 .sl360-stage { position: relative; user-select: none; touch-action: pan-y; cursor: grab; }
 .sl360-stage:active { cursor: grabbing; }
@@ -168,8 +203,30 @@
   border-color: rgba(255,255,255,.18);
   box-shadow: 0 14px 40px rgba(0,0,0,.35), 0 0 0 1px rgba(255,255,255,.03) inset;
 }
-.lv-item-media{ aspect-ratio: 16/9; background:#0a0a0a; }
-.lv-item-media img{ width:100%; height:100%; object-fit:cover; display:block; }
+/* Card media: lighter thumbnails + safe containment */
+.lv-item-media {
+  aspect-ratio: 4 / 3;              /* smaller, faster thumbs */
+  background: #0a0a0a;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+}
+
+/* img class used by the card component */
+.lv-thumb {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  background-color: #111;            /* avoids white flash */
+}
+
+/* video fallback in cards */
+.lv-item-video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
 .lv-item-body{ padding:12px 14px; display:grid; gap:6px; }
 
 .lv-artist{
@@ -199,6 +256,8 @@
 /* ===== Join section ===== */
 .lv-join{ max-width: var(--container); margin:0 auto; padding:40px 20px 64px; text-align:center; }
 .lv-join .lv-prose{ max-width: 880px; margin: 8px auto 14px; }
+
+/* .lv-hero-360 { aspect-ratio: 21 / 9; } */
 
 /* Responsive tune-ups */
 @media (max-width: 760px){
