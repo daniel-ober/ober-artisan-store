@@ -58,11 +58,11 @@ const HeritageProductDetail = () => {
   };
 
   const staveOptions = {
-    12: { 6: ['12 - 10mm'], 8: ['16 - 13mm'] },
-    13: { 8: ['16 - 12mm'] },
+    12: { 6: ['12 - 8mm'], 8: ['16 - 10mm'] },
+    13: { 8: ['16 - 10mm'] },
     14: {
-      8: ['16 - 12mm'],
-      10: ['20 - 14mm', '10 - 7mm + $150 (Re-Rings Required)'], // ✅ Only this has Re-Rings
+      8: ['16 - 10mm'],
+      10: ['20 - 12mm', '10 - 7mm + $150 (Re-Rings Required)'], // ✅ Only this has Re-Rings
     },
   };
 
