@@ -1,0 +1,596 @@
+/* HulaGiftPage.css
+   Scoped styles for /hula QR experience
+   Usage:
+     - Add id="hula" to the top-level wrapper div in HulaGiftPage.js
+     - import './HulaGiftPage.css' in HulaGiftPage.js
+*/
+
+/* ====== Theme Vars ====== */
+#hula {
+  --hula-bg: #0a0e19;
+  --hula-bg-top: rgba(0, 80, 120, 0.35);
+  --hula-fg: #ffffff;
+  --hula-fg-dim: rgba(255,255,255,0.7);
+  --hula-border: rgba(255,255,255,0.12);
+  --hula-border-strong: rgba(255,255,255,0.2);
+  --hula-card: rgba(255,255,255,0.06);
+  --hula-card-strong: rgba(255,255,255,0.1);
+  --hula-ring: rgba(66, 211, 255, 0.45);
+  --hula-glow-cyan: rgba(56, 189, 248, 0.35);
+  --hula-glow-fuchsia: rgba(232, 121, 249, 0.35);
+  --hula-glow-amber: rgba(251, 191, 36, 0.35);
+  --hula-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  --hula-radius: 18px;
+}
+
+/* ====== Page Canvas / Background ====== */
+#hula {
+  position: relative;
+  min-height: 100dvh;
+  color: var(--hula-fg);
+  background:
+    radial-gradient(ellipse at top, var(--hula-bg-top), transparent 60%),
+    linear-gradient(180deg, #0b1020 0%, #0a0e19 60%, #080a12 100%),
+    var(--hula-bg);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#hula .hula-ambient {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+#hula .hula-ambient::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 6rem;
+  transform: translateX(-50%);
+  width: 380px;
+  height: 380px;
+  border-radius: 9999px;
+  filter: blur(80px);
+  background: radial-gradient(circle at 30% 30%,
+    var(--hula-glow-cyan),
+    var(--hula-glow-fuchsia) 45%,
+    var(--hula-glow-amber) 80%,
+    transparent 75%);
+  animation: hula-breathe 6s ease-in-out infinite;
+  opacity: 0.65;
+}
+@keyframes hula-breathe {
+  0%,100% { transform: translateX(-50%) scale(1); opacity: .55; }
+  50%     { transform: translateX(-50%) scale(1.08); opacity: .75; }
+}
+
+/* ====== Container ====== */
+/* NOTE: bottom padding is reduced so footer can sit tighter */
+#hula .hula-wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 2rem;
+}
+@media (min-width: 640px) {
+  #hula .hula-wrap { padding: 3rem 1.5rem 2.5rem; }
+}
+@media (min-width: 1024px) {
+  #hula .hula-wrap { padding: 4.5rem 2rem 3rem; }
+}
+
+/* keeps hero + cards in the same centered column so alignment feels intentional */
+#hula .hula-section-inner {
+  max-width: 850px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+/* ====== Header / Badge ====== */
+#hula .hula-badge {
+  display: inline-grid;
+  place-items: center;
+  width: 44px; height: 44px;
+  border-radius: 9999px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--hula-border);
+  box-shadow: var(--hula-shadow);
+}
+#hula .hula-brand {
+  font-size: 0.95rem;
+  color: var(--hula-fg-dim);
+  letter-spacing: .2px;
+}
+
+/* ====== Hero ====== */
+/* hero-centered-* classes are new: gives you the centered hero block vibe */
+#hula .hula-hero {
+  margin-top: 1rem;
+  text-align: center;
+  max-width: 850px;
+  margin-left: auto;
+  margin-right: auto;
+}
+#hula .hero-centered-block {
+  text-align: center;
+  max-width: 850px;
+  margin-left: auto;
+  margin-right: auto;
+}
+#hula .hero-centered-headline {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+#hula .hero-centered-copy {
+  margin-top: 1rem;
+  display: grid;
+  gap: 1rem;
+  color: var(--hula-fg-dim);
+  font-size: 0.98rem;
+  max-width: 780px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.5;
+}
+#hula .hero-centered-copy .hula-sub {
+  margin-top: 0;
+  text-align: center;
+  line-height: 1.5;
+}
+
+#hula .hula-title {
+  font-weight: 700;
+  line-height: 1.1;
+  font-size: clamp(28px, 4vw + 8px, 48px);
+  background: linear-gradient(90deg,
+    #67e8f9 0%,
+    #e879f9 45%,
+    #fbbf24 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 2px 14px rgba(0,0,0,0.35);
+}
+#hula .hula-sub {
+  margin-top: .75rem;
+  /* max-width: 68ch; */
+  color: var(--hula-fg-dim);
+  font-size: 0.98rem;
+}
+
+/* ====== Section Card ====== */
+#hula .hula-card {
+  margin-top: 1.25rem;
+  background: var(--hula-card);
+  border: 1px solid var(--hula-border);
+  border-radius: var(--hula-radius);
+  box-shadow: var(--hula-shadow);
+  padding: 1.25rem;
+  backdrop-filter: blur(6px);
+}
+@media (min-width: 640px) {
+  #hula .hula-card { padding: 1.5rem; }
+}
+#hula .hula-card h2,
+#hula .hula-card h3 {
+  font-weight: 600;
+  letter-spacing: .3px;
+}
+#hula .hula-note {
+  color: var(--hula-fg-dim);
+  font-size: .95rem;
+  margin-top: .35rem;
+}
+
+/* tighten bottom spacing specifically on the community section so footer pulls up */
+#hula .hula-card--community {
+  margin-bottom: 1rem;
+}
+
+/* ====== Drum Picker Grid ====== */
+#hula .hula-grid {
+  margin-top: .75rem;
+  display: grid;
+  gap: .75rem;
+}
+@media (min-width: 640px) {
+  #hula .hula-grid { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+}
+#hula .hula-drum {
+  text-align: left;
+  border-radius: 20px;
+  border: 1px solid var(--hula-border);
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.04));
+  padding: 1rem 1rem 1.1rem;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  box-shadow: var(--hula-shadow);
+}
+#hula .hula-drum:hover {
+  transform: translateY(-3px) scale(1.01);
+  border-color: var(--hula-border-strong);
+  box-shadow: 0 18px 45px rgba(56, 189, 248, 0.18);
+}
+#hula .hula-drum h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: .4px;
+}
+#hula .hula-drum p {
+  margin-top: .35rem;
+  color: var(--hula-fg-dim);
+  font-size: .95rem;
+}
+#hula .hula-pill {
+  display: inline-block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  border: 1px solid var(--hula-border);
+  padding: .35rem .6rem;
+  border-radius: 9999px;
+  color: var(--hula-fg-dim);
+}
+
+/* ====== Progress Bar (drum cards) ====== */
+#hula .hula-meter {
+  margin-top: .9rem;
+  height: 8px;
+  border-radius: 9999px;
+  background: rgba(255,255,255,0.1);
+  overflow: hidden;
+}
+#hula .hula-meter > span {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #fff, rgba(255,255,255,0.65));
+  animation: hula-scan 1.8s ease-in-out infinite;
+}
+@keyframes hula-scan {
+  0% { width: 0%; }
+  50% { width: 100%; }
+  100% { width: 0%; }
+}
+
+/* ====== Rhythm Quest ====== */
+#hula .rq-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+}
+#hula .rq-round {
+  color: var(--hula-fg-dim);
+  font-size: .95rem;
+}
+#hula .rq-note {
+  margin-top: .35rem;
+  color: var(--hula-fg-dim);
+  font-size: .95rem;
+}
+#hula .rq-grid {
+  margin-top: .9rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: .75rem;
+}
+@media (min-width: 640px) {
+  #hula .rq-grid { grid-template-columns: repeat(4, 1fr); }
+}
+#hula .rq-pad {
+  aspect-ratio: 1 / 1;
+  border-radius: 18px;
+  border: 1px solid var(--hula-border-strong);
+  backdrop-filter: blur(6px);
+  display: grid;
+  place-items: center;
+  font-weight: 600;
+  transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+  user-select: none;
+}
+#hula .rq-pad:hover {
+  transform: scale(1.04);
+  box-shadow: 0 18px 40px rgba(255,255,255,0.18);
+}
+#hula .rq-pad:active {
+  transform: scale(.97);
+}
+#hula .rq-pad--kick    { background: rgba(56, 189, 248, 0.22); }
+#hula .rq-pad--snare   { background: rgba(244, 63, 94,  0.22); }
+#hula .rq-pad--hihat   { background: rgba(250, 204, 21, 0.28); }
+#hula .rq-pad--tom     { background: rgba(139, 92, 246, 0.22); }
+
+#hula .rq-cta {
+  margin-top: .85rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+}
+
+/* ====== Buttons ====== */
+#hula .hula-btn {
+  appearance: none;
+  border: 1px solid var(--hula-border);
+  background: var(--hula-card);
+  color: var(--hula-fg);
+  padding: .55rem .9rem;
+  border-radius: 12px;
+  
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease, transform .05s ease;
+}
+#hula .hula-btn:hover {
+  background: var(--hula-card-strong);
+  border-color: var(--hula-border-strong);
+}
+#hula .hula-btn:active {
+  transform: translateY(1px);
+}
+
+#hula .hula-tag {
+  padding: .5rem .8rem;
+  border-radius: 12px;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(52, 211, 153, 0.35);
+  color: #d1fae5;
+}
+
+/* Gift code panel */
+#hula .gift {
+  margin-top: .9rem;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(52, 211, 153, 0.35);
+  border-radius: 16px;
+  padding: 1rem;
+}
+#hula .gift .code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  background: rgba(0,0,0,0.45);
+  border: 1px solid rgba(52, 211, 153, 0.35);
+  padding: .45rem .6rem;
+  border-radius: 10px;
+  word-break: break-all;
+}
+
+/* ====== Guestbook ====== */
+#hula .gb-wrap {
+  margin-top: 1.25rem;
+}
+
+#hula .gb-inputs {
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: nowrap;
+}
+
+/* Override Tailwind inline sizing */
+#hula .gb-inputs input {
+  all: unset;
+  display: block;
+  height: 34px !important;
+  padding: 0 0.7rem !important;
+  font-size: 0.9rem !important;
+  border-radius: 8px !important;
+  border: 1px solid var(--hula-border) !important;
+  background: rgba(255,255,255,0.05) !important;
+  color: var(--hula-fg) !important;
+  flex-shrink: 0;
+  box-sizing: border-box !important;
+  outline: none !important;
+  width: auto !important;
+  max-width: 100%;
+}
+#hula .gb-inputs input:first-of-type {
+  width: 160px !important;
+}
+#hula .gb-inputs input:nth-of-type(2) {
+  flex: 1 !important;
+  min-width: 0;
+}
+#hula .gb-inputs input::placeholder {
+  color: rgba(255,255,255,0.55);
+}
+#hula .gb-inputs input:focus {
+  border-color: var(--hula-ring);
+  box-shadow: 0 0 0 3px rgba(103,232,249,0.25);
+}
+
+/* Compact Post button */
+#hula .gb-wrap .hula-btn,
+#hula .gb-btn {
+  height: 34px;
+  padding: 0 0.9rem;
+  border-radius: 8px;
+  border: 1px solid var(--hula-border);
+  background: var(--hula-card);
+  color: var(--hula-fg);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background .2s, border-color .2s, transform .05s;
+}
+#hula .gb-wrap .hula-btn:hover,
+#hula .gb-btn:hover {
+  background: var(--hula-card-strong);
+  border-color: var(--hula-border-strong);
+}
+#hula .gb-wrap .hula-btn:active,
+#hula .gb-btn:active {
+  transform: translateY(1px);
+}
+
+/* Comment list */
+#hula .gb-list {
+  margin-top: 0.7rem;
+  display: grid;
+  gap: 0.5rem;
+  list-style: none;
+  padding-left: 0;
+}
+#hula .gb-item {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--hula-border);
+  border-radius: 10px;
+  padding: 0.55rem 0.75rem;
+  line-height: 1.4;
+  transition: background .15s, border-color .15s;
+}
+#hula .gb-item:hover {
+  background: rgba(255,255,255,0.07);
+  border-color: var(--hula-border-strong);
+}
+#hula .gb-time {
+  margin-top: 0.25rem;
+  color: var(--hula-fg-dim);
+  font-size: 11px;
+}
+
+#hula .shell-personality li {
+  margin-left: 0.8rem;
+  line-height: 1.4;
+  list-style-type: "🎵 ";
+}
+#hula .shell-personality li::marker {
+  color: rgba(251,191,36,0.8);
+}
+
+/* Mobile stacking */
+@media (max-width: 640px) {
+  #hula .gb-inputs {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  #hula .gb-inputs input,
+  #hula .gb-wrap .hula-btn {
+    width: 100% !important;
+  }
+}
+
+/* ====== Share / CTA ====== */
+#hula .cta-wrap { margin-top: 1.25rem; }
+#hula .cta-actions {
+  margin-top: .7rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+}
+#hula .cta-small {
+  margin-top: .55rem;
+  color: rgba(255,255,255,0.55);
+  font-size: 12px;
+}
+
+/* --- Force responsive grid even if Tailwind isn't present --- */
+.hula-card .grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1rem;
+}
+@media (min-width: 640px) { /* sm: */
+  .hula-card .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1024px) { /* lg: */
+  .hula-card .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+/* Keep the select row inside the card and aligned */
+.hula-card .select-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: .75rem;
+}
+
+/* Make sure radios aren't getting weird global positioning */
+.hula-card input[type="radio"] {
+  position: static !important;
+  margin: 0 !important;
+  transform: none !important;
+}
+
+/* Optional: shrink the progress bar height a hair for a sleeker look */
+.hula-card .meter {
+  height: 0.5rem;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+/* ====== Confetti (fallback keyframes) ====== */
+@keyframes fall {
+  to { transform: translateY(110vh) rotate(720deg); opacity: .9; }
+}
+
+/* ====== Footer ====== */
+.hula-footer {
+  position: relative;
+  background: radial-gradient(circle at 50% -20px,
+    rgba(251,191,36,0.18) 0%,
+    rgba(232,121,249,0.12) 40%,
+    rgba(10,14,25,0) 70%);
+  padding: 1.5rem 1rem 3rem;
+  text-align: center;
+  color: rgba(255,255,255,0.8);
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hula-footer-inner {
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(8px);
+  box-shadow:
+    0 30px 80px rgba(251,191,36,0.12),
+    0 12px 40px rgba(0,0,0,0.8);
+  border-radius: 16px;
+  padding: 1.5rem 1rem 2rem;
+  max-width: 780px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.footer-headline {
+  font-weight: 600;
+  font-size: 1rem;
+  color: rgba(255,255,255,0.9);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+}
+
+.footer-body {
+  margin-top: .5rem;
+  font-size: .85rem;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.7);
+}
+
+.footer-signoff {
+  margin-top: 1rem;
+  font-size: .8rem;
+  color: rgba(255,255,255,0.6);
+  font-style: italic;
+}
+
+.footer-logo {
+  margin-top: 1rem;
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  opacity: 0.6;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.8));
+}
+
+/* ====== Utilities (scoped) ====== */
+#hula .mt-0   { margin-top: 0 !important; }
+#hula .mt-4   { margin-top: 1rem !important; }
+#hula .mt-6   { margin-top: 1.5rem !important; }
+#hula .mt-8   { margin-top: 2rem !important; }
+#hula .mt-10  { margin-top: 2.5rem !important; }
+#hula .mb-10  { margin-bottom: 2.5rem !important; }
+#hula .center { display: grid; place-items: center; }

@@ -37,6 +37,7 @@
     "firebase-admin": "^13.2.0",
     "firebase-functions": "^6.3.2",
     "formdata-node": "^6.0.3",
+    "framer-motion": "^12.23.24",
     "homepage": ".",
     "http-proxy-middleware": "^3.0.2",
     "joi": "^17.13.3",
@@ -114,6 +115,7 @@
     "@babel/core": "^7.26.0",
     "@babel/preset-env": "^7.26.0",
     "dotenv-cli": "^7.4.4",
+    "eslint-plugin-react-hooks": "^7.0.1",
     "prettier": "^3.5.3",
     "source-map-explorer": "^2.5.3"
   }
