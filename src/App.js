@@ -63,6 +63,8 @@ import SoundLegendVaultCreator from './components/SoundLegendVaultCreator.js';
 import Endorsements from './components/Endorsements.js';
 import EndorsementForm from './components/EndorsementForm.js';
 import ResinAccentGenerator from './components/ResinAccentGenerator.js';
+import DrumSelector from './components/DrumSelector.js';
+import HulaGiftPage from './components/HulaGiftPage.js';
 import { Toaster } from 'react-hot-toast';
 import './App.css';
 
@@ -238,6 +240,7 @@ function App() {
             path="/artisan-shop"
             element={<PreOrderPage isAdmin={isAdmin} isDarkMode={isDarkMode} />}
           />
+          <Route path="/drum-selector" element={<DrumSelector />} />
 
           {/* Projects & Auth */}
           <Route
@@ -261,6 +264,8 @@ function App() {
             path="/artisan-shop/soundlegend"
             element={<SoundlegendProductDetail />}
           />
+
+          <Route path="/hula" element={<HulaGiftPage />} />
 
           {/* Legacy Vault on its own endpoint */}
           <Route
