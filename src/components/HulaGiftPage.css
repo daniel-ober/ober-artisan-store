@@ -225,6 +225,7 @@
   color: var(--hula-fg-dim);
   font-size: .95rem;
 }
+
 #hula .hula-pill {
   display: inline-block;
   font-size: 11px;
@@ -461,6 +462,25 @@
   color: rgba(251,191,36,0.8);
 }
 
+#hula .hula-select-row {
+  margin-top: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+
+  /* new: breathing room + visual anchor */
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-radius: 12px;
+}
+
+#hula .hula-select-row .hula-btn {
+  border-radius: 10px; /* was 12 vs 10, now consistent with badge */
+}
+
 /* Mobile stacking */
 @media (max-width: 640px) {
   #hula .gb-inputs {
@@ -473,7 +493,7 @@
   }
 }
 
-/* ====== Share / CTA ====== */
+/* ====== Share / CTA ====== */v
 #hula .cta-wrap { margin-top: 1.25rem; }
 #hula .cta-actions {
   margin-top: .7rem;
@@ -584,6 +604,251 @@
   object-fit: contain;
   opacity: 0.6;
   filter: drop-shadow(0 6px 12px rgba(0,0,0,0.8));
+}
+
+/* ====== Thank You Modal / Banner ====== */
+
+/* Wrapper if it shows inline (not fixed overlay)
+   We'll give it the same glow look as the popup card */
+#hula .thanks-inline-wrapper {
+  background: radial-gradient(
+      circle at 0% 0%,
+      rgba(251,191,36,0.12) 0%,
+      rgba(10,14,25,0.9) 60%
+    );
+  border: 1px solid rgba(255,255,255,0.18);
+  box-shadow:
+    0 30px 80px rgba(0,0,0,0.9),
+    0 16px 40px rgba(251,191,36,0.18);
+  border-radius: 16px;
+  padding: 1.25rem 1rem 1rem;
+  color: rgba(255,255,255,0.9);
+
+  max-width: 900px;
+  margin: 1rem auto 0 auto;
+
+  position: relative;
+  backdrop-filter: blur(8px);
+}
+
+/* little gold badge at the top-left */
+#hula .thanks-badge {
+  position: absolute;
+  top: -10px;
+  left: 1rem;
+
+  background: linear-gradient(
+    90deg,
+    rgba(251,191,36,.9),
+    rgba(253,224,71,.8)
+  );
+  color: #111;
+  border: 1px solid rgba(0,0,0,.4);
+  box-shadow: 0 8px 20px rgba(251,191,36,.4);
+
+  border-radius: 10px;
+  padding: .4rem .5rem;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.1;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Title "Pick submitted ✓" */
+#hula .thanks-headline {
+  font-weight: 600;
+  color: rgba(255,255,255,0.95);
+  margin-bottom: .5rem;
+  font-size: 1rem;
+  line-height: 1.4;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+}
+
+/* Body text under headline */
+#hula .thanks-body {
+  color: rgba(255,255,255,0.8);
+  font-size: .9rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+/* Inner grey/black safety block */
+#hula .thanks-safety-box {
+  background: rgba(0,0,0,0.4);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 12px;
+  padding: .75rem .8rem;
+  font-size: .8rem;
+  line-height: 1.45;
+  color: rgba(255,255,255,0.7);
+  box-shadow:
+    0 20px 40px rgba(0,0,0,0.8),
+    0 10px 30px rgba(251,191,36,0.12);
+}
+
+/* "Take care of each other." inside the box */
+#hula .thanks-safety-head {
+  font-weight: 600;
+  color: rgba(255,255,255,0.9);
+  margin-bottom: .4rem;
+  font-size: .8rem;
+  line-height: 1.4;
+}
+
+/* row with the Got it button */
+#hula .thanks-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+/* make that Got it button sit right visually even inline */
+#hula .thanks-close-btn {
+  background: var(--hula-card);
+  border: 1px solid var(--hula-border);
+  color: var(--hula-fg);
+  font-weight: 500;
+  font-size: .9rem;
+  line-height: 1.2;
+  padding: .5rem .8rem;
+  border-radius: 10px;
+  min-width: 90px;
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease, transform .05s ease;
+}
+#hula .thanks-close-btn:hover {
+  background: var(--hula-card-strong);
+  border-color: var(--hula-border-strong);
+}
+#hula .thanks-close-btn:active {
+  transform: translateY(1px);
+}
+
+/* ====== Thank You Modal Overlay ====== */
+
+/* full-screen dimmer behind the card */
+#hula .thanks-overlay {
+  background-color: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+}
+
+/* glowing card */
+#hula .thanks-modal-card {
+  background: radial-gradient(
+    circle at 0% 0%,
+    rgba(251,191,36,0.12) 0%,
+    rgba(10,14,25,0.9) 60%
+  );
+  border: 1px solid rgba(255,255,255,0.18);
+  box-shadow:
+    0 30px 80px rgba(0,0,0,0.9),
+    0 16px 40px rgba(251,191,36,0.18);
+  border-radius: 16px;
+  padding: 1.25rem 1rem 1rem;
+  color: rgba(255,255,255,0.9);
+  position: relative;
+  max-width: 20rem;
+  width: 100%;
+  backdrop-filter: blur(8px);
+}
+
+/* little gold badge */
+#hula .thanks-badge {
+  position: absolute;
+  top: -10px;
+  left: 1rem;
+
+  background: linear-gradient(
+    90deg,
+    rgba(251,191,36,.9),
+    rgba(253,224,71,.8)
+  );
+  color: #111;
+  border: 1px solid rgba(0,0,0,.4);
+  box-shadow: 0 8px 20px rgba(251,191,36,.4);
+
+  border-radius: 10px;
+  padding: .4rem .5rem;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.1;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* headline text */
+#hula .thanks-headline {
+  font-weight: 600;
+  color: rgba(255,255,255,0.95);
+  margin-bottom: .5rem;
+  font-size: 1rem;
+  line-height: 1.4;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+}
+
+/* body copy */
+#hula .thanks-body {
+  color: rgba(255,255,255,0.8);
+  font-size: .9rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+/* safety box */
+#hula .thanks-safety-box {
+  background: rgba(0,0,0,0.4);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 12px;
+  padding: .75rem .8rem;
+  font-size: .8rem;
+  line-height: 1.45;
+  color: rgba(255,255,255,0.7);
+  box-shadow:
+    0 20px 40px rgba(0,0,0,0.8),
+    0 10px 30px rgba(251,191,36,0.12);
+}
+
+/* "Take care of each other." text inside box */
+#hula .thanks-safety-head {
+  font-weight: 600;
+  color: rgba(255,255,255,0.9);
+  margin-bottom: .4rem;
+  font-size: .8rem;
+  line-height: 1.4;
+}
+
+/* actions row (button alignment) */
+#hula .thanks-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+/* close button */
+#hula .thanks-close-btn {
+  background: var(--hula-card);
+  border: 1px solid var(--hula-border);
+  color: var(--hula-fg);
+  font-weight: 500;
+  font-size: .9rem;
+  line-height: 1.2;
+  padding: .5rem .8rem;
+  border-radius: 10px;
+  min-width: 90px;
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease, transform .05s ease;
+}
+#hula .thanks-close-btn:hover {
+  background: var(--hula-card-strong);
+  border-color: var(--hula-border-strong);
+}
+#hula .thanks-close-btn:active {
+  transform: translateY(1px);
 }
 
 /* ====== Utilities (scoped) ====== */
