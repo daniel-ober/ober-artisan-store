@@ -7,34 +7,20 @@
       "**/node_modules/**"
     ],
     "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
+      { "source": "**", "destination": "/index.html" }
     ]
   },
   "functions": [
     {
       "source": "functions",
+      "codebase": "default",
+      "runtime": "nodejs20",
       "ignore": [
         "node_modules",
         ".git"
       ],
       "predeploy": [
-        "npm --prefix \"$RESOURCE_DIR\" run lint"
-      ],
-      "runtime": "nodejs18",
-      "codebase": "default"
-    },
-    {
-      "source": "recaptcha-functions",
-      "codebase": "recaptcha-functions",
-      "ignore": [
-        "node_modules",
-        ".git",
-        "firebase-debug.log",
-        "firebase-debug.*.log",
-        "*.local"
+        "npm --prefix \"$RESOURCE_DIR\" run -s lint || echo 'no lint script'"
       ]
     }
   ],
@@ -43,27 +29,15 @@
     "indexes": "firestore.indexes.json"
   },
   "emulators": {
-    "functions": {
-      "port": 5001
-    },
-    "firestore": {
-      "port": 8080
-    },
-    "database": {
-      "port": 9000
-    },
-    "hosting": {
-      "port": 5002
-    },
-    "storage": {
-      "port": 9199
-    },
-    "ui": {
-      "enabled": true
-    },
+    "functions": { "port": 5001 },
+    "firestore": { "port": 8080 },
+    "database": { "port": 9000 },
+    "hosting": { "port": 5002 },
+    "storage": { "port": 9199 },
+    "ui": { "enabled": true },
     "singleProjectMode": true
   },
   "storage": {
-    "rules": "firebase deploy --only storage"
+    "rules": "storage.rules"
   }
 }

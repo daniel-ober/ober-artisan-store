@@ -3,9 +3,7 @@
   "private": true,
   "type": "commonjs",
   "main": "index.js",
-  "engines": {
-    "node": "20"
-  },
+  "engines": { "node": "20" },
   "scripts": {
     "serve": "firebase emulators:start --only functions",
     "predeploy": "echo 'Skipping ESLint check...'",
