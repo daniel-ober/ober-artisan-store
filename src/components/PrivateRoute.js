@@ -1,16 +1,32 @@
-// src/components/PrivateRoute.js
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
-const PrivateRoute = ({ element, adminOnly = false, redirectAuthenticated = false }) => {
-  const { user, isAdmin, loading } = useAuth();
+/**
+ * Usage examples:
+ * <PrivateRoute element={<SomePage />} />
+ * <PrivateRoute element={<AdminPage />} adminOnly />
+ * <PrivateRoute element={<Portal />} soundlegendOnly />
+ */
+const PrivateRoute = ({
+  element,
+  adminOnly = false,
+  soundlegendOnly = false,
+  redirectAuthenticated = false,
+}) => {
+  const { user, isAdmin, isSoundlegend, authIsReady } = useAuth();
 
-  if (loading) return <p>Loading...</p>;
+  if (!authIsReady) return <p>Loading...</p>;
 
-  if (redirectAuthenticated && user) return <Navigate to="/account" />;
-  if (!user && !redirectAuthenticated) return <Navigate to="/signin" />;
-  if (adminOnly && (!user || !isAdmin)) return <Navigate to="/not-authorized" />;
+  if (redirectAuthenticated && user) return <Navigate to="/account" replace />;
+
+  if (!user && !redirectAuthenticated)
+    return <Navigate to="/soundlegends/signin" replace />;
+
+  if (adminOnly && !isAdmin) return <Navigate to="/not-authorized" replace />;
+
+  if (soundlegendOnly && !(isAdmin || isSoundlegend))
+    return <Navigate to="/not-authorized" replace />;
 
   return element;
 };

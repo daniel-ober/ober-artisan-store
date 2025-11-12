@@ -1,19 +1,27 @@
 import React, { useRef, useState, useEffect, useContext } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaCartPlus, FaSignOutAlt, FaCog } from 'react-icons/fa';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import { DarkModeContext } from '../context/DarkModeContext';
-import { collection, getDocs, doc, getDoc } from 'firebase/firestore';
+import {
+  collection,
+  getDocs,
+  query,
+  where,
+  orderBy,
+  limit,
+} from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
 import { db } from '../firebaseConfig';
 import CartPreview from './CartPreview';
 import './NavBar.css';
 
 /** ⚙️ Paths to the Legacy Vault logo assets in /public */
-const VAULT_LOGO_LIGHT = '/legacy-vault-nav/black2.png'; // LIGHT theme uses black mark
-const VAULT_LOGO_DARK = '/legacy-vault-nav/white2.png'; // DARK theme uses white mark
+const VAULT_LOGO_LIGHT = '/legacy-vault-nav/black2.png';
+const VAULT_LOGO_DARK = '/legacy-vault-nav/white2.png';
 
-/** 🔗 Where the Vault logo should link */
+/** 🔗 Where the Vault logo should link (public) */
 const VAULT_ROUTE = '/artisan-shop/soundlegend/vault';
 
 const NavBar = () => {
@@ -23,12 +31,13 @@ const NavBar = () => {
   const [showStickyHeader, setShowStickyHeader] = useState(false);
   const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 768);
   const [userProjects, setUserProjects] = useState([]);
-  const [isSoundlegend, setIsSoundlegend] = useState(false);
+  const [hasSLClaim, setHasSLClaim] = useState(false);
+  const [claimsReady, setClaimsReady] = useState(false);
 
   const { isDarkMode } = useContext(DarkModeContext);
   const { user, isAdmin, logout } = useAuth();
   const { cart } = useCart();
-  const location = useLocation();
+  const navigate = useNavigate();
 
   const cartItemCount = Object.values(cart).reduce(
     (total, item) => total + item.quantity,
@@ -39,47 +48,111 @@ const NavBar = () => {
   const buttonRef = useRef(null);
   const cartRef = useRef(null);
   const navbarRef = useRef(null);
-  const navigate = useNavigate();
 
-  const fetchUserProjects = async () => {
-    if (!user?.uid) return;
-    try {
-      const docRef = doc(db, 'users', user.uid);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        const data = docSnap.data();
-        setUserProjects(data.projects || []);
-        setIsSoundlegend(!!data.isSoundlegend);
-      }
-    } catch (err) {
-      console.error('Failed to fetch user projects:', err);
-    }
-  };
-
-  /** 🧹 Remove: Contact/Endorsements/Account from navbar set */
-  const filteredLinks = navbarLinks.filter((link) => {
-    const access = link.access || [];
-    const name = (link.name || '').toLowerCase();
-    const label = (link.label || '').toLowerCase();
-
-    // Exclude from NAVBAR (but can appear in footer): contact, endorsements, account
-    const isContact = name.includes('contact') || label.includes('contact');
-    const isEndorsements =
-      name.includes('endorsement') || label.includes('endorsement');
-    const isAccount = name.includes('account') || label.includes('account');
-    if (isContact || isEndorsements || isAccount) return false;
-
-    if (link.enabled && access.includes('public')) return true;
-    if (user && isAdmin && access.includes('admin')) return true;
-    if (user && isSoundlegend && access.includes('soundlegend')) return true;
-
-    return false;
-  });
-
+  /* --------- 1) Refresh claims on auth changes --------- */
   useEffect(() => {
-    if (user?.uid) fetchUserProjects();
+    const refreshClaims = async () => {
+      setClaimsReady(false);
+      setHasSLClaim(false);
+      setUserProjects([]);
+
+      if (!user) {
+        setClaimsReady(true);
+        return;
+      }
+
+      try {
+        const token = await getAuth().currentUser?.getIdTokenResult(true);
+        const c = token?.claims || {};
+        setHasSLClaim(!!(c.soundlegend || c.isSoundlegend));
+      } catch {
+        setHasSLClaim(false);
+      } finally {
+        setClaimsReady(true);
+      }
+    };
+
+    refreshClaims();
   }, [user]);
 
+  /* --------- 2) Only fetch projects if allowed --------- */
+  useEffect(() => {
+    const run = async () => {
+      if (!user || !claimsReady) return;
+      if (!(isAdmin || hasSLClaim)) {
+        return;
+      }
+
+      try {
+        const emailLower = (user.email || '').trim().toLowerCase();
+
+        let q1 = query(
+          collection(db, 'projects'),
+          where('customer.emailLower', '==', emailLower),
+          orderBy('updatedAt', 'desc'),
+          limit(50)
+        );
+        let snap = await getDocs(q1);
+
+        // Legacy fallback if some docs don’t have `emailLower`
+        if (snap.empty) {
+          const q2 = query(
+            collection(db, 'projects'),
+            where('customer.email', '==', user.email || ''),
+            limit(50)
+          );
+          snap = await getDocs(q2);
+        }
+
+        const list = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+        setUserProjects(
+          list.map((p) => ({
+            projectId: p.projectId || p.id,
+            title: p.title || p.projectId || p.id,
+          }))
+        );
+      } catch (err) {
+        console.warn('User projects query skipped/denied:', err?.message || err);
+        setUserProjects([]);
+      }
+    };
+
+    run();
+  }, [user, isAdmin, hasSLClaim, claimsReady]);
+
+  /* --------- 3) Navbar links (public) --------- */
+  useEffect(() => {
+    const fetchNavbarLinks = async () => {
+      try {
+        const navbarLinksCollection = collection(
+          db,
+          'settings',
+          'site',
+          'navbarLinks'
+        );
+        const snapshot = await getDocs(navbarLinksCollection);
+
+        const links = snapshot.docs
+          .map((d) => ({ id: d.id, ...d.data() }))
+          .sort((a, b) => (a.order || 0) - (b.order || 0));
+
+        const transformed = links
+          .filter((l) => (l.name || '').toLowerCase() !== 'artisan-shop')
+          .map((l) =>
+            (l.name || '').toLowerCase() === 'founders-batch'
+              ? { ...l, label: 'Artisan Drums' }
+              : l
+          );
+
+        setNavbarLinks(transformed);
+      } catch (err) {
+        console.error('❌ Navbar fetch error:', err);
+      }
+    };
+    fetchNavbarLinks();
+  }, []);
+
+  /* --------- 4) UI plumbing --------- */
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => setShowStickyHeader(!entry.isIntersecting),
@@ -97,42 +170,6 @@ const NavBar = () => {
     };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  useEffect(() => {
-    const fetchNavbarLinks = async () => {
-      try {
-        const navbarLinksCollection = collection(
-          db,
-          'settings',
-          'site',
-          'navbarLinks'
-        );
-        const snapshot = await getDocs(navbarLinksCollection);
-
-        // Base list from Firestore
-        const links = snapshot.docs
-          .map((d) => ({ id: d.id, ...d.data() }))
-          .sort((a, b) => a.order - b.order);
-
-        // Transform:
-        // 1) Rename "founders-batch" label -> "Artisan Drums"
-        // 2) Remove "artisan-shop" from navbar
-        const transformed = links
-          .filter((l) => (l.name || '').toLowerCase() !== 'artisan-shop')
-          .map((l) => {
-            if ((l.name || '').toLowerCase() === 'founders-batch') {
-              return { ...l, label: 'Artisan Drums' }; // or 'Our Drums'
-            }
-            return l;
-          });
-
-        setNavbarLinks(transformed);
-      } catch (err) {
-        console.error('❌ Navbar fetch error:', err);
-      }
-    };
-    fetchNavbarLinks();
   }, []);
 
   useEffect(() => {
@@ -157,6 +194,7 @@ const NavBar = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  /* --------- helpers --------- */
   const handleSignOut = async () => {
     try {
       await logout();
@@ -189,52 +227,36 @@ const NavBar = () => {
     </button>
   );
 
-  const renderSoundLegendTab = () => {
-    if (!user || !isSoundlegend || userProjects.length === 0) return null;
-    return (
-      <div className="nav-link dropdown">
-        <span className="dropdown-label">SoundLegend ▾</span>
-        <div className="dropdown-menu">
-          {userProjects?.map((proj) => (
-            <div
-              key={proj.projectId}
-              className="dropdown-item"
-              onClick={(e) => {
-                e.stopPropagation();
-                setIsMenuOpen(false);
-                navigate(`/projects/${proj.projectId}`);
-              }}
-            >
-              {proj.projectId}
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  };
+  /* --------- link filtering --------- */
+  const filteredLinks = navbarLinks.filter((link) => {
+    const access = link.access || [];
+    const name = (link.name || '').toLowerCase();
+    const label = (link.label || '').toLowerCase();
 
-  /** 🎁 Static link for Founder’s Toast */
-  const renderFoundersToastLink = () => (
-    <Link
-      to="/artisan-shop/founders-toast"
-      className="nav-link"
-      onClick={() => handleNavLinkClick('/artisan-shop/founders-toast')}
-    >
-      Founder’s Toast
-    </Link>
-  );
+    // Hide Contact / Endorsements / Account from the top navbar
+    const isContact = name.includes('contact') || label.includes('contact');
+    const isEndorsements =
+      name.includes('endorsement') || label.includes('endorsement');
+    const isAccount = name.includes('account') || label.includes('account');
+    if (isContact || isEndorsements || isAccount) return false;
 
-  /** 🎯 Legacy Vault logo link (auto-picks light/dark asset) */
+    if (link.enabled && access.includes('public')) return true;
+    if (user && isAdmin && access.includes('admin')) return true;
+    if (user && hasSLClaim && access.includes('soundlegend')) return true;
+
+    return false;
+  });
+
+  /* --------- special items --------- */
+
+  // Public Vault logo
   const renderLegacyVaultLogo = () => {
-    // Sticky mini (or sticky mobile dropdown) sits on a dark sheet → always white mark
     const isStickyContext = showStickyHeader;
-
-    // In main (non-sticky) navbar: black in light mode, white in dark mode
     const vaultLogoSrc = isStickyContext
       ? VAULT_LOGO_DARK
       : isDarkMode
-        ? VAULT_LOGO_DARK
-        : VAULT_LOGO_LIGHT;
+      ? VAULT_LOGO_DARK
+      : VAULT_LOGO_LIGHT;
 
     return (
       <Link
@@ -255,6 +277,56 @@ const NavBar = () => {
     );
   };
 
+  // Private Portal link (admins or SL claim)
+  const renderPortalLink = () => {
+    if (!user || !(isAdmin || hasSLClaim)) return null;
+    return (
+      <Link
+        to="/legacy"
+        className="nav-link"
+        onClick={() => handleNavLinkClick('/legacy')}
+        title="SoundLegend Portal"
+      >
+        Artist Portal
+      </Link>
+    );
+  };
+
+  const renderSoundLegendTab = () => {
+    if (!user || userProjects.length === 0) return null;
+    return (
+      <div className="nav-link dropdown">
+        <span className="dropdown-label">SoundLegend ▾</span>
+        <div className="dropdown-menu">
+          {userProjects.map((proj) => (
+            <div
+              key={proj.projectId}
+              className="dropdown-item"
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsMenuOpen(false);
+                navigate(`/projects/${proj.projectId}`);
+              }}
+            >
+              {proj.title}
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
+  const renderFoundersToastLink = () => (
+    <Link
+      to="/artisan-shop/founders-toast"
+      className="nav-link"
+      onClick={() => handleNavLinkClick('/artisan-shop/founders-toast')}
+    >
+      Founder’s Toast
+    </Link>
+  );
+
+  /* --------- render --------- */
   return (
     <>
       {/* ===== Sticky (mini) navbar ===== */}
@@ -269,9 +341,8 @@ const NavBar = () => {
               />
             </Link>
 
-            {/* Desktop sticky links */}
             {!isMobileView ? (
-              <div className={`navbar-links sticky-dropdown`} ref={menuRef}>
+              <div className="navbar-links sticky-dropdown" ref={menuRef}>
                 <Link
                   to="/"
                   className="nav-link"
@@ -294,6 +365,7 @@ const NavBar = () => {
                   ))}
 
                 {renderFoundersToastLink()}
+                {renderPortalLink()}
                 {renderSoundLegendTab()}
                 {renderLegacyVaultLogo()}
 
@@ -307,7 +379,6 @@ const NavBar = () => {
                   </Link>
                 )}
 
-                {/* Sign out (Account removed) */}
                 {user && (
                   <button className="nav-link-signout" onClick={handleSignOut}>
                     <FaSignOutAlt /> Sign Out
@@ -326,7 +397,6 @@ const NavBar = () => {
                 )}
               </div>
             ) : (
-              /* Mobile sticky: menu button */
               <button
                 className="navbar-sticky-menu"
                 onClick={() => setIsMenuOpen((prev) => !prev)}
@@ -373,6 +443,7 @@ const NavBar = () => {
                   ))}
 
                 {renderFoundersToastLink()}
+                {renderPortalLink()}
                 {renderSoundLegendTab()}
                 {renderLegacyVaultLogo()}
 
@@ -439,8 +510,8 @@ const NavBar = () => {
                     ? '/menu/close-button-dark-mode.png'
                     : '/menu/menu-button-dark-mode.png'
                   : isMenuOpen
-                    ? '/menu/close-button-light-mode.png'
-                    : '/menu/menu-button-light-mode.png'
+                  ? '/menu/close-button-light-mode.png'
+                  : '/menu/menu-button-light-mode.png'
               }
               alt="Menu Toggle"
               className={`menu-arrow-icon ${isMenuOpen ? 'open' : ''}`}
@@ -451,7 +522,9 @@ const NavBar = () => {
         {!showStickyHeader && (isMenuOpen || !isMobileView) && (
           <div className="navbar-links-wrapper">
             <div
-              className={`navbar-links ${isMobileView && isMenuOpen ? 'open' : ''}`}
+              className={`navbar-links ${
+                isMobileView && isMenuOpen ? 'open' : ''
+              }`}
               ref={menuRef}
             >
               <Link
@@ -476,6 +549,7 @@ const NavBar = () => {
                 ))}
 
               {renderFoundersToastLink()}
+              {renderPortalLink()}
               {renderSoundLegendTab()}
               {renderLegacyVaultLogo()}
 

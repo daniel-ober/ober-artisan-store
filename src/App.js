@@ -65,6 +65,7 @@ import EndorsementForm from './components/EndorsementForm.js';
 import ResinAccentGenerator from './components/ResinAccentGenerator.js';
 import DrumSelector from './components/DrumSelector.js';
 import HulaGiftPage from './components/HulaGiftPage.js';
+import SoundLegendPortal from './components/SoundLegendPortal/SoundLegendPortal.js';
 import { Toaster } from 'react-hot-toast';
 import './App.css';
 
@@ -205,6 +206,13 @@ function App() {
               )
             }
           />
+
+          {/* SoundLegend Portal */}
+          <Route
+            path="/legacy"
+            element={<PrivateRoute element={<SoundLegendPortal />} />}
+          />
+
           <Route
             path="/original-artisan-shop"
             element={
@@ -247,7 +255,10 @@ function App() {
             path="/projects/:projectId"
             element={<ProjectRoute element={ProjectDetailPage} />}
           />
-          <Route path="/soundlegends/signin" element={<SoundlegendSignin />} />
+          <Route
+            path="/soundlegends/signin"
+            element={user ? <Navigate to="/legacy" replace /> : <SoundlegendSignin />}
+          />
 
           {/* Individual product detail routes */}
           <Route

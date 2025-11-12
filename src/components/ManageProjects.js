@@ -41,6 +41,33 @@ const stepWeights = {
 const normalize = (str) =>
   str?.toLowerCase().replace(/[^a-z0-9 ]/gi, '').trim().replace(/\s+/g, '-') || '';
 
+/** Build a display identifier like "SL-004 · SoundLegend".
+ *  Looks across common field names and de-dupes/cleans output. */
+const getIdentifier = (p) => {
+  const serial =
+    p.serial ??
+    p.serialNumber ??
+    p.projectSerial ??
+    p.snareSerial ??
+    p.serialId ??
+    '';
+
+  const lineRaw =
+    p.series ??
+    p.line ??
+    p.artisanLine ??
+    p.productLine ??
+    p.seriesLine ??
+    '';
+
+  const line = typeof lineRaw === 'string' ? lineRaw : '';
+
+  if (serial && line) return `${serial} · ${line}`;
+  if (serial) return serial;
+  if (line) return line;
+  return '—';
+};
+
 const ManageProjects = () => {
   const [projects, setProjects] = useState([]);
   const [filteredProjects, setFilteredProjects] = useState([]);
@@ -78,6 +105,7 @@ const ManageProjects = () => {
   const projectValue = (p, key) => {
     switch (key) {
       case 'customerName':     return (p.customerName || '').toLowerCase();
+      case 'identifier':       return getIdentifier(p).toLowerCase();
       case 'startDate':        return getMillis(p.startDate);
       case 'targetCompletion': {
         // prefer explicit target; otherwise created + 35 days (fallback like UI)
@@ -305,6 +333,9 @@ const ManageProjects = () => {
             <th className="sortable" onClick={() => toggleSort('customerName')}>
               Customer Name <span className="sort-indicator">{renderSort('customerName')}</span>
             </th>
+            <th className="sortable" onClick={() => toggleSort('identifier')}>
+              Identifier <span className="sort-indicator">{renderSort('identifier')}</span>
+            </th>
             <th className="sortable" onClick={() => toggleSort('startDate')}>
               Created At <span className="sort-indicator">{renderSort('startDate')}</span>
             </th>
@@ -336,6 +367,7 @@ const ManageProjects = () => {
               className={`status-row ${normalize(determineStatus(project))}`}
             >
               <td>{project.customerName || 'N/A'}</td>
+              <td>{getIdentifier(project)}</td>
               <td>{formatDate(project.startDate)}</td>
               <td>{formatTargetCompletion(project.startDate)}</td>
               <td>{calculateTotalProjectTime(project)}</td>
