@@ -1,306 +1,182 @@
-import React, { useState, useEffect, useRef } from 'react';
-import './StepComponentTemplate.css';
+import React, { useMemo, useState } from 'react';
+
+/* Format a totalSeconds integer to "Hh MMm" (no seconds) */
+const fmtHM = (totalSeconds = 0) => {
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  return `${hours}h ${minutes.toString().padStart(2, '0')}m`;
+};
+
+/* Convert hours/minutes to seconds */
+const hmToSeconds = (h, m) => {
+  const hours = Number.isFinite(+h) ? Math.max(0, parseInt(h, 10) || 0) : 0;
+  const mins = Number.isFinite(+m) ? Math.max(0, parseInt(m, 10) || 0) : 0;
+  return hours * 3600 + mins * 60;
+};
 
 const StepComponentTemplate = ({
   stepKey,
   stepLabel,
-  stepData = {},
-  onToggleChecklist,
-  isLocked,
+  stepData = { checklist: [] },
+  onToggleChecklist,      // (index, completed, totalSeconds)
+  isLocked = false,
 }) => {
-  const [localChecklist, setLocalChecklist] = useState([]);
-  const [timers, setTimers] = useState([]);
-  const intervals = useRef({});
   const [editingIndex, setEditingIndex] = useState(null);
-  const [editHh, setEditHh] = useState('00');
-  const [editMm, setEditMm] = useState('00');
-  const [editSs, setEditSs] = useState('00');
+  const [hInput, setHInput] = useState('0');
+  const [mInput, setMInput] = useState('0');
 
-  useEffect(() => {
-    setLocalChecklist(stepData?.checklist || []);
-  }, [stepData?.checklist]);
+  const totalTime = useMemo(
+    () =>
+      (stepData.checklist || []).reduce(
+        (sum, item) => sum + (item.totalSeconds || 0),
+        0
+      ),
+    [stepData.checklist]
+  );
 
-  useEffect(() => {
-    setTimers((prevTimers) =>
-      localChecklist.map((item, i) => ({
-        running: prevTimers[i]?.running || false,
-        seconds: extractValidSeconds(item.totalSeconds),
-      }))
-    );
-  }, [JSON.stringify(localChecklist)]);
-
-  const toggleTimer = (index) => {
-    const isRunning = timers[index]?.running;
-
-    if (isRunning) {
-      clearInterval(intervals.current[index]);
-      delete intervals.current[index];
-
-      setTimers((prevTimers) => {
-        const updated = [...prevTimers];
-        updated[index] = {
-          ...updated[index],
-          running: false,
-        };
-        return updated;
-      });
-
-      const finalSeconds =
-        typeof timers[index]?.seconds === 'number'
-          ? timers[index].seconds
-          : extractValidSeconds(localChecklist[index]?.totalSeconds);
-
-      onToggleChecklist(index, localChecklist[index]?.completed || false, finalSeconds);
-    } else {
-      setTimers((prevTimers) => {
-        const updated = [...prevTimers];
-        updated[index] = {
-          ...updated[index],
-          running: true,
-        };
-        return updated;
-      });
-
-      intervals.current[index] = setInterval(() => {
-        setTimers((prevTimers) => {
-          const updated = [...prevTimers];
-          if (updated[index]?.running) {
-            updated[index] = {
-              ...updated[index],
-              seconds: (updated[index].seconds || 0) + 1,
-            };
-          }
-          return updated;
-        });
-      }, 1000);
-    }
+  const beginEdit = (idx, currentSeconds = 0) => {
+    const h = Math.floor(currentSeconds / 3600);
+    const m = Math.floor((currentSeconds % 3600) / 60);
+    setHInput(String(h));
+    setMInput(String(m));
+    setEditingIndex(idx);
   };
 
-  const handleCheckboxToggle = (index) => {
-    if (timers[index]) {
-      timers[index].running = false;
-      clearInterval(intervals.current[index]);
-      delete intervals.current[index];
-    }
-
-    const raw =
-      timers[index]?.seconds ?? localChecklist[index]?.totalSeconds ?? 0;
-
-    const totalSeconds =
-      typeof raw === 'number' ? raw : extractValidSeconds(raw);
-
-    onToggleChecklist(index, !localChecklist[index]?.completed, totalSeconds);
-  };
-
-  const handleClear = (index) => {
-    if (timers[index]) {
-      timers[index].running = false;
-      clearInterval(intervals.current[index]);
-      delete intervals.current[index];
-    }
-
-    const updatedTimers = [...timers];
-    updatedTimers[index].seconds = 0;
-    setTimers(updatedTimers);
-
-    onToggleChecklist(index, localChecklist[index]?.completed || false, 0);
-  };
-
-  const extractValidSeconds = (val) => {
-    if (typeof val === 'number') return val;
-    if (val?.seconds && typeof val.seconds === 'number') return val.seconds;
-    if (typeof val === 'object') {
-      const nested = Object.values(val).find((v) => typeof v === 'number');
-      return typeof nested === 'number' ? nested : 0;
-    }
-    return 0;
-  };
-
-  const formatTime = (seconds) => {
-    const safeSeconds = isNaN(seconds) ? 0 : seconds;
-    const hrs = Math.floor(safeSeconds / 3600);
-    const mins = Math.floor((safeSeconds % 3600) / 60);
-    const secs = safeSeconds % 60;
-    return `${hrs}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-  };
-
-  const totalStepTime = localChecklist.reduce((acc, item, idx) => {
-    const t =
-      typeof timers[idx]?.seconds === 'number'
-        ? timers[idx].seconds
-        : extractValidSeconds(item?.totalSeconds);
-    return acc + t;
-  }, 0);
-
-  const handleManualTimeSave = (index) => {
-    const hh = parseInt(editHh, 10) || 0;
-    const mm = Math.min(parseInt(editMm, 10) || 0, 59);
-    const ss = Math.min(parseInt(editSs, 10) || 0, 59);
-    const totalSeconds = hh * 3600 + mm * 60 + ss;
-
-    if (timers[index]) {
-      timers[index].running = false;
-      clearInterval(intervals.current[index]);
-      delete intervals.current[index];
-    }
-
-    const updatedTimers = [...timers];
-    updatedTimers[index].seconds = totalSeconds;
-    setTimers(updatedTimers);
-
-    onToggleChecklist(index, localChecklist[index]?.completed || false, totalSeconds);
+  const saveEdit = (idx, checked) => {
+    const secs = hmToSeconds(hInput, mInput);
+    onToggleChecklist(idx, checked, secs);
     setEditingIndex(null);
   };
-
-  const handleCancelEdit = () => {
-    setEditingIndex(null);
-  };
-
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (editingIndex !== null) {
-        const isInsideTimeInputs =
-          e.target.closest('.time-input-group') || e.target.closest('.time-input-actions');
-        if (!isInsideTimeInputs) {
-          alert('Please save or cancel your time edit first.');
-          e.stopPropagation();
-        }
-      }
-    };
-
-    document.addEventListener('click', handleClickOutside, true);
-    return () => document.removeEventListener('click', handleClickOutside, true);
-  }, [editingIndex]);
 
   return (
-    <div className="step-container">
-      <h3 className="step-title">{stepLabel}</h3>
-      <p className="step-total-time">
-        <strong>Total Time:</strong> {formatTime(totalStepTime)}
-      </p>
+    <div>
+      <h2 style={{ fontSize: '1.6rem', marginBottom: '.75rem' }}>{stepLabel}</h2>
 
-      <div className="step-checklist">
-        <table className="step-table">
-          <thead>
-            <tr>
-              <th></th>
-              <th></th>
-              <th>Task</th>
-              <th>Total Time</th>
-            </tr>
-          </thead>
-          <tbody>
-            {localChecklist.map((item, index) => (
-              <tr key={index}>
-                <td>
-                  {!item.completed && (
+      {/* total time with units */}
+      <div style={{ marginBottom: '1rem', fontWeight: 600 }}>
+        Total Time: {fmtHM(totalTime)}
+      </div>
+
+      <div style={{ borderTop: '1px solid #eee' }}>
+        {(stepData.checklist || []).map((item, idx) => {
+          const checked = !!item.completed;
+          const isEditing = editingIndex === idx;
+
+          return (
+            <div
+              key={idx}
+              style={{
+                display: 'grid',
+                gridTemplateColumns: '28px 1fr 220px',
+                gap: '12px',
+                alignItems: 'center',
+                padding: '12px 0',
+                borderBottom: '1px solid #f0f0f0',
+                opacity: isLocked ? 0.6 : 1,
+              }}
+            >
+              {/* checkbox */}
+              <input
+                type="checkbox"
+                checked={checked}
+                disabled={isLocked}
+                onChange={(e) =>
+                  onToggleChecklist(idx, e.target.checked, item.totalSeconds || 0)
+                }
+              />
+
+              {/* task label */}
+              <div style={{ color: '#111' }}>{item.task}</div>
+
+              {/* time cell */}
+              <div style={{ justifySelf: 'end' }}>
+                {!isEditing ? (
+                  <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+                    {/* reading with "h m" */}
+                    <div style={{ minWidth: 90, textAlign: 'right' }}>
+                      {fmtHM(item.totalSeconds || 0)}
+                    </div>
                     <button
-                      onClick={() => toggleTimer(index)}
-                      className={`timer-toggle ${timers[index]?.running ? 'stop' : 'start'}`}
-                    >
-                      {timers[index]?.running ? 'Stop' : 'Start'}
-                    </button>
-                  )}
-                </td>
-                <td>
-                  <input
-                    type="checkbox"
-                    disabled={isLocked}
-                    checked={item.completed}
-                    onChange={() => handleCheckboxToggle(index)}
-                    className={isLocked ? 'locked-task' : ''}
-                  />
-                </td>
-                <td>{item.task}</td>
-                <td>
-                  {editingIndex === index ? (
-                    <>
-                      <div className="time-input-group">
-                        <input
-                          type="text"
-                          maxLength={2}
-                          className="manual-time-input"
-                          value={editHh}
-                          onChange={(e) => {
-                            const val = e.target.value.replace(/\D/g, '').slice(0, 2);
-                            setEditHh(val);
-                          }}
-                        />
-                        :
-                        <input
-                          type="text"
-                          maxLength={2}
-                          className="manual-time-input"
-                          value={editMm}
-                          onChange={(e) => {
-                            let val = e.target.value.replace(/\D/g, '').slice(0, 2);
-                            if (parseInt(val, 10) > 59) val = '59';
-                            setEditMm(val);
-                          }}
-                        />
-                        :
-                        <input
-                          type="text"
-                          maxLength={2}
-                          className="manual-time-input"
-                          value={editSs}
-                          onChange={(e) => {
-                            let val = e.target.value.replace(/\D/g, '').slice(0, 2);
-                            if (parseInt(val, 10) > 59) val = '59';
-                            setEditSs(val);
-                          }}
-                        />
-                      </div>
-                      <div className="time-input-actions">
-                        <button onClick={() => handleManualTimeSave(index)}>Save</button>
-                        <button className="cancel-btn" onClick={handleCancelEdit}>
-                          Cancel
-                        </button>
-                      </div>
-                    </>
-                  ) : (
-                    <span
-                      className="time-display"
-                      onClick={() => {
-                        const raw =
-                          timers[index]?.seconds ??
-                          localChecklist[index]?.totalSeconds ??
-                          0;
-                        const total =
-                          typeof raw === 'number' ? raw : extractValidSeconds(raw);
-                        const hh = Math.floor(total / 3600)
-                          .toString()
-                          .padStart(2, '0');
-                        const mm = Math.floor((total % 3600) / 60)
-                          .toString()
-                          .padStart(2, '0');
-                        const ss = (total % 60).toString().padStart(2, '0');
-                        setEditHh(hh);
-                        setEditMm(mm);
-                        setEditSs(ss);
-                        setEditingIndex(index);
+                      disabled={isLocked}
+                      onClick={() => beginEdit(idx, item.totalSeconds || 0)}
+                      style={{
+                        border: '1px solid #d1d5db',
+                        background: '#fff',
+                        padding: '4px 8px',
+                        borderRadius: 6,
+                        cursor: 'pointer',
                       }}
                     >
-                      {formatTime(
-                        typeof timers[index]?.seconds === 'number'
-                          ? timers[index].seconds
-                          : extractValidSeconds(localChecklist[index]?.totalSeconds)
-                      )}
-                    </span>
-                  )}
-                  <div>
+                      Edit
+                    </button>
                     <button
-                      onClick={() => handleClear(index)}
-                      className="clear-time-btn"
+                      disabled={isLocked || (item.totalSeconds || 0) === 0}
+                      onClick={() => onToggleChecklist(idx, checked, 0)}
+                      style={{
+                        border: 'none',
+                        background: 'transparent',
+                        color: '#999',
+                        textDecoration: 'underline',
+                        cursor: 'pointer',
+                      }}
                     >
                       Clear
                     </button>
                   </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                ) : (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <input
+                      type="number"
+                      min="0"
+                      value={hInput}
+                      onChange={(e) => setHInput(e.target.value)}
+                      style={{ width: 56, textAlign: 'right' }}
+                    />
+                    <span>h</span>
+                    <input
+                      type="number"
+                      min="0"
+                      max="59"
+                      value={mInput}
+                      onChange={(e) => {
+                        const v = e.target.value;
+                        if (v === '' || (/^\d+$/.test(v) && Number(v) <= 59)) setMInput(v);
+                      }}
+                      style={{ width: 56, textAlign: 'right' }}
+                    />
+                    <span>m</span>
+                    <button
+                      onClick={() => saveEdit(idx, checked)}
+                      style={{
+                        background: '#22c55e',
+                        color: '#fff',
+                        border: '1px solid #16a34a',
+                        padding: '4px 10px',
+                        borderRadius: 6,
+                        cursor: 'pointer',
+                        fontWeight: 600,
+                      }}
+                    >
+                      Save
+                    </button>
+                    <button
+                      onClick={() => setEditingIndex(null)}
+                      style={{
+                        border: '1px solid #d1d5db',
+                        background: '#fff',
+                        padding: '4px 10px',
+                        borderRadius: 6,
+                        cursor: 'pointer',
+                      }}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

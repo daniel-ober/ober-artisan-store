@@ -1,4 +1,3 @@
-// src/context/AuthContext.js
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { auth, setAnalyticsUserProperties } from '../firebaseConfig';
 import { signOut, onAuthStateChanged } from 'firebase/auth';
@@ -9,20 +8,33 @@ export const useAuth = () => useContext(AuthContext);
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isSoundlegend, setIsSoundlegend] = useState(false);
   const [authIsReady, setAuthIsReady] = useState(false);
 
-  const checkAdminClaim = async (currentUser) => {
+  const setAnalyticsRole = (role) => {
+    try {
+      setAnalyticsUserProperties(role);
+    } catch {
+      /* noop */
+    }
+  };
+
+  const refreshClaims = async (currentUser) => {
     try {
       const idTokenResult = await currentUser.getIdTokenResult(true);
-      const claims = idTokenResult.claims;
-      const adminStatus = !!claims.admin || !!claims.isAdmin; // ✅ fallback to isAdmin if admin is missing
-      setIsAdmin(adminStatus);
+      const claims = idTokenResult.claims || {};
+      const adminStatus = !!(claims.admin || claims.isAdmin);
+      const slStatus = !!(claims.soundlegend || claims.isSoundlegend);
 
-      setAnalyticsUserProperties(adminStatus ? 'admin' : 'guest');
+      setIsAdmin(adminStatus);
+      setIsSoundlegend(slStatus);
+
+      setAnalyticsRole(adminStatus ? 'admin' : slStatus ? 'soundlegend' : 'user');
     } catch (error) {
-      console.error('❌ Error checking admin claim:', error);
+      console.error('❌ Error checking claims:', error);
       setIsAdmin(false);
-      setAnalyticsUserProperties('guest');
+      setIsSoundlegend(false);
+      setAnalyticsRole('guest');
     }
   };
 
@@ -30,13 +42,13 @@ export const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
-        await checkAdminClaim(currentUser);
+        await refreshClaims(currentUser);
       } else {
         setUser(null);
         setIsAdmin(false);
-        setAnalyticsUserProperties('guest');
+        setIsSoundlegend(false);
+        setAnalyticsRole('guest');
       }
-
       setAuthIsReady(true);
     });
 
@@ -48,7 +60,8 @@ export const AuthProvider = ({ children }) => {
       await signOut(auth);
       setUser(null);
       setIsAdmin(false);
-      setAnalyticsUserProperties('guest');
+      setIsSoundlegend(false);
+      setAnalyticsRole('guest');
     } catch (error) {
       console.error('❌ Error logging out:', error.message);
     }
@@ -59,8 +72,9 @@ export const AuthProvider = ({ children }) => {
       value={{
         user,
         isAdmin,
-        logout,
+        isSoundlegend,
         authIsReady,
+        logout,
       }}
     >
       {children}

@@ -1,3 +1,4 @@
+// src/components/AppInitializer.js
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCart } from '../redux/slices/cartSlice';

@@ -1,42 +1,73 @@
 /* src/components/SoundLegendPortal/ScopeOfWork.css */
-
 .scope-section {
-    padding: 1.5rem;
-    background-color: #1a1a1a;
-    color: #f0f0f0;
-    border-radius: 12px;
-    margin-bottom: 2rem;
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
-  }
-  
-  .scope-section h2 {
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-  }
-  
-  .scope-section p {
-    font-size: 1rem;
-    margin: 0.4rem 0;
-    line-height: 1.5;
-  }
-  
-  .scope-section strong {
-    color: #ffffff;
-    font-weight: 600;
-  }
-  
-  .scope-section .edit-button {
-    margin-top: 1rem;
-    background-color: #0078ff;
-    color: #fff;
-    border: none;
-    padding: 8px 14px;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .scope-section .edit-button:hover {
-    background-color: #005ec4;
-  }
+  padding: 1.5rem;
+  background-color: #111418;      /* slightly warmer dark */
+  color: #eaecef;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: 0 0 14px rgba(0, 0, 0, 0.45);
+}
+
+.sow-header {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+
+.id-chip {
+  background: #0f172a;
+  color: #c7d2fe;
+  border-color: #334155;
+}
+.line-chip {
+  background: #1f2937;
+  color: #e5e7eb;
+  border-color: #374151;
+}
+.size-chip {
+  background: #122233;
+  color: #cce0ff;
+  border-color: #1e3a8a;
+}
+
+.scope-section h2 {
+  font-size: 1.8rem;
+  margin: 0.6rem 0 1rem;
+  color: #ffffff;
+}
+
+.scope-section p {
+  font-size: 1rem;
+  margin: 0.35rem 0;
+  line-height: 1.55;
+}
+
+.scope-section strong {
+  color: #ffffff;
+  font-weight: 650;
+}
+
+.scope-section .edit-button {
+  margin-top: 1rem;
+  background-color: #0078ff;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.scope-section .edit-button:hover { background-color: #005ec4; }

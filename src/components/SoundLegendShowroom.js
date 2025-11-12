@@ -45,6 +45,72 @@ function getPublishedSnapshot(d) {
   return null;
 }
 
+/* =============== robust public resolver (final) =============== */
+function resolvePublicFields(raw) {
+  const D = raw && typeof raw === 'object' ? raw : {};
+  const asObj = (x) => (x && typeof x === 'object' ? x : {});
+
+  // Where prefs might live (support multiple shapes)
+  const pub = asObj(
+    D.public ||
+    D.publicPrefs ||
+    D.vaultPrefs ||
+    (D.publishedSnapshot && D.publishedSnapshot.public) ||
+    (D.soundprism && D.soundprism.publishedSnapshot && D.soundprism.publishedSnapshot.public)
+  );
+
+  // ---- STORY FLAG ----
+  const storyEnabled =
+    pub.storyEnabled === true ||
+    pub.showStory === true ||
+    pub.showArtistStory === true ||
+    pub.storyVisible === true ||
+    (D.vaultPrefs && D.vaultPrefs.storyEnabled === true);
+
+  // ---- NAME FLAG (respect explicit false) ----
+  // Detect whether *any* name flag is explicitly present
+  const nameFlagValues = [
+    pub.nameEnabled,
+    pub.showName,
+    pub.showArtistName,
+    pub.showNameInVault,
+    D.vaultPrefs && D.vaultPrefs.nameEnabled,
+  ].filter(v => v !== undefined); // keep explicit booleans
+
+  const hasExplicitNameFlag = nameFlagValues.length > 0;
+  const anyNameTrue = nameFlagValues.some(v => v === true);
+
+  // If an explicit name flag exists, use it. Otherwise, inherit from storyEnabled.
+  const nameEnabled = hasExplicitNameFlag ? anyNameTrue : storyEnabled === true;
+
+  // ---- CANDIDATES ----
+  const nameCandidate =
+    pub.displayName ??
+    D.artistName ??
+    D.displayName ??
+    D.name ??
+    D.links?.name ??
+    D.specs?.artistName ??
+    '';
+
+  const storyCandidate =
+    (typeof pub.storyHtml === 'string' ? pub.storyHtml : '') ||
+    (typeof pub.story === 'string' ? pub.story : '') ||
+    (typeof D.storyHtml === 'string' ? D.storyHtml : '') ||
+    (typeof D.story === 'string' ? D.story : '') ||
+    (typeof D.specs?.story === 'string' ? D.specs.story : '') ||
+    (typeof D.artistStory === 'string' ? D.artistStory : '') ||
+    '';
+
+  const name = nameEnabled
+    ? (String(nameCandidate).trim() || 'Anonymous Legend')
+    : 'Anonymous Legend';
+
+  const storyHtml = storyEnabled ? String(storyCandidate).trim() : '';
+
+  return { name, storyHtml, allowName: nameEnabled, allowStory: storyEnabled };
+}
+
 /* ===== scroll container helpers ===== */
 function isScrollable(el) {
   if (!el) return false;
@@ -264,7 +330,7 @@ const SoundLegendShowroom = () => {
   const viewbarRef = useRef(null);
   const headerElRef = useRef(null);
   const [active, setActive] = useState('artist');
-  const [isLocked, setIsLocked] = useState(false);
+  const [isLocked, setIsLocked] = useState(false); // <-- fixed typo
   const lockTimerRef = useRef(null);
   const [scrollRoot, setScrollRoot] = useState(window);
 
@@ -332,19 +398,15 @@ const SoundLegendShowroom = () => {
     if (!chosen) chosen = candidates[0] || null;
     headerElRef.current = chosen;
 
-    // Sit right *under* the navbar (add a little safety so we don’t clip)
     const rect = chosen ? chosen.getBoundingClientRect() : { bottom: 72, height: 72 };
-    const safety = 10; // extra pixels to avoid overlap
+    const safety = 10;
     const top = Math.max(56, Math.round(rect.bottom) + safety);
 
-    // Actual pillbar height if present
     const pillsH = viewbarRef.current
       ? Math.round(viewbarRef.current.getBoundingClientRect().height || 48)
       : 48;
 
-    // Extra cushion changes on small screens
     const mobileCushion = window.matchMedia('(max-width: 600px)').matches ? 16 : 12;
-
     const fullOffset = top + mobileCushion + pillsH;
 
     document.documentElement.style.setProperty('--sl-navbar', `${top}px`);
@@ -365,7 +427,6 @@ const SoundLegendShowroom = () => {
       : null;
     if (ro && headerElRef.current) ro.observe(headerElRef.current);
 
-    // Watch for DOM changes (e.g., mobile menu expanding)
     const mo = new MutationObserver(() => measureStickyTop());
     mo.observe(document.body, { attributes: true, childList: true, subtree: true });
 
@@ -378,10 +439,9 @@ const SoundLegendShowroom = () => {
   }, [measureStickyTop]);
 
   // ---------- DERIVED ----------
-  const name = drumData?.name ?? '';
+  const { name, storyHtml } = resolvePublicFields(drumData || {});
   const heroImage = drumData?.heroImage ?? null;
   const gallery = Array.isArray(drumData?.gallery) ? drumData.gallery : [];
-  const storyHtml = drumData?.story ?? drumData?.specs?.story ?? '';
   const specs = drumData?.specs || {};
 
   const publishedSnapshot = getPublishedSnapshot(drumData);
@@ -683,16 +743,16 @@ const SoundLegendShowroom = () => {
         </p>
       </section>
 
-{/* Back to Legacy Vault */}
-<div className="showroom-cta showroom-cta--back fade-in-section is-visible">
-  <Link
-    to="/artisan-shop/soundlegend/vault"
-    className="cta-back"
-    aria-label="Return to the SoundLegend Legacy Vault"
-  >
-    Back to Legacy Vault
-  </Link>
-</div>
+      {/* Back to Legacy Vault */}
+      <div className="showroom-cta showroom-cta--back fade-in-section is-visible">
+        <Link
+          to="/artisan-shop/soundlegend/vault"
+          className="cta-back"
+          aria-label="Return to the SoundLegend Legacy Vault"
+        >
+          Back to Legacy Vault
+        </Link>
+      </div>
     </div>
   );
 };

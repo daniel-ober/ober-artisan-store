@@ -16,6 +16,7 @@ const PRINTIFY_API_KEY = defineSecret('PRINTIFY_API_KEY');
 const PRINTIFY_SHOP_ID = defineSecret('PRINTIFY_SHOP_ID');
 const PRINTIFY_WEBHOOK_SECRET = defineSecret('PRINTIFY_WEBHOOK_SECRET');
 const RECAPTCHA_SECRET_KEY = defineSecret('RECAPTCHA_SECRET_KEY');
+const { onDocumentWritten } = require('firebase-functions/v2/firestore');
 
 admin.initializeApp();
 const db = admin.firestore();
@@ -268,6 +269,75 @@ const mapRatesToStripeOptions = (rates, currency = 'usd') => {
       },
     }));
 };
+
+// ---------- SoundLegend: mirror project.publicPrefs -> soundlegend_showroom/{serial}
+function getSerialFromProject(p = {}) {
+  return (
+    p.lineSerial ||
+    p.globalSerial ||
+    p.serial ||
+    p.soundlegendSerial ||
+    null
+  );
+}
+
+function computePublicSnapshot(project = {}) {
+  const prefs = project.publicPrefs || {};
+  const showName  = !!prefs.showName;
+  const showStory = !!prefs.showStory;
+
+  const baseName =
+    (prefs.displayName && String(prefs.displayName).trim()) ||
+    project?.customer?.name ||
+    null;
+
+  const name = showName ? (baseName || 'Anonymous Legend') : 'Anonymous Legend';
+  const storyHtml = showStory
+    ? (typeof prefs.storyHtml === 'string' && prefs.storyHtml.trim()) || '<p>Legacy Unknown.</p>'
+    : '<p>Legacy is set to Private.</p>';
+
+  return {
+    publicPrefs: {
+      showName,
+      showStory,
+      displayName: prefs.displayName || null,
+      storyHtml:   prefs.storyHtml   || null,
+      lastUpdated: admin.firestore.FieldValue.serverTimestamp(),
+    },
+    publicDisplay: {
+      name,
+      storyHtml,
+    },
+    meta: {
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+    },
+  };
+}
+
+exports.mirrorPublicPrefsToShowroom = onDocumentWritten(
+  { document: 'projects/{projectId}', region: 'us-central1' },
+  async (event) => {
+    const before = event.data?.before?.data();
+    const after  = event.data?.after?.data();
+    if (!after) return;
+
+    // Only continue if publicPrefs changed (or didn't exist before)
+    const changed =
+      !before ||
+      JSON.stringify(before.publicPrefs || {}) !== JSON.stringify(after.publicPrefs || {});
+    if (!changed) return;
+
+    const serial = getSerialFromProject(after);
+    if (!serial) {
+      console.warn('mirrorPublicPrefsToShowroom: missing serial on project', event.params.projectId);
+      return;
+    }
+
+    const payload = computePublicSnapshot(after);
+    // Create if missing, update if exists (admin SDK bypasses rules)
+    await db.collection('soundlegend_showroom').doc(serial).set(payload, { merge: true });
+  }
+);
 
 // ───────────────────────────────────────────────────────────────────────────────
 // NEW: Admin — list Printify products for picker
@@ -1540,6 +1610,132 @@ const handlePrintifyProductPublished = async (productId) => {
   }
 };
 
+// === Add somewhere near your other onCall exports (e.g., under setAdminClaim) ===
+
+exports.setSoundlegendClaim = onCall({ region: 'us-central1' }, async (request) => {
+  const ctx = request.auth;
+  const isAdmin = ctx?.token?.admin === true || ctx?.token?.isAdmin === true;
+  const callerEmail = ctx?.token?.email || '';
+  const ALLOW = new Set(['dan@oberartisandrums.com']);
+
+  if (!(isAdmin || ALLOW.has(callerEmail))) {
+    throw new functions.https.HttpsError('permission-denied', 'Admin privileges required.');
+  }
+
+  const { uid, enable = true } = request.data || {};
+  if (!uid) throw new functions.https.HttpsError('invalid-argument', 'uid is required');
+
+  const user = await admin.auth().getUser(uid);
+  const claims = user.customClaims || {};
+
+  const merged = {
+    ...claims,
+    soundlegend: !!enable,
+    isSoundlegend: !!enable,
+  };
+
+  await admin.auth().setCustomUserClaims(uid, merged);
+  await admin.auth().revokeRefreshTokens(uid);
+
+  await db.collection('users').doc(uid).set(
+    {
+      access: { soundlegend: !!enable },
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+    },
+    { merge: true }
+  );
+
+  return { ok: true, uid, soundlegend: !!enable };
+});
+
+exports.adminCreateUser = onCall(
+  { region: 'us-central1' },
+  async (request) => {
+    const ctx = request.auth;
+    const isAdmin =
+      ctx?.token?.admin === true || ctx?.token?.isAdmin === true;
+    if (!isAdmin) {
+      throw new functions.https.HttpsError(
+        'permission-denied',
+        'Admin privileges required.'
+      );
+    }
+
+    const {
+      email,
+      password,
+      firstName = '',
+      lastName = '',
+      phone = '',
+      isSoundlegend = false,
+      status = 'active',
+    } = request.data || {};
+
+    if (!email || !password) {
+      throw new functions.https.HttpsError(
+        'invalid-argument',
+        'email and password are required'
+      );
+    }
+
+    try {
+      // 1) Create in Firebase Auth
+      const userRecord = await admin.auth().createUser({
+        email,
+        password,
+        displayName: `${firstName} ${lastName}`.trim() || undefined,
+        phoneNumber: phone && /^\+/.test(phone) ? phone : undefined, // keep E.164 only
+        disabled: status !== 'active',
+      });
+
+      // 2) Return UID so the client can write Firestore doc (your UI already does this)
+      return { uid: userRecord.uid };
+    } catch (e) {
+      // Surface common Auth errors
+      const code = e?.code || '';
+      if (code === 'auth/email-already-exists') {
+        throw new functions.https.HttpsError(
+          'already-exists',
+          'auth/email-already-exists'
+        );
+      }
+      throw new functions.https.HttpsError('internal', e?.message || String(e));
+    }
+  }
+);
+
+exports.setAdminClaim = onCall(
+  { region: 'us-central1' },
+  async (request) => {
+    const ctx = request.auth;
+    const isAdmin =
+      ctx?.token?.admin === true || ctx?.token?.isAdmin === true;
+    if (!isAdmin) {
+      throw new functions.https.HttpsError(
+        'permission-denied',
+        'Admin privileges required.'
+      );
+    }
+
+    const { uid, admin: makeAdmin = true } = request.data || {};
+    if (!uid) {
+      throw new functions.https.HttpsError(
+        'invalid-argument',
+        'uid is required'
+      );
+    }
+
+    try {
+      await admin.auth().setCustomUserClaims(uid, { admin: !!makeAdmin });
+      // Optional: force token refresh next time they sign in
+      await admin.auth().revokeRefreshTokens(uid);
+      return { ok: true };
+    } catch (e) {
+      throw new functions.https.HttpsError('internal', e?.message || String(e));
+    }
+  }
+);
+
 // ───────────────────────────────────────────────────────────────────────────────
 // Scheduled refresh (unchanged)
 exports.refreshPrintifyStock = onSchedule(
@@ -2093,14 +2289,6 @@ exports.syncMerchVariantPrice = onCall(
     };
   }
 );
-
-exports.adminCreateUser = onCall({ region: 'us-central1' }, async (request) => {
-  // Keep your existing handler body; if it referenced (data, context) before, use:
-  const data = request.data;
-  const context = request;
-
-  // ... unchanged ...
-});
 
 // Safe-load generateDrumMockup so a missing/broken file won't crash startup
 let generateDrumMockup;

@@ -134,5 +134,11 @@
   .slp-tab{font-size:.92rem;padding:7px 10px}
 }
 
+/* Account Settings sectionized editing */
+.as-section { margin-top: 16px; padding-top: 8px; border-top: 1px solid var(--border-soft); }
+.as-header { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:8px; }
+.as-actions { display:flex; gap:8px; }
+.vp-input.has-error { border-color: rgba(255, 154, 154, .8); }
+
 /* Reduced motion */
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}

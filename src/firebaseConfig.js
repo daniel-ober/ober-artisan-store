@@ -1,17 +1,20 @@
 // src/firebaseConfig.js
-import { initializeApp } from 'firebase/app';
+import { initializeApp, getApps, getApp } from 'firebase/app';
 import {
   getAnalytics, logEvent, isSupported, setUserProperties,
 } from 'firebase/analytics';
-import { getAuth, signOut as firebaseSignOut } from 'firebase/auth';
+import {
+  getAuth,
+  setPersistence,
+  browserLocalPersistence,
+  signOut as firebaseSignOut,
+} from 'firebase/auth';
 import {
   getFirestore, doc, getDoc, setDoc, updateDoc,
   arrayUnion, collection, addDoc, deleteDoc, Timestamp,
 } from 'firebase/firestore';
 import { getStorage, ref, listAll, getDownloadURL } from 'firebase/storage';
 import { getFunctions } from 'firebase/functions';
-
-// 👇 App Check (Enterprise)
 import { initializeAppCheck, ReCaptchaEnterpriseProvider } from 'firebase/app-check';
 
 const firebaseConfig = {
@@ -24,28 +27,16 @@ const firebaseConfig = {
   measurementId:     process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 };
 
-// Initialize core app
-const app = initializeApp(firebaseConfig);
+// ✅ Singleton app
+export const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
 
-/**
- * APP CHECK (reCAPTCHA Enterprise)
- * --------------------------------
- * - Works in prod and localhost.
- * - In dev, we enable a debug token so Firestore/WebChannel calls don’t get blocked.
- * - Set REACT_APP_RECAPTCHA_ENTERPRISE_SITE_KEY in your .env[.local]
- * - Optional: set REACT_APP_APPCHECK_DEBUG_TOKEN to a fixed token string, otherwise we auto-generate one.
- */
+/* ------------------------------- App Check -------------------------------- */
 const siteKey = process.env.REACT_APP_RECAPTCHA_ENTERPRISE_SITE_KEY;
-
-// Enable a debug token in non-production so you can register it in Firebase Console → App Check → Debug tokens
 if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
-  // If you already created a token in Console, put it in .env as REACT_APP_APPCHECK_DEBUG_TOKEN
-  // Otherwise, 'true' makes the SDK print a new token once, which you then paste into Console.
   // eslint-disable-next-line no-undef
   self.FIREBASE_APPCHECK_DEBUG_TOKEN =
     process.env.REACT_APP_APPCHECK_DEBUG_TOKEN || true;
 }
-
 if (typeof window !== 'undefined' && siteKey) {
   initializeAppCheck(app, {
     provider: new ReCaptchaEnterpriseProvider(siteKey),
@@ -53,105 +44,88 @@ if (typeof window !== 'undefined' && siteKey) {
   });
 }
 
-// Analytics (only in production, when supported)
+/* -------------------------------- Analytics ------------------------------- */
 let analytics = null;
 if (typeof window !== 'undefined'
   && process.env.NODE_ENV === 'production'
   && firebaseConfig.measurementId) {
-  isSupported().then((supported) => {
-    if (supported) {
+  isSupported().then((ok) => {
+    if (ok) {
       analytics = getAnalytics(app);
       logEvent(analytics, 'page_view');
     }
   });
 }
-
 export const setAnalyticsUserProperties = (userType) => {
   if (analytics && typeof userType === 'string') {
     setUserProperties(analytics, { user_type: userType });
   }
 };
 
-// 🔧 Core services
-export const db = getFirestore(app);
+/* ------------------------------- Core SDKs -------------------------------- */
 export const auth = getAuth(app);
-export const storage = getStorage(app);
-export const functions = getFunctions(app, 'us-central1');
-export const signOut = firebaseSignOut;
-export { app, analytics, logEvent };
+setPersistence(auth, browserLocalPersistence);
 
-// ========== UTILITY METHODS ==========
+export const db = getFirestore(app);
+export const storage = getStorage(app);
+
+/**
+ * Cloud Functions
+ * ---------------
+ * MUST match your deployed region or the callable won’t be found.
+ * Set REACT_APP_FUNCTIONS_REGION in .env (defaults to 'us-central1').
+ */
+const FUNCTIONS_REGION = process.env.REACT_APP_FUNCTIONS_REGION || 'us-central1';
+export const functions = getFunctions(app, FUNCTIONS_REGION);
+
+/* ------------------------------- Debug logs ------------------------------- */
+if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
+  console.log('[firebase] projectId(app):', app.options?.projectId);
+  console.log('[firebase] projectId(auth):', auth.app?.options?.projectId);
+  console.log('[firebase] projectId(db):', db.app?.options?.projectId);
+  console.log('[firebase] Functions region:', FUNCTIONS_REGION);
+}
+
+export const signOut = firebaseSignOut;
+export { analytics, logEvent };
+
+/* ------------------------------- Utilities -------------------------------- */
 export const fetchGalleryImages = async () => {
-  try {
-    const galleryRef = ref(storage, 'Gallery/');
-    const galleryList = await listAll(galleryRef);
-    return Promise.all(galleryList.items.map((item) => getDownloadURL(item)));
-  } catch (error) {
-    console.error('❌ Error fetching gallery images:', error);
-    throw error;
-  }
+  const galleryRef = ref(storage, 'Gallery/');
+  const galleryList = await listAll(galleryRef);
+  return Promise.all(galleryList.items.map((item) => getDownloadURL(item)));
 };
 
 export const getUserDoc = async (userId) => {
-  try {
-    const userDocRef = doc(db, 'users', userId);
-    const userDocSnap = await getDoc(userDocRef);
-    return userDocSnap.exists() ? userDocSnap.data() : null;
-  } catch (error) {
-    console.error('❌ Error getting user document:', error);
-    throw error;
-  }
+  const userDocRef = doc(db, 'users', userId);
+  const snap = await getDoc(userDocRef);
+  return snap.exists() ? snap.data() : null;
 };
 
 export const createCart = async (userId) => {
-  try {
-    const cartRef = doc(db, 'carts', userId);
-    await setDoc(cartRef, { items: [], createdAt: Timestamp.now() });
-    return userId;
-  } catch (error) {
-    console.error('❌ Error creating cart:', error);
-    throw error;
-  }
+  const cartRef = doc(db, 'carts', userId);
+  await setDoc(cartRef, { items: [], createdAt: Timestamp.now() });
+  return userId;
 };
 
 export const addItemToCart = async (userId, item) => {
-  try {
-    const cartRef = doc(db, 'carts', userId);
-    await updateDoc(cartRef, { items: arrayUnion(item) });
-  } catch (error) {
-    console.error('❌ Error adding item to cart:', error);
-    throw error;
-  }
+  const cartRef = doc(db, 'carts', userId);
+  await updateDoc(cartRef, { items: arrayUnion(item) });
 };
 
 export const getCartItems = async (userId) => {
-  try {
-    const cartRef = doc(db, 'carts', userId);
-    const cartSnap = await getDoc(cartRef);
-    return cartSnap.exists() ? cartSnap.data().items || [] : [];
-  } catch (error) {
-    console.error('❌ Error fetching cart items:', error);
-    throw error;
-  }
+  const cartRef = doc(db, 'carts', userId);
+  const snap = await getDoc(cartRef);
+  return snap.exists() ? snap.data().items || [] : [];
 };
 
 export const saveOrder = async (orderData) => {
-  try {
-    const ordersRef = collection(db, 'orders');
-    const orderDoc = await addDoc(ordersRef, { ...orderData, createdAt: Timestamp.now() });
-    return orderDoc.id;
-  } catch (error) {
-    console.error('❌ Error saving order:', error);
-    throw error;
-  }
+  const ordersRef = collection(db, 'orders');
+  const orderDoc = await addDoc(ordersRef, { ...orderData, createdAt: Timestamp.now() });
+  return orderDoc.id;
 };
 
 export const clearCart = async (userId) => {
-  try {
-    const cartRef = doc(db, 'carts', userId);
-    await deleteDoc(cartRef);
-  } catch (error) {
-    console.error('❌ Error clearing cart:', error);
-    throw error;
-  }
+  const cartRef = doc(db, 'carts', userId);
+  await deleteDoc(cartRef);
 };
