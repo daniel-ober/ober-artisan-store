@@ -1,174 +1,493 @@
-/* ProjectProgress — v2 “Comfort” density, scoped under .pp2 */
-.pp2{
-  --pp-bg: rgba(0,0,0,.58);
-  --pp-border: rgba(255,255,255,.10);
-  --pp-soft: rgba(255,255,255,.06);
-  --pp-text: #e9eef3;
-  --pp-dim: #cfd6dd;
-  --pp-muted: #aab6c0;
-  --pp-accent: #39e08a;
-  --pp-accent-2: #36cf79;
-  --pp-wip: #fad73c;
-  --pp-card-radius: 18px;
-  --pp-pad: 22px;
-  --pp-gap: 18px;
+/* ProjectProgress.css — polished Build Progress card for SoundLegend portal */
 
-  display:grid;
-  gap:26px;
-  color:var(--pp-text);
+.slp-card.pp-card[data-component="ProjectProgress"] {
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px 24px 24px;
+  border-radius: 18px;
+  background: radial-gradient(circle at top left, #181a27 0, #05060c 55%, #020208 100%);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(26px);
 }
 
-/* header */
-.pp2-head { display:flex; align-items:flex-end; justify-content:space-between; gap:14px; }
-.pp2-head h3 { margin:0; font-weight:800; letter-spacing:.02em; font-size:1.15rem; }
-.pp2-metrics { display:flex; gap:22px; flex-wrap:wrap; font-size:.96rem; color:var(--pp-dim); }
-.pp2-metrics strong{ font-weight:800; }
-
-/* sticky track (keeps context while scrolling) */
-@supports (position: sticky){
-  .pp2-track { position:sticky; top:6px; z-index:5; }
+.slp-card.pp-card[data-component="ProjectProgress"] h3 {
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  margin: 0 0 4px;
 }
 
-/* track */
-.pp2-track { position:relative; height:56px; padding:12px 0 8px; }
-.pp2-track::before{
-  content:""; position:absolute; left:0; right:0; top:26px; height:8px;
-  border-radius:999px; background:rgba(255,255,255,.08);
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
-}
-.pp2-bar{
-  position:absolute; left:0; top:26px; height:8px; width:0%;
-  background:linear-gradient(90deg, var(--pp-accent-2), var(--pp-accent));
-  border-radius:999px; transition:width .45s cubic-bezier(.2,.8,.2,1);
-  box-shadow: 0 0 18px rgba(57,224,138,.25);
+.slp-card.pp-card[data-component="ProjectProgress"] .slp-muted {
+  font-size: 0.88rem;
+  opacity: 0.78;
 }
 
-/* dots */
-.pp2-dots{ position:absolute; inset:0; }
-.pp2-dot{
-  position:absolute; top:8px; transform:translateX(-50%);
-  width:30px; height:30px; border-radius:12px;
-  border:1px solid rgba(255,255,255,.22);
-  background:rgba(12,20,16,.55);
-  color:#eafaf1; font-size:.9rem; display:flex; align-items:center; justify-content:center;
-  cursor:pointer;
-  transition:transform .15s ease, box-shadow .15s ease, background .15s ease, border-color .15s ease, opacity .2s;
-}
-.pp2-dot:hover{ transform:translateX(-50%) translateY(-1px); box-shadow:0 0 0 3px rgba(57,224,138,.25); }
-.pp2-dot.done{ background:rgba(49,190,110,.20); border-color:rgba(49,190,110,.50); }
-.pp2-dot.wip{  background:rgba(250,215,60,.22); border-color:rgba(250,215,60,.55); color:#111; }
-.pp2-dot.todo{ background:rgba(255,255,255,.06); border-color:rgba(255,255,255,.18); color:#fff; opacity:.85; }
+/* ---------- HERO (Craft In Motion or Vault hero) ---------- */
 
-.pp2-dot[aria-selected="true"],
-.pp2-dot.active{
-  box-shadow:0 0 0 4px rgba(57,224,138,.33), 0 0 22px rgba(57,224,138,.25);
+[data-component="ProjectProgress"] .pp-hero-section {
+  margin-top: 14px;
 }
 
-/* gentle focus pulse for the active/WIP step */
-@keyframes pp2-pulse {
-  0% { box-shadow:0 0 0 0 rgba(57,224,138,.36); }
-  50%{ box-shadow:0 0 0 12px rgba(57,224,138,0); }
-  100%{ box-shadow:0 0 0 0 rgba(57,224,138,0); }
-}
-.pp2-dot.active { animation: pp2-pulse 2.2s ease-in-out infinite; }
-.pp2-dot.wip.active { animation: pp2-pulse 1.6s ease-in-out infinite; }
-
-.pp2-endcap{ position:absolute; top:26px; width:0; height:0; }
-
-/* card */
-.pp2-card{
-  border-radius:var(--pp-card-radius);
-  background:var(--pp-bg);
-  border:1px solid var(--pp-border);
-  box-shadow: 0 10px 34px rgba(0,0,0,.42), inset 0 0 0 1px var(--pp-soft);
-  padding:var(--pp-pad);
+[data-component="ProjectProgress"] .pp-hero-frame {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #05070c;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  aspect-ratio: 16 / 9;
 }
 
-/* top row: title + KPIs */
-.pp2-card-top{
-  display:grid; gap:var(--pp-gap); align-items:center;
-  grid-template-columns: 1fr; margin-bottom:10px;
-}
-@media (min-width:960px){
-  .pp2-card-top{ grid-template-columns: 1fr auto; }
+[data-component="ProjectProgress"] .pp-hero-media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
-.pp2-step-title{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
-.pp2-step-title h4{ margin:0; font-size:1.28rem; letter-spacing:.02em; font-weight:800; }
-
-.pp2-pill{
-  font-size:.78rem; padding:5px 12px; border-radius:999px;
-  border:1px solid rgba(255,255,255,.18); background:rgba(255,255,255,.06); color:#dfe;
-}
-.pp2-pill.ok{  border-color:rgba(49,190,110,.55); background:rgba(49,190,110,.20); }
-.pp2-pill.wip{ border-color:rgba(250,215,60,.55); background:rgba(250,215,60,.20); color:#1a1a1a; }
-
-/* KPI trio */
-.pp2-stats{
-  display:grid; grid-template-columns:1fr; gap:12px;
-}
-@media (min-width:760px){ .pp2-stats{ grid-template-columns: repeat(3, minmax(0,1fr)); } }
-.pp2-stat{
-  padding:12px 14px; border-radius:12px;
-  background:rgba(255,255,255,.045);
-  border:1px solid rgba(255,255,255,.08);
-  min-width: 220px;
-}
-.pp2-stat-label{ font-size:.78rem; color:var(--pp-muted); font-weight:700; letter-spacing:.02em; }
-.pp2-stat-value{ font-weight:800; margin-top:4px; }
-
-/* main two columns */
-.pp2-grid{
-  display:grid; gap:24px; grid-template-columns:1fr; margin-top:12px;
-}
-@media (min-width:980px){ .pp2-grid{ grid-template-columns:1.05fr .95fr; } }
-
-.pp2-col{ display:grid; gap:12px; }
-.pp2-sub{ font-weight:900; letter-spacing:.02em; color:#f6faf8; opacity:.94; }
-.pp2-body{ color:#d9e2ea; line-height:1.6; }
-
-/* chips & lists */
-.pp2-chips{ display:flex; gap:8px; flex-wrap:wrap; }
-.pp2-chip{ font-size:.82rem; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14); }
-.pp2-muted{ color:var(--pp-muted); font-weight:600; }
-.pp2-list{ margin:2px 0 0 18px; display:grid; gap:6px; }
-.pp2-list li{ line-height:1.5; }
-
-.pp2-links{ margin:4px 0 0 18px; display:grid; gap:6px; }
-.pp2-links a{ color:#b6e8c9; text-decoration:underline; }
-.pp2-links a:hover{ opacity:.9; }
-
-.pp2-mantra{
-  display:flex; gap:10px; align-items:center; margin-top:6px; padding:12px 14px;
-  border-radius:12px; background:rgba(49,190,110,.10); border:1px solid rgba(49,190,110,.28);
-}
-.pp2-star{ font-size:1rem; color:var(--pp-accent); }
-
-/* media rail */
-.pp2-media{ display:flex; gap:12px; flex-wrap:wrap; margin-top:10px; }
-.pp2-thumb{
-  width:136px; height:92px; border-radius:14px; overflow:hidden;
-  border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.04);
-  display:flex; align-items:center; justify-content:center; text-decoration:none; color:#dfe;
-}
-.pp2-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
-.pp2-thumb-video span,
-.pp2-thumb-pdf span,
-.pp2-thumb-audio span,
-.pp2-thumb-link span{ font-weight:800; font-size:.86rem; }
-.pp2-empty{ padding:14px; border-radius:12px; border:1px dashed rgba(255,255,255,.15); color:var(--pp-muted); }
-
-/* small screens */
-@media (max-width:640px){
-  .pp2{ gap:20px; }
-  .pp2-track{ height:52px; }
-  .pp2-dot{ width:28px; height:28px; }
-  .pp2-card{ padding:16px; }
+[data-component="ProjectProgress"] .pp-hero-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 14px 18px;
+  pointer-events: none;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.6),
+    rgba(0, 0, 0, 0.25),
+    transparent
+  );
 }
 
-/* reduced motion */
-@media (prefers-reduced-motion: reduce){
-  .pp2-dot.active,
-  .pp2-dot.wip.active { animation: none; }
-  .pp2-bar { transition: none; }
+[data-component="ProjectProgress"] .pp-hero-pill {
+  pointer-events: auto;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(248, 250, 252, 0.65);
+  background: rgba(15, 23, 42, 0.82);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+[data-component="ProjectProgress"] .pp-hero-caption {
+  margin-top: 6px;
+  font-size: 0.84rem;
+}
+
+/* ---------- Summary row ---------- */
+
+[data-component="ProjectProgress"] .pp-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+
+[data-component="ProjectProgress"] .pp-summary-item {
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: radial-gradient(circle at top left, #171926 0, #090a12 55%, #040408 100%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+[data-component="ProjectProgress"] .pp-summary-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  opacity: 0.7;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+[data-component="ProjectProgress"] .pp-summary-check {
+  display: inline-block;
+  font-size: 0.9rem;
+  color: #22c55e;
+  transform: translateY(-1px);
+}
+
+[data-component="ProjectProgress"] .pp-summary-value {
+  font-size: 0.94rem;
+}
+
+/* ---------- Weighted track ---------- */
+
+[data-component="ProjectProgress"] .pp-track-section {
+  margin-top: 18px;
+}
+
+[data-component="ProjectProgress"] .pp-subheading {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  opacity: 0.8;
+  margin: 0 0 6px;
+  padding: 0 2px;
+}
+
+[data-component="ProjectProgress"] .pp-track {
+  position: relative;
+  padding-top: 20px;
+}
+
+[data-component="ProjectProgress"] .pp-track-bar {
+  position: relative;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.9);
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+}
+
+[data-component="ProjectProgress"] .pp-track-fill {
+  position: absolute;
+  inset: 0;
+  transform-origin: left center;
+  background: linear-gradient(90deg, #22c55e, #4ade80);
+  width: 0;
+  transition: width 0.25s ease;
+}
+
+/* dot rail */
+
+[data-component="ProjectProgress"] .pp-track-dots {
+  position: relative;
+  margin-top: 10px;
+  height: 32px;
+}
+
+[data-component="ProjectProgress"] .pp-dot {
+  position: absolute;
+  top: 4px;
+  transform: translateX(-50%);
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  border: 2px solid rgba(148, 163, 184, 0.7);
+  background: #020617;
+  color: #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.18s ease;
+}
+
+/* connector line from dot up to the bar */
+[data-component="ProjectProgress"] .pp-dot::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.9);
+}
+
+/* state colors */
+
+[data-component="ProjectProgress"] .pp-dot.todo {
+  opacity: 0.7;
+}
+
+[data-component="ProjectProgress"] .pp-dot.wip {
+  border-color: rgba(59, 130, 246, 0.95);
+}
+
+[data-component="ProjectProgress"] .pp-dot.done {
+  border-color: rgba(34, 197, 94, 0.95);
+}
+
+[data-component="ProjectProgress"] .pp-dot.wip::before {
+  background: rgba(59, 130, 246, 0.95);
+}
+
+[data-component="ProjectProgress"] .pp-dot.done::before {
+  background: rgba(34, 197, 94, 0.95);
+}
+
+/* active + hover enlarge / subtle glow */
+
+[data-component="ProjectProgress"] .pp-dot.active,
+[data-component="ProjectProgress"] .pp-dot:hover {
+  transform: translateX(-50%) scale(1.08);
+  box-shadow: 0 0 0 3px rgba(191, 219, 254, 0.35);
+}
+
+[data-component="ProjectProgress"] .pp-dot-number {
+  font-size: 0.7rem;
+  line-height: 1;
+}
+
+/* small endcap */
+
+[data-component="ProjectProgress"] .pp-endcap {
+  position: absolute;
+  top: 14px;
+  width: 2px;
+  height: 2px;
+  border-radius: 999px;
+}
+
+/* ---------- Step detail card ---------- */
+
+[data-component="ProjectProgress"] .pp-detail {
+  margin-top: 22px;
+  padding: 14px 16px 16px;
+  border-radius: 14px;
+  background: radial-gradient(circle at top left, #151725 0, #070810 55%, #030307 100%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+[data-component="ProjectProgress"] .pp-step-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+[data-component="ProjectProgress"] .pp-pill {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  background: rgba(15, 23, 42, 0.8);
+}
+
+[data-component="ProjectProgress"] .pp-pill.ok {
+  border-color: rgba(34, 197, 94, 0.9);
+  color: #bbf7d0;
+}
+
+[data-component="ProjectProgress"] .pp-pill.wip {
+  border-color: rgba(59, 130, 246, 0.9);
+  color: #bfdbfe;
+}
+
+[data-component="ProjectProgress"] .pp-step-title {
+  font-size: 0.98rem;
+  font-weight: 500;
+}
+
+[data-component="ProjectProgress"] .pp-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+[data-component="ProjectProgress"] .pp-stat {
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: radial-gradient(circle at top left, #181a2a 0, #090a13 55%, #040408 100%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+[data-component="ProjectProgress"] .pp-stat-label {
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  opacity: 0.7;
+}
+
+[data-component="ProjectProgress"] .pp-stat-value {
+  font-size: 0.9rem;
+  margin-top: 2px;
+}
+
+/* grid for WHAT/WHY/etc */
+
+[data-component="ProjectProgress"] .pp-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 4px;
+}
+
+[data-component="ProjectProgress"] .pp-col {
+  min-width: 0;
+}
+
+[data-component="ProjectProgress"] .pp-sub {
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  opacity: 0.78;
+  margin: 8px 0 4px;
+}
+
+[data-component="ProjectProgress"] .pp-muted {
+  font-size: 0.76rem;
+  opacity: 0.72;
+}
+
+[data-component="ProjectProgress"] .pp-body {
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* chips */
+
+[data-component="ProjectProgress"] .pp-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+[data-component="ProjectProgress"] .pp-chip {
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  font-size: 0.76rem;
+}
+
+/* lists */
+
+[data-component="ProjectProgress"] .pp-list {
+  margin: 4px 0 0;
+  padding-left: 18px;
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+[data-component="ProjectProgress"] .pp-links {
+  margin: 4px 0 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+[data-component="ProjectProgress"] .pp-link-button {
+  padding: 0;
+  background: none;
+  border: none;
+  color: #c4d0ff;
+  cursor: default;
+  font-size: 0.88rem;
+}
+
+/* mantra */
+
+[data-component="ProjectProgress"] .pp-mantra {
+  margin-top: 10px;
+  padding: 7px 10px;
+  border-radius: 10px;
+  background: radial-gradient(circle at top left, #111827 0, #020617 60%);
+  border: 1px solid rgba(191, 219, 254, 0.35);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.88rem;
+}
+
+[data-component="ProjectProgress"] .pp-star {
+  font-size: 0.9rem;
+  color: #fde68a;
+}
+
+/* media */
+
+[data-component="ProjectProgress"] .pp-media {
+  margin-top: 8px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 8px;
+}
+
+[data-component="ProjectProgress"] .pp-thumb {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  text-decoration: none;
+  font-size: 0.8rem;
+  color: #e5e7eb;
+}
+
+[data-component="ProjectProgress"] .pp-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+[data-component="ProjectProgress"] .pp-thumb-video span,
+[data-component="ProjectProgress"] .pp-thumb-audio span,
+[data-component="ProjectProgress"] .pp-thumb-pdf span,
+[data-component="ProjectProgress"] .pp-thumb-link span {
+  white-space: nowrap;
+}
+
+[data-component="ProjectProgress"] .pp-empty {
+  margin-top: 6px;
+  font-size: 0.88rem;
+  opacity: 0.75;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 900px) {
+  .slp-card.pp-card[data-component="ProjectProgress"] {
+    padding: 18px 16px 20px;
+  }
+
+  [data-component="ProjectProgress"] .pp-summary {
+    grid-template-columns: 1fr;
+  }
+
+  [data-component="ProjectProgress"] .pp-stats {
+    grid-template-columns: 1fr;
+  }
+
+  [data-component="ProjectProgress"] .pp-grid {
+    grid-template-columns: 1fr;
+  }
+
+  [data-component="ProjectProgress"] .pp-track-dots {
+    height: 40px;
+  }
+}
+
+@media (max-width: 640px) {
+  [data-component="ProjectProgress"] .pp-hero-frame {
+    border-radius: 14px;
+  }
+
+  [data-component="ProjectProgress"] .pp-hero-caption {
+    font-size: 0.82rem;
+  }
+
+  [data-component="ProjectProgress"] .pp-summary-item {
+    padding: 9px 10px;
+  }
+
+  [data-component="ProjectProgress"] .pp-body,
+  [data-component="ProjectProgress"] .pp-list,
+  [data-component="ProjectProgress"] .pp-link-button {
+    font-size: 0.86rem;
+  }
 }

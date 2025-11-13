@@ -1,72 +1,78 @@
-import React, { useMemo, useState, useEffect } from 'react';
+// src/components/SoundLegendPortal/ProjectProgress.js
+
+import React, { useEffect, useMemo, useState } from 'react';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../../firebaseConfig';
 import './ProjectProgress.css';
 
-/* ---- ordered steps ---- */
+const CRAFT_VIDEO = '/craft_in_motion/craftinmotion1080p.mp4';
+
+/* -------------------- Step metadata -------------------- */
+
 const STEPS = [
-  { key: 'woodPreparation',     label: 'Wood Preparation' },
-  { key: 'shellConstruction',   label: 'Shell Construction' },
-  { key: 'fineTuning',          label: 'Fine Tuning (Trueing/Thickness)' },
-  { key: 'shellExteriorFinish', label: 'Exterior Finish' },
-  { key: 'bearingEdges',        label: 'Bearing Edges' },
-  { key: 'snareBedCutting',     label: 'Snare Beds' },
-  { key: 'hardwareDrilling',    label: 'Hardware Drilling' },
-  { key: 'hardwareAssembly',    label: 'Hardware Assembly' },
-  { key: 'tuningDetailing',     label: 'Tuning & Detailing' },
-  { key: 'qualityCheck',        label: 'Quality Check' },
+  { key: 'woodPreparation', label: 'Wood Preparation', short: 'Wood Prep' },
+  { key: 'shellConstruction', label: 'Shell Construction', short: 'Shell Build' },
+  { key: 'fineTuning', label: 'Fine Tuning (Trueing/Thickness)', short: 'Interior' },
+  { key: 'shellExteriorFinish', label: 'Exterior Finish', short: 'Exterior' },
+  { key: 'bearingEdges', label: 'Bearing Edges', short: 'Edges' },
+  { key: 'snareBedCutting', label: 'Snare Beds', short: 'Beds' },
+  { key: 'hardwareDrilling', label: 'Hardware Drilling', short: 'Drilling' },
+  { key: 'hardwareAssembly', label: 'Hardware Assembly', short: 'Hardware' },
+  { key: 'tuningDetailing', label: 'Tuning & Detailing', short: 'Tuning' },
+  { key: 'qualityCheck', label: 'Quality Check', short: 'Delivery' },
 ];
 
-/* ---- weights drive both progress % and dot spacing ---- */
 const STEP_WEIGHTS = {
-  woodPreparation:     0.05,
-  shellConstruction:   0.20,
-  fineTuning:          0.10,
-  shellExteriorFinish: 0.20,
-  bearingEdges:        0.10,
-  snareBedCutting:     0.10,
-  hardwareDrilling:    0.10,
-  hardwareAssembly:    0.05,
-  tuningDetailing:     0.05,
-  qualityCheck:        0.05,
+  woodPreparation: 0.05,
+  shellConstruction: 0.2,
+  fineTuning: 0.1,
+  shellExteriorFinish: 0.2,
+  bearingEdges: 0.1,
+  snareBedCutting: 0.1,
+  hardwareDrilling: 0.1,
+  hardwareAssembly: 0.05,
+  tuningDetailing: 0.05,
+  qualityCheck: 0.05,
 };
+
+/* -------------------- Helpers -------------------- */
 
 function calcProgress(project) {
   if (!project) return 0;
   let total = 0;
   for (const [key, w] of Object.entries(STEP_WEIGHTS)) {
-    const list = project[key]?.checklist;
-    if (!list?.length) continue;
-    const done = list.filter(i => i.completed).length;
+    const step = project[key];
+    const list = step?.checklist;
+    if (!Array.isArray(list) || !list.length) continue;
+    const done = list.filter((i) => i && i.completed).length;
     total += (done / list.length) * w;
   }
   return Math.round(total * 100);
 }
 
 function stepStatus(stepData) {
-  const total = stepData?.checklist?.length || 0;
-  const done  = stepData?.checklist?.filter(i => i.completed).length || 0;
-  if (!total) return { status: 'Not Started', done, total };
+  const list = Array.isArray(stepData?.checklist)
+    ? stepData.checklist
+    : [];
+
+  const total = list.length;
+  const done = list.filter((i) => i && i.completed).length;
+
+  if (!total) return { status: 'Not Started', done: 0, total: 0 };
   if (done === total) return { status: 'Completed', done, total };
-  if (done > 0)       return { status: 'In Progress', done, total };
+  if (done > 0) return { status: 'In Progress', done, total };
   return { status: 'Not Started', done, total };
 }
 
 function topFiveTasks(stepData) {
-  return (stepData?.checklist || []).slice(0, 5).map(x => x.task);
+  const list = Array.isArray(stepData?.checklist)
+    ? stepData.checklist
+    : [];
+  return list
+    .filter((x) => x && typeof x.task === 'string' && x.task.trim())
+    .slice(0, 5)
+    .map((x) => x.task.trim());
 }
-
-/* --- media buckets per step (maps to Firestore attachments groups) --- */
-const MEDIA_BUCKETS_BY_STEP = {
-  woodPreparation:       ['wood_selection'],
-  shellConstruction:     ['stave_construction_(pre-milling)', 'stave_construction_(post-milling)'],
-  fineTuning:            ['stave_construction_(post-milling)'],
-  shellExteriorFinish:   ['early_mockups_(pre-production)', 'other'],
-  bearingEdges:          [],
-  snareBedCutting:       [],
-  hardwareDrilling:      [],
-  hardwareAssembly:      [],
-  tuningDetailing:       [],
-  qualityCheck:          ['other', 'build_proposal'],
-};
 
 function detectType(url) {
   const u = (url || '').toLowerCase();
@@ -77,298 +83,680 @@ function detectType(url) {
   return 'link';
 }
 
+// Media mapping per step (by attachment category)
+const MEDIA_BUCKETS_BY_STEP = {
+  woodPreparation: ['wood_selection'],
+  shellConstruction: [
+    'stave_construction_(pre-milling)',
+    'stave_construction_(post-milling)',
+  ],
+  fineTuning: ['stave_construction_(post-milling)'],
+  shellExteriorFinish: ['early_mockups_(pre-production)', 'other'],
+  bearingEdges: [],
+  snareBedCutting: [],
+  hardwareDrilling: [],
+  hardwareAssembly: [],
+  tuningDetailing: [],
+  qualityCheck: ['other', 'build_proposal'],
+};
+
 function getStepMedia(project, stepKey) {
   const all = project?.attachments || {};
   const wanted = MEDIA_BUCKETS_BY_STEP[stepKey] || [];
   const out = [];
-  for (const b of wanted) {
-    const arr = all[b] || [];
-    for (const item of arr) {
-      if (item?.url) out.push({ url: item.url, type: detectType(item.url) });
-    }
-  }
+
+  wanted.forEach((bucketKey) => {
+    const arr = Array.isArray(all[bucketKey]) ? all[bucketKey] : [];
+    arr.forEach((item) => {
+      if (!item || !item.url) return;
+      out.push({ url: item.url, type: detectType(item.url) });
+    });
+  });
+
   return out;
 }
 
-/* --- fallback copy to keep panel informative even with sparse checklists --- */
+/* ---- date helpers ---- */
+
+function tsToMillis(v) {
+  if (!v) return 0;
+  if (typeof v === 'string') {
+    const t = Date.parse(v);
+    return Number.isFinite(t) ? t : 0;
+  }
+  if (typeof v === 'number') return v;
+  if (v instanceof Date) return v.getTime() || 0;
+  if (typeof v === 'object' && v.seconds) return v.seconds * 1000;
+  try {
+    const t = new Date(v).getTime();
+    return Number.isFinite(t) ? t : 0;
+  } catch {
+    return 0;
+  }
+}
+
+function fmtFromMs(ms) {
+  return ms ? new Date(ms).toLocaleDateString() : '—';
+}
+
+function pickLatestDate(...vals) {
+  const ms = vals.map(tsToMillis).filter(Boolean);
+  if (!ms.length) return 0;
+  return Math.max(...ms);
+}
+
+function pickEarliestDate(...vals) {
+  const ms = vals.map(tsToMillis).filter(Boolean);
+  if (!ms.length) return 0;
+  return Math.min(...ms);
+}
+
+function getCompletionDate(project) {
+  if (!project) return 0;
+
+  const candidates = [
+    project.completionDate,
+    project.completedAt,
+    project.fulfilledAt,
+    project.deliveredAt,
+    project.shippedAt,
+    project.qualityCheck && project.qualityCheck.completedAt,
+  ];
+
+  return pickLatestDate(...candidates);
+}
+
+function isProjectComplete(project, pct) {
+  if (!project) return false;
+  const s = String(project.status || project.overviewStatus || '').toLowerCase();
+  if (s.includes('completed') || s.includes('fulfilled') || s.includes('delivered')) {
+    return true;
+  }
+
+  const qc = project.qualityCheck;
+  if (qc && stepStatus(qc).status === 'Completed') return true;
+
+  return pct >= 99;
+}
+
+/**
+ * Hero media:
+ *  - Use hero URL already attached to the project.
+ *  - Falls back to heroMedia struct or attachments.
+ */
+function getHeroMedia(project) {
+  if (!project) return null;
+
+  const directUrl =
+    project.showroomHeroUrl ||
+    project.heroImageUrl ||
+    project.heroImage || // direct hero image on project
+    project.heroMediaUrl ||
+    project.vaultHeroUrl ||
+    project.heroUrl ||
+    (project.meta &&
+      (project.meta.heroImage || project.meta.heroImageUrl));
+
+  if (directUrl) {
+    return { url: directUrl, type: detectType(directUrl) };
+  }
+
+  // Struct-style field { url, type }
+  if (project.heroMedia && project.heroMedia.url) {
+    const t = project.heroMedia.type || detectType(project.heroMedia.url);
+    return { url: project.heroMedia.url, type: t };
+  }
+
+  // Attachments bucket, e.g. attachments.showroom_hero[0]
+  const bucket =
+    project.attachments &&
+    (project.attachments.showroom_hero ||
+      project.attachments.hero ||
+      project.attachments.cover);
+
+  if (Array.isArray(bucket) && bucket[0]?.url) {
+    const url = bucket[0].url;
+    return { url, type: detectType(url) };
+  }
+
+  return null;
+}
+
+/* Step copy (WHAT/WHY/TOOLS/etc.) */
+
 const COPY = {
   woodPreparation: {
     what: 'Select boards, moisture-check, joint/plane flat & square, and mark grain orientation.',
-    why:  'Flat, dry, oriented wood prevents warping and sets the drum’s voice.',
+    why: 'Flat, dry, oriented wood prevents warping and sets the drum’s voice.',
     techniques: ['Moisture normalization', 'Grain matching', 'Face/edge jointing'],
     tools: ['Moisture meter', 'Jointer & planer', 'Calipers', 'Clamps'],
     risks: ['Hidden tension → cupping', 'Mismatched moisture → creep'],
     mantra: 'Stable wood = stable tone.',
-    est: '3–8 hrs'
+    est: '3–8 hrs',
   },
   shellConstruction: {
     what: 'Cut/bevel/clamp staves and bring shell true to diameter & roundness.',
-    why:  'Round, consistent shells project well and tune evenly.',
+    why: 'Round, consistent shells project well and tune evenly.',
     techniques: ['Stave beveling', 'Form clamping', 'Roundness trueing'],
     tools: ['Table saw + bevel sled', 'Clamping forms', 'Dial calipers'],
     risks: ['Gluing misalignment', 'Ovalization during clamp'],
     mantra: 'True, round shells tune easier.',
-    est: '8–16 hrs'
+    est: '8–16 hrs',
   },
   fineTuning: {
     what: 'True faces, bring thickness to target, smooth interior.',
-    why:  'Consistency yields even resonance & predictable tuning.',
+    why: 'Consistency yields even resonance & predictable tuning.',
     techniques: ['Lathe trueing', 'Thickness profiling', 'Progressive sanding'],
     tools: ['Lathe/drum sander', 'Dial indicator', 'Sanding blocks'],
     risks: ['Hot spots → dead zones', 'Over-removal'],
     mantra: 'Consistent shell = consistent resonance.',
-    est: '4–10 hrs'
+    est: '4–10 hrs',
   },
   shellExteriorFinish: {
     what: 'Veneer/stain/epoxy/clear. Level-sand & polish; honor cure windows.',
-    why:  'Protects the shell and shapes attack/sustain & feel.',
+    why: 'Protects the shell and shapes attack/sustain & feel.',
     techniques: ['HVLP spray', 'Level sanding', 'Buff & polish'],
     tools: ['HVLP sprayer', 'Polishing system', 'Viscosity cups'],
     risks: ['Solvent trap → haze', 'Runs & sags'],
     mantra: 'Durable finish, consistent tone.',
-    est: '10–24 hrs'
+    est: '10–24 hrs',
   },
   bearingEdges: {
     what: 'Cut profiles to spec; dress, burnish, and polish.',
-    why:  'Edge is the head’s contact—attack & articulation start here.',
+    why: 'Edge is the head’s contact—attack & articulation start here.',
     techniques: ['Profile routing', 'Hand dressing', 'Burnishing'],
     tools: ['Router table & jigs', 'Files', 'Burnish wheels'],
     risks: ['Chip-out', 'Uneven apex'],
     mantra: 'Your “handshake” with the head.',
-    est: '2–4 hrs'
+    est: '2–4 hrs',
   },
   snareBedCutting: {
     what: 'Cut/blend beds to target depth/width; verify wire fit.',
-    why:  'Keeps wires crisp & sensitive at all dynamics.',
+    why: 'Keeps wires crisp & sensitive at all dynamics.',
     techniques: ['Template routing', 'Feeler gauge tuning', 'Hand blending'],
     tools: ['Router sled', 'Feeler gauges', 'Blocks & abrasives'],
     risks: ['Over-deep → choke', 'Misalignment'],
     mantra: 'Crisp response, zero choke.',
-    est: '1–2 hrs'
+    est: '1–2 hrs',
   },
   hardwareDrilling: {
     what: 'Layout, drill, deburr, and seal all holes.',
-    why:  'Prevents micro-cracks; ensures alignment & longevity.',
+    why: 'Prevents micro-cracks; ensures alignment & longevity.',
     techniques: ['Template layout', 'Step drilling', 'Hole sealing'],
     tools: ['Drill press + jigs', 'Step bits', 'Layout templates'],
     risks: ['Exit tear-out', 'Layout drift'],
     mantra: 'Rock-solid hardware, no buzzes.',
-    est: '1–3 hrs'
+    est: '1–3 hrs',
   },
   hardwareAssembly: {
     what: 'Install lugs/hoops/throw/butt/strain; dress contacts; treat threads.',
-    why:  'Removes squeaks/buzzes; stable tuning.',
+    why: 'Removes squeaks/buzzes; stable tuning.',
     techniques: ['Torque sequence', 'Threadlock where appropriate', 'Contact dressing'],
     tools: ['Torque drivers', 'Soft jaws', 'Thread treatments'],
     risks: ['Cross-threading', 'Uneven seating'],
     mantra: 'Quiet, aligned hardware that lasts.',
-    est: '1–3 hrs'
+    est: '1–3 hrs',
   },
   tuningDetailing: {
     what: 'Head fit, initial tuning, wire alignment, badge, meticulous clean.',
-    why:  'Turns a shell into an instrument.',
+    why: 'Turns a shell into an instrument.',
     techniques: ['Tension mapping', 'Wire centering', 'Final clean'],
     tools: ['Tension gauge', 'Reference tuner', 'Straightedges'],
     risks: ['Head seating issues', 'Wire chatter'],
     mantra: 'Plays in tune, feels alive.',
-    est: '1–3 hrs'
+    est: '1–3 hrs',
   },
   qualityCheck: {
     what: 'Full inspection, documentation, a short audio clip, and ship prep.',
-    why:  'Ensures it arrives verified & gig-ready.',
+    why: 'Ensures it arrives verified & gig-ready.',
     techniques: ['QC checklist', 'Audio capture', 'Pack & protect'],
     tools: ['Reference mic', 'Monitors', 'Inspection lights'],
     risks: ['Transit risk if packaging is wrong'],
     mantra: 'Every SoundLegend leaves verified.',
-    est: '1–4 hrs'
+    est: '1–4 hrs',
   },
 };
 
-export default function ProjectProgress({ project }) {
-  const pct = useMemo(() => calcProgress(project), [project]);
+/* -------------------- Component -------------------- */
 
-  // pick default active based on project.currentPhase or last step with progress
+const ProjectProgress = ({ project }) => {
+  const pct = useMemo(() => calcProgress(project), [project]);
+  const complete = useMemo(() => isProjectComplete(project, pct), [project, pct]);
+
   const defaultIndex = useMemo(() => {
-    const phase = (project?.currentPhase || '').toLowerCase();
-    const fromPhase = STEPS.findIndex(s =>
+    if (!project) return 0;
+
+    const phase = String(project.currentPhase || '').toLowerCase();
+
+    const fromPhase = STEPS.findIndex((s) =>
       phase.includes(s.label.split(' ')[0].toLowerCase())
     );
     if (fromPhase >= 0) return fromPhase;
+
     for (let i = STEPS.length - 1; i >= 0; i--) {
-      const d = project?.[STEPS[i].key];
-      if (d?.checklist?.some(c => c.completed)) return i;
+      const d = project[STEPS[i].key];
+      const list = Array.isArray(d?.checklist) ? d.checklist : [];
+      if (list.some((c) => c && c.completed)) return i;
     }
+
     return 0;
   }, [project]);
 
-  // keep active step in sync with data changes
   const [active, setActive] = useState(defaultIndex);
-  useEffect(() => { setActive(defaultIndex); }, [defaultIndex]);
+  const [heroFromShowroom, setHeroFromShowroom] = useState(null);
+
+  useEffect(() => {
+    setActive(defaultIndex);
+  }, [defaultIndex]);
+
+  // 🔹 Pull heroImage from soundlegend_showroom (e.g. doc "SL-003")
+  useEffect(() => {
+    let cancelled = false;
+
+    const fetchHero = async () => {
+      if (!project) return;
+
+      const serial =
+        project.lineSerial ||
+        project.globalSerial ||
+        (project.specs && project.specs.lineSerial);
+
+      if (!serial) return;
+
+      try {
+        const ref = doc(db, 'soundlegend_showroom', serial);
+        const snap = await getDoc(ref);
+        if (!snap.exists() || cancelled) return;
+
+        const data = snap.data();
+        const url =
+          data.heroImage ||
+          data.heroImageUrl ||
+          data.hero ||
+          data.coverImage ||
+          '';
+
+        if (!url || cancelled) return;
+
+        setHeroFromShowroom({ url, type: detectType(url) });
+      } catch (err) {
+        console.error('Failed to load showroom hero:', err);
+      }
+    };
+
+    fetchHero();
+    return () => {
+      cancelled = true;
+    };
+  }, [project]);
+
+  if (!project) {
+    return (
+      <div className="slp-card pp-card" data-component="ProjectProgress">
+        <h3>Build Progress</h3>
+        <p className="slp-muted">No project selected.</p>
+      </div>
+    );
+  }
 
   const activeStep = STEPS[active];
-  const stepData   = project?.[activeStep.key] || {};
+  const stepData = project[activeStep.key] || {};
   const { status } = stepStatus(stepData);
-  const body       = COPY[activeStep.key] || {};
-  const qcTop5     = topFiveTasks(stepData);
-  const media      = getStepMedia(project, activeStep.key);
+  const body = COPY[activeStep.key] || {};
+  const qcTop5 = topFiveTasks(stepData);
+  const media = getStepMedia(project, activeStep.key);
 
-  // cum weights → dot positions
+  // Weighted track marker positions
   const cumWeights = useMemo(() => {
-    const arr = STEPS.map(s => STEP_WEIGHTS[s.key] || 0);
+    const arr = STEPS.map((s) => STEP_WEIGHTS[s.key] || 0);
     const out = [];
     let sum = 0;
-    for (let i = 0; i < arr.length; i++) { out.push(sum); sum += arr[i]; }
-    out.push(1); // final bound
+    for (let i = 0; i < arr.length; i++) {
+      out.push(sum);
+      sum += arr[i];
+    }
+    out.push(1); // end cap
     return out;
   }, []);
-  const leftPctForIndex = (i) => (cumWeights[i] * 100);
+
+  const leftPctForIndex = (i) => cumWeights[i] * 100;
+
+  // summary dates
+  const startMs = pickEarliestDate(project.startDate, project.createdAt);
+  const targetMs = pickLatestDate(
+    project.targetCompletionWithBuffer,
+    project.targetCompletion,
+    project.estimatedCompletion
+  );
+  const completionMs = getCompletionDate(project);
+
+  const startDate = fmtFromMs(startMs);
+  const targetDate = fmtFromMs(targetMs);
+  const completionDate = fmtFromMs(completionMs || targetMs);
+
+  const currentStepLabel =
+    project.currentPhase ||
+    (complete ? 'All Steps Complete' : `${active + 1}. ${activeStep.label}`);
+
+  // ⭐ Hero selection: use showroom hero first, then any hero already on the project
+  const heroLocal = getHeroMedia(project);
+  const hero = heroFromShowroom || heroLocal;
+  const showHeroFromProject = complete && hero && hero.url;
+  const heroIsVideo = showHeroFromProject && hero.type === 'video';
+
+  const buildWindowLabel = complete ? 'Completion date' : 'Build window';
 
   return (
-    <section className="pp2" data-component="ProjectProgress">
-      <header className="pp2-head">
-        <h3>Build Progress</h3>
-        <div className="pp2-metrics" role="group" aria-label="Project metrics">
-          <span><strong>Project Completion:</strong> {pct}%</span>
-          <span><strong>Current Step:</strong> {project?.currentPhase || '—'}</span>
-        </div>
-      </header>
+    <div className="slp-card pp-card" data-component="ProjectProgress">
+      <h3>Build Progress</h3>
+      <p className="slp-muted">
+        Follow your SoundLegend as it moves through each phase of the build —
+        from raw wood to finished instrument, ready for the Legacy Vault.
+      </p>
 
-      {/* progress track */}
-      <div
-        className="pp2-track"
-        role="progressbar"
-        aria-valuemin={0}
-        aria-valuemax={100}
-        aria-valuenow={pct}
-        aria-label="Overall project completion"
-      >
-        <div className="pp2-bar" style={{ width: `${pct}%` }} />
-        <div className="pp2-dots" role="tablist" aria-label="Build steps">
-          {STEPS.map((s, i) => {
-            const d  = project?.[s.key];
-            const st = stepStatus(d).status;
-            const clazz = st === 'Completed' ? 'done' : st === 'In Progress' ? 'wip' : 'todo';
-            const isActive = i === active;
-            return (
-              <button
-                key={s.key}
-                type="button"
-                role="tab"
-                aria-selected={isActive}
-                aria-current={isActive ? 'step' : undefined}
-                aria-label={`Step ${i+1}: ${s.label} — ${st}`}
-                title={`${i+1}. ${s.label} — ${st}`}
-                className={`pp2-dot ${clazz} ${isActive ? 'active' : ''}`}
-                style={{ left: `${leftPctForIndex(i)}%` }}
-                onClick={() => setActive(i)}
-                onKeyDown={(e) => {
-                  if (e.key === 'ArrowRight') setActive(Math.min(active + 1, STEPS.length - 1));
-                  if (e.key === 'ArrowLeft')  setActive(Math.max(active - 1, 0));
-                }}
-              >
-                <span>{i+1}</span>
-              </button>
-            );
-          })}
-          <span className="pp2-endcap" style={{ left: `${leftPctForIndex(STEPS.length)}%` }} />
-        </div>
-      </div>
+      {/* ---------- Hero media ---------- */}
+      <section className="pp-hero-section">
+        <div className="pp-hero-frame">
+          {showHeroFromProject ? (
+            heroIsVideo ? (
+              <video
+                className="pp-hero-media"
+                src={hero.url}
+                muted
+                loop
+                autoPlay
+                playsInline
+                controls
+              />
+            ) : (
+              <img
+                className="pp-hero-media"
+                src={hero.url}
+                alt="SoundLegend hero"
+              />
+            )
+          ) : (
+            <video
+              className="pp-hero-media"
+              src={CRAFT_VIDEO}
+              muted
+              loop
+              autoPlay
+              playsInline
+            />
+          )}
 
-      {/* detail card */}
-      <div className="pp2-card">
-        <div className="pp2-card-top">
-          <div className="pp2-step-title">
-            <div className={`pp2-pill ${status === 'Completed' ? 'ok' : status === 'In Progress' ? 'wip' : ''}`}>
-              {status}
-            </div>
-            <h4>{active+1}. {activeStep.label}</h4>
-          </div>
-
-          <div className="pp2-stats">
-            <div className="pp2-stat">
-              <div className="pp2-stat-label">Standard Turnaround</div>
-              <div className="pp2-stat-value">8–10 weeks</div>
-            </div>
-            <div className="pp2-stat">
-              <div className="pp2-stat-label">Projected Completion (Throughput)</div>
-              <div className="pp2-stat-value">—</div>
-            </div>
-            <div className="pp2-stat">
-              <div className="pp2-stat-label">Est. Time (Working Hours)</div>
-              <div className="pp2-stat-value">{body.est || '—'}</div>
-            </div>
+          <div className="pp-hero-overlay">
+            <span className="pp-hero-pill">
+              {showHeroFromProject ? 'Legacy Vault Reveal' : 'Craft In Motion'}
+            </span>
           </div>
         </div>
 
-        <div className="pp2-grid">
-          <div className="pp2-col">
-            <div className="pp2-sub">WHAT WE DO</div>
-            <p className="pp2-body">{body.what || '—'}</p>
+        <p className="pp-hero-caption slp-muted">
+          {showHeroFromProject
+            ? 'Your finished SoundLegend as it appears in the Legacy Vault and showroom.'
+            : 'A glimpse into the Ober Artisan process — you’ll see more behind-the-scenes clips and photos in the Media tab as your drum moves through each step.'}
+        </p>
+      </section>
 
-            <div className="pp2-sub">WHY IT MATTERS</div>
-            <p className="pp2-body">{body.why || '—'}</p>
+      {/* ---------- Summary row ---------- */}
+      <section className="pp-summary">
+        <div className="pp-summary-item">
+          <span className="pp-summary-label">
+            Project completion
+            {complete && (
+              <span className="pp-summary-check" aria-hidden="true">
+                ✔
+              </span>
+            )}
+          </span>
+          <span className="pp-summary-value">
+            {complete ? 'All steps complete' : `${pct}%`}
+          </span>
+        </div>
+        <div className="pp-summary-item">
+          <span className="pp-summary-label">
+            Current step
+            {complete && (
+              <span className="pp-summary-check" aria-hidden="true">
+                ✔
+              </span>
+            )}
+          </span>
+          <span className="pp-summary-value">{currentStepLabel}</span>
+        </div>
+        <div className="pp-summary-item">
+          <span className="pp-summary-label">
+            {buildWindowLabel}
+            {complete && completionMs && (
+              <span className="pp-summary-check" aria-hidden="true">
+                ✔
+              </span>
+            )}
+          </span>
+          <span className="pp-summary-value">
+            {complete
+              ? completionDate
+              : startDate !== '—' || targetDate !== '—'
+              ? `${startDate || '—'} → ${targetDate || '—'}`
+              : '—'}
+          </span>
+        </div>
+      </section>
 
-            <div className="pp2-sub">TECHNIQUES USED</div>
-            <div className="pp2-chips">
-              {(body.techniques || []).map(t => <span key={t} className="pp2-chip">{t}</span>)}
+      {/* ---------- Weighted progress track ---------- */}
+      <section className="pp-track-section">
+        <h4 className="pp-subheading">Build roadmap</h4>
+
+        <div
+          className="pp-track"
+          role="progressbar"
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-valuenow={pct}
+          aria-label="Overall project completion"
+        >
+          <div className="pp-track-bar">
+            <div className="pp-track-fill" style={{ width: `${pct}%` }} />
+          </div>
+
+          <div className="pp-track-dots" role="tablist" aria-label="Build steps">
+            {STEPS.map((s, i) => {
+              const d = project[s.key];
+              const st = stepStatus(d).status;
+              const isActive = i === active;
+
+              const clazz =
+                st === 'Completed'
+                  ? 'done'
+                  : st === 'In Progress'
+                  ? 'wip'
+                  : 'todo';
+
+              return (
+                <button
+                  key={s.key}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  aria-current={isActive ? 'step' : undefined}
+                  aria-label={`Step ${i + 1}: ${s.label} — ${st}`}
+                  title={`${i + 1}. ${s.label} — ${st}`}
+                  className={`pp-dot ${clazz} ${isActive ? 'active' : ''}`}
+                  style={{ left: `${leftPctForIndex(i)}%` }}
+                  onClick={() => setActive(i)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'ArrowRight') {
+                      setActive((prev) =>
+                        Math.min(prev + 1, STEPS.length - 1)
+                      );
+                    }
+                    if (e.key === 'ArrowLeft') {
+                      setActive((prev) => Math.max(prev - 1, 0));
+                    }
+                  }}
+                >
+                  <span className="pp-dot-number">{i + 1}</span>
+                </button>
+              );
+            })}
+            <span
+              className="pp-endcap"
+              style={{ left: `${leftPctForIndex(STEPS.length)}%` }}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* ---------- Active step details ---------- */}
+      <section className="pp-detail">
+        <div className="pp-step-header">
+          <div
+            className={`pp-pill ${
+              status === 'Completed'
+                ? 'ok'
+                : status === 'In Progress'
+                ? 'wip'
+                : ''
+            }`}
+          >
+            {status}
+          </div>
+          <h4 className="pp-step-title">
+            {active + 1}. {activeStep.label}
+          </h4>
+        </div>
+
+        <div className="pp-stats">
+          <div className="pp-stat">
+            <div className="pp-stat-label">Standard turnaround</div>
+            <div className="pp-stat-value">8–10 weeks</div>
+          </div>
+          <div className="pp-stat">
+            <div className="pp-stat-label">
+              Projected completion (throughput)
+            </div>
+            <div className="pp-stat-value">—</div>
+          </div>
+          <div className="pp-stat">
+            <div className="pp-stat-label">Est. time (working hours)</div>
+            <div className="pp-stat-value">{body.est || '—'}</div>
+          </div>
+        </div>
+
+        <div className="pp-grid">
+          {/* Column 1 */}
+          <div className="pp-col">
+            <div className="pp-sub">What we do</div>
+            <p className="pp-body">{body.what || '—'}</p>
+
+            <div className="pp-sub">Why it matters</div>
+            <p className="pp-body">{body.why || '—'}</p>
+
+            <div className="pp-sub">Techniques used</div>
+            <div className="pp-chips">
+              {(body.techniques || []).map((t) => (
+                <span key={t} className="pp-chip">
+                  {t}
+                </span>
+              ))}
             </div>
 
-            <div className="pp2-sub">QC CHECKLIST <span className="pp2-muted">(Top 5)</span></div>
-            <ul className="pp2-list">
-              {(qcTop5.length ? qcTop5 : ['No checklist items recorded for this step.']).map((t,i) => (
+            <div className="pp-sub">
+              QC checklist <span className="pp-muted">(top 5)</span>
+            </div>
+            <ul className="pp-list">
+              {(qcTop5.length
+                ? qcTop5
+                : ['No checklist items recorded for this step.']
+              ).map((t, i) => (
                 <li key={i}>{t}</li>
               ))}
             </ul>
           </div>
 
-          <div className="pp2-col">
-            <div className="pp2-sub">TOOLS INVOLVED</div>
-            <ul className="pp2-links">
-              {(body.tools || []).map(t => (
+          {/* Column 2 */}
+          <div className="pp-col">
+            <div className="pp-sub">Tools involved</div>
+            <ul className="pp-links">
+              {(body.tools || []).map((t) => (
                 <li key={t}>
-                  <a href="#" onClick={(e)=>e.preventDefault()}>{t}</a>
+                  <button
+                    type="button"
+                    className="pp-link-button"
+                    onClick={(e) => e.preventDefault()}
+                  >
+                    {t}
+                  </button>
                 </li>
               ))}
             </ul>
 
-            <div className="pp2-sub">RISKS & MITIGATIONS</div>
-            <ul className="pp2-list">
-              {(body.risks || []).map(r => <li key={r}>{r}</li>)}
+            <div className="pp-sub">Risks & mitigations</div>
+            <ul className="pp-list">
+              {(body.risks || []).map((r) => (
+                <li key={r}>{r}</li>
+              ))}
             </ul>
 
-            <div className="pp2-mantra">
-              <span className="pp2-star">★</span>
+            <div className="pp-mantra">
+              <span className="pp-star">★</span>
               <span>{body.mantra}</span>
             </div>
           </div>
         </div>
 
-        {/* Media rail */}
-        {media.length > 0 && <div className="pp2-sub" style={{marginTop:12}}>Related Media</div>}
+        {/* Related media */}
+        {media.length > 0 && (
+          <div className="pp-sub" style={{ marginTop: 12 }}>
+            Related media
+          </div>
+        )}
+
         {media.length === 0 ? (
-          <div className="pp2-empty">No files for this step yet.</div>
+          <div className="pp-empty">No files for this step yet.</div>
         ) : (
-          <div className="pp2-media">
+          <div className="pp-media">
             {media.map((m, i) => {
-              const alt = `${activeStep.label} media ${i+1}`;
+              const alt = `${activeStep.label} media ${i + 1}`;
+
               if (m.type === 'image') {
                 return (
-                  <a key={i} href={m.url} target="_blank" rel="noreferrer" className="pp2-thumb">
+                  <a
+                    key={i}
+                    href={m.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="pp-thumb"
+                  >
                     <img src={m.url} alt={alt} />
                   </a>
                 );
               }
-              const cls = `pp2-thumb pp2-thumb-${m.type}`;
-              const label = m.type[0].toUpperCase() + m.type.slice(1);
+
+              const cls = `pp-thumb pp-thumb-${m.type}`;
+              const label =
+                m.type.charAt(0).toUpperCase() + m.type.slice(1);
+
               return (
-                <a key={i} href={m.url} target="_blank" rel="noreferrer" className={cls} aria-label={`${label}: ${alt}`}>
+                <a
+                  key={i}
+                  href={m.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={cls}
+                  aria-label={`${label}: ${alt}`}
+                >
                   <span>{label}</span>
                 </a>
               );
             })}
           </div>
         )}
-      </div>
-    </section>
+      </section>
+    </div>
   );
-}
+};
+
+export default ProjectProgress;

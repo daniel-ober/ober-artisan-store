@@ -1,73 +1,203 @@
-/* src/components/SoundLegendPortal/ScopeOfWork.css */
-.scope-section {
-  padding: 1.5rem;
-  background-color: #111418;      /* slightly warmer dark */
-  color: #eaecef;
+/* ScopeOfWork.css — customer-facing build specs layout */
+
+/* ---------- Card shell ---------- */
+
+.slp-card[data-component="ScopeOfWork"] {
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px 24px 24px;
+  border-radius: 18px;
+  background: radial-gradient(circle at top left, #181a27 0, #05060c 55%, #020208 100%);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(26px);
+}
+
+.slp-card[data-component="ScopeOfWork"] h3 {
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  margin: 0 0 4px;
+}
+
+.slp-card[data-component="ScopeOfWork"] .slp-muted {
+  font-size: 0.88rem;
+  opacity: 0.78;
+  margin-bottom: 12px;
+}
+
+/* ---------- Section wrapper ---------- */
+
+.sow-section {
+  margin-top: 16px;
+}
+
+.sow-heading {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  opacity: 0.8;
+  margin: 0 0 6px;
+  padding: 0 2px;
+}
+
+/* ---------- Inner section card ---------- */
+
+.sow-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 24px;
+  row-gap: 10px;
+  padding: 12px 16px 14px;
   border-radius: 12px;
-  margin-bottom: 2rem;
-  box-shadow: 0 0 14px rgba(0, 0, 0, 0.45);
+  background: radial-gradient(circle at top left, #171926 0, #090a12 55%, #040408 100%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-.sow-header {
+/* Each “cell” (label + value) */
+
+.sow-row {
   display: flex;
-  gap: 0.5rem;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* Label (small caps) */
+
+.sow-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  opacity: 0.7;
+}
+
+/* Value */
+
+.sow-value {
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* ---------- Additional notes ---------- */
+
+.sow-notes {
+  margin-top: 6px;
+  padding: 12px 16px 14px;
+  border-radius: 12px;
+  background: radial-gradient(circle at top left, #151725 0, #070810 55%, #030307 100%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* ---------- Legacy helpers (if used anywhere else) ---------- */
+
+.sow-card {
+  position: relative;
+}
+
+.sow-intro {
+  margin-bottom: 14px;
+}
+
+.sow-notes-body {
+  margin-top: 4px;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+/* -------- Signed Build Proposal -------- */
+
+.sow-proposal {
+  margin-top: 8px;
+  padding: 16px 18px;
+  border-radius: 12px;
+  background: radial-gradient(circle at top left, #141622 0, #05060c 60%, #030307 100%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.sow-proposal-title {
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+  opacity: 0.9;
+  word-break: break-all;
+}
+
+.sow-proposal-actions {
+  display: flex;
+  gap: 10px;
   flex-wrap: wrap;
-  margin-bottom: 0.75rem;
 }
 
-.chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.25rem 0.55rem;
-  border-radius: 999px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  border: 1px solid transparent;
-}
-
-.id-chip {
-  background: #0f172a;
-  color: #c7d2fe;
-  border-color: #334155;
-}
-.line-chip {
-  background: #1f2937;
-  color: #e5e7eb;
-  border-color: #374151;
-}
-.size-chip {
-  background: #122233;
-  color: #cce0ff;
-  border-color: #1e3a8a;
-}
-
-.scope-section h2 {
-  font-size: 1.8rem;
-  margin: 0.6rem 0 1rem;
-  color: #ffffff;
-}
-
-.scope-section p {
-  font-size: 1rem;
-  margin: 0.35rem 0;
-  line-height: 1.55;
-}
-
-.scope-section strong {
-  color: #ffffff;
-  font-weight: 650;
-}
-
-.scope-section .edit-button {
-  margin-top: 1rem;
-  background-color: #0078ff;
-  color: #fff;
-  border: none;
+/* buttons */
+.sow-btn {
   padding: 8px 14px;
-  border-radius: 6px;
-  font-size: 0.9rem;
+  background: #ffffff0f;
+  border: 1px solid #ffffff22;
+  color: #fff;
+  font-size: 0.84rem;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  text-decoration: none;
+  transition: 0.2s ease;
 }
-.scope-section .edit-button:hover { background-color: #005ec4; }
+
+.sow-btn:hover {
+  background: #ffffff18;
+}
+
+.sow-btn-outline {
+  background: transparent;
+  border: 1px solid #ffffff33;
+}
+
+.sow-proposal-empty {
+  font-size: 0.9rem;
+  opacity: 0.7;
+  padding: 4px 0;
+}
+
+/* mobile */
+@media (max-width: 900px) {
+  .sow-proposal-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .sow-btn,
+  .sow-btn-outline {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 900px) {
+  .slp-card[data-component="ScopeOfWork"] {
+    padding: 18px 16px 20px;
+  }
+
+  .sow-grid {
+    grid-template-columns: 1fr;
+    row-gap: 8px;
+  }
+
+  .sow-heading {
+    font-size: 0.76rem;
+    letter-spacing: 0.18em;
+  }
+
+  .sow-label {
+    font-size: 0.74rem;
+  }
+
+  .sow-value {
+    font-size: 0.88rem;
+  }
+
+  .sow-notes {
+    font-size: 0.88rem;
+  }
+}

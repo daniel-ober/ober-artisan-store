@@ -1,5 +1,13 @@
+// src/components/ViewOrderModal.js
 import React, { useEffect, useState } from 'react';
-import { doc, getDoc, updateDoc, arrayUnion, collection, addDoc } from 'firebase/firestore';
+import {
+  doc,
+  getDoc,
+  updateDoc,
+  arrayUnion,
+  collection,
+  addDoc,
+} from 'firebase/firestore';
 import { Timestamp } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import { getOrderStatusFromItems } from '../utils/statusConfig';
@@ -39,13 +47,23 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
   const [internalNotes, setInternalNotes] = useState([]);
   const [systemHistory, setSystemHistory] = useState([]);
   const [newNote, setNewNote] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false); // used for Add Note
   const [items, setItems] = useState(orderDetails.items || []);
-  const [orderStatus, setOrderStatus] = useState(orderDetails.status || 'Order Started');
+  const [orderStatus, setOrderStatus] = useState(
+    orderDetails.status || 'Order Started'
+  );
   const [relatedProjects, setRelatedProjects] = useState([]);
 
+  // ⭐ NEW: tracking number state
+  const [trackingNumber, setTrackingNumber] = useState(
+    orderDetails.trackingNumber || ''
+  );
+  const [savingTracking, setSavingTracking] = useState(false);
+
   const createProject = async (item = null) => {
-    const confirmCreation = window.confirm(`Create Project for ${item?.name || 'Blank Project'}?`);
+    const confirmCreation = window.confirm(
+      `Create Project for ${item?.name || 'Blank Project'}?`
+    );
     if (!confirmCreation) return;
 
     try {
@@ -53,7 +71,8 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
       const parsedAddress = (orderDetails.customerAddress || '').split(',');
       const street = parsedAddress[0]?.trim() || '';
       const city = parsedAddress[1]?.trim() || '';
-      let state = '', zip = '';
+      let state = '',
+        zip = '';
       if (parsedAddress[2]) {
         const parts = parsedAddress[2].trim().split(' ');
         state = parts[0] || '';
@@ -76,7 +95,9 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
         },
         startDate: Timestamp.now(),
         currentPhase: 'Step 1. Wood Preparation',
-        artisanLine: item?.name?.toLowerCase().includes('soundlegend') ? 'SoundLegend' : '',
+        artisanLine: item?.name?.toLowerCase().includes('soundlegend')
+          ? 'SoundLegend'
+          : '',
         width: '',
         shellDepth: '',
         itemDetails: item || null,
@@ -87,7 +108,10 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
       const projectRef = await addDoc(collection(db, 'projects'), projectData);
       const projectId = projectRef.id;
 
-      const projectEntry = { projectId, itemName: item?.name || 'Blank Project' };
+      const projectEntry = {
+        projectId,
+        itemName: item?.name || 'Blank Project',
+      };
       const orderRef = doc(db, 'orders', orderDetails.id);
 
       await updateDoc(orderRef, {
@@ -109,7 +133,10 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
 
       setRelatedProjects((p) => [...p, projectEntry]);
       setSystemHistory((p) => [
-        { event: `Project created: ${projectEntry.itemName} (ID: ${projectId})`, timestamp: new Date().toISOString() },
+        {
+          event: `Project created: ${projectEntry.itemName} (ID: ${projectId})`,
+          timestamp: new Date().toISOString(),
+        },
         ...p,
       ]);
 
@@ -130,6 +157,8 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
           setInternalNotes(data.internalNotes || []);
           setSystemHistory(data.systemHistory || []);
           setRelatedProjects(data.relatedProjects || []);
+          // keep tracking in sync with Firestore
+          setTrackingNumber(data.trackingNumber || '');
         }
       } catch (err) {
         console.error('❌ Failed to load order data:', err);
@@ -138,20 +167,36 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
     if (isOpen) fetchOrderData();
   }, [isOpen, orderDetails.id]);
 
+  // also sync when parent passes a different orderDetails
+  useEffect(() => {
+    setItems(orderDetails.items || []);
+    setOrderStatus(orderDetails.status || 'Order Started');
+    setTrackingNumber(orderDetails.trackingNumber || '');
+  }, [orderDetails]);
+
   const handleAddNote = async () => {
     if (!newNote.trim()) return;
     const note = { text: newNote.trim(), timestamp: new Date().toISOString() };
     setInternalNotes((prev) => [note, ...prev]);
-    setSystemHistory((prev) => [{ event: `Internal note added`, timestamp: note.timestamp }, ...prev]);
+    setSystemHistory((prev) => [
+      { event: `Internal note added`, timestamp: note.timestamp },
+      ...prev,
+    ]);
     setNewNote('');
     try {
+      setLoading(true);
       const orderRef = doc(db, 'orders', orderDetails.id);
       await updateDoc(orderRef, {
         internalNotes: arrayUnion(note),
-        systemHistory: arrayUnion({ event: 'Internal note added', timestamp: note.timestamp }),
+        systemHistory: arrayUnion({
+          event: 'Internal note added',
+          timestamp: note.timestamp,
+        }),
       });
     } catch (error) {
       console.error('❌ Failed to save note to Firestore:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -175,7 +220,10 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
       });
 
       setSystemHistory((prev) => [
-        { event: `Item status changed to "${newStatus}"`, timestamp: new Date().toISOString() },
+        {
+          event: `Item status changed to "${newStatus}"`,
+          timestamp: new Date().toISOString(),
+        },
         ...prev,
       ]);
     } catch (err) {
@@ -183,29 +231,123 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
     }
   };
 
+  // ⭐ NEW: save tracking number to Firestore + bubble up
+  const handleSaveTracking = async () => {
+    const trimmed = trackingNumber.trim();
+    const eventText = trimmed
+      ? `Tracking number set to "${trimmed}"`
+      : 'Tracking number cleared';
+
+    try {
+      setSavingTracking(true);
+      const orderRef = doc(db, 'orders', orderDetails.id);
+      await updateDoc(orderRef, {
+        trackingNumber: trimmed || '',
+        systemHistory: arrayUnion({
+          event: eventText,
+          timestamp: new Date().toISOString(),
+        }),
+      });
+
+      setSystemHistory((prev) => [
+        { event: eventText, timestamp: new Date().toISOString() },
+        ...prev,
+      ]);
+
+      if (onUpdateOrder) {
+        onUpdateOrder({
+          ...orderDetails,
+          trackingNumber: trimmed || '',
+        });
+      }
+
+      alert('✅ Tracking number saved.');
+    } catch (err) {
+      console.error('❌ Failed to save tracking number:', err);
+      alert('❌ Failed to save tracking. Please try again.');
+    } finally {
+      setSavingTracking(false);
+    }
+  };
+
   if (!isOpen) return null;
 
   return (
-    <div className="modal-overlay ordermodal adminmodal light" onClick={onClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true">
-        <button onClick={onClose} className="modal-close icon-btn" aria-label="Close">✕</button>
+    <div
+      className="modal-overlay ordermodal adminmodal light"
+      onClick={onClose}
+    >
+      <div
+        className="modal-content"
+        onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+      >
+        <button
+          onClick={onClose}
+          className="modal-close icon-btn"
+          aria-label="Close"
+        >
+          ✕
+        </button>
         <h3 className="modal-title">Order Details</h3>
 
         <div className="compact-order-details">
-          <div className="detail-row"><strong>Order ID:</strong> <span>{orderDetails.id}</span></div>
+          <div className="detail-row">
+            <strong>Order ID:</strong> <span>{orderDetails.id}</span>
+          </div>
           <div className="detail-row">
             <strong>Order Date:</strong>{' '}
-            <span>{orderDetails.createdAt ? formatFirestoreTimestamp(orderDetails.createdAt) : 'N/A'}</span>
+            <span>
+              {orderDetails.createdAt
+                ? formatFirestoreTimestamp(orderDetails.createdAt)
+                : 'N/A'}
+            </span>
           </div>
-          <div className="detail-row"><strong>Order Status:</strong> <span>{orderStatus}</span></div>
-          <div className="detail-row"><strong>Customer Name:</strong> <span>{orderDetails.customerName || 'N/A'}</span></div>
-          <div className="detail-row"><strong>Email:</strong> <span>{orderDetails.customerEmail || 'N/A'}</span></div>
+          <div className="detail-row">
+            <strong>Order Status:</strong> <span>{orderStatus}</span>
+          </div>
+          <div className="detail-row">
+            <strong>Customer Name:</strong>{' '}
+            <span>{orderDetails.customerName || 'N/A'}</span>
+          </div>
+          <div className="detail-row">
+            <strong>Email:</strong>{' '}
+            <span>{orderDetails.customerEmail || 'N/A'}</span>
+          </div>
           {orderDetails.customerPhone && (
-            <div className="detail-row"><strong>Phone:</strong> <span>{orderDetails.customerPhone}</span></div>
+            <div className="detail-row">
+              <strong>Phone:</strong>{' '}
+              <span>{orderDetails.customerPhone}</span>
+            </div>
           )}
           {orderDetails.customerAddress && (
-            <div className="detail-row"><strong>Shipping Address:</strong> <span>{orderDetails.customerAddress}</span></div>
+            <div className="detail-row">
+              <strong>Shipping Address:</strong>{' '}
+              <span>{orderDetails.customerAddress}</span>
+            </div>
           )}
+
+          {/* ⭐ NEW: tracking number editor */}
+          <div className="detail-row">
+            <strong>Tracking #:</strong>
+            <span>
+              <input
+                type="text"
+                value={trackingNumber}
+                onChange={(e) => setTrackingNumber(e.target.value)}
+                placeholder="e.g. 1Z999AA10123456784"
+                style={{ maxWidth: '260px', marginRight: '8px' }}
+              />
+              <button
+                className="btn"
+                onClick={handleSaveTracking}
+                disabled={savingTracking}
+              >
+                {savingTracking ? 'Saving…' : 'Save'}
+              </button>
+            </span>
+          </div>
         </div>
 
         <h3 className="section-title">Products Ordered</h3>
@@ -232,10 +374,18 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
               {items.map((item, index) => (
                 <tr key={index}>
                   <td className="product-cell">
-                    <strong className="product-name-modal">{item.description || item.name || 'N/A'}</strong>
+                    <strong className="product-name-modal">
+                      {item.description || item.name || 'N/A'}
+                    </strong>
                     {item.variant && (
                       <div className="muted">
-                        {[item.variant.color, item.variant.size, item.variant.other].filter(Boolean).join(' / ')}
+                        {[
+                          item.variant.color,
+                          item.variant.size,
+                          item.variant.other,
+                        ]
+                          .filter(Boolean)
+                          .join(' / ')}
                       </div>
                     )}
                   </td>
@@ -244,11 +394,15 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
                   <td>
                     <select
                       value={item.status || 'Preparing'}
-                      onChange={(e) => handleItemStatusChange(index, e.target.value)}
+                      onChange={(e) =>
+                        handleItemStatusChange(index, e.target.value)
+                      }
                       className="status-select"
                     >
                       {ITEM_STATUSES.map((s) => (
-                        <option key={s} value={s}>{s}</option>
+                        <option key={s} value={s}>
+                          {s}
+                        </option>
                       ))}
                     </select>
                   </td>
@@ -261,10 +415,32 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
                       title="Create project"
                     >
                       {/* plus-in-document icon (inline SVG) */}
-                      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" fill="none" stroke="currentColor" strokeWidth="1.7" />
-                        <path d="M14 2v6h6" fill="none" stroke="currentColor" strokeWidth="1.7" />
-                        <path d="M12 11v6M9 14h6" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
+                      <svg
+                        viewBox="0 0 24 24"
+                        width="18"
+                        height="18"
+                        aria-hidden="true"
+                        focusable="false"
+                      >
+                        <path
+                          d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.7"
+                        />
+                        <path
+                          d="M14 2v6h6"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.7"
+                        />
+                        <path
+                          d="M12 11v6M9 14h6"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.7"
+                          strokeLinecap="round"
+                        />
                       </svg>
                     </button>
                   </td>
@@ -283,7 +459,9 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
               <li key={p.projectId}>
                 <button
                   className="project-chip"
-                  onClick={() => (window.location.href = `/projects/${p.projectId}`)}
+                  onClick={() =>
+                    (window.location.href = `/projects/${p.projectId}`)
+                  }
                 >
                   {p.itemName} (ID: {p.projectId})
                 </button>
@@ -322,13 +500,17 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
           onChange={(e) => setNewNote(e.target.value)}
           className="note-input"
         />
-        <button className="btn add-note-btn" onClick={handleAddNote} disabled={loading}>
+        <button
+          className="btn add-note-btn"
+          onClick={handleAddNote}
+          disabled={loading}
+        >
           {loading ? 'Adding Note...' : 'Add Note'}
         </button>
 
         <div className="history-log">
           <h3 className="section-title">System History</h3>
-        {systemHistory.length > 0 ? (
+          {systemHistory.length > 0 ? (
             <table className="data-table">
               <thead>
                 <tr>
@@ -350,7 +532,12 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
           )}
         </div>
 
-        <button className="btn btn-ghost order-close-btn" onClick={onClose}>Close</button>
+        <button
+          className="btn btn-ghost order-close-btn"
+          onClick={onClose}
+        >
+          Close
+        </button>
       </div>
     </div>
   );

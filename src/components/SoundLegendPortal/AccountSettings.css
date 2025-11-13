@@ -1,0 +1,70 @@
+/* Scoped styles for the Account Settings tab.
+   Relies on shared atoms (apo-btn, apo-toggle, vp-input, vp-hint, vp-label, slp-muted, vp-card)
+   that already exist in your SoundLegend styles. These add layout polish only. */
+
+[data-component="AccountSettings"] .as-section {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 16px;
+  margin-top: 16px;
+}
+
+[data-component="AccountSettings"] .as-section:first-of-type {
+  border-top: none;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+[data-component="AccountSettings"] .as-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+[data-component="AccountSettings"] .as-actions {
+  display: inline-flex;
+  gap: 8px;
+}
+
+[data-component="AccountSettings"] .as-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 8px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+
+[data-component="AccountSettings"] .as-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+[data-component="AccountSettings"] .as-grid {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 1fr;
+  margin-top: 6px;
+}
+
+[data-component="AccountSettings"] .as-grid.two {
+  grid-template-columns: 1.2fr 0.8fr; /* city/state and zip/country pairs */
+}
+
+.vp-input.has-error {
+  border-color: #ff9a9a !important;
+  box-shadow: 0 0 0 2px rgba(255,154,154,0.15);
+}
+
+.vp-hint.error {
+  color: #ff9a9a;
+}
+
+/* Small screens */
+@media (max-width: 640px) {
+  [data-component="AccountSettings"] .as-grid.two {
+    grid-template-columns: 1fr 1fr;
+  }
+}

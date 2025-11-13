@@ -1,183 +1,411 @@
-// src/components/SoundLegendPortal/ScopeOfWork.js
-import React, { useEffect, useState, useMemo } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { doc, getDoc } from 'firebase/firestore';
-import { db } from '../../firebaseConfig';
+import React from 'react';
 import './ScopeOfWork.css';
 
-/* ---------- helpers ---------- */
-const val = (...candidates) => {
-  for (const c of candidates) {
-    if (Array.isArray(c) && c.length) return c;
-    if (c !== undefined && c !== null && c !== '') return c;
-  }
-  return undefined;
-};
+/**
+ * Safely pull a scalar (string/number) from project/specs by trying
+ * a list of candidate paths. If value is an object (like { checklist }),
+ * we NEVER render it — we return "—" instead.
+ */
+const getScalar = (project, paths, fallback = '—') => {
+  if (!project) return fallback;
 
-const toText = (v, fallback = 'N/A') => {
-  if (Array.isArray(v)) return v.filter(Boolean).join(' / ') || fallback;
-  if (typeof v === 'number') return String(v);
-  return v || fallback;
-};
+  for (const path of paths) {
+    const parts = path.split('.');
+    let cur = project;
+    let ok = true;
 
-const isHybridOrStave = (name = '') =>
-  /stave|hybrid/i.test(String(name || ''));
-
-const getIdentifier = (p = {}) => {
-  const serial =
-    val(p.serial, p.serialNumber, p.projectSerial, p.snareSerial, p.serialId) || '';
-  const line =
-    val(p.series, p.artisanLine, p.productLine, p.seriesLine, p.line) || '';
-  const diameter = val(p.diameter, p.width);
-  const depth = val(p.depth, p.shellDepth);
-  const size = diameter && depth ? ` · ${diameter}×${depth}"` : '';
-
-  if (serial && line) return `${serial} · ${line}${size}`;
-  if (serial) return `${serial}${size}`;
-  if (line) return `${line}${size}`;
-  return size ? size.slice(3) : '—';
-};
-
-const speciesText = (p = {}) => {
-  // Try the most structured first, then fall back
-  const inner = val(p.innerSpecies, p.woodInner);
-  const outer = val(p.outerSpecies, p.woodOuter);
-  const secondary = val(p.secondarySpecies, p.woodSecondary);
-  const primary = val(p.woodPrimary, p.woodSpecies, p.species);
-
-  // Arrays -> join; strings -> pass-through
-  const parts = [];
-
-  if (inner || outer) {
-    const innerTxt = toText(inner, null);
-    const outerTxt = toText(outer, null);
-    if (innerTxt && outerTxt) parts.push(`${outerTxt} (outer) / ${innerTxt} (inner)`);
-    else if (outerTxt) parts.push(`${outerTxt} (outer)`);
-    else if (innerTxt) parts.push(`${innerTxt} (inner)`);
-  }
-
-  if (secondary) {
-    parts.push(`${toText(secondary)} (secondary)`);
-  }
-
-  if (primary && parts.length === 0) {
-    parts.push(toText(primary));
-  }
-
-  return parts.length ? parts.join(' · ') : 'N/A';
-};
-
-const ScopeOfWork = () => {
-  const { projectId } = useParams();
-  const navigate = useNavigate();
-
-  const [project, setProject] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchProject = async () => {
-      try {
-        const ref = doc(db, 'projects', projectId);
-        const snap = await getDoc(ref);
-        if (!snap.exists()) {
-          navigate('/not-found');
-          return;
-        }
-        setProject({ id: snap.id, ...snap.data() });
-      } catch (err) {
-        console.error('Error fetching project:', err);
-      } finally {
-        setLoading(false);
+    for (const p of parts) {
+      if (!cur || typeof cur !== 'object' || !(p in cur)) {
+        ok = false;
+        break;
       }
-    };
-    fetchProject();
-  }, [projectId, navigate]);
+      cur = cur[p];
+    }
 
-  const derived = useMemo(() => {
-    if (!project) return {};
-    const diameter = val(project.diameter, project.width);
-    const depth = val(project.depth, project.shellDepth);
-    const line = val(project.series, project.artisanLine, project.productLine, project.seriesLine, project.line);
-    const construction = val(project.shellConstructionName, project.shellConstruction);
-    const staveCount = val(project.staveCount, project.staves);
-    const hardwareColor = val(project.hardwareColor, project.hardwareFinish);
-    const hoops = val(project.hoops, project.hoopType);
-    const throwOff = val(project.snareThrowOff, project.throwOff);
-    const snareWires = val(project.snareWires, project.wires);
-    const bearingEdge = val(project.bearingEdge, project.bearingEdges);
-    const rerings = val(project.reinforcementRings, project.reRings, project.rerings);
-    const reringSpecies = val(project.reringsSpecies, project.reRingsSpecies);
-    const targetThickness = val(project.targetShellThickness, project.shellThicknessTarget);
+    if (!ok || cur == null) continue;
 
-    return {
-      identifier: getIdentifier(project),
-      line,
-      construction,
-      staveCount,
-      diameter,
-      depth,
-      species: speciesText(project),
-      targetThickness,
-      bearingEdge,
-      hardwareColor,
-      hoops,
-      rerings,
-      reringSpecies,
-      throwOff,
-      snareWires,
-      finishDetails: val(project.finishDetails, project.finish, project.veneer),
-      additionalNotes: val(project.additionalNotes, project.notes),
-    };
-  }, [project]);
+    // Ignore non-scalar values (objects/arrays like { checklist: [...] })
+    if (typeof cur === 'object') continue;
 
-  if (loading) return <div className="scope-section">Loading...</div>;
-  if (!project) return <div className="scope-section">Project not found.</div>;
+    const s = String(cur).trim();
+    if (!s) continue;
+    return s;
+  }
 
-  const d = derived;
+  return fallback;
+};
+
+const ScopeOfWork = ({ project }) => {
+  if (!project) {
+    return (
+      <div className="slp-card">
+        <h3>Scope of Work</h3>
+        <p className="slp-muted">No project selected.</p>
+      </div>
+    );
+  }
+
+  // -------- Identity / line info --------
+  const line = getScalar(project, ['artisanLine', 'specs.artisanLine']);
+
+  // For drums like SL-003, lineSerial is the main serial.
+  const serial = getScalar(project, [
+    'lineSerial',
+    'globalSerial',
+    'specs.lineSerial',
+    'specs.globalSerial',
+  ]);
+
+  const nickname = getScalar(project, ['nickname', 'specs.nickname']);
+
+  // -------- Shell / geometry --------
+  const diameter = getScalar(project, [
+    'width', // e.g. "14\""
+    'diameter',
+    'specs.diameter',
+    'specs.shellDiameter',
+  ]);
+
+  const depth = getScalar(project, [
+    'shellDepth', // e.g. "5\""
+    'depth',
+    'specs.depth',
+    'specs.shellDepth',
+  ]);
+
+  const staveCount = getScalar(project, [
+    'staveCount', // "16"
+    'specs.staveCount',
+    'specs.stave_count',
+  ]);
+
+  // shellConstructionName is the clean string ("Stave")
+  const shellConstruction = getScalar(project, [
+    'shellConstructionName',
+    'shellConstruction',
+    'specs.shellConstruction',
+    'specs.shellType',
+  ]);
+
+  const reinforcementRings = getScalar(project, [
+    'reinforcementRings', // "None"
+    'specs.reinforcementRings',
+    'specs.reinforcement_rings',
+  ]);
+
+  // -------- Wood / veneer --------
+  const primarySpecies = getScalar(project, [
+    'woodPrimary', // "Birch"
+    'woodSpecies',
+    'primarySpecies',
+    'specs.woodSpecies',
+    'specs.primarySpecies',
+  ]);
+
+  const secondarySpeciesBase = getScalar(project, [
+    'woodSecondary', // "Cherry"
+    'secondarySpecies',
+    'specs.secondarySpecies',
+  ]);
+
+  const secondaryPercent = getScalar(
+    project,
+    ['woodSecondaryPercent'], // "25"
+    '—'
+  );
+
+  let secondarySpecies = '—';
+  if (secondarySpeciesBase !== '—') {
+    secondarySpecies =
+      secondaryPercent !== '—'
+        ? `${secondarySpeciesBase} (${secondaryPercent}%)`
+        : secondarySpeciesBase;
+  }
+
+  const veneer = getScalar(project, [
+    // You can later swap to a dedicated veneer field if you add one.
+    'veneer',
+    'veneerSpecies',
+    'finishDetails', // "Veneer (Exotic)"
+    'specs.veneer',
+    'specs.veneerSpecies',
+  ]);
+
+  // -------- Bearing edges / beds --------
+  const bearingEdges = getScalar(project, [
+    'bearingEdge', // "45 Inner + Rounded Outer"
+    'bearingEdges', // (map, safely skipped if object)
+    'specs.bearingEdges',
+  ]);
+
+  const snareBedDepth = getScalar(project, [
+    'snareBedDepth', // "Medium"
+    'specs.snareBedDepth',
+  ]);
+
+  // -------- Hardware --------
+  const lugType = getScalar(project, [
+    'lugType', // "Double-end tube"
+    'specs.lugType',
+  ]);
+
+  const hardwareFinish = getScalar(project, [
+    'hardwareColor', // "Brass/Gold"
+    'hardwareFinish',
+    'specs.hardwareFinish',
+    'specs.hardwareColor',
+  ]);
+
+  const hoops = getScalar(project, [
+    'hoops', // "Die-Cast"
+    'specs.hoops',
+  ]);
+
+  const throwOff = getScalar(project, [
+    'snareThrowOff', // "Trick Percussion GS007AM (Multi-Step)"
+    'throw',
+    'throwOff',
+    'specs.throw',
+    'specs.throwOff',
+  ]);
+
+  const snareWires = getScalar(project, [
+    'snareWires', // "Puresound Custom Pro (Steel)"
+    'specs.snareWires',
+    'specs.wires',
+  ]);
+
+  // -------- Finish --------
+  const exteriorFinish = getScalar(project, [
+    'exteriorFinish',
+    'finishDetails', // "Veneer (Exotic)" – better than nothing
+    'finish',
+    'specs.finish',
+    'specs.exteriorFinish',
+  ]);
+
+  const interiorFinish = getScalar(project, [
+    'interiorFinish',
+    'specs.interiorFinish',
+  ]);
+
+  const resinAccent = getScalar(project, [
+    'resinAccent'
+  ]);
+
+  // -------- Notes --------
+  const additionalNotes = getScalar(
+    project,
+    [
+      'additionalNotes', // "mappa burl veneer, dark blue (some green)..."
+      'notes',
+      'specs.notes',
+      'specs.additionalNotes',
+    ],
+    ''
+  );
+
+  // -------- Download handler for signed proposal (no fetch, no CORS issues) --------
+  const handleDownloadProposal = () => {
+    try {
+      const arr =
+        project.attachments &&
+        project.attachments.build_proposal &&
+        project.attachments.build_proposal.length > 0
+          ? project.attachments.build_proposal
+          : null;
+
+      if (!arr) return;
+
+      const fileUrl = arr[0].url;
+      if (!fileUrl) return;
+
+      const link = document.createElement('a');
+      link.href = fileUrl;
+      // Let browser decide filename; you can set a default if you want:
+      // link.download = 'Signed_Build_Proposal.pdf';
+      link.setAttribute('download', '');
+      link.setAttribute('target', '_blank');
+      link.setAttribute('rel', 'noopener noreferrer');
+
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (err) {
+      console.error('Error triggering proposal download:', err);
+    }
+  };
 
   return (
-    <div className="scope-section">
-      {/* Header chips */}
-      <div className="sow-header">
-        <span className="chip id-chip">🆔 {d.identifier}</span>
-        {d.line && <span className="chip line-chip">✨ {d.line}</span>}
-        {(d.diameter && d.depth) && (
-          <span className="chip size-chip">📐 {d.diameter}×{d.depth}"</span>
-        )}
-      </div>
+    <div className="slp-card" data-component="ScopeOfWork">
+      <h3>Scope of Work</h3>
+      <p className="slp-muted">
+        A high-level snapshot of how your SoundLegend is built — woods,
+        geometry, edges, hardware, and finish — based on the information in your
+        project.
+      </p>
 
-      <h2>Scope of Work</h2>
+      {/* IDENTITY */}
+      <section className="sow-section">
+        <h4 className="sow-heading">Identity</h4>
+        <div className="sow-grid">
+          <div className="sow-row">
+            <span className="sow-label">Artisan Line</span>
+            <span className="sow-value">{line}</span>
+          </div>
+          <div className="sow-row">
+            <span className="sow-label">Serial</span>
+            <span className="sow-value">{serial}</span>
+          </div>
+          <div className="sow-row">
+            <span className="sow-label">Nickname / Title</span>
+            <span className="sow-value">{nickname || '—'}</span>
+          </div>
+        </div>
+      </section>
 
-      <p><strong>Artisan Line:</strong> {toText(d.line)}</p>
-      <p><strong>Shell Construction:</strong> {toText(d.construction)}</p>
+      {/* SHELL / GEOMETRY */}
+      <section className="sow-section">
+        <h4 className="sow-heading">Shell & Geometry</h4>
+        <div className="sow-grid">
+          <div className="sow-row">
+            <span className="sow-label">Dimensions</span>
+            <span className="sow-value">
+              {diameter !== '—' && depth !== '—'
+                ? `${diameter} × ${depth}`
+                : '—'}
+            </span>
+          </div>
+          <div className="sow-row">
+            <span className="sow-label">Stave Count</span>
+            <span className="sow-value">{staveCount}</span>
+          </div>
+          <div className="sow-row">
+            <span className="sow-label">Shell Construction</span>
+            <span className="sow-value">{shellConstruction}</span>
+          </div>
+          <div className="sow-row">
+            <span className="sow-label">Reinforcement Rings</span>
+            <span className="sow-value">{reinforcementRings}</span>
+          </div>
+        </div>
+      </section>
 
-      {isHybridOrStave(d.construction) && (
-        <p><strong>Stave Quantity:</strong> {toText(d.staveCount)}</p>
-      )}
+      {/* WOOD / VENEER */}
+      <section className="sow-section">
+        <h4 className="sow-heading">Wood & Veneer</h4>
+        <div className="sow-grid">
+          <div className="sow-row">
+            <span className="sow-label">Primary Species</span>
+            <span className="sow-value">{primarySpecies}</span>
+          </div>
+          <div className="sow-row">
+            <span className="sow-label">Secondary / Hybrid</span>
+            <span className="sow-value">{secondarySpecies}</span>
+          </div>
+          <div className="sow-row">
+            <span className="sow-label">Veneer / Top Sheet</span>
+            <span className="sow-value">{veneer}</span>
+          </div>
+        </div>
+      </section>
 
-      <p><strong>Diameter:</strong> {toText(d.diameter)}</p>
-      <p><strong>Depth:</strong> {toText(d.depth)}</p>
+      {/* BEARING EDGES / SNARE BEDS */}
+      <section className="sow-section">
+        <h4 className="sow-heading">Edges & Snare Beds</h4>
+        <div className="sow-grid">
+          <div className="sow-row">
+            <span className="sow-label">Bearing Edges</span>
+            <span className="sow-value">{bearingEdges}</span>
+          </div>
+          <div className="sow-row">
+            <span className="sow-label">Snare Bed Depth</span>
+            <span className="sow-value">{snareBedDepth}</span>
+          </div>
+        </div>
+      </section>
 
-      <p><strong>Wood Species:</strong> {toText(d.species)}</p>
-      <p><strong>Target Shell Thickness:</strong> {d.targetThickness ? `${d.targetThickness} mm` : 'N/A'}</p>
+      {/* HARDWARE */}
+      <section className="sow-section">
+        <h4 className="sow-heading">Hardware</h4>
+        <div className="sow-grid">
+          <div className="sow-row">
+            <span className="sow-label">Lug Type</span>
+            <span className="sow-value">{lugType}</span>
+          </div>
+          <div className="sow-row">
+            <span className="sow-label">Hardware Finish</span>
+            <span className="sow-value">{hardwareFinish}</span>
+          </div>
+          <div className="sow-row">
+            <span className="sow-label">Hoops</span>
+            <span className="sow-value">{hoops}</span>
+          </div>
+          <div className="sow-row">
+            <span className="sow-label">Throw-Off</span>
+            <span className="sow-value">{throwOff}</span>
+          </div>
+          <div className="sow-row">
+            <span className="sow-label">Snare Wires</span>
+            <span className="sow-value">{snareWires}</span>
+          </div>
+        </div>
+      </section>
 
-      <p><strong>Bearing Edge:</strong> {toText(d.bearingEdge)}</p>
-      <p><strong>Quantity Lugs:</strong> {toText(project.lugCount)}</p>
-      <p><strong>Lug Type:</strong> {toText(project.lugType)}</p>
-      <p><strong>Hardware Color:</strong> {toText(d.hardwareColor)}</p>
-      <p><strong>Hoops:</strong> {toText(d.hoops)}</p>
+      {/* FINISH */}
+      <section className="sow-section">
+        <h4 className="sow-heading">Finish</h4>
+        <div className="sow-grid">
+          <div className="sow-row">
+            <span className="sow-label">Exterior Finish</span>
+            <span className="sow-value">{exteriorFinish}</span>
+          </div>
+          <div className="sow-row">
+            <span className="sow-label">Interior Finish</span>
+            <span className="sow-value">{interiorFinish}</span>
+          </div>
+          <div className="sow-row">
+            <span className="sow-label">Resin / Acrylic Accent</span>
+            <span className="sow-value">{resinAccent}</span>
+          </div>
+        </div>
+      </section>
 
-      <p><strong>Reinforcement Rings:</strong> {toText(d.rerings, 'None')}</p>
-      {d.rerings && String(d.rerings).toLowerCase() !== 'none' && (
-        <p><strong>Re-Rings Wood Species:</strong> {toText(d.reringSpecies)}</p>
-      )}
+      {/* NOTES */}
+      <section className="sow-section">
+        <h4 className="sow-heading">Additional Notes</h4>
+        <div className="sow-notes">
+          {additionalNotes
+            ? additionalNotes
+            : 'No additional build notes recorded.'}
+        </div>
+      </section>
 
-      <p><strong>Throw-off:</strong> {toText(d.throwOff)}</p>
-      <p><strong>Snare Wires:</strong> {toText(d.snareWires)}</p>
+      {/* SIGNED BUILD PROPOSAL */}
+      <section className="sow-section">
+        <h4 className="sow-heading">Signed Build Proposal</h4>
 
-      <p><strong>Snare Bed Depth:</strong> {toText(val(project.snareBedDepth, project.snareBed), 'N/A')}</p>
-      <p><strong>Finish Details:</strong> {toText(d.finishDetails)}</p>
-      <p><strong>Additional Notes:</strong> {toText(d.additionalNotes)}</p>
+        <div className="sow-proposal">
+          {project.attachments &&
+          project.attachments.build_proposal &&
+          project.attachments.build_proposal.length > 0 ? (
+            <div className="sow-proposal-actions">
+              <a
+                href={project.attachments.build_proposal[0].url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="sow-btn"
+              >
+                View/Download Document
+              </a>
+            </div>
+          ) : (
+            <div className="sow-proposal-empty">
+              No signed proposal uploaded.
+            </div>
+          )}
+        </div>
+      </section>
     </div>
   );
 };

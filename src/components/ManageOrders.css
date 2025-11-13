@@ -210,6 +210,17 @@
   background-color: #ddd;
 }
 
+/* Tracking cell – hint that it's editable */
+.manage-orders-table .tracking-cell {
+  cursor: pointer;
+  font-size: 13px;
+  color: #333;
+}
+
+.manage-orders-table .tracking-cell:hover {
+  background-color: #f5f5f5;
+}
+
 /* ======================== */
 /* Responsive Styles        */
 /* ======================== */
