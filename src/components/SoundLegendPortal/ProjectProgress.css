@@ -190,11 +190,11 @@
 [data-component="ProjectProgress"] .pp-dot::before {
   content: '';
   position: absolute;
-  top: -8px;
+  top: -20px;
   left: 50%;
   transform: translateX(-50%);
   width: 1px;
-  height: 8px;
+  height: 20px;
   border-radius: 999px;
   background: rgba(148, 163, 184, 0.9);
 }
@@ -254,22 +254,38 @@
   border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
+/* step header: centered title with status directly underneath */
+
+/* step header: centered title with status directly underneath */
+
 [data-component="ProjectProgress"] .pp-step-header {
   display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 8px;
-  margin-bottom: 12px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 14px;
+  padding: 4px 6px 10px;
 }
 
+/* centered, enlarged step title */
+[data-component="ProjectProgress"] .pp-step-title {
+  margin: 0;
+  font-size: 1.12rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* status pill under the title */
 [data-component="ProjectProgress"] .pp-pill {
   font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.16em;
-  padding: 3px 8px;
+  padding: 4px 10px;
   border-radius: 999px;
   border: 1px solid rgba(148, 163, 184, 0.6);
-  background: rgba(15, 23, 42, 0.8);
+  background: rgba(15, 23, 42, 0.9);
+  white-space: nowrap;
 }
 
 [data-component="ProjectProgress"] .pp-pill.ok {
@@ -282,9 +298,52 @@
   color: #bfdbfe;
 }
 
-[data-component="ProjectProgress"] .pp-step-title {
-  font-size: 0.98rem;
-  font-weight: 500;
+[data-component="ProjectProgress"] .pp-info-tip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 6px;
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.8);
+  font-size: 0.68rem;
+  line-height: 1;
+  cursor: help;
+  opacity: 0.8;
+}
+
+[data-component="ProjectProgress"] .pp-info-tip:hover {
+  opacity: 1;
+}
+
+@media (max-width: 640px) {
+  [data-component="ProjectProgress"] .pp-hero-frame {
+    border-radius: 14px;
+  }
+
+  [data-component="ProjectProgress"] .pp-hero-caption {
+    font-size: 0.82rem;
+  }
+
+  [data-component="ProjectProgress"] .pp-summary-item {
+    padding: 9px 10px;
+  }
+
+  [data-component="ProjectProgress"] .pp-body,
+  [data-component="ProjectProgress"] .pp-list,
+  [data-component="ProjectProgress"] .pp-link-button {
+    font-size: 0.86rem;
+  }
+
+  [data-component="ProjectProgress"] .pp-step-title {
+    font-size: 1.02rem;
+  }
+
+  [data-component="ProjectProgress"] .pp-pill {
+    font-size: 0.68rem;
+    padding: 3px 8px;
+  }
 }
 
 [data-component="ProjectProgress"] .pp-stats {
@@ -490,4 +549,15 @@
   [data-component="ProjectProgress"] .pp-link-button {
     font-size: 0.86rem;
   }
+
+  @media (max-width: 640px) {
+  [data-component="ProjectProgress"] .pp-step-title {
+    font-size: 1.02rem;
+  }
+
+  [data-component="ProjectProgress"] .pp-pill {
+    font-size: 0.68rem;
+    padding: 3px 8px;
+  }
+}
 }
