@@ -11,8 +11,16 @@ const CRAFT_VIDEO = '/craft_in_motion/craftinmotion1080p.mp4';
 
 const STEPS = [
   { key: 'woodPreparation', label: 'Wood Preparation', short: 'Wood Prep' },
-  { key: 'shellConstruction', label: 'Shell Construction', short: 'Shell Build' },
-  { key: 'fineTuning', label: 'Fine Tuning (Trueing/Thickness)', short: 'Interior' },
+  {
+    key: 'shellConstruction',
+    label: 'Shell Construction',
+    short: 'Shell Build',
+  },
+  {
+    key: 'fineTuning',
+    label: 'Fine Tuning (Trueing/Thickness)',
+    short: 'Interior',
+  },
   { key: 'shellExteriorFinish', label: 'Exterior Finish', short: 'Exterior' },
   { key: 'bearingEdges', label: 'Bearing Edges', short: 'Edges' },
   { key: 'snareBedCutting', label: 'Snare Beds', short: 'Beds' },
@@ -51,9 +59,7 @@ function calcProgress(project) {
 }
 
 function stepStatus(stepData) {
-  const list = Array.isArray(stepData?.checklist)
-    ? stepData.checklist
-    : [];
+  const list = Array.isArray(stepData?.checklist) ? stepData.checklist : [];
 
   const total = list.length;
   const done = list.filter((i) => i && i.completed).length;
@@ -65,9 +71,7 @@ function stepStatus(stepData) {
 }
 
 function topFiveTasks(stepData) {
-  const list = Array.isArray(stepData?.checklist)
-    ? stepData.checklist
-    : [];
+  const list = Array.isArray(stepData?.checklist) ? stepData.checklist : [];
   return list
     .filter((x) => x && typeof x.task === 'string' && x.task.trim())
     .slice(0, 5)
@@ -151,8 +155,14 @@ function pickEarliestDate(...vals) {
   return Math.min(...ms);
 }
 
+// 🔹 Prefer the explicit actualCompletion field when present,
+// otherwise fall back to the latest of other completion-ish timestamps.
 function getCompletionDate(project) {
   if (!project) return 0;
+
+  if (project.actualCompletion) {
+    return tsToMillis(project.actualCompletion);
+  }
 
   const candidates = [
     project.completionDate,
@@ -168,15 +178,11 @@ function getCompletionDate(project) {
 
 function isProjectComplete(project, pct) {
   if (!project) return false;
-  const s = String(project.status || project.overviewStatus || '').toLowerCase();
-  if (s.includes('completed') || s.includes('fulfilled') || s.includes('delivered')) {
-    return true;
-  }
 
-  const qc = project.qualityCheck;
-  if (qc && stepStatus(qc).status === 'Completed') return true;
+  // 🔒 Only treat as complete when the weighted checklist is 100%
+  if (pct < 100) return false;
 
-  return pct >= 99;
+  return true;
 }
 
 /**
@@ -194,8 +200,7 @@ function getHeroMedia(project) {
     project.heroMediaUrl ||
     project.vaultHeroUrl ||
     project.heroUrl ||
-    (project.meta &&
-      (project.meta.heroImage || project.meta.heroImageUrl));
+    (project.meta && (project.meta.heroImage || project.meta.heroImageUrl));
 
   if (directUrl) {
     return { url: directUrl, type: detectType(directUrl) };
@@ -222,13 +227,40 @@ function getHeroMedia(project) {
   return null;
 }
 
+/* 🔹 Determine the "current" step index based on project data */
+function getCurrentStepIndex(project) {
+  if (!project) return -1;
+
+  const phase = String(project.currentPhase || '').toLowerCase();
+
+  // Try to map currentPhase text to one of the labels (e.g., "Shell Construction")
+  const fromPhase = STEPS.findIndex((s) =>
+    phase.includes(s.label.split(' ')[0].toLowerCase())
+  );
+  if (fromPhase >= 0) return fromPhase;
+
+  // Otherwise, fall back to the last step that has *any* completed checklist item
+  for (let i = STEPS.length - 1; i >= 0; i--) {
+    const d = project[STEPS[i].key];
+    const list = Array.isArray(d?.checklist) ? d.checklist : [];
+    if (list.some((c) => c && c.completed)) return i;
+  }
+
+  // No progress yet
+  return -1;
+}
+
 /* Step copy (WHAT/WHY/TOOLS/etc.) */
 
 const COPY = {
   woodPreparation: {
     what: 'Select boards, moisture-check, joint/plane flat & square, and mark grain orientation.',
     why: 'Flat, dry, oriented wood prevents warping and sets the drum’s voice.',
-    techniques: ['Moisture normalization', 'Grain matching', 'Face/edge jointing'],
+    techniques: [
+      'Moisture normalization',
+      'Grain matching',
+      'Face/edge jointing',
+    ],
     tools: ['Moisture meter', 'Jointer & planer', 'Calipers', 'Clamps'],
     risks: ['Hidden tension → cupping', 'Mismatched moisture → creep'],
     mantra: 'Stable wood = stable tone.',
@@ -291,7 +323,11 @@ const COPY = {
   hardwareAssembly: {
     what: 'Install lugs/hoops/throw/butt/strain; dress contacts; treat threads.',
     why: 'Removes squeaks/buzzes; stable tuning.',
-    techniques: ['Torque sequence', 'Threadlock where appropriate', 'Contact dressing'],
+    techniques: [
+      'Torque sequence',
+      'Threadlock where appropriate',
+      'Contact dressing',
+    ],
     tools: ['Torque drivers', 'Soft jaws', 'Thread treatments'],
     risks: ['Cross-threading', 'Uneven seating'],
     mantra: 'Quiet, aligned hardware that lasts.',
@@ -317,30 +353,84 @@ const COPY = {
   },
 };
 
+// ---- estimation helpers (hours -> days for each step) ----
+function parseHoursRange(est) {
+  if (!est) return null;
+  const matches = String(est).match(/(\d+(\.\d+)?)/g);
+  if (!matches || !matches.length) return null;
+
+  if (matches.length === 1) {
+    const v = parseFloat(matches[0]);
+    return { min: v, max: v, avg: v };
+  }
+
+  const min = parseFloat(matches[0]);
+  const max = parseFloat(matches[matches.length - 1]);
+  const avg = (min + max) / 2;
+  return { min, max, avg };
+}
+
+// Conservative average calendar days for a step, based on COPY.est
+function getStepAvgDays(stepKey) {
+  const est = COPY[stepKey]?.est;
+  const range = parseHoursRange(est);
+  if (!range) return 0;
+
+  const hoursPerDay = 6; // focused build hours per day (conservative)
+  const days = range.avg / hoursPerDay;
+  return Math.max(1, Math.round(days));
+}
+
+// Add weekend-only workdays (Sat/Sun) PLUS a 2-weekend buffer (4 days total)
+function addWeekendWorkdays(startMs, workdays) {
+  if (!workdays) return startMs;
+
+  let date = new Date(startMs);
+  let remaining = workdays;
+
+  // First: step forward counting ONLY Sat/Sun as workdays
+  while (remaining > 0) {
+    date.setDate(date.getDate() + 1);
+    const day = date.getDay(); // 0 = Sun, 6 = Sat
+    if (day === 0 || day === 6) {
+      remaining--;
+    }
+  }
+
+  // Second: add buffer = 2 full weekends = 4 workdays
+  let buffer = 4; // (Sat + Sun) × 2 weekends
+
+  while (buffer > 0) {
+    date.setDate(date.getDate() + 1);
+    const day = date.getDay();
+    if (day === 0 || day === 6) {
+      buffer--;
+    }
+  }
+
+  return date.getTime();
+}
+
 /* -------------------- Component -------------------- */
 
 const ProjectProgress = ({ project }) => {
   const pct = useMemo(() => calcProgress(project), [project]);
-  const complete = useMemo(() => isProjectComplete(project, pct), [project, pct]);
+  const complete = useMemo(
+    () => isProjectComplete(project, pct),
+    [project, pct]
+  );
 
+  // 🔹 Index used for default active tab in the track
   const defaultIndex = useMemo(() => {
-    if (!project) return 0;
-
-    const phase = String(project.currentPhase || '').toLowerCase();
-
-    const fromPhase = STEPS.findIndex((s) =>
-      phase.includes(s.label.split(' ')[0].toLowerCase())
-    );
-    if (fromPhase >= 0) return fromPhase;
-
-    for (let i = STEPS.length - 1; i >= 0; i--) {
-      const d = project[STEPS[i].key];
-      const list = Array.isArray(d?.checklist) ? d.checklist : [];
-      if (list.some((c) => c && c.completed)) return i;
-    }
-
-    return 0;
+    const idx = getCurrentStepIndex(project);
+    return idx === -1 ? 0 : idx; // UI still needs *some* step selected
   }, [project]);
+
+  // 🔹 Stable "current step" index for the summary card
+  const currentStepIndex = useMemo(
+    () => getCurrentStepIndex(project),
+    [project]
+  );
 
   const [active, setActive] = useState(defaultIndex);
   const [heroFromShowroom, setHeroFromShowroom] = useState(null);
@@ -423,20 +513,57 @@ const ProjectProgress = ({ project }) => {
 
   // summary dates
   const startMs = pickEarliestDate(project.startDate, project.createdAt);
-  const targetMs = pickLatestDate(
-    project.targetCompletionWithBuffer,
-    project.targetCompletion,
-    project.estimatedCompletion
-  );
   const completionMs = getCompletionDate(project);
 
   const startDate = fmtFromMs(startMs);
-  const targetDate = fmtFromMs(targetMs);
-  const completionDate = fmtFromMs(completionMs || targetMs);
+  const completionDate = fmtFromMs(completionMs);
 
-  const currentStepLabel =
-    project.currentPhase ||
-    (complete ? 'All Steps Complete' : `${active + 1}. ${activeStep.label}`);
+  // Step-level timing estimates
+  const stepAvgDays = getStepAvgDays(activeStep.key);
+
+  // Cumulative days from project start through each step, for target dates
+  const cumulativeStepDays = useMemo(() => {
+    let running = 0;
+    return STEPS.map((s) => {
+      const d = getStepAvgDays(s.key);
+      running += d;
+      return running;
+    });
+  }, []);
+
+  const daysFromStartForActive = cumulativeStepDays[active] || stepAvgDays || 0;
+
+  const baselineMs = startMs || Date.now();
+
+  const targetStepDateMs = daysFromStartForActive
+    ? addWeekendWorkdays(baselineMs, daysFromStartForActive)
+    : 0;
+
+  const targetStepDate = fmtFromMs(targetStepDateMs);
+
+  // 🔹 Final-step conservative completion window (summary row)
+  const totalDaysFinal = cumulativeStepDays[STEPS.length - 1] || 0;
+
+  const finalStepTargetMs = totalDaysFinal
+    ? addWeekendWorkdays(baselineMs, totalDaysFinal)
+    : 0;
+
+  const finalStepTargetDate = fmtFromMs(finalStepTargetMs);
+
+  // Add 2 calendar weeks for shipping / life buffer
+  const TWO_WEEKS_MS = 14 * 24 * 60 * 60 * 1000;
+  const finalWindowEndMs = finalStepTargetMs
+    ? finalStepTargetMs + TWO_WEEKS_MS
+    : 0;
+
+  const finalWindowEndDate = fmtFromMs(finalWindowEndMs);
+
+  // 🔹 Current step label in the SUMMARY row (top middle card)
+  const currentStepLabel = complete
+    ? 'All Steps Complete'
+    : currentStepIndex === -1
+      ? 'Not Started'
+      : `${currentStepIndex + 1}. ${STEPS[currentStepIndex].label}`;
 
   // ⭐ Hero selection: use showroom hero first, then any hero already on the project
   const heroLocal = getHeroMedia(project);
@@ -444,7 +571,9 @@ const ProjectProgress = ({ project }) => {
   const showHeroFromProject = complete && hero && hero.url;
   const heroIsVideo = showHeroFromProject && hero.type === 'video';
 
-  const buildWindowLabel = complete ? 'Completion date' : 'Build window';
+  const buildWindowLabel = complete
+    ? 'Completion date'
+    : 'Target completion window';
 
   return (
     <div className="slp-card pp-card" data-component="ProjectProgress">
@@ -515,6 +644,7 @@ const ProjectProgress = ({ project }) => {
             {complete ? 'All steps complete' : `${pct}%`}
           </span>
         </div>
+
         <div className="pp-summary-item">
           <span className="pp-summary-label">
             Current step
@@ -526,6 +656,7 @@ const ProjectProgress = ({ project }) => {
           </span>
           <span className="pp-summary-value">{currentStepLabel}</span>
         </div>
+
         <div className="pp-summary-item">
           <span className="pp-summary-label">
             {buildWindowLabel}
@@ -537,10 +668,12 @@ const ProjectProgress = ({ project }) => {
           </span>
           <span className="pp-summary-value">
             {complete
-              ? completionDate
-              : startDate !== '—' || targetDate !== '—'
-              ? `${startDate || '—'} → ${targetDate || '—'}`
-              : '—'}
+              ? completionDate || startDate || '—'
+              : finalStepTargetDate !== '—' || finalWindowEndDate !== '—'
+                ? `${finalStepTargetDate || '—'} → ${
+                    finalWindowEndDate || '—'
+                  }`
+                : '—'}
           </span>
         </div>
       </section>
@@ -561,7 +694,11 @@ const ProjectProgress = ({ project }) => {
             <div className="pp-track-fill" style={{ width: `${pct}%` }} />
           </div>
 
-          <div className="pp-track-dots" role="tablist" aria-label="Build steps">
+          <div
+            className="pp-track-dots"
+            role="tablist"
+            aria-label="Build steps"
+          >
             {STEPS.map((s, i) => {
               const d = project[s.key];
               const st = stepStatus(d).status;
@@ -571,8 +708,8 @@ const ProjectProgress = ({ project }) => {
                 st === 'Completed'
                   ? 'done'
                   : st === 'In Progress'
-                  ? 'wip'
-                  : 'todo';
+                    ? 'wip'
+                    : 'todo';
 
               return (
                 <button
@@ -588,9 +725,7 @@ const ProjectProgress = ({ project }) => {
                   onClick={() => setActive(i)}
                   onKeyDown={(e) => {
                     if (e.key === 'ArrowRight') {
-                      setActive((prev) =>
-                        Math.min(prev + 1, STEPS.length - 1)
-                      );
+                      setActive((prev) => Math.min(prev + 1, STEPS.length - 1));
                     }
                     if (e.key === 'ArrowLeft') {
                       setActive((prev) => Math.max(prev - 1, 0));
@@ -612,36 +747,50 @@ const ProjectProgress = ({ project }) => {
       {/* ---------- Active step details ---------- */}
       <section className="pp-detail">
         <div className="pp-step-header">
+          <h4 className="pp-step-title">
+            {active + 1}. {activeStep.label}
+          </h4>
           <div
             className={`pp-pill ${
               status === 'Completed'
                 ? 'ok'
                 : status === 'In Progress'
-                ? 'wip'
-                : ''
+                  ? 'wip'
+                  : ''
             }`}
           >
             {status}
           </div>
-          <h4 className="pp-step-title">
-            {active + 1}. {activeStep.label}
-          </h4>
         </div>
 
         <div className="pp-stats">
           <div className="pp-stat">
-            <div className="pp-stat-label">Standard turnaround</div>
-            <div className="pp-stat-value">8–10 weeks</div>
+            <div className="pp-stat-label">Est. time (focused hours)</div>
+            <div className="pp-stat-value">{body.est || '—'}</div>
           </div>
+
+          <div className="pp-stat">
+            <div className="pp-stat-label">Avg. turnaround (calendar days)</div>
+            <div className="pp-stat-value">
+              {stepAvgDays
+                ? `${stepAvgDays} day${stepAvgDays === 1 ? '' : 's'}`
+                : '—'}
+            </div>
+          </div>
+
           <div className="pp-stat">
             <div className="pp-stat-label">
-              Projected completion (throughput)
+              Conservative target date
+              <span
+                className="pp-info-tip"
+                title="Currently based on a weekend-only work schedule."
+              >
+                ?
+              </span>
             </div>
-            <div className="pp-stat-value">—</div>
-          </div>
-          <div className="pp-stat">
-            <div className="pp-stat-label">Est. time (working hours)</div>
-            <div className="pp-stat-value">{body.est || '—'}</div>
+            <div className="pp-stat-value">
+              {daysFromStartForActive ? targetStepDate : '—'}
+            </div>
           </div>
         </div>
 
@@ -736,8 +885,7 @@ const ProjectProgress = ({ project }) => {
               }
 
               const cls = `pp-thumb pp-thumb-${m.type}`;
-              const label =
-                m.type.charAt(0).toUpperCase() + m.type.slice(1);
+              const label = m.type.charAt(0).toUpperCase() + m.type.slice(1);
 
               return (
                 <a

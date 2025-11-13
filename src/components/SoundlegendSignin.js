@@ -80,9 +80,9 @@ const SoundlegendSignin = () => {
       const userDoc = await fetchUserDoc(user.uid);
       if (userDoc?.projects?.length > 0) {
         const firstProjectId = userDoc.projects[0].projectId;
-        navigate(`/projects/${firstProjectId}`);
+        navigate(`/legacy`);
       } else {
-        navigate('/projects');
+        navigate('/legacy');
       }
     } catch (err) {
       console.error('❌ Sign-in error:', err);
