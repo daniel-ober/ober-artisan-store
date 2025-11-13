@@ -1,3 +1,4 @@
+// src/components/ManageOrders.js
 import React, { useEffect, useState } from 'react';
 import { collection, getDocs, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
@@ -60,19 +61,19 @@ const ManageOrders = () => {
           const data = docSnap.data();
           let derivedStatus = data.status;
           let derivedOverview = data.overviewStatus;
-          
+
           if (!derivedStatus || derivedStatus === 'order started') {
             derivedStatus = getOrderStatusFromItems(data.items || []);
           }
-          
+
           if (!derivedOverview) {
             derivedOverview = getOverviewStatus('order', derivedStatus);
             await updateDoc(doc(db, 'orders', docSnap.id), {
               overviewStatus: derivedOverview,
-              status: derivedStatus, // optional: ensure Firestore keeps in sync
+              status: derivedStatus, // keep in sync
             });
           }
-  
+
           return {
             id: docSnap.id,
             orderDate:
@@ -84,17 +85,17 @@ const ManageOrders = () => {
                 : 'N/A',
             status: derivedStatus,
             overviewStatus: derivedOverview,
-            ...data,
+            ...data, // ⭐ includes trackingNumber if present
           };
         })
       );
-  
+
       ordersList.sort((a, b) => {
         const aTime = a.createdAt?.seconds || 0;
         const bTime = b.createdAt?.seconds || 0;
         return bTime - aTime;
       });
-  
+
       setOrders(ordersList);
       applyFilters(ordersList);
     } catch (error) {
@@ -146,7 +147,6 @@ const ManageOrders = () => {
 
     try {
       await deleteDoc(doc(db, 'orders', orderId));
-      // console.log(`✅ Order ${orderId} deleted successfully`);
       fetchOrders(); // Refresh the order list after deletion
     } catch (error) {
       console.error('❌ Error deleting order:', error);
@@ -178,6 +178,7 @@ const ManageOrders = () => {
           </label>
         </div>
       </div>
+
       <table className="manage-orders-table">
         <thead>
           <tr>
@@ -186,13 +187,14 @@ const ManageOrders = () => {
             <th>Date</th>
             <th>Customer Name</th>
             <th>Total</th>
-            <th>Actions</th> {/* New column for actions */}
+            <th>Tracking</th> {/* ⭐ new column */}
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {filteredOrders.length === 0 ? (
             <tr>
-              <td colSpan="6">No orders available</td>
+              <td colSpan="7">No orders available</td> {/* ⭐ colSpan updated */}
             </tr>
           ) : (
             filteredOrders.map((order) => (
@@ -210,6 +212,13 @@ const ManageOrders = () => {
                   {order.customerName}
                 </td>
                 <td onClick={() => handleRowClick(order)}>${order.total}</td>
+                {/* ⭐ tracking cell – click to edit in modal */}
+                <td
+                  className="tracking-cell"
+                  onClick={() => handleRowClick(order)}
+                >
+                  {order.trackingNumber || 'Add tracking'}
+                </td>
                 <td>
                   <button
                     className="delete-button"
@@ -234,7 +243,7 @@ const ManageOrders = () => {
               o.id === updatedOrder.id ? updatedOrder : o
             );
             setOrders(updatedOrders);
-            applyFilters(updatedOrders); // ✅ use updatedOrders, not stale state
+            applyFilters(updatedOrders);
           }}
         />
       )}
