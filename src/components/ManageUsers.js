@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
 import { db } from '../firebaseConfig';
 import EditUserModal from './EditUserModal';
 import AddUserModal from './AddUserModal';
+import { useImpersonation } from '../context/ImpersonationContext';
 
 const ManageUsers = () => {
   const [users, setUsers] = useState([]);
@@ -13,15 +15,18 @@ const ManageUsers = () => {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const navigate = useNavigate();
+  const { startImpersonation } = useImpersonation();
+
   useEffect(() => {
     const fetchUsers = async () => {
       try {
         const usersCollection = collection(db, 'users');
         const userSnapshot = await getDocs(usersCollection);
-        const usersList = userSnapshot.docs.map((doc) => {
-          const data = doc.data() || {};
+        const usersList = userSnapshot.docs.map((docSnap) => {
+          const data = docSnap.data() || {};
           return {
-            id: doc.id,
+            id: docSnap.id,
             email: data.email || 'N/A',
             firstName: data.firstName || 'N/A',
             lastName: data.lastName || 'N/A',
@@ -45,8 +50,8 @@ const ManageUsers = () => {
     setSearchQuery(query);
     const filtered = users.filter(
       (user) =>
-        user.email.toLowerCase().includes(query) ||
-        user.lastName.toLowerCase().includes(query)
+        (user.email || '').toLowerCase().includes(query) ||
+        (user.lastName || '').toLowerCase().includes(query)
     );
     setFilteredUsers(filtered);
   };
@@ -65,8 +70,9 @@ const ManageUsers = () => {
     setLoading(true);
     try {
       await deleteDoc(doc(db, 'users', userId));
-      setUsers(users.filter((user) => user.id !== userId));
-      setFilteredUsers(filteredUsers.filter((user) => user.id !== userId));
+      const remaining = users.filter((u) => u.id !== userId);
+      setUsers(remaining);
+      setFilteredUsers(remaining);
     } catch (error) {
       console.error('Error deleting user:', error);
     } finally {
@@ -82,12 +88,23 @@ const ManageUsers = () => {
     setIsAddModalOpen(false);
   };
 
+  // 🔹 NEW: Impersonate user and jump into their artist portal
+  const handleImpersonateUser = (user) => {
+    if (!user?.id) return;
+    // user.id should match the Firebase Auth uid you stored in the users collection
+    startImpersonation(user.id);
+    // Navigate into the artist / SoundLegend portal view
+    navigate('/legacy');
+  };
+
   return (
     <div className="manage-users">
       <div className="manage-users-header">Manage Users</div>
+
       <button className="add-btn" onClick={handleAddUser}>
         Add User
       </button>
+
       <input
         type="text"
         placeholder="Search by email or last name"
@@ -95,6 +112,7 @@ const ManageUsers = () => {
         onChange={handleSearch}
         className="search-bar"
       />
+
       <div className="responsive-table-container">
         <table className="manage-users-table">
           <thead>
@@ -127,13 +145,24 @@ const ManageUsers = () => {
                     >
                       View
                     </button>
-                    {/* <button
+
+                    {/* 🔹 NEW: Impersonate / View Portal button */}
+                    <button
+                      className="impersonate-btn"
+                      onClick={() => handleImpersonateUser(user)}
+                    >
+                      View Portal as User
+                    </button>
+
+                    {/* Optionally re-enable delete later
+                    <button
                       className="delete-btn"
                       onClick={() => handleDeleteUser(user.id)}
                       disabled={loading}
                     >
                       {loading ? 'Deleting...' : 'Delete'}
-                    </button> */}
+                    </button>
+                    */}
                   </td>
                 </tr>
               ))
@@ -147,8 +176,8 @@ const ManageUsers = () => {
           user={selectedUser}
           onClose={handleCloseModal}
           onUserUpdated={(updatedUser) => {
-            const updatedUsers = users.map((user) =>
-              user.id === updatedUser.id ? updatedUser : user
+            const updatedUsers = users.map((u) =>
+              u.id === updatedUser.id ? updatedUser : u
             );
             setUsers(updatedUsers);
             setFilteredUsers(updatedUsers);

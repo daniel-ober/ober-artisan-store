@@ -65,6 +65,7 @@ import EndorsementForm from './components/EndorsementForm.js';
 import ResinAccentGenerator from './components/ResinAccentGenerator.js';
 import DrumSelector from './components/DrumSelector.js';
 import HulaGiftPage from './components/HulaGiftPage.js';
+import { ImpersonationProvider } from './context/ImpersonationContext';
 import SoundLegendPortal from './components/SoundLegendPortal/SoundLegendPortal.js';
 import { Toaster } from 'react-hot-toast';
 import './App.css';

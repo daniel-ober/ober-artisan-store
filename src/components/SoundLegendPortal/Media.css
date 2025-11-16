@@ -14,9 +14,15 @@
 .mg-toolbar {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  gap: 10px;
+  align-items: flex-start;
+  gap: 12px;
   margin-bottom: 8px;
+}
+
+.mg-filter-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 /* filter pills */
@@ -24,6 +30,10 @@
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+}
+
+.mg-stage-filter {
+  opacity: 0.9;
 }
 
 .mg-pill {
@@ -163,6 +173,129 @@
   border-left: 2px solid rgba(255, 200, 120, 0.7);
 }
 
+/* ---------- upload panel (admin) ---------- */
+
+.mg-upload-section {
+  margin-top: 18px;
+}
+
+.mg-upload-heading {
+  margin-bottom: 6px;
+}
+
+.mg-upload-card {
+  border-radius: 14px;
+  padding: 16px 18px 14px;
+  background: radial-gradient(
+    circle at top left,
+    #141622 0,
+    #05060c 60%,
+    #030307 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  cursor: pointer;
+  transition:
+    background 0.16s ease,
+    border-color 0.16s ease,
+    box-shadow 0.16s ease,
+    transform 0.16s ease;
+}
+
+.mg-upload-card.is-dragover {
+  border-color: rgba(129, 230, 217, 0.9);
+  box-shadow: 0 0 0 1px rgba(129, 230, 217, 0.7);
+  transform: translateY(-1px);
+}
+
+.mg-upload-card.is-uploading {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.mg-upload-main {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mg-upload-icon {
+  font-size: 1.6rem;
+}
+
+.mg-upload-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mg-upload-title {
+  font-size: 0.93rem;
+  font-weight: 500;
+}
+
+.mg-upload-sub {
+  font-size: 0.8rem;
+  opacity: 0.72;
+}
+
+.mg-upload-fields {
+  display: grid;
+  grid-template-columns: 2fr 1.4fr 1.3fr;
+  gap: 8px;
+}
+
+.mg-upload-input,
+.mg-upload-select {
+  width: 100%;
+  padding: 6px 9px;
+  border-radius: 9px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  font-size: 0.86rem;
+  font-family: inherit;
+}
+
+.mg-upload-input::placeholder {
+  color: rgba(148, 163, 184, 0.85);
+}
+
+.mg-upload-input:focus,
+.mg-upload-select:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.14);
+}
+
+.mg-upload-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.mg-upload-btn {
+  font-size: 0.82rem;
+  padding-inline: 12px;
+}
+
+.mg-upload-url-btn {
+  background: #2563eb;
+  border-color: #2563eb;
+}
+
+.mg-upload-url-btn:hover {
+  background: #3b82f6;
+}
+
+.mg-upload-hint {
+  margin-top: 6px;
+  font-size: 0.8rem;
+  opacity: 0.75;
+}
+
 /* ---------- modal ---------- */
 
 .mg-modal {
@@ -222,6 +355,20 @@
   font-size: 0.85rem;
 }
 
+.mg-modal-stage-wrap {
+  min-width: 0;
+}
+
+.mg-modal-stage-select {
+  max-width: 260px;
+  padding: 4px 9px;
+  font-size: 0.8rem;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  background: rgba(15, 23, 42, 0.9);
+  color: #e5e7eb;
+}
+
 .mg-modal-stage {
   opacity: 0.8;
   font-size: 0.8rem;
@@ -242,6 +389,16 @@
 .mg-nav-btn {
   min-width: 32px;
   padding-inline: 8px;
+}
+
+.mg-delete-btn {
+  background: rgba(248, 113, 113, 0.12);
+  border-color: rgba(248, 113, 113, 0.55);
+  color: #fecaca;
+}
+
+.mg-delete-btn:hover {
+  background: rgba(248, 113, 113, 0.18);
 }
 
 /* modal body */
@@ -360,13 +517,104 @@
 
 /* Make the SoundLegend page's stacking context sit above the footer */
 .slp-page {
-  position: relative;   
-  z-index: 1000;      
+  position: relative;
+  z-index: 1000;
+}
+
+/* ---------- audit history ---------- */
+
+.mg-audit-section {
+  margin-top: 18px;
+}
+
+.mg-audit-toggle {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: radial-gradient(
+    circle at top left,
+    #141622 0,
+    #05060c 60%,
+    #030307 100%
+  );
+  padding: 8px 10px;
+  font-size: 0.82rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.mg-audit-chevron {
+  opacity: 0.8;
+}
+
+.mg-audit-body {
+  margin-top: 8px;
+  padding: 10px 12px 12px;
+  border-radius: 10px;
+  background: radial-gradient(
+    circle at top left,
+    #10121d 0,
+    #05060c 60%,
+    #020206 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.82rem;
+}
+
+.mg-audit-empty {
+  opacity: 0.7;
+}
+
+.mg-audit-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mg-audit-item + .mg-audit-item {
+  margin-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 8px;
+}
+
+.mg-audit-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.mg-audit-actor {
+  font-weight: 500;
+}
+
+.mg-audit-time {
+  opacity: 0.7;
+}
+
+.mg-audit-summary {
+  margin-top: 2px;
+  opacity: 0.86;
 }
 
 /* ---------- responsive tweaks ---------- */
 
 @media (max-width: 768px) {
+  .mg-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .mg-upload-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .mg-upload-actions {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
   .mg-grid {
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   }

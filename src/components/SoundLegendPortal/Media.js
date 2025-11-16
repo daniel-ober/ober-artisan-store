@@ -1,5 +1,13 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import './Media.css';
+import { useActorContext } from '../../hooks/useActorContext';
+import {
+  doc,
+  updateDoc,
+  serverTimestamp,
+} from 'firebase/firestore';
+import { db, storage } from '../../firebaseConfig';
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 
 /* -------------------- helpers -------------------- */
 
@@ -27,6 +35,19 @@ const FILE_TYPES = {
   doc: ['.pdf', '.doc', '.docx', '.xls', '.xlsx'],
 };
 
+const buildPhases = [
+  'Step 1. Wood Preparation',
+  'Step 2. Shell Construction',
+  'Step 3. Fine-Tuning',
+  'Step 4. Shell Exterior Finish',
+  'Step 5. Bearing Edges',
+  'Step 6. Snare Bed Cutting',
+  'Step 7. Hardware Drilling',
+  'Step 8. Hardware Assembly',
+  'Step 9. Tuning and Detailing',
+  'Step 10. Quality Check',
+];
+
 const extOf = (url = '') => {
   try {
     const u = new URL(url);
@@ -41,6 +62,12 @@ const extOf = (url = '') => {
 };
 
 const classifyType = (url = '') => {
+  const lower = (url || '').toLowerCase();
+
+  // Host-based hints for URLs with no extension
+  if (/youtube\.com|youtu\.be|vimeo\.com/.test(lower)) return 'video';
+  if (/soundcloud\.com|spotify\.com|bandcamp\.com/.test(lower)) return 'audio';
+
   const ext = extOf(url);
   if (FILE_TYPES.image.includes(ext)) return 'image';
   if (FILE_TYPES.video.includes(ext)) return 'video';
@@ -86,26 +113,35 @@ const inferStage = (attachment = {}, category = '') => {
   return 0; // unknown / misc
 };
 
-// Flatten your attachments map into a single list with type + category + stage
+const stageLabel = (stage) => {
+  if (!stage) return 'No stage / Misc';
+  const idx = stage - 1;
+  if (idx < 0 || idx >= buildPhases.length) return `Stage ${stage}`;
+  return buildPhases[idx];
+};
+
+// Flatten attachments map into a list with type + category + stage
 const flattenAttachments = (attachments = {}) => {
   const out = [];
-  let idx = 0;
+  let globalIndex = 0;
   for (const [category, arr] of Object.entries(attachments)) {
     if (!Array.isArray(arr)) continue;
-    for (const it of arr) {
-      if (!it?.url) continue;
+    arr.forEach((it, index) => {
+      if (!it?.url) return;
       const type = classifyType(it.url);
+      const createdAt = tsToMillis(it.createdAt || it.uploadedAt);
       out.push({
-        id: `${category}:${it.url}`,
+        id: it.id || `${category}:${index}:${it.url}`,
         url: it.url,
         title: it.title || it.name || filenameFromUrl(it.url),
         category,
+        itemIndex: index,
         type,
-        createdAt: tsToMillis(it.createdAt) || 0,
+        createdAt: createdAt || 0,
         stage: inferStage(it, category),
-        order: idx++, // fallback “upload order”
+        order: globalIndex++, // fallback “upload order”
       });
-    }
+    });
   }
   return out;
 };
@@ -137,60 +173,88 @@ const TYPE_FILTERS = [
   { id: 'doc', label: 'Documents' },
 ];
 
+const STAGE_FILTERS = [
+  { id: 'all', label: 'All stages' },
+  { id: '0', label: 'No stage / Misc' },
+  ...buildPhases.map((label, idx) => ({
+    id: String(idx + 1),
+    label: `Stage ${idx + 1}`,
+  })),
+];
+
 /* -------------------- main tab component -------------------- */
 
 export default function Media({ project }) {
+  const { actorIsAdmin, isImpersonating, actorEmail } =
+    useActorContext() || {};
+
+  // Only admins in impersonation mode can edit
+  const canEdit = !!project?.id && actorIsAdmin && isImpersonating;
+
   const [sortMode, setSortMode] = useState('date_desc');
   const [typeFilter, setTypeFilter] = useState('all');
-
-  // NEW: index of current item in the *sorted* array (for modal nav)
+  const [stageFilter, setStageFilter] = useState('all');
+  const [uploading, setUploading] = useState(false);
+  const [attachments, setAttachments] = useState(project?.attachments || {});
   const [viewerIndex, setViewerIndex] = useState(null);
 
+  // sync when project changes
+  useEffect(() => {
+    setAttachments(project?.attachments || {});
+  }, [project?.attachments]);
+
   const items = useMemo(
-    () => flattenAttachments(project?.attachments || {}),
-    [project?.attachments]
+    () => flattenAttachments(attachments || {}),
+    [attachments]
   );
 
-  // apply media-type filter
+  // apply filters
   const filtered = useMemo(() => {
-    if (typeFilter === 'all') return items;
-    return items.filter((it) => it.type === typeFilter);
-  }, [items, typeFilter]);
+    let list = items;
+    if (typeFilter !== 'all') {
+      list = list.filter((it) => it.type === typeFilter);
+    }
+    if (stageFilter !== 'all') {
+      if (stageFilter === '0') {
+        list = list.filter((it) => !it.stage);
+      } else {
+        const target = parseInt(stageFilter, 10);
+        if (Number.isFinite(target)) {
+          list = list.filter((it) => (it.stage || 0) === target);
+        }
+      }
+    }
+    return list;
+  }, [items, typeFilter, stageFilter]);
 
-  // apply sort mode (unchanged from your working version)
+  // sort
   const sorted = useMemo(() => {
     const out = [...filtered];
     out.sort((a, b) => {
       const tA = a.createdAt || a.order;
       const tB = b.createdAt || b.order;
 
-      if (sortMode === 'date_asc') {
-        return tA - tB;
-      }
-      if (sortMode === 'date_desc') {
-        return tB - tA;
-      }
+      if (sortMode === 'date_asc') return tA - tB;
+      if (sortMode === 'date_desc') return tB - tA;
 
       const sa = a.stage || 0;
       const sb = b.stage || 0;
 
       if (sortMode === 'stage_asc') {
         if (sa !== sb) {
-          if (sa === 0) return 1; // unknown last
+          if (sa === 0) return 1;
           if (sb === 0) return -1;
-          return sa - sb; // 1 → 10
+          return sa - sb;
         }
-        // tie-break within same stage: oldest → newest
         return tA - tB;
       }
 
       if (sortMode === 'stage_desc') {
         if (sa !== sb) {
-          if (sa === 0) return 1; // unknown last
+          if (sa === 0) return 1;
           if (sb === 0) return -1;
-          return sb - sa; // 10 → 1
+          return sb - sa;
         }
-        // tie-break within same stage: newest → oldest
         return tB - tA;
       }
 
@@ -201,7 +265,7 @@ export default function Media({ project }) {
 
   const buckets = useMemo(() => bucketize(sorted), [sorted]);
 
-  // close viewer if sorted list shrinks and index is now invalid
+  // close viewer if sorted list shrinks and index is invalid
   useEffect(() => {
     if (
       viewerIndex !== null &&
@@ -239,11 +303,178 @@ export default function Media({ project }) {
       ? sorted[viewerIndex]
       : null;
 
+  /* ---------- Firestore helper (no audit) ---------- */
+
+  const updateAttachmentsCategory = async (category, newArray) => {
+    if (!project?.id) return;
+    const docRef = doc(db, 'projects', project.id);
+    await updateDoc(docRef, {
+      [`attachments.${category}`]: newArray,
+      updatedAt: serverTimestamp(),
+    });
+  };
+
+  /* ---------- upload / url add / stage / delete ---------- */
+
+  const handleUploadFiles = async (fileList, stageValue) => {
+    if (!canEdit || !project?.id) return;
+    const files = Array.from(fileList || []);
+    if (!files.length) return;
+
+    const stage = Number(stageValue) || 0;
+    const category = 'media';
+
+    setUploading(true);
+    try {
+      const uploadedEntries = [];
+
+      for (const file of files) {
+        const path = `projects/${project.id}/media/${Date.now()}_${file.name}`;
+        const storageRef = ref(storage, path);
+        await new Promise((resolve, reject) => {
+          const task = uploadBytesResumable(storageRef, file);
+          task.on(
+            'state_changed',
+            () => {},
+            (err) => reject(err),
+            () => resolve()
+          );
+        });
+        const url = await getDownloadURL(storageRef);
+
+        uploadedEntries.push({
+          url,
+          title: file.name,
+          stage,
+          createdAt: new Date().toISOString(),
+          uploadedAt: new Date().toISOString(),
+          uploadedBy: actorEmail || 'admin',
+          type: classifyType(url),
+        });
+      }
+
+      const prevArr = attachments?.[category] || [];
+      const updatedArr = [...prevArr, ...uploadedEntries];
+      const nextAttachments = {
+        ...(attachments || {}),
+        [category]: updatedArr,
+      };
+
+      setAttachments(nextAttachments);
+      await updateAttachmentsCategory(category, updatedArr);
+    } catch (err) {
+      console.error('Media upload error:', err);
+      alert(
+        `Sorry, there was a problem uploading media.\n\n${
+          err?.message || String(err)
+        }`
+      );
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handleAddUrl = async ({ url, title, stageValue }) => {
+    if (!canEdit || !project?.id) return;
+    if (!url) return;
+
+    const stage = Number(stageValue) || 0;
+    const category = 'media';
+
+    try {
+      const entry = {
+        url,
+        title: title?.trim() || filenameFromUrl(url),
+        stage,
+        createdAt: new Date().toISOString(),
+        uploadedAt: new Date().toISOString(),
+        uploadedBy: actorEmail || 'admin',
+        type: classifyType(url),
+      };
+
+      const prevArr = attachments?.[category] || [];
+      const updatedArr = [...prevArr, entry];
+      const nextAttachments = {
+        ...(attachments || {}),
+        [category]: updatedArr,
+      };
+      setAttachments(nextAttachments);
+      await updateAttachmentsCategory(category, updatedArr);
+    } catch (err) {
+      console.error('Media URL add error:', err);
+      alert(
+        `Sorry, there was a problem adding this URL.\n\n${
+          err?.message || String(err)
+        }`
+      );
+    }
+  };
+
+  const handleChangeStage = async (item, newStageValue) => {
+    if (!canEdit || !project?.id || !item) return;
+    const category = item.category;
+    const idx = item.itemIndex;
+    const arr = (attachments && attachments[category]) || [];
+    if (!arr[idx]) return;
+
+    const newStage = Number(newStageValue) || 0;
+    const prevStage = arr[idx].stage || 0;
+    if (prevStage === newStage) return;
+
+    const newArr = [...arr];
+    newArr[idx] = { ...arr[idx], stage: newStage };
+
+    const nextAttachments = {
+      ...(attachments || {}),
+      [category]: newArr,
+    };
+    setAttachments(nextAttachments);
+
+    try {
+      await updateAttachmentsCategory(category, newArr);
+    } catch (err) {
+      console.error('Media stage change error:', err);
+      alert(
+        `Sorry, there was a problem updating the media stage.\n\n${
+          err?.message || String(err)
+        }`
+      );
+    }
+  };
+
+  const handleDeleteItem = async (item) => {
+    if (!canEdit || !project?.id || !item) return;
+    const category = item.category;
+    const idx = item.itemIndex;
+    const arr = (attachments && attachments[category]) || [];
+    if (!arr[idx]) return;
+
+    const ok = window.confirm(
+      `Delete this media item?\n\n${item.title || item.url}`
+    );
+    if (!ok) return;
+
+    const newArr = arr.filter((_, i) => i !== idx);
+    const nextAttachments = {
+      ...(attachments || {}),
+      [category]: newArr,
+    };
+    setAttachments(nextAttachments);
+
+    try {
+      await updateAttachmentsCategory(category, newArr);
+    } catch (err) {
+      console.error('Media delete error:', err);
+      alert(
+        `Sorry, there was a problem deleting this media item.\n\n${
+          err?.message || String(err)
+        }`
+      );
+    }
+  };
+
   return (
-    <div
-      className="slp-card mg-card"
-      data-component="Media"
-    >
+    <div className="slp-card mg-card" data-component="Media">
       <h3>Media</h3>
       <p className="slp-muted mg-description">
         Curated by <b>Ober Artisan</b> throughout your build journey — follow
@@ -256,6 +487,8 @@ export default function Media({ project }) {
         onSortChange={setSortMode}
         typeFilter={typeFilter}
         onTypeFilterChange={setTypeFilter}
+        stageFilter={stageFilter}
+        onStageFilterChange={setStageFilter}
       />
 
       {sorted.length === 0 ? (
@@ -285,6 +518,14 @@ export default function Media({ project }) {
         </>
       )}
 
+      {canEdit && (
+        <MediaUploadPanel
+          uploading={uploading}
+          onUploadFiles={handleUploadFiles}
+          onAddUrl={handleAddUrl}
+        />
+      )}
+
       <MediaModal
         open={!!currentItem}
         item={currentItem}
@@ -293,6 +534,9 @@ export default function Media({ project }) {
         onClose={closeViewer}
         onPrev={goPrev}
         onNext={goNext}
+        canEdit={canEdit}
+        onChangeStage={handleChangeStage}
+        onDelete={handleDeleteItem}
       />
     </div>
   );
@@ -305,20 +549,42 @@ function MediaToolbar({
   onSortChange,
   typeFilter,
   onTypeFilterChange,
+  stageFilter,
+  onStageFilterChange,
 }) {
   return (
     <div className="mg-toolbar">
-      <div className="mg-filter-group" aria-label="Filter by media type">
-        {TYPE_FILTERS.map((t) => (
-          <button
-            key={t.id}
-            type="button"
-            className={`mg-pill ${typeFilter === t.id ? 'is-active' : ''}`}
-            onClick={() => onTypeFilterChange(t.id)}
-          >
-            {t.label}
-          </button>
-        ))}
+      <div className="mg-filter-stack">
+        <div className="mg-filter-group" aria-label="Filter by media type">
+          {TYPE_FILTERS.map((t) => (
+            <button
+              key={t.id}
+              type="button"
+              className={`mg-pill ${typeFilter === t.id ? 'is-active' : ''}`}
+              onClick={() => onTypeFilterChange(t.id)}
+            >
+              {t.label}
+            </button>
+          ))}
+        </div>
+
+        <div
+          className="mg-filter-group mg-stage-filter"
+          aria-label="Filter by build stage"
+        >
+          {STAGE_FILTERS.map((s) => (
+            <button
+              key={s.id}
+              type="button"
+              className={`mg-pill mg-stage-pill ${
+                stageFilter === s.id ? 'is-active' : ''
+              }`}
+              onClick={() => onStageFilterChange(s.id)}
+            >
+              {s.label}
+            </button>
+          ))}
+        </div>
       </div>
 
       <label className="mg-sort">
@@ -347,8 +613,7 @@ function MediaSection({ title, items, onOpen }) {
       <div className="mg-title">{title}</div>
       <div className="mg-grid">
         {items.map((it) => {
-          const isPdfDoc =
-            it.type === 'doc' && extOf(it.url) === '.pdf';
+          const isPdfDoc = it.type === 'doc' && extOf(it.url) === '.pdf';
 
           return (
             <button
@@ -390,9 +655,167 @@ function MediaSection({ title, items, onOpen }) {
   );
 }
 
+/* -------------------- upload panel (admin only) -------------------- */
+
+function MediaUploadPanel({ uploading, onUploadFiles, onAddUrl }) {
+  const [url, setUrl] = useState('');
+  const [title, setTitle] = useState('');
+  const [stage, setStage] = useState('0');
+  const [dragOver, setDragOver] = useState(false);
+  const inputRef = useRef(null);
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragOver(false);
+    if (uploading) return;
+    const files = e.dataTransfer?.files;
+    if (files && files.length) {
+      onUploadFiles(files, stage);
+    }
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!dragOver) setDragOver(true);
+  };
+
+  const handleDragLeave = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragOver(false);
+  };
+
+  const handleFileInputChange = (e) => {
+    const files = e.target.files;
+    if (files && files.length) {
+      onUploadFiles(files, stage);
+    }
+    e.target.value = '';
+  };
+
+  const handleAddUrlClick = () => {
+    if (!url.trim()) return;
+    onAddUrl({ url: url.trim(), title: title.trim(), stage });
+    setUrl('');
+    // keep title/stage for quick batch entry if desired
+  };
+
+  return (
+    <section className="mg-upload-section">
+      <h4 className="sow-heading mg-upload-heading">Add Media (admin)</h4>
+      <div
+        className={`mg-upload-card ${
+          dragOver ? 'is-dragover' : ''
+        } ${uploading ? 'is-uploading' : ''}`}
+        onDrop={handleDrop}
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onClick={() => inputRef.current?.click()}
+      >
+        <div className="mg-upload-main">
+          <div className="mg-upload-icon">⬆️</div>
+          <div className="mg-upload-text">
+            <div className="mg-upload-title">
+              {uploading
+                ? 'Uploading media…'
+                : 'Drag & drop media files here'}
+            </div>
+            <div className="mg-upload-sub">
+              or click anywhere in this area to browse
+            </div>
+          </div>
+        </div>
+
+        <div className="mg-upload-fields">
+          <input
+            type="text"
+            className="mg-upload-input"
+            placeholder="Paste media URL (YouTube, Vimeo, SoundCloud…) — optional"
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+            onClick={(e) => e.stopPropagation()}
+          />
+          <input
+            type="text"
+            className="mg-upload-input"
+            placeholder="Optional title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            onClick={(e) => e.stopPropagation()}
+          />
+          <select
+            className="mg-upload-select"
+            value={stage}
+            onChange={(e) => setStage(e.target.value)}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <option value="0">No stage / Misc</option>
+            {buildPhases.map((label, idx) => (
+              <option key={idx + 1} value={idx + 1}>
+                {`Stage ${idx + 1} · ${label.replace(/^Step \d+\.\s*/, '')}`}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="mg-upload-actions">
+          <button
+            type="button"
+            className="apo-btn mg-upload-btn"
+            onClick={(e) => {
+              e.stopPropagation();
+              inputRef.current?.click();
+            }}
+            disabled={uploading}
+          >
+            {uploading ? 'Uploading…' : 'Upload media files'}
+          </button>
+          <button
+            type="button"
+            className="apo-btn mg-upload-btn mg-upload-url-btn"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleAddUrlClick();
+            }}
+            disabled={uploading || !url.trim()}
+          >
+            Add URL
+          </button>
+        </div>
+
+        <input
+          ref={inputRef}
+          type="file"
+          multiple
+          style={{ display: 'none' }}
+          onChange={handleFileInputChange}
+        />
+      </div>
+      <p className="mg-upload-hint">
+        Files are automatically grouped into Images, Video, Audio, or Documents
+        based on type. Each item can be associated with a single build stage or
+        marked as “No stage / Misc.”
+      </p>
+    </section>
+  );
+}
+
 /* -------------------- modal viewer -------------------- */
 
-function MediaModal({ open, item, index, total, onClose, onPrev, onNext }) {
+function MediaModal({
+  open,
+  item,
+  index,
+  total,
+  onClose,
+  onPrev,
+  onNext,
+  canEdit,
+  onChangeStage,
+  onDelete,
+}) {
   const [zoom, setZoom] = useState(1);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [dragging, setDragging] = useState(false);
@@ -467,7 +890,7 @@ function MediaModal({ open, item, index, total, onClose, onPrev, onNext }) {
     setDragging(false);
   };
 
-const handleDownload = () => {
+  const handleDownload = () => {
     try {
       const link = document.createElement('a');
       link.href = item.url;
@@ -481,6 +904,11 @@ const handleDownload = () => {
       console.error('Download failed, opening in new tab instead.', err);
       window.open(item.url, '_blank', 'noopener,noreferrer');
     }
+  };
+
+  const handleStageChange = (e) => {
+    const nextStage = e.target.value;
+    onChangeStage?.(item, nextStage);
   };
 
   return (
@@ -506,12 +934,29 @@ const handleDownload = () => {
                   · {String(item.category).replace(/_/g, ' ')}
                 </span>
               ) : null}
-              {item.stage ? (
+            </div>
+            <div className="mg-modal-stage-wrap">
+              {canEdit ? (
+                <select
+                  className="mg-modal-stage-select"
+                  value={String(item.stage || 0)}
+                  onChange={handleStageChange}
+                >
+                  <option value="0">No stage / Misc</option>
+                  {buildPhases.map((label, idx) => (
+                    <option key={idx + 1} value={idx + 1}>
+                      {`Stage ${idx + 1} · ${label.replace(
+                        /^Step \d+\.\s*/,
+                        ''
+                      )}`}
+                    </option>
+                  ))}
+                </select>
+              ) : (
                 <span className="mg-modal-stage">
-                  {' '}
-                  · Stage {item.stage}
+                  {stageLabel(item.stage || 0)}
                 </span>
-              ) : null}
+              )}
             </div>
             <div className="mg-index">
               {total > 0 ? `${index + 1} / ${total}` : null}
@@ -519,6 +964,16 @@ const handleDownload = () => {
           </div>
 
           <div className="mg-actions">
+            {canEdit && (
+              <button
+                type="button"
+                className="apo-btn mg-delete-btn"
+                onClick={() => onDelete?.(item)}
+              >
+                Delete
+              </button>
+            )}
+
             <button
               className="apo-btn mg-nav-btn"
               onClick={onPrev}

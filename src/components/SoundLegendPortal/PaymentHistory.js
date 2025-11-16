@@ -1,9 +1,14 @@
 import React from 'react';
 import './PaymentHistory.css';
+import { useActorContext } from '../../hooks/useActorContext';
 
 const STRIPE_LOGO = '/logos/stripe-logo.png';
 
 /* -------------------- tiny helpers (local only) -------------------- */
+
+function cleanOrderId(id = '') {
+  return id.startsWith('ORD-') ? id.replace('ORD-', '') : id;
+}
 
 function tsToMillis(v) {
   if (!v) return 0;
@@ -37,18 +42,28 @@ function dollars(cents) {
 /* -------------------- main component -------------------- */
 
 export default function PaymentHistory({ orders }) {
+  const { actorIsAdmin, isImpersonating, subjectEmail } = useActorContext();
+
   const hasOrders = Array.isArray(orders) && orders.length > 0;
+  const isAdminViewingOther = actorIsAdmin && isImpersonating;
 
   if (!hasOrders) {
     return (
-      <div
-        className="slp-card ph-card"
-        data-component="PaymentHistory"
-      >
+      <div className="slp-card ph-card" data-component="PaymentHistory">
         <h3>Payments &amp; Orders</h3>
-        <p className="slp-muted">
-          No order/payment records found for your account email.
-        </p>
+
+        {isAdminViewingOther && (
+          <p className="slp-admin-note">
+            Admin view: no order/payment records were found for this artist
+            {subjectEmail ? ` (${subjectEmail})` : ''}.
+          </p>
+        )}
+
+        {!isAdminViewingOther && (
+          <p className="slp-muted">
+            No order/payment records found for your account email.
+          </p>
+        )}
 
         {/* Stripe security message even if there are no orders */}
         <StripeSecurityNotice />
@@ -57,11 +72,15 @@ export default function PaymentHistory({ orders }) {
   }
 
   return (
-    <div
-      className="slp-card ph-card"
-      data-component="PaymentHistory"
-    >
+    <div className="slp-card ph-card" data-component="PaymentHistory">
       <h3>Payments &amp; Orders</h3>
+
+      {isAdminViewingOther && (
+        <p className="slp-admin-note">
+          Admin view: you’re viewing payment history for
+          {subjectEmail ? ` ${subjectEmail}` : ' this artist'}.
+        </p>
+      )}
 
       {/* ✅ Stripe security message */}
       <StripeSecurityNotice />
@@ -70,7 +89,7 @@ export default function PaymentHistory({ orders }) {
         <table className="slp-table ph-table">
           <thead>
             <tr>
-              <th>Order ID</th>
+              <th>Order Number</th>
               <th>Date</th>
               <th>Total</th>
               <th>Status</th>
@@ -80,10 +99,14 @@ export default function PaymentHistory({ orders }) {
           <tbody>
             {orders.map((o) => (
               <tr key={o.id}>
-                <td className="mono">{o.id}</td>
+                <td className="mono">{cleanOrderId(o.id)}</td>
                 <td>{fmtDate(o.createdAt)}</td>
                 <td>{dollars(o.amountTotal ?? o.totalAmount)}</td>
-                <td>{o.status || o.paymentMethodDetails?.status || '—'}</td>
+                <td>
+                  {(o.status || o.paymentMethodDetails?.status || '—')
+                    .toString()
+                    .toUpperCase()}
+                </td>
                 <td>{o.trackingNumber || '—'}</td>
               </tr>
             ))}
@@ -109,13 +132,8 @@ function StripeSecurityNotice() {
       <span className="ph-stripe-text">
         All payments are processed securely through
         <span className="ph-stripe-logo-wrap">
-          <img
-            src={STRIPE_LOGO}
-            alt="Stripe"
-            className="ph-stripe-logo"
-          />
+          <img src={STRIPE_LOGO} alt="Stripe" className="ph-stripe-logo" />
         </span>
-        . Ober Artisan Drums never stores or sees your full card details.
       </span>
     </div>
   );

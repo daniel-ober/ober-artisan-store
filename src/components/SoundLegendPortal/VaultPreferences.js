@@ -10,6 +10,8 @@ import './VaultPreferences.css';
 
 /* -------------------- tiny shared bits -------------------- */
 
+const FALLBACK_POSTER = '/craft_in_motion/craftinmotion.png';
+
 const MailLink = ({ label, subject, body }) => {
   const href = React.useMemo(() => {
     const s = encodeURIComponent(subject || '');
@@ -34,8 +36,6 @@ const buildTeaser = (raw) => {
 
 /** Mini version of the Legacy Vault card (non-clickable) */
 function VaultCardPreview({ serial, heroImage, name, teaser }) {
-  const fallbackPoster = '/placeholder/snare-dark.jpg';
-
   return (
     <div className="lv-item lv-item--preview">
       <div className="lv-item-media">
@@ -52,7 +52,7 @@ function VaultCardPreview({ serial, heroImage, name, teaser }) {
           <video
             className="lv-item-video"
             src="/craft_in_motion/craftinmotion1080p.mp4"
-            poster={fallbackPoster}
+            poster={FALLBACK_POSTER}
             autoPlay
             muted
             loop
