@@ -1,3 +1,4 @@
+// src/components/NavBar.js
 import React, { useRef, useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaCartPlus, FaSignOutAlt, FaCog } from 'react-icons/fa';
@@ -11,10 +12,13 @@ import {
   where,
   orderBy,
   limit,
+  doc,
+  getDoc,
 } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { db } from '../firebaseConfig';
 import CartPreview from './CartPreview';
+import { useImpersonation } from '../context/ImpersonationContext';
 import './NavBar.css';
 
 /** ⚙️ Paths to the Legacy Vault logo assets in /public */
@@ -33,11 +37,15 @@ const NavBar = () => {
   const [userProjects, setUserProjects] = useState([]);
   const [hasSLClaim, setHasSLClaim] = useState(false);
   const [claimsReady, setClaimsReady] = useState(false);
+  const [impersonatedEmail, setImpersonatedEmail] = useState('');
 
-  const { isDarkMode } = useContext(DarkModeContext);
+  // 🔦 Dark mode from context (now with toggle)
+  const { isDarkMode, toggleDarkMode } = useContext(DarkModeContext);
+
   const { user, isAdmin, logout } = useAuth();
   const { cart } = useCart();
   const navigate = useNavigate();
+  const { impersonatedUserId, stopImpersonation } = useImpersonation();
 
   const cartItemCount = Object.values(cart).reduce(
     (total, item) => total + item.quantity,
@@ -79,9 +87,7 @@ const NavBar = () => {
   useEffect(() => {
     const run = async () => {
       if (!user || !claimsReady) return;
-      if (!(isAdmin || hasSLClaim)) {
-        return;
-      }
+      if (!(isAdmin || hasSLClaim)) return;
 
       try {
         const emailLower = (user.email || '').trim().toLowerCase();
@@ -112,7 +118,10 @@ const NavBar = () => {
           }))
         );
       } catch (err) {
-        console.warn('User projects query skipped/denied:', err?.message || err);
+        console.warn(
+          'User projects query skipped/denied:',
+          err?.message || err
+        );
         setUserProjects([]);
       }
     };
@@ -194,6 +203,35 @@ const NavBar = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+    useEffect(() => {
+    const fetchImpersonatedUser = async () => {
+      if (!impersonatedUserId) {
+        setImpersonatedEmail('');
+        return;
+      }
+
+      try {
+        const ref = doc(db, 'users', impersonatedUserId);
+        const snap = await getDoc(ref);
+        if (snap.exists()) {
+          const data = snap.data() || {};
+          setImpersonatedEmail(
+            data.email ||
+            data.emailLower ||
+            impersonatedUserId
+          );
+        } else {
+          setImpersonatedEmail(impersonatedUserId);
+        }
+      } catch (err) {
+        console.error('Failed to load impersonated user:', err);
+        setImpersonatedEmail(impersonatedUserId);
+      }
+    };
+
+    fetchImpersonatedUser();
+  }, [impersonatedUserId]);
+
   /* --------- helpers --------- */
   const handleSignOut = async () => {
     try {
@@ -227,6 +265,20 @@ const NavBar = () => {
     </button>
   );
 
+  const renderThemeToggle = () => {
+    if (!toggleDarkMode) return null; // defensive: if context didn’t provide it
+    return (
+      <button
+        type="button"
+        className="nav-link theme-toggle-button"
+        onClick={toggleDarkMode}
+        aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+      >
+        {isDarkMode ? '☾' : '☀'}
+      </button>
+    );
+  };
+
   /* --------- link filtering --------- */
   const filteredLinks = navbarLinks.filter((link) => {
     const access = link.access || [];
@@ -255,8 +307,8 @@ const NavBar = () => {
     const vaultLogoSrc = isStickyContext
       ? VAULT_LOGO_DARK
       : isDarkMode
-      ? VAULT_LOGO_DARK
-      : VAULT_LOGO_LIGHT;
+        ? VAULT_LOGO_DARK
+        : VAULT_LOGO_LIGHT;
 
     return (
       <Link
@@ -277,23 +329,49 @@ const NavBar = () => {
     );
   };
 
-  // Private Portal link (admins or SL claim)
+  // Private Portal link
   const renderPortalLink = () => {
-    if (!user || !(isAdmin || hasSLClaim)) return null;
-    return (
-      <Link
-        to="/legacy"
-        className="nav-link"
-        onClick={() => handleNavLinkClick('/legacy')}
-        title="SoundLegend Portal"
-      >
-        Artist Portal
-      </Link>
-    );
+    // Must be logged in at all
+    if (!user) return null;
+
+    // 1) If impersonating, ALWAYS show Artist Portal (admin viewing as artist)
+    if (impersonatedUserId) {
+      return (
+        <Link
+          to="/legacy"
+          className="nav-link"
+          onClick={() => handleNavLinkClick('/legacy')}
+          title="SoundLegend Portal"
+        >
+          Artist Portal
+        </Link>
+      );
+    }
+
+    // 2) If a *non-admin* SoundLegend user, show it
+    if (hasSLClaim && !isAdmin) {
+      return (
+        <Link
+          to="/legacy"
+          className="nav-link"
+          onClick={() => handleNavLinkClick('/legacy')}
+          title="SoundLegend Portal"
+        >
+          Artist Portal
+        </Link>
+      );
+    }
+
+    // 3) Admin not impersonating (or any non-SL user): hide it
+    return null;
   };
 
   const renderSoundLegendTab = () => {
     if (!user || userProjects.length === 0) return null;
+
+    // hide for plain admins unless impersonating or SL user
+    if (isAdmin && !impersonatedUserId && !hasSLClaim) return null;
+
     return (
       <div className="nav-link dropdown">
         <span className="dropdown-label">SoundLegend ▾</span>
@@ -329,6 +407,26 @@ const NavBar = () => {
   /* --------- render --------- */
   return (
     <>
+      {/* ===== Impersonation banner ===== */}
+      {impersonatedUserId && (
+        <div className="impersonation-banner">
+          <span>
+            You are logged in as <strong>{user?.email}</strong> and viewing the
+            portal as <strong>{impersonatedEmail || impersonatedUserId}</strong>.
+          </span>
+          <button
+            type="button"
+            className="impersonation-exit-button"
+            onClick={() => {
+              stopImpersonation();
+              navigate('/admin');
+            }}
+          >
+            Exit Admin Impersonation
+          </button>
+        </div>
+      )}
+
       {/* ===== Sticky (mini) navbar ===== */}
       {showStickyHeader && (
         <div className="navbar-sticky-wrapper">
@@ -368,6 +466,7 @@ const NavBar = () => {
                 {renderPortalLink()}
                 {renderSoundLegendTab()}
                 {renderLegacyVaultLogo()}
+                {renderThemeToggle()}
 
                 {user && isAdmin && (
                   <Link
@@ -446,6 +545,7 @@ const NavBar = () => {
                 {renderPortalLink()}
                 {renderSoundLegendTab()}
                 {renderLegacyVaultLogo()}
+                {renderThemeToggle()}
 
                 {user && isAdmin && (
                   <Link
@@ -510,8 +610,8 @@ const NavBar = () => {
                     ? '/menu/close-button-dark-mode.png'
                     : '/menu/menu-button-dark-mode.png'
                   : isMenuOpen
-                  ? '/menu/close-button-light-mode.png'
-                  : '/menu/menu-button-light-mode.png'
+                    ? '/menu/close-button-light-mode.png'
+                    : '/menu/menu-button-light-mode.png'
               }
               alt="Menu Toggle"
               className={`menu-arrow-icon ${isMenuOpen ? 'open' : ''}`}
@@ -552,6 +652,7 @@ const NavBar = () => {
               {renderPortalLink()}
               {renderSoundLegendTab()}
               {renderLegacyVaultLogo()}
+              {renderThemeToggle()}
 
               {user && isAdmin && (
                 <Link

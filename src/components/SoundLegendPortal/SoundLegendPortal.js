@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
 import { useAuth } from '../../context/AuthContext';
+import { usePortalUser } from '../../hooks/usePortalUser';
 
 import ProjectProgress from './ProjectProgress';
 import ScopeOfWork from './ScopeOfWork';
@@ -110,37 +111,40 @@ const ProjectPicker = ({ projects, selectedId, onChange }) => {
 /* -------------------- main portal -------------------- */
 
 const SoundLegendPortal = () => {
-  const { user, isAdmin } = useAuth();
+  const { isAdmin } = useAuth();
+  const { portalUser, loadingPortalUser, isImpersonating } = usePortalUser();
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true); // loading projects/orders
   const [projects, setProjects] = useState([]);
   const [selectedId, setSelectedId] = useState('');
   const [orders, setOrders] = useState([]);
   const [tab, setTab] = useState('progress');
 
-  // Load projects for this user
+  // Load projects for this portal user
   useEffect(() => {
-    if (!user) return;
+    if (!portalUser || loadingPortalUser) return;
 
     let cancelled = false;
 
     const run = async () => {
       try {
+        const ownerUid = portalUser.uid || portalUser.id;
+
         // Primary: ownerUid
-        let qProj = query(
-          collection(db, 'projects'),
-          where('ownerUid', '==', user.uid)
-        );
-        let snap = await getDocs(qProj);
+        let qProj = ownerUid
+          ? query(collection(db, 'projects'), where('ownerUid', '==', ownerUid))
+          : null;
+
+        let snap = qProj ? await getDocs(qProj) : { empty: true, docs: [] };
 
         // Fallback: customer.emailLower
-        if (snap.empty && user.email) {
-          const emailLower = user.email.trim().toLowerCase();
-          qProj = query(
+        if (snap.empty && portalUser.email) {
+          const emailLower = portalUser.email.trim().toLowerCase();
+          const qByEmail = query(
             collection(db, 'projects'),
             where('customer.emailLower', '==', emailLower)
           );
-          snap = await getDocs(qProj);
+          snap = await getDocs(qByEmail);
         }
 
         if (cancelled) return;
@@ -161,18 +165,18 @@ const SoundLegendPortal = () => {
     return () => {
       cancelled = true;
     };
-  }, [user]);
+  }, [portalUser, loadingPortalUser]);
 
-  // Load orders for this user (by email)
+  // Load orders for this portal user (by email)
   useEffect(() => {
-    if (!user?.email) return;
+    if (!portalUser?.email || loadingPortalUser) return;
     let cancelled = false;
 
     const run = async () => {
       try {
         const qOrders = query(
           collection(db, 'orders'),
-          where('customerEmail', '==', user.email)
+          where('customerEmail', '==', portalUser.email)
         );
         const snap = await getDocs(qOrders);
         if (cancelled) return;
@@ -189,7 +193,7 @@ const SoundLegendPortal = () => {
     return () => {
       cancelled = true;
     };
-  }, [user?.email]);
+  }, [portalUser?.email, loadingPortalUser]);
 
   const selectedProject = useMemo(
     () => projects.find((p) => p.id === selectedId) || null,
@@ -201,20 +205,33 @@ const SoundLegendPortal = () => {
     [orders]
   );
 
-  if (!user) {
+  /* -------------------- loading / empty states -------------------- */
+
+  if (loadingPortalUser) {
+    return (
+      <div className="slp-page">Loading your SoundLegend portal…</div>
+    );
+  }
+
+  if (!portalUser) {
     return (
       <div className="slp-page">Please sign in to view your Artist Portal.</div>
     );
   }
 
   if (loading) {
-    return <div className="slp-page">Loading your SoundLegend experience…</div>;
+    return (
+      <div className="slp-page">Loading your SoundLegend experience…</div>
+    );
   }
 
   if (!projects.length) {
     return (
       <div className="slp-page">
-        <h2>Welcome to your SoundLegend</h2>
+        <h2>
+          Welcome to your SoundLegend
+          {isImpersonating ? ' (admin view)' : ''}
+        </h2>
         <p>
           No projects are linked to your account yet. If this seems wrong,
           email:{' '}
@@ -246,6 +263,11 @@ const SoundLegendPortal = () => {
         />
       </div>
 
+      <h2 className="slp-heading">
+        Welcome to your SoundLegend
+        {isImpersonating ? ' (admin view)' : ''}
+      </h2>
+
       <Tabs tabs={tabs} current={tab} onChange={setTab} />
 
       <div className="slp-project-picker-row">
@@ -266,7 +288,7 @@ const SoundLegendPortal = () => {
         {tab === 'payments' && <PaymentHistory orders={orders} />}
         {tab === 'account' && (
           <AccountSettings
-            user={user}
+            user={portalUser}
             projects={projects}
             orders={orders}
             latestOrder={latestOrder}
