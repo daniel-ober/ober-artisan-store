@@ -9,6 +9,9 @@ import {
   arrayUnion,
   getDoc,
   Timestamp,
+  query,
+  where,
+  getDocs,
 } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 
@@ -40,6 +43,22 @@ END:VCARD
   a.click();
 
   URL.revokeObjectURL(url);
+};
+
+// Helper: find a user document (and uid) by email
+const findUserByEmail = async (email) => {
+  if (!email) return null;
+  try {
+    const usersRef = collection(db, 'users');
+    const q = query(usersRef, where('email', '==', email));
+    const snap = await getDocs(q);
+    if (snap.empty) return null;
+    const docSnap = snap.docs[0];
+    return { uid: docSnap.id, ...docSnap.data() };
+  } catch (err) {
+    console.error('❌ findUserByEmail failed:', err);
+    return null;
+  }
 };
 
 const ViewSoundlegendModal = ({
@@ -125,16 +144,24 @@ const ViewSoundlegendModal = ({
       .catch((err) => console.error('❌ Copy failed:', err));
   }, []);
 
-  const createProject = async () => {
+   const createProject = async () => {
     const confirmCreation = window.confirm(
       `Create Project for ${firstName} ${lastName}?`
     );
     if (!confirmCreation) return;
 
     try {
+      // Look up the user so we can attach ownerUid
+      const user = await findUserByEmail(email);
+
       const projectData = {
         source: 'SoundLegend',
         submissionId: fullSubmission.id,
+
+        // 🔑 Key fields for the SoundLegend portal
+        ownerUid: user?.uid || null,
+        ownerEmail: email,
+
         customerName: `${firstName} ${lastName}`,
         customer: {
           name: `${firstName} ${lastName}`,

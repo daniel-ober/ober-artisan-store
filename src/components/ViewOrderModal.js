@@ -7,7 +7,11 @@ import {
   arrayUnion,
   collection,
   addDoc,
+  query,
+  where,
+  getDocs,
 } from 'firebase/firestore';
+import { Timestamp } from 'firebase/firestore';
 import { Timestamp } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import { getOrderStatusFromItems } from '../utils/statusConfig';
@@ -43,6 +47,21 @@ const formatFirestoreTimestamp = (ts) => {
   }
 };
 
+const findUserByEmail = async (email) => {
+  if (!email) return null;
+  try {
+    const usersRef = collection(db, 'users');
+    const q = query(usersRef, where('email', '==', email));
+    const snap = await getDocs(q);
+    if (snap.empty) return null;
+    const docSnap = snap.docs[0];
+    return { uid: docSnap.id, ...docSnap.data() };
+  } catch (err) {
+    console.error('❌ findUserByEmail failed:', err);
+    return null;
+  }
+};
+
 const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
   const [internalNotes, setInternalNotes] = useState([]);
   const [systemHistory, setSystemHistory] = useState([]);
@@ -68,11 +87,15 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
 
     try {
       const customerEmail = orderDetails.customerEmail || '';
+
+      // Get the user so we can attach ownerUid
+      const user = await findUserByEmail(customerEmail);
+
       const parsedAddress = (orderDetails.customerAddress || '').split(',');
       const street = parsedAddress[0]?.trim() || '';
       const city = parsedAddress[1]?.trim() || '';
-      let state = '',
-        zip = '';
+      let state = '';
+      let zip = '';
       if (parsedAddress[2]) {
         const parts = parsedAddress[2].trim().split(' ');
         state = parts[0] || '';
@@ -81,12 +104,16 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
 
       const projectData = {
         orderId: orderDetails.id,
+
+        // 🔑 Key for SoundLegend portal
+        ownerUid: user?.uid || null,
+        ownerEmail: customerEmail,
+
         customerName:
           orderDetails.customerName ||
           item?.description?.split('-')[0]?.trim() ||
           item?.name?.split('-')[0]?.trim() ||
           'N/A',
-        ownerEmail: customerEmail,
         customer: {
           name: orderDetails.customerName || 'N/A',
           email: customerEmail,

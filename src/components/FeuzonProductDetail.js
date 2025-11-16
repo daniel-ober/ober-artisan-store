@@ -422,7 +422,7 @@ const FeuzonProductDetail = () => {
               <li>Trick Snare Throw-Off</li>
               <li>Puresound Snare Wires</li>
               <li>Remo Coated Ambassador Batter & Clear Snare Side</li>
-              <li>Estimated Delivery: 6–8 weeks</li>
+              <li>Estimated Delivery: 7-10</li>
               <p className="order-to-build-disclaimer">
                 *Note: Each Ober Artisan Drum is built to order. The drum you
                 receive will closely reflect the design shown, but natural wood
@@ -527,7 +527,7 @@ const FeuzonProductDetail = () => {
           </select>
 
           <p className="feuzon-detail-price">${totalPrice}</p>
-          <p className="delivery-time">Est Delivery: 6–8 weeks</p>
+          <p className="delivery-time">Est Delivery: 7–10 weeks</p>
 
           {productInCart ? (
             <div className="artisan-cart-hover-container">

@@ -7,8 +7,8 @@ const EditUserModal = ({ user, onClose, onUserUpdated }) => {
   const [lastName, setLastName] = useState(user?.lastName || '');
   const [email, setEmail] = useState(user?.email || '');
   const [phone, setPhone] = useState(user?.phone || '');
-  const [isAdmin, setIsAdmin] = useState(!!user?.isAdmin);            // <--- Add this
-  const [isSoundlegend, setIsSoundlegend] = useState(!!user?.isSoundlegend);  // <--- Add this
+  const [isAdmin, setIsAdmin] = useState(!!user?.isAdmin);          
+  const [isSoundlegend, setIsSoundlegend] = useState(!!user?.isSoundlegend); 
   const [error, setError] = useState('');
 
   const handleSave = async () => {
@@ -19,8 +19,8 @@ const EditUserModal = ({ user, onClose, onUserUpdated }) => {
         lastName,
         email,
         phone,
-        isAdmin,           // <--- Save these fields
-        isSoundlegend,     // <--- Save these fields
+        isAdmin,           
+        isSoundlegend,    
       });
       onUserUpdated({ ...user, firstName, lastName, email, phone, isAdmin, isSoundlegend });
       onClose();

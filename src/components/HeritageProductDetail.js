@@ -338,7 +338,7 @@ const HeritageProductDetail = () => {
               <li>Trick Snare Throw-Off</li>
               <li>Puresound Snare Wires</li>
               <li>Remo Coated Ambassador Batter & Clear Snare Side</li>
-              <li>Estimated Delivery: 5–7 weeks</li>
+              <li>Estimated Delivery: 6–8 weeks</li>
               <p className="order-to-build-disclaimer">
                 *Note: Each Ober Artisan Drum is built to order. The drum you
                 receive will closely reflect the design shown, but natural wood
@@ -401,7 +401,7 @@ const HeritageProductDetail = () => {
           </select>
 
           <p className="heritage-detail-price">${totalPrice}</p>
-          <p className="delivery-time">Est Delivery: 5–7 weeks</p>
+          <p className="delivery-time">Est Delivery: 6–8 weeks</p>
 
           {buttonText === 'In Cart' ? (
             <div className="artisan-cart-hover-container">
