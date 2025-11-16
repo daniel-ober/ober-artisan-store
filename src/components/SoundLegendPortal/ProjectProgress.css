@@ -248,13 +248,11 @@
 
 [data-component="ProjectProgress"] .pp-detail {
   margin-top: 22px;
-  padding: 14px 16px 16px;
+  padding: 14px 16px 18px;
   border-radius: 14px;
   background: radial-gradient(circle at top left, #151725 0, #070810 55%, #030307 100%);
   border: 1px solid rgba(255, 255, 255, 0.06);
 }
-
-/* step header: centered title with status directly underneath */
 
 /* step header: centered title with status directly underneath */
 
@@ -266,6 +264,7 @@
   gap: 4px;
   margin-bottom: 14px;
   padding: 4px 6px 10px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.25);
 }
 
 /* centered, enlarged step title */
@@ -317,40 +316,13 @@
   opacity: 1;
 }
 
-@media (max-width: 640px) {
-  [data-component="ProjectProgress"] .pp-hero-frame {
-    border-radius: 14px;
-  }
-
-  [data-component="ProjectProgress"] .pp-hero-caption {
-    font-size: 0.82rem;
-  }
-
-  [data-component="ProjectProgress"] .pp-summary-item {
-    padding: 9px 10px;
-  }
-
-  [data-component="ProjectProgress"] .pp-body,
-  [data-component="ProjectProgress"] .pp-list,
-  [data-component="ProjectProgress"] .pp-link-button {
-    font-size: 0.86rem;
-  }
-
-  [data-component="ProjectProgress"] .pp-step-title {
-    font-size: 1.02rem;
-  }
-
-  [data-component="ProjectProgress"] .pp-pill {
-    font-size: 0.68rem;
-    padding: 3px 8px;
-  }
-}
+/* stats row under header */
 
 [data-component="ProjectProgress"] .pp-stats {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
-  margin-bottom: 12px;
+  margin: 10px 0 14px;
 }
 
 [data-component="ProjectProgress"] .pp-stat {
@@ -377,8 +349,8 @@
 [data-component="ProjectProgress"] .pp-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
-  margin-top: 4px;
+  gap: 24px;
+  margin-top: 6px;
 }
 
 [data-component="ProjectProgress"] .pp-col {
@@ -390,7 +362,7 @@
   text-transform: uppercase;
   letter-spacing: 0.18em;
   opacity: 0.78;
-  margin: 8px 0 4px;
+  margin: 10px 0 4px;
 }
 
 [data-component="ProjectProgress"] .pp-muted {
@@ -447,7 +419,7 @@
 /* mantra */
 
 [data-component="ProjectProgress"] .pp-mantra {
-  margin-top: 10px;
+  margin-top: 12px;
   padding: 7px 10px;
   border-radius: 10px;
   background: radial-gradient(circle at top left, #111827 0, #020617 60%);
@@ -463,28 +435,41 @@
   color: #fde68a;
 }
 
-/* media */
+/* ---------- media grid ---------- */
 
 [data-component="ProjectProgress"] .pp-media {
-  margin-top: 8px;
+  margin-top: 10px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 8px;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
 }
 
 [data-component="ProjectProgress"] .pp-thumb {
   position: relative;
-  border-radius: 10px;
+  border-radius: 12px;
   overflow: hidden;
-  background: rgba(15, 23, 42, 0.9);
+  background: radial-gradient(circle at top left, #020617 0, #020617 55%, #000 100%);
   border: 1px solid rgba(148, 163, 184, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 6px;
+  padding: 0;
   text-decoration: none;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   color: #e5e7eb;
+  cursor: pointer;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease,
+    background 0.18s ease;
+  min-height: 72px;
+}
+
+[data-component="ProjectProgress"] .pp-thumb:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.75);
+  border-color: rgba(191, 219, 254, 0.9);
 }
 
 [data-component="ProjectProgress"] .pp-thumb img {
@@ -494,17 +479,151 @@
   display: block;
 }
 
-[data-component="ProjectProgress"] .pp-thumb-video span,
-[data-component="ProjectProgress"] .pp-thumb-audio span,
-[data-component="ProjectProgress"] .pp-thumb-pdf span,
-[data-component="ProjectProgress"] .pp-thumb-link span {
-  white-space: nowrap;
+/* non-image thumbs */
+
+[data-component="ProjectProgress"] .pp-thumb-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 10px 8px;
 }
 
+[data-component="ProjectProgress"] .pp-thumb-badge {
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.8);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+[data-component="ProjectProgress"] .pp-thumb-badge-video {
+  border-color: rgba(59, 130, 246, 0.9);
+  color: #bfdbfe;
+}
+
+[data-component="ProjectProgress"] .pp-thumb-badge-audio {
+  border-color: rgba(16, 185, 129, 0.9);
+  color: #a7f3d0;
+}
+
+[data-component="ProjectProgress"] .pp-thumb-badge-pdf {
+  border-color: rgba(248, 113, 113, 0.9);
+  color: #fecaca;
+}
+
+[data-component="ProjectProgress"] .pp-thumb-badge-link {
+  border-color: rgba(148, 163, 184, 0.8);
+  color: #e5e7eb;
+}
+
+[data-component="ProjectProgress"] .pp-thumb-label {
+  font-size: 0.78rem;
+  opacity: 0.85;
+}
+
+/* "No files" text */
+
 [data-component="ProjectProgress"] .pp-empty {
-  margin-top: 6px;
+  margin-top: 8px;
   font-size: 0.88rem;
   opacity: 0.75;
+}
+
+/* ---------- media modal ---------- */
+
+[data-component="ProjectProgress"] .pp-media-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: rgba(0, 0, 0, 0.74);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+[data-component="ProjectProgress"] .pp-media-modal {
+  max-width: min(960px, 100%);
+  max-height: min(80vh, 100%);
+  width: 100%;
+  border-radius: 18px;
+  background: radial-gradient(circle at top left, #020617 0, #020617 55%, #000 100%);
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.9);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+[data-component="ProjectProgress"] .pp-media-modal-header {
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(51, 65, 85, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+[data-component="ProjectProgress"] .pp-media-modal-title {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  opacity: 0.85;
+}
+
+[data-component="ProjectProgress"] .pp-media-modal-close {
+  border: 1px solid rgba(148, 163, 184, 0.8);
+  background: rgba(15, 23, 42, 0.9);
+  color: #e5e7eb;
+  border-radius: 999px;
+  padding: 3px 9px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+[data-component="ProjectProgress"] .pp-media-modal-close:hover {
+  background: rgba(30, 64, 175, 0.95);
+}
+
+[data-component="ProjectProgress"] .pp-media-modal-body {
+  padding: 10px 14px 8px;
+  flex: 1;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+[data-component="ProjectProgress"] .pp-media-modal-body img,
+[data-component="ProjectProgress"] .pp-media-modal-body video,
+[data-component="ProjectProgress"] .pp-media-modal-body iframe {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 12px;
+}
+
+[data-component="ProjectProgress"] .pp-media-modal-body audio {
+  width: 100%;
+}
+
+[data-component="ProjectProgress"] .pp-media-modal-footer {
+  padding: 8px 14px 12px;
+  border-top: 1px solid rgba(31, 41, 55, 0.9);
+  display: flex;
+  justify-content: flex-end;
+}
+
+[data-component="ProjectProgress"] .pp-media-modal-link {
+  font-size: 0.82rem;
+  color: #bfdbfe;
+  text-decoration: none;
+}
+
+[data-component="ProjectProgress"] .pp-media-modal-link:hover {
+  text-decoration: underline;
 }
 
 /* ---------- Responsive ---------- */
@@ -550,7 +669,6 @@
     font-size: 0.86rem;
   }
 
-  @media (max-width: 640px) {
   [data-component="ProjectProgress"] .pp-step-title {
     font-size: 1.02rem;
   }
@@ -559,5 +677,8 @@
     font-size: 0.68rem;
     padding: 3px 8px;
   }
-}
+
+  [data-component="ProjectProgress"] .pp-media-modal {
+    max-height: 85vh;
+  }
 }

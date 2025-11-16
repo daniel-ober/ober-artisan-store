@@ -78,12 +78,18 @@ function topFiveTasks(stepData) {
     .map((x) => x.task.trim());
 }
 
+/** 🔎 Detect media type from URL (handles Firebase URLs with ?alt=media&token=...) */
 function detectType(url) {
   const u = (url || '').toLowerCase();
-  if (u.endsWith('.pdf')) return 'pdf';
-  if (/\.(png|jpg|jpeg|webp|gif|bmp|tiff)$/.test(u)) return 'image';
-  if (/\.(mp4|mov|webm|m4v)$/.test(u)) return 'video';
-  if (/\.(mp3|m4a|wav|flac|aac|ogg)$/.test(u)) return 'audio';
+
+  // Look only at the path portion before any query/hash
+  const [path] = u.split(/[?#]/);
+
+  if (path.endsWith('.pdf')) return 'pdf';
+  if (/\.(png|jpg|jpeg|webp|gif|bmp|tiff)$/.test(path)) return 'image';
+  if (/\.(mp4|mov|webm|m4v)$/.test(path)) return 'video';
+  if (/\.(mp3|m4a|wav|flac|aac|ogg)$/.test(path)) return 'audio';
+
   return 'link';
 }
 
@@ -113,7 +119,11 @@ function getStepMedia(project, stepKey) {
     const arr = Array.isArray(all[bucketKey]) ? all[bucketKey] : [];
     arr.forEach((item) => {
       if (!item || !item.url) return;
-      out.push({ url: item.url, type: detectType(item.url) });
+      out.push({
+        url: item.url,
+        type: detectType(item.url),
+        name: item.name || '',
+      });
     });
   });
 
@@ -155,8 +165,7 @@ function pickEarliestDate(...vals) {
   return Math.min(...ms);
 }
 
-// 🔹 Prefer the explicit actualCompletion field when present,
-// otherwise fall back to the latest of other completion-ish timestamps.
+// Prefer explicit actualCompletion when present
 function getCompletionDate(project) {
   if (!project) return 0;
 
@@ -178,25 +187,18 @@ function getCompletionDate(project) {
 
 function isProjectComplete(project, pct) {
   if (!project) return false;
-
-  // 🔒 Only treat as complete when the weighted checklist is 100%
   if (pct < 100) return false;
-
   return true;
 }
 
-/**
- * Hero media:
- *  - Use hero URL already attached to the project.
- *  - Falls back to heroMedia struct or attachments.
- */
+/** Hero media selection */
 function getHeroMedia(project) {
   if (!project) return null;
 
   const directUrl =
     project.showroomHeroUrl ||
     project.heroImageUrl ||
-    project.heroImage || // direct hero image on project
+    project.heroImage ||
     project.heroMediaUrl ||
     project.vaultHeroUrl ||
     project.heroUrl ||
@@ -206,13 +208,11 @@ function getHeroMedia(project) {
     return { url: directUrl, type: detectType(directUrl) };
   }
 
-  // Struct-style field { url, type }
   if (project.heroMedia && project.heroMedia.url) {
     const t = project.heroMedia.type || detectType(project.heroMedia.url);
     return { url: project.heroMedia.url, type: t };
   }
 
-  // Attachments bucket, e.g. attachments.showroom_hero[0]
   const bucket =
     project.attachments &&
     (project.attachments.showroom_hero ||
@@ -227,26 +227,23 @@ function getHeroMedia(project) {
   return null;
 }
 
-/* 🔹 Determine the "current" step index based on project data */
+/* Determine the "current" step index based on project data */
 function getCurrentStepIndex(project) {
   if (!project) return -1;
 
   const phase = String(project.currentPhase || '').toLowerCase();
 
-  // Try to map currentPhase text to one of the labels (e.g., "Shell Construction")
   const fromPhase = STEPS.findIndex((s) =>
     phase.includes(s.label.split(' ')[0].toLowerCase())
   );
   if (fromPhase >= 0) return fromPhase;
 
-  // Otherwise, fall back to the last step that has *any* completed checklist item
   for (let i = STEPS.length - 1; i >= 0; i--) {
     const d = project[STEPS[i].key];
     const list = Array.isArray(d?.checklist) ? d.checklist : [];
     if (list.some((c) => c && c.completed)) return i;
   }
 
-  // No progress yet
   return -1;
 }
 
@@ -370,36 +367,32 @@ function parseHoursRange(est) {
   return { min, max, avg };
 }
 
-// Conservative average calendar days for a step, based on COPY.est
 function getStepAvgDays(stepKey) {
   const est = COPY[stepKey]?.est;
   const range = parseHoursRange(est);
   if (!range) return 0;
 
-  const hoursPerDay = 6; // focused build hours per day (conservative)
+  const hoursPerDay = 6;
   const days = range.avg / hoursPerDay;
   return Math.max(1, Math.round(days));
 }
 
-// Add weekend-only workdays (Sat/Sun) PLUS a 2-weekend buffer (4 days total)
+// Add weekend-only workdays plus 2-weekend buffer (4 weekend workdays)
 function addWeekendWorkdays(startMs, workdays) {
   if (!workdays) return startMs;
 
   let date = new Date(startMs);
   let remaining = workdays;
 
-  // First: step forward counting ONLY Sat/Sun as workdays
   while (remaining > 0) {
     date.setDate(date.getDate() + 1);
-    const day = date.getDay(); // 0 = Sun, 6 = Sat
+    const day = date.getDay();
     if (day === 0 || day === 6) {
       remaining--;
     }
   }
 
-  // Second: add buffer = 2 full weekends = 4 workdays
-  let buffer = 4; // (Sat + Sun) × 2 weekends
-
+  let buffer = 4;
   while (buffer > 0) {
     date.setDate(date.getDate() + 1);
     const day = date.getDay();
@@ -420,13 +413,11 @@ const ProjectProgress = ({ project }) => {
     [project, pct]
   );
 
-  // 🔹 Index used for default active tab in the track
   const defaultIndex = useMemo(() => {
     const idx = getCurrentStepIndex(project);
-    return idx === -1 ? 0 : idx; // UI still needs *some* step selected
+    return idx === -1 ? 0 : idx;
   }, [project]);
 
-  // 🔹 Stable "current step" index for the summary card
   const currentStepIndex = useMemo(
     () => getCurrentStepIndex(project),
     [project]
@@ -434,12 +425,13 @@ const ProjectProgress = ({ project }) => {
 
   const [active, setActive] = useState(defaultIndex);
   const [heroFromShowroom, setHeroFromShowroom] = useState(null);
+  const [activeMedia, setActiveMedia] = useState(null); // { url, type, alt, name? }
 
   useEffect(() => {
     setActive(defaultIndex);
   }, [defaultIndex]);
 
-  // 🔹 Pull heroImage from soundlegend_showroom (e.g. doc "SL-003")
+  // Load hero from soundlegend_showroom
   useEffect(() => {
     let cancelled = false;
 
@@ -505,13 +497,13 @@ const ProjectProgress = ({ project }) => {
       out.push(sum);
       sum += arr[i];
     }
-    out.push(1); // end cap
+    out.push(1);
     return out;
   }, []);
 
   const leftPctForIndex = (i) => cumWeights[i] * 100;
 
-  // summary dates
+  // Dates
   const startMs = pickEarliestDate(project.startDate, project.createdAt);
   const completionMs = getCompletionDate(project);
 
@@ -521,7 +513,6 @@ const ProjectProgress = ({ project }) => {
   // Step-level timing estimates
   const stepAvgDays = getStepAvgDays(activeStep.key);
 
-  // Cumulative days from project start through each step, for target dates
   const cumulativeStepDays = useMemo(() => {
     let running = 0;
     return STEPS.map((s) => {
@@ -541,7 +532,7 @@ const ProjectProgress = ({ project }) => {
 
   const targetStepDate = fmtFromMs(targetStepDateMs);
 
-  // 🔹 Final-step conservative completion window (summary row)
+  // Final-step conservative completion window
   const totalDaysFinal = cumulativeStepDays[STEPS.length - 1] || 0;
 
   const finalStepTargetMs = totalDaysFinal
@@ -550,7 +541,6 @@ const ProjectProgress = ({ project }) => {
 
   const finalStepTargetDate = fmtFromMs(finalStepTargetMs);
 
-  // Add 2 calendar weeks for shipping / life buffer
   const TWO_WEEKS_MS = 14 * 24 * 60 * 60 * 1000;
   const finalWindowEndMs = finalStepTargetMs
     ? finalStepTargetMs + TWO_WEEKS_MS
@@ -558,14 +548,12 @@ const ProjectProgress = ({ project }) => {
 
   const finalWindowEndDate = fmtFromMs(finalWindowEndMs);
 
-  // 🔹 Current step label in the SUMMARY row (top middle card)
   const currentStepLabel = complete
     ? 'All Steps Complete'
     : currentStepIndex === -1
       ? 'Not Started'
       : `${currentStepIndex + 1}. ${STEPS[currentStepIndex].label}`;
 
-  // ⭐ Hero selection: use showroom hero first, then any hero already on the project
   const heroLocal = getHeroMedia(project);
   const hero = heroFromShowroom || heroLocal;
   const showHeroFromProject = complete && hero && hero.url;
@@ -574,6 +562,12 @@ const ProjectProgress = ({ project }) => {
   const buildWindowLabel = complete
     ? 'Completion date'
     : 'Target completion window';
+
+  const openMedia = (m, alt) => {
+    setActiveMedia({ ...m, alt });
+  };
+
+  const closeMedia = () => setActiveMedia(null);
 
   return (
     <div className="slp-card pp-card" data-component="ProjectProgress">
@@ -868,41 +862,91 @@ const ProjectProgress = ({ project }) => {
         ) : (
           <div className="pp-media">
             {media.map((m, i) => {
-              const alt = `${activeStep.label} media ${i + 1}`;
-
-              if (m.type === 'image') {
-                return (
-                  <a
-                    key={i}
-                    href={m.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="pp-thumb"
-                  >
-                    <img src={m.url} alt={alt} />
-                  </a>
-                );
-              }
-
-              const cls = `pp-thumb pp-thumb-${m.type}`;
-              const label = m.type.charAt(0).toUpperCase() + m.type.slice(1);
+              const altBase =
+                m.name && m.name.trim()
+                  ? m.name.trim()
+                  : `${activeStep.label} media ${i + 1}`;
+              const label =
+                m.type.charAt(0).toUpperCase() + m.type.slice(1);
 
               return (
-                <a
-                  key={i}
-                  href={m.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={cls}
-                  aria-label={`${label}: ${alt}`}
+                <button
+                  key={`${m.url}-${i}`}
+                  type="button"
+                  className={`pp-thumb pp-thumb-${m.type}`}
+                  onClick={() => openMedia(m, altBase)}
+                  aria-label={`${label}: ${altBase}`}
                 >
-                  <span>{label}</span>
-                </a>
+                  {m.type === 'image' ? (
+                    <img src={m.url} alt={altBase} />
+                  ) : (
+                    <span className="pp-thumb-label">{label}</span>
+                  )}
+                </button>
               );
             })}
           </div>
         )}
       </section>
+
+      {/* ---------- Media lightbox / modal ---------- */}
+      {activeMedia && (
+        <div
+          className="pp-media-modal-overlay"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Media viewer"
+          onClick={closeMedia}
+        >
+          <div
+            className="pp-media-modal"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              className="pp-media-modal-close"
+              onClick={closeMedia}
+              aria-label="Close media viewer"
+            >
+              ×
+            </button>
+
+            <div className="pp-media-modal-body">
+              {activeMedia.type === 'image' && (
+                <img
+                  src={activeMedia.url}
+                  alt={activeMedia.alt || 'Media preview'}
+                />
+              )}
+
+              {activeMedia.type === 'video' && (
+                <video
+                  src={activeMedia.url}
+                  controls
+                  autoPlay
+                  playsInline
+                />
+              )}
+
+              {activeMedia.type === 'audio' && (
+                <audio src={activeMedia.url} controls />
+              )}
+
+              {(activeMedia.type === 'pdf' ||
+                activeMedia.type === 'link') && (
+                <a
+                  href={activeMedia.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="pp-media-modal-link"
+                >
+                  Open in new tab
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
