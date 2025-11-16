@@ -1,5 +1,3 @@
-// src/components/SoundLegendPortal/SoundLegendPortal.js
-
 import React, { useEffect, useMemo, useState } from 'react';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
@@ -34,7 +32,7 @@ function tsToMillis(v) {
   }
 }
 
-const Tabs = ({ tabs, current, onChange, rightSlot }) => (
+const Tabs = ({ tabs, current, onChange }) => (
   <div className="slp-tabs">
     <div
       className="slp-tablist"
@@ -53,9 +51,61 @@ const Tabs = ({ tabs, current, onChange, rightSlot }) => (
         </button>
       ))}
     </div>
-    <div className="slp-tab-right">{rightSlot}</div>
   </div>
 );
+
+/* -------------------- custom project picker -------------------- */
+
+const ProjectPicker = ({ projects, selectedId, onChange }) => {
+  const [open, setOpen] = useState(false);
+
+  if (!projects || projects.length <= 1) return null;
+
+  const current =
+    projects.find((p) => p.id === selectedId) || projects[0] || null;
+
+  const labelFor = (p) => {
+    const base =
+      p.lineSerial || p.globalSerial || p.artisanLine || p.id || 'Project';
+    return base; // serial only, no diameter/depth
+  };
+
+  const handleSelect = (id) => {
+    onChange(id);
+    setOpen(false);
+  };
+
+  return (
+    <div className="slp-picker-shell">
+      <button
+        type="button"
+        className="slp-picker slp-picker-button slp-picker-soundlegend"
+        onClick={() => setOpen((o) => !o)}
+      >
+        {current ? labelFor(current) : 'Select your project'}
+      </button>
+
+      {open && (
+        <div className="slp-picker-menu" role="listbox">
+          {projects.map((p) => (
+            <button
+              key={p.id}
+              type="button"
+              className={`slp-picker-item ${
+                p.id === selectedId ? 'is-active' : ''
+              }`}
+              onClick={() => handleSelect(p.id)}
+              role="option"
+              aria-selected={p.id === selectedId}
+            >
+              {labelFor(p)}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
 
 /* -------------------- main portal -------------------- */
 
@@ -153,16 +203,12 @@ const SoundLegendPortal = () => {
 
   if (!user) {
     return (
-      <div className="slp-page">
-        Please sign in to view your Artist Portal.
-      </div>
+      <div className="slp-page">Please sign in to view your Artist Portal.</div>
     );
   }
 
   if (loading) {
-    return (
-      <div className="slp-page">Loading your SoundLegend experience…</div>
-    );
+    return <div className="slp-page">Loading your SoundLegend experience…</div>;
   }
 
   if (!projects.length) {
@@ -179,22 +225,6 @@ const SoundLegendPortal = () => {
       </div>
     );
   }
-
-  const ProjectPicker =
-    projects.length > 1 ? (
-      <select
-        className="slp-picker"
-        value={selectedId}
-        onChange={(e) => setSelectedId(e.target.value)}
-      >
-        {projects.map((p) => (
-          <option key={p.id} value={p.id}>
-            {p.lineSerial || p.globalSerial || p.artisanLine || p.id}
-            {p.width && p.shellDepth ? ` — ${p.width}×${p.shellDepth}"` : ''}
-          </option>
-        ))}
-      </select>
-    ) : null;
 
   const tabs = [
     { key: 'progress', label: 'Build Progress' },
@@ -216,26 +246,24 @@ const SoundLegendPortal = () => {
         />
       </div>
 
-      <Tabs
-        tabs={tabs}
-        current={tab}
-        onChange={setTab}
-        rightSlot={ProjectPicker}
-      />
+      <Tabs tabs={tabs} current={tab} onChange={setTab} />
+
+      <div className="slp-project-picker-row">
+        <ProjectPicker
+          projects={projects}
+          selectedId={selectedId}
+          onChange={setSelectedId}
+        />
+      </div>
 
       <div className="slp-panel">
         {tab === 'progress' && (
           <ProjectProgress project={selectedProject} isAdmin={isAdmin} />
         )}
-
         {tab === 'scope' && <ScopeOfWork project={selectedProject} />}
-
         {tab === 'vault' && <VaultPreferences project={selectedProject} />}
-
         {tab === 'media' && <Media project={selectedProject} />}
-
         {tab === 'payments' && <PaymentHistory orders={orders} />}
-
         {tab === 'account' && (
           <AccountSettings
             user={user}
