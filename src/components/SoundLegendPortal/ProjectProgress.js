@@ -774,7 +774,7 @@ const ProjectProgress = ({ project }) => {
 
           <div className="pp-stat">
             <div className="pp-stat-label">
-              Conservative target date
+              Stage completion target
               <span
                 className="pp-info-tip"
                 title="Currently based on a weekend-only work schedule."

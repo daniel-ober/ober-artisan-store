@@ -12,7 +12,6 @@ import {
   getDocs,
 } from 'firebase/firestore';
 import { Timestamp } from 'firebase/firestore';
-import { Timestamp } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import { getOrderStatusFromItems } from '../utils/statusConfig';
 import defaultStepData from '../utils/defaultStepData';

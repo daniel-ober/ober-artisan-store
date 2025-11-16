@@ -29,16 +29,164 @@
 .slp-table tr:last-child td { border-bottom: none; }
 .slp-table .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
 
-/* Picker on right side of tabs */
-.slp-picker {
-  appearance: none; border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(0,0,0,0.25); color: #fff;
-  border-radius: 10px; padding: 8px 10px; min-width: 220px;
+/* ====== Custom Project Picker ====== */
+
+.slp-project-picker-row {
+  margin: 8px 0 18px;
+  display: flex;
+  justify-content: center;
+}
+
+.slp-picker-shell {
+  position: relative;
+  display: inline-block;
+  max-width: min(640px, 100%);
+  width: 100%;
+}
+
+/* Pill button – dark gradient + vignette + smooth hover */
+.slp-picker.slp-picker-button.slp-picker-soundlegend {
+  width: 100%;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.32);
+  padding: 10px 44px 10px 20px; /* room on right for arrow */
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+
+  color: #fdfdfd;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(185,120,255,0.12), transparent 65%),
+    radial-gradient(circle at 100% 100%, rgba(120,220,255,0.12), transparent 75%),
+    linear-gradient(160deg, #0b0912 0%, #181828 55%, #06050a 100%);
+
+  /* vignette + depth */
+  box-shadow:
+    0 14px 30px rgba(0,0,0,0.75),
+    inset 0 0 0 1px rgba(255,255,255,0.04),
+    inset 0 -18px 22px rgba(0,0,0,0.55);
+  backdrop-filter: blur(16px);
+
+  position: relative;
+  transition:
+    background 180ms ease-out,
+    box-shadow 180ms ease-out,
+    transform 120ms ease-out;
+}
+
+.slp-picker.slp-picker-button.slp-picker-soundlegend:hover,
+.slp-picker.slp-picker-button.slp-picker-soundlegend:focus-visible {
+  transform: translateY(-0.5px);
+  box-shadow:
+    0 18px 36px rgba(0,0,0,0.85),
+    inset 0 0 0 1px rgba(255,255,255,0.06),
+    inset 0 -20px 26px rgba(0,0,0,0.65);
+  outline: none;
+}
+
+/* arrow icon inside the pill */
+.slp-picker.slp-picker-button.slp-picker-soundlegend::after {
+  content: "";
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  width: 10px;
+  height: 6px;
+  transform: translateY(-50%);
+  background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23ffffff' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: 10px 6px;
+  opacity: 0.9;
+}
+
+/* Dropdown panel – matching gradient + soft vignette */
+.slp-picker-shell .slp-picker-menu {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;          /* directly below */
+  margin-top: 6px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.18);
+  box-shadow:
+    0 20px 44px rgba(0,0,0,0.9),
+    inset 0 0 0 1px rgba(255,255,255,0.03);
+  overflow: hidden;
+  z-index: 40;
+
+  background:
+    radial-gradient(circle at 0% 0%, rgba(185,120,255,0.10), transparent 65%),
+    radial-gradient(circle at 100% 100%, rgba(120,220,255,0.12), transparent 75%),
+    linear-gradient(160deg, #070612 0%, #141326 55%, #020108 100%);
+}
+
+/* Individual options – heavier type, subtle neon hover */
+.slp-picker-menu .slp-picker-item {
+  width: 100%;
+  padding: 12px 18px;
+  border: 0;
+  background: transparent;
+  color: #f7f7ff;
+  text-align: center;
+  font-weight: 600;     /* heavier */
+  font-size: 16px;      /* slightly larger */
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition:
+    background 130ms ease-out,
+    box-shadow 130ms ease-out,
+    transform 120ms ease-out;
+}
+
+.slp-picker-menu .slp-picker-item + .slp-picker-item {
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+/* hover: soft neon rim + micro lift */
+.slp-picker-menu .slp-picker-item:hover {
+  background: linear-gradient(
+    90deg,
+    rgba(120,220,255,0.12),
+    rgba(185,120,255,0.14)
+  );
+  box-shadow:
+    0 0 0 1px rgba(160,210,255,0.55),
+    inset 0 0 0 1px rgba(0,0,0,0.65);
+  transform: translateY(-0.5px);
+}
+
+/* active row – glass sheen */
+.slp-picker-menu .slp-picker-item.is-active {
+  color: #fdfdff;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(100,210,255,0.32),
+      rgba(185,120,255,0.40)
+    );
+  box-shadow:
+    0 0 0 1px rgba(190,230,255,0.9),
+    inset 0 0 0 1px rgba(0,0,0,0.7),
+    inset 0 -18px 24px rgba(0,0,0,0.55);
 }
 
 /* ====== Tabs ====== */
-.slp-tabs { display:flex; align-items:center; justify-content:space-between; margin-bottom: 12px; }
-.slp-tablist { display:flex; gap:6px; flex-wrap:wrap; }
+.slp-tabs {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* center the chip row */
+  margin-bottom: 12px;
+}
+
+.slp-tablist {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center; /* center chips inside */
+}
+
 .slp-tab {
   border: 1px solid rgba(255,255,255,0.12);
   background: rgba(0,0,0,0.25);
@@ -51,7 +199,6 @@
   background: rgba(255,255,255,0.1);
   box-shadow: inset 0 0 0 1px rgba(255,255,255,0.18);
 }
-.slp-tab-right { display:flex; align-items:center; gap:8px; }
 
 /* ===== Buttons / Inputs ===== */
 .apo-btn {
