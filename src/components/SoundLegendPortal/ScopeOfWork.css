@@ -384,6 +384,50 @@
   margin-top: 4px;
 }
 
+/* Audit header row with toggle */
+.sow-audit-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.sow-audit-toggle {
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+  font-size: 0.78rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.sow-audit-toggle:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+.sow-audit-chevron {
+  font-size: 0.78rem;
+  transform: translateY(1px) rotate(0deg);
+  transition: transform 0.15s ease;
+}
+
+.sow-audit-chevron.is-open {
+  transform: translateY(1px) rotate(180deg);
+}
+
+/* On small screens, keep header tidy */
+@media (max-width: 900px) {
+  .sow-audit-header-row {
+    align-items: flex-start;
+  }
+}
+
 /* Mobile */
 @media (max-width: 900px) {
   .proposal-item {

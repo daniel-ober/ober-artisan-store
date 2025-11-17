@@ -310,6 +310,7 @@ const ScopeOfWork = ({ project }) => {
   const [buildProposals, setBuildProposals] = useState(
     project?.attachments?.build_proposal || []
   );
+  const [auditExpanded, setAuditExpanded] = useState(false); // collapsed by default
 
   const baselineRef = useRef(form);
   const fileInputRef = useRef(null);
@@ -1038,56 +1039,56 @@ const ScopeOfWork = ({ project }) => {
 
         <div className="sow-proposal-enhanced">
           {/* PROPOSAL LIST */}
-{buildProposals?.length > 0 ? (
-  <div className="proposal-list">
-    {buildProposals.map((file, idx) => {
-      const uploadedLabel = formatUploadedDateLabel(file.uploadedAt);
+          {buildProposals?.length > 0 ? (
+            <div className="proposal-list">
+              {buildProposals.map((file, idx) => {
+                const uploadedLabel = formatUploadedDateLabel(file.uploadedAt);
 
-      return (
-        <div key={file.url || idx} className="proposal-item">
-          <div className="proposal-left">
-            <div className="proposal-icon">📄</div>
-            <div>
-              <div className="proposal-name">
-                {file.name || `Proposal ${idx + 1}`}
-              </div>
-              {uploadedLabel && (
-                <div className="proposal-meta">
-                  Uploaded {uploadedLabel}
-                </div>
-              )}
+                return (
+                  <div key={file.url || idx} className="proposal-item">
+                    <div className="proposal-left">
+                      <div className="proposal-icon">📄</div>
+                      <div>
+                        <div className="proposal-name">
+                          {file.name || `Proposal ${idx + 1}`}
+                        </div>
+                        {uploadedLabel && (
+                          <div className="proposal-meta">
+                            Uploaded {uploadedLabel}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="proposal-actions">
+                      <a
+                        href={file.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="proposal-btn"
+                      >
+                        View / Download
+                      </a>
+
+                      {canEdit && (
+                        <button
+                          type="button"
+                          className="proposal-btn delete-btn"
+                          onClick={() => handleDeleteProposal(idx)}
+                        >
+                          Delete
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-          </div>
-
-          <div className="proposal-actions">
-            <a
-              href={file.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="proposal-btn"
-            >
-              View / Download
-            </a>
-
-            {canEdit && (
-              <button
-                type="button"
-                className="proposal-btn delete-btn"
-                onClick={() => handleDeleteProposal(idx)}
-              >
-                Delete
-              </button>
-            )}
-          </div>
-        </div>
-      );
-    })}
-  </div>
-) : (
-  <div className="proposal-empty-msg">
-    No signed proposal uploaded.
-  </div>
-)}
+          ) : (
+            <div className="proposal-empty-msg">
+              No signed proposal uploaded.
+            </div>
+          )}
 
           {/* DRAG + DROP UPLOADER */}
           {canEdit && (
@@ -1121,11 +1122,40 @@ const ScopeOfWork = ({ project }) => {
 
       {/* AUDIT HISTORY */}
       <section className="sow-section sow-audit-section">
-        <h4 className="sow-heading">Audit History</h4>
-        <div className="sow-audit">
-          {!auditTrail || auditTrail.length === 0 ? (
-            <div className="sow-audit-empty">No admin edits recorded yet.</div>
-          ) : (
+        <div className="sow-audit-header-row">
+          <h4 className="sow-heading">Audit History</h4>
+
+          {auditTrail && auditTrail.length > 0 && (
+            <button
+              type="button"
+              className="sow-audit-toggle"
+              onClick={() => setAuditExpanded((v) => !v)}
+            >
+              {auditExpanded ? 'Hide' : 'Show'} ({auditTrail.length})
+              <span
+                className={
+                  'sow-audit-chevron' +
+                  (auditExpanded ? ' is-open' : '')
+                }
+              >
+                ▾
+              </span>
+            </button>
+          )}
+        </div>
+
+        {/* If no audit entries, just show the empty message (no toggle needed) */}
+        {(!auditTrail || auditTrail.length === 0) && (
+          <div className="sow-audit">
+            <div className="sow-audit-empty">
+              No admin edits recorded yet.
+            </div>
+          </div>
+        )}
+
+        {/* When we DO have entries, only render details if expanded */}
+        {auditTrail && auditTrail.length > 0 && auditExpanded && (
+          <div className="sow-audit">
             <ul className="sow-audit-list">
               {auditTrail.map((entry, idx) => (
                 <li key={idx} className="sow-audit-item">
@@ -1137,6 +1167,7 @@ const ScopeOfWork = ({ project }) => {
                       {formatAuditTime(entry.ts)}
                     </span>
                   </div>
+
                   {entry.type === 'fields-update' ? (
                     <>
                       <div className="sow-audit-summary">
@@ -1176,7 +1207,9 @@ const ScopeOfWork = ({ project }) => {
                   ) : (
                     <div className="sow-audit-summary">
                       {entry.type === 'proposal-upload' &&
-                        `Uploaded ${entry.details?.count || 0} proposal file(s).`}
+                        `Uploaded ${
+                          entry.details?.count || 0
+                        } proposal file(s).`}
                       {entry.type === 'proposal-delete' &&
                         `Deleted proposal: ${
                           entry.details?.name || 'Unnamed file'
@@ -1190,8 +1223,8 @@ const ScopeOfWork = ({ project }) => {
                 </li>
               ))}
             </ul>
-          )}
-        </div>
+          </div>
+        )}
       </section>
     </div>
   );
