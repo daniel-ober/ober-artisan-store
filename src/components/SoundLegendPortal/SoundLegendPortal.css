@@ -261,7 +261,6 @@
 
 .vp-actions { margin-top:12px; }
 
-.vp-help { position:relative; display:inline-block; margin-left:6px; cursor:help; opacity:.85; }
 .vp-popover {
   position:absolute; left:50%; transform:translateX(-50%);
   min-width: 220px; top: 20px; z-index: 5;
