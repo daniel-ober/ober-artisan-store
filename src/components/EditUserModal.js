@@ -1,40 +1,87 @@
+// src/components/EditUserModal.js
 import React, { useState } from 'react';
 import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
+import './EditUserModal.css';
 
 const EditUserModal = ({ user, onClose, onUserUpdated }) => {
   const [firstName, setFirstName] = useState(user?.firstName || '');
   const [lastName, setLastName] = useState(user?.lastName || '');
   const [email, setEmail] = useState(user?.email || '');
   const [phone, setPhone] = useState(user?.phone || '');
-  const [isAdmin, setIsAdmin] = useState(!!user?.isAdmin);          
-  const [isSoundlegend, setIsSoundlegend] = useState(!!user?.isSoundlegend); 
+  const [isSoundlegend, setIsSoundlegend] = useState(!!user?.isSoundlegend);
   const [error, setError] = useState('');
+
+  const isAdmin = !!user?.isAdmin;
 
   const handleSave = async () => {
     try {
+      if (!user?.id) {
+        setError('Missing user id.');
+        return;
+      }
+
       const userDocRef = doc(db, 'users', user.id);
+
+      // 🚫 DO NOT update isAdmin from here.
       await updateDoc(userDocRef, {
         firstName,
         lastName,
         email,
         phone,
-        isAdmin,           
-        isSoundlegend,    
+        isSoundlegend,
       });
-      onUserUpdated({ ...user, firstName, lastName, email, phone, isAdmin, isSoundlegend });
+
+      onUserUpdated &&
+        onUserUpdated({
+          ...user,
+          firstName,
+          lastName,
+          email,
+          phone,
+          isSoundlegend,
+          // keep whatever isAdmin currently is on the object
+          isAdmin,
+        });
+
       onClose();
-    } catch (error) {
-      console.error('Error updating user:', error.message);
+    } catch (err) {
+      console.error('Error updating user:', err);
       setError('Failed to update user. Please check your permissions.');
     }
   };
 
   return (
-    <div className="edit-user-modal">
-      <div className="modal-content">
-        <h2>Edit User</h2>
-        {error && <div className="error-message">{error}</div>}
+    <div className="edit-user-modal" role="dialog" aria-modal="true">
+      <div className="edit-modal-content">
+        <div className="edit-modal-header">
+          <h2>Edit User</h2>
+          <button
+            className="edit-close-btn"
+            type="button"
+            aria-label="Close"
+            onClick={onClose}
+          >
+            ×
+          </button>
+        </div>
+
+        {isAdmin && (
+          <div className="edit-banner edit-banner--warn">
+            <strong>Admin account:</strong> Admin privileges are read-only in
+            this UI.
+            <br />
+            To change admin status, update the Firestore user document and
+            custom claims directly.
+          </div>
+        )}
+
+        {error && (
+          <div className="edit-banner edit-banner--error" role="alert">
+            {error}
+          </div>
+        )}
+
         <div className="form-group">
           <label htmlFor="firstName">First Name</label>
           <input
@@ -44,6 +91,7 @@ const EditUserModal = ({ user, onClose, onUserUpdated }) => {
             onChange={(e) => setFirstName(e.target.value)}
           />
         </div>
+
         <div className="form-group">
           <label htmlFor="lastName">Last Name</label>
           <input
@@ -53,6 +101,7 @@ const EditUserModal = ({ user, onClose, onUserUpdated }) => {
             onChange={(e) => setLastName(e.target.value)}
           />
         </div>
+
         <div className="form-group">
           <label htmlFor="email">Email</label>
           <input
@@ -62,6 +111,7 @@ const EditUserModal = ({ user, onClose, onUserUpdated }) => {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
+
         <div className="form-group">
           <label htmlFor="phone">Phone</label>
           <input
@@ -71,17 +121,7 @@ const EditUserModal = ({ user, onClose, onUserUpdated }) => {
             onChange={(e) => setPhone(e.target.value)}
           />
         </div>
-        {/* New Fields Below */}
-        <div className="form-group">
-          <label>
-            <input
-              type="checkbox"
-              checked={isAdmin}
-              onChange={() => setIsAdmin((prev) => !prev)}
-            />
-            Admin Access
-          </label>
-        </div>
+
         <div className="form-group">
           <label>
             <input
@@ -92,12 +132,31 @@ const EditUserModal = ({ user, onClose, onUserUpdated }) => {
             SoundLegend Access
           </label>
         </div>
-        <button type="submit" onClick={handleSave}>
-          Save
-        </button>
-        <button type="button" onClick={onClose}>
-          Cancel
-        </button>
+
+        {/* Admin access is shown as read-only text, not editable */}
+        <div className="form-group">
+          <label>Admin Access</label>
+          <div className="admin-readonly-pill">
+            {isAdmin ? 'Admin (managed via Firestore)' : 'No'}
+          </div>
+        </div>
+
+        {/* ❗ Future hook:
+            If we want to attach loose projects/orders here, we can add a
+            simple read-only summary of:
+              - Orders linked to this user
+              - Projects linked to this user
+            and a "Manage" button that jumps to ManageOrders/ManageProjects.
+            That keeps this modal light and avoids risky schema changes. */}
+
+        <div className="edit-modal-actions">
+          <button type="button" className="save-btn" onClick={handleSave}>
+            Save
+          </button>
+          <button type="button" className="cancel-btn" onClick={onClose}>
+            Cancel
+          </button>
+        </div>
       </div>
     </div>
   );

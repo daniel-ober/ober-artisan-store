@@ -3,18 +3,18 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 25px;
-  background-color: #f9f9f9;
-  border-radius: 12px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  background-color: #f5f5f7;
+  border-radius: 16px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
   text-align: center;
   overflow: hidden;
-  color: #222;
+  color: #111827;
 }
 
 .admin-dashboard h1 {
   font-size: 2rem;
   margin: 0 0 20px 0;
-  color: #222;
+  color: #111827;
 }
 
 /* Ensure headings are readable everywhere */
@@ -22,15 +22,12 @@
 .admin-dashboard h3,
 .component-container h2,
 .component-container h3 {
-  color: #222 !important;
+  color: #111827 !important;
 }
 
 .component-container,
 .admin-card {
-  color: #222;
-}
-.component-container * {
-  /* color: inherit; */
+  color: #111827;
 }
 
 /* =============== Cards Grid =============== */
@@ -39,28 +36,40 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: stretch;
-  gap: 22px;
+  gap: 20px;
   padding-top: 15px;
 }
 
-/* Individual Card Styling (shell, not the details – see AdminCard.css) */
+/* Individual Card Styling */
 .admin-card {
-  background-color: #f0f0f0;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 20px;
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 18px 16px;
   text-align: center;
   cursor: pointer;
-  transition: background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  transition:
+    background-color 0.2s ease,
+    transform 0.18s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
   min-width: 200px;
   max-width: 240px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.08);
 }
 
 .admin-card:hover {
-  background-color: #e7e7e7;
-  transform: scale(1.04);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  background-color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.18);
+}
+
+/* Active card state */
+.admin-card--active {
+  border-color: #4135ea;
+  box-shadow: 0 10px 24px rgba(65, 53, 234, 0.35);
+  background: #ffffff;
+  transform: translateY(-3px);
 }
 
 /* Card Icon + Title */
@@ -68,21 +77,23 @@
   position: relative;
   font-size: 2rem;
   margin-bottom: 10px;
-  color: #444;
+  color: #374151;
 }
+
 .admin-card h3 {
-  font-size: 1.15rem;
-  color: #333;
+  font-size: 1.05rem;
+  color: #111827;
   margin: 0;
   text-align: center;
-  line-height: 1.2;
+  line-height: 1.25;
+  white-space: nowrap;
 }
 
 /* =============== Badge Styling =============== */
 .badge-wrapper {
   position: absolute;
   top: -6px;
-  right: -8px;
+  right: -10px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -94,56 +105,65 @@
 .notification-badge-secondary,
 .notification-badge-high,
 .notification-badge-medium {
-  color: #fff;
-  font-size: 12px;
+  color: #ffffff;
+  font-size: 11px;
   font-weight: 700;
-  padding: 2px 9px;
-  border-radius: 50%;
+  padding: 2px 7px;
+  border-radius: 999px;
   display: inline-block;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
-  position: relative;
+  box-shadow: 0 3px 6px rgba(15, 23, 42, 0.25);
 }
 
-/* Default (green primary) + secondary stacked badge */
+/* Base */
+
 .notification-badge {
-  background-color: rgb(8, 151, 0);
-  z-index: 3;
+  background-color: #16a34a; /* default green */
 }
+
+/* Secondary stacked badge */
 .notification-badge-secondary {
-  background-color: orange;
-  z-index: 2;
-  margin-left: -10px; /* overlap effect */
+  background-color: #f97316;
+  margin-left: -8px;
 }
 
-/* Hide tertiary if not needed */
-.notification-badge-tertiary {
-  display: none !important;
+/* Color modifiers */
+.badge-green {
+  background-color: #16a34a;
 }
 
-/* Special for Risk Alerts */
+.badge-orange {
+  background-color: #f97316;
+}
+
+.badge-yellow {
+  background-color: #eab308;
+}
+
+/* Risk alerts special */
 .notification-badge-high {
-  background-color: #e74c3c; /* 🔴 High severity */
+  background-color: #ef4444; /* 🔴 High severity */
 }
+
 .notification-badge-medium {
-  background-color: orange; /* 🟠 Medium severity */
-  margin-left: -10px;
+  background-color: #f97316; /* 🟠 Medium severity */
+  margin-left: -8px;
 }
 
 /* =============== Component Panel =============== */
 .component-container {
-  margin-top: 30px;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border: 1px solid #ddd;
-  max-height: 550px;
+  margin-top: 28px;
+  padding: 20px 22px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.18);
+  border: 1px solid #e5e7eb;
+  max-height: 600px;
   overflow: auto;
-  color: #222;
+  color: #111827;
   text-align: left;
 }
 
-/* Toast Notifications */
+/* Toast Notifications (if you re-use them) */
 .toast {
   margin-top: 1rem;
   padding: 0.75rem 1rem;
@@ -151,10 +171,12 @@
   font-size: 0.9rem;
   text-align: center;
 }
+
 .toast.success {
   background-color: #d4edda;
   color: #155724;
 }
+
 .toast.error {
   background-color: #f8d7da;
   color: #721c24;
@@ -163,38 +185,42 @@
 /* =============== Responsive =============== */
 @media (max-width: 768px) {
   .admin-dashboard {
-    padding: 20px;
+    padding: 18px;
     box-shadow: none;
+    border-radius: 0;
   }
 
   .admin-cards {
     justify-content: center;
-    gap: 14px;
+    gap: 12px;
   }
 
   .admin-card {
-    width: calc(50% - 10px); /* 2 cards per row */
+    width: calc(50% - 8px); /* 2 cards per row */
     min-width: unset;
     max-width: unset;
     box-sizing: border-box;
+    padding: 16px 10px;
   }
+
   .admin-card.full-width-mobile {
     width: 100%;
   }
 
   .admin-card-icon {
-    font-size: 1.8rem;
-    margin-bottom: 8px;
+    font-size: 1.7rem;
+    margin-bottom: 6px;
   }
+
   .admin-card h3 {
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
 
   .component-container {
-    padding: 15px;
-    margin-top: 20px;
-    border: none;
-    box-shadow: none;
+    padding: 14px 12px;
+    margin-top: 18px;
+    border-radius: 12px;
     max-height: none;
+    box-shadow: 0 4px 10px rgba(15, 23, 42, 0.12);
   }
 }

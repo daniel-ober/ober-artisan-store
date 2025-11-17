@@ -65,6 +65,7 @@ import EndorsementForm from './components/EndorsementForm.js';
 import ResinAccentGenerator from './components/ResinAccentGenerator.js';
 import DrumSelector from './components/DrumSelector.js';
 import HulaGiftPage from './components/HulaGiftPage.js';
+import AttachUserResourcesTool from './components/AttachUserResourcesTool';
 import { ImpersonationProvider } from './context/ImpersonationContext';
 import SoundLegendPortal from './components/SoundLegendPortal/SoundLegendPortal.js';
 import { Toaster } from 'react-hot-toast';
@@ -258,7 +259,9 @@ function App() {
           />
           <Route
             path="/soundlegends/signin"
-            element={user ? <Navigate to="/legacy" replace /> : <SoundlegendSignin />}
+            element={
+              user ? <Navigate to="/legacy" replace /> : <SoundlegendSignin />
+            }
           />
 
           {/* Individual product detail routes */}
@@ -305,6 +308,14 @@ function App() {
             element={<PrivateRoute element={<InventoryTracker />} adminOnly />}
           />
 
+          {/* Attach orders/projects to user (admin-only utility) */}
+          <Route
+            path="/admin/tools/attach-user-resources"
+            element={
+              <PrivateRoute element={<AttachUserResourcesTool />} adminOnly />
+            }
+          />
+
           {/* Product detail (general) */}
           <Route
             path="/artisan-shop/:productId"
@@ -320,7 +331,9 @@ function App() {
             path="/artisanseries/:productId"
             element={
               <Navigate
-                to={`/artisan-shop/${window.location.pathname.split('/').pop()}`}
+                to={`/artisan-shop/${
+                  window.location.pathname.split('/').pop()
+                }`}
                 replace
               />
             }

@@ -90,6 +90,7 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
       // Get the user so we can attach ownerUid
       const user = await findUserByEmail(customerEmail);
 
+      // ----- parse shipping address into pieces -----
       const parsedAddress = (orderDetails.customerAddress || '').split(',');
       const street = parsedAddress[0]?.trim() || '';
       const city = parsedAddress[1]?.trim() || '';
@@ -101,7 +102,15 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
         zip = parts[1] || '';
       }
 
+      // ---------- NEW: defaults first, then real values override ----------
       const projectData = {
+        // 1) All step checklists
+        ...defaultStepData,
+
+        // 2) All canonical/base project fields
+        ...defaultProjectFields,
+
+        // 3) Then overwrite with real order-specific values
         orderId: orderDetails.id,
 
         // 🔑 Key for SoundLegend portal
@@ -113,22 +122,28 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
           item?.description?.split('-')[0]?.trim() ||
           item?.name?.split('-')[0]?.trim() ||
           'N/A',
+
         customer: {
           name: orderDetails.customerName || 'N/A',
           email: customerEmail,
           phone: orderDetails.customerPhone || '',
           address: { street, city, state, zip },
         },
+
+        // start date for the build
         startDate: Timestamp.now(),
-        currentPhase: 'Step 1. Wood Preparation',
+
+        // if you ever change the default, this still has a safe fallback
+        currentPhase:
+          defaultProjectFields.currentPhase || 'Step 1. Wood Preparation',
+
+        // basic line detection from the product name
         artisanLine: item?.name?.toLowerCase().includes('soundlegend')
           ? 'SoundLegend'
-          : '',
-        width: '',
-        shellDepth: '',
+          : defaultProjectFields.artisanLine || '',
+
+        // keep a copy of the originating item details
         itemDetails: item || null,
-        ...defaultStepData,
-        ...defaultProjectFields,
       };
 
       const projectRef = await addDoc(collection(db, 'projects'), projectData);
@@ -154,6 +169,7 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
           item?.description?.split('-')[0]?.trim() ||
           orderDetails.customerName?.trim() ||
           'Custom Drum Project';
+
         await linkProjectToUserByEmail(customerEmail, projectId, label);
       }
 

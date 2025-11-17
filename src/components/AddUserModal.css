@@ -1,3 +1,5 @@
+/* src/components/AddUserModal.css */
+
 :root {
   --brand: #4135EA;          /* Ober purple */
   --brand-dk: #2e28d9;
@@ -62,6 +64,7 @@
 }
 .icon-btn.close:hover { color: #6b7280; }
 
+/* Role preset chips (Standard / SoundLegend) */
 .role-presets {
   display: flex;
   gap: 8px;
@@ -78,9 +81,20 @@
   color: #111827;
   cursor: pointer;
 }
-.chip:hover { background: #eef2ff; border-color: rgba(65,53,234,0.4); }
-.chip--warn { background: #fff7ed; border-color: rgba(245,158,11,0.45); color: #7c2d12; }
-.chip--warn:hover { background: #ffedd5; }
+.chip:hover {
+  background: #eef2ff;
+  border-color: rgba(65,53,234,0.4);
+}
+
+/* leaving .chip--warn in case you ever reuse this file elsewhere */
+.chip--warn {
+  background: #fff7ed;
+  border-color: rgba(245,158,11,0.45);
+  color: #7c2d12;
+}
+.chip--warn:hover {
+  background: #ffedd5;
+}
 
 .banner {
   border-radius: 10px;
@@ -113,7 +127,9 @@
   margin-top: 8px;
 }
 @media (max-width: 700px) {
-  .form-grid { grid-template-columns: 1fr; }
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .form-group {
@@ -141,7 +157,9 @@
   transition: border-color .15s, background-color .15s, box-shadow .15s;
 }
 
-.form-group input::placeholder { color: #9ca3af; }
+.form-group input::placeholder {
+  color: #9ca3af;
+}
 
 .form-group input:focus,
 .form-group select:focus {
@@ -158,7 +176,10 @@
   gap: 18px;
 }
 @media (max-width: 700px) {
-  .form-group--switches { grid-column: span 1; flex-wrap: wrap; }
+  .form-group--switches {
+    grid-column: span 1;
+    flex-wrap: wrap;
+  }
 }
 
 .switch {
@@ -189,7 +210,11 @@
   padding: 12px;
   background: #f9fafb;
 }
-@media (max-width: 700px) { .password-card { grid-column: span 1; } }
+@media (max-width: 700px) {
+  .password-card {
+    grid-column: span 1;
+  }
+}
 
 .password-row {
   display: flex;
@@ -209,7 +234,9 @@
   cursor: pointer;
   font-weight: 650;
 }
-.password-actions .btn-link:hover { text-decoration: underline; }
+.password-actions .btn-link:hover {
+  text-decoration: underline;
+}
 
 .password-display {
   display: flex;
@@ -221,7 +248,8 @@
   padding: 10px 12px;
 }
 .password-display code {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", monospace;
   font-size: 0.98rem;
   color: #111827;
   word-break: break-all;
@@ -234,9 +262,15 @@
   cursor: pointer;
   font-size: 0.88rem;
 }
-.copy-btn:hover { background: #e5e7eb; }
+.copy-btn:hover {
+  background: #e5e7eb;
+}
 
-.muted { color: var(--muted); font-size: 0.85rem; margin-top: 6px; }
+.muted {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-top: 6px;
+}
 
 /* Actions */
 .modal-actions {
@@ -246,7 +280,11 @@
   gap: 10px;
   margin-top: 6px;
 }
-@media (max-width: 700px) { .modal-actions { grid-column: span 1; } }
+@media (max-width: 700px) {
+  .modal-actions {
+    grid-column: span 1;
+  }
+}
 
 .modal-actions button {
   padding: 10px 16px;
@@ -262,14 +300,20 @@
   color: white;
   font-weight: 700;
 }
-.modal-actions button[type='submit']:hover { background-color: var(--brand-dk); }
-.modal-actions button[type='submit']:active { transform: translateY(1px); }
+.modal-actions button[type='submit']:hover {
+  background-color: var(--brand-dk);
+}
+.modal-actions button[type='submit']:active {
+  transform: translateY(1px);
+}
 
 .btn-secondary {
   background-color: #f3f4f6;
   color: #111827;
 }
-.btn-secondary:hover { background: #e5e7eb; }
+.btn-secondary:hover {
+  background: #e5e7eb;
+}
 
 .password-popup {
   background: #fff7ed;
@@ -292,6 +336,12 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: scale(.985); }
-  to   { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(.985);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }

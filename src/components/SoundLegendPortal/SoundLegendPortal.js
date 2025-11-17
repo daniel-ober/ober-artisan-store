@@ -120,28 +120,37 @@ const SoundLegendPortal = () => {
   const [orders, setOrders] = useState([]);
   const [tab, setTab] = useState('progress');
 
-  // Load projects for this portal user
+  /* ---------- LOAD PROJECTS FOR PORTAL USER (ownerUid OR userId OR email) ---------- */
   useEffect(() => {
     if (!portalUser || loadingPortalUser) return;
 
     let cancelled = false;
 
     const run = async () => {
+      setLoading(true);
       try {
         const ownerUid = portalUser.uid || portalUser.id;
+        const colRef = collection(db, 'projects');
 
-        // Primary: ownerUid
-        let qProj = ownerUid
-          ? query(collection(db, 'projects'), where('ownerUid', '==', ownerUid))
-          : null;
+        let snap = { empty: true, docs: [] };
 
-        let snap = qProj ? await getDocs(qProj) : { empty: true, docs: [] };
+        // 1) Primary: ownerUid
+        if (ownerUid) {
+          const qByOwner = query(colRef, where('ownerUid', '==', ownerUid));
+          snap = await getDocs(qByOwner);
+        }
 
-        // Fallback: customer.emailLower
+        // 2) Fallback: userId (what AttachUserResourcesTool writes)
+        if (snap.empty && ownerUid) {
+          const qByUserId = query(colRef, where('userId', '==', ownerUid));
+          snap = await getDocs(qByUserId);
+        }
+
+        // 3) Fallback: customer.emailLower
         if (snap.empty && portalUser.email) {
           const emailLower = portalUser.email.trim().toLowerCase();
           const qByEmail = query(
-            collection(db, 'projects'),
+            colRef,
             where('customer.emailLower', '==', emailLower)
           );
           snap = await getDocs(qByEmail);
@@ -153,7 +162,11 @@ const SoundLegendPortal = () => {
         list.sort((a, b) => tsToMillis(a.createdAt) - tsToMillis(b.createdAt));
 
         setProjects(list);
-        setSelectedId(list[0]?.id || '');
+
+        // keep current selection if still present, else default to first
+        setSelectedId((prev) =>
+          prev && list.some((p) => p.id === prev) ? prev : list[0]?.id || ''
+        );
       } catch (e) {
         console.error('Error loading projects', e);
       } finally {
