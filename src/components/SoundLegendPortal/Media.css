@@ -671,6 +671,58 @@
   font-weight: 500;
 }
 
+/* --- Fix embedded video sizing in media viewer --- */
+
+.mg-modal-body {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  /* keep same look you already have; adjust if needed */
+}
+
+.mg-media-box.mg-video-embed {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  background: #020308;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* Maintain a 16:9 box for YouTube/Vimeo embeds */
+.mg-embed-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  /* 16:9 aspect ratio */
+  padding-top: 56.25%;
+  background: #000;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+/* Make sure the iframe actually fills the wrapper */
+.mg-embed-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+/* Fallback <video> element styling (non-YouTube URLs) */
+.mg-media-box.mg-video-embed video {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 14px;
+  display: block;
+  background: #000;
+}
+
 /* ---------- responsive tweaks ---------- */
 
 @media (max-width: 768px) {

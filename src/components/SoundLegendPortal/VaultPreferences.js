@@ -1,11 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import {
-  doc,
-  getDoc,
-  setDoc,
-  serverTimestamp,
-} from 'firebase/firestore';
+import React, { useEffect, useMemo, useState } from 'react';
+import { doc, getDoc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
+import { useActorContext } from '../../hooks/useActorContext';
 import './VaultPreferences.css';
 
 /* -------------------- tiny shared bits -------------------- */
@@ -13,7 +9,7 @@ import './VaultPreferences.css';
 const FALLBACK_POSTER = '/craft_in_motion/craftinmotion.png';
 
 const MailLink = ({ label, subject, body }) => {
-  const href = React.useMemo(() => {
+  const href = useMemo(() => {
     const s = encodeURIComponent(subject || '');
     const b = encodeURIComponent(body || '');
     return `mailto:soundlegend@oberartisandrums.com?subject=${s}&body=${b}`;
@@ -112,6 +108,9 @@ const Switch = ({ checked, onChange }) => (
 /* -------------------- main component -------------------- */
 
 export default function VaultPreferences({ project }) {
+  const { actorIsAdmin } = useActorContext() || {};
+  const canAdminEdit = !!actorIsAdmin;
+
   const [saving, setSaving] = useState(false);
   const [prefs, setPrefs] = useState({ showName: false, showStory: false });
 
@@ -120,6 +119,10 @@ export default function VaultPreferences({ project }) {
   const [onFileStoryHtml, setOnFileStoryHtml] = useState(
     '<p>Legacy Unknown.</p>'
   );
+
+  // editable admin fields
+  const [editName, setEditName] = useState('Anonymous Legend');
+  const [editStory, setEditStory] = useState('<p>Legacy Unknown.</p>');
 
   // preview-specific bits from showroom doc
   const [heroImage, setHeroImage] = useState('');
@@ -135,7 +138,11 @@ export default function VaultPreferences({ project }) {
   /* ---------- hydrate from project itself ---------- */
   useEffect(() => {
     const p = project?.publicPrefs || {};
-    setPrefs({ showName: !!p.showName, showStory: !!p.showStory });
+    const nextPrefs = {
+      showName: !!p.showName,
+      showStory: !!p.showStory,
+    };
+    setPrefs(nextPrefs);
 
     const baseName =
       project?.publicPrefs?.displayName ||
@@ -150,6 +157,8 @@ export default function VaultPreferences({ project }) {
 
     setOnFileName(baseName);
     setOnFileStoryHtml(baseStory);
+    setEditName(baseName);
+    setEditStory(baseStory);
   }, [
     project?.publicPrefs,
     project?.customer?.name,
@@ -175,16 +184,19 @@ export default function VaultPreferences({ project }) {
         const d = snap.data() || {};
 
         // Stage / public name priority:
-        // 1) top-level `name` on showroom doc  (Rick Ressner)
-        // 2) meta.name (fallback)
-        // 3) publicDisplay.name (legal name)
+        // 1) top-level `name` on showroom doc
+        // 2) meta.name
+        // 3) publicDisplay.name
         const showroomName =
           (typeof d?.name === 'string' && d.name.trim()) ||
           (typeof d?.meta?.name === 'string' && d.meta.name.trim()) ||
           (typeof d?.publicDisplay?.name === 'string' &&
             d.publicDisplay.name.trim()) ||
           null;
-        if (showroomName) setOnFileName(showroomName);
+        if (showroomName) {
+          setOnFileName(showroomName);
+          setEditName(showroomName);
+        }
 
         const showroomStoryHtml =
           (typeof d?.story === 'string' && d.story.trim()) ||
@@ -192,7 +204,10 @@ export default function VaultPreferences({ project }) {
             d.publicDisplay.storyHtml.trim()) ||
           (typeof d?.specs?.story === 'string' && d.specs.story.trim()) ||
           null;
-        if (showroomStoryHtml) setOnFileStoryHtml(showroomStoryHtml);
+        if (showroomStoryHtml) {
+          setOnFileStoryHtml(showroomStoryHtml);
+          setEditStory(showroomStoryHtml);
+        }
 
         const hero =
           d.heroImage ||
@@ -219,8 +234,9 @@ export default function VaultPreferences({ project }) {
     };
   }, [project?.lineSerial, project?.globalSerial]);
 
-  /* ---------- save prefs to project ---------- */
-  const save = async () => {
+  /* ---------- save prefs / fields to project ---------- */
+
+  const savePrefsToFirestore = async (nextPrefs) => {
     if (!project?.id) return;
     setSaving(true);
     try {
@@ -228,6 +244,59 @@ export default function VaultPreferences({ project }) {
         doc(db, 'projects', project.id),
         {
           publicPrefs: {
+            showName: !!nextPrefs.showName,
+            showStory: !!nextPrefs.showStory,
+            // keep current editable values in sync
+            displayName: editName || onFileName || 'Anonymous Legend',
+            storyHtml: editStory || onFileStoryHtml || '<p>Legacy Unknown.</p>',
+          },
+          updatedAt: serverTimestamp(),
+        },
+        { merge: true }
+      );
+    } catch (e) {
+      console.error('Vault save error:', e);
+      alert('Sorry, there was a problem saving Vault preferences.');
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const confirmMakePrivate = () => {
+    return window.confirm(
+      'Are you sure you want to remove your personal legacy details from the public vault?'
+    );
+  };
+
+  const handleToggleName = async (next) => {
+    // going from public -> private
+    if (!next && prefs.showName && !confirmMakePrivate()) {
+      return;
+    }
+    const nextPrefs = { ...prefs, showName: next };
+    setPrefs(nextPrefs);
+    await savePrefsToFirestore(nextPrefs);
+  };
+
+  const handleToggleStory = async (next) => {
+    if (!next && prefs.showStory && !confirmMakePrivate()) {
+      return;
+    }
+    const nextPrefs = { ...prefs, showStory: next };
+    setPrefs(nextPrefs);
+    await savePrefsToFirestore(nextPrefs);
+  };
+
+  const handleAdminSaveName = async () => {
+    if (!project?.id) return;
+    const trimmed = (editName || '').trim() || 'Anonymous Legend';
+    setSaving(true);
+    try {
+      await setDoc(
+        doc(db, 'projects', project.id),
+        {
+          publicPrefs: {
+            displayName: trimmed,
             showName: !!prefs.showName,
             showStory: !!prefs.showStory,
           },
@@ -235,10 +304,36 @@ export default function VaultPreferences({ project }) {
         },
         { merge: true }
       );
-      alert('Vault preferences saved.');
+      setOnFileName(trimmed);
     } catch (e) {
-      console.error('Vault save error:', e);
-      alert('Sorry, there was a problem saving.');
+      console.error('Vault admin name save error:', e);
+      alert('Sorry, there was a problem saving the public name.');
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleAdminSaveStory = async () => {
+    if (!project?.id) return;
+    const value = editStory || '<p>Legacy Unknown.</p>';
+    setSaving(true);
+    try {
+      await setDoc(
+        doc(db, 'projects', project.id),
+        {
+          publicPrefs: {
+            storyHtml: value,
+            showName: !!prefs.showName,
+            showStory: !!prefs.showStory,
+          },
+          updatedAt: serverTimestamp(),
+        },
+        { merge: true }
+      );
+      setOnFileStoryHtml(value);
+    } catch (e) {
+      console.error('Vault admin story save error:', e);
+      alert('Sorry, there was a problem saving the legacy story.');
     } finally {
       setSaving(false);
     }
@@ -253,7 +348,7 @@ export default function VaultPreferences({ project }) {
   const NameGuidelines = () => (
     <span className="vp-help" tabIndex={0} aria-label="Stage name guidelines">
       ⓘ
-      <span className="vp-popover" role="tooltip">
+      <span className="vp-popover-guidelines" role="tooltip">
         <b>Stage/Public Name Guidelines</b>
         <ul>
           <li>2–40 characters</li>
@@ -268,7 +363,7 @@ export default function VaultPreferences({ project }) {
   const StoryGuidelines = () => (
     <span className="vp-help" tabIndex={0} aria-label="Legacy story guidelines">
       ⓘ
-      <span className="vp-popover" role="tooltip">
+      <span className="vp-popover-guidelines" role="tooltip">
         <b>Legacy Story Guidelines</b>
         <ul>
           <li>1–3 short paragraphs; keep it personal and respectful</li>
@@ -310,133 +405,183 @@ export default function VaultPreferences({ project }) {
       <h3>VAULT PREFERENCES</h3>
       <p className="slp-muted vp-intro">
         By default your Legacy is <strong>Private</strong>. Use the switches
-        below to share your name or story publicly.
+        below to share your name or story publicly. Changes save automatically.
       </p>
 
-      <div className="vp-grid">
-        {/* NAME */}
-        <div className="vp-col">
-          <div className="vp-row between">
-            <label className="vp-label">Display my name publicly</label>
-            <Switch
-              checked={prefs.showName}
-              onChange={(v) => setPrefs({ ...prefs, showName: v })}
-            />
-          </div>
-
-          <div className="vp-row">
-            <div className="vp-sub">
-              STAGE / PUBLIC NAME <NameGuidelines />
-            </div>
-            <div className="vp-hint">
-              Name is managed by Ober (to prevent spoofing). Use the button
-              below to request a change.
+      <div className="vp-layout">
+        {/* LEFT SIDE – controls (stacked) */}
+        <div className="vp-left">
+          {/* NAME BLOCK */}
+          <div className="vp-col">
+            <div className="vp-row between">
+              <label className="vp-label">Display my name publicly</label>
+              <Switch checked={prefs.showName} onChange={handleToggleName} />
             </div>
 
-            <div
-              className={`vp-preview ${!prefs.showName ? 'is-private' : ''}`}
-            >
-              <div className="vp-preview-top">
-                <StatusChip on={prefs.showName} kind="NAME" />
+            <div className="vp-row">
+              <div className="vp-sub">
+                STAGE / PUBLIC NAME <NameGuidelines />
               </div>
-              <div className="vp-preview-name">{onFileName}</div>
-            </div>
-
-            <div className="vp-requests">
-              <MailLink
-                label="Request change to public / stage name"
-                subject="SoundLegend Vault — Stage/Public Name change"
-                body={`Project ID: ${project?.id || ''}\nCurrent: ${onFileName}\nRequested: `}
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* STORY */}
-        <div className="vp-col">
-          <div className="vp-row between">
-            <label className="vp-label">Display my story publicly</label>
-            <Switch
-              checked={prefs.showStory}
-              onChange={(v) => setPrefs({ ...prefs, showStory: v })}
-            />
-          </div>
-
-          <div className="vp-row">
-            <div className="vp-sub">
-              STORY (MANAGED BY OBER) <StoryGuidelines />
-            </div>
-            <div className="vp-hint">
-              Story is managed by Ober (to prevent spoofing). Use the button
-              below to request a change.
-            </div>
-            <div className="vp-note-private">
-              If this switch is off, your Legacy story is kept private by you,
-              the Legacy Artist. It remains visible only to you and Ober.
-            </div>
-
-            <div
-              className={`vp-preview ${!prefs.showStory ? 'is-private' : ''}`}
-            >
-              <div className="vp-preview-top">
-                <StatusChip on={prefs.showStory} kind="STORY" />
+              <div className="vp-hint">
+                Name is managed by Ober (to prevent spoofing).
+                {canAdminEdit ? (
+                  <> As an admin, you can update it directly below.</>
+                ) : (
+                  <> Use the button below to request a change.</>
+                )}
               </div>
+
               <div
-                className="vp-preview-story"
-                dangerouslySetInnerHTML={{ __html: onFileStoryHtml }}
-              />
+                className={`vp-preview ${!prefs.showName ? 'is-private' : ''}`}
+              >
+                <div className="vp-preview-top">
+                  <StatusChip on={prefs.showName} kind="NAME" />
+                </div>
+                {canAdminEdit ? (
+                  <>
+                    <input
+                      type="text"
+                      className="vp-input"
+                      value={editName}
+                      onChange={(e) => setEditName(e.target.value)}
+                      placeholder="Stage / public name"
+                    />
+                    <div className="vp-admin-actions">
+                      <button
+                        type="button"
+                        className="apo-btn primary vp-admin-save"
+                        onClick={handleAdminSaveName}
+                        disabled={saving}
+                      >
+                        {saving ? 'Saving…' : 'Save name'}
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <div className="vp-preview-name">{onFileName}</div>
+                )}
+              </div>
+
+              {!canAdminEdit && (
+                <div className="vp-requests">
+                  <MailLink
+                    label="Request change to public / stage name"
+                    subject="SoundLegend Vault — Stage/Public Name change"
+                    body={`Project ID: ${project?.id || ''}\nCurrent: ${
+                      onFileName || ''
+                    }\nRequested: `}
+                  />
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* STORY BLOCK */}
+          <div className="vp-col">
+            <div className="vp-row between">
+              <label className="vp-label">Display my story publicly</label>
+              <Switch checked={prefs.showStory} onChange={handleToggleStory} />
             </div>
 
-            <div className="vp-requests">
-              <MailLink
-                label="Request change to legacy story"
-                subject="SoundLegend Vault — Story revision request"
-                body={`Project ID: ${project?.id || ''}\nRequested edits:\n`}
-              />
+            <div className="vp-row">
+              <div className="vp-sub">
+                STORY (MANAGED BY OBER) <StoryGuidelines />
+              </div>
+              <div className="vp-hint">
+                Story is managed by Ober (to prevent spoofing).
+                {canAdminEdit ? (
+                  <> As an admin, you can edit the story directly.</>
+                ) : (
+                  <> Use the button below to request a change.</>
+                )}
+              </div>
+              <div className="vp-note-private">
+                If this switch is off, your Legacy story is kept private by you,
+                the Legacy Artist. It remains visible only to you and Ober.
+              </div>
+
+              <div
+                className={`vp-preview ${!prefs.showStory ? 'is-private' : ''}`}
+              >
+                <div className="vp-preview-top">
+                  <StatusChip on={prefs.showStory} kind="STORY" />
+                </div>
+
+                {canAdminEdit ? (
+                  <>
+                    <textarea
+                      className="vp-textarea"
+                      value={editStory}
+                      onChange={(e) => setEditStory(e.target.value)}
+                      rows={6}
+                    />
+                    <div className="vp-admin-actions">
+                      <button
+                        type="button"
+                        className="apo-btn primary vp-admin-save"
+                        onClick={handleAdminSaveStory}
+                        disabled={saving}
+                      >
+                        {saving ? 'Saving…' : 'Save story'}
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <div
+                    className="vp-preview-story"
+                    dangerouslySetInnerHTML={{ __html: onFileStoryHtml }}
+                  />
+                )}
+              </div>
+
+              {!canAdminEdit && (
+                <div className="vp-requests">
+                  <MailLink
+                    label="Request change to legacy story"
+                    subject="SoundLegend Vault — Story revision request"
+                    body={`Project ID: ${
+                      project?.id || ''
+                    }\nRequested edits:\n`}
+                  />
+                </div>
+              )}
             </div>
           </div>
         </div>
-      </div>
 
-      {/* PUBLIC PREVIEW */}
-      <section className="vp-public-preview">
-        <div className="vp-public-header">
-          <h4>Public preview</h4>
-          <p>
-            This is how your Legacy will appear in the public SoundLegend Vault
-            and on your Legacy page, based on the switches above.
-          </p>
+        {/* RIGHT SIDE – public preview */}
+        <div className="vp-right">
+          <section className="vp-public-preview">
+            <div className="vp-public-header">
+              <h4>Public preview</h4>
+              <p>
+                This is how your Legacy will appear in the public SoundLegend
+                Vault and on your Legacy page, based on the switches on the
+                left.
+              </p>
+            </div>
+
+            <div className="vp-public-row">
+              <div className="vp-public-card">
+                <VaultCardPreview
+                  serial={serial}
+                  heroImage={heroImage}
+                  name={publicName}
+                  teaser={teaser}
+                />
+              </div>
+
+              <div className="vp-public-story">
+                <ShowroomStoryPreview
+                  serial={serial}
+                  name={publicName}
+                  storyHtml={publicStoryHtml}
+                  isStoryPublic={storyIsPublic}
+                />
+              </div>
+            </div>
+          </section>
         </div>
-
-        <div className="vp-public-row">
-          <div className="vp-public-card">
-            <VaultCardPreview
-              serial={serial}
-              heroImage={heroImage}
-              name={publicName}
-              teaser={teaser}
-            />
-          </div>
-
-          <div className="vp-public-story">
-            <ShowroomStoryPreview
-              serial={serial}
-              name={publicName}
-              storyHtml={publicStoryHtml}
-              isStoryPublic={storyIsPublic}
-            />
-          </div>
-        </div>
-      </section>
-
-      <div className="vp-actions">
-        <button
-          className="apo-btn primary"
-          onClick={save}
-          disabled={saving}
-        >
-          {saving ? 'Saving…' : 'Save Vault Preferences'}
-        </button>
       </div>
     </div>
   );
