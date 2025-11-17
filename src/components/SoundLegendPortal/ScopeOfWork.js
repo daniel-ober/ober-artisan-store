@@ -1120,112 +1120,112 @@ const ScopeOfWork = ({ project }) => {
         </div>
       </section>
 
-      {/* AUDIT HISTORY */}
-      <section className="sow-section sow-audit-section">
-        <div className="sow-audit-header-row">
-          <h4 className="sow-heading">Audit History</h4>
+      {/* AUDIT HISTORY (admins only) */}
+      {actorIsAdmin && (
+        <section className="sow-section sow-audit-section">
+          <div className="sow-audit-header-row">
+            <h4 className="sow-heading">Audit History</h4>
 
-          {auditTrail && auditTrail.length > 0 && (
-            <button
-              type="button"
-              className="sow-audit-toggle"
-              onClick={() => setAuditExpanded((v) => !v)}
-            >
-              {auditExpanded ? 'Hide' : 'Show'} ({auditTrail.length})
-              <span
-                className={
-                  'sow-audit-chevron' +
-                  (auditExpanded ? ' is-open' : '')
-                }
+            {auditTrail && auditTrail.length > 0 && (
+              <button
+                type="button"
+                className="sow-audit-toggle"
+                onClick={() => setAuditExpanded((v) => !v)}
               >
-                ▾
-              </span>
-            </button>
-          )}
-        </div>
+                {auditExpanded ? 'Hide' : 'Show'} ({auditTrail.length})
+                <span
+                  className={
+                    'sow-audit-chevron' +
+                    (auditExpanded ? ' is-open' : '')
+                  }
+                >
+                  ▾
+                </span>
+              </button>
+            )}
+          </div>
 
-        {/* If no audit entries, just show the empty message (no toggle needed) */}
-        {(!auditTrail || auditTrail.length === 0) && (
-          <div className="sow-audit">
-            <div className="sow-audit-empty">
-              No admin edits recorded yet.
+          {(!auditTrail || auditTrail.length === 0) && (
+            <div className="sow-audit">
+              <div className="sow-audit-empty">
+                No admin edits recorded yet.
+              </div>
             </div>
-          </div>
-        )}
+          )}
 
-        {/* When we DO have entries, only render details if expanded */}
-        {auditTrail && auditTrail.length > 0 && auditExpanded && (
-          <div className="sow-audit">
-            <ul className="sow-audit-list">
-              {auditTrail.map((entry, idx) => (
-                <li key={idx} className="sow-audit-item">
-                  <div className="sow-audit-main">
-                    <span className="sow-audit-actor">
-                      {entry.actor || 'Admin'}
-                    </span>
-                    <span className="sow-audit-time">
-                      {formatAuditTime(entry.ts)}
-                    </span>
-                  </div>
-
-                  {entry.type === 'fields-update' ? (
-                    <>
-                      <div className="sow-audit-summary">
-                        Updated Scope of Work fields (
-                        {Object.keys(entry.changes || {}).length} field
-                        {Object.keys(entry.changes || {}).length === 1
-                          ? ''
-                          : 's'}
-                        ).
-                      </div>
-
-                      {entry.changes && (
-                        <ul className="sow-audit-changes">
-                          {Object.entries(entry.changes).map(
-                            ([fieldKey, diff]) => (
-                              <li
-                                key={fieldKey}
-                                className="sow-audit-change-row"
-                              >
-                                <span className="sow-audit-field">
-                                  {FIELD_LABELS[fieldKey] || fieldKey}
-                                </span>
-                                <span className="sow-audit-arrow">:</span>
-                                <span className="sow-audit-before">
-                                  {diff.before ? `“${diff.before}”` : '—'}
-                                </span>
-                                <span className="sow-audit-arrow">→</span>
-                                <span className="sow-audit-after">
-                                  {diff.after ? `“${diff.after}”` : '—'}
-                                </span>
-                              </li>
-                            )
-                          )}
-                        </ul>
-                      )}
-                    </>
-                  ) : (
-                    <div className="sow-audit-summary">
-                      {entry.type === 'proposal-upload' &&
-                        `Uploaded ${
-                          entry.details?.count || 0
-                        } proposal file(s).`}
-                      {entry.type === 'proposal-delete' &&
-                        `Deleted proposal: ${
-                          entry.details?.name || 'Unnamed file'
-                        }`}
-                      {!entry.type &&
-                        entry.type !== 'proposal-upload' &&
-                        entry.type !== 'proposal-delete' &&
-                        'Scope of Work updated.'}
+          {auditTrail && auditTrail.length > 0 && auditExpanded && (
+            <div className="sow-audit">
+              <ul className="sow-audit-list">
+                {auditTrail.map((entry, idx) => (
+                  <li key={idx} className="sow-audit-item">
+                    <div className="sow-audit-main">
+                      <span className="sow-audit-actor">
+                        {entry.actor || 'Admin'}
+                      </span>
+                      <span className="sow-audit-time">
+                        {formatAuditTime(entry.ts)}
+                      </span>
                     </div>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </section>
+
+                    {entry.type === 'fields-update' ? (
+                      <>
+                        <div className="sow-audit-summary">
+                          Updated Scope of Work fields (
+                          {Object.keys(entry.changes || {}).length} field
+                          {Object.keys(entry.changes || {}).length === 1
+                            ? ''
+                            : 's'}
+                          ).
+                        </div>
+
+                        {entry.changes && (
+                          <ul className="sow-audit-changes">
+                            {Object.entries(entry.changes).map(
+                              ([fieldKey, diff]) => (
+                                <li
+                                  key={fieldKey}
+                                  className="sow-audit-change-row"
+                                >
+                                  <span className="sow-audit-field">
+                                    {FIELD_LABELS[fieldKey] || fieldKey}
+                                  </span>
+                                  <span className="sow-audit-arrow">:</span>
+                                  <span className="sow-audit-before">
+                                    {diff.before ? `“${diff.before}”` : '—'}
+                                  </span>
+                                  <span className="sow-audit-arrow">→</span>
+                                  <span className="sow-audit-after">
+                                    {diff.after ? `“${diff.after}”` : '—'}
+                                  </span>
+                                </li>
+                              )
+                            )}
+                          </ul>
+                        )}
+                      </>
+                    ) : (
+                      <div className="sow-audit-summary">
+                        {entry.type === 'proposal-upload' &&
+                          `Uploaded ${
+                            entry.details?.count || 0
+                          } proposal file(s).`}
+                        {entry.type === 'proposal-delete' &&
+                          `Deleted proposal: ${
+                            entry.details?.name || 'Unnamed file'
+                          }`}
+                        {!entry.type &&
+                          entry.type !== 'proposal-upload' &&
+                          entry.type !== 'proposal-delete' &&
+                          'Scope of Work updated.'}
+                      </div>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </section>
+      )}
     </div>
   );
 };
