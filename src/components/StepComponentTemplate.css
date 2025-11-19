@@ -1,165 +1,333 @@
-.step-container {
-    padding: 2rem;
-    max-width: 1000px;
-    margin: 0 auto;
-    font-family: 'Poppins', sans-serif;
-    color: #111;
+/* src/components/StepComponentTemplate.css
+   Highly specific styles for the per–sub-step detail view.
+*/
+
+.mpm-step-detail {
+  padding: 1.75rem 2rem 2.25rem;
+  max-width: 1040px;
+  margin: 0 auto;
+  font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #111827;
+}
+
+/* Title (sub-step name) */
+.mpm-step-title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem;
+  text-align: center;
+}
+
+/* Small total-time line under the title */
+.mpm-step-total {
+  font-size: 0.95rem;
+  color: #4b5563;
+  margin-bottom: 1.25rem;
+  text-align: left;
+}
+
+.mpm-step-total span {
+  font-weight: 600;
+  margin-left: 0.25rem;
+}
+
+/* --- Time tracking block ------------------------------------------------ */
+
+.mpm-step-time {
+  border-top: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 1rem 0 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.mpm-step-disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.mpm-step-time-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.mpm-step-time-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.mpm-step-time-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* Current time display */
+.mpm-step-time-value {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace;
+  font-size: 0.9rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: 6px;
+  background-color: #eef2ff;
+  border: 1px solid #c7d2fe;
+  color: #1e3a8a;
+}
+
+/* Buttons (Edit / Save / Cancel) */
+.mpm-step-btn {
+  appearance: none;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  color: #111827;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.35rem 0.7rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease,
+    transform 0.05s ease;
+}
+
+.mpm-step-btn-primary {
+  background-color: #111827;
+  color: #ffffff;
+  border-color: #111827;
+}
+
+.mpm-step-btn:hover:not(:disabled) {
+  background-color: #f3f4f6;
+}
+
+.mpm-step-btn-primary:hover:not(:disabled) {
+  background-color: #1f2937;
+}
+
+.mpm-step-btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.mpm-step-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* Clear link-style button */
+.mpm-step-link-btn {
+  appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.8rem;
+  color: #6b7280;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.mpm-step-link-btn:hover {
+  color: #ef4444;
+}
+
+/* Inline edit - dropdown select */
+.mpm-step-time-edit {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.mpm-step-time-select {
+  min-width: 180px;
+  max-width: 260px;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  font-size: 0.85rem;
+  background-color: #ffffff;
+  color: #111827;
+}
+
+/* --- Checkpoints & Measurement Points ---------------------------------- */
+
+.mpm-step-checkpoints {
+  margin-top: 1.75rem;
+}
+
+.mpm-step-checkpoints-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 0.75rem;
+}
+
+/* If no checkpoints defined */
+.mpm-step-empty {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
+}
+
+/* Grid/list for checkpoints */
+.mpm-check-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  margin-top: 0.5rem;
+}
+
+/* One row: checkbox LEFT, text RIGHT */
+.mpm-check-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+  font-size: 0.95rem;
+  color: #111827;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Checkbox itself */
+.mpm-check-row input[type='checkbox'] {
+  margin-top: 2px;
+  transform: scale(1.1);
+  cursor: pointer;
+  accent-color: #22c55e;
+}
+
+/* Slight highlight when completed */
+.mpm-check-row input[type='checkbox']:checked + .mpm-check-text {
+  text-decoration: line-through;
+  color: #6b7280;
+}
+
+/* Text block for checkpoint */
+.mpm-check-text {
+  line-height: 1.4;
+}
+
+/* --- Responsive tweaks -------------------------------------------------- */
+
+@media (max-width: 768px) {
+  .mpm-step-detail {
+    padding: 1.25rem 1.25rem 1.75rem;
   }
-  
-  .step-title {
-    font-size: 1.6rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
+
+  .mpm-step-title {
+    font-size: 1.35rem;
   }
-  
-  .step-checklist {
-    margin-top: 1.5rem;
+
+  .mpm-step-time-header {
+    align-items: flex-start;
   }
-  
-  .step-table {
+
+  .mpm-step-time-right {
+    justify-content: flex-start;
+  }
+
+  .mpm-step-time-select {
     width: 100%;
-    border-collapse: collapse;
+    max-width: none;
   }
-  
-  .step-table th,
-  .step-table td {
-    border-bottom: 1px solid #ddd;
-    padding: 0.75rem;
-    vertical-align: top;
-    font-size: 0.95rem;
-  }
-  
-  .step-table th {
-    text-align: left;
-    font-weight: 600;
-    color: #444;
-  }
-  
-  .step-table td:first-child {
-    width: 20px;
-    text-align: center;
-  }
-  
-  .step-table input[type="checkbox"] {
-    transform: scale(1.2);
-    accent-color: #6fe0b5;
-    cursor: pointer;
-  }
-  
-  .timer-toggle {
-    all: unset;
-    background-color: #6fe0b5;
-    color: #111;
-    padding: 0.4rem 0.8rem;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background-color 0.2s ease;
-  }
-  
-  .timer-toggle:hover {
-    background-color: #5bcc9c;
-  }
+}
 
-  .step-total-time {
-    margin-bottom: 1rem;
-    font-size: 1rem;
-    font-weight: 500;
-    color: #333;
-  }
-  
-  .timer-toggle {
-    all: unset;
-    padding: 0.4rem 0.8rem;
-    border-radius: 4px;
-    font-weight: 600;
-    cursor: pointer;
-    font-size: 0.85rem;
-    transition: background-color 0.2s ease;
-  }
-  
-  .timer-toggle.start {
-    background-color: #6fe0b5;
-    color: #111;
-  }
-  
-  .timer-toggle.stop {
-    background-color: #f45c5c;
-    color: white;
-  }
+/* ------------------------------------------------------------------ */
+/* 🔒 Nuclear override to beat any global form styles                 */
+/* This guarantees: checkbox left, text right, no full-width weirdness */
+/* ------------------------------------------------------------------ */
 
-  .clear-time-btn {
-    all: unset;
-    font-size: 0.75rem;
-    color: #888;
-    cursor: pointer;
-    margin-top: 2px;
-  }
-  
-  .clear-time-btn:hover {
-    text-decoration: underline;
-    color: #e74c3c;
-  }
+.mpm-check-grid label.mpm-check-row {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+  gap: 0.45rem !important;
+  width: auto !important;
+  max-width: 100% !important;
+}
 
-  .manual-time-input {
-    width: 60px;
-    font-size: 0.85rem;
-    padding: 2px 6px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    text-align: center;
-    font-family: 'Poppins', sans-serif;
-  }
-  
-  .time-display {
-    cursor: pointer;
-    display: inline-block;
-  }
+.mpm-check-grid label.mpm-check-row input[type='checkbox'] {
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 2px 0 0 0 !important;
+  flex: 0 0 auto !important;
+  box-shadow: none !important;
+}
 
-  .time-input-group {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    margin-bottom: 4px;
-  }
-  
-  .manual-time-input {
-    width: 20px;
-    font-size: 0.85rem;
-    padding: 3px 4px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    text-align: center;
-    font-family: 'Poppins', sans-serif;
-  }
+.mpm-check-grid label.mpm-check-row .mpm-check-text {
+  flex: 1 1 auto !important;
+  display: inline-block !important;
+  text-align: left !important;
+}
 
-  .time-input-actions {
-    display: flex;
-    gap: 8px;
-    margin-top: 4px;
-  }
-  
-  .time-input-actions button {
-    all: unset;
-    font-size: 0.8rem;
-    padding: 4px 8px;
-    border-radius: 4px;
-    cursor: pointer;
-    background-color: #6fe0b5;
-    font-weight: 600;
-    color: #111;
-    border: 1px solid transparent;
-  }
-  
-  .time-input-actions button:hover {
-    background-color: #5bcc9c;
-  }
-  
-  .time-input-actions button.cancel-btn {
-    background-color: #eee;
-    color: #333;
-  }
-  
-  .time-input-actions button.cancel-btn:hover {
-    background-color: #ddd;
-  }
+.mpm-check-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  margin-top: 0.5rem;
+}
+
+.mpm-check-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+  font-size: 0.95rem;
+  color: #111827;
+  cursor: pointer;
+  user-select: none;
+}
+
+.mpm-check-row input[type='checkbox'] {
+  margin-top: 2px;
+  transform: scale(1.1);
+  cursor: pointer;
+  accent-color: #22c55e;
+}
+
+/* optional: strike-through when checked */
+.mpm-check-row input[type='checkbox']:checked ~ .mpm-check-text {
+  text-decoration: line-through;
+  color: #6b7280;
+}
+
+.mpm-check-text {
+  line-height: 1.4;
+}
+
+.mpm-check-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  margin-top: 0.5rem;
+}
+
+.mpm-check-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+  font-size: 0.95rem;
+  color: #111827;
+  cursor: pointer;
+  user-select: none;
+}
+
+.mpm-check-row input[type='checkbox'] {
+  margin-top: 2px;
+  transform: scale(1.1);
+  cursor: pointer;
+  accent-color: #22c55e;
+}
+
+/* optional: strike-through when checked */
+.mpm-check-row input[type='checkbox']:checked ~ .mpm-check-text {
+  text-decoration: line-through;
+  color: #6b7280;
+}
+
+.mpm-check-text {
+  line-height: 1.4;
+}

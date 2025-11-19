@@ -3,24 +3,40 @@ import './ProjectOverview.css';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { doc, updateDoc } from 'firebase/firestore';
 import { storage, db } from '../firebaseConfig';
+import { calculateProjectProgress } from '../utils/calculateProjectProgress';
 
 /* ---------- tiny helpers ---------- */
-const val = (...c) => c.find(v => v !== undefined && v !== null && v !== '') ?? undefined;
+const val = (...c) =>
+  c.find((v) => v !== undefined && v !== null && v !== '') ?? undefined;
+
 const getIdentifier = (p = {}) => {
-  const serial = val(p.serial, p.serialNumber, p.projectSerial, p.snareSerial, p.serialId, p.lineSerial) || '';
-  const line   = val(p.series, p.artisanLine, p.productLine, p.seriesLine, p.line) || '';
-  const dia    = val(p.diameter, p.width);
-  const dep    = val(p.depth, p.shellDepth);
-  const size   = dia && dep ? ` · ${dia}×${dep}"` : '';
+  const serial =
+    val(
+      p.serial,
+      p.serialNumber,
+      p.projectSerial,
+      p.snareSerial,
+      p.serialId,
+      p.lineSerial
+    ) || '';
+  const line =
+    val(p.series, p.artisanLine, p.productLine, p.seriesLine, p.line) || '';
+  const dia = val(p.diameter, p.width);
+  const dep = val(p.depth, p.shellDepth);
+  const size = dia && dep ? ` · ${dia}×${dep}"` : '';
   if (serial && line) return `${serial} · ${line}${size}`;
-  if (serial)         return `${serial}${size}`;
-  if (line)           return `${line}${size}`;
+  if (serial) return `${serial}${size}`;
+  if (line) return `${line}${size}`;
   return size ? size.slice(3) : '—';
 };
 
 /** AfterShip universal tracking link */
 const makeTrackingUrl = (tracking) =>
-  tracking ? `https://track.aftership.com/${encodeURIComponent(String(tracking).trim())}` : '';
+  tracking
+    ? `https://track.aftership.com/${encodeURIComponent(
+        String(tracking).trim()
+      )}`
+    : '';
 
 /* ---------- Vault fallbacks (preview only) ---------- */
 const LEGACY_PRIVATE_TEXT = '<p>Legacy is set to Private.</p>';
@@ -31,7 +47,9 @@ const Toggle = ({ checked, onChange, disabled, id }) => (
   <button
     id={id}
     type="button"
-    className={`apo-toggle ${checked ? 'on' : 'off'} ${disabled ? 'disabled' : ''}`}
+    className={`apo-toggle ${checked ? 'on' : 'off'} ${
+      disabled ? 'disabled' : ''
+    }`}
     role="switch"
     aria-checked={checked}
     onClick={() => !disabled && onChange(!checked)}
@@ -39,6 +57,47 @@ const Toggle = ({ checked, onChange, disabled, id }) => (
     <span className="knob" />
   </button>
 );
+
+/* ---------- Build phases (for progress breakdown + attachment categories) ---------- */
+const buildPhases = [
+  { key: 'discoveryDesign', label: '1. Discovery & Design' },
+  { key: 'commitmentPortal', label: '2. Commitment & Portal Setup' },
+  { key: 'woodVisionLockIn', label: '3. Wood & Vision Lock-In' },
+  { key: 'rawShellCreation', label: '4. Raw Shell Creation' },
+  { key: 'shellTrueingTorchTune', label: '5. Shell Trueing & Torch Tune' },
+  { key: 'exteriorArtFinish', label: '6. Exterior Art & Finish' },
+  { key: 'edgesSnareBeds', label: '7. Edges & Snare Beds' },
+  { key: 'hardwareAssembly', label: '8. Hardware & Assembly' },
+  { key: 'legacyTuningMedia', label: '9. Legacy Tuning & Media' },
+  {
+    key: 'finalQAPackagingDelivery',
+    label: '10. Final QA, Packaging & Delivery',
+  },
+];
+
+/**
+ * Patch the data before sending to calculateProjectProgress.
+ * Same alias map as ManageProjectModal.
+ */
+const getWeightedProgressPct = (data) => {
+  if (!data) return 0;
+
+  const patched = {
+    ...data,
+    woodPreparation: data.discoveryDesign,
+    shellConstruction: data.commitmentPortal,
+    fineTuning: data.woodVisionLockIn,
+    shellExteriorFinish: data.rawShellCreation,
+    bearingEdges: data.shellTrueingTorchTune,
+    snareBedCutting: data.exteriorArtFinish,
+    hardwareDrilling: data.edgesSnareBeds,
+    hardwareAssembly: data.hardwareAssembly,
+    tuningAndDetailing: data.legacyTuningMedia,
+    qualityCheck: data.finalQAPackagingDelivery,
+  };
+
+  return calculateProjectProgress(patched);
+};
 
 const ProjectOverview = ({
   editableData,
@@ -48,6 +107,7 @@ const ProjectOverview = ({
   onSave,
   onCancel,
 }) => {
+  /* ---- uploads / preview ---- */
   const [dragging, setDragging] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -56,6 +116,34 @@ const ProjectOverview = ({
   const [uploadedFiles, setUploadedFiles] = useState(
     editableData?.attachments || { other: [] }
   );
+
+/* ---- collapsible sections: all collapsed by default; max one open ---- */
+const [openSections, setOpenSections] = useState({
+  scope: false,
+  openCheckpoints: false,
+  customer: false,
+  vault: false,
+});
+
+const toggleSection = (key) => {
+  setOpenSections((prev) => {
+    const isCurrentlyOpen = !!prev[key];
+
+    // base: everything closed
+    const base = {
+      scope: false,
+      openCheckpoints: false,
+      customer: false,
+      vault: false,
+    };
+
+    // if clicking an open section -> close all
+    if (isCurrentlyOpen) return base;
+
+    // otherwise open just this one
+    return { ...base, [key]: true };
+  });
+};
 
   /* ---- Vault public prefs (admin controls) ---- */
   const [publicPrefs, setPublicPrefs] = useState({
@@ -66,32 +154,79 @@ const ProjectOverview = ({
   });
 
   const woodSpeciesOptions = [
-    'Maple','Walnut','Cherry','Birch','Oak','Ash','Mahogany','Bubinga','Purpleheart','Rosewood',
+    'Maple',
+    'Walnut',
+    'Cherry',
+    'Birch',
+    'Oak',
+    'Ash',
+    'Mahogany',
+    'Bubinga',
+    'Purpleheart',
+    'Rosewood',
   ];
 
-  const fileCategories = [
-    'Build Proposal',
-    'Wood Selection',
-    'Early Mockups (Pre-Production)',
-    'Stave Construction (Pre-Milling)',
-    'Stave Construction (Post-Milling)',
-    'Final Mockups (Mid-Production)',
-    'Media Files (Audio/Video)',
+  const artisanLines = [
+    'SoundLegend',
+    'Heritage',
+    'Feuzon',
+    'One Series',
     'Other',
   ];
+
+  const shellConstructionOptions = [
+    'Stave',
+    'Feuzon Hybrid',
+    'Segmented',
+    'Ply / Keller',
+    'Steam-Bent',
+    'Other',
+  ];
+
+  const bearingEdgeOptions = [
+    '45° inner / 1/4" roundover outer',
+    '45° inner / full roundover',
+    'Double 45°',
+    'Rounded vintage',
+    'Custom',
+  ];
+
+  const hoopOptions = [
+    'Die-Cast',
+    'Triple-Flanged',
+    'Single-Flanged',
+    'Wood hoops',
+  ];
+
+  // Attachment categories aligned to 10 steps (+ uncategorized)
+const fileCategories = [
+  '1. Discovery & Design',
+  '2. Commitment & Portal Setup',
+  '3. Wood & Vision Lock-In',
+  '4. Raw Shell Creation',
+  '5. Shell Trueing & Torch Tune',
+  '6. Exterior Art & Finish',
+  '7. Edges & Snare Beds',
+  '8. Hardware & Assembly',
+  '9. Legacy Tuning & Media',
+  '10. Final QA, Packaging & Delivery',
+];
 
   /* ---------- util date formatters ---------- */
   const getDateInputValue = (val) => {
     if (!val) return '';
     try {
-      if (typeof val === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(val)) return val;
+      if (typeof val === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(val))
+        return val;
       let d;
       if (val?.toDate) d = val.toDate();
       else if (val?.seconds) d = new Date(val.seconds * 1000);
       else d = new Date(val);
       if (isNaN(d)) return '';
       return d.toISOString().split('T')[0];
-    } catch { return ''; }
+    } catch {
+      return '';
+    }
   };
 
   const formatDate = (value) => {
@@ -105,32 +240,56 @@ const ProjectOverview = ({
       date = parsed;
     } else if (value instanceof Date) date = value;
     else return 'N/A';
-    return date.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+    return date.toLocaleDateString(undefined, {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    });
   };
 
   /* ---- seed public prefs from Firestore doc (if present) ---- */
   useEffect(() => {
     const p = editableData?.publicPrefs || {};
     setPublicPrefs({
-      namePublicEnabled: !!p.namePublicEnabled,
-      storyPublicEnabled: !!p.storyPublicEnabled,
+      namePublicEnabled: p.namePublicEnabled ?? p.showName ?? false,
+      storyPublicEnabled: p.storyPublicEnabled ?? p.showStory ?? false,
       displayName: p.displayName || '',
       storyHtml: p.storyHtml || '',
     });
   }, [editableData]);
 
-  /* ---------- uploads ---------- */
-  const regroupFilesByCategory = (allFiles) => {
-    const grouped = {};
-    Object.entries(allFiles || {}).forEach(([key, fileArray]) => {
-      (fileArray || []).forEach((file) => {
-        const category = file?.category || key || 'other';
-        if (!grouped[category]) grouped[category] = [];
-        grouped[category].push(file);
-      });
-    });
-    return grouped;
-  };
+  // keep local uploadedFiles in sync when switching projects
+useEffect(() => {
+  setUploadedFiles(editableData?.attachments || { other: [] });
+}, [editableData?.attachments]);
+
+  /* ---------- uploads (used by Attachments) ---------- */
+// Normalize attachments: keep original buckets, just ensure each is an array
+const normalizeAttachmentsByBucket = (allFiles) => {
+  const normalized = {};
+
+  Object.entries(allFiles || {}).forEach(([bucket, fileArray]) => {
+    let arr;
+
+    if (Array.isArray(fileArray)) {
+      arr = fileArray;
+    } else if (fileArray && typeof fileArray === 'object') {
+      // Could be {0: file, 1: file} or a single file object
+      const values = Object.values(fileArray);
+      if (values.length && values.every((v) => v && typeof v === 'object' && v.url)) {
+        arr = values;
+      } else {
+        arr = [fileArray];
+      }
+    } else {
+      arr = [];
+    }
+
+    normalized[bucket] = arr;
+  });
+
+  return normalized;
+};
 
   const handleDeleteFile = (sectionKey, index) => {
     const file = uploadedFiles[sectionKey]?.[index];
@@ -146,7 +305,9 @@ const ProjectOverview = ({
 
     updateDoc(doc(db, 'projects', editableData.id), {
       [`attachments.${sectionKey}`]: updatedSection,
-    }).catch((err) => console.error('❌ Failed to delete file from Firestore:', err));
+    }).catch((err) =>
+      console.error('❌ Failed to delete file from Firestore:', err)
+    );
   };
 
   const handleDrop = async (e) => {
@@ -171,7 +332,8 @@ const ProjectOverview = ({
         uploadTask.on(
           'state_changed',
           (snapshot) => {
-            const pct = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            const pct =
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
             setUploadProgress(pct.toFixed(0));
           },
           (error) => {
@@ -184,7 +346,10 @@ const ProjectOverview = ({
             const newFile = { url, category: safeCategory, hidden: true };
 
             const updated = [...(uploadedFiles[safeCategory] || []), newFile];
-            const updatedFiles = { ...uploadedFiles, [safeCategory]: updated };
+            const updatedFiles = {
+              ...uploadedFiles,
+              [safeCategory]: updated,
+            };
             setUploadedFiles(updatedFiles);
 
             try {
@@ -205,7 +370,10 @@ const ProjectOverview = ({
     setUploading(false);
   };
 
-  const groupedFiles = useMemo(() => regroupFilesByCategory(uploadedFiles), [uploadedFiles]);
+const normalizedFiles = useMemo(
+  () => normalizeAttachmentsByBucket(uploadedFiles),
+  [uploadedFiles]
+);
 
   /* ---------- SAVE: Vault prefs (admin) ---------- */
   const saveVaultPrefs = async () => {
@@ -228,26 +396,99 @@ const ProjectOverview = ({
 
   /* ---------- derived preview ---------- */
   const previewName = publicPrefs.namePublicEnabled
-    ? (publicPrefs.displayName || editableData?.customer?.name || '—')
+    ? publicPrefs.displayName || editableData?.customer?.name || '—'
     : 'Anonymous Legend';
 
   const previewStoryHtml = publicPrefs.storyPublicEnabled
-    ? (publicPrefs.storyHtml || LEGACY_UNKNOWN_TEXT)
+    ? publicPrefs.storyHtml || LEGACY_UNKNOWN_TEXT
     : LEGACY_PRIVATE_TEXT;
 
-  const trackingUrl = makeTrackingUrl(editableData?.shipping?.trackingNumber);
+  const trackingUrl = makeTrackingUrl(
+    editableData?.shipping?.trackingNumber
+  );
+
+  /* ---------- time-weighted progress + checklist stats ---------- */
+  const progressMeta = useMemo(() => {
+    const data = editableData || {};
+
+    // Tasks (raw checklist progress)
+    let completedTasks = 0;
+    let totalTasks = 0;
+
+    buildPhases.forEach((phase) => {
+      const cl = data[phase.key]?.checklist || [];
+      totalTasks += cl.length;
+      completedTasks += cl.filter((t) => t.completed).length;
+    });
+
+    const tasksPct = totalTasks
+      ? Math.round((completedTasks / totalTasks) * 100)
+      : 0;
+
+    // Weighted progress we use everywhere
+    const weightedPct = getWeightedProgressPct(data);
+
+    // Current phase label
+    let currentPhaseLabel = 'All Steps Complete';
+    for (const phase of buildPhases) {
+      const cl = data[phase.key]?.checklist;
+      if (!cl || cl.some((i) => !i.completed)) {
+        currentPhaseLabel = phase.label;
+        break;
+      }
+    }
+
+    return {
+      weightedPct,
+      tasksPct,
+      completedTasks,
+      totalTasks,
+      currentPhaseLabel,
+    };
+  }, [editableData]);
+
+  /* ---------- OPEN CHECKPOINTS (grouped by step) ---------- */
+  const openCheckpointsByStep = useMemo(() => {
+    const data = editableData || {};
+    const map = {};
+
+    buildPhases.forEach((phase) => {
+      const checklist = data[phase.key]?.checklist || [];
+      const openItems = checklist.filter((item) => !item.completed);
+      if (openItems.length) {
+        map[phase.label] = openItems.map((item, idx) => ({
+          id: item.id || `${phase.key}-${idx}`,
+          task: item.task || item.label || '',
+        }));
+      }
+    });
+
+    return map;
+  }, [editableData]);
+
+  const totalOpenSteps = Object.keys(openCheckpointsByStep).length;
+  const totalOpenTasks = Object.values(openCheckpointsByStep).reduce(
+    (sum, arr) => sum + arr.length,
+    0
+  );
 
   /* ==================== RENDER ==================== */
   return (
     <div className="apo-container">
       {/* header chips */}
       <div className="apo-header-chips">
-        <span className="apo-chip apo-id">🆔 {getIdentifier(editableData || {})}</span>
-        {editableData?.customerName && <span className="apo-chip">👤 {editableData.customerName}</span>}
-        {editableData?.id && <span className="apo-chip apo-mono">ID: {editableData.id}</span>}
+        <span className="apo-chip apo-id">
+          🆔 {getIdentifier(editableData || {})}
+        </span>
+        {editableData?.customerName && (
+          <span className="apo-chip">👤 {editableData.customerName}</span>
+        )}
+        {editableData?.id && (
+          <span className="apo-chip apo-mono">ID: {editableData.id}</span>
+        )}
       </div>
 
-      <div className="apo-title">Project Details</div>
+      <div className="apo-title">Project Overview</div>
 
       {/* meta line */}
       <div className="apo-meta">
@@ -281,363 +522,1234 @@ const ProjectOverview = ({
         )}
       </div>
 
-      <div className="apo-actions">
-        {isEditing ? (
-          <>
-            <button className="apo-btn primary" onClick={onSave}>Save Changes</button>
-            <button className="apo-btn ghost" onClick={onCancel}>Cancel Edit</button>
-          </>
-        ) : (
-          <button className="apo-btn ghost" onClick={onEditToggle}>Edit</button>
+      {/* ---------- Progress overview (always visible at top) ---------- */}
+      <div className="apo-card apo-progress-card">
+        <h4 className="apo-h4">Progress Overview</h4>
+        <div className="apo-progress-bar-wrap">
+          <div className="apo-progress-bar-track">
+            <div
+              className="apo-progress-bar-fill"
+              style={{ width: `${progressMeta.weightedPct || 0}%` }}
+            />
+          </div>
+          <div className="apo-progress-bar-label">
+            Overall Progress (time-weighted):{' '}
+            <span className="apo-progress-pill">
+              {progressMeta.weightedPct || 0}%
+            </span>
+          </div>
+        </div>
+
+        <div className="apo-progress-meta-row">
+          <div className="apo-progress-pill-row">
+            <span className="apo-progress-pill-label">
+              Checklist completion:
+            </span>
+            <span className="apo-progress-pill">
+              {progressMeta.completedTasks}/{progressMeta.totalTasks || 0} tasks
+              ({progressMeta.tasksPct || 0}%)
+            </span>
+          </div>
+          <div className="apo-progress-pill-row">
+            <span className="apo-progress-pill-label">Current phase:</span>
+            <span className="apo-progress-pill apo-progress-phase-pill">
+              {progressMeta.currentPhaseLabel}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* ======================================================
+          1) PROJECT SCOPE
+         ====================================================== */}
+      <div
+        className={`apo-card apo-section ${
+          openSections.scope ? 'open' : 'collapsed'
+        }`}
+      >
+        <button
+          type="button"
+          className="apo-section-header"
+          onClick={() => toggleSection('scope')}
+        >
+          <div className="apo-section-header-main">
+            <span className="apo-section-title">Project Scope</span>
+            <span className="apo-section-subtitle">
+              A high-level snapshot of how this drum is built.
+            </span>
+          </div>
+          <div className="apo-section-header-meta">
+            <span className="apo-section-summary">
+              {editableData?.artisanLine || '—'} ·{' '}
+              {editableData?.width || editableData?.diameter || '—'}×
+              {editableData?.shellDepth || editableData?.depth || '—'}"
+            </span>
+            <button
+              type="button"
+              className="apo-section-edit-btn"
+              onClick={(e) => {
+                e.stopPropagation();
+                isEditing ? onSave() : onEditToggle();
+              }}
+            >
+              {isEditing ? 'Save' : 'Edit section'}
+            </button>
+            <span
+              className={`apo-section-chevron ${
+                openSections.scope ? 'open' : ''
+              }`}
+            >
+              ▾
+            </span>
+          </div>
+        </button>
+
+        {openSections.scope && (
+          <div className="apo-section-body apo-scope-body">
+            <p className="apo-scope-admin-hint">
+              Admin view: you’re viewing the scope of work for{' '}
+              <span className="apo-mono">
+                {editableData?.customer?.email ||
+                  editableData?.customerEmail ||
+                  '—'}
+              </span>
+              .
+            </p>
+
+            {/* Identity */}
+            <div className="apo-scope-group">
+              <div className="apo-scope-heading">Identity</div>
+
+              <div className="apo-row">
+                <label className="apo-label">Artisan Line</label>
+                {isEditing ? (
+                  <select
+                    className="apo-input"
+                    value={editableData?.artisanLine || ''}
+                    onChange={(e) =>
+                      handleChange('artisanLine', e.target.value)
+                    }
+                  >
+                    <option value="">Select line</option>
+                    {artisanLines.map((line) => (
+                      <option key={line} value={line}>
+                        {line}
+                      </option>
+                    ))}
+                  </select>
+                ) : (
+                  <span className="apo-value">
+                    {editableData?.artisanLine || 'N/A'}
+                  </span>
+                )}
+              </div>
+
+              <div className="apo-row">
+                <label className="apo-label">Serial</label>
+                {isEditing ? (
+                  <input
+                    className="apo-input"
+                    type="text"
+                    value={
+                      editableData?.serial ||
+                      editableData?.serialNumber ||
+                      editableData?.projectSerial ||
+                      editableData?.snareSerial ||
+                      ''
+                    }
+                    onChange={(e) =>
+                      handleChange('serial', e.target.value)
+                    }
+                  />
+                ) : (
+                  <span className="apo-value">
+                    {editableData?.serial ||
+                      editableData?.serialNumber ||
+                      editableData?.projectSerial ||
+                      editableData?.snareSerial ||
+                      'N/A'}
+                  </span>
+                )}
+              </div>
+            </div>
+
+            {/* Shell & Geometry */}
+            <div className="apo-scope-group">
+              <div className="apo-scope-heading">Shell &amp; Geometry</div>
+
+              <div className="apo-row">
+                <label className="apo-label">Dimensions</label>
+                {isEditing ? (
+                  <div className="apo-size-row">
+                    <input
+                      type="number"
+                      className="apo-input apo-input-inline"
+                      placeholder='Diameter (e.g. 14")'
+                      value={
+                        editableData?.width || editableData?.diameter || ''
+                      }
+                      onChange={(e) =>
+                        handleChange('width', e.target.value)
+                      }
+                    />
+                    <span className="apo-size-x">×</span>
+                    <input
+                      type="number"
+                      className="apo-input apo-input-inline"
+                      placeholder='Depth (e.g. 8")'
+                      value={
+                        editableData?.shellDepth ||
+                        editableData?.depth ||
+                        ''
+                      }
+                      onChange={(e) =>
+                        handleChange('shellDepth', e.target.value)
+                      }
+                    />
+                    <span className="apo-size-unit">"</span>
+                  </div>
+                ) : (
+                  <span className="apo-value apo-mono">
+                    {editableData?.width || editableData?.diameter || '—'}×
+                    {editableData?.shellDepth || editableData?.depth || '—'}"
+                  </span>
+                )}
+              </div>
+
+              <div className="apo-row">
+                <label className="apo-label">Stave Count</label>
+                {isEditing ? (
+                  <input
+                    type="number"
+                    className="apo-input apo-input-inline"
+                    placeholder="# of staves"
+                    value={editableData?.staveCount || ''}
+                    onChange={(e) =>
+                      handleChange('staveCount', e.target.value)
+                    }
+                  />
+                ) : (
+                  <span className="apo-value">
+                    {editableData?.staveCount
+                      ? `${editableData.staveCount}-stave`
+                      : 'N/A'}
+                  </span>
+                )}
+              </div>
+
+              <div className="apo-row">
+                <label className="apo-label">Shell Construction</label>
+                {isEditing ? (
+                  <select
+                    className="apo-input"
+                    value={editableData?.shellConstruction || ''}
+                    onChange={(e) =>
+                      handleChange('shellConstruction', e.target.value)
+                    }
+                  >
+                    <option value="">Select construction</option>
+                    {shellConstructionOptions.map((opt) => (
+                      <option key={opt} value={opt}>
+                        {opt}
+                      </option>
+                    ))}
+                  </select>
+                ) : (
+                  <span className="apo-value">
+                    {editableData?.shellConstruction || 'N/A'}
+                  </span>
+                )}
+              </div>
+
+              <div className="apo-row">
+                <label className="apo-label">Reinforcement Rings</label>
+                {isEditing ? (
+                  <input
+                    className="apo-input"
+                    type="text"
+                    placeholder="e.g. None, 1/4&quot; Maple top/bottom"
+                    value={editableData?.reinforcementRings || ''}
+                    onChange={(e) =>
+                      handleChange('reinforcementRings', e.target.value)
+                    }
+                  />
+                ) : (
+                  <span className="apo-value">
+                    {editableData?.reinforcementRings || 'None'}
+                  </span>
+                )}
+              </div>
+            </div>
+
+            {/* Wood & Veneer */}
+            <div className="apo-scope-group">
+              <div className="apo-scope-heading">Wood &amp; Veneer</div>
+
+              <div className="apo-row">
+                <label className="apo-label">Primary Species</label>
+                {isEditing ? (
+                  <select
+                    className="apo-input"
+                    value={editableData?.primaryWoodSpecies || ''}
+                    onChange={(e) =>
+                      handleChange('primaryWoodSpecies', e.target.value)
+                    }
+                  >
+                    <option value="">Select primary species</option>
+                    {woodSpeciesOptions.map((w) => (
+                      <option key={w} value={w}>
+                        {w}
+                      </option>
+                    ))}
+                  </select>
+                ) : (
+                  <span className="apo-value">
+                    {editableData?.primaryWoodSpecies || 'N/A'}
+                  </span>
+                )}
+              </div>
+
+              <div className="apo-row">
+                <label className="apo-label">Secondary / Hybrid</label>
+                {isEditing ? (
+                  <input
+                    className="apo-input"
+                    type="text"
+                    placeholder="e.g. Cherry (50%)"
+                    value={editableData?.secondaryWoodSpecies || ''}
+                    onChange={(e) =>
+                      handleChange('secondaryWoodSpecies', e.target.value)
+                    }
+                  />
+                ) : (
+                  <span className="apo-value">
+                    {editableData?.secondaryWoodSpecies || 'None'}
+                  </span>
+                )}
+              </div>
+
+              <div className="apo-row">
+                <label className="apo-label">Veneer / Top Sheet</label>
+                {isEditing ? (
+                  <input
+                    className="apo-input"
+                    type="text"
+                    placeholder="e.g. Mappa Burl (Exotic)"
+                    value={editableData?.veneerTopSheet || ''}
+                    onChange={(e) =>
+                      handleChange('veneerTopSheet', e.target.value)
+                    }
+                  />
+                ) : (
+                  <span className="apo-value">
+                    {editableData?.veneerTopSheet || 'N/A'}
+                  </span>
+                )}
+              </div>
+            </div>
+
+            {/* Edges & Snare Beds */}
+            <div className="apo-scope-group">
+              <div className="apo-scope-heading">Edges &amp; Snare Beds</div>
+
+              <div className="apo-row">
+                <label className="apo-label">Bearing Edges</label>
+                {isEditing ? (
+                  <select
+                    className="apo-input"
+                    value={editableData?.bearingEdgeSpec || ''}
+                    onChange={(e) =>
+                      handleChange('bearingEdgeSpec', e.target.value)
+                    }
+                  >
+                    <option value="">Select edge spec</option>
+                    {bearingEdgeOptions.map((b) => (
+                      <option key={b} value={b}>
+                        {b}
+                      </option>
+                    ))}
+                  </select>
+                ) : (
+                  <span className="apo-value">
+                    {editableData?.bearingEdgeSpec || 'N/A'}
+                  </span>
+                )}
+              </div>
+
+              <div className="apo-row">
+                <label className="apo-label">Snare Bed Depth</label>
+                {isEditing ? (
+                  <input
+                    className="apo-input"
+                    type="text"
+                    placeholder="e.g. Low / Medium / Deep"
+                    value={editableData?.snareBedDepth || ''}
+                    onChange={(e) =>
+                      handleChange('snareBedDepth', e.target.value)
+                    }
+                  />
+                ) : (
+                  <span className="apo-value">
+                    {editableData?.snareBedDepth || 'N/A'}
+                  </span>
+                )}
+              </div>
+            </div>
+
+            {/* Hardware */}
+            <div className="apo-scope-group">
+              <div className="apo-scope-heading">Hardware</div>
+
+              <div className="apo-row">
+                <label className="apo-label">Lug Type</label>
+                {isEditing ? (
+                  <input
+                    className="apo-input"
+                    type="text"
+                    placeholder="e.g. Single-point Vintage Tube"
+                    value={editableData?.lugType || ''}
+                    onChange={(e) =>
+                      handleChange('lugType', e.target.value)
+                    }
+                  />
+                ) : (
+                  <span className="apo-value">
+                    {editableData?.lugType || 'N/A'}
+                  </span>
+                )}
+              </div>
+
+              <div className="apo-row">
+                <label className="apo-label">Hardware Finish</label>
+                {isEditing ? (
+                  <input
+                    className="apo-input"
+                    type="text"
+                    placeholder="e.g. Brass / Gold"
+                    value={editableData?.hardwareFinish || ''}
+                    onChange={(e) =>
+                      handleChange('hardwareFinish', e.target.value)
+                    }
+                  />
+                ) : (
+                  <span className="apo-value">
+                    {editableData?.hardwareFinish || 'N/A'}
+                  </span>
+                )}
+              </div>
+
+              <div className="apo-row">
+                <label className="apo-label">Hoops</label>
+                {isEditing ? (
+                  <select
+                    className="apo-input"
+                    value={editableData?.hoopType || ''}
+                    onChange={(e) =>
+                      handleChange('hoopType', e.target.value)
+                    }
+                  >
+                    <option value="">Select hoop type</option>
+                    {hoopOptions.map((h) => (
+                      <option key={h} value={h}>
+                        {h}
+                      </option>
+                    ))}
+                  </select>
+                ) : (
+                  <span className="apo-value">
+                    {editableData?.hoopType || 'N/A'}
+                  </span>
+                )}
+              </div>
+
+              <div className="apo-row">
+                <label className="apo-label">Throw-Off</label>
+                {isEditing ? (
+                  <input
+                    className="apo-input"
+                    type="text"
+                    placeholder="e.g. Trick"
+                    value={editableData?.throwOff || ''}
+                    onChange={(e) =>
+                      handleChange('throwOff', e.target.value)
+                    }
+                  />
+                ) : (
+                  <span className="apo-value">
+                    {editableData?.throwOff || 'N/A'}
+                  </span>
+                )}
+              </div>
+
+              <div className="apo-row">
+                <label className="apo-label">Snare Wires</label>
+                {isEditing ? (
+                  <input
+                    className="apo-input"
+                    type="text"
+                    placeholder="e.g. Puresound"
+                    value={editableData?.snareWires || ''}
+                    onChange={(e) =>
+                      handleChange('snareWires', e.target.value)
+                    }
+                  />
+                ) : (
+                  <span className="apo-value">
+                    {editableData?.snareWires || 'N/A'}
+                  </span>
+                )}
+              </div>
+            </div>
+
+            {/* Finish */}
+            <div className="apo-scope-group">
+              <div className="apo-scope-heading">Finish</div>
+
+              <div className="apo-row">
+                <label className="apo-label">Exterior Finish</label>
+                {isEditing ? (
+                  <input
+                    className="apo-input"
+                    type="text"
+                    placeholder="e.g. Custom PolyGloss"
+                    value={
+                      editableData?.exteriorFinish ||
+                      editableData?.finishDetails ||
+                      ''
+                    }
+                    onChange={(e) =>
+                      handleChange('exteriorFinish', e.target.value)
+                    }
+                  />
+                ) : (
+                  <span className="apo-value">
+                    {editableData?.exteriorFinish ||
+                      editableData?.finishDetails ||
+                      'N/A'}
+                  </span>
+                )}
+              </div>
+
+              <div className="apo-row">
+                <label className="apo-label">Interior Finish</label>
+                {isEditing ? (
+                  <input
+                    className="apo-input"
+                    type="text"
+                    placeholder="e.g. Raw / Oil / Sealed"
+                    value={editableData?.interiorFinish || ''}
+                    onChange={(e) =>
+                      handleChange('interiorFinish', e.target.value)
+                    }
+                  />
+                ) : (
+                  <span className="apo-value">
+                    {editableData?.interiorFinish || '—'}
+                  </span>
+                )}
+              </div>
+
+              <div className="apo-row">
+                <label className="apo-label">Resin / Acrylic Accent</label>
+                {isEditing ? (
+                  <input
+                    className="apo-input"
+                    type="text"
+                    placeholder="e.g. Cowboy Blue"
+                    value={editableData?.resinAccent || ''}
+                    onChange={(e) =>
+                      handleChange('resinAccent', e.target.value)
+                    }
+                  />
+                ) : (
+                  <span className="apo-value">
+                    {editableData?.resinAccent || 'N/A'}
+                  </span>
+                )}
+              </div>
+
+              <div className="apo-row apo-row-textarea">
+                <label className="apo-label">Additional Notes</label>
+                {isEditing ? (
+                  <textarea
+                    className="apo-input"
+                    rows={3}
+                    placeholder="Any special requests or build notes."
+                    value={editableData?.additionalNotes || ''}
+                    onChange={(e) =>
+                      handleChange('additionalNotes', e.target.value)
+                    }
+                  />
+                ) : (
+                  <span className="apo-value">
+                    {editableData?.additionalNotes || 'N/A'}
+                  </span>
+                )}
+              </div>
+            </div>
+          </div>
         )}
       </div>
 
-      {/* ---------- LEGACY VAULT VISIBILITY (admin) ---------- */}
-      <div className="apo-card">
-        <h4 className="apo-h4">Legacy Vault Visibility</h4>
-
-        <div className="apo-row">
-          <label className="apo-label" htmlFor="toggle-name">Display name publicly</label>
-          <div className="apo-field">
-            <Toggle
-              id="toggle-name"
-              checked={publicPrefs.namePublicEnabled}
-              onChange={(v) => setPublicPrefs({ ...publicPrefs, namePublicEnabled: v })}
-            />
-            <span className="apo-hint">
-              If off, Vault will show <strong>Anonymous Legend</strong>.
+      {/* ======================================================
+          2) OPEN CHECKPOINTS
+         ====================================================== */}
+      <div
+        className={`apo-card apo-section ${
+          openSections.openCheckpoints ? 'open' : 'collapsed'
+        }`}
+      >
+        <button
+          type="button"
+          className="apo-section-header"
+          onClick={() => toggleSection('openCheckpoints')}
+        >
+          <div className="apo-section-header-main">
+            <span className="apo-section-title">Open Checkpoints</span>
+            <span className="apo-section-subtitle">
+              Grouped by build phase
             </span>
           </div>
-        </div>
-
-        <div className="apo-row">
-          <label className="apo-label">Public Name (optional override)</label>
-          {isEditing ? (
-            <input
-              className="apo-input"
-              type="text"
-              placeholder="Leave blank to use account name"
-              value={publicPrefs.displayName}
-              onChange={(e) => setPublicPrefs({ ...publicPrefs, displayName: e.target.value })}
-            />
-          ) : (
-            <span className="apo-value">
-              {publicPrefs.displayName || editableData?.customer?.name || '—'}
+          <div className="apo-section-header-meta">
+            <span className="apo-section-summary">
+              {totalOpenTasks === 0
+                ? 'All tasks complete'
+                : `${totalOpenTasks} open task${
+                    totalOpenTasks === 1 ? '' : 's'
+                  } across ${totalOpenSteps} step${
+                    totalOpenSteps === 1 ? '' : 's'
+                  }`}
             </span>
-          )}
-        </div>
-
-        <hr className="apo-sep" />
-
-        <div className="apo-row">
-          <label className="apo-label" htmlFor="toggle-story">Display story publicly</label>
-          <div className="apo-field">
-            <Toggle
-              id="toggle-story"
-              checked={publicPrefs.storyPublicEnabled}
-              onChange={(v) => setPublicPrefs({ ...publicPrefs, storyPublicEnabled: v })}
-            />
-            <span className="apo-hint">
-              If off, Vault will show <strong>Legacy is set to Private</strong>.
+            <span
+              className={`apo-section-chevron ${
+                openSections.openCheckpoints ? 'open' : ''
+              }`}
+            >
+              ▾
             </span>
           </div>
-        </div>
+        </button>
 
-        <div className="apo-row">
-          <label className="apo-label">Story HTML (optional override)</label>
-          {isEditing ? (
-            <textarea
-              className="apo-input"
-              rows={7}
-              placeholder="Paste or write HTML."
-              value={publicPrefs.storyHtml}
-              onChange={(e) => setPublicPrefs({ ...publicPrefs, storyHtml: e.target.value })}
-            />
-          ) : (
-            <div
-              className="apo-value"
-              dangerouslySetInnerHTML={{ __html: (publicPrefs.storyHtml || LEGACY_UNKNOWN_TEXT) }}
-            />
-          )}
-        </div>
-
-        <div className="apo-actions">
-          <button className="apo-btn primary" onClick={saveVaultPrefs}>Save Vault Preferences</button>
-        </div>
-
-        <div className="vp-title">Public Preview</div>
-        <div className="vp-card">
-          <div className="vp-name">
-            {publicPrefs.namePublicEnabled
-              ? (publicPrefs.displayName || editableData?.customer?.name || '—')
-              : 'Anonymous Legend'}
+        {openSections.openCheckpoints && (
+          <div className="apo-section-body">
+            {totalOpenTasks === 0 ? (
+              <p className="apo-hint">All checklist items are complete.</p>
+            ) : (
+              <div className="apo-open-groups">
+                {Object.entries(openCheckpointsByStep).map(
+                  ([stepLabel, items]) => (
+                    <div key={stepLabel} className="apo-open-group">
+                      <div className="apo-open-group-header">
+                        <span className="apo-open-step">
+                          {stepLabel}{' '}
+                          <span className="apo-open-count">
+                            ({items.length})
+                          </span>
+                        </span>
+                      </div>
+                      <ul className="apo-open-list">
+                        {items.map((it) => (
+                          <li key={it.id} className="apo-open-item">
+                            <span className="apo-open-task">{it.task}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )
+                )}
+              </div>
+            )}
           </div>
-          <div
-            className="vp-story"
-            dangerouslySetInnerHTML={{
-              __html: publicPrefs.storyPublicEnabled
-                ? (publicPrefs.storyHtml || LEGACY_UNKNOWN_TEXT)
-                : LEGACY_PRIVATE_TEXT,
-            }}
-          />
-        </div>
+        )}
       </div>
 
-      {/* -------- Customer info -------- */}
-      <div className="apo-card">
-        <h4 className="apo-h4">Customer Info</h4>
-        <div className="apo-row"><label className="apo-label">Customer Name:</label><span className="apo-value">{editableData?.customer?.name || 'N/A'}</span></div>
-        <div className="apo-row"><label className="apo-label">Email:</label><span className="apo-value">{editableData?.customer?.email || 'N/A'}</span></div>
-        <div className="apo-row"><label className="apo-label">Phone:</label><span className="apo-value">{editableData?.customer?.phone || 'N/A'}</span></div>
-        <div className="apo-row"><label className="apo-label">Street:</label><span className="apo-value">{editableData?.customer?.address?.street || 'N/A'}</span></div>
-        <div className="apo-row"><label className="apo-label">City:</label><span className="apo-value">{editableData?.customer?.address?.city || 'N/A'}</span></div>
-        <div className="apo-row"><label className="apo-label">State:</label><span className="apo-value">{editableData?.customer?.address?.state || 'N/A'}</span></div>
-        <div className="apo-row"><label className="apo-label">Zip Code:</label><span className="apo-value">{editableData?.customer?.address?.zip || 'N/A'}</span></div>
+      {/* ======================================================
+          3) CUSTOMER DETAILS
+         ====================================================== */}
+      <div
+        className={`apo-card apo-section ${
+          openSections.customer ? 'open' : 'collapsed'
+        }`}
+      >
+        <button
+          type="button"
+          className="apo-section-header"
+          onClick={() => toggleSection('customer')}
+        >
+          <div className="apo-section-header-main">
+            <span className="apo-section-title">Customer Details</span>
+            <span className="apo-section-subtitle">
+              Contact + shipping information
+            </span>
+          </div>
+          <div className="apo-section-header-meta">
+            <span className="apo-section-summary">
+              {editableData?.customer?.name ||
+                editableData?.customerName ||
+                'No name on file'}
+            </span>
+            <button
+              type="button"
+              className="apo-section-edit-btn"
+              onClick={(e) => {
+                e.stopPropagation();
+                isEditing ? onSave() : onEditToggle();
+              }}
+            >
+              {isEditing ? 'Save' : 'Edit section'}
+            </button>
+            <span
+              className={`apo-section-chevron ${
+                openSections.customer ? 'open' : ''
+              }`}
+            >
+              ▾
+            </span>
+          </div>
+        </button>
+
+        {openSections.customer && (
+          <div className="apo-section-body">
+            <div className="apo-row">
+              <label className="apo-label">Customer Name</label>
+              {isEditing ? (
+                <input
+                  className="apo-input"
+                  type="text"
+                  value={
+                    editableData?.customer?.name ||
+                    editableData?.customerName ||
+                    ''
+                  }
+                  onChange={(e) =>
+                    handleChange('customer.name', e.target.value)
+                  }
+                />
+              ) : (
+                <span className="apo-value">
+                  {editableData?.customer?.name ||
+                    editableData?.customerName ||
+                    'N/A'}
+                </span>
+              )}
+            </div>
+
+            <div className="apo-row">
+              <label className="apo-label">Email</label>
+              {isEditing ? (
+                <input
+                  className="apo-input"
+                  type="email"
+                  value={editableData?.customer?.email || ''}
+                  onChange={(e) =>
+                    handleChange('customer.email', e.target.value)
+                  }
+                />
+              ) : (
+                <span className="apo-value">
+                  {editableData?.customer?.email || 'N/A'}
+                </span>
+              )}
+            </div>
+
+            <div className="apo-row">
+              <label className="apo-label">Phone</label>
+              {isEditing ? (
+                <input
+                  className="apo-input"
+                  type="tel"
+                  value={editableData?.customer?.phone || ''}
+                  onChange={(e) =>
+                    handleChange('customer.phone', e.target.value)
+                  }
+                />
+              ) : (
+                <span className="apo-value">
+                  {editableData?.customer?.phone || 'N/A'}
+                </span>
+              )}
+            </div>
+
+            <div className="apo-row">
+              <label className="apo-label">Street</label>
+              {isEditing ? (
+                <input
+                  className="apo-input"
+                  type="text"
+                  value={editableData?.customer?.address?.street || ''}
+                  onChange={(e) =>
+                    handleChange('customer.address.street', e.target.value)
+                  }
+                />
+              ) : (
+                <span className="apo-value">
+                  {editableData?.customer?.address?.street || 'N/A'}
+                </span>
+              )}
+            </div>
+
+            <div className="apo-row">
+              <label className="apo-label">City</label>
+              {isEditing ? (
+                <input
+                  className="apo-input"
+                  type="text"
+                  value={editableData?.customer?.address?.city || ''}
+                  onChange={(e) =>
+                    handleChange('customer.address.city', e.target.value)
+                  }
+                />
+              ) : (
+                <span className="apo-value">
+                  {editableData?.customer?.address?.city || 'N/A'}
+                </span>
+              )}
+            </div>
+
+            <div className="apo-row">
+              <label className="apo-label">State</label>
+              {isEditing ? (
+                <input
+                  className="apo-input"
+                  type="text"
+                  value={editableData?.customer?.address?.state || ''}
+                  onChange={(e) =>
+                    handleChange('customer.address.state', e.target.value)
+                  }
+                />
+              ) : (
+                <span className="apo-value">
+                  {editableData?.customer?.address?.state || 'N/A'}
+                </span>
+              )}
+            </div>
+
+            <div className="apo-row">
+              <label className="apo-label">Zip Code</label>
+              {isEditing ? (
+                <input
+                  className="apo-input"
+                  type="text"
+                  value={editableData?.customer?.address?.zip || ''}
+                  onChange={(e) =>
+                    handleChange('customer.address.zip', e.target.value)
+                  }
+                />
+              ) : (
+                <span className="apo-value">
+                  {editableData?.customer?.address?.zip || 'N/A'}
+                </span>
+              )}
+            </div>
+
+            <div className="apo-row">
+              <label className="apo-label">Target Completion</label>
+              {isEditing ? (
+                <input
+                  className="apo-input"
+                  type="date"
+                  value={getDateInputValue(editableData?.targetCompletion)}
+                  onChange={(e) =>
+                    handleChange('targetCompletion', e.target.value)
+                  }
+                />
+              ) : (
+                <span className="apo-value">
+                  {formatDate(editableData?.targetCompletion)}
+                </span>
+              )}
+            </div>
+
+            <div className="apo-row">
+              <label className="apo-label">Shipping Tracking #</label>
+              {isEditing ? (
+                <input
+                  className="apo-input apo-input-mono"
+                  type="text"
+                  value={editableData?.shipping?.trackingNumber || ''}
+                  onChange={(e) =>
+                    handleChange(
+                      'shipping.trackingNumber',
+                      e.target.value
+                    )
+                  }
+                />
+              ) : trackingUrl ? (
+                <a
+                  href={trackingUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="apo-link apo-mono"
+                >
+                  {editableData?.shipping?.trackingNumber}
+                </a>
+              ) : (
+                <span className="apo-value">
+                  {editableData?.shipping?.trackingNumber || 'N/A'}
+                </span>
+              )}
+            </div>
+          </div>
+        )}
       </div>
 
-      {/* -------- Drum build (unchanged fields condensed) -------- */}
-      <div className="apo-card">
-        <h4 className="apo-h4">Drum Build Details</h4>
+      {/* ======================================================
+          4) VAULT SETTINGS
+         ====================================================== */}
+      <div
+        className={`apo-card apo-section ${
+          openSections.vault ? 'open' : 'collapsed'
+        }`}
+      >
+        <button
+          type="button"
+          className="apo-section-header"
+          onClick={() => toggleSection('vault')}
+        >
+          <div className="apo-section-header-main">
+            <span className="apo-section-title">Legacy Vault Settings</span>
+            <span className="apo-section-subtitle">
+              Public name, story, and preview
+            </span>
+          </div>
+          <div className="apo-section-header-meta">
+            <span className="apo-section-summary">
+              {publicPrefs.namePublicEnabled || publicPrefs.storyPublicEnabled
+                ? 'Partially public'
+                : 'Private by default'}
+            </span>
+            <span
+              className={`apo-section-chevron ${
+                openSections.vault ? 'open' : ''
+              }`}
+            >
+              ▾
+            </span>
+          </div>
+        </button>
 
-        <div className="apo-row">
-          <label className="apo-label">Line Serial (e.g., SL-001):</label>
-          {isEditing
-            ? <input className="apo-input apo-input-mono" value={editableData?.lineSerial || ''} onChange={(e)=>handleChange('lineSerial', e.target.value)} />
-            : <span className="apo-value apo-mono">{editableData?.lineSerial || '—'}</span>}
-        </div>
+        {openSections.vault && (
+          <div className="apo-section-body">
+            <div className="apo-row">
+              <label className="apo-label" htmlFor="toggle-name">
+                Display name publicly
+              </label>
+              <div className="apo-field">
+                <Toggle
+                  id="toggle-name"
+                  checked={publicPrefs.namePublicEnabled}
+                  onChange={(v) =>
+                    setPublicPrefs({
+                      ...publicPrefs,
+                      namePublicEnabled: v,
+                    })
+                  }
+                />
+                <span className="apo-hint">
+                  If off, Vault will show{' '}
+                  <strong>Anonymous Legend</strong>.
+                </span>
+              </div>
+            </div>
 
-        <div className="apo-row">
-          <label className="apo-label">Global Serial (overall build #):</label>
-          {isEditing
-            ? <input className="apo-input apo-input-mono" value={editableData?.globalSerial || ''} onChange={(e)=>handleChange('globalSerial', e.target.value)} />
-            : <span className="apo-value apo-mono">{editableData?.globalSerial || '—'}</span>}
-        </div>
+            <div className="apo-row">
+              <label className="apo-label">Public Name</label>
+              {isEditing ? (
+                <input
+                  className="apo-input"
+                  type="text"
+                  placeholder="Leave blank to use account name"
+                  value={publicPrefs.displayName}
+                  onChange={(e) =>
+                    setPublicPrefs({
+                      ...publicPrefs,
+                      displayName: e.target.value,
+                    })
+                  }
+                />
+              ) : (
+                <span className="apo-value">
+                  {publicPrefs.displayName ||
+                    editableData?.customer?.name ||
+                    '—'}
+                </span>
+              )}
+            </div>
 
-        <div className="apo-row">
-          <label className="apo-label">Start Date:</label>
-          {isEditing
-            ? <input className="apo-input" type="date" value={getDateInputValue(editableData?.startDate)} onChange={(e)=>handleChange('startDate', e.target.value)} />
-            : <span className="apo-value">{formatDate(editableData?.startDate)}</span>}
-        </div>
+            <hr className="apo-sep" />
 
-        <div className="apo-row">
-          <label className="apo-label">Target Completion:</label>
-          {isEditing
-            ? <input className="apo-input" type="date" value={getDateInputValue(editableData?.targetCompletion)} onChange={(e)=>handleChange('targetCompletion', e.target.value)} />
-            : <span className="apo-value">{formatDate(editableData?.targetCompletion)}</span>}
-        </div>
+            <div className="apo-row">
+              <label className="apo-label" htmlFor="toggle-story">
+                Display story publicly
+              </label>
+              <div className="apo-field">
+                <Toggle
+                  id="toggle-story"
+                  checked={publicPrefs.storyPublicEnabled}
+                  onChange={(v) =>
+                    setPublicPrefs({
+                      ...publicPrefs,
+                      storyPublicEnabled: v,
+                    })
+                  }
+                />
+                <span className="apo-hint">
+                  If off, Vault will show{' '}
+                  <strong>Legacy is set to Private</strong>.
+                </span>
+              </div>
+            </div>
 
-        <div className="apo-row">
-          <label className="apo-label">Actual Completion:</label>
-          {isEditing
-            ? <input className="apo-input" type="date" value={getDateInputValue(editableData?.actualCompletion)} onChange={(e)=>handleChange('actualCompletion', e.target.value)} />
-            : <span className="apo-value">{formatDate(editableData?.actualCompletion)}</span>}
-        </div>
+            <div className="apo-row apo-row-textarea">
+              <label className="apo-label">Story HTML</label>
+              {isEditing ? (
+                <textarea
+                  className="apo-input"
+                  rows={7}
+                  placeholder="Paste or write HTML shown in the Legacy Vault."
+                  value={publicPrefs.storyHtml}
+                  onChange={(e) =>
+                    setPublicPrefs({
+                      ...publicPrefs,
+                      storyHtml: e.target.value,
+                    })
+                  }
+                />
+              ) : (
+                <div
+                  className="apo-value"
+                  dangerouslySetInnerHTML={{
+                    __html:
+                      publicPrefs.storyHtml || LEGACY_UNKNOWN_TEXT,
+                  }}
+                />
+              )}
+            </div>
+
+            <div className="apo-actions-inline">
+              <button
+                className="apo-btn primary"
+                type="button"
+                onClick={saveVaultPrefs}
+              >
+                Save Vault Preferences
+              </button>
+            </div>
+
+            <div className="vp-title">Public Preview</div>
+            <div className="vp-card">
+              <div className="vp-name">{previewName}</div>
+              <div
+                className="vp-story"
+                dangerouslySetInnerHTML={{
+                  __html: previewStoryHtml,
+                }}
+              />
+            </div>
+          </div>
+        )}
       </div>
 
-      {/* -------- Shipping -------- */}
+      {/* ======================================================
+          ATTACHMENTS
+         ====================================================== */}
       <div className="apo-card">
-        <h4 className="apo-h4">Shipping Details</h4>
-
-        <div className="apo-row">
-          <label className="apo-label">Ship Date:</label>
-          {isEditing
-            ? <input className="apo-input" type="date" value={getDateInputValue(editableData?.shipping?.shipDate)} onChange={(e)=>handleChange('shipping.shipDate', e.target.value)} />
-            : <span className="apo-value">{formatDate(editableData?.shipping?.shipDate)}</span>}
-        </div>
-
-        <div className="apo-row">
-          <label className="apo-label">Delivery Date:</label>
-          {isEditing
-            ? <input className="apo-input" type="date" value={getDateInputValue(editableData?.shipping?.deliveryDate)} onChange={(e)=>handleChange('shipping.deliveryDate', e.target.value)} />
-            : <span className="apo-value">{formatDate(editableData?.shipping?.deliveryDate)}</span>}
-        </div>
-
-        <div className="apo-row">
-          <label className="apo-label">Tracking Number:</label>
-          {isEditing ? (
-            <input
-              className="apo-input apo-input-mono"
-              type="text"
-              placeholder="e.g., 1Z999AA10123456784"
-              value={editableData?.shipping?.trackingNumber || ''}
-              onChange={(e) => handleChange('shipping.trackingNumber', e.target.value)}
-            />
-          ) : editableData?.shipping?.trackingNumber ? (
-            <a className="apo-link apo-mono" href={trackingUrl} target="_blank" rel="noopener noreferrer">
-              {editableData.shipping.trackingNumber}
-            </a>
-          ) : (
-            <span className="apo-value">N/A</span>
-          )}
-        </div>
-      </div>
-
-      {/* -------- Uploads -------- */}
-      <div className="apo-card">
-        <h4 className="apo-h4">Upload Files</h4>
+        <h4 className="apo-h4">Attachments</h4>
 
         <div
           className={`apo-dropzone ${dragging ? 'drag' : ''}`}
-          onDrop={(e) => handleDrop(e)}
-          onDragOver={(e) => e.preventDefault()}
-          onDragEnter={() => setDragging(true)}
-          onDragLeave={() => setDragging(false)}
+          onDragOver={(e) => {
+            e.preventDefault();
+            setDragging(true);
+          }}
+          onDragLeave={(e) => {
+            e.preventDefault();
+            setDragging(false);
+          }}
+          onDrop={handleDrop}
         >
-          <div className="apo-manual-upload">
-            <label htmlFor="manual-file-input" className="apo-label">Or choose files:</label>
-            <input
-              id="manual-file-input"
-              type="file"
-              multiple
-              onChange={(e) => {
-                const dt = new DataTransfer();
-                Array.from(e.target.files).forEach((f) => dt.items.add(f));
-                handleDrop({ dataTransfer: dt, preventDefault: () => {} });
-              }}
-            />
-          </div>
-          <p className="apo-hint">Drag & drop files here (PDF, audio, images, video)</p>
-          {uploading && <p className="apo-progress">Uploading... {uploadProgress}%</p>}
+          <div>Drop files here to upload (defaults to “Other / Uncategorized” &amp; hidden).</div>
+          {uploading && (
+            <div className="apo-progress">
+              Uploading… {uploadProgress}%
+            </div>
+          )}
         </div>
 
-        {Object.entries(groupedFiles).map(([sectionKey, fileArray]) =>
-          fileArray?.length > 0 ? (
-            <div key={sectionKey}>
-              <h4 className="apo-h4">{sectionKey.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())}</h4>
-              <div className="file-preview-grid">
-                {fileArray.map((file, i) => {
-                  const url = file?.url || (typeof file === 'string' ? file : '');
-                  const hidden = file.hidden ?? true;
-                  const category = file.category || sectionKey || 'other';
+<div className="file-preview-grid">
+  {Object.entries(normalizedFiles).map(([bucket, files]) =>
+    files.map((file, idx) => {
+      const displayCategory = file.category || bucket;
 
-                  const filename = decodeURIComponent(
-                    url.split('/').pop().split('?')[0].split('%2F').pop()
-                  );
-                  const fileType = (filename.split('.').pop() || '').toLowerCase();
-                  const isImage = ['jpg','jpeg','png','gif','webp'].includes(fileType);
-                  const isPDF   = fileType === 'pdf';
-                  const isAudio = ['mp3','wav','ogg'].includes(fileType);
-                  const isVideo = ['mp4','webm','mov'].includes(fileType);
+      return (
+        <div
+          key={`${bucket}-${idx}`}
+          className="file-preview-item"
+        >
+          <button
+            type="button"
+            className="file-preview-inner"
+            onClick={() => {
+              setModalPreview(file);
+              setIsPreviewLoaded(false);
+            }}
+          >
+            {/* basic type sniff */}
+            {file.url?.match(/\.mp4|\.mov|\.webm/i) ? (
+              <video
+                className="file-preview-video"
+                src={file.url}
+              />
+            ) : file.url?.match(/\.mp3|\.wav|\.m4a/i) ? (
+              <audio
+                className="file-preview-audio"
+                src={file.url}
+                controls
+              />
+            ) : file.url?.match(/\.pdf/i) ? (
+              <div className="file-preview-image file-preview-pdf">
+                PDF Preview
+              </div>
+            ) : (
+              <img
+                src={file.url}
+                alt={displayCategory}
+                className="file-preview-image"
+              />
+            )}
+            <div className="file-name">{displayCategory}</div>
+          </button>
 
-                  const updateFile = (updates) => {
-                    const updatedFile = { ...file, ...updates };
-                    const updatedArray = [...fileArray];
-                    updatedArray[i] = updatedFile;
+          <div className="file-actions">
+            <label>
+              Category
+              <select
+                value={displayCategory}
+                onChange={(e) => {
+                  const nextCat = e.target.value;
 
-                    const updatedAll = { ...groupedFiles, [sectionKey]: updatedArray };
-
-                    // flatten back to Firestore-friendly structure
-                    const flattened = Object.values(updatedAll).flat();
-                    const groupedForFirestore = {};
-                    flattened.forEach((f) => {
-                      const cat = f.category || 'other';
-                      if (!groupedForFirestore[cat]) groupedForFirestore[cat] = [];
-                      groupedForFirestore[cat].push(f);
-                    });
-
-                    setUploadedFiles(groupedForFirestore);
-
-                    if (editableData?.id) {
-                      updateDoc(doc(db, 'projects', editableData.id), {
-                        attachments: groupedForFirestore,
-                      }).catch((err) => console.error('❌ Firestore update failed:', err));
-                    }
+                  const currentArr = normalizedFiles[bucket] || [];
+                  const cloned = [...currentArr];
+                  cloned[idx] = {
+                    ...cloned[idx],
+                    category: nextCat,
                   };
 
-                  return (
-                    <div key={i} className="file-preview-item">
-                      <div
-                        className="file-preview-inner"
-                        style={{ cursor: 'pointer' }}
-                        onClick={() => {
-                          setIsPreviewLoaded(false);
-                          const ext = fileType;
-                          setModalPreview({ url, ext });
-                        }}
-                      >
-                        {isImage && <img src={url} alt="Preview" className="file-preview-image" />}
-                        {isPDF && <iframe src={url} className="file-preview-pdf" title={`pdf-${i}`} />}
-                        {isAudio && <audio controls className="file-preview-audio"><source src={url} /></audio>}
-                        {isVideo && <video muted autoPlay loop className="file-preview-video" title={`video-${i}`}><source src={url} /></video>}
-                        {!isImage && !isPDF && !isAudio && !isVideo && <p className="file-name">{filename}</p>}
-                      </div>
+                  const updatedAll = {
+                    ...uploadedFiles,
+                    [bucket]: cloned,
+                  };
+                  setUploadedFiles(updatedAll);
 
-                      <div className="file-actions">
-                        <label>
-                          Sub-Category:
-                          <select
-                            value={category}
-                            onChange={(e) => updateFile({ category: e.target.value })}
-                          >
-                            {fileCategories.map((cat) => (
-                              <option key={cat} value={cat.replace(/\s+/g, '_').toLowerCase()}>
-                                {cat}
-                              </option>
-                            ))}
-                          </select>
-                        </label>
-                        <label style={{ marginLeft: '1rem' }}>
-                          <input
-                            type="checkbox"
-                            checked={!hidden}
-                            onChange={(e) => updateFile({ hidden: !e.target.checked })}
-                          />
-                          Visible to Customer
-                        </label>
-                        <button className="delete-file-btn" onClick={() => handleDeleteFile(sectionKey, i)}>
-                          Delete
-                        </button>
-                      </div>
-                    </div>
+                  updateDoc(doc(db, 'projects', editableData.id), {
+                    [`attachments.${bucket}`]: cloned,
+                  }).catch((err) =>
+                    console.error('❌ Failed to update file category:', err)
                   );
-                })}
-              </div>
-            </div>
-          ) : null
-        )}
+                }}
+              >
+                {fileCategories.map((c) => (
+                  <option key={c} value={c}>
+                    {c}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label>
+              Visible to customer
+              <input
+                type="checkbox"
+                checked={!file.hidden}
+                onChange={(e) => {
+                  const visible = e.target.checked;
+                  const currentArr = normalizedFiles[bucket] || [];
+                  const cloned = [...currentArr];
+                  cloned[idx] = {
+                    ...cloned[idx],
+                    hidden: !visible,
+                  };
+
+                  const updatedAll = {
+                    ...uploadedFiles,
+                    [bucket]: cloned,
+                  };
+                  setUploadedFiles(updatedAll);
+
+                  updateDoc(doc(db, 'projects', editableData.id), {
+                    [`attachments.${bucket}`]: cloned,
+                  }).catch((err) =>
+                    console.error('❌ Failed to update hidden flag:', err)
+                  );
+                }}
+              />
+            </label>
+
+            <button
+              type="button"
+              className="delete-file-btn"
+              onClick={() => handleDeleteFile(bucket, idx)}
+            >
+              Delete file
+            </button>
+          </div>
+        </div>
+      );
+    })
+  )}
+</div>
       </div>
 
+      {/* ---------- Preview modal ---------- */}
       {modalPreview && (
-        <div className="file-preview-modal" onClick={() => setModalPreview(null)}>
-          <div className="file-preview-modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close-button" onClick={() => setModalPreview(null)}>✕</button>
-            <a href={modalPreview.url} download target="_blank" rel="noopener noreferrer" className="modal-download-button">⬇ Download</a>
-            {!isPreviewLoaded && <div className="preview-loading-spinner">Loading...</div>}
-            {modalPreview.ext === 'pdf' ? (
-              <iframe
+        <div className="file-preview-modal">
+          <div className="file-preview-modal-content">
+            <button
+              className="modal-close-button"
+              onClick={() => setModalPreview(null)}
+            >
+              Close
+            </button>
+            <a
+              className="modal-download-button"
+              href={modalPreview.url}
+              download
+            >
+              Download
+            </a>
+
+            {!isPreviewLoaded && (
+              <div className="preview-loading-spinner">
+                Loading preview…
+              </div>
+            )}
+
+            {modalPreview.url?.match(/\.mp4|\.mov|\.webm/i) ? (
+              <video
+                className="file-preview-video"
                 src={modalPreview.url}
-                title="PDF Preview"
+                controls
+                onLoadedData={() => setIsPreviewLoaded(true)}
+              />
+            ) : modalPreview.url?.match(/\.mp3|\.wav|\.m4a/i) ? (
+              <audio
+                className="file-preview-audio"
+                src={modalPreview.url}
+                controls
+                onLoadedData={() => setIsPreviewLoaded(true)}
+              />
+            ) : modalPreview.url?.match(/\.pdf/i) ? (
+              <iframe
+                title="PDF preview"
                 className="file-preview-pdf"
-                style={{ visibility: isPreviewLoaded ? 'visible' : 'hidden', opacity: isPreviewLoaded ? 1 : 0, transition: 'opacity 0.4s ease' }}
+                src={modalPreview.url}
                 onLoad={() => setIsPreviewLoaded(true)}
               />
-            ) : ['mp4','webm','mov'].includes(modalPreview.ext) ? (
-              <video
-                controls
-                autoPlay
-                loop
-                className="file-preview-video"
-                style={{ visibility: isPreviewLoaded ? 'visible' : 'hidden', opacity: isPreviewLoaded ? 1 : 0, transition: 'opacity 0.4s ease' }}
-                onLoadedData={() => setIsPreviewLoaded(true)}
-              >
-                <source src={modalPreview.url} />
-              </video>
-            ) : ['mp3','wav','ogg'].includes(modalPreview.ext) ? (
-              <audio
-                controls
-                className="file-preview-audio"
-                style={{ visibility: isPreviewLoaded ? 'visible' : 'hidden', opacity: isPreviewLoaded ? 1 : 0, transition: 'opacity 0.4s ease' }}
-                onLoadedData={() => setIsPreviewLoaded(true)}
-              >
-                <source src={modalPreview.url} />
-              </audio>
             ) : (
               <img
                 src={modalPreview.url}
-                alt="Preview"
+                alt="Attachment preview"
                 className="file-preview-image"
-                style={{ visibility: isPreviewLoaded ? 'visible' : 'hidden', opacity: isPreviewLoaded ? 1 : 0, transition: 'opacity 0.4s ease' }}
                 onLoad={() => setIsPreviewLoaded(true)}
               />
             )}

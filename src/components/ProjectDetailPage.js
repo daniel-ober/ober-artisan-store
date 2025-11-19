@@ -201,131 +201,416 @@ const ProjectDetailPage = () => {
   };
 
   const STEP_EDU = {
+    /*
+     * STEP 1 — WOOD PREPARATION
+     * Maps to master process:
+     * 1.1 Initial Consultation
+     * 1.2 Build Proposal
+     * 1.3 Payment Processing
+     * 1.4 Portal Access Setup
+     * 1.5 Wood Selection
+     * 1.6 Early Mockups
+     * 1.7 Pre-Build Measuring & Prep
+     */
     woodPreparation: {
       title: 'Wood Preparation',
-      what: 'Select boards, moisture-check, joint/plane flat/square, acclimate to shop RH.',
-      why: 'Flat, dry, oriented wood prevents warping and sets the drum’s voice.',
+      what: 'Everything that happens before the first cut: consultation, written build proposal, payment, portal setup, wood selection, early mockups, and pre-build measurements so the shell is engineered on paper before it’s built in wood.',
+      why: 'A drum that feels “meant for you” starts here. Getting size, ergonomics, tuning goals, finish direction, and budget correct on day one prevents painful surprises later and lets every downstream step support your voice.',
       techniques: [
-        'Moisture normalization',
-        'Grain matching',
-        'Face/edge jointing',
+        'Artist consultation & goal mapping',
+        'Build spec & proposal drafting',
+        'SoundLegend portal + dashboard setup',
+        'Board selection & moisture testing',
+        'Early veneer / finish mockups',
+        'Pre-build dimensional planning',
       ],
       tools: ['Moisture meter', 'Jointer & planer', 'Calipers', 'Clamps'],
       qc: [
-        'Moisture 6–9%',
-        'Faces flat & parallel',
-        'Grain orientation marked',
+        'Genres, feel, and tonal goals captured',
+        'Ergonomic needs (arthritis, fatigue, stick choice) noted',
+        'Diameter & depth agreed and logged',
+        'LegacyPrint tuning window defined',
+        'Budget & turnaround confirmed',
+        'Boards selected, MC% in target range',
+        'Mockups / finish direction approved',
       ],
-      risks: ['Hidden tension → cupping', 'Mismatched moisture → creep'],
-      time: hours(3, 8),
-      value: 'Stable wood = stable tone.',
+      risks: [
+        'Unclear goals → wrong shell or tuning window',
+        'Incorrect diameter/depth → ergonomic issues',
+        'Poor wood selection → movement or instability later',
+        'Portal not set up → poor communication down the line',
+      ],
+      time: hours(3, 10),
+      value:
+        'You’re not buying a stock drum — you’re commissioning a tailored instrument. This step makes sure the build, sound, and look are all aimed at you before tools ever touch wood.',
     },
+
+    /*
+     * STEP 2 — SHELL CONSTRUCTION
+     * Maps to master process:
+     * 2.1 Cut Stave Blocks to Size
+     * 2.2 Cut Stave Bevels
+     * 2.3 Pre-Glue Test
+     * 2.4 Glue-Up & Clamping
+     * 2.5 Glue Curing
+     */
     shellConstruction: {
       title: 'Shell Construction',
-      what: 'Cut/bevel/clamp staves (or prep hybrid/steam-bent). True to diameter & roundness.',
-      why: 'Round, consistent shells project and tune evenly.',
-      techniques: ['Stave beveling', 'Form clamping', 'Roundness trueing'],
-      tools: ['Table saw + bevel sled', 'Clamping forms', 'Dial calipers'],
-      qc: ['Seam integrity', 'OOR < ±0.5 mm', 'Diameter matches spec'],
-      risks: ['Gluing misalignment', 'Ovalization during clamp'],
+      what: 'Cut stave blocks to size, establish bevels, dry-fit, glue, clamp, and cure the raw shell into a single, stable body that will become your drum.',
+      why: 'If the shell isn’t structurally perfect, nothing downstream can truly fix it. Consistent staves, clean joints, and a stable glue-up are what allow the drum to stay round, tune easily, and last a lifetime.',
+      techniques: [
+        'Block sizing & grain orientation',
+        'Precision bevel cutting',
+        'Dry-fit circle & gap testing',
+        'Timed glue spread & clamp sequence',
+        'Cure-time and joint inspection',
+      ],
+      tools: [
+        'Table saw + bevel sled',
+        'Clamping forms',
+        'Dial calipers',
+        'Clamps',
+      ],
+      qc: [
+        'Blocks uniform in length/width/thickness',
+        'Bevel angles accurate (e.g., 9–10°)',
+        'Dry-fit circle shows minimal gaps',
+        'Glue coverage full, no starved joints',
+        'Post-cure joints visually clean, no cracks',
+        'Shell roundness within target variance',
+      ],
+      risks: [
+        'Incorrect bevel → visible gaps and weak joints',
+        'Uneven clamp pressure → oval or twisted shell',
+        'Rushed cure → joints that fail over time',
+      ],
       time: hours(8, 16),
-      value: 'True, round shells tune easier.',
+      value:
+        'This is where separate pieces of wood become a single voice. Done correctly, the shell feels alive instead of glued together.',
     },
+
+    /*
+     * STEP 3 — FINE TUNING (TRUEING / THICKNESS)
+     * Maps to master process:
+     * 2.6 Exterior Milling Setup
+     * 2.7 Mill Exterior Diameter
+     * 2.8 Outer Bevel Reinforcement
+     * 2.9 Sanding Prep (for Veneer + Interior)
+     * 2.10 Interior Milling Setup
+     * 2.11 Mill Interior Thickness
+     * 2.12 Inner Bevel Reinforcement
+     * 2.13 Sanding Prep (Interior)
+     * 2.14 Original Torch Tune Process
+     */
     fineTuning: {
       title: 'Fine Tuning (Trueing/Thickness)',
-      what: 'True faces, bring thickness to target, smooth interior.',
-      why: 'Consistency yields even resonance & predictable tuning.',
+      what: 'Bring the shell to precise diameter and thickness, reinforce joints with CA, refine interior and exterior surfaces, and perform the signature torch-tuning that wakes up the grain.',
+      why: 'Even tiny variations in thickness and roundness change how a shell breathes. Controlled milling, reinforcement, and the torch process shape how the drum responds, projects, and speaks under the stick.',
       techniques: [
-        'Lathe trueing',
-        'Thickness profiling',
-        'Progressive sanding',
+        'Exterior diameter milling',
+        'Interior thickness profiling',
+        'CA joint reinforcement (inner & outer)',
+        'Progressive sanding inside and out',
+        'Torch tuning to energize the grain',
       ],
-      tools: ['Lathe/drum sander', 'Dial indicator', 'Sanding blocks'],
-      qc: ['Thickness ±0.3 mm', 'Interior free of ridges'],
-      risks: ['Hot spots → dead zones', 'Over-removal'],
+      tools: [
+        'Lathe/drum sander',
+        'Dial indicator',
+        'Sanding blocks',
+        'Router sled',
+        'Inspection lights',
+      ],
+      qc: [
+        'Exterior diameter on spec (e.g., 14.000")',
+        'Roundness within ±0.03"',
+        'Shell thickness consistent top/middle/bottom',
+        'CA reinforcement clean, no buildup ridges',
+        'Interior free of tear-out or grooves',
+        'Torch work even, no burn-through',
+      ],
+      risks: [
+        'Over-milling → thin, fragile shell',
+        'Uneven thickness → dead spots or “wolf” notes',
+        'Poor sanding → micro-ridges that affect head seating',
+        'Aggressive torching → structural damage',
+      ],
       time: hours(4, 10),
-      value: 'Consistent shell = consistent resonance.',
+      value:
+        'This is where the shell becomes predictable and musical — not just round, but tuned in how it responds to every hit.',
     },
+
+    /*
+     * STEP 4 — SHELL EXTERIOR FINISH
+     * Maps to master process:
+     * 2.15 Veneer Application
+     * 2.16 Under-Spray Aesthetic Work
+     * 2.17 Pre-Finish Full Shell Inspection
+     * 2.18 Badge + Logo Work
+     * 2.19 Spray Finishing
+     * 2.20 Full De-gassing of Chemicals
+     */
     shellExteriorFinish: {
       title: 'Exterior Finish',
-      what: 'Veneer/stain/epoxy/clear. Level-sand & polish; honor cure windows.',
-      why: 'Protects shell and shapes attack/sustain & feel.',
-      techniques: ['HVLP spray', 'Level sanding', 'Buff & polish'],
-      tools: ['HVLP sprayer', 'Polishing system', 'Viscosity cups'],
-      qc: ['Even film build', 'No witness lines', 'Gloss/Sheen to spec'],
-      risks: ['Solvent trap → haze', 'Runs & sags'],
+      what: 'Apply veneer, integrate acrylic and torch accents, lock in detailing, install badges, and build up the sprayed finish with proper leveling, cure, and de-gassing.',
+      why: 'Finish isn’t just cosmetics — it protects the shell, shapes attack and sustain, and becomes the surface you feel every time you touch the drum. SoundLegend aesthetics are part of the instrument, not an afterthought.',
+      techniques: [
+        'Veneer wrapping & seam control',
+        'Acrylic stress-line filling',
+        'Torch and CA accent balancing',
+        'Spray-finish film-build management',
+        'Cure and de-gassing cycles',
+      ],
+      tools: [
+        'HVLP sprayer',
+        'Polishing system',
+        'Viscosity cups',
+        'Inspection lights',
+      ],
+      qc: [
+        'Veneer fully adhered, no bubbles or creep',
+        'Seam is clean and visually minimal',
+        'Acrylic fills follow natural stress lines, not random streaks',
+        'No orange peel or solvent trap in finish',
+        'Cure time respected, surface free of tack',
+        'Badges aligned and bonded correctly',
+      ],
+      risks: [
+        'Poor veneer adhesion → bubbles or splits later',
+        'Over-busy detailing → visually noisy, tone-killing CA buildup',
+        'Rushed cure → finish that imprints or hazes',
+      ],
       time: hours(10, 24),
-      value: 'Durable finish, consistent tone.',
+      value:
+        'This is where your drum starts to look like the photos you dreamed about — but with pro-grade protection and longevity baked in.',
     },
+
+    /*
+     * STEP 5 — BEARING EDGES
+     * Maps to master process:
+     * 2.21 Bearing Edges
+     */
     bearingEdges: {
       title: 'Bearing Edges',
-      what: 'Cut profiles to spec; dress, burnish, polish.',
-      why: 'Edge is the head’s contact—attack & articulation start here.',
-      techniques: ['Profile routing', 'Hand dressing', 'Burnishing'],
-      tools: ['Router table & jigs', 'Files', 'Burnish wheels'],
-      qc: ['No flat spots', 'Even apex', 'Silky head glide'],
-      risks: ['Chip-out', 'Uneven apex'],
+      what: 'Cut, refine, and burnish the bearing edges so the head has a perfect, repeatable contact point around the entire shell.',
+      why: 'The edge is where energy transfers from head to shell. A great edge gives you articulate attack, controlled sustain, and heads that seat easily instead of fighting you.',
+      techniques: [
+        'Profile routing (e.g., 45° inner + roundover outer)',
+        'Hand dressing & micro-sanding',
+        'Burnishing for smooth head glide',
+      ],
+      tools: [
+        'Router table & jigs',
+        'Files',
+        'Burnish wheels',
+        'Straightedges',
+      ],
+      qc: [
+        'Edge height consistent all the way around',
+        'No flat spots, chips, or chatter marks',
+        'Head glides smoothly with no snags',
+        'Inner/outer edge balance supports chosen sound',
+      ],
+      risks: [
+        'Uneven edge → tuning dead zones',
+        'Chip-out on veneer or shell',
+        'Harsh, unpolished edge → premature head wear',
+      ],
       time: hours(2, 4),
-      value: 'Your “handshake” with the head.',
+      value:
+        'A perfect shell with bad edges still feels “off.” This step is where tuning stops being a fight and starts feeling intuitive.',
     },
+
+    /*
+     * STEP 6 — SNARE BEDS
+     * Maps to master process:
+     * 2.22 Snare Beds
+     */
     snareBedCutting: {
       title: 'Snare Beds',
-      what: 'Cut/blend beds to target depth/width; verify wire fit.',
-      why: 'Keeps wires crisp & sensitive at all dynamics.',
-      techniques: ['Template routing', 'Feeler gauge tuning', 'Hand blending'],
-      tools: ['Router sled', 'Feeler gauges', 'Blocks & abrasives'],
-      qc: ['Symmetric depth/transition', 'No sharp transitions'],
-      risks: ['Over-deep → choke', 'Misalignment'],
+      what: 'Shape and blend the snare beds so the wires sit exactly where they should, with just enough relief for crisp response at all dynamics.',
+      why: 'Snare beds control wire contact. Done wrong, you get choking, weird buzzes, or dead response. Done right, the drum feels sensitive and controlled from whisper to rimshot.',
+      techniques: [
+        'Template-guided bed routing',
+        'Depth and taper tuning',
+        'Hand blending into the edges',
+      ],
+      tools: [
+        'Router sled',
+        'Feeler gauges',
+        'Blocks & abrasives',
+        'Straightedges',
+      ],
+      qc: [
+        'Bed depth and width to spec',
+        'Left/right symmetry verified',
+        'Transitions smooth, no sudden dips',
+        'Wires sit centered over the beds',
+      ],
+      risks: [
+        'Over-deep beds → choked sound',
+        'Uneven sides → wires never seat correctly',
+        'Sharp transitions → weird overtones',
+      ],
       time: hours(1, 2),
-      value: 'Crisp response, zero choke.',
+      value:
+        'This is the difference between wires that feel finicky and a drum that just “locks in” no matter how you play it.',
     },
+
+    /*
+     * STEP 7 — HARDWARE DRILLING
+     * Maps to master process:
+     * 2.23 Final Sanding (surface prep where needed)
+     * 2.26 Hardware + Head Assembly (layout & hole prep portion)
+     */
     hardwareDrilling: {
       title: 'Hardware Drilling',
-      what: 'Layout, drill, deburr, and seal all holes.',
-      why: 'Prevents micro-cracks; ensures alignment & longevity.',
-      techniques: ['Template layout', 'Step drilling', 'Hole sealing'],
-      tools: ['Drill press + jigs', 'Step bits', 'Layout templates'],
-      qc: ['Spacing verified', 'Edges sealed', 'Hardware test-fit'],
-      risks: ['Exit tear-out', 'Layout drift'],
+      what: 'Lay out, drill, and seal every hardware hole so lugs, throw, butt, and vents all mount cleanly without stressing the shell or finish.',
+      why: 'Hardware holes are stress concentrators. Clean, sealed holes preserve the shell’s strength and keep the finish from cracking over time while ensuring everything lines up perfectly.',
+      techniques: [
+        'Template-based layout',
+        'Step-bit drilling from both sides as needed',
+        'Deburring and sealing hole edges',
+      ],
+      tools: ['Drill press + jigs', 'Step bits', 'Layout templates', 'Files'],
+      qc: [
+        'Lug spacing and alignment verified',
+        'Throw and butt positions square and level',
+        'No tear-out on entry or exit',
+        'Hole edges sealed to prevent moisture intrusion',
+      ],
+      risks: [
+        'Layout drift → crooked hardware',
+        'Tear-out in finish or veneer',
+        'Unsealed holes → micro-cracks and moisture issues later',
+      ],
       time: hours(1, 3),
-      value: 'Rock-solid hardware, no buzzes.',
+      value:
+        'Great hardware is useless if the holes are wrong. This step makes sure everything mounts cleanly and stays silent for years.',
     },
+
+    /*
+     * STEP 8 — HARDWARE ASSEMBLY
+     * Maps to master process:
+     * 2.26 Hardware + Head Assembly (assembly portion)
+     */
     hardwareAssembly: {
       title: 'Hardware Assembly',
-      what: 'Install lugs/hoops/throw/butt/strain; dress contacts; treat threads as needed.',
-      why: 'Removes squeaks/buzzes; stable tuning.',
+      what: 'Install all hardware, heads, and wires with attention to torque, alignment, and feel so everything operates smoothly and quietly.',
+      why: 'A high-end shell deserves hardware that feels as refined as it sounds. Proper assembly prevents rattles, cross-threading, and tuning drift.',
       techniques: [
-        'Torque sequence',
-        'Threadlock (where appropriate)',
-        'Contact dressing',
+        'Torque-sequenced lug installation',
+        'Throw/butt alignment and travel testing',
+        'Hoop parallelism checks',
+        'Thread treatment where appropriate',
       ],
-      tools: ['Torque drivers', 'Soft jaws', 'Thread treatments'],
-      qc: ['Even alignment', 'No rattles', 'Smooth throw'],
-      risks: ['Cross-threading', 'Uneven seating'],
+      tools: [
+        'Torque drivers',
+        'Soft jaws',
+        'Thread treatments',
+        'Tension gauge',
+      ],
+      qc: [
+        'All lugs aligned and seated flush',
+        'Throw action smooth and centered',
+        'Hoops parallel to shell all around',
+        'No rattles or loose fittings',
+      ],
+      risks: [
+        'Cross-threaded inserts',
+        'Misaligned throw causing uneven wire tension',
+        'Hardware noise under microphones',
+      ],
       time: hours(1, 3),
-      value: 'Quiet, aligned hardware that lasts.',
+      value:
+        'This is where your drum starts to feel like a single, intentional machine — not just parts bolted to wood.',
     },
+
+    /*
+     * STEP 9 — TUNING & DETAILING
+     * Maps to master process:
+     * 3.1 Legacy Tuning
+     * 3.2 NTAG Authentication
+     * 3.3 Professional Photos
+     * 3.4 Studio Legacy Audio
+     */
     tuningAndDetailing: {
       title: 'Tuning & Detailing',
-      what: 'Head fit, initial tuning, wire alignment, badge, meticulous clean.',
-      why: 'Turns a shell into an instrument.',
-      techniques: ['Tension mapping', 'Wire centering', 'Final clean'],
-      tools: ['Tension gauge', 'Reference tuner', 'Straightedges'],
-      qc: ['Even lug pitch', 'Responsive wires'],
-      risks: ['Head seating issues', 'Wire chatter'],
-      time: hours(1, 3),
-      value: 'Plays in tune, feels alive.',
+      what: 'Dial in Legacy tuning ranges, capture key frequency data, authenticate the drum with NTAG, and document the build with studio photos and audio.',
+      why: 'You’re not just getting a pretty drum — you’re getting a documented instrument with a known Legacy window, verification tag, and media that shows how it sounds when it leaves the shop.',
+      techniques: [
+        'Lug-by-lug frequency mapping',
+        'LegacyPrint window calibration',
+        'Adjacent-low and adjacent-high tuning passes',
+        'NTAG linking and scan testing',
+        'Photo and audio session capture',
+      ],
+      tools: [
+        'Tension gauge',
+        'Reference tuner',
+        'Reference mic',
+        'Monitors',
+        'Inspection lights',
+      ],
+      qc: [
+        'Hz readings logged at key tunings (lo/Legacy/high)',
+        'No weird buzzes or snare anomalies',
+        'NTAG UID stored and linked in Firestore',
+        'Tag verified by iPhone and Android',
+        'Core photo set and audio takes captured',
+      ],
+      risks: [
+        'Uneven lug tuning → unstable feel',
+        'Tag not linked or mis-linked → failed authentication',
+        'Incomplete media set → poor future reference',
+      ],
+      time: hours(1, 4),
+      value:
+        'This step creates the “paper trail” of your drum — how it was tuned, how it sounded, and how we prove it’s the real thing.',
     },
+
+    /*
+     * STEP 10 — QUALITY CHECK
+     * Maps to master process:
+     * 3.5 Final Cleaning
+     * 3.6 Packaging
+     * 3.7 Delivery Confirmation
+     * 3.8 Followup Cycle
+     * + Final Master QA Checklist
+     */
     qualityCheck: {
       title: 'Quality Check',
-      what: 'Full inspection, documentation, audio clip, and ship prep.',
-      why: 'Ensures it arrives verified & gig-ready.',
-      techniques: ['QC checklist', 'Audio capture', 'Pack & protect'],
-      tools: ['Reference mic', 'Monitors', 'Inspection lights'],
-      qc: ['Fasteners verified', 'No finish defects', 'Audio pass'],
-      risks: ['Transit risk if packaging is wrong'],
-      time: hours(1, 4),
-      value: 'Every SoundLegend leaves verified.',
+      what: 'Run through the full master QA checklist, deep clean, pack, ship, confirm delivery, and schedule follow-ups so the relationship continues after unboxing.',
+      why: 'A SoundLegend drum doesn’t “end” at shipping. Final QA, safe packaging, and intentional follow-up make sure the drum arrives safely and that you feel supported as you live with it.',
+      techniques: [
+        'Multi-category QA sign-off (structure, finish, hardware, sound, aesthetic, vault, packaging, readiness)',
+        'Final cleaning & inspection under studio light',
+        'Purpose-built packing & moisture protection',
+        'Tracking, confirmation, and scheduled follow-ups',
+      ],
+      tools: [
+        'Inspection lights',
+        'Soft cloths & cleaners',
+        'Custom packaging materials',
+        'Project management / reminder system',
+      ],
+      qc: [
+        'Final diameter, depth, and thickness verified',
+        'Roundness and stave joints inspected',
+        'Finish defect-free under hard light',
+        'Hardware alignment, threads, and function checked',
+        'Legacy measurements and media logged',
+        'Vault content linked and validated',
+        'Packaging padded, moisture-safe, and labeled correctly',
+        'Follow-up cadence created (day-after, 10–14, 30 day)',
+      ],
+      risks: [
+        'Shipping damage from improper padding',
+        'Overlooked micro-defects',
+        'Customer left without support post-delivery',
+      ],
+      time: hours(1, 6),
+      value:
+        'This is the signature on the build. When this step is complete, the drum is ready not just to arrive—but to start its life with you the right way.',
     },
   };
 
@@ -392,11 +677,12 @@ const ProjectDetailPage = () => {
           });
           setUploadedFiles(groupedVisible);
 
-          // seed Vault prefs
+          // seed Vault prefs (supports both old + new keys)
           const p = data.publicPrefs || {};
           setPublicPrefs({
-            showName: !!p.showName,
-            showStory: !!p.showStory,
+            // Prefer admin-style keys if present, fall back to older showName/showStory
+            showName: p.showName ?? p.namePublicEnabled ?? false,
+            showStory: p.showStory ?? p.storyPublicEnabled ?? false,
             displayName: p.displayName || '',
             storyHtml: p.storyHtml || '',
           });
@@ -528,7 +814,18 @@ const ProjectDetailPage = () => {
   const savePublicPrefs = async () => {
     if (!project?.id) return;
     try {
-      await updateDoc(doc(db, 'projects', project.id), { publicPrefs });
+      const payload = {
+        // canonical admin-style keys
+        namePublicEnabled: !!publicPrefs.showName,
+        storyPublicEnabled: !!publicPrefs.showStory,
+        displayName: publicPrefs.displayName || '',
+        storyHtml: publicPrefs.storyHtml || '',
+      };
+
+      await updateDoc(doc(db, 'projects', project.id), {
+        publicPrefs: payload,
+      });
+
       alert('Your Vault privacy preferences were saved.');
     } catch (e) {
       console.error('❌ Failed saving publicPrefs', e);
@@ -563,27 +860,27 @@ const ProjectDetailPage = () => {
   };
 
   // --- tiny UI bits for artist portal ---
-const Toggle = ({ checked, onChange, id, disabled }) => (
-  <button
-    id={id}
-    type="button"
-    className={`vp-toggle ${checked ? 'on' : 'off'} ${disabled ? 'disabled' : ''}`}
-    role="switch"
-    aria-checked={checked}
-    onClick={() => !disabled && onChange(!checked)}
-  >
-    <span className="knob" />
-  </button>
-);
-
-const MailLink = ({ label, subject, body }) => {
-  const href = `mailto:soundlegend@oberartisandrums.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  return (
-    <a className="vp-request" href={href}>
-      {label} ↗
-    </a>
+  const Toggle = ({ checked, onChange, id, disabled }) => (
+    <button
+      id={id}
+      type="button"
+      className={`vp-toggle ${checked ? 'on' : 'off'} ${disabled ? 'disabled' : ''}`}
+      role="switch"
+      aria-checked={checked}
+      onClick={() => !disabled && onChange(!checked)}
+    >
+      <span className="knob" />
+    </button>
   );
-};
+
+  const MailLink = ({ label, subject, body }) => {
+    const href = `mailto:soundlegend@oberartisandrums.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    return (
+      <a className="vp-request" href={href}>
+        {label} ↗
+      </a>
+    );
+  };
 
   const renderTinyThumb = (file, i) => {
     const url = typeof file === 'string' ? file : file?.url;
@@ -687,9 +984,12 @@ const MailLink = ({ label, subject, body }) => {
       {!isAdmin && (
         <div className="soundlegend-banner">
           <p>
-            You’re viewing your custom SoundLegend drum build in progress. This page is read-only.
-            Questions? Contact us at{' '}
-            <a href="mailto:soundlegend@oberartisandrums.com">soundlegend@oberartisandrums.com</a>.
+            You’re viewing your custom SoundLegend drum build in progress. This
+            page is read-only. Questions? Contact us at{' '}
+            <a href="mailto:soundlegend@oberartisandrums.com">
+              soundlegend@oberartisandrums.com
+            </a>
+            .
           </p>
         </div>
       )}
@@ -700,35 +1000,55 @@ const MailLink = ({ label, subject, body }) => {
       <section className="project-section">
         <h3>Build Journey</h3>
         <p className="timeline-hint above">
-          Click any <span className="hint-unlocked">unlocked</span> step to learn more.
+          Click any <span className="hint-unlocked">unlocked</span> step to
+          learn more.
         </p>
-        <p><strong>Project Completion:</strong> {pct}%</p>
-        <p><strong>Current Step:</strong> {currentPhase || 'N/A'}</p>
+        <p>
+          <strong>Project Completion:</strong> {pct}%
+        </p>
+        <p>
+          <strong>Current Step:</strong> {currentPhase || 'N/A'}
+        </p>
 
         {/* Progress Bar */}
         <div className="customer-progress-container">
           <div className="customer-progress-track">
-            <div className="customer-progress-fill" style={{ width: `${pct}%` }} />
-            <div className="customer-current-indicator" style={{ left: `${pct}%` }} />
+            <div
+              className="customer-progress-fill"
+              style={{ width: `${pct}%` }}
+            />
+            <div
+              className="customer-current-indicator"
+              style={{ left: `${pct}%` }}
+            />
           </div>
 
           <div className="customer-progress-timeline">
             {Object.entries(stepWeights).map(([key], index) => {
               const step = project[key] || {};
-              const rawList = Array.isArray(step?.checklist) ? step.checklist : [];
+              const rawList = Array.isArray(step?.checklist)
+                ? step.checklist
+                : [];
               const enabled = rawList.filter((i) => i?.enabled !== false);
               const total = enabled.length;
               const completed = enabled.filter((i) => i?.completed).length;
               const isExplicitlyDone = step?.completed === true;
               const isChecklistDone = total > 0 && completed === total;
-              const isDone = isGlobalFinished || isExplicitlyDone || isChecklistDone;
+              const isDone =
+                isGlobalFinished || isExplicitlyDone || isChecklistDone;
 
               let className = '';
               if (isDone) className = 'complete';
-              else if (completed > 0 || step?.inProgress) className = 'in-progress';
+              else if (completed > 0 || step?.inProgress)
+                className = 'in-progress';
 
-              const left = Object.values(stepWeights).slice(0, index).reduce((s, w) => s + w, 0) * 100;
-              const readable = key.replace(/([A-Z])/g, ' $1').replace(/^./, (c) => c.toUpperCase());
+              const left =
+                Object.values(stepWeights)
+                  .slice(0, index)
+                  .reduce((s, w) => s + w, 0) * 100;
+              const readable = key
+                .replace(/([A-Z])/g, ' $1')
+                .replace(/^./, (c) => c.toUpperCase());
               const unlocked = index <= currentIdx || isGlobalFinished;
 
               return (
@@ -740,7 +1060,10 @@ const MailLink = ({ label, subject, body }) => {
                   onClick={() => unlocked && setSelectedStep(key)}
                   role={unlocked ? 'button' : undefined}
                   tabIndex={unlocked ? 0 : -1}
-                  onKeyDown={(e) => { if (unlocked && (e.key === 'Enter' || e.key === ' ')) setSelectedStep(key); }}
+                  onKeyDown={(e) => {
+                    if (unlocked && (e.key === 'Enter' || e.key === ' '))
+                      setSelectedStep(key);
+                  }}
                 >
                   <div className="step-pill">{index + 1}</div>
                 </div>
@@ -754,163 +1077,256 @@ const MailLink = ({ label, subject, body }) => {
           <p className="muted" style={{ marginTop: '12px' }}>
             Select a step above to see what happens there.
           </p>
-        ) : (() => {
-          const meta = STEP_EDU[selectedStep];
-          const i = stepIndex(selectedStep);
-          const unlocked = i <= currentIdx || isGlobalFinished;
-          const active = i === currentIdx && !isGlobalFinished;
-          const complete = i < currentIdx || isGlobalFinished;
+        ) : (
+          (() => {
+            const meta = STEP_EDU[selectedStep];
+            const i = stepIndex(selectedStep);
+            const unlocked = i <= currentIdx || isGlobalFinished;
+            const active = i === currentIdx && !isGlobalFinished;
+            const complete = i < currentIdx || isGlobalFinished;
 
-          const filesForAll = Object.values(uploadedFiles || {}).flat();
-          const visibleFiles = (filesForAll || []).filter((f) => {
-            const cat = (typeof f === 'string' ? '' : f?.category) || '';
-            return (STEP_CATEGORY_MAP[selectedStep] || []).includes(cat);
-          });
+            const filesForAll = Object.values(uploadedFiles || {}).flat();
+            const visibleFiles = (filesForAll || []).filter((f) => {
+              const cat = (typeof f === 'string' ? '' : f?.category) || '';
+              return (STEP_CATEGORY_MAP[selectedStep] || []).includes(cat);
+            });
 
-          return (
-            <article
-              className={[
-                'edu-step',
-                unlocked ? 'unlocked' : 'locked',
-                active ? 'active' : '',
-                complete ? 'complete' : '',
-              ].join(' ')}
-              style={{ marginTop: '14px' }}
-            >
-              <header className="edu-step-head">
-                <div className="edu-header-card">
-                  <div className="edu-badge">{complete ? '✓' : i + 1}</div>
-                  <div className="edu-titles">
-                    <h4>{meta.title}</h4>
-                    <span className="edu-state">
-                      {complete ? 'Completed' : active ? 'In Progress' : 'Locked'}
-                    </span>
-                    <div className="eta-row">
-                      <div className="eta-chip">
-                        <span className="sub">Standard Turnaround</span>
-                        <span className="big">8–10 weeks</span>
-                      </div>
-                      <div className="eta-chip">
-                        <span className="sub">Projected Completion (throughput)</span>
-                        <span className="big">{etaDateRange}</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="edu-metrics">
-                    <div className="metric">
-                      <span className="metric-label">Est. Time (working hours)</span>
-                      <span className="metric-value">{renderHourRange(meta.time)}</span>
-                    </div>
-                  </div>
-                </div>
-              </header>
-
-              {unlocked ? (
-                <div className="edu-body">
-                  <div className="edu-row"><label>What we do</label><p>{meta.what}</p></div>
-                  <div className="edu-row edu-why"><label>Why it matters</label><p>{meta.why}</p></div>
-
-                  <div className="edu-grid">
-                    <div className="edu-col">
-                      <label>Techniques used</label>
-                      <div className="chips">{meta.techniques.map((t) => <span className="chip" key={t}>{t}</span>)}</div>
-                    </div>
-                    <div className="edu-col">
-                      <label>Tools involved</label>
-                      <ul className="tool-list">{meta.tools.map((t) => <ToolItem name={t} key={t} />)}</ul>
-                    </div>
-                  </div>
-
-                  <div className="edu-grid">
-                    <div className="edu-col"><label>QC checklist</label><ul>{meta.qc.map((q) => <li key={q}>{q}</li>)}</ul></div>
-                    <div className="edu-col"><label>Risks & mitigations</label><ul>{meta.risks.map((r) => <li key={r}>{r}</li>)}</ul></div>
-                  </div>
-
-                  <div className="edu-value"><span className="spark">★</span> {meta.value}</div>
-
-                  {/* Dropzone + thumbnails */}
-                  <div className="mini-grid" onDragOver={(e)=>isAdmin && e.preventDefault()}>
-                    {isAdmin && (
-                      <div
-                        className={`step-dropzone ${dragActive ? 'drag' : ''}`}
-                        onDragEnter={()=>setDragActive(true)}
-                        onDragLeave={()=>setDragActive(false)}
-                        onDrop={(e)=>handleStepDrop(e, selectedStep)}
-                      >
-                        Drag & drop media here to add to this step.
-                        <div style={{ marginTop:'6px', fontSize:'.85rem' }}>
-                          Or <label style={{ textDecoration:'underline', cursor:'pointer' }}>
-                            choose files
-                            <input type="file" multiple style={{ display:'none' }} onChange={(e)=>handleStepDrop(e, selectedStep)} />
-                          </label>
+            return (
+              <article
+                className={[
+                  'edu-step',
+                  unlocked ? 'unlocked' : 'locked',
+                  active ? 'active' : '',
+                  complete ? 'complete' : '',
+                ].join(' ')}
+                style={{ marginTop: '14px' }}
+              >
+                <header className="edu-step-head">
+                  <div className="edu-header-card">
+                    <div className="edu-badge">{complete ? '✓' : i + 1}</div>
+                    <div className="edu-titles">
+                      <h4>{meta.title}</h4>
+                      <span className="edu-state">
+                        {complete
+                          ? 'Completed'
+                          : active
+                            ? 'In Progress'
+                            : 'Locked'}
+                      </span>
+                      <div className="eta-row">
+                        <div className="eta-chip">
+                          <span className="sub">Standard Turnaround</span>
+                          <span className="big">8–10 weeks</span>
+                        </div>
+                        <div className="eta-chip">
+                          <span className="sub">
+                            Projected Completion (throughput)
+                          </span>
+                          <span className="big">{etaDateRange}</span>
                         </div>
                       </div>
-                    )}
-                    {visibleFiles.length > 0 ? visibleFiles.map(renderTinyThumb)
-                      : !isAdmin && <div className="edu-no-files">No files for this step yet.</div>}
+                    </div>
+                    <div className="edu-metrics">
+                      <div className="metric">
+                        <span className="metric-label">
+                          Est. Time (working hours)
+                        </span>
+                        <span className="metric-value">
+                          {renderHourRange(meta.time)}
+                        </span>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              ) : (
-                <div className="edu-locked-note">This step unlocks as your build reaches it.</div>
-              )}
-            </article>
-          );
-        })()}
+                </header>
+
+                {unlocked ? (
+                  <div className="edu-body">
+                    <div className="edu-row">
+                      <label>What we do</label>
+                      <p>{meta.what}</p>
+                    </div>
+                    <div className="edu-row edu-why">
+                      <label>Why it matters</label>
+                      <p>{meta.why}</p>
+                    </div>
+
+                    <div className="edu-grid">
+                      <div className="edu-col">
+                        <label>Techniques used</label>
+                        <div className="chips">
+                          {meta.techniques.map((t) => (
+                            <span className="chip" key={t}>
+                              {t}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="edu-col">
+                        <label>Tools involved</label>
+                        <ul className="tool-list">
+                          {meta.tools.map((t) => (
+                            <ToolItem name={t} key={t} />
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div className="edu-grid">
+                      <div className="edu-col">
+                        <label>QC checklist</label>
+                        <ul>
+                          {meta.qc.map((q) => (
+                            <li key={q}>{q}</li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div className="edu-col">
+                        <label>Risks & mitigations</label>
+                        <ul>
+                          {meta.risks.map((r) => (
+                            <li key={r}>{r}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div className="edu-value">
+                      <span className="spark">★</span> {meta.value}
+                    </div>
+
+                    {/* Dropzone + thumbnails */}
+                    <div
+                      className="mini-grid"
+                      onDragOver={(e) => isAdmin && e.preventDefault()}
+                    >
+                      {isAdmin && (
+                        <div
+                          className={`step-dropzone ${dragActive ? 'drag' : ''}`}
+                          onDragEnter={() => setDragActive(true)}
+                          onDragLeave={() => setDragActive(false)}
+                          onDrop={(e) => handleStepDrop(e, selectedStep)}
+                        >
+                          Drag & drop media here to add to this step.
+                          <div style={{ marginTop: '6px', fontSize: '.85rem' }}>
+                            Or{' '}
+                            <label
+                              style={{
+                                textDecoration: 'underline',
+                                cursor: 'pointer',
+                              }}
+                            >
+                              choose files
+                              <input
+                                type="file"
+                                multiple
+                                style={{ display: 'none' }}
+                                onChange={(e) =>
+                                  handleStepDrop(e, selectedStep)
+                                }
+                              />
+                            </label>
+                          </div>
+                        </div>
+                      )}
+                      {visibleFiles.length > 0
+                        ? visibleFiles.map(renderTinyThumb)
+                        : !isAdmin && (
+                            <div className="edu-no-files">
+                              No files for this step yet.
+                            </div>
+                          )}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="edu-locked-note">
+                    This step unlocks as your build reaches it.
+                  </div>
+                )}
+              </article>
+            );
+          })()
+        )}
       </section>
 
       {/* ---------------- Customer Info ---------------- */}
       <section className="project-section">
         <h3>Customer</h3>
-        <p><strong>Name:</strong> {customer?.name || 'N/A'}</p>
-        <p><strong>Phone:</strong> {customer?.phone || 'N/A'}</p>
-        <p><strong>Email:</strong> {customer?.email || 'N/A'}</p>
-        <p><strong>Shipping Address:</strong> {customer?.address
-          ? [customer.address.street, customer.address.city, customer.address.state, customer.address.zip]
-              .filter(Boolean).join(', ')
-          : 'N/A'}</p>
+        <p>
+          <strong>Name:</strong> {customer?.name || 'N/A'}
+        </p>
+        <p>
+          <strong>Phone:</strong> {customer?.phone || 'N/A'}
+        </p>
+        <p>
+          <strong>Email:</strong> {customer?.email || 'N/A'}
+        </p>
+        <p>
+          <strong>Shipping Address:</strong>{' '}
+          {customer?.address
+            ? [
+                customer.address.street,
+                customer.address.city,
+                customer.address.state,
+                customer.address.zip,
+              ]
+                .filter(Boolean)
+                .join(', ')
+            : 'N/A'}
+        </p>
         {!isAdmin && (
           <button
             className="edit-button"
-            onClick={() => window.open('mailto:soundlegend@oberartisandrums.com?subject=Request to update customer info','_blank')}
+            onClick={() =>
+              window.open(
+                'mailto:soundlegend@oberartisandrums.com?subject=Request to update customer info',
+                '_blank'
+              )
+            }
           >
             Request Changes
           </button>
         )}
       </section>
 
-  {/* ---------------- Vault Privacy ---------------- */}
-<section className="project-section">
-  <h3>Vault Privacy</h3>
-  <p className="muted">Choose what appears publicly in the Legacy Vault.</p>
+      {/* ---------------- Vault Privacy ---------------- */}
+      <section className="project-section">
+        <h3>Vault Privacy</h3>
+        <p className="muted">
+          Choose what appears publicly in the Legacy Vault.
+        </p>
 
-  <div className="vault-privacy-grid">
-    {/* NAME VISIBILITY */}
-    <div className="vp-col">
-      <div className="vp-row">
-        <label className="vp-label" htmlFor="vp-toggle-name">Display my name publicly</label>
-        <Toggle
-          id="vp-toggle-name"
-          checked={publicPrefs.showName}
-          onChange={(v) => setPublicPrefs({ ...publicPrefs, showName: v })}
-          disabled={false} // artists can control visibility
-        />
-      </div>
+        <div className="vault-privacy-grid">
+          {/* NAME VISIBILITY */}
+          <div className="vp-col">
+            <div className="vp-row">
+              <label className="vp-label" htmlFor="vp-toggle-name">
+                Display my name publicly
+              </label>
+              <Toggle
+                id="vp-toggle-name"
+                checked={publicPrefs.showName}
+                onChange={(v) =>
+                  setPublicPrefs({ ...publicPrefs, showName: v })
+                }
+                disabled={false} // artists can control visibility
+              />
+            </div>
 
-      <div className="vp-row">
-        <span className="vp-sub">Public Name (optional override)</span>
-        <input
-          className="vp-input"
-          type="text"
-          placeholder="Leave blank to use your account name"
-          value={publicPrefs.displayName}
-          disabled // artist cannot directly edit; they request a change
-          readOnly
-        />
-        <div className="vp-actions-inline">
-          <MailLink
-            label="Request a name change"
-            subject="SoundLegend Vault — Name change request"
-            body={`Hello SoundLegend Team,
+            <div className="vp-row">
+              <span className="vp-sub">Public Name (optional override)</span>
+              <input
+                className="vp-input"
+                type="text"
+                placeholder="Leave blank to use your account name"
+                value={publicPrefs.displayName}
+                disabled // artist cannot directly edit; they request a change
+                readOnly
+              />
+              <div className="vp-actions-inline">
+                <MailLink
+                  label="Request a name change"
+                  subject="SoundLegend Vault — Name change request"
+                  body={`Hello SoundLegend Team,
 
 I'd like to request an update to my public name in the Legacy Vault.
 
@@ -919,41 +1335,45 @@ Current public name: ${computePublicName()}
 
 Requested change:
 `}
-          />
-        </div>
-        <div className="vp-hint">
-          If off, Vault will show <strong>Anonymous Legend</strong>.
-        </div>
-      </div>
-    </div>
+                />
+              </div>
+              <div className="vp-hint">
+                If off, Vault will show <strong>Anonymous Legend</strong>.
+              </div>
+            </div>
+          </div>
 
-    {/* STORY VISIBILITY */}
-    <div className="vp-col">
-      <div className="vp-row">
-        <label className="vp-label" htmlFor="vp-toggle-story">Display my story publicly</label>
-        <Toggle
-          id="vp-toggle-story"
-          checked={publicPrefs.showStory}
-          onChange={(v) => setPublicPrefs({ ...publicPrefs, showStory: v })}
-          disabled={false} // artists can control visibility
-        />
-      </div>
+          {/* STORY VISIBILITY */}
+          <div className="vp-col">
+            <div className="vp-row">
+              <label className="vp-label" htmlFor="vp-toggle-story">
+                Display my story publicly
+              </label>
+              <Toggle
+                id="vp-toggle-story"
+                checked={publicPrefs.showStory}
+                onChange={(v) =>
+                  setPublicPrefs({ ...publicPrefs, showStory: v })
+                }
+                disabled={false} // artists can control visibility
+              />
+            </div>
 
-      <div className="vp-row">
-        <span className="vp-sub">Story HTML (optional override)</span>
-        <textarea
-          className="vp-textarea"
-          placeholder="Story edits are made by our team. Use the button below to request a revision."
-          value={publicPrefs.storyHtml}
-          disabled // artist cannot directly edit; they request a change
-          readOnly
-          rows={6}
-        />
-        <div className="vp-actions-inline">
-          <MailLink
-            label="Request a story revision"
-            subject="SoundLegend Vault — Story/Legacy revision request"
-            body={`Hello SoundLegend Team,
+            <div className="vp-row">
+              <span className="vp-sub">Story HTML (optional override)</span>
+              <textarea
+                className="vp-textarea"
+                placeholder="Story edits are made by our team. Use the button below to request a revision."
+                value={publicPrefs.storyHtml}
+                disabled // artist cannot directly edit; they request a change
+                readOnly
+                rows={6}
+              />
+              <div className="vp-actions-inline">
+                <MailLink
+                  label="Request a story revision"
+                  subject="SoundLegend Vault — Story/Legacy revision request"
+                  body={`Hello SoundLegend Team,
 
 I'd like to request an update to my Legacy story in the Vault.
 
@@ -961,79 +1381,148 @@ Project ID: ${project?.id || ''}
 
 Requested changes (paste or describe edits here):
 `}
-          />
+                />
+              </div>
+              <div className="vp-hint">
+                If off, Vault will show{' '}
+                <strong>Legacy is set to Private.</strong>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="vp-hint">
-          If off, Vault will show <strong>Legacy is set to Private.</strong>
+
+        <div className="vp-actions">
+          <button className="edit-button" onClick={savePublicPrefs}>
+            Save Vault Preferences
+          </button>
         </div>
-      </div>
-    </div>
-  </div>
 
-  <div className="vp-actions">
-    <button className="edit-button" onClick={savePublicPrefs}>Save Vault Preferences</button>
-  </div>
-
-  {/* Preview */}
-  <div className="vp-preview">
-    <div className="vp-preview-title">Public Preview</div>
-    <div className="vp-preview-card">
-      <div className="vp-name">{computePublicName()}</div>
-      <div
-        className="vp-story"
-        dangerouslySetInnerHTML={{ __html: computePublicStoryHtml() }}
-      />
-    </div>
-  </div>
-</section>
+        {/* Preview */}
+        <div className="vp-preview">
+          <div className="vp-preview-title">Public Preview</div>
+          <div className="vp-preview-card">
+            <div className="vp-name">{computePublicName()}</div>
+            <div
+              className="vp-story"
+              dangerouslySetInnerHTML={{ __html: computePublicStoryHtml() }}
+            />
+          </div>
+        </div>
+      </section>
 
       {/* ---------------- Scope of Work ---------------- */}
       <section className="project-section">
         <h3>Scope of Work</h3>
-        <p><strong>Artisan Line:</strong> {project?.artisanLine?.trim() || 'N/A'}</p>
-        <p><strong>Shell Construction:</strong> {project?.shellConstructionName?.trim() || 'N/A'}</p>
-        {['Stave','Hybrid'].includes(project?.shellConstructionName) && <p><strong>Stave Quantity:</strong> {project?.staveCount || 'N/A'}</p>}
-        <p><strong>Diameter:</strong> {project?.width || 'N/A'}</p>
-        <p><strong>Depth:</strong> {project?.shellDepth || 'N/A'}</p>
-        <p><strong>Wood Species:</strong> {project?.woodPrimary?.trim() || 'N/A'}</p>
-        <p><strong>Target Shell Thickness:</strong> {project?.targetShellThickness ? `${project.targetShellThickness} mm` : 'N/A'}</p>
-        <p><strong>Bearing Edge:</strong> {project?.bearingEdge?.trim() || 'N/A'}</p>
-        <p><strong>Quantity Lugs:</strong> {project?.lugCount || 'N/A'}</p>
-        <p><strong>Lug Type:</strong> {project?.lugType?.trim() || 'N/A'}</p>
-        <p><strong>Hardware Color:</strong> {project?.hardwareColor?.trim() || 'N/A'}</p>
-        <p><strong>Hoops:</strong> {project?.hoops?.trim() || 'N/A'}</p>
-        <p><strong>Reinforcement Rings:</strong> {project?.reinforcementRings?.trim() || 'N/A'}</p>
-        {project?.reinforcementRings !== 'None' && (
-          <p><strong>Re-Rings Wood Species:</strong> {project?.reringsSpecies && project.reringsSpecies !== 'None' ? project.reringsSpecies : 'N/A'}</p>
+        <p>
+          <strong>Artisan Line:</strong> {project?.artisanLine?.trim() || 'N/A'}
+        </p>
+        <p>
+          <strong>Shell Construction:</strong>{' '}
+          {project?.shellConstructionName?.trim() || 'N/A'}
+        </p>
+        {['Stave', 'Hybrid'].includes(project?.shellConstructionName) && (
+          <p>
+            <strong>Stave Quantity:</strong> {project?.staveCount || 'N/A'}
+          </p>
         )}
-        <p><strong>Throw-off:</strong> {project?.snareThrowOff?.trim() || 'N/A'}</p>
-        <p><strong>Snare Wires:</strong> {project?.snareWires?.trim() || 'N/A'}</p>
-        <p><strong>Snare Bed Depth:</strong> {project?.snareBedDepth || 'N/A'}</p>
-        <p><strong>Finish Details:</strong> {project?.finishDetails?.trim() || 'N/A'}</p>
-        <p><strong>Additional Notes:</strong> {project?.additionalNotes?.trim() || 'N/A'}</p>
+        <p>
+          <strong>Diameter:</strong> {project?.width || 'N/A'}
+        </p>
+        <p>
+          <strong>Depth:</strong> {project?.shellDepth || 'N/A'}
+        </p>
+        <p>
+          <strong>Wood Species:</strong> {project?.woodPrimary?.trim() || 'N/A'}
+        </p>
+        <p>
+          <strong>Target Shell Thickness:</strong>{' '}
+          {project?.targetShellThickness
+            ? `${project.targetShellThickness} mm`
+            : 'N/A'}
+        </p>
+        <p>
+          <strong>Bearing Edge:</strong> {project?.bearingEdge?.trim() || 'N/A'}
+        </p>
+        <p>
+          <strong>Quantity Lugs:</strong> {project?.lugCount || 'N/A'}
+        </p>
+        <p>
+          <strong>Lug Type:</strong> {project?.lugType?.trim() || 'N/A'}
+        </p>
+        <p>
+          <strong>Hardware Color:</strong>{' '}
+          {project?.hardwareColor?.trim() || 'N/A'}
+        </p>
+        <p>
+          <strong>Hoops:</strong> {project?.hoops?.trim() || 'N/A'}
+        </p>
+        <p>
+          <strong>Reinforcement Rings:</strong>{' '}
+          {project?.reinforcementRings?.trim() || 'N/A'}
+        </p>
+        {project?.reinforcementRings !== 'None' && (
+          <p>
+            <strong>Re-Rings Wood Species:</strong>{' '}
+            {project?.reringsSpecies && project.reringsSpecies !== 'None'
+              ? project.reringsSpecies
+              : 'N/A'}
+          </p>
+        )}
+        <p>
+          <strong>Throw-off:</strong> {project?.snareThrowOff?.trim() || 'N/A'}
+        </p>
+        <p>
+          <strong>Snare Wires:</strong> {project?.snareWires?.trim() || 'N/A'}
+        </p>
+        <p>
+          <strong>Snare Bed Depth:</strong> {project?.snareBedDepth || 'N/A'}
+        </p>
+        <p>
+          <strong>Finish Details:</strong>{' '}
+          {project?.finishDetails?.trim() || 'N/A'}
+        </p>
+        <p>
+          <strong>Additional Notes:</strong>{' '}
+          {project?.additionalNotes?.trim() || 'N/A'}
+        </p>
       </section>
 
       {/* ---------------- Public Files ---------------- */}
       {allFileSections.map((sectionKey) => {
         const files = uploadedFiles?.[sectionKey] || [];
         if (!files.length) return null;
-        const sectionTitle = sectionKey.replace(/_/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase());
+        const sectionTitle = sectionKey
+          .replace(/_/g, ' ')
+          .replace(/\b\w/g, (l) => l.toUpperCase());
         return (
           <section className="project-section" key={sectionKey}>
             <h3>{sectionTitle}</h3>
             <div className="file-preview-grid">
               {files.map((file, i) => {
-                const fileObj = typeof file === 'string' ? { url: file, hidden: false } : file;
-                const { url } = fileObj; if (!url) return null;
-                const fileName = decodeURIComponent(url.split('/').pop().split('?')[0].split('%2F').pop());
-                const ext = fileName.includes('.') ? fileName.split('.').pop().toLowerCase() : '';
-                const isImage = ['jpg','jpeg','png','gif','webp'].includes(ext);
+                const fileObj =
+                  typeof file === 'string'
+                    ? { url: file, hidden: false }
+                    : file;
+                const { url } = fileObj;
+                if (!url) return null;
+                const fileName = decodeURIComponent(
+                  url.split('/').pop().split('?')[0].split('%2F').pop()
+                );
+                const ext = fileName.includes('.')
+                  ? fileName.split('.').pop().toLowerCase()
+                  : '';
+                const isImage = ['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(
+                  ext
+                );
                 const isPDF = ext === 'pdf';
                 return (
                   <div
                     key={i}
                     className="file-preview-item"
-                    onClick={() => { setIsPreviewLoaded(false); setModalPreview({ url, ext }); }}
+                    onClick={() => {
+                      setIsPreviewLoaded(false);
+                      setModalPreview({ url, ext });
+                    }}
                     style={{ cursor: 'pointer' }}
                   >
                     {isImage ? (
@@ -1041,13 +1530,26 @@ Requested changes (paste or describe edits here):
                         src={url}
                         alt={fileName}
                         className="file-preview-image"
-                        style={{ height:'160px', objectFit:'cover', borderRadius:'8px', border:'1px solid #444' }}
+                        style={{
+                          height: '160px',
+                          objectFit: 'cover',
+                          borderRadius: '8px',
+                          border: '1px solid #444',
+                        }}
                       />
                     ) : (
                       <div className="file-preview-thumbnail">
-                        {isPDF && <img src="/icons/pdf-icon.png" alt="PDF" className="pdf-icon" />}
+                        {isPDF && (
+                          <img
+                            src="/icons/pdf-icon.png"
+                            alt="PDF"
+                            className="pdf-icon"
+                          />
+                        )}
                         <span className="file-label">{fileName}</span>
-                        <span className="file-format">{isPDF ? 'PDF' : 'File'}</span>
+                        <span className="file-format">
+                          {isPDF ? 'PDF' : 'File'}
+                        </span>
                       </div>
                     )}
                   </div>
@@ -1060,9 +1562,20 @@ Requested changes (paste or describe edits here):
 
       {/* ---------------- Modal Preview ---------------- */}
       {modalPreview && (
-        <div className="file-preview-modal" onClick={() => setModalPreview(null)}>
-          <div className="file-preview-modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close-button" onClick={() => setModalPreview(null)}>✕</button>
+        <div
+          className="file-preview-modal"
+          onClick={() => setModalPreview(null)}
+        >
+          <div
+            className="file-preview-modal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className="modal-close-button"
+              onClick={() => setModalPreview(null)}
+            >
+              ✕
+            </button>
             <a
               href={modalPreview.url}
               download
@@ -1072,7 +1585,9 @@ Requested changes (paste or describe edits here):
             >
               ⬇ Download
             </a>
-            {!isPreviewLoaded && <div className="preview-loading-spinner">Loading...</div>}
+            {!isPreviewLoaded && (
+              <div className="preview-loading-spinner">Loading...</div>
+            )}
             {modalPreview.ext === 'pdf' ? (
               <iframe
                 src={modalPreview.url}
@@ -1085,9 +1600,11 @@ Requested changes (paste or describe edits here):
                 }}
                 onLoad={() => setIsPreviewLoaded(true)}
               />
-            ) : ['mp4','webm','mov'].includes(modalPreview.ext) ? (
+            ) : ['mp4', 'webm', 'mov'].includes(modalPreview.ext) ? (
               <video
-                controls autoPlay loop
+                controls
+                autoPlay
+                loop
                 className="file-preview-video"
                 style={{
                   visibility: isPreviewLoaded ? 'visible' : 'hidden',
@@ -1098,7 +1615,7 @@ Requested changes (paste or describe edits here):
               >
                 <source src={modalPreview.url} />
               </video>
-            ) : ['mp3','wav','ogg'].includes(modalPreview.ext) ? (
+            ) : ['mp3', 'wav', 'ogg'].includes(modalPreview.ext) ? (
               <audio
                 controls
                 className="file-preview-audio"

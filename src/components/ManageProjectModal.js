@@ -1,29 +1,86 @@
+// src/components/ManageProjectModal.js
 import React, { useState, useEffect } from 'react';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import StepComponentTemplate from './StepComponentTemplate';
 import ProjectOverview from './ProjectOverview';
 import defaultStepData from '../utils/defaultStepData';
+import { calculateProjectProgress } from '../utils/calculateProjectProgress';
 import { Snackbar } from '@mui/material';
 import './ManageProjectModal.css';
 
-const buildPhases = [
-  { key: 'woodPreparation',   label: 'Step 1: Wood Preparation' },
-  { key: 'shellConstruction', label: 'Step 2: Shell Construction' },
-  { key: 'fineTuning',        label: 'Step 3: Fine-Tuning' },
-  { key: 'shellExteriorFinish', label: 'Step 4: Shell Exterior Finish' },
-  { key: 'bearingEdges',      label: 'Step 5: Bearing Edges' },
-  { key: 'snareBedCutting',   label: 'Step 6: Snare Bed Cutting' },
-  { key: 'hardwareDrilling',  label: 'Step 7: Hardware Drilling' },
-  { key: 'hardwareAssembly',  label: 'Step 8: Hardware Assembly' },
-  { key: 'tuningDetailing',   label: 'Step 9: Tuning and Detailing' },
-  { key: 'qualityCheck',      label: 'Step 10: Quality Check' },
+/* ----------------------------------------------------------------------------
+ * CORE STEP KEYS (match Firestore + defaultStepData)
+ * -------------------------------------------------------------------------- */
+const STEP_KEYS = [
+  'discoveryDesign',
+  'commitmentPortal',
+  'woodVisionLockIn',
+  'rawShellCreation',
+  'shellTrueingTorchTune',
+  'exteriorArtFinish',
+  'edgesSnareBeds',
+  'hardwareAssembly',
+  'legacyTuningMedia',
+  'finalQAPackagingDelivery',
 ];
+
+/* ----------------------------------------------------------------------------
+ * STEP META: labels + phase metadata (phaseId is only for logic, not UI)
+ * -------------------------------------------------------------------------- */
+const STEP_META = {
+  discoveryDesign: {
+    label: '1. Discovery & Design',
+    phaseId: 'phase1',
+  },
+  commitmentPortal: {
+    label: '2. Commitment & Portal Setup',
+    phaseId: 'phase1',
+  },
+  woodVisionLockIn: {
+    label: '3. Wood & Vision Lock-In',
+    phaseId: 'phase1',
+  },
+  rawShellCreation: {
+    label: '4. Raw Shell Creation',
+    phaseId: 'phase2',
+  },
+  shellTrueingTorchTune: {
+    label: '5. Shell Trueing & Torch Tune',
+    phaseId: 'phase2',
+  },
+  exteriorArtFinish: {
+    label: '6. Exterior Art & Finish',
+    phaseId: 'phase2',
+  },
+  edgesSnareBeds: {
+    label: '7. Edges & Snare Beds',
+    phaseId: 'phase2',
+  },
+  hardwareAssembly: {
+    label: '8. Hardware & Assembly',
+    phaseId: 'phase2',
+  },
+  legacyTuningMedia: {
+    label: '9. Legacy Tuning & Media',
+    phaseId: 'phase3',
+  },
+  finalQAPackagingDelivery: {
+    label: '10. Final QA, Packaging & Delivery',
+    phaseId: 'phase3',
+  },
+};
+
+const buildPhases = STEP_KEYS.map((key) => ({
+  key,
+  label: STEP_META[key]?.label || key,
+  phaseId: STEP_META[key]?.phaseId || null,
+}));
 
 /* ----- date + progress helpers --------------------------------------------------- */
 const toDate = (v) => {
   if (!v) return null;
-  if (v.toDate) return v.toDate();          // Firestore Timestamp
+  if (v.toDate) return v.toDate(); // Firestore Timestamp
   if (v.seconds) return new Date(v.seconds * 1000);
   const d = new Date(v);
   return Number.isNaN(+d) ? null : d;
@@ -38,18 +95,34 @@ const fmtMDY = (v) =>
       })
     : '—';
 
-const overallProgressPct = (data) => {
-  const items = Object.values(data || {})
-    .flatMap((s) => (s && Array.isArray(s.checklist) ? s.checklist : []));
-  const total = items.length || 1;
-  const done = items.filter((i) => i.completed).length;
-  return Math.round((done / total) * 100);
+/**
+ * Patch the data before sending to calculateProjectProgress.
+ * That util still expects the old step names, so we alias.
+ */
+const getWeightedProgressPct = (data) => {
+  if (!data) return 0;
+
+  const patched = {
+    ...data,
+    woodPreparation: data.discoveryDesign,
+    shellConstruction: data.commitmentPortal,
+    fineTuning: data.woodVisionLockIn,
+    shellExteriorFinish: data.rawShellCreation,
+    bearingEdges: data.shellTrueingTorchTune,
+    snareBedCutting: data.exteriorArtFinish,
+    hardwareDrilling: data.edgesSnareBeds,
+    hardwareAssembly: data.hardwareAssembly,
+    tuningAndDetailing: data.legacyTuningMedia,
+    qualityCheck: data.finalQAPackagingDelivery,
+  };
+
+  return calculateProjectProgress(patched);
 };
 
 /** Compare actual progress vs time elapsed (with buffer) to produce a schedule chip. */
 const scheduleStatus = ({
   startDate,
-  targetDate,       // unbuffered target
+  targetDate, // unbuffered target
   bufferDays = 14,
   progressPct = 0,
   today = new Date(),
@@ -65,9 +138,9 @@ const scheduleStatus = ({
 
   const delta = progressPct - expectedPct; // positive = ahead
   if (progressPct >= 100) return { label: 'Finished', code: 'finished' };
-  if (delta >= 10)   return { label: 'Ahead',             code: 'ahead' };
-  if (delta >= -10)  return { label: 'On Pace',           code: 'onpace' };
-  if (delta >= -25)  return { label: 'Slightly Behind',   code: 'slightly' };
+  if (delta >= 10) return { label: 'Ahead', code: 'ahead' };
+  if (delta >= -10) return { label: 'On Pace', code: 'onpace' };
+  if (delta >= -25) return { label: 'Slightly Behind', code: 'slightly' };
   return { label: 'At Risk', code: 'risk' };
 };
 
@@ -82,13 +155,21 @@ const formatFullTime = (totalSeconds) => {
   return days > 0 ? `${days}d ${hh}h ${mm}m` : `${hh}h ${mm}m`;
 };
 
+/**
+ * Ensure each of the 10 core steps has a checklist matching defaultStepData.
+ * If a project document is missing a step or is missing items, we hydrate/merge it.
+ */
 const ensureChecklistStructure = (data) => {
   const fixed = { ...data };
+
+  // Hydrate from defaultStepData (canonical 10 steps)
   for (const [stepKey, stepValue] of Object.entries(defaultStepData)) {
     const current = fixed[stepKey];
-    if (!current || typeof current !== 'object') fixed[stepKey] = stepValue;
-    else if (!Array.isArray(current.checklist)) fixed[stepKey].checklist = stepValue.checklist;
-    else {
+    if (!current || typeof current !== 'object') {
+      fixed[stepKey] = stepValue;
+    } else if (!Array.isArray(current.checklist)) {
+      fixed[stepKey].checklist = stepValue.checklist;
+    } else {
       const existingTasks = current.checklist.map((i) => i.task);
       const merged = [...current.checklist];
       stepValue.checklist.forEach((def) => {
@@ -97,16 +178,92 @@ const ensureChecklistStructure = (data) => {
       fixed[stepKey].checklist = merged;
     }
   }
+
+  // Normalize checklist items
+  buildPhases.forEach((phase) => {
+    const current = fixed[phase.key] || {};
+    let cl = Array.isArray(current.checklist) ? current.checklist : [];
+
+    if (cl.length === 0) {
+      cl = [
+        {
+          id: `${phase.key}_1`,
+          label: `${phase.label} — Step 1`,
+          completed: false,
+          totalSeconds: 0,
+        },
+        {
+          id: `${phase.key}_2`,
+          label: `${phase.label} — Step 2`,
+          completed: false,
+          totalSeconds: 0,
+        },
+        {
+          id: `${phase.key}_3`,
+          label: `${phase.label} — Step 3`,
+          completed: false,
+          totalSeconds: 0,
+        },
+      ];
+    } else {
+      cl = cl.map((item, idx) => ({
+        ...item,
+        label:
+          item.label ??
+          item.task ??
+          `${phase.label} — Step ${idx + 1}`,
+        completed: !!item.completed,
+        totalSeconds: Number.isFinite(item.totalSeconds)
+          ? item.totalSeconds
+          : 0,
+      }));
+    }
+
+    fixed[phase.key] = {
+      ...current,
+      checklist: cl,
+    };
+  });
+
   return fixed;
 };
 
-const ManageProjectModal = ({ isOpen, onClose, projectData, onProjectUpdate }) => {
-  const [selectedTab, setSelectedTab] = useState('details');
+const ManageProjectModal = ({
+  isOpen,
+  onClose,
+  projectData,
+  onProjectUpdate,
+}) => {
+  const [selectedTab, setSelectedTab] = useState('details'); // 'details' or stepKey
   const [editableData, setEditableData] = useState({});
   const [isEditing, setIsEditing] = useState(false);
   const [status, setStatus] = useState('Unknown');
   const [showSnackbar, setShowSnackbar] = useState(false);
   const [originalData, setOriginalData] = useState({});
+
+  // which step is expanded in sidebar, and which sub-step is selected
+  const [expandedStepKey, setExpandedStepKey] = useState(null);
+  const [selectedStepKey, setSelectedStepKey] = useState(null);
+  const [selectedSubIndex, setSelectedSubIndex] = useState(0);
+
+  const determineOverallStatus = (data = editableData) => {
+    const all = buildPhases.flatMap((p) => data[p.key]?.checklist || []);
+    const total = all.length;
+    const done = all.filter((t) => t.completed).length;
+    if (done === 0) return 'Initial Planning';
+    if (done === total) return 'Finished';
+    return 'In Production';
+  };
+
+  const determineCurrentPhase = (data = editableData) => {
+    for (const phase of buildPhases) {
+      const checklist = data[phase.key]?.checklist;
+      if (!checklist || checklist.some((i) => !i.completed)) {
+        return STEP_META[phase.key]?.label || phase.label || phase.key;
+      }
+    }
+    return 'All Steps Complete';
+  };
 
   useEffect(() => {
     if (!projectData) return;
@@ -114,6 +271,15 @@ const ManageProjectModal = ({ isOpen, onClose, projectData, onProjectUpdate }) =
     setEditableData(hydrated);
     setOriginalData(hydrated);
     setStatus(determineOverallStatus(hydrated));
+
+    // default expanded step = first step
+    if (!expandedStepKey) {
+      const firstKey = buildPhases[0]?.key || null;
+      setExpandedStepKey(firstKey);
+      setSelectedStepKey(firstKey);
+      setSelectedSubIndex(0);
+      setSelectedTab(firstKey);
+    }
   }, [projectData]);
 
   useEffect(() => {
@@ -136,23 +302,6 @@ const ManageProjectModal = ({ isOpen, onClose, projectData, onProjectUpdate }) =
     return total;
   };
 
-  const determineCurrentPhase = (data = editableData) => {
-    for (const phase of buildPhases) {
-      const checklist = data[phase.key]?.checklist;
-      if (!checklist || checklist.some((i) => !i.completed)) return phase.label;
-    }
-    return 'All Steps Complete';
-  };
-
-  const determineOverallStatus = (data = editableData) => {
-    const all = buildPhases.flatMap((p) => data[p.key]?.checklist || []);
-    const total = all.length;
-    const done = all.filter((t) => t.completed).length;
-    if (done === 0) return 'Initial Planning';
-    if (done === total) return 'Finished';
-    return 'In Production';
-  };
-
   const saveToFirestore = async (updatedPartial = {}) => {
     try {
       const merged = { ...editableData, ...updatedPartial };
@@ -160,7 +309,12 @@ const ManageProjectModal = ({ isOpen, onClose, projectData, onProjectUpdate }) =
       const newStatus = determineOverallStatus(merged);
       const currentPhase = determineCurrentPhase(merged);
 
-      const dataToSave = { ...merged, totalTimeSeconds, status: newStatus, currentPhase };
+      const dataToSave = {
+        ...merged,
+        totalTimeSeconds,
+        status: newStatus,
+        currentPhase,
+      };
       const ref = doc(db, 'projects', projectData.id);
       await setDoc(ref, dataToSave, { merge: true });
 
@@ -194,7 +348,12 @@ const ManageProjectModal = ({ isOpen, onClose, projectData, onProjectUpdate }) =
   };
 
   const getCurrentStepProgress = () => {
-    const currentKey = buildPhases.find((p) => p.label === determineCurrentPhase(editableData))?.key;
+    const currentKey = buildPhases.find(
+      (p) =>
+        (STEP_META[p.key]?.label || p.label) ===
+        determineCurrentPhase(editableData)
+    )?.key;
+
     const cl = editableData?.[currentKey]?.checklist || [];
     const done = cl.filter((t) => t.completed).length;
     const total = cl.length || 1;
@@ -203,141 +362,301 @@ const ManageProjectModal = ({ isOpen, onClose, projectData, onProjectUpdate }) =
 
   const getStepProgressClass = () => {
     const pct = getCurrentStepProgress();
-    if (pct === 0) return 'step-chip step-0';
-    if (pct < 35) return 'step-chip step-25';
-    if (pct < 65) return 'step-chip step-50';
-    if (pct < 100) return 'step-chip step-75';
-    return 'step-chip step-100';
+    if (pct === 0) return 'mpm-step-chip mpm-step-0';
+    if (pct < 35) return 'mpm-step-chip mpm-step-25';
+    if (pct < 65) return 'mpm-step-chip mpm-step-50';
+    if (pct < 100) return 'mpm-step-chip mpm-step-75';
+    return 'mpm-step-chip mpm-step-100';
   };
 
-  const currentStepName = determineCurrentPhase(editableData);
-  const parentOrderId   = projectData?.parentOrderId || projectData?.orderId || '';
-  const idText          = projectData?.id || '—';
+  const currentPhaseLabel = determineCurrentPhase(editableData);
+  const selectedStepLabel =
+    selectedTab === 'details'
+      ? currentPhaseLabel
+      : (buildPhases.find((p) => p.key === selectedTab)?.label ||
+         currentPhaseLabel);
+
+  const parentOrderId =
+    projectData?.parentOrderId || projectData?.orderId || '';
+  const idText = projectData?.id || '—';
+  const weightedProgress = getWeightedProgressPct(editableData);
+
+  // Resolve current sub-step label for main header
+  const currentChecklist =
+    selectedStepKey && editableData[selectedStepKey]
+      ? editableData[selectedStepKey].checklist || []
+      : [];
+  const currentSub =
+    selectedSubIndex !== null && currentChecklist[selectedSubIndex]
+      ? currentChecklist[selectedSubIndex]
+      : null;
+  const currentSubLabel =
+    currentSub?.label ?? currentSub?.task ?? selectedStepLabel;
+
+  // ----- helper: current value for mobile dropdown -----
+  const getMobileSelectValue = () => {
+    if (!selectedStepKey || selectedTab === 'details') return 'details';
+    const idx = Number.isFinite(selectedSubIndex) ? selectedSubIndex : 0;
+    return `${selectedStepKey}::${idx}`;
+  };
 
   return (
-    <div className="manage-project-modal-overlay" onClick={onClose}>
+    <div
+      className="manage-project-modal-overlay mpm-overlay"
+      onClick={onClose}
+    >
       <div
-        className="manage-project-modal-content"
+        className="manage-project-modal-content mpm-modal"
         role="dialog"
         aria-modal="true"
         aria-labelledby="admin-project-view-title"
         onClick={(e) => e.stopPropagation()}
       >
-        <header className="modal-header">
-          <h2 id="admin-project-view-title" className="modal-title">Admin Project View</h2>
+        <header className="mpm-header">
+          <h2 id="admin-project-view-title" className="mpm-title">
+            Admin Project View
+          </h2>
 
           {/* Build status (from checklist completion) */}
-          <div className={`status-chip ${status.toLowerCase().replace(/\s+/g, '-')}`}>
+          <div
+            className={`mpm-status-chip ${status
+              .toLowerCase()
+              .replace(/\s+/g, '-')}`}
+          >
             Build Status: {status}
+          </div>
+
+          {/* Overall time-weighted progress chip */}
+          <div className="mpm-overall-progress-chip">
+            Overall Progress: {weightedProgress}%
           </div>
 
           {/* Schedule status chip (progress vs time elapsed with buffer) */}
           {(() => {
-            const prog = overallProgressPct(editableData);
             const sch = scheduleStatus({
               startDate: projectData?.startDate,
               targetDate: projectData?.targetCompletion,
               bufferDays: 14,
-              progressPct: prog,
+              progressPct: weightedProgress,
             });
-            return <div className={`sched-chip ${sch.code}`}>Schedule: {sch.label} ({prog}%)</div>;
+            return (
+              <div className={`mpm-sched-chip ${sch.code}`}>
+                Schedule: {sch.label} ({weightedProgress}%)
+              </div>
+            );
           })()}
 
           {/* Target + 2-week buffer callout */}
-          <div className="target-chip">
+          <div className="mpm-target-chip">
             Target: {fmtMDY(projectData?.targetCompletion)} &rarr;{' '}
             {projectData?.targetCompletion
-              ? fmtMDY(new Date(toDate(projectData.targetCompletion).getTime() + 14 * 86400000))
+              ? fmtMDY(
+                  new Date(
+                    toDate(projectData.targetCompletion).getTime() +
+                      14 * 86400000
+                  )
+                )
               : '—'}{' '}
-            <span className="sub">(2-week buffer)</span>
+            <span className="mpm-target-sub">(2-week buffer)</span>
           </div>
 
           {/* Current step progress chip */}
           <div className={getStepProgressClass()}>
-            Current Step: {currentStepName}
+            Current Step: {currentPhaseLabel}
           </div>
 
           {/* Total time */}
-          <div className="total-time-wrapper">
-            <span className="total-time-label">Total Time Spent:</span>
-            <span className="total-time-value">{formatFullTime(calculateProjectTotalTime())}</span>
+          <div className="mpm-total-time-wrapper">
+            <span className="mpm-total-time-label">Total Time Spent:</span>
+            <span className="mpm-total-time-value">
+              {formatFullTime(calculateProjectTotalTime())}
+            </span>
           </div>
 
-          {/* close button (header has extra right padding so it never overlaps) */}
-          <button type="button" aria-label="Close modal" className="modal-close-btn" onClick={onClose}>✕</button>
+          {/* close button */}
+          <button
+            type="button"
+            aria-label="Close modal"
+            className="mpm-close-btn"
+            onClick={onClose}
+          >
+            ✕
+          </button>
         </header>
 
         {/* Identifier / order row */}
-        <div style={{ padding: '8px 16px', borderBottom: '1px solid #f0f0f0' }}>
-          <div className="identifier-top">
+        <div
+          className="mpm-id-strip"
+          style={{ padding: '8px 16px', borderBottom: '1px solid #f0f0f0' }}
+        >
+          <div className="mpm-identifier-top">
             {projectData?.artisanLine && (
-              <span className="identifier-chip"><strong>ID</strong> {projectData.artisanLine}</span>
+              <span className="mpm-identifier-chip">
+                <strong>ID</strong> {projectData.artisanLine}
+              </span>
             )}
             {projectData?.customerName && (
-              <span className="identifier-chip">👤 {projectData.customerName}</span>
+              <span className="mpm-identifier-chip">
+                👤 {projectData.customerName}
+              </span>
             )}
-            <span className="identifier-chip mono-id">ID: {idText}</span>
+            <span className="mpm-identifier-chip mpm-mono-id">
+              ID: {idText}
+            </span>
           </div>
-          <div className="id-row" style={{ marginTop: 6 }}>
-            <span className="mono-id">{idText}</span>
-            <button className="copy-btn" onClick={() => navigator.clipboard?.writeText(String(idText))}>Copy ID</button>
+          <div className="mpm-id-row" style={{ marginTop: 6 }}>
+            <span className="mpm-mono-id">{idText}</span>
+            <button
+              className="mpm-copy-btn"
+              onClick={() => navigator.clipboard?.writeText(String(idText))}
+            >
+              Copy ID
+            </button>
             {parentOrderId && (
               <>
-                <span style={{ opacity: .6 }}>·</span>
+                <span style={{ opacity: 0.6 }}>·</span>
                 <span>Order:</span>
-                <a className="mono-id" href={`/orders/${parentOrderId}`} target="_blank" rel="noreferrer">{parentOrderId}</a>
-                <button className="copy-btn" onClick={() => navigator.clipboard?.writeText(String(parentOrderId))}>Copy</button>
+                <a
+                  className="mpm-mono-id"
+                  href={`/orders/${parentOrderId}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {parentOrderId}
+                </a>
+                <button
+                  className="mpm-copy-btn"
+                  onClick={() =>
+                    navigator.clipboard?.writeText(String(parentOrderId))
+                  }
+                >
+                  Copy
+                </button>
               </>
             )}
           </div>
         </div>
 
-        <div className="modal-body">
-          <div className="mobile-phase-selector-wrapper">
+        <div className="mpm-body">
+          {/* Mobile selector (step + sub-step) */}
+          <div className="mpm-mobile-phase-selector-wrapper">
             <select
-              className="phase-selector-dropdown"
-              value={selectedTab}
-              onChange={(e) => setSelectedTab(e.target.value)}
+              className="mpm-phase-selector-dropdown"
+              value={getMobileSelectValue()}
+              onChange={(e) => {
+                const val = e.target.value;
+                if (val === 'details') {
+                  setSelectedTab('details');
+                  setSelectedStepKey(null);
+                  setSelectedSubIndex(0);
+                  return;
+                }
+                const [stepKey, idxStr] = val.split('::');
+                const idx = Number(idxStr) || 0;
+                setSelectedTab(stepKey);
+                setExpandedStepKey(stepKey);
+                setSelectedStepKey(stepKey);
+                setSelectedSubIndex(idx);
+              }}
             >
               <option value="details">📝 Overview</option>
-              {buildPhases.map((phase, idx) => {
-                const unlocked = buildPhases
-                  .slice(0, idx)
-                  .every((prev) => editableData[prev.key]?.checklist?.every((i) => i.completed));
-                const allDone = editableData[phase.key]?.checklist?.every((i) => i.completed);
+
+              {buildPhases.map((phase) => {
+                const cl = editableData[phase.key]?.checklist || [];
+                if (!cl.length) return null;
+
                 return (
-                  <option key={phase.key} value={phase.key} disabled={!unlocked}>
-                    {allDone ? '✅ ' : !unlocked ? '🔒 ' : ''}{phase.label}
-                  </option>
+                  <optgroup key={phase.key} label={phase.label}>
+                    {cl.map((item, idx) => {
+                      const label = item.label ?? item.task ?? '';
+                      const optionValue = `${phase.key}::${idx}`;
+                      const done = !!item.completed;
+                      return (
+                        <option key={optionValue} value={optionValue}>
+                          {done ? '✅ ' : ''}
+                          {label}
+                        </option>
+                      );
+                    })}
+                  </optgroup>
                 );
               })}
             </select>
           </div>
 
-          <aside className="sidebar">
-            <button className={selectedTab === 'details' ? 'active' : ''} onClick={() => setSelectedTab('details')}>
+          {/* Sidebar: Overview + 10 steps, each expandable to show sub-steps */}
+          <aside className="mpm-sidebar">
+            <button
+              className={`mpm-sidebar-overview-btn ${
+                selectedTab === 'details' ? 'active' : ''
+              }`}
+              onClick={() => {
+                setSelectedTab('details');
+                setSelectedStepKey(null);
+                setSelectedSubIndex(0);
+              }}
+            >
               📝 Overview
             </button>
-            {buildPhases.map((phase, idx) => {
-              const unlocked = buildPhases
-                .slice(0, idx)
-                .every((prev) => editableData[prev.key]?.checklist?.every((i) => i.completed));
-              const isActive = selectedTab === phase.key;
-              const allDone = editableData[phase.key]?.checklist?.every((i) => i.completed);
-              return (
-                <button
-                  key={phase.key}
-                  className={`${isActive ? 'active' : ''} ${!unlocked ? 'locked' : ''}`}
-                  onClick={() => unlocked && setSelectedTab(phase.key)}
-                  title={!unlocked ? 'Complete the previous step to unlock' : ''}
-                >
-                  {allDone ? '✅ ' : !unlocked ? '🔒 ' : ''}{phase.label}
-                </button>
-              );
-            })}
+
+            <div className="mpm-sidebar-step-list">
+              {buildPhases.map((step) => {
+                const isExpanded = expandedStepKey === step.key;
+                const checklist = editableData[step.key]?.checklist || [];
+                const allDone =
+                  checklist.length > 0 && checklist.every((i) => i.completed);
+
+                return (
+                  <div key={step.key} className="mpm-sidebar-step-block">
+                    <button
+                      className={`mpm-sidebar-step-root ${
+                        selectedTab === step.key ? 'active' : ''
+                      }`}
+                      onClick={() => {
+                        setExpandedStepKey(step.key);
+                        setSelectedTab(step.key);
+                        setSelectedStepKey(step.key);
+                        setSelectedSubIndex(0);
+                      }}
+                    >
+                      {allDone ? '✅ ' : ''}
+                      {step.label}
+                    </button>
+
+                    {isExpanded && checklist.length > 0 && (
+                      <div className="mpm-sidebar-substep-list">
+                        {checklist.map((item, idx) => {
+                          const label = item.label ?? item.task ?? '';
+                          const isActiveSub =
+                            selectedStepKey === step.key &&
+                            selectedSubIndex === idx;
+
+                          return (
+                            <button
+                              key={item.id || idx}
+                              className={`mpm-sidebar-substep-btn ${
+                                isActiveSub ? 'active' : ''
+                              }`}
+                              type="button"
+                              onClick={() => {
+                                setSelectedStepKey(step.key);
+                                setSelectedSubIndex(idx);
+                                setSelectedTab(step.key);
+                              }}
+                            >
+                              {label}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
           </aside>
 
-          <main>
+          <main className="mpm-main">
             {selectedTab === 'details' ? (
               <ProjectOverview
                 editableData={{ ...editableData, id: projectData.id }}
@@ -356,22 +675,32 @@ const ManageProjectModal = ({ isOpen, onClose, projectData, onProjectUpdate }) =
                     return updated;
                   });
                 }}
-                onSave={() => { saveToFirestore(editableData); setIsEditing(false); setShowSnackbar(true); }}
-                onCancel={() => { setEditableData(originalData); setIsEditing(false); }}
+                onSave={() => {
+                  saveToFirestore(editableData);
+                  setIsEditing(false);
+                  setShowSnackbar(true);
+                }}
+                onCancel={() => {
+                  setEditableData(originalData);
+                  setIsEditing(false);
+                }}
               />
             ) : (
               <StepComponentTemplate
-                stepKey={selectedTab}
-                stepLabel={buildPhases.find((p) => p.key === selectedTab)?.label || selectedTab}
-                stepData={editableData[selectedTab]}
+                stepKey={selectedStepKey}
+                stepLabel={currentSubLabel}
+                stepData={editableData[selectedStepKey] || { checklist: [] }}
                 onToggleChecklist={(index, completed, seconds) =>
-                  handleChecklistToggle(selectedTab, index, completed, seconds)}
-                isLocked={
-                  selectedTab !== 'details' &&
-                  buildPhases
-                    .slice(0, buildPhases.findIndex((p) => p.key === selectedTab))
-                    .some((prev) => !(editableData[prev.key]?.checklist || []).every((i) => i.completed))
+                  handleChecklistToggle(
+                    selectedStepKey,
+                    index,
+                    completed,
+                    seconds
+                  )
                 }
+                isLocked={false}
+                showCheckbox={false}
+                activeIndex={selectedSubIndex}
               />
             )}
           </main>
