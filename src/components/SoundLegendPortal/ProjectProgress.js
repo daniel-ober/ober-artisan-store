@@ -556,7 +556,19 @@ const ProjectProgress = ({ project }) => {
 
   const heroLocal = getHeroMedia(project);
   const hero = heroFromShowroom || heroLocal;
-  const showHeroFromProject = complete && hero && hero.url;
+
+  // Only reveal hero media when you explicitly mark it ready.
+  // You can set any of these fields to true in Firestore/admin:
+  // - heroRevealReady
+  // - showHeroInPortal
+  // - vaultPreferences.heroRevealReady
+  const heroRevealReady = Boolean(
+    project.heroRevealReady ||
+      project.showHeroInPortal ||
+      (project.vaultPreferences && project.vaultPreferences.heroRevealReady)
+  );
+
+  const showHeroFromProject = complete && hero && hero.url && heroRevealReady;
   const heroIsVideo = showHeroFromProject && hero.type === 'video';
 
   const buildWindowLabel = complete

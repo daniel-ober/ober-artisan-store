@@ -5,18 +5,88 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
+.manage-projects-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.manage-projects-header h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* --- Summary pills (quick glance health) --- */
+.projects-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.summary-pill {
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+  background: #f5f5f5;
+  color: #222;
+}
+
+.summary-pill-primary {
+  border-color: #d0d0d0;
+  background: #fafafa;
+}
+
+.summary-pill-ahead {
+  border-color: #2ecc71;
+  background: #e6f9ec;
+  color: #116338;
+}
+
+.summary-pill-on {
+  border-color: #27ae60;
+  background: #e9f9ef;
+  color: #176a39;
+}
+
+.summary-pill-slight {
+  border-color: #f1c40f;
+  background: #fff7df;
+  color: #8a6c05;
+}
+
+.summary-pill-behind {
+  border-color: #e74c3c;
+  background: #ffe5e3;
+  color: #8c1f14;
+}
+
 .filters {
   display: flex;
   justify-content: flex-start;
   align-items: center;
   margin-bottom: 20px;
-  gap: 12px;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
 .filters label {
-  font-size: 1rem;
+  font-size: 0.95rem;
   color: #333;
 }
+
+.show-completed-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* table */
 
 .projects-table {
   width: 100%;
@@ -36,14 +106,27 @@
 .projects-table th {
   background-color: #f9f9f9;
   font-weight: 600;
+  white-space: nowrap;
+}
+
+.sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.sort-indicator {
+  margin-left: 4px;
+  font-size: 0.75rem;
+  color: #888;
 }
 
 /* Progress bar */
+
 .project-progress-bar {
   display: flex;
   align-items: center;
   gap: 8px;
-  width: 140px;
+  width: 160px;
 }
 
 .progress-percent {
@@ -57,8 +140,8 @@
 .progress-bar-wrapper {
   width: 100%;
   height: 10px;
-  background-color: #e0e0e0;
   border-radius: 5px;
+  background-color: #e0e0e0;
   overflow: hidden;
 }
 
@@ -74,41 +157,77 @@
   transition: width 0.3s ease-in-out;
 }
 
-/* === Status Row Background Colors with Specificity === */
+/* === Status Row Background Colors === */
 .projects-table tr.status-row.ahead-of-schedule {
-  background-color: #d4f8d4;
+  background-color: #f0fff4;
 }
 
 .projects-table tr.status-row.on-pace {
-  background-color: #e5fbe5;
+  background-color: #f6fff8;
 }
 
 .projects-table tr.status-row.slightly-behind {
-  background-color: #fff4d4;
+  background-color: #fffaf0;
 }
 
 .projects-table tr.status-row.behind-schedule {
-  background-color: #ffe3e3;
+  background-color: #fff5f5;
 }
 
-.projects-table tr.status-row.at-risk {
-  background-color: #ffd1d1;
-}
-
-/* Maintain background on hover */
+/* Maintain subtle highlight on hover without losing status color */
 .projects-table tr.status-row:hover {
-  filter: brightness(0.985);
+  filter: brightness(0.98);
+  cursor: pointer;
 }
 
-/* Improve text legibility */
-.projects-table tr.status-row td {
-  color: #222;
+/* Status pill in Status column */
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+  background: #f2f2f2;
+  color: #333;
 }
 
-/* Remove default hover override */
+.status-pill-on-pace {
+  background: #e9f9ef;
+  border-color: #27ae60;
+  color: #176a39;
+}
+
+.status-pill-ahead-of-schedule {
+  background: #e6f9ec;
+  border-color: #2ecc71;
+  color: #116338;
+}
+
+.status-pill-slightly-behind {
+  background: #fff7df;
+  border-color: #f1c40f;
+  color: #8a6c05;
+}
+
+.status-pill-behind-schedule {
+  background: #ffe5e3;
+  border-color: #e74c3c;
+  color: #8c1f14;
+}
+
+.status-pill-unknown {
+  background: #f5f5f5;
+  border-color: #d0d0d0;
+  color: #555;
+}
+
+/* Keep generic tr:hover from nuking status colors */
 .projects-table tr:hover {
   background-color: transparent;
-  cursor: pointer;
 }
 
 /* --- Fix field styling on Manage Projects page (override global EndorsementForm.css) --- */
@@ -118,9 +237,9 @@
 
 /* Text inputs, selects, textareas ONLY — do NOT touch checkboxes */
 .manage-projects .filters select,
-.manage-projects .filters input:not([type="checkbox"]),
+.manage-projects .filters input:not([type='checkbox']),
 .manage-projects .projects-table select,
-.manage-projects .projects-table input:not([type="checkbox"]),
+.manage-projects .projects-table input:not([type='checkbox']),
 .manage-projects .projects-table textarea {
   appearance: none;
   -webkit-appearance: none;
@@ -136,31 +255,35 @@
   box-shadow: none !important;
 }
 
-.manage-projects .filters select:focus,
-.manage-projects .filters input:not([type="checkbox"]):focus,
-.manage-projects .projects-table select:focus,
-.manage-projects .projects-table input:not([type="checkbox"]):focus,
-.manage-projects .projects-table textarea:focus {
+.manage-projects
+  .filters
+  select:focus,
+.manage-projects
+  .filters
+  input:not([type='checkbox']):focus,
+.manage-projects
+  .projects-table
+  select:focus,
+.manage-projects
+  .projects-table
+  input:not([type='checkbox']):focus,
+.manage-projects
+  .projects-table
+  textarea:focus {
   outline: none;
   border-color: #888 !important;
-  box-shadow: 0 0 0 3px rgba(0,0,0,0.06) !important;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.06) !important;
 }
 
 /* Proper styling/alignment for the "Show completed" checkbox */
-.manage-projects .filters input[type="checkbox"] {
+.manage-projects .filters input[type='checkbox'] {
   appearance: checkbox;
   -webkit-appearance: checkbox;
   -moz-appearance: checkbox;
   width: auto;
   height: auto;
-  margin-right: 8px;
-  background: transparent !important; /* ensure no dark fill leaks in */
+  margin: 0;
+  background: transparent !important;
   border: none !important;
   box-shadow: none !important;
-}
-
-.manage-projects .filters label {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
 }

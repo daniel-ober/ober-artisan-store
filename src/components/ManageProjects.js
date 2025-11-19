@@ -1,4 +1,3 @@
-// src/components/ManageProjects.js
 import React, { useState, useEffect } from 'react';
 import {
   collection,
@@ -13,35 +12,59 @@ import ManageProjectModal from './ManageProjectModal';
 import { calculateProjectProgress } from '../utils/calculateProjectProgress';
 import './ManageProjects.css';
 
+/**
+ * Canonical build phases for the NEW 10-step workflow.
+ * These should match project.currentPhase values from ManageProjectModal.
+ */
 const buildPhases = [
-  'Step 1. Wood Preparation',
-  'Step 2. Shell Construction',
-  'Step 3. Fine-Tuning',
-  'Step 4. Shell Exterior Finish',
-  'Step 5. Bearing Edges',
-  'Step 6. Snare Bed Cutting',
-  'Step 7. Hardware Drilling',
-  'Step 8. Hardware Assembly',
-  'Step 9. Tuning and Detailing',
-  'Step 10. Quality Check',
+  '1. Discovery & Design',
+  '2. Commitment & Portal Setup',
+  '3. Wood & Vision Lock-In',
+  '4. Raw Shell Creation',
+  '5. Shell Trueing & Torch Tune',
+  '6. Exterior Art & Finish',
+  '7. Edges & Snare Beds',
+  '8. Hardware & Assembly',
+  '9. Legacy Tuning & Media',
+  '10. Final QA, Packaging & Delivery',
 ];
 
-/* ---------- checklist weights (for time aggregation only) ---------- */
+/**
+ * For time aggregation only.
+ * We just care about the keys; value is unused but kept for clarity.
+ * Includes BOTH old and new step keys for backwards compatibility.
+ */
 const stepWeights = {
-  woodPreparation: 0.05,
-  shellConstruction: 0.2,
-  fineTuning: 0.1,
-  shellExteriorFinish: 0.2,
-  bearingEdges: 0.1,
-  snareBedCutting: 0.1,
-  hardwareDrilling: 0.1,
-  hardwareAssembly: 0.05,
-  tuningDetailing: 0.05, // ✅ fix key: matches defaultStepData.tuningDetailing
-  qualityCheck: 0.05,
+  // new schema
+  discoveryDesign: 1,
+  commitmentPortal: 1,
+  woodVisionLockIn: 1,
+  rawShellCreation: 1,
+  shellTrueingTorchTune: 1,
+  exteriorArtFinish: 1,
+  edgesSnareBeds: 1,
+  hardwareAssembly: 1,
+  legacyTuningMedia: 1,
+  finalQAPackagingDelivery: 1,
+
+  // legacy schema (older projects)
+  woodPreparation: 1,
+  shellConstruction: 1,
+  fineTuning: 1,
+  shellExteriorFinish: 1,
+  bearingEdges: 1,
+  snareBedCutting: 1,
+  hardwareDrilling: 1,
+  tuningDetailing: 1,
+  qualityCheck: 1,
 };
 
 const normalize = (str) =>
-  str?.toLowerCase().replace(/[^a-z0-9 ]/gi, '').trim().replace(/\s+/g, '-') || '';
+  str
+    ?.toLowerCase()
+    .replace(/[^a-z0-9 ]/gi, '')
+    .trim()
+    .replace(/\s+/g, '-') || '';
 
 /* ---------- tiny helpers shared with Overview ---------- */
 const val = (...c) =>
@@ -54,7 +77,7 @@ const val = (...c) =>
 const getIdentifier = (p = {}) => {
   const serial =
     val(
-      p.lineSerial,      // canonical
+      p.lineSerial, // canonical
       p.serial,
       p.serialNumber,
       p.projectSerial,
@@ -64,21 +87,21 @@ const getIdentifier = (p = {}) => {
 
   const line =
     val(
-      p.artisanLine,     // canonical
+      p.artisanLine, // canonical
       p.series,
       p.productLine,
       p.seriesLine,
       p.line
     ) || '';
 
-  const dia = val(p.width, p.diameter);       // canonical width = diameter
-  const dep = val(p.shellDepth, p.depth);     // canonical shellDepth = depth
+  const dia = val(p.width, p.diameter); // canonical width = diameter
+  const dep = val(p.shellDepth, p.depth); // canonical shellDepth = depth
   const size = dia && dep ? ` · ${dia}×${dep}"` : '';
 
   if (serial && line) return `${serial} · ${line}${size}`;
-  if (serial)         return `${serial}${size}`;
-  if (line)           return `${line}${size}`;
-  return size ? size.slice(3) : '—';          // strip leading " · "
+  if (serial) return `${serial}${size}`;
+  if (line) return `${line}${size}`;
+  return size ? size.slice(3) : '—'; // strip leading " · "
 };
 
 const ManageProjects = () => {
@@ -107,7 +130,7 @@ const ManageProjects = () => {
     }
   };
 
-  // numeric seconds for total time spent (used for sort)
+  // numeric seconds for total time spent (used for sort + display)
   const totalSecondsFromProject = (project) => {
     let total = 0;
     Object.keys(stepWeights).forEach((key) => {
@@ -116,7 +139,8 @@ const ManageProjects = () => {
         step.checklist.forEach((item) => {
           const v = item?.totalSeconds;
           if (typeof v === 'number') total += v;
-          else if (v?.seconds && typeof v.seconds === 'number') total += v.seconds;
+          else if (v?.seconds && typeof v.seconds === 'number')
+            total += v.seconds;
         });
       }
     });
@@ -125,21 +149,30 @@ const ManageProjects = () => {
 
   const projectValue = (p, key) => {
     switch (key) {
-      case 'customerName':     return (p.customerName || '').toLowerCase();
-      case 'identifier':       return getIdentifier(p).toLowerCase();
-      case 'startDate':        return getMillis(p.startDate);
+      case 'customerName':
+        return (p.customerName || '').toLowerCase();
+      case 'identifier':
+        return getIdentifier(p).toLowerCase();
+      case 'startDate':
+        return getMillis(p.startDate);
       case 'targetCompletion': {
         // sort by explicit target if present; otherwise created + 35 days fallback
         if (p.targetCompletion) return getMillis(p.targetCompletion);
         const baseMs = getMillis(p.startDate);
         return baseMs ? baseMs + 35 * 24 * 60 * 60 * 1000 : 0;
       }
-      case 'timeSpent':        return totalSecondsFromProject(p);
-      case 'currentPhase':     return p.currentPhase || '';
-      case 'expectedPhase':    return getExpectedPhase(p) || '';
-      case 'progress':         return Number(calculateProjectProgress(p)) || 0;
-      case 'status':           return determineStatus(p) || '';
-      default:                 return '';
+      case 'timeSpent':
+        return totalSecondsFromProject(p);
+      case 'currentPhase':
+        return p.currentPhase || '';
+      case 'expectedPhase':
+        return getExpectedPhase(p) || '';
+      case 'progress':
+        return Number(calculateProjectProgress(p)) || 0;
+      case 'status':
+        return determineStatus(p) || '';
+      default:
+        return '';
     }
   };
 
@@ -149,7 +182,8 @@ const ManageProjects = () => {
     return [...list].sort((a, b) => {
       const va = projectValue(a, key);
       const vb = projectValue(b, key);
-      if (typeof va === 'number' && typeof vb === 'number') return (va - vb) * mul;
+      if (typeof va === 'number' && typeof vb === 'number')
+        return (va - vb) * mul;
       return (
         String(va).localeCompare(String(vb), undefined, {
           numeric: true,
@@ -161,7 +195,9 @@ const ManageProjects = () => {
 
   const toggleSort = (key) => {
     setSort((s) =>
-      s.key === key ? { key, dir: s.dir === 'asc' ? 'desc' : 'asc' } : { key, dir: 'asc' }
+      s.key === key
+        ? { key, dir: s.dir === 'asc' ? 'desc' : 'asc' }
+        : { key, dir: 'asc' }
     );
   };
   const renderSort = (key) =>
@@ -190,6 +226,10 @@ const ManageProjects = () => {
     }
   };
 
+  /**
+   * Expected phase based on elapsed time between start and target date.
+   * Uses the NEW 10-step buildPhases timeline.
+   */
   const getExpectedPhase = (project) => {
     let createdAt = null;
 
@@ -210,7 +250,8 @@ const ManageProjects = () => {
     const tc = project.targetCompletion;
     if (tc) {
       if (tc.toDate) target = tc.toDate();
-      else if (typeof tc.seconds === 'number') target = new Date(tc.seconds * 1000);
+      else if (typeof tc.seconds === 'number')
+        target = new Date(tc.seconds * 1000);
       else if (typeof tc === 'string') {
         const parsed = new Date(tc);
         if (!Number.isNaN(parsed.getTime())) target = parsed;
@@ -236,17 +277,30 @@ const ManageProjects = () => {
     return buildPhases[index] || 'Unknown';
   };
 
+  /**
+   * Status bucket based on how far actual phase is from expected phase.
+   */
   const determineStatus = (project) => {
     const expectedPhase = getExpectedPhase(project);
     const expectedIndex = buildPhases.findIndex(
       (p) => normalize(p) === normalize(expectedPhase)
     );
+
+    let actualPhaseLabel = project.currentPhase || '';
+
+    // treat "All Steps Complete" as final step
+    if (/all steps complete/i.test(actualPhaseLabel)) {
+      actualPhaseLabel = buildPhases[buildPhases.length - 1];
+    }
+
     const actualIndex = buildPhases.findIndex(
-      (p) => normalize(p) === normalize(project.currentPhase)
+      (p) => normalize(p) === normalize(actualPhaseLabel)
     );
+
     if (expectedIndex === -1 || actualIndex === -1) return 'Unknown';
 
     const delta = actualIndex - expectedIndex;
+
     if (delta >= 2) return 'Ahead of Schedule';
     if (delta === 1 || delta === 0) return 'On Pace';
     if (delta === -1) return 'Slightly Behind';
@@ -277,7 +331,8 @@ const ManageProjects = () => {
       let base = null;
       const sd = project.startDate;
       if (sd?.toDate) base = sd.toDate();
-      else if (typeof sd?.seconds === 'number') base = new Date(sd.seconds * 1000);
+      else if (typeof sd?.seconds === 'number')
+        base = new Date(sd.seconds * 1000);
       else if (typeof sd === 'string') {
         const parsed = new Date(sd);
         if (!Number.isNaN(parsed.getTime())) base = parsed;
@@ -292,22 +347,23 @@ const ManageProjects = () => {
   };
 
   const isOverdue = (project) => {
-    const phaseIndex = buildPhases.indexOf(project.currentPhase);
-    if (phaseIndex < 0) return false;
-
-    let start = null;
-    const sd = project.startDate;
-    if (sd?.toDate) start = sd.toDate();
-    else if (typeof sd?.seconds === 'number') start = new Date(sd.seconds * 1000);
-    else if (typeof sd === 'string') {
-      const parsed = new Date(sd);
-      if (!Number.isNaN(parsed.getTime())) start = parsed;
+    // simple heuristic: if today is past target date and progress < 100
+    let target = null;
+    const tc = project.targetCompletion;
+    if (tc) {
+      if (tc.toDate) target = tc.toDate();
+      else if (typeof tc.seconds === 'number')
+        target = new Date(tc.seconds * 1000);
+      else if (typeof tc === 'string') {
+        const parsed = new Date(tc);
+        if (!Number.isNaN(parsed.getTime())) target = parsed;
+      } else if (tc instanceof Date) {
+        target = tc;
+      }
     }
-    if (!start) return false;
-
-    const phaseStartDate = new Date(start);
-    phaseStartDate.setDate(phaseStartDate.getDate() + phaseIndex * 2);
-    return new Date() > phaseStartDate;
+    if (!target) return false;
+    if (calculateProjectProgress(project) >= 100) return false;
+    return new Date() > target;
   };
 
   // completed logic + filters
@@ -364,7 +420,7 @@ const ManageProjects = () => {
     if (!selectedProject) return;
     const projectRef = doc(db, 'projects', selectedProject.id);
     await updateDoc(projectRef, updatedData);
-    const updated = { ...selectedProject, ...updatedData };
+    const updated = { ...selectedProject, ...updatedData, id: selectedProject.id };
     handleLiveUpdate(updated);
     closeModal();
   };
@@ -382,17 +438,7 @@ const ManageProjects = () => {
   };
 
   const calculateTotalProjectTime = (project) => {
-    let total = 0;
-    Object.keys(stepWeights).forEach((key) => {
-      const step = project[key];
-      if (step?.checklist?.length) {
-        step.checklist.forEach((item) => {
-          const val = item.totalSeconds;
-          if (typeof val === 'number') total += val;
-          else if (val?.seconds && typeof val.seconds === 'number') total += val.seconds;
-        });
-      }
-    });
+    const total = totalSecondsFromProject(project);
     const hrs = Math.floor(total / 3600);
     const mins = Math.floor((total % 3600) / 60);
     const secs = total % 60;
@@ -401,9 +447,43 @@ const ManageProjects = () => {
       .padStart(2, '0')}`;
   };
 
+  /* ---------- summary metrics for the header ---------- */
+  const activeProjects = projects.filter((p) => !isCompleted(p));
+  const aheadCount = activeProjects.filter(
+    (p) => determineStatus(p) === 'Ahead of Schedule'
+  ).length;
+  const onPaceCount = activeProjects.filter(
+    (p) => determineStatus(p) === 'On Pace'
+  ).length;
+  const slightlyBehindCount = activeProjects.filter(
+    (p) => determineStatus(p) === 'Slightly Behind'
+  ).length;
+  const behindCount = activeProjects.filter(
+    (p) => determineStatus(p) === 'Behind Schedule'
+  ).length;
+
   return (
     <div className="manage-projects">
-      <h2>Manage Projects</h2>
+      <div className="manage-projects-header">
+        <h2>Manage Projects</h2>
+        <div className="projects-summary">
+          <div className="summary-pill summary-pill-primary">
+            Active: {activeProjects.length}
+          </div>
+          <div className="summary-pill summary-pill-ahead">
+            Ahead: {aheadCount}
+          </div>
+          <div className="summary-pill summary-pill-on">
+            On Pace: {onPaceCount}
+          </div>
+          <div className="summary-pill summary-pill-slight">
+            Slightly Behind: {slightlyBehindCount}
+          </div>
+          <div className="summary-pill summary-pill-behind">
+            Behind: {behindCount}
+          </div>
+        </div>
+      </div>
 
       <div className="filters">
         <label>
@@ -415,16 +495,16 @@ const ManageProjects = () => {
                 {phase}
               </option>
             ))}
-            <option value="overdue">Overdue</option>
+            <option value="overdue">Overdue (past target date)</option>
           </select>
         </label>
 
-        <label style={{ marginLeft: 12 }}>
+        <label className="show-completed-label">
           <input
             type="checkbox"
             checked={showCompleted}
             onChange={(e) => setShowCompleted(e.target.checked)}
-          />{' '}
+          />
           Show completed
         </label>
       </div>
@@ -491,39 +571,48 @@ const ManageProjects = () => {
           </tr>
         </thead>
         <tbody>
-          {filteredProjects.map((project) => (
-            <tr
-              key={project.id}
-              onClick={() => openModal(project)}
-              className={`status-row ${normalize(determineStatus(project))}`}
-            >
-              <td>{project.customerName || 'N/A'}</td>
-              <td>{getIdentifier(project)}</td>
-              <td>{formatDate(project.startDate)}</td>
-              <td>{formatTargetCompletion(project)}</td>
-              <td>{calculateTotalProjectTime(project)}</td>
-              <td>{project.currentPhase || '—'}</td>
-              <td>{getExpectedPhase(project)}</td>
-              <td>
-                <div className="project-progress-bar">
-                  <div className="progress-bar-wrapper">
-                    <div className="progress-bar-track">
-                      <div
-                        className="progress-bar-fill"
-                        style={{
-                          width: `${calculateProjectProgress(project)}%`,
-                        }}
-                      />
+          {filteredProjects.map((project) => {
+            const statusLabel = determineStatus(project);
+            const statusClass = normalize(statusLabel); // e.g., "on-pace"
+
+            return (
+              <tr
+                key={project.id}
+                onClick={() => openModal(project)}
+                className={`status-row ${statusClass}`}
+              >
+                <td>{project.customerName || 'N/A'}</td>
+                <td>{getIdentifier(project)}</td>
+                <td>{formatDate(project.startDate)}</td>
+                <td>{formatTargetCompletion(project)}</td>
+                <td>{calculateTotalProjectTime(project)}</td>
+                <td>{project.currentPhase || '—'}</td>
+                <td>{getExpectedPhase(project)}</td>
+                <td>
+                  <div className="project-progress-bar">
+                    <div className="progress-bar-wrapper">
+                      <div className="progress-bar-track">
+                        <div
+                          className="progress-bar-fill"
+                          style={{
+                            width: `${calculateProjectProgress(project)}%`,
+                          }}
+                        />
+                      </div>
                     </div>
+                    <span className="progress-percent">
+                      {calculateProjectProgress(project)}%
+                    </span>
                   </div>
-                  <span className="progress-percent">
-                    {calculateProjectProgress(project)}%
+                </td>
+                <td>
+                  <span className={`status-pill status-pill-${statusClass}`}>
+                    {statusLabel}
                   </span>
-                </div>
-              </td>
-              <td>{determineStatus(project)}</td>
-            </tr>
-          ))}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
 
