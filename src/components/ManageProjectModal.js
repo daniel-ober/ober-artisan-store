@@ -208,10 +208,7 @@ const ensureChecklistStructure = (data) => {
     } else {
       cl = cl.map((item, idx) => ({
         ...item,
-        label:
-          item.label ??
-          item.task ??
-          `${phase.label} — Step ${idx + 1}`,
+        label: item.label ?? item.task ?? `${phase.label} — Step ${idx + 1}`,
         completed: !!item.completed,
         totalSeconds: Number.isFinite(item.totalSeconds)
           ? item.totalSeconds
@@ -267,19 +264,24 @@ const ManageProjectModal = ({
 
   useEffect(() => {
     if (!projectData) return;
+
     const hydrated = ensureChecklistStructure(projectData);
     setEditableData(hydrated);
     setOriginalData(hydrated);
     setStatus(determineOverallStatus(hydrated));
 
-    // default expanded step = first step
-    if (!expandedStepKey) {
-      const firstKey = buildPhases[0]?.key || null;
-      setExpandedStepKey(firstKey);
-      setSelectedStepKey(firstKey);
-      setSelectedSubIndex(0);
-      setSelectedTab(firstKey);
-    }
+    // 🔄 Always reset to Overview when a project is opened/changed
+    setSelectedTab('details'); // show ProjectOverview
+    setSelectedStepKey(null); // no specific step selected
+    setSelectedSubIndex(0); // reset substep index
+
+    // Optional: still expand the first step in the sidebar,
+    // so you can immediately see its checklist if you click into it.
+    const firstKey = buildPhases[0]?.key || null;
+    setExpandedStepKey(firstKey);
+
+    // Make sure we're not stuck in edit mode from a previous project
+    setIsEditing(false);
   }, [projectData]);
 
   useEffect(() => {
@@ -373,8 +375,8 @@ const ManageProjectModal = ({
   const selectedStepLabel =
     selectedTab === 'details'
       ? currentPhaseLabel
-      : (buildPhases.find((p) => p.key === selectedTab)?.label ||
-         currentPhaseLabel);
+      : buildPhases.find((p) => p.key === selectedTab)?.label ||
+        currentPhaseLabel;
 
   const parentOrderId =
     projectData?.parentOrderId || projectData?.orderId || '';
@@ -401,10 +403,7 @@ const ManageProjectModal = ({
   };
 
   return (
-    <div
-      className="manage-project-modal-overlay mpm-overlay"
-      onClick={onClose}
-    >
+    <div className="manage-project-modal-overlay mpm-overlay" onClick={onClose}>
       <div
         className="manage-project-modal-content mpm-modal"
         role="dialog"

@@ -1,68 +1,70 @@
 /* =========================
-   Layout + header
+   Layout & typography
    ========================= */
 
 .apo-container {
-  padding: 1.25rem 1.5rem 1.75rem;
-  max-width: 1080px;
-  margin: 0 auto;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-    "Segoe UI", sans-serif;
+  padding: 1.5rem 1.25rem 2.5rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text',
+    sans-serif;
   color: #111827;
+  font-size: 14px;
 }
 
 .apo-title {
-  font-size: 1.35rem;
+  font-size: 1.4rem;
   font-weight: 700;
-  margin-bottom: 0.9rem;
-  color: #111827;
+  margin-top: 0.25rem;
+  margin-bottom: 0.5rem;
 }
+
+/* header chips */
 
 .apo-header-chips {
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem;
-  margin-bottom: 0.5rem;
 }
 
 .apo-chip {
   display: inline-flex;
   align-items: center;
-  padding: 0.2rem 0.6rem;
   border-radius: 999px;
+  padding: 0.25rem 0.65rem;
   font-size: 0.78rem;
-  background: #f3f4f6;
-  color: #374151;
   border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  color: #111827;
 }
 
-.apo-chip.apo-id {
-  background: #eef2ff;
-  border-color: #e0e7ff;
+.apo-id {
+  font-weight: 600;
 }
 
-.apo-chip.apo-mono {
+.apo-mono {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", "Courier New", monospace;
+    'Liberation Mono', 'Courier New', monospace;
 }
+
+/* meta row */
 
 .apo-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.8rem 1.5rem;
-  margin-bottom: 1rem;
-  font-size: 0.85rem;
+  gap: 0.75rem 1.5rem;
+  margin-bottom: 0.75rem;
+  margin-top: 0.25rem;
 }
 
 .apo-meta-item {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.25rem;
+  font-size: 0.85rem;
 }
 
 .apo-label {
   font-weight: 500;
-  color: #374151;
+  color: #4b5563;
 }
 
 .apo-link {
@@ -74,76 +76,72 @@
   text-decoration: underline;
 }
 
-.apo-mono {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", "Courier New", monospace;
-}
+/* cards */
 
-/* Card shell */
 .apo-card {
   background: #ffffff;
-  border-radius: 12px;
+  border-radius: 16px;
   border: 1px solid #e5e7eb;
-  padding: 0.9rem 1.1rem 1.05rem;
-  margin-bottom: 1rem;
+  padding: 1rem 1.1rem 1.25rem;
+  margin-top: 1rem;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.04);
 }
 
 .apo-h4 {
+  margin: 0 0 0.6rem;
   font-size: 0.95rem;
   font-weight: 600;
-  margin: 0 0 0.6rem;
-  color: #111827;
 }
 
 /* =========================
-   Progress Overview
+   Progress overview
    ========================= */
 
 .apo-progress-card {
-  background: #f5f3ff;
+  background: #f9fafb;
   border-color: #e5e7eb;
-  padding-top: 1rem;
-  padding-bottom: 1.1rem;
 }
 
 .apo-progress-bar-wrap {
-  margin-bottom: 0.65rem;
+  margin-bottom: 0.75rem;
 }
 
 .apo-progress-bar-track {
   position: relative;
   width: 100%;
-  height: 10px;
+  height: 0.65rem;
   border-radius: 999px;
   background: #e5e7eb;
   overflow: hidden;
 }
 
 .apo-progress-bar-fill {
-  height: 100%;
+  position: absolute;
+  inset: 0;
+  width: 0%;
   border-radius: inherit;
-  background: linear-gradient(90deg, #6366f1, #8b5cf6);
-  transition: width 0.25s ease-out;
+  background: linear-gradient(90deg, #3b82f6, #6366f1);
+  transition: width 0.45s ease;
 }
 
 .apo-progress-bar-label {
-  margin-top: 0.3rem;
-  font-size: 0.82rem;
+  margin-top: 0.35rem;
+  font-size: 0.84rem;
   color: #4b5563;
 }
 
 .apo-progress-meta-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem 1rem;
-  margin-top: 0.1rem;
+  gap: 0.4rem 0.75rem;
+  align-items: center;
 }
 
 .apo-progress-pill-row {
-  display: inline-flex;
+  display: flex;
+  gap: 0.25rem;
   align-items: center;
-  gap: 0.35rem;
-  font-size: 0.8rem;
+  font-size: 0.82rem;
 }
 
 .apo-progress-pill-label {
@@ -153,107 +151,86 @@
 .apo-progress-pill {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   padding: 0.15rem 0.55rem;
   border-radius: 999px;
-  background: #eef2ff;
-  color: #1f2937;
+  background: #1d4ed8;
+  color: white;
   font-size: 0.78rem;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .apo-progress-phase-pill {
-  background: #e0f2fe;
+  background: #e0ecff;
+  color: #1d4ed8;
 }
 
 /* =========================
-   Scope groups / rows
+   Scope groups
    ========================= */
 
 .apo-scope-body {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 1rem;
 }
 
 .apo-scope-admin-hint {
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   color: #6b7280;
-  margin: 0 0 0.2rem;
+  margin: 0 0 0.35rem;
 }
 
 .apo-scope-group {
-  border-radius: 10px;
+  border-radius: 12px;
   border: 1px dashed #e5e7eb;
-  padding: 0.75rem 0.8rem 0.65rem;
+  padding: 0.75rem 0.85rem 0.8rem;
   background: #f9fafb;
 }
 
 .apo-scope-heading {
-  font-size: 0.78rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: #6b7280;
+  font-size: 0.86rem;
   font-weight: 600;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.5rem;
 }
 
 .apo-row {
   display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 0.45rem;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0.4rem;
 }
 
 .apo-row-textarea {
-  align-items: flex-start;
+  margin-top: 0.35rem;
 }
 
 .apo-field {
   display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.apo-input,
-.apo-input-inline,
-.apo-input-mono,
-.apo-row textarea.apo-input {
-  flex: 1;
+.apo-input {
   border-radius: 8px;
   border: 1px solid #d1d5db;
   padding: 0.35rem 0.55rem;
   font-size: 0.85rem;
+  width: 100%;
+}
+
+.apo-input:focus {
   outline: none;
-  background: #ffffff;
-  color: #111827;
-}
-
-.apo-input:focus,
-.apo-input-inline:focus,
-.apo-input-mono:focus,
-.apo-row textarea.apo-input:focus {
-  border-color: #6366f1;
-  box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.3);
-}
-
-.apo-input-inline {
-  max-width: 90px;
-}
-
-.apo-input-mono {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", "Courier New", monospace;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.35);
 }
 
 .apo-value {
-  font-size: 0.87rem;
+  font-size: 0.88rem;
   color: #111827;
 }
 
-.apo-hint {
-  font-size: 0.8rem;
-  color: #6b7280;
-}
+/* size row */
 
 .apo-size-row {
   display: inline-flex;
@@ -261,93 +238,97 @@
   gap: 0.25rem;
 }
 
-.apo-size-x {
+.apo-input-inline {
+  max-width: 80px;
+}
+
+.apo-size-x,
+.apo-size-unit {
   font-size: 0.85rem;
   color: #6b7280;
 }
 
-.apo-size-unit {
-  font-size: 0.85rem;
-  color: #4b5563;
+/* buttons */
+
+.apo-btn {
+  border-radius: 999px;
+  border: 1px solid transparent;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.apo-btn.primary {
+  background: #1d4ed8;
+  color: #ffffff;
+  border-color: #1d4ed8;
+}
+
+.apo-btn.primary:hover {
+  background: #1e40af;
+}
+
+.apo-btn.ghost {
+  background: #ffffff;
+  color: #111827;
+  border-color: #d1d5db;
+}
+
+.apo-actions-inline {
+  margin-top: 0.4rem;
+}
+
+/* separator */
+
+.apo-sep {
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  margin: 0.6rem 0;
 }
 
 /* =========================
-   Toggles & buttons
+   Toggle
    ========================= */
 
 .apo-toggle {
-  width: 38px;
-  height: 22px;
+  position: relative;
+  width: 34px;
+  height: 18px;
   border-radius: 999px;
   border: none;
   padding: 0;
-  background: #e5e7eb;
-  position: relative;
   cursor: pointer;
-  transition: background 0.18s ease;
+  background: #d1d5db;
+  transition: background 0.2s ease;
 }
 
 .apo-toggle.on {
-  background: #6366f1;
+  background: #10b981;
 }
 
 .apo-toggle.disabled {
   opacity: 0.5;
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .apo-toggle .knob {
   position: absolute;
   top: 2px;
   left: 2px;
-  width: 18px;
-  height: 18px;
+  width: 14px;
+  height: 14px;
   border-radius: 999px;
-  background: #ffffff;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
-  transition: transform 0.18s ease;
+  background: white;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease;
 }
 
 .apo-toggle.on .knob {
   transform: translateX(16px);
 }
 
-.apo-btn {
-  border-radius: 999px;
-  border: 1px solid #d1d5db;
-  background: #f9fafb;
-  font-size: 0.8rem;
-  padding: 0.35rem 0.8rem;
-  cursor: pointer;
-}
-
-.apo-btn.primary {
-  background: #4f46e5;
-  color: #ffffff;
-  border-color: #4f46e5;
-}
-
-.apo-btn.primary:hover {
-  background: #4338ca;
-}
-
-.apo-btn.ghost:hover {
-  background: #e5e7eb;
-}
-
-.apo-actions-inline {
-  margin-top: 0.6rem;
-}
-
-/* Divider */
-.apo-sep {
-  border: 0;
-  border-top: 1px solid #e5e7eb;
-  margin: 0.6rem 0;
-}
-
 /* =========================
-   Collapsible section wrappers
+   Collapsible sections
    ========================= */
 
 .apo-section {
@@ -422,7 +403,7 @@
   padding: 0.75rem 1.1rem 1rem;
 }
 
-/* Open checkpoints grouped view */
+/* Open checkpoints */
 
 .apo-open-groups {
   display: flex;
@@ -470,86 +451,59 @@
 }
 
 /* =========================
-   Vault preview
-   ========================= */
-
-.vp-title {
-  font-size: 0.8rem;
-  font-weight: 600;
-  margin-top: 0.6rem;
-  margin-bottom: 0.3rem;
-  color: #374151;
-}
-
-.vp-card {
-  border-radius: 10px;
-  border: 1px solid #e5e7eb;
-  padding: 0.6rem 0.75rem;
-  background: #ffffff;
-}
-
-.vp-name {
-  font-weight: 600;
-  margin-bottom: 0.3rem;
-}
-
-/* =========================
-   Attachments
+   Attachments grid
    ========================= */
 
 .apo-dropzone {
-  border-radius: 10px;
-  border: 1px dashed #d1d5db;
-  padding: 0.75rem 0.9rem;
-  font-size: 0.82rem;
-  color: #6b7280;
+  border-radius: 12px;
+  border: 1px dashed #cbd5f5;
+  padding: 0.9rem 1rem;
   background: #f9fafb;
-  margin-bottom: 0.8rem;
-  transition: border-color 0.15s ease, background 0.15s ease;
+  font-size: 0.85rem;
+  color: #6b7280;
+  text-align: center;
+  margin-bottom: 0.9rem;
 }
 
 .apo-dropzone.drag {
-  border-color: #6366f1;
-  background: #eef2ff;
-}
-
-.apo-progress {
-  margin-top: 0.4rem;
-  font-size: 0.8rem;
-  color: #4b5563;
+  background: #e0edff;
+  border-color: #2563eb;
 }
 
 .file-preview-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-  gap: 0.85rem;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.9rem;
 }
 
 .file-preview-item {
-  border-radius: 10px;
-  border: 1px solid #e5e7eb;
-  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid #111827;
+  background: #111827;
+  padding: 0.55rem 0.55rem 0.7rem;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  gap: 0.5rem;
+  color: #f9fafb;
 }
 
 .file-preview-inner {
   border: none;
   background: transparent;
-  padding: 0.5rem 0.5rem 0.35rem;
+  padding: 0;
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
+  gap: 0.4rem;
 }
 
 .file-preview-image,
 .file-preview-video {
   width: 100%;
-  height: 130px;
+  max-height: 220px;
+  border-radius: 10px;
   object-fit: cover;
-  border-radius: 8px;
+  background: #111827;
 }
 
 .file-preview-audio {
@@ -560,24 +514,26 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #eef2ff;
-  color: #4338ca;
+  font-size: 0.85rem;
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.file-preview-missing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #111827;
+  color: #9ca3af;
   font-size: 0.8rem;
-  border-radius: 8px;
-  height: 130px;
 }
 
 .file-name {
-  margin-top: 0.35rem;
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: #111827;
-  text-align: left;
+  font-size: 0.82rem;
+  font-weight: 600;
 }
 
 .file-actions {
-  border-top: 1px solid #e5e7eb;
-  padding: 0.45rem 0.55rem 0.55rem;
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
@@ -586,100 +542,240 @@
 
 .file-actions label {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 0.4rem;
+  flex-direction: column;
+  gap: 0.15rem;
 }
 
 .file-actions select {
-  flex: 1;
-  border-radius: 6px;
-  border: 1px solid #d1d5db;
-  padding: 0.2rem 0.35rem;
+  border-radius: 8px;
+  border: 1px solid #6b7280;
+  padding: 0.2rem 0.4rem;
   font-size: 0.78rem;
 }
 
-.file-actions input[type="checkbox"] {
-  width: 14px;
-  height: 14px;
-}
-
 .delete-file-btn {
-  margin-top: 0.2rem;
   align-self: flex-start;
-  font-size: 0.75rem;
+  margin-top: 0.1rem;
+  border-radius: 999px;
+  border: 1px solid #fca5a5;
+  background: #fee2e2;
   color: #b91c1c;
-  background: transparent;
-  border: none;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.78rem;
   cursor: pointer;
 }
 
 .delete-file-btn:hover {
-  text-decoration: underline;
+  background: #fecaca;
 }
 
-/* Preview modal */
+/* =========================
+   Preview modal
+   ========================= */
 
 .file-preview-modal {
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.6);
+  background: rgba(15, 23, 42, 0.72);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 60;
+  z-index: 9999;
 }
 
 .file-preview-modal-content {
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 0.9rem 1rem 1rem;
-  max-width: 900px;
-  width: 95%;
-  max-height: 90vh;
+  background: #111827;
+  border-radius: 18px;
+  padding: 0.9rem 1.1rem 1.1rem;
+  width: min(1100px, 92vw);
+  height: min(680px, 82vh);
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.6rem;
+  color: #f9fafb;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
 }
 
 .modal-close-button,
 .modal-download-button {
-  font-size: 0.8rem;
-  padding: 0.3rem 0.7rem;
   border-radius: 999px;
   border: 1px solid #d1d5db;
   background: #f9fafb;
+  color: #111827;
+  padding: 0.25rem 0.65rem;
+  font-size: 0.78rem;
   cursor: pointer;
-  margin-right: 0.4rem;
+}
+
+.modal-close-button {
+  align-self: flex-end;
 }
 
 .modal-download-button {
-  background: #4f46e5;
-  border-color: #4f46e5;
-  color: #ffffff;
+  align-self: flex-start;
+  text-decoration: none;
 }
 
 .preview-loading-spinner {
-  font-size: 0.8rem;
-  color: #6b7280;
+  font-size: 0.82rem;
+  color: #d1d5db;
 }
 
-.file-preview-modal-content img.file-preview-image,
-.file-preview-modal-content .file-preview-video,
-.file-preview-modal-content iframe.file-preview-pdf {
+/* Make media fill the modal nicely */
+.file-preview-modal .file-preview-image,
+.file-preview-modal .file-preview-video,
+.file-preview-modal .file-preview-pdf,
+.file-preview-modal .file-preview-audio {
+  flex: 1;
   width: 100%;
-  max-height: 70vh;
-  border-radius: 10px;
-  border: 1px solid #e5e7eb;
+  max-height: 100%;
+  border-radius: 12px;
+  background: #000000;
+  object-fit: contain;
+}
+
+.file-preview-modal .file-preview-pdf {
+  border: none;
 }
 
 /* =========================
-   Responsive tweaks
+   Vault preview
+   ========================= */
+
+.vp-title {
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-top: 0.55rem;
+  margin-bottom: 0.25rem;
+}
+
+.vp-card {
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  padding: 0.75rem 0.85rem;
+}
+
+.vp-name {
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+/* ---------- EDIT / SAVE / CANCEL BUTTONS ---------- */
+
+.apo-edit-controls {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+/* Default edit button (not editing mode) */
+.apo-edit-btn {
+  font-size: 0.78rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  background: #f9fafb;
+  color: #111827;
+  cursor: pointer;
+}
+
+.apo-edit-btn:hover {
+  background: #e5e7eb;
+}
+
+/* Cancel button (gray outline) */
+.apo-cancel-btn {
+  font-size: 0.78rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid #cbd5e1;
+  background: white;
+  color: #475569;
+  cursor: pointer;
+}
+
+.apo-cancel-btn:hover {
+  background: #f1f5f9;
+}
+
+/* Save button (blue emphasis) */
+.apo-save-btn {
+  font-size: 0.78rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  background: #2563eb;
+  border: 1px solid #1e40af;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.apo-save-btn:hover {
+  background: #1d4ed8;
+}
+
+.apo-edit-controls {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+/* default Edit button */
+.apo-edit-btn {
+  font-size: 0.78rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  background: #f9fafb;
+  color: #111827;
+  cursor: pointer;
+}
+
+.apo-edit-btn:hover {
+  background: #e5e7eb;
+}
+
+/* Cancel (gray) */
+.apo-cancel-btn {
+  font-size: 0.78rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #475569;
+  cursor: pointer;
+}
+
+.apo-cancel-btn:hover {
+  background: #f1f5f9;
+}
+
+/* Save (blue) */
+.apo-save-btn {
+  font-size: 0.78rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  background: #2563eb;
+  border: 1px solid #1e40af;
+  color: #ffffff;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.apo-save-btn:hover {
+  background: #1d4ed8;
+}
+
+/* =========================
+   Responsive
    ========================= */
 
 @media (max-width: 700px) {
   .apo-container {
-    padding: 1rem;
+    padding-inline: 0.85rem;
   }
 
   .apo-section-header {
@@ -698,12 +794,8 @@
     white-space: normal;
   }
 
-  .apo-row {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .file-preview-grid {
-    grid-template-columns: minmax(0, 1fr);
+  .file-preview-modal-content {
+    width: 95vw;
+    height: 80vh;
   }
 }

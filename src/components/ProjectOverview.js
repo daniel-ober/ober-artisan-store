@@ -30,6 +30,15 @@ const getIdentifier = (p = {}) => {
   return size ? size.slice(3) : '—';
 };
 
+/** Safely render anything that should be text. Avoids crashing on objects
+ * like { checklist: [...] } coming from bad data.
+ */
+const safeText = (value, fallback = 'N/A') => {
+  if (value === null || value === undefined) return fallback;
+  if (typeof value === 'object') return fallback;
+  return String(value);
+};
+
 /** AfterShip universal tracking link */
 const makeTrackingUrl = (tracking) =>
   tracking
@@ -99,6 +108,26 @@ const getWeightedProgressPct = (data) => {
   return calculateProjectProgress(patched);
 };
 
+/* ---- helpers: normalize attachments shape ---- */
+const normalizeAttachments = (attachments) => {
+  const result = {};
+
+  Object.entries(attachments || {}).forEach(([sectionKey, fileArray]) => {
+    if (Array.isArray(fileArray)) {
+      result[sectionKey] = fileArray;
+    } else if (fileArray && typeof fileArray === 'object') {
+      // handle old object-based shape
+      const vals = Object.values(fileArray);
+      result[sectionKey] = vals.length ? vals : [];
+    } else {
+      result[sectionKey] = [];
+    }
+  });
+
+  if (!result.other) result.other = [];
+  return result;
+};
+
 const ProjectOverview = ({
   editableData,
   isEditing,
@@ -113,37 +142,42 @@ const ProjectOverview = ({
   const [uploadProgress, setUploadProgress] = useState(0);
   const [modalPreview, setModalPreview] = useState(null);
   const [isPreviewLoaded, setIsPreviewLoaded] = useState(false);
-  const [uploadedFiles, setUploadedFiles] = useState(
-    editableData?.attachments || { other: [] }
+  const [uploadedFiles, setUploadedFiles] = useState(() =>
+    normalizeAttachments(editableData?.attachments)
   );
 
-/* ---- collapsible sections: all collapsed by default; max one open ---- */
-const [openSections, setOpenSections] = useState({
-  scope: false,
-  openCheckpoints: false,
-  customer: false,
-  vault: false,
-});
+  // keep attachments in sync if I switch projects
+  useEffect(() => {
+    setUploadedFiles(normalizeAttachments(editableData?.attachments));
+  }, [editableData?.attachments]);
 
-const toggleSection = (key) => {
-  setOpenSections((prev) => {
-    const isCurrentlyOpen = !!prev[key];
-
-    // base: everything closed
-    const base = {
-      scope: false,
-      openCheckpoints: false,
-      customer: false,
-      vault: false,
-    };
-
-    // if clicking an open section -> close all
-    if (isCurrentlyOpen) return base;
-
-    // otherwise open just this one
-    return { ...base, [key]: true };
+  /* ---- collapsible sections: all collapsed by default; max one open ---- */
+  const [openSections, setOpenSections] = useState({
+    scope: false,
+    openCheckpoints: false,
+    customer: false,
+    vault: false,
   });
-};
+
+  const toggleSection = (key) => {
+    setOpenSections((prev) => {
+      const isCurrentlyOpen = !!prev[key];
+
+      // base: everything closed
+      const base = {
+        scope: false,
+        openCheckpoints: false,
+        customer: false,
+        vault: false,
+      };
+
+      // if clicking an open section -> close all
+      if (isCurrentlyOpen) return base;
+
+      // otherwise open just this one
+      return { ...base, [key]: true };
+    });
+  };
 
   /* ---- Vault public prefs (admin controls) ---- */
   const [publicPrefs, setPublicPrefs] = useState({
@@ -199,18 +233,18 @@ const toggleSection = (key) => {
   ];
 
   // Attachment categories aligned to 10 steps (+ uncategorized)
-const fileCategories = [
-  '1. Discovery & Design',
-  '2. Commitment & Portal Setup',
-  '3. Wood & Vision Lock-In',
-  '4. Raw Shell Creation',
-  '5. Shell Trueing & Torch Tune',
-  '6. Exterior Art & Finish',
-  '7. Edges & Snare Beds',
-  '8. Hardware & Assembly',
-  '9. Legacy Tuning & Media',
-  '10. Final QA, Packaging & Delivery',
-];
+  const fileCategories = [
+    '1. Discovery & Design',
+    '2. Commitment & Portal Setup',
+    '3. Wood & Vision Lock-In',
+    '4. Raw Shell Creation',
+    '5. Shell Trueing & Torch Tune',
+    '6. Exterior Art & Finish',
+    '7. Edges & Snare Beds',
+    '8. Hardware & Assembly',
+    '9. Legacy Tuning & Media',
+    '10. Final QA, Packaging & Delivery',
+  ];
 
   /* ---------- util date formatters ---------- */
   const getDateInputValue = (val) => {
@@ -258,53 +292,66 @@ const fileCategories = [
     });
   }, [editableData]);
 
-  // keep local uploadedFiles in sync when switching projects
-useEffect(() => {
-  setUploadedFiles(editableData?.attachments || { other: [] });
-}, [editableData?.attachments]);
+  // keep local uploadedFiles in sync when switching projects (old shape)
+  useEffect(() => {
+    setUploadedFiles(editableData?.attachments || { other: [] });
+  }, [editableData?.attachments]);
 
   /* ---------- uploads (used by Attachments) ---------- */
-// Normalize attachments: keep original buckets, just ensure each is an array
-const normalizeAttachmentsByBucket = (allFiles) => {
-  const normalized = {};
+  // Normalize attachments: keep original buckets, just ensure each is an array
+  const normalizeAttachmentsByBucket = (allFiles) => {
+    const normalized = {};
 
-  Object.entries(allFiles || {}).forEach(([bucket, fileArray]) => {
-    let arr;
+    Object.entries(allFiles || {}).forEach(([bucket, fileArray]) => {
+      let arr;
 
-    if (Array.isArray(fileArray)) {
-      arr = fileArray;
-    } else if (fileArray && typeof fileArray === 'object') {
-      // Could be {0: file, 1: file} or a single file object
-      const values = Object.values(fileArray);
-      if (values.length && values.every((v) => v && typeof v === 'object' && v.url)) {
-        arr = values;
+      if (Array.isArray(fileArray)) {
+        arr = fileArray;
+      } else if (fileArray && typeof fileArray === 'object') {
+        // Could be {0: file, 1: file} or a single file object
+        const values = Object.values(fileArray);
+        if (
+          values.length &&
+          values.every((v) => v && typeof v === 'object' && v.url)
+        ) {
+          arr = values;
+        } else {
+          arr = [fileArray];
+        }
       } else {
-        arr = [fileArray];
+        arr = [];
       }
-    } else {
-      arr = [];
-    }
 
-    normalized[bucket] = arr;
-  });
+      normalized[bucket] = arr;
+    });
 
-  return normalized;
-};
+    return normalized;
+  };
 
   const handleDeleteFile = (sectionKey, index) => {
-    const file = uploadedFiles[sectionKey]?.[index];
-    if (!file || !file.url) return;
-    if (!editableData?.id) return;
+    const bucket = uploadedFiles[sectionKey];
+    if (!bucket || !editableData?.id) return;
 
     if (!window.confirm('Delete this file?')) return;
 
-    const updatedSection = [...uploadedFiles[sectionKey]];
-    updatedSection.splice(index, 1);
-    const updatedAll = { ...uploadedFiles, [sectionKey]: updatedSection };
+    // Normalize to an array so we can safely splice
+    const currentArr = Array.isArray(bucket)
+      ? [...bucket]
+      : Object.values(bucket || {});
+
+    if (!currentArr[index]) return;
+
+    // Remove the selected file (even if it has no .url)
+    currentArr.splice(index, 1);
+
+    const updatedAll = {
+      ...uploadedFiles,
+      [sectionKey]: currentArr,
+    };
     setUploadedFiles(updatedAll);
 
     updateDoc(doc(db, 'projects', editableData.id), {
-      [`attachments.${sectionKey}`]: updatedSection,
+      [`attachments.${sectionKey}`]: currentArr,
     }).catch((err) =>
       console.error('❌ Failed to delete file from Firestore:', err)
     );
@@ -332,8 +379,7 @@ const normalizeAttachmentsByBucket = (allFiles) => {
         uploadTask.on(
           'state_changed',
           (snapshot) => {
-            const pct =
-              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            const pct = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
             setUploadProgress(pct.toFixed(0));
           },
           (error) => {
@@ -370,10 +416,10 @@ const normalizeAttachmentsByBucket = (allFiles) => {
     setUploading(false);
   };
 
-const normalizedFiles = useMemo(
-  () => normalizeAttachmentsByBucket(uploadedFiles),
-  [uploadedFiles]
-);
+  const normalizedFiles = useMemo(
+    () => normalizeAttachmentsByBucket(uploadedFiles),
+    [uploadedFiles]
+  );
 
   /* ---------- SAVE: Vault prefs (admin) ---------- */
   const saveVaultPrefs = async () => {
@@ -396,7 +442,12 @@ const normalizedFiles = useMemo(
 
   /* ---------- derived preview ---------- */
   const previewName = publicPrefs.namePublicEnabled
-    ? publicPrefs.displayName || editableData?.customer?.name || '—'
+    ? safeText(
+        publicPrefs.displayName ||
+          editableData?.customer?.name ||
+          editableData?.customerName,
+        '—'
+      )
     : 'Anonymous Legend';
 
   const previewStoryHtml = publicPrefs.storyPublicEnabled
@@ -404,7 +455,7 @@ const normalizedFiles = useMemo(
     : LEGACY_PRIVATE_TEXT;
 
   const trackingUrl = makeTrackingUrl(
-    editableData?.shipping?.trackingNumber
+    safeText(editableData?.shipping?.trackingNumber, '')
   );
 
   /* ---------- time-weighted progress + checklist stats ---------- */
@@ -478,13 +529,17 @@ const normalizedFiles = useMemo(
       {/* header chips */}
       <div className="apo-header-chips">
         <span className="apo-chip apo-id">
-          🆔 {getIdentifier(editableData || {})}
+          🆔 {safeText(getIdentifier(editableData || {}), '—')}
         </span>
         {editableData?.customerName && (
-          <span className="apo-chip">👤 {editableData.customerName}</span>
+          <span className="apo-chip">
+            👤 {safeText(editableData.customerName, '—')}
+          </span>
         )}
         {editableData?.id && (
-          <span className="apo-chip apo-mono">ID: {editableData.id}</span>
+          <span className="apo-chip apo-mono">
+            ID: {safeText(editableData.id, '—')}
+          </span>
         )}
       </div>
 
@@ -494,24 +549,26 @@ const normalizedFiles = useMemo(
       <div className="apo-meta">
         <div className="apo-meta-item">
           <span className="apo-label">Project ID:</span>
-          <span className="apo-mono">{editableData?.id || 'N/A'}</span>
+          <span className="apo-mono">
+            {safeText(editableData?.id, 'N/A')}
+          </span>
         </div>
         <div className="apo-meta-item">
           <span className="apo-label">Parent Order ID:</span>
           <a
             className="apo-link"
-            href={`/orders/${editableData?.orderId}`}
+            href={`/orders/${safeText(editableData?.orderId, '')}`}
             target="_blank"
             rel="noopener noreferrer"
           >
-            {editableData?.orderId || 'N/A'}
+            {safeText(editableData?.orderId, 'N/A')}
           </a>
         </div>
         {editableData?.id && (
           <div className="apo-meta-item">
             <span className="apo-label">View as Customer:</span>
             <a
-              href={`/projects/${editableData.id}`}
+              href={`/projects/${safeText(editableData.id, '')}`}
               target="_blank"
               rel="noopener noreferrer"
               className="apo-link"
@@ -580,20 +637,48 @@ const normalizedFiles = useMemo(
           </div>
           <div className="apo-section-header-meta">
             <span className="apo-section-summary">
-              {editableData?.artisanLine || '—'} ·{' '}
-              {editableData?.width || editableData?.diameter || '—'}×
-              {editableData?.shellDepth || editableData?.depth || '—'}"
+              {safeText(editableData?.artisanLine, '—')} ·{' '}
+              {safeText(
+                editableData?.width ?? editableData?.diameter,
+                '—'
+              )}
+              ×
+              {safeText(
+                editableData?.shellDepth ?? editableData?.depth,
+                '—'
+              )}
+              "
             </span>
-            <button
-              type="button"
-              className="apo-section-edit-btn"
-              onClick={(e) => {
-                e.stopPropagation();
-                isEditing ? onSave() : onEditToggle();
-              }}
-            >
-              {isEditing ? 'Save' : 'Edit section'}
-            </button>
+
+            {isEditing ? (
+              <div
+                className="apo-edit-controls"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button
+                  type="button"
+                  className="apo-cancel-btn"
+                  onClick={onCancel}
+                >
+                  Cancel
+                </button>
+                <button type="button" className="apo-save-btn" onClick={onSave}>
+                  Save
+                </button>
+              </div>
+            ) : (
+              <button
+                type="button"
+                className="apo-edit-btn"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onEditToggle();
+                }}
+              >
+                Edit
+              </button>
+            )}
+
             <span
               className={`apo-section-chevron ${
                 openSections.scope ? 'open' : ''
@@ -609,9 +694,11 @@ const normalizedFiles = useMemo(
             <p className="apo-scope-admin-hint">
               Admin view: you’re viewing the scope of work for{' '}
               <span className="apo-mono">
-                {editableData?.customer?.email ||
-                  editableData?.customerEmail ||
-                  '—'}
+                {safeText(
+                  editableData?.customer?.email ||
+                    editableData?.customerEmail,
+                  '—'
+                )}
               </span>
               .
             </p>
@@ -625,7 +712,7 @@ const normalizedFiles = useMemo(
                 {isEditing ? (
                   <select
                     className="apo-input"
-                    value={editableData?.artisanLine || ''}
+                    value={safeText(editableData?.artisanLine, '')}
                     onChange={(e) =>
                       handleChange('artisanLine', e.target.value)
                     }
@@ -639,7 +726,7 @@ const normalizedFiles = useMemo(
                   </select>
                 ) : (
                   <span className="apo-value">
-                    {editableData?.artisanLine || 'N/A'}
+                    {safeText(editableData?.artisanLine, 'N/A')}
                   </span>
                 )}
               </div>
@@ -650,24 +737,24 @@ const normalizedFiles = useMemo(
                   <input
                     className="apo-input"
                     type="text"
-                    value={
+                    value={safeText(
                       editableData?.serial ||
-                      editableData?.serialNumber ||
-                      editableData?.projectSerial ||
-                      editableData?.snareSerial ||
+                        editableData?.serialNumber ||
+                        editableData?.projectSerial ||
+                        editableData?.snareSerial,
                       ''
-                    }
-                    onChange={(e) =>
-                      handleChange('serial', e.target.value)
-                    }
+                    )}
+                    onChange={(e) => handleChange('serial', e.target.value)}
                   />
                 ) : (
                   <span className="apo-value">
-                    {editableData?.serial ||
-                      editableData?.serialNumber ||
-                      editableData?.projectSerial ||
-                      editableData?.snareSerial ||
-                      'N/A'}
+                    {safeText(
+                      editableData?.serial ||
+                        editableData?.serialNumber ||
+                        editableData?.projectSerial ||
+                        editableData?.snareSerial,
+                      'N/A'
+                    )}
                   </span>
                 )}
               </div>
@@ -685,23 +772,21 @@ const normalizedFiles = useMemo(
                       type="number"
                       className="apo-input apo-input-inline"
                       placeholder='Diameter (e.g. 14")'
-                      value={
-                        editableData?.width || editableData?.diameter || ''
-                      }
-                      onChange={(e) =>
-                        handleChange('width', e.target.value)
-                      }
+                      value={safeText(
+                        editableData?.width ?? editableData?.diameter,
+                        ''
+                      )}
+                      onChange={(e) => handleChange('width', e.target.value)}
                     />
                     <span className="apo-size-x">×</span>
                     <input
                       type="number"
                       className="apo-input apo-input-inline"
                       placeholder='Depth (e.g. 8")'
-                      value={
-                        editableData?.shellDepth ||
-                        editableData?.depth ||
+                      value={safeText(
+                        editableData?.shellDepth ?? editableData?.depth,
                         ''
-                      }
+                      )}
                       onChange={(e) =>
                         handleChange('shellDepth', e.target.value)
                       }
@@ -710,8 +795,16 @@ const normalizedFiles = useMemo(
                   </div>
                 ) : (
                   <span className="apo-value apo-mono">
-                    {editableData?.width || editableData?.diameter || '—'}×
-                    {editableData?.shellDepth || editableData?.depth || '—'}"
+                    {safeText(
+                      editableData?.width ?? editableData?.diameter,
+                      '—'
+                    )}
+                    ×
+                    {safeText(
+                      editableData?.shellDepth ?? editableData?.depth,
+                      '—'
+                    )}
+                    "
                   </span>
                 )}
               </div>
@@ -723,15 +816,13 @@ const normalizedFiles = useMemo(
                     type="number"
                     className="apo-input apo-input-inline"
                     placeholder="# of staves"
-                    value={editableData?.staveCount || ''}
-                    onChange={(e) =>
-                      handleChange('staveCount', e.target.value)
-                    }
+                    value={safeText(editableData?.staveCount, '')}
+                    onChange={(e) => handleChange('staveCount', e.target.value)}
                   />
                 ) : (
                   <span className="apo-value">
                     {editableData?.staveCount
-                      ? `${editableData.staveCount}-stave`
+                      ? `${safeText(editableData.staveCount)}-stave`
                       : 'N/A'}
                   </span>
                 )}
@@ -742,7 +833,7 @@ const normalizedFiles = useMemo(
                 {isEditing ? (
                   <select
                     className="apo-input"
-                    value={editableData?.shellConstruction || ''}
+                    value={safeText(editableData?.shellConstruction, '')}
                     onChange={(e) =>
                       handleChange('shellConstruction', e.target.value)
                     }
@@ -756,7 +847,7 @@ const normalizedFiles = useMemo(
                   </select>
                 ) : (
                   <span className="apo-value">
-                    {editableData?.shellConstruction || 'N/A'}
+                    {safeText(editableData?.shellConstruction, 'N/A')}
                   </span>
                 )}
               </div>
@@ -767,15 +858,15 @@ const normalizedFiles = useMemo(
                   <input
                     className="apo-input"
                     type="text"
-                    placeholder="e.g. None, 1/4&quot; Maple top/bottom"
-                    value={editableData?.reinforcementRings || ''}
+                    placeholder='e.g. None, 1/4" Maple top/bottom'
+                    value={safeText(editableData?.reinforcementRings, '')}
                     onChange={(e) =>
                       handleChange('reinforcementRings', e.target.value)
                     }
                   />
                 ) : (
                   <span className="apo-value">
-                    {editableData?.reinforcementRings || 'None'}
+                    {safeText(editableData?.reinforcementRings, 'None')}
                   </span>
                 )}
               </div>
@@ -790,7 +881,7 @@ const normalizedFiles = useMemo(
                 {isEditing ? (
                   <select
                     className="apo-input"
-                    value={editableData?.primaryWoodSpecies || ''}
+                    value={safeText(editableData?.primaryWoodSpecies, '')}
                     onChange={(e) =>
                       handleChange('primaryWoodSpecies', e.target.value)
                     }
@@ -804,7 +895,7 @@ const normalizedFiles = useMemo(
                   </select>
                 ) : (
                   <span className="apo-value">
-                    {editableData?.primaryWoodSpecies || 'N/A'}
+                    {safeText(editableData?.primaryWoodSpecies, 'N/A')}
                   </span>
                 )}
               </div>
@@ -816,14 +907,14 @@ const normalizedFiles = useMemo(
                     className="apo-input"
                     type="text"
                     placeholder="e.g. Cherry (50%)"
-                    value={editableData?.secondaryWoodSpecies || ''}
+                    value={safeText(editableData?.secondaryWoodSpecies, '')}
                     onChange={(e) =>
                       handleChange('secondaryWoodSpecies', e.target.value)
                     }
                   />
                 ) : (
                   <span className="apo-value">
-                    {editableData?.secondaryWoodSpecies || 'None'}
+                    {safeText(editableData?.secondaryWoodSpecies, 'None')}
                   </span>
                 )}
               </div>
@@ -835,14 +926,14 @@ const normalizedFiles = useMemo(
                     className="apo-input"
                     type="text"
                     placeholder="e.g. Mappa Burl (Exotic)"
-                    value={editableData?.veneerTopSheet || ''}
+                    value={safeText(editableData?.veneerTopSheet, '')}
                     onChange={(e) =>
                       handleChange('veneerTopSheet', e.target.value)
                     }
                   />
                 ) : (
                   <span className="apo-value">
-                    {editableData?.veneerTopSheet || 'N/A'}
+                    {safeText(editableData?.veneerTopSheet, 'N/A')}
                   </span>
                 )}
               </div>
@@ -857,7 +948,7 @@ const normalizedFiles = useMemo(
                 {isEditing ? (
                   <select
                     className="apo-input"
-                    value={editableData?.bearingEdgeSpec || ''}
+                    value={safeText(editableData?.bearingEdgeSpec, '')}
                     onChange={(e) =>
                       handleChange('bearingEdgeSpec', e.target.value)
                     }
@@ -871,7 +962,7 @@ const normalizedFiles = useMemo(
                   </select>
                 ) : (
                   <span className="apo-value">
-                    {editableData?.bearingEdgeSpec || 'N/A'}
+                    {safeText(editableData?.bearingEdgeSpec, 'N/A')}
                   </span>
                 )}
               </div>
@@ -883,14 +974,14 @@ const normalizedFiles = useMemo(
                     className="apo-input"
                     type="text"
                     placeholder="e.g. Low / Medium / Deep"
-                    value={editableData?.snareBedDepth || ''}
+                    value={safeText(editableData?.snareBedDepth, '')}
                     onChange={(e) =>
                       handleChange('snareBedDepth', e.target.value)
                     }
                   />
                 ) : (
                   <span className="apo-value">
-                    {editableData?.snareBedDepth || 'N/A'}
+                    {safeText(editableData?.snareBedDepth, 'N/A')}
                   </span>
                 )}
               </div>
@@ -907,14 +998,12 @@ const normalizedFiles = useMemo(
                     className="apo-input"
                     type="text"
                     placeholder="e.g. Single-point Vintage Tube"
-                    value={editableData?.lugType || ''}
-                    onChange={(e) =>
-                      handleChange('lugType', e.target.value)
-                    }
+                    value={safeText(editableData?.lugType, '')}
+                    onChange={(e) => handleChange('lugType', e.target.value)}
                   />
                 ) : (
                   <span className="apo-value">
-                    {editableData?.lugType || 'N/A'}
+                    {safeText(editableData?.lugType, 'N/A')}
                   </span>
                 )}
               </div>
@@ -926,14 +1015,14 @@ const normalizedFiles = useMemo(
                     className="apo-input"
                     type="text"
                     placeholder="e.g. Brass / Gold"
-                    value={editableData?.hardwareFinish || ''}
+                    value={safeText(editableData?.hardwareFinish, '')}
                     onChange={(e) =>
                       handleChange('hardwareFinish', e.target.value)
                     }
                   />
                 ) : (
                   <span className="apo-value">
-                    {editableData?.hardwareFinish || 'N/A'}
+                    {safeText(editableData?.hardwareFinish, 'N/A')}
                   </span>
                 )}
               </div>
@@ -943,10 +1032,8 @@ const normalizedFiles = useMemo(
                 {isEditing ? (
                   <select
                     className="apo-input"
-                    value={editableData?.hoopType || ''}
-                    onChange={(e) =>
-                      handleChange('hoopType', e.target.value)
-                    }
+                    value={safeText(editableData?.hoopType, '')}
+                    onChange={(e) => handleChange('hoopType', e.target.value)}
                   >
                     <option value="">Select hoop type</option>
                     {hoopOptions.map((h) => (
@@ -957,7 +1044,7 @@ const normalizedFiles = useMemo(
                   </select>
                 ) : (
                   <span className="apo-value">
-                    {editableData?.hoopType || 'N/A'}
+                    {safeText(editableData?.hoopType, 'N/A')}
                   </span>
                 )}
               </div>
@@ -969,14 +1056,12 @@ const normalizedFiles = useMemo(
                     className="apo-input"
                     type="text"
                     placeholder="e.g. Trick"
-                    value={editableData?.throwOff || ''}
-                    onChange={(e) =>
-                      handleChange('throwOff', e.target.value)
-                    }
+                    value={safeText(editableData?.throwOff, '')}
+                    onChange={(e) => handleChange('throwOff', e.target.value)}
                   />
                 ) : (
                   <span className="apo-value">
-                    {editableData?.throwOff || 'N/A'}
+                    {safeText(editableData?.throwOff, 'N/A')}
                   </span>
                 )}
               </div>
@@ -988,14 +1073,12 @@ const normalizedFiles = useMemo(
                     className="apo-input"
                     type="text"
                     placeholder="e.g. Puresound"
-                    value={editableData?.snareWires || ''}
-                    onChange={(e) =>
-                      handleChange('snareWires', e.target.value)
-                    }
+                    value={safeText(editableData?.snareWires, '')}
+                    onChange={(e) => handleChange('snareWires', e.target.value)}
                   />
                 ) : (
                   <span className="apo-value">
-                    {editableData?.snareWires || 'N/A'}
+                    {safeText(editableData?.snareWires, 'N/A')}
                   </span>
                 )}
               </div>
@@ -1012,20 +1095,22 @@ const normalizedFiles = useMemo(
                     className="apo-input"
                     type="text"
                     placeholder="e.g. Custom PolyGloss"
-                    value={
+                    value={safeText(
                       editableData?.exteriorFinish ||
-                      editableData?.finishDetails ||
+                        editableData?.finishDetails,
                       ''
-                    }
+                    )}
                     onChange={(e) =>
                       handleChange('exteriorFinish', e.target.value)
                     }
                   />
                 ) : (
                   <span className="apo-value">
-                    {editableData?.exteriorFinish ||
-                      editableData?.finishDetails ||
-                      'N/A'}
+                    {safeText(
+                      editableData?.exteriorFinish ||
+                        editableData?.finishDetails,
+                      'N/A'
+                    )}
                   </span>
                 )}
               </div>
@@ -1037,14 +1122,14 @@ const normalizedFiles = useMemo(
                     className="apo-input"
                     type="text"
                     placeholder="e.g. Raw / Oil / Sealed"
-                    value={editableData?.interiorFinish || ''}
+                    value={safeText(editableData?.interiorFinish, '')}
                     onChange={(e) =>
                       handleChange('interiorFinish', e.target.value)
                     }
                   />
                 ) : (
                   <span className="apo-value">
-                    {editableData?.interiorFinish || '—'}
+                    {safeText(editableData?.interiorFinish, '—')}
                   </span>
                 )}
               </div>
@@ -1056,14 +1141,14 @@ const normalizedFiles = useMemo(
                     className="apo-input"
                     type="text"
                     placeholder="e.g. Cowboy Blue"
-                    value={editableData?.resinAccent || ''}
+                    value={safeText(editableData?.resinAccent, '')}
                     onChange={(e) =>
                       handleChange('resinAccent', e.target.value)
                     }
                   />
                 ) : (
                   <span className="apo-value">
-                    {editableData?.resinAccent || 'N/A'}
+                    {safeText(editableData?.resinAccent, 'N/A')}
                   </span>
                 )}
               </div>
@@ -1075,14 +1160,14 @@ const normalizedFiles = useMemo(
                     className="apo-input"
                     rows={3}
                     placeholder="Any special requests or build notes."
-                    value={editableData?.additionalNotes || ''}
+                    value={safeText(editableData?.additionalNotes, '')}
                     onChange={(e) =>
                       handleChange('additionalNotes', e.target.value)
                     }
                   />
                 ) : (
                   <span className="apo-value">
-                    {editableData?.additionalNotes || 'N/A'}
+                    {safeText(editableData?.additionalNotes, 'N/A')}
                   </span>
                 )}
               </div>
@@ -1106,9 +1191,7 @@ const normalizedFiles = useMemo(
         >
           <div className="apo-section-header-main">
             <span className="apo-section-title">Open Checkpoints</span>
-            <span className="apo-section-subtitle">
-              Grouped by build phase
-            </span>
+            <span className="apo-section-subtitle">Grouped by build phase</span>
           </div>
           <div className="apo-section-header-meta">
             <span className="apo-section-summary">
@@ -1150,7 +1233,9 @@ const normalizedFiles = useMemo(
                       <ul className="apo-open-list">
                         {items.map((it) => (
                           <li key={it.id} className="apo-open-item">
-                            <span className="apo-open-task">{it.task}</span>
+                            <span className="apo-open-task">
+                              {safeText(it.task, '')}
+                            </span>
                           </li>
                         ))}
                       </ul>
@@ -1184,20 +1269,41 @@ const normalizedFiles = useMemo(
           </div>
           <div className="apo-section-header-meta">
             <span className="apo-section-summary">
-              {editableData?.customer?.name ||
-                editableData?.customerName ||
-                'No name on file'}
+              {safeText(
+                editableData?.customer?.name || editableData?.customerName,
+                'No name on file'
+              )}
             </span>
-            <button
-              type="button"
-              className="apo-section-edit-btn"
-              onClick={(e) => {
-                e.stopPropagation();
-                isEditing ? onSave() : onEditToggle();
-              }}
-            >
-              {isEditing ? 'Save' : 'Edit section'}
-            </button>
+
+            {isEditing ? (
+              <div
+                className="apo-edit-controls"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button
+                  type="button"
+                  className="apo-cancel-btn"
+                  onClick={onCancel}
+                >
+                  Cancel
+                </button>
+                <button type="button" className="apo-save-btn" onClick={onSave}>
+                  Save
+                </button>
+              </div>
+            ) : (
+              <button
+                type="button"
+                className="apo-edit-btn"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onEditToggle();
+                }}
+              >
+                Edit
+              </button>
+            )}
+
             <span
               className={`apo-section-chevron ${
                 openSections.customer ? 'open' : ''
@@ -1216,20 +1322,22 @@ const normalizedFiles = useMemo(
                 <input
                   className="apo-input"
                   type="text"
-                  value={
+                  value={safeText(
                     editableData?.customer?.name ||
-                    editableData?.customerName ||
+                      editableData?.customerName,
                     ''
-                  }
+                  )}
                   onChange={(e) =>
                     handleChange('customer.name', e.target.value)
                   }
                 />
               ) : (
                 <span className="apo-value">
-                  {editableData?.customer?.name ||
-                    editableData?.customerName ||
-                    'N/A'}
+                  {safeText(
+                    editableData?.customer?.name ||
+                      editableData?.customerName,
+                    'N/A'
+                  )}
                 </span>
               )}
             </div>
@@ -1240,14 +1348,14 @@ const normalizedFiles = useMemo(
                 <input
                   className="apo-input"
                   type="email"
-                  value={editableData?.customer?.email || ''}
+                  value={safeText(editableData?.customer?.email, '')}
                   onChange={(e) =>
                     handleChange('customer.email', e.target.value)
                   }
                 />
               ) : (
                 <span className="apo-value">
-                  {editableData?.customer?.email || 'N/A'}
+                  {safeText(editableData?.customer?.email, 'N/A')}
                 </span>
               )}
             </div>
@@ -1258,14 +1366,14 @@ const normalizedFiles = useMemo(
                 <input
                   className="apo-input"
                   type="tel"
-                  value={editableData?.customer?.phone || ''}
+                  value={safeText(editableData?.customer?.phone, '')}
                   onChange={(e) =>
                     handleChange('customer.phone', e.target.value)
                   }
                 />
               ) : (
                 <span className="apo-value">
-                  {editableData?.customer?.phone || 'N/A'}
+                  {safeText(editableData?.customer?.phone, 'N/A')}
                 </span>
               )}
             </div>
@@ -1276,14 +1384,20 @@ const normalizedFiles = useMemo(
                 <input
                   className="apo-input"
                   type="text"
-                  value={editableData?.customer?.address?.street || ''}
+                  value={safeText(
+                    editableData?.customer?.address?.street,
+                    ''
+                  )}
                   onChange={(e) =>
                     handleChange('customer.address.street', e.target.value)
                   }
                 />
               ) : (
                 <span className="apo-value">
-                  {editableData?.customer?.address?.street || 'N/A'}
+                  {safeText(
+                    editableData?.customer?.address?.street,
+                    'N/A'
+                  )}
                 </span>
               )}
             </div>
@@ -1294,14 +1408,17 @@ const normalizedFiles = useMemo(
                 <input
                   className="apo-input"
                   type="text"
-                  value={editableData?.customer?.address?.city || ''}
+                  value={safeText(editableData?.customer?.address?.city, '')}
                   onChange={(e) =>
                     handleChange('customer.address.city', e.target.value)
                   }
                 />
               ) : (
                 <span className="apo-value">
-                  {editableData?.customer?.address?.city || 'N/A'}
+                  {safeText(
+                    editableData?.customer?.address?.city,
+                    'N/A'
+                  )}
                 </span>
               )}
             </div>
@@ -1312,14 +1429,17 @@ const normalizedFiles = useMemo(
                 <input
                   className="apo-input"
                   type="text"
-                  value={editableData?.customer?.address?.state || ''}
+                  value={safeText(editableData?.customer?.address?.state, '')}
                   onChange={(e) =>
                     handleChange('customer.address.state', e.target.value)
                   }
                 />
               ) : (
                 <span className="apo-value">
-                  {editableData?.customer?.address?.state || 'N/A'}
+                  {safeText(
+                    editableData?.customer?.address?.state,
+                    'N/A'
+                  )}
                 </span>
               )}
             </div>
@@ -1330,14 +1450,14 @@ const normalizedFiles = useMemo(
                 <input
                   className="apo-input"
                   type="text"
-                  value={editableData?.customer?.address?.zip || ''}
+                  value={safeText(editableData?.customer?.address?.zip, '')}
                   onChange={(e) =>
                     handleChange('customer.address.zip', e.target.value)
                   }
                 />
               ) : (
                 <span className="apo-value">
-                  {editableData?.customer?.address?.zip || 'N/A'}
+                  {safeText(editableData?.customer?.address?.zip, 'N/A')}
                 </span>
               )}
             </div>
@@ -1366,12 +1486,12 @@ const normalizedFiles = useMemo(
                 <input
                   className="apo-input apo-input-mono"
                   type="text"
-                  value={editableData?.shipping?.trackingNumber || ''}
+                  value={safeText(
+                    editableData?.shipping?.trackingNumber,
+                    ''
+                  )}
                   onChange={(e) =>
-                    handleChange(
-                      'shipping.trackingNumber',
-                      e.target.value
-                    )
+                    handleChange('shipping.trackingNumber', e.target.value)
                   }
                 />
               ) : trackingUrl ? (
@@ -1381,11 +1501,17 @@ const normalizedFiles = useMemo(
                   rel="noopener noreferrer"
                   className="apo-link apo-mono"
                 >
-                  {editableData?.shipping?.trackingNumber}
+                  {safeText(
+                    editableData?.shipping?.trackingNumber,
+                    'N/A'
+                  )}
                 </a>
               ) : (
                 <span className="apo-value">
-                  {editableData?.shipping?.trackingNumber || 'N/A'}
+                  {safeText(
+                    editableData?.shipping?.trackingNumber,
+                    'N/A'
+                  )}
                 </span>
               )}
             </div>
@@ -1446,8 +1572,7 @@ const normalizedFiles = useMemo(
                   }
                 />
                 <span className="apo-hint">
-                  If off, Vault will show{' '}
-                  <strong>Anonymous Legend</strong>.
+                  If off, Vault will show <strong>Anonymous Legend</strong>.
                 </span>
               </div>
             </div>
@@ -1470,8 +1595,11 @@ const normalizedFiles = useMemo(
               ) : (
                 <span className="apo-value">
                   {publicPrefs.displayName ||
-                    editableData?.customer?.name ||
-                    '—'}
+                    safeText(
+                      editableData?.customer?.name ||
+                        editableData?.customerName,
+                      '—'
+                    )}
                 </span>
               )}
             </div>
@@ -1519,8 +1647,7 @@ const normalizedFiles = useMemo(
                 <div
                   className="apo-value"
                   dangerouslySetInnerHTML={{
-                    __html:
-                      publicPrefs.storyHtml || LEGACY_UNKNOWN_TEXT,
+                    __html: publicPrefs.storyHtml || LEGACY_UNKNOWN_TEXT,
                   }}
                 />
               )}
@@ -1568,136 +1695,162 @@ const normalizedFiles = useMemo(
           }}
           onDrop={handleDrop}
         >
-          <div>Drop files here to upload (defaults to “Other / Uncategorized” &amp; hidden).</div>
+          <div>
+            Drop files here to upload (defaults to “Other / Uncategorized” &amp;
+            hidden).
+          </div>
           {uploading && (
-            <div className="apo-progress">
-              Uploading… {uploadProgress}%
-            </div>
+            <div className="apo-progress">Uploading… {uploadProgress}%</div>
           )}
         </div>
 
-<div className="file-preview-grid">
-  {Object.entries(normalizedFiles).map(([bucket, files]) =>
-    files.map((file, idx) => {
-      const displayCategory = file.category || bucket;
+        <div className="file-preview-grid">
+          {Object.entries(uploadedFiles || {}).map(([sectionKey, files]) => {
+            // ensure array
+            const arr = Array.isArray(files)
+              ? files
+              : files && typeof files === 'object'
+              ? Object.values(files)
+              : [];
 
-      return (
-        <div
-          key={`${bucket}-${idx}`}
-          className="file-preview-item"
-        >
-          <button
-            type="button"
-            className="file-preview-inner"
-            onClick={() => {
-              setModalPreview(file);
-              setIsPreviewLoaded(false);
-            }}
-          >
-            {/* basic type sniff */}
-            {file.url?.match(/\.mp4|\.mov|\.webm/i) ? (
-              <video
-                className="file-preview-video"
-                src={file.url}
-              />
-            ) : file.url?.match(/\.mp3|\.wav|\.m4a/i) ? (
-              <audio
-                className="file-preview-audio"
-                src={file.url}
-                controls
-              />
-            ) : file.url?.match(/\.pdf/i) ? (
-              <div className="file-preview-image file-preview-pdf">
-                PDF Preview
-              </div>
-            ) : (
-              <img
-                src={file.url}
-                alt={displayCategory}
-                className="file-preview-image"
-              />
-            )}
-            <div className="file-name">{displayCategory}</div>
-          </button>
+            return arr.map((file, idx) => {
+              const url = file?.url || file?.downloadURL || file?.path || '';
 
-          <div className="file-actions">
-            <label>
-              Category
-              <select
-                value={displayCategory}
-                onChange={(e) => {
-                  const nextCat = e.target.value;
+              return (
+                <div key={`${sectionKey}-${idx}`} className="file-preview-item">
+                  <button
+                    type="button"
+                    className="file-preview-inner"
+                    onClick={() => {
+                      if (!url) return;
+                      setModalPreview({ ...file, url });
+                      setIsPreviewLoaded(false);
+                    }}
+                  >
+                    {/* basic type sniff */}
+                    {!url ? (
+                      <div className="file-preview-image file-preview-missing">
+                        No preview
+                      </div>
+                    ) : url.match(/\.mp4|\.mov|\.webm/i) ? (
+                      <video className="file-preview-video" src={url} />
+                    ) : url.match(/\.mp3|\.wav|\.m4a/i) ? (
+                      <audio
+                        className="file-preview-audio"
+                        src={url}
+                        controls
+                      />
+                    ) : url.match(/\.pdf/i) ? (
+                      <div className="file-preview-image file-preview-pdf">
+                        PDF Preview
+                      </div>
+                    ) : (
+                      <img
+                        src={url}
+                        alt={file.fileName || sectionKey}
+                        className="file-preview-image"
+                      />
+                    )}
+                    <div className="file-name">
+                      {safeText(
+                        file.category,
+                        'Other / Uncategorized'
+                      )}
+                    </div>
+                  </button>
 
-                  const currentArr = normalizedFiles[bucket] || [];
-                  const cloned = [...currentArr];
-                  cloned[idx] = {
-                    ...cloned[idx],
-                    category: nextCat,
-                  };
+                  <div className="file-actions">
+                    <label>
+                      Category
+                      <select
+                        value={file.category || ''}
+                        onChange={(e) => {
+                          const nextCat =
+                            e.target.value || 'Other / Uncategorized';
 
-                  const updatedAll = {
-                    ...uploadedFiles,
-                    [bucket]: cloned,
-                  };
-                  setUploadedFiles(updatedAll);
+                          const currentArrRaw = uploadedFiles[sectionKey] || [];
+                          const currentArr = Array.isArray(currentArrRaw)
+                            ? [...currentArrRaw]
+                            : Object.values(currentArrRaw || {});
 
-                  updateDoc(doc(db, 'projects', editableData.id), {
-                    [`attachments.${bucket}`]: cloned,
-                  }).catch((err) =>
-                    console.error('❌ Failed to update file category:', err)
-                  );
-                }}
-              >
-                {fileCategories.map((c) => (
-                  <option key={c} value={c}>
-                    {c}
-                  </option>
-                ))}
-              </select>
-            </label>
+                          currentArr[idx] = {
+                            ...currentArr[idx],
+                            category: nextCat,
+                          };
 
-            <label>
-              Visible to customer
-              <input
-                type="checkbox"
-                checked={!file.hidden}
-                onChange={(e) => {
-                  const visible = e.target.checked;
-                  const currentArr = normalizedFiles[bucket] || [];
-                  const cloned = [...currentArr];
-                  cloned[idx] = {
-                    ...cloned[idx],
-                    hidden: !visible,
-                  };
+                          const updatedAll = {
+                            ...uploadedFiles,
+                            [sectionKey]: currentArr,
+                          };
+                          setUploadedFiles(updatedAll);
 
-                  const updatedAll = {
-                    ...uploadedFiles,
-                    [bucket]: cloned,
-                  };
-                  setUploadedFiles(updatedAll);
+                          updateDoc(doc(db, 'projects', editableData.id), {
+                            [`attachments.${sectionKey}`]: currentArr,
+                          }).catch((err) =>
+                            console.error(
+                              '❌ Failed to update file category:',
+                              err
+                            )
+                          );
+                        }}
+                      >
+                        <option value="">Other / Uncategorized</option>
+                        {fileCategories.map((c) => (
+                          <option key={c} value={c}>
+                            {c}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
 
-                  updateDoc(doc(db, 'projects', editableData.id), {
-                    [`attachments.${bucket}`]: cloned,
-                  }).catch((err) =>
-                    console.error('❌ Failed to update hidden flag:', err)
-                  );
-                }}
-              />
-            </label>
+                    <label>
+                      Visible to customer
+                      <input
+                        type="checkbox"
+                        checked={!file.hidden}
+                        onChange={(e) => {
+                          const visible = e.target.checked;
+                          const currentArrRaw = uploadedFiles[sectionKey] || [];
+                          const currentArr = Array.isArray(currentArrRaw)
+                            ? [...currentArrRaw]
+                            : Object.values(currentArrRaw || {});
 
-            <button
-              type="button"
-              className="delete-file-btn"
-              onClick={() => handleDeleteFile(bucket, idx)}
-            >
-              Delete file
-            </button>
-          </div>
+                          currentArr[idx] = {
+                            ...currentArr[idx],
+                            hidden: !visible,
+                          };
+
+                          const updatedAll = {
+                            ...uploadedFiles,
+                            [sectionKey]: currentArr,
+                          };
+                          setUploadedFiles(updatedAll);
+
+                          updateDoc(doc(db, 'projects', editableData.id), {
+                            [`attachments.${sectionKey}`]: currentArr,
+                          }).catch((err) =>
+                            console.error(
+                              '❌ Failed to update hidden flag:',
+                              err
+                            )
+                          );
+                        }}
+                      />
+                    </label>
+
+                    <button
+                      type="button"
+                      className="delete-file-btn"
+                      onClick={() => handleDeleteFile(sectionKey, idx)}
+                    >
+                      Delete file
+                    </button>
+                  </div>
+                </div>
+              );
+            });
+          })}
         </div>
-      );
-    })
-  )}
-</div>
       </div>
 
       {/* ---------- Preview modal ---------- */}
@@ -1719,9 +1872,7 @@ const normalizedFiles = useMemo(
             </a>
 
             {!isPreviewLoaded && (
-              <div className="preview-loading-spinner">
-                Loading preview…
-              </div>
+              <div className="preview-loading-spinner">Loading preview…</div>
             )}
 
             {modalPreview.url?.match(/\.mp4|\.mov|\.webm/i) ? (
