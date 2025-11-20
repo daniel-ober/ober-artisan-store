@@ -1,5 +1,5 @@
 // src/components/StepComponentTemplate.js
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import './StepComponentTemplate.css';
 
 /* ---------- Time helpers ---------- */
@@ -497,16 +497,18 @@ const StepComponentTemplate = ({
   stepKey,
   stepLabel,
   stepData = { checklist: [] },
-  onToggleChecklist, // (index, completed, totalSeconds)
+  onToggleChecklist,              // (index, completed, totalSeconds)
+  onUpdateCheckpointStates,       // (itemIndex, checkpointStatesArray)
   isLocked = false,
   activeIndex = null,
-  showCheckbox = false, // kept for compatibility, but we always show the main status checkbox
+  showCheckbox = false,           // kept for compatibility
 }) => {
   const [editingIndex, setEditingIndex] = useState(null);
   const [presetSeconds, setPresetSeconds] = useState(0);
 
   // UI-only: checkpoint checkmarks per sub-step
-  const [checkpointState, setCheckpointState] = useState({}); // { [itemId]: { [idx]: bool } }
+  // { [itemId]: { [idx]: bool } }
+  const [checkpointState, setCheckpointState] = useState({});
 
   const items = stepData.checklist || [];
 
@@ -516,6 +518,25 @@ const StepComponentTemplate = ({
       : 0;
 
   const activeItem = items[activeIdx] || null;
+
+  /* ---------------- Hydrate checkpointState from Firestore ---------------- */
+
+  useEffect(() => {
+    const next = {};
+    (stepData.checklist || []).forEach((item) => {
+      const id = item.id;
+      if (!id) return;
+      const arr = Array.isArray(item.checkpointStates)
+        ? item.checkpointStates
+        : [];
+      const map = {};
+      arr.forEach((val, idx) => {
+        if (val) map[idx] = true;
+      });
+      next[id] = map;
+    });
+    setCheckpointState(next);
+  }, [stepData]);
 
   const totalTime = useMemo(
     () => (activeItem ? activeItem.totalSeconds || 0 : 0),
@@ -535,23 +556,49 @@ const StepComponentTemplate = ({
     setEditingIndex(null);
   };
 
-  const checkpoints =
-    (activeItem && CHECKPOINTS_BY_ITEM_ID[activeItem.id]) || [];
+  // Figure out which key to use in CHECKPOINTS_BY_ITEM_ID.
+  // 1) Try the item.id (best case if it matches your mapping)
+  // 2) If that’s missing, fall back to "<stepKey>_<1-based index>"
+  let checkpoints = [];
+  if (activeItem) {
+    const primaryKey = activeItem.id;
+    const fallbackKey = `${stepKey}_${activeIdx + 1}`;
 
-  const checkpointsForItem =
-    (activeItem && checkpointState[activeItem.id]) || {};
+    checkpoints =
+      CHECKPOINTS_BY_ITEM_ID[primaryKey] ||
+      CHECKPOINTS_BY_ITEM_ID[fallbackKey] ||
+      [];
+  }
+
+  const activeItemId =
+    (activeItem && activeItem.id) || `${stepKey}_${activeIdx + 1}`;
+
+  const checkpointsForItem = checkpointState[activeItemId] || {};
 
   const toggleCheckpoint = (cpIndex) => {
     if (!activeItem) return;
+
     setCheckpointState((prev) => {
-      const forItem = prev[activeItem.id] || {};
-      return {
+      const forItem = prev[activeItemId] || {};
+      const newFlag = !forItem[cpIndex];
+      const nextForItem = { ...forItem, [cpIndex]: newFlag };
+      const next = {
         ...prev,
-        [activeItem.id]: {
-          ...forItem,
-          [cpIndex]: !forItem[cpIndex],
-        },
+        [activeItemId]: nextForItem,
       };
+
+      // Build a dense boolean array for Firestore
+      const maxIndex = Math.max(
+        cpIndex,
+        ...Object.keys(nextForItem).map((k) => Number(k))
+      );
+      const arr = Array.from({ length: maxIndex + 1 }, (_, i) => !!nextForItem[i]);
+
+      if (onUpdateCheckpointStates) {
+        onUpdateCheckpointStates(activeIdx, arr);
+      }
+
+      return next;
     });
   };
 
