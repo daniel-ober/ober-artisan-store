@@ -654,8 +654,7 @@ function getTargetWindow(project) {
 const isItemTouched = (item = {}) => {
   const done = !!item.completed;
   const hasCheckpoints =
-    Array.isArray(item.checkpointStates) &&
-    item.checkpointStates.some(Boolean);
+    Array.isArray(item.checkpointStates) && item.checkpointStates.some(Boolean);
   return done || hasCheckpoints;
 };
 
@@ -720,10 +719,9 @@ const getCheckpointCountsForPhase = (project, phaseKey, stepIndex) => {
   return { done, total };
 };
 
-
 /* =========================================================
    LIFECYCLE STAGE → STEP → CHECKPOINT TEMPLATE
-   (Labels / ordering only; completion comes from Firestore)
+   (Customer-facing labels only; completion still from Firestore)
    ========================================================= */
 
 const STAGE_TEMPLATES = {
@@ -733,42 +731,42 @@ const STAGE_TEMPLATES = {
         key: 'initialConsultation',
         label: 'Initial consultation',
         checkpoints: [
-          'Capture drummer goals (genres, feel, tonal preferences)',
-          'Capture ergonomic considerations (arthritis, hand fatigue, stick choice)',
-          'Confirm drum size preference (diameter / depth)',
-          'Confirm visual tone / finish direction',
-          'Determine tuning goals (LegacyPrint window)',
-          'Confirm budget & timeline',
+          'Talk through what you play, how you like a drum to feel, and the kind of tone you love hearing.',
+          'Note any comfort needs (arthritis, hand fatigue, stick choice) so the drum works with your body, not against it.',
+          'Confirm the size you’re leaning toward (diameter and depth) and how it should sit in your setup.',
+          'Dial in the visual vibe—wood tones, color, and overall finish direction you’re drawn to.',
+          'Define the tuning range where you want this drum to live (your LegacyPrint “home base”).',
+          'Agree on a clear budget and realistic build timeline so expectations stay aligned.',
         ],
       },
       {
         key: 'buildProposal',
         label: 'Build proposal',
         checkpoints: [
-          'Generate full written build spec',
-          'Select primary wood species',
-          'Select secondary species if hybrid',
-          'Determine stave count',
-          'Determine shell thickness target',
-          'Determine veneer choice',
-          'Determine hardware finish (chrome / black nickel / brass)',
-          'Determine lug style (vintage tube)',
-          'Confirm hoop type is diecast',
-          'Determine bearing edge profile',
-          'Determine snare bed style',
-          'Generate mockup previews (if applicable)',
+          'Put everything we’ve discussed into a clear written build plan for your drum.',
+          'Choose the main wood that will shape the core tone and feel.',
+          'Decide if we’re adding a secondary wood for extra character or hybrid response.',
+          'Lock in how many staves the shell will use to balance feel, response, and look.',
+          'Set a target shell thickness so the drum breathes and responds the way you want.',
+          'Choose the outer veneer that will define the drum’s visual personality.',
+          'Pick your hardware finish (chrome, black nickel, or brass/gold) to frame the shell.',
+          'Confirm the lug style (vintage tube) that matches both sound and aesthetic.',
+          'Confirm we’re using diecast hoops for focus, attack, and tuning stability.',
+          'Choose the bearing edge profile that best supports your feel and tuning goals.',
+          'Choose the snare bed style that will shape wire response and sensitivity.',
+          'Prepare early visual mockups or previews when they’ll help you “see” the build.',
         ],
       },
       {
         key: 'earlyMockups',
         label: 'Early mockups',
         checkpoints: [
-          'Create first-round visual mockups (finish / veneer / hardware)',
-          'Explore 2–3 finish concepts with different accents',
-          'Mock up badge placement and logo treatments',
-          'Prepare quick write-up explaining each option',
-          'Share mockups with customer for feedback',
-          'Capture revision notes for chosen direction',
+          'Create first visual sketches or mockups of finish, veneer, and hardware together.',
+          'Show 2–3 finish concepts so you can compare different accent and color ideas.',
+          'Rough in where badges and logos will live on the shell.',
+          'Write a simple overview of each option so you know what you’re looking at.',
+          'Share these mockups with you for honest feedback and reactions.',
+          'Capture your notes and lock in the direction that feels most like “you.”',
         ],
       },
     ],
@@ -780,19 +778,19 @@ const STAGE_TEMPLATES = {
         key: 'paymentProcessing',
         label: 'Payment processing',
         checkpoints: [
-          'Invoice sent to customer',
-          'Deposit received / payment confirmed',
-          'Order status updated to “In Progress”',
+          'Send a simple, secure payment link for your build.',
+          'Confirm deposit or payment is received so your spot is locked in.',
+          'Update your order to “In Progress” so the build officially begins.',
         ],
       },
       {
         key: 'portalAccess',
         label: 'Portal access setup',
         checkpoints: [
-          'Create customer portal record',
-          'Link project to SoundLegend dashboard',
-          'Send welcome email with portal link',
-          'Confirm customer can log in successfully',
+          'Create your private SoundLegend project in the system.',
+          'Connect your build to the SoundLegend portal so progress can be tracked.',
+          'Send a welcome email with your login link and quick overview.',
+          'Confirm you can sign in and everything looks right on your side.',
         ],
       },
     ],
@@ -804,28 +802,28 @@ const STAGE_TEMPLATES = {
         key: 'woodSelection',
         label: 'Wood selection',
         checkpoints: [
-          'Select raw boards for shell',
-          'Check moisture content (MC% reading)',
-          'Verify grain direction for musicality and strength',
-          'Inspect knots and natural stress lines for resin fill opportunities',
-          'Estimate pre-cut length for each board',
-          'Optionally review and approve wood set with customer',
-          'Record board length',
-          'Record board width',
-          'Record board thickness',
-          'Record moisture reading (%)',
+          'Pick the specific boards that will become your shell.',
+          'Check each board’s moisture reading so the drum stays stable over time.',
+          'Choose grain directions that support both tone and strength.',
+          'Study knots and grain stress lines where resin or accents might live naturally.',
+          'Rough out how long each board needs to be for your shell size.',
+          'Optionally send photos or a quick video so you can approve the wood set.',
+          'Log each board’s length for accurate shell planning.',
+          'Log each board’s width so staves stay balanced.',
+          'Log each board’s thickness so we know how much material we have to work with.',
+          'Record the moisture percentage so we have a baseline for the build.',
         ],
       },
       {
         key: 'preBuildMeasuring',
         label: 'Pre-build measuring & prep',
         checkpoints: [
-          'Veneer integration test (visual + adhesion plan)',
-          'Shell color test under natural light',
-          'Shell color test with flash / studio light',
-          'Acrylic color swatch review against veneer',
-          'Logo badge placement test (mock or tape-on)',
-          'Send mockups / visuals to customer',
+          'Do a quick test to confirm veneer and shell will bond cleanly and look cohesive.',
+          'Check shell color and character in natural light to see its “real-world” appearance.',
+          'Check shell color and reflection under flash or studio lighting for photos and stage.',
+          'Compare acrylic accent color swatches against the veneer to find the best pairing.',
+          'Rough in badge and logo placement so they feel balanced on the shell.',
+          'Share updated visuals or notes with you before cutting any wood.',
         ],
       },
     ],
@@ -837,72 +835,72 @@ const STAGE_TEMPLATES = {
         key: 'cutStaveBevels',
         label: 'Cut stave bevels',
         checkpoints: [
-          'Confirm grain orientation for each stave block',
-          'Ensure all staves are uniform in dimension',
-          'Inspect each block for defects, cracks, or voids',
-          'Measure block length',
-          'Measure block width',
-          'Measure block thickness',
+          'Set each stave so its grain flows in a musical, stable direction.',
+          'Make sure every stave is cut to the same dimensions so the shell forms cleanly.',
+          'Check each piece for cracks, voids, or flaws that could affect long-term strength.',
+          'Measure the length of each stave to match your drum size.',
+          'Measure the width of each stave so the circle closes correctly.',
+          'Measure thickness so the shell can be brought to the right final profile.',
         ],
       },
       {
         key: 'preGlueTest',
         label: 'Pre-glue test (dry-fit)',
         checkpoints: [
-          'Inspect for tear-out after bevel cuts',
-          'Test fit two or more staves for perfect mating joints',
-          'Measure bevel angle accuracy (e.g., 9° or 10°)',
-          'Compare width of inner vs outer face to expected values',
+          'Inspect freshly cut bevels to ensure there’s no tear-out or roughness.',
+          'Test-fit a few staves together to confirm they lock up with tight joints.',
+          'Double-check the bevel angle so the full circle will form correctly.',
+          'Compare inside and outside faces to be sure proportions match our plan.',
         ],
       },
       {
         key: 'glueUpClamping',
         label: 'Glue-up & clamping',
         checkpoints: [
-          'Perform full dry-fit circle test',
-          'Check gaps between staves visually and by feel',
-          'Check roundness variance with calipers or jig',
-          'Measure out-of-round (target ±0.03")',
-          'Evaluate joint tightness at multiple points',
+          'Dry-fit the full circle of staves before glue to make sure everything mates well.',
+          'Look and feel for any gaps between staves and correct them before committing.',
+          'Check how round the circle is using our jigs or measuring tools.',
+          'Measure how far out-of-round the shell is and bring it into tight spec.',
+          'Check joint tightness at several points around the shell for even strength.',
         ],
       },
       {
         key: 'glueCuring',
         label: 'Glue curing',
         checkpoints: [
-          'Confirm minimum cure time has been met',
-          'Remove shell from clamps carefully',
-          'Perform visual inspection of all glue joints',
+          'Let the shell sit for the full recommended cure time so joints reach full strength.',
+          'Release the shell from the clamps carefully to avoid stressing new joints.',
+          'Do a first visual pass on every joint to confirm nothing opened up.',
         ],
       },
       {
         key: 'exteriorMillingSetup',
         label: 'Exterior milling setup',
         checkpoints: [
-          'Verify exterior milling sled or lathe jig is square and secure',
-          'Confirm shell is centered in jig with even overhang',
-          'Set cutter/router bit height for safe first pass',
-          'Run a light test pass to check for chatter or vibration',
+          'Square and lock the exterior milling sled or lathe so the shell cuts cleanly.',
+          'Center the shell in the jig so there’s equal support all the way around.',
+          'Set the cutter or router depth for a safe, controlled first pass.',
+          'Run a light test pass to listen for chatter or vibration and adjust if needed.',
         ],
       },
       {
         key: 'millExteriorDiameter',
         label: 'Mill exterior diameter',
         checkpoints: [
-          'Take multiple shallow passes to reach target diameter',
-          'Check diameter at 12 / 3 / 6 / 9 o’clock positions',
-          'Confirm roundness tolerance is within spec',
-          'Inspect exterior surface for tool marks or tear-out',
+          'Take several shallow cuts instead of one heavy pass to protect the shell.',
+          'Measure the shell at multiple clock positions to confirm a true circle.',
+          'Verify the final diameter is within our target tolerance.',
+          'Inspect the outside of the shell for any tool marks or tear-out that need refinement.',
         ],
       },
       {
         key: 'outerBevelReinforcement',
         label: 'Outer bevel reinforcement',
         checkpoints: [
-          'Apply thin CA or epoxy to outer bevel region',
-          'Confirm adhesive wicks evenly along all joints',
-          'Sand back reinforcement to a clean, smooth surface',
-          'Re-check for micro gaps or hairline cracks',
+          'Apply a thin reinforcing layer to the outer bevel zone where heads will sit.',
+          'Make sure that reinforcement soaks evenly along all stave joints.',
+          'Sand the area back to a smooth, clean surface ready for future steps.',
+          'Re-check for tiny gaps or hairline cracks and address them now, not later.',
         ],
       },
     ],
@@ -914,66 +912,66 @@ const STAGE_TEMPLATES = {
         key: 'sandingPrepExteriorInterior',
         label: 'Sanding prep (for veneer + interior)',
         checkpoints: [
-          'Perform 80–120 grit exterior prep',
-          'Remove high spots or ridges on exterior',
-          'Ensure shell is ready for interior jig / next process',
-          'Perform 120–220 grit interior smoothing',
-          'Micro-inspect all joints on interior surface',
-          'Confirm shell is ready for torching and veneer',
+          'Do an initial exterior sand so the shell is smooth and ready for finer work.',
+          'Knock down any high spots or ridges so the shell feels even under the hand.',
+          'Confirm the shell is ready to move into the next jig or process.',
+          'Smooth the interior with finer grits so it feels clean and consistent.',
+          'Inspect every interior joint up close before moving forward.',
+          'Make sure the shell is fully ready for torch work and veneer application.',
         ],
       },
       {
         key: 'interiorMillingSetup',
         label: 'Interior milling setup',
         checkpoints: [
-          'Verify interior sled / jig alignment',
-          'Set interior cutter height and depth of cut',
-          'Index shell correctly on interior jig',
+          'Align the interior milling sled or jig so the shell spins true.',
+          'Set the interior cutter depth to remove just the right amount of material.',
+          'Seat and index the shell correctly in the jig so it cuts evenly.',
         ],
       },
       {
         key: 'millInteriorThickness',
         label: 'Mill interior thickness',
         checkpoints: [
-          'Inspect shell exterior for smoothness after passes',
-          'Confirm glue lines are exposed and visible',
-          'Measure final exterior diameter (e.g., 14.000")',
-          'Check roundness accuracy with calipers / jig',
-          'Measure outer wall thickness at multiple points',
+          'Check the exterior again after passes to ensure it stayed smooth and true.',
+          'Expose clean glue lines so we can see the health of each joint.',
+          'Measure the final exterior diameter to confirm we’re exactly on spec.',
+          'Verify roundness again using calipers or jigs.',
+          'Measure shell wall thickness at multiple points to keep things even.',
         ],
       },
       {
         key: 'innerBevelReinforcement',
         label: 'Inner bevel reinforcement',
         checkpoints: [
-          'Inspect interior surface for smoothness',
-          'Confirm no significant tear-out on interior',
-          'Measure interior diameter',
-          'Measure final shell thickness at top',
-          'Measure final shell thickness at mid-shell',
-          'Measure final shell thickness at bottom',
-          'Check inner roundness variance',
+          'Inspect the interior surface and edges to ensure they feel smooth and intentional.',
+          'Confirm there’s no major tear-out or roughness hiding inside.',
+          'Measure interior diameter to check our inner profile.',
+          'Measure final shell thickness at the top edge area.',
+          'Measure final shell thickness around the middle of the shell.',
+          'Measure final shell thickness near the bottom edge.',
+          'Check how true the inner circle is all the way around.',
         ],
       },
       {
         key: 'sandingPrepInterior',
         label: 'Sanding prep (interior)',
         checkpoints: [
-          'Apply thin CA glue to outer bevel region',
-          'Inspect penetration of CA along joints',
-          'Sand back outer bevel to clean, smooth surface',
-          'Apply thin CA glue to inner bevel region',
-          'Confirm even penetration along inner joints',
-          'Sand back inner bevel smooth after cure',
+          'Reinforce the outer bevel area with a thin glue treatment for long-term strength.',
+          'Check that reinforcement has soaked evenly into all joints.',
+          'Sand the outer bevel smooth again so it feels seamless.',
+          'Reinforce the inner bevel area with a matching treatment.',
+          'Confirm the inner joints have taken reinforcement evenly.',
+          'Sand the inner bevel smooth and comfortable after everything cures.',
         ],
       },
       {
         key: 'originalTorchTune',
         label: 'Original torch tune process',
         checkpoints: [
-          'Ensure flame pattern is even around shell',
-          'Verify grain “pop” without overburning',
-          'Confirm no burn-through or structural damage',
+          'Apply torch work in a controlled pattern around the shell.',
+          'Bring the grain to life visually without scorching or overburning.',
+          'Confirm the shell is visually elevated with no structural damage from heat.',
         ],
       },
     ],
@@ -985,82 +983,82 @@ const STAGE_TEMPLATES = {
         key: 'veneerApplication',
         label: 'Veneer application',
         checkpoints: [
-          'Verify contact cement coverage on shell and veneer',
-          'Roll veneer onto shell with even pressure',
-          'Check for bubbles or trapped air',
-          'Confirm seam is tight and effectively invisible',
-          'Measure veneer thickness',
-          'Confirm veneer seam alignment to design plan',
-          'Observe any veneer creep or slippage after set time',
+          'Lay down even adhesive on both shell and veneer for a strong bond.',
+          'Roll the veneer onto the shell with smooth, even pressure.',
+          'Check for any bubbles or trapped air and remove them.',
+          'Inspect the seam so it reads as a clean, nearly invisible joint.',
+          'Confirm veneer thickness is appropriate for tone and durability.',
+          'Make sure the veneer seam lines up with the planned design orientation.',
+          'Watch for any drifting or creep as the veneer settles and address it early.',
         ],
       },
       {
         key: 'underSprayWork',
         label: 'Under-spray aesthetic work',
         checkpoints: [
-          'Place acrylic fills in natural stress lines (not random streaks)',
-          'Balance torch accents with overall design',
-          'Confirm CA injections are level and clear',
-          'Sand shell to 320–400 grit before finish',
+          'Place acrylic accents where the wood naturally wants them—inside stress lines and figure.',
+          'Balance torch and color work so the shell feels intentional, not busy.',
+          'Check that any injected fills are level, clear, and integrated with the grain.',
+          'Sand the shell to a fine grit (320–400) so it’s truly ready for finish.',
         ],
       },
       {
         key: 'preFinishInspection',
         label: 'Pre-finish full shell inspection',
         checkpoints: [
-          'Verify shell is perfectly smooth to the touch',
-          'Confirm no veneer overhang at edges',
-          'Remove all surface dust and debris',
-          'Mask edges as needed before spray',
+          'Run a hand and eye check to confirm the shell feels perfectly smooth.',
+          'Make sure there’s no veneer hanging over the edges where heads will sit.',
+          'Remove dust and debris so nothing gets trapped under the finish.',
+          'Mask off any areas that shouldn’t receive spray before finishing.',
         ],
       },
       {
         key: 'badgeLogoWork',
         label: 'Badge + logo work',
         checkpoints: [
-          'Align outer badge at correct vertical and rotational position',
-          'Place inner badge in correct location',
-          'Confirm adhesives or fasteners have set properly',
+          'Place the outer badge exactly where it feels balanced on the shell.',
+          'Install the inner badge in its dedicated spot inside the drum.',
+          'Confirm everything is fully adhered or fastened and ready for the long haul.',
         ],
       },
       {
         key: 'sprayFinishing',
         label: 'Spray finishing',
         checkpoints: [
-          'Spray even, controlled coats (no heavy spots)',
-          'Check flashing between coats and eliminate as needed',
-          'Minimize orange peel through gun settings and technique',
-          'Respect cure time between coats before next application',
-          'Measure approximate finish thickness (multi-coat build)',
-          'Visually inspect surface reflection consistency',
+          'Lay down controlled, even coats so the finish builds cleanly.',
+          'Watch for flashing or uneven spots between coats and smooth them out.',
+          'Tune gun settings and technique to keep orange peel to a minimum.',
+          'Give each coat the time it needs to set before the next one goes on.',
+          'Track approximate finish build so tone and protection stay in balance.',
+          'Check shell reflections to ensure an even, consistent surface.',
         ],
       },
       {
         key: 'fullDegassing',
         label: 'Full de-gassing of chemicals',
         checkpoints: [
-          'Place shell in dust-controlled area for final cure',
-          'Observe finish for shrink-back or witness lines during cure',
-          'Respect manufacturer’s full de-gassing / off-gassing time',
-          'Confirm finish is fully hardened before level sanding',
+          'Let the shell cure in a clean, dust-controlled area.',
+          'Watch the surface as it cures for any shrinking or witness lines.',
+          'Give the finish full off-gassing time so it hardens correctly.',
+          'Confirm the finish is fully cured before any leveling or polishing.',
         ],
       },
       {
         key: 'finalSanding',
         label: 'Final sanding',
         checkpoints: [
-          'Level sand to remove minor orange peel and dust nibs',
-          'Avoid sanding through veneer or color coats',
-          'Inspect surface under raking light for flatness and defects',
+          'Level sand to remove tiny imperfections and texture in the finish.',
+          'Protect veneer and color coats by sanding carefully where it matters.',
+          'Check the shell under raking light to catch any final surface issues.',
         ],
       },
       {
         key: 'polishing',
         label: 'Polishing',
         checkpoints: [
-          'Buff shell to final gloss or satin sheen',
-          'Check reflections for waves or swirl marks',
-          'Clean compound residue from edges and hardware zones',
+          'Buff the shell to its final sheen—gloss or satin, as planned.',
+          'Inspect reflections for smoothness without waves or swirl marks.',
+          'Clean away any leftover polish from edges and hardware areas.',
         ],
       },
     ],
@@ -1072,23 +1070,23 @@ const STAGE_TEMPLATES = {
         key: 'bearingEdges',
         label: 'Bearing edges',
         checkpoints: [
-          'Balance inner and outer edge profiles',
-          'Confirm 45° cutting surface with intended roundover',
-          'Inspect for chatter marks or tool marks',
-          'Measure edge height relative to shell',
-          'Inspect contact point profile around full circle',
-          'Evaluate cutting surface smoothness',
+          'Shape inner and outer edges so they work together as one profile.',
+          'Confirm the main cutting surface matches the intended angle and roundover.',
+          'Check for any chatter or tool marks that could affect tuning or feel.',
+          'Measure edge height so heads sit exactly where they should on the shell.',
+          'Inspect the contact point all the way around for consistency.',
+          'Evaluate how smooth the edge feels as you run a finger along it.',
         ],
       },
       {
         key: 'snareBeds',
         label: 'Snare beds',
         checkpoints: [
-          'Confirm left / right bed symmetry',
-          'Check smooth transitions into and out of snare beds',
-          'Measure bed depth',
-          'Measure bed width',
-          'Measure bed taper / ramp profile',
+          'Confirm left and right snare beds mirror each other perfectly.',
+          'Check the transitions into and out of the beds so there are no sharp steps.',
+          'Measure bed depth so wires can relax into the shell properly.',
+          'Measure bed width to match your snare setup and response goals.',
+          'Check how the bed ramps in and out to keep feel and response balanced.',
         ],
       },
     ],
@@ -1100,20 +1098,20 @@ const STAGE_TEMPLATES = {
         key: 'hardwareHeadAssembly',
         label: 'Hardware + head assembly',
         checkpoints: [
-          'Install all lugs with correct hardware',
-          'Install throw-off at correct height and angle',
-          'Install butt plate aligned with throw-off',
-          'Install vent grommet',
-          'Verify all components sit flush and solid',
-          'Install hoops and heads with correct orientation',
-          'Install snare wires and confirm center alignment',
-          'Confirm no rattles or loose components',
-          'Check snare throw action for smooth travel',
-          'Verify even head seating all around',
-          'Check lug alignment relative to hoops',
-          'Confirm shell-to-hoop parallelism',
-          'Confirm adequate tension rod travel and feel',
-          'Verify snare throw alignment with beds and wires',
+          'Install all lugs with the correct fittings so they feel solid and quiet.',
+          'Mount the throw-off at the right height and angle for easy access.',
+          'Install the butt plate directly opposite the throw-off for clean wire pull.',
+          'Install the vent grommet so the shell can breathe and equalize pressure.',
+          'Confirm all hardware sits flat and tight against the shell.',
+          'Mount hoops and heads in the correct orientation for the design.',
+          'String up the snare wires and center them across the beds.',
+          'Tap and check for rattles or loose parts and correct anything that moves.',
+          'Test the snare throw to make sure it engages and releases smoothly.',
+          'Check that the head seats evenly around the drum with balanced tension.',
+          'Visually line up lugs relative to the hoops for a clean, intentional look.',
+          'Confirm the hoops and shell sit parallel for smooth tuning and feel.',
+          'Make sure there’s plenty of usable range on each tension rod.',
+          'Verify the throw-off and beds work together so the wires respond evenly.',
         ],
       },
     ],
@@ -1125,51 +1123,51 @@ const STAGE_TEMPLATES = {
         key: 'legacyResonanceAnalysis',
         label: 'Legacy resonance analysis',
         checkpoints: [
-          'Capture fundamental pitch (3-hit average)',
-          'Identify low sweet spot',
-          'Identify Legacy sweet spot',
-          'Identify high sweet spot',
-          'Note harmonic multiples',
-          'Evaluate overtone suppression / control score',
+          'Capture the drum’s fundamental pitch multiple times and average it.',
+          'Find the low tuning range where the drum still feels musical.',
+          'Find the “Legacy” sweet-spot tuning that shows the drum at its best.',
+          'Find the higher tuning range where it still feels controlled and usable.',
+          'Note how the overtones stack so we understand its harmonic behavior.',
+          'Evaluate how the drum handles unwanted overtones or ring.',
         ],
       },
       {
         key: 'legacyTuning',
         label: 'Legacy tuning',
         checkpoints: [
-          'Evaluate sustain at various tunings',
-          'Check overtones across the tuning range',
-          'Test dynamic response from soft to loud',
-          'Measure Hz at each lug (where applicable)',
-          'Define target LegacyPrint window',
-          'Document adjacent-low tuning reference',
-          'Document adjacent-high tuning reference',
+          'Listen to how the drum sustains at several tunings.',
+          'Check how overtones behave across the tuning range.',
+          'Test soft-to-loud playing so we know how it responds dynamically.',
+          'Measure lug-to-lug pitch (when useful) to keep things balanced.',
+          'Define the LegacyPrint window—the tuning zone we recommend you live in.',
+          'Document a slightly-lower tuning option you can explore.',
+          'Document a slightly-higher tuning option for brighter applications.',
         ],
       },
       {
         key: 'professionalPhotos',
         label: 'Professional photos',
         checkpoints: [
-          'Capture hero shot',
-          'Capture left-angle shot',
-          'Capture right-angle shot',
-          'Capture top-down hoop shot',
-          'Capture close-up badge shot',
-          'Capture texture macro shot',
-          'Capture 360 vertical standing series',
-          'Capture 360 flat / horizontal series',
+          'Capture a hero shot that shows the drum’s overall character.',
+          'Capture a left-angle shot that highlights depth and stance.',
+          'Capture a right-angle shot for full shell and hardware detail.',
+          'Capture a top-down shot that shows hoops and head layout.',
+          'Capture a close-up of the badge and logo details.',
+          'Capture a macro shot of wood, grain, and finish texture.',
+          'Shoot a 360-style standing series to show the drum all the way around.',
+          'Shoot a horizontal or flat series to show the drum in a different context.',
         ],
       },
       {
         key: 'studioLegacyAudio',
         label: 'Studio Legacy audio',
         checkpoints: [
-          'Record loose tuning examples',
-          'Record medium tuning examples',
-          'Record tight tuning examples',
-          'Record adjacent-high tuning example',
-          'Record cross-stick samples',
-          'Record ghost-note swells and dynamic phrases',
+          'Record examples at a loose tuning so you can hear it wide open.',
+          'Record examples at a medium tuning that many players will live in.',
+          'Record examples at a tighter tuning for crack and articulation.',
+          'Record at the higher recommended tuning for extra cut when needed.',
+          'Capture cross-stick examples so you can hear rim voice and feel.',
+          'Capture ghost-note and dynamic phrases to show nuance and response.',
         ],
       },
     ],
@@ -1181,46 +1179,46 @@ const STAGE_TEMPLATES = {
         key: 'ntagAuthentication',
         label: 'NTAG authentication',
         checkpoints: [
-          'Capture NFC chip UID',
-          'Create or update Firestore entry for tag',
-          'Link tag record to correct project',
-          'Verify Legacy page URL is correctly linked',
-          'Test scan on iPhone',
-          'Test scan on Android',
+          'Read and record the unique ID from your NFC chip.',
+          'Create or update the digital record that links this tag to your drum.',
+          'Connect that tag record to the correct project in our system.',
+          'Confirm the tag points to the right Legacy / verification page.',
+          'Test tap-to-verify using an iPhone.',
+          'Test tap-to-verify using an Android device.',
         ],
       },
       {
         key: 'finalCleaning',
         label: 'Final cleaning',
         checkpoints: [
-          'Remove fingerprints and smudges from shell and hardware',
-          'Polish hoops and hardware to final shine',
-          'Confirm snare wire alignment and tension range',
-          'Inspect shell under studio light for finish defects',
-          'Perform final structural check (shell, edges, hardware)',
-          'Perform final sound check and Vault verification',
+          'Wipe away fingerprints and smudges from shell and hardware.',
+          'Give hoops and hardware a final polish so they arrive stage-ready.',
+          'Double-check snare wire alignment and the range of tension available.',
+          'Inspect the shell under good light for any last finish issues.',
+          'Run a final structural check of shell, edges, and hardware.',
+          'Do one last sound and feel pass before calling it complete.',
         ],
       },
       {
         key: 'packaging',
         label: 'Packaging',
         checkpoints: [
-          'Apply inner wrap / protective layer to drum',
-          'Add moisture barrier as needed',
-          'Add cushioning around shell, hoops, and hardware',
-          'Insert folder with personalized thank-you letter',
-          'Insert folder with Legacy tuning analysis',
-          'Insert folder with care instructions',
-          'Insert folder with branding tag or collateral',
-          'Apply external box branding',
-          'Apply shipping label, insurance, and signature required',
+          'Wrap the drum in a soft inner layer so nothing rubs against the finish.',
+          'Add moisture protection if needed for the route it will travel.',
+          'Add cushioning around shell, hoops, and hardware for impact protection.',
+          'Place your personalized thank-you letter into the package.',
+          'Include your Legacy tuning and analysis materials.',
+          'Include care instructions so the drum stays healthy long-term.',
+          'Include any brand collateral or extras connected to your build.',
+          'Mark the outside of the box with Ober branding where appropriate.',
+          'Apply the shipping label, insurance, and signature-required details.',
         ],
       },
       {
         key: 'deliveryConfirmation',
         label: 'Delivery confirmation',
         checkpoints: [
-          'Schedule reveal date or follow-up session if desired',
+          'Coordinate a reveal or follow-up touchpoint once the drum arrives, if you’d like.',
         ],
       },
     ],
@@ -1237,65 +1235,84 @@ const StageCheckpointsPanel = ({ project, stageKey }) => {
   const template = STAGE_TEMPLATES[stageKey];
   if (!template) return null;
 
-  // 🔑 Find the underlying Firestore section for this stage.
-  // e.g. stageKey "rawShell" → STEP_DEFS.rawShell.storageKeys[0] = "rawShellCreation"
-  const meta = STEP_DEFS[stageKey];
-  const primaryStorageKey = meta?.storageKeys?.[0];
-  const section = primaryStorageKey ? project[primaryStorageKey] : null;
-  const checklist = Array.isArray(section?.checklist) ? section.checklist : [];
+  // Map stageKey (e.g. 'rawShell') → phase key used in the admin modal
+  // (e.g. 'rawShellCreation'), via STEP_DEFS.storageKeys.
+  const stepMeta = STEP_DEFS[stageKey];
+  const phaseKey = stepMeta?.storageKeys?.[0]; // usually a single key
+  const phase = phaseKey ? project?.[phaseKey] : null;
+  const phaseChecklist = Array.isArray(phase?.checklist) ? phase.checklist : [];
 
-  // Map template steps → align with checklist items + checkpointStates
-  const normalizedSteps = template.steps.map((tplStep, stepIndex) => {
-    // Each stage step (e.g. "Cut stave blocks to size") corresponds to one
-    // checklist item in the admin modal, in order.
-    const checklistItem = checklist[stepIndex] || {};
-    const states = Array.isArray(checklistItem.checkpointStates)
-      ? checklistItem.checkpointStates
-      : [];
+  // Optional legacy lifecycle structure (fallback only)
+  const lifecycleStage = project?.lifecycle?.stages?.[stageKey];
+  const lifecycleSteps = lifecycleStage?.steps
+    ? Object.values(lifecycleStage.steps)
+    : [];
 
-    const checkpoints = (tplStep.checkpoints || []).map((cpLabel, cpIndex) => ({
+  // Build normalized steps from the template, and overlay completion from
+  // either the phase checklist (primary) or lifecycle (fallback).
+  const normalizedSteps = template.steps.map((tplStep, idx) => {
+    const labels = tplStep.checkpoints || [];
+
+    let checkpointStates = [];
+    let completedFlag = false;
+
+    // ---- 1) PRIMARY: top-level phase checklist (rawShellCreation.checklist) ----
+    const phaseItem = phaseChecklist[idx];
+    if (phaseItem) {
+      if (Array.isArray(phaseItem.checkpointStates)) {
+        checkpointStates = phaseItem.checkpointStates;
+      }
+      completedFlag = !!phaseItem.completed;
+    }
+
+    // ---- 2) FALLBACK: lifecycle.stages[stageKey].steps[*].checkpoints ----
+    if (!checkpointStates.length && lifecycleSteps.length) {
+      const tplSlug = slugify(tplStep.label);
+      const dbStep =
+        lifecycleSteps.find((s) => slugify(s.label || '') === tplSlug) ||
+        lifecycleSteps[idx];
+
+      if (dbStep) {
+        const cpsObj = dbStep.checkpoints || {};
+        const cpsArr = Object.values(cpsObj).sort(
+          (a, b) => (a.order || 0) - (b.order || 0)
+        );
+        checkpointStates = cpsArr.map((c) => !!c.completed);
+        completedFlag = completedFlag || !!dbStep.completed;
+      }
+    }
+
+    // Map template checkpoint labels → completion booleans
+    const checkpoints = labels.map((cpLabel, cpIndex) => ({
       id: `${tplStep.key}_cp_${cpIndex}`,
-      label: cpLabel,                // always show template label
-      completed: !!states[cpIndex],  // ✅ completion from checkpointStates
+      label: cpLabel,
+      completed: !!checkpointStates[cpIndex],
     }));
 
+    const total = checkpoints.length;
+    const done = checkpoints.filter((c) => c.completed).length;
+
+    let status;
+    if (completedFlag && total > 0) {
+      status = 'COMPLETED';
+    } else if (done === 0) {
+      status = 'NOT STARTED';
+    } else if (done === total) {
+      status = 'COMPLETED';
+    } else {
+      status = 'IN PROGRESS';
+    }
+
     return {
-      id: checklistItem.id || tplStep.key,
+      id: `${stageKey}_${tplStep.key}`,
       label: tplStep.label,
-      order: stepIndex + 1,
+      order: idx + 1,
       checkpoints,
+      total,
+      done,
+      status,
     };
   });
-
-  // sort by explicit order, fallback to index
-  normalizedSteps.sort((a, b) => (a.order || 0) - (b.order || 0));
-
-  // ---------- single-open accordion state ----------
-  const [openStepId, setOpenStepId] = useState(
-    () => normalizedSteps[0]?.id || null
-  );
-
-  // When the stage or project changes, default to first step open
-  useEffect(() => {
-    const firstId = normalizedSteps[0]?.id || null;
-    setOpenStepId(firstId);
-  }, [stageKey, project?.id]);
-
-  const toggleStep = (stepId) => {
-    setOpenStepId((prev) => (prev === stepId ? null : stepId));
-  };
-
-  const summarizeStep = (step) => {
-    const cps = step.checkpoints || [];
-    const total = cps.length;
-    const done = cps.filter((c) => c.completed).length;
-
-    let status = 'NOT STARTED';
-    if (done > 0 && done < total) status = 'IN PROGRESS';
-    if (done === total && total > 0) status = 'COMPLETED';
-
-    return { total, done, status };
-  };
 
   const statusClass = (status) => {
     if (status === 'COMPLETED') return 'pill-complete';
@@ -1303,13 +1320,74 @@ const StageCheckpointsPanel = ({ project, stageKey }) => {
     return 'pill-pending';
   };
 
+  // ---------- single-open accordion state ----------
+  const [openStepId, setOpenStepId] = useState(null);
+
+  // On stage or project change:
+  // - If this is the *current* stage: auto-open the most current
+  //   non-completed step (prefer IN PROGRESS, else first NOT STARTED).
+  // - If this is a past/future stage: don't auto-open anything.
+  useEffect(() => {
+    if (!normalizedSteps.length) {
+      setOpenStepId(null);
+      return;
+    }
+
+    const currentStageIndex = getCurrentStepIndex(project); // from above in file
+    const thisStageIndex = STEPS.findIndex((s) => s.key === stageKey);
+    const isCurrentStage = thisStageIndex === currentStageIndex;
+
+    // If we're looking at a past or future stage, never auto-expand.
+    if (!isCurrentStage) {
+      setOpenStepId(null);
+      return;
+    }
+
+    let candidateIndex = -1;
+
+    // 1) Try to derive from the phase checklist (admin modal source of truth)
+    if (phaseChecklist.length && phaseKey) {
+      const idx = getActiveStepIndexForPhase(project, phaseKey);
+      if (idx >= 0 && idx < normalizedSteps.length) {
+        candidateIndex = idx;
+      }
+    }
+
+    // 2) If that fails, look for the first IN PROGRESS step in this stage
+    if (candidateIndex < 0) {
+      candidateIndex = normalizedSteps.findIndex(
+        (s) => s.status === 'IN PROGRESS'
+      );
+    }
+
+    // 3) If still nothing, look for the first NOT STARTED step
+    if (candidateIndex < 0) {
+      candidateIndex = normalizedSteps.findIndex(
+        (s) => s.status === 'NOT STARTED'
+      );
+    }
+
+    const candidate =
+      candidateIndex >= 0 ? normalizedSteps[candidateIndex] : null;
+
+    // 🚫 Never auto-expand a COMPLETED step
+    if (!candidate || candidate.status === 'COMPLETED') {
+      setOpenStepId(null);
+    } else {
+      setOpenStepId(candidate.id);
+    }
+  }, [stageKey, project, phaseChecklist.length]);
+
+  const toggleStep = (stepId) => {
+    setOpenStepId((prev) => (prev === stepId ? null : stepId));
+  };
+
   return (
     <div className="pp-stage-card">
       <h4 className="pp-section-title">Stage checkpoints</h4>
-
       <div className="pp-step-list">
         {normalizedSteps.map((step) => {
-          const { total, done, status } = summarizeStep(step);
+          const { total, done, status } = step;
           const isOpen = openStepId === step.id;
 
           return (
@@ -1319,7 +1397,7 @@ const StageCheckpointsPanel = ({ project, stageKey }) => {
                 .toLowerCase()
                 .replace(' ', '-')}`}
             >
-              {/* Step header (e.g. "Cut stave blocks to size") */}
+              {/* Step header (e.g. "Glue-up & clamping") */}
               <button
                 type="button"
                 className="pp-step-header slp-pp-step-header"
@@ -1333,9 +1411,7 @@ const StageCheckpointsPanel = ({ project, stageKey }) => {
                   </span>
                 </div>
 
-                <span
-                  className={`pp-step-status pill ${statusClass(status)}`}
-                >
+                <span className={`pp-step-status pill ${statusClass(status)}`}>
                   {status}
                 </span>
 
@@ -1446,10 +1522,7 @@ const ProjectProgress = ({ project: initialProject }) => {
     [project, activeStep]
   );
 
-  const heroMedia = useMemo(
-    () => ({ type: 'video', url: CRAFT_VIDEO }),
-    []
-  );
+  const heroMedia = useMemo(() => ({ type: 'video', url: CRAFT_VIDEO }), []);
 
   if (loading && !project) {
     return (
@@ -1529,9 +1602,9 @@ const ProjectProgress = ({ project: initialProject }) => {
             className="sl-progress-roadmap-track-fill"
             style={{
               width:
-                ((currentStepIndex + 0.0001) /
-                  Math.max(1, STEPS.length - 1)) *
-                  100 + '%',
+                ((currentStepIndex + 0.0001) / Math.max(1, STEPS.length - 1)) *
+                  100 +
+                '%',
             }}
           />
         </div>
@@ -1602,8 +1675,8 @@ const ProjectProgress = ({ project: initialProject }) => {
                 activeStatus === 'completed'
                   ? 'is-completed'
                   : activeStatus === 'in progress'
-                  ? 'is-inprogress'
-                  : 'is-notstarted',
+                    ? 'is-inprogress'
+                    : 'is-notstarted',
               ].join(' ')}
             >
               {displayStatus(activeStatus)}
@@ -1641,26 +1714,20 @@ const ProjectProgress = ({ project: initialProject }) => {
           </div>
         </div>
 
-        {/* Two-column content */}
+        {/* Explainer + checkpoints */}
         <div className="sl-progress-stage-body">
-          {/* LEFT: narrative + checkpoints */}
-          <div className="sl-progress-stage-col">
+          {/* LEFT: explainer content (always together) */}
+          <div className="sl-progress-stage-col sl-progress-stage-col--explainer">
             <div className="sl-progress-card">
-              <h3 className="sl-progress-card-title">What we do</h3>
+              <h3 className="sl-progress-card-title">What we do in this stage</h3>
               <p className="sl-progress-card-text">{activeStep.what}</p>
             </div>
 
             <div className="sl-progress-card">
-              <h3 className="sl-progress-card-title">Why it matters</h3>
+              <h3 className="sl-progress-card-title">Why it matters for your drum</h3>
               <p className="sl-progress-card-text">{activeStep.why}</p>
             </div>
 
-            {/* Stage checkpoints (grouped by step, with expand/collapse) */}
-            <StageCheckpointsPanel project={project} stageKey={activeStep.key} />
-          </div>
-
-          {/* RIGHT: techniques / tools + mantra */}
-          <div className="sl-progress-stage-col">
             <div className="sl-progress-card">
               <h3 className="sl-progress-card-title">Techniques used</h3>
               <div className="sl-progress-pill-row">
@@ -1687,9 +1754,14 @@ const ProjectProgress = ({ project: initialProject }) => {
               <div className="sl-progress-quote-icon">★</div>
               <p className="sl-progress-quote-text">
                 {activeStep.mantra ||
-                  'The difference between “pretty on paper” and “just locks in” lives inside the details of this step.'}
+                  'This is the moment a stack of boards turns into a living, breathing shell.'}
               </p>
             </div>
+          </div>
+
+          {/* RIGHT: stage checkpoints */}
+          <div className="sl-progress-stage-col sl-progress-stage-col--checkpoints">
+            <StageCheckpointsPanel project={project} stageKey={activeStep.key} />
           </div>
         </div>
 

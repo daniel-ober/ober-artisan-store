@@ -344,16 +344,15 @@
 /* Stage body layout */
 
 .sl-progress-stage-body {
-  display: grid;
-  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.1fr);
-  gap: 20px;
+  display: flex;
+  flex-direction: column;
+  /* gap: 20px; */
   margin-top: 4px;
 }
 
 .sl-progress-stage-col {
   min-width: 0;
 }
-
 /* Cards */
 
 .sl-progress-card {
@@ -647,6 +646,87 @@
 /* =====================================================================
    RESPONSIVE
    ===================================================================== */
+
+/* ───────────────────────────────────────────────
+   SPACING / PADDING POLISH FOR LARGE SCREENS
+   ─────────────────────────────────────────────── */
+@media (min-width: 1200px) {
+  /* tighter overall container spacing */
+  .sl-progress-stage {
+    padding: 32px 36px 48px;
+  }
+
+  /* reduce excess vertical space between sections */
+  .sl-progress-stage-header {
+    margin-bottom: 28px;
+  }
+
+  .sl-progress-stage-stats {
+    margin-bottom: 32px;
+  }
+
+  /* better balance inside the two-column grid */
+  .sl-progress-stage-body {
+    column-gap: 40px;  /* was 24px — more breathing room */
+    row-gap: 0;
+  }
+
+  /* explainer column: consistent vertical spacing between cards */
+  .sl-progress-stage-col--explainer .sl-progress-card {
+    margin-bottom: 20px;
+  }
+
+  .sl-progress-stage-col--explainer .sl-progress-card:last-child {
+    margin-bottom: 0;
+  }
+
+  /* checkpoints column: reduce padding so it's not so “boxed in” */
+  .sl-progress-stage-col--checkpoints .pp-stage-card {
+    padding: 24px 26px;
+    width: 100%;
+    border-radius: 14px;
+  }
+
+  /* “Stage Checkpoints” title refinement */
+  .pp-stage-title {
+    font-size: 1.1rem;
+    margin-bottom: 18px;
+  }
+
+  /* Fix top alignment between left content and right checkpoints */
+  .sl-progress-stage-col--checkpoints {
+    align-self: start;
+    padding-top: 6px;
+  }
+
+  /* bottom spacing consistency */
+  .sl-progress-stage-footer {
+    margin-top: 40px;
+  }
+}
+
+@media (min-width: 1100px) {
+  .sl-progress-stage-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.2fr);
+    align-items: flex-start;
+  }
+
+  .sl-progress-stage-col--explainer {
+    /* just makes intent clear; grid handles width */
+  }
+
+  .sl-progress-stage-col--checkpoints {
+    display: flex;
+    justify-content: flex-end; /* keeps the panel nicely aligned to the right */
+  }
+
+  /* Make the checkpoints card sit flush to the top and use the column width */
+  .sl-progress-stage-col--checkpoints .pp-stage-card {
+    margin-top: 0.4rem; /* was 1.5rem – that’s why it looked “dropped” */
+    width: 100%;
+  }
+}
 
 @media (max-width: 900px) {
   .slp-card.pp-card[data-component="ProjectProgress"] {

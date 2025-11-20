@@ -114,7 +114,7 @@ const CHECKPOINTS_BY_ITEM_ID = {
 
   // 2.1 Payment processing
   commitmentPortal_1: [
-    'Invoice sent to customer',
+    'Payment Link sent to customer',
     'Deposit received / payment confirmed',
     'Order status updated to “In Progress”',
   ],
