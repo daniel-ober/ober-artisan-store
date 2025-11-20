@@ -213,6 +213,10 @@ const ensureChecklistStructure = (data) => {
         totalSeconds: Number.isFinite(item.totalSeconds)
           ? item.totalSeconds
           : 0,
+        // keep any existing checkpointStates array if present
+        checkpointStates: Array.isArray(item.checkpointStates)
+          ? item.checkpointStates
+          : [],
       }));
     }
 
@@ -224,6 +228,112 @@ const ensureChecklistStructure = (data) => {
 
   return fixed;
 };
+
+/* ----------------------------------------------------------------------------
+ * LIFECYCLE PANEL (Stage → Step → Checkpoint)
+ * -------------------------------------------------------------------------- */
+
+const LifecyclePanel = ({ lifecycle, onToggleCheckpoint }) => {
+  const stages = lifecycle?.stages || {};
+  const stageIds = Object.keys(stages).sort((a, b) => {
+    const aOrder = stages[a]?.order ?? 0;
+    const bOrder = stages[b]?.order ?? 0;
+    return aOrder - bOrder;
+  });
+
+  if (!stageIds.length) {
+    return (
+      <div className="mpm-lifecycle-card">
+        <h3 className="mpm-lifecycle-title">Lifecycle Checkpoints</h3>
+        <p className="mpm-lifecycle-hint">
+          No lifecycle data found for this project. New projects will populate
+          this automatically as you define stages, steps, and checkpoints.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="mpm-lifecycle-card">
+      <h3 className="mpm-lifecycle-title">Lifecycle Checkpoints</h3>
+      <p className="mpm-lifecycle-hint">
+        This is your Stage → Step → Checkpoint map. Toggle checkpoints as you
+        complete them. Stage and Step completion will auto-roll up.
+      </p>
+
+      {stageIds.map((stageId) => {
+        const stage = stages[stageId] || {};
+        const steps = stage.steps || {};
+        const stepIds = Object.keys(steps).sort((a, b) => {
+          const aOrder = steps[a]?.order ?? 0;
+          const bOrder = steps[b]?.order ?? 0;
+          return aOrder - bOrder;
+        });
+        const stageDone = !!stage.completed;
+
+        return (
+          <div key={stageId} className="mpm-lifecycle-stage">
+            <div className="mpm-lifecycle-stage-header">
+              <span className="mpm-lifecycle-stage-title">
+                {stageDone ? '✅ ' : ''}
+                {stage.label || stageId}
+              </span>
+            </div>
+
+            {stepIds.map((stepId) => {
+              const step = steps[stepId] || {};
+              const checkpoints = step.checkpoints || {};
+              const checkpointIds = Object.keys(checkpoints);
+              const stepDone = !!step.completed;
+
+              if (!checkpointIds.length) return null;
+
+              return (
+                <div key={stepId} className="mpm-lifecycle-step">
+                  <div className="mpm-lifecycle-step-title">
+                    {stepDone ? '✅ ' : ''}
+                    {step.label || stepId}
+                  </div>
+
+                  <ul className="mpm-lifecycle-ck-list">
+                    {checkpointIds.map((cpId) => {
+                      const cp = checkpoints[cpId] || {};
+                      return (
+                        <li key={cpId} className="mpm-lifecycle-ck-item">
+                          <label className="mpm-lifecycle-ck-label-wrap">
+                            <input
+                              type="checkbox"
+                              checked={!!cp.completed}
+                              onChange={(e) =>
+                                onToggleCheckpoint(
+                                  stageId,
+                                  stepId,
+                                  cpId,
+                                  e.target.checked
+                                )
+                              }
+                            />
+                            <span className="mpm-lifecycle-ck-label">
+                              {cp.label || cpId}
+                            </span>
+                          </label>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              );
+            })}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+/* ----------------------------------------------------------------------------
+ * MAIN COMPONENT
+ * -------------------------------------------------------------------------- */
 
 const ManageProjectModal = ({
   isOpen,
@@ -252,44 +362,76 @@ const ManageProjectModal = ({
     return 'In Production';
   };
 
-  const determineCurrentPhase = (data = editableData) => {
-    for (const phase of buildPhases) {
-      const checklist = data[phase.key]?.checklist;
-      if (!checklist || checklist.some((i) => !i.completed)) {
-        return STEP_META[phase.key]?.label || phase.label || phase.key;
-      }
+const determineCurrentPhase = (data = editableData) => {
+  if (!data) return 'Unknown';
+
+  let lastTouchedLabel = null;
+
+  for (const phase of buildPhases) {
+    const stepData = data[phase.key] || {};
+    const checklist = Array.isArray(stepData.checklist)
+      ? stepData.checklist
+      : [];
+
+    if (!checklist.length) continue;
+
+    const label = STEP_META[phase.key]?.label || phase.label || phase.key;
+
+    const anyTouched = checklist.some((item) => {
+      const hasCompleted = !!item.completed;
+      const hasCheckpoint =
+        Array.isArray(item.checkpointStates) &&
+        item.checkpointStates.some(Boolean);
+      return hasCompleted || hasCheckpoint;
+    });
+
+    const allDone =
+      checklist.length > 0 && checklist.every((item) => !!item.completed);
+
+    if (anyTouched && !allDone) {
+      // This is the first "in progress" phase → current step
+      return label;
     }
-    return 'All Steps Complete';
-  };
 
-  useEffect(() => {
-    if (!projectData) return;
+    if (anyTouched) {
+      // Keep track of the last phase where *something* happened
+      lastTouchedLabel = label;
+    }
+  }
 
-    const hydrated = ensureChecklistStructure(projectData);
-    setEditableData(hydrated);
-    setOriginalData(hydrated);
-    setStatus(determineOverallStatus(hydrated));
+  // If we get here, then either nothing has started or all are finished.
+  if (lastTouchedLabel) return lastTouchedLabel;
 
-    // 🔄 Always reset to Overview when a project is opened/changed
-    setSelectedTab('details'); // show ProjectOverview
-    setSelectedStepKey(null); // no specific step selected
-    setSelectedSubIndex(0); // reset substep index
+  // Fallback to the very first phase label
+  const first = buildPhases[0];
+  return (
+    (first && (STEP_META[first.key]?.label || first.label || first.key)) ||
+    'Unknown'
+  );
+};
 
-    // Optional: still expand the first step in the sidebar,
-    // so you can immediately see its checklist if you click into it.
-    const firstKey = buildPhases[0]?.key || null;
-    setExpandedStepKey(firstKey);
+useEffect(() => {
+  if (!projectData) return;
 
-    // Make sure we're not stuck in edit mode from a previous project
-    setIsEditing(false);
-  }, [projectData]);
+  const hydrated = ensureChecklistStructure(projectData);
+  setEditableData(hydrated);
+  setOriginalData(hydrated);
+  setStatus(determineOverallStatus(hydrated));
+}, [projectData]);
 
-  useEffect(() => {
-    if (!isOpen) return;
-    const onKey = (e) => e.key === 'Escape' && onClose?.();
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [isOpen, onClose]);
+useEffect(() => {
+  if (!isOpen) return;
+
+  // When the modal is opened, start on Overview / Step 1
+  setSelectedTab('details');
+  setSelectedStepKey(null);
+  setSelectedSubIndex(0);
+
+  const firstKey = buildPhases[0]?.key || null;
+  setExpandedStepKey(firstKey);
+
+  setIsEditing(false);
+}, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -347,6 +489,84 @@ const ManageProjectModal = ({
     saveToFirestore(update);
     setIsEditing(false);
     setShowSnackbar(true);
+  };
+
+  /**
+   * NEW: persist per-sub-step checkpoint checkbox state.
+   * checkpointStates is an array of booleans on the checklist item.
+   */
+  const handleCheckpointStatesChange = (stepKey, itemIndex, checkpointStates) => {
+    const step = editableData[stepKey] || { checklist: [] };
+    const updatedChecklist = (step.checklist || []).map((item, idx) =>
+      idx === itemIndex ? { ...item, checkpointStates } : item
+    );
+    const updatedStep = { ...step, checklist: updatedChecklist };
+    const update = { [stepKey]: updatedStep };
+    const merged = { ...editableData, ...update };
+
+    setEditableData(merged);
+    onProjectUpdate?.({ id: projectData.id, [stepKey]: updatedStep });
+
+    // We only need to merge the step; saveToFirestore will recalc status/time.
+    saveToFirestore(update);
+  };
+
+  /**
+   * Toggle a lifecycle checkpoint and roll up completion to step + stage.
+   * This works against the nested:
+   * lifecycle.stages[stageId].steps[stepId].checkpoints[checkpointId]
+   */
+  const handleLifecycleCheckpointToggle = (
+    stageId,
+    stepId,
+    checkpointId,
+    newCompleted
+  ) => {
+    const prev = editableData || {};
+    const lifecycle = prev.lifecycle || {};
+    const stages = { ...(lifecycle.stages || {}) };
+
+    const stage = { ...(stages[stageId] || { steps: {} }) };
+    const steps = { ...(stage.steps || {}) };
+    const step = { ...(steps[stepId] || { checkpoints: {} }) };
+    const checkpoints = { ...(step.checkpoints || {}) };
+    const cp = { ...(checkpoints[checkpointId] || {}) };
+
+    cp.completed = newCompleted;
+    cp.timestamp = newCompleted ? new Date().toISOString() : null;
+    checkpoints[checkpointId] = cp;
+
+    // Recompute step.completed
+    const checkpointList = Object.values(checkpoints);
+    step.checkpoints = checkpoints;
+    step.completed =
+      checkpointList.length > 0 && checkpointList.every((c) => c.completed);
+
+    steps[stepId] = step;
+
+    // Recompute stage.completed
+    const stepList = Object.values(steps);
+    stage.steps = steps;
+    stage.completed =
+      stepList.length > 0 && stepList.every((s) => s.completed);
+
+    stages[stageId] = stage;
+
+    const updatedLifecycle = {
+      ...lifecycle,
+      stages,
+    };
+
+    const updated = {
+      ...prev,
+      lifecycle: updatedLifecycle,
+    };
+
+    setEditableData(updated);
+
+    // Persist only the lifecycle field; saveToFirestore will also
+    // recalc status/currentPhase from the 10-step checklist.
+    saveToFirestore({ lifecycle: updatedLifecycle });
   };
 
   const getCurrentStepProgress = () => {
@@ -657,33 +877,41 @@ const ManageProjectModal = ({
 
           <main className="mpm-main">
             {selectedTab === 'details' ? (
-              <ProjectOverview
-                editableData={{ ...editableData, id: projectData.id }}
-                isEditing={isEditing}
-                onEditToggle={() => setIsEditing((v) => !v)}
-                handleChange={(path, value) => {
-                  setEditableData((prev) => {
-                    const updated = { ...prev };
-                    const keys = path.split('.');
-                    let cur = updated;
-                    for (let i = 0; i < keys.length - 1; i++) {
-                      if (!cur[keys[i]]) cur[keys[i]] = {};
-                      cur = cur[keys[i]];
-                    }
-                    cur[keys[keys.length - 1]] = value;
-                    return updated;
-                  });
-                }}
-                onSave={() => {
-                  saveToFirestore(editableData);
-                  setIsEditing(false);
-                  setShowSnackbar(true);
-                }}
-                onCancel={() => {
-                  setEditableData(originalData);
-                  setIsEditing(false);
-                }}
-              />
+              <>
+                <ProjectOverview
+                  editableData={{ ...editableData, id: projectData.id }}
+                  isEditing={isEditing}
+                  onEditToggle={() => setIsEditing((v) => !v)}
+                  handleChange={(path, value) => {
+                    setEditableData((prev) => {
+                      const updated = { ...prev };
+                      const keys = path.split('.');
+                      let cur = updated;
+                      for (let i = 0; i < keys.length - 1; i++) {
+                        if (!cur[keys[i]]) cur[keys[i]] = {};
+                        cur = cur[keys[i]];
+                      }
+                      cur[keys[keys.length - 1]] = value;
+                      return updated;
+                    });
+                  }}
+                  onSave={() => {
+                    saveToFirestore(editableData);
+                    setIsEditing(false);
+                    setShowSnackbar(true);
+                  }}
+                  onCancel={() => {
+                    setEditableData(originalData);
+                    setIsEditing(false);
+                  }}
+                />
+
+                {/* NEW: Lifecycle Stage → Step → Checkpoint view */}
+                <LifecyclePanel
+                  lifecycle={editableData.lifecycle}
+                  onToggleCheckpoint={handleLifecycleCheckpointToggle}
+                />
+              </>
             ) : (
               <StepComponentTemplate
                 stepKey={selectedStepKey}
@@ -695,6 +923,13 @@ const ManageProjectModal = ({
                     index,
                     completed,
                     seconds
+                  )
+                }
+                onUpdateCheckpointStates={(itemIndex, states) =>
+                  handleCheckpointStatesChange(
+                    selectedStepKey,
+                    itemIndex,
+                    states
                   )
                 }
                 isLocked={false}

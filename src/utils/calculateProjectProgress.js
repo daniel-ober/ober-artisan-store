@@ -31,14 +31,16 @@
 const STEP_KEYS = [
   'discoveryDesign',
   'commitmentPortal',
-  'woodVisionLockIn',
-  'rawShellCreation',
-  'shellTrueingTorchTune',
-  'exteriorArtFinish',
-  'edgesSnareBeds',
+  'woodVision',
+  'shellConstruction',
+  'fineTuning',
+  'shellExteriorFinish',
+  'bearingEdges',
+  'snareBedCutting',
+  'hardwareDrilling',
   'hardwareAssembly',
-  'legacyTuningMedia',
-  'finalQAPackagingDelivery',
+  'tuningAndDetailing',
+  'qualityCheck',
 ];
 
 /* ------------------------------------------------------------------ */

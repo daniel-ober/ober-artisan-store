@@ -17,6 +17,7 @@ import { getOrderStatusFromItems } from '../utils/statusConfig';
 import defaultStepData from '../utils/defaultStepData';
 import defaultProjectFields from '../utils/defaultProjectFields';
 import { linkProjectToUserByEmail } from '../services/userService';
+import { buildEmptyLifecycle } from '../utils/projectLifecycleConfig'; // ⭐ NEW
 
 // THEME + SHARED MODAL STYLES
 import './AdminModalTheme.css';
@@ -72,7 +73,7 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
   );
   const [relatedProjects, setRelatedProjects] = useState([]);
 
-  // ⭐ NEW: tracking number state
+  // ⭐ tracking number state
   const [trackingNumber, setTrackingNumber] = useState(
     orderDetails.trackingNumber || ''
   );
@@ -104,13 +105,16 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
 
       // ---------- NEW: defaults first, then real values override ----------
       const projectData = {
-        // 1) All step checklists
+        // 1) All step checklists (legacy / admin-side)
         ...defaultStepData,
 
         // 2) All canonical/base project fields
         ...defaultProjectFields,
 
-        // 3) Then overwrite with real order-specific values
+        // 3) New structured lifecycle tree for portal (Stage → Steps → Checkpoints)
+        lifecycle: buildEmptyLifecycle(), // ⭐ NEW FIELD
+
+        // 4) Then overwrite with real order-specific values
         orderId: orderDetails.id,
 
         // 🔑 Key for SoundLegend portal
@@ -273,7 +277,7 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
     }
   };
 
-  // ⭐ NEW: save tracking number to Firestore + bubble up
+  // ⭐ save tracking number to Firestore + bubble up
   const handleSaveTracking = async () => {
     const trimmed = trackingNumber.trim();
     const eventText = trimmed
@@ -370,7 +374,7 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
             </div>
           )}
 
-          {/* ⭐ NEW: tracking number editor */}
+          {/* tracking number editor */}
           <div className="detail-row">
             <strong>Tracking #:</strong>
             <span>
