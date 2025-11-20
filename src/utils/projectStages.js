@@ -158,7 +158,7 @@ export const PROJECT_STAGE_DEFINITION = [
         checkpoints: [
           {
             id: 'invoiceSentToCustomer',
-            label: 'Invoice sent to customer',
+            label: 'Payment link sent to customer',
           },
           {
             id: 'depositReceivedOrPaymentConfirmed',
