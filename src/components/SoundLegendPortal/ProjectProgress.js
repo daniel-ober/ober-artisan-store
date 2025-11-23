@@ -609,8 +609,19 @@ function getOverallProgress(project) {
 /** Derive current step index from currentPhase text if present */
 function getCurrentStepIndex(project) {
   if (!project) return 0;
-  const phase = String(project.currentPhase || '').toLowerCase();
 
+  // 1️⃣ Look at all steps and see if *anything* has been completed
+  const stepSummaries = STEPS.map((s) => getStepStatus(project, s));
+  const anyCompleted = stepSummaries.some(({ done }) => done > 0);
+
+  // If NO checklist items are completed anywhere, treat this as a brand-new project
+  // → force stage index 0 ("1. Discovery & Design")
+  if (!anyCompleted) {
+    return 0;
+  }
+
+  // 2️⃣ If we DO have some progress, try to honor currentPhase text first
+  const phase = String(project.currentPhase || '').toLowerCase();
   if (phase) {
     const idx = STEPS.findIndex((s) =>
       phase.includes(String(s.label).split(' ')[0].toLowerCase())
@@ -618,7 +629,7 @@ function getCurrentStepIndex(project) {
     if (idx >= 0) return idx;
   }
 
-  // Fallback: last step that has any completed checklist items
+  // 3️⃣ Fallback: last step that has any completed checklist items
   let lastIdx = 0;
   STEPS.forEach((s, i) => {
     const { done } = getStepStatus(project, s);
@@ -743,6 +754,24 @@ const getCheckpointCountsForPhase = (project, phaseKey, stepIndex) => {
   return { done, total };
 };
 
+// Stage indexes: 0–2 = PRE-BUILD, 3–7 = BUILD, 8–9 = POST-BUILD
+const PREBUILD_STAGE_INDEXES = [0, 1, 2];
+
+const getPhaseIndexForStep = (stepIndex) => {
+  if (stepIndex <= 2) return 0; // PRE-BUILD (stages 1–3)
+  if (stepIndex <= 7) return 1; // BUILD (stages 4–8)
+  return 2; // POST-BUILD (stages 9–10)
+};
+
+const arePrebuildStagesComplete = (project) => {
+  if (!project) return false;
+  return PREBUILD_STAGE_INDEXES.every((i) => {
+    const def = STEPS[i];
+    if (!def) return false;
+    return getStepStatus(project, def).status === 'Completed';
+  });
+};
+
 /* =========================================================
    LIFECYCLE STAGE → STEP → CHECKPOINT TEMPLATE
    (Customer-facing labels only; completion still from Firestore)
@@ -825,7 +854,7 @@ const STAGE_TEMPLATES = {
           'Record the moisture percentage so we have a baseline for the build.',
         ],
       },
-            {
+      {
         key: 'earlyMockups',
         label: 'Early mockups',
         checkpoints: [
@@ -1562,8 +1591,21 @@ const ProjectProgress = ({ project: initialProject }) => {
   }, [initialProject]);
 
   const overallPct = useMemo(() => getOverallProgress(project), [project]);
+
+    const targetWindow = useMemo(
+    () => getTargetWindow(project),
+    [project]
+  );
+
+  // If there is zero progress on the project, always treat it as being at Stage 1
   const currentStepIndex = useMemo(
-    () => getCurrentStepIndex(project),
+    () => (overallPct === 0 ? 0 : getCurrentStepIndex(project)),
+    [project, overallPct]
+  );
+
+  // Have we finished all PRE-BUILD stages (1–3)?
+  const prebuildComplete = useMemo(
+    () => arePrebuildStagesComplete(project),
     [project]
   );
 
@@ -1578,11 +1620,24 @@ const ProjectProgress = ({ project: initialProject }) => {
   const activeStep = STEPS.find((s) => s.key === activeKey) || STEPS[0];
   const activeStatus = getStepStatus(project, activeStep).status.toLowerCase();
 
-  const targetWindow = useMemo(() => getTargetWindow(project), [project]);
-  const stageTarget = useMemo(
+    const stageTarget = useMemo(
     () => getStageTargetDate(project, activeStep.key),
-    [project, activeStep]
+    [project, activeStep.key]
   );
+
+  const activeIndex = STEPS.indexOf(activeStep);
+
+  // "Future stage" lock (for the little note under the roadmap)
+  const isStageFuture =
+    activeStatus === 'not started' && activeIndex > currentStepIndex;
+
+  // For brand-new projects, let stages 1–3 behave as unlocked teaser stages
+  const isStageLocked =
+    isStageFuture && !(overallPct === 0 && activeIndex <= 2);
+
+  // Phase-level lock: BUILD + POST-BUILD stay teaser-only until pre-build done
+  const isPhaseLockedByTeaser =
+    !prebuildComplete && getPhaseIndexForStep(activeIndex) > 0;
 
   const heroMedia = useMemo(() => ({ type: 'video', url: CRAFT_VIDEO }), []);
 
@@ -1601,10 +1656,6 @@ const ProjectProgress = ({ project: initialProject }) => {
       </div>
     );
   }
-
-  const activeIndex = STEPS.indexOf(activeStep);
-  const isStageLocked =
-    activeStatus === 'not started' && activeIndex > currentStepIndex;
 
   return (
     <div className="sl-progress">
@@ -1659,7 +1710,7 @@ const ProjectProgress = ({ project: initialProject }) => {
             Target completion window
           </div>
           <div className="sl-progress-metric-value">
-            {targetWindow || 'TBD'}
+            {stageTarget || 'TBD'}
           </div>
         </div>
       </div>
@@ -1721,14 +1772,29 @@ const ProjectProgress = ({ project: initialProject }) => {
             const isCompleted =
               stepStatus === 'completed' || index < currentStepIndex;
 
-            const isLockedStep =
+            // Phase-level lock: any BUILD or POST-BUILD stage (index >= 3)
+            // stays locked until all PRE-BUILD stages are completed.
+            const phaseLocked =
+              !prebuildComplete && getPhaseIndexForStep(index) > 0;
+
+            // Default: future stages are locked until we reach them
+            const futureLocked =
               stepStatus === 'not started' && index > currentStepIndex;
+
+            let isLocked = phaseLocked || futureLocked;
+
+            // 🔓 Brand-new project teaser rule:
+            // when overall progress is 0%, allow the first three stages (0–2)
+            // to be clickable so the artist can explore pre-build.
+            if (overallPct === 0 && index <= 2) {
+              isLocked = false;
+            }
 
             const className = [
               'sl-progress-step-dot',
               isCurrent ? 'is-current' : '',
               isCompleted ? 'is-completed' : '',
-              isLockedStep ? 'is-locked' : '',
+              isLocked ? 'is-locked' : '',
             ]
               .filter(Boolean)
               .join(' ');
@@ -1738,9 +1804,9 @@ const ProjectProgress = ({ project: initialProject }) => {
                 key={step.key}
                 type="button"
                 className={className}
-                disabled={isLockedStep}
+                disabled={isLocked}
                 onClick={() => {
-                  if (isLockedStep) return;
+                  if (isLocked) return;
                   setActiveKey(step.key);
                 }}
               >
@@ -1832,10 +1898,23 @@ const ProjectProgress = ({ project: initialProject }) => {
 
           {/* RIGHT: stage checkpoints */}
           <div className="sl-progress-stage-col sl-progress-stage-col--checkpoints">
-            <StageCheckpointsPanel
-              project={project}
-              stageKey={activeStep.key}
-            />
+            {isPhaseLockedByTeaser ? (
+              <div className="pp-stage-card">
+                <h4 className="pp-section-title">Stage checkpoints</h4>
+                <p className="sl-progress-stage-locked-text">
+                  Detailed, step-by-step checkpoints for the BUILD and
+                  POST-BUILD phases unlock once we complete the full PRE-BUILD
+                  phase together (Stages 1–3). For now, this view is a preview
+                  of what the SoundLegend tracker will show as your drum moves
+                  forward.
+                </p>
+              </div>
+            ) : (
+              <StageCheckpointsPanel
+                project={project}
+                stageKey={activeStep.key}
+              />
+            )}
           </div>
         </div>
 

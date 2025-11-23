@@ -84,39 +84,6 @@ export const PROJECT_LIFECYCLE_DEFINITION = {
           ],
         },
 
-        earlyMockups: {
-          id: 'earlyMockups',
-          label: 'Early mockups',
-          order: 3,
-          checkpoints: [
-            {
-              id: 'createFirstRoundMockups',
-              label:
-                'Create first-round visual mockups (finish / veneer / hardware)',
-            },
-            {
-              id: 'exploreFinishConcepts',
-              label:
-                'Explore 2–3 finish concepts with different accents',
-            },
-            {
-              id: 'mockBadgePlacement',
-              label: 'Mock up badge placement and logo treatments',
-            },
-            {
-              id: 'prepareWriteupEachOption',
-              label: 'Prepare quick write-up explaining each option',
-            },
-            {
-              id: 'shareMockupsForFeedback',
-              label: 'Share mockups with customer for feedback',
-            },
-            {
-              id: 'captureRevisionNotes',
-              label: 'Capture revision notes for chosen direction',
-            },
-          ],
-        },
       },
     },
   },
