@@ -7,9 +7,9 @@
  *
  * Firestore project doc shape (current schema):
  *
- *  - discoveryDesign              { checklist: [...] }  // Initial consultation, Build proposal, Early mockups
+ *  - discoveryDesign              { checklist: [...] }  // Initial consultation, Build proposal
  *  - commitmentPortal             { checklist: [...] }  // Payment processing, Portal access setup
- *  - woodVisionLockIn             { checklist: [...] }  // Wood selection, Pre-build measuring & prep
+ *  - woodVisionLockIn             { checklist: [...] }  // Wood selection, Early mockups, Pre-build measuring & prep
  *  - rawShellCreation             { checklist: [...] }  // Cut stave blocks, bevels, glue-up, etc.
  *  - shellTrueingTorchTune        { checklist: [...] }  // sanding prep, interior milling, torch tune, etc.
  *  - exteriorArtFinish            { checklist: [...] }  // veneer, spray, polishing, etc.
@@ -52,7 +52,6 @@ const TASK_WEIGHTS_PERCENT = {
   // 1. Discovery & Design
   'Initial consultation': 0.66,
   'Build proposal': 1.09,
-  'Early mockups': 1.42,
 
   // 2. Commitment & Portal Setup
   'Payment processing': 0.33,
@@ -60,6 +59,7 @@ const TASK_WEIGHTS_PERCENT = {
 
   // 3. Wood & Vision Lock-In
   'Wood selection': 1.75,
+  'Early mockups': 1.42,
   'Pre-build measuring & prep': 2.07,
 
   // 4. Raw Shell Creation
@@ -90,7 +90,7 @@ const TASK_WEIGHTS_PERCENT = {
   'Spray finishing': 10.34, // adjusted slightly so total = 100.00
   'Full de-gassing of chemicals': 0.0, // 0 weight
   'Final sanding': 3.17,
-  'Polishing': 2.07,
+  Polishing: 2.07,
 
   // 7. Edges & Snare Beds
   'Bearing edges': 1.53,
@@ -108,7 +108,7 @@ const TASK_WEIGHTS_PERCENT = {
   // 10. Final QA, Packaging & Delivery
   'NTAG authentication': 0.33,
   'Final cleaning': 0.33,
-  'Packaging': 0.76,
+  Packaging: 0.76,
   'Delivery confirmation': 0.44,
 };
 
