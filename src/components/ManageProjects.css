@@ -109,6 +109,11 @@
   white-space: nowrap;
 }
 
+.projects-table-wrapper {
+  width: 100%;
+  overflow-x: visible; /* default for desktop */
+}
+
 .sortable {
   cursor: pointer;
   user-select: none;
@@ -286,4 +291,86 @@
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
+}
+
+/* =========================================================
+   MOBILE & TABLET — Manage Projects
+   ========================================================= */
+
+/* Tablet-ish: stack header, stretch pills & filters */
+@media (max-width: 900px) {
+  .manage-projects {
+    padding: 16px 14px;
+  }
+
+  .manage-projects-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .projects-summary {
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .filters {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .filters label {
+    width: 100%;
+  }
+
+  .filters select {
+    width: 100%;
+  }
+
+  .show-completed-label {
+    margin-top: 4px;
+  }
+}
+
+/* Phone: make table scrollable + slightly denser UI */
+@media (max-width: 640px) {
+  .manage-projects {
+    padding: 12px 10px 16px;
+    overflow-x: visible; /* header & pills stay fixed width */
+  }
+
+  .projects-table-wrapper {
+    overflow-x: auto;              /* only the table scrolls */
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .projects-table {
+    min-width: 760px;              /* keep columns readable */
+    font-size: 0.85rem;
+  }
+
+  .projects-table th,
+  .projects-table td {
+    padding: 10px 8px;
+  }
+
+  .project-progress-bar {
+    width: 120px;
+    gap: 6px;
+  }
+
+  .progress-percent {
+    font-size: 0.8rem;
+    min-width: 28px;
+  }
+
+  .summary-pill {
+    font-size: 0.76rem;
+    padding: 4px 8px;
+  }
+
+  .manage-projects-header h2 {
+    font-size: 1.2rem;
+  }
 }

@@ -106,42 +106,6 @@ export const PROJECT_STAGE_DEFINITION = [
           },
         ],
       },
-      {
-        id: 'earlyMockups',
-        label: 'Early mockups',
-        checkpoints: [
-          {
-            id: 'createFirstRoundVisualMockups',
-            label:
-              'Create first-round visual mockups (finish / veneer / hardware)',
-          },
-          {
-            id: 'exploreFinishConcepts',
-            label:
-              'Explore 2–3 finish concepts with different accents',
-          },
-          {
-            id: 'mockBadgePlacementAndLogos',
-            label:
-              'Mock up badge placement and logo treatments',
-          },
-          {
-            id: 'prepareOptionWriteups',
-            label:
-              'Prepare quick write-up explaining each option',
-          },
-          {
-            id: 'shareMockupsForFeedback',
-            label:
-              'Share mockups with customer for feedback',
-          },
-          {
-            id: 'captureRevisionNotesChosenDirection',
-            label:
-              'Capture revision notes for chosen direction',
-          },
-        ],
-      },
     ],
   },
 
@@ -248,6 +212,42 @@ export const PROJECT_STAGE_DEFINITION = [
           {
             id: 'recordMoistureReadingPercent',
             label: 'Record moisture reading (%)',
+          },
+        ],
+      },
+            {
+        id: 'earlyMockups',
+        label: 'Early mockups',
+        checkpoints: [
+          {
+            id: 'createFirstRoundVisualMockups',
+            label:
+              'Create first-round visual mockups (finish / veneer / hardware)',
+          },
+          {
+            id: 'exploreFinishConcepts',
+            label:
+              'Explore 2–3 finish concepts with different accents',
+          },
+          {
+            id: 'mockBadgePlacementAndLogos',
+            label:
+              'Mock up badge placement and logo treatments',
+          },
+          {
+            id: 'prepareOptionWriteups',
+            label:
+              'Prepare quick write-up explaining each option',
+          },
+          {
+            id: 'shareMockupsForFeedback',
+            label:
+              'Share mockups with customer for feedback',
+          },
+          {
+            id: 'captureRevisionNotesChosenDirection',
+            label:
+              'Capture revision notes for chosen direction',
           },
         ],
       },

@@ -526,61 +526,7 @@ const ProjectOverview = ({
   /* ==================== RENDER ==================== */
   return (
     <div className="apo-container">
-      {/* header chips */}
-      <div className="apo-header-chips">
-        <span className="apo-chip apo-id">
-          🆔 {safeText(getIdentifier(editableData || {}), '—')}
-        </span>
-        {editableData?.customerName && (
-          <span className="apo-chip">
-            👤 {safeText(editableData.customerName, '—')}
-          </span>
-        )}
-        {editableData?.id && (
-          <span className="apo-chip apo-mono">
-            ID: {safeText(editableData.id, '—')}
-          </span>
-        )}
-      </div>
-
-      <div className="apo-title">Project Overview</div>
-
-      {/* meta line */}
-      <div className="apo-meta">
-        <div className="apo-meta-item">
-          <span className="apo-label">Project ID:</span>
-          <span className="apo-mono">
-            {safeText(editableData?.id, 'N/A')}
-          </span>
-        </div>
-        <div className="apo-meta-item">
-          <span className="apo-label">Parent Order ID:</span>
-          <a
-            className="apo-link"
-            href={`/orders/${safeText(editableData?.orderId, '')}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {safeText(editableData?.orderId, 'N/A')}
-          </a>
-        </div>
-        {editableData?.id && (
-          <div className="apo-meta-item">
-            <span className="apo-label">View as Customer:</span>
-            <a
-              href={`/projects/${safeText(editableData.id, '')}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="apo-link"
-            >
-              Open Project View ↗
-            </a>
-          </div>
-        )}
-      </div>
-
       {/* ---------- Progress overview (always visible at top) ---------- */}
-      <div className="apo-card apo-progress-card">
         <h4 className="apo-h4">Progress Overview</h4>
         <div className="apo-progress-bar-wrap">
           <div className="apo-progress-bar-track">
@@ -614,7 +560,6 @@ const ProjectOverview = ({
             </span>
           </div>
         </div>
-      </div>
 
       {/* ======================================================
           1) PROJECT SCOPE

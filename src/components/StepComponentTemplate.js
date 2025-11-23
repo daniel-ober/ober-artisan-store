@@ -98,16 +98,6 @@ const CHECKPOINTS_BY_ITEM_ID = {
     'Generate mockup previews (if applicable)',
   ],
 
-  // 1.3 Early mockups
-  discoveryDesign_3: [
-    'Create first-round visual mockups (finish / veneer / hardware)',
-    'Explore 2–3 finish concepts with different accents',
-    'Mock up badge placement and logo treatments',
-    'Prepare quick write-up explaining each option',
-    'Share mockups with customer for feedback',
-    'Capture revision notes for chosen direction',
-  ],
-
   /* ----------------------------------------------------------
    * 2. Commitment & Portal Setup
    * -------------------------------------------------------- */
@@ -145,8 +135,18 @@ const CHECKPOINTS_BY_ITEM_ID = {
     'Record moisture reading (%)',
   ],
 
-  // 3.2 Pre-build measuring & prep
+  // 3.2 Early mockups
   woodVisionLockIn_2: [
+    'Create first-round visual mockups (finish / veneer / hardware)',
+    'Explore 2–3 finish concepts with different accents',
+    'Mock up badge placement and logo treatments',
+    'Prepare quick write-up explaining each option',
+    'Share mockups with customer for feedback',
+    'Capture revision notes for chosen direction',
+  ],
+
+  // 3.3 Pre-build measuring & prep
+  woodVisionLockIn_3: [
     'Veneer integration test (visual + adhesion plan)',
     'Shell color test under natural light',
     'Shell color test with flash / studio light',
@@ -592,7 +592,10 @@ const StepComponentTemplate = ({
         cpIndex,
         ...Object.keys(nextForItem).map((k) => Number(k))
       );
-      const arr = Array.from({ length: maxIndex + 1 }, (_, i) => !!nextForItem[i]);
+      const arr = Array.from(
+        { length: maxIndex + 1 },
+        (_, i) => !!nextForItem[i]
+      );
 
       if (onUpdateCheckpointStates) {
         onUpdateCheckpointStates(activeIdx, arr);
@@ -600,6 +603,29 @@ const StepComponentTemplate = ({
 
       return next;
     });
+  };
+
+  // NEW: bulk mark / clear all checkpoints for THIS sub-step only
+  const handleBulkCheckpointToggle = (complete) => {
+    if (!activeItem || !onUpdateCheckpointStates || checkpoints.length === 0) {
+      return;
+    }
+
+    const arr = new Array(checkpoints.length).fill(!!complete);
+
+    // update local UI state map
+    setCheckpointState((prev) => {
+      const map = {};
+      arr.forEach((val, idx) => {
+        if (val) map[idx] = true;
+      });
+      return {
+        ...prev,
+        [activeItemId]: map,
+      };
+    });
+
+    onUpdateCheckpointStates(activeIdx, arr);
   };
 
   if (!activeItem) {
@@ -710,9 +736,30 @@ const StepComponentTemplate = ({
 
       {/* ---- Checkpoints & Measurements ---- */}
       <section className="mpm-step-checkpoints">
-        <h3 className="mpm-step-checkpoints-title">
-          Checkpoints &amp; Measurement Points
-        </h3>
+        <div className="mpm-step-checkpoints-header-row">
+          <h3 className="mpm-step-checkpoints-title">
+            Checkpoints &amp; Measurement Points
+          </h3>
+
+          {!isLocked && checkpoints.length > 0 && (
+            <div className="mpm-step-checkpoints-bulk-actions">
+              <button
+                type="button"
+                className="mpm-step-checkpoints-bulk-btn mark-all"
+                onClick={() => handleBulkCheckpointToggle(true)}
+              >
+                Mark all complete
+              </button>
+              <button
+                type="button"
+                className="mpm-step-checkpoints-bulk-btn clear-all"
+                onClick={() => handleBulkCheckpointToggle(false)}
+              >
+                Clear all
+              </button>
+            </div>
+          )}
+        </div>
 
         {checkpoints.length === 0 ? (
           <p className="mpm-step-empty">
@@ -725,6 +772,7 @@ const StepComponentTemplate = ({
                 <input
                   type="checkbox"
                   checked={!!checkpointsForItem[idx]}
+                  disabled={isLocked}
                   onChange={() => toggleCheckpoint(idx)}
                 />
                 <span className="mpm-check-text">{text}</span>

@@ -1,3 +1,4 @@
+// src/components/ManageProjects.js
 import React, { useState, useEffect } from 'react';
 import {
   collection,
@@ -57,6 +58,34 @@ const stepWeights = {
   hardwareDrilling: 1,
   tuningDetailing: 1,
   qualityCheck: 1,
+};
+
+/**
+ * Wrapper so ALL callers use the same aliasing that
+ * ManageProjectModal uses.
+ *
+ * calculateProjectProgress still expects the OLD step
+ * keys, so we map the new ones onto those names.
+ */
+const getWeightedProgressPct = (data) => {
+  if (!data) return 0;
+
+  const patched = {
+    ...data,
+    woodPreparation: data.woodPreparation || data.discoveryDesign,
+    shellConstruction: data.shellConstruction || data.commitmentPortal,
+    fineTuning: data.fineTuning || data.woodVisionLockIn,
+    shellExteriorFinish: data.shellExteriorFinish || data.rawShellCreation,
+    bearingEdges: data.bearingEdges || data.shellTrueingTorchTune,
+    snareBedCutting: data.snareBedCutting || data.exteriorArtFinish,
+    hardwareDrilling: data.hardwareDrilling || data.edgesSnareBeds,
+    hardwareAssembly: data.hardwareAssembly,
+    tuningAndDetailing:
+      data.tuningAndDetailing || data.legacyTuningMedia || data.tuningDetailing,
+    qualityCheck: data.qualityCheck || data.finalQAPackagingDelivery,
+  };
+
+  return calculateProjectProgress(patched);
 };
 
 const normalize = (str) =>
@@ -168,7 +197,7 @@ const ManageProjects = () => {
       case 'expectedPhase':
         return getExpectedPhase(p) || '';
       case 'progress':
-        return Number(calculateProjectProgress(p)) || 0;
+        return Number(getWeightedProgressPct(p)) || 0;
       case 'status':
         return determineStatus(p) || '';
       default:
@@ -362,13 +391,13 @@ const ManageProjects = () => {
       }
     }
     if (!target) return false;
-    if (calculateProjectProgress(project) >= 100) return false;
+    if (getWeightedProgressPct(project) >= 100) return false;
     return new Date() > target;
   };
 
   // completed logic + filters
   const isCompleted = (p) => {
-    const pct = calculateProjectProgress(p);
+    const pct = getWeightedProgressPct(p);
     const finishedFlag =
       p?.status?.toLowerCase?.() === 'finished' ||
       p?.allStepsComplete === true ||
@@ -394,7 +423,10 @@ const ManageProjects = () => {
   useEffect(() => {
     const q = query(collection(db, 'projects'), orderBy('startDate', 'desc'));
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      const liveProjects = snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
+      const liveProjects = snapshot.docs.map((d) => ({
+        id: d.id,
+        ...d.data(),
+      }));
       setProjects(liveProjects);
     });
     return () => unsubscribe();
@@ -420,7 +452,11 @@ const ManageProjects = () => {
     if (!selectedProject) return;
     const projectRef = doc(db, 'projects', selectedProject.id);
     await updateDoc(projectRef, updatedData);
-    const updated = { ...selectedProject, ...updatedData, id: selectedProject.id };
+    const updated = {
+      ...selectedProject,
+      ...updatedData,
+      id: selectedProject.id,
+    };
     handleLiveUpdate(updated);
     closeModal();
   };
@@ -509,112 +545,123 @@ const ManageProjects = () => {
         </label>
       </div>
 
-      <table className="projects-table">
-        <thead>
-          <tr>
-            <th className="sortable" onClick={() => toggleSort('customerName')}>
-              Customer Name{' '}
-              <span className="sort-indicator">
-                {renderSort('customerName')}
-              </span>
-            </th>
-            <th className="sortable" onClick={() => toggleSort('identifier')}>
-              Identifier{' '}
-              <span className="sort-indicator">
-                {renderSort('identifier')}
-              </span>
-            </th>
-            <th className="sortable" onClick={() => toggleSort('startDate')}>
-              Created At{' '}
-              <span className="sort-indicator">
-                {renderSort('startDate')}
-              </span>
-            </th>
-            <th
-              className="sortable"
-              onClick={() => toggleSort('targetCompletion')}
-            >
-              Target Completion{' '}
-              <span className="sort-indicator">
-                {renderSort('targetCompletion')}
-              </span>
-            </th>
-            <th className="sortable" onClick={() => toggleSort('timeSpent')}>
-              Total Time Spent{' '}
-              <span className="sort-indicator">
-                {renderSort('timeSpent')}
-              </span>
-            </th>
-            <th className="sortable" onClick={() => toggleSort('currentPhase')}>
-              Current Phase{' '}
-              <span className="sort-indicator">
-                {renderSort('currentPhase')}
-              </span>
-            </th>
-            <th
-              className="sortable"
-              onClick={() => toggleSort('expectedPhase')}
-            >
-              Expected On Pace (EOP){' '}
-              <span className="sort-indicator">
-                {renderSort('expectedPhase')}
-              </span>
-            </th>
-            <th className="sortable" onClick={() => toggleSort('progress')}>
-              Progress{' '}
-              <span className="sort-indicator">{renderSort('progress')}</span>
-            </th>
-            <th className="sortable" onClick={() => toggleSort('status')}>
-              Status{' '}
-              <span className="sort-indicator">{renderSort('status')}</span>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredProjects.map((project) => {
-            const statusLabel = determineStatus(project);
-            const statusClass = normalize(statusLabel); // e.g., "on-pace"
-
-            return (
-              <tr
-                key={project.id}
-                onClick={() => openModal(project)}
-                className={`status-row ${statusClass}`}
+      {/* Table */}
+      <div className="projects-table-wrapper">
+        <table className="projects-table">
+          <thead>
+            <tr>
+              <th className="sortable" onClick={() => toggleSort('customerName')}>
+                Customer Name{' '}
+                <span className="sort-indicator">
+                  {renderSort('customerName')}
+                </span>
+              </th>
+              <th className="sortable" onClick={() => toggleSort('identifier')}>
+                Identifier{' '}
+                <span className="sort-indicator">
+                  {renderSort('identifier')}
+                </span>
+              </th>
+              <th className="sortable" onClick={() => toggleSort('startDate')}>
+                Created At{' '}
+                <span className="sort-indicator">
+                  {renderSort('startDate')}
+                </span>
+              </th>
+              <th
+                className="sortable"
+                onClick={() => toggleSort('targetCompletion')}
               >
-                <td>{project.customerName || 'N/A'}</td>
-                <td>{getIdentifier(project)}</td>
-                <td>{formatDate(project.startDate)}</td>
-                <td>{formatTargetCompletion(project)}</td>
-                <td>{calculateTotalProjectTime(project)}</td>
-                <td>{project.currentPhase || '—'}</td>
-                <td>{getExpectedPhase(project)}</td>
-                <td>
-                  <div className="project-progress-bar">
-                    <div className="progress-bar-wrapper">
-                      <div className="progress-bar-track">
-                        <div
-                          className="progress-bar-fill"
-                          style={{
-                            width: `${calculateProjectProgress(project)}%`,
-                          }}
-                        />
+                Target Completion{' '}
+                <span className="sort-indicator">
+                  {renderSort('targetCompletion')}
+                </span>
+              </th>
+              <th className="sortable" onClick={() => toggleSort('timeSpent')}>
+                Total Time Spent{' '}
+                <span className="sort-indicator">
+                  {renderSort('timeSpent')}
+                </span>
+              </th>
+              <th
+                className="sortable"
+                onClick={() => toggleSort('currentPhase')}
+              >
+                Current Phase{' '}
+                <span className="sort-indicator">
+                  {renderSort('currentPhase')}
+                </span>
+              </th>
+              <th
+                className="sortable"
+                onClick={() => toggleSort('expectedPhase')}
+              >
+                Expected On Pace (EOP){' '}
+                <span className="sort-indicator">
+                  {renderSort('expectedPhase')}
+                </span>
+              </th>
+              <th className="sortable" onClick={() => toggleSort('progress')}>
+                Progress{' '}
+                <span className="sort-indicator">
+                  {renderSort('progress')}
+                </span>
+              </th>
+              <th className="sortable" onClick={() => toggleSort('status')}>
+                Status{' '}
+                <span className="sort-indicator">
+                  {renderSort('status')}
+                </span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredProjects.map((project) => {
+              const statusLabel = determineStatus(project);
+              const statusClass = normalize(statusLabel); // e.g., "on-pace"
+              const progressPct = getWeightedProgressPct(project);
+
+              return (
+                <tr
+                  key={project.id}
+                  onClick={() => openModal(project)}
+                  className={`status-row ${statusClass}`}
+                >
+                  <td>{project.customerName || 'N/A'}</td>
+                  <td>{getIdentifier(project)}</td>
+                  <td>{formatDate(project.startDate)}</td>
+                  <td>{formatTargetCompletion(project)}</td>
+                  <td>{calculateTotalProjectTime(project)}</td>
+                  <td>{project.currentPhase || '—'}</td>
+                  <td>{getExpectedPhase(project)}</td>
+                  <td>
+                    <div className="project-progress-bar">
+                      <div className="progress-bar-wrapper">
+                        <div className="progress-bar-track">
+                          <div
+                            className="progress-bar-fill"
+                            style={{
+                              width: `${progressPct}%`,
+                            }}
+                          />
+                        </div>
                       </div>
+                      <span className="progress-percent">
+                        {progressPct}%
+                      </span>
                     </div>
-                    <span className="progress-percent">
-                      {calculateProjectProgress(project)}%
+                  </td>
+                  <td>
+                    <span className={`status-pill status-pill-${statusClass}`}>
+                      {statusLabel}
                     </span>
-                  </div>
-                </td>
-                <td>
-                  <span className={`status-pill status-pill-${statusClass}`}>
-                    {statusLabel}
-                  </span>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
 
       {isModalOpen && (
         <ManageProjectModal
