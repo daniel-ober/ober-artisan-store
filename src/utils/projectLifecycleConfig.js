@@ -119,8 +119,6 @@ export const PROJECT_LIFECYCLE_DEFINITION = {
         },
       },
     },
-
-    // 🔜 Stage 2–10 will be added here next.
   },
 };
 

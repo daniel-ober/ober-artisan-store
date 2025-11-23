@@ -153,3 +153,44 @@
   box-shadow: inset 0 0 0 1px rgba(255,255,255,0.18);
 }
 .slp-tab-right { display:flex; align-items:center; gap:8px; }
+
+.slp-tablist {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.slp-tabs-left {
+  margin-right: 16px;
+}
+
+.slp-tabs-buttons {
+  display: flex;
+  gap: 16px;
+  flex: 1;
+  justify-content: center;
+}
+
+/* --- Ensure project picker dropdown sits above the content panel --- */
+
+.slp-tabs {
+  position: relative;
+  z-index: 20; /* tabs layer above the panel */
+}
+
+.slp-picker-shell {
+  position: relative;
+  z-index: 30; /* picker + button above other tab content */
+}
+
+.slp-picker-shell .slp-picker-menu {
+  position: absolute;
+  z-index: 40; /* dropdown options above everything below */
+}
+
+/* keep the main panel explicitly below */
+.slp-panel {
+  position: relative;
+  z-index: 1;
+}

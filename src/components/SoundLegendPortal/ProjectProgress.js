@@ -3,6 +3,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
 import { calculateProjectProgress } from '../../utils/calculateProjectProgress';
+
 import './ProjectProgress.css';
 
 const CRAFT_VIDEO = '/craft_in_motion/craftinmotion1080p.mp4';
@@ -42,7 +43,6 @@ your hands, your ears, your rooms, and your story.`,
     checkpoints: [
       { label: 'Initial consultation', weight: 0.6 },
       { label: 'Build proposal', weight: 1.0 },
-      { label: 'Early mockups', weight: 1.3 },
     ],
     mantra:
       'Every legendary drum starts here — with a story worth building around.',
@@ -77,6 +77,7 @@ and we can focus fully on building instead of chasing loose ends.`,
     ],
     checkpoints: [
       { label: 'Payment processing', weight: 0.3 },
+      { label: 'Early mockups', weight: 1.3 },
       { label: 'Portal access setup', weight: 0.4 },
     ],
     mantra:
@@ -448,6 +449,27 @@ const PRIMARY_BY_STORAGE_KEY = (() => {
    HELPERS
    ========================================================= */
 
+const getWeightedProgressPct = (data) => {
+  if (!data) return 0;
+
+  const patched = {
+    ...data,
+    woodPreparation: data.woodPreparation || data.discoveryDesign,
+    shellConstruction: data.shellConstruction || data.commitmentPortal,
+    fineTuning: data.fineTuning || data.woodVisionLockIn,
+    shellExteriorFinish: data.shellExteriorFinish || data.rawShellCreation,
+    bearingEdges: data.bearingEdges || data.shellTrueingTorchTune,
+    snareBedCutting: data.snareBedCutting || data.exteriorArtFinish,
+    hardwareDrilling: data.hardwareDrilling || data.edgesSnareBeds,
+    hardwareAssembly: data.hardwareAssembly,
+    tuningAndDetailing:
+      data.tuningAndDetailing || data.legacyTuningMedia || data.tuningDetailing,
+    qualityCheck: data.qualityCheck || data.finalQAPackagingDelivery,
+  };
+
+  return calculateProjectProgress(patched);
+};
+
 export function computeStageStatus(step) {
   if (!step || !Array.isArray(step.checklist)) {
     return 'not_started';
@@ -571,11 +593,13 @@ function getExtraChecklistItems(project, stepDef) {
   });
 }
 
-/** Percentage completion using the admin util */
+/** Percentage completion using the admin util (with key patching) */
 function getOverallProgress(project) {
   if (!project) return 0;
   try {
-    return Math.round(calculateProjectProgress(project));
+    // 🔁 Make sure we feed the *patched* object into calculateProjectProgress,
+    // so it matches what ManageProjects.js is doing.
+    return Math.round(getWeightedProgressPct(project));
   } catch (e) {
     console.error('calculateProjectProgress failed; defaulting to 0', e);
     return 0;
@@ -757,18 +781,6 @@ const STAGE_TEMPLATES = {
           'Prepare early visual mockups or previews when they’ll help you “see” the build.',
         ],
       },
-      {
-        key: 'earlyMockups',
-        label: 'Early mockups',
-        checkpoints: [
-          'Create first visual sketches or mockups of finish, veneer, and hardware together.',
-          'Show 2–3 finish concepts so you can compare different accent and color ideas.',
-          'Rough in where badges and logos will live on the shell.',
-          'Write a simple overview of each option so you know what you’re looking at.',
-          'Share these mockups with you for honest feedback and reactions.',
-          'Capture your notes and lock in the direction that feels most like “you.”',
-        ],
-      },
     ],
   },
 
@@ -780,7 +792,6 @@ const STAGE_TEMPLATES = {
         checkpoints: [
           'Send a simple, secure payment link for your build.',
           'Confirm deposit or payment is received so your spot is locked in.',
-          'Update your order to “In Progress” so the build officially begins.',
         ],
       },
       {
@@ -812,6 +823,18 @@ const STAGE_TEMPLATES = {
           'Log each board’s width so staves stay balanced.',
           'Log each board’s thickness so we know how much material we have to work with.',
           'Record the moisture percentage so we have a baseline for the build.',
+        ],
+      },
+            {
+        key: 'earlyMockups',
+        label: 'Early mockups',
+        checkpoints: [
+          'Create first visual sketches or mockups of finish, veneer, and hardware together.',
+          'Show 2–3 finish concepts so you can compare different accent and color ideas.',
+          'Rough in where badges and logos will live on the shell.',
+          'Write a simple overview of each option so you know what you’re looking at.',
+          'Share these mockups with you for honest feedback and reactions.',
+          'Capture your notes and lock in the direction that feels most like “you.”',
         ],
       },
       {
@@ -1384,7 +1407,7 @@ const StageCheckpointsPanel = ({ project, stageKey }) => {
 
   return (
     <div className="pp-stage-card">
-      <h4 className="pp-section-title">Stage checkpoints</h4>
+      <h4 className="pp-section-title">Internal checkpoints</h4>
       <div className="pp-step-list">
         {normalizedSteps.map((step) => {
           const { total, done, status } = step;
@@ -1460,6 +1483,43 @@ const StageCheckpointsPanel = ({ project, stageKey }) => {
 /* =========================================================
    COMPONENT
    ========================================================= */
+// Derive the *project* current stage + current sub-step labels
+function getCurrentStageAndStepLabels(project) {
+  // default text when we don't have anything yet
+  if (!project) {
+    return {
+      stageLabel: 'Not started',
+      stepLabel: 'No sub-step selected',
+    };
+  }
+
+  // 1️⃣ Figure out which STAGE the project is currently in
+  const stageIndex = getCurrentStepIndex(project); // uses STEPS + checklist truth
+  const stageDef = STEPS[stageIndex] || STEPS[0];
+  const stageLabel = `${stageIndex + 1}. ${stageDef.label}`;
+
+  // 2️⃣ Figure out which STEP (sub-step) inside that stage is "active"
+  let stepLabel = 'No sub-step selected';
+
+  const stageKey = stageDef.key; // e.g. 'woodVision'
+  const template = STAGE_TEMPLATES[stageKey];
+  const phaseKey = (STEP_DEFS[stageKey]?.storageKeys || [])[0]; // e.g. 'woodVisionLockIn'
+
+  if (template && phaseKey) {
+    // use the same logic as the checkpoints panel
+    const activeIdx = getActiveStepIndexForPhase(project, phaseKey);
+    const stepsArr = template.steps || [];
+
+    if (activeIdx >= 0 && activeIdx < stepsArr.length) {
+      stepLabel = stepsArr[activeIdx].label;
+    } else if (stepsArr.length) {
+      // fallback: first defined step in this stage
+      stepLabel = stepsArr[0].label;
+    }
+  }
+
+  return { stageLabel, stepLabel };
+}
 
 const ProjectProgress = ({ project: initialProject }) => {
   const [project, setProject] = useState(initialProject || null);
@@ -1507,6 +1567,8 @@ const ProjectProgress = ({ project: initialProject }) => {
     [project]
   );
 
+  const { stageLabel: currentStageLabel, stepLabel: currentStepLabel } =
+    useMemo(() => getCurrentStageAndStepLabels(project), [project]);
   // default active step = current step
   useEffect(() => {
     const def = STEPS[currentStepIndex] || STEPS[0];
@@ -1558,7 +1620,7 @@ const ProjectProgress = ({ project: initialProject }) => {
             playsInline
           />
         ) : null}
-        <button className="sl-progress-hero-pill">Craft in Motion</button>
+        {/* <button className="sl-progress-hero-pill">Craft in Motion</button> */}
       </div>
 
       <section className="sl-progress-intro">
@@ -1570,42 +1632,46 @@ const ProjectProgress = ({ project: initialProject }) => {
       </section>
 
       {/* Top metrics */}
-      <section className="sl-progress-metrics">
+      <div className="sl-progress-metrics">
+        {/* 1. Project completion */}
         <div className="sl-progress-metric">
-          <div className="sl-progress-metric-label">Project Completion</div>
-          <div className="sl-progress-metric-value">{overallPct}%</div>
-        </div>
-
-        <div className="sl-progress-metric">
-          <div className="sl-progress-metric-label">Current Step</div>
+          <div className="sl-progress-metric-label">Project completion</div>
           <div className="sl-progress-metric-value">
-            {STEPS.indexOf(activeStep) + 1}. {activeStep.label}
+            {overallPct != null ? `${overallPct}%` : '—'}
           </div>
         </div>
 
+        {/* 2. Project current stage (STAGE ONLY) */}
+        <div className="sl-progress-metric">
+          <div className="sl-progress-metric-label">Project current stage</div>
+          <div className="sl-progress-metric-value">{currentStageLabel}</div>
+        </div>
+
+        {/* 3. Current stage step (SUB-STEP) */}
+        <div className="sl-progress-metric">
+          <div className="sl-progress-metric-label">Current stage step</div>
+          <div className="sl-progress-metric-value">{currentStepLabel}</div>
+        </div>
+
+        {/* 4. Target completion window */}
         <div className="sl-progress-metric">
           <div className="sl-progress-metric-label">
-            Target Completion Window
+            Target completion window
           </div>
           <div className="sl-progress-metric-value">
             {targetWindow || 'TBD'}
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* Roadmap timeline */}
+      {/* Roadmap timeline (progress bar stays here) */}
       <section className="sl-progress-roadmap">
         <div className="sl-progress-roadmap-header">Build Roadmap</div>
 
         <div className="sl-progress-roadmap-track">
           <div
             className="sl-progress-roadmap-track-fill"
-            style={{
-              width:
-                ((currentStepIndex + 0.0001) / Math.max(1, STEPS.length - 1)) *
-                  100 +
-                '%',
-            }}
+            style={{ width: `${overallPct}%` }}
           />
         </div>
 
@@ -1615,47 +1681,6 @@ const ProjectProgress = ({ project: initialProject }) => {
             SoundLegend drum together, one focused step at a time.
           </div>
         )}
-
-        <div className="sl-progress-roadmap-steps">
-          {STEPS.map((step, index) => {
-            const stepStatus = getStepStatus(
-              project,
-              step
-            ).status.toLowerCase();
-            const isCurrent = step.key === activeStep.key;
-
-            const isCompleted =
-              stepStatus === 'completed' || index < currentStepIndex;
-
-            const isLocked =
-              stepStatus === 'not started' && index > currentStepIndex;
-
-            const className = [
-              'sl-progress-step-dot',
-              isCurrent ? 'is-current' : '',
-              isCompleted ? 'is-completed' : '',
-              isLocked ? 'is-locked' : '',
-            ]
-              .filter(Boolean)
-              .join(' ');
-
-            return (
-              <button
-                key={step.key}
-                type="button"
-                className={className}
-                disabled={isLocked}
-                onClick={() => {
-                  if (isLocked) return;
-                  setActiveKey(step.key);
-                }}
-              >
-                <span className="sl-progress-step-number">{index + 1}</span>
-                <span className="sl-progress-step-label">{step.label}</span>
-              </button>
-            );
-          })}
-        </div>
       </section>
 
       {/* Active step details */}
@@ -1683,6 +1708,48 @@ const ProjectProgress = ({ project: initialProject }) => {
             </div>
           </div>
         </header>
+
+        {/* Stage roadmap steps (cards moved down here) */}
+        <div className="sl-progress-roadmap-steps">
+          {STEPS.map((step, index) => {
+            const stepStatus = getStepStatus(
+              project,
+              step
+            ).status.toLowerCase();
+            const isCurrent = step.key === activeStep.key;
+
+            const isCompleted =
+              stepStatus === 'completed' || index < currentStepIndex;
+
+            const isLockedStep =
+              stepStatus === 'not started' && index > currentStepIndex;
+
+            const className = [
+              'sl-progress-step-dot',
+              isCurrent ? 'is-current' : '',
+              isCompleted ? 'is-completed' : '',
+              isLockedStep ? 'is-locked' : '',
+            ]
+              .filter(Boolean)
+              .join(' ');
+
+            return (
+              <button
+                key={step.key}
+                type="button"
+                className={className}
+                disabled={isLockedStep}
+                onClick={() => {
+                  if (isLockedStep) return;
+                  setActiveKey(step.key);
+                }}
+              >
+                <span className="sl-progress-step-number">{index + 1}</span>
+                <span className="sl-progress-step-label">{step.label}</span>
+              </button>
+            );
+          })}
+        </div>
 
         {/* Stage stats row */}
         <div className="sl-progress-stage-stats">
@@ -1719,12 +1786,16 @@ const ProjectProgress = ({ project: initialProject }) => {
           {/* LEFT: explainer content (always together) */}
           <div className="sl-progress-stage-col sl-progress-stage-col--explainer">
             <div className="sl-progress-card">
-              <h3 className="sl-progress-card-title">What we do in this stage</h3>
+              <h3 className="sl-progress-card-title">
+                What we do in this stage
+              </h3>
               <p className="sl-progress-card-text">{activeStep.what}</p>
             </div>
 
             <div className="sl-progress-card">
-              <h3 className="sl-progress-card-title">Why it matters for your drum</h3>
+              <h3 className="sl-progress-card-title">
+                Why it matters for your drum
+              </h3>
               <p className="sl-progress-card-text">{activeStep.why}</p>
             </div>
 
@@ -1761,7 +1832,10 @@ const ProjectProgress = ({ project: initialProject }) => {
 
           {/* RIGHT: stage checkpoints */}
           <div className="sl-progress-stage-col sl-progress-stage-col--checkpoints">
-            <StageCheckpointsPanel project={project} stageKey={activeStep.key} />
+            <StageCheckpointsPanel
+              project={project}
+              stageKey={activeStep.key}
+            />
           </div>
         </div>
 

@@ -1,12 +1,22 @@
 // src/components/ManageProjectModal.js
 import React, { useState, useEffect } from 'react';
-import { doc, setDoc, getDoc } from 'firebase/firestore';
+import {
+  doc,
+  setDoc,
+  getDoc,
+  collection,
+  query,
+  where,
+  getDocs,
+} from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
 import { db } from '../firebaseConfig';
 import StepComponentTemplate from './StepComponentTemplate';
 import ProjectOverview from './ProjectOverview';
 import defaultStepData from '../utils/defaultStepData';
 import { calculateProjectProgress } from '../utils/calculateProjectProgress';
 import { Snackbar } from '@mui/material';
+import { useImpersonation } from '../context/ImpersonationContext';
 import './ManageProjectModal.css';
 
 /* ----------------------------------------------------------------------------
@@ -69,6 +79,40 @@ const STEP_META = {
     label: '10. Final QA, Packaging & Delivery',
     phaseId: 'phase3',
   },
+};
+
+// Small helper to build "SL-005 · SoundLegend · 14×8"
+const val = (...c) =>
+  c.find((v) => v !== undefined && v !== null && v !== '') ?? undefined;
+
+const getIdentifier = (p = {}) => {
+  const serial =
+    val(
+      p.lineSerial, // canonical
+      p.serial,
+      p.serialNumber,
+      p.projectSerial,
+      p.snareSerial,
+      p.serialId
+    ) || '';
+
+  const line =
+    val(
+      p.artisanLine, // canonical
+      p.series,
+      p.productLine,
+      p.seriesLine,
+      p.line
+    ) || '';
+
+  const dia = val(p.width, p.diameter); // canonical width = diameter
+  const dep = val(p.shellDepth, p.depth); // canonical shellDepth = depth
+  const size = dia && dep ? ` · ${dia}×${dep}"` : '';
+
+  if (serial && line) return `${serial} · ${line}${size}`;
+  if (serial) return `${serial}${size}`;
+  if (line) return `${line}${size}`;
+  return size ? size.slice(3) : '—'; // strip leading " · "
 };
 
 const buildPhases = STEP_KEYS.map((key) => ({
@@ -240,95 +284,6 @@ const LifecyclePanel = ({ lifecycle, onToggleCheckpoint }) => {
     const bOrder = stages[b]?.order ?? 0;
     return aOrder - bOrder;
   });
-
-  if (!stageIds.length) {
-    return (
-      <div className="mpm-lifecycle-card">
-        <h3 className="mpm-lifecycle-title">Lifecycle Checkpoints</h3>
-        <p className="mpm-lifecycle-hint">
-          No lifecycle data found for this project. New projects will populate
-          this automatically as you define stages, steps, and checkpoints.
-        </p>
-      </div>
-    );
-  }
-
-  return (
-    <div className="mpm-lifecycle-card">
-      <h3 className="mpm-lifecycle-title">Lifecycle Checkpoints</h3>
-      <p className="mpm-lifecycle-hint">
-        This is your Stage → Step → Checkpoint map. Toggle checkpoints as you
-        complete them. Stage and Step completion will auto-roll up.
-      </p>
-
-      {stageIds.map((stageId) => {
-        const stage = stages[stageId] || {};
-        const steps = stage.steps || {};
-        const stepIds = Object.keys(steps).sort((a, b) => {
-          const aOrder = steps[a]?.order ?? 0;
-          const bOrder = steps[b]?.order ?? 0;
-          return aOrder - bOrder;
-        });
-        const stageDone = !!stage.completed;
-
-        return (
-          <div key={stageId} className="mpm-lifecycle-stage">
-            <div className="mpm-lifecycle-stage-header">
-              <span className="mpm-lifecycle-stage-title">
-                {stageDone ? '✅ ' : ''}
-                {stage.label || stageId}
-              </span>
-            </div>
-
-            {stepIds.map((stepId) => {
-              const step = steps[stepId] || {};
-              const checkpoints = step.checkpoints || {};
-              const checkpointIds = Object.keys(checkpoints);
-              const stepDone = !!step.completed;
-
-              if (!checkpointIds.length) return null;
-
-              return (
-                <div key={stepId} className="mpm-lifecycle-step">
-                  <div className="mpm-lifecycle-step-title">
-                    {stepDone ? '✅ ' : ''}
-                    {step.label || stepId}
-                  </div>
-
-                  <ul className="mpm-lifecycle-ck-list">
-                    {checkpointIds.map((cpId) => {
-                      const cp = checkpoints[cpId] || {};
-                      return (
-                        <li key={cpId} className="mpm-lifecycle-ck-item">
-                          <label className="mpm-lifecycle-ck-label-wrap">
-                            <input
-                              type="checkbox"
-                              checked={!!cp.completed}
-                              onChange={(e) =>
-                                onToggleCheckpoint(
-                                  stageId,
-                                  stepId,
-                                  cpId,
-                                  e.target.checked
-                                )
-                              }
-                            />
-                            <span className="mpm-lifecycle-ck-label">
-                              {cp.label || cpId}
-                            </span>
-                          </label>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
-              );
-            })}
-          </div>
-        );
-      })}
-    </div>
-  );
 };
 
 /* ----------------------------------------------------------------------------
@@ -341,6 +296,9 @@ const ManageProjectModal = ({
   projectData,
   onProjectUpdate,
 }) => {
+const navigate = useNavigate();
+const { startImpersonation } = useImpersonation();
+
   const [selectedTab, setSelectedTab] = useState('details'); // 'details' or stepKey
   const [editableData, setEditableData] = useState({});
   const [isEditing, setIsEditing] = useState(false);
@@ -353,6 +311,9 @@ const ManageProjectModal = ({
   const [selectedStepKey, setSelectedStepKey] = useState(null);
   const [selectedSubIndex, setSelectedSubIndex] = useState(0);
 
+  // linked customer user (for impersonation)
+  const [linkedUser, setLinkedUser] = useState(null);
+
   const determineOverallStatus = (data = editableData) => {
     const all = buildPhases.flatMap((p) => data[p.key]?.checklist || []);
     const total = all.length;
@@ -362,76 +323,165 @@ const ManageProjectModal = ({
     return 'In Production';
   };
 
-const determineCurrentPhase = (data = editableData) => {
-  if (!data) return 'Unknown';
+  const determineCurrentPhase = (data = editableData) => {
+    if (!data) return 'Unknown';
 
-  let lastTouchedLabel = null;
+    let lastTouchedLabel = null;
 
-  for (const phase of buildPhases) {
-    const stepData = data[phase.key] || {};
-    const checklist = Array.isArray(stepData.checklist)
-      ? stepData.checklist
-      : [];
+    for (const phase of buildPhases) {
+      const stepData = data[phase.key] || {};
+      const checklist = Array.isArray(stepData.checklist)
+        ? stepData.checklist
+        : [];
 
-    if (!checklist.length) continue;
+      if (!checklist.length) continue;
 
-    const label = STEP_META[phase.key]?.label || phase.label || phase.key;
+      const label = STEP_META[phase.key]?.label || phase.label || phase.key;
 
-    const anyTouched = checklist.some((item) => {
-      const hasCompleted = !!item.completed;
-      const hasCheckpoint =
-        Array.isArray(item.checkpointStates) &&
-        item.checkpointStates.some(Boolean);
-      return hasCompleted || hasCheckpoint;
-    });
+      const anyTouched = checklist.some((item) => {
+        const hasCompleted = !!item.completed;
+        const hasCheckpoint =
+          Array.isArray(item.checkpointStates) &&
+          item.checkpointStates.some(Boolean);
+        return hasCompleted || hasCheckpoint;
+      });
 
-    const allDone =
-      checklist.length > 0 && checklist.every((item) => !!item.completed);
+      const allDone =
+        checklist.length > 0 && checklist.every((item) => !!item.completed);
 
-    if (anyTouched && !allDone) {
-      // This is the first "in progress" phase → current step
-      return label;
+      if (anyTouched && !allDone) {
+        // This is the first "in progress" phase → current step
+        return label;
+      }
+
+      if (anyTouched) {
+        // Keep track of the last phase where *something* happened
+        lastTouchedLabel = label;
+      }
     }
 
-    if (anyTouched) {
-      // Keep track of the last phase where *something* happened
-      lastTouchedLabel = label;
-    }
-  }
+    // If we get here, then either nothing has started or all are finished.
+    if (lastTouchedLabel) return lastTouchedLabel;
 
-  // If we get here, then either nothing has started or all are finished.
-  if (lastTouchedLabel) return lastTouchedLabel;
+    // Fallback to the very first phase label
+    const first = buildPhases[0];
+    return (
+      (first && (STEP_META[first.key]?.label || first.label || first.key)) ||
+      'Unknown'
+    );
+  };
 
-  // Fallback to the very first phase label
-  const first = buildPhases[0];
-  return (
-    (first && (STEP_META[first.key]?.label || first.label || first.key)) ||
-    'Unknown'
-  );
-};
+  // hydrate project data
+  useEffect(() => {
+    if (!projectData) return;
 
+    const hydrated = ensureChecklistStructure(projectData);
+    setEditableData(hydrated);
+    setOriginalData(hydrated);
+    setStatus(determineOverallStatus(hydrated));
+  }, [projectData]);
+
+  // always open on Overview (Option 1)
+  // always open on Overview
+  useEffect(() => {
+    if (!isOpen) return;
+
+    setSelectedTab('details');
+    setSelectedStepKey(null);
+    setSelectedSubIndex(0);
+
+    const firstKey = buildPhases[0]?.key || null;
+    setExpandedStepKey(firstKey);
+
+    setIsEditing(false);
+  }, [isOpen]);
+
+// look up linked user for impersonation based on customerEmail
+// 🔗 Link the project to a SoundLegend user for impersonation
 useEffect(() => {
-  if (!projectData) return;
+  const linkUser = async () => {
+    setLinkedUser(null);
 
-  const hydrated = ensureChecklistStructure(projectData);
-  setEditableData(hydrated);
-  setOriginalData(hydrated);
-  setStatus(determineOverallStatus(hydrated));
+    if (!projectData) return;
+
+    try {
+      /* 1) Try direct userId fields first (if you ever add these to projects) */
+      const directUserId =
+        projectData.customerUserId ||
+        projectData.userId ||
+        projectData.ownerUserId;
+
+      if (directUserId) {
+        console.log(
+          '[ManageProjectModal] Trying to link user via direct id:',
+          directUserId
+        );
+        const uRef = doc(db, 'users', directUserId);
+        const uSnap = await getDoc(uRef);
+        if (uSnap.exists()) {
+          const uData = { id: uSnap.id, ...uSnap.data() };
+          console.log('[ManageProjectModal] Linked user via id:', uData);
+          setLinkedUser(uData);
+          return;
+        }
+      }
+
+      /* 2) Fallback: match on email (case/whitespace tolerant) */
+      const rawEmail =
+        projectData.customerEmail ||
+        projectData.email ||
+        projectData.customerEmailAddress;
+
+      if (!rawEmail) {
+        console.warn(
+          '[ManageProjectModal] No customer email on project; cannot link user.'
+        );
+        return;
+      }
+
+      const candidates = Array.from(
+        new Set(
+          [
+            rawEmail,
+            rawEmail.trim(),
+            rawEmail.trim().toLowerCase(),
+          ].filter(Boolean)
+        )
+      );
+
+      const usersCol = collection(db, 'users');
+
+      for (const email of candidates) {
+        console.log(
+          '[ManageProjectModal] Trying to link user by email:',
+          email
+        );
+        const q = query(usersCol, where('email', '==', email));
+        const snap = await getDocs(q);
+        if (!snap.empty) {
+          const docSnap = snap.docs[0];
+          const uData = { id: docSnap.id, ...docSnap.data() };
+          console.log('[ManageProjectModal] Linked user via email:', uData);
+          setLinkedUser(uData);
+          return;
+        }
+      }
+
+      console.warn(
+        '[ManageProjectModal] No user matched any candidate email for project',
+        projectData.id,
+        candidates
+      );
+    } catch (err) {
+      console.error(
+        '[ManageProjectModal] Failed to look up customer user for impersonation:',
+        err
+      );
+    }
+  };
+
+  linkUser();
 }, [projectData]);
-
-useEffect(() => {
-  if (!isOpen) return;
-
-  // When the modal is opened, start on Overview / Step 1
-  setSelectedTab('details');
-  setSelectedStepKey(null);
-  setSelectedSubIndex(0);
-
-  const firstKey = buildPhases[0]?.key || null;
-  setExpandedStepKey(firstKey);
-
-  setIsEditing(false);
-}, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -463,7 +513,10 @@ useEffect(() => {
       await setDoc(ref, dataToSave, { merge: true });
 
       const snap = await getDoc(ref);
-      const rehydrated = ensureChecklistStructure(snap.data());
+      const rehydrated = ensureChecklistStructure({
+        id: projectData.id,
+        ...snap.data(),
+      });
       setEditableData(rehydrated);
       setIsEditing(false);
       setShowSnackbar(true);
@@ -472,7 +525,6 @@ useEffect(() => {
       console.error('❌ Failed to save project data:', err);
     }
   };
-
   const handleChecklistToggle = (stepKey, index, completed, totalSeconds) => {
     const step = editableData[stepKey] || { checklist: [] };
     const updatedChecklist = step.checklist.map((item, i) =>
@@ -492,10 +544,14 @@ useEffect(() => {
   };
 
   /**
-   * NEW: persist per-sub-step checkpoint checkbox state.
+   * Persist per-sub-step checkpoint checkbox state.
    * checkpointStates is an array of booleans on the checklist item.
    */
-  const handleCheckpointStatesChange = (stepKey, itemIndex, checkpointStates) => {
+  const handleCheckpointStatesChange = (
+    stepKey,
+    itemIndex,
+    checkpointStates
+  ) => {
     const step = editableData[stepKey] || { checklist: [] };
     const updatedChecklist = (step.checklist || []).map((item, idx) =>
       idx === itemIndex ? { ...item, checkpointStates } : item
@@ -547,8 +603,7 @@ useEffect(() => {
     // Recompute stage.completed
     const stepList = Object.values(steps);
     stage.steps = steps;
-    stage.completed =
-      stepList.length > 0 && stepList.every((s) => s.completed);
+    stage.completed = stepList.length > 0 && stepList.every((s) => s.completed);
 
     stages[stageId] = stage;
 
@@ -592,18 +647,18 @@ useEffect(() => {
   };
 
   const currentPhaseLabel = determineCurrentPhase(editableData);
+  const parentOrderId =
+    projectData?.parentOrderId || projectData?.orderId || '';
+  const idText = projectData?.id || '—';
+  const weightedProgress = getWeightedProgressPct(editableData);
+
+  // Resolve current sub-step label for step views
   const selectedStepLabel =
     selectedTab === 'details'
       ? currentPhaseLabel
       : buildPhases.find((p) => p.key === selectedTab)?.label ||
         currentPhaseLabel;
 
-  const parentOrderId =
-    projectData?.parentOrderId || projectData?.orderId || '';
-  const idText = projectData?.id || '—';
-  const weightedProgress = getWeightedProgressPct(editableData);
-
-  // Resolve current sub-step label for main header
   const currentChecklist =
     selectedStepKey && editableData[selectedStepKey]
       ? editableData[selectedStepKey].checklist || []
@@ -615,12 +670,42 @@ useEffect(() => {
   const currentSubLabel =
     currentSub?.label ?? currentSub?.task ?? selectedStepLabel;
 
-  // ----- helper: current value for mobile dropdown -----
+  // helper: current value for mobile dropdown
   const getMobileSelectValue = () => {
     if (!selectedStepKey || selectedTab === 'details') return 'details';
     const idx = Number.isFinite(selectedSubIndex) ? selectedSubIndex : 0;
     return `${selectedStepKey}::${idx}`;
   };
+
+// 🔐 Impersonate linked user (if available) and open their customer project view
+const handleViewAsCustomer = () => {
+  const projectId = projectData?.id;
+
+  if (!projectId) {
+    console.warn('[ManageProjectModal] Missing projectData.id for View as Customer');
+    return;
+  }
+
+  if (linkedUser?.id && typeof startImpersonation === 'function') {
+    console.log(
+      '[ManageProjectModal] Starting impersonation for user:',
+      linkedUser.id
+    );
+    startImpersonation(linkedUser.id);
+  } else {
+    // We *don’t* block navigation anymore – we just warn you.
+    window.alert(
+      'No linked SoundLegend user was found for this project.\n\n' +
+        'Impersonation works by matching project.customerEmail to a user.email\n' +
+        'in the users collection.\n\n' +
+        'We will still open the SoundLegend portal in your current session.'
+    );
+  }
+
+  // Use the same route the ManageUsers impersonation flow uses,
+  // but pass projectId so the portal can auto-select it.
+  navigate(`/legacy?projectId=${encodeURIComponent(projectId)}`);
+};
 
   return (
     <div className="manage-project-modal-overlay mpm-overlay" onClick={onClose}>
@@ -703,43 +788,55 @@ useEffect(() => {
           </button>
         </header>
 
-        {/* Identifier / order row */}
+        {/* Project meta row (identifier, customer, IDs, impersonation link) */}
         <div
           className="mpm-id-strip"
           style={{ padding: '8px 16px', borderBottom: '1px solid #f0f0f0' }}
         >
+          {/* Left: drum identifier + customer name/email */}
           <div className="mpm-identifier-top">
-            {projectData?.artisanLine && (
-              <span className="mpm-identifier-chip">
-                <strong>ID</strong> {projectData.artisanLine}
+            {/* SL-005 · SoundLegend · 14×8" */}
+            {getIdentifier(projectData) && (
+              <span className="mpm-identifier-chip mpm-identifier-primary">
+                <span className="mpm-id-pill">ID</span>
+                {getIdentifier(projectData)}
               </span>
             )}
+
+            {/* 👤 Zenon D Lopez · email */}
             {projectData?.customerName && (
               <span className="mpm-identifier-chip">
                 👤 {projectData.customerName}
+                {projectData?.customerEmail && (
+                  <span className="mpm-identifier-email">
+                    {'  ·  '}
+                    {projectData.customerEmail}
+                  </span>
+                )}
               </span>
             )}
-            <span className="mpm-identifier-chip mpm-mono-id">
-              ID: {idText}
-            </span>
           </div>
+
+          {/* Right: IDs, order link, "View as Customer" */}
           <div className="mpm-id-row" style={{ marginTop: 6 }}>
-            <span className="mpm-mono-id">{idText}</span>
+            <span className="mpm-mono-id">Project ID: {idText}</span>
             <button
               className="mpm-copy-btn"
               onClick={() => navigator.clipboard?.writeText(String(idText))}
             >
-              Copy ID
+              Copy
             </button>
+
             {parentOrderId && (
               <>
-                <span style={{ opacity: 0.6 }}>·</span>
-                <span>Order:</span>
+                <span style={{ opacity: 0.6, margin: '0 4px' }}>·</span>
+                <span>Parent Order ID:</span>
                 <a
                   className="mpm-mono-id"
                   href={`/orders/${parentOrderId}`}
                   target="_blank"
                   rel="noreferrer"
+                  style={{ marginLeft: 4 }}
                 >
                   {parentOrderId}
                 </a>
@@ -750,6 +847,23 @@ useEffect(() => {
                   }
                 >
                   Copy
+                </button>
+              </>
+            )}
+
+            {/* View as Customer: always visible; impersonates when possible */}
+            {projectData?.id && (
+              <>
+                <span style={{ opacity: 0.6, margin: '0 4px' }}>·</span>
+                <button
+                  type="button"
+                  className="mpm-view-as-link"
+                  onClick={handleViewAsCustomer}
+                >
+                  <span className="mpm-view-as-label">View as Customer:</span>{' '}
+                  <span className="mpm-view-as-anchor">
+                    Open Project View ↗
+                  </span>
                 </button>
               </>
             )}
@@ -906,7 +1020,7 @@ useEffect(() => {
                   }}
                 />
 
-                {/* NEW: Lifecycle Stage → Step → Checkpoint view */}
+                {/* Lifecycle Stage → Step → Checkpoint view */}
                 <LifecyclePanel
                   lifecycle={editableData.lifecycle}
                   onToggleCheckpoint={handleLifecycleCheckpointToggle}

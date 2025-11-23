@@ -24,7 +24,6 @@ export const defaultStepData = {
    * 1. Discovery & Design  (Phase 1 — Pre-Build)
    *   • Initial Consultation
    *   • Build Proposal
-   *   • Early Mockups
    * -------------------------------------------------------- */
   discoveryDesign: {
     key: 'discoveryDesign',
@@ -43,13 +42,6 @@ export const defaultStepData = {
         id: 'discoveryDesign_2',
         label: 'Build proposal',
         task: 'Build proposal',
-        completed: false,
-        totalSeconds: 0,
-      },
-      {
-        id: 'discoveryDesign_3',
-        label: 'Early mockups',
-        task: 'Early mockups',
         completed: false,
         totalSeconds: 0,
       },
@@ -87,6 +79,7 @@ export const defaultStepData = {
   /* ----------------------------------------------------------
    * 3. Wood & Vision Lock-In  (Phase 1 — Pre-Build)
    *   • Wood Selection
+   *   • Early Mockups
    *   • Pre-Build Measuring & Prep
    * -------------------------------------------------------- */
   woodVisionLockIn: {
@@ -104,6 +97,13 @@ export const defaultStepData = {
       },
       {
         id: 'woodVisionLockIn_2',
+        label: 'Early mockups',
+        task: 'Early mockups',
+        completed: false,
+        totalSeconds: 0,
+      },
+      {
+        id: 'woodVisionLockIn_3',
         label: 'Pre-build measuring & prep',
         task: 'Pre-build measuring & prep',
         completed: false,

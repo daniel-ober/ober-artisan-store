@@ -44,77 +44,77 @@ const STEP_KEYS = [
 ];
 
 /* ------------------------------------------------------------------ */
-/*  Per-TASK weights (your list, as given)                             */
-/*  NOTE: these sum to 91.6; we normalize so 100% = all done.          */
+/*  Per-TASK weights                                                   */
+/*  NOTE: these values are normalized and rounded to sum to 100.00%.   */
 /* ------------------------------------------------------------------ */
 
 const TASK_WEIGHTS_PERCENT = {
   // 1. Discovery & Design
-  'Initial consultation': 0.6,
-  'Build proposal': 1.0,
-  'Early mockups': 1.3,
+  'Initial consultation': 0.66,
+  'Build proposal': 1.09,
+  'Early mockups': 1.42,
 
   // 2. Commitment & Portal Setup
-  'Payment processing': 0.3,
-  'Portal access setup': 0.4,
+  'Payment processing': 0.33,
+  'Portal access setup': 0.44,
 
   // 3. Wood & Vision Lock-In
-  'Wood selection': 1.6,
-  'Pre-build measuring & prep': 1.9,
+  'Wood selection': 1.75,
+  'Pre-build measuring & prep': 2.07,
 
   // 4. Raw Shell Creation
-  'Cut stave blocks to size': 6.4,
-  'Cut stave bevels': 2.6,
-  'Pre-glue test (dry-fit)': 0.6,
-  'Glue-up & clamping': 2.6,
-  'Glue curing': 0.0, // included for completeness, but contributes 0%
+  'Cut stave blocks to size': 6.99,
+  'Cut stave bevels': 2.84,
+  'Pre-glue test (dry-fit)': 0.66,
+  'Glue-up & clamping': 2.84,
+  'Glue curing': 0.0, // still tracked, but 0 weight
 
   // 5. Shell Trueing & Torch Tune
-  'Exterior milling setup': 2.6,
-  'Mill exterior diameter': 1.9,
-  'Outer bevel reinforcement': 0.9,
-  'Sanding prep (for veneer + interior)': 2.6,
+  'Exterior milling setup': 2.84,
+  'Mill exterior diameter': 2.07,
+  'Outer bevel reinforcement': 0.98,
+  'Sanding prep (for veneer + interior)': 2.84,
 
-  'Interior milling setup': 2.6,
-  'Mill interior thickness': 2.6,
-  'Inner bevel reinforcement': 1.0,
-  'Sanding prep (interior)': 2.6,
+  'Interior milling setup': 2.84,
+  'Mill interior thickness': 2.84,
+  'Inner bevel reinforcement': 1.09,
+  'Sanding prep (interior)': 2.84,
 
-  'Original torch tune process': 3.0,
+  'Original torch tune process': 3.28,
 
   // 6. Exterior Art & Finish
-  'Veneer application': 5.5,
-  'Under-spray aesthetic work': 1.3,
-  'Pre-finish full shell inspection': 1.0,
-  'Badge + logo work': 3.9,
-  'Spray finishing': 9.5,
-  'Full de-gassing of chemicals': 0.0, // again, 0% weight
-  'Final sanding': 2.9,
-  'Polishing': 1.9,
+  'Veneer application': 6.0,
+  'Under-spray aesthetic work': 1.42,
+  'Pre-finish full shell inspection': 1.09,
+  'Badge + logo work': 4.26,
+  'Spray finishing': 10.34, // adjusted slightly so total = 100.00
+  'Full de-gassing of chemicals': 0.0, // 0 weight
+  'Final sanding': 3.17,
+  'Polishing': 2.07,
 
   // 7. Edges & Snare Beds
-  'Bearing edges': 1.4,
-  'Snare beds': 1.8,
+  'Bearing edges': 1.53,
+  'Snare beds': 1.97,
 
   // 8. Hardware & Assembly
-  'Hardware + head assembly': 7.1,
+  'Hardware + head assembly': 7.75,
 
   // 9. Legacy Tuning & Media
-  'Legacy resonance analysis': 0.6,
-  'Legacy tuning': 2.6,
-  'Professional photos': 10.3,
-  'Studio Legacy audio': 1.0,
+  'Legacy resonance analysis': 0.66,
+  'Legacy tuning': 2.84,
+  'Professional photos': 6.24,
+  'Studio Legacy audio': 6.09,
 
   // 10. Final QA, Packaging & Delivery
-  'NTAG authentication': 0.3,
-  'Final cleaning': 0.3,
-  'Packaging': 0.7,
-  'Delivery confirmation': 0.4,
+  'NTAG authentication': 0.33,
+  'Final cleaning': 0.33,
+  'Packaging': 0.76,
+  'Delivery confirmation': 0.44,
 };
 
 /**
- * Sum of all task weights (currently 91.6).
- * We use this to normalize to 0–100%.
+ * Sum of all task weights (should be ~100.00).
+ * We still normalize to be robust to any future tweaks.
  */
 const TOTAL_WEIGHT = Object.values(TASK_WEIGHTS_PERCENT).reduce(
   (sum, v) => sum + v,
@@ -237,7 +237,7 @@ export function calculateProjectProgress(projectData) {
  * {
  *   "Cut stave blocks to size": {
  *      completed: true,
- *      weight: 6.4,
+ *      weight: 6.99,
  *      contribution: 6.99  // % points toward the final 0–100
  *   },
  *   ...

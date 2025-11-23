@@ -2,13 +2,18 @@
    ---------------------------------------------------------------------- */
 
 /* Optional: keep the card wrapper styling you were using */
-.slp-card.pp-card[data-component="ProjectProgress"] {
+.slp-card.pp-card[data-component='ProjectProgress'] {
   position: relative;
   max-width: 1100px;
   margin: 0 auto;
   padding: 20px 24px 24px;
   border-radius: 18px;
-  background: radial-gradient(circle at top left, #181a27 0, #05060c 55%, #020208 100%);
+  background: radial-gradient(
+    circle at top left,
+    #181a27 0,
+    #05060c 55%,
+    #020208 100%
+  );
   border: 1px solid rgba(255, 255, 255, 0.04);
   box-shadow: 0 22px 60px rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(26px);
@@ -86,7 +91,7 @@
 
 .sl-progress-metrics {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 14px;
   margin-top: 18px;
 }
@@ -94,7 +99,12 @@
 .sl-progress-metric {
   padding: 10px 12px;
   border-radius: 12px;
-  background: radial-gradient(circle at top left, #171926 0, #090a12 55%, #040408 100%);
+  background: radial-gradient(
+    circle at top left,
+    #171926 0,
+    #090a12 55%,
+    #040408 100%
+  );
   border: 1px solid rgba(255, 255, 255, 0.06);
   display: flex;
   flex-direction: column;
@@ -185,7 +195,7 @@
   background: #020617;
   display: flex;
   align-items: center;
-  justify-content:center;
+  justify-content: center;
   font-size: 0.7rem;
   line-height: 1;
   position: relative;
@@ -198,7 +208,6 @@
 
 /* small connector to the bar */
 .sl-progress-step-number::before {
-  content: '';
   position: absolute;
   top: -20px;
   left: 50%;
@@ -264,7 +273,12 @@
   margin-top: 24px;
   padding: 16px 16px 20px;
   border-radius: 14px;
-  background: radial-gradient(circle at top left, #151725 0, #070810 55%, #030307 100%);
+  background: radial-gradient(
+    circle at top left,
+    #151725 0,
+    #070810 55%,
+    #030307 100%
+  );
   border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
@@ -325,7 +339,12 @@
 .sl-progress-stage-stat {
   padding: 8px 10px;
   border-radius: 10px;
-  background: radial-gradient(circle at top left, #181a2a 0, #090a13 55%, #040408 100%);
+  background: radial-gradient(
+    circle at top left,
+    #181a2a 0,
+    #090a13 55%,
+    #040408 100%
+  );
   border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
@@ -434,8 +453,13 @@
   margin-top: 1.5rem;
   padding: 1.25rem 1.5rem;
   border-radius: 16px;
-  background: radial-gradient(circle at top left, rgba(80, 140, 255, 0.18), transparent 60%),
-              rgba(3, 9, 20, 0.96);
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(80, 140, 255, 0.18),
+      transparent 60%
+    ),
+    rgba(3, 9, 20, 0.96);
   border: 1px solid rgba(120, 190, 255, 0.28);
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
 }
@@ -464,7 +488,9 @@
   border-radius: 14px;
   margin-bottom: 4px;
   overflow: hidden;
-  transition: background 0.25s ease, border 0.25s ease;
+  transition:
+    background 0.25s ease,
+    border 0.25s ease;
 }
 
 .pp-step-block:hover {
@@ -643,6 +669,12 @@
   opacity: 0.78;
 }
 
+/* REMOVE vertical marker lines above roadmap dots */
+.sl-progress-step-number::before {
+  display: none !important;
+  content: none !important;
+}
+
 /* =====================================================================
    RESPONSIVE
    ===================================================================== */
@@ -653,7 +685,7 @@
 @media (min-width: 1200px) {
   /* tighter overall container spacing */
   .sl-progress-stage {
-    padding: 32px 36px 48px;
+    padding: 40px 48px 56px;
   }
 
   /* reduce excess vertical space between sections */
@@ -667,7 +699,7 @@
 
   /* better balance inside the two-column grid */
   .sl-progress-stage-body {
-    column-gap: 40px;  /* was 24px — more breathing room */
+    column-gap: 40px; /* was 24px — more breathing room */
     row-gap: 0;
   }
 
@@ -729,7 +761,7 @@
 }
 
 @media (max-width: 900px) {
-  .slp-card.pp-card[data-component="ProjectProgress"] {
+  .slp-card.pp-card[data-component='ProjectProgress'] {
     padding: 18px 16px 20px;
   }
 

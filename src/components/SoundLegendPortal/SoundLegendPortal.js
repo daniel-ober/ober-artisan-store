@@ -33,28 +33,6 @@ function tsToMillis(v) {
   }
 }
 
-const Tabs = ({ tabs, current, onChange }) => (
-  <div className="slp-tabs">
-    <div
-      className="slp-tablist"
-      role="tablist"
-      aria-label="SoundLegend sections"
-    >
-      {tabs.map((t) => (
-        <button
-          key={t.key}
-          role="tab"
-          aria-selected={current === t.key}
-          className={`slp-tab ${current === t.key ? 'active' : ''}`}
-          onClick={() => onChange(t.key)}
-        >
-          {t.label}
-        </button>
-      ))}
-    </div>
-  </div>
-);
-
 /* -------------------- custom project picker -------------------- */
 
 const ProjectPicker = ({ projects, selectedId, onChange }) => {
@@ -107,6 +85,45 @@ const ProjectPicker = ({ projects, selectedId, onChange }) => {
     </div>
   );
 };
+
+/* -------------------- tabs w/ picker on the left -------------------- */
+
+const Tabs = ({
+  tabs,
+  current,
+  onChange,
+  projects,
+  selectedId,
+  onSelectProject,
+}) => (
+  <div className="slp-tabs">
+    <div className="slp-tabs-left">
+      <ProjectPicker
+        projects={projects}
+        selectedId={selectedId}
+        onChange={onSelectProject}
+      />
+    </div>
+
+    <div
+      className="slp-tablist slp-tabs-buttons"
+      role="tablist"
+      aria-label="SoundLegend sections"
+    >
+      {tabs.map((t) => (
+        <button
+          key={t.key}
+          role="tab"
+          aria-selected={current === t.key}
+          className={`slp-tab ${current === t.key ? 'active' : ''}`}
+          onClick={() => onChange(t.key)}
+        >
+          {t.label}
+        </button>
+      ))}
+    </div>
+  </div>
+);
 
 /* -------------------- main portal -------------------- */
 
@@ -281,15 +298,14 @@ const SoundLegendPortal = () => {
         {isImpersonating ? ' (admin view)' : ''}
       </h2>
 
-      <Tabs tabs={tabs} current={tab} onChange={setTab} />
-
-      <div className="slp-project-picker-row">
-        <ProjectPicker
-          projects={projects}
-          selectedId={selectedId}
-          onChange={setSelectedId}
-        />
-      </div>
+      <Tabs
+        tabs={tabs}
+        current={tab}
+        onChange={setTab}
+        projects={projects}
+        selectedId={selectedId}
+        onSelectProject={setSelectedId}
+      />
 
       <div className="slp-panel">
         {tab === 'progress' && (
