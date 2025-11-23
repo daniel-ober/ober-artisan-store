@@ -32,16 +32,16 @@ const FILE_TYPES = {
 };
 
 const buildPhases = [
-  'Step 1. Wood Preparation',
-  'Step 2. Shell Construction',
-  'Step 3. Fine-Tuning',
-  'Step 4. Shell Exterior Finish',
-  'Step 5. Bearing Edges',
-  'Step 6. Snare Bed Cutting',
-  'Step 7. Hardware Drilling',
-  'Step 8. Hardware Assembly',
-  'Step 9. Tuning and Detailing',
-  'Step 10. Quality Check',
+  'Discovery & Design',
+  'Commitment & Portal Setup',
+  'Wood & Vision Lock-In',
+  'Raw Shell Creation',
+  'Shell Trueing & Torch Tune',
+  'Exterior Art & Finish',
+  'Edges & Snare Beds',
+  'Hardware & Assembly',
+  'Legacy Tuning & Media',
+  'Final QA, Packaging & Delivery',
 ];
 
 const extOf = (url = '') => {
@@ -247,7 +247,7 @@ const STAGE_FILTERS = [
   { id: '0', label: 'No stage / Misc' },
   ...buildPhases.map((label, idx) => ({
     id: String(idx + 1),
-    label: `Stage ${idx + 1}`,
+    label: `Stage ${idx + 1} · ${label}`,
   })),
 ];
 
@@ -269,8 +269,7 @@ const SORT_STAGE_OPTIONS = [
 /* -------------------- main tab component -------------------- */
 
 export default function Media({ project }) {
-  const { actorIsAdmin, isImpersonating, actorEmail } =
-    useActorContext() || {};
+  const { actorIsAdmin, isImpersonating, actorEmail } = useActorContext() || {};
 
   // Only admins in impersonation mode can edit
   const canEdit = !!project?.id && actorIsAdmin && isImpersonating;
@@ -450,7 +449,7 @@ export default function Media({ project }) {
   const handleUploadFiles = async (fileList, stageValue) => {
     if (!canEdit || !project?.id) return;
     const files = Array.from(fileList || []);
-       if (!files.length) return;
+    if (!files.length) return;
 
     const stage = Number(stageValue) || 0;
     const category = 'media';
@@ -774,10 +773,7 @@ function MediaToolbar({
 
       <label className="mg-sort">
         <span className="mg-sort-label">Sort</span>
-        <select
-          value={sortMode}
-          onChange={(e) => onSortChange(e.target.value)}
-        >
+        <select value={sortMode} onChange={(e) => onSortChange(e.target.value)}>
           {sortOptions.map((opt) => (
             <option key={opt.id} value={opt.id}>
               {opt.label}
@@ -919,9 +915,7 @@ function MediaUploadPanel({ uploading, onUploadFiles, onAddUrl }) {
           <div className="mg-upload-icon">⬆️</div>
           <div className="mg-upload-text">
             <div className="mg-upload-title">
-              {uploading
-                ? 'Uploading media…'
-                : 'Drag & drop media files here'}
+              {uploading ? 'Uploading media…' : 'Drag & drop media files here'}
             </div>
             <div className="mg-upload-sub">
               or click anywhere in this area to browse
@@ -955,7 +949,7 @@ function MediaUploadPanel({ uploading, onUploadFiles, onAddUrl }) {
             <option value="0">No stage / Misc</option>
             {buildPhases.map((label, idx) => (
               <option key={idx + 1} value={idx + 1}>
-                {`Stage ${idx + 1} · ${label.replace(/^Step \d+\.\s*/, '')}`}
+                {`Stage ${idx + 1} · ${label}`}
               </option>
             ))}
           </select>
@@ -1112,11 +1106,9 @@ function MediaModal({
     onChangeStage?.(item, nextStage);
   };
 
-const embedUrl =
-  item.type === 'video' ? getVideoEmbedUrl(item.url) : null;
+  const embedUrl = item.type === 'video' ? getVideoEmbedUrl(item.url) : null;
 
-const isYouTubeHosted =
-  item.type === 'video' && !!getYouTubeId(item.url);
+  const isYouTubeHosted = item.type === 'video' && !!getYouTubeId(item.url);
 
   const showDownloadButton =
     item.type !== 'video' || !embedUrl || !isYouTubeHosted;
@@ -1158,10 +1150,7 @@ const isYouTubeHosted =
                   <option value="0">No stage / Misc</option>
                   {buildPhases.map((label, idx) => (
                     <option key={idx + 1} value={idx + 1}>
-                      {`Stage ${idx + 1} · ${label.replace(
-                        /^Step \d+\.\s*/,
-                        ''
-                      )}`}
+                      {`Stage ${idx + 1} · ${label}`}
                     </option>
                   ))}
                 </select>
@@ -1206,9 +1195,7 @@ const isYouTubeHosted =
               <>
                 <button
                   className="apo-btn"
-                  onClick={() =>
-                    setZoom((z) => Math.max(1, z - 0.25))
-                  }
+                  onClick={() => setZoom((z) => Math.max(1, z - 0.25))}
                 >
                   –
                 </button>
@@ -1223,9 +1210,7 @@ const isYouTubeHosted =
                 </button>
                 <button
                   className="apo-btn"
-                  onClick={() =>
-                    setZoom((z) => Math.min(4, z + 0.25))
-                  }
+                  onClick={() => setZoom((z) => Math.min(4, z + 0.25))}
                 >
                   +
                 </button>

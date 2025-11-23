@@ -72,17 +72,19 @@ const getWeightedProgressPct = (data) => {
 
   const patched = {
     ...data,
-    woodPreparation: data.woodPreparation || data.discoveryDesign,
-    shellConstruction: data.shellConstruction || data.commitmentPortal,
-    fineTuning: data.fineTuning || data.woodVisionLockIn,
-    shellExteriorFinish: data.shellExteriorFinish || data.rawShellCreation,
-    bearingEdges: data.bearingEdges || data.shellTrueingTorchTune,
-    snareBedCutting: data.snareBedCutting || data.exteriorArtFinish,
-    hardwareDrilling: data.hardwareDrilling || data.edgesSnareBeds,
+    // 🔄 NEW 10-step keys take priority, fall back to legacy only if missing
+    woodPreparation: data.discoveryDesign || data.woodPreparation,
+    shellConstruction: data.commitmentPortal || data.shellConstruction,
+    fineTuning: data.woodVisionLockIn || data.fineTuning,
+    shellExteriorFinish: data.rawShellCreation || data.shellExteriorFinish,
+    bearingEdges: data.shellTrueingTorchTune || data.bearingEdges,
+    snareBedCutting: data.exteriorArtFinish || data.snareBedCutting,
+    hardwareDrilling: data.edgesSnareBeds || data.hardwareDrilling,
     hardwareAssembly: data.hardwareAssembly,
     tuningAndDetailing:
-      data.tuningAndDetailing || data.legacyTuningMedia || data.tuningDetailing,
-    qualityCheck: data.qualityCheck || data.finalQAPackagingDelivery,
+      data.legacyTuningMedia || data.tuningAndDetailing || data.tuningDetailing,
+    qualityCheck:
+      data.finalQAPackagingDelivery || data.qualityCheck,
   };
 
   return calculateProjectProgress(patched);

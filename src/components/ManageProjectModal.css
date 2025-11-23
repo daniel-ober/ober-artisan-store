@@ -5,6 +5,37 @@
 
 /* ==== Fullscreen overlay + dialog ======================================== */
 
+/* When both classes are present (your JSX), use these styles */
+.manage-project-modal-overlay.mpm-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 4000;
+  cursor: default;
+}
+
+.manage-project-modal-content.mpm-modal {
+  position: relative;
+  background: #ffffff;
+  width: min(1200px, 92vw);
+  height: min(90vh, 900px);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  cursor: auto;
+  font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont,
+    sans-serif;
+}
+
+/* Keep bare .mpm-overlay / .mpm-modal for safety if used elsewhere */
 .mpm-overlay {
   position: fixed;
   inset: 0;
@@ -30,7 +61,8 @@
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
   cursor: auto;
-  font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont,
+    sans-serif;
 }
 
 /* ==== Header / chips / close ============================================ */
@@ -73,11 +105,14 @@
   line-height: 1;
   cursor: pointer;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  transition: background 0.15s ease, border-color 0.15s ease,
+    transform 0.08s ease;
 }
 
 .mpm-close-btn:hover {
   background: #f3f4f6;
   border-color: #d1d5db;
+  transform: translateY(-0.5px);
 }
 
 /* ==== Header chips ======================================================= */
@@ -236,6 +271,10 @@
   color: #111827;
 }
 
+.mpm-total-time-label {
+  font-size: 0.92rem;
+}
+
 .mpm-total-time-value {
   background: #eef2ff;
   border: 1px solid #c7d2fe;
@@ -244,6 +283,63 @@
   border-radius: 6px;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     'Liberation Mono', 'Courier New', monospace;
+}
+
+/* ==== Bulk project actions (header row) ================================== */
+
+.mpm-bulk-project-actions {
+  width: 100%;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* Generic bulk action buttons (project + stage) */
+
+.mpm-bulk-btn {
+  border-radius: 999px;
+  border: 1px solid #0f172a;
+  background: #0f172a;
+  color: #ffffff;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.1);
+  transition: background 0.15s ease, border-color 0.15s ease,
+    transform 0.08s ease, box-shadow 0.15s ease;
+}
+
+.mpm-bulk-btn:hover {
+  background: #111827;
+  border-color: #020617;
+  transform: translateY(-0.5px);
+  box-shadow: 0 3px 8px rgba(15, 23, 42, 0.25);
+}
+
+.mpm-bulk-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Destructive / reset variant */
+
+.mpm-bulk-btn-reset {
+  border-color: #b91c1c;
+  background: #fef2f2;
+  color: #991b1b;
+}
+
+.mpm-bulk-btn-reset:hover {
+  background: #fee2e2;
+  border-color: #7f1d1d;
+  color: #7f1d1d;
 }
 
 /* ==== Body layout ======================================================== */
@@ -400,11 +496,18 @@
 
 /* ==== Identifier + order row under header ================================ */
 
+.mpm-id-strip {
+  padding: 8px 16px;
+  border-bottom: 1px solid #f3f4f6;
+  background: #fcfcff;
+}
+
 .mpm-identifier-top {
   display: flex;
   gap: 0.5rem;
   align-items: center;
   flex-wrap: wrap;
+  margin-bottom: 4px;
 }
 
 .mpm-identifier-chip {
@@ -414,9 +517,42 @@
   background: #f3f4f6;
   border: 1px solid #e5e7eb;
   padding: 0.25rem 0.5rem;
-  border-radius: 6px;
+  border-radius: 999px;
   font-weight: 600;
   color: #111827;
+}
+
+.mpm-identifier-primary {
+  background: #eef2ff;
+  border-color: #c7d2fe;
+  color: #111827;
+}
+
+.mpm-identifier-email {
+  font-weight: 500;
+  color: #4b5563;
+  font-size: 0.85rem;
+}
+
+.mpm-id-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.4rem;
+  height: 18px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  background: #a855f7; /* purple-ish */
+  color: #ffffff;
+  margin-right: 0.35rem;
+}
+
+.mpm-id-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
 }
 
 .mpm-mono-id {
@@ -428,13 +564,6 @@
   padding: 0.15rem 0.4rem;
   border-radius: 6px;
   color: #0f172a;
-}
-
-.mpm-id-row {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  flex-wrap: wrap;
 }
 
 .mpm-copy-btn {
@@ -468,7 +597,7 @@
 }
 
 .mpm-view-as-anchor {
-  color: #0a66c2;      /* blue link */
+  color: #0a66c2; /* blue link */
   text-decoration: underline;
   font-weight: 500;
 }
@@ -476,6 +605,22 @@
 .mpm-view-as-link:hover .mpm-view-as-anchor {
   text-decoration: underline;
   filter: brightness(0.9);
+}
+
+/* ==== Stage-level bulk actions (inside main) ============================= */
+
+.mpm-bulk-step-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.mpm-bulk-step-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #4b5563;
 }
 
 /* ==== Overview / Project details cards (scoped to modal) ================= */
@@ -570,6 +715,14 @@
   text-decoration: underline;
 }
 
+/* Labels only inside the Overview pane – do NOT touch step checkpoints */
+.project-overview-content label {
+  display: block;
+  margin-top: 1.1rem;
+  font-weight: 600;
+  color: #111827;
+}
+
 /* ==== Mobile step selector ============================================== */
 
 .mpm-mobile-phase-selector-wrapper {
@@ -590,28 +743,6 @@
   appearance: none;
   text-align: center;
   text-align-last: center;
-}
-
-/* Labels only inside the Overview pane – do NOT touch step checkpoints */
-.project-overview-content label {
-  display: block;
-  margin-top: 1.1rem;
-  font-weight: 600;
-  color: #111827;
-}
-
-.mpm-id-pill {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 0.4rem;
-  height: 18px;
-  border-radius: 999px;
-  font-size: 0.7rem;
-  font-weight: 700;
-  background: #a855f7; /* purple-ish */
-  color: #ffffff;
-  margin-right: 0.35rem;
 }
 
 /* ==== Scrollbars (desktop only) ========================================= */
@@ -640,8 +771,7 @@
 
 @media (max-width: 1024px) {
   .mpm-header {
-    grid-template-columns: 1fr auto auto;
-    grid-auto-rows: minmax(0, auto);
+    padding-right: 60px;
   }
 }
 

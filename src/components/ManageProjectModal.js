@@ -11,7 +11,9 @@ import {
 } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import { db } from '../firebaseConfig';
-import StepComponentTemplate from './StepComponentTemplate';
+import StepComponentTemplate, {
+  CHECKPOINTS_BY_ITEM_ID,
+} from './StepComponentTemplate';
 import ProjectOverview from './ProjectOverview';
 import defaultStepData from '../utils/defaultStepData';
 import { calculateProjectProgress } from '../utils/calculateProjectProgress';
@@ -120,6 +122,19 @@ const buildPhases = STEP_KEYS.map((key) => ({
   label: STEP_META[key]?.label || key,
   phaseId: STEP_META[key]?.phaseId || null,
 }));
+
+// Figure out how many checkpoints a given checklist item *should* have.
+// Prefer the existing checkpointStates length if present, otherwise fall
+// back to the static CHECKPOINTS_BY_ITEM_ID mapping.
+const getCheckpointCountForItem = (item = {}) => {
+  if (Array.isArray(item.checkpointStates) && item.checkpointStates.length > 0) {
+    return item.checkpointStates.length;
+  }
+  const id = item.id;
+  if (!id) return 0;
+  const checkpoints = CHECKPOINTS_BY_ITEM_ID?.[id];
+  return Array.isArray(checkpoints) ? checkpoints.length : 0;
+};
 
 /* ----- date + progress helpers --------------------------------------------------- */
 const toDate = (v) => {
@@ -284,6 +299,8 @@ const LifecyclePanel = ({ lifecycle, onToggleCheckpoint }) => {
     const bOrder = stages[b]?.order ?? 0;
     return aOrder - bOrder;
   });
+  // (Intentionally left simple for now; UI not requested here.)
+  return null;
 };
 
 /* ----------------------------------------------------------------------------
@@ -296,8 +313,8 @@ const ManageProjectModal = ({
   projectData,
   onProjectUpdate,
 }) => {
-const navigate = useNavigate();
-const { startImpersonation } = useImpersonation();
+  const navigate = useNavigate();
+  const { startImpersonation } = useImpersonation();
 
   const [selectedTab, setSelectedTab] = useState('details'); // 'details' or stepKey
   const [editableData, setEditableData] = useState({});
@@ -381,7 +398,6 @@ const { startImpersonation } = useImpersonation();
     setStatus(determineOverallStatus(hydrated));
   }, [projectData]);
 
-  // always open on Overview (Option 1)
   // always open on Overview
   useEffect(() => {
     if (!isOpen) return;
@@ -396,92 +412,89 @@ const { startImpersonation } = useImpersonation();
     setIsEditing(false);
   }, [isOpen]);
 
-// look up linked user for impersonation based on customerEmail
-// 🔗 Link the project to a SoundLegend user for impersonation
-useEffect(() => {
-  const linkUser = async () => {
-    setLinkedUser(null);
+  // 🔗 Link the project to a SoundLegend user for impersonation
+  useEffect(() => {
+    const linkUser = async () => {
+      setLinkedUser(null);
 
-    if (!projectData) return;
+      if (!projectData) return;
 
-    try {
-      /* 1) Try direct userId fields first (if you ever add these to projects) */
-      const directUserId =
-        projectData.customerUserId ||
-        projectData.userId ||
-        projectData.ownerUserId;
+      try {
+        /* 1) Try direct userId fields first (if you ever add these to projects) */
+        const directUserId =
+          projectData.customerUserId ||
+          projectData.userId ||
+          projectData.ownerUserId;
 
-      if (directUserId) {
-        console.log(
-          '[ManageProjectModal] Trying to link user via direct id:',
-          directUserId
-        );
-        const uRef = doc(db, 'users', directUserId);
-        const uSnap = await getDoc(uRef);
-        if (uSnap.exists()) {
-          const uData = { id: uSnap.id, ...uSnap.data() };
-          console.log('[ManageProjectModal] Linked user via id:', uData);
-          setLinkedUser(uData);
+        if (directUserId) {
+          console.log(
+            '[ManageProjectModal] Trying to link user via direct id:',
+            directUserId
+          );
+          const uRef = doc(db, 'users', directUserId);
+          const uSnap = await getDoc(uRef);
+          if (uSnap.exists()) {
+            const uData = { id: uSnap.id, ...uSnap.data() };
+            console.log('[ManageProjectModal] Linked user via id:', uData);
+            setLinkedUser(uData);
+            return;
+          }
+        }
+
+        /* 2) Fallback: match on email (case/whitespace tolerant) */
+        const rawEmail =
+          projectData.customerEmail ||
+          projectData.email ||
+          projectData.customerEmailAddress;
+
+        if (!rawEmail) {
+          console.warn(
+            '[ManageProjectModal] No customer email on project; cannot link user.'
+          );
           return;
         }
-      }
 
-      /* 2) Fallback: match on email (case/whitespace tolerant) */
-      const rawEmail =
-        projectData.customerEmail ||
-        projectData.email ||
-        projectData.customerEmailAddress;
+        const candidates = Array.from(
+          new Set(
+            [rawEmail, rawEmail.trim(), rawEmail.trim().toLowerCase()].filter(
+              Boolean
+            )
+          )
+        );
 
-      if (!rawEmail) {
+        const usersCol = collection(db, 'users');
+
+        for (const email of candidates) {
+          console.log(
+            '[ManageProjectModal] Trying to link user by email:',
+            email
+          );
+          const q = query(usersCol, where('email', '==', email));
+          const snap = await getDocs(q);
+          if (!snap.empty) {
+            const docSnap = snap.docs[0];
+            const uData = { id: docSnap.id, ...docSnap.data() };
+            console.log('[ManageProjectModal] Linked user via email:', uData);
+            setLinkedUser(uData);
+            return;
+          }
+        }
+
         console.warn(
-          '[ManageProjectModal] No customer email on project; cannot link user.'
+          '[ManageProjectModal] No user matched any candidate email for project',
+          projectData.id,
+          candidates
         );
-        return;
-      }
-
-      const candidates = Array.from(
-        new Set(
-          [
-            rawEmail,
-            rawEmail.trim(),
-            rawEmail.trim().toLowerCase(),
-          ].filter(Boolean)
-        )
-      );
-
-      const usersCol = collection(db, 'users');
-
-      for (const email of candidates) {
-        console.log(
-          '[ManageProjectModal] Trying to link user by email:',
-          email
+      } catch (err) {
+        console.error(
+          '[ManageProjectModal] Failed to look up customer user for impersonation:',
+          err
         );
-        const q = query(usersCol, where('email', '==', email));
-        const snap = await getDocs(q);
-        if (!snap.empty) {
-          const docSnap = snap.docs[0];
-          const uData = { id: docSnap.id, ...docSnap.data() };
-          console.log('[ManageProjectModal] Linked user via email:', uData);
-          setLinkedUser(uData);
-          return;
-        }
       }
+    };
 
-      console.warn(
-        '[ManageProjectModal] No user matched any candidate email for project',
-        projectData.id,
-        candidates
-      );
-    } catch (err) {
-      console.error(
-        '[ManageProjectModal] Failed to look up customer user for impersonation:',
-        err
-      );
-    }
-  };
-
-  linkUser();
-}, [projectData]);
+    linkUser();
+  }, [projectData]);
 
   if (!isOpen) return null;
 
@@ -494,6 +507,79 @@ useEffect(() => {
       });
     });
     return total;
+  };
+
+  /* --------------------------------------------------------------------------
+   * 🔵 UPDATED: COMPLETION HELPERS
+   * ------------------------------------------------------------------------ */
+
+  // Helper: toggle completion on a single checklist item.
+  // By default this **does not** touch checkpointStates so that individual
+  // measurement-point toggles don't get blown away. We only sync all
+  // checkpointStates when explicitly requested (bulk actions).
+  const applyCompletionToItem = (
+    item,
+    complete,
+    { touchCheckpoints = false } = {}
+  ) => {
+    const base = {
+      ...item,
+      completed: !!complete,
+    };
+
+    if (!touchCheckpoints) {
+      return base;
+    }
+
+    const expectedCount = getCheckpointCountForItem(item);
+    if (expectedCount <= 0) {
+      return base;
+    }
+
+    const states = new Array(expectedCount).fill(!!complete);
+    return {
+      ...base,
+      checkpointStates: states,
+    };
+  };
+
+  // Mark all sub-steps in a single stage (e.g. "4. Raw Shell Creation")
+  // Also mark all checkpoints/measurement points for those sub-steps.
+  const bulkUpdateStepCompletion = (stepKey, complete) => {
+    if (!stepKey) return;
+    const step = editableData[stepKey];
+    if (!step || !Array.isArray(step.checklist)) return;
+
+    const updatedStep = {
+      ...step,
+      checklist: step.checklist.map((item) =>
+        applyCompletionToItem(item, complete, { touchCheckpoints: true })
+      ),
+    };
+
+    const update = { [stepKey]: updatedStep };
+    saveToFirestore(update);
+  };
+
+  // Mark all stages in the project complete / incomplete.
+  // Also mark all checkpoints/measurement points across the project.
+  const bulkUpdateAllStepsCompletion = (complete) => {
+    const update = {};
+
+    STEP_KEYS.forEach((key) => {
+      const step = editableData[key];
+      if (step && Array.isArray(step.checklist)) {
+        update[key] = {
+          ...step,
+          checklist: step.checklist.map((item) =>
+            applyCompletionToItem(item, complete, { touchCheckpoints: true })
+          ),
+        };
+      }
+    });
+
+    if (Object.keys(update).length === 0) return;
+    saveToFirestore(update);
   };
 
   const saveToFirestore = async (updatedPartial = {}) => {
@@ -525,11 +611,22 @@ useEffect(() => {
       console.error('❌ Failed to save project data:', err);
     }
   };
+
   const handleChecklistToggle = (stepKey, index, completed, totalSeconds) => {
     const step = editableData[stepKey] || { checklist: [] };
-    const updatedChecklist = step.checklist.map((item, i) =>
-      i === index ? { ...item, completed, totalSeconds } : item
-    );
+
+    const updatedChecklist = step.checklist.map((item, i) => {
+      if (i !== index) return item;
+
+      // First update time, then apply completion. We **do not** touch
+      // checkpointStates here so we don't auto-complete every measurement
+      // point when only one is clicked.
+      const withTime = { ...item, totalSeconds };
+      return applyCompletionToItem(withTime, completed, {
+        touchCheckpoints: false,
+      });
+    });
+
     const updatedStep = { ...step, checklist: updatedChecklist };
     const update = { [stepKey]: updatedStep };
     const merged = { ...editableData, ...update };
@@ -553,9 +650,25 @@ useEffect(() => {
     checkpointStates
   ) => {
     const step = editableData[stepKey] || { checklist: [] };
-    const updatedChecklist = (step.checklist || []).map((item, idx) =>
-      idx === itemIndex ? { ...item, checkpointStates } : item
-    );
+
+    const updatedChecklist = (step.checklist || []).map((item, idx) => {
+      if (idx !== itemIndex) return item;
+
+      const allTrue =
+        Array.isArray(checkpointStates) &&
+        checkpointStates.length > 0 &&
+        checkpointStates.every(Boolean);
+
+      return {
+        ...item,
+        checkpointStates,
+        // Auto-mark the sub-step complete only when *all* measurement
+        // points for that sub-step are checked. This only affects the
+        // single item at itemIndex.
+        completed: allTrue,
+      };
+    });
+
     const updatedStep = { ...step, checklist: updatedChecklist };
     const update = { [stepKey]: updatedStep };
     const merged = { ...editableData, ...update };
@@ -677,35 +790,37 @@ useEffect(() => {
     return `${selectedStepKey}::${idx}`;
   };
 
-// 🔐 Impersonate linked user (if available) and open their customer project view
-const handleViewAsCustomer = () => {
-  const projectId = projectData?.id;
+  // 🔐 Impersonate linked user (if available) and open their customer project view
+  const handleViewAsCustomer = () => {
+    const projectId = projectData?.id;
 
-  if (!projectId) {
-    console.warn('[ManageProjectModal] Missing projectData.id for View as Customer');
-    return;
-  }
+    if (!projectId) {
+      console.warn(
+        '[ManageProjectModal] Missing projectData.id for View as Customer'
+      );
+      return;
+    }
 
-  if (linkedUser?.id && typeof startImpersonation === 'function') {
-    console.log(
-      '[ManageProjectModal] Starting impersonation for user:',
-      linkedUser.id
-    );
-    startImpersonation(linkedUser.id);
-  } else {
-    // We *don’t* block navigation anymore – we just warn you.
-    window.alert(
-      'No linked SoundLegend user was found for this project.\n\n' +
-        'Impersonation works by matching project.customerEmail to a user.email\n' +
-        'in the users collection.\n\n' +
-        'We will still open the SoundLegend portal in your current session.'
-    );
-  }
+    if (linkedUser?.id && typeof startImpersonation === 'function') {
+      console.log(
+        '[ManageProjectModal] Starting impersonation for user:',
+        linkedUser.id
+      );
+      startImpersonation(linkedUser.id);
+    } else {
+      // We *don’t* block navigation anymore – we just warn you.
+      window.alert(
+        'No linked SoundLegend user was found for this project.\n\n' +
+          'Impersonation works by matching project.customerEmail to a user.email\n' +
+          'in the users collection.\n\n' +
+          'We will still open the SoundLegend portal in your current session.'
+      );
+    }
 
-  // Use the same route the ManageUsers impersonation flow uses,
-  // but pass projectId so the portal can auto-select it.
-  navigate(`/legacy?projectId=${encodeURIComponent(projectId)}`);
-};
+    // Use the same route the ManageUsers impersonation flow uses,
+    // but pass projectId so the portal can auto-select it.
+    navigate(`/legacy?projectId=${encodeURIComponent(projectId)}`);
+  };
 
   return (
     <div className="manage-project-modal-overlay mpm-overlay" onClick={onClose}>
@@ -775,6 +890,40 @@ const handleViewAsCustomer = () => {
             <span className="mpm-total-time-value">
               {formatFullTime(calculateProjectTotalTime())}
             </span>
+          </div>
+
+          {/* 🔵 NEW: Project-level bulk actions */}
+          <div className="mpm-bulk-project-actions">
+            <button
+              type="button"
+              className="mpm-bulk-btn"
+              onClick={() => {
+                if (
+                  window.confirm(
+                    'Mark ALL stages and sub-steps in this project as complete? This will tick every checklist item but will NOT erase any time tracking.'
+                  )
+                ) {
+                  bulkUpdateAllStepsCompletion(true);
+                }
+              }}
+            >
+              Mark entire project complete
+            </button>
+            <button
+              type="button"
+              className="mpm-bulk-btn mpm-bulk-btn-reset"
+              onClick={() => {
+                if (
+                  window.confirm(
+                    'Reset ALL stages and sub-steps in this project to incomplete? Time tracking will be preserved, but every completion checkbox will be cleared.'
+                  )
+                ) {
+                  bulkUpdateAllStepsCompletion(false);
+                }
+              }}
+            >
+              Reset entire project
+            </button>
           </div>
 
           {/* close button */}
@@ -1027,29 +1176,76 @@ const handleViewAsCustomer = () => {
                 />
               </>
             ) : (
-              <StepComponentTemplate
-                stepKey={selectedStepKey}
-                stepLabel={currentSubLabel}
-                stepData={editableData[selectedStepKey] || { checklist: [] }}
-                onToggleChecklist={(index, completed, seconds) =>
-                  handleChecklistToggle(
-                    selectedStepKey,
-                    index,
-                    completed,
-                    seconds
-                  )
-                }
-                onUpdateCheckpointStates={(itemIndex, states) =>
-                  handleCheckpointStatesChange(
-                    selectedStepKey,
-                    itemIndex,
-                    states
-                  )
-                }
-                isLocked={false}
-                showCheckbox={false}
-                activeIndex={selectedSubIndex}
-              />
+              <>
+                {/* 🔵 NEW: Stage-level bulk actions for the currently selected step */}
+                <div className="mpm-bulk-step-actions">
+                  <span className="mpm-bulk-step-label">
+                    Bulk actions for this stage:
+                  </span>
+                  <button
+                    type="button"
+                    className="mpm-bulk-btn"
+                    disabled={!selectedStepKey}
+                    onClick={() => {
+                      if (!selectedStepKey) return;
+                      const count =
+                        editableData[selectedStepKey]?.checklist?.length || 0;
+                      if (
+                        window.confirm(
+                          `Mark all ${count} sub-steps in this stage as complete?`
+                        )
+                      ) {
+                        bulkUpdateStepCompletion(selectedStepKey, true);
+                      }
+                    }}
+                  >
+                    Mark stage complete
+                  </button>
+                  <button
+                    type="button"
+                    className="mpm-bulk-btn mpm-bulk-btn-reset"
+                    disabled={!selectedStepKey}
+                    onClick={() => {
+                      if (!selectedStepKey) return;
+                      const count =
+                        editableData[selectedStepKey]?.checklist?.length || 0;
+                      if (
+                        window.confirm(
+                          `Reset all ${count} sub-steps in this stage to incomplete? Time tracking will be preserved.`
+                        )
+                      ) {
+                        bulkUpdateStepCompletion(selectedStepKey, false);
+                      }
+                    }}
+                  >
+                    Reset stage
+                  </button>
+                </div>
+
+                <StepComponentTemplate
+                  stepKey={selectedStepKey}
+                  stepLabel={currentSubLabel}
+                  stepData={editableData[selectedStepKey] || { checklist: [] }}
+                  onToggleChecklist={(index, completed, seconds) =>
+                    handleChecklistToggle(
+                      selectedStepKey,
+                      index,
+                      completed,
+                      seconds
+                    )
+                  }
+                  onUpdateCheckpointStates={(itemIndex, states) =>
+                    handleCheckpointStatesChange(
+                      selectedStepKey,
+                      itemIndex,
+                      states
+                    )
+                  }
+                  isLocked={false}
+                  showCheckbox={false}
+                  activeIndex={selectedSubIndex}
+                />
+              </>
             )}
           </main>
         </div>

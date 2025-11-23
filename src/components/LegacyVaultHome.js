@@ -169,10 +169,7 @@ function InlineFrame360Light({
       };
       rafRef.current = requestAnimationFrame(tick);
     };
-    if (
-      typeof window !== 'undefined' &&
-      'requestIdleCallback' in window
-    ) {
+    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
       window.requestIdleCallback(start, { timeout: 1200 });
     } else {
       setTimeout(start, 300);
@@ -234,11 +231,7 @@ function InlineFrame360Light({
         onPointerUp={onPointerUp}
         onPointerCancel={onPointerUp}
       >
-        <img
-          src={src}
-          alt="SoundLegend 360 preview"
-          draggable={false}
-        />
+        <img src={src} alt="SoundLegend 360 preview" draggable={false} />
       </div>
       <p className="lv-hero-note">Click &amp; drag to rotate.</p>
     </>
@@ -309,15 +302,25 @@ export default function LegacyVaultHome() {
     let alive = true;
     (async () => {
       try {
-        const snap = await getDocs(
-          collection(db, 'soundlegend_showroom')
-        );
+        const snap = await getDocs(collection(db, 'soundlegend_showroom'));
         const rows = [];
-        snap.forEach((doc) => {
-          const d = doc.data() || {};
-          const serial = doc.id;
-          const heroImage = d.heroImage || d.gallery?.[0] || '';
 
+        snap.forEach((docSnap) => {
+          const d = docSnap.data() || {};
+          const serial = docSnap.id.toUpperCase();
+
+          // 🔒 Only allow SoundLegend entries into the Vault
+          const artisanLine = (d.artisanLine || d.series || '').toLowerCase();
+          const isSLLine = artisanLine === 'soundlegend';
+          const isSLSerial = serial.startsWith('SL-');
+          const isExplicitlyHidden = d.isVaultEligible === false;
+
+          if (isExplicitlyHidden || (!isSLLine && !isSLSerial)) {
+            // e.g. H-003 Craft In Motion will be skipped here
+            return;
+          }
+
+          const heroImage = d.heroImage || d.gallery?.[0] || '';
           const { name, storyHtml } = resolvePublicFields(d);
 
           const teaser =
@@ -339,10 +342,9 @@ export default function LegacyVaultHome() {
             href: `/artisan-shop/soundlegend/${serial}`,
           });
         });
+
         rows.sort((a, b) =>
-          a.serial.localeCompare(b.serial, undefined, {
-            numeric: true,
-          })
+          a.serial.localeCompare(b.serial, undefined, { numeric: true })
         );
         if (alive) setItems(rows);
       } catch (e) {
@@ -380,18 +382,16 @@ export default function LegacyVaultHome() {
       <section className="lv-welcome">
         <h2 className="lv-heading">Welcome to the Legacy Vault</h2>
         <p className="lv-lede">
-          A living archive where instruments and artists meet their
-          memory.
+          A living archive where instruments and artists meet their memory.
         </p>
         <p className="lv-prose">
-          Step inside, listen close, and read the short stories behind
-          each build. You’ll see the choices that shaped the sound, the
-          hands that shaped the wood, and the moments these drums were
-          born for.
+          Step inside, listen close, and read the short stories behind each
+          build. You’ll see the choices that shaped the sound, the hands that
+          shaped the wood, and the moments these drums were born for.
         </p>
         <p className="lv-prose">
-          When you’re ready, add your chapter. The Vault is
-          growing—one legend at a time.
+          When you’re ready, add your chapter. The Vault is growing—one legend
+          at a time.
         </p>
       </section>
 
@@ -400,19 +400,15 @@ export default function LegacyVaultHome() {
         <div className="lv-index-head">
           <h2 className="lv-heading">Legacy Index</h2>
           <p className="muted centerish">
-            Every drum carries a story — tap an instrument to read,
-            hear, and feel its legacy.
+            Every drum carries a story — tap an instrument to read, hear, and
+            feel its legacy.
           </p>
         </div>
 
         {loading ? (
           <div className="lv-grid">
             {Array.from({ length: 4 }).map((_, i) => (
-              <div
-                key={i}
-                className="lv-item skeleton"
-                aria-hidden="true"
-              >
+              <div key={i} className="lv-item skeleton" aria-hidden="true">
                 <div className="lv-item-media" />
                 <div className="lv-item-body">
                   <div className="line w60" />
@@ -435,23 +431,16 @@ export default function LegacyVaultHome() {
       <section className="lv-join">
         <h2 className="lv-heading">Join the Legacy Experience</h2>
         <p className="lv-prose centerish">
-          It begins with a conversation. We design your voice, craft it
-          by hand, and preserve your story—photos, audio, and a living
-          page here in the Vault. Your drum ships with an NFC badge that
-          always takes you home.
+          It begins with a conversation. We design your voice, craft it by hand,
+          and preserve your story—photos, audio, and a living page here in the
+          Vault. Your drum ships with an NFC badge that always takes you home.
         </p>
 
         <div className="lv-cta-row center">
-          <Link
-            to="/artisan-shop/soundlegend"
-            className="lv-cta-btn primary"
-          >
+          <Link to="/artisan-shop/soundlegend" className="lv-cta-btn primary">
             Start Your Build
           </Link>
-          <Link
-            to="/soundlegends/signin"
-            className="lv-cta-btn ghost"
-          >
+          <Link to="/soundlegends/signin" className="lv-cta-btn ghost">
             Artist Portal
           </Link>
         </div>
