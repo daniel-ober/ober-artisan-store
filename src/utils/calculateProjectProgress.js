@@ -1,31 +1,21 @@
 // src/utils/calculateProjectProgress.js
 
 /**
- * Project progress calculation (task-weighted)
+ * Project progress calculation
  *
- * This version uses your **individual checklist tasks** as the source of truth.
+ * Priority:
+ *  1) If a `lifecycle` object exists on the project, we treat that as
+ *     the source of truth (stages → steps → checkpoints).
+ *  2) If no lifecycle is present, we fall back to the older
+ *     task-weighted checklist method using your step/checklist fields.
  *
- * Firestore project doc shape (current schema):
- *
- *  - discoveryDesign              { checklist: [...] }  // Initial consultation, Build proposal
- *  - commitmentPortal             { checklist: [...] }  // Payment processing, Portal access setup
- *  - woodVisionLockIn             { checklist: [...] }  // Wood selection, Early mockups, Pre-build measuring & prep
- *  - rawShellCreation             { checklist: [...] }  // Cut stave blocks, bevels, glue-up, etc.
- *  - shellTrueingTorchTune        { checklist: [...] }  // sanding prep, interior milling, torch tune, etc.
- *  - exteriorArtFinish            { checklist: [...] }  // veneer, spray, polishing, etc.
- *  - edgesSnareBeds               { checklist: [...] }  // Bearing edges, Snare beds
- *  - hardwareAssembly             { checklist: [...] }  // Hardware + head assembly
- *  - legacyTuningMedia            { checklist: [...] }  // Resonance analysis, photos, audio, etc.
- *  - finalQAPackagingDelivery     { checklist: [...] }  // NTAG, cleaning, packaging, delivery
- *
- * Each checklist item looks like:
- *   { task: string, label: string, completed: boolean, totalSeconds: number }
- *
- * We ONLY care about `completed` here.
+ * This keeps things stable and allows Stage 8 (Hardware & Assembly)
+ * with substeps + checkpoints to be fully represented without
+ * blowing progress back to 0 or throwing runtime errors.
  */
 
 /* ------------------------------------------------------------------ */
-/*  Where to look for checklist items                                  */
+/*  Where to look for checklist items (legacy step-based method)       */
 /* ------------------------------------------------------------------ */
 
 const STEP_KEYS = [
@@ -44,8 +34,8 @@ const STEP_KEYS = [
 ];
 
 /* ------------------------------------------------------------------ */
-/*  Per-TASK weights                                                   */
-/*  NOTE: these values are normalized and rounded to sum to 100.00%.   */
+/*  Per-TASK weights (legacy method)                                  */
+/*  NOTE: these values are normalized and rounded to sum to ~100%.     */
 /* ------------------------------------------------------------------ */
 
 const TASK_WEIGHTS_PERCENT = {
@@ -122,7 +112,7 @@ const TOTAL_WEIGHT = Object.values(TASK_WEIGHTS_PERCENT).reduce(
 );
 
 /* ------------------------------------------------------------------ */
-/*  Helpers                                                            */
+/*  Helpers (legacy step-based)                                       */
 /* ------------------------------------------------------------------ */
 
 /**
@@ -158,15 +148,60 @@ function findChecklistItemByLabel(projectData, label) {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Step completion ratio (weighted within that step only)             */
+/*  Lifecycle-based progress (preferred path)                          */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Calculate progress based on lifecycle (stages → steps → checkpoints).
+ * Returns a number 0–100, plus some internal counters if needed later.
+ */
+function calculateLifecycleProgress(project) {
+  const lifecycle = project?.lifecycle;
+  if (!lifecycle || !lifecycle.stages) {
+    return { percent: 0, checkpointsDone: 0, checkpointsTotal: 0 };
+  }
+
+  let checkpointsTotal = 0;
+  let checkpointsDone = 0;
+
+  Object.values(lifecycle.stages).forEach((stage) => {
+    if (!stage || !stage.steps) return;
+
+    Object.values(stage.steps).forEach((step) => {
+      if (!step || !step.checkpoints) return;
+
+      Object.values(step.checkpoints).forEach((cp) => {
+        if (!cp) return;
+        checkpointsTotal += 1;
+        if (cp.completed) checkpointsDone += 1;
+      });
+    });
+  });
+
+  if (checkpointsTotal === 0) {
+    return { percent: 0, checkpointsDone: 0, checkpointsTotal: 0 };
+  }
+
+  const pct = (checkpointsDone / checkpointsTotal) * 100;
+  const clamped = Math.max(0, Math.min(100, pct));
+
+  return {
+    percent: Math.round(clamped),
+    checkpointsDone,
+    checkpointsTotal,
+  };
+}
+
+/* ------------------------------------------------------------------ */
+/*  Step completion ratio (legacy step/checklist)                      */
 /* ------------------------------------------------------------------ */
 
 /**
  * Calculate completion ratio (0–1) for a single *step*,
  * based on the weights of the tasks inside that step.
  *
- * This is useful if you want a pre-build / build / post-build breakdown
- * somewhere in the UI.
+ * This uses the legacy checklist method and is still handy
+ * if you want pre-build / build / post-build breakdowns.
  */
 export function calculateStepCompletionRatio(projectData, stepKey) {
   const step = getStep(projectData, stepKey);
@@ -201,16 +236,24 @@ export function calculateStepCompletionRatio(projectData, stepKey) {
 /* ------------------------------------------------------------------ */
 
 /**
- * Calculate the overall project progress as an integer percent (0–100).
+ * calculateProjectProgress(projectData)
  *
- * Logic:
- *   - For every named task in TASK_WEIGHTS_PERCENT:
- *       - Find the matching checklist item in the project doc.
- *       - If `completed === true`, add its weight to `completedWeight`.
- *   - Normalize: (completedWeight / TOTAL_WEIGHT) * 100
+ * If `projectData.lifecycle` exists:
+ *   → uses lifecycle-based checkpoint completion (stages → steps → checkpoints).
+ *
+ * Else:
+ *   → falls back to task-weighted checklist logic using TASK_WEIGHTS_PERCENT.
  */
 export function calculateProjectProgress(projectData) {
   if (!projectData) return 0;
+
+  // 1) Preferred: lifecycle-based progress
+  if (projectData.lifecycle && projectData.lifecycle.stages) {
+    const { percent } = calculateLifecycleProgress(projectData);
+    return percent;
+  }
+
+  // 2) Fallback: old weighted checklist method
   if (TOTAL_WEIGHT <= 0) return 0;
 
   let completedWeight = 0;
@@ -228,11 +271,11 @@ export function calculateProjectProgress(projectData) {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Optional: per-task breakdown for debugging / UI                    */
+/*  Optional: per-task breakdown for debugging / UI (legacy)          */
 /* ------------------------------------------------------------------ */
 
 /**
- * Returns an object keyed by task label:
+ * Returns an object keyed by task label (legacy checklist-based):
  *
  * {
  *   "Cut stave blocks to size": {
@@ -261,3 +304,5 @@ export function getProgressBreakdown(projectData) {
 
   return result;
 }
+
+export default calculateProjectProgress;

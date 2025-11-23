@@ -53,10 +53,21 @@
   flex-wrap: wrap;
 }
 
+.mpm-step-time-label-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
 .mpm-step-time-label {
   font-size: 0.95rem;
   font-weight: 600;
   color: #111827;
+}
+
+.mpm-step-time-sub {
+  font-size: 0.8rem;
+  color: #6b7280;
 }
 
 .mpm-step-time-right {
@@ -157,56 +168,122 @@
   margin-top: 1.75rem;
 }
 
+.mpm-step-checkpoints-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
 .mpm-step-checkpoints-title {
   font-size: 1.05rem;
   font-weight: 600;
   color: #111827;
-  margin: 0 0 0.75rem;
+  margin: 0;
 }
 
-/* If no checkpoints defined */
+/* Bulk buttons */
+.mpm-step-checkpoints-bulk-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.mpm-step-checkpoints-bulk-btn {
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease,
+    transform 0.05s ease;
+}
+
+.mpm-step-checkpoints-bulk-btn.mark-all {
+  background: #ecfdf3;
+  border-color: #86efac;
+  color: #166534;
+}
+
+.mpm-step-checkpoints-bulk-btn.mark-all:hover {
+  background: #bbf7d0;
+}
+
+.mpm-step-checkpoints-bulk-btn.clear-all {
+  background: #fef2f2;
+  border-color: #fecaca;
+  color: #b91c1c;
+}
+
+.mpm-step-checkpoints-bulk-btn.clear-all:hover {
+  background: #fee2e2;
+}
+
 .mpm-step-empty {
   font-size: 0.9rem;
   color: #6b7280;
-  margin-top: 0.25rem;
+  margin-top: 0.75rem;
 }
 
-/* Grid/list for checkpoints */
+/* ================= Checkpoint row layout ================== */
+
+/* Container list */
 .mpm-check-grid {
+  margin-top: 0.75rem;
   display: flex;
   flex-direction: column;
-  gap: 0.55rem;
-  margin-top: 0.5rem;
+  align-items: flex-start;
+  gap: 0.4rem;
 }
 
-/* One row: checkbox LEFT, text RIGHT */
+/* Each row: checkbox immediately left of text */
 .mpm-check-row {
   display: flex;
   align-items: flex-start;
   gap: 0.45rem;
   font-size: 0.95rem;
   color: #111827;
-  cursor: pointer;
-  user-select: none;
+  max-width: 900px;
 }
 
 /* Checkbox itself */
 .mpm-check-row input[type='checkbox'] {
+  flex: 0 0 auto;
   margin-top: 2px;
   transform: scale(1.1);
   cursor: pointer;
   accent-color: #22c55e;
 }
 
-/* Slight highlight when completed */
+/* Text block */
+.mpm-check-text {
+  flex: 1 1 auto;
+  display: inline-block;
+  text-align: left;
+  line-height: 1.4;
+}
+
+/* Strike-through when checked */
 .mpm-check-row input[type='checkbox']:checked + .mpm-check-text {
   text-decoration: line-through;
   color: #6b7280;
 }
 
-/* Text block for checkpoint */
-.mpm-check-text {
-  line-height: 1.4;
+/* --- Sub-step completion row ------------------------------------------- */
+
+.mpm-step-status-row {
+  margin-top: 0.9rem;
+}
+
+.mpm-step-status-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #111827;
 }
 
 /* --- Responsive tweaks -------------------------------------------------- */
@@ -232,102 +309,51 @@
     width: 100%;
     max-width: none;
   }
+
+  .mpm-check-grid {
+    max-width: 100%;
+  }
 }
 
-/* ------------------------------------------------------------------ */
-/* 🔒 Nuclear override to beat any global form styles                 */
-/* This guarantees: checkbox left, text right, no full-width weirdness */
-/* ------------------------------------------------------------------ */
+/* =========================================================
+   HARD OVERRIDES inside Manage Projects modal ONLY
+   (kills any old label/checkbox layout that’s fighting us)
+   ========================================================= */
 
-.mpm-check-grid label.mpm-check-row {
-  display: inline-flex !important;
+.manage-projects .mpm-step-detail .mpm-check-grid {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 0.4rem !important;
+  width: 100% !important;
+}
+
+.manage-projects .mpm-step-detail .mpm-check-row {
+  display: flex !important;
   flex-direction: row !important;
   align-items: flex-start !important;
   justify-content: flex-start !important;
-  gap: 0.45rem !important;
-  width: auto !important;
-  max-width: 100% !important;
+  width: 100% !important;
+  max-width: 960px !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
-.mpm-check-grid label.mpm-check-row input[type='checkbox'] {
-  position: static !important;
+.manage-projects .mpm-step-detail .mpm-check-row input[type='checkbox'] {
+  position: relative !important;
+  left: auto !important;
+  top: auto !important;
   width: auto !important;
   height: auto !important;
-  margin: 2px 0 0 0 !important;
-  flex: 0 0 auto !important;
+  margin: 3px 8px 0 0 !important;
+  transform: none !important;
   box-shadow: none !important;
 }
 
-.mpm-check-grid label.mpm-check-row .mpm-check-text {
+.manage-projects .mpm-step-detail .mpm-check-text {
   flex: 1 1 auto !important;
   display: inline-block !important;
   text-align: left !important;
-}
-
-.mpm-check-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 0.55rem;
-  margin-top: 0.5rem;
-}
-
-.mpm-check-row {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.45rem;
-  font-size: 0.95rem;
-  color: #111827;
-  cursor: pointer;
-  user-select: none;
-}
-
-.mpm-check-row input[type='checkbox'] {
-  margin-top: 2px;
-  transform: scale(1.1);
-  cursor: pointer;
-  accent-color: #22c55e;
-}
-
-/* optional: strike-through when checked */
-.mpm-check-row input[type='checkbox']:checked ~ .mpm-check-text {
-  text-decoration: line-through;
-  color: #6b7280;
-}
-
-.mpm-check-text {
-  line-height: 1.4;
-}
-
-.mpm-check-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 0.55rem;
-  margin-top: 0.5rem;
-}
-
-.mpm-check-row {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.45rem;
-  font-size: 0.95rem;
-  color: #111827;
-  cursor: pointer;
-  user-select: none;
-}
-
-.mpm-check-row input[type='checkbox'] {
-  margin-top: 2px;
-  transform: scale(1.1);
-  cursor: pointer;
-  accent-color: #22c55e;
-}
-
-/* optional: strike-through when checked */
-.mpm-check-row input[type='checkbox']:checked ~ .mpm-check-text {
-  text-decoration: line-through;
-  color: #6b7280;
-}
-
-.mpm-check-text {
-  line-height: 1.4;
+  white-space: normal !important;
+  line-height: 1.4 !important;
 }

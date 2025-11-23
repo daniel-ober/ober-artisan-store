@@ -2,6 +2,66 @@
 
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../firebaseConfig";
+import defaultStepData from "./defaultStepData";
+
+/**
+ * Normalize a project document's step/checklist shape so that:
+ *  - every core step from defaultStepData exists on the project
+ *  - each step has a checklist that matches the template
+ *  - existing completion/time values are preserved when possible
+ */
+export function ensureChecklistStructure(projectDoc = {}) {
+  const next = { ...projectDoc };
+
+  // Walk through every core build step from defaultStepData
+  Object.values(defaultStepData).forEach((tmpl) => {
+    const key = tmpl.key;
+    if (!key) return;
+
+    // If the project already has this block, preserve it
+    const existingBlock =
+      next[key] && typeof next[key] === "object" ? next[key] : {};
+
+    const existingChecklist = Array.isArray(existingBlock.checklist)
+      ? existingBlock.checklist
+      : [];
+
+    // Index existing checklist items by id so we can preserve completion + time
+    const checklistById = new Map();
+    existingChecklist.forEach((item) => {
+      if (item && item.id) {
+        checklistById.set(item.id, item);
+      }
+    });
+
+    // Template checklist from defaultStepData (guarded so we never .forEach undefined)
+    const templateChecklist = Array.isArray(tmpl.checklist)
+      ? tmpl.checklist
+      : [];
+
+    const normalizedChecklist = templateChecklist.map((row) => {
+      const prev = row.id ? checklistById.get(row.id) : null;
+      return {
+        ...row,
+        completed: !!prev?.completed,
+        totalSeconds:
+          typeof prev?.totalSeconds === "number" ? prev.totalSeconds : 0,
+      };
+    });
+
+    // Merge:
+    //  - tmpl (key, label, phase, order, etc)
+    //  - any existing custom fields on the project step (like hardwareAssembly.steps)
+    //  - the normalized checklist
+    next[key] = {
+      ...tmpl,
+      ...existingBlock,
+      checklist: normalizedChecklist,
+    };
+  });
+
+  return next;
+}
 
 /**
  * Toggle a single checkpoint and automatically recalc:

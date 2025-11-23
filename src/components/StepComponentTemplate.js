@@ -67,7 +67,7 @@ const findClosestPreset = (totalSeconds = 0) => {
  * Each value is a flat list of strings that combine "Checkpoints"
  * and "Measurements" for that sub-step.
  */
-const CHECKPOINTS_BY_ITEM_ID = {
+export const CHECKPOINTS_BY_ITEM_ID = {
   /* ----------------------------------------------------------
    * 1. Discovery & Design
    * -------------------------------------------------------- */
@@ -379,25 +379,106 @@ const CHECKPOINTS_BY_ITEM_ID = {
   ],
 
   /* ----------------------------------------------------------
-   * 8. Hardware & Assembly
+   * 8. Hardware & Assembly  (now per sub-step)
    * -------------------------------------------------------- */
 
-  // 8.1 Hardware + head assembly
+  // 8.1 Install all lugs, throw, butt plate
   hardwareAssembly_1: [
-    'Install all lugs with correct hardware',
-    'Install throw-off at correct height and angle',
-    'Install butt plate aligned with throw-off',
-    'Install vent grommet',
-    'Verify all components sit flush and solid',
-    'Install hoops and heads with correct orientation',
-    'Install snare wires and confirm center alignment',
-    'Confirm no rattles or loose components',
-    'Check snare throw action for smooth travel',
-    'Verify even head seating all around',
-    'Check lug alignment relative to hoops',
-    'Confirm shell-to-hoop parallelism',
-    'Confirm adequate tension rod travel and feel',
-    'Verify snare throw alignment with beds and wires',
+    'Lay out lug, throw, and butt locations relative to snare beds',
+    'Dry-fit hardware to ensure hole pattern alignment',
+    'Install all lugs with correct screws, washers, and gaskets',
+    'Install throw-off at correct height and stroke orientation',
+    'Install butt plate square to throw and centered on beds',
+    'Confirm all mounting hardware seats flush to shell',
+  ],
+
+  // 8.2 Install air vent grommet
+  hardwareAssembly_2: [
+    'Verify vent hole is drilled clean and to correct diameter',
+    'Test-fit vent grommet before final seating',
+    'Seat vent grommet flush to shell inside and out',
+    'Confirm no rattle or play in vent hardware',
+  ],
+
+  // 8.3 Verify hardware alignment
+  hardwareAssembly_3: [
+    'Sight down shell to confirm lug rows track true with edges',
+    'Check throw and butt alignment relative to snare beds',
+    'Verify badges / logos are level and centered between lugs',
+    'Confirm hoop line clears all hardware at target head heights',
+  ],
+
+  // 8.4 Torque hardware as needed
+  hardwareAssembly_4: [
+    'Torque lug mounting screws evenly around shell',
+    'Verify throw-off mounting screws are snug but not over-tightened',
+    'Confirm butt plate screws are fully seated',
+    'Re-check for spin-outs or stripped holes',
+  ],
+
+  // 8.5 Attach badges / brand markings
+  hardwareAssembly_5: [
+    'Clean shell surface before badge installation',
+    'Align badge with design reference (vertical center, rotation)',
+    'Secure badge using correct fasteners or adhesive',
+    'Confirm badge matches hardware finish (chrome / black nickel / brass)',
+  ],
+
+  // 8.6 Inspect for rattle or loose fit
+  hardwareAssembly_6: [
+    'Perform dry shake test (no heads) to listen for loose parts',
+    'Tap around shell and hardware with fingertip / stick for micro-rattles',
+    'Re-torque any suspect fasteners and repeat test',
+  ],
+
+  // 8.7 Punch leather gaskets (if applicable)
+  hardwareAssembly_7: [
+    'Lay out gasket pattern to match lug and hoop footprint',
+    'Punch clean holes with no tearing, fray, or thin spots',
+    'Dry-fit gaskets under hoops to confirm clean alignment',
+    'Confirm gasket thickness does not interfere with tuning range',
+  ],
+
+  // 8.8 Install lugs, throw, butt plate, air vent (full hardware set)
+  hardwareAssembly_8: [
+    'Install full hardware set with gaskets / washers as designed',
+    'Confirm vent grommet remains centered after all hardware is on',
+    'Check shell interior for any protruding fasteners',
+    'Spin shell slowly to ensure even hardware spacing visually',
+  ],
+
+  // 8.9 Torque hardware (final pass)
+  hardwareAssembly_9: [
+    'Perform final torque pass on all lug screws',
+    'Perform final torque pass on throw / butt hardware',
+    'Verify badges and vent hardware are fully secure',
+    'Re-check shell for rattles after torquing',
+  ],
+
+  // 8.10 Inspect for rattle/loose fit (heads off)
+  hardwareAssembly_10: [
+    'Spin and shake shell with full hardware but no heads',
+    'Confirm no hardware interferes with rim or head plane',
+    'Check snare bed area for any hardware clearance issues',
+  ],
+
+  // 8.11 Professionally photograph shell before heads/hoops
+  hardwareAssembly_11: [
+    'Clean shell and hardware (no fingerprints or dust)',
+    'Capture hero angle of raw shell + hardware',
+    'Capture detail shots of veneer, resin, and badges',
+    'Stage consistent lighting for archival series',
+    'Back up photos to project media / Storage',
+  ],
+
+  // 8.12 Hardware + head assembly
+  hardwareAssembly_12: [
+    'Install batter and resonant heads with correct orientation',
+    'Seat heads evenly using gradual star-pattern tensioning',
+    'Install hoops and tension rods with full travel available',
+    'Install snare wires and center over snare beds',
+    'Test throw-off action and wire response at multiple tensions',
+    'Confirm no rattles after full assembly',
   ],
 
   /* ----------------------------------------------------------
@@ -497,18 +578,14 @@ const StepComponentTemplate = ({
   stepKey,
   stepLabel,
   stepData = { checklist: [] },
-  onToggleChecklist,              // (index, completed, totalSeconds)
-  onUpdateCheckpointStates,       // (itemIndex, checkpointStatesArray)
+  onToggleChecklist, // (index, completed, totalSeconds)
+  onUpdateCheckpointStates, // (itemIndex, checkpointStatesArray)
   isLocked = false,
   activeIndex = null,
-  showCheckbox = false,           // kept for compatibility
+  showCheckbox = false, // kept for compatibility
 }) => {
   const [editingIndex, setEditingIndex] = useState(null);
   const [presetSeconds, setPresetSeconds] = useState(0);
-
-  // UI-only: checkpoint checkmarks per sub-step
-  // { [itemId]: { [idx]: bool } }
-  const [checkpointState, setCheckpointState] = useState({});
 
   const items = stepData.checklist || [];
 
@@ -519,24 +596,47 @@ const StepComponentTemplate = ({
 
   const activeItem = items[activeIdx] || null;
 
-  /* ---------------- Hydrate checkpointState from Firestore ---------------- */
+  // Figure out which key to use in CHECKPOINTS_BY_ITEM_ID.
+  // 1) Try the item.id (best case if it matches your mapping)
+  // 2) If that’s missing, fall back to "<stepKey>_<1-based index>"
+  let checkpoints = [];
+  if (activeItem) {
+    const primaryKey = activeItem.id;
+    const fallbackKey = `${stepKey}_${activeIdx + 1}`;
 
+    checkpoints =
+      CHECKPOINTS_BY_ITEM_ID[primaryKey] ||
+      CHECKPOINTS_BY_ITEM_ID[fallbackKey] ||
+      [];
+  }
+
+  const activeItemId =
+    (activeItem && activeItem.id) || `${stepKey}_${activeIdx + 1}`;
+
+  // Local array of booleans for THIS sub-step's checkpoints
+  const [localCheckpointStates, setLocalCheckpointStates] = useState(() => {
+    if (
+      activeItem &&
+      Array.isArray(activeItem.checkpointStates) &&
+      activeItem.checkpointStates.length
+    ) {
+      return [...activeItem.checkpointStates];
+    }
+    return new Array(checkpoints.length).fill(false);
+  });
+
+  // When the active sub-step or its Firestore data changes, sync local state
   useEffect(() => {
-    const next = {};
-    (stepData.checklist || []).forEach((item) => {
-      const id = item.id;
-      if (!id) return;
-      const arr = Array.isArray(item.checkpointStates)
-        ? item.checkpointStates
-        : [];
-      const map = {};
-      arr.forEach((val, idx) => {
-        if (val) map[idx] = true;
-      });
-      next[id] = map;
-    });
-    setCheckpointState(next);
-  }, [stepData]);
+    if (
+      activeItem &&
+      Array.isArray(activeItem.checkpointStates) &&
+      activeItem.checkpointStates.length
+    ) {
+      setLocalCheckpointStates([...activeItem.checkpointStates]);
+    } else {
+      setLocalCheckpointStates(new Array(checkpoints.length).fill(false));
+    }
+  }, [activeItem?.id, checkpoints.length]);
 
   const totalTime = useMemo(
     () => (activeItem ? activeItem.totalSeconds || 0 : 0),
@@ -556,76 +656,38 @@ const StepComponentTemplate = ({
     setEditingIndex(null);
   };
 
-  // Figure out which key to use in CHECKPOINTS_BY_ITEM_ID.
-  // 1) Try the item.id (best case if it matches your mapping)
-  // 2) If that’s missing, fall back to "<stepKey>_<1-based index>"
-  let checkpoints = [];
-  if (activeItem) {
-    const primaryKey = activeItem.id;
-    const fallbackKey = `${stepKey}_${activeIdx + 1}`;
-
-    checkpoints =
-      CHECKPOINTS_BY_ITEM_ID[primaryKey] ||
-      CHECKPOINTS_BY_ITEM_ID[fallbackKey] ||
-      [];
-  }
-
-  const activeItemId =
-    (activeItem && activeItem.id) || `${stepKey}_${activeIdx + 1}`;
-
-  const checkpointsForItem = checkpointState[activeItemId] || {};
-
-  const toggleCheckpoint = (cpIndex) => {
+  // Handle individual checkpoint toggle (no direct completed logic here;
+  // parent decides whether the item is "completed" based on checkpointStates)
+  const handleCheckpointChange = (cpIndex, checked) => {
     if (!activeItem) return;
-
-    setCheckpointState((prev) => {
-      const forItem = prev[activeItemId] || {};
-      const newFlag = !forItem[cpIndex];
-      const nextForItem = { ...forItem, [cpIndex]: newFlag };
-      const next = {
-        ...prev,
-        [activeItemId]: nextForItem,
-      };
-
-      // Build a dense boolean array for Firestore
-      const maxIndex = Math.max(
-        cpIndex,
-        ...Object.keys(nextForItem).map((k) => Number(k))
-      );
-      const arr = Array.from(
-        { length: maxIndex + 1 },
-        (_, i) => !!nextForItem[i]
-      );
-
+    setLocalCheckpointStates((prev) => {
+      const len = Math.max(checkpoints.length, prev.length);
+      const next = Array.from({ length: len }, (_, i) => !!prev[i]);
+      next[cpIndex] = checked;
       if (onUpdateCheckpointStates) {
-        onUpdateCheckpointStates(activeIdx, arr);
+        onUpdateCheckpointStates(activeIdx, next);
       }
-
       return next;
     });
   };
 
-  // NEW: bulk mark / clear all checkpoints for THIS sub-step only
-  const handleBulkCheckpointToggle = (complete) => {
-    if (!activeItem || !onUpdateCheckpointStates || checkpoints.length === 0) {
-      return;
+  // Bulk mark / clear all checkpoints for THIS sub-step only
+  const handleAllCheckpointsComplete = () => {
+    if (!activeItem || checkpoints.length === 0) return;
+    const next = new Array(checkpoints.length).fill(true);
+    setLocalCheckpointStates(next);
+    if (onUpdateCheckpointStates) {
+      onUpdateCheckpointStates(activeIdx, next);
     }
+  };
 
-    const arr = new Array(checkpoints.length).fill(!!complete);
-
-    // update local UI state map
-    setCheckpointState((prev) => {
-      const map = {};
-      arr.forEach((val, idx) => {
-        if (val) map[idx] = true;
-      });
-      return {
-        ...prev,
-        [activeItemId]: map,
-      };
-    });
-
-    onUpdateCheckpointStates(activeIdx, arr);
+  const handleAllCheckpointsClear = () => {
+    if (!activeItem || checkpoints.length === 0) return;
+    const next = new Array(checkpoints.length).fill(false);
+    setLocalCheckpointStates(next);
+    if (onUpdateCheckpointStates) {
+      onUpdateCheckpointStates(activeIdx, next);
+    }
   };
 
   if (!activeItem) {
@@ -647,7 +709,8 @@ const StepComponentTemplate = ({
 
       {/* total time for this sub-step */}
       <div className="mpm-step-total">
-        Total Time: <span>{fmtHM(totalTime)}</span>
+        Total Time for this sub-step:
+        <span>{fmtHM(totalTime)}</span>
       </div>
 
       {/* ---- Time tracking + status ---- */}
@@ -655,7 +718,12 @@ const StepComponentTemplate = ({
         className={`mpm-step-time ${isLocked ? 'mpm-step-disabled' : ''}`}
       >
         <div className="mpm-step-time-header">
-          <div className="mpm-step-time-label">Time Tracking</div>
+          <div className="mpm-step-time-label-block">
+            <div className="mpm-step-time-label">Time Tracking</div>
+            <div className="mpm-step-time-sub">
+              Adjust the time spent on this sub-step.
+            </div>
+          </div>
 
           {!isEditing ? (
             <div className="mpm-step-time-right">
@@ -674,8 +742,7 @@ const StepComponentTemplate = ({
               <button
                 disabled={isLocked || (activeItem.totalSeconds || 0) === 0}
                 onClick={() =>
-                  onToggleChecklist &&
-                  onToggleChecklist(activeIdx, checked, 0)
+                  onToggleChecklist && onToggleChecklist(activeIdx, checked, 0)
                 }
                 className="mpm-step-link-btn"
               >
@@ -746,14 +813,14 @@ const StepComponentTemplate = ({
               <button
                 type="button"
                 className="mpm-step-checkpoints-bulk-btn mark-all"
-                onClick={() => handleBulkCheckpointToggle(true)}
+                onClick={handleAllCheckpointsComplete}
               >
                 Mark all complete
               </button>
               <button
                 type="button"
                 className="mpm-step-checkpoints-bulk-btn clear-all"
-                onClick={() => handleBulkCheckpointToggle(false)}
+                onClick={handleAllCheckpointsClear}
               >
                 Clear all
               </button>
@@ -767,17 +834,25 @@ const StepComponentTemplate = ({
           </p>
         ) : (
           <div className="mpm-check-grid">
-            {checkpoints.map((text, idx) => (
-              <label key={idx} className="mpm-check-row">
-                <input
-                  type="checkbox"
-                  checked={!!checkpointsForItem[idx]}
-                  disabled={isLocked}
-                  onChange={() => toggleCheckpoint(idx)}
-                />
-                <span className="mpm-check-text">{text}</span>
-              </label>
-            ))}
+            {checkpoints.map((text, idx) => {
+              const inputId = `cp-${activeItemId}-${idx}`;
+              return (
+                <div key={idx} className="mpm-check-row">
+                  <input
+                    id={inputId}
+                    type="checkbox"
+                    checked={!!localCheckpointStates[idx]}
+                    disabled={isLocked}
+                    onChange={(e) =>
+                      handleCheckpointChange(idx, e.target.checked)
+                    }
+                  />
+                  <label htmlFor={inputId} className="mpm-check-text">
+                    {text}
+                  </label>
+                </div>
+              );
+            })}
           </div>
         )}
       </section>

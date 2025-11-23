@@ -354,16 +354,97 @@ export const defaultStepData = {
 
   /* ----------------------------------------------------------
    * 8. Hardware & Assembly  (Phase 2 — Build)
-   *   • Hardware + Head Assembly
+   *   • 12 sub-steps that match StepComponentTemplate + CHECKPOINTS_BY_ITEM_ID
    * -------------------------------------------------------- */
   hardwareAssembly: {
     key: 'hardwareAssembly',
     label: '8. Hardware & Assembly',
     phase: STEP_PHASES.BUILD,
     order: 8,
+
+    // ✅ We now drive everything from `checklist` (12 items).
+    //    StepComponentTemplate + CHECKPOINTS_BY_ITEM_ID already
+    //    expect ids hardwareAssembly_1 … hardwareAssembly_12.
     checklist: [
       {
         id: 'hardwareAssembly_1',
+        label: 'Install all lugs, throw, butt plate',
+        task: 'Install all lugs, throw, butt plate',
+        completed: false,
+        totalSeconds: 0,
+      },
+      {
+        id: 'hardwareAssembly_2',
+        label: 'Install air vent grommet',
+        task: 'Install air vent grommet',
+        completed: false,
+        totalSeconds: 0,
+      },
+      {
+        id: 'hardwareAssembly_3',
+        label: 'Verify hardware alignment',
+        task: 'Verify hardware alignment',
+        completed: false,
+        totalSeconds: 0,
+      },
+      {
+        id: 'hardwareAssembly_4',
+        label: 'Torque hardware as needed',
+        task: 'Torque hardware as needed',
+        completed: false,
+        totalSeconds: 0,
+      },
+      {
+        id: 'hardwareAssembly_5',
+        label: 'Attach badges / brand markings',
+        task: 'Attach badges / brand markings',
+        completed: false,
+        totalSeconds: 0,
+      },
+      {
+        id: 'hardwareAssembly_6',
+        label: 'Inspect for rattle or loose fit',
+        task: 'Inspect for rattle or loose fit',
+        completed: false,
+        totalSeconds: 0,
+      },
+      {
+        id: 'hardwareAssembly_7',
+        label: 'Punch leather gaskets (if applicable)',
+        task: 'Punch leather gaskets (if applicable)',
+        completed: false,
+        totalSeconds: 0,
+      },
+      {
+        id: 'hardwareAssembly_8',
+        label: 'Install full hardware set (lugs, throw, butt, vent)',
+        task: 'Install full hardware set (lugs, throw, butt, vent)',
+        completed: false,
+        totalSeconds: 0,
+      },
+      {
+        id: 'hardwareAssembly_9',
+        label: 'Torque hardware (final pass)',
+        task: 'Torque hardware (final pass)',
+        completed: false,
+        totalSeconds: 0,
+      },
+      {
+        id: 'hardwareAssembly_10',
+        label: 'Inspect for rattle / loose fit (heads off)',
+        task: 'Inspect for rattle / loose fit (heads off)',
+        completed: false,
+        totalSeconds: 0,
+      },
+      {
+        id: 'hardwareAssembly_11',
+        label: 'Professionally photograph shell before heads/hoops',
+        task: 'Professionally photograph shell before heads/hoops',
+        completed: false,
+        totalSeconds: 0,
+      },
+      {
+        id: 'hardwareAssembly_12',
         label: 'Hardware + head assembly',
         task: 'Hardware + head assembly',
         completed: false,

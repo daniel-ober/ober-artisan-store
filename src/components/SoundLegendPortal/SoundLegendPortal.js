@@ -95,35 +95,65 @@ const Tabs = ({
   projects,
   selectedId,
   onSelectProject,
-}) => (
-  <div className="slp-tabs">
-    <div className="slp-tabs-left">
-      <ProjectPicker
-        projects={projects}
-        selectedId={selectedId}
-        onChange={onSelectProject}
-      />
-    </div>
+  isSoundLegendProject,
+}) => {
+  const slOnlyKeys = new Set(['vault', 'media']);
 
-    <div
-      className="slp-tablist slp-tabs-buttons"
-      role="tablist"
-      aria-label="SoundLegend sections"
-    >
-      {tabs.map((t) => (
-        <button
-          key={t.key}
-          role="tab"
-          aria-selected={current === t.key}
-          className={`slp-tab ${current === t.key ? 'active' : ''}`}
-          onClick={() => onChange(t.key)}
-        >
-          {t.label}
-        </button>
-      ))}
+  return (
+    <div className="slp-tabs">
+      <div className="slp-tabs-left">
+        <ProjectPicker
+          projects={projects}
+          selectedId={selectedId}
+          onChange={onSelectProject}
+        />
+      </div>
+
+      <div
+        className="slp-tablist slp-tabs-buttons"
+        role="tablist"
+        aria-label="SoundLegend sections"
+      >
+        {tabs.map((t) => {
+          const isSlOnly = slOnlyKeys.has(t.key);
+          const disabled = isSlOnly && !isSoundLegendProject;
+
+          const tooltipText =
+            t.key === 'vault'
+              ? 'Vault preferences are part of the SoundLegend experience.'
+              : t.key === 'media'
+              ? 'Legacy media is part of the SoundLegend experience.'
+              : '';
+
+          return (
+            <button
+              key={t.key}
+              role="tab"
+              aria-selected={current === t.key}
+              className={[
+                'slp-tab',
+                current === t.key ? 'active' : '',
+                disabled ? 'slp-tab-disabled' : '',
+              ]
+                .filter(Boolean)
+                .join(' ')}
+              onClick={() => {
+                if (disabled) return;
+                onChange(t.key);
+              }}
+              type="button"
+            >
+              <span>{t.label}</span>
+              {disabled && tooltipText && (
+                <span className="slp-tab-tooltip">{tooltipText}</span>
+              )}
+            </button>
+          );
+        })}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 /* -------------------- main portal -------------------- */
 
@@ -282,29 +312,45 @@ const SoundLegendPortal = () => {
     { key: 'account', label: 'Account Settings' },
   ];
 
+  // 🔐 Is the currently selected project a SoundLegend drum?
+  const artisanLine = (selectedProject?.artisanLine || '').toLowerCase();
+  const serialGuess = (
+    selectedProject?.lineSerial ||
+    selectedProject?.snareSerial ||
+    selectedProject?.serial ||
+    selectedProject?.id ||
+    ''
+  ).toUpperCase();
+
+  const isSoundLegendProject =
+    artisanLine === 'soundlegend' || serialGuess.startsWith('SL-');
+
+  const handleTabChange = (nextKey) => {
+    // Block navigation to SL-only tabs for non-SL drums
+    if (
+      !isSoundLegendProject &&
+      (nextKey === 'vault' || nextKey === 'media')
+    ) {
+      return;
+    }
+    setTab(nextKey);
+  };
+
   return (
     <div className="slp-page">
-      <div className="signin-logo-container">
-        <img
-          src="/soundlegend-signin/white-logo.png"
-          alt="SoundLegend Experience"
-          className="signin-logo"
-          loading="eager"
-        />
-      </div>
-
       <h2 className="slp-heading">
-        Welcome to your SoundLegend
+        Welcome to your Artist Portal
         {isImpersonating ? ' (admin view)' : ''}
       </h2>
 
       <Tabs
         tabs={tabs}
         current={tab}
-        onChange={setTab}
+        onChange={handleTabChange}
         projects={projects}
         selectedId={selectedId}
         onSelectProject={setSelectedId}
+        isSoundLegendProject={isSoundLegendProject}
       />
 
       <div className="slp-panel">
@@ -312,8 +358,15 @@ const SoundLegendPortal = () => {
           <ProjectProgress project={selectedProject} isAdmin={isAdmin} />
         )}
         {tab === 'scope' && <ScopeOfWork project={selectedProject} />}
-        {tab === 'vault' && <VaultPreferences project={selectedProject} />}
-        {tab === 'media' && <Media project={selectedProject} />}
+
+        {/* SL-only sections */}
+        {tab === 'vault' && isSoundLegendProject && (
+          <VaultPreferences project={selectedProject} />
+        )}
+        {tab === 'media' && isSoundLegendProject && (
+          <Media project={selectedProject} />
+        )}
+
         {tab === 'payments' && <PaymentHistory orders={orders} />}
         {tab === 'account' && (
           <AccountSettings
