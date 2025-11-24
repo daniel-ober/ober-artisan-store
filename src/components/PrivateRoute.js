@@ -21,7 +21,7 @@ const PrivateRoute = ({
   if (redirectAuthenticated && user) return <Navigate to="/account" replace />;
 
   if (!user && !redirectAuthenticated)
-    return <Navigate to="/soundlegends/signin" replace />;
+    return <Navigate to="/artisan-portal/signin" replace />;
 
   if (adminOnly && !isAdmin) return <Navigate to="/not-authorized" replace />;
 

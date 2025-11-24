@@ -737,7 +737,7 @@ const SoundLegendShowroom = () => {
         <p>
           This SoundLegend drum is digitally authenticated and part of an exclusive artist series...
           <br /><br />
-          <a href="/soundlegends/signin" className="portal-link">Sign in here</a>{' '}
+          <a href="/artisan-portal/signin" className="portal-link">Sign in here</a>{' '}
           to access your portal, or{' '}
           <a href="/artisan-shop/soundlegend" className="portal-link">learn more about joining the SoundLegend Experience</a>.
         </p>
