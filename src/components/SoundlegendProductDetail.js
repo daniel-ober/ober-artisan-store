@@ -215,7 +215,7 @@ const steps = [
       'Behind-the-scenes media drops',
       'Direct line to Dan throughout the build',
     ],
-    portalSignin: '/soundlegends/signin',
+    portalSignin: '/artisan-portal/signin',
   },
   {
     id: 6,

@@ -107,7 +107,7 @@ function App() {
       '/artisanseries': 'ArtisanSeries',
       '/products': 'Products',
       '/merch': 'Merch',
-      '/soundlegends/signin': 'SignIn',
+      '/artisan-portal/signin': 'SignIn',
       '/terms-of-service': 'TermsOfService',
       '/register': 'Register',
       '/forgot-password': 'ForgotPassword',
@@ -189,11 +189,11 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route
             path="/about"
-            element={isLinkEnabled('about') ? <About /> : <NotFound />}
+            element={<About />}
           />
           <Route
             path="/contact"
-            element={isLinkEnabled('contact') ? <Contact /> : <NotFound />}
+            element={<Contact />}
           />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/return-policy" element={<ReturnPolicy />} />
@@ -209,10 +209,21 @@ function App() {
             }
           />
 
-          {/* SoundLegend Portal */}
+          {/* SoundLegend / Artisan Portal */}
           <Route
             path="/legacy"
             element={<PrivateRoute element={<SoundLegendPortal />} />}
+          />
+
+          {/* New unified artisan portal sign-in */}
+          <Route
+            path="/artisan-portal/signin"
+            element={<SoundlegendSignin />}
+          />
+          {/* Redirect from old SoundLegend-only sign-in path */}
+          <Route
+            path="/soundlegends/signin"
+            element={<Navigate to="/artisan-portal/signin" replace />}
           />
 
           <Route
@@ -256,12 +267,6 @@ function App() {
           <Route
             path="/projects/:projectId"
             element={<ProjectRoute element={ProjectDetailPage} />}
-          />
-          <Route
-            path="/soundlegends/signin"
-            element={
-              user ? <Navigate to="/legacy" replace /> : <SoundlegendSignin />
-            }
           />
 
           {/* Individual product detail routes */}

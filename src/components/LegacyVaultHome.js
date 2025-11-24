@@ -440,7 +440,7 @@ export default function LegacyVaultHome() {
           <Link to="/artisan-shop/soundlegend" className="lv-cta-btn primary">
             Start Your Build
           </Link>
-          <Link to="/soundlegends/signin" className="lv-cta-btn ghost">
+          <Link to="/artisan-portal/signin" className="lv-cta-btn ghost">
             Artist Portal
           </Link>
         </div>
