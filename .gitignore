@@ -51,3 +51,22 @@ cors.json
 backend/serviceAccountKey-dev.json
 backend/serviceAccountKey-stg.json
 backend/serviceAccountKey-prod.json
+# === Secrets & env files ===
+.env*
+backend/.env*
+serviceAccountKey*.json
+backend/serviceAccountKey*.json
+
+# Local TLS certs / keys
+localhost-key.pem
+localhost.pem
+*.pem
+*.p12
+*.pfx
+*.key
+*.crt
+
+# Node modules
+node_modules/
+backend/node_modules/
+
