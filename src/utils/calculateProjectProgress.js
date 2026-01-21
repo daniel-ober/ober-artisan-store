@@ -1,308 +1,222 @@
 // src/utils/calculateProjectProgress.js
 
 /**
- * Project progress calculation
+ * calculateProjectProgress(project)
  *
- * Priority:
- *  1) If a `lifecycle` object exists on the project, we treat that as
- *     the source of truth (stages → steps → checkpoints).
- *  2) If no lifecycle is present, we fall back to the older
- *     task-weighted checklist method using your step/checklist fields.
+ * Returns an integer 0–100 representing overall progress.
  *
- * This keeps things stable and allows Stage 8 (Hardware & Assembly)
- * with substeps + checkpoints to be fully represented without
- * blowing progress back to 0 or throwing runtime errors.
+ * ✅ Correct model for your system:
+ * - Each of the 10 project steps has its own WEIGHT
+ * - Each step’s completion is based on SUB-STEP checkpoint progress (not just “substep completed”)
+ *   - Each checklist item (sub-step) contains checkpointStates: boolean[]
+ *   - Step completion = (total checkpoints completed) / (total checkpoints)
+ *   - If an item has no checkpointStates array, it falls back to item.completed as a single checkpoint.
+ * - Overall progress = weighted average across steps
+ *
+ * ❌ We intentionally DO NOT time-weight progress.
+ * Timers/totalSeconds are for "time spent" displays, not for % complete.
+ *
+ * Supports BOTH:
+ * 1) Legacy schema keys (woodPreparation, shellConstruction, ... qualityCheck)
+ * 2) NEW 10-step schema keys (discoveryDesign, commitmentPortal, ... finalQAPackagingDelivery)
  */
 
-/* ------------------------------------------------------------------ */
-/*  Where to look for checklist items (legacy step-based method)       */
-/* ------------------------------------------------------------------ */
+function isPlainObject(v) {
+  return v && typeof v === "object" && !Array.isArray(v);
+}
 
-const STEP_KEYS = [
-  'discoveryDesign',
-  'commitmentPortal',
-  'woodVision',
-  'shellConstruction',
-  'fineTuning',
-  'shellExteriorFinish',
-  'bearingEdges',
-  'snareBedCutting',
-  'hardwareDrilling',
-  'hardwareAssembly',
-  'tuningAndDetailing',
-  'qualityCheck',
-];
-
-/* ------------------------------------------------------------------ */
-/*  Per-TASK weights (legacy method)                                  */
-/*  NOTE: these values are normalized and rounded to sum to ~100%.     */
-/* ------------------------------------------------------------------ */
-
-const TASK_WEIGHTS_PERCENT = {
-  // 1. Discovery & Design
-  'Initial consultation': 0.66,
-  'Build proposal': 1.09,
-
-  // 2. Commitment & Portal Setup
-  'Payment processing': 0.33,
-  'Portal access setup': 0.44,
-
-  // 3. Wood & Vision Lock-In
-  'Wood selection': 1.75,
-  'Early mockups': 1.42,
-  'Pre-build measuring & prep': 2.07,
-
-  // 4. Raw Shell Creation
-  'Cut stave blocks to size': 6.99,
-  'Cut stave bevels': 2.84,
-  'Pre-glue test (dry-fit)': 0.66,
-  'Glue-up & clamping': 2.84,
-  'Glue curing': 0.0, // still tracked, but 0 weight
-
-  // 5. Shell Trueing & Torch Tune
-  'Exterior milling setup': 2.84,
-  'Mill exterior diameter': 2.07,
-  'Outer bevel reinforcement': 0.98,
-  'Sanding prep (for veneer + interior)': 2.84,
-
-  'Interior milling setup': 2.84,
-  'Mill interior thickness': 2.84,
-  'Inner bevel reinforcement': 1.09,
-  'Sanding prep (interior)': 2.84,
-
-  'Original torch tune process': 3.28,
-
-  // 6. Exterior Art & Finish
-  'Veneer application': 6.0,
-  'Under-spray aesthetic work': 1.42,
-  'Pre-finish full shell inspection': 1.09,
-  'Badge + logo work': 4.26,
-  'Spray finishing': 10.34, // adjusted slightly so total = 100.00
-  'Full de-gassing of chemicals': 0.0, // 0 weight
-  'Final sanding': 3.17,
-  Polishing: 2.07,
-
-  // 7. Edges & Snare Beds
-  'Bearing edges': 1.53,
-  'Snare beds': 1.97,
-
-  // 8. Hardware & Assembly
-  'Hardware + head assembly': 7.75,
-
-  // 9. Legacy Tuning & Media
-  'Legacy resonance analysis': 0.66,
-  'Legacy tuning': 2.84,
-  'Professional photos': 6.24,
-  'Studio Legacy audio': 6.09,
-
-  // 10. Final QA, Packaging & Delivery
-  'NTAG authentication': 0.33,
-  'Final cleaning': 0.33,
-  Packaging: 0.76,
-  'Delivery confirmation': 0.44,
+/**
+ * NEW 10-step key -> possible keys that might exist in Firestore (new OR legacy)
+ * (This keeps your app compatible with older projects.)
+ */
+const STEP_ALIASES_NEW = {
+  discoveryDesign: ["discoveryDesign", "woodPreparation"],
+  commitmentPortal: ["commitmentPortal", "shellConstruction"],
+  woodVisionLockIn: ["woodVisionLockIn", "fineTuning", "woodVision"],
+  rawShellCreation: ["rawShellCreation", "shellExteriorFinish"],
+  shellTrueingTorchTune: ["shellTrueingTorchTune", "bearingEdges"],
+  exteriorArtFinish: ["exteriorArtFinish", "snareBedCutting"],
+  edgesSnareBeds: ["edgesSnareBeds", "hardwareDrilling"],
+  hardwareAssembly: ["hardwareAssembly"],
+  legacyTuningMedia: ["legacyTuningMedia", "tuningAndDetailing", "tuningDetailing"],
+  finalQAPackagingDelivery: ["finalQAPackagingDelivery", "qualityCheck"],
 };
 
-/**
- * Sum of all task weights (should be ~100.00).
- * We still normalize to be robust to any future tweaks.
- */
-const TOTAL_WEIGHT = Object.values(TASK_WEIGHTS_PERCENT).reduce(
-  (sum, v) => sum + v,
-  0
-);
+const STEP_ORDER_NEW = [
+  "discoveryDesign",
+  "commitmentPortal",
+  "woodVisionLockIn",
+  "rawShellCreation",
+  "shellTrueingTorchTune",
+  "exteriorArtFinish",
+  "edgesSnareBeds",
+  "hardwareAssembly",
+  "legacyTuningMedia",
+  "finalQAPackagingDelivery",
+];
 
-/* ------------------------------------------------------------------ */
-/*  Helpers (legacy step-based)                                       */
-/* ------------------------------------------------------------------ */
-
 /**
- * Safely grab a step object from the project data.
+ * Default weights
+ * (These can be overridden by project.stepWeights or project.progressWeights if present)
+ *
+ * NOTE: weights do NOT need to sum to 100 — we normalize by totalWeight.
  */
-function getStep(data, key) {
-  if (!data) return null;
-  return data[key] || null;
+const DEFAULT_STEP_WEIGHTS = {
+  discoveryDesign: 6,
+  commitmentPortal: 6,
+  woodVisionLockIn: 8,
+  rawShellCreation: 16,
+  shellTrueingTorchTune: 14,
+  exteriorArtFinish: 14,
+  edgesSnareBeds: 10,
+  hardwareAssembly: 10,
+  legacyTuningMedia: 8,
+  finalQAPackagingDelivery: 8,
+};
+
+function getStepWeights(project) {
+  const candidates = [project?.stepWeights, project?.progressWeights];
+
+  for (const obj of candidates) {
+    if (!isPlainObject(obj)) continue;
+
+    // Only accept if it has at least one known key with a finite number
+    let ok = false;
+    for (const k of STEP_ORDER_NEW) {
+      const n = Number(obj[k]);
+      if (Number.isFinite(n)) {
+        ok = true;
+        break;
+      }
+    }
+    if (ok) return obj;
+  }
+
+  return DEFAULT_STEP_WEIGHTS;
 }
 
-/**
- * Search across all steps to find a checklist item whose label/task
- * matches the given label string.
- */
-function findChecklistItemByLabel(projectData, label) {
-  if (!projectData) return null;
+function normalizeProjectForProgress(data) {
+  if (!data) return data;
+  const out = { ...data };
 
-  for (const stepKey of STEP_KEYS) {
-    const step = getStep(projectData, stepKey);
-    if (!step || !Array.isArray(step.checklist)) continue;
-
-    const item = step.checklist.find((it) => {
-      const t = (it.task || '').trim();
-      const l = (it.label || '').trim();
-      const target = label.trim();
-      return t === target || l === target;
-    });
-
-    if (item) return item;
-  }
-
-  return null;
-}
-
-/* ------------------------------------------------------------------ */
-/*  Lifecycle-based progress (preferred path)                          */
-/* ------------------------------------------------------------------ */
-
-/**
- * Calculate progress based on lifecycle (stages → steps → checkpoints).
- * Returns a number 0–100, plus some internal counters if needed later.
- */
-function calculateLifecycleProgress(project) {
-  const lifecycle = project?.lifecycle;
-  if (!lifecycle || !lifecycle.stages) {
-    return { percent: 0, checkpointsDone: 0, checkpointsTotal: 0 };
-  }
-
-  let checkpointsTotal = 0;
-  let checkpointsDone = 0;
-
-  Object.values(lifecycle.stages).forEach((stage) => {
-    if (!stage || !stage.steps) return;
-
-    Object.values(stage.steps).forEach((step) => {
-      if (!step || !step.checkpoints) return;
-
-      Object.values(step.checkpoints).forEach((cp) => {
-        if (!cp) return;
-        checkpointsTotal += 1;
-        if (cp.completed) checkpointsDone += 1;
-      });
-    });
-  });
-
-  if (checkpointsTotal === 0) {
-    return { percent: 0, checkpointsDone: 0, checkpointsTotal: 0 };
-  }
-
-  const pct = (checkpointsDone / checkpointsTotal) * 100;
-  const clamped = Math.max(0, Math.min(100, pct));
-
-  return {
-    percent: Math.round(clamped),
-    checkpointsDone,
-    checkpointsTotal,
+  const pickFirst = (keys) => {
+    for (const k of keys) {
+      const v = out[k];
+      if (isPlainObject(v)) return v;
+    }
+    return null;
   };
+
+  // Ensure NEW keys exist by pulling from either new or legacy keys
+  Object.entries(STEP_ALIASES_NEW).forEach(([newKey, keys]) => {
+    const stepObj = pickFirst(keys);
+    if (!stepObj) return;
+    if (!isPlainObject(out[newKey])) out[newKey] = stepObj;
+  });
+
+  // Map NEW -> legacy keys (so any older UI stays consistent)
+  if (isPlainObject(out.discoveryDesign)) out.woodPreparation = out.discoveryDesign;
+  if (isPlainObject(out.commitmentPortal)) out.shellConstruction = out.commitmentPortal;
+  if (isPlainObject(out.woodVisionLockIn)) out.fineTuning = out.woodVisionLockIn;
+  if (isPlainObject(out.rawShellCreation)) out.shellExteriorFinish = out.rawShellCreation;
+  if (isPlainObject(out.shellTrueingTorchTune)) out.bearingEdges = out.shellTrueingTorchTune;
+  if (isPlainObject(out.exteriorArtFinish)) out.snareBedCutting = out.exteriorArtFinish;
+  if (isPlainObject(out.edgesSnareBeds)) out.hardwareDrilling = out.edgesSnareBeds;
+  if (isPlainObject(out.legacyTuningMedia)) out.tuningAndDetailing = out.legacyTuningMedia;
+  if (isPlainObject(out.finalQAPackagingDelivery)) out.qualityCheck = out.finalQAPackagingDelivery;
+
+  return out;
 }
 
-/* ------------------------------------------------------------------ */
-/*  Step completion ratio (legacy step/checklist)                      */
-/* ------------------------------------------------------------------ */
+function getStepChecklist(stepObj) {
+  const checklist = stepObj?.checklist;
+  return Array.isArray(checklist) ? checklist : [];
+}
 
 /**
- * Calculate completion ratio (0–1) for a single *step*,
- * based on the weights of the tasks inside that step.
+ * We treat progress as checkpoint-based:
+ * - If item.checkpointStates is a non-empty array:
+ *     - each boolean is a checkpoint (true = complete)
+ * - Else:
+ *     - fall back to item.completed as a single checkpoint
  *
- * This uses the legacy checklist method and is still handy
- * if you want pre-build / build / post-build breakdowns.
+ * This is the key fix for your screenshots:
+ * checking individual tasks (checkboxes) updates checkpointStates,
+ * so overall progress must reflect partial completion within a sub-step.
  */
-export function calculateStepCompletionRatio(projectData, stepKey) {
-  const step = getStep(projectData, stepKey);
-  if (!step || !Array.isArray(step.checklist) || step.checklist.length === 0) {
-    return 0;
+function getChecklistItemCheckpointStats(item) {
+  if (!item || typeof item !== "object") return { done: 0, total: 0 };
+
+  const cs = item.checkpointStates;
+
+  if (Array.isArray(cs) && cs.length > 0) {
+    let done = 0;
+    for (const v of cs) if (v === true) done += 1;
+    return { done, total: cs.length };
   }
 
-  let stepTotalWeight = 0;
-  let stepDoneWeight = 0;
-
-  step.checklist.forEach((item) => {
-    const label = (item.label || item.task || '').trim();
-    const w =
-      TASK_WEIGHTS_PERCENT[label] !== undefined
-        ? TASK_WEIGHTS_PERCENT[label]
-        : 0;
-
-    if (w <= 0) return; // ignore zero-weight tasks in ratio calc
-
-    stepTotalWeight += w;
-    if (item.completed) {
-      stepDoneWeight += w;
-    }
-  });
-
-  if (stepTotalWeight === 0) return 0;
-  return stepDoneWeight / stepTotalWeight;
+  // fallback: treat item.completed as a single checkpoint
+  const completed = item.completed === true || item.completed === "true";
+  return { done: completed ? 1 : 0, total: 1 };
 }
 
-/* ------------------------------------------------------------------ */
-/*  Overall project progress (0–100%)                                  */
-/* ------------------------------------------------------------------ */
-
 /**
- * calculateProjectProgress(projectData)
- *
- * If `projectData.lifecycle` exists:
- *   → uses lifecycle-based checkpoint completion (stages → steps → checkpoints).
- *
- * Else:
- *   → falls back to task-weighted checklist logic using TASK_WEIGHTS_PERCENT.
+ * Step completion: (completed checkpoints across all substeps) / (total checkpoints across all substeps)
+ * Returns 0..1
  */
-export function calculateProjectProgress(projectData) {
-  if (!projectData) return 0;
+function computeStepCompletionPct(stepObj) {
+  const checklist = getStepChecklist(stepObj);
+  if (!checklist.length) return 0;
 
-  // 1) Preferred: lifecycle-based progress
-  if (projectData.lifecycle && projectData.lifecycle.stages) {
-    const { percent } = calculateLifecycleProgress(projectData);
-    return percent;
+  let done = 0;
+  let total = 0;
+
+  for (const item of checklist) {
+    const s = getChecklistItemCheckpointStats(item);
+    done += s.done;
+    total += s.total;
   }
 
-  // 2) Fallback: old weighted checklist method
-  if (TOTAL_WEIGHT <= 0) return 0;
-
-  let completedWeight = 0;
-
-  Object.entries(TASK_WEIGHTS_PERCENT).forEach(([label, weight]) => {
-    const item = findChecklistItemByLabel(projectData, label);
-    if (item && item.completed) {
-      completedWeight += weight;
-    }
-  });
-
-  const pct = (completedWeight / TOTAL_WEIGHT) * 100;
-  const clamped = Math.max(0, Math.min(100, pct));
-  return Math.round(clamped);
+  if (!total) return 0;
+  return done / total;
 }
 
-/* ------------------------------------------------------------------ */
-/*  Optional: per-task breakdown for debugging / UI (legacy)          */
-/* ------------------------------------------------------------------ */
+/**
+ * Overall progress: weighted average of step completion.
+ * Only includes steps that exist as objects on the project and have a positive weight.
+ */
+function computeWeightedProgressPct(normalized) {
+  const weights = getStepWeights(normalized);
+
+  let totalWeight = 0;
+  let earnedWeight = 0;
+
+  for (const stepKey of STEP_ORDER_NEW) {
+    const stepObj = normalized?.[stepKey];
+    if (!isPlainObject(stepObj)) continue;
+
+    const stepWeightRaw = Number(weights?.[stepKey]);
+    const stepWeight = Number.isFinite(stepWeightRaw) ? stepWeightRaw : 0;
+    if (stepWeight <= 0) continue;
+
+    const stepCompletion = computeStepCompletionPct(stepObj); // 0..1
+
+    totalWeight += stepWeight;
+    earnedWeight += stepWeight * stepCompletion;
+  }
+
+  if (!totalWeight) return 0;
+
+  const pct = Math.round((earnedWeight / totalWeight) * 100);
+  return Math.max(0, Math.min(100, pct));
+}
 
 /**
- * Returns an object keyed by task label (legacy checklist-based):
- *
- * {
- *   "Cut stave blocks to size": {
- *      completed: true,
- *      weight: 6.99,
- *      contribution: 6.99  // % points toward the final 0–100
- *   },
- *   ...
- * }
+ * Public API
  */
-export function getProgressBreakdown(projectData) {
-  const result = {};
-
-  Object.entries(TASK_WEIGHTS_PERCENT).forEach(([label, weight]) => {
-    const item = findChecklistItemByLabel(projectData, label);
-    const completed = !!(item && item.completed);
-    const contribution =
-      weight > 0 && completed ? (weight * 100) / TOTAL_WEIGHT : 0;
-
-    result[label] = {
-      completed,
-      weight,
-      contribution,
-    };
-  });
-
-  return result;
+export function calculateProjectProgress(project) {
+  const normalized = normalizeProjectForProgress(project || {});
+  return computeWeightedProgressPct(normalized);
 }
 
 export default calculateProjectProgress;

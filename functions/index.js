@@ -30,9 +30,11 @@ const GMAIL_IMPERSONATE = defineSecret('GMAIL_IMPERSONATE'); // Workspace user
 
 // branding assets + CTAs
 const LOGO_MAIN =
-  'https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/SendGridEmail%2Fblack_logo.png?alt=media&token=850410a6-4373-4194-803e-808c49cbc626';
-const LOGO_SL =
-  'https://firebasestorage.googleapis.com/v0/b/danoberartisandrums.appspot.com/o/SendGridEmail%2Fsoundlegend-email.png?alt=media&token=2929bea0-5d78-4143-ab61-c4d543671a33';
+  'https://www.oberartisandrums.com/animated-logos/dark-logo.png';
+// For now we’ll also use the Ober logo for SoundLegend emails;
+// change this later if you want a separate SL mark.
+const LOGO_SL = LOGO_MAIN;
+
 const CTA_SL = 'https://www.youtube.com/watch?v=PW28PjMCpxg';
 const CTA_SITE = 'https://www.oberartisandrums.com';
 
@@ -1881,6 +1883,92 @@ exports.autoReplyEndorsement = onDocumentCreated(
       });
     } catch (err) {
       console.error('autoReplyEndorsement (gmail) failed:', err);
+    }
+  }
+);
+
+// Send a manual SoundLegend welcome email to an artist (admin-triggered)
+exports.sendSoundLegendWelcomeEmail = onRequest(
+  {
+    region: 'us-central1',
+    cors: true,
+    secrets: [
+      GMAIL_CLIENT_EMAIL,
+      GMAIL_PRIVATE_KEY,
+      GMAIL_SENDER,
+      GMAIL_IMPERSONATE,
+    ],
+  },
+  async (req, res) => {
+    // CORS preflight
+    const origin = req.headers.origin;
+    if (origin && allowedOrigins.includes(origin)) {
+      res.setHeader('Access-Control-Allow-Origin', origin);
+      res.setHeader(
+        'Access-Control-Allow-Headers',
+        'Content-Type, Authorization'
+      );
+      res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+      res.setHeader('Access-Control-Allow-Credentials', 'true');
+    }
+    if (req.method === 'OPTIONS') {
+      return res.status(204).end();
+    }
+
+    if (req.method !== 'POST') {
+      return res.status(405).send('Method Not Allowed');
+    }
+
+    try {
+      const { email, name } = req.body || {};
+      if (!email) {
+        return res.status(400).json({ error: 'Missing email' });
+      }
+
+      const displayName = name || '';
+
+      const html = emailShell({
+        logo: LOGO_SL,
+        bodyHtml: `
+          <p style="margin:0 0 16px">${greet(displayName)}</p>
+
+          <p style="margin:0 0 16px">
+            Your SoundLegend artist portal is ready.
+          </p>
+
+          <p style="margin:0 0 16px">
+            From here, you'll be able to track your custom build, review files,
+            and see each phase of the process as it unfolds.
+          </p>
+
+          ${button(
+            'Open Your Artist Portal',
+            'https://soundlegend.oberartisandrums.com/signin'
+          )}
+
+          <p style="margin:16px 0 0">
+            If this is your first time signing in, use the temporary password
+            we provided, or click <em>“Forgot password?”</em> on the sign-in
+            page to set a new one.
+          </p>
+        `,
+      });
+
+      await gmailSend({
+        to: email,
+        subject: 'Welcome to your SoundLegend Artist Portal',
+        html,
+        fromEmail: 'soundlegend@oberartisandrums.com',
+        replyTo: 'soundlegend@oberartisandrums.com',
+        bcc: ['soundlegend@oberartisandrums.com'],
+      });
+
+      return res.json({ ok: true });
+    } catch (err) {
+      console.error('sendSoundLegendWelcomeEmail error:', err);
+      return res
+        .status(500)
+        .json({ error: err?.message || 'Failed to send welcome email' });
     }
   }
 );

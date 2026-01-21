@@ -16,6 +16,15 @@ import './ManageUsers.css';
 
 const auth = getAuth();
 
+/* ------------ Cloud Functions config ------------ */
+/** Make sure these match your deployed Functions **/
+const CF_REGION = 'us-central1'; // <- change if you deployed somewhere else
+const CF_PROJECT = 'danoberartisandrums';
+const CF_BASE = `https://${CF_REGION}-${CF_PROJECT}.cloudfunctions.net`;
+
+// This MUST match the function name you see in the Functions console
+const WELCOME_FN_NAME = 'sendSoundLegendWelcomeEmail';
+
 /* ------------ helpers ------------ */
 
 const generateTempPassword = () => {
@@ -276,18 +285,15 @@ const ManageUsers = () => {
     setLoadingActionId(user.id);
     try {
       // 🔐 Cloud Function that uses Firebase Admin SDK to set the password
-      const resp = await fetch(
-        'https://us-central1-danoberartisandrums.cloudfunctions.net/adminSetTempPassword',
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            uid: user.id,
-            email: user.email,
-            tempPassword,
-          }),
-        }
-      );
+      const resp = await fetch(`${CF_BASE}/adminSetTempPassword`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          uid: user.id,
+          email: user.email,
+          tempPassword,
+        }),
+      });
 
       if (!resp.ok) {
         throw new Error(
@@ -312,6 +318,58 @@ const ManageUsers = () => {
       alert(
         'There was a problem setting the temporary password. ' +
           'Check the Cloud Function logs for adminSetTempPassword.'
+      );
+    } finally {
+      setLoadingActionId(null);
+    }
+  };
+
+  /* ---------- welcome email flow ---------- */
+  const handleSendWelcomeEmail = async (user) => {
+    if (isAdminUser(user)) {
+      alert(
+        'Admin accounts do not get the SoundLegend welcome email from this screen.'
+      );
+      return;
+    }
+
+    if (!user?.email || user.email === 'N/A') {
+      alert('No valid email on file for this user.');
+      return;
+    }
+
+    const confirm = window.confirm(
+      `Send a SoundLegend welcome email to ${user.email}?\n\n` +
+        'This will send the artist a branded "Welcome to your Artist Portal" message with sign-in instructions.'
+    );
+    if (!confirm) return;
+
+    setLoadingActionId(user.id);
+    try {
+      const resp = await fetch(`${CF_BASE}/${WELCOME_FN_NAME}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: user.email,
+          name: user.fullName || '',
+        }),
+      });
+
+      if (!resp.ok) {
+        const text = await resp.text().catch(() => '');
+        throw new Error(`HTTP ${resp.status} ${text}`);
+      }
+
+      alert(
+        `Welcome email queued for ${user.email}.\n\n` +
+          'Ask the artist to check their inbox (and spam/promotions).'
+      );
+    } catch (err) {
+      console.error('Failed to send welcome email:', err);
+      alert(
+        'We could not send the welcome email automatically.\n\n' +
+          'Please email the artist manually (e.g., from Gmail) instead.\n\n' +
+          `Developer info (see console & Cloud Functions logs):\n${err?.message || err}`
       );
     } finally {
       setLoadingActionId(null);
@@ -452,9 +510,7 @@ const ManageUsers = () => {
                               className="mini-btn"
                               onClick={() => handleSendResetEmail(user)}
                               disabled={
-                                busy ||
-                                !user.email ||
-                                user.email === 'N/A'
+                                busy || !user.email || user.email === 'N/A'
                               }
                             >
                               Send Reset Email
@@ -465,9 +521,7 @@ const ManageUsers = () => {
                               className="mini-btn secondary"
                               onClick={() => handleTempPassword(user)}
                               disabled={
-                                busy ||
-                                !user.email ||
-                                user.email === 'N/A'
+                                busy || !user.email || user.email === 'N/A'
                               }
                               data-tooltip={
                                 'Generate a one-time temporary password, set it\n' +
@@ -476,6 +530,17 @@ const ManageUsers = () => {
                               }
                             >
                               Temp Password
+                            </button>
+
+                            <button
+                              type="button"
+                              className="mini-btn secondary"
+                              onClick={() => handleSendWelcomeEmail(user)}
+                              disabled={
+                                busy || !user.email || user.email === 'N/A'
+                              }
+                            >
+                              Send Welcome Email
                             </button>
                           </div>
                         </>

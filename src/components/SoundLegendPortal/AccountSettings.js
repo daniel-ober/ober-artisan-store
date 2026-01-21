@@ -1,5 +1,5 @@
 // src/components/SoundLegendPortal/AccountSettings.js
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   collection,
   doc,
@@ -7,7 +7,8 @@ import {
   setDoc,
   serverTimestamp,
 } from 'firebase/firestore';
-import { db } from '../../firebaseConfig';
+import { sendPasswordResetEmail } from 'firebase/auth';
+import { db, auth } from '../../firebaseConfig';
 
 /* -------------------- shared helpers (scoped) -------------------- */
 const cleanAddr = (a = {}) => ({
@@ -131,7 +132,7 @@ export default function AccountSettings({
   });
 
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState(''); // read-only display of login email
   const [phone, setPhone] = useState('');
   const [addr, setAddr] = useState({
     line1: '',
@@ -146,20 +147,20 @@ export default function AccountSettings({
   const [notifySms, setNotifySms] = useState(false);
 
   // validation + edit toggles
-  const [emailErr, setEmailErr] = useState('');
   const [phoneErr, setPhoneErr] = useState('');
 
   const [editName, setEditName] = useState(false);
-  const [editEmail, setEditEmail] = useState(false);
   const [editPhone, setEditPhone] = useState(false);
   const [editAddr, setEditAddr] = useState(false);
 
   // saving flags
   const [savingName, setSavingName] = useState(false);
-  const [savingEmail, setSavingEmail] = useState(false);
   const [savingPhone, setSavingPhone] = useState(false);
   const [savingAddr, setSavingAddr] = useState(false);
   const [savingPrefs, setSavingPrefs] = useState(false);
+
+  // email / password helpers
+  const [pwResetStatus, setPwResetStatus] = useState('');
 
   const isValidEmail = (val) =>
     /^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/.test((val || '').trim());
@@ -232,9 +233,6 @@ export default function AccountSettings({
           }
         );
 
-        setEmailErr(
-          isValidEmail(base.email) || !base.email ? '' : 'Enter a valid email'
-        );
         const d = digitsOnly(base.phone || '');
         setPhoneErr(
           d.length === 10 || d.length === 0
@@ -310,36 +308,6 @@ export default function AccountSettings({
   const onCancelName = () => {
     setName(initial.name || '');
     setEditName(false);
-  };
-
-  const onSaveEmail = async () => {
-    if (!isValidEmail(email)) {
-      setEmailErr('Enter a valid email');
-      return;
-    }
-    setSavingEmail(true);
-    try {
-      const before = initial.email || '';
-      const after = (email || '').trim();
-      await writeUserPatch(
-        { email: after },
-        before === after ? {} : { email: { before, after } },
-        { email: after }
-      );
-      setInitial((i) => ({ ...i, email: after }));
-      setEditEmail(false);
-      alert('Email updated.');
-    } catch (e) {
-      console.error(e);
-      alert('Could not save email.');
-    } finally {
-      setSavingEmail(false);
-    }
-  };
-  const onCancelEmail = () => {
-    setEmail(initial.email || '');
-    setEmailErr('');
-    setEditEmail(false);
   };
 
   const onSavePhone = async () => {
@@ -432,6 +400,58 @@ export default function AccountSettings({
     }
   };
 
+  // Send password reset email to login email on record
+  const onSendPasswordReset = async () => {
+    setPwResetStatus('');
+    const targetEmail = (user?.email || initial.email || '').trim();
+
+    if (!targetEmail || !isValidEmail(targetEmail)) {
+      alert(
+        'We could not find a valid login email on file. Please contact support@oberartisandrums.com.'
+      );
+      return;
+    }
+
+    try {
+      await sendPasswordResetEmail(auth, targetEmail);
+      setPwResetStatus(
+        'Password reset link sent. Check your inbox (and spam folder).'
+      );
+    } catch (e) {
+      console.error('Password reset request failed:', e);
+      setPwResetStatus(
+        'We could not send a reset email automatically. Please email support@oberartisandrums.com instead.'
+      );
+    }
+  };
+
+  // Opens a pre-filled email to support so you can safely request a login email change
+  const onRequestEmailChange = () => {
+    const currentLogin = user?.email || initial.email || '';
+    const subject = 'SoundLegend — login email change request';
+    const body = `Hi Ober team,
+
+I need to change the login email for my SoundLegend Artist Portal.
+
+Current login email: ${currentLogin || '(not sure / unknown)'}
+New email address:
+(enter new email here)
+
+Project details (optional):
+- Drum serial or project ID
+- Name on order
+
+Thanks!
+`;
+
+    window.location.href =
+      'mailto:support@oberartisandrums.com' +
+      '?subject=' +
+      encodeURIComponent(subject) +
+      '&body=' +
+      encodeURIComponent(body);
+  };
+
   if (loading) {
     return (
       <div className="slp-card">
@@ -478,46 +498,45 @@ export default function AccountSettings({
         />
       </div>
 
-      {/* EMAIL */}
+      {/* EMAIL (read-only login email + actions) */}
       <div className="as-section">
         <div className="as-header">
           <label className="vp-label">Email</label>
-          {!editEmail ? (
-            <button className="apo-btn" onClick={() => setEditEmail(true)}>
-              Edit
-            </button>
-          ) : (
-            <div className="as-actions">
-              <button className="apo-btn" onClick={onCancelEmail}>
-                Cancel
-              </button>
-              <button
-                className="apo-btn primary"
-                onClick={onSaveEmail}
-                disabled={savingEmail}
-              >
-                {savingEmail ? 'Saving…' : 'Save'}
-              </button>
-            </div>
-          )}
+          {/* no edit button on purpose */}
         </div>
         <input
-          className={`vp-input ${emailErr ? 'has-error' : ''}`}
+          className="vp-input vp-input-readonly"
           type="email"
           value={email}
-          onChange={(e) => {
-            const v = e.target.value;
-            setEmail(v);
-            setEmailErr(isValidEmail(v) ? '' : 'Enter a valid email');
-          }}
-          onBlur={() =>
-            setEmailErr(isValidEmail(email) ? '' : 'Enter a valid email')
-          }
-          disabled={!editEmail}
-          placeholder="name@example.com"
+          disabled
         />
-        {emailErr && <div className="vp-hint error">{emailErr}</div>}
+        <div className="as-email-meta">
+          <div className="vp-hint">
+            This email is used for Artist Portal notifications and build
+            updates.
+          </div>
+          <div className="as-email-actions">
+            <button
+              type="button"
+              className="apo-btn subtle"
+              onClick={onSendPasswordReset}
+            >
+              Send password reset link
+            </button>
+            <button
+              type="button"
+              className="apo-btn subtle"
+              onClick={onRequestEmailChange}
+            >
+              I use a different email now
+            </button>
+          </div>
+          {pwResetStatus && (
+            <div className="as-status-text">{pwResetStatus}</div>
+          )}
+        </div>
       </div>
+
       {/* PHONE */}
       <div className="as-section">
         <div className="as-header">
@@ -592,8 +611,8 @@ export default function AccountSettings({
           </label>
         </div>
         <div className="vp-hint">
-          Opt into email and/or SMS notifications for build updates and important
-          account notices.
+          Opt into email and/or SMS notifications for build progress updates and
+          important account notices.
         </div>
       </div>
 
@@ -643,14 +662,18 @@ export default function AccountSettings({
                   className="vp-input"
                   placeholder="City"
                   value={addr.city}
-                  onChange={(e) => setAddr({ ...addr, city: e.target.value })}
+                  onChange={(e) =>
+                    setAddr({ ...addr, city: e.target.value })
+                  }
                   disabled={!editAddr}
                 />
                 <input
                   className="vp-input"
                   placeholder="State/Province"
                   value={addr.state}
-                  onChange={(e) => setAddr({ ...addr, state: e.target.value })}
+                  onChange={(e) =>
+                    setAddr({ ...addr, state: e.target.value })
+                  }
                   disabled={!editAddr}
                 />
               </div>

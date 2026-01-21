@@ -296,7 +296,7 @@ const SoundLegendPortal = () => {
           No projects are linked to your account yet. If this seems wrong,
           email:{' '}
           <a href="mailto:soundlegend@oberartisandrums.com">
-            soundlegend@oberartisandrums.com
+            support@oberartisandrums.com
           </a>
         </p>
       </div>
