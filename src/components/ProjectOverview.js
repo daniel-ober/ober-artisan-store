@@ -84,28 +84,83 @@ const buildPhases = [
   },
 ];
 
-/**
- * Patch the data before sending to calculateProjectProgress.
- * Same alias map as ManageProjectModal.
- */
+function isPlainObject(v) {
+  return v && typeof v === 'object' && !Array.isArray(v);
+}
+
+// NEW 10-step key -> possible keys that might exist in Firestore (new OR legacy)
+const STEP_ALIASES_NEW = {
+  discoveryDesign: ['discoveryDesign', 'woodPreparation'],
+  commitmentPortal: ['commitmentPortal', 'shellConstruction'],
+  woodVisionLockIn: ['woodVisionLockIn', 'fineTuning', 'woodVision'],
+  rawShellCreation: ['rawShellCreation', 'shellExteriorFinish'],
+  shellTrueingTorchTune: ['shellTrueingTorchTune', 'bearingEdges'],
+  exteriorArtFinish: ['exteriorArtFinish', 'snareBedCutting'],
+  edgesSnareBeds: ['edgesSnareBeds', 'hardwareDrilling'],
+  hardwareAssembly: ['hardwareAssembly'],
+  legacyTuningMedia: [
+    'legacyTuningMedia',
+    'tuningAndDetailing',
+    'tuningDetailing',
+  ],
+  finalQAPackagingDelivery: ['finalQAPackagingDelivery', 'qualityCheck'],
+};
+
+const normalizeProjectForProgress = (data) => {
+  if (!data) return data;
+  const out = { ...data };
+
+  const pickFirst = (keys) => {
+    for (const k of keys) {
+      const v = out[k];
+      if (isPlainObject(v)) return v;
+    }
+    return null;
+  };
+
+  // Ensure NEW keys exist by pulling from either new or legacy keys
+  Object.entries(STEP_ALIASES_NEW).forEach(([newKey, keys]) => {
+    const stepObj = pickFirst(keys);
+    if (!stepObj) return;
+    if (!isPlainObject(out[newKey])) out[newKey] = stepObj;
+  });
+
+  return out;
+};
+
 const getWeightedProgressPct = (data) => {
   if (!data) return 0;
 
+  const normalized = normalizeProjectForProgress(data);
+
   const patched = {
-    ...data,
-    woodPreparation: data.discoveryDesign,
-    shellConstruction: data.commitmentPortal,
-    fineTuning: data.woodVisionLockIn,
-    shellExteriorFinish: data.rawShellCreation,
-    bearingEdges: data.shellTrueingTorchTune,
-    snareBedCutting: data.exteriorArtFinish,
-    hardwareDrilling: data.edgesSnareBeds,
-    hardwareAssembly: data.hardwareAssembly,
-    tuningAndDetailing: data.legacyTuningMedia,
-    qualityCheck: data.finalQAPackagingDelivery,
+    ...normalized,
+
+    // legacy names -> NEW 10-step objects
+    woodPreparation: normalized.discoveryDesign,
+    shellConstruction: normalized.commitmentPortal,
+    fineTuning: normalized.woodVisionLockIn,
+    shellExteriorFinish: normalized.rawShellCreation,
+    bearingEdges: normalized.shellTrueingTorchTune,
+    snareBedCutting: normalized.exteriorArtFinish,
+    hardwareDrilling: normalized.edgesSnareBeds,
+    hardwareAssembly: normalized.hardwareAssembly,
+    tuningAndDetailing: normalized.legacyTuningMedia,
+    qualityCheck: normalized.finalQAPackagingDelivery,
   };
 
-  return calculateProjectProgress(patched);
+  const raw = calculateProjectProgress(patched);
+
+  let n = 0;
+  if (typeof raw === 'number') n = raw;
+  else if (typeof raw === 'string') n = Number(raw);
+
+  // safeguard: if util ever returns 0–1, convert to 0–100
+  if (Number.isFinite(n) && n > 0 && n <= 1) n = n * 100;
+
+  if (!Number.isFinite(n)) return 0;
+  n = Math.max(0, Math.min(100, n));
+  return Math.round(n);
 };
 
 /* ---- helpers: normalize attachments shape ---- */
@@ -292,11 +347,6 @@ const ProjectOverview = ({
     });
   }, [editableData]);
 
-  // keep local uploadedFiles in sync when switching projects (old shape)
-  useEffect(() => {
-    setUploadedFiles(editableData?.attachments || { other: [] });
-  }, [editableData?.attachments]);
-
   /* ---------- uploads (used by Attachments) ---------- */
   // Normalize attachments: keep original buckets, just ensure each is an array
   const normalizeAttachmentsByBucket = (allFiles) => {
@@ -460,7 +510,7 @@ const ProjectOverview = ({
 
   /* ---------- time-weighted progress + checklist stats ---------- */
   const progressMeta = useMemo(() => {
-    const data = editableData || {};
+    const data = normalizeProjectForProgress(editableData || {});
 
     // Tasks (raw checklist progress)
     let completedTasks = 0;
@@ -500,7 +550,7 @@ const ProjectOverview = ({
 
   /* ---------- OPEN CHECKPOINTS (grouped by step) ---------- */
   const openCheckpointsByStep = useMemo(() => {
-    const data = editableData || {};
+    const data = normalizeProjectForProgress(editableData || {});
     const map = {};
 
     buildPhases.forEach((phase) => {
@@ -527,39 +577,37 @@ const ProjectOverview = ({
   return (
     <div className="apo-container">
       {/* ---------- Progress overview (always visible at top) ---------- */}
-        <h4 className="apo-h4">Progress Overview</h4>
-        <div className="apo-progress-bar-wrap">
-          <div className="apo-progress-bar-track">
-            <div
-              className="apo-progress-bar-fill"
-              style={{ width: `${progressMeta.weightedPct || 0}%` }}
-            />
-          </div>
-          <div className="apo-progress-bar-label">
-            Overall Progress (time-weighted):{' '}
-            <span className="apo-progress-pill">
-              {progressMeta.weightedPct || 0}%
-            </span>
-          </div>
+      <h4 className="apo-h4">Progress Overview</h4>
+      <div className="apo-progress-bar-wrap">
+        <div className="apo-progress-bar-track">
+          <div
+            className="apo-progress-bar-fill"
+            style={{ width: `${progressMeta.weightedPct || 0}%` }}
+          />
         </div>
+        <div className="apo-progress-bar-label">
+          Overall Progress (time-weighted):{' '}
+          <span className="apo-progress-pill">
+            {progressMeta.weightedPct || 0}%
+          </span>
+        </div>
+      </div>
 
-        <div className="apo-progress-meta-row">
-          <div className="apo-progress-pill-row">
-            <span className="apo-progress-pill-label">
-              Checklist completion:
-            </span>
-            <span className="apo-progress-pill">
-              {progressMeta.completedTasks}/{progressMeta.totalTasks || 0} tasks
-              ({progressMeta.tasksPct || 0}%)
-            </span>
-          </div>
-          <div className="apo-progress-pill-row">
-            <span className="apo-progress-pill-label">Current phase:</span>
-            <span className="apo-progress-pill apo-progress-phase-pill">
-              {progressMeta.currentPhaseLabel}
-            </span>
-          </div>
+      <div className="apo-progress-meta-row">
+        <div className="apo-progress-pill-row">
+          <span className="apo-progress-pill-label">Checklist completion:</span>
+          <span className="apo-progress-pill">
+            {progressMeta.completedTasks}/{progressMeta.totalTasks || 0} tasks (
+            {progressMeta.tasksPct || 0}%)
+          </span>
         </div>
+        <div className="apo-progress-pill-row">
+          <span className="apo-progress-pill-label">Current phase:</span>
+          <span className="apo-progress-pill apo-progress-phase-pill">
+            {progressMeta.currentPhaseLabel}
+          </span>
+        </div>
+      </div>
 
       {/* ======================================================
           1) PROJECT SCOPE
@@ -583,16 +631,8 @@ const ProjectOverview = ({
           <div className="apo-section-header-meta">
             <span className="apo-section-summary">
               {safeText(editableData?.artisanLine, '—')} ·{' '}
-              {safeText(
-                editableData?.width ?? editableData?.diameter,
-                '—'
-              )}
-              ×
-              {safeText(
-                editableData?.shellDepth ?? editableData?.depth,
-                '—'
-              )}
-              "
+              {safeText(editableData?.width ?? editableData?.diameter, '—')}×
+              {safeText(editableData?.shellDepth ?? editableData?.depth, '—')}"
             </span>
 
             {isEditing ? (
@@ -640,8 +680,7 @@ const ProjectOverview = ({
               Admin view: you’re viewing the scope of work for{' '}
               <span className="apo-mono">
                 {safeText(
-                  editableData?.customer?.email ||
-                    editableData?.customerEmail,
+                  editableData?.customer?.email || editableData?.customerEmail,
                   '—'
                 )}
               </span>
@@ -1268,8 +1307,7 @@ const ProjectOverview = ({
                   className="apo-input"
                   type="text"
                   value={safeText(
-                    editableData?.customer?.name ||
-                      editableData?.customerName,
+                    editableData?.customer?.name || editableData?.customerName,
                     ''
                   )}
                   onChange={(e) =>
@@ -1279,8 +1317,7 @@ const ProjectOverview = ({
               ) : (
                 <span className="apo-value">
                   {safeText(
-                    editableData?.customer?.name ||
-                      editableData?.customerName,
+                    editableData?.customer?.name || editableData?.customerName,
                     'N/A'
                   )}
                 </span>
@@ -1329,20 +1366,14 @@ const ProjectOverview = ({
                 <input
                   className="apo-input"
                   type="text"
-                  value={safeText(
-                    editableData?.customer?.address?.street,
-                    ''
-                  )}
+                  value={safeText(editableData?.customer?.address?.street, '')}
                   onChange={(e) =>
                     handleChange('customer.address.street', e.target.value)
                   }
                 />
               ) : (
                 <span className="apo-value">
-                  {safeText(
-                    editableData?.customer?.address?.street,
-                    'N/A'
-                  )}
+                  {safeText(editableData?.customer?.address?.street, 'N/A')}
                 </span>
               )}
             </div>
@@ -1360,10 +1391,7 @@ const ProjectOverview = ({
                 />
               ) : (
                 <span className="apo-value">
-                  {safeText(
-                    editableData?.customer?.address?.city,
-                    'N/A'
-                  )}
+                  {safeText(editableData?.customer?.address?.city, 'N/A')}
                 </span>
               )}
             </div>
@@ -1381,10 +1409,7 @@ const ProjectOverview = ({
                 />
               ) : (
                 <span className="apo-value">
-                  {safeText(
-                    editableData?.customer?.address?.state,
-                    'N/A'
-                  )}
+                  {safeText(editableData?.customer?.address?.state, 'N/A')}
                 </span>
               )}
             </div>
@@ -1431,10 +1456,7 @@ const ProjectOverview = ({
                 <input
                   className="apo-input apo-input-mono"
                   type="text"
-                  value={safeText(
-                    editableData?.shipping?.trackingNumber,
-                    ''
-                  )}
+                  value={safeText(editableData?.shipping?.trackingNumber, '')}
                   onChange={(e) =>
                     handleChange('shipping.trackingNumber', e.target.value)
                   }
@@ -1446,17 +1468,11 @@ const ProjectOverview = ({
                   rel="noopener noreferrer"
                   className="apo-link apo-mono"
                 >
-                  {safeText(
-                    editableData?.shipping?.trackingNumber,
-                    'N/A'
-                  )}
+                  {safeText(editableData?.shipping?.trackingNumber, 'N/A')}
                 </a>
               ) : (
                 <span className="apo-value">
-                  {safeText(
-                    editableData?.shipping?.trackingNumber,
-                    'N/A'
-                  )}
+                  {safeText(editableData?.shipping?.trackingNumber, 'N/A')}
                 </span>
               )}
             </div>
@@ -1655,8 +1671,8 @@ const ProjectOverview = ({
             const arr = Array.isArray(files)
               ? files
               : files && typeof files === 'object'
-              ? Object.values(files)
-              : [];
+                ? Object.values(files)
+                : [];
 
             return arr.map((file, idx) => {
               const url = file?.url || file?.downloadURL || file?.path || '';
@@ -1697,10 +1713,7 @@ const ProjectOverview = ({
                       />
                     )}
                     <div className="file-name">
-                      {safeText(
-                        file.category,
-                        'Other / Uncategorized'
-                      )}
+                      {safeText(file.category, 'Other / Uncategorized')}
                     </div>
                   </button>
 
@@ -1808,13 +1821,16 @@ const ProjectOverview = ({
             >
               Close
             </button>
-            <a
+            <button
+              type="button"
               className="modal-download-button"
-              href={modalPreview.url}
-              download
+              onClick={() => {
+                if (!modalPreview?.url) return;
+                window.open(modalPreview.url, '_blank', 'noopener,noreferrer');
+              }}
             >
               Download
-            </a>
+            </button>
 
             {!isPreviewLoaded && (
               <div className="preview-loading-spinner">Loading preview…</div>

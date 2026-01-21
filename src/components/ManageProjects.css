@@ -242,9 +242,9 @@
 
 /* Text inputs, selects, textareas ONLY — do NOT touch checkboxes */
 .manage-projects .filters select,
-.manage-projects .filters input:not([type='checkbox']),
+.manage-projects .filters input:not([type="checkbox"]),
 .manage-projects .projects-table select,
-.manage-projects .projects-table input:not([type='checkbox']),
+.manage-projects .projects-table input:not([type="checkbox"]),
 .manage-projects .projects-table textarea {
   appearance: none;
   -webkit-appearance: none;
@@ -260,28 +260,18 @@
   box-shadow: none !important;
 }
 
-.manage-projects
-  .filters
-  select:focus,
-.manage-projects
-  .filters
-  input:not([type='checkbox']):focus,
-.manage-projects
-  .projects-table
-  select:focus,
-.manage-projects
-  .projects-table
-  input:not([type='checkbox']):focus,
-.manage-projects
-  .projects-table
-  textarea:focus {
+.manage-projects .filters select:focus,
+.manage-projects .filters input:not([type="checkbox"]):focus,
+.manage-projects .projects-table select:focus,
+.manage-projects .projects-table input:not([type="checkbox"]):focus,
+.manage-projects .projects-table textarea:focus {
   outline: none;
   border-color: #888 !important;
   box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.06) !important;
 }
 
 /* Proper styling/alignment for the "Show completed" checkbox */
-.manage-projects .filters input[type='checkbox'] {
+.manage-projects .filters input[type="checkbox"] {
   appearance: checkbox;
   -webkit-appearance: checkbox;
   -moz-appearance: checkbox;
@@ -341,12 +331,12 @@
   }
 
   .projects-table-wrapper {
-    overflow-x: auto;              /* only the table scrolls */
+    overflow-x: auto; /* only the table scrolls */
     -webkit-overflow-scrolling: touch;
   }
 
   .projects-table {
-    min-width: 760px;              /* keep columns readable */
+    min-width: 760px; /* keep columns readable */
     font-size: 0.85rem;
   }
 

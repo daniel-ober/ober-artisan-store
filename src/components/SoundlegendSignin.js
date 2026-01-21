@@ -20,6 +20,9 @@ const SoundlegendSignin = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
+  /* -------------------------------------------------- */
+  /* Load last used email                               */
+  /* -------------------------------------------------- */
   useEffect(() => {
     const stored = localStorage.getItem('sl_last_email');
     if (stored) {
@@ -28,6 +31,9 @@ const SoundlegendSignin = () => {
     }
   }, []);
 
+  /* -------------------------------------------------- */
+  /* Firebase → Friendly error map                      */
+  /* -------------------------------------------------- */
   const mapFirebaseError = (code = '') => {
     switch (code) {
       case 'auth/invalid-email':
@@ -45,6 +51,9 @@ const SoundlegendSignin = () => {
     }
   };
 
+  /* -------------------------------------------------- */
+  /* SIGN IN                                             */
+  /* -------------------------------------------------- */
   const handleSignin = async (e) => {
     e.preventDefault();
     setErrorMsg('');
@@ -60,30 +69,19 @@ const SoundlegendSignin = () => {
       );
       const user = userCredential.user;
 
+      /* Save email for next time */
       if (rememberMe) localStorage.setItem('sl_last_email', trimmedEmail);
       else localStorage.removeItem('sl_last_email');
 
+      /* ►► Removed SoundLegend claim requirement  
+         All authenticated users can now access the Artisan Portal */
       await user.getIdToken(true);
-      const idTokenResult = await user.getIdTokenResult(true);
-      const claims = idTokenResult.claims || {};
 
-      if (!claims.isSoundlegend) {
-        await signOut(auth);
-        setErrorMsg('You are not authorized for SoundLegend access.');
-        setInfoMsg(
-          'If you’re ready to join, start your custom build to receive portal access.'
-        );
-        setIsSubmitting(false);
-        return;
-      }
-
+      /* Optional: read user doc (still safe) */
       const userDoc = await fetchUserDoc(user.uid);
-      if (userDoc?.projects?.length > 0) {
-        const firstProjectId = userDoc.projects[0].projectId;
-        navigate(`/legacy`);
-      } else {
-        navigate('/legacy');
-      }
+
+      /* Redirect into the portal */
+      navigate('/legacy');
     } catch (err) {
       console.error('❌ Sign-in error:', err);
       setErrorMsg(mapFirebaseError(err?.code));
@@ -91,6 +89,9 @@ const SoundlegendSignin = () => {
     }
   };
 
+  /* -------------------------------------------------- */
+  /* FORGOT PASSWORD                                     */
+  /* -------------------------------------------------- */
   const handleForgot = async () => {
     setErrorMsg('');
     setInfoMsg('');
@@ -108,18 +109,21 @@ const SoundlegendSignin = () => {
     }
   };
 
+  /* -------------------------------------------------- */
+  /* UI                                                  */
+  /* -------------------------------------------------- */
   return (
     <div className="soundlegend-signin">
       <div className="signin-logo-container">
         <img
           src="/soundlegend-signin/white-logo.png"
-          alt="SoundLegend Experience"
+          alt="Artisan Portal"
           className="signin-logo"
           loading="eager"
         />
       </div>
 
-      <header className="signin-hero" aria-label="SoundLegend intro">
+      <header className="signin-hero" aria-label="Portal intro">
         <p className="signin-subtitle">
           Secure access to your build, media, and milestone history.
         </p>
@@ -130,7 +134,7 @@ const SoundlegendSignin = () => {
         className="signin-card"
         aria-label="Sign in"
       >
-        {/* EMAIL (placeholder only) */}
+        {/* EMAIL */}
         <div className="field">
           <input
             id="email"
@@ -146,17 +150,15 @@ const SoundlegendSignin = () => {
           />
         </div>
 
-        {/* PASSWORD (placeholder + show/hide) */}
+        {/* PASSWORD */}
         <div className="field">
           <div className="pw-wrapper">
             <input
               id="password"
-              key={showPw ? 'text' : 'password'} /* force re-render on toggle */
+              key={showPw ? 'text' : 'password'}
               type={showPw ? 'text' : 'password'}
               style={{ WebkitTextSecurity: showPw ? 'none' : 'disc' }}
               autoComplete={showPw ? 'off' : 'current-password'}
-              inputMode={showPw ? 'text' : 'none'}
-              spellCheck="false"
               placeholder="Password"
               aria-label="Password"
               value={password}
@@ -170,6 +172,7 @@ const SoundlegendSignin = () => {
               required
               disabled={isSubmitting}
             />
+
             <button
               type="button"
               className="pw-toggle"
@@ -204,11 +207,7 @@ const SoundlegendSignin = () => {
               disabled={isSubmitting}
             />
             <span className="checkbox-box" aria-hidden="true">
-              <svg
-                viewBox="0 0 24 24"
-                className="checkbox-check"
-                focusable="false"
-              >
+              <svg viewBox="0 0 24 24" className="checkbox-check">
                 <path
                   d="M20 6L9 17l-5-5"
                   fill="none"
@@ -221,9 +220,6 @@ const SoundlegendSignin = () => {
             </span>
             <span className="checkbox-label">Remember me on this device</span>
           </label>
-
-          {/* Optional forgot link */}
-          {/* <button type="button" className="link-ghost" onClick={handleForgot} disabled={isSubmitting}>Forgot password?</button> */}
         </div>
 
         <button
@@ -231,15 +227,12 @@ const SoundlegendSignin = () => {
           className="btn-primary"
           disabled={isSubmitting || !email.trim() || !password}
         >
-          {isSubmitting ? (
-            <span className="spinner" aria-hidden="true" />
-          ) : null}
-          {isSubmitting ? 'Signing In…' : 'Sign In'}
+          {isSubmitting ? <span className="spinner" /> : 'Sign In'}
         </button>
 
         <div className="signin-aux join-block">
           <span className="join-question">
-            Not already a SoundLegend Artist?
+            Not already part of the Ober Artisan family?
           </span>
           <a
             href="/artisan-shop/soundlegend"
@@ -253,9 +246,7 @@ const SoundlegendSignin = () => {
       </form>
 
       <div className="signin-info">
-        <p>
-          <strong>What you’ll access</strong>
-        </p>
+        <p><strong>What you’ll access</strong></p>
         <ul>
           <li>Live build updates & milestone tracking</li>
           <li>Design approvals, mockups & progress media</li>
@@ -263,10 +254,12 @@ const SoundlegendSignin = () => {
           <li>Artisan notes & care documentation</li>
           <li>Priority support & direct messaging</li>
         </ul>
+
         <p className="trust-note">
-          Each drum ships with a secure NFC badge. Your private portal keeps
-          your story, files, and build history together — always within reach.
+          Each drum ships with a secure NFC badge.  
+          Your private portal keeps your story, files, and build history together — always within reach.
         </p>
+
         <p className="support-row">
           Need help?{' '}
           <a href="mailto:support@oberartisandrums.com">
