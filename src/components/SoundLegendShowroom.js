@@ -330,7 +330,7 @@ const SoundLegendShowroom = () => {
   const viewbarRef = useRef(null);
   const headerElRef = useRef(null);
   const [active, setActive] = useState('artist');
-  const [isLocked, setIsLocked] = useState(false); // <-- fixed typo
+  const [isLocked, setIsLocked] = useState(false); 
   const lockTimerRef = useRef(null);
   const [scrollRoot, setScrollRoot] = useState(window);
 

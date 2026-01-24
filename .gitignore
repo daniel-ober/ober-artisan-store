@@ -51,3 +51,6 @@ cors.json
 backend/serviceAccountKey-dev.json
 backend/serviceAccountKey-stg.json
 backend/serviceAccountKey-prod.json
+# Build output + Firebase artifacts
+build/
+.firebase/
