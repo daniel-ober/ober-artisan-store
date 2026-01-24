@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SpiderChart from './SpiderChart';
 import BarChart from './BarChart';
@@ -72,6 +72,17 @@ const HeritageProductDetail = () => {
     14: ['8', '10'],
   };
 
+  // ✅ Use Cart Context
+  const { addToCart, removeFromCart, cart } = useCart();
+
+  // ✅ Always use Firestore-provided product image in prod (never hardcode dev URLs)
+  const productImage = useMemo(() => {
+    return (
+      product?.images?.[0] ||
+      '/resized-logos/heritage-placeholder.png' // optional fallback (add file or swap to any existing local image)
+    );
+  }, [product]);
+
   // **🔄 Sound Profile Based on Selections**
   const [soundProfile, setSoundProfile] = useState({
     attack: 8,
@@ -88,12 +99,14 @@ const HeritageProductDetail = () => {
     }
   };
 
-  // ✅ Use Cart Context
-  const { addToCart, removeFromCart, cart } = useCart();
-
   const handleAddToCart = async () => {
     if (!size || !depth) {
       console.error('❌ Missing selection: Size or Depth not chosen');
+      return;
+    }
+
+    if (!product) {
+      toast.error('❌ Product data not loaded yet.');
       return;
     }
 
@@ -141,9 +154,10 @@ const HeritageProductDetail = () => {
       price: correctedPrice, // ✅ always use calculated totalPrice
       stripePriceId: null, // ✅ prevent old Stripe price mismatch
       quantity: 1,
-      images: [
-        'https://firebasestorage.googleapis.com/v0/b/danoberartisandrums-dev.firebasestorage.app/o/products%2FIMG_6123.png?alt=media&token=ec8d40b8-ebae-41dc-93c6-e7936055ead7',
-      ],
+
+      // ✅ IMPORTANT: use Firestore product image (prod bucket) instead of hardcoded dev image
+      images: [productImage],
+
       category: 'artisan',
       hardwareColor,
     };
@@ -156,6 +170,7 @@ const HeritageProductDetail = () => {
       staveQuantity: staveOption.split(' - ')[0],
       hardwareColor,
     });
+
     toast.success('🛒 Item added to cart!');
     setPendingCartItemId(cartItem.id); // let useEffect detect this as a signal
     // ✅ Manually reflect new ID locally for instant feedback
@@ -172,7 +187,9 @@ const HeritageProductDetail = () => {
     // ✅ Always use empty string when stripePriceId is missing to match CartContext
     const priceId = option.stripePriceId ?? '';
 
-    return `${priceId}-${option.size}-${option.depth}-${String(option.reRing)}-${option.lugQuantity}-${normalizedStave}-${normalizedHardware}`;
+    return `${priceId}-${option.size}-${option.depth}-${String(
+      option.reRing
+    )}-${option.lugQuantity}-${normalizedStave}-${normalizedHardware}`;
   };
 
   useEffect(() => {
@@ -218,6 +235,8 @@ const HeritageProductDetail = () => {
         if (productSnap.exists()) {
           const productData = productSnap.data();
           setProduct(productData); // ✅ This line sets the product in state
+        } else {
+          console.error('❌ Product doc not found: products/heritage');
         }
       } catch (error) {
         console.error('❌ Error fetching product status:', error);
@@ -265,7 +284,9 @@ const HeritageProductDetail = () => {
     const staveThickness =
       staveParts[1]?.replace(' + $150 (Re-Rings Required)', '') || '';
     const lugCount = `${lugs} Lugs`;
-    const generatedKey = `${size}" - Base Price: $${basePrices[size]}-${depth}"-${lugCount}-${staveThickness}`;
+    const generatedKey = `${size}" - Base Price: $${
+      basePrices[size]
+    }-${depth}"-${lugCount}-${staveThickness}`;
 
     if (heritageSummaries[generatedKey]) {
       setSelectedDrumSummary(heritageSummaries[generatedKey]);
@@ -317,10 +338,7 @@ const HeritageProductDetail = () => {
 
       <div className="heritage-product-content">
         <div className="heritage-product-image">
-          <img
-            src="https://firebasestorage.googleapis.com/v0/b/danoberartisandrums-dev.firebasestorage.app/o/products%2FIMG_6123.png?alt=media&token=ec8d40b8-ebae-41dc-93c6-e7936055ead7"
-            alt="HERITAGE Snare Drum"
-          />
+          <img src={productImage} alt="HERITAGE Snare Drum" />
         </div>
 
         <div className="heritage-product-options">
@@ -417,6 +435,8 @@ const HeritageProductDetail = () => {
             <button
               className="artisan-add-to-cart-button"
               onClick={handleAddToCart}
+              disabled={isLoading || !product}
+              title={isLoading ? 'Loading...' : ''}
             >
               Add to Cart
             </button>

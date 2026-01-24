@@ -1,3 +1,4 @@
+// src/components/ManageProjects.js
 import React, { useState, useEffect } from 'react';
 import {
   collection,
@@ -12,60 +13,126 @@ import ManageProjectModal from './ManageProjectModal';
 import { calculateProjectProgress } from '../utils/calculateProjectProgress';
 import './ManageProjects.css';
 
+/**
+ * Canonical build phases for the NEW 10-step workflow.
+ * These should match project.currentPhase values from ManageProjectModal.
+ */
 const buildPhases = [
-  'Step 1. Wood Preparation',
-  'Step 2. Shell Construction',
-  'Step 3. Fine-Tuning',
-  'Step 4. Shell Exterior Finish',
-  'Step 5. Bearing Edges',
-  'Step 6. Snare Bed Cutting',
-  'Step 7. Hardware Drilling',
-  'Step 8. Hardware Assembly',
-  'Step 9. Tuning and Detailing',
-  'Step 10. Quality Check',
+  '1. Discovery & Design',
+  '2. Commitment & Portal Setup',
+  '3. Wood & Vision Lock-In',
+  '4. Raw Shell Creation',
+  '5. Shell Trueing & Torch Tune',
+  '6. Exterior Art & Finish',
+  '7. Edges & Snare Beds',
+  '8. Hardware & Assembly',
+  '9. Legacy Tuning & Media',
+  '10. Final QA, Packaging & Delivery',
 ];
 
+/**
+ * For time aggregation only.
+ * We just care about the keys; value is unused but kept for clarity.
+ * Includes BOTH old and new step keys for backwards compatibility.
+ */
 const stepWeights = {
-  woodPreparation: 0.05,
-  shellConstruction: 0.2,
-  fineTuning: 0.1,
-  shellExteriorFinish: 0.2,
-  bearingEdges: 0.1,
-  snareBedCutting: 0.1,
-  hardwareDrilling: 0.1,
-  hardwareAssembly: 0.05,
-  tuningAndDetailing: 0.05,
-  qualityCheck: 0.05,
+  // new schema
+  discoveryDesign: 1,
+  commitmentPortal: 1,
+  woodVisionLockIn: 1,
+  rawShellCreation: 1,
+  shellTrueingTorchTune: 1,
+  exteriorArtFinish: 1,
+  edgesSnareBeds: 1,
+  hardwareAssembly: 1,
+  legacyTuningMedia: 1,
+  finalQAPackagingDelivery: 1,
+
+  // legacy schema (older projects)
+  woodPreparation: 1,
+  shellConstruction: 1,
+  fineTuning: 1,
+  shellExteriorFinish: 1,
+  bearingEdges: 1,
+  snareBedCutting: 1,
+  hardwareDrilling: 1,
+  tuningDetailing: 1,
+  qualityCheck: 1,
+};
+
+/**
+ * Wrapper so ALL callers use the same aliasing that
+ * ManageProjectModal uses.
+ *
+ * calculateProjectProgress still expects the OLD step
+ * keys, so we map the new ones onto those names.
+ */
+const getWeightedProgressPct = (data) => {
+  if (!data) return 0;
+
+  const patched = {
+    ...data,
+    // 🔄 NEW 10-step keys take priority, fall back to legacy only if missing
+    woodPreparation: data.discoveryDesign || data.woodPreparation,
+    shellConstruction: data.commitmentPortal || data.shellConstruction,
+    fineTuning: data.woodVisionLockIn || data.fineTuning,
+    shellExteriorFinish: data.rawShellCreation || data.shellExteriorFinish,
+    bearingEdges: data.shellTrueingTorchTune || data.bearingEdges,
+    snareBedCutting: data.exteriorArtFinish || data.snareBedCutting,
+    hardwareDrilling: data.edgesSnareBeds || data.hardwareDrilling,
+    hardwareAssembly: data.hardwareAssembly,
+    tuningAndDetailing:
+      data.legacyTuningMedia || data.tuningAndDetailing || data.tuningDetailing,
+    qualityCheck:
+      data.finalQAPackagingDelivery || data.qualityCheck,
+  };
+
+  return calculateProjectProgress(patched);
 };
 
 const normalize = (str) =>
-  str?.toLowerCase().replace(/[^a-z0-9 ]/gi, '').trim().replace(/\s+/g, '-') || '';
+  str
+    ?.toLowerCase()
+    .replace(/[^a-z0-9 ]/gi, '')
+    .trim()
+    .replace(/\s+/g, '-') || '';
 
-/** Build a display identifier like "SL-004 · SoundLegend".
- *  Looks across common field names and de-dupes/cleans output. */
-const getIdentifier = (p) => {
+/* ---------- tiny helpers shared with Overview ---------- */
+const val = (...c) =>
+  c.find((v) => v !== undefined && v !== null && v !== '') ?? undefined;
+
+/** Build a display identifier like:
+ *   "SL-004 · SoundLegend · 14×6.5"
+ * falling back gracefully if some fields are missing.
+ */
+const getIdentifier = (p = {}) => {
   const serial =
-    p.serial ??
-    p.serialNumber ??
-    p.projectSerial ??
-    p.snareSerial ??
-    p.serialId ??
-    '';
+    val(
+      p.lineSerial, // canonical
+      p.serial,
+      p.serialNumber,
+      p.projectSerial,
+      p.snareSerial,
+      p.serialId
+    ) || '';
 
-  const lineRaw =
-    p.series ??
-    p.line ??
-    p.artisanLine ??
-    p.productLine ??
-    p.seriesLine ??
-    '';
+  const line =
+    val(
+      p.artisanLine, // canonical
+      p.series,
+      p.productLine,
+      p.seriesLine,
+      p.line
+    ) || '';
 
-  const line = typeof lineRaw === 'string' ? lineRaw : '';
+  const dia = val(p.width, p.diameter); // canonical width = diameter
+  const dep = val(p.shellDepth, p.depth); // canonical shellDepth = depth
+  const size = dia && dep ? ` · ${dia}×${dep}"` : '';
 
-  if (serial && line) return `${serial} · ${line}`;
-  if (serial) return serial;
-  if (line) return line;
-  return '—';
+  if (serial && line) return `${serial} · ${line}${size}`;
+  if (serial) return `${serial}${size}`;
+  if (line) return `${line}${size}`;
+  return size ? size.slice(3) : '—'; // strip leading " · "
 };
 
 const ManageProjects = () => {
@@ -79,14 +146,22 @@ const ManageProjects = () => {
   // sorting
   const [sort, setSort] = useState({ key: 'startDate', dir: 'desc' });
 
-  const getMillis = (ts) => {
-    if (!ts) return 0;
-    if (typeof ts?.seconds === 'number') return ts.seconds * 1000;
-    const d = new Date(ts);
-    return isNaN(d.getTime()) ? 0 : d.getTime();
+  const getMillis = (v) => {
+    if (!v) return 0;
+    try {
+      if (v.toDate) {
+        const d = v.toDate();
+        return d?.getTime?.() || 0;
+      }
+      if (typeof v.seconds === 'number') return v.seconds * 1000;
+      const d = new Date(v);
+      return Number.isNaN(d.getTime()) ? 0 : d.getTime();
+    } catch {
+      return 0;
+    }
   };
 
-  // numeric seconds for total time spent (used for sort)
+  // numeric seconds for total time spent (used for sort + display)
   const totalSecondsFromProject = (project) => {
     let total = 0;
     Object.keys(stepWeights).forEach((key) => {
@@ -95,7 +170,8 @@ const ManageProjects = () => {
         step.checklist.forEach((item) => {
           const v = item?.totalSeconds;
           if (typeof v === 'number') total += v;
-          else if (v?.seconds && typeof v.seconds === 'number') total += v.seconds;
+          else if (v?.seconds && typeof v.seconds === 'number')
+            total += v.seconds;
         });
       }
     });
@@ -104,21 +180,30 @@ const ManageProjects = () => {
 
   const projectValue = (p, key) => {
     switch (key) {
-      case 'customerName':     return (p.customerName || '').toLowerCase();
-      case 'identifier':       return getIdentifier(p).toLowerCase();
-      case 'startDate':        return getMillis(p.startDate);
+      case 'customerName':
+        return (p.customerName || '').toLowerCase();
+      case 'identifier':
+        return getIdentifier(p).toLowerCase();
+      case 'startDate':
+        return getMillis(p.startDate);
       case 'targetCompletion': {
-        // prefer explicit target; otherwise created + 35 days (fallback like UI)
-        const base = p.targetCompletion || p.startDate;
-        const ms = getMillis(base);
-        return p.targetCompletion ? ms : (ms ? ms + 35 * 24 * 60 * 60 * 1000 : 0);
+        // sort by explicit target if present; otherwise created + 35 days fallback
+        if (p.targetCompletion) return getMillis(p.targetCompletion);
+        const baseMs = getMillis(p.startDate);
+        return baseMs ? baseMs + 35 * 24 * 60 * 60 * 1000 : 0;
       }
-      case 'timeSpent':        return totalSecondsFromProject(p);
-      case 'currentPhase':     return p.currentPhase || '';
-      case 'expectedPhase':    return getExpectedPhase(p) || '';
-      case 'progress':         return Number(calculateProjectProgress(p)) || 0;
-      case 'status':           return determineStatus(p) || '';
-      default:                 return '';
+      case 'timeSpent':
+        return totalSecondsFromProject(p);
+      case 'currentPhase':
+        return p.currentPhase || '';
+      case 'expectedPhase':
+        return getExpectedPhase(p) || '';
+      case 'progress':
+        return Number(getWeightedProgressPct(p)) || 0;
+      case 'status':
+        return determineStatus(p) || '';
+      default:
+        return '';
     }
   };
 
@@ -128,44 +213,84 @@ const ManageProjects = () => {
     return [...list].sort((a, b) => {
       const va = projectValue(a, key);
       const vb = projectValue(b, key);
-      if (typeof va === 'number' && typeof vb === 'number') return (va - vb) * mul;
-      return String(va).localeCompare(String(vb), undefined, { numeric: true, sensitivity: 'base' }) * mul;
+      if (typeof va === 'number' && typeof vb === 'number')
+        return (va - vb) * mul;
+      return (
+        String(va).localeCompare(String(vb), undefined, {
+          numeric: true,
+          sensitivity: 'base',
+        }) * mul
+      );
     });
   };
 
   const toggleSort = (key) => {
-    setSort((s) => (s.key === key ? { key, dir: s.dir === 'asc' ? 'desc' : 'asc' } : { key, dir: 'asc' }));
+    setSort((s) =>
+      s.key === key
+        ? { key, dir: s.dir === 'asc' ? 'desc' : 'asc' }
+        : { key, dir: 'asc' }
+    );
   };
-  const renderSort = (key) => (sort.key === key ? (sort.dir === 'asc' ? '▲' : '▼') : '↕');
+  const renderSort = (key) =>
+    sort.key === key ? (sort.dir === 'asc' ? '▲' : '▼') : '↕';
 
-  const formatDate = (timestamp) => {
-    if (!timestamp) return 'N/A';
+  const formatDate = (value) => {
+    if (!value) return 'N/A';
     let date;
-    if (timestamp?.seconds) {
-      date = new Date(timestamp.seconds * 1000);
-    } else if (typeof timestamp === 'string') {
-      date = new Date(timestamp);
-      if (isNaN(date.getTime())) return 'Invalid';
-    } else {
-      return 'Invalid';
+    try {
+      if (value.toDate) {
+        date = value.toDate();
+      } else if (typeof value.seconds === 'number') {
+        date = new Date(value.seconds * 1000);
+      } else if (typeof value === 'string') {
+        const parsed = new Date(value);
+        if (Number.isNaN(parsed.getTime())) return 'N/A';
+        date = parsed;
+      } else if (value instanceof Date) {
+        date = value;
+      } else {
+        return 'N/A';
+      }
+      return date.toLocaleDateString();
+    } catch {
+      return 'N/A';
     }
-    return date.toLocaleDateString();
   };
 
+  /**
+   * Expected phase based on elapsed time between start and target date.
+   * Uses the NEW 10-step buildPhases timeline.
+   */
   const getExpectedPhase = (project) => {
     let createdAt = null;
-    if (project.startDate?.seconds) {
+
+    // createdAt / startDate
+    if (project.startDate?.toDate) {
+      createdAt = project.startDate.toDate();
+    } else if (typeof project.startDate?.seconds === 'number') {
       createdAt = new Date(project.startDate.seconds * 1000);
     } else if (typeof project.startDate === 'string') {
       const parsed = new Date(project.startDate);
-      if (!isNaN(parsed)) createdAt = parsed;
+      if (!Number.isNaN(parsed.getTime())) createdAt = parsed;
     }
+
     if (!createdAt) return 'Unknown';
 
+    // explicit target if present, else fallback 35-day window
     let target = null;
-    if (project.targetCompletion?.seconds) {
-      target = new Date(project.targetCompletion.seconds * 1000);
-    } else {
+    const tc = project.targetCompletion;
+    if (tc) {
+      if (tc.toDate) target = tc.toDate();
+      else if (typeof tc.seconds === 'number')
+        target = new Date(tc.seconds * 1000);
+      else if (typeof tc === 'string') {
+        const parsed = new Date(tc);
+        if (!Number.isNaN(parsed.getTime())) target = parsed;
+      } else if (tc instanceof Date) {
+        target = tc;
+      }
+    }
+    if (!target) {
       target = new Date(createdAt);
       target.setDate(target.getDate() + 35);
     }
@@ -176,49 +301,105 @@ const ManageProjects = () => {
     if (totalDays <= 0 || elapsedDays < 0) return 'Unknown';
 
     const progressPercent = elapsedDays / totalDays;
-    const index = Math.min(buildPhases.length - 1, Math.floor(progressPercent * buildPhases.length));
+    const index = Math.min(
+      buildPhases.length - 1,
+      Math.floor(progressPercent * buildPhases.length)
+    );
     return buildPhases[index] || 'Unknown';
   };
 
+  /**
+   * Status bucket based on how far actual phase is from expected phase.
+   */
   const determineStatus = (project) => {
     const expectedPhase = getExpectedPhase(project);
-    const expectedIndex = buildPhases.findIndex((p) => normalize(p) === normalize(expectedPhase));
-    const actualIndex = buildPhases.findIndex((p) => normalize(p) === normalize(project.currentPhase));
+    const expectedIndex = buildPhases.findIndex(
+      (p) => normalize(p) === normalize(expectedPhase)
+    );
+
+    let actualPhaseLabel = project.currentPhase || '';
+
+    // treat "All Steps Complete" as final step
+    if (/all steps complete/i.test(actualPhaseLabel)) {
+      actualPhaseLabel = buildPhases[buildPhases.length - 1];
+    }
+
+    const actualIndex = buildPhases.findIndex(
+      (p) => normalize(p) === normalize(actualPhaseLabel)
+    );
+
     if (expectedIndex === -1 || actualIndex === -1) return 'Unknown';
 
     const delta = actualIndex - expectedIndex;
+
     if (delta >= 2) return 'Ahead of Schedule';
     if (delta === 1 || delta === 0) return 'On Pace';
     if (delta === -1) return 'Slightly Behind';
     return 'Behind Schedule';
   };
 
-  const formatTargetCompletion = (timestamp) => {
-    if (!timestamp) return 'N/A';
-    let date;
-    if (timestamp?.seconds) {
-      date = new Date(timestamp.seconds * 1000);
-    } else if (typeof timestamp === 'string') {
-      date = new Date(timestamp);
-      if (isNaN(date)) return 'Invalid';
-    } else {
-      return 'Invalid';
+  /** Show targetCompletion if set; otherwise show startDate + 35 days. */
+  const formatTargetCompletion = (project) => {
+    if (!project) return 'N/A';
+    let date = null;
+
+    const tc = project.targetCompletion;
+    if (tc) {
+      if (tc.toDate) {
+        date = tc.toDate();
+      } else if (typeof tc.seconds === 'number') {
+        date = new Date(tc.seconds * 1000);
+      } else if (typeof tc === 'string') {
+        const parsed = new Date(tc);
+        if (!Number.isNaN(parsed.getTime())) date = parsed;
+      } else if (tc instanceof Date) {
+        date = tc;
+      }
     }
-    date.setDate(date.getDate() + 35); // fallback for display
+
+    // fallback: 35 days after startDate
+    if (!date) {
+      let base = null;
+      const sd = project.startDate;
+      if (sd?.toDate) base = sd.toDate();
+      else if (typeof sd?.seconds === 'number')
+        base = new Date(sd.seconds * 1000);
+      else if (typeof sd === 'string') {
+        const parsed = new Date(sd);
+        if (!Number.isNaN(parsed.getTime())) base = parsed;
+      }
+
+      if (!base) return 'N/A';
+      date = new Date(base);
+      date.setDate(date.getDate() + 35);
+    }
+
     return date.toLocaleDateString();
   };
 
   const isOverdue = (project) => {
-    const phaseIndex = buildPhases.indexOf(project.currentPhase);
-    if (!project.startDate?.seconds) return false;
-    const phaseStartDate = new Date(project.startDate.seconds * 1000);
-    phaseStartDate.setDate(phaseStartDate.getDate() + phaseIndex * 2);
-    return new Date() > phaseStartDate;
+    // simple heuristic: if today is past target date and progress < 100
+    let target = null;
+    const tc = project.targetCompletion;
+    if (tc) {
+      if (tc.toDate) target = tc.toDate();
+      else if (typeof tc.seconds === 'number')
+        target = new Date(tc.seconds * 1000);
+      else if (typeof tc === 'string') {
+        const parsed = new Date(tc);
+        if (!Number.isNaN(parsed.getTime())) target = parsed;
+      } else if (tc instanceof Date) {
+        target = tc;
+      }
+    }
+    if (!target) return false;
+    if (getWeightedProgressPct(project) >= 100) return false;
+    return new Date() > target;
   };
 
   // completed logic + filters
   const isCompleted = (p) => {
-    const pct = calculateProjectProgress(p);
+    const pct = getWeightedProgressPct(p);
     const finishedFlag =
       p?.status?.toLowerCase?.() === 'finished' ||
       p?.allStepsComplete === true ||
@@ -244,7 +425,10 @@ const ManageProjects = () => {
   useEffect(() => {
     const q = query(collection(db, 'projects'), orderBy('startDate', 'desc'));
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      const liveProjects = snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
+      const liveProjects = snapshot.docs.map((d) => ({
+        id: d.id,
+        ...d.data(),
+      }));
       setProjects(liveProjects);
     });
     return () => unsubscribe();
@@ -254,7 +438,7 @@ const ManageProjects = () => {
   useEffect(() => {
     const base = applyFilters(projects);
     setFilteredProjects(sortProjects(base));
-  }, [projects, filter, showCompleted, sort]); // include sort + showCompleted
+  }, [projects, filter, showCompleted, sort]);
 
   const openModal = (project) => {
     setSelectedProject(project);
@@ -270,38 +454,74 @@ const ManageProjects = () => {
     if (!selectedProject) return;
     const projectRef = doc(db, 'projects', selectedProject.id);
     await updateDoc(projectRef, updatedData);
-    const updated = { ...selectedProject, ...updatedData };
+    const updated = {
+      ...selectedProject,
+      ...updatedData,
+      id: selectedProject.id,
+    };
     handleLiveUpdate(updated);
     closeModal();
   };
 
   const handleLiveUpdate = (updatedProject) => {
-    setProjects((prev) => prev.map((p) => (p.id === updatedProject.id ? updatedProject : p)));
-    setFilteredProjects((prev) => prev.map((p) => (p.id === updatedProject.id ? updatedProject : p)));
-    setSelectedProject((prev) => (prev?.id === updatedProject.id ? updatedProject : prev));
+    setProjects((prev) =>
+      prev.map((p) => (p.id === updatedProject.id ? updatedProject : p))
+    );
+    setFilteredProjects((prev) =>
+      prev.map((p) => (p.id === updatedProject.id ? updatedProject : p))
+    );
+    setSelectedProject((prev) =>
+      prev?.id === updatedProject.id ? updatedProject : prev
+    );
   };
 
   const calculateTotalProjectTime = (project) => {
-    let total = 0;
-    Object.keys(stepWeights).forEach((key) => {
-      const step = project[key];
-      if (step?.checklist?.length) {
-        step.checklist.forEach((item) => {
-          const val = item.totalSeconds;
-          if (typeof val === 'number') total += val;
-          else if (val?.seconds && typeof val.seconds === 'number') total += val.seconds;
-        });
-      }
-    });
+    const total = totalSecondsFromProject(project);
     const hrs = Math.floor(total / 3600);
     const mins = Math.floor((total % 3600) / 60);
     const secs = total % 60;
-    return `${hrs}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    return `${hrs}:${mins.toString().padStart(2, '0')}:${secs
+      .toString()
+      .padStart(2, '0')}`;
   };
+
+  /* ---------- summary metrics for the header ---------- */
+  const activeProjects = projects.filter((p) => !isCompleted(p));
+  const aheadCount = activeProjects.filter(
+    (p) => determineStatus(p) === 'Ahead of Schedule'
+  ).length;
+  const onPaceCount = activeProjects.filter(
+    (p) => determineStatus(p) === 'On Pace'
+  ).length;
+  const slightlyBehindCount = activeProjects.filter(
+    (p) => determineStatus(p) === 'Slightly Behind'
+  ).length;
+  const behindCount = activeProjects.filter(
+    (p) => determineStatus(p) === 'Behind Schedule'
+  ).length;
 
   return (
     <div className="manage-projects">
-      <h2>Manage Projects</h2>
+      <div className="manage-projects-header">
+        <h2>Manage Projects</h2>
+        <div className="projects-summary">
+          <div className="summary-pill summary-pill-primary">
+            Active: {activeProjects.length}
+          </div>
+          <div className="summary-pill summary-pill-ahead">
+            Ahead: {aheadCount}
+          </div>
+          <div className="summary-pill summary-pill-on">
+            On Pace: {onPaceCount}
+          </div>
+          <div className="summary-pill summary-pill-slight">
+            Slightly Behind: {slightlyBehindCount}
+          </div>
+          <div className="summary-pill summary-pill-behind">
+            Behind: {behindCount}
+          </div>
+        </div>
+      </div>
 
       <div className="filters">
         <label>
@@ -313,86 +533,137 @@ const ManageProjects = () => {
                 {phase}
               </option>
             ))}
-            <option value="overdue">Overdue</option>
+            <option value="overdue">Overdue (past target date)</option>
           </select>
         </label>
 
-        <label style={{ marginLeft: 12 }}>
+        <label className="show-completed-label">
           <input
             type="checkbox"
             checked={showCompleted}
             onChange={(e) => setShowCompleted(e.target.checked)}
-          />{' '}
+          />
           Show completed
         </label>
       </div>
 
-      <table className="projects-table">
-        <thead>
-          <tr>
-            <th className="sortable" onClick={() => toggleSort('customerName')}>
-              Customer Name <span className="sort-indicator">{renderSort('customerName')}</span>
-            </th>
-            <th className="sortable" onClick={() => toggleSort('identifier')}>
-              Identifier <span className="sort-indicator">{renderSort('identifier')}</span>
-            </th>
-            <th className="sortable" onClick={() => toggleSort('startDate')}>
-              Created At <span className="sort-indicator">{renderSort('startDate')}</span>
-            </th>
-            <th className="sortable" onClick={() => toggleSort('targetCompletion')}>
-              Target Completion <span className="sort-indicator">{renderSort('targetCompletion')}</span>
-            </th>
-            <th className="sortable" onClick={() => toggleSort('timeSpent')}>
-              Total Time Spent <span className="sort-indicator">{renderSort('timeSpent')}</span>
-            </th>
-            <th className="sortable" onClick={() => toggleSort('currentPhase')}>
-              Current Phase <span className="sort-indicator">{renderSort('currentPhase')}</span>
-            </th>
-            <th className="sortable" onClick={() => toggleSort('expectedPhase')}>
-              Expected On Pace (EOP) <span className="sort-indicator">{renderSort('expectedPhase')}</span>
-            </th>
-            <th className="sortable" onClick={() => toggleSort('progress')}>
-              Progress <span className="sort-indicator">{renderSort('progress')}</span>
-            </th>
-            <th className="sortable" onClick={() => toggleSort('status')}>
-              Status <span className="sort-indicator">{renderSort('status')}</span>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredProjects.map((project) => (
-            <tr
-              key={project.id}
-              onClick={() => openModal(project)}
-              className={`status-row ${normalize(determineStatus(project))}`}
-            >
-              <td>{project.customerName || 'N/A'}</td>
-              <td>{getIdentifier(project)}</td>
-              <td>{formatDate(project.startDate)}</td>
-              <td>{formatTargetCompletion(project.startDate)}</td>
-              <td>{calculateTotalProjectTime(project)}</td>
-              <td>{project.currentPhase}</td>
-              <td>{getExpectedPhase(project)}</td>
-              <td>
-                <div className="project-progress-bar">
-                  <div className="progress-bar-wrapper">
-                    <div className="progress-bar-track">
-                      <div
-                        className="progress-bar-fill"
-                        style={{ width: `${calculateProjectProgress(project)}%` }}
-                      />
-                    </div>
-                  </div>
-                  <span className="progress-percent">
-                    {calculateProjectProgress(project)}%
-                  </span>
-                </div>
-              </td>
-              <td>{determineStatus(project)}</td>
+      {/* Table */}
+      <div className="projects-table-wrapper">
+        <table className="projects-table">
+          <thead>
+            <tr>
+              <th className="sortable" onClick={() => toggleSort('customerName')}>
+                Customer Name{' '}
+                <span className="sort-indicator">
+                  {renderSort('customerName')}
+                </span>
+              </th>
+              <th className="sortable" onClick={() => toggleSort('identifier')}>
+                Identifier{' '}
+                <span className="sort-indicator">
+                  {renderSort('identifier')}
+                </span>
+              </th>
+              <th className="sortable" onClick={() => toggleSort('startDate')}>
+                Created At{' '}
+                <span className="sort-indicator">
+                  {renderSort('startDate')}
+                </span>
+              </th>
+              <th
+                className="sortable"
+                onClick={() => toggleSort('targetCompletion')}
+              >
+                Target Completion{' '}
+                <span className="sort-indicator">
+                  {renderSort('targetCompletion')}
+                </span>
+              </th>
+              <th className="sortable" onClick={() => toggleSort('timeSpent')}>
+                Total Time Spent{' '}
+                <span className="sort-indicator">
+                  {renderSort('timeSpent')}
+                </span>
+              </th>
+              <th
+                className="sortable"
+                onClick={() => toggleSort('currentPhase')}
+              >
+                Current Phase{' '}
+                <span className="sort-indicator">
+                  {renderSort('currentPhase')}
+                </span>
+              </th>
+              <th
+                className="sortable"
+                onClick={() => toggleSort('expectedPhase')}
+              >
+                Expected On Pace (EOP){' '}
+                <span className="sort-indicator">
+                  {renderSort('expectedPhase')}
+                </span>
+              </th>
+              <th className="sortable" onClick={() => toggleSort('progress')}>
+                Progress{' '}
+                <span className="sort-indicator">
+                  {renderSort('progress')}
+                </span>
+              </th>
+              <th className="sortable" onClick={() => toggleSort('status')}>
+                Status{' '}
+                <span className="sort-indicator">
+                  {renderSort('status')}
+                </span>
+              </th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {filteredProjects.map((project) => {
+              const statusLabel = determineStatus(project);
+              const statusClass = normalize(statusLabel); // e.g., "on-pace"
+              const progressPct = getWeightedProgressPct(project);
+
+              return (
+                <tr
+                  key={project.id}
+                  onClick={() => openModal(project)}
+                  className={`status-row ${statusClass}`}
+                >
+                  <td>{project.customerName || 'N/A'}</td>
+                  <td>{getIdentifier(project)}</td>
+                  <td>{formatDate(project.startDate)}</td>
+                  <td>{formatTargetCompletion(project)}</td>
+                  <td>{calculateTotalProjectTime(project)}</td>
+                  <td>{project.currentPhase || '—'}</td>
+                  <td>{getExpectedPhase(project)}</td>
+                  <td>
+                    <div className="project-progress-bar">
+                      <div className="progress-bar-wrapper">
+                        <div className="progress-bar-track">
+                          <div
+                            className="progress-bar-fill"
+                            style={{
+                              width: `${progressPct}%`,
+                            }}
+                          />
+                        </div>
+                      </div>
+                      <span className="progress-percent">
+                        {progressPct}%
+                      </span>
+                    </div>
+                  </td>
+                  <td>
+                    <span className={`status-pill status-pill-${statusClass}`}>
+                      {statusLabel}
+                    </span>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
 
       {isModalOpen && (
         <ManageProjectModal
