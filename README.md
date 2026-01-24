@@ -1,70 +1,275 @@
-# Getting Started with Create React App
+# Ober Artisan Drums
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<br>
 
-## Available Scripts
+## Overview
 
-In the project directory, you can run:
+**Ober Artisan Drums** is a full-stack e-commerce and project-tracking platform for handcrafted stave snare drums.
 
-### `npm start`
+It powers both the **public brand experience** and the **internal workshop systems**, including:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Public storefront for **Heritage**, **Feuzøn Hybrid**, and **SoundLegend** series
+- Polished **product browsing + checkout** experience
+- Admin dashboard for **orders, support, SoundLegend commissions, and risk**
+- Customer-facing **SoundLegend Portal** where clients follow their drum build
+- Internal **project workflow engine** mirroring real workshop build phases
+- Technical **stave cut calculator** used for accurate shell geometry
+- NFC authentication groundwork for future product verification
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+It connects craftsmanship, storytelling, and technology into a single ecosystem.
 
-### `npm test`
+<br>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## MVP
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- _Public storefront with detailed drum + merch pages_
+- _Shopping cart + Stripe checkout_
+- _Admin dashboard for orders / submissions / support_
+- _Project build workflow engine with per-step checklists_
+- _Customer SoundLegend Portal (progress, attachments, info, support)_
+- _Stave geometry calculator_
+- _Auth with admin + SoundLegend roles_
+- _Hosted on Firebase + Cloud Functions_
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<br>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## Goals
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- _Treat each drum as both a precision instrument **and** a personal story_
+- _Give customers real transparency into the build process_
+- _Give the shop an actual operational cockpit, not spreadsheets_
+- _Keep stack lean and maintainable (React + Firebase + Stripe)_
+- _Mirror real artisan workflow in software — not force software onto craft_
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<br>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Libraries & Dependencies
 
-## Learn More
+| Library / Service   | Purpose                                                                 |
+|---------------------|-------------------------------------------------------------------------|
+| React               | Front-end UI                                                           |
+| Vite                | Build tooling                                                          |
+| React Router        | Client routing                                                         |
+| Firebase Auth       | Authentication + roles                                                 |
+| Firestore           | Orders, projects, SoundLegend data                                     |
+| Firebase Storage    | Images, PDFs, media files                                              |
+| Cloud Functions     | Secure backend logic                                                   |
+| Firebase Hosting    | Deployment                                                             |
+| Stripe              | Payments + checkout                                                    |
+| Framer Motion       | UI polish                                                              |
+| Lucide / FontAwesome| Icons                                                                  |
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<br>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## 🎛 UI — Screens
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+**Storefront – Drum Lineup**  
+![Storefront](https://i.imgur.com/Oa4FR3t.png)
 
-### Analyzing the Bundle Size
+<br>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+**Our Craft – Process Story**  
+![Our Craft](https://i.imgur.com/0XUo2oI.png)
 
-### Making a Progressive Web App
+<br>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+**Drum Product Detail**  
+![Product Detail](https://i.imgur.com/EwyJvj2.png)
 
-### Advanced Configuration
+<br>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+**Cart**  
+![Cart](https://i.imgur.com/Zn56ao8.png)
 
-### Deployment
+<br>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+**Checkout**  
+![Checkout](https://i.imgur.com/vcs4bdJ.png)
 
-### `npm run build` fails to minify
+<br>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**Admin Dashboard**  
+![Admin](https://i.imgur.com/qXto6Rq.png)
+
+<br>
+
+**Stave Calculator**  
+![Calculator](https://i.imgur.com/z9uIHUI.png)
+
+<br>
+
+**SoundLegend Portal – Media & Attachments**  
+![Portal Media](https://i.imgur.com/iES5RpN.png)
+
+<br>
+
+**SoundLegend Portal – Project Progress**  
+![Portal Progress](https://i.imgur.com/pu73aBU.png)
+
+<br>
+
+---
+
+## Client Architecture
+
+~~~text
+src
+|__ assets/
+|   |__ images/
+|   |__ logos/
+|
+|__ lib/
+|   |__ firebaseClient.js
+|   |__ stripeClient.js
+|
+|__ components/
+|   |__ NavBar/
+|   |__ Storefront/
+|   |__ ProductDetail/
+|   |__ Cart/
+|   |__ Checkout/
+|
+|   |__ Admin/
+|   |   |__ AdminDashboard.js
+|   |   |__ ManageOrders.js
+|   |   |__ ManageProjects.js
+|   |   |__ ManageProjectModal.js
+|   |   |__ ViewOrderModal.js
+|   |   |__ ViewSoundlegendModal.js
+|
+|   |__ SoundLegendPortal/
+|       |__ ProjectDetailPage.js
+|       |__ ProjectProgress.js
+|       |__ ScopeOfWork.js
+|       |__ Attachments.js
+|       |__ CustomerInfo.js
+|       |__ Billing.js
+|       |__ PrioritySupport.js
+|
+|__ tools/
+|   |__ StaveCalculator.js
+|   |__ VerifyDrum.js
+|
+|__ utils/
+|   |__ deriveBuildProgress.ts
+|   |__ statusConfig.js
+|
+|__ pages/
+|__ main.jsx
+~~~
+
+<br>
+
+---
+
+## ⭐ Code Showcase
+
+A cornerstone of Ober Artisan Drums is the **Project Build Progress Engine**.
+
+Each custom SoundLegend drum is stored in Firestore with deeply structured data:
+build steps, checklists, timers, media, and metadata.  
+To turn that into a meaningful experience, the app derives:
+
+- ordered build stages  
+- completion percentage  
+- total hours logged  
+- progress bar state  
+
+This is what powers the customer SoundLegend portal’s timeline.
+
+~~~ts
+// utils/deriveBuildProgress.ts
+
+const STEP_KEYS = [
+  "woodPreparation",
+  "rawShellCreation",
+  "shellExteriorFinish",
+  "hardwareAssembly",
+  "tuningDetailing",
+  "qualityCheck",
+  "finalQAPackagingDelivery"
+];
+
+export function deriveBuildProgress(project) {
+  const phases = STEP_KEYS.map((key, index) => {
+    const step = project[key];
+    const tasks = step?.checklist ?? [];
+
+    const totalTasks = tasks.length;
+    const completed = tasks.filter(t => t.completed).length;
+
+    const seconds = tasks.reduce(
+      (sum, t) => sum + (t.totalSeconds ?? 0),
+      0
+    );
+
+    return {
+      id: key,
+      label: step?.label ?? `Step ${index + 1}`,
+      order: step?.order ?? index + 1,
+      totalTasks,
+      completedTasks: completed,
+      progressPercent: totalTasks
+        ? Math.round((completed / totalTasks) * 100)
+        : 0,
+      hoursLogged: Number((seconds / 3600).toFixed(1))
+    };
+  }).sort((a, b) => a.order - b.order);
+
+  const progressPercent =
+    phases.length > 0
+      ? Math.round(
+          phases.reduce((s, p) => s + p.progressPercent, 0) /
+            phases.length
+        )
+      : 0;
+
+  return {
+    phases,
+    stepsComplete: phases.filter(p => p.progressPercent === 100).length,
+    stepsTotal: phases.length,
+    progressPercent,
+    hoursLogged: phases.reduce((s, p) => s + p.hoursLogged, 0)
+  };
+}
+~~~
+
+This system:
+
+- keeps admin tools reliable  
+- keeps customer experience transparent  
+- mirrors real physical shop workflow  
+
+It turns a physical craft into a digital journey.
+
+<br>
+
+---
+
+## Code Issues & Resolutions
+
+- **Issue:** Early project docs were inconsistent, breaking the portal  
+  **Fix:** Normalized schema + defensive progress derivation
+
+- **Issue:** Large media files slowed portal  
+  **Fix:** previews, caching, and customer-visibility toggles
+
+<br>
+
+---
+
+## Post-MVP
+
+- NFC authenticated ownership pages
+- Public “Legacy Vault” drum profiles
+- Better analytics for build timing + forecasting
+- Stripe billing portal + subscriptions
+- Customer ↔️ Artisan inline comment system
