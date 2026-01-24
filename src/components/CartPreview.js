@@ -6,7 +6,7 @@ import { db } from '../firebaseConfig';
 import { doc, getDoc } from 'firebase/firestore';
 import './CartPreview.css';
 
-const FREE_THRESHOLD = 75; // $75+
+const FREE_THRESHOLD = 50; // $50+
 const SHIPPING_COST = 9.99; // $9.99 flat under threshold
 const formatMoney = (n) => `$${Number(n || 0).toFixed(2)}`;
 
@@ -236,14 +236,14 @@ const CartPreview = ({ onClose, closeMenu }) => {
             <div className="cart-shipping-preview">
               <div className="ship-nudge-inline">{freeMsg}</div>
               <div className="ship-note-inline">
-                * Free shipping on orders over $75 (contiguous U.S. only)
+                * Free shipping on orders over $50 (contiguous U.S. only)
               </div>
             </div>
           )}
           {qualifiesForFree && (
             <div className="cart-shipping-preview">
               <div className="ship-note-inline">
-                * Free shipping on orders over $75 (contiguous U.S. only)
+                * Free shipping on orders over $50 (contiguous U.S. only)
               </div>
             </div>
           )}
