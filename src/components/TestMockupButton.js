@@ -16,7 +16,7 @@ const TestMockupButton = () => {
         hardware: 'black nickel',
         diameter: '14',
         depth: '6.5',
-        docId: 'test-mockup-doc', // <-- must match a real doc
+        docId: 'test-mockup-doc',
       });
       console.log('✅ Image generated at:', result.data.url);
     } catch (err) {
