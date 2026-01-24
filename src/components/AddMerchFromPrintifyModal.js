@@ -89,7 +89,7 @@ export default function AddMerchFromPrintifyModal({ onClose, onAdded }) {
         // margins now come from Printify; we’re not applying an extra % here
         marginPercent: 0,
         active,
-        includeVariantIds, // <-- tell backend which variants to ingest
+        includeVariantIds,
       });
 
       onAdded?.(merchProduct);

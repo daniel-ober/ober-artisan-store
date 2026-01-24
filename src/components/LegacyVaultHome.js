@@ -70,7 +70,7 @@ function resolvePublicFields(raw) {
 }
 const stripHtml = (s = '') => s.replace(/<[^>]*>/g, '').trim();
 
-/* 360 viewer (unchanged) */
+/* 360 viewer */
 function InlineFrame360Light({
   totalFrames = 392, basePath = '/soundlegend360/med', prefix = 'frame_', pad = 3, ext = 'webp',
   fps = 24, stride = 4, prefetch = 6, dragSensitivity = 0.22,
