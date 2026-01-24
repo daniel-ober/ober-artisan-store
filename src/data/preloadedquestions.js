@@ -129,7 +129,7 @@ const preloadedQuestions = {
     },
     {
       question: "Do you offer free shipping?",
-      answer: "We offer free shipping within the continental U.S. for orders over $300. International shipping is available at additional cost."
+      answer: "We offer free shipping within the continental U.S. for orders over $50. International shipping is available at additional cost."
     }
   ],
   contact: [
@@ -143,7 +143,7 @@ const preloadedQuestions = {
     },
     {
       question: "Do you have a direct customer service phone number?",
-      answer: "Yes, our customer service line is available at 1-800-555-DRUM during business hours."
+      answer: "Yes, our customer service line is available at 1-615-445-0220 during business hours."
     },
     {
       question: "How can I reach you after business hours?",

@@ -17,7 +17,7 @@ const API_BASE_URL =
   'https://us-central1-danoberartisandrums.cloudfunctions.net/api';
 
 /* Shipping rules */
-const FREE_THRESHOLD = 75;
+const FREE_THRESHOLD = 50;
 const SHIPPING_COST = 9.99;
 const money = (n) => `$${Number(n || 0).toFixed(2)}`;
 
@@ -492,7 +492,7 @@ const Cart = () => {
             </div>
 
             <div className="summary-note">
-              * Free shipping on orders over $75 (contiguous U.S. only)
+              * Free shipping on orders over $50 (contiguous U.S. only)
             </div>
 
             <div className="summary-line total">
