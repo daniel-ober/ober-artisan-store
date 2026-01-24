@@ -1,9 +1,8 @@
-// src/components/SoundLegendPortal/SoundLegendPortal.js
-
 import React, { useEffect, useMemo, useState } from 'react';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
 import { useAuth } from '../../context/AuthContext';
+import { usePortalUser } from '../../hooks/usePortalUser';
 
 import ProjectProgress from './ProjectProgress';
 import ScopeOfWork from './ScopeOfWork';
@@ -34,63 +33,174 @@ function tsToMillis(v) {
   }
 }
 
-const Tabs = ({ tabs, current, onChange, rightSlot }) => (
-  <div className="slp-tabs">
-    <div
-      className="slp-tablist"
-      role="tablist"
-      aria-label="SoundLegend sections"
-    >
-      {tabs.map((t) => (
-        <button
-          key={t.key}
-          role="tab"
-          aria-selected={current === t.key}
-          className={`slp-tab ${current === t.key ? 'active' : ''}`}
-          onClick={() => onChange(t.key)}
-        >
-          {t.label}
-        </button>
-      ))}
+/* -------------------- custom project picker -------------------- */
+
+const ProjectPicker = ({ projects, selectedId, onChange }) => {
+  const [open, setOpen] = useState(false);
+
+  if (!projects || projects.length <= 1) return null;
+
+  const current =
+    projects.find((p) => p.id === selectedId) || projects[0] || null;
+
+  const labelFor = (p) => {
+    const base =
+      p.lineSerial || p.globalSerial || p.artisanLine || p.id || 'Project';
+    return base; // serial only, no diameter/depth
+  };
+
+  const handleSelect = (id) => {
+    onChange(id);
+    setOpen(false);
+  };
+
+  return (
+    <div className="slp-picker-shell">
+      <button
+        type="button"
+        className="slp-picker slp-picker-button slp-picker-soundlegend"
+        onClick={() => setOpen((o) => !o)}
+      >
+        {current ? labelFor(current) : 'Select your project'}
+      </button>
+
+      {open && (
+        <div className="slp-picker-menu" role="listbox">
+          {projects.map((p) => (
+            <button
+              key={p.id}
+              type="button"
+              className={`slp-picker-item ${
+                p.id === selectedId ? 'is-active' : ''
+              }`}
+              onClick={() => handleSelect(p.id)}
+              role="option"
+              aria-selected={p.id === selectedId}
+            >
+              {labelFor(p)}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
-    <div className="slp-tab-right">{rightSlot}</div>
-  </div>
-);
+  );
+};
+
+/* -------------------- tabs w/ picker on the left -------------------- */
+
+const Tabs = ({
+  tabs,
+  current,
+  onChange,
+  projects,
+  selectedId,
+  onSelectProject,
+  isSoundLegendProject,
+}) => {
+  const slOnlyKeys = new Set(['vault', 'media']);
+
+  return (
+    <div className="slp-tabs">
+      <div className="slp-tabs-left">
+        <ProjectPicker
+          projects={projects}
+          selectedId={selectedId}
+          onChange={onSelectProject}
+        />
+      </div>
+
+      <div
+        className="slp-tablist slp-tabs-buttons"
+        role="tablist"
+        aria-label="SoundLegend sections"
+      >
+        {tabs.map((t) => {
+          const isSlOnly = slOnlyKeys.has(t.key);
+          const disabled = isSlOnly && !isSoundLegendProject;
+
+          const tooltipText =
+            t.key === 'vault'
+              ? 'Vault preferences are part of the SoundLegend experience.'
+              : t.key === 'media'
+              ? 'Legacy media is part of the SoundLegend experience.'
+              : '';
+
+          return (
+            <button
+              key={t.key}
+              role="tab"
+              aria-selected={current === t.key}
+              className={[
+                'slp-tab',
+                current === t.key ? 'active' : '',
+                disabled ? 'slp-tab-disabled' : '',
+              ]
+                .filter(Boolean)
+                .join(' ')}
+              onClick={() => {
+                if (disabled) return;
+                onChange(t.key);
+              }}
+              type="button"
+            >
+              <span>{t.label}</span>
+              {disabled && tooltipText && (
+                <span className="slp-tab-tooltip">{tooltipText}</span>
+              )}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
 
 /* -------------------- main portal -------------------- */
 
 const SoundLegendPortal = () => {
-  const { user, isAdmin } = useAuth();
+  const { isAdmin } = useAuth();
+  const { portalUser, loadingPortalUser, isImpersonating } = usePortalUser();
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true); // loading projects/orders
   const [projects, setProjects] = useState([]);
   const [selectedId, setSelectedId] = useState('');
   const [orders, setOrders] = useState([]);
   const [tab, setTab] = useState('progress');
 
-  // Load projects for this user
+  /* ---------- LOAD PROJECTS FOR PORTAL USER (ownerUid OR userId OR email) ---------- */
   useEffect(() => {
-    if (!user) return;
+    if (!portalUser || loadingPortalUser) return;
 
     let cancelled = false;
 
     const run = async () => {
+      setLoading(true);
       try {
-        // Primary: ownerUid
-        let qProj = query(
-          collection(db, 'projects'),
-          where('ownerUid', '==', user.uid)
-        );
-        let snap = await getDocs(qProj);
+        const ownerUid = portalUser.uid || portalUser.id;
+        const colRef = collection(db, 'projects');
 
-        // Fallback: customer.emailLower
-        if (snap.empty && user.email) {
-          const emailLower = user.email.trim().toLowerCase();
-          qProj = query(
-            collection(db, 'projects'),
+        let snap = { empty: true, docs: [] };
+
+        // 1) Primary: ownerUid
+        if (ownerUid) {
+          const qByOwner = query(colRef, where('ownerUid', '==', ownerUid));
+          snap = await getDocs(qByOwner);
+        }
+
+        // 2) Fallback: userId (what AttachUserResourcesTool writes)
+        if (snap.empty && ownerUid) {
+          const qByUserId = query(colRef, where('userId', '==', ownerUid));
+          snap = await getDocs(qByUserId);
+        }
+
+        // 3) Fallback: customer.emailLower
+        if (snap.empty && portalUser.email) {
+          const emailLower = portalUser.email.trim().toLowerCase();
+          const qByEmail = query(
+            colRef,
             where('customer.emailLower', '==', emailLower)
           );
-          snap = await getDocs(qProj);
+          snap = await getDocs(qByEmail);
         }
 
         if (cancelled) return;
@@ -99,7 +209,11 @@ const SoundLegendPortal = () => {
         list.sort((a, b) => tsToMillis(a.createdAt) - tsToMillis(b.createdAt));
 
         setProjects(list);
-        setSelectedId(list[0]?.id || '');
+
+        // keep current selection if still present, else default to first
+        setSelectedId((prev) =>
+          prev && list.some((p) => p.id === prev) ? prev : list[0]?.id || ''
+        );
       } catch (e) {
         console.error('Error loading projects', e);
       } finally {
@@ -111,18 +225,18 @@ const SoundLegendPortal = () => {
     return () => {
       cancelled = true;
     };
-  }, [user]);
+  }, [portalUser, loadingPortalUser]);
 
-  // Load orders for this user (by email)
+  // Load orders for this portal user (by email)
   useEffect(() => {
-    if (!user?.email) return;
+    if (!portalUser?.email || loadingPortalUser) return;
     let cancelled = false;
 
     const run = async () => {
       try {
         const qOrders = query(
           collection(db, 'orders'),
-          where('customerEmail', '==', user.email)
+          where('customerEmail', '==', portalUser.email)
         );
         const snap = await getDocs(qOrders);
         if (cancelled) return;
@@ -139,7 +253,7 @@ const SoundLegendPortal = () => {
     return () => {
       cancelled = true;
     };
-  }, [user?.email]);
+  }, [portalUser?.email, loadingPortalUser]);
 
   const selectedProject = useMemo(
     () => projects.find((p) => p.id === selectedId) || null,
@@ -151,11 +265,17 @@ const SoundLegendPortal = () => {
     [orders]
   );
 
-  if (!user) {
+  /* -------------------- loading / empty states -------------------- */
+
+  if (loadingPortalUser) {
     return (
-      <div className="slp-page">
-        Please sign in to view your Artist Portal.
-      </div>
+      <div className="slp-page">Loading your SoundLegend portal…</div>
+    );
+  }
+
+  if (!portalUser) {
+    return (
+      <div className="slp-page">Please sign in to view your Artist Portal.</div>
     );
   }
 
@@ -168,33 +288,20 @@ const SoundLegendPortal = () => {
   if (!projects.length) {
     return (
       <div className="slp-page">
-        <h2>Welcome to your SoundLegend</h2>
+        <h2>
+          Welcome to your SoundLegend
+          {isImpersonating ? ' (admin view)' : ''}
+        </h2>
         <p>
           No projects are linked to your account yet. If this seems wrong,
           email:{' '}
           <a href="mailto:soundlegend@oberartisandrums.com">
-            soundlegend@oberartisandrums.com
+            support@oberartisandrums.com
           </a>
         </p>
       </div>
     );
   }
-
-  const ProjectPicker =
-    projects.length > 1 ? (
-      <select
-        className="slp-picker"
-        value={selectedId}
-        onChange={(e) => setSelectedId(e.target.value)}
-      >
-        {projects.map((p) => (
-          <option key={p.id} value={p.id}>
-            {p.lineSerial || p.globalSerial || p.artisanLine || p.id}
-            {p.width && p.shellDepth ? ` — ${p.width}×${p.shellDepth}"` : ''}
-          </option>
-        ))}
-      </select>
-    ) : null;
 
   const tabs = [
     { key: 'progress', label: 'Build Progress' },
@@ -205,40 +312,65 @@ const SoundLegendPortal = () => {
     { key: 'account', label: 'Account Settings' },
   ];
 
+  // 🔐 Is the currently selected project a SoundLegend drum?
+  const artisanLine = (selectedProject?.artisanLine || '').toLowerCase();
+  const serialGuess = (
+    selectedProject?.lineSerial ||
+    selectedProject?.snareSerial ||
+    selectedProject?.serial ||
+    selectedProject?.id ||
+    ''
+  ).toUpperCase();
+
+  const isSoundLegendProject =
+    artisanLine === 'soundlegend' || serialGuess.startsWith('SL-');
+
+  const handleTabChange = (nextKey) => {
+    // Block navigation to SL-only tabs for non-SL drums
+    if (
+      !isSoundLegendProject &&
+      (nextKey === 'vault' || nextKey === 'media')
+    ) {
+      return;
+    }
+    setTab(nextKey);
+  };
+
   return (
     <div className="slp-page">
-      <div className="signin-logo-container">
-        <img
-          src="/soundlegend-signin/white-logo.png"
-          alt="SoundLegend Experience"
-          className="signin-logo"
-          loading="eager"
-        />
-      </div>
+      <h2 className="slp-heading">
+        Welcome to your Artist Portal
+        {isImpersonating ? ' (admin view)' : ''}
+      </h2>
 
       <Tabs
         tabs={tabs}
         current={tab}
-        onChange={setTab}
-        rightSlot={ProjectPicker}
+        onChange={handleTabChange}
+        projects={projects}
+        selectedId={selectedId}
+        onSelectProject={setSelectedId}
+        isSoundLegendProject={isSoundLegendProject}
       />
 
       <div className="slp-panel">
         {tab === 'progress' && (
           <ProjectProgress project={selectedProject} isAdmin={isAdmin} />
         )}
-
         {tab === 'scope' && <ScopeOfWork project={selectedProject} />}
 
-        {tab === 'vault' && <VaultPreferences project={selectedProject} />}
-
-        {tab === 'media' && <Media project={selectedProject} />}
+        {/* SL-only sections */}
+        {tab === 'vault' && isSoundLegendProject && (
+          <VaultPreferences project={selectedProject} />
+        )}
+        {tab === 'media' && isSoundLegendProject && (
+          <Media project={selectedProject} />
+        )}
 
         {tab === 'payments' && <PaymentHistory orders={orders} />}
-
         {tab === 'account' && (
           <AccountSettings
-            user={user}
+            user={portalUser}
             projects={projects}
             orders={orders}
             latestOrder={latestOrder}

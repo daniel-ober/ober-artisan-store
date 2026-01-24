@@ -4,7 +4,12 @@
   position: relative;
   padding: 20px 22px 18px;
   border-radius: 18px;
-  background: radial-gradient(circle at top left, #171926 0, #05060c 55%, #020308 100%);
+  background: radial-gradient(
+    circle at top left,
+    #171926 0,
+    #05060c 55%,
+    #020308 100%
+  );
   border: 1px solid rgba(255, 255, 255, 0.14);
   box-shadow: 0 18px 50px rgba(0, 0, 0, 0.65);
 }
@@ -21,26 +26,41 @@
   font-size: 0.9rem;
 }
 
-/* GRID LAYOUT */
+/* MAIN LAYOUT – controls left, preview right */
 
-.vp-grid {
+.vp-layout {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 20px;
+  align-items: flex-start;
 }
+
+.vp-left {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px; /* space between name + story blocks */
+}
+
+.vp-right {
+  min-width: 0;
+}
+
+/* LEFT-SIDE CARDS */
 
 .vp-col {
   padding: 12px 14px 14px;
   border-radius: 16px;
-  background: radial-gradient(circle at top left, #141623 0, #070812 60%, #04040a 100%);
+  background: radial-gradient(
+    circle at top left,
+    #141623 0,
+    #070812 60%,
+    #04040a 100%
+  );
   border: 1px solid rgba(255, 255, 255, 0.09);
 }
 
 /* BASIC ROWS / LABELS */
-
-.vp-row {
-  margin-bottom: 10px;
-}
 
 .vp-row.between {
   display: flex;
@@ -58,7 +78,8 @@
   font-size: 0.76rem;
   text-transform: uppercase;
   letter-spacing: 0.18em;
-  opacity: 0.7;
+  /* no opacity here so children (tooltip) can be fully opaque */
+  color: rgba(148, 163, 184, 0.85);
   display: inline-flex;
   align-items: center;
   gap: 4px;
@@ -84,42 +105,55 @@
   font-size: 0.7rem;
   border: 1px solid rgba(148, 163, 184, 0.7);
   cursor: default;
+  z-index: 2;
 }
 
-.vp-popover {
+.vp-popover-guidelines {
   position: absolute;
-  z-index: 10;
-  top: 130%;
+  z-index: 9999;
+  bottom: 130%;                 /* show ABOVE the icon */
   left: 0;
-  transform-origin: top left;
-  min-width: 220px;
-  padding: 8px 10px;
-  border-radius: 10px;
-  background: #020309;
-  border: 1px solid rgba(148, 163, 184, 0.9);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
+  transform-origin: bottom left;
+  min-width: 240px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background-color: #05060c !important; /* fully opaque */
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.9);
   font-size: 0.78rem;
   line-height: 1.4;
+  color: #f1f5f9;
+  mix-blend-mode: normal !important;
+  backdrop-filter: none !important;
   opacity: 0;
   pointer-events: none;
-  transform: scale(0.96);
+  transform: scale(0.96) translateY(4px);
   transition: opacity 0.14s ease, transform 0.14s ease;
 }
 
-.vp-popover ul {
+.vp-popover-guidelines ul {
   margin: 4px 0 0 1.1rem;
   padding: 0;
 }
 
-.vp-popover li {
+.vp-popover-guidelines li {
   margin-bottom: 2px;
+  color: #e2e8f0;
+  opacity: 0.95;
 }
 
-.vp-help:focus .vp-popover,
-.vp-help:hover .vp-popover {
-  opacity: 1;
+.vp-popover-guidelines b {
+  display: block;
+  margin-bottom: 4px;
+  color: #ffffff;
+  letter-spacing: 0.12em;
+}
+
+.vp-help:focus .vp-popover-guidelines,
+.vp-help:hover .vp-popover-guidelines {
+  opacity: 1 !important;
   pointer-events: auto;
-  transform: scale(1);
+  transform: scale(1) translateY(0);
 }
 
 /* TOGGLE – dedicated for VaultPreferences */
@@ -137,7 +171,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
-  overflow: hidden; /* clip the knob so it never overflows */
+  overflow: hidden;
   transition: background 0.18s ease, box-shadow 0.18s ease;
 }
 
@@ -159,10 +193,10 @@
 }
 
 .vp-toggle.is-on .vp-toggle-knob {
-  transform: translateX(21px); /* 3px + 21px + 20px = 44px (< 46px), fully inside */
+  transform: translateX(21px); /* 3px + 21px + 20px = 44px (< 46px) */
 }
 
-/* PREVIEW CARDS */
+/* PREVIEW CARDS (left side) */
 
 .vp-preview {
   margin-top: 6px;
@@ -216,7 +250,7 @@
   font-weight: 600;
 }
 
-/* STORY PREVIEW */
+/* STORY PREVIEW (left) */
 
 .vp-preview-story {
   font-size: 0.86rem;
@@ -258,7 +292,10 @@
   font-size: 0.8rem;
   text-decoration: none;
   cursor: pointer;
-  transition: background 0.14s ease, border-color 0.14s ease, color 0.14s ease;
+  transition:
+    background 0.14s ease,
+    border-color 0.14s ease,
+    color 0.14s ease;
 }
 
 .apo-btn.request {
@@ -290,20 +327,60 @@
   cursor: default;
 }
 
-/* FOOTER ACTIONS */
+/* small admin save row */
 
-.vp-actions {
+.vp-admin-actions {
   display: flex;
   justify-content: flex-end;
-  margin-top: 18px;
+  margin-top: 8px;
 }
 
-/* PUBLIC PREVIEW (reuses lv-* + showroom-* styles) */
+.vp-admin-save {
+  padding-inline: 12px;
+}
+
+/* INPUTS / TEXTAREAS FOR ADMIN */
+
+.vp-input,
+.vp-textarea {
+  width: 100%;
+  border-radius: 9px;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  background: rgba(15, 23, 42, 0.9);
+  color: #f9fafb;
+  font-size: 0.86rem;
+  font-family: inherit;
+  padding: 7px 9px;
+}
+
+.vp-textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.vp-input::placeholder,
+.vp-textarea::placeholder {
+  color: rgba(148, 163, 184, 0.85);
+}
+
+.vp-input:focus,
+.vp-textarea:focus {
+  outline: none;
+  border-color: rgba(129, 230, 217, 0.9);
+  box-shadow: 0 0 0 1px rgba(129, 230, 217, 0.6);
+}
+
+/* PUBLIC PREVIEW (right side) */
 
 .vp-public-preview {
-  margin-top: 22px;
-  padding-top: 18px;
-  border-top: 1px solid rgba(148, 163, 184, 0.35);
+  padding: 12px 14px 14px;
+  border-radius: 16px;
+  background: radial-gradient(
+    circle at top left,
+    #10121d 0,
+    #05060e 65%
+  );
+  border: 1px solid rgba(148, 163, 184, 0.35);
 }
 
 .vp-public-header h4 {
@@ -320,38 +397,43 @@
   opacity: 0.8;
 }
 
-.vp-public-row {
-  display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.15fr);
-  gap: 18px;
-  align-items: flex-start;
-}
+/* Vault card then Showroom story stacked */
 
-/* shrink the big components a bit inside the portal */
 .vp-public-card .lv-item {
   max-width: 360px;
   margin: 0;
 }
 
+.vp-public-row {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: stretch;
+}
+
+/* Showroom story preview – smaller text to feel closer to real page */
+
 .showroom-story-preview {
   padding: 14px 16px 16px;
   border-radius: 16px;
   background: radial-gradient(circle at top left, #10121d 0, #05060e 65%);
-  border: 1px solid rgba(148, 163, 184, 0.3);
+  border: none;
 }
 
 .showroom-story-preview .artist-name {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   margin-bottom: 2px;
 }
 
 .showroom-story-preview .legacy-subtitle {
-  font-size: 0.74rem;
+  font-size: 0.72rem;
   letter-spacing: 0.18em;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .showroom-story-preview .showroom-story-content {
+  font-size: 0.9rem;
+  line-height: 1.6;
   max-height: 220px;
   overflow-y: auto;
   padding-right: 4px;
@@ -372,6 +454,22 @@
   opacity: 0.8;
 }
 
+/* Scale down Vault card text inside VaultPreferences preview only */
+.vp-public-card .lv-artist {
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+}
+
+.vp-public-card .lv-item-serial {
+  font-size: 0.7rem;
+  padding: 4px 10px;
+}
+
+.vp-public-card .lv-teaser {
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
 /* RESPONSIVE */
 
 @media (max-width: 900px) {
@@ -379,17 +477,16 @@
     padding: 18px 14px 16px;
   }
 
-  .vp-grid {
+  .vp-layout {
     grid-template-columns: 1fr;
+  }
+
+  .vp-right {
+    margin-top: 14px;
   }
 
   .vp-preview-story {
     max-height: 260px;
-  }
-
-  .vp-public-row {
-    grid-template-columns: 1fr;
-    gap: 14px;
   }
 
   .vp-public-card .lv-item {

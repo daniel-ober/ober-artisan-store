@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { db } from '../firebaseConfig'; // Import Firestore configuration
 import { doc, getDoc, setDoc, collection } from 'firebase/firestore'; // ✅ MOVE THIS TO THE TOP
 import { useCart } from '../context/CartContext'; // Adjust path if needed
@@ -34,6 +34,33 @@ const FeuzonProductDetail = () => {
   const { cart, cartId, addToCart, removeFromCart } = useCart();
   const [productInCart, setProductInCart] = useState(false);
   const [flickerChangeSelection, setFlickerChangeSelection] = useState(false);
+  const [product, setProduct] = useState(null);
+
+  const productImage = useMemo(() => {
+  return (
+    product?.images?.[0] ||
+    '/resized-logos/feuzon-placeholder.png' // optional fallback
+  );
+}, [product]);
+
+
+useEffect(() => {
+  const fetchProduct = async () => {
+    try {
+      const productRef = doc(db, 'products', 'feuzon');
+      const snap = await getDoc(productRef);
+      if (snap.exists()) {
+        setProduct(snap.data());
+      } else {
+        console.error('❌ Product doc not found: products/feuzon');
+      }
+    } catch (err) {
+      console.error('❌ Error fetching feuzon product:', err);
+    }
+  };
+
+  fetchProduct();
+}, []);
 
   // Derive re-ring from label
   useEffect(() => {
@@ -151,9 +178,7 @@ const FeuzonProductDetail = () => {
       price: totalPrice,
       stripePriceId,
       quantity: 1,
-      images: [
-        'https://firebasestorage.googleapis.com/v0/b/danoberartisandrums-dev.firebasestorage.app/o/products%2F67c255d1-a9ca-4f5d-80af-ddeee6a424e1_IMG_6133.png?alt=media&token=a15b2e68-d34b-44fa-bf33-eccc4a025331',
-      ],
+ images: [productImage],
       category: 'artisan',
       options: {
         outerShell,
@@ -400,11 +425,7 @@ const FeuzonProductDetail = () => {
       />
 
       <div className="feuzon-product-content">
-        <img
-          className="feuzon-product-image"
-          src="https://firebasestorage.googleapis.com/v0/b/danoberartisandrums-dev.firebasestorage.app/o/products%2F67c255d1-a9ca-4f5d-80af-ddeee6a424e1_IMG_6133.png?alt=media&token=a15b2e68-d34b-44fa-bf33-eccc4a025331"
-          alt="FEUZON Snare Drum"
-        />
+<img className="feuzon-product-image" src={productImage} alt="FEUZON Snare Drum" />
 
         <div className="feuzon-product-options">
           <div className="feuzon-features">

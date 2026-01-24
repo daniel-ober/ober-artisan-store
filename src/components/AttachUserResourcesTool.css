@@ -1,0 +1,324 @@
+/* Root wrapper inside Admin panel */
+.aur-root {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 8px 4px 28px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    sans-serif;
+  color: #0f172a;
+}
+
+/* Toast message */
+.aur-toast {
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 0.9rem;
+  margin-bottom: 14px;
+  border: 1px solid transparent;
+}
+
+.aur-toast--success {
+  background: #ecfdf5;
+  border-color: #6ee7b7;
+  color: #047857;
+}
+
+.aur-toast--error {
+  background: #fef2f2;
+  border-color: #fecaca;
+  color: #b91c1c;
+}
+
+/* Card shells */
+.aur-card {
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+  margin-bottom: 18px;
+  overflow: hidden;
+}
+
+/* Loose resources card — padded so content doesn't touch edges */
+.aur-card--secondary {
+  margin-top: 10px;
+  padding: 18px 20px;
+}
+
+/* Header */
+.aur-header {
+  padding: 16px 18px 10px 18px;
+}
+
+.aur-header h2 {
+  font-size: 1.6rem;
+  margin: 0 0 4px;
+  letter-spacing: -0.02em;
+}
+
+.aur-header h3 {
+  font-size: 1.05rem;
+  margin: 0 0 3px;
+}
+
+.aur-header p,
+.aur-header .aur-muted {
+  margin: 0;
+  font-size: 0.94rem;
+  color: #6b7280;
+}
+
+/* Inline header row for loose resources + refresh button */
+.aur-header--inline,
+.aur-card-header-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 18px 10px 18px;
+}
+
+/* Refresh button spacing */
+.aur-card-header-row button {
+  margin-right: 4px;
+}
+
+/* Card body for form / content */
+.aur-form {
+  padding: 0 18px 18px 18px;
+}
+
+/* Field groups */
+.aur-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.aur-label {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.aur-label-sub {
+  font-weight: 500;
+  color: #9ca3af;
+}
+
+/* Inputs */
+.aur-input {
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  background: #f9fafb;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.aur-input::placeholder {
+  color: #9ca3af;
+}
+
+.aur-input:focus {
+  background: #ffffff;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.18);
+}
+
+/* Buttons row */
+.aur-actions-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 10px 0 4px;
+}
+
+/* Base button */
+.aur-btn {
+  border-radius: 999px;
+  padding: 9px 18px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease,
+    color 0.15s ease, box-shadow 0.15s ease, transform 0.05s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+/* Disabled state */
+.aur-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+  box-shadow: none;
+  transform: none;
+}
+
+/* Main purple button */
+.aur-btn--primary {
+  background: #4f46e5;
+  border-color: #4f46e5;
+  color: #f9fafb;
+  box-shadow: 0 3px 8px rgba(79, 70, 229, 0.25);
+}
+
+.aur-btn--primary:hover:not(:disabled) {
+  background: #4338ca;
+  border-color: #4338ca;
+  box-shadow: 0 6px 14px rgba(55, 48, 163, 0.3);
+  transform: translateY(-1px);
+}
+
+/* Subtle outline button */
+.aur-btn--outline {
+  background: #f9fafb;
+  border-color: #d1d5db;
+  color: #1f2937;
+}
+
+.aur-btn--outline:hover:not(:disabled) {
+  background: #eef2ff;
+  border-color: #c7d2fe;
+}
+
+/* Ghost refresh button */
+.aur-btn--ghost {
+  background: #f9fafb;
+  border-color: #e5e7eb;
+  color: #374151;
+  padding-inline: 16px;
+}
+
+.aur-btn--ghost:hover:not(:disabled) {
+  background: #e5e7eb;
+}
+
+/* Helper text under form */
+.aur-help {
+  margin-top: 16px;
+  border-top: 1px dashed #e5e7eb;
+  padding-top: 10px;
+  font-size: 0.88rem;
+  color: #6b7280;
+}
+
+.aur-help code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    'Liberation Mono', monospace;
+}
+
+/* ======== Loose Resources layout ======== */
+
+.aur-loose-columns {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 12px 18px 18px 18px;
+}
+
+/* Each section: USERS, PROJECTS, ORDERS
+   All share the same card styling now */
+.aur-loose-column {
+  padding: 10px 12px 12px 12px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+}
+
+/* Order of sections: Users first, then Projects, then Orders */
+.aur-loose-column:nth-child(2) { order: 0; } /* Users */
+.aur-loose-column:nth-child(1) { order: 1; } /* Projects */
+.aur-loose-column:nth-child(3) { order: 2; } /* Orders */
+
+.aur-loose-column h4 {
+  margin: 0 0 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.aur-empty {
+  margin: 2px 0 0;
+  font-size: 0.88rem;
+  color: #9ca3af;
+}
+
+/* Pill list */
+.aur-pill-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.aur-pill {
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  padding: 6px 10px;
+  font-size: 0.82rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.aur-pill:hover {
+  background: #eef2ff;
+  border-color: #c7d2fe;
+}
+
+.aur-pill-id {
+  font-family: ui-monospace;
+  font-size: 0.78rem;
+  color: #4b5563;
+}
+
+.aur-pill-label {
+  font-weight: 500;
+  color: #111827;
+}
+
+.aur-pill-tag {
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  font-size: 0.75rem;
+  color: #374151;
+}
+
+/* Generic muted text */
+.aur-muted {
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+/* Responsive tweaks */
+@media (max-width: 720px) {
+  .aur-header {
+    padding-inline: 14px;
+  }
+
+  .aur-form {
+    padding-inline: 14px;
+  }
+
+  .aur-card-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-inline: 14px;
+  }
+
+  .aur-loose-columns {
+    padding-inline: 14px;
+  }
+}
