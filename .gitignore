@@ -56,3 +56,5 @@ backend/serviceAccountKey-prod.json
 
 # Firebase hosting cache
 .firebase/hosting*.cache
+build/
+.firebase/
