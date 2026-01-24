@@ -9,7 +9,7 @@
 }
 
 [data-component="PaymentHistory"] .ph-table {
-  min-width: 540px; /* keep columns readable on small screens */
+  min-width: 640px; /* little wider now that we have a Receipt column */
 }
 
 [data-component="PaymentHistory"] .ph-table th,
@@ -21,6 +21,50 @@
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
   font-size: 0.85rem;
+}
+
+/* ================= Receipt column ================= */
+
+[data-component="PaymentHistory"] .ph-receipt-cell {
+  min-width: 180px;
+}
+
+[data-component="PaymentHistory"] .ph-receipt-drop {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 0;
+  border-radius: 999px;
+  transition:
+    background 0.15s ease,
+    box-shadow 0.15s ease,
+    border-color 0.15s ease;
+}
+
+[data-component="PaymentHistory"] .ph-receipt-drop.is-dragover {
+  background: rgba(37, 99, 235, 0.08);
+  box-shadow: 0 0 0 1px rgba(191, 219, 254, 0.7);
+}
+
+[data-component="PaymentHistory"] .ph-receipt-btn {
+  font-size: 0.78rem;
+  padding-inline: 10px;
+  padding-block: 4px;
+}
+
+[data-component="PaymentHistory"] .ph-receipt-btn-secondary {
+  background: rgba(15, 23, 42, 0.7);
+  border-color: rgba(148, 163, 184, 0.6);
+}
+
+[data-component="PaymentHistory"] .ph-receipt-hint {
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+[data-component="PaymentHistory"] .ph-receipt-none {
+  font-size: 0.8rem;
+  opacity: 0.6;
 }
 
 /* ================= Stripe security notice ================= */

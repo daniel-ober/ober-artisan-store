@@ -1,71 +1,71 @@
-/* ProjectProgress.css — polished Build Progress card for SoundLegend portal */
+/* ProjectProgress.css — SoundLegend Portal Build Progress (Customer View)
+   ---------------------------------------------------------------------- */
 
-.slp-card.pp-card[data-component="ProjectProgress"] {
+/* Optional: keep the card wrapper styling you were using */
+.slp-card.pp-card[data-component='ProjectProgress'] {
   position: relative;
   max-width: 1100px;
   margin: 0 auto;
   padding: 20px 24px 24px;
   border-radius: 18px;
-  background: radial-gradient(circle at top left, #181a27 0, #05060c 55%, #020208 100%);
+  background: radial-gradient(
+    circle at top left,
+    #181a27 0,
+    #05060c 55%,
+    #020208 100%
+  );
   border: 1px solid rgba(255, 255, 255, 0.04);
   box-shadow: 0 22px 60px rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(26px);
 }
 
-.slp-card.pp-card[data-component="ProjectProgress"] h3 {
-  font-size: 0.95rem;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  margin: 0 0 4px;
+/* =====================================================================
+   ROOT
+   ===================================================================== */
+
+.sl-progress {
+  color: #e5e7eb;
+  font-size: 0.94rem;
 }
 
-.slp-card.pp-card[data-component="ProjectProgress"] .slp-muted {
-  font-size: 0.88rem;
-  opacity: 0.78;
+.sl-progress p {
+  margin: 0;
 }
 
-/* ---------- HERO (Craft In Motion or Vault hero) ---------- */
+/* Loading / empty states */
 
-[data-component="ProjectProgress"] .pp-hero-section {
-  margin-top: 14px;
+.sl-progress.sl-progress--loading,
+.sl-progress.sl-progress--empty {
+  padding: 20px;
+  text-align: center;
+  font-size: 0.9rem;
+  opacity: 0.85;
 }
 
-[data-component="ProjectProgress"] .pp-hero-frame {
-  position: relative;
+/* =====================================================================
+   HERO
+   ===================================================================== */
+
+.sl-progress-hero {
+  margin-top: 10px;
+}
+
+.sl-progress-hero-video {
+  display: block;
+  width: 100%;
+  height: auto;
   border-radius: 16px;
   overflow: hidden;
   background: #05070c;
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.85);
   border: 1px solid rgba(255, 255, 255, 0.05);
   aspect-ratio: 16 / 9;
-}
-
-[data-component="ProjectProgress"] .pp-hero-media {
-  width: 100%;
-  height: 100%;
   object-fit: cover;
-  display: block;
 }
 
-[data-component="ProjectProgress"] .pp-hero-overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
-  padding: 14px 18px;
-  pointer-events: none;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.6),
-    rgba(0, 0, 0, 0.25),
-    transparent
-  );
-}
-
-[data-component="ProjectProgress"] .pp-hero-pill {
-  pointer-events: auto;
-  padding: 4px 10px;
+.sl-progress-hero-pill {
+  margin-top: 10px;
+  padding: 4px 12px;
   border-radius: 999px;
   border: 1px solid rgba(248, 250, 252, 0.65);
   background: rgba(15, 23, 42, 0.82);
@@ -74,81 +74,87 @@
   letter-spacing: 0.18em;
 }
 
-[data-component="ProjectProgress"] .pp-hero-caption {
-  margin-top: 6px;
-  font-size: 0.84rem;
+/* Intro blurb */
+
+.sl-progress-intro {
+  margin-top: 14px;
 }
 
-/* ---------- Summary row ---------- */
+.sl-progress-intro-text {
+  font-size: 0.88rem;
+  opacity: 0.78;
+}
 
-[data-component="ProjectProgress"] .pp-summary {
+/* =====================================================================
+   TOP METRICS
+   ===================================================================== */
+
+.sl-progress-metrics {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 14px;
   margin-top: 18px;
 }
 
-[data-component="ProjectProgress"] .pp-summary-item {
+.sl-progress-metric {
   padding: 10px 12px;
   border-radius: 12px;
-  background: radial-gradient(circle at top left, #171926 0, #090a12 55%, #040408 100%);
+  background: radial-gradient(
+    circle at top left,
+    #171926 0,
+    #090a12 55%,
+    #040408 100%
+  );
   border: 1px solid rgba(255, 255, 255, 0.06);
   display: flex;
   flex-direction: column;
   gap: 3px;
 }
 
-[data-component="ProjectProgress"] .pp-summary-label {
+.sl-progress-metric-label {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.16em;
-  opacity: 0.7;
-  display: flex;
-  align-items: center;
-  gap: 6px;
+  opacity: 0.72;
 }
 
-[data-component="ProjectProgress"] .pp-summary-check {
-  display: inline-block;
-  font-size: 0.9rem;
-  color: #22c55e;
-  transform: translateY(-1px);
+.sl-progress-metric-value {
+  font-size: 0.96rem;
 }
 
-[data-component="ProjectProgress"] .pp-summary-value {
-  font-size: 0.94rem;
+/* =====================================================================
+   ROADMAP TRACK + DOTS
+   ===================================================================== */
+
+.sl-progress-roadmap {
+  margin-top: 20px;
 }
 
-/* ---------- Weighted track ---------- */
-
-[data-component="ProjectProgress"] .pp-track-section {
-  margin-top: 18px;
-}
-
-[data-component="ProjectProgress"] .pp-subheading {
+.sl-progress-roadmap-header {
   font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.2em;
   opacity: 0.8;
-  margin: 0 0 6px;
-  padding: 0 2px;
+  margin-bottom: 4px;
 }
 
-[data-component="ProjectProgress"] .pp-track {
-  position: relative;
-  padding-top: 20px;
+.sl-progress-roadmap-note {
+  font-size: 0.8rem;
+  opacity: 0.78;
+  margin-bottom: 8px;
 }
 
-[data-component="ProjectProgress"] .pp-track-bar {
+/* slightly thicker track */
+.sl-progress-roadmap-track {
   position: relative;
-  height: 6px;
+  height: 8px;
   border-radius: 999px;
   background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.7);
   overflow: hidden;
-  border: 1px solid rgba(148, 163, 184, 0.6);
 }
 
-[data-component="ProjectProgress"] .pp-track-fill {
+.sl-progress-roadmap-track-fill {
   position: absolute;
   inset: 0;
   transform-origin: left center;
@@ -157,28 +163,42 @@
   transition: width 0.25s ease;
 }
 
-/* dot rail */
+/* Step dots */
 
-[data-component="ProjectProgress"] .pp-track-dots {
+.sl-progress-roadmap-steps {
   position: relative;
-  margin-top: 10px;
-  height: 32px;
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  gap: 4px;
 }
 
-[data-component="ProjectProgress"] .pp-dot {
-  position: absolute;
-  top: 4px;
-  transform: translateX(-50%);
+.sl-progress-step-dot {
+  position: relative;
+  flex: 1 1 0;
+  max-width: 80px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: #e5e7eb;
+}
+
+.sl-progress-step-number {
   width: 26px;
   height: 26px;
   border-radius: 999px;
   border: 2px solid rgba(148, 163, 184, 0.7);
   background: #020617;
-  color: #e5e7eb;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
+  font-size: 0.7rem;
+  line-height: 1;
+  position: relative;
   transition:
     background 0.2s ease,
     border-color 0.2s ease,
@@ -186,9 +206,8 @@
     transform 0.18s ease;
 }
 
-/* connector line from dot up to the bar */
-[data-component="ProjectProgress"] .pp-dot::before {
-  content: '';
+/* small connector to the bar */
+.sl-progress-step-number::before {
   position: absolute;
   top: -20px;
   left: 50%;
@@ -199,84 +218,89 @@
   background: rgba(148, 163, 184, 0.9);
 }
 
-/* state colors */
-
-[data-component="ProjectProgress"] .pp-dot.todo {
-  opacity: 0.7;
+.sl-progress-step-label {
+  font-size: 0.68rem;
+  text-align: center;
+  opacity: 0.78;
 }
 
-[data-component="ProjectProgress"] .pp-dot.wip {
-  border-color: rgba(59, 130, 246, 0.95);
-}
+/* State colors */
 
-[data-component="ProjectProgress"] .pp-dot.done {
+.sl-progress-step-dot.is-completed .sl-progress-step-number {
   border-color: rgba(34, 197, 94, 0.95);
 }
 
-[data-component="ProjectProgress"] .pp-dot.wip::before {
-  background: rgba(59, 130, 246, 0.95);
-}
-
-[data-component="ProjectProgress"] .pp-dot.done::before {
+.sl-progress-step-dot.is-completed .sl-progress-step-number::before {
   background: rgba(34, 197, 94, 0.95);
 }
 
-/* active + hover enlarge / subtle glow */
+.sl-progress-step-dot.is-current .sl-progress-step-number {
+  border-color: rgba(59, 130, 246, 0.95);
+}
 
-[data-component="ProjectProgress"] .pp-dot.active,
-[data-component="ProjectProgress"] .pp-dot:hover {
-  transform: translateX(-50%) scale(1.08);
+.sl-progress-step-dot.is-current .sl-progress-step-number::before {
+  background: rgba(59, 130, 246, 0.95);
+}
+
+/* Locked future stages */
+.sl-progress-step-dot.is-locked {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.sl-progress-step-dot.is-locked .sl-progress-step-number {
+  border-color: rgba(75, 85, 99, 0.8);
+  background: #020617;
+}
+
+.sl-progress-step-dot.is-locked .sl-progress-step-number::before {
+  background: rgba(75, 85, 99, 0.8);
+}
+
+/* hover / active (avoid glow on locked) */
+
+.sl-progress-step-dot.is-current .sl-progress-step-number,
+.sl-progress-step-dot:not(.is-locked):hover .sl-progress-step-number {
+  transform: scale(1.08);
   box-shadow: 0 0 0 3px rgba(191, 219, 254, 0.35);
 }
 
-[data-component="ProjectProgress"] .pp-dot-number {
-  font-size: 0.7rem;
-  line-height: 1;
-}
+/* =====================================================================
+   ACTIVE STAGE
+   ===================================================================== */
 
-/* small endcap */
-
-[data-component="ProjectProgress"] .pp-endcap {
-  position: absolute;
-  top: 14px;
-  width: 2px;
-  height: 2px;
-  border-radius: 999px;
-}
-
-/* ---------- Step detail card ---------- */
-
-[data-component="ProjectProgress"] .pp-detail {
-  margin-top: 22px;
-  padding: 14px 16px 18px;
+.sl-progress-stage {
+  margin-top: 24px;
+  padding: 16px 16px 20px;
   border-radius: 14px;
-  background: radial-gradient(circle at top left, #151725 0, #070810 55%, #030307 100%);
+  background: radial-gradient(
+    circle at top left,
+    #151725 0,
+    #070810 55%,
+    #030307 100%
+  );
   border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-/* step header: centered title with status directly underneath */
+/* Header */
 
-[data-component="ProjectProgress"] .pp-step-header {
+.sl-progress-stage-header {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 4px;
+  justify-content: space-between;
+  gap: 10px;
+  padding-bottom: 10px;
   margin-bottom: 14px;
-  padding: 4px 6px 10px;
   border-bottom: 1px solid rgba(148, 163, 184, 0.25);
 }
 
-/* centered, enlarged step title */
-[data-component="ProjectProgress"] .pp-step-title {
+.sl-progress-stage-title {
   margin: 0;
-  font-size: 1.12rem;
+  font-size: 1.08rem;
   font-weight: 500;
-  text-align: center;
 }
 
-/* status pill under the title */
-[data-component="ProjectProgress"] .pp-pill {
+.sl-progress-stage-status-pill {
   font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.16em;
@@ -287,398 +311,510 @@
   white-space: nowrap;
 }
 
-[data-component="ProjectProgress"] .pp-pill.ok {
+/* Status colors */
+
+.sl-progress-stage-status-pill.is-completed {
   border-color: rgba(34, 197, 94, 0.9);
   color: #bbf7d0;
 }
 
-[data-component="ProjectProgress"] .pp-pill.wip {
+.sl-progress-stage-status-pill.is-inprogress {
   border-color: rgba(59, 130, 246, 0.9);
   color: #bfdbfe;
 }
 
-[data-component="ProjectProgress"] .pp-info-tip {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 6px;
-  width: 14px;
-  height: 14px;
-  border-radius: 999px;
-  border: 1px solid rgba(148, 163, 184, 0.8);
-  font-size: 0.68rem;
-  line-height: 1;
-  cursor: help;
-  opacity: 0.8;
+.sl-progress-stage-status-pill.is-notstarted {
+  opacity: 0.85;
 }
 
-[data-component="ProjectProgress"] .pp-info-tip:hover {
-  opacity: 1;
-}
+/* Stage stats */
 
-/* stats row under header */
-
-[data-component="ProjectProgress"] .pp-stats {
+.sl-progress-stage-stats {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
-  margin: 10px 0 14px;
+  margin: 10px 0 16px;
 }
 
-[data-component="ProjectProgress"] .pp-stat {
+.sl-progress-stage-stat {
   padding: 8px 10px;
   border-radius: 10px;
-  background: radial-gradient(circle at top left, #181a2a 0, #090a13 55%, #040408 100%);
+  background: radial-gradient(
+    circle at top left,
+    #181a2a 0,
+    #090a13 55%,
+    #040408 100%
+  );
   border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-[data-component="ProjectProgress"] .pp-stat-label {
+.sl-progress-stage-stat-label {
   font-size: 0.74rem;
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  opacity: 0.7;
+  opacity: 0.72;
 }
 
-[data-component="ProjectProgress"] .pp-stat-value {
+.sl-progress-stage-stat-value {
   font-size: 0.9rem;
   margin-top: 2px;
 }
 
-/* grid for WHAT/WHY/etc */
+/* Stage body layout */
 
-[data-component="ProjectProgress"] .pp-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px;
-  margin-top: 6px;
+.sl-progress-stage-body {
+  display: flex;
+  flex-direction: column;
+  /* gap: 20px; */
+  margin-top: 4px;
 }
 
-[data-component="ProjectProgress"] .pp-col {
+.sl-progress-stage-col {
   min-width: 0;
 }
+/* Cards */
 
-[data-component="ProjectProgress"] .pp-sub {
-  font-size: 0.76rem;
+.sl-progress-card {
+  margin-bottom: 12px;
+  padding: 10px 10px 11px;
+  border-radius: 12px;
+  background: radial-gradient(circle at top left, #111827 0, #020617 60%);
+  border: 1px solid rgba(30, 64, 175, 0.4);
+}
+
+.sl-progress-card-title {
+  margin: 0 0 4px;
+  font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.18em;
-  opacity: 0.78;
-  margin: 10px 0 4px;
+  opacity: 0.8;
 }
 
-[data-component="ProjectProgress"] .pp-muted {
-  font-size: 0.76rem;
-  opacity: 0.72;
+.sl-progress-card-subtitle {
+  margin: 6px 0 2px;
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  opacity: 0.8;
 }
 
-[data-component="ProjectProgress"] .pp-body {
+.sl-progress-card-text {
   font-size: 0.9rem;
   line-height: 1.5;
 }
 
-/* chips */
+/* Pills & bullets */
 
-[data-component="ProjectProgress"] .pp-chips {
+.sl-progress-pill-row {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
   margin-top: 4px;
 }
 
-[data-component="ProjectProgress"] .pp-chip {
-  padding: 3px 8px;
+.sl-progress-pill {
+  padding: 3px 9px;
   border-radius: 999px;
   background: rgba(15, 23, 42, 0.85);
-  border: 1px solid rgba(148, 163, 184, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.7);
   font-size: 0.76rem;
 }
 
-/* lists */
-
-[data-component="ProjectProgress"] .pp-list {
+.sl-progress-bullet-list {
   margin: 4px 0 0;
   padding-left: 18px;
   font-size: 0.88rem;
   line-height: 1.45;
 }
 
-[data-component="ProjectProgress"] .pp-links {
-  margin: 4px 0 0;
-  padding-left: 0;
-  list-style: none;
-}
+/* Quote card */
 
-[data-component="ProjectProgress"] .pp-link-button {
-  padding: 0;
-  background: none;
-  border: none;
-  color: #c4d0ff;
-  cursor: default;
-  font-size: 0.88rem;
-}
-
-/* mantra */
-
-[data-component="ProjectProgress"] .pp-mantra {
-  margin-top: 12px;
-  padding: 7px 10px;
-  border-radius: 10px;
-  background: radial-gradient(circle at top left, #111827 0, #020617 60%);
-  border: 1px solid rgba(191, 219, 254, 0.35);
+.sl-progress-card--quote {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 0.88rem;
+  gap: 8px;
+  border-color: rgba(191, 219, 254, 0.45);
 }
 
-[data-component="ProjectProgress"] .pp-star {
-  font-size: 0.9rem;
+.sl-progress-quote-icon {
+  font-size: 0.96rem;
   color: #fde68a;
 }
 
-/* ---------- media grid ---------- */
-
-[data-component="ProjectProgress"] .pp-media {
-  margin-top: 10px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 10px;
-}
-
-[data-component="ProjectProgress"] .pp-thumb {
-  position: relative;
-  border-radius: 12px;
-  overflow: hidden;
-  background: radial-gradient(circle at top left, #020617 0, #020617 55%, #000 100%);
-  border: 1px solid rgba(148, 163, 184, 0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  text-decoration: none;
-  font-size: 0.78rem;
-  color: #e5e7eb;
-  cursor: pointer;
-  transition:
-    transform 0.18s ease,
-    box-shadow 0.18s ease,
-    border-color 0.18s ease,
-    background 0.18s ease;
-  min-height: 72px;
-}
-
-[data-component="ProjectProgress"] .pp-thumb:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.75);
-  border-color: rgba(191, 219, 254, 0.9);
-}
-
-[data-component="ProjectProgress"] .pp-thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* non-image thumbs */
-
-[data-component="ProjectProgress"] .pp-thumb-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  padding: 10px 8px;
-}
-
-[data-component="ProjectProgress"] .pp-thumb-badge {
-  padding: 3px 8px;
-  border-radius: 999px;
-  border: 1px solid rgba(148, 163, 184, 0.8);
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-}
-
-[data-component="ProjectProgress"] .pp-thumb-badge-video {
-  border-color: rgba(59, 130, 246, 0.9);
-  color: #bfdbfe;
-}
-
-[data-component="ProjectProgress"] .pp-thumb-badge-audio {
-  border-color: rgba(16, 185, 129, 0.9);
-  color: #a7f3d0;
-}
-
-[data-component="ProjectProgress"] .pp-thumb-badge-pdf {
-  border-color: rgba(248, 113, 113, 0.9);
-  color: #fecaca;
-}
-
-[data-component="ProjectProgress"] .pp-thumb-badge-link {
-  border-color: rgba(148, 163, 184, 0.8);
-  color: #e5e7eb;
-}
-
-[data-component="ProjectProgress"] .pp-thumb-label {
-  font-size: 0.78rem;
-  opacity: 0.85;
-}
-
-/* "No files" text */
-
-[data-component="ProjectProgress"] .pp-empty {
-  margin-top: 8px;
-  font-size: 0.88rem;
-  opacity: 0.75;
-}
-
-/* ---------- media modal ---------- */
-
-[data-component="ProjectProgress"] .pp-media-modal-backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: 999;
-  background: rgba(0, 0, 0, 0.74);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
-}
-
-[data-component="ProjectProgress"] .pp-media-modal {
-  max-width: min(960px, 100%);
-  max-height: min(80vh, 100%);
-  width: 100%;
-  border-radius: 18px;
-  background: radial-gradient(circle at top left, #020617 0, #020617 55%, #000 100%);
-  border: 1px solid rgba(148, 163, 184, 0.7);
-  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.9);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-[data-component="ProjectProgress"] .pp-media-modal-header {
-  padding: 10px 14px;
-  border-bottom: 1px solid rgba(51, 65, 85, 0.9);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-}
-
-[data-component="ProjectProgress"] .pp-media-modal-title {
+.sl-progress-quote-text {
   font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  opacity: 0.85;
 }
 
-[data-component="ProjectProgress"] .pp-media-modal-close {
-  border: 1px solid rgba(148, 163, 184, 0.8);
-  background: rgba(15, 23, 42, 0.9);
-  color: #e5e7eb;
-  border-radius: 999px;
-  padding: 3px 9px;
+/* =====================================================================
+   CHECKPOINTS (EXPAND/COLLAPSE PANEL)
+   ===================================================================== */
+
+.pp-stage-card {
+  margin-top: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  border-radius: 16px;
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(80, 140, 255, 0.18),
+      transparent 60%
+    ),
+    rgba(3, 9, 20, 0.96);
+  border: 1px solid rgba(120, 190, 255, 0.28);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+}
+
+.pp-section-title {
   font-size: 0.8rem;
-  cursor: pointer;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #a9b4d4;
+  margin-bottom: 0.75rem;
 }
 
-[data-component="ProjectProgress"] .pp-media-modal-close:hover {
-  background: rgba(30, 64, 175, 0.95);
+/* List of steps inside the stage */
+
+.pp-step-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
 }
 
-[data-component="ProjectProgress"] .pp-media-modal-body {
-  padding: 10px 14px 8px;
-  flex: 1;
-  overflow: auto;
+/* Each step block (card) */
+
+.pp-step-block {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  margin-bottom: 4px;
+  overflow: hidden;
+  transition:
+    background 0.25s ease,
+    border 0.25s ease;
+}
+
+.pp-step-block:hover {
+  background: rgba(15, 23, 42, 0.95);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Header row for each step (clickable) */
+.sl-progress .pp-stage-card .slp-pp-step-header {
+  width: 100%;
+  padding: 0.7rem 0.95rem;
+  border: none;
+  outline: none;
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 0.75rem;
+  background: transparent;
+  cursor: pointer;
+  color: #f9fafb;
 }
 
-[data-component="ProjectProgress"] .pp-media-modal-body img,
-[data-component="ProjectProgress"] .pp-media-modal-body video,
-[data-component="ProjectProgress"] .pp-media-modal-body iframe {
-  max-width: 100%;
-  max-height: 100%;
-  border-radius: 12px;
+/* Optional hover state */
+.sl-progress .pp-stage-card .slp-pp-step-header:hover {
+  background: radial-gradient(
+    circle at top left,
+    rgba(148, 163, 184, 0.16),
+    transparent 60%
+  );
 }
-
-[data-component="ProjectProgress"] .pp-media-modal-body audio {
-  width: 100%;
-}
-
-[data-component="ProjectProgress"] .pp-media-modal-footer {
-  padding: 8px 14px 12px;
-  border-top: 1px solid rgba(31, 41, 55, 0.9);
+.pp-step-header-main {
+  flex: 1;
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  text-align: left;
 }
 
-[data-component="ProjectProgress"] .pp-media-modal-link {
-  font-size: 0.82rem;
-  color: #bfdbfe;
-  text-decoration: none;
+.pp-step-title {
+  font-size: 0.96rem;
+  font-weight: 600;
 }
 
-[data-component="ProjectProgress"] .pp-media-modal-link:hover {
-  text-decoration: underline;
+.pp-step-count {
+  font-size: 0.75rem;
+  margin-top: 2px;
+  color: #93a4bd;
 }
 
-/* ---------- Responsive ---------- */
+/* Step status pill */
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+
+/* Grey = Not started */
+.pill-pending {
+  background: rgba(148, 163, 184, 0.15);
+  border-color: rgba(148, 163, 184, 0.28);
+  color: #9fb0c5;
+}
+
+/* Yellow = In progress */
+.pill-progress {
+  background: rgba(250, 204, 21, 0.18);
+  border-color: rgba(250, 204, 21, 0.4);
+  color: #facc15;
+}
+
+/* Green = Completed */
+.pill-complete {
+  background: rgba(34, 197, 94, 0.2);
+  border-color: rgba(34, 197, 94, 0.45);
+  color: #22c55e;
+}
+
+/* Chevron */
+
+.pp-step-chevron {
+  font-size: 0.8rem;
+  margin-left: 10px;
+  color: #8ea0b8;
+  transform: rotate(-90deg);
+  transition: transform 0.18s ease;
+}
+
+.pp-step-chevron.open {
+  transform: rotate(0deg);
+}
+
+/* Checkpoint list (inside open step) */
+
+.pp-checkpoint-list.grouped {
+  border-top: 1px solid rgba(148, 163, 184, 0.25);
+  padding: 0.5rem 0.95rem 0.75rem;
+}
+
+.pp-checkpoint-list.flat {
+  margin-top: 0.4rem;
+}
+
+/* Each checkpoint row */
+
+.pp-checkpoint-row {
+  display: flex;
+  align-items: center;
+  padding: 0.35rem 0;
+  font-size: 0.8rem;
+  color: #d0d6f2;
+  border-bottom: 1px dashed rgba(68, 80, 120, 0.5);
+}
+
+.pp-checkpoint-row:last-child {
+  border-bottom: none;
+}
+
+.pp-checkpoint-main {
+  display: flex;
+  align-items: center;
+}
+
+/* Icon container: keeps text aligned even when there is no checkmark */
+.pp-checkpoint-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  margin-right: 0.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.35); /* subtle gray ring */
+  font-size: 0.7rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  color: transparent; /* no visible mark when incomplete */
+  background: transparent;
+}
+
+/* Completed checkpoint: green pill + visible checkmark */
+.pp-checkpoint-icon.is-completed {
+  background: #22c55e;
+  border-color: #22c55e;
+  color: #020617; /* dark text inside */
+}
+
+/* Text styling */
+.pp-checkpoint-label {
+  font-size: 0.85rem;
+  color: rgba(226, 232, 240, 0.82);
+}
+
+.pp-checkpoint-label.is-completed {
+  color: #bbf7d0;
+}
+
+/* =====================================================================
+   FOOTER
+   ===================================================================== */
+
+.sl-progress-stage-footer {
+  margin-top: 14px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(30, 64, 175, 0.5);
+}
+
+.sl-progress-stage-files {
+  font-size: 0.86rem;
+  opacity: 0.78;
+}
+
+/* REMOVE vertical marker lines above roadmap dots */
+.sl-progress-step-number::before {
+  display: none !important;
+  content: none !important;
+}
+
+.sl-progress-stage-locked-text {
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: rgba(226, 232, 240, 0.9);
+  opacity: 0.9;
+}
+
+/* =====================================================================
+   RESPONSIVE
+   ===================================================================== */
+
+/* ───────────────────────────────────────────────
+   SPACING / PADDING POLISH FOR LARGE SCREENS
+   ─────────────────────────────────────────────── */
+@media (min-width: 1200px) {
+  /* tighter overall container spacing */
+  .sl-progress-stage {
+    padding: 40px 48px 56px;
+  }
+
+  /* reduce excess vertical space between sections */
+  .sl-progress-stage-header {
+    margin-bottom: 28px;
+  }
+
+  .sl-progress-stage-stats {
+    margin-bottom: 32px;
+  }
+
+  /* better balance inside the two-column grid */
+  .sl-progress-stage-body {
+    column-gap: 40px; /* was 24px — more breathing room */
+    row-gap: 0;
+  }
+
+  /* explainer column: consistent vertical spacing between cards */
+  .sl-progress-stage-col--explainer .sl-progress-card {
+    margin-bottom: 20px;
+  }
+
+  .sl-progress-stage-col--explainer .sl-progress-card:last-child {
+    margin-bottom: 0;
+  }
+
+  /* checkpoints column: reduce padding so it's not so “boxed in” */
+  .sl-progress-stage-col--checkpoints .pp-stage-card {
+    padding: 24px 26px;
+    width: 100%;
+    border-radius: 14px;
+  }
+
+  /* “Stage Checkpoints” title refinement */
+  .pp-stage-title {
+    font-size: 1.1rem;
+    margin-bottom: 18px;
+  }
+
+  /* Fix top alignment between left content and right checkpoints */
+  .sl-progress-stage-col--checkpoints {
+    align-self: start;
+    padding-top: 6px;
+  }
+
+  /* bottom spacing consistency */
+  .sl-progress-stage-footer {
+    margin-top: 40px;
+  }
+}
+
+@media (min-width: 1100px) {
+  .sl-progress-stage-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.2fr);
+    align-items: flex-start;
+  }
+
+  .sl-progress-stage-col--explainer {
+    /* just makes intent clear; grid handles width */
+  }
+
+  .sl-progress-stage-col--checkpoints {
+    display: flex;
+    justify-content: flex-end; /* keeps the panel nicely aligned to the right */
+  }
+
+  /* Make the checkpoints card sit flush to the top and use the column width */
+  .sl-progress-stage-col--checkpoints .pp-stage-card {
+    margin-top: 0.4rem; /* was 1.5rem – that’s why it looked “dropped” */
+    width: 100%;
+  }
+}
 
 @media (max-width: 900px) {
-  .slp-card.pp-card[data-component="ProjectProgress"] {
+  .slp-card.pp-card[data-component='ProjectProgress'] {
     padding: 18px 16px 20px;
   }
 
-  [data-component="ProjectProgress"] .pp-summary {
+  .sl-progress-metrics {
     grid-template-columns: 1fr;
   }
 
-  [data-component="ProjectProgress"] .pp-stats {
+  .sl-progress-stage-stats {
     grid-template-columns: 1fr;
   }
 
-  [data-component="ProjectProgress"] .pp-grid {
+  .sl-progress-stage-body {
     grid-template-columns: 1fr;
   }
 
-  [data-component="ProjectProgress"] .pp-track-dots {
-    height: 40px;
+  .sl-progress-roadmap-steps {
+    flex-wrap: wrap;
   }
 }
 
 @media (max-width: 640px) {
-  [data-component="ProjectProgress"] .pp-hero-frame {
+  .sl-progress-hero-video {
     border-radius: 14px;
   }
 
-  [data-component="ProjectProgress"] .pp-hero-caption {
-    font-size: 0.82rem;
-  }
-
-  [data-component="ProjectProgress"] .pp-summary-item {
-    padding: 9px 10px;
-  }
-
-  [data-component="ProjectProgress"] .pp-body,
-  [data-component="ProjectProgress"] .pp-list,
-  [data-component="ProjectProgress"] .pp-link-button {
+  .sl-progress-intro-text {
     font-size: 0.86rem;
   }
 
-  [data-component="ProjectProgress"] .pp-step-title {
+  .sl-progress-stage-title {
     font-size: 1.02rem;
   }
 
-  [data-component="ProjectProgress"] .pp-pill {
+  .sl-progress-stage-status-pill {
     font-size: 0.68rem;
     padding: 3px 8px;
   }
 
-  [data-component="ProjectProgress"] .pp-media-modal {
-    max-height: 85vh;
+  .sl-progress-step-label {
+    display: none; /* keep the rail clean on small screens */
+  }
+
+  .sl-progress-card-text,
+  .sl-progress-bullet-list,
+  .sl-progress-pill,
+  .sl-progress-stage-files {
+    font-size: 0.86rem;
   }
 }

@@ -158,6 +158,298 @@
   padding: 4px 0;
 }
 
+/* ---------- Admin edit toolbar ---------- */
+
+.sow-admin-toolbar {
+  margin-top: 8px;
+  margin-bottom: 4px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* primary variant for save button */
+.sow-btn-primary {
+  background: #2f80ed;
+  border-color: #2f80ed;
+}
+
+.sow-btn-primary:hover {
+  background: #3b82f6;
+}
+
+/* ---------- Editable fields ---------- */
+
+.sow-input,
+.sow-textarea {
+  width: 100%;
+  padding: 6px 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(0, 0, 0, 0.35);
+  color: #fff;
+  font-size: 0.88rem;
+  font-family: inherit;
+}
+
+.sow-input:focus,
+.sow-textarea:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15);
+}
+
+.sow-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* ---------- Audit history ---------- */
+
+.sow-audit-section {
+  margin-bottom: 4px;
+}
+
+.sow-audit {
+  margin-top: 6px;
+  padding: 10px 14px 12px;
+  border-radius: 12px;
+  background: radial-gradient(circle at top left, #10121d 0, #05060c 60%, #020206 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.82rem;
+}
+
+.sow-audit-empty {
+  opacity: 0.7;
+}
+
+.sow-audit-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sow-audit-item + .sow-audit-item {
+  margin-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 8px;
+}
+
+.sow-audit-main {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.sow-audit-actor {
+  font-weight: 500;
+}
+
+.sow-audit-time {
+  opacity: 0.7;
+}
+
+.sow-audit-summary {
+  margin-top: 2px;
+  opacity: 0.86;
+}
+
+/* ---------- Signed Build Proposal (Enhanced) ---------- */
+
+.sow-proposal-enhanced {
+  margin-top: 10px;
+  padding: 18px 20px;
+  border-radius: 14px;
+  background: radial-gradient(circle at top left, #141622 0, #05060c 60%, #030307 100%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.proposal-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+/* Individual proposal card */
+.proposal-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.proposal-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.proposal-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.proposal-icon {
+  font-size: 1.4rem;
+  opacity: 0.85;
+}
+
+.proposal-name {
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+
+.proposal-meta {
+  font-size: 0.78rem;
+  opacity: 0.55;
+  margin-top: 2px;
+}
+
+/* Buttons */
+.proposal-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.proposal-btn {
+  padding: 8px 14px;
+  background: #ffffff10;
+  border: 1px solid #ffffff28;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  cursor: pointer;
+  color: #fff;
+  text-decoration: none;
+  transition: 0.15s ease;
+}
+
+.proposal-btn:hover {
+  background: #ffffff18;
+}
+
+.delete-btn {
+  color: #ff6b6b;
+  border-color: #ff6b6b33;
+}
+
+.delete-btn:hover {
+  background: rgba(255, 50, 50, 0.1);
+  border-color: #ff6b6b66;
+}
+
+/* Empty message */
+.proposal-empty-msg {
+  font-size: 0.9rem;
+  opacity: 0.75;
+  text-align: left;
+  padding: 4px 0 14px;
+}
+
+/* Drag + Drop Zone */
+.proposal-dropzone {
+  margin-top: 10px;
+  border: 1px dashed #ffffff22;
+  border-radius: 10px;
+  padding: 26px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.18s ease;
+  background: rgba(255,255,255,0.02);
+}
+
+.proposal-dropzone:hover {
+  background: rgba(255,255,255,0.04);
+  border-color: #ffffff40;
+}
+
+.proposal-dropzone.is-uploading {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.drop-icon {
+  font-size: 1.6rem;
+  opacity: 0.8;
+}
+
+.hint {
+  opacity: 0.6;
+  font-size: 0.85rem;
+  display: block;
+  margin-top: 4px;
+}
+
+/* Audit header row with toggle */
+.sow-audit-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.sow-audit-toggle {
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+  font-size: 0.78rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.sow-audit-toggle:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+.sow-audit-chevron {
+  font-size: 0.78rem;
+  transform: translateY(1px) rotate(0deg);
+  transition: transform 0.15s ease;
+}
+
+.sow-audit-chevron.is-open {
+  transform: translateY(1px) rotate(180deg);
+}
+
+/* On small screens, keep header tidy */
+@media (max-width: 900px) {
+  .sow-audit-header-row {
+    align-items: flex-start;
+  }
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .proposal-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .proposal-actions {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .proposal-btn,
+  .delete-btn {
+    width: auto;
+  }
+}
+
+
+
 /* mobile */
 @media (max-width: 900px) {
   .sow-proposal-actions {
@@ -167,6 +459,17 @@
 
   .sow-btn,
   .sow-btn-outline {
+    width: 100%;
+    text-align: center;
+  }
+
+  .sow-admin-toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .sow-admin-toolbar .sow-btn,
+  .sow-admin-toolbar .sow-btn-primary {
     width: 100%;
     text-align: center;
   }
