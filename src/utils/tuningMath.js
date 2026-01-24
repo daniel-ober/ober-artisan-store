@@ -1,5 +1,5 @@
 // Null-safe helpers + a *public* showroom fallback for tuning bands.
-// This WON'T expose your secret-sauce; it just makes the UI robust.
+// This WON'T expose my secret-sauce; it just makes the UI robust.
 
 function num(x, fb = null) {
   const n = Number(x);

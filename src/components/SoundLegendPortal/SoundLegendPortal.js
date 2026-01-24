@@ -207,7 +207,14 @@ const SoundLegendPortal = () => {
 
   return (
     <div className="slp-page">
-      <h2 className="slp-title">SoundLegend</h2>
+      <div className="signin-logo-container">
+        <img
+          src="/soundlegend-signin/white-logo.png"
+          alt="SoundLegend Experience"
+          className="signin-logo"
+          loading="eager"
+        />
+      </div>
 
       <Tabs
         tabs={tabs}
