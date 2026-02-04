@@ -1,3 +1,4 @@
+// src/components/AdminDashboard.js
 import React, { useState, useEffect } from 'react';
 import { collection, onSnapshot, query } from 'firebase/firestore';
 import { backfillOverviewStatus } from '../utils/backfillOverviewStatus';
@@ -37,6 +38,18 @@ import AttachUserResourcesTool from './AttachUserResourcesTool';
 
 import { db } from '../firebaseConfig';
 import './AdminDashboard.css';
+
+// ✅ normalize overviewStatus so badges don’t drift ("inprogress" vs "inProgress", etc.)
+const normalizeOverviewStatus = (raw) => {
+  const v = (raw || '').toString().trim().toLowerCase();
+  if (!v) return null;
+
+  if (v === 'new') return 'new';
+  if (v === 'inprogress' || v === 'in progress') return 'inProgress';
+  if (v === 'completed' || v === 'complete' || v === 'done') return 'completed';
+
+  return null;
+};
 
 const AdminDashboard = () => {
   const [activeComponent, setActiveComponent] = useState('overview');
@@ -87,17 +100,14 @@ const AdminDashboard = () => {
         let yellow = 0;
 
         snapshot.forEach((docSnap) => {
-          const status = (docSnap.data().overviewStatus || '').toLowerCase();
-          if (status === 'new') green++;
-          else if (status === 'inprogress' || status === 'in progress')
-            yellow++;
+          const normalized = normalizeOverviewStatus(docSnap.data().overviewStatus);
+          if (normalized === 'new') green++;
+          else if (normalized === 'inProgress') yellow++;
         });
 
+        // ✅ keep per-card keys consistent with card stateKey
         setNotifications((prev) => ({ ...prev, manageOrders: green }));
-        setSecondaryNotifications((prev) => ({
-          ...prev,
-          manageOrders: yellow,
-        }));
+        setSecondaryNotifications((prev) => ({ ...prev, manageOrders: yellow }));
 
         setBadgeSources((prev) => ({
           ...prev,
@@ -114,19 +124,21 @@ const AdminDashboard = () => {
         let yellow = 0;
 
         snapshot.forEach((docSnap) => {
-          const raw =
-            docSnap.data().overviewStatus || docSnap.data().status || '';
-          const status = raw.toLowerCase();
-          if (status === 'new') green++;
-          else if (status === 'inprogress' || status === 'in progress')
+          const d = docSnap.data();
+          const normalized =
+            normalizeOverviewStatus(d.overviewStatus) ||
+            normalizeOverviewStatus(d.status) ||
+            (d.status || '').toString().trim().toLowerCase();
+
+          // inquiries might still have textual statuses—fall back to string checks
+          if (normalized === 'new') green++;
+          else if (normalized === 'inProgress' || normalized === 'inprogress' || normalized === 'in progress')
             yellow++;
+          else if (typeof normalized === 'string' && normalized.includes('in progress')) yellow++;
         });
 
         setNotifications((prev) => ({ ...prev, manageInquiries: green }));
-        setSecondaryNotifications((prev) => ({
-          ...prev,
-          manageInquiries: yellow,
-        }));
+        setSecondaryNotifications((prev) => ({ ...prev, manageInquiries: yellow }));
 
         setBadgeSources((prev) => ({
           ...prev,
@@ -143,14 +155,18 @@ const AdminDashboard = () => {
         let yellow = 0;
 
         snapshot.forEach((docSnap) => {
-          const raw =
-            docSnap.data().overviewStatus || docSnap.data().status || '';
-          const status = raw.toLowerCase();
-          if (status === 'new') green++;
+          const d = docSnap.data();
+          const normalized =
+            normalizeOverviewStatus(d.overviewStatus) ||
+            normalizeOverviewStatus(d.status) ||
+            (d.status || '').toString().trim().toLowerCase();
+
+          if (normalized === 'new') green++;
           else if (
-            status === 'prospecting' ||
-            status === 'inprogress' ||
-            status === 'in progress'
+            normalized === 'inProgress' ||
+            normalized === 'prospecting' ||
+            normalized === 'inprogress' ||
+            normalized === 'in progress'
           )
             yellow++;
         });
@@ -179,11 +195,22 @@ const AdminDashboard = () => {
         let yellow = 0;
 
         snapshot.forEach((docSnap) => {
-          const status = (docSnap.data().status || '').toLowerCase().trim();
-          if (status === 'new') green++;
-          else if (status === 'in review' || status === 'in progress') yellow++;
+          const d = docSnap.data();
+          // risk uses status like "In Review" etc, but may also have overviewStatus
+          const normalized =
+            normalizeOverviewStatus(d.overviewStatus) ||
+            (d.status || '').toString().trim().toLowerCase();
+
+          if (normalized === 'new') green++;
+          else if (
+            normalized === 'inProgress' ||
+            normalized === 'in review' ||
+            normalized === 'in progress'
+          )
+            yellow++;
         });
 
+        // ✅ IMPORTANT: your card uses stateKey "manageRiskAlerts"
         setNotifications((prev) => ({
           ...prev,
           manageRiskAlerts: green,
@@ -208,9 +235,14 @@ const AdminDashboard = () => {
         let yellow = 0;
 
         snapshot.forEach((docSnap) => {
-          const status = (docSnap.data().status || '').toLowerCase();
-          if (status === 'new') green++;
-          else if (status === 'inprogress' || status === 'in progress')
+          const d = docSnap.data();
+          const normalized =
+            normalizeOverviewStatus(d.overviewStatus) ||
+            normalizeOverviewStatus(d.status) ||
+            (d.status || '').toString().trim().toLowerCase();
+
+          if (normalized === 'new') green++;
+          else if (normalized === 'inProgress' || normalized === 'inprogress' || normalized === 'in progress')
             yellow++;
         });
 

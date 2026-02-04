@@ -487,14 +487,13 @@ export function computeStageStatus(step) {
 }
 
 function displayStatus(status) {
-  switch (status) {
-    case 'completed':
-      return 'Completed';
-    case 'in progress':
-      return 'In Progress';
-    default:
-      return 'Not Started';
-  }
+  const s = String(status || '').toLowerCase();
+
+  if (s === 'completed') return 'Completed';
+  if (s === 'in_progress' || s === 'in progress') return 'In Progress';
+  if (s === 'not_started' || s === 'not started') return 'Not Started';
+
+  return 'Not Started';
 }
 
 function getProjectDocRef(project) {
@@ -1282,114 +1281,102 @@ const STAGE_TEMPLATES = {
    ========================================================= */
 
 const StageCheckpointsPanel = ({ project, stageKey }) => {
-  if (!project) return null;
-
-  const template = STAGE_TEMPLATES[stageKey];
-  if (!template) return null;
-
-  // Map stageKey (e.g. 'rawShell') → phase key used in the admin modal
-  // (e.g. 'rawShellCreation'), via STEP_DEFS.storageKeys.
-  const stepMeta = STEP_DEFS[stageKey];
-  const phaseKey = stepMeta?.storageKeys?.[0]; // usually a single key
-  const phase = phaseKey ? project?.[phaseKey] : null;
-  const phaseChecklist = Array.isArray(phase?.checklist) ? phase.checklist : [];
-
-  // Optional legacy lifecycle structure (fallback only)
-  const lifecycleStage = project?.lifecycle?.stages?.[stageKey];
-  const lifecycleSteps = lifecycleStage?.steps
-    ? Object.values(lifecycleStage.steps)
-    : [];
-
-  // Build normalized steps from the template, and overlay completion from
-  // either the phase checklist (primary) or lifecycle (fallback).
-  const normalizedSteps = template.steps.map((tplStep, idx) => {
-    const labels = tplStep.checkpoints || [];
-
-    let checkpointStates = [];
-    let completedFlag = false;
-
-    // ---- 1) PRIMARY: top-level phase checklist (rawShellCreation.checklist) ----
-    const phaseItem = phaseChecklist[idx];
-    if (phaseItem) {
-      if (Array.isArray(phaseItem.checkpointStates)) {
-        checkpointStates = phaseItem.checkpointStates;
-      }
-      completedFlag = !!phaseItem.completed;
-    }
-
-    // ---- 2) FALLBACK: lifecycle.stages[stageKey].steps[*].checkpoints ----
-    if (!checkpointStates.length && lifecycleSteps.length) {
-      const tplSlug = slugify(tplStep.label);
-      const dbStep =
-        lifecycleSteps.find((s) => slugify(s.label || '') === tplSlug) ||
-        lifecycleSteps[idx];
-
-      if (dbStep) {
-        const cpsObj = dbStep.checkpoints || {};
-        const cpsArr = Object.values(cpsObj).sort(
-          (a, b) => (a.order || 0) - (b.order || 0)
-        );
-        checkpointStates = cpsArr.map((c) => !!c.completed);
-        completedFlag = completedFlag || !!dbStep.completed;
-      }
-    }
-
-    // Map template checkpoint labels → completion booleans
-    const checkpoints = labels.map((cpLabel, cpIndex) => ({
-      id: `${tplStep.key}_cp_${cpIndex}`,
-      label: cpLabel,
-      completed: !!checkpointStates[cpIndex],
-    }));
-
-    const total = checkpoints.length;
-    const done = checkpoints.filter((c) => c.completed).length;
-
-    let status;
-    if (completedFlag && total > 0) {
-      status = 'COMPLETED';
-    } else if (done === 0) {
-      status = 'NOT STARTED';
-    } else if (done === total) {
-      status = 'COMPLETED';
-    } else {
-      status = 'IN PROGRESS';
-    }
-
-    return {
-      id: `${stageKey}_${tplStep.key}`,
-      label: tplStep.label,
-      order: idx + 1,
-      checkpoints,
-      total,
-      done,
-      status,
-    };
-  });
-
-  const statusClass = (status) => {
-    if (status === 'COMPLETED') return 'pill-complete';
-    if (status === 'IN PROGRESS') return 'pill-progress';
-    return 'pill-pending';
-  };
-
   // ---------- single-open accordion state ----------
   const [openStepId, setOpenStepId] = useState(null);
 
-  // On stage or project change:
-  // - If this is the *current* stage: auto-open the most current
-  //   non-completed step (prefer IN PROGRESS, else first NOT STARTED).
-  // - If this is a past/future stage: don't auto-open anything.
+  // template does NOT need project to exist
+  const template = STAGE_TEMPLATES?.[stageKey] || null;
+
+  // Map stageKey (e.g. 'rawShell') → phase key used in the admin modal
+  const stepMeta = STEP_DEFS?.[stageKey] || null;
+  const phaseKey = stepMeta?.storageKeys?.[0] || null;
+
+  // Safe fallbacks so hooks can always run
+  const phaseChecklist = useMemo(() => {
+    const phase = phaseKey && project ? project?.[phaseKey] : null;
+    return Array.isArray(phase?.checklist) ? phase.checklist : [];
+  }, [project, phaseKey]);
+
+  const lifecycleSteps = useMemo(() => {
+    const lifecycleStage = project?.lifecycle?.stages?.[stageKey];
+    const stepsObj = lifecycleStage?.steps || null;
+    return stepsObj ? Object.values(stepsObj) : [];
+  }, [project, stageKey]);
+
+  // Build normalized steps from the template (safe even if template is null)
+  const normalizedSteps = useMemo(() => {
+    const tplSteps = template?.steps || [];
+
+    return tplSteps.map((tplStep, idx) => {
+      const labels = tplStep.checkpoints || [];
+
+      let checkpointStates = [];
+      let completedFlag = false;
+
+      // ---- 1) PRIMARY: top-level phase checklist ----
+      const phaseItem = phaseChecklist[idx];
+      if (phaseItem) {
+        if (Array.isArray(phaseItem.checkpointStates)) {
+          checkpointStates = phaseItem.checkpointStates;
+        }
+        completedFlag = !!phaseItem.completed;
+      }
+
+      // ---- 2) FALLBACK: lifecycle ----
+      if (!checkpointStates.length && lifecycleSteps.length) {
+        const tplSlug = slugify(tplStep.label);
+        const dbStep =
+          lifecycleSteps.find((s) => slugify(s.label || '') === tplSlug) ||
+          lifecycleSteps[idx];
+
+        if (dbStep) {
+          const cpsObj = dbStep.checkpoints || {};
+          const cpsArr = Object.values(cpsObj).sort(
+            (a, b) => (a.order || 0) - (b.order || 0)
+          );
+          checkpointStates = cpsArr.map((c) => !!c.completed);
+          completedFlag = completedFlag || !!dbStep.completed;
+        }
+      }
+
+      const checkpoints = labels.map((cpLabel, cpIndex) => ({
+        id: `${tplStep.key}_cp_${cpIndex}`,
+        label: cpLabel,
+        completed: !!checkpointStates[cpIndex],
+      }));
+
+      const total = checkpoints.length;
+      const done = checkpoints.filter((c) => c.completed).length;
+
+      let status;
+      if (completedFlag && total > 0) status = 'COMPLETED';
+      else if (done === 0) status = 'NOT STARTED';
+      else if (done === total) status = 'COMPLETED';
+      else status = 'IN PROGRESS';
+
+      return {
+        id: `${stageKey}_${tplStep.key}`,
+        label: tplStep.label,
+        order: idx + 1,
+        checkpoints,
+        total,
+        done,
+        status,
+      };
+    });
+  }, [template, stageKey, phaseChecklist, lifecycleSteps]);
+
+  // Auto-open logic (hook must ALWAYS run; guard inside)
   useEffect(() => {
-    if (!normalizedSteps.length) {
+    if (!project || !normalizedSteps.length) {
       setOpenStepId(null);
       return;
     }
 
-    const currentStageIndex = getCurrentStepIndex(project); // from above in file
+    const currentStageIndex = getCurrentStepIndex(project);
     const thisStageIndex = STEPS.findIndex((s) => s.key === stageKey);
     const isCurrentStage = thisStageIndex === currentStageIndex;
 
-    // If we're looking at a past or future stage, never auto-expand.
     if (!isCurrentStage) {
       setOpenStepId(null);
       return;
@@ -1397,42 +1384,41 @@ const StageCheckpointsPanel = ({ project, stageKey }) => {
 
     let candidateIndex = -1;
 
-    // 1) Try to derive from the phase checklist (admin modal source of truth)
-    if (phaseChecklist.length && phaseKey) {
+    if (phaseKey) {
       const idx = getActiveStepIndexForPhase(project, phaseKey);
-      if (idx >= 0 && idx < normalizedSteps.length) {
-        candidateIndex = idx;
-      }
+      if (idx >= 0 && idx < normalizedSteps.length) candidateIndex = idx;
     }
 
-    // 2) If that fails, look for the first IN PROGRESS step in this stage
     if (candidateIndex < 0) {
       candidateIndex = normalizedSteps.findIndex(
         (s) => s.status === 'IN PROGRESS'
       );
     }
 
-    // 3) If still nothing, look for the first NOT STARTED step
     if (candidateIndex < 0) {
       candidateIndex = normalizedSteps.findIndex(
         (s) => s.status === 'NOT STARTED'
       );
     }
 
-    const candidate =
-      candidateIndex >= 0 ? normalizedSteps[candidateIndex] : null;
+    if (candidateIndex < 0) candidateIndex = 0;
 
-    // 🚫 Never auto-expand a COMPLETED step
-    if (!candidate || candidate.status === 'COMPLETED') {
-      setOpenStepId(null);
-    } else {
-      setOpenStepId(candidate.id);
-    }
-  }, [stageKey, project, phaseChecklist.length]);
+    const nextId = normalizedSteps[candidateIndex]?.id ?? null;
+    setOpenStepId((prev) => (prev === nextId ? prev : nextId));
+  }, [stageKey, project, phaseKey, normalizedSteps]);
+
+  const statusClass = (status) => {
+    if (status === 'COMPLETED') return 'pill-complete';
+    if (status === 'IN PROGRESS') return 'pill-progress';
+    return 'pill-pending';
+  };
 
   const toggleStep = (stepId) => {
     setOpenStepId((prev) => (prev === stepId ? null : stepId));
   };
+
+  // ✅ Early return ONLY AFTER hooks are declared
+  if (!project || !template) return null;
 
   return (
     <div className="pp-stage-card">
@@ -1445,11 +1431,8 @@ const StageCheckpointsPanel = ({ project, stageKey }) => {
           return (
             <div
               key={step.id}
-              className={`pp-step-block step-${status
-                .toLowerCase()
-                .replace(' ', '-')}`}
+              className={`pp-step-block step-${status.toLowerCase().replace(' ', '-')}`}
             >
-              {/* Step header (e.g. "Glue-up & clamping") */}
               <button
                 type="button"
                 className="pp-step-header slp-pp-step-header"
@@ -1475,24 +1458,19 @@ const StageCheckpointsPanel = ({ project, stageKey }) => {
                 </span>
               </button>
 
-              {/* Step checkpoints (internal tasks) */}
               {isOpen && (
                 <div className="pp-checkpoint-list grouped">
                   {step.checkpoints.map((cp) => (
                     <div key={cp.id} className="pp-checkpoint-row">
                       <div className="pp-checkpoint-main">
                         <span
-                          className={`pp-checkpoint-icon ${
-                            cp.completed ? 'is-completed' : ''
-                          }`}
+                          className={`pp-checkpoint-icon ${cp.completed ? 'is-completed' : ''}`}
                           aria-hidden="true"
                         >
                           {cp.completed ? '✓' : ''}
                         </span>
                         <span
-                          className={`pp-checkpoint-label ${
-                            cp.completed ? 'is-completed' : ''
-                          }`}
+                          className={`pp-checkpoint-label ${cp.completed ? 'is-completed' : ''}`}
                         >
                           {cp.label}
                         </span>
@@ -1592,10 +1570,7 @@ const ProjectProgress = ({ project: initialProject }) => {
 
   const overallPct = useMemo(() => getOverallProgress(project), [project]);
 
-    const targetWindow = useMemo(
-    () => getTargetWindow(project),
-    [project]
-  );
+  const targetWindow = useMemo(() => getTargetWindow(project), [project]);
 
   // If there is zero progress on the project, always treat it as being at Stage 1
   const currentStepIndex = useMemo(
@@ -1618,9 +1593,12 @@ const ProjectProgress = ({ project: initialProject }) => {
   }, [currentStepIndex]);
 
   const activeStep = STEPS.find((s) => s.key === activeKey) || STEPS[0];
-  const activeStatus = getStepStatus(project, activeStep).status.toLowerCase();
+ const activeStatusRaw = getStepStatus(project, activeStep).status; // "In Progress"
+const activeStatus = String(activeStatusRaw || '')
+  .toLowerCase()
+  .replace(/\s+/g, '_'); // "in_progress"
 
-    const stageTarget = useMemo(
+  const stageTarget = useMemo(
     () => getStageTargetDate(project, activeStep.key),
     [project, activeStep.key]
   );
@@ -1710,7 +1688,7 @@ const ProjectProgress = ({ project: initialProject }) => {
             Target completion window
           </div>
           <div className="sl-progress-metric-value">
-            {stageTarget || 'TBD'}
+            {targetWindow || 'TBD'}
           </div>
         </div>
       </div>

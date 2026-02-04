@@ -151,6 +151,16 @@ label .optional { color: #b5b5b5; font-weight: 400; }
   border-radius: 8px;
   margin: 10px 0 12px;
 }
+
+.error-bullets {
+  margin: 8px 0 0;
+  padding-left: 18px;
+}
+
+.error-bullets li {
+  margin: 4px 0;
+}
+
 .error-bottom { margin-top: 12px; }
 
 /* ───── Invalid field highlighting ───── */
