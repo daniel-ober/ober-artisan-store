@@ -1130,7 +1130,11 @@ stripeWebhookApp.post('/', async (req, res) => {
 
   // Fallbacks (just in case)
   if (!payload) payload = req.body;
-  if (payload && !(payload instanceof Buffer) && payload instanceof Uint8Array) {
+  if (
+    payload &&
+    !(payload instanceof Buffer) &&
+    payload instanceof Uint8Array
+  ) {
     payload = Buffer.from(payload);
   }
 
@@ -1296,10 +1300,14 @@ stripeWebhookApp.post('/', async (req, res) => {
       '';
 
     const name =
-      session.customer_details?.name || session.metadata?.customerName || 'Customer';
+      session.customer_details?.name ||
+      session.metadata?.customerName ||
+      'Customer';
 
     const addressObj =
-      session.shipping_details?.address || session.customer_details?.address || null;
+      session.shipping_details?.address ||
+      session.customer_details?.address ||
+      null;
 
     if (!email) {
       await markProcessed({ note: 'Skipped: Missing email.' });
@@ -1336,7 +1344,10 @@ stripeWebhookApp.post('/', async (req, res) => {
 
     if (guestToken) {
       try {
-        const snapDoc = await db.collection('pending_checkouts').doc(guestToken).get();
+        const snapDoc = await db
+          .collection('pending_checkouts')
+          .doc(guestToken)
+          .get();
         if (snapDoc.exists) {
           const snap = snapDoc.data();
           if (Array.isArray(snap?.products)) snapshotProducts = snap.products;
@@ -1353,14 +1364,18 @@ stripeWebhookApp.post('/', async (req, res) => {
       const productObj = li.price?.product || {};
       const pMeta = productObj?.metadata || {};
       const pDesc = productObj?.description || '';
-      const pImages = Array.isArray(productObj?.images) ? productObj.images : [];
+      const pImages = Array.isArray(productObj?.images)
+        ? productObj.images
+        : [];
 
       let matched =
         (Array.isArray(snapshotProducts) ? snapshotProducts : []).find(
           (p) => p.stripePriceId && p.stripePriceId === priceId
         ) ||
         (Array.isArray(snapshotProducts) ? snapshotProducts : []).find(
-          (p) => !p.stripePriceId && Math.round(Number(p.price || 0) * 100) === unitAmount
+          (p) =>
+            !p.stripePriceId &&
+            Math.round(Number(p.price || 0) * 100) === unitAmount
         );
 
       let stripePriceMeta = { variantId: '', title: '', sku: '' };
@@ -1368,7 +1383,8 @@ stripeWebhookApp.post('/', async (req, res) => {
         if (priceId) {
           const priceObj = await stripe.prices.retrieve(priceId);
           const md = priceObj?.metadata || {};
-          stripePriceMeta.variantId = md.variantId || md.printify_variant_id || '';
+          stripePriceMeta.variantId =
+            md.variantId || md.printify_variant_id || '';
           stripePriceMeta.title = md.title || md.variant_title || '';
           stripePriceMeta.sku = md.sku || md.printify_sku || '';
         }
@@ -1392,7 +1408,8 @@ stripeWebhookApp.post('/', async (req, res) => {
         const cfg = matched.config || {};
         variant.variantId =
           variant.variantId || (cfg.variantId ? String(cfg.variantId) : '');
-        variant.size = variant.size || cfg.sizeName || cfg.size || cfg.Sizes || '';
+        variant.size =
+          variant.size || cfg.sizeName || cfg.size || cfg.Sizes || '';
         variant.color =
           variant.color || cfg.colorName || cfg.color || cfg.Colors || '';
       } else if (matched) {
@@ -1405,7 +1422,11 @@ stripeWebhookApp.post('/', async (req, res) => {
           staveQuantity: cfg.staveQuantity || '',
           depth: cfg.depth || '',
           reRing:
-            typeof cfg.reRing !== 'undefined' ? (cfg.reRing ? 'Yes' : 'No') : '',
+            typeof cfg.reRing !== 'undefined'
+              ? cfg.reRing
+                ? 'Yes'
+                : 'No'
+              : '',
         };
       }
 
@@ -1457,7 +1478,9 @@ stripeWebhookApp.post('/', async (req, res) => {
     }
 
     const paymentMethodDetails =
-      paymentMethodType && pm && pm[paymentMethodType] ? pm[paymentMethodType] : null;
+      paymentMethodType && pm && pm[paymentMethodType]
+        ? pm[paymentMethodType]
+        : null;
 
     const customerAddress = addressObj
       ? [
@@ -1593,9 +1616,12 @@ exports.reconcileStripeOrders = onSchedule(
         console.warn('🚨 Missing order detected for session:', session.id);
 
         // Pull line items
-        const lineItems = await stripe.checkout.sessions.listLineItems(session.id, {
-          limit: 100,
-        });
+        const lineItems = await stripe.checkout.sessions.listLineItems(
+          session.id,
+          {
+            limit: 100,
+          }
+        );
 
         const items = lineItems.data.map((li) => ({
           name: li.description,
@@ -1609,12 +1635,14 @@ exports.reconcileStripeOrders = onSchedule(
           stripeSessionId: session.id,
           customerEmail: session.customer_details?.email || 'unknown',
           customerName: session.customer_details?.name || 'Customer',
-          totalAmount: session.amount_total ? session.amount_total / 100 : 0,
+          amountTotal: session.amount_total || 0, // cents
+          totalAmount: session.amount_total ? session.amount_total / 100 : 0, // dollars
           currency: session.currency || 'usd',
           status: 'recovered-by-reconciliation',
           createdAt: admin.firestore.FieldValue.serverTimestamp(),
           items,
           recovered: true,
+          recoveredBy: 'reconcileStripeOrders',
         };
 
         await db.collection('orders').doc(orderId).set(orderDoc);
@@ -1654,12 +1682,15 @@ exports.reconcileStripeOrders = onSchedule(
 
       // ✅ If the backstop fails, alert yourself (don’t silently miss failures)
       try {
-        await admin.firestore().collection('admin_alerts').add({
-          type: 'reconciliation_failure',
-          severity: 'critical',
-          createdAt: admin.firestore.FieldValue.serverTimestamp(),
-          message: err?.message || String(err),
-        });
+        await admin
+          .firestore()
+          .collection('admin_alerts')
+          .add({
+            type: 'reconciliation_failure',
+            severity: 'critical',
+            createdAt: admin.firestore.FieldValue.serverTimestamp(),
+            message: err?.message || String(err),
+          });
       } catch (e) {
         console.error(
           '⚠️ Failed writing admin_alerts (reconciliation_failure):',

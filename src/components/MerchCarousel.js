@@ -16,6 +16,9 @@ export default function MerchCarousel({
 }) {
   const viewportRef = useRef(null);
 
+  const FALLBACK_IMG =
+    'https://www.oberartisandrums.com/fallback-images/fallback_image1.png';
+
   // Read CSS vars + live width so math stays aligned with styles
   const [sizes, setSizes] = useState({ card: 132, gap: 12, vw: 800, nudge: 0 });
 
@@ -42,63 +45,18 @@ export default function MerchCarousel({
   const step = sizes.card + sizes.gap;
   const centerPx = Math.round(sizes.vw / 2);
 
-  // Cross-fade image swapper: keeps old src showing until new one is loaded
-const useCrossfadeImage = (initialSrc) => {
-  const [currentSrc, setCurrentSrc] = useState(initialSrc || '');
-  const [incomingSrc, setIncomingSrc] = useState(null);
-  const [incomingVisible, setIncomingVisible] = useState(false);
-
-  const preload = (src) =>
-    new Promise((resolve, reject) => {
-      if (!src) return reject(new Error('no src'));
-      const img = new Image();
-      img.onload = () => resolve(src);
-      img.onerror = reject;
-      img.src = src;
-      // hint
-      img.decoding = 'async';
-      img.fetchPriority = 'high';
-    });
-
-  const swapTo = async (nextSrc, fallback) => {
-    try {
-      if (!nextSrc) nextSrc = fallback;
-      if (!nextSrc || nextSrc === currentSrc) return;
-      const ready = await preload(nextSrc);
-      setIncomingSrc(ready);
-      // allow the node to mount before animating opacity
-      requestAnimationFrame(() => setIncomingVisible(true));
-      // after the fade, commit
-      setTimeout(() => {
-        setCurrentSrc(ready);
-        setIncomingVisible(false);
-        setIncomingSrc(null);
-      }, 220); // keep in sync with CSS transition
-    } catch {
-      if (fallback && fallback !== currentSrc) {
-        setCurrentSrc(fallback);
-        setIncomingSrc(null);
-        setIncomingVisible(false);
-      }
-    }
-  };
-
-  return { currentSrc, incomingSrc, incomingVisible, swapTo };
-};
-
   // Tripled data for seamless wrap
   const N = items.length;
   const middleStart = N;
   const tripled = useMemo(() => (N ? [...items, ...items, ...items] : []), [items, N]);
 
   // Cursor over 0..(3N-1)
-  const initialBaseIdx = Math.max(0, items.findIndex(i => i.id === activeId));
+  const initialBaseIdx = Math.max(0, items.findIndex((i) => i.id === activeId));
   const [cursor, setCursor] = useState(middleStart + initialBaseIdx);
   const [withTransition, setWithTransition] = useState(true);
 
   // Choose the nearest occurrence of a base index (0..N-1)
   const nearestCursorForBase = (baseIdx, fromCursor) => {
-    // occurrences at baseIdx, baseIdx+N, baseIdx+2N
     const choices = [baseIdx, baseIdx + N, baseIdx + 2 * N];
     let best = choices[0];
     let bestDist = Math.abs(best - fromCursor);
@@ -115,10 +73,11 @@ const useCrossfadeImage = (initialSrc) => {
   // When parent changes activeId, animate to the nearest copy
   useEffect(() => {
     if (!N) return;
-    const baseIdx = Math.max(0, items.findIndex(i => i.id === activeId));
+    const baseIdx = Math.max(0, items.findIndex((i) => i.id === activeId));
     const dest = nearestCursorForBase(baseIdx, cursor);
     setWithTransition(true);
     setCursor(dest);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeId, N]); // intentionally not depending on `items` or `cursor` reactivity here
 
   // Translate so cursor's *center* is at viewport center (plus tiny nudge)
@@ -128,7 +87,7 @@ const useCrossfadeImage = (initialSrc) => {
   const handleTransitionEnd = () => {
     if (!N) return;
     const idxInBase = ((cursor % N) + N) % N; // 0..N-1
-    const ideal = middleStart + idxInBase;    // middle copy position
+    const ideal = middleStart + idxInBase; // middle copy position
     if (cursor !== ideal) {
       setWithTransition(false);
       requestAnimationFrame(() => {
@@ -158,49 +117,69 @@ const useCrossfadeImage = (initialSrc) => {
     setActiveByCursor(dest);
   };
 
+  // Image error handler (prevents infinite loops)
+  const handleImgError = (e) => {
+    const img = e.currentTarget;
+    // If we've already fallen back once, don’t loop forever.
+    if (img.dataset.fallbackApplied === '1') return;
+    img.dataset.fallbackApplied = '1';
+    img.src = FALLBACK_IMG;
+  };
+
   return (
-  <div className="merch-carousel">
-    <button className="mc-nav" onClick={goPrev} aria-label="Previous">‹</button>
+    <div className="merch-carousel">
+      <button className="mc-nav" onClick={goPrev} aria-label="Previous">
+        ‹
+      </button>
 
-    <div className="mc-viewport" ref={viewportRef}>
-      {ring && <div className="mc-centerHighlight" aria-hidden />}
-      <div
-        className="mc-track"
-        style={{
-          transform: `translateX(${-translatePx}px)`,
-          transition: withTransition ? 'transform 320ms ease' : 'none',
-          gap: `var(--mc-gap)`,
-        }}
-        onTransitionEnd={handleTransitionEnd}
-      >
-        {tripled.map((it, i) => {
-          // figure out which base index this card represents
-          const baseIndex = ((i % N) + N) % N; 
-          const isHighlight = items[baseIndex]?.id === activeId;
+      <div className="mc-viewport" ref={viewportRef}>
+        {ring && <div className="mc-centerHighlight" aria-hidden />}
+        <div
+          className="mc-track"
+          style={{
+            transform: `translateX(${-translatePx}px)`,
+            transition: withTransition ? 'transform 320ms ease' : 'none',
+            gap: `var(--mc-gap)`,
+          }}
+          onTransitionEnd={handleTransitionEnd}
+        >
+          {tripled.map((it, i) => {
+            const baseIndex = ((i % N) + N) % N;
+            const isHighlight = items[baseIndex]?.id === activeId;
 
-          return (
-            <div
-              className={`mc-card${isHighlight ? ' highlight' : ''}`}
-              key={`${it.id}-${i}`}
-              role="button"
-              tabIndex={0}
-              onClick={() => onCardClick(i)}
-              onKeyDown={(e) =>
-                (e.key === 'Enter' || e.key === ' ') && onCardClick(i)
-              }
-              aria-label={it.title}
-              aria-selected={isHighlight ? 'true' : 'false'}
-            >
-              <div className="mc-thumb">
-                <img src={it.previewImage} alt={it.title} />
+            // If previewImage is missing/empty, start with fallback immediately.
+            const src = (it?.previewImage && String(it.previewImage).trim()) ? it.previewImage : FALLBACK_IMG;
+
+            return (
+              <div
+                className={`mc-card${isHighlight ? ' highlight' : ''}`}
+                key={`${it.id}-${i}`}
+                role="button"
+                tabIndex={0}
+                onClick={() => onCardClick(i)}
+                onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && onCardClick(i)}
+                aria-label={it.title}
+                aria-selected={isHighlight ? 'true' : 'false'}
+              >
+                <div className="mc-thumb">
+                  <img
+                    src={src}
+                    alt={it.title}
+                    loading="lazy"
+                    decoding="async"
+                    referrerPolicy="no-referrer"
+                    onError={handleImgError}
+                  />
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
-    </div>
 
-    <button className="mc-nav" onClick={goNext} aria-label="Next">›</button>
-  </div>
-);
+      <button className="mc-nav" onClick={goNext} aria-label="Next">
+        ›
+      </button>
+    </div>
+  );
 }

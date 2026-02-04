@@ -3,11 +3,7 @@ import './PaymentHistory.css';
 import { useActorContext } from '../../hooks/useActorContext';
 import { db, storage } from '../../firebaseConfig';
 import { doc, updateDoc } from 'firebase/firestore';
-import {
-  ref,
-  uploadBytesResumable,
-  getDownloadURL,
-} from 'firebase/storage';
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 
 const STRIPE_LOGO = '/logos/stripe-logo.png';
 
@@ -39,11 +35,41 @@ function fmtDate(v) {
   return ms ? new Date(ms).toLocaleDateString() : '—';
 }
 
-function dollars(cents) {
-  if (cents == null) return '—';
-  const num = Number(cents);
-  if (!Number.isFinite(num)) return '—';
-  return `$${(num / 100).toFixed(2)}`;
+/**
+ * Display the order total correctly across legacy docs.
+ *
+ * Rules:
+ * - amountTotal: cents (Stripe-style)
+ * - totalAmount: dollars (your app convention)
+ * - If totalAmount looks like cents (e.g. 56000), fall back to cents formatting.
+ */
+function formatOrderTotal(order) {
+  if (!order) return '—';
+
+  const hasAmountTotal = order.amountTotal != null && order.amountTotal !== '';
+  const hasTotalAmount = order.totalAmount != null && order.totalAmount !== '';
+
+  // Prefer amountTotal when present (it should be cents)
+  if (hasAmountTotal) {
+    const cents = Number(order.amountTotal);
+    if (!Number.isFinite(cents)) return '—';
+    return `$${(cents / 100).toFixed(2)}`;
+  }
+
+  if (hasTotalAmount) {
+    const dollars = Number(order.totalAmount);
+    if (!Number.isFinite(dollars)) return '—';
+
+    // Heuristic: if a value is absurdly large for dollars, it might be cents
+    // (e.g. 56000 intended as $560.00)
+    if (dollars >= 10000) {
+      return `$${(dollars / 100).toFixed(2)}`;
+    }
+
+    return `$${dollars.toFixed(2)}`;
+  }
+
+  return '—';
 }
 
 function prettyStatus(status) {
@@ -261,7 +287,6 @@ export default function PaymentHistory({ orders }) {
           </p>
         )}
 
-        {/* Stripe security message even if there are no orders */}
         <StripeSecurityNotice />
       </div>
     );
@@ -294,8 +319,7 @@ export default function PaymentHistory({ orders }) {
           </thead>
           <tbody>
             {sortedRows.map((o) => {
-              const status =
-                o.status || o.paymentMethodDetails?.status || '—';
+              const status = o.status || o.paymentMethodDetails?.status || '—';
               const hasReceipt = !!o.receiptUrl;
               const inputId = `ph-receipt-input-${o.id}`;
               const uploading = uploadingOrderId === o.id;
@@ -304,7 +328,7 @@ export default function PaymentHistory({ orders }) {
                 <tr key={o.id}>
                   <td className="mono">{cleanOrderId(o.id)}</td>
                   <td>{fmtDate(o.createdAt)}</td>
-                  <td>{dollars(o.amountTotal ?? o.totalAmount)}</td>
+                  <td>{formatOrderTotal(o)}</td>
                   <td>{prettyStatus(status)}</td>
                   <td>{o.trackingNumber || '—'}</td>
                   <td className="ph-receipt-cell">
@@ -370,9 +394,7 @@ export default function PaymentHistory({ orders }) {
                           >
                             {uploading ? 'Uploading…' : 'Upload receipt'}
                           </label>
-                          <span className="ph-receipt-hint">
-                            or drag file here
-                          </span>
+                          <span className="ph-receipt-hint">or drag file here</span>
                         </>
                       ) : (
                         <span className="ph-receipt-none">—</span>
@@ -384,9 +406,7 @@ export default function PaymentHistory({ orders }) {
                           type="file"
                           accept="application/pdf,image/*"
                           style={{ display: 'none' }}
-                          onChange={(e) =>
-                            handleReceiptInputChange(o, e)
-                          }
+                          onChange={(e) => handleReceiptInputChange(o, e)}
                           disabled={uploading}
                         />
                       )}
@@ -399,7 +419,6 @@ export default function PaymentHistory({ orders }) {
         </table>
       </div>
 
-      {/* Receipt preview modal (re-uses Media modal styling) */}
       {activeReceipt && (
         <div
           className="mg-modal"
@@ -426,19 +445,12 @@ export default function PaymentHistory({ orders }) {
                   type="button"
                   className="apo-btn"
                   onClick={() =>
-                    handleDownloadReceipt(
-                      activeReceipt.url,
-                      activeReceipt.name
-                    )
+                    handleDownloadReceipt(activeReceipt.url, activeReceipt.name)
                   }
                 >
                   Download
                 </button>
-                <button
-                  type="button"
-                  className="apo-btn"
-                  onClick={closeReceiptModal}
-                >
+                <button type="button" className="apo-btn" onClick={closeReceiptModal}>
                   ✕
                 </button>
               </div>
