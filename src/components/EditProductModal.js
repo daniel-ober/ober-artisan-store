@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { fetchProductById, updateProduct } from '../services/productService';
-// import { createStripeProduct, createStripePrice, updateStripeProductWithPrices, fetchStripePrices } from '../services/stripeService';
+import {
+  createStripeProduct,
+  createStripePrice,
+  updateStripeProductWithPrices,
+  fetchStripePrices,
+} from '../services/stripeService'; // ✅ FIX
 import './EditProductModal.css';
 
 const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
@@ -37,7 +42,6 @@ const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
   });
 
   const [pricingOptions, setPricingOptions] = useState([]);
-  const [stripePrices, setStripePrices] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
@@ -46,7 +50,7 @@ const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
     const loadProduct = async () => {
       try {
         setLoading(true);
-        setError("");
+        setError('');
 
         const fetchedProduct = await fetchProductById(productId);
         setProduct(fetchedProduct);
@@ -54,38 +58,34 @@ const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
         let firestorePricingOptions = fetchedProduct.pricingOptions || [];
         let stripePricingOptions = [];
 
-        if (["HERITAGE", "FEUZØN", "SOUNDLEGEND"].includes(fetchedProduct.name)) {
-          if (fetchedProduct.stripeProductId) {
-            const stripePrices = await fetchStripePrices(fetchedProduct.stripeProductId);
+        if (fetchedProduct.stripeProductId) {
+          const stripePrices = await fetchStripePrices(fetchedProduct.stripeProductId);
 
-            if (stripePrices.length > 0) {
-              stripePricingOptions = stripePrices.map((price) => ({
-                size: "",
-                depth: "",
-                reRing: false,
-                price: price.unit_amount / 100,
-                stripePriceId: price.id,
-              }));
-            }
-          }
+          stripePricingOptions = stripePrices.map((price) => ({
+            size: '',
+            depth: '',
+            reRing: false,
+            price: price.unit_amount / 100,
+            stripePriceId: price.id,
+          }));
         }
 
         const mergedPricingOptions = firestorePricingOptions.map((firestoreOption) => {
-          const matchingStripePrice = stripePricingOptions.find(
+          const match = stripePricingOptions.find(
             (stripeOption) => stripeOption.stripePriceId === firestoreOption.stripePriceId
           );
-          return matchingStripePrice ? { ...firestoreOption, price: matchingStripePrice.price } : firestoreOption;
+          return match ? { ...firestoreOption, price: match.price } : firestoreOption;
         });
 
         stripePricingOptions.forEach((stripeOption) => {
-          if (!mergedPricingOptions.find((option) => option.stripePriceId === stripeOption.stripePriceId)) {
+          if (!mergedPricingOptions.find((o) => o.stripePriceId === stripeOption.stripePriceId)) {
             mergedPricingOptions.push(stripeOption);
           }
         });
 
         setPricingOptions(mergedPricingOptions);
       } catch (err) {
-        setError("Failed to load product details.");
+        setError('Failed to load product details.');
       } finally {
         setLoading(false);
       }
@@ -96,22 +96,19 @@ const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setProduct((prevProduct) => ({
-      ...prevProduct,
-      [name]: value,
-    }));
+    setProduct((prev) => ({ ...prev, [name]: value }));
   };
 
   const handlePriceOptionChange = (index, field, value) => {
-    const updatedOptions = [...pricingOptions];
-    updatedOptions[index][field] = value;
-    setPricingOptions(updatedOptions);
+    const updated = [...pricingOptions];
+    updated[index][field] = value;
+    setPricingOptions(updated);
   };
 
   const addPriceOption = () => {
     setPricingOptions([
       ...pricingOptions,
-      { size: "", depth: "", reRing: false, price: 0, stripePriceId: "" },
+      { size: '', depth: '', reRing: false, price: 0, stripePriceId: '' },
     ]);
   };
 
@@ -122,53 +119,55 @@ const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-  
+    setError('');
+
     try {
       let stripeProductId = product.stripeProductId;
-  
-      // Step 1: Ensure Stripe Product Exists
+
+      // 1️⃣ Ensure Stripe Product exists
       if (!stripeProductId) {
         const newStripeProduct = await createStripeProduct(
           product.name,
           product.description,
           product.images
         );
-  
-        if (!newStripeProduct || !newStripeProduct.id) {
-          throw new Error("❌ Failed to create Stripe product.");
-        }
-  
+
         stripeProductId = newStripeProduct.id;
-  
-        // Update Firestore with the new Stripe Product ID
         await updateProduct(productId, { ...product, stripeProductId });
       }
-  
-      // Step 2: Update or Create Stripe Prices
+
+      // 2️⃣ Create / update prices
       const updatedPricingOptions = await Promise.all(
         pricingOptions.map(async (option) => {
           if (option.stripePriceId) {
-            const updatedStripePrice = await updateStripeProductWithPrices(
+            const updatedPrice = await updateStripeProductWithPrices(
               stripeProductId,
               option.stripePriceId,
-              option.price * 100 // Convert price to cents
+              option.price * 100
             );
-            return { ...option, stripePriceId: updatedStripePrice.id };
+            return { ...option, stripePriceId: updatedPrice.id };
           } else {
-            const newStripePrice = await createStripePrice(stripeProductId, option.price * 100);
-            return { ...option, stripePriceId: newStripePrice.id };
+            const newPrice = await createStripePrice(
+              stripeProductId,
+              option.price * 100
+            );
+            return { ...option, stripePriceId: newPrice.id };
           }
         })
       );
-  
-      // Step 3: Save Updated Product to Firestore
-      const updatedProduct = { ...product, pricingOptions: updatedPricingOptions, stripeProductId };
+
+      // 3️⃣ Save to Firestore
+      const updatedProduct = {
+        ...product,
+        pricingOptions: updatedPricingOptions,
+        stripeProductId,
+      };
+
       await updateProduct(productId, updatedProduct);
-  
       onProductUpdated(updatedProduct);
       onClose();
     } catch (err) {
-      setError(err.message || "Failed to update product.");
+      setError(err.message || 'Failed to update product.');
     } finally {
       setIsSubmitting(false);
     }
@@ -181,80 +180,16 @@ const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
       <div className="modal-content">
         <h2>Edit Product</h2>
         {error && <div className="error-message">{error}</div>}
+
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="name">Product Name</label>
-            <input id="name" name="name" type="text" value={product.name} onChange={handleInputChange} required />
+            <label>Product Name</label>
+            <input name="name" value={product.name} onChange={handleInputChange} required />
           </div>
 
-          <div className="form-group">
-            <label htmlFor="price">Base Price (USD)</label>
-            <input id="price" name="price" type="number" value={product.price} onChange={handleInputChange} min="0" required />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="pricing-options">Pricing Options</label>
-            <div id="pricing-options">
-              {pricingOptions.map((option, index) => (
-                <div key={index} className="price-option">
-                  {/* Conditionally render the size and depth only for artisan category */}
-                  {product.category === "artisan" && (
-                    <>
-                      <label htmlFor={`size-${index}`}>Size</label>
-                      <select
-                        id={`size-${index}`}
-                        value={option.size}
-                        onChange={(e) => handlePriceOptionChange(index, "size", e.target.value)}
-                      >
-                        <option value="">Select</option>
-                        <option value="12-inch">12-inch</option>
-                        <option value="13-inch">13-inch</option>
-                        <option value="14-inch">14-inch</option>
-                      </select>
-
-                      <label htmlFor={`depth-${index}`}>Depth</label>
-                      <select
-                        id={`depth-${index}`}
-                        value={option.depth}
-                        onChange={(e) => handlePriceOptionChange(index, "depth", e.target.value)}
-                      >
-                        <option value="">Select</option>
-                        <option value="5-inch">5-inch</option>
-                        <option value="5.5-inch">5.5-inch</option>
-                        <option value="6-inch">6-inch</option>
-                        <option value="6.5-inch">6.5-inch</option>
-                        <option value="7-inch">7-inch</option>
-                      </select>
-                    </>
-                  )}
-
-                  <label className="checkbox-label">
-                    <input
-                      type="checkbox"
-                      checked={option.reRing}
-                      onChange={(e) => handlePriceOptionChange(index, "reRing", e.target.checked)}
-                    />
-                    Re-Ring
-                  </label>
-
-                  <label htmlFor={`price-${index}`}>Price (USD)</label>
-                  <input
-                    id={`price-${index}`}
-                    type="number"
-                    value={option.price}
-                    onChange={(e) => handlePriceOptionChange(index, "price", e.target.value)}
-                    min="0"
-                    required
-                  />
-
-                  <button type="button" onClick={() => removePriceOption(index)}>Remove</button>
-                </div>
-              ))}
-            </div>
-            <button type="button" onClick={addPriceOption}>+ Add Price Option</button>
-          </div>
-
-          <button type="submit" disabled={isSubmitting}>{isSubmitting ? "Updating..." : "Update Product"}</button>
+          <button type="submit" disabled={isSubmitting}>
+            {isSubmitting ? 'Updating…' : 'Update Product'}
+          </button>
           <button type="button" onClick={onClose}>Close</button>
         </form>
       </div>

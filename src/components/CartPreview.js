@@ -236,14 +236,14 @@ const CartPreview = ({ onClose, closeMenu }) => {
             <div className="cart-shipping-preview">
               <div className="ship-nudge-inline">{freeMsg}</div>
               <div className="ship-note-inline">
-                * Free shipping on orders over $50 (contiguous U.S. only)
+                * Free shipping on orders $50 or more (contiguous U.S. only)
               </div>
             </div>
           )}
           {qualifiesForFree && (
             <div className="cart-shipping-preview">
               <div className="ship-note-inline">
-                * Free shipping on orders over $50 (contiguous U.S. only)
+                * Free shipping on orders $50 or more (contiguous U.S. only)
               </div>
             </div>
           )}

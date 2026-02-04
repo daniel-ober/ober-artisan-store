@@ -1,3 +1,4 @@
+// src/components/AdminOverview.js
 import React, { useEffect, useState } from 'react';
 import {
   getDoc,
@@ -11,11 +12,13 @@ import {
   arrayUnion,
 } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
+
 import ViewOrderModal from './ViewOrderModal';
 import ViewInquiryModal from './ViewInquiryModal';
 import ViewSoundlegendModal from './ViewSoundlegendModal';
 import ViewRiskDetailModal from './ViewRiskDetailModal';
 import EndorsementApplicationModal from './EndorsementApplicationModal';
+
 import {
   FaBox,
   FaHeadset,
@@ -24,12 +27,14 @@ import {
   FaThLarge,
   FaUsers,
 } from 'react-icons/fa';
+
 import {
   getOverviewStatus,
   getBadgeClass,
   getOrderStatusFromItems,
   STATUS_SCHEMA,
 } from '../utils/statusConfig';
+
 import './AdminOverview.css';
 
 const getCollectionPath = (type) => {
@@ -47,6 +52,18 @@ const getCollectionPath = (type) => {
     default:
       return '';
   }
+};
+
+// ✅ normalize overviewStatus so "inprogress" / "in progress" etc don’t get misfiled
+const normalizeOverviewStatus = (raw) => {
+  const v = (raw || '').toString().trim().toLowerCase();
+  if (!v) return null;
+
+  if (v === 'new') return 'new';
+  if (v === 'inprogress' || v === 'in progress') return 'inProgress';
+  if (v === 'completed' || v === 'complete' || v === 'done') return 'completed';
+
+  return null;
 };
 
 const inferStatusFromTarget = (type, targetStatus, currentItem = null) => {
@@ -86,9 +103,11 @@ const AdminOverview = ({
 
   const [selectedItem, setSelectedItem] = useState(null);
   const [modalType, setModalType] = useState(null);
+
   const [newPage, setNewPage] = useState(1);
   const [inProgressPage, setInProgressPage] = useState(1);
   const [completedPage, setCompletedPage] = useState(1);
+
   const itemsPerPage = 10;
   const [activeFilter, setActiveFilter] = useState('all');
 
@@ -99,8 +118,14 @@ const AdminOverview = ({
 
     for (const item of items) {
       item.type = type;
-      if (item.overviewStatus === 'new') newItems.push(item);
-      else if (item.overviewStatus === 'inProgress') inProgressItems.push(item);
+
+      // ✅ ensure overviewStatus is ALWAYS canonical
+      const normalized = normalizeOverviewStatus(item.overviewStatus);
+      const finalOverview = normalized || 'new';
+      item.overviewStatus = finalOverview;
+
+      if (finalOverview === 'new') newItems.push(item);
+      else if (finalOverview === 'inProgress') inProgressItems.push(item);
       else completedItems.push(item);
     }
 
@@ -131,23 +156,28 @@ const AdminOverview = ({
       async (snapshot) => {
         const orders = await Promise.all(
           snapshot.docs.map(async (docSnap) => {
-            const data = docSnap.data();
-            let status = data.status;
-            let overviewStatus = data.overviewStatus;
+            const d = docSnap.data();
 
-            if (!status || !overviewStatus) {
-              status = getOrderStatusFromItems(data.items || []);
-              overviewStatus = getOverviewStatus('order', status);
-              await updateDoc(doc(db, 'orders', docSnap.id), { status, overviewStatus });
+            // ✅ normalize & backfill status + overviewStatus
+            let status = d.status;
+            if (!status) status = getOrderStatusFromItems(d.items || []);
+
+            let overviewStatus = normalizeOverviewStatus(d.overviewStatus);
+            if (!overviewStatus) overviewStatus = getOverviewStatus('order', status);
+
+            // ✅ if firestore values are missing / non-canonical, fix them
+            const needsPatch =
+              d.status !== status ||
+              d.overviewStatus !== overviewStatus;
+
+            if (needsPatch) {
+              await updateDoc(doc(db, 'orders', docSnap.id), {
+                status,
+                overviewStatus,
+              });
             }
 
-            return {
-              id: docSnap.id,
-              type: 'order',
-              ...data,
-              status,
-              overviewStatus,
-            };
+            return { id: docSnap.id, type: 'order', ...d, status, overviewStatus };
           })
         );
         updateColumnState('order', orders);
@@ -157,18 +187,30 @@ const AdminOverview = ({
     // Inquiries
     const unsubInquiries = onSnapshot(
       query(collection(db, 'inquiries'), orderBy('createdAt', 'desc'), limit(100)),
-      (snapshot) => {
-        const inquiries = snapshot.docs.map((doc) => {
-          const data = doc.data();
-          return {
-            id: doc.id,
-            type: 'inquiry',
-            customerName: `${data.first_name || ''} ${data.last_name || ''}`.trim(),
-            email: data.email || '',
-            status: data.status || '',
-            overviewStatus: getOverviewStatus('inquiry', data.status || data.overviewStatus),
-          };
-        });
+      async (snapshot) => {
+        const inquiries = await Promise.all(
+          snapshot.docs.map(async (docSnap) => {
+            const d = docSnap.data();
+            const status = d.status || d.overviewStatus || 'New';
+            let overviewStatus = normalizeOverviewStatus(d.overviewStatus);
+            if (!overviewStatus) overviewStatus = getOverviewStatus('inquiry', status);
+
+            // optional patch (safe)
+            if (d.overviewStatus !== overviewStatus) {
+              await updateDoc(doc(db, 'inquiries', docSnap.id), { overviewStatus });
+            }
+
+            return {
+              id: docSnap.id,
+              type: 'inquiry',
+              customerName: `${d.first_name || ''} ${d.last_name || ''}`.trim(),
+              email: d.email || '',
+              status,
+              overviewStatus,
+              ...d,
+            };
+          })
+        );
         updateColumnState('inquiry', inquiries);
       }
     );
@@ -176,21 +218,29 @@ const AdminOverview = ({
     // Risk
     const unsubRisks = onSnapshot(
       query(collection(db, 'risk_notifications'), orderBy('timestamp', 'desc'), limit(100)),
-      (snapshot) => {
-        const risks = snapshot.docs.map((doc) => {
-          const data = doc.data();
-          const overviewStatus = getOverviewStatus('risk', data.status || data.overviewStatus);
-          return {
-            id: doc.id,
-            type: 'risk',
-            overviewStatus,
-            status: data.status || 'Unclassified Risk',
-            customerName:
-              data.assessment?.username || data.assessment?.email || 'Unverified Login',
-            email: data.email || 'N/A',
-            ...data,
-          };
-        });
+      async (snapshot) => {
+        const risks = await Promise.all(
+          snapshot.docs.map(async (docSnap) => {
+            const d = docSnap.data();
+            const status = d.status || d.overviewStatus || 'Unclassified Risk';
+            let overviewStatus = normalizeOverviewStatus(d.overviewStatus);
+            if (!overviewStatus) overviewStatus = getOverviewStatus('risk', status);
+
+            if (d.overviewStatus !== overviewStatus) {
+              await updateDoc(doc(db, 'risk_notifications', docSnap.id), { overviewStatus });
+            }
+
+            return {
+              id: docSnap.id,
+              type: 'risk',
+              overviewStatus,
+              status,
+              customerName: d.assessment?.username || d.assessment?.email || 'Unverified Login',
+              email: d.email || d.assessment?.email || 'N/A',
+              ...d,
+            };
+          })
+        );
         updateColumnState('risk', risks);
       }
     );
@@ -198,21 +248,28 @@ const AdminOverview = ({
     // SoundLegend submissions
     const unsubSubmissions = onSnapshot(
       query(collection(db, 'soundlegend_submissions'), orderBy('submittedAt', 'desc'), limit(100)),
-      (snapshot) => {
-        const submissions = snapshot.docs.map((doc) => {
-          const data = doc.data();
-          const overviewStatus = getOverviewStatus(
-            'submission',
-            data.status || data.overviewStatus
-          );
-          return {
-            id: doc.id,
-            type: 'submission',
-            customerName: `${data.firstName || ''} ${data.lastName || ''}`.trim(),
-            overviewStatus,
-            ...data,
-          };
-        });
+      async (snapshot) => {
+        const submissions = await Promise.all(
+          snapshot.docs.map(async (docSnap) => {
+            const d = docSnap.data();
+            const status = d.status || d.overviewStatus || 'New';
+            let overviewStatus = normalizeOverviewStatus(d.overviewStatus);
+            if (!overviewStatus) overviewStatus = getOverviewStatus('submission', status);
+
+            if (d.overviewStatus !== overviewStatus) {
+              await updateDoc(doc(db, 'soundlegend_submissions', docSnap.id), { overviewStatus });
+            }
+
+            return {
+              id: docSnap.id,
+              type: 'submission',
+              customerName: `${d.firstName || ''} ${d.lastName || ''}`.trim(),
+              status,
+              overviewStatus,
+              ...d,
+            };
+          })
+        );
         updateColumnState('submission', submissions);
       }
     );
@@ -220,23 +277,29 @@ const AdminOverview = ({
     // Endorsement applications
     const unsubEndorsements = onSnapshot(
       query(collection(db, 'endorsement_applications'), orderBy('createdAt', 'desc'), limit(100)),
-      (snapshot) => {
-        const apps = snapshot.docs.map((docSnap) => {
-          const data = docSnap.data();
-          const overviewStatus = getOverviewStatus(
-            'endorsement',
-            data.status || data.overviewStatus || 'inProgress'
-          );
-        return {
-            id: docSnap.id,
-            type: 'endorsement',
-            customerName: data.fullName || data.stageName || 'N/A',
-            email: data.email || '',
-            status: data.status || 'inProgress',
-            overviewStatus,
-            ...data,
-          };
-        });
+      async (snapshot) => {
+        const apps = await Promise.all(
+          snapshot.docs.map(async (docSnap) => {
+            const d = docSnap.data();
+            const status = d.status || d.overviewStatus || 'inProgress';
+            let overviewStatus = normalizeOverviewStatus(d.overviewStatus);
+            if (!overviewStatus) overviewStatus = getOverviewStatus('endorsement', status);
+
+            if (d.overviewStatus !== overviewStatus) {
+              await updateDoc(doc(db, 'endorsement_applications', docSnap.id), { overviewStatus });
+            }
+
+            return {
+              id: docSnap.id,
+              type: 'endorsement',
+              customerName: d.fullName || d.stageName || 'N/A',
+              email: d.email || '',
+              status,
+              overviewStatus,
+              ...d,
+            };
+          })
+        );
         updateColumnState('endorsement', apps);
       }
     );
@@ -275,38 +338,34 @@ const AdminOverview = ({
       const snap = await getDoc(ref);
       if (!snap.exists()) return;
 
-      const data = snap.data();
+      const d = snap.data();
 
-      // RISK
       if (item.type === 'risk') {
-        const timestamp = data.timestamp?.seconds
-          ? new Date(data.timestamp.seconds * 1000)
-          : new Date();
-        const severity = data.score >= 0.85 ? 'High' : data.score >= 0.5 ? 'Medium' : 'Low';
+        const timestamp = d.timestamp?.seconds ? new Date(d.timestamp.seconds * 1000) : new Date();
+        const severity = d.score >= 0.85 ? 'High' : d.score >= 0.5 ? 'Medium' : 'Low';
 
         setSelectedItem({
           id: snap.id,
-          email: data.email || data.assessment?.email || 'N/A',
-          type: data.type || 'Unknown',
-          score: data.score || 0,
+          email: d.email || d.assessment?.email || 'N/A',
+          type: d.type || 'Unknown',
+          score: d.score || 0,
           timestamp,
           severity,
-          source: data.source || 'N/A',
-          systemHistory: data.systemHistory || [],
-          status: data.status || 'New',
-          overviewStatus: getOverviewStatus('risk', data.status),
+          source: d.source || 'N/A',
+          systemHistory: d.systemHistory || [],
+          status: d.status || 'New',
+          overviewStatus: getOverviewStatus('risk', d.status),
         });
         setModalType('risk');
         return;
       }
 
-      // ORDER
       if (item.type === 'order') {
-        let createdAt = data.createdAt;
+        let createdAt = d.createdAt;
         if (createdAt?.seconds) createdAt = new Date(createdAt.seconds * 1000);
 
-        const systemHistory = Array.isArray(data.systemHistory)
-          ? data.systemHistory.map((entry) => ({
+        const systemHistory = Array.isArray(d.systemHistory)
+          ? d.systemHistory.map((entry) => ({
               ...entry,
               timestamp: entry.timestamp?.seconds
                 ? new Date(entry.timestamp.seconds * 1000).toISOString()
@@ -317,63 +376,54 @@ const AdminOverview = ({
         setSelectedItem({
           id: snap.id,
           createdAt,
-          status: data.status || 'New',
-          overviewStatus: data.overviewStatus || 'new',
-          items: data.items || [],
-          customerName: data.customerName || 'N/A',
-          customerEmail: data.customerEmail || 'N/A',
-          customerPhone: data.customerPhone || '',
-          customerAddress: data.customerAddress || '',
-          internalNotes: data.internalNotes || [],
+          status: d.status || 'New',
+          overviewStatus: normalizeOverviewStatus(d.overviewStatus) || 'new',
+          items: d.items || [],
+          customerName: d.customerName || 'N/A',
+          customerEmail: d.customerEmail || 'N/A',
+          customerPhone: d.customerPhone || '',
+          customerAddress: d.customerAddress || '',
+          internalNotes: d.internalNotes || [],
           systemHistory,
-          relatedProjects: data.relatedProjects || [],
+          relatedProjects: d.relatedProjects || [],
         });
         setModalType('order');
         return;
       }
 
-      // ✅ INQUIRY (Support) — this was missing
       if (item.type === 'inquiry') {
         const createdAt =
-          data.createdAt?.seconds
-            ? new Date(data.createdAt.seconds * 1000).toLocaleString()
-            : (data.createdAt || '');
+          d.createdAt?.seconds
+            ? new Date(d.createdAt.seconds * 1000).toLocaleString()
+            : d.createdAt || '';
 
         setSelectedItem({
           id: snap.id,
           type: 'inquiry',
           createdAt,
-          origin: data.origin || data.source || 'web-contact',
-          status: data.status || 'New',
-          overviewStatus: getOverviewStatus('inquiry', data.status || data.overviewStatus),
-          category: data.category || 'Other',
-          name:
-            `${data.first_name || ''} ${data.last_name || ''}`.trim() ||
-            data.name ||
-            'N/A',
-          email: data.email || 'N/A',
-          message: data.message || '',
-          internalNotes: data.internalNotes || [],
-          systemHistory: data.systemHistory || [],
+          origin: d.origin || d.source || 'web-contact',
+          status: d.status || 'New',
+          overviewStatus: getOverviewStatus('inquiry', d.status || d.overviewStatus),
+          category: d.category || 'Other',
+          name: `${d.first_name || ''} ${d.last_name || ''}`.trim() || d.name || 'N/A',
+          email: d.email || 'N/A',
+          message: d.message || '',
+          internalNotes: d.internalNotes || [],
+          systemHistory: d.systemHistory || [],
         });
         setModalType('inquiry');
         return;
       }
 
-      // SOUNDLEGEND SUBMISSION
       if (item.type === 'submission') {
-        const submittedAt = data.submittedAt?.seconds
-          ? new Date(data.submittedAt.seconds * 1000)
-          : null;
-
-        setSelectedItem({ id: snap.id, ...data, submittedAt });
+        const submittedAt = d.submittedAt?.seconds ? new Date(d.submittedAt.seconds * 1000) : null;
+        setSelectedItem({ id: snap.id, ...d, submittedAt });
         setModalType('submission');
         return;
       }
 
-      // ENDORSEMENT
       if (item.type === 'endorsement') {
-        setSelectedItem({ id: snap.id, ...data });
+        setSelectedItem({ id: snap.id, ...d });
         setModalType('endorsement');
         return;
       }
@@ -499,10 +549,8 @@ const AdminOverview = ({
       return false;
     });
 
-    let page = 1;
-    if (statusKey === 'new') page = newPage;
-    else if (statusKey === 'inProgress') page = inProgressPage;
-    else if (statusKey === 'completed') page = completedPage;
+    const page =
+      statusKey === 'new' ? newPage : statusKey === 'inProgress' ? inProgressPage : completedPage;
 
     const paginatedItems = filteredItems.slice((page - 1) * itemsPerPage, page * itemsPerPage);
     const startIndex = filteredItems.length > 0 ? (page - 1) * itemsPerPage + 1 : 0;
@@ -540,10 +588,8 @@ const AdminOverview = ({
               <button
                 onClick={() => {
                   if (statusKey === 'new') setNewPage((p) => Math.max(p - 1, 1));
-                  else if (statusKey === 'inProgress')
-                    setInProgressPage((p) => Math.max(p - 1, 1));
-                  else if (statusKey === 'completed')
-                    setCompletedPage((p) => Math.max(p - 1, 1));
+                  else if (statusKey === 'inProgress') setInProgressPage((p) => Math.max(p - 1, 1));
+                  else setCompletedPage((p) => Math.max(p - 1, 1));
                 }}
                 disabled={page === 1}
               >
@@ -558,7 +604,7 @@ const AdminOverview = ({
                     setInProgressPage((p) =>
                       p * itemsPerPage < filteredItems.length ? p + 1 : p
                     );
-                  else if (statusKey === 'completed')
+                  else
                     setCompletedPage((p) =>
                       p * itemsPerPage < filteredItems.length ? p + 1 : p
                     );
@@ -594,32 +640,6 @@ const AdminOverview = ({
     setSelectedItem((prev) => {
       if (!prev || prev.id !== id) return prev;
       return { ...prev, status: newStatus, overviewStatus: newOverviewStatus };
-    });
-
-    setData((prev) => {
-      const updatedItem = {
-        ...(prev.new.find((i) => i.id === id) ||
-          prev.inProgress.find((i) => i.id === id) ||
-          prev.completed.find((i) => i.id === id)),
-        id,
-        status: newStatus,
-        overviewStatus: newOverviewStatus,
-      };
-
-      return {
-        new:
-          newOverviewStatus === 'new'
-            ? [updatedItem, ...prev.new.filter((i) => i.id !== id)]
-            : prev.new.filter((i) => i.id !== id),
-        inProgress:
-          newOverviewStatus === 'inProgress'
-            ? [updatedItem, ...prev.inProgress.filter((i) => i.id !== id)]
-            : prev.inProgress.filter((i) => i.id !== id),
-        completed:
-          newOverviewStatus === 'completed'
-            ? [updatedItem, ...prev.completed.filter((i) => i.id !== id)]
-            : prev.completed.filter((i) => i.id !== id),
-      };
     });
   };
 

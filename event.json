@@ -1,0 +1,184 @@
+{
+  "object": {
+    "id": "cs_live_b1mZlIkRGExUxb3MAovTAkS1htOb8fU4QY2dfuiB7414uykHImRPYjQ8vN",
+    "object": "checkout.session",
+    "adaptive_pricing": {
+      "enabled": true
+    },
+    "after_expiration": null,
+    "allow_promotion_codes": true,
+    "amount_subtotal": 2000,
+    "amount_total": 2999,
+    "automatic_tax": {
+      "enabled": false,
+      "liability": null,
+      "provider": null,
+      "status": null
+    },
+    "billing_address_collection": null,
+    "branding_settings": {
+      "background_color": "#121211",
+      "border_style": "rounded",
+      "button_color": "#4135ea",
+      "display_name": "Ober Artisan Drums",
+      "font_family": "default",
+      "icon": {
+        "file": "file_1R4GmzJbbx8jAR4N47lIc4Ze",
+        "type": "file"
+      },
+      "logo": {
+        "file": "file_1R4GnrJbbx8jAR4NqJQX92Et",
+        "type": "file"
+      }
+    },
+    "cancel_url": "https://oberartisandrums.com/cart",
+    "client_reference_id": null,
+    "client_secret": null,
+    "collected_information": {
+      "business_name": null,
+      "individual_name": null,
+      "shipping_details": {
+        "address": {
+          "city": "Winter Springs",
+          "country": "US",
+          "line1": "819 Seneca Meadows Road",
+          "line2": null,
+          "postal_code": "32708",
+          "state": "FL"
+        },
+        "name": "Melanie Reeve"
+      }
+    },
+    "consent": null,
+    "consent_collection": null,
+    "created": 1767907424,
+    "currency": "usd",
+    "currency_conversion": null,
+    "custom_fields": [],
+    "custom_text": {
+      "after_submit": null,
+      "shipping_address": null,
+      "submit": null,
+      "terms_of_service_acceptance": null
+    },
+    "customer": null,
+    "customer_account": null,
+    "customer_creation": "if_required",
+    "customer_details": {
+      "address": {
+        "city": null,
+        "country": "US",
+        "line1": null,
+        "line2": null,
+        "postal_code": "37224",
+        "state": null
+      },
+      "business_name": null,
+      "email": "blake@beckwithinteriors.com",
+      "individual_name": null,
+      "name": "William B Cunningham",
+      "phone": null,
+      "tax_exempt": "none",
+      "tax_ids": []
+    },
+    "customer_email": null,
+    "discounts": [],
+    "expires_at": 1767993824,
+    "invoice": null,
+    "invoice_creation": {
+      "enabled": false,
+      "invoice_data": {
+        "account_tax_ids": null,
+        "custom_fields": null,
+        "description": null,
+        "footer": null,
+        "issuer": null,
+        "metadata": {},
+        "rendering_options": null
+      }
+    },
+    "livemode": true,
+    "locale": null,
+    "metadata": {
+      "customerName": "",
+      "customerPhone": "",
+      "guestToken": "1767907423608-53wyg7tvg3b",
+      "promoCode": "",
+      "shipTo": "",
+      "userId": "guest"
+    },
+    "mode": "payment",
+    "origin_context": null,
+    "payment_intent": "pi_3SnQi8Jbbx8jAR4N0gwApvFy",
+    "payment_link": null,
+    "payment_method_collection": "if_required",
+    "payment_method_configuration_details": {
+      "id": "pmc_1PrEVJJbbx8jAR4NEto7FaVm",
+      "parent": null
+    },
+    "payment_method_options": {
+      "card": {
+        "request_three_d_secure": "automatic"
+      }
+    },
+    "payment_method_types": [
+      "card",
+      "link",
+      "cashapp",
+      "amazon_pay"
+    ],
+    "payment_status": "paid",
+    "permissions": null,
+    "phone_number_collection": {
+      "enabled": false
+    },
+    "recovered_from": null,
+    "saved_payment_method_options": null,
+    "setup_intent": null,
+    "shipping_address_collection": {
+      "allowed_countries": [
+        "US",
+        "CA"
+      ]
+    },
+    "shipping_cost": {
+      "amount_subtotal": 999,
+      "amount_tax": 0,
+      "amount_total": 999,
+      "shipping_rate": "shr_1SnQgGJbbx8jAR4N9wa1s4sf"
+    },
+    "shipping_details": {
+      "address": {
+        "city": "Winter Springs",
+        "country": "US",
+        "line1": "819 Seneca Meadows Road",
+        "line2": null,
+        "postal_code": "32708",
+        "state": "FL"
+      },
+      "carrier": null,
+      "name": "Melanie Reeve",
+      "phone": null,
+      "tracking_number": null
+    },
+    "shipping_options": [
+      {
+        "shipping_amount": 999,
+        "shipping_rate": "shr_1SnQgGJbbx8jAR4N9wa1s4sf"
+      }
+    ],
+    "status": "complete",
+    "submit_type": null,
+    "subscription": null,
+    "success_url": "https://oberartisandrums.com/checkout-summary?session_id={CHECKOUT_SESSION_ID}&guest_token=1767907423608-53wyg7tvg3b",
+    "total_details": {
+      "amount_discount": 0,
+      "amount_shipping": 999,
+      "amount_tax": 0
+    },
+    "ui_mode": "hosted",
+    "url": null,
+    "wallet_options": null
+  },
+  "previous_attributes": null
+}
