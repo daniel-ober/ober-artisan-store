@@ -1,113 +1,287 @@
-import React, { useState } from 'react';
+// src/components/EndorsementApplicationModal.js
+import React, { useMemo, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { doc, serverTimestamp, updateDoc } from 'firebase/firestore';
+import { arrayUnion, doc, serverTimestamp, updateDoc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import './EndorsementApplicationModal.css';
 import './AdminModalTheme.css';
 
-
 const Portal = ({ children }) => ReactDOM.createPortal(children, document.body);
 
-const EndorsementApplicationModal = ({ value, appId, onClose }) => {
-  const [form, setForm] = useState({
-    internalNotes: value?.internalNotes || '',
-    status: value?.status || 'inProgress'
-  });
-  const [saving, setSaving] = useState(false);
+const safeDate = (ts) => {
+  try {
+    if (!ts) return '';
+    if (typeof ts === 'string') return ts;
+    if (ts?.seconds) return new Date(ts.seconds * 1000).toLocaleString();
+    if (ts instanceof Date) return ts.toLocaleString();
+    return '';
+  } catch {
+    return '';
+  }
+};
 
-  const save = async () => {
+export default function EndorsementApplicationModal({ value, appId, onClose }) {
+  const [saving, setSaving] = useState(false);
+  const [noteText, setNoteText] = useState('');
+
+  const status = value?.status || 'inProgress';
+  const overviewStatus =
+    value?.overviewStatus ||
+    (status === 'new' ? 'new' : status === 'completed' ? 'completed' : 'inProgress');
+
+  const attachmentUrl = useMemo(() => {
+    return (
+      value?.attachment?.url ||
+      value?.attachmentUrl ||
+      (value?.hasAttachment && value?.url ? value.url : '') ||
+      ''
+    );
+  }, [value]);
+
+  const createdAt = safeDate(value?.createdAt);
+  const updatedAt = safeDate(value?.updatedAt);
+
+  const onChangeStatus = async (nextStatus) => {
     setSaving(true);
-    await updateDoc(doc(db, 'endorsement_applications', appId), {
-      internalNotes: form.internalNotes || '',
-      status: form.status || 'inProgress',
-      updatedAt: serverTimestamp()
-    });
-    setSaving(false);
-    onClose();
+    try {
+      await updateDoc(doc(db, 'endorsement_applications', appId), {
+        status: nextStatus,
+        overviewStatus:
+          nextStatus === 'new'
+            ? 'new'
+            : nextStatus === 'completed'
+            ? 'completed'
+            : 'inProgress',
+        updatedAt: serverTimestamp(),
+        systemHistory: arrayUnion({
+          event: `Status changed to "${nextStatus}"`,
+          timestamp: new Date().toISOString(),
+        }),
+      });
+    } catch (e) {
+      console.error('Failed to update endorsement status', e);
+    } finally {
+      setSaving(false);
+    }
   };
 
-  const safe = (x) => (x === undefined || x === null || x === '' ? '—' : x);
+  const addInternalNote = async () => {
+    const trimmed = noteText.trim();
+    if (!trimmed) return;
+
+    setSaving(true);
+    try {
+      await updateDoc(doc(db, 'endorsement_applications', appId), {
+        updatedAt: serverTimestamp(),
+        internalNotes: arrayUnion({
+          text: trimmed,
+          timestamp: new Date().toISOString(),
+        }),
+        systemHistory: arrayUnion({
+          event: 'Internal note added',
+          timestamp: new Date().toISOString(),
+        }),
+      });
+      setNoteText('');
+    } catch (e) {
+      console.error('Failed to add internal note', e);
+    } finally {
+      setSaving(false);
+    }
+  };
 
   return (
     <Portal>
-      <div className="eamodal__backdrop">
-        <div className="eamodal">
-          <div className="eamodal__header">
-            <h3>Application Details</h3>
-            <button className="icon-btn" onClick={onClose} aria-label="Close">✕</button>
-          </div>
-
-          <div className="eamodal__body">
-            <div className="ea-grid">
-              <div className="ea-block">
-                <h4>Applicant</h4>
-                <div className="row"><span>Name</span><b>{safe(value.fullName)}</b></div>
-                <div className="row"><span>Stage Name</span><b>{safe(value.stageName)}</b></div>
-                <div className="row"><span>Location</span><b>{[value.city, value.state, value.country].filter(Boolean).join(', ') || '—'}</b></div>
-                <div className="row"><span>Email</span><b>{safe(value.email)}</b></div>
-                <div className="row"><span>Phone</span><b>{safe(value.phone)}</b></div>
-                <div className="row"><span>Bands</span><b>{safe(value.bands)}</b></div>
-                <div className="row"><span>Heard About Us</span><b>{safe(value.heardAboutUs)}</b></div>
-                <div className="row"><span>Goals</span><b>{safe(value.endorsementGoals)}</b></div>
+      <div className="admin-modal-backdrop" onMouseDown={onClose}>
+        <div className="admin-modal" onMouseDown={(e) => e.stopPropagation()}>
+          <div className="admin-modal-header">
+            <div className="admin-modal-title">
+              <h3>Endorsement Application</h3>
+              <div className="admin-modal-subtitle">
+                <span className="pill">{overviewStatus}</span>
+                <span className="mono">ID: {appId}</span>
               </div>
+            </div>
 
-              <div className="ea-block">
-                <h4>Links</h4>
-                <div className="row"><span>Instagram</span><b>{safe(value.instagram)}</b></div>
-                <div className="row"><span>TikTok</span><b>{safe(value.tiktok)}</b></div>
-                <div className="row"><span>YouTube</span><b>{safe(value.youtube)}</b></div>
-                <div className="row"><span>Website</span><b>{safe(value.website)}</b></div>
-                <div className="row"><span>Media</span><b>{safe(value.mediaLinks)}</b></div>
-              </div>
-
-              <div className="ea-block">
-                <h4>Attachment</h4>
-                {value?.attachment?.url || value?.url ? (
-                  <a className="file-link" href={value?.attachment?.url || value?.url} target="_blank" rel="noreferrer">
-                    {value?.attachment?.name || value?.fileName || 'Open file'}
-                  </a>
-                ) : <div className="muted">No file</div>}
-                <div className="row"><span>Client Scan</span><b>{safe(value.clientScan)}</b></div>
-                <div className="row"><span>Created</span><b>{value?.createdAt?.toDate ? value.createdAt.toDate().toLocaleString() : '—'}</b></div>
-                <div className="row"><span>Status</span>
-                  <select value={form.status} onChange={(e)=>setForm(f=>({ ...f, status: e.target.value }))}>
-                    <option value="new">New</option>
-                    <option value="inProgress">In Progress</option>
-                    <option value="completed">Completed</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="ea-block col-span-2">
-                <h4>Why Ober</h4>
-                <div className="text-box">{safe(value.whyOber)}</div>
-              </div>
-
-              <div className="ea-block col-span-2">
-                <h4>Current Gear</h4>
-                <div className="text-box">{safe(value.currentGear)}</div>
-              </div>
-
-              <div className="ea-block col-span-2">
-                <h4>Internal Notes (private)</h4>
-                <textarea
-                  rows={5}
-                  value={form.internalNotes}
-                  onChange={(e)=>setForm(f=>({ ...f, internalNotes: e.target.value }))}
-                  placeholder="Decision notes, next steps, etc."
-                />
-              </div>
+            <div className="admin-modal-actions">
+              <button className="btn btn--ghost" onClick={onClose}>
+                Close
+              </button>
             </div>
           </div>
 
-          <div className="eamodal__footer">
-            <button className="btn btn--ghost" onClick={onClose}>Close</button>
-            <button className="btn" onClick={save} disabled={saving}>{saving ? 'Saving…' : 'Save'}</button>
+          <div className="admin-modal-body">
+            <div className="eamodal-grid">
+              <section className="eamodal-card">
+                <h4>Applicant</h4>
+                <div className="kv">
+                  <div className="k">Full Name</div>
+                  <div className="v">{value?.fullName || '—'}</div>
+                </div>
+                <div className="kv">
+                  <div className="k">Stage Name</div>
+                  <div className="v">{value?.stageName || '—'}</div>
+                </div>
+                <div className="kv">
+                  <div className="k">Email</div>
+                  <div className="v">
+                    {value?.email ? <a href={`mailto:${value.email}`}>{value.email}</a> : '—'}
+                  </div>
+                </div>
+                <div className="kv">
+                  <div className="k">Phone</div>
+                  <div className="v">{value?.phone || '—'}</div>
+                </div>
+                <div className="kv">
+                  <div className="k">Location</div>
+                  <div className="v">
+                    {[value?.city, value?.state, value?.country].filter(Boolean).join(', ') || '—'}
+                  </div>
+                </div>
+              </section>
+
+              <section className="eamodal-card">
+                <h4>Links</h4>
+                <div className="kv">
+                  <div className="k">Website</div>
+                  <div className="v">
+                    {value?.website ? (
+                      <a href={value.website} target="_blank" rel="noreferrer">
+                        {value.website}
+                      </a>
+                    ) : (
+                      '—'
+                    )}
+                  </div>
+                </div>
+                <div className="kv">
+                  <div className="k">Instagram</div>
+                  <div className="v">{value?.instagram || '—'}</div>
+                </div>
+                <div className="kv">
+                  <div className="k">TikTok</div>
+                  <div className="v">{value?.tiktok || '—'}</div>
+                </div>
+                <div className="kv">
+                  <div className="k">YouTube</div>
+                  <div className="v">{value?.youtube || '—'}</div>
+                </div>
+                <div className="kv">
+                  <div className="k">Media Links</div>
+                  <div className="v prewrap">{value?.mediaLinks || '—'}</div>
+                </div>
+              </section>
+
+              <section className="eamodal-card">
+                <h4>Application</h4>
+                <div className="kv">
+                  <div className="k">Band(s)</div>
+                  <div className="v prewrap">{value?.bands || '—'}</div>
+                </div>
+                <div className="kv">
+                  <div className="k">Touring / Gigs</div>
+                  <div className="v prewrap">{value?.tourSchedule || '—'}</div>
+                </div>
+                <div className="kv">
+                  <div className="k">Current Gear</div>
+                  <div className="v prewrap">{value?.currentGear || '—'}</div>
+                </div>
+                <div className="kv">
+                  <div className="k">Goals</div>
+                  <div className="v prewrap">{value?.endorsementGoals || '—'}</div>
+                </div>
+                <div className="kv">
+                  <div className="k">Why Ober</div>
+                  <div className="v prewrap">{value?.whyOber || '—'}</div>
+                </div>
+                <div className="kv">
+                  <div className="k">Heard About Us</div>
+                  <div className="v prewrap">{value?.heardAboutUs || '—'}</div>
+                </div>
+              </section>
+
+              <section className="eamodal-card">
+                <h4>Attachment</h4>
+                {attachmentUrl ? (
+                  <a className="btn btn--ghost" href={attachmentUrl} target="_blank" rel="noreferrer">
+                    Open Attachment
+                  </a>
+                ) : (
+                  <div className="muted">No attachment on file.</div>
+                )}
+
+                <div className="kv" style={{ marginTop: 12 }}>
+                  <div className="k">Created</div>
+                  <div className="v">{createdAt || '—'}</div>
+                </div>
+                <div className="kv">
+                  <div className="k">Updated</div>
+                  <div className="v">{updatedAt || '—'}</div>
+                </div>
+
+                <div className="kv" style={{ marginTop: 12 }}>
+                  <div className="k">Status</div>
+                  <div className="v">
+                    <select value={status} disabled={saving} onChange={(e) => onChangeStatus(e.target.value)}>
+                      <option value="new">New</option>
+                      <option value="inProgress">In Progress</option>
+                      <option value="completed">Completed</option>
+                    </select>
+                  </div>
+                </div>
+              </section>
+
+              <section className="eamodal-card eamodal-notes">
+                <h4>Internal Notes</h4>
+                <div className="notes-list">
+                  {(value?.internalNotes || []).slice().reverse().map((n, idx) => (
+                    <div className="note" key={idx}>
+                      <div className="note-meta">{safeDate(n?.timestamp) || n?.timestamp || '—'}</div>
+                      <div className="note-text">{n?.text || '—'}</div>
+                    </div>
+                  ))}
+                  {(value?.internalNotes || []).length === 0 && (
+                    <div className="muted">No internal notes yet.</div>
+                  )}
+                </div>
+
+                <div className="note-compose">
+                  <textarea
+                    rows={3}
+                    value={noteText}
+                    onChange={(e) => setNoteText(e.target.value)}
+                    placeholder="Add an internal note..."
+                  />
+                  <button className="btn" disabled={saving || !noteText.trim()} onClick={addInternalNote}>
+                    {saving ? 'Saving…' : 'Add Note'}
+                  </button>
+                </div>
+              </section>
+
+              <section className="eamodal-card eamodal-history">
+                <h4>System History</h4>
+                <div className="history-list">
+                  {(value?.systemHistory || []).slice().reverse().map((h, idx) => (
+                    <div className="history-item" key={idx}>
+                      <div className="history-meta">{safeDate(h?.timestamp) || h?.timestamp || '—'}</div>
+                      <div className="history-text">{h?.event || '—'}</div>
+                    </div>
+                  ))}
+                  {(value?.systemHistory || []).length === 0 && (
+                    <div className="muted">No system history yet.</div>
+                  )}
+                </div>
+              </section>
+            </div>
+          </div>
+
+          <div className="admin-modal-footer">
+            <button className="btn btn--ghost" onClick={onClose}>
+              Close
+            </button>
           </div>
         </div>
       </div>
     </Portal>
   );
-};
-
-export default EndorsementApplicationModal;
+}

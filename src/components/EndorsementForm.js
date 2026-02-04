@@ -38,53 +38,83 @@ const initial = {
   agree: false,
 };
 
+const FIELD_LABELS = {
+  fullName: 'Full Name',
+  email: 'Email',
+  phone: 'Phone',
+  city: 'City',
+  state: 'State',
+  bands: 'Band(s) / Act(s)',
+  website: 'Website (must be a full URL starting with https://)',
+  instagram: 'Instagram (@handle or URL)',
+  tiktok: 'TikTok (@handle or URL)',
+  youtube: 'YouTube (channel or URL)',
+  tourSchedule: 'Touring Schedule / Recent Gigs',
+  currentGear: 'Gear You Currently Use',
+  endorsementGoals: 'Endorsement Goals',
+  mediaLinks: 'Media Links (photos, videos, press)',
+  whyOber: 'Why Ober Artisan Drums?',
+  heardAboutUs: 'How did you hear about us?',
+  agree: 'Agreement checkbox',
+};
+
 const looksUrlOrHandle = (s) =>
   /^https?:\/\//i.test(s) || /^@?[\w.\-]{2,}$/i.test(s);
+
+const looksUrl = (s) => /^https?:\/\//i.test(String(s || '').trim());
 
 export default function EndorsementForm() {
   const [form, setForm] = useState(initial);
   const [submitting, setSubmitting] = useState(false);
   const [successOpen, setSuccessOpen] = useState(false);
-  const [error, setError] = useState('');
+
+  // CHANGED: error is now an object so we can render bullets
+  // { message: string, fields: string[] }
+  const [error, setError] = useState(null);
+
   const [invalid, setInvalid] = useState(new Set());
   const navigate = useNavigate();
 
   const onChange = (e) => {
     const { name, value, type, checked } = e.target;
     setForm((f) => ({ ...f, [name]: type === 'checkbox' ? checked : value }));
+
+    // clear invalid marker on edit
     setInvalid((prev) => {
       if (!prev.has(name)) return prev;
       const next = new Set(prev);
       next.delete(name);
       return next;
     });
-    if (error) setError('');
+
+    if (error) setError(null);
   };
 
   const validate = () => {
     const nextInvalid = new Set();
 
     if (!form.fullName.trim()) nextInvalid.add('fullName');
-    const email = form.email.trim();
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
-      nextInvalid.add('email');
 
-    const phoneDigits = form.phone.replace(/[^\d]/g, '');
+    const email = form.email.trim();
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) nextInvalid.add('email');
+
+    const phoneDigits = String(form.phone || '').replace(/[^\d]/g, '');
     if (phoneDigits.length < 10) nextInvalid.add('phone');
 
     if (!form.city.trim()) nextInvalid.add('city');
+
     const st = form.state.trim().toUpperCase();
     if (!US_STATES.includes(st)) nextInvalid.add('state');
 
     if (!form.bands.trim()) nextInvalid.add('bands');
-    if (!form.website.trim() || !looksUrlOrHandle(form.website))
-      nextInvalid.add('website');
-    if (!form.instagram.trim() || !looksUrlOrHandle(form.instagram))
-      nextInvalid.add('instagram');
-    if (!form.youtube.trim() || !looksUrlOrHandle(form.youtube))
-      nextInvalid.add('youtube');
-    if (!form.tiktok.trim() || !looksUrlOrHandle(form.tiktok))
-      nextInvalid.add('tiktok');
+
+    // Website should be an actual URL (not handle)
+    if (!form.website.trim() || !looksUrl(form.website)) nextInvalid.add('website');
+
+    // Socials can be URL or @handle
+    if (!form.instagram.trim() || !looksUrlOrHandle(form.instagram)) nextInvalid.add('instagram');
+    if (!form.youtube.trim() || !looksUrlOrHandle(form.youtube)) nextInvalid.add('youtube');
+    if (!form.tiktok.trim() || !looksUrlOrHandle(form.tiktok)) nextInvalid.add('tiktok');
 
     if (!form.tourSchedule.trim()) nextInvalid.add('tourSchedule');
     if (!form.currentGear.trim()) nextInvalid.add('currentGear');
@@ -97,17 +127,28 @@ export default function EndorsementForm() {
 
     if (nextInvalid.size) {
       setInvalid(nextInvalid);
-      setError('Please complete all required fields correctly before submitting.');
+
+      // Build bullet list labels in a consistent order
+      const orderedKeys = Object.keys(FIELD_LABELS);
+      const fields = orderedKeys
+        .filter((k) => nextInvalid.has(k))
+        .map((k) => FIELD_LABELS[k] || k);
+
+      setError({
+        message: 'Please correct the following fields before submitting:',
+        fields,
+      });
+
       return false;
     }
 
-    setError('');
+    setError(null);
     return true;
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+    setError(null);
     if (!validate()) return;
 
     setSubmitting(true);
@@ -124,30 +165,20 @@ export default function EndorsementForm() {
 
       // 1) Create Firestore doc
       const colRef = collection(db, 'endorsement_applications');
+
       const payload = {
         ...form,
         country: COUNTRY_US,
         state: form.state.toUpperCase(),
         createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
         status: 'new',
+        overviewStatus: 'new',
         source: 'website',
-        recaptchaToken: token,
+        recaptcha: token ? { hasToken: true } : { hasToken: false },
       };
-      const docRef = await addDoc(colRef, payload);
 
-      // 2) Auto-reply email
-      try {
-        const functions = getFunctions(app, 'us-central1');
-        const sendAutoReply = httpsCallable(functions, 'sendEndorsementAutoReply');
-        await sendAutoReply({
-          docId: docRef.id,
-          toEmail: form.email,
-          fullName: form.fullName,
-          stageName: form.stageName,
-        });
-      } catch (mailErr) {
-        console.warn('[endorsement] email send failed:', mailErr?.code, mailErr?.message || mailErr);
-      }
+      const docRef = await addDoc(colRef, payload);
 
       // Success UI
       setSuccessOpen(true);
@@ -155,7 +186,10 @@ export default function EndorsementForm() {
       setInvalid(new Set());
     } catch (e2) {
       console.error('[endorsement submit] error', e2?.code, e2?.message, e2);
-      setError(e2?.message || 'Something went wrong submitting your application. Please try again.');
+      setError({
+        message: e2?.message || 'Something went wrong submitting your application. Please try again.',
+        fields: [],
+      });
     } finally {
       setSubmitting(false);
     }
@@ -185,7 +219,6 @@ export default function EndorsementForm() {
           </ul>
         </div>
 
-        {/* --- Fields --- */}
         <div className="grid-2">
           <label className={markInvalid('fullName')}>
             Full Name
@@ -199,6 +232,7 @@ export default function EndorsementForm() {
               placeholder="Your legal name"
             />
           </label>
+
           <label>
             Stage Name <span className="optional">(optional)</span>
             <input
@@ -224,6 +258,7 @@ export default function EndorsementForm() {
               placeholder="you@example.com"
             />
           </label>
+
           <label className={markInvalid('phone')}>
             Phone
             <input
@@ -247,6 +282,7 @@ export default function EndorsementForm() {
               placeholder="City (U.S. only)"
             />
           </label>
+
           <label className={markInvalid('state')}>
             State
             <select
@@ -276,6 +312,7 @@ export default function EndorsementForm() {
               placeholder="Solo, band name(s), MD work, etc."
             />
           </label>
+
           <label className={markInvalid('website')}>
             Website
             <input
@@ -299,6 +336,7 @@ export default function EndorsementForm() {
               placeholder="@handle or URL"
             />
           </label>
+
           <label className={markInvalid('tiktok')}>
             TikTok
             <input
@@ -309,6 +347,7 @@ export default function EndorsementForm() {
               placeholder="@handle or URL"
             />
           </label>
+
           <label className={markInvalid('youtube')}>
             YouTube
             <input
@@ -388,7 +427,6 @@ export default function EndorsementForm() {
           />
         </label>
 
-        {/* Agreement + CTA */}
         <div className="form-footer-block">
           <label className={`agree ${markInvalid('agree')}`}>
             <input
@@ -403,12 +441,24 @@ export default function EndorsementForm() {
               <ul>
                 <li>You will represent the Ober Artisan Drums brand professionally and respectfully.</li>
                 <li>You understand Ober supports full creative freedom and does not require exclusivity.</li>
-                <li>You acknowledge that all endorsement placements, as well as tier placements, are determined by the Ober team and are at our discretion.</li>
+                <li>You acknowledge endorsement and tier placement decisions are at Ober’s discretion.</li>
               </ul>
             </div>
           </label>
 
-          {error && <div className="error error-bottom">{error}</div>}
+          {/* CHANGED: render bullet list if we have it */}
+          {error && (
+            <div className="error error-bottom">
+              <div><strong>{error.message || 'Please correct the following:'}</strong></div>
+              {Array.isArray(error.fields) && error.fields.length > 0 && (
+                <ul className="error-bullets">
+                  {error.fields.map((f, idx) => (
+                    <li key={`${f}-${idx}`}>{f}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          )}
 
           <button className="submit" disabled={submitting}>
             {submitting ? 'Submitting…' : 'Submit Application'}
@@ -426,7 +476,7 @@ export default function EndorsementForm() {
               <button
                 onClick={() => {
                   setSuccessOpen(false);
-                  navigate('/'); // redirect to homepage
+                  navigate('/');
                 }}
               >
                 Close

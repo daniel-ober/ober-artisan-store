@@ -12,7 +12,6 @@ import {
 } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 
-// Load theme first, then component CSS (so component overrides win)
 import './AdminModalTheme.css';
 import './ViewSoundlegendModal.css';
 
@@ -21,12 +20,15 @@ import defaultProjectFields from '../utils/defaultProjectFields';
 import defaultStepData from '../utils/defaultStepData';
 
 const generateAndDownloadVCard = ({ firstName, lastName, email, phone }) => {
+  const safeFirst = firstName || 'Contact';
+  const safeLast = lastName || 'Ober';
+
   const vCard = `
 BEGIN:VCARD
 VERSION:3.0
-N:${lastName};${firstName}
-FN:${firstName} ${lastName}
-EMAIL:${email}
+N:${safeLast};${safeFirst}
+FN:${safeFirst} ${safeLast}
+EMAIL:${email || ''}
 ${phone ? `TEL;TYPE=CELL:${phone}` : ''}
 END:VCARD
   `.trim();
@@ -36,7 +38,7 @@ END:VCARD
 
   const a = document.createElement('a');
   a.href = url;
-  a.download = `${firstName}_${lastName}_OberContact.vcf`;
+  a.download = `${safeFirst}_${safeLast}_OberContact.vcf`;
   a.click();
 
   URL.revokeObjectURL(url);
@@ -48,7 +50,10 @@ const ViewSoundlegendModal = ({
   onStatusUpdate,
   onUpdateSubmission,
 }) => {
-  const [selectedStatus, setSelectedStatus] = useState(submission?.status || '');
+  // ✅ derive ID safely (no early returns before hooks)
+  const submissionId = submission?.id || null;
+
+  const [selectedStatus, setSelectedStatus] = useState(submission?.status || 'New');
   const [notes, setNotes] = useState('');
   const [history, setHistory] = useState(submission?.history || []);
   const [projectId, setProjectId] = useState(submission?.projectId || null);
@@ -56,28 +61,43 @@ const ViewSoundlegendModal = ({
     submission ? { ...submission, id: submission.id } : null
   );
 
-  if (!submission) return null;
-
   const { firstName, lastName, email, phone, artistBio, inspiration, submittedAt } =
-    fullSubmission || submission;
+    fullSubmission || submission || {};
 
   // Lock body scroll + ESC to close
   useEffect(() => {
+    // If modal isn't open (no submission), don't do anything
+    if (!submissionId) return;
+
     const prev = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
+
     const onKey = (e) => e.key === 'Escape' && onClose?.();
     window.addEventListener('keydown', onKey);
+
     return () => {
       document.body.style.overflow = prev;
       window.removeEventListener('keydown', onKey);
     };
-  }, [onClose]);
+  }, [submissionId, onClose]);
+
+  const copyToClipboard = useCallback((text) => {
+    if (!text) return;
+    navigator.clipboard
+      .writeText(text)
+      .then(() => console.log(`📋 Copied: ${text}`))
+      .catch((err) => console.error('❌ Copy failed:', err));
+  }, []);
 
   const handleStatusUpdate = async (newStatus) => {
+    if (!submissionId) return;
+
     setSelectedStatus(newStatus);
+
     try {
       const overviewStatus = getOverviewStatus('soundlegend', newStatus);
-      const submissionRef = doc(db, 'soundlegend_submissions', fullSubmission.id);
+      const submissionRef = doc(db, 'soundlegend_submissions', submissionId);
+
       const timestamp = new Date().toISOString();
       const historyEntry = { type: 'status', value: newStatus, timestamp };
 
@@ -89,23 +109,27 @@ const ViewSoundlegendModal = ({
 
       setHistory((prev) => [...prev, historyEntry]);
 
-      onUpdateSubmission?.({
-        ...fullSubmission,
+      const nextSubmission = {
+        ...(fullSubmission || submission),
+        id: submissionId,
         status: newStatus,
         overviewStatus,
-        history: [...history, historyEntry],
-      });
+        history: [...(history || []), historyEntry],
+      };
 
-      onStatusUpdate?.(fullSubmission.id, newStatus);
+      onUpdateSubmission?.(nextSubmission);
+      onStatusUpdate?.(submissionId, newStatus);
     } catch (err) {
       console.error('❌ Failed to update status in modal:', err);
     }
   };
 
   const handleNoteSubmit = async () => {
+    if (!submissionId) return;
     if (!notes.trim()) return;
+
     try {
-      const submissionRef = doc(db, 'soundlegend_submissions', fullSubmission.id);
+      const submissionRef = doc(db, 'soundlegend_submissions', submissionId);
       const timestamp = new Date().toISOString();
       const noteEntry = { type: 'note', value: notes.trim(), timestamp };
 
@@ -118,27 +142,22 @@ const ViewSoundlegendModal = ({
     }
   };
 
-  const copyToClipboard = useCallback((text) => {
-    navigator.clipboard
-      .writeText(text)
-      .then(() => console.log(`📋 Copied: ${text}`))
-      .catch((err) => console.error('❌ Copy failed:', err));
-  }, []);
-
   const createProject = async () => {
+    if (!submissionId) return;
+
     const confirmCreation = window.confirm(
-      `Create Project for ${firstName} ${lastName}?`
+      `Create Project for ${firstName || ''} ${lastName || ''}?`
     );
     if (!confirmCreation) return;
 
     try {
       const projectData = {
         source: 'SoundLegend',
-        submissionId: fullSubmission.id,
-        customerName: `${firstName} ${lastName}`,
+        submissionId,
+        customerName: `${firstName || ''} ${lastName || ''}`.trim(),
         customer: {
-          name: `${firstName} ${lastName}`,
-          email,
+          name: `${firstName || ''} ${lastName || ''}`.trim(),
+          email: email || '',
           phone: phone || '',
           address: { street: '', city: '', state: '', zip: '' },
         },
@@ -154,7 +173,7 @@ const ViewSoundlegendModal = ({
       const projectRef = await addDoc(collection(db, 'projects'), projectData);
       const newProjectId = projectRef.id;
 
-      const submissionRef = doc(db, 'soundlegend_submissions', fullSubmission.id);
+      const submissionRef = doc(db, 'soundlegend_submissions', submissionId);
       const systemEntry = {
         type: 'system',
         value: `Project created: ${newProjectId}`,
@@ -172,9 +191,10 @@ const ViewSoundlegendModal = ({
       alert(`✅ Project created successfully!\n\nID: ${newProjectId}`);
 
       onUpdateSubmission?.({
-        ...fullSubmission,
+        ...(fullSubmission || submission),
+        id: submissionId,
         projectId: newProjectId,
-        history: [systemEntry, ...history],
+        history: [systemEntry, ...(history || [])],
       });
     } catch (err) {
       console.error('❌ Failed to create project:', err);
@@ -182,10 +202,13 @@ const ViewSoundlegendModal = ({
     }
   };
 
+  // Fetch and validate submission + linked project
   useEffect(() => {
+    if (!submissionId) return;
+
     const fetchAndValidateSubmission = async () => {
       try {
-        const ref = doc(db, 'soundlegend_submissions', submission.id);
+        const ref = doc(db, 'soundlegend_submissions', submissionId);
         const snap = await getDoc(ref);
 
         if (!snap.exists()) {
@@ -206,7 +229,7 @@ const ViewSoundlegendModal = ({
           }
         }
 
-        setFullSubmission({ ...data, id: submission.id });
+        setFullSubmission({ ...data, id: submissionId });
         setProjectId(validProjectId);
         setHistory(data.history || []);
         setSelectedStatus(data.status || 'New');
@@ -216,18 +239,18 @@ const ViewSoundlegendModal = ({
     };
 
     fetchAndValidateSubmission();
-  }, [submission.id]);
+  }, [submissionId]);
 
-  // ------- PORTAL RENDER: guarantees overlay is above everything -------
+  // ✅ Now it's safe to return null (after hooks)
+  if (!submissionId) return null;
+
   return ReactDOM.createPortal(
     <div
       className="slmodal__backdrop"
-      // inline guards to beat hostile CSS
       style={{ position: 'fixed', inset: 0, zIndex: 100000 }}
       onClick={onClose}
       role="presentation"
     >
-      {/* LIGHT THEME opt-in */}
       <div
         className="slmodal light"
         onClick={(e) => e.stopPropagation()}
@@ -236,14 +259,16 @@ const ViewSoundlegendModal = ({
       >
         <div className="slmodal__header">
           <h3>SoundLegend Submission</h3>
-          <button className="icon-btn" onClick={onClose} aria-label="Close">✕</button>
+          <button className="icon-btn" onClick={onClose} aria-label="Close">
+            ✕
+          </button>
         </div>
 
         <div className="slmodal__body">
           <div className="ea-grid">
-            {/* Status & Quick Actions */}
             <div className="ea-block">
               <h4>Status & Actions</h4>
+
               <div className="row">
                 <span>Status</span>
                 <select
@@ -298,13 +323,15 @@ const ViewSoundlegendModal = ({
               </div>
             </div>
 
-            {/* Contact */}
             <div className="ea-block">
               <h4>Contact</h4>
+
               <div className="row">
                 <span>Name</span>
                 <div>
-                  <span className="text-box">{firstName} {lastName}</span>
+                  <span className="text-box">
+                    {firstName} {lastName}
+                  </span>
                   <button
                     className="icon-btn ml-8"
                     onClick={() => copyToClipboard(`${firstName} ${lastName}`)}
@@ -314,6 +341,7 @@ const ViewSoundlegendModal = ({
                   </button>
                 </div>
               </div>
+
               <div className="row">
                 <span>Email</span>
                 <div>
@@ -327,12 +355,14 @@ const ViewSoundlegendModal = ({
                   </button>
                 </div>
               </div>
+
               {phone && (
                 <div className="row">
                   <span>Phone</span>
                   <span className="text-box">{phone}</span>
                 </div>
               )}
+
               {submittedAt?.seconds && (
                 <div className="row">
                   <span>Submitted</span>
@@ -343,7 +373,6 @@ const ViewSoundlegendModal = ({
               )}
             </div>
 
-            {/* Artist Bio */}
             {artistBio && (
               <div className="ea-block col-span-2">
                 <h4>Artist Bio</h4>
@@ -351,7 +380,6 @@ const ViewSoundlegendModal = ({
               </div>
             )}
 
-            {/* Inspiration */}
             {inspiration && (
               <div className="ea-block col-span-2">
                 <h4>Inspiration</h4>
@@ -359,7 +387,6 @@ const ViewSoundlegendModal = ({
               </div>
             )}
 
-            {/* Notes */}
             <div className="ea-block col-span-2">
               <h4>Add Note</h4>
               <textarea
@@ -369,16 +396,22 @@ const ViewSoundlegendModal = ({
                 onChange={(e) => setNotes(e.target.value)}
               />
               <div className="right">
-                <button className="btn btn--sm" onClick={handleNoteSubmit} disabled={!notes.trim()}>
+                <button
+                  className="btn btn--sm"
+                  onClick={handleNoteSubmit}
+                  disabled={!notes.trim()}
+                >
                   Save Note
                 </button>
-                <button className="btn btn--ghost btn--sm" onClick={() => setNotes('')}>
+                <button
+                  className="btn btn--ghost btn--sm"
+                  onClick={() => setNotes('')}
+                >
                   Clear
                 </button>
               </div>
             </div>
 
-            {/* History */}
             <div className="ea-block col-span-2">
               <h4>History</h4>
               {history.length === 0 ? (
@@ -410,7 +443,9 @@ const ViewSoundlegendModal = ({
         </div>
 
         <div className="slmodal__footer">
-          <button className="btn btn--ghost" onClick={onClose}>Close</button>
+          <button className="btn btn--ghost" onClick={onClose}>
+            Close
+          </button>
         </div>
       </div>
     </div>,

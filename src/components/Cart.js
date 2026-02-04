@@ -492,7 +492,7 @@ const Cart = () => {
             </div>
 
             <div className="summary-note">
-              * Free shipping on orders over $50 (contiguous U.S. only)
+              * Free shipping on orders $50 or more (contiguous U.S. only)
             </div>
 
             <div className="summary-line total">

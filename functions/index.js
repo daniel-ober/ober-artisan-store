@@ -273,17 +273,13 @@ const mapRatesToStripeOptions = (rates, currency = 'usd') => {
 // ---------- SoundLegend: mirror project.publicPrefs -> soundlegend_showroom/{serial}
 function getSerialFromProject(p = {}) {
   return (
-    p.lineSerial ||
-    p.globalSerial ||
-    p.serial ||
-    p.soundlegendSerial ||
-    null
+    p.lineSerial || p.globalSerial || p.serial || p.soundlegendSerial || null
   );
 }
 
 function computePublicSnapshot(project = {}) {
   const prefs = project.publicPrefs || {};
-  const showName  = !!prefs.showName;
+  const showName = !!prefs.showName;
   const showStory = !!prefs.showStory;
 
   const baseName =
@@ -291,9 +287,10 @@ function computePublicSnapshot(project = {}) {
     project?.customer?.name ||
     null;
 
-  const name = showName ? (baseName || 'Anonymous Legend') : 'Anonymous Legend';
+  const name = showName ? baseName || 'Anonymous Legend' : 'Anonymous Legend';
   const storyHtml = showStory
-    ? (typeof prefs.storyHtml === 'string' && prefs.storyHtml.trim()) || '<p>Legacy Unknown.</p>'
+    ? (typeof prefs.storyHtml === 'string' && prefs.storyHtml.trim()) ||
+      '<p>Legacy Unknown.</p>'
     : '<p>Legacy is set to Private.</p>';
 
   return {
@@ -301,7 +298,7 @@ function computePublicSnapshot(project = {}) {
       showName,
       showStory,
       displayName: prefs.displayName || null,
-      storyHtml:   prefs.storyHtml   || null,
+      storyHtml: prefs.storyHtml || null,
       lastUpdated: admin.firestore.FieldValue.serverTimestamp(),
     },
     publicDisplay: {
@@ -318,24 +315,31 @@ exports.mirrorPublicPrefsToShowroom = onDocumentWritten(
   { document: 'projects/{projectId}', region: 'us-central1' },
   async (event) => {
     const before = event.data?.before?.data();
-    const after  = event.data?.after?.data();
+    const after = event.data?.after?.data();
     if (!after) return;
 
     // Only continue if publicPrefs changed (or didn't exist before)
     const changed =
       !before ||
-      JSON.stringify(before.publicPrefs || {}) !== JSON.stringify(after.publicPrefs || {});
+      JSON.stringify(before.publicPrefs || {}) !==
+        JSON.stringify(after.publicPrefs || {});
     if (!changed) return;
 
     const serial = getSerialFromProject(after);
     if (!serial) {
-      console.warn('mirrorPublicPrefsToShowroom: missing serial on project', event.params.projectId);
+      console.warn(
+        'mirrorPublicPrefsToShowroom: missing serial on project',
+        event.params.projectId
+      );
       return;
     }
 
     const payload = computePublicSnapshot(after);
     // Create if missing, update if exists (admin SDK bypasses rules)
-    await db.collection('soundlegend_showroom').doc(serial).set(payload, { merge: true });
+    await db
+      .collection('soundlegend_showroom')
+      .doc(serial)
+      .set(payload, { merge: true });
   }
 );
 
@@ -1093,264 +1097,578 @@ app.get('/orders/by-session/:sessionId', async (req, res) => {
 });
 
 // ───────────────────────────────────────────────────────────────────────────────
-// Stripe webhook app (raw body)
-const stripeWebhookApp = express();
-stripeWebhookApp.use(express.raw({ type: 'application/json' }));
+// Stripe webhook app (RAW body ONLY)
+// Adds:
+//  1) stripe_webhook_events/{eventId} receipt log (received/processed/failed)
+//  2) checkout_failures docs for expired/failed sessions
+//  3) stripe_missed_orders docs if order creation fails
+//
+// IMPORTANT:
+//   - Do NOT add stripeWebhookApp.use(express.json()) anywhere.
+//   - Do NOT mount this app under a parent app that uses express.json().
+//   - Keep this webhook as its own function/app.
+//
+// NOTE (FIX):
+//   - We do NOT rely on req.body being a Buffer (middleware can change it).
+//   - We use req.rawBody (Firebase provides it) so signature verification
+//     always gets the exact bytes Stripe sent.
+// ───────────────────────────────────────────────────────────────────────────────
 
-function parseTitleColorSize(title) {
-  if (!title || typeof title !== 'string') return { color: '', size: '' };
-  const parts = title
-    .split('/')
-    .map((s) => s.trim())
-    .filter(Boolean);
-  if (parts.length === 2) return { color: parts[0], size: parts[1] };
-  if (parts.length > 2)
-    return { color: parts[0], size: parts[parts.length - 1] };
-  return { color: '', size: '' };
-}
+const stripeWebhookApp = express();
 
 stripeWebhookApp.post('/', async (req, res) => {
   const stripe = stripeLib(STRIPE_SECRET_KEY.value());
+  const sig = req.headers['stripe-signature'];
+
+  if (!sig) {
+    console.error('❌ Missing Stripe signature header');
+    return res.status(400).send('Missing Stripe signature');
+  }
+
+  // ✅ ALWAYS prefer Firebase-provided rawBody (exact bytes)
+  let payload = req.rawBody;
+
+  // Fallbacks (just in case)
+  if (!payload) payload = req.body;
+  if (payload && !(payload instanceof Buffer) && payload instanceof Uint8Array) {
+    payload = Buffer.from(payload);
+  }
+
+  if (!Buffer.isBuffer(payload)) {
+    console.error(
+      '❌ Webhook payload is not a Buffer.',
+      'typeof:',
+      typeof payload,
+      'constructor:',
+      payload?.constructor?.name
+    );
+    return res.status(400).send('Webhook Error: Expected raw body Buffer');
+  }
+
   let event;
   try {
     event = stripe.webhooks.constructEvent(
-      req.rawBody,
-      req.headers['stripe-signature'],
+      payload,
+      sig,
       STRIPE_WEBHOOK_SECRET.value()
     );
   } catch (err) {
     console.error('❌ Webhook signature verification failed:', err.message);
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }
-  let session = event.data.object;
-  if (session.payment_intent) {
-    session = await stripe.checkout.sessions.retrieve(session.id, {
-      expand: ['payment_intent.payment_method'],
-    });
+
+  const eventId = event.id;
+  const eventType = event.type;
+  const eventCreated = event.created ? new Date(event.created * 1000) : null;
+  const livemode = !!event.livemode;
+
+  // ── 1) Receipt log: write immediately (idempotent)
+  const receiptRef = db.collection('stripe_webhook_events').doc(eventId);
+  try {
+    await receiptRef.set(
+      {
+        eventId,
+        type: eventType,
+        livemode,
+        stripeCreatedAt: eventCreated,
+        receivedAt: admin.firestore.FieldValue.serverTimestamp(),
+        processingStatus: 'received',
+      },
+      { merge: true }
+    );
+  } catch (e) {
+    // Even if Firestore write fails, we still proceed (don’t lose the webhook)
+    console.warn('⚠️ Failed to write webhook receipt:', e?.message || e);
   }
 
-  try {
-    if (
-      event.type === 'checkout.session.completed' ||
-      event.type === 'checkout.session.async_payment_succeeded'
-    ) {
-      const lineItems = await stripe.checkout.sessions.listLineItems(
-        session.id,
+  // If you only care about checkout.session.*, keep your filter:
+  if (!eventType.startsWith('checkout.session.')) {
+    try {
+      await receiptRef.set(
         {
-          expand: ['data.price.product'],
-        }
+          processingStatus: 'ignored',
+          processedAt: admin.firestore.FieldValue.serverTimestamp(),
+        },
+        { merge: true }
       );
+    } catch {}
+    return res.status(200).send('Ignored: non-checkout event');
+  }
 
-      const existing = await db
-        .collection('orders')
-        .where('stripeSessionId', '==', session.id)
-        .limit(1)
-        .get();
-      if (!existing.empty)
-        return res.status(200).send('Order already recorded for this session.');
+  // Helper: mark receipt processed/failed
+  const markProcessed = async (extra = {}) => {
+    try {
+      await receiptRef.set(
+        {
+          processingStatus: 'processed',
+          processedAt: admin.firestore.FieldValue.serverTimestamp(),
+          ...extra,
+        },
+        { merge: true }
+      );
+    } catch {}
+  };
 
-      if (
-        !session.customer_details?.email ||
-        !session.customer_details?.name ||
-        !session.shipping_details?.address ||
-        lineItems.data.length === 0
-      ) {
+  const markFailed = async (err, extra = {}) => {
+    try {
+      await receiptRef.set(
+        {
+          processingStatus: 'failed',
+          failedAt: admin.firestore.FieldValue.serverTimestamp(),
+          errorMessage: err?.message || String(err),
+          ...extra,
+        },
+        { merge: true }
+      );
+    } catch {}
+  };
+
+  try {
+    const sessionBase = event.data.object; // usually contains id
+
+    // ── Capture failures for visibility (no order creation)
+    if (
+      eventType === 'checkout.session.expired' ||
+      eventType === 'checkout.session.async_payment_failed'
+    ) {
+      const sessionId = sessionBase?.id || '';
+      let session = null;
+
+      try {
+        if (sessionId) {
+          session = await stripe.checkout.sessions.retrieve(sessionId);
+        }
+      } catch (e) {
         console.warn(
-          '⚠️ Skipping incomplete order creation. Missing important customer info.'
+          '⚠️ Failed to retrieve failed/expired session:',
+          e?.message || e
         );
-        return res
-          .status(200)
-          .send('Skipped: Incomplete session, no order created.');
       }
 
-      const guestToken = session.metadata?.guestToken || '';
-      let snapshotProducts = [];
-      if (guestToken) {
-        try {
-          const snapDoc = await db
-            .collection('pending_checkouts')
-            .doc(guestToken)
-            .get();
-          if (snapDoc.exists) {
-            const snap = snapDoc.data();
-            if (Array.isArray(snap?.products)) snapshotProducts = snap.products;
-          }
-        } catch (e) {
-          console.warn('⚠️ Failed to read pending_checkouts:', e.message);
-        }
-      }
+      const email =
+        session?.customer_details?.email ||
+        session?.customer_email ||
+        session?.metadata?.customerEmail ||
+        '';
 
-      const items = [];
-      for (const li of lineItems.data) {
-        const priceId = li.price?.id || '';
-        const unitAmount = li.price?.unit_amount ?? null;
-        const productObj = li.price?.product || {};
-        const pMeta = productObj?.metadata || {};
-        const pDesc = productObj?.description || '';
-        const pImages = Array.isArray(productObj?.images)
-          ? productObj.images
-          : [];
+      const name =
+        session?.customer_details?.name ||
+        session?.metadata?.customerName ||
+        'Customer';
 
-        let matched =
-          (Array.isArray(snapshotProducts) ? snapshotProducts : []).find(
-            (p) => p.stripePriceId && p.stripePriceId === priceId
-          ) ||
-          (Array.isArray(snapshotProducts) ? snapshotProducts : []).find(
-            (p) =>
-              !p.stripePriceId &&
-              Math.round(Number(p.price || 0) * 100) === unitAmount
-          );
-
-        let stripePriceMeta = { variantId: '', title: '', sku: '' };
-        try {
-          if (priceId) {
-            const priceObj = await stripe.prices.retrieve(priceId);
-            const md = priceObj?.metadata || {};
-            stripePriceMeta.variantId =
-              md.variantId || md.printify_variant_id || '';
-            stripePriceMeta.title = md.title || md.variant_title || '';
-            stripePriceMeta.sku = md.sku || md.printify_sku || '';
-          }
-        } catch (e) {
-          console.warn(
-            '⚠️ Could not retrieve Stripe Price metadata for',
-            priceId,
-            e.message
-          );
-        }
-
-        let variant = {
-          variantId: pMeta.variantId || pMeta.printify_variant_id || '',
-          size: pMeta.sizeName || '',
-          color: pMeta.colorName || '',
-          sku: stripePriceMeta.sku || '',
-          title: stripePriceMeta.title || '',
-        };
-
-        if (matched?.category === 'merch') {
-          const cfg = matched.config || {};
-          variant.variantId =
-            variant.variantId || (cfg.variantId ? String(cfg.variantId) : '');
-          variant.size =
-            variant.size || cfg.sizeName || cfg.size || cfg.Sizes || '';
-          variant.color =
-            variant.color || cfg.colorName || cfg.color || cfg.Colors || '';
-        } else if (matched) {
-          const cfg = matched.config || {};
-          variant = {
-            ...variant,
-            size: variant.size || cfg.size || '',
-            color: variant.color || cfg.hardwareColor || '',
-            lugQuantity: cfg.lugQuantity || '',
-            staveQuantity: cfg.staveQuantity || '',
-            depth: cfg.depth || '',
-            reRing:
-              typeof cfg.reRing !== 'undefined'
-                ? cfg.reRing
-                  ? 'Yes'
-                  : 'No'
-                : '',
-          };
-        }
-
-        if ((!variant.color || !variant.size) && pDesc) {
-          const parts = pDesc.split('•').map((s) => s.trim());
-          for (const part of parts) {
-            if (part.toLowerCase().startsWith('color:'))
-              variant.color = variant.color || part.split(':')[1].trim();
-            if (part.toLowerCase().startsWith('size:'))
-              variant.size = variant.size || part.split(':')[1].trim();
-          }
-        }
-
-        if ((!variant.color || !variant.size) && stripePriceMeta.title) {
-          const t = stripePriceMeta.title.split('/').map((s) => s.trim());
-          if (!variant.color && t[0]) variant.color = t[0];
-          if (!variant.size && t[t.length - 1]) variant.size = t[t.length - 1];
-        }
-
-        const finalCategory = matched?.category || pMeta.category || '';
-        const finalProductId = matched?.productId || pMeta.productId || '';
-        const finalName =
-          matched?.name || productObj?.name || li.description || 'Ober Product';
-        const finalImage = matched?.image || pImages[0] || '';
-
-        items.push({
-          priceId,
-          description: li.description,
-          quantity: li.quantity,
-          price: (li.amount_total || 0) / 100,
-          name: finalName,
-          category: finalCategory,
-          productId: finalProductId,
-          image: finalImage,
-          variant,
-        });
-      }
-
-      const pm = session.payment_intent?.payment_method || null;
-      const paymentMethodType = pm?.type || '';
-      let cardDetails = null;
-      if (paymentMethodType === 'card' && pm?.card) {
-        cardDetails = {
-          brand: pm.card.brand || '',
-          lastFour: pm.card.last4 || '',
-        };
-      }
-      const paymentMethodDetails =
-        paymentMethodType && pm && pm[paymentMethodType]
-          ? pm[paymentMethodType]
-          : null;
-
-      const orderId = `ORD-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
-      const orderDoc = {
-        stripeSessionId: session.id,
-        customerEmail: session.customer_details.email,
-        customerPhone: session.metadata?.customerPhone || '',
-        customerName: session.customer_details.name,
-        customerAddress: `${session.shipping_details.address.line1}, ${session.shipping_details.address.city}, ${session.shipping_details.address.state} ${session.shipping_details.address.postal_code}, ${session.shipping_details.address.country}`,
-        amountTotal: session.amount_total || 0,
-        totalAmount: session.amount_total ? session.amount_total / 100 : 0,
-        currency: session.currency || 'usd',
-        paymentMethod: paymentMethodType,
-        cardDetails,
-        paymentMethodDetails,
-        stripePaymentStatus: session.payment_status || '',
-        status: 'order successful',
+      const failureDoc = {
+        type: eventType,
+        stripeEventId: eventId,
+        stripeSessionId: sessionId,
+        paymentStatus: session?.payment_status || '',
+        status: session?.status || '',
+        customerEmail: email,
+        customerName: name,
         createdAt: admin.firestore.FieldValue.serverTimestamp(),
-        userId: session.metadata?.userId || 'guest',
-        guestToken: session.metadata?.guestToken || '',
-        items,
-        orderId,
-        promoCode: session.total_details?.amount_discount
-          ? session.discounts?.[0]?.promotion_code || ''
-          : '',
+        livemode,
       };
 
-      await db.collection('orders').doc(orderId).set(orderDoc);
-      if (session.metadata?.guestToken) {
-        db.collection('pending_checkouts')
-          .doc(session.metadata.guestToken)
-          .delete()
-          .catch(() => {});
+      await db.collection('checkout_failures').add(failureDoc);
+      await markProcessed({ note: 'Recorded checkout failure/expiry.' });
+      return res.status(200).send('Recorded checkout failure/expiry.');
+    }
+
+    // Only create orders on completed or async_succeeded
+    const okTypes = new Set([
+      'checkout.session.completed',
+      'checkout.session.async_payment_succeeded',
+    ]);
+
+    if (!okTypes.has(eventType)) {
+      await markProcessed({ note: 'Unhandled checkout.session.* event.' });
+      return res.status(200).send('Unhandled checkout.session.* event');
+    }
+
+    // Pull full session details
+    const session = await stripe.checkout.sessions.retrieve(sessionBase.id, {
+      expand: ['payment_intent.payment_method'],
+    });
+
+    const email =
+      session.customer_details?.email ||
+      session.customer_email ||
+      session.metadata?.customerEmail ||
+      '';
+
+    const name =
+      session.customer_details?.name || session.metadata?.customerName || 'Customer';
+
+    const addressObj =
+      session.shipping_details?.address || session.customer_details?.address || null;
+
+    if (!email) {
+      await markProcessed({ note: 'Skipped: Missing email.' });
+      return res.status(200).send('Skipped: Missing email.');
+    }
+
+    // Avoid duplicates
+    const existing = await db
+      .collection('orders')
+      .where('stripeSessionId', '==', session.id)
+      .limit(1)
+      .get();
+
+    if (!existing.empty) {
+      await markProcessed({
+        note: 'Order already recorded for this session.',
+      });
+      return res.status(200).send('Order already recorded for this session.');
+    }
+
+    // Line items
+    const lineItems = await stripe.checkout.sessions.listLineItems(session.id, {
+      expand: ['data.price.product'],
+    });
+
+    if (!lineItems?.data?.length) {
+      await markProcessed({ note: 'Skipped: No line items.' });
+      return res.status(200).send('Skipped: No line items.');
+    }
+
+    // Preserve your snapshot + item-building logic
+    const guestToken = session.metadata?.guestToken || '';
+    let snapshotProducts = [];
+
+    if (guestToken) {
+      try {
+        const snapDoc = await db.collection('pending_checkouts').doc(guestToken).get();
+        if (snapDoc.exists) {
+          const snap = snapDoc.data();
+          if (Array.isArray(snap?.products)) snapshotProducts = snap.products;
+        }
+      } catch (e) {
+        console.warn('⚠️ Failed to read pending_checkouts:', e.message);
       }
-      return res.status(200).send('Order created');
     }
 
-    if (
-      event.type === 'checkout.session.expired' ||
-      event.type === 'checkout.session.async_payment_failed'
-    ) {
-      console.warn('⚠️ Stripe session failed or expired, no order created.');
-      return res.status(200).send('Skipped: Session failed or expired.');
+    const items = [];
+    for (const li of lineItems.data) {
+      const priceId = li.price?.id || '';
+      const unitAmount = li.price?.unit_amount ?? null;
+      const productObj = li.price?.product || {};
+      const pMeta = productObj?.metadata || {};
+      const pDesc = productObj?.description || '';
+      const pImages = Array.isArray(productObj?.images) ? productObj.images : [];
+
+      let matched =
+        (Array.isArray(snapshotProducts) ? snapshotProducts : []).find(
+          (p) => p.stripePriceId && p.stripePriceId === priceId
+        ) ||
+        (Array.isArray(snapshotProducts) ? snapshotProducts : []).find(
+          (p) => !p.stripePriceId && Math.round(Number(p.price || 0) * 100) === unitAmount
+        );
+
+      let stripePriceMeta = { variantId: '', title: '', sku: '' };
+      try {
+        if (priceId) {
+          const priceObj = await stripe.prices.retrieve(priceId);
+          const md = priceObj?.metadata || {};
+          stripePriceMeta.variantId = md.variantId || md.printify_variant_id || '';
+          stripePriceMeta.title = md.title || md.variant_title || '';
+          stripePriceMeta.sku = md.sku || md.printify_sku || '';
+        }
+      } catch (e) {
+        console.warn(
+          '⚠️ Could not retrieve Stripe Price metadata for',
+          priceId,
+          e.message
+        );
+      }
+
+      let variant = {
+        variantId: pMeta.variantId || pMeta.printify_variant_id || '',
+        size: pMeta.sizeName || '',
+        color: pMeta.colorName || '',
+        sku: stripePriceMeta.sku || '',
+        title: stripePriceMeta.title || '',
+      };
+
+      if (matched?.category === 'merch') {
+        const cfg = matched.config || {};
+        variant.variantId =
+          variant.variantId || (cfg.variantId ? String(cfg.variantId) : '');
+        variant.size = variant.size || cfg.sizeName || cfg.size || cfg.Sizes || '';
+        variant.color =
+          variant.color || cfg.colorName || cfg.color || cfg.Colors || '';
+      } else if (matched) {
+        const cfg = matched.config || {};
+        variant = {
+          ...variant,
+          size: variant.size || cfg.size || '',
+          color: variant.color || cfg.hardwareColor || '',
+          lugQuantity: cfg.lugQuantity || '',
+          staveQuantity: cfg.staveQuantity || '',
+          depth: cfg.depth || '',
+          reRing:
+            typeof cfg.reRing !== 'undefined' ? (cfg.reRing ? 'Yes' : 'No') : '',
+        };
+      }
+
+      if ((!variant.color || !variant.size) && pDesc) {
+        const parts = pDesc.split('•').map((s) => s.trim());
+        for (const part of parts) {
+          if (part.toLowerCase().startsWith('color:'))
+            variant.color = variant.color || part.split(':')[1].trim();
+          if (part.toLowerCase().startsWith('size:'))
+            variant.size = variant.size || part.split(':')[1].trim();
+        }
+      }
+
+      if ((!variant.color || !variant.size) && stripePriceMeta.title) {
+        const t = stripePriceMeta.title.split('/').map((s) => s.trim());
+        if (!variant.color && t[0]) variant.color = t[0];
+        if (!variant.size && t[t.length - 1]) variant.size = t[t.length - 1];
+      }
+
+      const finalCategory = matched?.category || pMeta.category || '';
+      const finalProductId = matched?.productId || pMeta.productId || '';
+      const finalName =
+        matched?.name || productObj?.name || li.description || 'Ober Product';
+      const finalImage = matched?.image || pImages[0] || '';
+
+      items.push({
+        priceId,
+        description: li.description,
+        quantity: li.quantity,
+        price: (li.amount_total || 0) / 100,
+        name: finalName,
+        category: finalCategory,
+        productId: finalProductId,
+        image: finalImage,
+        variant,
+      });
     }
 
-    res.status(200).send('Unhandled event received');
+    // Payment method details
+    const pm = session.payment_intent?.payment_method || null;
+    const paymentMethodType = pm?.type || '';
+    let cardDetails = null;
+
+    if (paymentMethodType === 'card' && pm?.card) {
+      cardDetails = {
+        brand: pm.card.brand || '',
+        lastFour: pm.card.last4 || '',
+      };
+    }
+
+    const paymentMethodDetails =
+      paymentMethodType && pm && pm[paymentMethodType] ? pm[paymentMethodType] : null;
+
+    const customerAddress = addressObj
+      ? [
+          addressObj.line1,
+          addressObj.city,
+          addressObj.state,
+          addressObj.postal_code,
+          addressObj.country,
+        ]
+          .filter(Boolean)
+          .join(', ')
+      : '';
+
+    const orderId = `ORD-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
+
+    const orderDoc = {
+      stripeSessionId: session.id,
+      customerEmail: email,
+      customerPhone: session.metadata?.customerPhone || '',
+      customerName: name,
+      customerAddress,
+      amountTotal: session.amount_total || 0,
+      totalAmount: session.amount_total ? session.amount_total / 100 : 0,
+      currency: session.currency || 'usd',
+      paymentMethod: paymentMethodType,
+      cardDetails,
+      paymentMethodDetails,
+      stripePaymentStatus: session.payment_status || '',
+      status: 'order successful',
+      createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      userId: session.metadata?.userId || 'guest',
+      guestToken: session.metadata?.guestToken || '',
+      items,
+      orderId,
+    };
+
+    // ✅ Create order + notification
+    await db.collection('orders').doc(orderId).set(orderDoc);
+
+    await db.collection('order_notifications').add({
+      orderId,
+      stripeSessionId: session.id,
+      customerEmail: orderDoc.customerEmail,
+      customerName: orderDoc.customerName,
+      totalAmount: orderDoc.totalAmount,
+      createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      status: 'new',
+    });
+
+    // cleanup
+    if (session.metadata?.guestToken) {
+      db.collection('pending_checkouts')
+        .doc(session.metadata.guestToken)
+        .delete()
+        .catch(() => {});
+    }
+
+    await markProcessed({ orderId, stripeSessionId: session.id });
+    return res.status(200).send('Order created');
   } catch (err) {
-    console.error('❌ Failed processing event:', err);
+    console.error('❌ Failed processing Stripe webhook event:', err);
+
+    // ── 2) Missed-order capture (so you see internal processing failures)
+    try {
+      await db.collection('stripe_missed_orders').add({
+        stripeEventId: event.id,
+        type: event.type,
+        livemode: !!event.livemode,
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+        errorMessage: err?.message || String(err),
+        // store session id if present
+        stripeSessionId: event?.data?.object?.id || '',
+      });
+    } catch {}
+
+    await markFailed(err);
     return res.status(500).send('Internal Server Error');
   }
 });
+
+// Export the webhook as its OWN function (do not mount under api)
+exports.stripeWebhook = onRequest(
+  {
+    region: 'us-central1',
+    secrets: [STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET],
+  },
+  stripeWebhookApp
+);
+
+// ───────────────────────────────────────────────────────────────────────────────
+// Stripe Order Reconciler (backstop)
+// - Runs every 15 minutes
+// - Lists recently created Checkout Sessions
+// - Ensures every "paid" session has an orders doc + notification
+// - Writes admin_alerts ONLY when recovery occurs
+// - Writes admin_alerts if the reconciler itself fails
+// ───────────────────────────────────────────────────────────────────────────────
+
+exports.reconcileStripeOrders = onSchedule(
+  {
+    schedule: 'every 15 minutes',
+    secrets: [STRIPE_SECRET_KEY],
+    region: 'us-central1',
+  },
+  async () => {
+    const stripe = stripeLib(STRIPE_SECRET_KEY.value());
+    const db = admin.firestore();
+
+    console.log('🔎 Running Stripe reconciliation job...');
+
+    try {
+      // Look back 24 hours (adjust later if desired)
+      const since = Math.floor(Date.now() / 1000) - 60 * 60 * 24;
+
+      const sessions = await stripe.checkout.sessions.list({
+        limit: 100,
+        created: { gte: since },
+        expand: ['data.payment_intent'],
+      });
+
+      for (const session of sessions.data) {
+        // Only care about PAID sessions
+        if (session.payment_status !== 'paid') continue;
+
+        const existing = await db
+          .collection('orders')
+          .where('stripeSessionId', '==', session.id)
+          .limit(1)
+          .get();
+
+        if (!existing.empty) continue;
+
+        console.warn('🚨 Missing order detected for session:', session.id);
+
+        // Pull line items
+        const lineItems = await stripe.checkout.sessions.listLineItems(session.id, {
+          limit: 100,
+        });
+
+        const items = lineItems.data.map((li) => ({
+          name: li.description,
+          quantity: li.quantity,
+          price: (li.amount_total || 0) / 100,
+        }));
+
+        const orderId = `ORD-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
+
+        const orderDoc = {
+          stripeSessionId: session.id,
+          customerEmail: session.customer_details?.email || 'unknown',
+          customerName: session.customer_details?.name || 'Customer',
+          totalAmount: session.amount_total ? session.amount_total / 100 : 0,
+          currency: session.currency || 'usd',
+          status: 'recovered-by-reconciliation',
+          createdAt: admin.firestore.FieldValue.serverTimestamp(),
+          items,
+          recovered: true,
+        };
+
+        await db.collection('orders').doc(orderId).set(orderDoc);
+
+        await db.collection('order_notifications').add({
+          orderId,
+          stripeSessionId: session.id,
+          customerEmail: orderDoc.customerEmail,
+          customerName: orderDoc.customerName,
+          totalAmount: orderDoc.totalAmount,
+          createdAt: admin.firestore.FieldValue.serverTimestamp(),
+          status: 'new',
+          recovered: true,
+        });
+
+        // ✅ High-signal admin alert ONLY when recovery occurs
+        try {
+          await db.collection('admin_alerts').add({
+            type: 'recovered_order',
+            severity: 'high',
+            stripeSessionId: session.id,
+            orderId,
+            createdAt: admin.firestore.FieldValue.serverTimestamp(),
+            message:
+              'Order recovered via Stripe reconciliation. Webhook likely failed.',
+          });
+        } catch (e) {
+          console.error('⚠️ Failed writing admin_alerts (recovered_order):', e);
+        }
+
+        console.warn('✅ Recovered missing order:', orderId);
+      }
+
+      console.log('✅ Stripe reconciliation complete.');
+    } catch (err) {
+      console.error('❌ Reconciliation job failed:', err);
+
+      // ✅ If the backstop fails, alert yourself (don’t silently miss failures)
+      try {
+        await admin.firestore().collection('admin_alerts').add({
+          type: 'reconciliation_failure',
+          severity: 'critical',
+          createdAt: admin.firestore.FieldValue.serverTimestamp(),
+          message: err?.message || String(err),
+        });
+      } catch (e) {
+        console.error(
+          '⚠️ Failed writing admin_alerts (reconciliation_failure):',
+          e
+        );
+      }
+    }
+  }
+);
 
 // ───────────────────────────────────────────────────────────────────────────────
 // Printify webhook app (raw body)
@@ -1358,7 +1676,9 @@ const printifyWebhookApp = express();
 printifyWebhookApp.use(express.raw({ type: '*/*' }));
 
 printifyWebhookApp.post('/', async (req, res) => {
-  const raw = req.rawBody?.toString('utf8');
+  const raw = Buffer.isBuffer(req.body)
+    ? req.body.toString('utf8')
+    : String(req.body || '');
   const signatureHeader = req.headers['x-pfy-signature'];
   const secret = PRINTIFY_WEBHOOK_SECRET.value();
 
@@ -1612,129 +1932,131 @@ const handlePrintifyProductPublished = async (productId) => {
 
 // === Add somewhere near your other onCall exports (e.g., under setAdminClaim) ===
 
-exports.setSoundlegendClaim = onCall({ region: 'us-central1' }, async (request) => {
-  const ctx = request.auth;
-  const isAdmin = ctx?.token?.admin === true || ctx?.token?.isAdmin === true;
-  const callerEmail = ctx?.token?.email || '';
-  const ALLOW = new Set(['dan@oberartisandrums.com']);
-
-  if (!(isAdmin || ALLOW.has(callerEmail))) {
-    throw new functions.https.HttpsError('permission-denied', 'Admin privileges required.');
-  }
-
-  const { uid, enable = true } = request.data || {};
-  if (!uid) throw new functions.https.HttpsError('invalid-argument', 'uid is required');
-
-  const user = await admin.auth().getUser(uid);
-  const claims = user.customClaims || {};
-
-  const merged = {
-    ...claims,
-    soundlegend: !!enable,
-    isSoundlegend: !!enable,
-  };
-
-  await admin.auth().setCustomUserClaims(uid, merged);
-  await admin.auth().revokeRefreshTokens(uid);
-
-  await db.collection('users').doc(uid).set(
-    {
-      access: { soundlegend: !!enable },
-      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-    },
-    { merge: true }
-  );
-
-  return { ok: true, uid, soundlegend: !!enable };
-});
-
-exports.adminCreateUser = onCall(
+exports.setSoundlegendClaim = onCall(
   { region: 'us-central1' },
   async (request) => {
     const ctx = request.auth;
-    const isAdmin =
-      ctx?.token?.admin === true || ctx?.token?.isAdmin === true;
-    if (!isAdmin) {
+    const isAdmin = ctx?.token?.admin === true || ctx?.token?.isAdmin === true;
+    const callerEmail = ctx?.token?.email || '';
+    const ALLOW = new Set(['dan@oberartisandrums.com']);
+
+    if (!(isAdmin || ALLOW.has(callerEmail))) {
       throw new functions.https.HttpsError(
         'permission-denied',
         'Admin privileges required.'
       );
     }
 
-    const {
-      email,
-      password,
-      firstName = '',
-      lastName = '',
-      phone = '',
-      isSoundlegend = false,
-      status = 'active',
-    } = request.data || {};
-
-    if (!email || !password) {
-      throw new functions.https.HttpsError(
-        'invalid-argument',
-        'email and password are required'
-      );
-    }
-
-    try {
-      // 1) Create in Firebase Auth
-      const userRecord = await admin.auth().createUser({
-        email,
-        password,
-        displayName: `${firstName} ${lastName}`.trim() || undefined,
-        phoneNumber: phone && /^\+/.test(phone) ? phone : undefined, // keep E.164 only
-        disabled: status !== 'active',
-      });
-
-      // 2) Return UID so the client can write Firestore doc (your UI already does this)
-      return { uid: userRecord.uid };
-    } catch (e) {
-      // Surface common Auth errors
-      const code = e?.code || '';
-      if (code === 'auth/email-already-exists') {
-        throw new functions.https.HttpsError(
-          'already-exists',
-          'auth/email-already-exists'
-        );
-      }
-      throw new functions.https.HttpsError('internal', e?.message || String(e));
-    }
-  }
-);
-
-exports.setAdminClaim = onCall(
-  { region: 'us-central1' },
-  async (request) => {
-    const ctx = request.auth;
-    const isAdmin =
-      ctx?.token?.admin === true || ctx?.token?.isAdmin === true;
-    if (!isAdmin) {
-      throw new functions.https.HttpsError(
-        'permission-denied',
-        'Admin privileges required.'
-      );
-    }
-
-    const { uid, admin: makeAdmin = true } = request.data || {};
-    if (!uid) {
+    const { uid, enable = true } = request.data || {};
+    if (!uid)
       throw new functions.https.HttpsError(
         'invalid-argument',
         'uid is required'
       );
-    }
 
-    try {
-      await admin.auth().setCustomUserClaims(uid, { admin: !!makeAdmin });
-      // Optional: force token refresh next time they sign in
-      await admin.auth().revokeRefreshTokens(uid);
-      return { ok: true };
-    } catch (e) {
-      throw new functions.https.HttpsError('internal', e?.message || String(e));
-    }
+    const user = await admin.auth().getUser(uid);
+    const claims = user.customClaims || {};
+
+    const merged = {
+      ...claims,
+      soundlegend: !!enable,
+      isSoundlegend: !!enable,
+    };
+
+    await admin.auth().setCustomUserClaims(uid, merged);
+    await admin.auth().revokeRefreshTokens(uid);
+
+    await db
+      .collection('users')
+      .doc(uid)
+      .set(
+        {
+          access: { soundlegend: !!enable },
+          updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+        },
+        { merge: true }
+      );
+
+    return { ok: true, uid, soundlegend: !!enable };
   }
 );
+
+exports.adminCreateUser = onCall({ region: 'us-central1' }, async (request) => {
+  const ctx = request.auth;
+  const isAdmin = ctx?.token?.admin === true || ctx?.token?.isAdmin === true;
+  if (!isAdmin) {
+    throw new functions.https.HttpsError(
+      'permission-denied',
+      'Admin privileges required.'
+    );
+  }
+
+  const {
+    email,
+    password,
+    firstName = '',
+    lastName = '',
+    phone = '',
+    isSoundlegend = false,
+    status = 'active',
+  } = request.data || {};
+
+  if (!email || !password) {
+    throw new functions.https.HttpsError(
+      'invalid-argument',
+      'email and password are required'
+    );
+  }
+
+  try {
+    // 1) Create in Firebase Auth
+    const userRecord = await admin.auth().createUser({
+      email,
+      password,
+      displayName: `${firstName} ${lastName}`.trim() || undefined,
+      phoneNumber: phone && /^\+/.test(phone) ? phone : undefined, // keep E.164 only
+      disabled: status !== 'active',
+    });
+
+    // 2) Return UID so the client can write Firestore doc (your UI already does this)
+    return { uid: userRecord.uid };
+  } catch (e) {
+    // Surface common Auth errors
+    const code = e?.code || '';
+    if (code === 'auth/email-already-exists') {
+      throw new functions.https.HttpsError(
+        'already-exists',
+        'auth/email-already-exists'
+      );
+    }
+    throw new functions.https.HttpsError('internal', e?.message || String(e));
+  }
+});
+
+exports.setAdminClaim = onCall({ region: 'us-central1' }, async (request) => {
+  const ctx = request.auth;
+  const isAdmin = ctx?.token?.admin === true || ctx?.token?.isAdmin === true;
+  if (!isAdmin) {
+    throw new functions.https.HttpsError(
+      'permission-denied',
+      'Admin privileges required.'
+    );
+  }
+
+  const { uid, admin: makeAdmin = true } = request.data || {};
+  if (!uid) {
+    throw new functions.https.HttpsError('invalid-argument', 'uid is required');
+  }
+
+  try {
+    await admin.auth().setCustomUserClaims(uid, { admin: !!makeAdmin });
+    // Optional: force token refresh next time they sign in
+    await admin.auth().revokeRefreshTokens(uid);
+    return { ok: true };
+  } catch (e) {
+    throw new functions.https.HttpsError('internal', e?.message || String(e));
+  }
+});
 
 // ───────────────────────────────────────────────────────────────────────────────
 // Scheduled refresh (unchanged)
@@ -1908,7 +2230,6 @@ exports.stripeWebhook = onRequest(
   {
     region: 'us-central1',
     secrets: [STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET],
-    cors: true,
   },
   stripeWebhookApp
 );
@@ -2164,7 +2485,7 @@ exports.syncMerchVariantPrice = onCall(
       newPriceCents,
       currency = 'usd',
       stripeProductId,
-      currentStripePriceId,   // not used (Stripe prices are immutable; we create a new one)
+      currentStripePriceId, // not used (Stripe prices are immutable; we create a new one)
       printify = {},
     } = request.data || {};
 
