@@ -1,6 +1,6 @@
 // src/components/SoundLegendPortal/ProjectProgress.js
 import React, { useEffect, useMemo, useState } from 'react';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
 import { calculateProjectProgress } from '../../utils/calculateProjectProgress';
 
@@ -603,6 +603,58 @@ function getOverallProgress(project) {
     console.error('calculateProjectProgress failed; defaulting to 0', e);
     return 0;
   }
+}
+
+// ✅ Global active sub-step pointer:
+// Ensures exactly ONE sub-step is "IN PROGRESS" whenever project is not 100% complete.
+function getGlobalActiveSubStep(project) {
+  if (!project) return null;
+
+  for (let s = 0; s < STEPS.length; s += 1) {
+    const stageKey = STEPS[s].key;
+    const tpl = STAGE_TEMPLATES?.[stageKey];
+    const phaseKey = (STEP_DEFS?.[stageKey]?.storageKeys || [])[0];
+
+    if (!tpl || !phaseKey) continue;
+
+    const phase = project?.[phaseKey] || {};
+    const checklist = Array.isArray(phase.checklist) ? phase.checklist : [];
+    const stepsArr = tpl.steps || [];
+    if (!stepsArr.length) continue;
+
+    // Is the stage fully complete?
+    const stageComplete = stepsArr.every((_, idx) => {
+      const item = checklist[idx] || {};
+      const states = Array.isArray(item.checkpointStates)
+        ? item.checkpointStates
+        : [];
+      const total = states.length;
+      const done = states.filter(Boolean).length;
+
+      // If we have checkpointStates, use them. Otherwise fallback to item.completed.
+      return total > 0 ? done === total : !!item.completed;
+    });
+
+    if (stageComplete) continue;
+
+    // Pick the first incomplete sub-step in this stage
+    for (let i = 0; i < stepsArr.length; i += 1) {
+      const item = checklist[i] || {};
+      const states = Array.isArray(item.checkpointStates)
+        ? item.checkpointStates
+        : [];
+      const total = states.length;
+      const done = states.filter(Boolean).length;
+
+      const isComplete = total > 0 ? done === total : !!item.completed;
+      if (!isComplete) return { stageKey, stepIdx: i };
+    }
+
+    // If stage isn't "complete" but we can't detect a sub-step, force step 0
+    return { stageKey, stepIdx: 0 };
+  }
+
+  return null;
 }
 
 /** Derive current step index from currentPhase text if present */
@@ -1280,18 +1332,28 @@ const STAGE_TEMPLATES = {
    STAGE CHECKPOINTS PANEL
    ========================================================= */
 
-const StageCheckpointsPanel = ({ project, stageKey }) => {
+const StageCheckpointsPanel = ({
+  project,
+  setProject,
+  stageKey,
+  isAdmin = false,
+}) => {
   // ---------- single-open accordion state ----------
   const [openStepId, setOpenStepId] = useState(null);
 
-  // template does NOT need project to exist
+  // ---------- duration modal state ----------
+  const [durationModalOpen, setDurationModalOpen] = useState(false);
+  const [pending, setPending] = useState(null);
+  const [hours, setHours] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [saving, setSaving] = useState(false);
+
   const template = STAGE_TEMPLATES?.[stageKey] || null;
 
-  // Map stageKey (e.g. 'rawShell') → phase key used in the admin modal
+  // Map stageKey (e.g. 'rawShell') → phase key used in Firestore
   const stepMeta = STEP_DEFS?.[stageKey] || null;
   const phaseKey = stepMeta?.storageKeys?.[0] || null;
 
-  // Safe fallbacks so hooks can always run
   const phaseChecklist = useMemo(() => {
     const phase = phaseKey && project ? project?.[phaseKey] : null;
     return Array.isArray(phase?.checklist) ? phase.checklist : [];
@@ -1303,15 +1365,19 @@ const StageCheckpointsPanel = ({ project, stageKey }) => {
     return stepsObj ? Object.values(stepsObj) : [];
   }, [project, stageKey]);
 
-  // Build normalized steps from the template (safe even if template is null)
   const normalizedSteps = useMemo(() => {
     const tplSteps = template?.steps || [];
+
+// ✅ Global active sub-step pointer (ONE "IN PROGRESS" across the whole project)
+const overallPct = getOverallProgress(project);
+const globalPtr = overallPct < 100 ? getGlobalActiveSubStep(project) : null;
 
     return tplSteps.map((tplStep, idx) => {
       const labels = tplStep.checkpoints || [];
 
       let checkpointStates = [];
       let completedFlag = false;
+      let stepDurationMinutes = 0;
 
       // ---- 1) PRIMARY: top-level phase checklist ----
       const phaseItem = phaseChecklist[idx];
@@ -1319,6 +1385,14 @@ const StageCheckpointsPanel = ({ project, stageKey }) => {
         if (Array.isArray(phaseItem.checkpointStates)) {
           checkpointStates = phaseItem.checkpointStates;
         }
+
+        stepDurationMinutes = Number(
+          phaseItem.durationMinutes ??
+            (Number.isFinite(phaseItem.totalSeconds)
+              ? phaseItem.totalSeconds / 60
+              : 0)
+        );
+
         completedFlag = !!phaseItem.completed;
       }
 
@@ -1348,11 +1422,16 @@ const StageCheckpointsPanel = ({ project, stageKey }) => {
       const total = checkpoints.length;
       const done = checkpoints.filter((c) => c.completed).length;
 
-      let status;
-      if (completedFlag && total > 0) status = 'COMPLETED';
-      else if (done === 0) status = 'NOT STARTED';
-      else if (done === total) status = 'COMPLETED';
-      else status = 'IN PROGRESS';
+const isComplete = total > 0 && (completedFlag || done === total);
+
+const isGlobalActive =
+  !!globalPtr &&
+  globalPtr.stageKey === stageKey &&
+  globalPtr.stepIdx === idx;
+
+let status = 'NOT STARTED';
+if (isComplete) status = 'COMPLETED';
+else if (isGlobalActive) status = 'IN PROGRESS';
 
       return {
         id: `${stageKey}_${tplStep.key}`,
@@ -1362,11 +1441,11 @@ const StageCheckpointsPanel = ({ project, stageKey }) => {
         total,
         done,
         status,
+        durationMinutes: stepDurationMinutes,
       };
     });
-  }, [template, stageKey, phaseChecklist, lifecycleSteps]);
+  }, [template, stageKey, phaseChecklist, lifecycleSteps, project, phaseKey]);
 
-  // Auto-open logic (hook must ALWAYS run; guard inside)
   useEffect(() => {
     if (!project || !normalizedSteps.length) {
       setOpenStepId(null);
@@ -1404,7 +1483,14 @@ const StageCheckpointsPanel = ({ project, stageKey }) => {
     if (candidateIndex < 0) candidateIndex = 0;
 
     const nextId = normalizedSteps[candidateIndex]?.id ?? null;
-    setOpenStepId((prev) => (prev === nextId ? prev : nextId));
+
+    setOpenStepId((prev) => {
+      // If user already has a step open AND it's still valid, keep it open
+      if (prev && normalizedSteps.some((s) => s.id === prev)) return prev;
+
+      // Otherwise, auto-select the best candidate
+      return nextId;
+    });
   }, [stageKey, project, phaseKey, normalizedSteps]);
 
   const statusClass = (status) => {
@@ -1417,72 +1503,480 @@ const StageCheckpointsPanel = ({ project, stageKey }) => {
     setOpenStepId((prev) => (prev === stepId ? null : stepId));
   };
 
+  // ✅ Firestore update helper
+  // ✅ 1) Toggle a checkpoint complete/incomplete (NO duration here)
+  const persistCheckpointToggle = async ({
+    phaseKeyArg,
+    stepIdx,
+    cpIdx,
+    completed,
+  }) => {
+    if (!project?.id || !phaseKeyArg) return;
+
+    const ref = doc(db, 'projects', project.id);
+
+    const phase = project?.[phaseKeyArg] || {};
+    const checklist = Array.isArray(phase.checklist)
+      ? [...phase.checklist]
+      : [];
+
+    const stepItemRaw = checklist[stepIdx] || {};
+    const stepItem = { ...stepItemRaw };
+
+    const states = Array.isArray(stepItem.checkpointStates)
+      ? [...stepItem.checkpointStates]
+      : [];
+
+    states[cpIdx] = !!completed;
+    stepItem.checkpointStates = states;
+
+    // ✅ recompute completion from checkpointStates
+    const total = states.length;
+    const done = states.filter(Boolean).length;
+    const isFullyComplete = total > 0 && done === total;
+
+    // ✅ IMPORTANT: keep stepItem.completed in sync with checkpoints
+    stepItem.completed = isFullyComplete;
+
+    // ✅ if not fully complete, clear duration (so "completed" doesn't imply time logged)
+    if (!isFullyComplete) {
+      stepItem.durationMinutes = 0;
+      stepItem.totalSeconds = 0;
+    }
+
+    checklist[stepIdx] = stepItem;
+
+    // patch local project
+    if (typeof setProject === 'function') {
+      setProject((prev) => {
+        if (!prev) return prev;
+        return {
+          ...prev,
+          [phaseKeyArg]: {
+            ...(prev[phaseKeyArg] || {}),
+            checklist,
+          },
+        };
+      });
+    }
+
+    await updateDoc(ref, {
+      [`${phaseKeyArg}.checklist`]: checklist,
+    });
+  };
+
+  // ✅ 3) Mark ALL checkpoints complete for a sub-step
+  const persistMarkAllComplete = async ({ phaseKeyArg, stepIdx, total }) => {
+    if (!project?.id || !phaseKeyArg) return;
+
+    const ref = doc(db, 'projects', project.id);
+
+    const phase = project?.[phaseKeyArg] || {};
+    const checklist = Array.isArray(phase.checklist)
+      ? [...phase.checklist]
+      : [];
+
+    const stepItemRaw = checklist[stepIdx] || {};
+    const stepItem = { ...stepItemRaw };
+
+    const totalCount = Number.isFinite(total) ? total : 0;
+
+    // Ensure we have an array of the correct length
+    const nextStates = Array.from({ length: totalCount }, () => true);
+
+    stepItem.checkpointStates = nextStates;
+
+    // ✅ completed MUST be true if we just set all checkpoints true
+    stepItem.completed = totalCount > 0;
+
+    // Do NOT auto-set duration; admin logs it explicitly
+    stepItem.durationMinutes = Number(stepItem.durationMinutes || 0);
+    stepItem.totalSeconds = Number(stepItem.totalSeconds || 0);
+
+    checklist[stepIdx] = stepItem;
+
+    // patch local state
+    if (typeof setProject === 'function') {
+      setProject((prev) => {
+        if (!prev) return prev;
+        return {
+          ...prev,
+          [phaseKeyArg]: {
+            ...(prev[phaseKeyArg] || {}),
+            checklist,
+          },
+        };
+      });
+    }
+
+    await updateDoc(ref, {
+      [`${phaseKeyArg}.checklist`]: checklist,
+    });
+  };
+
+  const handleMarkAllComplete = async ({ phaseKeyArg, stepIdx, total }) => {
+    if (!isAdmin) return;
+    try {
+      await persistMarkAllComplete({ phaseKeyArg, stepIdx, total });
+    } catch (e) {
+      console.error('Failed marking all complete', e);
+    }
+  };
+
+  // ✅ 2) Save duration at the SUB-STEP level (only after fully complete)
+  const persistStepDuration = async ({
+    phaseKeyArg,
+    stepIdx,
+    durationMinutes,
+  }) => {
+    if (!project?.id || !phaseKeyArg) return;
+
+    const ref = doc(db, 'projects', project.id);
+
+    const phase = project?.[phaseKeyArg] || {};
+    const checklist = Array.isArray(phase.checklist)
+      ? [...phase.checklist]
+      : [];
+
+    const stepItemRaw = checklist[stepIdx] || {};
+    const stepItem = { ...stepItemRaw };
+
+    const states = Array.isArray(stepItem.checkpointStates)
+      ? [...stepItem.checkpointStates]
+      : [];
+
+    const total = states.length;
+    const done = states.filter(Boolean).length;
+    const isFullyComplete = total > 0 && done === total;
+
+    // guard: only allow duration when fully completed
+    if (!isFullyComplete) return;
+
+    const mins = Math.max(0, Number(durationMinutes || 0));
+    stepItem.durationMinutes = mins;
+    stepItem.totalSeconds = mins * 60;
+
+    checklist[stepIdx] = stepItem;
+
+    if (typeof setProject === 'function') {
+      setProject((prev) => {
+        if (!prev) return prev;
+        return {
+          ...prev,
+          [phaseKeyArg]: {
+            ...(prev[phaseKeyArg] || {}),
+            checklist,
+          },
+        };
+      });
+    }
+
+    await updateDoc(ref, {
+      [`${phaseKeyArg}.checklist`]: checklist,
+    });
+  };
+
+  const openDurationModal = ({ phaseKeyArg, stepIdx }) => {
+    setPending({ phaseKey: phaseKeyArg, stepIdx });
+    setHours(0);
+    setMinutes(0);
+    setDurationModalOpen(true);
+  };
+
+  const closeDurationModal = () => {
+    setDurationModalOpen(false);
+    setPending(null);
+    setHours(0);
+    setMinutes(0);
+    setSaving(false);
+  };
+
+  const saveDurationAndComplete = async () => {
+    if (!pending?.phaseKey) return;
+
+    const durMins = Number(hours) * 60 + Number(minutes);
+
+    setSaving(true);
+    try {
+      await persistStepDuration({
+        phaseKeyArg: pending.phaseKey,
+        stepIdx: pending.stepIdx,
+        durationMinutes: durMins,
+      });
+      closeDurationModal();
+    } catch (e) {
+      console.error('Failed saving step duration', e);
+      setSaving(false);
+    }
+  };
+
+  const handleToggleCheckpoint = async ({
+    phaseKeyArg,
+    stepIdx,
+    cpIdx,
+    nextChecked,
+  }) => {
+    if (!isAdmin) return;
+
+    try {
+      await persistCheckpointToggle({
+        phaseKeyArg,
+        stepIdx,
+        cpIdx,
+        completed: nextChecked,
+      });
+    } catch (e) {
+      console.error('Failed toggling checkpoint', e);
+    }
+  };
+
   // ✅ Early return ONLY AFTER hooks are declared
   if (!project || !template) return null;
+
+  const HOURS_OPTIONS = Array.from({ length: 25 }, (_, i) => i); // 0–24
+  const MINUTES_OPTIONS = Array.from({ length: 12 }, (_, i) => i * 5); // 0–55
 
   return (
     <div className="pp-stage-card">
       <h4 className="pp-section-title">Internal checkpoints</h4>
+
       <div className="pp-step-list">
-        {normalizedSteps.map((step) => {
+        {normalizedSteps.map((step, stepIdx) => {
           const { total, done, status } = step;
           const isOpen = openStepId === step.id;
+          const canLogDuration = isAdmin && total > 0 && done === total;
+          const hasLoggedDuration = (step.durationMinutes || 0) > 0;
 
           return (
             <div
               key={step.id}
               className={`pp-step-block step-${status.toLowerCase().replace(' ', '-')}`}
             >
-              <button
-                type="button"
-                className="pp-step-header slp-pp-step-header"
-                data-context="project-progress-step-header"
-                onClick={() => toggleStep(step.id)}
-              >
-                <div className="pp-step-header-main">
-                  <span className="pp-step-title">{step.label}</span>
-                  <span className="pp-step-count">
-                    {done}/{total} checkpoints
+              {isAdmin ? (
+                <button
+                  type="button"
+                  className="pp-step-header slp-pp-step-header"
+                  onClick={() => toggleStep(step.id)}
+                >
+                  <div className="pp-step-header-main">
+                    <span className="pp-step-title">{step.label}</span>
+
+                    <span className="pp-step-count">
+                      {done === total
+                        ? 'Fully completed'
+                        : `${done}/${total} completed`}
+                    </span>
+                    {isAdmin && total > 0 && done < total && (
+                      <span
+                        role="button"
+                        tabIndex={0}
+                        className="pp-step-markall-btn"
+                        onClick={(e) => {
+                          e.stopPropagation(); // ✅ don't collapse accordion
+                          handleMarkAllComplete({
+                            phaseKeyArg: phaseKey,
+                            stepIdx,
+                            total,
+                          });
+                        }}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            handleMarkAllComplete({
+                              phaseKeyArg: phaseKey,
+                              stepIdx,
+                              total,
+                            });
+                          }
+                        }}
+                      >
+                        Mark all complete
+                      </span>
+                    )}
+
+                    {/* ✅ Sub-step duration (admin only) */}
+                    {canLogDuration && (
+                      <span className="pp-step-duration">
+                        {hasLoggedDuration ? (
+                          <>
+                            {Math.floor((step.durationMinutes || 0) / 60)}h{' '}
+                            {String((step.durationMinutes || 0) % 60).padStart(
+                              2,
+                              '0'
+                            )}
+                            m
+                          </>
+                        ) : (
+                          <button
+                            type="button"
+                            className="pp-step-log-btn"
+                            onClick={(e) => {
+                              e.stopPropagation(); // don't collapse accordion
+                              openDurationModal({
+                                phaseKeyArg: phaseKey,
+                                stepIdx,
+                              });
+                            }}
+                          >
+                            Log duration
+                          </button>
+                        )}
+                      </span>
+                    )}
+                  </div>
+
+                  <span
+                    className={`pp-step-status pill ${statusClass(status)}`}
+                  >
+                    {status}
+                  </span>
+
+                  <span
+                    className={`pp-step-chevron ${isOpen ? 'open' : ''}`}
+                    aria-hidden="true"
+                  >
+                    ▾
+                  </span>
+                </button>
+              ) : (
+                <div className="pp-step-header slp-pp-step-header is-static">
+                  <div className="pp-step-header-main">
+                    <span className="pp-step-title">{step.label}</span>
+                    <span className="pp-step-count">
+                      {done === total
+                        ? 'Fully completed'
+                        : `${done}/${total} completed`}
+                    </span>
+                  </div>
+
+                  <span
+                    className={`pp-step-status pill ${statusClass(status)}`}
+                  >
+                    {status}
                   </span>
                 </div>
-
-                <span className={`pp-step-status pill ${statusClass(status)}`}>
-                  {status}
-                </span>
-
-                <span
-                  className={`pp-step-chevron ${isOpen ? 'open' : ''}`}
-                  aria-hidden="true"
-                >
-                  ▾
-                </span>
-              </button>
-
-              {isOpen && (
-                <div className="pp-checkpoint-list grouped">
-                  {step.checkpoints.map((cp) => (
-                    <div key={cp.id} className="pp-checkpoint-row">
-                      <div className="pp-checkpoint-main">
-                        <span
-                          className={`pp-checkpoint-icon ${cp.completed ? 'is-completed' : ''}`}
-                          aria-hidden="true"
-                        >
-                          {cp.completed ? '✓' : ''}
-                        </span>
-                        <span
-                          className={`pp-checkpoint-label ${cp.completed ? 'is-completed' : ''}`}
-                        >
-                          {cp.label}
-                        </span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
               )}
+
+              {isOpen &&
+                (isAdmin ? (
+                  <div className="pp-checkpoint-list grouped">
+                    {step.checkpoints.map((cp, cpIdx) => (
+                      <div
+                        key={cp.id}
+                        className="pp-checkpoint-row pp-checkpoint-row--admin"
+                      >
+                        <div className="pp-checkpoint-main">
+                          <button
+                            type="button"
+                            className={`pp-checkpoint-icon pp-checkpoint-icon--button ${
+                              cp.completed ? 'is-completed' : ''
+                            }`}
+                            aria-label={
+                              cp.completed ? 'Mark incomplete' : 'Mark complete'
+                            }
+                            onClick={() =>
+                              handleToggleCheckpoint({
+                                phaseKeyArg: phaseKey,
+                                stepIdx,
+                                cpIdx,
+                                nextChecked: !cp.completed,
+                              })
+                            }
+                          >
+                            {cp.completed ? '✓' : ''}
+                          </button>
+
+                          <span
+                            className={`pp-checkpoint-label ${cp.completed ? 'is-completed' : ''}`}
+                          >
+                            {cp.label}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="checkpoint-hidden-note">
+                    Detailed internal checkpoints are workshop-only.
+                  </div>
+                ))}
             </div>
           );
         })}
       </div>
+
+      {/* Duration modal (admin-only) */}
+      {isAdmin && durationModalOpen && (
+        <div className="slp-modal-overlay" role="dialog" aria-modal="true">
+          <div className="slp-modal">
+            <div className="slp-modal-header">
+              <div className="slp-modal-title">Log duration</div>
+              <div className="slp-modal-subtitle">
+                How long did this checkpoint take?
+              </div>
+            </div>
+
+            <div className="slp-modal-body">
+              <div className="slp-modal-grid">
+                <div className="slp-modal-field">
+                  <label className="slp-modal-label">Hours</label>
+                  <select
+                    className="slp-modal-select"
+                    value={hours}
+                    onChange={(e) => setHours(Number(e.target.value))}
+                  >
+                    {HOURS_OPTIONS.map((h) => (
+                      <option key={h} value={h}>
+                        {h}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="slp-modal-field">
+                  <label className="slp-modal-label">Minutes</label>
+                  <select
+                    className="slp-modal-select"
+                    value={minutes}
+                    onChange={(e) => setMinutes(Number(e.target.value))}
+                  >
+                    {MINUTES_OPTIONS.map((m) => (
+                      <option key={m} value={m}>
+                        {m}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div className="slp-modal-hint">
+                Minutes are logged in 5-minute increments.
+              </div>
+            </div>
+
+            <div className="slp-modal-footer">
+              <button
+                type="button"
+                className="slp-modal-btn slp-modal-btn--ghost"
+                onClick={closeDurationModal}
+                disabled={saving}
+              >
+                Cancel
+              </button>
+
+              <button
+                type="button"
+                className="slp-modal-btn slp-modal-btn--primary"
+                onClick={saveDurationAndComplete}
+                disabled={saving}
+              >
+                {saving ? 'Saving…' : 'Save & mark complete'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
@@ -1492,43 +1986,30 @@ const StageCheckpointsPanel = ({ project, stageKey }) => {
    ========================================================= */
 // Derive the *project* current stage + current sub-step labels
 function getCurrentStageAndStepLabels(project) {
-  // default text when we don't have anything yet
   if (!project) {
-    return {
-      stageLabel: 'Not started',
-      stepLabel: 'No sub-step selected',
-    };
+    return { stageLabel: 'Not started', stepLabel: 'No sub-step selected' };
   }
 
-  // 1️⃣ Figure out which STAGE the project is currently in
-  const stageIndex = getCurrentStepIndex(project); // uses STEPS + checklist truth
+  const stageIndex = getCurrentStepIndex(project);
   const stageDef = STEPS[stageIndex] || STEPS[0];
   const stageLabel = `${stageIndex + 1}. ${stageDef.label}`;
 
-  // 2️⃣ Figure out which STEP (sub-step) inside that stage is "active"
   let stepLabel = 'No sub-step selected';
 
-  const stageKey = stageDef.key; // e.g. 'woodVision'
-  const template = STAGE_TEMPLATES[stageKey];
-  const phaseKey = (STEP_DEFS[stageKey]?.storageKeys || [])[0]; // e.g. 'woodVisionLockIn'
+  // ✅ define this (and only use it when not complete)
+  const overallPct = getOverallProgress(project);
+  const activePtr = overallPct < 100 ? getGlobalActiveSubStep(project) : null;
 
-  if (template && phaseKey) {
-    // use the same logic as the checkpoints panel
-    const activeIdx = getActiveStepIndexForPhase(project, phaseKey);
-    const stepsArr = template.steps || [];
-
-    if (activeIdx >= 0 && activeIdx < stepsArr.length) {
-      stepLabel = stepsArr[activeIdx].label;
-    } else if (stepsArr.length) {
-      // fallback: first defined step in this stage
-      stepLabel = stepsArr[0].label;
-    }
+  if (activePtr) {
+    const tpl = STAGE_TEMPLATES?.[activePtr.stageKey];
+    const stepsArr = tpl?.steps || [];
+    if (stepsArr[activePtr.stepIdx]) stepLabel = stepsArr[activePtr.stepIdx].label;
   }
 
   return { stageLabel, stepLabel };
 }
 
-const ProjectProgress = ({ project: initialProject }) => {
+const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
   const [project, setProject] = useState(initialProject || null);
   const [loading, setLoading] = useState(!initialProject);
   const [activeKey, setActiveKey] = useState(STEPS[0].key);
@@ -1593,10 +2074,10 @@ const ProjectProgress = ({ project: initialProject }) => {
   }, [currentStepIndex]);
 
   const activeStep = STEPS.find((s) => s.key === activeKey) || STEPS[0];
- const activeStatusRaw = getStepStatus(project, activeStep).status; // "In Progress"
-const activeStatus = String(activeStatusRaw || '')
-  .toLowerCase()
-  .replace(/\s+/g, '_'); // "in_progress"
+  const activeStatusRaw = getStepStatus(project, activeStep).status; // "In Progress"
+  const activeStatus = String(activeStatusRaw || '')
+    .toLowerCase()
+    .replace(/\s+/g, '_'); // "in_progress"
 
   const stageTarget = useMemo(
     () => getStageTargetDate(project, activeStep.key),
@@ -1607,7 +2088,7 @@ const activeStatus = String(activeStatusRaw || '')
 
   // "Future stage" lock (for the little note under the roadmap)
   const isStageFuture =
-    activeStatus === 'not started' && activeIndex > currentStepIndex;
+    activeStatus === 'not_started' && activeIndex > currentStepIndex;
 
   // For brand-new projects, let stages 1–3 behave as unlocked teaser stages
   const isStageLocked =
@@ -1728,7 +2209,7 @@ const activeStatus = String(activeStatusRaw || '')
                 'sl-progress-stage-status-pill',
                 activeStatus === 'completed'
                   ? 'is-completed'
-                  : activeStatus === 'in progress'
+                  : activeStatus === 'in_progress'
                     ? 'is-inprogress'
                     : 'is-notstarted',
               ].join(' ')}
@@ -1741,10 +2222,9 @@ const activeStatus = String(activeStatusRaw || '')
         {/* Stage roadmap steps (cards moved down here) */}
         <div className="sl-progress-roadmap-steps">
           {STEPS.map((step, index) => {
-            const stepStatus = getStepStatus(
-              project,
-              step
-            ).status.toLowerCase();
+            const stepStatus = String(getStepStatus(project, step).status || '')
+              .toLowerCase()
+              .replace(/\s+/g, '_');
             const isCurrent = step.key === activeStep.key;
 
             const isCompleted =
@@ -1890,7 +2370,9 @@ const activeStatus = String(activeStatusRaw || '')
             ) : (
               <StageCheckpointsPanel
                 project={project}
+                setProject={setProject}
                 stageKey={activeStep.key}
+                isAdmin={isAdmin}
               />
             )}
           </div>

@@ -60,6 +60,14 @@ const findClosestPreset = (totalSeconds = 0) => {
   return closest;
 };
 
+const normalizeBoolArray = (arr, len) => {
+  const base = Array.isArray(arr) ? arr.map((v) => v === true) : [];
+  const padded = base.concat(
+    new Array(Math.max(0, len - base.length)).fill(false)
+  );
+  return padded.slice(0, len);
+};
+
 /**
  * CHECKPOINTS_BY_ITEM_ID
  *
@@ -615,27 +623,14 @@ const StepComponentTemplate = ({
 
   // Local array of booleans for THIS sub-step's checkpoints
   const [localCheckpointStates, setLocalCheckpointStates] = useState(() => {
-    if (
-      activeItem &&
-      Array.isArray(activeItem.checkpointStates) &&
-      activeItem.checkpointStates.length
-    ) {
-      return [...activeItem.checkpointStates];
-    }
-    return new Array(checkpoints.length).fill(false);
+    return normalizeBoolArray(activeItem?.checkpointStates, checkpoints.length);
   });
 
   // When the active sub-step or its Firestore data changes, sync local state
   useEffect(() => {
-    if (
-      activeItem &&
-      Array.isArray(activeItem.checkpointStates) &&
-      activeItem.checkpointStates.length
-    ) {
-      setLocalCheckpointStates([...activeItem.checkpointStates]);
-    } else {
-      setLocalCheckpointStates(new Array(checkpoints.length).fill(false));
-    }
+    setLocalCheckpointStates(
+      normalizeBoolArray(activeItem?.checkpointStates, checkpoints.length)
+    );
   }, [activeItem?.id, checkpoints.length]);
 
   const totalTime = useMemo(
@@ -742,7 +737,8 @@ const StepComponentTemplate = ({
               <button
                 disabled={isLocked || (activeItem.totalSeconds || 0) === 0}
                 onClick={() =>
-                  onToggleChecklist && onToggleChecklist(activeIdx, checked, 0)
+                  onToggleChecklist &&
+                  onToggleChecklist(activeIdx, !!activeItem.completed, 0)
                 }
                 className="mpm-step-link-btn"
               >
@@ -788,11 +784,7 @@ const StepComponentTemplate = ({
               onChange={(e) => {
                 const newCompleted = e.target.checked;
                 if (onToggleChecklist) {
-                  onToggleChecklist(
-                    activeIdx,
-                    newCompleted,
-                    activeItem.totalSeconds || 0
-                  );
+                  onToggleChecklist(activeIdx, newCompleted, undefined);
                 }
               }}
             />

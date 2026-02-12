@@ -176,7 +176,7 @@
 .sl-progress-step-dot {
   position: relative;
   flex: 1 1 0;
-  max-width: 80px;
+  max-width: 72px;
   border: none;
   background: transparent;
   cursor: pointer;
@@ -246,6 +246,7 @@
 .sl-progress-step-dot.is-locked {
   cursor: default;
   opacity: 0.6;
+  pointer-events: none;
 }
 
 .sl-progress-step-dot.is-locked .sl-progress-step-number {
@@ -493,9 +494,14 @@
     border 0.25s ease;
 }
 
-.pp-step-block:hover {
-  background: rgba(15, 23, 42, 0.95);
-  border-color: rgba(255, 255, 255, 0.12);
+.checkpoint-hidden-note {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px dashed rgba(120, 190, 255, 0.22);
+  background: rgba(3, 9, 20, 0.55);
+  color: rgba(226, 232, 240, 0.78);
+  font-size: 0.9rem;
 }
 
 /* Header row for each step (clickable) */
@@ -620,6 +626,10 @@
   align-items: center;
 }
 
+/* =========================================================
+   CHECKPOINT ICON + LABEL
+   ========================================================= */
+
 /* Icon container: keeps text aligned even when there is no checkmark */
 .pp-checkpoint-icon {
   display: inline-flex;
@@ -629,25 +639,74 @@
   height: 18px;
   margin-right: 0.6rem;
   border-radius: 999px;
-  border: 1px solid rgba(148, 163, 184, 0.35); /* subtle gray ring */
+  border: 1px solid rgba(148, 163, 184, 0.35);
   font-size: 0.7rem;
   font-weight: 700;
   flex-shrink: 0;
   color: transparent; /* no visible mark when incomplete */
   background: transparent;
+  transition:
+    border-color 0.18s ease,
+    background 0.18s ease,
+    transform 0.14s ease,
+    box-shadow 0.14s ease;
 }
 
-/* Completed checkpoint: green pill + visible checkmark */
+/* =========================================================
+   ADMIN — clickable circle
+   (add class: pp-checkpoint-icon--button)
+   ========================================================= */
+
+.pp-checkpoint-icon--button {
+  appearance: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* hover ONLY when incomplete */
+.pp-checkpoint-icon--button:not(.is-completed):hover {
+  border-color: rgba(120, 190, 255, 0.65);
+  transform: scale(1.06);
+}
+
+/* subtle press feedback */
+.pp-checkpoint-icon--button:active {
+  transform: scale(0.96);
+}
+
+/* accessible focus */
+.pp-checkpoint-icon--button:focus {
+  outline: none;
+}
+
+.pp-checkpoint-icon--button:focus-visible {
+  box-shadow: 0 0 0 3px rgba(120, 190, 255, 0.22);
+}
+
+/* =========================================================
+   COMPLETED STATE
+   ========================================================= */
+
 .pp-checkpoint-icon.is-completed {
   background: #22c55e;
   border-color: #22c55e;
-  color: #020617; /* dark text inside */
+  color: #020617; /* dark checkmark */
+  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.18);
 }
 
-/* Text styling */
+/* nicer hover when already completed */
+.pp-checkpoint-icon--button.is-completed:hover {
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.22);
+}
+
+/* =========================================================
+   LABEL
+   ========================================================= */
+
 .pp-checkpoint-label {
   font-size: 0.85rem;
   color: rgba(226, 232, 240, 0.82);
+  transition: color 0.18s ease;
 }
 
 .pp-checkpoint-label.is-completed {
@@ -682,6 +741,197 @@
   opacity: 0.9;
 }
 
+/* Non-admin headers are static (no hover glow, no pointer) */
+.sl-progress .pp-stage-card .slp-pp-step-header.is-static {
+  cursor: default;
+}
+
+.sl-progress .pp-stage-card .slp-pp-step-header.is-static:hover {
+  background: transparent;
+}
+
+/* Slightly tighter header layout */
+.sl-progress .pp-stage-card .slp-pp-step-header {
+  padding: 0.65rem 0.95rem;
+}
+
+.pp-step-header-main {
+  gap: 2px;
+}
+
+.pp-step-title {
+  font-size: 0.92rem; /* was 0.96 */
+  line-height: 1.2;
+}
+
+.pp-step-count {
+  font-size: 0.74rem;
+  line-height: 1.15;
+}
+
+/* =========================
+   ADMIN checkpoint controls
+   ========================= */
+
+.pp-checkpoint-row--admin {
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.pp-checkpoint-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pp-checkpoint-duration {
+  font-size: 0.75rem;
+  color: rgba(226, 232, 240, 0.72);
+  padding: 4px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(120, 190, 255, 0.18);
+  background: rgba(3, 9, 20, 0.35);
+  min-width: 66px;
+  text-align: right;
+}
+
+.pp-checkpoint-duration--empty {
+  opacity: 0.55;
+}
+
+/* =========================
+   Duration modal
+   ========================= */
+
+.slp-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.62);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  z-index: 9999;
+}
+
+.slp-modal {
+  width: min(520px, 100%);
+  border-radius: 16px;
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(80, 140, 255, 0.16),
+      transparent 55%
+    ),
+    rgba(3, 9, 20, 0.98);
+  border: 1px solid rgba(120, 190, 255, 0.28);
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.75);
+  overflow: hidden;
+}
+
+.slp-modal-header {
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid rgba(120, 190, 255, 0.14);
+}
+
+.slp-modal-title {
+  font-size: 0.95rem;
+  font-weight: 650;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.slp-modal-subtitle {
+  margin-top: 4px;
+  font-size: 0.82rem;
+  color: rgba(226, 232, 240, 0.72);
+}
+
+.slp-modal-body {
+  padding: 14px 18px 12px;
+}
+
+.slp-modal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.slp-modal-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.slp-modal-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(169, 180, 212, 0.92);
+}
+
+.slp-modal-select {
+  width: 100%;
+  padding: 10px 10px;
+  border-radius: 12px;
+  background: rgba(2, 6, 23, 0.75);
+  border: 1px solid rgba(120, 190, 255, 0.22);
+  color: rgba(255, 255, 255, 0.9);
+  outline: none;
+}
+
+.slp-modal-select:focus {
+  border-color: rgba(120, 190, 255, 0.45);
+  box-shadow: 0 0 0 3px rgba(120, 190, 255, 0.18);
+}
+
+.slp-modal-hint {
+  margin-top: 10px;
+  font-size: 0.82rem;
+  color: rgba(226, 232, 240, 0.68);
+}
+
+.slp-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 12px 18px 16px;
+  border-top: 1px solid rgba(120, 190, 255, 0.14);
+}
+
+.slp-modal-btn {
+  border: none;
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-size: 0.86rem;
+  cursor: pointer;
+}
+
+.slp-modal-btn--ghost {
+  background: rgba(148, 163, 184, 0.12);
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.slp-modal-btn--primary {
+  background: linear-gradient(
+    90deg,
+    rgba(34, 197, 94, 0.95),
+    rgba(74, 222, 128, 0.95)
+  );
+  color: rgba(2, 6, 23, 0.95);
+  font-weight: 650;
+}
+
+.slp-modal-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 520px) {
+  .slp-modal-grid {
+    grid-template-columns: 1fr;
+  }
+}
 /* =====================================================================
    RESPONSIVE
    ===================================================================== */
