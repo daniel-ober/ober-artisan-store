@@ -379,9 +379,17 @@ const ManageUsers = () => {
   /* ---------- impersonate & view portal ---------- */
   const handleImpersonateUser = (user) => {
     if (!user?.id) return;
-    // You *might* choose to block impersonation for admins too, but for now we allow it.
+
+    // 1) Keep your existing context behavior
     startImpersonation(user.id);
-    navigate('/legacy');
+
+    // 2) Persist impersonation so /legacy can read it even if context hasn't hydrated yet
+    sessionStorage.setItem('impersonateUid', user.id);
+    sessionStorage.setItem('impersonateEmail', user.email || '');
+    sessionStorage.setItem('impersonateName', user.fullName || '');
+
+    // 3) Open portal in new tab so you don't lose admin view
+    window.open('/legacy', '_blank');
   };
 
   /* ---------- render ---------- */
@@ -586,17 +594,6 @@ const ManageUsers = () => {
                             >
                               View Portal as User
                             </button>
-
-                            {/* Optional delete: re-enable if you want it visible again
-                            <button
-                              className="delete-btn"
-                              type="button"
-                              onClick={() => handleDeleteUser(user.id)}
-                              disabled={loadingDelete}
-                            >
-                              {loadingDelete ? 'Deleting…' : 'Delete'}
-                            </button>
-                            */}
                           </>
                         )}
                       </div>

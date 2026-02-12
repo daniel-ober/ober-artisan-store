@@ -1,8 +1,16 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { collection, getDocs, query, where } from 'firebase/firestore';
+import {
+  collection,
+  getDocs,
+  query,
+  where,
+  doc,
+  getDoc,
+} from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
 import { useAuth } from '../../context/AuthContext';
 import { usePortalUser } from '../../hooks/usePortalUser';
+import { useNavigate } from 'react-router-dom';
 
 import ProjectProgress from './ProjectProgress';
 import ScopeOfWork from './ScopeOfWork';
@@ -158,25 +166,128 @@ const Tabs = ({
 /* -------------------- main portal -------------------- */
 
 const SoundLegendPortal = () => {
+  const navigate = useNavigate();
   const { isAdmin } = useAuth();
-  const { portalUser, loadingPortalUser, isImpersonating } = usePortalUser();
+  const {
+    portalUser,
+    loadingPortalUser,
+    isImpersonating: hookIsImpersonating,
+  } = usePortalUser();
 
+  // Impersonation values persisted by ManageUsers
+  const impersonateUid = useMemo(
+    () => sessionStorage.getItem('impersonateUid') || '',
+    []
+  );
+  const impersonateName = useMemo(
+    () => sessionStorage.getItem('impersonateName') || '',
+    []
+  );
+  const impersonateEmail = useMemo(
+    () => sessionStorage.getItem('impersonateEmail') || '',
+    []
+  );
+
+  // Effective portal user for this page:
+  // - normal users: portalUser from hook
+  // - admins: if impersonateUid exists, we fetch users/{impersonateUid} and use that as portal user
+  const [effectivePortalUser, setEffectivePortalUser] = useState(null);
+  const [loadingEffectiveUser, setLoadingEffectiveUser] = useState(true);
+  const [effectiveIsImpersonating, setEffectiveIsImpersonating] = useState(false);
+
+  // Projects / Orders state
   const [loading, setLoading] = useState(true); // loading projects/orders
   const [projects, setProjects] = useState([]);
   const [selectedId, setSelectedId] = useState('');
   const [orders, setOrders] = useState([]);
   const [tab, setTab] = useState('progress');
 
-  /* ---------- LOAD PROJECTS FOR PORTAL USER (ownerUid OR userId OR email) ---------- */
+  /* ---------- Resolve effective portal user ---------- */
   useEffect(() => {
-    if (!portalUser || loadingPortalUser) return;
+    let cancelled = false;
+
+    const run = async () => {
+      // Wait for your hook to settle first
+      if (loadingPortalUser) return;
+
+      setLoadingEffectiveUser(true);
+
+      try {
+        // Admin impersonation takes precedence if sessionStorage has a UID
+        if (isAdmin && impersonateUid) {
+          const ref = doc(db, 'users', impersonateUid);
+          const snap = await getDoc(ref);
+
+          if (cancelled) return;
+
+          if (snap.exists()) {
+            const data = snap.data() || {};
+            setEffectivePortalUser({
+              id: impersonateUid,
+              uid: impersonateUid,
+              ...data,
+              // Prefer Firestore email/name, but keep storage as fallback
+              email: data.email || impersonateEmail || '',
+              fullName:
+                data.firstName || data.lastName
+                  ? `${data.firstName || ''} ${data.lastName || ''}`.trim()
+                  : data.fullName || impersonateName || '',
+            });
+          } else {
+            // If doc doesn't exist, fall back to hook user (still better than hard fail)
+            setEffectivePortalUser(portalUser || null);
+          }
+
+          setEffectiveIsImpersonating(true);
+          return;
+        }
+
+        // Not impersonating: use hook portalUser
+        setEffectivePortalUser(portalUser || null);
+        setEffectiveIsImpersonating(Boolean(hookIsImpersonating));
+      } catch (e) {
+        console.error('Failed to resolve effective portal user:', e);
+        setEffectivePortalUser(portalUser || null);
+        setEffectiveIsImpersonating(Boolean(hookIsImpersonating));
+      } finally {
+        if (!cancelled) setLoadingEffectiveUser(false);
+      }
+    };
+
+    run();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [
+    isAdmin,
+    impersonateUid,
+    impersonateEmail,
+    impersonateName,
+    portalUser,
+    loadingPortalUser,
+    hookIsImpersonating,
+  ]);
+
+  const exitImpersonation = () => {
+    sessionStorage.removeItem('impersonateUid');
+    sessionStorage.removeItem('impersonateEmail');
+    sessionStorage.removeItem('impersonateName');
+
+    // take admin back to admin dashboard immediately
+    navigate('/admin');
+  };
+
+  /* ---------- LOAD PROJECTS FOR EFFECTIVE PORTAL USER (ownerUid OR userId OR email) ---------- */
+  useEffect(() => {
+    if (!effectivePortalUser || loadingEffectiveUser) return;
 
     let cancelled = false;
 
     const run = async () => {
       setLoading(true);
       try {
-        const ownerUid = portalUser.uid || portalUser.id;
+        const ownerUid = effectivePortalUser.uid || effectivePortalUser.id;
         const colRef = collection(db, 'projects');
 
         let snap = { empty: true, docs: [] };
@@ -194,8 +305,8 @@ const SoundLegendPortal = () => {
         }
 
         // 3) Fallback: customer.emailLower
-        if (snap.empty && portalUser.email) {
-          const emailLower = portalUser.email.trim().toLowerCase();
+        if (snap.empty && effectivePortalUser.email) {
+          const emailLower = effectivePortalUser.email.trim().toLowerCase();
           const qByEmail = query(
             colRef,
             where('customer.emailLower', '==', emailLower)
@@ -225,18 +336,18 @@ const SoundLegendPortal = () => {
     return () => {
       cancelled = true;
     };
-  }, [portalUser, loadingPortalUser]);
+  }, [effectivePortalUser, loadingEffectiveUser]);
 
-  // Load orders for this portal user (by email)
+  // Load orders for this effective portal user (by email)
   useEffect(() => {
-    if (!portalUser?.email || loadingPortalUser) return;
+    if (!effectivePortalUser?.email || loadingEffectiveUser) return;
     let cancelled = false;
 
     const run = async () => {
       try {
         const qOrders = query(
           collection(db, 'orders'),
-          where('customerEmail', '==', portalUser.email)
+          where('customerEmail', '==', effectivePortalUser.email)
         );
         const snap = await getDocs(qOrders);
         if (cancelled) return;
@@ -253,48 +364,63 @@ const SoundLegendPortal = () => {
     return () => {
       cancelled = true;
     };
-  }, [portalUser?.email, loadingPortalUser]);
+  }, [effectivePortalUser?.email, loadingEffectiveUser]);
 
   const selectedProject = useMemo(
     () => projects.find((p) => p.id === selectedId) || null,
     [projects, selectedId]
   );
 
-  const latestOrder = useMemo(
-    () => (orders.length ? orders[0] : null),
-    [orders]
-  );
+  const latestOrder = useMemo(() => (orders.length ? orders[0] : null), [orders]);
 
   /* -------------------- loading / empty states -------------------- */
 
-  if (loadingPortalUser) {
-    return (
-      <div className="slp-page">Loading your SoundLegend portal…</div>
-    );
+  if (loadingPortalUser || loadingEffectiveUser) {
+    return <div className="slp-page">Loading your SoundLegend portal…</div>;
   }
 
-  if (!portalUser) {
+  if (!effectivePortalUser) {
     return (
       <div className="slp-page">Please sign in to view your Artist Portal.</div>
     );
   }
 
   if (loading) {
-    return (
-      <div className="slp-page">Loading your SoundLegend experience…</div>
-    );
+    return <div className="slp-page">Loading your SoundLegend experience…</div>;
   }
 
   if (!projects.length) {
     return (
       <div className="slp-page">
+        {effectiveIsImpersonating && (
+          <div className="slp-impersonation-banner">
+            <div className="slp-impersonation-left">
+              <span className="slp-impersonation-pill">IMPERSONATING</span>
+              <span className="slp-impersonation-text">
+                {effectivePortalUser.fullName ||
+                  effectivePortalUser.email ||
+                  impersonateName ||
+                  impersonateEmail ||
+                  impersonateUid}
+              </span>
+            </div>
+
+            <button
+              type="button"
+              className="slp-impersonation-exit"
+              onClick={exitImpersonation}
+            >
+              Exit
+            </button>
+          </div>
+        )}
+
         <h2>
           Welcome to your SoundLegend
-          {isImpersonating ? ' (admin view)' : ''}
+          {effectiveIsImpersonating ? ' (admin view)' : ''}
         </h2>
         <p>
-          No projects are linked to your account yet. If this seems wrong,
-          email:{' '}
+          No projects are linked to your account yet. If this seems wrong, email:{' '}
           <a href="mailto:soundlegend@oberartisandrums.com">
             support@oberartisandrums.com
           </a>
@@ -327,10 +453,7 @@ const SoundLegendPortal = () => {
 
   const handleTabChange = (nextKey) => {
     // Block navigation to SL-only tabs for non-SL drums
-    if (
-      !isSoundLegendProject &&
-      (nextKey === 'vault' || nextKey === 'media')
-    ) {
+    if (!isSoundLegendProject && (nextKey === 'vault' || nextKey === 'media')) {
       return;
     }
     setTab(nextKey);
@@ -338,9 +461,32 @@ const SoundLegendPortal = () => {
 
   return (
     <div className="slp-page">
+      {effectiveIsImpersonating && (
+        <div className="slp-impersonation-banner">
+          <div className="slp-impersonation-left">
+            <span className="slp-impersonation-pill">IMPERSONATING</span>
+            <span className="slp-impersonation-text">
+              {effectivePortalUser.fullName ||
+                effectivePortalUser.email ||
+                impersonateName ||
+                impersonateEmail ||
+                impersonateUid}
+            </span>
+          </div>
+
+          <button
+            type="button"
+            className="slp-impersonation-exit"
+            onClick={exitImpersonation}
+          >
+            Exit
+          </button>
+        </div>
+      )}
+
       <h2 className="slp-heading">
         Welcome to your Artist Portal
-        {isImpersonating ? ' (admin view)' : ''}
+        {effectiveIsImpersonating ? ' (admin view)' : ''}
       </h2>
 
       <Tabs
@@ -357,20 +503,20 @@ const SoundLegendPortal = () => {
         {tab === 'progress' && (
           <ProjectProgress project={selectedProject} isAdmin={isAdmin} />
         )}
+
         {tab === 'scope' && <ScopeOfWork project={selectedProject} />}
 
         {/* SL-only sections */}
         {tab === 'vault' && isSoundLegendProject && (
           <VaultPreferences project={selectedProject} />
         )}
-        {tab === 'media' && isSoundLegendProject && (
-          <Media project={selectedProject} />
-        )}
+        {tab === 'media' && isSoundLegendProject && <Media project={selectedProject} />}
 
         {tab === 'payments' && <PaymentHistory orders={orders} />}
+
         {tab === 'account' && (
           <AccountSettings
-            user={portalUser}
+            user={effectivePortalUser}
             projects={projects}
             orders={orders}
             latestOrder={latestOrder}

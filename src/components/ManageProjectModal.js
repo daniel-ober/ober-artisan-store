@@ -20,6 +20,8 @@ import { calculateProjectProgress } from '../utils/calculateProjectProgress';
 import { Snackbar } from '@mui/material';
 import { useImpersonation } from '../context/ImpersonationContext';
 import './ManageProjectModal.css';
+// NOTE: StepComponentTemplate expects checkpointStates as boolean[]
+// (tri-state objects make every checkbox "truthy"/checked).
 
 /* ----------------------------------------------------------------------------
  * CORE STEP KEYS (match Firestore + defaultStepData)
@@ -127,13 +129,27 @@ const buildPhases = STEP_KEYS.map((key) => ({
 // Prefer the existing checkpointStates length if present, otherwise fall
 // back to the static CHECKPOINTS_BY_ITEM_ID mapping.
 const getCheckpointCountForItem = (item = {}) => {
-  if (Array.isArray(item.checkpointStates) && item.checkpointStates.length > 0) {
-    return item.checkpointStates.length;
-  }
   const id = item.id;
   if (!id) return 0;
   const checkpoints = CHECKPOINTS_BY_ITEM_ID?.[id];
   return Array.isArray(checkpoints) ? checkpoints.length : 0;
+};
+
+// Normalize checkpointStates into a boolean[] of the expected length.
+// Supports legacy boolean[] and tri-state object[] ({ status: 'completed' | ... }).
+const normalizeCheckpointBooleans = (states, expectedCount = 0) => {
+  const arr = Array.isArray(states) ? states : [];
+
+  const mapped = arr.map((c) => {
+    if (typeof c === 'boolean') return c;
+    if (c && typeof c === 'object') return c.status === 'completed';
+    return false;
+  });
+
+  const padded = mapped.concat(
+    new Array(Math.max(0, expectedCount - mapped.length)).fill(false)
+  );
+  return padded.slice(0, expectedCount);
 };
 
 /* ----- date + progress helpers --------------------------------------------------- */
@@ -218,70 +234,119 @@ const formatFullTime = (totalSeconds) => {
  * Ensure each of the 10 core steps has a checklist matching defaultStepData.
  * If a project document is missing a step or is missing items, we hydrate/merge it.
  */
+/**
+ * Ensure the canonical 10 steps exist and their checklist structure matches defaultStepData.
+ * Fixes: duplicated / mis-ordered substeps, missing ids, broken time mapping.
+ *
+ * Rules:
+ * - Only hydrate/merge STEP_KEYS (canonical 10 steps)
+ * - Merge checklist items by stable `id` (NOT task/label)
+ * - Preserve existing completed/totalSeconds/checkpointStates when present
+ * - Normalize checkpointStates to boolean[]
+ * - Do NOT auto-create 3 placeholder items (that corrupts reality)
+ */
 const ensureChecklistStructure = (data) => {
-  const fixed = { ...data };
+  const fixed = { ...(data || {}) };
 
-  // Hydrate from defaultStepData (canonical 10 steps)
-  for (const [stepKey, stepValue] of Object.entries(defaultStepData)) {
-    const current = fixed[stepKey];
+  const deepClone = (obj) => {
+    try {
+      return typeof structuredClone === 'function'
+        ? structuredClone(obj)
+        : JSON.parse(JSON.stringify(obj));
+    } catch {
+      return JSON.parse(JSON.stringify(obj));
+    }
+  };
+
+  STEP_KEYS.forEach((stepKey) => {
+    const defStep = defaultStepData?.[stepKey];
+    if (!defStep || typeof defStep !== 'object') return;
+
+    const current = fixed?.[stepKey];
+
+    // If the entire step is missing -> clone default
     if (!current || typeof current !== 'object') {
-      fixed[stepKey] = stepValue;
-    } else if (!Array.isArray(current.checklist)) {
-      fixed[stepKey].checklist = stepValue.checklist;
-    } else {
-      const existingTasks = current.checklist.map((i) => i.task);
-      const merged = [...current.checklist];
-      stepValue.checklist.forEach((def) => {
-        if (!existingTasks.includes(def.task)) merged.push(def);
+      const cloned = deepClone(defStep);
+
+      // normalize checkpointStates on defaults too (in case defaults ever change)
+      const defChecklist = Array.isArray(cloned.checklist) ? cloned.checklist : [];
+      cloned.checklist = defChecklist.map((item) => {
+        const expected = getCheckpointCountForItem(item);
+        return {
+          ...item,
+          id: item?.id || null,
+          completed: !!item.completed,
+          totalSeconds: Number.isFinite(item.totalSeconds) ? item.totalSeconds : 0,
+          checkpointStates: normalizeCheckpointBooleans(
+            item.checkpointStates,
+            expected
+          ),
+          // normalize label/task
+          task: item.task ?? item.label ?? '',
+          label: item.label ?? item.task ?? '',
+        };
       });
-      fixed[stepKey].checklist = merged;
+
+      fixed[stepKey] = cloned;
+      return;
     }
-  }
 
-  // Normalize checklist items
-  buildPhases.forEach((phase) => {
-    const current = fixed[phase.key] || {};
-    let cl = Array.isArray(current.checklist) ? current.checklist : [];
+    const currentChecklist = Array.isArray(current.checklist) ? current.checklist : [];
+    const defChecklist = Array.isArray(defStep.checklist) ? defStep.checklist : [];
 
-    if (cl.length === 0) {
-      cl = [
-        {
-          id: `${phase.key}_1`,
-          label: `${phase.label} — Step 1`,
-          completed: false,
-          totalSeconds: 0,
-        },
-        {
-          id: `${phase.key}_2`,
-          label: `${phase.label} — Step 2`,
-          completed: false,
-          totalSeconds: 0,
-        },
-        {
-          id: `${phase.key}_3`,
-          label: `${phase.label} — Step 3`,
-          completed: false,
-          totalSeconds: 0,
-        },
-      ];
-    } else {
-      cl = cl.map((item, idx) => ({
-        ...item,
-        label: item.label ?? item.task ?? `${phase.label} — Step ${idx + 1}`,
-        completed: !!item.completed,
-        totalSeconds: Number.isFinite(item.totalSeconds)
-          ? item.totalSeconds
+    // Index existing items by id (fallback to <stepKey>_<index+1> if missing)
+    const currentById = new Map();
+    currentChecklist.forEach((item, idx) => {
+      const id = item?.id || `${stepKey}_${idx + 1}`;
+      currentById.set(id, item);
+    });
+
+    // Build merged list in the same order as defaults
+    const mergedChecklist = defChecklist.map((defItem, idx) => {
+      const id = defItem?.id || `${stepKey}_${idx + 1}`;
+      const existing = currentById.get(id) || {};
+
+      const expectedCount = getCheckpointCountForItem({ ...defItem, ...existing });
+
+      const merged = {
+        // canonical identity from default
+        ...defItem,
+        // preserve anything saved in Firestore
+        ...existing,
+
+        id,
+
+        // normalize label/task so UI always has a stable string
+        task:
+          existing.task ??
+          defItem.task ??
+          existing.label ??
+          defItem.label ??
+          '',
+        label:
+          existing.label ??
+          defItem.label ??
+          existing.task ??
+          defItem.task ??
+          '',
+
+        completed: !!existing.completed,
+        totalSeconds: Number.isFinite(existing.totalSeconds)
+          ? existing.totalSeconds
           : 0,
-        // keep any existing checkpointStates array if present
-        checkpointStates: Array.isArray(item.checkpointStates)
-          ? item.checkpointStates
-          : [],
-      }));
-    }
 
-    fixed[phase.key] = {
+        checkpointStates: normalizeCheckpointBooleans(
+          existing.checkpointStates ?? defItem.checkpointStates,
+          expectedCount
+        ),
+      };
+
+      return merged;
+    });
+
+    fixed[stepKey] = {
       ...current,
-      checklist: cl,
+      checklist: mergedChecklist,
     };
   });
 
@@ -357,9 +422,11 @@ const ManageProjectModal = ({
 
       const anyTouched = checklist.some((item) => {
         const hasCompleted = !!item.completed;
-        const hasCheckpoint =
-          Array.isArray(item.checkpointStates) &&
-          item.checkpointStates.some(Boolean);
+
+const hasCheckpoint =
+  Array.isArray(item.checkpointStates) &&
+  item.checkpointStates.some((c) => c === true);
+
         return hasCompleted || hasCheckpoint;
       });
 
@@ -375,7 +442,7 @@ const ManageProjectModal = ({
         // Keep track of the last phase where *something* happened
         lastTouchedLabel = label;
       }
-    }
+    } // <-- CLOSE the for-loop
 
     // If we get here, then either nothing has started or all are finished.
     if (lastTouchedLabel) return lastTouchedLabel;
@@ -498,16 +565,16 @@ const ManageProjectModal = ({
 
   if (!isOpen) return null;
 
-  const calculateProjectTotalTime = (data = editableData) => {
-    let total = 0;
-    Object.keys(data || {}).forEach((k) => {
-      const cl = data[k]?.checklist || [];
-      cl.forEach((item) => {
-        if (typeof item.totalSeconds === 'number') total += item.totalSeconds;
-      });
+const calculateProjectTotalTime = (data = editableData) => {
+  let total = 0;
+  STEP_KEYS.forEach((k) => {
+    const cl = data?.[k]?.checklist || [];
+    cl.forEach((item) => {
+      if (Number.isFinite(item.totalSeconds)) total += item.totalSeconds;
     });
-    return total;
-  };
+  });
+  return total;
+};
 
   /* --------------------------------------------------------------------------
    * 🔵 UPDATED: COMPLETION HELPERS
@@ -612,34 +679,6 @@ const ManageProjectModal = ({
     }
   };
 
-  const handleChecklistToggle = (stepKey, index, completed, totalSeconds) => {
-    const step = editableData[stepKey] || { checklist: [] };
-
-    const updatedChecklist = step.checklist.map((item, i) => {
-      if (i !== index) return item;
-
-      // First update time, then apply completion. We **do not** touch
-      // checkpointStates here so we don't auto-complete every measurement
-      // point when only one is clicked.
-      const withTime = { ...item, totalSeconds };
-      return applyCompletionToItem(withTime, completed, {
-        touchCheckpoints: false,
-      });
-    });
-
-    const updatedStep = { ...step, checklist: updatedChecklist };
-    const update = { [stepKey]: updatedStep };
-    const merged = { ...editableData, ...update };
-
-    setEditableData(merged);
-    setStatus(determineOverallStatus(merged));
-    onProjectUpdate?.({ id: projectData.id, [stepKey]: updatedStep });
-
-    saveToFirestore(update);
-    setIsEditing(false);
-    setShowSnackbar(true);
-  };
-
   /**
    * Persist per-sub-step checkpoint checkbox state.
    * checkpointStates is an array of booleans on the checklist item.
@@ -651,32 +690,30 @@ const ManageProjectModal = ({
   ) => {
     const step = editableData[stepKey] || { checklist: [] };
 
+    const expectedCount = getCheckpointCountForItem(
+      step.checklist?.[itemIndex]
+    );
+    const normalizedStates = normalizeCheckpointBooleans(
+      checkpointStates,
+      expectedCount
+    );
+
     const updatedChecklist = (step.checklist || []).map((item, idx) => {
       if (idx !== itemIndex) return item;
 
-      const allTrue =
-        Array.isArray(checkpointStates) &&
-        checkpointStates.length > 0 &&
-        checkpointStates.every(Boolean);
-
+      // ✅ Only update checkpointStates.
+      // ❌ Do NOT change item.completed based on tasks anymore.
       return {
         ...item,
-        checkpointStates,
-        // Auto-mark the sub-step complete only when *all* measurement
-        // points for that sub-step are checked. This only affects the
-        // single item at itemIndex.
-        completed: allTrue,
+        checkpointStates: normalizedStates,
       };
     });
 
     const updatedStep = { ...step, checklist: updatedChecklist };
     const update = { [stepKey]: updatedStep };
-    const merged = { ...editableData, ...update };
 
-    setEditableData(merged);
+    setEditableData((prev) => ({ ...prev, ...update }));
     onProjectUpdate?.({ id: projectData.id, [stepKey]: updatedStep });
-
-    // We only need to merge the step; saveToFirestore will recalc status/time.
     saveToFirestore(update);
   };
 
@@ -749,6 +786,47 @@ const ManageProjectModal = ({
     const total = cl.length || 1;
     return Math.round((done / total) * 100);
   };
+
+  const handleSubStepCompletionChange = (stepKey, itemIndex, completed, seconds) => {
+  const step = editableData[stepKey] || { checklist: [] };
+
+  const updatedChecklist = (step.checklist || []).map((item, idx) => {
+    if (idx !== itemIndex) return item;
+
+    const expectedCount = getCheckpointCountForItem(item);
+
+    // keep existing time unless we got a valid new value
+const nextSeconds =
+  typeof seconds === 'number' && !Number.isNaN(seconds)
+    ? seconds
+    : typeof item.totalSeconds === 'number'
+      ? item.totalSeconds
+      : 0;
+
+    // If sub-step is being marked complete, force all tasks complete.
+    // If being uncompleted, preserve tasks (or optionally clear them—your call).
+const nextCheckpointStates =
+  expectedCount > 0
+    ? completed
+      ? new Array(expectedCount).fill(true)
+      : normalizeCheckpointBooleans(item.checkpointStates, expectedCount)
+    : item.checkpointStates;
+
+    return {
+      ...item,
+      completed: !!completed,
+      totalSeconds: nextSeconds,
+      checkpointStates: nextCheckpointStates,
+    };
+  });
+
+  const updatedStep = { ...step, checklist: updatedChecklist };
+  const update = { [stepKey]: updatedStep };
+
+  setEditableData((prev) => ({ ...prev, ...update }));
+  onProjectUpdate?.({ id: projectData.id, [stepKey]: updatedStep });
+  saveToFirestore(update);
+};
 
   const getStepProgressClass = () => {
     const pct = getCurrentStepProgress();
@@ -1226,14 +1304,10 @@ const ManageProjectModal = ({
                   stepKey={selectedStepKey}
                   stepLabel={currentSubLabel}
                   stepData={editableData[selectedStepKey] || { checklist: [] }}
-                  onToggleChecklist={(index, completed, seconds) =>
-                    handleChecklistToggle(
-                      selectedStepKey,
-                      index,
-                      completed,
-                      seconds
-                    )
-                  }
+onToggleChecklist={(index, completed, seconds) => {
+  const safeSeconds = Number.isFinite(seconds) ? seconds : undefined;
+  handleSubStepCompletionChange(selectedStepKey, index, completed, safeSeconds);
+}}
                   onUpdateCheckpointStates={(itemIndex, states) =>
                     handleCheckpointStatesChange(
                       selectedStepKey,
@@ -1242,7 +1316,7 @@ const ManageProjectModal = ({
                     )
                   }
                   isLocked={false}
-                  showCheckbox={false}
+                  showCheckbox={true}
                   activeIndex={selectedSubIndex}
                 />
               </>
