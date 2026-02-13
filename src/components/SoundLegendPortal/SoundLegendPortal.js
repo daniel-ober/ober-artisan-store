@@ -10,8 +10,7 @@ import {
 import { db } from '../../firebaseConfig';
 import { useAuth } from '../../context/AuthContext';
 import { usePortalUser } from '../../hooks/usePortalUser';
-import { useNavigate } from 'react-router-dom';
-
+import { useNavigate, useLocation } from 'react-router-dom';
 import ProjectProgress from './ProjectProgress';
 import ScopeOfWork from './ScopeOfWork';
 import VaultPreferences from './VaultPreferences';
@@ -130,8 +129,8 @@ const Tabs = ({
             t.key === 'vault'
               ? 'Vault preferences are part of the SoundLegend experience.'
               : t.key === 'media'
-              ? 'Legacy media is part of the SoundLegend experience.'
-              : '';
+                ? 'Legacy media is part of the SoundLegend experience.'
+                : '';
 
           return (
             <button
@@ -167,6 +166,8 @@ const Tabs = ({
 
 const SoundLegendPortal = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
   const { isAdmin } = useAuth();
   const {
     portalUser,
@@ -174,46 +175,100 @@ const SoundLegendPortal = () => {
     isImpersonating: hookIsImpersonating,
   } = usePortalUser();
 
-  // Impersonation values persisted by ManageUsers
-  const impersonateUid = useMemo(
-    () => sessionStorage.getItem('impersonateUid') || '',
-    []
+  // -------------------- Query params (project + optional impersonation bootstrap) --------------------
+  const queryParams = useMemo(() => {
+    try {
+      return new URLSearchParams(location.search);
+    } catch {
+      return new URLSearchParams();
+    }
+  }, [location.search]);
+
+  const projectIdFromQuery = (queryParams.get('projectId') || '').trim();
+  const qpImpersonateUid = (queryParams.get('impersonateUid') || '').trim();
+  const qpImpersonateName = (queryParams.get('impersonateName') || '').trim();
+  const qpImpersonateEmail = (queryParams.get('impersonateEmail') || '').trim();
+
+  // If we arrive via "View as Customer ↗" in a new tab, sessionStorage will be empty.
+  // Bootstrap impersonation from query params (admin only), then trigger the same reactive flow.
+  useEffect(() => {
+    if (!isAdmin) return;
+    if (!qpImpersonateUid) return;
+
+    // Set session storage exactly like ManageUsers does
+    sessionStorage.setItem('impersonateUid', qpImpersonateUid);
+    sessionStorage.setItem('impersonateMode', 'admin');
+
+    if (qpImpersonateName) sessionStorage.setItem('impersonateName', qpImpersonateName);
+    if (qpImpersonateEmail) sessionStorage.setItem('impersonateEmail', qpImpersonateEmail);
+
+    window.dispatchEvent(new Event('impersonation-changed'));
+
+    // Optional: strip impersonation params from URL to keep it clean (projectId stays)
+    // (Keeps behavior stable even if user refreshes)
+    try {
+      const clean = new URLSearchParams(location.search);
+      clean.delete('impersonateUid');
+      clean.delete('impersonateName');
+      clean.delete('impersonateEmail');
+
+      const nextSearch = clean.toString();
+      const nextUrl = nextSearch ? `${location.pathname}?${nextSearch}` : location.pathname;
+
+      // Only replace if it actually changes anything
+      if (nextUrl !== `${location.pathname}${location.search}`) {
+        navigate(nextUrl, { replace: true });
+      }
+    } catch {
+      // no-op
+    }
+  }, [
+    isAdmin,
+    qpImpersonateUid,
+    qpImpersonateName,
+    qpImpersonateEmail,
+    location.pathname,
+    location.search,
+    navigate,
+  ]);
+
+  // -------------------- Impersonation values persisted by ManageUsers (reactive) --------------------
+  const [impersonateUid, setImpersonateUid] = useState(
+    () => sessionStorage.getItem('impersonateUid') || ''
   );
-  const impersonateName = useMemo(
-    () => sessionStorage.getItem('impersonateName') || '',
-    []
+  const [impersonateName, setImpersonateName] = useState(
+    () => sessionStorage.getItem('impersonateName') || ''
   );
-  const impersonateEmail = useMemo(
-    () => sessionStorage.getItem('impersonateEmail') || '',
-    []
+  const [impersonateEmail, setImpersonateEmail] = useState(
+    () => sessionStorage.getItem('impersonateEmail') || ''
   );
 
-  // Effective portal user for this page:
-  // - normal users: portalUser from hook
-  // - admins: if impersonateUid exists, we fetch users/{impersonateUid} and use that as portal user
+  useEffect(() => {
+    const sync = () => {
+      setImpersonateUid(sessionStorage.getItem('impersonateUid') || '');
+      setImpersonateName(sessionStorage.getItem('impersonateName') || '');
+      setImpersonateEmail(sessionStorage.getItem('impersonateEmail') || '');
+    };
+
+    sync();
+    window.addEventListener('impersonation-changed', sync);
+    return () => window.removeEventListener('impersonation-changed', sync);
+  }, []);
+
+  // -------------------- Effective portal user resolution --------------------
   const [effectivePortalUser, setEffectivePortalUser] = useState(null);
   const [loadingEffectiveUser, setLoadingEffectiveUser] = useState(true);
   const [effectiveIsImpersonating, setEffectiveIsImpersonating] = useState(false);
 
-  // Projects / Orders state
-  const [loading, setLoading] = useState(true); // loading projects/orders
-  const [projects, setProjects] = useState([]);
-  const [selectedId, setSelectedId] = useState('');
-  const [orders, setOrders] = useState([]);
-  const [tab, setTab] = useState('progress');
-
-  /* ---------- Resolve effective portal user ---------- */
   useEffect(() => {
     let cancelled = false;
 
     const run = async () => {
-      // Wait for your hook to settle first
       if (loadingPortalUser) return;
 
       setLoadingEffectiveUser(true);
 
       try {
-        // Admin impersonation takes precedence if sessionStorage has a UID
         if (isAdmin && impersonateUid) {
           const ref = doc(db, 'users', impersonateUid);
           const snap = await getDoc(ref);
@@ -226,7 +281,6 @@ const SoundLegendPortal = () => {
               id: impersonateUid,
               uid: impersonateUid,
               ...data,
-              // Prefer Firestore email/name, but keep storage as fallback
               email: data.email || impersonateEmail || '',
               fullName:
                 data.firstName || data.lastName
@@ -234,7 +288,6 @@ const SoundLegendPortal = () => {
                   : data.fullName || impersonateName || '',
             });
           } else {
-            // If doc doesn't exist, fall back to hook user (still better than hard fail)
             setEffectivePortalUser(portalUser || null);
           }
 
@@ -242,7 +295,6 @@ const SoundLegendPortal = () => {
           return;
         }
 
-        // Not impersonating: use hook portalUser
         setEffectivePortalUser(portalUser || null);
         setEffectiveIsImpersonating(Boolean(hookIsImpersonating));
       } catch (e) {
@@ -271,12 +323,24 @@ const SoundLegendPortal = () => {
 
   const exitImpersonation = () => {
     sessionStorage.removeItem('impersonateUid');
-    sessionStorage.removeItem('impersonateEmail');
     sessionStorage.removeItem('impersonateName');
+    sessionStorage.removeItem('impersonateEmail');
+    sessionStorage.removeItem('impersonateMode');
 
-    // take admin back to admin dashboard immediately
-    navigate('/admin');
+    setImpersonateUid('');
+    setImpersonateName('');
+    setImpersonateEmail('');
+
+    window.dispatchEvent(new Event('impersonation-changed'));
+    navigate('/admin', { replace: true });
   };
+
+  // -------------------- Projects / Orders state --------------------
+  const [loading, setLoading] = useState(true);
+  const [projects, setProjects] = useState([]);
+  const [selectedId, setSelectedId] = useState('');
+  const [orders, setOrders] = useState([]);
+  const [tab, setTab] = useState('progress');
 
   /* ---------- LOAD PROJECTS FOR EFFECTIVE PORTAL USER (ownerUid OR userId OR email) ---------- */
   useEffect(() => {
@@ -290,15 +354,30 @@ const SoundLegendPortal = () => {
         const ownerUid = effectivePortalUser.uid || effectivePortalUser.id;
         const colRef = collection(db, 'projects');
 
-        let snap = { empty: true, docs: [] };
+        let list = [];
+
+        // 0) If a projectId was passed, fetch it directly and seed the list
+        let seededProject = null;
+        if (projectIdFromQuery) {
+          try {
+            const pRef = doc(db, 'projects', projectIdFromQuery);
+            const pSnap = await getDoc(pRef);
+            if (pSnap.exists()) {
+              seededProject = { id: pSnap.id, ...pSnap.data() };
+            }
+          } catch (e) {
+            console.warn('Failed to fetch project by projectId query param:', e);
+          }
+        }
 
         // 1) Primary: ownerUid
+        let snap = { empty: true, docs: [] };
         if (ownerUid) {
           const qByOwner = query(colRef, where('ownerUid', '==', ownerUid));
           snap = await getDocs(qByOwner);
         }
 
-        // 2) Fallback: userId (what AttachUserResourcesTool writes)
+        // 2) Fallback: userId
         if (snap.empty && ownerUid) {
           const qByUserId = query(colRef, where('userId', '==', ownerUid));
           snap = await getDocs(qByUserId);
@@ -307,24 +386,68 @@ const SoundLegendPortal = () => {
         // 3) Fallback: customer.emailLower
         if (snap.empty && effectivePortalUser.email) {
           const emailLower = effectivePortalUser.email.trim().toLowerCase();
-          const qByEmail = query(
+          const qByEmailLower = query(
             colRef,
             where('customer.emailLower', '==', emailLower)
           );
-          snap = await getDocs(qByEmail);
+          snap = await getDocs(qByEmailLower);
         }
 
-        if (cancelled) return;
+        // 4) Extra fallbacks (older schemas)
+        if (snap.empty && effectivePortalUser.email) {
+          const email = effectivePortalUser.email.trim();
+          const emailLower = email.toLowerCase();
 
-        const list = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
-        list.sort((a, b) => tsToMillis(a.createdAt) - tsToMillis(b.createdAt));
+          // projects.customerEmail
+          const qByCustomerEmail = query(colRef, where('customerEmail', '==', email));
+          const snapA = await getDocs(qByCustomerEmail);
 
-        setProjects(list);
+          if (!snapA.empty) snap = snapA;
 
-        // keep current selection if still present, else default to first
-        setSelectedId((prev) =>
-          prev && list.some((p) => p.id === prev) ? prev : list[0]?.id || ''
-        );
+          // projects.customer.email (exact)
+          if (snap.empty) {
+            const qByCustomerDotEmail = query(colRef, where('customer.email', '==', email));
+            const snapB = await getDocs(qByCustomerDotEmail);
+            if (!snapB.empty) snap = snapB;
+          }
+
+          // projects.customer.emailLower might exist but emailLower stored differently
+          if (snap.empty) {
+            const qByCustomerDotEmailLower = query(
+              colRef,
+              where('customer.emailLower', '==', emailLower)
+            );
+            const snapC = await getDocs(qByCustomerDotEmailLower);
+            if (!snapC.empty) snap = snapC;
+          }
+        }
+
+        if (!cancelled) {
+          const fetched = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+
+          // Merge seededProject (from direct projectId fetch) into fetched list, de-duped
+          const map = new Map();
+          [...(seededProject ? [seededProject] : []), ...fetched].forEach((p) => {
+            if (p?.id) map.set(p.id, p);
+          });
+          list = Array.from(map.values());
+
+          list.sort((a, b) => tsToMillis(a.createdAt) - tsToMillis(b.createdAt));
+
+          setProjects(list);
+
+          // Selection logic:
+          // - if projectIdFromQuery exists and is in list -> select it
+          // - else keep previous selection if still present
+          // - else first project
+          setSelectedId((prev) => {
+            if (projectIdFromQuery && list.some((p) => p.id === projectIdFromQuery)) {
+              return projectIdFromQuery;
+            }
+            if (prev && list.some((p) => p.id === prev)) return prev;
+            return list[0]?.id || '';
+          });
+        }
       } catch (e) {
         console.error('Error loading projects', e);
       } finally {
@@ -336,7 +459,7 @@ const SoundLegendPortal = () => {
     return () => {
       cancelled = true;
     };
-  }, [effectivePortalUser, loadingEffectiveUser]);
+  }, [effectivePortalUser, loadingEffectiveUser, projectIdFromQuery]);
 
   // Load orders for this effective portal user (by email)
   useEffect(() => {
@@ -380,9 +503,7 @@ const SoundLegendPortal = () => {
   }
 
   if (!effectivePortalUser) {
-    return (
-      <div className="slp-page">Please sign in to view your Artist Portal.</div>
-    );
+    return <div className="slp-page">Please sign in to view your Artist Portal.</div>;
   }
 
   if (loading) {
@@ -448,11 +569,9 @@ const SoundLegendPortal = () => {
     ''
   ).toUpperCase();
 
-  const isSoundLegendProject =
-    artisanLine === 'soundlegend' || serialGuess.startsWith('SL-');
+  const isSoundLegendProject = artisanLine === 'soundlegend' || serialGuess.startsWith('SL-');
 
   const handleTabChange = (nextKey) => {
-    // Block navigation to SL-only tabs for non-SL drums
     if (!isSoundLegendProject && (nextKey === 'vault' || nextKey === 'media')) {
       return;
     }
@@ -506,7 +625,6 @@ const SoundLegendPortal = () => {
 
         {tab === 'scope' && <ScopeOfWork project={selectedProject} />}
 
-        {/* SL-only sections */}
         {tab === 'vault' && isSoundLegendProject && (
           <VaultPreferences project={selectedProject} />
         )}

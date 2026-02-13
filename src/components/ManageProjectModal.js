@@ -89,6 +89,26 @@ const STEP_META = {
 const val = (...c) =>
   c.find((v) => v !== undefined && v !== null && v !== '') ?? undefined;
 
+// Mirror nested customer fields → top-level so ManageProjects table never shows N/A
+const deriveCustomerName = (p = {}) =>
+  val(
+    p.customerName,
+    p.customer?.name,
+    p.customer?.displayName,
+    p.publicPrefs?.displayName,
+    p.customerInfo?.name,
+    p.customerFullName
+  ) || '';
+
+const deriveCustomerEmail = (p = {}) =>
+  val(
+    p.customerEmail,
+    p.customer?.email,
+    p.customerEmailAddress,
+    p.email,
+    p.customerInfo?.email
+  ) || '';
+
 const getIdentifier = (p = {}) => {
   const serial =
     val(
@@ -125,14 +145,51 @@ const buildPhases = STEP_KEYS.map((key) => ({
   phaseId: STEP_META[key]?.phaseId || null,
 }));
 
+
+// Same mapping logic used by StepComponentTemplate
+const STEPKEY_TO_CHECKPOINT_PREFIX = {
+  discoveryDesign: 'discoveryDesign',
+  commitmentPortal: 'commitmentPortal',
+  woodVisionLockIn: 'woodVisionLockIn',
+  rawShellCreation: 'rawShellCreation',
+  shellTrueingTorchTune: 'shellTrueingTorchTune',
+  exteriorArtFinish: 'exteriorArtFinish',
+  edgesSnareBeds: 'edgesSnareBeds',
+  hardwareAssembly: 'hardwareAssembly',
+  legacyTuningMedia: 'legacyTuningMedia',
+  finalQAPackagingDelivery: 'finalQAPackagingDelivery',
+
+  // legacy aliases (if any old keys still exist in docs)
+  woodPreparation: 'woodVisionLockIn',
+  shellConstruction: 'rawShellCreation',
+  fineTuning: 'shellTrueingTorchTune',
+  shellExteriorFinish: 'exteriorArtFinish',
+  bearingEdges: 'edgesSnareBeds',
+  snareBedCutting: 'edgesSnareBeds',
+  hardwareDrilling: 'hardwareAssembly',
+  tuningDetailing: 'legacyTuningMedia',
+  qualityCheck: 'finalQAPackagingDelivery',
+};
+
+// returns the checkpoint list for a given substep (prefers item.id, falls back to generated key)
+const getCheckpointListForSubstep = (stepKey, itemIndex, item) => {
+  const id = item?.id;
+  if (id && Array.isArray(CHECKPOINTS_BY_ITEM_ID?.[id])) {
+    return CHECKPOINTS_BY_ITEM_ID[id];
+  }
+
+  const prefix = STEPKEY_TO_CHECKPOINT_PREFIX[stepKey] || stepKey;
+  const generatedKey = `${prefix}_${itemIndex + 1}`;
+  if (Array.isArray(CHECKPOINTS_BY_ITEM_ID?.[generatedKey])) {
+    return CHECKPOINTS_BY_ITEM_ID[generatedKey];
+  }
+
+  return [];
+};
+
 // Figure out how many checkpoints a given checklist item *should* have.
-// Prefer the existing checkpointStates length if present, otherwise fall
-// back to the static CHECKPOINTS_BY_ITEM_ID mapping.
-const getCheckpointCountForItem = (item = {}) => {
-  const id = item.id;
-  if (!id) return 0;
-  const checkpoints = CHECKPOINTS_BY_ITEM_ID?.[id];
-  return Array.isArray(checkpoints) ? checkpoints.length : 0;
+const getCheckpointCountForItem = (stepKey, itemIndex, item = {}) => {
+  return getCheckpointListForSubstep(stepKey, itemIndex, item).length;
 };
 
 // Normalize checkpointStates into a boolean[] of the expected length.
@@ -149,6 +206,7 @@ const normalizeCheckpointBooleans = (states, expectedCount = 0) => {
   const padded = mapped.concat(
     new Array(Math.max(0, expectedCount - mapped.length)).fill(false)
   );
+
   return padded.slice(0, expectedCount);
 };
 
@@ -260,93 +318,56 @@ const ensureChecklistStructure = (data) => {
 
   STEP_KEYS.forEach((stepKey) => {
     const defStep = defaultStepData?.[stepKey];
-    if (!defStep || typeof defStep !== 'object') return;
+    if (!defStep) return;
 
     const current = fixed?.[stepKey];
 
-    // If the entire step is missing -> clone default
-    if (!current || typeof current !== 'object') {
-      const cloned = deepClone(defStep);
-
-      // normalize checkpointStates on defaults too (in case defaults ever change)
-      const defChecklist = Array.isArray(cloned.checklist) ? cloned.checklist : [];
-      cloned.checklist = defChecklist.map((item) => {
-        const expected = getCheckpointCountForItem(item);
-        return {
-          ...item,
-          id: item?.id || null,
-          completed: !!item.completed,
-          totalSeconds: Number.isFinite(item.totalSeconds) ? item.totalSeconds : 0,
-          checkpointStates: normalizeCheckpointBooleans(
-            item.checkpointStates,
-            expected
-          ),
-          // normalize label/task
-          task: item.task ?? item.label ?? '',
-          label: item.label ?? item.task ?? '',
-        };
-      });
-
-      fixed[stepKey] = cloned;
+    // STEP MISSING → clone default
+    if (!current) {
+      fixed[stepKey] = deepClone(defStep);
       return;
     }
 
-    const currentChecklist = Array.isArray(current.checklist) ? current.checklist : [];
-    const defChecklist = Array.isArray(defStep.checklist) ? defStep.checklist : [];
+    const currentChecklist = Array.isArray(current.checklist)
+      ? current.checklist
+      : [];
 
-    // Index existing items by id (fallback to <stepKey>_<index+1> if missing)
+    const defChecklist = defStep.checklist || [];
+
+    // index legacy items by id
     const currentById = new Map();
-    currentChecklist.forEach((item, idx) => {
-      const id = item?.id || `${stepKey}_${idx + 1}`;
-      currentById.set(id, item);
+    currentChecklist.forEach((item) => {
+      if (item?.id) currentById.set(item.id, item);
     });
 
-    // Build merged list in the same order as defaults
-    const mergedChecklist = defChecklist.map((defItem, idx) => {
-      const id = defItem?.id || `${stepKey}_${idx + 1}`;
-      const existing = currentById.get(id) || {};
+    // ✅ STRICT ALIGNMENT
+const mergedChecklist = defChecklist.map((defItem, idx) => {
+  const existing = currentById.get(defItem.id);
 
-      const expectedCount = getCheckpointCountForItem({ ...defItem, ...existing });
+  const expectedCount = getCheckpointCountForItem(stepKey, idx, defItem);
 
-      const merged = {
-        // canonical identity from default
-        ...defItem,
-        // preserve anything saved in Firestore
-        ...existing,
+  return {
+    // ALWAYS TRUST DEFAULT FOR STRUCTURE
+    id: defItem.id,
+    task: defItem.task,
+    label: defItem.label ?? defItem.task,
 
-        id,
+    // ONLY copy SAFE runtime fields
+    completed: !!existing?.completed,
+    totalSeconds: Number.isFinite(existing?.totalSeconds)
+      ? existing.totalSeconds
+      : 0,
 
-        // normalize label/task so UI always has a stable string
-        task:
-          existing.task ??
-          defItem.task ??
-          existing.label ??
-          defItem.label ??
-          '',
-        label:
-          existing.label ??
-          defItem.label ??
-          existing.task ??
-          defItem.task ??
-          '',
-
-        completed: !!existing.completed,
-        totalSeconds: Number.isFinite(existing.totalSeconds)
-          ? existing.totalSeconds
-          : 0,
-
-        checkpointStates: normalizeCheckpointBooleans(
-          existing.checkpointStates ?? defItem.checkpointStates,
-          expectedCount
-        ),
-      };
-
-      return merged;
-    });
+    checkpointStates: normalizeCheckpointBooleans(
+      existing?.checkpointStates,
+      expectedCount
+    ),
+  };
+});
 
     fixed[stepKey] = {
       ...current,
-      checklist: mergedChecklist,
+      checklist: mergedChecklist, // 🚨 replaces legacy items permanently
     };
   });
 
@@ -378,7 +399,7 @@ const ManageProjectModal = ({
   projectData,
   onProjectUpdate,
 }) => {
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // ✅ ADD THIS
   const { startImpersonation } = useImpersonation();
 
   const [selectedTab, setSelectedTab] = useState('details'); // 'details' or stepKey
@@ -423,9 +444,9 @@ const ManageProjectModal = ({
       const anyTouched = checklist.some((item) => {
         const hasCompleted = !!item.completed;
 
-const hasCheckpoint =
-  Array.isArray(item.checkpointStates) &&
-  item.checkpointStates.some((c) => c === true);
+        const hasCheckpoint =
+          Array.isArray(item.checkpointStates) &&
+          item.checkpointStates.some((c) => c === true);
 
         return hasCompleted || hasCheckpoint;
       });
@@ -433,10 +454,7 @@ const hasCheckpoint =
       const allDone =
         checklist.length > 0 && checklist.every((item) => !!item.completed);
 
-      if (anyTouched && !allDone) {
-        // This is the first "in progress" phase → current step
-        return label;
-      }
+      if (anyTouched && !allDone) return label;
 
       if (anyTouched) {
         // Keep track of the last phase where *something* happened
@@ -456,14 +474,28 @@ const hasCheckpoint =
   };
 
   // hydrate project data
-  useEffect(() => {
-    if (!projectData) return;
+useEffect(() => {
+  if (!projectData) return;
 
-    const hydrated = ensureChecklistStructure(projectData);
-    setEditableData(hydrated);
-    setOriginalData(hydrated);
-    setStatus(determineOverallStatus(hydrated));
-  }, [projectData]);
+  setEditableData((prev) => {
+    // Merge remote data + local state so remote updates don't wipe local edits
+    const merged = { ...(prev || {}), ...(projectData || {}) };
+    return ensureChecklistStructure(merged);
+  });
+
+  setOriginalData((prev) => {
+    const merged = { ...(prev || {}), ...(projectData || {}) };
+    return ensureChecklistStructure(merged);
+  });
+
+  // status should be based on the merged structure too
+  const mergedForStatus = ensureChecklistStructure({
+    ...(editableData || {}),
+    ...(projectData || {}),
+  });
+  setStatus(determineOverallStatus(mergedForStatus));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, [projectData]);
 
   // always open on Overview
   useEffect(() => {
@@ -565,159 +597,303 @@ const hasCheckpoint =
 
   if (!isOpen) return null;
 
-const calculateProjectTotalTime = (data = editableData) => {
-  let total = 0;
-  STEP_KEYS.forEach((k) => {
-    const cl = data?.[k]?.checklist || [];
-    cl.forEach((item) => {
-      if (Number.isFinite(item.totalSeconds)) total += item.totalSeconds;
+    // --------------------------------------------------------------------------
+  // SAVE → Firestore (single canonical save)
+  // --------------------------------------------------------------------------
+  const saveToFirestore = async (partialUpdate = {}) => {
+    try {
+      if (!projectData?.id) return;
+
+      // Merge update into current local state so we can derive status safely
+      const merged = {
+        ...(editableData || {}),
+        ...(partialUpdate || {}),
+      };
+
+      const nextStatus = determineOverallStatus(merged);
+      const nextPhase = determineCurrentPhase(merged);
+
+      // Persist: partial step updates + derived fields for admin views/tables
+      const projectRef = doc(db, 'projects', projectData.id);
+
+      await setDoc(
+        projectRef,
+        {
+          ...partialUpdate,
+
+          // Keep these fields in sync for dashboard + tables
+          status: nextStatus,
+          currentPhase: nextPhase,
+
+          // Optional: normalize top-level customer fields so tables don’t show N/A
+          customerName: deriveCustomerName({
+            ...(projectData || {}),
+            ...(merged || {}),
+          }),
+          customerEmail: deriveCustomerEmail({
+            ...(projectData || {}),
+            ...(merged || {}),
+          }),
+
+          updatedAt: new Date(),
+        },
+        { merge: true }
+      );
+
+      // Update local chips immediately
+      setStatus(nextStatus);
+
+      // Tell parent list to update if needed
+      onProjectUpdate?.({
+        id: projectData.id,
+        ...partialUpdate,
+        status: nextStatus,
+        currentPhase: nextPhase,
+      });
+
+      setShowSnackbar(true);
+    } catch (err) {
+      console.error('[ManageProjectModal] saveToFirestore failed:', err);
+    }
+  };
+
+  const calculateProjectTotalTime = (data = editableData) => {
+    let total = 0;
+    STEP_KEYS.forEach((k) => {
+      const cl = data?.[k]?.checklist || [];
+      cl.forEach((item) => {
+        if (Number.isFinite(item.totalSeconds)) total += item.totalSeconds;
+      });
     });
-  });
-  return total;
+    return total;
+  };
+
+  // --- STATUS HELPERS (Step / Substep / Checkpoint) ---
+
+  const getSubstepStatus = (item) => {
+    const completed = !!item?.completed;
+
+    const checkpointArr = Array.isArray(item?.checkpointStates)
+      ? item.checkpointStates
+      : [];
+
+    const anyCheckpoint = checkpointArr.some(Boolean);
+    const anyTime =
+      Number.isFinite(item?.totalSeconds) && item.totalSeconds > 0;
+
+    if (completed) return 'done';
+    if (anyCheckpoint || anyTime) return 'doing';
+    return 'todo';
+  };
+
+  const getStepStatus = (stepKey, data) => {
+    const checklist = data?.[stepKey]?.checklist || [];
+    if (!checklist.length) return 'todo';
+
+    const statuses = checklist.map(getSubstepStatus);
+    const allDone = statuses.every((s) => s === 'done');
+    const anyTouched = statuses.some((s) => s !== 'todo');
+
+    if (allDone) return 'done';
+    if (anyTouched) return 'doing';
+    return 'todo';
+  };
+
+  const getCheckpointStatus = (substepItem, checkpointIndex) => {
+    const subStatus = getSubstepStatus(substepItem);
+    const states = Array.isArray(substepItem?.checkpointStates)
+      ? substepItem.checkpointStates
+      : [];
+
+    const isDone = states[checkpointIndex] === true;
+    if (isDone) return 'done';
+
+    if (subStatus === 'doing') {
+      const firstIncompleteIdx = states.findIndex((v) => v !== true);
+      if (firstIncompleteIdx === checkpointIndex) return 'doing';
+    }
+
+    return 'todo';
+  };
+
+  const StatusPip = ({ level, status }) => {
+    return (
+      <span
+        className={['mpm-pip', `mpm-pip-${level}`, `mpm-pip-${status}`].join(
+          ' '
+        )}
+        aria-hidden="true"
+      />
+    );
+  };
+
+
+  // returns the checkpoint list for a given substep (prefers item.id, falls back to generated key)
+  const getCheckpointListForSubstep = (stepKey, itemIndex, item) => {
+    const id = item?.id;
+    if (id && Array.isArray(CHECKPOINTS_BY_ITEM_ID[id]))
+      return CHECKPOINTS_BY_ITEM_ID[id];
+
+    const prefix = STEPKEY_TO_CHECKPOINT_PREFIX[stepKey] || stepKey;
+    const generatedKey = `${prefix}_${itemIndex + 1}`;
+    if (Array.isArray(CHECKPOINTS_BY_ITEM_ID[generatedKey]))
+      return CHECKPOINTS_BY_ITEM_ID[generatedKey];
+
+    return [];
+  };
+
+/* --------------------------------------------------------------------------
+ * 🔵 UPDATED: COMPLETION HELPERS (FIXED ARGUMENTS)
+ * ------------------------------------------------------------------------ */
+
+// Helper: toggle completion on a single checklist item.
+// By default this does NOT touch checkpointStates.
+// We only sync all checkpointStates when explicitly requested (bulk actions).
+const applyCompletionToItem = (
+  stepKey,
+  itemIndex,
+  item,
+  complete,
+  { touchCheckpoints = false } = {}
+) => {
+  const base = {
+    ...item,
+    completed: !!complete,
+  };
+
+  if (!touchCheckpoints) return base;
+
+  const expectedCount = getCheckpointCountForItem(stepKey, itemIndex, item);
+  if (expectedCount <= 0) return base;
+
+  return {
+    ...base,
+    checkpointStates: new Array(expectedCount).fill(!!complete),
+  };
 };
 
-  /* --------------------------------------------------------------------------
-   * 🔵 UPDATED: COMPLETION HELPERS
-   * ------------------------------------------------------------------------ */
+// Mark all sub-steps in a single stage (e.g. "4. Raw Shell Creation")
+// Also mark all checkpoints/measurement points for those sub-steps.
+const bulkUpdateStepCompletion = (stepKey, complete) => {
+  if (!stepKey) return;
+  const step = editableData[stepKey];
+  if (!step || !Array.isArray(step.checklist)) return;
 
-  // Helper: toggle completion on a single checklist item.
-  // By default this **does not** touch checkpointStates so that individual
-  // measurement-point toggles don't get blown away. We only sync all
-  // checkpointStates when explicitly requested (bulk actions).
-  const applyCompletionToItem = (
-    item,
-    complete,
-    { touchCheckpoints = false } = {}
-  ) => {
-    const base = {
-      ...item,
-      completed: !!complete,
-    };
+  const updatedStep = {
+    ...step,
+    checklist: step.checklist.map((item, idx) =>
+      applyCompletionToItem(stepKey, idx, item, complete, {
+        touchCheckpoints: true,
+      })
+    ),
+  };
 
-    if (!touchCheckpoints) {
-      return base;
+  const update = { [stepKey]: updatedStep };
+  setEditableData((prev) => ({ ...prev, ...update }));
+  onProjectUpdate?.({ id: projectData.id, [stepKey]: updatedStep });
+  saveToFirestore(update);
+};
+
+// Mark all stages in the project complete / incomplete.
+// Also mark all checkpoints/measurement points across the project.
+const bulkUpdateAllStepsCompletion = (complete) => {
+  const update = {};
+
+  STEP_KEYS.forEach((key) => {
+    const step = editableData[key];
+    if (step && Array.isArray(step.checklist)) {
+      update[key] = {
+        ...step,
+        checklist: step.checklist.map((item, idx) =>
+          applyCompletionToItem(key, idx, item, complete, {
+            touchCheckpoints: true,
+          })
+        ),
+      };
     }
+  });
 
-    const expectedCount = getCheckpointCountForItem(item);
-    if (expectedCount <= 0) {
-      return base;
-    }
+  if (Object.keys(update).length === 0) return;
 
-    const states = new Array(expectedCount).fill(!!complete);
+  setEditableData((prev) => ({ ...prev, ...update }));
+  onProjectUpdate?.({ id: projectData.id, ...update });
+  saveToFirestore(update);
+};
+
+/**
+ * Persist per-sub-step checkpoint checkbox state.
+ * checkpointStates is an array of booleans on the checklist item.
+ */
+const handleCheckpointStatesChange = (stepKey, itemIndex, checkpointStates) => {
+  const step = editableData[stepKey] || { checklist: [] };
+  const item = step.checklist?.[itemIndex];
+
+  const expectedCount = getCheckpointCountForItem(stepKey, itemIndex, item);
+  const normalizedStates = normalizeCheckpointBooleans(
+    checkpointStates,
+    expectedCount
+  );
+
+  const updatedChecklist = (step.checklist || []).map((it, idx) => {
+    if (idx !== itemIndex) return it;
     return {
-      ...base,
-      checkpointStates: states,
+      ...it,
+      checkpointStates: normalizedStates,
     };
-  };
+  });
 
-  // Mark all sub-steps in a single stage (e.g. "4. Raw Shell Creation")
-  // Also mark all checkpoints/measurement points for those sub-steps.
-  const bulkUpdateStepCompletion = (stepKey, complete) => {
-    if (!stepKey) return;
-    const step = editableData[stepKey];
-    if (!step || !Array.isArray(step.checklist)) return;
+  const updatedStep = { ...step, checklist: updatedChecklist };
+  const update = { [stepKey]: updatedStep };
 
-    const updatedStep = {
-      ...step,
-      checklist: step.checklist.map((item) =>
-        applyCompletionToItem(item, complete, { touchCheckpoints: true })
-      ),
+  setEditableData((prev) => ({ ...prev, ...update }));
+  onProjectUpdate?.({ id: projectData.id, [stepKey]: updatedStep });
+  saveToFirestore(update);
+};
+
+const handleSubStepCompletionChange = (
+  stepKey,
+  itemIndex,
+  completed,
+  seconds
+) => {
+  const step = editableData[stepKey] || { checklist: [] };
+
+  const updatedChecklist = (step.checklist || []).map((item, idx) => {
+    if (idx !== itemIndex) return item;
+
+    const expectedCount = getCheckpointCountForItem(stepKey, idx, item);
+
+    const nextSeconds =
+      typeof seconds === 'number' && !Number.isNaN(seconds)
+        ? seconds
+        : Number.isFinite(item.totalSeconds)
+          ? item.totalSeconds
+          : 0;
+
+    const nextCheckpointStates =
+      expectedCount > 0
+        ? completed
+          ? new Array(expectedCount).fill(true)
+          : normalizeCheckpointBooleans(item.checkpointStates, expectedCount)
+        : item.checkpointStates;
+
+    return {
+      ...item,
+      completed: !!completed,
+      totalSeconds: nextSeconds,
+      checkpointStates: nextCheckpointStates,
     };
+  });
 
-    const update = { [stepKey]: updatedStep };
-    saveToFirestore(update);
-  };
+  const updatedStep = { ...step, checklist: updatedChecklist };
+  const update = { [stepKey]: updatedStep };
 
-  // Mark all stages in the project complete / incomplete.
-  // Also mark all checkpoints/measurement points across the project.
-  const bulkUpdateAllStepsCompletion = (complete) => {
-    const update = {};
+  setEditableData((prev) => ({ ...prev, ...update }));
+  onProjectUpdate?.({ id: projectData.id, [stepKey]: updatedStep });
+  saveToFirestore(update);
+};
 
-    STEP_KEYS.forEach((key) => {
-      const step = editableData[key];
-      if (step && Array.isArray(step.checklist)) {
-        update[key] = {
-          ...step,
-          checklist: step.checklist.map((item) =>
-            applyCompletionToItem(item, complete, { touchCheckpoints: true })
-          ),
-        };
-      }
-    });
-
-    if (Object.keys(update).length === 0) return;
-    saveToFirestore(update);
-  };
-
-  const saveToFirestore = async (updatedPartial = {}) => {
-    try {
-      const merged = { ...editableData, ...updatedPartial };
-      const totalTimeSeconds = calculateProjectTotalTime(merged);
-      const newStatus = determineOverallStatus(merged);
-      const currentPhase = determineCurrentPhase(merged);
-
-      const dataToSave = {
-        ...merged,
-        totalTimeSeconds,
-        status: newStatus,
-        currentPhase,
-      };
-      const ref = doc(db, 'projects', projectData.id);
-      await setDoc(ref, dataToSave, { merge: true });
-
-      const snap = await getDoc(ref);
-      const rehydrated = ensureChecklistStructure({
-        id: projectData.id,
-        ...snap.data(),
-      });
-      setEditableData(rehydrated);
-      setIsEditing(false);
-      setShowSnackbar(true);
-      setStatus(newStatus);
-    } catch (err) {
-      console.error('❌ Failed to save project data:', err);
-    }
-  };
-
-  /**
-   * Persist per-sub-step checkpoint checkbox state.
-   * checkpointStates is an array of booleans on the checklist item.
-   */
-  const handleCheckpointStatesChange = (
-    stepKey,
-    itemIndex,
-    checkpointStates
-  ) => {
-    const step = editableData[stepKey] || { checklist: [] };
-
-    const expectedCount = getCheckpointCountForItem(
-      step.checklist?.[itemIndex]
-    );
-    const normalizedStates = normalizeCheckpointBooleans(
-      checkpointStates,
-      expectedCount
-    );
-
-    const updatedChecklist = (step.checklist || []).map((item, idx) => {
-      if (idx !== itemIndex) return item;
-
-      // ✅ Only update checkpointStates.
-      // ❌ Do NOT change item.completed based on tasks anymore.
-      return {
-        ...item,
-        checkpointStates: normalizedStates,
-      };
-    });
-
-    const updatedStep = { ...step, checklist: updatedChecklist };
-    const update = { [stepKey]: updatedStep };
-
-    setEditableData((prev) => ({ ...prev, ...update }));
-    onProjectUpdate?.({ id: projectData.id, [stepKey]: updatedStep });
-    saveToFirestore(update);
-  };
-
-  /**
+    /**
    * Toggle a lifecycle checkpoint and roll up completion to step + stage.
    * This works against the nested:
    * lifecycle.stages[stageId].steps[stepId].checkpoints[checkpointId]
@@ -787,47 +963,6 @@ const calculateProjectTotalTime = (data = editableData) => {
     return Math.round((done / total) * 100);
   };
 
-  const handleSubStepCompletionChange = (stepKey, itemIndex, completed, seconds) => {
-  const step = editableData[stepKey] || { checklist: [] };
-
-  const updatedChecklist = (step.checklist || []).map((item, idx) => {
-    if (idx !== itemIndex) return item;
-
-    const expectedCount = getCheckpointCountForItem(item);
-
-    // keep existing time unless we got a valid new value
-const nextSeconds =
-  typeof seconds === 'number' && !Number.isNaN(seconds)
-    ? seconds
-    : typeof item.totalSeconds === 'number'
-      ? item.totalSeconds
-      : 0;
-
-    // If sub-step is being marked complete, force all tasks complete.
-    // If being uncompleted, preserve tasks (or optionally clear them—your call).
-const nextCheckpointStates =
-  expectedCount > 0
-    ? completed
-      ? new Array(expectedCount).fill(true)
-      : normalizeCheckpointBooleans(item.checkpointStates, expectedCount)
-    : item.checkpointStates;
-
-    return {
-      ...item,
-      completed: !!completed,
-      totalSeconds: nextSeconds,
-      checkpointStates: nextCheckpointStates,
-    };
-  });
-
-  const updatedStep = { ...step, checklist: updatedChecklist };
-  const update = { [stepKey]: updatedStep };
-
-  setEditableData((prev) => ({ ...prev, ...update }));
-  onProjectUpdate?.({ id: projectData.id, [stepKey]: updatedStep });
-  saveToFirestore(update);
-};
-
   const getStepProgressClass = () => {
     const pct = getCurrentStepProgress();
     if (pct === 0) return 'mpm-step-chip mpm-step-0';
@@ -868,7 +1003,7 @@ const nextCheckpointStates =
     return `${selectedStepKey}::${idx}`;
   };
 
-  // 🔐 Impersonate linked user (if available) and open their customer project view
+  // 🔐 Impersonate linked user (if available) and open their customer project view (SAME TAB)
   const handleViewAsCustomer = () => {
     const projectId = projectData?.id;
 
@@ -879,147 +1014,148 @@ const nextCheckpointStates =
       return;
     }
 
-    if (linkedUser?.id && typeof startImpersonation === 'function') {
-      console.log(
-        '[ManageProjectModal] Starting impersonation for user:',
-        linkedUser.id
-      );
-      startImpersonation(linkedUser.id);
-    } else {
-      // We *don’t* block navigation anymore – we just warn you.
-      window.alert(
-        'No linked SoundLegend user was found for this project.\n\n' +
-          'Impersonation works by matching project.customerEmail to a user.email\n' +
-          'in the users collection.\n\n' +
-          'We will still open the SoundLegend portal in your current session.'
-      );
+    const uid = linkedUser?.id || linkedUser?.uid || '';
+    const name =
+      linkedUser?.fullName ||
+      (linkedUser?.firstName || linkedUser?.lastName
+        ? `${linkedUser?.firstName || ''} ${linkedUser?.lastName || ''}`.trim()
+        : '') ||
+      '';
+    const email = linkedUser?.email || '';
+
+    // Keep current-session impersonation behavior
+    if (uid && typeof startImpersonation === 'function') {
+      startImpersonation(uid);
     }
 
-    // Use the same route the ManageUsers impersonation flow uses,
-    // but pass projectId so the portal can auto-select it.
-    navigate(`/legacy?projectId=${encodeURIComponent(projectId)}`);
+    // Build URL (can still include params; harmless even in same tab)
+    const params = new URLSearchParams();
+    params.set('projectId', projectId);
+
+    if (uid) {
+      params.set('impersonateUid', uid);
+      if (name) params.set('impersonateName', name);
+      if (email) params.set('impersonateEmail', email);
+    }
+
+    const url = `/legacy?${params.toString()}`;
+
+    // ✅ SAME TAB
+    navigate(url);
   };
 
   return (
     <div className="manage-project-modal-overlay mpm-overlay" onClick={onClose}>
       <div
-        className="manage-project-modal-content mpm-modal"
+        className="manage-project-modal-content mpm-modal mpm-light"
         role="dialog"
         aria-modal="true"
         aria-labelledby="admin-project-view-title"
         onClick={(e) => e.stopPropagation()}
       >
         <header className="mpm-header">
-          <h2 id="admin-project-view-title" className="mpm-title">
-            Admin Project View
-          </h2>
+          <div className="mpm-header-top">
+            <h2 id="admin-project-view-title" className="mpm-title">
+              Admin Project View
+            </h2>
 
-          {/* Build status (from checklist completion) */}
-          <div
-            className={`mpm-status-chip ${status
-              .toLowerCase()
-              .replace(/\s+/g, '-')}`}
-          >
-            Build Status: {status}
-          </div>
-
-          {/* Overall time-weighted progress chip */}
-          <div className="mpm-overall-progress-chip">
-            Overall Progress: {weightedProgress}%
-          </div>
-
-          {/* Schedule status chip (progress vs time elapsed with buffer) */}
-          {(() => {
-            const sch = scheduleStatus({
-              startDate: projectData?.startDate,
-              targetDate: projectData?.targetCompletion,
-              bufferDays: 14,
-              progressPct: weightedProgress,
-            });
-            return (
-              <div className={`mpm-sched-chip ${sch.code}`}>
-                Schedule: {sch.label} ({weightedProgress}%)
-              </div>
-            );
-          })()}
-
-          {/* Target + 2-week buffer callout */}
-          <div className="mpm-target-chip">
-            Target: {fmtMDY(projectData?.targetCompletion)} &rarr;{' '}
-            {projectData?.targetCompletion
-              ? fmtMDY(
-                  new Date(
-                    toDate(projectData.targetCompletion).getTime() +
-                      14 * 86400000
-                  )
-                )
-              : '—'}{' '}
-            <span className="mpm-target-sub">(2-week buffer)</span>
-          </div>
-
-          {/* Current step progress chip */}
-          <div className={getStepProgressClass()}>
-            Current Step: {currentPhaseLabel}
-          </div>
-
-          {/* Total time */}
-          <div className="mpm-total-time-wrapper">
-            <span className="mpm-total-time-label">Total Time Spent:</span>
-            <span className="mpm-total-time-value">
-              {formatFullTime(calculateProjectTotalTime())}
-            </span>
-          </div>
-
-          {/* 🔵 NEW: Project-level bulk actions */}
-          <div className="mpm-bulk-project-actions">
             <button
               type="button"
-              className="mpm-bulk-btn"
-              onClick={() => {
-                if (
-                  window.confirm(
-                    'Mark ALL stages and sub-steps in this project as complete? This will tick every checklist item but will NOT erase any time tracking.'
-                  )
-                ) {
-                  bulkUpdateAllStepsCompletion(true);
-                }
-              }}
+              aria-label="Close modal"
+              className="mpm-close-btn"
+              onClick={onClose}
             >
-              Mark entire project complete
-            </button>
-            <button
-              type="button"
-              className="mpm-bulk-btn mpm-bulk-btn-reset"
-              onClick={() => {
-                if (
-                  window.confirm(
-                    'Reset ALL stages and sub-steps in this project to incomplete? Time tracking will be preserved, but every completion checkbox will be cleared.'
-                  )
-                ) {
-                  bulkUpdateAllStepsCompletion(false);
-                }
-              }}
-            >
-              Reset entire project
+              ✕
             </button>
           </div>
 
-          {/* close button */}
-          <button
-            type="button"
-            aria-label="Close modal"
-            className="mpm-close-btn"
-            onClick={onClose}
-          >
-            ✕
-          </button>
+          <div className="mpm-header-chips">
+            <div
+              className={`mpm-status-chip ${status.toLowerCase().replace(/\s+/g, '-')}`}
+            >
+              Build Status: {status}
+            </div>
+
+            <div className="mpm-overall-progress-chip">
+              Overall Progress: {weightedProgress}%
+            </div>
+
+            {(() => {
+              const sch = scheduleStatus({
+                startDate: projectData?.startDate,
+                targetDate: projectData?.targetCompletion,
+                bufferDays: 14,
+                progressPct: weightedProgress,
+              });
+              return (
+                <div className={`mpm-sched-chip ${sch.code}`}>
+                  Schedule: {sch.label} ({weightedProgress}%)
+                </div>
+              );
+            })()}
+
+            <div className="mpm-target-chip">
+              Target: {fmtMDY(projectData?.targetCompletion)} &rarr;{' '}
+              {projectData?.targetCompletion
+                ? fmtMDY(
+                    new Date(
+                      toDate(projectData.targetCompletion).getTime() +
+                        14 * 86400000
+                    )
+                  )
+                : '—'}{' '}
+              <span className="mpm-target-sub">(2-week buffer)</span>
+            </div>
+
+            <div className={getStepProgressClass()}>
+              Current Step: {currentPhaseLabel}
+            </div>
+
+            <div className="mpm-total-time-wrapper">
+              <span className="mpm-total-time-label">Total Time Spent:</span>
+              <span className="mpm-total-time-value">
+                {formatFullTime(calculateProjectTotalTime())}
+              </span>
+            </div>
+
+            <div className="mpm-bulk-project-actions">
+              <button
+                type="button"
+                className="mpm-bulk-btn"
+                onClick={() => {
+                  if (
+                    window.confirm(
+                      'Mark ALL stages and sub-steps in this project as complete?'
+                    )
+                  ) {
+                    bulkUpdateAllStepsCompletion(true);
+                  }
+                }}
+              >
+                Mark entire project complete
+              </button>
+
+              <button
+                type="button"
+                className="mpm-bulk-btn mpm-bulk-btn-reset"
+                onClick={() => {
+                  if (
+                    window.confirm(
+                      'Reset ALL stages and sub-steps in this project to incomplete?'
+                    )
+                  ) {
+                    bulkUpdateAllStepsCompletion(false);
+                  }
+                }}
+              >
+                Reset entire project
+              </button>
+            </div>
+          </div>
         </header>
 
         {/* Project meta row (identifier, customer, IDs, impersonation link) */}
-        <div
-          className="mpm-id-strip"
-          style={{ padding: '8px 16px', borderBottom: '1px solid #f0f0f0' }}
-        >
+        <div className="mpm-id-strip">
           {/* Left: drum identifier + customer name/email */}
           <div className="mpm-identifier-top">
             {/* SL-005 · SoundLegend · 14×8" */}
@@ -1163,8 +1299,9 @@ const nextCheckpointStates =
               {buildPhases.map((step) => {
                 const isExpanded = expandedStepKey === step.key;
                 const checklist = editableData[step.key]?.checklist || [];
-                const allDone =
-                  checklist.length > 0 && checklist.every((i) => i.completed);
+
+                // ✅ compute step status here (valid JS, not JSX)
+                const stepStatus = getStepStatus(step.key, editableData);
 
                 return (
                   <div key={step.key} className="mpm-sidebar-step-block">
@@ -1178,9 +1315,12 @@ const nextCheckpointStates =
                         setSelectedStepKey(step.key);
                         setSelectedSubIndex(0);
                       }}
+                      type="button"
                     >
-                      {allDone ? '✅ ' : ''}
-                      {step.label}
+                      <StatusPip level="step" status={stepStatus} />
+                      <span className="mpm-sidebar-step-text">
+                        {step.label}
+                      </span>
                     </button>
 
                     {isExpanded && checklist.length > 0 && (
@@ -1191,21 +1331,62 @@ const nextCheckpointStates =
                             selectedStepKey === step.key &&
                             selectedSubIndex === idx;
 
+                          // ✅ compute substep status here (valid JS)
+                          const subStatus = getSubstepStatus(item);
+
                           return (
-                            <button
-                              key={item.id || idx}
-                              className={`mpm-sidebar-substep-btn ${
-                                isActiveSub ? 'active' : ''
-                              }`}
-                              type="button"
-                              onClick={() => {
-                                setSelectedStepKey(step.key);
-                                setSelectedSubIndex(idx);
-                                setSelectedTab(step.key);
-                              }}
-                            >
-                              {label}
-                            </button>
+                            <div key={item.id || idx}>
+                              <button
+                                className={`mpm-sidebar-substep-btn ${
+                                  isActiveSub ? 'active' : ''
+                                }`}
+                                type="button"
+                                onClick={() => {
+                                  setSelectedStepKey(step.key);
+                                  setSelectedSubIndex(idx);
+                                  setSelectedTab(step.key);
+                                }}
+                              >
+                                <StatusPip level="substep" status={subStatus} />
+                                <span className="mpm-sidebar-substep-text">
+                                  {label}
+                                </span>
+                              </button>
+
+                              {/* ✅ Checkpoint task list (only under active substep) */}
+                              {isActiveSub &&
+                                Array.isArray(item.checkpointStates) &&
+                                item.checkpointStates.length > 0 && (
+                                  <div className="mpm-sidebar-task-list">
+                                    {(
+                                      CHECKPOINTS_BY_ITEM_ID?.[item.id] ||
+                                      item.checkpointStates.map(
+                                        (_, i) => `Checkpoint ${i + 1}`
+                                      )
+                                    ).map((taskLabel, cIdx) => {
+                                      const taskStatus = getCheckpointStatus(
+                                        item,
+                                        cIdx
+                                      );
+
+                                      return (
+                                        <div
+                                          key={`${item.id || idx}-cp-${cIdx}`}
+                                          className="mpm-sidebar-task-row"
+                                        >
+                                          <StatusPip
+                                            level="task"
+                                            status={taskStatus}
+                                          />
+                                          <span className="mpm-sidebar-task-text">
+                                            {taskLabel}
+                                          </span>
+                                        </div>
+                                      );
+                                    })}
+                                  </div>
+                                )}
+                            </div>
                           );
                         })}
                       </div>
@@ -1218,7 +1399,7 @@ const nextCheckpointStates =
 
           <main className="mpm-main">
             {selectedTab === 'details' ? (
-              <>
+              <div className="mpm-surface mpm-overview-scope">
                 <ProjectOverview
                   editableData={{ ...editableData, id: projectData.id }}
                   isEditing={isEditing}
@@ -1252,14 +1433,15 @@ const nextCheckpointStates =
                   lifecycle={editableData.lifecycle}
                   onToggleCheckpoint={handleLifecycleCheckpointToggle}
                 />
-              </>
+              </div>
             ) : (
               <>
-                {/* 🔵 NEW: Stage-level bulk actions for the currently selected step */}
+                {/* 🔵 Stage-level bulk actions */}
                 <div className="mpm-bulk-step-actions">
                   <span className="mpm-bulk-step-label">
                     Bulk actions for this stage:
                   </span>
+
                   <button
                     type="button"
                     className="mpm-bulk-btn"
@@ -1268,6 +1450,7 @@ const nextCheckpointStates =
                       if (!selectedStepKey) return;
                       const count =
                         editableData[selectedStepKey]?.checklist?.length || 0;
+
                       if (
                         window.confirm(
                           `Mark all ${count} sub-steps in this stage as complete?`
@@ -1279,6 +1462,7 @@ const nextCheckpointStates =
                   >
                     Mark stage complete
                   </button>
+
                   <button
                     type="button"
                     className="mpm-bulk-btn mpm-bulk-btn-reset"
@@ -1287,6 +1471,7 @@ const nextCheckpointStates =
                       if (!selectedStepKey) return;
                       const count =
                         editableData[selectedStepKey]?.checklist?.length || 0;
+
                       if (
                         window.confirm(
                           `Reset all ${count} sub-steps in this stage to incomplete? Time tracking will be preserved.`
@@ -1300,25 +1485,38 @@ const nextCheckpointStates =
                   </button>
                 </div>
 
-                <StepComponentTemplate
-                  stepKey={selectedStepKey}
-                  stepLabel={currentSubLabel}
-                  stepData={editableData[selectedStepKey] || { checklist: [] }}
-onToggleChecklist={(index, completed, seconds) => {
-  const safeSeconds = Number.isFinite(seconds) ? seconds : undefined;
-  handleSubStepCompletionChange(selectedStepKey, index, completed, safeSeconds);
-}}
-                  onUpdateCheckpointStates={(itemIndex, states) =>
-                    handleCheckpointStatesChange(
-                      selectedStepKey,
-                      itemIndex,
-                      states
-                    )
-                  }
-                  isLocked={false}
-                  showCheckbox={true}
-                  activeIndex={selectedSubIndex}
-                />
+                {/* 🔥 READABILITY SURFACE */}
+                <div className="mpm-surface mpm-step-scope">
+                  <StepComponentTemplate
+                    stepKey={selectedStepKey}
+                    stepLabel={currentSubLabel}
+                    stepData={
+                      editableData[selectedStepKey] || { checklist: [] }
+                    }
+                    onToggleChecklist={(index, completed, seconds) => {
+                      const safeSeconds = Number.isFinite(seconds)
+                        ? seconds
+                        : undefined;
+
+                      handleSubStepCompletionChange(
+                        selectedStepKey,
+                        index,
+                        completed,
+                        safeSeconds
+                      );
+                    }}
+                    onUpdateCheckpointStates={(itemIndex, states) =>
+                      handleCheckpointStatesChange(
+                        selectedStepKey,
+                        itemIndex,
+                        states
+                      )
+                    }
+                    isLocked={false}
+                    showCheckbox={true}
+                    activeIndex={selectedSubIndex}
+                  />
+                </div>
               </>
             )}
           </main>
