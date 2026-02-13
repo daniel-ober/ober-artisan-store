@@ -1,13 +1,6 @@
 // src/components/ManageProjects.js
 import React, { useState, useEffect } from 'react';
-import {
-  collection,
-  updateDoc,
-  doc,
-  onSnapshot,
-  query,
-  orderBy,
-} from 'firebase/firestore';
+import { collection, updateDoc, doc, onSnapshot, query } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import ManageProjectModal from './ManageProjectModal';
 import { calculateProjectProgress } from '../utils/calculateProjectProgress';
@@ -83,8 +76,7 @@ const getWeightedProgressPct = (data) => {
     hardwareAssembly: data.hardwareAssembly,
     tuningAndDetailing:
       data.legacyTuningMedia || data.tuningAndDetailing || data.tuningDetailing,
-    qualityCheck:
-      data.finalQAPackagingDelivery || data.qualityCheck,
+    qualityCheck: data.finalQAPackagingDelivery || data.qualityCheck,
   };
 
   return calculateProjectProgress(patched);
@@ -98,41 +90,44 @@ const normalize = (str) =>
     .replace(/\s+/g, '-') || '';
 
 /* ---------- tiny helpers shared with Overview ---------- */
-const val = (...c) =>
-  c.find((v) => v !== undefined && v !== null && v !== '') ?? undefined;
+const val = (...c) => c.find((v) => v !== undefined && v !== null && v !== '') ?? undefined;
 
-/** Build a display identifier like:
- *   "SL-004 · SoundLegend · 14×6.5"
- * falling back gracefully if some fields are missing.
- */
+const getMillis = (v) => {
+  if (!v) return 0;
+  try {
+    if (v.toDate) return v.toDate()?.getTime?.() || 0;
+    if (typeof v.seconds === 'number') return v.seconds * 1000;
+    const d = new Date(v);
+    return Number.isNaN(d.getTime()) ? 0 : d.getTime();
+  } catch {
+    return 0;
+  }
+};
+
+/** Customer name fallback (this is your core bug) */
+const getCustomerName = (p = {}) =>
+  val(
+    p.customerName, // canonical legacy
+    p.customer?.name, // new nested customer map
+    p.customer?.displayName,
+    p.publicPrefs?.displayName
+  ) || '';
+
+/** Build a display identifier like: "SL-004 · SoundLegend · 14×6.5" */
 const getIdentifier = (p = {}) => {
   const serial =
-    val(
-      p.lineSerial, // canonical
-      p.serial,
-      p.serialNumber,
-      p.projectSerial,
-      p.snareSerial,
-      p.serialId
-    ) || '';
+    val(p.lineSerial, p.serial, p.serialNumber, p.projectSerial, p.snareSerial, p.serialId) || '';
 
-  const line =
-    val(
-      p.artisanLine, // canonical
-      p.series,
-      p.productLine,
-      p.seriesLine,
-      p.line
-    ) || '';
+  const line = val(p.artisanLine, p.series, p.productLine, p.seriesLine, p.line) || '';
 
-  const dia = val(p.width, p.diameter); // canonical width = diameter
-  const dep = val(p.shellDepth, p.depth); // canonical shellDepth = depth
+  const dia = val(p.width, p.diameter);
+  const dep = val(p.shellDepth, p.depth);
   const size = dia && dep ? ` · ${dia}×${dep}"` : '';
 
   if (serial && line) return `${serial} · ${line}${size}`;
   if (serial) return `${serial}${size}`;
   if (line) return `${line}${size}`;
-  return size ? size.slice(3) : '—'; // strip leading " · "
+  return size ? size.slice(3) : '—';
 };
 
 const ManageProjects = () => {
@@ -146,21 +141,6 @@ const ManageProjects = () => {
   // sorting
   const [sort, setSort] = useState({ key: 'startDate', dir: 'desc' });
 
-  const getMillis = (v) => {
-    if (!v) return 0;
-    try {
-      if (v.toDate) {
-        const d = v.toDate();
-        return d?.getTime?.() || 0;
-      }
-      if (typeof v.seconds === 'number') return v.seconds * 1000;
-      const d = new Date(v);
-      return Number.isNaN(d.getTime()) ? 0 : d.getTime();
-    } catch {
-      return 0;
-    }
-  };
-
   // numeric seconds for total time spent (used for sort + display)
   const totalSecondsFromProject = (project) => {
     let total = 0;
@@ -170,28 +150,44 @@ const ManageProjects = () => {
         step.checklist.forEach((item) => {
           const v = item?.totalSeconds;
           if (typeof v === 'number') total += v;
-          else if (v?.seconds && typeof v.seconds === 'number')
-            total += v.seconds;
+          else if (v?.seconds && typeof v.seconds === 'number') total += v.seconds;
         });
       }
     });
     return total;
   };
 
+  /**
+   * Created At fallback:
+   * startDate -> createdAt -> updatedAt
+   */
+  const getCreatedAtMillis = (p) =>
+    getMillis(p.startDate) || getMillis(p.createdAt) || getMillis(p.updatedAt) || 0;
+
+  /**
+   * Target completion fallback:
+   * targetCompletion -> targetCompletionWithBuffer -> createdAt + 35 days
+   */
+  const getTargetMillis = (p) => {
+    const explicit =
+      getMillis(p.targetCompletion) ||
+      getMillis(p.targetCompletionWithBuffer); // you already retain this in some docs
+    if (explicit) return explicit;
+
+    const baseMs = getCreatedAtMillis(p);
+    return baseMs ? baseMs + 35 * 24 * 60 * 60 * 1000 : 0;
+  };
+
   const projectValue = (p, key) => {
     switch (key) {
       case 'customerName':
-        return (p.customerName || '').toLowerCase();
+        return (getCustomerName(p) || '').toLowerCase();
       case 'identifier':
         return getIdentifier(p).toLowerCase();
       case 'startDate':
-        return getMillis(p.startDate);
-      case 'targetCompletion': {
-        // sort by explicit target if present; otherwise created + 35 days fallback
-        if (p.targetCompletion) return getMillis(p.targetCompletion);
-        const baseMs = getMillis(p.startDate);
-        return baseMs ? baseMs + 35 * 24 * 60 * 60 * 1000 : 0;
-      }
+        return getCreatedAtMillis(p);
+      case 'targetCompletion':
+        return getTargetMillis(p);
       case 'timeSpent':
         return totalSecondsFromProject(p);
       case 'currentPhase':
@@ -213,44 +209,34 @@ const ManageProjects = () => {
     return [...list].sort((a, b) => {
       const va = projectValue(a, key);
       const vb = projectValue(b, key);
-      if (typeof va === 'number' && typeof vb === 'number')
-        return (va - vb) * mul;
+      if (typeof va === 'number' && typeof vb === 'number') return (va - vb) * mul;
       return (
-        String(va).localeCompare(String(vb), undefined, {
-          numeric: true,
-          sensitivity: 'base',
-        }) * mul
+        String(va).localeCompare(String(vb), undefined, { numeric: true, sensitivity: 'base' }) * mul
       );
     });
   };
 
   const toggleSort = (key) => {
     setSort((s) =>
-      s.key === key
-        ? { key, dir: s.dir === 'asc' ? 'desc' : 'asc' }
-        : { key, dir: 'asc' }
+      s.key === key ? { key, dir: s.dir === 'asc' ? 'desc' : 'asc' } : { key, dir: 'asc' }
     );
   };
-  const renderSort = (key) =>
-    sort.key === key ? (sort.dir === 'asc' ? '▲' : '▼') : '↕';
+  const renderSort = (key) => (sort.key === key ? (sort.dir === 'asc' ? '▲' : '▼') : '↕');
 
   const formatDate = (value) => {
     if (!value) return 'N/A';
     let date;
     try {
-      if (value.toDate) {
-        date = value.toDate();
-      } else if (typeof value.seconds === 'number') {
-        date = new Date(value.seconds * 1000);
-      } else if (typeof value === 'string') {
+      if (value.toDate) date = value.toDate();
+      else if (typeof value.seconds === 'number') date = new Date(value.seconds * 1000);
+      else if (typeof value === 'string') {
         const parsed = new Date(value);
         if (Number.isNaN(parsed.getTime())) return 'N/A';
         date = parsed;
       } else if (value instanceof Date) {
         date = value;
-      } else {
-        return 'N/A';
-      }
+      } else return 'N/A';
+
       return date.toLocaleDateString();
     } catch {
       return 'N/A';
@@ -262,38 +248,13 @@ const ManageProjects = () => {
    * Uses the NEW 10-step buildPhases timeline.
    */
   const getExpectedPhase = (project) => {
-    let createdAt = null;
+    const createdAtMs = getCreatedAtMillis(project);
+    if (!createdAtMs) return 'Unknown';
+    const createdAt = new Date(createdAtMs);
 
-    // createdAt / startDate
-    if (project.startDate?.toDate) {
-      createdAt = project.startDate.toDate();
-    } else if (typeof project.startDate?.seconds === 'number') {
-      createdAt = new Date(project.startDate.seconds * 1000);
-    } else if (typeof project.startDate === 'string') {
-      const parsed = new Date(project.startDate);
-      if (!Number.isNaN(parsed.getTime())) createdAt = parsed;
-    }
-
-    if (!createdAt) return 'Unknown';
-
-    // explicit target if present, else fallback 35-day window
-    let target = null;
-    const tc = project.targetCompletion;
-    if (tc) {
-      if (tc.toDate) target = tc.toDate();
-      else if (typeof tc.seconds === 'number')
-        target = new Date(tc.seconds * 1000);
-      else if (typeof tc === 'string') {
-        const parsed = new Date(tc);
-        if (!Number.isNaN(parsed.getTime())) target = parsed;
-      } else if (tc instanceof Date) {
-        target = tc;
-      }
-    }
-    if (!target) {
-      target = new Date(createdAt);
-      target.setDate(target.getDate() + 35);
-    }
+    const targetMs = getTargetMillis(project);
+    if (!targetMs) return 'Unknown';
+    const target = new Date(targetMs);
 
     const now = new Date();
     const elapsedDays = (now - createdAt) / (1000 * 60 * 60 * 24);
@@ -301,10 +262,7 @@ const ManageProjects = () => {
     if (totalDays <= 0 || elapsedDays < 0) return 'Unknown';
 
     const progressPercent = elapsedDays / totalDays;
-    const index = Math.min(
-      buildPhases.length - 1,
-      Math.floor(progressPercent * buildPhases.length)
-    );
+    const index = Math.min(buildPhases.length - 1, Math.floor(progressPercent * buildPhases.length));
     return buildPhases[index] || 'Unknown';
   };
 
@@ -313,9 +271,7 @@ const ManageProjects = () => {
    */
   const determineStatus = (project) => {
     const expectedPhase = getExpectedPhase(project);
-    const expectedIndex = buildPhases.findIndex(
-      (p) => normalize(p) === normalize(expectedPhase)
-    );
+    const expectedIndex = buildPhases.findIndex((p) => normalize(p) === normalize(expectedPhase));
 
     let actualPhaseLabel = project.currentPhase || '';
 
@@ -324,9 +280,7 @@ const ManageProjects = () => {
       actualPhaseLabel = buildPhases[buildPhases.length - 1];
     }
 
-    const actualIndex = buildPhases.findIndex(
-      (p) => normalize(p) === normalize(actualPhaseLabel)
-    );
+    const actualIndex = buildPhases.findIndex((p) => normalize(p) === normalize(actualPhaseLabel));
 
     if (expectedIndex === -1 || actualIndex === -1) return 'Unknown';
 
@@ -341,60 +295,21 @@ const ManageProjects = () => {
   /** Show targetCompletion if set; otherwise show startDate + 35 days. */
   const formatTargetCompletion = (project) => {
     if (!project) return 'N/A';
-    let date = null;
 
-    const tc = project.targetCompletion;
-    if (tc) {
-      if (tc.toDate) {
-        date = tc.toDate();
-      } else if (typeof tc.seconds === 'number') {
-        date = new Date(tc.seconds * 1000);
-      } else if (typeof tc === 'string') {
-        const parsed = new Date(tc);
-        if (!Number.isNaN(parsed.getTime())) date = parsed;
-      } else if (tc instanceof Date) {
-        date = tc;
-      }
-    }
+    const ms =
+      getMillis(project.targetCompletion) ||
+      getMillis(project.targetCompletionWithBuffer) ||
+      getTargetMillis(project);
 
-    // fallback: 35 days after startDate
-    if (!date) {
-      let base = null;
-      const sd = project.startDate;
-      if (sd?.toDate) base = sd.toDate();
-      else if (typeof sd?.seconds === 'number')
-        base = new Date(sd.seconds * 1000);
-      else if (typeof sd === 'string') {
-        const parsed = new Date(sd);
-        if (!Number.isNaN(parsed.getTime())) base = parsed;
-      }
-
-      if (!base) return 'N/A';
-      date = new Date(base);
-      date.setDate(date.getDate() + 35);
-    }
-
-    return date.toLocaleDateString();
+    if (!ms) return 'N/A';
+    return new Date(ms).toLocaleDateString();
   };
 
   const isOverdue = (project) => {
-    // simple heuristic: if today is past target date and progress < 100
-    let target = null;
-    const tc = project.targetCompletion;
-    if (tc) {
-      if (tc.toDate) target = tc.toDate();
-      else if (typeof tc.seconds === 'number')
-        target = new Date(tc.seconds * 1000);
-      else if (typeof tc === 'string') {
-        const parsed = new Date(tc);
-        if (!Number.isNaN(parsed.getTime())) target = parsed;
-      } else if (tc instanceof Date) {
-        target = tc;
-      }
-    }
-    if (!target) return false;
+    const targetMs = getMillis(project.targetCompletion) || getMillis(project.targetCompletionWithBuffer);
+    if (!targetMs) return false;
     if (getWeightedProgressPct(project) >= 100) return false;
-    return new Date() > target;
+    return Date.now() > targetMs;
   };
 
   // completed logic + filters
@@ -421,9 +336,9 @@ const ManageProjects = () => {
     return out;
   };
 
-  // subscribe
+  // subscribe (IMPORTANT: do NOT orderBy startDate, some docs don’t have it)
   useEffect(() => {
-    const q = query(collection(db, 'projects'), orderBy('startDate', 'desc'));
+    const q = query(collection(db, 'projects'));
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const liveProjects = snapshot.docs.map((d) => ({
         id: d.id,
@@ -452,27 +367,31 @@ const ManageProjects = () => {
 
   const handleSave = async (updatedData) => {
     if (!selectedProject) return;
+
+    // ✅ Patch common “table fields” so list view stays consistent
+    const patched = { ...updatedData };
+
+    // If modal saves nested customer.name but not customerName, keep customerName in sync.
+    const nameFromNested = updatedData?.customer?.name;
+    if (!patched.customerName && nameFromNested) patched.customerName = nameFromNested;
+
     const projectRef = doc(db, 'projects', selectedProject.id);
-    await updateDoc(projectRef, updatedData);
+    await updateDoc(projectRef, patched);
+
     const updated = {
       ...selectedProject,
-      ...updatedData,
+      ...patched,
       id: selectedProject.id,
     };
+
     handleLiveUpdate(updated);
     closeModal();
   };
 
   const handleLiveUpdate = (updatedProject) => {
-    setProjects((prev) =>
-      prev.map((p) => (p.id === updatedProject.id ? updatedProject : p))
-    );
-    setFilteredProjects((prev) =>
-      prev.map((p) => (p.id === updatedProject.id ? updatedProject : p))
-    );
-    setSelectedProject((prev) =>
-      prev?.id === updatedProject.id ? updatedProject : prev
-    );
+    setProjects((prev) => prev.map((p) => (p.id === updatedProject.id ? updatedProject : p)));
+    setFilteredProjects((prev) => prev.map((p) => (p.id === updatedProject.id ? updatedProject : p)));
+    setSelectedProject((prev) => (prev?.id === updatedProject.id ? updatedProject : prev));
   };
 
   const calculateTotalProjectTime = (project) => {
@@ -480,46 +399,27 @@ const ManageProjects = () => {
     const hrs = Math.floor(total / 3600);
     const mins = Math.floor((total % 3600) / 60);
     const secs = total % 60;
-    return `${hrs}:${mins.toString().padStart(2, '0')}:${secs
-      .toString()
-      .padStart(2, '0')}`;
+    return `${hrs}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
   /* ---------- summary metrics for the header ---------- */
   const activeProjects = projects.filter((p) => !isCompleted(p));
-  const aheadCount = activeProjects.filter(
-    (p) => determineStatus(p) === 'Ahead of Schedule'
-  ).length;
-  const onPaceCount = activeProjects.filter(
-    (p) => determineStatus(p) === 'On Pace'
-  ).length;
-  const slightlyBehindCount = activeProjects.filter(
-    (p) => determineStatus(p) === 'Slightly Behind'
-  ).length;
-  const behindCount = activeProjects.filter(
-    (p) => determineStatus(p) === 'Behind Schedule'
-  ).length;
+  const aheadCount = activeProjects.filter((p) => determineStatus(p) === 'Ahead of Schedule').length;
+  const onPaceCount = activeProjects.filter((p) => determineStatus(p) === 'On Pace').length;
+  const slightlyBehindCount = activeProjects.filter((p) => determineStatus(p) === 'Slightly Behind')
+    .length;
+  const behindCount = activeProjects.filter((p) => determineStatus(p) === 'Behind Schedule').length;
 
   return (
     <div className="manage-projects">
       <div className="manage-projects-header">
         <h2>Manage Projects</h2>
         <div className="projects-summary">
-          <div className="summary-pill summary-pill-primary">
-            Active: {activeProjects.length}
-          </div>
-          <div className="summary-pill summary-pill-ahead">
-            Ahead: {aheadCount}
-          </div>
-          <div className="summary-pill summary-pill-on">
-            On Pace: {onPaceCount}
-          </div>
-          <div className="summary-pill summary-pill-slight">
-            Slightly Behind: {slightlyBehindCount}
-          </div>
-          <div className="summary-pill summary-pill-behind">
-            Behind: {behindCount}
-          </div>
+          <div className="summary-pill summary-pill-primary">Active: {activeProjects.length}</div>
+          <div className="summary-pill summary-pill-ahead">Ahead: {aheadCount}</div>
+          <div className="summary-pill summary-pill-on">On Pace: {onPaceCount}</div>
+          <div className="summary-pill summary-pill-slight">Slightly Behind: {slightlyBehindCount}</div>
+          <div className="summary-pill summary-pill-behind">Behind: {behindCount}</div>
         </div>
       </div>
 
@@ -553,75 +453,42 @@ const ManageProjects = () => {
           <thead>
             <tr>
               <th className="sortable" onClick={() => toggleSort('customerName')}>
-                Customer Name{' '}
-                <span className="sort-indicator">
-                  {renderSort('customerName')}
-                </span>
+                Customer Name <span className="sort-indicator">{renderSort('customerName')}</span>
               </th>
               <th className="sortable" onClick={() => toggleSort('identifier')}>
-                Identifier{' '}
-                <span className="sort-indicator">
-                  {renderSort('identifier')}
-                </span>
+                Identifier <span className="sort-indicator">{renderSort('identifier')}</span>
               </th>
               <th className="sortable" onClick={() => toggleSort('startDate')}>
-                Created At{' '}
-                <span className="sort-indicator">
-                  {renderSort('startDate')}
-                </span>
+                Created At <span className="sort-indicator">{renderSort('startDate')}</span>
               </th>
-              <th
-                className="sortable"
-                onClick={() => toggleSort('targetCompletion')}
-              >
-                Target Completion{' '}
-                <span className="sort-indicator">
-                  {renderSort('targetCompletion')}
-                </span>
+              <th className="sortable" onClick={() => toggleSort('targetCompletion')}>
+                Target Completion <span className="sort-indicator">{renderSort('targetCompletion')}</span>
               </th>
               <th className="sortable" onClick={() => toggleSort('timeSpent')}>
-                Total Time Spent{' '}
-                <span className="sort-indicator">
-                  {renderSort('timeSpent')}
-                </span>
+                Total Time Spent <span className="sort-indicator">{renderSort('timeSpent')}</span>
               </th>
-              <th
-                className="sortable"
-                onClick={() => toggleSort('currentPhase')}
-              >
-                Current Phase{' '}
-                <span className="sort-indicator">
-                  {renderSort('currentPhase')}
-                </span>
+              <th className="sortable" onClick={() => toggleSort('currentPhase')}>
+                Current Phase <span className="sort-indicator">{renderSort('currentPhase')}</span>
               </th>
-              <th
-                className="sortable"
-                onClick={() => toggleSort('expectedPhase')}
-              >
-                Expected On Pace (EOP){' '}
-                <span className="sort-indicator">
-                  {renderSort('expectedPhase')}
-                </span>
+              <th className="sortable" onClick={() => toggleSort('expectedPhase')}>
+                Expected On Pace (EOP) <span className="sort-indicator">{renderSort('expectedPhase')}</span>
               </th>
               <th className="sortable" onClick={() => toggleSort('progress')}>
-                Progress{' '}
-                <span className="sort-indicator">
-                  {renderSort('progress')}
-                </span>
+                Progress <span className="sort-indicator">{renderSort('progress')}</span>
               </th>
               <th className="sortable" onClick={() => toggleSort('status')}>
-                Status{' '}
-                <span className="sort-indicator">
-                  {renderSort('status')}
-                </span>
+                Status <span className="sort-indicator">{renderSort('status')}</span>
               </th>
             </tr>
           </thead>
           <tbody>
             {filteredProjects.map((project) => {
               const statusLabel = determineStatus(project);
-              const statusClass = normalize(statusLabel); // e.g., "on-pace"
+              const statusClass = normalize(statusLabel);
               const progressPct = getWeightedProgressPct(project);
+
+              const createdAtDisplay =
+                project.startDate || project.createdAt || project.updatedAt || null;
 
               return (
                 <tr
@@ -629,9 +496,9 @@ const ManageProjects = () => {
                   onClick={() => openModal(project)}
                   className={`status-row ${statusClass}`}
                 >
-                  <td>{project.customerName || 'N/A'}</td>
+                  <td>{getCustomerName(project) || 'N/A'}</td>
                   <td>{getIdentifier(project)}</td>
-                  <td>{formatDate(project.startDate)}</td>
+                  <td>{formatDate(createdAtDisplay)}</td>
                   <td>{formatTargetCompletion(project)}</td>
                   <td>{calculateTotalProjectTime(project)}</td>
                   <td>{project.currentPhase || '—'}</td>
@@ -640,23 +507,14 @@ const ManageProjects = () => {
                     <div className="project-progress-bar">
                       <div className="progress-bar-wrapper">
                         <div className="progress-bar-track">
-                          <div
-                            className="progress-bar-fill"
-                            style={{
-                              width: `${progressPct}%`,
-                            }}
-                          />
+                          <div className="progress-bar-fill" style={{ width: `${progressPct}%` }} />
                         </div>
                       </div>
-                      <span className="progress-percent">
-                        {progressPct}%
-                      </span>
+                      <span className="progress-percent">{progressPct}%</span>
                     </div>
                   </td>
                   <td>
-                    <span className={`status-pill status-pill-${statusClass}`}>
-                      {statusLabel}
-                    </span>
+                    <span className={`status-pill status-pill-${statusClass}`}>{statusLabel}</span>
                   </td>
                 </tr>
               );

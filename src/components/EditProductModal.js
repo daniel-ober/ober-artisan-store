@@ -5,7 +5,7 @@ import {
   createStripePrice,
   updateStripeProductWithPrices,
   fetchStripePrices,
-} from '../services/stripeService'; // ✅ FIX
+} from '../services/stripeService';
 import './EditProductModal.css';
 
 const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
@@ -55,7 +55,7 @@ const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
         const fetchedProduct = await fetchProductById(productId);
         setProduct(fetchedProduct);
 
-        let firestorePricingOptions = fetchedProduct.pricingOptions || [];
+        const firestorePricingOptions = fetchedProduct.pricingOptions || [];
         let stripePricingOptions = [];
 
         if (fetchedProduct.stripeProductId) {
@@ -99,23 +99,6 @@ const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
     setProduct((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handlePriceOptionChange = (index, field, value) => {
-    const updated = [...pricingOptions];
-    updated[index][field] = value;
-    setPricingOptions(updated);
-  };
-
-  const addPriceOption = () => {
-    setPricingOptions([
-      ...pricingOptions,
-      { size: '', depth: '', reRing: false, price: 0, stripePriceId: '' },
-    ]);
-  };
-
-  const removePriceOption = (index) => {
-    setPricingOptions(pricingOptions.filter((_, i) => i !== index));
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -124,7 +107,7 @@ const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
     try {
       let stripeProductId = product.stripeProductId;
 
-      // 1️⃣ Ensure Stripe Product exists
+      // 1) Ensure Stripe Product exists
       if (!stripeProductId) {
         const newStripeProduct = await createStripeProduct(
           product.name,
@@ -136,27 +119,26 @@ const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
         await updateProduct(productId, { ...product, stripeProductId });
       }
 
-      // 2️⃣ Create / update prices
+      // 2) Create / update prices
       const updatedPricingOptions = await Promise.all(
         pricingOptions.map(async (option) => {
+          const cents = Math.round(Number(option.price || 0) * 100);
+
           if (option.stripePriceId) {
             const updatedPrice = await updateStripeProductWithPrices(
               stripeProductId,
               option.stripePriceId,
-              option.price * 100
+              cents
             );
             return { ...option, stripePriceId: updatedPrice.id };
           } else {
-            const newPrice = await createStripePrice(
-              stripeProductId,
-              option.price * 100
-            );
+            const newPrice = await createStripePrice(stripeProductId, cents);
             return { ...option, stripePriceId: newPrice.id };
           }
         })
       );
 
-      // 3️⃣ Save to Firestore
+      // 3) Save to Firestore
       const updatedProduct = {
         ...product,
         pricingOptions: updatedPricingOptions,
@@ -167,30 +149,55 @@ const EditProductModal = ({ productId, onClose, onProductUpdated }) => {
       onProductUpdated(updatedProduct);
       onClose();
     } catch (err) {
-      setError(err.message || 'Failed to update product.');
+      setError(err?.message || 'Failed to update product.');
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) {
+    return (
+      <div className="epm-modal-overlay">
+        <div className="epm-modal-content">
+          <div className="epm-loading">Loading…</div>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="modal-overlay">
-      <div className="modal-content">
-        <h2>Edit Product</h2>
-        {error && <div className="error-message">{error}</div>}
+    <div className="epm-modal-overlay" onMouseDown={onClose}>
+      <div className="epm-modal-content" onMouseDown={(e) => e.stopPropagation()}>
+        <div className="epm-modal-header">
+          <h2 className="epm-title">Edit Product</h2>
+          <button type="button" className="epm-x" onClick={onClose} aria-label="Close">
+            ×
+          </button>
+        </div>
+
+        {error && <div className="epm-error">{error}</div>}
 
         <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label>Product Name</label>
-            <input name="name" value={product.name} onChange={handleInputChange} required />
+          <div className="epm-form-group">
+            <label className="epm-label">Product Name</label>
+            <input
+              className="epm-input"
+              name="name"
+              value={product.name}
+              onChange={handleInputChange}
+              required
+            />
           </div>
 
-          <button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? 'Updating…' : 'Update Product'}
-          </button>
-          <button type="button" onClick={onClose}>Close</button>
+          <div className="epm-actions">
+            <button className="epm-btn epm-btn-primary" type="submit" disabled={isSubmitting}>
+              {isSubmitting ? 'Updating…' : 'Update Product'}
+            </button>
+
+            <button className="epm-btn epm-btn-ghost" type="button" onClick={onClose}>
+              Close
+            </button>
+          </div>
         </form>
       </div>
     </div>

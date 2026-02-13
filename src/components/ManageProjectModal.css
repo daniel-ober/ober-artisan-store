@@ -1,751 +1,871 @@
 /* ==========================================================================
-   Admin Project View Modal (mpm = Manage Project Modal)
-   All classes are mpm-* to avoid collisions.
+   ManageProjectModal.css (mpm = Manage Project Modal)
+   SINGLE SOURCE OF TRUTH — CLEANED / NO DUPES
+   Dark premium admin modal + optional light theme.
    ========================================================================== */
 
-/* ==== Fullscreen overlay + dialog ======================================== */
+/* ===========================
+   Theme tokens
+   =========================== */
 
-/* When both classes are present (your JSX), use these styles */
+:root {
+  --mpm-bg: rgba(10, 10, 12, 0.92);
+  --mpm-modal: rgba(18, 18, 22, 0.92);
+  --mpm-sidebar: rgba(14, 14, 18, 0.92);
+
+  --mpm-panel: rgba(255, 255, 255, 0.06);
+  --mpm-panel-2: rgba(255, 255, 255, 0.04);
+
+  --mpm-border: rgba(255, 255, 255, 0.10);
+  --mpm-border-2: rgba(255, 255, 255, 0.08);
+
+  --mpm-text: rgba(255, 255, 255, 0.92);
+  --mpm-text-dim: rgba(255, 255, 255, 0.70);
+  --mpm-text-dimmer: rgba(255, 255, 255, 0.55);
+
+  --mpm-accent: rgba(120, 170, 255, 0.95);
+  --mpm-accent-soft: rgba(120, 170, 255, 0.18);
+
+  --mpm-success: rgba(140, 255, 180, 0.65);
+  --mpm-warn: rgba(255, 215, 120, 0.70);
+  --mpm-danger: rgba(255, 120, 120, 0.70);
+}
+
+/* ===========================
+   Overlay + modal shell
+   =========================== */
+
 .manage-project-modal-overlay.mpm-overlay {
   position: fixed;
   inset: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.55);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 24px;
+  padding: 22px;
   z-index: 4000;
-  cursor: default;
 }
 
+/* NOTE: you currently mount with .mpm-light on the modal element.
+   We keep that class, but it can behave as either “dark shell + light main”
+   or true light theme based on the section below. */
 .manage-project-modal-content.mpm-modal {
-  position: relative;
-  background: #ffffff;
-  width: min(1200px, 92vw);
-  height: min(90vh, 900px);
-  border-radius: 12px;
+  width: min(1280px, 94vw);
+  height: min(90vh, 920px);
+  border-radius: 18px;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-  cursor: auto;
-  font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont,
-    sans-serif;
+
+  background: var(--mpm-modal);
+  border: 1px solid var(--mpm-border);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(12px);
+
+  font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--mpm-text);
 }
 
-/* Keep bare .mpm-overlay / .mpm-modal for safety if used elsewhere */
-.mpm-overlay {
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-  z-index: 4000;
-  cursor: default;
-}
-
-.mpm-modal {
-  position: relative;
-  background: #ffffff;
-  width: min(1200px, 92vw);
-  height: min(90vh, 900px);
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-  cursor: auto;
-  font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont,
-    sans-serif;
-}
-
-/* ==== Header / chips / close ============================================ */
+/* ===========================
+   Header
+   =========================== */
 
 .mpm-header {
-  position: sticky;
-  top: 0;
-  z-index: 1;
-  background: #ffffff;
+  padding: 14px 16px 12px;
+  border-bottom: 1px solid var(--mpm-border-2);
+  background: var(--mpm-bg);
+  backdrop-filter: blur(10px);
+}
+
+.mpm-header-top {
   display: flex;
-  gap: 0.75rem;
   align-items: center;
-  padding: 12px 16px;
-  padding-right: 68px; /* room for ✕ button */
-  border-bottom: 1px solid #ececec;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
 }
 
 .mpm-title {
-  font-size: 1.25rem;
-  font-weight: 700;
   margin: 0;
-  color: #111827;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
 }
 
 .mpm-close-btn {
-  position: absolute;
-  top: 10px;
-  right: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  border: 1px solid var(--mpm-border);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 36px;
-  width: 36px;
-  border-radius: 8px;
-  border: 1px solid #e5e7eb;
-  background: #ffffff;
-  color: #111827;
-  font-size: 18px;
-  line-height: 1;
-  cursor: pointer;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
-  transition: background 0.15s ease, border-color 0.15s ease,
-    transform 0.08s ease;
 }
 
 .mpm-close-btn:hover {
-  background: #f3f4f6;
-  border-color: #d1d5db;
-  transform: translateY(-0.5px);
+  background: rgba(255, 255, 255, 0.10);
 }
 
-/* ==== Header chips ======================================================= */
-
-.mpm-status-chip {
-  font-size: 0.95rem;
-  font-weight: 600;
-  padding: 0.35rem 0.65rem;
-  border-radius: 6px;
-  border: 1px solid #d1d5db;
-  background-color: #f9fafb;
-  color: #111827;
+/* chips row */
+.mpm-header-chips {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
 }
 
-.mpm-status-chip.initial-planning {
-  background-color: #fffbe6;
-  border-color: #ffe58f;
-  color: #8a6d00;
-}
+/* ===========================
+   Chips
+   =========================== */
 
-.mpm-status-chip.in-production {
-  background-color: #e6f7ff;
-  border-color: #91d5ff;
-  color: #096dd9;
-}
-
-.mpm-status-chip.finished {
-  background-color: #f6ffed;
-  border-color: #b7eb8f;
-  color: #389e0d;
-}
-
-/* Overall weighted progress chip */
-
-.mpm-overall-progress-chip {
-  font-size: 0.95rem;
-  font-weight: 600;
-  padding: 0.35rem 0.65rem;
-  border-radius: 6px;
-  border: 1px solid #d1d5db;
-  background: #eef2ff;
-  color: #1e3a8a;
-}
-
-/* Schedule chip (ahead / on pace / etc.) */
-
-.mpm-sched-chip {
-  font-size: 0.95rem;
-  font-weight: 600;
-  padding: 0.35rem 0.65rem;
-  border-radius: 6px;
-  border: 1px solid #d1d5db;
-  background: #f9fafb;
-  color: #111827;
-}
-
-.mpm-sched-chip.ahead {
-  background: #e6f7ff;
-  border-color: #91d5ff;
-  color: #096dd9;
-}
-
-.mpm-sched-chip.onpace {
-  background: #eefbf3;
-  border-color: #b7ebc6;
-  color: #237a3b;
-}
-
-.mpm-sched-chip.slightly {
-  background: #fff7e6;
-  border-color: #ffd591;
-  color: #8a5a00;
-}
-
-.mpm-sched-chip.risk {
-  background: #fff1f0;
-  border-color: #ffccc7;
-  color: #a8071a;
-}
-
-.mpm-sched-chip.finished {
-  background: #f6ffed;
-  border-color: #b7eb8f;
-  color: #389e0d;
-}
-
-/* Current-step progress chip */
-
+.mpm-status-chip,
+.mpm-overall-progress-chip,
+.mpm-sched-chip,
+.mpm-target-chip,
 .mpm-step-chip {
-  font-size: 0.95rem;
-  font-weight: 600;
-  padding: 0.35rem 0.65rem;
-  border-radius: 6px;
-  border: 1px solid #d1d5db;
-  background-color: #fffde7;
-  color: #333333;
-}
-
-.mpm-step-chip.mpm-step-0 {
-  background: #fffde7;
-  border-color: #fff7a8;
-  color: #8a6d00;
-}
-
-.mpm-step-chip.mpm-step-25 {
-  background: #fffbc2;
-  border-color: #ffe58f;
-  color: #856404;
-}
-
-.mpm-step-chip.mpm-step-50 {
-  background: #e6f7b2;
-  border-color: #c9e265;
-  color: #556b2f;
-}
-
-.mpm-step-chip.mpm-step-75 {
-  background: #d4f4a2;
-  border-color: #a0d911;
-  color: #3c763d;
-}
-
-.mpm-step-chip.mpm-step-100 {
-  background: #a0e87a;
-  border-color: #52c41a;
-  color: #1b5e20;
+  font-size: 13px;
   font-weight: 700;
-}
-
-/* Target chip */
-
-.mpm-target-chip {
-  font-size: 0.95rem;
-  font-weight: 600;
-  padding: 0.35rem 0.65rem;
-  border-radius: 6px;
-  border: 1px solid #e5e7eb;
-  background: #f3f4f6;
-  color: #111827;
+  padding: 7px 10px;
+  border-radius: 12px;
+  border: 1px solid var(--mpm-border);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--mpm-text);
+  white-space: nowrap;
 }
 
 .mpm-target-sub {
-  font-weight: 500;
-  opacity: 0.8;
-  margin-left: 0.25rem;
+  font-weight: 600;
+  opacity: 0.75;
+  margin-left: 6px;
 }
 
-/* Total time summary */
-
 .mpm-total-time-wrapper {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  white-space: nowrap;
-  font-weight: 600;
-  color: #111827;
+  gap: 8px;
+  padding: 7px 10px;
+  border-radius: 12px;
+  border: 1px solid var(--mpm-border);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--mpm-text);
 }
 
 .mpm-total-time-label {
-  font-size: 0.92rem;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--mpm-text-dim);
 }
 
 .mpm-total-time-value {
-  background: #eef2ff;
-  border: 1px solid #c7d2fe;
-  color: #1e3a8a;
-  padding: 0.25rem 0.5rem;
-  border-radius: 6px;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    'Liberation Mono', 'Courier New', monospace;
+  font-size: 13px;
+  font-weight: 800;
+  padding: 4px 8px;
+  border-radius: 10px;
+  border: 1px solid rgba(160, 190, 255, 0.35);
+  background: var(--mpm-accent-soft);
+  color: #fff;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
-/* ==== Bulk project actions (header row) ================================== */
+/* status variants */
+.mpm-status-chip.initial-planning {
+  border-color: rgba(255, 215, 120, 0.40);
+  background: rgba(255, 215, 120, 0.14);
+}
+
+.mpm-status-chip.in-production {
+  border-color: rgba(120, 170, 255, 0.40);
+  background: rgba(120, 170, 255, 0.14);
+}
+
+.mpm-status-chip.finished {
+  border-color: rgba(140, 255, 180, 0.35);
+  background: rgba(140, 255, 180, 0.12);
+}
+
+/* schedule variants */
+.mpm-sched-chip.ahead {
+  border-color: rgba(120, 170, 255, 0.45);
+  background: rgba(120, 170, 255, 0.16);
+}
+.mpm-sched-chip.onpace {
+  border-color: rgba(140, 255, 180, 0.35);
+  background: rgba(140, 255, 180, 0.12);
+}
+.mpm-sched-chip.slightly {
+  border-color: rgba(255, 215, 120, 0.40);
+  background: rgba(255, 215, 120, 0.14);
+}
+.mpm-sched-chip.risk {
+  border-color: rgba(255, 120, 120, 0.40);
+  background: rgba(255, 120, 120, 0.12);
+}
+.mpm-sched-chip.finished {
+  border-color: rgba(140, 255, 180, 0.35);
+  background: rgba(140, 255, 180, 0.12);
+}
+
+/* step progress chip variants */
+.mpm-step-chip.mpm-step-0,
+.mpm-step-chip.mpm-step-25 {
+  border-color: rgba(255, 215, 120, 0.40);
+  background: rgba(255, 215, 120, 0.14);
+}
+.mpm-step-chip.mpm-step-50 {
+  border-color: rgba(160, 190, 255, 0.35);
+  background: rgba(120, 170, 255, 0.14);
+}
+.mpm-step-chip.mpm-step-75 {
+  border-color: rgba(140, 255, 180, 0.35);
+  background: rgba(140, 255, 180, 0.12);
+}
+.mpm-step-chip.mpm-step-100 {
+  border-color: rgba(140, 255, 180, 0.40);
+  background: rgba(140, 255, 180, 0.15);
+}
+
+/* ===========================
+   Bulk buttons
+   =========================== */
 
 .mpm-bulk-project-actions {
-  width: 100%;
-  margin-top: 4px;
-  display: flex;
+  display: inline-flex;
+  gap: 8px;
   align-items: center;
-  gap: 0.5rem;
   flex-wrap: wrap;
 }
 
-/* Generic bulk action buttons (project + stage) */
-
 .mpm-bulk-btn {
+  height: 34px;
+  padding: 0 12px;
   border-radius: 999px;
-  border: 1px solid #0f172a;
-  background: #0f172a;
-  color: #ffffff;
-  padding: 0.35rem 0.9rem;
-  font-size: 0.85rem;
-  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.10);
+  color: #fff;
+  font-weight: 800;
+  font-size: 12.5px;
   cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.1);
-  transition: background 0.15s ease, border-color 0.15s ease,
-    transform 0.08s ease, box-shadow 0.15s ease;
 }
 
 .mpm-bulk-btn:hover {
-  background: #111827;
-  border-color: #020617;
-  transform: translateY(-0.5px);
-  box-shadow: 0 3px 8px rgba(15, 23, 42, 0.25);
+  background: rgba(255, 255, 255, 0.14);
 }
-
-.mpm-bulk-btn:disabled {
-  opacity: 0.55;
-  cursor: not-allowed;
-  box-shadow: none;
-}
-
-/* Destructive / reset variant */
 
 .mpm-bulk-btn-reset {
-  border-color: #b91c1c;
-  background: #fef2f2;
-  color: #991b1b;
+  border-color: rgba(255, 120, 120, 0.40);
+  background: rgba(255, 120, 120, 0.14);
 }
 
 .mpm-bulk-btn-reset:hover {
-  background: #fee2e2;
-  border-color: #7f1d1d;
-  color: #7f1d1d;
+  background: rgba(255, 120, 120, 0.18);
 }
 
-/* ==== Body layout ======================================================== */
-
-.mpm-body {
-  display: flex;
-  flex: 1;
-  overflow: hidden;
-}
-
-/* Left sidebar: overview + 10 steps + sub-steps */
-
-.mpm-sidebar {
-  width: 240px;
-  padding: 10px 8px;
-  border-right: 1px solid #e5e5e5;
-  background: #fafafa;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  overflow-y: auto;
-  font-size: 0.86rem;
-}
-
-/* "Overview" button at top of sidebar */
-.mpm-sidebar-overview-btn {
-  width: 100%;
-  text-align: left;
-  padding: 8px 10px;
-  border-radius: 8px;
-  border: none;
-  background: #f3f4f6;
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
-  color: #111827;
-}
-
-.mpm-sidebar-overview-btn:hover {
-  background: #e5edf5;
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08);
-}
-
-.mpm-sidebar-overview-btn.active {
-  background: #101827;
-  color: #ffffff;
-}
-
-/* Step list & sub-step list */
-
-.mpm-sidebar-step-list {
-  margin-top: 4px;
-  margin-left: 2px;
-  border-left: 2px solid rgba(15, 23, 42, 0.08);
-  padding-left: 6px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.mpm-sidebar-step-block {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-/* Root step button (e.g. "4. Raw Shell Creation") */
-.mpm-sidebar-step-root {
-  width: 100%;
-  text-align: left;
-  padding: 6px 8px;
-  border-radius: 6px;
-  border: none;
-  background: transparent;
-  font-size: 0.86rem;
-  color: #111827;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  transition: background 0.15s ease, color 0.15s ease, padding-left 0.15s ease;
-  line-height: 1.3;
-  white-space: normal;
-}
-
-.mpm-sidebar-step-root:hover {
-  background: #e5edf5;
-  padding-left: 12px;
-}
-
-.mpm-sidebar-step-root.active {
-  background: #0f172a;
-  color: #ffffff;
-  font-weight: 600;
-  padding-left: 14px;
-}
-
-/* Sub-step list (Initial consultation, Veneer application, etc.) */
-
-.mpm-sidebar-substep-list {
-  padding-left: 10px;
-  border-left: 1px dashed rgba(15, 23, 42, 0.15);
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.mpm-sidebar-substep-btn {
-  width: 100%;
-  text-align: left;
-  padding: 4px 8px;
-  border-radius: 6px;
-  border: none;
-  background: transparent;
-  font-size: 0.82rem;
-  color: #4b5563;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  transition: background 0.15s ease, color 0.15s ease, padding-left 0.15s ease;
-  white-space: normal;
-  line-height: 1.3;
-}
-
-.mpm-sidebar-substep-btn:hover {
-  background: #e5edf5;
-  padding-left: 12px;
-}
-
-.mpm-sidebar-substep-btn.active {
-  background: #0f172a;
-  color: #ffffff;
-  font-weight: 600;
-  padding-left: 14px;
-}
-
-/* Optional "locked" style if you re-enable locked steps later */
-.mpm-sidebar-step-root.locked,
-.mpm-sidebar-substep-btn.locked {
-  opacity: 0.55;
-  cursor: not-allowed;
-}
-
-/* Main content area (ProjectOverview / StepComponentTemplate) */
-
-.mpm-main {
-  flex: 1;
-  padding: 1.5rem;
-  overflow-y: auto;
-  background: #ffffff;
-}
-
-/* ==== Identifier + order row under header ================================ */
+/* ===========================
+   ID strip
+   =========================== */
 
 .mpm-id-strip {
-  padding: 8px 16px;
-  border-bottom: 1px solid #f3f4f6;
-  background: #fcfcff;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--mpm-border-2);
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .mpm-identifier-top {
   display: flex;
-  gap: 0.5rem;
+  gap: 8px;
   align-items: center;
   flex-wrap: wrap;
-  margin-bottom: 4px;
 }
 
 .mpm-identifier-chip {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  background: #f3f4f6;
-  border: 1px solid #e5e7eb;
-  padding: 0.25rem 0.5rem;
+  gap: 8px;
+  padding: 6px 10px;
   border-radius: 999px;
-  font-weight: 600;
-  color: #111827;
-}
-
-.mpm-identifier-primary {
-  background: #eef2ff;
-  border-color: #c7d2fe;
-  color: #111827;
+  border: 1px solid var(--mpm-border);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--mpm-text);
+  font-weight: 800;
+  font-size: 12.5px;
 }
 
 .mpm-identifier-email {
-  font-weight: 500;
-  color: #4b5563;
-  font-size: 0.85rem;
+  color: var(--mpm-text-dim);
+  font-weight: 700;
+  font-size: 12px;
 }
 
 .mpm-id-pill {
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 0.4rem;
   height: 18px;
+  padding: 0 7px;
   border-radius: 999px;
-  font-size: 0.7rem;
-  font-weight: 700;
-  background: #a855f7; /* purple-ish */
-  color: #ffffff;
-  margin-right: 0.35rem;
+  background: rgba(168, 85, 247, 0.45);
+  border: 1px solid rgba(168, 85, 247, 0.55);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 900;
+  align-items: center;
 }
 
 .mpm-id-row {
+  margin-top: 8px;
   display: flex;
+  gap: 8px;
   align-items: center;
-  gap: 0.4rem;
   flex-wrap: wrap;
+  color: var(--mpm-text-dim);
+  font-weight: 700;
 }
 
 .mpm-mono-id {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    'Liberation Mono', 'Courier New', monospace;
-  font-size: 0.85rem;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  padding: 0.15rem 0.4rem;
-  border-radius: 6px;
-  color: #0f172a;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 12px;
+  padding: 5px 8px;
+  border-radius: 10px;
+  border: 1px solid var(--mpm-border);
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
 }
 
 .mpm-copy-btn {
-  appearance: none;
-  border: 1px solid #d1d5db;
-  background: #ffffff;
-  padding: 0.2rem 0.5rem;
-  border-radius: 6px;
-  font-size: 0.8rem;
+  height: 28px;
+  padding: 0 10px;
+  border-radius: 10px;
+  border: 1px solid var(--mpm-border);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  font-weight: 800;
+  font-size: 12px;
   cursor: pointer;
 }
 
 .mpm-copy-btn:hover {
-  background: #f3f4f6;
+  background: rgba(255, 255, 255, 0.10);
 }
 
 .mpm-view-as-link {
   border: none;
   background: transparent;
   padding: 0;
-  margin: 0;
   cursor: pointer;
-  font-size: 0.9rem;
   display: inline-flex;
+  gap: 6px;
   align-items: baseline;
-  gap: 0.25rem;
+  font-weight: 800;
 }
 
 .mpm-view-as-label {
-  color: #4b5563; /* gray label: "View as Customer:" */
+  color: var(--mpm-text-dimmer);
 }
 
 .mpm-view-as-anchor {
-  color: #0a66c2; /* blue link */
+  color: rgba(140, 190, 255, 0.95);
   text-decoration: underline;
-  font-weight: 500;
 }
 
 .mpm-view-as-link:hover .mpm-view-as-anchor {
-  text-decoration: underline;
-  filter: brightness(0.9);
+  filter: brightness(0.92);
 }
 
-/* ==== Stage-level bulk actions (inside main) ============================= */
+/* ===========================
+   Body layout
+   =========================== */
 
+.mpm-body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* ===========================
+   Sidebar
+   =========================== */
+
+.mpm-sidebar {
+  background: var(--mpm-sidebar);
+  border-right: 1px solid var(--mpm-border-2);
+  padding: 12px;
+  overflow-y: auto;
+}
+
+.mpm-sidebar-overview-btn {
+  width: 100%;
+  text-align: left;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid var(--mpm-border);
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.mpm-sidebar-overview-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.mpm-sidebar-overview-btn.active {
+  border-color: rgba(120, 170, 255, 0.45);
+  background: rgba(120, 170, 255, 0.14);
+}
+
+.mpm-sidebar-step-list {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mpm-sidebar-step-block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mpm-sidebar-step-root {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 10px;
+  border-radius: 14px;
+  border: 1px solid var(--mpm-border);
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(255, 255, 255, 0.92);
+  cursor: pointer;
+}
+
+.mpm-sidebar-step-root:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.mpm-sidebar-step-root.active {
+  border-color: rgba(120, 170, 255, 0.45);
+  background: rgba(120, 170, 255, 0.14);
+}
+
+.mpm-sidebar-step-text {
+  font-weight: 900;
+  font-size: 12.5px;
+  line-height: 1.2;
+}
+
+.mpm-sidebar-substep-list {
+  padding-left: 10px;
+  border-left: 1px solid rgba(255, 255, 255, 0.10);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mpm-sidebar-substep-btn {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 9px 10px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.78);
+  cursor: pointer;
+}
+
+.mpm-sidebar-substep-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.mpm-sidebar-substep-btn.active {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.10);
+  color: #fff;
+}
+
+/* optional checkpoint mini-list */
+.mpm-sidebar-task-list {
+  margin: 6px 0 8px 22px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.mpm-sidebar-task-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 4px 0;
+}
+
+.mpm-sidebar-task-text {
+  color: rgba(255, 255, 255, 0.70);
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+/* ===========================
+   Main content area
+   =========================== */
+
+.mpm-main {
+  overflow-y: auto;
+  padding: 16px;
+  background: #f1f3f8; /* your current “light canvas” behind content */
+  color: #111;         /* baseline readable in the main area */
+}
+
+/* The surface “card” that wraps whatever the active view renders */
+.mpm-surface {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.10);
+  color: #111;
+}
+
+/* Bulk step actions */
 .mpm-bulk-step-actions {
   display: flex;
+  gap: 10px;
   align-items: center;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
+  padding: 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  background: rgba(0, 0, 0, 0.03);
+  margin-bottom: 12px;
 }
 
 .mpm-bulk-step-label {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #4b5563;
+  color: rgba(0, 0, 0, 0.65);
+  font-weight: 900;
+  font-size: 12.5px;
 }
 
-/* ==== Overview / Project details cards (scoped to modal) ================= */
+/* Status pips */
+.mpm-pip {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  display: inline-block;
+  flex: 0 0 auto;
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  background: rgba(0, 0, 0, 0.06);
+}
 
-.mpm-main .project-details,
-.mpm-main .customer-details {
-  background: #fcfcfc;
-  padding: 1.1rem 1.25rem;
-  border: 1px solid #e7e7e7;
+.mpm-pip-done {
+  background: rgba(140, 255, 180, 0.85);
+  border-color: rgba(140, 255, 180, 0.55);
+}
+
+.mpm-pip-doing {
+  background: rgba(120, 170, 255, 0.85);
+  border-color: rgba(120, 170, 255, 0.55);
+}
+
+.mpm-pip-todo {
+  background: rgba(0, 0, 0, 0.10);
+  border-color: rgba(0, 0, 0, 0.10);
+}
+
+.mpm-pip-task {
+  width: 8px;
+  height: 8px;
+}
+
+/* ===========================
+   Inputs/buttons inside main surface
+   =========================== */
+
+.manage-project-modal-content.mpm-modal .mpm-main input,
+.manage-project-modal-content.mpm-modal .mpm-main select,
+.manage-project-modal-content.mpm-modal .mpm-main textarea {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  color: #111;
+  border-radius: 12px;
+  outline: none;
+}
+
+.manage-project-modal-content.mpm-modal .mpm-main input::placeholder,
+.manage-project-modal-content.mpm-modal .mpm-main textarea::placeholder {
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.manage-project-modal-content.mpm-modal .mpm-main input:focus,
+.manage-project-modal-content.mpm-modal .mpm-main select:focus,
+.manage-project-modal-content.mpm-modal .mpm-main textarea:focus {
+  border-color: rgba(120, 170, 255, 0.55);
+  box-shadow: 0 0 0 3px rgba(120, 170, 255, 0.18);
+}
+
+/* Buttons inside surface */
+.manage-project-modal-content.mpm-modal .mpm-main .mpm-surface button {
+  background: rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  color: #111;
   border-radius: 10px;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: #111827;
-}
-
-.mpm-main .current-status-label {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #111827;
-  background: #f3f4f6;
-  padding: 0.3rem 0.6rem;
-  border-radius: 6px;
-  border: 1px solid #e5e7eb;
-}
-
-/* Inputs / form widgets used inside modal */
-
-.mpm-main input,
-.mpm-main select,
-.mpm-main textarea {
-  width: 100%;
-  padding: 0.55rem 0.6rem;
-  border-radius: 8px;
-  border: 1px solid #d1d5db;
-  font-size: 0.95rem;
-  background: #ffffff;
-  color: #111827;
-}
-
-.mpm-main textarea {
-  resize: vertical;
-  min-height: 92px;
-}
-
-.mpm-main input:focus,
-.mpm-main select:focus,
-.mpm-main textarea:focus {
-  outline: 3px solid rgba(59, 130, 246, 0.25);
-  border-color: #60a5fa;
-}
-
-/* Buttons used in overview section */
-
-.mpm-main .save-button,
-.mpm-main .edit-button {
-  margin-top: 1.25rem;
-  padding: 0.65rem 1.2rem;
-  font-weight: 700;
-  border: 1px solid #111827;
-  background: #111827;
-  color: #ffffff;
-  border-radius: 8px;
+  font-weight: 800;
   cursor: pointer;
-  transition: transform 0.05s ease, background-color 0.15s ease;
 }
 
-.mpm-main .save-button:hover,
-.mpm-main .edit-button:hover {
-  background: #333333;
+.manage-project-modal-content.mpm-modal .mpm-main .mpm-surface button:hover {
+  background: rgba(0, 0, 0, 0.09);
 }
 
-.mpm-main .save-button:active,
-.mpm-main .edit-button:active {
-  transform: translateY(1px);
+/* ===========================
+   ✅ REAL FIX: StepComponentTemplate styles INSIDE modal
+   We style the step template directly instead of random scope nukes.
+   =========================== */
+
+/* container */
+.manage-project-modal-content.mpm-modal .mpm-main .step-container {
+  padding: 0;                 /* surface already has padding */
+  max-width: none;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  color: #111;
 }
 
-/* Labels + links */
-
-/* Generic labels in the Overview only – do NOT affect checkpoint rows */
-.mpm-main label:not(.mpm-check-row) {
-  display: block;
-  margin-top: 1.1rem;
-  font-weight: 600;
-  color: #111827;
+/* title */
+.manage-project-modal-content.mpm-modal .mpm-main .step-title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+  color: #111;
 }
 
-.mpm-main a {
-  color: #0a66c2;
+/* total time */
+.manage-project-modal-content.mpm-modal .mpm-main .step-total-time {
+  margin: 0 0 12px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.70);
 }
 
-.mpm-main a:hover {
+/* table */
+.manage-project-modal-content.mpm-modal .mpm-main .step-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.manage-project-modal-content.mpm-modal .mpm-main .step-table th,
+.manage-project-modal-content.mpm-modal .mpm-main .step-table td {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 12px 12px;
+  vertical-align: top;
+  font-size: 0.95rem;
+  color: #111;
+}
+
+.manage-project-modal-content.mpm-modal .mpm-main .step-table th {
+  text-align: left;
+  font-weight: 900;
+  color: rgba(0, 0, 0, 0.70);
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.manage-project-modal-content.mpm-modal .mpm-main .step-table td:first-child,
+.manage-project-modal-content.mpm-modal .mpm-main .step-table th:first-child {
+  width: 40px;
+  text-align: center;
+}
+
+/* checkbox */
+.manage-project-modal-content.mpm-modal .mpm-main .step-table input[type="checkbox"] {
+  transform: scale(1.15);
+  accent-color: rgba(120, 170, 255, 0.95);
+  cursor: pointer;
+}
+
+/* ensure labels/spans next to checkbox are always visible */
+.manage-project-modal-content.mpm-modal .mpm-main .step-table label,
+.manage-project-modal-content.mpm-modal .mpm-main .step-table span,
+.manage-project-modal-content.mpm-modal .mpm-main .step-table p {
+  color: #111;
+  opacity: 1;
+}
+
+/* selection highlight (so “highlighted text” is visible) */
+.manage-project-modal-content.mpm-modal .mpm-main ::selection {
+  background: rgba(120, 170, 255, 0.25);
+  color: #111;
+}
+
+/* timer buttons */
+.manage-project-modal-content.mpm-modal .mpm-main .timer-toggle {
+  all: unset;
+  padding: 0.42rem 0.85rem;
+  border-radius: 10px;
+  font-weight: 900;
+  cursor: pointer;
+  font-size: 0.85rem;
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  background: rgba(0, 0, 0, 0.06);
+  color: #111;
+}
+
+.manage-project-modal-content.mpm-modal .mpm-main .timer-toggle:hover {
+  background: rgba(0, 0, 0, 0.09);
+}
+
+.manage-project-modal-content.mpm-modal .mpm-main .timer-toggle.start {
+  background: rgba(111, 224, 181, 0.65);
+  border-color: rgba(111, 224, 181, 0.85);
+  color: #111;
+}
+
+.manage-project-modal-content.mpm-modal .mpm-main .timer-toggle.stop {
+  background: rgba(244, 92, 92, 0.85);
+  border-color: rgba(244, 92, 92, 0.95);
+  color: #fff;
+}
+
+/* clear time */
+.manage-project-modal-content.mpm-modal .mpm-main .clear-time-btn {
+  all: unset;
+  font-size: 0.78rem;
+  color: rgba(0, 0, 0, 0.55);
+  cursor: pointer;
+  margin-top: 2px;
+}
+
+.manage-project-modal-content.mpm-modal .mpm-main .clear-time-btn:hover {
   text-decoration: underline;
+  color: rgba(244, 92, 92, 0.95);
 }
 
-/* Labels only inside the Overview pane – do NOT touch step checkpoints */
-.project-overview-content label {
-  display: block;
-  margin-top: 1.1rem;
-  font-weight: 600;
-  color: #111827;
+/* manual time inputs */
+.manage-project-modal-content.mpm-modal .mpm-main .manual-time-input {
+  width: 34px;
+  font-size: 0.85rem;
+  padding: 4px 6px;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  border-radius: 8px;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  background: #fff;
+  color: #111;
 }
 
-/* ==== Mobile step selector ============================================== */
+.manage-project-modal-content.mpm-modal .mpm-main .time-input-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.manage-project-modal-content.mpm-modal .mpm-main .time-input-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.manage-project-modal-content.mpm-modal .mpm-main .time-input-actions button {
+  all: unset;
+  font-size: 0.82rem;
+  padding: 6px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  background: rgba(111, 224, 181, 0.70);
+  font-weight: 900;
+  color: #111;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.manage-project-modal-content.mpm-modal .mpm-main .time-input-actions button:hover {
+  background: rgba(111, 224, 181, 0.85);
+}
+
+.manage-project-modal-content.mpm-modal .mpm-main .time-input-actions button.cancel-btn {
+  background: rgba(0, 0, 0, 0.06);
+  color: #111;
+}
+
+.manage-project-modal-content.mpm-modal .mpm-main .time-input-actions button.cancel-btn:hover {
+  background: rgba(0, 0, 0, 0.09);
+}
+
+/* IMPORTANT: do NOT fade completed rows – keep readable */
+.manage-project-modal-content.mpm-modal .mpm-main .completed,
+.manage-project-modal-content.mpm-modal .mpm-main [class*="completed"],
+.manage-project-modal-content.mpm-modal .mpm-main [class*="Complete"] {
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+/* ===========================
+   MUI (only minimal, no nukes)
+   =========================== */
+
+.manage-project-modal-content.mpm-modal .mpm-main .MuiPaper-root {
+  background: #fff;
+  color: #111;
+  border: 1px solid rgba(0, 0, 0, 0.10);
+}
+
+.manage-project-modal-content.mpm-modal .mpm-main .MuiFormLabel-root,
+.manage-project-modal-content.mpm-modal .mpm-main .MuiInputLabel-root,
+.manage-project-modal-content.mpm-modal .mpm-main .MuiFormHelperText-root {
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.manage-project-modal-content.mpm-modal .mpm-main .MuiOutlinedInput-notchedOutline {
+  border-color: rgba(0, 0, 0, 0.14);
+}
+
+/* ===========================
+   Mobile selector
+   =========================== */
 
 .mpm-mobile-phase-selector-wrapper {
   display: none;
-  padding: 0.75rem 1rem 0;
-  background: #fafafa;
-  z-index: 10;
 }
 
-.mpm-phase-selector-dropdown {
-  width: 100%;
-  padding: 0.55rem 0.9rem;
-  font-size: 1rem;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  background: #ffffff;
-  color: #111827;
-  appearance: none;
-  text-align: center;
-  text-align-last: center;
+@media (max-width: 920px) {
+  .mpm-body {
+    grid-template-columns: 1fr;
+  }
+
+  .mpm-sidebar {
+    display: none;
+  }
+
+  .mpm-mobile-phase-selector-wrapper {
+    display: block;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--mpm-border-2);
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .mpm-phase-selector-dropdown {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 14px;
+    border: 1px solid var(--mpm-border);
+    background: rgba(255, 255, 255, 0.06);
+    color: #fff;
+    font-weight: 800;
+  }
 }
 
-/* ==== Scrollbars (desktop only) ========================================= */
+/* ===========================
+   Scrollbars
+   =========================== */
 
 @media (hover: hover) and (pointer: fine) {
   .mpm-sidebar::-webkit-scrollbar,
@@ -756,40 +876,64 @@
 
   .mpm-sidebar::-webkit-scrollbar-thumb,
   .mpm-main::-webkit-scrollbar-thumb {
-    background: #d1d5db;
+    background: rgba(0, 0, 0, 0.18);
     border-radius: 10px;
-    border: 2px solid #f5f5f5;
+    border: 2px solid rgba(255, 255, 255, 0.35);
   }
 
   .mpm-sidebar::-webkit-scrollbar-thumb:hover,
   .mpm-main::-webkit-scrollbar-thumb:hover {
-    background: #9ca3af;
+    background: rgba(0, 0, 0, 0.26);
   }
 }
 
-/* ==== Responsive tweaks ================================================== */
+/* ===========================
+   Optional: TRUE light theme mode (if you ever use it)
+   If your modal always uses mpm-light, you can ignore this.
+   =========================== */
 
-@media (max-width: 1024px) {
-  .mpm-header {
-    padding-right: 60px;
-  }
+.manage-project-modal-content.mpm-modal.mpm-light {
+  /* keep your current look (dark shell + light main) */
 }
 
-@media (max-width: 768px) {
-  .mpm-sidebar {
-    display: none;
-  }
+/* If you ever want FULL light modal, swap class to .mpm-modal.mpm-true-light
+   and use these styles. */
+.manage-project-modal-content.mpm-modal.mpm-true-light {
+  background: #fff;
+  border-color: rgba(0, 0, 0, 0.10);
+  color: #111;
+}
 
-  .mpm-mobile-phase-selector-wrapper {
-    display: block;
-  }
+.manage-project-modal-content.mpm-modal.mpm-true-light .mpm-header,
+.manage-project-modal-content.mpm-modal.mpm-true-light .mpm-id-strip {
+  background: #fff;
+  border-color: rgba(0, 0, 0, 0.10);
+}
 
-  .mpm-body {
-    flex-direction: column;
-    overflow-y: auto;
-  }
+.manage-project-modal-content.mpm-modal.mpm-true-light .mpm-title {
+  color: #111;
+}
 
-  .mpm-main {
-    padding: 1rem;
-  }
+.manage-project-modal-content.mpm-modal.mpm-true-light .mpm-close-btn {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.10);
+  color: #111;
+}
+
+.manage-project-modal-content.mpm-modal.mpm-true-light .mpm-status-chip,
+.manage-project-modal-content.mpm-modal.mpm-true-light .mpm-overall-progress-chip,
+.manage-project-modal-content.mpm-modal.mpm-true-light .mpm-sched-chip,
+.manage-project-modal-content.mpm-modal.mpm-true-light .mpm-target-chip,
+.manage-project-modal-content.mpm-modal.mpm-true-light .mpm-step-chip,
+.manage-project-modal-content.mpm-modal.mpm-true-light .mpm-total-time-wrapper,
+.manage-project-modal-content.mpm-modal.mpm-true-light .mpm-identifier-chip,
+.manage-project-modal-content.mpm-modal.mpm-true-light .mpm-mono-id {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.10);
+  color: #111;
+}
+
+.manage-project-modal-content.mpm-modal.mpm-true-light .mpm-sidebar {
+  background: #fff;
+  border-right-color: rgba(0, 0, 0, 0.10);
 }

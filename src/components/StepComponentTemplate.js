@@ -80,7 +80,6 @@ export const CHECKPOINTS_BY_ITEM_ID = {
    * 1. Discovery & Design
    * -------------------------------------------------------- */
 
-  // 1.1 Initial consultation
   discoveryDesign_1: [
     'Capture drummer goals (genres, feel, tonal preferences)',
     'Capture ergonomic considerations (arthritis, hand fatigue, stick choice)',
@@ -90,7 +89,6 @@ export const CHECKPOINTS_BY_ITEM_ID = {
     'Confirm budget & timeline',
   ],
 
-  // 1.2 Build proposal
   discoveryDesign_2: [
     'Generate full written build spec',
     'Select primary wood species',
@@ -110,14 +108,12 @@ export const CHECKPOINTS_BY_ITEM_ID = {
    * 2. Commitment & Portal Setup
    * -------------------------------------------------------- */
 
-  // 2.1 Payment processing
   commitmentPortal_1: [
     'Payment Link sent to customer',
     'Deposit received / payment confirmed',
     'Order status updated to “In Progress”',
   ],
 
-  // 2.2 Portal access setup
   commitmentPortal_2: [
     'Create customer portal record',
     'Link project to SoundLegend dashboard',
@@ -129,7 +125,6 @@ export const CHECKPOINTS_BY_ITEM_ID = {
    * 3. Wood & Vision Lock-In
    * -------------------------------------------------------- */
 
-  // 3.1 Wood selection
   woodVisionLockIn_1: [
     'Select raw boards for shell',
     'Check moisture content (MC% reading)',
@@ -143,7 +138,6 @@ export const CHECKPOINTS_BY_ITEM_ID = {
     'Record moisture reading (%)',
   ],
 
-  // 3.2 Early mockups
   woodVisionLockIn_2: [
     'Create first-round visual mockups (finish / veneer / hardware)',
     'Explore 2–3 finish concepts with different accents',
@@ -153,7 +147,6 @@ export const CHECKPOINTS_BY_ITEM_ID = {
     'Capture revision notes for chosen direction',
   ],
 
-  // 3.3 Pre-build measuring & prep
   woodVisionLockIn_3: [
     'Veneer integration test (visual + adhesion plan)',
     'Shell color test under natural light',
@@ -167,7 +160,6 @@ export const CHECKPOINTS_BY_ITEM_ID = {
    * 4. Raw Shell Creation
    * -------------------------------------------------------- */
 
-  // 4.1 Cut stave blocks to size
   rawShellCreation_1: [
     'Confirm grain orientation for each stave block',
     'Ensure all staves are uniform in dimension',
@@ -177,7 +169,6 @@ export const CHECKPOINTS_BY_ITEM_ID = {
     'Measure block thickness',
   ],
 
-  // 4.2 Cut stave bevels
   rawShellCreation_2: [
     'Inspect for tear-out after bevel cuts',
     'Test fit two or more staves for perfect mating joints',
@@ -185,7 +176,6 @@ export const CHECKPOINTS_BY_ITEM_ID = {
     'Compare width of inner vs outer face to expected values',
   ],
 
-  // 4.3 Pre-glue test (dry-fit)
   rawShellCreation_3: [
     'Perform full dry-fit circle test',
     'Check gaps between staves visually and by feel',
@@ -194,7 +184,6 @@ export const CHECKPOINTS_BY_ITEM_ID = {
     'Evaluate joint tightness at multiple points',
   ],
 
-  // 4.4 Glue-up & clamping
   rawShellCreation_4: [
     'Verify glue spread is uniform on all mating surfaces',
     'Confirm clamp pressure is even around the circle',
@@ -204,14 +193,12 @@ export const CHECKPOINTS_BY_ITEM_ID = {
     'Check shell height uniformity at multiple locations',
   ],
 
-  // 4.5 Glue curing
   rawShellCreation_5: [
     'Confirm minimum cure time has been met',
     'Remove shell from clamps carefully',
     'Perform visual inspection of all glue joints',
   ],
 
-  // 4.6 Exterior milling setup
   rawShellCreation_6: [
     'Verify exterior milling sled or lathe jig is square and secure',
     'Confirm shell is centered in jig with even overhang',
@@ -219,7 +206,6 @@ export const CHECKPOINTS_BY_ITEM_ID = {
     'Run a light test pass to check for chatter or vibration',
   ],
 
-  // 4.7 Mill exterior diameter
   rawShellCreation_7: [
     'Take multiple shallow passes to reach target diameter',
     'Check diameter at 12 / 3 / 6 / 9 o’clock positions',
@@ -227,7 +213,6 @@ export const CHECKPOINTS_BY_ITEM_ID = {
     'Inspect exterior surface for tool marks or tear-out',
   ],
 
-  // 4.8 Outer bevel reinforcement
   rawShellCreation_8: [
     'Apply thin CA or epoxy to outer bevel region',
     'Confirm adhesive wicks evenly along all joints',
@@ -239,7 +224,6 @@ export const CHECKPOINTS_BY_ITEM_ID = {
    * 5. Shell Trueing & Torch Tune
    * -------------------------------------------------------- */
 
-  // 5.1 Sanding prep (for veneer + interior)
   shellTrueingTorchTune_1: [
     'Perform 80–120 grit exterior prep',
     'Remove high spots or ridges on exterior',
@@ -249,14 +233,12 @@ export const CHECKPOINTS_BY_ITEM_ID = {
     'Confirm shell is ready for torching and veneer',
   ],
 
-  // 5.2 Interior milling setup
   shellTrueingTorchTune_2: [
     'Verify interior sled / jig alignment',
     'Set interior cutter height and depth of cut',
     'Index shell correctly on interior jig',
   ],
 
-  // 5.3 Mill interior thickness
   shellTrueingTorchTune_3: [
     'Inspect shell exterior for smoothness after passes',
     'Confirm glue lines are exposed and visible',
@@ -265,7 +247,6 @@ export const CHECKPOINTS_BY_ITEM_ID = {
     'Measure outer wall thickness at multiple points',
   ],
 
-  // 5.4 Inner bevel reinforcement
   shellTrueingTorchTune_4: [
     'Inspect interior surface for smoothness',
     'Confirm no significant tear-out on interior',
@@ -276,7 +257,6 @@ export const CHECKPOINTS_BY_ITEM_ID = {
     'Check inner roundness variance',
   ],
 
-  // 5.5 Sanding prep (interior)
   shellTrueingTorchTune_5: [
     'Apply thin CA glue to outer bevel region',
     'Inspect penetration of CA along joints',
@@ -286,7 +266,6 @@ export const CHECKPOINTS_BY_ITEM_ID = {
     'Sand back inner bevel smooth after cure',
   ],
 
-  // 5.6 Original torch tune process
   shellTrueingTorchTune_6: [
     'Ensure flame pattern is even around shell',
     'Verify grain “pop” without overburning',
@@ -297,7 +276,6 @@ export const CHECKPOINTS_BY_ITEM_ID = {
    * 6. Exterior Art & Finish
    * -------------------------------------------------------- */
 
-  // 6.1 Veneer application
   exteriorArtFinish_1: [
     'Verify contact cement coverage on shell and veneer',
     'Roll veneer onto shell with even pressure',
@@ -308,7 +286,6 @@ export const CHECKPOINTS_BY_ITEM_ID = {
     'Observe any veneer creep or slippage after set time',
   ],
 
-  // 6.2 Under-spray aesthetic work
   exteriorArtFinish_2: [
     'Place acrylic fills in natural stress lines (not random streaks)',
     'Balance torch accents with overall design',
@@ -316,7 +293,6 @@ export const CHECKPOINTS_BY_ITEM_ID = {
     'Sand shell to 320–400 grit before finish',
   ],
 
-  // 6.3 Pre-finish full shell inspection
   exteriorArtFinish_3: [
     'Verify shell is perfectly smooth to the touch',
     'Confirm no veneer overhang at edges',
@@ -324,14 +300,12 @@ export const CHECKPOINTS_BY_ITEM_ID = {
     'Mask edges as needed before spray',
   ],
 
-  // 6.4 Badge + logo work
   exteriorArtFinish_4: [
     'Align outer badge at correct vertical and rotational position',
     'Place inner badge in correct location',
     'Confirm adhesives or fasteners have set properly',
   ],
 
-  // 6.5 Spray finishing
   exteriorArtFinish_5: [
     'Spray even, controlled coats (no heavy spots)',
     'Check flashing between coats and eliminate as needed',
@@ -341,7 +315,6 @@ export const CHECKPOINTS_BY_ITEM_ID = {
     'Visually inspect surface reflection consistency',
   ],
 
-  // 6.6 Full de-gassing of chemicals
   exteriorArtFinish_6: [
     'Place shell in dust-controlled area for final cure',
     'Observe finish for shrink-back or witness lines during cure',
@@ -349,14 +322,12 @@ export const CHECKPOINTS_BY_ITEM_ID = {
     'Confirm finish is fully hardened before level sanding',
   ],
 
-  // 6.7 Final sanding
   exteriorArtFinish_7: [
     'Level sand to remove minor orange peel and dust nibs',
     'Avoid sanding through veneer or color coats',
     'Inspect surface under raking light for flatness and defects',
   ],
 
-  // 6.8 Polishing
   exteriorArtFinish_8: [
     'Buff shell to final gloss or satin sheen',
     'Check reflections for waves or swirl marks',
@@ -367,7 +338,6 @@ export const CHECKPOINTS_BY_ITEM_ID = {
    * 7. Edges & Snare Beds
    * -------------------------------------------------------- */
 
-  // 7.1 Bearing edges
   edgesSnareBeds_1: [
     'Balance inner and outer edge profiles',
     'Confirm 45° cutting surface with intended roundover',
@@ -377,7 +347,6 @@ export const CHECKPOINTS_BY_ITEM_ID = {
     'Evaluate cutting surface smoothness',
   ],
 
-  // 7.2 Snare beds
   edgesSnareBeds_2: [
     'Confirm left / right bed symmetry',
     'Check smooth transitions into and out of snare beds',
@@ -387,10 +356,9 @@ export const CHECKPOINTS_BY_ITEM_ID = {
   ],
 
   /* ----------------------------------------------------------
-   * 8. Hardware & Assembly  (now per sub-step)
+   * 8. Hardware & Assembly
    * -------------------------------------------------------- */
 
-  // 8.1 Install all lugs, throw, butt plate
   hardwareAssembly_1: [
     'Lay out lug, throw, and butt locations relative to snare beds',
     'Dry-fit hardware to ensure hole pattern alignment',
@@ -400,7 +368,6 @@ export const CHECKPOINTS_BY_ITEM_ID = {
     'Confirm all mounting hardware seats flush to shell',
   ],
 
-  // 8.2 Install air vent grommet
   hardwareAssembly_2: [
     'Verify vent hole is drilled clean and to correct diameter',
     'Test-fit vent grommet before final seating',
@@ -408,7 +375,6 @@ export const CHECKPOINTS_BY_ITEM_ID = {
     'Confirm no rattle or play in vent hardware',
   ],
 
-  // 8.3 Verify hardware alignment
   hardwareAssembly_3: [
     'Sight down shell to confirm lug rows track true with edges',
     'Check throw and butt alignment relative to snare beds',
@@ -416,7 +382,6 @@ export const CHECKPOINTS_BY_ITEM_ID = {
     'Confirm hoop line clears all hardware at target head heights',
   ],
 
-  // 8.4 Torque hardware as needed
   hardwareAssembly_4: [
     'Torque lug mounting screws evenly around shell',
     'Verify throw-off mounting screws are snug but not over-tightened',
@@ -424,7 +389,6 @@ export const CHECKPOINTS_BY_ITEM_ID = {
     'Re-check for spin-outs or stripped holes',
   ],
 
-  // 8.5 Attach badges / brand markings
   hardwareAssembly_5: [
     'Clean shell surface before badge installation',
     'Align badge with design reference (vertical center, rotation)',
@@ -432,14 +396,12 @@ export const CHECKPOINTS_BY_ITEM_ID = {
     'Confirm badge matches hardware finish (chrome / black nickel / brass)',
   ],
 
-  // 8.6 Inspect for rattle or loose fit
   hardwareAssembly_6: [
     'Perform dry shake test (no heads) to listen for loose parts',
     'Tap around shell and hardware with fingertip / stick for micro-rattles',
     'Re-torque any suspect fasteners and repeat test',
   ],
 
-  // 8.7 Punch leather gaskets (if applicable)
   hardwareAssembly_7: [
     'Lay out gasket pattern to match lug and hoop footprint',
     'Punch clean holes with no tearing, fray, or thin spots',
@@ -447,7 +409,6 @@ export const CHECKPOINTS_BY_ITEM_ID = {
     'Confirm gasket thickness does not interfere with tuning range',
   ],
 
-  // 8.8 Install lugs, throw, butt plate, air vent (full hardware set)
   hardwareAssembly_8: [
     'Install full hardware set with gaskets / washers as designed',
     'Confirm vent grommet remains centered after all hardware is on',
@@ -455,7 +416,6 @@ export const CHECKPOINTS_BY_ITEM_ID = {
     'Spin shell slowly to ensure even hardware spacing visually',
   ],
 
-  // 8.9 Torque hardware (final pass)
   hardwareAssembly_9: [
     'Perform final torque pass on all lug screws',
     'Perform final torque pass on throw / butt hardware',
@@ -463,14 +423,12 @@ export const CHECKPOINTS_BY_ITEM_ID = {
     'Re-check shell for rattles after torquing',
   ],
 
-  // 8.10 Inspect for rattle/loose fit (heads off)
   hardwareAssembly_10: [
     'Spin and shake shell with full hardware but no heads',
     'Confirm no hardware interferes with rim or head plane',
     'Check snare bed area for any hardware clearance issues',
   ],
 
-  // 8.11 Professionally photograph shell before heads/hoops
   hardwareAssembly_11: [
     'Clean shell and hardware (no fingerprints or dust)',
     'Capture hero angle of raw shell + hardware',
@@ -479,7 +437,6 @@ export const CHECKPOINTS_BY_ITEM_ID = {
     'Back up photos to project media / Storage',
   ],
 
-  // 8.12 Hardware + head assembly
   hardwareAssembly_12: [
     'Install batter and resonant heads with correct orientation',
     'Seat heads evenly using gradual star-pattern tensioning',
@@ -493,7 +450,6 @@ export const CHECKPOINTS_BY_ITEM_ID = {
    * 9. Legacy Tuning & Media
    * -------------------------------------------------------- */
 
-  // 9.1 Legacy resonance analysis
   legacyTuningMedia_1: [
     'Capture fundamental pitch (3-hit average)',
     'Identify low sweet spot',
@@ -503,7 +459,6 @@ export const CHECKPOINTS_BY_ITEM_ID = {
     'Evaluate overtone suppression / control score',
   ],
 
-  // 9.2 Legacy tuning
   legacyTuningMedia_2: [
     'Evaluate sustain at various tunings',
     'Check overtones across the tuning range',
@@ -514,7 +469,6 @@ export const CHECKPOINTS_BY_ITEM_ID = {
     'Document adjacent-high tuning reference',
   ],
 
-  // 9.3 Professional photos
   legacyTuningMedia_3: [
     'Capture hero shot',
     'Capture left-angle shot',
@@ -526,7 +480,6 @@ export const CHECKPOINTS_BY_ITEM_ID = {
     'Capture 360 flat / horizontal series',
   ],
 
-  // 9.4 Studio Legacy audio
   legacyTuningMedia_4: [
     'Record loose tuning examples',
     'Record medium tuning examples',
@@ -540,7 +493,6 @@ export const CHECKPOINTS_BY_ITEM_ID = {
    * 10. Final QA, Packaging & Delivery
    * -------------------------------------------------------- */
 
-  // 10.1 NTAG authentication
   finalQAPackagingDelivery_1: [
     'Capture NFC chip UID',
     'Create or update Firestore entry for tag',
@@ -550,7 +502,6 @@ export const CHECKPOINTS_BY_ITEM_ID = {
     'Test scan on Android',
   ],
 
-  // 10.2 Final cleaning
   finalQAPackagingDelivery_2: [
     'Remove fingerprints and smudges from shell and hardware',
     'Polish hoops and hardware to final shine',
@@ -560,7 +511,6 @@ export const CHECKPOINTS_BY_ITEM_ID = {
     'Perform final sound check and Vault verification',
   ],
 
-  // 10.3 Packaging
   finalQAPackagingDelivery_3: [
     'Apply inner wrap / protective layer to drum',
     'Add moisture barrier as needed',
@@ -573,13 +523,38 @@ export const CHECKPOINTS_BY_ITEM_ID = {
     'Apply shipping label, insurance, and signature required',
   ],
 
-  // 10.4 Delivery confirmation
   finalQAPackagingDelivery_4: [
     'Confirm tracking number is active and correct',
     'Notify customer with tracking details',
     'Schedule day-after-arrival check-in',
     'Schedule reveal date or follow-up session if desired',
   ],
+};
+
+// Map whatever "stepKey" your app uses → the checkpoint prefix used in CHECKPOINTS_BY_ITEM_ID
+const STEPKEY_TO_CHECKPOINT_PREFIX = {
+  // NEW workflow step keys (preferred)
+  discoveryDesign: 'discoveryDesign',
+  commitmentPortal: 'commitmentPortal',
+  woodVisionLockIn: 'woodVisionLockIn',
+  rawShellCreation: 'rawShellCreation',
+  shellTrueingTorchTune: 'shellTrueingTorchTune',
+  exteriorArtFinish: 'exteriorArtFinish',
+  edgesSnareBeds: 'edgesSnareBeds',
+  hardwareAssembly: 'hardwareAssembly',
+  legacyTuningMedia: 'legacyTuningMedia',
+  finalQAPackagingDelivery: 'finalQAPackagingDelivery',
+
+  // OLD workflow step keys (from your original defaultStepData)
+  woodPreparation: 'woodVisionLockIn',
+  shellConstruction: 'rawShellCreation',
+  fineTuning: 'shellTrueingTorchTune',
+  shellExteriorFinish: 'exteriorArtFinish',
+  bearingEdges: 'edgesSnareBeds',
+  snareBedCutting: 'edgesSnareBeds',
+  hardwareDrilling: 'hardwareAssembly',
+  tuningDetailing: 'legacyTuningMedia',
+  qualityCheck: 'finalQAPackagingDelivery',
 };
 
 const StepComponentTemplate = ({
@@ -604,29 +579,47 @@ const StepComponentTemplate = ({
 
   const activeItem = items[activeIdx] || null;
 
-  // Figure out which key to use in CHECKPOINTS_BY_ITEM_ID.
-  // 1) Try the item.id (best case if it matches your mapping)
-  // 2) If that’s missing, fall back to "<stepKey>_<1-based index>"
-  let checkpoints = [];
-  if (activeItem) {
-    const primaryKey = activeItem.id;
-    const fallbackKey = `${stepKey}_${activeIdx + 1}`;
+  /* ---------------------------------------------------
+     CHECKPOINT RESOLUTION (CLEAN + SAFE)
+  --------------------------------------------------- */
 
-    checkpoints =
-      CHECKPOINTS_BY_ITEM_ID[primaryKey] ||
-      CHECKPOINTS_BY_ITEM_ID[fallbackKey] ||
-      [];
-  }
+  const prefix = STEPKEY_TO_CHECKPOINT_PREFIX[stepKey];
 
-  const activeItemId =
-    (activeItem && activeItem.id) || `${stepKey}_${activeIdx + 1}`;
+  const generatedKey = prefix
+    ? `${prefix}_${activeIdx + 1}`
+    : `${stepKey}_${activeIdx + 1}`;
 
-  // Local array of booleans for THIS sub-step's checkpoints
-  const [localCheckpointStates, setLocalCheckpointStates] = useState(() => {
-    return normalizeBoolArray(activeItem?.checkpointStates, checkpoints.length);
-  });
+  // Prefer explicit item.id → fallback to generated key
+  const resolvedCheckpointKey =
+    (activeItem?.id && CHECKPOINTS_BY_ITEM_ID[activeItem.id]
+      ? activeItem.id
+      : null) || (CHECKPOINTS_BY_ITEM_ID[generatedKey] ? generatedKey : null);
 
-  // When the active sub-step or its Firestore data changes, sync local state
+  // ✅ PERSISTENCE-SAFE LENGTH:
+  // If there is NO checkpoint definition, but the item already has checkpointStates saved,
+  // we must preserve that length so the UI doesn't "shrink to 0" on refresh.
+  const savedCheckpointLen = Array.isArray(activeItem?.checkpointStates)
+    ? activeItem.checkpointStates.length
+    : 0;
+
+  const checkpoints = resolvedCheckpointKey
+    ? CHECKPOINTS_BY_ITEM_ID[resolvedCheckpointKey]
+    : savedCheckpointLen > 0
+      ? new Array(savedCheckpointLen)
+          .fill('')
+          .map((_, i) => `Checkpoint ${i + 1}`)
+      : [];
+
+  const activeItemId = resolvedCheckpointKey || activeItem?.id || generatedKey;
+
+  /* ---------------------------------------------------
+     LOCAL CHECKPOINT STATE
+  --------------------------------------------------- */
+
+  const [localCheckpointStates, setLocalCheckpointStates] = useState(() =>
+    normalizeBoolArray(activeItem?.checkpointStates, checkpoints.length)
+  );
+
   useEffect(() => {
     setLocalCheckpointStates(
       normalizeBoolArray(activeItem?.checkpointStates, checkpoints.length)
@@ -651,19 +644,19 @@ const StepComponentTemplate = ({
     setEditingIndex(null);
   };
 
-  // Handle individual checkpoint toggle (no direct completed logic here;
-  // parent decides whether the item is "completed" based on checkpointStates)
+  // Handle individual checkpoint toggle (parent decides completed logic)
   const handleCheckpointChange = (cpIndex, checked) => {
     if (!activeItem) return;
-    setLocalCheckpointStates((prev) => {
-      const len = Math.max(checkpoints.length, prev.length);
-      const next = Array.from({ length: len }, (_, i) => !!prev[i]);
-      next[cpIndex] = checked;
-      if (onUpdateCheckpointStates) {
-        onUpdateCheckpointStates(activeIdx, next);
-      }
-      return next;
-    });
+
+    const len = Math.max(checkpoints.length, localCheckpointStates.length);
+    const next = Array.from(
+      { length: len },
+      (_, i) => !!localCheckpointStates[i]
+    );
+    next[cpIndex] = checked;
+
+    setLocalCheckpointStates(next);
+    onUpdateCheckpointStates?.(activeIdx, next);
   };
 
   // Bulk mark / clear all checkpoints for THIS sub-step only
@@ -671,18 +664,14 @@ const StepComponentTemplate = ({
     if (!activeItem || checkpoints.length === 0) return;
     const next = new Array(checkpoints.length).fill(true);
     setLocalCheckpointStates(next);
-    if (onUpdateCheckpointStates) {
-      onUpdateCheckpointStates(activeIdx, next);
-    }
+    onUpdateCheckpointStates?.(activeIdx, next);
   };
 
   const handleAllCheckpointsClear = () => {
     if (!activeItem || checkpoints.length === 0) return;
     const next = new Array(checkpoints.length).fill(false);
     setLocalCheckpointStates(next);
-    if (onUpdateCheckpointStates) {
-      onUpdateCheckpointStates(activeIdx, next);
-    }
+    onUpdateCheckpointStates?.(activeIdx, next);
   };
 
   if (!activeItem) {
@@ -697,18 +686,18 @@ const StepComponentTemplate = ({
   const isEditing = editingIndex === activeIdx;
   const checked = !!activeItem.completed;
 
+  const allCheckpointsDone =
+    checkpoints.length > 0 && localCheckpointStates.every(Boolean);
+
   return (
     <div className="mpm-step-detail">
-      {/* Sub-step header */}
       <h2 className="mpm-step-title">{stepLabel}</h2>
 
-      {/* total time for this sub-step */}
       <div className="mpm-step-total">
         Total Time for this sub-step:
         <span>{fmtHM(totalTime)}</span>
       </div>
 
-      {/* ---- Time tracking + status ---- */}
       <section
         className={`mpm-step-time ${isLocked ? 'mpm-step-disabled' : ''}`}
       >
@@ -725,6 +714,7 @@ const StepComponentTemplate = ({
               <div className="mpm-step-time-value">
                 {fmtHM(activeItem.totalSeconds || 0)}
               </div>
+
               <button
                 disabled={isLocked}
                 onClick={() =>
@@ -734,6 +724,7 @@ const StepComponentTemplate = ({
               >
                 Edit
               </button>
+
               <button
                 disabled={isLocked || (activeItem.totalSeconds || 0) === 0}
                 onClick={() =>
@@ -758,12 +749,14 @@ const StepComponentTemplate = ({
                   </option>
                 ))}
               </select>
+
               <button
                 onClick={() => saveEdit(activeIdx, checked)}
                 className="mpm-step-btn mpm-step-btn-primary"
               >
                 Save
               </button>
+
               <button
                 onClick={() => setEditingIndex(null)}
                 className="mpm-step-btn"
@@ -774,17 +767,31 @@ const StepComponentTemplate = ({
           )}
         </div>
 
-        {/* Main “completed” toggle for this checklist item */}
         <div className="mpm-step-status-row">
           <label className="mpm-step-status-label">
             <input
               type="checkbox"
               disabled={isLocked}
-              checked={checked}
+              checked={checked || allCheckpointsDone}
               onChange={(e) => {
                 const newCompleted = e.target.checked;
+
+                // Toggle checklist item
                 if (onToggleChecklist) {
-                  onToggleChecklist(activeIdx, newCompleted, undefined);
+                  onToggleChecklist(
+                    activeIdx,
+                    newCompleted,
+                    activeItem.totalSeconds || 0
+                  );
+                }
+
+                // Auto-sync checkpoints
+                if (checkpoints.length > 0 && onUpdateCheckpointStates) {
+                  const nextStates = new Array(checkpoints.length).fill(
+                    newCompleted
+                  );
+                  setLocalCheckpointStates(nextStates);
+                  onUpdateCheckpointStates(activeIdx, nextStates);
                 }
               }}
             />
@@ -793,7 +800,6 @@ const StepComponentTemplate = ({
         </div>
       </section>
 
-      {/* ---- Checkpoints & Measurements ---- */}
       <section className="mpm-step-checkpoints">
         <div className="mpm-step-checkpoints-header-row">
           <h3 className="mpm-step-checkpoints-title">
@@ -840,7 +846,7 @@ const StepComponentTemplate = ({
                     }
                   />
                   <label htmlFor={inputId} className="mpm-check-text">
-                    {text}
+                    {text || `Checkpoint ${idx + 1}`}
                   </label>
                 </div>
               );
