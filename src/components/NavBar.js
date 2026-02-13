@@ -17,11 +17,8 @@ import { db } from '../firebaseConfig';
 import CartPreview from './CartPreview';
 import './NavBar.css';
 
-/** ⚙️ Paths to the Legacy Vault logo assets in /public */
 const VAULT_LOGO_LIGHT = '/legacy-vault-nav/black2.png';
 const VAULT_LOGO_DARK = '/legacy-vault-nav/white2.png';
-
-/** 🔗 Where the Vault logo should link (public) */
 const VAULT_ROUTE = '/artisan-shop/soundlegend/vault';
 
 const NavBar = () => {
@@ -33,6 +30,19 @@ const NavBar = () => {
   const [userProjects, setUserProjects] = useState([]);
   const [hasSLClaim, setHasSLClaim] = useState(false);
   const [claimsReady, setClaimsReady] = useState(false);
+
+  const [impersonateUid, setImpersonateUid] = useState(
+    () => sessionStorage.getItem('impersonateUid') || ''
+  );
+
+  useEffect(() => {
+    const sync = () =>
+      setImpersonateUid(sessionStorage.getItem('impersonateUid') || '');
+
+    sync();
+    window.addEventListener('impersonation-changed', sync);
+    return () => window.removeEventListener('impersonation-changed', sync);
+  }, []);
 
   const { isDarkMode } = useContext(DarkModeContext);
   const { user, isAdmin, logout } = useAuth();
@@ -49,7 +59,11 @@ const NavBar = () => {
   const cartRef = useRef(null);
   const navbarRef = useRef(null);
 
-  /* --------- 1) Refresh claims on auth changes --------- */
+  const isImpersonating = !!impersonateUid;
+
+  const canShowSoundLegendUI =
+    (!isAdmin && hasSLClaim) || (isAdmin && isImpersonating);
+
   useEffect(() => {
     const refreshClaims = async () => {
       setClaimsReady(false);
@@ -75,11 +89,12 @@ const NavBar = () => {
     refreshClaims();
   }, [user]);
 
-  /* --------- 2) Only fetch projects if allowed --------- */
   useEffect(() => {
     const run = async () => {
       if (!user || !claimsReady) return;
-      if (!(isAdmin || hasSLClaim)) {
+
+      if (!canShowSoundLegendUI) {
+        setUserProjects([]);
         return;
       }
 
@@ -94,7 +109,6 @@ const NavBar = () => {
         );
         let snap = await getDocs(q1);
 
-        // Legacy fallback if some docs don’t have `emailLower`
         if (snap.empty) {
           const q2 = query(
             collection(db, 'projects'),
@@ -112,15 +126,17 @@ const NavBar = () => {
           }))
         );
       } catch (err) {
-        console.warn('User projects query skipped/denied:', err?.message || err);
+        console.warn(
+          'User projects query skipped/denied:',
+          err?.message || err
+        );
         setUserProjects([]);
       }
     };
 
     run();
-  }, [user, isAdmin, hasSLClaim, claimsReady]);
+  }, [user, claimsReady, canShowSoundLegendUI]);
 
-  /* --------- 3) Navbar links (public) --------- */
   useEffect(() => {
     const fetchNavbarLinks = async () => {
       try {
@@ -152,7 +168,6 @@ const NavBar = () => {
     fetchNavbarLinks();
   }, []);
 
-  /* --------- 4) UI plumbing --------- */
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => setShowStickyHeader(!entry.isIntersecting),
@@ -194,7 +209,6 @@ const NavBar = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  /* --------- helpers --------- */
   const handleSignOut = async () => {
     try {
       await logout();
@@ -211,13 +225,15 @@ const NavBar = () => {
 
   const renderCartButton = () => (
     <button
-      className="cart-icon nav-link"
+      type="button"
+      className="nav-btn cart-icon"
+      aria-label="Cart"
       onClick={(e) => {
         e.stopPropagation();
         setIsCartPreviewOpen((prev) => !prev);
       }}
     >
-      <FaCartPlus />
+      <FaCartPlus className="nav-icon" />
       <span
         className="cart-badge"
         style={{ display: cartItemCount > 0 ? 'inline-block' : 'none' }}
@@ -227,13 +243,11 @@ const NavBar = () => {
     </button>
   );
 
-  /* --------- link filtering --------- */
   const filteredLinks = navbarLinks.filter((link) => {
     const access = link.access || [];
     const name = (link.name || '').toLowerCase();
     const label = (link.label || '').toLowerCase();
 
-    // Hide Contact / Endorsements / Account from the top navbar
     const isContact = name.includes('contact') || label.includes('contact');
     const isEndorsements =
       name.includes('endorsement') || label.includes('endorsement');
@@ -242,21 +256,20 @@ const NavBar = () => {
 
     if (link.enabled && access.includes('public')) return true;
     if (user && isAdmin && access.includes('admin')) return true;
-    if (user && hasSLClaim && access.includes('soundlegend')) return true;
+
+    if (user && canShowSoundLegendUI && access.includes('soundlegend'))
+      return true;
 
     return false;
   });
 
-  /* --------- special items --------- */
-
-  // Public Vault logo
   const renderLegacyVaultLogo = () => {
     const isStickyContext = showStickyHeader;
     const vaultLogoSrc = isStickyContext
       ? VAULT_LOGO_DARK
       : isDarkMode
-      ? VAULT_LOGO_DARK
-      : VAULT_LOGO_LIGHT;
+        ? VAULT_LOGO_DARK
+        : VAULT_LOGO_LIGHT;
 
     return (
       <Link
@@ -277,9 +290,10 @@ const NavBar = () => {
     );
   };
 
-  // Private Portal link (admins or SL claim)
   const renderPortalLink = () => {
-    if (!user || !(isAdmin || hasSLClaim)) return null;
+    if (!user) return null;
+    if (!canShowSoundLegendUI) return null;
+
     return (
       <Link
         to="/legacy"
@@ -293,7 +307,10 @@ const NavBar = () => {
   };
 
   const renderSoundLegendTab = () => {
-    if (!user || userProjects.length === 0) return null;
+    if (!user) return null;
+    if (!canShowSoundLegendUI) return null;
+    if (userProjects.length === 0) return null;
+
     return (
       <div className="nav-link dropdown">
         <span className="dropdown-label">SoundLegend ▾</span>
@@ -326,10 +343,8 @@ const NavBar = () => {
     </Link>
   );
 
-  /* --------- render --------- */
   return (
     <>
-      {/* ===== Sticky (mini) navbar ===== */}
       {showStickyHeader && (
         <div className="navbar-sticky-wrapper">
           <div className="navbar-sticky-mini">
@@ -380,8 +395,15 @@ const NavBar = () => {
                 )}
 
                 {user && (
-                  <button className="nav-link-signout" onClick={handleSignOut}>
-                    <FaSignOutAlt /> Sign Out
+                  <button
+                    type="button"
+                    className="nav-btn nav-signout"
+                    onClick={handleSignOut}
+                    aria-label="Sign out"
+                    title="Sign out"
+                  >
+                    <FaSignOutAlt className="nav-icon" />
+                    <span className="nav-signout-text">Sign Out</span>
                   </button>
                 )}
 
@@ -398,6 +420,7 @@ const NavBar = () => {
               </div>
             ) : (
               <button
+                type="button"
                 className="navbar-sticky-menu"
                 onClick={() => setIsMenuOpen((prev) => !prev)}
                 aria-expanded={isMenuOpen}
@@ -417,7 +440,6 @@ const NavBar = () => {
             )}
           </div>
 
-          {/* Mobile sticky dropdown */}
           {isMobileView && isMenuOpen && (
             <div className="navbar-sticky-dropdown-wrapper">
               <div className="navbar-links sticky-dropdown open" ref={menuRef}>
@@ -458,8 +480,15 @@ const NavBar = () => {
                 )}
 
                 {user && (
-                  <button className="nav-link-signout" onClick={handleSignOut}>
-                    <FaSignOutAlt /> Sign Out
+                  <button
+                    type="button"
+                    className="nav-btn nav-signout"
+                    onClick={handleSignOut}
+                    aria-label="Sign out"
+                    title="Sign out"
+                  >
+                    <FaSignOutAlt className="nav-icon" />
+                    <span className="nav-signout-text">Sign Out</span>
                   </button>
                 )}
 
@@ -479,7 +508,6 @@ const NavBar = () => {
         </div>
       )}
 
-      {/* ===== Main (non-sticky) navbar ===== */}
       <nav className="navbar" ref={navbarRef}>
         <div className="navbar-logo">
           <Link to="/" replace onClick={() => handleNavLinkClick('/')}>
@@ -497,6 +525,7 @@ const NavBar = () => {
 
         {isMobileView && !showStickyHeader && (
           <button
+            type="button"
             className="navbar-menu-container"
             onClick={() => setIsMenuOpen((prev) => !prev)}
             aria-expanded={isMenuOpen}
@@ -510,8 +539,8 @@ const NavBar = () => {
                     ? '/menu/close-button-dark-mode.png'
                     : '/menu/menu-button-dark-mode.png'
                   : isMenuOpen
-                  ? '/menu/close-button-light-mode.png'
-                  : '/menu/menu-button-light-mode.png'
+                    ? '/menu/close-button-light-mode.png'
+                    : '/menu/menu-button-light-mode.png'
               }
               alt="Menu Toggle"
               className={`menu-arrow-icon ${isMenuOpen ? 'open' : ''}`}
@@ -522,9 +551,7 @@ const NavBar = () => {
         {!showStickyHeader && (isMenuOpen || !isMobileView) && (
           <div className="navbar-links-wrapper">
             <div
-              className={`navbar-links ${
-                isMobileView && isMenuOpen ? 'open' : ''
-              }`}
+              className={`navbar-links ${isMobileView && isMenuOpen ? 'open' : ''}`}
               ref={menuRef}
             >
               <Link
@@ -558,14 +585,22 @@ const NavBar = () => {
                   to="/admin"
                   className="nav-link"
                   onClick={() => handleNavLinkClick('/admin')}
+                  title="Admin"
                 >
-                  <FaCog /> Admin
+                  <FaCog className="nav-icon" /> <span>Admin</span>
                 </Link>
               )}
 
               {user && (
-                <button className="nav-link-signout" onClick={handleSignOut}>
-                  <FaSignOutAlt /> Sign Out
+                <button
+                  type="button"
+                  className="nav-btn nav-signout"
+                  onClick={handleSignOut}
+                  aria-label="Sign out"
+                  title="Sign out"
+                >
+                  <FaSignOutAlt className="nav-icon" />
+                  <span className="nav-signout-text">Sign Out</span>
                 </button>
               )}
 

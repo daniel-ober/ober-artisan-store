@@ -33,7 +33,28 @@
   justify-content: space-between;
   width: 100%;
   flex-wrap: wrap;
-  align-items: center;           /* ensure vertical centering of items */
+  align-items: center;
+}
+
+/* =========================
+   ✅ CRITICAL: BUTTON RESET (navbar only)
+   Fixes “boxed” cart/signout button styling everywhere
+   ========================= */
+.navbar-links button,
+.navbar-links .nav-btn {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  outline: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.nav-signout-text {
+  line-height: 1;
 }
 
 .nav-link {
@@ -44,6 +65,9 @@
   cursor: pointer;
   font-weight: 600;
   text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .nav-link:hover {
@@ -56,10 +80,38 @@
   text-decoration: underline;
 }
 
-.cart-icon.nav-link {
-  background-color: transparent;
-  color: white;
+/* =========================
+   ✅ CART BUTTON (looks like a nav-link, not a button)
+   ========================= */
+.cart-icon {
   position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 12px; /* match .nav-link */
+  border-radius: 10px;
+}
+
+.cart-icon:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.nav-icon {
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* cart color by theme (main navbar) */
+body.light .navbar .cart-icon {
+  color: #111;
+}
+body.dark .navbar .cart-icon {
+  color: rgba(245, 245, 245, 0.9);
+}
+
+/* sticky context is always dark */
+.navbar-links.sticky-dropdown .cart-icon {
+  color: #fff !important;
 }
 
 .cart-badge {
@@ -154,11 +206,9 @@
   box-shadow: none;
 }
 
-/* On the dark sticky mini bar, use a subtle light halo */
 .navbar-sticky-mini .vault-logo-img {
   filter: drop-shadow(0 0 6px rgba(255,255,255,.18));
 }
-
 
 body.dark .navbar-sticky-mini {
   background: rgba(0, 0, 0, 0.9);
@@ -237,7 +287,6 @@ body.dark .navbar-sticky-mini {
   max-height: 1200px;
 }
 
-/* === STICKY MENU WRAPPER === */
 .navbar-sticky-dropdown-wrapper {
   position: absolute;
   top: 100%;
@@ -281,13 +330,6 @@ body.dark .navbar-sticky-mini {
   background: #222;
 }
 
-.nav-link-signout {
-  background-color: rgba(255, 255, 255, 0.51);
-  color: #000000;
-  border-radius: 100px;
-  margin: 7px;
-}
-
 /* ===== Legacy Vault logo link (between Merch and Cart) ===== */
 .vault-logo-link {
   display: inline-flex;
@@ -299,7 +341,7 @@ body.dark .navbar-sticky-mini {
 }
 
 .vault-logo-img {
-  height: 45px;                 /* desktop/main navbar size */
+  height: 45px;
   margin-bottom: 16px;
   margin-left: 10px;
   width: auto;
@@ -307,17 +349,82 @@ body.dark .navbar-sticky-mini {
   object-fit: contain;
   vertical-align: middle;
   padding: 0;
-
-  /* shadow behind the logo */
   filter: drop-shadow(0 2px 4px rgba(0,0,0,.45));
 }
 
-/* Sticky mini bar (desktop): force white mark on dark background */
 .navbar-links.sticky-dropdown .vault-logo-img{
   filter: brightness(0) invert(1) !important;
 }
 
-/* Mobile menu (dark sheet): force white mark there too */
+.admin-dropdown { position: relative; }
+
+.admin-menu {
+  min-width: 220px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(10,10,10,0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.admin-menu .dropdown-item {
+  border-radius: 8px;
+}
+
+.admin-menu .dropdown-item:hover {
+  background: rgba(255,255,255,0.10);
+}
+
+.admin-signout {
+  margin-top: 6px;
+  border-top: 1px solid rgba(255,255,255,0.10);
+  padding-top: 10px;
+}
+
+/* =========================
+   ✅ SIGN OUT BUTTON (polished pill)
+   ========================= */
+.nav-signout {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 10px 12px;
+  border-radius: 999px;
+
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.10);
+  color: #fff;
+}
+
+.nav-signout:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+/* Light mode main navbar */
+body.light .navbar .nav-signout {
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  background: rgba(0, 0, 0, 0.06);
+  color: #111;
+}
+
+body.light .navbar .nav-signout:hover {
+  background: rgba(0, 0, 0, 0.10);
+}
+
+/* Sticky context always dark */
+.navbar-links.sticky-dropdown .nav-signout {
+  color: #fff !important;
+  border-color: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.10);
+}
+
 @media (max-width: 768px){
   .navbar-links.open .vault-logo-img{
     filter: brightness(0) invert(1) !important;
@@ -335,7 +442,7 @@ body.dark .navbar-sticky-mini {
   }
 
   body.menu-open {
-    overflow: hidden; /* Prevent background scroll */
+    overflow: hidden;
   }
 
   .navbar-links-wrapper {
@@ -366,7 +473,6 @@ body.dark .navbar-sticky-mini {
     gap: 16px;
   }
 
-  /* Mobile menu links must be white and match desktop weight */
   .navbar-links .nav-link {
     color: #fff !important;
     font-size: 16px;
@@ -392,7 +498,7 @@ body.dark .navbar-sticky-mini {
 
   .navbar-sticky-dropdown-wrapper {
     position: absolute;
-    top: 100px; /* sits just below sticky mini */
+    top: 100px;
     left: 0;
     width: 100%;
     z-index: 2999;
@@ -412,23 +518,15 @@ body.dark .navbar-sticky-mini {
     position: relative !important;
   }
 
-  .cart-icon.nav-link {
+  .cart-icon {
     margin-top: 12px;
     margin-bottom: 16px;
-    color: #fff !important; /* ensure white in mobile menu */
+    color: #fff !important;
   }
 
   .cart-badge {
     top: -10px;
     right: -12px;
-  }
-
-  .navbar-links-wrapper.sticky-mode {
-    position: absolute !important;
-    top: 100% !important;
-    left: 0;
-    width: 100%;
-    z-index: 2999 !important;
   }
 
   body.menu-open .navbar-sticky-mini {
@@ -448,7 +546,7 @@ body.dark .navbar-sticky-mini {
 /* === LANDSCAPE FIX (iPad / horizontal tablets) === */
 @media screen and (max-width: 1024px) and (orientation: landscape) {
   .navbar-links .nav-link,
-  .navbar-links .cart-icon.nav-link {
+  .navbar-links .cart-icon {
     color: white !important;
   }
 }
@@ -503,19 +601,19 @@ body.dark .navbar-sticky-mini {
     position: static;
   }
 
-  /* Match sticky links to the main navbar typography; force white */
   .navbar-links.sticky-dropdown .nav-link {
-    display: inline-block;
-    color: #fff !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
 
+    color: #fff !important;
     font-family: 'Poppins', sans-serif;
     font-size: 16px;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: normal;
 
-    padding: 15px 12px; /* same as main navbar */
-    border-radius: 4px;
+    padding: 15px 12px;
+    border-radius: 10px;
     cursor: pointer;
     transition: background 0.2s ease, color 0.2s ease;
   }
@@ -525,13 +623,8 @@ body.dark .navbar-sticky-mini {
     color: hsl(46, 100%, 89%) !important;
   }
 
-  .navbar-links-wrapper.sticky-mode .navbar-links .nav-link {
-    color: white !important;
-  }
-
-  .navbar-links.sticky-dropdown .cart-icon.nav-link {
-    position: relative;
-    color: #fff !important;  /* ensure white in sticky mini */
+  .navbar-links.sticky-dropdown .cart-icon {
+    color: #fff !important;
   }
 
   .navbar-links.sticky-dropdown .cart-badge {

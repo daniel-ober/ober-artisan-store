@@ -1,78 +1,162 @@
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
+/* ============================
+   EditProductModal (SCOPED)
+   These styles MUST NOT affect the rest of the site
+   ============================ */
+
+.epm-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3999;
+  padding: 16px;
+}
+
+.epm-modal-content {
+  width: 100%;
+  max-width: 620px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 18px 18px 16px 18px;
+  box-shadow: 0px 18px 55px rgba(0, 0, 0, 0.35);
+  position: relative;
+}
+
+.epm-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.epm-title {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #222;
+}
+
+/* Close (X) */
+.epm-x {
+  background: transparent;
+  border: none;
+  padding: 6px 10px;
+  font-size: 22px;
+  line-height: 1;
+  color: #333;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.epm-x:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+/* Error */
+.epm-error {
+  background: rgba(220, 53, 69, 0.1);
+  border: 1px solid rgba(220, 53, 69, 0.35);
+  color: #b02a37;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 0.92rem;
+  margin-bottom: 12px;
+}
+
+/* Loading */
+.epm-loading {
+  padding: 10px;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+/* Form */
+.epm-form-group {
+  margin-bottom: 14px;
+}
+
+.epm-label {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #222;
+}
+
+.epm-input,
+.epm-textarea {
+  width: 100%;
+  padding: 10px 10px;
+  border: 1px solid #cfcfcf;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  color: #111;
+  outline: none;
+}
+
+.epm-input:focus,
+.epm-textarea:focus {
+  border-color: rgba(0, 123, 255, 0.7);
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+}
+
+/* Actions */
+.epm-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 14px;
+}
+
+/* Buttons (SCOPED — ONLY affects buttons inside this modal) */
+.epm-btn {
+  border: none;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 10px 14px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.epm-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.epm-btn-primary {
+  background: #007bff;
+  color: #fff;
+}
+
+.epm-btn-primary:hover {
+  background: #0056b3;
+}
+
+.epm-btn-ghost {
+  background: #f2f2f2;
+  color: #222;
+}
+
+.epm-btn-ghost:hover {
+  background: #e6e6e6;
+}
+
+/* Mobile */
+@media (max-width: 520px) {
+  .epm-modal-content {
+    padding: 16px 14px 14px 14px;
+  }
+
+  .epm-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .epm-btn {
     width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 3999;
   }
-  
-  .modal-content {
-    background: #ffffff;
-    border-radius: 8px;
-    max-width: 600px;
-    width: 90%;
-    padding: 20px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
-    position: relative;
-  }
-  
-  .modal-content h2 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 20px;
-    text-align: center;
-    color: #333;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  .form-group label {
-    display: block;
-    font-size: 0.9rem;
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  .form-group input,
-  .form-group textarea {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 0.9rem;
-  }
-  
-  button {
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    font-size: 0.9rem;
-    cursor: pointer;
-  }
-  
-  button[type='submit'] {
-    background: #007bff;
-    color: white;
-    font-weight: bold;
-  }
-  
-  button[type='submit']:hover {
-    background: #0056b3;
-  }
-  
-  button[type='button'] {
-    background: #f4f4f4;
-    color: #333;
-  }
-  
-  button[type='button']:hover {
-    background: #e4e4e4;
-  }
-  
+}
