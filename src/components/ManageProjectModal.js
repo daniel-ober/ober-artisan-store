@@ -216,6 +216,63 @@ const shortenCheckpointLabel = (s = '') => {
   return str.length > 44 ? `${str.slice(0, 44).trim()}…` : str;
 };
 
+const getCheckpointLabelText = (cp) => {
+  if (!cp) return '';
+
+  // 1) Already a string
+  if (typeof cp === 'string') return cp.trim();
+
+  // 2) Object checkpoints (your cp() shape uses: ui, book, details)
+  if (typeof cp === 'object') {
+    // Prefer an explicit short field if you ever add one
+    const short =
+      typeof cp.short === 'string' ? cp.short.trim() : '';
+    if (short) return short;
+
+    // ✅ Prefer "book" as the sidebar short label (this is your short version)
+    const book =
+      typeof cp.book === 'string' ? cp.book.trim() : '';
+    if (book) return book;
+
+    // Fallback to UI (long)
+    const ui = typeof cp.ui === 'string' ? cp.ui.trim() : '';
+    if (ui) return ui;
+
+    const label =
+      typeof cp.label === 'string' ? cp.label.trim() : '';
+    if (label) return label;
+
+    const title =
+      typeof cp.title === 'string' ? cp.title.trim() : '';
+    if (title) return title;
+  }
+
+  return '';
+};
+
+const getSubstepLabelText = (item) => {
+  if (!item) return 'Untitled';
+
+  const candidates = [item.label, item.task, item.name, item.title];
+
+  for (const v of candidates) {
+    if (typeof v === 'string' && v.trim()) return v.trim();
+  }
+
+  // If label/task accidentally became an object, try common nested keys
+  const nested = [
+    item.label?.task,
+    item.label?.label,
+    item.task?.task,
+    item.task?.label,
+  ];
+  for (const v of nested) {
+    if (typeof v === 'string' && v.trim()) return v.trim();
+  }
+
+  return 'Untitled';
+};
+
 /* ----- date + progress helpers --------------------------------------------------- */
 const toDate = (v) => {
   if (!v) return null;
@@ -676,22 +733,23 @@ const ManageProjectModal = ({
 
   // --- STATUS HELPERS (Step / Substep / Checkpoint) ---
 
-const getSubstepStatus = (item) => {
-  const checkpointArr = Array.isArray(item?.checkpointStates)
-    ? item.checkpointStates
-    : [];
+  const getSubstepStatus = (item) => {
+    const checkpointArr = Array.isArray(item?.checkpointStates)
+      ? item.checkpointStates
+      : [];
 
-  const checkpointsAllDone =
-    checkpointArr.length > 0 && checkpointArr.every((c) => c === true);
+    const checkpointsAllDone =
+      checkpointArr.length > 0 && checkpointArr.every((c) => c === true);
 
-  const anyCheckpoint = checkpointArr.some(Boolean);
-  const anyTime = Number.isFinite(item?.totalSeconds) && item.totalSeconds > 0;
+    const anyCheckpoint = checkpointArr.some(Boolean);
+    const anyTime =
+      Number.isFinite(item?.totalSeconds) && item.totalSeconds > 0;
 
-  // ✅ treat all checkpoints done as "done"
-  if (checkpointsAllDone || !!item?.completed) return 'done';
-  if (anyCheckpoint || anyTime) return 'doing';
-  return 'todo';
-};
+    // ✅ treat all checkpoints done as "done"
+    if (checkpointsAllDone || !!item?.completed) return 'done';
+    if (anyCheckpoint || anyTime) return 'doing';
+    return 'todo';
+  };
 
   const getStepStatus = (stepKey, data) => {
     const checklist = data?.[stepKey]?.checklist || [];
@@ -830,34 +888,39 @@ const getSubstepStatus = (item) => {
    * Persist per-sub-step checkpoint checkbox state.
    * checkpointStates is an array of booleans on the checklist item.
    */
-const handleCheckpointStatesChange = (stepKey, itemIndex, checkpointStates) => {
-  const step = editableData[stepKey] || { checklist: [] };
-  const item = step.checklist?.[itemIndex];
+  const handleCheckpointStatesChange = (
+    stepKey,
+    itemIndex,
+    checkpointStates
+  ) => {
+    const step = editableData[stepKey] || { checklist: [] };
+    const item = step.checklist?.[itemIndex];
 
-  const expectedCount = getCheckpointCountForItem(stepKey, itemIndex, item);
-  const normalizedStates = normalizeCheckpointBooleans(
-    checkpointStates,
-    expectedCount
-  );
+    const expectedCount = getCheckpointCountForItem(stepKey, itemIndex, item);
+    const normalizedStates = normalizeCheckpointBooleans(
+      checkpointStates,
+      expectedCount
+    );
 
-  const allDone = normalizedStates.length > 0 && normalizedStates.every(Boolean);
+    const allDone =
+      normalizedStates.length > 0 && normalizedStates.every(Boolean);
 
-  const updatedChecklist = (step.checklist || []).map((it, idx) => {
-    if (idx !== itemIndex) return it;
-    return {
-      ...it,
-      checkpointStates: normalizedStates,
-      completed: allDone, // ✅ auto-rollup
-    };
-  });
+    const updatedChecklist = (step.checklist || []).map((it, idx) => {
+      if (idx !== itemIndex) return it;
+      return {
+        ...it,
+        checkpointStates: normalizedStates,
+        completed: allDone, // ✅ auto-rollup
+      };
+    });
 
-  const updatedStep = { ...step, checklist: updatedChecklist };
-  const update = { [stepKey]: updatedStep };
+    const updatedStep = { ...step, checklist: updatedChecklist };
+    const update = { [stepKey]: updatedStep };
 
-  setEditableData((prev) => ({ ...prev, ...update }));
-  onProjectUpdate?.({ id: projectData.id, [stepKey]: updatedStep });
-  saveToFirestore(update);
-};
+    setEditableData((prev) => ({ ...prev, ...update }));
+    onProjectUpdate?.({ id: projectData.id, [stepKey]: updatedStep });
+    saveToFirestore(update);
+  };
 
   const handleSubStepCompletionChange = (
     stepKey,
@@ -1003,7 +1066,7 @@ const handleCheckpointStatesChange = (stepKey, itemIndex, checkpointStates) => {
       ? currentChecklist[selectedSubIndex]
       : null;
   const currentSubLabel =
-    currentSub?.label ?? currentSub?.task ?? selectedStepLabel;
+    (currentSub ? getSubstepLabelText(currentSub) : '') || selectedStepLabel;
 
   // helper: current value for mobile dropdown
   const getMobileSelectValue = () => {
@@ -1273,7 +1336,7 @@ const handleCheckpointStatesChange = (stepKey, itemIndex, checkpointStates) => {
                 return (
                   <optgroup key={phase.key} label={phase.label}>
                     {cl.map((item, idx) => {
-                      const label = item.label ?? item.task ?? '';
+                      const label = item.task ?? item.label ?? '';
                       const optionValue = `${phase.key}::${idx}`;
                       const done = !!item.completed;
                       return (
@@ -1335,7 +1398,7 @@ const handleCheckpointStatesChange = (stepKey, itemIndex, checkpointStates) => {
                     {isExpanded && checklist.length > 0 && (
                       <div className="mpm-sidebar-substep-list">
                         {checklist.map((item, idx) => {
-                          const label = item.label ?? item.task ?? '';
+                          const label = item.task ?? item.label ?? '';
                           const isActiveSub =
                             selectedStepKey === step.key &&
                             selectedSubIndex === idx;
@@ -1402,7 +1465,9 @@ const handleCheckpointStatesChange = (stepKey, itemIndex, checkpointStates) => {
                                               />
                                               <span className="mpm-sidebar-task-text">
                                                 {shortenCheckpointLabel(
-                                                  taskLabel
+                                                  getCheckpointLabelText(
+                                                    taskLabel
+                                                  )
                                                 )}
                                               </span>
                                             </div>

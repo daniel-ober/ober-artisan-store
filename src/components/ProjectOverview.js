@@ -30,6 +30,9 @@ const getIdentifier = (p = {}) => {
   return size ? size.slice(3) : '—';
 };
 
+const DEFAULT_BUCKET = 'other';
+const DEFAULT_DISPLAY_CATEGORY = 'Other / Uncategorized';
+
 /** Safely render anything that should be text. Avoids crashing on objects
  * like { checklist: [...] } coming from bad data.
  */
@@ -113,18 +116,36 @@ const normalizeAttachments = (attachments) => {
   const result = {};
 
   Object.entries(attachments || {}).forEach(([sectionKey, fileArray]) => {
+    let arr = [];
+
     if (Array.isArray(fileArray)) {
-      result[sectionKey] = fileArray;
+      arr = fileArray;
     } else if (fileArray && typeof fileArray === 'object') {
-      // handle old object-based shape
-      const vals = Object.values(fileArray);
-      result[sectionKey] = vals.length ? vals : [];
-    } else {
-      result[sectionKey] = [];
+      arr = Object.values(fileArray);
     }
+
+    result[sectionKey] = arr.filter(Boolean).map((f) => {
+      const url = f?.url || f?.downloadURL || f?.path || '';
+      const existingCat = f?.category;
+
+      // If old data used "other" as the category label, fix it.
+      const fixedCategory = !existingCat
+        ? DEFAULT_DISPLAY_CATEGORY
+        : existingCat === DEFAULT_BUCKET
+          ? DEFAULT_DISPLAY_CATEGORY
+          : existingCat;
+
+      return {
+        ...f,
+        url,
+        bucket: f?.bucket || sectionKey, // bucket key
+        category: fixedCategory, // display label
+        hidden: typeof f?.hidden === 'boolean' ? f.hidden : true, // default hidden
+      };
+    });
   });
 
-  if (!result.other) result.other = [];
+  if (!result[DEFAULT_BUCKET]) result[DEFAULT_BUCKET] = [];
   return result;
 };
 
@@ -292,11 +313,6 @@ const ProjectOverview = ({
     });
   }, [editableData]);
 
-  // keep local uploadedFiles in sync when switching projects (old shape)
-  useEffect(() => {
-    setUploadedFiles(editableData?.attachments || { other: [] });
-  }, [editableData?.attachments]);
-
   /* ---------- uploads (used by Attachments) ---------- */
   // Normalize attachments: keep original buckets, just ensure each is an array
   const normalizeAttachmentsByBucket = (allFiles) => {
@@ -364,7 +380,7 @@ const ProjectOverview = ({
     const files = Array.from(e.dataTransfer?.files || []);
     if (files.length === 0 || !editableData?.id) return;
 
-    const safeCategory = 'other';
+    const safeCategory = DEFAULT_BUCKET;
     const projectId = editableData.id;
 
     for (const file of files) {
@@ -389,7 +405,12 @@ const ProjectOverview = ({
           },
           async () => {
             const url = await getDownloadURL(uploadTask.snapshot.ref);
-            const newFile = { url, category: safeCategory, hidden: true };
+            const newFile = {
+              url,
+              bucket: safeCategory, // bucket key used for storage + attachments map
+              category: DEFAULT_DISPLAY_CATEGORY, // human label shown in UI dropdown
+              hidden: true,
+            };
 
             const updated = [...(uploadedFiles[safeCategory] || []), newFile];
             const updatedFiles = {
@@ -415,11 +436,6 @@ const ProjectOverview = ({
 
     setUploading(false);
   };
-
-  const normalizedFiles = useMemo(
-    () => normalizeAttachmentsByBucket(uploadedFiles),
-    [uploadedFiles]
-  );
 
   /* ---------- SAVE: Vault prefs (admin) ---------- */
   const saveVaultPrefs = async () => {
@@ -527,39 +543,37 @@ const ProjectOverview = ({
   return (
     <div className="apo-container">
       {/* ---------- Progress overview (always visible at top) ---------- */}
-        <h4 className="apo-h4">Progress Overview</h4>
-        <div className="apo-progress-bar-wrap">
-          <div className="apo-progress-bar-track">
-            <div
-              className="apo-progress-bar-fill"
-              style={{ width: `${progressMeta.weightedPct || 0}%` }}
-            />
-          </div>
-          <div className="apo-progress-bar-label">
-            Overall Progress (time-weighted):{' '}
-            <span className="apo-progress-pill">
-              {progressMeta.weightedPct || 0}%
-            </span>
-          </div>
+      <h4 className="apo-h4">Progress Overview</h4>
+      <div className="apo-progress-bar-wrap">
+        <div className="apo-progress-bar-track">
+          <div
+            className="apo-progress-bar-fill"
+            style={{ width: `${progressMeta.weightedPct || 0}%` }}
+          />
         </div>
+        <div className="apo-progress-bar-label">
+          Overall Progress (time-weighted):{' '}
+          <span className="apo-progress-pill">
+            {progressMeta.weightedPct || 0}%
+          </span>
+        </div>
+      </div>
 
-        <div className="apo-progress-meta-row">
-          <div className="apo-progress-pill-row">
-            <span className="apo-progress-pill-label">
-              Checklist completion:
-            </span>
-            <span className="apo-progress-pill">
-              {progressMeta.completedTasks}/{progressMeta.totalTasks || 0} tasks
-              ({progressMeta.tasksPct || 0}%)
-            </span>
-          </div>
-          <div className="apo-progress-pill-row">
-            <span className="apo-progress-pill-label">Current phase:</span>
-            <span className="apo-progress-pill apo-progress-phase-pill">
-              {progressMeta.currentPhaseLabel}
-            </span>
-          </div>
+      <div className="apo-progress-meta-row">
+        <div className="apo-progress-pill-row">
+          <span className="apo-progress-pill-label">Checklist completion:</span>
+          <span className="apo-progress-pill">
+            {progressMeta.completedTasks}/{progressMeta.totalTasks || 0} tasks (
+            {progressMeta.tasksPct || 0}%)
+          </span>
         </div>
+        <div className="apo-progress-pill-row">
+          <span className="apo-progress-pill-label">Current phase:</span>
+          <span className="apo-progress-pill apo-progress-phase-pill">
+            {progressMeta.currentPhaseLabel}
+          </span>
+        </div>
+      </div>
 
       {/* ======================================================
           1) PROJECT SCOPE
@@ -583,16 +597,8 @@ const ProjectOverview = ({
           <div className="apo-section-header-meta">
             <span className="apo-section-summary">
               {safeText(editableData?.artisanLine, '—')} ·{' '}
-              {safeText(
-                editableData?.width ?? editableData?.diameter,
-                '—'
-              )}
-              ×
-              {safeText(
-                editableData?.shellDepth ?? editableData?.depth,
-                '—'
-              )}
-              "
+              {safeText(editableData?.width ?? editableData?.diameter, '—')}×
+              {safeText(editableData?.shellDepth ?? editableData?.depth, '—')}"
             </span>
 
             {isEditing ? (
@@ -640,8 +646,7 @@ const ProjectOverview = ({
               Admin view: you’re viewing the scope of work for{' '}
               <span className="apo-mono">
                 {safeText(
-                  editableData?.customer?.email ||
-                    editableData?.customerEmail,
+                  editableData?.customer?.email || editableData?.customerEmail,
                   '—'
                 )}
               </span>
@@ -1268,8 +1273,7 @@ const ProjectOverview = ({
                   className="apo-input"
                   type="text"
                   value={safeText(
-                    editableData?.customer?.name ||
-                      editableData?.customerName,
+                    editableData?.customer?.name || editableData?.customerName,
                     ''
                   )}
                   onChange={(e) =>
@@ -1279,8 +1283,7 @@ const ProjectOverview = ({
               ) : (
                 <span className="apo-value">
                   {safeText(
-                    editableData?.customer?.name ||
-                      editableData?.customerName,
+                    editableData?.customer?.name || editableData?.customerName,
                     'N/A'
                   )}
                 </span>
@@ -1329,20 +1332,14 @@ const ProjectOverview = ({
                 <input
                   className="apo-input"
                   type="text"
-                  value={safeText(
-                    editableData?.customer?.address?.street,
-                    ''
-                  )}
+                  value={safeText(editableData?.customer?.address?.street, '')}
                   onChange={(e) =>
                     handleChange('customer.address.street', e.target.value)
                   }
                 />
               ) : (
                 <span className="apo-value">
-                  {safeText(
-                    editableData?.customer?.address?.street,
-                    'N/A'
-                  )}
+                  {safeText(editableData?.customer?.address?.street, 'N/A')}
                 </span>
               )}
             </div>
@@ -1360,10 +1357,7 @@ const ProjectOverview = ({
                 />
               ) : (
                 <span className="apo-value">
-                  {safeText(
-                    editableData?.customer?.address?.city,
-                    'N/A'
-                  )}
+                  {safeText(editableData?.customer?.address?.city, 'N/A')}
                 </span>
               )}
             </div>
@@ -1381,10 +1375,7 @@ const ProjectOverview = ({
                 />
               ) : (
                 <span className="apo-value">
-                  {safeText(
-                    editableData?.customer?.address?.state,
-                    'N/A'
-                  )}
+                  {safeText(editableData?.customer?.address?.state, 'N/A')}
                 </span>
               )}
             </div>
@@ -1431,10 +1422,7 @@ const ProjectOverview = ({
                 <input
                   className="apo-input apo-input-mono"
                   type="text"
-                  value={safeText(
-                    editableData?.shipping?.trackingNumber,
-                    ''
-                  )}
+                  value={safeText(editableData?.shipping?.trackingNumber, '')}
                   onChange={(e) =>
                     handleChange('shipping.trackingNumber', e.target.value)
                   }
@@ -1446,17 +1434,11 @@ const ProjectOverview = ({
                   rel="noopener noreferrer"
                   className="apo-link apo-mono"
                 >
-                  {safeText(
-                    editableData?.shipping?.trackingNumber,
-                    'N/A'
-                  )}
+                  {safeText(editableData?.shipping?.trackingNumber, 'N/A')}
                 </a>
               ) : (
                 <span className="apo-value">
-                  {safeText(
-                    editableData?.shipping?.trackingNumber,
-                    'N/A'
-                  )}
+                  {safeText(editableData?.shipping?.trackingNumber, 'N/A')}
                 </span>
               )}
             </div>
@@ -1641,7 +1623,7 @@ const ProjectOverview = ({
           onDrop={handleDrop}
         >
           <div>
-            Drop files here to upload (defaults to “Other / Uncategorized” &amp;
+            Drop files here to upload (defaults to “Other / Uncategorized” and
             hidden).
           </div>
           {uploading && (
@@ -1651,12 +1633,11 @@ const ProjectOverview = ({
 
         <div className="file-preview-grid">
           {Object.entries(uploadedFiles || {}).map(([sectionKey, files]) => {
-            // ensure array
             const arr = Array.isArray(files)
               ? files
               : files && typeof files === 'object'
-              ? Object.values(files)
-              : [];
+                ? Object.values(files)
+                : [];
 
             return arr.map((file, idx) => {
               const url = file?.url || file?.downloadURL || file?.path || '';
@@ -1697,21 +1678,17 @@ const ProjectOverview = ({
                       />
                     )}
                     <div className="file-name">
-                      {safeText(
-                        file.category,
-                        'Other / Uncategorized'
-                      )}
+                      {safeText(file.category, 'Other / Uncategorized')}
                     </div>
                   </button>
 
                   <div className="file-actions">
                     <label>
-                      Category
+                      Display Category
                       <select
-                        value={file.category || ''}
+                        value={file.category || DEFAULT_DISPLAY_CATEGORY}
                         onChange={(e) => {
-                          const nextCat =
-                            e.target.value || 'Other / Uncategorized';
+                          const nextCat = e.target.value; // always a real label
 
                           const currentArrRaw = uploadedFiles[sectionKey] || [];
                           const currentArr = Array.isArray(currentArrRaw)
@@ -1739,7 +1716,9 @@ const ProjectOverview = ({
                           );
                         }}
                       >
-                        <option value="">Other / Uncategorized</option>
+                        <option value={DEFAULT_DISPLAY_CATEGORY}>
+                          {DEFAULT_DISPLAY_CATEGORY}
+                        </option>
                         {fileCategories.map((c) => (
                           <option key={c} value={c}>
                             {c}
