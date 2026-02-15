@@ -569,8 +569,8 @@
 }
 
 .mpm-pip-doing {
-  background: rgba(120, 170, 255, 0.85);
-  border-color: rgba(120, 170, 255, 0.55);
+  background: rgba(255, 184, 72, 0.85);
+  border-color: rgba(255, 184, 72, 0.55);
 }
 
 .mpm-pip-todo {
