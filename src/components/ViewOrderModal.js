@@ -11,7 +11,7 @@ import {
 import { Timestamp } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import { getOrderStatusFromItems } from '../utils/statusConfig';
-import defaultStepData from '../utils/defaultStepData';
+import { defaultStepData } from '../utils/buildWorkflow';
 import defaultProjectFields from '../utils/defaultProjectFields';
 import { linkProjectToUserByEmail } from '../services/userService';
 

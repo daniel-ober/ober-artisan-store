@@ -16,19 +16,19 @@
   --mpm-panel: rgba(255, 255, 255, 0.06);
   --mpm-panel-2: rgba(255, 255, 255, 0.04);
 
-  --mpm-border: rgba(255, 255, 255, 0.10);
+  --mpm-border: rgba(255, 255, 255, 0.1);
   --mpm-border-2: rgba(255, 255, 255, 0.08);
 
   --mpm-text: rgba(255, 255, 255, 0.92);
-  --mpm-text-dim: rgba(255, 255, 255, 0.70);
+  --mpm-text-dim: rgba(255, 255, 255, 0.7);
   --mpm-text-dimmer: rgba(255, 255, 255, 0.55);
 
   --mpm-accent: rgba(120, 170, 255, 0.95);
   --mpm-accent-soft: rgba(120, 170, 255, 0.18);
 
   --mpm-success: rgba(140, 255, 180, 0.65);
-  --mpm-warn: rgba(255, 215, 120, 0.70);
-  --mpm-danger: rgba(255, 120, 120, 0.70);
+  --mpm-warn: rgba(255, 215, 120, 0.7);
+  --mpm-danger: rgba(255, 120, 120, 0.7);
 }
 
 /* ===========================
@@ -62,7 +62,12 @@
   box-shadow: 0 18px 50px rgba(0, 0, 0, 0.55);
   backdrop-filter: blur(12px);
 
-  font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family:
+    'Poppins',
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
   color: var(--mpm-text);
 }
 
@@ -106,7 +111,7 @@
 }
 
 .mpm-close-btn:hover {
-  background: rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 /* chips row */
@@ -168,21 +173,23 @@
   border: 1px solid rgba(160, 190, 255, 0.35);
   background: var(--mpm-accent-soft);
   color: #fff;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+    'Courier New', monospace;
 }
 
 /* status variants */
-.mpm-status-chip.initial-planning {
-  border-color: rgba(255, 215, 120, 0.40);
+.mpm-status-chips.initial-planning {
+  border-color: rgba(255, 215, 120, 0.4);
   background: rgba(255, 215, 120, 0.14);
 }
 
-.mpm-status-chip.in-production {
-  border-color: rgba(120, 170, 255, 0.40);
+.mpm-status-chips.in-production {
+  border-color: rgba(120, 170, 255, 0.4);
   background: rgba(120, 170, 255, 0.14);
 }
 
-.mpm-status-chip.finished {
+.mpm-status-chips.finished {
   border-color: rgba(140, 255, 180, 0.35);
   background: rgba(140, 255, 180, 0.12);
 }
@@ -197,11 +204,11 @@
   background: rgba(140, 255, 180, 0.12);
 }
 .mpm-sched-chip.slightly {
-  border-color: rgba(255, 215, 120, 0.40);
+  border-color: rgba(255, 215, 120, 0.4);
   background: rgba(255, 215, 120, 0.14);
 }
 .mpm-sched-chip.risk {
-  border-color: rgba(255, 120, 120, 0.40);
+  border-color: rgba(255, 120, 120, 0.4);
   background: rgba(255, 120, 120, 0.12);
 }
 .mpm-sched-chip.finished {
@@ -212,7 +219,7 @@
 /* step progress chip variants */
 .mpm-step-chip.mpm-step-0,
 .mpm-step-chip.mpm-step-25 {
-  border-color: rgba(255, 215, 120, 0.40);
+  border-color: rgba(255, 215, 120, 0.4);
   background: rgba(255, 215, 120, 0.14);
 }
 .mpm-step-chip.mpm-step-50 {
@@ -224,7 +231,7 @@
   background: rgba(140, 255, 180, 0.12);
 }
 .mpm-step-chip.mpm-step-100 {
-  border-color: rgba(140, 255, 180, 0.40);
+  border-color: rgba(140, 255, 180, 0.4);
   background: rgba(140, 255, 180, 0.15);
 }
 
@@ -244,7 +251,7 @@
   padding: 0 12px;
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.18);
-  background: rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.1);
   color: #fff;
   font-weight: 800;
   font-size: 12.5px;
@@ -256,7 +263,7 @@
 }
 
 .mpm-bulk-btn-reset {
-  border-color: rgba(255, 120, 120, 0.40);
+  border-color: rgba(255, 120, 120, 0.4);
   background: rgba(255, 120, 120, 0.14);
 }
 
@@ -324,7 +331,9 @@
 }
 
 .mpm-mono-id {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+    'Courier New', monospace;
   font-size: 12px;
   padding: 5px 8px;
   border-radius: 10px;
@@ -346,7 +355,7 @@
 }
 
 .mpm-copy-btn:hover {
-  background: rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .mpm-view-as-link {
@@ -417,55 +426,70 @@
   background: rgba(120, 170, 255, 0.14);
 }
 
+/* ===========================
+   Sidebar — DIGESTIBLE hierarchy
+   =========================== */
+
 .mpm-sidebar-step-list {
   margin-top: 10px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
+/* STAGE container */
 .mpm-sidebar-step-block {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+  border: 1px solid var(--mpm-border-2);
+  background: rgba(0, 0, 0, 0.18);
+  border-radius: 16px;
+  overflow: hidden;
 }
 
+/* STAGE header button */
 .mpm-sidebar-step-root {
   width: 100%;
   display: flex;
   gap: 10px;
   align-items: center;
-  padding: 10px 10px;
-  border-radius: 14px;
-  border: 1px solid var(--mpm-border);
+  padding: 12px 12px;
+  border-radius: 0;
+  border: none;
   background: rgba(255, 255, 255, 0.03);
-  color: rgba(255, 255, 255, 0.92);
+  color: rgba(255, 255, 255, 0.95);
   cursor: pointer;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .mpm-sidebar-step-root:hover {
   background: rgba(255, 255, 255, 0.06);
 }
 
+/* STAGE active (current) */
 .mpm-sidebar-step-root.active {
-  border-color: rgba(120, 170, 255, 0.45);
-  background: rgba(120, 170, 255, 0.14);
+  background: rgba(120, 170, 255, 0.1);
+  border-bottom-color: rgba(120, 170, 255, 0.18);
 }
 
+/* Stage label */
 .mpm-sidebar-step-text {
   font-weight: 900;
-  font-size: 12.5px;
-  line-height: 1.2;
+  font-size: 13px;
+  line-height: 1.15;
+  letter-spacing: 0.2px;
 }
 
+/* NEST rail + indentation for sub-steps */
 .mpm-sidebar-substep-list {
-  padding-left: 10px;
-  border-left: 1px solid rgba(255, 255, 255, 0.10);
+  padding: 10px 10px 12px 12px;
+  margin-left: 12px;
+  border-left: 2px solid rgba(255, 255, 255, 0.08);
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
 }
 
+/* SUB-STEP item */
 .mpm-sidebar-substep-btn {
   width: 100%;
   display: flex;
@@ -473,19 +497,21 @@
   align-items: center;
   padding: 9px 10px;
   border-radius: 12px;
-  border: 1px solid transparent;
-  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.03);
   color: rgba(255, 255, 255, 0.78);
   cursor: pointer;
+  text-align: left;
 }
 
 .mpm-sidebar-substep-btn:hover {
   background: rgba(255, 255, 255, 0.06);
 }
 
+/* SUB-STEP active */
 .mpm-sidebar-substep-btn.active {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.10);
+  border-color: rgba(120, 170, 255, 0.35);
+  background: rgba(120, 170, 255, 0.12);
   color: #fff;
 }
 
@@ -506,10 +532,11 @@
 }
 
 .mpm-sidebar-task-text {
-  color: rgba(255, 255, 255, 0.70);
+  color: rgba(255, 255, 255, 0.7);
   font-weight: 700;
   font-size: 12px;
   line-height: 1.2;
+  display: block;
 }
 
 /* ===========================
@@ -520,16 +547,16 @@
   overflow-y: auto;
   padding: 16px;
   background: #f1f3f8; /* your current “light canvas” behind content */
-  color: #111;         /* baseline readable in the main area */
+  color: #111; /* baseline readable in the main area */
 }
 
 /* The surface “card” that wraps whatever the active view renders */
 .mpm-surface {
   background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.10);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 16px;
   padding: 16px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.10);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
   color: #111;
 }
 
@@ -541,7 +568,7 @@
   flex-wrap: wrap;
   padding: 12px;
   border-radius: 16px;
-  border: 1px solid rgba(0, 0, 0, 0.10);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   background: rgba(0, 0, 0, 0.03);
   margin-bottom: 12px;
 }
@@ -559,13 +586,26 @@
   border-radius: 999px;
   display: inline-block;
   flex: 0 0 auto;
-  border: 1px solid rgba(0, 0, 0, 0.10);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   background: rgba(0, 0, 0, 0.06);
 }
 
 .mpm-pip-done {
-  background: rgba(140, 255, 180, 0.85);
-  border-color: rgba(140, 255, 180, 0.55);
+  background: transparent;
+  border: none;
+  position: relative;
+}
+
+.mpm-pip-done::after {
+  content: "✓";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 11px;
+  font-weight: 900;
+  line-height: 1;
+  color: rgba(140, 255, 180, 0.95);
 }
 
 .mpm-pip-doing {
@@ -574,10 +614,61 @@
 }
 
 .mpm-pip-todo {
-  background: rgba(0, 0, 0, 0.10);
-  border-color: rgba(0, 0, 0, 0.10);
+  background: rgba(0, 0, 0, 0.1);
+  border-color: rgba(0, 0, 0, 0.1);
 }
 
+.mpm-pip-task {
+  width: 8px;
+  height: 8px;
+}
+
+.mpm-pip-done-check{
+  width: 14px;
+  height: 14px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 900;
+  line-height: 1;
+  color: rgba(10,10,12,.95);
+  background: rgba(140,255,180,.95);
+  border: 1px solid rgba(140,255,180,.65);
+}
+
+/* ✅ DONE: sub-step = green check ONLY (no bg) */
+.mpm-pip-done-green {
+  width: 14px;
+  height: 14px;
+  border: none;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 900;
+  line-height: 1;
+  color: rgba(140, 255, 180, 0.95);
+}
+
+/* ✅ DONE: task/checkpoint = small WHITE check ONLY */
+.mpm-pip-done-white {
+  width: 10px;
+  height: 10px;
+  border: none;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 900;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* keep task size consistent (your existing rule is fine, but this reinforces it) */
 .mpm-pip-task {
   width: 8px;
   height: 8px;
@@ -612,7 +703,7 @@
 /* Buttons inside surface */
 .manage-project-modal-content.mpm-modal .mpm-main .mpm-surface button {
   background: rgba(0, 0, 0, 0.06);
-  border: 1px solid rgba(0, 0, 0, 0.10);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   color: #111;
   border-radius: 10px;
   font-weight: 800;
@@ -630,7 +721,7 @@
 
 /* container */
 .manage-project-modal-content.mpm-modal .mpm-main .step-container {
-  padding: 0;                 /* surface already has padding */
+  padding: 0; /* surface already has padding */
   max-width: none;
   margin: 0;
   font-family: 'Poppins', sans-serif;
@@ -650,7 +741,7 @@
   margin: 0 0 12px;
   font-size: 0.95rem;
   font-weight: 700;
-  color: rgba(0, 0, 0, 0.70);
+  color: rgba(0, 0, 0, 0.7);
 }
 
 /* table */
@@ -675,7 +766,7 @@
 .manage-project-modal-content.mpm-modal .mpm-main .step-table th {
   text-align: left;
   font-weight: 900;
-  color: rgba(0, 0, 0, 0.70);
+  color: rgba(0, 0, 0, 0.7);
   background: rgba(0, 0, 0, 0.03);
 }
 
@@ -686,7 +777,10 @@
 }
 
 /* checkbox */
-.manage-project-modal-content.mpm-modal .mpm-main .step-table input[type="checkbox"] {
+.manage-project-modal-content.mpm-modal
+  .mpm-main
+  .step-table
+  input[type='checkbox'] {
   transform: scale(1.15);
   accent-color: rgba(120, 170, 255, 0.95);
   cursor: pointer;
@@ -714,7 +808,7 @@
   font-weight: 900;
   cursor: pointer;
   font-size: 0.85rem;
-  border: 1px solid rgba(0, 0, 0, 0.10);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   background: rgba(0, 0, 0, 0.06);
   color: #111;
 }
@@ -781,29 +875,38 @@
   padding: 6px 10px;
   border-radius: 10px;
   cursor: pointer;
-  background: rgba(111, 224, 181, 0.70);
+  background: rgba(111, 224, 181, 0.7);
   font-weight: 900;
   color: #111;
   border: 1px solid rgba(0, 0, 0, 0.06);
 }
 
-.manage-project-modal-content.mpm-modal .mpm-main .time-input-actions button:hover {
+.manage-project-modal-content.mpm-modal
+  .mpm-main
+  .time-input-actions
+  button:hover {
   background: rgba(111, 224, 181, 0.85);
 }
 
-.manage-project-modal-content.mpm-modal .mpm-main .time-input-actions button.cancel-btn {
+.manage-project-modal-content.mpm-modal
+  .mpm-main
+  .time-input-actions
+  button.cancel-btn {
   background: rgba(0, 0, 0, 0.06);
   color: #111;
 }
 
-.manage-project-modal-content.mpm-modal .mpm-main .time-input-actions button.cancel-btn:hover {
+.manage-project-modal-content.mpm-modal
+  .mpm-main
+  .time-input-actions
+  button.cancel-btn:hover {
   background: rgba(0, 0, 0, 0.09);
 }
 
 /* IMPORTANT: do NOT fade completed rows – keep readable */
 .manage-project-modal-content.mpm-modal .mpm-main .completed,
-.manage-project-modal-content.mpm-modal .mpm-main [class*="completed"],
-.manage-project-modal-content.mpm-modal .mpm-main [class*="Complete"] {
+.manage-project-modal-content.mpm-modal .mpm-main [class*='completed'],
+.manage-project-modal-content.mpm-modal .mpm-main [class*='Complete'] {
   opacity: 1 !important;
   filter: none !important;
 }
@@ -815,7 +918,7 @@
 .manage-project-modal-content.mpm-modal .mpm-main .MuiPaper-root {
   background: #fff;
   color: #111;
-  border: 1px solid rgba(0, 0, 0, 0.10);
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .manage-project-modal-content.mpm-modal .mpm-main .MuiFormLabel-root,
@@ -824,7 +927,9 @@
   color: rgba(0, 0, 0, 0.65);
 }
 
-.manage-project-modal-content.mpm-modal .mpm-main .MuiOutlinedInput-notchedOutline {
+.manage-project-modal-content.mpm-modal
+  .mpm-main
+  .MuiOutlinedInput-notchedOutline {
   border-color: rgba(0, 0, 0, 0.14);
 }
 
@@ -834,6 +939,143 @@
 
 .mpm-mobile-phase-selector-wrapper {
   display: none;
+}
+
+/* ===========================
+   Mobile meta bar + collapsible sections (MISSING)
+   =========================== */
+
+
+/* Desktop defaults */
+.mpm-mobile-meta-bar {
+  display: none;
+}
+
+.mpm-meta-collapsible {
+  display: block; /* ✅ ALWAYS visible on desktop */
+  margin-top: 10px;
+}
+
+.mpm-meta-collapsible > * + * {
+  margin-top: 8px;
+}
+
+/* ===========================
+   Desktop: always show the details row
+   =========================== */
+
+.mpm-meta-collapsible {
+  display: block;
+  margin-top: 10px;
+}
+
+.mpm-meta-collapsible > * + * {
+  margin-top: 8px;
+}
+
+@media (max-width: 920px) {
+  .mpm-mobile-meta-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 14px;
+    border: 1px solid var(--mpm-border-2);
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .mpm-meta-collapsible {
+    display: none; /* ✅ hidden until toggled */
+    margin-top: 10px;
+  }
+
+  .mpm-meta-collapsible.open {
+    display: block;
+  }
+
+  .mpm-mobile-meta-left {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px; /* ✅ fixes "In Production64%" */
+    min-width: 0;
+  }
+
+  .mpm-mobile-status {
+    font-size: 12.5px;
+    font-weight: 900;
+    color: #fff;
+    white-space: nowrap;
+  }
+
+  .mpm-mobile-progress {
+    font-size: 12.5px;
+    font-weight: 900;
+    padding: 4px 8px;
+    border-radius: 999px;
+    border: 1px solid rgba(160, 190, 255, 0.35);
+    background: var(--mpm-accent-soft);
+    color: #fff;
+    white-space: nowrap;
+  }
+
+  .mpm-mobile-meta-toggle {
+    height: 30px;
+    padding: 0 10px;
+    border-radius: 999px;
+    border: 1px solid var(--mpm-border);
+    background: rgba(255, 255, 255, 0.06);
+    color: #fff;
+    font-weight: 900;
+    font-size: 12px;
+    cursor: pointer;
+  }
+
+  .mpm-mobile-meta-toggle:hover {
+    background: rgba(255, 255, 255, 0.10);
+  }
+}
+
+@media (max-width: 920px) {
+  /* FULL SCREEN MODAL ON MOBILE */
+  .manage-project-modal-overlay.mpm-overlay {
+    padding: 0 !important;
+    align-items: stretch !important;
+    justify-content: stretch !important;
+  }
+
+  .manage-project-modal-content.mpm-modal {
+    width: 100vw !important;
+    height: 100vh !important;
+    border-radius: 0 !important;
+  }
+
+  /* keep your existing rules */
+  .mpm-body {
+    grid-template-columns: 1fr;
+  }
+
+  .mpm-sidebar {
+    display: none;
+  }
+}
+
+@media (max-width: 920px) {
+  /* FORCE MOBILE SELECTOR VISIBLE */
+  .manage-project-modal-content.mpm-modal .mpm-mobile-phase-selector-wrapper {
+    display: block !important;
+  }
+
+  .manage-project-modal-content.mpm-modal .mpm-phase-selector-dropdown {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 14px;
+    border: 1px solid var(--mpm-border);
+    background: rgba(255, 255, 255, 0.06);
+    color: #fff;
+    font-weight: 800;
+  }
 }
 
 @media (max-width: 920px) {
@@ -900,14 +1142,14 @@
    and use these styles. */
 .manage-project-modal-content.mpm-modal.mpm-true-light {
   background: #fff;
-  border-color: rgba(0, 0, 0, 0.10);
+  border-color: rgba(0, 0, 0, 0.1);
   color: #111;
 }
 
 .manage-project-modal-content.mpm-modal.mpm-true-light .mpm-header,
 .manage-project-modal-content.mpm-modal.mpm-true-light .mpm-id-strip {
   background: #fff;
-  border-color: rgba(0, 0, 0, 0.10);
+  border-color: rgba(0, 0, 0, 0.1);
 }
 
 .manage-project-modal-content.mpm-modal.mpm-true-light .mpm-title {
@@ -916,12 +1158,13 @@
 
 .manage-project-modal-content.mpm-modal.mpm-true-light .mpm-close-btn {
   background: rgba(0, 0, 0, 0.04);
-  border-color: rgba(0, 0, 0, 0.10);
+  border-color: rgba(0, 0, 0, 0.1);
   color: #111;
 }
 
 .manage-project-modal-content.mpm-modal.mpm-true-light .mpm-status-chip,
-.manage-project-modal-content.mpm-modal.mpm-true-light .mpm-overall-progress-chip,
+.manage-project-modal-content.mpm-modal.mpm-true-light
+  .mpm-overall-progress-chip,
 .manage-project-modal-content.mpm-modal.mpm-true-light .mpm-sched-chip,
 .manage-project-modal-content.mpm-modal.mpm-true-light .mpm-target-chip,
 .manage-project-modal-content.mpm-modal.mpm-true-light .mpm-step-chip,
@@ -929,11 +1172,11 @@
 .manage-project-modal-content.mpm-modal.mpm-true-light .mpm-identifier-chip,
 .manage-project-modal-content.mpm-modal.mpm-true-light .mpm-mono-id {
   background: rgba(0, 0, 0, 0.04);
-  border-color: rgba(0, 0, 0, 0.10);
+  border-color: rgba(0, 0, 0, 0.1);
   color: #111;
 }
 
 .manage-project-modal-content.mpm-modal.mpm-true-light .mpm-sidebar {
   background: #fff;
-  border-right-color: rgba(0, 0, 0, 0.10);
+  border-right-color: rgba(0, 0, 0, 0.1);
 }

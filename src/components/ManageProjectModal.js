@@ -8,6 +8,7 @@ import {
   query,
   where,
   getDocs,
+  serverTimestamp,
 } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import { db } from '../firebaseConfig';
@@ -15,10 +16,11 @@ import StepComponentTemplate, {
   CHECKPOINTS_BY_ITEM_ID,
 } from './StepComponentTemplate';
 import ProjectOverview from './ProjectOverview';
-import defaultStepData from '../utils/defaultStepData';
+import { defaultStepData } from '../utils/buildWorkflow';
 import { calculateProjectProgress } from '../utils/calculateProjectProgress';
 import { Snackbar } from '@mui/material';
 import { useImpersonation } from '../context/ImpersonationContext';
+
 import './ManageProjectModal.css';
 // NOTE: StepComponentTemplate expects checkpointStates as boolean[]
 // (tri-state objects make every checkbox "truthy"/checked).
@@ -225,25 +227,21 @@ const getCheckpointLabelText = (cp) => {
   // 2) Object checkpoints (your cp() shape uses: ui, book, details)
   if (typeof cp === 'object') {
     // Prefer an explicit short field if you ever add one
-    const short =
-      typeof cp.short === 'string' ? cp.short.trim() : '';
+    const short = typeof cp.short === 'string' ? cp.short.trim() : '';
     if (short) return short;
 
     // ✅ Prefer "book" as the sidebar short label (this is your short version)
-    const book =
-      typeof cp.book === 'string' ? cp.book.trim() : '';
+    const book = typeof cp.book === 'string' ? cp.book.trim() : '';
     if (book) return book;
 
     // Fallback to UI (long)
     const ui = typeof cp.ui === 'string' ? cp.ui.trim() : '';
     if (ui) return ui;
 
-    const label =
-      typeof cp.label === 'string' ? cp.label.trim() : '';
+    const label = typeof cp.label === 'string' ? cp.label.trim() : '';
     if (label) return label;
 
-    const title =
-      typeof cp.title === 'string' ? cp.title.trim() : '';
+    const title = typeof cp.title === 'string' ? cp.title.trim() : '';
     if (title) return title;
   }
 
@@ -452,6 +450,32 @@ const LifecyclePanel = ({ lifecycle, onToggleCheckpoint }) => {
   return null;
 };
 
+// ✅ Always returns the *one* active sub-step (first incomplete) while project < 100%
+function getGlobalActivePointer(data) {
+  if (!data) return null;
+
+  for (const stepKey of STEP_KEYS) {
+    const checklist = Array.isArray(data?.[stepKey]?.checklist)
+      ? data[stepKey].checklist
+      : [];
+
+    for (let idx = 0; idx < checklist.length; idx += 1) {
+      const item = checklist[idx] || {};
+      const states = Array.isArray(item.checkpointStates)
+        ? item.checkpointStates
+        : [];
+      const checkpointsDone = states.length > 0 && states.every(Boolean);
+
+      const isDone = !!item.completed || checkpointsDone;
+      if (!isDone) {
+        return { stepKey, idx }; // FIRST incomplete sub-step across entire project
+      }
+    }
+  }
+
+  return null;
+}
+
 /* ----------------------------------------------------------------------------
  * MAIN COMPONENT
  * -------------------------------------------------------------------------- */
@@ -471,6 +495,7 @@ const ManageProjectModal = ({
   const [status, setStatus] = useState('Unknown');
   const [showSnackbar, setShowSnackbar] = useState(false);
   const [originalData, setOriginalData] = useState({});
+  const [mobileMetaOpen, setMobileMetaOpen] = useState(false);
 
   // which step is expanded in sidebar, and which sub-step is selected
   const [expandedStepKey, setExpandedStepKey] = useState(null);
@@ -483,7 +508,15 @@ const ManageProjectModal = ({
   const determineOverallStatus = (data = editableData) => {
     const all = buildPhases.flatMap((p) => data[p.key]?.checklist || []);
     const total = all.length;
-    const done = all.filter((t) => t.completed).length;
+
+    const done = all.filter((t) => {
+      const states = Array.isArray(t?.checkpointStates)
+        ? t.checkpointStates
+        : [];
+      const checkpointsDone = states.length > 0 && states.every(Boolean);
+      return !!t.completed || checkpointsDone;
+    }).length;
+
     if (done === 0) return 'Initial Planning';
     if (done === total) return 'Finished';
     return 'In Production';
@@ -535,6 +568,27 @@ const ManageProjectModal = ({
       'Unknown'
     );
   };
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const mq = window.matchMedia('(max-width: 920px)');
+    const apply = () => setMobileMetaOpen(false); // collapsed by default on mobile
+
+    if (mq.matches) apply();
+
+    const onChange = (e) => {
+      if (e.matches) setMobileMetaOpen(false);
+    };
+
+    if (mq.addEventListener) mq.addEventListener('change', onChange);
+    else mq.addListener(onChange);
+
+    return () => {
+      if (mq.removeEventListener) mq.removeEventListener('change', onChange);
+      else mq.removeListener(onChange);
+    };
+  }, [isOpen]);
 
   // hydrate project data
   useEffect(() => {
@@ -698,7 +752,7 @@ const ManageProjectModal = ({
             ...(merged || {}),
           }),
 
-          updatedAt: new Date(),
+          updatedAt: serverTimestamp(),
         },
         { merge: true }
       );
@@ -733,39 +787,35 @@ const ManageProjectModal = ({
 
   // --- STATUS HELPERS (Step / Substep / Checkpoint) ---
 
-  const getSubstepStatus = (item) => {
-    const checkpointArr = Array.isArray(item?.checkpointStates)
-      ? item.checkpointStates
-      : [];
-
-    const checkpointsAllDone =
-      checkpointArr.length > 0 && checkpointArr.every((c) => c === true);
-
-    const anyCheckpoint = checkpointArr.some(Boolean);
-    const anyTime =
-      Number.isFinite(item?.totalSeconds) && item.totalSeconds > 0;
-
-    // ✅ treat all checkpoints done as "done"
-    if (checkpointsAllDone || !!item?.completed) return 'done';
-    if (anyCheckpoint || anyTime) return 'doing';
-    return 'todo';
-  };
-
   const getStepStatus = (stepKey, data) => {
-    const checklist = data?.[stepKey]?.checklist || [];
+    const checklist = Array.isArray(data?.[stepKey]?.checklist)
+      ? data[stepKey].checklist
+      : [];
     if (!checklist.length) return 'todo';
 
-    const statuses = checklist.map(getSubstepStatus);
-    const allDone = statuses.every((s) => s === 'done');
-    const anyTouched = statuses.some((s) => s !== 'todo');
+    const allDone = checklist.every((it) => {
+      const states = Array.isArray(it?.checkpointStates)
+        ? it.checkpointStates
+        : [];
+      const checkpointsDone = states.length > 0 && states.every(Boolean);
+      return !!it.completed || checkpointsDone;
+    });
 
     if (allDone) return 'done';
-    if (anyTouched) return 'doing';
+
+    // if this step contains the global active pointer, stage = doing
+    if (activePtr?.stepKey === stepKey) return 'doing';
+
+    // otherwise not started
     return 'todo';
   };
 
-  const getCheckpointStatus = (substepItem, checkpointIndex) => {
-    const subStatus = getSubstepStatus(substepItem);
+  const getCheckpointStatus = (
+    stepKey,
+    subIdx,
+    substepItem,
+    checkpointIndex
+  ) => {
     const states = Array.isArray(substepItem?.checkpointStates)
       ? substepItem.checkpointStates
       : [];
@@ -773,7 +823,10 @@ const ManageProjectModal = ({
     const isDone = states[checkpointIndex] === true;
     if (isDone) return 'done';
 
-    if (subStatus === 'doing') {
+    const isGlobalActive =
+      !!activePtr && activePtr.stepKey === stepKey && activePtr.idx === subIdx;
+
+    if (isGlobalActive) {
       const firstIncompleteIdx = states.findIndex((v) => v !== true);
       if (firstIncompleteIdx === checkpointIndex) return 'doing';
     }
@@ -782,6 +835,56 @@ const ManageProjectModal = ({
   };
 
   const StatusPip = ({ level, status }) => {
+    if (status === 'done') {
+      // Stage-level: keep the green pill check (your current look)
+      if (level === 'step') {
+        return (
+          <span
+            className={[
+              'mpm-pip',
+              `mpm-pip-${level}`,
+              'mpm-pip-done-check',
+            ].join(' ')}
+            aria-hidden="true"
+          >
+            ✓
+          </span>
+        );
+      }
+
+      // Step-level: green check ONLY (no background)
+      if (level === 'substep') {
+        return (
+          <span
+            className={[
+              'mpm-pip',
+              `mpm-pip-${level}`,
+              'mpm-pip-done-green',
+            ].join(' ')}
+            aria-hidden="true"
+          >
+            ✓
+          </span>
+        );
+      }
+
+      // Task-level: small WHITE check ONLY
+      if (level === 'task') {
+        return (
+          <span
+            className={[
+              'mpm-pip',
+              `mpm-pip-${level}`,
+              'mpm-pip-done-white',
+            ].join(' ')}
+            aria-hidden="true"
+          >
+            ✓
+          </span>
+        );
+      }
+    }
+
     return (
       <span
         className={['mpm-pip', `mpm-pip-${level}`, `mpm-pip-${status}`].join(
@@ -790,20 +893,6 @@ const ManageProjectModal = ({
         aria-hidden="true"
       />
     );
-  };
-
-  // returns the checkpoint list for a given substep (prefers item.id, falls back to generated key)
-  const getCheckpointListForSubstep = (stepKey, itemIndex, item) => {
-    const id = item?.id;
-    if (id && Array.isArray(CHECKPOINTS_BY_ITEM_ID[id]))
-      return CHECKPOINTS_BY_ITEM_ID[id];
-
-    const prefix = STEPKEY_TO_CHECKPOINT_PREFIX[stepKey] || stepKey;
-    const generatedKey = `${prefix}_${itemIndex + 1}`;
-    if (Array.isArray(CHECKPOINTS_BY_ITEM_ID[generatedKey]))
-      return CHECKPOINTS_BY_ITEM_ID[generatedKey];
-
-    return [];
   };
 
   /* --------------------------------------------------------------------------
@@ -1049,6 +1138,8 @@ const ManageProjectModal = ({
     projectData?.parentOrderId || projectData?.orderId || '';
   const idText = projectData?.id || '—';
   const weightedProgress = getWeightedProgressPct(editableData);
+  const activePtr =
+    weightedProgress < 100 ? getGlobalActivePointer(editableData) : null;
 
   // Resolve current sub-step label for step views
   const selectedStepLabel =
@@ -1075,7 +1166,7 @@ const ManageProjectModal = ({
     return `${selectedStepKey}::${idx}`;
   };
 
-  // 🔐 Impersonate linked user (if available) and open their customer project view (SAME TAB)
+   // 🔐 Impersonate linked user (if available) and open their customer project view (SAME TAB)
   const handleViewAsCustomer = () => {
     const projectId = projectData?.id;
 
@@ -1100,7 +1191,7 @@ const ManageProjectModal = ({
       startImpersonation(uid);
     }
 
-    // Build URL (can still include params; harmless even in same tab)
+    // Build URL params (safe even if legacy page ignores some)
     const params = new URLSearchParams();
     params.set('projectId', projectId);
 
@@ -1110,10 +1201,8 @@ const ManageProjectModal = ({
       if (email) params.set('impersonateEmail', email);
     }
 
-    const url = `/legacy?${params.toString()}`;
-
-    // ✅ SAME TAB
-    navigate(url);
+    // ✅ NEW endpoint
+    navigate(`/legacy?${params.toString()}`);
   };
 
   return (
@@ -1141,7 +1230,29 @@ const ManageProjectModal = ({
             </button>
           </div>
 
-          <div className="mpm-header-chips">
+          {/* ✅ Mobile condensed bar (always visible on mobile) */}
+          <div className="mpm-mobile-meta-bar">
+            <div className="mpm-mobile-meta-left">
+              <span
+                className={`mpm-mobile-status ${status.toLowerCase().replace(/\s+/g, '-')}`}
+              >
+                {status}
+              </span>
+              <span className="mpm-mobile-progress">{weightedProgress}%</span>
+            </div>
+
+            <button
+              type="button"
+              className="mpm-mobile-meta-toggle"
+              onClick={() => setMobileMetaOpen((v) => !v)}
+            >
+              {mobileMetaOpen ? 'Hide ▲' : 'Details ▼'}
+            </button>
+          </div>
+
+          <div
+            className={`mpm-meta-collapsible mpm-header-chips ${mobileMetaOpen ? 'open' : ''}`}
+          >
             <div
               className={`mpm-status-chip ${status.toLowerCase().replace(/\s+/g, '-')}`}
             >
@@ -1227,7 +1338,9 @@ const ManageProjectModal = ({
         </header>
 
         {/* Project meta row (identifier, customer, IDs, impersonation link) */}
-        <div className="mpm-id-strip">
+        <div
+          className={`mpm-id-strip mpm-meta-collapsible ${mobileMetaOpen ? 'open' : ''}`}
+        >
           {/* Left: drum identifier + customer name/email */}
           <div className="mpm-identifier-top">
             {/* SL-005 · SoundLegend · 14×8" */}
@@ -1329,16 +1442,22 @@ const ManageProjectModal = ({
             >
               <option value="details">📝 Overview</option>
 
-              {buildPhases.map((phase) => {
-                const cl = editableData[phase.key]?.checklist || [];
+              {(Array.isArray(buildPhases) ? buildPhases : []).map((phase) => {
+                const cl = Array.isArray(editableData?.[phase.key]?.checklist)
+                  ? editableData[phase.key].checklist
+                  : [];
+
                 if (!cl.length) return null;
 
                 return (
                   <optgroup key={phase.key} label={phase.label}>
                     {cl.map((item, idx) => {
-                      const label = item.task ?? item.label ?? '';
+                      const label = String(
+                        item?.task ?? item?.label ?? ''
+                      ).trim();
                       const optionValue = `${phase.key}::${idx}`;
-                      const done = !!item.completed;
+                      const done = !!item?.completed;
+
                       return (
                         <option key={optionValue} value={optionValue}>
                           {done ? '✅ ' : ''}
@@ -1366,14 +1485,42 @@ const ManageProjectModal = ({
             >
               📝 Overview
             </button>
-
             <div className="mpm-sidebar-step-list">
-              {buildPhases.map((step) => {
+              {(Array.isArray(buildPhases) ? buildPhases : []).map((step) => {
                 const isExpanded = expandedStepKey === step.key;
-                const checklist = editableData[step.key]?.checklist || [];
+
+                const checklist = Array.isArray(
+                  editableData?.[step.key]?.checklist
+                )
+                  ? editableData[step.key].checklist
+                  : [];
 
                 // ✅ compute step status here (valid JS, not JSX)
-                const stepStatus = getStepStatus(step.key, editableData);
+                const stepStatus = (() => {
+                  const checklistInner = Array.isArray(
+                    editableData?.[step.key]?.checklist
+                  )
+                    ? editableData[step.key].checklist
+                    : [];
+
+                  if (!checklistInner.length) return 'todo';
+
+                  const allDone = checklistInner.every((it) => {
+                    const states = Array.isArray(it?.checkpointStates)
+                      ? it.checkpointStates
+                      : [];
+                    const checkpointsDone =
+                      states.length > 0 && states.every(Boolean);
+                    return !!it?.completed || checkpointsDone;
+                  });
+
+                  if (allDone) return 'done';
+
+                  const containsActive =
+                    !!activePtr && activePtr.stepKey === step.key;
+
+                  return containsActive ? 'doing' : 'todo';
+                })();
 
                 return (
                   <div key={step.key} className="mpm-sidebar-step-block">
@@ -1397,89 +1544,112 @@ const ManageProjectModal = ({
 
                     {isExpanded && checklist.length > 0 && (
                       <div className="mpm-sidebar-substep-list">
-                        {checklist.map((item, idx) => {
-                          const label = item.task ?? item.label ?? '';
-                          const isActiveSub =
-                            selectedStepKey === step.key &&
-                            selectedSubIndex === idx;
+                        {(Array.isArray(checklist) ? checklist : []).map(
+                          (item, idx) => {
+                            const label = item?.task ?? item?.label ?? '';
+                            const isActiveSub =
+                              selectedStepKey === step.key &&
+                              selectedSubIndex === idx;
 
-                          // ✅ compute substep status here (valid JS)
-                          const subStatus = getSubstepStatus(item);
+                            // ✅ compute substep status here (valid JS)
+                            const states = Array.isArray(item?.checkpointStates)
+                              ? item.checkpointStates
+                              : [];
+                            const checkpointsDone =
+                              states.length > 0 && states.every(Boolean);
+                            const isDone = !!item?.completed || checkpointsDone;
 
-                          return (
-                            <div key={item.id || idx}>
-                              <button
-                                className={`mpm-sidebar-substep-btn ${
-                                  isActiveSub ? 'active' : ''
-                                }`}
-                                type="button"
-                                onClick={() => {
-                                  setSelectedStepKey(step.key);
-                                  setSelectedSubIndex(idx);
-                                  setSelectedTab(step.key);
-                                }}
-                              >
-                                <StatusPip level="substep" status={subStatus} />
-                                <span className="mpm-sidebar-substep-text">
-                                  {label}
-                                </span>
-                              </button>
+                            const isGlobalActive =
+                              !!activePtr &&
+                              activePtr.stepKey === step.key &&
+                              activePtr.idx === idx;
 
-                              {/* ✅ Checkpoint task list (only under active substep) */}
-                              {isActiveSub &&
-                                (() => {
-                                  const checkpointLabels =
-                                    getCheckpointListForSubstep(
-                                      step.key,
-                                      idx,
-                                      item
-                                    );
-                                  const states = Array.isArray(
-                                    item.checkpointStates
-                                  )
-                                    ? item.checkpointStates
-                                    : [];
-                                  if (!checkpointLabels.length) return null;
+                            // ✅ RULE: 1 active "doing" item if project < 100%
+                            const subStatus = isDone
+                              ? 'done'
+                              : isGlobalActive
+                                ? 'doing'
+                                : 'todo';
 
-                                  return (
-                                    <div className="mpm-sidebar-task-list">
-                                      {checkpointLabels.map(
-                                        (taskLabel, cIdx) => {
-                                          const taskStatus =
-                                            getCheckpointStatus(
-                                              {
-                                                ...item,
-                                                checkpointStates: states,
-                                              },
-                                              cIdx
+                            return (
+                              <div key={item?.id || idx}>
+                                <button
+                                  className={`mpm-sidebar-substep-btn ${
+                                    isActiveSub ? 'active' : ''
+                                  }`}
+                                  type="button"
+                                  onClick={() => {
+                                    setSelectedStepKey(step.key);
+                                    setSelectedSubIndex(idx);
+                                    setSelectedTab(step.key);
+                                  }}
+                                >
+                                  <StatusPip
+                                    level="substep"
+                                    status={subStatus}
+                                  />
+                                  <span className="mpm-sidebar-substep-text">
+                                    {label}
+                                  </span>
+                                </button>
+
+                                {/* ✅ Checkpoint task list (only under active substep) */}
+                                {isActiveSub &&
+                                  (() => {
+                                    const checkpointLabels =
+                                      getCheckpointListForSubstep(
+                                        step.key,
+                                        idx,
+                                        item
+                                      );
+
+                                    const cpStates = Array.isArray(
+                                      item?.checkpointStates
+                                    )
+                                      ? item.checkpointStates
+                                      : [];
+
+                                    if (!checkpointLabels?.length) return null;
+
+                                    return (
+                                      <div className="mpm-sidebar-task-list">
+                                        {checkpointLabels.map(
+                                          (taskLabel, cIdx) => {
+                                            const taskStatus =
+                                              getCheckpointStatus(
+                                                step.key,
+                                                idx,
+                                                item,
+                                                cIdx
+                                              );
+
+                                            return (
+                                              <div
+                                                key={`${item?.id || idx}-cp-${cIdx}`}
+                                                className="mpm-sidebar-task-row"
+                                              >
+                                                <StatusPip
+                                                  level="task"
+                                                  status={taskStatus}
+                                                />
+                                                <span className="mpm-sidebar-task-text">
+                                                  {shortenCheckpointLabel(
+                                                    getCheckpointLabelText(
+                                                      taskLabel
+                                                    )
+                                                  )}
+                                                </span>
+                                              </div>
                                             );
-
-                                          return (
-                                            <div
-                                              key={`${item.id || idx}-cp-${cIdx}`}
-                                              className="mpm-sidebar-task-row"
-                                            >
-                                              <StatusPip
-                                                level="task"
-                                                status={taskStatus}
-                                              />
-                                              <span className="mpm-sidebar-task-text">
-                                                {shortenCheckpointLabel(
-                                                  getCheckpointLabelText(
-                                                    taskLabel
-                                                  )
-                                                )}
-                                              </span>
-                                            </div>
-                                          );
-                                        }
-                                      )}
-                                    </div>
-                                  );
-                                })()}
-                            </div>
-                          );
-                        })}
+                                          }
+                                        )}
+                                      </div>
+                                    );
+                                  })()}
+                              </div>
+                            );
+                          }
+                        )}
                       </div>
                     )}
                   </div>
@@ -1509,7 +1679,9 @@ const ManageProjectModal = ({
                     });
                   }}
                   onSave={() => {
-                    saveToFirestore(editableData);
+                    saveToFirestore({
+                      projectOverview: editableData.projectOverview || {},
+                    });
                     setIsEditing(false);
                     setShowSnackbar(true);
                   }}
