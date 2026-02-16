@@ -1,5 +1,6 @@
 // src/components/ManageProjectModal.js
 import React, { useState, useEffect } from 'react';
+import { STAGE_TEMPLATES } from '../utils/workflowDefinitions';
 import {
   doc,
   setDoc,

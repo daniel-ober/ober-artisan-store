@@ -10,14 +10,40 @@ import {
 import { db } from '../../firebaseConfig';
 import { calculateProjectProgress } from '../../utils/calculateProjectProgress';
 import {
-  STEPS,
-  STEP_DEFS,
+  STAGES,
+  STAGE_DEFS,
   STAGE_TEMPLATES,
+  resolveStageKey,
 } from '../../utils/workflowDefinitions';
 
 import './ProjectProgress.css';
 
 const CRAFT_VIDEO = '/craft_in_motion/craftinmotion1080p.mp4';
+
+// ✅ TEMP ALIASES so the rest of this file compiles without a massive refactor yet.
+// This file expects "STEPS" to mean "stages in order".
+const STEPS = STAGES.map((s) => ({
+  key: s.stageKey,
+  label: s.adminMainTitle?.replace(/^\d+\.\s*/, '') || s.adminMainTitle,
+  adminMainTitle: s.adminMainTitle,
+  adminLeftShort: s.adminLeftShort,
+  // placeholders (so UI doesn’t explode)
+  what: '',
+  why: '',
+  techniques: [],
+  tools: [],
+  estHours: '—',
+  avgDays: '—',
+  mantra: '',
+  // IMPORTANT: use templates to drive sub-steps/checkpoints in StageCheckpointsPanel
+  storageKeys: [s.stageKey],
+}));
+
+// ✅ This file also expects a STEP_DEFS map keyed by `key`
+const STEP_DEFS = STEPS.reduce((acc, s) => {
+  acc[s.key] = s;
+  return acc;
+}, {});
 
 /**
  * ✅ CANONICAL STORAGE KEYS (Admin Project View source of truth)
@@ -84,6 +110,49 @@ const LEGACY_STEPKEY_FALLBACKS = {
 /* =========================================================
    HELPERS
    ========================================================= */
+
+function isChecklistItemComplete(item) {
+  if (!item) return false;
+
+  const states = Array.isArray(item.checkpointStates) ? item.checkpointStates : null;
+  if (states && states.length > 0) {
+    return states.every(Boolean);
+  }
+
+  return !!item.completed;
+}
+
+function isChecklistItemTouched(item) {
+  if (!item) return false;
+
+  if (item.completed) return true;
+
+  const states = Array.isArray(item.checkpointStates) ? item.checkpointStates : null;
+  if (states && states.length > 0) {
+    return states.some(Boolean);
+  }
+
+  return (item.totalSeconds ?? 0) > 0;
+}
+
+function getUnlockMaxStageIndex(project) {
+  // Always allow Stage 1–3
+  const MIN_UNLOCKED = 2; // index 2 == Stage 3
+
+  if (!project) return MIN_UNLOCKED;
+
+  // Find the FIRST stage that is not completed.
+  // Everything up to that stage should be unlocked.
+  for (let i = 0; i < STEPS.length; i += 1) {
+    const status = getStepStatus(project, STEPS[i]).status; // "Completed" | "In Progress" | "Not Started"
+    if (status !== 'Completed') {
+      return Math.max(MIN_UNLOCKED, i);
+    }
+  }
+
+  // If all completed, unlock all
+  return STEPS.length - 1;
+}
 
 function canonicalKeyForStage(stageKey) {
   return STAGEKEY_TO_CANONICAL_STEPKEY[stageKey] || stageKey;
@@ -212,8 +281,10 @@ function slugify(s = '') {
 function getCombinedChecklist(project, stepDef) {
   if (!project || !stepDef) return [];
 
-  // ✅ Portal stepDef.storageKeys can stay for UI/structure, but STORAGE must be canonical.
-  // If workflowDefinitions has storageKeys, we map each to canonical, then read the project fields.
+  const stageKey = stepDef.key || stepDef.stageKey; // portal stage key
+  const tpl = stageKey ? STAGE_TEMPLATES?.[stageKey] : null;
+  const cap = Array.isArray(tpl?.steps) ? tpl.steps.length : null;
+
   const keys = stepDef.storageKeys || [];
   const items = [];
 
@@ -223,7 +294,9 @@ function getCombinedChecklist(project, stepDef) {
     const section = project?.[phaseKey];
 
     if (section?.checklist && Array.isArray(section.checklist)) {
-      section.checklist.filter(Boolean).forEach((i) => items.push(i));
+      const filtered = section.checklist.filter(Boolean);
+      const capped = Number.isFinite(cap) ? filtered.slice(0, cap) : filtered;
+      capped.forEach((i) => items.push(i));
     }
   });
 
@@ -238,12 +311,16 @@ function getStepStatus(project, stepOrDef) {
   const list = getCombinedChecklist(project, def);
   if (!list.length) return { status: 'Not Started', done: 0, total: 0 };
 
-  const done = list.filter((i) => i && i.completed).length;
+  const total = list.length;
+  const done = list.filter(isChecklistItemComplete).length;
 
-  if (done === 0) return { status: 'Not Started', done: 0, total: list.length };
-  if (done === list.length)
-    return { status: 'Completed', done, total: list.length };
-  return { status: 'In Progress', done, total: list.length };
+  if (done === 0) {
+    const anyTouched = list.some(isChecklistItemTouched);
+    return { status: anyTouched ? 'In Progress' : 'Not Started', done: 0, total };
+  }
+
+  if (done === total) return { status: 'Completed', done, total };
+  return { status: 'In Progress', done, total };
 }
 
 /** Any extra checklist items that aren’t part of the curated weighted list */
@@ -491,14 +568,25 @@ const StageCheckpointsPanel = ({
     const globalPtr = overallPct < 100 ? getGlobalActiveSubStep(project) : null;
 
     return tplSteps.map((tplStep, idx) => {
-      const labels = tplStep.checkpoints || [];
+      const phaseItem = phaseChecklist[idx];
+
+      // ✅ New template shape support
+      const tplStepId =
+        tplStep?.id || tplStep?.key || `${stageKey}_step_${idx}`;
+      const tplStepLabel =
+        tplStep?.adminMainTitle ||
+        tplStep?.label ||
+        tplStep?.adminLeftShort ||
+        `Step ${idx + 1}`;
+
+      // checkpoints are cp objects now
+      const checkpointDefs = Array.isArray(tplStep?.checkpoints)
+        ? tplStep.checkpoints
+        : [];
 
       let checkpointStates = [];
-      let completedFlag = false;
       let stepDurationMinutes = 0;
 
-      // ---- 1) PRIMARY: CANONICAL phase checklist ----
-      const phaseItem = phaseChecklist[idx];
       if (phaseItem) {
         if (Array.isArray(phaseItem.checkpointStates)) {
           checkpointStates = phaseItem.checkpointStates;
@@ -510,37 +598,25 @@ const StageCheckpointsPanel = ({
               ? phaseItem.totalSeconds / 60
               : 0)
         );
-
-        completedFlag = !!phaseItem.completed;
       }
 
-      // ---- 2) FALLBACK: lifecycle (display-only) ----
-      if (!checkpointStates.length && lifecycleSteps.length) {
-        const tplSlug = slugify(tplStep.label);
-        const dbStep =
-          lifecycleSteps.find((s) => slugify(s.label || '') === tplSlug) ||
-          lifecycleSteps[idx];
-
-        if (dbStep) {
-          const cpsObj = dbStep.checkpoints || {};
-          const cpsArr = Object.values(cpsObj).sort(
-            (a, b) => (a.order || 0) - (b.order || 0)
-          );
-          checkpointStates = cpsArr.map((c) => !!c.completed);
-          completedFlag = completedFlag || !!dbStep.completed;
-        }
-      }
-
-      const checkpoints = labels.map((cpLabel, cpIndex) => ({
-        id: `${tplStep.key}_cp_${cpIndex}`,
-        label: cpLabel,
+      const checkpoints = checkpointDefs.map((cpObj, cpIndex) => ({
+        id: `${tplStepId}_cp_${cpIndex}`,
+        // ✅ renderable string
+        label: cpObj?.ui || cpObj?.book || `Checkpoint ${cpIndex + 1}`,
+        // (optional: keep details available if you ever want to show them)
+        details: Array.isArray(cpObj?.details) ? cpObj.details : [],
         completed: !!checkpointStates[cpIndex],
       }));
 
       const total = checkpoints.length;
       const done = checkpoints.filter((c) => c.completed).length;
 
-      const isComplete = total > 0 && (completedFlag || done === total);
+      const isComplete = total > 0 && done === total;
+
+      const overallPct = getOverallProgress(project);
+      const globalPtr =
+        overallPct < 100 ? getGlobalActiveSubStep(project) : null;
 
       const isGlobalActive =
         !!globalPtr &&
@@ -552,8 +628,9 @@ const StageCheckpointsPanel = ({
       else if (isGlobalActive) status = 'IN PROGRESS';
 
       return {
-        id: `${stageKey}_${tplStep.key}`,
-        label: tplStep.label,
+        id: `${stageKey}_${tplStepId}`,
+        // ✅ THIS is what will show "Player Interview", etc.
+        label: tplStepLabel,
         order: idx + 1,
         checkpoints,
         total,
@@ -1243,6 +1320,13 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
     [project, overallPct]
   );
 
+  // ✅ Always allow Stage 1–3 to be viewable.
+  // ✅ Also allow anything up to the current stage (in progress / reached).
+const unlockedUntilIndex = useMemo(
+  () => getUnlockMaxStageIndex(project),
+  [project]
+);
+
   const prebuildComplete = useMemo(
     () => arePrebuildStagesComplete(project),
     [project]
@@ -1269,14 +1353,11 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
 
   const activeIndex = STEPS.indexOf(activeStep);
 
-  const isStageFuture =
-    activeStatus === 'not_started' && activeIndex > currentStepIndex;
+  // ✅ Stage is locked if it's beyond what’s unlocked for viewing
+  const isStageLocked = activeIndex > unlockedUntilIndex;
 
-  const isStageLocked =
-    isStageFuture && !(overallPct === 0 && activeIndex <= 2);
-
-  const isPhaseLockedByTeaser =
-    !prebuildComplete && getPhaseIndexForStep(activeIndex) > 0;
+  // ✅ Use the same rule for whether to show teaser vs checkpoints
+  const isPhaseLockedByTeaser = isStageLocked;
 
   const heroMedia = useMemo(() => ({ type: 'video', url: CRAFT_VIDEO }), []);
 
@@ -1403,22 +1484,8 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
 
             // Phase-level lock: any BUILD or POST-BUILD stage (index >= 3)
             // stays locked until all PRE-BUILD stages are completed.
-            const phaseLocked =
-              !prebuildComplete && getPhaseIndexForStep(index) > 0;
-
-            // Default: future stages are locked until we reach them
-            const futureLocked =
-              stepStatus === 'not_started' && index > currentStepIndex;
-
-            let isLocked = phaseLocked || futureLocked;
-
-            // 🔓 Brand-new project teaser rule:
-            // when overall progress is 0%, allow the first three stages (0–2)
-            // to be clickable so the artist can explore pre-build.
-            if (overallPct === 0 && index <= 2) {
-              isLocked = false;
-            }
-
+            // ✅ Locked if beyond the furthest stage we're allowed to view
+            const isLocked = index > unlockedUntilIndex;
             const className = [
               'sl-progress-step-dot',
               isCurrent ? 'is-current' : '',
