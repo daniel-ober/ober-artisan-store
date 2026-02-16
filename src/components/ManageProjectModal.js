@@ -714,65 +714,74 @@ const ManageProjectModal = ({
 
   if (!isOpen) return null;
 
-  // --------------------------------------------------------------------------
-  // SAVE → Firestore (single canonical save)
-  // --------------------------------------------------------------------------
-  const saveToFirestore = async (partialUpdate = {}) => {
-    try {
-      if (!projectData?.id) return;
+// --------------------------------------------------------------------------
+// SAVE → Firestore (single canonical save)  ✅ FIXED: robust project id + logging
+// --------------------------------------------------------------------------
+const saveToFirestore = async (partialUpdate = {}) => {
+  try {
+    const projectId =
+      projectData?.id ||
+      projectData?.projectId ||
+      projectData?.docId ||
+      projectData?.projectID;
 
-      // Merge update into current local state so we can derive status safely
-      const merged = {
-        ...(editableData || {}),
-        ...(partialUpdate || {}),
-      };
-
-      const nextStatus = determineOverallStatus(merged);
-      const nextPhase = determineCurrentPhase(merged);
-
-      // Persist: partial step updates + derived fields for admin views/tables
-      const projectRef = doc(db, 'projects', projectData.id);
-
-      await setDoc(
-        projectRef,
-        {
-          ...partialUpdate,
-
-          // Keep these fields in sync for dashboard + tables
-          status: nextStatus,
-          currentPhase: nextPhase,
-
-          // Optional: normalize top-level customer fields so tables don’t show N/A
-          customerName: deriveCustomerName({
-            ...(projectData || {}),
-            ...(merged || {}),
-          }),
-          customerEmail: deriveCustomerEmail({
-            ...(projectData || {}),
-            ...(merged || {}),
-          }),
-
-          updatedAt: serverTimestamp(),
-        },
-        { merge: true }
+    if (!projectId) {
+      console.warn(
+        '[ManageProjectModal] saveToFirestore: missing project id',
+        { projectData, partialUpdate }
       );
+      return;
+    }
 
-      // Update local chips immediately
-      setStatus(nextStatus);
+    // Merge update into current local state so we can derive status safely
+    const merged = {
+      ...(editableData || {}),
+      ...(partialUpdate || {}),
+    };
 
-      // Tell parent list to update if needed
-      onProjectUpdate?.({
-        id: projectData.id,
+    const nextStatus = determineOverallStatus(merged);
+    const nextPhase = determineCurrentPhase(merged);
+
+    const projectRef = doc(db, 'projects', projectId);
+
+    await setDoc(
+      projectRef,
+      {
         ...partialUpdate,
+
+        // Keep these fields in sync for dashboard + tables
         status: nextStatus,
         currentPhase: nextPhase,
-      });
 
-      setShowSnackbar(true);
-    } catch (err) {
-      console.error('[ManageProjectModal] saveToFirestore failed:', err);
-    }
-  };
+        // Normalize top-level customer fields so tables don’t show N/A
+        customerName: deriveCustomerName({
+          ...(projectData || {}),
+          ...(merged || {}),
+        }),
+        customerEmail: deriveCustomerEmail({
+          ...(projectData || {}),
+          ...(merged || {}),
+        }),
+
+        updatedAt: serverTimestamp(),
+      },
+      { merge: true }
+    );
+
+    setStatus(nextStatus);
+
+    onProjectUpdate?.({
+      id: projectId,
+      ...partialUpdate,
+      status: nextStatus,
+      currentPhase: nextPhase,
+    });
+
+    setShowSnackbar(true);
+  } catch (err) {
+    console.error('[ManageProjectModal] saveToFirestore failed:', err);
+  }
+};
 
   const calculateProjectTotalTime = (data = editableData) => {
     let total = 0;
