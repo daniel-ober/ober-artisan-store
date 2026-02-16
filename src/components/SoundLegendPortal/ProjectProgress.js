@@ -1,6 +1,12 @@
 // src/components/SoundLegendPortal/ProjectProgress.js
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import {
+  doc,
+  getDoc,
+  onSnapshot,
+  updateDoc,
+  serverTimestamp,
+} from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
 import { calculateProjectProgress } from '../../utils/calculateProjectProgress';
 import {
@@ -13,80 +19,124 @@ import './ProjectProgress.css';
 
 const CRAFT_VIDEO = '/craft_in_motion/craftinmotion1080p.mp4';
 
-/** Normalized time weights (kept for reference if needed later) */
-const STEP_WEIGHTS = {
-  discoveryDesign: 0.0317,
-  commitmentPortal: 0.0076,
-  woodVision: 0.0382,
-  rawShell: 0.1332,
-  shellTrueingTorch: 0.2162,
-  exteriorArt: 0.2838,
-  edgesBeds: 0.0349,
-  hardwareAssembly: 0.0775,
-  legacyMedia: 0.1616,
-  finalQa: 0.0153,
-};
+/**
+ * ✅ CANONICAL STORAGE KEYS (Admin Project View source of truth)
+ * These must match ManageProjectModal STEP_KEYS exactly.
+ */
+const CANONICAL_STEP_KEYS = [
+  'discoveryDesign',
+  'commitmentPortal',
+  'woodVisionLockIn',
+  'rawShellCreation',
+  'shellTrueingTorchTune',
+  'exteriorArtFinish',
+  'edgesSnareBeds',
+  'hardwareAssembly',
+  'legacyTuningMedia',
+  'finalQAPackagingDelivery',
+];
 
-const STAGE_DAY_ESTIMATES = {
-  discoveryDesign: 2,
-  commitmentPortal: 1,
-  woodVision: 3,
-  rawShell: 4,
-  shellTrueingTorch: 4,
-  exteriorArt: 9,
-  edgesBeds: 1,
-  hardwareAssembly: 2,
-  legacyMedia: 5,
-  finalQa: 2,
+/**
+ * ✅ Map portal workflowDefinitions stage keys -> canonical admin step keys
+ * (This is the drift fix.)
+ */
+const STAGEKEY_TO_CANONICAL_STEPKEY = {
+  // likely identical
+  discoveryDesign: 'discoveryDesign',
+  commitmentPortal: 'commitmentPortal',
+
+  // portal shorthand -> canonical
+  woodVision: 'woodVisionLockIn',
+  rawShell: 'rawShellCreation',
+  shellTrueingTorch: 'shellTrueingTorchTune',
+  exteriorArt: 'exteriorArtFinish',
+  edgesBeds: 'edgesSnareBeds',
+  legacyMedia: 'legacyTuningMedia',
+  finalQa: 'finalQAPackagingDelivery',
+
+  // if any portal already uses canonical names, pass-through
+  woodVisionLockIn: 'woodVisionLockIn',
+  rawShellCreation: 'rawShellCreation',
+  shellTrueingTorchTune: 'shellTrueingTorchTune',
+  exteriorArtFinish: 'exteriorArtFinish',
+  edgesSnareBeds: 'edgesSnareBeds',
+  legacyTuningMedia: 'legacyTuningMedia',
+  finalQAPackagingDelivery: 'finalQAPackagingDelivery',
 };
 
 /**
- * For storageKeys that are shared across multiple steps (like woodPreparation),
- * only the first step that uses that key will show extra internal checklist
- * items, to avoid repetition.
+ * Legacy aliases (if any old project docs still contain these)
+ * We READ these only as fallback, but we WRITE ONLY to canonical.
  */
-const PRIMARY_BY_STORAGE_KEY = (() => {
-  const map = {};
-  STEPS.forEach((step) => {
-    (step.storageKeys || []).forEach((key) => {
-      if (!map[key]) {
-        map[key] = step.key;
-      }
-    });
-  });
-  return map;
-})();
+const LEGACY_STEPKEY_FALLBACKS = {
+  discoveryDesign: ['woodPreparation'],
+  commitmentPortal: ['shellConstruction'],
+  woodVisionLockIn: ['fineTuning', 'woodVision'],
+  rawShellCreation: ['shellExteriorFinish', 'rawShell'],
+  shellTrueingTorchTune: ['bearingEdges', 'shellTrueingTorch'],
+  exteriorArtFinish: ['snareBedCutting', 'exteriorArt'],
+  edgesSnareBeds: ['hardwareDrilling', 'edgesBeds'],
+  hardwareAssembly: ['hardwareAssembly'],
+  legacyTuningMedia: ['tuningAndDetailing', 'tuningDetailing', 'legacyMedia'],
+  finalQAPackagingDelivery: ['qualityCheck', 'finalQa'],
+};
 
 /* =========================================================
    HELPERS
    ========================================================= */
 
+function canonicalKeyForStage(stageKey) {
+  return STAGEKEY_TO_CANONICAL_STEPKEY[stageKey] || stageKey;
+}
+
+function getExistingPhaseKey(project, canonicalKey) {
+  if (!project || !canonicalKey) return null;
+
+  // 1) Prefer canonical if present
+  const v = project?.[canonicalKey];
+  if (v && typeof v === 'object' && Array.isArray(v.checklist))
+    return canonicalKey;
+
+  // 2) Try legacy fallbacks
+  const fallbacks = LEGACY_STEPKEY_FALLBACKS[canonicalKey] || [];
+  for (const k of fallbacks) {
+    const vv = project?.[k];
+    if (vv && typeof vv === 'object' && Array.isArray(vv.checklist)) return k;
+  }
+
+  // 3) If none exist, still return canonical (we’ll create/fill safely in writers)
+  return canonicalKey;
+}
+
 const getWeightedProgressPct = (data) => {
   if (!data) return 0;
 
+  /**
+   * ✅ Match Admin Project View patching exactly:
+   * calculateProjectProgress expects old keys, so we alias from CANONICAL.
+   * (No “woodPreparation || discoveryDesign” ambiguity here.)
+   */
   const patched = {
     ...data,
-    woodPreparation: data.woodPreparation || data.discoveryDesign,
-    shellConstruction: data.shellConstruction || data.commitmentPortal,
-    fineTuning: data.fineTuning || data.woodVisionLockIn,
-    shellExteriorFinish: data.shellExteriorFinish || data.rawShellCreation,
-    bearingEdges: data.bearingEdges || data.shellTrueingTorchTune,
-    snareBedCutting: data.snareBedCutting || data.exteriorArtFinish,
-    hardwareDrilling: data.hardwareDrilling || data.edgesSnareBeds,
+    woodPreparation: data.discoveryDesign,
+    shellConstruction: data.commitmentPortal,
+    fineTuning: data.woodVisionLockIn,
+    shellExteriorFinish: data.rawShellCreation,
+    bearingEdges: data.shellTrueingTorchTune,
+    snareBedCutting: data.exteriorArtFinish,
+    hardwareDrilling: data.edgesSnareBeds,
     hardwareAssembly: data.hardwareAssembly,
-    tuningAndDetailing:
-      data.tuningAndDetailing || data.legacyTuningMedia || data.tuningDetailing,
-    qualityCheck: data.qualityCheck || data.finalQAPackagingDelivery,
+    tuningAndDetailing: data.legacyTuningMedia,
+    qualityCheck: data.finalQAPackagingDelivery,
   };
 
   return calculateProjectProgress(patched);
 };
 
 export function computeStageStatus(step) {
-  if (!step || !Array.isArray(step.checklist)) {
-    return 'not_started';
-  }
-  const items = step.checklist;
+  if (!step || !Array.isArray(step.checklist)) return 'not_started';
+
+  const items = step.checklist.filter(Boolean);
   const completedCount = items.filter((i) => i.completed).length;
   const totalCount = items.length;
   const anyProgress =
@@ -160,20 +210,32 @@ function slugify(s = '') {
 
 /** Combine checklists across all underlying storage keys for a portal step */
 function getCombinedChecklist(project, stepDef) {
+  if (!project || !stepDef) return [];
+
+  // ✅ Portal stepDef.storageKeys can stay for UI/structure, but STORAGE must be canonical.
+  // If workflowDefinitions has storageKeys, we map each to canonical, then read the project fields.
   const keys = stepDef.storageKeys || [];
   const items = [];
-  keys.forEach((key) => {
-    const section = project[key];
+
+  keys.forEach((k) => {
+    const canonical = canonicalKeyForStage(k);
+    const phaseKey = getExistingPhaseKey(project, canonical);
+    const section = project?.[phaseKey];
+
     if (section?.checklist && Array.isArray(section.checklist)) {
-      section.checklist.forEach((i) => items.push(i));
+      section.checklist.filter(Boolean).forEach((i) => items.push(i));
     }
   });
+
   return items;
 }
 
 /** Determine status of a step based on its combined checklist */
-function getStepStatus(project, stepDef) {
-  const list = getCombinedChecklist(project, stepDef);
+function getStepStatus(project, stepOrDef) {
+  const key = stepOrDef?.key;
+  const def = key && STEP_DEFS?.[key] ? STEP_DEFS[key] : stepOrDef;
+
+  const list = getCombinedChecklist(project, def);
   if (!list.length) return { status: 'Not Started', done: 0, total: 0 };
 
   const done = list.filter((i) => i && i.completed).length;
@@ -189,11 +251,7 @@ function getExtraChecklistItems(project, stepDef) {
   const checklist = getCombinedChecklist(project, stepDef);
   if (!checklist.length) return [];
 
-  const isPrimaryForAnyKey = (stepDef.storageKeys || []).some(
-    (key) => PRIMARY_BY_STORAGE_KEY[key] === stepDef.key
-  );
-  if (!isPrimaryForAnyKey) return [];
-
+  // Original behavior preserved
   const cpSlugs = new Set(
     (stepDef.checkpoints || []).map((cp) => slugify(cp.label))
   );
@@ -204,12 +262,10 @@ function getExtraChecklistItems(project, stepDef) {
   });
 }
 
-/** Percentage completion using the admin util (with key patching) */
+/** Percentage completion using the admin util (with canonical key patching) */
 function getOverallProgress(project) {
   if (!project) return 0;
   try {
-    // 🔁 Make sure we feed the *patched* object into calculateProjectProgress,
-    // so it matches what ManageProjects.js is doing.
     return Math.round(getWeightedProgressPct(project));
   } catch (e) {
     console.error('calculateProjectProgress failed; defaulting to 0', e);
@@ -217,111 +273,26 @@ function getOverallProgress(project) {
   }
 }
 
-function normalizeProjectChecklistsToTemplates(project) {
-  if (!project) return { next: project, changed: false };
-
-  let changed = false;
-  const next = { ...project };
-
-  STEPS.forEach(({ key: stageKey }) => {
-    const tpl = STAGE_TEMPLATES?.[stageKey];
-    const def = STEP_DEFS?.[stageKey];
-    const phaseKey = def?.storageKeys?.[0];
-
-    if (!tpl?.steps?.length || !phaseKey) return;
-
-    const phase =
-      next[phaseKey] && typeof next[phaseKey] === 'object'
-        ? next[phaseKey]
-        : {};
-    const existing = Array.isArray(phase.checklist) ? [...phase.checklist] : [];
-
-    const normalized = tpl.steps.map((tplStep, idx) => {
-      const cpCount = Array.isArray(tplStep.checkpoints)
-        ? tplStep.checkpoints.length
-        : 0;
-
-      const prev =
-        existing[idx] && typeof existing[idx] === 'object'
-          ? { ...existing[idx] }
-          : {};
-
-      // Ensure checkpointStates length matches template
-      const prevStates = Array.isArray(prev.checkpointStates)
-        ? [...prev.checkpointStates]
-        : [];
-      const nextStates = Array.from(
-        { length: cpCount },
-        (_, i) => !!prevStates[i]
-      );
-
-      const done = nextStates.filter(Boolean).length;
-      const isFullyComplete = cpCount > 0 && done === cpCount;
-
-      // Preserve duration if present, but never invent it
-      const durationMinutes = Number(prev.durationMinutes || 0);
-      const totalSeconds = Number.isFinite(prev.totalSeconds)
-        ? Number(prev.totalSeconds)
-        : durationMinutes > 0
-          ? durationMinutes * 60
-          : 0;
-
-      const out = {
-        ...prev,
-        // optional: keep a stable label if you want; otherwise omit
-        label: prev.label || tplStep.label,
-        checkpointStates: nextStates,
-        completed: isFullyComplete,
-        durationMinutes,
-        totalSeconds,
-      };
-
-      // Detect whether we changed anything
-      const prevJson = JSON.stringify({
-        checkpointStates: prev.checkpointStates,
-        completed: prev.completed,
-        durationMinutes: prev.durationMinutes,
-        totalSeconds: prev.totalSeconds,
-        label: prev.label,
-      });
-
-      const outJson = JSON.stringify({
-        checkpointStates: out.checkpointStates,
-        completed: out.completed,
-        durationMinutes: out.durationMinutes,
-        totalSeconds: out.totalSeconds,
-        label: out.label,
-      });
-
-      if (prevJson !== outJson) changed = true;
-
-      return out;
-    });
-
-    next[phaseKey] = { ...phase, checklist: normalized };
-  });
-
-  return { next, changed };
-}
-
-// ✅ Global active sub-step pointer:
-// Ensures exactly ONE sub-step is "IN PROGRESS" whenever project is not 100% complete.
+// ✅ Global active sub-step pointer (ONE "IN PROGRESS" across whole project)
 function getGlobalActiveSubStep(project) {
   if (!project) return null;
 
   for (let s = 0; s < STEPS.length; s += 1) {
-    const stageKey = STEPS[s].key;
+    const stageKey = STEPS[s].key; // portal key
     const tpl = STAGE_TEMPLATES?.[stageKey];
-    const phaseKey = (STEP_DEFS?.[stageKey]?.storageKeys || [])[0];
+    const canonical = canonicalKeyForStage(stageKey);
+    const phaseKey = getExistingPhaseKey(project, canonical);
 
     if (!tpl || !phaseKey) continue;
 
     const phase = project?.[phaseKey] || {};
-    const checklist = Array.isArray(phase.checklist) ? phase.checklist : [];
+    const checklist = Array.isArray(phase.checklist)
+      ? [...phase.checklist]
+      : [];
     const stepsArr = tpl.steps || [];
     if (!stepsArr.length) continue;
 
-    // Is the stage fully complete?
+    // stage complete?
     const stageComplete = stepsArr.every((_, idx) => {
       const item = checklist[idx] || {};
       const states = Array.isArray(item.checkpointStates)
@@ -329,14 +300,11 @@ function getGlobalActiveSubStep(project) {
         : [];
       const total = states.length;
       const done = states.filter(Boolean).length;
-
-      // If we have checkpointStates, use them. Otherwise fallback to item.completed.
       return total > 0 ? done === total : !!item.completed;
     });
-
     if (stageComplete) continue;
 
-    // Pick the first incomplete sub-step in this stage
+    // first incomplete sub-step
     for (let i = 0; i < stepsArr.length; i += 1) {
       const item = checklist[i] || {};
       const states = Array.isArray(item.checkpointStates)
@@ -344,12 +312,10 @@ function getGlobalActiveSubStep(project) {
         : [];
       const total = states.length;
       const done = states.filter(Boolean).length;
-
       const isComplete = total > 0 ? done === total : !!item.completed;
       if (!isComplete) return { stageKey, stepIdx: i };
     }
 
-    // If stage isn't "complete" but we can't detect a sub-step, force step 0
     return { stageKey, stepIdx: 0 };
   }
 
@@ -360,17 +326,12 @@ function getGlobalActiveSubStep(project) {
 function getCurrentStepIndex(project) {
   if (!project) return 0;
 
-  // 1️⃣ Look at all steps and see if *anything* has been completed
+  // 1️⃣ any completed?
   const stepSummaries = STEPS.map((s) => getStepStatus(project, s));
   const anyCompleted = stepSummaries.some(({ done }) => done > 0);
+  if (!anyCompleted) return 0;
 
-  // If NO checklist items are completed anywhere, treat this as a brand-new project
-  // → force stage index 0 ("1. Discovery & Design")
-  if (!anyCompleted) {
-    return 0;
-  }
-
-  // 2️⃣ If we DO have some progress, try to honor currentPhase text first
+  // 2️⃣ honor currentPhase text
   const phase = String(project.currentPhase || '').toLowerCase();
   if (phase) {
     const idx = STEPS.findIndex((s) =>
@@ -379,7 +340,7 @@ function getCurrentStepIndex(project) {
     if (idx >= 0) return idx;
   }
 
-  // 3️⃣ Fallback: last step that has any completed checklist items
+  // 3️⃣ fallback last touched
   let lastIdx = 0;
   STEPS.forEach((s, i) => {
     const { done } = getStepStatus(project, s);
@@ -389,20 +350,19 @@ function getCurrentStepIndex(project) {
 }
 
 /** Stage completion target */
-function getStageTargetDate(project, stepKey) {
+function getStageTargetDate(project, stageKey) {
   if (!project) return null;
-  const stepDef = STEP_DEFS[stepKey];
-  if (!stepDef) return null;
+
+  const canonical = canonicalKeyForStage(stageKey);
+  const phaseKey = getExistingPhaseKey(project, canonical);
+  const step = project?.[phaseKey];
+
+  if (!step?.checklist || !Array.isArray(step.checklist)) return null;
 
   const timestamps = [];
-  for (const key of stepDef.storageKeys || []) {
-    const step = project[key];
-    if (!step || !Array.isArray(step.checklist)) continue;
-    for (const item of step.checklist) {
-      if (item.timestamp || item.completedAt) {
-        timestamps.push(tsToMillis(item.timestamp || item.completedAt));
-      }
-    }
+  for (const item of step.checklist.filter(Boolean)) {
+    const ts = item?.timestamp ?? item?.completedAt ?? null;
+    if (ts) timestamps.push(tsToMillis(ts));
   }
 
   if (timestamps.length === 0) return null;
@@ -414,17 +374,18 @@ function getStageTargetDate(project, stepKey) {
 /** Target completion window text */
 function getTargetWindow(project) {
   if (!project) return null;
+
   const all = [];
 
-  Object.values(STEP_DEFS).forEach((stepDef) => {
-    (stepDef.storageKeys || []).forEach((key) => {
-      const step = project[key];
-      if (!step || !Array.isArray(step.checklist)) return;
-      step.checklist.forEach((item) => {
-        if (item.timestamp || item.completedAt) {
-          all.push(tsToMillis(item.timestamp || item.completedAt));
-        }
-      });
+  CANONICAL_STEP_KEYS.forEach((canonicalKey) => {
+    const phaseKey = getExistingPhaseKey(project, canonicalKey);
+    const step = project?.[phaseKey];
+    if (!step || !Array.isArray(step.checklist)) return;
+
+    step.checklist.filter(Boolean).forEach((item) => {
+      if (item.timestamp || item.completedAt) {
+        all.push(tsToMillis(item.timestamp || item.completedAt));
+      }
     });
   });
 
@@ -435,7 +396,7 @@ function getTargetWindow(project) {
   return `${early} → ${late}`;
 }
 
-// 🔎 is this checklist item "touched" at all?
+// touched?
 const isItemTouched = (item = {}) => {
   const done = !!item.completed;
   const hasCheckpoints =
@@ -443,74 +404,34 @@ const isItemTouched = (item = {}) => {
   return done || hasCheckpoints;
 };
 
-// 👉 figure out which checklist index is the "active" step
-// for a given phase (e.g. 'rawShellCreation')
 const getActiveStepIndexForPhase = (project, phaseKey) => {
   const phase = project?.[phaseKey] || {};
-  const checklist = Array.isArray(phase.checklist) ? phase.checklist : [];
+  const checklist = Array.isArray(phase.checklist) ? [...phase.checklist] : [];
   if (!checklist.length) return -1;
 
-  // 1) first item with any checkpoints / completion but not fully done
+  // 1) touched but not done
   for (let i = 0; i < checklist.length; i += 1) {
-    const item = checklist[i];
+    const item = checklist[i] || {};
     const touched = isItemTouched(item);
     const done = !!item.completed;
     if (touched && !done) return i;
   }
 
-  // 2) otherwise first incomplete item
+  // 2) first incomplete
   for (let i = 0; i < checklist.length; i += 1) {
-    if (!checklist[i].completed) return i;
+    const item = checklist[i] || {};
+    if (!item.completed) return i;
   }
 
-  // 3) everything is done → no active step
   return -1;
 };
 
-// 🟢 derive a STATUS CODE for a specific step in a phase
-// returns: 'completed' | 'inProgress' | 'notStarted'
-const getStepStatusForPhase = (project, phaseKey, stepIndex) => {
-  const phase = project?.[phaseKey] || {};
-  const checklist = Array.isArray(phase.checklist) ? phase.checklist : [];
-  if (!checklist.length || stepIndex < 0 || stepIndex >= checklist.length) {
-    return 'notStarted';
-  }
-
-  const item = checklist[stepIndex];
-  const done = !!item.completed;
-  const touched = isItemTouched(item);
-  const activeIdx = getActiveStepIndexForPhase(project, phaseKey);
-
-  if (done) return 'completed';
-  if (stepIndex === activeIdx && touched) return 'inProgress';
-  return 'notStarted';
-};
-
-// 🧮 how many checkpoints are completed for this step
-const getCheckpointCountsForPhase = (project, phaseKey, stepIndex) => {
-  const phase = project?.[phaseKey] || {};
-  const checklist = Array.isArray(phase.checklist) ? phase.checklist : [];
-  if (!checklist.length || stepIndex < 0 || stepIndex >= checklist.length) {
-    return { done: 0, total: 0 };
-  }
-
-  const item = checklist[stepIndex];
-  const states = Array.isArray(item.checkpointStates)
-    ? item.checkpointStates
-    : [];
-
-  const done = states.filter(Boolean).length;
-  const total = states.length;
-  return { done, total };
-};
-
-// Stage indexes: 0–2 = PRE-BUILD, 3–7 = BUILD, 8–9 = POST-BUILD
 const PREBUILD_STAGE_INDEXES = [0, 1, 2];
 
 const getPhaseIndexForStep = (stepIndex) => {
-  if (stepIndex <= 2) return 0; // PRE-BUILD (stages 1–3)
-  if (stepIndex <= 7) return 1; // BUILD (stages 4–8)
-  return 2; // POST-BUILD (stages 9–10)
+  if (stepIndex <= 2) return 0;
+  if (stepIndex <= 7) return 1;
+  return 2;
 };
 
 const arePrebuildStagesComplete = (project) => {
@@ -532,11 +453,9 @@ const StageCheckpointsPanel = ({
   stageKey,
   isAdmin = false,
 }) => {
-  // ---------- single-open accordion state ----------
   const [openStepId, setOpenStepId] = useState(null);
   const userToggledRef = useRef(false);
 
-  // ---------- duration modal state ----------
   const [durationModalOpen, setDurationModalOpen] = useState(false);
   const [pending, setPending] = useState(null);
   const [hours, setHours] = useState(0);
@@ -545,13 +464,18 @@ const StageCheckpointsPanel = ({
 
   const template = STAGE_TEMPLATES?.[stageKey] || null;
 
-  // Map stageKey (e.g. 'rawShell') → phase key used in Firestore
-  const stepMeta = STEP_DEFS?.[stageKey] || null;
-  const phaseKey = stepMeta?.storageKeys?.[0] || null;
+  // ✅ Canonical phase key for this portal stage
+  const canonical = useMemo(() => canonicalKeyForStage(stageKey), [stageKey]);
+  const phaseKey = useMemo(
+    () => getExistingPhaseKey(project, canonical),
+    [project, canonical]
+  );
 
   const phaseChecklist = useMemo(() => {
     const phase = phaseKey && project ? project?.[phaseKey] : null;
-    return Array.isArray(phase?.checklist) ? phase.checklist : [];
+    return Array.isArray(phase?.checklist)
+      ? phase.checklist.filter(Boolean)
+      : [];
   }, [project, phaseKey]);
 
   const lifecycleSteps = useMemo(() => {
@@ -563,7 +487,6 @@ const StageCheckpointsPanel = ({
   const normalizedSteps = useMemo(() => {
     const tplSteps = template?.steps || [];
 
-    // ✅ Global active sub-step pointer (ONE "IN PROGRESS" across the whole project)
     const overallPct = getOverallProgress(project);
     const globalPtr = overallPct < 100 ? getGlobalActiveSubStep(project) : null;
 
@@ -574,7 +497,7 @@ const StageCheckpointsPanel = ({
       let completedFlag = false;
       let stepDurationMinutes = 0;
 
-      // ---- 1) PRIMARY: top-level phase checklist ----
+      // ---- 1) PRIMARY: CANONICAL phase checklist ----
       const phaseItem = phaseChecklist[idx];
       if (phaseItem) {
         if (Array.isArray(phaseItem.checkpointStates)) {
@@ -591,7 +514,7 @@ const StageCheckpointsPanel = ({
         completedFlag = !!phaseItem.completed;
       }
 
-      // ---- 2) FALLBACK: lifecycle ----
+      // ---- 2) FALLBACK: lifecycle (display-only) ----
       if (!checkpointStates.length && lifecycleSteps.length) {
         const tplSlug = slugify(tplStep.label);
         const dbStep =
@@ -639,40 +562,9 @@ const StageCheckpointsPanel = ({
         durationMinutes: stepDurationMinutes,
       };
     });
-  }, [template, stageKey, phaseChecklist, lifecycleSteps, project, phaseKey]);
+  }, [template, stageKey, phaseChecklist, lifecycleSteps, project]);
 
-  // ✅ Normalize checklist shapes to match templates (and optionally persist for admins)
-  useEffect(() => {
-    if (!project) return;
-
-    const { next, changed } = normalizeProjectChecklistsToTemplates(project);
-    if (!changed) return;
-
-    // Update local state so UI always has consistent checkpointStates lengths
-    if (typeof setProject === 'function') {
-      setProject(next);
-    }
-
-    // Optional: if admin, persist the repaired shapes to Firestore once
-    if (isAdmin && next?.id) {
-      const ref = doc(db, 'projects', next.id);
-
-      const payload = {};
-      STEPS.forEach(({ key: sKey }) => {
-        const pk = STEP_DEFS?.[sKey]?.storageKeys?.[0];
-        if (!pk) return;
-        if (next?.[pk]?.checklist) {
-          payload[`${pk}.checklist`] = next[pk].checklist;
-        }
-      });
-
-      updateDoc(ref, payload).catch((e) =>
-        console.error('Failed to persist normalized checklists', e)
-      );
-    }
-  }, [project, isAdmin, setProject]);
-
-  // ✅ Auto-open the best sub-step for the CURRENT stage
+  // auto-open best sub-step for current stage (unchanged behavior, now correct keys)
   useEffect(() => {
     if (!project || !normalizedSteps.length) {
       setOpenStepId(null);
@@ -683,21 +575,16 @@ const StageCheckpointsPanel = ({
     const thisStageIndex = STEPS.findIndex((s) => s.key === stageKey);
     const isCurrentStage = thisStageIndex === currentStageIndex;
 
-    // If not the current stage, don't auto-open anything
     if (!isCurrentStage) {
       setOpenStepId(null);
-      userToggledRef.current = false; // reset when leaving stage
+      userToggledRef.current = false;
       return;
     }
 
     setOpenStepId((prev) => {
-      // If user has interacted in this stage, respect their choice (including closing)
       if (userToggledRef.current) return prev;
-
-      // If something is already open and still valid, keep it
       if (prev && normalizedSteps.some((s) => s.id === prev)) return prev;
 
-      // Otherwise choose best candidate
       let candidateIndex = -1;
 
       if (phaseKey) {
@@ -732,19 +619,176 @@ const StageCheckpointsPanel = ({
     setOpenStepId((prev) => (prev === stepId ? null : stepId));
   };
 
-  // ✅ Firestore update helper
-  // ✅ 1) Toggle a checkpoint complete/incomplete (NO duration here)
-  const persistCheckpointToggle = async ({
-    phaseKeyArg,
-    stepIdx,
-    cpIdx,
-    completed,
-  }) => {
-    if (!project?.id || !phaseKeyArg) return;
+  // ✅ Firestore update helper (WRITES CANONICAL ONLY)
+  const persistCheckpointToggle = async ({ stepIdx, cpIdx, completed }) => {
+    if (!project?.id || !phaseKey) return;
 
     const ref = doc(db, 'projects', project.id);
 
-    const phase = project?.[phaseKeyArg] || {};
+    // read freshest server state
+    const snap = await getDoc(ref);
+    if (!snap.exists()) return;
+
+    const server = { id: snap.id, ...snap.data() };
+    const serverPhaseKey = getExistingPhaseKey(server, canonical);
+    const phase = server?.[serverPhaseKey] || {};
+    const checklist = Array.isArray(phase.checklist)
+      ? [...phase.checklist]
+      : [];
+
+    while (checklist.length <= stepIdx) {
+      checklist.push({
+        checkpointStates: [],
+        completed: false,
+        durationMinutes: 0,
+        totalSeconds: 0,
+      });
+    }
+
+    const stepItemRaw = checklist[stepIdx] || {};
+    const stepItem = { ...stepItemRaw };
+
+    const cpCount =
+      STAGE_TEMPLATES?.[stageKey]?.steps?.[stepIdx]?.checkpoints?.length ?? 0;
+
+    const prevStates = Array.isArray(stepItem.checkpointStates)
+      ? stepItem.checkpointStates
+      : [];
+
+    const states = Array.from({ length: cpCount }, (_, i) => !!prevStates[i]);
+
+    if (cpIdx < 0 || cpIdx >= cpCount) return;
+
+    states[cpIdx] = !!completed;
+
+    const done = states.filter(Boolean).length;
+    const isFullyComplete = cpCount > 0 && done === cpCount;
+
+    // ✅ WRITE BACK into checklist (this was missing)
+    checklist[stepIdx] = {
+      ...stepItem,
+      checkpointStates: states,
+      completed: isFullyComplete,
+      ...(isFullyComplete ? {} : { durationMinutes: 0, totalSeconds: 0 }),
+    };
+
+    // optimistic local update
+    if (typeof setProject === 'function') {
+      setProject((prev) => {
+        if (!prev) return prev;
+
+        const localPhaseKey = getExistingPhaseKey(prev, canonical);
+        const prevPhase = prev?.[localPhaseKey] || {};
+        const prevChecklist = Array.isArray(prevPhase.checklist)
+          ? [...prevPhase.checklist]
+          : [];
+
+        const prevStep = { ...(prevChecklist[stepIdx] || {}) };
+        prevStep.checkpointStates = states;
+        prevStep.completed = isFullyComplete;
+
+        if (!isFullyComplete) {
+          prevStep.durationMinutes = 0;
+          prevStep.totalSeconds = 0;
+        }
+
+        prevChecklist[stepIdx] = prevStep;
+
+        // ✅ always store into CANONICAL key in local state
+        return {
+          ...prev,
+          [canonical]: { ...prevPhase, checklist: prevChecklist },
+        };
+      });
+    }
+
+    // ✅ write ONLY canonical object (full checklist to avoid partial overwrites)
+    const canonicalPhase = server?.[canonical] || {};
+    await updateDoc(ref, {
+      [canonical]: {
+        ...canonicalPhase,
+        checklist,
+      },
+      updatedAt: serverTimestamp(),
+      updatedBy: 'artistPortal',
+    });
+  };
+
+  const persistMarkAllComplete = async ({ stepIdx }) => {
+    if (!project?.id || !phaseKey) return;
+
+    const ref = doc(db, 'projects', project.id);
+
+    const snap = await getDoc(ref);
+    if (!snap.exists()) return;
+
+    const server = { id: snap.id, ...snap.data() };
+    const serverPhaseKey = getExistingPhaseKey(server, canonical);
+    const phase = server?.[serverPhaseKey] || {};
+    const checklist = Array.isArray(phase.checklist)
+      ? [...phase.checklist]
+      : [];
+
+    while (checklist.length <= stepIdx) {
+      checklist.push({
+        checkpointStates: [],
+        completed: false,
+        durationMinutes: 0,
+        totalSeconds: 0,
+      });
+    }
+
+    const cpCount =
+      STAGE_TEMPLATES?.[stageKey]?.steps?.[stepIdx]?.checkpoints?.length ?? 0;
+
+    const nextStates = Array.from({ length: cpCount }, () => true);
+    checklist[stepIdx] = {
+      ...(checklist[stepIdx] || {}),
+      checkpointStates: nextStates,
+      completed: cpCount > 0,
+    };
+
+    if (typeof setProject === 'function') {
+      setProject((prev) => {
+        if (!prev) return prev;
+
+        const prevPhase = prev?.[canonical] || {};
+        const prevChecklist = Array.isArray(prevPhase.checklist)
+          ? [...prevPhase.checklist]
+          : [];
+
+        prevChecklist[stepIdx] = {
+          ...(prevChecklist[stepIdx] || {}),
+          checkpointStates: nextStates,
+          completed: cpCount > 0,
+        };
+
+        return {
+          ...prev,
+          [canonical]: { ...prevPhase, checklist: prevChecklist },
+        };
+      });
+    }
+
+    await updateDoc(ref, {
+      [canonical]: { ...phase, checklist },
+      updatedAt: serverTimestamp(),
+      updatedBy: 'artistPortal',
+    });
+  };
+
+  // ✅ Save duration at sub-step level (only after fully complete)
+  const persistStepDuration = async ({ stepIdx, durationMinutes }) => {
+    if (!project?.id || !phaseKey) return;
+
+    const ref = doc(db, 'projects', project.id);
+
+    const snap = await getDoc(ref);
+    if (!snap.exists()) return;
+
+    const server = { id: snap.id, ...snap.data() };
+    const serverPhaseKey = getExistingPhaseKey(server, canonical);
+    const phase = server?.[serverPhaseKey] || {};
     const checklist = Array.isArray(phase.checklist)
       ? [...phase.checklist]
       : [];
@@ -752,161 +796,66 @@ const StageCheckpointsPanel = ({
     const stepItemRaw = checklist[stepIdx] || {};
     const stepItem = { ...stepItemRaw };
 
-    const states = Array.isArray(stepItem.checkpointStates)
-      ? [...stepItem.checkpointStates]
+    const cpCount =
+      STAGE_TEMPLATES?.[stageKey]?.steps?.[stepIdx]?.checkpoints?.length ?? 0;
+
+    const prevStates = Array.isArray(stepItem.checkpointStates)
+      ? stepItem.checkpointStates
       : [];
 
-    states[cpIdx] = !!completed;
-    stepItem.checkpointStates = states;
+    const states = Array.from({ length: cpCount }, (_, i) => !!prevStates[i]);
 
-    // ✅ recompute completion from checkpointStates
     const total = states.length;
     const done = states.filter(Boolean).length;
     const isFullyComplete = total > 0 && done === total;
 
-    // ✅ IMPORTANT: keep stepItem.completed in sync with checkpoints
-    stepItem.completed = isFullyComplete;
+    if (!isFullyComplete) return;
 
-    // ✅ if not fully complete, clear duration (so "completed" doesn't imply time logged)
-    if (!isFullyComplete) {
-      stepItem.durationMinutes = 0;
-      stepItem.totalSeconds = 0;
-    }
+    const mins = Math.max(0, Number(durationMinutes || 0));
+    const secs = mins * 60;
 
-    checklist[stepIdx] = stepItem;
-
-    // patch local project
+    // optimistic
     if (typeof setProject === 'function') {
       setProject((prev) => {
         if (!prev) return prev;
+
+        const prevPhase = prev?.[canonical] || {};
+        const prevChecklist = Array.isArray(prevPhase.checklist)
+          ? [...prevPhase.checklist]
+          : [];
+
+        const prevStep = { ...(prevChecklist[stepIdx] || {}) };
+        prevStep.durationMinutes = mins;
+        prevStep.totalSeconds = secs;
+
+        prevChecklist[stepIdx] = prevStep;
+
         return {
           ...prev,
-          [phaseKeyArg]: {
-            ...(prev[phaseKeyArg] || {}),
-            checklist,
-          },
+          [canonical]: { ...prevPhase, checklist: prevChecklist },
         };
       });
     }
 
     await updateDoc(ref, {
-      [`${phaseKeyArg}.checklist`]: checklist,
+      [`${canonical}.checklist.${stepIdx}.durationMinutes`]: mins,
+      [`${canonical}.checklist.${stepIdx}.totalSeconds`]: secs,
+      updatedAt: serverTimestamp(),
+      updatedBy: 'artistPortal',
     });
   };
 
-  // ✅ 3) Mark ALL checkpoints complete for a sub-step
-  const persistMarkAllComplete = async ({ phaseKeyArg, stepIdx, total }) => {
-    if (!project?.id || !phaseKeyArg) return;
-
-    const ref = doc(db, 'projects', project.id);
-
-    const phase = project?.[phaseKeyArg] || {};
-    const checklist = Array.isArray(phase.checklist)
-      ? [...phase.checklist]
-      : [];
-
-    const stepItemRaw = checklist[stepIdx] || {};
-    const stepItem = { ...stepItemRaw };
-
-    const totalCount = Number.isFinite(total) ? total : 0;
-
-    // Ensure we have an array of the correct length
-    const nextStates = Array.from({ length: totalCount }, () => true);
-
-    stepItem.checkpointStates = nextStates;
-
-    // ✅ completed MUST be true if we just set all checkpoints true
-    stepItem.completed = totalCount > 0;
-
-    // Do NOT auto-set duration; admin logs it explicitly
-    stepItem.durationMinutes = Number(stepItem.durationMinutes || 0);
-    stepItem.totalSeconds = Number(stepItem.totalSeconds || 0);
-
-    checklist[stepIdx] = stepItem;
-
-    // patch local state
-    if (typeof setProject === 'function') {
-      setProject((prev) => {
-        if (!prev) return prev;
-        return {
-          ...prev,
-          [phaseKeyArg]: {
-            ...(prev[phaseKeyArg] || {}),
-            checklist,
-          },
-        };
-      });
-    }
-
-    await updateDoc(ref, {
-      [`${phaseKeyArg}.checklist`]: checklist,
-    });
-  };
-
-  const handleMarkAllComplete = async ({ phaseKeyArg, stepIdx, total }) => {
+  const handleMarkAllComplete = async ({ stepIdx }) => {
     if (!isAdmin) return;
     try {
-      await persistMarkAllComplete({ phaseKeyArg, stepIdx, total });
+      await persistMarkAllComplete({ stepIdx });
     } catch (e) {
       console.error('Failed marking all complete', e);
     }
   };
 
-  // ✅ 2) Save duration at the SUB-STEP level (only after fully complete)
-  const persistStepDuration = async ({
-    phaseKeyArg,
-    stepIdx,
-    durationMinutes,
-  }) => {
-    if (!project?.id || !phaseKeyArg) return;
-
-    const ref = doc(db, 'projects', project.id);
-
-    const phase = project?.[phaseKeyArg] || {};
-    const checklist = Array.isArray(phase.checklist)
-      ? [...phase.checklist]
-      : [];
-
-    const stepItemRaw = checklist[stepIdx] || {};
-    const stepItem = { ...stepItemRaw };
-
-    const states = Array.isArray(stepItem.checkpointStates)
-      ? [...stepItem.checkpointStates]
-      : [];
-
-    const total = states.length;
-    const done = states.filter(Boolean).length;
-    const isFullyComplete = total > 0 && done === total;
-
-    // guard: only allow duration when fully completed
-    if (!isFullyComplete) return;
-
-    const mins = Math.max(0, Number(durationMinutes || 0));
-    stepItem.durationMinutes = mins;
-    stepItem.totalSeconds = mins * 60;
-
-    checklist[stepIdx] = stepItem;
-
-    if (typeof setProject === 'function') {
-      setProject((prev) => {
-        if (!prev) return prev;
-        return {
-          ...prev,
-          [phaseKeyArg]: {
-            ...(prev[phaseKeyArg] || {}),
-            checklist,
-          },
-        };
-      });
-    }
-
-    await updateDoc(ref, {
-      [`${phaseKeyArg}.checklist`]: checklist,
-    });
-  };
-
-  const openDurationModal = ({ phaseKeyArg, stepIdx }) => {
-    setPending({ phaseKey: phaseKeyArg, stepIdx });
+  const openDurationModal = ({ stepIdx }) => {
+    setPending({ stepIdx });
     setHours(0);
     setMinutes(0);
     setDurationModalOpen(true);
@@ -921,14 +870,13 @@ const StageCheckpointsPanel = ({
   };
 
   const saveDurationAndComplete = async () => {
-    if (!pending?.phaseKey) return;
+    if (pending?.stepIdx == null) return;
 
     const durMins = Number(hours) * 60 + Number(minutes);
 
     setSaving(true);
     try {
       await persistStepDuration({
-        phaseKeyArg: pending.phaseKey,
         stepIdx: pending.stepIdx,
         durationMinutes: durMins,
       });
@@ -939,17 +887,11 @@ const StageCheckpointsPanel = ({
     }
   };
 
-  const handleToggleCheckpoint = async ({
-    phaseKeyArg,
-    stepIdx,
-    cpIdx,
-    nextChecked,
-  }) => {
+  const handleToggleCheckpoint = async ({ stepIdx, cpIdx, nextChecked }) => {
     if (!isAdmin) return;
 
     try {
       await persistCheckpointToggle({
-        phaseKeyArg,
         stepIdx,
         cpIdx,
         completed: nextChecked,
@@ -979,7 +921,9 @@ const StageCheckpointsPanel = ({
           return (
             <div
               key={step.id}
-              className={`pp-step-block step-${String(status).toLowerCase().replace(/\s+/g, '-')}`}
+              className={`pp-step-block step-${String(status)
+                .toLowerCase()
+                .replace(/\s+/g, '-')}`}
             >
               {isAdmin ? (
                 <button
@@ -995,28 +939,21 @@ const StageCheckpointsPanel = ({
                         ? 'Fully completed'
                         : `${done}/${total} completed`}
                     </span>
+
                     {isAdmin && total > 0 && done < total && (
                       <span
                         role="button"
                         tabIndex={0}
                         className="pp-step-markall-btn"
                         onClick={(e) => {
-                          e.stopPropagation(); // ✅ don't collapse accordion
-                          handleMarkAllComplete({
-                            phaseKeyArg: phaseKey,
-                            stepIdx,
-                            total,
-                          });
+                          e.stopPropagation();
+                          handleMarkAllComplete({ stepIdx });
                         }}
                         onKeyDown={(e) => {
                           if (e.key === 'Enter' || e.key === ' ') {
                             e.preventDefault();
                             e.stopPropagation();
-                            handleMarkAllComplete({
-                              phaseKeyArg: phaseKey,
-                              stepIdx,
-                              total,
-                            });
+                            handleMarkAllComplete({ stepIdx });
                           }
                         }}
                       >
@@ -1041,11 +978,8 @@ const StageCheckpointsPanel = ({
                             type="button"
                             className="pp-step-log-btn"
                             onClick={(e) => {
-                              e.stopPropagation(); // don't collapse accordion
-                              openDurationModal({
-                                phaseKeyArg: phaseKey,
-                                stepIdx,
-                              });
+                              e.stopPropagation();
+                              openDurationModal({ stepIdx });
                             }}
                           >
                             Log duration
@@ -1106,7 +1040,6 @@ const StageCheckpointsPanel = ({
                             }
                             onClick={() =>
                               handleToggleCheckpoint({
-                                phaseKeyArg: phaseKey,
                                 stepIdx,
                                 cpIdx,
                                 nextChecked: !cp.completed,
@@ -1117,7 +1050,9 @@ const StageCheckpointsPanel = ({
                           </button>
 
                           <span
-                            className={`pp-checkpoint-label ${cp.completed ? 'is-completed' : ''}`}
+                            className={`pp-checkpoint-label ${
+                              cp.completed ? 'is-completed' : ''
+                            }`}
                           >
                             {cp.label}
                           </span>
@@ -1213,6 +1148,7 @@ const StageCheckpointsPanel = ({
 /* =========================================================
    COMPONENT
    ========================================================= */
+
 // Derive the *project* current stage + current sub-step labels
 function getCurrentStageAndStepLabels(project) {
   if (!project) {
@@ -1225,7 +1161,6 @@ function getCurrentStageAndStepLabels(project) {
 
   let stepLabel = 'No sub-step selected';
 
-  // ✅ define this (and only use it when not complete)
   const overallPct = getOverallProgress(project);
   const activePtr = overallPct < 100 ? getGlobalActiveSubStep(project) : null;
 
@@ -1244,14 +1179,30 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
   const [loading, setLoading] = useState(!initialProject);
   const [activeKey, setActiveKey] = useState(STEPS[0].key);
 
-  // keep in sync if parent passes updated project
+  // ✅ Only seed from props when switching projects or when local is empty.
   useEffect(() => {
-    if (initialProject) {
-      setProject(initialProject);
-    }
+    if (!initialProject) return;
+
+    setProject((prev) => {
+      if (!prev) return initialProject;
+
+      const incomingId =
+        initialProject.id ||
+        initialProject.projectId ||
+        initialProject.docId ||
+        initialProject.serial ||
+        initialProject.snareSerial ||
+        initialProject.lineSerial;
+
+      if (incomingId && prev.id && incomingId !== prev.id) {
+        return initialProject;
+      }
+
+      return prev;
+    });
   }, [initialProject]);
 
-  // fetch freshest data from Firestore if we can
+  // ✅ Live sync from Firestore so admin + artist never drift
   useEffect(() => {
     const ref = getProjectDocRef(initialProject);
     if (!ref) {
@@ -1259,37 +1210,39 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
       return;
     }
 
-    let isMounted = true;
-
-    (async () => {
-      try {
-        const snap = await getDoc(ref);
-        if (snap.exists() && isMounted) {
-          setProject({ id: snap.id, ...snap.data() });
+    const unsub = onSnapshot(
+      ref,
+      (snap) => {
+        if (snap.exists()) {
+          setProject((prev) => {
+            const incoming = { id: snap.id, ...snap.data() };
+            if (prev && prev.id === incoming.id) {
+              return { ...prev, ...incoming };
+            }
+            return incoming;
+          });
+        } else {
+          setProject(null);
         }
-      } catch (e) {
-        console.error('Failed to refresh project for ProjectProgress', e);
-      } finally {
-        if (isMounted) setLoading(false);
+        setLoading(false);
+      },
+      (err) => {
+        console.error('ProjectProgress onSnapshot error', err);
+        setLoading(false);
       }
-    })();
+    );
 
-    return () => {
-      isMounted = false;
-    };
+    return () => unsub();
   }, [initialProject]);
 
   const overallPct = useMemo(() => getOverallProgress(project), [project]);
-
   const targetWindow = useMemo(() => getTargetWindow(project), [project]);
 
-  // If there is zero progress on the project, always treat it as being at Stage 1
   const currentStepIndex = useMemo(
     () => (overallPct === 0 ? 0 : getCurrentStepIndex(project)),
     [project, overallPct]
   );
 
-  // Have we finished all PRE-BUILD stages (1–3)?
   const prebuildComplete = useMemo(
     () => arePrebuildStagesComplete(project),
     [project]
@@ -1297,17 +1250,17 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
 
   const { stageLabel: currentStageLabel, stepLabel: currentStepLabel } =
     useMemo(() => getCurrentStageAndStepLabels(project), [project]);
-  // default active step = current step
+
   useEffect(() => {
     const def = STEPS[currentStepIndex] || STEPS[0];
     setActiveKey(def.key);
   }, [currentStepIndex]);
 
   const activeStep = STEPS.find((s) => s.key === activeKey) || STEPS[0];
-  const activeStatusRaw = getStepStatus(project, activeStep).status; // "In Progress"
+  const activeStatusRaw = getStepStatus(project, activeStep).status;
   const activeStatus = String(activeStatusRaw || '')
     .toLowerCase()
-    .replace(/\s+/g, '_'); // "in_progress"
+    .replace(/\s+/g, '_');
 
   const stageTarget = useMemo(
     () => getStageTargetDate(project, activeStep.key),
@@ -1316,15 +1269,12 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
 
   const activeIndex = STEPS.indexOf(activeStep);
 
-  // "Future stage" lock (for the little note under the roadmap)
   const isStageFuture =
     activeStatus === 'not_started' && activeIndex > currentStepIndex;
 
-  // For brand-new projects, let stages 1–3 behave as unlocked teaser stages
   const isStageLocked =
     isStageFuture && !(overallPct === 0 && activeIndex <= 2);
 
-  // Phase-level lock: BUILD + POST-BUILD stay teaser-only until pre-build done
   const isPhaseLockedByTeaser =
     !prebuildComplete && getPhaseIndexForStep(activeIndex) > 0;
 
@@ -1350,17 +1300,14 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
     <div className="sl-progress">
       {/* Hero media */}
       <div className="sl-progress-hero">
-        {heroMedia.type === 'video' ? (
-          <video
-            className="sl-progress-hero-video"
-            src={heroMedia.url}
-            autoPlay
-            loop
-            muted
-            playsInline
-          />
-        ) : null}
-        {/* <button className="sl-progress-hero-pill">Craft in Motion</button> */}
+        <video
+          className="sl-progress-hero-video"
+          src={heroMedia.url}
+          autoPlay
+          loop
+          muted
+          playsInline
+        />
       </div>
 
       <section className="sl-progress-intro">
@@ -1373,7 +1320,6 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
 
       {/* Top metrics */}
       <div className="sl-progress-metrics">
-        {/* 1. Project completion */}
         <div className="sl-progress-metric">
           <div className="sl-progress-metric-label">Project completion</div>
           <div className="sl-progress-metric-value">
@@ -1381,19 +1327,16 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
           </div>
         </div>
 
-        {/* 2. Project current stage (STAGE ONLY) */}
         <div className="sl-progress-metric">
           <div className="sl-progress-metric-label">Project current stage</div>
           <div className="sl-progress-metric-value">{currentStageLabel}</div>
         </div>
 
-        {/* 3. Current stage step (SUB-STEP) */}
         <div className="sl-progress-metric">
           <div className="sl-progress-metric-label">Current stage step</div>
           <div className="sl-progress-metric-value">{currentStepLabel}</div>
         </div>
 
-        {/* 4. Target completion window */}
         <div className="sl-progress-metric">
           <div className="sl-progress-metric-label">
             Target completion window
@@ -1404,7 +1347,6 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
         </div>
       </div>
 
-      {/* Roadmap timeline (progress bar stays here) */}
       <section className="sl-progress-roadmap">
         <div className="sl-progress-roadmap-header">Build Roadmap</div>
 
@@ -1423,7 +1365,6 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
         )}
       </section>
 
-      {/* Active step details */}
       <section
         className={['sl-progress-stage', isStageLocked ? 'is-locked' : '']
           .filter(Boolean)
@@ -1554,28 +1495,31 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
             </div>
 
             <div className="sl-progress-card">
-  <h3 className="sl-progress-card-title">Techniques used</h3>
-  <div className="sl-progress-pill-row">
-    {(Array.isArray(activeStep?.techniques) ? activeStep.techniques : []).map(
-      (t, i) => (
-        <span key={`${t}-${i}`} className="sl-progress-pill">
-          {t}
-        </span>
-      )
-    )}
-  </div>
-</div>
+              <h3 className="sl-progress-card-title">Techniques used</h3>
+              <div className="sl-progress-pill-row">
+                {(Array.isArray(activeStep?.techniques)
+                  ? activeStep.techniques
+                  : []
+                ).map((t, i) => (
+                  <span key={`${t}-${i}`} className="sl-progress-pill">
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </div>
 
-<div className="sl-progress-card">
-  <h3 className="sl-progress-card-title">Tools involved</h3>
-  <div className="sl-progress-pill-row">
-    {(Array.isArray(activeStep?.tools) ? activeStep.tools : []).map((t, i) => (
-      <span key={`${t}-${i}`} className="sl-progress-pill">
-        {t}
-      </span>
-    ))}
-  </div>
-</div>
+            <div className="sl-progress-card">
+              <h3 className="sl-progress-card-title">Tools involved</h3>
+              <div className="sl-progress-pill-row">
+                {(Array.isArray(activeStep?.tools) ? activeStep.tools : []).map(
+                  (t, i) => (
+                    <span key={`${t}-${i}`} className="sl-progress-pill">
+                      {t}
+                    </span>
+                  )
+                )}
+              </div>
+            </div>
 
             <div className="sl-progress-card sl-progress-card--quote">
               <div className="sl-progress-quote-icon">★</div>
