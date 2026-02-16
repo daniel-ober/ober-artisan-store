@@ -528,119 +528,266 @@ export const CHECKPOINTS_BY_ITEM_ID = {
     ),
   ],
 
+    woodVisionLockIn_2: [
+    cp(
+      'Confirm construction method + shell philosophy',
+      [
+        'Decide stave vs hybrid vs specialty construction.',
+        'Example: full stave = maximum articulation + projection.',
+        'Hybrid example: tonal warmth inside, visual drama outside.',
+        'Align shell philosophy with the target voice from Discovery.',
+      ],
+      'Construction method'
+    ),
+
+    cp(
+      'Lock shell thickness strategy',
+      [
+        'Thicker shell → punch, projection, reduced flex.',
+        'Thinner shell → sensitivity, bloom, dynamic range.',
+        'Example: heavy hitter touring player may benefit from added mass.',
+        'Confirm bearing edge compatibility before committing.',
+      ],
+      'Shell thickness'
+    ),
+
+    cp(
+      'Determine stave count + geometry',
+      [
+        'Higher stave count = more circular geometry, smoother tone.',
+        'Lower stave count = stronger polygonal influence, added character.',
+        'Example: 20–24 staves often balances strength + roundness.',
+        'Confirm miter angle math BEFORE milling.',
+      ],
+      'Stave geometry'
+    ),
+
+    cp(
+      'Validate structural risk factors',
+      [
+        'Identify highly figured woods prone to movement.',
+        'Example: burl requires slower acclimation + stabilization mindset.',
+        'Plan clamp strategy early for difficult species.',
+        'Add risk note to project if instability is possible.',
+      ],
+      'Structural validation'
+    ),
+  ],
+
+
+  woodVisionLockIn_3: [
+    cp(
+      'Select veneer species + figure intensity',
+      [
+        'Example: mappa burl = chaotic figure, extremely visual.',
+        'Walnut = refined, classic, understated.',
+        'Olive / redwood burl = statement drum territory.',
+        'Confirm veneer complements shell voice — not fights it.',
+      ],
+      'Veneer species'
+    ),
+
+    cp(
+      'Confirm seam strategy',
+      [
+        'Front seam = intentional visual statement.',
+        'Rear seam = cleaner presentation.',
+        'Example: align seam opposite badge unless design says otherwise.',
+        'Dry wrap to preview before adhesive touches wood.',
+      ],
+      'Seam strategy'
+    ),
+
+    cp(
+      'Plan grain orientation + flow',
+      [
+        'Ensure grain wraps naturally around shell.',
+        'Avoid abrupt figure transitions at seam.',
+        'Example: bookmatch when possible for premium builds.',
+        'Visual continuity dramatically increases perceived value.',
+      ],
+      'Grain flow'
+    ),
+
+    cp(
+      'Run adhesion risk check',
+      [
+        'Highly figured veneers require excellent glue coverage.',
+        'Confirm press/clamp method before starting.',
+        'Example: vacuum press recommended for unstable sheets.',
+        'Failure here becomes permanent after finishing.',
+      ],
+      'Adhesion risk'
+    ),
+  ],
+
+
+  woodVisionLockIn_4: [
+    cp(
+      'Define resin/accent philosophy',
+      [
+        'Should resin whisper or shout?',
+        'Subtle micro-speckle = sophistication.',
+        'Bold fills = artistic centerpiece.',
+        'Must support the drum — never distract.',
+      ],
+      'Accent philosophy'
+    ),
+
+    cp(
+      'Confirm HEX + color behavior',
+      [
+        'Test color against wood under real lighting.',
+        'Example: teal may skew green under warm finish.',
+        'Confirm transparency vs opacity.',
+        'Document exact HEX for repeatability.',
+      ],
+      'Color lock'
+    ),
+
+    cp(
+      'Map organic fill zones',
+      [
+        'Resin should follow knots, voids, and stress lines.',
+        'Avoid artificial stripe bands.',
+        'Example: fill burl eyes only — let wood lead.',
+        'Natural integration separates artisan from hobby.',
+      ],
+      'Fill mapping'
+    ),
+
+    cp(
+      'Run finish compatibility check',
+      [
+        'Confirm resin bonds cleanly with clear coat system.',
+        'Test scrap if using metallic or pigment-heavy pours.',
+        'Verify cure schedule alignment.',
+        'Prevent sink-back surprises later.',
+      ],
+      'Finish compatibility'
+    ),
+  ],
+
+
+  woodVisionLockIn_5: [
+    cp(
+      'Conduct full spec readback with client',
+      [
+        'Verbally confirm size, wood, finish, hardware.',
+        'Example: “We are building a 14x6.5 walnut stave with teal resin.”',
+        'Catch misunderstandings NOW — not mid-build.',
+        'Document confirmation.',
+      ],
+      'Spec readback'
+    ),
+
+    cp(
+      'Obtain written vision approval',
+      [
+        'Customer explicitly approves the final direction.',
+        'Portal confirmation preferred.',
+        'Example: “Approved — proceed to build.”',
+        'No cutting begins before this moment.',
+      ],
+      'Vision approval'
+    ),
+
+    cp(
+      'Freeze change window',
+      [
+        'After approval, major changes require rebuild-level discussion.',
+        'Protect timeline integrity.',
+        'Example: veneer swaps post-cut are not minor changes.',
+        'Set expectations clearly.',
+      ],
+      'Change freeze'
+    ),
+
+    cp(
+      'Greenlight build transition',
+      [
+        'Mark Vision Lock complete.',
+        'Update project status → Ready for Shell Creation.',
+        'Notify client that the build officially begins.',
+        'Psychological milestone — celebrate it.',
+      ],
+      'Build greenlight'
+    ),
+  ],
+
+
   /* =========================================================
-   * 4) Raw Shell Creation (maps to OLD shellConstruction early)
+   * 4) Raw Shell Creation
    * ======================================================= */
   rawShellCreation_1: [
     cp(
-      'Pre-glue test assembly',
+      'Mill stock to consistent thickness + width',
       [
-        'Confirm no visible gaps at miter joints.',
-        'Example: clamp pressure closes evenly without “hinge” gaps.',
-        'If gaps exist: re-joint, adjust miter, or re-plane faces.',
+        'Joint/plane so every stave blank is the same thickness (prevents gaps during glue-up).',
+        'Rip to consistent width with clean edges.',
+        'Example: label one face as the “outside” reference face.',
       ],
-      'Dry clamp'
+      'Stave stock milling'
     ),
     cp(
-      'Glue and clamp',
+      'Crosscut to length + add buffer',
       [
-        'Use consistent glue coverage (no dry spots).',
-        'Example: alternate clamp directions to keep shell centered.',
-        'Record clamp time + cure time (don’t rush milling).',
+        'Cut all staves slightly long to allow post-glue squaring/flush trim.',
+        'Example: add 1/2"–1" buffer depending on shell depth + jig method.',
       ],
-      'Glue + clamp'
+      'Stave length prep'
     ),
     cp(
-      'Check joint stability post glue, prior to milling',
+      'Mark grain direction + number all staves',
       [
-        'Tap around joints for hollow spots.',
-        'Example: if a joint moves under finger pressure, re-glue before machining.',
-        'Mark any suspect area for reinforcement strategy.',
+        'Arrow grain direction, mark top/bottom, and number 1–N.',
+        'This protects the “wrap flow” and keeps bookmatching consistent.',
       ],
-      'Joint stability'
+      'Stave orientation + numbering'
+    ),
+    cp(
+      'Dry layout the full ring (no glue)',
+      [
+        'Assemble the ring on the bench to preview seam placement + figure flow.',
+        'This catches mismatched edges before any cuts or glue.',
+      ],
+      'Dry layout ring'
     ),
   ],
 
   rawShellCreation_2: [
     cp(
-      'Prepare shell in jig (fine-tune, measure, adjust)',
+      'Cut miter/bevel angles accurately',
       [
-        'Example: shim high spots to prevent wobble.',
-        'Check: shell sits flat; no rocking.',
-        'Measure: out-of-round at multiple points before milling.',
+        'Set saw/jig to the correct miter angle for the stave count.',
+        'Do test cuts on scrap first.',
+        'Example: cut 2 staves, place together, and check for daylight.',
       ],
-      'Jig prep'
+      'Miter cuts'
     ),
     cp(
-      'Check exterior roundness',
+      'Joint/true the cut faces (if needed)',
       [
-        'Example tolerance: within 1/32" before finishing passes.',
-        'Mark high zones for first passes.',
-        'Document measurements so “before/after” is visible.',
+        'If faces show tiny gaps, true them with shooting board/plane or sanding jig.',
+        'Goal: joints close with light pressure, not clamp force.',
       ],
-      'Roundness check'
-    ),
-  ],
-  rawShellCreation_3: [
-    cp(
-      'Mill exterior to target diameter',
-      [
-        'Example: rough to +0.020", then final pass to exact OD.',
-        'Check for tearout on figured woods (slow feed, sharp cutter).',
-        'Measure at 6–8 points around circumference.',
-      ],
-      'Mill exterior'
-    ),
-  ],
-  rawShellCreation_4: [
-    cp(
-      'Mill interior to desired shell thickness',
-      [
-        'Example: keep thickness uniform within a tight tolerance.',
-        'Check: avoid chatter; confirm cutter alignment.',
-        'Measure: thickness at multiple zones (top/mid/bottom).',
-      ],
-      'Mill interior'
-    ),
-  ],
-  rawShellCreation_5: [
-    cp(
-      'Wood + grain fill exterior',
-      [
-        'Example: open-pore woods may need multiple fill passes.',
-        'Let cure fully before sanding to avoid sink-back.',
-        'Spot-check after first sand for low pores.',
-      ],
-      'Fill exterior'
+      'True joint faces'
     ),
     cp(
-      'Sand exterior',
+      'Dry clamp partial sections to validate fit',
       [
-        'Example grit path: 120 → 180 → 220 (before finish).',
-        'Keep edges crisp; avoid flat spots.',
-        'Raking light check for scratches before moving on.',
+        'Clamp 4–6 staves at a time to validate your cut accuracy.',
+        'If it hinges or twists, correct before cutting the rest.',
       ],
-      'Sand exterior'
-    ),
-  ],
-  rawShellCreation_6: [
-    cp(
-      'Wood + grain fill interior',
-      [
-        'Example: interior fill affects feel + control (don’t overbuild).',
-        'Ensure no drips/runs that could interfere with snare bed work later.',
-        'Let cure fully before sanding.',
-      ],
-      'Fill interior'
+      'Dry clamp validation'
     ),
     cp(
-      'Sand interior',
+      'Full dry-fit ring + gap inspection',
       [
-        'Example: keep interior smooth for consistent resonance + easy cleaning.',
-        'Avoid thinning walls unevenly with aggressive sanding.',
-        'Final pass: even surface, no ridges.',
+        'Assemble the entire ring and check all joints under bright light.',
+        'Any consistent gap = angle issue; isolated gap = bad stave face.',
       ],
-      'Sand interior'
+      'Full ring fit check'
     ),
   ],
 

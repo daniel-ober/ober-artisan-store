@@ -17,7 +17,7 @@ import './ViewSoundlegendModal.css';
 
 import { STATUS_OPTIONS, getOverviewStatus } from '../utils/statusConfig';
 import defaultProjectFields from '../utils/defaultProjectFields';
-import defaultStepData from '../utils/defaultStepData';
+import { defaultStepData } from '../utils/buildWorkflow';
 
 const generateAndDownloadVCard = ({ firstName, lastName, email, phone }) => {
   const safeFirst = firstName || 'Contact';
