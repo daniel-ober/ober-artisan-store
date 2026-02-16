@@ -78,9 +78,7 @@ function LegacyBrowse() {
 }
 function LegacyTuningLearn() {
   return (
-    <div style={{ padding: 20 }}>
-      What is Legacy Tuning™ (placeholder)
-    </div>
+    <div style={{ padding: 20 }}>What is Legacy Tuning™ (placeholder)</div>
   );
 }
 
@@ -212,10 +210,15 @@ function App() {
             {/* ARTISAN PORTAL */}
             <Route
               path="/legacy"
-              element={<PrivateRoute element={<SoundLegendPortal />} />}
+              element={
+                <PrivateRoute element={<SoundLegendPortal />} soundlegendOnly />
+              }
             />
 
-            <Route path="/artisan-portal/signin" element={<SoundlegendSignin />} />
+            <Route
+              path="/artisan-portal/signin"
+              element={<SoundlegendSignin />}
+            />
 
             <Route
               path="/artisan-portal/reset-password"
@@ -252,13 +255,19 @@ function App() {
 
             <Route
               path="/custom-shop"
-              element={isLinkEnabled('custom-shop') ? <CustomShop /> : <NotFound />}
+              element={
+                isLinkEnabled('custom-shop') ? <CustomShop /> : <NotFound />
+              }
             />
 
             <Route
               path="/products"
               element={
-                isLinkEnabled('products') || isAdmin ? <Products /> : <NotFound />
+                isLinkEnabled('products') || isAdmin ? (
+                  <Products />
+                ) : (
+                  <NotFound />
+                )
               }
             />
 
@@ -266,7 +275,9 @@ function App() {
 
             <Route
               path="/artisan-shop"
-              element={<PreOrderPage isAdmin={isAdmin} isDarkMode={isDarkMode} />}
+              element={
+                <PreOrderPage isAdmin={isAdmin} isDarkMode={isDarkMode} />
+              }
             />
 
             <Route path="/drum-selector" element={<DrumSelector />} />
@@ -282,7 +293,10 @@ function App() {
               path="/artisan-shop/heritage"
               element={<HeritageProductDetail />}
             />
-            <Route path="/artisan-shop/feuzon" element={<FeuzonProductDetail />} />
+            <Route
+              path="/artisan-shop/feuzon"
+              element={<FeuzonProductDetail />}
+            />
             <Route
               path="/artisan-shop/soundlegend"
               element={<SoundlegendProductDetail />}
@@ -314,7 +328,9 @@ function App() {
             {/* ADMIN TOOLS */}
             <Route
               path="/admin/artisan-tools/inventory-tracker"
-              element={<PrivateRoute element={<InventoryTracker />} adminOnly />}
+              element={
+                <PrivateRoute element={<InventoryTracker />} adminOnly />
+              }
             />
 
             <Route

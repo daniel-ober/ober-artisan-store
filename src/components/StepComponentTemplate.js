@@ -295,7 +295,7 @@ export const CHECKPOINTS_BY_ITEM_ID = {
     ),
   ],
 
-    discoveryDesign_5: [
+  discoveryDesign_5: [
     cp(
       'Confirm spec feasibility (size / lugs / construction)',
       [
@@ -528,7 +528,7 @@ export const CHECKPOINTS_BY_ITEM_ID = {
     ),
   ],
 
-    woodVisionLockIn_2: [
+  woodVisionLockIn_2: [
     cp(
       'Confirm construction method + shell philosophy',
       [
@@ -573,7 +573,6 @@ export const CHECKPOINTS_BY_ITEM_ID = {
       'Structural validation'
     ),
   ],
-
 
   woodVisionLockIn_3: [
     cp(
@@ -621,7 +620,6 @@ export const CHECKPOINTS_BY_ITEM_ID = {
     ),
   ],
 
-
   woodVisionLockIn_4: [
     cp(
       'Define resin/accent philosophy',
@@ -668,7 +666,6 @@ export const CHECKPOINTS_BY_ITEM_ID = {
     ),
   ],
 
-
   woodVisionLockIn_5: [
     cp(
       'Conduct full spec readback with client',
@@ -714,7 +711,6 @@ export const CHECKPOINTS_BY_ITEM_ID = {
       'Build greenlight'
     ),
   ],
-
 
   /* =========================================================
    * 4) Raw Shell Creation
@@ -1566,54 +1562,54 @@ const StepComponentTemplate = ({
     : `${stepKey}_${activeIdx + 1}`;
 
   // Prefer explicit item.id → fallback to generated key
-const resolvedCheckpointKey =
-  (activeItem?.id && CHECKPOINTS_BY_ITEM_ID[activeItem.id]
-    ? activeItem.id
-    : null) || (CHECKPOINTS_BY_ITEM_ID[generatedKey] ? generatedKey : null);
+  const resolvedCheckpointKey =
+    (activeItem?.id && CHECKPOINTS_BY_ITEM_ID[activeItem.id]
+      ? activeItem.id
+      : null) || (CHECKPOINTS_BY_ITEM_ID[generatedKey] ? generatedKey : null);
 
-// Do we actually have real checkpoint definitions?
-const hasExplicitDefs = !!resolvedCheckpointKey;
+  // Do we actually have real checkpoint definitions?
+  const hasExplicitDefs = !!resolvedCheckpointKey;
 
-// If there is no checkpoint definition, preserve saved length
-const savedCheckpointLen = Array.isArray(activeItem?.checkpointStates)
-  ? activeItem.checkpointStates.length
-  : 0;
+  // If there is no checkpoint definition, preserve saved length
+  const savedCheckpointLen = Array.isArray(activeItem?.checkpointStates)
+    ? activeItem.checkpointStates.length
+    : 0;
 
-let checkpointDefs = [];
+  let checkpointDefs = [];
 
-// ✅ REAL DEFINITIONS
-if (hasExplicitDefs) {
-  checkpointDefs = CHECKPOINTS_BY_ITEM_ID[resolvedCheckpointKey];
-}
+  // ✅ REAL DEFINITIONS
+  if (hasExplicitDefs) {
+    checkpointDefs = CHECKPOINTS_BY_ITEM_ID[resolvedCheckpointKey];
+  }
 
-// ✅ EXISTING SAVED STATES (legacy projects)
-else if (savedCheckpointLen > 0) {
-  checkpointDefs = new Array(savedCheckpointLen)
-    .fill(null)
-    .map((_, i) =>
-      cp(`Checkpoint ${i + 1}`, [], `Checkpoint ${i + 1}`, 'task', true)
-    );
-}
+  // ✅ EXISTING SAVED STATES (legacy projects)
+  else if (savedCheckpointLen > 0) {
+    checkpointDefs = new Array(savedCheckpointLen)
+      .fill(null)
+      .map((_, i) =>
+        cp(`Checkpoint ${i + 1}`, [], `Checkpoint ${i + 1}`, 'task', true)
+      );
+  }
 
-// ✅ HARD FALLBACK — SINGLE CHECKBOX ONLY
-else {
-  checkpointDefs = [
-    cp(
-      'Mark step complete',
-      [],
-      activeItem?.bookLabel ||
-        activeItem?.label ||
-        activeItem?.task ||
-        `Step ${activeIdx + 1}`,
-      'task',
-      false
-    ),
-  ];
-}
+  // ✅ HARD FALLBACK — SINGLE CHECKBOX ONLY
+  else {
+    checkpointDefs = [
+      cp(
+        'Mark step complete',
+        [],
+        activeItem?.bookLabel ||
+          activeItem?.label ||
+          activeItem?.task ||
+          `Step ${activeIdx + 1}`,
+        'task',
+        false
+      ),
+    ];
+  }
 
-const activeItemId = resolvedCheckpointKey || activeItem?.id || generatedKey;
+  const activeItemId = resolvedCheckpointKey || activeItem?.id || generatedKey;
 
- /* ---------------------------------------------------
+  /* ---------------------------------------------------
      LOCAL CHECKPOINT STATE
   --------------------------------------------------- */
 
@@ -1659,9 +1655,8 @@ const activeItemId = resolvedCheckpointKey || activeItem?.id || generatedKey;
     if (!activeItem) return;
 
     const len = Math.max(checkpointDefs.length, localCheckpointStates.length);
-    const next = Array.from(
-      { length: len },
-      (_, i) => localCheckpointStates[i]
+    const next = Array.from({ length: len }, (_, i) =>
+      localCheckpointStates[i] === undefined ? false : localCheckpointStates[i]
     );
 
     // If user checks "done" and it was "na", flip to done.
@@ -1678,9 +1673,8 @@ const activeItemId = resolvedCheckpointKey || activeItem?.id || generatedKey;
     if (def?.naAllowed === false) return;
 
     const len = Math.max(checkpointDefs.length, localCheckpointStates.length);
-    const next = Array.from(
-      { length: len },
-      (_, i) => localCheckpointStates[i]
+    const next = Array.from({ length: len }, (_, i) =>
+      localCheckpointStates[i] === undefined ? false : localCheckpointStates[i]
     );
 
     // Toggle: false/true -> 'na' ; 'na' -> false

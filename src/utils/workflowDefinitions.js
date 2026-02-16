@@ -9,6 +9,18 @@
  * IMPORTANT:
  * - "key" in STEPS must match a key in STEP_DEFS + STAGE_TEMPLATES
  * - storageKeys must match your Firestore project phase keys
+ *
+ * This file is aligned to your NEW workflow keys used throughout the app:
+ *  discoveryDesign
+ *  commitmentPortal
+ *  woodVisionLockIn
+ *  rawShellCreation
+ *  shellTrueingTorchTune
+ *  exteriorArtFinish
+ *  edgesSnareBeds
+ *  hardwareAssembly
+ *  legacyTuningMedia
+ *  finalQAPackagingDelivery
  */
 
 /* =========================================================
@@ -18,14 +30,14 @@
 export const STEPS = [
   { key: 'discoveryDesign', label: 'Discovery & Design' },
   { key: 'commitmentPortal', label: 'Commitment & Portal Setup' },
-  { key: 'woodVision', label: 'Wood & Vision Lock-In' },
-  { key: 'rawShell', label: 'Raw Shell Creation' },
-  { key: 'shellTrueingTorch', label: 'Shell Trueing & Torch Tune' },
-  { key: 'exteriorArt', label: 'Exterior Art & Finish' },
-  { key: 'edgesBeds', label: 'Edges & Snare Beds' },
+  { key: 'woodVisionLockIn', label: 'Wood & Vision Lock-In' },
+  { key: 'rawShellCreation', label: 'Raw Shell Creation' },
+  { key: 'shellTrueingTorchTune', label: 'Shell Trueing & Torch Tune' },
+  { key: 'exteriorArtFinish', label: 'Exterior Art & Finish' },
+  { key: 'edgesSnareBeds', label: 'Edges & Snare Beds' },
   { key: 'hardwareAssembly', label: 'Hardware & Assembly' },
-  { key: 'legacyMedia', label: 'Legacy Tuning & Media' },
-  { key: 'finalQa', label: 'Final QA, Packaging & Delivery' },
+  { key: 'legacyTuningMedia', label: 'Legacy Tuning & Media' },
+  { key: 'finalQAPackagingDelivery', label: 'Final QA, Packaging & Delivery' },
 ];
 
 /* =========================================================
@@ -61,7 +73,8 @@ your hands, your ears, your rooms, and your story.`,
       { label: 'Initial consultation', weight: 0.6 },
       { label: 'Build proposal', weight: 1.0 },
     ],
-    mantra: 'Every legendary drum starts here — with a story worth building around.',
+    mantra:
+      'Every legendary drum starts here — with a story worth building around.',
   },
 
   commitmentPortal: {
@@ -89,15 +102,17 @@ and we can focus fully on building instead of chasing loose ends.`,
       'Missed updates if portal access is not configured correctly',
     ],
     checkpoints: [
-      { label: 'Payment processing', weight: 0.3 },
-      { label: 'Early mockups', weight: 1.3 },
-      { label: 'Portal access setup', weight: 0.4 },
+      { label: 'Deposit + confirm', weight: 0.3 },
+      { label: 'Portal setup', weight: 0.4 },
+      { label: 'Approval rules', weight: 0.4 },
+      { label: 'Schedule + risks', weight: 0.4 },
     ],
-    mantra: 'Once we both commit, this stops being an idea and starts becoming your drum.',
+    mantra:
+      'Once we both commit, this stops being an idea and starts becoming your drum.',
   },
 
-  woodVision: {
-    key: 'woodVision',
+  woodVisionLockIn: {
+    key: 'woodVisionLockIn',
     label: 'Wood & Vision Lock-In',
     storageKeys: ['woodVisionLockIn'],
     estHours: '3–5 hrs',
@@ -121,14 +136,18 @@ how the drum breathes, and how it sits in a mix.`,
       'Over-complicating the design at the expense of clarity and tone',
     ],
     checkpoints: [
-      { label: 'Wood selection', weight: 1.6 },
-      { label: 'Pre-build measuring & prep', weight: 1.9 },
+      { label: 'Wood select + moisture check', weight: 1.6 },
+      { label: 'Build plan', weight: 1.2 },
+      { label: 'Veneer plan', weight: 1.0 },
+      { label: 'Resin strategy', weight: 1.0 },
+      { label: 'Vision approval gate', weight: 1.4 },
     ],
-    mantra: 'This is where your drum stops being “a snare” and becomes your sound in wood form.',
+    mantra:
+      'This is where your drum stops being “a snare” and becomes your sound in wood form.',
   },
 
-  rawShell: {
-    key: 'rawShell',
+  rawShellCreation: {
+    key: 'rawShellCreation',
     label: 'Raw Shell Creation',
     storageKeys: ['rawShellCreation'],
     estHours: '6–10 hrs',
@@ -154,26 +173,25 @@ This is where the drum literally comes into existence.`,
       'Uneven glue squeeze-out causing weak spots',
     ],
     checkpoints: [
-      { label: 'Cut stave blocks to size', weight: 6.4 },
-      { label: 'Cut stave bevels', weight: 2.6 },
-      { label: 'Pre-glue test (dry-fit)', weight: 0.6 },
-      { label: 'Glue-up & clamping', weight: 2.6 },
-      { label: 'Glue curing', weight: 0.0 },
-      { label: 'Exterior milling setup', weight: 2.6 },
-      { label: 'Mill exterior diameter', weight: 1.9 },
-      { label: 'Outer bevel reinforcement', weight: 0.9 },
+      { label: 'Stave prep', weight: 2.2 },
+      { label: 'Miters + fit', weight: 2.2 },
+      { label: 'Dry fit ring', weight: 0.8 },
+      { label: 'Glue + clamp', weight: 2.2 },
+      { label: 'Cure + inspect', weight: 0.0 },
+      { label: 'Rough true', weight: 2.0 },
     ],
-    mantra: 'This is the moment a stack of boards turns into a living, breathing shell.',
+    mantra:
+      'This is the moment a stack of boards turns into a living, breathing shell.',
   },
 
-  shellTrueingTorch: {
-    key: 'shellTrueingTorch',
+  shellTrueingTorchTune: {
+    key: 'shellTrueingTorchTune',
     label: 'Shell Trueing & Torch Tune',
     storageKeys: ['shellTrueingTorchTune'],
     estHours: '5–8 hrs',
     avgDays: '3–4 days',
     what: `We true the shell inside and out, finalize thickness, reinforce stress points,
-and perform your Torch Tune process so the shell “rings with intent” before any hardware touches it.`,
+and perform Torch Tune so the shell “rings with intent” before any hardware touches it.`,
     why: `This is where the drum learns how to vibrate. A well-trued shell is easier to tune,
 stays in tune longer, and feels alive at any dynamic.`,
     techniques: [
@@ -194,18 +212,18 @@ stays in tune longer, and feels alive at any dynamic.`,
       'Uneven resonance across the shell',
     ],
     checkpoints: [
-      { label: 'Sanding prep (for veneer + interior)', weight: 2.6 },
-      { label: 'Interior milling setup', weight: 2.6 },
-      { label: 'Mill interior thickness', weight: 2.6 },
-      { label: 'Inner bevel reinforcement', weight: 1.0 },
-      { label: 'Sanding prep (interior)', weight: 2.6 },
-      { label: 'Original torch tune process', weight: 3.0 },
+      { label: 'Surface prep', weight: 1.2 },
+      { label: 'ID jig setup', weight: 1.0 },
+      { label: 'OD validate', weight: 1.0 },
+      { label: 'ID validate', weight: 1.0 },
+      { label: 'Stabilize/torch', weight: 1.2 },
     ],
-    mantra: 'If a drum is going to “just lock in,” it has to learn that language right here.',
+    mantra:
+      'If a drum is going to “just lock in,” it has to learn that language right here.',
   },
 
-  exteriorArt: {
-    key: 'exteriorArt',
+  exteriorArtFinish: {
+    key: 'exteriorArtFinish',
     label: 'Exterior Art & Finish',
     storageKeys: ['exteriorArtFinish'],
     estHours: '8–14 hrs',
@@ -232,20 +250,19 @@ and how the drum ages on the road and in the studio.`,
       'Over-heavy finish that chokes resonance',
     ],
     checkpoints: [
-      { label: 'Veneer application', weight: 5.5 },
-      { label: 'Under-spray aesthetic work', weight: 1.3 },
-      { label: 'Pre-finish full shell inspection', weight: 1.0 },
-      { label: 'Badge + logo work', weight: 3.9 },
-      { label: 'Spray finishing', weight: 9.5 },
-      { label: 'Full de-gassing of chemicals', weight: 0.0 },
-      { label: 'Final sanding', weight: 2.9 },
-      { label: 'Polishing', weight: 1.9 },
+      { label: 'Bond prep', weight: 1.2 },
+      { label: 'Apply veneer', weight: 2.4 },
+      { label: 'Resin/color', weight: 1.4 },
+      { label: 'Prep clear', weight: 1.2 },
+      { label: 'Clear + cure', weight: 0.0 },
+      { label: 'Level + buff', weight: 1.8 },
     ],
-    mantra: 'This is where people start saying “I almost don’t want to play it… almost.”',
+    mantra:
+      'This is where people start saying “I almost don’t want to play it… almost.”',
   },
 
-  edgesBeds: {
-    key: 'edgesBeds',
+  edgesSnareBeds: {
+    key: 'edgesSnareBeds',
     label: 'Edges & Snare Beds',
     storageKeys: ['edgesSnareBeds'],
     estHours: '3–6 hrs',
@@ -269,10 +286,14 @@ Done well, they make the drum feel like it “just locks in.”`,
       'Uneven edges creating tuning dead zones',
     ],
     checkpoints: [
-      { label: 'Bearing edges', weight: 1.4 },
-      { label: 'Snare beds', weight: 1.8 },
+      { label: 'Cut edges', weight: 1.4 },
+      { label: 'Bed layout', weight: 1.0 },
+      { label: 'Cut beds', weight: 1.4 },
+      { label: 'Seal edges', weight: 0.8 },
+      { label: 'Seating QC', weight: 1.2 },
     ],
-    mantra: 'This is the thin line between “annoying to tune” and “it just lands where you want it.”',
+    mantra:
+      'This is the thin line between “annoying to tune” and “it just lands where you want it.”',
   },
 
   hardwareAssembly: {
@@ -299,98 +320,144 @@ keep the drum quiet, stable, and road-worthy.`,
       'Tear-out or chip-out around drill holes',
       'Hardware rattle from under-tightened fasteners',
     ],
-    checkpoints: [{ label: 'Hardware + head assembly', weight: 7.1 }],
-    mantra: 'This is where the shell gets its armor and becomes a drum built to tour.',
+    checkpoints: [
+      { label: 'Layout plan', weight: 1.0 },
+      { label: 'Drill + fit', weight: 1.6 },
+      { label: 'Install lugs', weight: 1.4 },
+      { label: 'Install snare', weight: 1.2 },
+      { label: 'Mechanical QC', weight: 0.9 },
+    ],
+    mantra:
+      'This is where the shell gets its armor and becomes a drum built to tour.',
   },
 
-  legacyMedia: {
-    key: 'legacyMedia',
+  legacyTuningMedia: {
+    key: 'legacyTuningMedia',
     label: 'Legacy Tuning & Media',
     storageKeys: ['legacyTuningMedia'],
     estHours: '4–8 hrs',
     avgDays: '3–5 days',
-    what: `We run your Legacy resonance analysis, tune the drum to its sweet spots, and capture the story in photos, audio, and NFC authentication.`,
+    what: `We tune the drum to its sweet spots and capture the story in photos and audio.`,
     why: `This is where the drum’s voice is documented and preserved. You’re not just getting a snare — you’re getting a record of how it was born.`,
     techniques: [
       'Frequency-based tuning + touch-based fine-tuning',
-      'Multi-mic photo and audio capture',
-      'NFC/NTAG programming and verification',
+      'Reference voicings (low / legacy / high)',
+      'Documentation-ready notes + media capture',
     ],
     tools: [
       'Frequency/tuner apps + reference tones',
       'Studio mics + interface',
       'Camera + lighting setup',
-      'NTAG 424 or equivalent NFC tools',
     ],
     risks: [
       'Tuning that doesn’t match player preference or range',
       'Poor documentation that undersells the drum’s voice',
     ],
     checkpoints: [
-      { label: 'Legacy resonance analysis', weight: 0.6 },
-      { label: 'Legacy tuning', weight: 2.6 },
-      { label: 'Professional photos', weight: 10.3 },
-      { label: 'Studio Legacy audio', weight: 1.0 },
-      { label: 'NTAG authentication', weight: 0.3 },
+      { label: 'Seat heads', weight: 0.8 },
+      { label: 'Dial wires', weight: 1.1 },
+      { label: 'Legacy voice', weight: 1.2 },
+      { label: 'Tuning notes', weight: 1.0 },
     ],
-    mantra: 'Here’s where your drum stops being “new gear” and becomes part of your legacy.',
+    mantra:
+      'Here’s where your drum stops being “new gear” and becomes part of your legacy.',
   },
 
-  finalQa: {
-    key: 'finalQa',
+  finalQAPackagingDelivery: {
+    key: 'finalQAPackagingDelivery',
     label: 'Final QA, Packaging & Delivery',
     storageKeys: ['finalQAPackagingDelivery'],
     estHours: '2–4 hrs',
     avgDays: '1–2 days',
     what: `We run a final inspection, clean and prep the drum, pack it safely, and confirm delivery so you’re ready to play, record, or tour with confidence.`,
     why: `A great drum deserves a great send-off. This step protects the build, your investment, and the story we’ve built together.`,
-    techniques: ['Multi-point QC checklist', 'Final tuning + feel pass', 'Protective packing tailored to the drum'],
-    tools: ['Soft cloths and non-abrasive cleaners', 'Custom packing materials / cases', 'Shipping labels + tracking system'],
-    risks: ['Transit damage from under-protected packing', 'Loose hardware or missed issues slipping through QA'],
-    checkpoints: [
-      { label: 'Final cleaning', weight: 0.3 },
-      { label: 'Packaging', weight: 0.7 },
-      { label: 'Delivery confirmation', weight: 0.4 },
+    techniques: [
+      'Multi-point QC checklist',
+      'Final tuning + feel pass',
+      'Protective packing tailored to the drum',
+      'Shipping + tracking confirmation',
     ],
-    mantra: 'The build ends here, but the story really starts the first time you hit it in your space.',
+    tools: [
+      'Soft cloths and non-abrasive cleaners',
+      'Custom packing materials / cases',
+      'Shipping labels + tracking system',
+    ],
+    risks: [
+      'Transit damage from under-protected packing',
+      'Loose hardware or missed issues slipping through QA',
+    ],
+    checkpoints: [
+      { label: 'Final QA', weight: 1.0 },
+      { label: 'Pack insert', weight: 0.9 },
+      { label: 'Ship close', weight: 0.7 },
+    ],
+    mantra:
+      'The build ends here, but the story really starts the first time you hit it in your space.',
   },
 };
 
 /* =========================================================
    CUSTOMER SUB-STEPS + CHECKPOINT TEXT (your STAGE_TEMPLATES)
+   - These are the customer-facing "sub-steps" inside each stage.
+   - Keys here align to your NEW workflow stage keys.
    ========================================================= */
 
 export const STAGE_TEMPLATES = {
   discoveryDesign: {
     steps: [
       {
-        key: 'initialConsultation',
-        label: 'Initial consultation',
+        key: 'playerInterview',
+        label: 'Player Interview',
         checkpoints: [
           'Talk through what you play, how you like a drum to feel, and the kind of tone you love hearing.',
           'Note any comfort needs (arthritis, hand fatigue, stick choice) so the drum works with your body, not against it.',
           'Confirm the size you’re leaning toward (diameter and depth) and how it should sit in your setup.',
-          'Dial in the visual vibe—wood tones, color, and overall finish direction you’re drawn to.',
           'Define the tuning range where you want this drum to live (your LegacyPrint “home base”).',
           'Agree on a clear budget and realistic build timeline so expectations stay aligned.',
         ],
       },
       {
-        key: 'buildProposal',
-        label: 'Build proposal',
+        key: 'voiceTargets',
+        label: 'Voice Targets',
         checkpoints: [
-          'Put everything we’ve discussed into a clear written build plan for your drum.',
-          'Choose the main wood that will shape the core tone and feel.',
-          'Decide if we’re adding a secondary wood for extra character or hybrid response.',
-          'Lock in how many staves the shell will use to balance feel, response, and look.',
+          'Define the core voice you want: fat, dry, crisp, airy, aggressive, or dark.',
+          'Decide how forward the attack should be versus how big the body should feel.',
+          'Choose sustain preference: controlled and tight vs open and breathing.',
+          'Define snare response goals: sensitivity vs thickness and weight.',
+          'Identify the “mix position” you want (studio focus vs live projection).',
+        ],
+      },
+      {
+        key: 'specTargets',
+        label: 'Spec Targets',
+        checkpoints: [
+          'Confirm diameter + depth targets (and why that size makes sense for you).',
+          'Lock in stave count direction to balance response, weight, and feel.',
           'Set a target shell thickness so the drum breathes and responds the way you want.',
+          'Choose the bearing edge profile that best supports your feel and tuning goals.',
+          'Choose the snare bed style that will shape wire response and sensitivity.',
+        ],
+      },
+      {
+        key: 'aestheticLane',
+        label: 'Aesthetic Lane',
+        checkpoints: [
+          'Dial in the visual vibe—wood tones, color, and overall finish direction you’re drawn to.',
           'Choose the outer veneer that will define the drum’s visual personality.',
           'Pick your hardware finish (chrome, black nickel, or brass/gold) to frame the shell.',
           'Confirm the lug style (vintage tube) that matches both sound and aesthetic.',
           'Confirm we’re using diecast hoops for focus, attack, and tuning stability.',
-          'Choose the bearing edge profile that best supports your feel and tuning goals.',
-          'Choose the snare bed style that will shape wire response and sensitivity.',
-          'Prepare early visual mockups or previews when they’ll help you “see” the build.',
+        ],
+      },
+      {
+        key: 'feasibilityGate',
+        label: 'Feasibility Gate',
+        checkpoints: [
+          'Confirm the design is feasible with the selected materials and construction method.',
+          'Confirm the scope and build direction are clearly defined (no hidden unknowns).',
+          'Validate timeline and workload assumptions before committing to the build path.',
+          'Validate budget alignment relative to materials, finish complexity, and hardware.',
+          'Greenlight moving forward into Commitment & Portal Setup.',
         ],
       },
     ],
@@ -399,329 +466,310 @@ export const STAGE_TEMPLATES = {
   commitmentPortal: {
     steps: [
       {
-        key: 'paymentProcessing',
-        label: 'Payment processing',
+        key: 'depositConfirm',
+        label: 'Deposit + Confirm',
         checkpoints: [
           'Send a simple, secure payment link for your build.',
           'Confirm deposit or payment is received so your spot is locked in.',
+          'Confirm your build spec summary is accurate (size, woods, finish, hardware).',
         ],
       },
       {
-        key: 'portalAccess',
-        label: 'Portal access setup',
+        key: 'portalSetup',
+        label: 'Portal Setup',
         checkpoints: [
           'Create your private SoundLegend project in the system.',
-          'Connect your build to the SoundLegend portal so progress can be tracked.',
+          'Connect your build to the portal so progress can be tracked.',
           'Send a welcome email with your login link and quick overview.',
           'Confirm you can sign in and everything looks right on your side.',
+        ],
+      },
+      {
+        key: 'approvalRules',
+        label: 'Approval Rules',
+        checkpoints: [
+          'Define what requires approval vs what is shared as FYI updates.',
+          'Set response timing expectations (typical: 24–72 hours).',
+          'Clarify how changes affect timeline + cost after approval gates.',
+        ],
+      },
+      {
+        key: 'scheduleRisks',
+        label: 'Schedule + Risks',
+        checkpoints: [
+          'Set your start date and target completion window (with buffer).',
+          'Document any hard deadlines (recording, tour, gift date).',
+          'Flag risk factors (burl, heavy resin, winter humidity, etc.) and how we mitigate them.',
         ],
       },
     ],
   },
 
-  woodVision: {
+  woodVisionLockIn: {
     steps: [
       {
-        key: 'woodSelection',
-        label: 'Wood selection',
+        key: 'woodSelectMC',
+        label: 'Wood Select + MC',
         checkpoints: [
           'Pick the specific boards that will become your shell.',
           'Check each board’s moisture reading so the drum stays stable over time.',
           'Choose grain directions that support both tone and strength.',
           'Study knots and grain stress lines where resin or accents might live naturally.',
-          'Rough out how long each board needs to be for your shell size.',
           'Optionally send photos or a quick video so you can approve the wood set.',
-          'Log each board’s length for accurate shell planning.',
-          'Log each board’s width so staves stay balanced.',
-          'Log each board’s thickness so we know how much material we have to work with.',
-          'Record the moisture percentage so we have a baseline for the build.',
         ],
       },
       {
-        key: 'earlyMockups',
-        label: 'Early mockups',
+        key: 'buildPlan',
+        label: 'Build Plan',
         checkpoints: [
-          'Create first visual sketches or mockups of finish, veneer, and hardware together.',
-          'Show 2–3 finish concepts so you can compare different accent and color ideas.',
-          'Rough in where badges and logos will live on the shell.',
-          'Write a simple overview of each option so you know what you’re looking at.',
-          'Share these mockups with you for honest feedback and reactions.',
-          'Capture your notes and lock in the direction that feels most like “you.”',
+          'Confirm shell size, stave count, and construction approach.',
+          'Confirm target shell thickness and the feel/tone intent behind it.',
+          'Confirm bearing edge direction so everything supports the same voice.',
         ],
       },
       {
-        key: 'preBuildMeasuring',
-        label: 'Pre-build measuring & prep',
+        key: 'veneerPlan',
+        label: 'Veneer Plan',
         checkpoints: [
-          'Do a quick test to confirm veneer and shell will bond cleanly and look cohesive.',
-          'Check shell color and character in natural light to see its “real-world” appearance.',
-          'Check shell color and reflection under flash or studio lighting for photos and stage.',
-          'Compare acrylic accent color swatches against the veneer to find the best pairing.',
-          'Rough in badge and logo placement so they feel balanced on the shell.',
-          'Share updated visuals or notes with you before cutting any wood.',
-        ],
-      },
-    ],
-  },
-
-  rawShell: {
-    steps: [
-      {
-        key: 'cutStaveBevels',
-        label: 'Cut stave bevels',
-        checkpoints: [
-          'Set each stave so its grain flows in a musical, stable direction.',
-          'Make sure every stave is cut to the same dimensions so the shell forms cleanly.',
-          'Check each piece for cracks, voids, or flaws that could affect long-term strength.',
-          'Measure the length of each stave to match your drum size.',
-          'Measure the width of each stave so the circle closes correctly.',
-          'Measure thickness so the shell can be brought to the right final profile.',
+          'Choose the veneer and figure intensity that matches your vision.',
+          'Confirm seam placement and grain flow around the shell.',
+          'Dry-wrap preview before any adhesive touches wood.',
         ],
       },
       {
-        key: 'preGlueTest',
-        label: 'Pre-glue test (dry-fit)',
+        key: 'resinStrategy',
+        label: 'Resin Strategy',
         checkpoints: [
-          'Inspect freshly cut bevels to ensure there’s no tear-out or roughness.',
-          'Test-fit a few staves together to confirm they lock up with tight joints.',
-          'Double-check the bevel angle so the full circle will form correctly.',
-          'Compare inside and outside faces to be sure proportions match our plan.',
+          'Lock your accent color (HEX) and how it should behave under finish.',
+          'Confirm accents will follow natural stress points/figure—no stripes.',
+          'Confirm the “subtle vs bold” direction so it feels intentional.',
         ],
       },
       {
-        key: 'glueUpClamping',
-        label: 'Glue-up & clamping',
+        key: 'visionApproval',
+        label: 'Vision Approval',
         checkpoints: [
-          'Dry-fit the full circle of staves before glue to make sure everything mates well.',
-          'Look and feel for any gaps between staves and correct them before committing.',
-          'Check how round the circle is using our jigs or measuring tools.',
-          'Measure how far out-of-round the shell is and bring it into tight spec.',
-          'Check joint tightness at several points around the shell for even strength.',
-        ],
-      },
-      {
-        key: 'glueCuring',
-        label: 'Glue curing',
-        checkpoints: [
-          'Let the shell sit for the full recommended cure time so joints reach full strength.',
-          'Release the shell from the clamps carefully to avoid stressing new joints.',
-          'Do a first visual pass on every joint to confirm nothing opened up.',
-        ],
-      },
-      {
-        key: 'exteriorMillingSetup',
-        label: 'Exterior milling setup',
-        checkpoints: [
-          'Square and lock the exterior milling sled or lathe so the shell cuts cleanly.',
-          'Center the shell in the jig so there’s equal support all the way around.',
-          'Set the cutter or router depth for a safe, controlled first pass.',
-          'Run a light test pass to listen for chatter or vibration and adjust if needed.',
-        ],
-      },
-      {
-        key: 'millExteriorDiameter',
-        label: 'Mill exterior diameter',
-        checkpoints: [
-          'Take several shallow cuts instead of one heavy pass to protect the shell.',
-          'Measure the shell at multiple clock positions to confirm a true circle.',
-          'Verify the final diameter is within our target tolerance.',
-          'Inspect the outside of the shell for any tool marks or tear-out that need refinement.',
-        ],
-      },
-      {
-        key: 'outerBevelReinforcement',
-        label: 'Outer bevel reinforcement',
-        checkpoints: [
-          'Apply a thin reinforcing layer to the outer bevel zone where heads will sit.',
-          'Make sure that reinforcement soaks evenly along all stave joints.',
-          'Sand the area back to a smooth, clean surface ready for future steps.',
-          'Re-check for tiny gaps or hairline cracks and address them now, not later.',
+          'We do a full spec readback so everything is perfectly aligned.',
+          'You approve the final direction in writing.',
+          'After this gate, major spec changes require a timeline/cost reset.',
         ],
       },
     ],
   },
 
-  shellTrueingTorch: {
+  rawShellCreation: {
     steps: [
       {
-        key: 'sandingPrepExteriorInterior',
-        label: 'Sanding prep (for veneer + interior)',
+        key: 'stavePrep',
+        label: 'Stave Prep',
         checkpoints: [
-          'Do an initial exterior sand so the shell is smooth and ready for finer work.',
-          'Knock down any high spots or ridges so the shell feels even under the hand.',
-          'Confirm the shell is ready to move into the next jig or process.',
-          'Smooth the interior with finer grits so it feels clean and consistent.',
-          'Inspect every interior joint up close before moving forward.',
-          'Make sure the shell is fully ready for torch work and veneer application.',
+          'Mill stock to consistent thickness and width.',
+          'Crosscut to length with a little buffer for post-glue squaring.',
+          'Mark grain direction + number all staves to protect wrap flow.',
         ],
       },
       {
-        key: 'interiorMillingSetup',
-        label: 'Interior milling setup',
+        key: 'mitersFit',
+        label: 'Miters + Fit',
         checkpoints: [
-          'Align the interior milling sled or jig so the shell spins true.',
-          'Set the interior cutter depth to remove just the right amount of material.',
-          'Seat and index the shell correctly in the jig so it cuts evenly.',
+          'Cut bevel/miter angles accurately using the correct math for your stave count.',
+          'Dry-clamp partial sections to validate fit before committing.',
+          'Fix any daylight/gaps before moving forward.',
         ],
       },
       {
-        key: 'millInteriorThickness',
-        label: 'Mill interior thickness',
+        key: 'dryFitRing',
+        label: 'Dry Fit Ring',
         checkpoints: [
-          'Check the exterior again after passes to ensure it stayed smooth and true.',
-          'Expose clean glue lines so we can see the health of each joint.',
-          'Measure the final exterior diameter to confirm we’re exactly on spec.',
-          'Verify roundness again using calipers or jigs.',
-          'Measure shell wall thickness at multiple points to keep things even.',
+          'Assemble the full ring with no glue to preview figure + seam alignment.',
+          'Check all joints under bright light.',
+          'Confirm the circle closes without forcing anything.',
         ],
       },
       {
-        key: 'innerBevelReinforcement',
-        label: 'Inner bevel reinforcement',
+        key: 'glueClamp',
+        label: 'Glue + Clamp',
         checkpoints: [
-          'Inspect the interior surface and edges to ensure they feel smooth and intentional.',
-          'Confirm there’s no major tear-out or roughness hiding inside.',
-          'Measure interior diameter to check our inner profile.',
-          'Measure final shell thickness at the top edge area.',
-          'Measure final shell thickness around the middle of the shell.',
-          'Measure final shell thickness near the bottom edge.',
-          'Check how true the inner circle is all the way around.',
+          'Apply full-surface glue coverage.',
+          'Clamp evenly so joint pressure is balanced all the way around.',
+          'Measure out-of-round and bring it into spec while glue is workable.',
         ],
       },
       {
-        key: 'sandingPrepInterior',
-        label: 'Sanding prep (interior)',
+        key: 'cureInspect',
+        label: 'Cure + Inspect',
         checkpoints: [
-          'Reinforce the outer bevel area with a thin glue treatment for long-term strength.',
-          'Check that reinforcement has soaked evenly into all joints.',
-          'Sand the outer bevel smooth again so it feels seamless.',
-          'Reinforce the inner bevel area with a matching treatment.',
-          'Confirm the inner joints have taken reinforcement evenly.',
-          'Sand the inner bevel smooth and comfortable after everything cures.',
+          'Allow full cure time so joints reach full strength.',
+          'Release from clamps carefully to avoid stressing joints.',
+          'Inspect every joint for any opening or weakness.',
         ],
       },
       {
-        key: 'originalTorchTune',
-        label: 'Original torch tune process',
+        key: 'roughTrue',
+        label: 'Rough True',
         checkpoints: [
-          'Apply torch work in a controlled pattern around the shell.',
-          'Bring the grain to life visually without scorching or overburning.',
-          'Confirm the shell is visually elevated with no structural damage from heat.',
+          'Rough true the OD so it’s stable and ready for precision milling.',
+          'Check roundness at multiple clock positions.',
+          'Address any high spots or wobble before moving on.',
         ],
       },
     ],
   },
 
-  exteriorArt: {
+  shellTrueingTorchTune: {
     steps: [
       {
-        key: 'veneerApplication',
-        label: 'Veneer application',
+        key: 'surfacePrep',
+        label: 'Surface Prep',
         checkpoints: [
-          'Lay down even adhesive on both shell and veneer for a strong bond.',
-          'Roll the veneer onto the shell with smooth, even pressure.',
-          'Check for any bubbles or trapped air and remove them.',
-          'Inspect the seam so it reads as a clean, nearly invisible joint.',
-          'Confirm veneer thickness is appropriate for tone and durability.',
-          'Make sure the veneer seam lines up with the planned design orientation.',
-          'Watch for any drifting or creep as the veneer settles and address it early.',
+          'Sand exterior to remove ridges and prep for cleaner milling and bonding.',
+          'Smooth the interior so it feels consistent under the hand.',
+          'Inspect joints closely before any resonance work begins.',
         ],
       },
       {
-        key: 'underSprayWork',
-        label: 'Under-spray aesthetic work',
+        key: 'idJigSetup',
+        label: 'ID Jig Setup',
         checkpoints: [
-          'Place acrylic accents where the wood naturally wants them—inside stress lines and figure.',
-          'Balance torch and color work so the shell feels intentional, not busy.',
-          'Check that any injected fills are level, clear, and integrated with the grain.',
-          'Sand the shell to a fine grit (320–400) so it’s truly ready for finish.',
+          'Align the interior milling setup so the shell spins/cuts true.',
+          'Set safe depth for controlled passes.',
+          'Confirm shell is seated and indexed correctly.',
         ],
       },
       {
-        key: 'preFinishInspection',
-        label: 'Pre-finish full shell inspection',
+        key: 'odValidate',
+        label: 'OD Validate',
         checkpoints: [
-          'Run a hand and eye check to confirm the shell feels perfectly smooth.',
-          'Make sure there’s no veneer hanging over the edges where heads will sit.',
-          'Remove dust and debris so nothing gets trapped under the finish.',
-          'Mask off any areas that shouldn’t receive spray before finishing.',
+          'Validate final OD roundness and target diameter.',
+          'Measure wall thickness at multiple points.',
+          'Confirm there are no flat spots or ridges on the outside.',
         ],
       },
       {
-        key: 'badgeLogoWork',
-        label: 'Badge + logo work',
+        key: 'idValidate',
+        label: 'ID Validate',
         checkpoints: [
-          'Place the outer badge exactly where it feels balanced on the shell.',
-          'Install the inner badge in its dedicated spot inside the drum.',
-          'Confirm everything is fully adhered or fastened and ready for the long haul.',
+          'Confirm interior is smooth with no major tear-out.',
+          'Measure final ID consistency and thickness map.',
+          'Confirm the shell “feels” even and intentional.',
         ],
       },
       {
-        key: 'sprayFinishing',
-        label: 'Spray finishing',
+        key: 'stabilizeTorch',
+        label: 'Stabilize/Torch',
         checkpoints: [
-          'Lay down controlled, even coats so the finish builds cleanly.',
-          'Watch for flashing or uneven spots between coats and smooth them out.',
-          'Tune gun settings and technique to keep orange peel to a minimum.',
-          'Give each coat the time it needs to set before the next one goes on.',
-          'Track approximate finish build so tone and protection stay in balance.',
-          'Check shell reflections to ensure an even, consistent surface.',
-        ],
-      },
-      {
-        key: 'fullDegassing',
-        label: 'Full de-gassing of chemicals',
-        checkpoints: [
-          'Let the shell cure in a clean, dust-controlled area.',
-          'Watch the surface as it cures for any shrinking or witness lines.',
-          'Give the finish full off-gassing time so it hardens correctly.',
-          'Confirm the finish is fully cured before any leveling or polishing.',
-        ],
-      },
-      {
-        key: 'finalSanding',
-        label: 'Final sanding',
-        checkpoints: [
-          'Level sand to remove tiny imperfections and texture in the finish.',
-          'Protect veneer and color coats by sanding carefully where it matters.',
-          'Check the shell under raking light to catch any final surface issues.',
-        ],
-      },
-      {
-        key: 'polishing',
-        label: 'Polishing',
-        checkpoints: [
-          'Buff the shell to its final sheen—gloss or satin, as planned.',
-          'Inspect reflections for smoothness without waves or swirl marks.',
-          'Clean away any leftover polish from edges and hardware areas.',
+          'Perform Torch Tune (where appropriate) in a controlled pattern.',
+          'Re-test resonance around the shell after each pass.',
+          'Confirm no structural stress or seam issues were introduced.',
         ],
       },
     ],
   },
 
-  edgesBeds: {
+  exteriorArtFinish: {
     steps: [
       {
-        key: 'bearingEdges',
-        label: 'Bearing edges',
+        key: 'bondPrep',
+        label: 'Bond Prep',
         checkpoints: [
-          'Shape inner and outer edges so they work together as one profile.',
-          'Confirm the main cutting surface matches the intended angle and roundover.',
-          'Check for any chatter or tool marks that could affect tuning or feel.',
-          'Measure edge height so heads sit exactly where they should on the shell.',
-          'Inspect the contact point all the way around for consistency.',
-          'Evaluate how smooth the edge feels as you run a finger along it.',
+          'Dry-fit veneer/wrap and confirm seam strategy.',
+          'Plan adhesive and clamping/press method for your veneer type.',
+          'Confirm shell is clean, dust-free, and ready to bond.',
         ],
       },
       {
-        key: 'snareBeds',
-        label: 'Snare beds',
+        key: 'applyVeneer',
+        label: 'Apply Veneer',
         checkpoints: [
-          'Confirm left and right snare beds mirror each other perfectly.',
-          'Check the transitions into and out of the beds so there are no sharp steps.',
-          'Measure bed depth so wires can relax into the shell properly.',
-          'Measure bed width to match your snare setup and response goals.',
-          'Check how the bed ramps in and out to keep feel and response balanced.',
+          'Apply even adhesive coverage to shell and veneer.',
+          'Roll/press evenly to remove bubbles and trapped air.',
+          'Inspect the seam for a clean, nearly invisible joint.',
+        ],
+      },
+      {
+        key: 'resinColor',
+        label: 'Resin/Color',
+        checkpoints: [
+          'Place accents where the wood naturally wants them—inside stress lines and figure.',
+          'Keep the accent behavior speckled and organic (no streak bands).',
+          'Sand to a fine grit so the surface is truly ready for clear.',
+        ],
+      },
+      {
+        key: 'prepClear',
+        label: 'Prep Clear',
+        checkpoints: [
+          'Run hand + eye checks to confirm surface is perfectly smooth.',
+          'Remove dust/debris so nothing gets trapped under clear.',
+          'Mask off areas that should not receive spray.',
+        ],
+      },
+      {
+        key: 'clearCure',
+        label: 'Clear + Cure',
+        checkpoints: [
+          'Lay down controlled, even coats to build protection without choking resonance.',
+          'Respect cure windows so the finish hardens correctly.',
+          'Watch for witness lines/sink-back and adjust schedule if needed.',
+        ],
+      },
+      {
+        key: 'levelBuff',
+        label: 'Level + Buff',
+        checkpoints: [
+          'Level sand to remove texture and tiny imperfections.',
+          'Polish to the final sheen (gloss/satin as planned).',
+          'Final inspection under raking light for swirl/wave control.',
+        ],
+      },
+    ],
+  },
+
+  edgesSnareBeds: {
+    steps: [
+      {
+        key: 'cutEdges',
+        label: 'Cut Edges',
+        checkpoints: [
+          'Cut the bearing edge profile to match the intended feel and tuning behavior.',
+          'Inspect for chatter/tool marks and refine immediately.',
+          'Verify consistent contact point all the way around.',
+        ],
+      },
+      {
+        key: 'bedLayout',
+        label: 'Bed Layout',
+        checkpoints: [
+          'Mark snare bed zones aligned to throw/butt orientation.',
+          'Ensure left/right beds are symmetric.',
+          'Confirm centerline before any cutting begins.',
+        ],
+      },
+      {
+        key: 'cutBeds',
+        label: 'Cut Beds',
+        checkpoints: [
+          'Cut beds using multiple light passes to avoid burning/tear-out.',
+          'Blend transitions so there are no sharp steps.',
+          'Verify depth/width match your snare wire intent.',
+        ],
+      },
+      {
+        key: 'sealEdges',
+        label: 'Seal Edges',
+        checkpoints: [
+          'Seal/protect edge surfaces so heads seat consistently long-term.',
+          'Confirm sealing does not change the intended profile.',
+          'Allow cure time before seating tests.',
+        ],
+      },
+      {
+        key: 'seatingQC',
+        label: 'Seating QC',
+        checkpoints: [
+          'Seat a head (when available) to confirm smooth, even contact.',
+          'Confirm snare response potential with a quick wire fit check.',
+          'Sign off the “it just locks in” feel before assembly.',
         ],
       },
     ],
@@ -730,130 +778,121 @@ export const STAGE_TEMPLATES = {
   hardwareAssembly: {
     steps: [
       {
-        key: 'hardwareHeadAssembly',
-        label: 'Hardware + head assembly',
+        key: 'layoutPlan',
+        label: 'Layout Plan',
         checkpoints: [
-          'Install all lugs with the correct fittings so they feel solid and quiet.',
-          'Mount the throw-off at the right height and angle for easy access.',
-          'Install the butt plate directly opposite the throw-off for clean wire pull.',
-          'Install the vent grommet so the shell can breathe and equalize pressure.',
-          'Confirm all hardware sits flat and tight against the shell.',
-          'Mount hoops and heads in the correct orientation for the design.',
-          'String up the snare wires and center them across the beds.',
-          'Tap and check for rattles or loose parts and correct anything that moves.',
-          'Test the snare throw to make sure it engages and releases smoothly.',
-          'Check that the head seats evenly around the drum with balanced tension.',
-          'Visually line up lugs relative to the hoops for a clean, intentional look.',
-          'Confirm the hoops and shell sit parallel for smooth tuning and feel.',
-          'Make sure there’s plenty of usable range on each tension rod.',
-          'Verify the throw-off and beds work together so the wires respond evenly.',
+          'Confirm all hardware is in stock and matches spec (finish, lug count, diecast hoops).',
+          'Plan layout for lugs/throw/butt/badge/vent.',
+          'Verify alignment relative to snare beds and visual front.',
+        ],
+      },
+      {
+        key: 'drillFit',
+        label: 'Drill + Fit',
+        checkpoints: [
+          'Tape + mark centers to prevent finish chip-out.',
+          'Drill pilot holes first; step up sizes gradually.',
+          'Deburr all holes and test-fit each hardware type.',
+        ],
+      },
+      {
+        key: 'installLugs',
+        label: 'Install Lugs',
+        checkpoints: [
+          'Install lug hardware with the correct protection stack/gaskets.',
+          'Ensure everything sits flat and tight against the shell.',
+          'Sight lug lines for clean vertical alignment.',
+        ],
+      },
+      {
+        key: 'installSnare',
+        label: 'Install Snare',
+        checkpoints: [
+          'Install throw-off and butt plate aligned to beds.',
+          'Install vent grommet and verify shell breathing.',
+          'Dry-check snare wire path and clearance.',
+        ],
+      },
+      {
+        key: 'mechQC',
+        label: 'Mechanical QC Gate',
+        checkpoints: [
+          'Torque check: snug, even, no crushed wood.',
+          'Rattle check: shake test and tap test.',
+          'Confirm hoops/heads seat parallel and tune smoothly.',
         ],
       },
     ],
   },
 
-  legacyMedia: {
+  legacyTuningMedia: {
     steps: [
       {
-        key: 'legacyResonanceAnalysis',
-        label: 'Legacy resonance analysis',
+        key: 'seatHeads',
+        label: 'Seat Heads',
         checkpoints: [
-          'Capture the drum’s fundamental pitch multiple times and average it.',
-          'Find the low tuning range where the drum still feels musical.',
-          'Find the “Legacy” sweet-spot tuning that shows the drum at its best.',
-          'Find the higher tuning range where it still feels controlled and usable.',
-          'Note how the overtones stack so we understand its harmonic behavior.',
-          'Evaluate how the drum handles unwanted overtones or ring.',
+          'Install heads and seat them properly.',
+          'Tune in a star pattern for even lug pressure.',
+          'Set a neutral baseline tuning.',
         ],
       },
       {
-        key: 'legacyTuning',
-        label: 'Legacy tuning',
+        key: 'dialWires',
+        label: 'Dial Wires',
         checkpoints: [
-          'Listen to how the drum sustains at several tunings.',
-          'Check how overtones behave across the tuning range.',
-          'Test soft-to-loud playing so we know how it responds dynamically.',
-          'Measure lug-to-lug pitch (when useful) to keep things balanced.',
-          'Define the LegacyPrint window—the tuning zone we recommend you live in.',
-          'Document a slightly-lower tuning option you can explore.',
-          'Document a slightly-higher tuning option for brighter applications.',
+          'Center wires across the beds.',
+          'Set wire tension for crisp response without choke.',
+          'Test for sympathetic buzz and adjust as needed.',
         ],
       },
       {
-        key: 'professionalPhotos',
-        label: 'Professional photos',
+        key: 'legacyVoice',
+        label: 'Legacy Voice',
         checkpoints: [
-          'Capture a hero shot that shows the drum’s overall character.',
-          'Capture a left-angle shot that highlights depth and stance.',
-          'Capture a right-angle shot for full shell and hardware detail.',
-          'Capture a top-down shot that shows hoops and head layout.',
-          'Capture a close-up of the badge and logo details.',
-          'Capture a macro shot of wood, grain, and finish texture.',
-          'Shoot a 360-style standing series to show the drum all the way around.',
-          'Shoot a horizontal or flat series to show the drum in a different context.',
+          'Play-test dynamics: ghosts, rimshots, cross-stick.',
+          'Establish low / legacy / high voicing zones.',
+          'Confirm it matches the original Discovery voice target.',
         ],
       },
       {
-        key: 'studioLegacyAudio',
-        label: 'Studio Legacy audio',
+        key: 'tuningNotes',
+        label: 'Tuning Notes',
         checkpoints: [
-          'Record examples at a loose tuning so you can hear it wide open.',
-          'Record examples at a medium tuning that many players will live in.',
-          'Record examples at a tighter tuning for crack and articulation.',
-          'Record at the higher recommended tuning for extra cut when needed.',
-          'Capture cross-stick examples so you can hear rim voice and feel.',
-          'Capture ghost-note and dynamic phrases to show nuance and response.',
+          'Document notes, ranges, and references.',
+          'Capture any quick audio/video samples when possible.',
+          'Save a simple “where this drum lives best” summary for you.',
         ],
       },
     ],
   },
 
-  finalQa: {
+  finalQAPackagingDelivery: {
     steps: [
       {
-        key: 'ntagAuthentication',
-        label: 'NTAG authentication',
+        key: 'finalQA',
+        label: 'Final QA',
         checkpoints: [
-          'Read and record the unique ID from your NFC chip.',
-          'Create or update the digital record that links this tag to your drum.',
-          'Connect that tag record to the correct project in our system.',
-          'Confirm the tag points to the right Legacy / verification page.',
-          'Test tap-to-verify using an iPhone.',
-          'Test tap-to-verify using an Android device.',
+          'Final cosmetic + structural inspection under good light.',
+          'Confirm hardware tightness/alignment and no rattles.',
+          'Full test-play to confirm tuning stability and tonal balance.',
         ],
       },
       {
-        key: 'finalCleaning',
-        label: 'Final cleaning',
+        key: 'packInsert',
+        label: 'Pack Insert',
         checkpoints: [
-          'Wipe away fingerprints and smudges from shell and hardware.',
-          'Give hoops and hardware a final polish so they arrive stage-ready.',
-          'Double-check snare wire alignment and the range of tension available.',
-          'Inspect the shell under good light for any last finish issues.',
-          'Run a final structural check of shell, edges, and hardware.',
-          'Do one last sound and feel pass before calling it complete.',
+          'Final clean + polish so it arrives stage-ready.',
+          'Package with finish-safe protection and impact cushioning.',
+          'Include inserts: thank-you, care notes, tuning notes, any extras.',
         ],
       },
       {
-        key: 'packaging',
-        label: 'Packaging',
+        key: 'shipClose',
+        label: 'Ship Close',
         checkpoints: [
-          'Wrap the drum in a soft inner layer so nothing rubs against the finish.',
-          'Add moisture protection if needed for the route it will travel.',
-          'Add cushioning around shell, hoops, and hardware for impact protection.',
-          'Place your personalized thank-you letter into the package.',
-          'Include your Legacy tuning and analysis materials.',
-          'Include care instructions so the drum stays healthy long-term.',
-          'Include any brand collateral or extras connected to your build.',
-          'Mark the outside of the box with Ober branding where appropriate.',
-          'Apply the shipping label, insurance, and signature-required details.',
-        ],
-      },
-      {
-        key: 'deliveryConfirmation',
-        label: 'Delivery confirmation',
-        checkpoints: [
-          'Coordinate a reveal or follow-up touchpoint once the drum arrives, if you’d like.',
+          'Create label + insurance/signature as appropriate.',
+          'Confirm tracking is saved and shared.',
+          'Coordinate delivery confirmation / reveal follow-up if desired.',
         ],
       },
     ],
