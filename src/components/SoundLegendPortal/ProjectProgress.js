@@ -7,11 +7,7 @@ import {
   updateDoc,
   serverTimestamp,
 } from 'firebase/firestore';
-import {
-  ref as storageRef,
-  getDownloadURL,
-  listAll,
-} from 'firebase/storage';
+import { ref as storageRef, getDownloadURL, listAll } from 'firebase/storage';
 import { db, storage } from '../../firebaseConfig';
 import { calculateProjectProgress } from '../../utils/calculateProjectProgress';
 import {
@@ -36,6 +32,19 @@ const STAGE_VIDEO_FILENAMES = {
   hardwareAssembly: 'stage-build-hardware-assembly.mp4',
   legacyTuningMedia: 'stage-legacy-tuning-media.mp4',
   finalQAPackagingDelivery: 'stage-final-qa-packaging-delivery.mp4',
+};
+
+const STAGE_IMAGE_FILENAMES = {
+  discoveryDesign: 'stage-discovery-design.png',
+  commitmentPortal: 'stage-commitment-portal.png',
+  woodVisionLockIn: 'stage-wood-vision-lock-in.png',
+  rawShellCreation: 'stage-build-raw-shell-creation.png',
+  shellTrueingTorchTune: 'stage-build-shell-trueing-torch-tune.png',
+  exteriorArtFinish: 'stage-build-exterior-art-finish.png',
+  edgesSnareBeds: 'stage-build-edges-snare-beds.png',
+  hardwareAssembly: 'stage-build-hardware-assembly.png',
+  legacyTuningMedia: 'stage-legacy-tuning-media.png',
+  finalQAPackagingDelivery: 'stage-final-qa-packaging-delivery.png',
 };
 
 // ✅ TEMP ALIASES so the rest of this file compiles without a massive refactor yet.
@@ -1298,6 +1307,8 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
   const [activeKey, setActiveKey] = useState(STEPS[0].key);
   const [heroVideoUrl, setHeroVideoUrl] = useState(FALLBACK_VIDEO);
   const [videoUrlCache, setVideoUrlCache] = useState({});
+  const [stageImageUrl, setStageImageUrl] = useState('');
+  const [imageUrlCache, setImageUrlCache] = useState({});
 
   // ✅ Only seed from props when switching projects or when local is empty.
   useEffect(() => {
@@ -1394,87 +1405,165 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
 
   const activeStep = STEPS.find((s) => s.key === activeKey) || STEPS[0];
 
-useEffect(() => {
-  let cancelled = false;
+  useEffect(() => {
+    let cancelled = false;
 
-  const normalizeName = (value = '') =>
-    String(value)
-      .replace(/[\u200B-\u200D\uFEFF]/g, '')
-      .trim()
-      .toLowerCase();
+    const normalizeName = (value = '') =>
+      String(value)
+        .replace(/[\u200B-\u200D\uFEFF]/g, '')
+        .trim()
+        .toLowerCase();
 
-  const loadStageVideo = async () => {
-    const stageKey = currentStageKey;
+    const loadStageVideo = async () => {
+      const stageKey = currentStageKey;
 
-    if (!stageKey) {
-      setHeroVideoUrl(FALLBACK_VIDEO);
-      return;
-    }
-
-    if (videoUrlCache[stageKey]) {
-      setHeroVideoUrl(videoUrlCache[stageKey]);
-      return;
-    }
-
-    const expectedFilename = STAGE_VIDEO_FILENAMES[stageKey];
-    if (!expectedFilename) {
-      console.warn('No filename mapped for stage key:', stageKey);
-      setHeroVideoUrl(FALLBACK_VIDEO);
-      return;
-    }
-
-    try {
-      const folderRef = storageRef(storage, 'project-stage-media');
-      const folderList = await listAll(folderRef);
-
-      const normalizedExpected = normalizeName(expectedFilename);
-
-      const availableNames = folderList.items.map((item) => item.name);
-      console.log('CURRENT STAGE KEY:', stageKey);
-      console.log('EXPECTED FILENAME:', expectedFilename);
-      console.log('NORMALIZED EXPECTED:', normalizedExpected);
-      console.log('AVAILABLE STAGE MEDIA FILES:', availableNames);
-
-      const matchedItem = folderList.items.find((item) => {
-        const normalizedItemName = normalizeName(item.name);
-        return normalizedItemName === normalizedExpected;
-      });
-
-      if (!matchedItem) {
-        console.error(
-          `No matching file found in project-stage-media for ${stageKey}. Expected: ${expectedFilename}`
-        );
-        if (!cancelled) setHeroVideoUrl(FALLBACK_VIDEO);
+      if (!stageKey) {
+        setHeroVideoUrl(FALLBACK_VIDEO);
         return;
       }
 
-      console.log('MATCHED STORAGE ITEM:', matchedItem.name);
-
-      const url = await getDownloadURL(matchedItem);
-
-      if (cancelled) return;
-
-      console.log('SUCCESS VIDEO URL:', url);
-
-      setVideoUrlCache((prev) => ({
-        ...prev,
-        [stageKey]: url,
-      }));
-      setHeroVideoUrl(url);
-    } catch (err) {
-      console.error(`Failed loading current stage video for ${stageKey}:`, err);
-      if (!cancelled) {
-        setHeroVideoUrl(FALLBACK_VIDEO);
+      if (videoUrlCache[stageKey]) {
+        setHeroVideoUrl(videoUrlCache[stageKey]);
+        return;
       }
-    }
-  };
 
-  loadStageVideo();
+      const expectedFilename = STAGE_VIDEO_FILENAMES[stageKey];
+      if (!expectedFilename) {
+        console.warn('No filename mapped for stage key:', stageKey);
+        setHeroVideoUrl(FALLBACK_VIDEO);
+        return;
+      }
 
-  return () => {
-    cancelled = true;
-  };
-}, [currentStageKey, videoUrlCache]);
+      try {
+        const folderRef = storageRef(storage, 'project-stage-media');
+        const folderList = await listAll(folderRef);
+
+        const normalizedExpected = normalizeName(expectedFilename);
+
+        const availableNames = folderList.items.map((item) => item.name);
+        console.log('CURRENT STAGE KEY:', stageKey);
+        console.log('EXPECTED FILENAME:', expectedFilename);
+        console.log('NORMALIZED EXPECTED:', normalizedExpected);
+        console.log('AVAILABLE STAGE MEDIA FILES:', availableNames);
+
+        const matchedItem = folderList.items.find((item) => {
+          const normalizedItemName = normalizeName(item.name);
+          return normalizedItemName === normalizedExpected;
+        });
+
+        if (!matchedItem) {
+          console.error(
+            `No matching file found in project-stage-media for ${stageKey}. Expected: ${expectedFilename}`
+          );
+          if (!cancelled) setHeroVideoUrl(FALLBACK_VIDEO);
+          return;
+        }
+
+        console.log('MATCHED STORAGE ITEM:', matchedItem.name);
+
+        const url = await getDownloadURL(matchedItem);
+
+        if (cancelled) return;
+
+        console.log('SUCCESS VIDEO URL:', url);
+
+        setVideoUrlCache((prev) => ({
+          ...prev,
+          [stageKey]: url,
+        }));
+        setHeroVideoUrl(url);
+      } catch (err) {
+        console.error(
+          `Failed loading current stage video for ${stageKey}:`,
+          err
+        );
+        if (!cancelled) {
+          setHeroVideoUrl(FALLBACK_VIDEO);
+        }
+      }
+    };
+
+    loadStageVideo();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [currentStageKey, videoUrlCache]);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const normalizeName = (value = '') =>
+      String(value)
+        .replace(/[\u200B-\u200D\uFEFF]/g, '')
+        .trim()
+        .toLowerCase();
+
+    const loadStageImage = async () => {
+      const stageKey = activeStep?.key;
+
+      if (!stageKey) {
+        setStageImageUrl('');
+        return;
+      }
+
+      if (imageUrlCache[stageKey]) {
+        setStageImageUrl(imageUrlCache[stageKey]);
+        return;
+      }
+
+      const expectedFilename = STAGE_IMAGE_FILENAMES[stageKey];
+      if (!expectedFilename) {
+        console.warn('No image filename mapped for stage key:', stageKey);
+        setStageImageUrl('');
+        return;
+      }
+
+      try {
+        const folderRef = storageRef(storage, 'project-stage-images');
+        const folderList = await listAll(folderRef);
+
+        const normalizedExpected = normalizeName(expectedFilename);
+
+        const matchedItem = folderList.items.find((item) => {
+          const normalizedItemName = normalizeName(item.name);
+          return normalizedItemName === normalizedExpected;
+        });
+
+        if (!matchedItem) {
+          console.error(
+            `No matching image found in project-stage-images for ${stageKey}. Expected: ${expectedFilename}`
+          );
+          if (!cancelled) setStageImageUrl('');
+          return;
+        }
+
+        const url = await getDownloadURL(matchedItem);
+
+        if (cancelled) return;
+
+        setImageUrlCache((prev) => ({
+          ...prev,
+          [stageKey]: url,
+        }));
+        setStageImageUrl(url);
+      } catch (err) {
+        console.error(
+          `Failed loading education stage image for ${stageKey}:`,
+          err
+        );
+        if (!cancelled) {
+          setStageImageUrl('');
+        }
+      }
+    };
+
+    loadStageImage();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [activeStep, imageUrlCache]);
 
   const activeStatus = useMemo(() => {
     if (!project || !activeStep) return 'not_started';
@@ -1689,6 +1778,16 @@ useEffect(() => {
             </div>
           </div>
         </div>
+
+        {stageImageUrl && (
+          <div className="sl-progress-stage-image-wrap">
+            <img
+              className="sl-progress-stage-image"
+              src={stageImageUrl}
+              alt={`${activeStep.label} stage`}
+            />
+          </div>
+        )}
 
         {/* Explainer + checkpoints */}
         <div className="sl-progress-stage-body">

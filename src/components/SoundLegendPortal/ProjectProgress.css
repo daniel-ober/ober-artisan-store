@@ -167,103 +167,242 @@
 
 .sl-progress-roadmap-steps {
   position: relative;
-  margin-top: 12px;
+  margin-top: 14px;
   display: flex;
   justify-content: space-between;
-  gap: 4px;
+  gap: 6px;
 }
 
 .sl-progress-step-dot {
   position: relative;
-  flex: 1 1 0;
-  max-width: 72px;
-  border: none;
   background: transparent;
-  cursor: pointer;
+  border: none;
+  color: rgba(255, 255, 255, 0.72);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
-  color: #e5e7eb;
+  gap: 8px;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease,
+    filter 0.2s ease;
+}
+
+.sl-progress-step-dot:hover {
+  transform: translateY(-1px);
+}
+
+.sl-progress-step-dot.is-locked {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 .sl-progress-step-number {
-  width: 26px;
-  height: 26px;
+  position: relative;
+  width: 42px;
+  height: 42px;
   border-radius: 999px;
-  border: 2px solid rgba(148, 163, 184, 0.7);
-  background: #020617;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.7rem;
-  line-height: 1;
-  position: relative;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border: 2px solid rgba(125, 146, 190, 0.45);
+  background: radial-gradient(circle at 30% 30%, #111827 0%, #020617 75%);
+  color: rgba(255, 255, 255, 0.88);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 0 0 0 rgba(0, 0, 0, 0);
   transition:
-    background 0.2s ease,
-    border-color 0.2s ease,
-    box-shadow 0.2s ease,
-    transform 0.18s ease;
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
-/* small connector to the bar */
+/* remove old connector line */
 .sl-progress-step-number::before {
-  position: absolute;
-  top: -20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 1px;
-  height: 20px;
-  border-radius: 999px;
-  background: rgba(148, 163, 184, 0.9);
+  display: none !important;
+  content: none !important;
 }
 
 .sl-progress-step-label {
-  font-size: 0.68rem;
+  font-size: 0.8rem;
+  line-height: 1.16;
   text-align: center;
-  opacity: 0.78;
+  max-width: 92px;
+  color: rgba(255, 255, 255, 0.7);
+  transition:
+    color 0.25s ease,
+    opacity 0.25s ease,
+    transform 0.25s ease;
 }
 
-/* State colors */
+/* =========================
+   COMPLETED
+   ========================= */
 
 .sl-progress-step-dot.is-completed .sl-progress-step-number {
-  border-color: rgba(34, 197, 94, 0.95);
+  border-color: rgba(54, 227, 138, 0.45);
+  background: rgba(16, 49, 29, 0.22);
+  color: transparent;
+  box-shadow: none;
 }
 
-.sl-progress-step-dot.is-completed .sl-progress-step-number::before {
-  background: rgba(34, 197, 94, 0.95);
+.sl-progress-step-dot.is-completed .sl-progress-step-number::after {
+  content: '✓';
+  color: #7dffb2;
+  font-size: 0.95rem;
+  font-weight: 800;
+  line-height: 1;
 }
 
-.sl-progress-step-dot.is-current .sl-progress-step-number {
-  border-color: rgba(59, 130, 246, 0.95);
+.sl-progress-step-dot.is-completed .sl-progress-step-label {
+  color: rgba(255, 255, 255, 0.82);
 }
 
-.sl-progress-step-dot.is-current .sl-progress-step-number::before {
-  background: rgba(59, 130, 246, 0.95);
+/* =========================
+   SELECTED COMPLETED STAGE
+   ========================= */
+
+.sl-progress-step-dot.is-current.is-completed .sl-progress-step-number {
+  border-color: #36e38a;
+  background: radial-gradient(circle at 30% 30%, #10311d 0%, #07150d 78%);
+  transform: scale(1.05);
+  box-shadow: 0 0 0 3px rgba(125, 255, 178, 0.12);
 }
 
-/* Locked future stages */
-.sl-progress-step-dot.is-locked {
-  cursor: default;
-  opacity: 0.6;
-  pointer-events: none;
+.sl-progress-step-dot.is-current.is-completed .sl-progress-step-label {
+  color: #ffffff;
 }
+
+/* =========================
+   CURRENT / IN PROGRESS
+   ========================= */
+
+.sl-progress-step-dot.is-current:not(.is-completed) .sl-progress-step-number,
+.sl-progress-step-dot.is-inprogress:not(.is-completed)
+  .sl-progress-step-number {
+  border-color: #5aa2ff;
+  color: #e8f1ff;
+  background: radial-gradient(circle at 30% 30%, #142443 0%, #081120 78%);
+  box-shadow:
+    0 0 0 3px rgba(90, 162, 255, 0.16),
+    0 0 22px rgba(90, 162, 255, 0.22);
+}
+
+.sl-progress-step-dot.is-current:not(.is-completed) .sl-progress-step-label,
+.sl-progress-step-dot.is-inprogress:not(.is-completed) .sl-progress-step-label {
+  color: #eef5ff;
+}
+
+.sl-progress-step-dot.is-current:not(.is-completed) .sl-progress-step-number,
+.sl-progress-step-dot.is-inprogress:not(.is-completed)
+  .sl-progress-step-number {
+  animation: sl-stage-pulse 1.8s ease-in-out infinite;
+}
+
+/* pulsing halo ring */
+.sl-progress-step-dot.is-current:not(.is-completed)
+  .sl-progress-step-number::before,
+.sl-progress-step-dot.is-inprogress:not(.is-completed)
+  .sl-progress-step-number::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 999px;
+  border: 1px solid rgba(90, 162, 255, 0.22);
+  animation: sl-stage-pulse-ring 1.8s ease-in-out infinite;
+}
+
+/* =========================
+   FUTURE / LOCKED
+   ========================= */
 
 .sl-progress-step-dot.is-locked .sl-progress-step-number {
   border-color: rgba(75, 85, 99, 0.8);
   background: #020617;
+  color: rgba(148, 163, 184, 0.72);
+  box-shadow: none;
 }
 
-.sl-progress-step-dot.is-locked .sl-progress-step-number::before {
-  background: rgba(75, 85, 99, 0.8);
+.sl-progress-step-dot.is-locked .sl-progress-step-label {
+  color: rgba(148, 163, 184, 0.55);
 }
 
-/* hover / active (avoid glow on locked) */
+/* =========================
+   NORMAL HOVER
+   ========================= */
 
-.sl-progress-step-dot.is-current .sl-progress-step-number,
-.sl-progress-step-dot:not(.is-locked):hover .sl-progress-step-number {
-  transform: scale(1.08);
-  box-shadow: 0 0 0 3px rgba(191, 219, 254, 0.35);
+.sl-progress-step-dot:not(.is-locked):not(.is-current):hover
+  .sl-progress-step-number {
+  transform: scale(1.06);
+  border-color: rgba(191, 219, 254, 0.55);
+  box-shadow: 0 0 0 3px rgba(191, 219, 254, 0.12);
+}
+
+.sl-progress-step-dot:not(.is-locked):hover .sl-progress-step-label {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* =========================
+   ANIMATIONS
+   ========================= */
+
+@keyframes sl-stage-pulse {
+  0% {
+    transform: scale(1);
+    box-shadow:
+      0 0 0 3px rgba(90, 162, 255, 0.12),
+      0 0 16px rgba(90, 162, 255, 0.16);
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow:
+      0 0 0 5px rgba(90, 162, 255, 0.18),
+      0 0 26px rgba(90, 162, 255, 0.28);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow:
+      0 0 0 3px rgba(90, 162, 255, 0.12),
+      0 0 16px rgba(90, 162, 255, 0.16);
+  }
+}
+
+@keyframes sl-stage-pulse-ring {
+  0% {
+    opacity: 0.18;
+    transform: scale(0.96);
+  }
+  50% {
+    opacity: 0.42;
+    transform: scale(1.08);
+  }
+  100% {
+    opacity: 0.18;
+    transform: scale(0.96);
+  }
+}
+
+.sl-progress-stage-image-wrap {
+  margin: 18px 0 22px;
+  width: 100%;
+}
+
+.sl-progress-stage-image {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  border-radius: 20px;
+  border: 1px solid rgba(64, 110, 255, 0.28);
+  box-shadow:
+    0 0 0 1px rgba(32, 69, 168, 0.14),
+    0 10px 28px rgba(0, 0, 0, 0.34);
+  object-fit: cover;
 }
 
 /* =====================================================================
@@ -1066,5 +1205,18 @@
   .sl-progress-pill,
   .sl-progress-stage-files {
     font-size: 0.86rem;
+  }
+}
+
+@media (min-width: 1100px) {
+  .sl-progress-stage-image-wrap {
+    width: min(100%, 60%);
+    margin: 18px 0 22px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .sl-progress-stage-image-wrap {
+    width: min(100%, 58%);
   }
 }
