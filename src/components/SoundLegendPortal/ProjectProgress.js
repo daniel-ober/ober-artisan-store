@@ -7,7 +7,12 @@ import {
   updateDoc,
   serverTimestamp,
 } from 'firebase/firestore';
-import { db } from '../../firebaseConfig';
+import {
+  ref as storageRef,
+  getDownloadURL,
+  listAll,
+} from 'firebase/storage';
+import { db, storage } from '../../firebaseConfig';
 import { calculateProjectProgress } from '../../utils/calculateProjectProgress';
 import {
   STAGES,
@@ -15,29 +20,54 @@ import {
   STAGE_TEMPLATES,
   resolveStageKey,
 } from '../../utils/workflowDefinitions';
-
+import { PROJECT_STAGE_EDU } from '../../utils/projectStageEducation';
 import './ProjectProgress.css';
 
-const CRAFT_VIDEO = '/craft_in_motion/craftinmotion1080p.mp4';
+const FALLBACK_VIDEO = '/craft_in_motion/craftinmotion1080p.mp4';
+
+const STAGE_VIDEO_FILENAMES = {
+  discoveryDesign: 'stage-discovery-design.mp4',
+  commitmentPortal: 'stage-commitment-portal.mp4',
+  woodVisionLockIn: 'stage-wood-vision-lock-in.mp4',
+  rawShellCreation: 'stage-build-raw-shell-creation.mp4',
+  shellTrueingTorchTune: 'stage-build-shell-trueing-torch-tune.mp4',
+  exteriorArtFinish: 'stage-build-exterior-art-finish.mp4',
+  edgesSnareBeds: 'stage-build-edges-snare-beds.mp4',
+  hardwareAssembly: 'stage-build-hardware-assembly.mp4',
+  legacyTuningMedia: 'stage-legacy-tuning-media.mp4',
+  finalQAPackagingDelivery: 'stage-final-qa-packaging-delivery.mp4',
+};
 
 // ✅ TEMP ALIASES so the rest of this file compiles without a massive refactor yet.
 // This file expects "STEPS" to mean "stages in order".
-const STEPS = STAGES.map((s) => ({
-  key: s.stageKey,
-  label: s.adminMainTitle?.replace(/^\d+\.\s*/, '') || s.adminMainTitle,
-  adminMainTitle: s.adminMainTitle,
-  adminLeftShort: s.adminLeftShort,
-  // placeholders (so UI doesn’t explode)
-  what: '',
-  why: '',
-  techniques: [],
-  tools: [],
-  estHours: '—',
-  avgDays: '—',
-  mantra: '',
-  // IMPORTANT: use templates to drive sub-steps/checkpoints in StageCheckpointsPanel
-  storageKeys: [s.stageKey],
-}));
+const STEPS = STAGES.map((s) => {
+  const edu = PROJECT_STAGE_EDU[s.stageKey] || {};
+
+  const time = edu.time || {};
+  const estHours =
+    typeof time.min === 'number' && typeof time.max === 'number'
+      ? time.min === time.max
+        ? `${time.min} hrs`
+        : `${time.min}–${time.max} hrs`
+      : '—';
+
+  return {
+    key: s.stageKey,
+    label: s.adminMainTitle?.replace(/^\d+\.\s*/, '') || s.adminMainTitle,
+    adminMainTitle: s.adminMainTitle,
+    adminLeftShort: s.adminLeftShort,
+
+    what: edu.what || '',
+    why: edu.why || '',
+    techniques: Array.isArray(edu.techniques) ? edu.techniques : [],
+    tools: Array.isArray(edu.tools) ? edu.tools : [],
+    estHours,
+    avgDays: '—',
+    mantra: edu.value || '',
+
+    storageKeys: [s.stageKey],
+  };
+});
 
 // ✅ This file also expects a STEP_DEFS map keyed by `key`
 const STEP_DEFS = STEPS.reduce((acc, s) => {
@@ -114,7 +144,9 @@ const LEGACY_STEPKEY_FALLBACKS = {
 function isChecklistItemComplete(item) {
   if (!item) return false;
 
-  const states = Array.isArray(item.checkpointStates) ? item.checkpointStates : null;
+  const states = Array.isArray(item.checkpointStates)
+    ? item.checkpointStates
+    : null;
   if (states && states.length > 0) {
     return states.every(Boolean);
   }
@@ -127,7 +159,9 @@ function isChecklistItemTouched(item) {
 
   if (item.completed) return true;
 
-  const states = Array.isArray(item.checkpointStates) ? item.checkpointStates : null;
+  const states = Array.isArray(item.checkpointStates)
+    ? item.checkpointStates
+    : null;
   if (states && states.length > 0) {
     return states.some(Boolean);
   }
@@ -316,7 +350,11 @@ function getStepStatus(project, stepOrDef) {
 
   if (done === 0) {
     const anyTouched = list.some(isChecklistItemTouched);
-    return { status: anyTouched ? 'In Progress' : 'Not Started', done: 0, total };
+    return {
+      status: anyTouched ? 'In Progress' : 'Not Started',
+      done: 0,
+      total,
+    };
   }
 
   if (done === total) return { status: 'Completed', done, total };
@@ -403,27 +441,41 @@ function getGlobalActiveSubStep(project) {
 function getCurrentStepIndex(project) {
   if (!project) return 0;
 
-  // 1️⃣ any completed?
-  const stepSummaries = STEPS.map((s) => getStepStatus(project, s));
-  const anyCompleted = stepSummaries.some(({ done }) => done > 0);
-  if (!anyCompleted) return 0;
-
-  // 2️⃣ honor currentPhase text
-  const phase = String(project.currentPhase || '').toLowerCase();
-  if (phase) {
-    const idx = STEPS.findIndex((s) =>
-      phase.includes(String(s.label).split(' ')[0].toLowerCase())
+  // 1) If there's an active global sub-step, use its stage first.
+  // This is the most accurate source of truth for the current in-progress stage.
+  const activePtr = getGlobalActiveSubStep(project);
+  if (activePtr?.stageKey) {
+    const activeStageIndex = STEPS.findIndex(
+      (step) => step.key === activePtr.stageKey
     );
-    if (idx >= 0) return idx;
+    if (activeStageIndex >= 0) return activeStageIndex;
   }
 
-  // 3️⃣ fallback last touched
-  let lastIdx = 0;
-  STEPS.forEach((s, i) => {
-    const { done } = getStepStatus(project, s);
-    if (done > 0) lastIdx = i;
+  // 2) If every stage is completed, show the last stage.
+  const summaries = STEPS.map((step) => getStepStatus(project, step));
+  const allCompleted =
+    summaries.length > 0 &&
+    summaries.every(
+      (s) => String(s.status || '').toLowerCase() === 'completed'
+    );
+
+  if (allCompleted) {
+    return STEPS.length - 1;
+  }
+
+  // 3) Otherwise fallback to the furthest completed/touched stage.
+  let lastTouchedIndex = 0;
+
+  summaries.forEach((summary, index) => {
+    const status = String(summary.status || '').toLowerCase();
+    const done = Number(summary.done || 0);
+
+    if (status === 'completed' || status === 'in progress' || done > 0) {
+      lastTouchedIndex = index;
+    }
   });
-  return lastIdx;
+
+  return lastTouchedIndex;
 }
 
 /** Stage completion target */
@@ -1017,7 +1069,7 @@ const StageCheckpointsPanel = ({
                         : `${done}/${total} completed`}
                     </span>
 
-                    {isAdmin && total > 0 && done < total && (
+                    {total > 0 && done < total && (
                       <span
                         role="button"
                         tabIndex={0}
@@ -1038,7 +1090,6 @@ const StageCheckpointsPanel = ({
                       </span>
                     )}
 
-                    {/* ✅ Sub-step duration (admin only) */}
                     {canLogDuration && (
                       <span className="pp-step-duration">
                         {hasLoggedDuration ? (
@@ -1083,11 +1134,6 @@ const StageCheckpointsPanel = ({
                 <div className="pp-step-header slp-pp-step-header is-static">
                   <div className="pp-step-header-main">
                     <span className="pp-step-title">{step.label}</span>
-                    <span className="pp-step-count">
-                      {done === total
-                        ? 'Fully completed'
-                        : `${done}/${total} completed`}
-                    </span>
                   </div>
 
                   <span
@@ -1098,50 +1144,45 @@ const StageCheckpointsPanel = ({
                 </div>
               )}
 
-              {isOpen &&
-                (isAdmin ? (
-                  <div className="pp-checkpoint-list grouped">
-                    {step.checkpoints.map((cp, cpIdx) => (
-                      <div
-                        key={cp.id}
-                        className="pp-checkpoint-row pp-checkpoint-row--admin"
-                      >
-                        <div className="pp-checkpoint-main">
-                          <button
-                            type="button"
-                            className={`pp-checkpoint-icon pp-checkpoint-icon--button ${
-                              cp.completed ? 'is-completed' : ''
-                            }`}
-                            aria-label={
-                              cp.completed ? 'Mark incomplete' : 'Mark complete'
-                            }
-                            onClick={() =>
-                              handleToggleCheckpoint({
-                                stepIdx,
-                                cpIdx,
-                                nextChecked: !cp.completed,
-                              })
-                            }
-                          >
-                            {cp.completed ? '✓' : ''}
-                          </button>
+              {isOpen && isAdmin && (
+                <div className="pp-checkpoint-list grouped">
+                  {step.checkpoints.map((cp, cpIdx) => (
+                    <div
+                      key={cp.id}
+                      className="pp-checkpoint-row pp-checkpoint-row--admin"
+                    >
+                      <div className="pp-checkpoint-main">
+                        <button
+                          type="button"
+                          className={`pp-checkpoint-icon pp-checkpoint-icon--button ${
+                            cp.completed ? 'is-completed' : ''
+                          }`}
+                          aria-label={
+                            cp.completed ? 'Mark incomplete' : 'Mark complete'
+                          }
+                          onClick={() =>
+                            handleToggleCheckpoint({
+                              stepIdx,
+                              cpIdx,
+                              nextChecked: !cp.completed,
+                            })
+                          }
+                        >
+                          {cp.completed ? '✓' : ''}
+                        </button>
 
-                          <span
-                            className={`pp-checkpoint-label ${
-                              cp.completed ? 'is-completed' : ''
-                            }`}
-                          >
-                            {cp.label}
-                          </span>
-                        </div>
+                        <span
+                          className={`pp-checkpoint-label ${
+                            cp.completed ? 'is-completed' : ''
+                          }`}
+                        >
+                          {cp.label}
+                        </span>
                       </div>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="checkpoint-hidden-note">
-                    Detailed internal checkpoints are workshop-only.
-                  </div>
-                ))}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           );
         })}
@@ -1255,6 +1296,8 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
   const [project, setProject] = useState(initialProject || null);
   const [loading, setLoading] = useState(!initialProject);
   const [activeKey, setActiveKey] = useState(STEPS[0].key);
+  const [heroVideoUrl, setHeroVideoUrl] = useState(FALLBACK_VIDEO);
+  const [videoUrlCache, setVideoUrlCache] = useState({});
 
   // ✅ Only seed from props when switching projects or when local is empty.
   useEffect(() => {
@@ -1320,12 +1363,20 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
     [project, overallPct]
   );
 
+  const currentStageKey = useMemo(() => {
+    return (STEPS[currentStepIndex] || STEPS[0]).key;
+  }, [currentStepIndex]);
+
+  const currentStageDef = useMemo(() => {
+    return STEPS[currentStepIndex] || STEPS[0];
+  }, [currentStepIndex]);
+
   // ✅ Always allow Stage 1–3 to be viewable.
   // ✅ Also allow anything up to the current stage (in progress / reached).
-const unlockedUntilIndex = useMemo(
-  () => getUnlockMaxStageIndex(project),
-  [project]
-);
+  const unlockedUntilIndex = useMemo(
+    () => getUnlockMaxStageIndex(project),
+    [project]
+  );
 
   const prebuildComplete = useMemo(
     () => arePrebuildStagesComplete(project),
@@ -1336,15 +1387,111 @@ const unlockedUntilIndex = useMemo(
     useMemo(() => getCurrentStageAndStepLabels(project), [project]);
 
   useEffect(() => {
+    if (!project?.id) return;
     const def = STEPS[currentStepIndex] || STEPS[0];
     setActiveKey(def.key);
-  }, [currentStepIndex]);
+  }, [project?.id]);
 
   const activeStep = STEPS.find((s) => s.key === activeKey) || STEPS[0];
-  const activeStatusRaw = getStepStatus(project, activeStep).status;
-  const activeStatus = String(activeStatusRaw || '')
-    .toLowerCase()
-    .replace(/\s+/g, '_');
+
+useEffect(() => {
+  let cancelled = false;
+
+  const normalizeName = (value = '') =>
+    String(value)
+      .replace(/[\u200B-\u200D\uFEFF]/g, '')
+      .trim()
+      .toLowerCase();
+
+  const loadStageVideo = async () => {
+    const stageKey = currentStageKey;
+
+    if (!stageKey) {
+      setHeroVideoUrl(FALLBACK_VIDEO);
+      return;
+    }
+
+    if (videoUrlCache[stageKey]) {
+      setHeroVideoUrl(videoUrlCache[stageKey]);
+      return;
+    }
+
+    const expectedFilename = STAGE_VIDEO_FILENAMES[stageKey];
+    if (!expectedFilename) {
+      console.warn('No filename mapped for stage key:', stageKey);
+      setHeroVideoUrl(FALLBACK_VIDEO);
+      return;
+    }
+
+    try {
+      const folderRef = storageRef(storage, 'project-stage-media');
+      const folderList = await listAll(folderRef);
+
+      const normalizedExpected = normalizeName(expectedFilename);
+
+      const availableNames = folderList.items.map((item) => item.name);
+      console.log('CURRENT STAGE KEY:', stageKey);
+      console.log('EXPECTED FILENAME:', expectedFilename);
+      console.log('NORMALIZED EXPECTED:', normalizedExpected);
+      console.log('AVAILABLE STAGE MEDIA FILES:', availableNames);
+
+      const matchedItem = folderList.items.find((item) => {
+        const normalizedItemName = normalizeName(item.name);
+        return normalizedItemName === normalizedExpected;
+      });
+
+      if (!matchedItem) {
+        console.error(
+          `No matching file found in project-stage-media for ${stageKey}. Expected: ${expectedFilename}`
+        );
+        if (!cancelled) setHeroVideoUrl(FALLBACK_VIDEO);
+        return;
+      }
+
+      console.log('MATCHED STORAGE ITEM:', matchedItem.name);
+
+      const url = await getDownloadURL(matchedItem);
+
+      if (cancelled) return;
+
+      console.log('SUCCESS VIDEO URL:', url);
+
+      setVideoUrlCache((prev) => ({
+        ...prev,
+        [stageKey]: url,
+      }));
+      setHeroVideoUrl(url);
+    } catch (err) {
+      console.error(`Failed loading current stage video for ${stageKey}:`, err);
+      if (!cancelled) {
+        setHeroVideoUrl(FALLBACK_VIDEO);
+      }
+    }
+  };
+
+  loadStageVideo();
+
+  return () => {
+    cancelled = true;
+  };
+}, [currentStageKey, videoUrlCache]);
+
+  const activeStatus = useMemo(() => {
+    if (!project || !activeStep) return 'not_started';
+
+    const computed = String(getStepStatus(project, activeStep).status || '')
+      .toLowerCase()
+      .replace(/\s+/g, '_');
+
+    if (computed === 'completed') return 'completed';
+
+    const activePtr = getGlobalActiveSubStep(project);
+    if (activePtr?.stageKey === activeStep.key) {
+      return 'in_progress';
+    }
+
+    return computed;
+  }, [project, activeStep]);
 
   const stageTarget = useMemo(
     () => getStageTargetDate(project, activeStep.key),
@@ -1358,8 +1505,6 @@ const unlockedUntilIndex = useMemo(
 
   // ✅ Use the same rule for whether to show teaser vs checkpoints
   const isPhaseLockedByTeaser = isStageLocked;
-
-  const heroMedia = useMemo(() => ({ type: 'video', url: CRAFT_VIDEO }), []);
 
   if (loading && !project) {
     return (
@@ -1382,8 +1527,9 @@ const unlockedUntilIndex = useMemo(
       {/* Hero media */}
       <div className="sl-progress-hero">
         <video
+          key={heroVideoUrl}
           className="sl-progress-hero-video"
-          src={heroMedia.url}
+          src={heroVideoUrl}
           autoPlay
           loop
           muted
@@ -1477,19 +1623,18 @@ const unlockedUntilIndex = useMemo(
             const stepStatus = String(getStepStatus(project, step).status || '')
               .toLowerCase()
               .replace(/\s+/g, '_');
-            const isCurrent = step.key === activeStep.key;
 
+            const isCurrent = step.key === activeStep.key;
             const isCompleted =
               stepStatus === 'completed' || index < currentStepIndex;
-
-            // Phase-level lock: any BUILD or POST-BUILD stage (index >= 3)
-            // stays locked until all PRE-BUILD stages are completed.
-            // ✅ Locked if beyond the furthest stage we're allowed to view
+            const isInProgress = stepStatus === 'in_progress';
             const isLocked = index > unlockedUntilIndex;
+
             const className = [
               'sl-progress-step-dot',
               isCurrent ? 'is-current' : '',
               isCompleted ? 'is-completed' : '',
+              isInProgress ? 'is-inprogress' : '',
               isLocked ? 'is-locked' : '',
             ]
               .filter(Boolean)
@@ -1506,7 +1651,9 @@ const unlockedUntilIndex = useMemo(
                   setActiveKey(step.key);
                 }}
               >
-                <span className="sl-progress-step-number">{index + 1}</span>
+                <span className="sl-progress-step-number">
+                  {!isCompleted ? index + 1 : ''}
+                </span>
                 <span className="sl-progress-step-label">{step.label}</span>
               </button>
             );
