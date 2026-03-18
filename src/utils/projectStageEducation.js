@@ -1,0 +1,367 @@
+// src/utils/projectStageEducation.js
+
+export const PROJECT_STAGE_EDU = {
+  discoveryDesign: {
+    title: 'Discovery & Design',
+    what: 'This is where we define the musical, visual, and practical direction of your build before any fabrication begins. We learn how you play, what you want to hear and feel, what you want to see, and what constraints matter most so the drum is designed around you from the very beginning.',
+    why: 'A great custom drum starts with clarity. When your sound goals, aesthetic direction, and spec priorities are aligned up front, every later stage of the build has a clear target to support.',
+    techniques: [
+      'Artist consultation & goal mapping',
+      'Sound-target definition',
+      'Aesthetic direction planning',
+      'Spec drafting',
+      'Constraint and priority alignment',
+      'Final approval / sign-off',
+    ],
+    tools: [
+      'Consultation notes',
+      'Reference tracks and listening examples',
+      'Spec worksheet / proposal template',
+      'Veneer and finish reference library',
+      'Mockup references',
+    ],
+    qc: [
+      'Playing goals documented',
+      'Sound target defined',
+      'Visual direction clarified',
+      'Constraints and non-negotiables recorded',
+      'Initial spec drafted',
+      'Final direction approved before fabrication',
+    ],
+    risks: [
+      'Misaligned expectations between sound and build direction',
+      'Unclear aesthetic target causing late changes',
+      'Important constraints discovered too late',
+    ],
+    time: { min: 2, max: 6 },
+    avgDays: '2–5 days',
+    value:
+      'This is where your drum stops being a vague idea and starts becoming a clearly defined instrument built around your voice.',
+  },
+
+  commitmentPortal: {
+    title: 'Commitment & Portal Setup',
+    what: 'Lock in the proposal, confirm scope, payment, and logistics, and set up the customer portal so the project can be followed cleanly from the very beginning.',
+    why: 'This stage creates clarity. It protects the relationship, prevents confusion, and makes sure the build begins with clean alignment instead of loose ends.',
+    techniques: [
+      'Proposal confirmation',
+      'Payment and commitment processing',
+      'Portal setup and onboarding',
+      'Customer/project record initialization',
+    ],
+    tools: [
+      'Secure online payment processing',
+      'Private customer portal',
+      'Build proposal and approval documents',
+      'Internal work order and scheduling notes',
+      'Customer shipping and billing records',
+    ],
+    qc: [
+      'Proposal approved',
+      'Payment/deposit recorded',
+      'Portal access confirmed',
+      'Project timeline initiated',
+      'Customer data verified',
+    ],
+    risks: [
+      'Misaligned scope or expectations',
+      'Missing customer/project setup data',
+      'Portal access issues',
+    ],
+    time: { min: 1, max: 3 },
+    avgDays: '1–3 days',
+    value:
+      'This is where the build becomes official. Once this is complete, your drum is no longer an idea — it is a committed project with momentum.',
+  },
+
+  woodVisionLockIn: {
+    title: 'Wood & Vision Lock-In',
+    what: 'This stage locks the exact material and visual identity of the build before core shell fabrication begins. Veneer reference, accent behavior, hardware finish, core species, and final spec details are all confirmed so the build can move forward with confidence and no silent drift.',
+    why: 'This is the bridge between concept and fabrication. By locking the exact wood, finish direction, and spec details here, the shell can be built around a clear identity instead of assumptions.',
+    techniques: [
+      'Veneer reference locking',
+      'Accent behavior planning',
+      'Hardware and badge finish confirmation',
+      'Core species selection',
+      'Material stability verification',
+      'Final spec freeze',
+    ],
+    tools: [
+      'Veneer reference library',
+      'Finish and hardware samples',
+      'Moisture meter',
+      'Measuring tools',
+      'Cut-list / planning worksheet',
+    ],
+    qc: [
+      'Exact veneer reference confirmed',
+      'Accent behavior rules documented',
+      'Hardware finish and badge direction locked',
+      'Core species selected',
+      'Material stability checked',
+      'Final spec frozen before fabrication',
+    ],
+    risks: [
+      'Visual direction not fully locked before build',
+      'Material instability discovered too late',
+      'Spec drift after fabrication begins',
+    ],
+    time: { min: 3, max: 6 },
+    avgDays: '2–4 days',
+    value:
+      'This is where the drum’s identity becomes fixed in real materials, not just imagination.',
+  },
+
+  rawShellCreation: {
+    title: 'Raw Shell Creation',
+    what: 'Cut stave blocks, machine bevels, dry-fit the ring, glue, clamp, and cure the shell into its first true physical form.',
+    why: 'This is the structural foundation of the instrument. If the shell is not sound here, no later step can fully recover what was lost.',
+    techniques: [
+      'Precision stave cutting',
+      'Bevel cutting',
+      'Dry-fit testing',
+      'Glue-up sequencing',
+      'Clamp-pressure management',
+      'Cure monitoring',
+    ],
+    tools: [
+      'Table saw + bevel sled',
+      'Clamping forms',
+      'Dial calipers',
+      'Clamps',
+    ],
+    qc: [
+      'Staves cut consistently',
+      'Bevels accurate',
+      'Dry-fit gaps minimized',
+      'Glue coverage complete',
+      'Shell cured cleanly',
+      'Shell roundness within tolerance',
+    ],
+    risks: [
+      'Poor bevel accuracy causing open joints',
+      'Uneven clamping causing shape issues',
+      'Glue-up defects that weaken the shell',
+    ],
+    time: { min: 8, max: 16 },
+    avgDays: '3–7 days',
+    value:
+      'This is the birth of the shell. Separate pieces of wood become one resonant body that will eventually become your drum.',
+  },
+
+  shellTrueingTorchTune: {
+    title: 'Shell Trueing & Torch Tune',
+    what: 'True the shell, refine thickness, reinforce critical structure, smooth surfaces, and carry out the torch-tuning process to bring the shell into its intended resonant state.',
+    why: 'This is where the shell becomes musically responsive. True geometry, stable thickness, and controlled shell energy are what make the drum feel alive under the stick.',
+    techniques: [
+      'Exterior and interior trueing',
+      'Thickness refinement',
+      'CA reinforcement',
+      'Progressive sanding',
+      'Torch-tuning process',
+    ],
+    tools: [
+      'Lathe/drum sander',
+      'Dial indicator',
+      'Sanding blocks',
+      'Router sled',
+      'Inspection lights',
+    ],
+    qc: [
+      'Diameter and roundness verified',
+      'Shell thickness mapped consistently',
+      'Interior/exterior surfaces refined',
+      'Torch pass even and controlled',
+      'No structural weak points introduced',
+    ],
+    risks: [
+      'Over-thinning the shell',
+      'Uneven trueing causing resonance problems',
+      'Torch work applied too aggressively',
+    ],
+    time: { min: 4, max: 10 },
+    avgDays: '2–5 days',
+    value:
+      'This is where the shell stops being only structural and starts becoming truly musical.',
+  },
+
+  exteriorArtFinish: {
+    title: 'Exterior Art & Finish',
+    what: 'Apply veneer, aesthetic detailing, acrylic and torch accents, badge work, finish coats, cure, and final polish preparation.',
+    why: 'This stage protects the shell, defines the look, and completes the visual character of the instrument without compromising its voice.',
+    techniques: [
+      'Veneer wrapping and seam work',
+      'Accent integration',
+      'Badge and logo placement',
+      'Spray finishing',
+      'Cure and de-gassing',
+      'Surface refinement',
+    ],
+    tools: [
+      'HVLP sprayer',
+      'Polishing system',
+      'Viscosity cups',
+      'Inspection lights',
+    ],
+    qc: [
+      'Veneer adhered cleanly',
+      'Accents balanced and intentional',
+      'Badge alignment correct',
+      'Finish laid evenly',
+      'Cure cycle respected',
+      'Surface ready for final polish',
+    ],
+    risks: [
+      'Veneer bubbles or seam issues',
+      'Overworked visuals reducing elegance',
+      'Finish defects from rushed cure or spray error',
+    ],
+    time: { min: 10, max: 24 },
+    avgDays: '5–14 days',
+    value:
+      'This is where the drum begins to look like the object you imagined — not just functional, but unmistakably yours.',
+  },
+
+  edgesSnareBeds: {
+    title: 'Edges & Snare Beds',
+    what: 'Cut, refine, and polish the bearing edges and shape the snare beds so heads and wires interact with the shell exactly as intended.',
+    why: 'These details directly affect tuning ease, snare sensitivity, sustain, and overall feel. Tiny geometry changes here make a huge difference in playability.',
+    techniques: [
+      'Bearing-edge profiling',
+      'Burnishing and hand refinement',
+      'Snare-bed routing',
+      'Symmetry balancing',
+      'Head-seat testing',
+    ],
+    tools: [
+      'Router table & jigs',
+      'Router sled',
+      'Feeler gauges',
+      'Burnish wheels',
+      'Straightedges',
+    ],
+    qc: [
+      'Edges even and clean',
+      'No flat spots or chatter',
+      'Snare beds symmetrical',
+      'Head seats properly',
+      'Wire path sits correctly',
+    ],
+    risks: [
+      'Uneven edges causing tuning dead spots',
+      'Over-deep beds choking the snare response',
+      'Poor symmetry affecting wire contact',
+    ],
+    time: { min: 3, max: 6 },
+    avgDays: '2–4 days',
+    value:
+      'This is the line between a drum that fights you and one that seems to tune itself into the right place.',
+  },
+
+  hardwareAssembly: {
+    title: 'Hardware & Assembly',
+    what: 'Drill, align, and install hardware, heads, and wires so every functional component is mounted cleanly, securely, and with the intended feel.',
+    why: 'The best shell in the world still needs flawless assembly. Clean layout and stable mounting are what let the instrument stay quiet, reliable, and road-ready.',
+    techniques: [
+      'Template-based layout',
+      'Precision drilling',
+      'Torque-sequenced assembly',
+      'Throw-off and wire alignment',
+      'Final fitment checks',
+    ],
+    tools: [
+      'Drill press + jigs',
+      'Step bits',
+      'Layout templates',
+      'Torque drivers',
+      'Tension gauge',
+    ],
+    qc: [
+      'Hardware aligned properly',
+      'No tear-out or edge chipping',
+      'Throw action smooth',
+      'Hoops parallel and seated',
+      'No loose or rattling components',
+    ],
+    risks: [
+      'Crooked layout or hole placement',
+      'Finish damage during install',
+      'Rattles or function issues from imperfect fitment',
+    ],
+    time: { min: 2, max: 6 },
+    avgDays: '1–3 days',
+    value:
+      'This is where the shell gains its working form and becomes a true instrument instead of a beautiful unfinished body.',
+  },
+
+  legacyTuningMedia: {
+    title: 'Legacy Tuning & Media',
+    what: 'Tune the drum into its intended Legacy window, capture frequency and feel references, and document the build with audio, photos, and vault-ready media.',
+    why: 'This preserves the voice of the instrument at the moment it leaves the shop. It turns the drum into a documented legacy object, not just a finished product.',
+    techniques: [
+      'LegacyPrint tuning passes',
+      'Frequency mapping',
+      'Audio capture',
+      'Photo documentation',
+      'Portal media preparation',
+    ],
+    tools: [
+      'Reference tuner',
+      'Tension gauge',
+      'Reference mic',
+      'Monitors',
+      'Camera + lighting setup',
+    ],
+    qc: [
+      'Key tuning windows documented',
+      'No odd buzzes or instability',
+      'Photos and audio captured cleanly',
+      'Portal files organized correctly',
+      'Final tuning notes logged',
+    ],
+    risks: [
+      'Tuning not matching intended voice',
+      'Poor documentation quality',
+      'Incomplete archival media',
+    ],
+    time: { min: 3, max: 8 },
+    avgDays: '2–4 days',
+    value: 'This is where your drum’s voice gets remembered, not just heard.',
+  },
+
+  finalQAPackagingDelivery: {
+    title: 'Final QA, Packaging & Delivery',
+    what: 'Perform the last full inspection, verify sound and cosmetics, clean the drum, pack it safely, ship it properly, and close out the build with confidence.',
+    why: 'A great build deserves a great send-off. This protects the instrument, confirms nothing was missed, and makes sure the first experience of receiving it matches the care that went into making it.',
+    techniques: [
+      'Master QA checklist',
+      'Final sound verification',
+      'Final cleaning and prep',
+      'Protective packaging',
+      'Shipping and closeout workflow',
+    ],
+    tools: [
+      'Inspection lights',
+      'Soft cloths & cleaners',
+      'Custom packaging materials',
+      'Shipping labels + tracking tools',
+    ],
+    qc: [
+      'Dimensions and roundness verified',
+      'Finish inspected under hard light',
+      'Hardware and function confirmed',
+      'Sound checked one final time',
+      'Packaging secured properly',
+      'Tracking and follow-up prepared',
+    ],
+    risks: [
+      'Shipping damage from weak packaging',
+      'Small issues missed in the final pass',
+      'Poor customer handoff after completion',
+    ],
+    time: { min: 1, max: 6 },
+    avgDays: '1–3 days',
+    value:
+      'This is the final signature on the build — the moment the instrument is truly ready to begin life in your hands.',
+  },
+};
