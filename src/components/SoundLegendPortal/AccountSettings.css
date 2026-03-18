@@ -1,9 +1,8 @@
 /* ============================================================
    Account Settings — Polished Styling for Artist Portal
-   Fully scoped via [data-component="AccountSettings"]
    ============================================================ */
 
-[data-component="AccountSettings"] {
+[data-component='AccountSettings'] {
   --section-divider: rgba(255, 255, 255, 0.07);
   --heading-color: rgba(255, 255, 255, 0.92);
   --subtle-text: rgba(255, 255, 255, 0.55);
@@ -12,32 +11,34 @@
   --input-border-focus: rgba(255, 255, 255, 0.3);
 }
 
-/* ------------------------------------------------------------
-   Card spacing
-------------------------------------------------------------- */
-[data-component="AccountSettings"] h3 {
-  margin-bottom: 12px;
+[data-component='AccountSettings'] h3 {
+  margin-bottom: 8px;
 }
 
-/* ------------------------------------------------------------
-   Sections
-------------------------------------------------------------- */
-[data-component="AccountSettings"] .as-section {
+[data-component='AccountSettings'] .as-title-wrap {
+  margin-bottom: 6px;
+}
+
+[data-component='AccountSettings'] .as-intro {
+  margin: 0;
+  color: var(--subtle-text);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+[data-component='AccountSettings'] .as-section {
   border-top: 1px solid var(--section-divider);
   padding-top: 20px;
   margin-top: 22px;
 }
 
-[data-component="AccountSettings"] .as-section:first-of-type {
+[data-component='AccountSettings'] .as-section:first-of-type {
   border-top: none;
   margin-top: 0;
   padding-top: 0;
 }
 
-/* ------------------------------------------------------------
-   Headers
-------------------------------------------------------------- */
-[data-component="AccountSettings"] .as-header {
+[data-component='AccountSettings'] .as-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -45,42 +46,35 @@
   gap: 10px;
 }
 
-[data-component="AccountSettings"] .as-header .vp-label {
+[data-component='AccountSettings'] .as-header .vp-label {
   color: var(--heading-color);
   font-size: 0.95rem;
   letter-spacing: 0.2px;
 }
 
-/* ------------------------------------------------------------
-   Edit/Save/Cancel Buttons
-------------------------------------------------------------- */
-[data-component="AccountSettings"] .as-actions {
+[data-component='AccountSettings'] .as-actions {
   display: flex;
   gap: 10px;
 }
 
-[data-component="AccountSettings"] .apo-btn {
+[data-component='AccountSettings'] .apo-btn {
   padding: 6px 12px;
   border-radius: 999px;
   font-size: 0.85rem;
 }
 
-/* subtle/secondary style used for small actions */
-[data-component="AccountSettings"] .apo-btn.subtle {
+[data-component='AccountSettings'] .apo-btn.subtle {
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.18);
   color: rgba(255, 255, 255, 0.85);
   padding: 5px 11px;
 }
 
-[data-component="AccountSettings"] .apo-btn.subtle:hover {
+[data-component='AccountSettings'] .apo-btn.subtle:hover {
   background: rgba(255, 255, 255, 0.1);
 }
 
-/* ------------------------------------------------------------
-   Form Layout
-------------------------------------------------------------- */
-[data-component="AccountSettings"] .as-row {
+[data-component='AccountSettings'] .as-row {
   display: flex;
   align-items: center;
   gap: 20px;
@@ -89,85 +83,73 @@
   flex-wrap: wrap;
 }
 
-[data-component="AccountSettings"] .as-toggle {
+[data-component='AccountSettings'] .as-toggle {
   display: inline-flex;
   align-items: center;
   gap: 8px;
 }
 
-/* ------------------------------------------------------------
-   Grid Layouts for Address Fields
-------------------------------------------------------------- */
-[data-component="AccountSettings"] .as-grid {
+[data-component='AccountSettings'] .as-grid {
   display: grid;
   gap: 10px;
   grid-template-columns: 1fr;
   margin-top: 8px;
 }
 
-[data-component="AccountSettings"] .as-grid.two {
+[data-component='AccountSettings'] .as-grid.two {
   grid-template-columns: 1.2fr 0.8fr;
 }
 
-/* ------------------------------------------------------------
-   Input Enhancements
-------------------------------------------------------------- */
-[data-component="AccountSettings"] .vp-input {
+[data-component='AccountSettings'] .vp-input {
   background: var(--input-bg);
   border: 1px solid var(--input-border);
   padding: 10px 12px;
   border-radius: 10px;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease,
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
     background-color 0.2s ease;
 }
 
-[data-component="AccountSettings"] .vp-input:focus {
+[data-component='AccountSettings'] .vp-input:focus {
   border-color: var(--input-border-focus);
   box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.12);
   background-color: rgba(255, 255, 255, 0.06);
 }
 
-/* read-only look for email field */
-[data-component="AccountSettings"] .vp-input-readonly {
+[data-component='AccountSettings'] .vp-input-readonly {
   opacity: 0.85;
   cursor: default;
 }
 
-/* Error state */
-.vp-input.has-error {
+[data-component='AccountSettings'] .vp-input.has-error {
   border-color: #ff8484 !important;
   box-shadow: 0 0 0 2px rgba(255, 80, 80, 0.2);
 }
 
-.vp-hint.error {
+[data-component='AccountSettings'] .vp-hint.error {
   color: #ff9a9a;
   margin-top: 4px;
 }
 
-/* ------------------------------------------------------------
-   Email meta + actions
-------------------------------------------------------------- */
-[data-component="AccountSettings"] .as-email-meta {
+[data-component='AccountSettings'] .as-email-meta {
   margin-top: 6px;
 }
 
-[data-component="AccountSettings"] .as-email-actions {
+[data-component='AccountSettings'] .as-email-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   margin-top: 6px;
 }
 
-[data-component="AccountSettings"] .as-status-text {
-  margin-top: 4px;
+[data-component='AccountSettings'] .as-status-text {
+  margin-top: 6px;
   font-size: 0.82rem;
   color: var(--subtle-text);
 }
 
-/* ------------------------------------------------------------
-   Locked Address Display
-------------------------------------------------------------- */
-[data-component="AccountSettings"] .vp-card {
+[data-component='AccountSettings'] .vp-card {
   padding: 12px 14px;
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.03);
@@ -176,28 +158,21 @@
   line-height: 1.4;
 }
 
-/* ------------------------------------------------------------
-   Help / Hint Text
-------------------------------------------------------------- */
-[data-component="AccountSettings"] .vp-hint {
+[data-component='AccountSettings'] .vp-hint {
   margin-top: 6px;
   font-size: 0.85rem;
   color: var(--subtle-text);
 }
 
-/* ------------------------------------------------------------
-   Toggle Switch (inherits from your atoms, just refined)
-------------------------------------------------------------- */
-[data-component="AccountSettings"] .apo-toggle {
+[data-component='AccountSettings'] .apo-toggle {
   min-width: 40px;
 }
 
-/* Request-link layout */
-.vp-requests {
+[data-component='AccountSettings'] .vp-requests {
   margin-top: 10px;
 }
 
-.vp-requests .apo-btn.request {
+[data-component='AccountSettings'] .vp-requests .apo-btn.request {
   font-size: 0.85rem;
   padding: 0.45rem 0.9rem;
   border-radius: 999px;
@@ -205,25 +180,122 @@
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-.vp-requests .apo-btn.request:hover {
+[data-component='AccountSettings'] .vp-requests .apo-btn.request:hover {
   background: rgba(255, 255, 255, 0.12);
 }
 
-/* ------------------------------------------------------------
-   Responsive Tweaks
-------------------------------------------------------------- */
+/* ============================================================
+   Appearance / theme toggle section
+   ============================================================ */
+
+[data-component='AccountSettings'] .as-appearance-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 14px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 14px;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.05),
+      rgba(255, 255, 255, 0.025)
+    );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.03),
+    0 10px 24px rgba(0, 0, 0, 0.18);
+}
+
+[data-component='AccountSettings'] .as-appearance-copy {
+  min-width: 0;
+}
+
+[data-component='AccountSettings'] .as-appearance-title {
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.94);
+  margin-bottom: 4px;
+}
+
+[data-component='AccountSettings'] .as-theme-segmented {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  flex-shrink: 0;
+}
+
+[data-component='AccountSettings'] .as-theme-btn {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.72);
+  padding: 9px 16px;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background 0.18s ease,
+    color 0.18s ease,
+    transform 0.1s ease,
+    box-shadow 0.18s ease;
+}
+
+[data-component='AccountSettings'] .as-theme-btn:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+[data-component='AccountSettings'] .as-theme-btn.active {
+  color: #fff;
+  background: linear-gradient(
+    135deg,
+    rgba(59, 130, 246, 0.9),
+    rgba(96, 165, 250, 0.82)
+  );
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.32);
+}
+
+[data-component='AccountSettings'] .as-theme-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+[data-component='AccountSettings'] .as-footer-note {
+  margin-top: 14px;
+}
+
 @media (max-width: 640px) {
-  [data-component="AccountSettings"] .as-header {
+  [data-component='AccountSettings'] .as-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 6px;
   }
 
-  [data-component="AccountSettings"] .as-actions {
+  [data-component='AccountSettings'] .as-actions {
     align-self: flex-end;
   }
 
-  [data-component="AccountSettings"] .as-grid.two {
+  [data-component='AccountSettings'] .as-grid.two {
     grid-template-columns: 1fr 1fr;
+  }
+
+  [data-component='AccountSettings'] .as-appearance-card {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  [data-component='AccountSettings'] .as-theme-segmented {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  [data-component='AccountSettings'] .as-theme-btn {
+    flex: 1;
+    text-align: center;
   }
 }

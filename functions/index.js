@@ -947,92 +947,94 @@ app.post('/createCheckoutSession', async (req, res) => {
         promoCode: promoCode || '',
         shipTo: shippingAddress?.line1 || '',
       },
-      shipping_address_collection: { allowed_countries: ['US', 'CA'] },
+      shipping_address_collection: { allowed_countries: ['US'] },
     };
 
     if (customerEmail && /\S+@\S+\.\S+/.test(customerEmail)) {
       sessionParams.customer_email = customerEmail;
     }
 
-    // ── Shipping rules
-    const subtotalCents = products.reduce((sum, p) => {
-      const qty = Math.max(1, parseInt(p?.quantity || 1, 10));
-      const priceCents = Math.round(Number(p?.price || 0) * 100);
-      return sum + (Number.isFinite(priceCents) ? priceCents * qty : 0);
-    }, 0);
+// ── Shipping rules
+const subtotalCents = products.reduce((sum, p) => {
+  const qty = Math.max(1, parseInt(p?.quantity || 1, 10));
+  const priceCents = Math.round(Number(p?.price || 0) * 100);
+  return sum + (Number.isFinite(priceCents) ? priceCents * qty : 0);
+}, 0);
 
-    const FREE_THRESHOLD = 7500; // $75.00
-    const FALLBACK_UNDER75 = 999; // $9.99 when we can't live-quote
-    const fallbackUnder75Option = {
+const FREE_THRESHOLD = 5000; // $50.00
+const FALLBACK_UNDER50 = 999; // $9.99 when we can't live-quote
+
+const fallbackUnder50Option = {
+  shipping_rate_data: {
+    type: 'fixed_amount',
+    fixed_amount: { amount: FALLBACK_UNDER50, currency: 'usd' },
+    display_name: 'Standard',
+    delivery_estimate: {
+      minimum: { unit: 'business_day', value: 7 },
+      maximum: { unit: 'business_day', value: 10 },
+    },
+  },
+};
+
+if (subtotalCents >= FREE_THRESHOLD) {
+  // ✅ Free shipping for qualifying carts
+  sessionParams.shipping_options = [
+    {
       shipping_rate_data: {
         type: 'fixed_amount',
-        fixed_amount: { amount: FALLBACK_UNDER75, currency: 'usd' },
+        fixed_amount: { amount: 0, currency: 'usd' },
         display_name: 'Standard',
         delivery_estimate: {
           minimum: { unit: 'business_day', value: 7 },
           maximum: { unit: 'business_day', value: 10 },
         },
       },
-    };
+    },
+  ];
+} else {
+  // < $50 → try live Printify quote, otherwise non-zero fallback
+  const hasAddress =
+    !!(shippingAddress && shippingAddress.country) &&
+    !!(
+      shippingAddress.postal_code ||
+      shippingAddress.postalCode ||
+      shippingAddress.zip
+    );
 
-    if (subtotalCents >= FREE_THRESHOLD) {
-      // ✅ Free shipping for qualifying carts
-      sessionParams.shipping_options = [
-        {
-          shipping_rate_data: {
-            type: 'fixed_amount',
-            fixed_amount: { amount: 0, currency: 'usd' },
-            display_name: 'Standard',
-            delivery_estimate: {
-              minimum: { unit: 'business_day', value: 7 },
-              maximum: { unit: 'business_day', value: 10 },
-            },
-          },
-        },
-      ];
-    } else {
-      // < $75 → try live Printify quote, otherwise non-zero fallback
-      const hasAddress =
-        !!(shippingAddress && shippingAddress.country) &&
-        !!(
-          shippingAddress.postal_code ||
-          shippingAddress.postalCode ||
-          shippingAddress.zip
-        );
+  if (!hasAddress) {
+    // No address yet: don't show $0
+    sessionParams.shipping_options = [fallbackUnder50Option];
+  } else {
+    try {
+      const shopId = PRINTIFY_SHOP_ID.value();
+      const payload = {
+        line_items: toPrintifyLineItems(products),
+        address_to: toPrintifyAddress(
+          shippingAddress || {},
+          firstName || 'Customer',
+          lastName || ''
+        ),
+      };
 
-      if (!hasAddress) {
-        // No address yet: don't show $0
-        sessionParams.shipping_options = [fallbackUnder75Option];
-      } else {
-        try {
-          const shopId = PRINTIFY_SHOP_ID.value();
-          const payload = {
-            line_items: toPrintifyLineItems(products),
-            address_to: toPrintifyAddress(
-              shippingAddress || {},
-              firstName || 'Customer',
-              lastName || ''
-            ),
-          };
-          const { data: rates } = await axios.post(
-            `https://api.printify.com/v1/shops/${shopId}/orders/shipping.json`,
-            payload,
-            { headers: pHeaders() }
-          );
+      const { data: rates } = await axios.post(
+        `https://api.printify.com/v1/shops/${shopId}/orders/shipping.json`,
+        payload,
+        { headers: pHeaders() }
+      );
 
-          const shipping_options = mapRatesToStripeOptions(rates, 'usd');
-          sessionParams.shipping_options = shipping_options.length
-            ? shipping_options
-            : [fallbackUnder75Option];
-        } catch (e) {
-          console.warn(
-            '⚠️ Printify quote failed; using fallback:',
-            e?.response?.data || e?.message || e
-          );
-          sessionParams.shipping_options = [fallbackUnder75Option];
-        }
-      }
+      const shipping_options = mapRatesToStripeOptions(rates, 'usd');
+      sessionParams.shipping_options = shipping_options.length
+        ? shipping_options
+        : [fallbackUnder50Option];
+    } catch (e) {
+      console.warn(
+        '⚠️ Printify quote failed; using fallback:',
+        e?.response?.data || e?.message || e
+      );
+      sessionParams.shipping_options = [fallbackUnder50Option];
     }
+  }
+}
 
     // Create session
     const session = await stripe.checkout.sessions.create(sessionParams);
@@ -1560,15 +1562,6 @@ stripeWebhookApp.post('/', async (req, res) => {
     return res.status(500).send('Internal Server Error');
   }
 });
-
-// Export the webhook as its OWN function (do not mount under api)
-exports.stripeWebhook = onRequest(
-  {
-    region: 'us-central1',
-    secrets: [STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET],
-  },
-  stripeWebhookApp
-);
 
 // ───────────────────────────────────────────────────────────────────────────────
 // Stripe Order Reconciler (backstop)

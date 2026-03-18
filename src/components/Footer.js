@@ -1,10 +1,13 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { DarkModeContext } from '../context/DarkModeContext';
 import { useAuth } from '../context/AuthContext';
 import './Footer.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebookF, faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons';
+import {
+  faFacebookF,
+  faInstagram,
+  faYoutube,
+} from '@fortawesome/free-brands-svg-icons';
 
 const Footer = ({ navbarLinks = [] }) => {
   const { user, isAdmin } = useAuth();
@@ -30,33 +33,14 @@ const Footer = ({ navbarLinks = [] }) => {
     .filter((l) => (l.name || '').toLowerCase() !== 'artisan-shop')
     .map((l) => {
       if ((l.name || '').toLowerCase() === 'founders-batch') {
-        return { ...l, label: 'Artisan Drums' }; // or 'Our Drums'
+        return { ...l, label: 'Artisan Drums' };
       }
       return l;
     });
 
-  // Final ordering (exclude Home from the list – it’s added manually first)
   const sortedFilteredLinks = [...transformed]
     .filter((link) => (link.name || '').toLowerCase() !== 'home')
     .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
-
-  const { isDarkMode, setIsDarkMode } = useContext(DarkModeContext);
-
-  useEffect(() => {
-    const savedMode = localStorage.getItem('darkMode');
-    const defaultMode = savedMode === 'true';
-    setIsDarkMode(defaultMode);
-    document.body.classList.remove('dark', 'light');
-    document.body.classList.add(defaultMode ? 'dark' : 'light');
-  }, [setIsDarkMode]);
-
-  const toggleDarkMode = () => {
-    const newMode = !isDarkMode;
-    setIsDarkMode(newMode);
-    localStorage.setItem('darkMode', newMode.toString());
-    document.body.classList.remove('dark', 'light');
-    document.body.classList.add(newMode ? 'dark' : 'light');
-  };
 
   const handleScrollTop = () => {
     setTimeout(() => {
@@ -67,7 +51,6 @@ const Footer = ({ navbarLinks = [] }) => {
 
   return (
     <footer className="footer-container">
-      {/* Sitemap Section */}
       <div className="footer-sitemap">
         <div className="footer-title">Sitemap</div>
         <ul>
@@ -88,7 +71,6 @@ const Footer = ({ navbarLinks = [] }) => {
             </li>
           ))}
 
-          {/* Explicit additions / footer-only links */}
           <li>
             <Link to="/artisan-shop/founders-toast" onClick={handleScrollTop}>
               Founder’s Toast
@@ -122,7 +104,6 @@ const Footer = ({ navbarLinks = [] }) => {
         </ul>
       </div>
 
-      {/* Social Media Icons */}
       <div className="footer-socials">
         <a
           href="https://www.facebook.com/profile.php?id=61570228293616"
@@ -150,20 +131,12 @@ const Footer = ({ navbarLinks = [] }) => {
         </a>
       </div>
 
-      {/* Footer Bottom */}
       <div className="footer-bottom">
         <div className="footer-copyright">
           <p>
             &copy; {new Date().getFullYear()} Dan Ober Artisan Drums. All rights reserved.
           </p>
         </div>
-      </div>
-
-      {/* Dark Mode Toggle */}
-      <div className="footer-darkmode-toggle">
-        <button className="footer-theme-toggle" onClick={toggleDarkMode}>
-          {isDarkMode ? 'Light Mode' : 'Dark Mode'}
-        </button>
       </div>
     </footer>
   );

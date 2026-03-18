@@ -1,5 +1,4 @@
-// src/components/SoundLegendPortal/AccountSettings.js
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   collection,
   doc,
@@ -9,6 +8,8 @@ import {
 } from 'firebase/firestore';
 import { sendPasswordResetEmail } from 'firebase/auth';
 import { db, auth } from '../../firebaseConfig';
+import { DarkModeContext } from '../../context/DarkModeContext';
+import './AccountSettings.css';
 
 /* -------------------- shared helpers (scoped) -------------------- */
 const cleanAddr = (a = {}) => ({
@@ -101,6 +102,8 @@ export default function AccountSettings({
   isAdmin,
 }) {
   const uid = user?.uid;
+  const { isDarkMode, setIsDarkMode, isForcedDarkRoute } =
+    useContext(DarkModeContext);
 
   // status helpers
   const s = (v) => String(v || '').toLowerCase();
@@ -182,7 +185,14 @@ export default function AccountSettings({
         const uref = doc(db, 'users', uid);
         const usnap = await getDoc(uref);
 
-        const fallbackName =
+        const userDoc = usnap.exists() ? usnap.data() || {} : {};
+
+        const userDocFullName =
+          `${userDoc.firstName || ''} ${userDoc.lastName || ''}`.trim();
+
+        const resolvedName =
+          userDoc.name ||
+          userDocFullName ||
           projects?.[0]?.customer?.name ||
           projects?.[0]?.publicPrefs?.displayName ||
           user?.displayName ||
@@ -193,7 +203,6 @@ export default function AccountSettings({
 
         const fallbackPhone = projects?.[0]?.customer?.phone || '';
 
-        const userDoc = usnap.exists() ? usnap.data() || {} : {};
         const userLevelAddr =
           pickAddressFrom({ address: userDoc.address }) ||
           pickAddressFrom(userDoc) ||
@@ -202,7 +211,7 @@ export default function AccountSettings({
         const originAddr = firstRecordedAddress(projects, orders || []);
 
         const base = {
-          name: usnap.exists() ? userDoc.name || fallbackName : fallbackName,
+          name: resolvedName,
           email: usnap.exists()
             ? userDoc.email || fallbackEmail
             : fallbackEmail,
@@ -400,6 +409,13 @@ export default function AccountSettings({
     }
   };
 
+  const onSetTheme = (nextDarkMode) => {
+    setIsDarkMode(nextDarkMode);
+    localStorage.setItem('darkMode', String(nextDarkMode));
+    document.body.classList.remove('dark', 'light');
+    document.body.classList.add(nextDarkMode ? 'dark' : 'light');
+  };
+
   // Send password reset email to login email on record
   const onSendPasswordReset = async () => {
     setPwResetStatus('');
@@ -454,17 +470,63 @@ Thanks!
 
   if (loading) {
     return (
-      <div className="slp-card">
+      <div className="slp-card" data-component="AccountSettings">
         <h3>Account Settings</h3>
         <div className="slp-muted">Loading…</div>
       </div>
     );
   }
 
-  /* -------------------- UI -------------------- */
   return (
     <div className="slp-card" data-component="AccountSettings">
-      <h3>Account Settings</h3>
+      <div className="as-title-wrap">
+        <h3>Account Settings</h3>
+        <p className="as-intro">
+          Manage your contact details, portal notifications, appearance, and
+          shipping info for your SoundLegend experience.
+        </p>
+      </div>
+
+      {/* APPEARANCE */}
+      <div className="as-section">
+        <div className="as-header">
+          <label className="vp-label">Appearance</label>
+        </div>
+
+        <div className="as-appearance-card">
+          <div className="as-appearance-copy">
+            <div className="as-appearance-title">Theme</div>
+            <div className="vp-hint">
+              Choose how your Artist Portal looks on this device.
+            </div>
+          </div>
+
+          <div className="as-theme-segmented" aria-label="Theme selection">
+            <button
+              type="button"
+              className={`as-theme-btn ${!isDarkMode ? 'active' : ''}`}
+              onClick={() => onSetTheme(false)}
+              disabled={isForcedDarkRoute}
+            >
+              Light
+            </button>
+            <button
+              type="button"
+              className={`as-theme-btn ${isDarkMode ? 'active' : ''}`}
+              onClick={() => onSetTheme(true)}
+              disabled={isForcedDarkRoute}
+            >
+              Dark
+            </button>
+          </div>
+        </div>
+
+        {isForcedDarkRoute && (
+          <div className="vp-hint">
+            This page is currently using a forced dark experience.
+          </div>
+        )}
+      </div>
 
       {/* NAME */}
       <div className="as-section">
@@ -498,11 +560,10 @@ Thanks!
         />
       </div>
 
-      {/* EMAIL (read-only login email + actions) */}
+      {/* EMAIL */}
       <div className="as-section">
         <div className="as-header">
           <label className="vp-label">Email</label>
-          {/* no edit button on purpose */}
         </div>
         <input
           className="vp-input vp-input-readonly"
@@ -662,18 +723,14 @@ Thanks!
                   className="vp-input"
                   placeholder="City"
                   value={addr.city}
-                  onChange={(e) =>
-                    setAddr({ ...addr, city: e.target.value })
-                  }
+                  onChange={(e) => setAddr({ ...addr, city: e.target.value })}
                   disabled={!editAddr}
                 />
                 <input
                   className="vp-input"
                   placeholder="State/Province"
                   value={addr.state}
-                  onChange={(e) =>
-                    setAddr({ ...addr, state: e.target.value })
-                  }
+                  onChange={(e) => setAddr({ ...addr, state: e.target.value })}
                   disabled={!editAddr}
                 />
               </div>
@@ -744,9 +801,9 @@ Thanks!
         )}
       </div>
 
-      <p className="slp-muted" style={{ marginTop: 8 }}>
-        Edit one section at a time. Changes won’t apply until you hit <b>Save</b>{' '}
-        for that section.
+      <p className="slp-muted as-footer-note">
+        Edit one section at a time. Changes won’t apply until you hit{' '}
+        <b>Save</b> for that section.
       </p>
     </div>
   );

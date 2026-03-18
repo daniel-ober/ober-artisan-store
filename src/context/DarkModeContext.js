@@ -1,22 +1,38 @@
 import React, { createContext, useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 export const DarkModeContext = createContext();
 
 export const DarkModeProvider = ({ children }) => {
-  // ✅ Check localStorage; Default to "false" (light mode)
+  const location = useLocation();
+
+  const forcedDarkRoutes = [
+    "/artisan-shop/soundlegend",
+    "/artisan-portal/signin",
+  ];
+
+  const isForcedDarkRoute = forcedDarkRoutes.includes(location.pathname);
+
   const storedMode = localStorage.getItem("darkMode");
-  const initialMode = storedMode !== null ? storedMode === "true" : true;
-  
+  const initialMode = storedMode !== null ? storedMode === "true" : false;
+
   const [isDarkMode, setIsDarkMode] = useState(initialMode);
 
+  const effectiveDarkMode = isForcedDarkRoute ? true : isDarkMode;
+
   useEffect(() => {
-    // ✅ Set body class on first load
-    document.body.classList.remove("dark", "light"); // Reset first
-    document.body.classList.add(isDarkMode ? "dark" : "light");
-  }, [isDarkMode]);
+    document.body.classList.remove("dark", "light");
+    document.body.classList.add(effectiveDarkMode ? "dark" : "light");
+  }, [effectiveDarkMode]);
 
   return (
-    <DarkModeContext.Provider value={{ isDarkMode, setIsDarkMode }}>
+    <DarkModeContext.Provider
+      value={{
+        isDarkMode: effectiveDarkMode,
+        setIsDarkMode,
+        isForcedDarkRoute,
+      }}
+    >
       {children}
     </DarkModeContext.Provider>
   );
