@@ -1,4 +1,3 @@
-// src/components/SoundLegendPortal/ProjectProgress.js
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import {
   doc,
@@ -10,45 +9,31 @@ import {
 import { ref as storageRef, getDownloadURL, listAll } from 'firebase/storage';
 import { db, storage } from '../../firebaseConfig';
 import { calculateProjectProgress } from '../../utils/calculateProjectProgress';
-import {
-  STAGES,
-  STAGE_DEFS,
-  STAGE_TEMPLATES,
-  resolveStageKey,
-} from '../../utils/workflowDefinitions';
+import { STAGES, STAGE_TEMPLATES } from '../../utils/workflowDefinitions';
 import { PROJECT_STAGE_EDU } from '../../utils/projectStageEducation';
 import './ProjectProgress.css';
 
 const FALLBACK_VIDEO = '/craft_in_motion/craftinmotion1080p.mp4';
 
-const STAGE_VIDEO_FILENAMES = {
-  discoveryDesign: 'stage-discovery-design.mp4',
-  commitmentPortal: 'stage-commitment-portal.mp4',
-  woodVisionLockIn: 'stage-wood-vision-lock-in.mp4',
-  rawShellCreation: 'stage-build-raw-shell-creation.mp4',
-  shellTrueingTorchTune: 'stage-build-shell-trueing-torch-tune.mp4',
-  exteriorArtFinish: 'stage-build-exterior-art-finish.mp4',
-  edgesSnareBeds: 'stage-build-edges-snare-beds.mp4',
-  hardwareAssembly: 'stage-build-hardware-assembly.mp4',
-  legacyTuningMedia: 'stage-legacy-tuning-media.mp4',
-  finalQAPackagingDelivery: 'stage-final-qa-packaging-delivery.mp4',
+const STAGE_MEDIA_BASENAMES = {
+  discoveryDesign: 'stage-discovery-design',
+  commitmentPortal: 'stage-commitment-portal',
+  woodVisionLockIn: 'stage-wood-vision-lock-in',
+  rawShellCreation: 'stage-build-raw-shell-creation',
+  shellTrueingTorchTune: 'stage-build-shell-trueing-torch-tune',
+  exteriorArtFinish: 'stage-build-exterior-art-finish',
+  edgesSnareBeds: 'stage-build-edges-snare-beds',
+  hardwareAssembly: 'stage-build-hardware-assembly',
+  legacyTuningMedia: 'stage-legacy-tuning-media',
+  finalQAPackagingDelivery: 'stage-final-qa-packaging-delivery',
 };
 
-const STAGE_IMAGE_FILENAMES = {
-  discoveryDesign: 'stage-discovery-design.png',
-  commitmentPortal: 'stage-commitment-portal.png',
-  woodVisionLockIn: 'stage-wood-vision-lock-in.png',
-  rawShellCreation: 'stage-build-raw-shell-creation.png',
-  shellTrueingTorchTune: 'stage-build-shell-trueing-torch-tune.png',
-  exteriorArtFinish: 'stage-build-exterior-art-finish.png',
-  edgesSnareBeds: 'stage-build-edges-snare-beds.png',
-  hardwareAssembly: 'stage-build-hardware-assembly.png',
-  legacyTuningMedia: 'stage-legacy-tuning-media.png',
-  finalQAPackagingDelivery: 'stage-final-qa-packaging-delivery.png',
+const STAGE_MEDIA_STATE = {
+  ACTIVE: 'active',
+  LOCKED: 'locked',
+  UNLOCKED: 'unlocked',
 };
 
-// ✅ TEMP ALIASES so the rest of this file compiles without a massive refactor yet.
-// This file expects "STEPS" to mean "stages in order".
 const STEPS = STAGES.map((s) => {
   const edu = PROJECT_STAGE_EDU[s.stageKey] || {};
 
@@ -71,23 +56,18 @@ const STEPS = STAGES.map((s) => {
     techniques: Array.isArray(edu.techniques) ? edu.techniques : [],
     tools: Array.isArray(edu.tools) ? edu.tools : [],
     estHours,
-    avgDays: '—',
+    avgDays: edu.avgDays || '—',
     mantra: edu.value || '',
 
     storageKeys: [s.stageKey],
   };
 });
 
-// ✅ This file also expects a STEP_DEFS map keyed by `key`
 const STEP_DEFS = STEPS.reduce((acc, s) => {
   acc[s.key] = s;
   return acc;
 }, {});
 
-/**
- * ✅ CANONICAL STORAGE KEYS (Admin Project View source of truth)
- * These must match ManageProjectModal STEP_KEYS exactly.
- */
 const CANONICAL_STEP_KEYS = [
   'discoveryDesign',
   'commitmentPortal',
@@ -101,16 +81,10 @@ const CANONICAL_STEP_KEYS = [
   'finalQAPackagingDelivery',
 ];
 
-/**
- * ✅ Map portal workflowDefinitions stage keys -> canonical admin step keys
- * (This is the drift fix.)
- */
 const STAGEKEY_TO_CANONICAL_STEPKEY = {
-  // likely identical
   discoveryDesign: 'discoveryDesign',
   commitmentPortal: 'commitmentPortal',
 
-  // portal shorthand -> canonical
   woodVision: 'woodVisionLockIn',
   rawShell: 'rawShellCreation',
   shellTrueingTorch: 'shellTrueingTorchTune',
@@ -119,20 +93,16 @@ const STAGEKEY_TO_CANONICAL_STEPKEY = {
   legacyMedia: 'legacyTuningMedia',
   finalQa: 'finalQAPackagingDelivery',
 
-  // if any portal already uses canonical names, pass-through
   woodVisionLockIn: 'woodVisionLockIn',
   rawShellCreation: 'rawShellCreation',
   shellTrueingTorchTune: 'shellTrueingTorchTune',
   exteriorArtFinish: 'exteriorArtFinish',
   edgesSnareBeds: 'edgesSnareBeds',
+  hardwareAssembly: 'hardwareAssembly',
   legacyTuningMedia: 'legacyTuningMedia',
   finalQAPackagingDelivery: 'finalQAPackagingDelivery',
 };
 
-/**
- * Legacy aliases (if any old project docs still contain these)
- * We READ these only as fallback, but we WRITE ONLY to canonical.
- */
 const LEGACY_STEPKEY_FALLBACKS = {
   discoveryDesign: ['woodPreparation'],
   commitmentPortal: ['shellConstruction'],
@@ -156,6 +126,7 @@ function isChecklistItemComplete(item) {
   const states = Array.isArray(item.checkpointStates)
     ? item.checkpointStates
     : null;
+
   if (states && states.length > 0) {
     return states.every(Boolean);
   }
@@ -171,6 +142,7 @@ function isChecklistItemTouched(item) {
   const states = Array.isArray(item.checkpointStates)
     ? item.checkpointStates
     : null;
+
   if (states && states.length > 0) {
     return states.some(Boolean);
   }
@@ -179,21 +151,17 @@ function isChecklistItemTouched(item) {
 }
 
 function getUnlockMaxStageIndex(project) {
-  // Always allow Stage 1–3
-  const MIN_UNLOCKED = 2; // index 2 == Stage 3
+  const MIN_UNLOCKED = 2;
 
   if (!project) return MIN_UNLOCKED;
 
-  // Find the FIRST stage that is not completed.
-  // Everything up to that stage should be unlocked.
   for (let i = 0; i < STEPS.length; i += 1) {
-    const status = getStepStatus(project, STEPS[i]).status; // "Completed" | "In Progress" | "Not Started"
+    const status = getStepStatus(project, STEPS[i]).status;
     if (status !== 'Completed') {
       return Math.max(MIN_UNLOCKED, i);
     }
   }
 
-  // If all completed, unlock all
   return STEPS.length - 1;
 }
 
@@ -204,30 +172,33 @@ function canonicalKeyForStage(stageKey) {
 function getExistingPhaseKey(project, canonicalKey) {
   if (!project || !canonicalKey) return null;
 
-  // 1) Prefer canonical if present
-  const v = project?.[canonicalKey];
-  if (v && typeof v === 'object' && Array.isArray(v.checklist))
+  const canonicalValue = project?.[canonicalKey];
+  if (
+    canonicalValue &&
+    typeof canonicalValue === 'object' &&
+    Array.isArray(canonicalValue.checklist)
+  ) {
     return canonicalKey;
-
-  // 2) Try legacy fallbacks
-  const fallbacks = LEGACY_STEPKEY_FALLBACKS[canonicalKey] || [];
-  for (const k of fallbacks) {
-    const vv = project?.[k];
-    if (vv && typeof vv === 'object' && Array.isArray(vv.checklist)) return k;
   }
 
-  // 3) If none exist, still return canonical (we’ll create/fill safely in writers)
+  const fallbacks = LEGACY_STEPKEY_FALLBACKS[canonicalKey] || [];
+  for (const k of fallbacks) {
+    const fallbackValue = project?.[k];
+    if (
+      fallbackValue &&
+      typeof fallbackValue === 'object' &&
+      Array.isArray(fallbackValue.checklist)
+    ) {
+      return k;
+    }
+  }
+
   return canonicalKey;
 }
 
 const getWeightedProgressPct = (data) => {
   if (!data) return 0;
 
-  /**
-   * ✅ Match Admin Project View patching exactly:
-   * calculateProjectProgress expects old keys, so we alias from CANONICAL.
-   * (No “woodPreparation || discoveryDesign” ambiguity here.)
-   */
   const patched = {
     ...data,
     woodPreparation: data.discoveryDesign,
@@ -272,6 +243,7 @@ function displayStatus(status) {
 
 function getProjectDocRef(project) {
   if (!project) return null;
+
   const id =
     project.id ||
     project.projectId ||
@@ -279,6 +251,7 @@ function getProjectDocRef(project) {
     project.serial ||
     project.snareSerial ||
     project.lineSerial;
+
   if (!id) return null;
   return doc(db, 'projects', id);
 }
@@ -292,6 +265,7 @@ function tsToMillis(v) {
   if (typeof v === 'number') return v;
   if (v instanceof Date) return v.getTime() || 0;
   if (typeof v === 'object' && v.seconds) return v.seconds * 1000;
+
   try {
     const t = new Date(v).getTime();
     return Number.isFinite(t) ? t : 0;
@@ -300,15 +274,18 @@ function tsToMillis(v) {
   }
 }
 
-const DAY_MS = 24 * 60 * 60 * 1000;
+const WEEKEND_WORK_HOURS_PER_DAY = 8;
+const WEEKEND_DAY_INDEXES = new Set([0, 6]);
 
 function fmtDate(v) {
   const ms = typeof v === 'number' ? v : tsToMillis(v);
   if (!ms) return null;
+
   const d = new Date(ms);
   const mm = String(d.getMonth() + 1).padStart(2, '0');
   const dd = String(d.getDate()).padStart(2, '0');
   const yyyy = d.getFullYear();
+
   return `${mm}/${dd}/${yyyy}`;
 }
 
@@ -320,11 +297,229 @@ function slugify(s = '') {
     .replace(/(^-|-$)/g, '');
 }
 
-/** Combine checklists across all underlying storage keys for a portal step */
+function normalizeAssetName(value = '') {
+  return String(value)
+    .replace(/[\u200B-\u200D\uFEFF]/g, '')
+    .trim()
+    .toLowerCase();
+}
+
+function parseHourRangeText(estHoursText = '') {
+  const source = String(estHoursText || '')
+    .toLowerCase()
+    .trim();
+  if (!source || source === '—') return { min: 0, max: 0 };
+
+  const matches = source.match(/\d+(\.\d+)?/g);
+  if (!matches || matches.length === 0) return { min: 0, max: 0 };
+
+  const nums = matches.map(Number).filter((n) => Number.isFinite(n));
+  if (!nums.length) return { min: 0, max: 0 };
+
+  if (nums.length === 1) return { min: nums[0], max: nums[0] };
+
+  return {
+    min: Math.min(nums[0], nums[1]),
+    max: Math.max(nums[0], nums[1]),
+  };
+}
+
+function weekendHoursToWorkdays(hours = 0) {
+  if (!hours || hours <= 0) return 0;
+  return Math.ceil(hours / WEEKEND_WORK_HOURS_PER_DAY);
+}
+
+function isWeekendDate(date) {
+  return WEEKEND_DAY_INDEXES.has(date.getDay());
+}
+
+function getSchedulingBaseDate(project) {
+  const loggedTimes = [];
+
+  CANONICAL_STEP_KEYS.forEach((canonicalKey) => {
+    const phaseKey = getExistingPhaseKey(project, canonicalKey);
+    const step = project?.[phaseKey];
+
+    if (!step || !Array.isArray(step.checklist)) return;
+
+    step.checklist.filter(Boolean).forEach((item) => {
+      const ts =
+        item?.completedAt ||
+        item?.timestamp ||
+        item?.updatedAt ||
+        item?.finishedAt ||
+        null;
+
+      const ms = tsToMillis(ts);
+      if (ms) loggedTimes.push(ms);
+    });
+  });
+
+  const latestLoggedMs = loggedTimes.length ? Math.max(...loggedTimes) : 0;
+  const nowMs = Date.now();
+
+  return new Date(Math.max(nowMs, latestLoggedMs || 0));
+}
+
+function advanceToNextWeekendWorkday(dateInput) {
+  const d = new Date(dateInput);
+  d.setHours(12, 0, 0, 0);
+
+  while (!isWeekendDate(d)) {
+    d.setDate(d.getDate() + 1);
+  }
+
+  return d;
+}
+
+function addWeekendWorkdays(startDateInput, workdaysNeeded = 0) {
+  let remaining = Math.max(0, Math.ceil(workdaysNeeded));
+  let cursor = advanceToNextWeekendWorkday(startDateInput);
+
+  if (remaining === 0) return cursor;
+
+  while (remaining > 1) {
+    cursor.setDate(cursor.getDate() + 1);
+    cursor = advanceToNextWeekendWorkday(cursor);
+    remaining -= 1;
+  }
+
+  return cursor;
+}
+
+function getStepHourRange(step) {
+  if (!step) return { min: 0, max: 0 };
+  return parseHourRangeText(step.estHours);
+}
+
+function getRemainingStageHourRange(project, fromIndex, toIndex) {
+  let minHours = 0;
+  let maxHours = 0;
+
+  for (let i = fromIndex; i <= toIndex; i += 1) {
+    const step = STEPS[i];
+    if (!step) continue;
+
+    const status = getStepStatus(project, step).status;
+    if (status === 'Completed') continue;
+
+    const range = getStepHourRange(step);
+    minHours += range.min;
+    maxHours += range.max;
+  }
+
+  return { minHours, maxHours };
+}
+
+function getProjectedWeekendRangeFromHours(baseDate, minHours, maxHours) {
+  if (minHours <= 0 && maxHours <= 0) {
+    return { early: null, late: null };
+  }
+
+  const earlyWorkdays = weekendHoursToWorkdays(minHours);
+  const lateWorkdays = weekendHoursToWorkdays(maxHours);
+
+  const earlyDate = addWeekendWorkdays(baseDate, Math.max(earlyWorkdays, 1));
+  const lateDate = addWeekendWorkdays(baseDate, Math.max(lateWorkdays, 1));
+
+  return {
+    early: fmtDate(earlyDate),
+    late: fmtDate(lateDate),
+  };
+}
+
+function getSelectedStageMediaState(selectedIndex, currentIndex) {
+  if (selectedIndex < currentIndex) return STAGE_MEDIA_STATE.UNLOCKED;
+  if (selectedIndex > currentIndex) return STAGE_MEDIA_STATE.LOCKED;
+  return STAGE_MEDIA_STATE.ACTIVE;
+}
+
+function getStageAssetConfig(stageKey, mediaState) {
+  const baseName = STAGE_MEDIA_BASENAMES[stageKey];
+  if (!baseName) return null;
+
+  if (mediaState === STAGE_MEDIA_STATE.ACTIVE) {
+    return {
+      type: 'video',
+      folderPath: 'project-stage-media/active',
+      fileName: `${baseName}-active.mp4`,
+    };
+  }
+
+  if (mediaState === STAGE_MEDIA_STATE.LOCKED) {
+    return {
+      type: 'video',
+      folderPath: 'project-stage-media/locked',
+      fileName: `${baseName}-locked.mp4`,
+    };
+  }
+
+  return {
+    type: 'image',
+    folderPath: 'project-stage-media/unlocked',
+    fileName: `${baseName}-unlocked.png`,
+  };
+}
+
+async function fetchStorageAssetUrl(folderPath, expectedFilename) {
+  const folderRef = storageRef(storage, folderPath);
+  const folderList = await listAll(folderRef);
+  const normalizedExpected = normalizeAssetName(expectedFilename);
+
+  const matchedItem = folderList.items.find(
+    (item) => normalizeAssetName(item.name) === normalizedExpected
+  );
+
+  if (!matchedItem) return null;
+
+  return getDownloadURL(matchedItem);
+}
+
+async function resolveStageMediaUrl(stageKey, mediaState) {
+  if (!stageKey) return null;
+
+  const assetConfig = getStageAssetConfig(stageKey, mediaState);
+  if (!assetConfig) return null;
+
+  const url = await fetchStorageAssetUrl(
+    assetConfig.folderPath,
+    assetConfig.fileName
+  );
+
+  if (!url) return null;
+
+  return {
+    type: assetConfig.type,
+    url,
+  };
+}
+
+function getStageSummary(step) {
+  const source = step?.what || '';
+  if (!source) return 'A refined look at this phase of your SoundLegend build.';
+
+  const firstSentence = source.split('. ')[0]?.trim();
+  if (!firstSentence) return source;
+
+  return firstSentence.endsWith('.') ? firstSentence : `${firstSentence}.`;
+}
+
+function getStageViewerStateLabel(selectedIndex, currentIndex) {
+  if (selectedIndex < currentIndex) return 'Completed milestone';
+  if (selectedIndex > currentIndex) return 'Preview only';
+  return 'Currently in progress';
+}
+
+function getStageViewerEyebrow(selectedIndex, currentIndex) {
+  if (selectedIndex < currentIndex) return 'Stage Archive';
+  if (selectedIndex > currentIndex) return 'Future Stage Preview';
+  return 'Live Build Stage';
+}
+
 function getCombinedChecklist(project, stepDef) {
   if (!project || !stepDef) return [];
 
-  const stageKey = stepDef.key || stepDef.stageKey; // portal stage key
+  const stageKey = stepDef.key || stepDef.stageKey;
   const tpl = stageKey ? STAGE_TEMPLATES?.[stageKey] : null;
   const cap = Array.isArray(tpl?.steps) ? tpl.steps.length : null;
 
@@ -346,7 +541,6 @@ function getCombinedChecklist(project, stepDef) {
   return items;
 }
 
-/** Determine status of a step based on its combined checklist */
 function getStepStatus(project, stepOrDef) {
   const key = stepOrDef?.key;
   const def = key && STEP_DEFS?.[key] ? STEP_DEFS[key] : stepOrDef;
@@ -370,25 +564,9 @@ function getStepStatus(project, stepOrDef) {
   return { status: 'In Progress', done, total };
 }
 
-/** Any extra checklist items that aren’t part of the curated weighted list */
-function getExtraChecklistItems(project, stepDef) {
-  const checklist = getCombinedChecklist(project, stepDef);
-  if (!checklist.length) return [];
-
-  // Original behavior preserved
-  const cpSlugs = new Set(
-    (stepDef.checkpoints || []).map((cp) => slugify(cp.label))
-  );
-
-  return checklist.filter((item) => {
-    const taskSlug = slugify(item.label || item.task || '');
-    return !cpSlugs.has(taskSlug);
-  });
-}
-
-/** Percentage completion using the admin util (with canonical key patching) */
 function getOverallProgress(project) {
   if (!project) return 0;
+
   try {
     return Math.round(getWeightedProgressPct(project));
   } catch (e) {
@@ -397,12 +575,11 @@ function getOverallProgress(project) {
   }
 }
 
-// ✅ Global active sub-step pointer (ONE "IN PROGRESS" across whole project)
 function getGlobalActiveSubStep(project) {
   if (!project) return null;
 
   for (let s = 0; s < STEPS.length; s += 1) {
-    const stageKey = STEPS[s].key; // portal key
+    const stageKey = STEPS[s].key;
     const tpl = STAGE_TEMPLATES?.[stageKey];
     const canonical = canonicalKeyForStage(stageKey);
     const phaseKey = getExistingPhaseKey(project, canonical);
@@ -416,7 +593,6 @@ function getGlobalActiveSubStep(project) {
     const stepsArr = tpl.steps || [];
     if (!stepsArr.length) continue;
 
-    // stage complete?
     const stageComplete = stepsArr.every((_, idx) => {
       const item = checklist[idx] || {};
       const states = Array.isArray(item.checkpointStates)
@@ -426,9 +602,9 @@ function getGlobalActiveSubStep(project) {
       const done = states.filter(Boolean).length;
       return total > 0 ? done === total : !!item.completed;
     });
+
     if (stageComplete) continue;
 
-    // first incomplete sub-step
     for (let i = 0; i < stepsArr.length; i += 1) {
       const item = checklist[i] || {};
       const states = Array.isArray(item.checkpointStates)
@@ -446,12 +622,9 @@ function getGlobalActiveSubStep(project) {
   return null;
 }
 
-/** Derive current step index from currentPhase text if present */
 function getCurrentStepIndex(project) {
   if (!project) return 0;
 
-  // 1) If there's an active global sub-step, use its stage first.
-  // This is the most accurate source of truth for the current in-progress stage.
   const activePtr = getGlobalActiveSubStep(project);
   if (activePtr?.stageKey) {
     const activeStageIndex = STEPS.findIndex(
@@ -460,7 +633,6 @@ function getCurrentStepIndex(project) {
     if (activeStageIndex >= 0) return activeStageIndex;
   }
 
-  // 2) If every stage is completed, show the last stage.
   const summaries = STEPS.map((step) => getStepStatus(project, step));
   const allCompleted =
     summaries.length > 0 &&
@@ -468,11 +640,8 @@ function getCurrentStepIndex(project) {
       (s) => String(s.status || '').toLowerCase() === 'completed'
     );
 
-  if (allCompleted) {
-    return STEPS.length - 1;
-  }
+  if (allCompleted) return STEPS.length - 1;
 
-  // 3) Otherwise fallback to the furthest completed/touched stage.
   let lastTouchedIndex = 0;
 
   summaries.forEach((summary, index) => {
@@ -487,54 +656,88 @@ function getCurrentStepIndex(project) {
   return lastTouchedIndex;
 }
 
-/** Stage completion target */
 function getStageTargetDate(project, stageKey) {
   if (!project) return null;
+
+  const selectedStageIndex = STEPS.findIndex((s) => s.key === stageKey);
+  if (selectedStageIndex < 0) return null;
+
+  const stageDef = STEPS[selectedStageIndex];
+  const stageStatus = getStepStatus(project, stageDef).status;
 
   const canonical = canonicalKeyForStage(stageKey);
   const phaseKey = getExistingPhaseKey(project, canonical);
   const step = project?.[phaseKey];
 
-  if (!step?.checklist || !Array.isArray(step.checklist)) return null;
+  if (stageStatus === 'Completed') {
+    if (step?.checklist && Array.isArray(step.checklist)) {
+      const actualCompletionTimes = step.checklist
+        .filter(Boolean)
+        .map((item) =>
+          tsToMillis(
+            item?.completedAt ||
+              item?.timestamp ||
+              item?.updatedAt ||
+              item?.finishedAt ||
+              null
+          )
+        )
+        .filter(Boolean);
 
-  const timestamps = [];
-  for (const item of step.checklist.filter(Boolean)) {
-    const ts = item?.timestamp ?? item?.completedAt ?? null;
-    if (ts) timestamps.push(tsToMillis(ts));
+      if (actualCompletionTimes.length > 0) {
+        return fmtDate(Math.max(...actualCompletionTimes));
+      }
+    }
+
+    return 'Completed';
   }
 
-  if (timestamps.length === 0) return null;
-  const latest = Math.max(...timestamps);
-  const projected = latest + 14 * DAY_MS;
-  return fmtDate(projected);
+  const baseDate = getSchedulingBaseDate(project);
+  if (!baseDate) return null;
+
+  const time = PROJECT_STAGE_EDU?.[stageKey]?.time || {};
+  const minHours = Number(time.min || 0);
+  const maxHours = Number(time.max || 0);
+
+  if (!maxHours) return null;
+
+  const projected = getProjectedWeekendRangeFromHours(
+    baseDate,
+    minHours,
+    maxHours
+  );
+
+  return projected.late || projected.early || null;
 }
 
-/** Target completion window text */
 function getTargetWindow(project) {
   if (!project) return null;
 
-  const all = [];
+  const currentStageIndex = getCurrentStepIndex(project);
+  const lastStageIndex = STEPS.length - 1;
 
-  CANONICAL_STEP_KEYS.forEach((canonicalKey) => {
-    const phaseKey = getExistingPhaseKey(project, canonicalKey);
-    const step = project?.[phaseKey];
-    if (!step || !Array.isArray(step.checklist)) return;
+  const baseDate = getSchedulingBaseDate(project);
+  const { minHours, maxHours } = getRemainingStageHourRange(
+    project,
+    currentStageIndex,
+    lastStageIndex
+  );
 
-    step.checklist.filter(Boolean).forEach((item) => {
-      if (item.timestamp || item.completedAt) {
-        all.push(tsToMillis(item.timestamp || item.completedAt));
-      }
-    });
-  });
+  if (!minHours && !maxHours) return null;
 
-  if (all.length === 0) return null;
-  const latest = Math.max(...all);
-  const early = fmtDate(latest + 14 * DAY_MS);
-  const late = fmtDate(latest + 28 * DAY_MS);
-  return `${early} → ${late}`;
+  const projected = getProjectedWeekendRangeFromHours(
+    baseDate,
+    minHours,
+    maxHours
+  );
+
+  if (projected.early && projected.late && projected.early !== projected.late) {
+    return `${projected.early} → ${projected.late}`;
+  }
+
+  return projected.early || projected.late || null;
 }
 
-// touched?
 const isItemTouched = (item = {}) => {
   const done = !!item.completed;
   const hasCheckpoints =
@@ -547,7 +750,6 @@ const getActiveStepIndexForPhase = (project, phaseKey) => {
   const checklist = Array.isArray(phase.checklist) ? [...phase.checklist] : [];
   if (!checklist.length) return -1;
 
-  // 1) touched but not done
   for (let i = 0; i < checklist.length; i += 1) {
     const item = checklist[i] || {};
     const touched = isItemTouched(item);
@@ -555,30 +757,12 @@ const getActiveStepIndexForPhase = (project, phaseKey) => {
     if (touched && !done) return i;
   }
 
-  // 2) first incomplete
   for (let i = 0; i < checklist.length; i += 1) {
     const item = checklist[i] || {};
     if (!item.completed) return i;
   }
 
   return -1;
-};
-
-const PREBUILD_STAGE_INDEXES = [0, 1, 2];
-
-const getPhaseIndexForStep = (stepIndex) => {
-  if (stepIndex <= 2) return 0;
-  if (stepIndex <= 7) return 1;
-  return 2;
-};
-
-const arePrebuildStagesComplete = (project) => {
-  if (!project) return false;
-  return PREBUILD_STAGE_INDEXES.every((i) => {
-    const def = STEPS[i];
-    if (!def) return false;
-    return getStepStatus(project, def).status === 'Completed';
-  });
 };
 
 /* =========================================================
@@ -602,7 +786,6 @@ const StageCheckpointsPanel = ({
 
   const template = STAGE_TEMPLATES?.[stageKey] || null;
 
-  // ✅ Canonical phase key for this portal stage
   const canonical = useMemo(() => canonicalKeyForStage(stageKey), [stageKey]);
   const phaseKey = useMemo(
     () => getExistingPhaseKey(project, canonical),
@@ -616,12 +799,6 @@ const StageCheckpointsPanel = ({
       : [];
   }, [project, phaseKey]);
 
-  const lifecycleSteps = useMemo(() => {
-    const lifecycleStage = project?.lifecycle?.stages?.[stageKey];
-    const stepsObj = lifecycleStage?.steps || null;
-    return stepsObj ? Object.values(stepsObj) : [];
-  }, [project, stageKey]);
-
   const normalizedSteps = useMemo(() => {
     const tplSteps = template?.steps || [];
 
@@ -631,7 +808,6 @@ const StageCheckpointsPanel = ({
     return tplSteps.map((tplStep, idx) => {
       const phaseItem = phaseChecklist[idx];
 
-      // ✅ New template shape support
       const tplStepId =
         tplStep?.id || tplStep?.key || `${stageKey}_step_${idx}`;
       const tplStepLabel =
@@ -640,7 +816,6 @@ const StageCheckpointsPanel = ({
         tplStep?.adminLeftShort ||
         `Step ${idx + 1}`;
 
-      // checkpoints are cp objects now
       const checkpointDefs = Array.isArray(tplStep?.checkpoints)
         ? tplStep.checkpoints
         : [];
@@ -663,21 +838,14 @@ const StageCheckpointsPanel = ({
 
       const checkpoints = checkpointDefs.map((cpObj, cpIndex) => ({
         id: `${tplStepId}_cp_${cpIndex}`,
-        // ✅ renderable string
         label: cpObj?.ui || cpObj?.book || `Checkpoint ${cpIndex + 1}`,
-        // (optional: keep details available if you ever want to show them)
         details: Array.isArray(cpObj?.details) ? cpObj.details : [],
         completed: !!checkpointStates[cpIndex],
       }));
 
       const total = checkpoints.length;
       const done = checkpoints.filter((c) => c.completed).length;
-
       const isComplete = total > 0 && done === total;
-
-      const overallPct = getOverallProgress(project);
-      const globalPtr =
-        overallPct < 100 ? getGlobalActiveSubStep(project) : null;
 
       const isGlobalActive =
         !!globalPtr &&
@@ -690,7 +858,6 @@ const StageCheckpointsPanel = ({
 
       return {
         id: `${stageKey}_${tplStepId}`,
-        // ✅ THIS is what will show "Player Interview", etc.
         label: tplStepLabel,
         order: idx + 1,
         checkpoints,
@@ -700,9 +867,8 @@ const StageCheckpointsPanel = ({
         durationMinutes: stepDurationMinutes,
       };
     });
-  }, [template, stageKey, phaseChecklist, lifecycleSteps, project]);
+  }, [template, stageKey, phaseChecklist, project]);
 
-  // auto-open best sub-step for current stage (unchanged behavior, now correct keys)
   useEffect(() => {
     if (!project || !normalizedSteps.length) {
       setOpenStepId(null);
@@ -757,13 +923,10 @@ const StageCheckpointsPanel = ({
     setOpenStepId((prev) => (prev === stepId ? null : stepId));
   };
 
-  // ✅ Firestore update helper (WRITES CANONICAL ONLY)
   const persistCheckpointToggle = async ({ stepIdx, cpIdx, completed }) => {
     if (!project?.id || !phaseKey) return;
 
     const ref = doc(db, 'projects', project.id);
-
-    // read freshest server state
     const snap = await getDoc(ref);
     if (!snap.exists()) return;
 
@@ -802,7 +965,6 @@ const StageCheckpointsPanel = ({
     const done = states.filter(Boolean).length;
     const isFullyComplete = cpCount > 0 && done === cpCount;
 
-    // ✅ WRITE BACK into checklist (this was missing)
     checklist[stepIdx] = {
       ...stepItem,
       checkpointStates: states,
@@ -810,7 +972,6 @@ const StageCheckpointsPanel = ({
       ...(isFullyComplete ? {} : { durationMinutes: 0, totalSeconds: 0 }),
     };
 
-    // optimistic local update
     if (typeof setProject === 'function') {
       setProject((prev) => {
         if (!prev) return prev;
@@ -832,7 +993,6 @@ const StageCheckpointsPanel = ({
 
         prevChecklist[stepIdx] = prevStep;
 
-        // ✅ always store into CANONICAL key in local state
         return {
           ...prev,
           [canonical]: { ...prevPhase, checklist: prevChecklist },
@@ -840,7 +1000,6 @@ const StageCheckpointsPanel = ({
       });
     }
 
-    // ✅ write ONLY canonical object (full checklist to avoid partial overwrites)
     const canonicalPhase = server?.[canonical] || {};
     await updateDoc(ref, {
       [canonical]: {
@@ -856,7 +1015,6 @@ const StageCheckpointsPanel = ({
     if (!project?.id || !phaseKey) return;
 
     const ref = doc(db, 'projects', project.id);
-
     const snap = await getDoc(ref);
     if (!snap.exists()) return;
 
@@ -915,12 +1073,10 @@ const StageCheckpointsPanel = ({
     });
   };
 
-  // ✅ Save duration at sub-step level (only after fully complete)
   const persistStepDuration = async ({ stepIdx, durationMinutes }) => {
     if (!project?.id || !phaseKey) return;
 
     const ref = doc(db, 'projects', project.id);
-
     const snap = await getDoc(ref);
     if (!snap.exists()) return;
 
@@ -952,7 +1108,6 @@ const StageCheckpointsPanel = ({
     const mins = Math.max(0, Number(durationMinutes || 0));
     const secs = mins * 60;
 
-    // optimistic
     if (typeof setProject === 'function') {
       setProject((prev) => {
         if (!prev) return prev;
@@ -985,6 +1140,7 @@ const StageCheckpointsPanel = ({
 
   const handleMarkAllComplete = async ({ stepIdx }) => {
     if (!isAdmin) return;
+
     try {
       await persistMarkAllComplete({ stepIdx });
     } catch (e) {
@@ -1039,15 +1195,19 @@ const StageCheckpointsPanel = ({
     }
   };
 
-  // ✅ Early return ONLY AFTER hooks are declared
   if (!project || !template) return null;
 
-  const HOURS_OPTIONS = Array.from({ length: 25 }, (_, i) => i); // 0–24
-  const MINUTES_OPTIONS = Array.from({ length: 12 }, (_, i) => i * 5); // 0–55
+  const HOURS_OPTIONS = Array.from({ length: 25 }, (_, i) => i);
+  const MINUTES_OPTIONS = Array.from({ length: 12 }, (_, i) => i * 5);
 
   return (
     <div className="pp-stage-card">
-      <h4 className="pp-section-title">Internal checkpoints</h4>
+      <div className="pp-stage-card-header">
+        <div>
+          <div className="pp-section-eyebrow">Build Checkpoints</div>
+          <h4 className="pp-section-title">Internal checkpoints</h4>
+        </div>
+      </div>
 
       <div className="pp-step-list">
         {normalizedSteps.map((step, stepIdx) => {
@@ -1197,7 +1357,6 @@ const StageCheckpointsPanel = ({
         })}
       </div>
 
-      {/* Duration modal (admin-only) */}
       {isAdmin && durationModalOpen && (
         <div className="slp-modal-overlay" role="dialog" aria-modal="true">
           <div className="slp-modal">
@@ -1273,10 +1432,21 @@ const StageCheckpointsPanel = ({
 };
 
 /* =========================================================
-   COMPONENT
+   COMPONENT HELPERS
    ========================================================= */
 
-// Derive the *project* current stage + current sub-step labels
+function getTemplateStepDisplayLabel(step) {
+  if (!step) return 'No sub-step selected';
+
+  return (
+    step.adminMainTitle ||
+    step.label ||
+    step.adminLeftShort ||
+    step.title ||
+    'No sub-step selected'
+  );
+}
+
 function getCurrentStageAndStepLabels(project) {
   if (!project) {
     return { stageLabel: 'Not started', stepLabel: 'No sub-step selected' };
@@ -1294,23 +1464,37 @@ function getCurrentStageAndStepLabels(project) {
   if (activePtr) {
     const tpl = STAGE_TEMPLATES?.[activePtr.stageKey];
     const stepsArr = tpl?.steps || [];
-    if (stepsArr[activePtr.stepIdx])
-      stepLabel = stepsArr[activePtr.stepIdx].label;
+    const activeStepDef = stepsArr[activePtr.stepIdx];
+
+    if (activeStepDef) {
+      stepLabel = getTemplateStepDisplayLabel(activeStepDef);
+    }
   }
 
   return { stageLabel, stepLabel };
 }
 
+/* =========================================================
+   COMPONENT
+   ========================================================= */
+
 const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
   const [project, setProject] = useState(initialProject || null);
   const [loading, setLoading] = useState(!initialProject);
   const [activeKey, setActiveKey] = useState(STEPS[0].key);
-  const [heroVideoUrl, setHeroVideoUrl] = useState(FALLBACK_VIDEO);
-  const [videoUrlCache, setVideoUrlCache] = useState({});
-  const [stageImageUrl, setStageImageUrl] = useState('');
-  const [imageUrlCache, setImageUrlCache] = useState({});
 
-  // ✅ Only seed from props when switching projects or when local is empty.
+  const [heroVideoUrl, setHeroVideoUrl] = useState(FALLBACK_VIDEO);
+  const [heroVideoCache, setHeroVideoCache] = useState({});
+
+  const [selectedStageMedia, setSelectedStageMedia] = useState({
+    type: null,
+    url: '',
+  });
+  const [selectedStageMediaCache, setSelectedStageMediaCache] = useState({});
+  const [adjacentStageMedia, setAdjacentStageMedia] = useState({
+    prev: { type: null, url: '' },
+    next: { type: null, url: '' },
+  });
   useEffect(() => {
     if (!initialProject) return;
 
@@ -1333,7 +1517,6 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
     });
   }, [initialProject]);
 
-  // ✅ Live sync from Firestore so admin + artist never drift
   useEffect(() => {
     const ref = getProjectDocRef(initialProject);
     if (!ref) {
@@ -1374,23 +1557,13 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
     [project, overallPct]
   );
 
-  const currentStageKey = useMemo(() => {
-    return (STEPS[currentStepIndex] || STEPS[0]).key;
-  }, [currentStepIndex]);
-
-  const currentStageDef = useMemo(() => {
-    return STEPS[currentStepIndex] || STEPS[0];
-  }, [currentStepIndex]);
-
-  // ✅ Always allow Stage 1–3 to be viewable.
-  // ✅ Also allow anything up to the current stage (in progress / reached).
-  const unlockedUntilIndex = useMemo(
-    () => getUnlockMaxStageIndex(project),
-    [project]
+  const currentStageKey = useMemo(
+    () => (STEPS[currentStepIndex] || STEPS[0]).key,
+    [currentStepIndex]
   );
 
-  const prebuildComplete = useMemo(
-    () => arePrebuildStagesComplete(project),
+  const unlockedUntilIndex = useMemo(
+    () => getUnlockMaxStageIndex(project),
     [project]
   );
 
@@ -1401,169 +1574,226 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
     if (!project?.id) return;
     const def = STEPS[currentStepIndex] || STEPS[0];
     setActiveKey(def.key);
-  }, [project?.id]);
+  }, [project?.id, currentStepIndex]);
 
   const activeStep = STEPS.find((s) => s.key === activeKey) || STEPS[0];
+  const activeIndex = STEPS.findIndex((s) => s.key === activeKey);
+
+  const prevStep = activeIndex > 0 ? STEPS[activeIndex - 1] : null;
+  const nextStep =
+    activeIndex < STEPS.length - 1 ? STEPS[activeIndex + 1] : null;
+
+  const currentStageStatus = getSelectedStageMediaState(
+    activeIndex,
+    currentStepIndex
+  );
 
   useEffect(() => {
     let cancelled = false;
 
-    const normalizeName = (value = '') =>
-      String(value)
-        .replace(/[\u200B-\u200D\uFEFF]/g, '')
-        .trim()
-        .toLowerCase();
-
-    const loadStageVideo = async () => {
-      const stageKey = currentStageKey;
+    const loadHeroVideo = async () => {
+      const stageKey = activeStep?.key;
 
       if (!stageKey) {
         setHeroVideoUrl(FALLBACK_VIDEO);
         return;
       }
 
-      if (videoUrlCache[stageKey]) {
-        setHeroVideoUrl(videoUrlCache[stageKey]);
+      if (heroVideoCache[stageKey]) {
+        setHeroVideoUrl(heroVideoCache[stageKey]);
         return;
       }
 
-      const expectedFilename = STAGE_VIDEO_FILENAMES[stageKey];
-      if (!expectedFilename) {
-        console.warn('No filename mapped for stage key:', stageKey);
+      const assetConfig = getStageAssetConfig(
+        stageKey,
+        getSelectedStageMediaState(activeIndex, currentStepIndex)
+      );
+
+      if (!assetConfig) {
         setHeroVideoUrl(FALLBACK_VIDEO);
         return;
       }
 
       try {
-        const folderRef = storageRef(storage, 'project-stage-media');
-        const folderList = await listAll(folderRef);
-
-        const normalizedExpected = normalizeName(expectedFilename);
-
-        const availableNames = folderList.items.map((item) => item.name);
-        console.log('CURRENT STAGE KEY:', stageKey);
-        console.log('EXPECTED FILENAME:', expectedFilename);
-        console.log('NORMALIZED EXPECTED:', normalizedExpected);
-        console.log('AVAILABLE STAGE MEDIA FILES:', availableNames);
-
-        const matchedItem = folderList.items.find((item) => {
-          const normalizedItemName = normalizeName(item.name);
-          return normalizedItemName === normalizedExpected;
-        });
-
-        if (!matchedItem) {
-          console.error(
-            `No matching file found in project-stage-media for ${stageKey}. Expected: ${expectedFilename}`
-          );
-          if (!cancelled) setHeroVideoUrl(FALLBACK_VIDEO);
-          return;
-        }
-
-        console.log('MATCHED STORAGE ITEM:', matchedItem.name);
-
-        const url = await getDownloadURL(matchedItem);
+        const url = await fetchStorageAssetUrl(
+          assetConfig.folderPath,
+          assetConfig.fileName
+        );
 
         if (cancelled) return;
 
-        console.log('SUCCESS VIDEO URL:', url);
+        if (!url) {
+          console.error(
+            `No hero media found for ${stageKey}. Expected: ${assetConfig.fileName}`
+          );
+          setHeroVideoUrl(FALLBACK_VIDEO);
+          return;
+        }
 
-        setVideoUrlCache((prev) => ({
+        setHeroVideoCache((prev) => ({
           ...prev,
           [stageKey]: url,
         }));
         setHeroVideoUrl(url);
       } catch (err) {
-        console.error(
-          `Failed loading current stage video for ${stageKey}:`,
-          err
-        );
-        if (!cancelled) {
-          setHeroVideoUrl(FALLBACK_VIDEO);
-        }
+        console.error(`Failed loading hero media for ${stageKey}:`, err);
+        if (!cancelled) setHeroVideoUrl(FALLBACK_VIDEO);
       }
     };
 
-    loadStageVideo();
+    loadHeroVideo();
 
     return () => {
       cancelled = true;
     };
-  }, [currentStageKey, videoUrlCache]);
+  }, [activeStep, activeIndex, currentStepIndex, heroVideoCache]);
 
   useEffect(() => {
     let cancelled = false;
 
-    const normalizeName = (value = '') =>
-      String(value)
-        .replace(/[\u200B-\u200D\uFEFF]/g, '')
-        .trim()
-        .toLowerCase();
+    const loadSelectedStageMedia = async () => {
+      const selectedStageKey = activeStep?.key;
 
-    const loadStageImage = async () => {
-      const stageKey = activeStep?.key;
-
-      if (!stageKey) {
-        setStageImageUrl('');
+      if (!selectedStageKey) {
+        setSelectedStageMedia({ type: null, url: '' });
         return;
       }
 
-      if (imageUrlCache[stageKey]) {
-        setStageImageUrl(imageUrlCache[stageKey]);
+      const mediaState = getSelectedStageMediaState(
+        activeIndex,
+        currentStepIndex
+      );
+
+      const cacheKey = `${mediaState}:${selectedStageKey}`;
+
+      if (selectedStageMediaCache[cacheKey]) {
+        setSelectedStageMedia({
+          type: mediaState === STAGE_MEDIA_STATE.UNLOCKED ? 'image' : 'video',
+          url: selectedStageMediaCache[cacheKey],
+        });
         return;
       }
 
-      const expectedFilename = STAGE_IMAGE_FILENAMES[stageKey];
-      if (!expectedFilename) {
-        console.warn('No image filename mapped for stage key:', stageKey);
-        setStageImageUrl('');
+      const assetConfig = getStageAssetConfig(selectedStageKey, mediaState);
+
+      if (!assetConfig) {
+        setSelectedStageMedia({ type: null, url: '' });
         return;
       }
 
       try {
-        const folderRef = storageRef(storage, 'project-stage-images');
-        const folderList = await listAll(folderRef);
-
-        const normalizedExpected = normalizeName(expectedFilename);
-
-        const matchedItem = folderList.items.find((item) => {
-          const normalizedItemName = normalizeName(item.name);
-          return normalizedItemName === normalizedExpected;
-        });
-
-        if (!matchedItem) {
-          console.error(
-            `No matching image found in project-stage-images for ${stageKey}. Expected: ${expectedFilename}`
-          );
-          if (!cancelled) setStageImageUrl('');
-          return;
-        }
-
-        const url = await getDownloadURL(matchedItem);
+        const url = await fetchStorageAssetUrl(
+          assetConfig.folderPath,
+          assetConfig.fileName
+        );
 
         if (cancelled) return;
 
-        setImageUrlCache((prev) => ({
+        if (!url) {
+          console.error(
+            `No ${mediaState} asset found for ${selectedStageKey}. Expected: ${assetConfig.fileName}`
+          );
+          setSelectedStageMedia({ type: null, url: '' });
+          return;
+        }
+
+        setSelectedStageMediaCache((prev) => ({
           ...prev,
-          [stageKey]: url,
+          [cacheKey]: url,
         }));
-        setStageImageUrl(url);
+
+        setSelectedStageMedia({
+          type: assetConfig.type,
+          url,
+        });
       } catch (err) {
         console.error(
-          `Failed loading education stage image for ${stageKey}:`,
+          `Failed loading ${mediaState} media for ${selectedStageKey}:`,
           err
         );
         if (!cancelled) {
-          setStageImageUrl('');
+          setSelectedStageMedia({ type: null, url: '' });
         }
       }
     };
 
-    loadStageImage();
+    loadSelectedStageMedia();
 
     return () => {
       cancelled = true;
     };
-  }, [activeStep, imageUrlCache]);
+  }, [activeStep, activeIndex, currentStepIndex, selectedStageMediaCache]);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const loadAdjacentMedia = async () => {
+      try {
+        const prevIndex = activeIndex - 1;
+        const nextIndex = activeIndex + 1;
+
+        const loadOne = async (index) => {
+          if (index < 0 || index >= STEPS.length) {
+            return { type: null, url: '' };
+          }
+
+          const step = STEPS[index];
+          const mediaState = getSelectedStageMediaState(
+            index,
+            currentStepIndex
+          );
+          const cacheKey = `${mediaState}:${step.key}:adjacent`;
+
+          if (selectedStageMediaCache[cacheKey]) {
+            return {
+              type:
+                mediaState === STAGE_MEDIA_STATE.UNLOCKED ? 'image' : 'video',
+              url: selectedStageMediaCache[cacheKey],
+            };
+          }
+
+          const resolved = await resolveStageMediaUrl(step.key, mediaState);
+
+          if (!resolved?.url) {
+            return { type: null, url: '' };
+          }
+
+          setSelectedStageMediaCache((prev) => ({
+            ...prev,
+            [cacheKey]: resolved.url,
+          }));
+
+          return resolved;
+        };
+
+        const [prevMedia, nextMedia] = await Promise.all([
+          loadOne(prevIndex),
+          loadOne(nextIndex),
+        ]);
+
+        if (cancelled) return;
+
+        setAdjacentStageMedia({
+          prev: prevMedia,
+          next: nextMedia,
+        });
+      } catch (err) {
+        console.error('Failed loading adjacent stage media:', err);
+        if (!cancelled) {
+          setAdjacentStageMedia({
+            prev: { type: null, url: '' },
+            next: { type: null, url: '' },
+          });
+        }
+      }
+    };
+
+    loadAdjacentMedia();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [activeIndex, currentStepIndex, selectedStageMediaCache]);
 
   const activeStatus = useMemo(() => {
     if (!project || !activeStep) return 'not_started';
@@ -1587,13 +1817,30 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
     [project, activeStep.key]
   );
 
-  const activeIndex = STEPS.indexOf(activeStep);
+  const isSelectedStageLocked = activeIndex > currentStepIndex;
+  const showEducationAndCheckpoints = activeIndex <= currentStepIndex;
+  const selectedStageThemeClass =
+    activeStatus === 'completed'
+      ? 'is-theme-completed'
+      : activeStatus === 'in_progress'
+        ? 'is-theme-live'
+        : isSelectedStageLocked
+          ? 'is-theme-locked'
+          : 'is-theme-default';
+  const canGoPrev = activeIndex > 0;
+  const canGoNext = activeIndex < STEPS.length - 1;
 
-  // ✅ Stage is locked if it's beyond what’s unlocked for viewing
-  const isStageLocked = activeIndex > unlockedUntilIndex;
+  const goPrevStage = () => {
+    if (!canGoPrev) return;
+    const prev = STEPS[activeIndex - 1];
+    if (prev) setActiveKey(prev.key);
+  };
 
-  // ✅ Use the same rule for whether to show teaser vs checkpoints
-  const isPhaseLockedByTeaser = isStageLocked;
+  const goNextStage = () => {
+    if (!canGoNext) return;
+    const next = STEPS[activeIndex + 1];
+    if (next) setActiveKey(next.key);
+  };
 
   if (loading && !project) {
     return (
@@ -1613,84 +1860,282 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
 
   return (
     <div className="sl-progress">
-      {/* Hero media */}
-      <div className="sl-progress-hero">
-        <video
-          key={heroVideoUrl}
-          className="sl-progress-hero-video"
-          src={heroVideoUrl}
-          autoPlay
-          loop
-          muted
-          playsInline
-        />
-      </div>
+      <section className="sl-progress-project-overview">
+        <div className="sl-progress-project-overview-header">
+          <div className="sl-progress-project-overview-eyebrow">
+            Project Overview
+          </div>
+          <div className="sl-progress-project-overview-title">
+            Your SoundLegend build at a glance
+          </div>
+        </div>
 
-      <section className="sl-progress-intro">
-        <p className="sl-progress-intro-text">
-          A glimpse into the Ober Artisan process — you’ll see more
-          behind-the-scenes clips and photos as your drum moves through each
-          step.
-        </p>
+        <div className="sl-progress-metrics sl-progress-metrics--overview">
+          <div className="sl-progress-metric">
+            <div className="sl-progress-metric-label">Project completion</div>
+            <div className="sl-progress-metric-value">
+              {overallPct != null ? `${overallPct}%` : '—'}
+            </div>
+          </div>
+
+          <div className="sl-progress-metric sl-progress-metric--featured">
+            <div className="sl-progress-metric-label">
+              Project current stage
+            </div>
+            <div className="sl-progress-metric-value">{currentStageLabel}</div>
+          </div>
+
+          <div className="sl-progress-metric">
+            <div className="sl-progress-metric-label">Current stage step</div>
+            <div className="sl-progress-metric-value">{currentStepLabel}</div>
+          </div>
+
+          <div className="sl-progress-metric">
+            <div className="sl-progress-metric-label">
+              Target completion window
+            </div>
+            <div className="sl-progress-metric-value">
+              {targetWindow || 'TBD'}
+            </div>
+          </div>
+        </div>
       </section>
 
-      {/* Top metrics */}
-      <div className="sl-progress-metrics">
-        <div className="sl-progress-metric">
-          <div className="sl-progress-metric-label">Project completion</div>
-          <div className="sl-progress-metric-value">
-            {overallPct != null ? `${overallPct}%` : '—'}
+      <section className="sl-progress-roadmap sl-progress-roadmap--premium">
+        <div className="sl-progress-roadmap-header-row">
+          <div className="sl-progress-roadmap-header-block">
+            <div className="sl-progress-roadmap-header">Build roadmap</div>
+            <div className="sl-progress-roadmap-subtitle">
+              Track your drum’s progress from concept to completion
+            </div>
+          </div>
+
+          <div className="sl-progress-roadmap-side">
+            <div className="sl-progress-roadmap-percent">{overallPct}%</div>
+            <div className="sl-progress-roadmap-caption">
+              {currentStageLabel}
+            </div>
           </div>
         </div>
 
-        <div className="sl-progress-metric">
-          <div className="sl-progress-metric-label">Project current stage</div>
-          <div className="sl-progress-metric-value">{currentStageLabel}</div>
-        </div>
-
-        <div className="sl-progress-metric">
-          <div className="sl-progress-metric-label">Current stage step</div>
-          <div className="sl-progress-metric-value">{currentStepLabel}</div>
-        </div>
-
-        <div className="sl-progress-metric">
-          <div className="sl-progress-metric-label">
-            Target completion window
-          </div>
-          <div className="sl-progress-metric-value">
-            {targetWindow || 'TBD'}
+        <div className="sl-progress-roadmap-track-shell">
+          <div className="sl-progress-roadmap-track">
+            <div
+              className="sl-progress-roadmap-track-fill"
+              style={{ width: `${overallPct}%` }}
+            />
+            <div
+              className="sl-progress-roadmap-track-glow"
+              style={{ width: `${overallPct}%` }}
+            />
           </div>
         </div>
-      </div>
-
-      <section className="sl-progress-roadmap">
-        <div className="sl-progress-roadmap-header">Build Roadmap</div>
-
-        <div className="sl-progress-roadmap-track">
-          <div
-            className="sl-progress-roadmap-track-fill"
-            style={{ width: `${overallPct}%` }}
-          />
-        </div>
-
-        {isStageLocked && (
-          <div className="sl-progress-stage-locknote">
-            Future stages unlock as we reach them — part of building this
-            SoundLegend drum together, one focused step at a time.
-          </div>
-        )}
       </section>
 
       <section
-        className={['sl-progress-stage', isStageLocked ? 'is-locked' : '']
+        className={[
+          'sl-progress-hero-carousel-shell',
+          selectedStageThemeClass,
+        ].join(' ')}
+      >
+        <div className="sl-progress-hero-carousel-stage-rail">
+          <button
+            type="button"
+            className={[
+              'sl-progress-hero-side-preview',
+              'is-prev',
+              !canGoPrev ? 'is-disabled' : '',
+            ]
+              .filter(Boolean)
+              .join(' ')}
+            onClick={goPrevStage}
+            disabled={!canGoPrev}
+            aria-label={
+              prevStep
+                ? `View previous stage: ${prevStep.label}`
+                : 'No previous stage'
+            }
+          >
+            <div className="sl-progress-hero-side-preview-media">
+              {adjacentStageMedia.prev?.url ? (
+                adjacentStageMedia.prev.type === 'image' ? (
+                  <img
+                    src={adjacentStageMedia.prev.url}
+                    alt={prevStep ? prevStep.label : 'Previous stage'}
+                  />
+                ) : (
+                  <video
+                    key={adjacentStageMedia.prev.url}
+                    src={adjacentStageMedia.prev.url}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                  />
+                )
+              ) : (
+                <div className="sl-progress-hero-side-preview-fallback" />
+              )}
+            </div>
+
+            <div className="sl-progress-hero-side-preview-overlay" />
+            <div className="sl-progress-hero-side-preview-copy">
+              <div className="sl-progress-hero-side-preview-label">
+                Previous
+              </div>
+              <div className="sl-progress-hero-side-preview-title">
+                {prevStep ? `${activeIndex}. ${prevStep.label}` : '—'}
+              </div>
+            </div>
+          </button>
+
+          <div className="sl-progress-hero-carousel-media">
+            {heroVideoUrl ? (
+              currentStageStatus === STAGE_MEDIA_STATE.UNLOCKED ? (
+                <img
+                  className="sl-progress-hero-video"
+                  src={heroVideoUrl}
+                  alt={`${activeStep.label} hero`}
+                />
+              ) : (
+                <video
+                  key={heroVideoUrl}
+                  className="sl-progress-hero-video"
+                  src={heroVideoUrl}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                />
+              )
+            ) : null}
+
+            <div className="sl-progress-hero-overlay">
+              <div className="sl-progress-hero-kicker">
+                {currentStageStatus === STAGE_MEDIA_STATE.ACTIVE
+                  ? 'Currently in the workshop'
+                  : currentStageStatus === STAGE_MEDIA_STATE.UNLOCKED
+                    ? 'Completed stage archive'
+                    : 'Future stage preview'}
+              </div>
+              <div className="sl-progress-hero-title">
+                {activeIndex + 1}. {activeStep.label}
+              </div>
+            </div>
+
+            <div className="sl-progress-hero-carousel-nav">
+              <button
+                type="button"
+                className="sl-progress-carousel-arrow sl-progress-carousel-arrow--hero"
+                onClick={goPrevStage}
+                disabled={!canGoPrev}
+                aria-label="Previous stage"
+              >
+                ‹
+              </button>
+
+              <button
+                type="button"
+                className="sl-progress-carousel-arrow sl-progress-carousel-arrow--hero"
+                onClick={goNextStage}
+                disabled={!canGoNext}
+                aria-label="Next stage"
+              >
+                ›
+              </button>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            className={[
+              'sl-progress-hero-side-preview',
+              'is-next',
+              !canGoNext ? 'is-disabled' : '',
+            ]
+              .filter(Boolean)
+              .join(' ')}
+            onClick={goNextStage}
+            disabled={!canGoNext}
+            aria-label={
+              nextStep ? `View next stage: ${nextStep.label}` : 'No next stage'
+            }
+          >
+            <div className="sl-progress-hero-side-preview-media">
+              {adjacentStageMedia.next?.url ? (
+                adjacentStageMedia.next.type === 'image' ? (
+                  <img
+                    src={adjacentStageMedia.next.url}
+                    alt={nextStep ? nextStep.label : 'Next stage'}
+                  />
+                ) : (
+                  <video
+                    key={adjacentStageMedia.next.url}
+                    src={adjacentStageMedia.next.url}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                  />
+                )
+              ) : (
+                <div className="sl-progress-hero-side-preview-fallback" />
+              )}
+            </div>
+
+            <div className="sl-progress-hero-side-preview-overlay" />
+            <div className="sl-progress-hero-side-preview-copy">
+              <div className="sl-progress-hero-side-preview-label">Next</div>
+              <div className="sl-progress-hero-side-preview-title">
+                {nextStep ? `${activeIndex + 2}. ${nextStep.label}` : '—'}
+              </div>
+            </div>
+          </button>
+        </div>
+
+        <div className="sl-progress-hero-carousel-bottom">
+          <section className="sl-progress-intro">
+            <p className="sl-progress-intro-text">
+              Follow the evolution of your SoundLegend drum as each phase is
+              completed, documented, and revealed.
+            </p>
+          </section>
+        </div>
+      </section>
+
+      <section
+        className={[
+          'sl-progress-stage',
+          selectedStageThemeClass,
+          isSelectedStageLocked ? 'is-locked' : '',
+          currentStageStatus === STAGE_MEDIA_STATE.ACTIVE
+            ? 'is-live-stage'
+            : '',
+          currentStageStatus === STAGE_MEDIA_STATE.UNLOCKED
+            ? 'is-archive-stage'
+            : '',
+        ]
           .filter(Boolean)
           .join(' ')}
       >
-        <header className="sl-progress-stage-header">
-          <div className="sl-progress-stage-header-main">
-            <h2 className="sl-progress-stage-title">
-              {STEPS.indexOf(activeStep) + 1}. {activeStep.label}
-            </h2>
+        <header className="sl-progress-stage-header sl-progress-stage-header--connected">
+          <div className="sl-progress-stage-header-copy">
+            <div className="sl-progress-stage-eyebrow">
+              {getStageViewerEyebrow(activeIndex, currentStepIndex)}
+            </div>
+
+            <div className="sl-progress-stage-bridge-line">
+              <span className="sl-progress-stage-bridge-label">
+                {getStageViewerStateLabel(activeIndex, currentStepIndex)}
+              </span>
+              <span className="sl-progress-stage-bridge-dot" />
+              <span className="sl-progress-stage-bridge-summary">
+                {getStageSummary(activeStep)}
+              </span>
+            </div>
+          </div>
+
+          <div className="sl-progress-stage-header-side">
             <div
               className={[
                 'sl-progress-stage-status-pill',
@@ -1706,50 +2151,6 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
           </div>
         </header>
 
-        {/* Stage roadmap steps (cards moved down here) */}
-        <div className="sl-progress-roadmap-steps">
-          {STEPS.map((step, index) => {
-            const stepStatus = String(getStepStatus(project, step).status || '')
-              .toLowerCase()
-              .replace(/\s+/g, '_');
-
-            const isCurrent = step.key === activeStep.key;
-            const isCompleted =
-              stepStatus === 'completed' || index < currentStepIndex;
-            const isInProgress = stepStatus === 'in_progress';
-            const isLocked = index > unlockedUntilIndex;
-
-            const className = [
-              'sl-progress-step-dot',
-              isCurrent ? 'is-current' : '',
-              isCompleted ? 'is-completed' : '',
-              isInProgress ? 'is-inprogress' : '',
-              isLocked ? 'is-locked' : '',
-            ]
-              .filter(Boolean)
-              .join(' ');
-
-            return (
-              <button
-                key={step.key}
-                type="button"
-                className={className}
-                disabled={isLocked}
-                onClick={() => {
-                  if (isLocked) return;
-                  setActiveKey(step.key);
-                }}
-              >
-                <span className="sl-progress-step-number">
-                  {!isCompleted ? index + 1 : ''}
-                </span>
-                <span className="sl-progress-step-label">{step.label}</span>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Stage stats row */}
         <div className="sl-progress-stage-stats">
           <div className="sl-progress-stage-stat">
             <div className="sl-progress-stage-stat-label">
@@ -1774,107 +2175,111 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
               Stage Completion Target
             </div>
             <div className="sl-progress-stage-stat-value">
-              {stageTarget || 'TBD'}
+              {stageTarget ||
+                (activeStatus === 'completed' ? 'Completed' : 'TBD')}
             </div>
           </div>
         </div>
 
-        {stageImageUrl && (
-          <div className="sl-progress-stage-image-wrap">
-            <img
-              className="sl-progress-stage-image"
-              src={stageImageUrl}
-              alt={`${activeStep.label} stage`}
-            />
-          </div>
-        )}
-
-        {/* Explainer + checkpoints */}
-        <div className="sl-progress-stage-body">
-          {/* LEFT: explainer content (always together) */}
-          <div className="sl-progress-stage-col sl-progress-stage-col--explainer">
-            <div className="sl-progress-card">
-              <h3 className="sl-progress-card-title">
-                What we do in this stage
-              </h3>
-              <p className="sl-progress-card-text">{activeStep.what}</p>
-            </div>
-
-            <div className="sl-progress-card">
-              <h3 className="sl-progress-card-title">
-                Why it matters for your drum
-              </h3>
-              <p className="sl-progress-card-text">{activeStep.why}</p>
-            </div>
-
-            <div className="sl-progress-card">
-              <h3 className="sl-progress-card-title">Techniques used</h3>
-              <div className="sl-progress-pill-row">
-                {(Array.isArray(activeStep?.techniques)
-                  ? activeStep.techniques
-                  : []
-                ).map((t, i) => (
-                  <span key={`${t}-${i}`} className="sl-progress-pill">
-                    {t}
-                  </span>
-                ))}
+        {showEducationAndCheckpoints ? (
+          <>
+            <div className="sl-progress-stage-education-header">
+              <div className="sl-progress-stage-education-eyebrow">
+                Stage Story
+              </div>
+              <div className="sl-progress-stage-education-title">
+                What this phase means for your drum
               </div>
             </div>
 
-            <div className="sl-progress-card">
-              <h3 className="sl-progress-card-title">Tools involved</h3>
-              <div className="sl-progress-pill-row">
-                {(Array.isArray(activeStep?.tools) ? activeStep.tools : []).map(
-                  (t, i) => (
-                    <span key={`${t}-${i}`} className="sl-progress-pill">
-                      {t}
-                    </span>
-                  )
-                )}
+            <div className="sl-progress-stage-body">
+              <div className="sl-progress-stage-col sl-progress-stage-col--explainer">
+                <div className="sl-progress-card">
+                  <h3 className="sl-progress-card-title">
+                    What we do in this stage
+                  </h3>
+                  <p className="sl-progress-card-text">{activeStep.what}</p>
+                </div>
+
+                <div className="sl-progress-card">
+                  <h3 className="sl-progress-card-title">
+                    Why it matters for your drum
+                  </h3>
+                  <p className="sl-progress-card-text">{activeStep.why}</p>
+                </div>
+
+                <div className="sl-progress-card">
+                  <h3 className="sl-progress-card-title">Techniques used</h3>
+                  <div className="sl-progress-pill-row">
+                    {(Array.isArray(activeStep?.techniques)
+                      ? activeStep.techniques
+                      : []
+                    ).map((t, i) => (
+                      <span key={`${t}-${i}`} className="sl-progress-pill">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="sl-progress-card">
+                  <h3 className="sl-progress-card-title">Tools involved</h3>
+                  <div className="sl-progress-pill-row">
+                    {(Array.isArray(activeStep?.tools)
+                      ? activeStep.tools
+                      : []
+                    ).map((t, i) => (
+                      <span key={`${t}-${i}`} className="sl-progress-pill">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="sl-progress-card sl-progress-card--quote">
+                  <div className="sl-progress-quote-icon">★</div>
+                  <p className="sl-progress-quote-text">
+                    {activeStep.mantra ||
+                      'This is the moment a stack of boards turns into a living, breathing shell.'}
+                  </p>
+                </div>
+              </div>
+
+              <div className="sl-progress-stage-col sl-progress-stage-col--checkpoints">
+                <StageCheckpointsPanel
+                  key={activeStep.key}
+                  project={project}
+                  setProject={setProject}
+                  stageKey={activeStep.key}
+                  isAdmin={isAdmin}
+                />
               </div>
             </div>
 
-            <div className="sl-progress-card sl-progress-card--quote">
-              <div className="sl-progress-quote-icon">★</div>
-              <p className="sl-progress-quote-text">
-                {activeStep.mantra ||
-                  'This is the moment a stack of boards turns into a living, breathing shell.'}
+            <footer className="sl-progress-stage-footer">
+              <p className="sl-progress-stage-files">
+                Files for this step will appear here as we add photos, audio,
+                and PDFs.
+              </p>
+            </footer>
+          </>
+        ) : (
+          <div className="sl-progress-stage-preview-lock">
+            <div className="sl-progress-stage-preview-lock-card">
+              <div className="sl-progress-stage-preview-lock-eyebrow">
+                Future stage access
+              </div>
+              <h3 className="sl-progress-stage-preview-lock-title">
+                Stage details remain locked for now
+              </h3>
+              <p className="sl-progress-stage-preview-lock-text">
+                You can preview the cinematic media above, but the educational
+                breakdown and milestone checklist will unlock only after all
+                prior stages are completed.
               </p>
             </div>
           </div>
-
-          {/* RIGHT: stage checkpoints */}
-          <div className="sl-progress-stage-col sl-progress-stage-col--checkpoints">
-            {isPhaseLockedByTeaser ? (
-              <div className="pp-stage-card">
-                <h4 className="pp-section-title">Stage checkpoints</h4>
-                <p className="sl-progress-stage-locked-text">
-                  Detailed, step-by-step checkpoints for the BUILD and
-                  POST-BUILD phases unlock once we complete the full PRE-BUILD
-                  phase together (Stages 1–3). For now, this view is a preview
-                  of what the SoundLegend tracker will show as your drum moves
-                  forward.
-                </p>
-              </div>
-            ) : (
-              <StageCheckpointsPanel
-                key={activeStep.key}
-                project={project}
-                setProject={setProject}
-                stageKey={activeStep.key}
-                isAdmin={isAdmin}
-              />
-            )}
-          </div>
-        </div>
-
-        {/* Placeholder for “files for this step” */}
-        <footer className="sl-progress-stage-footer">
-          <p className="sl-progress-stage-files">
-            Files for this step will appear here as we add photos, audio, and
-            PDFs.
-          </p>
-        </footer>
+        )}
       </section>
     </div>
   );

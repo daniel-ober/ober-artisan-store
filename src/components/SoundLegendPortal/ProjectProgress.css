@@ -1,21 +1,20 @@
 /* ProjectProgress.css — SoundLegend Portal Build Progress (Customer View)
    ---------------------------------------------------------------------- */
 
-/* Optional: keep the card wrapper styling you were using */
 .slp-card.pp-card[data-component='ProjectProgress'] {
   position: relative;
-  max-width: 1100px;
+  max-width: 1180px;
   margin: 0 auto;
-  padding: 20px 24px 24px;
-  border-radius: 18px;
-  background: radial-gradient(
-    circle at top left,
-    #181a27 0,
-    #05060c 55%,
-    #020208 100%
-  );
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.8);
+  padding: 24px 28px 30px;
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at top left, rgba(34, 48, 86, 0.42) 0, transparent 38%),
+    radial-gradient(circle at top right, rgba(18, 28, 52, 0.28) 0, transparent 32%),
+    linear-gradient(180deg, rgba(10, 12, 22, 0.96), rgba(3, 4, 10, 0.98));
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(26px);
 }
 
@@ -24,65 +23,141 @@
    ===================================================================== */
 
 .sl-progress {
-  color: #e5e7eb;
-  font-size: 0.94rem;
+  color: #e8edf7;
+  font-size: 0.95rem;
 }
 
 .sl-progress p {
   margin: 0;
 }
 
-/* Loading / empty states */
-
 .sl-progress.sl-progress--loading,
 .sl-progress.sl-progress--empty {
-  padding: 20px;
+  padding: 24px;
   text-align: center;
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   opacity: 0.85;
 }
+
+
 
 /* =====================================================================
    HERO
    ===================================================================== */
 
 .sl-progress-hero {
+  position: relative;
   margin-top: 10px;
+  overflow: hidden;
+  border-radius: 20px;
 }
 
 .sl-progress-hero-video {
   display: block;
   width: 100%;
   height: auto;
-  border-radius: 16px;
+  border-radius: 20px;
   overflow: hidden;
   background: #05070c;
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.85);
+  box-shadow:
+    0 20px 44px rgba(0, 0, 0, 0.82),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.05);
   aspect-ratio: 16 / 9;
   object-fit: cover;
 }
 
-.sl-progress-hero-pill {
-  margin-top: 10px;
-  padding: 4px 12px;
-  border-radius: 999px;
-  border: 1px solid rgba(248, 250, 252, 0.65);
-  background: rgba(15, 23, 42, 0.82);
-  font-size: 0.72rem;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
+.sl-progress-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(3, 6, 16, 0.08) 0%,
+      rgba(3, 6, 16, 0.22) 52%,
+      rgba(3, 6, 16, 0.56) 100%
+    );
+  pointer-events: none;
+  border-radius: 20px;
 }
 
-/* Intro blurb */
+.sl-progress-hero-overlay {
+  position: absolute;
+  left: 22px;
+  bottom: 18px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sl-progress-hero-kicker {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: rgba(235, 241, 255, 0.76);
+}
+
+.sl-progress-hero-title {
+  font-size: 1.08rem;
+  font-weight: 600;
+  color: #ffffff;
+  text-shadow: 0 6px 24px rgba(0, 0, 0, 0.65);
+}
+
+/* =====================================================================
+   INTRO
+   ===================================================================== */
 
 .sl-progress-intro {
   margin-top: 14px;
 }
 
 .sl-progress-intro-text {
-  font-size: 0.88rem;
-  opacity: 0.78;
+  font-size: 0.9rem;
+  color: rgba(226, 232, 240, 0.76);
+  line-height: 1.55;
+}
+
+/* =====================================================================
+   PROJECT OVERVIEW
+   ===================================================================== */
+
+.sl-progress-project-overview {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  padding: 18px 18px 20px;
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at top left, rgba(27, 41, 84, 0.2) 0, transparent 34%),
+    linear-gradient(180deg, rgba(9, 11, 20, 0.92), rgba(4, 5, 11, 0.98));
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow:
+    0 20px 54px rgba(0, 0, 0, 0.44),
+    inset 0 1px 0 rgba(255, 255, 255, 0.025);
+}
+
+.sl-progress-project-overview-header {
+  margin-bottom: 14px;
+}
+
+.sl-progress-project-overview-eyebrow {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: rgba(210, 221, 241, 0.68);
+  margin-bottom: 4px;
+}
+
+.sl-progress-project-overview-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #f7fbff;
+}
+
+.sl-progress-metrics--overview {
+  margin-top: 0;
 }
 
 /* =====================================================================
@@ -97,437 +172,450 @@
 }
 
 .sl-progress-metric {
-  padding: 10px 12px;
-  border-radius: 12px;
-  background: radial-gradient(
-    circle at top left,
-    #171926 0,
-    #090a12 55%,
-    #040408 100%
-  );
+  padding: 12px 14px;
+  border-radius: 14px;
+  background:
+    radial-gradient(circle at top left, rgba(32, 42, 72, 0.72) 0, rgba(8, 10, 18, 0.96) 74%);
   border: 1px solid rgba(255, 255, 255, 0.06);
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 5px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.025);
+}
+
+.sl-progress-metric--featured {
+  border-color: rgba(106, 156, 255, 0.22);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.03),
+    0 0 0 1px rgba(78, 122, 220, 0.08);
 }
 
 .sl-progress-metric-label {
-  font-size: 0.75rem;
+  font-size: 0.73rem;
   text-transform: uppercase;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
   opacity: 0.72;
 }
 
 .sl-progress-metric-value {
-  font-size: 0.96rem;
+  font-size: 0.97rem;
+  font-weight: 500;
+  color: #f8fbff;
 }
 
 /* =====================================================================
-   ROADMAP TRACK + DOTS
+   ROADMAP
    ===================================================================== */
 
 .sl-progress-roadmap {
-  margin-top: 20px;
+  margin-top: 22px;
+}
+
+.sl-progress-roadmap--premium {
+  margin-top: 0;
+  margin-bottom: 18px;
+  padding: 16px 18px 18px;
+  border-radius: 20px;
+  background:
+    radial-gradient(circle at top left, rgba(39, 62, 124, 0.2) 0, transparent 34%),
+    linear-gradient(180deg, rgba(8, 11, 22, 0.94), rgba(4, 6, 12, 0.98));
+  border: 1px solid rgba(255, 255, 255, 0.055);
+  box-shadow:
+    0 18px 46px rgba(0, 0, 0, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.025);
+}
+
+.sl-progress-roadmap-header-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 12px;
+}
+
+.sl-progress-roadmap-header-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
 }
 
 .sl-progress-roadmap-header {
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
-  opacity: 0.8;
-  margin-bottom: 4px;
+  letter-spacing: 0.24em;
+  color: rgba(235, 242, 255, 0.9);
 }
 
-.sl-progress-roadmap-note {
+.sl-progress-roadmap-subtitle {
+  font-size: 0.86rem;
+  line-height: 1.4;
+  color: rgba(195, 207, 227, 0.7);
+}
+
+.sl-progress-roadmap-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  flex: 0 0 auto;
+}
+
+.sl-progress-roadmap-percent {
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #f8fbff;
+  letter-spacing: 0.01em;
+}
+
+.sl-progress-roadmap-caption {
   font-size: 0.8rem;
-  opacity: 0.78;
-  margin-bottom: 8px;
+  color: rgba(203, 213, 225, 0.68);
+  text-align: right;
 }
 
-/* slightly thicker track */
+.sl-progress-roadmap-track-shell {
+  position: relative;
+  padding: 8px 0 2px;
+}
+
 .sl-progress-roadmap-track {
   position: relative;
-  height: 8px;
+  height: 12px;
   border-radius: 999px;
-  background: rgba(15, 23, 42, 0.9);
-  border: 1px solid rgba(148, 163, 184, 0.7);
+  background:
+    linear-gradient(180deg, rgba(10, 16, 30, 0.95), rgba(5, 8, 18, 0.98));
+  border: 1px solid rgba(122, 143, 190, 0.34);
   overflow: hidden;
+  box-shadow:
+    inset 0 2px 6px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 .sl-progress-roadmap-track-fill {
   position: absolute;
-  inset: 0;
-  transform-origin: left center;
-  background: linear-gradient(90deg, #22c55e, #4ade80);
-  width: 0;
-  transition: width 0.25s ease;
-}
-
-/* Step dots */
-
-.sl-progress-roadmap-steps {
-  position: relative;
-  margin-top: 14px;
-  display: flex;
-  justify-content: space-between;
-  gap: 6px;
-}
-
-.sl-progress-step-dot {
-  position: relative;
-  background: transparent;
-  border: none;
-  color: rgba(255, 255, 255, 0.72);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-  transition:
-    transform 0.2s ease,
-    opacity 0.2s ease,
-    filter 0.2s ease;
-}
-
-.sl-progress-step-dot:hover {
-  transform: translateY(-1px);
-}
-
-.sl-progress-step-dot.is-locked {
-  opacity: 0.45;
-  cursor: not-allowed;
-  pointer-events: none;
-}
-
-.sl-progress-step-number {
-  position: relative;
-  width: 42px;
-  height: 42px;
+  top: 0;
+  left: 0;
+  bottom: 0;
   border-radius: 999px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.95rem;
-  font-weight: 700;
-  border: 2px solid rgba(125, 146, 190, 0.45);
-  background: radial-gradient(circle at 30% 30%, #111827 0%, #020617 75%);
-  color: rgba(255, 255, 255, 0.88);
+  background:
+    linear-gradient(
+      90deg,
+      rgba(84, 214, 120, 0.95) 0%,
+      rgba(74, 222, 128, 0.98) 32%,
+      rgba(110, 231, 183, 0.96) 68%,
+      rgba(96, 165, 250, 0.94) 100%
+    );
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.04),
-    0 0 0 0 rgba(0, 0, 0, 0);
-  transition:
-    transform 0.25s ease,
-    border-color 0.25s ease,
-    background 0.25s ease,
-    color 0.25s ease,
-    box-shadow 0.25s ease;
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    0 0 18px rgba(74, 222, 128, 0.22);
+  transition: width 0.35s ease;
 }
 
-/* remove old connector line */
-.sl-progress-step-number::before {
-  display: none !important;
-  content: none !important;
+.sl-progress-roadmap-track-glow {
+  position: absolute;
+  top: 1px;
+  left: 0;
+  bottom: 1px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.18),
+    rgba(255, 255, 255, 0.05)
+  );
+  mix-blend-mode: screen;
+  pointer-events: none;
+  transition: width 0.35s ease;
 }
 
-.sl-progress-step-label {
-  font-size: 0.8rem;
-  line-height: 1.16;
-  text-align: center;
-  max-width: 92px;
-  color: rgba(255, 255, 255, 0.7);
-  transition:
-    color 0.25s ease,
-    opacity 0.25s ease,
-    transform 0.25s ease;
-}
+/* =====================================================================
+   STAGE SHELL
+   ===================================================================== */
 
-/* =========================
-   COMPLETED
-   ========================= */
-
-.sl-progress-step-dot.is-completed .sl-progress-step-number {
-  border-color: rgba(54, 227, 138, 0.45);
-  background: rgba(16, 49, 29, 0.22);
-  color: transparent;
-  box-shadow: none;
-}
-
-.sl-progress-step-dot.is-completed .sl-progress-step-number::after {
-  content: '✓';
-  color: #7dffb2;
-  font-size: 0.95rem;
-  font-weight: 800;
-  line-height: 1;
-}
-
-.sl-progress-step-dot.is-completed .sl-progress-step-label {
-  color: rgba(255, 255, 255, 0.82);
-}
-
-/* =========================
-   SELECTED COMPLETED STAGE
-   ========================= */
-
-.sl-progress-step-dot.is-current.is-completed .sl-progress-step-number {
-  border-color: #36e38a;
-  background: radial-gradient(circle at 30% 30%, #10311d 0%, #07150d 78%);
-  transform: scale(1.05);
-  box-shadow: 0 0 0 3px rgba(125, 255, 178, 0.12);
-}
-
-.sl-progress-step-dot.is-current.is-completed .sl-progress-step-label {
-  color: #ffffff;
-}
-
-/* =========================
-   CURRENT / IN PROGRESS
-   ========================= */
-
-.sl-progress-step-dot.is-current:not(.is-completed) .sl-progress-step-number,
-.sl-progress-step-dot.is-inprogress:not(.is-completed)
-  .sl-progress-step-number {
-  border-color: #5aa2ff;
-  color: #e8f1ff;
-  background: radial-gradient(circle at 30% 30%, #142443 0%, #081120 78%);
+.sl-progress-stage {
+  position: relative;
+  margin-top: 10px;
+  padding: 24px 24px 28px;
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at top left, rgba(24, 34, 63, 0.34) 0, transparent 34%),
+    linear-gradient(180deg, rgba(10, 12, 22, 0.96), rgba(5, 6, 12, 0.985));
+  border: 1px solid rgba(255, 255, 255, 0.055);
   box-shadow:
-    0 0 0 3px rgba(90, 162, 255, 0.16),
-    0 0 22px rgba(90, 162, 255, 0.22);
+    0 22px 58px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.02);
 }
 
-.sl-progress-step-dot.is-current:not(.is-completed) .sl-progress-step-label,
-.sl-progress-step-dot.is-inprogress:not(.is-completed) .sl-progress-step-label {
-  color: #eef5ff;
+.sl-progress-stage.is-locked {
+  border-color: rgba(96, 111, 143, 0.12);
 }
 
-.sl-progress-step-dot.is-current:not(.is-completed) .sl-progress-step-number,
-.sl-progress-step-dot.is-inprogress:not(.is-completed)
-  .sl-progress-step-number {
-  animation: sl-stage-pulse 1.8s ease-in-out infinite;
-}
-
-/* pulsing halo ring */
-.sl-progress-step-dot.is-current:not(.is-completed)
-  .sl-progress-step-number::before,
-.sl-progress-step-dot.is-inprogress:not(.is-completed)
-  .sl-progress-step-number::before {
+.sl-progress-stage::before {
   content: '';
   position: absolute;
-  inset: -8px;
+  top: 0;
+  left: 24px;
+  right: 24px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(74, 222, 128, 0),
+    rgba(74, 222, 128, 0.35),
+    rgba(96, 165, 250, 0.28),
+    rgba(96, 165, 250, 0)
+  );
+  opacity: 0.9;
+}
+
+.sl-progress-stage-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding-bottom: 14px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.16);
+}
+
+.sl-progress-stage-header--connected {
+  align-items: flex-start;
+}
+
+.sl-progress-stage-header-copy {
+  min-width: 0;
+  flex: 1;
+}
+
+.sl-progress-stage-header-side {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  flex: 0 0 auto;
+}
+
+.sl-progress-stage-eyebrow {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: rgba(212, 223, 240, 0.62);
+  margin-bottom: 8px;
+}
+
+.sl-progress-stage-bridge-line {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  min-width: 0;
+}
+
+.sl-progress-stage-bridge-label {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #f3f7ff;
+}
+
+.sl-progress-stage-bridge-dot {
+  width: 5px;
+  height: 5px;
   border-radius: 999px;
-  border: 1px solid rgba(90, 162, 255, 0.22);
-  animation: sl-stage-pulse-ring 1.8s ease-in-out infinite;
+  background: rgba(148, 163, 184, 0.5);
+  flex: 0 0 auto;
 }
 
-/* =========================
-   FUTURE / LOCKED
-   ========================= */
-
-.sl-progress-step-dot.is-locked .sl-progress-step-number {
-  border-color: rgba(75, 85, 99, 0.8);
-  background: #020617;
-  color: rgba(148, 163, 184, 0.72);
-  box-shadow: none;
+.sl-progress-stage-bridge-summary {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: rgba(220, 229, 242, 0.76);
+  max-width: 760px;
 }
 
-.sl-progress-step-dot.is-locked .sl-progress-step-label {
-  color: rgba(148, 163, 184, 0.55);
+.sl-progress-stage-status-pill {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.48);
+  background: rgba(15, 23, 42, 0.88);
+  white-space: nowrap;
 }
 
-/* =========================
-   NORMAL HOVER
-   ========================= */
-
-.sl-progress-step-dot:not(.is-locked):not(.is-current):hover
-  .sl-progress-step-number {
-  transform: scale(1.06);
-  border-color: rgba(191, 219, 254, 0.55);
-  box-shadow: 0 0 0 3px rgba(191, 219, 254, 0.12);
+.sl-progress-stage-status-pill.is-completed {
+  border-color: rgba(34, 197, 94, 0.75);
+  color: #bbf7d0;
 }
 
-.sl-progress-step-dot:not(.is-locked):hover .sl-progress-step-label {
-  color: rgba(255, 255, 255, 0.92);
+.sl-progress-stage-status-pill.is-inprogress {
+  border-color: rgba(59, 130, 246, 0.82);
+  color: #bfdbfe;
 }
 
-/* =========================
-   ANIMATIONS
-   ========================= */
-
-@keyframes sl-stage-pulse {
-  0% {
-    transform: scale(1);
-    box-shadow:
-      0 0 0 3px rgba(90, 162, 255, 0.12),
-      0 0 16px rgba(90, 162, 255, 0.16);
-  }
-  50% {
-    transform: scale(1.08);
-    box-shadow:
-      0 0 0 5px rgba(90, 162, 255, 0.18),
-      0 0 26px rgba(90, 162, 255, 0.28);
-  }
-  100% {
-    transform: scale(1);
-    box-shadow:
-      0 0 0 3px rgba(90, 162, 255, 0.12),
-      0 0 16px rgba(90, 162, 255, 0.16);
-  }
+.sl-progress-stage-status-pill.is-notstarted {
+  color: rgba(226, 232, 240, 0.7);
 }
 
-@keyframes sl-stage-pulse-ring {
-  0% {
-    opacity: 0.18;
-    transform: scale(0.96);
-  }
-  50% {
-    opacity: 0.42;
-    transform: scale(1.08);
-  }
-  100% {
-    opacity: 0.18;
-    transform: scale(0.96);
-  }
+/* =====================================================================
+   STAGE STATS
+   ===================================================================== */
+
+.sl-progress-stage-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 14px 0 20px;
+}
+
+.sl-progress-stage-stat {
+  padding: 12px 14px;
+  border-radius: 14px;
+  background:
+    radial-gradient(circle at top left, rgba(22, 28, 48, 0.82) 0, rgba(7, 9, 18, 0.98) 74%);
+  border: 1px solid rgba(255, 255, 255, 0.055);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
+}
+
+.sl-progress-stage-stat-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  opacity: 0.68;
+}
+
+.sl-progress-stage-stat-value {
+  margin-top: 5px;
+  font-size: 0.96rem;
+  font-weight: 500;
+  color: #f2f6ff;
+}
+
+/* =====================================================================
+   SELECTED STAGE MEDIA
+   ===================================================================== */
+
+.sl-progress-stage-image-shell {
+  margin-bottom: 22px;
+}
+
+.sl-progress-stage-image-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+
+.sl-progress-stage-image-kicker {
+  font-size: 0.76rem;
+  color: rgba(220, 229, 242, 0.82);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.sl-progress-stage-image-badge {
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  background: rgba(15, 23, 42, 0.72);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(235, 240, 248, 0.88);
 }
 
 .sl-progress-stage-image-wrap {
-  margin: 18px 0 22px;
   width: 100%;
+  margin: 10px 0 0;
 }
 
 .sl-progress-stage-image {
   display: block;
   width: 100%;
   max-width: 100%;
-  border-radius: 20px;
-  border: 1px solid rgba(64, 110, 255, 0.28);
+  border-radius: 18px;
+  border: 1px solid rgba(84, 117, 205, 0.24);
   box-shadow:
-    0 0 0 1px rgba(32, 69, 168, 0.14),
-    0 10px 28px rgba(0, 0, 0, 0.34);
+    0 0 0 1px rgba(32, 69, 168, 0.1),
+    0 16px 40px rgba(0, 0, 0, 0.34);
+  background: #060913;
   object-fit: cover;
+  aspect-ratio: 16 / 9;
+}
+
+video.sl-progress-stage-image {
+  overflow: hidden;
 }
 
 /* =====================================================================
-   ACTIVE STAGE
+   STAGE BODY
    ===================================================================== */
 
-.sl-progress-stage {
-  margin-top: 24px;
-  padding: 16px 16px 20px;
-  border-radius: 14px;
-  background: radial-gradient(
-    circle at top left,
-    #151725 0,
-    #070810 55%,
-    #030307 100%
-  );
-  border: 1px solid rgba(255, 255, 255, 0.06);
+.sl-progress-stage-education-header {
+  margin: 0 0 14px;
 }
 
-/* Header */
-
-.sl-progress-stage-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  padding-bottom: 10px;
-  margin-bottom: 14px;
-  border-bottom: 1px solid rgba(148, 163, 184, 0.25);
-}
-
-.sl-progress-stage-title {
-  margin: 0;
-  font-size: 1.08rem;
-  font-weight: 500;
-}
-
-.sl-progress-stage-status-pill {
+.sl-progress-stage-education-eyebrow {
   font-size: 0.72rem;
   text-transform: uppercase;
-  letter-spacing: 0.16em;
-  padding: 4px 10px;
-  border-radius: 999px;
-  border: 1px solid rgba(148, 163, 184, 0.6);
-  background: rgba(15, 23, 42, 0.9);
-  white-space: nowrap;
+  letter-spacing: 0.18em;
+  color: rgba(210, 220, 240, 0.68);
+  margin-bottom: 4px;
 }
 
-/* Status colors */
-
-.sl-progress-stage-status-pill.is-completed {
-  border-color: rgba(34, 197, 94, 0.9);
-  color: #bbf7d0;
+.sl-progress-stage-education-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #f7fbff;
 }
-
-.sl-progress-stage-status-pill.is-inprogress {
-  border-color: rgba(59, 130, 246, 0.9);
-  color: #bfdbfe;
-}
-
-.sl-progress-stage-status-pill.is-notstarted {
-  opacity: 0.85;
-}
-
-/* Stage stats */
-
-.sl-progress-stage-stats {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
-  margin: 10px 0 16px;
-}
-
-.sl-progress-stage-stat {
-  padding: 8px 10px;
-  border-radius: 10px;
-  background: radial-gradient(
-    circle at top left,
-    #181a2a 0,
-    #090a13 55%,
-    #040408 100%
-  );
-  border: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.sl-progress-stage-stat-label {
-  font-size: 0.74rem;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  opacity: 0.72;
-}
-
-.sl-progress-stage-stat-value {
-  font-size: 0.9rem;
-  margin-top: 2px;
-}
-
-/* Stage body layout */
 
 .sl-progress-stage-body {
-  display: flex;
-  flex-direction: column;
-  /* gap: 20px; */
-  margin-top: 4px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(320px, 0.95fr);
+  gap: 24px;
+  align-items: start;
 }
 
 .sl-progress-stage-col {
   min-width: 0;
 }
-/* Cards */
+
+.sl-progress-stage-col--explainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.sl-progress-stage-col--checkpoints {
+  display: flex;
+  align-items: flex-start;
+}
+
+/* =====================================================================
+   CONTENT CARDS
+   ===================================================================== */
 
 .sl-progress-card {
-  margin-bottom: 12px;
-  padding: 10px 10px 11px;
-  border-radius: 12px;
-  background: radial-gradient(circle at top left, #111827 0, #020617 60%);
-  border: 1px solid rgba(30, 64, 175, 0.4);
+  margin-bottom: 14px;
+  padding: 14px 14px 15px;
+  border-radius: 16px;
+  background:
+    radial-gradient(circle at top left, rgba(16, 26, 52, 0.82) 0, rgba(4, 8, 18, 0.96) 72%);
+  border: 1px solid rgba(44, 78, 170, 0.35);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.018),
+    0 10px 24px rgba(0, 0, 0, 0.18);
+}
+
+.sl-progress-card:last-child {
+  margin-bottom: 0;
 }
 
 .sl-progress-card-title {
-  margin: 0 0 4px;
-  font-size: 0.78rem;
+  margin: 0 0 7px;
+  font-size: 0.76rem;
   text-transform: uppercase;
-  letter-spacing: 0.18em;
-  opacity: 0.8;
+  letter-spacing: 0.22em;
+  color: rgba(210, 220, 240, 0.72);
 }
 
 .sl-progress-card-subtitle {
@@ -539,25 +627,26 @@
 }
 
 .sl-progress-card-text {
-  font-size: 0.9rem;
-  line-height: 1.5;
+  font-size: 0.94rem;
+  line-height: 1.62;
+  color: rgba(239, 244, 255, 0.9);
 }
-
-/* Pills & bullets */
 
 .sl-progress-pill-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 8px;
   margin-top: 4px;
 }
 
 .sl-progress-pill {
-  padding: 3px 9px;
+  padding: 4px 10px;
   border-radius: 999px;
-  background: rgba(15, 23, 42, 0.85);
-  border: 1px solid rgba(148, 163, 184, 0.7);
-  font-size: 0.76rem;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(148, 163, 184, 0.38);
+  color: rgba(234, 240, 248, 0.9);
+  font-size: 0.75rem;
+  line-height: 1.15;
 }
 
 .sl-progress-bullet-list {
@@ -567,70 +656,85 @@
   line-height: 1.45;
 }
 
-/* Quote card */
-
 .sl-progress-card--quote {
   display: flex;
   align-items: center;
-  gap: 8px;
-  border-color: rgba(191, 219, 254, 0.45);
+  gap: 10px;
+  border-color: rgba(191, 219, 254, 0.26);
+  background:
+    linear-gradient(135deg, rgba(16, 22, 42, 0.96), rgba(10, 12, 22, 0.98));
 }
 
 .sl-progress-quote-icon {
-  font-size: 0.96rem;
+  flex: 0 0 auto;
+  font-size: 0.95rem;
   color: #fde68a;
 }
 
 .sl-progress-quote-text {
   font-size: 0.9rem;
+  color: rgba(245, 248, 255, 0.92);
+  line-height: 1.55;
 }
 
 /* =====================================================================
-   CHECKPOINTS (EXPAND/COLLAPSE PANEL)
+   CHECKPOINT PANEL
    ===================================================================== */
 
 .pp-stage-card {
-  margin-top: 1.5rem;
-  padding: 1.25rem 1.5rem;
-  border-radius: 16px;
+  width: 100%;
+  margin-top: 0;
+  padding: 1.35rem 1.4rem 1.25rem;
+  border-radius: 18px;
   background:
-    radial-gradient(
-      circle at top left,
-      rgba(80, 140, 255, 0.18),
-      transparent 60%
-    ),
+    radial-gradient(circle at top left, rgba(80, 140, 255, 0.18), transparent 60%),
     rgba(3, 9, 20, 0.96);
-  border: 1px solid rgba(120, 190, 255, 0.28);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(120, 190, 255, 0.24);
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.48),
+    inset 0 1px 0 rgba(255, 255, 255, 0.02);
+}
+
+.pp-stage-card-header {
+  margin-bottom: 12px;
+}
+
+.pp-section-eyebrow {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: rgba(190, 205, 230, 0.64);
+  margin-bottom: 4px;
 }
 
 .pp-section-title {
-  font-size: 0.8rem;
-  letter-spacing: 0.12em;
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #a9b4d4;
-  margin-bottom: 0.75rem;
+  color: #b5c3df;
+  margin-bottom: 0.9rem;
 }
-
-/* List of steps inside the stage */
 
 .pp-step-list {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.7rem;
 }
 
-/* Each step block (card) */
-
 .pp-step-block {
-  background: rgba(15, 23, 42, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(15, 23, 42, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 14px;
   margin-bottom: 4px;
   overflow: hidden;
   transition:
     background 0.25s ease,
-    border 0.25s ease;
+    border 0.25s ease,
+    transform 0.25s ease;
+}
+
+.pp-step-block:hover {
+  border-color: rgba(148, 163, 184, 0.16);
 }
 
 .checkpoint-hidden-note {
@@ -643,10 +747,9 @@
   font-size: 0.9rem;
 }
 
-/* Header row for each step (clickable) */
 .sl-progress .pp-stage-card .slp-pp-step-header {
   width: 100%;
-  padding: 0.7rem 0.95rem;
+  padding: 0.78rem 0.98rem;
   border: none;
   outline: none;
   display: flex;
@@ -657,70 +760,93 @@
   color: #f9fafb;
 }
 
-/* Optional hover state */
 .sl-progress .pp-stage-card .slp-pp-step-header:hover {
   background: radial-gradient(
     circle at top left,
-    rgba(148, 163, 184, 0.16),
+    rgba(148, 163, 184, 0.12),
     transparent 60%
   );
 }
+
+.sl-progress .pp-stage-card .slp-pp-step-header.is-static {
+  cursor: default;
+}
+
+.sl-progress .pp-stage-card .slp-pp-step-header.is-static:hover {
+  background: transparent;
+}
+
 .pp-step-header-main {
   flex: 1;
   display: flex;
   flex-direction: column;
   text-align: left;
+  gap: 2px;
 }
 
 .pp-step-title {
-  font-size: 0.96rem;
+  font-size: 0.93rem;
   font-weight: 600;
+  line-height: 1.25;
+  color: #f7fbff;
 }
 
 .pp-step-count {
-  font-size: 0.75rem;
-  margin-top: 2px;
+  font-size: 0.74rem;
+  line-height: 1.15;
   color: #93a4bd;
 }
 
-/* Step status pill */
+.pp-step-markall-btn,
+.pp-step-log-btn {
+  margin-top: 6px;
+  width: fit-content;
+  border: 1px solid rgba(120, 190, 255, 0.22);
+  background: rgba(7, 15, 32, 0.72);
+  color: rgba(232, 239, 248, 0.9);
+  font-size: 0.72rem;
+  border-radius: 999px;
+  padding: 4px 9px;
+  cursor: pointer;
+}
+
+.pp-step-duration {
+  margin-top: 6px;
+  font-size: 0.74rem;
+  color: rgba(218, 227, 239, 0.82);
+}
 
 .pill {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.15rem 0.6rem;
+  padding: 0.18rem 0.62rem;
   border-radius: 999px;
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   white-space: nowrap;
   border: 1px solid transparent;
 }
 
-/* Grey = Not started */
 .pill-pending {
-  background: rgba(148, 163, 184, 0.15);
-  border-color: rgba(148, 163, 184, 0.28);
+  background: rgba(148, 163, 184, 0.12);
+  border-color: rgba(148, 163, 184, 0.22);
   color: #9fb0c5;
 }
 
-/* Yellow = In progress */
 .pill-progress {
-  background: rgba(250, 204, 21, 0.18);
-  border-color: rgba(250, 204, 21, 0.4);
+  background: rgba(250, 204, 21, 0.16);
+  border-color: rgba(250, 204, 21, 0.34);
   color: #facc15;
 }
 
-/* Green = Completed */
 .pill-complete {
-  background: rgba(34, 197, 94, 0.2);
-  border-color: rgba(34, 197, 94, 0.45);
-  color: #22c55e;
+  background: rgba(34, 197, 94, 0.18);
+  border-color: rgba(34, 197, 94, 0.34);
+  color: #7df5a4;
 }
-
-/* Chevron */
 
 .pp-step-chevron {
   font-size: 0.8rem;
@@ -734,26 +860,22 @@
   transform: rotate(0deg);
 }
 
-/* Checkpoint list (inside open step) */
-
 .pp-checkpoint-list.grouped {
-  border-top: 1px solid rgba(148, 163, 184, 0.25);
-  padding: 0.5rem 0.95rem 0.75rem;
+  border-top: 1px solid rgba(148, 163, 184, 0.18);
+  padding: 0.55rem 0.98rem 0.8rem;
 }
 
 .pp-checkpoint-list.flat {
   margin-top: 0.4rem;
 }
 
-/* Each checkpoint row */
-
 .pp-checkpoint-row {
   display: flex;
   align-items: center;
-  padding: 0.35rem 0;
+  padding: 0.42rem 0;
   font-size: 0.8rem;
   color: #d0d6f2;
-  border-bottom: 1px dashed rgba(68, 80, 120, 0.5);
+  border-bottom: 1px dashed rgba(68, 80, 120, 0.42);
 }
 
 .pp-checkpoint-row:last-child {
@@ -765,11 +887,17 @@
   align-items: center;
 }
 
-/* =========================================================
-   CHECKPOINT ICON + LABEL
-   ========================================================= */
+.pp-checkpoint-row--admin {
+  justify-content: space-between;
+  gap: 12px;
+}
 
-/* Icon container: keeps text aligned even when there is no checkmark */
+.pp-checkpoint-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .pp-checkpoint-icon {
   display: inline-flex;
   align-items: center;
@@ -782,7 +910,7 @@
   font-size: 0.7rem;
   font-weight: 700;
   flex-shrink: 0;
-  color: transparent; /* no visible mark when incomplete */
+  color: transparent;
   background: transparent;
   transition:
     border-color 0.18s ease,
@@ -791,29 +919,21 @@
     box-shadow 0.14s ease;
 }
 
-/* =========================================================
-   ADMIN — clickable circle
-   (add class: pp-checkpoint-icon--button)
-   ========================================================= */
-
 .pp-checkpoint-icon--button {
   appearance: none;
   padding: 0;
   cursor: pointer;
 }
 
-/* hover ONLY when incomplete */
 .pp-checkpoint-icon--button:not(.is-completed):hover {
   border-color: rgba(120, 190, 255, 0.65);
   transform: scale(1.06);
 }
 
-/* subtle press feedback */
 .pp-checkpoint-icon--button:active {
   transform: scale(0.96);
 }
 
-/* accessible focus */
 .pp-checkpoint-icon--button:focus {
   outline: none;
 }
@@ -822,105 +942,26 @@
   box-shadow: 0 0 0 3px rgba(120, 190, 255, 0.22);
 }
 
-/* =========================================================
-   COMPLETED STATE
-   ========================================================= */
-
 .pp-checkpoint-icon.is-completed {
   background: #22c55e;
   border-color: #22c55e;
-  color: #020617; /* dark checkmark */
+  color: #020617;
   box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.18);
 }
 
-/* nicer hover when already completed */
 .pp-checkpoint-icon--button.is-completed:hover {
   box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.22);
 }
 
-/* =========================================================
-   LABEL
-   ========================================================= */
-
 .pp-checkpoint-label {
-  font-size: 0.85rem;
-  color: rgba(226, 232, 240, 0.82);
+  font-size: 0.84rem;
+  color: rgba(226, 232, 240, 0.84);
   transition: color 0.18s ease;
+  line-height: 1.35;
 }
 
 .pp-checkpoint-label.is-completed {
-  color: #bbf7d0;
-}
-
-/* =====================================================================
-   FOOTER
-   ===================================================================== */
-
-.sl-progress-stage-footer {
-  margin-top: 14px;
-  padding-top: 8px;
-  border-top: 1px solid rgba(30, 64, 175, 0.5);
-}
-
-.sl-progress-stage-files {
-  font-size: 0.86rem;
-  opacity: 0.78;
-}
-
-/* REMOVE vertical marker lines above roadmap dots */
-.sl-progress-step-number::before {
-  display: none !important;
-  content: none !important;
-}
-
-.sl-progress-stage-locked-text {
-  font-size: 0.86rem;
-  line-height: 1.5;
-  color: rgba(226, 232, 240, 0.9);
-  opacity: 0.9;
-}
-
-/* Non-admin headers are static (no hover glow, no pointer) */
-.sl-progress .pp-stage-card .slp-pp-step-header.is-static {
-  cursor: default;
-}
-
-.sl-progress .pp-stage-card .slp-pp-step-header.is-static:hover {
-  background: transparent;
-}
-
-/* Slightly tighter header layout */
-.sl-progress .pp-stage-card .slp-pp-step-header {
-  padding: 0.65rem 0.95rem;
-}
-
-.pp-step-header-main {
-  gap: 2px;
-}
-
-.pp-step-title {
-  font-size: 0.92rem; /* was 0.96 */
-  line-height: 1.2;
-}
-
-.pp-step-count {
-  font-size: 0.74rem;
-  line-height: 1.15;
-}
-
-/* =========================
-   ADMIN checkpoint controls
-   ========================= */
-
-.pp-checkpoint-row--admin {
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.pp-checkpoint-controls {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  color: #c5f7d8;
 }
 
 .pp-checkpoint-duration {
@@ -938,9 +979,65 @@
   opacity: 0.55;
 }
 
-/* =========================
-   Duration modal
-   ========================= */
+/* =====================================================================
+   PREVIEW LOCK CARD
+   ===================================================================== */
+
+.sl-progress-stage-preview-lock {
+  margin-top: 2px;
+}
+
+.sl-progress-stage-preview-lock-card {
+  padding: 18px 18px 20px;
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at top left, rgba(44, 59, 96, 0.18) 0, transparent 42%),
+    linear-gradient(180deg, rgba(10, 12, 22, 0.96), rgba(6, 8, 16, 0.98));
+  border: 1px solid rgba(255, 255, 255, 0.055);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.018),
+    0 14px 30px rgba(0, 0, 0, 0.18);
+}
+
+.sl-progress-stage-preview-lock-eyebrow {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: rgba(210, 220, 240, 0.62);
+  margin-bottom: 6px;
+}
+
+.sl-progress-stage-preview-lock-title {
+  margin: 0 0 8px;
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: #f3f7ff;
+}
+
+.sl-progress-stage-preview-lock-text {
+  font-size: 0.92rem;
+  line-height: 1.62;
+  color: rgba(224, 232, 243, 0.78);
+}
+
+/* =====================================================================
+   FOOTER
+   ===================================================================== */
+
+.sl-progress-stage-footer {
+  margin-top: 18px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(30, 64, 175, 0.26);
+}
+
+.sl-progress-stage-files {
+  font-size: 0.86rem;
+  color: rgba(211, 219, 232, 0.74);
+}
+
+/* =====================================================================
+   MODAL
+   ===================================================================== */
 
 .slp-modal-overlay {
   position: fixed;
@@ -957,11 +1054,7 @@
   width: min(520px, 100%);
   border-radius: 16px;
   background:
-    radial-gradient(
-      circle at top left,
-      rgba(80, 140, 255, 0.16),
-      transparent 55%
-    ),
+    radial-gradient(circle at top left, rgba(80, 140, 255, 0.16), transparent 55%),
     rgba(3, 9, 20, 0.98);
   border: 1px solid rgba(120, 190, 255, 0.28);
   box-shadow: 0 28px 80px rgba(0, 0, 0, 0.75);
@@ -1066,92 +1159,44 @@
   cursor: not-allowed;
 }
 
-@media (max-width: 520px) {
-  .slp-modal-grid {
-    grid-template-columns: 1fr;
-  }
-}
 /* =====================================================================
    RESPONSIVE
    ===================================================================== */
 
-/* ───────────────────────────────────────────────
-   SPACING / PADDING POLISH FOR LARGE SCREENS
-   ─────────────────────────────────────────────── */
-@media (min-width: 1200px) {
-  /* tighter overall container spacing */
+@media (min-width: 1260px) {
   .sl-progress-stage {
-    padding: 40px 48px 56px;
+    padding: 28px 30px 34px;
   }
 
-  /* reduce excess vertical space between sections */
-  .sl-progress-stage-header {
-    margin-bottom: 28px;
-  }
-
-  .sl-progress-stage-stats {
-    margin-bottom: 32px;
-  }
-
-  /* better balance inside the two-column grid */
   .sl-progress-stage-body {
-    column-gap: 40px; /* was 24px — more breathing room */
-    row-gap: 0;
+    grid-template-columns: minmax(0, 1.62fr) minmax(340px, 0.92fr);
+    gap: 28px;
   }
 
-  /* explainer column: consistent vertical spacing between cards */
-  .sl-progress-stage-col--explainer .sl-progress-card {
-    margin-bottom: 20px;
+  .pp-stage-card {
+    padding: 1.45rem 1.5rem 1.3rem;
   }
 
-  .sl-progress-stage-col--explainer .sl-progress-card:last-child {
-    margin-bottom: 0;
-  }
-
-  /* checkpoints column: reduce padding so it's not so “boxed in” */
-  .sl-progress-stage-col--checkpoints .pp-stage-card {
-    padding: 24px 26px;
-    width: 100%;
-    border-radius: 14px;
-  }
-
-  /* “Stage Checkpoints” title refinement */
-  .pp-stage-title {
-    font-size: 1.1rem;
-    margin-bottom: 18px;
-  }
-
-  /* Fix top alignment between left content and right checkpoints */
-  .sl-progress-stage-col--checkpoints {
-    align-self: start;
-    padding-top: 6px;
-  }
-
-  /* bottom spacing consistency */
-  .sl-progress-stage-footer {
-    margin-top: 40px;
+  .sl-progress-stage-carousel-card {
+    flex-basis: 300px;
   }
 }
 
-@media (min-width: 1100px) {
+@media (max-width: 1100px) {
   .sl-progress-stage-body {
-    display: grid;
-    grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.2fr);
-    align-items: flex-start;
+    grid-template-columns: 1fr;
+    gap: 18px;
   }
 
-  .sl-progress-stage-col--explainer {
-    /* just makes intent clear; grid handles width */
+  .sl-progress-stage-image-wrap {
+    width: 100%;
   }
 
   .sl-progress-stage-col--checkpoints {
-    display: flex;
-    justify-content: flex-end; /* keeps the panel nicely aligned to the right */
+    display: block;
   }
 
-  /* Make the checkpoints card sit flush to the top and use the column width */
-  .sl-progress-stage-col--checkpoints .pp-stage-card {
-    margin-top: 0.4rem; /* was 1.5rem – that’s why it looked “dropped” */
+  .pp-stage-card {
     width: 100%;
   }
 }
@@ -1159,6 +1204,7 @@
 @media (max-width: 900px) {
   .slp-card.pp-card[data-component='ProjectProgress'] {
     padding: 18px 16px 20px;
+    border-radius: 18px;
   }
 
   .sl-progress-metrics {
@@ -1169,54 +1215,459 @@
     grid-template-columns: 1fr;
   }
 
-  .sl-progress-stage-body {
-    grid-template-columns: 1fr;
+  .sl-progress-roadmap-header-row,
+  .sl-progress-stage-header--premium,
+  .sl-progress-stage-image-meta {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  .sl-progress-roadmap-steps {
-    flex-wrap: wrap;
+  .sl-progress-roadmap-caption,
+  .sl-progress-stage-viewer-state {
+    text-align: left;
   }
+
+  .sl-progress-stage-carousel-controls {
+    align-self: flex-start;
+  }
+
+  .sl-progress-stage-carousel-card {
+    flex-basis: 250px;
+    min-height: 188px;
+  }
+
+  .sl-progress-stage-header--connected {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.sl-progress-stage-header-side {
+  align-items: flex-start;
+}
+
+.sl-progress-stage-bridge-line {
+  gap: 8px;
+}
+
+.sl-progress-stage-bridge-summary {
+  max-width: 100%;
+}
 }
 
 @media (max-width: 640px) {
   .sl-progress-hero-video {
-    border-radius: 14px;
+    border-radius: 16px;
+  }
+
+  .sl-progress-hero::after {
+    border-radius: 16px;
+  }
+
+  .sl-progress-hero-overlay {
+    left: 16px;
+    bottom: 14px;
+  }
+
+  .sl-progress-hero-title {
+    font-size: 0.96rem;
   }
 
   .sl-progress-intro-text {
     font-size: 0.86rem;
   }
 
+  .sl-progress-stage-carousel-shell,
+  .sl-progress-stage {
+    padding: 18px 16px 22px;
+    border-radius: 18px;
+  }
+
   .sl-progress-stage-title {
-    font-size: 1.02rem;
+    font-size: 1rem;
   }
 
   .sl-progress-stage-status-pill {
-    font-size: 0.68rem;
+    font-size: 0.65rem;
     padding: 3px 8px;
   }
 
-  .sl-progress-step-label {
-    display: none; /* keep the rail clean on small screens */
+  .sl-progress-stage-carousel-title {
+    font-size: 0.95rem;
+  }
+
+  .sl-progress-stage-carousel-card {
+    flex-basis: 88%;
+    min-height: 180px;
+    padding: 14px;
+  }
+
+  .sl-progress-stage-carousel-card-title {
+    font-size: 0.94rem;
+  }
+
+  .sl-progress-stage-carousel-card-summary {
+    font-size: 0.84rem;
+  }
+
+  .sl-progress-card,
+  .pp-stage-card {
+    border-radius: 14px;
   }
 
   .sl-progress-card-text,
   .sl-progress-bullet-list,
   .sl-progress-pill,
-  .sl-progress-stage-files {
+  .sl-progress-stage-files,
+  .sl-progress-stage-preview-lock-text {
     font-size: 0.86rem;
   }
+
+  .slp-modal-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sl-progress-stage {
+  margin-top: 8px;
 }
 
-@media (min-width: 1100px) {
-  .sl-progress-stage-image-wrap {
-    width: min(100%, 60%);
-    margin: 18px 0 22px;
-  }
+.sl-progress-stage-bridge-label {
+  font-size: 0.8rem;
 }
 
-@media (min-width: 1200px) {
-  .sl-progress-stage-image-wrap {
-    width: min(100%, 58%);
+.sl-progress-stage-bridge-summary {
+  font-size: 0.84rem;
+}
+}
+
+/* =====================================================================
+   HERO + CAROUSEL COMBINED SHELL
+   ===================================================================== */
+
+.sl-progress-hero-carousel-shell {
+  position: relative;
+  margin-top: 0;
+  overflow: hidden;
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at top left, rgba(27, 41, 84, 0.24) 0, transparent 34%),
+    linear-gradient(180deg, rgba(7, 9, 18, 0.9), rgba(3, 4, 10, 0.98));
+  border: 1px solid rgba(255, 255, 255, 0.055);
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.025);
+}
+
+.sl-progress-hero-carousel-media {
+  position: relative;
+  overflow: hidden;
+  border-radius: 22px 22px 0 0;
+}
+
+.sl-progress-hero-carousel-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(3, 6, 16, 0.08) 0%,
+      rgba(3, 6, 16, 0.22) 52%,
+      rgba(3, 6, 16, 0.62) 100%
+    );
+  pointer-events: none;
+}
+
+.sl-progress-hero-carousel-nav {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sl-progress-carousel-arrow--hero {
+  backdrop-filter: blur(12px);
+  background:
+    radial-gradient(circle at top left, rgba(31, 47, 92, 0.78) 0, rgba(8, 12, 24, 0.92) 74%);
+}
+
+.sl-progress-hero-carousel-bottom {
+  padding: 14px 18px 16px;
+}
+
+.sl-progress-hero-carousel-shell.is-theme-live {
+  background:
+    radial-gradient(circle at top left, rgba(36, 74, 160, 0.26) 0, transparent 34%),
+    linear-gradient(180deg, rgba(7, 10, 22, 0.92), rgba(3, 5, 12, 0.98));
+}
+
+.sl-progress-hero-carousel-shell.is-theme-completed {
+  background:
+    radial-gradient(circle at top left, rgba(36, 104, 74, 0.24) 0, transparent 34%),
+    linear-gradient(180deg, rgba(7, 10, 20, 0.92), rgba(3, 5, 11, 0.98));
+}
+
+.sl-progress-hero-carousel-shell.is-theme-locked {
+  background:
+    radial-gradient(circle at top left, rgba(66, 74, 96, 0.18) 0, transparent 34%),
+    linear-gradient(180deg, rgba(7, 9, 18, 0.92), rgba(3, 4, 10, 0.98));
+}
+
+.sl-progress-hero-carousel-stage-rail {
+  display: grid;
+  grid-template-columns: minmax(0, 0.2fr) minmax(0, 1fr) minmax(0, 0.2fr);
+  gap: 14px;
+  align-items: stretch;
+  padding: 16px 16px 0;
+}
+
+.sl-progress-hero-side-preview {
+  position: relative;
+  min-height: 100%;
+  border: none;
+  border-radius: 18px;
+  overflow: hidden;
+  background: rgba(8, 11, 20, 0.72);
+  cursor: pointer;
+  opacity: 0.78;
+  transform: scale(0.96);
+  transition:
+    transform 0.28s ease,
+    opacity 0.28s ease,
+    filter 0.28s ease,
+    box-shadow 0.28s ease;
+}
+
+.sl-progress-hero-side-preview:hover:not(:disabled) {
+  opacity: 0.94;
+  transform: scale(0.985);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.28);
+}
+
+.sl-progress-hero-side-preview.is-disabled {
+  opacity: 0.22;
+  cursor: default;
+}
+
+.sl-progress-hero-side-preview-media,
+.sl-progress-hero-side-preview-media img,
+.sl-progress-hero-side-preview-media video {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.sl-progress-hero-side-preview-media {
+  position: absolute;
+  inset: 0;
+}
+
+.sl-progress-hero-side-preview-media img,
+.sl-progress-hero-side-preview-media video {
+  object-fit: cover;
+}
+
+.sl-progress-hero-side-preview-fallback {
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(circle at top left, rgba(39, 53, 98, 0.34), transparent 60%),
+    linear-gradient(180deg, rgba(10, 13, 24, 0.96), rgba(4, 6, 12, 0.98));
+}
+
+.sl-progress-hero-side-preview-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(3, 6, 16, 0.24) 0%,
+      rgba(3, 6, 16, 0.52) 58%,
+      rgba(3, 6, 16, 0.82) 100%
+    );
+}
+
+.sl-progress-hero-side-preview-copy {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 14px;
+  z-index: 2;
+  text-align: left;
+}
+
+.sl-progress-hero-side-preview-label {
+  font-size: 0.64rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: rgba(225, 233, 245, 0.68);
+  margin-bottom: 6px;
+}
+
+.sl-progress-hero-side-preview-title {
+  font-size: 0.86rem;
+  line-height: 1.35;
+  font-weight: 600;
+  color: #f5f8ff;
+}
+
+.sl-progress-hero-carousel-media {
+  position: relative;
+  overflow: hidden;
+  border-radius: 22px 22px 0 0;
+  min-width: 0;
+}
+
+.sl-progress-stage.is-theme-live {
+  background:
+    radial-gradient(circle at top left, rgba(28, 59, 134, 0.16) 0, transparent 34%),
+    linear-gradient(180deg, rgba(10, 12, 22, 0.96), rgba(5, 6, 12, 0.985));
+}
+
+.sl-progress-stage.is-theme-completed {
+  background:
+    radial-gradient(circle at top left, rgba(34, 108, 73, 0.14) 0, transparent 34%),
+    linear-gradient(180deg, rgba(10, 12, 22, 0.96), rgba(5, 6, 12, 0.985));
+}
+
+.sl-progress-stage.is-theme-locked {
+  background:
+    radial-gradient(circle at top left, rgba(74, 84, 108, 0.1) 0, transparent 34%),
+    linear-gradient(180deg, rgba(10, 12, 22, 0.96), rgba(5, 6, 12, 0.985));
+}
+
+.sl-progress-stage::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 24px;
+  right: 24px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(74, 222, 128, 0),
+    rgba(74, 222, 128, 0.35),
+    rgba(96, 165, 250, 0.28),
+    rgba(96, 165, 250, 0)
+  );
+  opacity: 0.9;
+}
+
+.sl-progress-stage-header--connected {
+  align-items: flex-start;
+}
+
+.sl-progress-stage-bridge-line {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  min-width: 0;
+}
+
+.sl-progress-stage-bridge-label {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #f3f7ff;
+}
+
+.sl-progress-stage-bridge-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.5);
+  flex: 0 0 auto;
+}
+
+.sl-progress-stage-bridge-summary {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: rgba(220, 229, 242, 0.76);
+  max-width: 760px;
+}
+
+/* =====================================================================
+   RESPONSIVE OVERRIDES FOR HERO-CAROUSEL
+   ===================================================================== */
+
+@media (max-width: 900px) {
+  .sl-progress-roadmap--premium {
+    padding: 15px 16px 16px;
+    border-radius: 18px;
   }
+
+  .sl-progress-roadmap-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .sl-progress-roadmap-side {
+    align-items: flex-start;
+  }
+
+  .sl-progress-roadmap-caption {
+    text-align: left;
+  }
+
+  .sl-progress-hero-carousel-stage-rail {
+  grid-template-columns: 1fr;
+  gap: 10px;
+  padding: 12px 12px 0;
+}
+
+.sl-progress-hero-side-preview {
+  display: none;
+}
+
+.sl-progress-stage-header--connected {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.sl-progress-stage-header-side {
+  align-items: flex-start;
+}
+
+.sl-progress-stage-bridge-summary {
+  max-width: 100%;
+}
+}
+
+@media (max-width: 640px) {
+  .sl-progress-roadmap--premium {
+    padding: 14px;
+    border-radius: 16px;
+    margin-bottom: 14px;
+  }
+
+  .sl-progress-roadmap-header {
+    font-size: 0.72rem;
+  }
+
+  .sl-progress-roadmap-subtitle {
+    font-size: 0.82rem;
+  }
+
+  .sl-progress-roadmap-percent {
+    font-size: 1rem;
+  }
+
+  .sl-progress-roadmap-track {
+    height: 10px;
+  }
+
+  .sl-progress-stage {
+  margin-top: 8px;
+}
+
+.sl-progress-stage-bridge-label {
+  font-size: 0.8rem;
+}
+
+.sl-progress-stage-bridge-summary {
+  font-size: 0.84rem;
+}
 }
