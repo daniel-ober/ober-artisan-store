@@ -1342,17 +1342,17 @@ video.sl-progress-stage-image {
   z-index: 2;
   transform: scale(1);
   transition:
-    opacity 420ms ease-in,
-    transform 1600ms ease-out;
+    opacity 240ms ease-in,
+    transform 700ms ease-out;
 }
 
 .sl-progress-stage-card-base-image--stacked.is-hidden {
   opacity: 0;
   z-index: 1;
-  transform: scale(1.01);
+  transform: scale(1.0015);
   transition:
-    opacity 320ms ease-out,
-    transform 320ms ease-out;
+    opacity 220ms ease-out,
+    transform 220ms ease-out;
 }
 
 .sl-progress-stage-card-smoke-video {
@@ -1412,11 +1412,11 @@ video.sl-progress-stage-image {
 .sl-progress-hero-overlay--center {
   position: absolute;
   inset: 0;
-  z-index: 6;
+  z-index: 7;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 32px 96px 86px;
+  padding: 32px 96px;
   pointer-events: none;
 }
 
@@ -1439,7 +1439,7 @@ video.sl-progress-stage-image {
 }
 
 .sl-progress-hero-title--center {
-font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   font-size: clamp(1.2rem, 1.6vw, 1.38rem);
   letter-spacing: 0.8em;
@@ -1701,8 +1701,26 @@ font-family: 'Montserrat', sans-serif;
   background: rgba(8, 11, 20, 0.72);
 }
 
+.sl-progress-project-overview,
+.sl-progress-roadmap--premium,
+.sl-progress-hero-carousel-shell,
+.sl-progress-stage {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
 .sl-progress-hero-carousel-shell {
-  margin: 0 18px;
+  margin: 0;
+}
+
+.sl-progress-hero-carousel-window,
+.sl-progress-hero-carousel-stage-rail,
+.sl-progress-hero-carousel-center-slot,
+.sl-progress-hero-carousel-media {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .sl-progress-hero-carousel-media .sl-progress-hero-video,
@@ -1736,12 +1754,26 @@ font-family: 'Montserrat', sans-serif;
 }
 
 .sl-progress-stage-card-smoke-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
   object-fit: cover;
   pointer-events: none;
-  mix-blend-mode: screen;
-  transition: opacity 1400ms ease;
   z-index: 3;
-  filter: blur(1.6px) saturate(0.72);
+  mix-blend-mode: screen;
+  filter: blur(1px) saturate(0.82);
+  will-change: opacity;
+  transition: opacity 520ms ease-in-out;
+}
+
+.sl-progress-stage-card-smoke-video.is-visible {
+  opacity: 1;
+}
+
+.sl-progress-stage-card-smoke-video.is-hidden {
+  opacity: 0;
 }
 
 .sl-progress-stage-card-logo-overlay {
@@ -1917,6 +1949,54 @@ font-family: 'Montserrat', sans-serif;
   margin-left: -2px;
 }
 
+.sl-progress-shared-smoke-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: 5;
+  mix-blend-mode: screen;
+  filter: blur(0.45px) saturate(0.92) brightness(0.92);
+  will-change: opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transition: opacity 260ms ease;
+}
+
+.sl-progress-locked-stage-veil {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 6;
+  opacity: 0;
+  transition: opacity 260ms ease;
+  background:
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(4, 6, 12, 0.22) 0%,
+      rgba(3, 5, 10, 0.5) 44%,
+      rgba(2, 3, 8, 0.82) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(2, 4, 10, 0.34) 0%,
+      rgba(2, 4, 10, 0.56) 52%,
+      rgba(1, 2, 6, 0.78) 100%
+    );
+}
+
+.sl-progress-hero-overlay--center {
+  z-index: 7;
+}
+
+.sl-progress-carousel-arrow {
+  z-index: 20;
+}
+
 @media (min-width: 1260px) {
   .sl-progress-stage {
     padding: 28px 30px 34px;
@@ -1933,6 +2013,12 @@ font-family: 'Montserrat', sans-serif;
 
   .sl-progress-stage-carousel-card {
     flex-basis: 300px;
+  }
+
+  .sl-progress-hero-carousel-window,
+  .sl-progress-hero-carousel-stage-rail,
+  .sl-progress-hero-carousel-stage-rail.is-single-panel {
+    padding: 0;
   }
 
   .sl-progress-hero-carousel-stage-rail.is-single-panel
@@ -1957,6 +2043,12 @@ font-family: 'Montserrat', sans-serif;
 
   .pp-stage-card {
     width: 100%;
+  }
+
+  .sl-progress-hero-carousel-window,
+  .sl-progress-hero-carousel-stage-rail,
+  .sl-progress-hero-carousel-stage-rail.is-single-panel {
+    padding: 0;
   }
 }
 
@@ -2022,19 +2114,19 @@ font-family: 'Montserrat', sans-serif;
   }
 
   .sl-progress-hero-carousel-window {
-    padding: 12px 12px 0;
+    padding: 0;
   }
 
   .sl-progress-hero-carousel-stage-rail {
     grid-template-columns: 1fr;
     gap: 10px;
     min-height: 280px;
-    padding: 12px 12px 0;
+    padding: 0;
   }
 
   .sl-progress-hero-carousel-stage-rail.is-single-panel {
     grid-template-columns: 1fr;
-    padding: 12px 12px 0;
+    padding: 0;
   }
 
   .sl-progress-hero-carousel-side-slot,
@@ -2055,7 +2147,7 @@ font-family: 'Montserrat', sans-serif;
   }
 
   .sl-progress-hero-overlay--center {
-    padding: 24px 72px 84px;
+    padding: 24px 72px;
   }
 
   .sl-progress-hero-title-stack {
@@ -2074,7 +2166,6 @@ font-family: 'Montserrat', sans-serif;
     right: 16px;
     bottom: 14px;
   }
-
 
   .sl-progress-carousel-arrow {
     width: 38px;
@@ -2187,10 +2278,19 @@ font-family: 'Montserrat', sans-serif;
     max-width: 28%;
   }
 
-  .sl-progress-hero-overlay--center {
-    padding: 18px 56px 78px;
+  .sl-progress-hero-carousel-window {
+    padding: 0;
   }
 
+  .sl-progress-hero-carousel-stage-rail,
+  .sl-progress-hero-carousel-stage-rail.is-single-panel {
+    padding: 0;
+  }
+
+  .sl-progress-hero-overlay--center {
+    padding: 18px 56px;
+  }
+  
   .sl-progress-hero-title-stack {
     min-height: 3.8em;
     max-width: 100%;
@@ -2207,7 +2307,7 @@ font-family: 'Montserrat', sans-serif;
     right: 12px;
     bottom: 12px;
   }
-  
+
   .sl-progress-carousel-arrow {
     width: 34px;
     height: 34px;
