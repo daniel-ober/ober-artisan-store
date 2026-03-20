@@ -6,26 +6,24 @@ import {
   updateDoc,
   serverTimestamp,
 } from 'firebase/firestore';
-import { ref as storageRef, getDownloadURL, listAll } from 'firebase/storage';
+import { ref as storageRef, getDownloadURL } from 'firebase/storage';
 import { db, storage } from '../../firebaseConfig';
 import { calculateProjectProgress } from '../../utils/calculateProjectProgress';
 import { STAGES, STAGE_TEMPLATES } from '../../utils/workflowDefinitions';
 import { PROJECT_STAGE_EDU } from '../../utils/projectStageEducation';
 import './ProjectProgress.css';
 
-const FALLBACK_VIDEO = '/craft_in_motion/craftinmotion1080p.mp4';
-
-const STAGE_MEDIA_BASENAMES = {
-  discoveryDesign: 'stage-discovery-design',
-  commitmentPortal: 'stage-commitment-portal',
-  woodVisionLockIn: 'stage-wood-vision-lock-in',
-  rawShellCreation: 'stage-build-raw-shell-creation',
-  shellTrueingTorchTune: 'stage-build-shell-trueing-torch-tune',
-  exteriorArtFinish: 'stage-build-exterior-art-finish',
-  edgesSnareBeds: 'stage-build-edges-snare-beds',
-  hardwareAssembly: 'stage-build-hardware-assembly',
-  legacyTuningMedia: 'stage-legacy-tuning-media',
-  finalQAPackagingDelivery: 'stage-final-qa-packaging-delivery',
+const STAGE_MEDIA = {
+  discoveryDesign: { stageNumber: 1 },
+  commitmentPortal: { stageNumber: 2 },
+  woodVisionLockIn: { stageNumber: 3 },
+  rawShellCreation: { stageNumber: 4 },
+  shellTrueingTorchTune: { stageNumber: 5 },
+  exteriorArtFinish: { stageNumber: 6 },
+  edgesSnareBeds: { stageNumber: 7 },
+  hardwareAssembly: { stageNumber: 8 },
+  legacyTuningMedia: { stageNumber: 9 },
+  finalQAPackagingDelivery: { stageNumber: 10 },
 };
 
 const STAGE_MEDIA_STATE = {
@@ -34,10 +32,18 @@ const STAGE_MEDIA_STATE = {
   UNLOCKED: 'unlocked',
 };
 
+const GLOBAL_STAGE_ASSETS = {
+  smokeOverlay: 'smoke-overlay.mp4',
+  logoOverlay: 'logo-overlay.png',
+  completedBadge: 'completed-badge.png',
+};
+
+const STAGE_MEDIA_PROMISE_CACHE = {};
+
 const STEPS = STAGES.map((s) => {
   const edu = PROJECT_STAGE_EDU[s.stageKey] || {};
-
   const time = edu.time || {};
+
   const estHours =
     typeof time.min === 'number' && typeof time.max === 'number'
       ? time.min === time.max
@@ -50,7 +56,6 @@ const STEPS = STAGES.map((s) => {
     label: s.adminMainTitle?.replace(/^\d+\.\s*/, '') || s.adminMainTitle,
     adminMainTitle: s.adminMainTitle,
     adminLeftShort: s.adminLeftShort,
-
     what: edu.what || '',
     why: edu.why || '',
     techniques: Array.isArray(edu.techniques) ? edu.techniques : [],
@@ -58,7 +63,6 @@ const STEPS = STAGES.map((s) => {
     estHours,
     avgDays: edu.avgDays || '—',
     mantra: edu.value || '',
-
     storageKeys: [s.stageKey],
   };
 });
@@ -127,42 +131,20 @@ function isChecklistItemComplete(item) {
     ? item.checkpointStates
     : null;
 
-  if (states && states.length > 0) {
-    return states.every(Boolean);
-  }
-
+  if (states && states.length > 0) return states.every(Boolean);
   return !!item.completed;
 }
 
 function isChecklistItemTouched(item) {
   if (!item) return false;
-
   if (item.completed) return true;
 
   const states = Array.isArray(item.checkpointStates)
     ? item.checkpointStates
     : null;
 
-  if (states && states.length > 0) {
-    return states.some(Boolean);
-  }
-
+  if (states && states.length > 0) return states.some(Boolean);
   return (item.totalSeconds ?? 0) > 0;
-}
-
-function getUnlockMaxStageIndex(project) {
-  const MIN_UNLOCKED = 2;
-
-  if (!project) return MIN_UNLOCKED;
-
-  for (let i = 0; i < STEPS.length; i += 1) {
-    const status = getStepStatus(project, STEPS[i]).status;
-    if (status !== 'Completed') {
-      return Math.max(MIN_UNLOCKED, i);
-    }
-  }
-
-  return STEPS.length - 1;
 }
 
 function canonicalKeyForStage(stageKey) {
@@ -194,6 +176,39 @@ function getExistingPhaseKey(project, canonicalKey) {
   }
 
   return canonicalKey;
+}
+
+const STAGE_IMAGE_PRELOAD_CACHE = {};
+
+function preloadImage(url) {
+  if (!url) return Promise.resolve('');
+
+  if (STAGE_IMAGE_PRELOAD_CACHE[url]) {
+    return STAGE_IMAGE_PRELOAD_CACHE[url];
+  }
+
+  STAGE_IMAGE_PRELOAD_CACHE[url] = new Promise((resolve, reject) => {
+    const img = new Image();
+    img.decoding = 'sync';
+    img.loading = 'eager';
+
+    img.onload = async () => {
+      try {
+        if (typeof img.decode === 'function') {
+          await img.decode();
+        }
+      } catch (err) {
+        // decode can fail harmlessly on cached/cross-origin images in some browsers
+      }
+
+      resolve(url);
+    };
+
+    img.onerror = reject;
+    img.src = url;
+  });
+
+  return STAGE_IMAGE_PRELOAD_CACHE[url];
 }
 
 const getWeightedProgressPct = (data) => {
@@ -289,14 +304,6 @@ function fmtDate(v) {
   return `${mm}/${dd}/${yyyy}`;
 }
 
-function slugify(s = '') {
-  return String(s)
-    .toLowerCase()
-    .replace(/&/g, 'and')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/(^-|-$)/g, '');
-}
-
 function normalizeAssetName(value = '') {
   return String(value)
     .replace(/[\u200B-\u200D\uFEFF]/g, '')
@@ -308,6 +315,7 @@ function parseHourRangeText(estHoursText = '') {
   const source = String(estHoursText || '')
     .toLowerCase()
     .trim();
+
   if (!source || source === '—') return { min: 0, max: 0 };
 
   const matches = source.match(/\d+(\.\d+)?/g);
@@ -315,7 +323,6 @@ function parseHourRangeText(estHoursText = '') {
 
   const nums = matches.map(Number).filter((n) => Number.isFinite(n));
   if (!nums.length) return { min: 0, max: 0 };
-
   if (nums.length === 1) return { min: nums[0], max: nums[0] };
 
   return {
@@ -434,64 +441,96 @@ function getSelectedStageMediaState(selectedIndex, currentIndex) {
   return STAGE_MEDIA_STATE.ACTIVE;
 }
 
-function getStageAssetConfig(stageKey, mediaState) {
-  const baseName = STAGE_MEDIA_BASENAMES[stageKey];
-  if (!baseName) return null;
+function getStageImageFilename(stageKey, variant = 'archived') {
+  const stage = STAGE_MEDIA[stageKey];
+  if (!stage?.stageNumber) return null;
 
-  if (mediaState === STAGE_MEDIA_STATE.ACTIVE) {
-    return {
-      type: 'video',
-      folderPath: 'project-stage-media/active',
-      fileName: `${baseName}-active.mp4`,
-    };
+  if (variant === 'current') {
+    return `stage-${stage.stageNumber}-current.webp`;
   }
 
-  if (mediaState === STAGE_MEDIA_STATE.LOCKED) {
-    return {
-      type: 'video',
-      folderPath: 'project-stage-media/locked',
-      fileName: `${baseName}-locked.mp4`,
-    };
+  return `stage-${stage.stageNumber}-archived.webp`;
+}
+
+function getSharedAssetFilename(assetKey) {
+  return GLOBAL_STAGE_ASSETS[assetKey] || null;
+}
+
+async function fetchStorageAssetUrl(folderPath, filename) {
+  if (!folderPath || !filename) return null;
+
+  try {
+    const fileRef = storageRef(storage, `${folderPath}/${filename}`);
+    return await getDownloadURL(fileRef);
+  } catch (err) {
+    console.warn(`Missing storage asset: ${folderPath}/${filename}`, err);
+    return null;
   }
-
-  return {
-    type: 'image',
-    folderPath: 'project-stage-media/unlocked',
-    fileName: `${baseName}-unlocked.png`,
-  };
 }
 
-async function fetchStorageAssetUrl(folderPath, expectedFilename) {
-  const folderRef = storageRef(storage, folderPath);
-  const folderList = await listAll(folderRef);
-  const normalizedExpected = normalizeAssetName(expectedFilename);
-
-  const matchedItem = folderList.items.find(
-    (item) => normalizeAssetName(item.name) === normalizedExpected
-  );
-
-  if (!matchedItem) return null;
-
-  return getDownloadURL(matchedItem);
-}
-
-async function resolveStageMediaUrl(stageKey, mediaState) {
+async function resolveStageMediaBundle(stageKey) {
   if (!stageKey) return null;
 
-  const assetConfig = getStageAssetConfig(stageKey, mediaState);
-  if (!assetConfig) return null;
+  const cacheKey = getStageMediaCacheKey(stageKey);
+  if (STAGE_MEDIA_PROMISE_CACHE[cacheKey]) {
+    return STAGE_MEDIA_PROMISE_CACHE[cacheKey];
+  }
 
-  const url = await fetchStorageAssetUrl(
-    assetConfig.folderPath,
-    assetConfig.fileName
-  );
+  STAGE_MEDIA_PROMISE_CACHE[cacheKey] = (async () => {
+    const archivedImageName = getStageImageFilename(stageKey, 'archived');
+    const currentImageName = getStageImageFilename(stageKey, 'current');
+    const smokeVideoName = getSharedAssetFilename('smokeOverlay');
+    const logoOverlayName = getSharedAssetFilename('logoOverlay');
+    const completedBadgeName = getSharedAssetFilename('completedBadge');
 
-  if (!url) return null;
+    const folderPath = 'project-stage-media';
 
-  return {
-    type: assetConfig.type,
-    url,
-  };
+    const [
+      archivedImageUrl,
+      currentImageUrl,
+      smokeVideoUrl,
+      logoOverlayUrl,
+      completedBadgeUrl,
+    ] = await Promise.all([
+      archivedImageName
+        ? fetchStorageAssetUrl(folderPath, archivedImageName)
+        : Promise.resolve(null),
+      currentImageName
+        ? fetchStorageAssetUrl(folderPath, currentImageName)
+        : Promise.resolve(null),
+      smokeVideoName
+        ? fetchStorageAssetUrl(folderPath, smokeVideoName)
+        : Promise.resolve(null),
+      logoOverlayName
+        ? fetchStorageAssetUrl(folderPath, logoOverlayName)
+        : Promise.resolve(null),
+      completedBadgeName
+        ? fetchStorageAssetUrl(folderPath, completedBadgeName)
+        : Promise.resolve(null),
+    ]);
+
+    console.log('[STAGE_MEDIA_BUNDLE]', stageKey, {
+      archivedImageUrl,
+      currentImageUrl,
+      smokeVideoUrl,
+      logoOverlayUrl,
+      completedBadgeUrl,
+    });
+
+    return {
+      archivedImageUrl: archivedImageUrl || '',
+      currentImageUrl: currentImageUrl || '',
+      smokeVideoUrl: smokeVideoUrl || '',
+      logoOverlayUrl: logoOverlayUrl || '',
+      completedBadgeUrl: completedBadgeUrl || '',
+    };
+  })();
+
+  return STAGE_MEDIA_PROMISE_CACHE[cacheKey];
+}
+
+function getStageMediaCacheKey(stageKey) {
+  return `bundle:${stageKey}`;
 }
 
 function getStageSummary(step) {
@@ -500,14 +539,7 @@ function getStageSummary(step) {
 
   const firstSentence = source.split('. ')[0]?.trim();
   if (!firstSentence) return source;
-
   return firstSentence.endsWith('.') ? firstSentence : `${firstSentence}.`;
-}
-
-function getStageViewerStateLabel(selectedIndex, currentIndex) {
-  if (selectedIndex < currentIndex) return 'Completed milestone';
-  if (selectedIndex > currentIndex) return 'Preview only';
-  return 'Currently in progress';
 }
 
 function getStageViewerEyebrow(selectedIndex, currentIndex) {
@@ -591,6 +623,7 @@ function getGlobalActiveSubStep(project) {
       ? [...phase.checklist]
       : [];
     const stepsArr = tpl.steps || [];
+
     if (!stepsArr.length) continue;
 
     const stageComplete = stepsArr.every((_, idx) => {
@@ -613,7 +646,10 @@ function getGlobalActiveSubStep(project) {
       const total = states.length;
       const done = states.filter(Boolean).length;
       const isComplete = total > 0 ? done === total : !!item.completed;
-      if (!isComplete) return { stageKey, stepIdx: i };
+
+      if (!isComplete) {
+        return { stageKey, stepIdx: i };
+      }
     }
 
     return { stageKey, stepIdx: 0 };
@@ -738,6 +774,21 @@ function getTargetWindow(project) {
   return projected.early || projected.late || null;
 }
 
+function getUnlockMaxStageIndex(project) {
+  const MIN_UNLOCKED = 2;
+
+  if (!project) return MIN_UNLOCKED;
+
+  for (let i = 0; i < STEPS.length; i += 1) {
+    const status = getStepStatus(project, STEPS[i]).status;
+    if (status !== 'Completed') {
+      return Math.max(MIN_UNLOCKED, i);
+    }
+  }
+
+  return STEPS.length - 1;
+}
+
 const isItemTouched = (item = {}) => {
   const done = !!item.completed;
   const hasCheckpoints =
@@ -777,7 +828,6 @@ const StageCheckpointsPanel = ({
 }) => {
   const [openStepId, setOpenStepId] = useState(null);
   const userToggledRef = useRef(false);
-
   const [durationModalOpen, setDurationModalOpen] = useState(false);
   const [pending, setPending] = useState(null);
   const [hours, setHours] = useState(0);
@@ -785,8 +835,8 @@ const StageCheckpointsPanel = ({
   const [saving, setSaving] = useState(false);
 
   const template = STAGE_TEMPLATES?.[stageKey] || null;
-
   const canonical = useMemo(() => canonicalKeyForStage(stageKey), [stageKey]);
+
   const phaseKey = useMemo(
     () => getExistingPhaseKey(project, canonical),
     [project, canonical]
@@ -801,13 +851,11 @@ const StageCheckpointsPanel = ({
 
   const normalizedSteps = useMemo(() => {
     const tplSteps = template?.steps || [];
-
     const overallPct = getOverallProgress(project);
     const globalPtr = overallPct < 100 ? getGlobalActiveSubStep(project) : null;
 
     return tplSteps.map((tplStep, idx) => {
       const phaseItem = phaseChecklist[idx];
-
       const tplStepId =
         tplStep?.id || tplStep?.key || `${stageKey}_step_${idx}`;
       const tplStepLabel =
@@ -1038,6 +1086,7 @@ const StageCheckpointsPanel = ({
       STAGE_TEMPLATES?.[stageKey]?.steps?.[stepIdx]?.checkpoints?.length ?? 0;
 
     const nextStates = Array.from({ length: cpCount }, () => true);
+
     checklist[stepIdx] = {
       ...(checklist[stepIdx] || {}),
       checkpointStates: nextStates,
@@ -1483,18 +1532,28 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
   const [loading, setLoading] = useState(!initialProject);
   const [activeKey, setActiveKey] = useState(STEPS[0].key);
 
-  const [heroVideoUrl, setHeroVideoUrl] = useState(FALLBACK_VIDEO);
-  const [heroVideoCache, setHeroVideoCache] = useState({});
-
-  const [selectedStageMedia, setSelectedStageMedia] = useState({
-    type: null,
-    url: '',
-  });
+  const [displayedStageKey, setDisplayedStageKey] = useState(STEPS[0].key);
   const [selectedStageMediaCache, setSelectedStageMediaCache] = useState({});
-  const [adjacentStageMedia, setAdjacentStageMedia] = useState({
-    prev: { type: null, url: '' },
-    next: { type: null, url: '' },
-  });
+
+  const [carouselAnimating, setCarouselAnimating] = useState(false);
+  const [dragOffsetX, setDragOffsetX] = useState(0);
+
+  const [allStageMediaReady, setAllStageMediaReady] = useState(false);
+  const [loadedAssetCount, setLoadedAssetCount] = useState(0);
+  const [totalAssetCount, setTotalAssetCount] = useState(STEPS.length * 2);
+
+  const transitionLockRef = useRef(false);
+  const dragStartXRef = useRef(0);
+  const dragDeltaXRef = useRef(0);
+  const isDraggingRef = useRef(false);
+
+  const [displayTitleText, setDisplayTitleText] = useState(
+    (STEPS[0]?.label || '').toUpperCase()
+  );
+
+  const [incomingTitleText, setIncomingTitleText] = useState('');
+  const [titleTransitioning, setTitleTransitioning] = useState(false);
+
   useEffect(() => {
     if (!initialProject) return;
 
@@ -1516,6 +1575,83 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
       return prev;
     });
   }, [initialProject]);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const preloadAllStageMedia = async () => {
+      try {
+        setAllStageMediaReady(false);
+        setLoadedAssetCount(0);
+        setTotalAssetCount(STEPS.length * 2); // phase 1 + phase 2
+
+        const nextCache = {};
+
+        // Phase 1: resolve bundle URLs stage-by-stage
+        const bundles = [];
+        for (let i = 0; i < STEPS.length; i += 1) {
+          const step = STEPS[i];
+          const bundle = await resolveStageMediaBundle(step.key);
+          bundles.push(bundle);
+          nextCache[getStageMediaCacheKey(step.key)] = bundle || null;
+
+          if (!cancelled) {
+            setSelectedStageMediaCache((prev) => ({
+              ...prev,
+              [getStageMediaCacheKey(step.key)]: bundle || null,
+            }));
+            setLoadedAssetCount(i + 1);
+          }
+        }
+
+        if (cancelled) return;
+
+        // Phase 2: preload only the stage images needed for smooth carousel use
+        const imageUrls = [];
+        bundles.forEach((bundle) => {
+          [bundle?.archivedImageUrl, bundle?.currentImageUrl]
+            .filter(Boolean)
+            .forEach((url) => imageUrls.push(url));
+        });
+
+        const uniqueImageUrls = Array.from(new Set(imageUrls));
+
+        for (let i = 0; i < uniqueImageUrls.length; i += 1) {
+          try {
+            await preloadImage(uniqueImageUrls[i]);
+          } catch (err) {
+            console.warn('Image preload failed:', uniqueImageUrls[i], err);
+          } finally {
+            if (!cancelled) {
+              const phaseOneCount = STEPS.length;
+              const phaseTwoProgress = Math.round(
+                ((i + 1) / Math.max(uniqueImageUrls.length, 1)) * STEPS.length
+              );
+
+              setLoadedAssetCount(phaseOneCount + phaseTwoProgress);
+            }
+          }
+        }
+
+        if (!cancelled) {
+          setSelectedStageMediaCache(nextCache);
+          setLoadedAssetCount(STEPS.length * 2);
+          setAllStageMediaReady(true);
+        }
+      } catch (err) {
+        console.error('Failed preloading all stage media bundles:', err);
+        if (!cancelled) {
+          setAllStageMediaReady(true);
+        }
+      }
+    };
+
+    preloadAllStageMedia();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   useEffect(() => {
     const ref = getProjectDocRef(initialProject);
@@ -1557,27 +1693,44 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
     [project, overallPct]
   );
 
-  const currentStageKey = useMemo(
-    () => (STEPS[currentStepIndex] || STEPS[0]).key,
-    [currentStepIndex]
-  );
-
-  const unlockedUntilIndex = useMemo(
-    () => getUnlockMaxStageIndex(project),
-    [project]
-  );
-
-  const { stageLabel: currentStageLabel, stepLabel: currentStepLabel } =
-    useMemo(() => getCurrentStageAndStepLabels(project), [project]);
-
   useEffect(() => {
     if (!project?.id) return;
     const def = STEPS[currentStepIndex] || STEPS[0];
     setActiveKey(def.key);
-  }, [project?.id, currentStepIndex]);
+
+    if (!transitionLockRef.current) {
+      setDisplayedStageKey(def.key);
+    }
+  }, [project, currentStepIndex]);
+
+  const { stageLabel: currentStageLabel, stepLabel: currentStepLabel } =
+    useMemo(() => getCurrentStageAndStepLabels(project), [project]);
 
   const activeStep = STEPS.find((s) => s.key === activeKey) || STEPS[0];
   const activeIndex = STEPS.findIndex((s) => s.key === activeKey);
+
+  useEffect(() => {
+    const nextTitle = (activeStep?.label || '').toUpperCase();
+
+    if (!nextTitle) return;
+    if (nextTitle === displayTitleText) return;
+
+    setIncomingTitleText(nextTitle);
+    setTitleTransitioning(true);
+
+    const swapTimer = window.setTimeout(() => {
+      setDisplayTitleText(nextTitle);
+      setIncomingTitleText('');
+      setTitleTransitioning(false);
+    }, 900);
+
+    return () => window.clearTimeout(swapTimer);
+  }, [activeStep?.label, displayTitleText]);
+
+  const displayedStageIndex = Math.max(
+    0,
+    STEPS.findIndex((s) => s.key === displayedStageKey)
+  );
 
   const prevStep = activeIndex > 0 ? STEPS[activeIndex - 1] : null;
   const nextStep =
@@ -1587,213 +1740,6 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
     activeIndex,
     currentStepIndex
   );
-
-  useEffect(() => {
-    let cancelled = false;
-
-    const loadHeroVideo = async () => {
-      const stageKey = activeStep?.key;
-
-      if (!stageKey) {
-        setHeroVideoUrl(FALLBACK_VIDEO);
-        return;
-      }
-
-      if (heroVideoCache[stageKey]) {
-        setHeroVideoUrl(heroVideoCache[stageKey]);
-        return;
-      }
-
-      const assetConfig = getStageAssetConfig(
-        stageKey,
-        getSelectedStageMediaState(activeIndex, currentStepIndex)
-      );
-
-      if (!assetConfig) {
-        setHeroVideoUrl(FALLBACK_VIDEO);
-        return;
-      }
-
-      try {
-        const url = await fetchStorageAssetUrl(
-          assetConfig.folderPath,
-          assetConfig.fileName
-        );
-
-        if (cancelled) return;
-
-        if (!url) {
-          console.error(
-            `No hero media found for ${stageKey}. Expected: ${assetConfig.fileName}`
-          );
-          setHeroVideoUrl(FALLBACK_VIDEO);
-          return;
-        }
-
-        setHeroVideoCache((prev) => ({
-          ...prev,
-          [stageKey]: url,
-        }));
-        setHeroVideoUrl(url);
-      } catch (err) {
-        console.error(`Failed loading hero media for ${stageKey}:`, err);
-        if (!cancelled) setHeroVideoUrl(FALLBACK_VIDEO);
-      }
-    };
-
-    loadHeroVideo();
-
-    return () => {
-      cancelled = true;
-    };
-  }, [activeStep, activeIndex, currentStepIndex, heroVideoCache]);
-
-  useEffect(() => {
-    let cancelled = false;
-
-    const loadSelectedStageMedia = async () => {
-      const selectedStageKey = activeStep?.key;
-
-      if (!selectedStageKey) {
-        setSelectedStageMedia({ type: null, url: '' });
-        return;
-      }
-
-      const mediaState = getSelectedStageMediaState(
-        activeIndex,
-        currentStepIndex
-      );
-
-      const cacheKey = `${mediaState}:${selectedStageKey}`;
-
-      if (selectedStageMediaCache[cacheKey]) {
-        setSelectedStageMedia({
-          type: mediaState === STAGE_MEDIA_STATE.UNLOCKED ? 'image' : 'video',
-          url: selectedStageMediaCache[cacheKey],
-        });
-        return;
-      }
-
-      const assetConfig = getStageAssetConfig(selectedStageKey, mediaState);
-
-      if (!assetConfig) {
-        setSelectedStageMedia({ type: null, url: '' });
-        return;
-      }
-
-      try {
-        const url = await fetchStorageAssetUrl(
-          assetConfig.folderPath,
-          assetConfig.fileName
-        );
-
-        if (cancelled) return;
-
-        if (!url) {
-          console.error(
-            `No ${mediaState} asset found for ${selectedStageKey}. Expected: ${assetConfig.fileName}`
-          );
-          setSelectedStageMedia({ type: null, url: '' });
-          return;
-        }
-
-        setSelectedStageMediaCache((prev) => ({
-          ...prev,
-          [cacheKey]: url,
-        }));
-
-        setSelectedStageMedia({
-          type: assetConfig.type,
-          url,
-        });
-      } catch (err) {
-        console.error(
-          `Failed loading ${mediaState} media for ${selectedStageKey}:`,
-          err
-        );
-        if (!cancelled) {
-          setSelectedStageMedia({ type: null, url: '' });
-        }
-      }
-    };
-
-    loadSelectedStageMedia();
-
-    return () => {
-      cancelled = true;
-    };
-  }, [activeStep, activeIndex, currentStepIndex, selectedStageMediaCache]);
-
-  useEffect(() => {
-    let cancelled = false;
-
-    const loadAdjacentMedia = async () => {
-      try {
-        const prevIndex = activeIndex - 1;
-        const nextIndex = activeIndex + 1;
-
-        const loadOne = async (index) => {
-          if (index < 0 || index >= STEPS.length) {
-            return { type: null, url: '' };
-          }
-
-          const step = STEPS[index];
-          const mediaState = getSelectedStageMediaState(
-            index,
-            currentStepIndex
-          );
-          const cacheKey = `${mediaState}:${step.key}:adjacent`;
-
-          if (selectedStageMediaCache[cacheKey]) {
-            return {
-              type:
-                mediaState === STAGE_MEDIA_STATE.UNLOCKED ? 'image' : 'video',
-              url: selectedStageMediaCache[cacheKey],
-            };
-          }
-
-          const resolved = await resolveStageMediaUrl(step.key, mediaState);
-
-          if (!resolved?.url) {
-            return { type: null, url: '' };
-          }
-
-          setSelectedStageMediaCache((prev) => ({
-            ...prev,
-            [cacheKey]: resolved.url,
-          }));
-
-          return resolved;
-        };
-
-        const [prevMedia, nextMedia] = await Promise.all([
-          loadOne(prevIndex),
-          loadOne(nextIndex),
-        ]);
-
-        if (cancelled) return;
-
-        setAdjacentStageMedia({
-          prev: prevMedia,
-          next: nextMedia,
-        });
-      } catch (err) {
-        console.error('Failed loading adjacent stage media:', err);
-        if (!cancelled) {
-          setAdjacentStageMedia({
-            prev: { type: null, url: '' },
-            next: { type: null, url: '' },
-          });
-        }
-      }
-    };
-
-    loadAdjacentMedia();
-
-    return () => {
-      cancelled = true;
-    };
-  }, [activeIndex, currentStepIndex, selectedStageMediaCache]);
 
   const activeStatus = useMemo(() => {
     if (!project || !activeStep) return 'not_started';
@@ -1805,9 +1751,7 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
     if (computed === 'completed') return 'completed';
 
     const activePtr = getGlobalActiveSubStep(project);
-    if (activePtr?.stageKey === activeStep.key) {
-      return 'in_progress';
-    }
+    if (activePtr?.stageKey === activeStep.key) return 'in_progress';
 
     return computed;
   }, [project, activeStep]);
@@ -1819,6 +1763,7 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
 
   const isSelectedStageLocked = activeIndex > currentStepIndex;
   const showEducationAndCheckpoints = activeIndex <= currentStepIndex;
+
   const selectedStageThemeClass =
     activeStatus === 'completed'
       ? 'is-theme-completed'
@@ -1827,25 +1772,171 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
         : isSelectedStageLocked
           ? 'is-theme-locked'
           : 'is-theme-default';
+
   const canGoPrev = activeIndex > 0;
   const canGoNext = activeIndex < STEPS.length - 1;
 
+  const preloadStageMedia = async (stageIndex) => {
+    if (stageIndex < 0 || stageIndex >= STEPS.length) return null;
+
+    const step = STEPS[stageIndex];
+    if (!step) return null;
+
+    const cacheKey = getStageMediaCacheKey(step.key);
+
+    if (selectedStageMediaCache[cacheKey]) {
+      return selectedStageMediaCache[cacheKey];
+    }
+
+    const resolved = await resolveStageMediaBundle(step.key);
+
+    if (resolved) {
+      setSelectedStageMediaCache((prev) => {
+        if (prev[cacheKey]) return prev;
+        return {
+          ...prev,
+          [cacheKey]: resolved,
+        };
+      });
+    }
+
+    return resolved;
+  };
+
+  const getStageMediaForIndex = (stageIndex) => {
+    if (stageIndex < 0 || stageIndex >= STEPS.length) {
+      return null;
+    }
+
+    const step = STEPS[stageIndex];
+    const mediaState = getSelectedStageMediaState(stageIndex, currentStepIndex);
+    const cacheKey = getStageMediaCacheKey(step.key);
+    const bundle = selectedStageMediaCache[cacheKey];
+
+    if (!bundle) return null;
+
+    const isArchived = mediaState === STAGE_MEDIA_STATE.UNLOCKED;
+    const isActive = mediaState === STAGE_MEDIA_STATE.ACTIVE;
+    const isLocked = mediaState === STAGE_MEDIA_STATE.LOCKED;
+
+    let smokeOpacity = 0.13;
+
+    if (isArchived) smokeOpacity = 0.06;
+    if (isLocked) smokeOpacity = 0.16;
+
+    return {
+      stageKey: step.key,
+      stageLabel: step.label,
+      mediaState,
+      baseImageUrl: isActive
+        ? bundle.currentImageUrl || bundle.archivedImageUrl || ''
+        : bundle.archivedImageUrl || bundle.currentImageUrl || '',
+      smokeVideoUrl: bundle.smokeVideoUrl || '',
+      logoOverlayUrl: bundle.logoOverlayUrl || '',
+      completedBadgeUrl: isArchived ? bundle.completedBadgeUrl || '' : '',
+      smokeOpacity,
+      logoOpacity: isArchived ? 0.34 : 0.9,
+      showCompletedBadge: isArchived,
+    };
+  };
+
+  const allRenderableStageLayers = useMemo(() => {
+    return STEPS.map((step, index) => {
+      const media = getStageMediaForIndex(index);
+
+      return {
+        stageKey: step.key,
+        baseImageUrl: media?.baseImageUrl || '',
+        isVisible: displayedStageKey === step.key,
+        label: step.label,
+      };
+    }).filter((layer) => !!layer.baseImageUrl);
+  }, [displayedStageKey, selectedStageMediaCache, currentStepIndex]);
+
+  const navigateToStageIndex = (targetIndex) => {
+    if (transitionLockRef.current) return;
+    if (targetIndex < 0 || targetIndex >= STEPS.length) return;
+    if (targetIndex === activeIndex) return;
+
+    const targetStep = STEPS[targetIndex];
+    if (!targetStep) return;
+
+    const targetMedia = getStageMediaForIndex(targetIndex);
+    if (!targetMedia?.baseImageUrl) return;
+
+    transitionLockRef.current = true;
+    setCarouselAnimating(true);
+
+    setActiveKey(targetStep.key);
+    setDisplayedStageKey(targetStep.key);
+
+    window.setTimeout(() => {
+      setCarouselAnimating(false);
+      transitionLockRef.current = false;
+    }, 1100);
+  };
+
   const goPrevStage = () => {
     if (!canGoPrev) return;
-    const prev = STEPS[activeIndex - 1];
-    if (prev) setActiveKey(prev.key);
+    navigateToStageIndex(activeIndex - 1);
   };
 
   const goNextStage = () => {
     if (!canGoNext) return;
-    const next = STEPS[activeIndex + 1];
-    if (next) setActiveKey(next.key);
+    navigateToStageIndex(activeIndex + 1);
+  };
+
+  const beginDrag = (clientX) => {
+    if (carouselAnimating) return;
+    isDraggingRef.current = true;
+    dragStartXRef.current = clientX;
+    dragDeltaXRef.current = 0;
+  };
+
+  const updateDrag = (clientX) => {
+    if (!isDraggingRef.current || carouselAnimating) return;
+
+    const delta = clientX - dragStartXRef.current;
+    dragDeltaXRef.current = delta;
+
+    const clamped = Math.max(-120, Math.min(120, delta));
+    setDragOffsetX(clamped);
+  };
+
+  const endDrag = () => {
+    if (!isDraggingRef.current || carouselAnimating) return;
+
+    const delta = dragDeltaXRef.current;
+    const threshold = 70;
+
+    isDraggingRef.current = false;
+    setDragOffsetX(0);
+
+    if (delta <= -threshold && canGoNext) {
+      goNextStage();
+      return;
+    }
+
+    if (delta >= threshold && canGoPrev) {
+      goPrevStage();
+      return;
+    }
+
+    dragDeltaXRef.current = 0;
   };
 
   if (loading && !project) {
     return (
-      <div className="sl-progress sl-progress--loading">
-        <p>Loading project progress…</p>
+      <div className="sl-progress sl-progress--loading-screen">
+        <div className="sl-progress-loading-shell">
+          <div className="sl-progress-loading-spinner" />
+          <div className="sl-progress-loading-title">
+            Loading project stage data...
+          </div>
+          <div className="sl-progress-loading-text">
+            Please wait while we prepare your stage timeline and media.
+          </div>
+        </div>
       </div>
     );
   }
@@ -1854,6 +1945,39 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
     return (
       <div className="sl-progress sl-progress--empty">
         <p>Project not found.</p>
+      </div>
+    );
+  }
+
+  if (!allStageMediaReady) {
+    return (
+      <div className="sl-progress sl-progress--loading-screen">
+        <div className="sl-progress-loading-shell">
+          <div className="sl-progress-loading-spinner" />
+          <div className="sl-progress-loading-title">
+            Loading project stage data...
+          </div>
+          <div className="sl-progress-loading-text">
+            Please wait while we prepare your stage timeline and media.
+          </div>
+          <div className="sl-progress-loading-meta">
+            {loadedAssetCount < STEPS.length
+              ? `Fetching stage media references... ${loadedAssetCount}/${STEPS.length}`
+              : loadedAssetCount < Math.max(totalAssetCount, 1)
+                ? 'Preloading stage imagery...'
+                : 'Finalizing experience...'}
+          </div>
+
+          <div className="sl-progress-loading-percent">
+            {Math.min(
+              100,
+              Math.round(
+                (loadedAssetCount / Math.max(totalAssetCount, 1)) * 100
+              )
+            )}
+            %
+          </div>
+        </div>
       </div>
     );
   }
@@ -1935,162 +2059,118 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
       <section
         className={[
           'sl-progress-hero-carousel-shell',
+          'is-unified-stage-shell',
           selectedStageThemeClass,
-        ].join(' ')}
+        ]
+          .filter(Boolean)
+          .join(' ')}
       >
-        <div className="sl-progress-hero-carousel-stage-rail">
-          <button
-            type="button"
+        <div
+          className="sl-progress-hero-carousel-window"
+          onMouseDown={(e) => beginDrag(e.clientX)}
+          onMouseMove={(e) => updateDrag(e.clientX)}
+          onMouseUp={endDrag}
+          onMouseLeave={endDrag}
+          onTouchStart={(e) => beginDrag(e.touches[0].clientX)}
+          onTouchMove={(e) => updateDrag(e.touches[0].clientX)}
+          onTouchEnd={endDrag}
+        >
+          <div
             className={[
-              'sl-progress-hero-side-preview',
-              'is-prev',
-              !canGoPrev ? 'is-disabled' : '',
+              'sl-progress-hero-carousel-stage-rail',
+              'is-single-panel',
             ]
               .filter(Boolean)
               .join(' ')}
-            onClick={goPrevStage}
-            disabled={!canGoPrev}
-            aria-label={
-              prevStep
-                ? `View previous stage: ${prevStep.label}`
-                : 'No previous stage'
-            }
+            style={{ transform: `translateX(${dragOffsetX * 0.08}px)` }}
           >
-            <div className="sl-progress-hero-side-preview-media">
-              {adjacentStageMedia.prev?.url ? (
-                adjacentStageMedia.prev.type === 'image' ? (
-                  <img
-                    src={adjacentStageMedia.prev.url}
-                    alt={prevStep ? prevStep.label : 'Previous stage'}
-                  />
+            <div className="sl-progress-hero-carousel-center-slot">
+              <div className="sl-progress-hero-carousel-media sl-progress-stage-card-media">
+                {allRenderableStageLayers.length > 0 ? (
+                  <div className="sl-progress-stage-image-stack">
+                    {allRenderableStageLayers.map((layer) => (
+                      <img
+                        key={layer.stageKey}
+                        className={[
+                          'sl-progress-stage-card-base-image',
+                          'sl-progress-stage-card-base-image--stacked',
+                          layer.isVisible ? 'is-visible' : 'is-hidden',
+                        ].join(' ')}
+                        src={layer.baseImageUrl}
+                        alt={layer.isVisible ? `${layer.label} hero` : ''}
+                        aria-hidden={!layer.isVisible}
+                        loading="eager"
+                        decoding="sync"
+                        draggable={false}
+                      />
+                    ))}
+                  </div>
                 ) : (
-                  <video
-                    key={adjacentStageMedia.prev.url}
-                    src={adjacentStageMedia.prev.url}
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                  />
-                )
-              ) : (
-                <div className="sl-progress-hero-side-preview-fallback" />
-              )}
-            </div>
+                  <div className="sl-progress-hero-side-preview-fallback" />
+                )}
 
-            <div className="sl-progress-hero-side-preview-overlay" />
-            <div className="sl-progress-hero-side-preview-copy">
-              <div className="sl-progress-hero-side-preview-label">
-                Previous
+                {!allStageMediaReady ? (
+                  <div className="sl-progress-stage-image-loading-veil" />
+                ) : null}
+
+                {canGoPrev ? (
+                  <button
+                    type="button"
+                    className="sl-progress-carousel-arrow sl-progress-carousel-arrow--left"
+                    onClick={goPrevStage}
+                    disabled={carouselAnimating}
+                    aria-label={`View previous stage: ${prevStep?.label || 'Previous stage'}`}
+                  >
+                    <span
+                      className="sl-progress-carousel-arrow-glyph"
+                      aria-hidden="true"
+                    />
+                  </button>
+                ) : null}
+
+                {canGoNext ? (
+                  <button
+                    type="button"
+                    className="sl-progress-carousel-arrow sl-progress-carousel-arrow--right"
+                    onClick={goNextStage}
+                    disabled={carouselAnimating}
+                    aria-label={`View next stage: ${nextStep?.label || 'Next stage'}`}
+                  >
+                    <span
+                      className="sl-progress-carousel-arrow-glyph is-right"
+                      aria-hidden="true"
+                    />
+                  </button>
+                ) : null}
+
+                <div className="sl-progress-hero-overlay sl-progress-hero-overlay--center">
+                  <div
+                    className={`sl-progress-hero-title-stack ${
+                      titleTransitioning ? 'is-transitioning' : ''
+                    }`}
+                  >
+                    <div
+                      className={`sl-progress-hero-title sl-progress-hero-title--center sl-progress-hero-title-layer sl-progress-hero-title-layer--current ${
+                        titleTransitioning ? 'is-outgoing' : 'is-visible'
+                      }`}
+                    >
+                      {displayTitleText}
+                    </div>
+
+                    <div
+                      className={`sl-progress-hero-title sl-progress-hero-title--center sl-progress-hero-title-layer sl-progress-hero-title-layer--incoming ${
+                        titleTransitioning ? 'is-incoming-visible' : ''
+                      }`}
+                    >
+                      {incomingTitleText}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="sl-progress-hero-carousel-nav" />
               </div>
-              <div className="sl-progress-hero-side-preview-title">
-                {prevStep ? `${activeIndex}. ${prevStep.label}` : '—'}
-              </div>
-            </div>
-          </button>
-
-          <div className="sl-progress-hero-carousel-media">
-            {heroVideoUrl ? (
-              currentStageStatus === STAGE_MEDIA_STATE.UNLOCKED ? (
-                <img
-                  className="sl-progress-hero-video"
-                  src={heroVideoUrl}
-                  alt={`${activeStep.label} hero`}
-                />
-              ) : (
-                <video
-                  key={heroVideoUrl}
-                  className="sl-progress-hero-video"
-                  src={heroVideoUrl}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                />
-              )
-            ) : null}
-
-            <div className="sl-progress-hero-overlay">
-              <div className="sl-progress-hero-kicker">
-                {currentStageStatus === STAGE_MEDIA_STATE.ACTIVE
-                  ? 'Currently in the workshop'
-                  : currentStageStatus === STAGE_MEDIA_STATE.UNLOCKED
-                    ? 'Completed stage archive'
-                    : 'Future stage preview'}
-              </div>
-              <div className="sl-progress-hero-title">
-                {activeIndex + 1}. {activeStep.label}
-              </div>
-            </div>
-
-            <div className="sl-progress-hero-carousel-nav">
-              <button
-                type="button"
-                className="sl-progress-carousel-arrow sl-progress-carousel-arrow--hero"
-                onClick={goPrevStage}
-                disabled={!canGoPrev}
-                aria-label="Previous stage"
-              >
-                ‹
-              </button>
-
-              <button
-                type="button"
-                className="sl-progress-carousel-arrow sl-progress-carousel-arrow--hero"
-                onClick={goNextStage}
-                disabled={!canGoNext}
-                aria-label="Next stage"
-              >
-                ›
-              </button>
             </div>
           </div>
-
-          <button
-            type="button"
-            className={[
-              'sl-progress-hero-side-preview',
-              'is-next',
-              !canGoNext ? 'is-disabled' : '',
-            ]
-              .filter(Boolean)
-              .join(' ')}
-            onClick={goNextStage}
-            disabled={!canGoNext}
-            aria-label={
-              nextStep ? `View next stage: ${nextStep.label}` : 'No next stage'
-            }
-          >
-            <div className="sl-progress-hero-side-preview-media">
-              {adjacentStageMedia.next?.url ? (
-                adjacentStageMedia.next.type === 'image' ? (
-                  <img
-                    src={adjacentStageMedia.next.url}
-                    alt={nextStep ? nextStep.label : 'Next stage'}
-                  />
-                ) : (
-                  <video
-                    key={adjacentStageMedia.next.url}
-                    src={adjacentStageMedia.next.url}
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                  />
-                )
-              ) : (
-                <div className="sl-progress-hero-side-preview-fallback" />
-              )}
-            </div>
-
-            <div className="sl-progress-hero-side-preview-overlay" />
-            <div className="sl-progress-hero-side-preview-copy">
-              <div className="sl-progress-hero-side-preview-label">Next</div>
-              <div className="sl-progress-hero-side-preview-title">
-                {nextStep ? `${activeIndex + 2}. ${nextStep.label}` : '—'}
-              </div>
-            </div>
-          </button>
         </div>
 
         <div className="sl-progress-hero-carousel-bottom">
@@ -2101,185 +2181,188 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
             </p>
           </section>
         </div>
-      </section>
 
-      <section
-        className={[
-          'sl-progress-stage',
-          selectedStageThemeClass,
-          isSelectedStageLocked ? 'is-locked' : '',
-          currentStageStatus === STAGE_MEDIA_STATE.ACTIVE
-            ? 'is-live-stage'
-            : '',
-          currentStageStatus === STAGE_MEDIA_STATE.UNLOCKED
-            ? 'is-archive-stage'
-            : '',
-        ]
-          .filter(Boolean)
-          .join(' ')}
-      >
-        <header className="sl-progress-stage-header sl-progress-stage-header--connected">
-          <div className="sl-progress-stage-header-copy">
-            <div className="sl-progress-stage-eyebrow">
-              {getStageViewerEyebrow(activeIndex, currentStepIndex)}
-            </div>
+        <div className="sl-progress-hero-stage-divider" />
 
-            <div className="sl-progress-stage-bridge-line">
-              <span className="sl-progress-stage-bridge-label">
-                {getStageViewerStateLabel(activeIndex, currentStepIndex)}
-              </span>
-              <span className="sl-progress-stage-bridge-dot" />
-              <span className="sl-progress-stage-bridge-summary">
-                {getStageSummary(activeStep)}
-              </span>
-            </div>
-          </div>
+        <section
+          className={[
+            'sl-progress-stage',
+            'sl-progress-stage--embedded',
+            selectedStageThemeClass,
+            isSelectedStageLocked ? 'is-locked' : '',
+            currentStageStatus === STAGE_MEDIA_STATE.ACTIVE
+              ? 'is-live-stage'
+              : '',
+            currentStageStatus === STAGE_MEDIA_STATE.UNLOCKED
+              ? 'is-archive-stage'
+              : '',
+          ]
+            .filter(Boolean)
+            .join(' ')}
+        >
+          <div className="sl-progress-stage-content-fade">
+            <header className="sl-progress-stage-header sl-progress-stage-header--connected">
+              <div className="sl-progress-stage-header-copy">
+                <div className="sl-progress-stage-eyebrow">
+                  {getStageViewerEyebrow(activeIndex, currentStepIndex)}
+                </div>
 
-          <div className="sl-progress-stage-header-side">
-            <div
-              className={[
-                'sl-progress-stage-status-pill',
-                activeStatus === 'completed'
-                  ? 'is-completed'
-                  : activeStatus === 'in_progress'
-                    ? 'is-inprogress'
-                    : 'is-notstarted',
-              ].join(' ')}
-            >
-              {displayStatus(activeStatus)}
-            </div>
-          </div>
-        </header>
-
-        <div className="sl-progress-stage-stats">
-          <div className="sl-progress-stage-stat">
-            <div className="sl-progress-stage-stat-label">
-              Est. Time (focused hours)
-            </div>
-            <div className="sl-progress-stage-stat-value">
-              {activeStep.estHours}
-            </div>
-          </div>
-
-          <div className="sl-progress-stage-stat">
-            <div className="sl-progress-stage-stat-label">
-              Avg. Turnaround (calendar days)
-            </div>
-            <div className="sl-progress-stage-stat-value">
-              {activeStep.avgDays}
-            </div>
-          </div>
-
-          <div className="sl-progress-stage-stat">
-            <div className="sl-progress-stage-stat-label">
-              Stage Completion Target
-            </div>
-            <div className="sl-progress-stage-stat-value">
-              {stageTarget ||
-                (activeStatus === 'completed' ? 'Completed' : 'TBD')}
-            </div>
-          </div>
-        </div>
-
-        {showEducationAndCheckpoints ? (
-          <>
-            <div className="sl-progress-stage-education-header">
-              <div className="sl-progress-stage-education-eyebrow">
-                Stage Story
+                <div className="sl-progress-stage-bridge-line">
+                  <span className="sl-progress-stage-bridge-summary">
+                    {getStageSummary(activeStep)}
+                  </span>
+                </div>
               </div>
-              <div className="sl-progress-stage-education-title">
-                What this phase means for your drum
+
+              <div className="sl-progress-stage-header-side">
+                <div
+                  className={[
+                    'sl-progress-stage-status-pill',
+                    activeStatus === 'completed'
+                      ? 'is-completed'
+                      : activeStatus === 'in_progress'
+                        ? 'is-inprogress'
+                        : 'is-notstarted',
+                  ].join(' ')}
+                >
+                  {displayStatus(activeStatus)}
+                </div>
+              </div>
+            </header>
+
+            <div className="sl-progress-stage-stats">
+              <div className="sl-progress-stage-stat">
+                <div className="sl-progress-stage-stat-label">
+                  Est. Time (focused hours)
+                </div>
+                <div className="sl-progress-stage-stat-value">
+                  {activeStep.estHours}
+                </div>
+              </div>
+
+              <div className="sl-progress-stage-stat">
+                <div className="sl-progress-stage-stat-label">
+                  Avg. Turnaround (calendar days)
+                </div>
+                <div className="sl-progress-stage-stat-value">
+                  {activeStep.avgDays}
+                </div>
+              </div>
+
+              <div className="sl-progress-stage-stat">
+                <div className="sl-progress-stage-stat-label">
+                  Stage Completion Target
+                </div>
+                <div className="sl-progress-stage-stat-value">
+                  {stageTarget ||
+                    (activeStatus === 'completed' ? 'Completed' : 'TBD')}
+                </div>
               </div>
             </div>
 
-            <div className="sl-progress-stage-body">
-              <div className="sl-progress-stage-col sl-progress-stage-col--explainer">
-                <div className="sl-progress-card">
-                  <h3 className="sl-progress-card-title">
-                    What we do in this stage
-                  </h3>
-                  <p className="sl-progress-card-text">{activeStep.what}</p>
-                </div>
-
-                <div className="sl-progress-card">
-                  <h3 className="sl-progress-card-title">
-                    Why it matters for your drum
-                  </h3>
-                  <p className="sl-progress-card-text">{activeStep.why}</p>
-                </div>
-
-                <div className="sl-progress-card">
-                  <h3 className="sl-progress-card-title">Techniques used</h3>
-                  <div className="sl-progress-pill-row">
-                    {(Array.isArray(activeStep?.techniques)
-                      ? activeStep.techniques
-                      : []
-                    ).map((t, i) => (
-                      <span key={`${t}-${i}`} className="sl-progress-pill">
-                        {t}
-                      </span>
-                    ))}
+            {showEducationAndCheckpoints ? (
+              <>
+                <div className="sl-progress-stage-education-header">
+                  <div className="sl-progress-stage-education-eyebrow">
+                    Stage Story
+                  </div>
+                  <div className="sl-progress-stage-education-title">
+                    What this phase means for your drum
                   </div>
                 </div>
 
-                <div className="sl-progress-card">
-                  <h3 className="sl-progress-card-title">Tools involved</h3>
-                  <div className="sl-progress-pill-row">
-                    {(Array.isArray(activeStep?.tools)
-                      ? activeStep.tools
-                      : []
-                    ).map((t, i) => (
-                      <span key={`${t}-${i}`} className="sl-progress-pill">
-                        {t}
-                      </span>
-                    ))}
+                <div className="sl-progress-stage-body">
+                  <div className="sl-progress-stage-col sl-progress-stage-col--explainer">
+                    <div className="sl-progress-card">
+                      <h3 className="sl-progress-card-title">
+                        What we do in this stage
+                      </h3>
+                      <p className="sl-progress-card-text">{activeStep.what}</p>
+                    </div>
+
+                    <div className="sl-progress-card">
+                      <h3 className="sl-progress-card-title">
+                        Why it matters for your drum
+                      </h3>
+                      <p className="sl-progress-card-text">{activeStep.why}</p>
+                    </div>
+
+                    <div className="sl-progress-card">
+                      <h3 className="sl-progress-card-title">
+                        Techniques used
+                      </h3>
+                      <div className="sl-progress-pill-row">
+                        {(Array.isArray(activeStep?.techniques)
+                          ? activeStep.techniques
+                          : []
+                        ).map((t, i) => (
+                          <span key={`${t}-${i}`} className="sl-progress-pill">
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="sl-progress-card">
+                      <h3 className="sl-progress-card-title">Tools involved</h3>
+                      <div className="sl-progress-pill-row">
+                        {(Array.isArray(activeStep?.tools)
+                          ? activeStep.tools
+                          : []
+                        ).map((t, i) => (
+                          <span key={`${t}-${i}`} className="sl-progress-pill">
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="sl-progress-card sl-progress-card--quote">
+                      <div className="sl-progress-quote-icon">★</div>
+                      <p className="sl-progress-quote-text">
+                        {activeStep.mantra ||
+                          'This is the moment a stack of boards turns into a living, breathing shell.'}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="sl-progress-stage-col sl-progress-stage-col--checkpoints">
+                    <StageCheckpointsPanel
+                      key={activeStep.key}
+                      project={project}
+                      setProject={setProject}
+                      stageKey={activeStep.key}
+                      isAdmin={isAdmin}
+                    />
                   </div>
                 </div>
 
-                <div className="sl-progress-card sl-progress-card--quote">
-                  <div className="sl-progress-quote-icon">★</div>
-                  <p className="sl-progress-quote-text">
-                    {activeStep.mantra ||
-                      'This is the moment a stack of boards turns into a living, breathing shell.'}
+                <footer className="sl-progress-stage-footer">
+                  <p className="sl-progress-stage-files">
+                    Files for this step will appear here as we add photos,
+                    audio, and PDFs.
+                  </p>
+                </footer>
+              </>
+            ) : (
+              <div className="sl-progress-stage-preview-lock">
+                <div className="sl-progress-stage-preview-lock-card">
+                  <div className="sl-progress-stage-preview-lock-eyebrow">
+                    Future stage access
+                  </div>
+                  <h3 className="sl-progress-stage-preview-lock-title">
+                    Stage details remain locked for now
+                  </h3>
+                  <p className="sl-progress-stage-preview-lock-text">
+                    You can preview the cinematic media above, but the
+                    educational breakdown and milestone checklist will unlock
+                    only after all prior stages are completed.
                   </p>
                 </div>
               </div>
-
-              <div className="sl-progress-stage-col sl-progress-stage-col--checkpoints">
-                <StageCheckpointsPanel
-                  key={activeStep.key}
-                  project={project}
-                  setProject={setProject}
-                  stageKey={activeStep.key}
-                  isAdmin={isAdmin}
-                />
-              </div>
-            </div>
-
-            <footer className="sl-progress-stage-footer">
-              <p className="sl-progress-stage-files">
-                Files for this step will appear here as we add photos, audio,
-                and PDFs.
-              </p>
-            </footer>
-          </>
-        ) : (
-          <div className="sl-progress-stage-preview-lock">
-            <div className="sl-progress-stage-preview-lock-card">
-              <div className="sl-progress-stage-preview-lock-eyebrow">
-                Future stage access
-              </div>
-              <h3 className="sl-progress-stage-preview-lock-title">
-                Stage details remain locked for now
-              </h3>
-              <p className="sl-progress-stage-preview-lock-text">
-                You can preview the cinematic media above, but the educational
-                breakdown and milestone checklist will unlock only after all
-                prior stages are completed.
-              </p>
-            </div>
+            )}
           </div>
-        )}
+        </section>
       </section>
     </div>
   );
