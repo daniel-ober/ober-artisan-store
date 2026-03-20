@@ -1414,17 +1414,89 @@ video.sl-progress-stage-image {
   inset: 0;
   z-index: 7;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 32px 96px;
+  gap: 20px;
+  padding: 56px 96px 44px;
   pointer-events: none;
+}
+
+.sl-progress-stage-learning-rail {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  width: min(100%, 980px);
+  max-width: calc(100% - 32px);
+  pointer-events: auto;
+}
+
+.sl-progress-stage-learning-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(7, 10, 20, 0.58);
+  color: rgba(246, 249, 255, 0.94);
+  padding: 8px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition:
+    transform 0.18s ease,
+    border-color 0.18s ease,
+    background 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.sl-progress-stage-learning-pill:hover {
+  transform: translateY(-1px);
+  border-color: rgba(120, 190, 255, 0.42);
+  background: rgba(10, 15, 28, 0.74);
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.26),
+    0 0 0 1px rgba(120, 190, 255, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.sl-progress-stage-learning-pill.is-active {
+  border-color: rgba(120, 190, 255, 0.72);
+  background: rgba(14, 22, 42, 0.86);
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(120, 190, 255, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.sl-progress-stage-learning-pill-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  min-width: 16px;
+  height: 16px;
+  font-size: 0.78rem;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.96);
+}
+
+.sl-progress-stage-learning-pill-label {
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
 }
 
 .sl-progress-hero-title-stack {
   position: relative;
   width: min(100%, 980px);
   max-width: calc(100% - 40px);
-  min-height: 3.2em;
+  min-height: 72px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1977,15 +2049,15 @@ video.sl-progress-stage-image {
   background:
     radial-gradient(
       circle at 50% 50%,
-      rgba(4, 6, 12, 0.22) 0%,
-      rgba(3, 5, 10, 0.5) 44%,
-      rgba(2, 3, 8, 0.82) 100%
+      rgba(3, 4, 10, 0.24) 0%,
+      rgba(2, 4, 10, 0.52) 42%,
+      rgba(1, 2, 6, 0.84) 100%
     ),
     linear-gradient(
       180deg,
-      rgba(2, 4, 10, 0.34) 0%,
-      rgba(2, 4, 10, 0.56) 52%,
-      rgba(1, 2, 6, 0.78) 100%
+      rgba(2, 4, 10, 0.30) 0%,
+      rgba(2, 4, 10, 0.48) 48%,
+      rgba(1, 2, 6, 0.72) 100%
     );
 }
 
@@ -1995,6 +2067,405 @@ video.sl-progress-stage-image {
 
 .sl-progress-carousel-arrow {
   z-index: 20;
+}
+
+.sl-progress-stage-hotspots-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  pointer-events: none;
+}
+
+.sl-progress-stage-hotspot {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  pointer-events: auto;
+  z-index: 9;
+}
+
+.sl-progress-stage-hotspot-dot {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: 10px;
+  height: 10px;
+  transform: translate(-50%, -50%);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow:
+    0 0 0 4px rgba(255, 255, 255, 0.08),
+    0 0 18px rgba(255, 255, 255, 0.24);
+}
+
+.sl-progress-stage-hotspot-ring {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: 30px;
+  height: 30px;
+  transform: translate(-50%, -50%);
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  background: rgba(8, 12, 24, 0.18);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.sl-progress-stage-hotspot-index {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.92);
+  letter-spacing: 0.02em;
+}
+
+.sl-progress-stage-hotspot:hover .sl-progress-stage-hotspot-ring,
+.sl-progress-stage-hotspot.is-active .sl-progress-stage-hotspot-ring {
+  border-color: rgba(120, 190, 255, 0.8);
+  box-shadow:
+    0 0 0 1px rgba(120, 190, 255, 0.2),
+    0 0 24px rgba(120, 190, 255, 0.18);
+}
+
+.sl-progress-stage-hotspot-card {
+  position: absolute;
+  left: 24px;
+  bottom: 24px;
+  z-index: 10;
+  width: min(420px, calc(100% - 48px));
+  padding: 16px 16px 14px;
+  border-radius: 18px;
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(40, 72, 150, 0.22),
+      transparent 44%
+    ),
+    linear-gradient(180deg, rgba(7, 10, 20, 0.9), rgba(4, 6, 14, 0.94));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 18px 42px rgba(0, 0, 0, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.sl-progress-stage-hotspot-card-eyebrow {
+  font-size: 0.64rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: rgba(204, 216, 238, 0.7);
+  margin-bottom: 6px;
+}
+
+.sl-progress-stage-hotspot-card-title {
+  font-size: 0.96rem;
+  font-weight: 600;
+  color: #f8fbff;
+  margin-bottom: 8px;
+}
+
+.sl-progress-stage-hotspot-card-body {
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: rgba(230, 236, 245, 0.88);
+}
+
+.sl-progress-stage-hotspot-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.sl-progress-stage-hotspot-card-pill {
+  padding: 4px 9px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  color: rgba(232, 239, 248, 0.9);
+  background: rgba(15, 23, 42, 0.72);
+  border: 1px solid rgba(148, 163, 184, 0.24);
+}
+
+.sl-progress-stage-hotspot-card-close {
+  margin-top: 12px;
+  border: 1px solid rgba(120, 190, 255, 0.22);
+  background: rgba(7, 15, 32, 0.72);
+  color: rgba(232, 239, 248, 0.92);
+  font-size: 0.72rem;
+  border-radius: 999px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.sl-progress-stage-checkpoints-overlay {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+  width: min(320px, calc(100% - 40px));
+  padding: 14px;
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at top left, rgba(40, 72, 150, 0.18), transparent 44%),
+    linear-gradient(180deg, rgba(7, 10, 20, 0.82), rgba(4, 6, 14, 0.88));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 18px 42px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.sl-progress-stage-checkpoints-overlay-eyebrow {
+  font-size: 0.64rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: rgba(204, 216, 238, 0.7);
+  margin-bottom: 5px;
+}
+
+.sl-progress-stage-checkpoints-overlay-title {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #f8fbff;
+  margin-bottom: 10px;
+}
+
+.sl-progress-stage-checkpoints-overlay-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sl-progress-stage-checkpoint-chip {
+  width: 100%;
+  text-align: left;
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  background: rgba(15, 23, 42, 0.7);
+  color: #f8fbff;
+  border-radius: 14px;
+  padding: 10px 12px;
+  cursor: pointer;
+  transition:
+    border-color 0.18s ease,
+    background 0.18s ease,
+    transform 0.18s ease;
+}
+
+.sl-progress-stage-checkpoint-chip:hover {
+  border-color: rgba(120, 190, 255, 0.34);
+  transform: translateY(-1px);
+}
+
+.sl-progress-stage-checkpoint-chip.is-active {
+  border-color: rgba(120, 190, 255, 0.55);
+  box-shadow: 0 0 0 1px rgba(120, 190, 255, 0.12);
+}
+
+.sl-progress-stage-checkpoint-chip.is-completed {
+  border-color: rgba(34, 197, 94, 0.28);
+}
+
+.sl-progress-stage-checkpoint-chip.is-inprogress {
+  border-color: rgba(250, 204, 21, 0.24);
+}
+
+.sl-progress-stage-checkpoint-chip-label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.sl-progress-stage-checkpoint-chip-meta {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.7rem;
+  color: rgba(204, 216, 238, 0.72);
+}
+
+.sl-progress-stage-checkpoint-detail-card {
+  position: absolute;
+  left: 24px;
+  bottom: 24px;
+  z-index: 10;
+  width: min(420px, calc(100% - 48px));
+  padding: 16px 16px 14px;
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at top left, rgba(40, 72, 150, 0.22), transparent 44%),
+    linear-gradient(180deg, rgba(7, 10, 20, 0.9), rgba(4, 6, 14, 0.94));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 18px 42px rgba(0, 0, 0, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.sl-progress-stage-checkpoints-overlay {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+  width: min(320px, calc(100% - 40px));
+  padding: 14px;
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at top left, rgba(40, 72, 150, 0.18), transparent 44%),
+    linear-gradient(180deg, rgba(7, 10, 20, 0.82), rgba(4, 6, 14, 0.88));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 18px 42px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.sl-progress-stage-checkpoints-overlay.is-collapsed {
+  padding: 10px 12px;
+}
+
+.sl-progress-stage-checkpoints-inline {
+  width: min(100%, 720px);
+  max-width: calc(100% - 40px);
+  pointer-events: auto;
+}
+
+.sl-progress-stage-checkpoints-toggle {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(8, 12, 24, 0.58);
+  color: rgba(246, 249, 255, 0.94);
+  padding: 12px 14px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  text-align: left;
+  cursor: pointer;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow:
+    0 14px 28px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition:
+    border-color 0.18s ease,
+    background 0.18s ease,
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.sl-progress-stage-checkpoints-toggle:hover {
+  transform: translateY(-1px);
+  border-color: rgba(120, 190, 255, 0.32);
+  background: rgba(10, 15, 28, 0.72);
+}
+
+.sl-progress-stage-checkpoints-inline-eyebrow {
+  font-size: 0.64rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: rgba(204, 216, 238, 0.72);
+  margin-bottom: 4px;
+}
+
+.sl-progress-stage-checkpoints-inline-title {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #f8fbff;
+}
+
+.sl-progress-stage-checkpoints-inline-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.sl-progress-stage-checkpoints-toggle-copy {
+  min-width: 0;
+}
+
+.sl-progress-stage-checkpoints-toggle-chevron {
+  flex: 0 0 auto;
+  font-size: 0.95rem;
+  color: rgba(232, 239, 248, 0.82);
+  transform: rotate(-90deg);
+  transition: transform 0.18s ease;
+}
+
+.sl-progress-stage-checkpoints-toggle-chevron.is-open {
+  transform: rotate(0deg);
+}
+
+.sl-progress-stage-checkpoints-overlay-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+@media (max-width: 640px) {
+.sl-progress-stage-checkpoints-overlay {
+  top: 12px;
+  right: 12px;
+  left: 12px;
+  width: auto;
+  padding: 12px;
+}
+
+  .sl-progress-stage-checkpoint-detail-card {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    width: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .sl-progress-stage-hotspot {
+    width: 30px;
+    height: 30px;
+  }
+
+  .sl-progress-stage-hotspot-ring {
+    width: 26px;
+    height: 26px;
+  }
+
+  .sl-progress-stage-hotspot-card {
+    left: 14px;
+    right: 14px;
+    bottom: 14px;
+    width: auto;
+    padding: 14px 14px 12px;
+    border-radius: 16px;
+  }
+
+  .sl-progress-stage-hotspot-card-title {
+    font-size: 0.9rem;
+  }
+
+  .sl-progress-stage-hotspot-card-body {
+    font-size: 0.82rem;
+  }
 }
 
 @media (min-width: 1260px) {
