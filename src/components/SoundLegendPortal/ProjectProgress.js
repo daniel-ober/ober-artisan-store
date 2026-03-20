@@ -27,9 +27,10 @@ const STAGE_MEDIA = {
 };
 
 const STAGE_MEDIA_STATE = {
-  ACTIVE: 'active',
-  LOCKED: 'locked',
-  UNLOCKED: 'unlocked',
+  COMPLETED: 'completed',
+  CURRENT: 'current',
+  NEXT: 'next',
+  FUTURE: 'future',
 };
 
 const GLOBAL_STAGE_ASSETS = {
@@ -436,9 +437,10 @@ function getProjectedWeekendRangeFromHours(baseDate, minHours, maxHours) {
 }
 
 function getSelectedStageMediaState(selectedIndex, currentIndex) {
-  if (selectedIndex < currentIndex) return STAGE_MEDIA_STATE.UNLOCKED;
-  if (selectedIndex > currentIndex) return STAGE_MEDIA_STATE.LOCKED;
-  return STAGE_MEDIA_STATE.ACTIVE;
+  if (selectedIndex < currentIndex) return STAGE_MEDIA_STATE.COMPLETED;
+  if (selectedIndex === currentIndex) return STAGE_MEDIA_STATE.CURRENT;
+  if (selectedIndex === currentIndex + 1) return STAGE_MEDIA_STATE.NEXT;
+  return STAGE_MEDIA_STATE.FUTURE;
 }
 
 function getStageImageFilename(stageKey, variant = 'archived') {
@@ -1523,6 +1525,61 @@ function getCurrentStageAndStepLabels(project) {
   return { stageLabel, stepLabel };
 }
 
+function getLearningPointsForStep(step) {
+  if (!step) return [];
+
+  return [
+    {
+      id: 'overview',
+      icon: '✦',
+      shortLabel: 'Overview',
+      title: 'Stage overview',
+      body:
+        step.mantra ||
+        'This phase plays an important role in shaping the final voice, feel, and identity of your drum.',
+      meta: ['Stage story'],
+    },
+    {
+      id: 'process',
+      icon: '◎',
+      shortLabel: 'Process',
+      title: 'What we do in this stage',
+      body: step.what || 'Details for this stage will appear here.',
+      meta: ['Process'],
+    },
+    {
+      id: 'impact',
+      icon: '◌',
+      shortLabel: 'Impact',
+      title: 'Why it matters for your drum',
+      body: step.why || 'Why this stage matters will appear here.',
+      meta: ['Impact'],
+    },
+    {
+      id: 'methods',
+      icon: '⟐',
+      shortLabel: 'Methods',
+      title: 'Techniques used',
+      body:
+        Array.isArray(step.techniques) && step.techniques.length
+          ? step.techniques.join(' • ')
+          : 'Techniques for this stage will appear here.',
+      meta: ['Methods'],
+    },
+    {
+      id: 'tools',
+      icon: '⌘',
+      shortLabel: 'Tools',
+      title: 'Tools involved',
+      body:
+        Array.isArray(step.tools) && step.tools.length
+          ? step.tools.join(' • ')
+          : 'Tools for this stage will appear here.',
+      meta: ['Tools'],
+    },
+  ];
+}
+
 /* =========================================================
    COMPONENT
    ========================================================= */
@@ -1537,6 +1594,12 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
     STEPS[0].key
   );
   const [selectedStageMediaCache, setSelectedStageMediaCache] = useState({});
+
+  const [activeHotspotId, setActiveHotspotId] = useState(null);
+
+  const [isCheckpointOverlayOpen, setIsCheckpointOverlayOpen] = useState(false);
+
+  const [activeInteractiveStepId, setActiveInteractiveStepId] = useState(null);
 
   const [carouselAnimating, setCarouselAnimating] = useState(false);
   const [dragOffsetX, setDragOffsetX] = useState(0);
@@ -1580,6 +1643,18 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
       return prev;
     });
   }, [initialProject]);
+
+  useEffect(() => {
+    setActiveHotspotId(null);
+  }, [activeKey]);
+
+  useEffect(() => {
+    setActiveInteractiveStepId(null);
+  }, [activeKey]);
+
+  useEffect(() => {
+    setIsCheckpointOverlayOpen(false);
+  }, [activeKey]);
 
   useEffect(() => {
     let cancelled = false;
@@ -1707,10 +1782,10 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
     const def = STEPS[currentStepIndex] || STEPS[0];
     setActiveKey(def.key);
 
-if (!transitionLockRef.current) {
-  setDisplayedStageKey(def.key);
-  setDisplayedOverlayStageKey(def.key);
-}
+    if (!transitionLockRef.current) {
+      setDisplayedStageKey(def.key);
+      setDisplayedOverlayStageKey(def.key);
+    }
   }, [project, currentStepIndex]);
 
   const { stageLabel: currentStageLabel, stepLabel: currentStepLabel } =
@@ -1718,6 +1793,65 @@ if (!transitionLockRef.current) {
 
   const activeStep = STEPS.find((s) => s.key === activeKey) || STEPS[0];
   const activeIndex = STEPS.findIndex((s) => s.key === activeKey);
+
+  const currentStageLearningPoints = useMemo(
+    () => getLearningPointsForStep(activeStep),
+    [activeStep]
+  );
+  const currentStageTemplate = STAGE_TEMPLATES?.[activeStep.key] || null;
+
+  const currentStageInteractiveSteps = useMemo(() => {
+    if (!project || !currentStageTemplate) return [];
+
+    const canonical = canonicalKeyForStage(activeStep.key);
+    const phaseKey = getExistingPhaseKey(project, canonical);
+    const phase = project?.[phaseKey] || {};
+    const checklist = Array.isArray(phase.checklist) ? phase.checklist : [];
+    const tplSteps = Array.isArray(currentStageTemplate.steps)
+      ? currentStageTemplate.steps
+      : [];
+
+    return tplSteps.map((tplStep, idx) => {
+      const item = checklist[idx] || {};
+      const checkpointStates = Array.isArray(item.checkpointStates)
+        ? item.checkpointStates
+        : [];
+      const checkpointCount = Array.isArray(tplStep?.checkpoints)
+        ? tplStep.checkpoints.length
+        : 0;
+      const checkpointDone = checkpointStates.filter(Boolean).length;
+      const isComplete =
+        checkpointCount > 0 && checkpointDone === checkpointCount;
+
+      let status = 'NOT STARTED';
+      if (isComplete) status = 'COMPLETED';
+      else if (checkpointDone > 0 || item.completed) status = 'IN PROGRESS';
+
+      return {
+        id: tplStep?.id || tplStep?.key || `${activeStep.key}-${idx}`,
+        index: idx,
+        label:
+          tplStep?.adminMainTitle ||
+          tplStep?.label ||
+          tplStep?.adminLeftShort ||
+          `Step ${idx + 1}`,
+        status,
+        done: checkpointDone,
+        total: checkpointCount,
+        body:
+          Array.isArray(tplStep?.checkpoints) && tplStep.checkpoints.length
+            ? tplStep.checkpoints
+                .map((cp) => cp?.ui || cp?.book)
+                .filter(Boolean)
+                .join(' • ')
+            : 'Checkpoint details will appear here.',
+      };
+    });
+  }, [project, currentStageTemplate, activeStep.key]);
+
+  const activeLearningPoint =
+    currentStageLearningPoints.find((item) => item.id === activeHotspotId) ||
+    null;
 
   useEffect(() => {
     const nextTitle = (activeStep?.label || '').toUpperCase();
@@ -1751,25 +1885,35 @@ if (!transitionLockRef.current) {
     currentStepIndex
   );
 
-const displayedOverlayStageIndex = Math.max(
-  0,
-  STEPS.findIndex((s) => s.key === displayedOverlayStageKey)
-);
+  const displayedOverlayStageIndex = Math.max(
+    0,
+    STEPS.findIndex((s) => s.key === displayedOverlayStageKey)
+  );
 
-const displayedStageStatus = getSelectedStageMediaState(
-  displayedOverlayStageIndex,
-  currentStepIndex
-);
+  const displayedStageStatus = getSelectedStageMediaState(
+    displayedOverlayStageIndex,
+    currentStepIndex
+  );
+
+  const SMOKE_OPACITY_BY_STAGE_STATE = {
+    [STAGE_MEDIA_STATE.COMPLETED]: 0.0,
+    [STAGE_MEDIA_STATE.CURRENT]: 0.55,
+    [STAGE_MEDIA_STATE.NEXT]: 0.9,
+    [STAGE_MEDIA_STATE.FUTURE]: 1.0,
+  };
+
+  const VEIL_OPACITY_BY_STAGE_STATE = {
+    [STAGE_MEDIA_STATE.COMPLETED]: 0.0,
+    [STAGE_MEDIA_STATE.CURRENT]: 0.22,
+    [STAGE_MEDIA_STATE.NEXT]: 0.95,
+    [STAGE_MEDIA_STATE.FUTURE]: 1.0,
+  };
 
   const smokeOverlayOpacity =
-    displayedStageStatus === STAGE_MEDIA_STATE.LOCKED
-      ? 1.0
-      : displayedStageStatus === STAGE_MEDIA_STATE.ACTIVE
-        ? 0.4
-        : 0.1;
+    SMOKE_OPACITY_BY_STAGE_STATE[displayedStageStatus] ?? 0.6;
 
   const lockedStageVeilOpacity =
-    displayedStageStatus === STAGE_MEDIA_STATE.LOCKED ? 1.0 : 0;
+    VEIL_OPACITY_BY_STAGE_STATE[displayedStageStatus] ?? 0;
 
   const activeStatus = useMemo(() => {
     if (!project || !activeStep) return 'not_started';
@@ -1791,7 +1935,9 @@ const displayedStageStatus = getSelectedStageMediaState(
     [project, activeStep.key]
   );
 
-  const isSelectedStageLocked = activeIndex > currentStepIndex;
+  const isSelectedStageLocked =
+    getSelectedStageMediaState(activeIndex, currentStepIndex) ===
+    STAGE_MEDIA_STATE.FUTURE;
   const showEducationAndCheckpoints = activeIndex <= currentStepIndex;
 
   const selectedStageThemeClass =
@@ -1845,28 +1991,39 @@ const displayedStageStatus = getSelectedStageMediaState(
 
     if (!bundle) return null;
 
-    const isArchived = mediaState === STAGE_MEDIA_STATE.UNLOCKED;
-    const isActive = mediaState === STAGE_MEDIA_STATE.ACTIVE;
-    const isLocked = mediaState === STAGE_MEDIA_STATE.LOCKED;
+    const isCompleted = mediaState === STAGE_MEDIA_STATE.COMPLETED;
+    const isCurrent = mediaState === STAGE_MEDIA_STATE.CURRENT;
+    const isNext = mediaState === STAGE_MEDIA_STATE.NEXT;
+    const isFuture = mediaState === STAGE_MEDIA_STATE.FUTURE;
 
-    let smokeOpacity = 0.13;
+    let baseImageUrl = '';
 
-    if (isArchived) smokeOpacity = 0.06;
-    if (isLocked) smokeOpacity = 0.16;
+    if (isCompleted || isCurrent) {
+      baseImageUrl = bundle.currentImageUrl || bundle.archivedImageUrl || '';
+    } else if (isNext) {
+      baseImageUrl = bundle.archivedImageUrl || bundle.currentImageUrl || '';
+    } else if (isFuture) {
+      baseImageUrl = '';
+    }
+
+    let smokeOpacity = 0;
+
+    if (isCompleted) smokeOpacity = 0.15;
+    if (isCurrent) smokeOpacity = 0.46;
+    if (isNext) smokeOpacity = 0.72;
+    if (isFuture) smokeOpacity = 1.0;
 
     return {
       stageKey: step.key,
       stageLabel: step.label,
       mediaState,
-      baseImageUrl: isActive
-        ? bundle.currentImageUrl || bundle.archivedImageUrl || ''
-        : bundle.archivedImageUrl || bundle.currentImageUrl || '',
+      baseImageUrl,
       smokeVideoUrl: bundle.smokeVideoUrl || '',
       logoOverlayUrl: bundle.logoOverlayUrl || '',
-      completedBadgeUrl: isArchived ? bundle.completedBadgeUrl || '' : '',
+      completedBadgeUrl: '',
       smokeOpacity,
-      logoOpacity: isArchived ? 0.34 : 0.9,
-      showCompletedBadge: isArchived,
+      logoOpacity: 0,
+      showCompletedBadge: false,
     };
   };
 
@@ -1877,6 +2034,7 @@ const displayedStageStatus = getSelectedStageMediaState(
       return {
         stageKey: step.key,
         baseImageUrl: media?.baseImageUrl || '',
+        mediaState: media?.mediaState || STAGE_MEDIA_STATE.FUTURE,
         isVisible: displayedStageKey === step.key,
         label: step.label,
       };
@@ -1890,9 +2048,6 @@ const displayedStageStatus = getSelectedStageMediaState(
 
     const targetStep = STEPS[targetIndex];
     if (!targetStep) return;
-
-    const targetMedia = getStageMediaForIndex(targetIndex);
-    if (!targetMedia?.baseImageUrl) return;
 
     const previousStageKey = displayedStageKey;
 
@@ -2139,12 +2294,98 @@ const displayedStageStatus = getSelectedStageMediaState(
                         loading="eager"
                         decoding="sync"
                         draggable={false}
+                        style={{
+                          filter:
+                            layer.mediaState === STAGE_MEDIA_STATE.COMPLETED
+                              ? 'grayscale(0.5) saturate(0.82) contrast(1.02) brightness(0.92)'
+                              : layer.mediaState === STAGE_MEDIA_STATE.CURRENT
+                                ? 'brightness(1.15) saturate(1.25)'
+                                : 'none',
+                        }}
                       />
                     ))}
                   </div>
                 ) : (
                   <div className="sl-progress-hero-side-preview-fallback" />
                 )}
+
+                {activeLearningPoint ? (
+                  <div className="sl-progress-stage-hotspot-card">
+                    <div className="sl-progress-stage-hotspot-card-eyebrow">
+                      Interactive learning point
+                    </div>
+
+                    <div className="sl-progress-stage-hotspot-card-title">
+                      {activeLearningPoint.title}
+                    </div>
+
+                    <p className="sl-progress-stage-hotspot-card-body">
+                      {activeLearningPoint.body}
+                    </p>
+
+                    <div className="sl-progress-stage-hotspot-card-meta">
+                      {(activeLearningPoint.meta || []).map((item) => (
+                        <span
+                          key={item}
+                          className="sl-progress-stage-hotspot-card-pill"
+                        >
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+
+                    <button
+                      type="button"
+                      className="sl-progress-stage-hotspot-card-close"
+                      onClick={() => setActiveHotspotId(null)}
+                    >
+                      Close
+                    </button>
+                  </div>
+                ) : null}
+
+                {(() => {
+                  const activeInteractiveStep =
+                    currentStageInteractiveSteps.find(
+                      (step) => step.id === activeInteractiveStepId
+                    ) || null;
+
+                  if (!activeInteractiveStep) return null;
+
+                  return (
+                    <div className="sl-progress-stage-checkpoint-detail-card">
+                      <div className="sl-progress-stage-hotspot-card-eyebrow">
+                        Build checkpoint
+                      </div>
+
+                      <div className="sl-progress-stage-hotspot-card-title">
+                        {activeInteractiveStep.label}
+                      </div>
+
+                      <p className="sl-progress-stage-hotspot-card-body">
+                        {activeInteractiveStep.body}
+                      </p>
+
+                      <div className="sl-progress-stage-hotspot-card-meta">
+                        <span className="sl-progress-stage-hotspot-card-pill">
+                          {activeInteractiveStep.status}
+                        </span>
+                        <span className="sl-progress-stage-hotspot-card-pill">
+                          {activeInteractiveStep.done}/
+                          {activeInteractiveStep.total || 0} complete
+                        </span>
+                      </div>
+
+                      <button
+                        type="button"
+                        className="sl-progress-stage-hotspot-card-close"
+                        onClick={() => setActiveInteractiveStepId(null)}
+                      >
+                        Close
+                      </button>
+                    </div>
+                  );
+                })()}
 
                 {sharedSmokeVideoUrl ? (
                   <video
@@ -2224,6 +2465,109 @@ const displayedStageStatus = getSelectedStageMediaState(
                       {incomingTitleText}
                     </div>
                   </div>
+
+                  {currentStageLearningPoints.length > 0 ? (
+                    <div className="sl-progress-stage-learning-rail">
+                      {currentStageLearningPoints.map((item) => (
+                        <button
+                          key={item.id}
+                          type="button"
+                          className={`sl-progress-stage-learning-pill ${
+                            activeHotspotId === item.id ? 'is-active' : ''
+                          }`}
+                          onClick={() =>
+                            setActiveHotspotId((prev) =>
+                              prev === item.id ? null : item.id
+                            )
+                          }
+                          aria-label={item.title}
+                        >
+                          <span className="sl-progress-stage-learning-pill-icon">
+                            {item.icon}
+                          </span>
+                          <span className="sl-progress-stage-learning-pill-label">
+                            {item.shortLabel}
+                          </span>
+                        </button>
+                      ))}
+                    </div>
+                  ) : null}
+
+                  {currentStageInteractiveSteps.length > 0 ? (
+                    <div
+                      className={`sl-progress-stage-checkpoints-inline ${
+                        isCheckpointOverlayOpen ? 'is-open' : 'is-collapsed'
+                      }`}
+                    >
+                      <button
+                        type="button"
+                        className="sl-progress-stage-checkpoints-toggle"
+                        onClick={() => {
+                          setIsCheckpointOverlayOpen((prev) => !prev);
+                          if (isCheckpointOverlayOpen) {
+                            setActiveInteractiveStepId(null);
+                          }
+                        }}
+                        aria-expanded={isCheckpointOverlayOpen}
+                      >
+                        <div className="sl-progress-stage-checkpoints-toggle-copy">
+                          <div className="sl-progress-stage-checkpoints-inline-eyebrow">
+                            Build Checkpoints
+                          </div>
+
+                          <div className="sl-progress-stage-checkpoints-inline-title">
+                            {isCheckpointOverlayOpen
+                              ? 'Hide stage tasks'
+                              : 'Click here to view stage tasks'}
+                          </div>
+                        </div>
+
+                        <span
+                          className={`sl-progress-stage-checkpoints-toggle-chevron ${
+                            isCheckpointOverlayOpen ? 'is-open' : ''
+                          }`}
+                          aria-hidden="true"
+                        >
+                          ▾
+                        </span>
+                      </button>
+
+                      {isCheckpointOverlayOpen ? (
+                        <div className="sl-progress-stage-checkpoints-inline-list">
+                          {currentStageInteractiveSteps.map((step) => (
+                            <button
+                              key={step.id}
+                              type="button"
+                              className={`sl-progress-stage-checkpoint-chip ${
+                                activeInteractiveStepId === step.id
+                                  ? 'is-active'
+                                  : ''
+                              } ${step.status === 'COMPLETED' ? 'is-completed' : ''} ${
+                                step.status === 'IN PROGRESS'
+                                  ? 'is-inprogress'
+                                  : ''
+                              }`}
+                              onClick={() =>
+                                setActiveInteractiveStepId((prev) =>
+                                  prev === step.id ? null : step.id
+                                )
+                              }
+                            >
+                              <span className="sl-progress-stage-checkpoint-chip-label">
+                                {step.label}
+                              </span>
+
+                              <span className="sl-progress-stage-checkpoint-chip-meta">
+                                {step.status === 'COMPLETED'
+                                  ? 'Completed'
+                                  : `${step.done}/${step.total || 0}`}
+                              </span>
+                            </button>
+                          ))}
+                        </div>
+                      ) : null}
+                    </div>
+                  ) : null}
                 </div>
               </div>
             </div>
@@ -2247,11 +2591,17 @@ const displayedStageStatus = getSelectedStageMediaState(
             'sl-progress-stage--embedded',
             selectedStageThemeClass,
             isSelectedStageLocked ? 'is-locked' : '',
-            currentStageStatus === STAGE_MEDIA_STATE.ACTIVE
+            currentStageStatus === STAGE_MEDIA_STATE.CURRENT
               ? 'is-live-stage'
               : '',
-            currentStageStatus === STAGE_MEDIA_STATE.UNLOCKED
+            currentStageStatus === STAGE_MEDIA_STATE.COMPLETED
               ? 'is-archive-stage'
+              : '',
+            currentStageStatus === STAGE_MEDIA_STATE.NEXT
+              ? 'is-next-stage'
+              : '',
+            currentStageStatus === STAGE_MEDIA_STATE.FUTURE
+              ? 'is-future-stage'
               : '',
           ]
             .filter(Boolean)
