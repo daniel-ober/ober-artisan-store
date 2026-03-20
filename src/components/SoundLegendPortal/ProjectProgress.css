@@ -8,8 +8,16 @@
   padding: 24px 28px 30px;
   border-radius: 22px;
   background:
-    radial-gradient(circle at top left, rgba(34, 48, 86, 0.42) 0, transparent 38%),
-    radial-gradient(circle at top right, rgba(18, 28, 52, 0.28) 0, transparent 32%),
+    radial-gradient(
+      circle at top left,
+      rgba(34, 48, 86, 0.42) 0,
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at top right,
+      rgba(18, 28, 52, 0.28) 0,
+      transparent 32%
+    ),
     linear-gradient(180deg, rgba(10, 12, 22, 0.96), rgba(3, 4, 10, 0.98));
   border: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow:
@@ -39,7 +47,77 @@
   opacity: 0.85;
 }
 
+.sl-progress--loading-screen {
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
 
+.sl-progress-loading-shell {
+  width: min(520px, 100%);
+  padding: 32px 28px;
+  border-radius: 24px;
+  text-align: center;
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(32, 52, 110, 0.24),
+      transparent 38%
+    ),
+    linear-gradient(180deg, rgba(8, 11, 22, 0.96), rgba(4, 6, 12, 0.99));
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.sl-progress-loading-spinner {
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 18px;
+  border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  border-top-color: rgba(255, 255, 255, 0.88);
+  animation: sl-progress-spin 0.9s linear infinite;
+}
+
+.sl-progress-loading-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #f8fbff;
+}
+
+.sl-progress-loading-text {
+  margin-top: 8px;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: rgba(220, 229, 242, 0.74);
+}
+
+.sl-progress-loading-meta {
+  margin-top: 16px;
+  font-size: 0.76rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(173, 188, 214, 0.62);
+}
+
+.sl-progress-loading-percent {
+  margin-top: 8px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: rgba(245, 248, 255, 0.9);
+}
+
+@keyframes sl-progress-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
 
 /* =====================================================================
    HERO
@@ -71,13 +149,12 @@
   content: '';
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(
-      180deg,
-      rgba(3, 6, 16, 0.08) 0%,
-      rgba(3, 6, 16, 0.22) 52%,
-      rgba(3, 6, 16, 0.56) 100%
-    );
+  background: linear-gradient(
+    180deg,
+    rgba(3, 6, 16, 0.08) 0%,
+    rgba(3, 6, 16, 0.22) 52%,
+    rgba(3, 6, 16, 0.56) 100%
+  );
   pointer-events: none;
   border-radius: 20px;
 }
@@ -90,6 +167,7 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
+  z-index: 40;
 }
 
 .sl-progress-hero-kicker {
@@ -110,10 +188,6 @@
    INTRO
    ===================================================================== */
 
-.sl-progress-intro {
-  margin-top: 14px;
-}
-
 .sl-progress-intro-text {
   font-size: 0.9rem;
   color: rgba(226, 232, 240, 0.76);
@@ -130,7 +204,11 @@
   padding: 18px 18px 20px;
   border-radius: 22px;
   background:
-    radial-gradient(circle at top left, rgba(27, 41, 84, 0.2) 0, transparent 34%),
+    radial-gradient(
+      circle at top left,
+      rgba(27, 41, 84, 0.2) 0,
+      transparent 34%
+    ),
     linear-gradient(180deg, rgba(9, 11, 20, 0.92), rgba(4, 5, 11, 0.98));
   border: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow:
@@ -174,8 +252,11 @@
 .sl-progress-metric {
   padding: 12px 14px;
   border-radius: 14px;
-  background:
-    radial-gradient(circle at top left, rgba(32, 42, 72, 0.72) 0, rgba(8, 10, 18, 0.96) 74%);
+  background: radial-gradient(
+    circle at top left,
+    rgba(32, 42, 72, 0.72) 0,
+    rgba(8, 10, 18, 0.96) 74%
+  );
   border: 1px solid rgba(255, 255, 255, 0.06);
   display: flex;
   flex-direction: column;
@@ -217,7 +298,11 @@
   padding: 16px 18px 18px;
   border-radius: 20px;
   background:
-    radial-gradient(circle at top left, rgba(39, 62, 124, 0.2) 0, transparent 34%),
+    radial-gradient(
+      circle at top left,
+      rgba(39, 62, 124, 0.2) 0,
+      transparent 34%
+    ),
     linear-gradient(180deg, rgba(8, 11, 22, 0.94), rgba(4, 6, 12, 0.98));
   border: 1px solid rgba(255, 255, 255, 0.055);
   box-shadow:
@@ -284,8 +369,11 @@
   position: relative;
   height: 12px;
   border-radius: 999px;
-  background:
-    linear-gradient(180deg, rgba(10, 16, 30, 0.95), rgba(5, 8, 18, 0.98));
+  background: linear-gradient(
+    180deg,
+    rgba(10, 16, 30, 0.95),
+    rgba(5, 8, 18, 0.98)
+  );
   border: 1px solid rgba(122, 143, 190, 0.34);
   overflow: hidden;
   box-shadow:
@@ -299,14 +387,13 @@
   left: 0;
   bottom: 0;
   border-radius: 999px;
-  background:
-    linear-gradient(
-      90deg,
-      rgba(84, 214, 120, 0.95) 0%,
-      rgba(74, 222, 128, 0.98) 32%,
-      rgba(110, 231, 183, 0.96) 68%,
-      rgba(96, 165, 250, 0.94) 100%
-    );
+  background: linear-gradient(
+    90deg,
+    rgba(84, 214, 120, 0.95) 0%,
+    rgba(74, 222, 128, 0.98) 32%,
+    rgba(110, 231, 183, 0.96) 68%,
+    rgba(96, 165, 250, 0.94) 100%
+  );
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.28),
     0 0 18px rgba(74, 222, 128, 0.22);
@@ -335,16 +422,20 @@
 
 .sl-progress-stage {
   position: relative;
-  margin-top: 10px;
+  margin-top: 14px;
   padding: 24px 24px 28px;
   border-radius: 22px;
   background:
-    radial-gradient(circle at top left, rgba(24, 34, 63, 0.34) 0, transparent 34%),
-    linear-gradient(180deg, rgba(10, 12, 22, 0.96), rgba(5, 6, 12, 0.985));
-  border: 1px solid rgba(255, 255, 255, 0.055);
+    radial-gradient(
+      circle at top left,
+      rgba(18, 28, 54, 0.26) 0,
+      transparent 34%
+    ),
+    linear-gradient(180deg, rgba(8, 10, 20, 0.975), rgba(4, 6, 12, 0.99));
+  border: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow:
-    0 22px 58px rgba(0, 0, 0, 0.6),
-    inset 0 1px 0 rgba(255, 255, 255, 0.02);
+    0 18px 44px rgba(0, 0, 0, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.018);
 }
 
 .sl-progress-stage.is-locked {
@@ -470,8 +561,11 @@
 .sl-progress-stage-stat {
   padding: 12px 14px;
   border-radius: 14px;
-  background:
-    radial-gradient(circle at top left, rgba(22, 28, 48, 0.82) 0, rgba(7, 9, 18, 0.98) 74%);
+  background: radial-gradient(
+    circle at top left,
+    rgba(22, 28, 48, 0.82) 0,
+    rgba(7, 9, 18, 0.98) 74%
+  );
   border: 1px solid rgba(255, 255, 255, 0.055);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
 }
@@ -598,8 +692,11 @@ video.sl-progress-stage-image {
   margin-bottom: 14px;
   padding: 14px 14px 15px;
   border-radius: 16px;
-  background:
-    radial-gradient(circle at top left, rgba(16, 26, 52, 0.82) 0, rgba(4, 8, 18, 0.96) 72%);
+  background: radial-gradient(
+    circle at top left,
+    rgba(16, 26, 52, 0.82) 0,
+    rgba(4, 8, 18, 0.96) 72%
+  );
   border: 1px solid rgba(44, 78, 170, 0.35);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.018),
@@ -661,8 +758,11 @@ video.sl-progress-stage-image {
   align-items: center;
   gap: 10px;
   border-color: rgba(191, 219, 254, 0.26);
-  background:
-    linear-gradient(135deg, rgba(16, 22, 42, 0.96), rgba(10, 12, 22, 0.98));
+  background: linear-gradient(
+    135deg,
+    rgba(16, 22, 42, 0.96),
+    rgba(10, 12, 22, 0.98)
+  );
 }
 
 .sl-progress-quote-icon {
@@ -687,7 +787,11 @@ video.sl-progress-stage-image {
   padding: 1.35rem 1.4rem 1.25rem;
   border-radius: 18px;
   background:
-    radial-gradient(circle at top left, rgba(80, 140, 255, 0.18), transparent 60%),
+    radial-gradient(
+      circle at top left,
+      rgba(80, 140, 255, 0.18),
+      transparent 60%
+    ),
     rgba(3, 9, 20, 0.96);
   border: 1px solid rgba(120, 190, 255, 0.24);
   box-shadow:
@@ -991,7 +1095,11 @@ video.sl-progress-stage-image {
   padding: 18px 18px 20px;
   border-radius: 18px;
   background:
-    radial-gradient(circle at top left, rgba(44, 59, 96, 0.18) 0, transparent 42%),
+    radial-gradient(
+      circle at top left,
+      rgba(44, 59, 96, 0.18) 0,
+      transparent 42%
+    ),
     linear-gradient(180deg, rgba(10, 12, 22, 0.96), rgba(6, 8, 16, 0.98));
   border: 1px solid rgba(255, 255, 255, 0.055);
   box-shadow:
@@ -1054,7 +1162,11 @@ video.sl-progress-stage-image {
   width: min(520px, 100%);
   border-radius: 16px;
   background:
-    radial-gradient(circle at top left, rgba(80, 140, 255, 0.16), transparent 55%),
+    radial-gradient(
+      circle at top left,
+      rgba(80, 140, 255, 0.16),
+      transparent 55%
+    ),
     rgba(3, 9, 20, 0.98);
   border: 1px solid rgba(120, 190, 255, 0.28);
   box-shadow: 0 28px 80px rgba(0, 0, 0, 0.75);
@@ -1159,9 +1271,651 @@ video.sl-progress-stage-image {
   cursor: not-allowed;
 }
 
-/* =====================================================================
-   RESPONSIVE
-   ===================================================================== */
+/* =========================================
+   HERO CAROUSEL
+   ========================================= */
+
+.sl-progress-hero-carousel-window {
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  user-select: none;
+  cursor: grab;
+}
+
+.sl-progress-hero-carousel-window:active {
+  cursor: grabbing;
+}
+
+.sl-progress-hero-carousel-stage-rail {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+  align-items: stretch;
+  min-height: 340px;
+  transition: none !important;
+  will-change: auto;
+}
+
+.sl-progress-hero-carousel-stage-rail.is-sliding.is-next,
+.sl-progress-hero-carousel-stage-rail.is-sliding.is-prev {
+  animation: none !important;
+}
+
+.sl-progress-stage-card-media {
+  position: relative;
+  isolation: isolate;
+  background: #05070c;
+  overflow: hidden;
+}
+
+.sl-progress-stage-card-base-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.sl-progress-stage-image-stack {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.sl-progress-stage-card-base-image--stacked {
+  opacity: 0;
+  pointer-events: none;
+  will-change: opacity, transform;
+  transform: scale(0.965);
+  transition:
+    opacity 420ms ease,
+    transform 1600ms ease-out;
+}
+
+.sl-progress-stage-card-base-image--stacked.is-visible {
+  opacity: 1;
+  z-index: 2;
+  transform: scale(1);
+  transition:
+    opacity 420ms ease-in,
+    transform 1600ms ease-out;
+}
+
+.sl-progress-stage-card-base-image--stacked.is-hidden {
+  opacity: 0;
+  z-index: 1;
+  transform: scale(1.01);
+  transition:
+    opacity 320ms ease-out,
+    transform 320ms ease-out;
+}
+
+.sl-progress-stage-card-smoke-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: 3;
+  mix-blend-mode: screen;
+  filter: blur(0.6px) saturate(0.9);
+  transition: opacity 900ms ease-in-out;
+}
+
+.sl-progress-stage-card-logo-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: 4;
+  transition:
+    opacity 420ms ease,
+    transform 420ms ease;
+}
+
+.sl-progress-stage-card-badge-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  opacity: 0;
+  transition:
+    opacity 480ms ease,
+    transform 480ms ease;
+}
+
+.sl-progress-stage-card-badge-layer.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.sl-progress-stage-card-completed-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 132px;
+  height: auto;
+  display: block;
+  opacity: 0.96;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.45));
+}
+
+.sl-progress-hero-overlay--center {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 96px 86px;
+  pointer-events: none;
+}
+
+.sl-progress-hero-title-stack {
+  position: relative;
+  width: min(100%, 980px);
+  max-width: calc(100% - 40px);
+  min-height: 3.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sl-progress-hero-kicker--center {
+  font-size: 0.72rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(245, 248, 255, 0.78);
+  text-shadow: 0 3px 18px rgba(0, 0, 0, 0.42);
+}
+
+.sl-progress-hero-title--center {
+font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.2rem, 1.6vw, 1.38rem);
+  letter-spacing: 0.8em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.96);
+  text-align: center;
+  line-height: 1.35;
+  white-space: normal;
+  text-wrap: balance;
+  text-shadow:
+    0 0 18px rgba(255, 255, 255, 0.08),
+    0 2px 12px rgba(0, 0, 0, 0.42),
+    0 8px 30px rgba(0, 0, 0, 0.42),
+    0 14px 42px rgba(0, 0, 0, 0.22);
+}
+
+.sl-progress-hero-title-layer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: normal;
+  text-align: center;
+  pointer-events: none;
+  will-change: opacity, filter, transform;
+}
+
+.sl-progress-hero-title-layer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  pointer-events: none;
+  will-change: opacity, filter, transform;
+}
+
+.sl-progress-hero-title-layer--current {
+  opacity: 1;
+  filter: blur(0px);
+  transform: translateY(0px) scale(1);
+}
+
+.sl-progress-hero-title-layer--incoming {
+  opacity: 0;
+  filter: blur(5px);
+  transform: translateY(1px) scale(0.994);
+}
+
+.sl-progress-hero-title-layer--incoming.is-incoming-visible {
+  opacity: 1;
+  filter: blur(0px);
+  transform: translateY(0px) scale(1);
+  transition:
+    opacity 1650ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 1850ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1850ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sl-progress-hero-title-layer--current.is-outgoing {
+  opacity: 0;
+  filter: blur(4px);
+  transform: translateY(-1px) scale(1.004);
+  transition:
+    opacity 1250ms cubic-bezier(0.4, 0, 0.2, 1),
+    filter 1350ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 1350ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sl-progress-hero-title-layer--incoming.is-incoming-visible {
+  opacity: 0.96;
+  filter: blur(0.8px);
+  transform: translateY(0px) scale(1);
+  transition:
+    opacity 1750ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 1950ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1950ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sl-progress-stage-content-fade.is-out {
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease;
+}
+
+.sl-progress-stage-content-fade.is-in {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 260ms ease,
+    transform 260ms ease;
+}
+
+@keyframes sl-carousel-nudge-next {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-18px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes sl-carousel-nudge-prev {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(18px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.sl-progress-hero-carousel-side-slot {
+  min-width: 0;
+  display: flex;
+}
+
+.sl-progress-hero-carousel-center-slot {
+  min-width: 0;
+  display: flex;
+}
+
+.sl-progress-hero-carousel-center-slot .sl-progress-hero-carousel-media {
+  width: 100%;
+  min-height: 320px;
+}
+
+.sl-progress-hero-side-preview {
+  position: relative;
+  width: 100%;
+  min-height: 340px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 18px;
+  overflow: hidden;
+  background: rgba(8, 11, 20, 0.72);
+  cursor: pointer;
+  opacity: 0.86;
+  filter: saturate(0.82) brightness(0.9);
+  transition:
+    transform 0.28s ease,
+    opacity 0.28s ease,
+    filter 0.28s ease,
+    box-shadow 0.28s ease,
+    border-color 0.28s ease;
+}
+
+.sl-progress-hero-side-preview.is-prev {
+  transform-origin: right center;
+}
+
+.sl-progress-hero-side-preview.is-next {
+  transform-origin: left center;
+}
+
+.sl-progress-hero-side-preview:hover:not(:disabled) {
+  opacity: 0.98;
+  transform: translateY(-2px) scale(1.01);
+  filter: saturate(0.96) brightness(0.96);
+  border-color: rgba(120, 190, 255, 0.18);
+  box-shadow:
+    0 16px 34px rgba(0, 0, 0, 0.28),
+    0 0 0 1px rgba(120, 190, 255, 0.08);
+}
+
+.sl-progress-hero-side-preview.is-disabled {
+  opacity: 0.2;
+  cursor: default;
+  filter: grayscale(0.35) brightness(0.8);
+}
+
+.sl-progress-hero-side-preview-media,
+.sl-progress-hero-side-preview-media img,
+.sl-progress-hero-side-preview-media video {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.sl-progress-hero-side-preview-media {
+  position: absolute;
+  inset: 0;
+}
+
+.sl-progress-hero-side-preview-media img,
+.sl-progress-hero-side-preview-media video {
+  object-fit: cover;
+}
+
+.sl-progress-hero-side-preview-fallback {
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(39, 53, 98, 0.34),
+      transparent 60%
+    ),
+    linear-gradient(180deg, rgba(10, 13, 24, 0.96), rgba(4, 6, 12, 0.98));
+}
+
+.sl-progress-hero-side-preview-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(3, 6, 16, 0.24) 0%,
+    rgba(3, 6, 16, 0.52) 58%,
+    rgba(3, 6, 16, 0.82) 100%
+  );
+}
+
+.sl-progress-hero-side-preview-copy {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 14px;
+  z-index: 2;
+  text-align: left;
+}
+
+.sl-progress-hero-side-preview-label {
+  font-size: 0.64rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: rgba(225, 233, 245, 0.68);
+  margin-bottom: 6px;
+}
+
+.sl-progress-hero-side-preview-title {
+  font-size: 0.86rem;
+  line-height: 1.35;
+  font-weight: 600;
+  color: #f5f8ff;
+}
+
+.sl-progress-hero-carousel-media {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  border-radius: 22px;
+  min-width: 0;
+  z-index: 2;
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.34),
+    0 0 0 1px rgba(255, 255, 255, 0.03);
+  transition:
+    transform 0.24s ease,
+    box-shadow 0.24s ease,
+    opacity 0.18s ease;
+  background: rgba(8, 11, 20, 0.72);
+}
+
+.sl-progress-hero-carousel-shell {
+  margin: 0 18px;
+}
+
+.sl-progress-hero-carousel-media .sl-progress-hero-video,
+.sl-progress-hero-carousel-media img,
+.sl-progress-hero-carousel-media video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.sl-progress-stage-card-media {
+  position: relative;
+  isolation: isolate;
+  background: #05070c;
+}
+
+.sl-progress-stage-card-base-image,
+.sl-progress-stage-card-smoke-video,
+.sl-progress-stage-card-logo-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.sl-progress-stage-card-base-image,
+.sl-progress-stage-card-logo-overlay {
+  object-fit: cover;
+}
+
+.sl-progress-stage-card-smoke-video {
+  object-fit: cover;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  transition: opacity 1400ms ease;
+  z-index: 3;
+  filter: blur(1.6px) saturate(0.72);
+}
+
+.sl-progress-stage-card-logo-overlay {
+  pointer-events: none;
+  z-index: 4;
+  transition: opacity 420ms ease;
+}
+
+.sl-progress-hero-carousel-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(3, 6, 16, 0.08) 0%,
+    rgba(3, 6, 16, 0.22) 52%,
+    rgba(3, 6, 16, 0.62) 100%
+  );
+  pointer-events: none;
+  z-index: 4;
+}
+
+.sl-progress-stage-card-badge-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  pointer-events: none;
+  opacity: 0;
+  transition:
+    opacity 420ms ease,
+    transform 420ms ease;
+}
+
+.sl-progress-stage-card-badge-layer.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.sl-progress-stage-card-badge-layer.is-hidden {
+  opacity: 0;
+  transform: translateY(-1px);
+}
+
+.sl-progress-stage-card-completed-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 132px;
+  height: auto;
+  display: block;
+  opacity: 0.96;
+  pointer-events: none;
+  z-index: 31;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.45));
+  transform: rotate(-8deg);
+  transform-origin: center;
+  transition:
+    opacity 520ms ease,
+    transform 560ms ease,
+    filter 560ms ease;
+}
+
+.sl-progress-stage-card-badge-layer.is-visible
+  .sl-progress-stage-card-completed-badge {
+  transform: rotate(-8deg) scale(1);
+}
+
+.sl-progress-stage-card-badge-layer.is-hidden
+  .sl-progress-stage-card-completed-badge {
+  opacity: 0;
+  transform: rotate(-8deg) scale(0.992);
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.28));
+}
+
+.sl-progress-stage-image-loading-veil {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 180ms linear;
+  background:
+    radial-gradient(
+      circle at 30% 20%,
+      rgba(56, 189, 248, 0.03),
+      transparent 30%
+    ),
+    linear-gradient(180deg, rgba(7, 10, 20, 0.04), rgba(7, 10, 20, 0.1));
+}
+
+.sl-progress-stage-image-loading-veil.is-hidden {
+  opacity: 0;
+}
+
+.sl-progress-hero-carousel-stage-rail.is-single-panel {
+  grid-template-columns: minmax(0, 1fr);
+  padding: 0;
+}
+
+.sl-progress-hero-carousel-stage-rail.is-single-panel
+  .sl-progress-hero-carousel-center-slot {
+  width: 100%;
+}
+
+.sl-progress-hero-carousel-stage-rail.is-single-panel
+  .sl-progress-hero-carousel-media {
+  width: 100%;
+  min-height: 500px;
+  border-radius: 20px;
+}
+
+.sl-progress-carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(10, 14, 26, 0.42);
+  color: transparent;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    opacity 0.18s ease;
+}
+
+.sl-progress-carousel-arrow:hover:not(:disabled) {
+  background: rgba(14, 20, 36, 0.62);
+  border-color: rgba(120, 190, 255, 0.18);
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(120, 190, 255, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+.sl-progress-carousel-arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+  box-shadow: none;
+}
+
+.sl-progress-carousel-arrow--left {
+  left: 14px;
+}
+
+.sl-progress-carousel-arrow--right {
+  right: 14px;
+}
+
+.sl-progress-carousel-arrow-glyph {
+  width: 9px;
+  height: 9px;
+  border-top: 1.8px solid rgba(244, 248, 255, 0.92);
+  border-left: 1.8px solid rgba(244, 248, 255, 0.92);
+  transform: rotate(-45deg);
+  margin-left: 2px;
+}
+
+.sl-progress-carousel-arrow-glyph.is-right {
+  transform: rotate(135deg);
+  margin-left: -2px;
+}
 
 @media (min-width: 1260px) {
   .sl-progress-stage {
@@ -1179,6 +1933,11 @@ video.sl-progress-stage-image {
 
   .sl-progress-stage-carousel-card {
     flex-basis: 300px;
+  }
+
+  .sl-progress-hero-carousel-stage-rail.is-single-panel
+    .sl-progress-hero-carousel-media {
+    min-height: 540px;
   }
 }
 
@@ -1237,21 +1996,103 @@ video.sl-progress-stage-image {
   }
 
   .sl-progress-stage-header--connected {
-  flex-direction: column;
-  align-items: flex-start;
-}
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
-.sl-progress-stage-header-side {
-  align-items: flex-start;
-}
+  .sl-progress-stage-header-side {
+    align-items: flex-start;
+  }
 
-.sl-progress-stage-bridge-line {
-  gap: 8px;
-}
+  .sl-progress-stage-bridge-line {
+    gap: 8px;
+  }
 
-.sl-progress-stage-bridge-summary {
-  max-width: 100%;
-}
+  .sl-progress-stage-bridge-summary {
+    max-width: 100%;
+  }
+
+  .sl-progress-roadmap--premium {
+    padding: 15px 16px 16px;
+    border-radius: 18px;
+  }
+
+  .sl-progress-roadmap-side {
+    align-items: flex-start;
+  }
+
+  .sl-progress-hero-carousel-window {
+    padding: 12px 12px 0;
+  }
+
+  .sl-progress-hero-carousel-stage-rail {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    min-height: 280px;
+    padding: 12px 12px 0;
+  }
+
+  .sl-progress-hero-carousel-stage-rail.is-single-panel {
+    grid-template-columns: 1fr;
+    padding: 12px 12px 0;
+  }
+
+  .sl-progress-hero-carousel-side-slot,
+  .sl-progress-hero-side-preview {
+    display: none;
+  }
+
+  .sl-progress-hero-carousel-center-slot .sl-progress-hero-carousel-media,
+  .sl-progress-hero-carousel-stage-rail.is-single-panel
+    .sl-progress-hero-carousel-media {
+    min-height: 360px;
+    max-height: none;
+    border-radius: 18px 18px 0 0;
+  }
+
+  .sl-progress-hero-carousel-media {
+    border-radius: 18px 18px 0 0;
+  }
+
+  .sl-progress-hero-overlay--center {
+    padding: 24px 72px 84px;
+  }
+
+  .sl-progress-hero-title-stack {
+    min-height: 3.4em;
+    max-width: calc(100% - 24px);
+  }
+
+  .sl-progress-hero-title--center {
+    font-size: clamp(0.96rem, 2.3vw, 1.08rem);
+    letter-spacing: 0.34em;
+    line-height: 1.32;
+  }
+
+  .sl-progress-hero-status-band {
+    left: 16px;
+    right: 16px;
+    bottom: 14px;
+  }
+
+
+  .sl-progress-carousel-arrow {
+    width: 38px;
+    height: 38px;
+  }
+
+  .sl-progress-carousel-arrow--left {
+    left: 12px;
+  }
+
+  .sl-progress-carousel-arrow--right {
+    right: 12px;
+  }
+
+  .sl-progress-carousel-arrow-glyph {
+    width: 8px;
+    height: 8px;
+  }
 }
 
 @media (max-width: 640px) {
@@ -1327,347 +2168,70 @@ video.sl-progress-stage-image {
   }
 
   .sl-progress-stage {
-  margin-top: 8px;
-}
-
-.sl-progress-stage-bridge-label {
-  font-size: 0.8rem;
-}
-
-.sl-progress-stage-bridge-summary {
-  font-size: 0.84rem;
-}
-}
-
-/* =====================================================================
-   HERO + CAROUSEL COMBINED SHELL
-   ===================================================================== */
-
-.sl-progress-hero-carousel-shell {
-  position: relative;
-  margin-top: 0;
-  overflow: hidden;
-  border-radius: 22px;
-  background:
-    radial-gradient(circle at top left, rgba(27, 41, 84, 0.24) 0, transparent 34%),
-    linear-gradient(180deg, rgba(7, 9, 18, 0.9), rgba(3, 4, 10, 0.98));
-  border: 1px solid rgba(255, 255, 255, 0.055);
-  box-shadow:
-    0 24px 70px rgba(0, 0, 0, 0.55),
-    inset 0 1px 0 rgba(255, 255, 255, 0.025);
-}
-
-.sl-progress-hero-carousel-media {
-  position: relative;
-  overflow: hidden;
-  border-radius: 22px 22px 0 0;
-}
-
-.sl-progress-hero-carousel-media::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(
-      180deg,
-      rgba(3, 6, 16, 0.08) 0%,
-      rgba(3, 6, 16, 0.22) 52%,
-      rgba(3, 6, 16, 0.62) 100%
-    );
-  pointer-events: none;
-}
-
-.sl-progress-hero-carousel-nav {
-  position: absolute;
-  right: 18px;
-  bottom: 18px;
-  z-index: 3;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.sl-progress-carousel-arrow--hero {
-  backdrop-filter: blur(12px);
-  background:
-    radial-gradient(circle at top left, rgba(31, 47, 92, 0.78) 0, rgba(8, 12, 24, 0.92) 74%);
-}
-
-.sl-progress-hero-carousel-bottom {
-  padding: 14px 18px 16px;
-}
-
-.sl-progress-hero-carousel-shell.is-theme-live {
-  background:
-    radial-gradient(circle at top left, rgba(36, 74, 160, 0.26) 0, transparent 34%),
-    linear-gradient(180deg, rgba(7, 10, 22, 0.92), rgba(3, 5, 12, 0.98));
-}
-
-.sl-progress-hero-carousel-shell.is-theme-completed {
-  background:
-    radial-gradient(circle at top left, rgba(36, 104, 74, 0.24) 0, transparent 34%),
-    linear-gradient(180deg, rgba(7, 10, 20, 0.92), rgba(3, 5, 11, 0.98));
-}
-
-.sl-progress-hero-carousel-shell.is-theme-locked {
-  background:
-    radial-gradient(circle at top left, rgba(66, 74, 96, 0.18) 0, transparent 34%),
-    linear-gradient(180deg, rgba(7, 9, 18, 0.92), rgba(3, 4, 10, 0.98));
-}
-
-.sl-progress-hero-carousel-stage-rail {
-  display: grid;
-  grid-template-columns: minmax(0, 0.2fr) minmax(0, 1fr) minmax(0, 0.2fr);
-  gap: 14px;
-  align-items: stretch;
-  padding: 16px 16px 0;
-}
-
-.sl-progress-hero-side-preview {
-  position: relative;
-  min-height: 100%;
-  border: none;
-  border-radius: 18px;
-  overflow: hidden;
-  background: rgba(8, 11, 20, 0.72);
-  cursor: pointer;
-  opacity: 0.78;
-  transform: scale(0.96);
-  transition:
-    transform 0.28s ease,
-    opacity 0.28s ease,
-    filter 0.28s ease,
-    box-shadow 0.28s ease;
-}
-
-.sl-progress-hero-side-preview:hover:not(:disabled) {
-  opacity: 0.94;
-  transform: scale(0.985);
-  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.28);
-}
-
-.sl-progress-hero-side-preview.is-disabled {
-  opacity: 0.22;
-  cursor: default;
-}
-
-.sl-progress-hero-side-preview-media,
-.sl-progress-hero-side-preview-media img,
-.sl-progress-hero-side-preview-media video {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-.sl-progress-hero-side-preview-media {
-  position: absolute;
-  inset: 0;
-}
-
-.sl-progress-hero-side-preview-media img,
-.sl-progress-hero-side-preview-media video {
-  object-fit: cover;
-}
-
-.sl-progress-hero-side-preview-fallback {
-  width: 100%;
-  height: 100%;
-  background:
-    radial-gradient(circle at top left, rgba(39, 53, 98, 0.34), transparent 60%),
-    linear-gradient(180deg, rgba(10, 13, 24, 0.96), rgba(4, 6, 12, 0.98));
-}
-
-.sl-progress-hero-side-preview-overlay {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(
-      180deg,
-      rgba(3, 6, 16, 0.24) 0%,
-      rgba(3, 6, 16, 0.52) 58%,
-      rgba(3, 6, 16, 0.82) 100%
-    );
-}
-
-.sl-progress-hero-side-preview-copy {
-  position: absolute;
-  left: 14px;
-  right: 14px;
-  bottom: 14px;
-  z-index: 2;
-  text-align: left;
-}
-
-.sl-progress-hero-side-preview-label {
-  font-size: 0.64rem;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  color: rgba(225, 233, 245, 0.68);
-  margin-bottom: 6px;
-}
-
-.sl-progress-hero-side-preview-title {
-  font-size: 0.86rem;
-  line-height: 1.35;
-  font-weight: 600;
-  color: #f5f8ff;
-}
-
-.sl-progress-hero-carousel-media {
-  position: relative;
-  overflow: hidden;
-  border-radius: 22px 22px 0 0;
-  min-width: 0;
-}
-
-.sl-progress-stage.is-theme-live {
-  background:
-    radial-gradient(circle at top left, rgba(28, 59, 134, 0.16) 0, transparent 34%),
-    linear-gradient(180deg, rgba(10, 12, 22, 0.96), rgba(5, 6, 12, 0.985));
-}
-
-.sl-progress-stage.is-theme-completed {
-  background:
-    radial-gradient(circle at top left, rgba(34, 108, 73, 0.14) 0, transparent 34%),
-    linear-gradient(180deg, rgba(10, 12, 22, 0.96), rgba(5, 6, 12, 0.985));
-}
-
-.sl-progress-stage.is-theme-locked {
-  background:
-    radial-gradient(circle at top left, rgba(74, 84, 108, 0.1) 0, transparent 34%),
-    linear-gradient(180deg, rgba(10, 12, 22, 0.96), rgba(5, 6, 12, 0.985));
-}
-
-.sl-progress-stage::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 24px;
-  right: 24px;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    rgba(74, 222, 128, 0),
-    rgba(74, 222, 128, 0.35),
-    rgba(96, 165, 250, 0.28),
-    rgba(96, 165, 250, 0)
-  );
-  opacity: 0.9;
-}
-
-.sl-progress-stage-header--connected {
-  align-items: flex-start;
-}
-
-.sl-progress-stage-bridge-line {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  min-width: 0;
-}
-
-.sl-progress-stage-bridge-label {
-  font-size: 0.84rem;
-  font-weight: 600;
-  color: #f3f7ff;
-}
-
-.sl-progress-stage-bridge-dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 999px;
-  background: rgba(148, 163, 184, 0.5);
-  flex: 0 0 auto;
-}
-
-.sl-progress-stage-bridge-summary {
-  font-size: 0.88rem;
-  line-height: 1.5;
-  color: rgba(220, 229, 242, 0.76);
-  max-width: 760px;
-}
-
-/* =====================================================================
-   RESPONSIVE OVERRIDES FOR HERO-CAROUSEL
-   ===================================================================== */
-
-@media (max-width: 900px) {
-  .sl-progress-roadmap--premium {
-    padding: 15px 16px 16px;
-    border-radius: 18px;
+    margin-top: 8px;
   }
 
-  .sl-progress-roadmap-header-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
+  .sl-progress-stage-bridge-label {
+    font-size: 0.8rem;
   }
 
-  .sl-progress-roadmap-side {
-    align-items: flex-start;
+  .sl-progress-stage-bridge-summary {
+    font-size: 0.84rem;
   }
 
-  .sl-progress-roadmap-caption {
-    text-align: left;
+  .sl-progress-stage-card-completed-badge {
+    top: 12px;
+    right: 12px;
+    width: 108px;
+    min-width: 0;
+    max-width: 28%;
   }
 
-  .sl-progress-hero-carousel-stage-rail {
-  grid-template-columns: 1fr;
-  gap: 10px;
-  padding: 12px 12px 0;
-}
-
-.sl-progress-hero-side-preview {
-  display: none;
-}
-
-.sl-progress-stage-header--connected {
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.sl-progress-stage-header-side {
-  align-items: flex-start;
-}
-
-.sl-progress-stage-bridge-summary {
-  max-width: 100%;
-}
-}
-
-@media (max-width: 640px) {
-  .sl-progress-roadmap--premium {
-    padding: 14px;
-    border-radius: 16px;
-    margin-bottom: 14px;
+  .sl-progress-hero-overlay--center {
+    padding: 18px 56px 78px;
   }
 
-  .sl-progress-roadmap-header {
-    font-size: 0.72rem;
+  .sl-progress-hero-title-stack {
+    min-height: 3.8em;
+    max-width: 100%;
   }
 
-  .sl-progress-roadmap-subtitle {
-    font-size: 0.82rem;
+  .sl-progress-hero-title--center {
+    font-size: clamp(0.82rem, 4vw, 0.94rem);
+    letter-spacing: 0.22em;
+    line-height: 1.28;
   }
 
-  .sl-progress-roadmap-percent {
-    font-size: 1rem;
+  .sl-progress-hero-status-band {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+  }
+  
+  .sl-progress-carousel-arrow {
+    width: 34px;
+    height: 34px;
   }
 
-  .sl-progress-roadmap-track {
-    height: 10px;
+  .sl-progress-carousel-arrow--left {
+    left: 10px;
   }
 
-  .sl-progress-stage {
-  margin-top: 8px;
-}
+  .sl-progress-carousel-arrow--right {
+    right: 10px;
+  }
 
-.sl-progress-stage-bridge-label {
-  font-size: 0.8rem;
-}
+  .sl-progress-carousel-arrow-glyph {
+    width: 7px;
+    height: 7px;
+    border-top-width: 1.6px;
+    border-left-width: 1.6px;
+  }
 
-.sl-progress-stage-bridge-summary {
-  font-size: 0.84rem;
-}
+  .sl-progress-hero-carousel-stage-rail.is-single-panel
+    .sl-progress-hero-carousel-media,
+  .sl-progress-hero-carousel-center-slot .sl-progress-hero-carousel-media {
+    min-height: 280px;
+    max-height: none;
+  }
 }
