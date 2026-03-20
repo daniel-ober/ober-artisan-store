@@ -1533,6 +1533,9 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
   const [activeKey, setActiveKey] = useState(STEPS[0].key);
 
   const [displayedStageKey, setDisplayedStageKey] = useState(STEPS[0].key);
+  const [displayedOverlayStageKey, setDisplayedOverlayStageKey] = useState(
+    STEPS[0].key
+  );
   const [selectedStageMediaCache, setSelectedStageMediaCache] = useState({});
 
   const [carouselAnimating, setCarouselAnimating] = useState(false);
@@ -1541,6 +1544,8 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
   const [allStageMediaReady, setAllStageMediaReady] = useState(false);
   const [loadedAssetCount, setLoadedAssetCount] = useState(0);
   const [totalAssetCount, setTotalAssetCount] = useState(STEPS.length * 2);
+
+  const [sharedSmokeVideoUrl, setSharedSmokeVideoUrl] = useState('');
 
   const transitionLockRef = useRef(false);
   const dragStartXRef = useRef(0);
@@ -1594,6 +1599,10 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
           const bundle = await resolveStageMediaBundle(step.key);
           bundles.push(bundle);
           nextCache[getStageMediaCacheKey(step.key)] = bundle || null;
+
+          if (!cancelled && !sharedSmokeVideoUrl && bundle?.smokeVideoUrl) {
+            setSharedSmokeVideoUrl(bundle.smokeVideoUrl);
+          }
 
           if (!cancelled) {
             setSelectedStageMediaCache((prev) => ({
@@ -1698,9 +1707,10 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
     const def = STEPS[currentStepIndex] || STEPS[0];
     setActiveKey(def.key);
 
-    if (!transitionLockRef.current) {
-      setDisplayedStageKey(def.key);
-    }
+if (!transitionLockRef.current) {
+  setDisplayedStageKey(def.key);
+  setDisplayedOverlayStageKey(def.key);
+}
   }, [project, currentStepIndex]);
 
   const { stageLabel: currentStageLabel, stepLabel: currentStepLabel } =
@@ -1740,6 +1750,26 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
     activeIndex,
     currentStepIndex
   );
+
+const displayedOverlayStageIndex = Math.max(
+  0,
+  STEPS.findIndex((s) => s.key === displayedOverlayStageKey)
+);
+
+const displayedStageStatus = getSelectedStageMediaState(
+  displayedOverlayStageIndex,
+  currentStepIndex
+);
+
+  const smokeOverlayOpacity =
+    displayedStageStatus === STAGE_MEDIA_STATE.LOCKED
+      ? 1.0
+      : displayedStageStatus === STAGE_MEDIA_STATE.ACTIVE
+        ? 0.4
+        : 0.1;
+
+  const lockedStageVeilOpacity =
+    displayedStageStatus === STAGE_MEDIA_STATE.LOCKED ? 1.0 : 0;
 
   const activeStatus = useMemo(() => {
     if (!project || !activeStep) return 'not_started';
@@ -1864,16 +1894,23 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
     const targetMedia = getStageMediaForIndex(targetIndex);
     if (!targetMedia?.baseImageUrl) return;
 
+    const previousStageKey = displayedStageKey;
+
     transitionLockRef.current = true;
     setCarouselAnimating(true);
 
     setActiveKey(targetStep.key);
     setDisplayedStageKey(targetStep.key);
+    setDisplayedOverlayStageKey(previousStageKey);
+
+    window.setTimeout(() => {
+      setDisplayedOverlayStageKey(targetStep.key);
+    }, 90);
 
     window.setTimeout(() => {
       setCarouselAnimating(false);
       transitionLockRef.current = false;
-    }, 1100);
+    }, 260);
   };
 
   const goPrevStage = () => {
@@ -2109,6 +2146,28 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
                   <div className="sl-progress-hero-side-preview-fallback" />
                 )}
 
+                {sharedSmokeVideoUrl ? (
+                  <video
+                    className="sl-progress-shared-smoke-overlay"
+                    src={sharedSmokeVideoUrl}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="auto"
+                    aria-hidden="true"
+                    style={{
+                      opacity: smokeOverlayOpacity,
+                    }}
+                  />
+                ) : null}
+
+                <div
+                  className="sl-progress-locked-stage-veil"
+                  aria-hidden="true"
+                  style={{ opacity: lockedStageVeilOpacity }}
+                />
+
                 {!allStageMediaReady ? (
                   <div className="sl-progress-stage-image-loading-veil" />
                 ) : null}
@@ -2166,8 +2225,6 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
                     </div>
                   </div>
                 </div>
-
-                <div className="sl-progress-hero-carousel-nav" />
               </div>
             </div>
           </div>
