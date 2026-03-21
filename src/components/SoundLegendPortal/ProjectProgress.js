@@ -11,6 +11,7 @@ import { db, storage } from '../../firebaseConfig';
 import { calculateProjectProgress } from '../../utils/calculateProjectProgress';
 import { STAGES, STAGE_TEMPLATES } from '../../utils/workflowDefinitions';
 import { PROJECT_STAGE_EDU } from '../../utils/projectStageEducation';
+import { createPortal } from 'react-dom';
 import './ProjectProgress.css';
 
 const STAGE_MEDIA = {
@@ -202,13 +203,195 @@ function toRomanChapter(value) {
   return result;
 }
 
-function getStageResourceItems(project) {
-  const projectFiles = Array.isArray(project?.files) ? project.files : [];
-  const attachmentFiles = Array.isArray(project?.attachments)
-    ? project.attachments
-    : [];
+function getFileTypeFromUrl(url = '', explicitType = '') {
+  const normalizedType = String(explicitType || '').toLowerCase();
 
-  const allFiles = [...projectFiles, ...attachmentFiles];
+  if (
+    normalizedType === 'image' ||
+    normalizedType === 'video' ||
+    normalizedType === 'audio'
+  ) {
+    return normalizedType;
+  }
+
+  const lower = String(url || '').toLowerCase();
+
+  if (
+    lower.includes('youtube.com') ||
+    lower.includes('youtu.be') ||
+    lower.includes('vimeo.com')
+  ) {
+    return 'video';
+  }
+
+  if (
+    lower.endsWith('.png') ||
+    lower.endsWith('.jpg') ||
+    lower.endsWith('.jpeg') ||
+    lower.endsWith('.webp') ||
+    lower.endsWith('.gif') ||
+    lower.endsWith('.bmp') ||
+    lower.endsWith('.svg')
+  ) {
+    return 'image';
+  }
+
+  if (
+    lower.endsWith('.mp4') ||
+    lower.endsWith('.mov') ||
+    lower.endsWith('.webm') ||
+    lower.endsWith('.m4v')
+  ) {
+    return 'video';
+  }
+
+  if (
+    lower.endsWith('.mp3') ||
+    lower.endsWith('.wav') ||
+    lower.endsWith('.m4a') ||
+    lower.endsWith('.aac') ||
+    lower.endsWith('.ogg') ||
+    lower.endsWith('.flac')
+  ) {
+    return 'audio';
+  }
+
+  if (
+    lower.endsWith('.pdf') ||
+    lower.endsWith('.doc') ||
+    lower.endsWith('.docx') ||
+    lower.endsWith('.xls') ||
+    lower.endsWith('.xlsx') ||
+    lower.endsWith('.txt')
+  ) {
+    return 'document';
+  }
+
+  return 'document';
+}
+
+function getFileNameFromUrl(url = '') {
+  try {
+    const clean = String(url || '').split('?')[0];
+    const last = clean.split('/').pop() || 'Resource';
+    return decodeURIComponent(last);
+  } catch {
+    return 'Resource';
+  }
+}
+
+function getFileExtension(url = '') {
+  try {
+    const clean = String(url || '')
+      .split('?')[0]
+      .toLowerCase();
+    const match = clean.match(/\.([a-z0-9]+)$/i);
+    return match ? match[1] : '';
+  } catch {
+    return '';
+  }
+}
+
+function isPdfUrl(url = '') {
+  return getFileExtension(url) === 'pdf';
+}
+
+function normalizeExternalUrl(url = '') {
+  const trimmed = String(url || '').trim();
+  if (!trimmed) return '';
+  if (/^https?:\/\//i.test(trimmed)) return trimmed;
+  return `https://${trimmed.replace(/^\/+/, '')}`;
+}
+
+function getYouTubeId(url = '') {
+  const normalized = normalizeExternalUrl(url);
+  if (!normalized) return null;
+
+  try {
+    const parsed = new URL(normalized);
+    const host = parsed.hostname.toLowerCase();
+
+    if (host.includes('youtu.be')) {
+      return parsed.pathname.split('/').filter(Boolean)[0] || null;
+    }
+
+    const v = parsed.searchParams.get('v');
+    if (v) return v;
+
+    const embedMatch = parsed.pathname.match(/\/embed\/([^/?]+)/i);
+    if (embedMatch) return embedMatch[1];
+  } catch {
+    return null;
+  }
+
+  return null;
+}
+
+function getVideoEmbedUrl(url = '') {
+  const normalized = normalizeExternalUrl(url);
+  if (!normalized) return null;
+
+  try {
+    const parsed = new URL(normalized);
+    const host = parsed.hostname.toLowerCase();
+
+    if (host.includes('youtube.com') || host.includes('youtu.be')) {
+      const ytId = getYouTubeId(normalized);
+      return ytId ? `https://www.youtube.com/embed/${ytId}?rel=0` : null;
+    }
+
+    if (host.includes('vimeo.com')) {
+      const parts = parsed.pathname.split('/').filter(Boolean);
+      const id = parts[parts.length - 1];
+      return id ? `https://player.vimeo.com/video/${id}` : null;
+    }
+  } catch {
+    return null;
+  }
+
+  return null;
+}
+
+function formatResourceTypeLabel(type = '') {
+  if (type === 'image') return 'Image';
+  if (type === 'video') return 'Video';
+  if (type === 'audio') return 'Audio';
+  return 'Document';
+}
+
+function normalizeStageResourceItem(item, fallback = {}) {
+  if (!item?.url) return null;
+
+  return {
+    id:
+      item.id ||
+      `${fallback.source || 'resource'}-${fallback.category || 'misc'}-${fallback.index || 0}-${item.url}`,
+    url: item.url,
+    title:
+      item.title || item.name || fallback.title || getFileNameFromUrl(item.url),
+    type: getFileTypeFromUrl(item.url, item.type),
+    stage:
+      typeof item.stage === 'number'
+        ? item.stage
+        : typeof fallback.stage === 'number'
+          ? fallback.stage
+          : 0,
+    category: item.category || fallback.category || 'resource',
+    source: fallback.source || 'resource',
+    hidden: !!item.hidden,
+    uploadedAt: item.uploadedAt || item.createdAt || fallback.uploadedAt || '',
+    createdAt: item.createdAt || item.uploadedAt || fallback.createdAt || '',
+  };
+}
+
+function getStageResourceItems(project, selectedStageNumber) {
+  if (!project) {
+    return {
+      items: [],
+      paymentLink: '',
+      signatureLink: '',
+    };
+  }
 
   const paymentLink =
     project?.paymentLink ||
@@ -222,8 +405,57 @@ function getStageResourceItems(project) {
     project?.esignUrl ||
     '';
 
+  const normalizedItems = [];
+
+  const mediaItems = Array.isArray(project?.media) ? project.media : [];
+  mediaItems.forEach((item, index) => {
+    const normalized = normalizeStageResourceItem(item, {
+      source: 'media',
+      category: item?.category || 'media',
+      index,
+      stage: item?.stage,
+    });
+
+    if (normalized && !normalized.hidden) {
+      normalizedItems.push(normalized);
+    }
+  });
+
+  const attachmentGroups =
+    project?.attachments && typeof project.attachments === 'object'
+      ? project.attachments
+      : {};
+
+  Object.entries(attachmentGroups).forEach(([categoryKey, arr]) => {
+    if (!Array.isArray(arr)) return;
+
+    arr.forEach((item, index) => {
+      const normalized = normalizeStageResourceItem(item, {
+        source: 'attachment',
+        category: categoryKey,
+        index,
+        stage: item?.stage,
+      });
+
+      if (normalized && !normalized.hidden) {
+        normalizedItems.push(normalized);
+      }
+    });
+  });
+
+  const stageItems = normalizedItems.filter((item) => {
+    if (!selectedStageNumber) return false;
+    return Number(item.stage || 0) === Number(selectedStageNumber);
+  });
+
+  stageItems.sort((a, b) => {
+    const aTime = tsToMillis(a.uploadedAt || a.createdAt);
+    const bTime = tsToMillis(b.uploadedAt || b.createdAt);
+    return bTime - aTime;
+  });
+
   return {
-    files: allFiles,
+    items: stageItems,
     paymentLink,
     signatureLink,
   };
@@ -861,6 +1093,8 @@ const StageCheckpointsPanel = ({
   setProject,
   stageKey,
   isAdmin = false,
+  variant = 'default',
+  showHeader = true,
 }) => {
   const [openStepId, setOpenStepId] = useState(null);
   const userToggledRef = useRef(false);
@@ -1133,7 +1367,8 @@ const StageCheckpointsPanel = ({
       setProject((prev) => {
         if (!prev) return prev;
 
-        const prevPhase = prev?.[canonical] || {};
+        const localPhaseKey = getExistingPhaseKey(prev, canonical);
+        const prevPhase = prev?.[localPhaseKey] || {};
         const prevChecklist = Array.isArray(prevPhase.checklist)
           ? [...prevPhase.checklist]
           : [];
@@ -1172,6 +1407,15 @@ const StageCheckpointsPanel = ({
       ? [...phase.checklist]
       : [];
 
+    while (checklist.length <= stepIdx) {
+      checklist.push({
+        checkpointStates: [],
+        completed: false,
+        durationMinutes: 0,
+        totalSeconds: 0,
+      });
+    }
+
     const stepItemRaw = checklist[stepIdx] || {};
     const stepItem = { ...stepItemRaw };
 
@@ -1193,31 +1437,56 @@ const StageCheckpointsPanel = ({
     const mins = Math.max(0, Number(durationMinutes || 0));
     const secs = mins * 60;
 
+    checklist[stepIdx] = {
+      ...stepItem,
+      checkpointStates: states,
+      completed: true,
+      durationMinutes: mins,
+      totalSeconds: secs,
+    };
+
     if (typeof setProject === 'function') {
       setProject((prev) => {
         if (!prev) return prev;
 
-        const prevPhase = prev?.[canonical] || {};
+        const localPhaseKey = getExistingPhaseKey(prev, canonical);
+        const prevPhase = prev?.[localPhaseKey] || {};
         const prevChecklist = Array.isArray(prevPhase.checklist)
           ? [...prevPhase.checklist]
           : [];
 
-        const prevStep = { ...(prevChecklist[stepIdx] || {}) };
-        prevStep.durationMinutes = mins;
-        prevStep.totalSeconds = secs;
+        while (prevChecklist.length <= stepIdx) {
+          prevChecklist.push({
+            checkpointStates: [],
+            completed: false,
+            durationMinutes: 0,
+            totalSeconds: 0,
+          });
+        }
 
-        prevChecklist[stepIdx] = prevStep;
+        prevChecklist[stepIdx] = {
+          ...(prevChecklist[stepIdx] || {}),
+          checkpointStates: states,
+          completed: true,
+          durationMinutes: mins,
+          totalSeconds: secs,
+        };
 
         return {
           ...prev,
-          [canonical]: { ...prevPhase, checklist: prevChecklist },
+          [canonical]: {
+            ...prevPhase,
+            checklist: prevChecklist,
+          },
         };
       });
     }
 
     await updateDoc(ref, {
-      [`${canonical}.checklist.${stepIdx}.durationMinutes`]: mins,
-      [`${canonical}.checklist.${stepIdx}.totalSeconds`]: secs,
+      [canonical]: {
+        ...phase,
+        checklist,
+      },
       updatedAt: serverTimestamp(),
       updatedBy: 'artistPortal',
     });
@@ -1286,65 +1555,118 @@ const StageCheckpointsPanel = ({
   const MINUTES_OPTIONS = Array.from({ length: 12 }, (_, i) => i * 5);
 
   return (
-    <div className="pp-stage-card">
-      <div className="pp-stage-card-header">
-        <div>
-          <div className="pp-section-eyebrow">Build Checkpoints</div>
-          <h4 className="pp-section-title">Internal checkpoints</h4>
+    <div
+      className={[
+        'pp-stage-card',
+        variant === 'compact' ? 'pp-stage-card--compact' : '',
+      ]
+        .filter(Boolean)
+        .join(' ')}
+    >
+      {showHeader && variant !== 'compact' && (
+        <div className="pp-stage-card-header">
+          <div>
+            <div className="pp-section-eyebrow">Build Checkpoints</div>
+            <h4 className="pp-section-title">Internal checkpoints</h4>
+          </div>
         </div>
-      </div>
+      )}
 
-      <div className="pp-step-list">
-        {normalizedSteps.map((step, stepIdx) => {
-          const { total, done, status } = step;
-          const isOpen = openStepId === step.id;
-          const canLogDuration = isAdmin && total > 0 && done === total;
-          const hasLoggedDuration = (step.durationMinutes || 0) > 0;
+      {variant === 'compact' ? (
+        <div className="pp-compact-list">
+          {normalizedSteps.map((step, stepIdx) => {
+            const { total, done, status } = step;
+            const isOpen = openStepId === step.id;
+            const canLogDuration = isAdmin && total > 0 && done === total;
+            const hasLoggedDuration = (step.durationMinutes || 0) > 0;
 
-          return (
-            <div
-              key={step.id}
-              className={`pp-step-block step-${String(status)
-                .toLowerCase()
-                .replace(/\s+/g, '-')}`}
-            >
-              {isAdmin ? (
-                <button
-                  type="button"
-                  className="pp-step-header slp-pp-step-header"
-                  onClick={() => toggleStep(step.id)}
-                >
-                  <div className="pp-step-header-main">
-                    <span className="pp-step-title">{step.label}</span>
+            const compactStatusClass =
+              status === 'COMPLETED'
+                ? 'is-completed'
+                : status === 'IN PROGRESS'
+                  ? 'is-in-progress'
+                  : 'is-upcoming';
 
-                    <span className="pp-step-count">
-                      {done === total
-                        ? 'Fully completed'
-                        : `${done}/${total} completed`}
+            const statusLabel =
+              status === 'COMPLETED'
+                ? 'Completed'
+                : status === 'IN PROGRESS'
+                  ? 'In progress'
+                  : 'Upcoming';
+
+            return (
+              <div
+                key={step.id}
+                className={`pp-compact-row ${compactStatusClass}`}
+              >
+                <div className="pp-compact-marker-rail">
+                  {isAdmin ? (
+                    <button
+                      type="button"
+                      className={`pp-compact-marker ${compactStatusClass}`}
+                      onClick={() => toggleStep(step.id)}
+                      aria-label={step.label}
+                    >
+                      {status === 'COMPLETED' ? '✓' : ''}
+                    </button>
+                  ) : (
+                    <span
+                      className={`pp-compact-marker ${compactStatusClass}`}
+                      aria-hidden="true"
+                    >
+                      {status === 'COMPLETED' ? '✓' : ''}
                     </span>
+                  )}
 
-                    {total > 0 && done < total && (
-                      <span
-                        role="button"
-                        tabIndex={0}
+                  <span className="pp-compact-line" aria-hidden="true" />
+                </div>
+
+                <div className="pp-compact-copy">
+                  <div className="pp-compact-title-row">
+                    <div className="pp-compact-title-wrap">
+                      <div className="pp-compact-title">{step.label}</div>
+                      <div className="pp-compact-desc">
+                        {step.checkpoints?.[0]?.details?.[0] ||
+                          step.checkpoints?.[0]?.label ||
+                          'Checkpoint details will appear here.'}
+                      </div>
+                    </div>
+
+                    <div className="pp-compact-right">
+                      {isAdmin ? (
+                        <button
+                          type="button"
+                          className={`pp-compact-chevron ${isOpen ? 'open' : ''}`}
+                          onClick={() => toggleStep(step.id)}
+                          aria-label={isOpen ? 'Collapse step' : 'Expand step'}
+                        >
+                          ▾
+                        </button>
+                      ) : (
+                        <span
+                          className="pp-compact-chevron pp-compact-chevron--placeholder"
+                          aria-hidden="true"
+                        />
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="pp-compact-meta-row">
+                    <div className={`pp-compact-status ${compactStatusClass}`}>
+                      {statusLabel}
+                    </div>
+
+                    {isAdmin && total > 0 && done < total && (
+                      <button
+                        type="button"
                         className="pp-step-markall-btn"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleMarkAllComplete({ stepIdx });
-                        }}
-                        onKeyDown={(e) => {
-                          if (e.key === 'Enter' || e.key === ' ') {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            handleMarkAllComplete({ stepIdx });
-                          }
-                        }}
+                        onClick={() => handleMarkAllComplete({ stepIdx })}
                       >
                         Mark all complete
-                      </span>
+                      </button>
                     )}
 
-                    {canLogDuration && (
+                    {isAdmin && canLogDuration && (
                       <span className="pp-step-duration">
                         {hasLoggedDuration ? (
                           <>
@@ -1359,10 +1681,7 @@ const StageCheckpointsPanel = ({
                           <button
                             type="button"
                             className="pp-step-log-btn"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              openDurationModal({ stepIdx });
-                            }}
+                            onClick={() => openDurationModal({ stepIdx })}
                           >
                             Log duration
                           </button>
@@ -1371,150 +1690,380 @@ const StageCheckpointsPanel = ({
                     )}
                   </div>
 
-                  <span
-                    className={`pp-step-status pill ${statusClass(status)}`}
-                  >
-                    {status}
-                  </span>
+                  {isAdmin && isOpen && (
+                    <div className="pp-compact-checkpoint-list">
+                      {step.checkpoints.map((cp, cpIdx) => (
+                        <div key={cp.id} className="pp-compact-checkpoint-row">
+                          <button
+                            type="button"
+                            className={`pp-checkpoint-icon pp-checkpoint-icon--button ${
+                              cp.completed ? 'is-completed' : ''
+                            }`}
+                            aria-label={
+                              cp.completed ? 'Mark incomplete' : 'Mark complete'
+                            }
+                            onClick={() =>
+                              handleToggleCheckpoint({
+                                stepIdx,
+                                cpIdx,
+                                nextChecked: !cp.completed,
+                              })
+                            }
+                          >
+                            {cp.completed ? '✓' : ''}
+                          </button>
 
-                  <span
-                    className={`pp-step-chevron ${isOpen ? 'open' : ''}`}
-                    aria-hidden="true"
-                  >
-                    ▾
-                  </span>
-                </button>
-              ) : (
-                <div className="pp-step-header slp-pp-step-header is-static">
-                  <div className="pp-step-header-main">
-                    <span className="pp-step-title">{step.label}</span>
-                  </div>
-
-                  <span
-                    className={`pp-step-status pill ${statusClass(status)}`}
-                  >
-                    {status}
-                  </span>
-                </div>
-              )}
-
-              {isOpen && isAdmin && (
-                <div className="pp-checkpoint-list grouped">
-                  {step.checkpoints.map((cp, cpIdx) => (
-                    <div
-                      key={cp.id}
-                      className="pp-checkpoint-row pp-checkpoint-row--admin"
-                    >
-                      <div className="pp-checkpoint-main">
-                        <button
-                          type="button"
-                          className={`pp-checkpoint-icon pp-checkpoint-icon--button ${
-                            cp.completed ? 'is-completed' : ''
-                          }`}
-                          aria-label={
-                            cp.completed ? 'Mark incomplete' : 'Mark complete'
-                          }
-                          onClick={() =>
-                            handleToggleCheckpoint({
-                              stepIdx,
-                              cpIdx,
-                              nextChecked: !cp.completed,
-                            })
-                          }
-                        >
-                          {cp.completed ? '✓' : ''}
-                        </button>
-
-                        <span
-                          className={`pp-checkpoint-label ${
-                            cp.completed ? 'is-completed' : ''
-                          }`}
-                        >
-                          {cp.label}
-                        </span>
-                      </div>
+                          <span
+                            className={`pp-checkpoint-label ${
+                              cp.completed ? 'is-completed' : ''
+                            }`}
+                          >
+                            {cp.label}
+                          </span>
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          );
-        })}
-      </div>
-
-      {isAdmin && durationModalOpen && (
-        <div className="slp-modal-overlay" role="dialog" aria-modal="true">
-          <div className="slp-modal">
-            <div className="slp-modal-header">
-              <div className="slp-modal-title">Log duration</div>
-              <div className="slp-modal-subtitle">
-                How long did this checkpoint take?
-              </div>
-            </div>
-
-            <div className="slp-modal-body">
-              <div className="slp-modal-grid">
-                <div className="slp-modal-field">
-                  <label className="slp-modal-label">Hours</label>
-                  <select
-                    className="slp-modal-select"
-                    value={hours}
-                    onChange={(e) => setHours(Number(e.target.value))}
-                  >
-                    {HOURS_OPTIONS.map((h) => (
-                      <option key={h} value={h}>
-                        {h}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className="slp-modal-field">
-                  <label className="slp-modal-label">Minutes</label>
-                  <select
-                    className="slp-modal-select"
-                    value={minutes}
-                    onChange={(e) => setMinutes(Number(e.target.value))}
-                  >
-                    {MINUTES_OPTIONS.map((m) => (
-                      <option key={m} value={m}>
-                        {m}
-                      </option>
-                    ))}
-                  </select>
+                  )}
                 </div>
               </div>
+            );
+          })}
+        </div>
+      ) : (
+        <div className="pp-step-list">
+          {normalizedSteps.map((step, stepIdx) => {
+            const { total, done, status } = step;
+            const isOpen = openStepId === step.id;
+            const canLogDuration = isAdmin && total > 0 && done === total;
+            const hasLoggedDuration = (step.durationMinutes || 0) > 0;
 
-              <div className="slp-modal-hint">
-                Minutes are logged in 5-minute increments.
-              </div>
-            </div>
-
-            <div className="slp-modal-footer">
-              <button
-                type="button"
-                className="slp-modal-btn slp-modal-btn--ghost"
-                onClick={closeDurationModal}
-                disabled={saving}
+            return (
+              <div
+                key={step.id}
+                className={`pp-step-block step-${String(status)
+                  .toLowerCase()
+                  .replace(/\s+/g, '-')}`}
               >
-                Cancel
-              </button>
+                {isAdmin ? (
+                  <button
+                    type="button"
+                    className="pp-step-header slp-pp-step-header"
+                    onClick={() => toggleStep(step.id)}
+                  >
+                    <div className="pp-step-header-main">
+                      <span className="pp-step-title">{step.label}</span>
 
-              <button
-                type="button"
-                className="slp-modal-btn slp-modal-btn--primary"
-                onClick={saveDurationAndComplete}
-                disabled={saving}
-              >
-                {saving ? 'Saving…' : 'Save & mark complete'}
-              </button>
-            </div>
-          </div>
+                      <span className="pp-step-count">
+                        {done === total
+                          ? 'Fully completed'
+                          : `${done}/${total} completed`}
+                      </span>
+
+                      {total > 0 && done < total && (
+                        <span
+                          role="button"
+                          tabIndex={0}
+                          className="pp-step-markall-btn"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleMarkAllComplete({ stepIdx });
+                          }}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              handleMarkAllComplete({ stepIdx });
+                            }
+                          }}
+                        >
+                          Mark all complete
+                        </span>
+                      )}
+
+                      {canLogDuration && (
+                        <span className="pp-step-duration">
+                          {hasLoggedDuration ? (
+                            <>
+                              {Math.floor((step.durationMinutes || 0) / 60)}h{' '}
+                              {String(
+                                (step.durationMinutes || 0) % 60
+                              ).padStart(2, '0')}
+                              m
+                            </>
+                          ) : (
+                            <button
+                              type="button"
+                              className="pp-step-log-btn"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                openDurationModal({ stepIdx });
+                              }}
+                            >
+                              Log duration
+                            </button>
+                          )}
+                        </span>
+                      )}
+                    </div>
+
+                    <span
+                      className={`pp-step-status pill ${statusClass(status)}`}
+                    >
+                      {status}
+                    </span>
+
+                    <span
+                      className={`pp-step-chevron ${isOpen ? 'open' : ''}`}
+                      aria-hidden="true"
+                    >
+                      ▾
+                    </span>
+                  </button>
+                ) : (
+                  <div className="pp-step-header slp-pp-step-header is-static">
+                    <div className="pp-step-header-main">
+                      <span className="pp-step-title">{step.label}</span>
+                    </div>
+
+                    <span
+                      className={`pp-step-status pill ${statusClass(status)}`}
+                    >
+                      {status}
+                    </span>
+                  </div>
+                )}
+
+                {isOpen && isAdmin && (
+                  <div className="pp-checkpoint-list grouped">
+                    {step.checkpoints.map((cp, cpIdx) => (
+                      <div
+                        key={cp.id}
+                        className="pp-checkpoint-row pp-checkpoint-row--admin"
+                      >
+                        <div className="pp-checkpoint-main">
+                          <button
+                            type="button"
+                            className={`pp-checkpoint-icon pp-checkpoint-icon--button ${
+                              cp.completed ? 'is-completed' : ''
+                            }`}
+                            aria-label={
+                              cp.completed ? 'Mark incomplete' : 'Mark complete'
+                            }
+                            onClick={() =>
+                              handleToggleCheckpoint({
+                                stepIdx,
+                                cpIdx,
+                                nextChecked: !cp.completed,
+                              })
+                            }
+                          >
+                            {cp.completed ? '✓' : ''}
+                          </button>
+
+                          <span
+                            className={`pp-checkpoint-label ${
+                              cp.completed ? 'is-completed' : ''
+                            }`}
+                          >
+                            {cp.label}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       )}
+
+      {isAdmin &&
+        durationModalOpen &&
+        createPortal(
+          <div
+            className="slp-modal-overlay"
+            role="dialog"
+            aria-modal="true"
+            onClick={(e) => {
+              if (e.target.classList.contains('slp-modal-overlay')) {
+                closeDurationModal();
+              }
+            }}
+          >
+            <div className="slp-modal slp-duration-modal">
+              <div className="slp-modal-header">
+                <div className="slp-modal-title">Log duration</div>
+                <div className="slp-modal-subtitle">
+                  How long did this checkpoint take?
+                </div>
+              </div>
+
+              <div className="slp-modal-body">
+                <div className="slp-modal-grid">
+                  <div className="slp-modal-field">
+                    <label className="slp-modal-label">Hours</label>
+                    <select
+                      className="slp-modal-select"
+                      value={hours}
+                      onChange={(e) => setHours(Number(e.target.value))}
+                    >
+                      {HOURS_OPTIONS.map((h) => (
+                        <option key={h} value={h}>
+                          {h}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="slp-modal-field">
+                    <label className="slp-modal-label">Minutes</label>
+                    <select
+                      className="slp-modal-select"
+                      value={minutes}
+                      onChange={(e) => setMinutes(Number(e.target.value))}
+                    >
+                      {MINUTES_OPTIONS.map((m) => (
+                        <option key={m} value={m}>
+                          {m}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                <div className="slp-modal-hint">
+                  Minutes are logged in 5-minute increments.
+                </div>
+              </div>
+
+              <div className="slp-modal-footer">
+                <button
+                  type="button"
+                  className="slp-modal-btn slp-modal-btn--ghost"
+                  onClick={closeDurationModal}
+                  disabled={saving}
+                >
+                  Cancel
+                </button>
+
+                <button
+                  type="button"
+                  className="slp-modal-btn slp-modal-btn--primary"
+                  onClick={saveDurationAndComplete}
+                  disabled={saving}
+                >
+                  {saving ? 'Saving…' : 'Save & mark complete'}
+                </button>
+              </div>
+            </div>
+          </div>,
+          document.body
+        )}
     </div>
   );
 };
+
+function renderStorypointIcon(iconKey) {
+  switch (iconKey) {
+    case 'progress':
+      return (
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none">
+          <circle
+            cx="12"
+            cy="12"
+            r="8.25"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            opacity="0.9"
+          />
+          <path
+            d="M12 12 L16.5 9.5"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+          />
+          <circle cx="12" cy="12" r="1.6" fill="currentColor" />
+        </svg>
+      );
+
+    case 'build':
+      return (
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none">
+          <path
+            d="M14.8 5.2a3.2 3.2 0 0 0 4 4l-6.8 6.8-2-2 6.8-6.8Z"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M8.4 14.4 5 17.8a1.6 1.6 0 1 0 2.2 2.2l3.4-3.4"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+          />
+        </svg>
+      );
+
+    case 'voice':
+      return (
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none">
+          <path
+            d="M4 13c1.6-3.2 3.2-3.2 4.8 0s3.2 3.2 4.8 0 3.2-3.2 4.8 0"
+            stroke="currentColor"
+            strokeWidth="1.7"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M4 9.5c1.6-3.2 3.2-3.2 4.8 0s3.2 3.2 4.8 0 3.2-3.2 4.8 0"
+            stroke="currentColor"
+            strokeWidth="1.4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            opacity="0.7"
+          />
+        </svg>
+      );
+
+    case 'archive':
+      return (
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none">
+          <path
+            d="M5 7.5h14v11a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-11Z"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M4 7.5h16V5.8a1.3 1.3 0 0 0-1.3-1.3H5.3A1.3 1.3 0 0 0 4 5.8v1.7Z"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M9 12h6"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+          />
+        </svg>
+      );
+
+    default:
+      return (
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none">
+          <circle
+            cx="12"
+            cy="12"
+            r="7"
+            stroke="currentColor"
+            strokeWidth="1.6"
+          />
+        </svg>
+      );
+  }
+}
 
 /* =========================================================
    COMPONENT HELPERS
@@ -1559,98 +2108,462 @@ function getCurrentStageAndStepLabels(project) {
   return { stageLabel, stepLabel };
 }
 
-function getLearningPointsForStep(step, project = null) {
+function getStorypointsForStep(step, project = null) {
   if (!step) return [];
+
+  const stageNumber = STAGE_MEDIA?.[step?.key]?.stageNumber || 0;
+  const stageResources = getStageResourceItems(project, stageNumber);
 
   const resourceItems = [];
 
-  const projectFiles = Array.isArray(project?.files) ? project.files : [];
-  const buildFiles = Array.isArray(project?.attachments)
-    ? project.attachments
-    : [];
-  const mergedFiles = [...projectFiles, ...buildFiles];
-
-  const paymentLink =
-    project?.paymentLink ||
-    project?.stripeCheckoutUrl ||
-    project?.checkoutUrl ||
-    '';
-
-  const signatureLink =
-    project?.signatureLink ||
-    project?.documentToSignUrl ||
-    project?.esignUrl ||
-    '';
-
-  if (mergedFiles.length) {
+  if (stageResources.items.length) {
     resourceItems.push(
-      `${mergedFiles.length} file${mergedFiles.length === 1 ? '' : 's'} available`
+      `${stageResources.items.length} stage resource${
+        stageResources.items.length === 1 ? '' : 's'
+      } available`
     );
   }
 
-  if (signatureLink) {
+  if (stageResources.signatureLink) {
     resourceItems.push('Document ready for signature');
   }
 
-  if (paymentLink) {
+  if (stageResources.paymentLink) {
     resourceItems.push('Payment link available');
   }
 
   return [
     {
-      id: 'overview',
-      icon: '✦',
-      shortLabel: 'Overview',
-      title: 'Stage overview',
+      id: 'progress',
+      icon: 'progress',
+      shortLabel: 'Progress',
+      title: 'Chapter progress',
+      body: 'Track where this chapter stands right now, including completion progress, estimated focused hours, target timing, and checkpoint status.',
+    },
+    {
+      id: 'build',
+      icon: 'build',
+      shortLabel: 'Build',
+      title: 'What happens in this chapter',
       body:
-        step.mantra ||
-        'This phase plays an important role in shaping the final voice, feel, and identity of your drum.',
+        step.what ||
+        'This section explains what is physically happening in the build during this chapter.',
+      data: {
+        summary:
+          step.what ||
+          'This section explains what is physically happening in the build during this chapter.',
+        techniques:
+          Array.isArray(step.techniques) && step.techniques.length
+            ? step.techniques
+            : [],
+        tools: Array.isArray(step.tools) && step.tools.length ? step.tools : [],
+      },
     },
     {
-      id: 'process',
-      icon: '◎',
-      shortLabel: 'Process',
-      title: 'What we do in this stage',
-      body: step.what || 'Details for this stage will appear here.',
-    },
-    {
-      id: 'impact',
-      icon: '◌',
-      shortLabel: 'Impact',
-      title: 'Why it matters for your drum',
-      body: step.why || 'Why this stage matters will appear here.',
-    },
-    {
-      id: 'methods',
-      icon: '⟐',
-      shortLabel: 'Methods',
-      title: 'Techniques used',
+      id: 'voice',
+      icon: 'voice',
+      shortLabel: 'Voice',
+      title: 'Why it matters',
       body:
-        Array.isArray(step.techniques) && step.techniques.length
-          ? step.techniques.join(' • ')
-          : 'Techniques for this stage will appear here.',
+        step.why ||
+        'This section explains how this chapter shapes the sound, feel, response, and identity of your drum.',
+      data: {
+        summary:
+          step.why ||
+          'This section explains how this chapter shapes the sound, feel, response, and identity of your drum.',
+        affects: ['Sound', 'Feel', 'Response', 'Identity'],
+        mantra:
+          step.mantra ||
+          'Every step in this process shapes the instrument’s final voice.',
+      },
     },
     {
-      id: 'tools',
-      icon: '⌘',
-      shortLabel: 'Tools',
-      title: 'Tools involved',
-      body:
-        Array.isArray(step.tools) && step.tools.length
-          ? step.tools.join(' • ')
-          : 'Tools for this stage will appear here.',
-    },
-    {
-      id: 'resources',
-      icon: '↗',
-      shortLabel: 'Resources',
-      title: 'Media, documents, and next actions',
+      id: 'archive',
+      icon: 'archive',
+      shortLabel: 'Archive',
+      title: 'Media, documents, and chapter records',
       body:
         resourceItems.length > 0
           ? resourceItems.join(' • ')
-          : 'When files, approval documents, or payment links are added for this stage, they will appear here.',
+          : 'Photos, videos, documents, approvals, and other chapter records will appear here as they are added.',
     },
   ];
+}
+
+function getChapterProgressData(step, project) {
+  if (!step || !project) {
+    return {
+      status: 'Not Started',
+      completionPct: 0,
+      completedCheckpoints: 0,
+      totalCheckpoints: 0,
+      currentSubStep: 'No sub-step selected',
+      estHours: '—',
+      avgDays: '—',
+      targetDate: 'TBD',
+    };
+  }
+
+  const statusSummary = getStepStatus(project, step);
+  const totalCheckpoints = Number(statusSummary?.total || 0);
+  const completedCheckpoints = Number(statusSummary?.done || 0);
+
+  const completionPct =
+    totalCheckpoints > 0
+      ? Math.round((completedCheckpoints / totalCheckpoints) * 100)
+      : 0;
+
+  const canonical = canonicalKeyForStage(step.key);
+  const phaseKey = getExistingPhaseKey(project, canonical);
+  const phase = project?.[phaseKey] || {};
+  const checklist = Array.isArray(phase.checklist) ? phase.checklist : [];
+  const tpl = STAGE_TEMPLATES?.[step.key];
+  const tplSteps = Array.isArray(tpl?.steps) ? tpl.steps : [];
+
+  const selectedStageIndex = STEPS.findIndex((s) => s.key === step.key);
+  const liveStageIndex = getCurrentStepIndex(project);
+  const selectedStageState = getSelectedStageMediaState(
+    selectedStageIndex,
+    liveStageIndex
+  );
+  const isSelectedStageLive = selectedStageState === STAGE_MEDIA_STATE.CURRENT;
+  const isSelectedStageCompleted =
+    selectedStageState === STAGE_MEDIA_STATE.COMPLETED;
+
+  let currentSubStep = 'No sub-step selected';
+
+  if (isSelectedStageCompleted) {
+    if (tplSteps.length > 0) {
+      const lastStep = tplSteps[tplSteps.length - 1];
+      currentSubStep =
+        lastStep?.adminMainTitle ||
+        lastStep?.label ||
+        lastStep?.adminLeftShort ||
+        `Step ${tplSteps.length}`;
+    }
+  } else if (isSelectedStageLive) {
+    for (let i = 0; i < tplSteps.length; i += 1) {
+      const tplStep = tplSteps[i];
+      const item = checklist[i] || {};
+      const checkpointStates = Array.isArray(item.checkpointStates)
+        ? item.checkpointStates
+        : [];
+
+      const checkpointCount = Array.isArray(tplStep?.checkpoints)
+        ? tplStep.checkpoints.length
+        : 0;
+
+      const checkpointDone = checkpointStates.filter(Boolean).length;
+      const isComplete =
+        checkpointCount > 0
+          ? checkpointDone === checkpointCount
+          : !!item.completed;
+
+      if (!isComplete) {
+        currentSubStep =
+          tplStep?.adminMainTitle ||
+          tplStep?.label ||
+          tplStep?.adminLeftShort ||
+          `Step ${i + 1}`;
+        break;
+      }
+    }
+
+    if (
+      currentSubStep === 'No sub-step selected' &&
+      tplSteps.length > 0 &&
+      completedCheckpoints === totalCheckpoints &&
+      totalCheckpoints > 0
+    ) {
+      const lastStep = tplSteps[tplSteps.length - 1];
+      currentSubStep =
+        lastStep?.adminMainTitle ||
+        lastStep?.label ||
+        lastStep?.adminLeftShort ||
+        `Step ${tplSteps.length}`;
+    }
+  } else {
+    const firstStep = tplSteps[0];
+    currentSubStep =
+      firstStep?.adminMainTitle ||
+      firstStep?.label ||
+      firstStep?.adminLeftShort ||
+      'Awaiting unlock';
+  }
+
+  const targetDate = getStageTargetDate(project, step.key) || 'TBD';
+
+  return {
+    status: isSelectedStageCompleted
+      ? 'Completed'
+      : isSelectedStageLive
+        ? statusSummary?.status || 'Not Started'
+        : selectedStageState === STAGE_MEDIA_STATE.NEXT
+          ? 'Up Next'
+          : 'Locked',
+    completionPct:
+      isSelectedStageLive || isSelectedStageCompleted ? completionPct : 0,
+    completedCheckpoints:
+      isSelectedStageLive || isSelectedStageCompleted
+        ? completedCheckpoints
+        : 0,
+    totalCheckpoints,
+    currentSubStep,
+    estHours: step.estHours || '—',
+    avgDays: step.avgDays || '—',
+    targetDate,
+  };
+}
+
+function getCheckpointStepStatus(item = {}, tplStep = {}) {
+  const checkpointStates = Array.isArray(item.checkpointStates)
+    ? item.checkpointStates
+    : [];
+
+  const checkpointCount = Array.isArray(tplStep?.checkpoints)
+    ? tplStep.checkpoints.length
+    : 0;
+
+  const checkpointDone = checkpointStates.filter(Boolean).length;
+
+  const isComplete =
+    checkpointCount > 0 ? checkpointDone === checkpointCount : !!item.completed;
+
+  const isStarted =
+    checkpointDone > 0 ||
+    !!item.completed ||
+    Number(item.totalSeconds || 0) > 0;
+
+  const status = isComplete
+    ? 'completed'
+    : isStarted
+      ? 'in_progress'
+      : 'upcoming';
+
+  return {
+    status,
+    done: checkpointDone,
+    total: checkpointCount,
+    isComplete,
+    isStarted,
+  };
+}
+
+function getChapterCheckpointTimeline(step, project) {
+  if (!step || !project) return [];
+
+  const canonical = canonicalKeyForStage(step.key);
+  const phaseKey = getExistingPhaseKey(project, canonical);
+  const phase = project?.[phaseKey] || {};
+  const checklist = Array.isArray(phase.checklist) ? phase.checklist : [];
+  const tpl = STAGE_TEMPLATES?.[step.key];
+  const tplSteps = Array.isArray(tpl?.steps) ? tpl.steps : [];
+
+  const selectedStageIndex = STEPS.findIndex((s) => s.key === step.key);
+  const liveStageIndex = getCurrentStepIndex(project);
+  const selectedStageState = getSelectedStageMediaState(
+    selectedStageIndex,
+    liveStageIndex
+  );
+  const isSelectedStageLive = selectedStageState === STAGE_MEDIA_STATE.CURRENT;
+  const isSelectedStageCompleted =
+    selectedStageState === STAGE_MEDIA_STATE.COMPLETED;
+
+  return tplSteps.map((tplStep, index) => {
+    const item = checklist[index] || {};
+    const checkpointStates = Array.isArray(item.checkpointStates)
+      ? item.checkpointStates
+      : [];
+
+    const checkpointCount = Array.isArray(tplStep?.checkpoints)
+      ? tplStep.checkpoints.length
+      : 0;
+
+    const checkpointDone = checkpointStates.filter(Boolean).length;
+    const isComplete =
+      checkpointCount > 0
+        ? checkpointDone === checkpointCount
+        : !!item.completed;
+
+    let status = 'upcoming';
+
+    if (isSelectedStageCompleted) {
+      status = 'completed';
+    } else if (isSelectedStageLive) {
+      const isStarted = checkpointDone > 0 || !!item.completed;
+      status = isComplete
+        ? 'completed'
+        : isStarted
+          ? 'in_progress'
+          : 'upcoming';
+    }
+
+    const firstCheckpoint = Array.isArray(tplStep?.checkpoints)
+      ? tplStep.checkpoints[0]
+      : null;
+
+    const description =
+      firstCheckpoint?.details?.[0] ||
+      firstCheckpoint?.ui ||
+      'Checkpoint details will appear here.';
+
+    return {
+      id: tplStep?.id || `${step.key}-timeline-${index}`,
+      label:
+        tplStep?.adminMainTitle ||
+        tplStep?.label ||
+        tplStep?.adminLeftShort ||
+        `Step ${index + 1}`,
+      description,
+      status,
+      done:
+        isSelectedStageLive || isSelectedStageCompleted ? checkpointDone : 0,
+      total: checkpointCount,
+    };
+  });
+}
+
+function StageResourceViewerModal({ item, onClose }) {
+  useEffect(() => {
+    if (!item) return;
+
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        onClose?.();
+      }
+    };
+
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [item, onClose]);
+
+  if (!item) return null;
+
+  const embedUrl = item.type === 'video' ? getVideoEmbedUrl(item.url) : null;
+  const isImage = item.type === 'image';
+  const isVideo = item.type === 'video';
+  const isAudio = item.type === 'audio';
+  const isPdf = item.type === 'document' && isPdfUrl(item.url);
+
+  return (
+    <div
+      className="sl-resource-viewer-modal"
+      role="dialog"
+      aria-modal="true"
+      onClick={(event) => {
+        if (event.target.classList.contains('sl-resource-viewer-modal')) {
+          onClose?.();
+        }
+      }}
+    >
+      <div className="sl-resource-viewer-modal-inner">
+        <div className="sl-resource-viewer-modal-top">
+          <div className="sl-resource-viewer-modal-meta">
+            <div className="sl-resource-viewer-modal-kicker">
+              {formatResourceTypeLabel(item.type)}
+            </div>
+            <div className="sl-resource-viewer-modal-title">
+              {item.title || 'Stage resource'}
+            </div>
+            <div className="sl-resource-viewer-modal-subtitle">
+              {item.category
+                ? String(item.category).replace(/_/g, ' ')
+                : 'Stage resource'}
+            </div>
+          </div>
+
+          <div className="sl-resource-viewer-modal-actions">
+            <a
+              href={item.url}
+              target="_blank"
+              rel="noreferrer"
+              className="sl-resource-viewer-modal-btn"
+            >
+              Open
+            </a>
+
+            <button
+              type="button"
+              className="sl-resource-viewer-modal-btn sl-resource-viewer-modal-btn--close"
+              onClick={onClose}
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+
+        <div className="sl-resource-viewer-modal-body">
+          {isImage ? (
+            <div className="sl-resource-viewer-modal-image-wrap">
+              <img
+                src={item.url}
+                alt={item.title || 'Stage resource'}
+                className="sl-resource-viewer-modal-image"
+              />
+            </div>
+          ) : null}
+
+          {isVideo ? (
+            <div className="sl-resource-viewer-modal-video-wrap">
+              {embedUrl ? (
+                <iframe
+                  src={embedUrl}
+                  title={item.title || 'Stage video'}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              ) : (
+                <video
+                  src={item.url}
+                  controls
+                  playsInline
+                  preload="metadata"
+                  className="sl-resource-viewer-modal-video"
+                />
+              )}
+            </div>
+          ) : null}
+
+          {isAudio ? (
+            <div className="sl-resource-viewer-modal-audio-wrap">
+              <div className="sl-resource-viewer-modal-audio-card">
+                <div className="sl-resource-viewer-modal-audio-label">
+                  Audio preview
+                </div>
+                <audio controls src={item.url} style={{ width: '100%' }} />
+              </div>
+            </div>
+          ) : null}
+
+          {item.type === 'document' ? (
+            <div className="sl-resource-viewer-modal-doc-wrap">
+              {isPdf ? (
+                <iframe
+                  title={item.title || 'Stage document'}
+                  src={item.url}
+                  className="sl-resource-viewer-modal-pdf"
+                />
+              ) : (
+                <div className="sl-resource-viewer-modal-doc-card">
+                  <div className="sl-resource-viewer-modal-doc-label">
+                    Preview unavailable for this document type.
+                  </div>
+                  <a
+                    href={item.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="sl-resource-viewer-modal-btn"
+                  >
+                    Open document
+                  </a>
+                </div>
+              )}
+            </div>
+          ) : null}
+        </div>
+      </div>
+    </div>
+  );
 }
 
 /* =========================================================
@@ -1668,8 +2581,8 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
   );
   const [selectedStageMediaCache, setSelectedStageMediaCache] = useState({});
 
-  const [hoveredHotspotId, setHoveredHotspotId] = useState(null);
-  const [pinnedHotspotId, setPinnedHotspotId] = useState(null);
+  const [hoveredStorypointId, sethoveredStorypointId] = useState(null);
+  const [pinnedStorypointId, setpinnedStorypointId] = useState(null);
   const [activeInteractiveStepId, setActiveInteractiveStepId] = useState(null);
 
   const [carouselAnimating, setCarouselAnimating] = useState(false);
@@ -1679,13 +2592,15 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
   const [loadedAssetCount, setLoadedAssetCount] = useState(0);
   const [totalAssetCount, setTotalAssetCount] = useState(STEPS.length * 2);
 
+  const [selectedResourceItem, setSelectedResourceItem] = useState(null);
+
   const [sharedSmokeVideoUrl, setSharedSmokeVideoUrl] = useState('');
 
   const [isTouchDevice, setIsTouchDevice] = useState(false);
   const eduPanelCloseTimerRef = useRef(null);
 
   const eduPanelRef = useRef(null);
-  const hotspotRailRef = useRef(null);
+  const storypointRailRef = useRef(null);
 
   const transitionLockRef = useRef(false);
   const dragStartXRef = useRef(0);
@@ -1722,6 +2637,10 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
 
   useEffect(() => {
     setActiveInteractiveStepId(null);
+  }, [activeKey]);
+
+  useEffect(() => {
+    setSelectedResourceItem(null);
   }, [activeKey]);
 
   useEffect(() => {
@@ -1871,60 +2790,60 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
     }
   }, [project, currentStepIndex]);
 
-  const openLearningPoint = (id) => {
+  const openStorypoint = (id) => {
     if (eduPanelCloseTimerRef.current) {
       clearTimeout(eduPanelCloseTimerRef.current);
       eduPanelCloseTimerRef.current = null;
     }
-    setHoveredHotspotId(id);
+    sethoveredStorypointId(id);
   };
 
-  const scheduleCloseLearningPoint = () => {
-    if (isTouchDevice || pinnedHotspotId) return;
+  const scheduleCloseStorypoint = () => {
+    if (isTouchDevice || pinnedStorypointId) return;
 
     if (eduPanelCloseTimerRef.current) {
       clearTimeout(eduPanelCloseTimerRef.current);
     }
 
     eduPanelCloseTimerRef.current = setTimeout(() => {
-      setHoveredHotspotId(null);
+      sethoveredStorypointId(null);
     }, 180);
   };
 
-  const closeLearningPointNow = () => {
+  const closeStorypointNow = () => {
     if (eduPanelCloseTimerRef.current) {
       clearTimeout(eduPanelCloseTimerRef.current);
       eduPanelCloseTimerRef.current = null;
     }
-    setHoveredHotspotId(null);
-    setPinnedHotspotId(null);
+    sethoveredStorypointId(null);
+    setpinnedStorypointId(null);
   };
 
-  const togglePinnedLearningPoint = (id) => {
+  const togglePinnedStorypoint = (id) => {
     if (eduPanelCloseTimerRef.current) {
       clearTimeout(eduPanelCloseTimerRef.current);
       eduPanelCloseTimerRef.current = null;
     }
 
-    setPinnedHotspotId((prev) => (prev === id ? null : id));
-    setHoveredHotspotId(id);
+    setpinnedStorypointId((prev) => (prev === id ? null : id));
+    sethoveredStorypointId(id);
   };
 
   useEffect(() => {
     const handlePointerDownOutside = (event) => {
-      if (!pinnedHotspotId) return;
+      if (!pinnedStorypointId) return;
 
       const target = event.target;
 
       const clickedInsidePanel =
         eduPanelRef.current && eduPanelRef.current.contains(target);
 
-      const clickedInsideHotspots =
-        hotspotRailRef.current && hotspotRailRef.current.contains(target);
+      const clickedInsidestorypoints =
+        storypointRailRef.current && storypointRailRef.current.contains(target);
 
-      if (clickedInsidePanel || clickedInsideHotspots) return;
+      if (clickedInsidePanel || clickedInsidestorypoints) return;
 
-      closeLearningPointNow();
+      closeStorypointNow();
     };
 
     document.addEventListener('mousedown', handlePointerDownOutside);
@@ -1934,7 +2853,7 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
       document.removeEventListener('mousedown', handlePointerDownOutside);
       document.removeEventListener('touchstart', handlePointerDownOutside);
     };
-  }, [pinnedHotspotId]);
+  }, [pinnedStorypointId]);
 
   const { stageLabel: currentStageLabel, stepLabel: currentStepLabel } =
     useMemo(() => getCurrentStageAndStepLabels(project), [project]);
@@ -1944,8 +2863,18 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
 
   const chapterLabel = `Chapter ${toRomanChapter(activeIndex + 1)}`;
 
-  const currentStageLearningPoints = useMemo(
-    () => getLearningPointsForStep(activeStep, project),
+  const currentStageStorypoints = useMemo(
+    () => getStorypointsForStep(activeStep, project),
+    [activeStep, project]
+  );
+
+  const currentChapterProgressData = useMemo(
+    () => getChapterProgressData(activeStep, project),
+    [activeStep, project]
+  );
+
+  const currentChapterCheckpointTimeline = useMemo(
+    () => getChapterCheckpointTimeline(activeStep, project),
     [activeStep, project]
   );
 
@@ -2000,15 +2929,15 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
     });
   }, [project, currentStageTemplate, activeStep.key]);
 
-  const resolvedHotspotId = pinnedHotspotId || hoveredHotspotId;
+  const resolvedStorypointId = pinnedStorypointId || hoveredStorypointId;
 
-  const activeLearningPoint =
-    currentStageLearningPoints.find((item) => item.id === resolvedHotspotId) ||
+  const activeStorypoint =
+    currentStageStorypoints.find((item) => item.id === resolvedStorypointId) ||
     null;
 
   const stageResourceItems = useMemo(
-    () => getStageResourceItems(project),
-    [project]
+    () => getStageResourceItems(project, activeIndex + 1),
+    [project, activeIndex]
   );
 
   useEffect(() => {
@@ -2045,15 +2974,15 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
 
   const isSelectedStageLocked = currentStageStatus === STAGE_MEDIA_STATE.FUTURE;
 
-  const showStageHotspots =
+  const showStageStorypoints =
     currentStageStatus === STAGE_MEDIA_STATE.COMPLETED ||
     currentStageStatus === STAGE_MEDIA_STATE.CURRENT ||
     currentStageStatus === STAGE_MEDIA_STATE.NEXT;
 
   useEffect(() => {
-    setHoveredHotspotId(null);
-    setPinnedHotspotId(null);
-  }, [activeKey, showStageHotspots]);
+    sethoveredStorypointId(null);
+    setpinnedStorypointId(null);
+  }, [activeKey, showStageStorypoints]);
 
   const displayedOverlayStageIndex = Math.max(
     0,
@@ -2428,23 +3357,23 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
                   <div className="sl-progress-hero-side-preview-fallback" />
                 )}
 
-                {activeLearningPoint ? (
+                {activeStorypoint ? (
                   <div
                     ref={eduPanelRef}
                     className={`sl-progress-stage-edu-panel ${
-                      activeLearningPoint ? 'is-visible' : ''
+                      activeStorypoint ? 'is-visible' : ''
                     }`}
                     onMouseEnter={() => {
                       if (
                         !isTouchDevice &&
-                        activeLearningPoint?.id &&
-                        !pinnedHotspotId
+                        activeStorypoint?.id &&
+                        !pinnedStorypointId
                       ) {
-                        openLearningPoint(activeLearningPoint.id);
+                        openStorypoint(activeStorypoint.id);
                       }
                     }}
                     onMouseLeave={() => {
-                      if (!isTouchDevice) scheduleCloseLearningPoint();
+                      if (!isTouchDevice) scheduleCloseStorypoint();
                     }}
                   >
                     <div className="sl-progress-stage-edu-panel-inner">
@@ -2461,33 +3390,271 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
                         <button
                           type="button"
                           className="sl-progress-stage-edu-close"
-                          onClick={closeLearningPointNow}
+                          onClick={closeStorypointNow}
                         >
                           Close
                         </button>
                       </div>
 
                       <div className="sl-progress-stage-edu-title">
-                        {activeLearningPoint.title}
+                        {activeStorypoint.title}
                       </div>
 
-                      <p className="sl-progress-stage-edu-body">
-                        {activeLearningPoint.body}
-                      </p>
+                      {activeStorypoint.id === 'progress' ? (
+                        <div className="sl-progress-storypoint-progress">
+                          <div className="sl-progress-storypoint-progress-grid">
+                            <div className="sl-progress-storypoint-stat">
+                              <div className="sl-progress-storypoint-stat-label">
+                                Chapter status
+                              </div>
+                              <div className="sl-progress-storypoint-stat-value">
+                                {currentChapterProgressData.status}
+                              </div>
+                            </div>
 
-                      {activeLearningPoint.id === 'resources' ? (
+                            <div className="sl-progress-storypoint-stat">
+                              <div className="sl-progress-storypoint-stat-label">
+                                Chapter completion
+                              </div>
+                              <div className="sl-progress-storypoint-stat-value">
+                                {currentChapterProgressData.completionPct}%
+                              </div>
+                            </div>
+
+                            <div className="sl-progress-storypoint-stat">
+                              <div className="sl-progress-storypoint-stat-label">
+                                Est. focused hours
+                              </div>
+                              <div className="sl-progress-storypoint-stat-value">
+                                {currentChapterProgressData.estHours}
+                              </div>
+                            </div>
+
+                            <div className="sl-progress-storypoint-stat">
+                              <div className="sl-progress-storypoint-stat-label">
+                                Avg. turnaround
+                              </div>
+                              <div className="sl-progress-storypoint-stat-value">
+                                {currentChapterProgressData.avgDays}
+                              </div>
+                            </div>
+
+                            <div className="sl-progress-storypoint-stat">
+                              <div className="sl-progress-storypoint-stat-label">
+                                Current sub-step
+                              </div>
+                              <div className="sl-progress-storypoint-stat-value">
+                                {currentChapterProgressData.currentSubStep}
+                              </div>
+                            </div>
+
+                            <div className="sl-progress-storypoint-stat">
+                              <div className="sl-progress-storypoint-stat-label">
+                                Stage completion target
+                              </div>
+                              <div className="sl-progress-storypoint-stat-value">
+                                {currentChapterProgressData.targetDate}
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="sl-progress-storypoint-checkpoints">
+                            <div className="sl-progress-storypoint-checkpoints-header">
+                              <div className="sl-progress-storypoint-checkpoints-label">
+                                Workshop checkpoints
+                              </div>
+                              <div className="sl-progress-storypoint-checkpoints-count">
+                                {
+                                  currentChapterProgressData.completedCheckpoints
+                                }
+                                /{currentChapterProgressData.totalCheckpoints}{' '}
+                                completed
+                              </div>
+                            </div>
+
+                            <StageCheckpointsPanel
+                              key={`progress-inline-${activeStep.key}-${isAdmin ? 'admin' : 'customer'}`}
+                              project={project}
+                              setProject={setProject}
+                              stageKey={activeStep.key}
+                              isAdmin={isAdmin}
+                              variant="compact"
+                              showHeader={false}
+                            />
+                          </div>
+                        </div>
+                      ) : (
+                        <p className="sl-progress-stage-edu-body">
+                          {activeStorypoint.body}
+                        </p>
+                      )}
+
+                      {activeStorypoint.id === 'build' ? (
+                        <div className="sl-progress-stage-storypoint-data-grid">
+                          <div className="sl-progress-stage-storypoint-data-card sl-progress-stage-storypoint-data-card--full">
+                            <div className="sl-progress-stage-storypoint-data-label">
+                              Chapter Summary
+                            </div>
+                            <div className="sl-progress-stage-storypoint-data-value sl-progress-stage-storypoint-data-value--body">
+                              {activeStorypoint.data?.summary ||
+                                'No build summary available yet.'}
+                            </div>
+                          </div>
+
+                          <div className="sl-progress-stage-storypoint-data-card">
+                            <div className="sl-progress-stage-storypoint-data-label">
+                              Techniques Used
+                            </div>
+                            <div className="sl-progress-stage-storypoint-data-value sl-progress-stage-storypoint-data-value--stack">
+                              {activeStorypoint.data?.techniques?.length ? (
+                                activeStorypoint.data.techniques.map(
+                                  (item, index) => (
+                                    <span
+                                      key={`${item}-${index}`}
+                                      className="sl-progress-stage-storypoint-tag"
+                                    >
+                                      {item}
+                                    </span>
+                                  )
+                                )
+                              ) : (
+                                <span>No techniques added yet.</span>
+                              )}
+                            </div>
+                          </div>
+
+                          <div className="sl-progress-stage-storypoint-data-card">
+                            <div className="sl-progress-stage-storypoint-data-label">
+                              Tools Involved
+                            </div>
+                            <div className="sl-progress-stage-storypoint-data-value sl-progress-stage-storypoint-data-value--stack">
+                              {activeStorypoint.data?.tools?.length ? (
+                                activeStorypoint.data.tools.map(
+                                  (item, index) => (
+                                    <span
+                                      key={`${item}-${index}`}
+                                      className="sl-progress-stage-storypoint-tag"
+                                    >
+                                      {item}
+                                    </span>
+                                  )
+                                )
+                              ) : (
+                                <span>No tools added yet.</span>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      ) : null}
+
+                      {activeStorypoint.id === 'voice' ? (
+                        <div className="sl-progress-stage-storypoint-data-grid">
+                          <div className="sl-progress-stage-storypoint-data-card sl-progress-stage-storypoint-data-card--full">
+                            <div className="sl-progress-stage-storypoint-data-label">
+                              Why this chapter matters
+                            </div>
+                            <div className="sl-progress-stage-storypoint-data-value sl-progress-stage-storypoint-data-value--body">
+                              {activeStorypoint.data?.summary ||
+                                'No stage impact summary available yet.'}
+                            </div>
+                          </div>
+
+                          <div className="sl-progress-stage-storypoint-data-card">
+                            <div className="sl-progress-stage-storypoint-data-label">
+                              What this affects
+                            </div>
+                            <div className="sl-progress-stage-storypoint-data-value sl-progress-stage-storypoint-data-value--stack">
+                              {activeStorypoint.data?.affects?.length ? (
+                                activeStorypoint.data.affects.map(
+                                  (item, index) => (
+                                    <span
+                                      key={`${item}-${index}`}
+                                      className="sl-progress-stage-storypoint-tag"
+                                    >
+                                      {item}
+                                    </span>
+                                  )
+                                )
+                              ) : (
+                                <span>No impact categories added yet.</span>
+                              )}
+                            </div>
+                          </div>
+
+                          <div className="sl-progress-stage-storypoint-data-card">
+                            <div className="sl-progress-stage-storypoint-data-label">
+                              Stage mantra
+                            </div>
+                            <div className="sl-progress-stage-storypoint-data-value sl-progress-stage-storypoint-data-value--body">
+                              {activeStorypoint.data?.mantra ||
+                                'Every step in this process shapes the instrument’s final voice.'}
+                            </div>
+                          </div>
+                        </div>
+                      ) : null}
+
+                      {activeStorypoint.id === 'archive' ? (
                         <div className="sl-progress-stage-edu-resource-list">
-                          {stageResourceItems.files.map((file, index) => (
-                            <a
-                              key={file.id || file.url || index}
-                              href={file.url}
-                              target="_blank"
-                              rel="noreferrer"
-                              className="sl-progress-stage-edu-resource-link"
-                            >
-                              {file.name || `Resource ${index + 1}`}
-                            </a>
-                          ))}
+                          {stageResourceItems.items.length ? (
+                            <div className="sl-progress-stage-edu-resource-grid">
+                              {stageResourceItems.items.map((item, index) => {
+                                const isImage = item.type === 'image';
+                                const isVideo = item.type === 'video';
+
+                                return (
+                                  <button
+                                    key={item.id || item.url || index}
+                                    type="button"
+                                    className={`sl-progress-stage-edu-resource-card is-${item.type}`}
+                                    onClick={() =>
+                                      setSelectedResourceItem(item)
+                                    }
+                                  >
+                                    <div className="sl-progress-stage-edu-resource-thumb">
+                                      {isImage ? (
+                                        <img
+                                          src={item.url}
+                                          alt={
+                                            item.title ||
+                                            `Stage resource ${index + 1}`
+                                          }
+                                          className="sl-progress-stage-edu-resource-image"
+                                          loading="lazy"
+                                        />
+                                      ) : (
+                                        <div className="sl-progress-stage-edu-resource-filetype">
+                                          {isVideo
+                                            ? 'VIDEO'
+                                            : item.type === 'audio'
+                                              ? 'AUDIO'
+                                              : 'DOC'}
+                                        </div>
+                                      )}
+                                    </div>
+
+                                    <div className="sl-progress-stage-edu-resource-meta">
+                                      <div className="sl-progress-stage-edu-resource-title">
+                                        {item.title || `Resource ${index + 1}`}
+                                      </div>
+                                      <div className="sl-progress-stage-edu-resource-subtitle">
+                                        {item.category
+                                          ? String(item.category).replace(
+                                              /_/g,
+                                              ' '
+                                            )
+                                          : item.type}
+                                      </div>
+                                    </div>
+                                  </button>
+                                );
+                              })}
+                            </div>
+                          ) : (
+                            <div className="sl-progress-stage-edu-resource-empty">
+                              No media or stage-specific files have been added
+                              for this chapter yet.
+                            </div>
+                          )}
 
                           {stageResourceItems.signatureLink ? (
                             <a
@@ -2526,23 +3693,23 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
 
                   return (
                     <div className="sl-progress-stage-checkpoint-detail-card">
-                      <div className="sl-progress-stage-hotspot-card-eyebrow">
+                      <div className="sl-progress-stage-storypoint-card-eyebrow">
                         Build checkpoint
                       </div>
 
-                      <div className="sl-progress-stage-hotspot-card-title">
+                      <div className="sl-progress-stage-storypoint-card-title">
                         {activeInteractiveStep.label}
                       </div>
 
-                      <p className="sl-progress-stage-hotspot-card-body">
+                      <p className="sl-progress-stage-storypoint-card-body">
                         {activeInteractiveStep.body}
                       </p>
 
-                      <div className="sl-progress-stage-hotspot-card-meta">
-                        <span className="sl-progress-stage-hotspot-card-pill">
+                      <div className="sl-progress-stage-storypoint-card-meta">
+                        <span className="sl-progress-stage-storypoint-card-pill">
                           {activeInteractiveStep.status}
                         </span>
-                        <span className="sl-progress-stage-hotspot-card-pill">
+                        <span className="sl-progress-stage-storypoint-card-pill">
                           {activeInteractiveStep.done}/
                           {activeInteractiveStep.total || 0} complete
                         </span>
@@ -2550,7 +3717,7 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
 
                       <button
                         type="button"
-                        className="sl-progress-stage-hotspot-card-close"
+                        className="sl-progress-stage-storypoint-card-close"
                         onClick={() => setActiveInteractiveStepId(null)}
                       >
                         Close
@@ -2651,39 +3818,39 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
                       </div>
                     </div>
                   </div>
-                  {showStageHotspots &&
-                  currentStageLearningPoints.length > 0 ? (
+                  {showStageStorypoints &&
+                  currentStageStorypoints.length > 0 ? (
                     <div
-                      ref={hotspotRailRef}
+                      ref={storypointRailRef}
                       className="sl-progress-stage-learning-rail sl-progress-stage-learning-rail--anchored"
                     >
-                      {currentStageLearningPoints.map((item) => (
+                      {currentStageStorypoints.map((item) => (
                         <button
                           key={item.id}
                           type="button"
                           className={`sl-progress-stage-learning-pill ${
-                            resolvedHotspotId === item.id ? 'is-active' : ''
+                            resolvedStorypointId === item.id ? 'is-active' : ''
                           }`}
                           onMouseEnter={() => {
-                            if (!isTouchDevice && !pinnedHotspotId)
-                              openLearningPoint(item.id);
+                            if (!isTouchDevice && !pinnedStorypointId)
+                              openStorypoint(item.id);
                           }}
                           onMouseLeave={() => {
-                            if (!isTouchDevice && !pinnedHotspotId)
-                              scheduleCloseLearningPoint();
+                            if (!isTouchDevice && !pinnedStorypointId)
+                              scheduleCloseStorypoint();
                           }}
                           onFocus={() => {
-                            if (!pinnedHotspotId) openLearningPoint(item.id);
+                            if (!pinnedStorypointId) openStorypoint(item.id);
                           }}
                           onBlur={() => {
-                            if (!isTouchDevice && !pinnedHotspotId)
-                              scheduleCloseLearningPoint();
+                            if (!isTouchDevice && !pinnedStorypointId)
+                              scheduleCloseStorypoint();
                           }}
-                          onClick={() => togglePinnedLearningPoint(item.id)}
-                          aria-pressed={pinnedHotspotId === item.id}
+                          onClick={() => togglePinnedStorypoint(item.id)}
+                          aria-pressed={pinnedStorypointId === item.id}
                         >
                           <span className="sl-progress-stage-learning-pill-icon">
-                            {item.icon}
+                            {renderStorypointIcon(item.icon)}
                           </span>
                           <span className="sl-progress-stage-learning-pill-label">
                             {item.shortLabel}
@@ -2706,205 +3873,11 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
             </p>
           </section>
         </div>
-
-        <div className="sl-progress-hero-stage-divider" />
-
-        <section
-          className={[
-            'sl-progress-stage',
-            'sl-progress-stage--embedded',
-            selectedStageThemeClass,
-            isSelectedStageLocked ? 'is-locked' : '',
-            currentStageStatus === STAGE_MEDIA_STATE.CURRENT
-              ? 'is-live-stage'
-              : '',
-            currentStageStatus === STAGE_MEDIA_STATE.COMPLETED
-              ? 'is-archive-stage'
-              : '',
-            currentStageStatus === STAGE_MEDIA_STATE.NEXT
-              ? 'is-next-stage'
-              : '',
-            currentStageStatus === STAGE_MEDIA_STATE.FUTURE
-              ? 'is-future-stage'
-              : '',
-          ]
-            .filter(Boolean)
-            .join(' ')}
-        >
-          <div className="sl-progress-stage-content-fade">
-            <header className="sl-progress-stage-header sl-progress-stage-header--connected">
-              <div className="sl-progress-stage-header-copy">
-                <div className="sl-progress-stage-eyebrow">
-                  {stageStatePresentation.eyebrow}
-                </div>
-
-                <div className="sl-progress-stage-state-helper">
-                  {stageStatePresentation.helper}
-                </div>
-
-                <div className="sl-progress-stage-status-pill">
-                  {stageStatePresentation.pill}
-                </div>
-
-                <div className="sl-progress-stage-bridge-line">
-                  <span className="sl-progress-stage-bridge-summary">
-                    {getStageSummary(activeStep)}
-                  </span>
-                </div>
-              </div>
-
-              <div className="sl-progress-stage-header-side">
-                <div
-                  className={[
-                    'sl-progress-stage-status-pill',
-                    currentStageStatus === STAGE_MEDIA_STATE.COMPLETED
-                      ? 'is-completed'
-                      : currentStageStatus === STAGE_MEDIA_STATE.CURRENT
-                        ? 'is-inprogress'
-                        : currentStageStatus === STAGE_MEDIA_STATE.NEXT
-                          ? 'is-next'
-                          : 'is-locked',
-                  ].join(' ')}
-                >
-                  {stageStatePresentation.pill}
-                </div>
-              </div>
-            </header>
-
-            <div className="sl-progress-stage-stats">
-              <div className="sl-progress-stage-stat">
-                <div className="sl-progress-stage-stat-label">
-                  Est. Time (focused hours)
-                </div>
-                <div className="sl-progress-stage-stat-value">
-                  {activeStep.estHours}
-                </div>
-              </div>
-
-              <div className="sl-progress-stage-stat">
-                <div className="sl-progress-stage-stat-label">
-                  Avg. Turnaround (calendar days)
-                </div>
-                <div className="sl-progress-stage-stat-value">
-                  {activeStep.avgDays}
-                </div>
-              </div>
-
-              <div className="sl-progress-stage-stat">
-                <div className="sl-progress-stage-stat-label">
-                  Stage Completion Target
-                </div>
-                <div className="sl-progress-stage-stat-value">
-                  {stageTarget ||
-                    (activeStatus === 'completed' ? 'Completed' : 'TBD')}
-                </div>
-              </div>
-            </div>
-
-            {showEducationAndCheckpoints ? (
-              <>
-                <div className="sl-progress-stage-education-header">
-                  <div className="sl-progress-stage-education-eyebrow">
-                    Stage Story
-                  </div>
-                  <div className="sl-progress-stage-education-title">
-                    What this phase means for your drum
-                  </div>
-                </div>
-
-                <div className="sl-progress-stage-body">
-                  <div className="sl-progress-stage-col sl-progress-stage-col--explainer">
-                    <div className="sl-progress-card">
-                      <h3 className="sl-progress-card-title">
-                        What we do in this stage
-                      </h3>
-                      <p className="sl-progress-card-text">{activeStep.what}</p>
-                    </div>
-
-                    <div className="sl-progress-card">
-                      <h3 className="sl-progress-card-title">
-                        Why it matters for your drum
-                      </h3>
-                      <p className="sl-progress-card-text">{activeStep.why}</p>
-                    </div>
-
-                    <div className="sl-progress-card">
-                      <h3 className="sl-progress-card-title">
-                        Techniques used
-                      </h3>
-                      <div className="sl-progress-pill-row">
-                        {(Array.isArray(activeStep?.techniques)
-                          ? activeStep.techniques
-                          : []
-                        ).map((t, i) => (
-                          <span key={`${t}-${i}`} className="sl-progress-pill">
-                            {t}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="sl-progress-card">
-                      <h3 className="sl-progress-card-title">Tools involved</h3>
-                      <div className="sl-progress-pill-row">
-                        {(Array.isArray(activeStep?.tools)
-                          ? activeStep.tools
-                          : []
-                        ).map((t, i) => (
-                          <span key={`${t}-${i}`} className="sl-progress-pill">
-                            {t}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="sl-progress-card sl-progress-card--quote">
-                      <div className="sl-progress-quote-icon">★</div>
-                      <p className="sl-progress-quote-text">
-                        {activeStep.mantra ||
-                          'This is the moment a stack of boards turns into a living, breathing shell.'}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="sl-progress-stage-col sl-progress-stage-col--checkpoints">
-                    <StageCheckpointsPanel
-                      key={activeStep.key}
-                      project={project}
-                      setProject={setProject}
-                      stageKey={activeStep.key}
-                      isAdmin={isAdmin}
-                    />
-                  </div>
-                </div>
-
-                <footer className="sl-progress-stage-footer">
-                  <p className="sl-progress-stage-files">
-                    Files for this step will appear here as we add photos,
-                    audio, and PDFs.
-                  </p>
-                </footer>
-              </>
-            ) : (
-              <div className="sl-progress-stage-preview-lock">
-                <div className="sl-progress-stage-preview-lock-card">
-                  <div className="sl-progress-stage-preview-lock-eyebrow">
-                    Future stage access
-                  </div>
-                  <h3 className="sl-progress-stage-preview-lock-title">
-                    Stage details remain locked for now
-                  </h3>
-                  <p className="sl-progress-stage-preview-lock-text">
-                    You can preview the cinematic media above, but the
-                    educational breakdown and milestone checklist will unlock
-                    only after all prior stages are completed.
-                  </p>
-                </div>
-              </div>
-            )}
-          </div>
-        </section>
       </section>
+      <StageResourceViewerModal
+        item={selectedResourceItem}
+        onClose={() => setSelectedResourceItem(null)}
+      />
     </div>
   );
 };
