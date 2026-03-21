@@ -333,6 +333,357 @@
   transition: width 0.35s ease;
 }
 
+ /* =========================================================
+   BUILD SUMMARY — OBER ARTISAN / GRITTY POLISH
+   ========================================================= */
+
+.sl-progress-build-summary {
+  position: relative;
+  margin-top: 10px;
+  margin-bottom: 18px;
+  padding: 22px 22px 18px;
+  border-radius: 26px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.025), transparent 28%),
+    radial-gradient(circle at top center, rgba(62, 76, 110, 0.08), transparent 34%),
+    linear-gradient(180deg, rgba(11, 12, 16, 0.97), rgba(6, 7, 10, 0.99));
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow:
+    0 24px 64px rgba(0, 0, 0, 0.52),
+    inset 0 1px 0 rgba(255, 255, 255, 0.035),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.012);
+}
+
+.sl-progress-build-summary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.018) 18%,
+      transparent 38%,
+      rgba(124, 146, 196, 0.03) 62%,
+      transparent 100%
+    );
+  mix-blend-mode: screen;
+  opacity: 0.75;
+}
+
+.sl-progress-build-summary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 26px,
+      rgba(255, 255, 255, 0.008) 27px,
+      transparent 28px
+    );
+  opacity: 0.14;
+  mix-blend-mode: soft-light;
+}
+
+.sl-progress-build-summary-header {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 14px;
+}
+
+.sl-progress-build-summary-eyebrow {
+  margin: 0 0 7px;
+  font-size: 0.7rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(217, 189, 155, 0.68);
+}
+
+.sl-progress-build-summary-title {
+  margin: 0;
+  font-size: 1.08rem;
+  line-height: 1.18;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: rgba(244, 247, 252, 0.96);
+}
+
+/* -----------------------------------------
+   ROADMAP FEATURE
+   ----------------------------------------- */
+
+.sl-progress-build-summary-stage {
+  position: relative;
+  z-index: 1;
+  padding: 20px 20px 18px;
+  border-radius: 22px;
+  margin-bottom: 14px;
+  background:
+    radial-gradient(circle at top left, rgba(86, 107, 150, 0.08), transparent 30%),
+    linear-gradient(180deg, rgba(13, 14, 18, 0.94), rgba(8, 9, 12, 0.98));
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow:
+    0 16px 36px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.sl-progress-build-summary-stage-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 16px;
+}
+
+.sl-progress-build-summary-stage-copy {
+  min-width: 0;
+  flex: 1;
+}
+
+.sl-progress-build-summary-stage-kicker {
+  margin-bottom: 8px;
+  font-size: 0.68rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(191, 199, 214, 0.62);
+}
+
+.sl-progress-build-summary-stage-title {
+  font-size: 1.2rem;
+  line-height: 1.18;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: rgba(246, 248, 252, 0.98);
+}
+
+.sl-progress-build-summary-stage-subtitle {
+  margin-top: 8px;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: rgba(196, 203, 216, 0.72);
+}
+
+.sl-progress-build-summary-stage-percent {
+  flex: 0 0 auto;
+  text-align: right;
+}
+
+.sl-progress-build-summary-stage-percent-value {
+  font-size: 2.05rem;
+  line-height: 0.95;
+  font-weight: 700;
+  color: rgba(249, 242, 233, 0.98);
+  letter-spacing: -0.04em;
+}
+
+.sl-progress-build-summary-stage-percent-label {
+  margin-top: 8px;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  color: rgba(185, 194, 210, 0.54);
+}
+
+/* -----------------------------------------
+   TRACK
+   ----------------------------------------- */
+
+.sl-progress-build-summary-track-shell {
+  margin-top: 2px;
+}
+
+.sl-progress-build-summary-track {
+  position: relative;
+  height: 18px;
+  border-radius: 999px;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(8, 7, 8, 0.98), rgba(14, 11, 10, 0.98));
+  border: 1px solid rgba(156, 118, 77, 0.22);
+  box-shadow:
+    inset 0 2px 7px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 235, 214, 0.03);
+}
+
+.sl-progress-build-summary-track-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: 999px;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(148, 198, 170, 0.92) 0%,
+      rgba(138, 184, 186, 0.92) 48%,
+      rgba(126, 154, 196, 0.9) 100%
+    );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 0 14px rgba(126, 154, 196, 0.08);
+}
+
+.sl-progress-build-summary-track-glow {
+  position: absolute;
+  top: 1px;
+  left: 0;
+  bottom: 1px;
+  border-radius: 999px;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.16),
+      rgba(255, 244, 226, 0.03)
+    );
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+/* -----------------------------------------
+   LOWER METRICS
+   ----------------------------------------- */
+
+.sl-progress-build-summary-metrics {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 0;
+}
+
+.sl-progress-build-summary-metric {
+  min-width: 0;
+  padding: 16px 16px 15px;
+  border-radius: 20px;
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.02), transparent 30%),
+    linear-gradient(180deg, rgba(12, 13, 18, 0.94), rgba(8, 9, 12, 0.98));
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.028),
+    0 10px 22px rgba(0, 0, 0, 0.2);
+}
+
+.sl-progress-build-summary-metric.is-featured {
+  border-color: rgba(126, 146, 188, 0.24);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.035),
+    0 0 0 1px rgba(126, 146, 188, 0.08),
+    0 12px 26px rgba(0, 0, 0, 0.2);
+}
+
+.sl-progress-build-summary-metric-label {
+  margin-bottom: 8px;
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.26em;
+  color: rgba(180, 189, 205, 0.58);
+}
+
+.sl-progress-build-summary-metric-value {
+  font-size: 0.96rem;
+  line-height: 1.42;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: rgba(244, 247, 252, 0.96);
+}
+
+.sl-progress-build-summary-metric-value.is-completion {
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+/* -----------------------------------------
+   RESPONSIVE
+   ----------------------------------------- */
+
+@media (max-width: 1100px) {
+  .sl-progress-build-summary-metrics {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .sl-progress-build-summary {
+    padding: 16px 14px 16px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+
+  .sl-progress-build-summary-header {
+    margin-bottom: 12px;
+  }
+
+  .sl-progress-build-summary-eyebrow {
+    font-size: 0.64rem;
+    letter-spacing: 0.22em;
+  }
+
+  .sl-progress-build-summary-title {
+    font-size: 1rem;
+    line-height: 1.22;
+  }
+
+  .sl-progress-build-summary-stage {
+    padding: 15px 14px 14px;
+    border-radius: 18px;
+    margin-bottom: 12px;
+  }
+
+  .sl-progress-build-summary-stage-top {
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .sl-progress-build-summary-stage-percent {
+    text-align: left;
+  }
+
+  .sl-progress-build-summary-stage-percent-value {
+    font-size: 1.55rem;
+  }
+
+  .sl-progress-build-summary-stage-title {
+    font-size: 1rem;
+    line-height: 1.28;
+  }
+
+  .sl-progress-build-summary-stage-subtitle {
+    font-size: 0.82rem;
+    line-height: 1.45;
+    margin-top: 6px;
+  }
+
+  .sl-progress-build-summary-track {
+    height: 14px;
+  }
+
+  .sl-progress-build-summary-metrics {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .sl-progress-build-summary-metric {
+    padding: 13px 12px;
+    border-radius: 16px;
+  }
+
+  .sl-progress-build-summary-metric-label {
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
+  }
+
+  .sl-progress-build-summary-metric-value {
+    font-size: 0.92rem;
+  }
+}
+
 /* =========================================================
    HERO CAROUSEL
    ========================================================= */
