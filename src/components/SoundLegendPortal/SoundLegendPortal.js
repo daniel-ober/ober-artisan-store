@@ -51,9 +51,9 @@ const ProjectPicker = ({ projects, selectedId, onChange }) => {
     projects.find((p) => p.id === selectedId) || projects[0] || null;
 
   const labelFor = (p) => {
-    const base =
-      p.lineSerial || p.globalSerial || p.artisanLine || p.id || 'Project';
-    return base; // serial only, no diameter/depth
+    return (
+      p.lineSerial || p.globalSerial || p.artisanLine || p.id || 'Project'
+    );
   };
 
   const handleSelect = (id) => {
@@ -65,10 +65,15 @@ const ProjectPicker = ({ projects, selectedId, onChange }) => {
     <div className="slp-picker-shell">
       <button
         type="button"
-        className="slp-picker slp-picker-button slp-picker-soundlegend"
+        className="slp-picker-button"
         onClick={() => setOpen((o) => !o)}
+        aria-haspopup="listbox"
+        aria-expanded={open}
       >
-        {current ? labelFor(current) : 'Select your project'}
+        <span className="slp-picker-button-text">
+          {current ? labelFor(current) : 'Select your project'}
+        </span>
+        <span className={`slp-picker-chevron ${open ? 'is-open' : ''}`} />
       </button>
 
       {open && (
@@ -107,56 +112,65 @@ const Tabs = ({
   const slOnlyKeys = new Set(['vault', 'media']);
 
   return (
-    <div className="slp-tabs">
-      <div className="slp-tabs-left">
-        <ProjectPicker
-          projects={projects}
-          selectedId={selectedId}
-          onChange={onSelectProject}
-        />
+    <div className="slp-tabs-shell">
+      <div className="slp-tabs-header">
+        <div className="slp-tabs-header-copy">
+          <div className="slp-tabs-eyebrow">Artist Portal</div>
+          <h2 className="slp-tabs-title">Your Project Workspace</h2>
+        </div>
       </div>
 
-      <div
-        className="slp-tablist slp-tabs-buttons"
-        role="tablist"
-        aria-label="SoundLegend sections"
-      >
-        {tabs.map((t) => {
-          const isSlOnly = slOnlyKeys.has(t.key);
-          const disabled = isSlOnly && !isSoundLegendProject;
+      <div className="slp-tabs">
+        <div className="slp-tabs-left">
+          <ProjectPicker
+            projects={projects}
+            selectedId={selectedId}
+            onChange={onSelectProject}
+          />
+        </div>
 
-          const tooltipText =
-            t.key === 'vault'
-              ? 'Vault preferences are part of the SoundLegend experience.'
-              : t.key === 'media'
-                ? 'Legacy media is part of the SoundLegend experience.'
-                : '';
+        <div
+          className="slp-tablist slp-tabs-buttons"
+          role="tablist"
+          aria-label="SoundLegend sections"
+        >
+          {tabs.map((t) => {
+            const isSlOnly = slOnlyKeys.has(t.key);
+            const disabled = isSlOnly && !isSoundLegendProject;
 
-          return (
-            <button
-              key={t.key}
-              role="tab"
-              aria-selected={current === t.key}
-              className={[
-                'slp-tab',
-                current === t.key ? 'active' : '',
-                disabled ? 'slp-tab-disabled' : '',
-              ]
-                .filter(Boolean)
-                .join(' ')}
-              onClick={() => {
-                if (disabled) return;
-                onChange(t.key);
-              }}
-              type="button"
-            >
-              <span>{t.label}</span>
-              {disabled && tooltipText && (
-                <span className="slp-tab-tooltip">{tooltipText}</span>
-              )}
-            </button>
-          );
-        })}
+            const tooltipText =
+              t.key === 'vault'
+                ? 'Vault preferences are part of the SoundLegend experience.'
+                : t.key === 'media'
+                  ? 'Legacy media is part of the SoundLegend experience.'
+                  : '';
+
+            return (
+              <button
+                key={t.key}
+                role="tab"
+                aria-selected={current === t.key}
+                className={[
+                  'slp-tab',
+                  current === t.key ? 'active' : '',
+                  disabled ? 'slp-tab-disabled' : '',
+                ]
+                  .filter(Boolean)
+                  .join(' ')}
+                onClick={() => {
+                  if (disabled) return;
+                  onChange(t.key);
+                }}
+                type="button"
+              >
+                <span className="slp-tab-label">{t.label}</span>
+                {disabled && tooltipText ? (
+                  <span className="slp-tab-tooltip">{tooltipText}</span>
+                ) : null}
+              </button>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
@@ -175,7 +189,6 @@ const SoundLegendPortal = () => {
     isImpersonating: hookIsImpersonating,
   } = usePortalUser();
 
-  // -------------------- Query params (project + optional impersonation bootstrap) --------------------
   const queryParams = useMemo(() => {
     try {
       return new URLSearchParams(location.search);
@@ -189,23 +202,22 @@ const SoundLegendPortal = () => {
   const qpImpersonateName = (queryParams.get('impersonateName') || '').trim();
   const qpImpersonateEmail = (queryParams.get('impersonateEmail') || '').trim();
 
-  // If we arrive via "View as Customer ↗" in a new tab, sessionStorage will be empty.
-  // Bootstrap impersonation from query params (admin only), then trigger the same reactive flow.
   useEffect(() => {
     if (!isAdmin) return;
     if (!qpImpersonateUid) return;
 
-    // Set session storage exactly like ManageUsers does
     sessionStorage.setItem('impersonateUid', qpImpersonateUid);
     sessionStorage.setItem('impersonateMode', 'admin');
 
-    if (qpImpersonateName) sessionStorage.setItem('impersonateName', qpImpersonateName);
-    if (qpImpersonateEmail) sessionStorage.setItem('impersonateEmail', qpImpersonateEmail);
+    if (qpImpersonateName) {
+      sessionStorage.setItem('impersonateName', qpImpersonateName);
+    }
+    if (qpImpersonateEmail) {
+      sessionStorage.setItem('impersonateEmail', qpImpersonateEmail);
+    }
 
     window.dispatchEvent(new Event('impersonation-changed'));
 
-    // Optional: strip impersonation params from URL to keep it clean (projectId stays)
-    // (Keeps behavior stable even if user refreshes)
     try {
       const clean = new URLSearchParams(location.search);
       clean.delete('impersonateUid');
@@ -213,9 +225,10 @@ const SoundLegendPortal = () => {
       clean.delete('impersonateEmail');
 
       const nextSearch = clean.toString();
-      const nextUrl = nextSearch ? `${location.pathname}?${nextSearch}` : location.pathname;
+      const nextUrl = nextSearch
+        ? `${location.pathname}?${nextSearch}`
+        : location.pathname;
 
-      // Only replace if it actually changes anything
       if (nextUrl !== `${location.pathname}${location.search}`) {
         navigate(nextUrl, { replace: true });
       }
@@ -232,7 +245,6 @@ const SoundLegendPortal = () => {
     navigate,
   ]);
 
-  // -------------------- Impersonation values persisted by ManageUsers (reactive) --------------------
   const [impersonateUid, setImpersonateUid] = useState(
     () => sessionStorage.getItem('impersonateUid') || ''
   );
@@ -255,10 +267,10 @@ const SoundLegendPortal = () => {
     return () => window.removeEventListener('impersonation-changed', sync);
   }, []);
 
-  // -------------------- Effective portal user resolution --------------------
   const [effectivePortalUser, setEffectivePortalUser] = useState(null);
   const [loadingEffectiveUser, setLoadingEffectiveUser] = useState(true);
-  const [effectiveIsImpersonating, setEffectiveIsImpersonating] = useState(false);
+  const [effectiveIsImpersonating, setEffectiveIsImpersonating] =
+    useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -335,14 +347,12 @@ const SoundLegendPortal = () => {
     navigate('/admin', { replace: true });
   };
 
-  // -------------------- Projects / Orders state --------------------
   const [loading, setLoading] = useState(true);
   const [projects, setProjects] = useState([]);
   const [selectedId, setSelectedId] = useState('');
   const [orders, setOrders] = useState([]);
   const [tab, setTab] = useState('progress');
 
-  /* ---------- LOAD PROJECTS FOR EFFECTIVE PORTAL USER (ownerUid OR userId OR email) ---------- */
   useEffect(() => {
     if (!effectivePortalUser || loadingEffectiveUser) return;
 
@@ -355,9 +365,8 @@ const SoundLegendPortal = () => {
         const colRef = collection(db, 'projects');
 
         let list = [];
-
-        // 0) If a projectId was passed, fetch it directly and seed the list
         let seededProject = null;
+
         if (projectIdFromQuery) {
           try {
             const pRef = doc(db, 'projects', projectIdFromQuery);
@@ -366,24 +375,24 @@ const SoundLegendPortal = () => {
               seededProject = { id: pSnap.id, ...pSnap.data() };
             }
           } catch (e) {
-            console.warn('Failed to fetch project by projectId query param:', e);
+            console.warn(
+              'Failed to fetch project by projectId query param:',
+              e
+            );
           }
         }
 
-        // 1) Primary: ownerUid
         let snap = { empty: true, docs: [] };
         if (ownerUid) {
           const qByOwner = query(colRef, where('ownerUid', '==', ownerUid));
           snap = await getDocs(qByOwner);
         }
 
-        // 2) Fallback: userId
         if (snap.empty && ownerUid) {
           const qByUserId = query(colRef, where('userId', '==', ownerUid));
           snap = await getDocs(qByUserId);
         }
 
-        // 3) Fallback: customer.emailLower
         if (snap.empty && effectivePortalUser.email) {
           const emailLower = effectivePortalUser.email.trim().toLowerCase();
           const qByEmailLower = query(
@@ -393,25 +402,26 @@ const SoundLegendPortal = () => {
           snap = await getDocs(qByEmailLower);
         }
 
-        // 4) Extra fallbacks (older schemas)
         if (snap.empty && effectivePortalUser.email) {
           const email = effectivePortalUser.email.trim();
           const emailLower = email.toLowerCase();
 
-          // projects.customerEmail
-          const qByCustomerEmail = query(colRef, where('customerEmail', '==', email));
+          const qByCustomerEmail = query(
+            colRef,
+            where('customerEmail', '==', email)
+          );
           const snapA = await getDocs(qByCustomerEmail);
-
           if (!snapA.empty) snap = snapA;
 
-          // projects.customer.email (exact)
           if (snap.empty) {
-            const qByCustomerDotEmail = query(colRef, where('customer.email', '==', email));
+            const qByCustomerDotEmail = query(
+              colRef,
+              where('customer.email', '==', email)
+            );
             const snapB = await getDocs(qByCustomerDotEmail);
             if (!snapB.empty) snap = snapB;
           }
 
-          // projects.customer.emailLower might exist but emailLower stored differently
           if (snap.empty) {
             const qByCustomerDotEmailLower = query(
               colRef,
@@ -425,23 +435,23 @@ const SoundLegendPortal = () => {
         if (!cancelled) {
           const fetched = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
 
-          // Merge seededProject (from direct projectId fetch) into fetched list, de-duped
           const map = new Map();
-          [...(seededProject ? [seededProject] : []), ...fetched].forEach((p) => {
-            if (p?.id) map.set(p.id, p);
-          });
-          list = Array.from(map.values());
+          [...(seededProject ? [seededProject] : []), ...fetched].forEach(
+            (p) => {
+              if (p?.id) map.set(p.id, p);
+            }
+          );
 
+          list = Array.from(map.values());
           list.sort((a, b) => tsToMillis(a.createdAt) - tsToMillis(b.createdAt));
 
           setProjects(list);
 
-          // Selection logic:
-          // - if projectIdFromQuery exists and is in list -> select it
-          // - else keep previous selection if still present
-          // - else first project
           setSelectedId((prev) => {
-            if (projectIdFromQuery && list.some((p) => p.id === projectIdFromQuery)) {
+            if (
+              projectIdFromQuery &&
+              list.some((p) => p.id === projectIdFromQuery)
+            ) {
               return projectIdFromQuery;
             }
             if (prev && list.some((p) => p.id === prev)) return prev;
@@ -461,7 +471,6 @@ const SoundLegendPortal = () => {
     };
   }, [effectivePortalUser, loadingEffectiveUser, projectIdFromQuery]);
 
-  // Load orders for this effective portal user (by email)
   useEffect(() => {
     if (!effectivePortalUser?.email || loadingEffectiveUser) return;
     let cancelled = false;
@@ -496,8 +505,6 @@ const SoundLegendPortal = () => {
 
   const latestOrder = useMemo(() => (orders.length ? orders[0] : null), [orders]);
 
-  /* -------------------- loading / empty states -------------------- */
-
   if (loadingPortalUser || loadingEffectiveUser) {
     return <div className="slp-page">Loading your SoundLegend portal…</div>;
   }
@@ -516,7 +523,7 @@ const SoundLegendPortal = () => {
         {effectiveIsImpersonating && (
           <div className="slp-impersonation-banner">
             <div className="slp-impersonation-left">
-              <span className="slp-impersonation-pill">IMPERSONATING</span>
+              <span className="slp-impersonation-pill">Impersonating</span>
               <span className="slp-impersonation-text">
                 {effectivePortalUser.fullName ||
                   effectivePortalUser.email ||
@@ -536,15 +543,18 @@ const SoundLegendPortal = () => {
           </div>
         )}
 
-        <h2>
-          Welcome to your SoundLegend
+        <h2 className="slp-heading">
+          Welcome to your Artist Portal
           {effectiveIsImpersonating ? ' (admin view)' : ''}
         </h2>
-        <p>
-          No projects are linked to your account yet. If this seems wrong, email:{' '}
-          <a href="mailto:soundlegend@oberartisandrums.com">
+
+        <p className="slp-empty-copy">
+          No projects are linked to your account yet. If this seems wrong,
+          contact support at{' '}
+          <a href="mailto:support@oberartisandrums.com">
             support@oberartisandrums.com
           </a>
+          .
         </p>
       </div>
     );
@@ -559,7 +569,6 @@ const SoundLegendPortal = () => {
     { key: 'account', label: 'Account Settings' },
   ];
 
-  // 🔐 Is the currently selected project a SoundLegend drum?
   const artisanLine = (selectedProject?.artisanLine || '').toLowerCase();
   const serialGuess = (
     selectedProject?.lineSerial ||
@@ -569,7 +578,8 @@ const SoundLegendPortal = () => {
     ''
   ).toUpperCase();
 
-  const isSoundLegendProject = artisanLine === 'soundlegend' || serialGuess.startsWith('SL-');
+  const isSoundLegendProject =
+    artisanLine === 'soundlegend' || serialGuess.startsWith('SL-');
 
   const handleTabChange = (nextKey) => {
     if (!isSoundLegendProject && (nextKey === 'vault' || nextKey === 'media')) {
@@ -583,7 +593,7 @@ const SoundLegendPortal = () => {
       {effectiveIsImpersonating && (
         <div className="slp-impersonation-banner">
           <div className="slp-impersonation-left">
-            <span className="slp-impersonation-pill">IMPERSONATING</span>
+            <span className="slp-impersonation-pill">Impersonating</span>
             <span className="slp-impersonation-text">
               {effectivePortalUser.fullName ||
                 effectivePortalUser.email ||
@@ -603,10 +613,10 @@ const SoundLegendPortal = () => {
         </div>
       )}
 
-      <h2 className="slp-heading">
+      <h1 className="slp-heading">
         Welcome to your Artist Portal
         {effectiveIsImpersonating ? ' (admin view)' : ''}
-      </h2>
+      </h1>
 
       <Tabs
         tabs={tabs}
@@ -628,7 +638,10 @@ const SoundLegendPortal = () => {
         {tab === 'vault' && isSoundLegendProject && (
           <VaultPreferences project={selectedProject} />
         )}
-        {tab === 'media' && isSoundLegendProject && <Media project={selectedProject} />}
+
+        {tab === 'media' && isSoundLegendProject && (
+          <Media project={selectedProject} />
+        )}
 
         {tab === 'payments' && <PaymentHistory orders={orders} />}
 
