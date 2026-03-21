@@ -3396,10 +3396,6 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
                         </button>
                       </div>
 
-                      <div className="sl-progress-stage-edu-title">
-                        {activeStorypoint.title}
-                      </div>
-
                       {activeStorypoint.id === 'progress' ? (
                         <div className="sl-progress-storypoint-progress">
                           <div className="sl-progress-storypoint-progress-grid">
@@ -3485,7 +3481,7 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
                         </div>
                       ) : (
                         <p className="sl-progress-stage-edu-body">
-                          {activeStorypoint.body}
+                          {/* {activeStorypoint.body} */}
                         </p>
                       )}
 
