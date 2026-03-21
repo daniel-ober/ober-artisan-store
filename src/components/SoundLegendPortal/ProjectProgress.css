@@ -3122,340 +3122,377 @@ button.pp-compact-marker {
   line-height: 1.5;
   color: rgba(224, 212, 196, 0.78);
 }
+
 /* =========================================================
-   RESPONSIVE
+   RESPONSIVE — SIMPLIFIED + CONSISTENT
    ========================================================= */
 
-/* ---------- XL desktops ---------- */
-@media (min-width: 1440px) {
-  .slp-card.pp-card[data-component='ProjectProgress'] {
-    max-width: 1260px;
-    padding: 28px 32px 34px;
-  }
-
-  .sl-progress-project-overview,
-  .sl-progress-roadmap--premium,
-  .sl-progress-hero-carousel-media,
-  .sl-progress-stage,
-  .sl-resource-viewer-modal-inner {
-    border-radius: 24px;
-  }
-
-  .sl-progress-hero-carousel-stage-rail.is-single-panel
-    .sl-progress-hero-carousel-media {
-    min-height: 580px;
-  }
-
-  .sl-progress-stage-title-anchor {
-    top: 40%;
-    max-width: calc(100% - 176px);
-  }
-
-  .sl-progress-stage-learning-rail--anchored {
-    bottom: 22px;
-    max-width: calc(100% - 150px);
-    gap: 10px;
-  }
-
-  .sl-progress-stage-edu-panel {
-    width: min(980px, calc(100% - 150px));
-    top: 18px;
-    bottom: 84px;
-  }
-
-  .sl-progress-stage-edu-panel-inner {
-    padding: 20px 22px 16px;
-  }
-
-  .sl-progress-stage-chapter-label {
-    font-size: 0.72rem;
-    letter-spacing: 0.66em;
-  }
-
-  .sl-progress-hero-title--center {
-    font-size: clamp(1.2rem, 1.4vw, 1.42rem);
-    letter-spacing: 0.42em;
-  }
+/* ---------- Shared hero title structure ---------- */
+.sl-progress-stage-title-anchor {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% - 72px);
+  max-width: 760px;
+  z-index: 8;
+  pointer-events: none;
+  text-align: center;
 }
 
-/* ---------- Standard desktops / laptops ---------- */
-@media (min-width: 1101px) and (max-width: 1439px) {
-  .slp-card.pp-card[data-component='ProjectProgress'] {
-    padding: 22px 24px 28px;
-  }
-
-  .sl-progress-metrics {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .sl-progress-hero-carousel-stage-rail.is-single-panel
-    .sl-progress-hero-carousel-media {
-    min-height: 500px;
-  }
-
-  .sl-progress-stage-title-anchor {
-    top: 40%;
-    max-width: calc(100% - 140px);
-  }
-
-  .sl-progress-stage-learning-rail--anchored {
-    bottom: 18px;
-    max-width: calc(100% - 120px);
-    gap: 9px;
-  }
-
-  .sl-progress-stage-edu-panel {
-    width: min(900px, calc(100% - 120px));
-    top: 16px;
-    bottom: 74px;
-  }
-
-  .sl-progress-stage-chapter-label {
-    font-size: 0.66rem;
-    letter-spacing: 0.48em;
-  }
-
-  .sl-progress-hero-title--center {
-    font-size: clamp(1rem, 1.45vw, 1.2rem);
-    letter-spacing: 0.28em;
-    line-height: 1.24;
-  }
+.sl-progress-hero-title-stack {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
-/* ---------- Tablet / small laptop ---------- */
-@media (min-width: 901px) and (max-width: 1100px) {
+.sl-progress-hero-title-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.sl-progress-stage-chapter-label,
+.sl-progress-hero-title--center {
+  width: 100%;
+  margin: 0;
+  text-align: center;
+}
+
+.sl-progress-stage-chapter-label {
+  font-size: 0.6rem;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: 0.7em;
+  white-space: nowrap;
+}
+
+.sl-progress-hero-title--center {
+  font-size: clamp(1.4rem, 2vw, 1.18rem);
+  line-height: 1.075;
+  font-weight: 600;
+  /* letter-spacing: 0.35em; */
+  white-space: normal;
+  text-wrap: balance;
+  max-width: 100%;
+}
+
+
+/* =========================================================
+   MOBILE FIXES — STORYPOINT PILLS + BUILD/VOICE PANEL LAYOUT
+   ========================================================= */
+
+@media (max-width: 768px) {
+  /* -----------------------------------------
+     HERO / CARD SPACING
+     ----------------------------------------- */
   .slp-card.pp-card[data-component='ProjectProgress'] {
-    padding: 20px 18px 24px;
-    border-radius: 20px;
-  }
-
-  .sl-progress-project-overview,
-  .sl-progress-roadmap--premium,
-  .sl-progress-stage,
-  .sl-progress-hero-carousel-media {
-    border-radius: 20px;
-  }
-
-  .sl-progress-metrics {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .sl-progress-stage-body {
-    grid-template-columns: 1fr;
-    gap: 18px;
-  }
-
-  .sl-progress-stage-col--checkpoints {
-    display: block;
-  }
-
-  .pp-stage-card {
-    width: 100%;
-  }
-
-  .sl-progress-hero-carousel-stage-rail.is-single-panel
-    .sl-progress-hero-carousel-media {
-    min-height: 430px;
-  }
-
-  .sl-progress-stage-title-anchor {
-    top: 38.5%;
-    max-width: calc(100% - 116px);
-  }
-
-  .sl-progress-stage-learning-rail--anchored {
-    bottom: 16px;
-    max-width: calc(100% - 96px);
-    gap: 8px;
-  }
-
-  .sl-progress-stage-learning-pill {
-    padding: 7px 11px;
-    min-height: 38px;
-  }
-
-  .sl-progress-stage-learning-pill-label {
-    font-size: 0.7rem;
-  }
-
-  .sl-progress-stage-edu-panel {
-    width: calc(100% - 88px);
-    top: 14px;
-    bottom: 68px;
-  }
-
-  .sl-progress-stage-edu-panel-inner {
-    padding: 16px 16px 14px;
+    padding: 18px 14px 20px;
     border-radius: 18px;
   }
 
+  .sl-progress-project-overview,
+  .sl-progress-roadmap--premium,
+  .sl-progress-stage {
+    border-radius: 18px;
+  }
+
+  .sl-progress-project-overview {
+    padding: 14px 14px 16px;
+    margin-bottom: 16px;
+  }
+
+  .sl-progress-roadmap--premium {
+    padding: 14px 14px 16px;
+    margin-bottom: 14px;
+  }
+
+  .sl-progress-stage {
+    padding: 14px 14px 18px;
+    margin-top: 12px;
+  }
+
+  /* -----------------------------------------
+     ROADMAP HEADER
+     ----------------------------------------- */
+  .sl-progress-roadmap-header-row {
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .sl-progress-roadmap-header {
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+  }
+
+  .sl-progress-roadmap-subtitle {
+    font-size: 0.78rem;
+    line-height: 1.35;
+  }
+
+  .sl-progress-roadmap-percent {
+    font-size: 1.45rem;
+  }
+
+  .sl-progress-roadmap-caption {
+    font-size: 0.74rem;
+    line-height: 1.25;
+    max-width: 130px;
+  }
+
+  /* -----------------------------------------
+     HERO IMAGE / TITLE
+     ----------------------------------------- */
+  .sl-progress-hero-carousel-stage-rail,
+  .sl-progress-hero-carousel-stage-rail.is-single-panel {
+    min-height: 0;
+  }
+
+  .sl-progress-hero-carousel-stage-rail.is-single-panel
+    .sl-progress-hero-carousel-media {
+    min-height: 520px;
+    border-radius: 18px;
+    clip-path: inset(0 round 18px);
+  }
+
+  .sl-progress-carousel-arrow {
+    width: 34px;
+    height: 34px;
+  }
+
+  .sl-progress-carousel-arrow--left {
+    left: 10px;
+  }
+
+  .sl-progress-carousel-arrow--right {
+    right: 10px;
+  }
+
+  .sl-progress-stage-title-anchor {
+    top: 45%;
+    width: calc(100% - 44px);
+    max-width: none;
+  }
+
+  .sl-progress-hero-title-stack {
+    min-height: 64px;
+    gap: 6px;
+  }
+
+  .sl-progress-stage-chapter-label {
+    font-size: 0.58rem;
+    letter-spacing: 0.46em;
+    white-space: nowrap;
+  }
+
+  .sl-progress-hero-title--center {
+    font-size: clamp(1.65rem, 5.6vw, 2.1rem);
+    line-height: 1.04;
+    letter-spacing: 0.2em;
+    text-wrap: balance;
+  }
+
+  .sl-progress-stage-hero-status-caption {
+    right: 16px;
+    bottom: 84px;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+  }
+
+  /* -----------------------------------------
+     STORYPOINT PILLS / ICONS
+     keep them on ONE LINE on mobile
+     ----------------------------------------- */
+  .sl-progress-stage-learning-rail--anchored {
+    left: 50%;
+    bottom: 16px;
+    transform: translateX(-50%);
+    width: calc(100% - 24px);
+    max-width: none;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 8px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0 2px 2px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .sl-progress-stage-learning-rail--anchored::-webkit-scrollbar {
+    display: none;
+  }
+
+  .sl-progress-stage-learning-pill {
+    flex: 0 0 auto;
+    min-width: fit-content;
+    padding: 8px 12px;
+    gap: 7px;
+    white-space: nowrap;
+  }
+
+  .sl-progress-stage-learning-pill-icon {
+    width: 16px;
+    min-width: 16px;
+    height: 16px;
+  }
+
+  .sl-progress-stage-learning-pill-label {
+    font-size: 0.72rem;
+  }
+
+  /* -----------------------------------------
+     EDUCATION / STORYPOINT PANEL
+     ----------------------------------------- */
+  .sl-progress-stage-edu-panel {
+    top: 14px;
+    bottom: 74px;
+    width: calc(100% - 28px);
+    transform: translateX(-50%) translateY(12px);
+  }
+
+  .sl-progress-stage-edu-panel.is-visible {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .sl-progress-stage-edu-panel-inner {
+    padding: 16px 14px 14px;
+    border-radius: 18px;
+  }
+
+  .sl-progress-stage-edu-header {
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
   .sl-progress-stage-edu-title {
-    font-size: 0.96rem;
+    font-size: 0.94rem;
+    line-height: 1.35;
   }
 
   .sl-progress-stage-edu-body {
     font-size: 0.88rem;
-    line-height: 1.52;
+    line-height: 1.58;
   }
 
-  .sl-progress-stage-edu-resource-grid,
+  /* -----------------------------------------
+     BUILD / VOICE MODAL CONTENT
+     change from columns to ROWS on mobile
+     ----------------------------------------- */
   .sl-progress-stage-storypoint-data-grid,
-  .sl-progress-storypoint-progress-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .sl-progress-stage-chapter-label {
-    font-size: 0.6rem;
-    letter-spacing: 0.34em;
-    margin-bottom: 4px;
-  }
-
-  .sl-progress-hero-title--center {
-    font-size: clamp(0.94rem, 2vw, 1.08rem);
-    letter-spacing: 0.18em;
-    line-height: 1.2;
-  }
-
-  .sl-progress-stage-hero-status-caption {
-    right: 18px;
-    bottom: 14px;
-    font-size: 0.62rem;
-    letter-spacing: 0.1em;
-  }
-
-  .slp-modal-overlay,
-  .sl-resource-viewer-modal {
-    padding: 18px;
-  }
-
-  .sl-resource-viewer-modal-video-wrap iframe,
-  .sl-resource-viewer-modal-video {
-    min-height: 300px;
-  }
-
-  .sl-resource-viewer-modal-pdf {
-    height: 62vh;
-  }
-}
-
-/* ---------- Tablets + large phones ---------- */
-@media (min-width: 641px) and (max-width: 900px) {
-  .slp-card.pp-card[data-component='ProjectProgress'] {
-    padding: 18px 16px 20px;
-    border-radius: 18px;
-  }
-
-  .sl-progress-project-overview,
-  .sl-progress-roadmap--premium,
-  .sl-progress-stage,
-  .sl-progress-hero-carousel-media {
-    border-radius: 18px;
-  }
-
-  .sl-progress-metrics,
-  .sl-progress-stage-stats,
-  .sl-progress-stage-body,
   .sl-progress-storypoint-progress-grid,
-  .sl-progress-stage-storypoint-data-grid {
+  .sl-progress-stage-edu-resource-grid,
+  .slp-modal-grid {
     grid-template-columns: 1fr;
+    gap: 10px;
   }
 
-  .sl-progress-roadmap-header-row,
-  .sl-progress-stage-header--connected {
-    flex-direction: column;
-    align-items: flex-start;
+  .sl-progress-stage-storypoint-data-card,
+  .sl-progress-storypoint-stat,
+  .sl-progress-stage-edu-resource-card {
+    grid-column: 1 / -1;
   }
 
-  .sl-progress-roadmap-side {
-    align-items: flex-start;
+  .sl-progress-stage-storypoint-data-card--full,
+  .sl-progress-storypoint-stat--full {
+    grid-column: 1 / -1;
   }
 
-  .sl-progress-roadmap-caption {
-    text-align: left;
-  }
-
-  .sl-progress-hero-carousel-stage-rail.is-single-panel
-    .sl-progress-hero-carousel-media {
-    min-height: 400px;
-  }
-
-  .sl-progress-stage-title-anchor {
-    top: 33%;
-    max-width: calc(100% - 76px);
-  }
-
-  .sl-progress-stage-learning-rail--anchored {
-    bottom: 14px;
-    max-width: calc(100% - 28px);
-    gap: 8px;
-    row-gap: 8px;
-  }
-
-  .sl-progress-stage-learning-pill {
-    padding: 7px 10px;
-    min-height: 36px;
-  }
-
-  .sl-progress-stage-learning-pill-label {
-    font-size: 0.68rem;
-  }
-
-  .sl-progress-stage-edu-panel {
+  /* -----------------------------------------
+     CHECKPOINT / DETAIL CARD
+     ----------------------------------------- */
+  .sl-progress-stage-storypoint-card,
+  .sl-progress-stage-checkpoint-detail-card {
     left: 12px;
     right: 12px;
+    bottom: 74px;
     width: auto;
-    top: 14px;
-    bottom: 66px;
-    transform: translateY(10px);
-    max-height: calc(100% - 84px);
-  }
-
-  .sl-progress-stage-edu-panel.is-visible {
-    transform: translateY(0);
-  }
-
-  .sl-progress-stage-edu-panel-inner {
-    padding: 14px 14px 12px;
+    padding: 14px 14px 13px;
     border-radius: 16px;
   }
 
-  .sl-progress-stage-edu-resource-grid {
+  .sl-progress-stage-storypoint-card-title {
+    font-size: 0.9rem;
+    line-height: 1.35;
+  }
+
+  .sl-progress-stage-storypoint-card-body {
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+
+  .sl-progress-stage-storypoint-card-meta {
+    gap: 6px;
+  }
+
+  .sl-progress-stage-storypoint-card-pill {
+    font-size: 0.66rem;
+    padding: 4px 8px;
+  }
+
+  /* -----------------------------------------
+     OVERVIEW METRICS
+     ----------------------------------------- */
+  .sl-progress-metrics {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 14px;
   }
 
-  .sl-progress-stage-chapter-label {
-    font-size: 0.56rem;
-    letter-spacing: 0.24em;
-    margin-bottom: 4px;
+  .sl-progress-metric {
+    padding: 11px 12px;
+    border-radius: 12px;
   }
 
-  .sl-progress-hero-title--center {
-    font-size: clamp(0.88rem, 2.8vw, 1rem);
-    letter-spacing: 0.12em;
-    line-height: 1.18;
+  .sl-progress-metric-label {
+    font-size: 0.64rem;
+    letter-spacing: 0.14em;
   }
 
-  .sl-progress-stage-hero-status-caption {
-    right: 14px;
-    bottom: 12px;
-    font-size: 0.56rem;
-    letter-spacing: 0.06em;
-    max-width: 42%;
-    line-height: 1.12;
-    text-align: right;
+  .sl-progress-metric-value {
+    font-size: 0.86rem;
+    line-height: 1.35;
   }
 
-  .slp-modal-overlay,
+  /* -----------------------------------------
+     RESOURCE VIEWER MODAL
+     ----------------------------------------- */
   .sl-resource-viewer-modal {
-    padding: 14px;
-  }
-
-  .slp-modal-grid {
-    grid-template-columns: 1fr 1fr;
+    padding: 12px;
   }
 
   .sl-resource-viewer-modal-inner {
     border-radius: 18px;
+    max-height: 92vh;
+  }
+
+  .sl-resource-viewer-modal-top {
+    padding: 14px 14px 12px;
+    gap: 12px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .sl-resource-viewer-modal-actions {
+    width: 100%;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+
+  .sl-resource-viewer-modal-body {
+    padding: 12px;
+  }
+
+  .sl-resource-viewer-modal-pdf {
+    height: 68vh;
   }
 
   .sl-resource-viewer-modal-video-wrap iframe,
@@ -3463,469 +3500,61 @@ button.pp-compact-marker {
     min-height: 240px;
   }
 
-  .sl-resource-viewer-modal-pdf {
-    height: 58vh;
-  }
-}
-
-/* ---------- Phones ---------- */
-@media (max-width: 640px) {
-  .slp-card.pp-card[data-component='ProjectProgress'] {
-    padding: 14px 12px 18px;
-    border-radius: 16px;
-  }
-
-  .sl-progress-project-overview,
-  .sl-progress-roadmap--premium,
-  .sl-progress-stage,
-  .sl-progress-hero-carousel-media {
-    border-radius: 16px;
-  }
-
-  .sl-progress-project-overview {
-    padding: 14px 14px 16px;
-    margin-bottom: 14px;
-  }
-
-  .sl-progress-roadmap--premium {
-    padding: 13px 14px 14px;
-    margin-bottom: 14px;
-  }
-
-  .sl-progress-metrics,
-  .sl-progress-stage-stats,
-  .sl-progress-stage-body,
-  .sl-progress-storypoint-progress-grid,
-  .sl-progress-stage-storypoint-data-grid,
-  .sl-progress-stage-edu-resource-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .sl-progress-stage {
-    padding: 16px 14px 20px;
-    margin-top: 8px;
-  }
-
-  .sl-progress-hero-carousel-bottom {
-    margin-top: 10px;
-  }
-
-  .sl-progress-intro-text {
-    font-size: 0.8rem;
-    line-height: 1.44;
-  }
-
-  .sl-progress-card,
-  .pp-stage-card {
-    border-radius: 14px;
-  }
-
-  .sl-progress-card-text,
-  .sl-progress-pill,
-  .sl-progress-stage-files,
-  .sl-progress-stage-preview-lock-text {
-    font-size: 0.84rem;
-  }
-
-  .sl-progress-roadmap-header-row,
-  .sl-progress-stage-header--connected,
-  .sl-resource-viewer-modal-top {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .sl-progress-roadmap-side {
-    align-items: flex-start;
-  }
-
-  .sl-progress-roadmap-caption {
-    text-align: left;
-    font-size: 0.74rem;
-  }
-
-  .sl-progress-roadmap-percent {
-    font-size: 1rem;
-  }
-
-  .sl-progress-stage-checkpoint-detail-card,
-  .sl-progress-stage-storypoint-card {
-    left: 10px;
-    right: 10px;
-    bottom: 60px;
-    width: auto;
-  }
-
-  .sl-progress-hero-carousel-stage-rail.is-single-panel
-    .sl-progress-hero-carousel-media {
-    min-height: 430px;
-  }
-
-  .sl-progress-stage-title-anchor {
-    top: 30%;
-    max-width: calc(100% - 28px);
-  }
-
-  .sl-progress-stage-chapter-label {
-    font-size: 0.52rem;
-    letter-spacing: 0.14em;
-    margin-bottom: 4px;
-  }
-
-  .sl-progress-hero-title--center {
-    font-size: clamp(0.86rem, 4.8vw, 1rem);
-    letter-spacing: 0.06em;
-    line-height: 1.14;
-  }
-
-  .sl-progress-stage-learning-rail--anchored {
-    bottom: 10px;
-    max-width: calc(100% - 14px);
-    gap: 6px;
-    row-gap: 6px;
-  }
-
-  .sl-progress-stage-learning-pill {
-    padding: 6px 8px;
-    gap: 5px;
-    min-height: 34px;
-  }
-
-  .sl-progress-stage-learning-pill-icon {
-    width: 13px;
-    min-width: 13px;
-    height: 13px;
-  }
-
-  .sl-progress-stage-learning-pill-label {
-    font-size: 0.6rem;
-  }
-
-  .sl-progress-stage-edu-panel {
-    left: 6px;
-    right: 6px;
-    width: auto;
-    top: 12px;
-    bottom: 52px;
-    transform: translateY(8px);
-    max-height: calc(100% - 70px);
-  }
-
-  .sl-progress-stage-edu-panel.is-visible {
-    transform: translateY(0);
-  }
-
-  .sl-progress-stage-edu-panel-inner {
-    max-height: 220px;
-    overflow-y: auto;
-    padding: 11px 11px 9px;
-    border-radius: 14px;
-  }
-
-  .sl-progress-stage-edu-header {
-    gap: 8px;
-    margin-bottom: 6px;
-  }
-
-  .sl-progress-stage-edu-kicker {
-    font-size: 0.54rem;
-    letter-spacing: 0.1em;
-  }
-
-  .sl-progress-stage-edu-title {
-    font-size: 0.82rem;
-    margin-bottom: 5px;
-  }
-
-  .sl-progress-stage-edu-body {
-    font-size: 0.76rem;
-    line-height: 1.38;
-  }
-
-  .sl-progress-stage-edu-resource-list {
-    gap: 6px;
-    margin-top: 8px;
-  }
-
-  .sl-progress-stage-edu-resource-link {
-    font-size: 0.72rem;
-    padding: 7px 9px;
-    border-radius: 10px;
-  }
-
-  .sl-progress-stage-edu-resource-meta {
-    padding: 9px 10px 10px;
-  }
-
-  .sl-progress-stage-edu-resource-title {
-    font-size: 0.74rem;
-  }
-
-  .sl-progress-stage-edu-resource-subtitle {
-    font-size: 0.64rem;
-  }
-
-  .sl-progress-stage-edu-close {
-    font-size: 0.6rem;
-    padding: 4px 8px;
-  }
-
-  .sl-progress-stage-hero-status-caption {
-    right: 10px;
-    bottom: 8px;
-    font-size: 0.46rem;
-    letter-spacing: 0.03em;
-    max-width: 32%;
-    line-height: 1.04;
-    text-align: right;
-    opacity: 0.82;
-  }
-
-  .sl-progress-carousel-arrow {
-    width: 30px;
-    height: 30px;
-  }
-
-  .sl-progress-carousel-arrow--left {
-    left: 6px;
-  }
-
-  .sl-progress-carousel-arrow--right {
-    right: 6px;
-  }
-
-  .sl-progress-carousel-arrow-glyph {
-    width: 7px;
-    height: 7px;
-    border-top-width: 1.5px;
-    border-left-width: 1.5px;
-  }
-
-  .pp-stage-card {
-    padding: 1rem 0.95rem 0.95rem;
-  }
-
-  .pp-step-title {
-    font-size: 0.86rem;
-  }
-
-  .pp-checkpoint-label {
-    font-size: 0.78rem;
-  }
-
-  .pp-compact-title-row {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .pp-compact-right {
-    width: 100%;
-    justify-content: space-between;
-  }
-
-  .pp-compact-meta-row {
-    gap: 8px;
-  }
-
-  .slp-modal-overlay,
-  .sl-resource-viewer-modal {
-    padding: 10px;
+  /* -----------------------------------------
+     STANDARD MODALS
+     ----------------------------------------- */
+  .slp-modal-overlay {
+    padding: 12px;
+    align-items: flex-end;
   }
 
   .slp-modal,
-  .slp-duration-modal,
-  .sl-resource-viewer-modal-inner {
-    border-radius: 16px;
+  .slp-duration-modal {
+    width: 100%;
+    border-radius: 18px;
   }
 
-  .slp-modal-grid {
-    grid-template-columns: 1fr;
+  .slp-modal-header {
+    padding: 16px 16px 12px;
   }
 
-  .sl-resource-viewer-modal-actions {
-    justify-content: space-between;
+  .slp-modal-body {
+    padding: 16px;
   }
 
-  .sl-resource-viewer-modal-title {
-    font-size: 0.9rem;
+  .slp-modal-footer {
+    padding: 12px 16px 16px;
+    flex-wrap: wrap;
   }
 
-  .sl-resource-viewer-modal-body {
-    padding: 12px;
-  }
-
-  .sl-resource-viewer-modal-video-wrap iframe,
-  .sl-resource-viewer-modal-video {
-    min-height: 220px;
-  }
-
-  .sl-resource-viewer-modal-audio-card,
-  .sl-resource-viewer-modal-doc-card {
-    padding: 16px 14px 14px;
-    border-radius: 14px;
-  }
-
-  .sl-resource-viewer-modal-pdf {
-    height: 54vh;
-  }
-
-  .sl-progress-storypoint-stat {
-    padding: 10px 10px 9px;
-    border-radius: 12px;
-  }
-
-  .sl-progress-storypoint-stat-label {
-    font-size: 0.58rem;
-  }
-
-  .sl-progress-storypoint-stat-value {
-    font-size: 0.78rem;
-  }
-
-  .sl-progress-stage-storypoint-data-card {
-    padding: 10px 11px;
-    border-radius: 12px;
-  }
-
-  .sl-progress-stage-storypoint-data-value {
-    font-size: 0.8rem;
-  }
-
-  .sl-progress-stage-storypoint-tag {
-    font-size: 0.68rem;
-    padding: 4px 8px;
+  .slp-modal-btn {
+    flex: 1 1 auto;
+    min-width: 0;
   }
 }
 
-/* ---------- Landscape phones / short screens ---------- */
-@media (max-height: 740px) and (orientation: landscape) {
-  .slp-card.pp-card[data-component='ProjectProgress'] {
-    padding: 12px 12px 16px;
-  }
-
-  .sl-progress-project-overview,
-  .sl-progress-roadmap--premium {
-    margin-bottom: 12px;
-  }
-
-  .sl-progress-hero-carousel-stage-rail.is-single-panel
-    .sl-progress-hero-carousel-media {
-    min-height: 300px;
-  }
-
+@media (max-width: 768px) {
   .sl-progress-stage-title-anchor {
-    top: 31%;
-    max-width: calc(100% - 44px);
+    top: 50%;
+    width: calc(100% - 44px);
   }
 
-  .sl-progress-stage-learning-rail--anchored {
-    bottom: 8px;
-    gap: 6px;
-    max-width: calc(100% - 18px);
-  }
-
-  .sl-progress-stage-edu-panel {
-    left: 8px;
-    right: 8px;
-    width: auto;
-    top: 10px;
-    bottom: 42px;
-    max-height: calc(100% - 52px);
-  }
-
-  .sl-progress-stage-edu-panel-inner {
-    max-height: 120px;
-    padding: 10px 12px 9px;
-    overflow-y: auto;
+  .sl-progress-hero-title-stack {
+    min-height: 78px;
+    gap: 12px;
   }
 
   .sl-progress-stage-chapter-label {
-    font-size: 0.46rem;
-    letter-spacing: 0.08em;
-    margin-bottom: 2px;
+    display: block;
+    margin-bottom: 6px;
+    font-size: 0.58rem;
+    line-height: 1;
+    letter-spacing: 0.46em;
   }
 
   .sl-progress-hero-title--center {
-    font-size: 0.74rem;
-    letter-spacing: 0.04em;
-    line-height: 1.12;
-  }
-
-  .sl-progress-stage-learning-pill {
-    padding: 5px 7px;
-  }
-
-  .sl-progress-stage-learning-pill-label {
-    font-size: 0.58rem;
-  }
-
-  .sl-progress-stage-hero-status-caption {
-    right: 10px;
-    bottom: 8px;
-    font-size: 0.48rem;
-    max-width: 34%;
-  }
-
-  .sl-resource-viewer-modal-video-wrap iframe,
-  .sl-resource-viewer-modal-video {
-    min-height: 180px;
-  }
-
-  .sl-resource-viewer-modal-pdf {
-    height: 48vh;
-  }
-}
-
-/* ---------- Touch devices ---------- */
-@media (hover: none) and (pointer: coarse) {
-  .sl-progress-hero-carousel-window {
-    cursor: default;
-  }
-
-  .sl-progress-stage-learning-pill:hover {
-    transform: none;
-  }
-
-  .sl-progress-stage-learning-pill,
-  .sl-progress-carousel-arrow,
-  .sl-progress-stage-edu-close,
-  .sl-progress-stage-storypoint-card-close,
-  .sl-progress-stage-edu-resource-link,
-  .sl-progress-stage-edu-resource-card,
-  .sl-resource-viewer-modal-btn,
-  .slp-modal-btn {
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  .sl-progress-stage-learning-pill {
-    min-height: 38px;
-  }
-
-  .sl-progress-carousel-arrow {
-    min-width: 38px;
-    min-height: 38px;
-  }
-
-  .sl-progress-stage-edu-panel-inner,
-  .sl-resource-viewer-modal-body {
-    overscroll-behavior: contain;
-  }
-}
-
-/* ---------- Reduced motion ---------- */
-@media (prefers-reduced-motion: reduce) {
-  .sl-progress-stage-card-base-image--stacked,
-  .sl-progress-stage-edu-panel,
-  .sl-progress-stage-learning-pill,
-  .sl-progress-roadmap-track-fill,
-  .sl-progress-roadmap-track-glow,
-  .sl-progress-hero-title-layer--incoming.is-incoming-visible,
-  .sl-progress-hero-title-layer--current.is-outgoing,
-  .sl-progress-carousel-arrow,
-  .sl-progress-stage-edu-resource-card,
-  .sl-resource-viewer-modal-btn,
-  .slp-modal-btn,
-  .slp-modal-select {
-    transition: none !important;
-    animation: none !important;
+    font-size: clamp(1.65rem, 5.6vw, 2.1rem);
+    line-height: 1.08;
+    letter-spacing: 0.2em;
   }
 }
