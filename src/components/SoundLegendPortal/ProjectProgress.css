@@ -333,7 +333,7 @@
   transition: width 0.35s ease;
 }
 
- /* =========================================================
+/* =========================================================
    BUILD SUMMARY — OBER ARTISAN / GRITTY POLISH
    ========================================================= */
 
@@ -345,8 +345,16 @@
   border-radius: 26px;
   overflow: hidden;
   background:
-    radial-gradient(circle at top left, rgba(255, 255, 255, 0.025), transparent 28%),
-    radial-gradient(circle at top center, rgba(62, 76, 110, 0.08), transparent 34%),
+    radial-gradient(
+      circle at top left,
+      rgba(255, 255, 255, 0.025),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at top center,
+      rgba(62, 76, 110, 0.08),
+      transparent 34%
+    ),
     linear-gradient(180deg, rgba(11, 12, 16, 0.97), rgba(6, 7, 10, 0.99));
   border: 1px solid rgba(255, 255, 255, 0.06);
   box-shadow:
@@ -360,15 +368,14 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background:
-    linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(255, 255, 255, 0.018) 18%,
-      transparent 38%,
-      rgba(124, 146, 196, 0.03) 62%,
-      transparent 100%
-    );
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.018) 18%,
+    transparent 38%,
+    rgba(124, 146, 196, 0.03) 62%,
+    transparent 100%
+  );
   mix-blend-mode: screen;
   opacity: 0.75;
 }
@@ -378,14 +385,13 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background:
-    repeating-linear-gradient(
-      90deg,
-      transparent 0,
-      transparent 26px,
-      rgba(255, 255, 255, 0.008) 27px,
-      transparent 28px
-    );
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0,
+    transparent 26px,
+    rgba(255, 255, 255, 0.008) 27px,
+    transparent 28px
+  );
   opacity: 0.14;
   mix-blend-mode: soft-light;
 }
@@ -424,7 +430,11 @@
   border-radius: 22px;
   margin-bottom: 14px;
   background:
-    radial-gradient(circle at top left, rgba(86, 107, 150, 0.08), transparent 30%),
+    radial-gradient(
+      circle at top left,
+      rgba(86, 107, 150, 0.08),
+      transparent 30%
+    ),
     linear-gradient(180deg, rgba(13, 14, 18, 0.94), rgba(8, 9, 12, 0.98));
   border: 1px solid rgba(255, 255, 255, 0.07);
   box-shadow:
@@ -502,8 +512,11 @@
   height: 18px;
   border-radius: 999px;
   overflow: hidden;
-  background:
-    linear-gradient(180deg, rgba(8, 7, 8, 0.98), rgba(14, 11, 10, 0.98));
+  background: linear-gradient(
+    180deg,
+    rgba(8, 7, 8, 0.98),
+    rgba(14, 11, 10, 0.98)
+  );
   border: 1px solid rgba(156, 118, 77, 0.22);
   box-shadow:
     inset 0 2px 7px rgba(0, 0, 0, 0.55),
@@ -514,13 +527,12 @@
   position: absolute;
   inset: 0 auto 0 0;
   border-radius: 999px;
-  background:
-    linear-gradient(
-      90deg,
-      rgba(148, 198, 170, 0.92) 0%,
-      rgba(138, 184, 186, 0.92) 48%,
-      rgba(126, 154, 196, 0.9) 100%
-    );
+  background: linear-gradient(
+    90deg,
+    rgba(148, 198, 170, 0.92) 0%,
+    rgba(138, 184, 186, 0.92) 48%,
+    rgba(126, 154, 196, 0.9) 100%
+  );
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.14),
     0 0 14px rgba(126, 154, 196, 0.08);
@@ -532,12 +544,11 @@
   left: 0;
   bottom: 1px;
   border-radius: 999px;
-  background:
-    linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0.16),
-      rgba(255, 244, 226, 0.03)
-    );
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.16),
+    rgba(255, 244, 226, 0.03)
+  );
   pointer-events: none;
   mix-blend-mode: screen;
 }
@@ -560,7 +571,11 @@
   padding: 16px 16px 15px;
   border-radius: 20px;
   background:
-    radial-gradient(circle at top left, rgba(255, 255, 255, 0.02), transparent 30%),
+    radial-gradient(
+      circle at top left,
+      rgba(255, 255, 255, 0.02),
+      transparent 30%
+    ),
     linear-gradient(180deg, rgba(12, 13, 18, 0.94), rgba(8, 9, 12, 0.98));
   border: 1px solid rgba(255, 255, 255, 0.07);
   box-shadow:
@@ -910,61 +925,87 @@
   top: 50%;
   transform: translateY(-50%);
   z-index: 20;
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(10, 14, 26, 0.42);
+  border: 1px solid rgba(255, 248, 236, 0.08);
+  background: rgba(255, 255, 255, 0.022);
   color: transparent;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
   box-shadow:
-    0 8px 24px rgba(0, 0, 0, 0.24),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    0 8px 18px rgba(0, 0, 0, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.035);
   transition:
-    background 0.18s ease,
-    border-color 0.18s ease,
-    box-shadow 0.18s ease,
-    opacity 0.18s ease;
+    background 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
 }
 
 .sl-progress-carousel-arrow:hover:not(:disabled) {
-  background: rgba(14, 20, 36, 0.62);
-  border-color: rgba(120, 190, 255, 0.18);
+  background: rgba(255, 255, 255, 0.032);
+  border-color: rgba(255, 248, 236, 0.12);
   box-shadow:
-    0 10px 28px rgba(0, 0, 0, 0.3),
-    0 0 0 1px rgba(120, 190, 255, 0.06),
-    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+    0 10px 22px rgba(0, 0, 0, 0.18),
+    0 0 10px rgba(255, 255, 255, 0.045),
+    inset 0 1px 0 rgba(255, 255, 255, 0.045);
+}
+
+.sl-progress-carousel-arrow:focus,
+.sl-progress-carousel-arrow:focus-visible,
+.sl-progress-carousel-arrow:active {
+  outline: none;
+  background: rgba(255, 255, 255, 0.022);
+  border-color: rgba(255, 248, 236, 0.08);
+  box-shadow:
+    0 8px 18px rgba(0, 0, 0, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.035);
 }
 
 .sl-progress-carousel-arrow:disabled {
-  opacity: 0.3;
-  cursor: default;
-  box-shadow: none;
+  opacity: 1;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.022);
+  border-color: rgba(255, 248, 236, 0.08);
+  box-shadow:
+    0 8px 18px rgba(0, 0, 0, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.035);
 }
 
 .sl-progress-carousel-arrow--left {
-  left: 14px;
+  left: 18px;
 }
 
 .sl-progress-carousel-arrow--right {
-  right: 14px;
+  right: 18px;
 }
 
-.sl-progress-carousel-arrow-glyph {
-  width: 9px;
-  height: 9px;
-  border-top: 1.8px solid rgba(244, 248, 255, 0.92);
-  border-left: 1.8px solid rgba(244, 248, 255, 0.92);
+.sl-progress-carousel-arrow::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid rgba(255, 255, 255, 0.94);
+  border-left: 2px solid rgba(255, 255, 255, 0.94);
+  display: block;
+  filter:
+    drop-shadow(0 0 4px rgba(255, 255, 255, 0.18))
+    drop-shadow(0 0 10px rgba(255, 255, 255, 0.08));
+}
+
+.sl-progress-carousel-arrow--left::before {
   transform: rotate(-45deg);
   margin-left: 2px;
 }
 
-.sl-progress-carousel-arrow-glyph.is-right {
+.sl-progress-carousel-arrow--right::before {
   transform: rotate(135deg);
   margin-left: -2px;
 }
@@ -1250,7 +1291,7 @@
   overflow-y: auto;
   overflow-x: hidden;
   min-height: 0;
-  padding: 20px 22px 16px;
+  padding: 0 22px 16px;
   border-radius: 24px;
   background:
     linear-gradient(180deg, rgba(19, 15, 12, 0.82), rgba(8, 8, 10, 0.92)),
@@ -1304,23 +1345,94 @@
 }
 
 .sl-progress-stage-edu-header {
-  position: relative;
-  z-index: 1;
+  position: sticky;
+  top: 0;
+  z-index: 25;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 14px;
-  margin-bottom: 10px;
+  margin: 0 -22px 14px;
+  padding: 18px 22px 14px;
+  background:
+    linear-gradient(180deg, rgba(19, 15, 12, 0.96), rgba(12, 10, 10, 0.9)),
+    radial-gradient(
+      circle at top left,
+      rgba(120, 78, 42, 0.16),
+      transparent 42%
+    );
+  border-bottom: 1px solid rgba(190, 158, 116, 0.12);
+  backdrop-filter: blur(16px) saturate(1.04);
+  -webkit-backdrop-filter: blur(16px) saturate(1.04);
+}
+
+.sl-progress-stage-edu-header-copy {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .sl-progress-stage-edu-kicker {
+  width: 100%;
+  text-align: left;
   font-size: 0.66rem;
   text-transform: uppercase;
   letter-spacing: 0.22em;
   color: rgba(222, 196, 164, 0.72);
 }
 
+.sl-progress-stage-edu-chapter-heading {
+  width: 100%;
+  max-width: 760px;
+  margin: 8px auto 0;
+  text-align: center;
+}
+
+.sl-progress-stage-edu-chapter-number {
+  display: block;
+  margin: 0 0 10px;
+  font-size: 0.82rem;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: 0.62em;
+  text-transform: uppercase;
+  color: rgba(237, 224, 205, 0.72);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.sl-progress-stage-edu-chapter-title {
+  display: block;
+  margin: 0;
+  font-size: clamp(1.7rem, 2.6vw, 2.9rem);
+  line-height: 1.08;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(247, 241, 233, 0.98);
+  text-align: center;
+  text-wrap: balance;
+  text-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.34),
+    0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.sl-progress-stage-edu-chapter {
+  margin-top: 6px;
+  font-size: 1.02rem;
+  line-height: 1.28;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: rgba(246, 238, 226, 0.96);
+}
+
 .sl-progress-stage-edu-close {
+  position: relative;
+  z-index: 2;
+  flex: 0 0 auto;
+  margin-top: 2px;
   border: 1px solid rgba(196, 163, 119, 0.16);
   background: rgba(18, 16, 17, 0.56);
   color: rgba(243, 234, 220, 0.86);
@@ -3111,8 +3223,11 @@ button.pp-compact-marker {
 .slp-modal-header {
   padding: 18px 20px 14px;
   border-bottom: 1px solid rgba(186, 149, 104, 0.12);
-  background:
-    linear-gradient(180deg, rgba(24, 18, 15, 0.64), rgba(14, 12, 12, 0.3));
+  background: linear-gradient(
+    180deg,
+    rgba(24, 18, 15, 0.64),
+    rgba(14, 12, 12, 0.3)
+  );
 }
 
 .slp-modal-title {
@@ -3536,7 +3651,6 @@ button.pp-compact-marker {
   max-width: 100%;
 }
 
-
 /* =========================================================
    MOBILE FIXES — STORYPOINT PILLS + BUILD/VOICE PANEL LAYOUT
    ========================================================= */
@@ -3550,6 +3664,36 @@ button.pp-compact-marker {
     border-radius: 18px;
   }
 
+  .sl-progress-stage-edu-chapter {
+    font-size: 0.92rem;
+    line-height: 1.32;
+  }
+
+.sl-progress-stage-edu-panel-inner {
+  padding: 0 14px 14px;
+  border-radius: 18px;
+}
+
+.sl-progress-stage-edu-header {
+  margin: 0 -14px 12px;
+  padding: 14px 14px 12px;
+}
+
+.sl-progress-stage-edu-chapter-heading {
+  margin-top: 6px;
+}
+
+.sl-progress-stage-edu-chapter-number {
+  margin-bottom: 8px;
+  font-size: 0.66rem;
+  letter-spacing: 0.4em;
+}
+
+.sl-progress-stage-edu-chapter-title {
+  font-size: clamp(1.1rem, 6vw, 1.65rem);
+  line-height: 1.12;
+  letter-spacing: 0.18em;
+}
   .sl-progress-project-overview,
   .sl-progress-roadmap--premium,
   .sl-progress-stage {
@@ -3615,8 +3759,8 @@ button.pp-compact-marker {
   }
 
   .sl-progress-carousel-arrow {
-    width: 34px;
-    height: 34px;
+    width: 38px;
+    height: 38px;
   }
 
   .sl-progress-carousel-arrow--left {
@@ -3625,6 +3769,11 @@ button.pp-compact-marker {
 
   .sl-progress-carousel-arrow--right {
     right: 10px;
+  }
+
+  .sl-progress-carousel-arrow::before {
+    width: 9px;
+    height: 9px;
   }
 
   .sl-progress-stage-title-anchor {

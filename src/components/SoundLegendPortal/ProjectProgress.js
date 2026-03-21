@@ -43,6 +43,84 @@ const GLOBAL_STAGE_ASSETS = {
 const STAGE_MEDIA_PROMISE_CACHE = {};
 const STAGE_IMAGE_PRELOAD_CACHE = {};
 
+const PROJECT_PROGRESS_STAGE_MEDIA_CACHE_KEY =
+  'projectProgressStageMediaCache:v1';
+
+function readProjectProgressStageMediaCache() {
+  if (typeof window === 'undefined') return null;
+
+  try {
+    const raw = window.sessionStorage.getItem(
+      PROJECT_PROGRESS_STAGE_MEDIA_CACHE_KEY
+    );
+    if (!raw) return null;
+    return JSON.parse(raw);
+  } catch (err) {
+    console.warn('Failed reading stage media cache', err);
+    return null;
+  }
+}
+
+function writeProjectProgressStageMediaCache(cache) {
+  if (typeof window === 'undefined') return;
+  if (!cache) return;
+
+  try {
+    window.sessionStorage.setItem(
+      PROJECT_PROGRESS_STAGE_MEDIA_CACHE_KEY,
+      JSON.stringify(cache)
+    );
+  } catch (err) {
+    console.warn('Failed writing stage media cache', err);
+  }
+}
+
+const PROJECT_PROGRESS_CACHE_PREFIX = 'projectProgressCache:';
+
+function getProjectProgressCacheKey(projectLike) {
+  const id =
+    projectLike?.id ||
+    projectLike?.projectId ||
+    projectLike?.docId ||
+    projectLike?.serial ||
+    projectLike?.snareSerial ||
+    projectLike?.lineSerial;
+
+  return id ? `${PROJECT_PROGRESS_CACHE_PREFIX}${id}` : null;
+}
+
+function readProjectProgressCache(projectLike) {
+  if (typeof window === 'undefined') return null;
+
+  try {
+    const key = getProjectProgressCacheKey(projectLike);
+    if (!key) return null;
+
+    const raw = window.sessionStorage.getItem(key);
+    if (!raw) return null;
+
+    return JSON.parse(raw);
+  } catch (err) {
+    console.warn('Failed reading project progress cache', err);
+    return null;
+  }
+}
+
+function writeProjectProgressCache(projectLike, data) {
+  if (typeof window === 'undefined') return;
+  if (!data) return;
+
+  try {
+    const key = getProjectProgressCacheKey(projectLike || data);
+    if (!key) return;
+
+    window.sessionStorage.setItem(key, JSON.stringify(data));
+  } catch (err) {
+    console.warn('Failed writing project progress cache', err);
+  }
+}
+
+
 const STEPS = STAGES.map((s) => {
   const edu = PROJECT_STAGE_EDU[s.stageKey] || {};
   const time = edu.time || {};
@@ -2595,15 +2673,41 @@ function StageResourceViewerModal({ item, onClose }) {
    ========================================================= */
 
 const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
-  const [project, setProject] = useState(initialProject || null);
-  const [loading, setLoading] = useState(!initialProject);
+    const cachedInitialProject = useMemo(
+    () => initialProject || readProjectProgressCache(initialProject),
+    [initialProject]
+  );
+
+  const [project, setProject] = useState(cachedInitialProject || null);
+  const [loading, setLoading] = useState(!cachedInitialProject);
   const [activeKey, setActiveKey] = useState(STEPS[0].key);
 
   const [displayedStageKey, setDisplayedStageKey] = useState(STEPS[0].key);
   const [displayedOverlayStageKey, setDisplayedOverlayStageKey] = useState(
     STEPS[0].key
   );
-  const [selectedStageMediaCache, setSelectedStageMediaCache] = useState({});
+
+const cachedStageMedia = useMemo(
+  () => readProjectProgressStageMediaCache(),
+  []
+);
+
+const hasCachedStageMedia = useMemo(() => {
+  if (!cachedStageMedia) return false;
+  return STEPS.every((step) => cachedStageMedia[getStageMediaCacheKey(step.key)]);
+}, [cachedStageMedia]);
+
+const [selectedStageMediaCache, setSelectedStageMediaCache] = useState(
+  cachedStageMedia || {}
+);
+
+const [allStageMediaReady, setAllStageMediaReady] = useState(
+  hasCachedStageMedia
+);
+const [loadedAssetCount, setLoadedAssetCount] = useState(
+  hasCachedStageMedia ? STEPS.length * 2 : 0
+);
+const [totalAssetCount, setTotalAssetCount] = useState(STEPS.length * 2);
 
   const [hoveredStorypointId, sethoveredStorypointId] = useState(null);
   const [pinnedStorypointId, setpinnedStorypointId] = useState(null);
@@ -2611,10 +2715,6 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
 
   const [carouselAnimating, setCarouselAnimating] = useState(false);
   const [dragOffsetX, setDragOffsetX] = useState(0);
-
-  const [allStageMediaReady, setAllStageMediaReady] = useState(false);
-  const [loadedAssetCount, setLoadedAssetCount] = useState(0);
-  const [totalAssetCount, setTotalAssetCount] = useState(STEPS.length * 2);
 
   const [selectedResourceItem, setSelectedResourceItem] = useState(null);
 
@@ -2625,6 +2725,7 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
 
   const eduPanelRef = useRef(null);
   const storypointRailRef = useRef(null);
+  const carouselWindowRef = useRef(null);
 
   const transitionLockRef = useRef(false);
   const dragStartXRef = useRef(0);
@@ -2637,11 +2738,21 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
   const [incomingTitleText, setIncomingTitleText] = useState('');
   const [titleTransitioning, setTitleTransitioning] = useState(false);
 
+    useEffect(() => {
+    if (initialProject) return;
+
+    const cached = readProjectProgressCache(project);
+    if (cached) {
+      setProject((prev) => prev || cached);
+      setLoading(false);
+    }
+  }, [initialProject, project]);
+
   useEffect(() => {
     if (!initialProject) return;
 
     setProject((prev) => {
-      if (!prev) return initialProject;
+            if (!prev) return initialProject || readProjectProgressCache(initialProject);
 
       const incomingId =
         initialProject.id ||
@@ -2667,10 +2778,32 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
     setSelectedResourceItem(null);
   }, [activeKey]);
 
-  useEffect(() => {
-    let cancelled = false;
+useEffect(() => {
+  let cancelled = false;
 
-    const preloadAllStageMedia = async () => {
+  const cached = readProjectProgressStageMediaCache();
+  const hasCompleteCache =
+    cached &&
+    STEPS.every((step) => cached[getStageMediaCacheKey(step.key)]);
+
+  if (hasCompleteCache) {
+    setSelectedStageMediaCache(cached);
+    setLoadedAssetCount(STEPS.length * 2);
+    setTotalAssetCount(STEPS.length * 2);
+    setAllStageMediaReady(true);
+
+    const cachedSmokeUrl =
+      Object.values(cached).find((bundle) => bundle?.smokeVideoUrl)
+        ?.smokeVideoUrl || '';
+
+    if (cachedSmokeUrl) {
+      setSharedSmokeVideoUrl(cachedSmokeUrl);
+    }
+
+    return;
+  }
+
+  const preloadAllStageMedia = async () => {
       try {
         setAllStageMediaReady(false);
         setLoadedAssetCount(0);
@@ -2725,11 +2858,12 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
           }
         }
 
-        if (!cancelled) {
-          setSelectedStageMediaCache(nextCache);
-          setLoadedAssetCount(STEPS.length * 2);
-          setAllStageMediaReady(true);
-        }
+if (!cancelled) {
+  setSelectedStageMediaCache(nextCache);
+  writeProjectProgressStageMediaCache(nextCache);
+  setLoadedAssetCount(STEPS.length * 2);
+  setAllStageMediaReady(true);
+}
       } catch (err) {
         console.error('Failed preloading all stage media bundles:', err);
         if (!cancelled) {
@@ -2794,6 +2928,11 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
 
     return () => unsub();
   }, [initialProject]);
+
+    useEffect(() => {
+    if (!project) return;
+    writeProjectProgressCache(initialProject || project, project);
+  }, [project, initialProject]);
 
   const overallPct = useMemo(() => getOverallProgress(project), [project]);
   const targetWindow = useMemo(() => getTargetWindow(project), [project]);
@@ -2862,10 +3001,19 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
       const clickedInsidePanel =
         eduPanelRef.current && eduPanelRef.current.contains(target);
 
-      const clickedInsidestorypoints =
+      const clickedInsideStorypoints =
         storypointRailRef.current && storypointRailRef.current.contains(target);
 
-      if (clickedInsidePanel || clickedInsidestorypoints) return;
+      const clickedInsideCarouselWindow =
+        carouselWindowRef.current && carouselWindowRef.current.contains(target);
+
+      if (
+        clickedInsidePanel ||
+        clickedInsideStorypoints ||
+        clickedInsideCarouselWindow
+      ) {
+        return;
+      }
 
       closeStorypointNow();
     };
@@ -2886,6 +3034,8 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
   const activeIndex = STEPS.findIndex((s) => s.key === activeKey);
 
   const chapterLabel = `Chapter ${toRomanChapter(activeIndex + 1)}`;
+
+  const activeChapterHeading = `${chapterLabel} — ${activeStep.label}`;
 
   const currentStageStorypoints = useMemo(
     () => getStorypointsForStep(activeStep, project),
@@ -3004,9 +3154,11 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
     currentStageStatus === STAGE_MEDIA_STATE.NEXT;
 
   useEffect(() => {
-    sethoveredStorypointId(null);
-    setpinnedStorypointId(null);
-  }, [activeKey, showStageStorypoints]);
+    if (!showStageStorypoints) {
+      sethoveredStorypointId(null);
+      setpinnedStorypointId(null);
+    }
+  }, [showStageStorypoints]);
 
   const displayedOverlayStageIndex = Math.max(
     0,
@@ -3148,11 +3300,23 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
 
   const goPrevStage = () => {
     if (!canGoPrev) return;
+
+    if (eduPanelCloseTimerRef.current) {
+      clearTimeout(eduPanelCloseTimerRef.current);
+      eduPanelCloseTimerRef.current = null;
+    }
+
     navigateToStageIndex(activeIndex - 1);
   };
 
   const goNextStage = () => {
     if (!canGoNext) return;
+
+    if (eduPanelCloseTimerRef.current) {
+      clearTimeout(eduPanelCloseTimerRef.current);
+      eduPanelCloseTimerRef.current = null;
+    }
+
     navigateToStageIndex(activeIndex + 1);
   };
 
@@ -3333,6 +3497,7 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
           .join(' ')}
       >
         <div
+          ref={carouselWindowRef}
           className="sl-progress-hero-carousel-window"
           onMouseDown={(e) => beginDrag(e.clientX)}
           onMouseMove={(e) => updateDrag(e.clientX)}
@@ -3405,8 +3570,22 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
                       />
 
                       <div className="sl-progress-stage-edu-header">
-                        <div className="sl-progress-stage-edu-kicker">
-                          From the workshop
+                        <div className="sl-progress-stage-edu-header-copy">
+                          <div className="sl-progress-stage-edu-kicker">
+                            From the workshop
+                          </div>
+
+                          {activeStorypoint ? (
+                            <div className="sl-progress-stage-edu-chapter-heading">
+                              <div className="sl-progress-stage-edu-chapter-number">
+                                {chapterLabel}
+                              </div>
+                              <div className="sl-progress-stage-edu-chapter-title">
+                                {activeStep?.label ||
+                                  activeStep?.adminMainTitle}
+                              </div>
+                            </div>
+                          ) : null}
                         </div>
 
                         <button
@@ -3772,30 +3951,32 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
                   <button
                     type="button"
                     className="sl-progress-carousel-arrow sl-progress-carousel-arrow--left"
+                    onMouseEnter={() => {
+                      if (eduPanelCloseTimerRef.current) {
+                        clearTimeout(eduPanelCloseTimerRef.current);
+                        eduPanelCloseTimerRef.current = null;
+                      }
+                    }}
                     onClick={goPrevStage}
                     disabled={carouselAnimating}
                     aria-label={`View previous stage: ${prevStep?.label || 'Previous stage'}`}
-                  >
-                    <span
-                      className="sl-progress-carousel-arrow-glyph"
-                      aria-hidden="true"
-                    />
-                  </button>
+                  ></button>
                 ) : null}
 
                 {canGoNext ? (
                   <button
                     type="button"
                     className="sl-progress-carousel-arrow sl-progress-carousel-arrow--right"
+                    onMouseEnter={() => {
+                      if (eduPanelCloseTimerRef.current) {
+                        clearTimeout(eduPanelCloseTimerRef.current);
+                        eduPanelCloseTimerRef.current = null;
+                      }
+                    }}
                     onClick={goNextStage}
                     disabled={carouselAnimating}
                     aria-label={`View next stage: ${nextStep?.label || 'Next stage'}`}
-                  >
-                    <span
-                      className="sl-progress-carousel-arrow-glyph is-right"
-                      aria-hidden="true"
-                    />
-                  </button>
+                  ></button>
                 ) : null}
 
                 <div className="sl-progress-hero-overlay sl-progress-hero-overlay--center">
@@ -3805,7 +3986,7 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
                       : currentStageStatus === STAGE_MEDIA_STATE.CURRENT
                         ? 'Chapter in progress'
                         : currentStageStatus === STAGE_MEDIA_STATE.NEXT
-                          ? 'Next chapter ahead'
+                          ? 'Preview of next chapter'
                           : 'Chapter unwritten'}
                   </div>
 
