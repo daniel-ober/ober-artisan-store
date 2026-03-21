@@ -40,6 +40,7 @@ const GLOBAL_STAGE_ASSETS = {
 };
 
 const STAGE_MEDIA_PROMISE_CACHE = {};
+const STAGE_IMAGE_PRELOAD_CACHE = {};
 
 const STEPS = STAGES.map((s) => {
   const edu = PROJECT_STAGE_EDU[s.stageKey] || {};
@@ -179,7 +180,54 @@ function getExistingPhaseKey(project, canonicalKey) {
   return canonicalKey;
 }
 
-const STAGE_IMAGE_PRELOAD_CACHE = {};
+function toRomanChapter(value) {
+  const numerals = [
+    ['X', 10],
+    ['IX', 9],
+    ['V', 5],
+    ['IV', 4],
+    ['I', 1],
+  ];
+
+  let num = Number(value) || 1;
+  let result = '';
+
+  numerals.forEach(([symbol, amount]) => {
+    while (num >= amount) {
+      result += symbol;
+      num -= amount;
+    }
+  });
+
+  return result;
+}
+
+function getStageResourceItems(project) {
+  const projectFiles = Array.isArray(project?.files) ? project.files : [];
+  const attachmentFiles = Array.isArray(project?.attachments)
+    ? project.attachments
+    : [];
+
+  const allFiles = [...projectFiles, ...attachmentFiles];
+
+  const paymentLink =
+    project?.paymentLink ||
+    project?.stripeCheckoutUrl ||
+    project?.checkoutUrl ||
+    '';
+
+  const signatureLink =
+    project?.signatureLink ||
+    project?.documentToSignUrl ||
+    project?.esignUrl ||
+    '';
+
+  return {
+    files: allFiles,
+    paymentLink,
+    signatureLink,
+  };
+}
 
 function preloadImage(url) {
   if (!url) return Promise.resolve('');
@@ -199,9 +247,8 @@ function preloadImage(url) {
           await img.decode();
         }
       } catch (err) {
-        // decode can fail harmlessly on cached/cross-origin images in some browsers
+        // harmless decode failures
       }
-
       resolve(url);
     };
 
@@ -245,16 +292,6 @@ export function computeStageStatus(step) {
   if (completedCount === totalCount && totalCount > 0) return 'completed';
   if (anyProgress) return 'in_progress';
   return 'not_started';
-}
-
-function displayStatus(status) {
-  const s = String(status || '').toLowerCase();
-
-  if (s === 'completed') return 'Completed';
-  if (s === 'in_progress' || s === 'in progress') return 'In Progress';
-  if (s === 'not_started' || s === 'not started') return 'Not Started';
-
-  return 'Not Started';
 }
 
 function getProjectDocRef(project) {
@@ -303,13 +340,6 @@ function fmtDate(v) {
   const yyyy = d.getFullYear();
 
   return `${mm}/${dd}/${yyyy}`;
-}
-
-function normalizeAssetName(value = '') {
-  return String(value)
-    .replace(/[\u200B-\u200D\uFEFF]/g, '')
-    .trim()
-    .toLowerCase();
 }
 
 function parseHourRangeText(estHoursText = '') {
@@ -470,6 +500,10 @@ async function fetchStorageAssetUrl(folderPath, filename) {
   }
 }
 
+function getStageMediaCacheKey(stageKey) {
+  return `bundle:${stageKey}`;
+}
+
 async function resolveStageMediaBundle(stageKey) {
   if (!stageKey) return null;
 
@@ -484,7 +518,6 @@ async function resolveStageMediaBundle(stageKey) {
     const smokeVideoName = getSharedAssetFilename('smokeOverlay');
     const logoOverlayName = getSharedAssetFilename('logoOverlay');
     const completedBadgeName = getSharedAssetFilename('completedBadge');
-
     const folderPath = 'project-stage-media';
 
     const [
@@ -511,14 +544,6 @@ async function resolveStageMediaBundle(stageKey) {
         : Promise.resolve(null),
     ]);
 
-    console.log('[STAGE_MEDIA_BUNDLE]', stageKey, {
-      archivedImageUrl,
-      currentImageUrl,
-      smokeVideoUrl,
-      logoOverlayUrl,
-      completedBadgeUrl,
-    });
-
     return {
       archivedImageUrl: archivedImageUrl || '',
       currentImageUrl: currentImageUrl || '',
@@ -531,10 +556,6 @@ async function resolveStageMediaBundle(stageKey) {
   return STAGE_MEDIA_PROMISE_CACHE[cacheKey];
 }
 
-function getStageMediaCacheKey(stageKey) {
-  return `bundle:${stageKey}`;
-}
-
 function getStageSummary(step) {
   const source = step?.what || '';
   if (!source) return 'A refined look at this phase of your SoundLegend build.';
@@ -544,10 +565,38 @@ function getStageSummary(step) {
   return firstSentence.endsWith('.') ? firstSentence : `${firstSentence}.`;
 }
 
-function getStageViewerEyebrow(selectedIndex, currentIndex) {
-  if (selectedIndex < currentIndex) return 'Stage Archive';
-  if (selectedIndex > currentIndex) return 'Future Stage Preview';
-  return 'Live Build Stage';
+function getStageStatePresentation(selectedIndex, currentIndex) {
+  const state = getSelectedStageMediaState(selectedIndex, currentIndex);
+
+  if (state === STAGE_MEDIA_STATE.COMPLETED) {
+    return {
+      eyebrow: 'Stage Completed',
+      pill: 'Completed',
+      helper: 'This phase is complete and now part of your build archive.',
+    };
+  }
+
+  if (state === STAGE_MEDIA_STATE.CURRENT) {
+    return {
+      eyebrow: 'Stage In Progress',
+      pill: 'In Progress',
+      helper: 'This is the current active phase of your drum’s build.',
+    };
+  }
+
+  if (state === STAGE_MEDIA_STATE.NEXT) {
+    return {
+      eyebrow: "A peek inside of what's up next",
+      pill: 'Up Next',
+      helper: 'This phase is coming next once the current stage is completed.',
+    };
+  }
+
+  return {
+    eyebrow: 'Future Stage (Locked)',
+    pill: 'Locked',
+    helper: 'This phase will unlock later in the build journey.',
+  };
 }
 
 function getCombinedChecklist(project, stepDef) {
@@ -774,21 +823,6 @@ function getTargetWindow(project) {
   }
 
   return projected.early || projected.late || null;
-}
-
-function getUnlockMaxStageIndex(project) {
-  const MIN_UNLOCKED = 2;
-
-  if (!project) return MIN_UNLOCKED;
-
-  for (let i = 0; i < STEPS.length; i += 1) {
-    const status = getStepStatus(project, STEPS[i]).status;
-    if (status !== 'Completed') {
-      return Math.max(MIN_UNLOCKED, i);
-    }
-  }
-
-  return STEPS.length - 1;
 }
 
 const isItemTouched = (item = {}) => {
@@ -1525,8 +1559,42 @@ function getCurrentStageAndStepLabels(project) {
   return { stageLabel, stepLabel };
 }
 
-function getLearningPointsForStep(step) {
+function getLearningPointsForStep(step, project = null) {
   if (!step) return [];
+
+  const resourceItems = [];
+
+  const projectFiles = Array.isArray(project?.files) ? project.files : [];
+  const buildFiles = Array.isArray(project?.attachments)
+    ? project.attachments
+    : [];
+  const mergedFiles = [...projectFiles, ...buildFiles];
+
+  const paymentLink =
+    project?.paymentLink ||
+    project?.stripeCheckoutUrl ||
+    project?.checkoutUrl ||
+    '';
+
+  const signatureLink =
+    project?.signatureLink ||
+    project?.documentToSignUrl ||
+    project?.esignUrl ||
+    '';
+
+  if (mergedFiles.length) {
+    resourceItems.push(
+      `${mergedFiles.length} file${mergedFiles.length === 1 ? '' : 's'} available`
+    );
+  }
+
+  if (signatureLink) {
+    resourceItems.push('Document ready for signature');
+  }
+
+  if (paymentLink) {
+    resourceItems.push('Payment link available');
+  }
 
   return [
     {
@@ -1537,7 +1605,6 @@ function getLearningPointsForStep(step) {
       body:
         step.mantra ||
         'This phase plays an important role in shaping the final voice, feel, and identity of your drum.',
-      meta: ['Stage story'],
     },
     {
       id: 'process',
@@ -1545,7 +1612,6 @@ function getLearningPointsForStep(step) {
       shortLabel: 'Process',
       title: 'What we do in this stage',
       body: step.what || 'Details for this stage will appear here.',
-      meta: ['Process'],
     },
     {
       id: 'impact',
@@ -1553,7 +1619,6 @@ function getLearningPointsForStep(step) {
       shortLabel: 'Impact',
       title: 'Why it matters for your drum',
       body: step.why || 'Why this stage matters will appear here.',
-      meta: ['Impact'],
     },
     {
       id: 'methods',
@@ -1564,7 +1629,6 @@ function getLearningPointsForStep(step) {
         Array.isArray(step.techniques) && step.techniques.length
           ? step.techniques.join(' • ')
           : 'Techniques for this stage will appear here.',
-      meta: ['Methods'],
     },
     {
       id: 'tools',
@@ -1575,7 +1639,16 @@ function getLearningPointsForStep(step) {
         Array.isArray(step.tools) && step.tools.length
           ? step.tools.join(' • ')
           : 'Tools for this stage will appear here.',
-      meta: ['Tools'],
+    },
+    {
+      id: 'resources',
+      icon: '↗',
+      shortLabel: 'Resources',
+      title: 'Media, documents, and next actions',
+      body:
+        resourceItems.length > 0
+          ? resourceItems.join(' • ')
+          : 'When files, approval documents, or payment links are added for this stage, they will appear here.',
     },
   ];
 }
@@ -1595,10 +1668,8 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
   );
   const [selectedStageMediaCache, setSelectedStageMediaCache] = useState({});
 
-  const [activeHotspotId, setActiveHotspotId] = useState(null);
-
-  const [isCheckpointOverlayOpen, setIsCheckpointOverlayOpen] = useState(false);
-
+  const [hoveredHotspotId, setHoveredHotspotId] = useState(null);
+  const [pinnedHotspotId, setPinnedHotspotId] = useState(null);
   const [activeInteractiveStepId, setActiveInteractiveStepId] = useState(null);
 
   const [carouselAnimating, setCarouselAnimating] = useState(false);
@@ -1610,6 +1681,12 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
 
   const [sharedSmokeVideoUrl, setSharedSmokeVideoUrl] = useState('');
 
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+  const eduPanelCloseTimerRef = useRef(null);
+
+  const eduPanelRef = useRef(null);
+  const hotspotRailRef = useRef(null);
+
   const transitionLockRef = useRef(false);
   const dragStartXRef = useRef(0);
   const dragDeltaXRef = useRef(0);
@@ -1618,7 +1695,6 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
   const [displayTitleText, setDisplayTitleText] = useState(
     (STEPS[0]?.label || '').toUpperCase()
   );
-
   const [incomingTitleText, setIncomingTitleText] = useState('');
   const [titleTransitioning, setTitleTransitioning] = useState(false);
 
@@ -1645,15 +1721,7 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
   }, [initialProject]);
 
   useEffect(() => {
-    setActiveHotspotId(null);
-  }, [activeKey]);
-
-  useEffect(() => {
     setActiveInteractiveStepId(null);
-  }, [activeKey]);
-
-  useEffect(() => {
-    setIsCheckpointOverlayOpen(false);
   }, [activeKey]);
 
   useEffect(() => {
@@ -1663,12 +1731,11 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
       try {
         setAllStageMediaReady(false);
         setLoadedAssetCount(0);
-        setTotalAssetCount(STEPS.length * 2); // phase 1 + phase 2
+        setTotalAssetCount(STEPS.length * 2);
 
         const nextCache = {};
-
-        // Phase 1: resolve bundle URLs stage-by-stage
         const bundles = [];
+
         for (let i = 0; i < STEPS.length; i += 1) {
           const step = STEPS[i];
           const bundle = await resolveStageMediaBundle(step.key);
@@ -1690,7 +1757,6 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
 
         if (cancelled) return;
 
-        // Phase 2: preload only the stage images needed for smooth carousel use
         const imageUrls = [];
         bundles.forEach((bundle) => {
           [bundle?.archivedImageUrl, bundle?.currentImageUrl]
@@ -1711,7 +1777,6 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
               const phaseTwoProgress = Math.round(
                 ((i + 1) / Math.max(uniqueImageUrls.length, 1)) * STEPS.length
               );
-
               setLoadedAssetCount(phaseOneCount + phaseTwoProgress);
             }
           }
@@ -1734,6 +1799,24 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
 
     return () => {
       cancelled = true;
+    };
+  }, [sharedSmokeVideoUrl]);
+
+  useEffect(() => {
+    const updateTouchCapability = () => {
+      const hasTouch =
+        window.matchMedia('(hover: none)').matches ||
+        'ontouchstart' in window ||
+        navigator.maxTouchPoints > 0;
+
+      setIsTouchDevice(hasTouch);
+    };
+
+    updateTouchCapability();
+    window.addEventListener('resize', updateTouchCapability);
+
+    return () => {
+      window.removeEventListener('resize', updateTouchCapability);
     };
   }, []);
 
@@ -1788,16 +1871,84 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
     }
   }, [project, currentStepIndex]);
 
+  const openLearningPoint = (id) => {
+    if (eduPanelCloseTimerRef.current) {
+      clearTimeout(eduPanelCloseTimerRef.current);
+      eduPanelCloseTimerRef.current = null;
+    }
+    setHoveredHotspotId(id);
+  };
+
+  const scheduleCloseLearningPoint = () => {
+    if (isTouchDevice || pinnedHotspotId) return;
+
+    if (eduPanelCloseTimerRef.current) {
+      clearTimeout(eduPanelCloseTimerRef.current);
+    }
+
+    eduPanelCloseTimerRef.current = setTimeout(() => {
+      setHoveredHotspotId(null);
+    }, 180);
+  };
+
+  const closeLearningPointNow = () => {
+    if (eduPanelCloseTimerRef.current) {
+      clearTimeout(eduPanelCloseTimerRef.current);
+      eduPanelCloseTimerRef.current = null;
+    }
+    setHoveredHotspotId(null);
+    setPinnedHotspotId(null);
+  };
+
+  const togglePinnedLearningPoint = (id) => {
+    if (eduPanelCloseTimerRef.current) {
+      clearTimeout(eduPanelCloseTimerRef.current);
+      eduPanelCloseTimerRef.current = null;
+    }
+
+    setPinnedHotspotId((prev) => (prev === id ? null : id));
+    setHoveredHotspotId(id);
+  };
+
+  useEffect(() => {
+    const handlePointerDownOutside = (event) => {
+      if (!pinnedHotspotId) return;
+
+      const target = event.target;
+
+      const clickedInsidePanel =
+        eduPanelRef.current && eduPanelRef.current.contains(target);
+
+      const clickedInsideHotspots =
+        hotspotRailRef.current && hotspotRailRef.current.contains(target);
+
+      if (clickedInsidePanel || clickedInsideHotspots) return;
+
+      closeLearningPointNow();
+    };
+
+    document.addEventListener('mousedown', handlePointerDownOutside);
+    document.addEventListener('touchstart', handlePointerDownOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handlePointerDownOutside);
+      document.removeEventListener('touchstart', handlePointerDownOutside);
+    };
+  }, [pinnedHotspotId]);
+
   const { stageLabel: currentStageLabel, stepLabel: currentStepLabel } =
     useMemo(() => getCurrentStageAndStepLabels(project), [project]);
 
   const activeStep = STEPS.find((s) => s.key === activeKey) || STEPS[0];
   const activeIndex = STEPS.findIndex((s) => s.key === activeKey);
 
+  const chapterLabel = `Chapter ${toRomanChapter(activeIndex + 1)}`;
+
   const currentStageLearningPoints = useMemo(
-    () => getLearningPointsForStep(activeStep),
-    [activeStep]
+    () => getLearningPointsForStep(activeStep, project),
+    [activeStep, project]
   );
+
   const currentStageTemplate = STAGE_TEMPLATES?.[activeStep.key] || null;
 
   const currentStageInteractiveSteps = useMemo(() => {
@@ -1849,9 +2000,16 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
     });
   }, [project, currentStageTemplate, activeStep.key]);
 
+  const resolvedHotspotId = pinnedHotspotId || hoveredHotspotId;
+
   const activeLearningPoint =
-    currentStageLearningPoints.find((item) => item.id === activeHotspotId) ||
+    currentStageLearningPoints.find((item) => item.id === resolvedHotspotId) ||
     null;
+
+  const stageResourceItems = useMemo(
+    () => getStageResourceItems(project),
+    [project]
+  );
 
   useEffect(() => {
     const nextTitle = (activeStep?.label || '').toUpperCase();
@@ -1871,11 +2029,6 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
     return () => window.clearTimeout(swapTimer);
   }, [activeStep?.label, displayTitleText]);
 
-  const displayedStageIndex = Math.max(
-    0,
-    STEPS.findIndex((s) => s.key === displayedStageKey)
-  );
-
   const prevStep = activeIndex > 0 ? STEPS[activeIndex - 1] : null;
   const nextStep =
     activeIndex < STEPS.length - 1 ? STEPS[activeIndex + 1] : null;
@@ -1884,6 +2037,23 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
     activeIndex,
     currentStepIndex
   );
+
+  const stageStatePresentation = getStageStatePresentation(
+    activeIndex,
+    currentStepIndex
+  );
+
+  const isSelectedStageLocked = currentStageStatus === STAGE_MEDIA_STATE.FUTURE;
+
+  const showStageHotspots =
+    currentStageStatus === STAGE_MEDIA_STATE.COMPLETED ||
+    currentStageStatus === STAGE_MEDIA_STATE.CURRENT ||
+    currentStageStatus === STAGE_MEDIA_STATE.NEXT;
+
+  useEffect(() => {
+    setHoveredHotspotId(null);
+    setPinnedHotspotId(null);
+  }, [activeKey, showStageHotspots]);
 
   const displayedOverlayStageIndex = Math.max(
     0,
@@ -1897,16 +2067,16 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
 
   const SMOKE_OPACITY_BY_STAGE_STATE = {
     [STAGE_MEDIA_STATE.COMPLETED]: 0.0,
-    [STAGE_MEDIA_STATE.CURRENT]: 0.55,
-    [STAGE_MEDIA_STATE.NEXT]: 0.9,
+    [STAGE_MEDIA_STATE.CURRENT]: 0.48,
+    [STAGE_MEDIA_STATE.NEXT]: 0.82,
     [STAGE_MEDIA_STATE.FUTURE]: 1.0,
   };
 
   const VEIL_OPACITY_BY_STAGE_STATE = {
     [STAGE_MEDIA_STATE.COMPLETED]: 0.0,
-    [STAGE_MEDIA_STATE.CURRENT]: 0.22,
-    [STAGE_MEDIA_STATE.NEXT]: 0.95,
-    [STAGE_MEDIA_STATE.FUTURE]: 1.0,
+    [STAGE_MEDIA_STATE.CURRENT]: 0.14,
+    [STAGE_MEDIA_STATE.NEXT]: 0.78,
+    [STAGE_MEDIA_STATE.FUTURE]: 0.96,
   };
 
   const smokeOverlayOpacity =
@@ -1935,9 +2105,6 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
     [project, activeStep.key]
   );
 
-  const isSelectedStageLocked =
-    getSelectedStageMediaState(activeIndex, currentStepIndex) ===
-    STAGE_MEDIA_STATE.FUTURE;
   const showEducationAndCheckpoints = activeIndex <= currentStepIndex;
 
   const selectedStageThemeClass =
@@ -1952,37 +2119,8 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
   const canGoPrev = activeIndex > 0;
   const canGoNext = activeIndex < STEPS.length - 1;
 
-  const preloadStageMedia = async (stageIndex) => {
-    if (stageIndex < 0 || stageIndex >= STEPS.length) return null;
-
-    const step = STEPS[stageIndex];
-    if (!step) return null;
-
-    const cacheKey = getStageMediaCacheKey(step.key);
-
-    if (selectedStageMediaCache[cacheKey]) {
-      return selectedStageMediaCache[cacheKey];
-    }
-
-    const resolved = await resolveStageMediaBundle(step.key);
-
-    if (resolved) {
-      setSelectedStageMediaCache((prev) => {
-        if (prev[cacheKey]) return prev;
-        return {
-          ...prev,
-          [cacheKey]: resolved,
-        };
-      });
-    }
-
-    return resolved;
-  };
-
   const getStageMediaForIndex = (stageIndex) => {
-    if (stageIndex < 0 || stageIndex >= STEPS.length) {
-      return null;
-    }
+    if (stageIndex < 0 || stageIndex >= STEPS.length) return null;
 
     const step = STEPS[stageIndex];
     const mediaState = getSelectedStageMediaState(stageIndex, currentStepIndex);
@@ -2006,24 +2144,11 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
       baseImageUrl = '';
     }
 
-    let smokeOpacity = 0;
-
-    if (isCompleted) smokeOpacity = 0.15;
-    if (isCurrent) smokeOpacity = 0.46;
-    if (isNext) smokeOpacity = 0.72;
-    if (isFuture) smokeOpacity = 1.0;
-
     return {
       stageKey: step.key,
       stageLabel: step.label,
       mediaState,
       baseImageUrl,
-      smokeVideoUrl: bundle.smokeVideoUrl || '',
-      logoOverlayUrl: bundle.logoOverlayUrl || '',
-      completedBadgeUrl: '',
-      smokeOpacity,
-      logoOpacity: 0,
-      showCompletedBadge: false,
     };
   };
 
@@ -2090,7 +2215,6 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
 
     const delta = clientX - dragStartXRef.current;
     dragDeltaXRef.current = delta;
-
     const clamped = Math.max(-120, Math.min(120, delta));
     setDragOffsetX(clamped);
   };
@@ -2268,12 +2392,7 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
           onTouchEnd={endDrag}
         >
           <div
-            className={[
-              'sl-progress-hero-carousel-stage-rail',
-              'is-single-panel',
-            ]
-              .filter(Boolean)
-              .join(' ')}
+            className="sl-progress-hero-carousel-stage-rail is-single-panel"
             style={{ transform: `translateX(${dragOffsetX * 0.08}px)` }}
           >
             <div className="sl-progress-hero-carousel-center-slot">
@@ -2297,9 +2416,9 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
                         style={{
                           filter:
                             layer.mediaState === STAGE_MEDIA_STATE.COMPLETED
-                              ? 'grayscale(0.5) saturate(0.82) contrast(1.02) brightness(0.92)'
+                              ? 'grayscale(0.42) saturate(0.82) contrast(1.02) brightness(0.9)'
                               : layer.mediaState === STAGE_MEDIA_STATE.CURRENT
-                                ? 'brightness(1.15) saturate(1.25)'
+                                ? 'brightness(1.06) saturate(1.08)'
                                 : 'none',
                         }}
                       />
@@ -2310,37 +2429,90 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
                 )}
 
                 {activeLearningPoint ? (
-                  <div className="sl-progress-stage-hotspot-card">
-                    <div className="sl-progress-stage-hotspot-card-eyebrow">
-                      Interactive learning point
-                    </div>
+                  <div
+                    ref={eduPanelRef}
+                    className={`sl-progress-stage-edu-panel ${
+                      activeLearningPoint ? 'is-visible' : ''
+                    }`}
+                    onMouseEnter={() => {
+                      if (
+                        !isTouchDevice &&
+                        activeLearningPoint?.id &&
+                        !pinnedHotspotId
+                      ) {
+                        openLearningPoint(activeLearningPoint.id);
+                      }
+                    }}
+                    onMouseLeave={() => {
+                      if (!isTouchDevice) scheduleCloseLearningPoint();
+                    }}
+                  >
+                    <div className="sl-progress-stage-edu-panel-inner">
+                      <div
+                        className="sl-progress-stage-edu-grain"
+                        aria-hidden="true"
+                      />
 
-                    <div className="sl-progress-stage-hotspot-card-title">
-                      {activeLearningPoint.title}
-                    </div>
+                      <div className="sl-progress-stage-edu-header">
+                        <div className="sl-progress-stage-edu-kicker">
+                          From the workshop
+                        </div>
 
-                    <p className="sl-progress-stage-hotspot-card-body">
-                      {activeLearningPoint.body}
-                    </p>
-
-                    <div className="sl-progress-stage-hotspot-card-meta">
-                      {(activeLearningPoint.meta || []).map((item) => (
-                        <span
-                          key={item}
-                          className="sl-progress-stage-hotspot-card-pill"
+                        <button
+                          type="button"
+                          className="sl-progress-stage-edu-close"
+                          onClick={closeLearningPointNow}
                         >
-                          {item}
-                        </span>
-                      ))}
-                    </div>
+                          Close
+                        </button>
+                      </div>
 
-                    <button
-                      type="button"
-                      className="sl-progress-stage-hotspot-card-close"
-                      onClick={() => setActiveHotspotId(null)}
-                    >
-                      Close
-                    </button>
+                      <div className="sl-progress-stage-edu-title">
+                        {activeLearningPoint.title}
+                      </div>
+
+                      <p className="sl-progress-stage-edu-body">
+                        {activeLearningPoint.body}
+                      </p>
+
+                      {activeLearningPoint.id === 'resources' ? (
+                        <div className="sl-progress-stage-edu-resource-list">
+                          {stageResourceItems.files.map((file, index) => (
+                            <a
+                              key={file.id || file.url || index}
+                              href={file.url}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="sl-progress-stage-edu-resource-link"
+                            >
+                              {file.name || `Resource ${index + 1}`}
+                            </a>
+                          ))}
+
+                          {stageResourceItems.signatureLink ? (
+                            <a
+                              href={stageResourceItems.signatureLink}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="sl-progress-stage-edu-resource-link is-primary"
+                            >
+                              Review / sign document
+                            </a>
+                          ) : null}
+
+                          {stageResourceItems.paymentLink ? (
+                            <a
+                              href={stageResourceItems.paymentLink}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="sl-progress-stage-edu-resource-link is-primary"
+                            >
+                              Complete payment
+                            </a>
+                          ) : null}
+                        </div>
+                      ) : null}
+                    </div>
                   </div>
                 ) : null}
 
@@ -2397,9 +2569,7 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
                     playsInline
                     preload="auto"
                     aria-hidden="true"
-                    style={{
-                      opacity: smokeOverlayOpacity,
-                    }}
+                    style={{ opacity: smokeOverlayOpacity }}
                   />
                 ) : null}
 
@@ -2444,43 +2614,73 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
                 ) : null}
 
                 <div className="sl-progress-hero-overlay sl-progress-hero-overlay--center">
-                  <div
-                    className={`sl-progress-hero-title-stack ${
-                      titleTransitioning ? 'is-transitioning' : ''
-                    }`}
-                  >
-                    <div
-                      className={`sl-progress-hero-title sl-progress-hero-title--center sl-progress-hero-title-layer sl-progress-hero-title-layer--current ${
-                        titleTransitioning ? 'is-outgoing' : 'is-visible'
-                      }`}
-                    >
-                      {displayTitleText}
-                    </div>
-
-                    <div
-                      className={`sl-progress-hero-title sl-progress-hero-title--center sl-progress-hero-title-layer sl-progress-hero-title-layer--incoming ${
-                        titleTransitioning ? 'is-incoming-visible' : ''
-                      }`}
-                    >
-                      {incomingTitleText}
-                    </div>
+                  <div className="sl-progress-stage-hero-status-caption">
+                    {currentStageStatus === STAGE_MEDIA_STATE.COMPLETED
+                      ? 'Chapter complete'
+                      : currentStageStatus === STAGE_MEDIA_STATE.CURRENT
+                        ? 'Chapter in progress'
+                        : currentStageStatus === STAGE_MEDIA_STATE.NEXT
+                          ? 'Next chapter ahead'
+                          : 'Chapter unwritten'}
                   </div>
 
-                  {currentStageLearningPoints.length > 0 ? (
-                    <div className="sl-progress-stage-learning-rail">
+                  <div className="sl-progress-stage-title-anchor">
+                    <div className="sl-progress-stage-chapter-label">
+                      {chapterLabel}
+                    </div>
+
+                    <div
+                      className={`sl-progress-hero-title-stack ${
+                        titleTransitioning ? 'is-transitioning' : ''
+                      }`}
+                    >
+                      <div
+                        className={`sl-progress-hero-title sl-progress-hero-title--center sl-progress-hero-title-layer sl-progress-hero-title-layer--current ${
+                          titleTransitioning ? 'is-outgoing' : 'is-visible'
+                        }`}
+                      >
+                        {displayTitleText}
+                      </div>
+
+                      <div
+                        className={`sl-progress-hero-title sl-progress-hero-title--center sl-progress-hero-title-layer sl-progress-hero-title-layer--incoming ${
+                          titleTransitioning ? 'is-incoming-visible' : ''
+                        }`}
+                      >
+                        {incomingTitleText}
+                      </div>
+                    </div>
+                  </div>
+                  {showStageHotspots &&
+                  currentStageLearningPoints.length > 0 ? (
+                    <div
+                      ref={hotspotRailRef}
+                      className="sl-progress-stage-learning-rail sl-progress-stage-learning-rail--anchored"
+                    >
                       {currentStageLearningPoints.map((item) => (
                         <button
                           key={item.id}
                           type="button"
                           className={`sl-progress-stage-learning-pill ${
-                            activeHotspotId === item.id ? 'is-active' : ''
+                            resolvedHotspotId === item.id ? 'is-active' : ''
                           }`}
-                          onClick={() =>
-                            setActiveHotspotId((prev) =>
-                              prev === item.id ? null : item.id
-                            )
-                          }
-                          aria-label={item.title}
+                          onMouseEnter={() => {
+                            if (!isTouchDevice && !pinnedHotspotId)
+                              openLearningPoint(item.id);
+                          }}
+                          onMouseLeave={() => {
+                            if (!isTouchDevice && !pinnedHotspotId)
+                              scheduleCloseLearningPoint();
+                          }}
+                          onFocus={() => {
+                            if (!pinnedHotspotId) openLearningPoint(item.id);
+                          }}
+                          onBlur={() => {
+                            if (!isTouchDevice && !pinnedHotspotId)
+                              scheduleCloseLearningPoint();
+                          }}
+                          onClick={() => togglePinnedLearningPoint(item.id)}
+                          aria-pressed={pinnedHotspotId === item.id}
                         >
                           <span className="sl-progress-stage-learning-pill-icon">
                             {item.icon}
@@ -2490,82 +2690,6 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
                           </span>
                         </button>
                       ))}
-                    </div>
-                  ) : null}
-
-                  {currentStageInteractiveSteps.length > 0 ? (
-                    <div
-                      className={`sl-progress-stage-checkpoints-inline ${
-                        isCheckpointOverlayOpen ? 'is-open' : 'is-collapsed'
-                      }`}
-                    >
-                      <button
-                        type="button"
-                        className="sl-progress-stage-checkpoints-toggle"
-                        onClick={() => {
-                          setIsCheckpointOverlayOpen((prev) => !prev);
-                          if (isCheckpointOverlayOpen) {
-                            setActiveInteractiveStepId(null);
-                          }
-                        }}
-                        aria-expanded={isCheckpointOverlayOpen}
-                      >
-                        <div className="sl-progress-stage-checkpoints-toggle-copy">
-                          <div className="sl-progress-stage-checkpoints-inline-eyebrow">
-                            Build Checkpoints
-                          </div>
-
-                          <div className="sl-progress-stage-checkpoints-inline-title">
-                            {isCheckpointOverlayOpen
-                              ? 'Hide stage tasks'
-                              : 'Click here to view stage tasks'}
-                          </div>
-                        </div>
-
-                        <span
-                          className={`sl-progress-stage-checkpoints-toggle-chevron ${
-                            isCheckpointOverlayOpen ? 'is-open' : ''
-                          }`}
-                          aria-hidden="true"
-                        >
-                          ▾
-                        </span>
-                      </button>
-
-                      {isCheckpointOverlayOpen ? (
-                        <div className="sl-progress-stage-checkpoints-inline-list">
-                          {currentStageInteractiveSteps.map((step) => (
-                            <button
-                              key={step.id}
-                              type="button"
-                              className={`sl-progress-stage-checkpoint-chip ${
-                                activeInteractiveStepId === step.id
-                                  ? 'is-active'
-                                  : ''
-                              } ${step.status === 'COMPLETED' ? 'is-completed' : ''} ${
-                                step.status === 'IN PROGRESS'
-                                  ? 'is-inprogress'
-                                  : ''
-                              }`}
-                              onClick={() =>
-                                setActiveInteractiveStepId((prev) =>
-                                  prev === step.id ? null : step.id
-                                )
-                              }
-                            >
-                              <span className="sl-progress-stage-checkpoint-chip-label">
-                                {step.label}
-                              </span>
-
-                              <span className="sl-progress-stage-checkpoint-chip-meta">
-                                {step.status === 'COMPLETED'
-                                  ? 'Completed'
-                                  : `${step.done}/${step.total || 0}`}
-                              </span>
-                            </button>
-                          ))}
-                        </div>
-                      ) : null}
                     </div>
                   ) : null}
                 </div>
@@ -2611,7 +2735,15 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
             <header className="sl-progress-stage-header sl-progress-stage-header--connected">
               <div className="sl-progress-stage-header-copy">
                 <div className="sl-progress-stage-eyebrow">
-                  {getStageViewerEyebrow(activeIndex, currentStepIndex)}
+                  {stageStatePresentation.eyebrow}
+                </div>
+
+                <div className="sl-progress-stage-state-helper">
+                  {stageStatePresentation.helper}
+                </div>
+
+                <div className="sl-progress-stage-status-pill">
+                  {stageStatePresentation.pill}
                 </div>
 
                 <div className="sl-progress-stage-bridge-line">
@@ -2625,14 +2757,16 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
                 <div
                   className={[
                     'sl-progress-stage-status-pill',
-                    activeStatus === 'completed'
+                    currentStageStatus === STAGE_MEDIA_STATE.COMPLETED
                       ? 'is-completed'
-                      : activeStatus === 'in_progress'
+                      : currentStageStatus === STAGE_MEDIA_STATE.CURRENT
                         ? 'is-inprogress'
-                        : 'is-notstarted',
+                        : currentStageStatus === STAGE_MEDIA_STATE.NEXT
+                          ? 'is-next'
+                          : 'is-locked',
                   ].join(' ')}
                 >
-                  {displayStatus(activeStatus)}
+                  {stageStatePresentation.pill}
                 </div>
               </div>
             </header>
