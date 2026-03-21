@@ -2083,27 +2083,51 @@ function getTemplateStepDisplayLabel(step) {
 
 function getCurrentStageAndStepLabels(project) {
   if (!project) {
-    return { stageLabel: 'Not started', stepLabel: 'No sub-step selected' };
+    return {
+      stageLabel: 'Chapter I — Not started',
+      stepLabel: 'No step selected',
+    };
   }
 
   const stageIndex = getCurrentStepIndex(project);
   const stageDef = STEPS[stageIndex] || STEPS[0];
-  const stageLabel = `${stageIndex + 1}. ${stageDef.label}`;
+  const stageLabel = `Chapter ${toRomanChapter(stageIndex + 1)} • ${stageDef.label}`;
 
-  let stepLabel = 'No sub-step selected';
+  const tpl = STAGE_TEMPLATES?.[stageDef.key];
+  const stepsArr = Array.isArray(tpl?.steps) ? tpl.steps : [];
+  const totalSteps = stepsArr.length;
+
+  let activeStepIdx = 0;
 
   const overallPct = getOverallProgress(project);
   const activePtr = overallPct < 100 ? getGlobalActiveSubStep(project) : null;
 
-  if (activePtr) {
-    const tpl = STAGE_TEMPLATES?.[activePtr.stageKey];
-    const stepsArr = tpl?.steps || [];
-    const activeStepDef = stepsArr[activePtr.stepIdx];
+  if (
+    activePtr?.stageKey === stageDef.key &&
+    Number.isInteger(activePtr.stepIdx)
+  ) {
+    activeStepIdx = activePtr.stepIdx;
+  } else {
+    const canonical = canonicalKeyForStage(stageDef.key);
+    const phaseKey = getExistingPhaseKey(project, canonical);
+    const fallbackIdx = getActiveStepIndexForPhase(project, phaseKey);
 
-    if (activeStepDef) {
-      stepLabel = getTemplateStepDisplayLabel(activeStepDef);
+    if (fallbackIdx >= 0) {
+      activeStepIdx = fallbackIdx;
+    } else if (totalSteps > 0) {
+      activeStepIdx = totalSteps - 1;
     }
   }
+
+  const activeStepDef = stepsArr[activeStepIdx];
+  const activeStepName = activeStepDef
+    ? getTemplateStepDisplayLabel(activeStepDef)
+    : 'No step selected';
+
+  const stepLabel =
+    totalSteps > 0
+      ? `Step ${activeStepIdx + 1} of ${totalSteps} • ${activeStepName}`
+      : activeStepName;
 
   return { stageLabel, stepLabel };
 }
@@ -3229,74 +3253,72 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
 
   return (
     <div className="sl-progress">
-      <section className="sl-progress-project-overview">
-        <div className="sl-progress-project-overview-header">
-          <div className="sl-progress-project-overview-eyebrow">
-            Project Overview
+      <section className="sl-progress-build-summary">
+        <div className="sl-progress-build-summary-stage">
+          <div className="sl-progress-build-summary-stage-top">
+            <div className="sl-progress-build-summary-stage-copy">
+              <div className="sl-progress-build-summary-stage-kicker">
+                Build Roadmap
+              </div>
+              <div className="sl-progress-build-summary-stage-title">
+                {currentStageLabel}
+              </div>
+              <div className="sl-progress-build-summary-stage-subtitle">
+                Follow your drum’s build journey from concept to final
+                delivery.{' '}
+              </div>
+            </div>
+
+            <div className="sl-progress-build-summary-stage-percent">
+              <div className="sl-progress-build-summary-stage-percent-value">
+                {overallPct}%
+              </div>
+              <div className="sl-progress-build-summary-stage-percent-label">
+                Progress
+              </div>
+            </div>
           </div>
-          <div className="sl-progress-project-overview-title">
-            Your SoundLegend build at a glance
+
+          <div className="sl-progress-build-summary-track-shell">
+            <div className="sl-progress-build-summary-track">
+              <div
+                className="sl-progress-build-summary-track-fill"
+                style={{ width: `${overallPct}%` }}
+              />
+              <div
+                className="sl-progress-build-summary-track-glow"
+                style={{ width: `${overallPct}%` }}
+              />
+            </div>
           </div>
         </div>
 
-        <div className="sl-progress-metrics sl-progress-metrics--overview">
-          <div className="sl-progress-metric">
-            <div className="sl-progress-metric-label">Project completion</div>
-            <div className="sl-progress-metric-value">
-              {overallPct != null ? `${overallPct}%` : '—'}
+        <div className="sl-progress-build-summary-metrics">
+          <div className="sl-progress-build-summary-metric is-featured">
+            <div className="sl-progress-build-summary-metric-label">
+              Current Chapter
             </div>
-          </div>
-
-          <div className="sl-progress-metric sl-progress-metric--featured">
-            <div className="sl-progress-metric-label">
-              Project current stage
-            </div>
-            <div className="sl-progress-metric-value">{currentStageLabel}</div>
-          </div>
-
-          <div className="sl-progress-metric">
-            <div className="sl-progress-metric-label">Current stage step</div>
-            <div className="sl-progress-metric-value">{currentStepLabel}</div>
-          </div>
-
-          <div className="sl-progress-metric">
-            <div className="sl-progress-metric-label">
-              Target completion window
-            </div>
-            <div className="sl-progress-metric-value">
-              {targetWindow || 'TBD'}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="sl-progress-roadmap sl-progress-roadmap--premium">
-        <div className="sl-progress-roadmap-header-row">
-          <div className="sl-progress-roadmap-header-block">
-            <div className="sl-progress-roadmap-header">Build roadmap</div>
-            <div className="sl-progress-roadmap-subtitle">
-              Track your drum’s progress from concept to completion
-            </div>
-          </div>
-
-          <div className="sl-progress-roadmap-side">
-            <div className="sl-progress-roadmap-percent">{overallPct}%</div>
-            <div className="sl-progress-roadmap-caption">
+            <div className="sl-progress-build-summary-metric-value">
               {currentStageLabel}
             </div>
           </div>
-        </div>
 
-        <div className="sl-progress-roadmap-track-shell">
-          <div className="sl-progress-roadmap-track">
-            <div
-              className="sl-progress-roadmap-track-fill"
-              style={{ width: `${overallPct}%` }}
-            />
-            <div
-              className="sl-progress-roadmap-track-glow"
-              style={{ width: `${overallPct}%` }}
-            />
+          <div className="sl-progress-build-summary-metric">
+            <div className="sl-progress-build-summary-metric-label">
+              Current Chapter Step
+            </div>
+            <div className="sl-progress-build-summary-metric-value">
+              {currentStepLabel}
+            </div>
+          </div>
+
+          <div className="sl-progress-build-summary-metric">
+            <div className="sl-progress-build-summary-metric-label">
+              Project Target Completion Window
+            </div>
+            <div className="sl-progress-build-summary-metric-value">
+              {targetWindow || 'TBD'}
+            </div>
           </div>
         </div>
       </section>
@@ -3859,15 +3881,6 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
               </div>
             </div>
           </div>
-        </div>
-
-        <div className="sl-progress-hero-carousel-bottom">
-          <section className="sl-progress-intro">
-            <p className="sl-progress-intro-text">
-              Follow the evolution of your SoundLegend drum as each phase is
-              completed, documented, and revealed.
-            </p>
-          </section>
         </div>
       </section>
       <StageResourceViewerModal
