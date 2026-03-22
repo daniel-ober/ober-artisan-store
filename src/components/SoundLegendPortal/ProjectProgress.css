@@ -6502,3 +6502,398 @@ textarea.sl-progress-stage-reveal-input {
   color: rgba(220, 226, 240, 0.7);
   z-index: 1;
 }
+
+/* =========================================================
+   LEGACY ADMIN — UNIFIED SECTION + INNER PANELS
+   ADD AT VERY BOTTOM
+   ========================================================= */
+
+.sl-progress-legacy-admin-shell {
+  width: min(100%, 1120px);
+  margin: 22px auto 0;
+  padding: 22px;
+  border-radius: 28px;
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(36, 52, 98, 0.22),
+      transparent 34%
+    ),
+    linear-gradient(180deg, rgba(8, 11, 22, 0.96), rgba(4, 6, 14, 0.985));
+  border: 1px solid rgba(135, 164, 255, 0.14);
+  box-shadow:
+    0 28px 70px rgba(0, 0, 0, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.sl-progress-legacy-admin-section-header {
+  margin-bottom: 18px;
+  padding: 2px 2px 0;
+}
+
+.sl-progress-legacy-admin-section-kicker {
+  margin-bottom: 8px;
+  font-size: 0.68rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(192, 202, 232, 0.56);
+}
+
+.sl-progress-legacy-admin-section-title {
+  font-size: 1.28rem;
+  line-height: 1.15;
+  font-weight: 600;
+  color: rgba(246, 248, 255, 0.97);
+}
+
+.sl-progress-legacy-admin-section-subtitle {
+  margin-top: 8px;
+  max-width: 780px;
+  font-size: 0.93rem;
+  line-height: 1.62;
+  color: rgba(207, 215, 236, 0.72);
+}
+
+.sl-progress-legacy-admin-panels {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.sl-progress-legacy-admin-card {
+  width: 100%;
+  padding: 22px;
+  border-radius: 22px;
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(255, 255, 255, 0.025),
+      transparent 28%
+    ),
+    linear-gradient(180deg, rgba(10, 14, 28, 0.92), rgba(6, 9, 18, 0.96));
+  border: 1px solid rgba(150, 176, 236, 0.12);
+  box-shadow:
+    0 16px 36px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.035);
+}
+
+.sl-progress-legacy-admin-eyebrow {
+  margin: 0 0 8px;
+  font-size: 0.66rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(184, 198, 235, 0.56);
+}
+
+.sl-progress-legacy-admin-title {
+  margin: 0;
+  font-size: 1.02rem;
+  line-height: 1.2;
+  font-weight: 600;
+  color: rgba(246, 248, 255, 0.96);
+}
+
+.sl-progress-legacy-admin-body {
+  margin-top: 8px;
+  margin-bottom: 18px;
+  max-width: 760px;
+  font-size: 0.9rem;
+  line-height: 1.58;
+  color: rgba(205, 214, 236, 0.72);
+}
+
+.sl-progress-legacy-admin-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.sl-progress-legacy-admin-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 0;
+}
+
+.sl-progress-legacy-admin-field--full {
+  grid-column: 1 / -1;
+}
+
+.sl-progress-legacy-admin-label {
+  font-size: 0.66rem;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(205, 215, 245, 0.68);
+}
+
+.sl-progress-legacy-admin-input,
+.sl-progress-legacy-admin-textarea,
+.sl-progress-legacy-admin-select {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(118, 143, 214, 0.18);
+  background:
+    linear-gradient(180deg, rgba(10, 14, 30, 0.94), rgba(7, 10, 22, 0.96));
+  color: rgba(244, 247, 255, 0.94);
+  font-size: 0.92rem;
+  line-height: 1.4;
+  outline: none;
+  box-sizing: border-box;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.03),
+    0 8px 20px rgba(0, 0, 0, 0.14);
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    background 160ms ease;
+}
+
+.sl-progress-legacy-admin-input:hover,
+.sl-progress-legacy-admin-textarea:hover,
+.sl-progress-legacy-admin-select:hover {
+  border-color: rgba(157, 184, 255, 0.26);
+  background:
+    linear-gradient(180deg, rgba(12, 17, 34, 0.96), rgba(8, 12, 26, 0.98));
+}
+
+.sl-progress-legacy-admin-input:focus,
+.sl-progress-legacy-admin-textarea:focus,
+.sl-progress-legacy-admin-select:focus {
+  border-color: rgba(157, 184, 255, 0.42);
+  box-shadow:
+    0 0 0 3px rgba(92, 124, 214, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 10px 24px rgba(0, 0, 0, 0.16);
+}
+
+.sl-progress-legacy-admin-input::placeholder,
+.sl-progress-legacy-admin-textarea::placeholder {
+  color: rgba(191, 201, 229, 0.34);
+}
+
+.sl-progress-legacy-admin-textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+/* date picker polish */
+.sl-progress-legacy-admin-input--date {
+  /* color-scheme: dark; */
+}
+
+.sl-progress-legacy-admin-input--date::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.9;
+  filter: invert(0.95);
+}
+
+.sl-progress-legacy-admin-preview {
+  margin-top: 4px;
+  margin-bottom: 18px;
+  padding: 14px;
+  border-radius: 18px;
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(36, 52, 98, 0.12),
+      transparent 34%
+    ),
+    linear-gradient(180deg, rgba(8, 11, 22, 0.82), rgba(4, 6, 14, 0.92));
+  border: 1px solid rgba(135, 164, 255, 0.1);
+}
+
+.sl-progress-legacy-admin-checklist {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 4px 0 18px;
+}
+
+.sl-progress-legacy-check {
+  appearance: none;
+  -webkit-appearance: none;
+  min-height: 36px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(155, 181, 255, 0.16);
+  background: rgba(13, 17, 30, 0.74);
+  color: rgba(245, 248, 255, 0.88);
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  transition:
+    transform 160ms ease,
+    background 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    color 160ms ease;
+}
+
+.sl-progress-legacy-check:hover {
+  transform: translateY(-1px);
+  background: rgba(18, 23, 40, 0.84);
+  border-color: rgba(155, 181, 255, 0.28);
+}
+
+.sl-progress-legacy-check.is-complete {
+  border-color: rgba(120, 220, 150, 0.24);
+  background: linear-gradient(
+    90deg,
+    rgba(74, 222, 128, 0.22),
+    rgba(110, 231, 183, 0.2)
+  );
+  color: rgba(214, 255, 225, 0.96);
+  box-shadow:
+    0 12px 26px rgba(74, 222, 128, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.sl-progress-legacy-admin-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 2px;
+}
+
+.sl-progress-legacy-admin-btn {
+  appearance: none;
+  -webkit-appearance: none;
+  min-height: 40px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(155, 181, 255, 0.16);
+  background: rgba(13, 17, 30, 0.74);
+  color: rgba(245, 248, 255, 0.92);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  transition:
+    transform 160ms ease,
+    background 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    opacity 160ms ease;
+}
+
+.sl-progress-legacy-admin-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  background: rgba(18, 23, 40, 0.84);
+  border-color: rgba(155, 181, 255, 0.28);
+}
+
+.sl-progress-legacy-admin-btn:disabled {
+  opacity: 0.56;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.sl-progress-legacy-admin-btn--ghost {
+  background: rgba(13, 17, 30, 0.74);
+  color: rgba(245, 248, 255, 0.92);
+}
+
+.sl-progress-legacy-admin-btn--primary {
+  border-color: rgba(120, 220, 150, 0.22);
+  background: linear-gradient(
+    90deg,
+    rgba(74, 222, 128, 0.96),
+    rgba(110, 231, 183, 0.96)
+  );
+  color: rgba(7, 18, 10, 0.96);
+  box-shadow:
+    0 12px 26px rgba(74, 222, 128, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.sl-progress-legacy-admin-btn--primary:hover:not(:disabled) {
+  background: linear-gradient(
+    90deg,
+    rgba(86, 228, 138, 0.98),
+    rgba(126, 236, 191, 0.98)
+  );
+}
+
+.sl-progress-legacy-admin-status {
+  margin-top: 14px;
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: rgba(216, 224, 242, 0.72);
+}
+
+.sl-progress-legacy-admin-status--error {
+  color: rgba(255, 187, 187, 0.92);
+}
+
+@media (max-width: 980px) {
+  .sl-progress-legacy-admin-shell {
+    padding: 18px;
+    border-radius: 22px;
+  }
+
+  .sl-progress-legacy-admin-card {
+    padding: 18px;
+    border-radius: 18px;
+  }
+
+  .sl-progress-legacy-admin-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sl-progress-legacy-admin-field--full {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .sl-progress-legacy-admin-shell {
+    padding: 14px;
+    border-radius: 18px;
+  }
+
+  .sl-progress-legacy-admin-section-title {
+    font-size: 1.04rem;
+  }
+
+  .sl-progress-legacy-admin-section-subtitle,
+  .sl-progress-legacy-admin-body {
+    font-size: 0.84rem;
+  }
+
+  .sl-progress-legacy-admin-card {
+    padding: 14px;
+    border-radius: 16px;
+  }
+
+  .sl-progress-legacy-admin-input,
+  .sl-progress-legacy-admin-textarea,
+  .sl-progress-legacy-admin-select {
+    min-height: 44px;
+    padding: 11px 12px;
+    font-size: 0.88rem;
+  }
+
+  .sl-progress-legacy-admin-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .sl-progress-legacy-admin-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
