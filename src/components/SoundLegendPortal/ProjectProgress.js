@@ -379,9 +379,9 @@ function getResolvedVisualStageState({
 }) {
   if (!step) return STAGE_MEDIA_STATE.FUTURE;
 
- if (step.key === 'soundlegendCover') {
-  return STAGE_MEDIA_STATE.CURRENT;
-}
+  if (step.key === 'soundlegendCover') {
+    return STAGE_MEDIA_STATE.CURRENT;
+  }
 
   if (step.key === 'soundlegendEpilogue') {
     return projectMarkedComplete
@@ -3607,10 +3607,16 @@ function SoundLegendCoverHero({
   mediaTitle,
   smokeVideoUrl,
   isPreview = false,
+  brightness = 0.72,
+  saturation = 1.02,
+  blackFloor = 0.22,
+  smokeOpacity = 0.28,
 }) {
   const resolvedType = getFileTypeFromUrl(mediaUrl, mediaType);
   const embedUrl =
-    resolvedType === 'video' ? getCoverPreviewEmbedUrl(mediaUrl, mediaType) : null;
+    resolvedType === 'video'
+      ? getCoverPreviewEmbedUrl(mediaUrl, mediaType)
+      : null;
 
   return (
     <div
@@ -3626,6 +3632,9 @@ function SoundLegendCoverHero({
                 src={embedUrl}
                 title="SoundLegend cover media"
                 className="sl-progress-soundlegend-cover-asset"
+                style={{
+                  filter: `brightness(${brightness}) saturate(${saturation})`,
+                }}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               />
@@ -3633,6 +3642,9 @@ function SoundLegendCoverHero({
               <video
                 src={mediaUrl}
                 className="sl-progress-soundlegend-cover-asset"
+                style={{
+                  filter: `brightness(${brightness}) saturate(${saturation})`,
+                }}
                 autoPlay
                 muted
                 loop
@@ -3645,6 +3657,9 @@ function SoundLegendCoverHero({
               src={mediaUrl}
               alt={mediaTitle || title || 'SoundLegend cover'}
               className="sl-progress-soundlegend-cover-asset"
+              style={{
+                filter: `brightness(${brightness}) saturate(${saturation})`,
+              }}
             />
           )
         ) : (
@@ -3652,6 +3667,13 @@ function SoundLegendCoverHero({
             No cover media selected yet.
           </div>
         )}
+
+        <div
+          className="sl-progress-soundlegend-cover-background-crush"
+          style={{
+            opacity: blackFloor,
+          }}
+        />
 
         <div className="sl-progress-soundlegend-cover-dim" />
 
@@ -3665,10 +3687,11 @@ function SoundLegendCoverHero({
             playsInline
             preload="auto"
             aria-hidden="true"
+            style={{ opacity: smokeOpacity }}
           />
         ) : null}
 
-              <div className="sl-progress-soundlegend-cover-overlay">
+        <div className="sl-progress-soundlegend-cover-overlay">
           {isPreview ? (
             <div className="sl-progress-stage-hero-status-caption">
               Revealed
@@ -3726,21 +3749,40 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
   const [revealCoverMediaTitle, setRevealCoverMediaTitle] = useState('');
   const [revealCoverMediaType, setRevealCoverMediaType] = useState('image');
 
-const [revealChecklist, setRevealChecklist] = useState({
-  coverMediaSelected: false,
-  chapterMediaReviewed: false,
-  visibilityReviewed: false,
-  customerStoryApproved: false,
-  shipmentConfirmed: false,
-  finalReviewComplete: false,
-});
+  const [revealChecklist, setRevealChecklist] = useState({
+    coverMediaSelected: false,
+    chapterMediaReviewed: false,
+    visibilityReviewed: false,
+    customerStoryApproved: false,
+    shipmentConfirmed: false,
+    finalReviewComplete: false,
+  });
 
-const [legacyShippingStatus, setLegacyShippingStatus] = useState('waiting_to_ship');
-const [legacyShippingCarrier, setLegacyShippingCarrier] = useState('');
-const [legacyTrackingNumber, setLegacyTrackingNumber] = useState('');
-const [legacyShippedAt, setLegacyShippedAt] = useState('');
-const [legacyDeliveredAt, setLegacyDeliveredAt] = useState('');
-const [legacyUndeliverableAt, setLegacyUndeliverableAt] = useState('');
+  const DEFAULT_REVEAL_COVER_BRIGHTNESS = 0.72;
+  const DEFAULT_REVEAL_COVER_SATURATION = 1.02;
+  const DEFAULT_REVEAL_COVER_BLACK_FLOOR = 0.22;
+  const DEFAULT_REVEAL_COVER_SMOKE_OPACITY = 0.28;
+
+  const [revealCoverBrightness, setRevealCoverBrightness] = useState(
+    DEFAULT_REVEAL_COVER_BRIGHTNESS
+  );
+  const [revealCoverSaturation, setRevealCoverSaturation] = useState(
+    DEFAULT_REVEAL_COVER_SATURATION
+  );
+  const [revealCoverBlackFloor, setRevealCoverBlackFloor] = useState(
+    DEFAULT_REVEAL_COVER_BLACK_FLOOR
+  );
+  const [revealCoverSmokeOpacity, setRevealCoverSmokeOpacity] = useState(
+    DEFAULT_REVEAL_COVER_SMOKE_OPACITY
+  );
+
+  const [legacyShippingStatus, setLegacyShippingStatus] =
+    useState('waiting_to_ship');
+  const [legacyShippingCarrier, setLegacyShippingCarrier] = useState('');
+  const [legacyTrackingNumber, setLegacyTrackingNumber] = useState('');
+  const [legacyShippedAt, setLegacyShippedAt] = useState('');
+  const [legacyDeliveredAt, setLegacyDeliveredAt] = useState('');
+  const [legacyUndeliverableAt, setLegacyUndeliverableAt] = useState('');
 
   const [displayedStageKey, setDisplayedStageKey] = useState(STEPS[0].key);
   const [displayedOverlayStageKey, setDisplayedOverlayStageKey] = useState(
@@ -3843,6 +3885,13 @@ const [legacyUndeliverableAt, setLegacyUndeliverableAt] = useState('');
     setRevealCoverMediaUrl(selected.url || '');
     setRevealCoverMediaType(selected.type || 'image');
     setRevealCoverMediaTitle(selected.title || '');
+  };
+
+  const handleResetRevealCoverAdjustments = () => {
+    setRevealCoverBrightness(DEFAULT_REVEAL_COVER_BRIGHTNESS);
+    setRevealCoverSaturation(DEFAULT_REVEAL_COVER_SATURATION);
+    setRevealCoverBlackFloor(DEFAULT_REVEAL_COVER_BLACK_FLOOR);
+    setRevealCoverSmokeOpacity(DEFAULT_REVEAL_COVER_SMOKE_OPACITY);
   };
 
   const openCoverRevealFilePicker = () => {
@@ -3987,16 +4036,43 @@ const [legacyUndeliverableAt, setLegacyUndeliverableAt] = useState('');
       shipmentConfirmed: !!reveal.adminChecklist?.shipmentConfirmed,
       finalReviewComplete: !!reveal.adminChecklist?.finalReviewComplete,
     });
-      setLegacyShippingStatus(reveal.shippingStatus || 'waiting_to_ship');
-  setLegacyShippingCarrier(reveal.shippingCarrier || '');
-  setLegacyTrackingNumber(reveal.trackingNumber || '');
-  setLegacyShippedAt(reveal.shippedAt ? formatDateForInput(reveal.shippedAt) : '');
-  setLegacyDeliveredAt(
-    reveal.deliveredAt ? formatDateForInput(reveal.deliveredAt) : ''
-  );
-  setLegacyUndeliverableAt(
-    reveal.undeliverableAt ? formatDateForInput(reveal.undeliverableAt) : ''
-  );
+
+    setLegacyShippingStatus(reveal.shippingStatus || 'waiting_to_ship');
+    setLegacyShippingCarrier(reveal.shippingCarrier || '');
+    setLegacyTrackingNumber(reveal.trackingNumber || '');
+    setLegacyShippedAt(
+      reveal.shippedAt ? formatDateForInput(reveal.shippedAt) : ''
+    );
+    setLegacyDeliveredAt(
+      reveal.deliveredAt ? formatDateForInput(reveal.deliveredAt) : ''
+    );
+    setLegacyUndeliverableAt(
+      reveal.undeliverableAt ? formatDateForInput(reveal.undeliverableAt) : ''
+    );
+
+    setRevealCoverBrightness(
+      typeof reveal.coverBrightness === 'number'
+        ? reveal.coverBrightness
+        : DEFAULT_REVEAL_COVER_BRIGHTNESS
+    );
+
+    setRevealCoverSaturation(
+      typeof reveal.coverSaturation === 'number'
+        ? reveal.coverSaturation
+        : DEFAULT_REVEAL_COVER_SATURATION
+    );
+
+    setRevealCoverBlackFloor(
+      typeof reveal.coverBlackFloor === 'number'
+        ? reveal.coverBlackFloor
+        : DEFAULT_REVEAL_COVER_BLACK_FLOOR
+    );
+
+    setRevealCoverSmokeOpacity(
+      typeof reveal.coverSmokeOpacity === 'number'
+        ? reveal.coverSmokeOpacity
+        : DEFAULT_REVEAL_COVER_SMOKE_OPACITY
+    );
   }, [project]);
 
   useEffect(() => {
@@ -4271,6 +4347,10 @@ const [legacyUndeliverableAt, setLegacyUndeliverableAt] = useState('');
         coverMediaUrl: revealCoverMediaUrl,
         coverMediaTitle: revealCoverMediaTitle,
         coverMediaType: revealCoverMediaType,
+        brightness: revealCoverBrightness,
+        saturation: revealCoverSaturation,
+        blackFloor: revealCoverBlackFloor,
+        smokeOpacity: revealCoverSmokeOpacity,
       });
     }
 
@@ -4294,14 +4374,18 @@ const [legacyUndeliverableAt, setLegacyUndeliverableAt] = useState('');
 
     return chapters;
   }, [
-    overallPct,
-    revealIsDeployed,
-    revealCoverIsAvailable,
-    revealCoverTitle,
-    revealCoverSubtitle,
-    revealCoverMediaUrl,
-    revealCoverMediaTitle,
-    revealCoverMediaType,
+  overallPct,
+  revealIsDeployed,
+  revealCoverIsAvailable,
+  revealCoverTitle,
+  revealCoverSubtitle,
+  revealCoverMediaUrl,
+  revealCoverMediaTitle,
+  revealCoverMediaType,
+  revealCoverBrightness,
+  revealCoverSaturation,
+  revealCoverBlackFloor,
+  revealCoverSmokeOpacity,
   ]);
 
   useEffect(() => {
@@ -4344,88 +4428,88 @@ const [legacyUndeliverableAt, setLegacyUndeliverableAt] = useState('');
     return fmtDate(ms);
   };
 
-useEffect(() => {
-  const reveal = project?.soundlegendReveal || {};
+  useEffect(() => {
+    const reveal = project?.soundlegendReveal || {};
 
-  setRevealCoverTitle(reveal.coverTitle || 'Your SoundLegend Story');
-  setRevealCoverSubtitle(
-    reveal.coverSubtitle || 'The completed journey of your custom instrument.'
-  );
-  setRevealCoverMediaUrl(reveal.coverMediaUrl || '');
-  setRevealCoverMediaTitle(reveal.coverMediaTitle || '');
-  setRevealCoverMediaType(reveal.coverMediaType || 'image');
+    setRevealCoverTitle(reveal.coverTitle || 'Your SoundLegend Story');
+    setRevealCoverSubtitle(
+      reveal.coverSubtitle || 'The completed journey of your custom instrument.'
+    );
+    setRevealCoverMediaUrl(reveal.coverMediaUrl || '');
+    setRevealCoverMediaTitle(reveal.coverMediaTitle || '');
+    setRevealCoverMediaType(reveal.coverMediaType || 'image');
 
-  setRevealChecklist({
-    coverMediaSelected: !!reveal.adminChecklist?.coverMediaSelected,
-    chapterMediaReviewed: !!reveal.adminChecklist?.chapterMediaReviewed,
-    visibilityReviewed: !!reveal.adminChecklist?.visibilityReviewed,
-    customerStoryApproved: !!reveal.adminChecklist?.customerStoryApproved,
-    shipmentConfirmed: !!reveal.adminChecklist?.shipmentConfirmed,
-    finalReviewComplete: !!reveal.adminChecklist?.finalReviewComplete,
-  });
+    setRevealChecklist({
+      coverMediaSelected: !!reveal.adminChecklist?.coverMediaSelected,
+      chapterMediaReviewed: !!reveal.adminChecklist?.chapterMediaReviewed,
+      visibilityReviewed: !!reveal.adminChecklist?.visibilityReviewed,
+      customerStoryApproved: !!reveal.adminChecklist?.customerStoryApproved,
+      shipmentConfirmed: !!reveal.adminChecklist?.shipmentConfirmed,
+      finalReviewComplete: !!reveal.adminChecklist?.finalReviewComplete,
+    });
 
-  setLegacyShippingStatus(reveal.shippingStatus || 'waiting_to_ship');
-  setLegacyShippingCarrier(reveal.shippingCarrier || '');
-  setLegacyTrackingNumber(reveal.trackingNumber || '');
-  setLegacyShippedAt(reveal.shippedAt ? formatDateForInput(reveal.shippedAt) : '');
-  setLegacyDeliveredAt(
-    reveal.deliveredAt ? formatDateForInput(reveal.deliveredAt) : ''
-  );
-  setLegacyUndeliverableAt(
-    reveal.undeliverableAt ? formatDateForInput(reveal.undeliverableAt) : ''
-  );
-}, [project]);
+    setLegacyShippingStatus(reveal.shippingStatus || 'waiting_to_ship');
+    setLegacyShippingCarrier(reveal.shippingCarrier || '');
+    setLegacyTrackingNumber(reveal.trackingNumber || '');
+    setLegacyShippedAt(
+      reveal.shippedAt ? formatDateForInput(reveal.shippedAt) : ''
+    );
+    setLegacyDeliveredAt(
+      reveal.deliveredAt ? formatDateForInput(reveal.deliveredAt) : ''
+    );
+    setLegacyUndeliverableAt(
+      reveal.undeliverableAt ? formatDateForInput(reveal.undeliverableAt) : ''
+    );
+  }, [project]);
 
-const shippingSummary = useMemo(() => {
-  const reveal = project?.soundlegendReveal || {};
+  const shippingSummary = useMemo(() => {
+    const reveal = project?.soundlegendReveal || {};
 
-  const shippingStatus = String(
-    reveal.shippingStatus || 'waiting_to_ship'
-  ).trim();
+    const shippingStatus = String(
+      reveal.shippingStatus || 'waiting_to_ship'
+    ).trim();
 
-  const carrier = String(reveal.shippingCarrier || '').trim();
-  const tracking = String(reveal.trackingNumber || '').trim();
+    const carrier = String(reveal.shippingCarrier || '').trim();
+    const tracking = String(reveal.trackingNumber || '').trim();
 
-  const shippedDate = formatDisplayDate(reveal.shippedAt);
-  const deliveredDate = formatDisplayDate(reveal.deliveredAt);
-  const undeliverableDate = formatDisplayDate(reveal.undeliverableAt);
+    const shippedDate = formatDisplayDate(reveal.shippedAt);
+    const deliveredDate = formatDisplayDate(reveal.deliveredAt);
+    const undeliverableDate = formatDisplayDate(reveal.undeliverableAt);
 
-  let headline = 'Build Complete • Waiting to be Shipped';
-  let deliveryStatus = 'Waiting to be Shipped';
+    let headline = 'Build Complete • Waiting to be Shipped';
+    let deliveryStatus = 'Waiting to be Shipped';
 
-  if (shippingStatus === 'shipped') {
-    headline = 'Build Complete • Shipped';
-    deliveryStatus = shippedDate
-      ? `Shipped on ${shippedDate}`
-      : 'Shipped';
-  } else if (shippingStatus === 'delivered') {
-    headline = 'Build Complete • Delivered';
-    deliveryStatus = deliveredDate
-      ? `Delivered on ${deliveredDate}`
-      : 'Delivered';
-  } else if (shippingStatus === 'undeliverable') {
-    headline = 'Build Complete • Delivery Issue';
-    deliveryStatus = undeliverableDate
-      ? `Undeliverable on ${undeliverableDate}`
-      : 'Undeliverable';
-  }
+    if (shippingStatus === 'shipped') {
+      headline = 'Build Complete • Shipped';
+      deliveryStatus = shippedDate ? `Shipped on ${shippedDate}` : 'Shipped';
+    } else if (shippingStatus === 'delivered') {
+      headline = 'Build Complete • Delivered';
+      deliveryStatus = deliveredDate
+        ? `Delivered on ${deliveredDate}`
+        : 'Delivered';
+    } else if (shippingStatus === 'undeliverable') {
+      headline = 'Build Complete • Delivery Issue';
+      deliveryStatus = undeliverableDate
+        ? `Undeliverable on ${undeliverableDate}`
+        : 'Undeliverable';
+    }
 
-  let carrierTracking = '—';
-  if (carrier && tracking) {
-    carrierTracking = `${carrier} • ${tracking}`;
-  } else if (carrier) {
-    carrierTracking = carrier;
-  } else if (tracking) {
-    carrierTracking = tracking;
-  }
+    let carrierTracking = '—';
+    if (carrier && tracking) {
+      carrierTracking = `${carrier} • ${tracking}`;
+    } else if (carrier) {
+      carrierTracking = carrier;
+    } else if (tracking) {
+      carrierTracking = tracking;
+    }
 
-  return {
-    shippingStatus,
-    headline,
-    deliveryStatus,
-    carrierTracking,
-  };
-}, [project]);
+    return {
+      shippingStatus,
+      headline,
+      deliveryStatus,
+      carrierTracking,
+    };
+  }, [project]);
 
   const summaryHeadline = useMemo(() => {
     if (!isProjectComplete) {
@@ -4783,19 +4867,12 @@ const shippingSummary = useMemo(() => {
     displayedStageKey === 'soundlegendEpilogue' ||
     activeStep?.key === 'soundlegendEpilogue';
 
- const isCoverStageVisible =
-  displayedStageKey === 'soundlegendCover' ||
-  activeStep?.key === 'soundlegendCover';
+  const isCoverStageVisible =
+    displayedStageKey === 'soundlegendCover' ||
+    activeStep?.key === 'soundlegendCover';
 
-const smokeOverlayOpacity = isLegacyStageVisible
-  ? 0.48
-  : isCoverStageVisible
-    ? 0.48
-    : (SMOKE_OPACITY_BY_STAGE_STATE[displayedStageStatus] ?? 0.6);
 
-const lockedStageVeilOpacity = isLegacyStageVisible || isCoverStageVisible
-  ? 0
-  : (VEIL_OPACITY_BY_STAGE_STATE[displayedStageStatus] ?? 0);
+
 
   const activeStatus = useMemo(() => {
     if (!project || !activeStep) return 'not_started';
@@ -4827,78 +4904,88 @@ const lockedStageVeilOpacity = isLegacyStageVisible || isCoverStageVisible
   const prevStep = canGoPrev ? storyChapters[activeIndex - 1] : null;
   const nextStep = canGoNext ? storyChapters[activeIndex + 1] : null;
 
-const getStageMediaForStep = (step) => {
-  if (!step?.key) return null;
+  const getStageMediaForStep = (step) => {
+    if (!step?.key) return null;
 
-  if (step.key === 'soundlegendCover') {
-    const coverUrl =
-      step.coverMediaUrl ||
-      project?.soundlegendReveal?.coverMediaUrl ||
-      '';
+    if (step.key === 'soundlegendCover') {
+      const coverUrl =
+        step.coverMediaUrl || project?.soundlegendReveal?.coverMediaUrl || '';
 
-    const coverType =
-      step.coverMediaType ||
-      project?.soundlegendReveal?.coverMediaType ||
-      getFileTypeFromUrl(coverUrl);
+      const coverType =
+        step.coverMediaType ||
+        project?.soundlegendReveal?.coverMediaType ||
+        getFileTypeFromUrl(coverUrl);
 
-    if (!coverUrl) return null;
+      if (!coverUrl) return null;
+
+      return {
+        stageKey: step.key,
+        stageLabel: step.label,
+        mediaState: STAGE_MEDIA_STATE.CURRENT,
+        baseImageUrl: coverType === 'image' ? coverUrl : '',
+        coverMediaUrl: coverUrl,
+        coverMediaType: coverType,
+        isCoverMedia: true,
+        brightness:
+          typeof step.brightness === 'number' ? step.brightness : 0.72,
+        saturation:
+          typeof step.saturation === 'number' ? step.saturation : 1.02,
+        blackFloor:
+          typeof step.blackFloor === 'number' ? step.blackFloor : 0.22,
+        smokeOpacity:
+          typeof step.smokeOpacity === 'number' ? step.smokeOpacity : 0.28,
+      };
+    }
+
+    if (step.key === 'soundlegendEpilogue') {
+      return null;
+    }
+
+    const canonicalStageIndex = STEPS.findIndex((s) => s.key === step.key);
+    if (canonicalStageIndex < 0) return null;
+
+    const mediaState = getResolvedVisualStageState({
+      project,
+      step,
+      stageIndex: canonicalStageIndex,
+      currentStepIndex,
+      projectMarkedComplete,
+    });
+
+    const cacheKey = getStageMediaCacheKey(step.key);
+    const bundle = selectedStageMediaCache[cacheKey];
+
+    if (!bundle) return null;
+
+    const isCompleted = mediaState === STAGE_MEDIA_STATE.COMPLETED;
+    const isCurrent = mediaState === STAGE_MEDIA_STATE.CURRENT;
+    const isNext = mediaState === STAGE_MEDIA_STATE.NEXT;
+    const isFuture = mediaState === STAGE_MEDIA_STATE.FUTURE;
+
+    let baseImageUrl = '';
+
+    if (isCompleted || isCurrent) {
+      baseImageUrl = bundle.currentImageUrl || bundle.archivedImageUrl || '';
+    } else if (isNext) {
+      baseImageUrl = bundle.archivedImageUrl || bundle.currentImageUrl || '';
+    } else if (isFuture) {
+      baseImageUrl = '';
+    }
 
     return {
       stageKey: step.key,
       stageLabel: step.label,
-      mediaState: STAGE_MEDIA_STATE.CURRENT,
-      baseImageUrl: coverType === 'image' ? coverUrl : '',
-      coverMediaUrl: coverUrl,
-      coverMediaType: coverType,
-      isCoverMedia: true,
+      mediaState,
+      baseImageUrl,
+      coverMediaUrl: '',
+      coverMediaType: '',
+      isCoverMedia: false,
+      brightness: 1,
+      saturation: 1,
+      blackFloor: 0,
+      smokeOpacity: 0,
     };
-  }
-
-  if (step.key === 'soundlegendEpilogue') {
-    return null;
-  }
-
-  const canonicalStageIndex = STEPS.findIndex((s) => s.key === step.key);
-  if (canonicalStageIndex < 0) return null;
-
-  const mediaState = getResolvedVisualStageState({
-    project,
-    step,
-    stageIndex: canonicalStageIndex,
-    currentStepIndex,
-    projectMarkedComplete,
-  });
-
-  const cacheKey = getStageMediaCacheKey(step.key);
-  const bundle = selectedStageMediaCache[cacheKey];
-
-  if (!bundle) return null;
-
-  const isCompleted = mediaState === STAGE_MEDIA_STATE.COMPLETED;
-  const isCurrent = mediaState === STAGE_MEDIA_STATE.CURRENT;
-  const isNext = mediaState === STAGE_MEDIA_STATE.NEXT;
-  const isFuture = mediaState === STAGE_MEDIA_STATE.FUTURE;
-
-  let baseImageUrl = '';
-
-  if (isCompleted || isCurrent) {
-    baseImageUrl = bundle.currentImageUrl || bundle.archivedImageUrl || '';
-  } else if (isNext) {
-    baseImageUrl = bundle.archivedImageUrl || bundle.currentImageUrl || '';
-  } else if (isFuture) {
-    baseImageUrl = '';
-  }
-
-  return {
-    stageKey: step.key,
-    stageLabel: step.label,
-    mediaState,
-    baseImageUrl,
-    coverMediaUrl: '',
-    coverMediaType: '',
-    isCoverMedia: false,
   };
-};
 
 const allRenderableStageLayers = useMemo(() => {
   return storyChapters
@@ -4914,11 +5001,13 @@ const allRenderableStageLayers = useMemo(() => {
         mediaState: media?.mediaState || STAGE_MEDIA_STATE.FUTURE,
         isVisible: displayedStageKey === step.key,
         label: step.label,
+        brightness: media?.brightness ?? 1,
+        saturation: media?.saturation ?? 1,
+        blackFloor: media?.blackFloor ?? 0,
+        smokeOpacity: media?.smokeOpacity ?? 0,
       };
     })
-    .filter(
-      (layer) => !!layer.baseImageUrl || !!layer.coverMediaUrl
-    );
+    .filter((layer) => !!layer.baseImageUrl || !!layer.coverMediaUrl);
 }, [
   storyChapters,
   displayedStageKey,
@@ -4927,6 +5016,22 @@ const allRenderableStageLayers = useMemo(() => {
   project,
   projectMarkedComplete,
 ]);
+
+const activeDisplayedLayer = allRenderableStageLayers.find(
+  (layer) => layer.stageKey === displayedStageKey
+);
+
+const smokeOverlayOpacity = isLegacyStageVisible
+  ? 0.48
+  : isCoverStageVisible
+    ? (activeDisplayedLayer?.smokeOpacity ?? revealCoverSmokeOpacity ?? 0.28)
+    : (SMOKE_OPACITY_BY_STAGE_STATE[displayedStageStatus] ?? 0.6);
+
+const lockedStageVeilOpacity =
+  isLegacyStageVisible || isCoverStageVisible
+    ? 0
+    : (VEIL_OPACITY_BY_STAGE_STATE[displayedStageStatus] ?? 0);
+
 
   const navigateToStageIndex = (targetIndex) => {
     if (transitionLockRef.current) return;
@@ -5360,24 +5465,22 @@ const allRenderableStageLayers = useMemo(() => {
       coverMediaUrl: overrides.coverMediaUrl ?? revealCoverMediaUrl,
       coverMediaTitle: overrides.coverMediaTitle ?? revealCoverMediaTitle,
       coverMediaType: overrides.coverMediaType ?? revealCoverMediaType,
+      coverBrightness: overrides.coverBrightness ?? revealCoverBrightness,
+      coverSaturation: overrides.coverSaturation ?? revealCoverSaturation,
+      coverBlackFloor: overrides.coverBlackFloor ?? revealCoverBlackFloor,
+      coverSmokeOpacity: overrides.coverSmokeOpacity ?? revealCoverSmokeOpacity,
       adminChecklist: nextChecklist,
-
       shippingStatus:
         overrides.shippingStatus ?? legacyShippingStatus ?? 'waiting_to_ship',
-      shippingCarrier:
-        overrides.shippingCarrier ?? legacyShippingCarrier ?? '',
-      trackingNumber:
-        overrides.trackingNumber ?? legacyTrackingNumber ?? '',
+      shippingCarrier: overrides.shippingCarrier ?? legacyShippingCarrier ?? '',
+      trackingNumber: overrides.trackingNumber ?? legacyTrackingNumber ?? '',
       shippedAt: overrides.shippedAt ?? legacyShippedAt ?? '',
       deliveredAt: overrides.deliveredAt ?? legacyDeliveredAt ?? '',
-      undeliverableAt:
-        overrides.undeliverableAt ?? legacyUndeliverableAt ?? '',
-
+      undeliverableAt: overrides.undeliverableAt ?? legacyUndeliverableAt ?? '',
       finalAdminNote:
         overrides.finalAdminNote ??
         project?.soundlegendReveal?.finalAdminNote ??
         '',
-
       revealReady:
         overrides.revealReady ?? Object.values(nextChecklist).every(Boolean),
       revealDeployed:
@@ -5765,86 +5868,86 @@ const allRenderableStageLayers = useMemo(() => {
 
   return (
     <div className="sl-progress">
-   <section className="sl-progress-build-summary">
-  <div className="sl-progress-build-summary-stage">
-    <div className="sl-progress-build-summary-stage-top">
-      <div className="sl-progress-build-summary-stage-copy">
-        <div className="sl-progress-build-summary-stage-kicker">
-          {isProjectComplete ? 'Legacy Status' : 'Build Roadmap'}
+      <section className="sl-progress-build-summary">
+        <div className="sl-progress-build-summary-stage">
+          <div className="sl-progress-build-summary-stage-top">
+            <div className="sl-progress-build-summary-stage-copy">
+              <div className="sl-progress-build-summary-stage-kicker">
+                {isProjectComplete ? 'Legacy Status' : 'Build Roadmap'}
+              </div>
+
+              <div className="sl-progress-build-summary-stage-title">
+                {summaryHeadline}
+              </div>
+
+              <div className="sl-progress-build-summary-stage-subtitle">
+                {summarySubtitle}
+              </div>
+            </div>
+
+            <div className="sl-progress-build-summary-stage-percent">
+              <div className="sl-progress-build-summary-stage-percent-value">
+                {overallPct}%
+              </div>
+              <div className="sl-progress-build-summary-stage-percent-label">
+                {isProjectComplete ? 'Complete' : 'Progress'}
+              </div>
+            </div>
+          </div>
+
+          <div className="sl-progress-build-summary-track-shell">
+            <div className="sl-progress-build-summary-track">
+              <div
+                className="sl-progress-build-summary-track-fill"
+                style={{ width: `${overallPct}%` }}
+              />
+              <div
+                className="sl-progress-build-summary-track-glow"
+                style={{ width: `${overallPct}%` }}
+              />
+            </div>
+          </div>
         </div>
 
-        <div className="sl-progress-build-summary-stage-title">
-          {summaryHeadline}
+        <div className="sl-progress-build-summary-metrics">
+          <div className="sl-progress-build-summary-metric is-featured">
+            <div className="sl-progress-build-summary-metric-label">
+              {isProjectComplete ? 'Final Chapter' : 'Current Chapter'}
+            </div>
+            <div className="sl-progress-build-summary-metric-value">
+              {isProjectComplete
+                ? 'Legacy Chapter • From Ober Artisan'
+                : isLegacyChapter
+                  ? 'Legacy Chapter • From Ober Artisan'
+                  : currentStageLabel}
+            </div>
+          </div>
+
+          <div className="sl-progress-build-summary-metric">
+            <div className="sl-progress-build-summary-metric-label">
+              {isProjectComplete ? 'Delivery Status' : 'Current Chapter Step'}
+            </div>
+            <div className="sl-progress-build-summary-metric-value">
+              {isProjectComplete
+                ? deliveryStatusLabel
+                : isLegacyChapter
+                  ? 'Final handoff • Story now belongs to the artist'
+                  : currentStepLabel}
+            </div>
+          </div>
+
+          <div className="sl-progress-build-summary-metric">
+            <div className="sl-progress-build-summary-metric-label">
+              {isProjectComplete
+                ? 'Carrier / Tracking'
+                : 'Project Target Completion Window'}
+            </div>
+            <div className="sl-progress-build-summary-metric-value">
+              {isProjectComplete ? carrierTrackingLabel : targetWindow || 'TBD'}
+            </div>
+          </div>
         </div>
-
-        <div className="sl-progress-build-summary-stage-subtitle">
-          {summarySubtitle}
-        </div>
-      </div>
-
-      <div className="sl-progress-build-summary-stage-percent">
-        <div className="sl-progress-build-summary-stage-percent-value">
-          {overallPct}%
-        </div>
-        <div className="sl-progress-build-summary-stage-percent-label">
-          {isProjectComplete ? 'Complete' : 'Progress'}
-        </div>
-      </div>
-    </div>
-
-    <div className="sl-progress-build-summary-track-shell">
-      <div className="sl-progress-build-summary-track">
-        <div
-          className="sl-progress-build-summary-track-fill"
-          style={{ width: `${overallPct}%` }}
-        />
-        <div
-          className="sl-progress-build-summary-track-glow"
-          style={{ width: `${overallPct}%` }}
-        />
-      </div>
-    </div>
-  </div>
-
-  <div className="sl-progress-build-summary-metrics">
-    <div className="sl-progress-build-summary-metric is-featured">
-      <div className="sl-progress-build-summary-metric-label">
-        {isProjectComplete ? 'Final Chapter' : 'Current Chapter'}
-      </div>
-      <div className="sl-progress-build-summary-metric-value">
-        {isProjectComplete
-          ? 'Legacy Chapter • From Ober Artisan'
-          : isLegacyChapter
-            ? 'Legacy Chapter • From Ober Artisan'
-            : currentStageLabel}
-      </div>
-    </div>
-
-    <div className="sl-progress-build-summary-metric">
-      <div className="sl-progress-build-summary-metric-label">
-        {isProjectComplete ? 'Delivery Status' : 'Current Chapter Step'}
-      </div>
-      <div className="sl-progress-build-summary-metric-value">
-        {isProjectComplete
-          ? deliveryStatusLabel
-          : isLegacyChapter
-            ? 'Final handoff • Story now belongs to the artist'
-            : currentStepLabel}
-      </div>
-    </div>
-
-    <div className="sl-progress-build-summary-metric">
-      <div className="sl-progress-build-summary-metric-label">
-       {isProjectComplete
-  ? 'Carrier / Tracking'
-  : 'Project Target Completion Window'}
-      </div>
-      <div className="sl-progress-build-summary-metric-value">
-  {isProjectComplete ? carrierTrackingLabel : targetWindow || 'TBD'}
-</div>
-    </div>
-  </div>
-</section>
+      </section>
 
       <section
         className={[
@@ -5873,61 +5976,77 @@ const allRenderableStageLayers = useMemo(() => {
             <div className="sl-progress-hero-carousel-center-slot">
               <div className="sl-progress-hero-carousel-media sl-progress-stage-card-media">
                 {allRenderableStageLayers.length > 0 ? (
-<div className="sl-progress-stage-image-stack">
-  {allRenderableStageLayers.map((layer) => {
-    const layerClassName = [
-      'sl-progress-stage-card-base-image',
-      'sl-progress-stage-card-base-image--stacked',
-      layer.isVisible ? 'is-visible' : 'is-hidden',
-    ].join(' ');
+                  <div className="sl-progress-stage-image-stack">
+                    {allRenderableStageLayers.map((layer) => {
+                      const layerClassName = [
+                        'sl-progress-stage-card-base-image',
+                        'sl-progress-stage-card-base-image--stacked',
+                        layer.isVisible ? 'is-visible' : 'is-hidden',
+                      ].join(' ');
 
-    if (layer.isCoverMedia && layer.coverMediaType === 'video') {
-      return (
-        <video
-          key={layer.stageKey}
-          className={layerClassName}
-          src={layer.coverMediaUrl}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          aria-hidden={!layer.isVisible}
-          style={{
-            objectFit: 'cover',
-            filter: 'brightness(0.72) saturate(1.02)',
-          }}
-        />
-      );
-    }
+                      if (layer.isCoverMedia && layer.coverMediaType === 'video') {
+                        return (
+                          <video
+                            key={layer.stageKey}
+                            className={layerClassName}
+                            src={layer.coverMediaUrl}
+                            autoPlay
+                            muted
+                            loop
+                            playsInline
+                            preload="auto"
+                            aria-hidden={!layer.isVisible}
+                            style={{
+                              objectFit: 'cover',
+                              filter: `brightness(${layer.brightness ?? 0.72}) saturate(${layer.saturation ?? 1.02})`,
+                            }}
+                          />
+                        );
+                      }
 
-    return (
-      <img
-        key={layer.stageKey}
-        className={layerClassName}
-        src={layer.isCoverMedia ? layer.coverMediaUrl : layer.baseImageUrl}
-        alt={layer.isVisible ? `${layer.label} hero` : ''}
-        aria-hidden={!layer.isVisible}
-        loading="eager"
-        decoding="sync"
-        draggable={false}
-        style={{
-          objectFit: 'cover',
-          filter: layer.isCoverMedia
-            ? 'brightness(0.72) saturate(1.02)'
-            : layer.mediaState === STAGE_MEDIA_STATE.COMPLETED
-              ? 'grayscale(0.42) saturate(0.82) contrast(1.02) brightness(0.9)'
-              : layer.mediaState === STAGE_MEDIA_STATE.CURRENT
-                ? 'brightness(1.06) saturate(1.08)'
-                : 'none',
-        }}
-      />
-    );
-  })}
-</div>
+                      return (
+                        <img
+                          key={layer.stageKey}
+                          className={layerClassName}
+                          src={
+                            layer.isCoverMedia
+                              ? layer.coverMediaUrl
+                              : layer.baseImageUrl
+                          }
+                          alt={layer.isVisible ? `${layer.label} hero` : ''}
+                          aria-hidden={!layer.isVisible}
+                          loading="eager"
+                          decoding="sync"
+                          draggable={false}
+                          style={{
+                            objectFit: 'cover',
+                            filter: layer.isCoverMedia
+                              ? `brightness(${layer.brightness ?? 0.72}) saturate(${layer.saturation ?? 1.02})`
+                              : layer.mediaState === STAGE_MEDIA_STATE.COMPLETED
+                                ? 'grayscale(0.42) saturate(0.82) contrast(1.02) brightness(0.9)'
+                                : layer.mediaState === STAGE_MEDIA_STATE.CURRENT
+                                  ? 'brightness(1.06) saturate(1.08)'
+                                  : 'none',
+                          }}
+                        />
+                      );
+                    })}
+                  </div>
                 ) : (
                   <div className="sl-progress-hero-side-preview-fallback" />
                 )}
+
+                {isCoverStageVisible ? (
+                  <div
+                    className="sl-progress-soundlegend-cover-background-crush"
+                    style={{
+                      opacity:
+                        activeDisplayedLayer?.blackFloor ??
+                        revealCoverBlackFloor ??
+                        0.22,
+                    }}
+                  />
+                ) : null}
 
                 {activeStorypoint && !isLegacyChapter ? (
                   <div
@@ -6053,10 +6172,8 @@ const allRenderableStageLayers = useMemo(() => {
                                   Workshop checkpoints
                                 </div>
                                 <div className="sl-progress-storypoint-checkpoints-count">
-                                  {
-                                    currentChapterProgressData.completedCheckpoints
-                                  }
-                                  /{currentChapterProgressData.totalCheckpoints}{' '}
+                                  {currentChapterProgressData.completedCheckpoints}/
+                                  {currentChapterProgressData.totalCheckpoints}{' '}
                                   completed
                                 </div>
                               </div>
@@ -6135,9 +6252,7 @@ const allRenderableStageLayers = useMemo(() => {
                                 )
                               )}
 
-                              <option value="other">
-                                Other / custom upload
-                              </option>
+                              <option value="other">Other / custom upload</option>
                             </select>
 
                             {selectedArchiveCapture ? (
@@ -6147,9 +6262,7 @@ const allRenderableStageLayers = useMemo(() => {
                                 </div>
 
                                 <div className="sl-progress-stage-storypoint-data-value sl-progress-stage-storypoint-data-value--body">
-                                  <strong>
-                                    {selectedArchiveCapture.label}
-                                  </strong>
+                                  <strong>{selectedArchiveCapture.label}</strong>
                                   <br />
                                   {selectedArchiveCapture.purpose}
                                   <br />
@@ -6404,7 +6517,7 @@ const allRenderableStageLayers = useMemo(() => {
                     isLegacyChapter ? 'sl-progress-hero-overlay--legacy' : ''
                   }`}
                 >
-                                    {!isRevealCoverChapter ? (
+                  {!isRevealCoverChapter ? (
                     <div className="sl-progress-stage-hero-status-caption">
                       {stageStatePresentation.pill}
                     </div>
@@ -6490,339 +6603,474 @@ const allRenderableStageLayers = useMemo(() => {
           </div>
         </div>
       </section>
-
-{isLegacyChapter && isAdmin ? (
-  <section className="sl-progress-legacy-admin-shell">
-    <div className="sl-progress-legacy-admin-section-header">
-      <div className="sl-progress-legacy-admin-section-kicker">
-        Legacy Chapter Admin
-      </div>
-      <div className="sl-progress-legacy-admin-section-title">
-        Final handoff controls
-      </div>
-      <div className="sl-progress-legacy-admin-section-subtitle">
-        Manage post-build shipping details and the SoundLegend reveal experience
-        from one unified admin section.
-      </div>
-    </div>
-
-    <div className="sl-progress-legacy-admin-panels">
-      <div className="sl-progress-legacy-admin-card">
-        <div className="sl-progress-legacy-admin-eyebrow">
-          Shipping & Delivery
-        </div>
-
-        <div className="sl-progress-legacy-admin-title">
-          Control post-build shipping status
-        </div>
-
-        <div className="sl-progress-legacy-admin-body">
-          These fields control the completed project summary shown to the
-          customer once the build is finished.
-        </div>
-
-        <div className="sl-progress-legacy-admin-grid">
-          <div className="sl-progress-legacy-admin-field">
-            <label className="sl-progress-legacy-admin-label">
-              Shipping status
-            </label>
-            <select
-              className="sl-progress-legacy-admin-select"
-              value={legacyShippingStatus}
-              onChange={(e) => setLegacyShippingStatus(e.target.value)}
-            >
-              <option value="waiting_to_ship">Waiting to be Shipped</option>
-              <option value="shipped">Shipped</option>
-              <option value="delivered">Delivered</option>
-              <option value="undeliverable">Undeliverable</option>
-            </select>
+      {isLegacyChapter && isAdmin ? (
+        <section className="sl-progress-legacy-admin-shell">
+          <div className="sl-progress-legacy-admin-section-header">
+            <div className="sl-progress-legacy-admin-section-kicker">
+              Legacy Chapter Admin
+            </div>
+            <div className="sl-progress-legacy-admin-section-title">
+              Final handoff controls
+            </div>
+            <div className="sl-progress-legacy-admin-section-subtitle">
+              Manage post-build shipping details and the SoundLegend reveal
+              experience from one unified admin section.
+            </div>
           </div>
 
-          <div className="sl-progress-legacy-admin-field">
-            <label className="sl-progress-legacy-admin-label">Carrier</label>
-            <select
-              className="sl-progress-legacy-admin-select"
-              value={legacyShippingCarrier}
-              onChange={(e) => setLegacyShippingCarrier(e.target.value)}
-            >
-              <option value="">Select carrier</option>
-              <option value="UPS">UPS</option>
-              <option value="FedEx">FedEx</option>
-              <option value="USPS">USPS</option>
-              <option value="DHL">DHL</option>
-              <option value="Other">Other</option>
-            </select>
+          <div className="sl-progress-legacy-admin-panels">
+            <div className="sl-progress-legacy-admin-card">
+              <div className="sl-progress-legacy-admin-eyebrow">
+                Shipping & Delivery
+              </div>
+
+              <div className="sl-progress-legacy-admin-title">
+                Control post-build shipping status
+              </div>
+
+              <div className="sl-progress-legacy-admin-body">
+                These fields control the completed project summary shown to the
+                customer once the build is finished.
+              </div>
+
+              <div className="sl-progress-legacy-admin-grid">
+                <div className="sl-progress-legacy-admin-field">
+                  <label className="sl-progress-legacy-admin-label">
+                    Shipping status
+                  </label>
+                  <select
+                    className="sl-progress-legacy-admin-select"
+                    value={legacyShippingStatus}
+                    onChange={(e) => setLegacyShippingStatus(e.target.value)}
+                  >
+                    <option value="waiting_to_ship">
+                      Waiting to be Shipped
+                    </option>
+                    <option value="shipped">Shipped</option>
+                    <option value="delivered">Delivered</option>
+                    <option value="undeliverable">Undeliverable</option>
+                  </select>
+                </div>
+
+                <div className="sl-progress-legacy-admin-field">
+                  <label className="sl-progress-legacy-admin-label">
+                    Carrier
+                  </label>
+                  <select
+                    className="sl-progress-legacy-admin-select"
+                    value={legacyShippingCarrier}
+                    onChange={(e) => setLegacyShippingCarrier(e.target.value)}
+                  >
+                    <option value="">Select carrier</option>
+                    <option value="UPS">UPS</option>
+                    <option value="FedEx">FedEx</option>
+                    <option value="USPS">USPS</option>
+                    <option value="DHL">DHL</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+
+                <div className="sl-progress-legacy-admin-field sl-progress-legacy-admin-field--full">
+                  <label className="sl-progress-legacy-admin-label">
+                    Tracking number
+                  </label>
+                  <input
+                    type="text"
+                    className="sl-progress-legacy-admin-input"
+                    value={legacyTrackingNumber}
+                    onChange={(e) => setLegacyTrackingNumber(e.target.value)}
+                    placeholder="Enter tracking number"
+                  />
+                </div>
+
+                <div className="sl-progress-legacy-admin-field">
+                  <label className="sl-progress-legacy-admin-label">
+                    Shipped date
+                  </label>
+                  <input
+                    type="date"
+                    className="sl-progress-legacy-admin-input sl-progress-legacy-admin-input--date"
+                    value={legacyShippedAt}
+                    onChange={(e) => setLegacyShippedAt(e.target.value)}
+                  />
+                </div>
+
+                <div className="sl-progress-legacy-admin-field">
+                  <label className="sl-progress-legacy-admin-label">
+                    Delivered date
+                  </label>
+                  <input
+                    type="date"
+                    className="sl-progress-legacy-admin-input sl-progress-legacy-admin-input--date"
+                    value={legacyDeliveredAt}
+                    onChange={(e) => setLegacyDeliveredAt(e.target.value)}
+                  />
+                </div>
+
+                <div className="sl-progress-legacy-admin-field">
+                  <label className="sl-progress-legacy-admin-label">
+                    Undeliverable date
+                  </label>
+                  <input
+                    type="date"
+                    className="sl-progress-legacy-admin-input sl-progress-legacy-admin-input--date"
+                    value={legacyUndeliverableAt}
+                    onChange={(e) => setLegacyUndeliverableAt(e.target.value)}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="sl-progress-legacy-admin-card">
+              <div className="sl-progress-legacy-admin-eyebrow">
+                SoundLegend Reveal
+              </div>
+
+              <div className="sl-progress-legacy-admin-title">
+                Deploy cover story before Chapter I
+              </div>
+
+              <div className="sl-progress-legacy-admin-body">
+                When deployed, the SoundLegend cover becomes visible as the
+                opening story panel before Chapter I for the customer.
+              </div>
+
+              <div className="sl-progress-legacy-admin-grid">
+                <div className="sl-progress-legacy-admin-field">
+                  <label className="sl-progress-legacy-admin-label">
+                    Cover title
+                  </label>
+                  <input
+                    type="text"
+                    className="sl-progress-legacy-admin-input"
+                    value={revealCoverTitle}
+                    onChange={(e) => setRevealCoverTitle(e.target.value)}
+                    placeholder="Your SoundLegend Story"
+                  />
+                </div>
+
+                <div className="sl-progress-legacy-admin-field">
+                  <label className="sl-progress-legacy-admin-label">
+                    Cover media type
+                  </label>
+                  <select
+                    className="sl-progress-legacy-admin-select"
+                    value={revealCoverMediaType}
+                    onChange={(e) => setRevealCoverMediaType(e.target.value)}
+                  >
+                    <option value="image">Image</option>
+                    <option value="video">Video</option>
+                  </select>
+                </div>
+
+                <div className="sl-progress-legacy-admin-field sl-progress-legacy-admin-field--full">
+                  <label className="sl-progress-legacy-admin-label">
+                    Cover subtitle
+                  </label>
+                  <textarea
+                    className="sl-progress-legacy-admin-textarea"
+                    value={revealCoverSubtitle}
+                    onChange={(e) => setRevealCoverSubtitle(e.target.value)}
+                    placeholder="The completed journey of your custom instrument."
+                    rows={3}
+                  />
+                </div>
+
+                <div className="sl-progress-legacy-admin-field sl-progress-legacy-admin-field--full">
+                  <label className="sl-progress-legacy-admin-label">
+                    Select existing project media
+                  </label>
+                  <select
+                    className="sl-progress-legacy-admin-select"
+                    value={selectedExistingCoverId}
+                    onChange={(e) =>
+                      handleSelectExistingCoverMedia(e.target.value)
+                    }
+                  >
+                    <option value="">Choose project media...</option>
+                    {projectCoverMediaOptions.map((item) => (
+                      <option key={item.id} value={item.id}>
+                        {item.title}
+                        {item.stageKey
+                          ? ` • ${toSentenceCaseLabel(item.stageKey)}`
+                          : ''}
+                        {item.type ? ` • ${item.type}` : ''}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div className="sl-progress-legacy-admin-actions">
+                <button
+                  type="button"
+                  className="sl-progress-legacy-admin-btn sl-progress-legacy-admin-btn--ghost"
+                  onClick={handleResetRevealCoverAdjustments}
+                  disabled={revealPanelBusy}
+                >
+                  Reset image settings
+                </button>
+
+                <button
+                  type="button"
+                  className="sl-progress-legacy-admin-btn sl-progress-legacy-admin-btn--ghost"
+                  onClick={handleSaveRevealPanel}
+                  disabled={revealPanelBusy}
+                >
+                  {revealPanelBusy ? 'Saving…' : 'Save reveal settings'}
+                </button>
+
+                {revealData?.revealDeployed ? (
+                  <button
+                    type="button"
+                    className="sl-progress-legacy-admin-btn sl-progress-legacy-admin-btn--ghost"
+                    onClick={handleHideReveal}
+                    disabled={revealPanelBusy}
+                  >
+                    {revealPanelBusy ? 'Updating…' : 'Hide SoundLegend cover'}
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    className="sl-progress-legacy-admin-btn sl-progress-legacy-admin-btn--primary"
+                    onClick={handleDeployReveal}
+                    disabled={
+                      revealPanelBusy ||
+                      !revealCoverMediaUrl ||
+                      !revealChecklistComplete
+                    }
+                  >
+                    {revealPanelBusy
+                      ? 'Deploying…'
+                      : 'Deploy SoundLegend cover'}
+                  </button>
+                )}
+              </div>
+
+              {coverUploadError ? (
+                <div className="sl-progress-legacy-admin-status sl-progress-legacy-admin-status--error">
+                  {coverUploadError}
+                </div>
+              ) : null}
+
+              <div className="sl-progress-legacy-admin-preview">
+                <SoundLegendCoverHero
+                  title={revealCoverTitle}
+                  subtitle={revealCoverSubtitle}
+                  mediaUrl={revealCoverMediaUrl}
+                  mediaType={revealCoverMediaType}
+                  mediaTitle={revealCoverMediaTitle}
+                  smokeVideoUrl={sharedSmokeVideoUrl}
+                  isPreview={false}
+                  brightness={revealCoverBrightness}
+                  saturation={revealCoverSaturation}
+                  blackFloor={revealCoverBlackFloor}
+                  smokeOpacity={revealCoverSmokeOpacity}
+                />
+              </div>
+
+              <div className="sl-progress-legacy-admin-grid">
+                <div className="sl-progress-legacy-admin-field">
+                  <label className="sl-progress-legacy-admin-label">
+                    Cover brightness
+                  </label>
+                  <input
+                    type="range"
+                    min="0.4"
+                    max="1.4"
+                    step="0.01"
+                    className="sl-progress-legacy-admin-range"
+                    value={revealCoverBrightness}
+                    onChange={(e) =>
+                      setRevealCoverBrightness(Number(e.target.value))
+                    }
+                  />
+                  <div className="sl-progress-legacy-admin-range-value">
+                    {revealCoverBrightness.toFixed(2)}
+                  </div>
+                </div>
+
+                <div className="sl-progress-legacy-admin-field">
+                  <label className="sl-progress-legacy-admin-label">
+                    Cover saturation
+                  </label>
+                  <input
+                    type="range"
+                    min="0.4"
+                    max="1.8"
+                    step="0.01"
+                    className="sl-progress-legacy-admin-range"
+                    value={revealCoverSaturation}
+                    onChange={(e) =>
+                      setRevealCoverSaturation(Number(e.target.value))
+                    }
+                  />
+                  <div className="sl-progress-legacy-admin-range-value">
+                    {revealCoverSaturation.toFixed(2)}
+                  </div>
+                </div>
+
+                <div className="sl-progress-legacy-admin-field sl-progress-legacy-admin-field--full">
+                  <label className="sl-progress-legacy-admin-label">
+                    Black floor
+                  </label>
+                  <input
+                    type="range"
+                    min="0"
+                    max="0.65"
+                    step="0.01"
+                    className="sl-progress-legacy-admin-range"
+                    value={revealCoverBlackFloor}
+                    onChange={(e) =>
+                      setRevealCoverBlackFloor(Number(e.target.value))
+                    }
+                  />
+                  <div className="sl-progress-legacy-admin-range-value">
+                    {revealCoverBlackFloor.toFixed(2)}
+                  </div>
+                </div>
+
+                <div className="sl-progress-legacy-admin-field sl-progress-legacy-admin-field--full">
+                  <label className="sl-progress-legacy-admin-label">
+                    Smoke overlay opacity
+                  </label>
+                  <input
+                    type="range"
+                    min="0"
+                    max="1"
+                    step="0.01"
+                    className="sl-progress-legacy-admin-range"
+                    value={revealCoverSmokeOpacity}
+                    onChange={(e) =>
+                      setRevealCoverSmokeOpacity(Number(e.target.value))
+                    }
+                  />
+                  <div className="sl-progress-legacy-admin-range-value">
+                    {revealCoverSmokeOpacity.toFixed(2)}
+                  </div>
+                </div>
+              </div>
+
+              <div className="sl-progress-legacy-admin-checklist">
+                <button
+                  type="button"
+                  className={`sl-progress-legacy-check ${
+                    revealChecklist.coverMediaSelected ? 'is-complete' : ''
+                  }`}
+                  onClick={() =>
+                    handleRevealChecklistToggle('coverMediaSelected')
+                  }
+                >
+                  Cover media selected
+                </button>
+
+                <button
+                  type="button"
+                  className={`sl-progress-legacy-check ${
+                    revealChecklist.chapterMediaReviewed ? 'is-complete' : ''
+                  }`}
+                  onClick={() =>
+                    handleRevealChecklistToggle('chapterMediaReviewed')
+                  }
+                >
+                  Chapter media reviewed
+                </button>
+
+                <button
+                  type="button"
+                  className={`sl-progress-legacy-check ${
+                    revealChecklist.visibilityReviewed ? 'is-complete' : ''
+                  }`}
+                  onClick={() =>
+                    handleRevealChecklistToggle('visibilityReviewed')
+                  }
+                >
+                  Visibility reviewed
+                </button>
+
+                <button
+                  type="button"
+                  className={`sl-progress-legacy-check ${
+                    revealChecklist.customerStoryApproved ? 'is-complete' : ''
+                  }`}
+                  onClick={() =>
+                    handleRevealChecklistToggle('customerStoryApproved')
+                  }
+                >
+                  Customer story approved
+                </button>
+
+                <button
+                  type="button"
+                  className={`sl-progress-legacy-check ${
+                    revealChecklist.shipmentConfirmed ? 'is-complete' : ''
+                  }`}
+                  onClick={() =>
+                    handleRevealChecklistToggle('shipmentConfirmed')
+                  }
+                >
+                  Shipment confirmed
+                </button>
+
+                <button
+                  type="button"
+                  className={`sl-progress-legacy-check ${
+                    revealChecklist.finalReviewComplete ? 'is-complete' : ''
+                  }`}
+                  onClick={() =>
+                    handleRevealChecklistToggle('finalReviewComplete')
+                  }
+                >
+                  Final review complete
+                </button>
+              </div>
+
+              <div className="sl-progress-legacy-admin-actions">
+                <button
+                  type="button"
+                  className="sl-progress-legacy-admin-btn sl-progress-legacy-admin-btn--ghost"
+                  onClick={handleSaveRevealPanel}
+                  disabled={revealPanelBusy}
+                >
+                  {revealPanelBusy ? 'Saving…' : 'Save reveal settings'}
+                </button>
+
+                {revealData?.revealDeployed ? (
+                  <button
+                    type="button"
+                    className="sl-progress-legacy-admin-btn sl-progress-legacy-admin-btn--ghost"
+                    onClick={handleHideReveal}
+                    disabled={revealPanelBusy}
+                  >
+                    {revealPanelBusy ? 'Updating…' : 'Hide SoundLegend cover'}
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    className="sl-progress-legacy-admin-btn sl-progress-legacy-admin-btn--primary"
+                    onClick={handleDeployReveal}
+                    disabled={
+                      revealPanelBusy ||
+                      !revealCoverMediaUrl ||
+                      !revealChecklistComplete
+                    }
+                  >
+                    {revealPanelBusy
+                      ? 'Deploying…'
+                      : 'Deploy SoundLegend cover'}
+                  </button>
+                )}
+              </div>
+
+              <div className="sl-progress-legacy-admin-status">
+                {revealData?.revealDeployed
+                  ? 'Cover reveal is live and will appear before Chapter I.'
+                  : 'Cover reveal is currently hidden. Saved settings are preserved until you deploy it again.'}
+              </div>
+            </div>
           </div>
-
-          <div className="sl-progress-legacy-admin-field sl-progress-legacy-admin-field--full">
-            <label className="sl-progress-legacy-admin-label">
-              Tracking number
-            </label>
-            <input
-              type="text"
-              className="sl-progress-legacy-admin-input"
-              value={legacyTrackingNumber}
-              onChange={(e) => setLegacyTrackingNumber(e.target.value)}
-              placeholder="Enter tracking number"
-            />
-          </div>
-
-          <div className="sl-progress-legacy-admin-field">
-            <label className="sl-progress-legacy-admin-label">Shipped date</label>
-            <input
-              type="date"
-              className="sl-progress-legacy-admin-input sl-progress-legacy-admin-input--date"
-              value={legacyShippedAt}
-              onChange={(e) => setLegacyShippedAt(e.target.value)}
-            />
-          </div>
-
-          <div className="sl-progress-legacy-admin-field">
-            <label className="sl-progress-legacy-admin-label">
-              Delivered date
-            </label>
-            <input
-              type="date"
-              className="sl-progress-legacy-admin-input sl-progress-legacy-admin-input--date"
-              value={legacyDeliveredAt}
-              onChange={(e) => setLegacyDeliveredAt(e.target.value)}
-            />
-          </div>
-
-          <div className="sl-progress-legacy-admin-field">
-            <label className="sl-progress-legacy-admin-label">
-              Undeliverable date
-            </label>
-            <input
-              type="date"
-              className="sl-progress-legacy-admin-input sl-progress-legacy-admin-input--date"
-              value={legacyUndeliverableAt}
-              onChange={(e) => setLegacyUndeliverableAt(e.target.value)}
-            />
-          </div>
-        </div>
-
-        <div className="sl-progress-legacy-admin-actions">
-          <button
-            type="button"
-            className="sl-progress-legacy-admin-btn sl-progress-legacy-admin-btn--primary"
-            onClick={handleSaveLegacyChapterDetails}
-            disabled={revealPanelBusy}
-          >
-            {revealPanelBusy ? 'Saving…' : 'Save shipping details'}
-          </button>
-        </div>
-      </div>
-
-      <div className="sl-progress-legacy-admin-card">
-        <div className="sl-progress-legacy-admin-eyebrow">
-          SoundLegend Reveal
-        </div>
-
-        <div className="sl-progress-legacy-admin-title">
-          Deploy cover story before Chapter I
-        </div>
-
-        <div className="sl-progress-legacy-admin-body">
-          When deployed, the SoundLegend cover becomes visible as the opening
-          story panel before Chapter I for the customer.
-        </div>
-
-        <div className="sl-progress-legacy-admin-grid">
-          <div className="sl-progress-legacy-admin-field">
-            <label className="sl-progress-legacy-admin-label">
-              Cover title
-            </label>
-            <input
-              type="text"
-              className="sl-progress-legacy-admin-input"
-              value={revealCoverTitle}
-              onChange={(e) => setRevealCoverTitle(e.target.value)}
-              placeholder="Your SoundLegend Story"
-            />
-          </div>
-
-          <div className="sl-progress-legacy-admin-field">
-            <label className="sl-progress-legacy-admin-label">
-              Cover media type
-            </label>
-            <select
-              className="sl-progress-legacy-admin-select"
-              value={revealCoverMediaType}
-              onChange={(e) => setRevealCoverMediaType(e.target.value)}
-            >
-              <option value="image">Image</option>
-              <option value="video">Video</option>
-            </select>
-          </div>
-
-          <div className="sl-progress-legacy-admin-field sl-progress-legacy-admin-field--full">
-            <label className="sl-progress-legacy-admin-label">
-              Cover subtitle
-            </label>
-            <textarea
-              className="sl-progress-legacy-admin-textarea"
-              value={revealCoverSubtitle}
-              onChange={(e) => setRevealCoverSubtitle(e.target.value)}
-              placeholder="The completed journey of your custom instrument."
-              rows={3}
-            />
-          </div>
-
-          <div className="sl-progress-legacy-admin-field sl-progress-legacy-admin-field--full">
-            <label className="sl-progress-legacy-admin-label">
-              Select existing project media
-            </label>
-            <select
-              className="sl-progress-legacy-admin-select"
-              value={selectedExistingCoverId}
-              onChange={(e) => handleSelectExistingCoverMedia(e.target.value)}
-            >
-              <option value="">Choose project media...</option>
-              {projectCoverMediaOptions.map((item) => (
-                <option key={item.id} value={item.id}>
-                  {item.title}
-                  {item.stageKey ? ` • ${toSentenceCaseLabel(item.stageKey)}` : ''}
-                  {item.type ? ` • ${item.type}` : ''}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-
-        <div className="sl-progress-legacy-admin-actions">
-          <button
-            type="button"
-            className="sl-progress-legacy-admin-btn sl-progress-legacy-admin-btn--ghost"
-            onClick={openCoverRevealFilePicker}
-            disabled={coverUploadBusy}
-          >
-            {coverUploadBusy ? 'Uploading…' : 'Upload new cover image/video'}
-          </button>
-        </div>
-
-        {coverUploadError ? (
-          <div className="sl-progress-legacy-admin-status sl-progress-legacy-admin-status--error">
-            {coverUploadError}
-          </div>
-        ) : null}
-
-        <div className="sl-progress-legacy-admin-preview">
-          <SoundLegendCoverHero
-            title={revealCoverTitle}
-            subtitle={revealCoverSubtitle}
-            mediaUrl={revealCoverMediaUrl}
-            mediaType={revealCoverMediaType}
-            mediaTitle={revealCoverMediaTitle}
-            smokeVideoUrl={sharedSmokeVideoUrl}
-            isPreview={true}
-          />
-        </div>
-
-        <div className="sl-progress-legacy-admin-checklist">
-          <button
-            type="button"
-            className={`sl-progress-legacy-check ${
-              revealChecklist.coverMediaSelected ? 'is-complete' : ''
-            }`}
-            onClick={() => handleRevealChecklistToggle('coverMediaSelected')}
-          >
-            Cover media selected
-          </button>
-
-          <button
-            type="button"
-            className={`sl-progress-legacy-check ${
-              revealChecklist.chapterMediaReviewed ? 'is-complete' : ''
-            }`}
-            onClick={() => handleRevealChecklistToggle('chapterMediaReviewed')}
-          >
-            Chapter media reviewed
-          </button>
-
-          <button
-            type="button"
-            className={`sl-progress-legacy-check ${
-              revealChecklist.visibilityReviewed ? 'is-complete' : ''
-            }`}
-            onClick={() => handleRevealChecklistToggle('visibilityReviewed')}
-          >
-            Visibility reviewed
-          </button>
-
-          <button
-            type="button"
-            className={`sl-progress-legacy-check ${
-              revealChecklist.customerStoryApproved ? 'is-complete' : ''
-            }`}
-            onClick={() => handleRevealChecklistToggle('customerStoryApproved')}
-          >
-            Customer story approved
-          </button>
-
-          <button
-            type="button"
-            className={`sl-progress-legacy-check ${
-              revealChecklist.shipmentConfirmed ? 'is-complete' : ''
-            }`}
-            onClick={() => handleRevealChecklistToggle('shipmentConfirmed')}
-          >
-            Shipment confirmed
-          </button>
-
-          <button
-            type="button"
-            className={`sl-progress-legacy-check ${
-              revealChecklist.finalReviewComplete ? 'is-complete' : ''
-            }`}
-            onClick={() => handleRevealChecklistToggle('finalReviewComplete')}
-          >
-            Final review complete
-          </button>
-        </div>
-
-        <div className="sl-progress-legacy-admin-actions">
-          <button
-            type="button"
-            className="sl-progress-legacy-admin-btn sl-progress-legacy-admin-btn--ghost"
-            onClick={handleSaveRevealPanel}
-            disabled={revealPanelBusy}
-          >
-            {revealPanelBusy ? 'Saving…' : 'Save reveal settings'}
-          </button>
-
-          {revealData?.revealDeployed ? (
-            <button
-              type="button"
-              className="sl-progress-legacy-admin-btn sl-progress-legacy-admin-btn--ghost"
-              onClick={handleHideReveal}
-              disabled={revealPanelBusy}
-            >
-              {revealPanelBusy ? 'Updating…' : 'Hide SoundLegend cover'}
-            </button>
-          ) : (
-            <button
-              type="button"
-              className="sl-progress-legacy-admin-btn sl-progress-legacy-admin-btn--primary"
-              onClick={handleDeployReveal}
-              disabled={
-                revealPanelBusy || !revealCoverMediaUrl || !revealChecklistComplete
-              }
-            >
-              {revealPanelBusy ? 'Deploying…' : 'Deploy SoundLegend cover'}
-            </button>
-          )}
-        </div>
-
-        <div className="sl-progress-legacy-admin-status">
-          {revealData?.revealDeployed
-            ? 'Cover reveal is live and will appear before Chapter I.'
-            : 'Cover reveal is currently hidden. Saved settings are preserved until you deploy it again.'}
-        </div>
-      </div>
-    </div>
-  </section>
-) : null}
+        </section>
+      ) : null}
 
       <input
         id="stage-archive-file-input"
