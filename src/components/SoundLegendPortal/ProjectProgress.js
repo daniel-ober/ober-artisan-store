@@ -6,11 +6,24 @@ import {
   updateDoc,
   serverTimestamp,
 } from 'firebase/firestore';
-import { ref as storageRef, getDownloadURL } from 'firebase/storage';
+import {
+  ref as storageRef,
+  getDownloadURL,
+  uploadBytes,
+  uploadBytesResumable,
+} from 'firebase/storage';
 import { db, storage } from '../../firebaseConfig';
 import { calculateProjectProgress } from '../../utils/calculateProjectProgress';
 import { STAGES, STAGE_TEMPLATES } from '../../utils/workflowDefinitions';
 import { PROJECT_STAGE_EDU } from '../../utils/projectStageEducation';
+import { PROJECT_STAGE_STORY } from '../../utils/projectStageStory';
+import {
+  ARCHIVE_VISIBILITY,
+  getStageArchiveDefinition,
+  getStageSuggestedCaptures,
+  getStageAdminCaptureChecklist,
+  getArchiveCaptureByKey,
+} from '../../utils/projectStageArchiveDefinitions';
 import { createPortal } from 'react-dom';
 import './ProjectProgress.css';
 
@@ -119,7 +132,6 @@ function writeProjectProgressCache(projectLike, data) {
     console.warn('Failed writing project progress cache', err);
   }
 }
-
 
 const STEPS = STAGES.map((s) => {
   const edu = PROJECT_STAGE_EDU[s.stageKey] || {};
@@ -356,6 +368,36 @@ function getFileNameFromUrl(url = '') {
   } catch {
     return 'Resource';
   }
+}
+
+function getResolvedVisualStageState({
+  project,
+  step,
+  stageIndex,
+  currentStepIndex,
+  projectMarkedComplete = false,
+}) {
+  if (!step) return STAGE_MEDIA_STATE.FUTURE;
+
+ if (step.key === 'soundlegendCover') {
+  return STAGE_MEDIA_STATE.CURRENT;
+}
+
+  if (step.key === 'soundlegendEpilogue') {
+    return projectMarkedComplete
+      ? STAGE_MEDIA_STATE.COMPLETED
+      : STAGE_MEDIA_STATE.FUTURE;
+  }
+
+  const stepStatus = String(
+    getStepStatus(project, step).status || ''
+  ).toLowerCase();
+
+  if (stepStatus === 'completed') {
+    return STAGE_MEDIA_STATE.COMPLETED;
+  }
+
+  return getSelectedStageMediaState(stageIndex, currentStepIndex);
 }
 
 function getFileExtension(url = '') {
@@ -880,32 +922,34 @@ function getStageStatePresentation(selectedIndex, currentIndex) {
 
   if (state === STAGE_MEDIA_STATE.COMPLETED) {
     return {
-      eyebrow: 'Stage Completed',
+      eyebrow: 'Chapter Completed',
       pill: 'Completed',
-      helper: 'This phase is complete and now part of your build archive.',
+      helper:
+        'This chapter is complete and now lives as part of your build archive.',
     };
   }
 
   if (state === STAGE_MEDIA_STATE.CURRENT) {
     return {
-      eyebrow: 'Stage In Progress',
+      eyebrow: 'Chapter In Progress',
       pill: 'In Progress',
-      helper: 'This is the current active phase of your drum’s build.',
+      helper: 'This is the current active chapter in your instrument’s story.',
     };
   }
 
   if (state === STAGE_MEDIA_STATE.NEXT) {
     return {
-      eyebrow: "A peek inside of what's up next",
+      eyebrow: "A look at what's coming next",
       pill: 'Up Next',
-      helper: 'This phase is coming next once the current stage is completed.',
+      helper:
+        'This chapter is approaching and will open as the current stage closes.',
     };
   }
 
   return {
-    eyebrow: 'Future Stage (Locked)',
+    eyebrow: 'Future Chapter',
     pill: 'Locked',
-    helper: 'This phase will unlock later in the build journey.',
+    helper: 'This chapter will unlock later in the build journey.',
   };
 }
 
@@ -1127,12 +1171,85 @@ function getTargetWindow(project) {
     minHours,
     maxHours
   );
-
   if (projected.early && projected.late && projected.early !== projected.late) {
     return `${projected.early} → ${projected.late}`;
   }
 
   return projected.early || projected.late || null;
+}
+
+function areAllStoryChaptersComplete(project) {
+  if (!project) return false;
+
+  return STEPS.every((step) => {
+    const status = getStepStatus(project, step);
+    return String(status?.status || '').toLowerCase() === 'completed';
+  });
+}
+
+function getSoundLegendRevealState(project) {
+  const reveal = project?.soundlegendReveal || {};
+
+  return {
+    enabled: !!reveal.enabled,
+    deployedAt: reveal.deployedAt || null,
+    deployedBy: reveal.deployedBy || '',
+    shipmentConfirmed: !!reveal.shipmentConfirmed,
+    coverMediaType: reveal.coverMediaType || 'image',
+    coverMediaUrl: reveal.coverMediaUrl || '',
+    coverMediaTitle: reveal.coverMediaTitle || '',
+    coverTitle: reveal.coverTitle || 'Your SoundLegend Story',
+    coverSubtitle:
+      reveal.coverSubtitle ||
+      'The completed journey of your custom instrument.',
+    adminChecklist: {
+      coverMediaSelected: !!reveal?.adminChecklist?.coverMediaSelected,
+      chapterMediaReviewed: !!reveal?.adminChecklist?.chapterMediaReviewed,
+      visibilityReviewed: !!reveal?.adminChecklist?.visibilityReviewed,
+      customerStoryApproved: !!reveal?.adminChecklist?.customerStoryApproved,
+      shipmentConfirmed: !!reveal?.adminChecklist?.shipmentConfirmed,
+      finalReviewComplete: !!reveal?.adminChecklist?.finalReviewComplete,
+    },
+  };
+}
+
+function isSoundLegendRevealReady(project) {
+  const reveal = getSoundLegendRevealState(project);
+  const checklistValues = Object.values(reveal.adminChecklist || {});
+  return checklistValues.length > 0 && checklistValues.every(Boolean);
+}
+
+function getLegacyChapterContent(project, isAdmin = false) {
+  const reveal = project?.soundlegendReveal || {};
+  const trackingNumber = reveal.trackingNumber || '';
+  const shippingCarrier = reveal.shippingCarrier || '';
+  const finalNote =
+    reveal.finalAdminNote ||
+    'Your instrument is complete, your story is now yours to carry forward, and we are honored to have built this chapter with you.';
+
+  return {
+    title: 'Legacy in Your Hands',
+    eyebrow: 'Legacy Chapter',
+    intro:
+      'What began as an idea, a conversation, and a vision now lives as a real instrument in your hands. This drum is no longer part of our bench story alone — it now becomes part of your voice, your sessions, your stages, and your legacy.',
+    gratitude:
+      'Thank you for trusting Ober Artisan Drums with something this personal. Building a SoundLegend instrument is never just about wood, hardware, or finish — it is about helping create a vessel for expression, memory, identity, and art. Being invited into that process is something I do not take lightly, and I am deeply grateful to have been part of your story.',
+    care: 'Treat your SoundLegend with the same intention it was built with. Keep it in a stable environment, avoid extreme shifts in heat or humidity, wipe it down gently after playing, and give it the respect due to an instrument made to travel with you for years to come.',
+    guarantee:
+      'This instrument carries the Ober Artisan standard of craftsmanship and care. If anything ever feels off, unexpected, or in need of attention, reach out directly. I stand behind the work, and I want this drum to continue serving you exactly as it was meant to.',
+    encouragement:
+      'Most importantly, make music with it. Let it collect songs, rehearsals, recordings, breakthroughs, hard seasons, beautiful seasons, and the kind of moments that cannot be manufactured — only lived. The build may be complete, but the real story begins now with you.',
+    nextSteps: [
+      'Inspect the instrument carefully upon arrival.',
+      'Allow it to acclimate before making major tuning changes.',
+      'Play it, record it, and let it become part of your voice.',
+      'Reach out any time you need support, guidance, or care advice.',
+    ],
+    shippingCarrier,
+    trackingNumber,
+    finalNote,
+    isAdmin,
+  };
 }
 
 const isItemTouched = (item = {}) => {
@@ -1161,6 +1278,938 @@ const getActiveStepIndexForPhase = (project, phaseKey) => {
 
   return -1;
 };
+
+/* =========================================================
+   STORY HELPERS
+   ========================================================= */
+
+function toSentenceCaseLabel(value = '') {
+  return String(value || '')
+    .replace(/([a-z])([A-Z])/g, '$1 $2')
+    .replace(/[_-]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function normalizeTextArray(value) {
+  if (!value) return [];
+  if (Array.isArray(value)) {
+    return value.map((item) => String(item || '').trim()).filter(Boolean);
+  }
+
+  return String(value)
+    .split(/\n|•|;|\|/g)
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
+function firstNonEmptyString(...values) {
+  for (const value of values) {
+    if (typeof value === 'string' && value.trim()) return value.trim();
+  }
+  return '';
+}
+
+function getStageSpecificText(project, stageKey, keys = []) {
+  if (!stageKey || !Array.isArray(keys)) return '';
+
+  const canonical = canonicalKeyForStage(stageKey);
+  const phaseKey = getExistingPhaseKey(project, canonical);
+
+  const staticStageStoryBucket = PROJECT_STAGE_STORY?.[stageKey] || {};
+  const projectStageStoryBucket = project?.stageStory?.[stageKey] || {};
+  const stageBucket = project?.[stageKey] || {};
+  const phaseBucket = project?.[phaseKey] || {};
+  const storytellingBucket = project?.storytelling || {};
+  const artistBucket = project?.artistDirection || {};
+  const craftsmanBucket = project?.craftsmanDirection || {};
+
+  const buckets = [
+    projectStageStoryBucket,
+    staticStageStoryBucket,
+    stageBucket,
+    phaseBucket,
+    storytellingBucket,
+    artistBucket,
+    craftsmanBucket,
+    project || {},
+  ];
+
+  for (const bucket of buckets) {
+    for (const key of keys) {
+      const value = bucket?.[key];
+      if (typeof value === 'string' && value.trim()) {
+        return value.trim();
+      }
+    }
+  }
+
+  return '';
+}
+
+function getStageSpecificArray(project, stageKey, keys = []) {
+  if (!stageKey || !Array.isArray(keys)) return [];
+
+  const canonical = canonicalKeyForStage(stageKey);
+  const phaseKey = getExistingPhaseKey(project, canonical);
+
+  const staticStageStoryBucket = PROJECT_STAGE_STORY?.[stageKey] || {};
+  const projectStageStoryBucket = project?.stageStory?.[stageKey] || {};
+  const stageBucket = project?.[stageKey] || {};
+  const phaseBucket = project?.[phaseKey] || {};
+  const storytellingBucket = project?.storytelling || {};
+  const artistBucket = project?.artistDirection || {};
+  const craftsmanBucket = project?.craftsmanDirection || {};
+
+  const buckets = [
+    projectStageStoryBucket,
+    staticStageStoryBucket,
+    stageBucket,
+    phaseBucket,
+    storytellingBucket,
+    artistBucket,
+    craftsmanBucket,
+    project || {},
+  ];
+
+  for (const bucket of buckets) {
+    for (const key of keys) {
+      const normalized = normalizeTextArray(bucket?.[key]);
+      if (normalized.length) {
+        return normalized;
+      }
+    }
+  }
+
+  return [];
+}
+
+function buildNarrativeSentences(step, project) {
+  const stageKey = step?.key;
+  const currentStageSummary = step?.what || '';
+  const why = step?.why || '';
+  const mantra = step?.mantra || '';
+
+  const customNarrative = getStageSpecificText(project, stageKey, [
+    'chapterNarrative',
+    'storyIntro',
+    'storySummary',
+    'overviewNarrative',
+    'narrative',
+  ]);
+
+  if (customNarrative) {
+    return customNarrative
+      .split(/(?<=[.!?])\s+/)
+      .map((sentence) => sentence.trim())
+      .filter(Boolean);
+  }
+
+  const chapterName = step?.label || 'This chapter';
+
+  const sentenceOne =
+    chapterName === 'Discovery & Design'
+      ? 'This chapter defines the identity of the instrument before a single permanent move is made.'
+      : 'This chapter moves the instrument deeper into its identity through intentional craft decisions.';
+
+  const sentenceTwo = currentStageSummary
+    ? currentStageSummary.endsWith('.')
+      ? currentStageSummary
+      : `${currentStageSummary}.`
+    : 'What happens here is carefully chosen to serve the build as a whole.';
+
+  const sentenceThree = why
+    ? why.endsWith('.')
+      ? why
+      : `${why}.`
+    : 'Each choice in this stage supports the feel, response, and emotional character of the final drum.';
+
+  const sentenceFour = mantra
+    ? mantra.endsWith('.')
+      ? mantra
+      : `${mantra}.`
+    : 'This is where intention and execution begin to sound like the same thing.';
+
+  return [sentenceOne, sentenceTwo, sentenceThree, sentenceFour].filter(
+    Boolean
+  );
+}
+
+function getChapterNarrative(step, project) {
+  const sentences = buildNarrativeSentences(step, project);
+  return {
+    title: 'Chapter Story',
+    summary: sentences.join(' '),
+    sentences,
+  };
+}
+
+function getArtistDirectionData(step, project) {
+  const stageKey = step?.key;
+  const influences = getStageSpecificArray(project, stageKey, [
+    'artistInfluences',
+    'influences',
+    'referenceArtists',
+    'referenceRecords',
+    'records',
+    'genres',
+  ]);
+
+  const emotionalTargets = getStageSpecificArray(project, stageKey, [
+    'artistEmotionalTargets',
+    'emotionalTargets',
+    'feelTargets',
+    'toneTargets',
+    'desiredTraits',
+  ]);
+
+  const useCases = getStageSpecificArray(project, stageKey, [
+    'artistUseCases',
+    'useCases',
+    'applications',
+    'playingContexts',
+  ]);
+
+  const intent =
+    getStageSpecificText(project, stageKey, [
+      'artistIntent',
+      'intent',
+      'artistDirectionSummary',
+      'artistSummary',
+      'directionSummary',
+    ]) ||
+    'This chapter clarifies what the artist is truly chasing in the instrument — not just specs, but response, attitude, and emotional pull.';
+
+  const listeningFor =
+    getStageSpecificText(project, stageKey, [
+      'listeningFor',
+      'artistListeningFor',
+      'desiredResponse',
+      'targetResponse',
+    ]) ||
+    firstNonEmptyString(step?.why, step?.mantra) ||
+    'We are listening for the balance between control, expression, and identity that the artist wants this drum to carry.';
+
+  return {
+    title: 'Artist Direction',
+    intro: intent,
+    sections: [
+      {
+        label: 'Intent',
+        body: intent,
+      },
+      {
+        label: 'Influences',
+        items:
+          influences.length > 0
+            ? influences
+            : [
+                'The references, records, players, and sounds guiding this chapter will be documented here as the story develops.',
+              ],
+      },
+      {
+        label: 'Emotional Target',
+        items:
+          emotionalTargets.length > 0
+            ? emotionalTargets
+            : [
+                'The goal is to shape the instrument around feel, identity, and emotional response — not just technical outcome.',
+              ],
+      },
+      {
+        label: 'How the artist wants it to respond',
+        body: listeningFor,
+      },
+      {
+        label: 'Use Case',
+        items:
+          useCases.length > 0
+            ? useCases
+            : [
+                'This section will reflect where and how the instrument is meant to live — studio, stage, versatility, or a very specific sonic role.',
+              ],
+      },
+    ],
+  };
+}
+
+function getCraftsmanDirectionData(step, project) {
+  const stageKey = step?.key;
+
+  const customChoices = getStageSpecificArray(project, stageKey, [
+    'craftsmanChoices',
+    'customChoices',
+    'customDecisions',
+    'adaptations',
+  ]);
+
+  const standardFoundations = getStageSpecificArray(project, stageKey, [
+    'standardFoundations',
+    'standardProcess',
+    'foundations',
+    'nonNegotiables',
+  ]);
+
+  const materialStrategy =
+    getStageSpecificText(project, stageKey, [
+      'materialStrategy',
+      'craftsmanMaterialStrategy',
+      'woodStrategy',
+      'selectionStrategy',
+    ]) ||
+    'Material, technique, and restraint are chosen here based on what best serves the instrument rather than what is merely possible.';
+
+  const interpretation =
+    getStageSpecificText(project, stageKey, [
+      'craftsmanInterpretation',
+      'interpretation',
+      'craftsmanSummary',
+      'buildInterpretation',
+    ]) ||
+    'This chapter is where the craftsman translates artistic intent into physical decisions, keeping the instrument honest to its purpose while shaping what makes it unique.';
+
+  const chapterSpecificMove =
+    getStageSpecificText(project, stageKey, [
+      'chapterSpecificMove',
+      'chapterSpecificFocus',
+      'uniqueFocus',
+      'stageSpecificApproach',
+    ]) ||
+    'What changes in this chapter is not the discipline of the process, but how that discipline is aimed to support this specific drum.';
+
+  return {
+    title: 'Craftsman Direction',
+    intro: interpretation,
+    sections: [
+      {
+        label: 'Interpretation',
+        body: interpretation,
+      },
+      {
+        label: 'Material Strategy',
+        body: materialStrategy,
+      },
+      {
+        label: 'What remains foundational',
+        items:
+          standardFoundations.length > 0
+            ? standardFoundations
+            : [
+                'Core tolerances, structural discipline, and repeatable craftsmanship remain steady through every chapter.',
+              ],
+      },
+      {
+        label: 'What is being customized in this chapter',
+        items: customChoices.length > 0 ? customChoices : [chapterSpecificMove],
+      },
+    ],
+  };
+}
+
+function getBuildDirectionData(step) {
+  return {
+    title: 'Build',
+    intro:
+      step?.what ||
+      'This chapter explains what is physically happening in the instrument during this phase of the journey.',
+    sections: [
+      {
+        label: 'What is happening',
+        body:
+          step?.what ||
+          'This section explains what is physically happening in the build during this chapter.',
+      },
+      {
+        label: 'Techniques Used',
+        items:
+          Array.isArray(step?.techniques) && step.techniques.length
+            ? step.techniques
+            : ['Techniques for this chapter will appear here.'],
+      },
+      {
+        label: 'Tools Involved',
+        items:
+          Array.isArray(step?.tools) && step.tools.length
+            ? step.tools
+            : ['Tools for this chapter will appear here.'],
+      },
+    ],
+  };
+}
+
+function getVoiceDirectionData(step, project) {
+  const stageKey = step?.key;
+
+  const effects = getStageSpecificArray(project, stageKey, [
+    'voiceEffects',
+    'affects',
+    'sonicEffects',
+    'impactCategories',
+  ]);
+
+  const mantra =
+    getStageSpecificText(project, stageKey, [
+      'voiceMantra',
+      'mantra',
+      'value',
+      'guidingPhrase',
+    ]) ||
+    step?.mantra ||
+    'Every choice in this chapter shapes how the instrument speaks back.';
+
+  const summary =
+    getStageSpecificText(project, stageKey, [
+      'voiceSummary',
+      'voiceNarrative',
+      'why',
+      'impactSummary',
+    ]) ||
+    step?.why ||
+    'This chapter shapes the sound, response, feel, and identity of the instrument in ways that continue to build on everything that came before it.';
+
+  return {
+    title: 'Voice',
+    intro: summary,
+    sections: [
+      {
+        label: 'Why this chapter matters',
+        body: summary,
+      },
+      {
+        label: 'What this affects',
+        items:
+          effects.length > 0
+            ? effects
+            : ['Sound', 'Feel', 'Response', 'Identity'],
+      },
+      {
+        label: 'Guiding line',
+        body: mantra,
+      },
+    ],
+  };
+}
+
+function getArchiveDirectionData(step, project) {
+  const stageNumber = STAGE_MEDIA?.[step?.key]?.stageNumber || 0;
+  const stageResources = getStageResourceItems(project, stageNumber);
+
+  const summaryBits = [];
+
+  if (stageResources.items.length) {
+    summaryBits.push(
+      `${stageResources.items.length} chapter artifact${
+        stageResources.items.length === 1 ? '' : 's'
+      } currently available`
+    );
+  }
+
+  if (stageResources.signatureLink) {
+    summaryBits.push('signature item available');
+  }
+
+  if (stageResources.paymentLink) {
+    summaryBits.push('payment item available');
+  }
+
+  return {
+    title: 'Archive',
+    intro:
+      summaryBits.length > 0
+        ? summaryBits.join(' • ')
+        : 'Documents, links, approvals, media, and chapter artifacts will appear here as they are added.',
+    stageResources,
+  };
+}
+
+function slugifyArchivePart(value = '') {
+  return String(value || '')
+    .toLowerCase()
+    .trim()
+    .replace(/['"]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+function getArchiveMediaTypeFromFile(file) {
+  if (!file) return 'other';
+
+  const mime = String(file.type || '').toLowerCase();
+  const name = String(file.name || '').toLowerCase();
+
+  if (mime.startsWith('image/')) return 'image';
+  if (mime.startsWith('video/')) return 'video';
+  if (mime.startsWith('audio/')) return 'audio';
+  if (
+    mime.includes('pdf') ||
+    mime.includes('document') ||
+    mime.includes('sheet') ||
+    mime.includes('text')
+  ) {
+    return 'document';
+  }
+
+  if (/\.(png|jpg|jpeg|webp|gif|bmp|svg)$/i.test(name)) return 'image';
+  if (/\.(mp4|mov|webm|m4v)$/i.test(name)) return 'video';
+  if (/\.(mp3|wav|m4a|aac|ogg|flac)$/i.test(name)) return 'audio';
+  if (/\.(pdf|doc|docx|xls|xlsx|txt|rtf)$/i.test(name)) return 'document';
+
+  return 'other';
+}
+
+function getArchiveVisibilityLabel(visibility) {
+  if (visibility === ARCHIVE_VISIBILITY.PUBLIC) return 'Public';
+  if (visibility === ARCHIVE_VISIBILITY.ADMIN) return 'Admin only';
+  return 'Admin + Customer';
+}
+
+function getProjectArchiveItems(project, stageKey) {
+  if (!project || !stageKey) return [];
+
+  const stageNumber = STAGE_MEDIA?.[stageKey]?.stageNumber || 0;
+  const items = [];
+
+  const normalizeArchiveItem = (item, fallbackId) => {
+    const inferredType = getArchiveMediaTypeFromFile({
+      name:
+        item?.originalFileName ||
+        item?.fileName ||
+        item?.title ||
+        item?.url ||
+        '',
+      type: item?.mimeType || item?.contentType || '',
+    });
+
+    const resolvedType =
+      item?.mediaType ||
+      item?.type ||
+      (inferredType !== 'other'
+        ? inferredType
+        : getFileTypeFromUrl(item?.url, item?.type));
+
+    return {
+      ...item,
+      id: item?.id || fallbackId,
+      mediaType: resolvedType,
+      type: resolvedType,
+      visibility: item?.visibility || ARCHIVE_VISIBILITY.ADMIN,
+      captureKey: item?.captureKey || '',
+      isSuggestedCapture: !!item?.captureKey,
+      stageKey: item?.stageKey || stageKey,
+      title:
+        item?.title ||
+        item?.name ||
+        item?.originalFileName ||
+        item?.fileName ||
+        getFileNameFromUrl(item?.url),
+      originalFileName:
+        item?.originalFileName ||
+        item?.fileName ||
+        getFileNameFromUrl(item?.url),
+    };
+  };
+
+  const mediaItems = Array.isArray(project?.media) ? project.media : [];
+  mediaItems.forEach((item, index) => {
+    if (!item?.url) return;
+    if (item.stageKey && item.stageKey !== stageKey) return;
+    if (!item.stageKey && Number(item.stage || 0) !== Number(stageNumber))
+      return;
+
+    items.push(normalizeArchiveItem(item, `media-${stageKey}-${index}`));
+  });
+
+  const attachmentGroups =
+    project?.attachments && typeof project.attachments === 'object'
+      ? project.attachments
+      : {};
+
+  Object.entries(attachmentGroups).forEach(([bucketKey, arr]) => {
+    if (!Array.isArray(arr)) return;
+
+    arr.forEach((item, index) => {
+      if (!item?.url) return;
+      if (item.stageKey && item.stageKey !== stageKey) return;
+      if (!item.stageKey && Number(item.stage || 0) !== Number(stageNumber))
+        return;
+
+      items.push(
+        normalizeArchiveItem(
+          item,
+          `attachment-${bucketKey}-${stageKey}-${index}`
+        )
+      );
+    });
+  });
+
+  const stageArchiveGroups =
+    project?.stageArchive && typeof project.stageArchive === 'object'
+      ? project.stageArchive
+      : {};
+
+  const stageArchiveItems = Array.isArray(stageArchiveGroups?.[stageKey])
+    ? stageArchiveGroups[stageKey]
+    : [];
+
+  stageArchiveItems.forEach((item, index) => {
+    if (!item?.url) return;
+
+    items.push(
+      normalizeArchiveItem(item, `stage-archive-${stageKey}-${index}`)
+    );
+  });
+
+  items.sort((a, b) => {
+    const aTime = tsToMillis(a.uploadedAt || a.createdAt);
+    const bTime = tsToMillis(b.uploadedAt || b.createdAt);
+    return bTime - aTime;
+  });
+
+  return items;
+}
+
+function getStorypointsForStep(step, project = null) {
+  if (!step) return [];
+
+  const chapterNarrative = getChapterNarrative(step, project);
+  const artistDirection = getArtistDirectionData(step, project);
+  const craftsmanDirection = getCraftsmanDirectionData(step, project);
+  const buildDirection = getBuildDirectionData(step, project);
+  const voiceDirection = getVoiceDirectionData(step, project);
+  const archiveDirection = getArchiveDirectionData(step, project);
+
+  return [
+    {
+      id: 'overview',
+      icon: 'overview',
+      shortLabel: 'Overview',
+      title: chapterNarrative.title,
+      body: chapterNarrative.summary,
+      data: chapterNarrative,
+    },
+    {
+      id: 'artist-direction',
+      icon: 'artistDirection',
+      shortLabel: 'Artist Direction',
+      title: artistDirection.title,
+      body: artistDirection.intro,
+      data: artistDirection,
+    },
+    {
+      id: 'craftsman-direction',
+      icon: 'craftsmanDirection',
+      shortLabel: 'Craftsman Direction',
+      title: craftsmanDirection.title,
+      body: craftsmanDirection.intro,
+      data: craftsmanDirection,
+    },
+    {
+      id: 'build',
+      icon: 'build',
+      shortLabel: 'Build',
+      title: buildDirection.title,
+      body: buildDirection.intro,
+      data: buildDirection,
+    },
+    {
+      id: 'voice',
+      icon: 'voice',
+      shortLabel: 'Voice',
+      title: voiceDirection.title,
+      body: voiceDirection.intro,
+      data: voiceDirection,
+    },
+    {
+      id: 'archive',
+      icon: 'archive',
+      shortLabel: 'Archive',
+      title: archiveDirection.title,
+      body: archiveDirection.intro,
+      data: archiveDirection,
+    },
+  ];
+}
+
+function getChapterProgressData(step, project) {
+  if (!step || !project) {
+    return {
+      status: 'Not Started',
+      completionPct: 0,
+      completedCheckpoints: 0,
+      totalCheckpoints: 0,
+      currentSubStep: 'No sub-step selected',
+      estHours: '—',
+      avgDays: '—',
+      targetDate: 'TBD',
+    };
+  }
+
+  const statusSummary = getStepStatus(project, step);
+  const totalCheckpoints = Number(statusSummary?.total || 0);
+  const completedCheckpoints = Number(statusSummary?.done || 0);
+
+  const completionPct =
+    totalCheckpoints > 0
+      ? Math.round((completedCheckpoints / totalCheckpoints) * 100)
+      : 0;
+
+  const canonical = canonicalKeyForStage(step.key);
+  const phaseKey = getExistingPhaseKey(project, canonical);
+  const phase = project?.[phaseKey] || {};
+  const checklist = Array.isArray(phase.checklist) ? phase.checklist : [];
+  const tpl = STAGE_TEMPLATES?.[step.key];
+  const tplSteps = Array.isArray(tpl?.steps) ? tpl.steps : [];
+
+  const selectedStageIndex = STEPS.findIndex((s) => s.key === step.key);
+  const liveStageIndex = getCurrentStepIndex(project);
+  const selectedStageState = getSelectedStageMediaState(
+    selectedStageIndex,
+    liveStageIndex
+  );
+  const isSelectedStageLive = selectedStageState === STAGE_MEDIA_STATE.CURRENT;
+  const isSelectedStageCompleted =
+    selectedStageState === STAGE_MEDIA_STATE.COMPLETED;
+
+  let currentSubStep = 'No sub-step selected';
+
+  if (isSelectedStageCompleted) {
+    if (tplSteps.length > 0) {
+      const lastStep = tplSteps[tplSteps.length - 1];
+      currentSubStep =
+        lastStep?.adminMainTitle ||
+        lastStep?.label ||
+        lastStep?.adminLeftShort ||
+        `Step ${tplSteps.length}`;
+    }
+  } else if (isSelectedStageLive) {
+    for (let i = 0; i < tplSteps.length; i += 1) {
+      const tplStep = tplSteps[i];
+      const item = checklist[i] || {};
+      const checkpointStates = Array.isArray(item.checkpointStates)
+        ? item.checkpointStates
+        : [];
+
+      const checkpointCount = Array.isArray(tplStep?.checkpoints)
+        ? tplStep.checkpoints.length
+        : 0;
+
+      const checkpointDone = checkpointStates.filter(Boolean).length;
+      const isComplete =
+        checkpointCount > 0
+          ? checkpointDone === checkpointCount
+          : !!item.completed;
+
+      if (!isComplete) {
+        currentSubStep =
+          tplStep?.adminMainTitle ||
+          tplStep?.label ||
+          tplStep?.adminLeftShort ||
+          `Step ${i + 1}`;
+        break;
+      }
+    }
+
+    if (
+      currentSubStep === 'No sub-step selected' &&
+      tplSteps.length > 0 &&
+      completedCheckpoints === totalCheckpoints &&
+      totalCheckpoints > 0
+    ) {
+      const lastStep = tplSteps[tplSteps.length - 1];
+      currentSubStep =
+        lastStep?.adminMainTitle ||
+        lastStep?.label ||
+        lastStep?.adminLeftShort ||
+        `Step ${tplSteps.length}`;
+    }
+  } else {
+    const firstStep = tplSteps[0];
+    currentSubStep =
+      firstStep?.adminMainTitle ||
+      firstStep?.label ||
+      firstStep?.adminLeftShort ||
+      'Awaiting unlock';
+  }
+
+  const targetDate = getStageTargetDate(project, step.key) || 'TBD';
+
+  return {
+    status: isSelectedStageCompleted
+      ? 'Completed'
+      : isSelectedStageLive
+        ? statusSummary?.status || 'Not Started'
+        : selectedStageState === STAGE_MEDIA_STATE.NEXT
+          ? 'Up Next'
+          : 'Locked',
+    completionPct:
+      isSelectedStageLive || isSelectedStageCompleted ? completionPct : 0,
+    completedCheckpoints:
+      isSelectedStageLive || isSelectedStageCompleted
+        ? completedCheckpoints
+        : 0,
+    totalCheckpoints,
+    currentSubStep,
+    estHours: step.estHours || '—',
+    avgDays: step.avgDays || '—',
+    targetDate,
+  };
+}
+
+function getCheckpointStepStatus(item = {}, tplStep = {}) {
+  const checkpointStates = Array.isArray(item.checkpointStates)
+    ? item.checkpointStates
+    : [];
+
+  const checkpointCount = Array.isArray(tplStep?.checkpoints)
+    ? tplStep.checkpoints.length
+    : 0;
+
+  const checkpointDone = checkpointStates.filter(Boolean).length;
+
+  const isComplete =
+    checkpointCount > 0 ? checkpointDone === checkpointCount : !!item.completed;
+
+  const isStarted =
+    checkpointDone > 0 ||
+    !!item.completed ||
+    Number(item.totalSeconds || 0) > 0;
+
+  const status = isComplete
+    ? 'completed'
+    : isStarted
+      ? 'in_progress'
+      : 'upcoming';
+
+  return {
+    status,
+    done: checkpointDone,
+    total: checkpointCount,
+    isComplete,
+    isStarted,
+  };
+}
+
+function getChapterCheckpointTimeline(step, project) {
+  if (!step || !project) return [];
+
+  const canonical = canonicalKeyForStage(step.key);
+  const phaseKey = getExistingPhaseKey(project, canonical);
+  const phase = project?.[phaseKey] || {};
+  const checklist = Array.isArray(phase.checklist) ? phase.checklist : [];
+  const tpl = STAGE_TEMPLATES?.[step.key];
+  const tplSteps = Array.isArray(tpl?.steps) ? tpl.steps : [];
+
+  const selectedStageIndex = STEPS.findIndex((s) => s.key === step.key);
+  const liveStageIndex = getCurrentStepIndex(project);
+  const selectedStageState = getSelectedStageMediaState(
+    selectedStageIndex,
+    liveStageIndex
+  );
+  const isSelectedStageLive = selectedStageState === STAGE_MEDIA_STATE.CURRENT;
+  const isSelectedStageCompleted =
+    selectedStageState === STAGE_MEDIA_STATE.COMPLETED;
+
+  return tplSteps.map((tplStep, index) => {
+    const item = checklist[index] || {};
+    const checkpointStates = Array.isArray(item.checkpointStates)
+      ? item.checkpointStates
+      : [];
+
+    const checkpointCount = Array.isArray(tplStep?.checkpoints)
+      ? tplStep.checkpoints.length
+      : 0;
+
+    const checkpointDone = checkpointStates.filter(Boolean).length;
+    const isComplete =
+      checkpointCount > 0
+        ? checkpointDone === checkpointCount
+        : !!item.completed;
+
+    let status = 'upcoming';
+
+    if (isSelectedStageCompleted) {
+      status = 'completed';
+    } else if (isSelectedStageLive) {
+      const isStarted =
+        checkpointDone > 0 ||
+        !!item.completed ||
+        Number(item.totalSeconds || 0) > 0;
+
+      status = isComplete
+        ? 'completed'
+        : isStarted
+          ? 'in_progress'
+          : 'upcoming';
+    }
+
+    const firstCheckpoint = Array.isArray(tplStep?.checkpoints)
+      ? tplStep.checkpoints[0]
+      : null;
+
+    const description =
+      firstCheckpoint?.details?.[0] ||
+      firstCheckpoint?.ui ||
+      'Checkpoint details will appear here.';
+
+    return {
+      id: tplStep?.id || `${step.key}-timeline-${index}`,
+      label:
+        tplStep?.adminMainTitle ||
+        tplStep?.label ||
+        tplStep?.adminLeftShort ||
+        `Step ${index + 1}`,
+      description,
+      status,
+      done:
+        isSelectedStageLive || isSelectedStageCompleted ? checkpointDone : 0,
+      total: checkpointCount,
+    };
+  });
+}
+
+function renderStorypointSections(data) {
+  if (!data?.sections?.length) return null;
+
+  return (
+    <div className="sl-progress-stage-storypoint-data-grid">
+      {data.sections.map((section, index) => {
+        const isFull = !!section.body && !section.items?.length;
+
+        return (
+          <div
+            key={`${section.label}-${index}`}
+            className={`sl-progress-stage-storypoint-data-card ${
+              isFull ? 'sl-progress-stage-storypoint-data-card--full' : ''
+            }`}
+          >
+            <div className="sl-progress-stage-storypoint-data-label">
+              {section.label}
+            </div>
+
+            {section.body ? (
+              <div className="sl-progress-stage-storypoint-data-value sl-progress-stage-storypoint-data-value--body">
+                {section.body}
+              </div>
+            ) : null}
+
+            {section.items?.length ? (
+              <div className="sl-progress-stage-storypoint-data-value sl-progress-stage-storypoint-data-value--stack">
+                {section.items.map((item, itemIndex) => (
+                  <span
+                    key={`${section.label}-${item}-${itemIndex}`}
+                    className="sl-progress-stage-storypoint-tag"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+            ) : null}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
 
 /* =========================================================
    STAGE CHECKPOINTS PANEL
@@ -2044,28 +3093,56 @@ const StageCheckpointsPanel = ({
 
 function renderStorypointIcon(iconKey) {
   switch (iconKey) {
-    case 'progress':
+    case 'overview':
       return (
         <svg viewBox="0 0 24 24" aria-hidden="true" fill="none">
-          <circle
-            cx="12"
-            cy="12"
-            r="8.25"
+          <path
+            d="M4.5 7.5h15"
             stroke="currentColor"
             strokeWidth="1.6"
+            strokeLinecap="round"
+          />
+          <path
+            d="M4.5 12h10.5"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinecap="round"
             opacity="0.9"
           />
           <path
-            d="M12 12 L16.5 9.5"
+            d="M4.5 16.5h8"
             stroke="currentColor"
-            strokeWidth="1.8"
+            strokeWidth="1.6"
             strokeLinecap="round"
+            opacity="0.72"
           />
-          <circle cx="12" cy="12" r="1.6" fill="currentColor" />
         </svg>
       );
 
-    case 'build':
+    case 'artistDirection':
+      return (
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none">
+          <path
+            d="M12 4.8c2.9 0 5.2 2.1 5.2 4.8S14.9 14.4 12 14.4 6.8 12.3 6.8 9.6 9.1 4.8 12 4.8Z"
+            stroke="currentColor"
+            strokeWidth="1.5"
+          />
+          <path
+            d="M5.6 19.4c1.2-2.3 3.6-3.6 6.4-3.6s5.2 1.3 6.4 3.6"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+          />
+          <path
+            d="M16.7 6.3 19.4 4.7"
+            stroke="currentColor"
+            strokeWidth="1.4"
+            strokeLinecap="round"
+          />
+        </svg>
+      );
+
+    case 'craftsmanDirection':
       return (
         <svg viewBox="0 0 24 24" aria-hidden="true" fill="none">
           <path
@@ -2079,6 +3156,25 @@ function renderStorypointIcon(iconKey) {
             stroke="currentColor"
             strokeWidth="1.6"
             strokeLinecap="round"
+          />
+        </svg>
+      );
+
+    case 'build':
+      return (
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none">
+          <path
+            d="M6 18 18 6"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+          />
+          <path
+            d="M8.5 6H18v9.5"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </svg>
       );
@@ -2210,322 +3306,18 @@ function getCurrentStageAndStepLabels(project) {
   return { stageLabel, stepLabel };
 }
 
-function getStorypointsForStep(step, project = null) {
-  if (!step) return [];
-
-  const stageNumber = STAGE_MEDIA?.[step?.key]?.stageNumber || 0;
-  const stageResources = getStageResourceItems(project, stageNumber);
-
-  const resourceItems = [];
-
-  if (stageResources.items.length) {
-    resourceItems.push(
-      `${stageResources.items.length} stage resource${
-        stageResources.items.length === 1 ? '' : 's'
-      } available`
-    );
-  }
-
-  if (stageResources.signatureLink) {
-    resourceItems.push('Document ready for signature');
-  }
-
-  if (stageResources.paymentLink) {
-    resourceItems.push('Payment link available');
-  }
-
-  return [
-    {
-      id: 'progress',
-      icon: 'progress',
-      shortLabel: 'Progress',
-      title: 'Chapter progress',
-      body: 'Track where this chapter stands right now, including completion progress, estimated focused hours, target timing, and checkpoint status.',
-    },
-    {
-      id: 'build',
-      icon: 'build',
-      shortLabel: 'Build',
-      title: 'What happens in this chapter',
-      body:
-        step.what ||
-        'This section explains what is physically happening in the build during this chapter.',
-      data: {
-        summary:
-          step.what ||
-          'This section explains what is physically happening in the build during this chapter.',
-        techniques:
-          Array.isArray(step.techniques) && step.techniques.length
-            ? step.techniques
-            : [],
-        tools: Array.isArray(step.tools) && step.tools.length ? step.tools : [],
-      },
-    },
-    {
-      id: 'voice',
-      icon: 'voice',
-      shortLabel: 'Voice',
-      title: 'Why it matters',
-      body:
-        step.why ||
-        'This section explains how this chapter shapes the sound, feel, response, and identity of your drum.',
-      data: {
-        summary:
-          step.why ||
-          'This section explains how this chapter shapes the sound, feel, response, and identity of your drum.',
-        affects: ['Sound', 'Feel', 'Response', 'Identity'],
-        mantra:
-          step.mantra ||
-          'Every step in this process shapes the instrument’s final voice.',
-      },
-    },
-    {
-      id: 'archive',
-      icon: 'archive',
-      shortLabel: 'Archive',
-      title: 'Media, documents, and chapter records',
-      body:
-        resourceItems.length > 0
-          ? resourceItems.join(' • ')
-          : 'Photos, videos, documents, approvals, and other chapter records will appear here as they are added.',
-    },
-  ];
-}
-
-function getChapterProgressData(step, project) {
-  if (!step || !project) {
-    return {
-      status: 'Not Started',
-      completionPct: 0,
-      completedCheckpoints: 0,
-      totalCheckpoints: 0,
-      currentSubStep: 'No sub-step selected',
-      estHours: '—',
-      avgDays: '—',
-      targetDate: 'TBD',
-    };
-  }
-
-  const statusSummary = getStepStatus(project, step);
-  const totalCheckpoints = Number(statusSummary?.total || 0);
-  const completedCheckpoints = Number(statusSummary?.done || 0);
-
-  const completionPct =
-    totalCheckpoints > 0
-      ? Math.round((completedCheckpoints / totalCheckpoints) * 100)
-      : 0;
-
-  const canonical = canonicalKeyForStage(step.key);
-  const phaseKey = getExistingPhaseKey(project, canonical);
-  const phase = project?.[phaseKey] || {};
-  const checklist = Array.isArray(phase.checklist) ? phase.checklist : [];
-  const tpl = STAGE_TEMPLATES?.[step.key];
-  const tplSteps = Array.isArray(tpl?.steps) ? tpl.steps : [];
-
-  const selectedStageIndex = STEPS.findIndex((s) => s.key === step.key);
-  const liveStageIndex = getCurrentStepIndex(project);
-  const selectedStageState = getSelectedStageMediaState(
-    selectedStageIndex,
-    liveStageIndex
-  );
-  const isSelectedStageLive = selectedStageState === STAGE_MEDIA_STATE.CURRENT;
-  const isSelectedStageCompleted =
-    selectedStageState === STAGE_MEDIA_STATE.COMPLETED;
-
-  let currentSubStep = 'No sub-step selected';
-
-  if (isSelectedStageCompleted) {
-    if (tplSteps.length > 0) {
-      const lastStep = tplSteps[tplSteps.length - 1];
-      currentSubStep =
-        lastStep?.adminMainTitle ||
-        lastStep?.label ||
-        lastStep?.adminLeftShort ||
-        `Step ${tplSteps.length}`;
-    }
-  } else if (isSelectedStageLive) {
-    for (let i = 0; i < tplSteps.length; i += 1) {
-      const tplStep = tplSteps[i];
-      const item = checklist[i] || {};
-      const checkpointStates = Array.isArray(item.checkpointStates)
-        ? item.checkpointStates
-        : [];
-
-      const checkpointCount = Array.isArray(tplStep?.checkpoints)
-        ? tplStep.checkpoints.length
-        : 0;
-
-      const checkpointDone = checkpointStates.filter(Boolean).length;
-      const isComplete =
-        checkpointCount > 0
-          ? checkpointDone === checkpointCount
-          : !!item.completed;
-
-      if (!isComplete) {
-        currentSubStep =
-          tplStep?.adminMainTitle ||
-          tplStep?.label ||
-          tplStep?.adminLeftShort ||
-          `Step ${i + 1}`;
-        break;
-      }
-    }
-
-    if (
-      currentSubStep === 'No sub-step selected' &&
-      tplSteps.length > 0 &&
-      completedCheckpoints === totalCheckpoints &&
-      totalCheckpoints > 0
-    ) {
-      const lastStep = tplSteps[tplSteps.length - 1];
-      currentSubStep =
-        lastStep?.adminMainTitle ||
-        lastStep?.label ||
-        lastStep?.adminLeftShort ||
-        `Step ${tplSteps.length}`;
-    }
-  } else {
-    const firstStep = tplSteps[0];
-    currentSubStep =
-      firstStep?.adminMainTitle ||
-      firstStep?.label ||
-      firstStep?.adminLeftShort ||
-      'Awaiting unlock';
-  }
-
-  const targetDate = getStageTargetDate(project, step.key) || 'TBD';
-
-  return {
-    status: isSelectedStageCompleted
-      ? 'Completed'
-      : isSelectedStageLive
-        ? statusSummary?.status || 'Not Started'
-        : selectedStageState === STAGE_MEDIA_STATE.NEXT
-          ? 'Up Next'
-          : 'Locked',
-    completionPct:
-      isSelectedStageLive || isSelectedStageCompleted ? completionPct : 0,
-    completedCheckpoints:
-      isSelectedStageLive || isSelectedStageCompleted
-        ? completedCheckpoints
-        : 0,
-    totalCheckpoints,
-    currentSubStep,
-    estHours: step.estHours || '—',
-    avgDays: step.avgDays || '—',
-    targetDate,
-  };
-}
-
-function getCheckpointStepStatus(item = {}, tplStep = {}) {
-  const checkpointStates = Array.isArray(item.checkpointStates)
-    ? item.checkpointStates
-    : [];
-
-  const checkpointCount = Array.isArray(tplStep?.checkpoints)
-    ? tplStep.checkpoints.length
-    : 0;
-
-  const checkpointDone = checkpointStates.filter(Boolean).length;
-
-  const isComplete =
-    checkpointCount > 0 ? checkpointDone === checkpointCount : !!item.completed;
-
-  const isStarted =
-    checkpointDone > 0 ||
-    !!item.completed ||
-    Number(item.totalSeconds || 0) > 0;
-
-  const status = isComplete
-    ? 'completed'
-    : isStarted
-      ? 'in_progress'
-      : 'upcoming';
-
-  return {
-    status,
-    done: checkpointDone,
-    total: checkpointCount,
-    isComplete,
-    isStarted,
-  };
-}
-
-function getChapterCheckpointTimeline(step, project) {
-  if (!step || !project) return [];
-
-  const canonical = canonicalKeyForStage(step.key);
-  const phaseKey = getExistingPhaseKey(project, canonical);
-  const phase = project?.[phaseKey] || {};
-  const checklist = Array.isArray(phase.checklist) ? phase.checklist : [];
-  const tpl = STAGE_TEMPLATES?.[step.key];
-  const tplSteps = Array.isArray(tpl?.steps) ? tpl.steps : [];
-
-  const selectedStageIndex = STEPS.findIndex((s) => s.key === step.key);
-  const liveStageIndex = getCurrentStepIndex(project);
-  const selectedStageState = getSelectedStageMediaState(
-    selectedStageIndex,
-    liveStageIndex
-  );
-  const isSelectedStageLive = selectedStageState === STAGE_MEDIA_STATE.CURRENT;
-  const isSelectedStageCompleted =
-    selectedStageState === STAGE_MEDIA_STATE.COMPLETED;
-
-  return tplSteps.map((tplStep, index) => {
-    const item = checklist[index] || {};
-    const checkpointStates = Array.isArray(item.checkpointStates)
-      ? item.checkpointStates
-      : [];
-
-    const checkpointCount = Array.isArray(tplStep?.checkpoints)
-      ? tplStep.checkpoints.length
-      : 0;
-
-    const checkpointDone = checkpointStates.filter(Boolean).length;
-    const isComplete =
-      checkpointCount > 0
-        ? checkpointDone === checkpointCount
-        : !!item.completed;
-
-    let status = 'upcoming';
-
-    if (isSelectedStageCompleted) {
-      status = 'completed';
-    } else if (isSelectedStageLive) {
-      const isStarted = checkpointDone > 0 || !!item.completed;
-      status = isComplete
-        ? 'completed'
-        : isStarted
-          ? 'in_progress'
-          : 'upcoming';
-    }
-
-    const firstCheckpoint = Array.isArray(tplStep?.checkpoints)
-      ? tplStep.checkpoints[0]
-      : null;
-
-    const description =
-      firstCheckpoint?.details?.[0] ||
-      firstCheckpoint?.ui ||
-      'Checkpoint details will appear here.';
-
-    return {
-      id: tplStep?.id || `${step.key}-timeline-${index}`,
-      label:
-        tplStep?.adminMainTitle ||
-        tplStep?.label ||
-        tplStep?.adminLeftShort ||
-        `Step ${index + 1}`,
-      description,
-      status,
-      done:
-        isSelectedStageLive || isSelectedStageCompleted ? checkpointDone : 0,
-      total: checkpointCount,
-    };
-  });
-}
-
-function StageResourceViewerModal({ item, onClose }) {
+function StageResourceViewerModal({
+  item,
+  onClose,
+  isAdmin = false,
+  archiveEditorTitle = '',
+  setArchiveEditorTitle,
+  archiveEditorVisibility = ARCHIVE_VISIBILITY.ADMIN,
+  setArchiveEditorVisibility,
+  archiveEditorBusy = false,
+  onSaveMeta,
+  onDelete,
+}) {
   useEffect(() => {
     if (!item) return;
 
@@ -2541,11 +3333,14 @@ function StageResourceViewerModal({ item, onClose }) {
 
   if (!item) return null;
 
-  const embedUrl = item.type === 'video' ? getVideoEmbedUrl(item.url) : null;
-  const isImage = item.type === 'image';
-  const isVideo = item.type === 'video';
-  const isAudio = item.type === 'audio';
-  const isPdf = item.type === 'document' && isPdfUrl(item.url);
+  const resolvedType =
+    item.mediaType || item.type || getFileTypeFromUrl(item.url, item.type);
+
+  const embedUrl = resolvedType === 'video' ? getVideoEmbedUrl(item.url) : null;
+  const isImage = resolvedType === 'image';
+  const isVideo = resolvedType === 'video';
+  const isAudio = resolvedType === 'audio';
+  const isPdf = resolvedType === 'document' && isPdfUrl(item.url);
 
   return (
     <div
@@ -2562,7 +3357,7 @@ function StageResourceViewerModal({ item, onClose }) {
         <div className="sl-resource-viewer-modal-top">
           <div className="sl-resource-viewer-modal-meta">
             <div className="sl-resource-viewer-modal-kicker">
-              {formatResourceTypeLabel(item.type)}
+              {formatResourceTypeLabel(resolvedType)}
             </div>
             <div className="sl-resource-viewer-modal-title">
               {item.title || 'Stage resource'}
@@ -2637,7 +3432,7 @@ function StageResourceViewerModal({ item, onClose }) {
             </div>
           ) : null}
 
-          {item.type === 'document' ? (
+          {resolvedType === 'document' ? (
             <div className="sl-resource-viewer-modal-doc-wrap">
               {isPdf ? (
                 <iframe
@@ -2663,6 +3458,225 @@ function StageResourceViewerModal({ item, onClose }) {
             </div>
           ) : null}
         </div>
+        {isAdmin && item ? (
+          <div className="sl-resource-viewer-admin-panel">
+            <div className="sl-resource-viewer-admin-grid">
+              <div className="sl-resource-viewer-admin-field">
+                <label className="sl-resource-viewer-admin-label">
+                  File name
+                </label>
+                <input
+                  type="text"
+                  className="sl-resource-viewer-admin-input"
+                  value={archiveEditorTitle}
+                  onChange={(e) => setArchiveEditorTitle?.(e.target.value)}
+                  placeholder="Enter file name"
+                />
+              </div>
+
+              <div className="sl-resource-viewer-admin-field">
+                <label className="sl-resource-viewer-admin-label">
+                  Visibility
+                </label>
+                <select
+                  className="sl-resource-viewer-admin-select"
+                  value={archiveEditorVisibility}
+                  onChange={(e) => setArchiveEditorVisibility?.(e.target.value)}
+                >
+                  <option value={ARCHIVE_VISIBILITY.ADMIN}>Admin only</option>
+                  <option value={ARCHIVE_VISIBILITY.CUSTOMER}>
+                    Admin + artist
+                  </option>
+                  <option value={ARCHIVE_VISIBILITY.PUBLIC}>Public</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="sl-resource-viewer-admin-actions">
+              <button
+                type="button"
+                className="sl-resource-viewer-modal-btn"
+                onClick={onSaveMeta}
+                disabled={archiveEditorBusy}
+              >
+                {archiveEditorBusy ? 'Saving…' : 'Save changes'}
+              </button>
+
+              <button
+                type="button"
+                className="sl-resource-viewer-modal-btn sl-resource-viewer-modal-btn--danger"
+                onClick={onDelete}
+                disabled={archiveEditorBusy}
+              >
+                {archiveEditorBusy ? 'Working…' : 'Delete file'}
+              </button>
+            </div>
+          </div>
+        ) : null}
+      </div>
+    </div>
+  );
+}
+
+function getProjectCoverMediaOptions(project) {
+  if (!project) return [];
+
+  const items = [];
+
+  const pushIfValid = (item, source = 'project') => {
+    if (!item?.url) return;
+
+    const type = getFileTypeFromUrl(item.url, item.mediaType || item.type);
+    if (type !== 'image' && type !== 'video') return;
+
+    items.push({
+      id:
+        item.id ||
+        `${source}-${item.stageKey || item.stage || 'misc'}-${item.url}`,
+      url: item.url,
+      title:
+        item.title ||
+        item.shortLabel ||
+        item.originalFileName ||
+        item.fileName ||
+        'Untitled media',
+      type,
+      source,
+      stageKey: item.stageKey || '',
+      stage: item.stage || null,
+      visibility: item.visibility || '',
+      uploadedAt: item.uploadedAt || item.createdAt || '',
+    });
+  };
+
+  const media = Array.isArray(project.media) ? project.media : [];
+  media.forEach((item) => pushIfValid(item, 'media'));
+
+  const stageArchive =
+    project.stageArchive && typeof project.stageArchive === 'object'
+      ? project.stageArchive
+      : {};
+
+  Object.entries(stageArchive).forEach(([stageKey, arr]) => {
+    if (!Array.isArray(arr)) return;
+    arr.forEach((item) =>
+      pushIfValid(
+        {
+          ...item,
+          stageKey: item.stageKey || stageKey,
+        },
+        'stageArchive'
+      )
+    );
+  });
+
+  items.sort((a, b) => tsToMillis(b.uploadedAt) - tsToMillis(a.uploadedAt));
+
+  const seen = new Set();
+  return items.filter((item) => {
+    const key = `${item.url}__${item.type}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+function getCoverPreviewEmbedUrl(url = '', type = '') {
+  const resolvedType = getFileTypeFromUrl(url, type);
+  if (resolvedType !== 'video') return null;
+  return getVideoEmbedUrl(url);
+}
+
+function SoundLegendCoverHero({
+  title,
+  subtitle,
+  mediaUrl,
+  mediaType,
+  mediaTitle,
+  smokeVideoUrl,
+  isPreview = false,
+}) {
+  const resolvedType = getFileTypeFromUrl(mediaUrl, mediaType);
+  const embedUrl =
+    resolvedType === 'video' ? getCoverPreviewEmbedUrl(mediaUrl, mediaType) : null;
+
+  return (
+    <div
+      className={`sl-progress-soundlegend-cover-hero ${
+        isPreview ? 'is-preview' : 'is-live'
+      }`}
+    >
+      <div className="sl-progress-soundlegend-cover-media">
+        {mediaUrl ? (
+          resolvedType === 'video' ? (
+            embedUrl ? (
+              <iframe
+                src={embedUrl}
+                title="SoundLegend cover media"
+                className="sl-progress-soundlegend-cover-asset"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            ) : (
+              <video
+                src={mediaUrl}
+                className="sl-progress-soundlegend-cover-asset"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="auto"
+              />
+            )
+          ) : (
+            <img
+              src={mediaUrl}
+              alt={mediaTitle || title || 'SoundLegend cover'}
+              className="sl-progress-soundlegend-cover-asset"
+            />
+          )
+        ) : (
+          <div className="sl-progress-soundlegend-cover-empty">
+            No cover media selected yet.
+          </div>
+        )}
+
+        <div className="sl-progress-soundlegend-cover-dim" />
+
+        {smokeVideoUrl ? (
+          <video
+            className="sl-progress-soundlegend-cover-smoke"
+            src={smokeVideoUrl}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            aria-hidden="true"
+          />
+        ) : null}
+
+              <div className="sl-progress-soundlegend-cover-overlay">
+          {isPreview ? (
+            <div className="sl-progress-stage-hero-status-caption">
+              Revealed
+            </div>
+          ) : null}
+
+          <div className="sl-progress-stage-title-anchor">
+            <div className="sl-progress-hero-title-stack">
+              <div className="sl-progress-hero-title sl-progress-hero-title--center is-visible">
+                {(title || 'Your SoundLegend Story').toUpperCase()}
+              </div>
+            </div>
+
+            <div className="sl-progress-stage-title-story">
+              {subtitle || 'The completed journey of your custom instrument.'}
+            </div>
+          </div>
+        </div>
+
+        <div className="sl-progress-soundlegend-cover-badge">REVEALED</div>
       </div>
     </div>
   );
@@ -2673,7 +3687,7 @@ function StageResourceViewerModal({ item, onClose }) {
    ========================================================= */
 
 const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
-    const cachedInitialProject = useMemo(
+  const cachedInitialProject = useMemo(
     () => initialProject || readProjectProgressCache(initialProject),
     [initialProject]
   );
@@ -2682,41 +3696,82 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
   const [loading, setLoading] = useState(!cachedInitialProject);
   const [activeKey, setActiveKey] = useState(STEPS[0].key);
 
+  const [archiveEditorBusy, setArchiveEditorBusy] = useState(false);
+  const [archiveEditorTitle, setArchiveEditorTitle] = useState('');
+  const [archiveEditorVisibility, setArchiveEditorVisibility] = useState(
+    ARCHIVE_VISIBILITY.ADMIN
+  );
+
+  const [revealPanelBusy, setRevealPanelBusy] = useState(false);
+
+  const [revealCoverTitle, setRevealCoverTitle] = useState(
+    'Your SoundLegend Story'
+  );
+  const [revealCoverSubtitle, setRevealCoverSubtitle] = useState(
+    'The completed journey of your custom instrument.'
+  );
+  const [revealCoverMediaUrl, setRevealCoverMediaUrl] = useState('');
+  const [revealCoverMediaTitle, setRevealCoverMediaTitle] = useState('');
+  const [revealCoverMediaType, setRevealCoverMediaType] = useState('image');
+
+  const [revealChecklist, setRevealChecklist] = useState({
+    coverMediaSelected: false,
+    chapterMediaReviewed: false,
+    visibilityReviewed: false,
+    customerStoryApproved: false,
+    shipmentConfirmed: false,
+    finalReviewComplete: false,
+  });
+
   const [displayedStageKey, setDisplayedStageKey] = useState(STEPS[0].key);
   const [displayedOverlayStageKey, setDisplayedOverlayStageKey] = useState(
     STEPS[0].key
   );
 
-const cachedStageMedia = useMemo(
-  () => readProjectProgressStageMediaCache(),
-  []
-);
+  const cachedStageMedia = useMemo(
+    () => readProjectProgressStageMediaCache(),
+    []
+  );
 
-const hasCachedStageMedia = useMemo(() => {
-  if (!cachedStageMedia) return false;
-  return STEPS.every((step) => cachedStageMedia[getStageMediaCacheKey(step.key)]);
-}, [cachedStageMedia]);
+  const hasCachedStageMedia = useMemo(() => {
+    if (!cachedStageMedia) return false;
+    return STEPS.every(
+      (step) => cachedStageMedia[getStageMediaCacheKey(step.key)]
+    );
+  }, [cachedStageMedia]);
 
-const [selectedStageMediaCache, setSelectedStageMediaCache] = useState(
-  cachedStageMedia || {}
-);
+  const [selectedStageMediaCache, setSelectedStageMediaCache] = useState(
+    cachedStageMedia || {}
+  );
 
-const [allStageMediaReady, setAllStageMediaReady] = useState(
-  hasCachedStageMedia
-);
-const [loadedAssetCount, setLoadedAssetCount] = useState(
-  hasCachedStageMedia ? STEPS.length * 2 : 0
-);
-const [totalAssetCount, setTotalAssetCount] = useState(STEPS.length * 2);
+  const [allStageMediaReady, setAllStageMediaReady] =
+    useState(hasCachedStageMedia);
+  const [loadedAssetCount, setLoadedAssetCount] = useState(
+    hasCachedStageMedia ? STEPS.length * 2 : 0
+  );
+  const [totalAssetCount, setTotalAssetCount] = useState(STEPS.length * 2);
 
-  const [hoveredStorypointId, sethoveredStorypointId] = useState(null);
-  const [pinnedStorypointId, setpinnedStorypointId] = useState(null);
+  const [hoveredStorypointId, setHoveredStorypointId] = useState(null);
+  const [pinnedStorypointId, setPinnedStorypointId] = useState(null);
   const [activeInteractiveStepId, setActiveInteractiveStepId] = useState(null);
 
   const [carouselAnimating, setCarouselAnimating] = useState(false);
   const [dragOffsetX, setDragOffsetX] = useState(0);
 
   const [selectedResourceItem, setSelectedResourceItem] = useState(null);
+
+  const [archiveUploading, setArchiveUploading] = useState(false);
+  const [archiveUploadError, setArchiveUploadError] = useState('');
+  const [selectedCaptureKey, setSelectedCaptureKey] = useState('');
+  const [customArchiveTitle, setCustomArchiveTitle] = useState('');
+  const [selectedArchiveVisibility, setSelectedArchiveVisibility] = useState(
+    ARCHIVE_VISIBILITY.ADMIN
+  );
+
+  const [coverUploadBusy, setCoverUploadBusy] = useState(false);
+  const [coverUploadError, setCoverUploadError] = useState('');
+  const [selectedExistingCoverId, setSelectedExistingCoverId] = useState('');
+  const coverRevealFileInputRef = useRef(null);
 
   const [sharedSmokeVideoUrl, setSharedSmokeVideoUrl] = useState('');
 
@@ -2732,13 +3787,103 @@ const [totalAssetCount, setTotalAssetCount] = useState(STEPS.length * 2);
   const dragDeltaXRef = useRef(0);
   const isDraggingRef = useRef(false);
 
+  const archiveFileInputRef = useRef(null);
+
+  const [selectedArchiveCaptureKey, setSelectedArchiveCaptureKey] =
+    useState('');
+  const [archiveIsDragging, setArchiveIsDragging] = useState(false);
+  const [archiveUploadProgress, setArchiveUploadProgress] = useState(0);
+
   const [displayTitleText, setDisplayTitleText] = useState(
     (STEPS[0]?.label || '').toUpperCase()
   );
   const [incomingTitleText, setIncomingTitleText] = useState('');
   const [titleTransitioning, setTitleTransitioning] = useState(false);
 
-    useEffect(() => {
+  const projectCoverMediaOptions = useMemo(
+    () => getProjectCoverMediaOptions(project),
+    [project]
+  );
+
+  const selectedExistingCoverOption = useMemo(() => {
+    return (
+      projectCoverMediaOptions.find(
+        (item) => item.id === selectedExistingCoverId
+      ) || null
+    );
+  }, [projectCoverMediaOptions, selectedExistingCoverId]);
+
+  const handleSelectExistingCoverMedia = (mediaId) => {
+    setSelectedExistingCoverId(mediaId);
+
+    const selected = projectCoverMediaOptions.find(
+      (item) => item.id === mediaId
+    );
+    if (!selected) return;
+
+    setRevealCoverMediaUrl(selected.url || '');
+    setRevealCoverMediaType(selected.type || 'image');
+    setRevealCoverMediaTitle(selected.title || '');
+  };
+
+  const openCoverRevealFilePicker = () => {
+    if (!isAdmin || coverUploadBusy) return;
+    const input = coverRevealFileInputRef.current;
+    if (!input) return;
+    input.value = '';
+    input.click();
+  };
+
+  const handleCoverRevealUpload = async (file) => {
+    if (!file || !project?.id) return;
+
+    try {
+      setCoverUploadBusy(true);
+      setCoverUploadError('');
+
+      const mediaType = getArchiveMediaTypeFromFile(file);
+      if (mediaType !== 'image' && mediaType !== 'video') {
+        throw new Error(
+          'Only image and video files are allowed for the cover.'
+        );
+      }
+
+      const extension =
+        getFileExtension(file.name) || file.name.split('.').pop() || 'bin';
+
+      const safeBase = slugifyArchivePart(
+        file.name.replace(/\.[^/.]+$/, '') || 'soundlegend-cover'
+      );
+
+      const fileName = `soundlegend-cover-${Date.now()}-${safeBase}.${extension}`;
+      const path = `projects/${project.id}/soundlegendReveal/${fileName}`;
+      const fileRef = storageRef(storage, path);
+
+      await uploadBytes(fileRef, file);
+      const url = await getDownloadURL(fileRef);
+
+      setRevealCoverMediaUrl(url);
+      setRevealCoverMediaType(mediaType);
+      setRevealCoverMediaTitle(
+        file.name.replace(/\.[^/.]+$/, '') || 'SoundLegend Cover Media'
+      );
+      setSelectedExistingCoverId('');
+    } catch (err) {
+      console.error('Failed uploading reveal cover media:', err);
+      setCoverUploadError(err.message || 'Failed to upload cover media.');
+    } finally {
+      setCoverUploadBusy(false);
+    }
+  };
+
+  const handleCoverRevealFileInputChange = async (event) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    await handleCoverRevealUpload(file);
+    event.target.value = '';
+  };
+
+  useEffect(() => {
     if (initialProject) return;
 
     const cached = readProjectProgressCache(project);
@@ -2752,7 +3897,9 @@ const [totalAssetCount, setTotalAssetCount] = useState(STEPS.length * 2);
     if (!initialProject) return;
 
     setProject((prev) => {
-            if (!prev) return initialProject || readProjectProgressCache(initialProject);
+      if (!prev) {
+        return initialProject || readProjectProgressCache(initialProject);
+      }
 
       const incomingId =
         initialProject.id ||
@@ -2776,34 +3923,78 @@ const [totalAssetCount, setTotalAssetCount] = useState(STEPS.length * 2);
 
   useEffect(() => {
     setSelectedResourceItem(null);
+    setArchiveUploadError('');
+    setSelectedCaptureKey('');
+    setCustomArchiveTitle('');
+    setSelectedArchiveVisibility(ARCHIVE_VISIBILITY.ADMIN);
   }, [activeKey]);
 
-useEffect(() => {
-  let cancelled = false;
-
-  const cached = readProjectProgressStageMediaCache();
-  const hasCompleteCache =
-    cached &&
-    STEPS.every((step) => cached[getStageMediaCacheKey(step.key)]);
-
-  if (hasCompleteCache) {
-    setSelectedStageMediaCache(cached);
-    setLoadedAssetCount(STEPS.length * 2);
-    setTotalAssetCount(STEPS.length * 2);
-    setAllStageMediaReady(true);
-
-    const cachedSmokeUrl =
-      Object.values(cached).find((bundle) => bundle?.smokeVideoUrl)
-        ?.smokeVideoUrl || '';
-
-    if (cachedSmokeUrl) {
-      setSharedSmokeVideoUrl(cachedSmokeUrl);
+  useEffect(() => {
+    if (!selectedResourceItem) {
+      setArchiveEditorTitle('');
+      setArchiveEditorVisibility(ARCHIVE_VISIBILITY.ADMIN);
+      return;
     }
 
-    return;
-  }
+    setArchiveEditorTitle(
+      selectedResourceItem.title ||
+        selectedResourceItem.shortLabel ||
+        selectedResourceItem.originalFileName ||
+        selectedResourceItem.fileName ||
+        ''
+    );
 
-  const preloadAllStageMedia = async () => {
+    setArchiveEditorVisibility(
+      selectedResourceItem.visibility || ARCHIVE_VISIBILITY.ADMIN
+    );
+  }, [selectedResourceItem]);
+
+  useEffect(() => {
+    const reveal = project?.soundlegendReveal || {};
+
+    setRevealCoverTitle(reveal.coverTitle || 'Your SoundLegend Story');
+    setRevealCoverSubtitle(
+      reveal.coverSubtitle || 'The completed journey of your custom instrument.'
+    );
+    setRevealCoverMediaUrl(reveal.coverMediaUrl || '');
+    setRevealCoverMediaTitle(reveal.coverMediaTitle || '');
+    setRevealCoverMediaType(reveal.coverMediaType || 'image');
+
+    setRevealChecklist({
+      coverMediaSelected: !!reveal.adminChecklist?.coverMediaSelected,
+      chapterMediaReviewed: !!reveal.adminChecklist?.chapterMediaReviewed,
+      visibilityReviewed: !!reveal.adminChecklist?.visibilityReviewed,
+      customerStoryApproved: !!reveal.adminChecklist?.customerStoryApproved,
+      shipmentConfirmed: !!reveal.adminChecklist?.shipmentConfirmed,
+      finalReviewComplete: !!reveal.adminChecklist?.finalReviewComplete,
+    });
+  }, [project]);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const cached = readProjectProgressStageMediaCache();
+    const hasCompleteCache =
+      cached && STEPS.every((step) => cached[getStageMediaCacheKey(step.key)]);
+
+    if (hasCompleteCache) {
+      setSelectedStageMediaCache(cached);
+      setLoadedAssetCount(STEPS.length * 2);
+      setTotalAssetCount(STEPS.length * 2);
+      setAllStageMediaReady(true);
+
+      const cachedSmokeUrl =
+        Object.values(cached).find((bundle) => bundle?.smokeVideoUrl)
+          ?.smokeVideoUrl || '';
+
+      if (cachedSmokeUrl) {
+        setSharedSmokeVideoUrl(cachedSmokeUrl);
+      }
+
+      return;
+    }
+
+    const preloadAllStageMedia = async () => {
       try {
         setAllStageMediaReady(false);
         setLoadedAssetCount(0);
@@ -2858,12 +4049,12 @@ useEffect(() => {
           }
         }
 
-if (!cancelled) {
-  setSelectedStageMediaCache(nextCache);
-  writeProjectProgressStageMediaCache(nextCache);
-  setLoadedAssetCount(STEPS.length * 2);
-  setAllStageMediaReady(true);
-}
+        if (!cancelled) {
+          setSelectedStageMediaCache(nextCache);
+          writeProjectProgressStageMediaCache(nextCache);
+          setLoadedAssetCount(STEPS.length * 2);
+          setAllStageMediaReady(true);
+        }
       } catch (err) {
         console.error('Failed preloading all stage media bundles:', err);
         if (!cancelled) {
@@ -2929,7 +4120,7 @@ if (!cancelled) {
     return () => unsub();
   }, [initialProject]);
 
-    useEffect(() => {
+  useEffect(() => {
     if (!project) return;
     writeProjectProgressCache(initialProject || project, project);
   }, [project, initialProject]);
@@ -2942,23 +4133,12 @@ if (!cancelled) {
     [project, overallPct]
   );
 
-  useEffect(() => {
-    if (!project?.id) return;
-    const def = STEPS[currentStepIndex] || STEPS[0];
-    setActiveKey(def.key);
-
-    if (!transitionLockRef.current) {
-      setDisplayedStageKey(def.key);
-      setDisplayedOverlayStageKey(def.key);
-    }
-  }, [project, currentStepIndex]);
-
   const openStorypoint = (id) => {
     if (eduPanelCloseTimerRef.current) {
       clearTimeout(eduPanelCloseTimerRef.current);
       eduPanelCloseTimerRef.current = null;
     }
-    sethoveredStorypointId(id);
+    setHoveredStorypointId(id);
   };
 
   const scheduleCloseStorypoint = () => {
@@ -2969,7 +4149,7 @@ if (!cancelled) {
     }
 
     eduPanelCloseTimerRef.current = setTimeout(() => {
-      sethoveredStorypointId(null);
+      setHoveredStorypointId(null);
     }, 180);
   };
 
@@ -2978,8 +4158,8 @@ if (!cancelled) {
       clearTimeout(eduPanelCloseTimerRef.current);
       eduPanelCloseTimerRef.current = null;
     }
-    sethoveredStorypointId(null);
-    setpinnedStorypointId(null);
+    setHoveredStorypointId(null);
+    setPinnedStorypointId(null);
   };
 
   const togglePinnedStorypoint = (id) => {
@@ -2988,8 +4168,8 @@ if (!cancelled) {
       eduPanelCloseTimerRef.current = null;
     }
 
-    setpinnedStorypointId((prev) => (prev === id ? null : id));
-    sethoveredStorypointId(id);
+    setPinnedStorypointId((prev) => (prev === id ? null : id));
+    setHoveredStorypointId(id);
   };
 
   useEffect(() => {
@@ -3030,17 +4210,167 @@ if (!cancelled) {
   const { stageLabel: currentStageLabel, stepLabel: currentStepLabel } =
     useMemo(() => getCurrentStageAndStepLabels(project), [project]);
 
-  const activeStep = STEPS.find((s) => s.key === activeKey) || STEPS[0];
-  const activeIndex = STEPS.findIndex((s) => s.key === activeKey);
+  const revealData = project?.soundlegendReveal || {};
+  const revealIsDeployed = !!revealData.revealDeployed;
+  const revealIsReady = !!revealData.revealReady;
 
-  const chapterLabel = `Chapter ${toRomanChapter(activeIndex + 1)}`;
-
-  const activeChapterHeading = `${chapterLabel} — ${activeStep.label}`;
-
-  const currentStageStorypoints = useMemo(
-    () => getStorypointsForStep(activeStep, project),
-    [activeStep, project]
+  const revealCoverIsAvailable = !!(
+    revealCoverMediaUrl &&
+    (revealCoverMediaType === 'image' || revealCoverMediaType === 'video')
   );
+
+  const storyChapters = useMemo(() => {
+    const chapters = [...STEPS];
+
+    if (revealIsDeployed && revealCoverIsAvailable) {
+      chapters.unshift({
+        key: 'soundlegendCover',
+        label: revealCoverTitle || 'SoundLegend Story',
+        adminMainTitle: revealCoverTitle || 'SoundLegend Story',
+        adminLeftShort: 'Cover',
+        what:
+          revealCoverSubtitle ||
+          'The completed journey of your custom instrument.',
+        why: '',
+        techniques: [],
+        tools: [],
+        estHours: '—',
+        avgDays: '—',
+        mantra: '',
+        storageKeys: [],
+        isRevealCover: true,
+        coverMediaUrl: revealCoverMediaUrl,
+        coverMediaTitle: revealCoverMediaTitle,
+        coverMediaType: revealCoverMediaType,
+      });
+    }
+
+    if (overallPct >= 100) {
+      chapters.push({
+        key: 'soundlegendEpilogue',
+        label: 'From Ober Artisan',
+        adminMainTitle: 'From Ober Artisan',
+        adminLeftShort: 'Finale',
+        what: 'A final note of gratitude, care guidance, guarantee details, and next steps for life with your SoundLegend instrument.',
+        why: '',
+        techniques: [],
+        tools: [],
+        estHours: '—',
+        avgDays: '—',
+        mantra: 'Continue creating.',
+        storageKeys: [],
+        isFinaleChapter: true,
+      });
+    }
+
+    return chapters;
+  }, [
+    overallPct,
+    revealIsDeployed,
+    revealCoverIsAvailable,
+    revealCoverTitle,
+    revealCoverSubtitle,
+    revealCoverMediaUrl,
+    revealCoverMediaTitle,
+    revealCoverMediaType,
+  ]);
+
+  useEffect(() => {
+    if (!project?.id) return;
+    if (transitionLockRef.current) return;
+
+    const liveDef = STEPS[currentStepIndex] || STEPS[0];
+    if (!liveDef?.key) return;
+
+    const isSpecialChapter =
+      activeKey === 'soundlegendCover' || activeKey === 'soundlegendEpilogue';
+
+    const activeKeyIsRealStoryStage = storyChapters.some(
+      (chapter) => chapter.key === activeKey
+    );
+
+    if (!activeKeyIsRealStoryStage) {
+      setActiveKey(liveDef.key);
+      setDisplayedStageKey(liveDef.key);
+      setDisplayedOverlayStageKey(liveDef.key);
+      return;
+    }
+
+    if (isAdmin && isSpecialChapter) return;
+  }, [project?.id, currentStepIndex, isAdmin, activeKey, storyChapters]);
+
+  const activeStep =
+    storyChapters.find((s) => s.key === activeKey) || storyChapters[0];
+  const activeIndex = storyChapters.findIndex((s) => s.key === activeKey);
+
+  const isRevealCoverChapter = activeStep?.key === 'soundlegendCover';
+  const isLegacyChapter = activeStep?.key === 'soundlegendEpilogue';
+
+  const legacyChapterContent = useMemo(() => {
+    return getLegacyChapterContent(project, isAdmin);
+  }, [project, isAdmin]);
+
+  const chapterLabel =
+    activeStep?.key === 'soundlegendCover'
+      ? 'Cover'
+      : activeStep?.key === 'soundlegendEpilogue'
+        ? 'Legacy Chapter'
+        : `Chapter ${toRomanChapter(
+            Math.max(
+              1,
+              storyChapters
+                .filter(
+                  (chapter) =>
+                    chapter.key !== 'soundlegendCover' &&
+                    chapter.key !== 'soundlegendEpilogue'
+                )
+                .findIndex((chapter) => chapter.key === activeStep?.key) + 1
+            )
+          )}`;
+
+  const chapterNarrative = useMemo(() => {
+    if (isLegacyChapter) {
+      return {
+        title: legacyChapterContent.title,
+        summary:
+          'Thank you for trusting me with something this personal. The build is complete. Now the story — and the sound — belong to you.',
+        sentences: [
+          'Thank you for trusting me with something this personal. The build is complete. Now the story — and the sound — belong to you.',
+        ],
+      };
+    }
+
+    if (isRevealCoverChapter) {
+      return {
+        title: revealCoverTitle || 'Your SoundLegend Story',
+        summary:
+          revealCoverSubtitle ||
+          'The completed journey of your custom instrument.',
+        sentences: [
+          revealCoverSubtitle ||
+            'The completed journey of your custom instrument.',
+        ],
+      };
+    }
+
+    return getChapterNarrative(activeStep, project);
+  }, [
+    activeStep,
+    project,
+    isLegacyChapter,
+    isRevealCoverChapter,
+    legacyChapterContent,
+    revealCoverTitle,
+    revealCoverSubtitle,
+  ]);
+
+  const currentStageStorypoints = useMemo(() => {
+    if (isLegacyChapter || isRevealCoverChapter) {
+      return [];
+    }
+
+    return getStorypointsForStep(activeStep, project);
+  }, [activeStep, project, isLegacyChapter, isRevealCoverChapter]);
 
   const currentChapterProgressData = useMemo(
     () => getChapterProgressData(activeStep, project),
@@ -3055,7 +4385,14 @@ if (!cancelled) {
   const currentStageTemplate = STAGE_TEMPLATES?.[activeStep.key] || null;
 
   const currentStageInteractiveSteps = useMemo(() => {
-    if (!project || !currentStageTemplate) return [];
+    if (
+      !project ||
+      !currentStageTemplate ||
+      activeStep?.key === 'soundlegendCover' ||
+      activeStep?.key === 'soundlegendEpilogue'
+    ) {
+      return [];
+    }
 
     const canonical = canonicalKeyForStage(activeStep.key);
     const phaseKey = getExistingPhaseKey(project, canonical);
@@ -3101,8 +4438,7 @@ if (!cancelled) {
             : 'Checkpoint details will appear here.',
       };
     });
-  }, [project, currentStageTemplate, activeStep.key]);
-
+  }, [project, currentStageTemplate, activeStep]);
   const resolvedStorypointId = pinnedStorypointId || hoveredStorypointId;
 
   const activeStorypoint =
@@ -3113,6 +4449,59 @@ if (!cancelled) {
     () => getStageResourceItems(project, activeIndex + 1),
     [project, activeIndex]
   );
+
+  const activeStageArchiveDefinition = useMemo(
+    () => getStageArchiveDefinition(activeStep?.key),
+    [activeStep?.key]
+  );
+
+  const activeStageSuggestedCaptures = useMemo(
+    () => getStageSuggestedCaptures(activeStep?.key),
+    [activeStep?.key]
+  );
+
+  const activeStageAdminCaptureChecklist = useMemo(
+    () => getStageAdminCaptureChecklist(activeStep?.key),
+    [activeStep?.key]
+  );
+
+  const activeStageArchiveItems = useMemo(
+    () => getProjectArchiveItems(project, activeStep?.key),
+    [project, activeStep?.key]
+  );
+
+  const revealChecklistComplete = useMemo(() => {
+    return Object.values(revealChecklist).every(Boolean);
+  }, [revealChecklist]);
+
+  const projectMarkedComplete = overallPct >= 100;
+
+  const legacyTrackingText = project?.soundlegendReveal?.trackingNumber?.trim()
+    ? `${project?.soundlegendReveal?.shippingCarrier || 'Carrier'} • ${
+        project.soundlegendReveal.trackingNumber
+      }`
+    : 'Tracking details will become available in the next 24 hours.';
+
+  const legacyFinalNoteText =
+    project?.soundlegendReveal?.finalAdminNote?.trim() ||
+    'Your instrument is complete, but the story continues every time you sit down to play.';
+
+  const handleSaveLegacyChapterDetails = async () => {
+    try {
+      setRevealPanelBusy(true);
+
+      await saveRevealSettings({
+        shippingCarrier: project?.soundlegendReveal?.shippingCarrier || '',
+        trackingNumber: project?.soundlegendReveal?.trackingNumber || '',
+        finalAdminNote: project?.soundlegendReveal?.finalAdminNote || '',
+      });
+    } catch (err) {
+      console.error('Failed saving legacy chapter details:', err);
+      alert('Failed to save legacy chapter details.');
+    } finally {
+      setRevealPanelBusy(false);
+    }
+  };
 
   useEffect(() => {
     const nextTitle = (activeStep?.label || '').toUpperCase();
@@ -3132,19 +4521,53 @@ if (!cancelled) {
     return () => window.clearTimeout(swapTimer);
   }, [activeStep?.label, displayTitleText]);
 
-  const prevStep = activeIndex > 0 ? STEPS[activeIndex - 1] : null;
-  const nextStep =
-    activeIndex < STEPS.length - 1 ? STEPS[activeIndex + 1] : null;
+  const activeStepCompletionStatus =
+    !isRevealCoverChapter && !isLegacyChapter && activeStep
+      ? String(getStepStatus(project, activeStep).status || '').toLowerCase()
+      : '';
 
-  const currentStageStatus = getSelectedStageMediaState(
-    activeIndex,
-    currentStepIndex
+  const currentStageStatus =
+    activeStep?.key === 'soundlegendCover'
+      ? STAGE_MEDIA_STATE.COMPLETED
+      : activeStep?.key === 'soundlegendEpilogue'
+        ? projectMarkedComplete
+          ? STAGE_MEDIA_STATE.COMPLETED
+          : STAGE_MEDIA_STATE.FUTURE
+        : activeStepCompletionStatus === 'completed'
+          ? STAGE_MEDIA_STATE.COMPLETED
+          : getSelectedStageMediaState(
+              STEPS.findIndex((s) => s.key === activeStep?.key),
+              currentStepIndex
+            );
+
+  const canonicalActiveStageIndex = STEPS.findIndex(
+    (s) => s.key === activeStep?.key
   );
 
-  const stageStatePresentation = getStageStatePresentation(
-    activeIndex,
-    currentStepIndex
-  );
+  const stageStatePresentation = isLegacyChapter
+    ? {
+        eyebrow: '',
+        pill: '',
+        helper:
+          'Your instrument is finished. This final chapter marks the handoff from maker to artist.',
+      }
+    : isRevealCoverChapter
+      ? {
+          eyebrow: 'SoundLegend Reveal',
+          pill: 'Revealed',
+          helper: 'This is the front cover of the completed SoundLegend story.',
+        }
+      : activeStepCompletionStatus === 'completed'
+        ? {
+            eyebrow: 'Chapter Completed',
+            pill: 'Completed',
+            helper:
+              'This chapter is complete and now lives as part of your build archive.',
+          }
+        : getStageStatePresentation(
+            canonicalActiveStageIndex,
+            currentStepIndex
+          );
 
   const isSelectedStageLocked = currentStageStatus === STAGE_MEDIA_STATE.FUTURE;
 
@@ -3155,20 +4578,31 @@ if (!cancelled) {
 
   useEffect(() => {
     if (!showStageStorypoints) {
-      sethoveredStorypointId(null);
-      setpinnedStorypointId(null);
+      setHoveredStorypointId(null);
+      setPinnedStorypointId(null);
     }
   }, [showStageStorypoints]);
 
   const displayedOverlayStageIndex = Math.max(
     0,
-    STEPS.findIndex((s) => s.key === displayedOverlayStageKey)
+    storyChapters.findIndex((s) => s.key === displayedOverlayStageKey)
   );
 
-  const displayedStageStatus = getSelectedStageMediaState(
-    displayedOverlayStageIndex,
-    currentStepIndex
+  const displayedStageStep =
+    storyChapters.find((s) => s.key === displayedStageKey) || null;
+
+  const displayedStageIndex = Math.max(
+    0,
+    storyChapters.findIndex((s) => s.key === displayedStageKey)
   );
+
+  const displayedStageStatus = getResolvedVisualStageState({
+    project,
+    step: displayedStageStep,
+    stageIndex: displayedStageIndex,
+    currentStepIndex,
+    projectMarkedComplete,
+  });
 
   const SMOKE_OPACITY_BY_STAGE_STATE = {
     [STAGE_MEDIA_STATE.COMPLETED]: 0.0,
@@ -3184,11 +4618,23 @@ if (!cancelled) {
     [STAGE_MEDIA_STATE.FUTURE]: 0.96,
   };
 
-  const smokeOverlayOpacity =
-    SMOKE_OPACITY_BY_STAGE_STATE[displayedStageStatus] ?? 0.6;
+  const isLegacyStageVisible =
+    displayedStageKey === 'soundlegendEpilogue' ||
+    activeStep?.key === 'soundlegendEpilogue';
 
-  const lockedStageVeilOpacity =
-    VEIL_OPACITY_BY_STAGE_STATE[displayedStageStatus] ?? 0;
+ const isCoverStageVisible =
+  displayedStageKey === 'soundlegendCover' ||
+  activeStep?.key === 'soundlegendCover';
+
+const smokeOverlayOpacity = isLegacyStageVisible
+  ? 0.48
+  : isCoverStageVisible
+    ? 0.48
+    : (SMOKE_OPACITY_BY_STAGE_STATE[displayedStageStatus] ?? 0.6);
+
+const lockedStageVeilOpacity = isLegacyStageVisible || isCoverStageVisible
+  ? 0
+  : (VEIL_OPACITY_BY_STAGE_STATE[displayedStageStatus] ?? 0);
 
   const activeStatus = useMemo(() => {
     if (!project || !activeStep) return 'not_started';
@@ -3205,13 +4651,7 @@ if (!cancelled) {
     return computed;
   }, [project, activeStep]);
 
-  const stageTarget = useMemo(
-    () => getStageTargetDate(project, activeStep.key),
-    [project, activeStep.key]
-  );
-
   const showEducationAndCheckpoints = activeIndex <= currentStepIndex;
-
   const selectedStageThemeClass =
     activeStatus === 'completed'
       ? 'is-theme-completed'
@@ -3222,61 +4662,117 @@ if (!cancelled) {
           : 'is-theme-default';
 
   const canGoPrev = activeIndex > 0;
-  const canGoNext = activeIndex < STEPS.length - 1;
+  const canGoNext = activeIndex < storyChapters.length - 1;
+  const prevStep = canGoPrev ? storyChapters[activeIndex - 1] : null;
+  const nextStep = canGoNext ? storyChapters[activeIndex + 1] : null;
 
-  const getStageMediaForIndex = (stageIndex) => {
-    if (stageIndex < 0 || stageIndex >= STEPS.length) return null;
+const getStageMediaForStep = (step) => {
+  if (!step?.key) return null;
 
-    const step = STEPS[stageIndex];
-    const mediaState = getSelectedStageMediaState(stageIndex, currentStepIndex);
-    const cacheKey = getStageMediaCacheKey(step.key);
-    const bundle = selectedStageMediaCache[cacheKey];
+  if (step.key === 'soundlegendCover') {
+    const coverUrl =
+      step.coverMediaUrl ||
+      project?.soundlegendReveal?.coverMediaUrl ||
+      '';
 
-    if (!bundle) return null;
+    const coverType =
+      step.coverMediaType ||
+      project?.soundlegendReveal?.coverMediaType ||
+      getFileTypeFromUrl(coverUrl);
 
-    const isCompleted = mediaState === STAGE_MEDIA_STATE.COMPLETED;
-    const isCurrent = mediaState === STAGE_MEDIA_STATE.CURRENT;
-    const isNext = mediaState === STAGE_MEDIA_STATE.NEXT;
-    const isFuture = mediaState === STAGE_MEDIA_STATE.FUTURE;
-
-    let baseImageUrl = '';
-
-    if (isCompleted || isCurrent) {
-      baseImageUrl = bundle.currentImageUrl || bundle.archivedImageUrl || '';
-    } else if (isNext) {
-      baseImageUrl = bundle.archivedImageUrl || bundle.currentImageUrl || '';
-    } else if (isFuture) {
-      baseImageUrl = '';
-    }
+    if (!coverUrl) return null;
 
     return {
       stageKey: step.key,
       stageLabel: step.label,
-      mediaState,
-      baseImageUrl,
+      mediaState: STAGE_MEDIA_STATE.CURRENT,
+      baseImageUrl: coverType === 'image' ? coverUrl : '',
+      coverMediaUrl: coverUrl,
+      coverMediaType: coverType,
+      isCoverMedia: true,
     };
-  };
+  }
 
-  const allRenderableStageLayers = useMemo(() => {
-    return STEPS.map((step, index) => {
-      const media = getStageMediaForIndex(index);
+  if (step.key === 'soundlegendEpilogue') {
+    return null;
+  }
+
+  const canonicalStageIndex = STEPS.findIndex((s) => s.key === step.key);
+  if (canonicalStageIndex < 0) return null;
+
+  const mediaState = getResolvedVisualStageState({
+    project,
+    step,
+    stageIndex: canonicalStageIndex,
+    currentStepIndex,
+    projectMarkedComplete,
+  });
+
+  const cacheKey = getStageMediaCacheKey(step.key);
+  const bundle = selectedStageMediaCache[cacheKey];
+
+  if (!bundle) return null;
+
+  const isCompleted = mediaState === STAGE_MEDIA_STATE.COMPLETED;
+  const isCurrent = mediaState === STAGE_MEDIA_STATE.CURRENT;
+  const isNext = mediaState === STAGE_MEDIA_STATE.NEXT;
+  const isFuture = mediaState === STAGE_MEDIA_STATE.FUTURE;
+
+  let baseImageUrl = '';
+
+  if (isCompleted || isCurrent) {
+    baseImageUrl = bundle.currentImageUrl || bundle.archivedImageUrl || '';
+  } else if (isNext) {
+    baseImageUrl = bundle.archivedImageUrl || bundle.currentImageUrl || '';
+  } else if (isFuture) {
+    baseImageUrl = '';
+  }
+
+  return {
+    stageKey: step.key,
+    stageLabel: step.label,
+    mediaState,
+    baseImageUrl,
+    coverMediaUrl: '',
+    coverMediaType: '',
+    isCoverMedia: false,
+  };
+};
+
+const allRenderableStageLayers = useMemo(() => {
+  return storyChapters
+    .map((step) => {
+      const media = getStageMediaForStep(step);
 
       return {
         stageKey: step.key,
         baseImageUrl: media?.baseImageUrl || '',
+        coverMediaUrl: media?.coverMediaUrl || '',
+        coverMediaType: media?.coverMediaType || '',
+        isCoverMedia: !!media?.isCoverMedia,
         mediaState: media?.mediaState || STAGE_MEDIA_STATE.FUTURE,
         isVisible: displayedStageKey === step.key,
         label: step.label,
       };
-    }).filter((layer) => !!layer.baseImageUrl);
-  }, [displayedStageKey, selectedStageMediaCache, currentStepIndex]);
+    })
+    .filter(
+      (layer) => !!layer.baseImageUrl || !!layer.coverMediaUrl
+    );
+}, [
+  storyChapters,
+  displayedStageKey,
+  selectedStageMediaCache,
+  currentStepIndex,
+  project,
+  projectMarkedComplete,
+]);
 
   const navigateToStageIndex = (targetIndex) => {
     if (transitionLockRef.current) return;
-    if (targetIndex < 0 || targetIndex >= STEPS.length) return;
+    if (targetIndex < 0 || targetIndex >= storyChapters.length) return;
     if (targetIndex === activeIndex) return;
 
-    const targetStep = STEPS[targetIndex];
+    const targetStep = storyChapters[targetIndex];
     if (!targetStep) return;
 
     const previousStageKey = displayedStageKey;
@@ -3319,6 +4815,106 @@ if (!cancelled) {
 
     navigateToStageIndex(activeIndex + 1);
   };
+  const handleArchiveUpload = async (file) => {
+    if (!file || !project?.id || !activeStep?.key) return;
+
+    try {
+      setArchiveUploading(true);
+      setArchiveUploadError('');
+
+      const captureDef =
+        selectedCaptureKey && selectedCaptureKey !== 'other'
+          ? getArchiveCaptureByKey(activeStep.key, selectedCaptureKey)
+          : null;
+
+      const mediaType =
+        captureDef?.mediaType || getArchiveMediaTypeFromFile(file);
+
+      const stageDef = getStageArchiveDefinition(activeStep.key);
+      const filenamePrefix =
+        stageDef?.filenamePrefix ||
+        `chapter-${String(activeIndex + 1).padStart(2, '0')}`;
+
+      const chosenLabel =
+        selectedCaptureKey === 'other'
+          ? customArchiveTitle || file.name
+          : captureDef?.filenameLabel || captureDef?.label || file.name;
+
+      const extension =
+        getFileExtension(file.name) || file.name.split('.').pop() || 'bin';
+      const safeLabel = slugifyArchivePart(chosenLabel);
+      const stampedName = `${filenamePrefix}--${safeLabel || 'asset'}--${Date.now()}.${extension}`;
+
+      const storagePath = `projects/${project.id}/archive/${activeStep.key}/${stampedName}`;
+      const fileRef = storageRef(storage, storagePath);
+
+      await uploadBytes(fileRef, file);
+      const url = await getDownloadURL(fileRef);
+
+      const nextItem = {
+        id: `${activeStep.key}-${Date.now()}`,
+        url,
+        title:
+          selectedCaptureKey === 'other'
+            ? customArchiveTitle || file.name
+            : captureDef?.label || file.name,
+        fileName: stampedName,
+        originalFileName: file.name,
+        stage: STAGE_MEDIA?.[activeStep.key]?.stageNumber || activeIndex + 1,
+        stageKey: activeStep.key,
+        captureKey:
+          selectedCaptureKey && selectedCaptureKey !== 'other'
+            ? selectedCaptureKey
+            : '',
+        isSuggestedCapture:
+          !!selectedCaptureKey && selectedCaptureKey !== 'other',
+        mediaType,
+        type: mediaType,
+        visibility:
+          selectedCaptureKey === 'other'
+            ? selectedArchiveVisibility
+            : captureDef?.visibility || selectedArchiveVisibility,
+        hidden:
+          (selectedCaptureKey === 'other'
+            ? selectedArchiveVisibility
+            : captureDef?.visibility || selectedArchiveVisibility) ===
+          ARCHIVE_VISIBILITY.ADMIN,
+        category: 'archive',
+        source: 'archive',
+        purpose: captureDef?.purpose || '',
+        angle: captureDef?.angle || '',
+        details: Array.isArray(captureDef?.details) ? captureDef.details : [],
+        adminTask: captureDef?.adminTask || '',
+        uploadedAt: new Date().toISOString(),
+        createdAt: new Date().toISOString(),
+        uploadedBy: isAdmin ? 'admin' : 'user',
+      };
+
+      const existingMedia = Array.isArray(project?.media) ? project.media : [];
+      const nextMedia = [...existingMedia, nextItem];
+
+      const projectRef = getProjectDocRef(project);
+      if (!projectRef) {
+        throw new Error('Missing project reference.');
+      }
+
+      await updateDoc(projectRef, {
+        media: nextMedia,
+        updatedAt: serverTimestamp(),
+      });
+
+      setProject((prev) => (prev ? { ...prev, media: nextMedia } : prev));
+
+      setSelectedCaptureKey('');
+      setCustomArchiveTitle('');
+      setSelectedArchiveVisibility(ARCHIVE_VISIBILITY.ADMIN);
+    } catch (err) {
+      console.error('Archive upload failed:', err);
+      setArchiveUploadError('Failed to upload archive item.');
+    } finally {
+      setArchiveUploading(false);
+    }
+  };
 
   const beginDrag = (clientX) => {
     if (carouselAnimating) return;
@@ -3356,6 +4952,592 @@ if (!cancelled) {
     }
 
     dragDeltaXRef.current = 0;
+  };
+
+  const selectedArchiveCapture = useMemo(() => {
+    if (selectedArchiveCaptureKey === 'other') {
+      return {
+        key: 'other',
+        label: 'Custom Archive Upload',
+        shortLabel: 'Custom upload',
+        mediaType: 'other',
+        purpose: 'Upload a custom archive item for this chapter.',
+        visibility: ARCHIVE_VISIBILITY.ADMIN,
+        filenameLabel: 'custom-archive-item',
+        details: [],
+        angle: '',
+      };
+    }
+
+    return (
+      getArchiveCaptureByKey(activeStep?.key, selectedArchiveCaptureKey) || null
+    );
+  }, [activeStep?.key, selectedArchiveCaptureKey]);
+
+  const getArchiveVisibilityLabel = (visibility) => {
+    if (visibility === ARCHIVE_VISIBILITY.ADMIN) return 'Admin only';
+    if (visibility === ARCHIVE_VISIBILITY.PUBLIC) return 'Public';
+    return 'Admin + customer';
+  };
+
+  const slugifyArchivePart = (value = '') =>
+    String(value || '')
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+
+  const getArchiveFileExtension = (fileName = '') => {
+    const parts = String(fileName || '').split('.');
+    return parts.length > 1 ? parts.pop().toLowerCase() : '';
+  };
+
+  const buildArchiveFilename = ({
+    file,
+    capture,
+    stageDefinition,
+    projectLike,
+  }) => {
+    const originalExt = getArchiveFileExtension(file?.name || '') || 'bin';
+    const prefix =
+      stageDefinition?.filenamePrefix || slugifyArchivePart(activeStep?.key);
+    const serial =
+      projectLike?.serial ||
+      projectLike?.lineSerial ||
+      projectLike?.snareSerial ||
+      projectLike?.projectSerial ||
+      projectLike?.id ||
+      'project';
+
+    const capturePart = slugifyArchivePart(
+      capture?.filenameLabel ||
+        capture?.shortLabel ||
+        capture?.label ||
+        'archive-item'
+    );
+
+    const stamp = new Date()
+      .toISOString()
+      .replace(/[:.]/g, '-')
+      .replace('T', '_')
+      .slice(0, 19);
+
+    return `${prefix}__${slugifyArchivePart(serial)}__${capturePart}__${stamp}.${originalExt}`;
+  };
+
+  const openArchiveFilePicker = () => {
+    if (!isAdmin) return;
+
+    const input = archiveFileInputRef.current;
+    if (!input) return;
+
+    input.value = '';
+    input.click();
+  };
+
+  const saveArchiveItemToProject = async (archiveItem) => {
+    if (!project?.id || !archiveItem) return;
+
+    const projectRef = doc(db, 'projects', project.id);
+    const existingArchive = project?.stageArchive || {};
+    const existingStageItems = Array.isArray(existingArchive?.[activeStep.key])
+      ? existingArchive[activeStep.key]
+      : [];
+
+    const nextStageItems = [archiveItem, ...existingStageItems];
+
+    await updateDoc(projectRef, {
+      [`stageArchive.${activeStep.key}`]: nextStageItems,
+      updatedAt: serverTimestamp(),
+    });
+
+    setProject((prev) => {
+      if (!prev) return prev;
+      return {
+        ...prev,
+        stageArchive: {
+          ...(prev.stageArchive || {}),
+          [activeStep.key]: nextStageItems,
+        },
+      };
+    });
+  };
+
+  const updateArchiveItemInProject = async (itemId, updates = {}) => {
+    if (!project?.id || !itemId) return;
+
+    const projectRef = doc(db, 'projects', project.id);
+    const existingArchive = project?.stageArchive || {};
+    const nextArchive = { ...existingArchive };
+
+    Object.keys(nextArchive).forEach((stageKey) => {
+      const arr = Array.isArray(nextArchive[stageKey])
+        ? nextArchive[stageKey]
+        : [];
+      nextArchive[stageKey] = arr.map((item) => {
+        if (item.id !== itemId) return item;
+
+        const nextVisibility = updates.visibility ?? item.visibility;
+        return {
+          ...item,
+          ...updates,
+          visibility: nextVisibility,
+          hidden: nextVisibility === ARCHIVE_VISIBILITY.ADMIN,
+        };
+      });
+    });
+
+    await updateDoc(projectRef, {
+      stageArchive: nextArchive,
+      updatedAt: serverTimestamp(),
+    });
+
+    setProject((prev) =>
+      prev
+        ? {
+            ...prev,
+            stageArchive: nextArchive,
+          }
+        : prev
+    );
+
+    setSelectedResourceItem((prev) => {
+      if (!prev || prev.id !== itemId) return prev;
+      const nextVisibility = updates.visibility ?? prev.visibility;
+      return {
+        ...prev,
+        ...updates,
+        visibility: nextVisibility,
+        hidden: nextVisibility === ARCHIVE_VISIBILITY.ADMIN,
+      };
+    });
+  };
+
+  const deleteArchiveItemFromProject = async (itemId) => {
+    if (!project?.id || !itemId) return;
+
+    const projectRef = doc(db, 'projects', project.id);
+    const existingArchive = project?.stageArchive || {};
+    const nextArchive = {};
+
+    Object.entries(existingArchive).forEach(([stageKey, arr]) => {
+      const safeArr = Array.isArray(arr) ? arr : [];
+      nextArchive[stageKey] = safeArr.filter((item) => item.id !== itemId);
+    });
+
+    await updateDoc(projectRef, {
+      stageArchive: nextArchive,
+      updatedAt: serverTimestamp(),
+    });
+
+    setProject((prev) =>
+      prev
+        ? {
+            ...prev,
+            stageArchive: nextArchive,
+          }
+        : prev
+    );
+
+    setSelectedResourceItem((prev) => (prev?.id === itemId ? null : prev));
+  };
+
+  const handleSaveArchiveItemMeta = async () => {
+    if (!selectedResourceItem?.id) return;
+
+    try {
+      setArchiveEditorBusy(true);
+
+      await updateArchiveItemInProject(selectedResourceItem.id, {
+        title:
+          archiveEditorTitle.trim() || selectedResourceItem.title || 'Untitled',
+        shortLabel:
+          archiveEditorTitle.trim() ||
+          selectedResourceItem.shortLabel ||
+          'Untitled',
+        visibility: archiveEditorVisibility,
+      });
+    } catch (err) {
+      console.error('Failed to update archive item metadata:', err);
+      alert('Failed to save archive item changes.');
+    } finally {
+      setArchiveEditorBusy(false);
+    }
+  };
+
+  const handleDeleteArchiveItem = async () => {
+    if (!selectedResourceItem?.id) return;
+
+    const confirmed = window.confirm(
+      'Delete this archive item? This cannot be undone.'
+    );
+
+    if (!confirmed) return;
+
+    try {
+      setArchiveEditorBusy(true);
+      await deleteArchiveItemFromProject(selectedResourceItem.id);
+    } catch (err) {
+      console.error('Failed to delete archive item:', err);
+      alert('Failed to delete archive item.');
+    } finally {
+      setArchiveEditorBusy(false);
+    }
+  };
+
+  const saveRevealSettings = async (overrides = {}) => {
+    if (!project?.id) return;
+
+    const projectRef = doc(db, 'projects', project.id);
+
+    const nextChecklist = overrides.checklist ?? revealChecklist;
+
+    const nextReveal = {
+      ...(project?.soundlegendReveal || {}),
+      coverTitle: overrides.coverTitle ?? revealCoverTitle,
+      coverSubtitle: overrides.coverSubtitle ?? revealCoverSubtitle,
+      coverMediaUrl: overrides.coverMediaUrl ?? revealCoverMediaUrl,
+      coverMediaTitle: overrides.coverMediaTitle ?? revealCoverMediaTitle,
+      coverMediaType: overrides.coverMediaType ?? revealCoverMediaType,
+      adminChecklist: nextChecklist,
+      shippingCarrier:
+        overrides.shippingCarrier ??
+        project?.soundlegendReveal?.shippingCarrier ??
+        '',
+      trackingNumber:
+        overrides.trackingNumber ??
+        project?.soundlegendReveal?.trackingNumber ??
+        '',
+      finalAdminNote:
+        overrides.finalAdminNote ??
+        project?.soundlegendReveal?.finalAdminNote ??
+        '',
+      revealReady:
+        overrides.revealReady ?? Object.values(nextChecklist).every(Boolean),
+      revealDeployed:
+        overrides.revealDeployed ??
+        project?.soundlegendReveal?.revealDeployed ??
+        false,
+      deployedAt:
+        overrides.deployedAt ?? project?.soundlegendReveal?.deployedAt ?? null,
+    };
+
+    await updateDoc(projectRef, {
+      soundlegendReveal: nextReveal,
+      updatedAt: serverTimestamp(),
+    });
+
+    setProject((prev) =>
+      prev
+        ? {
+            ...prev,
+            soundlegendReveal: nextReveal,
+          }
+        : prev
+    );
+  };
+
+  const handleRevealChecklistToggle = async (key) => {
+    const nextChecklist = {
+      ...revealChecklist,
+      [key]: !revealChecklist[key],
+    };
+
+    setRevealChecklist(nextChecklist);
+
+    try {
+      setRevealPanelBusy(true);
+      await saveRevealSettings({ checklist: nextChecklist });
+    } catch (err) {
+      console.error('Failed to update reveal checklist:', err);
+      alert('Failed to update reveal checklist.');
+    } finally {
+      setRevealPanelBusy(false);
+    }
+  };
+
+  const handleSaveRevealPanel = async () => {
+    try {
+      setRevealPanelBusy(true);
+      await saveRevealSettings();
+    } catch (err) {
+      console.error('Failed to save reveal settings:', err);
+      alert('Failed to save reveal settings.');
+    } finally {
+      setRevealPanelBusy(false);
+    }
+  };
+
+  const handleDeployReveal = async () => {
+    if (!revealChecklistComplete) {
+      alert('Complete all reveal checklist items before deploying.');
+      return;
+    }
+
+    try {
+      setRevealPanelBusy(true);
+
+      await saveRevealSettings({
+        revealReady: true,
+        revealDeployed: true,
+        deployedAt: new Date().toISOString(),
+      });
+    } catch (err) {
+      console.error('Failed to deploy reveal:', err);
+      alert('Failed to deploy SoundLegend reveal.');
+    } finally {
+      setRevealPanelBusy(false);
+    }
+  };
+
+  const handleHideReveal = async () => {
+    try {
+      setRevealPanelBusy(true);
+
+      await saveRevealSettings({
+        revealDeployed: false,
+        // optional: also mark not-ready if you want to force re-review
+        // revealReady: false,
+        deployedAt: null,
+      });
+    } catch (err) {
+      console.error('Failed to hide reveal:', err);
+      alert('Failed to hide SoundLegend cover.');
+    } finally {
+      setRevealPanelBusy(false);
+    }
+  };
+
+  const updateStageArchiveItemsForStage = async (stageKey, updater) => {
+    if (!project?.id || !stageKey) return;
+
+    const projectRef = doc(db, 'projects', project.id);
+
+    const existingArchive =
+      project?.stageArchive && typeof project.stageArchive === 'object'
+        ? project.stageArchive
+        : {};
+
+    const existingStageItems = Array.isArray(existingArchive?.[stageKey])
+      ? existingArchive[stageKey]
+      : [];
+
+    const nextStageItems = updater(existingStageItems);
+
+    await updateDoc(projectRef, {
+      [`stageArchive.${stageKey}`]: nextStageItems,
+      updatedAt: serverTimestamp(),
+    });
+
+    setProject((prev) => {
+      if (!prev) return prev;
+      return {
+        ...prev,
+        stageArchive: {
+          ...(prev.stageArchive || {}),
+          [stageKey]: nextStageItems,
+        },
+      };
+    });
+
+    return nextStageItems;
+  };
+
+  const handleArchiveRename = async (item, nextTitle) => {
+    if (!item?.stageKey || !item?.id) return;
+    const safeTitle = String(nextTitle || '').trim();
+    if (!safeTitle) return;
+
+    await updateStageArchiveItemsForStage(item.stageKey, (items) =>
+      items.map((entry) =>
+        entry.id === item.id
+          ? {
+              ...entry,
+              title: safeTitle,
+            }
+          : entry
+      )
+    );
+
+    setSelectedResourceItem((prev) =>
+      prev && prev.id === item.id ? { ...prev, title: safeTitle } : prev
+    );
+  };
+
+  const handleArchiveVisibilityChange = async (item, nextVisibility) => {
+    if (!item?.stageKey || !item?.id) return;
+
+    await updateStageArchiveItemsForStage(item.stageKey, (items) =>
+      items.map((entry) =>
+        entry.id === item.id
+          ? {
+              ...entry,
+              visibility: nextVisibility,
+              hidden: nextVisibility === ARCHIVE_VISIBILITY.ADMIN,
+            }
+          : entry
+      )
+    );
+
+    setSelectedResourceItem((prev) =>
+      prev && prev.id === item.id
+        ? {
+            ...prev,
+            visibility: nextVisibility,
+            hidden: nextVisibility === ARCHIVE_VISIBILITY.ADMIN,
+          }
+        : prev
+    );
+  };
+
+  const handleArchiveDelete = async (item) => {
+    if (!item?.stageKey || !item?.id) return;
+
+    const confirmed = window.confirm(
+      'Delete this archive file? This removes it from the project archive.'
+    );
+    if (!confirmed) return;
+
+    await updateStageArchiveItemsForStage(item.stageKey, (items) =>
+      items.filter((entry) => entry.id !== item.id)
+    );
+
+    setSelectedResourceItem((prev) =>
+      prev && prev.id === item.id ? null : prev
+    );
+  };
+
+  const uploadArchiveFiles = async (fileList) => {
+    if (!isAdmin) return;
+    if (!project?.id) return;
+    if (!fileList?.length) return;
+    if (!selectedArchiveCapture) {
+      alert('Please choose a suggested capture first.');
+      return;
+    }
+
+    const stageDefinition = getStageArchiveDefinition(activeStep?.key);
+    if (!stageDefinition) return;
+
+    try {
+      setArchiveUploading(true);
+      setArchiveUploadProgress(0);
+
+      for (const file of Array.from(fileList)) {
+        const safeFileName = buildArchiveFilename({
+          file,
+          capture: selectedArchiveCapture,
+          stageDefinition,
+          projectLike: project,
+        });
+
+        const storagePath = [
+          'projects',
+          project.id,
+          'stageArchive',
+          activeStep.key,
+          safeFileName,
+        ].join('/');
+
+        const fileRef = storageRef(storage, storagePath);
+        const uploadTask = uploadBytesResumable(fileRef, file);
+
+        const downloadUrl = await new Promise((resolve, reject) => {
+          uploadTask.on(
+            'state_changed',
+            (snapshot) => {
+              const pct = snapshot.totalBytes
+                ? Math.round(
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                  )
+                : 0;
+              setArchiveUploadProgress(pct);
+            },
+            reject,
+            async () => {
+              const url = await getDownloadURL(uploadTask.snapshot.ref);
+              resolve(url);
+            }
+          );
+        });
+
+        const detectedMediaType =
+          selectedArchiveCapture.key === 'other'
+            ? getArchiveMediaTypeFromFile(file)
+            : selectedArchiveCapture.mediaType ||
+              getArchiveMediaTypeFromFile(file);
+
+        const resolvedVisibility = isAdmin
+          ? ARCHIVE_VISIBILITY.ADMIN
+          : selectedArchiveCapture.visibility || ARCHIVE_VISIBILITY.CUSTOMER;
+
+        const resolvedTitle =
+          selectedArchiveCapture.key === 'other'
+            ? file.name.replace(/\.[^/.]+$/, '')
+            : selectedArchiveCapture.label;
+
+        const archiveItem = {
+          id: `${activeStep.key}-${selectedArchiveCapture.key}-${Date.now()}`,
+          title: resolvedTitle,
+          captureKey: selectedArchiveCapture.key,
+          shortLabel:
+            selectedArchiveCapture.shortLabel || selectedArchiveCapture.label,
+          fileName: safeFileName,
+          originalFileName: file.name,
+          url: downloadUrl,
+          type: detectedMediaType,
+          mediaType: detectedMediaType,
+          visibility: resolvedVisibility,
+          hidden: resolvedVisibility === ARCHIVE_VISIBILITY.ADMIN,
+          stage: activeIndex + 1,
+          stageKey: activeStep.key,
+          category: 'stageArchive',
+          uploadedAt: new Date().toISOString(),
+          createdAt: new Date().toISOString(),
+          adminTask: selectedArchiveCapture.adminTask || '',
+          purpose: selectedArchiveCapture.purpose || '',
+          angle: selectedArchiveCapture.angle || '',
+          details: selectedArchiveCapture.details || [],
+        };
+
+        await saveArchiveItemToProject(archiveItem);
+        setSelectedResourceItem(archiveItem);
+      }
+
+      setArchiveUploadProgress(100);
+    } catch (err) {
+      console.error('Archive upload failed:', err);
+      alert('Archive upload failed. Check console for details.');
+    } finally {
+      setTimeout(() => setArchiveUploadProgress(0), 600);
+      setArchiveUploading(false);
+    }
+  };
+
+  const handleArchiveFileInputChange = async (event) => {
+    const files = event.target.files;
+    await uploadArchiveFiles(files);
+    event.target.value = '';
+  };
+
+  const handleArchiveDragOver = (event) => {
+    if (!isAdmin) return;
+    event.preventDefault();
+    setArchiveIsDragging(true);
+  };
+
+  const handleArchiveDragLeave = (event) => {
+    if (!isAdmin) return;
+    event.preventDefault();
+    setArchiveIsDragging(false);
+  };
+
+  const handleArchiveDrop = async (event) => {
+    if (!isAdmin) return;
+    event.preventDefault();
+    setArchiveIsDragging(false);
+    const files = event.dataTransfer?.files;
+    await uploadArchiveFiles(files);
   };
 
   if (loading && !project) {
@@ -3425,11 +5607,12 @@ if (!cancelled) {
                 Build Roadmap
               </div>
               <div className="sl-progress-build-summary-stage-title">
-                {currentStageLabel}
+                {isLegacyChapter
+                  ? 'Legacy Chapter • From Ober Artisan'
+                  : currentStageLabel}
               </div>
               <div className="sl-progress-build-summary-stage-subtitle">
-                Follow your drum’s build journey from concept to final
-                delivery.{' '}
+                Follow your drum’s build journey from concept to final delivery.
               </div>
             </div>
 
@@ -3463,7 +5646,9 @@ if (!cancelled) {
               Current Chapter
             </div>
             <div className="sl-progress-build-summary-metric-value">
-              {currentStageLabel}
+              {isLegacyChapter
+                ? 'Legacy Chapter • From Ober Artisan'
+                : currentStageLabel}
             </div>
           </div>
 
@@ -3472,7 +5657,9 @@ if (!cancelled) {
               Current Chapter Step
             </div>
             <div className="sl-progress-build-summary-metric-value">
-              {currentStepLabel}
+              {isLegacyChapter
+                ? 'Final handoff • Story now belongs to the artist'
+                : currentStepLabel}
             </div>
           </div>
 
@@ -3514,37 +5701,63 @@ if (!cancelled) {
             <div className="sl-progress-hero-carousel-center-slot">
               <div className="sl-progress-hero-carousel-media sl-progress-stage-card-media">
                 {allRenderableStageLayers.length > 0 ? (
-                  <div className="sl-progress-stage-image-stack">
-                    {allRenderableStageLayers.map((layer) => (
-                      <img
-                        key={layer.stageKey}
-                        className={[
-                          'sl-progress-stage-card-base-image',
-                          'sl-progress-stage-card-base-image--stacked',
-                          layer.isVisible ? 'is-visible' : 'is-hidden',
-                        ].join(' ')}
-                        src={layer.baseImageUrl}
-                        alt={layer.isVisible ? `${layer.label} hero` : ''}
-                        aria-hidden={!layer.isVisible}
-                        loading="eager"
-                        decoding="sync"
-                        draggable={false}
-                        style={{
-                          filter:
-                            layer.mediaState === STAGE_MEDIA_STATE.COMPLETED
-                              ? 'grayscale(0.42) saturate(0.82) contrast(1.02) brightness(0.9)'
-                              : layer.mediaState === STAGE_MEDIA_STATE.CURRENT
-                                ? 'brightness(1.06) saturate(1.08)'
-                                : 'none',
-                        }}
-                      />
-                    ))}
-                  </div>
+<div className="sl-progress-stage-image-stack">
+  {allRenderableStageLayers.map((layer) => {
+    const layerClassName = [
+      'sl-progress-stage-card-base-image',
+      'sl-progress-stage-card-base-image--stacked',
+      layer.isVisible ? 'is-visible' : 'is-hidden',
+    ].join(' ');
+
+    if (layer.isCoverMedia && layer.coverMediaType === 'video') {
+      return (
+        <video
+          key={layer.stageKey}
+          className={layerClassName}
+          src={layer.coverMediaUrl}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          aria-hidden={!layer.isVisible}
+          style={{
+            objectFit: 'cover',
+            filter: 'brightness(0.72) saturate(1.02)',
+          }}
+        />
+      );
+    }
+
+    return (
+      <img
+        key={layer.stageKey}
+        className={layerClassName}
+        src={layer.isCoverMedia ? layer.coverMediaUrl : layer.baseImageUrl}
+        alt={layer.isVisible ? `${layer.label} hero` : ''}
+        aria-hidden={!layer.isVisible}
+        loading="eager"
+        decoding="sync"
+        draggable={false}
+        style={{
+          objectFit: 'cover',
+          filter: layer.isCoverMedia
+            ? 'brightness(0.72) saturate(1.02)'
+            : layer.mediaState === STAGE_MEDIA_STATE.COMPLETED
+              ? 'grayscale(0.42) saturate(0.82) contrast(1.02) brightness(0.9)'
+              : layer.mediaState === STAGE_MEDIA_STATE.CURRENT
+                ? 'brightness(1.06) saturate(1.08)'
+                : 'none',
+        }}
+      />
+    );
+  })}
+</div>
                 ) : (
                   <div className="sl-progress-hero-side-preview-fallback" />
                 )}
 
-                {activeStorypoint ? (
+                {activeStorypoint && !isLegacyChapter ? (
                   <div
                     ref={eduPanelRef}
                     className={`sl-progress-stage-edu-panel ${
@@ -3571,21 +5784,18 @@ if (!cancelled) {
 
                       <div className="sl-progress-stage-edu-header">
                         <div className="sl-progress-stage-edu-header-copy">
-                          <div className="sl-progress-stage-edu-kicker">
-                            From the workshop
+                          <div className="sl-progress-stage-edu-chapter-heading">
+                            <div className="sl-progress-stage-edu-chapter-number">
+                              {chapterLabel}
+                            </div>
+                            <div className="sl-progress-stage-edu-chapter-title">
+                              {activeStep?.label || activeStep?.adminMainTitle}
+                            </div>
                           </div>
 
-                          {activeStorypoint ? (
-                            <div className="sl-progress-stage-edu-chapter-heading">
-                              <div className="sl-progress-stage-edu-chapter-number">
-                                {chapterLabel}
-                              </div>
-                              <div className="sl-progress-stage-edu-chapter-title">
-                                {activeStep?.label ||
-                                  activeStep?.adminMainTitle}
-                              </div>
-                            </div>
-                          ) : null}
+                          <div className="sl-progress-stage-edu-helper">
+                            {stageStatePresentation.helper}
+                          </div>
                         </div>
 
                         <button
@@ -3597,282 +5807,317 @@ if (!cancelled) {
                         </button>
                       </div>
 
-                      {activeStorypoint.id === 'progress' ? (
-                        <div className="sl-progress-storypoint-progress">
-                          <div className="sl-progress-storypoint-progress-grid">
-                            <div className="sl-progress-storypoint-stat">
-                              <div className="sl-progress-storypoint-stat-label">
-                                Chapter status
-                              </div>
-                              <div className="sl-progress-storypoint-stat-value">
-                                {currentChapterProgressData.status}
-                              </div>
-                            </div>
-
-                            <div className="sl-progress-storypoint-stat">
-                              <div className="sl-progress-storypoint-stat-label">
-                                Chapter completion
-                              </div>
-                              <div className="sl-progress-storypoint-stat-value">
-                                {currentChapterProgressData.completionPct}%
-                              </div>
-                            </div>
-
-                            <div className="sl-progress-storypoint-stat">
-                              <div className="sl-progress-storypoint-stat-label">
-                                Est. focused hours
-                              </div>
-                              <div className="sl-progress-storypoint-stat-value">
-                                {currentChapterProgressData.estHours}
-                              </div>
-                            </div>
-
-                            <div className="sl-progress-storypoint-stat">
-                              <div className="sl-progress-storypoint-stat-label">
-                                Avg. turnaround
-                              </div>
-                              <div className="sl-progress-storypoint-stat-value">
-                                {currentChapterProgressData.avgDays}
-                              </div>
-                            </div>
-
-                            <div className="sl-progress-storypoint-stat">
-                              <div className="sl-progress-storypoint-stat-label">
-                                Current sub-step
-                              </div>
-                              <div className="sl-progress-storypoint-stat-value">
-                                {currentChapterProgressData.currentSubStep}
-                              </div>
-                            </div>
-
-                            <div className="sl-progress-storypoint-stat">
-                              <div className="sl-progress-storypoint-stat-label">
-                                Stage completion target
-                              </div>
-                              <div className="sl-progress-storypoint-stat-value">
-                                {currentChapterProgressData.targetDate}
-                              </div>
-                            </div>
-                          </div>
-
-                          <div className="sl-progress-storypoint-checkpoints">
-                            <div className="sl-progress-storypoint-checkpoints-header">
-                              <div className="sl-progress-storypoint-checkpoints-label">
-                                Workshop checkpoints
-                              </div>
-                              <div className="sl-progress-storypoint-checkpoints-count">
-                                {
-                                  currentChapterProgressData.completedCheckpoints
-                                }
-                                /{currentChapterProgressData.totalCheckpoints}{' '}
-                                completed
-                              </div>
-                            </div>
-
-                            <StageCheckpointsPanel
-                              key={`progress-inline-${activeStep.key}-${isAdmin ? 'admin' : 'customer'}`}
-                              project={project}
-                              setProject={setProject}
-                              stageKey={activeStep.key}
-                              isAdmin={isAdmin}
-                              variant="compact"
-                              showHeader={false}
-                            />
-                          </div>
-                        </div>
-                      ) : (
-                        <p className="sl-progress-stage-edu-body">
-                          {/* {activeStorypoint.body} */}
-                        </p>
-                      )}
-
-                      {activeStorypoint.id === 'build' ? (
-                        <div className="sl-progress-stage-storypoint-data-grid">
+                      {activeStorypoint?.id === 'overview' ? (
+                        <>
                           <div className="sl-progress-stage-storypoint-data-card sl-progress-stage-storypoint-data-card--full">
                             <div className="sl-progress-stage-storypoint-data-label">
-                              Chapter Summary
+                              Chapter Story
                             </div>
                             <div className="sl-progress-stage-storypoint-data-value sl-progress-stage-storypoint-data-value--body">
-                              {activeStorypoint.data?.summary ||
-                                'No build summary available yet.'}
+                              {chapterNarrative.summary}
                             </div>
                           </div>
 
-                          <div className="sl-progress-stage-storypoint-data-card">
-                            <div className="sl-progress-stage-storypoint-data-label">
-                              Techniques Used
-                            </div>
-                            <div className="sl-progress-stage-storypoint-data-value sl-progress-stage-storypoint-data-value--stack">
-                              {activeStorypoint.data?.techniques?.length ? (
-                                activeStorypoint.data.techniques.map(
-                                  (item, index) => (
-                                    <span
-                                      key={`${item}-${index}`}
-                                      className="sl-progress-stage-storypoint-tag"
-                                    >
-                                      {item}
-                                    </span>
-                                  )
-                                )
-                              ) : (
-                                <span>No techniques added yet.</span>
-                              )}
-                            </div>
-                          </div>
+                          <div className="sl-progress-storypoint-progress">
+                            <div className="sl-progress-storypoint-progress-grid">
+                              <div className="sl-progress-storypoint-stat">
+                                <div className="sl-progress-storypoint-stat-label">
+                                  Chapter status
+                                </div>
+                                <div className="sl-progress-storypoint-stat-value">
+                                  {currentChapterProgressData.status}
+                                </div>
+                              </div>
 
-                          <div className="sl-progress-stage-storypoint-data-card">
-                            <div className="sl-progress-stage-storypoint-data-label">
-                              Tools Involved
+                              <div className="sl-progress-storypoint-stat">
+                                <div className="sl-progress-storypoint-stat-label">
+                                  Chapter completion
+                                </div>
+                                <div className="sl-progress-storypoint-stat-value">
+                                  {currentChapterProgressData.completionPct}%
+                                </div>
+                              </div>
+
+                              <div className="sl-progress-storypoint-stat">
+                                <div className="sl-progress-storypoint-stat-label">
+                                  Est. focused hours
+                                </div>
+                                <div className="sl-progress-storypoint-stat-value">
+                                  {currentChapterProgressData.estHours}
+                                </div>
+                              </div>
+
+                              <div className="sl-progress-storypoint-stat">
+                                <div className="sl-progress-storypoint-stat-label">
+                                  Avg. turnaround
+                                </div>
+                                <div className="sl-progress-storypoint-stat-value">
+                                  {currentChapterProgressData.avgDays}
+                                </div>
+                              </div>
+
+                              <div className="sl-progress-storypoint-stat">
+                                <div className="sl-progress-storypoint-stat-label">
+                                  Current sub-step
+                                </div>
+                                <div className="sl-progress-storypoint-stat-value">
+                                  {currentChapterProgressData.currentSubStep}
+                                </div>
+                              </div>
+
+                              <div className="sl-progress-storypoint-stat">
+                                <div className="sl-progress-storypoint-stat-label">
+                                  Stage completion target
+                                </div>
+                                <div className="sl-progress-storypoint-stat-value">
+                                  {currentChapterProgressData.targetDate}
+                                </div>
+                              </div>
                             </div>
-                            <div className="sl-progress-stage-storypoint-data-value sl-progress-stage-storypoint-data-value--stack">
-                              {activeStorypoint.data?.tools?.length ? (
-                                activeStorypoint.data.tools.map(
-                                  (item, index) => (
-                                    <span
-                                      key={`${item}-${index}`}
-                                      className="sl-progress-stage-storypoint-tag"
-                                    >
-                                      {item}
-                                    </span>
-                                  )
-                                )
-                              ) : (
-                                <span>No tools added yet.</span>
-                              )}
+
+                            <div className="sl-progress-storypoint-checkpoints">
+                              <div className="sl-progress-storypoint-checkpoints-header">
+                                <div className="sl-progress-storypoint-checkpoints-label">
+                                  Workshop checkpoints
+                                </div>
+                                <div className="sl-progress-storypoint-checkpoints-count">
+                                  {
+                                    currentChapterProgressData.completedCheckpoints
+                                  }
+                                  /{currentChapterProgressData.totalCheckpoints}{' '}
+                                  completed
+                                </div>
+                              </div>
+
+                              <StageCheckpointsPanel
+                                key={`progress-inline-${activeStep.key}-${isAdmin ? 'admin' : 'customer'}`}
+                                project={project}
+                                setProject={setProject}
+                                stageKey={activeStep.key}
+                                isAdmin={isAdmin}
+                                variant="compact"
+                                showHeader={false}
+                              />
                             </div>
                           </div>
-                        </div>
+                        </>
                       ) : null}
 
-                      {activeStorypoint.id === 'voice' ? (
-                        <div className="sl-progress-stage-storypoint-data-grid">
+                      {activeStorypoint?.id === 'artist-direction'
+                        ? renderStorypointSections(activeStorypoint.data)
+                        : null}
+
+                      {activeStorypoint?.id === 'craftsman-direction'
+                        ? renderStorypointSections(activeStorypoint.data)
+                        : null}
+
+                      {activeStorypoint?.id === 'build'
+                        ? renderStorypointSections(activeStorypoint.data)
+                        : null}
+
+                      {activeStorypoint?.id === 'voice'
+                        ? renderStorypointSections(activeStorypoint.data)
+                        : null}
+
+                      {isAdmin &&
+                      activeStageArchiveDefinition &&
+                      activeStorypoint?.id === 'archive' ? (
+                        <div
+                          className={`sl-progress-stage-archive-admin-card ${
+                            archiveIsDragging ? 'is-dragging' : ''
+                          }`}
+                          onDragOver={handleArchiveDragOver}
+                          onDragLeave={handleArchiveDragLeave}
+                          onDrop={handleArchiveDrop}
+                        >
                           <div className="sl-progress-stage-storypoint-data-card sl-progress-stage-storypoint-data-card--full">
                             <div className="sl-progress-stage-storypoint-data-label">
-                              Why this chapter matters
+                              Chapter Archive
                             </div>
                             <div className="sl-progress-stage-storypoint-data-value sl-progress-stage-storypoint-data-value--body">
-                              {activeStorypoint.data?.summary ||
-                                'No stage impact summary available yet.'}
+                              {activeStageArchiveDefinition.internalGoal}
                             </div>
                           </div>
 
-                          <div className="sl-progress-stage-storypoint-data-card">
+                          <div className="sl-progress-stage-archive-admin-controls">
                             <div className="sl-progress-stage-storypoint-data-label">
-                              What this affects
+                              Add archive item
                             </div>
-                            <div className="sl-progress-stage-storypoint-data-value sl-progress-stage-storypoint-data-value--stack">
-                              {activeStorypoint.data?.affects?.length ? (
-                                activeStorypoint.data.affects.map(
-                                  (item, index) => (
-                                    <span
-                                      key={`${item}-${index}`}
-                                      className="sl-progress-stage-storypoint-tag"
-                                    >
-                                      {item}
-                                    </span>
-                                  )
-                                )
-                              ) : (
-                                <span>No impact categories added yet.</span>
-                              )}
-                            </div>
-                          </div>
 
-                          <div className="sl-progress-stage-storypoint-data-card">
-                            <div className="sl-progress-stage-storypoint-data-label">
-                              Stage mantra
-                            </div>
-                            <div className="sl-progress-stage-storypoint-data-value sl-progress-stage-storypoint-data-value--body">
-                              {activeStorypoint.data?.mantra ||
-                                'Every step in this process shapes the instrument’s final voice.'}
-                            </div>
-                          </div>
-                        </div>
-                      ) : null}
-
-                      {activeStorypoint.id === 'archive' ? (
-                        <div className="sl-progress-stage-edu-resource-list">
-                          {stageResourceItems.items.length ? (
-                            <div className="sl-progress-stage-edu-resource-grid">
-                              {stageResourceItems.items.map((item, index) => {
-                                const isImage = item.type === 'image';
-                                const isVideo = item.type === 'video';
-
-                                return (
-                                  <button
-                                    key={item.id || item.url || index}
-                                    type="button"
-                                    className={`sl-progress-stage-edu-resource-card is-${item.type}`}
-                                    onClick={() =>
-                                      setSelectedResourceItem(item)
-                                    }
-                                  >
-                                    <div className="sl-progress-stage-edu-resource-thumb">
-                                      {isImage ? (
-                                        <img
-                                          src={item.url}
-                                          alt={
-                                            item.title ||
-                                            `Stage resource ${index + 1}`
-                                          }
-                                          className="sl-progress-stage-edu-resource-image"
-                                          loading="lazy"
-                                        />
-                                      ) : (
-                                        <div className="sl-progress-stage-edu-resource-filetype">
-                                          {isVideo
-                                            ? 'VIDEO'
-                                            : item.type === 'audio'
-                                              ? 'AUDIO'
-                                              : 'DOC'}
-                                        </div>
-                                      )}
-                                    </div>
-
-                                    <div className="sl-progress-stage-edu-resource-meta">
-                                      <div className="sl-progress-stage-edu-resource-title">
-                                        {item.title || `Resource ${index + 1}`}
-                                      </div>
-                                      <div className="sl-progress-stage-edu-resource-subtitle">
-                                        {item.category
-                                          ? String(item.category).replace(
-                                              /_/g,
-                                              ' '
-                                            )
-                                          : item.type}
-                                      </div>
-                                    </div>
-                                  </button>
-                                );
-                              })}
-                            </div>
-                          ) : (
-                            <div className="sl-progress-stage-edu-resource-empty">
-                              No media or stage-specific files have been added
-                              for this chapter yet.
-                            </div>
-                          )}
-
-                          {stageResourceItems.signatureLink ? (
-                            <a
-                              href={stageResourceItems.signatureLink}
-                              target="_blank"
-                              rel="noreferrer"
-                              className="sl-progress-stage-edu-resource-link is-primary"
+                            <select
+                              className="sl-progress-stage-archive-select"
+                              value={selectedArchiveCaptureKey}
+                              onChange={(e) =>
+                                setSelectedArchiveCaptureKey(e.target.value)
+                              }
                             >
-                              Review / sign document
-                            </a>
+                              <option value="">
+                                Choose a suggested capture…
+                              </option>
+
+                              {activeStageArchiveDefinition.suggestedCaptures.map(
+                                (capture) => (
+                                  <option key={capture.key} value={capture.key}>
+                                    {capture.shortLabel || capture.label}
+                                  </option>
+                                )
+                              )}
+
+                              <option value="other">
+                                Other / custom upload
+                              </option>
+                            </select>
+
+                            {selectedArchiveCapture ? (
+                              <div className="sl-progress-stage-storypoint-data-card sl-progress-stage-storypoint-data-card--full">
+                                <div className="sl-progress-stage-storypoint-data-label">
+                                  Suggested capture details
+                                </div>
+
+                                <div className="sl-progress-stage-storypoint-data-value sl-progress-stage-storypoint-data-value--body">
+                                  <strong>
+                                    {selectedArchiveCapture.label}
+                                  </strong>
+                                  <br />
+                                  {selectedArchiveCapture.purpose}
+                                  <br />
+                                  Visibility:{' '}
+                                  {getArchiveVisibilityLabel(
+                                    selectedArchiveCapture.visibility
+                                  )}
+                                  {selectedArchiveCapture.angle ? (
+                                    <>
+                                      <br />
+                                      Angle: {selectedArchiveCapture.angle}
+                                    </>
+                                  ) : null}
+                                </div>
+                              </div>
+                            ) : null}
+
+                            <button
+                              type="button"
+                              className={`sl-progress-stage-edu-resource-link sl-progress-stage-upload-trigger is-primary ${
+                                archiveUploading || !selectedArchiveCaptureKey
+                                  ? 'is-disabled'
+                                  : ''
+                              }`}
+                              onClick={() => {
+                                if (
+                                  archiveUploading ||
+                                  !selectedArchiveCaptureKey
+                                )
+                                  return;
+                                openArchiveFilePicker();
+                              }}
+                              disabled={
+                                archiveUploading || !selectedArchiveCaptureKey
+                              }
+                            >
+                              {archiveUploading
+                                ? `Uploading… ${archiveUploadProgress}%`
+                                : 'Upload archive item'}
+                            </button>
+
+                            <div className="sl-progress-stage-archive-drop-hint">
+                              Drag and drop files here, or click the button
+                              above.
+                            </div>
+                          </div>
+
+                          {activeStageArchiveDefinition.adminCaptureChecklist
+                            ?.length ? (
+                            <div className="sl-progress-stage-storypoint-data-card sl-progress-stage-storypoint-data-card--full">
+                              <div className="sl-progress-stage-storypoint-data-label">
+                                Admin capture checklist
+                              </div>
+
+                              <div className="sl-progress-stage-storypoint-data-value sl-progress-stage-storypoint-data-value--stack">
+                                {activeStageArchiveDefinition.adminCaptureChecklist.map(
+                                  (item, index) => (
+                                    <span
+                                      key={`${item}-${index}`}
+                                      className="sl-progress-stage-storypoint-tag"
+                                    >
+                                      {item}
+                                    </span>
+                                  )
+                                )}
+                              </div>
+                            </div>
                           ) : null}
 
-                          {stageResourceItems.paymentLink ? (
-                            <a
-                              href={stageResourceItems.paymentLink}
-                              target="_blank"
-                              rel="noreferrer"
-                              className="sl-progress-stage-edu-resource-link is-primary"
-                            >
-                              Complete payment
-                            </a>
+                          {activeStageArchiveItems.length ? (
+                            <div className="sl-progress-stage-storypoint-data-card sl-progress-stage-storypoint-data-card--full">
+                              <div className="sl-progress-stage-storypoint-data-label">
+                                Uploaded archive items
+                              </div>
+
+                              <div className="sl-progress-stage-edu-resource-grid">
+                                {activeStageArchiveItems.map((item, index) => {
+                                  const itemType =
+                                    item.mediaType ||
+                                    item.type ||
+                                    getFileTypeFromUrl(item.url, item.type);
+
+                                  const previewItem = {
+                                    ...item,
+                                    type: itemType,
+                                  };
+
+                                  const isImage = itemType === 'image';
+                                  const isVideo = itemType === 'video';
+
+                                  return (
+                                    <button
+                                      key={item.id || `${item.url}-${index}`}
+                                      type="button"
+                                      className={`sl-progress-stage-edu-resource-card is-${itemType}`}
+                                      onClick={() =>
+                                        setSelectedResourceItem(previewItem)
+                                      }
+                                    >
+                                      <div className="sl-progress-stage-edu-resource-thumb">
+                                        {isImage ? (
+                                          <img
+                                            src={item.url}
+                                            alt={
+                                              item.title ||
+                                              `Archive item ${index + 1}`
+                                            }
+                                            className="sl-progress-stage-edu-resource-image"
+                                            loading="lazy"
+                                          />
+                                        ) : (
+                                          <div className="sl-progress-stage-edu-resource-filetype">
+                                            {isVideo
+                                              ? 'VIDEO'
+                                              : itemType === 'audio'
+                                                ? 'AUDIO'
+                                                : itemType === 'document'
+                                                  ? 'DOC'
+                                                  : 'FILE'}
+                                          </div>
+                                        )}
+                                      </div>
+
+                                      <div className="sl-progress-stage-edu-resource-meta">
+                                        <div className="sl-progress-stage-edu-resource-title">
+                                          {item.title ||
+                                            `Archive item ${index + 1}`}
+                                        </div>
+                                        <div className="sl-progress-stage-edu-resource-subtitle">
+                                          {formatResourceTypeLabel(itemType)} •{' '}
+                                          {getArchiveVisibilityLabel(
+                                            item.visibility
+                                          )}
+                                        </div>
+                                      </div>
+                                    </button>
+                                  );
+                                })}
+                              </div>
+                            </div>
                           ) : null}
                         </div>
                       ) : null}
@@ -3883,7 +6128,10 @@ if (!cancelled) {
                 {(() => {
                   const activeInteractiveStep =
                     currentStageInteractiveSteps.find(
-                      (step) => step.id === activeInteractiveStepId
+                      (step) =>
+                        step.id === activeInteractiveStepId ||
+                        `${activeStep.key}-timeline-${step.index}` ===
+                          activeInteractiveStepId
                     ) || null;
 
                   if (!activeInteractiveStep) return null;
@@ -3891,7 +6139,7 @@ if (!cancelled) {
                   return (
                     <div className="sl-progress-stage-checkpoint-detail-card">
                       <div className="sl-progress-stage-storypoint-card-eyebrow">
-                        Build checkpoint
+                        Chapter page
                       </div>
 
                       <div className="sl-progress-stage-storypoint-card-title">
@@ -3960,7 +6208,7 @@ if (!cancelled) {
                     onClick={goPrevStage}
                     disabled={carouselAnimating}
                     aria-label={`View previous stage: ${prevStep?.label || 'Previous stage'}`}
-                  ></button>
+                  />
                 ) : null}
 
                 {canGoNext ? (
@@ -3976,25 +6224,21 @@ if (!cancelled) {
                     onClick={goNextStage}
                     disabled={carouselAnimating}
                     aria-label={`View next stage: ${nextStep?.label || 'Next stage'}`}
-                  ></button>
+                  />
                 ) : null}
 
-                <div className="sl-progress-hero-overlay sl-progress-hero-overlay--center">
-                  <div className="sl-progress-stage-hero-status-caption">
-                    {currentStageStatus === STAGE_MEDIA_STATE.COMPLETED
-                      ? 'Chapter complete'
-                      : currentStageStatus === STAGE_MEDIA_STATE.CURRENT
-                        ? 'Chapter in progress'
-                        : currentStageStatus === STAGE_MEDIA_STATE.NEXT
-                          ? 'Preview of next chapter'
-                          : 'Chapter unwritten'}
-                  </div>
+                <div
+                  className={`sl-progress-hero-overlay sl-progress-hero-overlay--center ${
+                    isLegacyChapter ? 'sl-progress-hero-overlay--legacy' : ''
+                  }`}
+                >
+                                    {!isRevealCoverChapter ? (
+                    <div className="sl-progress-stage-hero-status-caption">
+                      {stageStatePresentation.pill}
+                    </div>
+                  ) : null}
 
                   <div className="sl-progress-stage-title-anchor">
-                    <div className="sl-progress-stage-chapter-label">
-                      {chapterLabel}
-                    </div>
-
                     <div
                       className={`sl-progress-hero-title-stack ${
                         titleTransitioning ? 'is-transitioning' : ''
@@ -4016,8 +6260,15 @@ if (!cancelled) {
                         {incomingTitleText}
                       </div>
                     </div>
+
+                    <div className="sl-progress-stage-title-story">
+                      {chapterNarrative.sentences?.[0] ||
+                        getStageSummary(activeStep)}
+                    </div>
                   </div>
-                  {showStageStorypoints &&
+
+                  {!isLegacyChapter &&
+                  showStageStorypoints &&
                   currentStageStorypoints.length > 0 ? (
                     <div
                       ref={storypointRailRef}
@@ -4031,19 +6282,22 @@ if (!cancelled) {
                             resolvedStorypointId === item.id ? 'is-active' : ''
                           }`}
                           onMouseEnter={() => {
-                            if (!isTouchDevice && !pinnedStorypointId)
+                            if (!isTouchDevice && !pinnedStorypointId) {
                               openStorypoint(item.id);
+                            }
                           }}
                           onMouseLeave={() => {
-                            if (!isTouchDevice && !pinnedStorypointId)
+                            if (!isTouchDevice && !pinnedStorypointId) {
                               scheduleCloseStorypoint();
+                            }
                           }}
                           onFocus={() => {
                             if (!pinnedStorypointId) openStorypoint(item.id);
                           }}
                           onBlur={() => {
-                            if (!isTouchDevice && !pinnedStorypointId)
+                            if (!isTouchDevice && !pinnedStorypointId) {
                               scheduleCloseStorypoint();
+                            }
                           }}
                           onClick={() => togglePinnedStorypoint(item.id)}
                           aria-pressed={pinnedStorypointId === item.id}
@@ -4064,9 +6318,308 @@ if (!cancelled) {
           </div>
         </div>
       </section>
+
+      {isLegacyChapter && isAdmin ? (
+        <section className="sl-progress-legacy-admin-shell">
+          <div className="sl-progress-legacy-admin-card">
+            <div className="sl-progress-legacy-admin-eyebrow">
+              SoundLegend Cover Reveal
+            </div>
+
+            <div className="sl-progress-legacy-admin-title">
+              Deploy cover story before Chapter I
+            </div>
+
+            <div className="sl-progress-legacy-admin-body">
+              When deployed, the SoundLegend cover becomes visible as the
+              opening story panel before Chapter I for the customer.
+            </div>
+
+            <div className="sl-progress-legacy-admin-grid">
+              <div className="sl-progress-legacy-admin-field">
+                <label className="sl-progress-legacy-admin-label">
+                  Cover title
+                </label>
+                <input
+                  type="text"
+                  className="sl-progress-legacy-admin-input"
+                  value={revealCoverTitle}
+                  onChange={(e) => setRevealCoverTitle(e.target.value)}
+                  placeholder="Your SoundLegend Story"
+                />
+              </div>
+
+              <div className="sl-progress-legacy-admin-field">
+                <label className="sl-progress-legacy-admin-label">
+                  Cover subtitle
+                </label>
+                <textarea
+                  className="sl-progress-legacy-admin-textarea"
+                  value={revealCoverSubtitle}
+                  onChange={(e) => setRevealCoverSubtitle(e.target.value)}
+                  placeholder="The completed journey of your custom instrument."
+                  rows={3}
+                />
+              </div>
+
+              <div className="sl-progress-legacy-admin-field">
+                <label className="sl-progress-legacy-admin-label">
+                  Cover media URL
+                </label>
+                <input
+                  type="text"
+                  className="sl-progress-legacy-admin-input"
+                  value={revealCoverMediaUrl}
+                  onChange={(e) => setRevealCoverMediaUrl(e.target.value)}
+                  placeholder="https://..."
+                />
+              </div>
+
+              <div className="sl-progress-legacy-admin-field">
+                <label className="sl-progress-legacy-admin-label">
+                  Cover media title
+                </label>
+                <input
+                  type="text"
+                  className="sl-progress-legacy-admin-input"
+                  value={revealCoverMediaTitle}
+                  onChange={(e) => setRevealCoverMediaTitle(e.target.value)}
+                  placeholder="Final reveal image"
+                />
+              </div>
+
+              <div className="sl-progress-legacy-admin-field">
+                <label className="sl-progress-legacy-admin-label">
+                  Cover media type
+                </label>
+                <select
+                  className="sl-progress-legacy-admin-select"
+                  value={revealCoverMediaType}
+                  onChange={(e) => setRevealCoverMediaType(e.target.value)}
+                >
+                  <option value="image">Image</option>
+                  <option value="video">Video</option>
+                </select>
+              </div>
+
+              <div
+                className="sl-progress-legacy-admin-field"
+                style={{ gridColumn: '1 / -1' }}
+              >
+                <label className="sl-progress-legacy-admin-label">
+                  Select existing project media
+                </label>
+
+                <select
+                  className="sl-progress-legacy-admin-select"
+                  value={selectedExistingCoverId}
+                  onChange={(e) =>
+                    handleSelectExistingCoverMedia(e.target.value)
+                  }
+                >
+                  <option value="">Choose project media...</option>
+
+                  {projectCoverMediaOptions.map((item) => (
+                    <option key={item.id} value={item.id}>
+                      {item.title}
+                      {item.stageKey
+                        ? ` • ${toSentenceCaseLabel(item.stageKey)}`
+                        : ''}
+                      {item.type ? ` • ${item.type}` : ''}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div
+                className="sl-progress-legacy-admin-actions"
+                style={{ marginTop: 0, marginBottom: 12 }}
+              >
+                <button
+                  type="button"
+                  className="sl-progress-legacy-admin-btn sl-progress-legacy-admin-btn--ghost"
+                  onClick={openCoverRevealFilePicker}
+                  disabled={coverUploadBusy}
+                >
+                  {coverUploadBusy
+                    ? 'Uploading…'
+                    : 'Upload new cover image/video'}
+                </button>
+              </div>
+
+              {coverUploadError ? (
+                <div
+                  className="sl-progress-legacy-admin-status"
+                  style={{ marginTop: 0, marginBottom: 12, color: '#ffb4b4' }}
+                >
+                  {coverUploadError}
+                </div>
+              ) : null}
+
+<div
+  className="sl-progress-legacy-admin-field"
+  style={{ gridColumn: '1 / -1' }}
+>
+  <label className="sl-progress-legacy-admin-label">
+    Cover preview
+  </label>
+
+  <SoundLegendCoverHero
+    title={revealCoverTitle}
+    subtitle={revealCoverSubtitle}
+    mediaUrl={revealCoverMediaUrl}
+    mediaType={revealCoverMediaType}
+    mediaTitle={revealCoverMediaTitle}
+    smokeVideoUrl={sharedSmokeVideoUrl}
+    isPreview={true}
+  />
+</div>
+            </div>
+
+            <div className="sl-progress-legacy-admin-checklist">
+              <button
+                type="button"
+                className={`sl-progress-legacy-check ${
+                  revealChecklist.coverMediaSelected ? 'is-complete' : ''
+                }`}
+                onClick={() =>
+                  handleRevealChecklistToggle('coverMediaSelected')
+                }
+              >
+                Cover media selected
+              </button>
+
+              <button
+                type="button"
+                className={`sl-progress-legacy-check ${
+                  revealChecklist.chapterMediaReviewed ? 'is-complete' : ''
+                }`}
+                onClick={() =>
+                  handleRevealChecklistToggle('chapterMediaReviewed')
+                }
+              >
+                Chapter media reviewed
+              </button>
+
+              <button
+                type="button"
+                className={`sl-progress-legacy-check ${
+                  revealChecklist.visibilityReviewed ? 'is-complete' : ''
+                }`}
+                onClick={() =>
+                  handleRevealChecklistToggle('visibilityReviewed')
+                }
+              >
+                Visibility reviewed
+              </button>
+
+              <button
+                type="button"
+                className={`sl-progress-legacy-check ${
+                  revealChecklist.customerStoryApproved ? 'is-complete' : ''
+                }`}
+                onClick={() =>
+                  handleRevealChecklistToggle('customerStoryApproved')
+                }
+              >
+                Customer story approved
+              </button>
+
+              <button
+                type="button"
+                className={`sl-progress-legacy-check ${
+                  revealChecklist.shipmentConfirmed ? 'is-complete' : ''
+                }`}
+                onClick={() => handleRevealChecklistToggle('shipmentConfirmed')}
+              >
+                Shipment confirmed
+              </button>
+
+              <button
+                type="button"
+                className={`sl-progress-legacy-check ${
+                  revealChecklist.finalReviewComplete ? 'is-complete' : ''
+                }`}
+                onClick={() =>
+                  handleRevealChecklistToggle('finalReviewComplete')
+                }
+              >
+                Final review complete
+              </button>
+            </div>
+
+            <div className="sl-progress-legacy-admin-actions">
+              <button
+                type="button"
+                className="sl-progress-legacy-admin-btn sl-progress-legacy-admin-btn--ghost"
+                onClick={handleSaveRevealPanel}
+                disabled={revealPanelBusy}
+              >
+                {revealPanelBusy ? 'Saving…' : 'Save reveal settings'}
+              </button>
+
+              {revealData?.revealDeployed ? (
+                <button
+                  type="button"
+                  className="sl-progress-legacy-admin-btn sl-progress-legacy-admin-btn--ghost"
+                  onClick={handleHideReveal}
+                  disabled={revealPanelBusy}
+                >
+                  {revealPanelBusy ? 'Updating…' : 'Hide SoundLegend cover'}
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  className="sl-progress-legacy-admin-btn sl-progress-legacy-admin-btn--primary"
+                  onClick={handleDeployReveal}
+                  disabled={
+                    revealPanelBusy ||
+                    !revealCoverMediaUrl ||
+                    !revealChecklistComplete
+                  }
+                >
+                  {revealPanelBusy ? 'Deploying…' : 'Deploy SoundLegend cover'}
+                </button>
+              )}
+            </div>
+
+            <div className="sl-progress-legacy-admin-status">
+              {revealData?.revealDeployed
+                ? 'Cover reveal is live and will appear before Chapter I.'
+                : 'Cover reveal is currently hidden. Saved settings are preserved until you deploy it again.'}
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+      <input
+        id="stage-archive-file-input"
+        ref={archiveFileInputRef}
+        type="file"
+        multiple
+        style={{ display: 'none' }}
+        onChange={handleArchiveFileInputChange}
+      />
+
+      <input
+        ref={coverRevealFileInputRef}
+        type="file"
+        accept="image/*,video/*"
+        style={{ display: 'none' }}
+        onChange={handleCoverRevealFileInputChange}
+      />
+
       <StageResourceViewerModal
         item={selectedResourceItem}
         onClose={() => setSelectedResourceItem(null)}
+        isAdmin={isAdmin}
+        archiveEditorTitle={archiveEditorTitle}
+        setArchiveEditorTitle={setArchiveEditorTitle}
+        archiveEditorVisibility={archiveEditorVisibility}
+        setArchiveEditorVisibility={setArchiveEditorVisibility}
+        archiveEditorBusy={archiveEditorBusy}
+        onSaveMeta={handleSaveArchiveItemMeta}
+        onDelete={handleDeleteArchiveItem}
       />
     </div>
   );
