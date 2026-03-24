@@ -7351,3 +7351,331 @@ textarea.sl-progress-stage-reveal-input {
 .sl-progress-hero-carousel-shell {
   margin-top: 0;
 }
+
+/* Make chapter selector and hero feel like one connected unit */
+.sl-progress-stage-stack {
+  margin-bottom: 0;
+}
+
+.sl-progress-chapter-selector-bar,
+.sl-progress-chapter-selector,
+.sl-progress-chapter-selector-inner {
+  margin-bottom: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+.sl-progress-hero-carousel-shell,
+.sl-progress-hero-carousel-window,
+.sl-progress-hero-carousel-media,
+.sl-progress-stage-card-media {
+  margin-top: 0 !important;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+
+/* optional: tighten seam even more */
+.sl-progress-hero-carousel-shell {
+  overflow: hidden;
+}
+
+/* =========================================================
+   CHAPTER BAR + HERO CAROUSEL — HARD CONNECT
+   Put at VERY BOTTOM
+   ========================================================= */
+
+.sl-progress-stage-stack,
+.sl-progress-chapter-selector-bar,
+.sl-progress-chapter-selector,
+.sl-progress-chapter-selector-inner {
+  margin-bottom: 0 !important;
+}
+
+.sl-progress-chapter-selector-bar,
+.sl-progress-chapter-selector,
+.sl-progress-chapter-selector-inner {
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+/* remove top rounding from EVERY hero layer that may be drawing it */
+.sl-progress-hero-carousel-shell,
+.sl-progress-hero-carousel-window,
+.sl-progress-hero-carousel-stage-rail,
+.sl-progress-hero-carousel-center-slot,
+.sl-progress-hero-carousel-media,
+.sl-progress-stage-card-media,
+.sl-progress-stage-image-stack,
+.sl-progress-stage-card-base-image,
+.sl-progress-stage-card-base-image--stacked {
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+  clip-path: inset(0 round 0 0 22px 22px) !important;
+}
+
+/* if the shell itself is creating spacing, kill it */
+.sl-progress-hero-carousel-shell,
+.sl-progress-hero-carousel-window,
+.sl-progress-hero-carousel-stage-rail,
+.sl-progress-hero-carousel-center-slot,
+.sl-progress-hero-carousel-media {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* keep the joined seam clean */
+.sl-progress-hero-carousel-shell {
+  overflow: hidden !important;
+}
+
+/* =========================================================
+   LEGACY ADMIN EDITOR TOOLS — GROUPED / COMPACT
+   ========================================================= */
+
+.sl-progress-legacy-editor-tools {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 8px 0 18px;
+}
+
+.sl-progress-legacy-editor-group {
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(255, 255, 255, 0.02),
+      transparent 34%
+    ),
+    linear-gradient(180deg, rgba(10, 14, 28, 0.78), rgba(6, 9, 18, 0.9));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.025),
+    0 10px 24px rgba(0, 0, 0, 0.16);
+}
+
+.sl-progress-legacy-editor-group--image {
+  border-color: rgba(132, 154, 220, 0.16);
+}
+
+.sl-progress-legacy-editor-group--desktop {
+  border-color: rgba(110, 231, 183, 0.16);
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(110, 231, 183, 0.045),
+      transparent 34%
+    ),
+    linear-gradient(180deg, rgba(10, 14, 28, 0.78), rgba(6, 9, 18, 0.9));
+}
+
+.sl-progress-legacy-editor-group--mobile {
+  border-color: rgba(96, 165, 250, 0.18);
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(96, 165, 250, 0.05),
+      transparent 34%
+    ),
+    linear-gradient(180deg, rgba(10, 14, 28, 0.78), rgba(6, 9, 18, 0.9));
+}
+
+.sl-progress-legacy-editor-group-header {
+  margin-bottom: 12px;
+}
+
+.sl-progress-legacy-editor-group-kicker {
+  margin-bottom: 5px;
+  font-size: 0.58rem;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(190, 202, 232, 0.54);
+}
+
+.sl-progress-legacy-editor-group-title {
+  font-size: 0.88rem;
+  line-height: 1.3;
+  font-weight: 600;
+  color: rgba(244, 247, 255, 0.94);
+}
+
+.sl-progress-legacy-editor-slider-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.sl-progress-legacy-editor-slider-grid--dual {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.sl-progress-legacy-admin-field--slider {
+  padding: 10px 10px 8px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
+}
+
+.sl-progress-legacy-admin-field--slider .sl-progress-legacy-admin-label {
+  margin-bottom: 3px;
+  font-size: 0.56rem;
+  line-height: 1.2;
+  letter-spacing: 0.14em;
+}
+
+.sl-progress-legacy-admin-field--slider .sl-progress-legacy-admin-range {
+  height: 6px;
+  margin-top: 2px;
+}
+
+.sl-progress-legacy-admin-field--slider
+  .sl-progress-legacy-admin-range::-webkit-slider-thumb {
+  width: 16px;
+  height: 16px;
+}
+
+.sl-progress-legacy-admin-field--slider
+  .sl-progress-legacy-admin-range::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+}
+
+.sl-progress-legacy-admin-field--slider .sl-progress-legacy-admin-range-value {
+  margin-top: 4px;
+  font-size: 0.7rem;
+  line-height: 1.1;
+  color: rgba(216, 224, 242, 0.72);
+}
+
+/* preview area tighten-up */
+.sl-progress-legacy-admin-preview-grid {
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.sl-progress-legacy-admin-preview
+  .sl-progress-soundlegend-cover-hero
+  .sl-progress-soundlegend-cover-media {
+  min-height: 280px;
+}
+
+.sl-progress-legacy-admin-phone-shell {
+  width: min(100%, 250px);
+}
+
+.sl-progress-legacy-admin-phone-shell
+  .sl-progress-soundlegend-cover-media {
+  min-height: 430px;
+}
+
+/* tablet/mobile */
+@media (max-width: 768px) {
+  .sl-progress-legacy-editor-tools {
+    gap: 12px;
+    margin: 8px 0 16px;
+  }
+
+  .sl-progress-legacy-editor-group {
+    padding: 12px;
+    border-radius: 16px;
+  }
+
+  .sl-progress-legacy-editor-slider-grid,
+  .sl-progress-legacy-editor-slider-grid--dual {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .sl-progress-legacy-admin-preview-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+
+  .sl-progress-legacy-admin-preview-label {
+    margin-bottom: 8px;
+    font-size: 0.58rem;
+    letter-spacing: 0.16em;
+  }
+
+  .sl-progress-legacy-admin-preview
+    .sl-progress-soundlegend-cover-hero
+    .sl-progress-soundlegend-cover-media {
+    min-height: 210px;
+    border-radius: 16px;
+  }
+
+  .sl-progress-legacy-admin-phone-shell {
+    width: min(100%, 220px);
+    padding: 10px 7px 8px;
+    border-radius: 24px;
+  }
+
+  .sl-progress-legacy-admin-phone-island {
+    top: 8px;
+    width: 82px;
+    height: 16px;
+  }
+
+  .sl-progress-legacy-admin-phone-shell
+    .sl-progress-soundlegend-cover-media {
+    min-height: 390px;
+    border-radius: 18px;
+  }
+
+  .sl-progress-legacy-checklist {
+    gap: 6px;
+    margin: 10px 0 14px;
+  }
+
+  .sl-progress-legacy-check {
+    min-height: 32px;
+    padding: 0 10px;
+    font-size: 0.68rem;
+  }
+
+  .sl-progress-legacy-admin-actions {
+    gap: 8px;
+    margin-top: 0;
+  }
+
+  .sl-progress-legacy-admin-btn {
+    min-height: 38px;
+    font-size: 0.74rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .sl-progress-legacy-editor-slider-grid,
+  .sl-progress-legacy-editor-slider-grid--dual {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .sl-progress-legacy-admin-field--slider {
+    padding: 8px 8px 7px;
+    border-radius: 12px;
+  }
+
+  .sl-progress-legacy-admin-field--slider .sl-progress-legacy-admin-label {
+    font-size: 0.52rem;
+    letter-spacing: 0.12em;
+  }
+
+  .sl-progress-legacy-admin-field--slider .sl-progress-legacy-admin-range-value {
+    font-size: 0.68rem;
+  }
+
+  .sl-progress-legacy-admin-phone-shell {
+    width: min(100%, 205px);
+  }
+
+  .sl-progress-legacy-admin-phone-shell
+    .sl-progress-soundlegend-cover-media {
+    min-height: 360px;
+  }
+}
