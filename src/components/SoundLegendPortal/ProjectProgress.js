@@ -4527,35 +4527,23 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
     projectMarkedComplete,
   ]);
 
-  useEffect(() => {
-    if (!project?.id) return;
-    if (transitionLockRef.current) return;
-    if (!defaultChapterKey) return;
+useEffect(() => {
+  if (!project?.id) return;
+  if (transitionLockRef.current) return;
+  if (!defaultChapterKey) return;
 
-    const activeKeyIsRealStoryStage = storyChapters.some(
-      (chapter) => chapter.key === activeKey
-    );
+  const activeKeyIsStillValid = storyChapters.some(
+    (chapter) => chapter.key === activeKey
+  );
 
-    const isAlreadyOnDesiredDefault =
-      activeKey === defaultChapterKey &&
-      displayedStageKey === defaultChapterKey &&
-      displayedOverlayStageKey === defaultChapterKey;
-
-    if (isAlreadyOnDesiredDefault) return;
-
-    if (!activeKeyIsRealStoryStage || activeKey !== defaultChapterKey) {
-      setActiveKey(defaultChapterKey);
-      setDisplayedStageKey(defaultChapterKey);
-      setDisplayedOverlayStageKey(defaultChapterKey);
-    }
-  }, [
-    project?.id,
-    defaultChapterKey,
-    activeKey,
-    displayedStageKey,
-    displayedOverlayStageKey,
-    storyChapters,
-  ]);
+  // Only initialize/fix invalid state.
+  // Do NOT keep forcing the user back to the default chapter.
+  if (!activeKey || !activeKeyIsStillValid) {
+    setActiveKey(defaultChapterKey);
+    setDisplayedStageKey(defaultChapterKey);
+    setDisplayedOverlayStageKey(defaultChapterKey);
+  }
+}, [project?.id, defaultChapterKey, activeKey, storyChapters]);
 
   const activeStep =
     storyChapters.find((s) => s.key === activeKey) || storyChapters[0];
@@ -7055,171 +7043,206 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
                 </div>
               </div>
 
-              <div className="sl-progress-legacy-admin-grid">
-                <div className="sl-progress-legacy-admin-field">
-                  <label className="sl-progress-legacy-admin-label">
-                    Cover brightness
-                  </label>
-                  <input
-                    type="range"
-                    min="0.4"
-                    max="1.4"
-                    step="0.01"
-                    className="sl-progress-legacy-admin-range"
-                    value={revealCoverBrightness}
-                    onChange={(e) =>
-                      setRevealCoverBrightness(Number(e.target.value))
-                    }
-                  />
-                  <div className="sl-progress-legacy-admin-range-value">
-                    {revealCoverBrightness.toFixed(2)}
-                  </div>
-                </div>
+<div className="sl-progress-legacy-editor-tools">
+  <div className="sl-progress-legacy-editor-group sl-progress-legacy-editor-group--image">
+    <div className="sl-progress-legacy-editor-group-header">
+      <div className="sl-progress-legacy-editor-group-kicker">
+        Image Treatment
+      </div>
+      <div className="sl-progress-legacy-editor-group-title">
+        Global cover look
+      </div>
+    </div>
 
-                <div className="sl-progress-legacy-admin-field">
-                  <label className="sl-progress-legacy-admin-label">
-                    Cover saturation
-                  </label>
-                  <input
-                    type="range"
-                    min="0.4"
-                    max="1.8"
-                    step="0.01"
-                    className="sl-progress-legacy-admin-range"
-                    value={revealCoverSaturation}
-                    onChange={(e) =>
-                      setRevealCoverSaturation(Number(e.target.value))
-                    }
-                  />
-                  <div className="sl-progress-legacy-admin-range-value">
-                    {revealCoverSaturation.toFixed(2)}
-                  </div>
-                </div>
+    <div className="sl-progress-legacy-editor-slider-grid">
+      <div className="sl-progress-legacy-admin-field sl-progress-legacy-admin-field--slider">
+        <label className="sl-progress-legacy-admin-label">
+          Smoke Overlay
+        </label>
+        <input
+          type="range"
+          min="0"
+          max="1"
+          step="0.01"
+          className="sl-progress-legacy-admin-range"
+          value={revealCoverSmokeOpacity}
+          onChange={(e) =>
+            setRevealCoverSmokeOpacity(Number(e.target.value))
+          }
+        />
+        <div className="sl-progress-legacy-admin-range-value">
+          {revealCoverSmokeOpacity.toFixed(2)}
+        </div>
+      </div>
 
-                <div className="sl-progress-legacy-admin-field sl-progress-legacy-admin-field--full">
-                  <label className="sl-progress-legacy-admin-label">
-                    Black floor
-                  </label>
-                  <input
-                    type="range"
-                    min="0"
-                    max="0.65"
-                    step="0.01"
-                    className="sl-progress-legacy-admin-range"
-                    value={revealCoverBlackFloor}
-                    onChange={(e) =>
-                      setRevealCoverBlackFloor(Number(e.target.value))
-                    }
-                  />
-                  <div className="sl-progress-legacy-admin-range-value">
-                    {revealCoverBlackFloor.toFixed(2)}
-                  </div>
-                </div>
+      <div className="sl-progress-legacy-admin-field sl-progress-legacy-admin-field--slider">
+        <label className="sl-progress-legacy-admin-label">
+          Brightness
+        </label>
+        <input
+          type="range"
+          min="0.5"
+          max="2.5"
+          step="0.01"
+          className="sl-progress-legacy-admin-range"
+          value={revealCoverBrightness}
+          onChange={(e) =>
+            setRevealCoverBrightness(Number(e.target.value))
+          }
+        />
+        <div className="sl-progress-legacy-admin-range-value">
+          {revealCoverBrightness.toFixed(2)}
+        </div>
+      </div>
 
-                <div className="sl-progress-legacy-admin-field sl-progress-legacy-admin-field--full">
-                  <label className="sl-progress-legacy-admin-label">
-                    Smoke overlay opacity
-                  </label>
-                  <input
-                    type="range"
-                    min="0"
-                    max="1"
-                    step="0.01"
-                    className="sl-progress-legacy-admin-range"
-                    value={revealCoverSmokeOpacity}
-                    onChange={(e) =>
-                      setRevealCoverSmokeOpacity(Number(e.target.value))
-                    }
-                  />
-                  <div className="sl-progress-legacy-admin-range-value">
-                    {revealCoverSmokeOpacity.toFixed(2)}
-                  </div>
-                </div>
-              </div>
+      <div className="sl-progress-legacy-admin-field sl-progress-legacy-admin-field--slider">
+        <label className="sl-progress-legacy-admin-label">
+          Black Floor
+        </label>
+        <input
+          type="range"
+          min="0"
+          max="1.0"
+          step="0.01"
+          className="sl-progress-legacy-admin-range"
+          value={revealCoverBlackFloor}
+          onChange={(e) =>
+            setRevealCoverBlackFloor(Number(e.target.value))
+          }
+        />
+        <div className="sl-progress-legacy-admin-range-value">
+          {revealCoverBlackFloor.toFixed(2)}
+        </div>
+      </div>
 
-              <div className="sl-progress-legacy-admin-grid">
-                <div className="sl-progress-legacy-admin-field">
-                  <label className="sl-progress-legacy-admin-label">
-                    Desktop X Position
-                  </label>
-                  <input
-                    type="range"
-                    min="0"
-                    max="100"
-                    step="1"
-                    className="sl-progress-legacy-admin-range"
-                    value={revealCoverDesktopPositionX}
-                    onChange={(e) =>
-                      setRevealCoverDesktopPositionX(Number(e.target.value))
-                    }
-                  />
-                  <div className="sl-progress-legacy-admin-range-value">
-                    {revealCoverDesktopPositionX}%
-                  </div>
-                </div>
+      <div className="sl-progress-legacy-admin-field sl-progress-legacy-admin-field--slider">
+        <label className="sl-progress-legacy-admin-label">
+          Saturation
+        </label>
+        <input
+          type="range"
+          min="0.5"
+          max="2.0"
+          step="0.01"
+          className="sl-progress-legacy-admin-range"
+          value={revealCoverSaturation}
+          onChange={(e) =>
+            setRevealCoverSaturation(Number(e.target.value))
+          }
+        />
+        <div className="sl-progress-legacy-admin-range-value">
+          {revealCoverSaturation.toFixed(2)}
+        </div>
+      </div>
+    </div>
+  </div>
 
-                <div className="sl-progress-legacy-admin-field">
-                  <label className="sl-progress-legacy-admin-label">
-                    Desktop Zoom
-                  </label>
-                  <input
-                    type="range"
-                    min="1"
-                    max="1.8"
-                    step="0.01"
-                    className="sl-progress-legacy-admin-range"
-                    value={revealCoverDesktopScale}
-                    onChange={(e) =>
-                      setRevealCoverDesktopScale(Number(e.target.value))
-                    }
-                  />
-                  <div className="sl-progress-legacy-admin-range-value">
-                    {revealCoverDesktopScale.toFixed(2)}
-                  </div>
-                </div>
-              </div>
+  <div className="sl-progress-legacy-editor-group sl-progress-legacy-editor-group--desktop">
+    <div className="sl-progress-legacy-editor-group-header">
+      <div className="sl-progress-legacy-editor-group-kicker">
+        Desktop Framing
+      </div>
+      <div className="sl-progress-legacy-editor-group-title">
+        Desktop preview position + zoom
+      </div>
+    </div>
 
-              <div className="sl-progress-legacy-admin-grid">
-                <div className="sl-progress-legacy-admin-field">
-                  <label className="sl-progress-legacy-admin-label">
-                    Mobile X Position
-                  </label>
-                  <input
-                    type="range"
-                    min="0"
-                    max="100"
-                    step="1"
-                    className="sl-progress-legacy-admin-range"
-                    value={revealCoverMobilePositionX}
-                    onChange={(e) =>
-                      setRevealCoverMobilePositionX(Number(e.target.value))
-                    }
-                  />
-                  <div className="sl-progress-legacy-admin-range-value">
-                    {revealCoverMobilePositionX}%
-                  </div>
-                </div>
+    <div className="sl-progress-legacy-editor-slider-grid sl-progress-legacy-editor-slider-grid--dual">
+      <div className="sl-progress-legacy-admin-field sl-progress-legacy-admin-field--slider">
+        <label className="sl-progress-legacy-admin-label">
+          Desktop X Position
+        </label>
+        <input
+          type="range"
+          min="0"
+          max="100"
+          step="1"
+          className="sl-progress-legacy-admin-range"
+          value={revealCoverDesktopPositionX}
+          onChange={(e) =>
+            setRevealCoverDesktopPositionX(Number(e.target.value))
+          }
+        />
+        <div className="sl-progress-legacy-admin-range-value">
+          {revealCoverDesktopPositionX}%
+        </div>
+      </div>
 
-                <div className="sl-progress-legacy-admin-field">
-                  <label className="sl-progress-legacy-admin-label">
-                    Mobile Zoom
-                  </label>
-                  <input
-                    type="range"
-                    min="1"
-                    max="1.8"
-                    step="0.01"
-                    className="sl-progress-legacy-admin-range"
-                    value={revealCoverMobileScale}
-                    onChange={(e) =>
-                      setRevealCoverMobileScale(Number(e.target.value))
-                    }
-                  />
-                  <div className="sl-progress-legacy-admin-range-value">
-                    {revealCoverMobileScale.toFixed(2)}
-                  </div>
-                </div>
-              </div>
+      <div className="sl-progress-legacy-admin-field sl-progress-legacy-admin-field--slider">
+        <label className="sl-progress-legacy-admin-label">
+          Desktop Zoom
+        </label>
+        <input
+          type="range"
+          min="1"
+          max="1.8"
+          step="0.01"
+          className="sl-progress-legacy-admin-range"
+          value={revealCoverDesktopScale}
+          onChange={(e) =>
+            setRevealCoverDesktopScale(Number(e.target.value))
+          }
+        />
+        <div className="sl-progress-legacy-admin-range-value">
+          {revealCoverDesktopScale.toFixed(2)}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div className="sl-progress-legacy-editor-group sl-progress-legacy-editor-group--mobile">
+    <div className="sl-progress-legacy-editor-group-header">
+      <div className="sl-progress-legacy-editor-group-kicker">
+        Mobile Framing
+      </div>
+      <div className="sl-progress-legacy-editor-group-title">
+        Mobile preview position + zoom
+      </div>
+    </div>
+
+    <div className="sl-progress-legacy-editor-slider-grid sl-progress-legacy-editor-slider-grid--dual">
+      <div className="sl-progress-legacy-admin-field sl-progress-legacy-admin-field--slider">
+        <label className="sl-progress-legacy-admin-label">
+          Mobile X Position
+        </label>
+        <input
+          type="range"
+          min="0"
+          max="100"
+          step="1"
+          className="sl-progress-legacy-admin-range"
+          value={revealCoverMobilePositionX}
+          onChange={(e) =>
+            setRevealCoverMobilePositionX(Number(e.target.value))
+          }
+        />
+        <div className="sl-progress-legacy-admin-range-value">
+          {revealCoverMobilePositionX}%
+        </div>
+      </div>
+
+      <div className="sl-progress-legacy-admin-field sl-progress-legacy-admin-field--slider">
+        <label className="sl-progress-legacy-admin-label">
+          Mobile Zoom
+        </label>
+        <input
+          type="range"
+          min="1"
+          max="1.8"
+          step="0.01"
+          className="sl-progress-legacy-admin-range"
+          value={revealCoverMobileScale}
+          onChange={(e) =>
+            setRevealCoverMobileScale(Number(e.target.value))
+          }
+        />
+        <div className="sl-progress-legacy-admin-range-value">
+          {revealCoverMobileScale.toFixed(2)}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
               <div className="sl-progress-legacy-admin-checklist">
                 <button
