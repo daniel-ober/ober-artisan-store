@@ -3611,6 +3611,8 @@ function SoundLegendCoverHero({
   saturation = 1.02,
   blackFloor = 0.22,
   smokeOpacity = 0.28,
+  positionX = 50,
+  scale = 1,
 }) {
   const resolvedType = getFileTypeFromUrl(mediaUrl, mediaType);
   const embedUrl =
@@ -3658,6 +3660,14 @@ function SoundLegendCoverHero({
               alt={mediaTitle || title || 'SoundLegend cover'}
               className="sl-progress-soundlegend-cover-asset"
               style={{
+                position: 'absolute',
+                inset: 0,
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                objectPosition: `${positionX}% 50%`,
+                transform: `scale(${scale})`,
+                transformOrigin: 'center center',
                 filter: `brightness(${brightness}) saturate(${saturation})`,
               }}
             />
@@ -3729,7 +3739,7 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
 
   const [project, setProject] = useState(cachedInitialProject || null);
   const [loading, setLoading] = useState(!cachedInitialProject);
-  const [activeKey, setActiveKey] = useState(STEPS[0].key);
+  const [activeKey, setActiveKey] = useState('soundlegendCover');
 
   const [archiveEditorBusy, setArchiveEditorBusy] = useState(false);
   const [archiveEditorTitle, setArchiveEditorTitle] = useState('');
@@ -3776,6 +3786,13 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
     DEFAULT_REVEAL_COVER_SMOKE_OPACITY
   );
 
+  const [revealCoverDesktopPositionX, setRevealCoverDesktopPositionX] =
+    useState(50);
+  const [revealCoverMobilePositionX, setRevealCoverMobilePositionX] =
+    useState(50);
+  const [revealCoverDesktopScale, setRevealCoverDesktopScale] = useState(1);
+  const [revealCoverMobileScale, setRevealCoverMobileScale] = useState(1.15);
+
   const [legacyShippingStatus, setLegacyShippingStatus] =
     useState('waiting_to_ship');
   const [legacyShippingCarrier, setLegacyShippingCarrier] = useState('');
@@ -3784,10 +3801,10 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
   const [legacyDeliveredAt, setLegacyDeliveredAt] = useState('');
   const [legacyUndeliverableAt, setLegacyUndeliverableAt] = useState('');
 
-  const [displayedStageKey, setDisplayedStageKey] = useState(STEPS[0].key);
-  const [displayedOverlayStageKey, setDisplayedOverlayStageKey] = useState(
-    STEPS[0].key
-  );
+  const [displayedStageKey, setDisplayedStageKey] =
+    useState('soundlegendCover');
+  const [displayedOverlayStageKey, setDisplayedOverlayStageKey] =
+    useState('soundlegendCover');
 
   const cachedStageMedia = useMemo(
     () => readProjectProgressStageMediaCache(),
@@ -3817,7 +3834,6 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
   const [activeInteractiveStepId, setActiveInteractiveStepId] = useState(null);
 
   const [carouselAnimating, setCarouselAnimating] = useState(false);
-  const [dragOffsetX, setDragOffsetX] = useState(0);
 
   const [selectedResourceItem, setSelectedResourceItem] = useState(null);
 
@@ -3844,9 +3860,6 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
   const carouselWindowRef = useRef(null);
 
   const transitionLockRef = useRef(false);
-  const dragStartXRef = useRef(0);
-  const dragDeltaXRef = useRef(0);
-  const isDraggingRef = useRef(false);
 
   const archiveFileInputRef = useRef(null);
 
@@ -3892,6 +3905,11 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
     setRevealCoverSaturation(DEFAULT_REVEAL_COVER_SATURATION);
     setRevealCoverBlackFloor(DEFAULT_REVEAL_COVER_BLACK_FLOOR);
     setRevealCoverSmokeOpacity(DEFAULT_REVEAL_COVER_SMOKE_OPACITY);
+
+    setRevealCoverDesktopPositionX(50);
+    setRevealCoverMobilePositionX(50);
+    setRevealCoverDesktopScale(1);
+    setRevealCoverMobileScale(1.15);
   };
 
   const openCoverRevealFilePicker = () => {
@@ -4073,6 +4091,29 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
         ? reveal.coverSmokeOpacity
         : DEFAULT_REVEAL_COVER_SMOKE_OPACITY
     );
+    setRevealCoverDesktopPositionX(
+      typeof reveal.coverDesktopPositionX === 'number'
+        ? reveal.coverDesktopPositionX
+        : 50
+    );
+
+    setRevealCoverMobilePositionX(
+      typeof reveal.coverMobilePositionX === 'number'
+        ? reveal.coverMobilePositionX
+        : 50
+    );
+
+    setRevealCoverDesktopScale(
+      typeof reveal.coverDesktopScale === 'number'
+        ? reveal.coverDesktopScale
+        : 1
+    );
+
+    setRevealCoverMobileScale(
+      typeof reveal.coverMobileScale === 'number'
+        ? reveal.coverMobileScale
+        : 1.15
+    );
   }, [project]);
 
   useEffect(() => {
@@ -4232,6 +4273,7 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
 
   const overallPct = useMemo(() => getOverallProgress(project), [project]);
   const targetWindow = useMemo(() => getTargetWindow(project), [project]);
+  const projectMarkedComplete = overallPct >= 100;
 
   const currentStepIndex = useMemo(
     () => (overallPct === 0 ? 0 : getCurrentStepIndex(project)),
@@ -4351,6 +4393,10 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
         saturation: revealCoverSaturation,
         blackFloor: revealCoverBlackFloor,
         smokeOpacity: revealCoverSmokeOpacity,
+        desktopPositionX: revealCoverDesktopPositionX,
+        mobilePositionX: revealCoverMobilePositionX,
+        desktopScale: revealCoverDesktopScale,
+        mobileScale: revealCoverMobileScale,
       });
     }
 
@@ -4374,43 +4420,142 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
 
     return chapters;
   }, [
-  overallPct,
-  revealIsDeployed,
-  revealCoverIsAvailable,
-  revealCoverTitle,
-  revealCoverSubtitle,
-  revealCoverMediaUrl,
-  revealCoverMediaTitle,
-  revealCoverMediaType,
-  revealCoverBrightness,
-  revealCoverSaturation,
-  revealCoverBlackFloor,
-  revealCoverSmokeOpacity,
+    overallPct,
+    revealIsDeployed,
+    revealCoverIsAvailable,
+    revealCoverTitle,
+    revealCoverSubtitle,
+    revealCoverMediaUrl,
+    revealCoverMediaTitle,
+    revealCoverMediaType,
+    revealCoverBrightness,
+    revealCoverSaturation,
+    revealCoverBlackFloor,
+    revealCoverSmokeOpacity,
+    revealCoverDesktopPositionX,
+    revealCoverMobilePositionX,
+    revealCoverDesktopScale,
+    revealCoverMobileScale,
+  ]);
+
+  const defaultChapterKey = useMemo(() => {
+    const reveal = project?.soundlegendReveal || {};
+
+    const hasRevealCoverChapter = storyChapters.some(
+      (chapter) => chapter.key === 'soundlegendCover'
+    );
+
+    const projectIsComplete = overallPct >= 100;
+    const revealIsLive = !!reveal.revealDeployed;
+    const revealHasMedia = !!reveal.coverMediaUrl;
+
+    if (
+      projectIsComplete &&
+      revealIsLive &&
+      revealHasMedia &&
+      hasRevealCoverChapter
+    ) {
+      return 'soundlegendCover';
+    }
+
+    return (STEPS[currentStepIndex] || STEPS[0])?.key || STEPS[0].key;
+  }, [project, storyChapters, overallPct, currentStepIndex]);
+
+  const chapterSelectorItems = useMemo(() => {
+    return storyChapters.map((chapter, index) => {
+      const isCover = chapter.key === 'soundlegendCover';
+      const isLegacy = chapter.key === 'soundlegendEpilogue';
+      const isActive = chapter.key === activeKey;
+
+      let visualState = 'default';
+
+      if (isCover) {
+        visualState =
+          revealIsDeployed && revealCoverIsAvailable ? 'revealed' : 'locked';
+      } else if (isLegacy) {
+        visualState = overallPct >= 100 ? 'revealed' : 'locked';
+      } else {
+        const canonicalStageIndex = STEPS.findIndex(
+          (s) => s.key === chapter.key
+        );
+        const stepStatus = getResolvedVisualStageState({
+          project,
+          step: chapter,
+          stageIndex: canonicalStageIndex,
+          currentStepIndex,
+          projectMarkedComplete,
+        });
+
+        if (stepStatus === STAGE_MEDIA_STATE.COMPLETED) {
+          visualState = 'completed';
+        } else if (stepStatus === STAGE_MEDIA_STATE.CURRENT) {
+          visualState = 'current';
+        } else {
+          visualState = 'future';
+        }
+      }
+
+      return {
+        key: chapter.key,
+        label: isCover
+          ? 'Cover'
+          : isLegacy
+            ? 'Legacy'
+            : `${toRomanChapter(
+                storyChapters
+                  .filter(
+                    (c) =>
+                      c.key !== 'soundlegendCover' &&
+                      c.key !== 'soundlegendEpilogue'
+                  )
+                  .findIndex((c) => c.key === chapter.key) + 1
+              )}`,
+        title: chapter.label,
+        isActive,
+        isClickable: true,
+        visualState,
+      };
+    });
+  }, [
+    storyChapters,
+    activeKey,
+    revealIsDeployed,
+    revealCoverIsAvailable,
+    overallPct,
+    project,
+    currentStepIndex,
+    projectMarkedComplete,
   ]);
 
   useEffect(() => {
     if (!project?.id) return;
     if (transitionLockRef.current) return;
-
-    const liveDef = STEPS[currentStepIndex] || STEPS[0];
-    if (!liveDef?.key) return;
-
-    const isSpecialChapter =
-      activeKey === 'soundlegendCover' || activeKey === 'soundlegendEpilogue';
+    if (!defaultChapterKey) return;
 
     const activeKeyIsRealStoryStage = storyChapters.some(
       (chapter) => chapter.key === activeKey
     );
 
-    if (!activeKeyIsRealStoryStage) {
-      setActiveKey(liveDef.key);
-      setDisplayedStageKey(liveDef.key);
-      setDisplayedOverlayStageKey(liveDef.key);
-      return;
-    }
+    const isAlreadyOnDesiredDefault =
+      activeKey === defaultChapterKey &&
+      displayedStageKey === defaultChapterKey &&
+      displayedOverlayStageKey === defaultChapterKey;
 
-    if (isAdmin && isSpecialChapter) return;
-  }, [project?.id, currentStepIndex, isAdmin, activeKey, storyChapters]);
+    if (isAlreadyOnDesiredDefault) return;
+
+    if (!activeKeyIsRealStoryStage || activeKey !== defaultChapterKey) {
+      setActiveKey(defaultChapterKey);
+      setDisplayedStageKey(defaultChapterKey);
+      setDisplayedOverlayStageKey(defaultChapterKey);
+    }
+  }, [
+    project?.id,
+    defaultChapterKey,
+    activeKey,
+    displayedStageKey,
+    displayedOverlayStageKey,
+    storyChapters,
+  ]);
 
   const activeStep =
     storyChapters.find((s) => s.key === activeKey) || storyChapters[0];
@@ -4427,40 +4572,6 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
     if (!ms) return '';
     return fmtDate(ms);
   };
-
-  useEffect(() => {
-    const reveal = project?.soundlegendReveal || {};
-
-    setRevealCoverTitle(reveal.coverTitle || 'Your SoundLegend Story');
-    setRevealCoverSubtitle(
-      reveal.coverSubtitle || 'The completed journey of your custom instrument.'
-    );
-    setRevealCoverMediaUrl(reveal.coverMediaUrl || '');
-    setRevealCoverMediaTitle(reveal.coverMediaTitle || '');
-    setRevealCoverMediaType(reveal.coverMediaType || 'image');
-
-    setRevealChecklist({
-      coverMediaSelected: !!reveal.adminChecklist?.coverMediaSelected,
-      chapterMediaReviewed: !!reveal.adminChecklist?.chapterMediaReviewed,
-      visibilityReviewed: !!reveal.adminChecklist?.visibilityReviewed,
-      customerStoryApproved: !!reveal.adminChecklist?.customerStoryApproved,
-      shipmentConfirmed: !!reveal.adminChecklist?.shipmentConfirmed,
-      finalReviewComplete: !!reveal.adminChecklist?.finalReviewComplete,
-    });
-
-    setLegacyShippingStatus(reveal.shippingStatus || 'waiting_to_ship');
-    setLegacyShippingCarrier(reveal.shippingCarrier || '');
-    setLegacyTrackingNumber(reveal.trackingNumber || '');
-    setLegacyShippedAt(
-      reveal.shippedAt ? formatDateForInput(reveal.shippedAt) : ''
-    );
-    setLegacyDeliveredAt(
-      reveal.deliveredAt ? formatDateForInput(reveal.deliveredAt) : ''
-    );
-    setLegacyUndeliverableAt(
-      reveal.undeliverableAt ? formatDateForInput(reveal.undeliverableAt) : ''
-    );
-  }, [project]);
 
   const shippingSummary = useMemo(() => {
     const reveal = project?.soundlegendReveal || {};
@@ -4715,8 +4826,6 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
     return Object.values(revealChecklist).every(Boolean);
   }, [revealChecklist]);
 
-  const projectMarkedComplete = overallPct >= 100;
-
   const legacyTrackingText = project?.soundlegendReveal?.trackingNumber?.trim()
     ? `${project?.soundlegendReveal?.shippingCarrier || 'Carrier'} • ${
         project.soundlegendReveal.trackingNumber
@@ -4871,9 +4980,6 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
     displayedStageKey === 'soundlegendCover' ||
     activeStep?.key === 'soundlegendCover';
 
-
-
-
   const activeStatus = useMemo(() => {
     if (!project || !activeStep) return 'not_started';
 
@@ -4918,6 +5024,9 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
 
       if (!coverUrl) return null;
 
+      const isMobileViewport =
+        typeof window !== 'undefined' ? window.innerWidth <= 768 : false;
+
       return {
         stageKey: step.key,
         stageLabel: step.label,
@@ -4934,6 +5043,12 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
           typeof step.blackFloor === 'number' ? step.blackFloor : 0.22,
         smokeOpacity:
           typeof step.smokeOpacity === 'number' ? step.smokeOpacity : 0.28,
+        positionX: isMobileViewport
+          ? (step.mobilePositionX ?? 50)
+          : (step.desktopPositionX ?? 50),
+        scale: isMobileViewport
+          ? (step.mobileScale ?? 1.15)
+          : (step.desktopScale ?? 1),
       };
     }
 
@@ -4987,51 +5102,52 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
     };
   };
 
-const allRenderableStageLayers = useMemo(() => {
-  return storyChapters
-    .map((step) => {
-      const media = getStageMediaForStep(step);
+  const allRenderableStageLayers = useMemo(() => {
+    return storyChapters
+      .map((step) => {
+        const media = getStageMediaForStep(step);
 
-      return {
-        stageKey: step.key,
-        baseImageUrl: media?.baseImageUrl || '',
-        coverMediaUrl: media?.coverMediaUrl || '',
-        coverMediaType: media?.coverMediaType || '',
-        isCoverMedia: !!media?.isCoverMedia,
-        mediaState: media?.mediaState || STAGE_MEDIA_STATE.FUTURE,
-        isVisible: displayedStageKey === step.key,
-        label: step.label,
-        brightness: media?.brightness ?? 1,
-        saturation: media?.saturation ?? 1,
-        blackFloor: media?.blackFloor ?? 0,
-        smokeOpacity: media?.smokeOpacity ?? 0,
-      };
-    })
-    .filter((layer) => !!layer.baseImageUrl || !!layer.coverMediaUrl);
-}, [
-  storyChapters,
-  displayedStageKey,
-  selectedStageMediaCache,
-  currentStepIndex,
-  project,
-  projectMarkedComplete,
-]);
+        return {
+          stageKey: step.key,
+          baseImageUrl: media?.baseImageUrl || '',
+          coverMediaUrl: media?.coverMediaUrl || '',
+          coverMediaType: media?.coverMediaType || '',
+          isCoverMedia: !!media?.isCoverMedia,
+          mediaState: media?.mediaState || STAGE_MEDIA_STATE.FUTURE,
+          isVisible: displayedStageKey === step.key,
+          label: step.label,
+          brightness: media?.brightness ?? 1,
+          saturation: media?.saturation ?? 1,
+          blackFloor: media?.blackFloor ?? 0,
+          smokeOpacity: media?.smokeOpacity ?? 0,
+          positionX: media?.positionX ?? 50,
+          scale: media?.scale ?? 1,
+        };
+      })
+      .filter((layer) => !!layer.baseImageUrl || !!layer.coverMediaUrl);
+  }, [
+    storyChapters,
+    displayedStageKey,
+    selectedStageMediaCache,
+    currentStepIndex,
+    project,
+    projectMarkedComplete,
+  ]);
 
-const activeDisplayedLayer = allRenderableStageLayers.find(
-  (layer) => layer.stageKey === displayedStageKey
-);
+  const activeDisplayedLayer = allRenderableStageLayers.find(
+    (layer) => layer.stageKey === displayedStageKey
+  );
 
-const smokeOverlayOpacity = isLegacyStageVisible
-  ? 0.48
-  : isCoverStageVisible
-    ? (activeDisplayedLayer?.smokeOpacity ?? revealCoverSmokeOpacity ?? 0.28)
-    : (SMOKE_OPACITY_BY_STAGE_STATE[displayedStageStatus] ?? 0.6);
+  const smokeOverlayOpacity = isLegacyStageVisible
+    ? 0.48
+    : isCoverStageVisible
+      ? (activeDisplayedLayer?.smokeOpacity ?? revealCoverSmokeOpacity ?? 0.28)
+      : (SMOKE_OPACITY_BY_STAGE_STATE[displayedStageStatus] ?? 0.6);
 
-const lockedStageVeilOpacity =
-  isLegacyStageVisible || isCoverStageVisible
-    ? 0
-    : (VEIL_OPACITY_BY_STAGE_STATE[displayedStageStatus] ?? 0);
-
+  const lockedStageVeilOpacity =
+    isLegacyStageVisible || isCoverStageVisible
+      ? 0
+      : (VEIL_OPACITY_BY_STAGE_STATE[displayedStageStatus] ?? 0);
 
   const navigateToStageIndex = (targetIndex) => {
     if (transitionLockRef.current) return;
@@ -5180,44 +5296,6 @@ const lockedStageVeilOpacity =
     } finally {
       setArchiveUploading(false);
     }
-  };
-
-  const beginDrag = (clientX) => {
-    if (carouselAnimating) return;
-    isDraggingRef.current = true;
-    dragStartXRef.current = clientX;
-    dragDeltaXRef.current = 0;
-  };
-
-  const updateDrag = (clientX) => {
-    if (!isDraggingRef.current || carouselAnimating) return;
-
-    const delta = clientX - dragStartXRef.current;
-    dragDeltaXRef.current = delta;
-    const clamped = Math.max(-120, Math.min(120, delta));
-    setDragOffsetX(clamped);
-  };
-
-  const endDrag = () => {
-    if (!isDraggingRef.current || carouselAnimating) return;
-
-    const delta = dragDeltaXRef.current;
-    const threshold = 70;
-
-    isDraggingRef.current = false;
-    setDragOffsetX(0);
-
-    if (delta <= -threshold && canGoNext) {
-      goNextStage();
-      return;
-    }
-
-    if (delta >= threshold && canGoPrev) {
-      goPrevStage();
-      return;
-    }
-
-    dragDeltaXRef.current = 0;
   };
 
   const selectedArchiveCapture = useMemo(() => {
@@ -5469,6 +5547,12 @@ const lockedStageVeilOpacity =
       coverSaturation: overrides.coverSaturation ?? revealCoverSaturation,
       coverBlackFloor: overrides.coverBlackFloor ?? revealCoverBlackFloor,
       coverSmokeOpacity: overrides.coverSmokeOpacity ?? revealCoverSmokeOpacity,
+      coverDesktopPositionX:
+        overrides.coverDesktopPositionX ?? revealCoverDesktopPositionX,
+      coverMobilePositionX:
+        overrides.coverMobilePositionX ?? revealCoverMobilePositionX,
+      coverDesktopScale: overrides.coverDesktopScale ?? revealCoverDesktopScale,
+      coverMobileScale: overrides.coverMobileScale ?? revealCoverMobileScale,
       adminChecklist: nextChecklist,
       shippingStatus:
         overrides.shippingStatus ?? legacyShippingStatus ?? 'waiting_to_ship',
@@ -5948,6 +6032,50 @@ const lockedStageVeilOpacity =
           </div>
         </div>
       </section>
+      <div className="sl-progress-stage-stack">
+        <div className="sl-progress-chapter-selector-bar">
+          <div
+            className="sl-progress-chapter-selector"
+            aria-label="Chapter selection"
+          >
+            <div className="sl-progress-chapter-selector-inner">
+              <div className="sl-progress-chapter-selector-title">
+                Chapter Selection
+              </div>
+
+              <div className="sl-progress-chapter-selector-list">
+                {chapterSelectorItems.map((item) => (
+                  <button
+                    key={item.key}
+                    type="button"
+                    className={[
+                      'sl-progress-chapter-selector-item',
+                      `is-${item.visualState}`,
+                      item.isActive ? 'is-active' : '',
+                    ]
+                      .filter(Boolean)
+                      .join(' ')}
+                    onClick={() => {
+                      const targetIndex = storyChapters.findIndex(
+                        (chapter) => chapter.key === item.key
+                      );
+                      if (targetIndex >= 0) {
+                        navigateToStageIndex(targetIndex);
+                      }
+                    }}
+                    aria-pressed={item.isActive}
+                    title={item.title}
+                  >
+                    <span className="sl-progress-chapter-selector-label">
+                      {item.label}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <section
         className={[
@@ -5961,18 +6089,8 @@ const lockedStageVeilOpacity =
         <div
           ref={carouselWindowRef}
           className="sl-progress-hero-carousel-window"
-          onMouseDown={(e) => beginDrag(e.clientX)}
-          onMouseMove={(e) => updateDrag(e.clientX)}
-          onMouseUp={endDrag}
-          onMouseLeave={endDrag}
-          onTouchStart={(e) => beginDrag(e.touches[0].clientX)}
-          onTouchMove={(e) => updateDrag(e.touches[0].clientX)}
-          onTouchEnd={endDrag}
         >
-          <div
-            className="sl-progress-hero-carousel-stage-rail is-single-panel"
-            style={{ transform: `translateX(${dragOffsetX * 0.08}px)` }}
-          >
+          <div className="sl-progress-hero-carousel-stage-rail is-single-panel">
             <div className="sl-progress-hero-carousel-center-slot">
               <div className="sl-progress-hero-carousel-media sl-progress-stage-card-media">
                 {allRenderableStageLayers.length > 0 ? (
@@ -5984,7 +6102,10 @@ const lockedStageVeilOpacity =
                         layer.isVisible ? 'is-visible' : 'is-hidden',
                       ].join(' ');
 
-                      if (layer.isCoverMedia && layer.coverMediaType === 'video') {
+                      if (
+                        layer.isCoverMedia &&
+                        layer.coverMediaType === 'video'
+                      ) {
                         return (
                           <video
                             key={layer.stageKey}
@@ -5997,7 +6118,15 @@ const lockedStageVeilOpacity =
                             preload="auto"
                             aria-hidden={!layer.isVisible}
                             style={{
+                              position: 'absolute',
+                              inset: 0,
+                              width: `${(layer.scale ?? 1) * 100}%`,
+                              height: `${(layer.scale ?? 1) * 100}%`,
                               objectFit: 'cover',
+                              objectPosition: `${layer.positionX ?? 50}% 50%`,
+                              left: '50%',
+                              top: '50%',
+                              transform: 'translate(-50%, -50%)',
                               filter: `brightness(${layer.brightness ?? 0.72}) saturate(${layer.saturation ?? 1.02})`,
                             }}
                           />
@@ -6019,7 +6148,22 @@ const lockedStageVeilOpacity =
                           decoding="sync"
                           draggable={false}
                           style={{
+                            position: 'absolute',
+                            inset: 0,
+                            width: layer.isCoverMedia
+                              ? `${(layer.scale ?? 1) * 100}%`
+                              : '100%',
+                            height: layer.isCoverMedia
+                              ? `${(layer.scale ?? 1) * 100}%`
+                              : '100%',
                             objectFit: 'cover',
+                            objectPosition: layer.isCoverMedia
+                              ? `${layer.positionX ?? 50}% 50%`
+                              : '50% 50%',
+                            left: '50%',
+                            top: '50%',
+                            transform: 'translate(-50%, -50%)',
+                            transformOrigin: 'center center',
                             filter: layer.isCoverMedia
                               ? `brightness(${layer.brightness ?? 0.72}) saturate(${layer.saturation ?? 1.02})`
                               : layer.mediaState === STAGE_MEDIA_STATE.COMPLETED
@@ -6172,8 +6316,10 @@ const lockedStageVeilOpacity =
                                   Workshop checkpoints
                                 </div>
                                 <div className="sl-progress-storypoint-checkpoints-count">
-                                  {currentChapterProgressData.completedCheckpoints}/
-                                  {currentChapterProgressData.totalCheckpoints}{' '}
+                                  {
+                                    currentChapterProgressData.completedCheckpoints
+                                  }
+                                  /{currentChapterProgressData.totalCheckpoints}{' '}
                                   completed
                                 </div>
                               </div>
@@ -6252,7 +6398,9 @@ const lockedStageVeilOpacity =
                                 )
                               )}
 
-                              <option value="other">Other / custom upload</option>
+                              <option value="other">
+                                Other / custom upload
+                              </option>
                             </select>
 
                             {selectedArchiveCapture ? (
@@ -6262,7 +6410,9 @@ const lockedStageVeilOpacity =
                                 </div>
 
                                 <div className="sl-progress-stage-storypoint-data-value sl-progress-stage-storypoint-data-value--body">
-                                  <strong>{selectedArchiveCapture.label}</strong>
+                                  <strong>
+                                    {selectedArchiveCapture.label}
+                                  </strong>
                                   <br />
                                   {selectedArchiveCapture.purpose}
                                   <br />
@@ -6523,34 +6673,39 @@ const lockedStageVeilOpacity =
                     </div>
                   ) : null}
 
-                  <div className="sl-progress-stage-title-anchor">
-                    <div
-                      className={`sl-progress-hero-title-stack ${
-                        titleTransitioning ? 'is-transitioning' : ''
-                      }`}
-                    >
-                      <div
-                        className={`sl-progress-hero-title sl-progress-hero-title--center sl-progress-hero-title-layer sl-progress-hero-title-layer--current ${
-                          titleTransitioning ? 'is-outgoing' : 'is-visible'
-                        }`}
-                      >
-                        {displayTitleText}
-                      </div>
+ <div className="sl-progress-stage-title-anchor">
+  {!isRevealCoverChapter ? (
+    <div className="sl-progress-stage-chapter-label">
+      {chapterLabel.toUpperCase()}
+    </div>
+  ) : null}
 
-                      <div
-                        className={`sl-progress-hero-title sl-progress-hero-title--center sl-progress-hero-title-layer sl-progress-hero-title-layer--incoming ${
-                          titleTransitioning ? 'is-incoming-visible' : ''
-                        }`}
-                      >
-                        {incomingTitleText}
-                      </div>
-                    </div>
+  <div
+    className={`sl-progress-hero-title-stack ${
+      titleTransitioning ? 'is-transitioning' : ''
+    }`}
+  >
+    <div
+      className={`sl-progress-hero-title sl-progress-hero-title--center sl-progress-hero-title-layer sl-progress-hero-title-layer--current ${
+        titleTransitioning ? 'is-outgoing' : 'is-visible'
+      }`}
+    >
+      {displayTitleText}
+    </div>
 
-                    <div className="sl-progress-stage-title-story">
-                      {chapterNarrative.sentences?.[0] ||
-                        getStageSummary(activeStep)}
-                    </div>
-                  </div>
+    <div
+      className={`sl-progress-hero-title sl-progress-hero-title--center sl-progress-hero-title-layer sl-progress-hero-title-layer--incoming ${
+        titleTransitioning ? 'is-incoming-visible' : ''
+      }`}
+    >
+      {incomingTitleText}
+    </div>
+  </div>
+
+  <div className="sl-progress-stage-title-story">
+    {chapterNarrative.sentences?.[0] || getStageSummary(activeStep)}
+  </div>
+</div>
 
                   {!isLegacyChapter &&
                   showStageStorypoints &&
@@ -6853,20 +7008,51 @@ const lockedStageVeilOpacity =
                 </div>
               ) : null}
 
-              <div className="sl-progress-legacy-admin-preview">
-                <SoundLegendCoverHero
-                  title={revealCoverTitle}
-                  subtitle={revealCoverSubtitle}
-                  mediaUrl={revealCoverMediaUrl}
-                  mediaType={revealCoverMediaType}
-                  mediaTitle={revealCoverMediaTitle}
-                  smokeVideoUrl={sharedSmokeVideoUrl}
-                  isPreview={false}
-                  brightness={revealCoverBrightness}
-                  saturation={revealCoverSaturation}
-                  blackFloor={revealCoverBlackFloor}
-                  smokeOpacity={revealCoverSmokeOpacity}
-                />
+              <div className="sl-progress-legacy-admin-preview-grid">
+                <div className="sl-progress-legacy-admin-preview">
+                  <div className="sl-progress-legacy-admin-preview-label">
+                    Desktop Preview
+                  </div>
+                  <SoundLegendCoverHero
+                    title={revealCoverTitle}
+                    subtitle={revealCoverSubtitle}
+                    mediaUrl={revealCoverMediaUrl}
+                    mediaType={revealCoverMediaType}
+                    mediaTitle={revealCoverMediaTitle}
+                    smokeVideoUrl={sharedSmokeVideoUrl}
+                    isPreview={false}
+                    brightness={revealCoverBrightness}
+                    saturation={revealCoverSaturation}
+                    blackFloor={revealCoverBlackFloor}
+                    smokeOpacity={revealCoverSmokeOpacity}
+                    positionX={revealCoverDesktopPositionX}
+                    scale={revealCoverDesktopScale}
+                  />
+                </div>
+
+                <div className="sl-progress-legacy-admin-preview sl-progress-legacy-admin-preview--mobile">
+                  <div className="sl-progress-legacy-admin-preview-label">
+                    Mobile Preview
+                  </div>
+                  <div className="sl-progress-legacy-admin-phone-shell">
+                    <div className="sl-progress-legacy-admin-phone-island" />
+                    <SoundLegendCoverHero
+                      title={revealCoverTitle}
+                      subtitle={revealCoverSubtitle}
+                      mediaUrl={revealCoverMediaUrl}
+                      mediaType={revealCoverMediaType}
+                      mediaTitle={revealCoverMediaTitle}
+                      smokeVideoUrl={sharedSmokeVideoUrl}
+                      isPreview={false}
+                      brightness={revealCoverBrightness}
+                      saturation={revealCoverSaturation}
+                      blackFloor={revealCoverBlackFloor}
+                      smokeOpacity={revealCoverSmokeOpacity}
+                      positionX={revealCoverMobilePositionX}
+                      scale={revealCoverMobileScale}
+                    />
+                  </div>
+                </div>
               </div>
 
               <div className="sl-progress-legacy-admin-grid">
@@ -6947,6 +7133,90 @@ const lockedStageVeilOpacity =
                   />
                   <div className="sl-progress-legacy-admin-range-value">
                     {revealCoverSmokeOpacity.toFixed(2)}
+                  </div>
+                </div>
+              </div>
+
+              <div className="sl-progress-legacy-admin-grid">
+                <div className="sl-progress-legacy-admin-field">
+                  <label className="sl-progress-legacy-admin-label">
+                    Desktop X Position
+                  </label>
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    step="1"
+                    className="sl-progress-legacy-admin-range"
+                    value={revealCoverDesktopPositionX}
+                    onChange={(e) =>
+                      setRevealCoverDesktopPositionX(Number(e.target.value))
+                    }
+                  />
+                  <div className="sl-progress-legacy-admin-range-value">
+                    {revealCoverDesktopPositionX}%
+                  </div>
+                </div>
+
+                <div className="sl-progress-legacy-admin-field">
+                  <label className="sl-progress-legacy-admin-label">
+                    Desktop Zoom
+                  </label>
+                  <input
+                    type="range"
+                    min="1"
+                    max="1.8"
+                    step="0.01"
+                    className="sl-progress-legacy-admin-range"
+                    value={revealCoverDesktopScale}
+                    onChange={(e) =>
+                      setRevealCoverDesktopScale(Number(e.target.value))
+                    }
+                  />
+                  <div className="sl-progress-legacy-admin-range-value">
+                    {revealCoverDesktopScale.toFixed(2)}
+                  </div>
+                </div>
+              </div>
+
+              <div className="sl-progress-legacy-admin-grid">
+                <div className="sl-progress-legacy-admin-field">
+                  <label className="sl-progress-legacy-admin-label">
+                    Mobile X Position
+                  </label>
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    step="1"
+                    className="sl-progress-legacy-admin-range"
+                    value={revealCoverMobilePositionX}
+                    onChange={(e) =>
+                      setRevealCoverMobilePositionX(Number(e.target.value))
+                    }
+                  />
+                  <div className="sl-progress-legacy-admin-range-value">
+                    {revealCoverMobilePositionX}%
+                  </div>
+                </div>
+
+                <div className="sl-progress-legacy-admin-field">
+                  <label className="sl-progress-legacy-admin-label">
+                    Mobile Zoom
+                  </label>
+                  <input
+                    type="range"
+                    min="1"
+                    max="1.8"
+                    step="0.01"
+                    className="sl-progress-legacy-admin-range"
+                    value={revealCoverMobileScale}
+                    onChange={(e) =>
+                      setRevealCoverMobileScale(Number(e.target.value))
+                    }
+                  />
+                  <div className="sl-progress-legacy-admin-range-value">
+                    {revealCoverMobileScale.toFixed(2)}
                   </div>
                 </div>
               </div>
