@@ -635,11 +635,7 @@
   overflow: hidden;
   padding: 0;
   user-select: none;
-  cursor: grab;
-}
-
-.sl-progress-hero-carousel-window:active {
-  cursor: grabbing;
+  touch-action: pan-y;
 }
 
 .sl-progress-hero-carousel-stage-rail,
@@ -7106,228 +7102,252 @@ textarea.sl-progress-stage-reveal-input {
 }
 
 /* =========================================================
-   REVEAL ADMIN — KEEP PREVIEW IN VIEW + COMPACT CONTROLS
-   ADD AT VERY BOTTOM
+   CHAPTER SELECTION — FINAL CLEAN FIX
    ========================================================= */
 
-.sl-progress-legacy-admin-card {
-  position: relative;
+.sl-progress-stage-stack {
+  width: 100%;
 }
 
-/* Keep the preview visible while scrolling the reveal controls */
-.sl-progress-legacy-admin-preview-grid {
-  position: sticky;
-  top: 84px;
-  z-index: 8;
-  grid-template-columns: minmax(0, 1fr) 220px;
-  gap: 12px;
-  margin-bottom: 14px;
-  padding: 12px;
-  border-radius: 18px;
+.sl-progress-chapter-selector-bar {
+  position: relative;
+  z-index: 14;
+  width: 100%;
+  margin: -18px 0 14px;
+}
+
+.sl-progress-chapter-selector {
+  width: 100%;
+}
+
+.sl-progress-chapter-selector-inner {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px 18px 16px;
+  border-radius: 22px;
   background:
-    linear-gradient(180deg, rgba(7, 10, 18, 0.88), rgba(4, 6, 14, 0.94)),
     radial-gradient(
       circle at top left,
-      rgba(36, 52, 98, 0.1),
+      rgba(34, 48, 86, 0.16) 0%,
       transparent 34%
+    ),
+    radial-gradient(
+      circle at top right,
+      rgba(255, 255, 255, 0.02) 0%,
+      transparent 26%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(4, 6, 12, 0.96) 0%,
+      rgba(2, 3, 7, 0.985) 100%
     );
-  border: 1px solid rgba(135, 164, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.07);
   box-shadow:
-    0 14px 34px rgba(0, 0, 0, 0.28),
-    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    0 18px 40px rgba(0, 0, 0, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.035);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
 }
 
-/* Make both previews shorter so controls stay closer */
-.sl-progress-legacy-admin-preview
-  .sl-progress-soundlegend-cover-hero
-  .sl-progress-soundlegend-cover-media {
-  min-height: 250px;
-  border-radius: 18px;
+.sl-progress-chapter-selector-inner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.018) 18%,
+    transparent 42%,
+    rgba(120, 145, 255, 0.03) 72%,
+    transparent 100%
+  );
+  opacity: 0.9;
 }
 
-.sl-progress-legacy-admin-phone-shell {
-  width: min(100%, 220px);
-  padding: 10px 8px 8px;
-  border-radius: 24px;
-}
-
-.sl-progress-legacy-admin-phone-island {
-  top: 8px;
-  width: 84px;
-  height: 16px;
-}
-
-.sl-progress-legacy-admin-phone-shell
-  .sl-progress-soundlegend-cover-media {
-  min-height: 360px;
-  border-radius: 18px;
-}
-
-.sl-progress-legacy-admin-phone-shell
-  .sl-progress-stage-title-anchor {
-  width: calc(100% - 20px);
-}
-
-.sl-progress-legacy-admin-phone-shell
-  .sl-progress-hero-title--center {
-  font-size: clamp(0.84rem, 3vw, 1rem);
-  letter-spacing: 0.12em;
-  line-height: 1.06;
-}
-
-.sl-progress-legacy-admin-phone-shell
-  .sl-progress-stage-title-story {
-  margin-top: 8px;
-  max-width: 180px;
+.sl-progress-chapter-selector-title {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 10px;
+  text-align: center;
   font-size: 0.68rem;
-  line-height: 1.35;
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(221, 229, 243, 0.72);
 }
 
-.sl-progress-legacy-admin-phone-shell
-  .sl-progress-soundlegend-cover-badge {
-  right: 10px;
-  bottom: 10px;
-  font-size: 0.52rem;
-  letter-spacing: 0.16em;
-}
-
-/* Tighten labels and spacing so more controls fit above the fold */
-.sl-progress-legacy-admin-preview-label,
-.sl-progress-legacy-admin-label {
-  margin-bottom: 6px;
-  font-size: 0.6rem;
-  letter-spacing: 0.16em;
-}
-
-.sl-progress-legacy-admin-grid {
-  gap: 10px;
-  margin-bottom: 12px;
-}
-
-.sl-progress-legacy-admin-field {
-  gap: 5px;
-}
-
-.sl-progress-legacy-admin-input,
-.sl-progress-legacy-admin-select {
-  min-height: 42px;
-  padding: 10px 12px;
-  font-size: 0.86rem;
-}
-
-.sl-progress-legacy-admin-textarea {
-  min-height: 86px;
-  padding: 10px 12px;
-  font-size: 0.84rem;
-}
-
-/* Make slider rows more compact */
-.sl-progress-legacy-admin-range {
-  height: 6px;
-}
-
-.sl-progress-legacy-admin-range::-webkit-slider-thumb {
-  width: 16px;
-  height: 16px;
-}
-
-.sl-progress-legacy-admin-range::-moz-range-thumb {
-  width: 16px;
-  height: 16px;
-}
-
-.sl-progress-legacy-admin-range-value {
-  margin-top: 4px;
-  font-size: 0.72rem;
-}
-
-/* Turn the slider groups into a dense 2-up layout on desktop */
-.sl-progress-legacy-admin-card > .sl-progress-legacy-admin-grid:nth-of-type(3),
-.sl-progress-legacy-admin-card > .sl-progress-legacy-admin-grid:nth-of-type(4),
-.sl-progress-legacy-admin-card > .sl-progress-legacy-admin-grid:nth-of-type(5) {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px 12px;
-  margin-bottom: 10px;
-}
-
-/* Shrink checklist/action footprint a bit */
-.sl-progress-legacy-admin-checklist {
+.sl-progress-chapter-selector-list {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
   gap: 6px;
-  margin: 2px 0 14px;
+  width: 100%;
 }
 
-.sl-progress-legacy-check {
-  min-height: 32px;
-  padding: 0 10px;
-  font-size: 0.7rem;
+.sl-progress-chapter-selector-item {
+  appearance: none;
+  -webkit-appearance: none;
+  min-width: 30px;
+  height: 30px;
+  padding: 0 8px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(228, 235, 247, 0.62);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition:
+    color 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    opacity 180ms ease,
+    transform 180ms ease;
 }
 
-.sl-progress-legacy-admin-actions {
-  gap: 8px;
+.sl-progress-chapter-selector-item:hover:not(.is-locked):not(:disabled) {
+  color: rgba(247, 250, 255, 0.96);
+  background: rgba(255, 255, 255, 0.045);
+  border-color: rgba(255, 255, 255, 0.06);
+  transform: translateY(-1px);
 }
 
-.sl-progress-legacy-admin-btn {
-  min-height: 36px;
-  padding: 0 12px;
-  font-size: 0.74rem;
+.sl-progress-chapter-selector-item:focus,
+.sl-progress-chapter-selector-item:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(120, 145, 255, 0.14);
 }
 
-.sl-progress-legacy-admin-status {
-  margin-top: 10px;
-  font-size: 0.78rem;
-  line-height: 1.45;
+.sl-progress-chapter-selector-label {
+  display: inline-block;
+  font-size: 0.76rem;
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: inherit;
 }
 
-/* Tablet */
-@media (max-width: 980px) {
-  .sl-progress-legacy-admin-preview-grid {
-    position: sticky;
-    top: 72px;
-    grid-template-columns: minmax(0, 1fr) 190px;
-  }
-
-  .sl-progress-legacy-admin-preview
-    .sl-progress-soundlegend-cover-hero
-    .sl-progress-soundlegend-cover-media {
-    min-height: 220px;
-  }
-
-  .sl-progress-legacy-admin-phone-shell {
-    width: min(100%, 190px);
-  }
-
-  .sl-progress-legacy-admin-phone-shell
-    .sl-progress-soundlegend-cover-media {
-    min-height: 320px;
-  }
+.sl-progress-chapter-selector-item.is-active {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.12),
+    rgba(255, 255, 255, 0.055)
+  );
+  border-color: rgba(255, 255, 255, 0.09);
+  color: rgba(255, 255, 255, 0.98);
+  box-shadow:
+    0 10px 22px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
-/* Mobile: unstick and stack cleanly */
+.sl-progress-chapter-selector-item.is-completed,
+.sl-progress-chapter-selector-item.is-revealed {
+  color: rgba(232, 239, 249, 0.8);
+}
+
+.sl-progress-chapter-selector-item.is-future {
+  color: rgba(183, 193, 210, 0.46);
+}
+
+.sl-progress-chapter-selector-item.is-locked,
+.sl-progress-chapter-selector-item:disabled {
+  cursor: default;
+  opacity: 0.32;
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  transform: none;
+  pointer-events: none;
+}
+
+.sl-progress-chapter-selector-item:first-child,
+.sl-progress-chapter-selector-item:last-child {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
 @media (max-width: 768px) {
-  .sl-progress-legacy-admin-preview-grid {
-    position: relative;
-    top: auto;
-    grid-template-columns: 1fr;
+  .sl-progress-chapter-selector-bar {
+    margin: -10px 0 12px;
   }
 
-  .sl-progress-legacy-admin-preview
-    .sl-progress-soundlegend-cover-hero
-    .sl-progress-soundlegend-cover-media {
-    min-height: 220px;
+  .sl-progress-chapter-selector-inner {
+    padding: 12px 10px 12px;
+    border-radius: 18px;
   }
 
-  .sl-progress-legacy-admin-phone-shell {
-    width: min(100%, 210px);
+  .sl-progress-chapter-selector-title {
+    font-size: 0.58rem;
+    letter-spacing: 0.16em;
+    margin-bottom: 8px;
   }
 
-  .sl-progress-legacy-admin-phone-shell
-    .sl-progress-soundlegend-cover-media {
-    min-height: 320px;
+  .sl-progress-chapter-selector-list {
+    justify-content: flex-start;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-bottom: 2px;
   }
 
-  .sl-progress-legacy-admin-card > .sl-progress-legacy-admin-grid:nth-of-type(3),
-  .sl-progress-legacy-admin-card > .sl-progress-legacy-admin-grid:nth-of-type(4),
-  .sl-progress-legacy-admin-card > .sl-progress-legacy-admin-grid:nth-of-type(5) {
-    grid-template-columns: 1fr;
+  .sl-progress-chapter-selector-list::-webkit-scrollbar {
+    display: none;
   }
+
+  .sl-progress-chapter-selector-item {
+    flex: 0 0 auto;
+    min-width: 28px;
+    height: 28px;
+    padding: 0 7px;
+  }
+
+  .sl-progress-chapter-selector-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+  }
+
+  .sl-progress-chapter-selector-item:first-child,
+  .sl-progress-chapter-selector-item:last-child {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+/* =========================================================
+   CHAPTER BAR SPACING — SPACE ABOVE, FLUSH TO CAROUSEL
+   ========================================================= */
+
+.sl-progress-stage-stack {
+  margin-top: 14px;   /* space below top build progress section */
+  margin-bottom: 0;   /* no extra space before carousel */
+}
+
+.sl-progress-chapter-selector-bar {
+  margin: 0 0 0 0;
+  padding: 0;
+}
+
+.sl-progress-chapter-selector {
+  margin: 0;
+}
+
+.sl-progress-chapter-selector-inner {
+  margin: 0;
+}
+
+/* make sure the carousel starts immediately below */
+.sl-progress-hero-carousel-shell {
+  margin-top: 0;
 }
