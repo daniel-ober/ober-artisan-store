@@ -3850,6 +3850,8 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
   const [selectedExistingCoverId, setSelectedExistingCoverId] = useState('');
   const coverRevealFileInputRef = useRef(null);
 
+  const initialChapterSelectionRef = useRef('');
+
   const [sharedSmokeVideoUrl, setSharedSmokeVideoUrl] = useState('');
 
   const [isTouchDevice, setIsTouchDevice] = useState(false);
@@ -4438,19 +4440,23 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
     revealCoverMobileScale,
   ]);
 
-  const defaultChapterKey = useMemo(() => {
-    const reveal = project?.soundlegendReveal || {};
+const defaultChapterKey = useMemo(() => {
+  const reveal = project?.soundlegendReveal || {};
 
-    const hasRevealCoverChapter = storyChapters.some(
-      (chapter) => chapter.key === 'soundlegendCover'
-    );
+  const hasRevealCoverChapter = storyChapters.some(
+    (chapter) => chapter.key === 'soundlegendCover'
+  );
 
-    const projectIsComplete = overallPct >= 100;
-    const revealIsLive = !!reveal.revealDeployed;
-    const revealHasMedia = !!reveal.coverMediaUrl;
+  const hasLegacyChapter = storyChapters.some(
+    (chapter) => chapter.key === 'soundlegendEpilogue'
+  );
 
+  const projectIsComplete = overallPct >= 100;
+  const revealIsLive = !!reveal.revealDeployed;
+  const revealHasMedia = !!reveal.coverMediaUrl;
+
+  if (projectIsComplete) {
     if (
-      projectIsComplete &&
       revealIsLive &&
       revealHasMedia &&
       hasRevealCoverChapter
@@ -4458,8 +4464,13 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
       return 'soundlegendCover';
     }
 
-    return (STEPS[currentStepIndex] || STEPS[0])?.key || STEPS[0].key;
-  }, [project, storyChapters, overallPct, currentStepIndex]);
+    if (hasLegacyChapter) {
+      return 'soundlegendEpilogue';
+    }
+  }
+
+  return (STEPS[currentStepIndex] || STEPS[0])?.key || STEPS[0].key;
+}, [project, storyChapters, overallPct, currentStepIndex]);
 
   const chapterSelectorItems = useMemo(() => {
     return storyChapters.map((chapter, index) => {
@@ -4536,8 +4547,23 @@ useEffect(() => {
     (chapter) => chapter.key === activeKey
   );
 
-  // Only initialize/fix invalid state.
-  // Do NOT keep forcing the user back to the default chapter.
+  const initSignature = [
+    project.id,
+    defaultChapterKey,
+    storyChapters.map((chapter) => chapter.key).join('|'),
+  ].join('::');
+
+  // Re-initialize when the loaded project's default landing chapter changes
+  // (example: completed project + reveal becomes available = go to cover).
+  if (initialChapterSelectionRef.current !== initSignature) {
+    initialChapterSelectionRef.current = initSignature;
+    setActiveKey(defaultChapterKey);
+    setDisplayedStageKey(defaultChapterKey);
+    setDisplayedOverlayStageKey(defaultChapterKey);
+    return;
+  }
+
+  // Still repair invalid state if needed.
   if (!activeKey || !activeKeyIsStillValid) {
     setActiveKey(defaultChapterKey);
     setDisplayedStageKey(defaultChapterKey);
@@ -5941,29 +5967,26 @@ useEffect(() => {
   return (
     <div className="sl-progress">
       <section className="sl-progress-build-summary">
-        <div className="sl-progress-build-summary-stage">
-          <div className="sl-progress-build-summary-stage-top">
-            <div className="sl-progress-build-summary-stage-copy">
-              <div className="sl-progress-build-summary-stage-kicker">
-                {isProjectComplete ? 'Legacy Status' : 'Build Roadmap'}
-              </div>
-
-              <div className="sl-progress-build-summary-stage-title">
-                {summaryHeadline}
-              </div>
-
-              <div className="sl-progress-build-summary-stage-subtitle">
-                {summarySubtitle}
-              </div>
+        <div className="sl-progress-build-summary-stage sl-progress-build-summary-stage--hero">
+          <div className="sl-progress-build-summary-stage-copy">
+            <div className="sl-progress-build-summary-stage-kicker">
+              {isProjectComplete ? 'Legacy Status' : 'Build Roadmap'}
             </div>
 
-            <div className="sl-progress-build-summary-stage-percent">
-              <div className="sl-progress-build-summary-stage-percent-value">
-                {overallPct}%
-              </div>
-              <div className="sl-progress-build-summary-stage-percent-label">
-                {isProjectComplete ? 'Complete' : 'Progress'}
-              </div>
+            <div className="sl-progress-build-summary-stage-title">
+              {isProjectComplete
+                ? shippingSummary.headline
+                : isLegacyChapter
+                  ? 'Legacy Chapter • From Ober Artisan'
+                  : currentStageLabel}
+            </div>
+
+            <div className="sl-progress-build-summary-stage-subtitle">
+              {isProjectComplete
+                ? shippingSummary.deliveryStatus
+                : isLegacyChapter
+                  ? 'Final handoff • Story now belongs to the artist'
+                  : currentStepLabel}
             </div>
           </div>
 
@@ -5979,43 +6002,28 @@ useEffect(() => {
               />
             </div>
           </div>
-        </div>
 
-        <div className="sl-progress-build-summary-metrics">
-          <div className="sl-progress-build-summary-metric is-featured">
-            <div className="sl-progress-build-summary-metric-label">
-              {isProjectComplete ? 'Final Chapter' : 'Current Chapter'}
-            </div>
-            <div className="sl-progress-build-summary-metric-value">
-              {isProjectComplete
-                ? 'Legacy Chapter • From Ober Artisan'
-                : isLegacyChapter
+          <div className="sl-progress-build-summary-stage-footer">
+            <div className="sl-progress-build-summary-stage-target">
+              <div className="sl-progress-build-summary-stage-target-label">
+                {isProjectComplete
+                  ? 'Final Chapter'
+                  : 'Target Completion Window'}
+              </div>
+              <div className="sl-progress-build-summary-stage-target-value">
+                {isProjectComplete
                   ? 'Legacy Chapter • From Ober Artisan'
-                  : currentStageLabel}
+                  : targetWindow || 'TBD'}
+              </div>
             </div>
-          </div>
 
-          <div className="sl-progress-build-summary-metric">
-            <div className="sl-progress-build-summary-metric-label">
-              {isProjectComplete ? 'Delivery Status' : 'Current Chapter Step'}
-            </div>
-            <div className="sl-progress-build-summary-metric-value">
-              {isProjectComplete
-                ? deliveryStatusLabel
-                : isLegacyChapter
-                  ? 'Final handoff • Story now belongs to the artist'
-                  : currentStepLabel}
-            </div>
-          </div>
-
-          <div className="sl-progress-build-summary-metric">
-            <div className="sl-progress-build-summary-metric-label">
-              {isProjectComplete
-                ? 'Carrier / Tracking'
-                : 'Project Target Completion Window'}
-            </div>
-            <div className="sl-progress-build-summary-metric-value">
-              {isProjectComplete ? carrierTrackingLabel : targetWindow || 'TBD'}
+            <div className="sl-progress-build-summary-stage-percent-inline">
+              <div className="sl-progress-build-summary-stage-percent-inline-value">
+                {overallPct}%
+              </div>
+              <div className="sl-progress-build-summary-stage-percent-inline-label">
+                {isProjectComplete ? 'Complete' : 'Progress'}
+              </div>
             </div>
           </div>
         </div>
@@ -6661,39 +6669,40 @@ useEffect(() => {
                     </div>
                   ) : null}
 
- <div className="sl-progress-stage-title-anchor">
-  {!isRevealCoverChapter ? (
-    <div className="sl-progress-stage-chapter-label">
-      {chapterLabel.toUpperCase()}
-    </div>
-  ) : null}
+                  <div className="sl-progress-stage-title-anchor">
+                    {!isRevealCoverChapter ? (
+                      <div className="sl-progress-stage-chapter-label">
+                        {chapterLabel.toUpperCase()}
+                      </div>
+                    ) : null}
 
-  <div
-    className={`sl-progress-hero-title-stack ${
-      titleTransitioning ? 'is-transitioning' : ''
-    }`}
-  >
-    <div
-      className={`sl-progress-hero-title sl-progress-hero-title--center sl-progress-hero-title-layer sl-progress-hero-title-layer--current ${
-        titleTransitioning ? 'is-outgoing' : 'is-visible'
-      }`}
-    >
-      {displayTitleText}
-    </div>
+                    <div
+                      className={`sl-progress-hero-title-stack ${
+                        titleTransitioning ? 'is-transitioning' : ''
+                      }`}
+                    >
+                      <div
+                        className={`sl-progress-hero-title sl-progress-hero-title--center sl-progress-hero-title-layer sl-progress-hero-title-layer--current ${
+                          titleTransitioning ? 'is-outgoing' : 'is-visible'
+                        }`}
+                      >
+                        {displayTitleText}
+                      </div>
 
-    <div
-      className={`sl-progress-hero-title sl-progress-hero-title--center sl-progress-hero-title-layer sl-progress-hero-title-layer--incoming ${
-        titleTransitioning ? 'is-incoming-visible' : ''
-      }`}
-    >
-      {incomingTitleText}
-    </div>
-  </div>
+                      <div
+                        className={`sl-progress-hero-title sl-progress-hero-title--center sl-progress-hero-title-layer sl-progress-hero-title-layer--incoming ${
+                          titleTransitioning ? 'is-incoming-visible' : ''
+                        }`}
+                      >
+                        {incomingTitleText}
+                      </div>
+                    </div>
 
-  <div className="sl-progress-stage-title-story">
-    {chapterNarrative.sentences?.[0] || getStageSummary(activeStep)}
-  </div>
-</div>
+                    <div className="sl-progress-stage-title-story">
+                      {chapterNarrative.sentences?.[0] ||
+                        getStageSummary(activeStep)}
+                    </div>
+                  </div>
 
                   {!isLegacyChapter &&
                   showStageStorypoints &&
@@ -7043,206 +7052,206 @@ useEffect(() => {
                 </div>
               </div>
 
-<div className="sl-progress-legacy-editor-tools">
-  <div className="sl-progress-legacy-editor-group sl-progress-legacy-editor-group--image">
-    <div className="sl-progress-legacy-editor-group-header">
-      <div className="sl-progress-legacy-editor-group-kicker">
-        Image Treatment
-      </div>
-      <div className="sl-progress-legacy-editor-group-title">
-        Global cover look
-      </div>
-    </div>
+              <div className="sl-progress-legacy-editor-tools">
+                <div className="sl-progress-legacy-editor-group sl-progress-legacy-editor-group--image">
+                  <div className="sl-progress-legacy-editor-group-header">
+                    <div className="sl-progress-legacy-editor-group-kicker">
+                      Image Treatment
+                    </div>
+                    <div className="sl-progress-legacy-editor-group-title">
+                      Global cover look
+                    </div>
+                  </div>
 
-    <div className="sl-progress-legacy-editor-slider-grid">
-      <div className="sl-progress-legacy-admin-field sl-progress-legacy-admin-field--slider">
-        <label className="sl-progress-legacy-admin-label">
-          Smoke Overlay
-        </label>
-        <input
-          type="range"
-          min="0"
-          max="1"
-          step="0.01"
-          className="sl-progress-legacy-admin-range"
-          value={revealCoverSmokeOpacity}
-          onChange={(e) =>
-            setRevealCoverSmokeOpacity(Number(e.target.value))
-          }
-        />
-        <div className="sl-progress-legacy-admin-range-value">
-          {revealCoverSmokeOpacity.toFixed(2)}
-        </div>
-      </div>
+                  <div className="sl-progress-legacy-editor-slider-grid">
+                    <div className="sl-progress-legacy-admin-field sl-progress-legacy-admin-field--slider">
+                      <label className="sl-progress-legacy-admin-label">
+                        Smoke Overlay
+                      </label>
+                      <input
+                        type="range"
+                        min="0"
+                        max="1"
+                        step="0.01"
+                        className="sl-progress-legacy-admin-range"
+                        value={revealCoverSmokeOpacity}
+                        onChange={(e) =>
+                          setRevealCoverSmokeOpacity(Number(e.target.value))
+                        }
+                      />
+                      <div className="sl-progress-legacy-admin-range-value">
+                        {revealCoverSmokeOpacity.toFixed(2)}
+                      </div>
+                    </div>
 
-      <div className="sl-progress-legacy-admin-field sl-progress-legacy-admin-field--slider">
-        <label className="sl-progress-legacy-admin-label">
-          Brightness
-        </label>
-        <input
-          type="range"
-          min="0.5"
-          max="2.5"
-          step="0.01"
-          className="sl-progress-legacy-admin-range"
-          value={revealCoverBrightness}
-          onChange={(e) =>
-            setRevealCoverBrightness(Number(e.target.value))
-          }
-        />
-        <div className="sl-progress-legacy-admin-range-value">
-          {revealCoverBrightness.toFixed(2)}
-        </div>
-      </div>
+                    <div className="sl-progress-legacy-admin-field sl-progress-legacy-admin-field--slider">
+                      <label className="sl-progress-legacy-admin-label">
+                        Brightness
+                      </label>
+                      <input
+                        type="range"
+                        min="0.5"
+                        max="2.5"
+                        step="0.01"
+                        className="sl-progress-legacy-admin-range"
+                        value={revealCoverBrightness}
+                        onChange={(e) =>
+                          setRevealCoverBrightness(Number(e.target.value))
+                        }
+                      />
+                      <div className="sl-progress-legacy-admin-range-value">
+                        {revealCoverBrightness.toFixed(2)}
+                      </div>
+                    </div>
 
-      <div className="sl-progress-legacy-admin-field sl-progress-legacy-admin-field--slider">
-        <label className="sl-progress-legacy-admin-label">
-          Black Floor
-        </label>
-        <input
-          type="range"
-          min="0"
-          max="1.0"
-          step="0.01"
-          className="sl-progress-legacy-admin-range"
-          value={revealCoverBlackFloor}
-          onChange={(e) =>
-            setRevealCoverBlackFloor(Number(e.target.value))
-          }
-        />
-        <div className="sl-progress-legacy-admin-range-value">
-          {revealCoverBlackFloor.toFixed(2)}
-        </div>
-      </div>
+                    <div className="sl-progress-legacy-admin-field sl-progress-legacy-admin-field--slider">
+                      <label className="sl-progress-legacy-admin-label">
+                        Black Floor
+                      </label>
+                      <input
+                        type="range"
+                        min="0"
+                        max="1.0"
+                        step="0.01"
+                        className="sl-progress-legacy-admin-range"
+                        value={revealCoverBlackFloor}
+                        onChange={(e) =>
+                          setRevealCoverBlackFloor(Number(e.target.value))
+                        }
+                      />
+                      <div className="sl-progress-legacy-admin-range-value">
+                        {revealCoverBlackFloor.toFixed(2)}
+                      </div>
+                    </div>
 
-      <div className="sl-progress-legacy-admin-field sl-progress-legacy-admin-field--slider">
-        <label className="sl-progress-legacy-admin-label">
-          Saturation
-        </label>
-        <input
-          type="range"
-          min="0.5"
-          max="2.0"
-          step="0.01"
-          className="sl-progress-legacy-admin-range"
-          value={revealCoverSaturation}
-          onChange={(e) =>
-            setRevealCoverSaturation(Number(e.target.value))
-          }
-        />
-        <div className="sl-progress-legacy-admin-range-value">
-          {revealCoverSaturation.toFixed(2)}
-        </div>
-      </div>
-    </div>
-  </div>
+                    <div className="sl-progress-legacy-admin-field sl-progress-legacy-admin-field--slider">
+                      <label className="sl-progress-legacy-admin-label">
+                        Saturation
+                      </label>
+                      <input
+                        type="range"
+                        min="0.5"
+                        max="2.0"
+                        step="0.01"
+                        className="sl-progress-legacy-admin-range"
+                        value={revealCoverSaturation}
+                        onChange={(e) =>
+                          setRevealCoverSaturation(Number(e.target.value))
+                        }
+                      />
+                      <div className="sl-progress-legacy-admin-range-value">
+                        {revealCoverSaturation.toFixed(2)}
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-  <div className="sl-progress-legacy-editor-group sl-progress-legacy-editor-group--desktop">
-    <div className="sl-progress-legacy-editor-group-header">
-      <div className="sl-progress-legacy-editor-group-kicker">
-        Desktop Framing
-      </div>
-      <div className="sl-progress-legacy-editor-group-title">
-        Desktop preview position + zoom
-      </div>
-    </div>
+                <div className="sl-progress-legacy-editor-group sl-progress-legacy-editor-group--desktop">
+                  <div className="sl-progress-legacy-editor-group-header">
+                    <div className="sl-progress-legacy-editor-group-kicker">
+                      Desktop Framing
+                    </div>
+                    <div className="sl-progress-legacy-editor-group-title">
+                      Desktop preview position + zoom
+                    </div>
+                  </div>
 
-    <div className="sl-progress-legacy-editor-slider-grid sl-progress-legacy-editor-slider-grid--dual">
-      <div className="sl-progress-legacy-admin-field sl-progress-legacy-admin-field--slider">
-        <label className="sl-progress-legacy-admin-label">
-          Desktop X Position
-        </label>
-        <input
-          type="range"
-          min="0"
-          max="100"
-          step="1"
-          className="sl-progress-legacy-admin-range"
-          value={revealCoverDesktopPositionX}
-          onChange={(e) =>
-            setRevealCoverDesktopPositionX(Number(e.target.value))
-          }
-        />
-        <div className="sl-progress-legacy-admin-range-value">
-          {revealCoverDesktopPositionX}%
-        </div>
-      </div>
+                  <div className="sl-progress-legacy-editor-slider-grid sl-progress-legacy-editor-slider-grid--dual">
+                    <div className="sl-progress-legacy-admin-field sl-progress-legacy-admin-field--slider">
+                      <label className="sl-progress-legacy-admin-label">
+                        Desktop X Position
+                      </label>
+                      <input
+                        type="range"
+                        min="0"
+                        max="100"
+                        step="1"
+                        className="sl-progress-legacy-admin-range"
+                        value={revealCoverDesktopPositionX}
+                        onChange={(e) =>
+                          setRevealCoverDesktopPositionX(Number(e.target.value))
+                        }
+                      />
+                      <div className="sl-progress-legacy-admin-range-value">
+                        {revealCoverDesktopPositionX}%
+                      </div>
+                    </div>
 
-      <div className="sl-progress-legacy-admin-field sl-progress-legacy-admin-field--slider">
-        <label className="sl-progress-legacy-admin-label">
-          Desktop Zoom
-        </label>
-        <input
-          type="range"
-          min="1"
-          max="1.8"
-          step="0.01"
-          className="sl-progress-legacy-admin-range"
-          value={revealCoverDesktopScale}
-          onChange={(e) =>
-            setRevealCoverDesktopScale(Number(e.target.value))
-          }
-        />
-        <div className="sl-progress-legacy-admin-range-value">
-          {revealCoverDesktopScale.toFixed(2)}
-        </div>
-      </div>
-    </div>
-  </div>
+                    <div className="sl-progress-legacy-admin-field sl-progress-legacy-admin-field--slider">
+                      <label className="sl-progress-legacy-admin-label">
+                        Desktop Zoom
+                      </label>
+                      <input
+                        type="range"
+                        min="1"
+                        max="1.8"
+                        step="0.01"
+                        className="sl-progress-legacy-admin-range"
+                        value={revealCoverDesktopScale}
+                        onChange={(e) =>
+                          setRevealCoverDesktopScale(Number(e.target.value))
+                        }
+                      />
+                      <div className="sl-progress-legacy-admin-range-value">
+                        {revealCoverDesktopScale.toFixed(2)}
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-  <div className="sl-progress-legacy-editor-group sl-progress-legacy-editor-group--mobile">
-    <div className="sl-progress-legacy-editor-group-header">
-      <div className="sl-progress-legacy-editor-group-kicker">
-        Mobile Framing
-      </div>
-      <div className="sl-progress-legacy-editor-group-title">
-        Mobile preview position + zoom
-      </div>
-    </div>
+                <div className="sl-progress-legacy-editor-group sl-progress-legacy-editor-group--mobile">
+                  <div className="sl-progress-legacy-editor-group-header">
+                    <div className="sl-progress-legacy-editor-group-kicker">
+                      Mobile Framing
+                    </div>
+                    <div className="sl-progress-legacy-editor-group-title">
+                      Mobile preview position + zoom
+                    </div>
+                  </div>
 
-    <div className="sl-progress-legacy-editor-slider-grid sl-progress-legacy-editor-slider-grid--dual">
-      <div className="sl-progress-legacy-admin-field sl-progress-legacy-admin-field--slider">
-        <label className="sl-progress-legacy-admin-label">
-          Mobile X Position
-        </label>
-        <input
-          type="range"
-          min="0"
-          max="100"
-          step="1"
-          className="sl-progress-legacy-admin-range"
-          value={revealCoverMobilePositionX}
-          onChange={(e) =>
-            setRevealCoverMobilePositionX(Number(e.target.value))
-          }
-        />
-        <div className="sl-progress-legacy-admin-range-value">
-          {revealCoverMobilePositionX}%
-        </div>
-      </div>
+                  <div className="sl-progress-legacy-editor-slider-grid sl-progress-legacy-editor-slider-grid--dual">
+                    <div className="sl-progress-legacy-admin-field sl-progress-legacy-admin-field--slider">
+                      <label className="sl-progress-legacy-admin-label">
+                        Mobile X Position
+                      </label>
+                      <input
+                        type="range"
+                        min="0"
+                        max="100"
+                        step="1"
+                        className="sl-progress-legacy-admin-range"
+                        value={revealCoverMobilePositionX}
+                        onChange={(e) =>
+                          setRevealCoverMobilePositionX(Number(e.target.value))
+                        }
+                      />
+                      <div className="sl-progress-legacy-admin-range-value">
+                        {revealCoverMobilePositionX}%
+                      </div>
+                    </div>
 
-      <div className="sl-progress-legacy-admin-field sl-progress-legacy-admin-field--slider">
-        <label className="sl-progress-legacy-admin-label">
-          Mobile Zoom
-        </label>
-        <input
-          type="range"
-          min="1"
-          max="1.8"
-          step="0.01"
-          className="sl-progress-legacy-admin-range"
-          value={revealCoverMobileScale}
-          onChange={(e) =>
-            setRevealCoverMobileScale(Number(e.target.value))
-          }
-        />
-        <div className="sl-progress-legacy-admin-range-value">
-          {revealCoverMobileScale.toFixed(2)}
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+                    <div className="sl-progress-legacy-admin-field sl-progress-legacy-admin-field--slider">
+                      <label className="sl-progress-legacy-admin-label">
+                        Mobile Zoom
+                      </label>
+                      <input
+                        type="range"
+                        min="1"
+                        max="1.8"
+                        step="0.01"
+                        className="sl-progress-legacy-admin-range"
+                        value={revealCoverMobileScale}
+                        onChange={(e) =>
+                          setRevealCoverMobileScale(Number(e.target.value))
+                        }
+                      />
+                      <div className="sl-progress-legacy-admin-range-value">
+                        {revealCoverMobileScale.toFixed(2)}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
               <div className="sl-progress-legacy-admin-checklist">
                 <button
