@@ -13,19 +13,6 @@ export const PRIMARY_GOAL_OPTIONS = [
   'Something unique I cannot get off the shelf',
 ];
 
-export const GENRE_OPTIONS = [
-  'Rock',
-  'Pop',
-  'Country',
-  'Gospel / Worship',
-  'Jazz',
-  'Funk / R&B',
-  'Metal',
-  'Studio / Session',
-  'Multi-genre',
-  'Other',
-];
-
 export const TONAL_GOAL_OPTIONS = [
   'Warm',
   'Crisp',
@@ -40,18 +27,6 @@ export const TONAL_GOAL_OPTIONS = [
   'Not sure — guide me',
 ];
 
-export const RESPONSE_PRIORITY_OPTIONS = [
-  'Ghost notes / sensitivity',
-  'Rimshot crack',
-  'Cross-stick',
-  'Dynamic response',
-  'Projection',
-  'Body / fullness',
-  'Controlled sustain',
-  'Versatility',
-  'Not sure — guide me',
-];
-
 export const VISUAL_DIRECTION_OPTIONS = [
   'Natural / organic',
   'Clean / understated',
@@ -63,10 +38,10 @@ export const VISUAL_DIRECTION_OPTIONS = [
   'Not sure — guide me',
 ];
 
-export const DECISION_STAGE_OPTIONS = [
-  'Ready to move soon',
-  'Gathering ideas',
-  'Still exploring',
+export const CONTACT_METHOD_OPTIONS = [
+  'Email',
+  'Text message',
+  'Either is fine',
 ];
 
 export const CONSULTATION_INTAKE_SECTIONS = [
@@ -74,7 +49,7 @@ export const CONSULTATION_INTAKE_SECTIONS = [
     id: 'soundlegendVision',
     title: 'Your SoundLegend Vision',
     description:
-      'A simple pre-consultation intake to help shape your sound, style, and direction before your one-on-one call.',
+      'A short pre-consultation intake to help Dan understand what you are looking for before your one-on-one call.',
     fields: [
       {
         id: 'buildClarity',
@@ -91,78 +66,42 @@ export const CONSULTATION_INTAKE_SECTIONS = [
         defaultValue: '',
       },
       {
-        id: 'primaryGenre',
-        label: 'What kind of music will this drum mostly live in?',
-        type: 'select',
-        options: GENRE_OPTIONS,
-        allowOther: true,
-        defaultValue: '',
-      },
-      {
         id: 'tonalGoals',
-        label: 'What kind of sound are you drawn to?',
+        label: 'What kind of sound are you most drawn to?',
         type: 'multiSelect',
         options: TONAL_GOAL_OPTIONS,
-        allowOther: true,
-        defaultValue: [],
-      },
-      {
-        id: 'responsePriorities',
-        label: 'What matters most in the way it feels and responds?',
-        type: 'multiSelect',
-        options: RESPONSE_PRIORITY_OPTIONS,
-        allowOther: true,
         defaultValue: [],
       },
       {
         id: 'visualDirection',
         label: 'Which visual direction feels most like you?',
-        type: 'multiSelect',
-        options: VISUAL_DIRECTION_OPTIONS,
-        allowOther: true,
-        defaultValue: [],
-      },
-      {
-        id: 'loves',
-        label: 'Are there any woods, finishes, sounds, or visual styles you already know you love?',
-        type: 'textarea',
-        rows: 3,
-        placeholder:
-          'Examples: warm walnut, natural wood grain, dry and punchy, black nickel hardware, bold figure, etc.',
-        defaultValue: '',
-      },
-      {
-        id: 'avoid',
-        label: 'Are there any sounds, looks, woods, or styles you know you want to avoid?',
-        type: 'textarea',
-        rows: 3,
-        placeholder:
-          'Examples: too bright, overly ringy, super flashy, gold hardware, painted finishes, etc.',
-        defaultValue: '',
-      },
-      {
-        id: 'references',
-        label: 'Is there a drummer, record, current snare, or reference this should lean toward?',
-        type: 'textarea',
-        rows: 3,
-        placeholder:
-          'Examples: a drummer, album, song, current snare, or general vibe.',
-        defaultValue: '',
-      },
-      {
-        id: 'decisionStage',
-        label: 'Where are you in the decision process?',
         type: 'select',
-        options: DECISION_STAGE_OPTIONS,
+        options: VISUAL_DIRECTION_OPTIONS,
         defaultValue: '',
       },
       {
-        id: 'anythingElse',
-        label: 'Anything else you want Dan to understand before the consultation?',
+        id: 'referenceNotes',
+        label: 'Any drummer, record, current snare, or general vibe this should lean toward?',
         type: 'textarea',
         rows: 4,
         placeholder:
-          'Anything about your playing, goals, personality, setup, or dream outcome.',
+          'Examples: a drummer, album, song, current snare, or just a vibe you love.',
+        defaultValue: '',
+      },
+      {
+        id: 'consultationContactMethod',
+        label: 'Best way to contact you to schedule your consultation',
+        type: 'select',
+        options: CONTACT_METHOD_OPTIONS,
+        defaultValue: '',
+      },
+      {
+        id: 'consultationAvailability',
+        label: 'Best day(s) / time(s) for a consultation',
+        type: 'textarea',
+        rows: 3,
+        placeholder:
+          'Examples: weekday evenings after 6pm, Tuesdays or Thursdays, weekends are best, etc.',
         defaultValue: '',
       },
     ],
