@@ -10,7 +10,18 @@ import {
   Button,
   Typography,
 } from '@mui/material';
-import { collection, addDoc, Timestamp } from 'firebase/firestore';
+import {
+  collection,
+  addDoc,
+  Timestamp,
+  doc,
+  getDocs,
+  query,
+  where,
+  setDoc,
+  updateDoc,
+  serverTimestamp,
+} from 'firebase/firestore';
 import { getRecaptchaToken } from '../utils/loadRecaptchaEnterprise';
 import './SoundlegendProductDetail.css';
 import MockupLightbox from './MockupLightbox';
@@ -23,14 +34,119 @@ const RECAPTCHA_SITE_KEY =
 
 /* ================= Helpers ================= */
 const onlyDigits = (s = '') => s.replace(/\D/g, '').slice(0, 10);
+
 const formatDashed = (d) => {
   if (!d) return '';
   if (d.length >= 6) return `${d.slice(0, 3)}-${d.slice(3, 6)}-${d.slice(6)}`;
   if (d.length >= 3) return `${d.slice(0, 3)}-${d.slice(3)}`;
   return d;
 };
+
 const isEmailFormat = (v) =>
   /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((v || '').trim());
+
+const normalizeEmail = (v = '') =>
+  String(v || '')
+    .trim()
+    .toLowerCase();
+
+const buildQuestionnaireToken = () => {
+  try {
+    if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+      return crypto.randomUUID();
+    }
+  } catch (err) {
+    console.warn('[soundlegend] crypto.randomUUID unavailable:', err);
+  }
+
+  return `slq_${Date.now()}_${Math.random().toString(36).slice(2, 12)}`;
+};
+
+const buildQuestionnaireUrl = (token) =>
+  `https://www.oberartisandrums.com/soundlegend-questionnaire/${token}`;
+
+const findExistingUserByEmail = async (email) => {
+  const normalized = normalizeEmail(email);
+  if (!normalized) return null;
+
+  const usersRef = collection(db, 'users');
+  const q1 = query(usersRef, where('email', '==', normalized));
+  const snap1 = await getDocs(q1);
+  if (!snap1.empty) {
+    const d = snap1.docs[0];
+    return { id: d.id, ...d.data() };
+  }
+
+  const q2 = query(usersRef, where('email', '==', email));
+  const snap2 = await getDocs(q2);
+  if (!snap2.empty) {
+    const d = snap2.docs[0];
+    return { id: d.id, ...d.data() };
+  }
+
+  return null;
+};
+
+const upsertLeadUser = async ({
+  firstName,
+  lastName,
+  email,
+  phoneDigits,
+  questionnaireToken,
+  questionnaireUrl,
+}) => {
+  const normalizedEmail = normalizeEmail(email);
+  const fullName = `${firstName} ${lastName}`.trim();
+  const phonePretty = phoneDigits ? `+1 ${formatDashed(phoneDigits)}` : '';
+  const phoneE164 = phoneDigits ? `+1${phoneDigits}` : '';
+
+  const existing = await findExistingUserByEmail(normalizedEmail);
+
+  const basePayload = {
+    firstName: firstName.trim(),
+    lastName: lastName.trim(),
+    fullName,
+    email: normalizedEmail,
+    phone: phonePretty || '',
+    phoneE164: phoneE164 || '',
+    isSoundlegend: true,
+    isAdmin: false,
+
+    // lead / portal gating
+    soundlegendLead: true,
+    soundlegendLeadStatus: 'questionnaire_pending',
+    slPortalLocked: true,
+    portalAccessGranted: false,
+    portalInviteSent: false,
+
+    // questionnaire tracking
+    latestQuestionnaireToken: questionnaireToken,
+    latestQuestionnaireUrl: questionnaireUrl,
+    questionnaireCompleted: false,
+    consultationScheduled: false,
+    consultationCompleted: false,
+
+    updatedAt: serverTimestamp(),
+  };
+
+  if (existing?.id) {
+    const userRef = doc(db, 'users', existing.id);
+    await updateDoc(userRef, basePayload);
+    return existing.id;
+  }
+
+  const newRef = doc(collection(db, 'users'));
+  await setDoc(newRef, {
+    ...basePayload,
+    createdAt: serverTimestamp(),
+    status: 'lead',
+    projects: [],
+    orderIds: [],
+    uid: '',
+  });
+
+  return newRef.id;
+};
 
 /* ================= Simple lazy for HERO only ================= */
 const LazyImg = (props) => <img loading="lazy" decoding="async" {...props} />;
@@ -47,6 +163,7 @@ const Icon = ({ name, size = 22 }) => {
     strokeLinecap: 'round',
     strokeLinejoin: 'round',
   };
+
   switch (name) {
     case 'phone':
       return (
@@ -194,11 +311,7 @@ const steps = [
       'Iterate quickly before we commit',
     ],
     mockImages: [
-      // { full: '/mockups/4.png', thumb: '/mockups/thumbs/4.jpg' },
-      // { full: '/mockups/10.png', thumb: '/mockups/thumbs/10.jpg' },
-      // { full: '/mockups/5.png', thumb: '/mockups/thumbs/5.jpg' },
       { full: '/mockups/9.png', thumb: '/mockups/thumbs/9.jpg' },
-      // { full: '/mockups/2.png', thumb: '/mockups/thumbs/2.jpg' },
       { full: '/mockups/1.png', thumb: '/mockups/thumbs/1.jpg' },
       { full: '/mockups/6.png', thumb: '/mockups/thumbs/6.jpg' },
       { full: '/mockups/3.png', thumb: '/mockups/thumbs/3.jpg' },
@@ -264,10 +377,7 @@ const SoundLegendProductDetail = () => {
   const [snareBedDepth] = useState('Medium');
   const [consultationDate] = useState('');
 
-  // Accordion: start collapsed
   const [activeStep, setActiveStep] = useState(0);
-
-  // mockup Lightbox state
   const [mockOpen, setMockOpen] = useState(false);
   const [mockIdx, setMockIdx] = useState(0);
 
@@ -286,22 +396,23 @@ const SoundLegendProductDetail = () => {
     setTimeout(() => navigate('/artisan-shop'), 200);
   };
 
-  const isPhoneValid = phoneDigits.length === 10;
-
   const validate = () => {
     const missing = [];
     if (!firstName.trim()) missing.push('First Name');
     if (!lastName.trim()) missing.push('Last Name');
     if (!email.trim()) missing.push('Email');
-    if (!phoneDigits) missing.push('Phone');
+
     const issues = [];
     if (email && !isEmailFormat(email)) issues.push('Valid Email');
-    if (phoneDigits && !isPhoneValid) issues.push('Valid 10-digit Phone');
+    if (phoneDigits && phoneDigits.length !== 10)
+      issues.push('Valid 10-digit Phone');
+
     return { missing, issues };
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const { missing, issues } = validate();
     if (missing.length || issues.length) {
       const lines = [];
@@ -312,8 +423,8 @@ const SoundLegendProductDetail = () => {
     }
 
     setIsSubmitting(true);
+
     try {
-      // Best-effort reCAPTCHA Enterprise token
       let recaptchaToken = '';
       if (RECAPTCHA_SITE_KEY) {
         try {
@@ -326,66 +437,90 @@ const SoundLegendProductDetail = () => {
         }
       }
 
-      const dashed = formatDashed(phoneDigits);
-      const phonePretty = `+1 ${dashed}`;
-      const phoneE164 = `+1${phoneDigits}`;
-      await addDoc(collection(db, 'soundlegend_submissions'), {
+      const normalizedEmail = normalizeEmail(email);
+      const questionnaireToken = buildQuestionnaireToken();
+      const questionnaireUrl = buildQuestionnaireUrl(questionnaireToken);
+
+      const userId = await upsertLeadUser({
         firstName,
         lastName,
-        email,
-        phone: phonePretty,
-        phoneE164,
+        email: normalizedEmail,
+        phoneDigits,
+        questionnaireToken,
+        questionnaireUrl,
+      });
+
+      const dashed = phoneDigits ? formatDashed(phoneDigits) : '';
+      const phonePretty = phoneDigits ? `+1 ${dashed}` : '';
+      const phoneE164 = phoneDigits ? `+1${phoneDigits}` : '';
+
+      await addDoc(collection(db, 'soundlegend_submissions'), {
+        firstName: firstName.trim(),
+        lastName: lastName.trim(),
+        fullName: `${firstName} ${lastName}`.trim(),
+        email: normalizedEmail,
+        phone: phonePretty || '',
+        phoneE164: phoneE164 || '',
         size,
         depth,
         shellConstruction,
         woodSpecies,
         snareBedDepth,
         consultationDate,
-        status: 'New',
-        submittedAt: Timestamp.now(),
+
+        status: 'Questionnaire Pending',
+        stage: 'lead_capture',
+        submissionType: 'soundlegend_interest',
+
+        questionnaireToken,
+        questionnaireUrl,
+        questionnaireCompleted: false,
+        consultationScheduled: false,
+        consultationCompleted: false,
+        portalInviteSent: false,
+        portalAccessGranted: false,
+
+        linkedUserId: userId || '',
         recaptchaToken,
+        submittedAt: Timestamp.now(),
+        createdAt: Timestamp.now(),
       });
-      await new Promise((r) => setTimeout(r, 500));
+
+      await new Promise((r) => setTimeout(r, 350));
+
       setOpen(true);
       setFirstName('');
       setLastName('');
       setEmail('');
       setPhoneDigits('');
     } catch (err) {
-      console.error('Error submitting form:', err);
+      console.error('Error submitting SoundLegend interest:', err);
       alert('Submission failed. Please try again later.');
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const openMock = (i) => {
-    setMockIdx(i);
-    setMockOpen(true);
-  };
-
-  // Lightbox list (full-res only when opened)
   const currentMockImages =
     activeStep >= 0 ? steps[activeStep].mockImages || [] : [];
+
   const lightboxImages = useMemo(
     () => currentMockImages.map((m) => m.full || m),
     [currentMockImages]
   );
 
-  // PNG fallback if JPG missing
   const onThumbError = (e, jpgPath, fullPath) => {
     if (!e.currentTarget.dataset.fallbackTried) {
       e.currentTarget.dataset.fallbackTried = '1';
       e.currentTarget.src = jpgPath.replace(/\.jpg$/i, '.png');
     } else if (!e.currentTarget.dataset.fullTried) {
       e.currentTarget.dataset.fullTried = '1';
-      e.currentTarget.src = fullPath; // last resort
+      e.currentTarget.src = fullPath;
     }
   };
 
   return (
     <div className="soundlegend-product-detail">
-      {/* Brand */}
       <img
         src="/resized-logos/soundlegend-white.png"
         alt="SOUNDLEGEND Series"
@@ -394,7 +529,6 @@ const SoundLegendProductDetail = () => {
         fetchpriority="high"
       />
 
-      {/* HERO */}
       <div className="sl-hero-grid">
         <div className="sl-hero-media">
           <div className="sl-hero-frame">
@@ -408,7 +542,6 @@ const SoundLegendProductDetail = () => {
             />
           </div>
 
-          {/* === TRUST BAND === */}
           <section className="sl-trustband" aria-label="Assurances">
             <div className="tb-item">
               <span className="tb-icon">🇺🇸</span>
@@ -476,7 +609,6 @@ const SoundLegendProductDetail = () => {
         </div>
       </div>
 
-      {/* ===== JOURNEY (Accordion Timeline) ===== */}
       <section className="sl-journey" aria-label="SoundLegend Experience">
         <h2 className="sl-exp-title">Your SoundLegend Experience</h2>
 
@@ -487,13 +619,13 @@ const SoundLegendProductDetail = () => {
         >
           {steps.map((s, i) => {
             const isOpen = activeStep === i;
+
             return (
               <article
                 key={s.id}
                 className={`sl-acc-item ${isOpen ? 'open' : ''}`}
                 data-step={i}
               >
-                {/* Header shows ONLY: step number • icon+title • Step X of Y • chevron */}
                 <button
                   className="sl-acc-header"
                   role="tab"
@@ -519,7 +651,6 @@ const SoundLegendProductDetail = () => {
                   </span>
                 </button>
 
-                {/* Body — render only when open (prevents iOS crashes & sliver) */}
                 {isOpen && (
                   <div
                     id={`panel-step-${i}`}
@@ -545,7 +676,6 @@ const SoundLegendProductDetail = () => {
                       </ul>
                     )}
 
-                    {/* Mockups */}
                     {s.mockImages?.length > 0 && (
                       <>
                         <p className="sl-mockup-hint">
@@ -554,6 +684,7 @@ const SoundLegendProductDetail = () => {
                         <div className="mockup-strip">
                           {s.mockImages.map((m, mi) => {
                             const jpg = m.thumb || m.full || m;
+
                             return (
                               <button
                                 key={`${mi}-${jpg}`}
@@ -569,7 +700,7 @@ const SoundLegendProductDetail = () => {
                                   alt={`Mockup ${mi + 1}`}
                                   width={220}
                                   height={150}
-                                  loading="lazy" // changed from eager
+                                  loading="lazy"
                                   fetchpriority="low"
                                   decoding="async"
                                   className="mockup-thumb-img"
@@ -584,10 +715,8 @@ const SoundLegendProductDetail = () => {
                       </>
                     )}
 
-                    {/* Payment/approval note */}
                     {s.note && <p className="sl-note">* {s.note}</p>}
 
-                    {/* Vendor badges */}
                     {s.vendors && (
                       <div className="sl-badges-row">
                         {s.vendors.signwell && (
@@ -603,19 +732,21 @@ const SoundLegendProductDetail = () => {
                             <span>{s.vendors.signwell.label}</span>
                           </span>
                         )}
+
                         {steps[i]?.vendors?.stripe && (
                           <span className="sl-badge sl-badge-vendor">
                             <img
                               src={steps[i].vendors.stripe.img}
                               alt={steps[i].vendors.stripe.alt}
-                              className="stripe-logo" // ⟵ add class
-                              height="18" // control by height only
+                              className="stripe-logo"
+                              height="18"
                               loading="lazy"
                               decoding="async"
                             />
                             <span>{steps[i].vendors.stripe.label}</span>
                           </span>
                         )}
+
                         {s.vendors.klarna && (
                           <span className="sl-badge sl-badge-vendor">
                             <img
@@ -632,14 +763,12 @@ const SoundLegendProductDetail = () => {
                       </div>
                     )}
 
-                    {/* Portal sign-in link */}
                     {s.portalSignin && (
                       <Link to={s.portalSignin} className="sl-panel-link">
                         Go to SoundLegend Portal Sign-in →
                       </Link>
                     )}
 
-                    {/* Vault CTA */}
                     {s.key === 'vault' && (
                       <div className="sl-vault-cta">
                         <span className="sl-vault-text">Explore the</span>
@@ -667,7 +796,6 @@ const SoundLegendProductDetail = () => {
         </div>
       </section>
 
-      {/* Lightbox gets full-res list only when opened */}
       <MockupLightbox
         open={mockOpen}
         images={lightboxImages}
@@ -676,14 +804,14 @@ const SoundLegendProductDetail = () => {
         onClose={() => setMockOpen(false)}
       />
 
-      {/* ===== Start Your Journey (Form only) ===== */}
       <aside className="sl-card sl-form-only">
         <div className="sl-card-section">
           <h2 className="sl-card-title">Start Your Journey</h2>
           <p className="sl-form-sub">
-            Tell us where to reach you. We’ll follow up personally within 1–2
-            business days.
+            Tell us where to reach you. We’ll email your private questionnaire
+            so you can begin the SoundLegend experience.
           </p>
+
           <form onSubmit={handleSubmit} noValidate>
             <label htmlFor="firstName">First Name</label>
             <input
@@ -719,7 +847,7 @@ const SoundLegendProductDetail = () => {
               We never share or sell your email. No spam—ever.
             </p>
 
-            <label htmlFor="phone">Phone</label>
+            <label htmlFor="phone">Phone (optional for now)</label>
             <div className="phone-input-container">
               <input
                 type="tel"
@@ -731,31 +859,39 @@ const SoundLegendProductDetail = () => {
                 onFocus={() => setPhoneFocused(true)}
                 onBlur={() => setPhoneFocused(false)}
                 onChange={(e) => setPhoneDigits(onlyDigits(e.target.value))}
-                required
-                aria-required="true"
                 aria-invalid={
                   phoneDigits ? !(phoneDigits.length === 10) : undefined
                 }
               />
             </div>
             <p className="field-note">
-              We will only use your number for your build process.
+              Phone becomes required when it’s time to schedule your free
+              consultation.
             </p>
 
-            <button type="submit" className="sl-cta">
+            <button type="submit" className="sl-cta" disabled={isSubmitting}>
               {isSubmitting ? 'Submitting…' : 'Start Your Custom Snare Journey'}
             </button>
           </form>
         </div>
       </aside>
 
-      {/* Success dialog */}
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Request Sent</DialogTitle>
+        <DialogTitle>Check Your Email</DialogTitle>
         <DialogContent>
-          <Typography variant="body1">
-            Thank you for reaching out! We’ll get back to you within 1–2
-            business days.
+          <Typography variant="body1" sx={{ mb: 1.5 }}>
+            Thanks for reaching out. Your SoundLegend inquiry has been received.
+          </Typography>
+          <Typography variant="body1" sx={{ mb: 1.5 }}>
+            We’ve sent your private questionnaire link to your email address.
+            Once your questionnaire is complete, our craftsman will personally
+            review it and reach out within 2 business days by email to schedule
+            your FREE consultation.
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Full SoundLegend Portal access is reserved for clients who move into
+            the custom build process. In some cases, early preview access may be
+            extended during the consultation phase.
           </Typography>
         </DialogContent>
         <DialogActions>

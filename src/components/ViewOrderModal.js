@@ -1,4 +1,3 @@
-// src/components/ViewOrderModal.js
 import React, { useEffect, useState } from 'react';
 import {
   doc,
@@ -7,13 +6,14 @@ import {
   arrayUnion,
   collection,
   addDoc,
+  Timestamp,
 } from 'firebase/firestore';
-import { Timestamp } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import { getOrderStatusFromItems } from '../utils/statusConfig';
 import { defaultStepData } from '../utils/buildWorkflow';
 import defaultProjectFields from '../utils/defaultProjectFields';
 import { linkProjectToUserByEmail } from '../services/userService';
+import { buildConsultationIntakeDefaults } from '../utils/consultationIntakeSchema';
 
 // THEME + SHARED MODAL STYLES
 import './AdminModalTheme.css';
@@ -43,18 +43,92 @@ const formatFirestoreTimestamp = (ts) => {
   }
 };
 
+const buildSoundLegendProtectedFields = () => ({
+  consultationIntake: buildConsultationIntakeDefaults(),
+
+  buildCommitment: {
+    isCommitted: false,
+    committedAt: null,
+    commitmentSource: '',
+    commitmentNote: '',
+  },
+
+  scopeVisibility: {
+    customerCanViewApprovedScope: false,
+    customerUnlockedAt: null,
+    unlockSource: '',
+  },
+
+  storyVisibility: {
+    customerCanViewStoryDetails: false,
+    storyUnlockedAt: null,
+    unlockSource: '',
+  },
+
+  adminBuildRecommendation: {
+    status: 'draft',
+    updatedAt: Timestamp.now(),
+    summary: '',
+    shellRecipe: '',
+    shellConstruction: '',
+    dimensions: '',
+    staveCount: '',
+    reinforcementRings: '',
+    primarySpecies: '',
+    secondarySpecies: '',
+    veneer: '',
+    bearingEdges: '',
+    snareBedDepth: '',
+    lugType: '',
+    hardwareFinish: '',
+    hoops: '',
+    throwOff: '',
+    snareWires: '',
+    exteriorFinish: '',
+    interiorFinish: '',
+    resinAccent: '',
+    additionalNotes: '',
+  },
+
+  approvedCustomerScope: {
+    artisanLine: 'SoundLegend',
+    lineSerial: '',
+    dimensionsLabel: '',
+    width: '',
+    shellDepth: '',
+    staveCount: '',
+    shellConstructionName: '',
+    reinforcementRings: '',
+    primarySpecies: '',
+    secondarySpecies: '',
+    veneer: '',
+    bearingEdge: '',
+    snareBedDepth: '',
+    lugType: '',
+    hardwareFinish: '',
+    hoops: '',
+    snareThrowOff: '',
+    snareWires: '',
+    exteriorFinish: '',
+    interiorFinish: '',
+    resinAccent: '',
+    additionalNotes: '',
+    lastApprovedAt: null,
+    approvedBy: '',
+  },
+});
+
 const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
   const [internalNotes, setInternalNotes] = useState([]);
   const [systemHistory, setSystemHistory] = useState([]);
   const [newNote, setNewNote] = useState('');
-  const [loading, setLoading] = useState(false); // used for Add Note
+  const [loading, setLoading] = useState(false);
   const [items, setItems] = useState(orderDetails.items || []);
   const [orderStatus, setOrderStatus] = useState(
     orderDetails.status || 'Order Started'
   );
   const [relatedProjects, setRelatedProjects] = useState([]);
 
-  // ⭐ NEW: tracking number state
   const [trackingNumber, setTrackingNumber] = useState(
     orderDetails.trackingNumber || ''
   );
@@ -68,41 +142,54 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
 
     try {
       const customerEmail = orderDetails.customerEmail || '';
+      const customerPhone = orderDetails.customerPhone || '';
+
       const parsedAddress = (orderDetails.customerAddress || '').split(',');
       const street = parsedAddress[0]?.trim() || '';
       const city = parsedAddress[1]?.trim() || '';
-      let state = '',
-        zip = '';
+      let state = '';
+      let zip = '';
+
       if (parsedAddress[2]) {
         const parts = parsedAddress[2].trim().split(' ');
         state = parts[0] || '';
         zip = parts[1] || '';
       }
 
+      const itemName = String(item?.name || item?.description || '').toLowerCase();
+      const isSoundLegendItem = itemName.includes('soundlegend');
+
+      const protectedFields = isSoundLegendItem
+        ? buildSoundLegendProtectedFields()
+        : {};
+
       const projectData = {
         orderId: orderDetails.id,
+        parentOrderId: orderDetails.id,
+        source: 'Order',
         customerName:
           orderDetails.customerName ||
           item?.description?.split('-')[0]?.trim() ||
           item?.name?.split('-')[0]?.trim() ||
           'N/A',
+        customerEmail,
+        customerPhone,
         ownerEmail: customerEmail,
         customer: {
           name: orderDetails.customerName || 'N/A',
           email: customerEmail,
-          phone: orderDetails.customerPhone || '',
+          phone: customerPhone,
           address: { street, city, state, zip },
         },
         startDate: Timestamp.now(),
-        currentPhase: 'Step 1. Wood Preparation',
-        artisanLine: item?.name?.toLowerCase().includes('soundlegend')
-          ? 'SoundLegend'
-          : '',
+        currentPhase: '1. Discovery & Design',
+        artisanLine: isSoundLegendItem ? 'SoundLegend' : '',
         width: '',
         shellDepth: '',
         itemDetails: item || null,
         ...defaultStepData,
         ...defaultProjectFields,
+        ...protectedFields,
       };
 
       const projectRef = await addDoc(collection(db, 'projects'), projectData);
@@ -112,6 +199,7 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
         projectId,
         itemName: item?.name || 'Blank Project',
       };
+
       const orderRef = doc(db, 'orders', orderDetails.id);
 
       await updateDoc(orderRef, {
@@ -128,16 +216,17 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
           item?.description?.split('-')[0]?.trim() ||
           orderDetails.customerName?.trim() ||
           'Custom Drum Project';
+
         await linkProjectToUserByEmail(customerEmail, projectId, label);
       }
 
-      setRelatedProjects((p) => [...p, projectEntry]);
-      setSystemHistory((p) => [
+      setRelatedProjects((prev) => [...prev, projectEntry]);
+      setSystemHistory((prev) => [
         {
           event: `Project created: ${projectEntry.itemName} (ID: ${projectId})`,
           timestamp: new Date().toISOString(),
         },
-        ...p,
+        ...prev,
       ]);
 
       alert(`✅ Project created successfully!\n\nProject ID: ${projectId}`);
@@ -152,22 +241,22 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
       try {
         const orderRef = doc(db, 'orders', orderDetails.id);
         const docSnap = await getDoc(orderRef);
+
         if (docSnap.exists()) {
           const data = docSnap.data();
           setInternalNotes(data.internalNotes || []);
           setSystemHistory(data.systemHistory || []);
           setRelatedProjects(data.relatedProjects || []);
-          // keep tracking in sync with Firestore
           setTrackingNumber(data.trackingNumber || '');
         }
       } catch (err) {
         console.error('❌ Failed to load order data:', err);
       }
     };
+
     if (isOpen) fetchOrderData();
   }, [isOpen, orderDetails.id]);
 
-  // also sync when parent passes a different orderDetails
   useEffect(() => {
     setItems(orderDetails.items || []);
     setOrderStatus(orderDetails.status || 'Order Started');
@@ -176,15 +265,22 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
 
   const handleAddNote = async () => {
     if (!newNote.trim()) return;
-    const note = { text: newNote.trim(), timestamp: new Date().toISOString() };
+
+    const note = {
+      text: newNote.trim(),
+      timestamp: new Date().toISOString(),
+    };
+
     setInternalNotes((prev) => [note, ...prev]);
     setSystemHistory((prev) => [
-      { event: `Internal note added`, timestamp: note.timestamp },
+      { event: 'Internal note added', timestamp: note.timestamp },
       ...prev,
     ]);
     setNewNote('');
+
     try {
       setLoading(true);
+
       const orderRef = doc(db, 'orders', orderDetails.id);
       await updateDoc(orderRef, {
         internalNotes: arrayUnion(note),
@@ -204,6 +300,7 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
     try {
       const updatedItems = [...items];
       updatedItems[index].status = newStatus;
+
       const newOrderStatus = getOrderStatusFromItems(updatedItems);
 
       setItems(updatedItems);
@@ -231,7 +328,6 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
     }
   };
 
-  // ⭐ NEW: save tracking number to Firestore + bubble up
   const handleSaveTracking = async () => {
     const trimmed = trackingNumber.trim();
     const eventText = trimmed
@@ -240,6 +336,7 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
 
     try {
       setSavingTracking(true);
+
       const orderRef = doc(db, 'orders', orderDetails.id);
       await updateDoc(orderRef, {
         trackingNumber: trimmed || '',
@@ -290,12 +387,14 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
         >
           ✕
         </button>
+
         <h3 className="modal-title">Order Details</h3>
 
         <div className="compact-order-details">
           <div className="detail-row">
             <strong>Order ID:</strong> <span>{orderDetails.id}</span>
           </div>
+
           <div className="detail-row">
             <strong>Order Date:</strong>{' '}
             <span>
@@ -304,23 +403,27 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
                 : 'N/A'}
             </span>
           </div>
+
           <div className="detail-row">
             <strong>Order Status:</strong> <span>{orderStatus}</span>
           </div>
+
           <div className="detail-row">
             <strong>Customer Name:</strong>{' '}
             <span>{orderDetails.customerName || 'N/A'}</span>
           </div>
+
           <div className="detail-row">
             <strong>Email:</strong>{' '}
             <span>{orderDetails.customerEmail || 'N/A'}</span>
           </div>
+
           {orderDetails.customerPhone && (
             <div className="detail-row">
-              <strong>Phone:</strong>{' '}
-              <span>{orderDetails.customerPhone}</span>
+              <strong>Phone:</strong> <span>{orderDetails.customerPhone}</span>
             </div>
           )}
+
           {orderDetails.customerAddress && (
             <div className="detail-row">
               <strong>Shipping Address:</strong>{' '}
@@ -328,7 +431,6 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
             </div>
           )}
 
-          {/* ⭐ NEW: tracking number editor */}
           <div className="detail-row">
             <strong>Tracking #:</strong>
             <span>
@@ -359,7 +461,7 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
               <col style={{ width: '8%' }} />
               <col style={{ width: '14%' }} />
               <col style={{ width: '18%' }} />
-              <col style={{ width: '8%' }} /> {/* compact icon column */}
+              <col style={{ width: '8%' }} />
             </colgroup>
             <thead>
               <tr>
@@ -377,20 +479,23 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
                     <strong className="product-name-modal">
                       {item.description || item.name || 'N/A'}
                     </strong>
+
                     {item.variant && (
                       <div className="muted">
-                        {[
+                        [
                           item.variant.color,
                           item.variant.size,
                           item.variant.other,
                         ]
                           .filter(Boolean)
-                          .join(' / ')}
+                          .join(' / ')
                       </div>
                     )}
                   </td>
+
                   <td>{item.quantity || 0}</td>
                   <td>${Math.abs(item.price ?? 0).toFixed(2)}</td>
+
                   <td>
                     <select
                       value={item.status || 'Preparing'}
@@ -399,22 +504,21 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
                       }
                       className="status-select"
                     >
-                      {ITEM_STATUSES.map((s) => (
-                        <option key={s} value={s}>
-                          {s}
+                      {ITEM_STATUSES.map((status) => (
+                        <option key={status} value={status}>
+                          {status}
                         </option>
                       ))}
                     </select>
                   </td>
+
                   <td className="actions-cell">
-                    {/* Icon-only button: Create new project */}
                     <button
                       className="icon-action-btn"
                       onClick={() => createProject(item)}
                       aria-label="Create project"
                       title="Create project"
                     >
-                      {/* plus-in-document icon (inline SVG) */}
                       <svg
                         viewBox="0 0 24 24"
                         width="18"
@@ -453,17 +557,18 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
         )}
 
         <h3 className="section-title">Related Projects</h3>
+
         {relatedProjects.length > 0 ? (
           <ul className="related-list">
-            {relatedProjects.map((p) => (
-              <li key={p.projectId}>
+            {relatedProjects.map((project) => (
+              <li key={project.projectId}>
                 <button
                   className="project-chip"
                   onClick={() =>
-                    (window.location.href = `/projects/${p.projectId}`)
+                    (window.location.href = `/projects/${project.projectId}`)
                   }
                 >
-                  {p.itemName} (ID: {p.projectId})
+                  {project.itemName} (ID: {project.projectId})
                 </button>
               </li>
             ))}
@@ -473,6 +578,7 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
         )}
 
         <h3 className="section-title">Internal Notes</h3>
+
         {internalNotes.length > 0 ? (
           <table className="data-table">
             <thead>
@@ -482,8 +588,8 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
               </tr>
             </thead>
             <tbody>
-              {internalNotes.map((note, i) => (
-                <tr key={i}>
+              {internalNotes.map((note, index) => (
+                <tr key={index}>
                   <td>{note.text}</td>
                   <td>{new Date(note.timestamp).toLocaleString()}</td>
                 </tr>
@@ -500,6 +606,7 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
           onChange={(e) => setNewNote(e.target.value)}
           className="note-input"
         />
+
         <button
           className="btn add-note-btn"
           onClick={handleAddNote}
@@ -510,6 +617,7 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
 
         <div className="history-log">
           <h3 className="section-title">System History</h3>
+
           {systemHistory.length > 0 ? (
             <table className="data-table">
               <thead>
@@ -519,10 +627,10 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
                 </tr>
               </thead>
               <tbody>
-                {systemHistory.map((ev, i) => (
-                  <tr key={i}>
-                    <td>{ev.event}</td>
-                    <td>{new Date(ev.timestamp).toLocaleString()}</td>
+                {systemHistory.map((event, index) => (
+                  <tr key={index}>
+                    <td>{event.event}</td>
+                    <td>{new Date(event.timestamp).toLocaleString()}</td>
                   </tr>
                 ))}
               </tbody>
@@ -532,10 +640,7 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
           )}
         </div>
 
-        <button
-          className="btn btn-ghost order-close-btn"
-          onClick={onClose}
-        >
+        <button className="btn btn-ghost order-close-btn" onClick={onClose}>
           Close
         </button>
       </div>

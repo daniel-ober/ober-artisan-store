@@ -1,0 +1,335 @@
+.cip-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 20px;
+  border-radius: 22px;
+  background: linear-gradient(180deg, rgba(12, 14, 24, 0.96), rgba(6, 8, 14, 0.98));
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  color: #f5f7fb;
+}
+
+.cip-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.cip-header-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cip-kicker {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(166, 186, 255, 0.86);
+}
+
+.cip-title {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.1;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.cip-subtitle {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: rgba(226, 232, 245, 0.78);
+  max-width: 760px;
+}
+
+.cip-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cip-btn {
+  border: 0;
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform 0.18s ease,
+    opacity 0.18s ease,
+    background 0.18s ease;
+}
+
+.cip-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.cip-btn--ghost {
+  background: rgba(255, 255, 255, 0.08);
+  color: #f5f7fb;
+}
+
+.cip-btn--primary {
+  background: linear-gradient(135deg, rgba(84, 125, 255, 0.96), rgba(122, 162, 255, 0.92));
+  color: white;
+}
+
+.cip-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.cip-section-card {
+  border-radius: 18px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.cip-section-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  padding: 16px 18px;
+  color: inherit;
+  cursor: pointer;
+}
+
+.cip-section-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cip-section-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.cip-section-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.cip-section-count {
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(185, 200, 255, 0.92);
+  background: rgba(86, 112, 202, 0.22);
+  border: 1px solid rgba(135, 162, 255, 0.24);
+  border-radius: 999px;
+  padding: 4px 8px;
+}
+
+.cip-section-description {
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(226, 232, 245, 0.72);
+}
+
+.cip-section-chevron {
+  font-size: 18px;
+  color: rgba(226, 232, 245, 0.82);
+  transform: rotate(0deg);
+  transition: transform 0.18s ease;
+}
+
+.cip-section-chevron.is-open {
+  transform: rotate(180deg);
+}
+
+.cip-section-body {
+  padding: 0 18px 18px;
+}
+
+.cip-fields-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.cip-field-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cip-field-card--wide {
+  grid-column: 1 / -1;
+}
+
+.cip-field-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: rgba(230, 236, 248, 0.92);
+}
+
+.cip-field-input,
+.cip-field-select,
+.cip-field-textarea {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(10, 12, 20, 0.88);
+  color: #f5f7fb;
+  font-size: 14px;
+  line-height: 1.4;
+  padding: 12px 14px;
+  outline: none;
+  transition:
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    background 0.18s ease;
+}
+
+.cip-field-textarea {
+  resize: vertical;
+  min-height: 96px;
+}
+
+.cip-field-input:focus,
+.cip-field-select:focus,
+.cip-field-textarea:focus {
+  border-color: rgba(133, 168, 255, 0.5);
+  box-shadow: 0 0 0 3px rgba(88, 121, 219, 0.14);
+}
+
+.cip-field-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cip-chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cip-chip {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(14, 16, 27, 0.9);
+  color: rgba(235, 239, 248, 0.84);
+  border-radius: 999px;
+  padding: 9px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.cip-chip.is-active {
+  background: rgba(79, 113, 220, 0.26);
+  border-color: rgba(136, 165, 255, 0.38);
+  color: #ffffff;
+}
+
+.cip-scale-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cip-scale-pill {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(14, 16, 27, 0.9);
+  color: rgba(235, 239, 248, 0.84);
+  border-radius: 999px;
+  padding: 10px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.cip-scale-pill.is-active {
+  background: linear-gradient(135deg, rgba(79, 113, 220, 0.24), rgba(110, 149, 255, 0.22));
+  border-color: rgba(136, 165, 255, 0.42);
+  color: #ffffff;
+}
+
+.cip-boolean-toggle {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: 0;
+  color: #f5f7fb;
+  cursor: pointer;
+  padding: 0;
+}
+
+.cip-boolean-toggle-track {
+  width: 50px;
+  height: 28px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  position: relative;
+  transition: background 0.18s ease;
+}
+
+.cip-boolean-toggle.is-on .cip-boolean-toggle-track {
+  background: rgba(78, 120, 255, 0.72);
+}
+
+.cip-boolean-toggle-knob {
+  position: absolute;
+  top: 3px;
+  left: 4px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: white;
+  transition: transform 0.18s ease;
+}
+
+.cip-boolean-toggle.is-on .cip-boolean-toggle-knob {
+  transform: translateX(20px);
+}
+
+.cip-boolean-toggle-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(233, 238, 248, 0.9);
+}
+
+@media (max-width: 900px) {
+  .cip-header {
+    flex-direction: column;
+  }
+
+  .cip-header-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .cip-fields-grid {
+    grid-template-columns: 1fr;
+  }
+}

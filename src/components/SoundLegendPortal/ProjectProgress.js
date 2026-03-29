@@ -25,6 +25,8 @@ import {
   getArchiveCaptureByKey,
 } from '../../utils/projectStageArchiveDefinitions';
 import { createPortal } from 'react-dom';
+import ConsultationIntakeManager from './ConsultationIntakeManager';
+import GeneratedStageStoryPreview from './GeneratedStageStoryPreview';
 import './ProjectProgress.css';
 
 const STAGE_MEDIA = {
@@ -212,6 +214,108 @@ const LEGACY_STEPKEY_FALLBACKS = {
   legacyTuningMedia: ['tuningAndDetailing', 'tuningDetailing', 'legacyMedia'],
   finalQAPackagingDelivery: ['qualityCheck', 'finalQa'],
 };
+
+const CUSTOMER_PORTAL_COPY = {
+  discoveryDesign: {
+    stageTitle: 'Discovery & Design',
+    steps: {
+      discoveryDesign_1: 'Capturing Your Vision',
+      discoveryDesign_2: 'Shaping Your Initial Spec',
+      discoveryDesign_3: 'Confirming Your Build Direction',
+    },
+  },
+
+  commitmentPortal: {
+    stageTitle: 'Commitment & Portal Setup',
+    steps: {
+      commitmentPortal_1: 'Confirming Your Commitment',
+      commitmentPortal_2: 'Setting Up Your Portal',
+      commitmentPortal_3: 'Finalizing Your Intake Details',
+    },
+  },
+
+  woodVisionLockIn: {
+    stageTitle: 'Wood & Vision Lock-In',
+    steps: {
+      woodVisionLockIn_1: 'Locking In Your Veneer Direction',
+      woodVisionLockIn_2: 'Selecting Your Core Shell Wood',
+      woodVisionLockIn_3: 'Freezing Your Final Spec',
+    },
+  },
+
+  rawShellCreation: {
+    stageTitle: 'Raw Shell Creation',
+    steps: {
+      rawShellCreation_1: 'Preparing Your Shell Materials',
+      rawShellCreation_2: 'Building Your Shell',
+      rawShellCreation_3: 'Trueing Your Raw Shell',
+    },
+  },
+
+  shellTrueingTorchTune: {
+    stageTitle: 'Shell Trueing & Torch Tune',
+    steps: {
+      shellTrueingTorchTune_1: 'Trueing Your Shell',
+      shellTrueingTorchTune_2: 'Torch-Tuning Your Shell',
+      shellTrueingTorchTune_3: 'Refining Your Shell Surface',
+    },
+  },
+
+  exteriorArtFinish: {
+    stageTitle: 'Exterior Art & Finish',
+    steps: {
+      exteriorArtFinish_1: 'Preparing Your Shell Surface',
+      exteriorArtFinish_2: 'Applying Your Veneer',
+      exteriorArtFinish_3: 'Integrating Your Accent Work',
+      exteriorArtFinish_4: 'Clearing & Curing Your Finish',
+    },
+  },
+
+  edgesSnareBeds: {
+    stageTitle: 'Edges & Snare Beds',
+    steps: {
+      edgesSnareBeds_1: 'Cutting Your Bearing Edges',
+      edgesSnareBeds_2: 'Shaping Your Snare Beds',
+      edgesSnareBeds_3: 'Checking Head Seating & Fit',
+    },
+  },
+
+  hardwareAssembly: {
+    stageTitle: 'Hardware & Assembly',
+    steps: {
+      hardwareAssembly_1: 'Laying Out Your Hardware',
+      hardwareAssembly_2: 'Installing Your Hardware',
+      hardwareAssembly_3: 'Fitting Your Heads & Wires',
+    },
+  },
+
+  legacyTuningMedia: {
+    stageTitle: 'Legacy Tuning & Media',
+    steps: {
+      legacyTuningMedia_1: 'Tuning Your Drum',
+      legacyTuningMedia_2: 'Capturing Your Media',
+      legacyTuningMedia_3: 'Preparing Your Final Update',
+    },
+  },
+
+  finalQAPackagingDelivery: {
+    stageTitle: 'Final QA, Packaging & Delivery',
+    steps: {
+      finalQAPackagingDelivery_1: 'Completing Final Quality Checks',
+      finalQAPackagingDelivery_2: 'Packing Your Drum',
+      finalQAPackagingDelivery_3: 'Preparing Your Shipment',
+    },
+  },
+};
+
+function getCustomerPortalStageTitle(stageKey, fallback = '') {
+  return CUSTOMER_PORTAL_COPY?.[stageKey]?.stageTitle || fallback;
+}
+
+function getCustomerPortalStepTitle(stageKey, stepDef, fallback = '') {
+  const stepId = stepDef?.id || stepDef?.key;
+  return CUSTOMER_PORTAL_COPY?.[stageKey]?.steps?.[stepId] || fallback;
+}
 
 /* =========================================================
    HELPERS
@@ -937,7 +1041,7 @@ function getStageStatePresentation(selectedIndex, currentIndex) {
       eyebrow: 'Chapter Completed',
       pill: 'Completed',
       helper:
-        'This chapter is complete and now lives as part of your build archive.',
+        'This chapter has been completed and is now part of the finished build story.',
     };
   }
 
@@ -945,23 +1049,24 @@ function getStageStatePresentation(selectedIndex, currentIndex) {
     return {
       eyebrow: 'Chapter In Progress',
       pill: 'In Progress',
-      helper: 'This is the current active chapter in your instrument’s story.',
+      helper: 'This chapter is actively being crafted right now.',
     };
   }
 
   if (state === STAGE_MEDIA_STATE.NEXT) {
     return {
-      eyebrow: "A look at what's coming next",
+      eyebrow: 'Coming Up Next',
       pill: 'Up Next',
       helper:
-        'This chapter is approaching and will open as the current stage closes.',
+        'This chapter is next in the build sequence and will begin after the current work is finished.',
     };
   }
 
   return {
     eyebrow: 'Future Chapter',
     pill: 'Locked',
-    helper: 'This chapter will unlock later in the build journey.',
+    helper:
+      'This chapter remains locked until the earlier build work is completed.',
   };
 }
 
@@ -1261,6 +1366,29 @@ function getLegacyChapterContent(project, isAdmin = false) {
     trackingNumber,
     finalNote,
     isAdmin,
+  };
+}
+
+function isSoundLegendProject(project) {
+  return (
+    String(project?.artisanLine || '')
+      .trim()
+      .toLowerCase() === 'soundlegend'
+  );
+}
+
+function getBuildCommitmentState(project) {
+  return {
+    isCommitted: !!project?.buildCommitment?.isCommitted,
+    committedAt: project?.buildCommitment?.committedAt || null,
+  };
+}
+
+function getStoryVisibilityState(project) {
+  return {
+    customerCanViewStoryDetails:
+      !!project?.storyVisibility?.customerCanViewStoryDetails,
+    storyUnlockedAt: project?.storyVisibility?.storyUnlockedAt || null,
   };
 }
 
@@ -3270,14 +3398,20 @@ function getTemplateStepDisplayLabel(step) {
 function getCurrentStageAndStepLabels(project) {
   if (!project) {
     return {
-      stageLabel: 'Chapter I — Not started',
+      stageLabel: 'Chapter I • Discovery & Design',
       stepLabel: 'No step selected',
     };
   }
 
   const stageIndex = getCurrentStepIndex(project);
   const stageDef = STEPS[stageIndex] || STEPS[0];
-  const stageLabel = `Chapter ${toRomanChapter(stageIndex + 1)} • ${stageDef.label}`;
+
+  const customerStageTitle = getCustomerPortalStageTitle(
+    stageDef.key,
+    stageDef.label
+  );
+
+  const stageLabel = `Chapter ${toRomanChapter(stageIndex + 1)} • ${customerStageTitle}`;
 
   const tpl = STAGE_TEMPLATES?.[stageDef.key];
   const stepsArr = Array.isArray(tpl?.steps) ? tpl.steps : [];
@@ -3306,8 +3440,13 @@ function getCurrentStageAndStepLabels(project) {
   }
 
   const activeStepDef = stepsArr[activeStepIdx];
+
   const activeStepName = activeStepDef
-    ? getTemplateStepDisplayLabel(activeStepDef)
+    ? getCustomerPortalStepTitle(
+        stageDef.key,
+        activeStepDef,
+        getTemplateStepDisplayLabel(activeStepDef)
+      )
     : 'No step selected';
 
   const stepLabel =
@@ -3740,6 +3879,8 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
   const [project, setProject] = useState(cachedInitialProject || null);
   const [loading, setLoading] = useState(!cachedInitialProject);
   const [activeKey, setActiveKey] = useState('soundlegendCover');
+
+  const [showStoryWorkshop, setShowStoryWorkshop] = useState(false);
 
   const [archiveEditorBusy, setArchiveEditorBusy] = useState(false);
   const [archiveEditorTitle, setArchiveEditorTitle] = useState('');
@@ -4273,6 +4414,27 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
     writeProjectProgressCache(initialProject || project, project);
   }, [project, initialProject]);
 
+  const isSoundLegend = useMemo(
+    () => isSoundLegendProject(project),
+    [project]
+  );
+
+  const buildCommitmentState = useMemo(
+    () => getBuildCommitmentState(project),
+    [project]
+  );
+
+  const storyVisibilityState = useMemo(
+    () => getStoryVisibilityState(project),
+    [project]
+  );
+
+  const customerBuildCommitted =
+    isAdmin || !isSoundLegend || buildCommitmentState.isCommitted;
+
+  const customerStoryUnlocked =
+    isAdmin || !isSoundLegend || storyVisibilityState.customerCanViewStoryDetails;
+
   const overallPct = useMemo(() => getOverallProgress(project), [project]);
   const targetWindow = useMemo(() => getTargetWindow(project), [project]);
   const projectMarkedComplete = overallPct >= 100;
@@ -4360,7 +4522,8 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
     useMemo(() => getCurrentStageAndStepLabels(project), [project]);
 
   const revealData = project?.soundlegendReveal || {};
-  const revealIsDeployed = !!revealData.revealDeployed;
+  const revealIsDeployed =
+    !!revealData.revealDeployed && customerStoryUnlocked;
   const revealIsReady = !!revealData.revealReady;
 
   const revealCoverIsAvailable = !!(
@@ -4440,40 +4603,36 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
     revealCoverMobileScale,
   ]);
 
-const defaultChapterKey = useMemo(() => {
-  const reveal = project?.soundlegendReveal || {};
+  const defaultChapterKey = useMemo(() => {
+    const reveal = project?.soundlegendReveal || {};
 
-  const hasRevealCoverChapter = storyChapters.some(
-    (chapter) => chapter.key === 'soundlegendCover'
-  );
+    const hasRevealCoverChapter = storyChapters.some(
+      (chapter) => chapter.key === 'soundlegendCover'
+    );
 
-  const hasLegacyChapter = storyChapters.some(
-    (chapter) => chapter.key === 'soundlegendEpilogue'
-  );
+    const hasLegacyChapter = storyChapters.some(
+      (chapter) => chapter.key === 'soundlegendEpilogue'
+    );
 
-  const projectIsComplete = overallPct >= 100;
-  const revealIsLive = !!reveal.revealDeployed;
-  const revealHasMedia = !!reveal.coverMediaUrl;
+    const projectIsComplete = overallPct >= 100;
+    const revealIsLive = !!reveal.revealDeployed;
+    const revealHasMedia = !!reveal.coverMediaUrl;
 
-  if (projectIsComplete) {
-    if (
-      revealIsLive &&
-      revealHasMedia &&
-      hasRevealCoverChapter
-    ) {
-      return 'soundlegendCover';
+    if (projectIsComplete) {
+      if (revealIsLive && revealHasMedia && hasRevealCoverChapter) {
+        return 'soundlegendCover';
+      }
+
+      if (hasLegacyChapter) {
+        return 'soundlegendEpilogue';
+      }
     }
 
-    if (hasLegacyChapter) {
-      return 'soundlegendEpilogue';
-    }
-  }
-
-  return (STEPS[currentStepIndex] || STEPS[0])?.key || STEPS[0].key;
-}, [project, storyChapters, overallPct, currentStepIndex]);
+    return (STEPS[currentStepIndex] || STEPS[0])?.key || STEPS[0].key;
+  }, [project, storyChapters, overallPct, currentStepIndex]);
 
   const chapterSelectorItems = useMemo(() => {
-    return storyChapters.map((chapter, index) => {
+    return storyChapters.map((chapter) => {
       const isCover = chapter.key === 'soundlegendCover';
       const isLegacy = chapter.key === 'soundlegendEpilogue';
       const isActive = chapter.key === activeKey;
@@ -4538,38 +4697,35 @@ const defaultChapterKey = useMemo(() => {
     projectMarkedComplete,
   ]);
 
-useEffect(() => {
-  if (!project?.id) return;
-  if (transitionLockRef.current) return;
-  if (!defaultChapterKey) return;
+  useEffect(() => {
+    if (!project?.id) return;
+    if (transitionLockRef.current) return;
+    if (!defaultChapterKey) return;
 
-  const activeKeyIsStillValid = storyChapters.some(
-    (chapter) => chapter.key === activeKey
-  );
+    const activeKeyIsStillValid = storyChapters.some(
+      (chapter) => chapter.key === activeKey
+    );
 
-  const initSignature = [
-    project.id,
-    defaultChapterKey,
-    storyChapters.map((chapter) => chapter.key).join('|'),
-  ].join('::');
+    const initSignature = [
+      project.id,
+      defaultChapterKey,
+      storyChapters.map((chapter) => chapter.key).join('|'),
+    ].join('::');
 
-  // Re-initialize when the loaded project's default landing chapter changes
-  // (example: completed project + reveal becomes available = go to cover).
-  if (initialChapterSelectionRef.current !== initSignature) {
-    initialChapterSelectionRef.current = initSignature;
-    setActiveKey(defaultChapterKey);
-    setDisplayedStageKey(defaultChapterKey);
-    setDisplayedOverlayStageKey(defaultChapterKey);
-    return;
-  }
+    if (initialChapterSelectionRef.current !== initSignature) {
+      initialChapterSelectionRef.current = initSignature;
+      setActiveKey(defaultChapterKey);
+      setDisplayedStageKey(defaultChapterKey);
+      setDisplayedOverlayStageKey(defaultChapterKey);
+      return;
+    }
 
-  // Still repair invalid state if needed.
-  if (!activeKey || !activeKeyIsStillValid) {
-    setActiveKey(defaultChapterKey);
-    setDisplayedStageKey(defaultChapterKey);
-    setDisplayedOverlayStageKey(defaultChapterKey);
-  }
-}, [project?.id, defaultChapterKey, activeKey, storyChapters]);
+    if (!activeKey || !activeKeyIsStillValid) {
+      setActiveKey(defaultChapterKey);
+      setDisplayedStageKey(defaultChapterKey);
+      setDisplayedOverlayStageKey(defaultChapterKey);
+    }
+  }, [project?.id, defaultChapterKey, activeKey, storyChapters]);
 
   const activeStep =
     storyChapters.find((s) => s.key === activeKey) || storyChapters[0];
@@ -4695,6 +4851,17 @@ useEffect(() => {
           )}`;
 
   const chapterNarrative = useMemo(() => {
+    if (!customerStoryUnlocked && !isAdmin) {
+      return {
+        title: 'Chapter Story',
+        summary:
+          'Detailed chapter story will unlock once your builder approves this part of the SoundLegend experience.',
+        sentences: [
+          'Detailed chapter story will unlock once your builder approves this part of the SoundLegend experience.',
+        ],
+      };
+    }
+
     if (isLegacyChapter) {
       return {
         title: legacyChapterContent.title,
@@ -4728,15 +4895,28 @@ useEffect(() => {
     legacyChapterContent,
     revealCoverTitle,
     revealCoverSubtitle,
+    customerStoryUnlocked,
+    isAdmin,
   ]);
 
   const currentStageStorypoints = useMemo(() => {
+    if (!customerStoryUnlocked && !isAdmin) {
+      return [];
+    }
+
     if (isLegacyChapter || isRevealCoverChapter) {
       return [];
     }
 
     return getStorypointsForStep(activeStep, project);
-  }, [activeStep, project, isLegacyChapter, isRevealCoverChapter]);
+  }, [
+    activeStep,
+    project,
+    isLegacyChapter,
+    isRevealCoverChapter,
+    customerStoryUnlocked,
+    isAdmin,
+  ]);
 
   const currentChapterProgressData = useMemo(
     () => getChapterProgressData(activeStep, project),
@@ -4872,7 +5052,16 @@ useEffect(() => {
   };
 
   useEffect(() => {
-    const nextTitle = (activeStep?.label || '').toUpperCase();
+    const nextTitle = (
+      isRevealCoverChapter
+        ? activeStep?.label || ''
+        : isLegacyChapter
+          ? activeStep?.label || ''
+          : getCustomerPortalStageTitle(
+              activeStep?.key,
+              activeStep?.label || ''
+            )
+    ).toUpperCase();
 
     if (!nextTitle) return;
     if (nextTitle === displayTitleText) return;
@@ -4887,7 +5076,13 @@ useEffect(() => {
     }, 900);
 
     return () => window.clearTimeout(swapTimer);
-  }, [activeStep?.label, displayTitleText]);
+  }, [
+    activeStep?.key,
+    activeStep?.label,
+    isRevealCoverChapter,
+    isLegacyChapter,
+    displayTitleText,
+  ]);
 
   const activeStepCompletionStatus =
     !isRevealCoverChapter && !isLegacyChapter && activeStep
@@ -4917,20 +5112,21 @@ useEffect(() => {
         eyebrow: '',
         pill: '',
         helper:
-          'Your instrument is finished. This final chapter marks the handoff from maker to artist.',
+          'The instrument is finished, and this final chapter marks the handoff from maker to artist.',
       }
     : isRevealCoverChapter
       ? {
           eyebrow: 'SoundLegend Reveal',
           pill: 'Revealed',
-          helper: 'This is the front cover of the completed SoundLegend story.',
+          helper:
+            'This is the opening cover for the completed SoundLegend story.',
         }
       : activeStepCompletionStatus === 'completed'
         ? {
             eyebrow: 'Chapter Completed',
             pill: 'Completed',
             helper:
-              'This chapter is complete and now lives as part of your build archive.',
+              'This chapter has been completed and now stands as part of the finished build story.',
           }
         : getStageStatePresentation(
             canonicalActiveStageIndex,
@@ -4940,9 +5136,10 @@ useEffect(() => {
   const isSelectedStageLocked = currentStageStatus === STAGE_MEDIA_STATE.FUTURE;
 
   const showStageStorypoints =
-    currentStageStatus === STAGE_MEDIA_STATE.COMPLETED ||
-    currentStageStatus === STAGE_MEDIA_STATE.CURRENT ||
-    currentStageStatus === STAGE_MEDIA_STATE.NEXT;
+    customerStoryUnlocked &&
+    (currentStageStatus === STAGE_MEDIA_STATE.COMPLETED ||
+      currentStageStatus === STAGE_MEDIA_STATE.CURRENT ||
+      currentStageStatus === STAGE_MEDIA_STATE.NEXT);
 
   useEffect(() => {
     if (!showStageStorypoints) {
@@ -5211,6 +5408,7 @@ useEffect(() => {
 
     navigateToStageIndex(activeIndex + 1);
   };
+
   const handleArchiveUpload = async (file) => {
     if (!file || !project?.id || !activeStep?.key) return;
 
@@ -5663,8 +5861,6 @@ useEffect(() => {
 
       await saveRevealSettings({
         revealDeployed: false,
-        // optional: also mark not-ready if you want to force re-review
-        // revealReady: false,
         deployedAt: null,
       });
     } catch (err) {
@@ -5927,6 +6123,22 @@ useEffect(() => {
     return (
       <div className="sl-progress sl-progress--empty">
         <p>Project not found.</p>
+      </div>
+    );
+  }
+
+  if (!isAdmin && isSoundLegend && !customerBuildCommitted) {
+    return (
+      <div className="sl-progress sl-progress--empty">
+        <div className="sl-progress-loading-shell">
+          <div className="sl-progress-loading-title">
+            Your SoundLegend portal is not unlocked yet
+          </div>
+          <div className="sl-progress-loading-text">
+            Your consultation has been received. Once your build commitment is
+            finalized, this portal will open with your project timeline and story.
+          </div>
+        </div>
       </div>
     );
   }
@@ -7390,6 +7602,54 @@ useEffect(() => {
         style={{ display: 'none' }}
         onChange={handleCoverRevealFileInputChange}
       />
+
+      {isAdmin ? (
+        <section className="sl-progress-story-workshop-shell">
+          <button
+            type="button"
+            className="sl-progress-story-workshop-toggle"
+            onClick={() => setShowStoryWorkshop((prev) => !prev)}
+          >
+            <div className="sl-progress-story-workshop-toggle-copy">
+              <div className="sl-progress-story-workshop-kicker">Admin Only</div>
+              <div className="sl-progress-story-workshop-title">
+                SoundLegend Story Workshop
+              </div>
+              <div className="sl-progress-story-workshop-subtitle">
+                Capture consultation intake and preview tailored chapter story output.
+              </div>
+            </div>
+
+            <div
+              className={`sl-progress-story-workshop-chevron ${
+                showStoryWorkshop ? 'is-open' : ''
+              }`}
+            >
+              ▾
+            </div>
+          </button>
+
+          {showStoryWorkshop ? (
+            <div className="sl-progress-story-workshop-body">
+              <ConsultationIntakeManager
+                project={project}
+                onSaved={(nextIntake) => {
+                  setProject((prev) =>
+                    prev
+                      ? {
+                          ...prev,
+                          consultationIntake: nextIntake,
+                        }
+                      : prev
+                  );
+                }}
+              />
+
+              <GeneratedStageStoryPreview project={project} />
+            </div>
+          ) : null}
+        </section>
+      ) : null}
 
       <StageResourceViewerModal
         item={selectedResourceItem}

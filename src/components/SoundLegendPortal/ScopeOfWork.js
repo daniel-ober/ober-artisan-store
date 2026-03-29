@@ -1,4 +1,3 @@
-// src/components/SoundLegendPortal/ScopeOfWork.js
 import React, { useEffect, useRef, useState } from 'react';
 import './ScopeOfWork.css';
 import { useActorContext } from '../../hooks/useActorContext';
@@ -74,7 +73,7 @@ const buildInitialForm = (project) => {
 
   const dimensions = getScalar(
     project,
-    ['specs.dimensionsLabel'],
+    ['specs.dimensionsLabel', 'dimensionsLabel'],
     defaultDimensions
   );
 
@@ -109,9 +108,9 @@ const buildInitialForm = (project) => {
   const primarySpecies = getScalar(
     project,
     [
+      'primarySpecies',
       'woodPrimary',
       'woodSpecies',
-      'primarySpecies',
       'specs.woodSpecies',
       'specs.primarySpecies',
     ],
@@ -120,7 +119,7 @@ const buildInitialForm = (project) => {
 
   const secondarySpeciesBase = getScalar(
     project,
-    ['woodSecondary', 'secondarySpecies', 'specs.secondarySpecies'],
+    ['secondarySpecies', 'woodSecondary', 'specs.secondarySpecies'],
     ''
   );
   const secondaryPercent = getScalar(project, ['woodSecondaryPercent'], '—');
@@ -158,8 +157,8 @@ const buildInitialForm = (project) => {
   const hardwareFinish = getScalar(
     project,
     [
-      'hardwareColor',
       'hardwareFinish',
+      'hardwareColor',
       'specs.hardwareFinish',
       'specs.hardwareColor',
     ],
@@ -239,6 +238,11 @@ const HW_FINISHES = ['Chrome', 'Black Nickel', 'Brass/Gold'];
 const HOOPS_OPTIONS = ['Die-cast', 'Triple flanged', 'Single flanged'];
 const THROW_OFFS = ['Trick', 'DW', 'Dunnett', 'Other'];
 
+const isSoundLegendProject = (project) =>
+  String(project?.artisanLine || '')
+    .trim()
+    .toLowerCase() === 'soundlegend';
+
 // Human-friendly labels for audit details
 const FIELD_LABELS = {
   line: 'Artisan Line',
@@ -302,7 +306,22 @@ const ScopeOfWork = ({ project }) => {
   const { actorIsAdmin, isImpersonating, subjectEmail, actorEmail } =
     useActorContext() || {};
 
-  const [form, setForm] = useState(() => buildInitialForm(project));
+  const isSoundLegend = isSoundLegendProject(project);
+  const customerScopeUnlocked =
+    !!project?.scopeVisibility?.customerCanViewApprovedScope;
+
+  const scopeSource =
+    !actorIsAdmin && isSoundLegend && customerScopeUnlocked
+      ? {
+          ...project,
+          ...(project?.approvedCustomerScope || {}),
+        }
+      : project;
+
+  const customerShouldSeeLockedScope =
+    !actorIsAdmin && isSoundLegend && !customerScopeUnlocked;
+
+  const [form, setForm] = useState(() => buildInitialForm(scopeSource));
   const [isEditing, setIsEditing] = useState(false);
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
@@ -320,14 +339,14 @@ const ScopeOfWork = ({ project }) => {
 
   /* ---------- sync when project changes ---------- */
   useEffect(() => {
-    const nextForm = buildInitialForm(project);
+    const nextForm = buildInitialForm(scopeSource);
     if (!isEditing) {
       setForm(nextForm);
       baselineRef.current = nextForm;
     }
     setAuditTrail(project?.scopeOfWorkAudit || []);
     setBuildProposals(project?.attachments?.build_proposal || []);
-  }, [project, isEditing]);
+  }, [project, scopeSource, isEditing]);
 
   const handleChange = (field, value) => {
     setForm((prev) => ({
@@ -345,7 +364,7 @@ const ScopeOfWork = ({ project }) => {
 
   const handleCancelEdit = () => {
     setIsEditing(false);
-    setForm(baselineRef.current || buildInitialForm(project));
+    setForm(baselineRef.current || buildInitialForm(scopeSource));
   };
 
   const handleSave = async () => {
@@ -373,7 +392,6 @@ const ScopeOfWork = ({ project }) => {
       const fields = [
         ['line', 'artisanLine'],
         ['serial', 'lineSerial'],
-        ['nickname', 'nickname'],
         ['dimensions', 'specs.dimensionsLabel'],
         ['staveCount', 'staveCount'],
         ['shellConstruction', 'shellConstructionName'],
@@ -403,7 +421,6 @@ const ScopeOfWork = ({ project }) => {
 
       const hasFieldChanges = Object.keys(updatePayload).length > 0;
 
-      // Build audit entry if there are any field changes
       const auditEntry = hasFieldChanges
         ? {
             ts: new Date().toISOString(),
@@ -427,7 +444,6 @@ const ScopeOfWork = ({ project }) => {
       }
 
       if (!hasFieldChanges && !auditEntry) {
-        // nothing changed
         setIsEditing(false);
         return;
       }
@@ -598,6 +614,22 @@ const ScopeOfWork = ({ project }) => {
     );
   }
 
+  if (customerShouldSeeLockedScope) {
+    return (
+      <div className="slp-card" data-component="ScopeOfWork">
+        <h3>Scope of Work</h3>
+        <p className="slp-muted">
+          Your approved build scope has not been released yet.
+        </p>
+        <div className="sow-notes">
+          Once Dan finalizes and approves your SoundLegend scope, this section
+          will unlock with your shell details, woods, hardware, finish, and
+          signed build proposal.
+        </div>
+      </div>
+    );
+  }
+
   const {
     line,
     serial,
@@ -670,7 +702,6 @@ const ScopeOfWork = ({ project }) => {
         </div>
       )}
 
-      {/* IDENTITY */}
       <section className="sow-section">
         <h4 className="sow-heading">Identity</h4>
         <div className="sow-grid">
@@ -709,7 +740,6 @@ const ScopeOfWork = ({ project }) => {
         </div>
       </section>
 
-      {/* SHELL / GEOMETRY */}
       <section className="sow-section">
         <h4 className="sow-heading">Shell & Geometry</h4>
         <div className="sow-grid">
@@ -791,7 +821,6 @@ const ScopeOfWork = ({ project }) => {
         </div>
       </section>
 
-      {/* WOOD / VENEER */}
       <section className="sow-section">
         <h4 className="sow-heading">Wood & Veneer</h4>
         <div className="sow-grid">
@@ -840,7 +869,6 @@ const ScopeOfWork = ({ project }) => {
         </div>
       </section>
 
-      {/* BEARING EDGES / SNARE BEDS */}
       <section className="sow-section">
         <h4 className="sow-heading">Edges & Snare Beds</h4>
         <div className="sow-grid">
@@ -879,7 +907,6 @@ const ScopeOfWork = ({ project }) => {
         </div>
       </section>
 
-      {/* HARDWARE */}
       <section className="sow-section">
         <h4 className="sow-heading">Hardware</h4>
         <div className="sow-grid">
@@ -969,7 +996,6 @@ const ScopeOfWork = ({ project }) => {
         </div>
       </section>
 
-      {/* FINISH */}
       <section className="sow-section">
         <h4 className="sow-heading">Finish</h4>
         <div className="sow-grid">
@@ -1015,7 +1041,6 @@ const ScopeOfWork = ({ project }) => {
         </div>
       </section>
 
-      {/* NOTES */}
       <section className="sow-section">
         <h4 className="sow-heading">Additional Notes</h4>
         <div className="sow-notes">
@@ -1038,7 +1063,6 @@ const ScopeOfWork = ({ project }) => {
         <h4 className="sow-heading">Signed Build Proposal</h4>
 
         <div className="sow-proposal-enhanced">
-          {/* PROPOSAL LIST */}
           {buildProposals?.length > 0 ? (
             <div className="proposal-list">
               {buildProposals.map((file, idx) => {
@@ -1090,7 +1114,6 @@ const ScopeOfWork = ({ project }) => {
             </div>
           )}
 
-          {/* DRAG + DROP UPLOADER */}
           {canEdit && (
             <>
               <div
@@ -1120,7 +1143,6 @@ const ScopeOfWork = ({ project }) => {
         </div>
       </section>
 
-      {/* AUDIT HISTORY (admins only) */}
       {actorIsAdmin && (
         <section className="sow-section sow-audit-section">
           <div className="sow-audit-header-row">
@@ -1135,8 +1157,7 @@ const ScopeOfWork = ({ project }) => {
                 {auditExpanded ? 'Hide' : 'Show'} ({auditTrail.length})
                 <span
                   className={
-                    'sow-audit-chevron' +
-                    (auditExpanded ? ' is-open' : '')
+                    'sow-audit-chevron' + (auditExpanded ? ' is-open' : '')
                   }
                 >
                   ▾

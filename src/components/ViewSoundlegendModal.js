@@ -1,4 +1,3 @@
-// src/components/ViewSoundlegendModal.js
 import React, { useState, useEffect, useCallback } from 'react';
 import ReactDOM from 'react-dom';
 import {
@@ -18,6 +17,7 @@ import './ViewSoundlegendModal.css';
 import { STATUS_OPTIONS, getOverviewStatus } from '../utils/statusConfig';
 import defaultProjectFields from '../utils/defaultProjectFields';
 import { defaultStepData } from '../utils/buildWorkflow';
+import { buildConsultationIntakeDefaults } from '../utils/consultationIntakeSchema';
 
 const generateAndDownloadVCard = ({ firstName, lastName, email, phone }) => {
   const safeFirst = firstName || 'Contact';
@@ -44,16 +44,92 @@ END:VCARD
   URL.revokeObjectURL(url);
 };
 
+const buildSoundLegendProtectedFields = () => ({
+  consultationIntake: buildConsultationIntakeDefaults(),
+
+  buildCommitment: {
+    isCommitted: false,
+    committedAt: null,
+    commitmentSource: '',
+    commitmentNote: '',
+  },
+
+  scopeVisibility: {
+    customerCanViewApprovedScope: false,
+    customerUnlockedAt: null,
+    unlockSource: '',
+  },
+
+  storyVisibility: {
+    customerCanViewStoryDetails: false,
+    storyUnlockedAt: null,
+    unlockSource: '',
+  },
+
+  adminBuildRecommendation: {
+    status: 'draft',
+    updatedAt: Timestamp.now(),
+    summary: '',
+    shellRecipe: '',
+    shellConstruction: '',
+    dimensions: '',
+    staveCount: '',
+    reinforcementRings: '',
+    primarySpecies: '',
+    secondarySpecies: '',
+    veneer: '',
+    bearingEdges: '',
+    snareBedDepth: '',
+    lugType: '',
+    hardwareFinish: '',
+    hoops: '',
+    throwOff: '',
+    snareWires: '',
+    exteriorFinish: '',
+    interiorFinish: '',
+    resinAccent: '',
+    additionalNotes: '',
+  },
+
+  approvedCustomerScope: {
+    artisanLine: 'SoundLegend',
+    lineSerial: '',
+    dimensionsLabel: '',
+    width: '',
+    shellDepth: '',
+    staveCount: '',
+    shellConstructionName: '',
+    reinforcementRings: '',
+    primarySpecies: '',
+    secondarySpecies: '',
+    veneer: '',
+    bearingEdge: '',
+    snareBedDepth: '',
+    lugType: '',
+    hardwareFinish: '',
+    hoops: '',
+    snareThrowOff: '',
+    snareWires: '',
+    exteriorFinish: '',
+    interiorFinish: '',
+    resinAccent: '',
+    additionalNotes: '',
+    lastApprovedAt: null,
+    approvedBy: '',
+  },
+});
+
 const ViewSoundlegendModal = ({
   submission,
   onClose,
   onStatusUpdate,
   onUpdateSubmission,
 }) => {
-  // ✅ derive ID safely (no early returns before hooks)
   const submissionId = submission?.id || null;
 
-  const [selectedStatus, setSelectedStatus] = useState(submission?.status || 'New');
+  const [selectedStatus, setSelectedStatus] = useState(
+    submission?.status || 'New'
+  );
   const [notes, setNotes] = useState('');
   const [history, setHistory] = useState(submission?.history || []);
   const [projectId, setProjectId] = useState(submission?.projectId || null);
@@ -61,12 +137,17 @@ const ViewSoundlegendModal = ({
     submission ? { ...submission, id: submission.id } : null
   );
 
-  const { firstName, lastName, email, phone, artistBio, inspiration, submittedAt } =
-    fullSubmission || submission || {};
+  const {
+    firstName,
+    lastName,
+    email,
+    phone,
+    artistBio,
+    inspiration,
+    submittedAt,
+  } = fullSubmission || submission || {};
 
-  // Lock body scroll + ESC to close
   useEffect(() => {
-    // If modal isn't open (no submission), don't do anything
     if (!submissionId) return;
 
     const prev = document.body.style.overflow;
@@ -83,6 +164,7 @@ const ViewSoundlegendModal = ({
 
   const copyToClipboard = useCallback((text) => {
     if (!text) return;
+
     navigator.clipboard
       .writeText(text)
       .then(() => console.log(`📋 Copied: ${text}`))
@@ -125,15 +207,16 @@ const ViewSoundlegendModal = ({
   };
 
   const handleNoteSubmit = async () => {
-    if (!submissionId) return;
-    if (!notes.trim()) return;
+    if (!submissionId || !notes.trim()) return;
 
     try {
       const submissionRef = doc(db, 'soundlegend_submissions', submissionId);
       const timestamp = new Date().toISOString();
       const noteEntry = { type: 'note', value: notes.trim(), timestamp };
 
-      await updateDoc(submissionRef, { history: arrayUnion(noteEntry) });
+      await updateDoc(submissionRef, {
+        history: arrayUnion(noteEntry),
+      });
 
       setHistory((prev) => [...prev, noteEntry]);
       setNotes('');
@@ -151,23 +234,34 @@ const ViewSoundlegendModal = ({
     if (!confirmCreation) return;
 
     try {
+      const protectedFields = buildSoundLegendProtectedFields();
+
       const projectData = {
         source: 'SoundLegend',
         submissionId,
         customerName: `${firstName || ''} ${lastName || ''}`.trim(),
+        customerEmail: email || '',
+        customerPhone: phone || '',
+        ownerEmail: email || '',
         customer: {
           name: `${firstName || ''} ${lastName || ''}`.trim(),
           email: email || '',
           phone: phone || '',
-          address: { street: '', city: '', state: '', zip: '' },
+          address: {
+            street: '',
+            city: '',
+            state: '',
+            zip: '',
+          },
         },
         artisanLine: 'SoundLegend',
-        width: '14"',
-        shellDepth: '8"',
+        width: '',
+        shellDepth: '',
         startDate: Timestamp.now(),
-        currentPhase: 'Step 1. Wood Preparation',
+        currentPhase: '1. Discovery & Design',
         ...defaultStepData,
         ...defaultProjectFields,
+        ...protectedFields,
       };
 
       const projectRef = await addDoc(collection(db, 'projects'), projectData);
@@ -202,7 +296,6 @@ const ViewSoundlegendModal = ({
     }
   };
 
-  // Fetch and validate submission + linked project
   useEffect(() => {
     if (!submissionId) return;
 
@@ -222,6 +315,7 @@ const ViewSoundlegendModal = ({
         if (validProjectId) {
           const projectRef = doc(db, 'projects', validProjectId);
           const projectSnap = await getDoc(projectRef);
+
           if (!projectSnap.exists()) {
             console.warn(`❌ Linked project not found: ${validProjectId}`);
             validProjectId = null;
@@ -241,7 +335,6 @@ const ViewSoundlegendModal = ({
     fetchAndValidateSubmission();
   }, [submissionId]);
 
-  // ✅ Now it's safe to return null (after hooks)
   if (!submissionId) return null;
 
   return ReactDOM.createPortal(
@@ -315,7 +408,12 @@ const ViewSoundlegendModal = ({
                 <button
                   className="btn btn--sm"
                   onClick={() =>
-                    generateAndDownloadVCard({ firstName, lastName, email, phone })
+                    generateAndDownloadVCard({
+                      firstName,
+                      lastName,
+                      email,
+                      phone,
+                    })
                   }
                 >
                   Download .vcf
@@ -334,7 +432,9 @@ const ViewSoundlegendModal = ({
                   </span>
                   <button
                     className="icon-btn ml-8"
-                    onClick={() => copyToClipboard(`${firstName} ${lastName}`)}
+                    onClick={() =>
+                      copyToClipboard(`${firstName || ''} ${lastName || ''}`.trim())
+                    }
                     title="Copy name"
                   >
                     📋
@@ -427,8 +527,8 @@ const ViewSoundlegendModal = ({
                       </tr>
                     </thead>
                     <tbody>
-                      {history.map((entry, i) => (
-                        <tr key={`${entry.timestamp}-${i}`}>
+                      {history.map((entry, index) => (
+                        <tr key={`${entry.timestamp}-${index}`}>
                           <td>{entry.type === 'status' ? 'Status' : entry.type}</td>
                           <td className="pre">{entry.value}</td>
                           <td>{new Date(entry.timestamp).toLocaleString()}</td>

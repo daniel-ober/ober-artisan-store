@@ -5,6 +5,10 @@ import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { db, storage } from '../firebaseConfig';
 import { useAuth } from '../context/AuthContext';
 import { PROJECT_STAGE_EDU } from '../utils/projectStageEducation';
+import {
+  STAGES,
+  STAGE_TEMPLATES,
+} from '../utils/workflowDefinitions';
 import { calculateProjectProgress } from '../utils/calculateProjectProgress';
 import './ProjectDetailPage.css';
 
@@ -19,10 +23,9 @@ function addDays(date, days) {
   d.setDate(d.getDate() + days);
   return d;
 }
-const hours = (min, max) => ({ min, max });
 
 // ---- VAULT PRIVACY FALLBACKS ----
-const LEGACY_PRIVATE_TEXT = '<p>Legacy is set to Private.</p>'; // alt: use 'Legacy Unknown.' if preferred
+const LEGACY_PRIVATE_TEXT = '<p>Legacy is set to Private.</p>';
 const LEGACY_UNKNOWN_TEXT = '<p>Legacy Unknown.</p>';
 
 const ProjectDetailPage = () => {
@@ -40,7 +43,6 @@ const ProjectDetailPage = () => {
   const [isPreviewLoaded, setIsPreviewLoaded] = useState(false);
   const [dragActive, setDragActive] = useState(false);
 
-  // NEW: Vault privacy local state
   const [publicPrefs, setPublicPrefs] = useState({
     showName: false,
     showStory: false,
@@ -48,18 +50,46 @@ const ProjectDetailPage = () => {
     storyHtml: '',
   });
 
-  // ---------- static config ----------
-  const stepWeights = {
-    woodPreparation: 0.05,
-    shellConstruction: 0.2,
-    fineTuning: 0.1,
-    shellExteriorFinish: 0.2,
-    bearingEdges: 0.1,
-    snareBedCutting: 0.1,
-    hardwareDrilling: 0.1,
-    hardwareAssembly: 0.05,
-    tuningAndDetailing: 0.05,
-    qualityCheck: 0.05,
+  // ---------- workflow-derived config ----------
+  const STEP_ORDER = useMemo(() => STAGES.map((stage) => stage.stageKey), []);
+
+  const stepWeights = useMemo(() => {
+    return STAGES.reduce((acc, stage) => {
+      acc[stage.stageKey] = Number(stage.weight || 0) / 100;
+      return acc;
+    }, {});
+  }, []);
+
+  const STEP_EDU = useMemo(
+    () => ({
+      discoveryDesign: PROJECT_STAGE_EDU.discoveryDesign,
+      commitmentPortal: PROJECT_STAGE_EDU.commitmentPortal,
+      woodVisionLockIn: PROJECT_STAGE_EDU.woodVisionLockIn,
+      rawShellCreation: PROJECT_STAGE_EDU.rawShellCreation,
+      shellTrueingTorchTune: PROJECT_STAGE_EDU.shellTrueingTorchTune,
+      exteriorArtFinish: PROJECT_STAGE_EDU.exteriorArtFinish,
+      edgesSnareBeds: PROJECT_STAGE_EDU.edgesSnareBeds,
+      hardwareAssembly: PROJECT_STAGE_EDU.hardwareAssembly,
+      legacyTuningMedia: PROJECT_STAGE_EDU.legacyTuningMedia,
+      finalQAPackagingDelivery: PROJECT_STAGE_EDU.finalQAPackagingDelivery,
+    }),
+    []
+  );
+
+  const STEP_CATEGORY_MAP = {
+    discoveryDesign: ['build_proposal', 'wood_selection'],
+    commitmentPortal: ['build_proposal'],
+    woodVisionLockIn: ['wood_selection', 'early_mockups_(pre-production)'],
+    rawShellCreation: [
+      'stave_construction_(pre-milling)',
+      'stave_construction_(post-milling)',
+    ],
+    shellTrueingTorchTune: ['stave_construction_(post-milling)'],
+    exteriorArtFinish: ['final_mockups_(mid-production)'],
+    edgesSnareBeds: ['final_mockups_(mid-production)'],
+    hardwareAssembly: ['final_mockups_(mid-production)'],
+    legacyTuningMedia: ['media_files_(audio/video)'],
+    finalQAPackagingDelivery: ['media_files_(audio/video)', 'other'],
   };
 
   const allFileSections = [
@@ -71,19 +101,6 @@ const ProjectDetailPage = () => {
     'final_mockups_(mid-production)',
     'media_files_(audio/video)',
     'other',
-  ];
-
-  const STEP_ORDER = [
-    'woodPreparation',
-    'shellConstruction',
-    'fineTuning',
-    'shellExteriorFinish',
-    'bearingEdges',
-    'snareBedCutting',
-    'hardwareDrilling',
-    'hardwareAssembly',
-    'tuningAndDetailing',
-    'qualityCheck',
   ];
 
   const TOOL_LIBRARY = {
@@ -201,43 +218,35 @@ const ProjectDetailPage = () => {
     },
   };
 
-  const STEP_EDU = {
-    woodPreparation: PROJECT_STAGE_EDU.discoveryDesign,
-    shellConstruction: PROJECT_STAGE_EDU.rawShellCreation,
-    fineTuning: PROJECT_STAGE_EDU.shellTrueingTorchTune,
-    shellExteriorFinish: PROJECT_STAGE_EDU.exteriorArtFinish,
-    bearingEdges: PROJECT_STAGE_EDU.edgesSnareBeds,
-    snareBedCutting: PROJECT_STAGE_EDU.edgesSnareBeds,
-    hardwareDrilling: PROJECT_STAGE_EDU.hardwareAssembly,
-    hardwareAssembly: PROJECT_STAGE_EDU.hardwareAssembly,
-    tuningAndDetailing: PROJECT_STAGE_EDU.legacyTuningMedia,
-    qualityCheck: PROJECT_STAGE_EDU.finalQAPackagingDelivery,
-  };
-
-  const STEP_CATEGORY_MAP = {
-    woodPreparation: ['build_proposal', 'wood_selection'],
-    shellConstruction: [
-      'stave_construction_(pre-milling)',
-      'stave_construction_(post-milling)',
-    ],
-    fineTuning: ['stave_construction_(post-milling)'],
-    shellExteriorFinish: ['final_mockups_(mid-production)'],
-    bearingEdges: ['final_mockups_(mid-production)'],
-    snareBedCutting: ['final_mockups_(mid-production)'],
-    hardwareDrilling: ['final_mockups_(mid-production)'],
-    hardwareAssembly: ['final_mockups_(mid-production)'],
-    tuningAndDetailing: ['media_files_(audio/video)'],
-    qualityCheck: ['media_files_(audio/video)'],
-  };
-
   const stepIndex = (key) => STEP_ORDER.indexOf(key);
+
+  const getReadableStageText = (stageKey) => {
+    const template = STAGE_TEMPLATES?.[stageKey];
+    return [
+      stageKey,
+      template?.portalLabel,
+      template?.adminMainTitle,
+      template?.adminLeftShort,
+      STEP_EDU?.[stageKey]?.title,
+    ]
+      .filter(Boolean)
+      .join(' ')
+      .toLowerCase();
+  };
+
   const currentIndexFromPhase = (currentPhase) => {
     if (!currentPhase) return -1;
     if (currentPhase === 'All Steps Complete') return STEP_ORDER.length;
-    const lower = String(currentPhase).toLowerCase();
-    const foundKey = STEP_ORDER.find((k) =>
-      lower.includes(STEP_EDU[k].title.toLowerCase())
+
+    const lower = String(currentPhase).toLowerCase().trim();
+
+    const direct = STEP_ORDER.find((key) => key.toLowerCase() === lower);
+    if (direct) return STEP_ORDER.indexOf(direct);
+
+    const foundKey = STEP_ORDER.find((key) =>
+      getReadableStageText(key).includes(lower) || lower.includes(key.toLowerCase())
     );
+
     return foundKey ? STEP_ORDER.indexOf(foundKey) : -1;
   };
 
@@ -259,7 +268,6 @@ const ProjectDetailPage = () => {
         if (isAdmin || data.ownerUid === user.uid) {
           setProject({ id: snap.id, ...data });
 
-          // visible attachments grouped by category
           const raw = data.attachments || {};
           const groupedVisible = {};
           Object.entries(raw).forEach(([key, files]) => {
@@ -277,10 +285,8 @@ const ProjectDetailPage = () => {
           });
           setUploadedFiles(groupedVisible);
 
-          // seed Vault prefs (supports both old + new keys)
           const p = data.publicPrefs || {};
           setPublicPrefs({
-            // Prefer admin-style keys if present, fall back to older showName/showStory
             showName: p.showName ?? p.namePublicEnabled ?? false,
             showStory: p.showStory ?? p.storyPublicEnabled ?? false,
             displayName: p.displayName || '',
@@ -298,7 +304,6 @@ const ProjectDetailPage = () => {
     fetchProject();
   }, [user, isAdmin, projectId, navigate]);
 
-  // choose default selected step (run after project loads)
   const [selectedStep, setSelectedStep] = useState(null);
   useEffect(() => {
     if (!project) return;
@@ -314,8 +319,8 @@ const ProjectDetailPage = () => {
     const idx = currentIndexFromPhase(project?.currentPhase);
     if (finished) setSelectedStep(STEP_ORDER[STEP_ORDER.length - 1]);
     else if (idx >= 0) setSelectedStep(STEP_ORDER[idx]);
-    else setSelectedStep(null);
-  }, [project]);
+    else setSelectedStep(STEP_ORDER[0] || null);
+  }, [project, STEP_ORDER]);
 
   // ---------- derive values ----------
   const currentPhase = project?.currentPhase || null;
@@ -329,13 +334,13 @@ const ProjectDetailPage = () => {
       project?.currentPhase === 'All Steps Complete' ||
       pct === 100);
 
-  const currentIdx = currentIndexFromPhase(currentPhase); // -1 if not known
+  const currentIdx = currentIndexFromPhase(currentPhase);
 
   // ---- curriculum hours ----
   const totalStepHours = useMemo(() => {
     return STEP_ORDER.reduce(
       (acc, key) => {
-        const t = STEP_EDU[key].time || { min: 0, max: 0 };
+        const t = STEP_EDU[key]?.time || { min: 0, max: 0 };
         return {
           min: acc.min + (t.min || 0),
           max: acc.max + (t.max || 0),
@@ -344,14 +349,14 @@ const ProjectDetailPage = () => {
       },
       { min: 0, max: 0, mid: 0 }
     );
-  }, []); // static
+  }, [STEP_ORDER, STEP_EDU]);
 
   const remainingStepHours = useMemo(() => {
     if (isGlobalFinished || currentIdx < 0) return { min: 0, max: 0, mid: 0 };
     return STEP_ORDER.slice(currentIdx).reduce(
       (acc, key, i) => {
-        const t = STEP_EDU[key].time || { min: 0, max: 0 };
-        const factor = i === 0 ? 0.5 : 1; // assume current step half-done
+        const t = STEP_EDU[key]?.time || { min: 0, max: 0 };
+        const factor = i === 0 ? 0.5 : 1;
         return {
           min: acc.min + (t.min || 0) * factor,
           max: acc.max + (t.max || 0) * factor,
@@ -360,7 +365,7 @@ const ProjectDetailPage = () => {
       },
       { min: 0, max: 0, mid: 0 }
     );
-  }, [currentIdx, isGlobalFinished]);
+  }, [currentIdx, isGlobalFinished, STEP_ORDER, STEP_EDU]);
 
   // ---- calendar ETA (scaled against the standard 8–10 weeks) ----
   const BASE_WEEKS = { min: 8, max: 10, mid: 9 };
@@ -391,7 +396,6 @@ const ProjectDetailPage = () => {
   const renderHourRange = (t) =>
     !t ? '—' : t.min === t.max ? `${t.min} hrs` : `${t.min}–${t.max} hrs`;
 
-  // NEW: compute public preview name & story
   const computePublicName = () => {
     if (!publicPrefs.showName) return 'Anonymous Legend';
     return (
@@ -400,6 +404,7 @@ const ProjectDetailPage = () => {
       'Anonymous Legend'
     );
   };
+
   const computePublicStoryHtml = () => {
     if (!publicPrefs.showStory) return LEGACY_PRIVATE_TEXT;
     const fromOverride = (publicPrefs.storyHtml || '').trim();
@@ -415,7 +420,6 @@ const ProjectDetailPage = () => {
     if (!project?.id) return;
     try {
       const payload = {
-        // canonical admin-style keys
         namePublicEnabled: !!publicPrefs.showName,
         storyPublicEnabled: !!publicPrefs.showStory,
         displayName: publicPrefs.displayName || '',
@@ -459,7 +463,6 @@ const ProjectDetailPage = () => {
     );
   };
 
-  // --- tiny UI bits for artist portal ---
   const Toggle = ({ checked, onChange, id, disabled }) => (
     <button
       id={id}
@@ -565,7 +568,6 @@ const ProjectDetailPage = () => {
     }
   };
 
-  // ---------- SAFE conditional UI ----------
   if (loading) return <div className="project-page">Loading...</div>;
   if (unauthorized)
     return (
@@ -576,11 +578,9 @@ const ProjectDetailPage = () => {
   if (!project) return <div className="project-page">Project not found.</div>;
 
   const customer = project.customer || {};
-  const allowedCats = (selectedStep && STEP_CATEGORY_MAP[selectedStep]) || [];
 
   return (
     <div className="project-page">
-      {/* Banner */}
       {!isAdmin && (
         <div className="soundlegend-banner">
           <p>
@@ -594,7 +594,6 @@ const ProjectDetailPage = () => {
         </div>
       )}
 
-      {/* ---------------- Project Overview ---------------- */}
       <h2>Project Overview</h2>
 
       <section className="project-section">
@@ -610,7 +609,6 @@ const ProjectDetailPage = () => {
           <strong>Current Step:</strong> {currentPhase || 'N/A'}
         </p>
 
-        {/* Progress Bar */}
         <div className="customer-progress-container">
           <div className="customer-progress-track">
             <div
@@ -624,7 +622,7 @@ const ProjectDetailPage = () => {
           </div>
 
           <div className="customer-progress-timeline">
-            {Object.entries(stepWeights).map(([key], index) => {
+            {STEP_ORDER.map((key, index) => {
               const step = project[key] || {};
               const rawList = Array.isArray(step?.checklist)
                 ? step.checklist
@@ -643,12 +641,19 @@ const ProjectDetailPage = () => {
                 className = 'in-progress';
 
               const left =
-                Object.values(stepWeights)
-                  .slice(0, index)
-                  .reduce((s, w) => s + w, 0) * 100;
-              const readable = key
-                .replace(/([A-Z])/g, ' $1')
-                .replace(/^./, (c) => c.toUpperCase());
+                STEP_ORDER.slice(0, index).reduce(
+                  (sum, stageKey) => sum + (stepWeights[stageKey] || 0),
+                  0
+                ) * 100;
+
+              const meta = STEP_EDU[key] || {};
+              const template = STAGE_TEMPLATES[key] || {};
+              const readable =
+                template.portalLabel ||
+                template.adminMainTitle ||
+                meta.title ||
+                key.replace(/([A-Z])/g, ' $1').replace(/^./, (c) => c.toUpperCase());
+
               const unlocked = index <= currentIdx || isGlobalFinished;
 
               return (
@@ -672,7 +677,6 @@ const ProjectDetailPage = () => {
           </div>
         </div>
 
-        {/* Step Details */}
         {!selectedStep ? (
           <p className="muted" style={{ marginTop: '12px' }}>
             Select a step above to see what happens there.
@@ -680,6 +684,7 @@ const ProjectDetailPage = () => {
         ) : (
           (() => {
             const meta = STEP_EDU[selectedStep];
+            const template = STAGE_TEMPLATES[selectedStep] || {};
             const i = stepIndex(selectedStep);
             const unlocked = i <= currentIdx || isGlobalFinished;
             const active = i === currentIdx && !isGlobalFinished;
@@ -705,7 +710,11 @@ const ProjectDetailPage = () => {
                   <div className="edu-header-card">
                     <div className="edu-badge">{complete ? '✓' : i + 1}</div>
                     <div className="edu-titles">
-                      <h4>{meta.title}</h4>
+                      <h4>
+                        {active
+                          ? template.portalLabel || meta?.title
+                          : template.portalLabel || meta?.title}
+                      </h4>
                       <span className="edu-state">
                         {complete
                           ? 'Completed'
@@ -732,7 +741,7 @@ const ProjectDetailPage = () => {
                           Est. Time (working hours)
                         </span>
                         <span className="metric-value">
-                          {renderHourRange(meta.time)}
+                          {renderHourRange(meta?.time)}
                         </span>
                       </div>
                     </div>
@@ -743,18 +752,18 @@ const ProjectDetailPage = () => {
                   <div className="edu-body">
                     <div className="edu-row">
                       <label>What we do</label>
-                      <p>{meta.what}</p>
+                      <p>{meta?.what}</p>
                     </div>
                     <div className="edu-row edu-why">
                       <label>Why it matters</label>
-                      <p>{meta.why}</p>
+                      <p>{meta?.why}</p>
                     </div>
 
                     <div className="edu-grid">
                       <div className="edu-col">
                         <label>Techniques used</label>
                         <div className="chips">
-                          {meta.techniques.map((t) => (
+                          {(meta?.techniques || []).map((t) => (
                             <span className="chip" key={t}>
                               {t}
                             </span>
@@ -764,37 +773,42 @@ const ProjectDetailPage = () => {
                       <div className="edu-col">
                         <label>Tools involved</label>
                         <ul className="tool-list">
-                          {meta.tools.map((t) => (
+                          {(meta?.tools || []).map((t) => (
                             <ToolItem name={t} key={t} />
                           ))}
                         </ul>
                       </div>
                     </div>
 
-                    <div className="edu-grid">
-                      <div className="edu-col">
-                        <label>QC checklist</label>
-                        <ul>
-                          {meta.qc.map((q) => (
-                            <li key={q}>{q}</li>
-                          ))}
-                        </ul>
+                    {!!meta?.qc?.length && (
+                      <div className="edu-grid">
+                        <div className="edu-col">
+                          <label>QC checklist</label>
+                          <ul>
+                            {meta.qc.map((q) => (
+                              <li key={q}>{q}</li>
+                            ))}
+                          </ul>
+                        </div>
+                        {!!meta?.risks?.length && (
+                          <div className="edu-col">
+                            <label>Risks & mitigations</label>
+                            <ul>
+                              {meta.risks.map((r) => (
+                                <li key={r}>{r}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
                       </div>
-                      <div className="edu-col">
-                        <label>Risks & mitigations</label>
-                        <ul>
-                          {meta.risks.map((r) => (
-                            <li key={r}>{r}</li>
-                          ))}
-                        </ul>
+                    )}
+
+                    {meta?.value && (
+                      <div className="edu-value">
+                        <span className="spark">★</span> {meta.value}
                       </div>
-                    </div>
+                    )}
 
-                    <div className="edu-value">
-                      <span className="spark">★</span> {meta.value}
-                    </div>
-
-                    {/* Dropzone + thumbnails */}
                     <div
                       className="mini-grid"
                       onDragOver={(e) => isAdmin && e.preventDefault()}
@@ -848,7 +862,6 @@ const ProjectDetailPage = () => {
         )}
       </section>
 
-      {/* ---------------- Customer Info ---------------- */}
       <section className="project-section">
         <h3>Customer</h3>
         <p>
@@ -888,7 +901,6 @@ const ProjectDetailPage = () => {
         )}
       </section>
 
-      {/* ---------------- Vault Privacy ---------------- */}
       <section className="project-section">
         <h3>Vault Privacy</h3>
         <p className="muted">
@@ -896,7 +908,6 @@ const ProjectDetailPage = () => {
         </p>
 
         <div className="vault-privacy-grid">
-          {/* NAME VISIBILITY */}
           <div className="vp-col">
             <div className="vp-row">
               <label className="vp-label" htmlFor="vp-toggle-name">
@@ -908,7 +919,7 @@ const ProjectDetailPage = () => {
                 onChange={(v) =>
                   setPublicPrefs({ ...publicPrefs, showName: v })
                 }
-                disabled={false} // artists can control visibility
+                disabled={false}
               />
             </div>
 
@@ -919,7 +930,7 @@ const ProjectDetailPage = () => {
                 type="text"
                 placeholder="Leave blank to use your account name"
                 value={publicPrefs.displayName}
-                disabled // artist cannot directly edit; they request a change
+                disabled
                 readOnly
               />
               <div className="vp-actions-inline">
@@ -943,7 +954,6 @@ Requested change:
             </div>
           </div>
 
-          {/* STORY VISIBILITY */}
           <div className="vp-col">
             <div className="vp-row">
               <label className="vp-label" htmlFor="vp-toggle-story">
@@ -955,7 +965,7 @@ Requested change:
                 onChange={(v) =>
                   setPublicPrefs({ ...publicPrefs, showStory: v })
                 }
-                disabled={false} // artists can control visibility
+                disabled={false}
               />
             </div>
 
@@ -965,7 +975,7 @@ Requested change:
                 className="vp-textarea"
                 placeholder="Story edits are made by our team. Use the button below to request a revision."
                 value={publicPrefs.storyHtml}
-                disabled // artist cannot directly edit; they request a change
+                disabled
                 readOnly
                 rows={6}
               />
@@ -997,7 +1007,6 @@ Requested changes (paste or describe edits here):
           </button>
         </div>
 
-        {/* Preview */}
         <div className="vp-preview">
           <div className="vp-preview-title">Public Preview</div>
           <div className="vp-preview-card">
@@ -1010,7 +1019,6 @@ Requested changes (paste or describe edits here):
         </div>
       </section>
 
-      {/* ---------------- Scope of Work ---------------- */}
       <section className="project-section">
         <h3>Scope of Work</h3>
         <p>
@@ -1087,7 +1095,6 @@ Requested changes (paste or describe edits here):
         </p>
       </section>
 
-      {/* ---------------- Public Files ---------------- */}
       {allFileSections.map((sectionKey) => {
         const files = uploadedFiles?.[sectionKey] || [];
         if (!files.length) return null;
@@ -1160,7 +1167,6 @@ Requested changes (paste or describe edits here):
         );
       })}
 
-      {/* ---------------- Modal Preview ---------------- */}
       {modalPreview && (
         <div
           className="file-preview-modal"
