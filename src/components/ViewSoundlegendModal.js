@@ -119,6 +119,34 @@ const buildSoundLegendProtectedFields = () => ({
   },
 });
 
+const formatTimestamp = (value) => {
+  if (!value) return '—';
+  try {
+    if (value?.seconds) {
+      return new Date(value.seconds * 1000).toLocaleString();
+    }
+    return new Date(value).toLocaleString();
+  } catch {
+    return '—';
+  }
+};
+
+const renderIntakeValue = (value) => {
+  if (Array.isArray(value)) {
+    return value.length ? value.join(', ') : '—';
+  }
+
+  if (typeof value === 'boolean') {
+    return value ? 'Yes' : 'No';
+  }
+
+  if (value === null || value === undefined || value === '') {
+    return '—';
+  }
+
+  return String(value);
+};
+
 const ViewSoundlegendModal = ({
   submission,
   onClose,
@@ -145,6 +173,9 @@ const ViewSoundlegendModal = ({
     artistBio,
     inspiration,
     submittedAt,
+    consultationIntake,
+    questionnaireCompleted,
+    questionnaireCompletedAt,
   } = fullSubmission || submission || {};
 
   useEffect(() => {
@@ -262,6 +293,8 @@ const ViewSoundlegendModal = ({
         ...defaultStepData,
         ...defaultProjectFields,
         ...protectedFields,
+        consultationIntake:
+          consultationIntake || buildConsultationIntakeDefaults(),
       };
 
       const projectRef = await addDoc(collection(db, 'projects'), projectData);
@@ -337,6 +370,9 @@ const ViewSoundlegendModal = ({
 
   if (!submissionId) return null;
 
+  const intakeSection =
+    consultationIntake?.soundlegendVision || buildConsultationIntakeDefaults().soundlegendVision;
+
   return ReactDOM.createPortal(
     <div
       className="slmodal__backdrop"
@@ -375,6 +411,22 @@ const ViewSoundlegendModal = ({
                   ))}
                 </select>
               </div>
+
+              <div className="row">
+                <span>Questionnaire</span>
+                <span className="text-box">
+                  {questionnaireCompleted ? 'Completed' : 'Pending'}
+                </span>
+              </div>
+
+              {questionnaireCompleted ? (
+                <div className="row">
+                  <span>Completed At</span>
+                  <span className="muted">
+                    {formatTimestamp(questionnaireCompletedAt)}
+                  </span>
+                </div>
+              ) : null}
 
               {projectId ? (
                 <div className="row">
@@ -433,7 +485,9 @@ const ViewSoundlegendModal = ({
                   <button
                     className="icon-btn ml-8"
                     onClick={() =>
-                      copyToClipboard(`${firstName || ''} ${lastName || ''}`.trim())
+                      copyToClipboard(
+                        `${firstName || ''} ${lastName || ''}`.trim()
+                      )
                     }
                     title="Copy name"
                   >
@@ -471,6 +525,54 @@ const ViewSoundlegendModal = ({
                   </span>
                 </div>
               )}
+            </div>
+
+            <div className="ea-block col-span-2">
+              <h4>Questionnaire Details</h4>
+              <div className="table-wrap">
+                <table className="ea-table">
+                  <tbody>
+                    <tr>
+                      <th>Vision clarity</th>
+                      <td>{renderIntakeValue(intakeSection.buildClarity)}</td>
+                    </tr>
+                    <tr>
+                      <th>Main goal</th>
+                      <td>{renderIntakeValue(intakeSection.primaryGoal)}</td>
+                    </tr>
+                    <tr>
+                      <th>Tonal direction</th>
+                      <td>{renderIntakeValue(intakeSection.tonalGoals)}</td>
+                    </tr>
+                    <tr>
+                      <th>Visual direction</th>
+                      <td>{renderIntakeValue(intakeSection.visualDirection)}</td>
+                    </tr>
+                    <tr>
+                      <th>Reference notes</th>
+                      <td className="pre">
+                        {renderIntakeValue(intakeSection.referenceNotes)}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>Scheduling contact method</th>
+                      <td>
+                        {renderIntakeValue(
+                          intakeSection.consultationContactMethod
+                        )}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>Scheduling availability</th>
+                      <td className="pre">
+                        {renderIntakeValue(
+                          intakeSection.consultationAvailability
+                        )}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
 
             {artistBio && (
@@ -529,7 +631,9 @@ const ViewSoundlegendModal = ({
                     <tbody>
                       {history.map((entry, index) => (
                         <tr key={`${entry.timestamp}-${index}`}>
-                          <td>{entry.type === 'status' ? 'Status' : entry.type}</td>
+                          <td>
+                            {entry.type === 'status' ? 'Status' : entry.type}
+                          </td>
                           <td className="pre">{entry.value}</td>
                           <td>{new Date(entry.timestamp).toLocaleString()}</td>
                         </tr>
