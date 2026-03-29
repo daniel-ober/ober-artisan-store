@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
   collection,
@@ -28,6 +28,25 @@ function normalizeIncomingIntake(value = {}) {
   return merged;
 }
 
+function formatTimestamp(timestamp) {
+  try {
+    if (!timestamp) return '';
+    const date =
+      typeof timestamp?.toDate === 'function'
+        ? timestamp.toDate()
+        : timestamp?.seconds
+          ? new Date(timestamp.seconds * 1000)
+          : timestamp instanceof Date
+            ? timestamp
+            : null;
+
+    if (!date) return '';
+    return date.toLocaleString();
+  } catch {
+    return '';
+  }
+}
+
 const pageShellStyle = {
   minHeight: '100vh',
   padding: '120px 24px 60px',
@@ -42,13 +61,12 @@ const pageInnerStyle = {
 };
 
 const heroCardStyle = {
-  borderRadius: '24px',
-  padding: '30px',
+  borderRadius: '22px',
+  padding: '28px',
   marginBottom: '18px',
-  background:
-    'radial-gradient(circle at top left, rgba(255, 204, 0, 0.08), transparent 28%), linear-gradient(180deg, rgba(19,22,34,0.96), rgba(10,12,20,0.98))',
+  background: 'rgba(255,255,255,0.04)',
   border: '1px solid rgba(255,255,255,0.08)',
-  boxShadow: '0 24px 60px rgba(0,0,0,0.35)',
+  boxShadow: '0 20px 60px rgba(0,0,0,0.35)',
 };
 
 const statusCardStyle = {
@@ -60,15 +78,18 @@ const statusCardStyle = {
   boxShadow: '0 20px 60px rgba(0,0,0,0.28)',
 };
 
-const mutedStyle = {
-  color: 'rgba(226, 232, 245, 0.76)',
+const completedCardStyle = {
+  borderRadius: '22px',
+  padding: '28px',
+  marginBottom: '18px',
+  background:
+    'radial-gradient(circle at top left, rgba(255, 204, 0, 0.08), transparent 30%), linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03))',
+  border: '1px solid rgba(255, 204, 0, 0.18)',
+  boxShadow: '0 20px 60px rgba(0,0,0,0.35)',
 };
 
-const actionRowStyle = {
-  display: 'flex',
-  flexWrap: 'wrap',
-  gap: '12px',
-  marginTop: '18px',
+const mutedStyle = {
+  color: 'rgba(226, 232, 245, 0.76)',
 };
 
 const ghostButtonStyle = {
@@ -88,29 +109,11 @@ const primaryButtonStyle = {
     'linear-gradient(135deg, rgba(244, 200, 66, 0.96), rgba(220, 174, 45, 0.92))',
   color: '#111',
   borderRadius: '999px',
-  padding: '11px 18px',
+  padding: '12px 18px',
   fontSize: '13px',
   fontWeight: 800,
   cursor: 'pointer',
 };
-
-function formatTimestamp(value) {
-  if (!value) return '';
-
-  try {
-    if (value?.seconds) {
-      return new Date(value.seconds * 1000).toLocaleString();
-    }
-
-    if (value instanceof Date) {
-      return value.toLocaleString();
-    }
-
-    return new Date(value).toLocaleString();
-  } catch {
-    return '';
-  }
-}
 
 function SoundlegendQuestionnaire() {
   const { token } = useParams();
@@ -120,7 +123,6 @@ function SoundlegendQuestionnaire() {
   const [linkedUserId, setLinkedUserId] = useState('');
   const [customerName, setCustomerName] = useState('');
   const [customerEmail, setCustomerEmail] = useState('');
-  const [submittedCompletedAt, setSubmittedCompletedAt] = useState(null);
   const [intakeValue, setIntakeValue] = useState(() =>
     normalizeIncomingIntake({})
   );
@@ -128,10 +130,12 @@ function SoundlegendQuestionnaire() {
   const [isLoading, setIsLoading] = useState(true);
   const [isInvalidToken, setIsInvalidToken] = useState(false);
   const [isAlreadyComplete, setIsAlreadyComplete] = useState(false);
+  const [completedAt, setCompletedAt] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [pageMessage, setPageMessage] = useState('');
+  const [isAutoSaving, setIsAutoSaving] = useState(false);
   const [pageError, setPageError] = useState('');
-  const [showSubmittedView, setShowSubmittedView] = useState(false);
+  const autosaveTimeoutRef = useRef(null);
+  const hasLoadedRef = useRef(false);
 
   const pageTitle = useMemo(() => {
     if (customerName?.trim()) {
@@ -154,7 +158,6 @@ function SoundlegendQuestionnaire() {
       try {
         setIsLoading(true);
         setPageError('');
-        setPageMessage('');
 
         const submissionsRef = collection(db, 'soundlegend_submissions');
         const submissionQuery = query(
@@ -178,7 +181,6 @@ function SoundlegendQuestionnaire() {
         const normalizedIntake = normalizeIncomingIntake(
           data.consultationIntake || {}
         );
-        const alreadyCompleted = !!data.questionnaireCompleted;
 
         setSubmissionDocId(foundDoc.id);
         setLinkedUserId(data.linkedUserId || '');
@@ -189,12 +191,9 @@ function SoundlegendQuestionnaire() {
         );
         setCustomerEmail(data.email || '');
         setIntakeValue(normalizedIntake);
-        setIsAlreadyComplete(alreadyCompleted);
-        setSubmittedCompletedAt(data.questionnaireCompletedAt || null);
-
-        if (alreadyCompleted) {
-          setShowSubmittedView(true);
-        }
+        setIsAlreadyComplete(!!data.questionnaireCompleted);
+        setCompletedAt(data.questionnaireCompletedAt || null);
+        hasLoadedRef.current = true;
       } catch (err) {
         console.error('Failed to load SoundLegend questionnaire:', err);
         if (!isMounted) return;
@@ -210,30 +209,57 @@ function SoundlegendQuestionnaire() {
 
     return () => {
       isMounted = false;
+      if (autosaveTimeoutRef.current) {
+        clearTimeout(autosaveTimeoutRef.current);
+      }
     };
   }, [token]);
 
-  const handleSaveOnly = async (nextValue) => {
-    if (!submissionDocId || isAlreadyComplete) return;
+  useEffect(() => {
+    if (!hasLoadedRef.current) return;
+    if (!submissionDocId) return;
+    if (isAlreadyComplete) return;
 
-    try {
-      setPageError('');
-      setPageMessage('');
-
-      const normalized = normalizeIncomingIntake(nextValue || intakeValue);
-
-      await updateDoc(doc(db, 'soundlegend_submissions', submissionDocId), {
-        consultationIntake: normalized,
-        consultationIntakeUpdatedAt: serverTimestamp(),
-      });
-
-      setIntakeValue(normalized);
-      setPageMessage('Progress saved.');
-    } catch (err) {
-      console.error('Failed to save questionnaire progress:', err);
-      setPageError('Failed to save progress.');
+    if (autosaveTimeoutRef.current) {
+      clearTimeout(autosaveTimeoutRef.current);
     }
-  };
+
+    autosaveTimeoutRef.current = setTimeout(async () => {
+      try {
+        setIsAutoSaving(true);
+        setPageError('');
+
+        const normalized = normalizeIncomingIntake(intakeValue);
+
+        await updateDoc(doc(db, 'soundlegend_submissions', submissionDocId), {
+          consultationIntake: normalized,
+          consultationIntakeUpdatedAt: serverTimestamp(),
+        });
+
+        if (linkedUserId) {
+          try {
+            await updateDoc(doc(db, 'users', linkedUserId), {
+              consultationIntake: normalized,
+              consultationIntakeUpdatedAt: serverTimestamp(),
+            });
+          } catch (userErr) {
+            console.error('Failed auto-saving linked user intake:', userErr);
+          }
+        }
+      } catch (err) {
+        console.error('Failed auto-saving questionnaire progress:', err);
+        setPageError('Unable to save questionnaire changes right now.');
+      } finally {
+        setIsAutoSaving(false);
+      }
+    }, 700);
+
+    return () => {
+      if (autosaveTimeoutRef.current) {
+        clearTimeout(autosaveTimeoutRef.current);
+      }
+    };
+  }, [intakeValue, submissionDocId, linkedUserId, isAlreadyComplete]);
 
   const handleFinalSubmit = async () => {
     if (!submissionDocId || isAlreadyComplete) return;
@@ -241,10 +267,13 @@ function SoundlegendQuestionnaire() {
     try {
       setIsSubmitting(true);
       setPageError('');
-      setPageMessage('');
+
+      if (autosaveTimeoutRef.current) {
+        clearTimeout(autosaveTimeoutRef.current);
+      }
 
       const normalized = normalizeIncomingIntake(intakeValue);
-
+      const nowFormattedFallback = new Date();
       const submissionRef = doc(db, 'soundlegend_submissions', submissionDocId);
 
       await updateDoc(submissionRef, {
@@ -272,9 +301,7 @@ function SoundlegendQuestionnaire() {
       }
 
       setIsAlreadyComplete(true);
-      setShowSubmittedView(true);
-      setPageMessage('');
-      setSubmittedCompletedAt(new Date());
+      setCompletedAt(nowFormattedFallback);
     } catch (err) {
       console.error('Failed to submit questionnaire:', err);
       setPageError('Failed to submit questionnaire.');
@@ -323,7 +350,14 @@ function SoundlegendQuestionnaire() {
               an active SoundLegend submission.
             </p>
 
-            <div style={actionRowStyle}>
+            <div
+              style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: '12px',
+                marginTop: '18px',
+              }}
+            >
               <button
                 type="button"
                 style={ghostButtonStyle}
@@ -338,48 +372,58 @@ function SoundlegendQuestionnaire() {
     );
   }
 
-  if (showSubmittedView && isAlreadyComplete) {
+  if (isAlreadyComplete) {
     return (
       <div style={pageShellStyle}>
         <div style={pageInnerStyle}>
-          <div style={heroCardStyle}>
+          <div style={completedCardStyle}>
             <p
               style={{
                 margin: '0 0 10px',
                 fontSize: '12px',
                 letterSpacing: '0.18em',
                 textTransform: 'uppercase',
-                opacity: 0.7,
+                color: 'rgba(255, 215, 105, 0.88)',
               }}
             >
-              Questionnaire Received
+              Questionnaire Complete
             </p>
 
             <h1
               style={{ margin: '0 0 14px', fontSize: '40px', lineHeight: 1.08 }}
             >
-              Thank you for taking the time
+              Thank you for your time
             </h1>
 
             <p style={{ margin: '0 0 12px', fontSize: '17px', ...mutedStyle }}>
-              Your SoundLegend questionnaire has been submitted successfully.
-              This does not lock anything in stone. It simply gives Dan a better
-              sense of where you are in your drum journey, what you are drawn
-              to, and how to make your consultation more meaningful.
+              Your SoundLegend questionnaire has already been submitted.
             </p>
+
+            {completedAt ? (
+              <p style={{ margin: '0 0 12px', fontSize: '14px', ...mutedStyle }}>
+                Submitted on: {formatTimestamp(completedAt)}
+              </p>
+            ) : null}
 
             <p style={{ margin: '0 0 12px', fontSize: '15px', ...mutedStyle }}>
               Dan will review your answers and typically reach out within 2
               business days to coordinate your free consultation.
             </p>
 
-            {submittedCompletedAt ? (
-              <p style={{ margin: 0, fontSize: '14px', ...mutedStyle }}>
-                Submitted on: {formatTimestamp(submittedCompletedAt)}
-              </p>
-            ) : null}
+            <p style={{ margin: 0, fontSize: '15px', ...mutedStyle }}>
+              Nothing in this form set anything in stone. It simply helped
+              capture where you are in your shopping journey and creative
+              direction before the conversation.
+            </p>
 
-            <div style={actionRowStyle}>
+            <div
+              style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: '12px',
+                marginTop: '22px',
+              }}
+            >
               <button
                 type="button"
                 style={ghostButtonStyle}
@@ -398,16 +442,12 @@ function SoundlegendQuestionnaire() {
             </div>
           </div>
 
-          <div style={statusCardStyle}>
-            <div style={{ fontWeight: 700, marginBottom: 8 }}>
-              Already filled this out?
-            </div>
-            <div style={mutedStyle}>
-              If you opened this link again later, no worries. Your questionnaire
-              is already on file. The next step is simply waiting for our
-              craftsman to coordinate your consultation.
-            </div>
-          </div>
+          <ConsultationIntakePanel
+            value={intakeValue}
+            readOnly
+            title="Submitted Questionnaire"
+            subtitle="This questionnaire has been completed and is now read-only."
+          />
         </div>
       </div>
     );
@@ -429,15 +469,17 @@ function SoundlegendQuestionnaire() {
             Private SoundLegend Intake
           </p>
 
-          <h1 style={{ margin: '0 0 14px', fontSize: '38px', lineHeight: 1.08 }}>
+          <h1
+            style={{ margin: '0 0 14px', fontSize: '38px', lineHeight: 1.08 }}
+          >
             {pageTitle}
           </h1>
 
           <p style={{ margin: '0 0 10px', fontSize: '17px', ...mutedStyle }}>
-            This short intake is here to help Dan understand what you are drawn
-            to before your consultation. Nothing in this form sets your build in
-            stone. It simply gives us a clearer starting point for the
-            conversation.
+            This short intake is here to give Dan a general feel for where you
+            are in your drum journey, what you are drawn to, and how to make
+            your consultation more meaningful. Nothing here locks you into final
+            specs.
           </p>
 
           {customerEmail ? (
@@ -447,37 +489,25 @@ function SoundlegendQuestionnaire() {
           ) : null}
         </div>
 
-        {(pageMessage || pageError) && (
+        {pageError ? (
           <div style={statusCardStyle}>
-            {pageError ? (
-              <div
-                style={{ color: 'rgba(255, 130, 130, 0.96)', fontWeight: 700 }}
-              >
-                {pageError}
-              </div>
-            ) : null}
-
-            {pageMessage ? (
-              <div
-                style={{
-                  color: 'rgba(145, 216, 168, 0.96)',
-                  fontWeight: 700,
-                  marginTop: pageError ? 8 : 0,
-                }}
-              >
-                {pageMessage}
-              </div>
-            ) : null}
+            <div
+              style={{
+                color: 'rgba(255, 130, 130, 0.96)',
+                fontWeight: 700,
+              }}
+            >
+              {pageError}
+            </div>
           </div>
-        )}
+        ) : null}
 
         <ConsultationIntakePanel
           value={intakeValue}
           onChange={setIntakeValue}
-          onSave={handleSaveOnly}
-          isSaving={isSubmitting}
+          isSaving={isAutoSaving}
           title="SoundLegend Questionnaire"
-          subtitle="A few quick questions to help shape your consultation."
+          subtitle="Answer these a few quick questions, then submit when ready."
         />
 
         <div
@@ -485,13 +515,16 @@ function SoundlegendQuestionnaire() {
             display: 'flex',
             flexWrap: 'wrap',
             justifyContent: 'space-between',
+            alignItems: 'center',
             gap: '14px',
             marginTop: '18px',
             padding: '4px',
           }}
         >
           <div style={{ fontSize: '13px', ...mutedStyle }}>
-            Token verified
+            {isAutoSaving
+              ? 'Saving automatically…'
+              : 'Your answers save automatically as you go.'}
           </div>
 
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>

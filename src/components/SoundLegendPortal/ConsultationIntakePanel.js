@@ -28,10 +28,10 @@ function ensureArray(value) {
 function ConsultationIntakePanel({
   value,
   onChange,
-  onSave,
   isSaving = false,
-  title = 'Your SoundLegend Questionnaire',
-  subtitle = 'A few quick questions to help shape your consultation.',
+  readOnly = false,
+  title = 'SoundLegend Questionnaire',
+  subtitle = 'This does not lock anything in. It simply gives Dan a clearer starting point before your consultation.',
 }) {
   const [formState, setFormState] = useState(() =>
     normalizeIncomingIntake(value)
@@ -63,6 +63,8 @@ function ConsultationIntakePanel({
   }, [formState]);
 
   const updateField = (sectionId, fieldId, nextValue) => {
+    if (readOnly) return;
+
     setFormState((prev) => {
       const next = {
         ...prev,
@@ -80,12 +82,6 @@ function ConsultationIntakePanel({
     });
   };
 
-  const handleSave = () => {
-    if (typeof onSave === 'function') {
-      onSave(formState);
-    }
-  };
-
   const renderTextLikeField = (section, field, isTextArea = false) => {
     const fieldValue = formState?.[section.id]?.[field.id] ?? '';
 
@@ -97,6 +93,7 @@ function ConsultationIntakePanel({
           value={fieldValue}
           placeholder={field.placeholder || ''}
           onChange={(e) => updateField(section.id, field.id, e.target.value)}
+          readOnly={readOnly}
         />
       );
     }
@@ -111,6 +108,7 @@ function ConsultationIntakePanel({
         step={field.step}
         placeholder={field.placeholder || ''}
         onChange={(e) => updateField(section.id, field.id, e.target.value)}
+        readOnly={readOnly}
       />
     );
   };
@@ -123,6 +121,7 @@ function ConsultationIntakePanel({
         className="cip-field-select"
         value={fieldValue}
         onChange={(e) => updateField(section.id, field.id, e.target.value)}
+        disabled={readOnly}
       >
         <option value="">Select…</option>
         {(field.options || []).map((option) => {
@@ -147,6 +146,8 @@ function ConsultationIntakePanel({
     const selected = ensureArray(formState?.[section.id]?.[field.id]);
 
     const toggleValue = (optionValue) => {
+      if (readOnly) return;
+
       const alreadySelected = selected.includes(optionValue);
       const next = alreadySelected
         ? selected.filter((item) => item !== optionValue)
@@ -170,8 +171,11 @@ function ConsultationIntakePanel({
             <button
               key={`${field.id}-${optionValue}`}
               type="button"
-              className={`cip-chip ${isActive ? 'is-active' : ''}`}
+              className={`cip-chip ${isActive ? 'is-active' : ''} ${
+                readOnly ? 'is-readonly' : ''
+              }`}
               onClick={() => toggleValue(optionValue)}
+              disabled={readOnly}
             >
               {optionLabel}
             </button>
@@ -211,7 +215,9 @@ function ConsultationIntakePanel({
     <div className="cip-shell">
       <div className="cip-header">
         <div className="cip-header-copy">
-          <div className="cip-kicker">Private Questionnaire</div>
+          <div className="cip-kicker">
+            {readOnly ? 'Questionnaire Submitted' : 'Private Questionnaire'}
+          </div>
           <h3 className="cip-title">{title}</h3>
           <p className="cip-subtitle">{subtitle}</p>
         </div>
@@ -231,7 +237,9 @@ function ConsultationIntakePanel({
               return (
                 <div
                   key={field.id}
-                  className={`cip-field-card ${isWide ? 'cip-field-card--wide' : ''}`}
+                  className={`cip-field-card ${
+                    isWide ? 'cip-field-card--wide' : ''
+                  }`}
                 >
                   <label className="cip-field-label">{field.label}</label>
                   {renderField(section, field)}
@@ -242,16 +250,15 @@ function ConsultationIntakePanel({
         </div>
       </div>
 
-      <div className="cip-footer">
-        <button
-          type="button"
-          className="cip-btn cip-btn--ghost"
-          onClick={handleSave}
-          disabled={isSaving}
-        >
-          {isSaving ? 'Saving…' : 'Save Progress'}
-        </button>
-      </div>
+      {!readOnly && (
+        <div className="cip-footer">
+          <div className="cip-autosave-note">
+            {isSaving
+              ? 'Saving your answers…'
+              : 'Your answers save automatically as you go.'}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

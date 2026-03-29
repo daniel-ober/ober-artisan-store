@@ -38,18 +38,12 @@ export const VISUAL_DIRECTION_OPTIONS = [
   'Not sure — guide me',
 ];
 
-export const CONTACT_METHOD_OPTIONS = [
-  'Email',
-  'Text message',
-  'Either is fine',
-];
-
 export const CONSULTATION_INTAKE_SECTIONS = [
   {
     id: 'soundlegendVision',
     title: 'Your SoundLegend Vision',
     description:
-      'A short pre-consultation intake to help Dan understand what you are looking for before your one-on-one call.',
+      'A few quick questions to help Dan understand your direction before your consultation.',
     fields: [
       {
         id: 'buildClarity',
@@ -81,27 +75,11 @@ export const CONSULTATION_INTAKE_SECTIONS = [
       },
       {
         id: 'referenceNotes',
-        label: 'Any drummer, record, current snare, or general vibe this should lean toward?',
+        label: 'Anything helpful Dan should know before the consultation?',
         type: 'textarea',
-        rows: 4,
+        rows: 5,
         placeholder:
-          'Examples: a drummer, album, song, current snare, or just a vibe you love.',
-        defaultValue: '',
-      },
-      {
-        id: 'consultationContactMethod',
-        label: 'Best way to contact you to schedule your consultation',
-        type: 'select',
-        options: CONTACT_METHOD_OPTIONS,
-        defaultValue: '',
-      },
-      {
-        id: 'consultationAvailability',
-        label: 'Best day(s) / time(s) for a consultation',
-        type: 'textarea',
-        rows: 3,
-        placeholder:
-          'Examples: weekday evenings after 6pm, Tuesdays or Thursdays, weekends are best, etc.',
+          'You can include a drummer, record, current snare, general vibe, where you are in your buying journey, and your best days / times for a consultation.',
         defaultValue: '',
       },
     ],
