@@ -4,6 +4,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { doc, updateDoc } from 'firebase/firestore';
 import { storage, db } from '../firebaseConfig';
 import { calculateProjectProgress } from '../utils/calculateProjectProgress';
+import { STAGES } from '../utils/workflowDefinitions';
 
 /* ---------- tiny helpers ---------- */
 const val = (...c) =>
@@ -30,6 +31,11 @@ const getIdentifier = (p = {}) => {
   return size ? size.slice(3) : '—';
 };
 
+const isSoundLegendProject = (p = {}) =>
+  String(val(p.artisanLine, p.series, p.line) || '')
+    .trim()
+    .toLowerCase() === 'soundlegend';
+
 const DEFAULT_BUCKET = 'other';
 const DEFAULT_DISPLAY_CATEGORY = 'Other / Uncategorized';
 
@@ -40,6 +46,63 @@ const safeText = (value, fallback = 'N/A') => {
   if (value === null || value === undefined) return fallback;
   if (typeof value === 'object') return fallback;
   return String(value);
+};
+
+const buildApprovedCustomerScopeFromProject = (p = {}) => {
+  const width = safeText(p.width ?? p.diameter, '');
+  const shellDepth = safeText(p.shellDepth ?? p.depth, '');
+
+  return {
+    artisanLine: safeText(p.artisanLine, 'SoundLegend'),
+    lineSerial: safeText(
+      p.lineSerial ||
+        p.serial ||
+        p.serialNumber ||
+        p.projectSerial ||
+        p.snareSerial,
+      ''
+    ),
+    dimensionsLabel: width && shellDepth ? `${width} × ${shellDepth}"` : '',
+    width,
+    shellDepth,
+    staveCount: safeText(p.staveCount, ''),
+    shellConstructionName: safeText(
+      p.shellConstructionName || p.shellConstruction,
+      ''
+    ),
+    reinforcementRings: safeText(p.reinforcementRings, ''),
+    primarySpecies: safeText(
+      p.primarySpecies || p.primaryWoodSpecies || p.woodPrimary || p.woodSpecies,
+      ''
+    ),
+    secondarySpecies: safeText(
+      p.secondarySpecies || p.secondaryWoodSpecies || p.woodSecondary,
+      ''
+    ),
+    veneer: safeText(
+      p.veneer || p.veneerTopSheet || p.veneerSpecies || p.finishDetails,
+      ''
+    ),
+    bearingEdge: safeText(
+      p.bearingEdge || p.bearingEdgeSpec || p.bearingEdges,
+      ''
+    ),
+    snareBedDepth: safeText(p.snareBedDepth, ''),
+    lugType: safeText(p.lugType, ''),
+    hardwareFinish: safeText(p.hardwareFinish || p.hardwareColor, ''),
+    hoops: safeText(p.hoops || p.hoopType, ''),
+    snareThrowOff: safeText(p.snareThrowOff || p.throwOff || p.throw, ''),
+    snareWires: safeText(p.snareWires, ''),
+    exteriorFinish: safeText(
+      p.exteriorFinish || p.finishDetails || p.finish,
+      ''
+    ),
+    interiorFinish: safeText(p.interiorFinish, ''),
+    resinAccent: safeText(p.resinAccent, ''),
+    additionalNotes: safeText(p.additionalNotes || p.notes, ''),
+    lastApprovedAt: new Date().toISOString(),
+    approvedBy: 'admin',
+  };
 };
 
 /** AfterShip universal tracking link */
@@ -70,26 +133,15 @@ const Toggle = ({ checked, onChange, disabled, id }) => (
   </button>
 );
 
-/* ---------- Build phases (for progress breakdown + attachment categories) ---------- */
-const buildPhases = [
-  { key: 'discoveryDesign', label: '1. Discovery & Design' },
-  { key: 'commitmentPortal', label: '2. Commitment & Portal Setup' },
-  { key: 'woodVisionLockIn', label: '3. Wood & Vision Lock-In' },
-  { key: 'rawShellCreation', label: '4. Raw Shell Creation' },
-  { key: 'shellTrueingTorchTune', label: '5. Shell Trueing & Torch Tune' },
-  { key: 'exteriorArtFinish', label: '6. Exterior Art & Finish' },
-  { key: 'edgesSnareBeds', label: '7. Edges & Snare Beds' },
-  { key: 'hardwareAssembly', label: '8. Hardware & Assembly' },
-  { key: 'legacyTuningMedia', label: '9. Legacy Tuning & Media' },
-  {
-    key: 'finalQAPackagingDelivery',
-    label: '10. Final QA, Packaging & Delivery',
-  },
-];
+/* ---------- Build phases (derived from workflowDefinitions) ---------- */
+const buildPhases = STAGES.map((stage) => ({
+  key: stage.stageKey,
+  label: stage.adminMainTitle,
+}));
 
 /**
  * Patch the data before sending to calculateProjectProgress.
- * Same alias map as ManageProjectModal.
+ * Same alias map as ManageProjectModal / ProjectProgress.
  */
 const getWeightedProgressPct = (data) => {
   if (!data) return 0;
@@ -128,7 +180,6 @@ const normalizeAttachments = (attachments) => {
       const url = f?.url || f?.downloadURL || f?.path || '';
       const existingCat = f?.category;
 
-      // If old data used "other" as the category label, fix it.
       const fixedCategory = !existingCat
         ? DEFAULT_DISPLAY_CATEGORY
         : existingCat === DEFAULT_BUCKET
@@ -138,9 +189,9 @@ const normalizeAttachments = (attachments) => {
       return {
         ...f,
         url,
-        bucket: f?.bucket || sectionKey, // bucket key
-        category: fixedCategory, // display label
-        hidden: typeof f?.hidden === 'boolean' ? f.hidden : true, // default hidden
+        bucket: f?.bucket || sectionKey,
+        category: fixedCategory,
+        hidden: typeof f?.hidden === 'boolean' ? f.hidden : true,
       };
     });
   });
@@ -167,10 +218,56 @@ const ProjectOverview = ({
     normalizeAttachments(editableData?.attachments)
   );
 
-  // keep attachments in sync if I switch projects
   useEffect(() => {
     setUploadedFiles(normalizeAttachments(editableData?.attachments));
   }, [editableData?.attachments]);
+
+  const [soundLegendControls, setSoundLegendControls] = useState({
+    buildCommitment: {
+      isCommitted: false,
+      committedAt: null,
+      commitmentSource: '',
+      commitmentNote: '',
+    },
+    scopeVisibility: {
+      customerCanViewApprovedScope: false,
+      customerUnlockedAt: null,
+      unlockSource: '',
+    },
+    storyVisibility: {
+      customerCanViewStoryDetails: false,
+      storyUnlockedAt: null,
+      unlockSource: '',
+    },
+    approvedCustomerScope: null,
+  });
+
+  useEffect(() => {
+    setSoundLegendControls({
+      buildCommitment: {
+        isCommitted: !!editableData?.buildCommitment?.isCommitted,
+        committedAt: editableData?.buildCommitment?.committedAt || null,
+        commitmentSource:
+          editableData?.buildCommitment?.commitmentSource || '',
+        commitmentNote: editableData?.buildCommitment?.commitmentNote || '',
+      },
+      scopeVisibility: {
+        customerCanViewApprovedScope:
+          !!editableData?.scopeVisibility?.customerCanViewApprovedScope,
+        customerUnlockedAt:
+          editableData?.scopeVisibility?.customerUnlockedAt || null,
+        unlockSource: editableData?.scopeVisibility?.unlockSource || '',
+      },
+      storyVisibility: {
+        customerCanViewStoryDetails:
+          !!editableData?.storyVisibility?.customerCanViewStoryDetails,
+        storyUnlockedAt:
+          editableData?.storyVisibility?.storyUnlockedAt || null,
+        unlockSource: editableData?.storyVisibility?.unlockSource || '',
+      },
+      approvedCustomerScope: editableData?.approvedCustomerScope || null,
+    });
+  }, [editableData]);
 
   /* ---- collapsible sections: all collapsed by default; max one open ---- */
   const [openSections, setOpenSections] = useState({
@@ -184,7 +281,6 @@ const ProjectOverview = ({
     setOpenSections((prev) => {
       const isCurrentlyOpen = !!prev[key];
 
-      // base: everything closed
       const base = {
         scope: false,
         openCheckpoints: false,
@@ -192,10 +288,7 @@ const ProjectOverview = ({
         vault: false,
       };
 
-      // if clicking an open section -> close all
       if (isCurrentlyOpen) return base;
-
-      // otherwise open just this one
       return { ...base, [key]: true };
     });
   };
@@ -253,7 +346,6 @@ const ProjectOverview = ({
     'Wood hoops',
   ];
 
-  // Attachment categories aligned to 10 steps (+ uncategorized)
   const fileCategories = [
     '1. Discovery & Design',
     '2. Commitment & Portal Setup',
@@ -314,7 +406,6 @@ const ProjectOverview = ({
   }, [editableData]);
 
   /* ---------- uploads (used by Attachments) ---------- */
-  // Normalize attachments: keep original buckets, just ensure each is an array
   const normalizeAttachmentsByBucket = (allFiles) => {
     const normalized = {};
 
@@ -324,7 +415,6 @@ const ProjectOverview = ({
       if (Array.isArray(fileArray)) {
         arr = fileArray;
       } else if (fileArray && typeof fileArray === 'object') {
-        // Could be {0: file, 1: file} or a single file object
         const values = Object.values(fileArray);
         if (
           values.length &&
@@ -350,14 +440,12 @@ const ProjectOverview = ({
 
     if (!window.confirm('Delete this file?')) return;
 
-    // Normalize to an array so we can safely splice
     const currentArr = Array.isArray(bucket)
       ? [...bucket]
       : Object.values(bucket || {});
 
     if (!currentArr[index]) return;
 
-    // Remove the selected file (even if it has no .url)
     currentArr.splice(index, 1);
 
     const updatedAll = {
@@ -407,8 +495,8 @@ const ProjectOverview = ({
             const url = await getDownloadURL(uploadTask.snapshot.ref);
             const newFile = {
               url,
-              bucket: safeCategory, // bucket key used for storage + attachments map
-              category: DEFAULT_DISPLAY_CATEGORY, // human label shown in UI dropdown
+              bucket: safeCategory,
+              category: DEFAULT_DISPLAY_CATEGORY,
               hidden: true,
             };
 
@@ -456,6 +544,100 @@ const ProjectOverview = ({
     }
   };
 
+  const saveSoundLegendControls = async (nextControls) => {
+    if (!editableData?.id) return;
+
+    try {
+      await updateDoc(doc(db, 'projects', editableData.id), {
+        buildCommitment: nextControls.buildCommitment,
+        scopeVisibility: nextControls.scopeVisibility,
+        storyVisibility: nextControls.storyVisibility,
+      });
+
+      setSoundLegendControls((prev) => ({
+        ...prev,
+        ...nextControls,
+      }));
+    } catch (err) {
+      console.error('❌ Failed to save SoundLegend controls:', err);
+      alert('Failed to save SoundLegend controls.');
+    }
+  };
+
+  const handleCommitmentToggle = async (nextValue) => {
+    const nextControls = {
+      ...soundLegendControls,
+      buildCommitment: {
+        ...soundLegendControls.buildCommitment,
+        isCommitted: nextValue,
+        committedAt: nextValue ? new Date().toISOString() : null,
+        commitmentSource: nextValue ? 'admin-project-overview' : '',
+      },
+    };
+
+    await saveSoundLegendControls(nextControls);
+  };
+
+  const handleScopeUnlockToggle = async (nextValue) => {
+    const nextControls = {
+      ...soundLegendControls,
+      scopeVisibility: {
+        ...soundLegendControls.scopeVisibility,
+        customerCanViewApprovedScope: nextValue,
+        customerUnlockedAt: nextValue ? new Date().toISOString() : null,
+        unlockSource: nextValue ? 'admin-project-overview' : '',
+      },
+    };
+
+    await saveSoundLegendControls(nextControls);
+  };
+
+  const handleStoryUnlockToggle = async (nextValue) => {
+    const nextControls = {
+      ...soundLegendControls,
+      storyVisibility: {
+        ...soundLegendControls.storyVisibility,
+        customerCanViewStoryDetails: nextValue,
+        storyUnlockedAt: nextValue ? new Date().toISOString() : null,
+        unlockSource: nextValue ? 'admin-project-overview' : '',
+      },
+    };
+
+    await saveSoundLegendControls(nextControls);
+  };
+
+  const handleApproveCurrentScope = async () => {
+    if (!editableData?.id) return;
+
+    const approvedScope = buildApprovedCustomerScopeFromProject(editableData);
+
+    try {
+      await updateDoc(doc(db, 'projects', editableData.id), {
+        approvedCustomerScope: approvedScope,
+        scopeVisibility: {
+          customerCanViewApprovedScope: true,
+          customerUnlockedAt: new Date().toISOString(),
+          unlockSource: 'admin-project-overview',
+        },
+      });
+
+      setSoundLegendControls((prev) => ({
+        ...prev,
+        approvedCustomerScope: approvedScope,
+        scopeVisibility: {
+          customerCanViewApprovedScope: true,
+          customerUnlockedAt: approvedScope.lastApprovedAt,
+          unlockSource: 'admin-project-overview',
+        },
+      }));
+
+      alert('Approved customer scope saved and unlocked.');
+    } catch (err) {
+      console.error('❌ Failed to approve customer scope:', err);
+      alert('Failed to approve customer scope.');
+    }
+  };
+
   /* ---------- derived preview ---------- */
   const previewName = publicPrefs.namePublicEnabled
     ? safeText(
@@ -478,7 +660,6 @@ const ProjectOverview = ({
   const progressMeta = useMemo(() => {
     const data = editableData || {};
 
-    // Tasks (raw checklist progress)
     let completedTasks = 0;
     let totalTasks = 0;
 
@@ -492,10 +673,8 @@ const ProjectOverview = ({
       ? Math.round((completedTasks / totalTasks) * 100)
       : 0;
 
-    // Weighted progress we use everywhere
     const weightedPct = getWeightedProgressPct(data);
 
-    // Current phase label
     let currentPhaseLabel = 'All Steps Complete';
     for (const phase of buildPhases) {
       const cl = data[phase.key]?.checklist;
@@ -525,7 +704,7 @@ const ProjectOverview = ({
       if (openItems.length) {
         map[phase.label] = openItems.map((item, idx) => ({
           id: item.id || `${phase.key}-${idx}`,
-          task: item.task || item.label || '',
+          task: item.task || item.label || item.ui || '',
         }));
       }
     });
@@ -539,10 +718,8 @@ const ProjectOverview = ({
     0
   );
 
-  /* ==================== RENDER ==================== */
   return (
     <div className="apo-container">
-      {/* ---------- Progress overview (always visible at top) ---------- */}
       <h4 className="apo-h4">Progress Overview</h4>
       <div className="apo-progress-bar-wrap">
         <div className="apo-progress-bar-track">
@@ -575,9 +752,74 @@ const ProjectOverview = ({
         </div>
       </div>
 
-      {/* ======================================================
-          1) PROJECT SCOPE
-         ====================================================== */}
+      {isSoundLegendProject(editableData) && (
+        <div className="apo-card">
+          <h4 className="apo-h4">SoundLegend Customer Gates</h4>
+
+          <div className="apo-row">
+            <label className="apo-label">Build Commitment</label>
+            <div className="apo-field">
+              <Toggle
+                checked={!!soundLegendControls.buildCommitment?.isCommitted}
+                onChange={handleCommitmentToggle}
+              />
+              <span className="apo-hint">
+                Customer portal story remains locked until commitment is approved.
+              </span>
+            </div>
+          </div>
+
+          <div className="apo-row">
+            <label className="apo-label">Scope Visible to Customer</label>
+            <div className="apo-field">
+              <Toggle
+                checked={
+                  !!soundLegendControls.scopeVisibility
+                    ?.customerCanViewApprovedScope
+                }
+                onChange={handleScopeUnlockToggle}
+              />
+              <span className="apo-hint">
+                Uses the approved scope snapshot, not raw admin fields.
+              </span>
+            </div>
+          </div>
+
+          <div className="apo-row">
+            <label className="apo-label">Story Details Visible</label>
+            <div className="apo-field">
+              <Toggle
+                checked={
+                  !!soundLegendControls.storyVisibility
+                    ?.customerCanViewStoryDetails
+                }
+                onChange={handleStoryUnlockToggle}
+              />
+              <span className="apo-hint">
+                Unlocks detailed chapter story content in the customer portal.
+              </span>
+            </div>
+          </div>
+
+          <div className="apo-actions-inline">
+            <button
+              type="button"
+              className="apo-btn primary"
+              onClick={handleApproveCurrentScope}
+            >
+              Approve Current Scope & Unlock
+            </button>
+          </div>
+
+          <div className="apo-hint" style={{ marginTop: '12px' }}>
+            Last approved scope:{' '}
+            {soundLegendControls.approvedCustomerScope?.lastApprovedAt
+              ? formatDate(soundLegendControls.approvedCustomerScope.lastApprovedAt)
+              : 'Not approved yet'}
+          </div>
+        </div>
+      )}
+
       <div
         className={`apo-card apo-section ${
           openSections.scope ? 'open' : 'collapsed'
@@ -653,7 +895,6 @@ const ProjectOverview = ({
               .
             </p>
 
-            {/* Identity */}
             <div className="apo-scope-group">
               <div className="apo-scope-heading">Identity</div>
 
@@ -710,7 +951,6 @@ const ProjectOverview = ({
               </div>
             </div>
 
-            {/* Shell & Geometry */}
             <div className="apo-scope-group">
               <div className="apo-scope-heading">Shell &amp; Geometry</div>
 
@@ -822,7 +1062,6 @@ const ProjectOverview = ({
               </div>
             </div>
 
-            {/* Wood & Veneer */}
             <div className="apo-scope-group">
               <div className="apo-scope-heading">Wood &amp; Veneer</div>
 
@@ -889,7 +1128,6 @@ const ProjectOverview = ({
               </div>
             </div>
 
-            {/* Edges & Snare Beds */}
             <div className="apo-scope-group">
               <div className="apo-scope-heading">Edges &amp; Snare Beds</div>
 
@@ -937,7 +1175,6 @@ const ProjectOverview = ({
               </div>
             </div>
 
-            {/* Hardware */}
             <div className="apo-scope-group">
               <div className="apo-scope-heading">Hardware</div>
 
@@ -1034,7 +1271,6 @@ const ProjectOverview = ({
               </div>
             </div>
 
-            {/* Finish */}
             <div className="apo-scope-group">
               <div className="apo-scope-heading">Finish</div>
 
@@ -1126,9 +1362,6 @@ const ProjectOverview = ({
         )}
       </div>
 
-      {/* ======================================================
-          2) OPEN CHECKPOINTS
-         ====================================================== */}
       <div
         className={`apo-card apo-section ${
           openSections.openCheckpoints ? 'open' : 'collapsed'
@@ -1198,9 +1431,6 @@ const ProjectOverview = ({
         )}
       </div>
 
-      {/* ======================================================
-          3) CUSTOMER DETAILS
-         ====================================================== */}
       <div
         className={`apo-card apo-section ${
           openSections.customer ? 'open' : 'collapsed'
@@ -1446,9 +1676,6 @@ const ProjectOverview = ({
         )}
       </div>
 
-      {/* ======================================================
-          4) VAULT SETTINGS
-         ====================================================== */}
       <div
         className={`apo-card apo-section ${
           openSections.vault ? 'open' : 'collapsed'
@@ -1604,9 +1831,6 @@ const ProjectOverview = ({
         )}
       </div>
 
-      {/* ======================================================
-          ATTACHMENTS
-         ====================================================== */}
       <div className="apo-card">
         <h4 className="apo-h4">Attachments</h4>
 
@@ -1653,7 +1877,6 @@ const ProjectOverview = ({
                       setIsPreviewLoaded(false);
                     }}
                   >
-                    {/* basic type sniff */}
                     {!url ? (
                       <div className="file-preview-image file-preview-missing">
                         No preview
@@ -1688,7 +1911,7 @@ const ProjectOverview = ({
                       <select
                         value={file.category || DEFAULT_DISPLAY_CATEGORY}
                         onChange={(e) => {
-                          const nextCat = e.target.value; // always a real label
+                          const nextCat = e.target.value;
 
                           const currentArrRaw = uploadedFiles[sectionKey] || [];
                           const currentArr = Array.isArray(currentArrRaw)
@@ -1777,7 +2000,6 @@ const ProjectOverview = ({
         </div>
       </div>
 
-      {/* ---------- Preview modal ---------- */}
       {modalPreview && (
         <div className="file-preview-modal">
           <div className="file-preview-modal-content">

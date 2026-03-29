@@ -27,6 +27,7 @@ const cp = (
  * - stage.adminMainTitle: admin main panel stage title (full)
  * - step.adminLeftShort: admin left panel step label (short)
  * - step.adminMainTitle: admin main panel step title (full)
+ * - step.portalActiveLabel: customer-facing present-tense live label
  * - checkpoint.book: short label used in left panel under the active sub-step
  */
 export const STAGE_TEMPLATES = {
@@ -35,7 +36,7 @@ export const STAGE_TEMPLATES = {
    * ========================================================== */
   discoveryDesign: {
     stageKey: 'discoveryDesign',
-    weight: 10,
+    weight: 3,
     adminLeftShort: '1. Discovery',
     adminMainTitle: '1. Discovery & Design',
     portalLabel: 'Discovery & Design',
@@ -58,9 +59,10 @@ export const STAGE_TEMPLATES = {
     steps: [
       {
         id: 'discoveryDesign_1',
-        weight: 3,
+        weight: 1,
         adminLeftShort: 'Kickoff',
         adminMainTitle: 'Kickoff & Vision Capture',
+        portalActiveLabel: 'Capturing Your Vision',
         checkpoints: [
           cp(
             'Capture player goals + influences',
@@ -126,9 +128,10 @@ export const STAGE_TEMPLATES = {
       },
       {
         id: 'discoveryDesign_2',
-        weight: 4,
+        weight: 1,
         adminLeftShort: 'Spec Draft',
         adminMainTitle: 'Initial Spec Draft',
+        portalActiveLabel: 'Drafting Your Build Specification',
         checkpoints: [
           cp(
             'Lock size + lug count direction',
@@ -187,9 +190,10 @@ export const STAGE_TEMPLATES = {
       },
       {
         id: 'discoveryDesign_3',
-        weight: 3,
+        weight: 1,
         adminLeftShort: 'Approval',
         adminMainTitle: 'Customer Approval & Sign-Off',
+        portalActiveLabel: 'Finalizing Your Approval',
         checkpoints: [
           cp(
             'Send proposal summary',
@@ -237,7 +241,7 @@ export const STAGE_TEMPLATES = {
    * ========================================================== */
   commitmentPortal: {
     stageKey: 'commitmentPortal',
-    weight: 8,
+    weight: 3,
     adminLeftShort: '2. Commitment',
     adminMainTitle: '2. Commitment & Portal Setup',
     portalLabel: 'Commitment & Portal Setup',
@@ -260,9 +264,10 @@ export const STAGE_TEMPLATES = {
     steps: [
       {
         id: 'commitmentPortal_1',
-        weight: 3,
+        weight: 1,
         adminLeftShort: 'Deposit',
         adminMainTitle: 'Deposit / Commitment Confirmed',
+        portalActiveLabel: 'Confirming Your Commitment',
         checkpoints: [
           cp(
             'Confirm deposit received',
@@ -303,9 +308,10 @@ export const STAGE_TEMPLATES = {
       },
       {
         id: 'commitmentPortal_2',
-        weight: 3,
+        weight: 1,
         adminLeftShort: 'Portal',
         adminMainTitle: 'Portal Access + Project Setup',
+        portalActiveLabel: 'Setting Up Your Artist Portal',
         checkpoints: [
           cp(
             'Confirm customer user link',
@@ -347,9 +353,10 @@ export const STAGE_TEMPLATES = {
       },
       {
         id: 'commitmentPortal_3',
-        weight: 2,
+        weight: 1,
         adminLeftShort: 'Intake',
         adminMainTitle: 'Shipping / Intake Details Confirmed',
+        portalActiveLabel: 'Confirming Your Shipping Details',
         checkpoints: [
           cp(
             'Confirm shipping address + contact',
@@ -384,7 +391,7 @@ export const STAGE_TEMPLATES = {
    * ========================================================== */
   woodVisionLockIn: {
     stageKey: 'woodVisionLockIn',
-    weight: 12,
+    weight: 6,
     adminLeftShort: '3. Wood',
     adminMainTitle: '3. Wood & Vision Lock-In',
     portalLabel: 'Wood & Vision Lock-In',
@@ -407,9 +414,10 @@ export const STAGE_TEMPLATES = {
     steps: [
       {
         id: 'woodVisionLockIn_1',
-        weight: 4,
+        weight: 2,
         adminLeftShort: 'Veneer',
         adminMainTitle: 'Veneer Selection Locked',
+        portalActiveLabel: 'Locking In Your Veneer Direction',
         checkpoints: [
           cp(
             'Confirm exact veneer reference',
@@ -455,9 +463,10 @@ export const STAGE_TEMPLATES = {
       },
       {
         id: 'woodVisionLockIn_2',
-        weight: 4,
+        weight: 2,
         adminLeftShort: 'Core Wood',
         adminMainTitle: 'Core Shell Wood Selection',
+        portalActiveLabel: 'Selecting Your Core Shell Wood',
         checkpoints: [
           cp(
             'Select core species + rationale',
@@ -502,9 +511,10 @@ export const STAGE_TEMPLATES = {
       },
       {
         id: 'woodVisionLockIn_3',
-        weight: 4,
+        weight: 2,
         adminLeftShort: 'Final Spec',
         adminMainTitle: 'Final Spec Freeze (No Silent Changes)',
+        portalActiveLabel: 'Freezing Your Final Specification',
         checkpoints: [
           cp(
             'Freeze spec + revision log',
@@ -551,7 +561,7 @@ export const STAGE_TEMPLATES = {
    * ========================================================== */
   rawShellCreation: {
     stageKey: 'rawShellCreation',
-    weight: 16,
+    weight: 15,
     adminLeftShort: '4. Raw Shell',
     adminMainTitle: '4. Raw Shell Creation',
     portalLabel: 'Raw Shell Creation',
@@ -579,6 +589,7 @@ export const STAGE_TEMPLATES = {
         weight: 5,
         adminLeftShort: 'Milling',
         adminMainTitle: 'Stave/Blank Milling + Prep',
+        portalActiveLabel: 'Milling Your Shell Stock',
         checkpoints: [
           cp(
             'Mill stock to spec',
@@ -625,6 +636,7 @@ export const STAGE_TEMPLATES = {
         weight: 6,
         adminLeftShort: 'Glue-Up',
         adminMainTitle: 'Glue-Up + Compression',
+        portalActiveLabel: 'Forming Your Raw Shell',
         checkpoints: [
           cp(
             'Glue application verified',
@@ -667,9 +679,10 @@ export const STAGE_TEMPLATES = {
       },
       {
         id: 'rawShellCreation_3',
-        weight: 5,
+        weight: 4,
         adminLeftShort: 'Rough True',
         adminMainTitle: 'Final QA Checklist',
+        portalActiveLabel: 'Trueing Your Raw Shell',
         portalNote:
           'This is the last full inspection pass, where we verify function, finish, hardware, and sound before the drum is cleared for packing.',
         checkpoints: [
@@ -718,7 +731,7 @@ export const STAGE_TEMPLATES = {
    * ========================================================== */
   shellTrueingTorchTune: {
     stageKey: 'shellTrueingTorchTune',
-    weight: 10,
+    weight: 17,
     adminLeftShort: '5. True + Tune',
     adminMainTitle: '5. Shell Trueing & Torch Tune',
     portalLabel: 'Shell Trueing & Torch Tune',
@@ -743,9 +756,10 @@ export const STAGE_TEMPLATES = {
     steps: [
       {
         id: 'shellTrueingTorchTune_1',
-        weight: 4,
+        weight: 7,
         adminLeftShort: 'Precision True',
         adminMainTitle: 'Precision Trueing (Flat + Round)',
+        portalActiveLabel: 'Precision-Trueing Your Shell',
         checkpoints: [
           cp(
             'True bearing surfaces flat',
@@ -787,9 +801,10 @@ export const STAGE_TEMPLATES = {
       },
       {
         id: 'shellTrueingTorchTune_2',
-        weight: 3,
+        weight: 5,
         adminLeftShort: 'Torch Tune',
         adminMainTitle: 'Torch Tune (Stability + Voice)',
+        portalActiveLabel: 'Torch-Tuning Your Shell',
         checkpoints: [
           cp(
             'Torch tune executed safely',
@@ -818,9 +833,10 @@ export const STAGE_TEMPLATES = {
       },
       {
         id: 'shellTrueingTorchTune_3',
-        weight: 3,
+        weight: 5,
         adminLeftShort: 'Prep Sand',
         adminMainTitle: 'Surface Prep Sanding',
+        portalActiveLabel: 'Preparing Your Shell Surface',
         checkpoints: [
           cp(
             'Sand progression completed',
@@ -855,7 +871,7 @@ export const STAGE_TEMPLATES = {
    * ========================================================== */
   exteriorArtFinish: {
     stageKey: 'exteriorArtFinish',
-    weight: 14,
+    weight: 20,
     adminLeftShort: '6. Finish',
     adminMainTitle: '6. Exterior Art & Finish',
     portalLabel: 'Exterior Art & Finish',
@@ -880,9 +896,10 @@ export const STAGE_TEMPLATES = {
     steps: [
       {
         id: 'exteriorArtFinish_1',
-        weight: 5,
+        weight: 7,
         adminLeftShort: 'Bond Prep',
         adminMainTitle: 'Bond Prep (Sealer + Surface)',
+        portalActiveLabel: 'Preparing Your Shell for Finish',
         checkpoints: [
           cp(
             'Seal strategy applied',
@@ -912,9 +929,10 @@ export const STAGE_TEMPLATES = {
       },
       {
         id: 'exteriorArtFinish_2',
-        weight: 4,
+        weight: 6,
         adminLeftShort: 'Apply Veneer',
         adminMainTitle: 'Apply Veneer (Exact Match)',
+        portalActiveLabel: 'Applying Your Veneer',
         checkpoints: [
           cp(
             'Grain orientation confirmed',
@@ -943,9 +961,10 @@ export const STAGE_TEMPLATES = {
       },
       {
         id: 'exteriorArtFinish_3',
-        weight: 3,
+        weight: 4,
         adminLeftShort: 'Resin/Color',
         adminMainTitle: 'Resin / Color Accent Integration',
+        portalActiveLabel: 'Integrating Your Accent Work',
         checkpoints: [
           cp(
             'Accent behavior enforced',
@@ -975,9 +994,10 @@ export const STAGE_TEMPLATES = {
       },
       {
         id: 'exteriorArtFinish_4',
-        weight: 2,
+        weight: 3,
         adminLeftShort: 'Clear + Cure',
         adminMainTitle: 'Clearcoat + Cure',
+        portalActiveLabel: 'Finishing and Curing Your Shell',
         checkpoints: [
           cp(
             'Clearcoat applied evenly',
@@ -1012,7 +1032,7 @@ export const STAGE_TEMPLATES = {
    * ========================================================== */
   edgesSnareBeds: {
     stageKey: 'edgesSnareBeds',
-    weight: 10,
+    weight: 14,
     adminLeftShort: '7. Edges',
     adminMainTitle: '7. Edges & Snare Beds',
     portalLabel: 'Edges & Snare Beds',
@@ -1036,9 +1056,10 @@ export const STAGE_TEMPLATES = {
     steps: [
       {
         id: 'edgesSnareBeds_1',
-        weight: 4,
+        weight: 6,
         adminLeftShort: 'Bearing Edges',
         adminMainTitle: 'Cut Bearing Edges',
+        portalActiveLabel: 'Cutting Your Bearing Edges',
         checkpoints: [
           cp(
             'Edge profile executed',
@@ -1078,9 +1099,10 @@ export const STAGE_TEMPLATES = {
       },
       {
         id: 'edgesSnareBeds_2',
-        weight: 4,
+        weight: 5,
         adminLeftShort: 'Snare Beds',
         adminMainTitle: 'Cut Snare Beds',
+        portalActiveLabel: 'Cutting Your Snare Beds',
         checkpoints: [
           cp(
             'Bed depth + symmetry verified',
@@ -1120,9 +1142,10 @@ export const STAGE_TEMPLATES = {
       },
       {
         id: 'edgesSnareBeds_3',
-        weight: 2,
+        weight: 3,
         adminLeftShort: 'Head Seat',
         adminMainTitle: 'Head Seating + Fit Check',
+        portalActiveLabel: 'Checking Head Seating and Hoop Fit',
         checkpoints: [
           cp(
             'Head seats cleanly',
@@ -1156,7 +1179,7 @@ export const STAGE_TEMPLATES = {
    * ========================================================== */
   hardwareAssembly: {
     stageKey: 'hardwareAssembly',
-    weight: 12,
+    weight: 9,
     adminLeftShort: '8. Hardware',
     adminMainTitle: '8. Hardware & Assembly',
     portalLabel: 'Hardware & Assembly',
@@ -1179,9 +1202,10 @@ export const STAGE_TEMPLATES = {
     steps: [
       {
         id: 'hardwareAssembly_1',
-        weight: 4,
+        weight: 3,
         adminLeftShort: 'Layout',
         adminMainTitle: 'Hardware Layout + Marking',
+        portalActiveLabel: 'Laying Out Your Hardware',
         checkpoints: [
           cp(
             'Confirm lug count + spacing',
@@ -1222,9 +1246,10 @@ export const STAGE_TEMPLATES = {
       },
       {
         id: 'hardwareAssembly_2',
-        weight: 5,
+        weight: 4,
         adminLeftShort: 'Drill',
         adminMainTitle: 'Drilling + Install Hardware',
+        portalActiveLabel: 'Installing Your Hardware',
         checkpoints: [
           cp(
             'Drill clean + tear-out controlled',
@@ -1277,9 +1302,10 @@ export const STAGE_TEMPLATES = {
       },
       {
         id: 'hardwareAssembly_3',
-        weight: 3,
+        weight: 2,
         adminLeftShort: 'Heads/Wires',
         adminMainTitle: 'Heads + Snare Wires Installed',
+        portalActiveLabel: 'Installing Your Heads and Snare Wires',
         checkpoints: [
           cp(
             'Install heads',
@@ -1313,7 +1339,7 @@ export const STAGE_TEMPLATES = {
    * ========================================================== */
   legacyTuningMedia: {
     stageKey: 'legacyTuningMedia',
-    weight: 8,
+    weight: 10,
     adminLeftShort: '9. Tuning',
     adminMainTitle: '9. Legacy Tuning & Media',
     portalLabel: 'Legacy Tuning & Media',
@@ -1337,9 +1363,10 @@ export const STAGE_TEMPLATES = {
     steps: [
       {
         id: 'legacyTuningMedia_1',
-        weight: 3,
+        weight: 4,
         adminLeftShort: 'Tuning Pass',
         adminMainTitle: 'Primary Tuning Pass',
+        portalActiveLabel: 'Dialing In Your Drum’s Voice',
         checkpoints: [
           cp(
             'Seat heads + initial stretch',
@@ -1380,9 +1407,10 @@ export const STAGE_TEMPLATES = {
       },
       {
         id: 'legacyTuningMedia_2',
-        weight: 3,
+        weight: 4,
         adminLeftShort: 'Media Capture',
         adminMainTitle: 'Capture Media (Sound + Visual)',
+        portalActiveLabel: 'Capturing Your Drum’s Sound and Story',
         checkpoints: [
           cp(
             'Record reference audio',
@@ -1424,6 +1452,7 @@ export const STAGE_TEMPLATES = {
         weight: 2,
         adminLeftShort: 'Customer Share',
         adminMainTitle: 'Customer Update + Delivery Prep Notes',
+        portalActiveLabel: 'Preparing Your Final Update',
         checkpoints: [
           cp(
             'Send update summary',
@@ -1457,7 +1486,7 @@ export const STAGE_TEMPLATES = {
    * ========================================================== */
   finalQAPackagingDelivery: {
     stageKey: 'finalQAPackagingDelivery',
-    weight: 10,
+    weight: 3,
     adminLeftShort: '10. Final QA',
     adminMainTitle: '10. Final QA, Packaging & Delivery',
     portalLabel: 'Final QA, Packaging & Delivery',
@@ -1480,9 +1509,10 @@ export const STAGE_TEMPLATES = {
     steps: [
       {
         id: 'finalQAPackagingDelivery_1',
-        weight: 4,
+        weight: 1,
         adminLeftShort: 'Final QA',
         adminMainTitle: 'Final QA Checklist',
+        portalActiveLabel: 'Running Final QA on Your Drum',
         checkpoints: [
           cp(
             'Hardware verification',
@@ -1537,9 +1567,10 @@ export const STAGE_TEMPLATES = {
       },
       {
         id: 'finalQAPackagingDelivery_2',
-        weight: 3,
+        weight: 1,
         adminLeftShort: 'Pack',
         adminMainTitle: 'Packaging',
+        portalActiveLabel: 'Packaging Your Drum',
         checkpoints: [
           cp(
             'Protective packing complete',
@@ -1579,9 +1610,10 @@ export const STAGE_TEMPLATES = {
       },
       {
         id: 'finalQAPackagingDelivery_3',
-        weight: 3,
+        weight: 1,
         adminLeftShort: 'Ship/Deliver',
         adminMainTitle: 'Shipping / Delivery',
+        portalActiveLabel: 'Preparing Your Drum for Delivery',
         checkpoints: [
           cp(
             'Label + carrier confirmed',

@@ -60,12 +60,29 @@ const button = (label, href) => `
   </div>`;
 const greet = (name) => `Hi ${String(name || '').trim() || 'there'},`;
 
-const bodySoundLegend = (name) => `
+const bodySoundLegend = (name, questionnaireUrl) => `
   <p style="margin:0 0 16px">${greet(name)}</p>
-  <p style="margin:0 0 16px">You're in. We've received your SoundLegend submission — and we’re excited to hear your story.</p>
-  <p style="margin:0 0 16px">This next chapter isn’t just about building a snare. It’s about honoring your legacy through sound — captured in wood, crafted by hand, and designed to last a lifetime.</p>
-  <p style="margin:0 0 16px">We typically follow up within 24–48 hours to learn more about your vision. In the meantime, here’s a short video to get us both amped up about what’s ahead:</p>
-  ${button('Watch the Teaser', CTA_SL)}
+  <p style="margin:0 0 16px">
+    We’ve received your SoundLegend inquiry — and we’re excited to hear your story.
+  </p>
+  <p style="margin:0 0 16px">
+    Your next step is to complete your private SoundLegend questionnaire. This helps us better understand what you’re looking for, what you want to get out of the experience, and how to make your consultation more meaningful.
+  </p>
+  <p style="margin:0 0 16px">
+    Once your questionnaire is complete, our craftsman will personally review it and reach out within 2 business days by email to schedule your FREE consultation.
+  </p>
+  ${
+    questionnaireUrl
+      ? button('Complete Your Private Questionnaire', questionnaireUrl)
+      : ''
+  }
+  <p style="margin:16px 0 0;color:#6b7280;font-size:14px">
+    If the button above does not work, copy and paste this link into your browser:
+    <br />
+    <a href="${questionnaireUrl || CTA_SITE}" style="color:#111;word-break:break-word">
+      ${questionnaireUrl || CTA_SITE}
+    </a>
+  </p>
 `;
 const bodySupport = (name) => `
   <p style="margin:0 0 16px">${greet(name)}</p>
@@ -2171,15 +2188,31 @@ exports.autoReplySoundlegend = onDocumentCreated(
     const data = event.data?.data();
     if (!data?.email) return;
 
+    const questionnaireToken = data.questionnaireToken || '';
+    const questionnaireUrl =
+      data.questionnaireUrl ||
+      (questionnaireToken
+        ? `https://www.oberartisandrums.com/soundlegend-questionnaire/${questionnaireToken}`
+        : '');
+
+    console.log('autoReplySoundlegend payload:', {
+      email: data.email,
+      questionnaireToken,
+      questionnaireUrl,
+    });
+
     const html = emailShell({
       logo: LOGO_SL,
-      bodyHtml: bodySoundLegend(data.firstName || data.name),
+      bodyHtml: bodySoundLegend(
+        data.firstName || data.fullName || data.name,
+        questionnaireUrl
+      ),
     });
 
     try {
       await gmailSend({
         to: data.email,
-        subject: 'Welcome to the SoundLegend Experience',
+        subject: 'Complete Your SoundLegend Questionnaire',
         html,
         fromEmail: 'soundlegend@oberartisandrums.com',
         replyTo: 'soundlegend@oberartisandrums.com',

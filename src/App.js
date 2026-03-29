@@ -1,4 +1,3 @@
-// src/App.js
 import React, { useState, useEffect, useMemo } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { getDocs, collection } from 'firebase/firestore';
@@ -49,6 +48,7 @@ import FoundersToastProductDetail from './components/FoundersToastProductDetail.
 import HeritageProductDetail from './components/HeritageProductDetail.js';
 import FeuzonProductDetail from './components/FeuzonProductDetail.js';
 import SoundlegendProductDetail from './components/SoundlegendProductDetail.js';
+import SoundlegendQuestionnaire from './components/SoundlegendQuestionnaire.js';
 import { DarkModeProvider } from './context/DarkModeContext.js';
 import { ImpersonationProvider } from './context/ImpersonationContext';
 
@@ -92,7 +92,6 @@ function App() {
 
   const location = useLocation();
 
-  // (kept even if unused — safe to remove later)
   const routeToTabMap = useMemo(
     () => ({
       '/': 'Home',
@@ -179,10 +178,8 @@ function App() {
           <HomeBackground />
 
           <Routes>
-            {/* HOME */}
             <Route path="/" element={<Home />} />
 
-            {/* CORE */}
             <Route path="/our-craft" element={<OurCraft />} />
             <Route
               path="/founders-batch"
@@ -195,7 +192,6 @@ function App() {
             <Route path="/return-policy" element={<ReturnPolicy />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
 
-            {/* CUSTOM DRUM BUILDER */}
             <Route
               path="/custom-drum-builder"
               element={
@@ -207,7 +203,6 @@ function App() {
               }
             />
 
-            {/* ARTISAN PORTAL */}
             <Route
               path="/legacy"
               element={
@@ -225,13 +220,11 @@ function App() {
               element={<ArtisanPortalResetPassword />}
             />
 
-            {/* Redirect old path */}
             <Route
               path="/soundlegends/signin"
               element={<Navigate to="/artisan-portal/signin" replace />}
             />
 
-            {/* SHOP */}
             <Route
               path="/original-artisan-shop"
               element={
@@ -282,13 +275,11 @@ function App() {
 
             <Route path="/drum-selector" element={<DrumSelector />} />
 
-            {/* PROJECTS */}
             <Route
               path="/projects/:projectId"
               element={<ProjectRoute element={ProjectDetailPage} />}
             />
 
-            {/* PRODUCT DETAIL */}
             <Route
               path="/artisan-shop/heritage"
               element={<HeritageProductDetail />}
@@ -301,11 +292,13 @@ function App() {
               path="/artisan-shop/soundlegend"
               element={<SoundlegendProductDetail />}
             />
+            <Route
+              path="/soundlegend-questionnaire/:token"
+              element={<SoundlegendQuestionnaire />}
+            />
 
-            {/* HULA */}
             <Route path="/hula" element={<HulaGiftPage />} />
 
-            {/* LEGACY VAULT */}
             <Route
               path="/artisan-shop/soundlegend/vault"
               element={<LegacyVaultHome />}
@@ -319,13 +312,11 @@ function App() {
               element={<LegacyTuningLearn />}
             />
 
-            {/* FOUNDERS TOAST */}
             <Route
               path="/artisan-shop/founders-toast"
               element={<FoundersToastProductDetail />}
             />
 
-            {/* ADMIN TOOLS */}
             <Route
               path="/admin/artisan-tools/inventory-tracker"
               element={
@@ -340,7 +331,6 @@ function App() {
               }
             />
 
-            {/* DYNAMIC PRODUCT DETAIL */}
             <Route
               path="/artisan-shop/:productId"
               element={<ProductDetail key={location.pathname} />}
@@ -350,7 +340,6 @@ function App() {
               element={<ProductDetail key={location.pathname} />}
             />
 
-            {/* LEGACY REDIRECTS */}
             <Route
               path="/artisanseries/:productId"
               element={
@@ -370,7 +359,6 @@ function App() {
               }
             />
 
-            {/* ACCOUNT & ADMIN */}
             <Route
               path="/account"
               element={<PrivateRoute element={<AccountPage />} />}
@@ -383,25 +371,20 @@ function App() {
 
             <Route path="/admin-signin" element={<AdminSignin />} />
 
-            {/* CHECKOUT */}
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/checkout-summary" element={<CheckoutSummary />} />
 
-            {/* VERIFY */}
             <Route path="/verify" element={<VerifySerial />} />
             <Route path="/verify/:serial" element={<VerifyDrumBySerial />} />
 
-            {/* SOUNDLEGEND SHOWROOM */}
             <Route
               path="/artisan-shop/soundlegend/:serial"
               element={<SoundLegendShowroom />}
             />
 
-            {/* ENDORSEMENTS */}
             <Route path="/endorsements" element={<Endorsements />} />
             <Route path="/endorsements/apply" element={<EndorsementForm />} />
 
-            {/* ADMIN: Vault Creator */}
             <Route
               path="/admin/soundlegend-vault"
               element={
@@ -414,7 +397,6 @@ function App() {
               element={<ResinAccentGenerator />}
             />
 
-            {/* WILDCARD — MUST BE LAST */}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
 
