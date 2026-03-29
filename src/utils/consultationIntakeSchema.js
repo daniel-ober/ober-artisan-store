@@ -38,12 +38,34 @@ export const VISUAL_DIRECTION_OPTIONS = [
   'Not sure — guide me',
 ];
 
+export const CONTACT_METHOD_OPTIONS = [
+  'Email',
+  'Text message',
+  'Either is fine',
+];
+
+export const CONSULT_DAY_OPTIONS = [
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+  'Sunday',
+];
+
+export const CONSULT_TIME_OPTIONS = [
+  'Mornings',
+  'Afternoons',
+  'Evenings',
+];
+
 export const CONSULTATION_INTAKE_SECTIONS = [
   {
     id: 'soundlegendVision',
     title: 'Your SoundLegend Vision',
     description:
-      'A few quick questions to help Dan understand your direction before your consultation.',
+      'A short pre-consultation intake to help Dan understand what you are looking for before your one-on-one call.',
     fields: [
       {
         id: 'buildClarity',
@@ -75,12 +97,34 @@ export const CONSULTATION_INTAKE_SECTIONS = [
       },
       {
         id: 'referenceNotes',
-        label: 'Anything helpful Dan should know before the consultation?',
+        label:
+          'Any drummer, record, current snare, or general vibe this should lean toward?',
         type: 'textarea',
-        rows: 5,
+        rows: 4,
         placeholder:
-          'You can include a drummer, record, current snare, general vibe, where you are in your buying journey, and your best days / times for a consultation.',
+          'Examples: a drummer, album, song, current snare, or just a vibe you love.',
         defaultValue: '',
+      },
+      {
+        id: 'consultationContactMethod',
+        label: 'Best way to contact you to schedule your consultation',
+        type: 'select',
+        options: CONTACT_METHOD_OPTIONS,
+        defaultValue: '',
+      },
+      {
+        id: 'consultationDays',
+        label: 'Which days usually work best for you?',
+        type: 'multiSelect',
+        options: CONSULT_DAY_OPTIONS,
+        defaultValue: [],
+      },
+      {
+        id: 'consultationTimes',
+        label: 'What time of day usually works best?',
+        type: 'multiSelect',
+        options: CONSULT_TIME_OPTIONS,
+        defaultValue: [],
       },
     ],
   },
