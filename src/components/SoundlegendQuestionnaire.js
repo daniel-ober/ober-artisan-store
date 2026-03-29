@@ -37,8 +37,18 @@ const pageShellStyle = {
 };
 
 const pageInnerStyle = {
-  maxWidth: '1280px',
+  maxWidth: '1120px',
   margin: '0 auto',
+};
+
+const heroCardStyle = {
+  borderRadius: '24px',
+  padding: '30px',
+  marginBottom: '18px',
+  background:
+    'radial-gradient(circle at top left, rgba(255, 204, 0, 0.08), transparent 28%), linear-gradient(180deg, rgba(19,22,34,0.96), rgba(10,12,20,0.98))',
+  border: '1px solid rgba(255,255,255,0.08)',
+  boxShadow: '0 24px 60px rgba(0,0,0,0.35)',
 };
 
 const statusCardStyle = {
@@ -48,15 +58,6 @@ const statusCardStyle = {
   background: 'rgba(255,255,255,0.04)',
   border: '1px solid rgba(255,255,255,0.08)',
   boxShadow: '0 20px 60px rgba(0,0,0,0.28)',
-};
-
-const heroCardStyle = {
-  borderRadius: '22px',
-  padding: '28px',
-  marginBottom: '18px',
-  background: 'rgba(255,255,255,0.04)',
-  border: '1px solid rgba(255,255,255,0.08)',
-  boxShadow: '0 20px 60px rgba(0,0,0,0.35)',
 };
 
 const mutedStyle = {
@@ -84,14 +85,32 @@ const ghostButtonStyle = {
 const primaryButtonStyle = {
   border: 0,
   background:
-    'linear-gradient(135deg, rgba(84, 125, 255, 0.96), rgba(122, 162, 255, 0.92))',
-  color: '#fff',
+    'linear-gradient(135deg, rgba(244, 200, 66, 0.96), rgba(220, 174, 45, 0.92))',
+  color: '#111',
   borderRadius: '999px',
   padding: '11px 18px',
   fontSize: '13px',
-  fontWeight: 700,
+  fontWeight: 800,
   cursor: 'pointer',
 };
+
+function formatTimestamp(value) {
+  if (!value) return '';
+
+  try {
+    if (value?.seconds) {
+      return new Date(value.seconds * 1000).toLocaleString();
+    }
+
+    if (value instanceof Date) {
+      return value.toLocaleString();
+    }
+
+    return new Date(value).toLocaleString();
+  } catch {
+    return '';
+  }
+}
 
 function SoundlegendQuestionnaire() {
   const { token } = useParams();
@@ -101,6 +120,7 @@ function SoundlegendQuestionnaire() {
   const [linkedUserId, setLinkedUserId] = useState('');
   const [customerName, setCustomerName] = useState('');
   const [customerEmail, setCustomerEmail] = useState('');
+  const [submittedCompletedAt, setSubmittedCompletedAt] = useState(null);
   const [intakeValue, setIntakeValue] = useState(() =>
     normalizeIncomingIntake({})
   );
@@ -111,6 +131,7 @@ function SoundlegendQuestionnaire() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [pageMessage, setPageMessage] = useState('');
   const [pageError, setPageError] = useState('');
+  const [showSubmittedView, setShowSubmittedView] = useState(false);
 
   const pageTitle = useMemo(() => {
     if (customerName?.trim()) {
@@ -157,6 +178,7 @@ function SoundlegendQuestionnaire() {
         const normalizedIntake = normalizeIncomingIntake(
           data.consultationIntake || {}
         );
+        const alreadyCompleted = !!data.questionnaireCompleted;
 
         setSubmissionDocId(foundDoc.id);
         setLinkedUserId(data.linkedUserId || '');
@@ -167,7 +189,12 @@ function SoundlegendQuestionnaire() {
         );
         setCustomerEmail(data.email || '');
         setIntakeValue(normalizedIntake);
-        setIsAlreadyComplete(!!data.questionnaireCompleted);
+        setIsAlreadyComplete(alreadyCompleted);
+        setSubmittedCompletedAt(data.questionnaireCompletedAt || null);
+
+        if (alreadyCompleted) {
+          setShowSubmittedView(true);
+        }
       } catch (err) {
         console.error('Failed to load SoundLegend questionnaire:', err);
         if (!isMounted) return;
@@ -187,7 +214,7 @@ function SoundlegendQuestionnaire() {
   }, [token]);
 
   const handleSaveOnly = async (nextValue) => {
-    if (!submissionDocId) return;
+    if (!submissionDocId || isAlreadyComplete) return;
 
     try {
       setPageError('');
@@ -209,7 +236,7 @@ function SoundlegendQuestionnaire() {
   };
 
   const handleFinalSubmit = async () => {
-    if (!submissionDocId) return;
+    if (!submissionDocId || isAlreadyComplete) return;
 
     try {
       setIsSubmitting(true);
@@ -245,9 +272,9 @@ function SoundlegendQuestionnaire() {
       }
 
       setIsAlreadyComplete(true);
-      setPageMessage(
-        'Questionnaire submitted successfully. Dan can now review your intake and prepare for consultation.'
-      );
+      setShowSubmittedView(true);
+      setPageMessage('');
+      setSubmittedCompletedAt(new Date());
     } catch (err) {
       console.error('Failed to submit questionnaire:', err);
       setPageError('Failed to submit questionnaire.');
@@ -285,13 +312,15 @@ function SoundlegendQuestionnaire() {
               SoundLegend Questionnaire
             </p>
 
-            <h1 style={{ margin: '0 0 16px', fontSize: '36px', lineHeight: 1.1 }}>
+            <h1
+              style={{ margin: '0 0 16px', fontSize: '36px', lineHeight: 1.1 }}
+            >
               This questionnaire link is invalid
             </h1>
 
             <p style={{ margin: 0, ...mutedStyle }}>
-              The link may be expired, incomplete, or no longer associated with an
-              active SoundLegend submission.
+              The link may be expired, incomplete, or no longer associated with
+              an active SoundLegend submission.
             </p>
 
             <div style={actionRowStyle}>
@@ -302,6 +331,81 @@ function SoundlegendQuestionnaire() {
               >
                 Back to SoundLegend
               </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (showSubmittedView && isAlreadyComplete) {
+    return (
+      <div style={pageShellStyle}>
+        <div style={pageInnerStyle}>
+          <div style={heroCardStyle}>
+            <p
+              style={{
+                margin: '0 0 10px',
+                fontSize: '12px',
+                letterSpacing: '0.18em',
+                textTransform: 'uppercase',
+                opacity: 0.7,
+              }}
+            >
+              Questionnaire Received
+            </p>
+
+            <h1
+              style={{ margin: '0 0 14px', fontSize: '40px', lineHeight: 1.08 }}
+            >
+              Thank you for taking the time
+            </h1>
+
+            <p style={{ margin: '0 0 12px', fontSize: '17px', ...mutedStyle }}>
+              Your SoundLegend questionnaire has been submitted successfully.
+              This does not lock anything in stone. It simply gives Dan a better
+              sense of where you are in your drum journey, what you are drawn
+              to, and how to make your consultation more meaningful.
+            </p>
+
+            <p style={{ margin: '0 0 12px', fontSize: '15px', ...mutedStyle }}>
+              Dan will review your answers and typically reach out within 2
+              business days to coordinate your free consultation.
+            </p>
+
+            {submittedCompletedAt ? (
+              <p style={{ margin: 0, fontSize: '14px', ...mutedStyle }}>
+                Submitted on: {formatTimestamp(submittedCompletedAt)}
+              </p>
+            ) : null}
+
+            <div style={actionRowStyle}>
+              <button
+                type="button"
+                style={ghostButtonStyle}
+                onClick={() => navigate('/artisan-shop/soundlegend')}
+              >
+                Back to SoundLegend
+              </button>
+
+              <button
+                type="button"
+                style={primaryButtonStyle}
+                onClick={() => navigate('/artisan-shop/soundlegend')}
+              >
+                Submit a New Inquiry
+              </button>
+            </div>
+          </div>
+
+          <div style={statusCardStyle}>
+            <div style={{ fontWeight: 700, marginBottom: 8 }}>
+              Already filled this out?
+            </div>
+            <div style={mutedStyle}>
+              If you opened this link again later, no worries. Your questionnaire
+              is already on file. The next step is simply waiting for our
+              craftsman to coordinate your consultation.
             </div>
           </div>
         </div>
@@ -330,9 +434,10 @@ function SoundlegendQuestionnaire() {
           </h1>
 
           <p style={{ margin: '0 0 10px', fontSize: '17px', ...mutedStyle }}>
-            This intake helps shape the consultation, clarifies your sonic and
-            visual direction, and gives Dan a strong starting point before your
-            one-on-one call.
+            This short intake is here to help Dan understand what you are drawn
+            to before your consultation. Nothing in this form sets your build in
+            stone. It simply gives us a clearer starting point for the
+            conversation.
           </p>
 
           {customerEmail ? (
@@ -342,10 +447,12 @@ function SoundlegendQuestionnaire() {
           ) : null}
         </div>
 
-        {(pageMessage || pageError || isAlreadyComplete) && (
+        {(pageMessage || pageError) && (
           <div style={statusCardStyle}>
             {pageError ? (
-              <div style={{ color: 'rgba(255, 130, 130, 0.96)', fontWeight: 700 }}>
+              <div
+                style={{ color: 'rgba(255, 130, 130, 0.96)', fontWeight: 700 }}
+              >
                 {pageError}
               </div>
             ) : null}
@@ -361,18 +468,6 @@ function SoundlegendQuestionnaire() {
                 {pageMessage}
               </div>
             ) : null}
-
-            {isAlreadyComplete ? (
-              <div
-                style={{
-                  marginTop: pageMessage || pageError ? 10 : 0,
-                  ...mutedStyle,
-                }}
-              >
-                This questionnaire has already been marked complete. You can still
-                update answers and save changes if needed.
-              </div>
-            ) : null}
           </div>
         )}
 
@@ -382,7 +477,7 @@ function SoundlegendQuestionnaire() {
           onSave={handleSaveOnly}
           isSaving={isSubmitting}
           title="SoundLegend Questionnaire"
-          subtitle="Take your time. The more context you provide, the stronger the consultation and build direction will be."
+          subtitle="A few quick questions to help shape your consultation."
         />
 
         <div
@@ -396,7 +491,7 @@ function SoundlegendQuestionnaire() {
           }}
         >
           <div style={{ fontSize: '13px', ...mutedStyle }}>
-            Token verified: {token}
+            Token verified
           </div>
 
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
