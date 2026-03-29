@@ -60,3 +60,9 @@ build/
 .firebase/
 
 functions/serviceAccountKey.json
+
+serviceAccountKey.json
+backend/serviceAccountKey-dev.json
+backend/serviceAccountKey-prod.json
+backend/serviceAccountKey-stg.json
+functions/serviceAccountKey.json
