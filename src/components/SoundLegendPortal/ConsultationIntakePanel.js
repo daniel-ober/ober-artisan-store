@@ -29,44 +29,37 @@ function ConsultationIntakePanel({
   value,
   onChange,
   onSave,
-  onCancel,
   isSaving = false,
-  title = 'Consultation Intake',
-  subtitle = 'Capture discovery details that will seed the SoundLegend story.',
+  title = 'Your SoundLegend Questionnaire',
+  subtitle = 'A few quick questions to help shape your consultation.',
 }) {
   const [formState, setFormState] = useState(() =>
     normalizeIncomingIntake(value)
-  );
-  const [expandedSections, setExpandedSections] = useState(() =>
-    CONSULTATION_INTAKE_SECTIONS.reduce((acc, section, index) => {
-      acc[section.id] = index < 2;
-      return acc;
-    }, {})
   );
 
   useEffect(() => {
     setFormState(normalizeIncomingIntake(value));
   }, [value]);
 
-  const sectionCompletion = useMemo(() => {
-    return CONSULTATION_INTAKE_SECTIONS.reduce((acc, section) => {
-      const fields = Array.isArray(section.fields) ? section.fields : [];
-      const completedCount = fields.filter((field) => {
-        const val = formState?.[section.id]?.[field.id];
+  const completion = useMemo(() => {
+    const section = CONSULTATION_INTAKE_SECTIONS[0];
+    if (!section) return { completedCount: 0, totalCount: 0 };
 
-        if (field.type === 'boolean') return typeof val === 'boolean';
-        if (field.type === 'multiSelect') return Array.isArray(val) && val.length > 0;
-        if (field.type === 'scale') return val !== '' && val !== null && val !== undefined;
-        return String(val ?? '').trim() !== '';
-      }).length;
+    const fields = Array.isArray(section.fields) ? section.fields : [];
+    const completedCount = fields.filter((field) => {
+      const val = formState?.[section.id]?.[field.id];
 
-      acc[section.id] = {
-        completedCount,
-        totalCount: fields.length,
-      };
+      if (field.type === 'multiSelect') {
+        return Array.isArray(val) && val.length > 0;
+      }
 
-      return acc;
-    }, {});
+      return String(val ?? '').trim() !== '';
+    }).length;
+
+    return {
+      completedCount,
+      totalCount: fields.length,
+    };
   }, [formState]);
 
   const updateField = (sectionId, fieldId, nextValue) => {
@@ -87,13 +80,6 @@ function ConsultationIntakePanel({
     });
   };
 
-  const toggleSection = (sectionId) => {
-    setExpandedSections((prev) => ({
-      ...prev,
-      [sectionId]: !prev[sectionId],
-    }));
-  };
-
   const handleSave = () => {
     if (typeof onSave === 'function') {
       onSave(formState);
@@ -101,14 +87,14 @@ function ConsultationIntakePanel({
   };
 
   const renderTextLikeField = (section, field, isTextArea = false) => {
-    const value = formState?.[section.id]?.[field.id] ?? '';
+    const fieldValue = formState?.[section.id]?.[field.id] ?? '';
 
     if (isTextArea) {
       return (
         <textarea
           className="cip-field-textarea"
           rows={field.rows || 4}
-          value={value}
+          value={fieldValue}
           placeholder={field.placeholder || ''}
           onChange={(e) => updateField(section.id, field.id, e.target.value)}
         />
@@ -119,7 +105,7 @@ function ConsultationIntakePanel({
       <input
         className="cip-field-input"
         type={field.type === 'number' ? 'number' : field.type}
-        value={value}
+        value={fieldValue}
         min={field.min}
         max={field.max}
         step={field.step}
@@ -130,98 +116,35 @@ function ConsultationIntakePanel({
   };
 
   const renderSelectField = (section, field) => {
-    const value = formState?.[section.id]?.[field.id] ?? '';
-    const otherFieldKey = `${field.id}Other`;
-    const otherValue = formState?.[section.id]?.[otherFieldKey] ?? '';
-    const showOther = field.allowOther && value === 'Other';
+    const fieldValue = formState?.[section.id]?.[field.id] ?? '';
 
     return (
-      <div className="cip-field-stack">
-        <select
-          className="cip-field-select"
-          value={value}
-          onChange={(e) => updateField(section.id, field.id, e.target.value)}
-        >
-          <option value="">Select…</option>
-          {(field.options || []).map((option) => {
-            const optionValue =
-              typeof option === 'string' ? option : option.value || '';
-            const optionLabel =
-              typeof option === 'string' ? option : option.label || option.value || '';
-
-            return (
-              <option key={optionValue} value={optionValue}>
-                {optionLabel}
-              </option>
-            );
-          })}
-        </select>
-
-        {showOther ? (
-          <input
-            className="cip-field-input"
-            type="text"
-            value={otherValue}
-            placeholder="Enter custom value"
-            onChange={(e) =>
-              updateField(section.id, otherFieldKey, e.target.value)
-            }
-          />
-        ) : null}
-      </div>
-    );
-  };
-
-  const renderBooleanField = (section, field) => {
-    const value = !!formState?.[section.id]?.[field.id];
-
-    return (
-      <button
-        type="button"
-        className={`cip-boolean-toggle ${value ? 'is-on' : 'is-off'}`}
-        onClick={() => updateField(section.id, field.id, !value)}
+      <select
+        className="cip-field-select"
+        value={fieldValue}
+        onChange={(e) => updateField(section.id, field.id, e.target.value)}
       >
-        <span className="cip-boolean-toggle-track">
-          <span className="cip-boolean-toggle-knob" />
-        </span>
-        <span className="cip-boolean-toggle-label">{value ? 'Yes' : 'No'}</span>
-      </button>
-    );
-  };
-
-  const renderScaleField = (section, field) => {
-    const value = Number(formState?.[section.id]?.[field.id] || 0);
-
-    return (
-      <div className="cip-scale-group">
+        <option value="">Select…</option>
         {(field.options || []).map((option) => {
           const optionValue =
-            typeof option === 'number' ? option : Number(option.value);
+            typeof option === 'string' ? option : option.value || '';
           const optionLabel =
             typeof option === 'string'
               ? option
-              : option.label || String(option.value);
+              : option.label || option.value || '';
 
           return (
-            <button
-              key={`${field.id}-${optionValue}`}
-              type="button"
-              className={`cip-scale-pill ${value === optionValue ? 'is-active' : ''}`}
-              onClick={() => updateField(section.id, field.id, optionValue)}
-            >
+            <option key={optionValue} value={optionValue}>
               {optionLabel}
-            </button>
+            </option>
           );
         })}
-      </div>
+      </select>
     );
   };
 
   const renderMultiSelectField = (section, field) => {
     const selected = ensureArray(formState?.[section.id]?.[field.id]);
-    const otherFieldKey = `${field.id}Other`;
-    const otherValue = formState?.[section.id]?.[otherFieldKey] ?? '';
-    const showOther = field.allowOther && selected.includes('Other');
 
     const toggleValue = (optionValue) => {
       const alreadySelected = selected.includes(optionValue);
@@ -233,39 +156,27 @@ function ConsultationIntakePanel({
     };
 
     return (
-      <div className="cip-field-stack">
-        <div className="cip-chip-group">
-          {(field.options || []).map((option) => {
-            const optionValue =
-              typeof option === 'string' ? option : option.value || '';
-            const optionLabel =
-              typeof option === 'string' ? option : option.label || option.value || '';
-            const isActive = selected.includes(optionValue);
+      <div className="cip-chip-group">
+        {(field.options || []).map((option) => {
+          const optionValue =
+            typeof option === 'string' ? option : option.value || '';
+          const optionLabel =
+            typeof option === 'string'
+              ? option
+              : option.label || option.value || '';
+          const isActive = selected.includes(optionValue);
 
-            return (
-              <button
-                key={`${field.id}-${optionValue}`}
-                type="button"
-                className={`cip-chip ${isActive ? 'is-active' : ''}`}
-                onClick={() => toggleValue(optionValue)}
-              >
-                {optionLabel}
-              </button>
-            );
-          })}
-        </div>
-
-        {showOther ? (
-          <input
-            className="cip-field-input"
-            type="text"
-            value={otherValue}
-            placeholder="Add custom entry"
-            onChange={(e) =>
-              updateField(section.id, otherFieldKey, e.target.value)
-            }
-          />
-        ) : null}
+          return (
+            <button
+              key={`${field.id}-${optionValue}`}
+              type="button"
+              className={`cip-chip ${isActive ? 'is-active' : ''}`}
+              onClick={() => toggleValue(optionValue)}
+            >
+              {optionLabel}
+            </button>
+          );
+        })}
       </div>
     );
   };
@@ -287,106 +198,59 @@ function ConsultationIntakePanel({
       case 'multiSelect':
         return renderMultiSelectField(section, field);
 
-      case 'boolean':
-        return renderBooleanField(section, field);
-
-      case 'scale':
-        return renderScaleField(section, field);
-
       default:
         return renderTextLikeField(section, field, false);
     }
   };
 
+  const section = CONSULTATION_INTAKE_SECTIONS[0];
+
+  if (!section) return null;
+
   return (
     <div className="cip-shell">
       <div className="cip-header">
         <div className="cip-header-copy">
-          <div className="cip-kicker">Admin Only</div>
+          <div className="cip-kicker">Private Questionnaire</div>
           <h3 className="cip-title">{title}</h3>
           <p className="cip-subtitle">{subtitle}</p>
         </div>
 
-        <div className="cip-header-actions">
-          {typeof onCancel === 'function' ? (
-            <button
-              type="button"
-              className="cip-btn cip-btn--ghost"
-              onClick={onCancel}
-              disabled={isSaving}
-            >
-              Cancel
-            </button>
-          ) : null}
-
-          <button
-            type="button"
-            className="cip-btn cip-btn--primary"
-            onClick={handleSave}
-            disabled={isSaving}
-          >
-            {isSaving ? 'Saving…' : 'Save Intake'}
-          </button>
+        <div className="cip-header-meta">
+          {completion.completedCount}/{completion.totalCount}
         </div>
       </div>
 
-      <div className="cip-sections">
-        {CONSULTATION_INTAKE_SECTIONS.map((section) => {
-          const isExpanded = !!expandedSections[section.id];
-          const completion = sectionCompletion?.[section.id] || {
-            completedCount: 0,
-            totalCount: 0,
-          };
+      <div className="cip-section-card">
+        <div className="cip-section-body">
+          <div className="cip-fields-grid">
+            {section.fields.map((field) => {
+              const isWide =
+                field.type === 'textarea' || field.type === 'multiSelect';
 
-          return (
-            <div key={section.id} className="cip-section-card">
-              <button
-                type="button"
-                className="cip-section-header"
-                onClick={() => toggleSection(section.id)}
-              >
-                <div className="cip-section-header-left">
-                  <div className="cip-section-title-row">
-                    <div className="cip-section-title">{section.title}</div>
-                    <div className="cip-section-count">
-                      {completion.completedCount}/{completion.totalCount}
-                    </div>
-                  </div>
-                  <div className="cip-section-description">
-                    {section.description}
-                  </div>
+              return (
+                <div
+                  key={field.id}
+                  className={`cip-field-card ${isWide ? 'cip-field-card--wide' : ''}`}
+                >
+                  <label className="cip-field-label">{field.label}</label>
+                  {renderField(section, field)}
                 </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
 
-                <div className={`cip-section-chevron ${isExpanded ? 'is-open' : ''}`}>
-                  ▾
-                </div>
-              </button>
-
-              {isExpanded ? (
-                <div className="cip-section-body">
-                  <div className="cip-fields-grid">
-                    {section.fields.map((field) => {
-                      const isWide =
-                        field.type === 'textarea' ||
-                        field.type === 'multiSelect' ||
-                        field.type === 'scale';
-
-                      return (
-                        <div
-                          key={field.id}
-                          className={`cip-field-card ${isWide ? 'cip-field-card--wide' : ''}`}
-                        >
-                          <label className="cip-field-label">{field.label}</label>
-                          {renderField(section, field)}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              ) : null}
-            </div>
-          );
-        })}
+      <div className="cip-footer">
+        <button
+          type="button"
+          className="cip-btn cip-btn--ghost"
+          onClick={handleSave}
+          disabled={isSaving}
+        >
+          {isSaving ? 'Saving…' : 'Save Progress'}
+        </button>
       </div>
     </div>
   );

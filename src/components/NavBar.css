@@ -345,7 +345,8 @@ body.dark .navbar-sticky-mini {
   margin-bottom: 16px;
   margin-left: 10px;
   width: auto;
-  display: block;
+   display: block;
+  transform: translateY(-5px);
   object-fit: contain;
   vertical-align: middle;
   padding: 0;
