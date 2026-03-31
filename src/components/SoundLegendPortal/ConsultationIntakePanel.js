@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   CONSULTATION_INTAKE_SECTIONS,
   buildConsultationIntakeDefaults,
@@ -31,7 +31,7 @@ function ConsultationIntakePanel({
   isSaving = false,
   readOnly = false,
   title = 'SoundLegend Questionnaire',
-  subtitle = 'This does not lock anything in. It simply gives Dan a clearer starting point before your consultation.',
+  subtitle = 'This does not lock anything in. It simply gives us a clearer starting point before your consultation.',
 }) {
   const [formState, setFormState] = useState(() =>
     normalizeIncomingIntake(value)
@@ -61,27 +61,6 @@ function ConsultationIntakePanel({
       onChange(formState);
     }
   }, [formState, onChange]);
-
-  const completion = useMemo(() => {
-    const section = CONSULTATION_INTAKE_SECTIONS[0];
-    if (!section) return { completedCount: 0, totalCount: 0 };
-
-    const fields = Array.isArray(section.fields) ? section.fields : [];
-    const completedCount = fields.filter((field) => {
-      const val = formState?.[section.id]?.[field.id];
-
-      if (field.type === 'multiSelect') {
-        return Array.isArray(val) && val.length > 0;
-      }
-
-      return String(val ?? '').trim() !== '';
-    }).length;
-
-    return {
-      completedCount,
-      totalCount: fields.length,
-    };
-  }, [formState]);
 
   const updateField = (sectionId, fieldId, nextValue) => {
     if (readOnly) return;
@@ -189,6 +168,7 @@ function ConsultationIntakePanel({
               }`}
               onClick={() => toggleValue(optionValue)}
               disabled={readOnly}
+              aria-pressed={isActive}
             >
               {optionLabel}
             </button>
@@ -234,16 +214,12 @@ function ConsultationIntakePanel({
           <h3 className="cip-title">{title}</h3>
           <p className="cip-subtitle">{subtitle}</p>
         </div>
-
-        <div className="cip-header-meta">
-          {completion.completedCount}/{completion.totalCount}
-        </div>
       </div>
 
       <div className="cip-section-card">
         <div className="cip-section-body">
-          <div className="cip-fields-grid">
-            {section.fields.map((field) => {
+          <div className="cip-fields-stack">
+            {section.fields.map((field, index) => {
               const isWide =
                 field.type === 'textarea' || field.type === 'multiSelect';
 
@@ -254,8 +230,21 @@ function ConsultationIntakePanel({
                     isWide ? 'cip-field-card--wide' : ''
                   }`}
                 >
+                  <div className="cip-field-card-topline">
+                    <div className="cip-field-step">
+                      Question {index + 1}
+                    </div>
+                  </div>
+
                   <label className="cip-field-label">{field.label}</label>
-                  {renderField(section, field)}
+
+                  {field.placeholder ? (
+                    <div className="cip-field-helper">{field.placeholder}</div>
+                  ) : null}
+
+                  <div className="cip-field-control">
+                    {renderField(section, field)}
+                  </div>
                 </div>
               );
             })}
