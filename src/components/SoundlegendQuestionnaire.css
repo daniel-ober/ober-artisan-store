@@ -1,0 +1,1024 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+  --slq-bg: #05070b;
+  --slq-bg-soft: #0a0d14;
+  --slq-panel: rgba(10, 13, 19, 0.88);
+  --slq-panel-alt: rgba(15, 18, 25, 0.94);
+  --slq-panel-soft: rgba(255, 255, 255, 0.03);
+  --slq-border: rgba(255, 255, 255, 0.08);
+  --slq-border-strong: rgba(255, 255, 255, 0.12);
+  --slq-gold: #d6ae52;
+  --slq-gold-soft: rgba(214, 174, 82, 0.18);
+  --slq-gold-line: rgba(214, 174, 82, 0.28);
+  --slq-text: #f3efe8;
+  --slq-muted: rgba(232, 229, 222, 0.74);
+  --slq-muted-soft: rgba(232, 229, 222, 0.52);
+  --slq-danger: #ffb1b1;
+  --slq-danger-bg: rgba(255, 90, 90, 0.08);
+  --slq-shadow: 0 28px 70px rgba(0, 0, 0, 0.42);
+  --slq-radius-xl: 26px;
+  --slq-radius-lg: 18px;
+  --slq-radius-md: 12px;
+  --slq-radius-sm: 10px;
+}
+
+.slq-page,
+.slq-page * {
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.slq-page {
+  min-height: 100vh;
+  padding: 118px 24px 72px;
+  color: var(--slq-text);
+  background:
+    radial-gradient(circle at top center, rgba(214, 174, 82, 0.06), transparent 18%),
+    radial-gradient(circle at 15% 0%, rgba(36, 48, 82, 0.22), transparent 26%),
+    linear-gradient(180deg, #04060a 0%, #070911 38%, #05070b 100%);
+}
+
+.slq-shell {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.slq-hero {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 22px;
+  padding: 34px 30px 28px;
+  border-radius: var(--slq-radius-xl);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.015)),
+    linear-gradient(180deg, rgba(14, 17, 24, 0.96), rgba(9, 12, 18, 0.98));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: var(--slq-shadow);
+}
+
+.slq-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, transparent 0%, rgba(214, 174, 82, 0.05) 45%, transparent 100%);
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.slq-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.02);
+}
+
+.slq-hero--compact {
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.slq-kicker {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  margin: 0 0 12px;
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.slq-kicker--gold {
+  color: rgba(220, 185, 98, 0.98);
+}
+
+.slq-title {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 14px;
+  font-size: clamp(2.15rem, 1.7rem + 1.5vw, 3.5rem);
+  line-height: 0.98;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  color: var(--slq-text);
+  max-width: 900px;
+}
+
+.slq-lede {
+  max-width: 880px;
+}
+
+.slq-muted {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 10px;
+  font-size: 1rem;
+  line-height: 1.72;
+  color: var(--slq-muted);
+}
+
+.slq-submeta {
+  position: relative;
+  z-index: 1;
+  margin: 10px 0 0;
+  font-size: 0.92rem;
+  color: var(--slq-muted-soft);
+}
+
+.slq-status {
+  margin-bottom: 18px;
+  border-radius: var(--slq-radius-lg);
+  padding: 15px 18px;
+  border: 1px solid var(--slq-border);
+  background: linear-gradient(180deg, rgba(15, 18, 25, 0.95), rgba(11, 14, 20, 0.98));
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.24);
+}
+
+.slq-status--error {
+  color: var(--slq-danger);
+  border-color: rgba(255, 120, 120, 0.18);
+  background:
+    linear-gradient(180deg, var(--slq-danger-bg), rgba(255, 255, 255, 0.02)),
+    linear-gradient(180deg, rgba(15, 18, 25, 0.95), rgba(11, 14, 20, 0.98));
+  font-weight: 700;
+}
+
+.slq-panel-wrap {
+  margin-bottom: 22px;
+}
+
+/* Main intake panel wrapper */
+.slq-page .cip-panel,
+.slq-page .consultation-intake-panel,
+.slq-page [data-component='ConsultationIntakePanel'] {
+  background:
+    linear-gradient(180deg, rgba(12, 15, 22, 0.96), rgba(8, 11, 17, 0.985)) !important;
+  border: 1px solid var(--slq-border) !important;
+  border-radius: var(--slq-radius-xl) !important;
+  overflow: hidden;
+  box-shadow: var(--slq-shadow);
+}
+
+/* Header area inside intake panel */
+.slq-page .cip-header,
+.slq-page .consultation-intake-panel__header,
+.slq-page [data-component='ConsultationIntakePanel'] .cip-header {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0)),
+    linear-gradient(180deg, rgba(14, 17, 24, 0.98), rgba(12, 15, 21, 0.98)) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Body spacing */
+.slq-page .cip-body,
+.slq-page .consultation-intake-panel__body,
+.slq-page [data-component='ConsultationIntakePanel'] .cip-body {
+  padding: 26px 28px 30px !important;
+}
+
+/* Section titles / labels */
+.slq-page h2,
+.slq-page h3,
+.slq-page h4,
+.slq-page label,
+.slq-page .cip-title,
+.slq-page .cip-subtitle,
+.slq-page .cip-section-title,
+.slq-page .cip-field-label {
+  color: var(--slq-text);
+}
+
+.slq-page .cip-title,
+.slq-page [data-component='ConsultationIntakePanel'] .cip-title {
+  font-size: 1.5rem !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px !important;
+}
+
+.slq-page .cip-subtitle,
+.slq-page [data-component='ConsultationIntakePanel'] .cip-subtitle {
+  color: var(--slq-muted) !important;
+  font-size: 0.98rem !important;
+  line-height: 1.6 !important;
+  margin-bottom: 18px !important;
+}
+
+.slq-page .cip-field-label,
+.slq-page label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.98rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: rgba(245, 240, 232, 0.92);
+}
+
+/* Progress / step count */
+.slq-page .cip-progress,
+.slq-page .cip-progress-text,
+.slq-page .cip-step-counter {
+  color: var(--slq-muted-soft) !important;
+  font-size: 0.92rem !important;
+  font-weight: 600;
+}
+
+/* Generic vertical spacing */
+.slq-page .cip-field,
+.slq-page .consultation-intake-field,
+.slq-page [data-component='ConsultationIntakePanel'] .cip-field {
+  margin-bottom: 18px !important;
+}
+
+/* Inputs */
+.slq-page input[type='text'],
+.slq-page input[type='email'],
+.slq-page input[type='tel'],
+.slq-page input[type='number'],
+.slq-page input[type='date'],
+.slq-page select,
+.slq-page textarea {
+  width: 100%;
+  background: linear-gradient(180deg, rgba(8, 11, 16, 0.98), rgba(10, 13, 19, 0.98));
+  color: #f6f1e9;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 11px;
+  min-height: 48px;
+  padding: 12px 14px;
+  font-size: 0.98rem;
+  line-height: 1.45;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.slq-page textarea {
+  min-height: 124px;
+  resize: vertical;
+}
+
+.slq-page input::placeholder,
+.slq-page textarea::placeholder {
+  color: rgba(255, 255, 255, 0.32);
+}
+
+.slq-page select {
+  appearance: none;
+}
+
+.slq-page input:focus,
+.slq-page select:focus,
+.slq-page textarea:focus {
+  outline: none;
+  border-color: rgba(214, 174, 82, 0.42);
+  box-shadow:
+    0 0 0 3px rgba(214, 174, 82, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  background: linear-gradient(180deg, rgba(9, 12, 17, 1), rgba(12, 15, 21, 1));
+}
+
+/* Helper text */
+.slq-page .cip-helper,
+.slq-page .cip-hint,
+.slq-page .field-help,
+.slq-page small {
+  color: var(--slq-muted-soft) !important;
+  font-size: 0.88rem !important;
+  line-height: 1.5;
+}
+
+/* Make option groups feel less like pills and more like tactile selectors */
+.slq-page .chip-group,
+.slq-page .option-group,
+.slq-page .selection-group,
+.slq-page .tag-group,
+.slq-page [role='group'] {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Generic option buttons/chips */
+.slq-page .chip,
+.slq-page .option-chip,
+.slq-page .selection-chip,
+.slq-page .tag-option,
+.slq-page [aria-pressed],
+.slq-page .cip-option,
+.slq-page .cip-tag {
+  appearance: none;
+  min-height: 40px;
+  padding: 9px 13px;
+  border-radius: 9px !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  background:
+    linear-gradient(180deg, rgba(19, 23, 31, 0.98), rgba(13, 16, 23, 0.98)) !important;
+  color: rgba(244, 239, 231, 0.9) !important;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.2;
+  box-shadow: none !important;
+  transition:
+    transform 0.14s ease,
+    border-color 0.18s ease,
+    background 0.18s ease,
+    color 0.18s ease;
+}
+
+/* Hover */
+.slq-page .chip:hover,
+.slq-page .option-chip:hover,
+.slq-page .selection-chip:hover,
+.slq-page .tag-option:hover,
+.slq-page [aria-pressed]:hover,
+.slq-page .cip-option:hover,
+.slq-page .cip-tag:hover {
+  transform: translateY(-1px);
+  border-color: rgba(214, 174, 82, 0.24) !important;
+  background:
+    linear-gradient(180deg, rgba(23, 27, 36, 1), rgba(15, 18, 26, 1)) !important;
+}
+
+/* Selected state */
+.slq-page .chip.is-selected,
+.slq-page .option-chip.is-selected,
+.slq-page .selection-chip.is-selected,
+.slq-page .tag-option.is-selected,
+.slq-page .cip-option.is-selected,
+.slq-page .cip-tag.is-selected,
+.slq-page [aria-pressed='true'] {
+  border-color: rgba(214, 174, 82, 0.4) !important;
+  background:
+    linear-gradient(180deg, rgba(53, 43, 18, 0.88), rgba(28, 23, 11, 0.96)) !important;
+  color: #fff5dd !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 8px 16px rgba(0, 0, 0, 0.22) !important;
+}
+
+/* Any obvious white default button styles inside panel */
+.slq-page .cip-panel button:not(.slq-btn),
+.slq-page [data-component='ConsultationIntakePanel'] button:not(.slq-btn) {
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Divider feel inside panel */
+.slq-page hr,
+.slq-page .cip-divider,
+.slq-page .consultation-intake-divider {
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  margin: 20px 0;
+}
+
+/* Footer bar */
+.slq-footerbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 8px 4px 4px;
+}
+
+.slq-token {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+
+.slq-token-label {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.42);
+}
+
+.slq-token-value {
+  font-size: 13px;
+  color: var(--slq-muted-soft);
+  word-break: break-word;
+}
+
+.slq-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.slq-btn {
+  appearance: none;
+  min-height: 46px;
+  border-radius: 999px;
+  padding: 0 20px;
+  font-size: 13px;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition:
+    transform 0.16s ease,
+    box-shadow 0.16s ease,
+    opacity 0.16s ease,
+    filter 0.16s ease,
+    background 0.16s ease;
+}
+
+.slq-btn:hover {
+  transform: translateY(-1px);
+}
+
+.slq-btn:disabled {
+  opacity: 0.72;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.slq-btn--ghost {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: linear-gradient(180deg, rgba(22, 25, 33, 0.9), rgba(14, 17, 24, 0.94));
+  color: #f4efe6;
+}
+
+.slq-btn--ghost:hover {
+  background: linear-gradient(180deg, rgba(26, 30, 39, 0.96), rgba(16, 19, 27, 0.98));
+}
+
+.slq-btn--primary {
+  border: 1px solid rgba(214, 174, 82, 0.24);
+  background: linear-gradient(180deg, #d8b158 0%, #c79d3a 100%);
+  color: #15110a;
+  box-shadow:
+    0 12px 28px rgba(173, 131, 38, 0.22),
+    inset 0 1px 0 rgba(255, 248, 222, 0.34);
+}
+
+.slq-btn--primary:hover {
+  filter: brightness(1.015);
+  box-shadow:
+    0 16px 34px rgba(173, 131, 38, 0.28),
+    inset 0 1px 0 rgba(255, 248, 222, 0.34);
+}
+
+/* Better spacing on any accidental dense rows */
+.slq-page .cip-row,
+.slq-page .consultation-intake-row {
+  gap: 14px !important;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .slq-page {
+    padding: 106px 18px 58px;
+  }
+
+  .slq-hero {
+    padding: 28px 22px 24px;
+  }
+
+  .slq-page .cip-body,
+  .slq-page .consultation-intake-panel__body,
+  .slq-page [data-component='ConsultationIntakePanel'] .cip-body {
+    padding: 22px 20px 24px !important;
+  }
+
+  .slq-footerbar {
+    align-items: stretch;
+  }
+}
+
+@media (max-width: 640px) {
+  .slq-page {
+    padding: 94px 14px 48px;
+  }
+
+  .slq-hero {
+    padding: 22px 16px 18px;
+    border-radius: 20px;
+  }
+
+  .slq-title {
+    font-size: 2rem;
+    line-height: 1.02;
+  }
+
+  .slq-muted {
+    font-size: 0.96rem;
+    line-height: 1.65;
+  }
+
+  .slq-page .cip-body,
+  .slq-page .consultation-intake-panel__body,
+  .slq-page [data-component='ConsultationIntakePanel'] .cip-body {
+    padding: 18px 14px 20px !important;
+  }
+
+  .slq-page .chip,
+  .slq-page .option-chip,
+  .slq-page .selection-chip,
+  .slq-page .tag-option,
+  .slq-page [aria-pressed],
+  .slq-page .cip-option,
+  .slq-page .cip-tag {
+    min-height: 38px;
+    padding: 8px 11px;
+    font-size: 0.84rem;
+  }
+
+  .slq-footerbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .slq-actions {
+    width: 100%;
+  }
+
+  .slq-actions .slq-btn {
+    flex: 1 1 auto;
+    text-align: center;
+    justify-content: center;
+  }
+}
+
+/* =========================================
+   FORCE DARK OBER-STYLE OPTION SELECTORS
+   Add this at the VERY BOTTOM of
+   SoundlegendQuestionnaire.css
+   ========================================= */
+
+.slq-page .cip-panel button,
+.slq-page .consultation-intake-panel button,
+.slq-page [data-component='ConsultationIntakePanel'] button {
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+/* kill white/native button styles */
+.slq-page .cip-panel button:not(.slq-btn),
+.slq-page .consultation-intake-panel button:not(.slq-btn),
+.slq-page [data-component='ConsultationIntakePanel'] button:not(.slq-btn),
+.slq-page .cip-panel [role='button'],
+.slq-page .consultation-intake-panel [role='button'],
+.slq-page [data-component='ConsultationIntakePanel'] [role='button'] {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  background: linear-gradient(
+    180deg,
+    rgba(18, 22, 30, 0.98),
+    rgba(10, 13, 19, 0.98)
+  ) !important;
+  color: rgba(245, 239, 228, 0.92) !important;
+  border: 1px solid rgba(255, 255, 255, 0.11) !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+/* specific chip/selectors */
+.slq-page .cip-option,
+.slq-page .cip-tag,
+.slq-page .chip,
+.slq-page .option-chip,
+.slq-page .selection-chip,
+.slq-page .tag-option,
+.slq-page [aria-pressed],
+.slq-page button[aria-pressed],
+.slq-page .cip-panel button[type='button']:not(.slq-btn),
+.slq-page .consultation-intake-panel button[type='button']:not(.slq-btn),
+.slq-page [data-component='ConsultationIntakePanel'] button[type='button']:not(.slq-btn) {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 34px !important;
+  padding: 5px 10px !important;
+  margin: 0 !important;
+  background: linear-gradient(
+    180deg,
+    rgba(18, 22, 30, 0.98),
+    rgba(11, 14, 20, 0.98)
+  ) !important;
+  color: rgba(243, 238, 230, 0.9) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 7px !important;
+  box-shadow: none !important;
+  font-size: 0.84rem !important;
+  font-weight: 500 !important;
+  line-height: 1.2 !important;
+  white-space: nowrap !important;
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease,
+    transform 0.18s ease !important;
+}
+
+/* hover */
+.slq-page .cip-option:hover,
+.slq-page .cip-tag:hover,
+.slq-page .chip:hover,
+.slq-page .option-chip:hover,
+.slq-page .selection-chip:hover,
+.slq-page .tag-option:hover,
+.slq-page [aria-pressed]:hover,
+.slq-page button[aria-pressed]:hover,
+.slq-page .cip-panel button[type='button']:not(.slq-btn):hover,
+.slq-page .consultation-intake-panel button[type='button']:not(.slq-btn):hover,
+.slq-page [data-component='ConsultationIntakePanel'] button[type='button']:not(.slq-btn):hover {
+  background: linear-gradient(
+    180deg,
+    rgba(24, 29, 38, 1),
+    rgba(14, 18, 25, 1)
+  ) !important;
+  border-color: rgba(214, 174, 82, 0.26) !important;
+  color: #fff5e1 !important;
+  transform: translateY(-1px) !important;
+}
+
+/* selected state */
+.slq-page .cip-option.is-selected,
+.slq-page .cip-tag.is-selected,
+.slq-page .chip.is-selected,
+.slq-page .option-chip.is-selected,
+.slq-page .selection-chip.is-selected,
+.slq-page .tag-option.is-selected,
+.slq-page [aria-pressed='true'],
+.slq-page button[aria-pressed='true'],
+.slq-page .cip-panel button[type='button'][aria-pressed='true']:not(.slq-btn),
+.slq-page .consultation-intake-panel button[type='button'][aria-pressed='true']:not(.slq-btn),
+.slq-page [data-component='ConsultationIntakePanel'] button[type='button'][aria-pressed='true']:not(.slq-btn) {
+  background: linear-gradient(
+    180deg,
+    rgba(66, 52, 20, 0.96),
+    rgba(35, 28, 12, 0.98)
+  ) !important;
+  border-color: rgba(214, 174, 82, 0.46) !important;
+  color: #fff1cb !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 8px 16px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* tighten selector rows so they look intentional */
+.slq-page .chip-group,
+.slq-page .option-group,
+.slq-page .selection-group,
+.slq-page .tag-group,
+.slq-page .cip-options,
+.slq-page .cip-tag-row,
+.slq-page [role='group'] {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 6px !important;
+  align-items: flex-start !important;
+}
+
+/* remove bright/light wrappers around option rows if present */
+.slq-page .cip-options,
+.slq-page .cip-tag-row,
+.slq-page .chip-group,
+.slq-page .option-group,
+.slq-page .selection-group,
+.slq-page .tag-group {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+/* selects */
+.slq-page select {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  background:
+    linear-gradient(180deg, rgba(8, 11, 16, 0.98), rgba(10, 13, 19, 0.98))
+    !important;
+  color: #f6f1e9 !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: none !important;
+}
+
+/* dropdown option list */
+.slq-page select option {
+  background: #0d1016 !important;
+  color: #f3efe8 !important;
+}
+
+/* if any fieldset wrappers are showing up bright */
+.slq-page fieldset {
+  border: 0 !important;
+  padding: 0 !important;
+  margin: 0 0 14px !important;
+  min-width: 0 !important;
+}
+
+.slq-page legend {
+  padding: 0 !important;
+  margin: 0 0 8px !important;
+  color: rgba(245, 240, 232, 0.92) !important;
+  font-size: 0.98rem !important;
+  font-weight: 600 !important;
+}
+
+/* mobile */
+@media (max-width: 640px) {
+  .slq-page .cip-option,
+  .slq-page .cip-tag,
+  .slq-page .chip,
+  .slq-page .option-chip,
+  .slq-page .selection-chip,
+  .slq-page .tag-option,
+  .slq-page [aria-pressed],
+  .slq-page button[aria-pressed],
+  .slq-page .cip-panel button[type='button']:not(.slq-btn),
+  .slq-page .consultation-intake-panel button[type='button']:not(.slq-btn),
+  .slq-page [data-component='ConsultationIntakePanel'] button[type='button']:not(.slq-btn) {
+    min-height: 32px !important;
+    padding: 5px 9px !important;
+    font-size: 0.79rem !important;
+  }
+}
+
+
+/* =========================================
+   REAL FIX: label-based checkbox/radio chips
+   ========================================= */
+
+/* chip rows */
+.slq-page fieldset,
+.slq-page .cip-options,
+.slq-page .cip-tag-row,
+.slq-page .chip-group,
+.slq-page .option-group,
+.slq-page .selection-group,
+.slq-page .tag-group,
+.slq-page [role='group'] {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 6px !important;
+  align-items: flex-start !important;
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  margin-top: 6px !important;
+  box-shadow: none !important;
+}
+
+/* the ugly white boxes are likely labels */
+.slq-page fieldset label,
+.slq-page .cip-options label,
+.slq-page .cip-tag-row label,
+.slq-page .chip-group label,
+.slq-page .option-group label,
+.slq-page .selection-group label,
+.slq-page .tag-group label,
+.slq-page [role='group'] label {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 34px !important;
+  padding: 6px 10px !important;
+  margin: 0 !important;
+  border-radius: 7px !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background: linear-gradient(
+    180deg,
+    rgba(18, 22, 30, 0.98),
+    rgba(11, 14, 20, 0.98)
+  ) !important;
+  color: rgba(243, 238, 230, 0.9) !important;
+  font-size: 0.82rem !important;
+  font-weight: 500 !important;
+  line-height: 1.15 !important;
+  letter-spacing: 0 !important;
+  white-space: nowrap !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  cursor: pointer !important;
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease,
+    transform 0.18s ease !important;
+}
+
+/* hover */
+.slq-page fieldset label:hover,
+.slq-page .cip-options label:hover,
+.slq-page .cip-tag-row label:hover,
+.slq-page .chip-group label:hover,
+.slq-page .option-group label:hover,
+.slq-page .selection-group label:hover,
+.slq-page .tag-group label:hover,
+.slq-page [role='group'] label:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(24, 29, 38, 1),
+    rgba(14, 18, 25, 1)
+  ) !important;
+  border-color: rgba(214, 174, 82, 0.24) !important;
+  color: #fff5e1 !important;
+  transform: translateY(-1px) !important;
+}
+
+/* hide native checkbox/radio visuals inside chips */
+.slq-page fieldset label input[type='checkbox'],
+.slq-page fieldset label input[type='radio'],
+.slq-page .cip-options label input[type='checkbox'],
+.slq-page .cip-options label input[type='radio'],
+.slq-page .cip-tag-row label input[type='checkbox'],
+.slq-page .cip-tag-row label input[type='radio'],
+.slq-page .chip-group label input[type='checkbox'],
+.slq-page .chip-group label input[type='radio'],
+.slq-page .option-group label input[type='checkbox'],
+.slq-page .option-group label input[type='radio'],
+.slq-page .selection-group label input[type='checkbox'],
+.slq-page .selection-group label input[type='radio'],
+.slq-page .tag-group label input[type='checkbox'],
+.slq-page .tag-group label input[type='radio'],
+.slq-page [role='group'] label input[type='checkbox'],
+.slq-page [role='group'] label input[type='radio'] {
+  position: absolute !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+}
+
+/* selected chip state */
+.slq-page fieldset label:has(input:checked),
+.slq-page .cip-options label:has(input:checked),
+.slq-page .cip-tag-row label:has(input:checked),
+.slq-page .chip-group label:has(input:checked),
+.slq-page .option-group label:has(input:checked),
+.slq-page .selection-group label:has(input:checked),
+.slq-page .tag-group label:has(input:checked),
+.slq-page [role='group'] label:has(input:checked) {
+  background: linear-gradient(
+    180deg,
+    rgba(66, 52, 20, 0.96),
+    rgba(35, 28, 12, 0.98)
+  ) !important;
+  border-color: rgba(214, 174, 82, 0.46) !important;
+  color: #fff1cb !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 8px 16px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* keyboard focus */
+.slq-page fieldset label:has(input:focus-visible),
+.slq-page .cip-options label:has(input:focus-visible),
+.slq-page .cip-tag-row label:has(input:focus-visible),
+.slq-page .chip-group label:has(input:focus-visible),
+.slq-page .option-group label:has(input:focus-visible),
+.slq-page .selection-group label:has(input:focus-visible),
+.slq-page .tag-group label:has(input:focus-visible),
+.slq-page [role='group'] label:has(input:focus-visible) {
+  outline: none !important;
+  border-color: rgba(214, 174, 82, 0.42) !important;
+  box-shadow:
+    0 0 0 3px rgba(214, 174, 82, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+}
+
+/* cleanup any leftover light backgrounds inside chip rows */
+.slq-page fieldset *,
+.slq-page .cip-options *,
+.slq-page .cip-tag-row *,
+.slq-page .chip-group *,
+.slq-page .option-group *,
+.slq-page .selection-group *,
+.slq-page .tag-group *,
+.slq-page [role='group'] * {
+  text-shadow: none !important;
+}
+
+/* mobile */
+@media (max-width: 640px) {
+  .slq-page fieldset label,
+  .slq-page .cip-options label,
+  .slq-page .cip-tag-row label,
+  .slq-page .chip-group label,
+  .slq-page .option-group label,
+  .slq-page .selection-group label,
+  .slq-page .tag-group label,
+  .slq-page [role='group'] label {
+    min-height: 32px !important;
+    padding: 5px 9px !important;
+    font-size: 0.78rem !important;
+  }
+}
+
+/* =========================================
+   ACTUAL FIX FOR ConsultationIntakePanel chips
+   based on inspected classes:
+   div.cip-chip-group
+   button.cip-chip
+   ========================================= */
+
+.slq-page .cip-chip-group {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 6px !important;
+  align-items: flex-start !important;
+  margin-top: 6px !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.slq-page .cip-chip-group .cip-chip {
+  all: unset;
+  box-sizing: border-box !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 34px !important;
+  padding: 6px 10px !important;
+  border-radius: 7px !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background: linear-gradient(
+    180deg,
+    rgba(18, 22, 30, 0.98),
+    rgba(11, 14, 20, 0.98)
+  ) !important;
+  color: rgba(243, 238, 230, 0.92) !important;
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 0.82rem !important;
+  font-weight: 500 !important;
+  line-height: 1.15 !important;
+  letter-spacing: 0 !important;
+  white-space: nowrap !important;
+  cursor: pointer !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease,
+    transform 0.18s ease,
+    box-shadow 0.18s ease !important;
+}
+
+.slq-page .cip-chip-group .cip-chip:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(24, 29, 38, 1),
+    rgba(14, 18, 25, 1)
+  ) !important;
+  border-color: rgba(214, 174, 82, 0.24) !important;
+  color: #fff5e1 !important;
+  transform: translateY(-1px) !important;
+}
+
+/* selected / active states */
+.slq-page .cip-chip-group .cip-chip.is-selected,
+.slq-page .cip-chip-group .cip-chip.is-active,
+.slq-page .cip-chip-group .cip-chip.active,
+.slq-page .cip-chip-group .cip-chip[aria-pressed='true'],
+.slq-page .cip-chip-group .cip-chip[data-selected='true'],
+.slq-page .cip-chip-group .cip-chip[data-active='true'] {
+  background: linear-gradient(
+    180deg,
+    rgba(66, 52, 20, 0.96),
+    rgba(35, 28, 12, 0.98)
+  ) !important;
+  border-color: rgba(214, 174, 82, 0.46) !important;
+  color: #fff1cb !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 8px 16px rgba(0, 0, 0, 0.2) !important;
+}
+
+.slq-page .cip-chip-group .cip-chip:focus-visible {
+  outline: none !important;
+  border-color: rgba(214, 174, 82, 0.42) !important;
+  box-shadow:
+    0 0 0 3px rgba(214, 174, 82, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+}
+
+@media (max-width: 640px) {
+  .slq-page .cip-chip-group .cip-chip {
+    min-height: 32px !important;
+    padding: 5px 9px !important;
+    font-size: 0.78rem !important;
+  }
+}

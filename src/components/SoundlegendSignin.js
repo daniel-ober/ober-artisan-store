@@ -80,9 +80,9 @@ const SoundlegendSignin = () => {
       const userDoc = await fetchUserDoc(user.uid);
       if (userDoc?.projects?.length > 0) {
         const firstProjectId = userDoc.projects[0].projectId;
-        navigate(`/legacy`);
+        navigate(`/projects/${firstProjectId}`);
       } else {
-        navigate('/legacy');
+        navigate('/projects');
       }
     } catch (err) {
       console.error('❌ Sign-in error:', err);
@@ -261,7 +261,6 @@ const SoundlegendSignin = () => {
           <li>Design approvals, mockups & progress media</li>
           <li>Personalized audio/video files</li>
           <li>Artisan notes & care documentation</li>
-          <li>Priority support & direct messaging</li>
         </ul>
         <p className="trust-note">
           Each drum ships with a secure NFC badge. Your private portal keeps

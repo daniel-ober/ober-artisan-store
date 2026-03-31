@@ -40,6 +40,70 @@ function tsToMillis(v) {
   }
 }
 
+const STORY_CHAPTER_KEYS = [
+  'discoveryDesign',
+  'commitmentPortal',
+  'woodVisionLockIn',
+  'rawShellCreation',
+  'shellTrueingTorchTune',
+  'exteriorArtFinish',
+  'edgesSnareBeds',
+  'hardwareAssembly',
+  'legacyTuningMedia',
+  'finalQAPackagingDelivery',
+];
+
+function isChecklistItemComplete(item) {
+  if (!item) return false;
+
+  const states = Array.isArray(item.checkpointStates)
+    ? item.checkpointStates
+    : null;
+
+  if (states && states.length > 0) return states.every(Boolean);
+  return !!item.completed;
+}
+
+function isChecklistItemTouched(item) {
+  if (!item) return false;
+  if (item.completed) return true;
+
+  const states = Array.isArray(item.checkpointStates)
+    ? item.checkpointStates
+    : null;
+
+  if (states && states.length > 0) return states.some(Boolean);
+  return (item.totalSeconds ?? 0) > 0;
+}
+
+/**
+ * Returns the currently active story chapter index:
+ * 0 = Chapter I, 1 = Chapter II, etc.
+ */
+function getProjectCurrentChapterIndex(project) {
+  if (!project) return 0;
+
+  for (let i = 0; i < STORY_CHAPTER_KEYS.length; i += 1) {
+    const key = STORY_CHAPTER_KEYS[i];
+    const checklist = Array.isArray(project?.[key]?.checklist)
+      ? project[key].checklist.filter(Boolean)
+      : [];
+
+    if (!checklist.length) {
+      return i;
+    }
+
+    const allComplete =
+      checklist.length > 0 && checklist.every(isChecklistItemComplete);
+
+    if (!allComplete) {
+      return i;
+    }
+  }
+
+  return STORY_CHAPTER_KEYS.length - 1;
+}
+
 /* -------------------- custom project picker -------------------- */
 
 const ProjectPicker = ({ projects, selectedId, onChange }) => {
@@ -51,9 +115,12 @@ const ProjectPicker = ({ projects, selectedId, onChange }) => {
     projects.find((p) => p.id === selectedId) || projects[0] || null;
 
   const labelFor = (p) => {
-    return (
-      p.lineSerial || p.globalSerial || p.artisanLine || p.id || 'Project'
-    );
+    const serial =
+      p.lineSerial || p.globalSerial || p.snareSerial || p.serial || '';
+    const line = p.artisanLine || p.series || 'Project';
+
+    if (serial) return `${serial} · ${line}`;
+    return `${line} · ${p.id?.slice(0, 6) || 'Project'}`;
   };
 
   const handleSelect = (id) => {
@@ -98,7 +165,7 @@ const ProjectPicker = ({ projects, selectedId, onChange }) => {
   );
 };
 
-/* -------------------- tabs w/ picker on the left -------------------- */
+/* -------------------- tabs -------------------- */
 
 const Tabs = ({
   tabs,
@@ -107,10 +174,8 @@ const Tabs = ({
   projects,
   selectedId,
   onSelectProject,
-  isSoundLegendProject,
+  showProjectPicker = true,
 }) => {
-  const slOnlyKeys = new Set(['vault', 'media']);
-
   return (
     <div className="slp-tabs-shell">
       <div className="slp-tabs-header">
@@ -122,11 +187,13 @@ const Tabs = ({
 
       <div className="slp-tabs">
         <div className="slp-tabs-left">
-          <ProjectPicker
-            projects={projects}
-            selectedId={selectedId}
-            onChange={onSelectProject}
-          />
+          {showProjectPicker ? (
+            <ProjectPicker
+              projects={projects}
+              selectedId={selectedId}
+              onChange={onSelectProject}
+            />
+          ) : null}
         </div>
 
         <div
@@ -135,15 +202,7 @@ const Tabs = ({
           aria-label="SoundLegend sections"
         >
           {tabs.map((t) => {
-            const isSlOnly = slOnlyKeys.has(t.key);
-            const disabled = isSlOnly && !isSoundLegendProject;
-
-            const tooltipText =
-              t.key === 'vault'
-                ? 'Vault preferences are part of the SoundLegend experience.'
-                : t.key === 'media'
-                  ? 'Legacy media is part of the SoundLegend experience.'
-                  : '';
+            const disabled = !!t.disabled;
 
             return (
               <button
@@ -164,8 +223,8 @@ const Tabs = ({
                 type="button"
               >
                 <span className="slp-tab-label">{t.label}</span>
-                {disabled && tooltipText ? (
-                  <span className="slp-tab-tooltip">{tooltipText}</span>
+                {disabled && t.tooltip ? (
+                  <span className="slp-tab-tooltip">{t.tooltip}</span>
                 ) : null}
               </button>
             );
@@ -383,6 +442,7 @@ const SoundLegendPortal = () => {
         }
 
         let snap = { empty: true, docs: [] };
+
         if (ownerUid) {
           const qByOwner = query(colRef, where('ownerUid', '==', ownerUid));
           snap = await getDocs(qByOwner);
@@ -391,6 +451,14 @@ const SoundLegendPortal = () => {
         if (snap.empty && ownerUid) {
           const qByUserId = query(colRef, where('userId', '==', ownerUid));
           snap = await getDocs(qByUserId);
+        }
+
+        if (snap.empty && ownerUid) {
+          const qByCustomerUserId = query(
+            colRef,
+            where('customerUserId', '==', ownerUid)
+          );
+          snap = await getDocs(qByCustomerUserId);
         }
 
         if (snap.empty && effectivePortalUser.email) {
@@ -443,7 +511,9 @@ const SoundLegendPortal = () => {
           );
 
           list = Array.from(map.values());
-          list.sort((a, b) => tsToMillis(a.createdAt) - tsToMillis(b.createdAt));
+
+          // newest first so the latest/active project is the default one
+          list.sort((a, b) => tsToMillis(b.createdAt) - tsToMillis(a.createdAt));
 
           setProjects(list);
 
@@ -505,69 +575,11 @@ const SoundLegendPortal = () => {
 
   const latestOrder = useMemo(() => (orders.length ? orders[0] : null), [orders]);
 
-  if (loadingPortalUser || loadingEffectiveUser) {
-    return <div className="slp-page">Loading your SoundLegend portal…</div>;
-  }
-
-  if (!effectivePortalUser) {
-    return <div className="slp-page">Please sign in to view your Artist Portal.</div>;
-  }
-
-  if (loading) {
-    return <div className="slp-page">Loading your SoundLegend experience…</div>;
-  }
-
-  if (!projects.length) {
-    return (
-      <div className="slp-page">
-        {effectiveIsImpersonating && (
-          <div className="slp-impersonation-banner">
-            <div className="slp-impersonation-left">
-              <span className="slp-impersonation-pill">Impersonating</span>
-              <span className="slp-impersonation-text">
-                {effectivePortalUser.fullName ||
-                  effectivePortalUser.email ||
-                  impersonateName ||
-                  impersonateEmail ||
-                  impersonateUid}
-              </span>
-            </div>
-
-            <button
-              type="button"
-              className="slp-impersonation-exit"
-              onClick={exitImpersonation}
-            >
-              Exit
-            </button>
-          </div>
-        )}
-
-        <h2 className="slp-heading">
-          Welcome to your Artist Portal
-          {effectiveIsImpersonating ? ' (admin view)' : ''}
-        </h2>
-
-        <p className="slp-empty-copy">
-          No projects are linked to your account yet. If this seems wrong,
-          contact support at{' '}
-          <a href="mailto:support@oberartisandrums.com">
-            support@oberartisandrums.com
-          </a>
-          .
-        </p>
-      </div>
-    );
-  }
-
-  const tabs = [
-    { key: 'progress', label: 'Build Progress' },
-    { key: 'scope', label: 'Scope of Work' },
-    { key: 'vault', label: 'Vault Preferences' },
-    { key: 'media', label: 'Media' },
-    { key: 'payments', label: 'Payment History' },
-    { key: 'account', label: 'Account Settings' },
-  ];
+  const hasProject = !!selectedProject;
+  const currentChapterIndex = useMemo(
+    () => (selectedProject ? getProjectCurrentChapterIndex(selectedProject) : 0),
+    [selectedProject]
+  );
 
   const artisanLine = (selectedProject?.artisanLine || '').toLowerCase();
   const serialGuess = (
@@ -581,12 +593,57 @@ const SoundLegendPortal = () => {
   const isSoundLegendProject =
     artisanLine === 'soundlegend' || serialGuess.startsWith('SL-');
 
-  const handleTabChange = (nextKey) => {
-    if (!isSoundLegendProject && (nextKey === 'vault' || nextKey === 'media')) {
-      return;
+  const tabs = useMemo(() => {
+    if (!hasProject) {
+      return [
+        { key: 'payments', label: 'Payment History' },
+        { key: 'account', label: 'Account Settings' },
+      ];
     }
+
+    const nextTabs = [
+      { key: 'progress', label: 'Build Progress' },
+      { key: 'scope', label: 'Scope of Work' },
+    ];
+
+    if (currentChapterIndex >= 2 && isSoundLegendProject) {
+      nextTabs.push({ key: 'vault', label: 'Vault Preferences' });
+      nextTabs.push({ key: 'media', label: 'Media' });
+    }
+
+    if (currentChapterIndex >= 1) {
+      nextTabs.push({ key: 'payments', label: 'Payment History' });
+    }
+
+    nextTabs.push({ key: 'account', label: 'Account Settings' });
+
+    return nextTabs;
+  }, [hasProject, currentChapterIndex, isSoundLegendProject]);
+
+  useEffect(() => {
+    const allowedKeys = tabs.map((t) => t.key);
+    if (!allowedKeys.includes(tab)) {
+      setTab(allowedKeys[0] || 'account');
+    }
+  }, [tabs, tab]);
+
+  const handleTabChange = (nextKey) => {
+    const allowedKeys = tabs.map((t) => t.key);
+    if (!allowedKeys.includes(nextKey)) return;
     setTab(nextKey);
   };
+
+  if (loadingPortalUser || loadingEffectiveUser) {
+    return <div className="slp-page">Loading your SoundLegend portal…</div>;
+  }
+
+  if (!effectivePortalUser) {
+    return <div className="slp-page">Please sign in to view your Artist Portal.</div>;
+  }
+
+  if (loading) {
+    return <div className="slp-page">Loading your SoundLegend experience…</div>;
+  }
 
   return (
     <div className="slp-page">
@@ -618,43 +675,80 @@ const SoundLegendPortal = () => {
         {effectiveIsImpersonating ? ' (admin view)' : ''}
       </h1>
 
-      <Tabs
-        tabs={tabs}
-        current={tab}
-        onChange={handleTabChange}
-        projects={projects}
-        selectedId={selectedId}
-        onSelectProject={setSelectedId}
-        isSoundLegendProject={isSoundLegendProject}
-      />
-
-      <div className="slp-panel">
-        {tab === 'progress' && (
-          <ProjectProgress project={selectedProject} isAdmin={isAdmin} />
-        )}
-
-        {tab === 'scope' && <ScopeOfWork project={selectedProject} />}
-
-        {tab === 'vault' && isSoundLegendProject && (
-          <VaultPreferences project={selectedProject} />
-        )}
-
-        {tab === 'media' && isSoundLegendProject && (
-          <Media project={selectedProject} />
-        )}
-
-        {tab === 'payments' && <PaymentHistory orders={orders} />}
-
-        {tab === 'account' && (
-          <AccountSettings
-            user={effectivePortalUser}
+      {!hasProject ? (
+        <>
+          <Tabs
+            tabs={tabs}
+            current={tab}
+            onChange={handleTabChange}
             projects={projects}
-            orders={orders}
-            latestOrder={latestOrder}
-            isAdmin={isAdmin}
+            selectedId={selectedId}
+            onSelectProject={setSelectedId}
+            showProjectPicker={false}
           />
-        )}
-      </div>
+
+          <div className="slp-panel">
+            <div className="slp-empty-copy" style={{ marginBottom: 20 }}>
+              Your build-specific portal areas will appear once your project is
+              officially created and committed.
+            </div>
+
+            {tab === 'payments' && <PaymentHistory orders={orders} />}
+
+            {tab === 'account' && (
+              <AccountSettings
+                user={effectivePortalUser}
+                projects={projects}
+                orders={orders}
+                latestOrder={latestOrder}
+                isAdmin={isAdmin}
+              />
+            )}
+          </div>
+        </>
+      ) : (
+        <>
+          <Tabs
+            tabs={tabs}
+            current={tab}
+            onChange={handleTabChange}
+            projects={projects}
+            selectedId={selectedId}
+            onSelectProject={setSelectedId}
+            showProjectPicker={projects.length > 1}
+          />
+
+          <div className="slp-panel">
+            {tab === 'progress' && (
+              <ProjectProgress project={selectedProject} isAdmin={isAdmin} />
+            )}
+
+            {tab === 'scope' && <ScopeOfWork project={selectedProject} />}
+
+            {tab === 'vault' && isSoundLegendProject && currentChapterIndex >= 2 && (
+              <VaultPreferences project={selectedProject} />
+            )}
+
+            {tab === 'media' && isSoundLegendProject && currentChapterIndex >= 2 && (
+              <Media project={selectedProject} />
+            )}
+
+            {tab === 'payments' && currentChapterIndex >= 1 && (
+              <PaymentHistory orders={orders} />
+            )}
+
+            {tab === 'account' && (
+              <AccountSettings
+                user={effectivePortalUser}
+                projects={projects}
+                orders={orders}
+                latestOrder={latestOrder}
+                isAdmin={isAdmin}
+              />
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 };

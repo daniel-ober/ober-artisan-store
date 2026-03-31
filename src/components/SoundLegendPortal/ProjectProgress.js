@@ -5037,10 +5037,9 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
 
   const isSelectedStageLocked = currentStageStatus === STAGE_MEDIA_STATE.FUTURE;
 
-  const showStageStorypoints =
-    currentStageStatus === STAGE_MEDIA_STATE.COMPLETED ||
-    currentStageStatus === STAGE_MEDIA_STATE.CURRENT ||
-    currentStageStatus === STAGE_MEDIA_STATE.NEXT;
+const showStageStorypoints =
+  currentStageStatus === STAGE_MEDIA_STATE.COMPLETED ||
+  currentStageStatus === STAGE_MEDIA_STATE.CURRENT;
 
   useEffect(() => {
     if (!showStageStorypoints) {
@@ -6855,10 +6854,11 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
                       </div>
                     </div>
 
-                    <div className="sl-progress-stage-title-story">
-                      {chapterNarrative.sentences?.[0] ||
-                        getStageSummary(activeStep)}
-                    </div>
+                   {currentStageStatus !== STAGE_MEDIA_STATE.FUTURE ? (
+  <div className="sl-progress-stage-title-story">
+    {chapterNarrative.sentences?.[0] || getStageSummary(activeStep)}
+  </div>
+) : null}
                   </div>
 
                   {!isLegacyChapter &&

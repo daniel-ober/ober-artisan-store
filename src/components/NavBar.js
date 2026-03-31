@@ -152,13 +152,36 @@ const NavBar = () => {
           .map((d) => ({ id: d.id, ...d.data() }))
           .sort((a, b) => (a.order || 0) - (b.order || 0));
 
+        const foundersBatchLink = links.find(
+          (l) => (l.name || '').toLowerCase() === 'founders-batch'
+        );
+        const existingArtisanShopLink = links.find(
+          (l) => (l.name || '').toLowerCase() === 'artisan-shop'
+        );
+
+        const artisanShopReplacement = {
+          id: 'nav-artisan-shop-replacement',
+          name: 'artisan-shop',
+          label: 'Artisan Shop',
+          enabled: true,
+          access: ['public', 'admin', 'soundlegend'],
+          order:
+            foundersBatchLink?.order ??
+            existingArtisanShopLink?.order ??
+            3,
+        };
+
         const transformed = links
-          .filter((l) => (l.name || '').toLowerCase() !== 'artisan-shop')
-          .map((l) =>
-            (l.name || '').toLowerCase() === 'founders-batch'
-              ? { ...l, label: 'Artisan Drums' }
-              : l
-          );
+          .filter((l) => {
+            const lower = (l.name || '').toLowerCase();
+            return (
+              lower !== 'artisan-shop' &&
+              lower !== 'founders-batch' &&
+              lower !== 'founders-toast'
+            );
+          })
+          .concat(artisanShopReplacement)
+          .sort((a, b) => (a.order || 0) - (b.order || 0));
 
         setNavbarLinks(transformed);
       } catch (err) {
@@ -252,7 +275,11 @@ const NavBar = () => {
     const isEndorsements =
       name.includes('endorsement') || label.includes('endorsement');
     const isAccount = name.includes('account') || label.includes('account');
-    if (isContact || isEndorsements || isAccount) return false;
+    const isFoundersToast =
+      name.includes('founders-toast') || label.includes('founder’s toast');
+
+    if (isContact || isEndorsements || isAccount || isFoundersToast)
+      return false;
 
     if (link.enabled && access.includes('public')) return true;
     if (user && isAdmin && access.includes('admin')) return true;
@@ -333,16 +360,6 @@ const NavBar = () => {
     );
   };
 
-  const renderFoundersToastLink = () => (
-    <Link
-      to="/artisan-shop/founders-toast"
-      className="nav-link"
-      onClick={() => handleNavLinkClick('/artisan-shop/founders-toast')}
-    >
-      Founder’s Toast
-    </Link>
-  );
-
   return (
     <>
       {showStickyHeader && (
@@ -379,7 +396,6 @@ const NavBar = () => {
                     </Link>
                   ))}
 
-                {renderFoundersToastLink()}
                 {renderPortalLink()}
                 {renderSoundLegendTab()}
                 {renderLegacyVaultLogo()}
@@ -464,7 +480,6 @@ const NavBar = () => {
                     </Link>
                   ))}
 
-                {renderFoundersToastLink()}
                 {renderPortalLink()}
                 {renderSoundLegendTab()}
                 {renderLegacyVaultLogo()}
@@ -575,7 +590,6 @@ const NavBar = () => {
                   </Link>
                 ))}
 
-              {renderFoundersToastLink()}
               {renderPortalLink()}
               {renderSoundLegendTab()}
               {renderLegacyVaultLogo()}

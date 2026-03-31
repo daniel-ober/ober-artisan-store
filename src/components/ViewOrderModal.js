@@ -7,6 +7,12 @@ import {
   arrayUnion,
   collection,
   addDoc,
+  query,
+  where,
+  getDocs,
+  setDoc,
+  serverTimestamp,
+  limit,
 } from 'firebase/firestore';
 import { Timestamp } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
@@ -32,6 +38,9 @@ const ITEM_STATUSES = [
   'Canceled',
 ];
 
+const normalizeEmail = (value = '') =>
+  String(value || '').trim().toLowerCase();
+
 const formatFirestoreTimestamp = (ts) => {
   if (!ts) return 'N/A';
   try {
@@ -47,18 +56,39 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
   const [internalNotes, setInternalNotes] = useState([]);
   const [systemHistory, setSystemHistory] = useState([]);
   const [newNote, setNewNote] = useState('');
-  const [loading, setLoading] = useState(false); // used for Add Note
+  const [loading, setLoading] = useState(false);
   const [items, setItems] = useState(orderDetails.items || []);
   const [orderStatus, setOrderStatus] = useState(
     orderDetails.status || 'Order Started'
   );
   const [relatedProjects, setRelatedProjects] = useState([]);
 
-  // ⭐ NEW: tracking number state
   const [trackingNumber, setTrackingNumber] = useState(
     orderDetails.trackingNumber || ''
   );
   const [savingTracking, setSavingTracking] = useState(false);
+
+  const findMatchingUserByEmail = async (email) => {
+    const normalized = normalizeEmail(email);
+    if (!normalized) return null;
+
+    const usersRef = collection(db, 'users');
+
+    const attempts = [
+      query(usersRef, where('email', '==', normalized), limit(1)),
+      query(usersRef, where('email', '==', email), limit(1)),
+    ];
+
+    for (const qRef of attempts) {
+      const snap = await getDocs(qRef);
+      if (!snap.empty) {
+        const match = snap.docs[0];
+        return { id: match.id, ...match.data() };
+      }
+    }
+
+    return null;
+  };
 
   const createProject = async (item = null) => {
     const confirmCreation = window.confirm(
@@ -67,51 +97,89 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
     if (!confirmCreation) return;
 
     try {
-      const customerEmail = orderDetails.customerEmail || '';
+      const customerEmailRaw = orderDetails.customerEmail || '';
+      const customerEmail = customerEmailRaw.trim();
+      const customerEmailLower = normalizeEmail(customerEmailRaw);
+
+      const customerName =
+        orderDetails.customerName ||
+        item?.description?.split('-')[0]?.trim() ||
+        item?.name?.split('-')[0]?.trim() ||
+        'N/A';
+
       const parsedAddress = (orderDetails.customerAddress || '').split(',');
       const street = parsedAddress[0]?.trim() || '';
       const city = parsedAddress[1]?.trim() || '';
-      let state = '',
-        zip = '';
+      let state = '';
+      let zip = '';
+
       if (parsedAddress[2]) {
         const parts = parsedAddress[2].trim().split(' ');
         state = parts[0] || '';
         zip = parts[1] || '';
       }
 
+      const linkedUser = customerEmail
+        ? await findMatchingUserByEmail(customerEmail)
+        : null;
+
+      const linkedUid = linkedUser?.uid || linkedUser?.id || '';
+
       const projectData = {
         orderId: orderDetails.id,
-        customerName:
-          orderDetails.customerName ||
-          item?.description?.split('-')[0]?.trim() ||
-          item?.name?.split('-')[0]?.trim() ||
-          'N/A',
+        parentOrderId: orderDetails.id,
+
+        customerName,
+        customerEmail,
+        customerEmailLower,
+
         ownerEmail: customerEmail,
+        ownerUid: linkedUid || '',
+        userId: linkedUid || '',
+        customerUserId: linkedUid || '',
+
         customer: {
-          name: orderDetails.customerName || 'N/A',
+          name: customerName,
           email: customerEmail,
+          emailLower: customerEmailLower,
           phone: orderDetails.customerPhone || '',
           address: { street, city, state, zip },
         },
+
         startDate: Timestamp.now(),
-        currentPhase: 'Step 1. Wood Preparation',
+        currentPhase: '1. Discovery & Design',
+        status: 'Initial Planning',
+
         artisanLine: item?.name?.toLowerCase().includes('soundlegend')
           ? 'SoundLegend'
           : '',
+
         width: '',
         shellDepth: '',
         itemDetails: item || null,
+
         ...defaultStepData,
         ...defaultProjectFields,
+
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
       };
 
       const projectRef = await addDoc(collection(db, 'projects'), projectData);
       const projectId = projectRef.id;
 
+      await updateDoc(doc(db, 'projects', projectId), {
+        id: projectId,
+        projectId,
+        docId: projectId,
+        updatedAt: serverTimestamp(),
+      });
+
       const projectEntry = {
         projectId,
         itemName: item?.name || 'Blank Project',
       };
+
       const orderRef = doc(db, 'orders', orderDetails.id);
 
       await updateDoc(orderRef, {
@@ -122,13 +190,48 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
         }),
       });
 
+      if (linkedUid) {
+        const userRef = doc(db, 'users', linkedUid);
+
+        await setDoc(
+          userRef,
+          {
+            uid: linkedUid,
+            email: customerEmail,
+            isSoundlegend: true,
+            projectIds: arrayUnion(projectId),
+            assignedProjectIds: arrayUnion(projectId),
+            activeProjectId: projectId,
+            projectId,
+            latestProjectId: projectId,
+            updatedAt: serverTimestamp(),
+          },
+          { merge: true }
+        );
+
+        await updateDoc(doc(db, 'projects', projectId), {
+          ownerUid: linkedUid,
+          userId: linkedUid,
+          customerUserId: linkedUid,
+          updatedAt: serverTimestamp(),
+        });
+      }
+
       if (customerEmail) {
         const label =
           item?.name?.trim() ||
           item?.description?.split('-')[0]?.trim() ||
-          orderDetails.customerName?.trim() ||
+          customerName ||
           'Custom Drum Project';
-        await linkProjectToUserByEmail(customerEmail, projectId, label);
+
+        try {
+          await linkProjectToUserByEmail(customerEmail, projectId, label);
+        } catch (linkErr) {
+          console.warn(
+            'linkProjectToUserByEmail failed, but project was still created and directly linked:',
+            linkErr
+          );
+        }
       }
 
       setRelatedProjects((p) => [...p, projectEntry]);
@@ -157,7 +260,6 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
           setInternalNotes(data.internalNotes || []);
           setSystemHistory(data.systemHistory || []);
           setRelatedProjects(data.relatedProjects || []);
-          // keep tracking in sync with Firestore
           setTrackingNumber(data.trackingNumber || '');
         }
       } catch (err) {
@@ -167,7 +269,6 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
     if (isOpen) fetchOrderData();
   }, [isOpen, orderDetails.id]);
 
-  // also sync when parent passes a different orderDetails
   useEffect(() => {
     setItems(orderDetails.items || []);
     setOrderStatus(orderDetails.status || 'Order Started');
@@ -231,7 +332,6 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
     }
   };
 
-  // ⭐ NEW: save tracking number to Firestore + bubble up
   const handleSaveTracking = async () => {
     const trimmed = trackingNumber.trim();
     const eventText = trimmed
@@ -328,7 +428,6 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
             </div>
           )}
 
-          {/* ⭐ NEW: tracking number editor */}
           <div className="detail-row">
             <strong>Tracking #:</strong>
             <span>
@@ -359,7 +458,7 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
               <col style={{ width: '8%' }} />
               <col style={{ width: '14%' }} />
               <col style={{ width: '18%' }} />
-              <col style={{ width: '8%' }} /> {/* compact icon column */}
+              <col style={{ width: '8%' }} />
             </colgroup>
             <thead>
               <tr>
@@ -407,14 +506,12 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
                     </select>
                   </td>
                   <td className="actions-cell">
-                    {/* Icon-only button: Create new project */}
                     <button
                       className="icon-action-btn"
                       onClick={() => createProject(item)}
                       aria-label="Create project"
                       title="Create project"
                     >
-                      {/* plus-in-document icon (inline SVG) */}
                       <svg
                         viewBox="0 0 24 24"
                         width="18"
@@ -532,10 +629,7 @@ const ViewOrderModal = ({ isOpen, onClose, orderDetails, onUpdateOrder }) => {
           )}
         </div>
 
-        <button
-          className="btn btn-ghost order-close-btn"
-          onClick={onClose}
-        >
+        <button className="btn btn-ghost order-close-btn" onClick={onClose}>
           Close
         </button>
       </div>

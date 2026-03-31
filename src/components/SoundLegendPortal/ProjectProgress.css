@@ -767,12 +767,13 @@
   border: 1px solid transparent;
   border-radius: 999px;
   background: transparent;
-  color: rgba(228, 235, 247, 0.54);
+  color: rgba(156, 164, 178, 0.42);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   box-sizing: border-box;
+  box-shadow: none;
   transition:
     color 180ms ease,
     background 180ms ease,
@@ -783,9 +784,6 @@
 }
 
 .sl-progress-chapter-selector-item:hover:not(.is-locked):not(:disabled) {
-  color: rgba(247, 250, 255, 0.94);
-  background: rgba(255, 255, 255, 0.045);
-  border-color: rgba(255, 255, 255, 0.06);
   transform: translateY(-1px);
 }
 
@@ -799,37 +797,69 @@
   color: inherit;
 }
 
+/* ONLY THE SELECTED CHAPTER GETS THE RING */
 .sl-progress-chapter-selector-item.is-active {
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.12),
-    rgba(255, 255, 255, 0.05)
+    rgba(255, 255, 255, 0.09),
+    rgba(255, 255, 255, 0.035)
   );
-  border-color: rgba(255, 255, 255, 0.08);
-  color: rgba(255, 255, 255, 0.98);
+  border-color: rgba(255, 255, 255, 0.1);
   box-shadow:
     0 8px 18px rgba(0, 0, 0, 0.14),
-    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
+/* COMPLETED CHAPTERS = GOLD TEXT */
 .sl-progress-chapter-selector-item.is-completed,
 .sl-progress-chapter-selector-item.is-revealed {
-  color: rgba(232, 239, 249, 0.78);
-}
-
-.sl-progress-chapter-selector-item.is-future {
-  color: rgba(183, 193, 210, 0.42);
-}
-
-.sl-progress-chapter-selector-item.is-locked,
-.sl-progress-chapter-selector-item:disabled {
-  cursor: default;
-  opacity: 0.28;
+  color: rgba(222, 185, 104, 0.94);
   background: transparent;
   border-color: transparent;
   box-shadow: none;
-  transform: none;
+}
+
+/* CURRENT / IN PROGRESS CHAPTER = GOLD TEXT */
+.sl-progress-chapter-selector-item.is-current {
+  color: rgba(222, 185, 104, 0.94);
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+/* IF A GOLD CHAPTER IS THE SELECTED ONE, KEEP THE RING */
+.sl-progress-chapter-selector-item.is-current.is-active,
+.sl-progress-chapter-selector-item.is-completed.is-active,
+.sl-progress-chapter-selector-item.is-revealed.is-active {
+  color: rgba(235, 201, 129, 0.98);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.09),
+    rgba(255, 255, 255, 0.035)
+  );
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 8px 18px rgba(0, 0, 0, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* ALL FUTURE CHAPTERS = GREYED OUT */
+.sl-progress-chapter-selector-item.is-future,
+.sl-progress-chapter-selector-item.is-locked,
+.sl-progress-chapter-selector-item:disabled {
+  color: rgba(156, 164, 178, 0.42);
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+/* LOCKED / DISABLED FUTURE CHAPTERS SHOULD NOT LOOK INTERACTIVE */
+.sl-progress-chapter-selector-item.is-locked,
+.sl-progress-chapter-selector-item:disabled {
+  cursor: default;
+  opacity: 1;
   pointer-events: none;
+  transform: none;
 }
 
 /* =========================================================

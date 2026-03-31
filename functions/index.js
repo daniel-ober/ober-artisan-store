@@ -9,6 +9,8 @@ const axios = require('axios');
 const crypto = require('crypto');
 const functions = require('firebase-functions/v2');
 const { onDocumentCreated } = require('firebase-functions/v2/firestore');
+const { onDocumentWritten } = require('firebase-functions/v2/firestore');
+
 const STRIPE_SECRET_KEY = defineSecret('STRIPE_SECRET_KEY');
 const STRIPE_WEBHOOK_SECRET = defineSecret('STRIPE_WEBHOOK_SECRET');
 const CLIENT_URL = defineSecret('CLIENT_URL');
@@ -16,7 +18,6 @@ const PRINTIFY_API_KEY = defineSecret('PRINTIFY_API_KEY');
 const PRINTIFY_SHOP_ID = defineSecret('PRINTIFY_SHOP_ID');
 const PRINTIFY_WEBHOOK_SECRET = defineSecret('PRINTIFY_WEBHOOK_SECRET');
 const RECAPTCHA_SECRET_KEY = defineSecret('RECAPTCHA_SECRET_KEY');
-const { onDocumentWritten } = require('firebase-functions/v2/firestore');
 
 admin.initializeApp();
 const db = admin.firestore();
@@ -25,8 +26,8 @@ const db = admin.firestore();
 const { google } = require('googleapis');
 const GMAIL_CLIENT_EMAIL = defineSecret('GMAIL_CLIENT_EMAIL');
 const GMAIL_PRIVATE_KEY = defineSecret('GMAIL_PRIVATE_KEY');
-const GMAIL_SENDER = defineSecret('GMAIL_SENDER'); // fallback
-const GMAIL_IMPERSONATE = defineSecret('GMAIL_IMPERSONATE'); // Workspace user
+const GMAIL_SENDER = defineSecret('GMAIL_SENDER');
+const GMAIL_IMPERSONATE = defineSecret('GMAIL_IMPERSONATE');
 
 // branding assets + CTAs
 const LOGO_MAIN =
@@ -52,12 +53,14 @@ const emailShell = ({ logo, bodyHtml }) => `
   </table>
 </div>
 `;
+
 const button = (label, href) => `
   <div style="text-align:center;margin:24px 0 8px">
     <a href="${href}" style="display:inline-block;padding:10px 18px;border-radius:6px;background:#111;color:#fff;text-decoration:none;font-weight:600">
       ${label}
     </a>
   </div>`;
+
 const greet = (name) => `Hi ${String(name || '').trim() || 'there'},`;
 
 const bodySoundLegend = (name) => `
@@ -67,6 +70,7 @@ const bodySoundLegend = (name) => `
   <p style="margin:0 0 16px">We typically follow up within 24–48 hours to learn more about your vision. In the meantime, here’s a short video to get us both amped up about what’s ahead:</p>
   ${button('Watch the Teaser', CTA_SL)}
 `;
+
 const bodySupport = (name) => `
   <p style="margin:0 0 16px">${greet(name)}</p>
   <p style="margin:0 0 16px">Thanks for reaching out. Your message has been received, and we're looking forward to connecting with you.</p>
@@ -74,6 +78,7 @@ const bodySupport = (name) => `
   <p style="margin:0 0 16px">We typically respond within 24–48 hours. In the meantime, feel free to browse the shop or explore the stories behind our drums.</p>
   ${button('Visit Our Site', CTA_SITE)}
 `;
+
 const bodyEndorsement = (name, docId, tier) => `
   <p style="margin:0 0 16px">${greet(name)}</p>
   <p style="margin:0 0 16px">Thank you for your interest in representing the Ober Artisan Drums brand. We’ve received your application${docId ? ` (Reference: <strong>${docId}</strong>)` : ''}${tier ? ` for the <strong>${tier}</strong> tier` : ''}.</p>
@@ -89,6 +94,12 @@ function base64Url(str) {
     .replace(/=+$/g, '');
 }
 
+function encodeRFC2047(str = '') {
+  return /[^\x00-\x7F]/.test(str)
+    ? `=?UTF-8?B?${Buffer.from(String(str), 'utf8').toString('base64')}?=`
+    : String(str);
+}
+
 /** gmailSend with per-message From override */
 async function gmailSend({
   to,
@@ -98,7 +109,7 @@ async function gmailSend({
   bcc = [],
   replyTo,
   fromName = 'Ober Artisan Drums',
-  fromEmail, // 👈 NEW
+  fromEmail,
 }) {
   const auth = new google.auth.JWT({
     email: GMAIL_CLIENT_EMAIL.value(),
@@ -111,6 +122,7 @@ async function gmailSend({
     ],
     subject: GMAIL_IMPERSONATE.value(),
   });
+
   const gmail = google.gmail({ version: 'v1', auth });
   const fromAddr = fromEmail || GMAIL_SENDER.value();
 
@@ -133,6 +145,231 @@ async function gmailSend({
   await gmail.users.messages.send({ userId: 'me', requestBody: { raw } });
 }
 
+function normalizeLeadEmail(email = '') {
+  return String(email || '').trim().toLowerCase();
+}
+
+function getLeadUserDocIdForEmail(email = '') {
+  const normalized = normalizeLeadEmail(email);
+  if (!normalized) return '';
+  return `lead_${crypto
+    .createHash('sha256')
+    .update(normalized)
+    .digest('hex')
+    .slice(0, 24)}`;
+}
+
+async function findAllUserDocsByEmail(email = '') {
+  const normalized = normalizeLeadEmail(email);
+  if (!normalized) return [];
+
+  const usersRef = db.collection('users');
+  const seen = new Map();
+
+  const snap1 = await usersRef.where('email', '==', normalized).get();
+  snap1.docs.forEach((docSnap) => {
+    seen.set(docSnap.id, { id: docSnap.id, ...docSnap.data() });
+  });
+
+  const snap2 = await usersRef.where('email', '==', email).get();
+  snap2.docs.forEach((docSnap) => {
+    seen.set(docSnap.id, { id: docSnap.id, ...docSnap.data() });
+  });
+
+  return Array.from(seen.values());
+}
+
+async function findUserDocByEmail(email = '') {
+  const matches = await findAllUserDocsByEmail(email);
+  return matches[0] || null;
+}
+
+function scoreUserDocForCanonical(user = {}) {
+  let score = 0;
+
+  if (user.uid) score += 100;
+  if (user.portalAccessGranted) score += 30;
+  if (user.portalInviteSent) score += 20;
+  if (user.authAccountCreated) score += 20;
+  if (user.isSoundlegend) score += 15;
+  if (user.soundlegendLead) score += 10;
+  if (user.fullName) score += 5;
+  if (user.isAdmin) score -= 1000;
+
+  return score;
+}
+
+function mergeObjectsPreferPrimary(primary = {}, secondary = {}) {
+  const merged = { ...primary };
+
+  Object.entries(secondary || {}).forEach(([key, value]) => {
+    if (value === undefined || value === null) return;
+
+    if (Array.isArray(value)) {
+      const existing = Array.isArray(merged[key]) ? merged[key] : [];
+      merged[key] = Array.from(new Set([...existing, ...value].filter(Boolean)));
+      return;
+    }
+
+    if (
+      typeof value === 'object' &&
+      value !== null &&
+      !(value instanceof Date) &&
+      !value._seconds &&
+      !value.seconds
+    ) {
+      merged[key] = {
+        ...(typeof merged[key] === 'object' && merged[key] !== null
+          ? merged[key]
+          : {}),
+        ...value,
+      };
+      return;
+    }
+
+    if (
+      merged[key] === undefined ||
+      merged[key] === null ||
+      merged[key] === '' ||
+      merged[key] === false
+    ) {
+      merged[key] = value;
+    }
+  });
+
+  return merged;
+}
+
+async function mergeUserDocsIntoCanonical({
+  canonicalId,
+  email = '',
+  patch = {},
+}) {
+  if (!canonicalId) {
+    throw new Error('canonicalId is required');
+  }
+
+  const normalizedEmail = normalizeLeadEmail(email || patch.email || '');
+  const allMatches = normalizedEmail
+    ? await findAllUserDocsByEmail(normalizedEmail)
+    : [];
+
+  const canonicalRef = db.collection('users').doc(canonicalId);
+  const canonicalSnap = await canonicalRef.get();
+  const canonicalData = canonicalSnap.exists ? canonicalSnap.data() || {} : {};
+
+  const sortedMatches = [...allMatches].sort(
+    (a, b) => scoreUserDocForCanonical(b) - scoreUserDocForCanonical(a)
+  );
+
+  let merged = { ...canonicalData };
+
+  sortedMatches.forEach((entry) => {
+    merged = mergeObjectsPreferPrimary(merged, entry);
+  });
+
+  merged = {
+    ...merged,
+    ...patch,
+    uid: patch.uid ?? merged.uid ?? '',
+    email: normalizedEmail || merged.email || '',
+    updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+  };
+
+  if (!canonicalSnap.exists) {
+    merged.createdAt =
+      merged.createdAt || admin.firestore.FieldValue.serverTimestamp();
+  }
+
+  await canonicalRef.set(merged, { merge: true });
+
+  for (const match of allMatches) {
+    if (match.id !== canonicalId) {
+      await db.collection('users').doc(match.id).delete().catch(() => {});
+    }
+  }
+
+  return canonicalId;
+}
+
+async function resolveCanonicalUserDoc({ userId = '', email = '' } = {}) {
+  if (userId) {
+    const explicitSnap = await db.collection('users').doc(userId).get();
+    if (explicitSnap.exists) {
+      return { id: explicitSnap.id, ...explicitSnap.data() };
+    }
+  }
+
+  const matches = await findAllUserDocsByEmail(email);
+  if (!matches.length) return null;
+
+  const sorted = [...matches].sort(
+    (a, b) => scoreUserDocForCanonical(b) - scoreUserDocForCanonical(a)
+  );
+
+  return sorted[0];
+}
+
+async function upsertSoundlegendLeadUserFromSubmission(
+  submissionId,
+  data = {}
+) {
+  const normalizedEmail = normalizeLeadEmail(data.email);
+  if (!normalizedEmail) return null;
+
+  const firstName = String(data.firstName || '').trim();
+  const lastName = String(data.lastName || '').trim();
+  const fullName =
+    String(data.fullName || '').trim() || `${firstName} ${lastName}`.trim();
+
+  const existing = await resolveCanonicalUserDoc({ email: normalizedEmail });
+  const canonicalId =
+    existing?.uid || existing?.id || getLeadUserDocIdForEmail(normalizedEmail);
+
+  const alreadyHasPortalAccess = existing?.portalAccessGranted === true;
+  const existingInviteSent = existing?.portalInviteSent === true;
+  const existingUid = existing?.uid || '';
+
+  await mergeUserDocsIntoCanonical({
+    canonicalId,
+    email: normalizedEmail,
+    patch: {
+      uid: existingUid || '',
+      firstName,
+      lastName,
+      fullName,
+      email: normalizedEmail,
+      phone: data.phone || '',
+      phoneE164: data.phoneE164 || '',
+      isSoundlegend: true,
+      isAdmin: false,
+      soundlegendLead: true,
+      soundlegendLeadStatus: data.questionnaireCompleted
+        ? 'questionnaire_complete'
+        : 'questionnaire_pending',
+      slPortalLocked: alreadyHasPortalAccess ? false : true,
+      portalAccessGranted: alreadyHasPortalAccess,
+      portalInviteSent: existingInviteSent,
+      portalStatus: alreadyHasPortalAccess ? 'active' : 'locked',
+      authAccountCreated: !!existingUid,
+      authInvitePending: !alreadyHasPortalAccess,
+      latestQuestionnaireToken: data.questionnaireToken || '',
+      latestQuestionnaireUrl: data.questionnaireUrl || '',
+      questionnaireCompleted: !!data.questionnaireCompleted,
+      consultationScheduled: !!data.consultationScheduled,
+      consultationCompleted: !!data.consultationCompleted,
+      linkedSubmissionId: submissionId,
+      latestSoundlegendSubmissionId: submissionId,
+      access: {
+        soundlegend: alreadyHasPortalAccess,
+      },
+      status: existing?.status || 'lead',
+    },
+  });
+
+  return canonicalId;
+}
+
 // ───────────────────────────────────────────────────────────────────────────────
 // Main Express app (JSON)
 const app = express();
@@ -146,6 +383,7 @@ const allowedOrigins = [
   'https://danoberartisandrums.web.app',
   'https://admin.oberartisandrums.com',
 ];
+
 app.use((req, res, next) => {
   const origin = req.headers.origin;
   if (origin && allowedOrigins.includes(origin)) {
@@ -161,24 +399,14 @@ app.use((req, res, next) => {
   next();
 });
 
-// 🔹 Healthcheck for Cloud Run
 app.get('/', (_req, res) => res.status(200).send('ok'));
 
-// Helpers
 const stripeFromSecret = () => stripeLib(STRIPE_SECRET_KEY.value());
 const pHeaders = () => ({
   Authorization: `Bearer ${PRINTIFY_API_KEY.value()}`,
   'Content-Type': 'application/json',
 });
 
-// Put this near your other helpers
-function encodeRFC2047(str = '') {
-  return /[^\x00-\x7F]/.test(str)
-    ? `=?UTF-8?B?${Buffer.from(String(str), 'utf8').toString('base64')}?=`
-    : String(str);
-}
-
-// Build Printify line_items from your cart shape
 const toPrintifyLineItems = (products = []) =>
   products.map((p) => {
     const quantity = Math.max(1, parseInt(p?.quantity || 1, 10));
@@ -194,6 +422,7 @@ const toPrintifyLineItems = (products = []) =>
         ...(sku ? { external_id: sku } : {}),
       };
     }
+
     return {
       sku: sku || productId,
       quantity,
@@ -201,7 +430,6 @@ const toPrintifyLineItems = (products = []) =>
     };
   });
 
-// Build Printify address_to from your shippingAddress shape
 const toPrintifyAddress = (
   addr = {},
   firstName = 'Customer',
@@ -219,7 +447,6 @@ const toPrintifyAddress = (
   zip: addr.postal_code || addr.postalCode || addr.zip || '',
 });
 
-// Map Printify rates -> Stripe shipping_options
 const mapRatesToStripeOptions = (rates, currency = 'usd') => {
   const candidates = [
     { key: 'economy', label: 'Economy' },
@@ -228,6 +455,7 @@ const mapRatesToStripeOptions = (rates, currency = 'usd') => {
     { key: 'express', label: 'Express' },
     { key: 'printify_express', label: 'Printify Express' },
   ];
+
   const windowFor = (k) => {
     switch (k) {
       case 'economy':
@@ -255,6 +483,7 @@ const mapRatesToStripeOptions = (rates, currency = 'usd') => {
         return null;
     }
   };
+
   return candidates
     .filter(
       (c) =>
@@ -318,7 +547,6 @@ exports.mirrorPublicPrefsToShowroom = onDocumentWritten(
     const after = event.data?.after?.data();
     if (!after) return;
 
-    // Only continue if publicPrefs changed (or didn't exist before)
     const changed =
       !before ||
       JSON.stringify(before.publicPrefs || {}) !==
@@ -335,7 +563,6 @@ exports.mirrorPublicPrefsToShowroom = onDocumentWritten(
     }
 
     const payload = computePublicSnapshot(after);
-    // Create if missing, update if exists (admin SDK bypasses rules)
     await db
       .collection('soundlegend_showroom')
       .doc(serial)
@@ -344,7 +571,7 @@ exports.mirrorPublicPrefsToShowroom = onDocumentWritten(
 );
 
 // ───────────────────────────────────────────────────────────────────────────────
-// NEW: Admin — list Printify products for picker
+// Admin — list Printify products for picker
 app.get('/printify/catalog', async (req, res) => {
   try {
     const shopId = PRINTIFY_SHOP_ID.value();
@@ -387,7 +614,6 @@ app.post('/admin/merch/ingest', async (req, res) => {
 
     const shopId = PRINTIFY_SHOP_ID.value();
 
-    // 1) Fetch full Printify product
     let p;
     try {
       const { data } = await axios.get(
@@ -410,7 +636,6 @@ app.post('/admin/merch/ingest', async (req, res) => {
         .json({ error: 'Printify product not found or malformed' });
     }
 
-    // 2) Fetch variant meta (optional, shape varies by blueprint/provider)
     let variantMeta = [];
     try {
       const { data } = await axios.get(
@@ -419,16 +644,15 @@ app.post('/admin/merch/ingest', async (req, res) => {
       );
       variantMeta = Array.isArray(data) ? data : [];
     } catch (e) {
-      // Don’t fail the whole ingest if meta call fails — we can still proceed
       console.warn(
         `[${where}] variant meta fetch warning`,
         e?.response?.data || e?.message
       );
     }
+
     const metaById = new Map();
     variantMeta.forEach((m) => metaById.set(m.id, m));
 
-    // Helpers to extract readable size/color safely
     const readableFromMeta = (meta) => {
       const out = { size: '', color: '' };
       const arr = Array.isArray(meta?.options) ? meta.options : [];
@@ -440,7 +664,6 @@ app.post('/admin/merch/ingest', async (req, res) => {
       return out;
     };
 
-    // 3) Enrich variants (guard all fields)
     const productImages = Array.isArray(p.images) ? p.images : [];
     const rawVariants = Array.isArray(p.variants) ? p.variants : [];
 
@@ -448,7 +671,6 @@ app.post('/admin/merch/ingest', async (req, res) => {
       const mid = Number(v?.id);
       const m = metaById.get(mid) || null;
 
-      // images that reference this variant
       const vImages = productImages.filter(
         (img) =>
           Array.isArray(img?.variant_ids) && img.variant_ids.includes(mid)
@@ -460,16 +682,13 @@ app.post('/admin/merch/ingest', async (req, res) => {
         id: String(v?.id ?? ''),
         title: String(v?.title || ''),
         sku: String(v?.sku || ''),
-        // Printify returns "price" already in retail cents; coerce to integer
         printifyPriceCents: Number.isFinite(Number(v?.price))
           ? Number(v.price)
           : null,
         quantity: Number.isFinite(Number(v?.quantity)) ? Number(v.quantity) : 0,
         is_enabled: !!v?.is_enabled,
         is_available: v?.is_available !== false,
-        // raw options array of value IDs (sizeId, colorId, etc)
         options_array: Array.isArray(v?.options) ? v.options : [],
-        // readable fields when meta is available
         size: readable.size,
         color: readable.color,
         images: vImages.map((img) => ({
@@ -480,7 +699,6 @@ app.post('/admin/merch/ingest', async (req, res) => {
       };
     });
 
-    // Only enabled & (available !== false)
     const enabledVariants = enrichedVariants.filter(
       (v) => v.is_enabled && v.is_available
     );
@@ -491,8 +709,6 @@ app.post('/admin/merch/ingest', async (req, res) => {
       });
     }
 
-    // 4) Build enriched options for UI (Colors/Sizes), but only keep values that
-    // actually occur in an enabled variant. IMPORTANT: preserve Printify's hex colors.
     const optionDefs = Array.isArray(p.options) ? p.options : [];
     const enabledOptionValueIds = new Set(
       enabledVariants.flatMap((v) =>
@@ -500,14 +716,13 @@ app.post('/admin/merch/ingest', async (req, res) => {
       )
     );
 
-    // helper: is a valid hex color
     const isHex = (s) => /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(String(s || ''));
 
     const enrichedOptions = optionDefs.map((opt) => {
       const values = Array.isArray(opt?.values) ? opt.values : [];
 
       const filteredValues = values
-        .filter((val) => enabledOptionValueIds.has(val.id)) // only values present on enabled variants
+        .filter((val) => enabledOptionValueIds.has(val.id))
         .map((val) => {
           const rawColors = Array.isArray(val?.colors) ? val.colors : [];
           const hexColors = rawColors.filter(isHex);
@@ -524,13 +739,11 @@ app.post('/admin/merch/ingest', async (req, res) => {
           });
 
           return {
-            // spread FIRST so any existing fields are kept,
-            // then override to guarantee hexes are used
             ...val,
             id: val.id,
             title: val.title,
-            colors: hexColors, // keep hex list here
-            hex_colors: hexColors, // mirror for redundancy
+            colors: hexColors,
+            hex_colors: hexColors,
             name_tokens: Array.from(nameTokens),
           };
         });
@@ -538,7 +751,6 @@ app.post('/admin/merch/ingest', async (req, res) => {
       return { ...opt, values: filteredValues };
     });
 
-    // 5) Stripe product
     let sp;
     try {
       sp = await stripeFromSecret().products.create({
@@ -562,7 +774,6 @@ app.post('/admin/merch/ingest', async (req, res) => {
         .json({ error: 'Stripe product create failed', detail });
     }
 
-    // 6) Stripe prices (guard unit_amount)
     const stripe = stripeFromSecret();
     const stripePriceIds = {};
     for (const v of enabledVariants) {
@@ -573,8 +784,9 @@ app.post('/admin/merch/ingest', async (req, res) => {
           v.id,
           cents
         );
-        continue; // don’t try to create $0 prices
+        continue;
       }
+
       try {
         const price = await stripe.prices.create({
           currency: 'usd',
@@ -588,11 +800,11 @@ app.post('/admin/merch/ingest', async (req, res) => {
             variant_title: v.title || '',
           },
         });
+
         stripePriceIds[v.id] = {
           priceId: price.id,
           unitAmount: price.unit_amount,
         };
-        // carry on the inline id for convenience
         v.stripePriceId = price.id;
       } catch (e) {
         const detail = e?.raw || e?.message || e;
@@ -600,21 +812,16 @@ app.post('/admin/merch/ingest', async (req, res) => {
           `[${where}] Stripe price create failed for variant ${v.id}`,
           detail
         );
-        // don’t fail the whole ingest; just skip the bad variant
       }
     }
 
-    // 7) Compute min price among variants we actually priced
     const pricedCents = Object.values(stripePriceIds).map((o) =>
       Number(o.unitAmount)
     );
     const minPriceCents = pricedCents.length ? Math.min(...pricedCents) : null;
-
-    // 8) Determine preview
     const preview =
       productImages.find((i) => i?.is_default) || productImages[0] || null;
 
-    // 9) Build Firestore payload
     const merchDoc = {
       id: String(p.id),
       title: p.title || '',
@@ -625,10 +832,9 @@ app.post('/admin/merch/ingest', async (req, res) => {
       visible: !!p.visible,
 
       stripeProductId: sp.id,
-      stripePriceIds, // map: variantId -> { priceId, unitAmount }
-      variants: enabledVariants, // enriched (some may not have stripePriceId if skipped)
-
-      options: enrichedOptions, // filtered to only enabled/used values
+      stripePriceIds,
+      variants: enabledVariants,
+      options: enrichedOptions,
       minPriceCents,
 
       status: active ? 'active' : 'inactive',
@@ -646,6 +852,7 @@ app.post('/admin/merch/ingest', async (req, res) => {
       .collection('merchProducts')
       .doc(String(p.id))
       .set(merchDoc, { merge: true });
+
     return res.json({ ok: true, merchProduct: merchDoc });
   } catch (e) {
     const detail = e?.response?.data || e?.message || e;
@@ -672,11 +879,9 @@ app.post('/admin/hard-delete', async (req, res) => {
     const shopId = PRINTIFY_SHOP_ID.value();
     const apiKey = PRINTIFY_API_KEY.value();
 
-    // 1) Read the doc
     const colRef = db.collection(source);
     const snap = await colRef.doc(productId).get();
     if (!snap.exists) {
-      // If already gone, do nothing
       return res.json({
         ok: true,
         message: 'Doc not found; nothing to delete.',
@@ -684,13 +889,10 @@ app.post('/admin/hard-delete', async (req, res) => {
     }
     const doc = snap.data();
 
-    // 2) Stripe cleanup (if present)
-    // Prefer explicit product id first, else try to find from any price
     const stripeProductId = doc.stripeProductId || null;
 
     if (stripeProductId) {
       try {
-        // List prices for the product and delete them
         const prices = await stripe.prices.list({
           product: stripeProductId,
           limit: 100,
@@ -700,27 +902,22 @@ app.post('/admin/hard-delete', async (req, res) => {
             await stripe.prices.update(price.id, { active: false });
             await stripe.prices.del(price.id);
           } catch (e) {
-            // Not all prices can be deleted (some might be used in payments); make inactive at least
             try {
               await stripe.prices.update(price.id, { active: false });
             } catch {}
           }
         }
-        // Deactivate then delete the product
         try {
           await stripe.products.update(stripeProductId, { active: false });
         } catch {}
         try {
           await stripe.products.del(stripeProductId);
-        } catch (e) {
-          // If deletion fails (e.g. already used), at least leave it inactive
-        }
+        } catch (e) {}
       } catch (e) {
         console.warn('⚠️ Stripe cleanup warning:', e?.message || e);
       }
     }
 
-    // 3) Printify cleanup (merch only) — best-effort
     if (source === 'merchProducts') {
       try {
         await axios.delete(
@@ -728,7 +925,6 @@ app.post('/admin/hard-delete', async (req, res) => {
           { headers: { Authorization: `Bearer ${apiKey}` } }
         );
       } catch (e) {
-        // If it 404s or the API forbids delete, just ignore.
         const code = e?.response?.status;
         if (code && code !== 404) {
           console.warn(
@@ -740,7 +936,6 @@ app.post('/admin/hard-delete', async (req, res) => {
       }
     }
 
-    // 4) Firestore: delete document
     await colRef.doc(productId).delete();
 
     return res.json({ ok: true });
@@ -750,7 +945,7 @@ app.post('/admin/hard-delete', async (req, res) => {
   }
 });
 
-// NEW: Admin — manual stock refresh (used by ManageProducts button)
+// NEW: Admin — manual stock refresh
 app.post('/admin/merch/refresh-stock', async (req, res) => {
   try {
     const shopId = PRINTIFY_SHOP_ID.value();
@@ -806,8 +1001,7 @@ app.post('/admin/merch/refresh-stock', async (req, res) => {
 });
 
 // ───────────────────────────────────────────────────────────────────────────────
-// Existing endpoints (kept exactly as in your file, with minimal edits)
-
+// Existing endpoints
 app.post('/createCheckoutSession', async (req, res) => {
   try {
     const stripeKey = STRIPE_SECRET_KEY.value();
@@ -837,25 +1031,20 @@ app.post('/createCheckoutSession', async (req, res) => {
       lastName,
       promoCode,
       shippingAddress,
-      billingAddress, // not used here, but keep for parity
+      billingAddress,
     } = req.body || {};
 
     if (!Array.isArray(products) || products.length === 0) {
       return res.status(400).json({ error: 'Invalid or empty cart.' });
     }
 
-    // Persist snapshot for webhook matching
     const guestToken = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
-    await db
-      .collection('pending_checkouts')
-      .doc(guestToken)
-      .set({
-        createdAt: admin.firestore.FieldValue.serverTimestamp(),
-        products,
-        userId: userId || 'guest',
-      });
+    await db.collection('pending_checkouts').doc(guestToken).set({
+      createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      products,
+      userId: userId || 'guest',
+    });
 
-    // Build Stripe line_items from your cart
     const lineItems = [];
     for (const p of products) {
       const isMerch = p?.category === 'merch';
@@ -932,7 +1121,6 @@ app.post('/createCheckoutSession', async (req, res) => {
       }
     }
 
-    // Base session params
     const sessionParams = {
       mode: 'payment',
       line_items: lineItems,
@@ -954,89 +1142,84 @@ app.post('/createCheckoutSession', async (req, res) => {
       sessionParams.customer_email = customerEmail;
     }
 
-// ── Shipping rules
-const subtotalCents = products.reduce((sum, p) => {
-  const qty = Math.max(1, parseInt(p?.quantity || 1, 10));
-  const priceCents = Math.round(Number(p?.price || 0) * 100);
-  return sum + (Number.isFinite(priceCents) ? priceCents * qty : 0);
-}, 0);
+    const subtotalCents = products.reduce((sum, p) => {
+      const qty = Math.max(1, parseInt(p?.quantity || 1, 10));
+      const priceCents = Math.round(Number(p?.price || 0) * 100);
+      return sum + (Number.isFinite(priceCents) ? priceCents * qty : 0);
+    }, 0);
 
-const FREE_THRESHOLD = 5000; // $50.00
-const FALLBACK_UNDER50 = 999; // $9.99 when we can't live-quote
+    const FREE_THRESHOLD = 5000;
+    const FALLBACK_UNDER50 = 999;
 
-const fallbackUnder50Option = {
-  shipping_rate_data: {
-    type: 'fixed_amount',
-    fixed_amount: { amount: FALLBACK_UNDER50, currency: 'usd' },
-    display_name: 'Standard',
-    delivery_estimate: {
-      minimum: { unit: 'business_day', value: 7 },
-      maximum: { unit: 'business_day', value: 10 },
-    },
-  },
-};
-
-if (subtotalCents >= FREE_THRESHOLD) {
-  // ✅ Free shipping for qualifying carts
-  sessionParams.shipping_options = [
-    {
+    const fallbackUnder50Option = {
       shipping_rate_data: {
         type: 'fixed_amount',
-        fixed_amount: { amount: 0, currency: 'usd' },
+        fixed_amount: { amount: FALLBACK_UNDER50, currency: 'usd' },
         display_name: 'Standard',
         delivery_estimate: {
           minimum: { unit: 'business_day', value: 7 },
           maximum: { unit: 'business_day', value: 10 },
         },
       },
-    },
-  ];
-} else {
-  // < $50 → try live Printify quote, otherwise non-zero fallback
-  const hasAddress =
-    !!(shippingAddress && shippingAddress.country) &&
-    !!(
-      shippingAddress.postal_code ||
-      shippingAddress.postalCode ||
-      shippingAddress.zip
-    );
+    };
 
-  if (!hasAddress) {
-    // No address yet: don't show $0
-    sessionParams.shipping_options = [fallbackUnder50Option];
-  } else {
-    try {
-      const shopId = PRINTIFY_SHOP_ID.value();
-      const payload = {
-        line_items: toPrintifyLineItems(products),
-        address_to: toPrintifyAddress(
-          shippingAddress || {},
-          firstName || 'Customer',
-          lastName || ''
-        ),
-      };
+    if (subtotalCents >= FREE_THRESHOLD) {
+      sessionParams.shipping_options = [
+        {
+          shipping_rate_data: {
+            type: 'fixed_amount',
+            fixed_amount: { amount: 0, currency: 'usd' },
+            display_name: 'Standard',
+            delivery_estimate: {
+              minimum: { unit: 'business_day', value: 7 },
+              maximum: { unit: 'business_day', value: 10 },
+            },
+          },
+        },
+      ];
+    } else {
+      const hasAddress =
+        !!(shippingAddress && shippingAddress.country) &&
+        !!(
+          shippingAddress.postal_code ||
+          shippingAddress.postalCode ||
+          shippingAddress.zip
+        );
 
-      const { data: rates } = await axios.post(
-        `https://api.printify.com/v1/shops/${shopId}/orders/shipping.json`,
-        payload,
-        { headers: pHeaders() }
-      );
+      if (!hasAddress) {
+        sessionParams.shipping_options = [fallbackUnder50Option];
+      } else {
+        try {
+          const shopId = PRINTIFY_SHOP_ID.value();
+          const payload = {
+            line_items: toPrintifyLineItems(products),
+            address_to: toPrintifyAddress(
+              shippingAddress || {},
+              firstName || 'Customer',
+              lastName || ''
+            ),
+          };
 
-      const shipping_options = mapRatesToStripeOptions(rates, 'usd');
-      sessionParams.shipping_options = shipping_options.length
-        ? shipping_options
-        : [fallbackUnder50Option];
-    } catch (e) {
-      console.warn(
-        '⚠️ Printify quote failed; using fallback:',
-        e?.response?.data || e?.message || e
-      );
-      sessionParams.shipping_options = [fallbackUnder50Option];
+          const { data: rates } = await axios.post(
+            `https://api.printify.com/v1/shops/${shopId}/orders/shipping.json`,
+            payload,
+            { headers: pHeaders() }
+          );
+
+          const shipping_options = mapRatesToStripeOptions(rates, 'usd');
+          sessionParams.shipping_options = shipping_options.length
+            ? shipping_options
+            : [fallbackUnder50Option];
+        } catch (e) {
+          console.warn(
+            '⚠️ Printify quote failed; using fallback:',
+            e?.response?.data || e?.message || e
+          );
+          sessionParams.shipping_options = [fallbackUnder50Option];
+        }
+      }
     }
-  }
-}
 
-    // Create session
     const session = await stripe.checkout.sessions.create(sessionParams);
     return res.status(200).json({ url: session.url });
   } catch (err) {
@@ -1049,7 +1232,6 @@ if (subtotalCents >= FREE_THRESHOLD) {
   }
 });
 
-// reCAPTCHA verification (unchanged)
 app.post('/verifyRecaptcha', async (req, res) => {
   const token = req.body.token;
   const email = req.body.email || 'unknown';
@@ -1100,22 +1282,6 @@ app.get('/orders/by-session/:sessionId', async (req, res) => {
 
 // ───────────────────────────────────────────────────────────────────────────────
 // Stripe webhook app (RAW body ONLY)
-// Adds:
-//  1) stripe_webhook_events/{eventId} receipt log (received/processed/failed)
-//  2) checkout_failures docs for expired/failed sessions
-//  3) stripe_missed_orders docs if order creation fails
-//
-// IMPORTANT:
-//   - Do NOT add stripeWebhookApp.use(express.json()) anywhere.
-//   - Do NOT mount this app under a parent app that uses express.json().
-//   - Keep this webhook as its own function/app.
-//
-// NOTE (FIX):
-//   - We do NOT rely on req.body being a Buffer (middleware can change it).
-//   - We use req.rawBody (Firebase provides it) so signature verification
-//     always gets the exact bytes Stripe sent.
-// ───────────────────────────────────────────────────────────────────────────────
-
 const stripeWebhookApp = express();
 
 stripeWebhookApp.post('/', async (req, res) => {
@@ -1127,10 +1293,7 @@ stripeWebhookApp.post('/', async (req, res) => {
     return res.status(400).send('Missing Stripe signature');
   }
 
-  // ✅ ALWAYS prefer Firebase-provided rawBody (exact bytes)
   let payload = req.rawBody;
-
-  // Fallbacks (just in case)
   if (!payload) payload = req.body;
   if (
     payload &&
@@ -1168,7 +1331,6 @@ stripeWebhookApp.post('/', async (req, res) => {
   const eventCreated = event.created ? new Date(event.created * 1000) : null;
   const livemode = !!event.livemode;
 
-  // ── 1) Receipt log: write immediately (idempotent)
   const receiptRef = db.collection('stripe_webhook_events').doc(eventId);
   try {
     await receiptRef.set(
@@ -1183,11 +1345,9 @@ stripeWebhookApp.post('/', async (req, res) => {
       { merge: true }
     );
   } catch (e) {
-    // Even if Firestore write fails, we still proceed (don’t lose the webhook)
     console.warn('⚠️ Failed to write webhook receipt:', e?.message || e);
   }
 
-  // If you only care about checkout.session.*, keep your filter:
   if (!eventType.startsWith('checkout.session.')) {
     try {
       await receiptRef.set(
@@ -1201,7 +1361,6 @@ stripeWebhookApp.post('/', async (req, res) => {
     return res.status(200).send('Ignored: non-checkout event');
   }
 
-  // Helper: mark receipt processed/failed
   const markProcessed = async (extra = {}) => {
     try {
       await receiptRef.set(
@@ -1230,9 +1389,8 @@ stripeWebhookApp.post('/', async (req, res) => {
   };
 
   try {
-    const sessionBase = event.data.object; // usually contains id
+    const sessionBase = event.data.object;
 
-    // ── Capture failures for visibility (no order creation)
     if (
       eventType === 'checkout.session.expired' ||
       eventType === 'checkout.session.async_payment_failed'
@@ -1279,7 +1437,6 @@ stripeWebhookApp.post('/', async (req, res) => {
       return res.status(200).send('Recorded checkout failure/expiry.');
     }
 
-    // Only create orders on completed or async_succeeded
     const okTypes = new Set([
       'checkout.session.completed',
       'checkout.session.async_payment_succeeded',
@@ -1290,7 +1447,6 @@ stripeWebhookApp.post('/', async (req, res) => {
       return res.status(200).send('Unhandled checkout.session.* event');
     }
 
-    // Pull full session details
     const session = await stripe.checkout.sessions.retrieve(sessionBase.id, {
       expand: ['payment_intent.payment_method'],
     });
@@ -1316,7 +1472,6 @@ stripeWebhookApp.post('/', async (req, res) => {
       return res.status(200).send('Skipped: Missing email.');
     }
 
-    // Avoid duplicates
     const existing = await db
       .collection('orders')
       .where('stripeSessionId', '==', session.id)
@@ -1330,7 +1485,6 @@ stripeWebhookApp.post('/', async (req, res) => {
       return res.status(200).send('Order already recorded for this session.');
     }
 
-    // Line items
     const lineItems = await stripe.checkout.sessions.listLineItems(session.id, {
       expand: ['data.price.product'],
     });
@@ -1340,7 +1494,6 @@ stripeWebhookApp.post('/', async (req, res) => {
       return res.status(200).send('Skipped: No line items.');
     }
 
-    // Preserve your snapshot + item-building logic
     const guestToken = session.metadata?.guestToken || '';
     let snapshotProducts = [];
 
@@ -1467,7 +1620,6 @@ stripeWebhookApp.post('/', async (req, res) => {
       });
     }
 
-    // Payment method details
     const pm = session.payment_intent?.payment_method || null;
     const paymentMethodType = pm?.type || '';
     let cardDetails = null;
@@ -1519,7 +1671,6 @@ stripeWebhookApp.post('/', async (req, res) => {
       orderId,
     };
 
-    // ✅ Create order + notification
     await db.collection('orders').doc(orderId).set(orderDoc);
 
     await db.collection('order_notifications').add({
@@ -1532,7 +1683,6 @@ stripeWebhookApp.post('/', async (req, res) => {
       status: 'new',
     });
 
-    // cleanup
     if (session.metadata?.guestToken) {
       db.collection('pending_checkouts')
         .doc(session.metadata.guestToken)
@@ -1545,7 +1695,6 @@ stripeWebhookApp.post('/', async (req, res) => {
   } catch (err) {
     console.error('❌ Failed processing Stripe webhook event:', err);
 
-    // ── 2) Missed-order capture (so you see internal processing failures)
     try {
       await db.collection('stripe_missed_orders').add({
         stripeEventId: event.id,
@@ -1553,7 +1702,6 @@ stripeWebhookApp.post('/', async (req, res) => {
         livemode: !!event.livemode,
         createdAt: admin.firestore.FieldValue.serverTimestamp(),
         errorMessage: err?.message || String(err),
-        // store session id if present
         stripeSessionId: event?.data?.object?.id || '',
       });
     } catch {}
@@ -1565,13 +1713,6 @@ stripeWebhookApp.post('/', async (req, res) => {
 
 // ───────────────────────────────────────────────────────────────────────────────
 // Stripe Order Reconciler (backstop)
-// - Runs every 15 minutes
-// - Lists recently created Checkout Sessions
-// - Ensures every "paid" session has an orders doc + notification
-// - Writes admin_alerts ONLY when recovery occurs
-// - Writes admin_alerts if the reconciler itself fails
-// ───────────────────────────────────────────────────────────────────────────────
-
 exports.reconcileStripeOrders = onSchedule(
   {
     schedule: 'every 15 minutes',
@@ -1585,7 +1726,6 @@ exports.reconcileStripeOrders = onSchedule(
     console.log('🔎 Running Stripe reconciliation job...');
 
     try {
-      // Look back 24 hours (adjust later if desired)
       const since = Math.floor(Date.now() / 1000) - 60 * 60 * 24;
 
       const sessions = await stripe.checkout.sessions.list({
@@ -1595,7 +1735,6 @@ exports.reconcileStripeOrders = onSchedule(
       });
 
       for (const session of sessions.data) {
-        // Only care about PAID sessions
         if (session.payment_status !== 'paid') continue;
 
         const existing = await db
@@ -1608,7 +1747,6 @@ exports.reconcileStripeOrders = onSchedule(
 
         console.warn('🚨 Missing order detected for session:', session.id);
 
-        // Pull line items
         const lineItems = await stripe.checkout.sessions.listLineItems(
           session.id,
           {
@@ -1628,8 +1766,8 @@ exports.reconcileStripeOrders = onSchedule(
           stripeSessionId: session.id,
           customerEmail: session.customer_details?.email || 'unknown',
           customerName: session.customer_details?.name || 'Customer',
-          amountTotal: session.amount_total || 0, // cents
-          totalAmount: session.amount_total ? session.amount_total / 100 : 0, // dollars
+          amountTotal: session.amount_total || 0,
+          totalAmount: session.amount_total ? session.amount_total / 100 : 0,
           currency: session.currency || 'usd',
           status: 'recovered-by-reconciliation',
           createdAt: admin.firestore.FieldValue.serverTimestamp(),
@@ -1651,7 +1789,6 @@ exports.reconcileStripeOrders = onSchedule(
           recovered: true,
         });
 
-        // ✅ High-signal admin alert ONLY when recovery occurs
         try {
           await db.collection('admin_alerts').add({
             type: 'recovered_order',
@@ -1673,17 +1810,13 @@ exports.reconcileStripeOrders = onSchedule(
     } catch (err) {
       console.error('❌ Reconciliation job failed:', err);
 
-      // ✅ If the backstop fails, alert yourself (don’t silently miss failures)
       try {
-        await admin
-          .firestore()
-          .collection('admin_alerts')
-          .add({
-            type: 'reconciliation_failure',
-            severity: 'critical',
-            createdAt: admin.firestore.FieldValue.serverTimestamp(),
-            message: err?.message || String(err),
-          });
+        await admin.firestore().collection('admin_alerts').add({
+          type: 'reconciliation_failure',
+          severity: 'critical',
+          createdAt: admin.firestore.FieldValue.serverTimestamp(),
+          message: err?.message || String(err),
+        });
       } catch (e) {
         console.error(
           '⚠️ Failed writing admin_alerts (reconciliation_failure):',
@@ -1747,7 +1880,7 @@ printifyWebhookApp.post('/', async (req, res) => {
 });
 
 // ───────────────────────────────────────────────────────────────────────────────
-// Shipping — live Printify quote (returns exact rates for the given address/ZIP)
+// Shipping — live Printify quote
 app.post('/shipping/printify/quote', async (req, res) => {
   try {
     const shopId = PRINTIFY_SHOP_ID.value();
@@ -1796,14 +1929,12 @@ const handlePrintifyProductPublished = async (productId) => {
     const apiKey = PRINTIFY_API_KEY.value();
     const stripe = stripeLib(STRIPE_SECRET_KEY.value());
 
-    // Fetch product
     const { data: product } = await axios.get(
       `https://api.printify.com/v1/shops/${shopId}/products/${productId}.json`,
       { headers: { Authorization: `Bearer ${apiKey}` } }
     );
     if (!product || !product.id) return;
 
-    // Variant meta describes readable option values per variant id
     const { data: variantMeta } = await axios.get(
       `https://api.printify.com/v1/catalog/blueprints/${product.blueprint_id}/print_providers/${product.print_provider_id}/variants.json`,
       { headers: { Authorization: `Bearer ${apiKey}` } }
@@ -1813,7 +1944,6 @@ const handlePrintifyProductPublished = async (productId) => {
       metaById.set(m.id, m)
     );
 
-    // Enrich variants
     const enrichedVariants = (product.variants || []).map((v) => {
       const m = metaById.get(v.id) || {};
       const optHuman = (m.options || []).reduce((acc, opt) => {
@@ -1942,10 +2072,9 @@ const handlePrintifyProductPublished = async (productId) => {
       updatedAt: admin.firestore.FieldValue.serverTimestamp(),
     };
 
-    await db
-      .collection('merchProducts')
-      .doc(productId)
-      .set(payload, { merge: true });
+    await db.collection('merchProducts').doc(productId).set(payload, {
+      merge: true,
+    });
   } catch (error) {
     console.error(
       '❌ Failed to sync Printify product:',
@@ -1954,8 +2083,7 @@ const handlePrintifyProductPublished = async (productId) => {
   }
 };
 
-// === Add somewhere near your other onCall exports (e.g., under setAdminClaim) ===
-
+// === Claims / user admin ===
 exports.setSoundlegendClaim = onCall(
   { region: 'us-central1' },
   async (request) => {
@@ -1972,11 +2100,12 @@ exports.setSoundlegendClaim = onCall(
     }
 
     const { uid, enable = true } = request.data || {};
-    if (!uid)
+    if (!uid) {
       throw new functions.https.HttpsError(
         'invalid-argument',
         'uid is required'
       );
+    }
 
     const user = await admin.auth().getUser(uid);
     const claims = user.customClaims || {};
@@ -1990,16 +2119,13 @@ exports.setSoundlegendClaim = onCall(
     await admin.auth().setCustomUserClaims(uid, merged);
     await admin.auth().revokeRefreshTokens(uid);
 
-    await db
-      .collection('users')
-      .doc(uid)
-      .set(
-        {
-          access: { soundlegend: !!enable },
-          updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-        },
-        { merge: true }
-      );
+    await db.collection('users').doc(uid).set(
+      {
+        access: { soundlegend: !!enable },
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+      },
+      { merge: true }
+    );
 
     return { ok: true, uid, soundlegend: !!enable };
   }
@@ -2008,6 +2134,7 @@ exports.setSoundlegendClaim = onCall(
 exports.adminCreateUser = onCall({ region: 'us-central1' }, async (request) => {
   const ctx = request.auth;
   const isAdmin = ctx?.token?.admin === true || ctx?.token?.isAdmin === true;
+
   if (!isAdmin) {
     throw new functions.https.HttpsError(
       'permission-denied',
@@ -2022,10 +2149,13 @@ exports.adminCreateUser = onCall({ region: 'us-central1' }, async (request) => {
     lastName = '',
     phone = '',
     isSoundlegend = false,
+    isAdmin: makeAdmin = false,
     status = 'active',
   } = request.data || {};
 
-  if (!email || !password) {
+  const normalizedEmail = normalizeLeadEmail(email);
+
+  if (!normalizedEmail || !password) {
     throw new functions.https.HttpsError(
       'invalid-argument',
       'email and password are required'
@@ -2033,29 +2163,266 @@ exports.adminCreateUser = onCall({ region: 'us-central1' }, async (request) => {
   }
 
   try {
-    // 1) Create in Firebase Auth
-    const userRecord = await admin.auth().createUser({
-      email,
-      password,
-      displayName: `${firstName} ${lastName}`.trim() || undefined,
-      phoneNumber: phone && /^\+/.test(phone) ? phone : undefined, // keep E.164 only
-      disabled: status !== 'active',
+    let userRecord = null;
+    let existingAuthUser = false;
+
+    try {
+      userRecord = await admin.auth().getUserByEmail(normalizedEmail);
+      existingAuthUser = true;
+    } catch (err) {
+      if (err?.code !== 'auth/user-not-found') {
+        throw err;
+      }
+    }
+
+    if (!userRecord) {
+      userRecord = await admin.auth().createUser({
+        email: normalizedEmail,
+        password,
+        displayName: `${firstName} ${lastName}`.trim() || undefined,
+        phoneNumber: phone && /^\+/.test(phone) ? phone : undefined,
+        disabled: status !== 'active',
+      });
+    } else {
+      await admin.auth().updateUser(userRecord.uid, {
+        email: normalizedEmail,
+        displayName: `${firstName} ${lastName}`.trim() || undefined,
+        disabled: status !== 'active',
+      });
+    }
+
+    const uid = userRecord.uid;
+
+    const existingCanonical = await resolveCanonicalUserDoc({
+      userId: uid,
+      email: normalizedEmail,
     });
 
-    // 2) Return UID so the client can write Firestore doc (your UI already does this)
-    return { uid: userRecord.uid };
+    const currentlyGranted = existingCanonical?.portalAccessGranted === true;
+    const currentlyLocked = existingCanonical?.slPortalLocked === true;
+
+    await mergeUserDocsIntoCanonical({
+      canonicalId: uid,
+      email: normalizedEmail,
+      patch: {
+        uid,
+        firstName: String(firstName || '').trim(),
+        lastName: String(lastName || '').trim(),
+        fullName: `${String(firstName || '').trim()} ${String(lastName || '').trim()}`.trim(),
+        email: normalizedEmail,
+        phone: String(phone || '').trim(),
+        isAdmin: !!makeAdmin,
+        isSoundlegend: !!isSoundlegend,
+        status,
+        authAccountCreated: true,
+        portalInviteSent: existingCanonical?.portalInviteSent === true,
+        portalAccessGranted: currentlyGranted,
+        slPortalLocked: isSoundlegend ? currentlyLocked || !currentlyGranted : false,
+        portalStatus: currentlyGranted && !currentlyLocked ? 'active' : 'inactive',
+        access: {
+          soundlegend: currentlyGranted && !currentlyLocked,
+        },
+      },
+    });
+
+    return {
+      uid,
+      userDocId: uid,
+      existingAuthUser,
+    };
   } catch (e) {
-    // Surface common Auth errors
-    const code = e?.code || '';
-    if (code === 'auth/email-already-exists') {
-      throw new functions.https.HttpsError(
-        'already-exists',
-        'auth/email-already-exists'
-      );
-    }
+    console.error('adminCreateUser failed:', e);
     throw new functions.https.HttpsError('internal', e?.message || String(e));
   }
 });
+
+exports.sendSoundLegendWelcomeEmail = onCall(
+  {
+    region: 'us-central1',
+    secrets: [
+      GMAIL_CLIENT_EMAIL,
+      GMAIL_PRIVATE_KEY,
+      GMAIL_SENDER,
+      GMAIL_IMPERSONATE,
+      CLIENT_URL,
+    ],
+  },
+  async (request) => {
+    const ctx = request.auth;
+    const isAdmin = ctx?.token?.admin === true || ctx?.token?.isAdmin === true;
+    const callerEmail = ctx?.token?.email || '';
+    const ALLOW = new Set(['dan@oberartisandrums.com']);
+
+    if (!(isAdmin || ALLOW.has(callerEmail))) {
+      throw new functions.https.HttpsError(
+        'permission-denied',
+        'Admin privileges required.'
+      );
+    }
+
+    const { userId = '', email = '', name = '' } = request.data || {};
+    const normalizedEmail = normalizeLeadEmail(email);
+
+    if (!userId && !normalizedEmail) {
+      throw new functions.https.HttpsError(
+        'invalid-argument',
+        'userId or email is required'
+      );
+    }
+
+    const canonicalUser = await resolveCanonicalUserDoc({
+      userId,
+      email: normalizedEmail,
+    });
+
+    if (!canonicalUser?.id && !normalizedEmail) {
+      throw new functions.https.HttpsError(
+        'not-found',
+        'No matching user document was found'
+      );
+    }
+
+    const targetEmail = normalizeLeadEmail(
+      canonicalUser?.email || normalizedEmail
+    );
+
+    if (!targetEmail) {
+      throw new functions.https.HttpsError(
+        'failed-precondition',
+        'Target user is missing an email address'
+      );
+    }
+
+    const firstName = String(canonicalUser?.firstName || '').trim();
+    const lastName = String(canonicalUser?.lastName || '').trim();
+    const fullName =
+      String(name || '').trim() ||
+      String(canonicalUser?.fullName || '').trim() ||
+      `${firstName} ${lastName}`.trim() ||
+      targetEmail;
+
+    let authUser = null;
+    let uid = String(canonicalUser?.uid || '').trim();
+
+    if (uid) {
+      try {
+        authUser = await admin.auth().getUser(uid);
+      } catch (err) {
+        uid = '';
+      }
+    }
+
+    if (!authUser) {
+      try {
+        authUser = await admin.auth().getUserByEmail(targetEmail);
+        uid = authUser.uid;
+      } catch (err) {
+        if (err?.code !== 'auth/user-not-found') {
+          throw new functions.https.HttpsError(
+            'internal',
+            err?.message || 'Failed looking up auth user by email'
+          );
+        }
+      }
+    }
+
+    if (!authUser) {
+      authUser = await admin.auth().createUser({
+        email: targetEmail,
+        displayName: fullName || undefined,
+        disabled: false,
+      });
+      uid = authUser.uid;
+    }
+
+    const existingClaims = authUser.customClaims || {};
+    const mergedClaims = {
+      ...existingClaims,
+      soundlegend: true,
+      isSoundlegend: true,
+    };
+
+    await admin.auth().setCustomUserClaims(uid, mergedClaims);
+    await admin.auth().revokeRefreshTokens(uid);
+
+    const rawClientUrl = String(CLIENT_URL.value() || '').trim();
+    const clientBase =
+      rawClientUrl.replace(/\/+$/, '') || 'https://www.oberartisandrums.com';
+
+    const resetLink = await admin.auth().generatePasswordResetLink(
+      targetEmail,
+      {
+        url: `${clientBase}/artisan-portal/reset-password`,
+        handleCodeInApp: false,
+      }
+    );
+
+    await mergeUserDocsIntoCanonical({
+      canonicalId: uid,
+      email: targetEmail,
+      patch: {
+        uid,
+        email: targetEmail,
+        firstName,
+        lastName,
+        fullName,
+        isSoundlegend: true,
+        soundlegendLead: true,
+        soundlegendLeadStatus: 'invited',
+        authAccountCreated: true,
+        authInvitePending: true,
+        portalInviteSent: true,
+        portalAccessGranted: true,
+        slPortalLocked: false,
+        portalStatus: 'active',
+        access: {
+          soundlegend: true,
+        },
+        lastWelcomeEmailSentAt: admin.firestore.FieldValue.serverTimestamp(),
+        invitedAt: admin.firestore.FieldValue.serverTimestamp(),
+      },
+    });
+
+    const emailHtml = emailShell({
+      logo: LOGO_SL,
+      bodyHtml: `
+        <p style="margin:0 0 16px">${greet(firstName || fullName)}</p>
+        <p style="margin:0 0 16px">
+          Welcome to your private <strong>SoundLegend Artist Portal</strong>.
+        </p>
+        <p style="margin:0 0 16px">
+          Your portal is where you'll access your build journey, updates, media, and milestone history as your project moves forward.
+        </p>
+        <p style="margin:0 0 16px">
+          To activate your access, click the button below and create your password.
+        </p>
+        ${button('Create Your Password', resetLink)}
+        <p style="margin:16px 0 0">
+          After setting your password, sign in here:
+          <br />
+          <a href="${clientBase}/artisan-portal/signin">${clientBase}/artisan-portal/signin</a>
+        </p>
+      `,
+    });
+
+    await gmailSend({
+      to: targetEmail,
+      subject: 'Welcome to Your SoundLegend Artist Portal',
+      html: emailHtml,
+      fromEmail: 'soundlegend@oberartisandrums.com',
+      replyTo: 'soundlegend@oberartisandrums.com',
+      bcc: ['soundlegend@oberartisandrums.com'],
+    });
+
+    return {
+      ok: true,
+      uid,
+      userDocId: uid,
+      email: targetEmail,
+      resetLinkGenerated: true,
+    };
+  }
+);
 
 exports.setAdminClaim = onCall({ region: 'us-central1' }, async (request) => {
   const ctx = request.auth;
@@ -2074,7 +2441,6 @@ exports.setAdminClaim = onCall({ region: 'us-central1' }, async (request) => {
 
   try {
     await admin.auth().setCustomUserClaims(uid, { admin: !!makeAdmin });
-    // Optional: force token refresh next time they sign in
     await admin.auth().revokeRefreshTokens(uid);
     return { ok: true };
   } catch (e) {
@@ -2083,7 +2449,7 @@ exports.setAdminClaim = onCall({ region: 'us-central1' }, async (request) => {
 });
 
 // ───────────────────────────────────────────────────────────────────────────────
-// Scheduled refresh (unchanged)
+// Scheduled refresh
 exports.refreshPrintifyStock = onSchedule(
   {
     schedule: '0 * * * *',
@@ -2117,6 +2483,38 @@ exports.refreshPrintifyStock = onSchedule(
       } catch (err) {
         console.error(`❌ Failed to update ${productId}:`, err.message);
       }
+    }
+  }
+);
+
+exports.linkSoundlegendLeadUser = onDocumentCreated(
+  {
+    document: 'soundlegend_submissions/{docId}',
+    region: 'us-central1',
+  },
+  async (event) => {
+    const submissionId = event.params?.docId;
+    const data = event.data?.data();
+
+    if (!submissionId || !data?.email) return;
+
+    try {
+      const linkedUserId = await upsertSoundlegendLeadUserFromSubmission(
+        submissionId,
+        data
+      );
+
+      if (!linkedUserId) return;
+
+      await db.collection('soundlegend_submissions').doc(submissionId).set(
+        {
+          linkedUserId,
+          updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+        },
+        { merge: true }
+      );
+    } catch (err) {
+      console.error('linkSoundlegendLeadUser failed:', err);
     }
   }
 );
@@ -2231,7 +2629,7 @@ exports.autoReplyEndorsement = onDocumentCreated(
   }
 );
 
-// Main API (same URL), but with more headroom for image work
+// Main API
 exports.api = onRequest(
   {
     region: 'us-central1',
@@ -2257,6 +2655,7 @@ exports.stripeWebhook = onRequest(
   },
   stripeWebhookApp
 );
+
 exports.printifyWebhookListener = onRequest(
   {
     region: 'us-central1',
@@ -2269,6 +2668,7 @@ exports.printifyWebhookListener = onRequest(
   },
   printifyWebhookApp
 );
+
 exports.refreshPrintifyStockNow = onRequest(
   { region: 'us-central1', secrets: [PRINTIFY_API_KEY, PRINTIFY_SHOP_ID] },
   async (req, res) => {
@@ -2291,7 +2691,7 @@ exports.refreshPrintifyStockNow = onRequest(
 );
 
 // ───────────────────────────────────────────────────────────────────────────────
-// Resin Accent Generator — keep veneer color; fill only darkest pits
+// Resin Accent Generator
 app.post('/resin/generate', async (req, res) => {
   let sharp;
   try {
@@ -2305,8 +2705,8 @@ app.post('/resin/generate', async (req, res) => {
     const {
       veneerDataUrl,
       hex = '#1aa7ff',
-      intensity = 'medium', // 'light' | 'medium' | 'heavy'
-      coverage = 0.45, // tiny nudge of selectivity
+      intensity = 'medium',
+      coverage = 0.45,
       size = 1536,
     } = req.body || {};
 
@@ -2319,7 +2719,6 @@ app.post('/resin/generate', async (req, res) => {
         .json({ error: 'Missing or invalid veneerDataUrl' });
     }
 
-    // ~8 MB guard
     const approxBytes = Math.floor(veneerDataUrl.length * 0.75);
     if (approxBytes > 8 * 1024 * 1024) {
       return res
@@ -2327,7 +2726,6 @@ app.post('/resin/generate', async (req, res) => {
         .json({ error: 'Input image too large (max ~8MB).' });
     }
 
-    // Decode + normalize
     const b64 = veneerDataUrl.split(',')[1];
     const inputBuf = Buffer.from(b64, 'base64');
 
@@ -2339,7 +2737,6 @@ app.post('/resin/generate', async (req, res) => {
     const h = Math.round((meta.height || size) * scale);
     const img = base.resize({ width: w, height: h });
 
-    // --- Luminance (no heavy global contrast) ---------------------------------
     const grayRaw = await img
       .clone()
       .greyscale()
@@ -2347,7 +2744,6 @@ app.post('/resin/generate', async (req, res) => {
       .raw()
       .toBuffer({ resolveWithObject: true });
 
-    // Pack to 1-channel PNG for sharp ops that need image objects
     const grayPNG = await sharp(grayRaw.data, {
       raw: {
         width: grayRaw.info.width,
@@ -2358,31 +2754,26 @@ app.post('/resin/generate', async (req, res) => {
       .png()
       .toBuffer();
 
-    // --- Local darkness (black-hat): blur(gray, σ) - gray ----------------------
-    const blurSigma = Math.max(2, Math.round(Math.max(w, h) / 220)); // scale with size
+    const blurSigma = Math.max(2, Math.round(Math.max(w, h) / 220));
     const localMeanPNG = await sharp(grayPNG).blur(blurSigma).png().toBuffer();
 
-    // delta = localMean - gray  (positive where pixel is darker than its neighborhood)
     const deltaRaw = await sharp(localMeanPNG)
       .composite([{ input: grayPNG, blend: 'subtract' }])
       .raw()
       .toBuffer({ resolveWithObject: true });
 
-    // Histogram of delta (0..255)
     const hist = new Uint32Array(256);
     const deltaData = deltaRaw.data;
     for (let i = 0; i < deltaData.length; i++) hist[deltaData[i]]++;
 
-    // Select only the strongest local pits (quantile on tail)
     const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
     const baseFrac =
-      intensity === 'light' ? 0.01 : intensity === 'heavy' ? 0.04 : 0.02; // 1–4%
+      intensity === 'light' ? 0.01 : intensity === 'heavy' ? 0.04 : 0.02;
     const frac = clamp(baseFrac + (coverage - 0.45) * 0.02, 0.005, 0.06);
 
-    // Walk the histogram from bright → dark tail to find threshold
     const total = deltaData.length;
-    let acc = 0,
-      T = 255;
+    let acc = 0;
+    let T = 255;
     for (let t = 255; t >= 0; t--) {
       acc += hist[t];
       if (acc / total >= frac) {
@@ -2391,10 +2782,9 @@ app.post('/resin/generate', async (req, res) => {
       }
     }
 
-    // Build mask: (delta >= T) AND (original gray is reasonably dark)
     const maskBytes = Buffer.alloc(deltaData.length);
     const g = grayRaw.data;
-    const darkGate = 180; // gate out light flats entirely
+    const darkGate = 180;
     let whiteCount = 0;
     for (let i = 0; i < deltaData.length; i++) {
       const isPit = deltaData[i] >= T && g[i] < darkGate;
@@ -2403,10 +2793,8 @@ app.post('/resin/generate', async (req, res) => {
       if (v === 255) whiteCount++;
     }
 
-    // If the mask is still too big (>12%), tighten automatically
     const whiteRatio = whiteCount / deltaData.length;
     if (whiteRatio > 0.12) {
-      // raise threshold by 10 levels and rebuild quickly
       const tightenBy = 10;
       for (let i = 0; i < deltaData.length; i++) {
         const isPit =
@@ -2415,7 +2803,6 @@ app.post('/resin/generate', async (req, res) => {
       }
     }
 
-    // Clean & crisp edges -> just holes/knots
     const maskPNG = await sharp(maskBytes, {
       raw: {
         width: grayRaw.info.width,
@@ -2425,11 +2812,10 @@ app.post('/resin/generate', async (req, res) => {
     })
       .median(1)
       .blur(0.6)
-      .threshold(200) // binarize
+      .threshold(200)
       .png()
       .toBuffer();
 
-    // --- Paint only masked pixels --------------------------------------------
     const { r, g: gg, b } = hexToRgbSafe(hex);
     const fillOpacity =
       intensity === 'light' ? 0.55 : intensity === 'heavy' ? 0.95 : 0.75;
@@ -2445,13 +2831,11 @@ app.post('/resin/generate', async (req, res) => {
       .png()
       .toBuffer();
 
-    // Keep color only where mask == white
     const coloredPits = await sharp(fillPlate)
       .composite([{ input: maskPNG, blend: 'dest-in' }])
       .png()
       .toBuffer();
 
-    // Compose over the original veneer (non-masked pixels are untouched)
     const outBuf = await img
       .clone()
       .composite([{ input: coloredPits, blend: 'over' }])
@@ -2493,7 +2877,6 @@ exports.syncMerchVariantPrice = onCall(
     const isAdminClaim =
       ctx?.token?.isAdmin === true || ctx?.token?.admin === true;
 
-    // Simple allowlist (add any editors you trust)
     const ALLOW = new Set(['dan@oberartisandrums.com']);
 
     if (!(ctx && (isAdminClaim || ALLOW.has(email)))) {
@@ -2509,7 +2892,7 @@ exports.syncMerchVariantPrice = onCall(
       newPriceCents,
       currency = 'usd',
       stripeProductId,
-      currentStripePriceId, // not used (Stripe prices are immutable; we create a new one)
+      currentStripePriceId,
       printify = {},
     } = request.data || {};
 
@@ -2530,7 +2913,6 @@ exports.syncMerchVariantPrice = onCall(
     }
     const data = snap.data() || {};
 
-    // ---------- Stripe: create a NEW price ----------
     const stripe = stripeLib(STRIPE_SECRET_KEY.value());
     const sProdId =
       stripeProductId ||
@@ -2545,7 +2927,6 @@ exports.syncMerchVariantPrice = onCall(
       );
     }
 
-    // Build a friendly "Color / Size" label for this variant
     const toLabel = (v) => {
       if (!v) return '';
       const opts = Array.isArray(data.options) ? data.options : [];
@@ -2560,7 +2941,6 @@ exports.syncMerchVariantPrice = onCall(
       return parts.join(' / ');
     };
 
-    // find the variant in the stored product (by id)
     const vObj =
       (Array.isArray(data.variants) &&
         data.variants.find((x) => String(x.id) === String(variantId))) ||
@@ -2572,7 +2952,7 @@ exports.syncMerchVariantPrice = onCall(
       unit_amount: Math.round(newPriceCents),
       currency,
       product: sProdId,
-      nickname: priceNickname, // shows in Stripe "Description"
+      nickname: priceNickname,
       metadata: {
         merchProductId: String(productId),
         variantId: String(variantId),
@@ -2580,7 +2960,6 @@ exports.syncMerchVariantPrice = onCall(
       },
     });
 
-    // Update mapping { variantId -> { priceId, unitAmount } }
     const stripePriceIds = { ...(data.stripePriceIds || {}) };
     stripePriceIds[String(variantId)] = {
       priceId: price.id,
@@ -2592,7 +2971,6 @@ exports.syncMerchVariantPrice = onCall(
       updatedAt: admin.firestore.FieldValue.serverTimestamp(),
     });
 
-    // ---------- Printify: update variant price (best-effort) ----------
     const shopId =
       printify.shopId ||
       data.printifyShopId ||
@@ -2635,7 +3013,7 @@ exports.syncMerchVariantPrice = onCall(
   }
 );
 
-// Safe-load generateDrumMockup so a missing/broken file won't crash startup
+// Safe-load generateDrumMockup
 let generateDrumMockup;
 try {
   ({ generateDrumMockup } = require('./generateDrumMockup'));
