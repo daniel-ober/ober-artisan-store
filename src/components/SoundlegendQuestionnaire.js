@@ -1,14 +1,10 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
-  collection,
   doc,
-  getDocs,
-  limit,
-  query,
+  getDoc,
   serverTimestamp,
   updateDoc,
-  where,
 } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import ConsultationIntakePanel from './SoundLegendPortal/ConsultationIntakePanel';
@@ -45,17 +41,13 @@ function formatTimestamp(ts) {
 }
 
 async function findSubmissionByToken(token) {
-  const submissionsRef = collection(db, 'soundlegend_submissions');
-  const submissionQuery = query(
-    submissionsRef,
-    where('questionnaireToken', '==', token),
-    limit(1)
-  );
+  if (!token) return null;
 
-  const snap = await getDocs(submissionQuery);
+  const questionnaireRef = doc(db, 'soundlegend_questionnaires', token);
+  const snap = await getDoc(questionnaireRef);
 
-  if (!snap.empty) {
-    return snap.docs[0];
+  if (snap.exists()) {
+    return snap;
   }
 
   return null;
@@ -65,8 +57,7 @@ function SoundlegendQuestionnaire() {
   const { token } = useParams();
   const navigate = useNavigate();
 
-  const [submissionDocId, setSubmissionDocId] = useState('');
-  const [linkedUserId, setLinkedUserId] = useState('');
+  const [questionnaireDocId, setQuestionnaireDocId] = useState('');
   const [customerName, setCustomerName] = useState('');
   const [customerEmail, setCustomerEmail] = useState('');
   const [completedAt, setCompletedAt] = useState(null);
@@ -126,8 +117,7 @@ function SoundlegendQuestionnaire() {
           data.consultationIntake || {}
         );
 
-        setSubmissionDocId(foundDoc.id);
-        setLinkedUserId(data.linkedUserId || '');
+        setQuestionnaireDocId(foundDoc.id);
         setCustomerName(
           data.fullName ||
             `${data.firstName || ''} ${data.lastName || ''}`.trim() ||
@@ -156,7 +146,7 @@ function SoundlegendQuestionnaire() {
   }, [token]);
 
   const handleFinalSubmit = async () => {
-    if (!submissionDocId || isSubmitting || isAlreadyComplete) return;
+    if (!questionnaireDocId || isSubmitting || isAlreadyComplete) return;
 
     try {
       setIsSubmitting(true);
@@ -164,29 +154,15 @@ function SoundlegendQuestionnaire() {
 
       const normalized = normalizeIncomingIntake(intakeValue);
 
-      await updateDoc(doc(db, 'soundlegend_submissions', submissionDocId), {
+      await updateDoc(doc(db, 'soundlegend_questionnaires', questionnaireDocId), {
         consultationIntake: normalized,
         consultationIntakeUpdatedAt: serverTimestamp(),
         questionnaireCompleted: true,
         questionnaireCompletedAt: serverTimestamp(),
         status: 'Questionnaire Complete',
         stage: 'questionnaire_complete',
+        updatedAt: serverTimestamp(),
       });
-
-      if (linkedUserId) {
-        try {
-          await updateDoc(doc(db, 'users', linkedUserId), {
-            consultationIntake: normalized,
-            consultationIntakeUpdatedAt: serverTimestamp(),
-            questionnaireCompleted: true,
-            questionnaireCompletedAt: serverTimestamp(),
-            soundlegendLeadStatus: 'questionnaire_complete',
-            latestQuestionnaireToken: token || '',
-          });
-        } catch (userErr) {
-          console.error('Failed updating linked user intake:', userErr);
-        }
-      }
 
       setIntakeValue(normalized);
       setIsAlreadyComplete(true);
