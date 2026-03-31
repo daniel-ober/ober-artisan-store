@@ -4,7 +4,8 @@ import {
   sendPasswordResetEmail,
   signOut,
 } from 'firebase/auth';
-import { auth } from '../firebaseConfig';
+import { doc, updateDoc, serverTimestamp } from 'firebase/firestore';
+import { auth, db } from '../firebaseConfig';
 import { useNavigate } from 'react-router-dom';
 import { fetchUserDoc } from '../services/userService';
 import './SoundlegendSignin.css';
@@ -64,7 +65,9 @@ const SoundlegendSignin = () => {
     return (
       status === 'expired' ||
       status === 'portal expired' ||
+      userDoc?.portalExpired === true ||
       userDoc?.slPortalExpired === true ||
+      userDoc?.access?.portalExpired === true ||
       userDoc?.access?.slPortalExpired === true
     );
   };
@@ -75,6 +78,7 @@ const SoundlegendSignin = () => {
     return (
       status === 'locked' ||
       status === 'portal locked' ||
+      userDoc?.portalLocked === true ||
       userDoc?.slPortalLocked === true ||
       userDoc?.access?.slPortalLocked === true ||
       userDoc?.access?.soundlegendLocked === true ||
@@ -92,73 +96,127 @@ const SoundlegendSignin = () => {
     return first?.projectId || first?.id || first?.projectID || '';
   };
 
-const handleSignin = async (e) => {
-  e.preventDefault();
-  setErrorMsg('');
-  setInfoMsg('');
-  setIsSubmitting(true);
+  const handleSignin = async (e) => {
+    e.preventDefault();
+    setErrorMsg('');
+    setInfoMsg('');
+    setIsSubmitting(true);
 
-  try {
-    const trimmedEmail = email.trim();
-    const userCredential = await signInWithEmailAndPassword(
-      auth,
-      trimmedEmail,
-      password
-    );
-    const user = userCredential.user;
-
-    if (rememberMe) localStorage.setItem('sl_last_email', trimmedEmail);
-    else localStorage.removeItem('sl_last_email');
-
-    await user.getIdToken(true);
-    const idTokenResult = await user.getIdTokenResult(true);
-    const claims = idTokenResult.claims || {};
-
-    if (!(claims.isSoundlegend || claims.soundlegend)) {
-      await signOut(auth);
-      setErrorMsg('You are not authorized for SoundLegend access.');
-      setInfoMsg(
-        'If you’re ready to join, start your custom build to receive portal access.'
+    try {
+      const trimmedEmail = email.trim();
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        trimmedEmail,
+        password
       );
+      const user = userCredential.user;
+
+      if (rememberMe) {
+        localStorage.setItem('sl_last_email', trimmedEmail);
+      } else {
+        localStorage.removeItem('sl_last_email');
+      }
+
+      await user.getIdToken(true);
+      const idTokenResult = await user.getIdTokenResult(true);
+      const claims = idTokenResult.claims || {};
+
+      if (!(claims.isSoundlegend || claims.soundlegend)) {
+        await signOut(auth);
+        setErrorMsg('You are not authorized for SoundLegend access.');
+        setInfoMsg(
+          'If you’re ready to join, start your custom build to receive portal access.'
+        );
+        setIsSubmitting(false);
+        return;
+      }
+
+      const userDoc = await fetchUserDoc(user.uid);
+
+      if (isPortalExpired(userDoc)) {
+        await signOut(auth);
+        setErrorMsg('Your SoundLegend Artist Portal is currently inactive.');
+        setInfoMsg(
+          'If you think this is a mistake, please contact support@oberartisandrums.com and we’ll be happy to help.'
+        );
+        setIsSubmitting(false);
+        return;
+      }
+
+      if (isPortalLocked(userDoc)) {
+        await signOut(auth);
+        setErrorMsg('Your SoundLegend Artist Portal is temporarily unavailable.');
+        setInfoMsg(
+          'Please contact support@oberartisandrums.com if you need help restoring access.'
+        );
+        setIsSubmitting(false);
+        return;
+      }
+
+      const loginTimestampPayload = {
+        uid: user.uid,
+        email: user.email || trimmedEmail,
+        emailLower: String(user.email || trimmedEmail).trim().toLowerCase(),
+        lastLoginAt: serverTimestamp(),
+        lastSignInAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
+      };
+
+      try {
+        await updateDoc(doc(db, 'users', user.uid), loginTimestampPayload);
+      } catch (updateError) {
+        console.warn(
+          'Could not write login timestamp to auth UID doc with updateDoc, trying merge fallback:',
+          updateError
+        );
+
+        try {
+          const { setDoc } = await import('firebase/firestore');
+          await setDoc(doc(db, 'users', user.uid), loginTimestampPayload, {
+            merge: true,
+          });
+        } catch (fallbackError) {
+          console.warn(
+            'Could not write login timestamp to auth UID doc with merge fallback:',
+            fallbackError
+          );
+        }
+      }
+
+      if (userDoc?.id && userDoc.id !== user.uid) {
+        try {
+          const { setDoc } = await import('firebase/firestore');
+          await setDoc(
+            doc(db, 'users', userDoc.id),
+            {
+              lastLoginAt: serverTimestamp(),
+              lastSignInAt: serverTimestamp(),
+              updatedAt: serverTimestamp(),
+            },
+            { merge: true }
+          );
+        } catch (linkedDocError) {
+          console.warn(
+            'Could not mirror login timestamp to linked user doc:',
+            linkedDocError
+          );
+        }
+      }
+
+      const firstProjectId = getFirstProjectId(userDoc);
+
+      if (firstProjectId) {
+        navigate(`/legacy?projectId=${firstProjectId}`, { replace: true });
+      } else {
+        navigate('/legacy', { replace: true });
+      }
+    } catch (err) {
+      console.error('❌ Sign-in error:', err);
+      setErrorMsg(mapFirebaseError(err?.code));
       setIsSubmitting(false);
-      return;
     }
+  };
 
-    const userDoc = await fetchUserDoc(user.uid);
-
-    if (isPortalExpired(userDoc)) {
-      await signOut(auth);
-      setErrorMsg('Your SoundLegend Artist Portal is currently inactive.');
-      setInfoMsg(
-        'If you think this is a mistake, please contact support@oberartisandrums.com and we’ll be happy to help.'
-      );
-      setIsSubmitting(false);
-      return;
-    }
-
-    if (isPortalLocked(userDoc)) {
-      await signOut(auth);
-      setErrorMsg('Your SoundLegend Artist Portal is temporarily unavailable.');
-      setInfoMsg(
-        'Please contact support@oberartisandrums.com if you need help restoring access.'
-      );
-      setIsSubmitting(false);
-      return;
-    }
-
-    const firstProjectId = getFirstProjectId(userDoc);
-
-    if (firstProjectId) {
-      navigate(`/legacy?projectId=${firstProjectId}`, { replace: true });
-    } else {
-      navigate('/legacy', { replace: true });
-    }
-  } catch (err) {
-    console.error('❌ Sign-in error:', err);
-    setErrorMsg(mapFirebaseError(err?.code));
-    setIsSubmitting(false);
-  }
-};
   const handleForgot = async () => {
     setErrorMsg('');
     setInfoMsg('');
