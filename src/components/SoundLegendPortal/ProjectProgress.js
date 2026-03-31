@@ -847,6 +847,7 @@ function isStoryChapterAccessible({
   stageIndex,
   currentStepIndex,
   projectMarkedComplete,
+  chapterTwoComplete = false,
 }) {
   if (!step) return false;
 
@@ -862,10 +863,18 @@ function isStoryChapterAccessible({
     return false;
   }
 
-  // allow:
-  // - all completed/current chapters up through the active one
-  // - exactly one preview chapter ahead
-  return stageIndex <= currentStepIndex + 1;
+  // Chapters I–III are always clickable.
+  if (stageIndex <= 2) {
+    return true;
+  }
+
+  // Once Chapter II is complete, all remaining chapters become clickable.
+  if (chapterTwoComplete) {
+    return true;
+  }
+
+  // Otherwise Chapters IV+ stay non-clickable.
+  return false;
 }
 
 function getStageImageFilename(stageKey, variant = 'archived') {
@@ -4322,6 +4331,14 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
   const targetWindow = useMemo(() => getTargetWindow(project), [project]);
   const projectMarkedComplete = overallPct >= 100;
 
+  const chapterTwoComplete = useMemo(() => {
+    const chapterTwoStep = STEPS[1];
+    if (!chapterTwoStep) return false;
+
+    const status = getStepStatus(project, chapterTwoStep);
+    return String(status?.status || '').toLowerCase() === 'completed';
+  }, [project]);
+
   const currentStepIndex = useMemo(
     () => (overallPct === 0 ? 0 : getCurrentStepIndex(project)),
     [project, overallPct]
@@ -4539,6 +4556,7 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
           stageIndex: canonicalStageIndex,
           currentStepIndex,
           projectMarkedComplete,
+          chapterTwoComplete,
         });
 
         const stepStatus = getResolvedVisualStageState({
@@ -4557,10 +4575,8 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
           visualState = 'completed';
         } else if (stepStatus === STAGE_MEDIA_STATE.CURRENT) {
           visualState = 'current';
-        } else if (stepStatus === STAGE_MEDIA_STATE.NEXT) {
-          visualState = 'future';
         } else {
-          visualState = 'locked';
+          visualState = 'future';
         }
       }
 
@@ -4594,6 +4610,7 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
     project,
     currentStepIndex,
     projectMarkedComplete,
+    chapterTwoComplete,
   ]);
 
   useEffect(() => {
@@ -4617,6 +4634,7 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
           stageIndex: activeCanonicalStageIndex,
           currentStepIndex,
           projectMarkedComplete,
+          chapterTwoComplete,
         })
       : false;
 
@@ -4648,6 +4666,7 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
     storyChapters,
     currentStepIndex,
     projectMarkedComplete,
+    chapterTwoComplete,
   ]);
 
   const activeStep =
@@ -5110,12 +5129,18 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
           stageIndex: canonicalStageIndex,
           currentStepIndex,
           projectMarkedComplete,
+          chapterTwoComplete,
         });
 
         return accessible ? idx : null;
       })
       .filter((idx) => idx !== null);
-  }, [storyChapters, currentStepIndex, projectMarkedComplete]);
+  }, [
+    storyChapters,
+    currentStepIndex,
+    projectMarkedComplete,
+    chapterTwoComplete,
+  ]);
 
   const prevAccessibleIndex = [...accessibleStoryIndexes]
     .reverse()
@@ -5286,6 +5311,7 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
       stageIndex: canonicalStageIndex,
       currentStepIndex,
       projectMarkedComplete,
+      chapterTwoComplete,
     });
 
     if (!isAccessible) return;
@@ -6095,70 +6121,70 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
 
   return (
     <div className="sl-progress">
-<section className="sl-progress-build-summary">
-  <div className="sl-progress-main-shell">
-    <div className="sl-progress-build-summary-stage sl-progress-build-summary-stage--hero">
-      <div className="sl-progress-build-summary-stage-copy">
-        <div className="sl-progress-build-summary-stage-kicker">
-          {isProjectComplete ? 'Legacy Status' : 'Build Roadmap'}
-        </div>
+      <section className="sl-progress-build-summary">
+        <div className="sl-progress-main-shell">
+          <div className="sl-progress-build-summary-stage sl-progress-build-summary-stage--hero">
+            <div className="sl-progress-build-summary-stage-copy">
+              <div className="sl-progress-build-summary-stage-kicker">
+                {isProjectComplete ? 'Legacy Status' : 'Build Roadmap'}
+              </div>
 
-        <div className="sl-progress-build-summary-stage-title">
-          {isProjectComplete
-            ? shippingSummary.headline
-            : isLegacyChapter
-              ? 'Legacy Chapter • From Ober Artisan'
-              : currentStageLabel}
-        </div>
+              <div className="sl-progress-build-summary-stage-title">
+                {isProjectComplete
+                  ? shippingSummary.headline
+                  : isLegacyChapter
+                    ? 'Legacy Chapter • From Ober Artisan'
+                    : currentStageLabel}
+              </div>
 
-        <div className="sl-progress-build-summary-stage-subtitle">
-          {isProjectComplete
-            ? shippingSummary.deliveryStatus
-            : isLegacyChapter
-              ? 'Final handoff • Story now belongs to the artist'
-              : currentStepLabel}
-        </div>
-      </div>
+              <div className="sl-progress-build-summary-stage-subtitle">
+                {isProjectComplete
+                  ? shippingSummary.deliveryStatus
+                  : isLegacyChapter
+                    ? 'Final handoff • Story now belongs to the artist'
+                    : currentStepLabel}
+              </div>
+            </div>
 
-      <div className="sl-progress-build-summary-track-shell">
-        <div className="sl-progress-build-summary-track">
-          <div
-            className="sl-progress-build-summary-track-fill"
-            style={{ width: `${overallPct}%` }}
-          />
-          <div
-            className="sl-progress-build-summary-track-glow"
-            style={{ width: `${overallPct}%` }}
-          />
-        </div>
-      </div>
+            <div className="sl-progress-build-summary-track-shell">
+              <div className="sl-progress-build-summary-track">
+                <div
+                  className="sl-progress-build-summary-track-fill"
+                  style={{ width: `${overallPct}%` }}
+                />
+                <div
+                  className="sl-progress-build-summary-track-glow"
+                  style={{ width: `${overallPct}%` }}
+                />
+              </div>
+            </div>
 
-      <div className="sl-progress-build-summary-stage-footer">
-        <div className="sl-progress-build-summary-stage-target">
-          <div className="sl-progress-build-summary-stage-target-label">
-            {isProjectComplete
-              ? 'Final Chapter'
-              : 'Target Completion Window'}
+            <div className="sl-progress-build-summary-stage-footer">
+              <div className="sl-progress-build-summary-stage-target">
+                <div className="sl-progress-build-summary-stage-target-label">
+                  {isProjectComplete
+                    ? 'Final Chapter'
+                    : 'Target Completion Window'}
+                </div>
+                <div className="sl-progress-build-summary-stage-target-value">
+                  {isProjectComplete
+                    ? 'Legacy Chapter • From Ober Artisan'
+                    : targetWindow || 'TBD'}
+                </div>
+              </div>
+
+              <div className="sl-progress-build-summary-stage-percent-inline">
+                <div className="sl-progress-build-summary-stage-percent-inline-value">
+                  {overallPct}%
+                </div>
+                <div className="sl-progress-build-summary-stage-percent-inline-label">
+                  {isProjectComplete ? 'Complete' : 'Progress'}
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="sl-progress-build-summary-stage-target-value">
-            {isProjectComplete
-              ? 'Legacy Chapter • From Ober Artisan'
-              : targetWindow || 'TBD'}
-          </div>
         </div>
-
-        <div className="sl-progress-build-summary-stage-percent-inline">
-          <div className="sl-progress-build-summary-stage-percent-inline-value">
-            {overallPct}%
-          </div>
-          <div className="sl-progress-build-summary-stage-percent-inline-label">
-            {isProjectComplete ? 'Complete' : 'Progress'}
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+      </section>
       <div className="sl-progress-stage-stack">
         <div className="sl-progress-chapter-selector-bar">
           <div
