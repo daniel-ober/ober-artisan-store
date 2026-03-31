@@ -1,14 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import {
-  collection,
-  getDocs,
-  deleteDoc,
-  doc,
-  updateDoc,
-} from 'firebase/firestore';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useMemo, useState } from 'react';
+import { collection, getDocs, doc, updateDoc } from 'firebase/firestore';
 import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
-import { db } from '../firebaseConfig';
+import { httpsCallable } from 'firebase/functions';
+import { db, functions } from '../firebaseConfig';
 import EditUserModal from './EditUserModal';
 import AddUserModal from './AddUserModal';
 import { useImpersonation } from '../context/ImpersonationContext';
@@ -16,84 +10,152 @@ import './ManageUsers.css';
 
 const auth = getAuth();
 
-/* ------------ Cloud Functions config ------------ */
-/** Make sure these match your deployed Functions **/
-const CF_REGION = 'us-central1'; // <- change if you deployed somewhere else
-const CF_PROJECT = 'danoberartisandrums';
-const CF_BASE = `https://${CF_REGION}-${CF_PROJECT}.cloudfunctions.net`;
-
-// This MUST match the function name you see in the Functions console
-const WELCOME_FN_NAME = 'sendSoundLegendWelcomeEmail';
-
-/* ------------ helpers ------------ */
-
-const generateTempPassword = () => {
-  const words = [
-    'Legend',
-    'Stave',
-    'Shell',
-    'Groove',
-    'Pulse',
-    'Torch',
-    'Maple',
-    'Cherry',
-    'Oak',
-  ];
-  const w = words[Math.floor(Math.random() * words.length)];
-  const num = Math.floor(100 + Math.random() * 900);
-  const symbol = '!';
-  return `${w}${num}${symbol}`;
-};
-
-const normalize = (str = '') =>
-  String(str).toLowerCase().replace(/\s+/g, ' ').trim();
-
 const isAdminUser = (user) => !!user?.isAdmin;
 
-/* ====================================== */
-/*              Component                 */
-/* ====================================== */
+const normalizeEmail = (email = '') =>
+  String(email || '').trim().toLowerCase();
+
+const formatMaybeDate = (value) => {
+  if (!value) return '';
+  try {
+    if (typeof value?.toDate === 'function') {
+      return value.toDate().toLocaleString();
+    }
+    if (value instanceof Date) {
+      return value.toLocaleString();
+    }
+    const parsed = new Date(value);
+    if (!Number.isNaN(parsed.getTime())) {
+      return parsed.toLocaleString();
+    }
+    return '';
+  } catch {
+    return '';
+  }
+};
+
+const scoreUserForDisplay = (user) => {
+  let score = 0;
+  if (user.uid) score += 100;
+  if (user.portalAccessGranted) score += 40;
+  if (user.portalInviteSent) score += 30;
+  if (user.authAccountCreated) score += 20;
+  if (user.isSoundlegend) score += 15;
+  if (user.fullName && user.fullName !== '—') score += 10;
+  if (user.firstName || user.lastName) score += 5;
+  if (user.isAdmin) score -= 500;
+  return score;
+};
+
+const mergeUsersForDisplay = (base, incoming) => {
+  return {
+    ...base,
+    ...incoming,
+    id: incoming.uid || base.uid ? incoming.uid || base.uid : incoming.id || base.id,
+    uid: incoming.uid || base.uid || '',
+    email: normalizeEmail(incoming.email || base.email || ''),
+    firstName: incoming.firstName || base.firstName || '',
+    lastName: incoming.lastName || base.lastName || '',
+    fullName:
+      incoming.fullName ||
+      base.fullName ||
+      `${incoming.firstName || base.firstName || ''} ${incoming.lastName || base.lastName || ''}`.trim(),
+    isSoundlegend: !!(base.isSoundlegend || incoming.isSoundlegend),
+    isAdmin: !!(base.isAdmin || incoming.isAdmin),
+    slPortalLocked:
+      typeof incoming.slPortalLocked === 'boolean'
+        ? incoming.slPortalLocked
+        : base.slPortalLocked,
+    portalAccessGranted:
+      typeof incoming.portalAccessGranted === 'boolean'
+        ? incoming.portalAccessGranted
+        : base.portalAccessGranted,
+    portalInviteSent: !!(base.portalInviteSent || incoming.portalInviteSent),
+    authAccountCreated:
+      !!(base.authAccountCreated || incoming.authAccountCreated || incoming.uid),
+    lastWelcomeEmailSentAt:
+      incoming.lastWelcomeEmailSentAt ||
+      base.lastWelcomeEmailSentAt ||
+      null,
+  };
+};
+
+const dedupeUsersByEmail = (usersList = []) => {
+  const grouped = new Map();
+
+  usersList.forEach((user) => {
+    const normalizedEmail = normalizeEmail(user.email);
+    const key = normalizedEmail || `doc:${user.id}`;
+
+    if (!grouped.has(key)) {
+      grouped.set(key, user);
+      return;
+    }
+
+    const existing = grouped.get(key);
+    const winner =
+      scoreUserForDisplay(user) > scoreUserForDisplay(existing)
+        ? mergeUsersForDisplay(user, existing)
+        : mergeUsersForDisplay(existing, user);
+
+    grouped.set(key, winner);
+  });
+
+  return Array.from(grouped.values()).sort((a, b) => {
+    const aAdmin = a.isAdmin ? 1 : 0;
+    const bAdmin = b.isAdmin ? 1 : 0;
+    if (aAdmin !== bAdmin) return aAdmin - bAdmin;
+
+    const aName = (a.fullName || a.email || '').toLowerCase();
+    const bName = (b.fullName || b.email || '').toLowerCase();
+    return aName.localeCompare(bName);
+  });
+};
 
 const ManageUsers = () => {
   const [users, setUsers] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [filteredUsers, setFilteredUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const [loadingDelete, setLoadingDelete] = useState(false);
-  const [loadingActionId, setLoadingActionId] = useState(null); // per-row actions
+  const [loadingActionId, setLoadingActionId] = useState(null);
 
-  const navigate = useNavigate();
   const { startImpersonation } = useImpersonation();
 
-  /* ---------- load users ---------- */
   useEffect(() => {
     const fetchUsers = async () => {
       try {
         const usersCollection = collection(db, 'users');
         const userSnapshot = await getDocs(usersCollection);
-        const usersList = userSnapshot.docs.map((docSnap) => {
+
+        const rawUsers = userSnapshot.docs.map((docSnap) => {
           const data = docSnap.data() || {};
           const firstName = data.firstName || '';
           const lastName = data.lastName || '';
-          const fullName = `${firstName} ${lastName}`.trim();
+          const fullName = data.fullName || `${firstName} ${lastName}`.trim();
 
           return {
             id: docSnap.id,
-            email: data.email || 'N/A',
+            docId: docSnap.id,
+            uid: data.uid || (docSnap.id.startsWith('lead_') ? '' : docSnap.id),
+            email: normalizeEmail(data.email || 'N/A'),
             firstName,
             lastName,
-            fullName,
+            fullName: fullName || '—',
+            phone: data.phone || '',
+            status: data.status || 'active',
             isSoundlegend: !!data.isSoundlegend,
-            slPortalLocked: !!data.slPortalLocked,
-            // 🔐 Admin flag is managed *only* in Firestore (no UI toggle)
             isAdmin: !!data.isAdmin,
+            slPortalLocked: !!data.slPortalLocked,
+            portalAccessGranted: !!data.portalAccessGranted,
+            portalInviteSent: !!data.portalInviteSent,
+            authAccountCreated: !!data.authAccountCreated || !!data.uid,
+            lastWelcomeEmailSentAt:
+              data.lastWelcomeEmailSentAt || data.welcomeEmailSentAt || null,
           };
         });
 
-        setUsers(usersList);
-        setFilteredUsers(usersList);
+        setUsers(dedupeUsersByEmail(rawUsers));
       } catch (error) {
         console.error('Error fetching users:', error);
       }
@@ -102,12 +164,11 @@ const ManageUsers = () => {
     fetchUsers();
   }, []);
 
-  /* ---------- search filter ---------- */
-  const handleSearch = (e) => {
-    const query = e.target.value.toLowerCase();
-    setSearchQuery(query);
+  const filteredUsers = useMemo(() => {
+    const query = searchQuery.trim().toLowerCase();
+    if (!query) return users;
 
-    const filtered = users.filter((user) => {
+    return users.filter((user) => {
       const haystack = [
         user.email,
         user.firstName,
@@ -116,22 +177,53 @@ const ManageUsers = () => {
       ]
         .map((v) => (v || '').toLowerCase())
         .join(' ');
+
       return haystack.includes(query);
     });
+  }, [users, searchQuery]);
 
-    setFilteredUsers(filtered);
+  const updateLocalUser = (idOrEmail, patch) => {
+    setUsers((prev) => {
+      const next = prev.map((u) => {
+        const emailMatch =
+          normalizeEmail(idOrEmail) &&
+          normalizeEmail(u.email) === normalizeEmail(idOrEmail);
+
+        if (u.id === idOrEmail || u.uid === idOrEmail || emailMatch) {
+          return { ...u, ...patch };
+        }
+        return u;
+      });
+
+      return dedupeUsersByEmail(next);
+    });
+
+    setSelectedUser((prev) => {
+      if (!prev) return prev;
+
+      const emailMatch =
+        normalizeEmail(idOrEmail) &&
+        normalizeEmail(prev.email) === normalizeEmail(idOrEmail);
+
+      if (prev.id === idOrEmail || prev.uid === idOrEmail || emailMatch) {
+        return { ...prev, ...patch };
+      }
+      return prev;
+    });
   };
 
-  /* ---------- CRUD helpers ---------- */
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
+  };
 
   const handleViewUser = (user) => {
     if (isAdminUser(user)) {
       alert(
-        'Admin users are read-only in this screen.\n\n' +
-          'Update their Firestore document directly if you need to change admin settings.'
+        'Admin users are read-only in this screen.\n\nUpdate admin flags directly in Firestore if needed.'
       );
       return;
     }
+
     setSelectedUser(user);
     setIsEditModalOpen(true);
   };
@@ -141,94 +233,80 @@ const ManageUsers = () => {
     setSelectedUser(null);
   };
 
-  const handleDeleteUser = async (userId) => {
-    const target = users.find((u) => u.id === userId);
-    if (isAdminUser(target)) {
-      alert(
-        'Admin users cannot be deleted from this screen.\n\n' +
-          'If you truly need to delete an admin, handle it carefully via Firebase Admin / Firestore.'
-      );
-      return;
-    }
-
-    if (!window.confirm('Delete this user from the users collection?')) return;
-    setLoadingDelete(true);
-    try {
-      await deleteDoc(doc(db, 'users', userId));
-      const remaining = users.filter((u) => u.id !== userId);
-      setUsers(remaining);
-      setFilteredUsers(remaining);
-    } catch (error) {
-      console.error('Error deleting user:', error);
-    } finally {
-      setLoadingDelete(false);
-    }
-  };
-
   const handleAddUser = () => setIsAddModalOpen(true);
   const handleAddUserClose = () => setIsAddModalOpen(false);
 
-  const updateLocalUser = (id, patch) => {
-    setUsers((prev) =>
-      prev.map((u) => (u.id === id ? { ...u, ...patch } : u))
-    );
-    setFilteredUsers((prev) =>
-      prev.map((u) => (u.id === id ? { ...u, ...patch } : u))
-    );
-    setSelectedUser((prev) => (prev?.id === id ? { ...prev, ...patch } : prev));
+  const getPortalStatus = (user) => {
+    if (!user?.isSoundlegend && !user?.portalInviteSent && !user?.authAccountCreated) {
+      return {
+        label: 'Portal Inactive',
+        className: 'off',
+      };
+    }
+
+    if (user.portalAccessGranted && !user.slPortalLocked) {
+      return {
+        label: 'Portal Active',
+        className: 'unlocked',
+      };
+    }
+
+    return {
+      label: 'Portal Expired',
+      className: 'locked',
+    };
   };
 
-  /* ---------- SoundLegend access toggle ---------- */
-  const handleToggleSlAccess = async (user) => {
-    if (!user?.id) return;
+  const handleTogglePortalAccess = async (user) => {
+    const canonicalId = user?.uid || user?.id;
+    if (!canonicalId) return;
+
     if (isAdminUser(user)) {
-      alert(
-        'Admin users are managed via Firestore and cannot be edited here (including SoundLegend access).'
-      );
+      alert('Admin users are managed via Firestore and cannot be edited here.');
       return;
     }
 
-    const newVal = !user.isSoundlegend;
-    setLoadingActionId(user.id);
+    const isCurrentlyActive =
+      user.isSoundlegend && !user.slPortalLocked && user.portalAccessGranted;
+
+    const nextLocked = isCurrentlyActive;
+    const nextGranted = !isCurrentlyActive;
+    const nextIsSoundlegend = true;
+
+    const confirmMessage = isCurrentlyActive
+      ? `Expire portal access for ${user.email}?\n\nThey will no longer be able to use the SoundLegend portal until access is restored.`
+      : `Restore portal access for ${user.email}?\n\nThey will be able to use the SoundLegend portal again.`;
+
+    if (!window.confirm(confirmMessage)) return;
+
+    setLoadingActionId(canonicalId);
+
     try {
-      await updateDoc(doc(db, 'users', user.id), {
-        isSoundlegend: newVal,
+      await updateDoc(doc(db, 'users', canonicalId), {
+        isSoundlegend: nextIsSoundlegend,
+        slPortalLocked: nextLocked,
+        portalAccessGranted: nextGranted,
+        portalStatus: nextGranted ? 'active' : 'expired',
+        access: {
+          soundlegend: nextGranted,
+        },
       });
-      updateLocalUser(user.id, { isSoundlegend: newVal });
+
+      updateLocalUser(user.email || canonicalId, {
+        id: canonicalId,
+        uid: canonicalId,
+        isSoundlegend: nextIsSoundlegend,
+        slPortalLocked: nextLocked,
+        portalAccessGranted: nextGranted,
+      });
     } catch (err) {
-      console.error('Failed to toggle SL access:', err);
-      alert('There was a problem updating SoundLegend access.');
+      console.error('Failed to update portal access:', err);
+      alert('There was a problem updating portal access.');
     } finally {
       setLoadingActionId(null);
     }
   };
 
-  /* ---------- Portal lock toggle ---------- */
-  const handleTogglePortalLock = async (user) => {
-    if (!user?.id) return;
-    if (isAdminUser(user)) {
-      alert(
-        'Admin users are managed via Firestore and cannot be edited here (including portal lock).'
-      );
-      return;
-    }
-
-    const newVal = !user.slPortalLocked;
-    setLoadingActionId(user.id);
-    try {
-      await updateDoc(doc(db, 'users', user.id), {
-        slPortalLocked: newVal,
-      });
-      updateLocalUser(user.id, { slPortalLocked: newVal });
-    } catch (err) {
-      console.error('Failed to toggle portal lock:', err);
-      alert('There was a problem updating portal lock status.');
-    } finally {
-      setLoadingActionId(null);
-    }
-  };
-
-  /* ---------- send password reset email ---------- */
   const handleSendResetEmail = async (user) => {
     if (isAdminUser(user)) {
       alert(
@@ -241,11 +319,13 @@ const ManageUsers = () => {
       alert('No valid email on file for this user.');
       return;
     }
-    setLoadingActionId(user.id);
+
+    setLoadingActionId(user.uid || user.id);
+
     try {
       await sendPasswordResetEmail(auth, user.email);
       alert(
-        `Password reset email sent to ${user.email}.\n\nThe artist will click the link, log in, and set a new password.`
+        `Password reset email sent to ${user.email}.\n\nThe artist can use that email to reset their password and sign back in.`
       );
     } catch (err) {
       console.error('Failed to send reset email:', err);
@@ -255,76 +335,6 @@ const ManageUsers = () => {
     }
   };
 
-  /* ---------- temp password flow ---------- */
-  const handleTempPassword = async (user) => {
-    if (isAdminUser(user)) {
-      alert(
-        'Admin passwords must not be changed via this temp-password flow.\n\n' +
-          'Handle admin password changes via Firebase Admin / Auth console instead.'
-      );
-      return;
-    }
-
-    if (!user?.id || !user?.email || user.email === 'N/A') {
-      alert('User must have a valid email and id for this action.');
-      return;
-    }
-
-    const tempPassword = generateTempPassword();
-
-    if (
-      !window.confirm(
-        `Generate a temporary password for ${user.email}?\n\n` +
-          `You will see the temp password after it is set. ` +
-          `Share it carefully (phone, in-person, or secure email).`
-      )
-    ) {
-      return;
-    }
-
-    setLoadingActionId(user.id);
-    try {
-      // 🔐 Cloud Function that uses Firebase Admin SDK to set the password
-      const resp = await fetch(`${CF_BASE}/adminSetTempPassword`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          uid: user.id,
-          email: user.email,
-          tempPassword,
-        }),
-      });
-
-      if (!resp.ok) {
-        throw new Error(
-          `adminSetTempPassword failed with status ${resp.status}`
-        );
-      }
-
-      // Optional: also send a standard password reset email, so they can
-      // immediately choose a permanent password after first login.
-      await sendPasswordResetEmail(auth, user.email);
-
-      window.alert(
-        `Temporary password for ${user.email}:\n\n` +
-          `${tempPassword}\n\n` +
-          `Share this carefully (phone, in-person, or secure email).\n` +
-          `Ask the artist to:\n` +
-          `1) Log in with this temp password.\n` +
-          `2) Use the reset link in their email to set a new permanent password.`
-      );
-    } catch (err) {
-      console.error('Failed to set temporary password:', err);
-      alert(
-        'There was a problem setting the temporary password. ' +
-          'Check the Cloud Function logs for adminSetTempPassword.'
-      );
-    } finally {
-      setLoadingActionId(null);
-    }
-  };
-
-  /* ---------- welcome email flow ---------- */
   const handleSendWelcomeEmail = async (user) => {
     if (isAdminUser(user)) {
       alert(
@@ -338,61 +348,66 @@ const ManageUsers = () => {
       return;
     }
 
-    const confirm = window.confirm(
-      `Send a SoundLegend welcome email to ${user.email}?\n\n` +
-        'This will send the artist a branded "Welcome to your Artist Portal" message with sign-in instructions.'
-    );
-    if (!confirm) return;
+    const confirmMessage = user.portalInviteSent
+      ? `Re-send the SoundLegend welcome email to ${user.email}?\n\nThis will send them another create-password / portal access email.`
+      : `Send a SoundLegend welcome email to ${user.email}?\n\nThis will create the Firebase Auth account if needed, grant portal access, and send a create-password email.`;
 
-    setLoadingActionId(user.id);
+    if (!window.confirm(confirmMessage)) return;
+
+    setLoadingActionId(user.uid || user.id);
+
     try {
-      const resp = await fetch(`${CF_BASE}/${WELCOME_FN_NAME}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: user.email,
-          name: user.fullName || '',
-        }),
+      const sendWelcomeEmail = httpsCallable(
+        functions,
+        'sendSoundLegendWelcomeEmail'
+      );
+
+      const result = await sendWelcomeEmail({
+        userId: user.uid || user.id,
+        email: user.email,
+        name: user.fullName || '',
       });
 
-      if (!resp.ok) {
-        const text = await resp.text().catch(() => '');
-        throw new Error(`HTTP ${resp.status} ${text}`);
-      }
+      const returnedUid = result?.data?.uid || user.uid || user.id;
+      const now = new Date();
+
+      updateLocalUser(user.email || returnedUid, {
+        id: returnedUid,
+        uid: returnedUid,
+        isSoundlegend: true,
+        slPortalLocked: false,
+        portalAccessGranted: true,
+        portalInviteSent: true,
+        authAccountCreated: true,
+        lastWelcomeEmailSentAt: now,
+      });
 
       alert(
-        `Welcome email queued for ${user.email}.\n\n` +
-          'Ask the artist to check their inbox (and spam/promotions).'
+        `Welcome email sent to ${user.email}.\n\nThey should use the email link to create their password, then sign in at /artisan-portal/signin.`
       );
     } catch (err) {
       console.error('Failed to send welcome email:', err);
       alert(
-        'We could not send the welcome email automatically.\n\n' +
-          'Please email the artist manually (e.g., from Gmail) instead.\n\n' +
-          `Developer info (see console & Cloud Functions logs):\n${err?.message || err}`
+        `We could not send the welcome email automatically.\n\nError: ${
+          err?.message || err
+        }`
       );
     } finally {
       setLoadingActionId(null);
     }
   };
 
-  /* ---------- impersonate & view portal ---------- */
   const handleImpersonateUser = (user) => {
-    if (!user?.id) return;
+    const canonicalId = user?.uid || user?.id;
+    if (!canonicalId) return;
 
-    // 1) Keep your existing context behavior
-    startImpersonation(user.id);
-
-    // 2) Persist impersonation so /legacy can read it even if context hasn't hydrated yet
-    sessionStorage.setItem('impersonateUid', user.id);
+    startImpersonation(canonicalId);
+    sessionStorage.setItem('impersonateUid', canonicalId);
     sessionStorage.setItem('impersonateEmail', user.email || '');
     sessionStorage.setItem('impersonateName', user.fullName || '');
 
-    // 3) Open portal in new tab so you don't lose admin view
     window.open('/legacy', '_blank');
   };
-
-  /* ---------- render ---------- */
 
   return (
     <div className="manage-users">
@@ -400,10 +415,11 @@ const ManageUsers = () => {
         <div>
           <h2 className="manage-users-header">Manage Users</h2>
           <p className="manage-users-subtitle">
-            Manage SoundLegend access, portal locks, and password tools for your
-            artists.
+            Manage SoundLegend portal access, invite emails, and password reset
+            tools for your artists.
           </p>
         </div>
+
         <button className="add-btn" onClick={handleAddUser}>
           + Add User
         </button>
@@ -427,6 +443,7 @@ const ManageUsers = () => {
               <th>More</th>
             </tr>
           </thead>
+
           <tbody>
             {filteredUsers.length === 0 ? (
               <tr>
@@ -434,23 +451,24 @@ const ManageUsers = () => {
               </tr>
             ) : (
               filteredUsers.map((user) => {
-                const busy = loadingActionId === user.id;
+                const busy = loadingActionId === (user.uid || user.id);
                 const isAdmin = isAdminUser(user);
+                const portalStatus = getPortalStatus(user);
+                const welcomeLabel = user.portalInviteSent
+                  ? 'Re-send Welcome Email'
+                  : 'Send Welcome Email';
+                const lastWelcomeSent = formatMaybeDate(
+                  user.lastWelcomeEmailSentAt
+                );
 
                 return (
-                  <tr key={user.id}>
-                    {/* Email + flags */}
+                  <tr key={user.uid || user.id || user.email}>
                     <td>
                       <div className="user-email-cell">{user.email}</div>
                       <div className="user-flags">
                         {user.isSoundlegend && (
                           <span className="user-flag user-flag-sl">
                             SoundLegend
-                          </span>
-                        )}
-                        {user.slPortalLocked && (
-                          <span className="user-flag user-flag-locked">
-                            Locked
                           </span>
                         )}
                         {isAdmin && (
@@ -461,10 +479,8 @@ const ManageUsers = () => {
                       </div>
                     </td>
 
-                    {/* Name */}
                     <td>{user.fullName || '—'}</td>
 
-                    {/* Portal controls */}
                     <td className="portal-controls-cell">
                       {isAdmin ? (
                         <div className="admin-portal-note">
@@ -482,33 +498,16 @@ const ManageUsers = () => {
                           <div className="portal-toggle-row">
                             <button
                               type="button"
-                              className={`pill-toggle ${
-                                user.isSoundlegend ? 'on' : 'off'
-                              }`}
-                              onClick={() => handleToggleSlAccess(user)}
-                              disabled={busy}
-                            >
-                              {user.isSoundlegend
-                                ? 'SL Access: ON'
-                                : 'SL Access: OFF'}
-                            </button>
-
-                            <button
-                              type="button"
-                              className={`pill-toggle lock ${
-                                user.slPortalLocked ? 'locked' : 'unlocked'
-                              }`}
-                              onClick={() => handleTogglePortalLock(user)}
+                              className={`pill-toggle lock ${portalStatus.className}`}
+                              onClick={() => handleTogglePortalAccess(user)}
                               disabled={busy}
                               data-tooltip={
-                                'Lock the SoundLegend portal for this artist.\n' +
-                                'Use this if there are billing issues, account review,\n' +
-                                'or the artist has requested a temporary hold.'
+                                portalStatus.className === 'unlocked'
+                                  ? 'Portal is currently active.\nClick to expire portal access.'
+                                  : 'Portal is currently expired/locked.\nClick to restore portal access.'
                               }
                             >
-                              {user.slPortalLocked
-                                ? 'Portal Locked'
-                                : 'Portal Unlocked'}
+                              {portalStatus.label}
                             </button>
                           </div>
 
@@ -517,9 +516,7 @@ const ManageUsers = () => {
                               type="button"
                               className="mini-btn"
                               onClick={() => handleSendResetEmail(user)}
-                              disabled={
-                                busy || !user.email || user.email === 'N/A'
-                              }
+                              disabled={busy || !user.email || user.email === 'N/A'}
                             >
                               Send Reset Email
                             </button>
@@ -527,35 +524,30 @@ const ManageUsers = () => {
                             <button
                               type="button"
                               className="mini-btn secondary"
-                              onClick={() => handleTempPassword(user)}
-                              disabled={
-                                busy || !user.email || user.email === 'N/A'
-                              }
-                              data-tooltip={
-                                'Generate a one-time temporary password, set it\n' +
-                                'via the admin Cloud Function, and send the artist\n' +
-                                'a reset email so they can choose a permanent one.'
-                              }
-                            >
-                              Temp Password
-                            </button>
-
-                            <button
-                              type="button"
-                              className="mini-btn secondary"
                               onClick={() => handleSendWelcomeEmail(user)}
-                              disabled={
-                                busy || !user.email || user.email === 'N/A'
-                              }
+                              disabled={busy || !user.email || user.email === 'N/A'}
                             >
-                              Send Welcome Email
+                              {welcomeLabel}
                             </button>
                           </div>
+
+                          {user.portalInviteSent && (
+                            <div
+                              style={{
+                                marginTop: '8px',
+                                fontSize: '0.82rem',
+                                color: '#666',
+                              }}
+                            >
+                              {lastWelcomeSent
+                                ? `Last welcome email sent: ${lastWelcomeSent}`
+                                : 'Welcome email has been sent previously.'}
+                            </div>
+                          )}
                         </>
                       )}
                     </td>
 
-                    {/* More actions */}
                     <td>
                       <div className="more-actions">
                         {isAdmin ? (
@@ -611,7 +603,7 @@ const ManageUsers = () => {
           user={selectedUser}
           onClose={handleCloseModal}
           onUserUpdated={(updatedUser) => {
-            updateLocalUser(updatedUser.id, updatedUser);
+            updateLocalUser(updatedUser.email || updatedUser.id, updatedUser);
           }}
         />
       )}
@@ -620,9 +612,7 @@ const ManageUsers = () => {
         <AddUserModal
           onClose={handleAddUserClose}
           onUserAdded={(newUser) => {
-            const next = [newUser, ...users];
-            setUsers(next);
-            setFilteredUsers(next);
+            setUsers((prev) => dedupeUsersByEmail([newUser, ...prev]));
           }}
         />
       )}

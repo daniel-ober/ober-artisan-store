@@ -1,0 +1,387 @@
+import React, { useEffect, useMemo, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import {
+  collection,
+  doc,
+  getDocs,
+  limit,
+  query,
+  serverTimestamp,
+  updateDoc,
+  where,
+} from 'firebase/firestore';
+import { db } from '../firebaseConfig';
+import ConsultationIntakePanel from './SoundLegendPortal/ConsultationIntakePanel';
+import { buildConsultationIntakeDefaults } from '../utils/consultationIntakeSchema';
+import './SoundlegendQuestionnaire.css';
+
+function normalizeIncomingIntake(value = {}) {
+  const defaults = buildConsultationIntakeDefaults();
+  const merged = { ...defaults };
+
+  Object.keys(defaults).forEach((sectionKey) => {
+    merged[sectionKey] = {
+      ...defaults[sectionKey],
+      ...(value?.[sectionKey] || {}),
+    };
+  });
+
+  return merged;
+}
+
+function formatTimestamp(ts) {
+  if (!ts) return '';
+  try {
+    if (typeof ts.toDate === 'function') {
+      return ts.toDate().toLocaleString();
+    }
+    if (ts.seconds) {
+      return new Date(ts.seconds * 1000).toLocaleString();
+    }
+    return new Date(ts).toLocaleString();
+  } catch {
+    return '';
+  }
+}
+
+async function findSubmissionByToken(token) {
+  const submissionsRef = collection(db, 'soundlegend_submissions');
+  const submissionQuery = query(
+    submissionsRef,
+    where('questionnaireToken', '==', token),
+    limit(1)
+  );
+
+  const snap = await getDocs(submissionQuery);
+
+  if (!snap.empty) {
+    return snap.docs[0];
+  }
+
+  return null;
+}
+
+function SoundlegendQuestionnaire() {
+  const { token } = useParams();
+  const navigate = useNavigate();
+
+  const [submissionDocId, setSubmissionDocId] = useState('');
+  const [linkedUserId, setLinkedUserId] = useState('');
+  const [customerName, setCustomerName] = useState('');
+  const [customerEmail, setCustomerEmail] = useState('');
+  const [completedAt, setCompletedAt] = useState(null);
+  const [intakeValue, setIntakeValue] = useState(() =>
+    normalizeIncomingIntake({})
+  );
+
+  const [isLoading, setIsLoading] = useState(true);
+  const [isInvalidToken, setIsInvalidToken] = useState(false);
+  const [isAlreadyComplete, setIsAlreadyComplete] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const [fatalLoadError, setFatalLoadError] = useState('');
+  const [submitError, setSubmitError] = useState('');
+
+  const pageTitle = useMemo(() => {
+    if (customerName?.trim()) {
+      return `${customerName.split(' ')[0]}'s SoundLegend Questionnaire`;
+    }
+    return 'Your SoundLegend Questionnaire';
+  }, [customerName]);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadSubmission = async () => {
+      if (!token) {
+        if (!isMounted) return;
+        setIsInvalidToken(true);
+        setIsLoading(false);
+        return;
+      }
+
+      try {
+        setIsLoading(true);
+        setFatalLoadError('');
+        setSubmitError('');
+        setIsInvalidToken(false);
+
+        let foundDoc = await findSubmissionByToken(token);
+
+        if (!foundDoc) {
+          await new Promise((resolve) => setTimeout(resolve, 500));
+          foundDoc = await findSubmissionByToken(token);
+        }
+
+        if (!isMounted) return;
+
+        if (!foundDoc) {
+          setIsInvalidToken(true);
+          setIsLoading(false);
+          return;
+        }
+
+        const data = foundDoc.data() || {};
+        const normalizedIntake = normalizeIncomingIntake(
+          data.consultationIntake || {}
+        );
+
+        setSubmissionDocId(foundDoc.id);
+        setLinkedUserId(data.linkedUserId || '');
+        setCustomerName(
+          data.fullName ||
+            `${data.firstName || ''} ${data.lastName || ''}`.trim() ||
+            ''
+        );
+        setCustomerEmail(data.email || '');
+        setIntakeValue(normalizedIntake);
+        setIsAlreadyComplete(!!data.questionnaireCompleted);
+        setCompletedAt(data.questionnaireCompletedAt || null);
+      } catch (err) {
+        console.error('Failed to load SoundLegend questionnaire:', err);
+        if (!isMounted) return;
+        setFatalLoadError('Unable to load this questionnaire right now.');
+      } finally {
+        if (isMounted) {
+          setIsLoading(false);
+        }
+      }
+    };
+
+    loadSubmission();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [token]);
+
+  const handleFinalSubmit = async () => {
+    if (!submissionDocId || isSubmitting || isAlreadyComplete) return;
+
+    try {
+      setIsSubmitting(true);
+      setSubmitError('');
+
+      const normalized = normalizeIncomingIntake(intakeValue);
+
+      await updateDoc(doc(db, 'soundlegend_submissions', submissionDocId), {
+        consultationIntake: normalized,
+        consultationIntakeUpdatedAt: serverTimestamp(),
+        questionnaireCompleted: true,
+        questionnaireCompletedAt: serverTimestamp(),
+        status: 'Questionnaire Complete',
+        stage: 'questionnaire_complete',
+      });
+
+      if (linkedUserId) {
+        try {
+          await updateDoc(doc(db, 'users', linkedUserId), {
+            consultationIntake: normalized,
+            consultationIntakeUpdatedAt: serverTimestamp(),
+            questionnaireCompleted: true,
+            questionnaireCompletedAt: serverTimestamp(),
+            soundlegendLeadStatus: 'questionnaire_complete',
+            latestQuestionnaireToken: token || '',
+          });
+        } catch (userErr) {
+          console.error('Failed updating linked user intake:', userErr);
+        }
+      }
+
+      setIntakeValue(normalized);
+      setIsAlreadyComplete(true);
+      setCompletedAt(new Date());
+    } catch (err) {
+      console.error('Failed to submit questionnaire:', err);
+      setSubmitError(
+        'We could not submit your questionnaire just now. Please try again in a moment.'
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  if (isLoading) {
+    return (
+      <div className="slq-page">
+        <div className="slq-shell">
+          <div className="slq-hero slq-hero--compact">
+            <p className="slq-kicker">Private SoundLegend Intake</p>
+            <h1 className="slq-title">Loading questionnaire…</h1>
+            <p className="slq-muted">
+              Please hang tight while we verify your private link.
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (isInvalidToken) {
+    return (
+      <div className="slq-page">
+        <div className="slq-shell">
+          <div className="slq-hero">
+            <p className="slq-kicker">SoundLegend Questionnaire</p>
+            <h1 className="slq-title">This questionnaire link is invalid</h1>
+            <p className="slq-muted">
+              The link may be expired, incomplete, or no longer associated with
+              an active SoundLegend submission.
+            </p>
+
+            <div className="slq-actions">
+              <button
+                type="button"
+                className="slq-btn slq-btn--ghost"
+                onClick={() => navigate('/artisan-shop/soundlegend')}
+              >
+                Back to SoundLegend
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (fatalLoadError) {
+    return (
+      <div className="slq-page">
+        <div className="slq-shell">
+          <div className="slq-hero">
+            <p className="slq-kicker">Private SoundLegend Intake</p>
+            <h1 className="slq-title">We hit a snag loading this page</h1>
+            <p className="slq-muted">{fatalLoadError}</p>
+
+            <div className="slq-status slq-status--error">
+              Please refresh the page once, or return to the SoundLegend page
+              and request a fresh questionnaire link.
+            </div>
+
+            <div className="slq-actions">
+              <button
+                type="button"
+                className="slq-btn slq-btn--ghost"
+                onClick={() => window.location.reload()}
+              >
+                Refresh
+              </button>
+              <button
+                type="button"
+                className="slq-btn slq-btn--primary"
+                onClick={() => navigate('/artisan-shop/soundlegend')}
+              >
+                Back to SoundLegend
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (isAlreadyComplete) {
+    return (
+      <div className="slq-page">
+        <div className="slq-shell">
+          <div className="slq-hero">
+            <p className="slq-kicker slq-kicker--gold">Questionnaire Complete</p>
+            <h1 className="slq-title">Thank you for your time</h1>
+
+            <p className="slq-muted">
+              Your SoundLegend questionnaire has already been submitted.
+            </p>
+
+            {completedAt ? (
+              <p className="slq-muted">
+                Submitted on: {formatTimestamp(completedAt)}
+              </p>
+            ) : null}
+
+            <p className="slq-muted">
+              Dan will review your answers and typically reach out within 2
+              business days to coordinate your free consultation.
+            </p>
+
+            <p className="slq-muted">
+              In the meantime, you can explore some previous builds in the
+              Legacy Vault.
+            </p>
+
+            <div className="slq-actions">
+              <button
+                type="button"
+                className="slq-btn slq-btn--primary"
+                onClick={() => navigate('/artisan-shop/soundlegend/vault')}
+              >
+                Explore the Legacy Vault
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="slq-page">
+      <div className="slq-shell">
+        <div className="slq-hero">
+          <p className="slq-kicker">Private Questionnaire</p>
+          <h1 className="slq-title">{pageTitle}</h1>
+          <p className="slq-muted slq-lede">
+            This short intake is here to help Dan understand what you are
+            looking for before your consultation. It does not lock anything in.
+          </p>
+
+          {customerEmail ? (
+            <p className="slq-submeta">Submission email: {customerEmail}</p>
+          ) : null}
+        </div>
+
+        {submitError ? (
+          <div className="slq-status slq-status--error">{submitError}</div>
+        ) : null}
+
+        <div className="slq-panel-wrap">
+          <ConsultationIntakePanel
+            value={intakeValue}
+            onChange={setIntakeValue}
+            isSaving={isSubmitting}
+            title="SoundLegend Questionnaire"
+            subtitle="A few quick questions to help shape your consultation. This does not set anything in stone."
+          />
+        </div>
+
+        <div className="slq-footerbar">
+          <div className="slq-token">
+            <span className="slq-token-label">Token verified</span>
+            <span className="slq-token-value">{token}</span>
+          </div>
+
+          <div className="slq-actions">
+            <button
+              type="button"
+              className="slq-btn slq-btn--ghost"
+              onClick={() => navigate('/artisan-shop/soundlegend')}
+              disabled={isSubmitting}
+            >
+              Back
+            </button>
+
+            <button
+              type="button"
+              className="slq-btn slq-btn--primary"
+              onClick={handleFinalSubmit}
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? 'Submitting…' : 'Submit Questionnaire'}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default SoundlegendQuestionnaire;

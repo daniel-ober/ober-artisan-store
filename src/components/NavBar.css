@@ -28,35 +28,23 @@
   object-fit: contain;
 }
 
+.navbar-links-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .navbar-links {
   display: flex;
-  justify-content: space-between;
-  width: 100%;
-  flex-wrap: wrap;
+  justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
+  width: auto;
+  max-width: 100%;
+  gap: 18px;
 }
 
-/* =========================
-   ✅ CRITICAL: BUTTON RESET (navbar only)
-   Fixes “boxed” cart/signout button styling everywhere
-   ========================= */
-.navbar-links button,
-.navbar-links .nav-btn {
-  -webkit-appearance: none;
-  appearance: none;
-  background: transparent;
-  border: none;
-  box-shadow: none;
-  outline: none;
-  font: inherit;
-  color: inherit;
-  cursor: pointer;
-}
-
-.nav-signout-text {
-  line-height: 1;
-}
-
+/* === LINKS === */
 .nav-link {
   color: #222;
   text-decoration: none;
@@ -67,7 +55,12 @@
   text-transform: uppercase;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  justify-content: center;
+  gap: 8px;
+  line-height: 1;
+  background: transparent;
+  border: none;
+  white-space: nowrap;
 }
 
 .nav-link:hover {
@@ -80,50 +73,76 @@
   text-decoration: underline;
 }
 
-/* =========================
-   ✅ CART BUTTON (looks like a nav-link, not a button)
-   ========================= */
-.cart-icon {
-  position: relative;
+/* === BUTTON RESET FOR NAV ICON BUTTONS === */
+.nav-btn {
+  appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  outline: none;
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  padding: 15px 12px;
+  cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 15px 12px; /* match .nav-link */
-  border-radius: 10px;
+  gap: 8px;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
-.cart-icon:hover {
-  background: rgba(255, 255, 255, 0.08);
+.nav-btn:hover,
+.nav-btn:focus,
+.nav-btn:active {
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: none;
 }
 
 .nav-icon {
-  font-size: 18px;
+  font-size: 17px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.nav-signout {
+  color: #222;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.nav-signout-text {
+  display: inline-block;
   line-height: 1;
 }
 
-/* cart color by theme (main navbar) */
-body.light .navbar .cart-icon {
-  color: #111;
-}
-body.dark .navbar .cart-icon {
-  color: rgba(245, 245, 245, 0.9);
-}
-
-/* sticky context is always dark */
-.navbar-links.sticky-dropdown .cart-icon {
-  color: #fff !important;
+.cart-icon {
+  position: relative;
+  color: #222;
+  padding-right: 18px;
 }
 
 .cart-badge {
-  background: red;
-  color: white;
-  font-size: 12px;
-  font-weight: bold;
-  padding: 2px 6px;
-  border-radius: 50%;
+  background: #d81f26;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
   position: absolute;
-  top: -6px;
-  right: -10px;
+  top: 8px;
+  right: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
 }
 
 /* === CART PREVIEW === */
@@ -206,10 +225,6 @@ body.dark .navbar .cart-icon {
   box-shadow: none;
 }
 
-.navbar-sticky-mini .vault-logo-img {
-  filter: drop-shadow(0 0 6px rgba(255,255,255,.18));
-}
-
 body.dark .navbar-sticky-mini {
   background: rgba(0, 0, 0, 0.9);
 }
@@ -287,6 +302,7 @@ body.dark .navbar-sticky-mini {
   max-height: 1200px;
 }
 
+/* === STICKY MENU WRAPPER === */
 .navbar-sticky-dropdown-wrapper {
   position: absolute;
   top: 100%;
@@ -295,6 +311,7 @@ body.dark .navbar-sticky-mini {
   z-index: 2995;
 }
 
+/* === DROPDOWN === */
 .nav-link.dropdown {
   position: relative;
 }
@@ -308,11 +325,13 @@ body.dark .navbar-sticky-mini {
   position: absolute;
   background: #111;
   padding: 0.5rem;
-  border-radius: 4px;
-  top: 100%;
+  border-radius: 8px;
+  top: calc(100% + 6px);
   left: 0;
   z-index: 1000;
   min-width: 200px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.28);
 }
 
 .nav-link.dropdown:hover .dropdown-menu {
@@ -322,15 +341,17 @@ body.dark .navbar-sticky-mini {
 .dropdown-item {
   display: block;
   color: white;
-  padding: 0.5rem;
+  padding: 0.55rem 0.7rem;
   text-decoration: none;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
 .dropdown-item:hover {
   background: #222;
 }
 
-/* ===== Legacy Vault logo link (between Merch and Cart) ===== */
+/* ===== Legacy Vault logo link ===== */
 .vault-logo-link {
   display: inline-flex;
   align-items: center;
@@ -338,97 +359,22 @@ body.dark .navbar-sticky-mini {
   padding: 6px 8px;
   text-decoration: none;
   cursor: pointer;
+  background: transparent !important;
+  flex: 0 0 auto;
 }
 
 .vault-logo-img {
-  height: 45px;
-  margin-bottom: 16px;
-  margin-left: 10px;
+  height: 50px;
   width: auto;
   display: block;
   object-fit: contain;
   vertical-align: middle;
-  padding: 0;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,.45));
+  padding-bottom: 13px;
+  filter: none !important;
 }
 
-.navbar-links.sticky-dropdown .vault-logo-img{
+.navbar-links.sticky-dropdown .vault-logo-img {
   filter: brightness(0) invert(1) !important;
-}
-
-.admin-dropdown { position: relative; }
-
-.admin-menu {
-  min-width: 220px;
-  padding: 10px;
-  border-radius: 10px;
-  border: 1px solid rgba(255,255,255,0.10);
-  background: rgba(10,10,10,0.92);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-
-.admin-menu .dropdown-item {
-  border-radius: 8px;
-}
-
-.admin-menu .dropdown-item:hover {
-  background: rgba(255,255,255,0.10);
-}
-
-.admin-signout {
-  margin-top: 6px;
-  border-top: 1px solid rgba(255,255,255,0.10);
-  padding-top: 10px;
-}
-
-/* =========================
-   ✅ SIGN OUT BUTTON (polished pill)
-   ========================= */
-.nav-signout {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-
-  padding: 10px 12px;
-  border-radius: 999px;
-
-  font-size: 13px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  background: rgba(255, 255, 255, 0.10);
-  color: #fff;
-}
-
-.nav-signout:hover {
-  background: rgba(255, 255, 255, 0.16);
-}
-
-/* Light mode main navbar */
-body.light .navbar .nav-signout {
-  border: 1px solid rgba(0, 0, 0, 0.14);
-  background: rgba(0, 0, 0, 0.06);
-  color: #111;
-}
-
-body.light .navbar .nav-signout:hover {
-  background: rgba(0, 0, 0, 0.10);
-}
-
-/* Sticky context always dark */
-.navbar-links.sticky-dropdown .nav-signout {
-  color: #fff !important;
-  border-color: rgba(255, 255, 255, 0.18);
-  background: rgba(255, 255, 255, 0.10);
-}
-
-@media (max-width: 768px){
-  .navbar-links.open .vault-logo-img{
-    filter: brightness(0) invert(1) !important;
-  }
 }
 
 /* === MOBILE (portrait) DROPDOWN + MENU BEHAVIOR === */
@@ -457,11 +403,13 @@ body.light .navbar .nav-signout:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
     background-color: rgba(0, 0, 0, 0.95);
     width: 100%;
     padding: 0;
     overflow: hidden;
     max-height: 0;
+    gap: 0;
     transition:
       max-height 0.3s ease-in-out,
       padding 0.3s ease-in-out;
@@ -473,16 +421,30 @@ body.light .navbar .nav-signout:hover {
     gap: 16px;
   }
 
-  .navbar-links .nav-link {
+  .navbar-links .nav-link,
+  .navbar-links .nav-btn,
+  .navbar-links .dropdown-label {
     color: #fff !important;
     font-size: 16px;
-    padding: 12px 0;
     font-weight: 600;
     text-transform: uppercase;
   }
 
-  .navbar-links .nav-link:hover {
+  .navbar-links .nav-link {
+    padding: 12px 0;
+  }
+
+  .navbar-links .nav-btn {
+    padding: 12px 0;
+  }
+
+  .navbar-links .nav-link:hover,
+  .navbar-links .nav-btn:hover {
     color: hsl(46, 100%, 89%) !important;
+  }
+
+  .navbar-links.open .vault-logo-img {
+    filter: brightness(0) invert(1) !important;
   }
 
   .cart-preview-container {
@@ -493,26 +455,17 @@ body.light .navbar .nav-signout:hover {
 
   .navbar-sticky-mini {
     justify-content: center;
-    padding: 6px 0 2px;
-    min-height: 64px;
-  }
-
-  .sticky-logo-img {
-    height: 38px;
-  }
-
-  .navbar-sticky-menu .menu-arrow-icon {
-    width: 32px;
-    height: 32px;
+    padding: 12px 0px 3px;
   }
 
   .navbar-sticky-dropdown-wrapper {
     position: absolute;
-    top: 64px;
+    top: 100px;
     left: 0;
     width: 100%;
     z-index: 2999;
   }
+
   .navbar-links.sticky-dropdown {
     flex-direction: column;
     align-items: center;
@@ -528,14 +481,27 @@ body.light .navbar .nav-signout:hover {
   }
 
   .cart-icon {
-    margin-top: 12px;
-    margin-bottom: 16px;
+    margin-top: 4px;
+    margin-bottom: 6px;
     color: #fff !important;
+    padding-right: 0;
   }
 
   .cart-badge {
-    top: -10px;
-    right: -12px;
+    top: -4px;
+    right: -16px;
+  }
+
+  .nav-signout {
+    color: #fff !important;
+  }
+
+  .navbar-links-wrapper.sticky-mode {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0;
+    width: 100%;
+    z-index: 2999 !important;
   }
 
   body.menu-open .navbar-sticky-mini {
@@ -549,13 +515,16 @@ body.light .navbar .nav-signout:hover {
     max-width: 250px;
     padding: 4px 0;
   }
-  .vault-logo-img{ height:40px; }
+
+  .vault-logo-img {
+    height: 62px;
+  }
 }
 
 /* === LANDSCAPE FIX (iPad / horizontal tablets) === */
 @media screen and (max-width: 1024px) and (orientation: landscape) {
   .navbar-links .nav-link,
-  .navbar-links .cart-icon {
+  .navbar-links .nav-btn {
     color: white !important;
   }
 }
@@ -567,26 +536,19 @@ body.light .navbar .nav-signout:hover {
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
   }
 
-@media screen and (min-width: 769px) {
-  .navbar-sticky-wrapper {
-    background: black;
-    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
-  }
-
   .navbar-sticky-mini {
     flex-direction: row;
     justify-content: center;
     align-items: center;
     gap: 0;
-    padding: 6px 18px;
-    min-height: 56px;
+    padding: 12px 24px;
     background: rgba(0, 0, 0, 0.95);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
 
   .sticky-logo-img {
-    height: 36px;
-    margin-right: 18px;
+    height: 48px;
+    margin-right: 24px;
   }
 
   .navbar-sticky-menu {
@@ -595,14 +557,14 @@ body.light .navbar .nav-signout:hover {
 
   .navbar-sticky-dropdown-wrapper {
     position: fixed;
-    top: 56px;
+    top: 72px;
     left: 0;
     width: 100%;
     z-index: 2998;
     background: rgba(0, 0, 0, 0.9);
     display: flex;
     justify-content: center;
-    padding: 6px 0;
+    padding: 10px 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   }
 
@@ -610,109 +572,73 @@ body.light .navbar .nav-signout:hover {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 14px;
+    width: auto;
+    max-width: 1280px;
+    gap: 18px;
     background: transparent;
-    padding: 0;
+    padding: 0 24px;
     max-height: none;
     position: static;
   }
 
-  .navbar-links.sticky-dropdown .nav-link {
+  .navbar-links.sticky-dropdown .nav-link,
+  .navbar-links.sticky-dropdown .nav-btn {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    color: #fff !important;
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    text-transform: uppercase;
-    padding: 10px 8px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background 0.2s ease, color 0.2s ease;
-  }
-
-  .navbar-links.sticky-dropdown .nav-link:hover {
-    background-color: rgba(255, 255, 255, 0.08);
-    color: hsl(46, 100%, 89%) !important;
-  }
-
-  .navbar-links.sticky-dropdown .cart-icon {
-    color: #fff !important;
-    padding: 10px 8px;
-  }
-
-  .navbar-links.sticky-dropdown .nav-signout {
-    padding: 8px 10px;
-    font-size: 12px;
-  }
-
-  .vault-logo-img {
-    height: 34px;
-    margin-bottom: 0;
-    margin-left: 4px;
-  }
-
-  .navbar-links.sticky-dropdown .cart-badge {
-    display: inline-block;
-    position: absolute;
-    top: -6px;
-    right: -8px;
-    background: red;
-    font-size: 11px;
-    font-weight: bold;
-    padding: 2px 5px;
-    border-radius: 50%;
-  }
-}
-
-  .navbar-links.sticky-dropdown {
-    flex-direction: row;
     justify-content: center;
-    align-items: center;
-    gap: 20px;
-    background: transparent;
-    padding: 0;
-    max-height: none;
-    position: static;
-  }
-
-  .navbar-links.sticky-dropdown .nav-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-
     color: #fff !important;
     font-family: 'Poppins', sans-serif;
     font-size: 16px;
     font-weight: 600;
     text-transform: uppercase;
-
+    letter-spacing: normal;
     padding: 15px 12px;
-    border-radius: 10px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background 0.2s ease, color 0.2s ease;
+    transition:
+      background 0.2s ease,
+      color 0.2s ease,
+      opacity 0.2s ease;
+    background: transparent !important;
+    box-shadow: none !important;
+    white-space: nowrap;
   }
 
-  .navbar-links.sticky-dropdown .nav-link:hover {
-    background-color: rgba(255, 255, 255, 0.08);
+  .navbar-links.sticky-dropdown .nav-link:hover,
+  .navbar-links.sticky-dropdown .nav-btn:hover {
+    background-color: rgba(255, 255, 255, 0.08) !important;
     color: hsl(46, 100%, 89%) !important;
+  }
+
+  .navbar-links-wrapper.sticky-mode .navbar-links .nav-link {
+    color: white !important;
   }
 
   .navbar-links.sticky-dropdown .cart-icon {
     color: #fff !important;
+    position: relative;
+    padding-right: 18px;
   }
 
   .navbar-links.sticky-dropdown .cart-badge {
-    display: inline-block;
-    position: absolute;
-    top: -8px;
-    right: -10px;
-    background: red;
-    font-size: 12px;
-    font-weight: bold;
-    padding: 2px 6px;
-    border-radius: 50%;
+    top: 8px;
+    right: 0;
+  }
+
+  .navbar-links.sticky-dropdown .nav-signout {
+    color: #fff !important;
+  }
+
+  .navbar:not(.mobile) .navbar-links-wrapper {
+    justify-content: center;
+  }
+
+  .navbar:not(.mobile) .navbar-links {
+    justify-content: center;
+    width: auto;
+    max-width: 1280px;
+    gap: 18px;
+    padding: 0 24px;
   }
 }
 
@@ -721,6 +647,7 @@ body.light .navbar .nav-signout:hover {
     right: 0;
     left: 0;
   }
+
   .cart-preview-container .cart-preview {
     margin: 0 auto;
     width: 90vw;
