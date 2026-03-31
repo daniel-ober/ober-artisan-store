@@ -14,14 +14,11 @@ import {
   addDoc,
   Timestamp,
   doc,
-  getDocs,
-  query,
-  where,
   setDoc,
-  updateDoc,
   serverTimestamp,
 } from 'firebase/firestore';
 import { getRecaptchaToken } from '../utils/loadRecaptchaEnterprise';
+import { buildConsultationIntakeDefaults } from '../utils/consultationIntakeSchema';
 import './SoundlegendProductDetail.css';
 
 /* ================= Env ================= */
@@ -62,102 +59,6 @@ const buildQuestionnaireToken = () => {
 
 const buildQuestionnaireUrl = (token) =>
   `https://www.oberartisandrums.com/soundlegend-questionnaire/${token}`;
-
-const findExistingUserByEmail = async (email) => {
-  const normalized = normalizeEmail(email);
-  if (!normalized) return null;
-
-  const usersRef = collection(db, 'users');
-
-  const q1 = query(usersRef, where('email', '==', normalized));
-  const snap1 = await getDocs(q1);
-  if (!snap1.empty) {
-    const d = snap1.docs[0];
-    return { id: d.id, ...d.data() };
-  }
-
-  const q2 = query(usersRef, where('email', '==', email));
-  const snap2 = await getDocs(q2);
-  if (!snap2.empty) {
-    const d = snap2.docs[0];
-    return { id: d.id, ...d.data() };
-  }
-
-  return null;
-};
-
-const upsertLeadUser = async ({
-  firstName,
-  lastName,
-  email,
-  phoneDigits,
-  questionnaireToken,
-  questionnaireUrl,
-}) => {
-  const normalizedEmail = normalizeEmail(email);
-  const fullName = `${firstName} ${lastName}`.trim();
-  const phonePretty = phoneDigits ? `+1 ${formatDashed(phoneDigits)}` : '';
-  const phoneE164 = phoneDigits ? `+1${phoneDigits}` : '';
-
-  const existing = await findExistingUserByEmail(normalizedEmail);
-
-  const alreadyHasPortalAccess = existing?.portalAccessGranted === true;
-  const existingInviteSent = existing?.portalInviteSent === true;
-  const existingUid = existing?.uid || '';
-
-  const basePayload = {
-    firstName: firstName.trim(),
-    lastName: lastName.trim(),
-    fullName,
-    email: normalizedEmail,
-    phone: phonePretty || '',
-    phoneE164: phoneE164 || '',
-
-    isSoundlegend: true,
-    isAdmin: false,
-
-    soundlegendLead: true,
-    soundlegendLeadStatus: 'questionnaire_pending',
-
-    slPortalLocked: alreadyHasPortalAccess ? false : true,
-    portalAccessGranted: alreadyHasPortalAccess,
-    portalInviteSent: existingInviteSent,
-
-    portalStatus: alreadyHasPortalAccess ? 'active' : 'locked',
-    authAccountCreated: !!existingUid,
-    authInvitePending: !alreadyHasPortalAccess,
-
-    latestQuestionnaireToken: questionnaireToken,
-    latestQuestionnaireUrl: questionnaireUrl,
-    questionnaireCompleted: false,
-    consultationScheduled: false,
-    consultationCompleted: false,
-
-    access: {
-      soundlegend: alreadyHasPortalAccess,
-    },
-
-    updatedAt: serverTimestamp(),
-  };
-
-  if (existing?.id) {
-    const userRef = doc(db, 'users', existing.id);
-    await updateDoc(userRef, basePayload);
-    return existing.id;
-  }
-
-  const newRef = doc(collection(db, 'users'));
-  await setDoc(newRef, {
-    ...basePayload,
-    createdAt: serverTimestamp(),
-    status: 'lead',
-    projects: [],
-    orderIds: [],
-    uid: '',
-  });
-
-  return newRef.id;
-};
 
 const LazyImg = (props) => <img loading="lazy" decoding="async" {...props} />;
 
@@ -243,52 +144,84 @@ const SoundLegendProductDetail = () => {
       const phonePretty = phoneDigits ? `+1 ${dashed}` : '';
       const phoneE164 = phoneDigits ? `+1${phoneDigits}` : '';
 
-      const linkedUserId = await upsertLeadUser({
-        firstName,
-        lastName,
-        email: normalizedEmail,
-        phoneDigits,
-        questionnaireToken,
-        questionnaireUrl,
-      });
+      console.log('[soundlegend] starting lead submit');
+      console.log('[soundlegend] questionnaireToken:', questionnaireToken);
+      console.log('[soundlegend] questionnaireUrl:', questionnaireUrl);
+      console.log('[soundlegend] normalizedEmail:', normalizedEmail);
 
-      const submissionRef = await addDoc(collection(db, 'soundlegend_submissions'), {
-        firstName: firstName.trim(),
-        lastName: lastName.trim(),
-        fullName: `${firstName} ${lastName}`.trim(),
-        email: normalizedEmail,
-        phone: phonePretty || '',
-        phoneE164: phoneE164 || '',
-        size,
-        depth,
-        shellConstruction,
-        woodSpecies,
-        snareBedDepth,
-        consultationDate,
+      const submissionRef = await addDoc(
+        collection(db, 'soundlegend_submissions'),
+        {
+          firstName: firstName.trim(),
+          lastName: lastName.trim(),
+          fullName: `${firstName} ${lastName}`.trim(),
+          email: normalizedEmail,
+          phone: phonePretty || '',
+          phoneE164: phoneE164 || '',
+          size,
+          depth,
+          shellConstruction,
+          woodSpecies,
+          snareBedDepth,
+          consultationDate,
 
-        status: 'Questionnaire Pending',
-        stage: 'lead_capture',
-        submissionType: 'soundlegend_interest',
+          status: 'Questionnaire Pending',
+          stage: 'lead_capture',
+          submissionType: 'soundlegend_interest',
 
-        questionnaireToken,
-        questionnaireUrl,
-        questionnaireCompleted: false,
-        consultationScheduled: false,
-        consultationCompleted: false,
-        portalInviteSent: false,
-        portalAccessGranted: false,
+          questionnaireToken,
+          questionnaireUrl,
+          questionnaireCompleted: false,
+          consultationScheduled: false,
+          consultationCompleted: false,
+          portalInviteSent: false,
+          portalAccessGranted: false,
 
-        linkedUserId,
-        recaptchaToken,
-        submittedAt: Timestamp.now(),
-        createdAt: Timestamp.now(),
-      });
+          recaptchaToken,
+          submittedAt: Timestamp.now(),
+          createdAt: Timestamp.now(),
+        }
+      );
 
-      await updateDoc(doc(db, 'users', linkedUserId), {
-        latestSoundlegendSubmissionId: submissionRef.id,
-        linkedSubmissionId: submissionRef.id,
-        updatedAt: serverTimestamp(),
-      });
+      console.log('[soundlegend] submission created:', submissionRef.id);
+      console.log(
+        '[soundlegend] creating questionnaire doc at:',
+        `soundlegend_questionnaires/${questionnaireToken}`
+      );
+
+      try {
+        await setDoc(doc(db, 'soundlegend_questionnaires', questionnaireToken), {
+          token: questionnaireToken,
+          submissionId: submissionRef.id,
+          questionnaireUrl,
+          email: normalizedEmail,
+          fullName: `${firstName} ${lastName}`.trim(),
+          firstName: firstName.trim(),
+          lastName: lastName.trim(),
+          questionnaireCompleted: false,
+          status: 'Questionnaire Pending',
+          stage: 'lead_capture',
+          consultationIntake: buildConsultationIntakeDefaults(),
+          createdAt: serverTimestamp(),
+          updatedAt: serverTimestamp(),
+        });
+
+        console.log(
+          '[soundlegend] questionnaire doc created:',
+          questionnaireToken
+        );
+      } catch (questionnaireErr) {
+        console.error(
+          '[soundlegend] questionnaire doc creation failed:',
+          questionnaireErr
+        );
+        alert(
+          `Submission partially completed. The lead was saved, but the questionnaire doc could not be created.${
+            questionnaireErr?.code ? ` (${questionnaireErr.code})` : ''
+          }`
+        );
+        throw questionnaireErr;
+      }
 
       await new Promise((r) => setTimeout(r, 350));
 
@@ -422,10 +355,14 @@ const SoundLegendProductDetail = () => {
                       inputMode="numeric"
                       autoComplete="tel"
                       placeholder="123-456-7890"
-                      value={phoneFocused ? phoneDigits : formatDashed(phoneDigits)}
+                      value={
+                        phoneFocused ? phoneDigits : formatDashed(phoneDigits)
+                      }
                       onFocus={() => setPhoneFocused(true)}
                       onBlur={() => setPhoneFocused(false)}
-                      onChange={(e) => setPhoneDigits(onlyDigits(e.target.value))}
+                      onChange={(e) =>
+                        setPhoneDigits(onlyDigits(e.target.value))
+                      }
                       aria-invalid={
                         phoneDigits ? !(phoneDigits.length === 10) : undefined
                       }
@@ -440,7 +377,9 @@ const SoundLegendProductDetail = () => {
               </div>
 
               <button type="submit" className="sl-cta" disabled={isSubmitting}>
-                {isSubmitting ? 'Submitting…' : 'Start Your Custom Snare Journey'}
+                {isSubmitting
+                  ? 'Submitting…'
+                  : 'Start Your Custom Snare Journey'}
               </button>
             </form>
           </div>
@@ -449,20 +388,23 @@ const SoundLegendProductDetail = () => {
 
       <div className="sl-copy-lower-wrap">
         <div className="sl-hero-copy sl-hero-copy--lower">
-          <div className="sl-eyebrow">Custom-built. Artist-led. One-on-one.</div>
+          <div className="sl-eyebrow">
+            Custom-built. Artist-led. One-on-one.
+          </div>
 
           <h1 className="sl-title">Build Your Custom SoundLegend Snare</h1>
 
           <p className="sl-lede">
             Your sound is unique, and your snare should be too. The
-            <strong> SoundLegend Series</strong> is a fully custom,
-            handcrafted instrument built around your playing style, sonic goals,
-            and artistic identity.
+            <strong> SoundLegend Series</strong> is a fully custom, handcrafted
+            instrument built around your playing style, sonic goals, and
+            artistic identity.
           </p>
 
           <p>
             In direct collaboration with <strong>Dan Ober</strong>, you will
-            shape a snare that feels personal, inspiring, and unmistakably yours.
+            shape a snare that feels personal, inspiring, and unmistakably
+            yours.
           </p>
 
           <p>
@@ -494,10 +436,9 @@ const SoundLegendProductDetail = () => {
             Thanks for reaching out. Your SoundLegend inquiry has been received.
           </Typography>
           <Typography variant="body1" sx={{ mb: 1.5 }}>
-            We’ve sent your private questionnaire link to your email address.
-            Once your questionnaire is complete, our craftsman will personally
-            review it and reach out within 2 business days by email to schedule
-            your FREE consultation.
+            We’ve received your request. Our team will review it and follow up
+            by email with next steps for your private questionnaire and
+            consultation.
           </Typography>
           <Typography variant="body2" color="text.secondary">
             Full SoundLegend Portal access is reserved for clients who move into
