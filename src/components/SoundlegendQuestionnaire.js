@@ -265,7 +265,7 @@ function SoundlegendQuestionnaire() {
             <h1 className="slq-title">Thank you for your time</h1>
 
             <p className="slq-muted">
-              Your SoundLegend questionnaire has already been submitted.
+              Your SoundLegend questionnaire has been submitted.
             </p>
 
             {completedAt ? (
