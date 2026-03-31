@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {
   collection,
   getDocs,
+  getDoc,
   updateDoc,
   doc,
   deleteDoc,
@@ -18,30 +19,99 @@ const ManageSoundlegendRequests = () => {
   const [selectedSubmission, setSelectedSubmission] = useState(null);
   const [deletingId, setDeletingId] = useState(null);
 
+  const resolveQuestionnaireToken = (submission = {}) =>
+    submission.questionnaireToken ||
+    submission.latestQuestionnaireToken ||
+    submission.linkedQuestionnaireToken ||
+    '';
+
+  const hydrateSubmissionWithQuestionnaireStatus = async (submission) => {
+    const questionnaireToken = resolveQuestionnaireToken(submission);
+
+    if (!questionnaireToken) {
+      return {
+        ...submission,
+        questionnaireCompleted: !!submission.questionnaireCompleted,
+      };
+    }
+
+    try {
+      const questionnaireRef = doc(
+        db,
+        'soundlegend_questionnaires',
+        questionnaireToken
+      );
+      const questionnaireSnap = await getDoc(questionnaireRef);
+
+      if (!questionnaireSnap.exists()) {
+        return {
+          ...submission,
+          questionnaireCompleted: !!submission.questionnaireCompleted,
+        };
+      }
+
+      const questionnaireData = questionnaireSnap.data() || {};
+      const questionnaireCompleted = !!questionnaireData.questionnaireCompleted;
+
+      if (submission.questionnaireCompleted !== questionnaireCompleted) {
+        try {
+          await updateDoc(doc(db, 'soundlegend_submissions', submission.id), {
+            questionnaireCompleted,
+          });
+        } catch (syncErr) {
+          console.error(
+            '⚠️ Failed to sync questionnaireCompleted onto submission:',
+            syncErr
+          );
+        }
+      }
+
+      return {
+        ...submission,
+        questionnaireCompleted,
+      };
+    } catch (error) {
+      console.error(
+        '❌ Error checking linked questionnaire completion:',
+        error
+      );
+      return {
+        ...submission,
+        questionnaireCompleted: !!submission.questionnaireCompleted,
+      };
+    }
+  };
+
   useEffect(() => {
     const fetchSubmissions = async () => {
       try {
         const submissionsRef = collection(db, 'soundlegend_submissions');
         const querySnapshot = await getDocs(submissionsRef);
 
-        const submissionsList = querySnapshot.docs
-          .map((docSnap) => {
-            const data = docSnap.data();
-            const rawStatus = data.status || 'New';
-            const overviewStatus = getOverviewStatus('soundlegend', rawStatus);
+        const rawSubmissions = querySnapshot.docs.map((docSnap) => {
+          const data = docSnap.data() || {};
+          const rawStatus = data.status || 'New';
+          const overviewStatus = getOverviewStatus('soundlegend', rawStatus);
 
-            return {
-              id: docSnap.id,
-              ...data,
-              status: rawStatus,
-              overviewStatus,
-            };
-          })
-          .sort((a, b) => {
-            const aTime = a.submittedAt?.seconds || 0;
-            const bTime = b.submittedAt?.seconds || 0;
-            return bTime - aTime;
-          });
+          return {
+            id: docSnap.id,
+            ...data,
+            status: rawStatus,
+            overviewStatus,
+          };
+        });
+
+        const hydratedSubmissions = await Promise.all(
+          rawSubmissions.map((submission) =>
+            hydrateSubmissionWithQuestionnaireStatus(submission)
+          )
+        );
+
+        const submissionsList = hydratedSubmissions.sort((a, b) => {
+          const aTime = a.submittedAt?.seconds || 0;
+          const bTime = b.submittedAt?.seconds || 0;
+          return bTime - aTime;
+        });
 
         setSubmissions(submissionsList);
       } catch (error) {
@@ -114,10 +184,12 @@ const ManageSoundlegendRequests = () => {
 
       await deleteDoc(doc(db, 'soundlegend_submissions', submission.id));
 
-      if (submission.questionnaireToken) {
+      const questionnaireToken = resolveQuestionnaireToken(submission);
+
+      if (questionnaireToken) {
         try {
           await deleteDoc(
-            doc(db, 'soundlegend_questionnaires', submission.questionnaireToken)
+            doc(db, 'soundlegend_questionnaires', questionnaireToken)
           );
         } catch (questionnaireErr) {
           console.error(
@@ -185,9 +257,10 @@ const ManageSoundlegendRequests = () => {
               <th>Name</th>
               <th>Email</th>
               <th>Phone</th>
+              <th>Questionnaire Complete</th>
               <th>Email Sent</th>
               <th>Text Sent</th>
-              <th>Delete</th>
+              {/* <th>Delete</th> */}
             </tr>
           </thead>
           <tbody>
@@ -219,6 +292,20 @@ const ManageSoundlegendRequests = () => {
                 <td>
                   <input
                     type="checkbox"
+                    checked={submission.questionnaireCompleted || false}
+                    readOnly
+                    disabled
+                    title={
+                      submission.questionnaireCompleted
+                        ? 'Questionnaire completed'
+                        : 'Questionnaire not completed'
+                    }
+                    onClick={(e) => e.stopPropagation()}
+                  />
+                </td>
+                <td>
+                  <input
+                    type="checkbox"
                     checked={submission.emailed || false}
                     onChange={(e) =>
                       handleCheckboxChange(
@@ -244,7 +331,7 @@ const ManageSoundlegendRequests = () => {
                     onClick={(e) => e.stopPropagation()}
                   />
                 </td>
-                <td>
+                {/* <td>
                   <button
                     type="button"
                     className="btn btn--ghost btn--sm"
@@ -253,7 +340,7 @@ const ManageSoundlegendRequests = () => {
                   >
                     {deletingId === submission.id ? 'Deleting…' : 'Delete'}
                   </button>
-                </td>
+                </td> */}
               </tr>
             ))}
           </tbody>

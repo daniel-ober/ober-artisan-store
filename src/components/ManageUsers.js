@@ -13,7 +13,9 @@ const auth = getAuth();
 const isAdminUser = (user) => !!user?.isAdmin;
 
 const normalizeEmail = (email = '') =>
-  String(email || '').trim().toLowerCase();
+  String(email || '')
+    .trim()
+    .toLowerCase();
 
 const formatMaybeDate = (value) => {
   if (!value) return '';
@@ -51,7 +53,10 @@ const mergeUsersForDisplay = (base, incoming) => {
   return {
     ...base,
     ...incoming,
-    id: incoming.uid || base.uid ? incoming.uid || base.uid : incoming.id || base.id,
+    id:
+      incoming.uid || base.uid
+        ? incoming.uid || base.uid
+        : incoming.id || base.id,
     uid: incoming.uid || base.uid || '',
     email: normalizeEmail(incoming.email || base.email || ''),
     firstName: incoming.firstName || base.firstName || '',
@@ -71,11 +76,24 @@ const mergeUsersForDisplay = (base, incoming) => {
         ? incoming.portalAccessGranted
         : base.portalAccessGranted,
     portalInviteSent: !!(base.portalInviteSent || incoming.portalInviteSent),
-    authAccountCreated:
-      !!(base.authAccountCreated || incoming.authAccountCreated || incoming.uid),
+    authAccountCreated: !!(
+      base.authAccountCreated ||
+      incoming.authAccountCreated ||
+      incoming.uid
+    ),
     lastWelcomeEmailSentAt:
-      incoming.lastWelcomeEmailSentAt ||
-      base.lastWelcomeEmailSentAt ||
+      incoming.lastWelcomeEmailSentAt || base.lastWelcomeEmailSentAt || null,
+    lastLoginAt:
+      incoming.lastLoginAt ||
+      incoming.lastSignInAt ||
+      base.lastLoginAt ||
+      base.lastSignInAt ||
+      null,
+    lastSignInAt:
+      incoming.lastSignInAt ||
+      incoming.lastLoginAt ||
+      base.lastSignInAt ||
+      base.lastLoginAt ||
       null,
   };
 };
@@ -112,6 +130,76 @@ const dedupeUsersByEmail = (usersList = []) => {
   });
 };
 
+const ActionModal = ({
+  open,
+  type = 'info',
+  title,
+  message,
+  confirmLabel = 'Confirm',
+  cancelLabel = 'Cancel',
+  onConfirm,
+  onClose,
+  isBusy = false,
+  hideCancel = false,
+}) => {
+  if (!open) return null;
+
+  return (
+    <div className="manage-users-action-overlay" onClick={isBusy ? undefined : onClose}>
+      <div
+        className={`manage-users-action-modal ${type}`}
+        onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+      >
+        <div className="manage-users-action-kicker">
+          {type === 'success'
+            ? 'Success'
+            : type === 'error'
+              ? 'Something went wrong'
+              : type === 'confirm'
+                ? 'Please confirm'
+                : 'Notice'}
+        </div>
+
+        <h3 className="manage-users-action-title">{title}</h3>
+
+        <div className="manage-users-action-message">
+          {String(message || '')
+            .split('\n')
+            .map((line, idx) => (
+              <p key={idx}>{line}</p>
+            ))}
+        </div>
+
+        <div className="manage-users-action-buttons">
+          {!hideCancel ? (
+            <button
+              type="button"
+              className="manage-users-action-btn secondary"
+              onClick={onClose}
+              disabled={isBusy}
+            >
+              {cancelLabel}
+            </button>
+          ) : null}
+
+          <button
+            type="button"
+            className={`manage-users-action-btn ${
+              type === 'error' ? 'danger' : 'primary'
+            }`}
+            onClick={onConfirm || onClose}
+            disabled={isBusy}
+          >
+            {isBusy ? 'Working…' : confirmLabel}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const ManageUsers = () => {
   const [users, setUsers] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
@@ -120,7 +208,64 @@ const ManageUsers = () => {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [loadingActionId, setLoadingActionId] = useState(null);
 
+  const [actionModal, setActionModal] = useState({
+    open: false,
+    type: 'info',
+    title: '',
+    message: '',
+    confirmLabel: 'OK',
+    cancelLabel: 'Cancel',
+    hideCancel: false,
+    onConfirm: null,
+  });
+
   const { startImpersonation } = useImpersonation();
+
+  const openInfoModal = ({
+    type = 'info',
+    title,
+    message,
+    confirmLabel = 'OK',
+    hideCancel = true,
+  }) => {
+    setActionModal({
+      open: true,
+      type,
+      title,
+      message,
+      confirmLabel,
+      cancelLabel: 'Cancel',
+      hideCancel,
+      onConfirm: null,
+    });
+  };
+
+  const openConfirmModal = ({
+    title,
+    message,
+    confirmLabel = 'Confirm',
+    cancelLabel = 'Cancel',
+    onConfirm,
+  }) => {
+    setActionModal({
+      open: true,
+      type: 'confirm',
+      title,
+      message,
+      confirmLabel,
+      cancelLabel,
+      hideCancel: false,
+      onConfirm,
+    });
+  };
+
+  const closeActionModal = () => {
+    setActionModal((prev) => ({
+      ...prev,
+      open: false,
+      onConfirm: null,
+    }));
+  };
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -152,12 +297,20 @@ const ManageUsers = () => {
             authAccountCreated: !!data.authAccountCreated || !!data.uid,
             lastWelcomeEmailSentAt:
               data.lastWelcomeEmailSentAt || data.welcomeEmailSentAt || null,
+            lastLoginAt: data.lastLoginAt || data.lastSignInAt || null,
+            lastSignInAt: data.lastSignInAt || data.lastLoginAt || null,
           };
         });
 
         setUsers(dedupeUsersByEmail(rawUsers));
       } catch (error) {
         console.error('Error fetching users:', error);
+        openInfoModal({
+          type: 'error',
+          title: 'Could not load users',
+          message:
+            'There was a problem loading the Manage Users list. Please refresh and try again.',
+        });
       }
     };
 
@@ -169,12 +322,7 @@ const ManageUsers = () => {
     if (!query) return users;
 
     return users.filter((user) => {
-      const haystack = [
-        user.email,
-        user.firstName,
-        user.lastName,
-        user.fullName,
-      ]
+      const haystack = [user.email, user.firstName, user.lastName, user.fullName]
         .map((v) => (v || '').toLowerCase())
         .join(' ');
 
@@ -216,11 +364,14 @@ const ManageUsers = () => {
     setSearchQuery(e.target.value);
   };
 
-  const handleViewUser = (user) => {
+    const handleViewUser = (user) => {
     if (isAdminUser(user)) {
-      alert(
-        'Admin users are read-only in this screen.\n\nUpdate admin flags directly in Firestore if needed.'
-      );
+      openInfoModal({
+        type: 'info',
+        title: 'Admin account',
+        message:
+          'Admin users are read-only in this screen.\n\nUpdate admin flags directly in Firestore if needed.',
+      });
       return;
     }
 
@@ -237,7 +388,11 @@ const ManageUsers = () => {
   const handleAddUserClose = () => setIsAddModalOpen(false);
 
   const getPortalStatus = (user) => {
-    if (!user?.isSoundlegend && !user?.portalInviteSent && !user?.authAccountCreated) {
+    if (
+      !user?.isSoundlegend &&
+      !user?.portalInviteSent &&
+      !user?.authAccountCreated
+    ) {
       return {
         label: 'Portal Inactive',
         className: 'off',
@@ -252,17 +407,22 @@ const ManageUsers = () => {
     }
 
     return {
-      label: 'Portal Expired',
+      label: 'Portal Inactive',
       className: 'locked',
     };
   };
 
-  const handleTogglePortalAccess = async (user) => {
+  const handleTogglePortalAccess = (user) => {
     const canonicalId = user?.uid || user?.id;
     if (!canonicalId) return;
 
     if (isAdminUser(user)) {
-      alert('Admin users are managed via Firestore and cannot be edited here.');
+      openInfoModal({
+        type: 'info',
+        title: 'Admin account',
+        message:
+          'Admin users are managed via Firestore and cannot be edited here.',
+      });
       return;
     }
 
@@ -273,128 +433,214 @@ const ManageUsers = () => {
     const nextGranted = !isCurrentlyActive;
     const nextIsSoundlegend = true;
 
+    const confirmTitle = isCurrentlyActive
+      ? 'Expire portal access?'
+      : 'Restore portal access?';
+
     const confirmMessage = isCurrentlyActive
-      ? `Expire portal access for ${user.email}?\n\nThey will no longer be able to use the SoundLegend portal until access is restored.`
-      : `Restore portal access for ${user.email}?\n\nThey will be able to use the SoundLegend portal again.`;
+      ? `This will expire portal access for ${user.email}.\n\nThey will no longer be able to use the SoundLegend portal until access is restored.`
+      : `This will restore portal access for ${user.email}.\n\nThey will be able to use the SoundLegend portal again.`;
 
-    if (!window.confirm(confirmMessage)) return;
+    openConfirmModal({
+      title: confirmTitle,
+      message: confirmMessage,
+      confirmLabel: isCurrentlyActive ? 'Expire Access' : 'Restore Access',
+      cancelLabel: 'Cancel',
+      onConfirm: async () => {
+        setLoadingActionId(canonicalId);
 
-    setLoadingActionId(canonicalId);
+        try {
+          closeActionModal();
 
-    try {
-      await updateDoc(doc(db, 'users', canonicalId), {
-        isSoundlegend: nextIsSoundlegend,
-        slPortalLocked: nextLocked,
-        portalAccessGranted: nextGranted,
-        portalStatus: nextGranted ? 'active' : 'expired',
-        access: {
-          soundlegend: nextGranted,
-        },
-      });
+          await updateDoc(doc(db, 'users', canonicalId), {
+            isSoundlegend: nextIsSoundlegend,
+            slPortalLocked: nextLocked,
+            portalLocked: nextLocked,
+            slPortalExpired: nextLocked,
+            portalExpired: nextLocked,
+            portalAccessGranted: nextGranted,
+            portalStatus: nextGranted ? 'active' : 'expired',
+            access: {
+              soundlegend: nextGranted,
+              soundLegend: nextGranted,
+            },
+          });
 
-      updateLocalUser(user.email || canonicalId, {
-        id: canonicalId,
-        uid: canonicalId,
-        isSoundlegend: nextIsSoundlegend,
-        slPortalLocked: nextLocked,
-        portalAccessGranted: nextGranted,
-      });
-    } catch (err) {
-      console.error('Failed to update portal access:', err);
-      alert('There was a problem updating portal access.');
-    } finally {
-      setLoadingActionId(null);
-    }
+          updateLocalUser(user.email || canonicalId, {
+            id: canonicalId,
+            uid: canonicalId,
+            isSoundlegend: nextIsSoundlegend,
+            slPortalLocked: nextLocked,
+            portalLocked: nextLocked,
+            slPortalExpired: nextLocked,
+            portalExpired: nextLocked,
+            portalAccessGranted: nextGranted,
+          });
+
+          openInfoModal({
+            type: 'success',
+            title: nextGranted ? 'Portal restored' : 'Portal expired',
+            message: nextGranted
+              ? `${user.email} can access the Artist Portal again.`
+              : `${user.email} no longer has active Artist Portal access.`,
+          });
+        } catch (err) {
+          console.error('Failed to update portal access:', err);
+          openInfoModal({
+            type: 'error',
+            title: 'Could not update portal access',
+            message:
+              'There was a problem updating this user’s portal access. Please try again.',
+          });
+        } finally {
+          setLoadingActionId(null);
+        }
+      },
+    });
   };
 
-  const handleSendResetEmail = async (user) => {
+  const handleSendResetEmail = (user) => {
     if (isAdminUser(user)) {
-      alert(
-        'Admin password resets should be handled manually through Firebase Auth / Admin tools, not this UI.'
-      );
+      openInfoModal({
+        type: 'info',
+        title: 'Admin account',
+        message:
+          'Admin password resets should be handled manually through Firebase Auth / Admin tools, not this UI.',
+      });
       return;
     }
 
     if (!user?.email || user.email === 'N/A') {
-      alert('No valid email on file for this user.');
+      openInfoModal({
+        type: 'error',
+        title: 'No valid email',
+        message: 'There is no valid email address on file for this user.',
+      });
       return;
     }
 
-    setLoadingActionId(user.uid || user.id);
+    openConfirmModal({
+      title: 'Send password reset email?',
+      message: `Send a password reset email to ${user.email}?\n\nUse this when the artist has already set their password and needs a new reset link.`,
+      confirmLabel: 'Send Reset Email',
+      cancelLabel: 'Cancel',
+      onConfirm: async () => {
+        setLoadingActionId(user.uid || user.id);
 
-    try {
-      await sendPasswordResetEmail(auth, user.email);
-      alert(
-        `Password reset email sent to ${user.email}.\n\nThe artist can use that email to reset their password and sign back in.`
-      );
-    } catch (err) {
-      console.error('Failed to send reset email:', err);
-      alert('There was a problem sending the reset email.');
-    } finally {
-      setLoadingActionId(null);
-    }
+        try {
+          closeActionModal();
+          await sendPasswordResetEmail(auth, user.email);
+
+          openInfoModal({
+            type: 'success',
+            title: 'Password reset email sent',
+            message: `${user.email} has been sent a password reset email.\n\nThey can use that link to reset their password and sign back in.`,
+          });
+        } catch (err) {
+          console.error('Failed to send reset email:', err);
+          openInfoModal({
+            type: 'error',
+            title: 'Could not send reset email',
+            message:
+              'There was a problem sending the password reset email. Please try again.',
+          });
+        } finally {
+          setLoadingActionId(null);
+        }
+      },
+    });
   };
 
-  const handleSendWelcomeEmail = async (user) => {
+  const handleSendWelcomeEmail = (user) => {
     if (isAdminUser(user)) {
-      alert(
-        'Admin accounts do not get the SoundLegend welcome email from this screen.'
-      );
+      openInfoModal({
+        type: 'info',
+        title: 'Admin account',
+        message:
+          'Admin accounts do not get the SoundLegend welcome email from this screen.',
+      });
       return;
     }
 
     if (!user?.email || user.email === 'N/A') {
-      alert('No valid email on file for this user.');
+      openInfoModal({
+        type: 'error',
+        title: 'No valid email',
+        message: 'There is no valid email address on file for this user.',
+      });
       return;
     }
+
+    const confirmTitle = user.portalInviteSent
+      ? 'Re-send welcome email?'
+      : 'Send welcome email?';
 
     const confirmMessage = user.portalInviteSent
       ? `Re-send the SoundLegend welcome email to ${user.email}?\n\nThis will send them another create-password / portal access email.`
       : `Send a SoundLegend welcome email to ${user.email}?\n\nThis will create the Firebase Auth account if needed, grant portal access, and send a create-password email.`;
 
-    if (!window.confirm(confirmMessage)) return;
+    openConfirmModal({
+      title: confirmTitle,
+      message: confirmMessage,
+      confirmLabel: user.portalInviteSent
+        ? 'Re-send Welcome Email'
+        : 'Send Welcome Email',
+      cancelLabel: 'Cancel',
+      onConfirm: async () => {
+        setLoadingActionId(user.uid || user.id);
 
-    setLoadingActionId(user.uid || user.id);
+        try {
+          closeActionModal();
 
-    try {
-      const sendWelcomeEmail = httpsCallable(
-        functions,
-        'sendSoundLegendWelcomeEmail'
-      );
+          const sendWelcomeEmail = httpsCallable(
+            functions,
+            'sendSoundLegendWelcomeEmail'
+          );
 
-      const result = await sendWelcomeEmail({
-        userId: user.uid || user.id,
-        email: user.email,
-        name: user.fullName || '',
-      });
+          const result = await sendWelcomeEmail({
+            userId: user.uid || user.id,
+            email: user.email,
+            name: user.fullName || '',
+          });
 
-      const returnedUid = result?.data?.uid || user.uid || user.id;
-      const now = new Date();
+          const returnedUid = result?.data?.uid || user.uid || user.id;
+          const now = new Date();
 
-      updateLocalUser(user.email || returnedUid, {
-        id: returnedUid,
-        uid: returnedUid,
-        isSoundlegend: true,
-        slPortalLocked: false,
-        portalAccessGranted: true,
-        portalInviteSent: true,
-        authAccountCreated: true,
-        lastWelcomeEmailSentAt: now,
-      });
+          updateLocalUser(user.email || returnedUid, {
+            id: returnedUid,
+            uid: returnedUid,
+            isSoundlegend: true,
+            slPortalLocked: false,
+            portalLocked: false,
+            slPortalExpired: false,
+            portalExpired: false,
+            portalAccessGranted: true,
+            portalInviteSent: true,
+            authAccountCreated: true,
+            lastWelcomeEmailSentAt: now,
+          });
 
-      alert(
-        `Welcome email sent to ${user.email}.\n\nThey should use the email link to create their password, then sign in at /artisan-portal/signin.`
-      );
-    } catch (err) {
-      console.error('Failed to send welcome email:', err);
-      alert(
-        `We could not send the welcome email automatically.\n\nError: ${
-          err?.message || err
-        }`
-      );
-    } finally {
-      setLoadingActionId(null);
-    }
+          openInfoModal({
+            type: 'success',
+            title: user.portalInviteSent
+              ? 'Welcome email re-sent'
+              : 'Welcome email sent',
+            message: `${user.email} has been sent a SoundLegend welcome email.\n\nThey should use the email link to create their password, then sign in at /artisan-portal/signin.`,
+          });
+        } catch (err) {
+          console.error('Failed to send welcome email:', err);
+          openInfoModal({
+            type: 'error',
+            title: 'Could not send welcome email',
+            message: `We could not send the welcome email automatically.\n\n${
+              err?.message || 'Please try again.'
+            }`,
+          });
+        } finally {
+          setLoadingActionId(null);
+        }
+      },
+    });
   };
 
   const handleImpersonateUser = (user) => {
@@ -410,213 +656,254 @@ const ManageUsers = () => {
   };
 
   return (
-    <div className="manage-users">
-      <div className="manage-users-header-row">
-        <div>
-          <h2 className="manage-users-header">Manage Users</h2>
-          <p className="manage-users-subtitle">
-            Manage SoundLegend portal access, invite emails, and password reset
-            tools for your artists.
-          </p>
+    <>
+      <div className="manage-users">
+        <div className="manage-users-header-row">
+          <div>
+            <h2 className="manage-users-header">Manage Users</h2>
+            <p className="manage-users-subtitle">
+              Manage SoundLegend portal access, invite emails, and password
+              reset tools for your artists.
+            </p>
+          </div>
+
+          <button className="add-btn" onClick={handleAddUser}>
+            + Add User
+          </button>
         </div>
 
-        <button className="add-btn" onClick={handleAddUser}>
-          + Add User
-        </button>
-      </div>
+        <input
+          type="text"
+          placeholder="Search by email, first name, or last name"
+          value={searchQuery}
+          onChange={handleSearch}
+          className="search-bar"
+        />
 
-      <input
-        type="text"
-        placeholder="Search by email, first name, or last name"
-        value={searchQuery}
-        onChange={handleSearch}
-        className="search-bar"
-      />
-
-      <div className="responsive-table-container">
-        <table className="manage-users-table">
-          <thead>
-            <tr>
-              <th>Email</th>
-              <th>Name</th>
-              <th>Portal Controls</th>
-              <th>More</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {filteredUsers.length === 0 ? (
+        <div className="responsive-table-container">
+          <table className="manage-users-table">
+            <thead>
               <tr>
-                <td colSpan="4">No users found</td>
+                <th>Email</th>
+                <th>Name</th>
+                <th>Portal Controls</th>
+                <th>More</th>
               </tr>
-            ) : (
-              filteredUsers.map((user) => {
-                const busy = loadingActionId === (user.uid || user.id);
-                const isAdmin = isAdminUser(user);
-                const portalStatus = getPortalStatus(user);
-                const welcomeLabel = user.portalInviteSent
-                  ? 'Re-send Welcome Email'
-                  : 'Send Welcome Email';
-                const lastWelcomeSent = formatMaybeDate(
-                  user.lastWelcomeEmailSentAt
-                );
+            </thead>
 
-                return (
-                  <tr key={user.uid || user.id || user.email}>
-                    <td>
-                      <div className="user-email-cell">{user.email}</div>
-                      <div className="user-flags">
-                        {user.isSoundlegend && (
-                          <span className="user-flag user-flag-sl">
-                            SoundLegend
-                          </span>
-                        )}
-                        {isAdmin && (
-                          <span className="user-flag user-flag-admin">
-                            Admin
-                          </span>
-                        )}
-                      </div>
-                    </td>
+            <tbody>
+              {filteredUsers.length === 0 ? (
+                <tr>
+                  <td colSpan="4">No users found</td>
+                </tr>
+              ) : (
+                filteredUsers.map((user) => {
+                  const busy = loadingActionId === (user.uid || user.id);
+                  const isAdmin = isAdminUser(user);
+                  const portalStatus = getPortalStatus(user);
 
-                    <td>{user.fullName || '—'}</td>
+                  const lastWelcomeSent = formatMaybeDate(
+                    user.lastWelcomeEmailSentAt
+                  );
+                  const lastLoginSeen = formatMaybeDate(
+                    user.lastLoginAt || user.lastSignInAt
+                  );
 
-                    <td className="portal-controls-cell">
-                      {isAdmin ? (
-                        <div className="admin-portal-note">
-                          Admin accounts are read-only in this view.
-                          <br />
-                          Update admin flags and access directly in the Firestore
-                          <br />
-                          <span className="admin-portal-note-strong">
-                            users
-                          </span>{' '}
-                          collection.
+                  const hasSignedIn =
+                    !!(user.lastLoginAt || user.lastSignInAt) &&
+                    String(lastLoginSeen).trim() !== '';
+
+                  const showResetButton = hasSignedIn;
+                  const showWelcomeButton = !hasSignedIn;
+
+                  const welcomeLabel = user.portalInviteSent
+                    ? 'Re-send Welcome Email'
+                    : 'Send Welcome Email';
+
+                  const statusLine = hasSignedIn
+                    ? `Last portal login: ${lastLoginSeen}`
+                    : user.portalInviteSent
+                      ? lastWelcomeSent
+                        ? `Welcome email sent: ${lastWelcomeSent}`
+                        : 'Welcome email sent'
+                      : 'No welcome email sent';
+
+                  return (
+                    <tr key={user.uid || user.id || user.email}>
+                      <td>
+                        <div className="user-email-cell">{user.email}</div>
+                        <div className="user-flags">
+                          {user.isSoundlegend && (
+                            <span className="user-flag user-flag-sl">
+                              SoundLegend
+                            </span>
+                          )}
+                          {isAdmin && (
+                            <span className="user-flag user-flag-admin">
+                              Admin
+                            </span>
+                          )}
                         </div>
-                      ) : (
-                        <>
-                          <div className="portal-toggle-row">
-                            <button
-                              type="button"
-                              className={`pill-toggle lock ${portalStatus.className}`}
-                              onClick={() => handleTogglePortalAccess(user)}
-                              disabled={busy}
-                              data-tooltip={
-                                portalStatus.className === 'unlocked'
-                                  ? 'Portal is currently active.\nClick to expire portal access.'
-                                  : 'Portal is currently expired/locked.\nClick to restore portal access.'
-                              }
-                            >
-                              {portalStatus.label}
-                            </button>
+                      </td>
+
+                      <td>{user.fullName || '—'}</td>
+
+                      <td className="portal-controls-cell">
+                        {isAdmin ? (
+                          <div className="admin-portal-note">
+                            Admin accounts are read-only in this view.
+                            <br />
+                            Update admin flags and access directly in the
+                            Firestore
+                            <br />
+                            <span className="admin-portal-note-strong">
+                              users
+                            </span>{' '}
+                            collection.
                           </div>
+                        ) : (
+                          <>
+                            <div className="portal-toggle-row">
+                              <button
+                                type="button"
+                                className={`pill-toggle lock ${portalStatus.className}`}
+                                onClick={() => handleTogglePortalAccess(user)}
+                                disabled={busy}
+                                data-tooltip={
+                                  portalStatus.className === 'unlocked'
+                                    ? 'Portal is currently active.\nClick to expire portal access.'
+                                    : 'Portal is currently expired/locked.\nClick to restore portal access.'
+                                }
+                              >
+                                {portalStatus.label}
+                              </button>
+                            </div>
 
-                          <div className="portal-password-row">
-                            <button
-                              type="button"
-                              className="mini-btn"
-                              onClick={() => handleSendResetEmail(user)}
-                              disabled={busy || !user.email || user.email === 'N/A'}
-                            >
-                              Send Reset Email
-                            </button>
+                            <div className="portal-password-row">
+                              {showResetButton ? (
+                                <button
+                                  type="button"
+                                  className="mini-btn"
+                                  onClick={() => handleSendResetEmail(user)}
+                                  disabled={
+                                    busy || !user.email || user.email === 'N/A'
+                                  }
+                                >
+                                  Send Reset Email
+                                </button>
+                              ) : null}
 
-                            <button
-                              type="button"
-                              className="mini-btn secondary"
-                              onClick={() => handleSendWelcomeEmail(user)}
-                              disabled={busy || !user.email || user.email === 'N/A'}
-                            >
-                              {welcomeLabel}
-                            </button>
-                          </div>
+                              {showWelcomeButton ? (
+                                <button
+                                  type="button"
+                                  className="mini-btn secondary"
+                                  onClick={() => handleSendWelcomeEmail(user)}
+                                  disabled={
+                                    busy || !user.email || user.email === 'N/A'
+                                  }
+                                >
+                                  {welcomeLabel}
+                                </button>
+                              ) : null}
+                            </div>
 
-                          {user.portalInviteSent && (
                             <div
                               style={{
                                 marginTop: '8px',
                                 fontSize: '0.82rem',
                                 color: '#666',
+                                lineHeight: 1.45,
                               }}
                             >
-                              {lastWelcomeSent
-                                ? `Last welcome email sent: ${lastWelcomeSent}`
-                                : 'Welcome email has been sent previously.'}
+                              {statusLine}
                             </div>
-                          )}
-                        </>
-                      )}
-                    </td>
-
-                    <td>
-                      <div className="more-actions">
-                        {isAdmin ? (
-                          <>
-                            <button
-                              className="view-btn"
-                              type="button"
-                              disabled
-                              title="Admin users are managed directly in Firestore"
-                            >
-                              Admin (read-only)
-                            </button>
-
-                            <button
-                              className="impersonate-btn"
-                              type="button"
-                              onClick={() => handleImpersonateUser(user)}
-                            >
-                              View Portal as User
-                            </button>
-                          </>
-                        ) : (
-                          <>
-                            <button
-                              className="view-btn"
-                              type="button"
-                              onClick={() => handleViewUser(user)}
-                            >
-                              View / Edit
-                            </button>
-
-                            <button
-                              className="impersonate-btn"
-                              type="button"
-                              onClick={() => handleImpersonateUser(user)}
-                            >
-                              View Portal as User
-                            </button>
                           </>
                         )}
-                      </div>
-                    </td>
-                  </tr>
-                );
-              })
-            )}
-          </tbody>
-        </table>
+                      </td>
+
+                      <td>
+                        <div className="more-actions">
+                          {isAdmin ? (
+                            <>
+                              <button
+                                className="view-btn"
+                                type="button"
+                                disabled
+                                title="Admin users are managed directly in Firestore"
+                              >
+                                Admin (read-only)
+                              </button>
+
+                              <button
+                                className="impersonate-btn"
+                                type="button"
+                                onClick={() => handleImpersonateUser(user)}
+                              >
+                                View Portal as User
+                              </button>
+                            </>
+                          ) : (
+                            <>
+                              <button
+                                className="view-btn"
+                                type="button"
+                                onClick={() => handleViewUser(user)}
+                              >
+                                View / Edit
+                              </button>
+
+                              <button
+                                className="impersonate-btn"
+                                type="button"
+                                onClick={() => handleImpersonateUser(user)}
+                              >
+                                View Portal as User
+                              </button>
+                            </>
+                          )}
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })
+              )}
+            </tbody>
+          </table>
+        </div>
+
+        {isEditModalOpen && selectedUser && (
+          <EditUserModal
+            user={selectedUser}
+            onClose={handleCloseModal}
+            onUserUpdated={(updatedUser) => {
+              updateLocalUser(updatedUser.email || updatedUser.id, updatedUser);
+            }}
+          />
+        )}
+
+        {isAddModalOpen && (
+          <AddUserModal
+            onClose={handleAddUserClose}
+            onUserAdded={(newUser) => {
+              setUsers((prev) => dedupeUsersByEmail([newUser, ...prev]));
+            }}
+          />
+        )}
       </div>
 
-      {isEditModalOpen && selectedUser && (
-        <EditUserModal
-          user={selectedUser}
-          onClose={handleCloseModal}
-          onUserUpdated={(updatedUser) => {
-            updateLocalUser(updatedUser.email || updatedUser.id, updatedUser);
-          }}
-        />
-      )}
-
-      {isAddModalOpen && (
-        <AddUserModal
-          onClose={handleAddUserClose}
-          onUserAdded={(newUser) => {
-            setUsers((prev) => dedupeUsersByEmail([newUser, ...prev]));
-          }}
-        />
-      )}
-    </div>
+      <ActionModal
+        open={actionModal.open}
+        type={actionModal.type}
+        title={actionModal.title}
+        message={actionModal.message}
+        confirmLabel={actionModal.confirmLabel}
+        cancelLabel={actionModal.cancelLabel}
+        hideCancel={actionModal.hideCancel}
+        isBusy={!!loadingActionId}
+        onClose={closeActionModal}
+        onConfirm={actionModal.onConfirm || closeActionModal}
+      />
+    </>
   );
 };
 

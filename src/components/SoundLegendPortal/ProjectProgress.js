@@ -4534,6 +4534,10 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
   }, [project, storyChapters, overallPct, currentStepIndex]);
 
   const chapterSelectorItems = useMemo(() => {
+    const numberedStoryChapters = storyChapters.filter(
+      (c) => c.key !== 'soundlegendCover' && c.key !== 'soundlegendEpilogue'
+    );
+
     return storyChapters.map((chapter) => {
       const isCover = chapter.key === 'soundlegendCover';
       const isLegacy = chapter.key === 'soundlegendEpilogue';
@@ -4541,6 +4545,7 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
 
       let visualState = 'default';
       let isClickable = false;
+      let title = chapter.label;
 
       if (isCover) {
         visualState =
@@ -4552,6 +4557,10 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
       } else {
         const canonicalStageIndex = STEPS.findIndex(
           (s) => s.key === chapter.key
+        );
+
+        const chapterNumberIndex = numberedStoryChapters.findIndex(
+          (c) => c.key === chapter.key
         );
 
         const accessible = isStoryChapterAccessible({
@@ -4570,16 +4579,35 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
           projectMarkedComplete,
         });
 
-        isClickable = accessible;
+        const isPreviewChapter =
+          chapterNumberIndex === 1 || chapterNumberIndex === 2;
+        const isPostCommitmentChapter = chapterNumberIndex >= 3;
 
         if (!accessible) {
-          visualState = 'locked';
-        } else if (stepStatus === STAGE_MEDIA_STATE.COMPLETED) {
-          visualState = 'completed';
-        } else if (stepStatus === STAGE_MEDIA_STATE.CURRENT) {
-          visualState = 'current';
+          if (isPreviewChapter) {
+            visualState = 'preview';
+            isClickable = true;
+            title = `${chapter.label} — Preview available before commitment`;
+          } else if (isPostCommitmentChapter) {
+            visualState = 'locked';
+            isClickable = false;
+            title = `${chapter.label} — Unlocks after commitment/payment`;
+          } else {
+            visualState = 'locked';
+            isClickable = false;
+          }
         } else {
-          visualState = 'future';
+          isClickable = true;
+
+          if (stepStatus === STAGE_MEDIA_STATE.COMPLETED) {
+            visualState = 'completed';
+          } else if (stepStatus === STAGE_MEDIA_STATE.CURRENT) {
+            visualState = 'current';
+          } else if (isPreviewChapter) {
+            visualState = 'preview';
+          } else {
+            visualState = 'revealed';
+          }
         }
       }
 
@@ -4590,17 +4618,13 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
           : isLegacy
             ? 'Legacy'
             : `${toRomanChapter(
-                storyChapters
-                  .filter(
-                    (c) =>
-                      c.key !== 'soundlegendCover' &&
-                      c.key !== 'soundlegendEpilogue'
-                  )
-                  .findIndex((c) => c.key === chapter.key) + 1
+                numberedStoryChapters.findIndex((c) => c.key === chapter.key) +
+                  1
               )}`,
-        title: chapter.label,
+        title,
         isActive,
         isClickable,
+        isLocked: !isClickable,
         visualState,
       };
     });
@@ -5923,17 +5947,17 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
   };
 
   const paymentReceivedAt =
-  project?.paymentReceivedAt ||
-  project?.depositPaidAt ||
-  project?.commitmentPaidAt ||
-  null;
+    project?.paymentReceivedAt ||
+    project?.depositPaidAt ||
+    project?.commitmentPaidAt ||
+    null;
 
-const chapter2Complete =
-  project?.commitmentPortal?.completed === true ||
-  project?.chapter2Complete === true ||
-  false;
+  const chapter2Complete =
+    project?.commitmentPortal?.completed === true ||
+    project?.chapter2Complete === true ||
+    false;
 
-const shouldShowTargetWindow = !!paymentReceivedAt && chapter2Complete;
+  const shouldShowTargetWindow = !!paymentReceivedAt && chapter2Complete;
 
   const uploadArchiveFiles = async (fileList) => {
     if (!isAdmin) return;
@@ -6174,7 +6198,7 @@ const shouldShowTargetWindow = !!paymentReceivedAt && chapter2Complete;
               </div>
             </div>
 
-               <div className="sl-progress-build-summary-stage-footer">
+            <div className="sl-progress-build-summary-stage-footer">
               <div className="sl-progress-build-summary-stage-target">
                 <div className="sl-progress-build-summary-stage-target-label">
                   {isProjectComplete
@@ -6185,8 +6209,8 @@ const shouldShowTargetWindow = !!paymentReceivedAt && chapter2Complete;
                   {isProjectComplete
                     ? 'Legacy Chapter • From Ober Artisan'
                     : shouldShowTargetWindow
-                    ? targetWindow || 'TBD'
-                    : 'TBD'}
+                      ? targetWindow || 'TBD'
+                      : 'TBD'}
                 </div>
               </div>
 
@@ -6222,10 +6246,13 @@ const shouldShowTargetWindow = !!paymentReceivedAt && chapter2Complete;
                       'sl-progress-chapter-selector-item',
                       `is-${item.visualState}`,
                       item.isActive ? 'is-active' : '',
+                      item.isLocked ? 'is-locked' : '',
                     ]
                       .filter(Boolean)
                       .join(' ')}
                     onClick={() => {
+                      if (!item.isClickable) return;
+
                       const targetIndex = storyChapters.findIndex(
                         (chapter) => chapter.key === item.key
                       );
@@ -6234,6 +6261,8 @@ const shouldShowTargetWindow = !!paymentReceivedAt && chapter2Complete;
                       }
                     }}
                     aria-pressed={item.isActive}
+                    aria-disabled={item.isLocked}
+                    disabled={item.isLocked}
                     title={item.title}
                   >
                     <span className="sl-progress-chapter-selector-label">

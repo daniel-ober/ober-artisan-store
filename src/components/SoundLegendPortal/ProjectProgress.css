@@ -810,28 +810,36 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
-/* COMPLETED CHAPTERS = GOLD TEXT */
+/* COMPLETED / REVEALED CHAPTERS = AVAILABLE / VIEWABLE */
 .sl-progress-chapter-selector-item.is-completed,
 .sl-progress-chapter-selector-item.is-revealed {
-  color: rgba(222, 185, 104, 0.94);
+  color: rgba(255, 255, 255, 0.92);
   background: transparent;
   border-color: transparent;
   box-shadow: none;
 }
 
-/* CURRENT / IN PROGRESS CHAPTER = GOLD TEXT */
+/* PREVIEW CHAPTERS = AVAILABLE BUT SLIGHTLY SOFTER THAN FULLY REVEALED */
+.sl-progress-chapter-selector-item.is-preview {
+  color: rgba(255, 255, 255, 0.78);
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+/* CURRENT / IN PROGRESS CHAPTER = GOLD */
 .sl-progress-chapter-selector-item.is-current {
-  color: rgba(222, 185, 104, 0.94);
+  color: rgba(222, 185, 104, 0.96);
   background: transparent;
   border-color: transparent;
   box-shadow: none;
 }
 
-/* IF A GOLD CHAPTER IS THE SELECTED ONE, KEEP THE RING */
+/* SELECTED AVAILABLE / CURRENT CHAPTER KEEPS THE RING */
 .sl-progress-chapter-selector-item.is-current.is-active,
 .sl-progress-chapter-selector-item.is-completed.is-active,
-.sl-progress-chapter-selector-item.is-revealed.is-active {
-  color: rgba(235, 201, 129, 0.98);
+.sl-progress-chapter-selector-item.is-revealed.is-active,
+.sl-progress-chapter-selector-item.is-preview.is-active {
   background: linear-gradient(
     180deg,
     rgba(255, 255, 255, 0.09),
@@ -843,7 +851,20 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
-/* ALL FUTURE CHAPTERS = GREYED OUT */
+.sl-progress-chapter-selector-item.is-current.is-active {
+  color: rgba(235, 201, 129, 0.98);
+}
+
+.sl-progress-chapter-selector-item.is-completed.is-active,
+.sl-progress-chapter-selector-item.is-revealed.is-active {
+  color: rgba(255, 255, 255, 0.98);
+}
+
+.sl-progress-chapter-selector-item.is-preview.is-active {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* LOCKED / FUTURE CHAPTERS = DIMMED */
 .sl-progress-chapter-selector-item.is-future,
 .sl-progress-chapter-selector-item.is-locked,
 .sl-progress-chapter-selector-item:disabled {
@@ -851,6 +872,7 @@
   background: transparent;
   border-color: transparent;
   box-shadow: none;
+  opacity: 0.72;
 }
 
 /* LOCKED / DISABLED FUTURE CHAPTERS SHOULD NOT LOOK INTERACTIVE */

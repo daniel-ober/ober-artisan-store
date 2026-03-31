@@ -298,15 +298,22 @@ const ViewSoundlegendModal = ({
 
     try {
       const questionnaireToken =
-        fullSubmission?.questionnaireToken || submission?.questionnaireToken || '';
+        fullSubmission?.questionnaireToken ||
+        submission?.questionnaireToken ||
+        '';
 
       await deleteDoc(doc(db, 'soundlegend_submissions', submissionId));
 
       if (questionnaireToken) {
         try {
-          await deleteDoc(doc(db, 'soundlegend_questionnaires', questionnaireToken));
+          await deleteDoc(
+            doc(db, 'soundlegend_questionnaires', questionnaireToken)
+          );
         } catch (questionnaireErr) {
-          console.error('⚠️ Failed to delete questionnaire doc:', questionnaireErr);
+          console.error(
+            '⚠️ Failed to delete questionnaire doc:',
+            questionnaireErr
+          );
         }
       }
 
@@ -552,7 +559,7 @@ const ViewSoundlegendModal = ({
                   <span>Linked Project</span>
                   <div>
                     <a
-                      href={`/projects/${projectId}`}
+                      href={`/legacy?projectId=${projectId}`}
                       target="_blank"
                       rel="noreferrer"
                       className="file-link"
@@ -676,7 +683,9 @@ const ViewSoundlegendModal = ({
                     </tr>
                     <tr>
                       <th>Visual direction</th>
-                      <td>{renderIntakeValue(intakeSection.visualDirection)}</td>
+                      <td>
+                        {renderIntakeValue(intakeSection.visualDirection)}
+                      </td>
                     </tr>
                     <tr>
                       <th>Reference notes</th>
