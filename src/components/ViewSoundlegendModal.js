@@ -8,6 +8,7 @@ import {
   arrayUnion,
   getDoc,
   Timestamp,
+  deleteDoc,
 } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 
@@ -191,6 +192,7 @@ const ViewSoundlegendModal = ({
   const [fullSubmission, setFullSubmission] = useState(
     submission ? { ...submission, id: submission.id } : null
   );
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const {
     firstName,
@@ -257,6 +259,7 @@ const ViewSoundlegendModal = ({
         history: [...(history || []), historyEntry],
       };
 
+      setFullSubmission(nextSubmission);
       onUpdateSubmission?.(nextSubmission);
       onStatusUpdate?.(submissionId, newStatus);
     } catch (err) {
@@ -280,6 +283,46 @@ const ViewSoundlegendModal = ({
       setNotes('');
     } catch (err) {
       console.error('❌ Failed to save note:', err);
+    }
+  };
+
+  const handleDeleteSubmission = async () => {
+    if (!submissionId || isDeleting) return;
+
+    const confirmDelete = window.confirm(
+      `Delete this SoundLegend submission for ${firstName || ''} ${lastName || ''}?\n\nThis cannot be undone.`
+    );
+    if (!confirmDelete) return;
+
+    setIsDeleting(true);
+
+    try {
+      const questionnaireToken =
+        fullSubmission?.questionnaireToken || submission?.questionnaireToken || '';
+
+      await deleteDoc(doc(db, 'soundlegend_submissions', submissionId));
+
+      if (questionnaireToken) {
+        try {
+          await deleteDoc(doc(db, 'soundlegend_questionnaires', questionnaireToken));
+        } catch (questionnaireErr) {
+          console.error('⚠️ Failed to delete questionnaire doc:', questionnaireErr);
+        }
+      }
+
+      onUpdateSubmission?.({
+        ...(fullSubmission || submission),
+        id: submissionId,
+        _deleted: true,
+      });
+
+      alert('✅ SoundLegend submission deleted.');
+      onClose?.();
+    } catch (err) {
+      console.error('❌ Failed to delete SoundLegend submission:', err);
+      alert('Failed to delete submission. Please try again.');
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -342,14 +385,18 @@ const ViewSoundlegendModal = ({
       setProjectId(newProjectId);
       setHistory((prev) => [systemEntry, ...prev]);
 
-      alert(`✅ Project created successfully!\n\nID: ${newProjectId}`);
-
-      onUpdateSubmission?.({
+      const nextSubmission = {
         ...(fullSubmission || submission),
         id: submissionId,
         projectId: newProjectId,
         history: [systemEntry, ...(history || [])],
-      });
+      };
+
+      setFullSubmission(nextSubmission);
+
+      alert(`✅ Project created successfully!\n\nID: ${newProjectId}`);
+
+      onUpdateSubmission?.(nextSubmission);
     } catch (err) {
       console.error('❌ Failed to create project:', err);
       alert('Failed to create project. Please try again.');
@@ -383,7 +430,51 @@ const ViewSoundlegendModal = ({
           }
         }
 
-        setFullSubmission({ ...data, id: submissionId });
+        let mergedData = { ...data, id: submissionId };
+
+        if (
+          (!mergedData.consultationIntake ||
+            !mergedData.consultationIntake.soundlegendVision) &&
+          mergedData.questionnaireToken
+        ) {
+          try {
+            const questionnaireRef = doc(
+              db,
+              'soundlegend_questionnaires',
+              mergedData.questionnaireToken
+            );
+            const questionnaireSnap = await getDoc(questionnaireRef);
+
+            if (questionnaireSnap.exists()) {
+              const questionnaireData = questionnaireSnap.data() || {};
+
+              mergedData = {
+                ...mergedData,
+                consultationIntake:
+                  questionnaireData.consultationIntake ||
+                  mergedData.consultationIntake,
+                consultationIntakeUpdatedAt:
+                  questionnaireData.consultationIntakeUpdatedAt ||
+                  mergedData.consultationIntakeUpdatedAt,
+                questionnaireCompleted:
+                  questionnaireData.questionnaireCompleted ??
+                  mergedData.questionnaireCompleted,
+                questionnaireCompletedAt:
+                  questionnaireData.questionnaireCompletedAt ||
+                  mergedData.questionnaireCompletedAt,
+                status: mergedData.status || questionnaireData.status,
+                stage: mergedData.stage || questionnaireData.stage,
+              };
+            }
+          } catch (questionnaireErr) {
+            console.error(
+              '❌ Error loading questionnaire fallback data:',
+              questionnaireErr
+            );
+          }
+        }
+
+        setFullSubmission(mergedData);
         setProjectId(validProjectId);
         setHistory(data.history || []);
         setSelectedStatus(data.status || 'New');
@@ -497,6 +588,17 @@ const ViewSoundlegendModal = ({
                   }
                 >
                   Download .vcf
+                </button>
+              </div>
+
+              <div className="row">
+                <span>Delete</span>
+                <button
+                  className="btn btn--ghost btn--sm"
+                  onClick={handleDeleteSubmission}
+                  disabled={isDeleting}
+                >
+                  {isDeleting ? 'Deleting…' : 'Delete Submission'}
                 </button>
               </div>
             </div>

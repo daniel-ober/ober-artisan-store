@@ -58,6 +58,7 @@ function SoundlegendQuestionnaire() {
   const navigate = useNavigate();
 
   const [questionnaireDocId, setQuestionnaireDocId] = useState('');
+  const [submissionDocId, setSubmissionDocId] = useState('');
   const [customerName, setCustomerName] = useState('');
   const [customerEmail, setCustomerEmail] = useState('');
   const [completedAt, setCompletedAt] = useState(null);
@@ -118,6 +119,7 @@ function SoundlegendQuestionnaire() {
         );
 
         setQuestionnaireDocId(foundDoc.id);
+        setSubmissionDocId(data.submissionId || '');
         setCustomerName(
           data.fullName ||
             `${data.firstName || ''} ${data.lastName || ''}`.trim() ||
@@ -163,6 +165,24 @@ function SoundlegendQuestionnaire() {
         stage: 'questionnaire_complete',
         updatedAt: serverTimestamp(),
       });
+
+      if (submissionDocId) {
+        try {
+          await updateDoc(doc(db, 'soundlegend_submissions', submissionDocId), {
+            consultationIntake: normalized,
+            consultationIntakeUpdatedAt: serverTimestamp(),
+            questionnaireCompleted: true,
+            questionnaireCompletedAt: serverTimestamp(),
+            status: 'Questionnaire Complete',
+            stage: 'questionnaire_complete',
+          });
+        } catch (submissionSyncErr) {
+          console.warn(
+            'Questionnaire saved, but submission sync failed:',
+            submissionSyncErr
+          );
+        }
+      }
 
       setIntakeValue(normalized);
       setIsAlreadyComplete(true);
@@ -275,13 +295,13 @@ function SoundlegendQuestionnaire() {
             ) : null}
 
             <p className="slq-muted">
-              Dan will review your answers and typically reach out within 2
+              We will review your responses and reach out within 2
               business days to coordinate your free consultation.
             </p>
 
             <p className="slq-muted">
               In the meantime, you can explore some previous builds in the
-              Legacy Vault.
+              LegacyVault.
             </p>
 
             <div className="slq-actions">

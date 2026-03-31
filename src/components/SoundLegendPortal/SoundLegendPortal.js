@@ -6,6 +6,8 @@ import {
   where,
   doc,
   getDoc,
+  setDoc,
+  serverTimestamp,
 } from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
 import { useAuth } from '../../context/AuthContext';
@@ -20,8 +22,6 @@ import AccountSettings from './AccountSettings';
 
 import './SoundLegendTabs.css';
 import './SoundLegendPortal.css';
-
-/* -------------------- tiny helpers -------------------- */
 
 function tsToMillis(v) {
   if (!v) return 0;
@@ -39,6 +39,10 @@ function tsToMillis(v) {
     return 0;
   }
 }
+
+const normalizeEmail = (value) => String(value || '').trim().toLowerCase();
+
+const normalizePhone = (value) => String(value || '').replace(/\D/g, '');
 
 const STORY_CHAPTER_KEYS = [
   'discoveryDesign',
@@ -64,22 +68,6 @@ function isChecklistItemComplete(item) {
   return !!item.completed;
 }
 
-function isChecklistItemTouched(item) {
-  if (!item) return false;
-  if (item.completed) return true;
-
-  const states = Array.isArray(item.checkpointStates)
-    ? item.checkpointStates
-    : null;
-
-  if (states && states.length > 0) return states.some(Boolean);
-  return (item.totalSeconds ?? 0) > 0;
-}
-
-/**
- * Returns the currently active story chapter index:
- * 0 = Chapter I, 1 = Chapter II, etc.
- */
 function getProjectCurrentChapterIndex(project) {
   if (!project) return 0;
 
@@ -103,8 +91,6 @@ function getProjectCurrentChapterIndex(project) {
 
   return STORY_CHAPTER_KEYS.length - 1;
 }
-
-/* -------------------- custom project picker -------------------- */
 
 const ProjectPicker = ({ projects, selectedId, onChange }) => {
   const [open, setOpen] = useState(false);
@@ -165,8 +151,6 @@ const ProjectPicker = ({ projects, selectedId, onChange }) => {
   );
 };
 
-/* -------------------- tabs -------------------- */
-
 const Tabs = ({
   tabs,
   current,
@@ -180,62 +164,57 @@ const Tabs = ({
     <div className="slp-tabs-shell">
       <div className="slp-tabs-header">
         <div className="slp-tabs-header-copy">
-          <div className="slp-tabs-eyebrow">Artist Portal</div>
-          <h2 className="slp-tabs-title">Your Project Workspace</h2>
+          <div className="slp-tabs-eyebrow">Workspace Navigation</div>
         </div>
-      </div>
 
-      <div className="slp-tabs">
-        <div className="slp-tabs-left">
-          {showProjectPicker ? (
+        {showProjectPicker ? (
+          <div className="slp-tabs-header-actions">
             <ProjectPicker
               projects={projects}
               selectedId={selectedId}
               onChange={onSelectProject}
             />
-          ) : null}
-        </div>
+          </div>
+        ) : null}
+      </div>
 
-        <div
-          className="slp-tablist slp-tabs-buttons"
-          role="tablist"
-          aria-label="SoundLegend sections"
-        >
-          {tabs.map((t) => {
-            const disabled = !!t.disabled;
+      <div
+        className="slp-tablist slp-tabs-buttons"
+        role="tablist"
+        aria-label="SoundLegend sections"
+      >
+        {tabs.map((t) => {
+          const disabled = !!t.disabled;
 
-            return (
-              <button
-                key={t.key}
-                role="tab"
-                aria-selected={current === t.key}
-                className={[
-                  'slp-tab',
-                  current === t.key ? 'active' : '',
-                  disabled ? 'slp-tab-disabled' : '',
-                ]
-                  .filter(Boolean)
-                  .join(' ')}
-                onClick={() => {
-                  if (disabled) return;
-                  onChange(t.key);
-                }}
-                type="button"
-              >
-                <span className="slp-tab-label">{t.label}</span>
-                {disabled && t.tooltip ? (
-                  <span className="slp-tab-tooltip">{t.tooltip}</span>
-                ) : null}
-              </button>
-            );
-          })}
-        </div>
+          return (
+            <button
+              key={t.key}
+              role="tab"
+              aria-selected={current === t.key}
+              className={[
+                'slp-tab',
+                current === t.key ? 'active' : '',
+                disabled ? 'slp-tab-disabled' : '',
+              ]
+                .filter(Boolean)
+                .join(' ')}
+              onClick={() => {
+                if (disabled) return;
+                onChange(t.key);
+              }}
+              type="button"
+            >
+              <span className="slp-tab-label">{t.label}</span>
+              {disabled && t.tooltip ? (
+                <span className="slp-tab-tooltip">{t.tooltip}</span>
+              ) : null}
+            </button>
+          );
+        })}
       </div>
     </div>
   );
 };
-
-/* -------------------- main portal -------------------- */
 
 const SoundLegendPortal = () => {
   const navigate = useNavigate();
@@ -412,174 +391,349 @@ const SoundLegendPortal = () => {
   const [orders, setOrders] = useState([]);
   const [tab, setTab] = useState('progress');
 
-  useEffect(() => {
-    if (!effectivePortalUser || loadingEffectiveUser) return;
+useEffect(() => {
+  if (!effectivePortalUser || loadingEffectiveUser) return;
 
-    let cancelled = false;
+  let cancelled = false;
 
-    const run = async () => {
-      setLoading(true);
-      try {
-        const ownerUid = effectivePortalUser.uid || effectivePortalUser.id;
-        const colRef = collection(db, 'projects');
+  const run = async () => {
+    setLoading(true);
 
-        let list = [];
-        let seededProject = null;
+    try {
+      const rawUserUid = String(
+        effectivePortalUser?.uid || effectivePortalUser?.id || ''
+      ).trim();
 
-        if (projectIdFromQuery) {
-          try {
-            const pRef = doc(db, 'projects', projectIdFromQuery);
-            const pSnap = await getDoc(pRef);
-            if (pSnap.exists()) {
-              seededProject = { id: pSnap.id, ...pSnap.data() };
-            }
-          } catch (e) {
-            console.warn(
-              'Failed to fetch project by projectId query param:',
-              e
-            );
+      const rawUserEmail = String(effectivePortalUser?.email || '').trim();
+      const userUid = rawUserUid;
+      const userEmail = normalizeEmail(rawUserEmail);
+      const colRef = collection(db, 'projects');
+
+      let seededProject = null;
+      let seededFromUserProjects = [];
+
+      if (projectIdFromQuery) {
+        try {
+          const pRef = doc(db, 'projects', projectIdFromQuery);
+          const pSnap = await getDoc(pRef);
+          if (pSnap.exists()) {
+            seededProject = { id: pSnap.id, ...pSnap.data() };
           }
+        } catch (e) {
+          console.warn('Failed to fetch project by query param:', e);
         }
-
-        let snap = { empty: true, docs: [] };
-
-        if (ownerUid) {
-          const qByOwner = query(colRef, where('ownerUid', '==', ownerUid));
-          snap = await getDocs(qByOwner);
-        }
-
-        if (snap.empty && ownerUid) {
-          const qByUserId = query(colRef, where('userId', '==', ownerUid));
-          snap = await getDocs(qByUserId);
-        }
-
-        if (snap.empty && ownerUid) {
-          const qByCustomerUserId = query(
-            colRef,
-            where('customerUserId', '==', ownerUid)
-          );
-          snap = await getDocs(qByCustomerUserId);
-        }
-
-        if (snap.empty && effectivePortalUser.email) {
-          const emailLower = effectivePortalUser.email.trim().toLowerCase();
-          const qByEmailLower = query(
-            colRef,
-            where('customer.emailLower', '==', emailLower)
-          );
-          snap = await getDocs(qByEmailLower);
-        }
-
-        if (snap.empty && effectivePortalUser.email) {
-          const email = effectivePortalUser.email.trim();
-          const emailLower = email.toLowerCase();
-
-          const qByCustomerEmail = query(
-            colRef,
-            where('customerEmail', '==', email)
-          );
-          const snapA = await getDocs(qByCustomerEmail);
-          if (!snapA.empty) snap = snapA;
-
-          if (snap.empty) {
-            const qByCustomerDotEmail = query(
-              colRef,
-              where('customer.email', '==', email)
-            );
-            const snapB = await getDocs(qByCustomerDotEmail);
-            if (!snapB.empty) snap = snapB;
-          }
-
-          if (snap.empty) {
-            const qByCustomerDotEmailLower = query(
-              colRef,
-              where('customer.emailLower', '==', emailLower)
-            );
-            const snapC = await getDocs(qByCustomerDotEmailLower);
-            if (!snapC.empty) snap = snapC;
-          }
-        }
-
-        if (!cancelled) {
-          const fetched = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
-
-          const map = new Map();
-          [...(seededProject ? [seededProject] : []), ...fetched].forEach(
-            (p) => {
-              if (p?.id) map.set(p.id, p);
-            }
-          );
-
-          list = Array.from(map.values());
-
-          // newest first so the latest/active project is the default one
-          list.sort((a, b) => tsToMillis(b.createdAt) - tsToMillis(a.createdAt));
-
-          setProjects(list);
-
-          setSelectedId((prev) => {
-            if (
-              projectIdFromQuery &&
-              list.some((p) => p.id === projectIdFromQuery)
-            ) {
-              return projectIdFromQuery;
-            }
-            if (prev && list.some((p) => p.id === prev)) return prev;
-            return list[0]?.id || '';
-          });
-        }
-      } catch (e) {
-        console.error('Error loading projects', e);
-      } finally {
-        if (!cancelled) setLoading(false);
       }
-    };
 
-    run();
-    return () => {
-      cancelled = true;
-    };
-  }, [effectivePortalUser, loadingEffectiveUser, projectIdFromQuery]);
+      const userProjectRefs = Array.isArray(effectivePortalUser?.projects)
+        ? effectivePortalUser.projects
+        : [];
+
+      if (userProjectRefs.length > 0) {
+        const fetchedFromUser = await Promise.all(
+          userProjectRefs.map(async (entry) => {
+            try {
+              const projectRefId =
+                typeof entry === 'string'
+                  ? entry
+                  : entry?.projectId || entry?.id || entry?.projectID || '';
+
+              if (!projectRefId) return null;
+
+              const pRef = doc(db, 'projects', projectRefId);
+              const pSnap = await getDoc(pRef);
+
+              if (!pSnap.exists()) return null;
+              return { id: pSnap.id, ...pSnap.data() };
+            } catch (err) {
+              console.warn('Failed to fetch project from user.projects:', err);
+              return null;
+            }
+          })
+        );
+
+        seededFromUserProjects = fetchedFromUser.filter(Boolean);
+      }
+
+      const matches = new Map();
+
+      const addProjects = (items = []) => {
+        items.forEach((p) => {
+          if (p?.id) {
+            matches.set(String(p.id), p);
+          }
+        });
+      };
+
+      addProjects(seededProject ? [seededProject] : []);
+      addProjects(seededFromUserProjects);
+
+      const tryQuery = async (constraint) => {
+        try {
+          const snap = await getDocs(query(colRef, constraint));
+          const list = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+          addProjects(list);
+        } catch (err) {
+          console.warn('Project query skipped/failed:', err);
+        }
+      };
+
+      if (userUid) {
+        await tryQuery(where('ownerUid', '==', userUid));
+        await tryQuery(where('userId', '==', userUid));
+        await tryQuery(where('customerUserId', '==', userUid));
+        await tryQuery(where('customer.uid', '==', userUid));
+      }
+
+      if (rawUserEmail) {
+        await tryQuery(where('customer.email', '==', rawUserEmail));
+        await tryQuery(where('customerEmail', '==', rawUserEmail));
+      }
+
+      if (userEmail) {
+        await tryQuery(where('customer.emailLower', '==', userEmail));
+        await tryQuery(where('customerEmailLower', '==', userEmail));
+      }
+
+      try {
+        const allSnap = await getDocs(colRef);
+        const allProjects = allSnap.docs.map((d) => ({
+          id: d.id,
+          ...d.data(),
+        }));
+
+        const listedProjectIds = Array.isArray(effectivePortalUser?.projects)
+          ? effectivePortalUser.projects
+              .map((entry) =>
+                typeof entry === 'string'
+                  ? entry
+                  : entry?.projectId || entry?.id || entry?.projectID || ''
+              )
+              .filter(Boolean)
+              .map(String)
+          : [];
+
+        const normalizedUserPhone = normalizePhone(
+          effectivePortalUser?.phone ||
+            effectivePortalUser?.customerPhone ||
+            ''
+        );
+
+        const normalizedUserName = String(
+          effectivePortalUser?.fullName ||
+            effectivePortalUser?.name ||
+            [
+              effectivePortalUser?.firstName || '',
+              effectivePortalUser?.lastName || '',
+            ]
+              .join(' ')
+              .trim()
+        )
+          .trim()
+          .toLowerCase();
+
+        const filtered = allProjects.filter((p) => {
+          const projectId = String(p?.id || '').trim();
+
+          const projectOwnerUid = String(
+            p?.ownerUid ||
+              p?.userId ||
+              p?.customerUserId ||
+              p?.customer?.uid ||
+              ''
+          ).trim();
+
+          const projectEmailRaw = String(
+            p?.customer?.email || p?.customerEmail || ''
+          ).trim();
+
+          const projectEmailNormalized = normalizeEmail(
+            p?.customer?.emailLower ||
+              p?.customerEmailLower ||
+              projectEmailRaw
+          );
+
+          const projectPhoneNormalized = normalizePhone(
+            p?.customer?.phone ||
+              p?.customerPhone ||
+              ''
+          );
+
+          const projectNameNormalized = String(
+            p?.customer?.name ||
+              p?.customerName ||
+              ''
+          )
+            .trim()
+            .toLowerCase();
+
+          const projectIdMatch =
+            !!projectId && listedProjectIds.includes(projectId);
+
+          const uidMatch =
+            !!userUid && !!projectOwnerUid && projectOwnerUid === userUid;
+
+          const rawEmailMatch =
+            !!rawUserEmail &&
+            !!projectEmailRaw &&
+            projectEmailRaw === rawUserEmail;
+
+          const normalizedEmailMatch =
+            !!userEmail &&
+            !!projectEmailNormalized &&
+            projectEmailNormalized === userEmail;
+
+          const phoneMatch =
+            !!normalizedUserPhone &&
+            !!projectPhoneNormalized &&
+            normalizedUserPhone === projectPhoneNormalized;
+
+          const nameMatch =
+            !!normalizedUserName &&
+            !!projectNameNormalized &&
+            normalizedUserName === projectNameNormalized;
+
+          const strongFallbackMatch =
+            phoneMatch || (nameMatch && phoneMatch);
+
+          return (
+            projectIdMatch ||
+            uidMatch ||
+            rawEmailMatch ||
+            normalizedEmailMatch ||
+            strongFallbackMatch
+          );
+        });
+
+        addProjects(filtered);
+      } catch (scanErr) {
+        console.warn('Full projects scan fallback failed:', scanErr);
+      }
+
+      const list = Array.from(matches.values());
+      list.sort((a, b) => tsToMillis(b.createdAt) - tsToMillis(a.createdAt));
+
+      if (!cancelled) {
+        setProjects(list);
+
+        setSelectedId((prev) => {
+          if (
+            projectIdFromQuery &&
+            list.some((p) => String(p.id) === String(projectIdFromQuery))
+          ) {
+            return projectIdFromQuery;
+          }
+
+          if (prev && list.some((p) => String(p.id) === String(prev))) {
+            return prev;
+          }
+
+          return list[0]?.id || '';
+        });
+      }
+    } catch (e) {
+      console.error('Error loading projects', e);
+      if (!cancelled) {
+        setProjects([]);
+        setSelectedId('');
+      }
+    } finally {
+      if (!cancelled) setLoading(false);
+    }
+  };
+
+  run();
+
+  return () => {
+    cancelled = true;
+  };
+}, [effectivePortalUser, loadingEffectiveUser, projectIdFromQuery]);
 
   useEffect(() => {
     if (!effectivePortalUser?.email || loadingEffectiveUser) return;
+
     let cancelled = false;
 
     const run = async () => {
       try {
-        const qOrders = query(
-          collection(db, 'orders'),
-          where('customerEmail', '==', effectivePortalUser.email)
-        );
-        const snap = await getDocs(qOrders);
+        const normalizedEmail = normalizeEmail(effectivePortalUser.email);
+        const orderMap = new Map();
+
+        const addOrders = (items = []) => {
+          items.forEach((o) => {
+            if (o?.id) orderMap.set(o.id, o);
+          });
+        };
+
+        const tryOrdersQuery = async (constraint) => {
+          try {
+            const snap = await getDocs(query(collection(db, 'orders'), constraint));
+            addOrders(snap.docs.map((d) => ({ id: d.id, ...d.data() })));
+          } catch (err) {
+            console.warn('Order query skipped/failed:', err);
+          }
+        };
+
+        await tryOrdersQuery(where('customerEmail', '==', effectivePortalUser.email));
+        await tryOrdersQuery(where('customerEmailLower', '==', normalizedEmail));
+
+        if (orderMap.size === 0) {
+          try {
+            const allSnap = await getDocs(collection(db, 'orders'));
+            const filtered = allSnap.docs
+              .map((d) => ({ id: d.id, ...d.data() }))
+              .filter((o) => {
+                const email = normalizeEmail(
+                  o?.customerEmail ||
+                    o?.customer?.email ||
+                    o?.customerEmailLower ||
+                    o?.customer?.emailLower
+                );
+                return email && email === normalizedEmail;
+              });
+
+            addOrders(filtered);
+          } catch (scanErr) {
+            console.warn('Full orders scan fallback failed:', scanErr);
+          }
+        }
+
         if (cancelled) return;
 
-        const list = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+        const list = Array.from(orderMap.values());
         list.sort((a, b) => tsToMillis(b.createdAt) - tsToMillis(a.createdAt));
         setOrders(list);
       } catch (e) {
         console.warn('Order fetch skipped/failed', e);
+        if (!cancelled) setOrders([]);
       }
     };
 
     run();
+
     return () => {
       cancelled = true;
     };
   }, [effectivePortalUser?.email, loadingEffectiveUser]);
 
-  const selectedProject = useMemo(
-    () => projects.find((p) => p.id === selectedId) || null,
-    [projects, selectedId]
-  );
+const selectedProject = useMemo(() => {
+  if (!Array.isArray(projects) || projects.length === 0) return null;
 
-  const latestOrder = useMemo(() => (orders.length ? orders[0] : null), [orders]);
+  if (selectedId) {
+    const matched = projects.find((p) => String(p.id) === String(selectedId));
+    if (matched) return matched;
+  }
 
-  const hasProject = !!selectedProject;
-  const currentChapterIndex = useMemo(
-    () => (selectedProject ? getProjectCurrentChapterIndex(selectedProject) : 0),
-    [selectedProject]
-  );
+  return projects[0] || null;
+}, [projects, selectedId]);
+
+const latestOrder = useMemo(() => (orders.length ? orders[0] : null), [orders]);
+
+const hasProject = Array.isArray(projects) && projects.length > 0;
+
+const currentChapterIndex = useMemo(
+  () => (selectedProject ? getProjectCurrentChapterIndex(selectedProject) : 0),
+  [selectedProject]
+);
 
   const artisanLine = (selectedProject?.artisanLine || '').toLowerCase();
   const serialGuess = (
@@ -620,12 +774,35 @@ const SoundLegendPortal = () => {
     return nextTabs;
   }, [hasProject, currentChapterIndex, isSoundLegendProject]);
 
-  useEffect(() => {
-    const allowedKeys = tabs.map((t) => t.key);
-    if (!allowedKeys.includes(tab)) {
-      setTab(allowedKeys[0] || 'account');
+const [didAutoSelectProgress, setDidAutoSelectProgress] = useState(false);
+
+useEffect(() => {
+  if (loading) return;
+
+  const allowedKeys = tabs.map((t) => t.key);
+
+  if (!allowedKeys.length) {
+    if (tab !== 'account') {
+      setTab('account');
     }
-  }, [tabs, tab]);
+    return;
+  }
+
+  if (!allowedKeys.includes(tab)) {
+    setTab(allowedKeys[0] || 'account');
+    return;
+  }
+
+  if (
+    !isAdmin &&
+    hasProject &&
+    !didAutoSelectProgress &&
+    allowedKeys.includes('progress')
+  ) {
+    setTab('progress');
+    setDidAutoSelectProgress(true);
+  }
+}, [tabs, tab, hasProject, isAdmin, loading, didAutoSelectProgress]);
 
   const handleTabChange = (nextKey) => {
     const allowedKeys = tabs.map((t) => t.key);
@@ -638,7 +815,9 @@ const SoundLegendPortal = () => {
   }
 
   if (!effectivePortalUser) {
-    return <div className="slp-page">Please sign in to view your Artist Portal.</div>;
+    return (
+      <div className="slp-page">Please sign in to view your Artist Portal.</div>
+    );
   }
 
   if (loading) {
@@ -670,10 +849,20 @@ const SoundLegendPortal = () => {
         </div>
       )}
 
-      <h1 className="slp-heading">
-        Welcome to your Artist Portal
-        {effectiveIsImpersonating ? ' (admin view)' : ''}
-      </h1>
+      <div className="slp-portal-hero">
+        <div className="slp-portal-hero-kicker">
+          {effectiveIsImpersonating ? 'Admin Portal View' : 'Artist Portal'}
+        </div>
+        <h1 className="slp-heading">
+          {effectiveIsImpersonating
+            ? 'Viewing Artist Workspace'
+            : 'Your Artist Workspace'}
+        </h1>
+        <p className="slp-portal-hero-subtitle">
+          Follow your project, review approved details, and stay connected to
+          each chapter of your build.
+        </p>
+      </div>
 
       {!hasProject ? (
         <>
@@ -719,25 +908,51 @@ const SoundLegendPortal = () => {
           />
 
           <div className="slp-panel">
-            {tab === 'progress' && (
+            <div
+              className={`slp-tab-panel ${tab === 'progress' ? 'is-active' : ''}`}
+              hidden={tab !== 'progress'}
+            >
               <ProjectProgress project={selectedProject} isAdmin={isAdmin} />
+            </div>
+
+            <div
+              className={`slp-tab-panel ${tab === 'scope' ? 'is-active' : ''}`}
+              hidden={tab !== 'scope'}
+            >
+              <ScopeOfWork project={selectedProject} />
+            </div>
+
+            {isSoundLegendProject && currentChapterIndex >= 2 && (
+              <div
+                className={`slp-tab-panel ${tab === 'vault' ? 'is-active' : ''}`}
+                hidden={tab !== 'vault'}
+              >
+                <VaultPreferences project={selectedProject} />
+              </div>
             )}
 
-            {tab === 'scope' && <ScopeOfWork project={selectedProject} />}
-
-            {tab === 'vault' && isSoundLegendProject && currentChapterIndex >= 2 && (
-              <VaultPreferences project={selectedProject} />
+            {isSoundLegendProject && currentChapterIndex >= 2 && (
+              <div
+                className={`slp-tab-panel ${tab === 'media' ? 'is-active' : ''}`}
+                hidden={tab !== 'media'}
+              >
+                <Media project={selectedProject} />
+              </div>
             )}
 
-            {tab === 'media' && isSoundLegendProject && currentChapterIndex >= 2 && (
-              <Media project={selectedProject} />
+            {currentChapterIndex >= 1 && (
+              <div
+                className={`slp-tab-panel ${tab === 'payments' ? 'is-active' : ''}`}
+                hidden={tab !== 'payments'}
+              >
+                <PaymentHistory orders={orders} />
+              </div>
             )}
 
-            {tab === 'payments' && currentChapterIndex >= 1 && (
-              <PaymentHistory orders={orders} />
-            )}
-
-            {tab === 'account' && (
+            <div
+              className={`slp-tab-panel ${tab === 'account' ? 'is-active' : ''}`}
+              hidden={tab !== 'account'}
+            >
               <AccountSettings
                 user={effectivePortalUser}
                 projects={projects}
@@ -745,7 +960,7 @@ const SoundLegendPortal = () => {
                 latestOrder={latestOrder}
                 isAdmin={isAdmin}
               />
-            )}
+            </div>
           </div>
         </>
       )}
