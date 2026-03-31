@@ -4,15 +4,26 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import {
   verifyPasswordResetCode,
   confirmPasswordReset,
+  checkActionCode,
+  applyActionCode,
 } from 'firebase/auth';
-import { auth } from '../firebaseConfig';
-import './SoundlegendSignin.css'; // reuse the same styling
+import {
+  doc,
+  setDoc,
+  collection,
+  serverTimestamp,
+} from 'firebase/firestore';
+import { auth, db } from '../firebaseConfig';
+import './SoundlegendSignin.css';
 
 const ArtisanPortalResetPassword = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const [mode, setMode] = useState('');
   const [email, setEmail] = useState('');
+  const [restoredEmail, setRestoredEmail] = useState('');
+
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPw, setShowPw] = useState(false);
@@ -20,39 +31,162 @@ const ArtisanPortalResetPassword = () => {
 
   const [isVerifyingCode, setIsVerifyingCode] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [actionComplete, setActionComplete] = useState(false);
 
   const [errorMsg, setErrorMsg] = useState('');
   const [infoMsg, setInfoMsg] = useState('');
 
-  // Grab oobCode + mode from the query string
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const oobCode = params.get('oobCode');
-    const mode = params.get('mode');
+    const incomingMode = params.get('mode');
 
-    if (!oobCode || mode !== 'resetPassword') {
-      setErrorMsg('This password reset link is invalid or incomplete.');
+    setMode(incomingMode || '');
+
+    if (!oobCode || !incomingMode) {
+      setErrorMsg('This action link is invalid or incomplete.');
       setIsVerifyingCode(false);
       return;
     }
 
-    // Verify the code and get the email it belongs to
-    const verifyCode = async () => {
+    const run = async () => {
       try {
-        const userEmail = await verifyPasswordResetCode(auth, oobCode);
-        setEmail(userEmail);
+        if (incomingMode === 'resetPassword') {
+          const userEmail = await verifyPasswordResetCode(auth, oobCode);
+          setEmail(userEmail);
+          setIsVerifyingCode(false);
+          return;
+        }
+
+        if (
+          incomingMode === 'verifyAndChangeEmail' ||
+          incomingMode === 'recoverEmail'
+        ) {
+          const actionInfo = await checkActionCode(auth, oobCode);
+
+          const pendingEmail =
+            actionInfo?.data?.email ||
+            actionInfo?.data?.newEmail ||
+            '';
+
+          const previousEmail =
+            actionInfo?.data?.previousEmail ||
+            actionInfo?.data?.email ||
+            '';
+
+          if (incomingMode === 'recoverEmail') {
+            setRestoredEmail(previousEmail);
+          } else {
+            setEmail(pendingEmail);
+          }
+
+          await applyActionCode(auth, oobCode);
+
+          let currentUid = '';
+          let confirmedEmail = '';
+
+          try {
+            if (auth.currentUser) {
+              await auth.currentUser.reload();
+              currentUid = auth.currentUser.uid || '';
+              confirmedEmail = auth.currentUser.email || '';
+            }
+          } catch (reloadErr) {
+            console.warn('Could not reload auth user after action:', reloadErr);
+          }
+
+          const finalEmail =
+            (confirmedEmail || '').trim() ||
+            (
+              incomingMode === 'recoverEmail'
+                ? previousEmail
+                : pendingEmail
+            ).trim();
+
+          if (currentUid && finalEmail) {
+            try {
+              await setDoc(
+                doc(db, 'users', currentUid),
+                {
+                  email: finalEmail,
+                  updatedAt: serverTimestamp(),
+                },
+                { merge: true }
+              );
+
+              await setDoc(
+                doc(collection(db, 'users', currentUid, 'audit_logs')),
+                {
+                  type: 'account_update',
+                  actorUid: currentUid,
+                  actorEmail: finalEmail,
+                  createdAt: serverTimestamp(),
+                  source: 'ArtisanPortalResetPassword/email-action',
+                  changes: {
+                    email: {
+                      before:
+                        incomingMode === 'recoverEmail'
+                          ? pendingEmail || null
+                          : previousEmail || null,
+                      after: finalEmail,
+                    },
+                  },
+                }
+              );
+            } catch (syncErr) {
+              console.warn(
+                'Could not sync confirmed email to Firestore user doc:',
+                syncErr
+              );
+            }
+          }
+
+          if (incomingMode === 'verifyAndChangeEmail') {
+            setInfoMsg(
+              `Your sign-in email has been verified and updated successfully to ${finalEmail || pendingEmail}.`
+            );
+          } else {
+            setInfoMsg(
+              `Your sign-in email has been restored to ${finalEmail || previousEmail}.`
+            );
+          }
+
+          setActionComplete(true);
+          setIsVerifyingCode(false);
+
+          setTimeout(() => {
+            navigate('/artisan-portal/signin');
+          }, 2500);
+
+          return;
+        }
+
+        setErrorMsg('This action is not supported.');
         setIsVerifyingCode(false);
       } catch (err) {
-        console.error('❌ Error verifying reset code:', err);
-        setErrorMsg(
-          'This password reset link has expired or is no longer valid. Please request a new one.'
-        );
+        console.error('❌ Error processing action link:', err);
+
+        if (incomingMode === 'resetPassword') {
+          setErrorMsg(
+            'This password reset link has expired or is no longer valid. Please request a new one.'
+          );
+        } else if (
+          incomingMode === 'verifyAndChangeEmail' ||
+          incomingMode === 'recoverEmail'
+        ) {
+          setErrorMsg(
+            'This email action link has expired or is no longer valid. Please request a new email update and try again.'
+          );
+        } else {
+          setErrorMsg('This action link is invalid or unsupported.');
+        }
+
         setIsVerifyingCode(false);
       }
     };
 
-    verifyCode();
-  }, [location.search]);
+    run();
+  }, [location.search, navigate, email, restoredEmail]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -87,7 +221,6 @@ const ArtisanPortalResetPassword = () => {
       setNewPassword('');
       setConfirmPassword('');
 
-      // After a short delay, send them to the sign-in page
       setTimeout(() => {
         navigate('/artisan-portal/signin');
       }, 2500);
@@ -112,12 +245,64 @@ const ArtisanPortalResetPassword = () => {
             loading="eager"
           />
         </div>
-        <header className="signin-hero" aria-label="Artisan Portal password reset">
-          <p className="signin-subtitle">Checking your reset link…</p>
+        <header
+          className="signin-hero"
+          aria-label="Artisan Portal account action"
+        >
+          <p className="signin-subtitle">Checking your secure link…</p>
         </header>
-        <form className="signin-card" aria-label="Reset password">
-          <p className="alert info">Verifying reset code. Please wait…</p>
+        <form className="signin-card" aria-label="Account action">
+          <p className="alert info">Verifying link. Please wait…</p>
         </form>
+      </div>
+    );
+  }
+
+  if (actionComplete && mode !== 'resetPassword') {
+    return (
+      <div className="soundlegend-signin">
+        <div className="signin-logo-container">
+          <img
+            src="/soundlegend-signin/white-logo.png"
+            alt="Ober Artisan Drums"
+            className="signin-logo"
+            loading="eager"
+          />
+        </div>
+
+        <header
+          className="signin-hero"
+          aria-label="Artisan Portal account action complete"
+        >
+          <p className="signin-subtitle">
+            Your secure account action has been completed.
+          </p>
+        </header>
+
+        <form className="signin-card" aria-label="Account action complete">
+          {infoMsg && (
+            <p className="alert info" role="status">
+              {infoMsg}
+            </p>
+          )}
+
+          <button
+            type="button"
+            className="btn-primary"
+            onClick={() => navigate('/artisan-portal/signin')}
+          >
+            Return to sign in
+          </button>
+        </form>
+
+        <div className="signin-info">
+          <p className="support-row">
+            Need help?{' '}
+            <a href="mailto:support@oberartisandrums.com">
+              support@oberartisandrums.com
+            </a>
+          </p>
+        </div>
       </div>
     );
   }
@@ -135,7 +320,8 @@ const ArtisanPortalResetPassword = () => {
 
       <header className="signin-hero" aria-label="Artisan Portal password reset">
         <p className="signin-subtitle">
-          Reset your password to regain secure access to your build, media, and milestone history.
+          Reset your password to regain secure access to your build, media, and
+          milestone history.
         </p>
       </header>
 
@@ -229,9 +415,7 @@ const ArtisanPortalResetPassword = () => {
         </button>
 
         <div className="signin-aux join-block">
-          <span className="join-question">
-            Remembered your password?
-          </span>
+          <span className="join-question">Remembered your password?</span>
           <button
             type="button"
             className="link-gold join-link"

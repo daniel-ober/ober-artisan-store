@@ -37,7 +37,8 @@ const SoundlegendSignin = () => {
       case 'auth/user-not-found':
         return 'No account found with that email.';
       case 'auth/wrong-password':
-        return 'Incorrect password. Please try again.';
+      case 'auth/invalid-credential':
+        return 'Incorrect email or password. Please try again.';
       case 'auth/too-many-requests':
         return 'Too many attempts. Please wait a moment and try again.';
       default:
@@ -45,60 +46,129 @@ const SoundlegendSignin = () => {
     }
   };
 
-  const handleSignin = async (e) => {
-    e.preventDefault();
-    setErrorMsg('');
-    setInfoMsg('');
-    setIsSubmitting(true);
+  const normalizePortalStatus = (userDoc = {}) => {
+    const direct =
+      userDoc?.soundlegendStatus ||
+      userDoc?.portalStatus ||
+      userDoc?.slPortalStatus ||
+      userDoc?.access?.soundlegendStatus ||
+      userDoc?.access?.portalStatus ||
+      '';
 
-    try {
-      const trimmedEmail = email.trim();
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        trimmedEmail,
-        password
-      );
-      const user = userCredential.user;
-
-      if (rememberMe) localStorage.setItem('sl_last_email', trimmedEmail);
-      else localStorage.removeItem('sl_last_email');
-
-      await user.getIdToken(true);
-      const idTokenResult = await user.getIdTokenResult(true);
-      const claims = idTokenResult.claims || {};
-
-      if (!claims.isSoundlegend) {
-        await signOut(auth);
-        setErrorMsg('You are not authorized for SoundLegend access.');
-        setInfoMsg(
-          'If you’re ready to join, start your custom build to receive portal access.'
-        );
-        setIsSubmitting(false);
-        return;
-      }
-
-      const userDoc = await fetchUserDoc(user.uid);
-      if (userDoc?.projects?.length > 0) {
-        const firstProjectId = userDoc.projects[0].projectId;
-        navigate(`/projects/${firstProjectId}`);
-      } else {
-        navigate('/projects');
-      }
-    } catch (err) {
-      console.error('❌ Sign-in error:', err);
-      setErrorMsg(mapFirebaseError(err?.code));
-      setIsSubmitting(false);
-    }
+    return String(direct || '').trim().toLowerCase();
   };
 
+  const isPortalExpired = (userDoc = {}) => {
+    const status = normalizePortalStatus(userDoc);
+
+    return (
+      status === 'expired' ||
+      status === 'portal expired' ||
+      userDoc?.slPortalExpired === true ||
+      userDoc?.access?.slPortalExpired === true
+    );
+  };
+
+  const isPortalLocked = (userDoc = {}) => {
+    const status = normalizePortalStatus(userDoc);
+
+    return (
+      status === 'locked' ||
+      status === 'portal locked' ||
+      userDoc?.slPortalLocked === true ||
+      userDoc?.access?.slPortalLocked === true ||
+      userDoc?.access?.soundlegendLocked === true ||
+      userDoc?.access?.portalLocked === true
+    );
+  };
+
+  const getFirstProjectId = (userDoc = {}) => {
+    const projects = Array.isArray(userDoc?.projects) ? userDoc.projects : [];
+    if (!projects.length) return '';
+
+    const first = projects[0];
+
+    if (typeof first === 'string') return first;
+    return first?.projectId || first?.id || first?.projectID || '';
+  };
+
+const handleSignin = async (e) => {
+  e.preventDefault();
+  setErrorMsg('');
+  setInfoMsg('');
+  setIsSubmitting(true);
+
+  try {
+    const trimmedEmail = email.trim();
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      trimmedEmail,
+      password
+    );
+    const user = userCredential.user;
+
+    if (rememberMe) localStorage.setItem('sl_last_email', trimmedEmail);
+    else localStorage.removeItem('sl_last_email');
+
+    await user.getIdToken(true);
+    const idTokenResult = await user.getIdTokenResult(true);
+    const claims = idTokenResult.claims || {};
+
+    if (!(claims.isSoundlegend || claims.soundlegend)) {
+      await signOut(auth);
+      setErrorMsg('You are not authorized for SoundLegend access.');
+      setInfoMsg(
+        'If you’re ready to join, start your custom build to receive portal access.'
+      );
+      setIsSubmitting(false);
+      return;
+    }
+
+    const userDoc = await fetchUserDoc(user.uid);
+
+    if (isPortalExpired(userDoc)) {
+      await signOut(auth);
+      setErrorMsg('Your SoundLegend Artist Portal is currently inactive.');
+      setInfoMsg(
+        'If you think this is a mistake, please contact support@oberartisandrums.com and we’ll be happy to help.'
+      );
+      setIsSubmitting(false);
+      return;
+    }
+
+    if (isPortalLocked(userDoc)) {
+      await signOut(auth);
+      setErrorMsg('Your SoundLegend Artist Portal is temporarily unavailable.');
+      setInfoMsg(
+        'Please contact support@oberartisandrums.com if you need help restoring access.'
+      );
+      setIsSubmitting(false);
+      return;
+    }
+
+    const firstProjectId = getFirstProjectId(userDoc);
+
+    if (firstProjectId) {
+      navigate(`/legacy?projectId=${firstProjectId}`, { replace: true });
+    } else {
+      navigate('/legacy', { replace: true });
+    }
+  } catch (err) {
+    console.error('❌ Sign-in error:', err);
+    setErrorMsg(mapFirebaseError(err?.code));
+    setIsSubmitting(false);
+  }
+};
   const handleForgot = async () => {
     setErrorMsg('');
     setInfoMsg('');
     const trimmedEmail = email.trim();
+
     if (!trimmedEmail) {
       setErrorMsg('Enter your email first to receive a reset link.');
       return;
     }
+
     try {
       await sendPasswordResetEmail(auth, trimmedEmail);
       setInfoMsg('Password reset link sent. Check your inbox (and spam).');
@@ -130,7 +200,6 @@ const SoundlegendSignin = () => {
         className="signin-card"
         aria-label="Sign in"
       >
-        {/* EMAIL (placeholder only) */}
         <div className="field">
           <input
             id="email"
@@ -146,12 +215,11 @@ const SoundlegendSignin = () => {
           />
         </div>
 
-        {/* PASSWORD (placeholder + show/hide) */}
         <div className="field">
           <div className="pw-wrapper">
             <input
               id="password"
-              key={showPw ? 'text' : 'password'} /* force re-render on toggle */
+              key={showPw ? 'text' : 'password'}
               type={showPw ? 'text' : 'password'}
               style={{ WebkitTextSecurity: showPw ? 'none' : 'disc' }}
               autoComplete={showPw ? 'off' : 'current-password'}
@@ -222,7 +290,6 @@ const SoundlegendSignin = () => {
             <span className="checkbox-label">Remember me on this device</span>
           </label>
 
-          {/* Optional forgot link */}
           {/* <button type="button" className="link-ghost" onClick={handleForgot} disabled={isSubmitting}>Forgot password?</button> */}
         </div>
 

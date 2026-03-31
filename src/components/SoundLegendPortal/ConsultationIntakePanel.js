@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import {
   CONSULTATION_INTAKE_SECTIONS,
   buildConsultationIntakeDefaults,
@@ -37,9 +37,30 @@ function ConsultationIntakePanel({
     normalizeIncomingIntake(value)
   );
 
+  const isSyncingFromParentRef = useRef(false);
+  const didMountRef = useRef(false);
+
   useEffect(() => {
+    isSyncingFromParentRef.current = true;
     setFormState(normalizeIncomingIntake(value));
   }, [value]);
+
+  useEffect(() => {
+    if (!didMountRef.current) {
+      didMountRef.current = true;
+      isSyncingFromParentRef.current = false;
+      return;
+    }
+
+    if (isSyncingFromParentRef.current) {
+      isSyncingFromParentRef.current = false;
+      return;
+    }
+
+    if (typeof onChange === 'function') {
+      onChange(formState);
+    }
+  }, [formState, onChange]);
 
   const completion = useMemo(() => {
     const section = CONSULTATION_INTAKE_SECTIONS[0];
@@ -65,21 +86,13 @@ function ConsultationIntakePanel({
   const updateField = (sectionId, fieldId, nextValue) => {
     if (readOnly) return;
 
-    setFormState((prev) => {
-      const next = {
-        ...prev,
-        [sectionId]: {
-          ...(prev?.[sectionId] || {}),
-          [fieldId]: nextValue,
-        },
-      };
-
-      if (typeof onChange === 'function') {
-        onChange(next);
-      }
-
-      return next;
-    });
+    setFormState((prev) => ({
+      ...prev,
+      [sectionId]: {
+        ...(prev?.[sectionId] || {}),
+        [fieldId]: nextValue,
+      },
+    }));
   };
 
   const renderTextLikeField = (section, field, isTextArea = false) => {

@@ -4,33 +4,47 @@
 
 .slp-card[data-component="ScopeOfWork"] {
   position: relative;
-  max-width: 1100px;
-  margin: 0 auto;
+  width: 100%;
+  max-width: none;
+  margin: 0;
   padding: 20px 24px 24px;
   border-radius: 18px;
-  background: radial-gradient(circle at top left, #181a27 0, #05060c 55%, #020208 100%);
+  background: radial-gradient(
+    circle at top left,
+    #181a27 0,
+    #05060c 55%,
+    #020208 100%
+  );
   border: 1px solid rgba(255, 255, 255, 0.04);
   box-shadow: 0 22px 60px rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(26px);
+  -webkit-backdrop-filter: blur(26px);
 }
 
-.slp-card[data-component="ScopeOfWork"] h3 {
+.slp-card[data-component='ScopeOfWork'] h3 {
   font-size: 0.95rem;
   text-transform: uppercase;
   letter-spacing: 0.16em;
   margin: 0 0 4px;
 }
 
-.slp-card[data-component="ScopeOfWork"] .slp-muted {
+.slp-card[data-component='ScopeOfWork'] .slp-muted {
   font-size: 0.88rem;
   opacity: 0.78;
   margin-bottom: 12px;
 }
 
+.slp-admin-note {
+  margin: 0 0 10px;
+  font-size: 0.84rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.74);
+}
+
 /* ---------- Section wrapper ---------- */
 
 .sow-section {
-  margin-top: 16px;
+  margin-top: 18px;
 }
 
 .sow-heading {
@@ -38,7 +52,7 @@
   text-transform: uppercase;
   letter-spacing: 0.2em;
   opacity: 0.8;
-  margin: 0 0 6px;
+  margin: 0 0 8px;
   padding: 0 2px;
 }
 
@@ -49,21 +63,23 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
   column-gap: 24px;
   row-gap: 10px;
-  padding: 12px 16px 14px;
+  padding: 14px 16px 16px;
   border-radius: 12px;
-  background: radial-gradient(circle at top left, #171926 0, #090a12 55%, #040408 100%);
+  background: radial-gradient(
+    circle at top left,
+    #171926 0,
+    #090a12 55%,
+    #040408 100%
+  );
   border: 1px solid rgba(255, 255, 255, 0.06);
 }
-
-/* Each “cell” (label + value) */
 
 .sow-row {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 3px;
+  min-width: 0;
 }
-
-/* Label (small caps) */
 
 .sow-label {
   font-size: 0.75rem;
@@ -72,26 +88,32 @@
   opacity: 0.7;
 }
 
-/* Value */
-
 .sow-value {
-  font-size: 0.9rem;
-  line-height: 1.4;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  word-break: break-word;
 }
 
 /* ---------- Additional notes ---------- */
 
 .sow-notes {
   margin-top: 6px;
-  padding: 12px 16px 14px;
+  padding: 14px 16px 16px;
   border-radius: 12px;
-  background: radial-gradient(circle at top left, #151725 0, #070810 55%, #030307 100%);
+  background: radial-gradient(
+    circle at top left,
+    #151725 0,
+    #070810 55%,
+    #030307 100%
+  );
   border: 1px solid rgba(255, 255, 255, 0.06);
   font-size: 0.9rem;
-  line-height: 1.5;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
 }
 
-/* ---------- Legacy helpers (if used anywhere else) ---------- */
+/* ---------- Legacy helpers ---------- */
 
 .sow-card {
   position: relative;
@@ -113,7 +135,12 @@
   margin-top: 8px;
   padding: 16px 18px;
   border-radius: 12px;
-  background: radial-gradient(circle at top left, #141622 0, #05060c 60%, #030307 100%);
+  background: radial-gradient(
+    circle at top left,
+    #141622 0,
+    #05060c 60%,
+    #030307 100%
+  );
   border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
@@ -130,7 +157,6 @@
   flex-wrap: wrap;
 }
 
-/* buttons */
 .sow-btn {
   padding: 8px 14px;
   background: #ffffff0f;
@@ -161,14 +187,13 @@
 /* ---------- Admin edit toolbar ---------- */
 
 .sow-admin-toolbar {
-  margin-top: 8px;
-  margin-bottom: 4px;
+  margin-top: 10px;
+  margin-bottom: 6px;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
 }
 
-/* primary variant for save button */
 .sow-btn-primary {
   background: #2f80ed;
   border-color: #2f80ed;
@@ -183,7 +208,7 @@
 .sow-input,
 .sow-textarea {
   width: 100%;
-  padding: 6px 8px;
+  padding: 8px 10px;
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.18);
   background: rgba(0, 0, 0, 0.35);
@@ -201,7 +226,7 @@
 
 .sow-textarea {
   resize: vertical;
-  min-height: 80px;
+  min-height: 96px;
 }
 
 /* ---------- Audit history ---------- */
@@ -214,7 +239,12 @@
   margin-top: 6px;
   padding: 10px 14px 12px;
   border-radius: 12px;
-  background: radial-gradient(circle at top left, #10121d 0, #05060c 60%, #020206 100%);
+  background: radial-gradient(
+    circle at top left,
+    #10121d 0,
+    #05060c 60%,
+    #020206 100%
+  );
   border: 1px solid rgba(255, 255, 255, 0.08);
   font-size: 0.82rem;
 }
@@ -250,8 +280,48 @@
 }
 
 .sow-audit-summary {
-  margin-top: 2px;
+  margin-top: 4px;
   opacity: 0.86;
+  line-height: 1.5;
+}
+
+.sow-audit-changes {
+  margin: 8px 0 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.sow-audit-change-row {
+  display: grid;
+  grid-template-columns: minmax(140px, 220px) auto minmax(0, 1fr) auto minmax(
+      0,
+      1fr
+    );
+  gap: 8px;
+  align-items: start;
+  padding: 6px 0;
+}
+
+.sow-audit-field {
+  font-weight: 600;
+  opacity: 0.92;
+}
+
+.sow-audit-arrow {
+  opacity: 0.55;
+}
+
+.sow-audit-before,
+.sow-audit-after {
+  word-break: break-word;
+}
+
+.sow-audit-before {
+  opacity: 0.72;
+}
+
+.sow-audit-after {
+  opacity: 0.92;
 }
 
 /* ---------- Signed Build Proposal (Enhanced) ---------- */
@@ -260,7 +330,12 @@
   margin-top: 10px;
   padding: 18px 20px;
   border-radius: 14px;
-  background: radial-gradient(circle at top left, #141622 0, #05060c 60%, #030307 100%);
+  background: radial-gradient(
+    circle at top left,
+    #141622 0,
+    #05060c 60%,
+    #030307 100%
+  );
   border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
@@ -271,16 +346,18 @@
   margin-bottom: 20px;
 }
 
-/* Individual proposal card */
 .proposal-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 14px;
   padding: 14px 16px;
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.05);
-  transition: background 0.15s ease, border-color 0.15s ease;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
 }
 
 .proposal-item:hover {
@@ -292,16 +369,19 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  min-width: 0;
 }
 
 .proposal-icon {
   font-size: 1.4rem;
   opacity: 0.85;
+  flex-shrink: 0;
 }
 
 .proposal-name {
   font-size: 0.92rem;
   font-weight: 500;
+  word-break: break-word;
 }
 
 .proposal-meta {
@@ -310,10 +390,11 @@
   margin-top: 2px;
 }
 
-/* Buttons */
 .proposal-actions {
   display: flex;
   gap: 10px;
+  flex-wrap: wrap;
+  flex-shrink: 0;
 }
 
 .proposal-btn {
@@ -342,7 +423,6 @@
   border-color: #ff6b6b66;
 }
 
-/* Empty message */
 .proposal-empty-msg {
   font-size: 0.9rem;
   opacity: 0.75;
@@ -350,7 +430,6 @@
   padding: 4px 0 14px;
 }
 
-/* Drag + Drop Zone */
 .proposal-dropzone {
   margin-top: 10px;
   border: 1px dashed #ffffff22;
@@ -359,11 +438,11 @@
   text-align: center;
   cursor: pointer;
   transition: 0.18s ease;
-  background: rgba(255,255,255,0.02);
+  background: rgba(255, 255, 255, 0.02);
 }
 
 .proposal-dropzone:hover {
-  background: rgba(255,255,255,0.04);
+  background: rgba(255, 255, 255, 0.04);
   border-color: #ffffff40;
 }
 
@@ -384,7 +463,8 @@
   margin-top: 4px;
 }
 
-/* Audit header row with toggle */
+/* ---------- Audit toggle ---------- */
+
 .sow-audit-header-row {
   display: flex;
   align-items: center;
@@ -421,64 +501,10 @@
   transform: translateY(1px) rotate(180deg);
 }
 
-/* On small screens, keep header tidy */
-@media (max-width: 900px) {
-  .sow-audit-header-row {
-    align-items: flex-start;
-  }
-}
-
-/* Mobile */
-@media (max-width: 900px) {
-  .proposal-item {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-  }
-
-  .proposal-actions {
-    width: 100%;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-  }
-
-  .proposal-btn,
-  .delete-btn {
-    width: auto;
-  }
-}
-
-
-
-/* mobile */
-@media (max-width: 900px) {
-  .sow-proposal-actions {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .sow-btn,
-  .sow-btn-outline {
-    width: 100%;
-    text-align: center;
-  }
-
-  .sow-admin-toolbar {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .sow-admin-toolbar .sow-btn,
-  .sow-admin-toolbar .sow-btn-primary {
-    width: 100%;
-    text-align: center;
-  }
-}
-
 /* ---------- Responsive ---------- */
 
 @media (max-width: 900px) {
-  .slp-card[data-component="ScopeOfWork"] {
+  .slp-card[data-component='ScopeOfWork'] {
     padding: 18px 16px 20px;
   }
 
@@ -502,5 +528,43 @@
 
   .sow-notes {
     font-size: 0.88rem;
+  }
+
+  .proposal-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .proposal-actions {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .proposal-btn,
+  .delete-btn {
+    width: auto;
+  }
+
+  .sow-admin-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .sow-admin-toolbar .sow-btn,
+  .sow-admin-toolbar .sow-btn-primary,
+  .sow-admin-toolbar .sow-btn-outline {
+    width: 100%;
+    text-align: center;
+  }
+
+  .sow-audit-header-row {
+    align-items: flex-start;
+  }
+
+  .sow-audit-change-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
   }
 }

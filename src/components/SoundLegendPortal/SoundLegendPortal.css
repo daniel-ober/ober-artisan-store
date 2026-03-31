@@ -42,17 +42,46 @@
     Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji';
 }
 
+.slp-portal-hero {
+  max-width: 760px;
+  margin: 10px auto 18px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.slp-portal-hero-kicker {
+  margin-bottom: 10px;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  color: rgba(223, 202, 174, 0.84);
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
+}
+
+.slp-portal-hero-subtitle {
+  max-width: 700px;
+  margin: 10px auto 0;
+  font-size: 1rem;
+  line-height: 1.62;
+  color: rgba(255, 255, 255, 0.84);
+  text-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.32),
+    0 10px 28px rgba(0, 0, 0, 0.22);
+}
+
 .slp-heading,
 .slp-title {
-  font-size: clamp(2rem, 1.55rem + 1.2vw, 2.7rem);
-  font-weight: 700;
+  font-size: clamp(2rem, 1.5rem + 1vw, 2.9rem);
+  font-weight: 760;
   text-align: center;
-  letter-spacing: -0.025em;
-  margin: 8px 0 18px;
+  letter-spacing: -0.035em;
+  line-height: 1.02;
+  margin: 0;
   color: #fff;
   text-shadow:
-    0 1px 16px rgba(34, 211, 238, 0.08),
-    0 8px 28px rgba(0, 0, 0, 0.28);
+    0 2px 18px rgba(0, 0, 0, 0.3),
+    0 14px 34px rgba(0, 0, 0, 0.28);
 }
 
 .slp-empty-copy {
@@ -89,7 +118,11 @@
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 18px;
   background:
-    radial-gradient(circle at top left, rgba(102, 131, 214, 0.12), transparent 28%),
+    radial-gradient(
+      circle at top left,
+      rgba(102, 131, 214, 0.12),
+      transparent 28%
+    ),
     linear-gradient(180deg, rgba(18, 16, 15, 0.74), rgba(9, 9, 10, 0.84));
   box-shadow: 0 18px 34px rgba(0, 0, 0, 0.32);
   backdrop-filter: blur(12px);
@@ -165,65 +198,120 @@
    ========================================================= */
 
 .slp-tabs-shell {
-  margin-bottom: 16px;
+  position: relative;
+  margin: 18px 0 30px;
+  padding: 22px 28px 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.22),
+      rgba(0, 0, 0, 0.1)
+    );
+  border-radius: 18px;
+  z-index: 2;
+}
+
+.slp-tabs-shell::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.12) 0%,
+      rgba(255, 255, 255, 0.025) 18%,
+      rgba(255, 255, 255, 0.035) 50%,
+      rgba(255, 255, 255, 0.025) 82%,
+      rgba(0, 0, 0, 0.12) 100%
+    );
+  pointer-events: none;
 }
 
 .slp-tabs-header {
-  margin-bottom: 12px;
-  text-align: center;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 18px;
+  text-align: left;
 }
 
 .slp-tabs-header-copy {
-  max-width: 720px;
-  margin: 0 auto;
+  max-width: 760px;
+  margin: 0;
 }
 
 .slp-tabs-eyebrow {
-  margin-bottom: 5px;
-  font-size: 0.68rem;
+  margin-bottom: 10px;
+  font-size: 0.66rem;
   text-transform: uppercase;
-  letter-spacing: 0.22em;
-  color: rgba(223, 202, 174, 0.62);
+  letter-spacing: 0.24em;
+  color: rgba(223, 202, 174, 0.88);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.28);
 }
 
 .slp-tabs-title {
   margin: 0;
-  font-size: clamp(1.1rem, 1rem + 0.45vw, 1.45rem);
-  line-height: 1.18;
-  font-weight: 700;
-  color: rgba(249, 245, 238, 0.98);
+  font-size: clamp(1.4rem, 1.16rem + 0.82vw, 1.95rem);
+  line-height: 1.06;
+  font-weight: 750;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+  text-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.34),
+    0 2px 12px rgba(0, 0, 0, 0.24);
+}
+
+.slp-tabs-subtitle {
+  margin: 12px 0 0;
+  max-width: 660px;
+  font-size: 0.98rem;
+  line-height: 1.62;
+  color: rgba(255, 255, 255, 0.86);
+  text-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.22),
+    0 10px 26px rgba(0, 0, 0, 0.18);
+}
+
+.slp-tabs-header-actions {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .slp-tabs {
-  position: relative;
-  z-index: 20;
-  display: grid;
-  grid-template-columns: auto 1fr;
-  align-items: center;
-  gap: 16px;
-  padding: 14px 16px;
-  margin-bottom: 12px;
-  border: 1px solid var(--border);
-  background:
-    radial-gradient(circle at top left, rgba(138, 107, 70, 0.12), transparent 28%),
-    linear-gradient(180deg, var(--panel), rgba(255, 255, 255, 0.02));
-  border-radius: 22px;
-  box-shadow: var(--shadow);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 .slp-tabs-left {
-  min-width: 220px;
+  min-width: 0;
 }
 
 .slp-tabs-buttons {
+  position: relative;
+  z-index: 1;
   display: flex;
-  gap: 10px;
-  justify-content: center;
+  gap: 30px;
+  justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
   min-width: 0;
+  padding: 2px 0 0;
+  margin: 0;
 }
 
 .slp-tablist {
@@ -231,53 +319,73 @@
 }
 
 /* =========================================================
-   Tab chips
+   Tabs — refined nav style
    ========================================================= */
 
 .slp-tab {
   appearance: none;
   position: relative;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background:
-    linear-gradient(180deg, rgba(14, 13, 14, 0.82), rgba(8, 8, 10, 0.92));
-  color: #eaeaf2;
-  font-size: 0.96rem;
-  font-weight: 650;
-  padding: 10px 16px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  padding: 6px 0 12px;
   cursor: pointer;
   white-space: nowrap;
+  text-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.26),
+    0 10px 24px rgba(0, 0, 0, 0.18);
   transition:
-    background 0.18s,
     color 0.18s,
-    border-color 0.18s,
-    transform 0.06s,
-    box-shadow 0.12s;
+    opacity 0.18s,
+    transform 0.06s;
+}
+
+.slp-tab::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    rgba(241, 224, 199, 0.98),
+    rgba(255, 255, 255, 0.98)
+  );
+  box-shadow: 0 0 14px rgba(255, 255, 255, 0.16);
+  opacity: 0;
+  transform: scaleX(0.35);
+  transform-origin: center;
+  transition:
+    opacity 0.18s,
+    transform 0.18s;
 }
 
 .slp-tab:hover {
-  background: rgba(255, 255, 255, 0.08);
-  color: #fff;
+  color: #ffffff;
 }
 
 .slp-tab:focus-visible {
   outline: none;
-  box-shadow: var(--ring);
+  color: #ffffff;
 }
 
 .slp-tab.active {
-  background:
-    radial-gradient(circle at top left, rgba(79, 110, 182, 0.22), transparent 56%),
-    linear-gradient(180deg, rgba(30, 33, 46, 0.96), rgba(10, 11, 16, 0.98));
-  color: #fff;
-  border-color: rgba(112, 155, 255, 0.55);
-  box-shadow:
-    0 10px 24px rgba(0, 0, 0, 0.22),
-    0 0 0 1px rgba(112, 155, 255, 0.16);
+  color: #ffffff;
+}
+
+.slp-tab.active::after {
+  opacity: 1;
+  transform: scaleX(1);
 }
 
 .slp-tab.slp-tab-disabled {
-  opacity: 0.48;
+  opacity: 0.4;
   cursor: not-allowed;
 }
 
@@ -299,45 +407,42 @@
   z-index: 30;
   display: inline-block;
   width: 100%;
-  max-width: 260px;
+  min-width: 240px;
+  max-width: 320px;
 }
 
 .slp-picker-button {
   width: 100%;
-  min-height: 52px;
-  padding: 0 46px 0 18px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.22);
+  min-height: 48px;
+  padding: 0 42px 0 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
   background:
-    radial-gradient(circle at 0% 0%, rgba(185, 120, 255, 0.1), transparent 65%),
-    radial-gradient(circle at 100% 100%, rgba(120, 220, 255, 0.1), transparent 75%),
-    linear-gradient(160deg, #0b0912 0%, #181828 55%, #06050a 100%);
+    linear-gradient(180deg, rgba(12, 12, 16, 0.88), rgba(7, 7, 10, 0.96));
   color: #fdfdfd;
-  font-weight: 650;
-  font-size: 0.98rem;
-  letter-spacing: 0.02em;
+  font-weight: 620;
+  font-size: 0.94rem;
+  letter-spacing: 0.01em;
   text-align: left;
   cursor: pointer;
   position: relative;
   box-shadow:
-    0 14px 30px rgba(0, 0, 0, 0.5),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.035),
-    inset 0 -18px 22px rgba(0, 0, 0, 0.42);
+    0 14px 26px rgba(0, 0, 0, 0.34),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.025);
   transition:
-    background 180ms ease-out,
+    border-color 180ms ease-out,
     box-shadow 180ms ease-out,
     transform 120ms ease-out,
-    border-color 180ms ease-out;
+    background 180ms ease-out;
 }
 
 .slp-picker-button:hover,
 .slp-picker-button:focus-visible {
   transform: translateY(-0.5px);
-  border-color: rgba(255, 255, 255, 0.3);
+  border-color: rgba(223, 202, 174, 0.3);
   box-shadow:
-    0 18px 36px rgba(0, 0, 0, 0.58),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.05),
-    inset 0 -20px 26px rgba(0, 0, 0, 0.5);
+    0 16px 30px rgba(0, 0, 0, 0.42),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.035);
   outline: none;
 }
 
@@ -350,12 +455,12 @@
 
 .slp-picker-chevron {
   position: absolute;
-  right: 18px;
+  right: 16px;
   top: 50%;
-  width: 10px;
-  height: 10px;
-  border-right: 1.8px solid rgba(255, 255, 255, 0.9);
-  border-bottom: 1.8px solid rgba(255, 255, 255, 0.9);
+  width: 9px;
+  height: 9px;
+  border-right: 1.7px solid rgba(255, 255, 255, 0.88);
+  border-bottom: 1.7px solid rgba(255, 255, 255, 0.88);
   transform: translateY(-60%) rotate(45deg);
   transition: transform 180ms ease;
 }
@@ -370,33 +475,30 @@
   left: 0;
   right: 0;
   top: calc(100% + 8px);
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
   box-shadow:
-    0 20px 44px rgba(0, 0, 0, 0.7),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+    0 18px 38px rgba(0, 0, 0, 0.56),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.02);
   overflow: hidden;
   background:
-    radial-gradient(circle at 0% 0%, rgba(185, 120, 255, 0.08), transparent 65%),
-    radial-gradient(circle at 100% 100%, rgba(120, 220, 255, 0.1), transparent 75%),
-    linear-gradient(160deg, #070612 0%, #141326 55%, #020108 100%);
+    linear-gradient(180deg, rgba(10, 10, 14, 0.98), rgba(5, 5, 8, 0.99));
 }
 
 .slp-picker-item {
   width: 100%;
-  padding: 12px 18px;
+  padding: 12px 16px;
   border: 0;
   background: transparent;
   color: #f7f7ff;
   text-align: left;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.93rem;
   letter-spacing: 0.01em;
   cursor: pointer;
   transition:
     background 130ms ease-out,
-    box-shadow 130ms ease-out,
-    transform 120ms ease-out;
+    color 130ms ease-out;
 }
 
 .slp-picker-item + .slp-picker-item {
@@ -404,24 +506,17 @@
 }
 
 .slp-picker-item:hover {
-  background: linear-gradient(
-    90deg,
-    rgba(120, 220, 255, 0.12),
-    rgba(185, 120, 255, 0.14)
-  );
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .slp-picker-item.is-active {
-  color: #fdfdff;
+  color: #fff;
   background:
     linear-gradient(
-      135deg,
-      rgba(100, 210, 255, 0.26),
-      rgba(185, 120, 255, 0.28)
+      90deg,
+      rgba(223, 202, 174, 0.14),
+      rgba(255, 255, 255, 0.06)
     );
-  box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.06),
-    inset 0 -18px 24px rgba(0, 0, 0, 0.35);
 }
 
 /* =========================================================
@@ -809,18 +904,17 @@
     padding: 22px 16px 34px;
   }
 
-  .slp-tabs {
-    gap: 12px;
-    padding: 12px;
+  .slp-tabs-shell {
+    margin: 16px 0 26px;
+    padding: 20px 22px 22px;
+  }
+
+  .slp-tabs-header {
+    gap: 14px;
   }
 
   .slp-tabs-buttons {
-    gap: 8px;
-  }
-
-  .slp-tab {
-    padding: 9px 13px;
-    font-size: 0.9rem;
+    gap: 22px;
   }
 
   .slp-card {
@@ -833,25 +927,46 @@
     max-width: 700px;
   }
 
-  .slp-tabs {
-    grid-template-columns: 1fr;
-    align-items: stretch;
+  .slp-portal-hero {
+    margin-bottom: 16px;
   }
 
-  .slp-tabs-left {
-    min-width: 0;
+  .slp-tabs-shell {
+    margin: 14px 0 24px;
+    padding: 18px 18px 20px;
+    border-radius: 16px;
+  }
+
+  .slp-tabs-shell::before {
+    border-radius: 16px;
+  }
+
+  .slp-tabs-header {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .slp-tabs-header-copy {
+    max-width: 100%;
+  }
+
+  .slp-tabs-header-actions {
     width: 100%;
+    justify-content: flex-start;
   }
 
   .slp-picker-shell {
+    min-width: 0;
     max-width: 100%;
   }
 
   .slp-tabs-buttons {
+    gap: 22px;
     justify-content: flex-start;
     flex-wrap: nowrap;
     overflow-x: auto;
-    padding-bottom: 4px;
+    padding-bottom: 8px;
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
@@ -875,10 +990,33 @@
     padding: 18px 12px 28px;
   }
 
+  .slp-portal-hero {
+    margin: 8px auto 14px;
+  }
+
+  .slp-portal-hero-kicker {
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+  }
+
+  .slp-portal-hero-subtitle {
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
   .slp-heading,
   .slp-title {
     font-size: 1.6rem;
-    margin-bottom: 14px;
+  }
+
+  .slp-tabs-shell {
+    margin: 12px 0 22px;
+    padding: 16px 14px 18px;
+    border-radius: 14px;
+  }
+
+  .slp-tabs-shell::before {
+    border-radius: 14px;
   }
 
   .slp-tabs-header {
@@ -886,28 +1024,32 @@
   }
 
   .slp-tabs-eyebrow {
-    font-size: 0.62rem;
+    font-size: 0.6rem;
     letter-spacing: 0.18em;
   }
 
   .slp-tabs-title {
-    font-size: 1rem;
+    font-size: 1.15rem;
   }
 
-  .slp-tabs {
-    padding: 10px;
-    border-radius: 18px;
+  .slp-tabs-subtitle {
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+
+  .slp-tabs-buttons {
+    gap: 18px;
   }
 
   .slp-tab {
-    font-size: 0.86rem;
-    padding: 8px 12px;
+    font-size: 0.95rem;
+    padding: 4px 0 10px;
   }
 
   .slp-picker-button {
-    min-height: 46px;
-    font-size: 0.92rem;
-    padding: 0 42px 0 15px;
+    min-height: 44px;
+    font-size: 0.9rem;
+    padding: 0 40px 0 14px;
   }
 
   .slp-picker-item {
@@ -954,8 +1096,7 @@
   }
 
   .slp-tab {
-    font-size: 0.82rem;
-    padding: 7px 10px;
+    font-size: 0.88rem;
   }
 
   .slp-picker-button {

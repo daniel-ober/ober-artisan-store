@@ -5,25 +5,37 @@
 [data-component='AccountSettings'] {
   --section-divider: rgba(255, 255, 255, 0.08);
   --heading-color: rgba(255, 255, 255, 0.94);
-  --subtle-text: rgba(255, 255, 255, 0.6);
+  --subtle-text: rgba(255, 255, 255, 0.68);
   --input-bg: rgba(255, 255, 255, 0.045);
-  --input-border: rgba(255, 255, 255, 0.14);
-  --input-border-focus: rgba(255, 255, 255, 0.28);
+  --input-border: rgba(255, 255, 255, 0.12);
+  --input-border-focus: rgba(255, 255, 255, 0.26);
   --surface-bg:
-    radial-gradient(circle at top left, rgba(96, 165, 250, 0.07), transparent 26%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.02));
-  --surface-border: rgba(255, 255, 255, 0.1);
-  --surface-shadow: 0 14px 32px rgba(0, 0, 0, 0.2);
+    radial-gradient(
+      circle at top left,
+      rgba(96, 165, 250, 0.05),
+      transparent 24%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.028),
+      rgba(255, 255, 255, 0.018)
+    );
+  --surface-border: rgba(255, 255, 255, 0.08);
+  --surface-shadow: 0 16px 34px rgba(0, 0, 0, 0.22);
 }
 
 [data-component='AccountSettings'].as-card {
-  padding: 22px 22px 20px;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 20px 22px 20px;
 }
 
 [data-component='AccountSettings'] h3 {
   margin: 0 0 8px;
-  font-size: 1.3rem;
-  line-height: 1.15;
+  font-size: 1.24rem;
+  line-height: 1.14;
+  font-weight: 700;
 }
 
 [data-component='AccountSettings'] .as-eyebrow {
@@ -31,7 +43,7 @@
   font-size: 0.68rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(223, 202, 174, 0.66);
+  color: rgba(223, 202, 174, 0.68);
 }
 
 [data-component='AccountSettings'] .as-title-wrap {
@@ -41,8 +53,8 @@
 [data-component='AccountSettings'] .as-intro {
   margin: 0;
   color: var(--subtle-text);
-  font-size: 0.95rem;
-  line-height: 1.6;
+  font-size: 0.94rem;
+  line-height: 1.62;
   max-width: 760px;
 }
 
@@ -62,7 +74,7 @@
   border-radius: 18px;
   background: var(--surface-bg);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.03),
+    inset 0 1px 0 rgba(255, 255, 255, 0.025),
     var(--surface-shadow);
 }
 
@@ -86,7 +98,7 @@
   align-items: flex-start;
   justify-content: space-between;
   margin-bottom: 12px;
-  gap: 12px;
+  gap: 14px;
 }
 
 [data-component='AccountSettings'] .as-header--stack {
@@ -115,11 +127,20 @@
   gap: 10px;
 }
 
+/* ============================================================
+   Buttons
+   ============================================================ */
+
 [data-component='AccountSettings'] .apo-btn {
   padding: 7px 13px;
   border-radius: 999px;
-  font-size: 0.84rem;
+  font-size: 0.83rem;
   font-weight: 700;
+  line-height: 1;
+}
+
+[data-component='AccountSettings'] .apo-btn.primary {
+  box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
 }
 
 [data-component='AccountSettings'] .apo-btn.subtle {
@@ -132,6 +153,22 @@
 [data-component='AccountSettings'] .apo-btn.subtle:hover {
   background: rgba(255, 255, 255, 0.08);
 }
+
+[data-component='AccountSettings'] .vp-requests .apo-btn.request {
+  font-size: 0.84rem;
+  padding: 0.56rem 0.96rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+[data-component='AccountSettings'] .vp-requests .apo-btn.request:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* ============================================================
+   Inputs / fields
+   ============================================================ */
 
 [data-component='AccountSettings'] .as-grid {
   display: grid;
@@ -150,6 +187,7 @@
   border: 1px solid var(--input-border);
   padding: 11px 13px;
   border-radius: 12px;
+  color: #fff;
   transition:
     border-color 0.2s ease,
     box-shadow 0.2s ease,
@@ -159,12 +197,13 @@
 
 [data-component='AccountSettings'] .vp-input:focus {
   border-color: var(--input-border-focus);
-  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.08);
   background-color: rgba(255, 255, 255, 0.06);
+  outline: none;
 }
 
 [data-component='AccountSettings'] .vp-input:disabled {
-  opacity: 0.72;
+  opacity: 0.74;
   cursor: default;
 }
 
@@ -182,6 +221,10 @@
   color: #ff9a9a;
   margin-top: 6px;
 }
+
+/* ============================================================
+   Email / status / notes
+   ============================================================ */
 
 [data-component='AccountSettings'] .as-email-meta {
   margin-top: 10px;
@@ -201,6 +244,10 @@
   color: rgba(214, 229, 255, 0.82);
 }
 
+[data-component='AccountSettings'] .as-status-text--modal {
+  margin-top: 10px;
+}
+
 [data-component='AccountSettings'] .vp-card {
   padding: 14px 15px;
   border-radius: 14px;
@@ -216,7 +263,7 @@
 
 [data-component='AccountSettings'] .vp-hint {
   margin-top: 6px;
-  font-size: 0.85rem;
+  font-size: 0.84rem;
   line-height: 1.5;
   color: var(--subtle-text);
 }
@@ -225,24 +272,8 @@
   margin-top: 10px;
 }
 
-[data-component='AccountSettings'] .apo-toggle {
-  min-width: 42px;
-}
-
 [data-component='AccountSettings'] .vp-requests {
   margin-top: 12px;
-}
-
-[data-component='AccountSettings'] .vp-requests .apo-btn.request {
-  font-size: 0.84rem;
-  padding: 0.55rem 0.95rem;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-}
-
-[data-component='AccountSettings'] .vp-requests .apo-btn.request:hover {
-  background: rgba(255, 255, 255, 0.1);
 }
 
 /* ============================================================
@@ -255,13 +286,21 @@
   justify-content: space-between;
   gap: 18px;
   padding: 15px 16px;
-  border: 1px solid rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;
   background:
-    radial-gradient(circle at top left, rgba(96, 165, 250, 0.08), transparent 28%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.02));
+    radial-gradient(
+      circle at top left,
+      rgba(96, 165, 250, 0.07),
+      transparent 26%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.042),
+      rgba(255, 255, 255, 0.02)
+    );
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.03),
+    inset 0 1px 0 rgba(255, 255, 255, 0.025),
     0 10px 24px rgba(0, 0, 0, 0.14);
 }
 
@@ -346,6 +385,7 @@
 
 [data-component='AccountSettings'] .as-toggle-copy {
   min-width: 0;
+  flex: 1 1 auto;
 }
 
 [data-component='AccountSettings'] .as-toggle-title {
@@ -361,26 +401,99 @@
   color: var(--subtle-text);
 }
 
+[data-component='AccountSettings'] .apo-toggle {
+  width: 48px;
+  min-width: 48px;
+  height: 28px;
+  flex: 0 0 auto;
+  align-self: center;
+  margin-left: 12px;
+}
+
 [data-component='AccountSettings'] .as-footer-note {
   margin-top: 14px;
   text-align: center;
   font-size: 0.84rem;
 }
 
-[data-component='AccountSettings'] .as-toggle-card .apo-toggle {
-  flex: 0 0 auto;
-  align-self: center;
-  margin-left: 12px;
+/* ============================================================
+   Email update modal
+   ============================================================ */
+
+[data-component='AccountSettings'] .as-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 12000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(2, 4, 10, 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
-[data-component='AccountSettings'] .as-toggle-copy {
-  flex: 1 1 auto;
+[data-component='AccountSettings'] .as-modal {
+  width: min(100%, 560px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(96, 165, 250, 0.08),
+      transparent 26%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(20, 22, 32, 0.98),
+      rgba(8, 9, 14, 0.99)
+    );
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.48),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  padding: 22px 22px 20px;
 }
 
-[data-component='AccountSettings'] .apo-toggle {
-  width: 48px;
-  min-width: 48px;
-  height: 28px;
+[data-component='AccountSettings'] .as-modal-eyebrow {
+  margin-bottom: 8px;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(223, 202, 174, 0.72);
+}
+
+[data-component='AccountSettings'] .as-modal-title {
+  margin: 0 0 8px;
+  color: #fff;
+  font-size: 1.24rem;
+  line-height: 1.15;
+  font-weight: 700;
+}
+
+[data-component='AccountSettings'] .as-modal-copy {
+  margin: 0 0 14px;
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 0.93rem;
+  line-height: 1.6;
+}
+
+[data-component='AccountSettings'] .as-modal-field {
+  margin-top: 12px;
+}
+
+[data-component='AccountSettings'] .as-modal-field-label {
+  display: block;
+  margin-bottom: 6px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+[data-component='AccountSettings'] .as-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 16px;
 }
 
 /* ============================================================
@@ -399,7 +512,7 @@
   }
 
   [data-component='AccountSettings'] h3 {
-    font-size: 1.18rem;
+    font-size: 1.14rem;
   }
 
   [data-component='AccountSettings'] .as-header {
@@ -448,17 +561,6 @@
     gap: 12px;
   }
 
-  [data-component='AccountSettings'] .as-toggle-card .apo-toggle {
-    flex: 0 0 auto;
-    align-self: center;
-    margin-left: 12px;
-    transform: none;
-  }
-
-  [data-component='AccountSettings'] .as-toggle-copy {
-    flex: 1 1 auto;
-  }
-
   [data-component='AccountSettings'] .as-toggle-title {
     font-size: 0.88rem;
   }
@@ -468,6 +570,166 @@
   }
 
   [data-component='AccountSettings'] .vp-requests .apo-btn.request {
+    width: 100%;
+    justify-content: center;
+  }
+
+  [data-component='AccountSettings'] .as-modal-backdrop {
+    padding: 14px;
+  }
+
+  [data-component='AccountSettings'] .as-modal {
+    padding: 18px 16px 16px;
+    border-radius: 16px;
+  }
+
+  [data-component='AccountSettings'] .as-modal-title {
+    font-size: 1.08rem;
+  }
+
+  [data-component='AccountSettings'] .as-modal-actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  [data-component='AccountSettings'] .as-modal-actions .apo-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ============================================================
+   Email Update Modal
+   ============================================================ */
+
+[data-component='AccountSettings'] .as-status-text--modal {
+  margin-top: 12px;
+}
+
+.as-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.62);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.as-modal {
+  width: 100%;
+  max-width: 560px;
+  padding: 22px 22px 20px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(96, 165, 250, 0.08),
+      transparent 28%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(18, 20, 28, 0.96),
+      rgba(8, 9, 14, 0.98)
+    );
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  color: #fff;
+}
+
+.as-modal-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.as-modal-head h4 {
+  margin: 0;
+  font-size: 1.15rem;
+  line-height: 1.2;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.96);
+}
+
+.as-modal-close {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+}
+
+.as-modal-close:hover {
+  color: #fff;
+}
+
+.as-modal-copy {
+  margin: 0 0 14px;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.76);
+}
+
+.as-modal-current {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 14px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.as-modal-current-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(223, 202, 174, 0.72);
+}
+
+.as-modal-current-value {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.94);
+  word-break: break-word;
+}
+
+.as-modal .vp-input {
+  margin-top: 2px;
+}
+
+.as-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+@media (max-width: 640px) {
+  .as-modal-overlay {
+    padding: 14px;
+  }
+
+  .as-modal {
+    padding: 18px 16px 16px;
+    border-radius: 16px;
+  }
+
+  .as-modal-actions {
+    flex-direction: column;
+  }
+
+  .as-modal-actions .apo-btn {
     width: 100%;
     justify-content: center;
   }

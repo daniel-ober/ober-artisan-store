@@ -2804,11 +2804,14 @@ const StageCheckpointsPanel = ({
                   <div className="pp-compact-title-row">
                     <div className="pp-compact-title-wrap">
                       <div className="pp-compact-title">{step.label}</div>
-                      <div className="pp-compact-desc">
-                        {step.checkpoints?.[0]?.details?.[0] ||
-                          step.checkpoints?.[0]?.label ||
-                          'Checkpoint details will appear here.'}
-                      </div>
+
+                      {isAdmin ? (
+                        <div className="pp-compact-desc">
+                          {step.checkpoints?.[0]?.details?.[0] ||
+                            step.checkpoints?.[0]?.label ||
+                            'Checkpoint details will appear here.'}
+                        </div>
+                      ) : null}
                     </div>
 
                     <div className="pp-compact-right">
@@ -5037,9 +5040,9 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
 
   const isSelectedStageLocked = currentStageStatus === STAGE_MEDIA_STATE.FUTURE;
 
-const showStageStorypoints =
-  currentStageStatus === STAGE_MEDIA_STATE.COMPLETED ||
-  currentStageStatus === STAGE_MEDIA_STATE.CURRENT;
+  const showStageStorypoints =
+    currentStageStatus === STAGE_MEDIA_STATE.COMPLETED ||
+    currentStageStatus === STAGE_MEDIA_STATE.CURRENT;
 
   useEffect(() => {
     if (!showStageStorypoints) {
@@ -5919,6 +5922,19 @@ const showStageStorypoints =
     );
   };
 
+  const paymentReceivedAt =
+  project?.paymentReceivedAt ||
+  project?.depositPaidAt ||
+  project?.commitmentPaidAt ||
+  null;
+
+const chapter2Complete =
+  project?.commitmentPortal?.completed === true ||
+  project?.chapter2Complete === true ||
+  false;
+
+const shouldShowTargetWindow = !!paymentReceivedAt && chapter2Complete;
+
   const uploadArchiveFiles = async (fileList) => {
     if (!isAdmin) return;
     if (!project?.id) return;
@@ -6158,7 +6174,7 @@ const showStageStorypoints =
               </div>
             </div>
 
-            <div className="sl-progress-build-summary-stage-footer">
+               <div className="sl-progress-build-summary-stage-footer">
               <div className="sl-progress-build-summary-stage-target">
                 <div className="sl-progress-build-summary-stage-target-label">
                   {isProjectComplete
@@ -6168,7 +6184,9 @@ const showStageStorypoints =
                 <div className="sl-progress-build-summary-stage-target-value">
                   {isProjectComplete
                     ? 'Legacy Chapter • From Ober Artisan'
-                    : targetWindow || 'TBD'}
+                    : shouldShowTargetWindow
+                    ? targetWindow || 'TBD'
+                    : 'TBD'}
                 </div>
               </div>
 
@@ -6854,11 +6872,12 @@ const showStageStorypoints =
                       </div>
                     </div>
 
-                   {currentStageStatus !== STAGE_MEDIA_STATE.FUTURE ? (
-  <div className="sl-progress-stage-title-story">
-    {chapterNarrative.sentences?.[0] || getStageSummary(activeStep)}
-  </div>
-) : null}
+                    {currentStageStatus !== STAGE_MEDIA_STATE.FUTURE ? (
+                      <div className="sl-progress-stage-title-story">
+                        {chapterNarrative.sentences?.[0] ||
+                          getStageSummary(activeStep)}
+                      </div>
+                    ) : null}
                   </div>
 
                   {!isLegacyChapter &&

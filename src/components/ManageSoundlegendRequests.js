@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { collection, getDocs, updateDoc, doc } from 'firebase/firestore';
+import {
+  collection,
+  getDocs,
+  updateDoc,
+  doc,
+  deleteDoc,
+} from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import ViewSoundlegendModal from './ViewSoundlegendModal';
 import { getOverviewStatus } from '../utils/statusConfig';
@@ -10,6 +16,7 @@ const ManageSoundlegendRequests = () => {
   const [loading, setLoading] = useState(true);
   const [hideClosed, setHideClosed] = useState(true);
   const [selectedSubmission, setSelectedSubmission] = useState(null);
+  const [deletingId, setDeletingId] = useState(null);
 
   useEffect(() => {
     const fetchSubmissions = async () => {
@@ -18,13 +25,13 @@ const ManageSoundlegendRequests = () => {
         const querySnapshot = await getDocs(submissionsRef);
 
         const submissionsList = querySnapshot.docs
-          .map((doc) => {
-            const data = doc.data();
+          .map((docSnap) => {
+            const data = docSnap.data();
             const rawStatus = data.status || 'New';
             const overviewStatus = getOverviewStatus('soundlegend', rawStatus);
 
             return {
-              id: doc.id,
+              id: docSnap.id,
               ...data,
               status: rawStatus,
               overviewStatus,
@@ -64,6 +71,12 @@ const ManageSoundlegendRequests = () => {
             : submission
         )
       );
+
+      setSelectedSubmission((prev) =>
+        prev?.id === submissionId
+          ? { ...prev, status: newStatus, overviewStatus }
+          : prev
+      );
     } catch (error) {
       console.error('❌ Error updating status:', error);
     }
@@ -77,8 +90,53 @@ const ManageSoundlegendRequests = () => {
       setSubmissions((prev) =>
         prev.map((s) => (s.id === submissionId ? { ...s, [field]: value } : s))
       );
+
+      setSelectedSubmission((prev) =>
+        prev?.id === submissionId ? { ...prev, [field]: value } : prev
+      );
     } catch (error) {
       console.error(`❌ Error updating ${field}:`, error);
+    }
+  };
+
+  const handleDeleteSubmission = async (submission, e) => {
+    e.stopPropagation();
+
+    const confirmDelete = window.confirm(
+      `Delete SoundLegend submission for ${submission.firstName || ''} ${
+        submission.lastName || ''
+      }?\n\nThis cannot be undone.`
+    );
+    if (!confirmDelete) return;
+
+    try {
+      setDeletingId(submission.id);
+
+      await deleteDoc(doc(db, 'soundlegend_submissions', submission.id));
+
+      if (submission.questionnaireToken) {
+        try {
+          await deleteDoc(
+            doc(db, 'soundlegend_questionnaires', submission.questionnaireToken)
+          );
+        } catch (questionnaireErr) {
+          console.error(
+            '⚠️ Failed to delete linked questionnaire doc:',
+            questionnaireErr
+          );
+        }
+      }
+
+      setSubmissions((prev) => prev.filter((s) => s.id !== submission.id));
+
+      if (selectedSubmission?.id === submission.id) {
+        setSelectedSubmission(null);
+      }
+    } catch (error) {
+      console.error('❌ Error deleting submission:', error);
+      alert('Failed to delete submission. Please try again.');
+    } finally {
+      setDeletingId(null);
     }
   };
 
@@ -95,7 +153,7 @@ const ManageSoundlegendRequests = () => {
   };
 
   const getBadgeClass = (status) => {
-    const lower = status.toLowerCase();
+    const lower = (status || '').toLowerCase();
     if (lower === 'prospecting') return 'badge-yellow';
     if (lower.startsWith('closed')) return 'badge-gray';
     return 'badge-green';
@@ -129,6 +187,7 @@ const ManageSoundlegendRequests = () => {
               <th>Phone</th>
               <th>Email Sent</th>
               <th>Text Sent</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -185,6 +244,16 @@ const ManageSoundlegendRequests = () => {
                     onClick={(e) => e.stopPropagation()}
                   />
                 </td>
+                <td>
+                  <button
+                    type="button"
+                    className="btn btn--ghost btn--sm"
+                    onClick={(e) => handleDeleteSubmission(submission, e)}
+                    disabled={deletingId === submission.id}
+                  >
+                    {deletingId === submission.id ? 'Deleting…' : 'Delete'}
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -195,13 +264,28 @@ const ManageSoundlegendRequests = () => {
         <ViewSoundlegendModal
           submission={selectedSubmission}
           onClose={closeModal}
+          onStatusUpdate={handleStatusChange}
           onUpdateSubmission={(updatedSubmission) => {
+            if (updatedSubmission?._deleted) {
+              setSubmissions((prev) =>
+                prev.filter((s) => s.id !== updatedSubmission.id)
+              );
+              setSelectedSubmission(null);
+              return;
+            }
+
             setSubmissions((prev) =>
               prev.map((s) =>
                 s.id === updatedSubmission.id
                   ? { ...s, ...updatedSubmission }
                   : s
               )
+            );
+
+            setSelectedSubmission((prev) =>
+              prev?.id === updatedSubmission.id
+                ? { ...prev, ...updatedSubmission }
+                : prev
             );
           }}
         />

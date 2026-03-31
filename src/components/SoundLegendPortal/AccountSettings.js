@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import {
   collection,
   doc,
@@ -6,7 +6,12 @@ import {
   setDoc,
   serverTimestamp,
 } from 'firebase/firestore';
-import { sendPasswordResetEmail } from 'firebase/auth';
+import {
+  sendPasswordResetEmail,
+  verifyBeforeUpdateEmail,
+  EmailAuthProvider,
+  reauthenticateWithCredential,
+} from 'firebase/auth';
 import { db, auth } from '../../firebaseConfig';
 import { DarkModeContext } from '../../context/DarkModeContext';
 import './AccountSettings.css';
@@ -82,6 +87,8 @@ const firstRecordedAddress = (projectsArr = [], ordersArr = []) => {
   return candidates[0].addr;
 };
 
+const normalizeEmail = (value) => String(value || '').trim().toLowerCase();
+
 /* -------------------- tiny UI bits -------------------- */
 const Switch = ({ checked, onChange }) => (
   <button
@@ -103,9 +110,11 @@ export default function AccountSettings({
   latestOrder, // kept for future use
   isAdmin,
 }) {
-  const uid = user?.uid;
+   const uid = user?.uid || user?.id || '';
   const { isDarkMode, setIsDarkMode, isForcedDarkRoute } =
     useContext(DarkModeContext);
+
+  const emailSyncLoggedRef = useRef('');
 
   const s = (v) => String(v || '').toLowerCase();
   const isDelivered = (p) => !!p?.shipping?.deliveryDate;
@@ -162,14 +171,50 @@ export default function AccountSettings({
 
   const [pwResetStatus, setPwResetStatus] = useState('');
 
+  const [showEmailUpdate, setShowEmailUpdate] = useState(false);
+  const [newEmail, setNewEmail] = useState('');
+  const [emailUpdateStatus, setEmailUpdateStatus] = useState('');
+  const [emailUpdating, setEmailUpdating] = useState(false);
+
+  const [showReauth, setShowReauth] = useState(false);
+  const [reauthPassword, setReauthPassword] = useState('');
+  const [pendingEmailForUpdate, setPendingEmailForUpdate] = useState('');
+  const [reauthStatus, setReauthStatus] = useState('');
+  const [reauthLoading, setReauthLoading] = useState(false);
+
   const isValidEmail = (val) =>
     /^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/.test((val || '').trim());
-  const digitsOnly = (str) => (str || '').replace(/\D/g, '');
+
+  const digitsOnly = (str) => {
+    const raw = String(str || '').replace(/\D/g, '');
+
+    if (raw.length === 11 && raw.startsWith('1')) {
+      return raw.slice(1);
+    }
+
+    return raw;
+  };
+
   const prettyUSPhone = (d) => {
-    const v = (d || '').slice(0, 10);
+    const v = digitsOnly(d).slice(0, 10);
+
     if (v.length < 4) return v;
     if (v.length < 7) return `(${v.slice(0, 3)}) ${v.slice(3)}`;
     return `(${v.slice(0, 3)}) ${v.slice(3, 6)}-${v.slice(6, 10)}`;
+  };
+
+  const createAuditLog = async (changes, source = 'AccountSettings/section-save') => {
+    if (!uid || !changes || !Object.keys(changes).length) return;
+
+    const logRef = doc(collection(db, 'users', uid, 'audit_logs'));
+    await setDoc(logRef, {
+      type: 'account_update',
+      actorUid: uid,
+      actorEmail: auth.currentUser?.email || user?.email || null,
+      changes,
+      createdAt: serverTimestamp(),
+      source,
+    });
   };
 
   useEffect(() => {
@@ -179,10 +224,85 @@ export default function AccountSettings({
       if (!uid) return;
 
       try {
+        const currentAuthUser = auth.currentUser;
+
+        if (currentAuthUser) {
+          try {
+            await currentAuthUser.reload();
+          } catch (reloadErr) {
+            console.warn(
+              'Could not reload auth user before account sync:',
+              reloadErr
+            );
+          }
+        }
+
+        const refreshedAuthEmail = (auth.currentUser?.email || user?.email || '').trim();
+
         const uref = doc(db, 'users', uid);
         const usnap = await getDoc(uref);
-
         const userDoc = usnap.exists() ? usnap.data() || {} : {};
+
+        const storedUserEmail = String(userDoc.email || '').trim();
+        const storedUserEmailLower = normalizeEmail(
+          userDoc.emailLower || storedUserEmail
+        );
+
+        const authEmailLower = normalizeEmail(refreshedAuthEmail);
+
+        if (
+          refreshedAuthEmail &&
+          authEmailLower &&
+          authEmailLower !== storedUserEmailLower &&
+          emailSyncLoggedRef.current !== `${uid}:${authEmailLower}`
+        ) {
+          try {
+            await setDoc(
+              doc(db, 'users', uid),
+              {
+                email: refreshedAuthEmail,
+                emailLower: authEmailLower,
+                updatedAt: serverTimestamp(),
+              },
+              { merge: true }
+            );
+
+            const syncTasks = (projects || [])
+              .filter((p) => !!p?.id)
+              .map((project) =>
+                setDoc(
+                  doc(db, 'projects', project.id),
+                  {
+                    customerEmail: refreshedAuthEmail,
+                    customerEmailLower: authEmailLower,
+                    customer: {
+                      ...(project?.customer || {}),
+                      email: refreshedAuthEmail,
+                      emailLower: authEmailLower,
+                    },
+                    updatedAt: serverTimestamp(),
+                  },
+                  { merge: true }
+                )
+              );
+
+            await Promise.all(syncTasks);
+
+            await createAuditLog(
+              {
+                email: {
+                  before: storedUserEmail || null,
+                  after: refreshedAuthEmail,
+                },
+              },
+              'AccountSettings/email-change-confirmed'
+            );
+
+            emailSyncLoggedRef.current = `${uid}:${authEmailLower}`;
+          } catch (syncErr) {
+            console.warn('Could not sync confirmed auth email:', syncErr);
+          }
+        }
 
         const userDocFullName =
           `${userDoc.firstName || ''} ${userDoc.lastName || ''}`.trim();
@@ -196,7 +316,7 @@ export default function AccountSettings({
           '';
 
         const fallbackEmail =
-          projects?.[0]?.customer?.email || user?.email || '';
+          projects?.[0]?.customer?.email || refreshedAuthEmail || '';
 
         const fallbackPhone = projects?.[0]?.customer?.phone || '';
 
@@ -209,9 +329,7 @@ export default function AccountSettings({
 
         const base = {
           name: resolvedName,
-          email: usnap.exists()
-            ? userDoc.email || fallbackEmail
-            : fallbackEmail,
+          email: refreshedAuthEmail || storedUserEmail || fallbackEmail,
           phone: usnap.exists()
             ? userDoc.phone || fallbackPhone
             : fallbackPhone,
@@ -256,6 +374,10 @@ export default function AccountSettings({
   }, [uid, projects, orders, user]);
 
   const writeUserPatch = async (patch, auditChanges, primaryProjectPatch) => {
+    if (!uid) {
+      throw new Error('Missing user uid/id for account update.');
+    }
+
     await setDoc(
       doc(db, 'users', uid),
       { ...patch, updatedAt: serverTimestamp() },
@@ -318,26 +440,39 @@ export default function AccountSettings({
 
   const onSavePhone = async () => {
     const digits = digitsOnly(phone);
+
     if (digits.length !== 10) {
       setPhoneErr('Enter a valid 10-digit phone number');
       return;
     }
+
+    if (!uid) {
+      console.error('Phone save blocked: missing user uid/id', { user });
+      alert('Could not save phone. Missing user account ID.');
+      return;
+    }
+
     setSavingPhone(true);
+
     try {
       const pretty = prettyUSPhone(digits);
       const before = initial.phone || '';
       const after = pretty;
+
       await writeUserPatch(
         { phone: after },
         before === after ? {} : { phone: { before, after } },
         { phone: after }
       );
+
       setInitial((i) => ({ ...i, phone: after }));
+      setPhone(pretty);
+      setPhoneErr('');
       setEditPhone(false);
       alert('Phone updated.');
     } catch (e) {
-      console.error(e);
-      alert('Could not save phone.');
+      console.error('Phone save failed:', e);
+      alert(`Could not save phone. ${e?.message || ''}`.trim());
     } finally {
       setSavingPhone(false);
     }
@@ -393,12 +528,20 @@ export default function AccountSettings({
         { notificationPrefs: { email: !!notifyEmail, sms: !!notifySms } },
         {
           notificationPrefs: {
-            before: null,
+            before: {
+              email: !!initial.notifyEmail,
+              sms: !!initial.notifySms,
+            },
             after: { email: !!notifyEmail, sms: !!notifySms },
           },
         },
         null
       );
+      setInitial((i) => ({
+        ...i,
+        notifyEmail: !!notifyEmail,
+        notifySms: !!notifySms,
+      }));
       alert('Notification preferences saved.');
     } catch (e) {
       console.error(e);
@@ -417,7 +560,7 @@ export default function AccountSettings({
 
   const onSendPasswordReset = async () => {
     setPwResetStatus('');
-    const targetEmail = (user?.email || initial.email || '').trim();
+    const targetEmail = (auth.currentUser?.email || user?.email || initial.email || '').trim();
 
     if (!targetEmail || !isValidEmail(targetEmail)) {
       alert(
@@ -428,6 +571,20 @@ export default function AccountSettings({
 
     try {
       await sendPasswordResetEmail(auth, targetEmail);
+
+      await createAuditLog(
+        {
+          passwordResetRequested: {
+            before: null,
+            after: {
+              email: targetEmail,
+              requestedAt: new Date().toISOString(),
+            },
+          },
+        },
+        'AccountSettings/password-reset-requested'
+      );
+
       setPwResetStatus(
         'Password reset link sent. Check your inbox and spam folder.'
       );
@@ -439,30 +596,146 @@ export default function AccountSettings({
     }
   };
 
-  const onRequestEmailChange = () => {
-    const currentLogin = user?.email || initial.email || '';
-    const subject = 'SoundLegend — login email change request';
-    const body = `Hi Ober team,
+  const handleEmailUpdate = async () => {
+    setEmailUpdateStatus('');
 
-I need to change the login email for my SoundLegend Artist Portal.
+    const trimmed = (newEmail || '').trim().toLowerCase();
 
-Current login email: ${currentLogin || '(not sure / unknown)'}
-New email address:
-(enter new email here)
+    if (!trimmed || !isValidEmail(trimmed)) {
+      setEmailUpdateStatus('Please enter a valid email address.');
+      return;
+    }
 
-Project details (optional):
-- Drum serial or project ID
-- Name on order
+    if (
+      trimmed === normalizeEmail(auth.currentUser?.email || user?.email || initial.email || '')
+    ) {
+      setEmailUpdateStatus('That email is already on file.');
+      return;
+    }
 
-Thanks!
-`;
+    const currentUser = auth.currentUser;
+    if (!currentUser) {
+      setEmailUpdateStatus('User session not found. Please sign in again.');
+      return;
+    }
 
-    window.location.href =
-      'mailto:support@oberartisandrums.com' +
-      '?subject=' +
-      encodeURIComponent(subject) +
-      '&body=' +
-      encodeURIComponent(body);
+    setEmailUpdating(true);
+
+    try {
+      await verifyBeforeUpdateEmail(currentUser, trimmed);
+
+      await createAuditLog(
+        {
+          emailChangeRequested: {
+            before: currentUser.email || initial.email || null,
+            after: trimmed,
+          },
+        },
+        'AccountSettings/email-change-requested'
+      );
+
+      setEmailUpdateStatus(
+        `Verification sent to ${trimmed}. Your login email will update after you confirm it from that inbox.`
+      );
+      setNewEmail('');
+    } catch (e) {
+      console.error('Email update request failed:', e);
+
+      if (e?.code === 'auth/requires-recent-login') {
+        setPendingEmailForUpdate(trimmed);
+        setReauthPassword('');
+        setReauthStatus('');
+        setShowReauth(true);
+      } else if (e?.code === 'auth/email-already-in-use') {
+        setEmailUpdateStatus(
+          'That email is already associated with another account.'
+        );
+      } else if (e?.code === 'auth/invalid-email') {
+        setEmailUpdateStatus('Please enter a valid email address.');
+      } else {
+        setEmailUpdateStatus(
+          'We could not send the verification email right now. Please try again.'
+        );
+      }
+    } finally {
+      setEmailUpdating(false);
+    }
+  };
+
+  const handleReauthenticateAndRetryEmail = async () => {
+    setReauthStatus('');
+
+    const currentUser = auth.currentUser;
+    const passwordFromUserInput = (reauthPassword || '').trim();
+
+    if (!currentUser?.email) {
+      setReauthStatus('Could not verify your current login session.');
+      return;
+    }
+
+    if (!passwordFromUserInput) {
+      setReauthStatus('Please enter your password.');
+      return;
+    }
+
+    if (!pendingEmailForUpdate) {
+      setReauthStatus('No pending email update was found. Please try again.');
+      return;
+    }
+
+    setReauthLoading(true);
+
+    try {
+      const credential = EmailAuthProvider.credential(
+        currentUser.email,
+        passwordFromUserInput
+      );
+
+      await reauthenticateWithCredential(currentUser, credential);
+      await verifyBeforeUpdateEmail(currentUser, pendingEmailForUpdate);
+
+      await createAuditLog(
+        {
+          emailChangeRequested: {
+            before: currentUser.email || initial.email || null,
+            after: pendingEmailForUpdate,
+          },
+        },
+        'AccountSettings/email-change-requested-after-reauth'
+      );
+
+      setShowReauth(false);
+      setReauthPassword('');
+      setPendingEmailForUpdate('');
+      setNewEmail('');
+      setEmailUpdateStatus(
+        `Verification sent to ${pendingEmailForUpdate}. Your login email will update after you confirm it from that inbox.`
+      );
+    } catch (e) {
+      console.error('Reauthentication / email update failed:', e);
+
+      if (
+        e?.code === 'auth/wrong-password' ||
+        e?.code === 'auth/invalid-credential'
+      ) {
+        setReauthStatus('That password was incorrect. Please try again.');
+      } else if (e?.code === 'auth/too-many-requests') {
+        setReauthStatus(
+          'Too many attempts. Please wait a moment and try again.'
+        );
+      } else if (e?.code === 'auth/email-already-in-use') {
+        setShowReauth(false);
+        setEmailUpdateStatus(
+          'That email is already associated with another account.'
+        );
+      } else {
+        setReauthStatus(
+          'We could not verify your password right now. Please try again.'
+        );
+      }
+    } finally {
+      setReauthLoading(false);
+    }
   };
 
   if (loading) {
@@ -475,377 +748,383 @@ Thanks!
   }
 
   return (
-    <div className="slp-card as-card" data-component="AccountSettings">
-      <div className="as-title-wrap">
-        <div className="as-eyebrow">Portal Preferences</div>
-        <h3>Account Settings</h3>
-        <p className="as-intro">
-          Manage your contact information, notification preferences, appearance,
-          and shipping details for your Artist Portal experience.
-        </p>
-      </div>
+    <>
+      <div className="slp-card as-card" data-component="AccountSettings">
+        <div className="as-title-wrap">
+          <div className="as-eyebrow">Portal Preferences</div>
+          <h3>Account Settings</h3>
+          <p className="as-intro">
+            Manage your contact information, notification preferences,
+            appearance, and shipping details for your Artist Portal experience.
+          </p>
+        </div>
 
-      <div className="as-stack">
-        {/* APPEARANCE */}
-        <section className="as-section as-surface-card">
-          <div className="as-header">
-            <div>
-              <label className="vp-label">Appearance</label>
-              <div className="as-section-copy">
-                Choose how your Artist Portal looks on this device.
-              </div>
-            </div>
-          </div>
-
-          <div className="as-appearance-card">
-            <div className="as-appearance-copy">
-              <div className="as-appearance-title">Theme</div>
-              <div className="vp-hint">
-                Light mode keeps things crisp. Dark mode matches the portal’s
-                immersive look.
-              </div>
-            </div>
-
-            <div className="as-theme-segmented" aria-label="Theme selection">
-              <button
-                type="button"
-                className={`as-theme-btn ${!isDarkMode ? 'active' : ''}`}
-                onClick={() => onSetTheme(false)}
-                disabled={isForcedDarkRoute}
-              >
-                Light
-              </button>
-              <button
-                type="button"
-                className={`as-theme-btn ${isDarkMode ? 'active' : ''}`}
-                onClick={() => onSetTheme(true)}
-                disabled={isForcedDarkRoute}
-              >
-                Dark
-              </button>
-            </div>
-          </div>
-
-          {isForcedDarkRoute && (
-            <div className="vp-hint as-inline-note">
-              This page is currently using a forced dark experience.
-            </div>
-          )}
-        </section>
-
-        {/* PROFILE */}
-        <section className="as-section as-surface-card">
-          <div className="as-block">
+        <div className="as-stack">
+          <section className="as-section as-surface-card">
             <div className="as-header">
               <div>
-                <label className="vp-label">Name</label>
+                <label className="vp-label">Appearance</label>
                 <div className="as-section-copy">
-                  This is how your portal identity appears across your account.
+                  Choose how your Artist Portal looks on this device.
+                </div>
+              </div>
+            </div>
+
+            <div className="as-appearance-card">
+              <div className="as-appearance-copy">
+                <div className="as-appearance-title">Theme</div>
+                <div className="vp-hint">
+                  Light mode keeps things crisp. Dark mode matches the portal’s
+                  immersive look.
                 </div>
               </div>
 
-              {!editName ? (
-                <button className="apo-btn" onClick={() => setEditName(true)}>
-                  Edit
-                </button>
-              ) : (
-                <div className="as-actions">
-                  <button className="apo-btn" onClick={onCancelName}>
-                    Cancel
-                  </button>
-                  <button
-                    className="apo-btn primary"
-                    onClick={onSaveName}
-                    disabled={savingName}
-                  >
-                    {savingName ? 'Saving…' : 'Save'}
-                  </button>
-                </div>
-              )}
-            </div>
-
-            <input
-              className="vp-input"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              disabled={!editName}
-              placeholder="Full name"
-            />
-          </div>
-
-          <div className="as-divider" />
-
-          <div className="as-block">
-            <div className="as-header">
-              <div>
-                <label className="vp-label">Phone</label>
-                <div className="as-section-copy">
-                  Used for direct build communication and important updates.
-                </div>
-              </div>
-
-              {!editPhone ? (
-                <button className="apo-btn" onClick={() => setEditPhone(true)}>
-                  Edit
-                </button>
-              ) : (
-                <div className="as-actions">
-                  <button className="apo-btn" onClick={onCancelPhone}>
-                    Cancel
-                  </button>
-                  <button
-                    className="apo-btn primary"
-                    onClick={onSavePhone}
-                    disabled={savingPhone}
-                  >
-                    {savingPhone ? 'Saving…' : 'Save'}
-                  </button>
-                </div>
-              )}
-            </div>
-
-            <input
-              className={`vp-input ${phoneErr ? 'has-error' : ''}`}
-              type="tel"
-              inputMode="numeric"
-              autoComplete="tel"
-              value={phone}
-              onChange={(e) => {
-                const d = digitsOnly(e.target.value).slice(0, 10);
-                setPhone(prettyUSPhone(d));
-                setPhoneErr(
-                  d.length === 10 ? '' : 'Enter a valid 10-digit phone number'
-                );
-              }}
-              onBlur={() => {
-                const d = digitsOnly(phone).slice(0, 10);
-                setPhone(prettyUSPhone(d));
-                setPhoneErr(
-                  d.length === 10 ? '' : 'Enter a valid 10-digit phone number'
-                );
-              }}
-              disabled={!editPhone}
-              placeholder="(555) 555-5555"
-            />
-
-            {phoneErr && <div className="vp-hint error">{phoneErr}</div>}
-          </div>
-        </section>
-
-        {/* EMAIL */}
-        <section className="as-section as-surface-card">
-          <div className="as-header as-header--stack">
-            <div>
-              <label className="vp-label">Email</label>
-              <div className="as-section-copy">
-                This email is tied to your Artist Portal login and account
-                notifications.
-              </div>
-            </div>
-          </div>
-
-          <input
-            className="vp-input vp-input-readonly"
-            type="email"
-            value={email}
-            disabled
-          />
-
-          <div className="as-email-meta">
-            <div className="as-email-actions">
-              <button
-                type="button"
-                className="apo-btn subtle"
-                onClick={onSendPasswordReset}
-              >
-                Send password reset link
-              </button>
-              <button
-                type="button"
-                className="apo-btn subtle"
-                onClick={onRequestEmailChange}
-              >
-                I use a different email now
-              </button>
-            </div>
-
-            {pwResetStatus && (
-              <div className="as-status-text">{pwResetStatus}</div>
-            )}
-          </div>
-        </section>
-
-        {/* NOTIFICATIONS */}
-        <section className="as-section as-surface-card">
-          <div className="as-header">
-            <div>
-              <label className="vp-label">Notifications</label>
-              <div className="as-section-copy">
-                Choose how you’d like to receive account and build updates.
-              </div>
-            </div>
-
-            <div className="as-actions">
-              <button
-                className="apo-btn primary"
-                onClick={onSavePrefs}
-                disabled={savingPrefs}
-              >
-                {savingPrefs ? 'Saving…' : 'Save'}
-              </button>
-            </div>
-          </div>
-
-          <div className="as-toggle-grid">
-            <label className="as-toggle-card">
-              <div className="as-toggle-copy">
-                <div className="as-toggle-title">Email updates</div>
-                <div className="as-toggle-desc">
-                  Receive progress updates and account notices by email.
-                </div>
-              </div>
-              <Switch checked={notifyEmail} onChange={setNotifyEmail} />
-            </label>
-
-            <label className="as-toggle-card">
-              <div className="as-toggle-copy">
-                <div className="as-toggle-title">Text (SMS) updates</div>
-                <div className="as-toggle-desc">
-                  Receive key milestones and direct text notifications.
-                </div>
-              </div>
-              <Switch checked={notifySms} onChange={setNotifySms} />
-            </label>
-          </div>
-        </section>
-
-        {/* ADDRESS */}
-        <section className="as-section as-surface-card">
-          <div className="as-header">
-            <div>
-              <label className="vp-label">Shipping Address</label>
-              <div className="as-section-copy">
-                This applies to future fulfillment and delivery coordination.
-              </div>
-            </div>
-
-            {!addressLocked && !editAddr ? (
-              <button className="apo-btn" onClick={() => setEditAddr(true)}>
-                Edit
-              </button>
-            ) : !addressLocked ? (
-              <div className="as-actions">
-                <button className="apo-btn" onClick={onCancelAddr}>
-                  Cancel
+              <div className="as-theme-segmented" aria-label="Theme selection">
+                <button
+                  type="button"
+                  className={`as-theme-btn ${!isDarkMode ? 'active' : ''}`}
+                  onClick={() => onSetTheme(false)}
+                  disabled={isForcedDarkRoute}
+                >
+                  Light
                 </button>
                 <button
-                  className="apo-btn primary"
-                  onClick={onSaveAddr}
-                  disabled={savingAddr}
+                  type="button"
+                  className={`as-theme-btn ${isDarkMode ? 'active' : ''}`}
+                  onClick={() => onSetTheme(true)}
+                  disabled={isForcedDarkRoute}
                 >
-                  {savingAddr ? 'Saving…' : 'Save'}
+                  Dark
                 </button>
               </div>
-            ) : null}
-          </div>
+            </div>
 
-          {!addressLocked ? (
-            <>
-              <div className="as-grid">
-                <input
-                  className="vp-input"
-                  placeholder="Address line 1"
-                  value={addr.line1}
-                  onChange={(e) => setAddr({ ...addr, line1: e.target.value })}
-                  disabled={!editAddr}
-                />
-                <input
-                  className="vp-input"
-                  placeholder="Address line 2 (optional)"
-                  value={addr.line2}
-                  onChange={(e) => setAddr({ ...addr, line2: e.target.value })}
-                  disabled={!editAddr}
-                />
+            {isForcedDarkRoute && (
+              <div className="vp-hint as-inline-note">
+                This page is currently using a forced dark experience.
+              </div>
+            )}
+          </section>
 
-                <div className="as-grid two">
-                  <input
-                    className="vp-input"
-                    placeholder="City"
-                    value={addr.city}
-                    onChange={(e) => setAddr({ ...addr, city: e.target.value })}
-                    disabled={!editAddr}
-                  />
-                  <input
-                    className="vp-input"
-                    placeholder="State/Province"
-                    value={addr.state}
-                    onChange={(e) =>
-                      setAddr({ ...addr, state: e.target.value })
-                    }
-                    disabled={!editAddr}
-                  />
+          <section className="as-section as-surface-card">
+            <div className="as-block">
+              <div className="as-header">
+                <div>
+                  <label className="vp-label">Name</label>
+                  <div className="as-section-copy">
+                    This is how your portal identity appears across your
+                    account.
+                  </div>
                 </div>
 
-                <div className="as-grid two">
-                  <input
-                    className="vp-input"
-                    placeholder="Postal / ZIP"
-                    value={addr.postal_code}
-                    onChange={(e) =>
-                      setAddr({ ...addr, postal_code: e.target.value })
-                    }
-                    disabled={!editAddr}
-                  />
-                  <input
-                    className="vp-input"
-                    placeholder="Country"
-                    value={addr.country}
-                    onChange={(e) =>
-                      setAddr({ ...addr, country: e.target.value })
-                    }
-                    disabled={!editAddr}
-                  />
+                {!editName ? (
+                  <button className="apo-btn" onClick={() => setEditName(true)}>
+                    Edit
+                  </button>
+                ) : (
+                  <div className="as-actions">
+                    <button className="apo-btn" onClick={onCancelName}>
+                      Cancel
+                    </button>
+                    <button
+                      className="apo-btn primary"
+                      onClick={onSaveName}
+                      disabled={savingName}
+                    >
+                      {savingName ? 'Saving…' : 'Save'}
+                    </button>
+                  </div>
+                )}
+              </div>
+
+              <input
+                className="vp-input"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                disabled={!editName}
+                placeholder="Full name"
+              />
+            </div>
+
+            <div className="as-divider" />
+
+            <div className="as-block">
+              <div className="as-header">
+                <div>
+                  <label className="vp-label">Phone</label>
+                  <div className="as-section-copy">
+                    Used for direct build communication and important updates.
+                  </div>
+                </div>
+
+                {!editPhone ? (
+                  <button className="apo-btn" onClick={() => setEditPhone(true)}>
+                    Edit
+                  </button>
+                ) : (
+                  <div className="as-actions">
+                    <button className="apo-btn" onClick={onCancelPhone}>
+                      Cancel
+                    </button>
+                    <button
+                      className="apo-btn primary"
+                      onClick={onSavePhone}
+                      disabled={savingPhone}
+                    >
+                      {savingPhone ? 'Saving…' : 'Save'}
+                    </button>
+                  </div>
+                )}
+              </div>
+
+              <input
+                className={`vp-input ${phoneErr ? 'has-error' : ''}`}
+                type="tel"
+                inputMode="numeric"
+                autoComplete="tel"
+                value={phone}
+                onChange={(e) => {
+                  const d = digitsOnly(e.target.value).slice(0, 10);
+                  setPhone(prettyUSPhone(d));
+                  setPhoneErr(
+                    d.length === 10 ? '' : 'Enter a valid 10-digit phone number'
+                  );
+                }}
+                onBlur={() => {
+                  const d = digitsOnly(phone).slice(0, 10);
+                  setPhone(prettyUSPhone(d));
+                  setPhoneErr(
+                    d.length === 10 ? '' : 'Enter a valid 10-digit phone number'
+                  );
+                }}
+                disabled={!editPhone}
+                placeholder="(555) 555-5555"
+              />
+
+              {phoneErr && <div className="vp-hint error">{phoneErr}</div>}
+            </div>
+          </section>
+
+          <section className="as-section as-surface-card">
+            <div className="as-header as-header--stack">
+              <div>
+                <label className="vp-label">Email</label>
+                <div className="as-section-copy">
+                  This email is tied to your Artist Portal login and account
+                  notifications.
+                </div>
+              </div>
+            </div>
+
+            <input
+              className="vp-input vp-input-readonly"
+              type="email"
+              value={email}
+              disabled
+            />
+
+            <div className="as-email-meta">
+              <div className="as-email-actions">
+                <button
+                  type="button"
+                  className="apo-btn subtle"
+                  onClick={onSendPasswordReset}
+                >
+                  Send password reset link
+                </button>
+                <button
+                  type="button"
+                  className="apo-btn subtle"
+                  onClick={() => {
+                    setEmailUpdateStatus('');
+                    setNewEmail('');
+                    setShowEmailUpdate(true);
+                  }}
+                >
+                  Update my email
+                </button>
+              </div>
+
+              {pwResetStatus && (
+                <div className="as-status-text">{pwResetStatus}</div>
+              )}
+            </div>
+          </section>
+
+          {/* <section className="as-section as-surface-card">
+            <div className="as-header">
+              <div>
+                <label className="vp-label">Notifications</label>
+                <div className="as-section-copy">
+                  Choose how you’d like to receive account and build updates.
                 </div>
               </div>
 
-              <div className="vp-hint as-inline-note">
-                Updating your address here affects future shipments only. Past
-                orders remain unchanged.
+              <div className="as-actions">
+                <button
+                  className="apo-btn primary"
+                  onClick={onSavePrefs}
+                  disabled={savingPrefs}
+                >
+                  {savingPrefs ? 'Saving…' : 'Save'}
+                </button>
               </div>
-            </>
-          ) : (
-            <>
-              <div className="vp-card as-address-card" style={{ whiteSpace: 'pre-line' }}>
-                {(() => {
-                  const a = initial.address || addr;
-                  const parts = [
-                    a?.line1,
-                    a?.line2,
-                    [a?.city, a?.state].filter(Boolean).join(', '),
-                    [a?.postal_code, a?.country].filter(Boolean).join(' '),
-                  ].filter(Boolean);
-                  return parts.length ? parts.join('\n') : '—';
-                })()}
+            </div>
+
+            <div className="as-toggle-grid">
+              <label className="as-toggle-card">
+                <div className="as-toggle-copy">
+                  <div className="as-toggle-title">Email updates</div>
+                  <div className="as-toggle-desc">
+                    Receive progress updates and account notices by email.
+                  </div>
+                </div>
+                <Switch checked={notifyEmail} onChange={setNotifyEmail} />
+              </label>
+
+              <label className="as-toggle-card">
+                <div className="as-toggle-copy">
+                  <div className="as-toggle-title">Text (SMS) updates</div>
+                  <div className="as-toggle-desc">
+                    Receive key milestones and direct text notifications.
+                  </div>
+                </div>
+                <Switch checked={notifySms} onChange={setNotifySms} />
+              </label>
+            </div>
+          </section> */}
+
+          <section className="as-section as-surface-card">
+            <div className="as-header">
+              <div>
+                <label className="vp-label">Shipping Address</label>
+                <div className="as-section-copy">
+                  This applies to future fulfillment and delivery coordination.
+                </div>
               </div>
 
-              <div className="vp-hint as-inline-note">
-                {lockReason === 'in transit'
-                  ? 'Your order is currently in transit. For security, address changes are locked until delivery.'
-                  : 'Your drum is currently in production. Address changes are locked until the build is complete.'}
-              </div>
+              {!addressLocked && !editAddr ? (
+                <button className="apo-btn" onClick={() => setEditAddr(true)}>
+                  Edit
+                </button>
+              ) : !addressLocked ? (
+                <div className="as-actions">
+                  <button className="apo-btn" onClick={onCancelAddr}>
+                    Cancel
+                  </button>
+                  <button
+                    className="apo-btn primary"
+                    onClick={onSaveAddr}
+                    disabled={savingAddr}
+                  >
+                    {savingAddr ? 'Saving…' : 'Save'}
+                  </button>
+                </div>
+              ) : null}
+            </div>
 
-              <div className="vp-requests">
-                <a
-                  className="apo-btn request"
-                  href={
-                    'mailto:soundlegend@oberartisandrums.com' +
-                    '?subject=' +
-                    encodeURIComponent(
-                      'SoundLegend — Shipping address change request'
-                    ) +
-                    '&body=' +
-                    encodeURIComponent(
-                      `Hi Ober team,
+            {!addressLocked ? (
+              <>
+                <div className="as-grid">
+                  <input
+                    className="vp-input"
+                    placeholder="Address line 1"
+                    value={addr.line1}
+                    onChange={(e) => setAddr({ ...addr, line1: e.target.value })}
+                    disabled={!editAddr}
+                  />
+                  <input
+                    className="vp-input"
+                    placeholder="Address line 2 (optional)"
+                    value={addr.line2}
+                    onChange={(e) => setAddr({ ...addr, line2: e.target.value })}
+                    disabled={!editAddr}
+                  />
+
+                  <div className="as-grid two">
+                    <input
+                      className="vp-input"
+                      placeholder="City"
+                      value={addr.city}
+                      onChange={(e) =>
+                        setAddr({ ...addr, city: e.target.value })
+                      }
+                      disabled={!editAddr}
+                    />
+                    <input
+                      className="vp-input"
+                      placeholder="State/Province"
+                      value={addr.state}
+                      onChange={(e) =>
+                        setAddr({ ...addr, state: e.target.value })
+                      }
+                      disabled={!editAddr}
+                    />
+                  </div>
+
+                  <div className="as-grid two">
+                    <input
+                      className="vp-input"
+                      placeholder="Postal / ZIP"
+                      value={addr.postal_code}
+                      onChange={(e) =>
+                        setAddr({ ...addr, postal_code: e.target.value })
+                      }
+                      disabled={!editAddr}
+                    />
+                    <input
+                      className="vp-input"
+                      placeholder="Country"
+                      value={addr.country}
+                      onChange={(e) =>
+                        setAddr({ ...addr, country: e.target.value })
+                      }
+                      disabled={!editAddr}
+                    />
+                  </div>
+                </div>
+
+                <div className="vp-hint as-inline-note">
+                  Updating your address here affects future shipments only. Past
+                  orders remain unchanged.
+                </div>
+              </>
+            ) : (
+              <>
+                <div
+                  className="vp-card as-address-card"
+                  style={{ whiteSpace: 'pre-line' }}
+                >
+                  {(() => {
+                    const a = initial.address || addr;
+                    const parts = [
+                      a?.line1,
+                      a?.line2,
+                      [a?.city, a?.state].filter(Boolean).join(', '),
+                      [a?.postal_code, a?.country].filter(Boolean).join(' '),
+                    ].filter(Boolean);
+                    return parts.length ? parts.join('\n') : '—';
+                  })()}
+                </div>
+
+                <div className="vp-hint as-inline-note">
+                  {lockReason === 'in transit'
+                    ? 'Your order is currently in transit. For security, address changes are locked until delivery.'
+                    : 'Your drum is currently in production. Address changes are locked until the build is complete.'}
+                </div>
+
+                <div className="vp-requests">
+                  <a
+                    className="apo-btn request"
+                    href={
+                      'mailto:soundlegend@oberartisandrums.com' +
+                      '?subject=' +
+                      encodeURIComponent(
+                        'SoundLegend — Shipping address change request'
+                      ) +
+                      '&body=' +
+                      encodeURIComponent(
+                        `Hi Ober team,
 
 I need to update my shipping address for an in-progress build.
 
@@ -856,21 +1135,170 @@ New address:
 (Country)
 
 Thanks!`
-                    )
-                  }
-                >
-                  Request an address change ↗
-                </a>
-              </div>
-            </>
-          )}
-        </section>
+                      )
+                    }
+                  >
+                    Request an address change ↗
+                  </a>
+                </div>
+              </>
+            )}
+          </section>
+        </div>
+
+        <p className="slp-muted as-footer-note">
+          Changes are saved one section at a time. Be sure to click <b>Save</b>{' '}
+          for each section you update.
+        </p>
       </div>
 
-      <p className="slp-muted as-footer-note">
-        Changes are saved one section at a time. Be sure to click <b>Save</b>{' '}
-        for each section you update.
-      </p>
-    </div>
+      {showEmailUpdate && (
+        <div
+          className="as-modal-overlay"
+          onClick={() => {
+            if (emailUpdating) return;
+            setShowEmailUpdate(false);
+          }}
+        >
+          <div
+            className="as-modal"
+            onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="as-email-update-title"
+          >
+            <div className="as-modal-head">
+              <h4 id="as-email-update-title">Update your email</h4>
+              <button
+                type="button"
+                className="as-modal-close"
+                onClick={() => setShowEmailUpdate(false)}
+                disabled={emailUpdating}
+                aria-label="Close"
+              >
+                ×
+              </button>
+            </div>
+
+            <p className="as-modal-copy">
+              Enter your new email address below. We’ll send a verification link
+              to that new inbox, and your login email will only change after you
+              confirm it.
+            </p>
+
+            <div className="as-modal-current">
+              <span className="as-modal-current-label">Current email</span>
+              <span className="as-modal-current-value">
+                {auth.currentUser?.email || user?.email || initial.email || '—'}
+              </span>
+            </div>
+
+            <input
+              className="vp-input"
+              type="email"
+              value={newEmail}
+              onChange={(e) => setNewEmail(e.target.value)}
+              placeholder="Enter your new email"
+              autoComplete="email"
+            />
+
+            {emailUpdateStatus && (
+              <div className="as-status-text as-status-text--modal">
+                {emailUpdateStatus}
+              </div>
+            )}
+
+            <div className="as-modal-actions">
+              <button
+                type="button"
+                className="apo-btn"
+                onClick={() => setShowEmailUpdate(false)}
+                disabled={emailUpdating}
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                className="apo-btn primary"
+                onClick={handleEmailUpdate}
+                disabled={emailUpdating}
+              >
+                {emailUpdating ? 'Sending…' : 'Send verification'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showReauth && (
+        <div
+          className="as-modal-overlay"
+          onClick={() => {
+            if (reauthLoading) return;
+            setShowReauth(false);
+          }}
+        >
+          <div
+            className="as-modal"
+            onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="as-reauth-title"
+          >
+            <div className="as-modal-head">
+              <h4 id="as-reauth-title">Confirm your password</h4>
+              <button
+                type="button"
+                className="as-modal-close"
+                onClick={() => setShowReauth(false)}
+                disabled={reauthLoading}
+                aria-label="Close"
+              >
+                ×
+              </button>
+            </div>
+
+            <p className="as-modal-copy">
+              For security, please enter your current password to continue your
+              email update.
+            </p>
+
+            <input
+              className="vp-input"
+              type="password"
+              value={reauthPassword}
+              onChange={(e) => setReauthPassword(e.target.value)}
+              placeholder="Current password"
+              autoComplete="current-password"
+            />
+
+            {reauthStatus && (
+              <div className="as-status-text as-status-text--modal">
+                {reauthStatus}
+              </div>
+            )}
+
+            <div className="as-modal-actions">
+              <button
+                type="button"
+                className="apo-btn"
+                onClick={() => setShowReauth(false)}
+                disabled={reauthLoading}
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                className="apo-btn primary"
+                onClick={handleReauthenticateAndRetryEmail}
+                disabled={reauthLoading}
+              >
+                {reauthLoading ? 'Verifying…' : 'Continue'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }

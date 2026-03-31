@@ -1,48 +1,126 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate, useParams } from 'react-router-dom';
-import { doc, getDoc } from 'firebase/firestore';
+import {
+  doc,
+  getDoc,
+  setDoc,
+  serverTimestamp,
+} from 'firebase/firestore';
 import { db } from '../firebaseConfig';
+
+const normalizeEmail = (value) => String(value || '').trim().toLowerCase();
+
+const getProjectEmail = (data = {}) =>
+  normalizeEmail(data?.customer?.email || data?.customerEmail || '');
+
+const getProjectOwnerUid = (data = {}) =>
+  String(
+    data?.ownerUid ||
+      data?.userId ||
+      data?.customerUserId ||
+      data?.customer?.uid ||
+      ''
+  ).trim();
+
+const getUserProjectIds = (userDoc = {}) => {
+  const refs = Array.isArray(userDoc?.projects) ? userDoc.projects : [];
+  return refs
+    .map((entry) =>
+      typeof entry === 'string'
+        ? entry
+        : entry?.projectId || entry?.id || entry?.projectID || ''
+    )
+    .map((id) => String(id || '').trim())
+    .filter(Boolean);
+};
 
 const ProjectRoute = ({ element: Component }) => {
   const { user, isAdmin, authIsReady } = useAuth();
   const { projectId } = useParams();
   const navigate = useNavigate();
-  const [authorized, setAuthorized] = useState(null); // null = loading
+  const [authorized, setAuthorized] = useState(null);
 
   useEffect(() => {
     if (!authIsReady) return;
 
+    let cancelled = false;
+
     const checkAccess = async () => {
       if (!user) {
-        navigate('/signin');
+        navigate('/artisan-portal/signin');
         return;
       }
-    
+
       if (isAdmin) {
-        setAuthorized(true);
+        if (!cancelled) setAuthorized(true);
         return;
       }
-    
+
       try {
         const projectRef = doc(db, 'projects', projectId);
-        const snapshot = await getDoc(projectRef);
-    
-        if (!snapshot.exists()) {
+        const projectSnap = await getDoc(projectRef);
+
+        if (!projectSnap.exists()) {
           navigate('/not-found');
           return;
         }
-    
-        const data = snapshot.data();
-    
-        const projectEmail = data?.customer?.email?.toLowerCase()?.trim();
-        const userEmail = user?.email?.toLowerCase()?.trim();
-    
-        console.log('✅ Project email:', projectEmail);
-        console.log('✅ User email:', userEmail);
-    
-        if (projectEmail && userEmail && projectEmail === userEmail) {
-          setAuthorized(true);
+
+        const data = projectSnap.data() || {};
+        const userRef = doc(db, 'users', user.uid);
+        const userSnap = await getDoc(userRef);
+        const userDoc = userSnap.exists() ? userSnap.data() || {} : {};
+
+        const projectEmail = getProjectEmail(data);
+        const userEmail = normalizeEmail(user?.email || userDoc?.email || '');
+        const projectOwnerUid = getProjectOwnerUid(data);
+        const userProjectIds = getUserProjectIds(userDoc);
+
+        const authorizedByUid =
+          !!projectOwnerUid && !!user?.uid && projectOwnerUid === user.uid;
+
+        const authorizedByEmail =
+          !!projectEmail && !!userEmail && projectEmail === userEmail;
+
+        const authorizedByUserProjects = userProjectIds.includes(
+          String(projectId || '').trim()
+        );
+
+        if (
+          authorizedByUid ||
+          authorizedByEmail ||
+          authorizedByUserProjects
+        ) {
+          const currentProjects = Array.isArray(userDoc?.projects)
+            ? userDoc.projects
+            : [];
+
+          const alreadyLinked = currentProjects.some((entry) => {
+            const existingId =
+              typeof entry === 'string'
+                ? entry
+                : entry?.projectId || entry?.id || entry?.projectID || '';
+            return String(existingId || '').trim() === String(projectId).trim();
+          });
+
+          if (!alreadyLinked) {
+            await setDoc(
+              userRef,
+              {
+                projects: [
+                  ...currentProjects,
+                  {
+                    projectId: String(projectId).trim(),
+                    linkedAt: serverTimestamp(),
+                  },
+                ],
+                updatedAt: serverTimestamp(),
+              },
+              { merge: true }
+            );
+          }
+
+          if (!cancelled) setAuthorized(true);
         } else {
           console.warn('🚫 Authorization failed');
           navigate('/unauthorized');
@@ -54,9 +132,15 @@ const ProjectRoute = ({ element: Component }) => {
     };
 
     checkAccess();
+
+    return () => {
+      cancelled = true;
+    };
   }, [user, isAdmin, authIsReady, navigate, projectId]);
 
-  if (!authIsReady || authorized === null) return <div>Loading project...</div>;
+  if (!authIsReady || authorized === null) {
+    return <div>Loading project...</div>;
+  }
 
   return <Component />;
 };
