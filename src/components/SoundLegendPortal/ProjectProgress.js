@@ -90,15 +90,20 @@ function writeProjectProgressStageMediaCache(cache) {
 
 const PROJECT_PROGRESS_CACHE_PREFIX = 'projectProgressCache:';
 
-function getProjectProgressCacheKey(projectLike) {
-  const id =
+function getProjectProgressIdentity(projectLike) {
+  return (
     projectLike?.id ||
     projectLike?.projectId ||
     projectLike?.docId ||
     projectLike?.serial ||
     projectLike?.snareSerial ||
-    projectLike?.lineSerial;
+    projectLike?.lineSerial ||
+    ''
+  );
+}
 
+function getProjectProgressCacheKey(projectLike) {
+  const id = getProjectProgressIdentity(projectLike);
   return id ? `${PROJECT_PROGRESS_CACHE_PREFIX}${id}` : null;
 }
 
@@ -835,6 +840,32 @@ function getSelectedStageMediaState(selectedIndex, currentIndex) {
   if (selectedIndex === currentIndex) return STAGE_MEDIA_STATE.CURRENT;
   if (selectedIndex === currentIndex + 1) return STAGE_MEDIA_STATE.NEXT;
   return STAGE_MEDIA_STATE.FUTURE;
+}
+
+function isStoryChapterAccessible({
+  step,
+  stageIndex,
+  currentStepIndex,
+  projectMarkedComplete,
+}) {
+  if (!step) return false;
+
+  if (step.key === 'soundlegendCover') {
+    return true;
+  }
+
+  if (step.key === 'soundlegendEpilogue') {
+    return !!projectMarkedComplete;
+  }
+
+  if (typeof stageIndex !== 'number' || stageIndex < 0) {
+    return false;
+  }
+
+  // allow:
+  // - all completed/current chapters up through the active one
+  // - exactly one preview chapter ahead
+  return stageIndex <= currentStepIndex + 1;
 }
 
 function getStageImageFilename(stageKey, variant = 'archived') {
@@ -3732,13 +3763,20 @@ function SoundLegendCoverHero({
    ========================================================= */
 
 const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
-  const cachedInitialProject = useMemo(
-    () => initialProject || readProjectProgressCache(initialProject),
+  const initialProjectId = useMemo(
+    () => getProjectProgressIdentity(initialProject),
     [initialProject]
   );
 
+  const cachedInitialProject = useMemo(() => {
+    if (!initialProjectId) return null;
+    return initialProject || readProjectProgressCache(initialProject);
+  }, [initialProject, initialProjectId]);
+
   const [project, setProject] = useState(cachedInitialProject || null);
-  const [loading, setLoading] = useState(!cachedInitialProject);
+  const [loading, setLoading] = useState(
+    !!initialProjectId && !cachedInitialProject
+  );
   const [activeKey, setActiveKey] = useState('soundlegendCover');
 
   const [archiveEditorBusy, setArchiveEditorBusy] = useState(false);
@@ -3972,38 +4010,27 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
   };
 
   useEffect(() => {
-    if (initialProject) return;
-
-    const cached = readProjectProgressCache(project);
-    if (cached) {
-      setProject((prev) => prev || cached);
+    if (!initialProjectId) {
+      setProject(null);
       setLoading(false);
+      return;
     }
-  }, [initialProject, project]);
-
-  useEffect(() => {
-    if (!initialProject) return;
 
     setProject((prev) => {
       if (!prev) {
         return initialProject || readProjectProgressCache(initialProject);
       }
 
-      const incomingId =
-        initialProject.id ||
-        initialProject.projectId ||
-        initialProject.docId ||
-        initialProject.serial ||
-        initialProject.snareSerial ||
-        initialProject.lineSerial;
+      const incomingId = getProjectProgressIdentity(initialProject);
+      const prevId = getProjectProgressIdentity(prev);
 
-      if (incomingId && prev.id && incomingId !== prev.id) {
+      if (incomingId && prevId && incomingId !== prevId) {
         return initialProject;
       }
 
-      return prev;
+      return initialProject || prev;
     });
-  }, [initialProject]);
+  }, [initialProject, initialProjectId]);
 
   useEffect(() => {
     setActiveInteractiveStepId(null);
@@ -4237,11 +4264,20 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
   }, []);
 
   useEffect(() => {
-    const ref = getProjectDocRef(initialProject);
-    if (!ref) {
+    if (!initialProjectId) {
+      setProject(null);
       setLoading(false);
       return;
     }
+
+    const ref = getProjectDocRef(initialProject);
+    if (!ref) {
+      setProject(null);
+      setLoading(false);
+      return;
+    }
+
+    setLoading(true);
 
     const unsub = onSnapshot(
       ref,
@@ -4249,28 +4285,37 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
         if (snap.exists()) {
           setProject((prev) => {
             const incoming = { id: snap.id, ...snap.data() };
-            if (prev && prev.id === incoming.id) {
+            const prevId = getProjectProgressIdentity(prev);
+
+            if (prev && prevId === incoming.id) {
               return { ...prev, ...incoming };
             }
+
             return incoming;
           });
         } else {
           setProject(null);
         }
+
         setLoading(false);
       },
       (err) => {
         console.error('ProjectProgress onSnapshot error', err);
+        setProject(null);
         setLoading(false);
       }
     );
 
     return () => unsub();
-  }, [initialProject]);
+  }, [initialProject, initialProjectId]);
 
   useEffect(() => {
-    if (!project) return;
-    writeProjectProgressCache(initialProject || project, project);
+    const cacheTarget = initialProject || project;
+    const cacheId = getProjectProgressIdentity(cacheTarget);
+
+    if (!project || !cacheId) return;
+
+    writeProjectProgressCache(cacheTarget, project);
   }, [project, initialProject]);
 
   const overallPct = useMemo(() => getOverallProgress(project), [project]);
@@ -4440,55 +4485,62 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
     revealCoverMobileScale,
   ]);
 
-const defaultChapterKey = useMemo(() => {
-  const reveal = project?.soundlegendReveal || {};
+  const defaultChapterKey = useMemo(() => {
+    const reveal = project?.soundlegendReveal || {};
 
-  const hasRevealCoverChapter = storyChapters.some(
-    (chapter) => chapter.key === 'soundlegendCover'
-  );
+    const hasRevealCoverChapter = storyChapters.some(
+      (chapter) => chapter.key === 'soundlegendCover'
+    );
 
-  const hasLegacyChapter = storyChapters.some(
-    (chapter) => chapter.key === 'soundlegendEpilogue'
-  );
+    const hasLegacyChapter = storyChapters.some(
+      (chapter) => chapter.key === 'soundlegendEpilogue'
+    );
 
-  const projectIsComplete = overallPct >= 100;
-  const revealIsLive = !!reveal.revealDeployed;
-  const revealHasMedia = !!reveal.coverMediaUrl;
+    const projectIsComplete = overallPct >= 100;
+    const revealIsLive = !!reveal.revealDeployed;
+    const revealHasMedia = !!reveal.coverMediaUrl;
 
-  if (projectIsComplete) {
-    if (
-      revealIsLive &&
-      revealHasMedia &&
-      hasRevealCoverChapter
-    ) {
-      return 'soundlegendCover';
+    if (projectIsComplete) {
+      if (revealIsLive && revealHasMedia && hasRevealCoverChapter) {
+        return 'soundlegendCover';
+      }
+
+      if (hasLegacyChapter) {
+        return 'soundlegendEpilogue';
+      }
     }
 
-    if (hasLegacyChapter) {
-      return 'soundlegendEpilogue';
-    }
-  }
-
-  return (STEPS[currentStepIndex] || STEPS[0])?.key || STEPS[0].key;
-}, [project, storyChapters, overallPct, currentStepIndex]);
+    return (STEPS[currentStepIndex] || STEPS[0])?.key || STEPS[0].key;
+  }, [project, storyChapters, overallPct, currentStepIndex]);
 
   const chapterSelectorItems = useMemo(() => {
-    return storyChapters.map((chapter, index) => {
+    return storyChapters.map((chapter) => {
       const isCover = chapter.key === 'soundlegendCover';
       const isLegacy = chapter.key === 'soundlegendEpilogue';
       const isActive = chapter.key === activeKey;
 
       let visualState = 'default';
+      let isClickable = false;
 
       if (isCover) {
         visualState =
           revealIsDeployed && revealCoverIsAvailable ? 'revealed' : 'locked';
+        isClickable = revealIsDeployed && revealCoverIsAvailable;
       } else if (isLegacy) {
         visualState = overallPct >= 100 ? 'revealed' : 'locked';
+        isClickable = overallPct >= 100;
       } else {
         const canonicalStageIndex = STEPS.findIndex(
           (s) => s.key === chapter.key
         );
+
+        const accessible = isStoryChapterAccessible({
+          step: chapter,
+          stageIndex: canonicalStageIndex,
+          currentStepIndex,
+          projectMarkedComplete,
+        });
+
         const stepStatus = getResolvedVisualStageState({
           project,
           step: chapter,
@@ -4497,12 +4549,18 @@ const defaultChapterKey = useMemo(() => {
           projectMarkedComplete,
         });
 
-        if (stepStatus === STAGE_MEDIA_STATE.COMPLETED) {
+        isClickable = accessible;
+
+        if (!accessible) {
+          visualState = 'locked';
+        } else if (stepStatus === STAGE_MEDIA_STATE.COMPLETED) {
           visualState = 'completed';
         } else if (stepStatus === STAGE_MEDIA_STATE.CURRENT) {
           visualState = 'current';
-        } else {
+        } else if (stepStatus === STAGE_MEDIA_STATE.NEXT) {
           visualState = 'future';
+        } else {
+          visualState = 'locked';
         }
       }
 
@@ -4523,7 +4581,7 @@ const defaultChapterKey = useMemo(() => {
               )}`,
         title: chapter.label,
         isActive,
-        isClickable: true,
+        isClickable,
         visualState,
       };
     });
@@ -4538,38 +4596,59 @@ const defaultChapterKey = useMemo(() => {
     projectMarkedComplete,
   ]);
 
-useEffect(() => {
-  if (!project?.id) return;
-  if (transitionLockRef.current) return;
-  if (!defaultChapterKey) return;
+  useEffect(() => {
+    if (!project?.id) return;
+    if (transitionLockRef.current) return;
+    if (!defaultChapterKey) return;
 
-  const activeKeyIsStillValid = storyChapters.some(
-    (chapter) => chapter.key === activeKey
-  );
+    const activeChapter = storyChapters.find(
+      (chapter) => chapter.key === activeKey
+    );
 
-  const initSignature = [
-    project.id,
+    const activeKeyIsStillValid = !!activeChapter;
+
+    const activeCanonicalStageIndex = STEPS.findIndex(
+      (s) => s.key === activeChapter?.key
+    );
+
+    const activeIsAccessible = activeChapter
+      ? isStoryChapterAccessible({
+          step: activeChapter,
+          stageIndex: activeCanonicalStageIndex,
+          currentStepIndex,
+          projectMarkedComplete,
+        })
+      : false;
+
+    const initSignature = [
+      project.id,
+      defaultChapterKey,
+      currentStepIndex,
+      projectMarkedComplete ? 'complete' : 'active',
+      storyChapters.map((chapter) => chapter.key).join('|'),
+    ].join('::');
+
+    if (initialChapterSelectionRef.current !== initSignature) {
+      initialChapterSelectionRef.current = initSignature;
+      setActiveKey(defaultChapterKey);
+      setDisplayedStageKey(defaultChapterKey);
+      setDisplayedOverlayStageKey(defaultChapterKey);
+      return;
+    }
+
+    if (!activeKey || !activeKeyIsStillValid || !activeIsAccessible) {
+      setActiveKey(defaultChapterKey);
+      setDisplayedStageKey(defaultChapterKey);
+      setDisplayedOverlayStageKey(defaultChapterKey);
+    }
+  }, [
+    project?.id,
     defaultChapterKey,
-    storyChapters.map((chapter) => chapter.key).join('|'),
-  ].join('::');
-
-  // Re-initialize when the loaded project's default landing chapter changes
-  // (example: completed project + reveal becomes available = go to cover).
-  if (initialChapterSelectionRef.current !== initSignature) {
-    initialChapterSelectionRef.current = initSignature;
-    setActiveKey(defaultChapterKey);
-    setDisplayedStageKey(defaultChapterKey);
-    setDisplayedOverlayStageKey(defaultChapterKey);
-    return;
-  }
-
-  // Still repair invalid state if needed.
-  if (!activeKey || !activeKeyIsStillValid) {
-    setActiveKey(defaultChapterKey);
-    setDisplayedStageKey(defaultChapterKey);
-    setDisplayedOverlayStageKey(defaultChapterKey);
-  }
-}, [project?.id, defaultChapterKey, activeKey, storyChapters]);
+    activeKey,
+    storyChapters,
+    currentStepIndex,
+    projectMarkedComplete,
+  ]);
 
   const activeStep =
     storyChapters.find((s) => s.key === activeKey) || storyChapters[0];
@@ -5019,10 +5098,37 @@ useEffect(() => {
           ? 'is-theme-locked'
           : 'is-theme-default';
 
-  const canGoPrev = activeIndex > 0;
-  const canGoNext = activeIndex < storyChapters.length - 1;
-  const prevStep = canGoPrev ? storyChapters[activeIndex - 1] : null;
-  const nextStep = canGoNext ? storyChapters[activeIndex + 1] : null;
+  const accessibleStoryIndexes = useMemo(() => {
+    return storyChapters
+      .map((chapter, idx) => {
+        const canonicalStageIndex = STEPS.findIndex(
+          (s) => s.key === chapter.key
+        );
+
+        const accessible = isStoryChapterAccessible({
+          step: chapter,
+          stageIndex: canonicalStageIndex,
+          currentStepIndex,
+          projectMarkedComplete,
+        });
+
+        return accessible ? idx : null;
+      })
+      .filter((idx) => idx !== null);
+  }, [storyChapters, currentStepIndex, projectMarkedComplete]);
+
+  const prevAccessibleIndex = [...accessibleStoryIndexes]
+    .reverse()
+    .find((idx) => idx < activeIndex);
+
+  const nextAccessibleIndex = accessibleStoryIndexes.find(
+    (idx) => idx > activeIndex
+  );
+
+  const canGoPrev = typeof prevAccessibleIndex === 'number';
+  const canGoNext = typeof nextAccessibleIndex === 'number';
+  const prevStep = canGoPrev ? storyChapters[prevAccessibleIndex] : null;
+  const nextStep = canGoNext ? storyChapters[nextAccessibleIndex] : null;
 
   const getStageMediaForStep = (step) => {
     if (!step?.key) return null;
@@ -5171,6 +5277,19 @@ useEffect(() => {
     const targetStep = storyChapters[targetIndex];
     if (!targetStep) return;
 
+    const canonicalStageIndex = STEPS.findIndex(
+      (s) => s.key === targetStep.key
+    );
+
+    const isAccessible = isStoryChapterAccessible({
+      step: targetStep,
+      stageIndex: canonicalStageIndex,
+      currentStepIndex,
+      projectMarkedComplete,
+    });
+
+    if (!isAccessible) return;
+
     const previousStageKey = displayedStageKey;
 
     transitionLockRef.current = true;
@@ -5198,7 +5317,7 @@ useEffect(() => {
       eduPanelCloseTimerRef.current = null;
     }
 
-    navigateToStageIndex(activeIndex - 1);
+    navigateToStageIndex(prevAccessibleIndex);
   };
 
   const goNextStage = () => {
@@ -5209,8 +5328,9 @@ useEffect(() => {
       eduPanelCloseTimerRef.current = null;
     }
 
-    navigateToStageIndex(activeIndex + 1);
+    navigateToStageIndex(nextAccessibleIndex);
   };
+
   const handleArchiveUpload = async (file) => {
     if (!file || !project?.id || !activeStep?.key) return;
 
@@ -5923,10 +6043,19 @@ useEffect(() => {
     );
   }
 
-  if (!project) {
+  if (!project || !getProjectProgressIdentity(project)) {
     return (
       <div className="sl-progress sl-progress--empty">
-        <p>Project not found.</p>
+        <div className="sl-progress-loading-shell">
+          <div className="sl-progress-loading-title">
+            Your build workspace is not available yet
+          </div>
+          <div className="sl-progress-loading-text">
+            Once your SoundLegend project is officially created and assigned,
+            your chapter timeline, build media, and project story will appear
+            here.
+          </div>
+        </div>
       </div>
     );
   }
@@ -5966,68 +6095,70 @@ useEffect(() => {
 
   return (
     <div className="sl-progress">
-      <section className="sl-progress-build-summary">
-        <div className="sl-progress-build-summary-stage sl-progress-build-summary-stage--hero">
-          <div className="sl-progress-build-summary-stage-copy">
-            <div className="sl-progress-build-summary-stage-kicker">
-              {isProjectComplete ? 'Legacy Status' : 'Build Roadmap'}
-            </div>
+<section className="sl-progress-build-summary">
+  <div className="sl-progress-main-shell">
+    <div className="sl-progress-build-summary-stage sl-progress-build-summary-stage--hero">
+      <div className="sl-progress-build-summary-stage-copy">
+        <div className="sl-progress-build-summary-stage-kicker">
+          {isProjectComplete ? 'Legacy Status' : 'Build Roadmap'}
+        </div>
 
-            <div className="sl-progress-build-summary-stage-title">
-              {isProjectComplete
-                ? shippingSummary.headline
-                : isLegacyChapter
-                  ? 'Legacy Chapter • From Ober Artisan'
-                  : currentStageLabel}
-            </div>
+        <div className="sl-progress-build-summary-stage-title">
+          {isProjectComplete
+            ? shippingSummary.headline
+            : isLegacyChapter
+              ? 'Legacy Chapter • From Ober Artisan'
+              : currentStageLabel}
+        </div>
 
-            <div className="sl-progress-build-summary-stage-subtitle">
-              {isProjectComplete
-                ? shippingSummary.deliveryStatus
-                : isLegacyChapter
-                  ? 'Final handoff • Story now belongs to the artist'
-                  : currentStepLabel}
-            </div>
+        <div className="sl-progress-build-summary-stage-subtitle">
+          {isProjectComplete
+            ? shippingSummary.deliveryStatus
+            : isLegacyChapter
+              ? 'Final handoff • Story now belongs to the artist'
+              : currentStepLabel}
+        </div>
+      </div>
+
+      <div className="sl-progress-build-summary-track-shell">
+        <div className="sl-progress-build-summary-track">
+          <div
+            className="sl-progress-build-summary-track-fill"
+            style={{ width: `${overallPct}%` }}
+          />
+          <div
+            className="sl-progress-build-summary-track-glow"
+            style={{ width: `${overallPct}%` }}
+          />
+        </div>
+      </div>
+
+      <div className="sl-progress-build-summary-stage-footer">
+        <div className="sl-progress-build-summary-stage-target">
+          <div className="sl-progress-build-summary-stage-target-label">
+            {isProjectComplete
+              ? 'Final Chapter'
+              : 'Target Completion Window'}
           </div>
-
-          <div className="sl-progress-build-summary-track-shell">
-            <div className="sl-progress-build-summary-track">
-              <div
-                className="sl-progress-build-summary-track-fill"
-                style={{ width: `${overallPct}%` }}
-              />
-              <div
-                className="sl-progress-build-summary-track-glow"
-                style={{ width: `${overallPct}%` }}
-              />
-            </div>
-          </div>
-
-          <div className="sl-progress-build-summary-stage-footer">
-            <div className="sl-progress-build-summary-stage-target">
-              <div className="sl-progress-build-summary-stage-target-label">
-                {isProjectComplete
-                  ? 'Final Chapter'
-                  : 'Target Completion Window'}
-              </div>
-              <div className="sl-progress-build-summary-stage-target-value">
-                {isProjectComplete
-                  ? 'Legacy Chapter • From Ober Artisan'
-                  : targetWindow || 'TBD'}
-              </div>
-            </div>
-
-            <div className="sl-progress-build-summary-stage-percent-inline">
-              <div className="sl-progress-build-summary-stage-percent-inline-value">
-                {overallPct}%
-              </div>
-              <div className="sl-progress-build-summary-stage-percent-inline-label">
-                {isProjectComplete ? 'Complete' : 'Progress'}
-              </div>
-            </div>
+          <div className="sl-progress-build-summary-stage-target-value">
+            {isProjectComplete
+              ? 'Legacy Chapter • From Ober Artisan'
+              : targetWindow || 'TBD'}
           </div>
         </div>
-      </section>
+
+        <div className="sl-progress-build-summary-stage-percent-inline">
+          <div className="sl-progress-build-summary-stage-percent-inline-value">
+            {overallPct}%
+          </div>
+          <div className="sl-progress-build-summary-stage-percent-inline-label">
+            {isProjectComplete ? 'Complete' : 'Progress'}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
       <div className="sl-progress-stage-stack">
         <div className="sl-progress-chapter-selector-bar">
           <div
