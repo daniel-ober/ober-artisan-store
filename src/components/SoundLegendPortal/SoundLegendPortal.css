@@ -242,7 +242,9 @@
 }
 
 .slp-tabs-header-copy {
-  max-width: 760px;
+    max-width: 760px;
+  width: 100%;
+  text-align: center;
   margin: 0;
 }
 

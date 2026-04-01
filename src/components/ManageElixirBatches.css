@@ -1,164 +1,580 @@
-.elixir-batch-container {
-    padding: 2rem;
-    font-family: 'Poppins', sans-serif;
-    color: #222;
-  }
-  
-  .elixir-batch-container h2 {
-    font-size: 1.75rem;
-    margin-bottom: 1.5rem;
-  }
-  
-  .add-batch-form,
-  .essential-oils-section,
-  .notes-section {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-    align-items: center;
-  }
-  
-  .add-batch-form input,
-  .essential-oils-section input,
-  .notes-section textarea {
-    padding: 0.4rem 0.75rem;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 0.95rem;
-    flex: unset;
-  }
-  
-  .essential-oils-section input[type="text"] {
-    width: 160px;
-  }
-  
-  .essential-oils-section input[type="number"] {
-    width: 100px;
-  }
-  
-  .notes-section textarea {
-    flex-basis: 100%;
-    resize: vertical;
-    min-height: 50px;
-  }
-  
-  .elixir-button {
-    background-color: #6e3eff;
-    color: white !important;
-    border: none;
-    padding: 0.45rem 0.9rem;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    white-space: nowrap;
-  }
-  
-  .elixir-button:hover {
-    background-color: #5931cc;
-  }
-  
-  .batch-card {
-    background-color: #fff;
-    border: 1px solid #e0e0e0;
-    border-radius: 12px;
-    padding: 1.2rem 1.25rem;
-    margin-bottom: 2rem;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
-  }
-  
-  .batch-card h3 {
-    font-size: 1.3rem;
-    margin-bottom: 0.5rem;
-    padding-bottom: 0.25rem;
-    border-bottom: 1px solid #eee;
-  }
-  
-  .batch-header {
-    display: flex;
+/* =========================================================
+   ManageElixirBatches.css — Ober Artisan Admin Polish
+   ========================================================= */
+
+.elixir-admin-page {
+  padding: 24px;
+  background: linear-gradient(180deg, #ffffff 0%, #fbfbfc 100%);
+  border: 1px solid #e7e7ea;
+  border-radius: 18px;
+  box-shadow:
+    0 10px 28px rgba(15, 23, 42, 0.06),
+    0 2px 8px rgba(15, 23, 42, 0.04);
+  color: #111827;
+  font-family: Arial, sans-serif;
+}
+
+.elixir-admin-hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  margin-bottom: 22px;
+}
+
+.elixir-admin-hero__copy {
+  max-width: 760px;
+  width: 100%;
+  text-align: center;
+}
+
+.elixir-admin-hero h2,
+.elixir-admin-hero p,
+.elixir-admin-eyebrow {
+  text-align: center;
+}
+
+.elixir-admin-eyebrow {
+  margin-bottom: 8px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #6b7280;
+}
+
+.elixir-admin-hero h2 {
+  margin: 0 0 8px;
+  font-size: 1.58rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #111827;
+}
+
+.elixir-admin-hero p {
+  margin: 0;
+  font-size: 0.97rem;
+  line-height: 1.6;
+  color: #4b5563;
+}
+
+.elixir-admin-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+  max-width: 420px;
+}
+
+.elixir-admin-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-size: 0.82rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.elixir-admin-pill--neutral {
+  background: #f3f4f6;
+  border-color: #d1d5db;
+  color: #374151;
+}
+
+.elixir-admin-pill--accent {
+  background: #eef4ff;
+  border-color: #c9d8ff;
+  color: #1d4ed8;
+}
+
+.elixir-admin-pill--soft {
+  background: #f3e8ff;
+  border-color: #d8b4fe;
+  color: #7c3aed;
+}
+
+.elixir-admin-create-card {
+  margin-bottom: 22px;
+  padding: 18px;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+}
+
+.elixir-admin-create-card__header {
+  margin-bottom: 14px;
+}
+
+.elixir-admin-create-card__header h3 {
+  margin: 0 0 6px;
+  font-size: 1.08rem;
+  font-weight: 800;
+  color: #111827;
+}
+
+.elixir-admin-create-card__header p {
+  margin: 0;
+  font-size: 0.92rem;
+  color: #4b5563;
+}
+
+.elixir-admin-form-grid,
+.elixir-edit-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.elixir-admin-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.elixir-admin-field label {
+  font-size: 0.83rem;
+  font-weight: 700;
+  color: #374151;
+}
+
+.elixir-admin-field input,
+.elixir-admin-field textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #111827;
+  font-size: 0.94rem;
+  box-shadow: none;
+}
+
+.elixir-admin-field input:focus,
+.elixir-admin-field textarea:focus {
+  outline: none;
+  border-color: #94a3b8;
+  box-shadow: 0 0 0 4px rgba(148, 163, 184, 0.14);
+}
+
+.elixir-admin-field textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+.elixir-admin-create-card__actions {
+  margin-top: 16px;
+}
+
+.elixir-admin-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform 0.04s ease,
+    filter 0.16s ease,
+    box-shadow 0.16s ease;
+  color: #ffffff;
+}
+
+.elixir-admin-btn:hover {
+  filter: brightness(1.03);
+}
+
+.elixir-admin-btn:active {
+  transform: translateY(1px);
+}
+
+.elixir-admin-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.elixir-admin-btn--primary {
+  background: linear-gradient(135deg, #1363df, #2457d6);
+  box-shadow: 0 6px 16px rgba(19, 99, 223, 0.18);
+}
+
+.elixir-admin-btn--dark {
+  background: linear-gradient(135deg, #111827, #1f2937);
+  box-shadow: 0 6px 16px rgba(17, 24, 39, 0.16);
+}
+
+.elixir-admin-btn--secondary {
+  background: linear-gradient(135deg, #4b5563, #374151);
+  box-shadow: 0 6px 16px rgba(75, 85, 99, 0.16);
+}
+
+.elixir-admin-state {
+  padding: 18px;
+  border-radius: 14px;
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+
+.elixir-admin-state--loading {
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  color: #374151;
+}
+
+.elixir-admin-state--error {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+}
+
+.elixir-admin-state--empty {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  color: #6b7280;
+}
+
+.elixir-batch-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  background: #ffffff;
+  overflow: hidden;
+  margin-bottom: 18px;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+}
+
+.elixir-batch-card__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 18px;
+  padding: 18px;
+  background: linear-gradient(180deg, #ffffff 0%, #fcfcfd 100%);
+}
+
+.elixir-batch-card__identity {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.elixir-batch-card__title-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.elixir-batch-card__title-row h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #111827;
+}
+
+.elixir-batch-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #eef2ff;
+  border: 1px solid #c7d2fe;
+  color: #3730a3;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.elixir-batch-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-size: 0.84rem;
+  color: #6b7280;
+}
+
+.elixir-batch-card__meta code {
+  padding: 3px 6px;
+  border-radius: 8px;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  color: #374151;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.elixir-batch-card__actions {
+  flex: 0 0 auto;
+}
+
+.elixir-batch-card__body {
+  padding: 0 18px 18px;
+}
+
+.elixir-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.elixir-detail-panel {
+  padding: 16px;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+}
+
+.elixir-detail-panel--full {
+  grid-column: 1 / -1;
+}
+
+.elixir-detail-panel__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.elixir-detail-panel__header h4 {
+  margin: 0 0 4px;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #111827;
+}
+
+.elixir-detail-panel__header p {
+  margin: 0;
+  font-size: 0.88rem;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+.elixir-inline-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.elixir-ingredient-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.elixir-stat-box {
+  padding: 14px;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+}
+
+.elixir-stat-box span {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.elixir-stat-box strong {
+  font-size: 1.05rem;
+  color: #111827;
+}
+
+.elixir-inline-form {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr auto;
+  gap: 12px;
+  align-items: end;
+  margin-bottom: 14px;
+}
+
+.elixir-inline-form__actions,
+.elixir-note-compose__actions {
+  display: flex;
+  align-items: end;
+}
+
+.elixir-item-list,
+.elixir-note-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.elixir-item-row,
+.elixir-note-item {
+  padding: 12px 14px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+}
+
+.elixir-item-row + .elixir-item-row,
+.elixir-note-item + .elixir-note-item {
+  margin-top: 10px;
+}
+
+.elixir-item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.elixir-item-row__main {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.elixir-item-row__title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.elixir-item-row__meta {
+  font-size: 0.84rem;
+  color: #6b7280;
+}
+
+.elixir-note-item__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.elixir-note-date {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #6b7280;
+}
+
+.elixir-note-text {
+  font-size: 0.93rem;
+  line-height: 1.6;
+  color: #111827;
+  white-space: pre-wrap;
+}
+
+.elixir-note-compose {
+  margin-bottom: 14px;
+}
+
+.elixir-empty-text {
+  padding: 14px;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px dashed #d1d5db;
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+.elixir-delete-link {
+  border: none;
+  background: transparent;
+  color: #b42318;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+}
+
+.elixir-delete-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 1100px) {
+  .elixir-admin-hero {
     flex-direction: column;
-    gap: 0.3rem;
     align-items: flex-start;
-    margin-bottom: 1rem;
   }
-  
-  .batch-header strong {
-    display: inline-block;
-    width: 130px;
-  }
-  
-  .batch-row {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.75rem;
-    margin: 0.5rem 0;
-  }
-  
-  .essential-oils-section ul,
-  .notes-section ul {
-    list-style: none;
-    padding-left: 1rem;
-    margin: 0.25rem 0;
-  }
-  
-  .essential-oils-section ul li,
-  .notes-section ul li {
-    padding-left: 0.25rem;
-    font-size: 0.95rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+
+  .elixir-admin-summary {
     justify-content: flex-start;
+    max-width: 100%;
   }
-  
-  .note-date {
-    font-weight: 600;
-    margin-right: 0.35rem;
-    color: #555;
-    white-space: nowrap;
+
+  .elixir-admin-form-grid,
+  .elixir-edit-grid {
+    grid-template-columns: 1fr 1fr;
   }
-  
-  .delete-link {
-    color: crimson;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 0.85rem;
+
+  .elixir-detail-grid {
+    grid-template-columns: 1fr;
   }
-  
-  .delete-link:hover {
-    text-decoration: underline;
+
+  .elixir-detail-panel--full {
+    grid-column: auto;
   }
-  
-  .section-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    font-weight: 600;
-    margin-top: 1rem;
-    margin-bottom: 0.25rem;
+
+  .elixir-inline-form {
+    grid-template-columns: 1fr 1fr;
   }
-  
-  .section-body {
-    display: flex;
+
+  .elixir-inline-form__actions {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 700px) {
+  .elixir-admin-page {
+    padding: 16px 12px;
+    border-radius: 14px;
+  }
+
+  .elixir-admin-hero h2 {
+    font-size: 1.3rem;
+  }
+
+  .elixir-admin-hero p {
+    font-size: 0.92rem;
+  }
+
+  .elixir-admin-form-grid,
+  .elixir-edit-grid,
+  .elixir-ingredient-stats,
+  .elixir-inline-form {
+    grid-template-columns: 1fr;
+  }
+
+  .elixir-batch-card__top,
+  .elixir-detail-panel__header {
     flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .elixir-batch-card__meta {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .elixir-admin-btn {
     width: 100%;
-    margin-top: 0.25rem;
   }
-  
-  .add-link {
-    color: green;
-    font-weight: bold;
-    font-size: 1.25rem;
-    cursor: pointer;
-    padding-left: 0.5rem;
+
+  .elixir-inline-actions {
+    width: 100%;
   }
-  
-  .add-link:hover {
-    text-decoration: underline;
+
+  .elixir-inline-actions .elixir-admin-btn {
+    width: 100%;
   }
-  
+
+  .elixir-note-item__top,
+  .elixir-item-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
