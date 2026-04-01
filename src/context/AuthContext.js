@@ -1,22 +1,12 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { auth, db, setAnalyticsUserProperties } from '../firebaseConfig';
 import { signOut, onAuthStateChanged } from 'firebase/auth';
-import {
-  doc,
-  getDoc,
-  collection,
-  query,
-  where,
-  limit,
-  getDocs,
-} from 'firebase/firestore';
+import { doc, getDoc } from 'firebase/firestore';
 
 const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
 
-const normalizeEmail = (value = '') => String(value || '').trim().toLowerCase();
-
-const getUserProjectIds = (profile = {}) => {
+const deriveProjectIds = (profile = {}) => {
   const raw = [
     ...(Array.isArray(profile.projects) ? profile.projects : []),
     ...(Array.isArray(profile.projectIds) ? profile.projectIds : []),
@@ -29,7 +19,18 @@ const getUserProjectIds = (profile = {}) => {
     profile.latestProjectId,
   ].filter(Boolean);
 
-  return Array.from(new Set(raw.map((v) => String(v).trim()).filter(Boolean)));
+  return Array.from(
+    new Set(
+      raw
+        .map((entry) =>
+          typeof entry === 'string'
+            ? entry
+            : entry?.projectId || entry?.id || entry?.projectID || ''
+        )
+        .map((v) => String(v || '').trim())
+        .filter(Boolean)
+    )
+  );
 };
 
 const derivePortalState = (profile = {}) => {
@@ -51,7 +52,7 @@ const derivePortalState = (profile = {}) => {
     portalStatus === 'inactive' ||
     portalStatus === 'disabled';
 
-  const projectIds = getUserProjectIds(profile);
+  const projectIds = deriveProjectIds(profile);
   const hasAssignedProject = projectIds.length > 0;
 
   return {
@@ -127,33 +128,6 @@ export const AuthProvider = ({ children }) => {
         return;
       }
 
-      const normalizedEmail = normalizeEmail(currentUser.email);
-      if (normalizedEmail) {
-        const usersRef = collection(db, 'users');
-
-        const q1 = query(
-          usersRef,
-          where('email', '==', normalizedEmail),
-          limit(1)
-        );
-        const snap1 = await getDocs(q1);
-
-        if (!snap1.empty) {
-          const match = snap1.docs[0];
-          applyProfileState({ id: match.id, ...match.data() });
-          return;
-        }
-
-        const q2 = query(usersRef, where('email', '==', currentUser.email), limit(1));
-        const snap2 = await getDocs(q2);
-
-        if (!snap2.empty) {
-          const match = snap2.docs[0];
-          applyProfileState({ id: match.id, ...match.data() });
-          return;
-        }
-      }
-
       applyProfileState(null);
     } catch (error) {
       console.error('❌ Error loading user profile:', error);
@@ -187,7 +161,10 @@ export const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
-        await Promise.all([refreshClaims(currentUser), loadUserProfile(currentUser)]);
+        await Promise.all([
+          refreshClaims(currentUser),
+          loadUserProfile(currentUser),
+        ]);
       } else {
         setUser(null);
         setIsAdmin(false);
