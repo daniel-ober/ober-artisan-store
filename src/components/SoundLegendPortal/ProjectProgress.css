@@ -5177,37 +5177,37 @@ button.pp-compact-marker {
   }
 
   .sl-progress-build-summary-stage-footer {
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 12px;
-}
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
 
-.sl-progress-build-summary-stage-target {
-  width: 100%;
-}
+  .sl-progress-build-summary-stage-target {
+    width: 100%;
+  }
 
-.sl-progress-build-summary-stage-target-label {
-  font-size: 0.52rem;
-  letter-spacing: 0.18em;
-}
+  .sl-progress-build-summary-stage-target-label {
+    font-size: 0.52rem;
+    letter-spacing: 0.18em;
+  }
 
-.sl-progress-build-summary-stage-target-value {
-  font-size: 0.82rem;
-  line-height: 1.35;
-}
+  .sl-progress-build-summary-stage-target-value {
+    font-size: 0.82rem;
+    line-height: 1.35;
+  }
 
-.sl-progress-build-summary-stage-percent-inline {
-  text-align: left;
-}
+  .sl-progress-build-summary-stage-percent-inline {
+    text-align: left;
+  }
 
-.sl-progress-build-summary-stage-percent-inline-value {
-  font-size: 1.25rem;
-}
+  .sl-progress-build-summary-stage-percent-inline-value {
+    font-size: 1.25rem;
+  }
 
-.sl-progress-build-summary-stage-percent-inline-label {
-  font-size: 0.5rem;
-  letter-spacing: 0.18em;
-}
+  .sl-progress-build-summary-stage-percent-inline-label {
+    font-size: 0.5rem;
+    letter-spacing: 0.18em;
+  }
 
   .sl-progress-build-summary-track-shell {
     margin-bottom: 12px;
@@ -5313,12 +5313,20 @@ button.pp-compact-marker {
   }
 
   .sl-progress-chapter-selector-bar {
-    margin: 0 0 12px;
+    margin: 0;
   }
 
   .sl-progress-chapter-selector-inner {
     padding: 10px 10px 10px;
     border-radius: 16px 16px 0 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .sl-progress-chapter-selector-inner::-webkit-scrollbar {
+    display: none;
   }
 
   .sl-progress-chapter-selector-title {
@@ -5328,16 +5336,11 @@ button.pp-compact-marker {
   }
 
   .sl-progress-chapter-selector-list {
-    justify-content: flex-start;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    padding-bottom: 2px;
-  }
-
-  .sl-progress-chapter-selector-list::-webkit-scrollbar {
-    display: none;
+    width: max-content;
+    min-width: 100%;
+    margin: 0 auto;
+    justify-content: center;
+    padding: 0 2px 2px;
   }
 
   .sl-progress-chapter-selector-item {
@@ -5875,5 +5878,60 @@ button.pp-compact-marker {
 
   .sl-progress-legacy-admin-field--slider .sl-progress-legacy-admin-range-value {
     font-size: 0.68rem;
+  }
+}
+
+/* =========================================================
+   CHAPTER SELECTOR
+   ========================================================= */
+
+.sl-progress-chapter-selector-list {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 6px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .sl-progress-chapter-selector-bar {
+    margin: 0;
+  }
+
+  .sl-progress-chapter-selector-inner {
+    padding: 10px 10px 10px;
+    border-radius: 16px 16px 0 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .sl-progress-chapter-selector-inner::-webkit-scrollbar {
+    display: none;
+  }
+
+  .sl-progress-chapter-selector-list {
+    width: max-content;
+    min-width: 100%;
+    margin: 0 auto;
+    justify-content: center;
+    padding: 0 2px 2px;
+  }
+
+  .sl-progress-chapter-selector-item {
+    flex: 0 0 auto;
+    min-width: 26px;
+    height: 26px;
+    padding: 0 6px;
+  }
+
+  .sl-progress-chapter-selector-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
   }
 }
