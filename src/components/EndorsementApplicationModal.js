@@ -20,6 +20,8 @@ const safeDate = (ts) => {
   }
 };
 
+const asArray = (value) => (Array.isArray(value) ? value : []);
+
 export default function EndorsementApplicationModal({ value, appId, onClose }) {
   const [saving, setSaving] = useState(false);
   const [noteText, setNoteText] = useState('');
@@ -233,17 +235,23 @@ export default function EndorsementApplicationModal({ value, appId, onClose }) {
 
               <section className="eamodal-card eamodal-notes">
                 <h4>Internal Notes</h4>
-                <div className="notes-list">
-                  {(value?.internalNotes || []).slice().reverse().map((n, idx) => (
-                    <div className="note" key={idx}>
-                      <div className="note-meta">{safeDate(n?.timestamp) || n?.timestamp || '—'}</div>
-                      <div className="note-text">{n?.text || '—'}</div>
-                    </div>
-                  ))}
-                  {(value?.internalNotes || []).length === 0 && (
-                    <div className="muted">No internal notes yet.</div>
-                  )}
-                </div>
+<div className="notes-list">
+  {asArray(value?.internalNotes)
+    .slice()
+    .reverse()
+    .map((n, idx) => (
+      <div className="note" key={idx}>
+        <div className="note-meta">
+          {safeDate(n?.timestamp) || n?.timestamp || '—'}
+        </div>
+        <div className="note-text">{n?.text || '—'}</div>
+      </div>
+    ))}
+
+  {asArray(value?.internalNotes).length === 0 && (
+    <div className="muted">No internal notes yet.</div>
+  )}
+</div>
 
                 <div className="note-compose">
                   <textarea
@@ -260,17 +268,23 @@ export default function EndorsementApplicationModal({ value, appId, onClose }) {
 
               <section className="eamodal-card eamodal-history">
                 <h4>System History</h4>
-                <div className="history-list">
-                  {(value?.systemHistory || []).slice().reverse().map((h, idx) => (
-                    <div className="history-item" key={idx}>
-                      <div className="history-meta">{safeDate(h?.timestamp) || h?.timestamp || '—'}</div>
-                      <div className="history-text">{h?.event || '—'}</div>
-                    </div>
-                  ))}
-                  {(value?.systemHistory || []).length === 0 && (
-                    <div className="muted">No system history yet.</div>
-                  )}
-                </div>
+<div className="history-list">
+  {asArray(value?.systemHistory)
+    .slice()
+    .reverse()
+    .map((h, idx) => (
+      <div className="history-item" key={idx}>
+        <div className="history-meta">
+          {safeDate(h?.timestamp) || h?.timestamp || '—'}
+        </div>
+        <div className="history-text">{h?.event || '—'}</div>
+      </div>
+    ))}
+
+  {asArray(value?.systemHistory).length === 0 && (
+    <div className="muted">No system history yet.</div>
+  )}
+</div>
               </section>
             </div>
           </div>
