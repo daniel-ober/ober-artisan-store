@@ -1,6 +1,4 @@
-// src/components/ManageEndorsementApplications.js
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import ReactDOM from 'react-dom';
 import {
   collection,
   doc,
@@ -16,14 +14,65 @@ import {
 import { db } from '../firebaseConfig';
 import EndorsementApplicationModal from './EndorsementApplicationModal';
 import './ManageEndorsementApplications.css';
-import './AdminModalTheme.css';
 
 const PAGE_SIZE = 10;
 
-const Portal = ({ children }) => ReactDOM.createPortal(children, document.body);
+const normalizeStatus = (status) => {
+  const raw = String(status || '').trim();
 
-const ManageEndorsementApplications = ({ onClose }) => {
-  const [pages, setPages] = useState([]); // Array<Array<Row>>
+  if (raw === 'new') return 'new';
+  if (raw === 'completed') return 'completed';
+  return 'inProgress';
+};
+
+const statusLabel = (status) => {
+  if (status === 'new') return 'New';
+  if (status === 'completed') return 'Completed';
+  return 'In Progress';
+};
+
+const statusClass = (status) => {
+  if (status === 'new') return 'new';
+  if (status === 'completed') return 'completed';
+  return 'in-progress';
+};
+
+const formatDate = (value) => {
+  if (!value) return '—';
+
+  try {
+    if (value?.toDate) return value.toDate().toLocaleDateString();
+    if (typeof value?.seconds === 'number') {
+      return new Date(value.seconds * 1000).toLocaleDateString();
+    }
+    const parsed = new Date(value);
+    if (Number.isNaN(parsed.getTime())) return '—';
+    return parsed.toLocaleDateString();
+  } catch {
+    return '—';
+  }
+};
+
+const attachmentUrl = (r) =>
+  r?.attachment?.url ||
+  r?.attachmentUrl ||
+  (r?.hasAttachment && r?.url ? r.url : '') ||
+  '';
+
+const getCreatedAtMs = (value) => {
+  if (!value) return 0;
+  try {
+    if (value?.toDate) return value.toDate().getTime();
+    if (typeof value?.seconds === 'number') return value.seconds * 1000;
+    const parsed = new Date(value);
+    return Number.isNaN(parsed.getTime()) ? 0 : parsed.getTime();
+  } catch {
+    return 0;
+  }
+};
+
+const ManageEndorsementApplications = () => {
+  const [pages, setPages] = useState([]);
   const [nextCursor, setNextCursor] = useState(null);
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -33,15 +82,15 @@ const ManageEndorsementApplications = ({ onClose }) => {
     search: '',
   });
 
-  const [selected, setSelected] = useState(null); // {id, data}
-
-  // Track loaded ids so live updates can patch only what we already loaded
+  const [selected, setSelected] = useState(null); // { id, data }
   const loadedIdsRef = useRef(new Set());
 
-  const chunk = (rows) => {
-    const out = [];
-    for (let i = 0; i < rows.length; i += PAGE_SIZE) out.push(rows.slice(i, i + PAGE_SIZE));
-    return out;
+  const chunkRows = (rows) => {
+    const output = [];
+    for (let i = 0; i < rows.length; i += PAGE_SIZE) {
+      output.push(rows.slice(i, i + PAGE_SIZE));
+    }
+    return output;
   };
 
   const loadPage = async (reset = false) => {
@@ -53,60 +102,67 @@ const ManageEndorsementApplications = ({ onClose }) => {
       let q = query(base, orderBy('createdAt', 'desc'), limit(PAGE_SIZE));
 
       if (!reset && nextCursor) {
-        q = query(base, orderBy('createdAt', 'desc'), startAfter(nextCursor), limit(PAGE_SIZE));
+        q = query(
+          base,
+          orderBy('createdAt', 'desc'),
+          startAfter(nextCursor),
+          limit(PAGE_SIZE)
+        );
       }
 
       const snap = await getDocs(q);
 
-      const page = snap.docs.map((d) => {
-        const data = d.data();
-        return { id: d.id, ...data };
-      });
+      const page = snap.docs.map((d) => ({
+        id: d.id,
+        ...d.data(),
+      }));
 
-      const nxt = snap.docs[snap.docs.length - 1] || null;
+      const cursor = snap.docs[snap.docs.length - 1] || null;
 
       setPages((prev) => (reset ? [page] : [...prev, page]));
-      setNextCursor(nxt);
-      setHasMore(!!nxt);
+      setNextCursor(cursor);
+      setHasMore(!!cursor);
 
-      // update loaded ids
       setTimeout(() => {
-        const s = new Set(reset ? [] : Array.from(loadedIdsRef.current));
-        page.forEach((r) => s.add(r.id));
-        loadedIdsRef.current = s;
+        const nextLoaded = new Set(reset ? [] : Array.from(loadedIdsRef.current));
+        page.forEach((row) => nextLoaded.add(row.id));
+        loadedIdsRef.current = nextLoaded;
       }, 0);
+    } catch (err) {
+      console.error('Failed to load endorsement applications:', err);
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    loadPage(true); // initial
+    loadPage(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Live updates: listen to collection and patch ONLY loaded ids.
   useEffect(() => {
     const unsub = onSnapshot(collection(db, 'endorsement_applications'), (snap) => {
-      const loaded = loadedIdsRef.current;
-      if (!loaded || loaded.size === 0) return;
+      const loadedIds = loadedIdsRef.current;
+      if (!loadedIds || loadedIds.size === 0) return;
 
-      const patch = new Map();
+      const patchMap = new Map();
+
       snap.forEach((d) => {
-        if (loaded.has(d.id)) patch.set(d.id, { id: d.id, ...d.data() });
+        if (loadedIds.has(d.id)) {
+          patchMap.set(d.id, { id: d.id, ...d.data() });
+        }
       });
 
-      if (patch.size === 0) return;
+      if (patchMap.size === 0) return;
 
       setPages((prev) => {
-        const flat = prev.flat().map((r) => (patch.has(r.id) ? patch.get(r.id) : r));
-        return chunk(flat);
+        const flat = prev.flat().map((row) => (patchMap.has(row.id) ? patchMap.get(row.id) : row));
+        return chunkRows(flat);
       });
 
-      // if modal is open, patch it too
       setSelected((prev) => {
         if (!prev) return prev;
-        const updated = patch.get(prev.id);
+        const updated = patchMap.get(prev.id);
         return updated ? { id: prev.id, data: updated } : prev;
       });
     });
@@ -117,35 +173,37 @@ const ManageEndorsementApplications = ({ onClose }) => {
   const allRows = useMemo(() => pages.flat(), [pages]);
 
   const visibleRows = useMemo(() => {
-    const s = (filters.search || '').trim().toLowerCase();
+    const search = filters.search.trim().toLowerCase();
 
     return allRows
-      .filter((r) => filters.status.has(String(r.status || 'inProgress')))
-      .filter((r) => {
-        if (!s) return true;
-        const hay = [
-          r.fullName,
-          r.stageName,
-          r.city,
-          r.state,
-          r.country,
-          r.email,
-          r.phone,
-          r.instagram,
-          r.tiktok,
-          r.youtube,
-          r.website,
-          r.bands,
-          r.endorsementGoals,
-          r.whyOber,
-          r.mediaLinks,
+      .filter((row) => filters.status.has(normalizeStatus(row.status)))
+      .filter((row) => {
+        if (!search) return true;
+
+        const haystack = [
+          row.fullName,
+          row.stageName,
+          row.city,
+          row.state,
+          row.country,
+          row.email,
+          row.phone,
+          row.instagram,
+          row.tiktok,
+          row.youtube,
+          row.website,
+          row.bands,
+          row.endorsementGoals,
+          row.whyOber,
+          row.mediaLinks,
         ]
           .filter(Boolean)
           .join(' ')
           .toLowerCase();
 
-        return hay.includes(s);
-      });
+        return haystack.includes(search);
+      })
+      .sort((a, b) => getCreatedAtMs(b.createdAt) - getCreatedAtMs(a.createdAt));
   }, [allRows, filters]);
 
   const quickSetStatus = async (row, newStatus) => {
@@ -156,171 +214,245 @@ const ManageEndorsementApplications = ({ onClose }) => {
           newStatus === 'new'
             ? 'new'
             : newStatus === 'completed'
-            ? 'completed'
-            : 'inProgress',
+              ? 'completed'
+              : 'inProgress',
         updatedAt: serverTimestamp(),
       });
-    } catch (e) {
-      console.error('Failed to update status', e);
+    } catch (err) {
+      console.error('Failed to update endorsement application status:', err);
     }
   };
 
-  const attachmentUrl = (r) => {
-    // Normalize whatever shape you used historically:
-    // - attachment: { url }
-    // - url + hasAttachment
-    // - attachmentUrl
-    return (
-      r?.attachment?.url ||
-      r?.attachmentUrl ||
-      (r?.hasAttachment && r?.url ? r.url : '') ||
-      ''
-    );
-  };
+  const counts = useMemo(() => {
+    const total = allRows.length;
+    const newCount = allRows.filter((r) => normalizeStatus(r.status) === 'new').length;
+    const inProgressCount = allRows.filter(
+      (r) => normalizeStatus(r.status) === 'inProgress'
+    ).length;
+    const completedCount = allRows.filter(
+      (r) => normalizeStatus(r.status) === 'completed'
+    ).length;
+
+    return { total, newCount, inProgressCount, completedCount };
+  }, [allRows]);
 
   return (
-    <Portal>
-      <div className="eamgr__backdrop">
-        <div className="eamgr">
-          <div className="eamgr__topbar">
-            <h2>Manage Endorsement Applications</h2>
-            <div className="eamgr__actions">
-              <input
-                placeholder="Search name, band, socials…"
-                value={filters.search}
-                onChange={(e) => setFilters((f) => ({ ...f, search: e.target.value }))}
-              />
-              <button className="btn btn--ghost" onClick={onClose}>
-                Close
-              </button>
-            </div>
-          </div>
-
-          <div className="eamgr__filters">
-            <div className="chip-row">
-              {['new', 'inProgress', 'completed'].map((k) => {
-                const active = filters.status.has(k);
-                const label =
-                  k === 'new' ? 'New' : k === 'inProgress' ? 'In Progress' : 'Completed';
-
-                return (
-                  <button
-                    key={k}
-                    className={`chip ${active ? 'chip--on' : ''}`}
-                    onClick={() => {
-                      setFilters((f) => {
-                        const s = new Set(f.status);
-                        if (s.has(k)) s.delete(k);
-                        else s.add(k);
-                        return { ...f, status: s };
-                      });
-                    }}
-                  >
-                    {label}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          <div className="eamgr__table">
-            <div className="ea-table__head">
-              <div>Name</div>
-              <div>City</div>
-              <div>Bands</div>
-              <div>Instagram</div>
-              <div>Attachment</div>
-              <div>Status</div>
-              <div>Actions</div>
-            </div>
-
-            {visibleRows.map((r) => {
-              const ig = String(r.instagram || '').replace(/^@/, '').trim();
-              const url = attachmentUrl(r);
-
-              return (
-                <div className="ea-table__row" key={r.id}>
-                  <div className="ea-table__cell">
-                    <div className="ea-name">
-                      <div className="ea-name__top">{r.fullName || '—'}</div>
-                      <div className="ea-name__sub">
-                        {[r.stageName, r.email, r.phone].filter(Boolean).join(' • ') || '—'}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="ea-table__cell">
-                    {[r.city, r.state, r.country].filter(Boolean).join(', ') || '—'}
-                  </div>
-
-                  <div className="ea-table__cell">{r.bands || '—'}</div>
-
-                  <div className="ea-table__cell">
-                    {ig ? (
-                      <a href={`https://instagram.com/${ig}`} target="_blank" rel="noreferrer">
-                        @{ig}
-                      </a>
-                    ) : (
-                      '—'
-                    )}
-                  </div>
-
-                  <div className="ea-table__cell">
-                    {url ? (
-                      <a href={url} target="_blank" rel="noreferrer">
-                        View file
-                      </a>
-                    ) : (
-                      '—'
-                    )}
-                  </div>
-
-                  <div className="ea-table__cell">
-                    <select
-                      value={r.status || 'inProgress'}
-                      onChange={(e) => quickSetStatus(r, e.target.value)}
-                    >
-                      <option value="new">New</option>
-                      <option value="inProgress">In Progress</option>
-                      <option value="completed">Completed</option>
-                    </select>
-                  </div>
-
-                  <div className="ea-table__cell">
-                    <button
-                      className="btn btn--sm"
-                      onClick={() => setSelected({ id: r.id, data: r })}
-                    >
-                      Open
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
-
-            {visibleRows.length === 0 && <div className="ea-empty">No results.</div>}
-          </div>
-
-          <div className="eamgr__pager">
-            <button
-              className="btn btn--ghost"
-              disabled={loading || !hasMore}
-              onClick={() => loadPage(false)}
-            >
-              {loading ? 'Loading…' : hasMore ? 'Load more' : 'No more'}
-            </button>
-          </div>
+    <div className="endorsements-v2">
+      <div className="endorsements-v2__header">
+        <div className="endorsements-v2__header-copy">
+          <div className="endorsements-v2__eyebrow">Admin Workspace</div>
+          <h2>Manage Endorsement Applications</h2>
+          <p>
+            Review inbound artist applications, track status, scan social presence,
+            and open each submission for full detail review.
+          </p>
         </div>
 
-        {selected && (
-          <EndorsementApplicationModal
-            value={selected.data}
-            appId={selected.id}
-            onClose={() => setSelected(null)}
-          />
-        )}
+        <div className="endorsements-v2__summary">
+          <div className="endorsements-v2__pill endorsements-v2__pill--neutral">
+            Total: {counts.total}
+          </div>
+          <div className="endorsements-v2__pill endorsements-v2__pill--new">
+            New: {counts.newCount}
+          </div>
+          <div className="endorsements-v2__pill endorsements-v2__pill--progress">
+            In Progress: {counts.inProgressCount}
+          </div>
+          <div className="endorsements-v2__pill endorsements-v2__pill--completed">
+            Completed: {counts.completedCount}
+          </div>
+        </div>
       </div>
-    </Portal>
+
+      <div className="endorsements-v2__toolbar">
+        <div className="endorsements-v2__search">
+          <label htmlFor="endorsement-search">Search</label>
+          <input
+            id="endorsement-search"
+            placeholder="Search name, band, city, socials, goals…"
+            value={filters.search}
+            onChange={(e) =>
+              setFilters((prev) => ({
+                ...prev,
+                search: e.target.value,
+              }))
+            }
+          />
+        </div>
+
+        <div className="endorsements-v2__chips">
+          {['new', 'inProgress', 'completed'].map((key) => {
+            const active = filters.status.has(key);
+            return (
+              <button
+                key={key}
+                type="button"
+                className={`endorsements-v2__chip ${active ? 'is-active' : ''}`}
+                onClick={() => {
+                  setFilters((prev) => {
+                    const next = new Set(prev.status);
+                    if (next.has(key)) next.delete(key);
+                    else next.add(key);
+                    return { ...prev, status: next };
+                  });
+                }}
+              >
+                {statusLabel(key)}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="endorsements-v2__table-shell">
+        <div className="endorsements-v2__table-scroll">
+          <table className="endorsements-v2__table">
+            <thead>
+              <tr>
+                <th>Applicant</th>
+                <th>Location</th>
+                <th>Bands / Projects</th>
+                <th>Instagram</th>
+                <th>Submitted</th>
+                <th>Attachment</th>
+                <th>Status</th>
+                <th>Open</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {visibleRows.length === 0 ? (
+                <tr>
+                  <td colSpan="8" className="endorsements-v2__empty">
+                    No endorsement applications matched your current filters.
+                  </td>
+                </tr>
+              ) : (
+                visibleRows.map((row) => {
+                  const ig = String(row.instagram || '').replace(/^@/, '').trim();
+                  const fileUrl = attachmentUrl(row);
+                  const normalized = normalizeStatus(row.status);
+
+                  return (
+                    <tr
+                      key={row.id}
+                      className={`endorsements-v2__row status-${statusClass(normalized)}`}
+                    >
+                      <td>
+                        <div className="endorsements-v2__primary">
+                          <div className="endorsements-v2__primary-title">
+                            {row.fullName || '—'}
+                          </div>
+                          <div className="endorsements-v2__primary-meta">
+                            {[row.stageName, row.email, row.phone]
+                              .filter(Boolean)
+                              .join(' • ') || '—'}
+                          </div>
+                          <div className="endorsements-v2__row-id">
+                            ID: <code>{row.id}</code>
+                          </div>
+                        </div>
+                      </td>
+
+                      <td>
+                        {[row.city, row.state, row.country].filter(Boolean).join(', ') || '—'}
+                      </td>
+
+                      <td className="endorsements-v2__bands-cell">
+                        {row.bands || '—'}
+                      </td>
+
+                      <td>
+                        {ig ? (
+                          <a
+                            href={`https://instagram.com/${ig}`}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="endorsements-v2__link"
+                          >
+                            @{ig}
+                          </a>
+                        ) : (
+                          '—'
+                        )}
+                      </td>
+
+                      <td>{formatDate(row.createdAt)}</td>
+
+                      <td>
+                        {fileUrl ? (
+                          <a
+                            href={fileUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="endorsements-v2__link"
+                          >
+                            View file
+                          </a>
+                        ) : (
+                          '—'
+                        )}
+                      </td>
+
+                      <td>
+                        <div className="endorsements-v2__status-stack">
+                          <span
+                            className={`endorsements-v2__status-pill status-${statusClass(
+                              normalized
+                            )}`}
+                          >
+                            {statusLabel(normalized)}
+                          </span>
+{/* 
+                          <select
+                            value={normalized}
+                            onChange={(e) => quickSetStatus(row, e.target.value)}
+                            className="endorsements-v2__status-select"
+                          >
+                            <option value="new">New</option>
+                            <option value="inProgress">In Progress</option>
+                            <option value="completed">Completed</option>
+                          </select> */}
+                        </div>
+                      </td>
+
+                      <td>
+                        <button
+                          type="button"
+                          className="endorsements-v2__open-btn"
+                          onClick={() => setSelected({ id: row.id, data: row })}
+                        >
+                          Open
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div className="endorsements-v2__footer">
+        <button
+          type="button"
+          className="endorsements-v2__loadmore"
+          disabled={loading || !hasMore}
+          onClick={() => loadPage(false)}
+        >
+          {loading ? 'Loading…' : hasMore ? 'Load more applications' : 'No more applications'}
+        </button>
+      </div>
+
+      {selected && (
+        <EndorsementApplicationModal
+          value={selected.data}
+          appId={selected.id}
+          onClose={() => setSelected(null)}
+        />
+      )}
+    </div>
   );
 };
 
