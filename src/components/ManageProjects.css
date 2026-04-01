@@ -18,7 +18,9 @@
 }
 
 .mpv2-header-copy {
-  max-width: 760px;
+    max-width: 760px;
+  width: 100%;
+  text-align: center;
 }
 
 .mpv2-eyebrow {

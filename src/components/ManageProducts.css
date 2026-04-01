@@ -44,6 +44,14 @@
 
 .manage-products-hero__copy {
   max-width: 760px;
+  width: 100%;
+  text-align: center;
+}
+
+.manage-products-hero h2,
+.manage-products-hero p,
+.manage-products-eyebrow {
+  text-align: center;
 }
 
 .manage-products-eyebrow {
@@ -543,63 +551,77 @@
    ========================================================= */
 
 .manage-products-page select,
-.manage-products-page input[type='number'],
+.manage-products-page input[type="number"],
 .manage-products-table select,
-.manage-products-table input[type='number'],
-.manage-products-table textarea,
-.manage-products-page input[type='text'] {
+.manage-products-table input[type="number"],
+.manage-products-table textarea {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  background: #fff !important;
-  color: #111 !important;
-  -webkit-text-fill-color: #111 !important;
+  color-scheme: light !important;
+
+  background: #ffffff !important;
+  color: #111111 !important;
+  -webkit-text-fill-color: #111111 !important;
   border: 1px solid #d1d5db !important;
-  border-radius: 10px !important;
-  padding: 9px 11px !important;
+  border-radius: 12px !important;
+
+  padding: 8px 10px !important;
   font-size: 14px !important;
   line-height: 1.2;
   box-shadow: none !important;
 }
 
+.manage-products-page select:hover,
+.manage-products-page input[type="number"]:hover,
+.manage-products-table select:hover,
+.manage-products-table input[type="number"]:hover,
+.manage-products-table textarea:hover,
 .manage-products-page select:focus,
-.manage-products-page input[type='number']:focus,
+.manage-products-page input[type="number"]:focus,
 .manage-products-table select:focus,
-.manage-products-table input[type='number']:focus,
+.manage-products-table input[type="number"]:focus,
 .manage-products-table textarea:focus,
-.manage-products-page input[type='text']:focus {
+.manage-products-page select:active,
+.manage-products-page input[type="number"]:active,
+.manage-products-table select:active,
+.manage-products-table input[type="number"]:active,
+.manage-products-table textarea:active {
+  background: #ffffff !important;
+  color: #111111 !important;
+  -webkit-text-fill-color: #111111 !important;
   outline: none;
   border-color: #94a3b8 !important;
-  box-shadow: 0 0 0 4px rgba(148, 163, 184, 0.14) !important;
+  box-shadow: 0 0 0 3px rgba(148, 163, 184, 0.14) !important;
 }
 
-.manage-products-table td select {
-  min-width: 120px;
-}
-
-.manage-products-table input[type='number'] {
-  width: 92px;
-  text-align: center;
-}
-
-.manage-products-table input[type='number']::-webkit-outer-spin-button,
-.manage-products-table input[type='number']::-webkit-inner-spin-button {
+.manage-products-page input[type="number"]::-webkit-outer-spin-button,
+.manage-products-page input[type="number"]::-webkit-inner-spin-button,
+.manage-products-table input[type="number"]::-webkit-outer-spin-button,
+.manage-products-table input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-.manage-products-page,
-.manage-products-page * {
-  color-scheme: light;
+.manage-products-page input[type="number"]:-webkit-autofill,
+.manage-products-page input[type="number"]:-webkit-autofill:hover,
+.manage-products-page input[type="number"]:-webkit-autofill:focus,
+.manage-products-table input[type="number"]:-webkit-autofill,
+.manage-products-table input[type="number"]:-webkit-autofill:hover,
+.manage-products-table input[type="number"]:-webkit-autofill:focus {
+  -webkit-text-fill-color: #111111 !important;
+  -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+  transition: background-color 9999s ease-out 0s;
 }
 
-.manage-products-page select,
-.manage-products-page select option,
-.manage-products-table select,
-.manage-products-table select option {
-  background-color: #ffffff !important;
-  color: #111827 !important;
+.manage-products-table input[type="number"] {
+  width: 82px;
+  text-align: center;
+  background: #ffffff !important;
+  color: #111111 !important;
+  -webkit-text-fill-color: #111111 !important;
 }
+
 
 /* =========================================================
    Responsive
@@ -634,6 +656,10 @@
   .manage-products-filter-group--search {
     min-width: 100%;
     max-width: 100%;
+  }
+
+  .manage-products-filter-group--search {
+    flex: 0 0 auto;
   }
 }
 

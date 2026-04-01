@@ -1,197 +1,496 @@
-/* ================ General Modal Styles ================ */
-.modal-overlay {
+/* =========================================================
+   ViewOrderModal.css — Order modal polish pass
+   ========================================================= */
+
+.orderview-modal-overlay {
   position: fixed;
   inset: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,.5);
+  background: rgba(7, 10, 18, 0.58);
+  backdrop-filter: blur(6px);
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  padding: 24px;
   z-index: 3999;
 }
 
-.modal-content {
-  background: #fff;
-  padding: 20px 30px;
-  border-radius: 8px;
-  width: 90%;
-  max-width: 800px;
-  max-height: 90%;
-  overflow-y: auto;
-  box-shadow: 0 4px 6px rgba(0,0,0,.1);
+.orderview-modal {
   position: relative;
+  width: min(1180px, 94vw);
+  max-height: 92vh;
+  overflow-y: auto;
+  padding: 24px;
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.985), rgba(250, 250, 252, 0.985));
+  border: 1px solid #e5e7eb;
+  box-shadow:
+    0 28px 70px rgba(15, 23, 42, 0.22),
+    0 10px 24px rgba(15, 23, 42, 0.12);
+  color: #111827;
 }
 
-.modal-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 20px;
-  text-align: center;
-  color: #333;
-}
-
-.modal-close.icon-btn {
+.orderview-close-btn {
   position: absolute;
-  right: 10px;
-  top: 10px;
-  height: 34px;
-  width: 34px;
-  border-radius: 8px;
-  border: 1px solid transparent;
-  background: #f5f5f7;
-  color: #222;
+  top: 16px;
+  right: 16px;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: 1px solid #d7dce5;
+  background: #ffffff;
+  color: #1f2937;
+  font-size: 18px;
   cursor: pointer;
   display: grid;
   place-items: center;
+  transition: background 0.16s ease, border-color 0.16s ease, transform 0.04s ease;
 }
-.modal-close.icon-btn:hover { background: #eee; }
-.modal-close.icon-btn:focus-visible { outline: 2px solid #3b82f6; outline-offset: 2px; }
 
-.order-close-btn {
-  margin-top: 20px;
-  background-color: #3498db;
-  color: #fff;
-  padding: 10px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 1rem;
-  text-align: center;
-  display: block;
-  width: 100%;
+.orderview-close-btn:hover {
+  background: #f8fafc;
+  border-color: #c6cfdb;
 }
-.order-close-btn:hover { background-color: #2980b9; }
 
-/* ================ Details + Sections ================ */
-.compact-order-details {
+.orderview-close-btn:active {
+  transform: translateY(1px);
+}
+
+.orderview-header {
+  padding-right: 56px;
+  margin-bottom: 20px;
+}
+
+.orderview-eyebrow {
+  margin-bottom: 8px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #6b7280;
+}
+
+.orderview-title {
+  margin: 0 0 10px;
+  font-size: 1.8rem;
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #111827;
+}
+
+.orderview-summary-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.orderview-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-size: 0.82rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.orderview-pill--id {
+  background: #f3f4f6;
+  border-color: #d1d5db;
+  color: #374151;
+}
+
+.orderview-pill--new {
+  background: #eef2ff;
+  border-color: #c7d2fe;
+  color: #3730a3;
+}
+
+.orderview-pill--progress {
+  background: #fff7df;
+  border-color: #f5d86e;
+  color: #8a6b06;
+}
+
+.orderview-pill--complete {
+  background: #dcfce7;
+  border-color: #86efac;
+  color: #166534;
+}
+
+.orderview-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 6px 16px;
-  margin-bottom: 12px;
-}
-.detail-row { font-size: .95rem; color: #333; }
-.detail-row strong { color: #111; }
-
-.section-title {
-  font-size: 1.05rem;
-  font-weight: 700;
-  margin: 18px 0 10px;
-  color: #111;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
 }
 
-/* ================ Tables ================ */
-.data-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 14px;
-}
-.data-table th,
-.data-table td {
+.orderview-card {
+  background: #ffffff;
   border: 1px solid #e5e7eb;
-  padding: 10px;
-  text-align: left;
+  border-radius: 20px;
+  padding: 18px;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.05);
 }
-.data-table th {
-  background-color: #f9fafb;
+
+.orderview-card--full {
+  margin-bottom: 16px;
+}
+
+.orderview-card-title {
+  margin: 0 0 14px;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #111827;
+}
+
+.orderview-kv {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 10px;
+  align-items: start;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f2f6;
+}
+
+.orderview-kv:last-child {
+  border-bottom: none;
+}
+
+.orderview-k {
+  font-size: 0.84rem;
   font-weight: 700;
-  color: #111827;
+  color: #6b7280;
 }
-.data-table td { font-size: .92rem; color: #374151; }
 
-.order-details-table .product-cell .product-name-modal {
+.orderview-v {
+  font-size: 0.95rem;
+  color: #111827;
+  line-height: 1.5;
+}
+
+.orderview-field-block + .orderview-field-block {
+  margin-top: 14px;
+}
+
+.orderview-label {
   display: block;
-  margin-bottom: 2px;
+  margin-bottom: 7px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: #374151;
 }
-.muted { color: #6b7280; font-size: .88rem; }
 
-/* ================ Status Select ================ */
-.status-select {
+.orderview-inline-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.orderview-inline-row--stack-mobile {
+  align-items: stretch;
+}
+
+.orderview-input,
+.orderview-select,
+.orderview-textarea {
   width: 100%;
-  padding: 8px 10px;
-  border-radius: 8px;
   border: 1px solid #d1d5db;
-  background: #fff;
+  background: #ffffff;
+  color: #111827;
+  border-radius: 12px;
+  box-shadow: none;
+}
+
+.orderview-input,
+.orderview-select {
+  height: 42px;
+  padding: 0 12px;
+  font-size: 0.94rem;
+}
+
+.orderview-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.orderview-textarea {
+  min-height: 108px;
+  padding: 12px 14px;
+  font-size: 0.94rem;
+  resize: vertical;
+  margin: 10px 0 12px;
+}
+
+.orderview-input:focus,
+.orderview-select:focus,
+.orderview-textarea:focus {
+  outline: none;
+  border-color: #94a3b8;
+  box-shadow: 0 0 0 4px rgba(148, 163, 184, 0.14);
+}
+
+.orderview-divider {
+  height: 1px;
+  background: #eef2f7;
+  margin: 16px 0;
+}
+
+.orderview-assigned-user {
+  margin-bottom: 12px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+  background: #f8fafc;
+}
+
+.orderview-assigned-user__name {
+  font-size: 0.95rem;
+  font-weight: 800;
   color: #111827;
 }
-.status-select:focus-visible {
-  outline: 2px solid #3b82f6;
-  outline-offset: 2px;
+
+.orderview-assigned-user__meta {
+  margin-top: 4px;
+  font-size: 0.82rem;
+  color: #6b7280;
+  word-break: break-word;
 }
 
-/* ================ Icon Action Button ================ */
-.actions-cell {
+.orderview-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  font-size: 0.92rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition:
+    background 0.16s ease,
+    border-color 0.16s ease,
+    transform 0.04s ease,
+    box-shadow 0.16s ease;
+}
+
+.orderview-btn:active {
+  transform: translateY(1px);
+}
+
+.orderview-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.orderview-btn--primary {
+  background: linear-gradient(135deg, #1f4fd6, #295fdc);
+  color: #ffffff;
+  box-shadow: 0 8px 18px rgba(41, 95, 220, 0.22);
+}
+
+.orderview-btn--primary:hover {
+  filter: brightness(1.03);
+}
+
+.orderview-btn--ghost {
+  background: #ffffff;
+  border-color: #d1d5db;
+  color: #111827;
+}
+
+.orderview-btn--ghost:hover {
+  background: #f8fafc;
+}
+
+.orderview-btn--footer {
+  width: 100%;
+  margin-top: 4px;
+  background: #111827;
+  color: #ffffff;
+  box-shadow: 0 10px 22px rgba(17, 24, 39, 0.18);
+}
+
+.orderview-btn--footer:hover {
+  filter: brightness(1.04);
+}
+
+.orderview-table-shell {
+  overflow-x: auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+}
+
+.orderview-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  min-width: 760px;
+}
+
+.orderview-table th,
+.orderview-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #eef2f7;
+  text-align: left;
+  font-size: 0.92rem;
+  color: #111827;
+  vertical-align: middle;
+}
+
+.orderview-table th {
+  background: #f8fafc;
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #374151;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.orderview-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.orderview-product-cell {
+  min-width: 280px;
+}
+
+.orderview-product-name {
+  display: block;
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 3px;
+}
+
+.orderview-actions-cell {
   text-align: center;
 }
 
-.icon-action-btn {
-  height: 36px;
-  width: 36px;
-  min-width: 36px;
-  border-radius: 10px;
-  border: 1px solid #e5e7eb;
-  background: #f9fafb;
+.orderview-icon-btn {
+  height: 38px;
+  width: 38px;
+  min-width: 38px;
+  border-radius: 12px;
+  border: 1px solid #dbe2ea;
+  background: #ffffff;
   color: #111827;
   display: inline-grid;
   place-items: center;
   cursor: pointer;
-  transition: background .15s ease, border-color .15s ease, transform .06s ease;
+  transition:
+    background 0.16s ease,
+    border-color 0.16s ease,
+    transform 0.04s ease,
+    box-shadow 0.16s ease;
 }
-.icon-action-btn:hover {
-  background: #eef2ff;           /* subtle indigo tint */
+
+.orderview-icon-btn:hover {
+  background: #eef2ff;
   border-color: #c7d2fe;
-}
-.icon-action-btn:active { transform: translateY(1px); }
-.icon-action-btn:focus-visible {
-  outline: 2px solid #3b82f6;
-  outline-offset: 2px;
+  box-shadow: 0 6px 14px rgba(99, 102, 241, 0.12);
 }
 
-/* ================ Notes / Inputs ================ */
-.note-input {
-  width: 100%;
-  min-height: 90px;
-  padding: 10px 12px;
-  border-radius: 8px;
-  border: 1px solid #d1d5db;
-  margin: 6px 0 10px;
-  resize: vertical;
+.orderview-icon-btn:active {
+  transform: translateY(1px);
 }
-.add-note-btn {
-  background: #111827;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 14px;
-  cursor: pointer;
-}
-.add-note-btn:hover { background: #0b1220; }
 
-/* ================ Related Projects ================ */
-.related-list {
+.orderview-chip-list {
   list-style: none;
   padding: 0;
-  margin: 0 0 10px;
+  margin: 0;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
 }
-.project-chip {
+
+.orderview-chip {
   border: 1px solid #d1d5db;
-  background: #fff;
+  background: #ffffff;
   color: #111827;
-  padding: 6px 10px;
+  padding: 7px 12px;
   border-radius: 999px;
   cursor: pointer;
-  margin-left: 20px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  transition: background 0.16s ease, border-color 0.16s ease;
 }
-.project-chip:hover { background: #f3f4f6; }
 
-/* ================ History ================ */
-.history-log { margin-top: 14px; }
+.orderview-chip:hover {
+  background: #f8fafc;
+  border-color: #bfc7d4;
+}
 
-/* ================ Responsive ================ */
-@media (max-width: 768px) {
-  .modal-content { width: 95%; padding: 15px; }
-  .compact-order-details { grid-template-columns: 1fr; }
+.orderview-notes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.orderview-note {
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+}
+
+.orderview-note__meta {
+  margin-bottom: 6px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #6b7280;
+}
+
+.orderview-note__text {
+  font-size: 0.92rem;
+  color: #111827;
+  line-height: 1.5;
+}
+
+.orderview-muted {
+  color: #6b7280;
+  font-size: 0.89rem;
+}
+
+@media (max-width: 900px) {
+  .orderview-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .orderview-modal-overlay {
+    padding: 12px;
+  }
+
+  .orderview-modal {
+    width: 100%;
+    max-height: 94vh;
+    padding: 16px;
+    border-radius: 18px;
+  }
+
+  .orderview-title {
+    font-size: 1.45rem;
+  }
+
+  .orderview-kv {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .orderview-inline-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .orderview-btn {
+    width: 100%;
+  }
 }
