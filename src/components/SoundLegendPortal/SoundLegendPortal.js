@@ -6,8 +6,6 @@ import {
   where,
   doc,
   getDoc,
-  setDoc,
-  serverTimestamp,
 } from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
 import { useAuth } from '../../context/AuthContext';
@@ -41,8 +39,6 @@ function tsToMillis(v) {
 }
 
 const normalizeEmail = (value) => String(value || '').trim().toLowerCase();
-
-const normalizePhone = (value) => String(value || '').replace(/\D/g, '');
 
 const STORY_CHAPTER_KEYS = [
   'discoveryDesign',
@@ -216,6 +212,33 @@ const Tabs = ({
   );
 };
 
+const extractProjectIdsFromUser = (portalUser) => {
+  const raw = [
+    ...(Array.isArray(portalUser?.projects) ? portalUser.projects : []),
+    ...(Array.isArray(portalUser?.projectIds) ? portalUser.projectIds : []),
+    ...(Array.isArray(portalUser?.assignedProjectIds)
+      ? portalUser.assignedProjectIds
+      : []),
+    portalUser?.activeProjectId,
+    portalUser?.projectId,
+    portalUser?.linkedProjectId,
+    portalUser?.latestProjectId,
+  ].filter(Boolean);
+
+  return Array.from(
+    new Set(
+      raw
+        .map((entry) =>
+          typeof entry === 'string'
+            ? entry
+            : entry?.projectId || entry?.id || entry?.projectID || ''
+        )
+        .map((v) => String(v).trim())
+        .filter(Boolean)
+    )
+  );
+};
+
 const SoundLegendPortal = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -333,9 +356,10 @@ const SoundLegendPortal = () => {
               ...data,
               email: data.email || impersonateEmail || '',
               fullName:
-                data.firstName || data.lastName
-                  ? `${data.firstName || ''} ${data.lastName || ''}`.trim()
-                  : data.fullName || impersonateName || '',
+                data.fullName ||
+                [data.firstName || '', data.lastName || ''].join(' ').trim() ||
+                impersonateName ||
+                '',
             });
           } else {
             setEffectivePortalUser(portalUser || null);
@@ -391,317 +415,121 @@ const SoundLegendPortal = () => {
   const [orders, setOrders] = useState([]);
   const [tab, setTab] = useState('progress');
 
-useEffect(() => {
-  if (!effectivePortalUser || loadingEffectiveUser) return;
+  useEffect(() => {
+    if (!effectivePortalUser || loadingEffectiveUser) return;
 
-  let cancelled = false;
+    let cancelled = false;
 
-  const run = async () => {
-    setLoading(true);
-
-    try {
-      const rawUserUid = String(
-        effectivePortalUser?.uid || effectivePortalUser?.id || ''
-      ).trim();
-
-      const rawUserEmail = String(effectivePortalUser?.email || '').trim();
-      const userUid = rawUserUid;
-      const userEmail = normalizeEmail(rawUserEmail);
-      const colRef = collection(db, 'projects');
-
-      let seededProject = null;
-      let seededFromUserProjects = [];
-
-      if (projectIdFromQuery) {
-        try {
-          const pRef = doc(db, 'projects', projectIdFromQuery);
-          const pSnap = await getDoc(pRef);
-          if (pSnap.exists()) {
-            seededProject = { id: pSnap.id, ...pSnap.data() };
-          }
-        } catch (e) {
-          console.warn('Failed to fetch project by query param:', e);
-        }
-      }
-
-      const userProjectRefs = Array.isArray(effectivePortalUser?.projects)
-        ? effectivePortalUser.projects
-        : [];
-
-      if (userProjectRefs.length > 0) {
-        const fetchedFromUser = await Promise.all(
-          userProjectRefs.map(async (entry) => {
-            try {
-              const projectRefId =
-                typeof entry === 'string'
-                  ? entry
-                  : entry?.projectId || entry?.id || entry?.projectID || '';
-
-              if (!projectRefId) return null;
-
-              const pRef = doc(db, 'projects', projectRefId);
-              const pSnap = await getDoc(pRef);
-
-              if (!pSnap.exists()) return null;
-              return { id: pSnap.id, ...pSnap.data() };
-            } catch (err) {
-              console.warn('Failed to fetch project from user.projects:', err);
-              return null;
-            }
-          })
-        );
-
-        seededFromUserProjects = fetchedFromUser.filter(Boolean);
-      }
-
-      const matches = new Map();
-
-      const addProjects = (items = []) => {
-        items.forEach((p) => {
-          if (p?.id) {
-            matches.set(String(p.id), p);
-          }
-        });
-      };
-
-      addProjects(seededProject ? [seededProject] : []);
-      addProjects(seededFromUserProjects);
-
-      const tryQuery = async (constraint) => {
-        try {
-          const snap = await getDocs(query(colRef, constraint));
-          const list = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
-          addProjects(list);
-        } catch (err) {
-          console.warn('Project query skipped/failed:', err);
-        }
-      };
-
-      if (userUid) {
-        await tryQuery(where('ownerUid', '==', userUid));
-        await tryQuery(where('userId', '==', userUid));
-        await tryQuery(where('customerUserId', '==', userUid));
-        await tryQuery(where('customer.uid', '==', userUid));
-      }
-
-      if (rawUserEmail) {
-        await tryQuery(where('customer.email', '==', rawUserEmail));
-        await tryQuery(where('customerEmail', '==', rawUserEmail));
-      }
-
-      if (userEmail) {
-        await tryQuery(where('customer.emailLower', '==', userEmail));
-        await tryQuery(where('customerEmailLower', '==', userEmail));
-      }
+    const run = async () => {
+      setLoading(true);
 
       try {
-        const allSnap = await getDocs(colRef);
-        const allProjects = allSnap.docs.map((d) => ({
-          id: d.id,
-          ...d.data(),
-        }));
+        const allowedProjectIds = extractProjectIdsFromUser(effectivePortalUser);
+        const matches = new Map();
 
-        const listedProjectIds = Array.isArray(effectivePortalUser?.projects)
-          ? effectivePortalUser.projects
-              .map((entry) =>
-                typeof entry === 'string'
-                  ? entry
-                  : entry?.projectId || entry?.id || entry?.projectID || ''
-              )
-              .filter(Boolean)
-              .map(String)
-          : [];
+        const addProject = (project) => {
+          if (!project?.id) return;
+          matches.set(String(project.id), project);
+        };
 
-        const normalizedUserPhone = normalizePhone(
-          effectivePortalUser?.phone ||
-            effectivePortalUser?.customerPhone ||
-            ''
-        );
-
-        const normalizedUserName = String(
-          effectivePortalUser?.fullName ||
-            effectivePortalUser?.name ||
-            [
-              effectivePortalUser?.firstName || '',
-              effectivePortalUser?.lastName || '',
-            ]
-              .join(' ')
-              .trim()
-        )
-          .trim()
-          .toLowerCase();
-
-        const filtered = allProjects.filter((p) => {
-          const projectId = String(p?.id || '').trim();
-
-          const projectOwnerUid = String(
-            p?.ownerUid ||
-              p?.userId ||
-              p?.customerUserId ||
-              p?.customer?.uid ||
-              ''
-          ).trim();
-
-          const projectEmailRaw = String(
-            p?.customer?.email || p?.customerEmail || ''
-          ).trim();
-
-          const projectEmailNormalized = normalizeEmail(
-            p?.customer?.emailLower ||
-              p?.customerEmailLower ||
-              projectEmailRaw
-          );
-
-          const projectPhoneNormalized = normalizePhone(
-            p?.customer?.phone ||
-              p?.customerPhone ||
-              ''
-          );
-
-          const projectNameNormalized = String(
-            p?.customer?.name ||
-              p?.customerName ||
-              ''
-          )
-            .trim()
-            .toLowerCase();
-
-          const projectIdMatch =
-            !!projectId && listedProjectIds.includes(projectId);
-
-          const uidMatch =
-            !!userUid && !!projectOwnerUid && projectOwnerUid === userUid;
-
-          const rawEmailMatch =
-            !!rawUserEmail &&
-            !!projectEmailRaw &&
-            projectEmailRaw === rawUserEmail;
-
-          const normalizedEmailMatch =
-            !!userEmail &&
-            !!projectEmailNormalized &&
-            projectEmailNormalized === userEmail;
-
-          const phoneMatch =
-            !!normalizedUserPhone &&
-            !!projectPhoneNormalized &&
-            normalizedUserPhone === projectPhoneNormalized;
-
-          const nameMatch =
-            !!normalizedUserName &&
-            !!projectNameNormalized &&
-            normalizedUserName === projectNameNormalized;
-
-          const strongFallbackMatch =
-            phoneMatch || (nameMatch && phoneMatch);
-
-          return (
-            projectIdMatch ||
-            uidMatch ||
-            rawEmailMatch ||
-            normalizedEmailMatch ||
-            strongFallbackMatch
-          );
-        });
-
-        addProjects(filtered);
-      } catch (scanErr) {
-        console.warn('Full projects scan fallback failed:', scanErr);
-      }
-
-      const list = Array.from(matches.values());
-      list.sort((a, b) => tsToMillis(b.createdAt) - tsToMillis(a.createdAt));
-
-      if (!cancelled) {
-        setProjects(list);
-
-        setSelectedId((prev) => {
+        if (projectIdFromQuery) {
           if (
-            projectIdFromQuery &&
-            list.some((p) => String(p.id) === String(projectIdFromQuery))
+            isAdmin ||
+            allowedProjectIds.includes(String(projectIdFromQuery).trim())
           ) {
-            return projectIdFromQuery;
+            try {
+              const pRef = doc(db, 'projects', projectIdFromQuery);
+              const pSnap = await getDoc(pRef);
+              if (pSnap.exists()) {
+                addProject({ id: pSnap.id, ...pSnap.data() });
+              }
+            } catch (e) {
+              console.warn('Failed to fetch project by query param:', e);
+            }
           }
+        }
 
-          if (prev && list.some((p) => String(p.id) === String(prev))) {
-            return prev;
+        for (const projectId of allowedProjectIds) {
+          try {
+            const pRef = doc(db, 'projects', projectId);
+            const pSnap = await getDoc(pRef);
+            if (pSnap.exists()) {
+              addProject({ id: pSnap.id, ...pSnap.data() });
+            }
+          } catch (err) {
+            console.warn('Failed to fetch allowed project:', err);
           }
+        }
 
-          return list[0]?.id || '';
-        });
+        const list = Array.from(matches.values());
+        list.sort((a, b) => tsToMillis(b.createdAt) - tsToMillis(a.createdAt));
+
+        if (!cancelled) {
+          setProjects(list);
+
+          setSelectedId((prev) => {
+            if (
+              projectIdFromQuery &&
+              list.some((p) => String(p.id) === String(projectIdFromQuery))
+            ) {
+              return projectIdFromQuery;
+            }
+
+            if (prev && list.some((p) => String(p.id) === String(prev))) {
+              return prev;
+            }
+
+            return list[0]?.id || '';
+          });
+        }
+      } catch (e) {
+        console.error('Error loading projects', e);
+        if (!cancelled) {
+          setProjects([]);
+          setSelectedId('');
+        }
+      } finally {
+        if (!cancelled) setLoading(false);
       }
-    } catch (e) {
-      console.error('Error loading projects', e);
-      if (!cancelled) {
-        setProjects([]);
-        setSelectedId('');
-      }
-    } finally {
-      if (!cancelled) setLoading(false);
-    }
-  };
+    };
 
-  run();
+    run();
 
-  return () => {
-    cancelled = true;
-  };
-}, [effectivePortalUser, loadingEffectiveUser, projectIdFromQuery]);
+    return () => {
+      cancelled = true;
+    };
+  }, [effectivePortalUser, loadingEffectiveUser, projectIdFromQuery, isAdmin]);
 
   useEffect(() => {
-    if (!effectivePortalUser?.email || loadingEffectiveUser) return;
+    if (loadingEffectiveUser || !effectivePortalUser) return;
 
     let cancelled = false;
 
     const run = async () => {
       try {
-        const normalizedEmail = normalizeEmail(effectivePortalUser.email);
-        const orderMap = new Map();
+        const orderIds = Array.isArray(effectivePortalUser?.orderIds)
+          ? effectivePortalUser.orderIds
+              .map((v) => String(v || '').trim())
+              .filter(Boolean)
+          : [];
 
-        const addOrders = (items = []) => {
-          items.forEach((o) => {
-            if (o?.id) orderMap.set(o.id, o);
-          });
-        };
+        const items = [];
 
-        const tryOrdersQuery = async (constraint) => {
+        for (const orderId of orderIds) {
           try {
-            const snap = await getDocs(query(collection(db, 'orders'), constraint));
-            addOrders(snap.docs.map((d) => ({ id: d.id, ...d.data() })));
+            const snap = await getDoc(doc(db, 'orders', orderId));
+            if (snap.exists()) {
+              items.push({ id: snap.id, ...snap.data() });
+            }
           } catch (err) {
-            console.warn('Order query skipped/failed:', err);
-          }
-        };
-
-        await tryOrdersQuery(where('customerEmail', '==', effectivePortalUser.email));
-        await tryOrdersQuery(where('customerEmailLower', '==', normalizedEmail));
-
-        if (orderMap.size === 0) {
-          try {
-            const allSnap = await getDocs(collection(db, 'orders'));
-            const filtered = allSnap.docs
-              .map((d) => ({ id: d.id, ...d.data() }))
-              .filter((o) => {
-                const email = normalizeEmail(
-                  o?.customerEmail ||
-                    o?.customer?.email ||
-                    o?.customerEmailLower ||
-                    o?.customer?.emailLower
-                );
-                return email && email === normalizedEmail;
-              });
-
-            addOrders(filtered);
-          } catch (scanErr) {
-            console.warn('Full orders scan fallback failed:', scanErr);
+            console.warn('Order fetch skipped/failed:', err);
           }
         }
 
         if (cancelled) return;
 
-        const list = Array.from(orderMap.values());
-        list.sort((a, b) => tsToMillis(b.createdAt) - tsToMillis(a.createdAt));
-        setOrders(list);
+        items.sort((a, b) => tsToMillis(b.createdAt) - tsToMillis(a.createdAt));
+        setOrders(items);
       } catch (e) {
         console.warn('Order fetch skipped/failed', e);
         if (!cancelled) setOrders([]);
@@ -713,27 +541,27 @@ useEffect(() => {
     return () => {
       cancelled = true;
     };
-  }, [effectivePortalUser?.email, loadingEffectiveUser]);
+  }, [effectivePortalUser, loadingEffectiveUser]);
 
-const selectedProject = useMemo(() => {
-  if (!Array.isArray(projects) || projects.length === 0) return null;
+  const selectedProject = useMemo(() => {
+    if (!Array.isArray(projects) || projects.length === 0) return null;
 
-  if (selectedId) {
-    const matched = projects.find((p) => String(p.id) === String(selectedId));
-    if (matched) return matched;
-  }
+    if (selectedId) {
+      const matched = projects.find((p) => String(p.id) === String(selectedId));
+      if (matched) return matched;
+    }
 
-  return projects[0] || null;
-}, [projects, selectedId]);
+    return projects[0] || null;
+  }, [projects, selectedId]);
 
-const latestOrder = useMemo(() => (orders.length ? orders[0] : null), [orders]);
+  const latestOrder = useMemo(() => (orders.length ? orders[0] : null), [orders]);
 
-const hasProject = Array.isArray(projects) && projects.length > 0;
+  const hasProject = Array.isArray(projects) && projects.length > 0;
 
-const currentChapterIndex = useMemo(
-  () => (selectedProject ? getProjectCurrentChapterIndex(selectedProject) : 0),
-  [selectedProject]
-);
+  const currentChapterIndex = useMemo(
+    () => (selectedProject ? getProjectCurrentChapterIndex(selectedProject) : 0),
+    [selectedProject]
+  );
 
   const artisanLine = (selectedProject?.artisanLine || '').toLowerCase();
   const serialGuess = (
@@ -774,35 +602,35 @@ const currentChapterIndex = useMemo(
     return nextTabs;
   }, [hasProject, currentChapterIndex, isSoundLegendProject]);
 
-const [didAutoSelectProgress, setDidAutoSelectProgress] = useState(false);
+  const [didAutoSelectProgress, setDidAutoSelectProgress] = useState(false);
 
-useEffect(() => {
-  if (loading) return;
+  useEffect(() => {
+    if (loading) return;
 
-  const allowedKeys = tabs.map((t) => t.key);
+    const allowedKeys = tabs.map((t) => t.key);
 
-  if (!allowedKeys.length) {
-    if (tab !== 'account') {
-      setTab('account');
+    if (!allowedKeys.length) {
+      if (tab !== 'account') {
+        setTab('account');
+      }
+      return;
     }
-    return;
-  }
 
-  if (!allowedKeys.includes(tab)) {
-    setTab(allowedKeys[0] || 'account');
-    return;
-  }
+    if (!allowedKeys.includes(tab)) {
+      setTab(allowedKeys[0] || 'account');
+      return;
+    }
 
-  if (
-    !isAdmin &&
-    hasProject &&
-    !didAutoSelectProgress &&
-    allowedKeys.includes('progress')
-  ) {
-    setTab('progress');
-    setDidAutoSelectProgress(true);
-  }
-}, [tabs, tab, hasProject, isAdmin, loading, didAutoSelectProgress]);
+    if (
+      !isAdmin &&
+      hasProject &&
+      !didAutoSelectProgress &&
+      allowedKeys.includes('progress')
+    ) {
+      setTab('progress');
+      setDidAutoSelectProgress(true);
+    }
+  }, [tabs, tab, hasProject, isAdmin, loading, didAutoSelectProgress]);
 
   const handleTabChange = (nextKey) => {
     const allowedKeys = tabs.map((t) => t.key);
@@ -891,6 +719,7 @@ useEffect(() => {
                 orders={orders}
                 latestOrder={latestOrder}
                 isAdmin={isAdmin}
+                isImpersonating={effectiveIsImpersonating}
               />
             )}
           </div>
@@ -959,6 +788,7 @@ useEffect(() => {
                 orders={orders}
                 latestOrder={latestOrder}
                 isAdmin={isAdmin}
+                isImpersonating={effectiveIsImpersonating}
               />
             </div>
           </div>

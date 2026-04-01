@@ -1,11 +1,5 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
-import {
-  collection,
-  doc,
-  getDoc,
-  setDoc,
-  serverTimestamp,
-} from 'firebase/firestore';
+import React, { useContext, useEffect, useState } from 'react';
+import { collection, doc, getDoc, setDoc, serverTimestamp } from 'firebase/firestore';
 import {
   sendPasswordResetEmail,
   verifyBeforeUpdateEmail,
@@ -87,7 +81,16 @@ const firstRecordedAddress = (projectsArr = [], ordersArr = []) => {
   return candidates[0].addr;
 };
 
-const normalizeEmail = (value) => String(value || '').trim().toLowerCase();
+const normalizeEmail = (value) =>
+  String(value || '')
+    .trim()
+    .toLowerCase();
+
+const buildFullName = (firstName = '', lastName = '') =>
+  [String(firstName || '').trim(), String(lastName || '').trim()]
+    .filter(Boolean)
+    .join(' ')
+    .trim();
 
 /* -------------------- tiny UI bits -------------------- */
 const Switch = ({ checked, onChange }) => (
@@ -109,12 +112,11 @@ export default function AccountSettings({
   orders,
   latestOrder, // kept for future use
   isAdmin,
+  isImpersonating = false,
 }) {
-   const uid = user?.uid || user?.id || '';
+  const uid = user?.uid || user?.id || '';
   const { isDarkMode, setIsDarkMode, isForcedDarkRoute } =
     useContext(DarkModeContext);
-
-  const emailSyncLoggedRef = useRef('');
 
   const s = (v) => String(v || '').toLowerCase();
   const isDelivered = (p) => !!p?.shipping?.deliveryDate;
@@ -135,7 +137,9 @@ export default function AccountSettings({
 
   const [loading, setLoading] = useState(true);
   const [initial, setInitial] = useState({
-    name: '',
+    firstName: '',
+    lastName: '',
+    fullName: '',
     email: '',
     phone: '',
     notifyEmail: true,
@@ -143,7 +147,8 @@ export default function AccountSettings({
     address: null,
   });
 
-  const [name, setName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [addr, setAddr] = useState({
@@ -159,6 +164,7 @@ export default function AccountSettings({
   const [notifySms, setNotifySms] = useState(false);
 
   const [phoneErr, setPhoneErr] = useState('');
+  const [nameErr, setNameErr] = useState('');
 
   const [editName, setEditName] = useState(false);
   const [editPhone, setEditPhone] = useState(false);
@@ -203,17 +209,22 @@ export default function AccountSettings({
     return `(${v.slice(0, 3)}) ${v.slice(3, 6)}-${v.slice(6, 10)}`;
   };
 
-  const createAuditLog = async (changes, source = 'AccountSettings/section-save') => {
+  const createAuditLog = async (
+    changes,
+    source = 'AccountSettings/section-save'
+  ) => {
     if (!uid || !changes || !Object.keys(changes).length) return;
 
     const logRef = doc(collection(db, 'users', uid, 'audit_logs'));
     await setDoc(logRef, {
       type: 'account_update',
-      actorUid: uid,
-      actorEmail: auth.currentUser?.email || user?.email || null,
+      actorUid: auth.currentUser?.uid || null,
+      actorEmail: auth.currentUser?.email || null,
+      subjectUid: uid,
       changes,
       createdAt: serverTimestamp(),
       source,
+      impersonated: !!isImpersonating,
     });
   };
 
@@ -224,99 +235,31 @@ export default function AccountSettings({
       if (!uid) return;
 
       try {
-        const currentAuthUser = auth.currentUser;
-
-        if (currentAuthUser) {
-          try {
-            await currentAuthUser.reload();
-          } catch (reloadErr) {
-            console.warn(
-              'Could not reload auth user before account sync:',
-              reloadErr
-            );
-          }
-        }
-
-        const refreshedAuthEmail = (auth.currentUser?.email || user?.email || '').trim();
-
         const uref = doc(db, 'users', uid);
         const usnap = await getDoc(uref);
         const userDoc = usnap.exists() ? usnap.data() || {} : {};
 
-        const storedUserEmail = String(userDoc.email || '').trim();
-        const storedUserEmailLower = normalizeEmail(
-          userDoc.emailLower || storedUserEmail
-        );
+        const resolvedFirstName = String(
+          userDoc.firstName || user?.firstName || ''
+        ).trim();
 
-        const authEmailLower = normalizeEmail(refreshedAuthEmail);
+        const resolvedLastName = String(
+          userDoc.lastName || user?.lastName || ''
+        ).trim();
 
-        if (
-          refreshedAuthEmail &&
-          authEmailLower &&
-          authEmailLower !== storedUserEmailLower &&
-          emailSyncLoggedRef.current !== `${uid}:${authEmailLower}`
-        ) {
-          try {
-            await setDoc(
-              doc(db, 'users', uid),
-              {
-                email: refreshedAuthEmail,
-                emailLower: authEmailLower,
-                updatedAt: serverTimestamp(),
-              },
-              { merge: true }
-            );
-
-            const syncTasks = (projects || [])
-              .filter((p) => !!p?.id)
-              .map((project) =>
-                setDoc(
-                  doc(db, 'projects', project.id),
-                  {
-                    customerEmail: refreshedAuthEmail,
-                    customerEmailLower: authEmailLower,
-                    customer: {
-                      ...(project?.customer || {}),
-                      email: refreshedAuthEmail,
-                      emailLower: authEmailLower,
-                    },
-                    updatedAt: serverTimestamp(),
-                  },
-                  { merge: true }
-                )
-              );
-
-            await Promise.all(syncTasks);
-
-            await createAuditLog(
-              {
-                email: {
-                  before: storedUserEmail || null,
-                  after: refreshedAuthEmail,
-                },
-              },
-              'AccountSettings/email-change-confirmed'
-            );
-
-            emailSyncLoggedRef.current = `${uid}:${authEmailLower}`;
-          } catch (syncErr) {
-            console.warn('Could not sync confirmed auth email:', syncErr);
-          }
-        }
-
-        const userDocFullName =
-          `${userDoc.firstName || ''} ${userDoc.lastName || ''}`.trim();
-
-        const resolvedName =
-          userDoc.name ||
-          userDocFullName ||
-          projects?.[0]?.customer?.name ||
-          projects?.[0]?.publicPrefs?.displayName ||
-          user?.displayName ||
-          '';
+        const resolvedFullName =
+          buildFullName(resolvedFirstName, resolvedLastName) ||
+          String(
+            userDoc.fullName ||
+              userDoc.name ||
+              projects?.[0]?.customer?.name ||
+              projects?.[0]?.publicPrefs?.displayName ||
+              user?.displayName ||
+              ''
+          ).trim();
 
         const fallbackEmail =
-          projects?.[0]?.customer?.email || refreshedAuthEmail || '';
+          projects?.[0]?.customer?.email || user?.email || '';
 
         const fallbackPhone = projects?.[0]?.customer?.phone || '';
 
@@ -328,8 +271,10 @@ export default function AccountSettings({
         const originAddr = firstRecordedAddress(projects, orders || []);
 
         const base = {
-          name: resolvedName,
-          email: refreshedAuthEmail || storedUserEmail || fallbackEmail,
+          firstName: resolvedFirstName,
+          lastName: resolvedLastName,
+          fullName: resolvedFullName,
+          email: String(userDoc.email || user?.email || fallbackEmail || '').trim(),
           phone: usnap.exists()
             ? userDoc.phone || fallbackPhone
             : fallbackPhone,
@@ -341,7 +286,8 @@ export default function AccountSettings({
         if (!alive) return;
 
         setInitial(base);
-        setName(base.name || '');
+        setFirstName(base.firstName || '');
+        setLastName(base.lastName || '');
         setEmail(base.email || '');
         setPhone(prettyUSPhone(digitsOnly(base.phone || '')));
         setNotifyEmail(base.notifyEmail);
@@ -385,7 +331,7 @@ export default function AccountSettings({
     );
 
     const primaryProject = projects?.[0];
-    if (isAdmin && primaryProject?.id && primaryProjectPatch) {
+    if (isAdmin && !isImpersonating && primaryProject?.id && primaryProjectPatch) {
       await setDoc(
         doc(db, 'projects', primaryProject.id),
         {
@@ -400,29 +346,71 @@ export default function AccountSettings({
     }
 
     if (Object.keys(auditChanges || {}).length) {
-      const logRef = doc(collection(db, 'users', uid, 'audit_logs'));
-      await setDoc(logRef, {
-        type: 'account_update',
-        actorUid: uid,
-        actorEmail: user?.email || null,
-        changes: auditChanges,
-        createdAt: serverTimestamp(),
-        source: 'AccountSettings/section-save',
-      });
+      await createAuditLog(auditChanges, 'AccountSettings/section-save');
     }
   };
 
   const onSaveName = async () => {
+    if (isImpersonating) {
+      alert('Name changes are disabled while impersonating a customer.');
+      return;
+    }
+
+    const nextFirstName = String(firstName || '').trim();
+    const nextLastName = String(lastName || '').trim();
+
+    if (!nextFirstName || !nextLastName) {
+      setNameErr('Please enter both a first name and last name.');
+      return;
+    }
+
+    setNameErr('');
     setSavingName(true);
+
     try {
-      const before = initial.name || '';
-      const after = (name || '').trim();
+      const nextFullName = buildFullName(nextFirstName, nextLastName);
+
+      const auditChanges = {};
+      if ((initial.firstName || '') !== nextFirstName) {
+        auditChanges.firstName = {
+          before: initial.firstName || '',
+          after: nextFirstName,
+        };
+      }
+      if ((initial.lastName || '') !== nextLastName) {
+        auditChanges.lastName = {
+          before: initial.lastName || '',
+          after: nextLastName,
+        };
+      }
+      if ((initial.fullName || '') !== nextFullName) {
+        auditChanges.fullName = {
+          before: initial.fullName || '',
+          after: nextFullName,
+        };
+      }
+
       await writeUserPatch(
-        { name: after },
-        before === after ? {} : { name: { before, after } },
-        { name: after }
+        {
+          firstName: nextFirstName,
+          lastName: nextLastName,
+          fullName: nextFullName,
+          name: nextFullName,
+        },
+        auditChanges,
+        {
+          name: nextFullName,
+          firstName: nextFirstName,
+          lastName: nextLastName,
+        }
       );
-      setInitial((i) => ({ ...i, name: after }));
+
+      setInitial((i) => ({
+        ...i,
+        firstName: nextFirstName,
+        lastName: nextLastName,
+        fullName: nextFullName,
+      }));
       setEditName(false);
       alert('Name updated.');
     } catch (e) {
@@ -434,11 +422,18 @@ export default function AccountSettings({
   };
 
   const onCancelName = () => {
-    setName(initial.name || '');
+    setFirstName(initial.firstName || '');
+    setLastName(initial.lastName || '');
+    setNameErr('');
     setEditName(false);
   };
 
   const onSavePhone = async () => {
+    if (isImpersonating) {
+      alert('Phone changes are disabled while impersonating a customer.');
+      return;
+    }
+
     const digits = digitsOnly(phone);
 
     if (digits.length !== 10) {
@@ -485,6 +480,11 @@ export default function AccountSettings({
   };
 
   const onSaveAddr = async () => {
+    if (isImpersonating) {
+      alert('Address changes are disabled while impersonating a customer.');
+      return;
+    }
+
     setSavingAddr(true);
     try {
       const before = initial.address || null;
@@ -522,6 +522,11 @@ export default function AccountSettings({
   };
 
   const onSavePrefs = async () => {
+    if (isImpersonating) {
+      alert('Preference changes are disabled while impersonating a customer.');
+      return;
+    }
+
     setSavingPrefs(true);
     try {
       await writeUserPatch(
@@ -560,7 +565,20 @@ export default function AccountSettings({
 
   const onSendPasswordReset = async () => {
     setPwResetStatus('');
-    const targetEmail = (auth.currentUser?.email || user?.email || initial.email || '').trim();
+
+    if (isImpersonating) {
+      setPwResetStatus(
+        'Password reset is disabled while impersonating a customer.'
+      );
+      return;
+    }
+
+    const targetEmail = (
+      auth.currentUser?.email ||
+      user?.email ||
+      initial.email ||
+      ''
+    ).trim();
 
     if (!targetEmail || !isValidEmail(targetEmail)) {
       alert(
@@ -599,6 +617,13 @@ export default function AccountSettings({
   const handleEmailUpdate = async () => {
     setEmailUpdateStatus('');
 
+    if (isImpersonating) {
+      setEmailUpdateStatus(
+        'Email changes are disabled while impersonating a customer.'
+      );
+      return;
+    }
+
     const trimmed = (newEmail || '').trim().toLowerCase();
 
     if (!trimmed || !isValidEmail(trimmed)) {
@@ -607,15 +632,20 @@ export default function AccountSettings({
     }
 
     if (
-      trimmed === normalizeEmail(auth.currentUser?.email || user?.email || initial.email || '')
+      trimmed ===
+      normalizeEmail(
+        auth.currentUser?.email || user?.email || initial.email || ''
+      )
     ) {
       setEmailUpdateStatus('That email is already on file.');
       return;
     }
 
     const currentUser = auth.currentUser;
-    if (!currentUser) {
-      setEmailUpdateStatus('User session not found. Please sign in again.');
+    if (!currentUser || currentUser.uid !== uid) {
+      setEmailUpdateStatus(
+        'Email updates can only be performed by the signed-in account owner.'
+      );
       return;
     }
 
@@ -665,10 +695,15 @@ export default function AccountSettings({
   const handleReauthenticateAndRetryEmail = async () => {
     setReauthStatus('');
 
+    if (isImpersonating) {
+      setReauthStatus('Email changes are disabled while impersonating.');
+      return;
+    }
+
     const currentUser = auth.currentUser;
     const passwordFromUserInput = (reauthPassword || '').trim();
 
-    if (!currentUser?.email) {
+    if (!currentUser?.email || currentUser.uid !== uid) {
       setReauthStatus('Could not verify your current login session.');
       return;
     }
@@ -757,6 +792,11 @@ export default function AccountSettings({
             Manage your contact information, notification preferences,
             appearance, and shipping details for your Artist Portal experience.
           </p>
+          {isImpersonating && (
+            <p className="as-intro" style={{ marginTop: 8 }}>
+              Account identity and email actions are disabled while impersonating.
+            </p>
+          )}
         </div>
 
         <div className="as-stack">
@@ -818,7 +858,11 @@ export default function AccountSettings({
                 </div>
 
                 {!editName ? (
-                  <button className="apo-btn" onClick={() => setEditName(true)}>
+                  <button
+                    className="apo-btn"
+                    onClick={() => setEditName(true)}
+                    disabled={isImpersonating}
+                  >
                     Edit
                   </button>
                 ) : (
@@ -837,13 +881,24 @@ export default function AccountSettings({
                 )}
               </div>
 
-              <input
-                className="vp-input"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                disabled={!editName}
-                placeholder="Full name"
-              />
+              <div className="as-grid two">
+                <input
+                  className={`vp-input ${nameErr ? 'has-error' : ''}`}
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  disabled={!editName}
+                  placeholder="First name"
+                />
+                <input
+                  className={`vp-input ${nameErr ? 'has-error' : ''}`}
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  disabled={!editName}
+                  placeholder="Last name"
+                />
+              </div>
+
+              {nameErr && <div className="vp-hint error">{nameErr}</div>}
             </div>
 
             <div className="as-divider" />
@@ -858,7 +913,11 @@ export default function AccountSettings({
                 </div>
 
                 {!editPhone ? (
-                  <button className="apo-btn" onClick={() => setEditPhone(true)}>
+                  <button
+                    className="apo-btn"
+                    onClick={() => setEditPhone(true)}
+                    disabled={isImpersonating}
+                  >
                     Edit
                   </button>
                 ) : (
@@ -929,6 +988,7 @@ export default function AccountSettings({
                   type="button"
                   className="apo-btn subtle"
                   onClick={onSendPasswordReset}
+                  disabled={isImpersonating}
                 >
                   Send password reset link
                 </button>
@@ -936,10 +996,12 @@ export default function AccountSettings({
                   type="button"
                   className="apo-btn subtle"
                   onClick={() => {
+                    if (isImpersonating) return;
                     setEmailUpdateStatus('');
                     setNewEmail('');
                     setShowEmailUpdate(true);
                   }}
+                  disabled={isImpersonating}
                 >
                   Update my email
                 </button>
@@ -964,7 +1026,7 @@ export default function AccountSettings({
                 <button
                   className="apo-btn primary"
                   onClick={onSavePrefs}
-                  disabled={savingPrefs}
+                  disabled={savingPrefs || isImpersonating}
                 >
                   {savingPrefs ? 'Saving…' : 'Save'}
                 </button>
@@ -994,156 +1056,7 @@ export default function AccountSettings({
             </div>
           </section> */}
 
-          <section className="as-section as-surface-card">
-            <div className="as-header">
-              <div>
-                <label className="vp-label">Shipping Address</label>
-                <div className="as-section-copy">
-                  This applies to future fulfillment and delivery coordination.
-                </div>
-              </div>
-
-              {!addressLocked && !editAddr ? (
-                <button className="apo-btn" onClick={() => setEditAddr(true)}>
-                  Edit
-                </button>
-              ) : !addressLocked ? (
-                <div className="as-actions">
-                  <button className="apo-btn" onClick={onCancelAddr}>
-                    Cancel
-                  </button>
-                  <button
-                    className="apo-btn primary"
-                    onClick={onSaveAddr}
-                    disabled={savingAddr}
-                  >
-                    {savingAddr ? 'Saving…' : 'Save'}
-                  </button>
-                </div>
-              ) : null}
-            </div>
-
-            {!addressLocked ? (
-              <>
-                <div className="as-grid">
-                  <input
-                    className="vp-input"
-                    placeholder="Address line 1"
-                    value={addr.line1}
-                    onChange={(e) => setAddr({ ...addr, line1: e.target.value })}
-                    disabled={!editAddr}
-                  />
-                  <input
-                    className="vp-input"
-                    placeholder="Address line 2 (optional)"
-                    value={addr.line2}
-                    onChange={(e) => setAddr({ ...addr, line2: e.target.value })}
-                    disabled={!editAddr}
-                  />
-
-                  <div className="as-grid two">
-                    <input
-                      className="vp-input"
-                      placeholder="City"
-                      value={addr.city}
-                      onChange={(e) =>
-                        setAddr({ ...addr, city: e.target.value })
-                      }
-                      disabled={!editAddr}
-                    />
-                    <input
-                      className="vp-input"
-                      placeholder="State/Province"
-                      value={addr.state}
-                      onChange={(e) =>
-                        setAddr({ ...addr, state: e.target.value })
-                      }
-                      disabled={!editAddr}
-                    />
-                  </div>
-
-                  <div className="as-grid two">
-                    <input
-                      className="vp-input"
-                      placeholder="Postal / ZIP"
-                      value={addr.postal_code}
-                      onChange={(e) =>
-                        setAddr({ ...addr, postal_code: e.target.value })
-                      }
-                      disabled={!editAddr}
-                    />
-                    <input
-                      className="vp-input"
-                      placeholder="Country"
-                      value={addr.country}
-                      onChange={(e) =>
-                        setAddr({ ...addr, country: e.target.value })
-                      }
-                      disabled={!editAddr}
-                    />
-                  </div>
-                </div>
-
-                <div className="vp-hint as-inline-note">
-                  Updating your address here affects future shipments only. Past
-                  orders remain unchanged.
-                </div>
-              </>
-            ) : (
-              <>
-                <div
-                  className="vp-card as-address-card"
-                  style={{ whiteSpace: 'pre-line' }}
-                >
-                  {(() => {
-                    const a = initial.address || addr;
-                    const parts = [
-                      a?.line1,
-                      a?.line2,
-                      [a?.city, a?.state].filter(Boolean).join(', '),
-                      [a?.postal_code, a?.country].filter(Boolean).join(' '),
-                    ].filter(Boolean);
-                    return parts.length ? parts.join('\n') : '—';
-                  })()}
-                </div>
-
-                <div className="vp-hint as-inline-note">
-                  {lockReason === 'in transit'
-                    ? 'Your order is currently in transit. For security, address changes are locked until delivery.'
-                    : 'Your drum is currently in production. Address changes are locked until the build is complete.'}
-                </div>
-
-                <div className="vp-requests">
-                  <a
-                    className="apo-btn request"
-                    href={
-                      'mailto:soundlegend@oberartisandrums.com' +
-                      '?subject=' +
-                      encodeURIComponent(
-                        'SoundLegend — Shipping address change request'
-                      ) +
-                      '&body=' +
-                      encodeURIComponent(
-                        `Hi Ober team,
-
-I need to update my shipping address for an in-progress build.
-
-New address:
-
-(Street)
-(City, State, ZIP)
-(Country)
-
-Thanks!`
-                      )
-                    }
-                  >
-                    Request an address change ↗
-                  </a>
-                </div>
-              </>
-            )}
-          </section>
+          {/* Shipping section intentionally left as-is/commented per your current setup */}
         </div>
 
         <p className="slp-muted as-footer-note">
