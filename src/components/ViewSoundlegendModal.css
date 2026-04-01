@@ -6,7 +6,7 @@
 .slmodal__backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, .42);
+  background: rgba(15, 23, 42, 0.42);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,15 +15,15 @@
 
 /* --- Light theme tokens (only when .light is present) --- */
 .slmodal.light {
-  --bg-1: #ffffff;        /* modal shell */
-  --bg-2: #f7f9fc;        /* blocks / cards */
-  --bg-3: #ffffff;        /* inputs / fields */
-  --line-1: #e5eaf2;      /* shell/section borders */
-  --line-2: #eef2f7;      /* inner row borders */
+  --bg-1: #ffffff; /* modal shell */
+  --bg-2: #f7f9fc; /* blocks / cards */
+  --bg-3: #ffffff; /* inputs / fields */
+  --line-1: #e5eaf2; /* shell/section borders */
+  --line-2: #eef2f7; /* inner row borders */
 
-  --text-1: #0f172a;      /* headings/body */
-  --text-2: #334155;      /* secondary */
-  --text-3: #64748b;      /* muted labels */
+  --text-1: #0f172a; /* headings/body */
+  --text-2: #334155; /* secondary */
+  --text-3: #64748b; /* muted labels */
   --placeholder: #9aa6b2;
 
   --link: #1d4ed8;
@@ -34,8 +34,8 @@
   --btn-ghost-bg: #ffffff;
   --btn-ghost-border: #d6dde8;
 
-  --focus: rgba(37, 99, 235, .28);
-  --shadow: 0 24px 70px rgba(2, 6, 23, .18);
+  --focus: rgba(37, 99, 235, 0.28);
+  --shadow: 0 24px 70px rgba(2, 6, 23, 0.18);
 }
 
 /* --- Modal shell --- */
@@ -48,7 +48,15 @@
   border-radius: 14px;
   box-shadow: var(--shadow);
   color: var(--text-1);
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Inter,
+    'Helvetica Neue',
+    Arial,
+    sans-serif;
   display: flex;
   flex-direction: column;
 }
@@ -64,14 +72,20 @@
   background: var(--bg-1);
 }
 
-.slmodal.light .slmodal__header { border-bottom: 1px solid var(--line-1); }
-.slmodal.light .slmodal__footer { border-top: 1px solid var(--line-1); justify-content: flex-end; }
+.slmodal.light .slmodal__header {
+  border-bottom: 1px solid var(--line-1);
+}
+
+.slmodal.light .slmodal__footer {
+  border-top: 1px solid var(--line-1);
+  justify-content: flex-end;
+}
 
 .slmodal.light .slmodal__header h3 {
   margin: 0;
   font-size: 1.05rem;
   font-weight: 800;
-  color: var(--text-1) !important;     /* beat any global dark rules */
+  color: var(--text-1) !important;
   text-shadow: none !important;
 }
 
@@ -82,8 +96,13 @@
   border-radius: 10px;
   padding: 6px 10px;
   cursor: pointer;
-  transition: background .15s ease, border-color .15s ease, box-shadow .15s ease, color .15s ease;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    color 0.15s ease;
 }
+
 .slmodal.light .icon-btn:hover {
   background: #f0f4fa;
   border-color: #cbd6e6;
@@ -91,16 +110,27 @@
 }
 
 /* --- Body layout --- */
-.slmodal.light .slmodal__body { padding: 16px 18px; }
+.slmodal.light .slmodal__body {
+  padding: 16px 18px;
+}
 
 .slmodal.light .ea-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
 }
-.slmodal.light .col-span-2 { grid-column: span 2; }
-.slmodal.light .right { text-align: right; }
-.slmodal.light .ml-8 { margin-left: 8px; }
+
+.slmodal.light .col-span-2 {
+  grid-column: span 2;
+}
+
+.slmodal.light .right {
+  text-align: right;
+}
+
+.slmodal.light .ml-8 {
+  margin-left: 8px;
+}
 
 /* Panels / cards */
 .slmodal.light .ea-block {
@@ -109,6 +139,7 @@
   border-radius: 12px;
   padding: 12px;
 }
+
 .slmodal.light .ea-block h4 {
   margin: 0 0 10px 0;
   color: var(--text-1);
@@ -126,53 +157,76 @@
   color: var(--text-2);
   line-height: 1.35;
 }
+
 .slmodal.light .row > span:first-child {
   color: var(--text-3);
-  font-size: .92rem;
+  font-size: 0.92rem;
   font-weight: 600;
+}
+
+/* keep dropdowns readable and sized nicely */
+.slmodal.light .row select {
+  flex: 0 0 220px;
 }
 
 /* --- Fields (textarea & select) --- */
 .slmodal.light textarea,
 .slmodal.light select {
   width: 100%;
-  background: var(--bg-3);
-  color: var(--text-1) !important;
-  -webkit-text-fill-color: var(--text-1) !important;
+  background: #ffffff !important;
+  color: #0f172a !important;
+  -webkit-text-fill-color: #0f172a !important;
   border: 1px solid #cfd7e6;
   border-radius: 10px;
   padding: 10px 12px;
-  font-size: .96rem;
+  font-size: 0.96rem;
   line-height: 1.45;
   outline: none;
-  transition: box-shadow .15s ease, border-color .15s ease, background .15s ease, color .15s ease;
-  caret-color: var(--text-1);
+  transition:
+    box-shadow 0.15s ease,
+    border-color 0.15s ease,
+    background 0.15s ease,
+    color 0.15s ease;
+  caret-color: #0f172a;
+  color-scheme: light;
 }
 
-/* Select arrow (subtle) */
+/* Select arrow + stronger light styling */
 .slmodal.light select {
   appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  min-width: 180px;
+  max-width: 240px;
+  padding-right: 38px;
   background-image:
-    linear-gradient(45deg, transparent 50%, #667da0 50%),
-    linear-gradient(135deg, #667da0 50%, transparent 50%);
-  background-position: calc(100% - 16px) calc(50% - 3px),
-                       calc(100% - 11px) calc(50% - 3px);
+    linear-gradient(45deg, transparent 50%, #64748b 50%),
+    linear-gradient(135deg, #64748b 50%, transparent 50%);
+  background-position:
+    calc(100% - 18px) calc(50% - 3px),
+    calc(100% - 12px) calc(50% - 3px);
   background-size: 6px 6px, 6px 6px;
   background-repeat: no-repeat;
-  padding-right: 34px;
 }
-.slmodal.light select option {
-  background: #ffffff;
-  color: var(--text-1);
+
+.slmodal.light select option,
+.slmodal.light select optgroup {
+  background: #ffffff !important;
+  color: #0f172a !important;
 }
 
 /* Placeholder + focus */
-.slmodal.light textarea::placeholder { color: var(--placeholder) !important; opacity: 1; }
+.slmodal.light textarea::placeholder {
+  color: var(--placeholder) !important;
+  opacity: 1;
+}
+
 .slmodal.light textarea:focus,
 .slmodal.light select:focus {
   border-color: var(--btn-bg);
   box-shadow: 0 0 0 3px var(--focus);
-  background: #ffffff;
+  background: #ffffff !important;
+  color: #0f172a !important;
 }
 
 /* --- Buttons --- */
@@ -184,10 +238,21 @@
   padding: 10px 14px;
   font-weight: 800;
   cursor: pointer;
-  transition: background .15s ease, filter .15s ease, transform .02s ease;
+  transition:
+    background 0.15s ease,
+    filter 0.15s ease,
+    transform 0.02s ease;
 }
-.slmodal.light .btn:hover { background: var(--btn-bg-hover); filter: brightness(1.03); }
-.slmodal.light .btn:active { transform: translateY(1px); }
+
+.slmodal.light .btn:hover {
+  background: var(--btn-bg-hover);
+  filter: brightness(1.03);
+}
+
+.slmodal.light .btn:active {
+  transform: translateY(1px);
+}
+
 .slmodal.light .btn:disabled {
   background: var(--btn-bg-disabled);
   color: #fff !important;
@@ -199,29 +264,42 @@
   color: var(--text-2) !important;
   border: 1px solid var(--btn-ghost-border);
 }
+
 .slmodal.light .btn--ghost:hover {
   border-color: var(--btn-bg);
   box-shadow: 0 0 0 3px var(--focus);
 }
 
-.slmodal.light .btn--sm { padding: 8px 11px; font-size: .88rem; }
+.slmodal.light .btn--sm {
+  padding: 8px 11px;
+  font-size: 0.88rem;
+}
 
 /* --- Links / helpers --- */
 .slmodal.light .file-link {
   color: var(--link) !important;
   text-decoration: underline;
 }
-.slmodal.light .text-box  { color: var(--text-1); white-space: pre-wrap; }
-.slmodal.light .muted     { color: var(--text-3); }
+
+.slmodal.light .text-box {
+  color: var(--text-1);
+  white-space: pre-wrap;
+}
+
+.slmodal.light .muted {
+  color: var(--text-3);
+}
 
 /* --- Tables (light, clean) --- */
-.slmodal.light .table-wrap { overflow: auto; }
+.slmodal.light .table-wrap {
+  overflow: auto;
+}
 
 .slmodal.light .ea-table {
   width: 100%;
   border-collapse: collapse;
   color: var(--text-1);
-  font-size: .95rem;
+  font-size: 0.95rem;
   border: 1px solid var(--line-2);
   border-radius: 10px;
   overflow: hidden;
@@ -230,10 +308,10 @@
 
 .slmodal.light .ea-table thead th {
   text-transform: uppercase;
-  letter-spacing: .05em;
-  font-size: .76rem;
+  letter-spacing: 0.05em;
+  font-size: 0.76rem;
   color: var(--text-2);
-  background: #eef3fb;                      /* LIGHT header */
+  background: #eef3fb;
   border-bottom: 1px solid var(--line-1);
   text-align: left;
   padding: 10px 8px;
@@ -245,8 +323,14 @@
   vertical-align: top;
   color: var(--text-1);
 }
-.slmodal.light .ea-table tr:hover td { background: #f8fbff; }
-.slmodal.light .ea-table td.pre { white-space: pre-wrap; }
+
+.slmodal.light .ea-table tr:hover td {
+  background: #f8fbff;
+}
+
+.slmodal.light .ea-table td.pre {
+  white-space: pre-wrap;
+}
 
 /* --- A11y focus --- */
 .slmodal.light .icon-btn:focus,
@@ -259,7 +343,27 @@
 
 /* --- Small screens --- */
 @media (max-width: 700px) {
-  .slmodal { width: 98vw; }
-  .slmodal.light .ea-grid { grid-template-columns: 1fr; }
-  .slmodal.light .col-span-2 { grid-column: span 1; }
+  .slmodal {
+    width: 98vw;
+  }
+
+  .slmodal.light .ea-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .slmodal.light .col-span-2 {
+    grid-column: span 1;
+  }
+
+  .slmodal.light .row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .slmodal.light .row select {
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    flex: 1 1 auto;
+  }
 }

@@ -1,4 +1,5 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import ReactDOM from 'react-dom';
 import {
   collection,
   getDocs,
@@ -90,28 +91,80 @@ function getProjectCurrentChapterIndex(project) {
 
 const ProjectPicker = ({ projects, selectedId, onChange }) => {
   const [open, setOpen] = useState(false);
+  const [menuStyle, setMenuStyle] = useState({});
+  const shellRef = useRef(null);
+  const menuRef = useRef(null);
 
-  if (!projects || projects.length <= 1) return null;
+  const hasMultipleProjects = Array.isArray(projects) && projects.length > 1;
 
   const current =
-    projects.find((p) => p.id === selectedId) || projects[0] || null;
+    projects?.find((p) => p.id === selectedId) || projects?.[0] || null;
 
   const labelFor = (p) => {
     const serial =
-      p.lineSerial || p.globalSerial || p.snareSerial || p.serial || '';
-    const line = p.artisanLine || p.series || 'Project';
+      p?.lineSerial || p?.globalSerial || p?.snareSerial || p?.serial || '';
+    const line = p?.artisanLine || p?.series || 'Project';
 
     if (serial) return `${serial} · ${line}`;
-    return `${line} · ${p.id?.slice(0, 6) || 'Project'}`;
+    return `${line} · ${p?.id?.slice(0, 6) || 'Project'}`;
   };
+
+  const updateMenuPosition = () => {
+    if (!shellRef.current) return;
+
+    const rect = shellRef.current.getBoundingClientRect();
+
+    setMenuStyle({
+      position: 'fixed',
+      top: rect.bottom + 8,
+      left: rect.left,
+      width: rect.width,
+      zIndex: 100000,
+    });
+  };
+
+  useEffect(() => {
+    if (!open || !hasMultipleProjects) return;
+
+    updateMenuPosition();
+
+    const handleWindowChange = () => updateMenuPosition();
+
+    const handleOutsideClick = (e) => {
+      const clickedShell = shellRef.current?.contains(e.target);
+      const clickedMenu = menuRef.current?.contains(e.target);
+
+      if (!clickedShell && !clickedMenu) {
+        setOpen(false);
+      }
+    };
+
+    const handleEscape = (e) => {
+      if (e.key === 'Escape') setOpen(false);
+    };
+
+    window.addEventListener('resize', handleWindowChange);
+    window.addEventListener('scroll', handleWindowChange, true);
+    document.addEventListener('mousedown', handleOutsideClick);
+    document.addEventListener('keydown', handleEscape);
+
+    return () => {
+      window.removeEventListener('resize', handleWindowChange);
+      window.removeEventListener('scroll', handleWindowChange, true);
+      document.removeEventListener('mousedown', handleOutsideClick);
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, [open, hasMultipleProjects]);
 
   const handleSelect = (id) => {
     onChange(id);
     setOpen(false);
   };
 
+  if (!hasMultipleProjects) return null;
+
   return (
-    <div className="slp-picker-shell">
+    <div ref={shellRef} className="slp-picker-shell">
       <button
         type="button"
         className="slp-picker-button"
@@ -125,24 +178,31 @@ const ProjectPicker = ({ projects, selectedId, onChange }) => {
         <span className={`slp-picker-chevron ${open ? 'is-open' : ''}`} />
       </button>
 
-      {open && (
-        <div className="slp-picker-menu" role="listbox">
-          {projects.map((p) => (
-            <button
-              key={p.id}
-              type="button"
-              className={`slp-picker-item ${
-                p.id === selectedId ? 'is-active' : ''
-              }`}
-              onClick={() => handleSelect(p.id)}
-              role="option"
-              aria-selected={p.id === selectedId}
-            >
-              {labelFor(p)}
-            </button>
-          ))}
-        </div>
-      )}
+      {open &&
+        ReactDOM.createPortal(
+          <div
+            ref={menuRef}
+            className="slp-picker-menu"
+            style={menuStyle}
+            role="listbox"
+          >
+            {projects.map((p) => (
+              <button
+                key={p.id}
+                type="button"
+                className={`slp-picker-item ${
+                  p.id === selectedId ? 'is-active' : ''
+                }`}
+                onClick={() => handleSelect(p.id)}
+                role="option"
+                aria-selected={p.id === selectedId}
+              >
+                {labelFor(p)}
+              </button>
+            ))}
+          </div>,
+          document.body
+        )}
     </div>
   );
 };
