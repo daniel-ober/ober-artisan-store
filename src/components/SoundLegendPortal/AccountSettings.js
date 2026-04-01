@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   collection,
   doc,
@@ -114,10 +114,12 @@ export default function AccountSettings({
   isAdmin,
 }) {
   const uid = user?.uid || user?.id || '';
+  const authUid = auth.currentUser?.uid || '';
+  const isOwnAccount = !!uid && !!authUid && uid === authUid;
+  const isAdminViewingOtherUser =
+    !!isAdmin && !!uid && !!authUid && uid !== authUid;
   const { isDarkMode, setIsDarkMode, isForcedDarkRoute } =
     useContext(DarkModeContext);
-
-  const emailSyncLoggedRef = useRef('');
 
   const s = (v) => String(v || '').toLowerCase();
   const isDelivered = (p) => !!p?.shipping?.deliveryDate;
@@ -245,71 +247,19 @@ export default function AccountSettings({
     let alive = true;
 
     (async () => {
-      if (!uid) return;
+      if (!uid) {
+        if (alive) setLoading(false);
+        return;
+      }
 
       try {
-        const currentAuthUser = auth.currentUser;
-
-        if (currentAuthUser) {
-          try {
-            await currentAuthUser.reload();
-          } catch (reloadErr) {
-            console.warn(
-              'Could not reload auth user before account sync:',
-              reloadErr
-            );
-          }
-        }
-
-        const refreshedAuthEmail = (
-          auth.currentUser?.email ||
-          user?.email ||
-          ''
-        ).trim();
-
         const uref = doc(db, 'users', uid);
         const usnap = await getDoc(uref);
         const userDoc = usnap.exists() ? usnap.data() || {} : {};
 
         const storedUserEmail = String(userDoc.email || '').trim();
-        const storedUserEmailLower = normalizeEmail(
-          userDoc.emailLower || storedUserEmail
-        );
-
-        const authEmailLower = normalizeEmail(refreshedAuthEmail);
-
-        if (
-          refreshedAuthEmail &&
-          authEmailLower &&
-          authEmailLower !== storedUserEmailLower &&
-          emailSyncLoggedRef.current !== `${uid}:${authEmailLower}`
-        ) {
-          try {
-            await setDoc(
-              doc(db, 'users', uid),
-              {
-                email: refreshedAuthEmail,
-                emailLower: authEmailLower,
-                updatedAt: serverTimestamp(),
-              },
-              { merge: true }
-            );
-
-            emailSyncLoggedRef.current = `${uid}:${authEmailLower}`;
-
-            void safeCreateAuditLog(
-              {
-                email: {
-                  before: storedUserEmail || null,
-                  after: refreshedAuthEmail,
-                },
-              },
-              'AccountSettings/email-change-confirmed'
-            );
-          } catch (syncErr) {
-            console.warn('Could not sync confirmed auth email:', syncErr);
-          }
-        }
+        const resolvedEmail =
+          storedUserEmail || String(user?.email || '').trim();
 
         const resolvedFirstName =
           String(userDoc.firstName || '').trim() ||
@@ -338,9 +288,6 @@ export default function AccountSettings({
           user?.displayName ||
           '';
 
-        const fallbackEmail =
-          projects?.[0]?.customer?.email || refreshedAuthEmail || '';
-
         const fallbackPhone = projects?.[0]?.customer?.phone || '';
 
         const userLevelAddr =
@@ -354,10 +301,8 @@ export default function AccountSettings({
           firstName: resolvedFirstName,
           lastName: resolvedLastName,
           fullName: resolvedFullName,
-          email: refreshedAuthEmail || storedUserEmail || fallbackEmail,
-          phone: usnap.exists()
-            ? userDoc.phone || fallbackPhone
-            : fallbackPhone,
+          email: resolvedEmail,
+          phone: userDoc.phone || fallbackPhone,
           notifyEmail: !!(userDoc.notificationPrefs?.email ?? true),
           notifySms: !!(userDoc.notificationPrefs?.sms ?? false),
           address: userLevelAddr || originAddr || null,
@@ -389,6 +334,8 @@ export default function AccountSettings({
             ? ''
             : 'Enter a valid 10-digit phone number'
         );
+      } catch (err) {
+        console.error('Failed loading account settings:', err);
       } finally {
         if (alive) setLoading(false);
       }
@@ -612,12 +559,14 @@ export default function AccountSettings({
   const onSendPasswordReset = async () => {
     setPwResetStatus('');
 
-    const targetEmail = (
-      auth.currentUser?.email ||
-      user?.email ||
-      initial.email ||
-      ''
-    ).trim();
+    if (!isOwnAccount) {
+      setPwResetStatus(
+        'Password reset is only available when signed into your own account.'
+      );
+      return;
+    }
+
+    const targetEmail = (auth.currentUser?.email || initial.email || '').trim();
 
     if (!targetEmail || !isValidEmail(targetEmail)) {
       alert(
@@ -656,6 +605,13 @@ export default function AccountSettings({
   const handleEmailUpdate = async () => {
     setEmailUpdateStatus('');
 
+    if (!isOwnAccount) {
+      setEmailUpdateStatus(
+        'Email updates are only available when signed into your own account.'
+      );
+      return;
+    }
+
     const trimmed = (newEmail || '').trim().toLowerCase();
 
     if (!trimmed || !isValidEmail(trimmed)) {
@@ -664,10 +620,7 @@ export default function AccountSettings({
     }
 
     if (
-      trimmed ===
-      normalizeEmail(
-        auth.currentUser?.email || user?.email || initial.email || ''
-      )
+      trimmed === normalizeEmail(auth.currentUser?.email || initial.email || '')
     ) {
       setEmailUpdateStatus('That email is already on file.');
       return;
@@ -1001,6 +954,12 @@ export default function AccountSettings({
                   type="button"
                   className="apo-btn subtle"
                   onClick={onSendPasswordReset}
+                  disabled={!isOwnAccount}
+                  title={
+                    !isOwnAccount
+                      ? 'Only available when signed into your own account'
+                      : ''
+                  }
                 >
                   Send password reset link
                 </button>
@@ -1008,10 +967,17 @@ export default function AccountSettings({
                   type="button"
                   className="apo-btn subtle"
                   onClick={() => {
+                    if (!isOwnAccount) return;
                     setEmailUpdateStatus('');
                     setNewEmail('');
                     setShowEmailUpdate(true);
                   }}
+                  disabled={!isOwnAccount}
+                  title={
+                    !isOwnAccount
+                      ? 'Only available when signed into your own account'
+                      : ''
+                  }
                 >
                   Update my email
                 </button>
@@ -1265,7 +1231,7 @@ Thanks!`
             <div className="as-modal-current">
               <span className="as-modal-current-label">Current email</span>
               <span className="as-modal-current-value">
-                {auth.currentUser?.email || user?.email || initial.email || '—'}
+                {initial.email || user?.email || '—'}
               </span>
             </div>
 

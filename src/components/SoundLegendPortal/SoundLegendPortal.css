@@ -470,11 +470,6 @@
 }
 
 .slp-picker-menu {
-  position: absolute;
-  z-index: 40;
-  left: 0;
-  right: 0;
-  top: calc(100% + 8px);
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.12);
   box-shadow:
@@ -482,7 +477,9 @@
     inset 0 0 0 1px rgba(255, 255, 255, 0.02);
   overflow: hidden;
   background:
-    linear-gradient(180deg, rgba(10, 10, 14, 0.98), rgba(5, 5, 8, 0.99));
+    linear-gradient(180deg, rgba(10, 10, 14, 0.985), rgba(5, 5, 8, 0.995));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .slp-picker-item {
@@ -935,6 +932,7 @@
     margin: 14px 0 24px;
     padding: 18px 18px 20px;
     border-radius: 16px;
+    overflow: visible;
   }
 
   .slp-tabs-shell::before {
@@ -945,6 +943,9 @@
     flex-direction: column;
     align-items: flex-start;
     text-align: left;
+    margin-bottom: 18px;
+    gap: 14px;
+    overflow: visible;
   }
 
   .slp-tabs-header-copy {
@@ -954,19 +955,32 @@
   .slp-tabs-header-actions {
     width: 100%;
     justify-content: flex-start;
+    position: relative;
+    z-index: 90;
+    overflow: visible;
   }
 
   .slp-picker-shell {
     min-width: 0;
     max-width: 100%;
+    width: 100%;
+  }
+
+  .slp-picker-menu {
+    z-index: 999;
   }
 
   .slp-tabs-buttons {
+    position: relative;
+    z-index: 1;
     gap: 22px;
     justify-content: flex-start;
     flex-wrap: nowrap;
     overflow-x: auto;
+    overflow-y: hidden;
+    padding-top: 4px;
     padding-bottom: 8px;
+    margin-top: 6px;
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
@@ -1013,6 +1027,7 @@
     margin: 12px 0 22px;
     padding: 16px 14px 18px;
     border-radius: 14px;
+    overflow: visible;
   }
 
   .slp-tabs-shell::before {
@@ -1020,7 +1035,8 @@
   }
 
   .slp-tabs-header {
-    margin-bottom: 10px;
+    margin-bottom: 14px;
+    overflow: visible;
   }
 
   .slp-tabs-eyebrow {
@@ -1039,6 +1055,7 @@
 
   .slp-tabs-buttons {
     gap: 18px;
+    margin-top: 10px;
   }
 
   .slp-tab {
