@@ -41,6 +41,7 @@
     'Apple Color Emoji',
     'Segoe UI Emoji';
 }
+
 .soundlegend-signin::before {
   content: '';
   position: fixed;
@@ -60,10 +61,12 @@
   pointer-events: none;
   z-index: 0;
 }
+
 .signin-logo-container,
 .signin-hero,
 .signin-card,
 .signin-info {
+  position: relative;
   z-index: 1;
 }
 
@@ -75,6 +78,7 @@
   margin-bottom: 1.1rem;
   width: 100%;
 }
+
 .signin-logo {
   max-width: 280px;
   width: 88%;
@@ -87,9 +91,9 @@
   position: relative;
   text-align: center;
   max-width: 720px;
-  /* margin: 0 auto 1.75rem; */
   padding: 0 0.5rem 1.25rem;
 }
+
 .signin-hero::after {
   content: '';
   display: block;
@@ -104,6 +108,7 @@
   );
   border-radius: 1px;
 }
+
 .signin-subtitle {
   color: var(--sl-muted);
   font-size: 0.98rem;
@@ -118,7 +123,7 @@
   background: var(--sl-card);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  padding: 1.4rem 1.5rem 1.2rem; /* slightly tighter since labels removed */
+  padding: 1.4rem 1.5rem 1.2rem;
   border-radius: 18px;
   box-shadow:
     0 18px 44px rgba(0, 0, 0, 0.55),
@@ -129,7 +134,7 @@
   border: 1px solid var(--sl-border);
 }
 
-/* Field wrapper to space controls evenly */
+/* Field wrapper */
 .field {
   margin-bottom: 0.9rem;
 }
@@ -149,9 +154,11 @@
     background-color 0.15s ease,
     border-color 0.15s ease;
 }
+
 .signin-card input::placeholder {
   color: #bfbfbf;
 }
+
 .signin-card input:focus {
   outline: none;
   border-color: rgba(255, 255, 255, 0.22);
@@ -173,6 +180,7 @@
 .pw-wrapper {
   position: relative;
 }
+
 .pw-toggle {
   position: absolute;
   right: 8px;
@@ -187,6 +195,7 @@
   cursor: pointer;
   transition: all 0.2s ease;
 }
+
 .pw-toggle:hover {
   color: #fff;
   border-color: rgba(255, 255, 255, 0.24);
@@ -200,23 +209,26 @@
   line-height: 1.4;
   text-align: center;
 }
+
 .alert.error {
   color: var(--sl-error);
 }
+
 .alert.info {
   color: var(--sl-info);
 }
+
 .alert.warn {
   color: var(--sl-warn);
 }
 
-/* Row (checkbox + optional forgot) */
+/* Row */
 .signin-row {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  gap: 12px;
-  margin: 0.25rem 0 0.9rem 0;
+  justify-content: space-between;
+  gap: 14px;
+  margin: 0.45rem 0 1rem 0;
 }
 
 /* Custom checkbox */
@@ -225,18 +237,23 @@
   align-items: center;
   gap: 10px;
   color: var(--sl-muted);
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   cursor: pointer;
   user-select: none;
+  min-width: 0;
+  flex: 1 1 auto;
 }
+
 .checkbox input {
   position: absolute;
   opacity: 0;
   pointer-events: none;
 }
+
 .checkbox-box {
   width: 20px;
   height: 20px;
+  flex: 0 0 20px;
   border-radius: 6px;
   border: 1px solid rgba(255, 255, 255, 0.22);
   background: #1c1c20;
@@ -245,29 +262,77 @@
   transition: all 0.15s ease;
   color: #0a0a0a;
 }
+
 .checkbox-check {
   width: 14px;
   height: 14px;
   opacity: 0;
   transition: opacity 0.15s ease;
 }
+
 .checkbox:hover .checkbox-box {
   border-color: rgba(255, 255, 255, 0.35);
 }
+
 .checkbox input:focus-visible + .checkbox-box {
   outline: 2px solid rgba(255, 255, 255, 0.35);
   outline-offset: 2px;
 }
+
 .checkbox input:checked + .checkbox-box {
   background: linear-gradient(135deg, var(--sl-gold), var(--sl-gold-warm));
   border-color: transparent;
   color: #1b1b1b;
 }
+
 .checkbox input:checked + .checkbox-box .checkbox-check {
   opacity: 1;
 }
+
 .checkbox-label {
   color: var(--sl-muted);
+  font-size: 0.88rem;
+  line-height: 1.25;
+}
+
+/* Forgot password */
+.forgot-link {
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+  color: var(--sl-gold);
+  font-size: 0.84rem;
+  font-weight: 600;
+  line-height: 1.15;
+  text-align: right;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  cursor: pointer;
+  white-space: nowrap;
+  flex: 0 0 auto;
+  transition:
+    color 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.forgot-link:hover:not(:disabled) {
+  color: var(--sl-gold-warm);
+}
+
+.forgot-link:focus,
+.forgot-link:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.forgot-link:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 /* Primary button */
@@ -290,10 +355,12 @@
     box-shadow 0.2s ease;
   box-shadow: 0 10px 30px rgba(255, 215, 0, 0.22);
 }
+
 .btn-primary:hover {
   transform: translateY(-1px);
   box-shadow: 0 18px 40px rgba(255, 215, 0, 0.32);
 }
+
 .btn-primary:disabled {
   opacity: 0.7;
   cursor: not-allowed;
@@ -309,13 +376,14 @@
   border-top-color: rgba(0, 0, 0, 0.6);
   animation: spin 0.8s linear infinite;
 }
+
 @keyframes spin {
   to {
     transform: rotate(360deg);
   }
 }
 
-/* CTA under the form */
+/* CTA under form */
 .signin-aux {
   display: flex;
   align-items: center;
@@ -324,17 +392,20 @@
   margin-top: 0.9rem;
   flex-wrap: wrap;
 }
+
 .join-block {
   margin-top: 1rem;
   text-align: center;
   line-height: 1.5;
 }
+
 .join-question {
   display: block;
   color: var(--sl-muted);
   font-size: 0.95rem;
   margin-bottom: 4px;
 }
+
 .link-gold {
   appearance: none;
   -webkit-appearance: none;
@@ -362,6 +433,7 @@
   outline: none;
   box-shadow: none;
 }
+
 .join-link {
   display: inline-block;
   font-weight: 600;
@@ -371,12 +443,12 @@
 
 /* Scoped join text */
 .soundlegend-signin .join-text {
-  font-size: 0.85rem; /* smaller font than before */
+  font-size: 0.85rem;
   color: var(--sl-muted);
 }
 
 .soundlegend-signin .join-text .join-link {
-  font-size: 0.9rem;  /* slightly larger than body text */
+  font-size: 0.9rem;
   font-weight: 600;
   color: var(--sl-gold);
   text-decoration: underline;
@@ -397,34 +469,45 @@
   text-align: center;
   line-height: 1.7;
 }
+
 .signin-info ul {
-  margin-top: 0.5rem;
+  margin-top: 0.75rem;
+  margin-left: auto;
+  margin-right: auto;
   padding-left: 1.2rem;
+  list-style-position: inside;
+  max-width: 360px;
   text-align: left;
-  list-style: disc;
   color: #aaa;
 }
+
 .signin-info li {
-  margin-bottom: 0.45rem;
+  margin-bottom: 0.35rem;
+  text-align: center;
+  font-size: 0.95rem;
 }
+
 .trust-note {
   margin-top: 0.9rem;
   color: var(--sl-muted);
   font-size: 0.9rem;
 }
+
 .support-row {
   margin-top: 0.35rem;
   color: var(--sl-muted-2);
   font-size: 0.9rem;
 }
+
 .support-row a {
   color: var(--sl-link);
 }
+
 .support-row a:hover {
   color: var(--sl-link-hover);
 }
 
-/* --- Hard reset hero block to kill the white rectangle --- */
+/* Hero hard reset */
 .soundlegend-signin .signin-hero,
 .soundlegend-signin .signin-hero * {
   background: transparent !important;
@@ -432,7 +515,6 @@
   border: 0 !important;
 }
 
-/* In case another stylesheet injects a pseudo-element background */
 .soundlegend-signin .signin-hero::before {
   content: none !important;
   display: none !important;
@@ -441,7 +523,6 @@
   border: 0 !important;
 }
 
-/* Keep our thin divider only (from ::after) */
 .soundlegend-signin .signin-hero::after {
   content: '';
   display: block;
@@ -457,38 +538,9 @@
   border-radius: 1px;
 }
 
-/* Ensure stacking is above any site-wide header bg layers */
 .soundlegend-signin .signin-hero {
   position: relative;
   z-index: 1;
-}
-
-/* Center the remember me row */
-.soundlegend-signin .signin-row {
-  justify-content: center; /* center instead of space-between */
-  margin: 0.5rem 0 1rem;
-}
-
-/* Center the custom checkbox label text */
-.soundlegend-signin .checkbox-label {
-  text-align: center;
-  font-size: 0.9rem;
-}
-
-/* Center and tighten the "What you'll access" list */
-.soundlegend-signin .signin-info ul {
-  margin-top: 0.75rem;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1.2rem; /* keep bullets visible */
-  list-style-position: inside; /* center-align bullets */
-  max-width: 360px; /* tighter block */
-}
-
-.soundlegend-signin .signin-info li {
-  margin-bottom: 0.35rem;
-  text-align: center; /* center-align text */
-  font-size: 0.95rem;
 }
 
 /* Smaller join link text */
@@ -536,11 +588,33 @@
   .soundlegend-signin {
     padding: 6vh 1rem 3rem;
   }
+
   .signin-logo {
     max-width: 200px;
   }
+
   .signin-card {
     padding: 1.3rem 1rem 1.05rem;
     max-width: 380px;
+  }
+
+  .signin-row {
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .checkbox {
+    gap: 8px;
+  }
+
+  .checkbox-label {
+    font-size: 0.82rem;
+    line-height: 1.2;
+  }
+
+  .forgot-link {
+    font-size: 0.8rem;
+    line-height: 1.1;
+    margin-top: 1px;
   }
 }

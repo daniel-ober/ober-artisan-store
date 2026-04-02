@@ -343,49 +343,42 @@ const SoundlegendSignin = () => {
           </p>
         )}
 
-        <div className="signin-row">
-          <label className="rememberme checkbox">
-            <input
-              type="checkbox"
-              checked={rememberMe}
-              onChange={(e) => setRememberMe(e.target.checked)}
-              disabled={isSubmitting || isSendingReset}
-            />
-            <span className="checkbox-box" aria-hidden="true">
-              <svg
-                viewBox="0 0 24 24"
-                className="checkbox-check"
-                focusable="false"
-              >
-                <path
-                  d="M20 6L9 17l-5-5"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </span>
-            <span className="checkbox-label">Remember me on this device</span>
-          </label>
+<div className="signin-row">
+  <label className="rememberme checkbox">
+    <input
+      type="checkbox"
+      checked={rememberMe}
+      onChange={(e) => setRememberMe(e.target.checked)}
+      disabled={isSubmitting}
+    />
+    <span className="checkbox-box" aria-hidden="true">
+      <svg
+        viewBox="0 0 24 24"
+        className="checkbox-check"
+        focusable="false"
+      >
+        <path
+          d="M20 6L9 17l-5-5"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </span>
+    <span className="checkbox-label">Remember me on this device</span>
+  </label>
 
-          <button
-            type="button"
-            className="link-gold join-link"
-            onClick={handleForgot}
-            disabled={isSubmitting || isSendingReset}
-            style={{
-              background: 'transparent',
-              border: 'none',
-              padding: 0,
-              cursor: isSubmitting || isSendingReset ? 'not-allowed' : 'pointer',
-              opacity: isSubmitting || isSendingReset ? 0.65 : 1,
-            }}
-          >
-            {isSendingReset ? 'Sending reset link…' : 'Forgot password?'}
-          </button>
-        </div>
+  <button
+    type="button"
+    className="forgot-link"
+    onClick={handleForgot}
+    disabled={isSubmitting}
+  >
+    Forgot password?
+  </button>
+</div>
 
         <button
           type="submit"
