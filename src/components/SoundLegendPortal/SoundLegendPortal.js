@@ -40,6 +40,8 @@ function tsToMillis(v) {
 }
 
 const normalizeEmail = (value) => String(value || '').trim().toLowerCase();
+const normalizeValue = (value) => String(value || '').trim();
+const normalizeUpper = (value) => normalizeValue(value).toUpperCase();
 
 const STORY_CHAPTER_KEYS = [
   'discoveryDesign',
@@ -293,10 +295,201 @@ const extractProjectIdsFromUser = (portalUser) => {
             ? entry
             : entry?.projectId || entry?.id || entry?.projectID || ''
         )
-        .map((v) => String(v).trim())
+        .map((v) => normalizeValue(v))
         .filter(Boolean)
     )
   );
+};
+
+const extractOrderIdsFromUser = (portalUser) => {
+  const raw = [
+    ...(Array.isArray(portalUser?.orderIds) ? portalUser.orderIds : []),
+    ...(Array.isArray(portalUser?.orders) ? portalUser.orders : []),
+    portalUser?.orderId,
+    portalUser?.latestOrderId,
+  ].filter(Boolean);
+
+  return Array.from(
+    new Set(
+      raw
+        .map((entry) =>
+          typeof entry === 'string'
+            ? entry
+            : entry?.orderId || entry?.id || entry?.orderID || ''
+        )
+        .map((v) => normalizeValue(v))
+        .filter(Boolean)
+    )
+  );
+};
+
+const getPortalUserLookup = (portalUser = {}) => {
+  const uidValues = Array.from(
+    new Set(
+      [
+        portalUser?.uid,
+        portalUser?.id,
+        portalUser?.userId,
+        portalUser?.customerUid,
+      ]
+        .map((v) => normalizeValue(v))
+        .filter(Boolean)
+    )
+  );
+
+  const emailValues = Array.from(
+    new Set(
+      [
+        portalUser?.email,
+        portalUser?.customerEmail,
+        portalUser?.contactEmail,
+      ]
+        .map((v) => normalizeEmail(v))
+        .filter(Boolean)
+    )
+  );
+
+  const nameValues = Array.from(
+    new Set(
+      [
+        portalUser?.fullName,
+        [portalUser?.firstName || '', portalUser?.lastName || '']
+          .join(' ')
+          .trim(),
+        portalUser?.displayName,
+        portalUser?.name,
+      ]
+        .map((v) => normalizeValue(v))
+        .filter(Boolean)
+    )
+  );
+
+  const projectIds = extractProjectIdsFromUser(portalUser);
+  const orderIds = extractOrderIdsFromUser(portalUser);
+
+  return {
+    uidValues,
+    emailValues,
+    nameValues,
+    projectIds,
+    orderIds,
+  };
+};
+
+const getProjectCandidateValues = (project = {}) => {
+  const uidValues = Array.from(
+    new Set(
+      [
+        project?.ownerUid,
+        project?.userId,
+        project?.uid,
+        project?.customerUid,
+        project?.assignedToUid,
+        project?.artistUid,
+        project?.clientUid,
+        project?.customer?.uid,
+        project?.owner?.uid,
+      ]
+        .map((v) => normalizeValue(v))
+        .filter(Boolean)
+    )
+  );
+
+  const emailValues = Array.from(
+    new Set(
+      [
+        project?.email,
+        project?.customerEmail,
+        project?.contactEmail,
+        project?.artistEmail,
+        project?.clientEmail,
+        project?.customer?.email,
+        project?.owner?.email,
+      ]
+        .map((v) => normalizeEmail(v))
+        .filter(Boolean)
+    )
+  );
+
+  const nameValues = Array.from(
+    new Set(
+      [
+        project?.customerName,
+        project?.fullName,
+        project?.artistName,
+        project?.clientName,
+        project?.customer?.name,
+        [project?.customer?.firstName || '', project?.customer?.lastName || '']
+          .join(' ')
+          .trim(),
+        [project?.firstName || '', project?.lastName || ''].join(' ').trim(),
+      ]
+        .map((v) => normalizeValue(v))
+        .filter(Boolean)
+    )
+  );
+
+  const orderValues = Array.from(
+    new Set(
+      [
+        project?.orderId,
+        project?.linkedOrderId,
+        project?.sourceOrderId,
+        ...(Array.isArray(project?.orderIds) ? project.orderIds : []),
+      ]
+        .map((v) => normalizeValue(v))
+        .filter(Boolean)
+    )
+  );
+
+  const projectValues = Array.from(
+    new Set(
+      [
+        project?.id,
+        project?.projectId,
+        project?.linkedProjectId,
+        project?.activeProjectId,
+      ]
+        .map((v) => normalizeValue(v))
+        .filter(Boolean)
+    )
+  );
+
+  return {
+    uidValues,
+    emailValues,
+    nameValues,
+    orderValues,
+    projectValues,
+  };
+};
+
+const projectMatchesPortalUser = ({ project, lookup, isAdminUser }) => {
+  if (!project?.id) return false;
+  if (isAdminUser) return true;
+
+  const candidate = getProjectCandidateValues(project);
+
+  const byExplicitProjectId = lookup.projectIds.some((id) =>
+    candidate.projectValues.includes(id)
+  );
+
+  const byUid = lookup.uidValues.some((uid) => candidate.uidValues.includes(uid));
+
+  const byEmail = lookup.emailValues.some((email) =>
+    candidate.emailValues.includes(email)
+  );
+
+  const byOrder = lookup.orderIds.some((orderId) =>
+    candidate.orderValues.includes(orderId)
+  );
+
+  const byName =
+    lookup.nameValues.length > 0 &&
+    candidate.nameValues.length > 0 &&
+    lookup.nameValues.some((name) => candidate.nameValues.includes(name));
+
+  return byExplicitProjectId || byUid || byEmail || byOrder || byName;
 };
 
 const SoundLegendPortal = () => {
@@ -318,10 +511,14 @@ const SoundLegendPortal = () => {
     }
   }, [location.search]);
 
-  const projectIdFromQuery = (queryParams.get('projectId') || '').trim();
-  const qpImpersonateUid = (queryParams.get('impersonateUid') || '').trim();
-  const qpImpersonateName = (queryParams.get('impersonateName') || '').trim();
-  const qpImpersonateEmail = (queryParams.get('impersonateEmail') || '').trim();
+  const projectIdFromQuery = normalizeValue(queryParams.get('projectId') || '');
+  const qpImpersonateUid = normalizeValue(queryParams.get('impersonateUid') || '');
+  const qpImpersonateName = normalizeValue(
+    queryParams.get('impersonateName') || ''
+  );
+  const qpImpersonateEmail = normalizeValue(
+    queryParams.get('impersonateEmail') || ''
+  );
 
   useEffect(() => {
     if (!isAdmin) return;
@@ -484,32 +681,35 @@ const SoundLegendPortal = () => {
       setLoading(true);
 
       try {
-        const allowedProjectIds = extractProjectIdsFromUser(effectivePortalUser);
         const matches = new Map();
+        const lookup = getPortalUserLookup(effectivePortalUser);
 
         const addProject = (project) => {
           if (!project?.id) return;
-          matches.set(String(project.id), project);
+          if (
+            projectMatchesPortalUser({
+              project,
+              lookup,
+              isAdminUser: isAdmin,
+            })
+          ) {
+            matches.set(String(project.id), project);
+          }
         };
 
         if (projectIdFromQuery) {
-          if (
-            isAdmin ||
-            allowedProjectIds.includes(String(projectIdFromQuery).trim())
-          ) {
-            try {
-              const pRef = doc(db, 'projects', projectIdFromQuery);
-              const pSnap = await getDoc(pRef);
-              if (pSnap.exists()) {
-                addProject({ id: pSnap.id, ...pSnap.data() });
-              }
-            } catch (e) {
-              console.warn('Failed to fetch project by query param:', e);
+          try {
+            const pRef = doc(db, 'projects', projectIdFromQuery);
+            const pSnap = await getDoc(pRef);
+            if (pSnap.exists()) {
+              addProject({ id: pSnap.id, ...pSnap.data() });
             }
+          } catch (e) {
+            console.warn('Failed to fetch project by query param:', e);
           }
         }
 
-        for (const projectId of allowedProjectIds) {
+        for (const projectId of lookup.projectIds) {
           try {
             const pRef = doc(db, 'projects', projectId);
             const pSnap = await getDoc(pRef);
@@ -518,6 +718,81 @@ const SoundLegendPortal = () => {
             }
           } catch (err) {
             console.warn('Failed to fetch allowed project:', err);
+          }
+        }
+
+        for (const uid of lookup.uidValues) {
+          const uidQueries = [
+            query(collection(db, 'projects'), where('ownerUid', '==', uid)),
+            query(collection(db, 'projects'), where('userId', '==', uid)),
+            query(collection(db, 'projects'), where('uid', '==', uid)),
+            query(collection(db, 'projects'), where('customerUid', '==', uid)),
+            query(collection(db, 'projects'), where('artistUid', '==', uid)),
+            query(collection(db, 'projects'), where('clientUid', '==', uid)),
+          ];
+
+          for (const qRef of uidQueries) {
+            try {
+              const snap = await getDocs(qRef);
+              snap.forEach((docSnap) =>
+                addProject({ id: docSnap.id, ...docSnap.data() })
+              );
+            } catch (err) {
+              console.warn('Project UID query failed:', err);
+            }
+          }
+        }
+
+        for (const email of lookup.emailValues) {
+          const emailQueries = [
+            query(collection(db, 'projects'), where('email', '==', email)),
+            query(collection(db, 'projects'), where('customerEmail', '==', email)),
+            query(collection(db, 'projects'), where('contactEmail', '==', email)),
+            query(collection(db, 'projects'), where('artistEmail', '==', email)),
+            query(collection(db, 'projects'), where('clientEmail', '==', email)),
+            query(collection(db, 'projects'), where('customer.email', '==', email)),
+            query(collection(db, 'projects'), where('owner.email', '==', email)),
+          ];
+
+          for (const qRef of emailQueries) {
+            try {
+              const snap = await getDocs(qRef);
+              snap.forEach((docSnap) =>
+                addProject({ id: docSnap.id, ...docSnap.data() })
+              );
+            } catch (err) {
+              console.warn('Project email query failed:', err);
+            }
+          }
+        }
+
+        for (const orderId of lookup.orderIds) {
+          const orderQueries = [
+            query(collection(db, 'projects'), where('orderId', '==', orderId)),
+            query(collection(db, 'projects'), where('linkedOrderId', '==', orderId)),
+            query(collection(db, 'projects'), where('sourceOrderId', '==', orderId)),
+          ];
+
+          for (const qRef of orderQueries) {
+            try {
+              const snap = await getDocs(qRef);
+              snap.forEach((docSnap) =>
+                addProject({ id: docSnap.id, ...docSnap.data() })
+              );
+            } catch (err) {
+              console.warn('Project order query failed:', err);
+            }
+          }
+        }
+
+        if (matches.size === 0) {
+          try {
+            const allProjectsSnap = await getDocs(collection(db, 'projects'));
+            allProjectsSnap.forEach((docSnap) => {
+              addProject({ id: docSnap.id, ...docSnap.data() });
+            });
+          } catch (err) {
+            console.warn('Fallback full project scan failed:', err);
           }
         }
 
@@ -567,12 +842,7 @@ const SoundLegendPortal = () => {
 
     const run = async () => {
       try {
-        const orderIds = Array.isArray(effectivePortalUser?.orderIds)
-          ? effectivePortalUser.orderIds
-              .map((v) => String(v || '').trim())
-              .filter(Boolean)
-          : [];
-
+        const orderIds = extractOrderIdsFromUser(effectivePortalUser);
         const items = [];
 
         for (const orderId of orderIds) {
@@ -624,13 +894,13 @@ const SoundLegendPortal = () => {
   );
 
   const artisanLine = (selectedProject?.artisanLine || '').toLowerCase();
-  const serialGuess = (
+  const serialGuess = normalizeUpper(
     selectedProject?.lineSerial ||
-    selectedProject?.snareSerial ||
-    selectedProject?.serial ||
-    selectedProject?.id ||
-    ''
-  ).toUpperCase();
+      selectedProject?.snareSerial ||
+      selectedProject?.serial ||
+      selectedProject?.id ||
+      ''
+  );
 
   const isSoundLegendProject =
     artisanLine === 'soundlegend' || serialGuess.startsWith('SL-');
