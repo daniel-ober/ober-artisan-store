@@ -231,9 +231,7 @@ function ConsultationIntakePanel({
                   }`}
                 >
                   <div className="cip-field-card-topline">
-                    <div className="cip-field-step">
-                      Question {index + 1}
-                    </div>
+                    <div className="cip-field-step">Question {index + 1}</div>
                   </div>
 
                   <label className="cip-field-label">{field.label}</label>
@@ -242,9 +240,7 @@ function ConsultationIntakePanel({
                     <div className="cip-field-helper">{field.placeholder}</div>
                   ) : null}
 
-                  <div className="cip-field-control">
-                    {renderField(section, field)}
-                  </div>
+                  <div className="cip-field-control">{renderField(section, field)}</div>
                 </div>
               );
             })}
