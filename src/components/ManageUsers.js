@@ -1,5 +1,11 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { collection, getDocs, doc, updateDoc } from 'firebase/firestore';
+import {
+  arrayUnion,
+  collection,
+  doc,
+  getDocs,
+  updateDoc,
+} from 'firebase/firestore';
 import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
 import { httpsCallable } from 'firebase/functions';
 import { db, functions } from '../firebaseConfig';
@@ -17,11 +23,19 @@ const normalizeEmail = (email = '') =>
     .trim()
     .toLowerCase();
 
+const normalizePhoneDigits = (phone = '') =>
+  String(phone || '')
+    .replace(/\D/g, '')
+    .replace(/^1(?=\d{10}$)/, '');
+
 const formatMaybeDate = (value) => {
   if (!value) return '';
   try {
     if (typeof value?.toDate === 'function') {
       return value.toDate().toLocaleString();
+    }
+    if (typeof value?.seconds === 'number') {
+      return new Date(value.seconds * 1000).toLocaleString();
     }
     if (value instanceof Date) {
       return value.toLocaleString();
@@ -65,6 +79,7 @@ const mergeUsersForDisplay = (base, incoming) => {
       incoming.fullName ||
       base.fullName ||
       `${incoming.firstName || base.firstName || ''} ${incoming.lastName || base.lastName || ''}`.trim(),
+    phone: incoming.phone || base.phone || '',
     isSoundlegend: !!(base.isSoundlegend || incoming.isSoundlegend),
     isAdmin: !!(base.isAdmin || incoming.isAdmin),
     slPortalLocked:
@@ -130,6 +145,23 @@ const dedupeUsersByEmail = (usersList = []) => {
   });
 };
 
+const yesNo = (value) => (value ? 'Yes' : 'No');
+
+const getDisplayName = (user) =>
+  user?.fullName ||
+  `${user?.firstName || ''} ${user?.lastName || ''}`.trim() ||
+  '—';
+
+const copyText = async (value) => {
+  if (!value) return false;
+  try {
+    await navigator.clipboard.writeText(String(value));
+    return true;
+  } catch {
+    return false;
+  }
+};
+
 const ActionModal = ({
   open,
   type = 'info',
@@ -145,7 +177,10 @@ const ActionModal = ({
   if (!open) return null;
 
   return (
-    <div className="manage-users-action-overlay" onClick={isBusy ? undefined : onClose}>
+    <div
+      className="manage-users-action-overlay"
+      onClick={isBusy ? undefined : onClose}
+    >
       <div
         className={`manage-users-action-modal ${type}`}
         onClick={(e) => e.stopPropagation()}
@@ -200,13 +235,121 @@ const ActionModal = ({
   );
 };
 
+const StatCell = ({ label, value, subtle = false, meta = '' }) => (
+  <div className={`mu-stat-cell ${subtle ? 'is-subtle' : ''}`}>
+    <div className="mu-stat-label">{label}</div>
+    <div className="mu-stat-value">{value || '—'}</div>
+    {meta ? <div className="mu-meta-line">{meta}</div> : null}
+  </div>
+);
+
+const ResourceCard = ({
+  title,
+  items = [],
+  emptyText,
+  onAttachClick,
+  onCopyId,
+  kind,
+}) => {
+  return (
+    <div className="mu-resource-card">
+      <div className="mu-resource-card-head">
+        <div>
+          <h4>{title}</h4>
+          <div className="mu-resource-card-count">
+            {items.length} {items.length === 1 ? 'item' : 'items'}
+          </div>
+        </div>
+      </div>
+
+      {items.length === 0 ? (
+        <div className="mu-resource-empty">{emptyText}</div>
+      ) : (
+        <div className="mu-resource-list">
+          {items.map((item) => (
+            <div key={`${kind}-${item.id}`} className="mu-resource-row">
+              <div className="mu-resource-copy">
+                <div className="mu-resource-title">
+                  {item.title || item.name || item.label || item.id}
+                </div>
+                <div className="mu-resource-meta">{item.meta || '—'}</div>
+              </div>
+
+              <div className="mu-resource-actions">
+                <button
+                  type="button"
+                  className="mu-inline-btn"
+                  onClick={() => onCopyId?.(item.id)}
+                >
+                  Copy ID
+                </button>
+                <button
+                  type="button"
+                  className="mu-inline-btn secondary"
+                  onClick={() => onAttachClick?.(item)}
+                >
+                  Re-attach
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+const UnassignedBucket = ({ title, items = [], emptyText, onAttach, kind }) => {
+  return (
+    <div className="mu-unassigned-card">
+      <div className="mu-unassigned-head">
+        <h4>{title}</h4>
+        <span>{items.length}</span>
+      </div>
+
+      {items.length === 0 ? (
+        <div className="mu-resource-empty">{emptyText}</div>
+      ) : (
+        <div className="mu-unassigned-list">
+          {items.map((item) => (
+            <div key={`${kind}-${item.id}`} className="mu-unassigned-row">
+              <div className="mu-unassigned-copy">
+                <div className="mu-unassigned-title">
+                  {item.title || item.name || item.label || item.id}
+                </div>
+                <div className="mu-unassigned-meta">{item.meta || '—'}</div>
+              </div>
+
+              <button
+                type="button"
+                className="mu-inline-btn"
+                onClick={() => onAttach(item)}
+              >
+                Attach
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
 const ManageUsers = () => {
   const [users, setUsers] = useState([]);
+  const [projects, setProjects] = useState([]);
+  const [orders, setOrders] = useState([]);
+  const [soundlegendRequests, setSoundlegendRequests] = useState([]);
+  const [endorsements, setEndorsements] = useState([]);
+
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedUser, setSelectedUser] = useState(null);
+  const [expandedUserId, setExpandedUserId] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [loadingActionId, setLoadingActionId] = useState(null);
+  const [pageLoading, setPageLoading] = useState(true);
+  const [activeAttachUserId, setActiveAttachUserId] = useState(null);
 
   const [actionModal, setActionModal] = useState({
     open: false,
@@ -267,54 +410,164 @@ const ManageUsers = () => {
     }));
   };
 
+  const refreshAll = async () => {
+    try {
+      setPageLoading(true);
+
+      const [
+        userSnapshot,
+        projectSnapshot,
+        orderSnapshot,
+        slSnapshot,
+        endorsementSnapshot,
+      ] = await Promise.all([
+        getDocs(collection(db, 'users')),
+        getDocs(collection(db, 'projects')),
+        getDocs(collection(db, 'orders')),
+        getDocs(collection(db, 'soundlegend_submissions')),
+        getDocs(collection(db, 'endorsement_applications')),
+      ]);
+
+      const rawUsers = userSnapshot.docs.map((docSnap) => {
+        const data = docSnap.data() || {};
+        const firstName = data.firstName || '';
+        const lastName = data.lastName || '';
+        const fullName = data.fullName || `${firstName} ${lastName}`.trim();
+
+        const derivedUid =
+          data.uid || (docSnap.id.startsWith('lead_') ? '' : docSnap.id);
+
+        const derivedAuthAccountCreated =
+          !!data.authAccountCreated || !!derivedUid;
+
+        return {
+          id: docSnap.id,
+          docId: docSnap.id,
+          uid: derivedUid,
+          email: normalizeEmail(data.email || ''),
+          firstName,
+          lastName,
+          fullName: fullName || '—',
+          phone: data.phone || '',
+          status: data.status || 'active',
+          isSoundlegend: !!data.isSoundlegend,
+          isAdmin: !!data.isAdmin,
+          slPortalLocked: !!data.slPortalLocked,
+          portalAccessGranted: !!data.portalAccessGranted,
+          portalInviteSent: !!data.portalInviteSent,
+          authAccountCreated: derivedAuthAccountCreated,
+          lastWelcomeEmailSentAt:
+            data.lastWelcomeEmailSentAt || data.welcomeEmailSentAt || null,
+          lastLoginAt: data.lastLoginAt || data.lastSignInAt || null,
+          lastSignInAt: data.lastSignInAt || data.lastLoginAt || null,
+          projectIds: Array.isArray(data.projectIds) ? data.projectIds : [],
+          orderIds: Array.isArray(data.orderIds) ? data.orderIds : [],
+        };
+      });
+
+      const projectRows = projectSnapshot.docs.map((d) => {
+        const data = d.data() || {};
+        return {
+          id: d.id,
+          userId: data.userId || data.ownerUid || '',
+          customerEmail: normalizeEmail(
+            data.customerEmail || data.ownerEmail || data.customer?.email || ''
+          ),
+          customerPhone: normalizePhoneDigits(
+            data.customerPhone || data.customer?.phone || ''
+          ),
+          title:
+            data.label ||
+            data.projectName ||
+            data.title ||
+            `${data.artisanLine || 'Project'} ${data.width || data.diameter || ''}${data.depth || data.shellDepth ? ` × ${data.depth || data.shellDepth}` : ''}`.trim() ||
+            'Untitled Project',
+          meta: [data.currentPhase || 'No phase', d.id]
+            .filter(Boolean)
+            .join(' • '),
+          raw: data,
+        };
+      });
+
+      const orderRows = orderSnapshot.docs.map((d) => {
+        const data = d.data() || {};
+        return {
+          id: d.id,
+          userId: data.userId || '',
+          customerEmail: normalizeEmail(
+            data.customerEmail ||
+              data.email ||
+              data.paymentMethodDetails?.email ||
+              ''
+          ),
+          customerPhone: normalizePhoneDigits(data.phone || ''),
+          title: data.customerName || `Order ${d.id}`,
+          meta: [data.status || data.overviewStatus || 'No status', d.id]
+            .filter(Boolean)
+            .join(' • '),
+          raw: data,
+        };
+      });
+
+      const slRows = slSnapshot.docs.map((d) => {
+        const data = d.data() || {};
+        return {
+          id: d.id,
+          userId: data.userId || data.linkedUserId || '',
+          customerEmail: normalizeEmail(data.email || ''),
+          customerPhone: normalizePhoneDigits(data.phone || ''),
+          title:
+            `${data.firstName || ''} ${data.lastName || ''}`.trim() ||
+            data.email ||
+            `SL Request ${d.id}`,
+          meta: [
+            data.status || data.overviewStatus || 'No status',
+            data.projectId ? `Project ${data.projectId}` : null,
+          ]
+            .filter(Boolean)
+            .join(' • '),
+          raw: data,
+        };
+      });
+
+      const endorsementRows = endorsementSnapshot.docs.map((d) => {
+        const data = d.data() || {};
+        return {
+          id: d.id,
+          userId: data.userId || data.linkedUserId || '',
+          customerEmail: normalizeEmail(data.email || ''),
+          customerPhone: normalizePhoneDigits(data.phone || ''),
+          title: data.fullName || data.email || `Endorsement ${d.id}`,
+          meta: [
+            data.status || data.overviewStatus || 'No status',
+            data.stageName || null,
+          ]
+            .filter(Boolean)
+            .join(' • '),
+          raw: data,
+        };
+      });
+
+      setUsers(dedupeUsersByEmail(rawUsers));
+      setProjects(projectRows);
+      setOrders(orderRows);
+      setSoundlegendRequests(slRows);
+      setEndorsements(endorsementRows);
+    } catch (error) {
+      console.error('Error loading Manage Users data:', error);
+      openInfoModal({
+        type: 'error',
+        title: 'Could not load user workspace',
+        message:
+          'There was a problem loading users and linked resources. Please refresh and try again.',
+      });
+    } finally {
+      setPageLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const usersCollection = collection(db, 'users');
-        const userSnapshot = await getDocs(usersCollection);
-
-        const rawUsers = userSnapshot.docs.map((docSnap) => {
-          const data = docSnap.data() || {};
-          const firstName = data.firstName || '';
-          const lastName = data.lastName || '';
-          const fullName = data.fullName || `${firstName} ${lastName}`.trim();
-
-          return {
-            id: docSnap.id,
-            docId: docSnap.id,
-            uid: data.uid || (docSnap.id.startsWith('lead_') ? '' : docSnap.id),
-            email: normalizeEmail(data.email || 'N/A'),
-            firstName,
-            lastName,
-            fullName: fullName || '—',
-            phone: data.phone || '',
-            status: data.status || 'active',
-            isSoundlegend: !!data.isSoundlegend,
-            isAdmin: !!data.isAdmin,
-            slPortalLocked: !!data.slPortalLocked,
-            portalAccessGranted: !!data.portalAccessGranted,
-            portalInviteSent: !!data.portalInviteSent,
-            authAccountCreated: !!data.authAccountCreated || !!data.uid,
-            lastWelcomeEmailSentAt:
-              data.lastWelcomeEmailSentAt || data.welcomeEmailSentAt || null,
-            lastLoginAt: data.lastLoginAt || data.lastSignInAt || null,
-            lastSignInAt: data.lastSignInAt || data.lastLoginAt || null,
-          };
-        });
-
-        setUsers(dedupeUsersByEmail(rawUsers));
-      } catch (error) {
-        console.error('Error fetching users:', error);
-        openInfoModal({
-          type: 'error',
-          title: 'Could not load users',
-          message:
-            'There was a problem loading the Manage Users list. Please refresh and try again.',
-        });
-      }
-    };
-
-    fetchUsers();
+    refreshAll();
   }, []);
 
   const filteredUsers = useMemo(() => {
@@ -322,13 +575,121 @@ const ManageUsers = () => {
     if (!query) return users;
 
     return users.filter((user) => {
-      const haystack = [user.email, user.firstName, user.lastName, user.fullName]
+      const haystack = [
+        user.email,
+        user.firstName,
+        user.lastName,
+        user.fullName,
+        user.id,
+        user.uid,
+      ]
         .map((v) => (v || '').toLowerCase())
         .join(' ');
 
       return haystack.includes(query);
     });
   }, [users, searchQuery]);
+
+  const userResourceMap = useMemo(() => {
+    const map = new Map();
+
+    const ensureBucket = (userId) => {
+      if (!map.has(userId)) {
+        map.set(userId, {
+          projects: [],
+          orders: [],
+          soundlegend: [],
+          endorsements: [],
+        });
+      }
+      return map.get(userId);
+    };
+
+    const usersById = new Map();
+    const usersByEmail = new Map();
+    const usersByPhone = new Map();
+
+    users.forEach((user) => {
+      const canonicalUserId = user.uid || user.id;
+      usersById.set(canonicalUserId, user);
+      usersById.set(user.id, user);
+
+      const email = normalizeEmail(user.email);
+      const phone = normalizePhoneDigits(user.phone);
+
+      if (email) usersByEmail.set(email, user);
+      if (phone) usersByPhone.set(phone, user);
+    });
+
+    const resolveUserForItem = (item) => {
+      const explicitUserId = item.userId;
+      if (explicitUserId && usersById.has(explicitUserId)) {
+        return usersById.get(explicitUserId);
+      }
+
+      if (item.customerEmail && usersByEmail.has(item.customerEmail)) {
+        return usersByEmail.get(item.customerEmail);
+      }
+
+      if (item.customerPhone && usersByPhone.has(item.customerPhone)) {
+        return usersByPhone.get(item.customerPhone);
+      }
+
+      return null;
+    };
+
+    projects.forEach((item) => {
+      const user = resolveUserForItem(item);
+      if (!user) return;
+      ensureBucket(user.uid || user.id).projects.push(item);
+    });
+
+    orders.forEach((item) => {
+      const user = resolveUserForItem(item);
+      if (!user) return;
+      ensureBucket(user.uid || user.id).orders.push(item);
+    });
+
+    soundlegendRequests.forEach((item) => {
+      const user = resolveUserForItem(item);
+      if (!user) return;
+      ensureBucket(user.uid || user.id).soundlegend.push(item);
+    });
+
+    endorsements.forEach((item) => {
+      const user = resolveUserForItem(item);
+      if (!user) return;
+      ensureBucket(user.uid || user.id).endorsements.push(item);
+    });
+
+    return map;
+  }, [users, projects, orders, soundlegendRequests, endorsements]);
+
+  const unassigned = useMemo(() => {
+    const usersById = new Set(users.map((u) => u.uid || u.id));
+    const usersByEmail = new Set(
+      users.map((u) => normalizeEmail(u.email)).filter(Boolean)
+    );
+    const usersByPhone = new Set(
+      users.map((u) => normalizePhoneDigits(u.phone)).filter(Boolean)
+    );
+
+    const isLinked = (item) => {
+      if (item.userId && usersById.has(item.userId)) return true;
+      if (item.customerEmail && usersByEmail.has(item.customerEmail))
+        return true;
+      if (item.customerPhone && usersByPhone.has(item.customerPhone))
+        return true;
+      return false;
+    };
+
+    return {
+      projects: projects.filter((item) => !isLinked(item)),
+      orders: orders.filter((item) => !isLinked(item)),
+      soundlegend: soundlegendRequests.filter((item) => !isLinked(item)),
+      endorsements: endorsements.filter((item) => !isLinked(item)),
+    };
+  }, [users, projects, orders, soundlegendRequests, endorsements]);
 
   const updateLocalUser = (idOrEmail, patch) => {
     setUsers((prev) => {
@@ -364,7 +725,7 @@ const ManageUsers = () => {
     setSearchQuery(e.target.value);
   };
 
-    const handleViewUser = (user) => {
+  const handleViewUser = (user) => {
     if (isAdminUser(user)) {
       openInfoModal({
         type: 'info',
@@ -394,20 +755,20 @@ const ManageUsers = () => {
       !user?.authAccountCreated
     ) {
       return {
-        label: 'Portal Inactive',
+        label: 'Portal inactive',
         className: 'off',
       };
     }
 
     if (user.portalAccessGranted && !user.slPortalLocked) {
       return {
-        label: 'Portal Active',
+        label: 'Portal active',
         className: 'unlocked',
       };
     }
 
     return {
-      label: 'Portal Inactive',
+      label: 'Portal inactive',
       className: 'locked',
     };
   };
@@ -655,221 +1016,542 @@ const ManageUsers = () => {
     window.open('/legacy', '_blank');
   };
 
+  const handleCopy = async (label, value) => {
+    const ok = await copyText(value);
+    openInfoModal({
+      type: ok ? 'success' : 'error',
+      title: ok ? `${label} copied` : 'Copy failed',
+      message: ok
+        ? `${label} has been copied to your clipboard.`
+        : `We could not copy that ${label.toLowerCase()} right now.`,
+    });
+  };
+
+  const attachResourceToUser = async ({ user, item, type }) => {
+    const canonicalUserId = user?.uid || user?.id;
+    if (!canonicalUserId || !item?.id) return;
+
+    const busyKey = `${canonicalUserId}:${type}:${item.id}`;
+    setLoadingActionId(busyKey);
+
+    try {
+      const userRef = doc(db, 'users', canonicalUserId);
+
+      if (type === 'project') {
+        const projectRef = doc(db, 'projects', item.id);
+        const raw = item.raw || {};
+        const projectSummary = {
+          projectId: item.id,
+          label:
+            raw.label ||
+            raw.projectName ||
+            raw.title ||
+            item.title ||
+            'Untitled Project',
+          width: String(raw.diameter ?? raw.width ?? raw.shellWidth ?? ''),
+          depth: String(raw.depth ?? raw.shellDepth ?? ''),
+          staveQuantity: String(raw.staveQuantity ?? raw.staveCount ?? ''),
+          updatedAt: Date.now(),
+        };
+
+        await Promise.all([
+          updateDoc(projectRef, {
+            userId: canonicalUserId,
+            ownerUid: canonicalUserId,
+          }),
+          updateDoc(userRef, {
+            projectIds: arrayUnion(item.id),
+            projects: arrayUnion(projectSummary),
+          }),
+        ]);
+      }
+
+      if (type === 'order') {
+        const orderRef = doc(db, 'orders', item.id);
+        await Promise.all([
+          updateDoc(orderRef, {
+            userId: canonicalUserId,
+          }),
+          updateDoc(userRef, {
+            orderIds: arrayUnion(item.id),
+          }),
+        ]);
+      }
+
+      if (type === 'soundlegend') {
+        const submissionRef = doc(db, 'soundlegend_submissions', item.id);
+        await updateDoc(submissionRef, {
+          userId: canonicalUserId,
+          linkedUserId: canonicalUserId,
+        });
+      }
+
+      if (type === 'endorsement') {
+        const endorsementRef = doc(db, 'endorsement_applications', item.id);
+        await updateDoc(endorsementRef, {
+          userId: canonicalUserId,
+          linkedUserId: canonicalUserId,
+        });
+      }
+
+      await refreshAll();
+
+      openInfoModal({
+        type: 'success',
+        title: 'Resource attached',
+        message: `${item.title || item.id} has been attached to ${getDisplayName(
+          user
+        )}.`,
+      });
+    } catch (err) {
+      console.error(`Failed to attach ${type}:`, err);
+      openInfoModal({
+        type: 'error',
+        title: 'Could not attach resource',
+        message:
+          'There was a problem attaching this resource to the user. Please try again.',
+      });
+    } finally {
+      setLoadingActionId(null);
+    }
+  };
+
+  const buildUserSummary = (user) => {
+    const canonicalUserId = user.uid || user.id;
+    const bucket = userResourceMap.get(canonicalUserId) || {
+      projects: [],
+      orders: [],
+      soundlegend: [],
+      endorsements: [],
+    };
+
+    const lastWelcomeSent = formatMaybeDate(user.lastWelcomeEmailSentAt);
+    const lastLoginSeen = formatMaybeDate(
+      user.lastLoginAt || user.lastSignInAt
+    );
+
+    return {
+      resources: bucket,
+      hasProjects: bucket.projects.length > 0,
+      hasOrders: bucket.orders.length > 0,
+      hasSoundlegend: bucket.soundlegend.length > 0,
+      hasEndorsements: bucket.endorsements.length > 0,
+      hasAnyResources:
+        bucket.projects.length > 0 ||
+        bucket.orders.length > 0 ||
+        bucket.soundlegend.length > 0 ||
+        bucket.endorsements.length > 0,
+      authCreated: !!user.authAccountCreated,
+      welcomeSent: !!user.portalInviteSent,
+      lastWelcomeSent: lastWelcomeSent || '—',
+      lastLoginSeen: lastLoginSeen || '—',
+    };
+  };
+
   return (
     <>
       <div className="manage-users">
-        <div className="manage-users-header-row">
-          <div>
-            <h2 className="manage-users-header">Manage Users</h2>
-            <p className="manage-users-subtitle">
-              Manage SoundLegend portal access, invite emails, and password
-              reset tools for your artists.
-            </p>
+        <div className="manage-users-shell">
+          <div className="manage-users-topbar">
+            <div className="manage-users-topbar-copy">
+              <div className="manage-users-eyebrow">Admin Workspace</div>
+              <h2 className="manage-users-header">Manage Users</h2>
+              <p className="manage-users-subtitle">
+                Clean user directory for account state, welcome email
+                visibility, portal access, linked resources, and manual
+                attachment of unassigned projects, orders, SoundLegend requests,
+                and endorsements.
+              </p>
+            </div>
+
+            <button className="add-btn" onClick={handleAddUser}>
+              + Add User
+            </button>
           </div>
 
-          <button className="add-btn" onClick={handleAddUser}>
-            + Add User
-          </button>
-        </div>
+          <div className="manage-users-toolbar">
+            <input
+              type="text"
+              placeholder="Search by name, email, user ID, or UID"
+              value={searchQuery}
+              onChange={handleSearch}
+              className="search-bar"
+            />
 
-        <input
-          type="text"
-          placeholder="Search by email, first name, or last name"
-          value={searchQuery}
-          onChange={handleSearch}
-          className="search-bar"
-        />
+            <button
+              type="button"
+              className="mu-refresh-btn"
+              onClick={refreshAll}
+              disabled={pageLoading}
+            >
+              {pageLoading ? 'Refreshing…' : 'Refresh'}
+            </button>
+          </div>
 
-        <div className="responsive-table-container">
-          <table className="manage-users-table">
-            <thead>
-              <tr>
-                <th>Email</th>
-                <th>Name</th>
-                <th>Portal Controls</th>
-                <th>More</th>
-              </tr>
-            </thead>
+{pageLoading ? (
+  <div className="mu-loading-state">Loading user workspace…</div>
+) : (
+  <div className="mu-list-shell">
+    {filteredUsers.length === 0 ? (
+      <div className="mu-empty-state">No users found.</div>
+    ) : (
+      filteredUsers.map((user) => {
+        const isAdmin = isAdminUser(user);
+        const portalStatus = getPortalStatus(user);
+        const summary = buildUserSummary(user);
+        const canonicalId = user.uid || user.id;
+        const expanded = expandedUserId === canonicalId;
+        const showResetButton =
+          !!formatMaybeDate(user.lastLoginAt || user.lastSignInAt);
+        const showWelcomeButton = !showResetButton;
 
-            <tbody>
-              {filteredUsers.length === 0 ? (
-                <tr>
-                  <td colSpan="4">No users found</td>
-                </tr>
-              ) : (
-                filteredUsers.map((user) => {
-                  const busy = loadingActionId === (user.uid || user.id);
-                  const isAdmin = isAdminUser(user);
-                  const portalStatus = getPortalStatus(user);
+        return (
+          <div
+            className={`mu-user-card ${expanded ? 'is-expanded' : ''}`}
+            key={canonicalId || user.email}
+          >
+            <div className="mu-user-main">
+              <div className="mu-user-identity">
+                <div className="mu-user-name-row">
+                  <div className="mu-user-name">{getDisplayName(user)}</div>
 
-                  const lastWelcomeSent = formatMaybeDate(
-                    user.lastWelcomeEmailSentAt
-                  );
-                  const lastLoginSeen = formatMaybeDate(
-                    user.lastLoginAt || user.lastSignInAt
-                  );
+                  <div className="mu-user-badges">
+                    {user.isSoundlegend ? (
+                      <span className="mu-badge tone-blue">SoundLegend</span>
+                    ) : null}
+                    {isAdmin ? (
+                      <span className="mu-badge tone-purple">Admin</span>
+                    ) : null}
+                  </div>
+                </div>
 
-                  const hasSignedIn =
-                    !!(user.lastLoginAt || user.lastSignInAt) &&
-                    String(lastLoginSeen).trim() !== '';
+                <div className="mu-user-email">{user.email || '—'}</div>
 
-                  const showResetButton = hasSignedIn;
-                  const showWelcomeButton = !hasSignedIn;
+                {user.phone ? (
+                  <div className="mu-user-subtle">{user.phone}</div>
+                ) : null}
 
-                  const welcomeLabel = user.portalInviteSent
-                    ? 'Re-send Welcome Email'
-                    : 'Send Welcome Email';
+                <div className="mu-id-stack">
+                  <div className="mu-id-label">User ID</div>
+                  <div className="mu-id-value">{canonicalId || '—'}</div>
 
-                  const statusLine = hasSignedIn
-                    ? `Last portal login: ${lastLoginSeen}`
-                    : user.portalInviteSent
-                      ? lastWelcomeSent
-                        ? `Welcome email sent: ${lastWelcomeSent}`
-                        : 'Welcome email sent'
-                      : 'No welcome email sent';
+                  <div className="mu-id-actions">
+                    <button
+                      type="button"
+                      className="mu-inline-btn"
+                      onClick={() => handleCopy('User ID', canonicalId)}
+                      disabled={!canonicalId}
+                    >
+                      Copy
+                    </button>
 
-                  return (
-                    <tr key={user.uid || user.id || user.email}>
-                      <td>
-                        <div className="user-email-cell">{user.email}</div>
-                        <div className="user-flags">
-                          {user.isSoundlegend && (
-                            <span className="user-flag user-flag-sl">
-                              SoundLegend
-                            </span>
-                          )}
-                          {isAdmin && (
-                            <span className="user-flag user-flag-admin">
-                              Admin
-                            </span>
-                          )}
-                        </div>
-                      </td>
+                    {user.uid && user.uid !== user.id ? (
+                      <button
+                        type="button"
+                        className="mu-inline-btn secondary"
+                        onClick={() => handleCopy('Auth UID', user.uid)}
+                      >
+                        Copy UID
+                      </button>
+                    ) : null}
+                  </div>
+                </div>
+              </div>
 
-                      <td>{user.fullName || '—'}</td>
+              <div className="mu-user-summary-grid">
+                <StatCell
+                  label="Auth Account"
+                  value={yesNo(summary.authCreated)}
+                />
 
-                      <td className="portal-controls-cell">
-                        {isAdmin ? (
-                          <div className="admin-portal-note">
-                            Admin accounts are read-only in this view.
-                            <br />
-                            Update admin flags and access directly in the
-                            Firestore
-                            <br />
-                            <span className="admin-portal-note-strong">
-                              users
-                            </span>{' '}
-                            collection.
-                          </div>
-                        ) : (
-                          <>
-                            <div className="portal-toggle-row">
-                              <button
-                                type="button"
-                                className={`pill-toggle lock ${portalStatus.className}`}
-                                onClick={() => handleTogglePortalAccess(user)}
-                                disabled={busy}
-                                data-tooltip={
-                                  portalStatus.className === 'unlocked'
-                                    ? 'Portal is currently active.\nClick to expire portal access.'
-                                    : 'Portal is currently expired/locked.\nClick to restore portal access.'
-                                }
-                              >
-                                {portalStatus.label}
-                              </button>
-                            </div>
+                <StatCell
+                  label="Welcome Email"
+                  value={yesNo(summary.welcomeSent)}
+                  meta={summary.lastWelcomeSent}
+                />
 
-                            <div className="portal-password-row">
-                              {showResetButton ? (
-                                <button
-                                  type="button"
-                                  className="mini-btn"
-                                  onClick={() => handleSendResetEmail(user)}
-                                  disabled={
-                                    busy || !user.email || user.email === 'N/A'
-                                  }
-                                >
-                                  Send Reset Email
-                                </button>
-                              ) : null}
+                <StatCell
+                  label="Last Login"
+                  value={summary.lastLoginSeen}
+                  subtle
+                />
 
-                              {showWelcomeButton ? (
-                                <button
-                                  type="button"
-                                  className="mini-btn secondary"
-                                  onClick={() => handleSendWelcomeEmail(user)}
-                                  disabled={
-                                    busy || !user.email || user.email === 'N/A'
-                                  }
-                                >
-                                  {welcomeLabel}
-                                </button>
-                              ) : null}
-                            </div>
+                <StatCell
+                  label="Linked Resources"
+                  value={yesNo(summary.hasAnyResources)}
+                  meta={`${summary.resources.projects.length} projects • ${summary.resources.orders.length} orders • ${summary.resources.soundlegend.length} SL • ${summary.resources.endorsements.length} endorsements`}
+                />
+              </div>
 
-                            <div
-                              style={{
-                                marginTop: '8px',
-                                fontSize: '0.82rem',
-                                color: '#666',
-                                lineHeight: 1.45,
-                              }}
-                            >
-                              {statusLine}
-                            </div>
-                          </>
-                        )}
-                      </td>
+              <div className="mu-user-side">
+                <div className={`mu-portal-state ${portalStatus.className}`}>
+                  {portalStatus.label}
+                </div>
 
-                      <td>
-                        <div className="more-actions">
-                          {isAdmin ? (
-                            <>
-                              <button
-                                className="view-btn"
-                                type="button"
-                                disabled
-                                title="Admin users are managed directly in Firestore"
-                              >
-                                Admin (read-only)
-                              </button>
+                <div className="mu-action-stack">
+                  <button
+                    className="mu-primary-btn"
+                    type="button"
+                    onClick={() =>
+                      setExpandedUserId(expanded ? null : canonicalId)
+                    }
+                  >
+                    {expanded ? 'Collapse' : 'Expand'}
+                  </button>
 
-                              <button
-                                className="impersonate-btn"
-                                type="button"
-                                onClick={() => handleImpersonateUser(user)}
-                              >
-                                View Portal as User
-                              </button>
-                            </>
-                          ) : (
-                            <>
-                              <button
-                                className="view-btn"
-                                type="button"
-                                onClick={() => handleViewUser(user)}
-                              >
-                                View / Edit
-                              </button>
+                  {isAdmin ? (
+                    <button
+                      className="mu-secondary-btn"
+                      type="button"
+                      disabled
+                      title="Admin users are managed directly in Firestore"
+                    >
+                      Admin (read-only)
+                    </button>
+                  ) : (
+                    <button
+                      className="mu-secondary-btn"
+                      type="button"
+                      onClick={() => handleViewUser(user)}
+                    >
+                      View / Edit
+                    </button>
+                  )}
 
-                              <button
-                                className="impersonate-btn"
-                                type="button"
-                                onClick={() => handleImpersonateUser(user)}
-                              >
-                                View Portal as User
-                              </button>
-                            </>
-                          )}
-                        </div>
-                      </td>
-                    </tr>
-                  );
-                })
-              )}
-            </tbody>
-          </table>
-        </div>
+                  <button
+                    className="mu-secondary-btn"
+                    type="button"
+                    onClick={() => handleImpersonateUser(user)}
+                  >
+                    View Portal
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {expanded ? (
+              <div className="mu-expanded-panel">
+                {!isAdmin ? (
+                  <div className="mu-quick-actions">
+                    <div className="mu-quick-actions-head">
+                      <h3>Account tools</h3>
+                      <p>
+                        Quick actions for portal access and account messaging.
+                      </p>
+                    </div>
+
+                    <div className="mu-quick-actions-row">
+                      <button
+                        type="button"
+                        className={`mu-tool-btn portal ${portalStatus.className}`}
+                        onClick={() => handleTogglePortalAccess(user)}
+                        disabled={!!loadingActionId}
+                      >
+                        {portalStatus.className === 'unlocked'
+                          ? 'Expire Portal Access'
+                          : 'Restore Portal Access'}
+                      </button>
+
+                      {showResetButton ? (
+                        <button
+                          type="button"
+                          className="mu-tool-btn"
+                          onClick={() => handleSendResetEmail(user)}
+                          disabled={
+                            !!loadingActionId ||
+                            !user.email ||
+                            user.email === 'N/A'
+                          }
+                        >
+                          Send Reset Email
+                        </button>
+                      ) : null}
+
+                      {showWelcomeButton ? (
+                        <button
+                          type="button"
+                          className="mu-tool-btn secondary"
+                          onClick={() => handleSendWelcomeEmail(user)}
+                          disabled={
+                            !!loadingActionId ||
+                            !user.email ||
+                            user.email === 'N/A'
+                          }
+                        >
+                          {user.portalInviteSent
+                            ? 'Re-send Welcome Email'
+                            : 'Send Welcome Email'}
+                        </button>
+                      ) : null}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="mu-admin-note">
+                    This is an admin account. Admin privileges and auth-level
+                    changes should still be handled directly in Firestore /
+                    Firebase Admin tooling.
+                  </div>
+                )}
+
+                <div className="mu-resource-grid">
+                  <ResourceCard
+                    title="Projects"
+                    kind="project"
+                    items={summary.resources.projects}
+                    emptyText="No projects attached to this user."
+                    onCopyId={(id) => handleCopy('Project ID', id)}
+                    onAttachClick={(item) =>
+                      attachResourceToUser({
+                        user,
+                        item,
+                        type: 'project',
+                      })
+                    }
+                  />
+
+                  <ResourceCard
+                    title="Orders"
+                    kind="order"
+                    items={summary.resources.orders}
+                    emptyText="No orders attached to this user."
+                    onCopyId={(id) => handleCopy('Order ID', id)}
+                    onAttachClick={(item) =>
+                      attachResourceToUser({
+                        user,
+                        item,
+                        type: 'order',
+                      })
+                    }
+                  />
+
+                  <ResourceCard
+                    title="SoundLegend Requests"
+                    kind="soundlegend"
+                    items={summary.resources.soundlegend}
+                    emptyText="No SoundLegend requests attached to this user."
+                    onCopyId={(id) =>
+                      handleCopy('SoundLegend Request ID', id)
+                    }
+                    onAttachClick={(item) =>
+                      attachResourceToUser({
+                        user,
+                        item,
+                        type: 'soundlegend',
+                      })
+                    }
+                  />
+
+                  <ResourceCard
+                    title="Endorsements"
+                    kind="endorsement"
+                    items={summary.resources.endorsements}
+                    emptyText="No endorsement applications attached to this user."
+                    onCopyId={(id) => handleCopy('Endorsement ID', id)}
+                    onAttachClick={(item) =>
+                      attachResourceToUser({
+                        user,
+                        item,
+                        type: 'endorsement',
+                      })
+                    }
+                  />
+                </div>
+
+                <div className="mu-attach-zone">
+                  <div className="mu-attach-zone-head">
+                    <div>
+                      <h3>Attach unassigned resources</h3>
+                      <p>
+                        Manually connect loose records to{' '}
+                        <strong>{getDisplayName(user)}</strong>.
+                      </p>
+                    </div>
+
+                    <button
+                      type="button"
+                      className="mu-refresh-btn secondary"
+                      onClick={() =>
+                        setActiveAttachUserId(
+                          activeAttachUserId === canonicalId
+                            ? null
+                            : canonicalId
+                        )
+                      }
+                    >
+                      {activeAttachUserId === canonicalId
+                        ? 'Hide Attachments'
+                        : 'Attach Resources'}
+                    </button>
+                  </div>
+
+                  {activeAttachUserId === canonicalId ? (
+                    <div className="mu-unassigned-grid">
+                      <UnassignedBucket
+                        kind="project"
+                        title="Unassigned Projects"
+                        items={unassigned.projects}
+                        emptyText="No loose projects."
+                        onAttach={(item) =>
+                          attachResourceToUser({
+                            user,
+                            item,
+                            type: 'project',
+                          })
+                        }
+                      />
+
+                      <UnassignedBucket
+                        kind="order"
+                        title="Unassigned Orders"
+                        items={unassigned.orders}
+                        emptyText="No loose orders."
+                        onAttach={(item) =>
+                          attachResourceToUser({
+                            user,
+                            item,
+                            type: 'order',
+                          })
+                        }
+                      />
+
+                      <UnassignedBucket
+                        kind="soundlegend"
+                        title="Unassigned SoundLegend Requests"
+                        items={unassigned.soundlegend}
+                        emptyText="No loose SoundLegend requests."
+                        onAttach={(item) =>
+                          attachResourceToUser({
+                            user,
+                            item,
+                            type: 'soundlegend',
+                          })
+                        }
+                      />
+
+                      <UnassignedBucket
+                        kind="endorsement"
+                        title="Unassigned Endorsements"
+                        items={unassigned.endorsements}
+                        emptyText="No loose endorsements."
+                        onAttach={(item) =>
+                          attachResourceToUser({
+                            user,
+                            item,
+                            type: 'endorsement',
+                          })
+                        }
+                      />
+                    </div>
+                  ) : null}
+                </div>
+              </div>
+            ) : null}
+          </div>
+        );
+      })
+    )}
+  </div>
+)}
 
         {isEditModalOpen && selectedUser && (
           <EditUserModal
@@ -890,6 +1572,7 @@ const ManageUsers = () => {
           />
         )}
       </div>
+    </div>
 
       <ActionModal
         open={actionModal.open}
