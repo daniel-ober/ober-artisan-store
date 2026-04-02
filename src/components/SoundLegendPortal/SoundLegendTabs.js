@@ -150,11 +150,14 @@ const getPortalAccessState = ({
     ? assignedProjectIds.map((id) => String(id).trim()).filter(Boolean)
     : [];
 
-  const assignedViaList = projectExists && normalizedAssignedIds.includes(projectId);
-  const assignedViaOwner = projectExists && !!ownerUid && !!user?.uid && ownerUid === user.uid;
+  const assignedViaList =
+    projectExists && normalizedAssignedIds.includes(projectId);
+  const assignedViaOwner =
+    projectExists && !!ownerUid && !!user?.uid && ownerUid === user.uid;
 
   const projectAssignedToUser =
-    projectExists && (assignedViaOwner || assignedViaList || (!ownerUid && hasAssignedProject));
+    projectExists &&
+    (assignedViaOwner || assignedViaList || (!ownerUid && hasAssignedProject));
 
   const portalLockedOrExpired = slPortalLocked || slPortalExpired;
 
@@ -239,9 +242,10 @@ const SoundLegendTabs = ({ project }) => {
     });
   }, [portalState.hasAccessibleProject, areaToggles]);
 
-  const defaultTabKey = useMemo(() => {
-    return availableTabs[0]?.key || 'billing';
-  }, [availableTabs]);
+  const defaultTabKey = useMemo(
+    () => availableTabs[0]?.key || 'billing',
+    [availableTabs]
+  );
 
   const [activeTab, setActiveTab] = useState(defaultTabKey);
 
@@ -257,42 +261,73 @@ const SoundLegendTabs = ({ project }) => {
     [availableTabs, activeTab]
   );
 
-  const renderLimitedAccessNotice = () => {
-    if (isAdmin || portalState.hasAccessibleProject) return null;
+  const hiddenSections = useMemo(() => {
+    if (isAdmin || !portalState.hasAccessibleProject) return [];
+
+    const items = [];
+    if (!areaToggles.progress) items.push('Build Progress');
+    if (!areaToggles.scope) items.push('Scope of Work');
+    if (!areaToggles.customer) items.push('Vault Preferences');
+    if (!areaToggles.attachments) items.push('Media');
+    return items;
+  }, [isAdmin, portalState.hasAccessibleProject, areaToggles]);
+
+  const accessBadgeLabel = useMemo(() => {
+    if (isAdmin) return 'Admin View';
+    if (portalState.hasAccessibleProject) return 'SoundLegend';
+    return 'Portal Access';
+  }, [isAdmin, portalState.hasAccessibleProject]);
+
+  const eyebrowLabel = useMemo(() => {
+    if (isAdmin) return 'Artist Portal';
+    if (portalState.hasAccessibleProject) return 'Artist Workspace';
+    return 'Account Center';
+  }, [isAdmin, portalState.hasAccessibleProject]);
+
+  const titleLabel = activeTabMeta?.label || 'SoundLegend Portal';
+
+  const introCopy = useMemo(() => {
+    if (isAdmin) {
+      return 'View the artist-facing workspace, review available sections, and move between portal areas cleanly.';
+    }
+
+    if (portalState.hasAccessibleProject) {
+      return 'Move through your workspace, follow the build story, and review the details currently available for your project.';
+    }
 
     return (
-      <div className="slt-access-note slt-access-note--limited">
-        <div className="slt-access-note-badge">Limited Access</div>
-        <div className="slt-access-note-copy">
-          <strong>Project areas are not available yet.</strong>
-          <p>
-            {portalState.lockReason ||
-              'Once your paid SoundLegend project is active and assigned, Build Progress, Scope of Work, Vault Preferences, and Media will appear here.'}
+      portalState.lockReason ||
+      'Project-specific portal areas will appear here once your build is active and assigned to your account.'
+    );
+  }, [isAdmin, portalState.hasAccessibleProject, portalState.lockReason]);
+
+  const renderAvailabilityBlock = () => {
+    if (isAdmin) return null;
+
+    if (!portalState.hasAccessibleProject) {
+      return (
+        <div className="slt-status-card slt-status-card--limited">
+          <div className="slt-status-card-row">
+            <span className="slt-status-pill">Limited Access</span>
+          </div>
+          <p className="slt-status-copy">
+            Project areas are not available yet. Payment History and Account
+            Settings remain available in the meantime.
           </p>
         </div>
-      </div>
-    );
-  };
-
-  const renderPortalAvailabilitySummary = () => {
-    if (isAdmin) return null;
-    if (!portalState.hasAccessibleProject) return null;
-
-    const hiddenSections = [];
-    if (!areaToggles.progress) hiddenSections.push('Build Progress');
-    if (!areaToggles.scope) hiddenSections.push('Scope of Work');
-    if (!areaToggles.customer) hiddenSections.push('Vault Preferences');
-    if (!areaToggles.attachments) hiddenSections.push('Media');
+      );
+    }
 
     if (!hiddenSections.length) return null;
 
     return (
-      <div className="slt-access-note">
-        <div className="slt-access-note-badge">Portal Settings</div>
-        <div className="slt-access-note-copy">
-          <strong>Some artist portal areas are currently disabled.</strong>
-          <p>{hiddenSections.join(', ')} are turned off for this project.</p>
+      <div className="slt-status-card">
+        <div className="slt-status-card-row">
+          <span className="slt-status-pill">Portal Settings</span>
         </div>
+        <p className="slt-status-copy">
+          Some project areas are currently hidden for this build: {hiddenSections.join(', ')}.
+        </p>
       </div>
     );
   };
@@ -324,53 +359,54 @@ const SoundLegendTabs = ({ project }) => {
 
   return (
     <section className="slt-shell" data-component="SoundLegendTabs">
-      <div className="slt-header">
-        <div className="slt-project-badge">
-          {portalState.hasAccessibleProject || isAdmin
-            ? 'SoundLegend'
-            : 'Portal Access'}
-        </div>
-
-        <div className="slt-header-copy">
-          <div className="slt-eyebrow">
-            {portalState.hasAccessibleProject || isAdmin
-              ? 'Artist Portal'
-              : 'Account Center'}
+      <div className="slt-frame">
+        <div className="slt-header">
+          <div className="slt-header-topline">
+            <div className="slt-project-badge">{accessBadgeLabel}</div>
+            <div className="slt-header-rule" />
           </div>
-          <h2 className="slt-title">
-            {activeTabMeta?.label || 'SoundLegend Portal'}
-          </h2>
+
+          <div className="slt-header-copy">
+            <div className="slt-eyebrow">{eyebrowLabel}</div>
+            <h2 className="slt-title">{titleLabel}</h2>
+            <p className="slt-intro">{introCopy}</p>
+          </div>
         </div>
+
+        {renderAvailabilityBlock()}
+
+        <div className="slt-tabbar-wrap">
+          <div
+            className="slt-tabbar"
+            role="tablist"
+            aria-label="SoundLegend tabs"
+          >
+            {availableTabs.map((tab) => {
+              const isActive = activeTab === tab.key;
+
+              return (
+                <button
+                  key={tab.key}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  className={`slt-tab ${isActive ? 'is-active' : ''}`}
+                  onClick={() => setActiveTab(tab.key)}
+                >
+                  <span className="slt-tab-label slt-tab-label--desktop">
+                    {tab.label}
+                  </span>
+                  <span className="slt-tab-label slt-tab-label--mobile">
+                    {tab.shortLabel}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="slt-content">{renderTab()}</div>
       </div>
-
-      {renderLimitedAccessNotice()}
-      {renderPortalAvailabilitySummary()}
-
-      <div className="slt-tabbar" role="tablist" aria-label="SoundLegend tabs">
-        {availableTabs.map((tab) => {
-          const isActive = activeTab === tab.key;
-
-          return (
-            <button
-              key={tab.key}
-              type="button"
-              role="tab"
-              aria-selected={isActive}
-              className={`slt-tab ${isActive ? 'is-active' : ''}`}
-              onClick={() => setActiveTab(tab.key)}
-            >
-              <span className="slt-tab-label slt-tab-label--desktop">
-                {tab.label}
-              </span>
-              <span className="slt-tab-label slt-tab-label--mobile">
-                {tab.shortLabel}
-              </span>
-            </button>
-          );
-        })}
-      </div>
-
-      <div className="slt-content">{renderTab()}</div>
     </section>
   );
 };
