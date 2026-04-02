@@ -3,72 +3,110 @@
    ========================================================= */
 
 .slt-shell[data-component='SoundLegendTabs'] {
-  width: min(100%, 1060px);
-  max-width: 1060px;
+  width: min(100%, 1120px);
+  max-width: 1120px;
   margin: 0 auto;
+}
+
+.slt-frame {
+  position: relative;
+  padding: 18px;
+  border-radius: 30px;
+  background:
+    radial-gradient(circle at top left, rgba(163, 137, 97, 0.09), transparent 22%),
+    radial-gradient(circle at top right, rgba(77, 93, 138, 0.1), transparent 24%),
+    linear-gradient(180deg, rgba(242, 232, 215, 0.92), rgba(205, 193, 176, 0.9));
+  border: 1px solid rgba(255, 247, 234, 0.34);
+  box-shadow:
+    0 28px 80px rgba(0, 0, 0, 0.26),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -12px 24px rgba(79, 57, 34, 0.08);
+  overflow: hidden;
+}
+
+.slt-frame::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.26;
+  background-image:
+    linear-gradient(rgba(88, 62, 36, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(88, 62, 36, 0.02) 1px, transparent 1px);
+  background-size: 100% 8px, 8px 100%;
+  mix-blend-mode: multiply;
 }
 
 .slt-header {
   position: relative;
-  display: grid;
-  grid-template-columns: auto 1fr;
-  align-items: center;
-  gap: 18px;
   margin-bottom: 14px;
-  padding: 18px 20px;
+  padding: 22px 24px 20px;
   border-radius: 24px;
   background:
-    radial-gradient(circle at top left, rgba(138, 107, 70, 0.14), transparent 28%),
-    radial-gradient(circle at top right, rgba(95, 116, 168, 0.08), transparent 24%),
-    linear-gradient(180deg, rgba(18, 16, 15, 0.72), rgba(9, 9, 10, 0.82));
-  border: 1px solid rgba(255, 244, 228, 0.08);
+    radial-gradient(circle at top left, rgba(74, 93, 148, 0.15), transparent 28%),
+    linear-gradient(180deg, rgba(24, 22, 22, 0.88), rgba(10, 10, 11, 0.94));
+  border: 1px solid rgba(255, 243, 225, 0.1);
   box-shadow:
-    0 18px 42px rgba(0, 0, 0, 0.22),
-    inset 0 1px 0 rgba(255, 244, 228, 0.04);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+    0 20px 40px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
   overflow: hidden;
 }
 
-.slt-header::before {
+.slt-header::after {
   content: '';
   position: absolute;
   inset: 0;
   pointer-events: none;
   background:
     linear-gradient(
-      90deg,
+      105deg,
       transparent 0%,
-      rgba(255, 244, 228, 0.02) 18%,
-      transparent 34%,
-      rgba(255, 244, 228, 0.03) 52%,
-      transparent 72%,
-      rgba(255, 244, 228, 0.02) 100%
+      rgba(255, 248, 236, 0.03) 20%,
+      transparent 42%,
+      rgba(255, 248, 236, 0.025) 62%,
+      transparent 100%
     );
-  mix-blend-mode: screen;
+}
+
+.slt-header-topline {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
 }
 
 .slt-project-badge {
-  position: relative;
-  z-index: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 48px;
-  padding: 0 20px;
+  min-height: 42px;
+  padding: 0 18px;
   border-radius: 999px;
   background:
-    radial-gradient(circle at top left, rgba(59, 76, 123, 0.28), transparent 54%),
-    linear-gradient(180deg, rgba(17, 19, 29, 0.94), rgba(7, 8, 14, 0.98));
-  border: 1px solid rgba(255, 244, 228, 0.14);
+    radial-gradient(circle at top left, rgba(101, 126, 194, 0.24), transparent 56%),
+    linear-gradient(180deg, rgba(18, 21, 30, 0.92), rgba(8, 9, 13, 0.98));
+  border: 1px solid rgba(255, 243, 225, 0.14);
   box-shadow:
-    0 10px 24px rgba(0, 0, 0, 0.22),
-    inset 0 1px 0 rgba(255, 255, 255, 0.04);
-  color: rgba(247, 242, 235, 0.96);
-  font-size: 0.94rem;
+    0 10px 24px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  color: rgba(248, 242, 233, 0.96);
+  font-size: 0.88rem;
   font-weight: 700;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   white-space: nowrap;
+}
+
+.slt-header-rule {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(211, 189, 156, 0.45),
+    rgba(255, 255, 255, 0.06)
+  );
 }
 
 .slt-header-copy {
@@ -78,104 +116,166 @@
 }
 
 .slt-eyebrow {
-  margin-bottom: 4px;
-  font-size: 0.68rem;
+  margin-bottom: 6px;
+  color: rgba(220, 200, 170, 0.76);
+  font-size: 0.66rem;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
-  letter-spacing: 0.22em;
-  color: rgba(223, 202, 174, 0.62);
 }
 
 .slt-title {
   margin: 0;
-  font-size: clamp(1.15rem, 1.02rem + 0.5vw, 1.42rem);
-  line-height: 1.15;
+  color: rgba(251, 247, 241, 0.98);
+  font-size: clamp(1.28rem, 1.06rem + 0.8vw, 1.8rem);
+  line-height: 1.08;
   font-weight: 700;
-  letter-spacing: -0.02em;
-  color: rgba(249, 245, 238, 0.98);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.slt-intro {
+  max-width: 760px;
+  margin: 10px 0 0;
+  color: rgba(235, 227, 216, 0.82);
+  font-size: 0.96rem;
+  line-height: 1.65;
+}
+
+/* =========================================================
+   STATUS / ACCESS NOTE
+   ========================================================= */
+
+.slt-status-card {
+  position: relative;
+  margin-bottom: 14px;
+  padding: 16px 18px;
+  border-radius: 20px;
+  background:
+    linear-gradient(180deg, rgba(255, 249, 240, 0.82), rgba(236, 226, 211, 0.72));
+  border: 1px solid rgba(98, 77, 53, 0.12);
+  box-shadow:
+    0 14px 26px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.34);
+}
+
+.slt-status-card--limited {
+  background:
+    linear-gradient(180deg, rgba(255, 244, 236, 0.82), rgba(235, 218, 205, 0.78));
+}
+
+.slt-status-card-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.slt-status-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: rgba(21, 21, 24, 0.92);
+  color: rgba(250, 245, 238, 0.96);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.slt-status-copy {
+  margin: 0;
+  color: rgba(52, 39, 26, 0.86);
+  font-size: 0.93rem;
+  line-height: 1.62;
 }
 
 /* =========================================================
    TAB BAR
    ========================================================= */
 
+.slt-tabbar-wrap {
+  margin-bottom: 16px;
+}
+
 .slt-tabbar {
   width: 100%;
   max-width: 100%;
-  margin: 0 0 14px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
   flex-wrap: wrap;
-  padding: 12px 14px;
+  padding: 14px;
   border-radius: 22px;
   background:
-    radial-gradient(circle at top left, rgba(255, 255, 255, 0.025), transparent 30%),
-    linear-gradient(180deg, rgba(215, 207, 197, 0.82), rgba(184, 176, 168, 0.74));
-  border: 1px solid rgba(255, 255, 255, 0.22);
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.18), transparent 32%),
+    linear-gradient(180deg, rgba(245, 238, 227, 0.82), rgba(212, 200, 183, 0.74));
+  border: 1px solid rgba(122, 94, 61, 0.14);
   box-shadow:
-    0 18px 40px rgba(0, 0, 0, 0.22),
+    0 18px 36px rgba(0, 0, 0, 0.12),
     inset 0 1px 0 rgba(255, 255, 255, 0.34);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .slt-tab {
   appearance: none;
   -webkit-appearance: none;
-  border: 1px solid rgba(255, 244, 228, 0.08);
-  background:
-    linear-gradient(180deg, rgba(20, 20, 22, 0.96), rgba(8, 8, 10, 0.98));
-  color: rgba(246, 240, 232, 0.92);
   min-height: 42px;
   padding: 0 16px;
   border-radius: 999px;
-  font-size: 0.86rem;
+  border: 1px solid rgba(255, 243, 225, 0.09);
+  background:
+    linear-gradient(180deg, rgba(23, 23, 26, 0.96), rgba(8, 8, 10, 0.99));
+  color: rgba(247, 241, 234, 0.92);
+  font-size: 0.85rem;
   font-weight: 650;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.01em;
   cursor: pointer;
+  white-space: nowrap;
   box-shadow:
-    0 8px 18px rgba(0, 0, 0, 0.18),
-    inset 0 1px 0 rgba(255, 255, 255, 0.025);
+    0 8px 18px rgba(0, 0, 0, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
   transition:
     transform 180ms ease,
     background 180ms ease,
     border-color 180ms ease,
     box-shadow 180ms ease,
     color 180ms ease;
-  white-space: nowrap;
 }
 
 .slt-tab:hover {
   transform: translateY(-1px);
-  color: rgba(255, 247, 238, 0.98);
-  border-color: rgba(255, 244, 228, 0.16);
+  color: rgba(255, 249, 240, 0.98);
+  border-color: rgba(214, 194, 167, 0.18);
   background:
-    linear-gradient(180deg, rgba(21, 19, 18, 0.88), rgba(10, 10, 12, 0.96));
+    linear-gradient(180deg, rgba(30, 28, 27, 0.94), rgba(11, 10, 12, 0.98));
   box-shadow:
-    0 12px 24px rgba(0, 0, 0, 0.22),
-    inset 0 1px 0 rgba(255, 255, 255, 0.035);
+    0 12px 22px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 .slt-tab:focus,
 .slt-tab:focus-visible {
   outline: none;
-  border-color: rgba(177, 202, 255, 0.42);
+  border-color: rgba(108, 143, 218, 0.42);
   box-shadow:
-    0 0 0 3px rgba(103, 140, 220, 0.16),
-    0 12px 24px rgba(0, 0, 0, 0.22),
+    0 0 0 3px rgba(95, 129, 202, 0.12),
+    0 12px 24px rgba(0, 0, 0, 0.18),
     inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 .slt-tab.is-active {
-  color: rgba(255, 249, 240, 0.98);
-  border-color: rgba(112, 155, 255, 0.42);
+  color: rgba(255, 250, 242, 0.99);
+  border-color: rgba(110, 148, 224, 0.36);
   background:
-    radial-gradient(circle at top left, rgba(79, 110, 182, 0.18), transparent 56%),
-    linear-gradient(180deg, rgba(30, 33, 46, 0.96), rgba(10, 11, 16, 0.98));
+    radial-gradient(circle at top left, rgba(89, 118, 188, 0.18), transparent 58%),
+    linear-gradient(180deg, rgba(35, 38, 52, 0.98), rgba(10, 11, 16, 0.98));
   box-shadow:
-    0 12px 24px rgba(0, 0, 0, 0.18),
-    0 0 0 1px rgba(112, 155, 255, 0.12),
+    0 14px 26px rgba(0, 0, 0, 0.16),
+    0 0 0 1px rgba(110, 148, 224, 0.12),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
@@ -198,15 +298,14 @@
    ========================================================= */
 
 @media (max-width: 980px) {
-  .slt-header {
-    grid-template-columns: 1fr;
-    gap: 12px;
-    text-align: center;
-    justify-items: center;
+  .slt-frame {
+    padding: 14px;
+    border-radius: 24px;
   }
 
-  .slt-header-copy {
-    text-align: center;
+  .slt-header {
+    padding: 18px 18px 17px;
+    border-radius: 20px;
   }
 
   .slt-tabbar {
@@ -214,7 +313,6 @@
     flex-wrap: nowrap;
     overflow-x: auto;
     overflow-y: hidden;
-    padding: 12px;
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
@@ -233,33 +331,70 @@
    ========================================================= */
 
 @media (max-width: 640px) {
+  .slt-frame {
+    padding: 10px;
+    border-radius: 20px;
+  }
+
   .slt-header {
     margin-bottom: 12px;
-    padding: 14px 14px 15px;
+    padding: 15px 14px 14px;
     border-radius: 18px;
+  }
+
+  .slt-header-topline {
     gap: 10px;
+    margin-bottom: 10px;
   }
 
   .slt-project-badge {
-    min-height: 42px;
-    padding: 0 16px;
-    font-size: 0.88rem;
+    min-height: 38px;
+    padding: 0 14px;
+    font-size: 0.76rem;
+    letter-spacing: 0.12em;
   }
 
   .slt-eyebrow {
-    margin-bottom: 5px;
-    font-size: 0.62rem;
-    letter-spacing: 0.18em;
+    margin-bottom: 6px;
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
   }
 
   .slt-title {
     font-size: 1rem;
-    line-height: 1.2;
+    line-height: 1.18;
+  }
+
+  .slt-intro {
+    margin-top: 8px;
+    font-size: 0.85rem;
+    line-height: 1.55;
+  }
+
+  .slt-status-card {
+    margin-bottom: 12px;
+    padding: 13px 14px;
+    border-radius: 16px;
+  }
+
+  .slt-status-pill {
+    min-height: 28px;
+    padding: 0 10px;
+    font-size: 0.64rem;
+    letter-spacing: 0.12em;
+  }
+
+  .slt-status-copy {
+    font-size: 0.84rem;
+    line-height: 1.55;
+  }
+
+  .slt-tabbar-wrap {
+    margin-bottom: 12px;
   }
 
   .slt-tabbar {
     gap: 8px;
-    margin: 0 auto 12px;
     padding: 10px;
     border-radius: 18px;
     justify-content: flex-start;

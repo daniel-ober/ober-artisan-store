@@ -1658,6 +1658,232 @@ function getCraftsmanDirectionData(step, project) {
   };
 }
 
+function getBuildNotesSummary(step, project) {
+  const stageKey = step?.key;
+
+  const customSummary =
+    getStageSpecificText(project, stageKey, [
+      'buildNotesSummary',
+      'chapterBuildSummary',
+      'customBuildSummary',
+      'buildSummary',
+      'summary',
+    ]) || '';
+
+  if (customSummary) {
+    return customSummary;
+  }
+
+  const artistIntent = getStageSpecificText(project, stageKey, [
+    'artistIntent',
+    'intent',
+    'artistDirectionSummary',
+    'artistSummary',
+    'directionSummary',
+  ]);
+
+  const materialStrategy = getStageSpecificText(project, stageKey, [
+    'materialStrategy',
+    'craftsmanMaterialStrategy',
+    'woodStrategy',
+    'selectionStrategy',
+  ]);
+
+  const buildVision = getStageSpecificText(project, stageKey, [
+    'craftsmanInterpretation',
+    'interpretation',
+    'craftsmanSummary',
+    'buildInterpretation',
+  ]);
+
+  const emotionalTargets = getStageSpecificArray(project, stageKey, [
+    'artistEmotionalTargets',
+    'emotionalTargets',
+    'feelTargets',
+    'toneTargets',
+  ]);
+
+  const useCases = getStageSpecificArray(project, stageKey, [
+    'artistUseCases',
+    'useCases',
+    'applications',
+    'playingContexts',
+  ]);
+
+  const chapterLabel = step?.label || 'this chapter';
+
+  const parts = [];
+
+  if (artistIntent) {
+    parts.push(
+      `In ${chapterLabel}, the work is being shaped around a clear player goal: ${artistIntent}`
+    );
+  } else {
+    parts.push(
+      `In ${chapterLabel}, the goal is to make decisions that move this instrument closer to its specific identity rather than treating it like a generic build.`
+    );
+  }
+
+  if (emotionalTargets.length) {
+    parts.push(
+      `The response we are protecting in this phase centers on ${emotionalTargets
+        .slice(0, 4)
+        .join(', ')}.`
+    );
+  }
+
+  if (materialStrategy) {
+    parts.push(materialStrategy.endsWith('.') ? materialStrategy : `${materialStrategy}.`);
+  }
+
+  if (buildVision) {
+    parts.push(buildVision.endsWith('.') ? buildVision : `${buildVision}.`);
+  }
+
+  if (useCases.length) {
+    parts.push(
+      `Everything in this chapter is being filtered through the real use case of ${useCases
+        .slice(0, 3)
+        .join(', ')}.`
+    );
+  }
+
+  return parts.join(' ');
+}
+
+function getBuildNotesUniquePoints(step, project) {
+  const stageKey = step?.key;
+
+  const explicitUniquePoints = getStageSpecificArray(project, stageKey, [
+    'buildUniquePoints',
+    'uniqueBuildPoints',
+    'chapterUniquePoints',
+    'uniquePoints',
+    'customChoices',
+    'customDecisions',
+  ]);
+
+  if (explicitUniquePoints.length) {
+    return explicitUniquePoints;
+  }
+
+  const artistIntent = getStageSpecificText(project, stageKey, [
+    'artistIntent',
+    'intent',
+    'artistDirectionSummary',
+    'artistSummary',
+  ]);
+
+  const emotionalTargets = getStageSpecificArray(project, stageKey, [
+    'artistEmotionalTargets',
+    'emotionalTargets',
+    'feelTargets',
+    'toneTargets',
+  ]);
+
+  const customChoices = getStageSpecificArray(project, stageKey, [
+    'craftsmanChoices',
+    'customChoices',
+    'customDecisions',
+    'adaptations',
+  ]);
+
+  const useCases = getStageSpecificArray(project, stageKey, [
+    'artistUseCases',
+    'useCases',
+    'applications',
+    'playingContexts',
+  ]);
+
+  const points = [];
+
+  if (artistIntent) {
+    points.push(`Build is being guided by this player goal: ${artistIntent}`);
+  }
+
+  if (emotionalTargets.length) {
+    points.push(
+      `Primary feel/response targets: ${emotionalTargets.slice(0, 4).join(', ')}`
+    );
+  }
+
+  if (customChoices.length) {
+    points.push(
+      `Chapter-specific custom decisions: ${customChoices.slice(0, 4).join(', ')}`
+    );
+  }
+
+  if (useCases.length) {
+    points.push(
+      `This build is being aimed toward these real-world roles: ${useCases
+        .slice(0, 3)
+        .join(', ')}`
+    );
+  }
+
+  return points.length
+    ? points
+    : [
+        'This chapter is being shaped around the player rather than a generic recipe.',
+        'Custom decisions here are meant to strengthen identity, response, and long-term cohesion.',
+        'Each move in this phase is narrowing the instrument toward its specific voice.',
+      ];
+}
+
+function getBuildNotesVisionData(step, project) {
+  const stageKey = step?.key;
+
+  const influences = getStageSpecificArray(project, stageKey, [
+    'artistInfluences',
+    'influences',
+    'referenceArtists',
+    'referenceRecords',
+    'records',
+    'genres',
+  ]);
+
+  const materialVision = getStageSpecificText(project, stageKey, [
+    'materialStrategy',
+    'craftsmanMaterialStrategy',
+    'woodStrategy',
+    'selectionStrategy',
+    'materialVision',
+  ]);
+
+  const buildVision = getStageSpecificText(project, stageKey, [
+    'craftsmanInterpretation',
+    'interpretation',
+    'craftsmanSummary',
+    'buildInterpretation',
+    'buildVision',
+  ]);
+
+  const influenceEffect = getStageSpecificText(project, stageKey, [
+    'influenceEffect',
+    'influencesAffectBuild',
+    'howInfluenceAffectsBuild',
+    'voiceSummary',
+    'voiceNarrative',
+    'impactSummary',
+  ]);
+
+  return {
+    influences:
+      influences.length > 0
+        ? influences
+        : ['Project influences will be surfaced here as this chapter is refined.'],
+    materialVision:
+      materialVision ||
+      'Material choices in this chapter are being narrowed based on what best serves the final voice and physical feel of the drum.',
+    buildVision:
+      buildVision ||
+      'The build approach here is focused on making disciplined decisions that support the specific identity of this instrument.',
+    influenceEffect:
+      influenceEffect ||
+      'These influences are not being copied literally — they are being translated into choices that affect response, balance, feel, and tone.',
+  };
+}
+
 function getBuildDirectionData(step) {
   return {
     title: 'Build',
@@ -1926,8 +2152,6 @@ function getStorypointsForStep(step, project = null) {
   const chapterNarrative = getChapterNarrative(step, project);
   const artistDirection = getArtistDirectionData(step, project);
   const craftsmanDirection = getCraftsmanDirectionData(step, project);
-  const buildDirection = getBuildDirectionData(step, project);
-  const voiceDirection = getVoiceDirectionData(step, project);
   const archiveDirection = getArchiveDirectionData(step, project);
 
   return [
@@ -1940,36 +2164,15 @@ function getStorypointsForStep(step, project = null) {
       data: chapterNarrative,
     },
     {
-      id: 'artist-direction',
-      icon: 'artistDirection',
-      shortLabel: 'Artist Direction',
-      title: artistDirection.title,
-      body: artistDirection.intro,
-      data: artistDirection,
-    },
-    {
-      id: 'craftsman-direction',
+      id: 'build-notes',
       icon: 'craftsmanDirection',
-      shortLabel: 'Craftsman Direction',
-      title: craftsmanDirection.title,
-      body: craftsmanDirection.intro,
-      data: craftsmanDirection,
-    },
-    {
-      id: 'build',
-      icon: 'build',
-      shortLabel: 'Build',
-      title: buildDirection.title,
-      body: buildDirection.intro,
-      data: buildDirection,
-    },
-    {
-      id: 'voice',
-      icon: 'voice',
-      shortLabel: 'Voice',
-      title: voiceDirection.title,
-      body: voiceDirection.intro,
-      data: voiceDirection,
+      shortLabel: 'Build Notes',
+      title: 'Build Notes',
+      body: 'Artist needs and craftsman direction for this chapter.',
+      data: {
+        artistDirection,
+        craftsmanDirection,
+      },
     },
     {
       id: 'archive',
@@ -2261,6 +2464,307 @@ function renderStorypointSections(data) {
       })}
     </div>
   );
+}
+
+function renderActiveStorySection({
+  activeStorypoint,
+  chapterNarrative,
+  currentChapterProgressData,
+  activeStep,
+  project,
+  setProject,
+  isAdmin,
+  activeStageArchiveDefinition,
+  activeStageArchiveItems,
+  selectedArchiveCaptureKey,
+  setSelectedArchiveCaptureKey,
+  selectedArchiveCapture,
+  archiveUploading,
+  archiveUploadProgress,
+  openArchiveFilePicker,
+  getArchiveVisibilityLabel,
+  setSelectedResourceItem,
+}) {
+  if (!activeStorypoint) return null;
+
+  if (activeStorypoint.id === 'overview') {
+    return (
+      <>
+        <div className="sl-progress-story-section-intro-card">
+          <div className="sl-progress-story-section-label">
+            Chapter Overview
+          </div>
+          <div className="sl-progress-story-section-body">
+            {chapterNarrative.summary}
+          </div>
+        </div>
+
+<div className="sl-progress-storypoint-progress-grid">
+  <div className="sl-progress-storypoint-stat">
+    <div className="sl-progress-storypoint-stat-label">
+      Chapter completion
+    </div>
+    <div className="sl-progress-storypoint-stat-value">
+      {currentChapterProgressData.completionPct}%
+    </div>
+  </div>
+
+  <div className="sl-progress-storypoint-stat">
+    <div className="sl-progress-storypoint-stat-label">
+      Target chapter completion
+    </div>
+    <div className="sl-progress-storypoint-stat-value">
+      {currentChapterProgressData.targetDate}
+    </div>
+  </div>
+
+  <div className="sl-progress-storypoint-stat">
+    <div className="sl-progress-storypoint-stat-label">
+      Estimated working hours
+    </div>
+    <div className="sl-progress-storypoint-stat-value">
+      {currentChapterProgressData.estHours}
+    </div>
+  </div>
+</div>
+
+        <div className="sl-progress-story-section-block sl-progress-story-section-block--spaced">
+          <div className="sl-progress-story-section-label">
+            Chapter Checklist
+          </div>
+
+          <StageCheckpointsPanel
+            key={`progress-inline-${activeStep.key}-${isAdmin ? 'admin' : 'customer'}`}
+            project={project}
+            setProject={setProject}
+            stageKey={activeStep.key}
+            isAdmin={isAdmin}
+            variant="compact"
+            showHeader={false}
+          />
+        </div>
+      </>
+    );
+  }
+
+if (activeStorypoint.id === 'build-notes') {
+  const buildNotesSummary = getBuildNotesSummary(activeStep, project);
+  const uniquePoints = getBuildNotesUniquePoints(activeStep, project);
+  const visionData = getBuildNotesVisionData(activeStep, project);
+
+  return (
+    <div className="sl-progress-build-notes-stack">
+      <div className="sl-progress-story-section-intro-card sl-progress-story-section-intro-card--lighter sl-progress-story-section-intro-card--summary">
+        <div className="sl-progress-story-section-label">
+          Personalized Chapter Summary
+        </div>
+        <div className="sl-progress-story-section-body">
+          {buildNotesSummary}
+        </div>
+      </div>
+
+      <div className="sl-progress-story-section-intro-card sl-progress-story-section-intro-card--lighter">
+        <div className="sl-progress-story-section-label">
+          What Makes This Build Unique In This Chapter
+        </div>
+
+        <ul className="sl-progress-build-notes-bullets">
+          {uniquePoints.map((point, index) => (
+            <li key={`${point}-${index}`}>{point}</li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="sl-progress-story-section-intro-card sl-progress-story-section-intro-card--lighter">
+        <div className="sl-progress-story-section-label">
+          Influences + Build / Material Vision
+        </div>
+
+        <div className="sl-progress-build-notes-vision-grid">
+          <div className="sl-progress-stage-storypoint-data-card">
+            <div className="sl-progress-stage-storypoint-data-label">
+              Influences
+            </div>
+            <div className="sl-progress-stage-storypoint-data-value sl-progress-stage-storypoint-data-value--stack">
+              {visionData.influences.map((item, index) => (
+                <span
+                  key={`${item}-${index}`}
+                  className="sl-progress-stage-storypoint-tag"
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="sl-progress-stage-storypoint-data-card sl-progress-stage-storypoint-data-card--full">
+            <div className="sl-progress-stage-storypoint-data-label">
+              Build Vision
+            </div>
+            <div className="sl-progress-stage-storypoint-data-value sl-progress-stage-storypoint-data-value--body">
+              {visionData.buildVision}
+            </div>
+          </div>
+
+          <div className="sl-progress-stage-storypoint-data-card sl-progress-stage-storypoint-data-card--full">
+            <div className="sl-progress-stage-storypoint-data-label">
+              Material Vision
+            </div>
+            <div className="sl-progress-stage-storypoint-data-value sl-progress-stage-storypoint-data-value--body">
+              {visionData.materialVision}
+            </div>
+          </div>
+
+          <div className="sl-progress-stage-storypoint-data-card sl-progress-stage-storypoint-data-card--full">
+            <div className="sl-progress-stage-storypoint-data-label">
+              How The Influences Affect The Build Approach
+            </div>
+            <div className="sl-progress-stage-storypoint-data-value sl-progress-stage-storypoint-data-value--body">
+              {visionData.influenceEffect}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+  if (activeStorypoint.id === 'archive') {
+    return (
+      <div className="sl-progress-story-section-block">
+        {isAdmin && activeStageArchiveDefinition ? (
+          <>
+            <div className="sl-progress-stage-archive-admin-controls">
+              <div className="sl-progress-stage-storypoint-data-label">
+                Add archive item
+              </div>
+
+              <select
+                className="sl-progress-stage-archive-select"
+                value={selectedArchiveCaptureKey}
+                onChange={(e) => setSelectedArchiveCaptureKey(e.target.value)}
+              >
+                <option value="">Choose a suggested capture…</option>
+
+                {activeStageArchiveDefinition.suggestedCaptures.map(
+                  (capture) => (
+                    <option key={capture.key} value={capture.key}>
+                      {capture.shortLabel || capture.label}
+                    </option>
+                  )
+                )}
+
+                <option value="other">Other / custom upload</option>
+              </select>
+
+              {selectedArchiveCapture ? (
+                <div className="sl-progress-stage-storypoint-data-card sl-progress-stage-storypoint-data-card--full">
+                  <div className="sl-progress-stage-storypoint-data-label">
+                    Suggested capture details
+                  </div>
+                  <div className="sl-progress-stage-storypoint-data-value sl-progress-stage-storypoint-data-value--body">
+                    <strong>{selectedArchiveCapture.label}</strong>
+                    <br />
+                    {selectedArchiveCapture.purpose}
+                    <br />
+                    Visibility:{' '}
+                    {getArchiveVisibilityLabel(
+                      selectedArchiveCapture.visibility
+                    )}
+                    {selectedArchiveCapture.angle ? (
+                      <>
+                        <br />
+                        Angle: {selectedArchiveCapture.angle}
+                      </>
+                    ) : null}
+                  </div>
+                </div>
+              ) : null}
+
+              <button
+                type="button"
+                className={`sl-progress-stage-edu-resource-link sl-progress-stage-upload-trigger is-primary ${
+                  archiveUploading || !selectedArchiveCaptureKey
+                    ? 'is-disabled'
+                    : ''
+                }`}
+                onClick={() => {
+                  if (archiveUploading || !selectedArchiveCaptureKey) return;
+                  openArchiveFilePicker();
+                }}
+                disabled={archiveUploading || !selectedArchiveCaptureKey}
+              >
+                {archiveUploading
+                  ? `Uploading… ${archiveUploadProgress}%`
+                  : 'Upload archive item'}
+              </button>
+            </div>
+          </>
+        ) : null}
+
+        {activeStageArchiveItems.length ? (
+          <div className="sl-progress-stage-edu-resource-grid">
+            {activeStageArchiveItems.map((item, index) => {
+              const itemType =
+                item.mediaType ||
+                item.type ||
+                getFileTypeFromUrl(item.url, item.type);
+              const isImage = itemType === 'image';
+              const isVideo = itemType === 'video';
+
+              return (
+                <button
+                  key={item.id || `${item.url}-${index}`}
+                  type="button"
+                  className={`sl-progress-stage-edu-resource-card is-${itemType}`}
+                  onClick={() =>
+                    setSelectedResourceItem({ ...item, type: itemType })
+                  }
+                >
+                  <div className="sl-progress-stage-edu-resource-thumb">
+                    {isImage ? (
+                      <img
+                        src={item.url}
+                        alt={item.title || `Archive item ${index + 1}`}
+                        className="sl-progress-stage-edu-resource-image"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="sl-progress-stage-edu-resource-filetype">
+                        {isVideo
+                          ? 'VIDEO'
+                          : itemType === 'audio'
+                            ? 'AUDIO'
+                            : itemType === 'document'
+                              ? 'DOC'
+                              : 'FILE'}
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="sl-progress-stage-edu-resource-meta">
+                    <div className="sl-progress-stage-edu-resource-title">
+                      {item.title || `Archive item ${index + 1}`}
+                    </div>
+                    <div className="sl-progress-stage-edu-resource-subtitle">
+                      {formatResourceTypeLabel(itemType)} •{' '}
+                      {getArchiveVisibilityLabel(item.visibility)}
+                    </div>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="sl-progress-stage-edu-resource-empty">
+            No archival chapter items yet.
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  return null;
 }
 
 /* =========================================================
@@ -3879,8 +4383,7 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
   );
   const [totalAssetCount, setTotalAssetCount] = useState(STEPS.length * 2);
 
-  const [hoveredStorypointId, setHoveredStorypointId] = useState(null);
-  const [pinnedStorypointId, setPinnedStorypointId] = useState(null);
+  const [activeStorySectionId, setActiveStorySectionId] = useState('overview');
   const [activeInteractiveStepId, setActiveInteractiveStepId] = useState(null);
 
   const [carouselAnimating, setCarouselAnimating] = useState(false);
@@ -4346,80 +4849,6 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
     () => (overallPct === 0 ? 0 : getCurrentStepIndex(project)),
     [project, overallPct]
   );
-
-  const openStorypoint = (id) => {
-    if (eduPanelCloseTimerRef.current) {
-      clearTimeout(eduPanelCloseTimerRef.current);
-      eduPanelCloseTimerRef.current = null;
-    }
-    setHoveredStorypointId(id);
-  };
-
-  const scheduleCloseStorypoint = () => {
-    if (isTouchDevice || pinnedStorypointId) return;
-
-    if (eduPanelCloseTimerRef.current) {
-      clearTimeout(eduPanelCloseTimerRef.current);
-    }
-
-    eduPanelCloseTimerRef.current = setTimeout(() => {
-      setHoveredStorypointId(null);
-    }, 180);
-  };
-
-  const closeStorypointNow = () => {
-    if (eduPanelCloseTimerRef.current) {
-      clearTimeout(eduPanelCloseTimerRef.current);
-      eduPanelCloseTimerRef.current = null;
-    }
-    setHoveredStorypointId(null);
-    setPinnedStorypointId(null);
-  };
-
-  const togglePinnedStorypoint = (id) => {
-    if (eduPanelCloseTimerRef.current) {
-      clearTimeout(eduPanelCloseTimerRef.current);
-      eduPanelCloseTimerRef.current = null;
-    }
-
-    setPinnedStorypointId((prev) => (prev === id ? null : id));
-    setHoveredStorypointId(id);
-  };
-
-  useEffect(() => {
-    const handlePointerDownOutside = (event) => {
-      if (!pinnedStorypointId) return;
-
-      const target = event.target;
-
-      const clickedInsidePanel =
-        eduPanelRef.current && eduPanelRef.current.contains(target);
-
-      const clickedInsideStorypoints =
-        storypointRailRef.current && storypointRailRef.current.contains(target);
-
-      const clickedInsideCarouselWindow =
-        carouselWindowRef.current && carouselWindowRef.current.contains(target);
-
-      if (
-        clickedInsidePanel ||
-        clickedInsideStorypoints ||
-        clickedInsideCarouselWindow
-      ) {
-        return;
-      }
-
-      closeStorypointNow();
-    };
-
-    document.addEventListener('mousedown', handlePointerDownOutside);
-    document.addEventListener('touchstart', handlePointerDownOutside);
-
-    return () => {
-      document.removeEventListener('mousedown', handlePointerDownOutside);
-      document.removeEventListener('touchstart', handlePointerDownOutside);
-    };
-  }, [pinnedStorypointId]);
 
   const { stageLabel: currentStageLabel, stepLabel: currentStepLabel } =
     useMemo(() => getCurrentStageAndStepLabels(project), [project]);
@@ -4930,10 +5359,9 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
       };
     });
   }, [project, currentStageTemplate, activeStep]);
-  const resolvedStorypointId = pinnedStorypointId || hoveredStorypointId;
-
   const activeStorypoint =
-    currentStageStorypoints.find((item) => item.id === resolvedStorypointId) ||
+    currentStageStorypoints.find((item) => item.id === activeStorySectionId) ||
+    currentStageStorypoints[0] ||
     null;
 
   const stageResourceItems = useMemo(
@@ -5067,13 +5495,6 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
   const showStageStorypoints =
     currentStageStatus === STAGE_MEDIA_STATE.COMPLETED ||
     currentStageStatus === STAGE_MEDIA_STATE.CURRENT;
-
-  useEffect(() => {
-    if (!showStageStorypoints) {
-      setHoveredStorypointId(null);
-      setPinnedStorypointId(null);
-    }
-  }, [showStageStorypoints]);
 
   const displayedOverlayStageIndex = Math.max(
     0,
@@ -6391,374 +6812,6 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
                   />
                 ) : null}
 
-                {activeStorypoint && !isLegacyChapter ? (
-                  <div
-                    ref={eduPanelRef}
-                    className={`sl-progress-stage-edu-panel ${
-                      activeStorypoint ? 'is-visible' : ''
-                    }`}
-                    onMouseEnter={() => {
-                      if (
-                        !isTouchDevice &&
-                        activeStorypoint?.id &&
-                        !pinnedStorypointId
-                      ) {
-                        openStorypoint(activeStorypoint.id);
-                      }
-                    }}
-                    onMouseLeave={() => {
-                      if (!isTouchDevice) scheduleCloseStorypoint();
-                    }}
-                  >
-                    <div className="sl-progress-stage-edu-panel-inner">
-                      <div
-                        className="sl-progress-stage-edu-grain"
-                        aria-hidden="true"
-                      />
-
-                      <div className="sl-progress-stage-edu-header">
-                        <div className="sl-progress-stage-edu-header-copy">
-                          <div className="sl-progress-stage-edu-chapter-heading">
-                            <div className="sl-progress-stage-edu-chapter-number">
-                              {chapterLabel}
-                            </div>
-                            <div className="sl-progress-stage-edu-chapter-title">
-                              {activeStep?.label || activeStep?.adminMainTitle}
-                            </div>
-                          </div>
-
-                          <div className="sl-progress-stage-edu-helper">
-                            {stageStatePresentation.helper}
-                          </div>
-                        </div>
-
-                        <button
-                          type="button"
-                          className="sl-progress-stage-edu-close"
-                          onClick={closeStorypointNow}
-                        >
-                          Close
-                        </button>
-                      </div>
-
-                      {activeStorypoint?.id === 'overview' ? (
-                        <>
-                          <div className="sl-progress-stage-storypoint-data-card sl-progress-stage-storypoint-data-card--full">
-                            <div className="sl-progress-stage-storypoint-data-label">
-                              Chapter Story
-                            </div>
-                            <div className="sl-progress-stage-storypoint-data-value sl-progress-stage-storypoint-data-value--body">
-                              {chapterNarrative.summary}
-                            </div>
-                          </div>
-
-                          <div className="sl-progress-storypoint-progress">
-                            <div className="sl-progress-storypoint-progress-grid">
-                              <div className="sl-progress-storypoint-stat">
-                                <div className="sl-progress-storypoint-stat-label">
-                                  Chapter status
-                                </div>
-                                <div className="sl-progress-storypoint-stat-value">
-                                  {currentChapterProgressData.status}
-                                </div>
-                              </div>
-
-                              <div className="sl-progress-storypoint-stat">
-                                <div className="sl-progress-storypoint-stat-label">
-                                  Chapter completion
-                                </div>
-                                <div className="sl-progress-storypoint-stat-value">
-                                  {currentChapterProgressData.completionPct}%
-                                </div>
-                              </div>
-
-                              <div className="sl-progress-storypoint-stat">
-                                <div className="sl-progress-storypoint-stat-label">
-                                  Est. focused hours
-                                </div>
-                                <div className="sl-progress-storypoint-stat-value">
-                                  {currentChapterProgressData.estHours}
-                                </div>
-                              </div>
-
-                              <div className="sl-progress-storypoint-stat">
-                                <div className="sl-progress-storypoint-stat-label">
-                                  Avg. turnaround
-                                </div>
-                                <div className="sl-progress-storypoint-stat-value">
-                                  {currentChapterProgressData.avgDays}
-                                </div>
-                              </div>
-
-                              <div className="sl-progress-storypoint-stat">
-                                <div className="sl-progress-storypoint-stat-label">
-                                  Current sub-step
-                                </div>
-                                <div className="sl-progress-storypoint-stat-value">
-                                  {currentChapterProgressData.currentSubStep}
-                                </div>
-                              </div>
-
-                              <div className="sl-progress-storypoint-stat">
-                                <div className="sl-progress-storypoint-stat-label">
-                                  Stage completion target
-                                </div>
-                                <div className="sl-progress-storypoint-stat-value">
-                                  {currentChapterProgressData.targetDate}
-                                </div>
-                              </div>
-                            </div>
-
-                            <div className="sl-progress-storypoint-checkpoints">
-                              <div className="sl-progress-storypoint-checkpoints-header">
-                                <div className="sl-progress-storypoint-checkpoints-label">
-                                  Workshop checkpoints
-                                </div>
-                                <div className="sl-progress-storypoint-checkpoints-count">
-                                  {
-                                    currentChapterProgressData.completedCheckpoints
-                                  }
-                                  /{currentChapterProgressData.totalCheckpoints}{' '}
-                                  completed
-                                </div>
-                              </div>
-
-                              <StageCheckpointsPanel
-                                key={`progress-inline-${activeStep.key}-${isAdmin ? 'admin' : 'customer'}`}
-                                project={project}
-                                setProject={setProject}
-                                stageKey={activeStep.key}
-                                isAdmin={isAdmin}
-                                variant="compact"
-                                showHeader={false}
-                              />
-                            </div>
-                          </div>
-                        </>
-                      ) : null}
-
-                      {activeStorypoint?.id === 'artist-direction'
-                        ? renderStorypointSections(activeStorypoint.data)
-                        : null}
-
-                      {activeStorypoint?.id === 'craftsman-direction'
-                        ? renderStorypointSections(activeStorypoint.data)
-                        : null}
-
-                      {activeStorypoint?.id === 'build'
-                        ? renderStorypointSections(activeStorypoint.data)
-                        : null}
-
-                      {activeStorypoint?.id === 'voice'
-                        ? renderStorypointSections(activeStorypoint.data)
-                        : null}
-
-                      {isAdmin &&
-                      activeStageArchiveDefinition &&
-                      activeStorypoint?.id === 'archive' ? (
-                        <div
-                          className={`sl-progress-stage-archive-admin-card ${
-                            archiveIsDragging ? 'is-dragging' : ''
-                          }`}
-                          onDragOver={handleArchiveDragOver}
-                          onDragLeave={handleArchiveDragLeave}
-                          onDrop={handleArchiveDrop}
-                        >
-                          <div className="sl-progress-stage-storypoint-data-card sl-progress-stage-storypoint-data-card--full">
-                            <div className="sl-progress-stage-storypoint-data-label">
-                              Chapter Archive
-                            </div>
-                            <div className="sl-progress-stage-storypoint-data-value sl-progress-stage-storypoint-data-value--body">
-                              {activeStageArchiveDefinition.internalGoal}
-                            </div>
-                          </div>
-
-                          <div className="sl-progress-stage-archive-admin-controls">
-                            <div className="sl-progress-stage-storypoint-data-label">
-                              Add archive item
-                            </div>
-
-                            <select
-                              className="sl-progress-stage-archive-select"
-                              value={selectedArchiveCaptureKey}
-                              onChange={(e) =>
-                                setSelectedArchiveCaptureKey(e.target.value)
-                              }
-                            >
-                              <option value="">
-                                Choose a suggested capture…
-                              </option>
-
-                              {activeStageArchiveDefinition.suggestedCaptures.map(
-                                (capture) => (
-                                  <option key={capture.key} value={capture.key}>
-                                    {capture.shortLabel || capture.label}
-                                  </option>
-                                )
-                              )}
-
-                              <option value="other">
-                                Other / custom upload
-                              </option>
-                            </select>
-
-                            {selectedArchiveCapture ? (
-                              <div className="sl-progress-stage-storypoint-data-card sl-progress-stage-storypoint-data-card--full">
-                                <div className="sl-progress-stage-storypoint-data-label">
-                                  Suggested capture details
-                                </div>
-
-                                <div className="sl-progress-stage-storypoint-data-value sl-progress-stage-storypoint-data-value--body">
-                                  <strong>
-                                    {selectedArchiveCapture.label}
-                                  </strong>
-                                  <br />
-                                  {selectedArchiveCapture.purpose}
-                                  <br />
-                                  Visibility:{' '}
-                                  {getArchiveVisibilityLabel(
-                                    selectedArchiveCapture.visibility
-                                  )}
-                                  {selectedArchiveCapture.angle ? (
-                                    <>
-                                      <br />
-                                      Angle: {selectedArchiveCapture.angle}
-                                    </>
-                                  ) : null}
-                                </div>
-                              </div>
-                            ) : null}
-
-                            <button
-                              type="button"
-                              className={`sl-progress-stage-edu-resource-link sl-progress-stage-upload-trigger is-primary ${
-                                archiveUploading || !selectedArchiveCaptureKey
-                                  ? 'is-disabled'
-                                  : ''
-                              }`}
-                              onClick={() => {
-                                if (
-                                  archiveUploading ||
-                                  !selectedArchiveCaptureKey
-                                )
-                                  return;
-                                openArchiveFilePicker();
-                              }}
-                              disabled={
-                                archiveUploading || !selectedArchiveCaptureKey
-                              }
-                            >
-                              {archiveUploading
-                                ? `Uploading… ${archiveUploadProgress}%`
-                                : 'Upload archive item'}
-                            </button>
-
-                            <div className="sl-progress-stage-archive-drop-hint">
-                              Drag and drop files here, or click the button
-                              above.
-                            </div>
-                          </div>
-
-                          {activeStageArchiveDefinition.adminCaptureChecklist
-                            ?.length ? (
-                            <div className="sl-progress-stage-storypoint-data-card sl-progress-stage-storypoint-data-card--full">
-                              <div className="sl-progress-stage-storypoint-data-label">
-                                Admin capture checklist
-                              </div>
-
-                              <div className="sl-progress-stage-storypoint-data-value sl-progress-stage-storypoint-data-value--stack">
-                                {activeStageArchiveDefinition.adminCaptureChecklist.map(
-                                  (item, index) => (
-                                    <span
-                                      key={`${item}-${index}`}
-                                      className="sl-progress-stage-storypoint-tag"
-                                    >
-                                      {item}
-                                    </span>
-                                  )
-                                )}
-                              </div>
-                            </div>
-                          ) : null}
-
-                          {activeStageArchiveItems.length ? (
-                            <div className="sl-progress-stage-storypoint-data-card sl-progress-stage-storypoint-data-card--full">
-                              <div className="sl-progress-stage-storypoint-data-label">
-                                Uploaded archive items
-                              </div>
-
-                              <div className="sl-progress-stage-edu-resource-grid">
-                                {activeStageArchiveItems.map((item, index) => {
-                                  const itemType =
-                                    item.mediaType ||
-                                    item.type ||
-                                    getFileTypeFromUrl(item.url, item.type);
-
-                                  const previewItem = {
-                                    ...item,
-                                    type: itemType,
-                                  };
-
-                                  const isImage = itemType === 'image';
-                                  const isVideo = itemType === 'video';
-
-                                  return (
-                                    <button
-                                      key={item.id || `${item.url}-${index}`}
-                                      type="button"
-                                      className={`sl-progress-stage-edu-resource-card is-${itemType}`}
-                                      onClick={() =>
-                                        setSelectedResourceItem(previewItem)
-                                      }
-                                    >
-                                      <div className="sl-progress-stage-edu-resource-thumb">
-                                        {isImage ? (
-                                          <img
-                                            src={item.url}
-                                            alt={
-                                              item.title ||
-                                              `Archive item ${index + 1}`
-                                            }
-                                            className="sl-progress-stage-edu-resource-image"
-                                            loading="lazy"
-                                          />
-                                        ) : (
-                                          <div className="sl-progress-stage-edu-resource-filetype">
-                                            {isVideo
-                                              ? 'VIDEO'
-                                              : itemType === 'audio'
-                                                ? 'AUDIO'
-                                                : itemType === 'document'
-                                                  ? 'DOC'
-                                                  : 'FILE'}
-                                          </div>
-                                        )}
-                                      </div>
-
-                                      <div className="sl-progress-stage-edu-resource-meta">
-                                        <div className="sl-progress-stage-edu-resource-title">
-                                          {item.title ||
-                                            `Archive item ${index + 1}`}
-                                        </div>
-                                        <div className="sl-progress-stage-edu-resource-subtitle">
-                                          {formatResourceTypeLabel(itemType)} •{' '}
-                                          {getArchiveVisibilityLabel(
-                                            item.visibility
-                                          )}
-                                        </div>
-                                      </div>
-                                    </button>
-                                  );
-                                })}
-                              </div>
-                            </div>
-                          ) : null}
-                        </div>
-                      ) : null}
-                    </div>
-                  </div>
-                ) : null}
-
                 {(() => {
                   const activeInteractiveStep =
                     currentStageInteractiveSteps.find(
@@ -6921,28 +6974,10 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
                           key={item.id}
                           type="button"
                           className={`sl-progress-stage-learning-pill ${
-                            resolvedStorypointId === item.id ? 'is-active' : ''
+                            activeStorySectionId === item.id ? 'is-active' : ''
                           }`}
-                          onMouseEnter={() => {
-                            if (!isTouchDevice && !pinnedStorypointId) {
-                              openStorypoint(item.id);
-                            }
-                          }}
-                          onMouseLeave={() => {
-                            if (!isTouchDevice && !pinnedStorypointId) {
-                              scheduleCloseStorypoint();
-                            }
-                          }}
-                          onFocus={() => {
-                            if (!pinnedStorypointId) openStorypoint(item.id);
-                          }}
-                          onBlur={() => {
-                            if (!isTouchDevice && !pinnedStorypointId) {
-                              scheduleCloseStorypoint();
-                            }
-                          }}
-                          onClick={() => togglePinnedStorypoint(item.id)}
-                          aria-pressed={pinnedStorypointId === item.id}
+                          onClick={() => setActiveStorySectionId(item.id)}
+                          aria-pressed={activeStorySectionId === item.id}
                         >
                           <span className="sl-progress-stage-learning-pill-icon">
                             {renderStorypointIcon(item.icon)}
@@ -6960,6 +6995,61 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
           </div>
         </div>
       </section>
+
+      {!isLegacyChapter &&
+      !isRevealCoverChapter &&
+      showStageStorypoints &&
+      activeStorypoint ? (
+        <section className="sl-progress-story-book-section">
+          <div
+  className="sl-progress-story-book-shell"
+  style={{
+    backgroundImage:
+      "linear-gradient(180deg, rgba(248, 240, 224, 0.82), rgba(232, 220, 198, 0.86)), url('/story-pages/page2.png')",
+    backgroundSize: 'cover',
+    backgroundPosition: 'center center',
+    backgroundRepeat: 'no-repeat',
+  }}
+>
+        <div className="sl-progress-story-book-header">
+  <div className="sl-progress-story-book-kicker">
+    {chapterLabel}
+  </div>
+  <h3 className="sl-progress-story-book-title">
+    {activeStorypoint.id === 'overview'
+      ? 'Chapter Overview'
+      : activeStorypoint.id === 'build-notes'
+        ? 'Build Notes'
+        : 'Archive'}
+  </h3>
+  <div className="sl-progress-story-book-subtitle">
+    {activeStep?.label || activeStep?.adminMainTitle}
+  </div>
+</div>
+
+            {renderActiveStorySection({
+              activeStorypoint,
+              chapterNarrative,
+              currentChapterProgressData,
+              activeStep,
+              project,
+              setProject,
+              isAdmin,
+              activeStageArchiveDefinition,
+              activeStageArchiveItems,
+              selectedArchiveCaptureKey,
+              setSelectedArchiveCaptureKey,
+              selectedArchiveCapture,
+              archiveUploading,
+              archiveUploadProgress,
+              openArchiveFilePicker,
+              getArchiveVisibilityLabel,
+              setSelectedResourceItem,
+            })}
+          </div>
+        </section>
+      ) : null}
+
       {isLegacyChapter && isAdmin ? (
         <section className="sl-progress-legacy-admin-shell">
           <div className="sl-progress-legacy-admin-section-header">
