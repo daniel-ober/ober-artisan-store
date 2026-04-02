@@ -14,7 +14,7 @@
 }
 
 .cip-header-copy {
-    max-width: 760px;
+  max-width: 760px;
   width: 100%;
   text-align: center;
 }
@@ -208,7 +208,7 @@
     box-shadow 0.16s ease;
 }
 
-.cip-chip:hover:not(:disabled) {
+.cip-chip:hover:not(:disabled):not(.is-active):not([aria-pressed='true']) {
   transform: translateY(-1px);
   border-color: rgba(214, 174, 82, 0.24);
   background: linear-gradient(
@@ -220,7 +220,11 @@
 }
 
 .cip-chip.is-active,
-.cip-chip[aria-pressed='true'] {
+.cip-chip[aria-pressed='true'],
+.cip-chip.is-active:hover:not(:disabled),
+.cip-chip[aria-pressed='true']:hover:not(:disabled),
+.cip-chip.is-active:focus-visible,
+.cip-chip[aria-pressed='true']:focus-visible {
   background: linear-gradient(
     180deg,
     rgba(66, 52, 20, 0.96),
@@ -231,6 +235,14 @@
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.05),
     0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.cip-chip:focus-visible {
+  outline: none;
+  border-color: rgba(214, 174, 82, 0.42);
+  box-shadow:
+    0 0 0 3px rgba(214, 174, 82, 0.14),
+    0 8px 16px rgba(0, 0, 0, 0.16);
 }
 
 .cip-chip.is-readonly,
