@@ -478,6 +478,25 @@
   font-weight: 500;
 }
 
+.apr-return-signin-btn {
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+  border: 1px solid rgba(214, 174, 82, 0.24);
+  background: linear-gradient(180deg, #d8b158 0%, #c79d3a 100%);
+  color: #15110a;
+  box-shadow:
+    0 12px 28px rgba(173, 131, 38, 0.22),
+    inset 0 1px 0 rgba(255, 248, 222, 0.34);
+}
+
+.apr-return-signin-btn:hover {
+  filter: brightness(1.015);
+  box-shadow:
+    0 16px 34px rgba(173, 131, 38, 0.28),
+    inset 0 1px 0 rgba(255, 248, 222, 0.34);
+}
+
 /* Responsive */
 @media (max-width: 480px) {
   .soundlegend-signin {
