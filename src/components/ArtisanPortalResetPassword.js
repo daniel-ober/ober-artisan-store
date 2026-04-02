@@ -279,21 +279,21 @@ const ArtisanPortalResetPassword = () => {
           </p>
         </header>
 
-        <form className="signin-card" aria-label="Account action complete">
-          {infoMsg && (
-            <p className="alert info" role="status">
-              {infoMsg}
-            </p>
-          )}
+       <form className="signin-card" aria-label="Account action complete">
+  {infoMsg && (
+    <p className="alert info" role="status">
+      {infoMsg}
+    </p>
+  )}
 
-          <button
-            type="button"
-            className="btn-primary"
-            onClick={() => navigate('/artisan-portal/signin')}
-          >
-            Return to sign in
-          </button>
-        </form>
+  <button
+    type="button"
+    className="btn-primary apr-return-signin-btn"
+    onClick={() => navigate('/artisan-portal/signin')}
+  >
+    Return to sign in
+  </button>
+</form>
 
         <div className="signin-info">
           <p className="support-row">
