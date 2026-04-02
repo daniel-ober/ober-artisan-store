@@ -19,6 +19,7 @@ const SoundlegendSignin = () => {
   const [errorMsg, setErrorMsg] = useState('');
   const [infoMsg, setInfoMsg] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSendingReset, setIsSendingReset] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -125,7 +126,7 @@ const SoundlegendSignin = () => {
         await signOut(auth);
         setErrorMsg('You are not authorized for SoundLegend access.');
         setInfoMsg(
-          'If you’re ready to join, start your custom build to receive portal access.'
+          'This portal is reserved for active SoundLegend artists. If you’re ready to join, start your custom build to receive portal access.'
         );
         setIsSubmitting(false);
         return;
@@ -220,6 +221,7 @@ const SoundlegendSignin = () => {
   const handleForgot = async () => {
     setErrorMsg('');
     setInfoMsg('');
+
     const trimmedEmail = email.trim();
 
     if (!trimmedEmail) {
@@ -228,11 +230,18 @@ const SoundlegendSignin = () => {
     }
 
     try {
+      setIsSendingReset(true);
+
       await sendPasswordResetEmail(auth, trimmedEmail);
-      setInfoMsg('Password reset link sent. Check your inbox (and spam).');
+
+      setInfoMsg(
+        'If this email has SoundLegend portal access, a password reset link has been sent. Please check your inbox and spam folder.'
+      );
     } catch (err) {
       console.error('❌ Reset error:', err);
       setErrorMsg(mapFirebaseError(err?.code));
+    } finally {
+      setIsSendingReset(false);
     }
   };
 
@@ -250,6 +259,19 @@ const SoundlegendSignin = () => {
       <header className="signin-hero" aria-label="SoundLegend intro">
         <p className="signin-subtitle">
           Secure access to your build, media, and milestone history.
+        </p>
+
+        <p
+          className="signin-subtitle"
+          style={{
+            marginTop: '0.7rem',
+            maxWidth: '58ch',
+            color: 'var(--sl-warn)',
+            fontWeight: 600,
+          }}
+        >
+          This portal is reserved for active SoundLegend artists who have been
+          granted portal access.
         </p>
       </header>
 
@@ -269,7 +291,7 @@ const SoundlegendSignin = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            disabled={isSubmitting}
+            disabled={isSubmitting || isSendingReset}
           />
         </div>
 
@@ -294,7 +316,7 @@ const SoundlegendSignin = () => {
                 setCapsOn(e.getModifierState && e.getModifierState('CapsLock'))
               }
               required
-              disabled={isSubmitting}
+              disabled={isSubmitting || isSendingReset}
             />
             <button
               type="button"
@@ -302,7 +324,7 @@ const SoundlegendSignin = () => {
               onClick={() => setShowPw((s) => !s)}
               aria-pressed={showPw}
               aria-label={showPw ? 'Hide password' : 'Show password'}
-              disabled={isSubmitting}
+              disabled={isSubmitting || isSendingReset}
             >
               {showPw ? 'Hide' : 'Show'}
             </button>
@@ -327,7 +349,7 @@ const SoundlegendSignin = () => {
               type="checkbox"
               checked={rememberMe}
               onChange={(e) => setRememberMe(e.target.checked)}
-              disabled={isSubmitting}
+              disabled={isSubmitting || isSendingReset}
             />
             <span className="checkbox-box" aria-hidden="true">
               <svg
@@ -348,13 +370,29 @@ const SoundlegendSignin = () => {
             <span className="checkbox-label">Remember me on this device</span>
           </label>
 
-          {/* <button type="button" className="link-ghost" onClick={handleForgot} disabled={isSubmitting}>Forgot password?</button> */}
+          <button
+            type="button"
+            className="link-gold join-link"
+            onClick={handleForgot}
+            disabled={isSubmitting || isSendingReset}
+            style={{
+              background: 'transparent',
+              border: 'none',
+              padding: 0,
+              cursor: isSubmitting || isSendingReset ? 'not-allowed' : 'pointer',
+              opacity: isSubmitting || isSendingReset ? 0.65 : 1,
+            }}
+          >
+            {isSendingReset ? 'Sending reset link…' : 'Forgot password?'}
+          </button>
         </div>
 
         <button
           type="submit"
           className="btn-primary"
-          disabled={isSubmitting || !email.trim() || !password}
+          disabled={
+            isSubmitting || isSendingReset || !email.trim() || !password
+          }
         >
           {isSubmitting ? (
             <span className="spinner" aria-hidden="true" />

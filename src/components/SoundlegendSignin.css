@@ -336,12 +336,31 @@
   margin-bottom: 4px;
 }
 .link-gold {
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
   color: var(--sl-gold);
   text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
   transition: color 0.2s ease;
+  cursor: pointer;
+  font: inherit;
+  line-height: inherit;
 }
+
 .link-gold:hover {
   color: var(--sl-gold-warm);
+}
+
+.link-gold:focus,
+.link-gold:focus-visible {
+  outline: none;
+  box-shadow: none;
 }
 .join-link {
   display: inline-block;
@@ -495,6 +514,21 @@
   box-shadow:
     0 16px 34px rgba(173, 131, 38, 0.28),
     inset 0 1px 0 rgba(255, 248, 222, 0.34);
+}
+
+.soundlegend-signin .signin-row .join-link {
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  margin: 0;
+}
+
+.soundlegend-signin .signin-row .join-link:focus,
+.soundlegend-signin .signin-row .join-link:focus-visible {
+  outline: none;
+  box-shadow: none;
 }
 
 /* Responsive */
