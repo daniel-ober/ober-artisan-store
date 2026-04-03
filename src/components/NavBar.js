@@ -321,8 +321,8 @@ const NavBar = () => {
                     </Link>
                   ))}
 
-                {renderPortalLink()}
                 {renderLegacyVaultLogo()}
+                {renderPortalLink()}
 
                 {user && isAdmin && (
                   <Link
@@ -404,8 +404,8 @@ const NavBar = () => {
                     </Link>
                   ))}
 
-                {renderPortalLink()}
                 {renderLegacyVaultLogo()}
+                {renderPortalLink()}
 
                 {user && isAdmin && (
                   <Link
@@ -515,8 +515,8 @@ const NavBar = () => {
                   </Link>
                 ))}
 
-              {renderPortalLink()}
               {renderLegacyVaultLogo()}
+              {renderPortalLink()}
 
               {user && isAdmin && (
                 <Link

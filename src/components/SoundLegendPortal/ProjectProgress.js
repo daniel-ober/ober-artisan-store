@@ -1733,7 +1733,9 @@ function getBuildNotesSummary(step, project) {
   }
 
   if (materialStrategy) {
-    parts.push(materialStrategy.endsWith('.') ? materialStrategy : `${materialStrategy}.`);
+    parts.push(
+      materialStrategy.endsWith('.') ? materialStrategy : `${materialStrategy}.`
+    );
   }
 
   if (buildVision) {
@@ -1871,7 +1873,9 @@ function getBuildNotesVisionData(step, project) {
     influences:
       influences.length > 0
         ? influences
-        : ['Project influences will be surfaced here as this chapter is refined.'],
+        : [
+            'Project influences will be surfaced here as this chapter is refined.',
+          ],
     materialVision:
       materialVision ||
       'Material choices in this chapter are being narrowed based on what best serves the final voice and physical feel of the drum.',
@@ -2499,34 +2503,34 @@ function renderActiveStorySection({
           </div>
         </div>
 
-<div className="sl-progress-storypoint-progress-grid">
-  <div className="sl-progress-storypoint-stat">
-    <div className="sl-progress-storypoint-stat-label">
-      Chapter completion
-    </div>
-    <div className="sl-progress-storypoint-stat-value">
-      {currentChapterProgressData.completionPct}%
-    </div>
-  </div>
+        <div className="sl-progress-storypoint-progress-grid">
+          <div className="sl-progress-storypoint-stat">
+            <div className="sl-progress-storypoint-stat-label">
+              Chapter completion
+            </div>
+            <div className="sl-progress-storypoint-stat-value">
+              {currentChapterProgressData.completionPct}%
+            </div>
+          </div>
 
-  <div className="sl-progress-storypoint-stat">
-    <div className="sl-progress-storypoint-stat-label">
-      Target chapter completion
-    </div>
-    <div className="sl-progress-storypoint-stat-value">
-      {currentChapterProgressData.targetDate}
-    </div>
-  </div>
+          <div className="sl-progress-storypoint-stat">
+            <div className="sl-progress-storypoint-stat-label">
+              Target chapter completion
+            </div>
+            <div className="sl-progress-storypoint-stat-value">
+              {currentChapterProgressData.targetDate}
+            </div>
+          </div>
 
-  <div className="sl-progress-storypoint-stat">
-    <div className="sl-progress-storypoint-stat-label">
-      Estimated working hours
-    </div>
-    <div className="sl-progress-storypoint-stat-value">
-      {currentChapterProgressData.estHours}
-    </div>
-  </div>
-</div>
+          <div className="sl-progress-storypoint-stat">
+            <div className="sl-progress-storypoint-stat-label">
+              Estimated working hours
+            </div>
+            <div className="sl-progress-storypoint-stat-value">
+              {currentChapterProgressData.estHours}
+            </div>
+          </div>
+        </div>
 
         <div className="sl-progress-story-section-block sl-progress-story-section-block--spaced">
           <div className="sl-progress-story-section-label">
@@ -2547,87 +2551,87 @@ function renderActiveStorySection({
     );
   }
 
-if (activeStorypoint.id === 'build-notes') {
-  const buildNotesSummary = getBuildNotesSummary(activeStep, project);
-  const uniquePoints = getBuildNotesUniquePoints(activeStep, project);
-  const visionData = getBuildNotesVisionData(activeStep, project);
+  if (activeStorypoint.id === 'build-notes') {
+    const buildNotesSummary = getBuildNotesSummary(activeStep, project);
+    const uniquePoints = getBuildNotesUniquePoints(activeStep, project);
+    const visionData = getBuildNotesVisionData(activeStep, project);
 
-  return (
-    <div className="sl-progress-build-notes-stack">
-      <div className="sl-progress-story-section-intro-card sl-progress-story-section-intro-card--lighter sl-progress-story-section-intro-card--summary">
-        <div className="sl-progress-story-section-label">
-          Personalized Chapter Summary
+    return (
+      <div className="sl-progress-build-notes-stack">
+        <div className="sl-progress-story-section-intro-card sl-progress-story-section-intro-card--lighter sl-progress-story-section-intro-card--summary">
+          <div className="sl-progress-story-section-label">
+            Personalized Chapter Summary
+          </div>
+          <div className="sl-progress-story-section-body">
+            {buildNotesSummary}
+          </div>
         </div>
-        <div className="sl-progress-story-section-body">
-          {buildNotesSummary}
+
+        <div className="sl-progress-story-section-intro-card sl-progress-story-section-intro-card--lighter">
+          <div className="sl-progress-story-section-label">
+            What Makes This Build Unique In This Chapter
+          </div>
+
+          <ul className="sl-progress-build-notes-bullets">
+            {uniquePoints.map((point, index) => (
+              <li key={`${point}-${index}`}>{point}</li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="sl-progress-story-section-intro-card sl-progress-story-section-intro-card--lighter">
+          <div className="sl-progress-story-section-label">
+            Influences + Build / Material Vision
+          </div>
+
+          <div className="sl-progress-build-notes-vision-grid">
+            <div className="sl-progress-stage-storypoint-data-card">
+              <div className="sl-progress-stage-storypoint-data-label">
+                Influences
+              </div>
+              <div className="sl-progress-stage-storypoint-data-value sl-progress-stage-storypoint-data-value--stack">
+                {visionData.influences.map((item, index) => (
+                  <span
+                    key={`${item}-${index}`}
+                    className="sl-progress-stage-storypoint-tag"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="sl-progress-stage-storypoint-data-card sl-progress-stage-storypoint-data-card--full">
+              <div className="sl-progress-stage-storypoint-data-label">
+                Build Vision
+              </div>
+              <div className="sl-progress-stage-storypoint-data-value sl-progress-stage-storypoint-data-value--body">
+                {visionData.buildVision}
+              </div>
+            </div>
+
+            <div className="sl-progress-stage-storypoint-data-card sl-progress-stage-storypoint-data-card--full">
+              <div className="sl-progress-stage-storypoint-data-label">
+                Material Vision
+              </div>
+              <div className="sl-progress-stage-storypoint-data-value sl-progress-stage-storypoint-data-value--body">
+                {visionData.materialVision}
+              </div>
+            </div>
+
+            <div className="sl-progress-stage-storypoint-data-card sl-progress-stage-storypoint-data-card--full">
+              <div className="sl-progress-stage-storypoint-data-label">
+                How The Influences Affect The Build Approach
+              </div>
+              <div className="sl-progress-stage-storypoint-data-value sl-progress-stage-storypoint-data-value--body">
+                {visionData.influenceEffect}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-
-      <div className="sl-progress-story-section-intro-card sl-progress-story-section-intro-card--lighter">
-        <div className="sl-progress-story-section-label">
-          What Makes This Build Unique In This Chapter
-        </div>
-
-        <ul className="sl-progress-build-notes-bullets">
-          {uniquePoints.map((point, index) => (
-            <li key={`${point}-${index}`}>{point}</li>
-          ))}
-        </ul>
-      </div>
-
-      <div className="sl-progress-story-section-intro-card sl-progress-story-section-intro-card--lighter">
-        <div className="sl-progress-story-section-label">
-          Influences + Build / Material Vision
-        </div>
-
-        <div className="sl-progress-build-notes-vision-grid">
-          <div className="sl-progress-stage-storypoint-data-card">
-            <div className="sl-progress-stage-storypoint-data-label">
-              Influences
-            </div>
-            <div className="sl-progress-stage-storypoint-data-value sl-progress-stage-storypoint-data-value--stack">
-              {visionData.influences.map((item, index) => (
-                <span
-                  key={`${item}-${index}`}
-                  className="sl-progress-stage-storypoint-tag"
-                >
-                  {item}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <div className="sl-progress-stage-storypoint-data-card sl-progress-stage-storypoint-data-card--full">
-            <div className="sl-progress-stage-storypoint-data-label">
-              Build Vision
-            </div>
-            <div className="sl-progress-stage-storypoint-data-value sl-progress-stage-storypoint-data-value--body">
-              {visionData.buildVision}
-            </div>
-          </div>
-
-          <div className="sl-progress-stage-storypoint-data-card sl-progress-stage-storypoint-data-card--full">
-            <div className="sl-progress-stage-storypoint-data-label">
-              Material Vision
-            </div>
-            <div className="sl-progress-stage-storypoint-data-value sl-progress-stage-storypoint-data-value--body">
-              {visionData.materialVision}
-            </div>
-          </div>
-
-          <div className="sl-progress-stage-storypoint-data-card sl-progress-stage-storypoint-data-card--full">
-            <div className="sl-progress-stage-storypoint-data-label">
-              How The Influences Affect The Build Approach
-            </div>
-            <div className="sl-progress-stage-storypoint-data-value sl-progress-stage-storypoint-data-value--body">
-              {visionData.influenceEffect}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
+    );
+  }
 
   if (activeStorypoint.id === 'archive') {
     return (
@@ -7002,30 +7006,30 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
       activeStorypoint ? (
         <section className="sl-progress-story-book-section">
           <div
-  className="sl-progress-story-book-shell"
-  style={{
-    backgroundImage:
-      "linear-gradient(180deg, rgba(248, 240, 224, 0.82), rgba(232, 220, 198, 0.86)), url('/story-pages/page2.png')",
-    backgroundSize: 'cover',
-    backgroundPosition: 'center center',
-    backgroundRepeat: 'no-repeat',
-  }}
->
-        <div className="sl-progress-story-book-header">
-  <div className="sl-progress-story-book-kicker">
-    {chapterLabel}
-  </div>
-  <h3 className="sl-progress-story-book-title">
-    {activeStorypoint.id === 'overview'
-      ? 'Chapter Overview'
-      : activeStorypoint.id === 'build-notes'
-        ? 'Build Notes'
-        : 'Archive'}
-  </h3>
-  <div className="sl-progress-story-book-subtitle">
-    {activeStep?.label || activeStep?.adminMainTitle}
-  </div>
-</div>
+            className="sl-progress-story-book-shell"
+            style={{
+              backgroundImage:
+                "linear-gradient(180deg, rgba(248, 240, 224, 0.62), rgba(232, 220, 198, 0.68)), url('/story-pages/page2.png')",
+              backgroundSize: 'cover',
+              backgroundPosition: 'center center',
+              backgroundRepeat: 'no-repeat',
+            }}
+          >
+            <div className="sl-progress-story-book-header">
+              <div className="sl-progress-story-book-kicker">
+                {chapterLabel}
+              </div>
+              <h3 className="sl-progress-story-book-title">
+                {activeStorypoint.id === 'overview'
+                  ? 'Chapter Overview'
+                  : activeStorypoint.id === 'build-notes'
+                    ? 'Build Notes'
+                    : 'Archive'}
+              </h3>
+              <div className="sl-progress-story-book-subtitle">
+                {activeStep?.label || activeStep?.adminMainTitle}
+              </div>
+            </div>
 
             {renderActiveStorySection({
               activeStorypoint,
