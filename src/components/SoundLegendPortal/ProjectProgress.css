@@ -5,6 +5,8 @@
    ROOT CARD
    ========================================================= */
 
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap');
+
 .slp-card.pp-card[data-component='ProjectProgress'] {
   position: relative;
   max-width: 1180px;
@@ -5080,13 +5082,12 @@ button.pp-compact-marker {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background:
-    linear-gradient(
-      180deg,
-      rgba(255, 248, 236, 0.32) 0%,
-      rgba(255, 244, 226, 0.18) 18%,
-      rgba(214, 193, 164, 0.14) 100%
-    );
+  background: linear-gradient(
+    180deg,
+    rgba(255, 248, 236, 0.32) 0%,
+    rgba(255, 244, 226, 0.18) 18%,
+    rgba(214, 193, 164, 0.14) 100%
+  );
   mix-blend-mode: screen;
 }
 
@@ -5169,9 +5170,14 @@ button.pp-compact-marker {
 }
 
 .sl-progress-story-section-body {
-  font-size: 0.98rem;
-  line-height: 1.8;
-  color: #2e241b;
+  color: rgba(58, 43, 30, 0.88);
+  font-family: 'Cormorant Garamond', 'Garamond', 'Times New Roman', serif;
+  font-size: 1.18rem;
+  line-height: 1.82;
+  letter-spacing: 0.01em;
+  max-width: 900px;
+  margin: 0 auto;
+  text-shadow: 0 0 0.2px rgba(70, 52, 36, 0.18);
 }
 
 .sl-progress-story-book-shell .sl-progress-storypoint-stat {
@@ -5276,13 +5282,6 @@ button.pp-compact-marker {
 .sl-progress-build-notes-stack {
   display: grid;
   gap: 18px;
-}
-
-.sl-progress-story-section-body {
-  color: rgba(44, 34, 26, 0.9);
-  font-size: 0.98rem;
-  line-height: 1.75;
-  letter-spacing: 0.01em;
 }
 
 .sl-progress-story-section-intro-card--summary {
@@ -5643,12 +5642,12 @@ button.pp-compact-marker {
     min-height: 0;
   }
 
-.sl-progress-hero-carousel-stage-rail.is-single-panel
-  .sl-progress-hero-carousel-media {
-  min-height: 520px;
-  border-radius: 0;
-  clip-path: inset(0 round 0);
-}
+  .sl-progress-hero-carousel-stage-rail.is-single-panel
+    .sl-progress-hero-carousel-media {
+    min-height: 520px;
+    border-radius: 0;
+    clip-path: inset(0 round 0);
+  }
 
   .sl-progress-carousel-arrow {
     width: 38px;
@@ -5700,31 +5699,31 @@ button.pp-compact-marker {
     letter-spacing: 0.12em;
   }
 
-.sl-progress-stage-learning-rail--anchored {
-  left: 50%;
-  bottom: 16px;
-  transform: translateX(-50%);
-  width: calc(100% - 24px);
-  max-width: none;
-  flex-wrap: nowrap;
-  justify-content: center;
-  gap: 8px;
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding: 0 12px 2px;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  scroll-padding-left: 12px;
-  scroll-padding-right: 12px;
-}
+  .sl-progress-stage-learning-rail--anchored {
+    left: 50%;
+    bottom: 16px;
+    transform: translateX(-50%);
+    width: calc(100% - 24px);
+    max-width: none;
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 8px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0 12px 2px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    scroll-padding-left: 12px;
+    scroll-padding-right: 12px;
+  }
 
-.sl-progress-stage-learning-rail--anchored .sl-progress-stage-learning-pill {
-   scroll-snap-align: center;
-}
+  .sl-progress-stage-learning-rail--anchored .sl-progress-stage-learning-pill {
+    scroll-snap-align: center;
+  }
 
-.sl-progress-stage-learning-rail--anchored {
-  scroll-snap-type: x proximity;
-}
+  .sl-progress-stage-learning-rail--anchored {
+    scroll-snap-type: x proximity;
+  }
 
   .sl-progress-stage-learning-rail--anchored::-webkit-scrollbar {
     display: none;

@@ -1,100 +1,40 @@
-.chart-container {
-    text-align: center;
-    color: #ffffff;
-    margin: 40px auto;
-    padding: 0 20px;
-    max-width: 100%;
-    box-sizing: border-box;
-    background-color: #1a1a1a;
-    overflow-x: hidden;
+/* src/components/SpiderChart.css */
+
+.spider-chart-card {
+  width: 100%;
+  margin: 0;
+}
+
+.spider-chart-frame {
+  position: relative;
+  min-height: 400px;
+  padding: 16px 14px 8px;
+  border-radius: 14px;
+  background:
+    radial-gradient(circle at top left, rgba(82, 132, 255, 0.12), transparent 32%),
+    radial-gradient(circle at bottom right, rgba(88, 211, 255, 0.06), transparent 28%),
+    linear-gradient(180deg, rgba(14, 17, 26, 0.97), rgba(9, 10, 16, 0.98));
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.03),
+    0 14px 30px rgba(0, 0, 0, 0.24);
+}
+
+.spider-chart-frame canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.spider-chart-card--compact .spider-chart-frame,
+.spider-chart-frame--compact {
+  min-height: 260px;
+  padding: 10px 8px 2px;
+  border-radius: 12px;
+}
+
+@media (max-width: 700px) {
+  .spider-chart-frame {
+    min-height: 300px;
+    padding: 12px 8px 4px;
   }
-
-canvas {
-    max-width: 500px;
-    max-height: 500px;
-    margin-bottom: 20px;
 }
-
-.definitions {
-    text-align: left;
-    margin: 40px auto;
-    max-width: 700px;
-    padding: 25px;
-    border-radius: 10px;
-    background-color: rgba(20, 20, 20, 0.95);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
-}
-
-.definition-item h3 {
-    margin: 15px 0;
-    color: #4db8ff;
-    font-size: 1.5rem;
-}
-
-.definition-item p {
-    margin: 5px 0;
-    line-height: 1.7;
-}
-
-/* Gauge Container */
-.gauge-container {
-    display: flex;
-    align-items: center;
-    margin: 15px 0;
-}
-
-.gauge {
-    flex-grow: 1;
-    height: 20px;
-    border-radius: 12px;
-    overflow: hidden;
-    margin: 0 15px;
-    background-color: rgba(0, 0, 0, 0.6);
-}
-
-/* Gradients for Each Characteristic */
-.gauge-fill {
-    height: 100%;
-    border-radius: 12px;
-    transition: width 0.6s ease;
-}
-
-.attack {
-    background: linear-gradient(90deg, #ff5f6d, #ffc371);
-}
-
-.sustain {
-    background: linear-gradient(90deg, #36d1dc, #5b86e5);
-}
-
-.warmth {
-    background: linear-gradient(90deg, #ff9966, #ff5e62);
-}
-
-.projection {
-    background: linear-gradient(90deg, #00c6ff, #0072ff);
-}
-
-.brightness {
-    background: linear-gradient(90deg, #f4e2d8, #ba5370);
-}
-
-.gauge-label {
-    font-size: 15px;
-    color: #ffffff;
-    font-weight: 500;
-}
-
-/* Responsive Design */
-@media (max-width: 600px) {
-    .chart-container {
-      margin: 20px 10px;
-      padding: 0 10px;
-    }
-  
-    canvas {
-      width: 100% !important;
-      height: auto !important;
-      max-width: 100%;
-    }
-  }
