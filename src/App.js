@@ -193,16 +193,7 @@ function App() {
             <Route path="/return-policy" element={<ReturnPolicy />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
 
-            <Route
-              path="/custom-drum-builder"
-              element={
-                isLinkEnabled('custom-drum-builder') ? (
-                  <CustomDrumBuilder />
-                ) : (
-                  <NotFound />
-                )
-              }
-            />
+           <Route path="/custom-drum-builder" element={<CustomDrumBuilder />} />
 
             <Route
               path="/legacy"
