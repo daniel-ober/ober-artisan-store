@@ -1368,23 +1368,23 @@ function getStageSpecificText(project, stageKey, keys = []) {
   const canonical = canonicalKeyForStage(stageKey);
   const phaseKey = getExistingPhaseKey(project, canonical);
 
-  const staticStageStoryBucket = PROJECT_STAGE_STORY?.[stageKey] || {};
   const projectStageStoryBucket = project?.stageStory?.[stageKey] || {};
   const stageBucket = project?.[stageKey] || {};
   const phaseBucket = project?.[phaseKey] || {};
   const storytellingBucket = project?.storytelling || {};
   const artistBucket = project?.artistDirection || {};
   const craftsmanBucket = project?.craftsmanDirection || {};
+  const staticStageStoryBucket = PROJECT_STAGE_STORY?.[stageKey] || {};
 
   const buckets = [
     projectStageStoryBucket,
-    staticStageStoryBucket,
     stageBucket,
     phaseBucket,
     storytellingBucket,
     artistBucket,
     craftsmanBucket,
     project || {},
+    staticStageStoryBucket,
   ];
 
   for (const bucket of buckets) {
@@ -1405,23 +1405,23 @@ function getStageSpecificArray(project, stageKey, keys = []) {
   const canonical = canonicalKeyForStage(stageKey);
   const phaseKey = getExistingPhaseKey(project, canonical);
 
-  const staticStageStoryBucket = PROJECT_STAGE_STORY?.[stageKey] || {};
   const projectStageStoryBucket = project?.stageStory?.[stageKey] || {};
   const stageBucket = project?.[stageKey] || {};
   const phaseBucket = project?.[phaseKey] || {};
   const storytellingBucket = project?.storytelling || {};
   const artistBucket = project?.artistDirection || {};
   const craftsmanBucket = project?.craftsmanDirection || {};
+  const staticStageStoryBucket = PROJECT_STAGE_STORY?.[stageKey] || {};
 
   const buckets = [
     projectStageStoryBucket,
-    staticStageStoryBucket,
     stageBucket,
     phaseBucket,
     storytellingBucket,
     artistBucket,
     craftsmanBucket,
     project || {},
+    staticStageStoryBucket,
   ];
 
   for (const bucket of buckets) {
@@ -1658,234 +1658,581 @@ function getCraftsmanDirectionData(step, project) {
   };
 }
 
-function getBuildNotesSummary(step, project) {
+function getStoryEngineChapterKeyForStage(stageKey = '') {
+  const map = {
+    discoveryDesign: 'discoveryDesign',
+    commitmentPortal: 'commitmentPortal',
+    woodVisionLockIn: 'woodVisionLockIn',
+    rawShellCreation: 'rawShellCreation',
+    shellTrueingTorchTune: 'shellTrueingTorchTune',
+    exteriorArtFinish: 'exteriorArtFinish',
+    edgesSnareBeds: 'edgesSnareBeds',
+    hardwareAssembly: 'hardwareAssembly',
+    legacyTuningMedia: 'legacyTuningMedia',
+    finalQAPackagingDelivery: 'finalQAPackagingDelivery',
+  };
+
+  return map[stageKey] || stageKey;
+}
+
+function getStoryEngineChapterRecord(project, stageKey = '') {
+  const chapterKey = getStoryEngineChapterKeyForStage(stageKey);
+  return project?.storyEngine?.chapters?.[chapterKey] || null;
+}
+
+function getStoryEngineDraftText(project, stageKey = '', fieldKey = '') {
+  const chapter = getStoryEngineChapterRecord(project, stageKey);
+  if (!chapter) return '';
+
+  const drafts = chapter?.drafts || {};
+  const storySections = chapter?.storySections || {};
+  const sections = chapter?.sections || {};
+
+  const candidates = [
+    drafts?.[fieldKey],
+    storySections?.[fieldKey]?.text,
+    storySections?.[fieldKey],
+    sections?.[fieldKey]?.text,
+    sections?.[fieldKey],
+  ];
+
+  return firstNonEmptyString(...candidates);
+}
+
+function getStoryEngineUniqueTraits(project, stageKey = '') {
+  const chapter = getStoryEngineChapterRecord(project, stageKey);
+  if (!chapter) return [];
+
+  const drafts = chapter?.drafts || {};
+  const storySections = chapter?.storySections || {};
+  const sections = chapter?.sections || {};
+
+  const candidates = [
+    drafts?.uniqueBuildTraits,
+    storySections?.uniqueBuildTraits?.items,
+    storySections?.uniqueBuildTraits,
+    sections?.uniqueBuildTraits?.items,
+    sections?.uniqueBuildTraits,
+  ];
+
+  for (const value of candidates) {
+    const normalized = normalizeTextArray(value);
+    if (normalized.length) return normalized;
+  }
+
+  return [];
+}
+
+function cleanBuildPhrase(value = '') {
+  return String(value || '')
+    .replace(/\s+/g, ' ')
+    .replace(/\s*\/\s*/g, ' / ')
+    .trim();
+}
+
+function sentenceCase(value = '') {
+  const text = cleanBuildPhrase(value);
+  if (!text) return '';
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
+function dedupeNormalizedLines(items = []) {
+  const seen = new Set();
+  const out = [];
+
+  items.forEach((item) => {
+    const clean = cleanBuildPhrase(item).replace(/\.$/, '');
+    if (!clean) return;
+
+    const key = clean.toLowerCase();
+    if (seen.has(key)) return;
+
+    seen.add(key);
+    out.push(clean);
+  });
+
+  return out;
+}
+
+function softenNotSureLanguage(value = '') {
+  const text = cleanBuildPhrase(value);
+  if (!text) return '';
+
+  return text
+    .replace(/\bnot sure\b/gi, 'still discovering the clearest direction')
+    .replace(/\bguide me\b/gi, 'open to a more intuitive craftsman-led approach')
+    .replace(
+      /\bi have somewhat of an idea what i want\b/gi,
+      'there is already a real instinct taking shape'
+    );
+}
+
+function humanizeIntakeList(items = []) {
+  return dedupeNormalizedLines(
+    items.map((item) => softenNotSureLanguage(item)).filter(Boolean)
+  );
+}
+
+function formatInches(value) {
+  if (value === null || value === undefined || value === '') return '';
+  const num = Number(value);
+  if (!Number.isFinite(num)) return String(value);
+  return `${num}"`;
+}
+
+function getStageNarrativeBlueprint(stageKey = '') {
+  const map = {
+    discoveryDesign: {
+      summaryLead:
+        'This chapter is about defining the instrument before any irreversible move is made.',
+      craftFocus:
+        'The job here is to listen carefully, narrow the direction, and make sure the build begins from something real rather than decorative guesswork.',
+    },
+    commitmentPortal: {
+      summaryLead:
+        'This chapter turns the project from idea into commitment.',
+      craftFocus:
+        'What matters here is alignment — making sure the artistic direction, practical expectations, and build path are all clearly locked in.',
+    },
+    woodVisionLockIn: {
+      summaryLead:
+        'This chapter is where the wood and overall vision stop being abstract and start becoming specific.',
+      craftFocus:
+        'The focus here is choosing a material foundation that actually supports the drum’s eventual voice, feel, and emotional identity.',
+    },
+    rawShellCreation: {
+      summaryLead:
+        'This chapter is where the drum begins to exist as a physical object rather than a plan.',
+      craftFocus:
+        'The emphasis here is structural honesty — getting the shell started with seriousness, accuracy, and a foundation that deserves everything that will follow.',
+    },
+    shellTrueingTorchTune: {
+      summaryLead:
+        'This chapter is where the shell starts learning how to behave.',
+      craftFocus:
+        'The priority here is balance, trueness, and response — helping the shell tune more honestly, fight less, and carry itself with more confidence.',
+    },
+    exteriorArtFinish: {
+      summaryLead:
+        'This chapter is where the instrument begins to carry its visual identity more clearly.',
+      craftFocus:
+        'The goal is not decoration for its own sake, but a finish language that feels personal, intentional, and in step with the voice of the drum.',
+    },
+    edgesSnareBeds: {
+      summaryLead:
+        'This chapter is where precision starts having an immediate effect on feel and response.',
+      craftFocus:
+        'Small decisions matter here. Edge shape and snare bed work need to support articulation, sensitivity, and control without thinning out the shell’s authority.',
+    },
+    hardwareAssembly: {
+      summaryLead:
+        'This chapter is where the instrument begins to come together as a complete object.',
+      craftFocus:
+        'The focus is fit, balance, and restraint — making sure the hardware supports the shell cleanly and that the final form still feels cohesive.',
+    },
+    legacyTuningMedia: {
+      summaryLead:
+        'This chapter is where the drum begins speaking back in its finished voice.',
+      craftFocus:
+        'The work here is about dialing in response, documenting the instrument honestly, and making sure the final personality of the drum is actually being heard.',
+    },
+    finalQAPackagingDelivery: {
+      summaryLead:
+        'This chapter is about final trust.',
+      craftFocus:
+        'Everything here should confirm that the instrument is truly ready — functionally, visually, and emotionally — to leave the bench and enter the artist’s life.',
+    },
+  };
+
+  return (
+    map[stageKey] || {
+      summaryLead:
+        'This chapter moves the build further into its final identity.',
+      craftFocus:
+        'The focus here is making decisions that feel intentional, musical, and true to the build as a whole.',
+    }
+  );
+}
+
+function getBuildNotesInputs(step, project) {
   const stageKey = step?.key;
 
-  const customSummary =
+  const artistIntent = softenNotSureLanguage(
     getStageSpecificText(project, stageKey, [
-      'buildNotesSummary',
-      'chapterBuildSummary',
-      'customBuildSummary',
-      'buildSummary',
-      'summary',
-    ]) || '';
+      'artistIntent',
+      'intent',
+      'artistDirectionSummary',
+      'artistSummary',
+      'directionSummary',
+    ])
+  );
+
+  const emotionalTargets = humanizeIntakeList(
+    getStageSpecificArray(project, stageKey, [
+      'artistEmotionalTargets',
+      'emotionalTargets',
+      'feelTargets',
+      'toneTargets',
+      'desiredTraits',
+    ])
+  );
+
+  const influences = humanizeIntakeList(
+    getStageSpecificArray(project, stageKey, [
+      'artistInfluences',
+      'influences',
+      'referenceArtists',
+      'referenceRecords',
+      'records',
+      'genres',
+    ])
+  );
+
+  const visualDirection = humanizeIntakeList(
+    getStageSpecificArray(project, stageKey, [
+      'visualDirection',
+      'visualTargets',
+      'finishDirection',
+      'lookDirection',
+      'materialDirection',
+      'materialVision',
+    ])
+  );
+
+  const customChoices = humanizeIntakeList(
+    getStageSpecificArray(project, stageKey, [
+      'craftsmanChoices',
+      'customChoices',
+      'customDecisions',
+      'adaptations',
+      'buildUniquePoints',
+      'uniqueBuildPoints',
+      'chapterUniquePoints',
+      'tailoredFocusPoints',
+      'focusPoints',
+      'chapterFocusPoints',
+    ])
+  );
+
+  const storyEngineTraits = humanizeIntakeList(
+    getStoryEngineUniqueTraits(project, stageKey)
+  );
+
+  const storyEngineBuildNotes = getStoryEngineDraftText(
+    project,
+    stageKey,
+    'buildNotesStory'
+  );
+
+  const storyEngineBuildVision = getStoryEngineDraftText(
+    project,
+    stageKey,
+    'buildVision'
+  );
+
+  const storyEngineMaterialDirection = getStoryEngineDraftText(
+    project,
+    stageKey,
+    'materialDirection'
+  );
+
+  return {
+    artistIntent,
+    emotionalTargets,
+    influences,
+    visualDirection,
+    customChoices,
+    storyEngineTraits,
+    storyEngineBuildNotes,
+    storyEngineBuildVision,
+    storyEngineMaterialDirection,
+  };
+}
+
+function getProjectSpecBenchNotes(step, project) {
+  if (!project) return [];
+
+  const notes = [];
+
+  const diameter = project?.diameter || project?.width || '';
+  const depth = project?.depth || project?.shellDepth || '';
+  const shellThickness =
+    project?.shellThickness || project?.targetShellThickness || '';
+  const shellConstruction =
+    project?.shellConstruction || project?.construction || '';
+  const bearingEdge = project?.bearingEdge || project?.bearingEdges || '';
+  const snareBedDepth = project?.snareBedDepth || '';
+  const snareBedWidth = project?.snareBedWidth || '';
+  const staveCount = project?.staveCount || '';
+  const lugCount = project?.lugCount || '';
+
+  const woodSpecies = humanizeIntakeList(
+    normalizeTextArray(
+      project?.woodSpecies ||
+        project?.species ||
+        project?.coreSpecies ||
+        project?.shellSpecies
+    )
+  );
+
+  if (diameter || depth) {
+    const size = [diameter ? formatInches(diameter) : '', depth ? formatInches(depth) : '']
+      .filter(Boolean)
+      .join(' x ');
+
+    if (size) {
+      notes.push(`Shell size anchor: ${size}`);
+    }
+  }
+
+  if (shellConstruction) {
+    notes.push(`Shell construction: ${cleanBuildPhrase(shellConstruction)}`);
+  }
+
+  if (woodSpecies.length) {
+    notes.push(`Primary wood direction: ${woodSpecies.slice(0, 3).join(', ')}`);
+  }
+
+  if (shellThickness) {
+    notes.push(`Target shell thickness: ${formatInches(shellThickness)}`);
+  }
+
+  if (bearingEdge) {
+    notes.push(`Bearing edge direction: ${cleanBuildPhrase(bearingEdge)}`);
+  }
+
+  if (snareBedDepth || snareBedWidth) {
+    const parts = [];
+    if (snareBedDepth) parts.push(`depth ${formatInches(snareBedDepth)}`);
+    if (snareBedWidth) parts.push(`width ${formatInches(snareBedWidth)}`);
+    notes.push(`Snare bed target: ${parts.join(' / ')}`);
+  }
+
+  if (staveCount) {
+    notes.push(`Stave count: ${staveCount}`);
+  }
+
+  if (lugCount) {
+    notes.push(`Hardware layout: ${lugCount} lugs`);
+  }
+
+  return dedupeNormalizedLines(notes);
+}
+
+function getChapterSpecificBenchNotes(step, project) {
+  const stageKey = step?.key;
+  if (!stageKey || !project) return [];
+
+  const canonical = canonicalKeyForStage(stageKey);
+  const phaseKey = getExistingPhaseKey(project, canonical);
+  const phase = project?.[phaseKey] || {};
+
+  const sandingPlan = humanizeIntakeList([
+    ...normalizeTextArray(phase?.sandingPlan),
+    ...normalizeTextArray(phase?.targetSandingPlan),
+    ...normalizeTextArray(project?.sandingPlan),
+    ...normalizeTextArray(project?.targetSandingPlan),
+  ]);
+
+  const finishPlan = humanizeIntakeList([
+    ...normalizeTextArray(phase?.finishPlan),
+    ...normalizeTextArray(phase?.finishSchedule),
+    ...normalizeTextArray(project?.finishPlan),
+    ...normalizeTextArray(project?.finishSchedule),
+  ]);
+
+  const cutDepths = humanizeIntakeList([
+    ...normalizeTextArray(phase?.targetCutDepths),
+    ...normalizeTextArray(phase?.cutDepthNotes),
+    ...normalizeTextArray(project?.targetCutDepths),
+    ...normalizeTextArray(project?.cutDepthNotes),
+  ]);
+
+  const sealerPlan = humanizeIntakeList([
+    ...normalizeTextArray(phase?.sealerPlan),
+    ...normalizeTextArray(project?.sealerPlan),
+  ]);
+
+  const surfaceTargets = humanizeIntakeList([
+    ...normalizeTextArray(phase?.surfaceTargets),
+    ...normalizeTextArray(project?.surfaceTargets),
+  ]);
+
+  const notes = [];
+
+  if (cutDepths.length) {
+    notes.push(`Critical cut targets: ${cutDepths.slice(0, 3).join(', ')}`);
+  }
+
+  if (sandingPlan.length) {
+    notes.push(`Sanding sequence: ${sandingPlan.slice(0, 4).join(', ')}`);
+  }
+
+  if (finishPlan.length) {
+    notes.push(`Finish workflow: ${finishPlan.slice(0, 4).join(', ')}`);
+  }
+
+  if (sealerPlan.length) {
+    notes.push(`Sealer approach: ${sealerPlan.slice(0, 3).join(', ')}`);
+  }
+
+  if (surfaceTargets.length) {
+    notes.push(`Surface targets: ${surfaceTargets.slice(0, 3).join(', ')}`);
+  }
+
+  return dedupeNormalizedLines(notes);
+}
+
+function getBuildNotesSummary(step, project) {
+  const stageKey = step?.key;
+  const blueprint = getStageNarrativeBlueprint(stageKey);
+
+  const customSummary = getStageSpecificText(project, stageKey, [
+    'buildNotesSummary',
+    'chapterBuildSummary',
+    'customBuildSummary',
+    'buildSummary',
+    'tailoredBuildNotes',
+    'chapterNotes',
+  ]);
 
   if (customSummary) {
     return customSummary;
   }
 
-  const artistIntent = getStageSpecificText(project, stageKey, [
-    'artistIntent',
-    'intent',
-    'artistDirectionSummary',
-    'artistSummary',
-    'directionSummary',
-  ]);
+  const {
+    artistIntent,
+    emotionalTargets,
+    influences,
+    visualDirection,
+    customChoices,
+    storyEngineTraits,
+    storyEngineBuildNotes,
+    storyEngineBuildVision,
+    storyEngineMaterialDirection,
+  } = getBuildNotesInputs(step, project);
 
-  const materialStrategy = getStageSpecificText(project, stageKey, [
-    'materialStrategy',
-    'craftsmanMaterialStrategy',
-    'woodStrategy',
-    'selectionStrategy',
-  ]);
+  if (storyEngineBuildNotes) {
+    return storyEngineBuildNotes;
+  }
 
-  const buildVision = getStageSpecificText(project, stageKey, [
-    'craftsmanInterpretation',
-    'interpretation',
-    'craftsmanSummary',
-    'buildInterpretation',
-  ]);
-
-  const emotionalTargets = getStageSpecificArray(project, stageKey, [
-    'artistEmotionalTargets',
-    'emotionalTargets',
-    'feelTargets',
-    'toneTargets',
-  ]);
-
-  const useCases = getStageSpecificArray(project, stageKey, [
-    'artistUseCases',
-    'useCases',
-    'applications',
-    'playingContexts',
-  ]);
-
-  const chapterLabel = step?.label || 'this chapter';
-
-  const parts = [];
+  const parts = [blueprint.summaryLead];
 
   if (artistIntent) {
     parts.push(
-      `In ${chapterLabel}, the work is being shaped around a clear player goal: ${artistIntent}`
+      `What is guiding it most is a player need centered around ${artistIntent.charAt(0).toLowerCase()}${artistIntent.slice(1)}.`
+    );
+  }
+
+  if (storyEngineBuildVision) {
+    parts.push(
+      `${storyEngineBuildVision.endsWith('.') ? storyEngineBuildVision : `${storyEngineBuildVision}.`}`
     );
   } else {
+    parts.push(blueprint.craftFocus);
+  }
+
+  if (influences.length) {
     parts.push(
-      `In ${chapterLabel}, the goal is to make decisions that move this instrument closer to its specific identity rather than treating it like a generic build.`
+      `The references shaping this chapter lean toward ${influences.slice(0, 2).join(' and ')}.`
     );
+  }
+
+  if (visualDirection.length || storyEngineMaterialDirection) {
+    const visualLine =
+      storyEngineMaterialDirection ||
+      `Visually and materially, the build is leaning toward ${visualDirection.slice(0, 3).join(', ')}.`;
+
+    parts.push(visualLine.endsWith('.') ? visualLine : `${visualLine}.`);
   }
 
   if (emotionalTargets.length) {
     parts.push(
-      `The response we are protecting in this phase centers on ${emotionalTargets
-        .slice(0, 4)
-        .join(', ')}.`
+      `The response being protected here is less about abstract adjectives and more about preserving qualities like ${emotionalTargets.slice(0, 4).join(', ')}.`
     );
   }
 
-  if (materialStrategy) {
-    parts.push(
-      materialStrategy.endsWith('.') ? materialStrategy : `${materialStrategy}.`
-    );
-  }
+  const uniqueSignals = dedupeNormalizedLines([
+    ...customChoices,
+    ...storyEngineTraits,
+  ]);
 
-  if (buildVision) {
-    parts.push(buildVision.endsWith('.') ? buildVision : `${buildVision}.`);
-  }
-
-  if (useCases.length) {
+  if (uniqueSignals.length) {
     parts.push(
-      `Everything in this chapter is being filtered through the real use case of ${useCases
-        .slice(0, 3)
-        .join(', ')}.`
+      `What makes this chapter specific to this instrument is the way choices are being narrowed around ${uniqueSignals.slice(0, 2).join(' and ')}.`
     );
   }
 
   return parts.join(' ');
 }
 
-function getBuildNotesUniquePoints(step, project) {
+function getBenchNotes(step, project) {
   const stageKey = step?.key;
 
-  const explicitUniquePoints = getStageSpecificArray(project, stageKey, [
-    'buildUniquePoints',
-    'uniqueBuildPoints',
-    'chapterUniquePoints',
-    'uniquePoints',
-    'customChoices',
-    'customDecisions',
-  ]);
+  const {
+    artistIntent,
+    emotionalTargets,
+    influences,
+    visualDirection,
+    customChoices,
+    storyEngineTraits,
+    storyEngineBuildVision,
+    storyEngineMaterialDirection,
+  } = getBuildNotesInputs(step, project);
 
-  if (explicitUniquePoints.length) {
-    return explicitUniquePoints;
-  }
+  const specNotes = getProjectSpecBenchNotes(step, project);
+  const chapterSpecificNotes = getChapterSpecificBenchNotes(step, project);
 
-  const artistIntent = getStageSpecificText(project, stageKey, [
-    'artistIntent',
-    'intent',
-    'artistDirectionSummary',
-    'artistSummary',
-  ]);
-
-  const emotionalTargets = getStageSpecificArray(project, stageKey, [
-    'artistEmotionalTargets',
-    'emotionalTargets',
-    'feelTargets',
-    'toneTargets',
-  ]);
-
-  const customChoices = getStageSpecificArray(project, stageKey, [
-    'craftsmanChoices',
-    'customChoices',
-    'customDecisions',
-    'adaptations',
-  ]);
-
-  const useCases = getStageSpecificArray(project, stageKey, [
-    'artistUseCases',
-    'useCases',
-    'applications',
-    'playingContexts',
-  ]);
-
-  const points = [];
+  const notes = [];
 
   if (artistIntent) {
-    points.push(`Build is being guided by this player goal: ${artistIntent}`);
+    notes.push(
+      `Primary player need: ${sentenceCase(artistIntent)}`
+    );
   }
 
   if (emotionalTargets.length) {
-    points.push(
-      `Primary feel/response targets: ${emotionalTargets.slice(0, 4).join(', ')}`
+    notes.push(
+      `Response targets: ${emotionalTargets.slice(0, 4).join(', ')}`
     );
   }
 
-  if (customChoices.length) {
-    points.push(
-      `Chapter-specific custom decisions: ${customChoices.slice(0, 4).join(', ')}`
+  if (influences.length) {
+    notes.push(
+      `Reference influences: ${influences.slice(0, 3).join(', ')}`
     );
   }
 
-  if (useCases.length) {
-    points.push(
-      `This build is being aimed toward these real-world roles: ${useCases
-        .slice(0, 3)
-        .join(', ')}`
+  if (visualDirection.length) {
+    notes.push(
+      `Visual / material direction: ${visualDirection.slice(0, 3).join(', ')}`
     );
   }
 
-  return points.length
-    ? points
-    : [
-        'This chapter is being shaped around the player rather than a generic recipe.',
-        'Custom decisions here are meant to strengthen identity, response, and long-term cohesion.',
-        'Each move in this phase is narrowing the instrument toward its specific voice.',
-      ];
-}
+  if (storyEngineBuildVision) {
+    notes.push(
+      `Build vision: ${cleanBuildPhrase(storyEngineBuildVision)}`
+    );
+  }
 
-function getBuildNotesVisionData(step, project) {
-  const stageKey = step?.key;
+  if (storyEngineMaterialDirection) {
+    notes.push(
+      `Material strategy: ${cleanBuildPhrase(storyEngineMaterialDirection)}`
+    );
+  }
 
-  const influences = getStageSpecificArray(project, stageKey, [
-    'artistInfluences',
-    'influences',
-    'referenceArtists',
-    'referenceRecords',
-    'records',
-    'genres',
-  ]);
+  dedupeNormalizedLines([...customChoices, ...storyEngineTraits])
+    .slice(0, 3)
+    .forEach((item) => {
+      notes.push(`Unique build focus: ${sentenceCase(item)}`);
+    });
 
-  const materialVision = getStageSpecificText(project, stageKey, [
-    'materialStrategy',
-    'craftsmanMaterialStrategy',
-    'woodStrategy',
-    'selectionStrategy',
-    'materialVision',
-  ]);
+  chapterSpecificNotes.slice(0, 3).forEach((note) => notes.push(note));
+  specNotes.slice(0, 4).forEach((note) => notes.push(note));
 
-  const buildVision = getStageSpecificText(project, stageKey, [
-    'craftsmanInterpretation',
-    'interpretation',
-    'craftsmanSummary',
-    'buildInterpretation',
-    'buildVision',
-  ]);
+  const cleaned = dedupeNormalizedLines(notes);
 
-  const influenceEffect = getStageSpecificText(project, stageKey, [
-    'influenceEffect',
-    'influencesAffectBuild',
-    'howInfluenceAffectsBuild',
-    'voiceSummary',
-    'voiceNarrative',
-    'impactSummary',
-  ]);
-
-  return {
-    influences:
-      influences.length > 0
-        ? influences
-        : [
-            'Project influences will be surfaced here as this chapter is refined.',
-          ],
-    materialVision:
-      materialVision ||
-      'Material choices in this chapter are being narrowed based on what best serves the final voice and physical feel of the drum.',
-    buildVision:
-      buildVision ||
-      'The build approach here is focused on making disciplined decisions that support the specific identity of this instrument.',
-    influenceEffect:
-      influenceEffect ||
-      'These influences are not being copied literally — they are being translated into choices that affect response, balance, feel, and tone.',
-  };
+  return cleaned.slice(0, 8);
 }
 
 function getBuildDirectionData(step) {
@@ -2553,14 +2900,13 @@ function renderActiveStorySection({
 
   if (activeStorypoint.id === 'build-notes') {
     const buildNotesSummary = getBuildNotesSummary(activeStep, project);
-    const uniquePoints = getBuildNotesUniquePoints(activeStep, project);
-    const visionData = getBuildNotesVisionData(activeStep, project);
+    const benchNotes = getBenchNotes(activeStep, project);
 
     return (
       <div className="sl-progress-build-notes-stack">
         <div className="sl-progress-story-section-intro-card sl-progress-story-section-intro-card--lighter sl-progress-story-section-intro-card--summary">
           <div className="sl-progress-story-section-label">
-            Personalized Chapter Summary
+            Tailored Story & Direction
           </div>
           <div className="sl-progress-story-section-body">
             {buildNotesSummary}
@@ -2568,66 +2914,13 @@ function renderActiveStorySection({
         </div>
 
         <div className="sl-progress-story-section-intro-card sl-progress-story-section-intro-card--lighter">
-          <div className="sl-progress-story-section-label">
-            What Makes This Build Unique In This Chapter
-          </div>
+          <div className="sl-progress-story-section-label">Bench Notes</div>
 
           <ul className="sl-progress-build-notes-bullets">
-            {uniquePoints.map((point, index) => (
-              <li key={`${point}-${index}`}>{point}</li>
+            {benchNotes.map((note, index) => (
+              <li key={`${note}-${index}`}>{note}</li>
             ))}
           </ul>
-        </div>
-
-        <div className="sl-progress-story-section-intro-card sl-progress-story-section-intro-card--lighter">
-          <div className="sl-progress-story-section-label">
-            Influences + Build / Material Vision
-          </div>
-
-          <div className="sl-progress-build-notes-vision-grid">
-            <div className="sl-progress-stage-storypoint-data-card">
-              <div className="sl-progress-stage-storypoint-data-label">
-                Influences
-              </div>
-              <div className="sl-progress-stage-storypoint-data-value sl-progress-stage-storypoint-data-value--stack">
-                {visionData.influences.map((item, index) => (
-                  <span
-                    key={`${item}-${index}`}
-                    className="sl-progress-stage-storypoint-tag"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            <div className="sl-progress-stage-storypoint-data-card sl-progress-stage-storypoint-data-card--full">
-              <div className="sl-progress-stage-storypoint-data-label">
-                Build Vision
-              </div>
-              <div className="sl-progress-stage-storypoint-data-value sl-progress-stage-storypoint-data-value--body">
-                {visionData.buildVision}
-              </div>
-            </div>
-
-            <div className="sl-progress-stage-storypoint-data-card sl-progress-stage-storypoint-data-card--full">
-              <div className="sl-progress-stage-storypoint-data-label">
-                Material Vision
-              </div>
-              <div className="sl-progress-stage-storypoint-data-value sl-progress-stage-storypoint-data-value--body">
-                {visionData.materialVision}
-              </div>
-            </div>
-
-            <div className="sl-progress-stage-storypoint-data-card sl-progress-stage-storypoint-data-card--full">
-              <div className="sl-progress-stage-storypoint-data-label">
-                How The Influences Affect The Build Approach
-              </div>
-              <div className="sl-progress-stage-storypoint-data-value sl-progress-stage-storypoint-data-value--body">
-                {visionData.influenceEffect}
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     );

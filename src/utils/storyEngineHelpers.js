@@ -1,5 +1,3 @@
-// src/utils/storyEngineHelpers.js
-
 import {
   FIELD_STATUS,
   WRITING_MODE,
@@ -25,6 +23,8 @@ import {
   getChapterCoverageScore,
   getChapterLengthTarget,
 } from './storyEngineRules';
+
+import { runVoicingNarrativePipeline } from './storyEngineVoicingNarrative';
 
 /* =========================================================
    BASIC PATH HELPERS
@@ -104,7 +104,10 @@ export function registerSource(record, sourceEntry) {
 
   if (!sourceEntry?.id) return next;
 
-  const exists = (next.sourceRegistry || []).some((s) => s.id === sourceEntry.id);
+  const exists = (next.sourceRegistry || []).some(
+    (s) => s.id === sourceEntry.id
+  );
+
   if (!exists) {
     next.sourceRegistry = [...(next.sourceRegistry || []), sourceEntry];
   }
@@ -120,18 +123,25 @@ export function writeField(record, fieldPath, updates = {}) {
   const next = cloneStoryEngineRecord(record);
   const field = ensureField(next, fieldPath);
 
-  const mergedSourceRefs = uniq([...(field.sourceRefs || []), ...(updates.sourceRefs || [])]);
+  const mergedSourceRefs = uniq([
+    ...(field.sourceRefs || []),
+    ...(updates.sourceRefs || []),
+  ]);
+
   const mergedSourceTypes = uniq([
     ...(field.sourceTypes || []),
     ...(updates.sourceTypes || []),
   ]);
+
   const mergedRationale = uniq([
     ...(field.rationale || []),
     ...(updates.rationale || []),
   ]);
 
   const manualLock =
-    typeof updates.manualLock === 'boolean' ? updates.manualLock : !!field.manualLock;
+    typeof updates.manualLock === 'boolean'
+      ? updates.manualLock
+      : !!field.manualLock;
 
   const confidence =
     typeof updates.confidence === 'number'
@@ -140,7 +150,8 @@ export function writeField(record, fieldPath, updates = {}) {
           sourceTypes: mergedSourceTypes,
           manualLock,
           hasConflict: !!updates.hasConflict,
-          observedStrength: updates.status === FIELD_STATUS.OBSERVED ? 0.08 : 0,
+          observedStrength:
+            updates.status === FIELD_STATUS.OBSERVED ? 0.08 : 0,
           derivedStrength: updates.status === FIELD_STATUS.DERIVED ? 0.04 : 0,
           recommendationStrength:
             updates.status === FIELD_STATUS.RECOMMENDED ? 0.03 : 0,
@@ -157,8 +168,9 @@ export function writeField(record, fieldPath, updates = {}) {
     ...getReviewReasonsForField(fieldPath, confidence),
   ]);
 
-  const finalValue =
-    Object.prototype.hasOwnProperty.call(updates, 'value') ? updates.value : field.value;
+  const finalValue = Object.prototype.hasOwnProperty.call(updates, 'value')
+    ? updates.value
+    : field.value;
 
   field.value = finalValue;
   field.status = updates.status || field.status || FIELD_STATUS.UNKNOWN;
@@ -359,6 +371,7 @@ export const RECOMMENDATION_TO_BUILD_FIELD_MAP = {
   lugCount: 'buildSpec.lugCount',
   tuningApproach: 'buildSpec.tuningApproach',
   finishSystem: 'buildSpec.finishSystem',
+  snareBed: 'buildSpec.snareBed',
 };
 
 export function applyRecommendationsToMissingBuildFields(record) {
@@ -409,17 +422,16 @@ export function getChapterFieldPaths(chapterKey, sectionKey = null) {
     ]);
   }
 
-  return config[sectionKey] || [];
+  return Array.isArray(config[sectionKey]) ? config[sectionKey] : [];
 }
 
 export function collectChapterFacts(record, chapterKey, sectionKey) {
   const fieldPaths = getChapterFieldPaths(chapterKey, sectionKey);
 
   return fieldPaths.map((path) => {
-    const node =
-      path.startsWith('recommendations.')
-        ? getRecommendationNode(record, path)
-        : getFieldNode(record, path);
+    const node = path.startsWith('recommendations.')
+      ? getRecommendationNode(record, path)
+      : getFieldNode(record, path);
 
     if (!node) {
       return {
@@ -492,7 +504,8 @@ export function buildStorySectionInput(record, chapterKey, sectionKey) {
   );
 
   const hasRecommendation = resolvedFacts.some(
-    (item) => item.status === FIELD_STATUS.RECOMMENDED || item.status === 'recommended'
+    (item) =>
+      item.status === FIELD_STATUS.RECOMMENDED || item.status === 'recommended'
   );
 
   const storyRisk = reviewFacts.some((fact) =>
@@ -517,8 +530,12 @@ export function buildStorySectionInput(record, chapterKey, sectionKey) {
     confidence: clamp(avgConfidence),
     writingMode,
     lengthTarget,
-    basedOnStatuses: uniq(resolvedFacts.map((item) => item.status).filter(Boolean)),
-    basedOnFieldKeys: uniq(resolvedFacts.map((item) => item.fieldPath)),
+    basedOnStatuses: uniq(
+      resolvedFacts.map((item) => item.status).filter(Boolean)
+    ),
+    basedOnFieldKeys: uniq(
+      resolvedFacts.map((item) => item.fieldPath).filter(Boolean)
+    ),
     reviewNeeded:
       writingMode === WRITING_MODE.HOLD_FOR_REVIEW || reviewFacts.length > 0,
     reviewReasons: uniq(
@@ -527,7 +544,12 @@ export function buildStorySectionInput(record, chapterKey, sectionKey) {
   };
 }
 
-export function saveStorySectionInput(record, chapterKey, sectionKey, sectionInput) {
+export function saveStorySectionInput(
+  record,
+  chapterKey,
+  sectionKey,
+  sectionInput
+) {
   const next = cloneStoryEngineRecord(record);
 
   setByPath(next, `chapters.${chapterKey}.storySections.${sectionKey}`, {
@@ -541,8 +563,8 @@ export function saveStorySectionInput(record, chapterKey, sectionKey, sectionInp
       sectionInput.reviewReasons?.length > 0
         ? uniq(sectionInput.reviewReasons)
         : sectionInput.reviewNeeded
-        ? [REVIEW_REASON.NOT_ENOUGH_DATA]
-        : [],
+          ? [REVIEW_REASON.NOT_ENOUGH_DATA]
+          : [],
     maxLengthTarget: sectionInput.lengthTarget,
   });
 
@@ -642,7 +664,9 @@ export function collectEngineUnresolvedQuestions(record) {
   const seen = new Set();
 
   Object.keys(record.chapters || {}).forEach((chapterKey) => {
-    const unresolved = record?.chapters?.[chapterKey]?.unresolvedCriticalFields || [];
+    const unresolved =
+      record?.chapters?.[chapterKey]?.unresolvedCriticalFields || [];
+
     unresolved.forEach((fieldKey) => {
       if (seen.has(fieldKey)) return;
       seen.add(fieldKey);
@@ -720,6 +744,7 @@ export function prepareChapterStoryInputs(record) {
       chapterKey,
       'chapterOverview'
     );
+
     const buildNotesInput = buildStorySectionInput(
       next,
       chapterKey,
@@ -761,6 +786,7 @@ export function runStoryEngine(record, options = {}) {
     next = applyRecommendationsToMissingBuildFields(next);
   }
 
+  next = runVoicingNarrativePipeline(next);
   next = prepareChapterStoryInputs(next);
   next = updateAllChapterMeta(next);
   next = updateEngineMeta(next, {
@@ -796,6 +822,10 @@ export function createAdminFieldMapFromConsultation({
   tuningRange = '',
   articulation = '',
   feel = '',
+  responsePriorities = '',
+  tonalGoals = '',
+  preferredSizeDirection = '',
+  consultationContactMethod = '',
 } = {}) {
   return {
     'buildIdentity.artistName': artistName,
@@ -804,13 +834,21 @@ export function createAdminFieldMapFromConsultation({
     'buildIdentity.styleOfPlaying': styleOfPlaying,
     'buildIdentity.size.diameter': diameter,
     'buildIdentity.size.depth': depth,
+    'buildIdentity.preferredSizeDirection': preferredSizeDirection,
+
     'globalProfile.playerContext.genreContext': genreContext,
     'globalProfile.playerContext.desiredOutcome': desiredOutcome,
     'globalProfile.playerContext.currentPainPoints': currentPainPoints,
     'globalProfile.playerContext.influenceReferences': influenceReferences,
+    'globalProfile.playerContext.responsePriorities': responsePriorities,
+    'globalProfile.playerContext.tonalGoals': tonalGoals,
+    'globalProfile.playerContext.consultationContactMethod':
+      consultationContactMethod,
+
     'globalProfile.aestheticIntent.visualMood': visualMood,
     'globalProfile.aestheticIntent.finishDirection': finishDirection,
     'globalProfile.aestheticIntent.woodPreference': woodPreference,
+
     'globalProfile.sonicIntent.attack': attack,
     'globalProfile.sonicIntent.body': body,
     'globalProfile.sonicIntent.sensitivity': sensitivity,
@@ -833,15 +871,26 @@ export function createAdminFieldMapFromQuestionnaire({
   hardwareFinish = '',
   woodPreference = '',
   finishDirection = '',
+  responsePriorities = '',
+  tonalGoals = '',
+  preferredSizeDirection = '',
+  consultationContactMethod = '',
 } = {}) {
   return {
     'buildIdentity.artistName': artistName,
     'buildIdentity.styleOfPlaying': styleOfPlaying,
+    'buildIdentity.preferredSizeDirection': preferredSizeDirection,
+
     'globalProfile.playerContext.desiredOutcome': desiredOutcome,
     'globalProfile.playerContext.genreContext': genreContext,
     'globalProfile.playerContext.recordingUse': recordingUse,
     'globalProfile.playerContext.liveUse': liveUse,
     'globalProfile.playerContext.influenceReferences': influenceReferences,
+    'globalProfile.playerContext.responsePriorities': responsePriorities,
+    'globalProfile.playerContext.tonalGoals': tonalGoals,
+    'globalProfile.playerContext.consultationContactMethod':
+      consultationContactMethod,
+
     'globalProfile.aestheticIntent.hardwareFinish': hardwareFinish,
     'globalProfile.aestheticIntent.woodPreference': woodPreference,
     'globalProfile.aestheticIntent.finishDirection': finishDirection,
@@ -855,7 +904,11 @@ export function createAdminFieldMapFromQuestionnaire({
 export function createChapterDraftPayload(record, chapterKey) {
   const chapter = record?.chapters?.[chapterKey] || {};
   const overview = buildStorySectionInput(record, chapterKey, 'chapterOverview');
-  const buildNotes = buildStorySectionInput(record, chapterKey, 'buildNotesStory');
+  const buildNotes = buildStorySectionInput(
+    record,
+    chapterKey,
+    'buildNotesStory'
+  );
 
   return {
     chapterKey,
@@ -870,6 +923,7 @@ export function createChapterDraftPayload(record, chapterKey) {
     globalProfile: record.globalProfile,
     buildSpec: record.buildSpec,
     recommendations: record.recommendations,
+    voicingNarrative: record?.engineMeta?.voicingNarrative || null,
   };
 }
 

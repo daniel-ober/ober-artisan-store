@@ -63,12 +63,111 @@ const button = (label, href) => `
 
 const greet = (name) => `Hi ${String(name || '').trim() || 'there'},`;
 
-const bodySoundLegend = (name) => `
+const bodySoundLegend = (name, questionnaireUrl = '') => `
   <p style="margin:0 0 16px">${greet(name)}</p>
-  <p style="margin:0 0 16px">You're in. We've received your SoundLegend submission — and we’re excited to hear your story.</p>
-  <p style="margin:0 0 16px">This next chapter isn’t just about building a snare. It’s about honoring your legacy through sound — captured in wood, crafted by hand, and designed to last a lifetime.</p>
-  <p style="margin:0 0 16px">We typically follow up within 24–48 hours to learn more about your vision. In the meantime, here’s a short video to get us both amped up about what’s ahead:</p>
-  ${button('Watch the Teaser', CTA_SL)}
+
+  <p style="margin:0 0 16px">
+    Thanks for reaching out. Your SoundLegend inquiry has been received.
+  </p>
+
+  <p style="margin:0 0 16px">
+    The next step is your private pre-consultation questionnaire. It should only take a few minutes, and it is made up mostly of easy-select questions with one optional write-in question at the end.
+  </p>
+
+  <p style="margin:0 0 16px">
+    Nothing you fill out there is locked in or a commitment by any means. It simply gives Dan a more thoughtful starting point before your call.
+  </p>
+
+  ${
+    questionnaireUrl
+      ? `
+        ${button('Open Your Private Questionnaire', questionnaireUrl)}
+      `
+      : ''
+  }
+`;
+
+const getSoundLegendFollowupContactLine = (data = {}) => {
+  const intake = data?.consultationIntake || {};
+  const consultPrep = intake?.consultPrep || {};
+
+  const preferredMethod = String(
+    consultPrep.consultationContactMethod || ''
+  ).trim();
+
+  const email = String(data?.email || '').trim();
+  const phone = String(data?.phone || data?.phoneE164 || '').trim();
+
+  if (preferredMethod === 'Text message') {
+    return phone
+      ? `Our lead craftsman will reach out within 2 business days by text message at <strong>${phone}</strong>.`
+      : 'Our lead craftsman will reach out within 2 business days by text message using the number you provided.';
+  }
+
+  if (preferredMethod === 'Phone call') {
+    return phone
+      ? `Our lead craftsman will reach out within 2 business days by phone call at <strong>${phone}</strong>.`
+      : 'Our lead craftsman will reach out within 2 business days by phone call using the number you provided.';
+  }
+
+  if (preferredMethod === 'Email') {
+    return email
+      ? `Our lead craftsman will reach out within 2 business days by email at <strong>${email}</strong>.`
+      : 'Our lead craftsman will reach out within 2 business days by email using the address you provided.';
+  }
+
+  if (preferredMethod && email && phone) {
+    return `Our lead craftsman will reach out within 2 business days using your preferred method (<strong>${preferredMethod}</strong>) at <strong>${email}</strong> or <strong>${phone}</strong>.`;
+  }
+
+  if (preferredMethod && email) {
+    return `Our lead craftsman will reach out within 2 business days using your preferred method (<strong>${preferredMethod}</strong>) at <strong>${email}</strong>.`;
+  }
+
+  if (preferredMethod && phone) {
+    return `Our lead craftsman will reach out within 2 business days using your preferred method (<strong>${preferredMethod}</strong>) at <strong>${phone}</strong>.`;
+  }
+
+  return 'Our lead craftsman will reach out within 2 business days to coordinate your free consultation.';
+};
+
+const bodySoundLegendQuestionnaireComplete = (name, data = {}) => `
+  <p style="margin:0 0 16px">${greet(name)}</p>
+
+  <p style="margin:0 0 16px">
+    Thank you for filling out your SoundLegend questionnaire.
+  </p>
+
+  <p style="margin:0 0 16px">
+    Your responses have been submitted successfully.
+  </p>
+
+  <p style="margin:0 0 16px">
+    Your SoundLegend call is meant to be relaxed, conversational, and low-pressure. Most calls take around 20–30 minutes.
+  </p>
+
+  <p style="margin:0 0 16px">
+    Nothing is forced. Each drum develops organically based on your sound, your preferences, and what feels right as the build direction takes shape.
+  </p>
+
+  <p style="margin:0 0 16px">
+    On the call, we may talk through things like:
+  </p>
+
+  <ul style="margin:0 0 16px 18px;padding:0;line-height:1.65">
+    <li>the kind of sound you are chasing</li>
+    <li>what you love or feel is missing in your current snares</li>
+    <li>shell direction, feel, and visual vibe</li>
+    <li>where you want guidance versus where you already have a vision</li>
+  </ul>
+
+  <p style="margin:0 0 16px">
+    ${getSoundLegendFollowupContactLine(data)}
+  </p>
+
+  <p style="margin:0">
+    We are looking forward to hearing more about your sound, your direction, and what kind of build feels right.
+  </p>
 `;
 
 const bodySupport = (name) => `
@@ -146,7 +245,9 @@ async function gmailSend({
 }
 
 function normalizeLeadEmail(email = '') {
-  return String(email || '').trim().toLowerCase();
+  return String(email || '')
+    .trim()
+    .toLowerCase();
 }
 
 function getLeadUserDocIdForEmail(email = '') {
@@ -207,7 +308,9 @@ function mergeObjectsPreferPrimary(primary = {}, secondary = {}) {
 
     if (Array.isArray(value)) {
       const existing = Array.isArray(merged[key]) ? merged[key] : [];
-      merged[key] = Array.from(new Set([...existing, ...value].filter(Boolean)));
+      merged[key] = Array.from(
+        new Set([...existing, ...value].filter(Boolean))
+      );
       return;
     }
 
@@ -285,7 +388,11 @@ async function mergeUserDocsIntoCanonical({
 
   for (const match of allMatches) {
     if (match.id !== canonicalId) {
-      await db.collection('users').doc(match.id).delete().catch(() => {});
+      await db
+        .collection('users')
+        .doc(match.id)
+        .delete()
+        .catch(() => {});
     }
   }
 
@@ -1039,11 +1146,14 @@ app.post('/createCheckoutSession', async (req, res) => {
     }
 
     const guestToken = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
-    await db.collection('pending_checkouts').doc(guestToken).set({
-      createdAt: admin.firestore.FieldValue.serverTimestamp(),
-      products,
-      userId: userId || 'guest',
-    });
+    await db
+      .collection('pending_checkouts')
+      .doc(guestToken)
+      .set({
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+        products,
+        userId: userId || 'guest',
+      });
 
     const lineItems = [];
     for (const p of products) {
@@ -1811,12 +1921,15 @@ exports.reconcileStripeOrders = onSchedule(
       console.error('❌ Reconciliation job failed:', err);
 
       try {
-        await admin.firestore().collection('admin_alerts').add({
-          type: 'reconciliation_failure',
-          severity: 'critical',
-          createdAt: admin.firestore.FieldValue.serverTimestamp(),
-          message: err?.message || String(err),
-        });
+        await admin
+          .firestore()
+          .collection('admin_alerts')
+          .add({
+            type: 'reconciliation_failure',
+            severity: 'critical',
+            createdAt: admin.firestore.FieldValue.serverTimestamp(),
+            message: err?.message || String(err),
+          });
       } catch (e) {
         console.error(
           '⚠️ Failed writing admin_alerts (reconciliation_failure):',
@@ -2119,13 +2232,16 @@ exports.setSoundlegendClaim = onCall(
     await admin.auth().setCustomUserClaims(uid, merged);
     await admin.auth().revokeRefreshTokens(uid);
 
-    await db.collection('users').doc(uid).set(
-      {
-        access: { soundlegend: !!enable },
-        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-      },
-      { merge: true }
-    );
+    await db
+      .collection('users')
+      .doc(uid)
+      .set(
+        {
+          access: { soundlegend: !!enable },
+          updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+        },
+        { merge: true }
+      );
 
     return { ok: true, uid, soundlegend: !!enable };
   }
@@ -2208,7 +2324,8 @@ exports.adminCreateUser = onCall({ region: 'us-central1' }, async (request) => {
         uid,
         firstName: String(firstName || '').trim(),
         lastName: String(lastName || '').trim(),
-        fullName: `${String(firstName || '').trim()} ${String(lastName || '').trim()}`.trim(),
+        fullName:
+          `${String(firstName || '').trim()} ${String(lastName || '').trim()}`.trim(),
         email: normalizedEmail,
         phone: String(phone || '').trim(),
         isAdmin: !!makeAdmin,
@@ -2217,8 +2334,11 @@ exports.adminCreateUser = onCall({ region: 'us-central1' }, async (request) => {
         authAccountCreated: true,
         portalInviteSent: existingCanonical?.portalInviteSent === true,
         portalAccessGranted: currentlyGranted,
-        slPortalLocked: isSoundlegend ? currentlyLocked || !currentlyGranted : false,
-        portalStatus: currentlyGranted && !currentlyLocked ? 'active' : 'inactive',
+        slPortalLocked: isSoundlegend
+          ? currentlyLocked || !currentlyGranted
+          : false,
+        portalStatus:
+          currentlyGranted && !currentlyLocked ? 'active' : 'inactive',
         access: {
           soundlegend: currentlyGranted && !currentlyLocked,
         },
@@ -2349,13 +2469,12 @@ exports.sendSoundLegendWelcomeEmail = onCall(
     const clientBase =
       rawClientUrl.replace(/\/+$/, '') || 'https://www.oberartisandrums.com';
 
-    const resetLink = await admin.auth().generatePasswordResetLink(
-      targetEmail,
-      {
+    const resetLink = await admin
+      .auth()
+      .generatePasswordResetLink(targetEmail, {
         url: `${clientBase}/artisan-portal/reset-password`,
         handleCodeInApp: false,
-      }
-    );
+      });
 
     await mergeUserDocsIntoCanonical({
       canonicalId: uid,
@@ -2571,13 +2690,16 @@ exports.autoReplySoundlegend = onDocumentCreated(
 
     const html = emailShell({
       logo: LOGO_SL,
-      bodyHtml: bodySoundLegend(data.firstName || data.name),
+      bodyHtml: bodySoundLegend(
+        data.firstName || data.fullName || data.name,
+        data.questionnaireUrl || ''
+      ),
     });
 
     try {
       await gmailSend({
         to: data.email,
-        subject: 'Welcome to the SoundLegend Experience',
+        subject: 'Your Private SoundLegend Questionnaire',
         html,
         fromEmail: 'soundlegend@oberartisandrums.com',
         replyTo: 'soundlegend@oberartisandrums.com',
@@ -2585,6 +2707,81 @@ exports.autoReplySoundlegend = onDocumentCreated(
       });
     } catch (error) {
       console.error('autoReplySoundlegend (gmail) failed:', error);
+    }
+  }
+);
+
+exports.sendSoundlegendQuestionnaireCompleteEmail = onDocumentWritten(
+  {
+    document: 'soundlegend_questionnaires/{questionnaireToken}',
+    region: 'us-central1',
+    secrets: [
+      GMAIL_CLIENT_EMAIL,
+      GMAIL_PRIVATE_KEY,
+      GMAIL_SENDER,
+      GMAIL_IMPERSONATE,
+    ],
+  },
+  async (event) => {
+    const before = event.data?.before?.data() || null;
+    const after = event.data?.after?.data() || null;
+
+    if (!after) return;
+
+    const wasComplete = !!before?.questionnaireCompleted;
+    const isComplete = !!after?.questionnaireCompleted;
+    const alreadySent = !!after?.questionnaireCompletionEmailSent;
+
+    if (wasComplete || !isComplete || alreadySent || !after?.email) return;
+
+    const html = emailShell({
+      logo: LOGO_SL,
+      bodyHtml: bodySoundLegendQuestionnaireComplete(
+        after.firstName || after.fullName || after.name,
+        after
+      ),
+    });
+
+    try {
+      await gmailSend({
+        to: after.email,
+        subject: 'Thank You for Completing Your SoundLegend Questionnaire',
+        html,
+        fromEmail: 'soundlegend@oberartisandrums.com',
+        replyTo: 'soundlegend@oberartisandrums.com',
+        bcc: ['soundlegend@oberartisandrums.com'],
+      });
+
+      await db
+        .collection('soundlegend_questionnaires')
+        .doc(event.params.questionnaireToken)
+        .set(
+          {
+            questionnaireCompletionEmailSent: true,
+            questionnaireCompletionEmailSentAt:
+              admin.firestore.FieldValue.serverTimestamp(),
+          },
+          { merge: true }
+        );
+
+      if (after.submissionId) {
+        await db
+          .collection('soundlegend_submissions')
+          .doc(after.submissionId)
+          .set(
+            {
+              questionnaireCompletionEmailSent: true,
+              questionnaireCompletionEmailSentAt:
+                admin.firestore.FieldValue.serverTimestamp(),
+            },
+            { merge: true }
+          );
+      }
+    } catch (error) {
+      console.error(
+        'sendSoundlegendQuestionnaireCompleteEmail (gmail) failed:',
+        error
+      );
     }
   }
 );

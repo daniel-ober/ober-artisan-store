@@ -1,14 +1,12 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import {
-  doc,
-  getDoc,
-  serverTimestamp,
-  updateDoc,
-} from 'firebase/firestore';
+import { doc, getDoc, serverTimestamp, updateDoc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import ConsultationIntakePanel from './SoundLegendPortal/ConsultationIntakePanel';
-import { buildConsultationIntakeDefaults } from '../utils/consultationIntakeSchema';
+import {
+  buildConsultationIntakeDefaults,
+  isConsultationIntakeComplete,
+} from '../utils/consultationIntakeSchema';
 import './SoundlegendQuestionnaire.css';
 
 function normalizeIncomingIntake(value = {}) {
@@ -81,6 +79,11 @@ function SoundlegendQuestionnaire() {
     return 'Your SoundLegend Questionnaire';
   }, [customerName]);
 
+  const intakeComplete = useMemo(
+    () => isConsultationIntakeComplete(intakeValue),
+    [intakeValue]
+  );
+
   useEffect(() => {
     let isMounted = true;
 
@@ -150,21 +153,31 @@ function SoundlegendQuestionnaire() {
   const handleFinalSubmit = async () => {
     if (!questionnaireDocId || isSubmitting || isAlreadyComplete) return;
 
+    if (!intakeComplete) {
+      setSubmitError(
+        'Please complete every required question before submitting your questionnaire.'
+      );
+      return;
+    }
+
     try {
       setIsSubmitting(true);
       setSubmitError('');
 
       const normalized = normalizeIncomingIntake(intakeValue);
 
-      await updateDoc(doc(db, 'soundlegend_questionnaires', questionnaireDocId), {
-        consultationIntake: normalized,
-        consultationIntakeUpdatedAt: serverTimestamp(),
-        questionnaireCompleted: true,
-        questionnaireCompletedAt: serverTimestamp(),
-        status: 'Questionnaire Complete',
-        stage: 'questionnaire_complete',
-        updatedAt: serverTimestamp(),
-      });
+      await updateDoc(
+        doc(db, 'soundlegend_questionnaires', questionnaireDocId),
+        {
+          consultationIntake: normalized,
+          consultationIntakeUpdatedAt: serverTimestamp(),
+          questionnaireCompleted: true,
+          questionnaireCompletedAt: serverTimestamp(),
+          status: 'Questionnaire Complete',
+          stage: 'questionnaire_complete',
+          updatedAt: serverTimestamp(),
+        }
+      );
 
       if (submissionDocId) {
         try {
@@ -281,11 +294,13 @@ function SoundlegendQuestionnaire() {
       <div className="slq-page">
         <div className="slq-shell">
           <div className="slq-hero">
-            <p className="slq-kicker slq-kicker--gold">Questionnaire Complete</p>
-            <h1 className="slq-title">Thank you for your time</h1>
+            <p className="slq-kicker slq-kicker--gold">
+              Questionnaire Complete
+            </p>
+            <h1 className="slq-title">Thank you for filling this out</h1>
 
             <p className="slq-muted">
-              Your SoundLegend questionnaire has been submitted.
+              Your questionnaire has been submitted successfully.
             </p>
 
             {completedAt ? (
@@ -294,14 +309,36 @@ function SoundlegendQuestionnaire() {
               </p>
             ) : null}
 
-            <p className="slq-muted">
-              We will review your responses and reach out within 2
-              business days to coordinate your free consultation.
-            </p>
+            <div className="slq-callout">
+              <h3 className="slq-callout-title">What to expect next</h3>
+              <p className="slq-callout-copy">
+                Your SoundLegend call is meant to be relaxed, conversational,
+                and low-pressure. Most calls take around 20–30 minutes.
+              </p>
+              <p className="slq-callout-copy">
+                Nothing is forced. Each drum develops organically based on your
+                sound, your preferences, and what feels right as the build
+                direction takes shape.
+              </p>
+              <ul className="slq-callout-list">
+                <li>We may talk through the kind of sound you are chasing</li>
+                <li>
+                  We may compare what you love or feel is missing in current
+                  snares
+                </li>
+                <li>
+                  We may talk through shell direction, feel, and visual vibe
+                </li>
+                <li>
+                  We may clarify where you want guidance versus where you
+                  already have a vision
+                </li>
+              </ul>
+            </div>
 
             <p className="slq-muted">
-              In the meantime, you can explore some previous builds in the
-              LegacyVault.
+              We will review your responses and reach out within 2 business days
+              to coordinate your free consultation.
             </p>
 
             <div className="slq-actions">
@@ -326,8 +363,14 @@ function SoundlegendQuestionnaire() {
           <p className="slq-kicker">Private Questionnaire</p>
           <h1 className="slq-title">{pageTitle}</h1>
           <p className="slq-muted slq-lede">
-            This short intake is here to help Dan understand what you are
-            looking for before your consultation. It does not lock anything in.
+            We do not want to take more than a few minutes of your time. These
+            are mostly easy-select questions to help Dan get a general sense of
+            your sound, direction, and preferences before your consultation.
+          </p>
+          <p className="slq-muted slq-muted--soft">
+            Nothing you fill out here is locked in or a commitment by any means.
+            It is simply meant to give us a more thoughtful starting point for
+            your call.
           </p>
 
           {customerEmail ? (
@@ -343,36 +386,18 @@ function SoundlegendQuestionnaire() {
           <ConsultationIntakePanel
             value={intakeValue}
             onChange={setIntakeValue}
+            onSubmit={handleFinalSubmit}
             isSaving={isSubmitting}
-            title="SoundLegend Questionnaire"
-            subtitle="A few quick questions to help shape your consultation. This does not set anything in stone."
+            isSubmitting={isSubmitting}
+            title="SoundLegend Pre-Consultation Questionnaire"
+            subtitle="A few quick sections to help shape a more thoughtful, personal consultation."
           />
         </div>
 
         <div className="slq-footerbar">
           <div className="slq-token">
-            <span className="slq-token-label">Token verified</span>
+            <span className="slq-token-label">Private link verified</span>
             <span className="slq-token-value">{token}</span>
-          </div>
-
-          <div className="slq-actions">
-            <button
-              type="button"
-              className="slq-btn slq-btn--ghost"
-              onClick={() => navigate('/artisan-shop/soundlegend')}
-              disabled={isSubmitting}
-            >
-              Back
-            </button>
-
-            <button
-              type="button"
-              className="slq-btn slq-btn--primary"
-              onClick={handleFinalSubmit}
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? 'Submitting…' : 'Submit Questionnaire'}
-            </button>
           </div>
         </div>
       </div>

@@ -1,5 +1,3 @@
-// src/utils/storyEngineRules.js
-
 import {
   FIELD_STATUS,
   WRITING_MODE,
@@ -22,10 +20,14 @@ export const CORE_TRUTH_FIELDS = [
   'buildIdentity.styleOfPlaying',
   'buildIdentity.size.diameter',
   'buildIdentity.size.depth',
+  'buildIdentity.preferredSizeDirection',
   'globalProfile.playerContext.genreContext',
   'globalProfile.playerContext.desiredOutcome',
   'globalProfile.playerContext.currentPainPoints',
   'globalProfile.playerContext.influenceReferences',
+  'globalProfile.playerContext.responsePriorities',
+  'globalProfile.playerContext.tonalGoals',
+  'globalProfile.playerContext.consultationContactMethod',
 ];
 
 export const BUILD_CRITICAL_FIELDS = [
@@ -65,7 +67,9 @@ export const SOURCE_WEIGHTS = {
 
 export function getConfidenceBand(score = 0) {
   if (score >= CONFIDENCE_BANDS.HIGH.min) return CONFIDENCE_BANDS.HIGH.label;
-  if (score >= CONFIDENCE_BANDS.MEDIUM.min) return CONFIDENCE_BANDS.MEDIUM.label;
+  if (score >= CONFIDENCE_BANDS.MEDIUM.min) {
+    return CONFIDENCE_BANDS.MEDIUM.label;
+  }
   if (score >= CONFIDENCE_BANDS.LOW.min) return CONFIDENCE_BANDS.LOW.label;
   return CONFIDENCE_BANDS.VERY_LOW.label;
 }
@@ -171,37 +175,46 @@ export const CHAPTER_FIELD_MAP = {
     chapterOverview: [
       'buildIdentity.primaryUseCase',
       'buildIdentity.styleOfPlaying',
+      'buildIdentity.preferredSizeDirection',
+      'globalProfile.playerContext.responsePriorities',
+      'globalProfile.playerContext.tonalGoals',
+      'globalProfile.playerContext.consultationContactMethod',
       'globalProfile.playerContext.genreContext',
       'globalProfile.playerContext.desiredOutcome',
       'globalProfile.playerContext.currentPainPoints',
     ],
     buildNotesStory: [
       'globalProfile.playerContext.influenceReferences',
+      'globalProfile.playerContext.responsePriorities',
+      'globalProfile.playerContext.tonalGoals',
+      'buildIdentity.preferredSizeDirection',
       'globalProfile.aestheticIntent.visualMood',
+      'globalProfile.aestheticIntent.finishDirection',
       'globalProfile.sonicIntent.attack',
       'globalProfile.sonicIntent.body',
       'globalProfile.sonicIntent.feel',
     ],
-    critical: [
-      'buildIdentity.primaryUseCase',
-      'buildIdentity.styleOfPlaying',
-    ],
+    critical: ['buildIdentity.primaryUseCase', 'buildIdentity.styleOfPlaying'],
   },
 
   [CHAPTER_KEYS.COMMITMENT_PORTAL]: {
     chapterOverview: [
       'buildIdentity.projectName',
       'buildIdentity.artistName',
+      'buildIdentity.preferredSizeDirection',
       'globalProfile.playerContext.desiredOutcome',
+      'globalProfile.playerContext.responsePriorities',
+      'globalProfile.playerContext.tonalGoals',
+      'globalProfile.playerContext.consultationContactMethod',
     ],
     buildNotesStory: [
       'globalProfile.playerContext.currentPainPoints',
       'globalProfile.playerContext.influenceReferences',
+      'globalProfile.playerContext.responsePriorities',
+      'globalProfile.playerContext.tonalGoals',
+      'globalProfile.aestheticIntent.visualMood',
     ],
-    critical: [
-      'buildIdentity.projectName',
-      'buildIdentity.artistName',
-    ],
+    critical: ['buildIdentity.projectName', 'buildIdentity.artistName'],
   },
 
   [CHAPTER_KEYS.WOOD_VISION_LOCK_IN]: {
@@ -213,15 +226,15 @@ export const CHAPTER_FIELD_MAP = {
       'recommendations.primaryWood',
     ],
     buildNotesStory: [
+      'globalProfile.playerContext.responsePriorities',
+      'globalProfile.playerContext.tonalGoals',
       'globalProfile.sonicIntent.attack',
       'globalProfile.sonicIntent.body',
       'globalProfile.sonicIntent.sustain',
       'globalProfile.aestheticIntent.woodPreference',
+      'buildIdentity.preferredSizeDirection',
     ],
-    critical: [
-      'buildSpec.shellConstruction',
-      'buildSpec.primaryWood',
-    ],
+    critical: ['buildSpec.shellConstruction', 'buildSpec.primaryWood'],
   },
 
   [CHAPTER_KEYS.RAW_SHELL_CREATION]: {
@@ -229,15 +242,16 @@ export const CHAPTER_FIELD_MAP = {
       'buildSpec.shellConstruction',
       'buildSpec.shellThicknessStrategy',
       'buildSpec.reinforcementRings',
+      'recommendations.shellConstruction',
     ],
     buildNotesStory: [
+      'globalProfile.playerContext.responsePriorities',
+      'globalProfile.playerContext.tonalGoals',
       'globalProfile.sonicIntent.body',
       'globalProfile.sonicIntent.projection',
       'globalProfile.sonicIntent.feel',
     ],
-    critical: [
-      'buildSpec.shellConstruction',
-    ],
+    critical: ['buildSpec.shellConstruction'],
   },
 
   [CHAPTER_KEYS.SHELL_TRUEING_TORCH_TUNE]: {
@@ -245,31 +259,33 @@ export const CHAPTER_FIELD_MAP = {
       'buildSpec.shellThicknessStrategy',
       'buildSpec.reinforcementRings',
       'buildSpec.tuningApproach',
+      'recommendations.tuningApproach',
     ],
     buildNotesStory: [
+      'globalProfile.playerContext.responsePriorities',
+      'globalProfile.playerContext.tonalGoals',
       'globalProfile.sonicIntent.tuningRange',
       'globalProfile.sonicIntent.sensitivity',
       'globalProfile.sonicIntent.articulation',
     ],
-    critical: [
-      'buildSpec.tuningApproach',
-    ],
+    critical: ['buildSpec.tuningApproach'],
   },
 
   [CHAPTER_KEYS.EXTERIOR_ART_FINISH]: {
     chapterOverview: [
       'buildSpec.finishSystem',
+      'recommendations.finishSystem',
       'globalProfile.aestheticIntent.finishDirection',
       'globalProfile.aestheticIntent.visualMood',
+      'globalProfile.aestheticIntent.hardwareFinish',
     ],
     buildNotesStory: [
       'globalProfile.aestheticIntent.visualMood',
+      'globalProfile.aestheticIntent.finishDirection',
       'globalProfile.aestheticIntent.woodPreference',
       'globalProfile.playerContext.influenceReferences',
     ],
-    critical: [
-      'buildSpec.finishSystem',
-    ],
+    critical: ['buildSpec.finishSystem'],
   },
 
   [CHAPTER_KEYS.EDGES_SNARE_BEDS]: {
@@ -277,16 +293,16 @@ export const CHAPTER_FIELD_MAP = {
       'buildSpec.bearingEdge',
       'buildSpec.snareBed',
       'recommendations.bearingEdge',
+      'recommendations.snareBed',
     ],
     buildNotesStory: [
+      'globalProfile.playerContext.responsePriorities',
+      'globalProfile.playerContext.tonalGoals',
       'globalProfile.sonicIntent.sensitivity',
       'globalProfile.sonicIntent.articulation',
       'globalProfile.sonicIntent.tuningRange',
     ],
-    critical: [
-      'buildSpec.bearingEdge',
-      'buildSpec.snareBed',
-    ],
+    critical: ['buildSpec.bearingEdge', 'buildSpec.snareBed'],
   },
 
   [CHAPTER_KEYS.HARDWARE_ASSEMBLY]: {
@@ -294,34 +310,35 @@ export const CHAPTER_FIELD_MAP = {
       'buildSpec.hoopType',
       'buildSpec.lugType',
       'buildSpec.lugCount',
+      'recommendations.hoopType',
+      'recommendations.lugCount',
       'globalProfile.aestheticIntent.hardwareFinish',
     ],
     buildNotesStory: [
+      'globalProfile.playerContext.responsePriorities',
       'globalProfile.sonicIntent.projection',
       'globalProfile.sonicIntent.feel',
       'globalProfile.aestheticIntent.hardwareFinish',
     ],
-    critical: [
-      'buildSpec.hoopType',
-      'buildSpec.lugCount',
-    ],
+    critical: ['buildSpec.hoopType', 'buildSpec.lugCount'],
   },
 
   [CHAPTER_KEYS.LEGACY_TUNING_MEDIA]: {
     chapterOverview: [
       'buildSpec.tuningApproach',
+      'recommendations.tuningApproach',
       'globalProfile.playerContext.liveUse',
       'globalProfile.playerContext.recordingUse',
+      'globalProfile.playerContext.desiredOutcome',
     ],
     buildNotesStory: [
+      'globalProfile.playerContext.responsePriorities',
       'globalProfile.playerContext.desiredOutcome',
       'globalProfile.sonicIntent.attack',
       'globalProfile.sonicIntent.body',
       'globalProfile.sonicIntent.sensitivity',
     ],
-    critical: [
-      'buildSpec.tuningApproach',
-    ],
+    critical: ['buildSpec.tuningApproach'],
   },
 
   [CHAPTER_KEYS.FINAL_QA_PACKAGING_DELIVERY]: {
@@ -329,15 +346,15 @@ export const CHAPTER_FIELD_MAP = {
       'buildIdentity.projectName',
       'buildIdentity.artistName',
       'globalProfile.playerContext.desiredOutcome',
+      'buildIdentity.preferredSizeDirection',
     ],
     buildNotesStory: [
       'globalProfile.playerContext.desiredOutcome',
       'globalProfile.playerContext.influenceReferences',
+      'globalProfile.playerContext.responsePriorities',
+      'globalProfile.playerContext.tonalGoals',
     ],
-    critical: [
-      'buildIdentity.projectName',
-      'buildIdentity.artistName',
-    ],
+    critical: ['buildIdentity.projectName', 'buildIdentity.artistName'],
   },
 };
 
@@ -346,6 +363,22 @@ export const CHAPTER_FIELD_MAP = {
    ========================================================= */
 
 export const INFERENCE_RULES = {
+  shellConstruction: [
+    {
+      id: 'hybrid-from-feuzon-direction',
+      when: (record) =>
+        includesAny(
+          getFieldValue(record, 'globalProfile.aestheticIntent.woodPreference'),
+          ['feuzon', 'hybrid']
+        ),
+      suggest: 'Hybrid',
+      rationale: [
+        'Questionnaire points directly toward a Feuzon / Hybrid shell direction',
+      ],
+      confidence: 0.84,
+    },
+  ],
+
   primaryWood: [
     {
       id: 'maple-balanced-articulate',
@@ -359,6 +392,19 @@ export const INFERENCE_RULES = {
       ],
       confidence: 0.66,
     },
+    {
+      id: 'maple-bright-cutting',
+      when: (record) =>
+        includesAny(
+          getFieldValue(record, 'globalProfile.playerContext.tonalGoals'),
+          ['bright', 'crisp', 'cutting']
+        ),
+      suggest: 'Maple',
+      rationale: [
+        'Maple is a strong current fit for bright, crisp, more cutting response goals',
+      ],
+      confidence: 0.72,
+    },
   ],
 
   hoopType: [
@@ -368,12 +414,14 @@ export const INFERENCE_RULES = {
         includesAny(
           getFieldValue(record, 'globalProfile.sonicIntent.articulation'),
           ['focused', 'controlled', 'tight', 'defined']
+        ) ||
+        includesAny(
+          getFieldValue(record, 'globalProfile.playerContext.responsePriorities'),
+          ['ghost', 'clear', 'defined']
         ),
       suggest: 'Die-cast hoops',
-      rationale: [
-        'Supports focused attack and more controlled response',
-      ],
-      confidence: 0.72,
+      rationale: ['Supports focused attack and more controlled response'],
+      confidence: 0.74,
     },
   ],
 
@@ -383,10 +431,19 @@ export const INFERENCE_RULES = {
       when: (record) =>
         Number(getFieldValue(record, 'buildIdentity.size.diameter')) >= 14,
       suggest: '10 lug',
-      rationale: [
-        'Common stability direction for 14-inch shell formats',
-      ],
+      rationale: ['Common stability direction for 14-inch shell formats'],
       confidence: 0.64,
+    },
+    {
+      id: 'compact-size-lug-direction',
+      when: (record) =>
+        includesAny(
+          getFieldValue(record, 'buildIdentity.preferredSizeDirection'),
+          ['13']
+        ),
+      suggest: '8 lug',
+      rationale: ['13-inch direction commonly points toward an 8-lug layout'],
+      confidence: 0.7,
     },
   ],
 
@@ -395,12 +452,14 @@ export const INFERENCE_RULES = {
       id: 'sensitivity-and-clarity-edge',
       when: (record) =>
         hasValue(record, 'globalProfile.sonicIntent.sensitivity') ||
-        hasValue(record, 'globalProfile.sonicIntent.articulation'),
+        hasValue(record, 'globalProfile.sonicIntent.articulation') ||
+        includesAny(
+          getFieldValue(record, 'globalProfile.playerContext.responsePriorities'),
+          ['ghost', 'clear', 'dynamic']
+        ),
       suggest: '45-degree with softened outer round-over',
-      rationale: [
-        'Balances sensitivity with a musical feel',
-      ],
-      confidence: 0.74,
+      rationale: ['Balances sensitivity with a musical feel'],
+      confidence: 0.78,
     },
   ],
 
@@ -411,12 +470,54 @@ export const INFERENCE_RULES = {
         includesAny(
           getFieldValue(record, 'globalProfile.playerContext.desiredOutcome'),
           ['versatile', 'range', 'studio', 'live']
+        ) ||
+        includesAny(
+          getFieldValue(record, 'buildIdentity.primaryUseCase'),
+          ['live', 'performance']
         ),
       suggest: 'Medium-to-high tuning window with broad usable response',
+      rationale: ['Supports flexible use across more than one setting'],
+      confidence: 0.72,
+    },
+  ],
+
+  finishSystem: [
+    {
+      id: 'gloss-elegant-artistic-finish',
+      when: (record) =>
+        includesAny(
+          getFieldValue(record, 'globalProfile.aestheticIntent.finishDirection'),
+          ['elegant', 'artistic', 'bold']
+        ) ||
+        includesAny(
+          getFieldValue(record, 'globalProfile.aestheticIntent.visualMood'),
+          ['elegant', 'artistic', 'bold']
+        ),
+      suggest: 'Gloss clear finish over figured visual direction',
       rationale: [
-        'Supports flexible use across more than one setting',
+        'Current visual direction points toward a finish that preserves figure while still feeling elevated',
       ],
-      confidence: 0.68,
+      confidence: 0.74,
+    },
+  ],
+
+  snareBed: [
+    {
+      id: 'ghost-note-sensitive-snare-bed',
+      when: (record) =>
+        includesAny(
+          getFieldValue(record, 'globalProfile.playerContext.responsePriorities'),
+          ['ghost', 'dynamic', 'smooth']
+        ) ||
+        includesAny(
+          getFieldValue(record, 'globalProfile.sonicIntent.sensitivity'),
+          ['high', 'sensitive']
+        ),
+      suggest: 'Moderate snare bed tuned for sensitivity and ghost-note response',
+      rationale: [
+        'Supported priorities point toward sensitivity without over-drying the drum',
+      ],
+      confidence: 0.76,
     },
   ],
 };
@@ -458,7 +559,9 @@ export function isStorySensitiveField(fieldPath = '') {
 
 export function requiresManualReview(fieldPath = '', confidence = 0) {
   if (isStorySensitiveField(fieldPath) && confidence < 0.8) return true;
-  if (BUILD_CRITICAL_FIELDS.includes(fieldPath) && confidence < 0.7) return true;
+  if (BUILD_CRITICAL_FIELDS.includes(fieldPath) && confidence < 0.7) {
+    return true;
+  }
   return false;
 }
 
@@ -512,7 +615,12 @@ export function evaluateChapterReadiness({
    ADMIN PROMPT RULES
    ========================================================= */
 
-export function createAdminPrompt({ fieldKey, reason, suggestion, priority = 'normal' }) {
+export function createAdminPrompt({
+  fieldKey,
+  reason,
+  suggestion,
+  priority = 'normal',
+}) {
   return {
     fieldKey,
     reason,
@@ -533,7 +641,8 @@ export function generateMissingFieldPrompt(fieldKey = '') {
 
     'buildSpec.bearingEdge': createAdminPrompt({
       fieldKey,
-      reason: 'Bearing edge choice affects sensitivity, articulation, and feel.',
+      reason:
+        'Bearing edge choice affects sensitivity, articulation, and feel.',
       suggestion:
         'Confirm whether the player values touch response, body, or maximum control most.',
       priority: 'high',
@@ -547,9 +656,36 @@ export function generateMissingFieldPrompt(fieldKey = '') {
       priority: 'normal',
     }),
 
+    'buildSpec.shellConstruction': createAdminPrompt({
+      fieldKey,
+      reason:
+        'Shell construction still needs confirmation before wood/voicing chapters can become specific.',
+      suggestion:
+        'Confirm whether this build should stay in the Feuzon / Hybrid lane or move to another shell format.',
+      priority: 'high',
+    }),
+
+    'buildSpec.snareBed': createAdminPrompt({
+      fieldKey,
+      reason: 'Snare bed depth/shape affects sensitivity and ghost-note behavior.',
+      suggestion:
+        'Confirm whether the player wants maximum ghost-note ease, balanced versatility, or a drier/more controlled response.',
+      priority: 'normal',
+    }),
+
+    'buildSpec.finishSystem': createAdminPrompt({
+      fieldKey,
+      reason:
+        'Finish system is still too open, which keeps the finish chapter generic.',
+      suggestion:
+        'Confirm whether the look should stay more natural/transparent, high-gloss and elevated, or more muted and understated.',
+      priority: 'normal',
+    }),
+
     'globalProfile.playerContext.influenceReferences': createAdminPrompt({
       fieldKey,
-      reason: 'Influence references help ground the story in something authentic.',
+      reason:
+        'Influence references help ground the story in something authentic.',
       suggestion:
         'Capture 1–3 artists, records, tones, or visual references that represent the intended direction.',
       priority: 'normal',
@@ -561,7 +697,8 @@ export function generateMissingFieldPrompt(fieldKey = '') {
     createAdminPrompt({
       fieldKey,
       reason: 'This field is not supported strongly enough yet.',
-      suggestion: 'Add a short admin note or confirm direction manually before drafting.',
+      suggestion:
+        'Add a short admin note or confirm direction manually before drafting.',
       priority: 'normal',
     })
   );
@@ -574,10 +711,12 @@ export function generateMissingFieldPrompt(fieldKey = '') {
 export function getFieldValue(obj, path) {
   if (!obj || !path) return null;
 
-  return path.split('.').reduce((acc, key) => {
-    if (acc == null) return null;
-    return acc[key];
-  }, obj)?.value ?? null;
+  return (
+    path.split('.').reduce((acc, key) => {
+      if (acc == null) return null;
+      return acc[key];
+    }, obj)?.value ?? null
+  );
 }
 
 export function getFieldNode(obj, path) {
@@ -606,7 +745,9 @@ export function includesAny(value, terms = []) {
     ? value.join(' ').toLowerCase()
     : String(value).toLowerCase();
 
-  return terms.some((term) => normalized.includes(String(term).toLowerCase()));
+  return terms.some((term) =>
+    normalized.includes(String(term).toLowerCase())
+  );
 }
 
 export function countResolvedFields(record, fieldPaths = []) {
@@ -622,9 +763,16 @@ export function getChapterCoverageScore(record, chapterKey) {
   const config = CHAPTER_FIELD_MAP[chapterKey];
   if (!config) return 0;
 
-  const overviewCount = countResolvedFields(record, config.chapterOverview);
-  const storyCount = countResolvedFields(record, config.buildNotesStory);
-  const total = config.chapterOverview.length + config.buildNotesStory.length;
+  const overviewPaths = Array.isArray(config.chapterOverview)
+    ? config.chapterOverview
+    : [];
+  const storyPaths = Array.isArray(config.buildNotesStory)
+    ? config.buildNotesStory
+    : [];
+
+  const overviewCount = countResolvedFields(record, overviewPaths);
+  const storyCount = countResolvedFields(record, storyPaths);
+  const total = overviewPaths.length + storyPaths.length;
 
   if (!total) return 0;
 
@@ -632,5 +780,8 @@ export function getChapterCoverageScore(record, chapterKey) {
 }
 
 export function getChapterLengthTarget(sectionKey) {
-  return STORY_LENGTH_POLICY[sectionKey] || STORY_LENGTH_POLICY[STORY_SECTIONS.CHAPTER_OVERVIEW];
+  return (
+    STORY_LENGTH_POLICY[sectionKey] ||
+    STORY_LENGTH_POLICY[STORY_SECTIONS.CHAPTER_OVERVIEW]
+  );
 }

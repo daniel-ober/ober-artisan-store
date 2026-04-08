@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import {
   CONSULTATION_INTAKE_SECTIONS,
   buildConsultationIntakeDefaults,
+  isConsultationIntakeComplete,
 } from '../../utils/consultationIntakeSchema';
 import './ConsultationIntakePanel.css';
 
@@ -25,17 +26,37 @@ function ensureArray(value) {
   return [value].filter(Boolean);
 }
 
+function getOptionValue(option) {
+  return typeof option === 'string' ? option : option.value || '';
+}
+
+function getOptionLabel(option) {
+  return typeof option === 'string'
+    ? option
+    : option.label || option.value || '';
+}
+
+function getOptionDescription(option) {
+  return typeof option === 'string' ? '' : option.description || '';
+}
+
 function ConsultationIntakePanel({
   value,
   onChange,
+  onSubmit,
   isSaving = false,
+  isSubmitting = false,
   readOnly = false,
   title = 'SoundLegend Questionnaire',
-  subtitle = 'This does not lock anything in. It simply gives us a clearer starting point before your consultation.',
+  subtitle = 'We do not want to take more than a few minutes of your time. These are mostly easy select questions, and nothing you choose here is locked in or a commitment by any means.',
 }) {
   const [formState, setFormState] = useState(() =>
     normalizeIncomingIntake(value)
   );
+  const [activeSectionIndex, setActiveSectionIndex] = useState(0);
+
+  const [attemptedNext, setAttemptedNext] = useState(false);
+  const [attemptedSubmit, setAttemptedSubmit] = useState(false);
 
   const isSyncingFromParentRef = useRef(false);
   const didMountRef = useRef(false);
@@ -61,6 +82,60 @@ function ConsultationIntakePanel({
       onChange(formState);
     }
   }, [formState, onChange]);
+
+  useEffect(() => {
+    setAttemptedNext(false);
+    setAttemptedSubmit(false);
+  }, [activeSectionIndex]);
+
+  const totalSections = CONSULTATION_INTAKE_SECTIONS.length;
+
+  const activeSection =
+    CONSULTATION_INTAKE_SECTIONS[activeSectionIndex] || null;
+
+  const sectionProgressPercent = useMemo(() => {
+    if (!totalSections) return 0;
+    return Math.round(((activeSectionIndex + 1) / totalSections) * 100);
+  }, [activeSectionIndex, totalSections]);
+
+  const intakeComplete = useMemo(
+    () => isConsultationIntakeComplete(formState),
+    [formState]
+  );
+
+  const getFieldValue = (sectionId, fieldId) =>
+    formState?.[sectionId]?.[fieldId];
+
+  const isFieldComplete = (section, field) => {
+    if (field.optional) return true;
+
+    const value = getFieldValue(section.id, field.id);
+
+    if (field.type === 'multiSelect') {
+      return Array.isArray(value) && value.length > 0;
+    }
+
+    return String(value || '').trim() !== '';
+  };
+
+  const getMissingFieldIdsForSection = (section) =>
+    (section?.fields || [])
+      .filter((field) => !isFieldComplete(section, field))
+      .map((field) => field.id);
+
+  const activeSectionMissingFieldIds = activeSection
+    ? getMissingFieldIdsForSection(activeSection)
+    : [];
+
+  const activeSectionComplete = activeSectionMissingFieldIds.length === 0;
+
+  const shouldHighlightFieldError = (fieldId) =>
+    (attemptedNext || attemptedSubmit) &&
+    activeSectionMissingFieldIds.includes(fieldId);
+
+  const shouldHighlightFieldSuccess = (fieldId) =>
+    (attemptedNext || attemptedSubmit) &&
+    !activeSectionMissingFieldIds.includes(fieldId);
 
   const updateField = (sectionId, fieldId, nextValue) => {
     if (readOnly) return;
@@ -117,12 +192,8 @@ function ConsultationIntakePanel({
       >
         <option value="">Select…</option>
         {(field.options || []).map((option) => {
-          const optionValue =
-            typeof option === 'string' ? option : option.value || '';
-          const optionLabel =
-            typeof option === 'string'
-              ? option
-              : option.label || option.value || '';
+          const optionValue = getOptionValue(option);
+          const optionLabel = getOptionLabel(option);
 
           return (
             <option key={optionValue} value={optionValue}>
@@ -151,12 +222,9 @@ function ConsultationIntakePanel({
     return (
       <div className="cip-chip-group">
         {(field.options || []).map((option) => {
-          const optionValue =
-            typeof option === 'string' ? option : option.value || '';
-          const optionLabel =
-            typeof option === 'string'
-              ? option
-              : option.label || option.value || '';
+          const optionValue = getOptionValue(option);
+          const optionLabel = getOptionLabel(option);
+          const optionDescription = getOptionDescription(option);
           const isActive = selected.includes(optionValue);
 
           return (
@@ -165,12 +233,17 @@ function ConsultationIntakePanel({
               type="button"
               className={`cip-chip ${isActive ? 'is-active' : ''} ${
                 readOnly ? 'is-readonly' : ''
-              }`}
+              } ${optionDescription ? 'cip-chip--descriptive' : ''}`}
               onClick={() => toggleValue(optionValue)}
               disabled={readOnly}
               aria-pressed={isActive}
             >
-              {optionLabel}
+              <span className="cip-chip-label">{optionLabel}</span>
+              {optionDescription ? (
+                <span className="cip-chip-description">
+                  {optionDescription}
+                </span>
+              ) : null}
             </button>
           );
         })}
@@ -200,9 +273,35 @@ function ConsultationIntakePanel({
     }
   };
 
-  const section = CONSULTATION_INTAKE_SECTIONS[0];
+  if (!activeSection) return null;
 
-  if (!section) return null;
+  const canGoBack = activeSectionIndex > 0;
+  const canGoNext = activeSectionIndex < totalSections - 1;
+
+  const isLastSection = activeSectionIndex === totalSections - 1;
+
+  const handleNextSection = () => {
+    if (readOnly || !activeSection) return;
+
+    setAttemptedNext(true);
+
+    if (!activeSectionComplete) return;
+
+    setAttemptedNext(false);
+    setActiveSectionIndex((prev) => prev + 1);
+  };
+
+  const handleSubmitClick = () => {
+    if (readOnly) return;
+
+    setAttemptedSubmit(true);
+
+    if (!activeSectionComplete || !intakeComplete) return;
+
+    if (typeof onSubmit === 'function') {
+      onSubmit();
+    }
+  };
 
   return (
     <div className="cip-shell">
@@ -213,13 +312,66 @@ function ConsultationIntakePanel({
           </div>
           <h3 className="cip-title">{title}</h3>
           <p className="cip-subtitle">{subtitle}</p>
+          <p className="cip-meta-note">
+            Most people finish this in under 5 minutes. These are mostly easy
+            selections, with one optional write-in question saved for the end.
+          </p>
+        </div>
+      </div>
+
+      <div className="cip-progress-card">
+        <div className="cip-progress-topline">
+          <div className="cip-progress-copy">
+            <span className="cip-progress-label">
+              Section {activeSectionIndex + 1} of {totalSections}
+            </span>
+            <span className="cip-progress-title">{activeSection.title}</span>
+          </div>
+          <div className="cip-progress-percent">{sectionProgressPercent}%</div>
+        </div>
+
+        <div className="cip-progress-track" aria-hidden="true">
+          <div
+            className="cip-progress-fill"
+            style={{ width: `${sectionProgressPercent}%` }}
+          />
+        </div>
+
+        <div className="cip-step-dots" aria-hidden="true">
+          {CONSULTATION_INTAKE_SECTIONS.map((section, index) => (
+            <div
+              key={section.id}
+              className={`cip-step-dot ${
+                index === activeSectionIndex ? 'is-active' : ''
+              } ${index < activeSectionIndex ? 'is-complete' : ''} ${
+                index > activeSectionIndex ? 'is-locked' : ''
+              }`}
+            >
+              <span className="cip-step-dot-number">{index + 1}</span>
+              <span className="cip-step-dot-text">
+                {section.shortTitle || section.title}
+              </span>
+            </div>
+          ))}
         </div>
       </div>
 
       <div className="cip-section-card">
+        <div className="cip-section-heading">
+          <div className="cip-section-kicker">Focused intake</div>
+          <h4 className="cip-section-title">{activeSection.title}</h4>
+          <p className="cip-section-description">{activeSection.description}</p>
+        </div>
+
+        {(attemptedNext || attemptedSubmit) && !activeSectionComplete ? (
+          <div className="cip-section-error">
+            Please complete all required questions in this section before
+            continuing.
+          </div>
+        ) : null}
         <div className="cip-section-body">
           <div className="cip-fields-stack">
-            {section.fields.map((field, index) => {
+            {activeSection.fields.map((field, index) => {
               const isWide =
                 field.type === 'textarea' || field.type === 'multiSelect';
 
@@ -228,19 +380,43 @@ function ConsultationIntakePanel({
                   key={field.id}
                   className={`cip-field-card ${
                     isWide ? 'cip-field-card--wide' : ''
+                  } ${
+                    shouldHighlightFieldError(field.id)
+                      ? 'cip-field-card--error'
+                      : ''
+                  } ${
+                    shouldHighlightFieldSuccess(field.id)
+                      ? 'cip-field-card--success'
+                      : ''
                   }`}
                 >
                   <div className="cip-field-card-topline">
                     <div className="cip-field-step">Question {index + 1}</div>
+                    {field.optional ? (
+                      <div className="cip-field-optional">Optional</div>
+                    ) : null}
                   </div>
 
                   <label className="cip-field-label">{field.label}</label>
 
-                  {field.placeholder ? (
+                  {field.helperText ? (
+                    <div className="cip-field-helper">{field.helperText}</div>
+                  ) : field.placeholder && field.type !== 'textarea' ? (
                     <div className="cip-field-helper">{field.placeholder}</div>
                   ) : null}
 
-                  <div className="cip-field-control">{renderField(section, field)}</div>
+                  <div className="cip-field-control">
+                    {renderField(activeSection, field)}
+                  </div>
+                  {shouldHighlightFieldError(field.id) ? (
+                    <div className="cip-field-status cip-field-status--error">
+                      This question still needs an answer.
+                    </div>
+                  ) : shouldHighlightFieldSuccess(field.id) ? (
+                    <div className="cip-field-status cip-field-status--success">
+                      Complete
+                    </div>
+                  ) : null}
                 </div>
               );
             })}
@@ -248,15 +424,50 @@ function ConsultationIntakePanel({
         </div>
       </div>
 
-      {!readOnly && (
-        <div className="cip-footer">
-          <div className="cip-autosave-note">
-            {isSaving
-              ? 'Saving your answers…'
-              : 'Your answers save automatically as you go.'}
-          </div>
+      <div className="cip-footer">
+        <div className="cip-autosave-note">
+          {isSaving
+            ? 'Saving your answers…'
+            : intakeComplete
+              ? 'Everything required has been completed. You can now submit your questionnaire.'
+              : isLastSection
+                ? 'Please complete all required questions before submitting your questionnaire.'
+                : 'Please complete this section before continuing.'}
         </div>
-      )}
+
+        <div className="cip-footer-actions">
+          <button
+            type="button"
+            className="cip-nav-btn cip-nav-btn--ghost"
+            onClick={() =>
+              canGoBack && setActiveSectionIndex((prev) => prev - 1)
+            }
+            disabled={!canGoBack || readOnly || isSubmitting}
+          >
+            Back
+          </button>
+
+          {!isLastSection ? (
+            <button
+              type="button"
+              className="cip-nav-btn cip-nav-btn--primary"
+              onClick={handleNextSection}
+              disabled={readOnly || isSubmitting}
+            >
+              Next Section
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="cip-nav-btn cip-nav-btn--primary"
+              onClick={handleSubmitClick}
+              disabled={readOnly || isSubmitting}
+            >
+              {isSubmitting ? 'Submitting…' : 'Submit Questionnaire'}
+            </button>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
