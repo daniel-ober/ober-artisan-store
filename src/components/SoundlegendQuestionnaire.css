@@ -1,15 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
 
 :root {
-  --slq-bg: #05070b;
-  --slq-text: #f3efe8;
-  --slq-muted: rgba(232, 229, 222, 0.74);
-  --slq-muted-soft: rgba(232, 229, 222, 0.52);
-  --slq-danger: #ffb1b1;
-  --slq-danger-bg: rgba(255, 90, 90, 0.08);
-  --slq-border: rgba(255, 255, 255, 0.08);
-  --slq-shadow: 0 28px 70px rgba(0, 0, 0, 0.42);
-  --slq-radius-xl: 26px;
+  --slq-bg: #f5efe4;
+  --slq-bg-2: #fbf7f0;
+  --slq-text: #221c13;
+  --slq-muted: rgba(66, 56, 40, 0.82);
+  --slq-muted-soft: rgba(82, 69, 48, 0.62);
+  --slq-danger: #8f2e2e;
+  --slq-danger-bg: rgba(214, 80, 80, 0.08);
+  --slq-border: rgba(98, 79, 42, 0.12);
+  --slq-shadow: 0 28px 70px rgba(62, 46, 20, 0.08);
+  --slq-radius-xl: 28px;
   --slq-radius-lg: 18px;
 }
 
@@ -24,9 +25,9 @@
   padding: 118px 24px 72px;
   color: var(--slq-text);
   background:
-    radial-gradient(circle at top center, rgba(214, 174, 82, 0.06), transparent 18%),
-    radial-gradient(circle at 15% 0%, rgba(36, 48, 82, 0.22), transparent 26%),
-    linear-gradient(180deg, #04060a 0%, #070911 38%, #05070b 100%);
+    radial-gradient(circle at top center, rgba(214, 174, 82, 0.1), transparent 22%),
+    radial-gradient(circle at 12% 0%, rgba(194, 168, 112, 0.08), transparent 26%),
+    linear-gradient(180deg, #f8f3ea 0%, #f5efe4 42%, #f7f1e8 100%);
 }
 
 .slq-shell {
@@ -41,9 +42,9 @@
   padding: 34px 30px 28px;
   border-radius: var(--slq-radius-xl);
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.015)),
-    linear-gradient(180deg, rgba(14, 17, 24, 0.96), rgba(9, 12, 18, 0.98));
-  border: 1px solid rgba(255, 255, 255, 0.08);
+    linear-gradient(135deg, rgba(255, 255, 255, 0.72), rgba(255, 251, 244, 0.92)),
+    linear-gradient(180deg, rgba(248, 242, 231, 0.98), rgba(243, 236, 224, 0.98));
+  border: 1px solid rgba(103, 81, 42, 0.12);
   box-shadow: var(--slq-shadow);
 }
 
@@ -52,7 +53,7 @@
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, transparent 0%, rgba(214, 174, 82, 0.05) 45%, transparent 100%);
+    linear-gradient(90deg, transparent 0%, rgba(214, 174, 82, 0.06) 45%, transparent 100%);
   opacity: 0.45;
   pointer-events: none;
 }
@@ -74,18 +75,18 @@
   letter-spacing: 0.2em;
   text-transform: uppercase;
   font-weight: 800;
-  color: rgba(255, 255, 255, 0.68);
+  color: rgba(108, 86, 46, 0.72);
 }
 
 .slq-kicker--gold {
-  color: rgba(220, 185, 98, 0.98);
+  color: rgba(166, 122, 29, 0.98);
 }
 
 .slq-title {
   position: relative;
   z-index: 1;
   margin: 0 0 14px;
-  font-size: clamp(2.15rem, 1.7rem + 1.5vw, 3.5rem);
+  font-size: clamp(2.15rem, 1.7rem + 1.5vw, 3.4rem);
   line-height: 0.98;
   font-weight: 900;
   letter-spacing: -0.03em;
@@ -94,7 +95,7 @@
 }
 
 .slq-lede {
-  max-width: 880px;
+  max-width: 900px;
 }
 
 .slq-muted {
@@ -104,6 +105,10 @@
   font-size: 1rem;
   line-height: 1.72;
   color: var(--slq-muted);
+}
+
+.slq-muted--soft {
+  color: var(--slq-muted-soft);
 }
 
 .slq-submeta {
@@ -119,16 +124,16 @@
   border-radius: var(--slq-radius-lg);
   padding: 15px 18px;
   border: 1px solid var(--slq-border);
-  background: linear-gradient(180deg, rgba(15, 18, 25, 0.95), rgba(11, 14, 20, 0.98));
-  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.24);
+  background: linear-gradient(180deg, rgba(255, 252, 247, 0.96), rgba(246, 240, 230, 0.96));
+  box-shadow: 0 18px 44px rgba(66, 52, 20, 0.06);
 }
 
 .slq-status--error {
   color: var(--slq-danger);
-  border-color: rgba(255, 120, 120, 0.18);
+  border-color: rgba(172, 68, 68, 0.18);
   background:
-    linear-gradient(180deg, var(--slq-danger-bg), rgba(255, 255, 255, 0.02)),
-    linear-gradient(180deg, rgba(15, 18, 25, 0.95), rgba(11, 14, 20, 0.98));
+    linear-gradient(180deg, var(--slq-danger-bg), rgba(255, 255, 255, 0.78)),
+    linear-gradient(180deg, rgba(255, 252, 247, 0.96), rgba(246, 240, 230, 0.96));
   font-weight: 700;
 }
 
@@ -139,9 +144,8 @@
 .slq-page .cip-shell {
   border-radius: var(--slq-radius-xl);
   overflow: hidden;
-  background:
-    linear-gradient(180deg, rgba(12, 15, 22, 0.96), rgba(8, 11, 17, 0.985));
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(180deg, rgba(252, 249, 244, 0.98), rgba(245, 239, 229, 0.98));
+  border: 1px solid rgba(103, 81, 42, 0.1);
   box-shadow: var(--slq-shadow);
 }
 
@@ -166,7 +170,7 @@
   font-weight: 800;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.42);
+  color: rgba(111, 90, 47, 0.52);
 }
 
 .slq-token-value {
@@ -210,13 +214,13 @@
 }
 
 .slq-btn--ghost {
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: linear-gradient(180deg, rgba(22, 25, 33, 0.9), rgba(14, 17, 24, 0.94));
-  color: #f4efe6;
+  border: 1px solid rgba(103, 81, 42, 0.14);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(246, 239, 228, 0.92));
+  color: #30271b;
 }
 
 .slq-btn--ghost:hover {
-  background: linear-gradient(180deg, rgba(26, 30, 39, 0.96), rgba(16, 19, 27, 0.98));
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(249, 242, 231, 0.98));
 }
 
 .slq-btn--primary {
@@ -224,15 +228,51 @@
   background: linear-gradient(180deg, #d8b158 0%, #c79d3a 100%);
   color: #15110a;
   box-shadow:
-    0 12px 28px rgba(173, 131, 38, 0.22),
+    0 12px 28px rgba(173, 131, 38, 0.16),
     inset 0 1px 0 rgba(255, 248, 222, 0.34);
 }
 
 .slq-btn--primary:hover {
   filter: brightness(1.015);
   box-shadow:
-    0 16px 34px rgba(173, 131, 38, 0.28),
+    0 16px 34px rgba(173, 131, 38, 0.2),
     inset 0 1px 0 rgba(255, 248, 222, 0.34);
+}
+
+.slq-callout {
+  position: relative;
+  z-index: 1;
+  margin: 18px 0 18px;
+  padding: 18px 18px 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(111, 90, 47, 0.12);
+  background: linear-gradient(180deg, rgba(255, 252, 246, 0.92), rgba(247, 241, 230, 0.92));
+}
+
+.slq-callout-title {
+  margin: 0 0 10px;
+  font-size: 1.08rem;
+  line-height: 1.2;
+  font-weight: 800;
+  color: #241d13;
+}
+
+.slq-callout-copy {
+  margin: 0 0 10px;
+  font-size: 0.96rem;
+  line-height: 1.68;
+  color: rgba(61, 51, 36, 0.82);
+}
+
+.slq-callout-list {
+  margin: 0;
+  padding-left: 18px;
+  color: rgba(61, 51, 36, 0.82);
+}
+
+.slq-callout-list li {
+  margin: 0 0 8px;
+  line-height: 1.6;
 }
 
 @media (max-width: 900px) {

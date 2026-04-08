@@ -20,6 +20,22 @@ import defaultProjectFields from '../utils/defaultProjectFields';
 import { defaultStepData } from '../utils/buildWorkflow';
 import { buildConsultationIntakeDefaults } from '../utils/consultationIntakeSchema';
 
+import {
+  SOURCE_TYPE,
+  createEmptyStoryEngineRecord,
+} from '../utils/storyEngineSchema';
+
+import {
+  createSourceEntry,
+  applyObservedFields,
+  runStoryEngine,
+} from '../utils/storyEngineHelpers';
+
+import { buildStoryEngineFromSources } from '../utils/storyEngineBuildIntentAdapter';
+import { runVoicingNarrativePipeline } from '../utils/storyEngineVoicingNarrative';
+
+import { runStoryDraftPipeline } from '../utils/storyEngineDrafting';
+
 const generateAndDownloadVCard = ({ firstName, lastName, email, phone }) => {
   const safeFirst = firstName || 'Contact';
   const safeLast = lastName || 'Ober';
@@ -175,6 +191,235 @@ const buildSchedulingAvailabilityText = (intakeSection = {}) => {
   return '—';
 };
 
+const normalizeTextValue = (value) => {
+  if (Array.isArray(value)) {
+    return value.map((item) => String(item || '').trim()).filter(Boolean);
+  }
+
+  if (value === null || value === undefined) return '';
+
+  return String(value).trim();
+};
+
+const joinArrayForField = (value) => {
+  const arr = Array.isArray(value)
+    ? value.map((item) => String(item || '').trim()).filter(Boolean)
+    : [];
+
+  return arr.length ? arr.join(', ') : '';
+};
+
+const mapIntakeToStoryEngineFieldMap = ({
+  submissionData = {},
+  consultationIntake = {},
+}) => {
+  const fullName = `${submissionData.firstName || ''} ${
+    submissionData.lastName || ''
+  }`.trim();
+
+  const playingWorld = consultationIntake?.playingWorld || {};
+  const soundGoals = consultationIntake?.soundGoals || {};
+  const buildDirection = consultationIntake?.buildDirection || {};
+  const consultPrep = consultationIntake?.consultPrep || {};
+
+  const tonalGoals = Array.isArray(soundGoals.tonalGoals)
+    ? soundGoals.tonalGoals
+    : [];
+
+  const responsePriorities = Array.isArray(soundGoals.responsePriorities)
+    ? soundGoals.responsePriorities
+    : [];
+
+  const playSettings = Array.isArray(playingWorld.playSettings)
+    ? playingWorld.playSettings
+    : [];
+
+  const genres = Array.isArray(playingWorld.genres) ? playingWorld.genres : [];
+
+  const consultationDays = normalizeAvailabilityValue(
+    consultPrep.consultationDays
+  );
+  const consultationTimes = normalizeAvailabilityValue(
+    consultPrep.consultationTimes
+  );
+
+  const combinedAvailability =
+    consultationDays.length || consultationTimes.length
+      ? [
+          consultationDays.length ? `Days: ${consultationDays.join(', ')}` : '',
+          consultationTimes.length
+            ? `Times: ${consultationTimes.join(', ')}`
+            : '',
+        ]
+          .filter(Boolean)
+          .join(' | ')
+      : '';
+
+  return {
+    'buildIdentity.artistName': fullName,
+    'buildIdentity.projectName': `${
+      fullName || 'SoundLegend'
+    } SoundLegend Build`,
+    'buildIdentity.primaryUseCase': normalizeTextValue(soundGoals.primaryGoal),
+    'buildIdentity.styleOfPlaying': normalizeTextValue(
+      buildDirection.buildClarity
+    ),
+
+    'globalProfile.playerContext.genreContext': joinArrayForField(genres),
+    'globalProfile.playerContext.desiredOutcome': normalizeTextValue(
+      soundGoals.primaryGoal
+    ),
+    'globalProfile.playerContext.currentPainPoints': normalizeTextValue(
+      buildDirection.buildClarity
+    ),
+    'globalProfile.playerContext.influenceReferences':
+      joinArrayForField(playSettings),
+
+    'globalProfile.aestheticIntent.visualMood': joinArrayForField(
+      buildDirection.visualDirection
+    ),
+    'globalProfile.aestheticIntent.finishDirection': joinArrayForField(
+      buildDirection.visualDirection
+    ),
+
+    'globalProfile.sonicIntent.attack': joinArrayForField(tonalGoals),
+    'globalProfile.sonicIntent.body': joinArrayForField(tonalGoals),
+    'globalProfile.sonicIntent.sensitivity': tonalGoals.includes(
+      'Sensitive / ghost-note friendly'
+    )
+      ? 'Sensitive / ghost-note friendly'
+      : joinArrayForField(responsePriorities),
+    'globalProfile.sonicIntent.sustain': tonalGoals.includes('Open / resonant')
+      ? 'Open / resonant'
+      : tonalGoals.includes('Dry / controlled')
+        ? 'Dry / controlled'
+        : '',
+    'globalProfile.sonicIntent.projection': tonalGoals.includes(
+      'Bright / cutting'
+    )
+      ? 'Bright / cutting'
+      : tonalGoals.includes('Punchy')
+        ? 'Punchy'
+        : '',
+    'globalProfile.sonicIntent.tuningRange': normalizeTextValue(
+      buildDirection.preferredSizeDirection
+    ),
+    'globalProfile.sonicIntent.articulation':
+      joinArrayForField(responsePriorities),
+    'globalProfile.sonicIntent.feel': joinArrayForField(tonalGoals),
+
+    'globalProfile.buildPreferences.shellConstruction': joinArrayForField(
+      buildDirection.shellDirectionsOpenTo
+    ),
+    'globalProfile.buildPreferences.hardwareFinish': normalizeTextValue(
+      buildDirection.hardwareFinishPreference
+    ),
+    'globalProfile.buildPreferences.sizePreference': normalizeTextValue(
+      buildDirection.preferredSizeDirection
+    ),
+    'globalProfile.buildPreferences.contactPreference': normalizeTextValue(
+      consultPrep.consultationContactMethod
+    ),
+    'globalProfile.buildPreferences.availability': combinedAvailability,
+  };
+};
+
+const tryApplyBuildIntentAdapter = ({ record, submissionData }) => {
+  if (!record) return record;
+
+  try {
+    return (
+      buildStoryEngineFromSources({
+        existingRecord: record,
+        submission: submissionData,
+        questionnaireDoc: submissionData,
+        project: {},
+        adminNotes: {},
+        createdBy: 'soundlegend_modal',
+      }) || record
+    );
+  } catch (err) {
+    console.error('⚠️ buildStoryEngineFromSources failed:', err);
+    return record;
+  }
+};
+
+const tryApplyVoicingNarrative = ({ record }) => {
+  if (!record) return record;
+
+  try {
+    return runVoicingNarrativePipeline(record) || record;
+  } catch (err) {
+    console.error('⚠️ runVoicingNarrativePipeline failed:', err);
+    return record;
+  }
+};
+
+const buildInitialStoryEngineRecord = ({
+  submissionData = {},
+  consultationIntake = {},
+  projectId = '',
+}) => {
+  let record = createEmptyStoryEngineRecord();
+
+  record.projectId = projectId || null;
+  record.artistId = submissionData?.ownerUid || submissionData?.userId || null;
+
+  const sourceEntry = createSourceEntry({
+    id: `consultation_${submissionData?.id || 'submission'}`,
+    type: SOURCE_TYPE.CONSULTATION,
+    label: 'SoundLegend consultation intake',
+    content: JSON.stringify(
+      {
+        submissionId: submissionData?.id || '',
+        firstName: submissionData?.firstName || '',
+        lastName: submissionData?.lastName || '',
+        email: submissionData?.email || '',
+        consultationIntake,
+      },
+      null,
+      2
+    ),
+    createdAt: new Date().toISOString(),
+    createdBy: 'admin_portal',
+    meta: {
+      submissionId: submissionData?.id || '',
+      questionnaireCompleted: !!submissionData?.questionnaireCompleted,
+      consultationContactMethod:
+        consultationIntake?.consultPrep?.consultationContactMethod || '',
+    },
+  });
+
+  const observedFieldMap = mapIntakeToStoryEngineFieldMap({
+    submissionData,
+    consultationIntake,
+  });
+
+  record = applyObservedFields(record, observedFieldMap, sourceEntry);
+
+  record = runStoryEngine(record, {
+    sourcesToRegister: [sourceEntry],
+  });
+
+  record = tryApplyBuildIntentAdapter({
+    record,
+    submissionData,
+  });
+
+  record = tryApplyVoicingNarrative({
+    record,
+  });
+
+  record = runStoryEngine(record, {
+    applyRecommendationInference: true,
+    applyRecommendationsToMissing: true,
+  });
+
+  record = runStoryDraftPipeline(record, 'soundlegend_modal');
+
+  return record;
+};
+
 const ViewSoundlegendModal = ({
   submission,
   onClose,
@@ -290,7 +535,9 @@ const ViewSoundlegendModal = ({
     if (!submissionId || isDeleting) return;
 
     const confirmDelete = window.confirm(
-      `Delete this SoundLegend submission for ${firstName || ''} ${lastName || ''}?\n\nThis cannot be undone.`
+      `Delete this SoundLegend submission for ${firstName || ''} ${
+        lastName || ''
+      }?\n\nThis cannot be undone.`
     );
     if (!confirmDelete) return;
 
@@ -343,6 +590,8 @@ const ViewSoundlegendModal = ({
 
     try {
       const protectedFields = buildSoundLegendProtectedFields();
+      const intakeDefaults = buildConsultationIntakeDefaults();
+      const resolvedConsultationIntake = consultationIntake || intakeDefaults;
 
       const projectData = {
         source: 'SoundLegend',
@@ -370,12 +619,26 @@ const ViewSoundlegendModal = ({
         ...defaultStepData,
         ...defaultProjectFields,
         ...protectedFields,
-        consultationIntake:
-          consultationIntake || buildConsultationIntakeDefaults(),
+        consultationIntake: resolvedConsultationIntake,
       };
 
       const projectRef = await addDoc(collection(db, 'projects'), projectData);
       const newProjectId = projectRef.id;
+
+      const storyEngine = buildInitialStoryEngineRecord({
+        submissionData: {
+          ...(fullSubmission || submission),
+          id: submissionId,
+        },
+        consultationIntake: resolvedConsultationIntake,
+        projectId: newProjectId,
+      });
+
+      await updateDoc(doc(db, 'projects', newProjectId), {
+        id: newProjectId,
+        storyEngine,
+        updatedAt: Timestamp.now(),
+      });
 
       const submissionRef = doc(db, 'soundlegend_submissions', submissionId);
       const systemEntry = {
@@ -495,9 +758,19 @@ const ViewSoundlegendModal = ({
 
   if (!submissionId) return null;
 
-  const intakeSection =
-    consultationIntake?.soundlegendVision ||
-    buildConsultationIntakeDefaults().soundlegendVision;
+  const intakeDefaults = buildConsultationIntakeDefaults();
+
+  const playingWorld =
+    consultationIntake?.playingWorld || intakeDefaults.playingWorld;
+
+  const soundGoals =
+    consultationIntake?.soundGoals || intakeDefaults.soundGoals;
+
+  const buildDirection =
+    consultationIntake?.buildDirection || intakeDefaults.buildDirection;
+
+  const consultPrep =
+    consultationIntake?.consultPrep || intakeDefaults.consultPrep;
 
   return ReactDOM.createPortal(
     <div
@@ -670,41 +943,83 @@ const ViewSoundlegendModal = ({
                 <table className="ea-table">
                   <tbody>
                     <tr>
+                      <th>Player profile</th>
+                      <td>{renderIntakeValue(playingWorld.playerProfile)}</td>
+                    </tr>
+                    <tr>
+                      <th>Play settings</th>
+                      <td>{renderIntakeValue(playingWorld.playSettings)}</td>
+                    </tr>
+                    <tr>
+                      <th>Genres</th>
+                      <td>{renderIntakeValue(playingWorld.genres)}</td>
+                    </tr>
+                    <tr>
                       <th>Vision clarity</th>
-                      <td>{renderIntakeValue(intakeSection.buildClarity)}</td>
+                      <td>{renderIntakeValue(buildDirection.buildClarity)}</td>
                     </tr>
                     <tr>
                       <th>Main goal</th>
-                      <td>{renderIntakeValue(intakeSection.primaryGoal)}</td>
+                      <td>{renderIntakeValue(soundGoals.primaryGoal)}</td>
                     </tr>
                     <tr>
                       <th>Tonal direction</th>
-                      <td>{renderIntakeValue(intakeSection.tonalGoals)}</td>
+                      <td>{renderIntakeValue(soundGoals.tonalGoals)}</td>
+                    </tr>
+                    <tr>
+                      <th>Response priorities</th>
+                      <td>
+                        {renderIntakeValue(soundGoals.responsePriorities)}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>Size direction</th>
+                      <td>
+                        {renderIntakeValue(
+                          buildDirection.preferredSizeDirection
+                        )}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>Shell direction</th>
+                      <td>
+                        {renderIntakeValue(
+                          buildDirection.shellDirectionsOpenTo
+                        )}
+                      </td>
                     </tr>
                     <tr>
                       <th>Visual direction</th>
                       <td>
-                        {renderIntakeValue(intakeSection.visualDirection)}
+                        {renderIntakeValue(buildDirection.visualDirection)}
                       </td>
                     </tr>
                     <tr>
-                      <th>Reference notes</th>
-                      <td className="pre">
-                        {renderIntakeValue(intakeSection.referenceNotes)}
+                      <th>Hardware finish</th>
+                      <td>
+                        {renderIntakeValue(
+                          buildDirection.hardwareFinishPreference
+                        )}
                       </td>
                     </tr>
                     <tr>
                       <th>Scheduling contact method</th>
                       <td>
                         {renderIntakeValue(
-                          intakeSection.consultationContactMethod
+                          consultPrep.consultationContactMethod
                         )}
                       </td>
                     </tr>
                     <tr>
                       <th>Scheduling availability</th>
                       <td className="pre">
-                        {buildSchedulingAvailabilityText(intakeSection)}
+                        {buildSchedulingAvailabilityText(consultPrep)}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>Final notes</th>
+                      <td className="pre">
+                        {renderIntakeValue(consultPrep.finalNotes)}
                       </td>
                     </tr>
                   </tbody>

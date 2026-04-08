@@ -1,5 +1,3 @@
-// src/utils/storyEngineSchema.js
-
 export const FIELD_STATUS = {
   OBSERVED: 'observed',
   DERIVED: 'derived',
@@ -140,6 +138,7 @@ export const createEmptyStoryEngineRecord = () => ({
     artistName: DEFAULT_FIELD(),
     primaryUseCase: DEFAULT_FIELD(),
     styleOfPlaying: DEFAULT_FIELD(),
+    preferredSizeDirection: DEFAULT_FIELD(),
     size: {
       diameter: DEFAULT_FIELD(),
       depth: DEFAULT_FIELD(),
@@ -177,6 +176,9 @@ export const createEmptyStoryEngineRecord = () => ({
       influenceReferences: DEFAULT_FIELD(),
       currentPainPoints: DEFAULT_FIELD(),
       desiredOutcome: DEFAULT_FIELD(),
+      responsePriorities: DEFAULT_FIELD(),
+      tonalGoals: DEFAULT_FIELD(),
+      consultationContactMethod: DEFAULT_FIELD(),
     },
   },
 
@@ -206,6 +208,7 @@ export const createEmptyStoryEngineRecord = () => ({
     lugCount: DEFAULT_RECOMMENDATION(),
     tuningApproach: DEFAULT_RECOMMENDATION(),
     finishSystem: DEFAULT_RECOMMENDATION(),
+    snareBed: DEFAULT_RECOMMENDATION(),
   },
 
   chapters: {

@@ -345,6 +345,140 @@ const formatFullTime = (totalSeconds) => {
   return days > 0 ? `${days}d ${hh}h ${mm}m` : `${hh}h ${mm}m`;
 };
 
+const STORY_EMPTYISH_VALUES = [
+  '',
+  'n/a',
+  'na',
+  'none',
+  'unknown',
+  'not sure',
+  'noot sure',
+  'unsure',
+  'tbd',
+  'idk',
+  'i don’t know',
+  "i don't know",
+  'not certain',
+  'maybe',
+];
+
+const cleanStoryText = (value) => {
+  if (value === null || value === undefined) return '';
+  return String(value).replace(/\s+/g, ' ').trim();
+};
+
+const isEmptyishStoryValue = (value) => {
+  const normalized = cleanStoryText(value).toLowerCase();
+  return STORY_EMPTYISH_VALUES.includes(normalized);
+};
+
+const sanitizeFreeformStoryValue = (value) => {
+  let text = cleanStoryText(value);
+  if (!text) return '';
+
+  const lower = text.toLowerCase();
+  if (STORY_EMPTYISH_VALUES.includes(lower)) return '';
+
+  text = text
+    .replace(/--+\s*already told you.*$/i, '')
+    .replace(/\balready told you.*$/i, '')
+    .replace(/\basked and answered.*$/i, '')
+    .replace(/\bnot sure\b/gi, '')
+    .replace(/\bnoot sure\b/gi, '')
+    .replace(/\bunsure\b/gi, '')
+    .replace(/\bidk\b/gi, '')
+    .replace(/\bi don’t know\b/gi, '')
+    .replace(/\bi don't know\b/gi, '')
+    .replace(/\s+,/g, ',')
+    .replace(/,{2,}/g, ',')
+    .replace(/\s{2,}/g, ' ')
+    .trim();
+
+  if (!text) return '';
+  if (isEmptyishStoryValue(text)) return '';
+
+  return text;
+};
+
+const sanitizeCommaSeparatedStoryValue = (value) => {
+  if (value === null || value === undefined) return '';
+
+  const items = String(value)
+    .split(',')
+    .map((item) => sanitizeFreeformStoryValue(item))
+    .filter(Boolean);
+
+  return [...new Set(items)].join(', ');
+};
+
+const sanitizeStoryFieldValue = (fieldKey, value) => {
+  const commaFields = [
+    'genreContext',
+    'influenceReferences',
+    'finishDirection',
+    'responsePriorities',
+    'tonalGoals',
+  ];
+
+  if (commaFields.includes(fieldKey)) {
+    return sanitizeCommaSeparatedStoryValue(value);
+  }
+
+  return sanitizeFreeformStoryValue(value);
+};
+
+const normalizeStoryDescriptor = (fieldKey, value) => {
+  const v = sanitizeFreeformStoryValue(value).toLowerCase();
+
+  if (!v) return '';
+
+  if (fieldKey === 'attack') {
+    if (v === 'controlled') return 'controlled attack';
+    if (v === 'fast') return 'quick attack';
+  }
+
+  if (fieldKey === 'body') {
+    if (v === 'full') return 'full-bodied response';
+  }
+
+  if (fieldKey === 'sensitivity') {
+    if (v === 'high') return 'high sensitivity';
+  }
+
+  if (fieldKey === 'feel') {
+    if (v === 'deep') return 'deeper feel';
+  }
+
+  if (fieldKey === 'projection') {
+    if (v === 'medium') return 'balanced projection';
+  }
+
+  return sanitizeFreeformStoryValue(value);
+};
+
+const sanitizeStoryFieldGroup = (group = {}) => {
+  const next = {};
+
+  Object.entries(group || {}).forEach(([key, value]) => {
+    next[key] = sanitizeStoryFieldValue(key, value);
+  });
+
+  return next;
+};
+
+const deriveBestProjectName = (project = {}) => {
+  const identifier = getIdentifier(project);
+  return (
+    cleanStoryText(project?.projectName) ||
+    cleanStoryText(project?.title) ||
+    cleanStoryText(project?.name) ||
+    cleanStoryText(project?.lineSerial) ||
+    (identifier !== '—' ? identifier : '') ||
+    cleanStoryText(project?.id) ||
+    ''
+  );
+};
+
 const ensureChecklistStructure = (data) => {
   const fixed = { ...(data || {}) };
 
@@ -487,6 +621,29 @@ const StatusPip = ({ level, status }) => {
   );
 };
 
+const buildQuestionnaireRawFromProject = (project = {}) => {
+  const intake = project?.consultationIntake || {};
+
+  const normalized = {
+    playingWorld: intake?.playingWorld || {},
+    soundGoals: intake?.soundGoals || {},
+    buildDirection: intake?.buildDirection || {},
+    consultPrep: intake?.consultPrep || {},
+  };
+
+  const hasAnyData = Object.values(normalized).some(
+    (section) => section && Object.keys(section).length
+  );
+
+  if (!hasAnyData) return '';
+
+  try {
+    return JSON.stringify(normalized, null, 2);
+  } catch {
+    return '';
+  }
+};
+
 const ManageProjectModal = ({
   isOpen,
   onClose,
@@ -526,6 +683,10 @@ const ManageProjectModal = ({
       hardwareFinish: '',
       woodPreference: '',
       finishDirection: '',
+      responsePriorities: '',
+      tonalGoals: '',
+      preferredSizeDirection: '',
+      consultationContactMethod: '',
     },
     consultationMapped: {
       artistName: '',
@@ -549,6 +710,9 @@ const ManageProjectModal = ({
       tuningRange: '',
       articulation: '',
       feel: '',
+      responsePriorities: '',
+      tonalGoals: '',
+      preferredSizeDirection: '',
     },
     engineRecord: createEmptyStoryEngineRecord(),
     draftPreview: null,
@@ -660,70 +824,85 @@ const ManageProjectModal = ({
 
     const se = projectData.storyEngine || {};
 
+    const hydratedQuestionnaireMapped = sanitizeStoryFieldGroup({
+      artistName: se?.sources?.questionnaireMapped?.artistName || '',
+      styleOfPlaying: se?.sources?.questionnaireMapped?.styleOfPlaying || '',
+      desiredOutcome: se?.sources?.questionnaireMapped?.desiredOutcome || '',
+      genreContext: se?.sources?.questionnaireMapped?.genreContext || '',
+      recordingUse: se?.sources?.questionnaireMapped?.recordingUse || '',
+      liveUse: se?.sources?.questionnaireMapped?.liveUse || '',
+      influenceReferences:
+        se?.sources?.questionnaireMapped?.influenceReferences || '',
+      hardwareFinish: se?.sources?.questionnaireMapped?.hardwareFinish || '',
+      woodPreference: se?.sources?.questionnaireMapped?.woodPreference || '',
+      finishDirection: se?.sources?.questionnaireMapped?.finishDirection || '',
+      responsePriorities:
+        se?.sources?.questionnaireMapped?.responsePriorities || '',
+      tonalGoals: se?.sources?.questionnaireMapped?.tonalGoals || '',
+      preferredSizeDirection:
+        se?.sources?.questionnaireMapped?.preferredSizeDirection || '',
+      consultationContactMethod:
+        se?.sources?.questionnaireMapped?.consultationContactMethod || '',
+    });
+
+    const hydratedConsultationMapped = sanitizeStoryFieldGroup({
+      artistName:
+        se?.sources?.consultationMapped?.artistName ||
+        deriveCustomerName(projectData) ||
+        '',
+      projectName:
+        se?.sources?.consultationMapped?.projectName ||
+        deriveBestProjectName(projectData) ||
+        '',
+      primaryUseCase: se?.sources?.consultationMapped?.primaryUseCase || '',
+      styleOfPlaying: se?.sources?.consultationMapped?.styleOfPlaying || '',
+      diameter:
+        se?.sources?.consultationMapped?.diameter ||
+        projectData?.width ||
+        projectData?.diameter ||
+        '',
+      depth:
+        se?.sources?.consultationMapped?.depth ||
+        projectData?.shellDepth ||
+        projectData?.depth ||
+        '',
+      genreContext: se?.sources?.consultationMapped?.genreContext || '',
+      desiredOutcome: se?.sources?.consultationMapped?.desiredOutcome || '',
+      currentPainPoints:
+        se?.sources?.consultationMapped?.currentPainPoints || '',
+      influenceReferences:
+        se?.sources?.consultationMapped?.influenceReferences || '',
+      visualMood: se?.sources?.consultationMapped?.visualMood || '',
+      finishDirection: se?.sources?.consultationMapped?.finishDirection || '',
+      woodPreference: se?.sources?.consultationMapped?.woodPreference || '',
+      attack: se?.sources?.consultationMapped?.attack || '',
+      body: se?.sources?.consultationMapped?.body || '',
+      sensitivity: se?.sources?.consultationMapped?.sensitivity || '',
+      sustain: se?.sources?.consultationMapped?.sustain || '',
+      projection: se?.sources?.consultationMapped?.projection || '',
+      tuningRange: se?.sources?.consultationMapped?.tuningRange || '',
+      articulation: se?.sources?.consultationMapped?.articulation || '',
+      feel: se?.sources?.consultationMapped?.feel || '',
+      responsePriorities:
+        se?.sources?.consultationMapped?.responsePriorities || '',
+      tonalGoals: se?.sources?.consultationMapped?.tonalGoals || '',
+      preferredSizeDirection:
+        se?.sources?.consultationMapped?.preferredSizeDirection || '',
+    });
+
     setStoryEngineData({
       consultationTranscript: se?.sources?.consultationTranscript || '',
       consultationSummary: se?.sources?.consultationSummary || '',
       adminNotes: se?.sources?.adminNotes || '',
       questionnaireRaw:
-        typeof se?.sources?.questionnaireRaw === 'string'
+        typeof se?.sources?.questionnaireRaw === 'string' &&
+        se.sources.questionnaireRaw.trim()
           ? se.sources.questionnaireRaw
           : se?.sources?.questionnaireRaw
             ? JSON.stringify(se.sources.questionnaireRaw, null, 2)
-            : '',
-      questionnaireMapped: {
-        artistName: se?.sources?.questionnaireMapped?.artistName || '',
-        styleOfPlaying: se?.sources?.questionnaireMapped?.styleOfPlaying || '',
-        desiredOutcome: se?.sources?.questionnaireMapped?.desiredOutcome || '',
-        genreContext: se?.sources?.questionnaireMapped?.genreContext || '',
-        recordingUse: se?.sources?.questionnaireMapped?.recordingUse || '',
-        liveUse: se?.sources?.questionnaireMapped?.liveUse || '',
-        influenceReferences:
-          se?.sources?.questionnaireMapped?.influenceReferences || '',
-        hardwareFinish: se?.sources?.questionnaireMapped?.hardwareFinish || '',
-        woodPreference: se?.sources?.questionnaireMapped?.woodPreference || '',
-        finishDirection:
-          se?.sources?.questionnaireMapped?.finishDirection || '',
-      },
-      consultationMapped: {
-        artistName:
-          se?.sources?.consultationMapped?.artistName ||
-          projectData?.customerName ||
-          '',
-        projectName:
-          se?.sources?.consultationMapped?.projectName ||
-          projectData?.lineSerial ||
-          projectData?.id ||
-          '',
-        primaryUseCase: se?.sources?.consultationMapped?.primaryUseCase || '',
-        styleOfPlaying: se?.sources?.consultationMapped?.styleOfPlaying || '',
-        diameter:
-          se?.sources?.consultationMapped?.diameter ||
-          projectData?.width ||
-          projectData?.diameter ||
-          '',
-        depth:
-          se?.sources?.consultationMapped?.depth ||
-          projectData?.shellDepth ||
-          projectData?.depth ||
-          '',
-        genreContext: se?.sources?.consultationMapped?.genreContext || '',
-        desiredOutcome: se?.sources?.consultationMapped?.desiredOutcome || '',
-        currentPainPoints:
-          se?.sources?.consultationMapped?.currentPainPoints || '',
-        influenceReferences:
-          se?.sources?.consultationMapped?.influenceReferences || '',
-        visualMood: se?.sources?.consultationMapped?.visualMood || '',
-        finishDirection: se?.sources?.consultationMapped?.finishDirection || '',
-        woodPreference: se?.sources?.consultationMapped?.woodPreference || '',
-        attack: se?.sources?.consultationMapped?.attack || '',
-        body: se?.sources?.consultationMapped?.body || '',
-        sensitivity: se?.sources?.consultationMapped?.sensitivity || '',
-        sustain: se?.sources?.consultationMapped?.sustain || '',
-        projection: se?.sources?.consultationMapped?.projection || '',
-        tuningRange: se?.sources?.consultationMapped?.tuningRange || '',
-        articulation: se?.sources?.consultationMapped?.articulation || '',
-        feel: se?.sources?.consultationMapped?.feel || '',
-      },
+            : buildQuestionnaireRawFromProject(projectData),
+      questionnaireMapped: hydratedQuestionnaireMapped,
+      consultationMapped: hydratedConsultationMapped,
       engineRecord: se?.record || createEmptyStoryEngineRecord(),
       draftPreview: se?.draftPreview || null,
     });
@@ -1175,15 +1354,17 @@ const ManageProjectModal = ({
   };
 
   const updateStoryEngineField = (section, key, value) => {
+    const sanitizedValue = sanitizeStoryFieldValue(key, value);
+
     setStoryEngineData((prev) => ({
       ...prev,
       [section]:
         typeof prev[section] === 'object' && prev[section] !== null
           ? {
               ...prev[section],
-              [key]: value,
+              [key]: sanitizedValue,
             }
-          : value,
+          : sanitizedValue,
     }));
   };
 
@@ -1235,12 +1416,352 @@ const ManageProjectModal = ({
     });
   };
 
+  const pickFirstMatch = (sourceText = '', patterns = []) => {
+    const text = String(sourceText || '');
+    for (const pattern of patterns) {
+      const match = text.match(pattern);
+      if (match?.[1]) return match[1].trim();
+    }
+    return '';
+  };
+
+  const extractConsultationMappedFields = ({
+    transcript = '',
+    summary = '',
+    adminNotes = '',
+    projectData = {},
+    existing = {},
+  }) => {
+    const combined = [transcript, summary, adminNotes]
+      .filter(Boolean)
+      .join('\n\n');
+
+    const lower = combined.toLowerCase();
+
+    const next = {
+      artistName: existing.artistName || deriveCustomerName(projectData) || '',
+
+      projectName:
+        existing.projectName || deriveBestProjectName(projectData) || '',
+
+      primaryUseCase:
+        existing.primaryUseCase ||
+        (lower.includes('band')
+          ? 'live performance'
+          : lower.includes('studio')
+            ? 'studio'
+            : ''),
+
+      styleOfPlaying:
+        existing.styleOfPlaying ||
+        (lower.includes('articulate') || lower.includes('dynamic')
+          ? 'articulate and dynamic'
+          : ''),
+
+      diameter:
+        existing.diameter || projectData?.width || projectData?.diameter || '',
+
+      depth:
+        existing.depth || projectData?.shellDepth || projectData?.depth || '',
+
+      genreContext:
+        existing.genreContext ||
+        (lower.includes('norteno')
+          ? 'norteno'
+          : lower.includes('mexican music')
+            ? 'mexican music'
+            : ''),
+
+      desiredOutcome:
+        existing.desiredOutcome ||
+        (lower.includes('inspiring') ? 'sounding inspiring' : ''),
+
+      currentPainPoints:
+        existing.currentPainPoints ||
+        (lower.includes('too dry') ? 'too dry of a snare sound' : ''),
+
+      influenceReferences:
+        existing.influenceReferences ||
+        (lower.includes('metallica') ? 'metallica' : ''),
+
+      visualMood:
+        existing.visualMood || (lower.includes('artistic') ? 'artistic' : ''),
+
+      finishDirection:
+        existing.finishDirection ||
+        (lower.includes('mappa burl') ? 'mappa burl high gloss' : ''),
+
+      woodPreference: existing.woodPreference || '',
+
+      attack: existing.attack || (lower.includes('fast') ? 'fast' : ''),
+
+      body: existing.body || (lower.includes('full') ? 'full' : ''),
+
+      sensitivity:
+        existing.sensitivity ||
+        (lower.includes('high sensitivity') ? 'high' : ''),
+
+      sustain: existing.sustain || '',
+
+      projection:
+        existing.projection || (lower.includes('medium') ? 'medium' : ''),
+
+      tuningRange:
+        existing.tuningRange ||
+        (lower.includes('medium-to-medium-high') ||
+        lower.includes('medium to medium high')
+          ? 'medium-to-medium-high'
+          : ''),
+
+      articulation:
+        existing.articulation || (lower.includes('mixed') ? 'mixed' : ''),
+
+      feel: existing.feel || (lower.includes('deep') ? 'deep' : ''),
+    };
+
+    return next;
+  };
+
+  const extractQuestionnaireMappedFields = ({
+    questionnaireRaw = '',
+    existing = {},
+  }) => {
+    let parsed = null;
+
+    try {
+      parsed = questionnaireRaw ? JSON.parse(questionnaireRaw) : null;
+    } catch {
+      parsed = null;
+    }
+
+    const playingWorld = parsed?.playingWorld || {};
+    const soundGoals = parsed?.soundGoals || {};
+    const buildDirection = parsed?.buildDirection || {};
+    const consultPrep = parsed?.consultPrep || {};
+
+    const genres = Array.isArray(playingWorld?.genres)
+      ? playingWorld.genres.join(', ')
+      : '';
+
+    const playSettings = Array.isArray(playingWorld?.playSettings)
+      ? playingWorld.playSettings.join(', ')
+      : '';
+
+    const shellDirections = Array.isArray(buildDirection?.shellDirectionsOpenTo)
+      ? buildDirection.shellDirectionsOpenTo.join(', ')
+      : '';
+
+    const visualDirection = Array.isArray(buildDirection?.visualDirection)
+      ? buildDirection.visualDirection.join(', ')
+      : buildDirection?.visualDirection || '';
+
+    const responsePriorities = Array.isArray(soundGoals?.responsePriorities)
+      ? soundGoals.responsePriorities.join(', ')
+      : '';
+
+    const tonalGoals = Array.isArray(soundGoals?.tonalGoals)
+      ? soundGoals.tonalGoals.join(', ')
+      : '';
+
+    return {
+      artistName: existing.artistName || '',
+
+      styleOfPlaying:
+        existing.styleOfPlaying ||
+        sanitizeFreeformStoryValue(playingWorld?.playerProfile || ''),
+
+      desiredOutcome:
+        existing.desiredOutcome ||
+        sanitizeFreeformStoryValue(soundGoals?.primaryGoal || ''),
+
+      genreContext:
+        existing.genreContext || sanitizeCommaSeparatedStoryValue(genres),
+
+      recordingUse:
+        existing.recordingUse ||
+        (Array.isArray(playingWorld?.playSettings) &&
+        playingWorld.playSettings.some((v) =>
+          String(v).toLowerCase().includes('record')
+        )
+          ? 'yes'
+          : ''),
+
+      liveUse:
+        existing.liveUse ||
+        (Array.isArray(playingWorld?.playSettings) &&
+        playingWorld.playSettings.some((v) => {
+          const lower = String(v).toLowerCase();
+          return (
+            lower.includes('live') ||
+            lower.includes('show') ||
+            lower.includes('church') ||
+            lower.includes('worship')
+          );
+        })
+          ? 'yes'
+          : ''),
+
+      influenceReferences:
+        existing.influenceReferences ||
+        sanitizeFreeformStoryValue(playSettings),
+
+      hardwareFinish:
+        existing.hardwareFinish ||
+        sanitizeFreeformStoryValue(
+          buildDirection?.hardwareFinishPreference || ''
+        ),
+
+      woodPreference:
+        existing.woodPreference || sanitizeFreeformStoryValue(shellDirections),
+
+      finishDirection:
+        existing.finishDirection || sanitizeFreeformStoryValue(visualDirection),
+
+      responsePriorities:
+        existing.responsePriorities ||
+        sanitizeFreeformStoryValue(responsePriorities),
+
+      tonalGoals: existing.tonalGoals || sanitizeFreeformStoryValue(tonalGoals),
+
+      preferredSizeDirection:
+        existing.preferredSizeDirection ||
+        sanitizeFreeformStoryValue(
+          buildDirection?.preferredSizeDirection || ''
+        ),
+
+      consultationContactMethod:
+        existing.consultationContactMethod ||
+        sanitizeFreeformStoryValue(
+          consultPrep?.consultationContactMethod || ''
+        ),
+    };
+  };
+
   const handleRunStoryEngine = async () => {
     try {
       setStoryEngineRunning(true);
 
       let record = createEmptyStoryEngineRecord();
       record.projectId = projectData?.id || null;
+
+      const autoConsultationMapped = sanitizeStoryFieldGroup({
+        ...(storyEngineData.consultationMapped || {}),
+        ...extractConsultationMappedFields({
+          transcript: storyEngineData.consultationTranscript,
+          summary: storyEngineData.consultationSummary,
+          adminNotes: storyEngineData.adminNotes,
+          projectData,
+          existing: storyEngineData.consultationMapped || {},
+        }),
+      });
+
+      const autoQuestionnaireMapped = sanitizeStoryFieldGroup({
+        ...(storyEngineData.questionnaireMapped || {}),
+        ...extractQuestionnaireMappedFields({
+          questionnaireRaw: storyEngineData.questionnaireRaw,
+          existing: storyEngineData.questionnaireMapped || {},
+        }),
+      });
+
+      const questionnaireRawParsed = (() => {
+        try {
+          return storyEngineData.questionnaireRaw
+            ? JSON.parse(storyEngineData.questionnaireRaw)
+            : null;
+        } catch {
+          return null;
+        }
+      })();
+
+      const tonalGoals = Array.isArray(
+        questionnaireRawParsed?.soundGoals?.tonalGoals
+      )
+        ? questionnaireRawParsed.soundGoals.tonalGoals
+        : [];
+
+      const consultationBackfilledFromQuestionnaire = sanitizeStoryFieldGroup({
+        ...autoConsultationMapped,
+
+        primaryUseCase:
+          autoConsultationMapped.primaryUseCase ||
+          (autoQuestionnaireMapped.liveUse === 'yes'
+            ? 'live performance'
+            : autoQuestionnaireMapped.recordingUse === 'yes'
+              ? 'studio'
+              : ''),
+
+        desiredOutcome:
+          autoConsultationMapped.desiredOutcome ||
+          autoQuestionnaireMapped.desiredOutcome ||
+          '',
+
+        influenceReferences:
+          autoConsultationMapped.influenceReferences ||
+          autoQuestionnaireMapped.influenceReferences ||
+          '',
+
+        finishDirection:
+          autoConsultationMapped.finishDirection ||
+          autoQuestionnaireMapped.finishDirection ||
+          '',
+
+        responsePriorities:
+          autoConsultationMapped.responsePriorities ||
+          autoQuestionnaireMapped.responsePriorities ||
+          '',
+
+        tonalGoals:
+          autoConsultationMapped.tonalGoals ||
+          autoQuestionnaireMapped.tonalGoals ||
+          '',
+
+        preferredSizeDirection:
+          autoConsultationMapped.preferredSizeDirection ||
+          autoQuestionnaireMapped.preferredSizeDirection ||
+          '',
+
+        styleOfPlaying:
+          autoConsultationMapped.styleOfPlaying ||
+          (tonalGoals.includes('Sensitive / ghost-note friendly')
+            ? 'dynamic and touch-sensitive'
+            : ''),
+
+        attack: normalizeStoryDescriptor(
+          'attack',
+          autoConsultationMapped.attack ||
+            (tonalGoals.includes('Warm') ? 'controlled' : '')
+        ),
+
+        body: normalizeStoryDescriptor(
+          'body',
+          autoConsultationMapped.body ||
+            (tonalGoals.includes('Fat / full') ? 'full' : '')
+        ),
+
+        projection: normalizeStoryDescriptor(
+          'projection',
+          autoConsultationMapped.projection
+        ),
+
+        sensitivity: normalizeStoryDescriptor(
+          'sensitivity',
+          autoConsultationMapped.sensitivity ||
+            (tonalGoals.includes('Sensitive / ghost-note friendly')
+              ? 'high'
+              : '')
+        ),
+
+        feel: normalizeStoryDescriptor('feel', autoConsultationMapped.feel),
+
+        visualMood:
+          autoConsultationMapped.visualMood ||
+          autoQuestionnaireMapped.finishDirection ||
+          '',
+      });
+
+      const sanitizedConsultationMapped =
+        consultationBackfilledFromQuestionnaire;
+      const sanitizedQuestionnaireMapped = autoQuestionnaireMapped;
 
       const consultationSource = createSourceEntry({
         type: SOURCE_TYPE.CONSULTATION,
@@ -1276,11 +1797,11 @@ const ManageProjectModal = ({
       record = registerSource(record, adminNotesSource);
 
       const consultationFieldMap = createAdminFieldMapFromConsultation(
-        storyEngineData.consultationMapped
+        sanitizedConsultationMapped
       );
 
       const questionnaireFieldMap = createAdminFieldMapFromQuestionnaire(
-        storyEngineData.questionnaireMapped
+        sanitizedQuestionnaireMapped
       );
 
       record = applyObservedFields(
@@ -1332,6 +1853,8 @@ const ManageProjectModal = ({
 
       const nextState = {
         ...storyEngineData,
+        consultationMapped: sanitizedConsultationMapped,
+        questionnaireMapped: sanitizedQuestionnaireMapped,
         engineRecord: record,
         draftPreview,
       };

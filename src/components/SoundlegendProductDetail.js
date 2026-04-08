@@ -144,11 +144,6 @@ const SoundLegendProductDetail = () => {
       const phonePretty = phoneDigits ? `+1 ${dashed}` : '';
       const phoneE164 = phoneDigits ? `+1${phoneDigits}` : '';
 
-      console.log('[soundlegend] starting lead submit');
-      console.log('[soundlegend] questionnaireToken:', questionnaireToken);
-      console.log('[soundlegend] questionnaireUrl:', questionnaireUrl);
-      console.log('[soundlegend] normalizedEmail:', normalizedEmail);
-
       const submissionRef = await addDoc(
         collection(db, 'soundlegend_submissions'),
         {
@@ -183,45 +178,21 @@ const SoundLegendProductDetail = () => {
         }
       );
 
-      console.log('[soundlegend] submission created:', submissionRef.id);
-      console.log(
-        '[soundlegend] creating questionnaire doc at:',
-        `soundlegend_questionnaires/${questionnaireToken}`
-      );
-
-      try {
-        await setDoc(doc(db, 'soundlegend_questionnaires', questionnaireToken), {
-          token: questionnaireToken,
-          submissionId: submissionRef.id,
-          questionnaireUrl,
-          email: normalizedEmail,
-          fullName: `${firstName} ${lastName}`.trim(),
-          firstName: firstName.trim(),
-          lastName: lastName.trim(),
-          questionnaireCompleted: false,
-          status: 'Questionnaire Pending',
-          stage: 'lead_capture',
-          consultationIntake: buildConsultationIntakeDefaults(),
-          createdAt: serverTimestamp(),
-          updatedAt: serverTimestamp(),
-        });
-
-        console.log(
-          '[soundlegend] questionnaire doc created:',
-          questionnaireToken
-        );
-      } catch (questionnaireErr) {
-        console.error(
-          '[soundlegend] questionnaire doc creation failed:',
-          questionnaireErr
-        );
-        alert(
-          `Submission partially completed. The lead was saved, but the questionnaire doc could not be created.${
-            questionnaireErr?.code ? ` (${questionnaireErr.code})` : ''
-          }`
-        );
-        throw questionnaireErr;
-      }
+      await setDoc(doc(db, 'soundlegend_questionnaires', questionnaireToken), {
+        token: questionnaireToken,
+        submissionId: submissionRef.id,
+        questionnaireUrl,
+        email: normalizedEmail,
+        fullName: `${firstName} ${lastName}`.trim(),
+        firstName: firstName.trim(),
+        lastName: lastName.trim(),
+        questionnaireCompleted: false,
+        status: 'Questionnaire Pending',
+        stage: 'lead_capture',
+        consultationIntake: buildConsultationIntakeDefaults(),
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
+      });
 
       await new Promise((r) => setTimeout(r, 350));
 
@@ -300,8 +271,8 @@ const SoundLegendProductDetail = () => {
             <div className="sl-card-kicker">Private SoundLegend Intake</div>
             <h2 className="sl-card-title">Start Your Journey</h2>
             <p className="sl-form-sub">
-              Tell us where to reach you. We’ll email your private questionnaire
-              so you can begin the SoundLegend experience.
+              Tell us where to reach you. We’ll send your private questionnaire
+              next so you can begin the SoundLegend experience.
             </p>
 
             <form onSubmit={handleSubmit} noValidate>
@@ -430,20 +401,28 @@ const SoundLegendProductDetail = () => {
       </div>
 
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Check Your Email</DialogTitle>
+        <DialogTitle>Thanks</DialogTitle>
         <DialogContent>
           <Typography variant="body1" sx={{ mb: 1.5 }}>
-            Thanks for reaching out. Your SoundLegend inquiry has been received.
+            Thanks for your interest.
           </Typography>
-          <Typography variant="body1" sx={{ mb: 1.5 }}>
-            We’ve received your request. Our team will review it and follow up
-            by email with next steps for your private questionnaire and
-            consultation.
+
+          <Typography variant="body2" sx={{ mb: 1.25 }}>
+            We’ve sent an email to <strong>{email}</strong> with your next
+            steps.
           </Typography>
+
+          <Typography variant="body2" sx={{ mb: 1.25 }}>
+            If you do not see it in your inbox, please check your spam or junk
+            folders.
+          </Typography>
+
           <Typography variant="body2" color="text.secondary">
-            Full SoundLegend Portal access is reserved for clients who move into
-            the custom build process. In some cases, early preview access may be
-            extended during the consultation phase.
+            If you run into any issues, please contact us at{' '}
+            <a href="mailto:support@oberartisandrums.com">
+              support@oberartisandrums.com
+            </a>
+            .
           </Typography>
         </DialogContent>
         <DialogActions>

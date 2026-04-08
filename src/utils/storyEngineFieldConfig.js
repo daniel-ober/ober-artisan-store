@@ -145,6 +145,27 @@ export const STORY_ENGINE_FIELD_CONFIG = {
       suggestable: true,
       recommendationKey: 'feel',
     },
+        {
+      key: 'responsePriorities',
+      label: 'Response Priorities',
+      inputType: 'text',
+      suggestable: true,
+      recommendationKey: 'responsePriorities',
+    },
+    {
+      key: 'tonalGoals',
+      label: 'Tonal Goals',
+      inputType: 'text',
+      suggestable: true,
+      recommendationKey: 'tonalGoals',
+    },
+    {
+      key: 'preferredSizeDirection',
+      label: 'Preferred Size Direction',
+      inputType: 'text',
+      suggestable: true,
+      recommendationKey: 'preferredSizeDirection',
+    },
   ],
 
   questionnaireMapped: [
@@ -216,6 +237,34 @@ export const STORY_ENGINE_FIELD_CONFIG = {
       inputType: 'text',
       suggestable: true,
       recommendationKey: 'finishDirection',
+    },
+        {
+      key: 'responsePriorities',
+      label: 'Response Priorities',
+      inputType: 'text',
+      suggestable: true,
+      recommendationKey: 'responsePriorities',
+    },
+    {
+      key: 'tonalGoals',
+      label: 'Tonal Goals',
+      inputType: 'text',
+      suggestable: true,
+      recommendationKey: 'tonalGoals',
+    },
+    {
+      key: 'preferredSizeDirection',
+      label: 'Preferred Size Direction',
+      inputType: 'text',
+      suggestable: true,
+      recommendationKey: 'preferredSizeDirection',
+    },
+    {
+      key: 'consultationContactMethod',
+      label: 'Consultation Contact Method',
+      inputType: 'text',
+      suggestable: true,
+      recommendationKey: 'consultationContactMethod',
     },
   ],
 };
