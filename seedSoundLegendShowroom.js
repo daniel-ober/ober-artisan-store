@@ -60,7 +60,7 @@ Rick’s new snare isn’t just an instrument. It’s a bridge back to the music
 async function seed() {
   try {
     await db.collection('soundlegend_showroom').doc('SL-003').set(drumData);
-    console.log('✅ Successfully seeded: SL-003');
+    // console.log('✅ Successfully seeded: SL-003');
     process.exit(0);
   } catch (error) {
     console.error('❌ Error seeding data:', error);

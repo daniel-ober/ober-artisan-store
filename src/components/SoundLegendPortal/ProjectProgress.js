@@ -13,6 +13,7 @@ import {
   uploadBytes,
   uploadBytesResumable,
 } from 'firebase/storage';
+import { createPortal } from 'react-dom';
 import { db, storage, app } from '../../firebaseConfig';
 import { calculateProjectProgress } from '../../utils/calculateProjectProgress';
 import { STAGES, STAGE_TEMPLATES } from '../../utils/workflowDefinitions';
@@ -25,8 +26,10 @@ import {
   getStageAdminCaptureChecklist,
   getArchiveCaptureByKey,
 } from '../../utils/projectStageArchiveDefinitions';
-import { createPortal } from 'react-dom';
 import './ProjectProgress.css';
+
+const PAGE_1_TEXTURE = `${process.env.PUBLIC_URL}/story-pages/page1.png`;
+const PAGE_2_TEXTURE = `${process.env.PUBLIC_URL}/story-pages/page2.png`;
 
 const STAGE_MEDIA = {
   discoveryDesign: { stageNumber: 1 },
@@ -2135,33 +2138,6 @@ function getBuildNotesInputs(step, project) {
     'materialDirection'
   );
 
-  console.log('[BUILD NOTES INPUTS DEBUG]', {
-    stageKey,
-    phaseKey,
-    artistIntent,
-    emotionalTargets,
-    influences,
-    visualDirection,
-    customChoices,
-    storyEngineTraits,
-    storyEngineBuildNotes,
-    storyEngineBuildVision,
-    storyEngineMaterialDirection,
-    storyEngineChapterBuildNotes: getStoryEngineDraftText(
-      project,
-      stageKey,
-      'buildNotesStory'
-    ),
-    storyEngineUniqueTraits: getStoryEngineUniqueTraits(project, stageKey),
-    projectStageStory: project?.stageStory?.[stageKey],
-    stageBucket: project?.[stageKey],
-    phaseBucket: project?.[phaseKey],
-    storytellingBucket: project?.storytelling,
-    artistBucket: project?.artistDirection,
-    craftsmanBucket: project?.craftsmanDirection,
-    staticStageStoryBucket: PROJECT_STAGE_STORY?.[stageKey],
-  });
-
   return {
     artistIntent,
     emotionalTargets,
@@ -3072,6 +3048,90 @@ function renderStorypointSections(data) {
   );
 }
 
+function renderStoryActionIcon(icon = 'pen') {
+  if (icon === 'lock') {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none">
+        <path
+          d="M7.5 10V8.4a4.5 4.5 0 1 1 9 0V10"
+          stroke="currentColor"
+          strokeWidth="1.7"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <rect
+          x="5"
+          y="10"
+          width="14"
+          height="10"
+          rx="2.4"
+          stroke="currentColor"
+          strokeWidth="1.7"
+        />
+        <path
+          d="M12 13.2v3.2"
+          stroke="currentColor"
+          strokeWidth="1.7"
+          strokeLinecap="round"
+        />
+      </svg>
+    );
+  }
+
+  if (icon === 'unlock') {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none">
+        <path
+          d="M16.5 10V8.6a4.5 4.5 0 0 0-8.8-1.4"
+          stroke="currentColor"
+          strokeWidth="1.7"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <rect
+          x="5"
+          y="10"
+          width="14"
+          height="10"
+          rx="2.4"
+          stroke="currentColor"
+          strokeWidth="1.7"
+        />
+        <path
+          d="M12 13.2v3.2"
+          stroke="currentColor"
+          strokeWidth="1.7"
+          strokeLinecap="round"
+        />
+      </svg>
+    );
+  }
+
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" fill="none">
+      <path
+        d="M4 16.8V20h3.2l9.4-9.4-3.2-3.2L4 16.8Z"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M12.8 8.2 16 11.4"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+      />
+      <path
+        d="M14.2 6.8 15.6 5.4a1.8 1.8 0 0 1 2.6 0l.4.4a1.8 1.8 0 0 1 0 2.6l-1.4 1.4"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 function renderActiveStorySection({
   activeStorypoint,
   chapterNarrative,
@@ -3099,47 +3159,47 @@ function renderActiveStorySection({
 
   if (activeStorypoint.id === 'overview') {
     return (
-      <>
-        <div className="sl-progress-story-section-intro-card">
-          <div className="sl-progress-story-section-label">
+      <div className="sl-progress-chapter-overview-shell">
+        <div className="sl-progress-chapter-overview-hero">
+          <div className="sl-progress-chapter-overview-kicker">
             Chapter Overview
           </div>
-          <div className="sl-progress-story-section-body">
+          <div className="sl-progress-chapter-overview-body">
             {chapterNarrative.summary}
           </div>
         </div>
 
-        <div className="sl-progress-storypoint-progress-grid">
-          <div className="sl-progress-storypoint-stat">
-            <div className="sl-progress-storypoint-stat-label">
-              Chapter completion
+        <div className="sl-progress-chapter-overview-meta-row">
+          <div className="sl-progress-chapter-overview-meta-card">
+            <div className="sl-progress-chapter-overview-meta-label">
+              Chapter Completion
             </div>
-            <div className="sl-progress-storypoint-stat-value">
+            <div className="sl-progress-chapter-overview-meta-value">
               {currentChapterProgressData.completionPct}%
             </div>
           </div>
 
-          <div className="sl-progress-storypoint-stat">
-            <div className="sl-progress-storypoint-stat-label">
-              Target chapter completion
+          <div className="sl-progress-chapter-overview-meta-card">
+            <div className="sl-progress-chapter-overview-meta-label">
+              Target Chapter Completion
             </div>
-            <div className="sl-progress-storypoint-stat-value">
+            <div className="sl-progress-chapter-overview-meta-value">
               {currentChapterProgressData.targetDate}
             </div>
           </div>
 
-          <div className="sl-progress-storypoint-stat">
-            <div className="sl-progress-storypoint-stat-label">
-              Estimated working hours
+          <div className="sl-progress-chapter-overview-meta-card">
+            <div className="sl-progress-chapter-overview-meta-label">
+              Estimated Working Hours
             </div>
-            <div className="sl-progress-storypoint-stat-value">
+            <div className="sl-progress-chapter-overview-meta-value">
               {currentChapterProgressData.estHours}
             </div>
           </div>
         </div>
 
-        <div className="sl-progress-story-section-block sl-progress-story-section-block--spaced">
-          <div className="sl-progress-story-section-label">
+        <div className="sl-progress-chapter-overview-checklist-shell">
+          <div className="sl-progress-chapter-overview-checklist-label">
             Chapter Checklist
           </div>
 
@@ -3153,14 +3213,14 @@ function renderActiveStorySection({
             showHeader={false}
           />
         </div>
-      </>
+      </div>
     );
   }
 
   if (activeStorypoint.id === 'build-notes') {
     const buildNotesSummary = getStorySectionDisplayText(
       getStoryEngineSectionText(project, activeStep?.key, 'chapterOverview'),
-      'Chapter writing will begin shortly.'
+      'This part of the story is still being shaped. The core direction is set, and more specific chapter writing will appear here as the build takes clearer form.'
     );
 
     const lockedStory = isStorySectionLocked(
@@ -3193,93 +3253,78 @@ function renderActiveStorySection({
 
     return (
       <div className="sl-progress-build-notes-stack">
-        <div className="sl-progress-story-section-intro-card sl-progress-story-section-intro-card--lighter sl-progress-story-section-intro-card--summary">
-          <div className="sl-progress-story-section-label-row">
-            <div className="sl-progress-story-section-label">
-              Tailored Story & Direction
+        <div className="sl-progress-build-notes-card sl-progress-build-notes-card--story">
+          <div className="sl-progress-build-notes-card-header">
+            <div className="sl-progress-build-notes-heading-wrap">
+              <div className="sl-progress-story-section-label">
+                Tailored Story &amp; Direction
+              </div>
+
               {lockedStory ? (
                 <span className="sl-progress-story-lock-pill">Locked</span>
               ) : null}
             </div>
-
-            {isAdmin ? (
-              <div className="sl-progress-story-admin-actions">
-                <button
-                  type="button"
-                  className="sl-progress-stage-edu-resource-link"
-                  disabled={storyBusy || lockedStory}
-                  onClick={() =>
-                    onRegenerateStorySection?.({
-                      stageKey: activeStep?.key,
-                      sectionKey: 'chapterOverview',
-                    })
-                  }
-                >
-                  {storyBusy ? 'Regenerating…' : 'Regenerate'}
-                </button>
-
-                <button
-                  type="button"
-                  className="sl-progress-stage-edu-resource-link"
-                  onClick={() =>
-                    onToggleStorySectionLock?.({
-                      stageKey: activeStep?.key,
-                      sectionKey: 'chapterOverview',
-                      locked: !lockedStory,
-                    })
-                  }
-                >
-                  {lockedStory ? 'Unlock' : 'Lock'}
-                </button>
-              </div>
-            ) : null}
           </div>
 
-          <div className="sl-progress-story-section-body">
+          <div className="sl-progress-story-section-body sl-progress-build-notes-story-body">
             {buildNotesSummary}
           </div>
+
+          {isAdmin ? (
+            <div className="sl-progress-build-notes-card-actions sl-progress-build-notes-card-actions--corner">
+              <button
+                type="button"
+                className="sl-progress-story-action-btn sl-progress-story-action-btn--regenerate"
+                disabled={storyBusy || lockedStory}
+                onClick={() =>
+                  onRegenerateStorySection?.({
+                    stageKey: activeStep?.key,
+                    sectionKey: 'chapterOverview',
+                  })
+                }
+              >
+                <span className="sl-progress-story-action-btn-icon">
+                  {renderStoryActionIcon('pen')}
+                </span>
+                <span>{storyBusy ? 'Regenerating…' : 'Regenerate'}</span>
+              </button>
+
+              <button
+                type="button"
+                className={`sl-progress-story-action-btn ${
+                  lockedStory
+                    ? 'sl-progress-story-action-btn--unlock'
+                    : 'sl-progress-story-action-btn--lock'
+                }`}
+                onClick={() =>
+                  onToggleStorySectionLock?.({
+                    stageKey: activeStep?.key,
+                    sectionKey: 'chapterOverview',
+                    locked: !lockedStory,
+                  })
+                }
+              >
+                <span className="sl-progress-story-action-btn-icon">
+                  {renderStoryActionIcon(lockedStory ? 'unlock' : 'lock')}
+                </span>
+                <span>{lockedStory ? 'Unlock' : 'Lock'}</span>
+              </button>
+            </div>
+          ) : null}
         </div>
 
-        <div className="sl-progress-story-section-intro-card sl-progress-story-section-intro-card--lighter">
-          <div className="sl-progress-story-section-label-row">
-            <div className="sl-progress-story-section-label">
-              Bench Notes
+        <div
+          className="sl-progress-build-notes-card sl-progress-build-notes-card--bench"
+          style={{ '--bench-page-image': `url('${PAGE_1_TEXTURE}')` }}
+        >
+          <div className="sl-progress-build-notes-card-header">
+            <div className="sl-progress-build-notes-heading-wrap">
+              <div className="sl-progress-story-section-label">Bench Notes</div>
+
               {lockedBench ? (
                 <span className="sl-progress-story-lock-pill">Locked</span>
               ) : null}
             </div>
-
-            {isAdmin ? (
-              <div className="sl-progress-story-admin-actions">
-                <button
-                  type="button"
-                  className="sl-progress-stage-edu-resource-link"
-                  disabled={benchBusy || lockedBench}
-                  onClick={() =>
-                    onRegenerateStorySection?.({
-                      stageKey: activeStep?.key,
-                      sectionKey: 'buildNotesStory',
-                    })
-                  }
-                >
-                  {benchBusy ? 'Regenerating…' : 'Regenerate'}
-                </button>
-
-                <button
-                  type="button"
-                  className="sl-progress-stage-edu-resource-link"
-                  onClick={() =>
-                    onToggleStorySectionLock?.({
-                      stageKey: activeStep?.key,
-                      sectionKey: 'buildNotesStory',
-                      locked: !lockedBench,
-                    })
-                  }
-                >
-                  {lockedBench ? 'Unlock' : 'Lock'}
-                </button>
-              </div>
-            ) : null}
           </div>
 
           {benchNotes.length ? (
@@ -3289,10 +3334,59 @@ function renderActiveStorySection({
               ))}
             </ul>
           ) : (
-            <p className="sl-progress-build-notes-placeholder">
-              Craftsman notes will be added soon.
-            </p>
+            <div className="sl-progress-build-notes-placeholder-card">
+              <div className="sl-progress-build-notes-placeholder-kicker">
+                Chapter notes in progress
+              </div>
+              <p className="sl-progress-build-notes-placeholder">
+                This part of the story is still being written. The build has
+                entered this chapter, but the detailed bench notes have not been
+                finalized yet.
+              </p>
+            </div>
           )}
+
+          {isAdmin ? (
+            <div className="sl-progress-build-notes-card-actions sl-progress-build-notes-card-actions--corner">
+              <button
+                type="button"
+                className="sl-progress-story-action-btn sl-progress-story-action-btn--regenerate"
+                disabled={benchBusy || lockedBench}
+                onClick={() =>
+                  onRegenerateStorySection?.({
+                    stageKey: activeStep?.key,
+                    sectionKey: 'buildNotesStory',
+                  })
+                }
+              >
+                <span className="sl-progress-story-action-btn-icon">
+                  {renderStoryActionIcon('pen')}
+                </span>
+                <span>{benchBusy ? 'Regenerating…' : 'Regenerate'}</span>
+              </button>
+
+              <button
+                type="button"
+                className={`sl-progress-story-action-btn ${
+                  lockedBench
+                    ? 'sl-progress-story-action-btn--unlock'
+                    : 'sl-progress-story-action-btn--lock'
+                }`}
+                onClick={() =>
+                  onToggleStorySectionLock?.({
+                    stageKey: activeStep?.key,
+                    sectionKey: 'buildNotesStory',
+                    locked: !lockedBench,
+                  })
+                }
+              >
+                <span className="sl-progress-story-action-btn-icon">
+                  {renderStoryActionIcon(lockedBench ? 'unlock' : 'lock')}
+                </span>
+                <span>{lockedBench ? 'Unlock' : 'Lock'}</span>
+              </button>
+            </div>
+          ) : null}
         </div>
       </div>
     );
@@ -3300,16 +3394,21 @@ function renderActiveStorySection({
 
   if (activeStorypoint.id === 'archive') {
     return (
-      <div className="sl-progress-story-section-block">
+      <div className="sl-progress-archive-shell">
         {isAdmin && activeStageArchiveDefinition ? (
-          <>
-            <div className="sl-progress-stage-archive-admin-controls">
-              <div className="sl-progress-stage-storypoint-data-label">
+          <div className="sl-progress-archive-admin-toolbar">
+            <div className="sl-progress-archive-admin-toolbar-head">
+              <div className="sl-progress-archive-admin-kicker">
+                Chapter Archive Tools
+              </div>
+              <div className="sl-progress-archive-admin-title">
                 Add archive item
               </div>
+            </div>
 
+            <div className="sl-progress-archive-admin-controls">
               <select
-                className="sl-progress-stage-archive-select"
+                className="sl-progress-archive-select"
                 value={selectedArchiveCaptureKey}
                 onChange={(e) => setSelectedArchiveCaptureKey(e.target.value)}
               >
@@ -3326,33 +3425,9 @@ function renderActiveStorySection({
                 <option value="other">Other / custom upload</option>
               </select>
 
-              {selectedArchiveCapture ? (
-                <div className="sl-progress-stage-storypoint-data-card sl-progress-stage-storypoint-data-card--full">
-                  <div className="sl-progress-stage-storypoint-data-label">
-                    Suggested capture details
-                  </div>
-                  <div className="sl-progress-stage-storypoint-data-value sl-progress-stage-storypoint-data-value--body">
-                    <strong>{selectedArchiveCapture.label}</strong>
-                    <br />
-                    {selectedArchiveCapture.purpose}
-                    <br />
-                    Visibility:{' '}
-                    {getArchiveVisibilityLabel(
-                      selectedArchiveCapture.visibility
-                    )}
-                    {selectedArchiveCapture.angle ? (
-                      <>
-                        <br />
-                        Angle: {selectedArchiveCapture.angle}
-                      </>
-                    ) : null}
-                  </div>
-                </div>
-              ) : null}
-
               <button
                 type="button"
-                className={`sl-progress-stage-edu-resource-link sl-progress-stage-upload-trigger is-primary ${
+                className={`sl-progress-archive-upload-btn ${
                   archiveUploading || !selectedArchiveCaptureKey
                     ? 'is-disabled'
                     : ''
@@ -3368,11 +3443,35 @@ function renderActiveStorySection({
                   : 'Upload archive item'}
               </button>
             </div>
-          </>
+
+            {selectedArchiveCapture ? (
+              <div className="sl-progress-archive-selected-capture">
+                <div className="sl-progress-archive-selected-capture-label">
+                  Selected Capture
+                </div>
+                <div className="sl-progress-archive-selected-capture-body">
+                  <strong>{selectedArchiveCapture.label}</strong>
+                  <br />
+                  {selectedArchiveCapture.purpose}
+                  <br />
+                  Visibility:{' '}
+                  {getArchiveVisibilityLabel(
+                    selectedArchiveCapture.visibility
+                  )}
+                  {selectedArchiveCapture.angle ? (
+                    <>
+                      <br />
+                      Angle: {selectedArchiveCapture.angle}
+                    </>
+                  ) : null}
+                </div>
+              </div>
+            ) : null}
+          </div>
         ) : null}
 
         {activeStageArchiveItems.length ? (
-          <div className="sl-progress-stage-edu-resource-grid">
+          <div className="sl-progress-archive-gallery">
             {activeStageArchiveItems.map((item, index) => {
               const itemType =
                 item.mediaType ||
@@ -3385,21 +3484,21 @@ function renderActiveStorySection({
                 <button
                   key={item.id || `${item.url}-${index}`}
                   type="button"
-                  className={`sl-progress-stage-edu-resource-card is-${itemType}`}
+                  className={`sl-progress-archive-artifact-card is-${itemType}`}
                   onClick={() =>
                     setSelectedResourceItem({ ...item, type: itemType })
                   }
                 >
-                  <div className="sl-progress-stage-edu-resource-thumb">
+                  <div className="sl-progress-archive-artifact-thumb">
                     {isImage ? (
                       <img
                         src={item.url}
                         alt={item.title || `Archive item ${index + 1}`}
-                        className="sl-progress-stage-edu-resource-image"
+                        className="sl-progress-archive-artifact-image"
                         loading="lazy"
                       />
                     ) : (
-                      <div className="sl-progress-stage-edu-resource-filetype">
+                      <div className="sl-progress-archive-artifact-filetype">
                         {isVideo
                           ? 'VIDEO'
                           : itemType === 'audio'
@@ -3411,11 +3510,11 @@ function renderActiveStorySection({
                     )}
                   </div>
 
-                  <div className="sl-progress-stage-edu-resource-meta">
-                    <div className="sl-progress-stage-edu-resource-title">
+                  <div className="sl-progress-archive-artifact-meta">
+                    <div className="sl-progress-archive-artifact-title">
                       {item.title || `Archive item ${index + 1}`}
                     </div>
-                    <div className="sl-progress-stage-edu-resource-subtitle">
+                    <div className="sl-progress-archive-artifact-subtitle">
                       {formatResourceTypeLabel(itemType)} •{' '}
                       {getArchiveVisibilityLabel(item.visibility)}
                     </div>
@@ -3425,8 +3524,14 @@ function renderActiveStorySection({
             })}
           </div>
         ) : (
-          <div className="sl-progress-stage-edu-resource-empty">
-            No archival chapter items yet.
+          <div className="sl-progress-archive-empty-state">
+            <div className="sl-progress-archive-empty-title">
+              No archival chapter items yet
+            </div>
+            <div className="sl-progress-archive-empty-copy">
+              This chapter’s artifacts, reference media, approvals, and workshop
+              captures will appear here as they are added.
+            </div>
           </div>
         )}
       </div>
@@ -7953,8 +8058,7 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
           <div
             className="sl-progress-story-book-shell"
             style={{
-              backgroundImage:
-                "linear-gradient(180deg, rgba(248, 240, 224, 0.62), rgba(232, 220, 198, 0.68)), url('/story-pages/page2.png')",
+              backgroundImage: `linear-gradient(180deg, rgba(248, 240, 224, 0.62), rgba(232, 220, 198, 0.68)), url('${PAGE_2_TEXTURE}')`,
               backgroundSize: 'cover',
               backgroundPosition: 'center center',
               backgroundRepeat: 'no-repeat',
@@ -8176,29 +8280,28 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
                   />
                 </div>
 
-                <div className="sl-progress-legacy-admin-field sl-progress-legacy-admin-field--full">
-                  <label className="sl-progress-legacy-admin-label">
-                    Select existing project media
-                  </label>
-                  <select
-                    className="sl-progress-legacy-admin-select"
-                    value={selectedExistingCoverId}
-                    onChange={(e) =>
-                      handleSelectExistingCoverMedia(e.target.value)
-                    }
-                  >
-                    <option value="">Choose project media...</option>
-                    {projectCoverMediaOptions.map((item) => (
-                      <option key={item.id} value={item.id}>
-                        {item.title}
-                        {item.stageKey
-                          ? ` • ${toSentenceCaseLabel(item.stageKey)}`
-                          : ''}
-                        {item.type ? ` • ${item.type}` : ''}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+<div className="sl-progress-legacy-admin-field sl-progress-legacy-admin-field--full">
+  <label className="sl-progress-legacy-admin-label">
+    Upload new cover media
+  </label>
+
+  <div className="sl-progress-legacy-admin-upload-row">
+    <button
+      type="button"
+      className="sl-progress-legacy-admin-btn sl-progress-legacy-admin-btn--ghost"
+      onClick={openCoverRevealFilePicker}
+      disabled={coverUploadBusy}
+    >
+      {coverUploadBusy ? 'Uploading…' : 'Upload cover image / video'}
+    </button>
+
+    {revealCoverMediaTitle ? (
+      <div className="sl-progress-legacy-admin-upload-meta">
+        Current file: {revealCoverMediaTitle}
+      </div>
+    ) : null}
+  </div>
+</div>
               </div>
 
               <div className="sl-progress-legacy-admin-actions">

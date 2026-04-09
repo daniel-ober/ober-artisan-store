@@ -1,5 +1,3 @@
-// src/components/TermsOfService.js
-
 import React, { forwardRef } from 'react';
 import './TermsOfService.css';
 
@@ -22,7 +20,10 @@ const TermsOfService = forwardRef((props, ref) => {
       <p>
         By accessing or using the Ober Artisan Drums website or services, you
         agree to these Terms and our Privacy Policy. If you do not agree, you
-        must not use this site.
+        must not use this site. Certain services, including consultations,
+        design discussions, or intake-related interactions, may involve the use
+        of note-taking, transcription, summarization, or related documentation
+        tools as described in our Privacy Policy.
       </p>
 
       <h2>2. Permitted Use</h2>

@@ -98,10 +98,10 @@ export const functions = getFunctions(app, FUNCTIONS_REGION);
 
 /* ------------------------------- Debug logs ------------------------------- */
 if (typeof window !== "undefined" && process.env.NODE_ENV !== "production") {
-  console.log("[firebase] projectId(app):", app.options?.projectId);
-  console.log("[firebase] projectId(auth):", auth.app?.options?.projectId);
-  console.log("[firebase] projectId(db):", db.app?.options?.projectId);
-  console.log("[firebase] Functions region:", FUNCTIONS_REGION);
+  // console.log("[firebase] projectId(app):", app.options?.projectId);
+  // console.log("[firebase] projectId(auth):", auth.app?.options?.projectId);
+  // console.log("[firebase] projectId(db):", db.app?.options?.projectId);
+  // console.log("[firebase] Functions region:", FUNCTIONS_REGION);
 }
 
 export const signOut = firebaseSignOut;

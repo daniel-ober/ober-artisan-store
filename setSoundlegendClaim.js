@@ -11,7 +11,7 @@ async function setSoundlegendClaim() {
   try {
     const user = await admin.auth().getUserByEmail(email);
     await admin.auth().setCustomUserClaims(user.uid, { isSoundlegend: true });
-    console.log(`✅ Custom claim 'isSoundlegend: true' set for ${email}`);
+    // console.log(`✅ Custom claim 'isSoundlegend: true' set for ${email}`);
   } catch (err) {
     console.error('❌ Failed to set claim:', err.message);
   }

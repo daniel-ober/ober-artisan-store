@@ -8,7 +8,7 @@ admin.initializeApp({
 
 admin.auth().setCustomUserClaims("kUBVZnh1EDX1W6CS2c09Rfdshjw2", {})
   .then(() => {
-    console.log("✅ Cleared all custom claims");
+    // console.log("✅ Cleared all custom claims");
     process.exit(0);
   })
   .catch((err) => {

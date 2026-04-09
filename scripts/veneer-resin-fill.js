@@ -122,7 +122,7 @@ async function main() {
     .toBuffer();
 
   fs.writeFileSync(outputPath, out);
-  console.log(`✅ Saved ${outputPath}`);
+  // console.log(`✅ Saved ${outputPath}`);
 }
 
 main().catch(e => {

@@ -153,7 +153,7 @@ async function main() {
 
   const b64 = res.data[0].b64_json;
   fs.writeFileSync(outputPath, Buffer.from(b64, "base64"));
-  console.log(`✅ Saved ${outputPath}`);
+  // console.log(`✅ Saved ${outputPath}`);
 }
 
 main().catch((err) => {

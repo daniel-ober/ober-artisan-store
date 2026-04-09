@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { STAGE_TEMPLATES } from '../utils/workflowDefinitions';
 import {
   doc,
@@ -164,6 +165,53 @@ const buildPhases = STEP_KEYS.map((key) => ({
   label: STEP_META[key]?.label || key,
   phaseId: STEP_META[key]?.phaseId || null,
 }));
+
+const ADMIN_SECTIONS = {
+  RECORD: 'record',
+  INTAKE: 'intake',
+  STORY_STUDIO: 'storyStudio',
+  BUILD: 'build',
+};
+
+const ADMIN_NAV_GROUPS = [
+  {
+    label: 'Project',
+    items: [
+      { key: ADMIN_SECTIONS.RECORD, label: 'Project Record' },
+      { key: ADMIN_SECTIONS.INTAKE, label: 'Intake & Direction' },
+      { key: ADMIN_SECTIONS.STORY_STUDIO, label: 'Story Studio' },
+    ],
+  },
+];
+
+const getProjectHeaderTitle = (project = {}) => {
+  const identifier = getIdentifier(project);
+  const line =
+    val(
+      project.artisanLine,
+      project.series,
+      project.productLine,
+      project.line
+    ) || 'SoundLegend';
+
+  return identifier !== '—' ? identifier : line;
+};
+
+const getProjectHeaderSubtitle = (project = {}) => {
+  const customerName = deriveCustomerName(project);
+  const customerEmail = deriveCustomerEmail(project);
+
+  if (customerName && customerEmail)
+    return `${customerName} • ${customerEmail}`;
+  if (customerName) return customerName;
+  if (customerEmail) return customerEmail;
+  return 'No customer linked yet';
+};
+
+const getLinkedUserStatusLabel = (linkedUser) => {
+  if (!linkedUser) return 'Not linked';
+  return linkedUser.email ? `Linked • ${linkedUser.email}` : 'Linked';
+};
 
 const STEPKEY_TO_CHECKPOINT_PREFIX = {
   discoveryDesign: 'discoveryDesign',
@@ -413,16 +461,36 @@ const sanitizeCommaSeparatedStoryValue = (value) => {
 };
 
 const sanitizeStoryFieldValue = (fieldKey, value) => {
-  const commaFields = [
+  const multiValueFields = [
     'genreContext',
     'influenceReferences',
-    'finishDirection',
     'responsePriorities',
     'tonalGoals',
+    'woodPreference',
   ];
 
-  if (commaFields.includes(fieldKey)) {
+  const strictSingleSelectFields = [
+    'styleOfPlaying',
+    'desiredOutcome',
+    'hardwareFinish',
+    'preferredSizeDirection',
+    'consultationContactMethod',
+    'primaryUseCase',
+    'attack',
+    'body',
+    'sensitivity',
+    'projection',
+    'tuningRange',
+    'articulation',
+    'feel',
+  ];
+
+  if (multiValueFields.includes(fieldKey)) {
     return sanitizeCommaSeparatedStoryValue(value);
+  }
+
+  if (strictSingleSelectFields.includes(fieldKey)) {
+    return sanitizeFreeformStoryValue(value);
   }
 
   return sanitizeFreeformStoryValue(value);
@@ -829,6 +897,293 @@ Return only an array of bullet strings.
 `.trim(),
 };
 
+const STORY_MULTI_VALUE_DELIMITER = ', ';
+
+const splitMultiValue = (value) =>
+  String(value || '')
+    .split(',')
+    .map((v) => v.trim())
+    .filter(Boolean);
+
+const joinMultiValue = (values = []) =>
+  [
+    ...new Set((values || []).map((v) => String(v).trim()).filter(Boolean)),
+  ].join(STORY_MULTI_VALUE_DELIMITER);
+
+const getOtherValues = (selectedValues = [], allowedOptions = []) => {
+  const allowed = new Set((allowedOptions || []).map((v) => String(v).trim()));
+  return (selectedValues || []).filter((v) => !allowed.has(String(v).trim()));
+};
+
+const QUESTIONNAIRE_OPTION_SETS = {
+  styleOfPlaying: [
+    'Collector',
+    'Gigging drummer',
+    'Studio drummer',
+    'Songwriter / producer',
+    'Weekend player',
+    'Worship drummer',
+    'Educator',
+    'Hobbyist',
+  ],
+  desiredOutcome: [
+    'Something unique I cannot get off the shelf',
+    'A better fit for my sound',
+    'A more inspiring instrument',
+    'A collectible / legacy piece',
+    'A versatile all-around snare',
+  ],
+  genreContext: [
+    'Rock',
+    'Pop',
+    'Country',
+    'Americana',
+    'Indie',
+    'Singer-songwriter',
+    'Worship',
+    'Jazz',
+    'Fusion',
+    'Funk',
+    'R&B',
+    'Hip-hop',
+    'Latin',
+    'Metal',
+    'Alternative',
+  ],
+  influenceReferences: [
+    'Collecting',
+    'Recording',
+    'Live performance',
+    'Worship',
+    'Studio work',
+    'Legacy / heirloom',
+  ],
+  hardwareFinish: ['Chrome', 'Black nickel', 'Brass / gold'],
+  woodPreference: [
+    'Feuzon (Hybrid)',
+    'Stave',
+    'Ply',
+    'I trust your recommendation',
+  ],
+  finishDirection: [
+    'Natural oil',
+    'Satin clear',
+    'High gloss clear',
+    'Burst / fade',
+    'Painted finish',
+    'Resin-accented',
+    'I trust your recommendation',
+  ],
+  responsePriorities: [
+    'Brush sensitivity',
+    'Consistent feel across tunings',
+    'Easy to record',
+    'Easy to mix live',
+    'Clear ghost notes',
+    'Smooth dynamic range',
+    'Strong backbeat',
+    'Wide tuning range',
+  ],
+  tonalGoals: [
+    'Dry / controlled',
+    'Sensitive / ghost-note friendly',
+    'Crisp',
+    'Fat / full',
+    'Open / resonant',
+    'Dark',
+    'Bright',
+    'Warm',
+    'Articulate',
+    'Punchy',
+  ],
+  preferredSizeDirection: [
+    'Under 13"',
+    '13"',
+    '14"',
+    'Over 14"',
+    'Not sure yet',
+  ],
+  consultationContactMethod: ['Text message', 'Phone call', 'Email'],
+  primaryUseCase: ['live performance', 'studio', 'both', 'collecting'],
+  attack: ['quick attack', 'controlled attack', 'soft attack'],
+  body: ['full-bodied response', 'balanced body', 'lean body'],
+  sensitivity: ['high sensitivity', 'moderate sensitivity', 'low sensitivity'],
+  projection: ['low', 'balanced projection', 'high'],
+  tuningRange: ['low', 'medium', 'medium-to-medium-high', 'high', 'wide'],
+  articulation: ['dry', 'balanced', 'mixed', 'crisp'],
+  feel: ['deeper feel', 'balanced feel', 'tight feel'],
+};
+
+const prettyPrintQuestionnaireRaw = (raw) => {
+  if (!raw) return '';
+
+  try {
+    return JSON.stringify(JSON.parse(raw), null, 2);
+  } catch {
+    return String(raw).trim();
+  }
+};
+
+const normalizePersonName = (value = '') =>
+  String(value || '')
+    .toLowerCase()
+    .replace(/[^a-z\s'-]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+const extractFirstName = (value = '') => {
+  const normalized = normalizePersonName(value);
+  return normalized.split(' ')[0] || '';
+};
+
+const mapSpeakerLabelToRole = (label, artistName = '') => {
+  const normalized = normalizePersonName(label);
+  const artistFirst = extractFirstName(artistName);
+
+  if (!normalized) return artistName || 'Artist';
+
+  if (
+    [
+      'craftsman',
+      'dan',
+      'builder',
+      'host',
+      'maker',
+      'ober',
+      'ober artisan',
+    ].includes(normalized)
+  ) {
+    return 'Ober Artisan';
+  }
+
+  if (['artist', 'customer', 'client', 'caller'].includes(normalized)) {
+    return artistName || 'Artist';
+  }
+
+  if (artistFirst && normalized === artistFirst) {
+    return artistName || 'Artist';
+  }
+
+  return artistName || 'Artist';
+};
+
+const buildSmartTranscriptTurns = (rawText, artistName = '') => {
+  const text = String(rawText || '')
+    .replace(/\r/g, '')
+    .trim();
+
+  if (!text) return [];
+
+  const lines = text
+    .split('\n')
+    .map((line) => line.trim())
+    .filter(Boolean);
+
+  const explicitSpeakerLines = lines.filter((line) =>
+    /^[A-Za-z][A-Za-z\s'-]{1,40}:\s+/.test(line)
+  );
+
+  if (explicitSpeakerLines.length >= 2) {
+    return explicitSpeakerLines.map((line, idx) => {
+      const match = line.match(/^([A-Za-z][A-Za-z\s'-]{1,40}):\s+([\s\S]+)$/);
+      const rawSpeaker = match?.[1] || '';
+      const content = match?.[2] || line;
+
+      return {
+        id: `turn-${idx}`,
+        speaker: mapSpeakerLabelToRole(rawSpeaker, artistName),
+        text: content.trim(),
+      };
+    });
+  }
+
+  return [
+    {
+      id: 'turn-0',
+      speaker: 'Ober Artisan',
+      text,
+    },
+  ];
+};
+
+function splitTranscriptIntoChunks(text = '', maxChars = 3500) {
+  const clean = String(text || '')
+    .replace(/\r/g, '')
+    .trim();
+  if (!clean) return [];
+
+  const paragraphs = clean
+    .split(/\n{2,}/)
+    .map((p) => p.trim())
+    .filter(Boolean);
+
+  const chunks = [];
+  let current = '';
+
+  for (const paragraph of paragraphs) {
+    if (!current) {
+      current = paragraph;
+      continue;
+    }
+
+    if ((current + '\n\n' + paragraph).length <= maxChars) {
+      current += `\n\n${paragraph}`;
+    } else {
+      chunks.push(current);
+      current = paragraph;
+    }
+  }
+
+  if (current) chunks.push(current);
+
+  // fallback for giant single paragraph transcripts
+  return chunks.flatMap((chunk) => {
+    if (chunk.length <= maxChars) return [chunk];
+
+    const pieces = [];
+    let start = 0;
+
+    while (start < chunk.length) {
+      pieces.push(chunk.slice(start, start + maxChars));
+      start += maxChars;
+    }
+
+    return pieces;
+  });
+}
+
+function mergeAdjacentTurns(turns = []) {
+  const merged = [];
+
+  turns.forEach((turn, idx) => {
+    const speaker = String(turn?.speaker || '').trim();
+    const text = String(turn?.text || '').trim();
+    const uncertain = !!turn?.uncertain;
+
+    if (!speaker || !text) return;
+
+    const prev = merged[merged.length - 1];
+
+    if (prev && prev.speaker === speaker) {
+      prev.text = `${prev.text} ${text}`.trim();
+      prev.uncertain = prev.uncertain || uncertain;
+      return;
+    }
+
+    merged.push({
+      id: `turn-${idx}`,
+      speaker,
+      text,
+      uncertain,
+    });
+  });
+
+  return merged.map((turn, idx) => ({
+    ...turn,
+    id: `turn-${idx}`,
+  }));
+}
+
 const ManageProjectModal = ({
   isOpen,
   onClose,
@@ -838,19 +1193,20 @@ const ManageProjectModal = ({
   const navigate = useNavigate();
   const { startImpersonation } = useImpersonation();
 
-  const [selectedTab, setSelectedTab] = useState('details');
+  const [selectedTab, setSelectedTab] = useState(ADMIN_SECTIONS.RECORD);
   const [editableData, setEditableData] = useState({});
   const [isEditing, setIsEditing] = useState(false);
   const [status, setStatus] = useState('Unknown');
   const [showSnackbar, setShowSnackbar] = useState(false);
   const [originalData, setOriginalData] = useState({});
-  const [mobileMetaOpen, setMobileMetaOpen] = useState(false);
 
   const [expandedStepKey, setExpandedStepKey] = useState(null);
   const [selectedStepKey, setSelectedStepKey] = useState(null);
   const [selectedSubIndex, setSelectedSubIndex] = useState(0);
 
   const [linkedUser, setLinkedUser] = useState(null);
+
+  const [outstandingHelpItem, setOutstandingHelpItem] = useState(null);
 
   const [storyEngineData, setStoryEngineData] = useState({
     consultationTranscript: '',
@@ -903,8 +1259,24 @@ const ManageProjectModal = ({
     draftPreview: null,
   });
 
-  const [storyEngineRunning, setStoryEngineRunning] = useState(false);
+  const [expandedIntakeSections, setExpandedIntakeSections] = useState({
+    sources: true,
+    consultation: false,
+    questionnaire: false,
+  });
 
+  const toggleIntakeSection = (sectionKey) => {
+    setExpandedIntakeSections((prev) => ({
+      ...prev,
+      [sectionKey]: !prev[sectionKey],
+    }));
+  };
+
+  const [storyEngineRunning, setStoryEngineRunning] = useState(false);
+  const [normalizedTranscriptTurns, setNormalizedTranscriptTurns] = useState(
+    []
+  );
+  const [isNormalizingTranscript, setIsNormalizingTranscript] = useState(false);
   const determineOverallStatus = (data = editableData) => {
     const all = buildPhases.flatMap((p) => data[p.key]?.checklist || []);
     const total = all.length;
@@ -961,27 +1333,6 @@ const ManageProjectModal = ({
       'Unknown'
     );
   };
-
-  useEffect(() => {
-    if (!isOpen) return;
-
-    const mq = window.matchMedia('(max-width: 920px)');
-    const apply = () => setMobileMetaOpen(false);
-
-    if (mq.matches) apply();
-
-    const onChange = (e) => {
-      if (e.matches) setMobileMetaOpen(false);
-    };
-
-    if (mq.addEventListener) mq.addEventListener('change', onChange);
-    else mq.addListener(onChange);
-
-    return () => {
-      if (mq.removeEventListener) mq.removeEventListener('change', onChange);
-      else mq.removeListener(onChange);
-    };
-  }, [isOpen]);
 
   useEffect(() => {
     if (!projectData) return;
@@ -1096,13 +1447,19 @@ const ManageProjectModal = ({
       engineRecord: se?.record || createEmptyStoryEngineRecord(),
       draftPreview: se?.draftPreview || null,
     });
+
+    setNormalizedTranscriptTurns(
+      Array.isArray(se?.sources?.consultationTranscriptTurns)
+        ? se.sources.consultationTranscriptTurns
+        : []
+    );
   }, [projectData]);
 
   useEffect(() => {
     if (!isOpen) return;
 
-    setSelectedTab('details');
-    setSelectedStepKey(null);
+    setSelectedTab(ADMIN_SECTIONS.RECORD);
+    setSelectedStepKey(buildPhases[0]?.key || null);
     setSelectedSubIndex(0);
     setExpandedStepKey(buildPhases[0]?.key || null);
     setIsEditing(false);
@@ -1486,11 +1843,14 @@ const ManageProjectModal = ({
   const parentOrderId =
     projectData?.parentOrderId || projectData?.orderId || '';
   const idText = projectData?.id || '—';
+  const projectHeaderTitle = getProjectHeaderTitle(projectData);
+  const projectHeaderSubtitle = getProjectHeaderSubtitle(projectData);
+  const linkedUserStatus = getLinkedUserStatusLabel(linkedUser);
 
   const selectedStepLabel =
-    selectedTab === 'details' || selectedTab === 'storyEngine'
+    selectedTab !== ADMIN_SECTIONS.BUILD
       ? currentPhaseLabel
-      : buildPhases.find((p) => p.key === selectedTab)?.label ||
+      : buildPhases.find((p) => p.key === selectedStepKey)?.label ||
         currentPhaseLabel;
 
   const currentChecklist =
@@ -1507,12 +1867,30 @@ const ManageProjectModal = ({
     (currentSub ? getSubstepLabelText(currentSub) : '') || selectedStepLabel;
 
   const getMobileSelectValue = () => {
-    if (selectedTab === 'details') return 'details';
-    if (selectedTab === 'storyEngine') return 'storyEngine';
-    if (!selectedStepKey) return 'details';
+    if (selectedTab !== ADMIN_SECTIONS.BUILD) return selectedTab;
+    if (!selectedStepKey) return ADMIN_SECTIONS.BUILD;
+
     const idx = Number.isFinite(selectedSubIndex) ? selectedSubIndex : 0;
-    return `${selectedStepKey}::${idx}`;
+    return `${ADMIN_SECTIONS.BUILD}::${selectedStepKey}::${idx}`;
   };
+
+  const artistDisplayName =
+    storyEngineData?.consultationMapped?.artistName ||
+    storyEngineData?.questionnaireMapped?.artistName ||
+    deriveCustomerName(projectData) ||
+    'Artist';
+
+  const formattedQuestionnaireRaw = prettyPrintQuestionnaireRaw(
+    storyEngineData.questionnaireRaw
+  );
+
+  const smartTranscriptTurns =
+    normalizedTranscriptTurns.length > 0
+      ? normalizedTranscriptTurns
+      : buildSmartTranscriptTurns(
+          storyEngineData.consultationTranscript,
+          artistDisplayName
+        );
 
   const handleViewAsCustomer = () => {
     const projectId = projectData?.id;
@@ -1541,6 +1919,86 @@ const ManageProjectModal = ({
     }
 
     navigate(`/legacy?${params.toString()}`);
+  };
+
+  const handleNormalizeTranscript = async () => {
+    const rawTranscript = String(
+      storyEngineData.consultationTranscript || ''
+    ).trim();
+
+    const resolvedArtistName =
+      storyEngineData?.consultationMapped?.artistName ||
+      storyEngineData?.questionnaireMapped?.artistName ||
+      deriveCustomerName(projectData) ||
+      '';
+
+    if (!rawTranscript) return;
+
+    try {
+      setIsNormalizingTranscript(true);
+
+      const chunks = splitTranscriptIntoChunks(rawTranscript, 3500);
+      const allTurns = [];
+
+      for (const chunk of chunks) {
+        const turns = await normalizeConsultationTranscript({
+          rawTranscript: chunk,
+          artistName: resolvedArtistName,
+        });
+
+        const cleanedTurns = (Array.isArray(turns) ? turns : [])
+          .map((turn) => ({
+            speaker:
+              turn?.speaker === 'Ober Artisan'
+                ? 'Ober Artisan'
+                : resolvedArtistName || 'Artist',
+            text: String(turn?.text || '').trim(),
+            uncertain: !!turn?.uncertain,
+          }))
+          .filter((turn) => turn.text);
+
+        allTurns.push(...cleanedTurns);
+      }
+
+      const mergedTurns = mergeAdjacentTurns(allTurns);
+
+      if (!mergedTurns.length) {
+        throw new Error('Transcript normalization returned no usable turns');
+      }
+
+      setNormalizedTranscriptTurns(mergedTurns);
+
+      await saveToFirestore({
+        storyEngine: {
+          sources: {
+            consultationTranscript: storyEngineData.consultationTranscript,
+            consultationTranscriptTurns: mergedTurns,
+            consultationSummary: storyEngineData.consultationSummary,
+            adminNotes: storyEngineData.adminNotes,
+            questionnaireRaw: storyEngineData.questionnaireRaw,
+            questionnaireMapped: storyEngineData.questionnaireMapped,
+            consultationMapped: storyEngineData.consultationMapped,
+          },
+          record: storyEngineData.engineRecord,
+          draftPreview: storyEngineData.draftPreview,
+          lastUpdatedAt: new Date().toISOString(),
+        },
+      });
+
+      setShowSnackbar(true);
+    } catch (err) {
+      console.error(
+        '[ManageProjectModal] Transcript normalization failed:',
+        err?.message,
+        err
+      );
+
+      window.alert(
+        `Transcript formatting failed:\n\n${err?.message || 'Unknown error'}`
+      );
+    } finally {
+      setIsNormalizingTranscript(false);
+    }
   };
 
   const updateStoryEngineField = (section, key, value) => {
@@ -1590,6 +2048,7 @@ const ManageProjectModal = ({
     const payload = payloadOverride || {
       sources: {
         consultationTranscript: storyEngineData.consultationTranscript,
+        consultationTranscriptTurns: normalizedTranscriptTurns,
         consultationSummary: storyEngineData.consultationSummary,
         adminNotes: storyEngineData.adminNotes,
         questionnaireRaw: storyEngineData.questionnaireRaw,
@@ -1659,6 +2118,7 @@ const ManageProjectModal = ({
     await saveStoryEngineToProject({
       sources: {
         consultationTranscript: nextState.consultationTranscript,
+        consultationTranscriptTurns: normalizedTranscriptTurns,
         consultationSummary: nextState.consultationSummary,
         adminNotes: nextState.adminNotes,
         questionnaireRaw: nextState.questionnaireRaw,
@@ -1774,6 +2234,7 @@ const ManageProjectModal = ({
       await saveStoryEngineToProject({
         sources: {
           consultationTranscript: nextState.consultationTranscript,
+          consultationTranscriptTurns: normalizedTranscriptTurns,
           consultationSummary: nextState.consultationSummary,
           adminNotes: nextState.adminNotes,
           questionnaireRaw: nextState.questionnaireRaw,
@@ -1812,31 +2273,224 @@ const ManageProjectModal = ({
     projectData = {},
     existing = {},
   }) => {
-    const combined = [transcript, summary, adminNotes]
+    const sourceBlocks = [transcript, summary, adminNotes]
       .filter(Boolean)
-      .join('\n\n');
+      .map((v) => String(v));
 
+    const combined = sourceBlocks.join('\n\n');
     const lower = combined.toLowerCase();
 
-    const next = {
+    const cleanExtract = (value) => {
+      const cleaned = sanitizeFreeformStoryValue(value)
+        .replace(/^(i'm|i am|it'?s|that'?s|we'?re|we are)\b[:\s-]*/i, '')
+        .replace(/^(like|just|maybe|probably)\b[:\s-]*/i, '')
+        .trim();
+
+      if (!cleaned) return '';
+      if (cleaned.length < 3) return '';
+      if (/^(yes|no|okay|ok|cool|sure)$/i.test(cleaned)) return '';
+      return cleaned;
+    };
+
+    const firstMatch = (...patterns) => {
+      for (const pattern of patterns) {
+        const match = combined.match(pattern);
+        if (match?.[1]) {
+          const cleaned = cleanExtract(match[1]);
+          if (cleaned) return cleaned;
+        }
+      }
+      return '';
+    };
+
+    const detectAny = (phrases = []) =>
+      phrases.some((phrase) => lower.includes(String(phrase).toLowerCase()));
+
+    const collectOptionsMentioned = (options = []) =>
+      options.filter((option) => lower.includes(String(option).toLowerCase()));
+
+    const genreMentions = collectOptionsMentioned([
+      'rock',
+      'pop',
+      'country',
+      'americana',
+      'indie',
+      'worship',
+      'jazz',
+      'fusion',
+      'funk',
+      'r&b',
+      'hip-hop',
+      'latin',
+      'metal',
+      'alternative',
+    ]);
+
+    const tonalMentions = collectOptionsMentioned([
+      'dry / controlled',
+      'sensitive / ghost-note friendly',
+      'crisp',
+      'fat / full',
+      'open / resonant',
+      'dark',
+      'bright',
+      'warm',
+      'articulate',
+      'punchy',
+    ]);
+
+    const responseMentions = collectOptionsMentioned([
+      'brush sensitivity',
+      'consistent feel across tunings',
+      'easy to record',
+      'easy to mix live',
+      'clear ghost notes',
+      'smooth dynamic range',
+      'strong backbeat',
+      'wide tuning range',
+    ]);
+
+    const finishMentions = collectOptionsMentioned([
+      'natural oil',
+      'satin clear',
+      'high gloss clear',
+      'burst / fade',
+      'painted finish',
+      'resin-accented',
+      'mappa burl',
+    ]);
+
+    const hardwareMentions = collectOptionsMentioned([
+      'chrome',
+      'black nickel',
+      'brass / gold',
+      'brass',
+      'gold',
+    ]);
+
+    const sizeDirection =
+      firstMatch(
+        /\b(?:size|diameter|preferred size|size direction)\s*[:\-]\s*([^\n.]+)/i,
+        /\b(over 14"|14"|13"|under 13")\b/i
+      ) || '';
+
+    const desiredOutcome =
+      firstMatch(
+        /\b(?:goal|desired outcome|main goal|primary goal)\s*[:\-]\s*([^\n.]+)/i,
+        /\blooking for\s+([^\n.]+)/i,
+        /\bwant(?:ing)?\s+([^\n.]+)/i
+      ) ||
+      (detectAny(['off the shelf'])
+        ? 'Something unique I cannot get off the shelf'
+        : '');
+
+    const currentPainPoints =
+      firstMatch(
+        /\b(?:pain point|pain points|frustration|problem|issue)\s*[:\-]\s*([^\n.]+)/i,
+        /\btoo\s+dry\b([^.\n]*)/i
+      ) || '';
+
+    const influenceMentions = collectOptionsMentioned([
+      'collecting',
+      'recording',
+      'live performance',
+      'worship',
+      'studio work',
+      'legacy / heirloom',
+      'metallica',
+    ]);
+
+    const visualMood =
+      firstMatch(
+        /\b(?:visual mood|visual direction|look|aesthetic)\s*[:\-]\s*([^\n.]+)/i
+      ) || '';
+
+    const finishDirection =
+      firstMatch(
+        /\b(?:finish direction|finish|surface direction)\s*[:\-]\s*([^\n.]+)/i
+      ) || (finishMentions.length ? finishMentions.join(', ') : '');
+
+    const woodPreference =
+      firstMatch(
+        /\b(?:wood preference|shell wood|wood)\s*[:\-]\s*([^\n.]+)/i
+      ) || '';
+
+    const styleOfPlaying =
+      firstMatch(
+        /\b(?:style of playing|playing style|player profile)\s*[:\-]\s*([^\n.]+)/i
+      ) ||
+      (detectAny(['ghost note', 'dynamic'])
+        ? 'dynamic and touch-sensitive'
+        : '');
+
+    const primaryUseCase =
+      firstMatch(/\b(?:primary use|use case)\s*[:\-]\s*([^\n.]+)/i) ||
+      (detectAny(['live performance', 'playing live', 'live shows'])
+        ? 'live performance'
+        : detectAny(['studio', 'recording'])
+          ? 'studio'
+          : '');
+
+    const attack = detectAny(['quick attack'])
+      ? 'quick attack'
+      : detectAny(['controlled attack', 'controlled'])
+        ? 'controlled attack'
+        : '';
+
+    const body = detectAny([
+      'fat / full',
+      'full-bodied',
+      'full body',
+      'full-bodied response',
+    ])
+      ? 'full-bodied response'
+      : '';
+
+    const sensitivity = detectAny([
+      'high sensitivity',
+      'ghost-note friendly',
+      'ghost notes',
+    ])
+      ? 'high sensitivity'
+      : '';
+
+    const projection = detectAny(['balanced projection'])
+      ? 'balanced projection'
+      : detectAny(['high projection'])
+        ? 'high'
+        : detectAny(['low projection'])
+          ? 'low'
+          : '';
+
+    const tuningRange =
+      firstMatch(
+        /\b(?:tuning range)\s*[:\-]\s*([^\n.]+)/i,
+        /\b(medium-to-medium-high|medium to medium high|wide|high|medium|low)\b/i
+      ) || '';
+
+    const articulation = detectAny(['mixed'])
+      ? 'mixed'
+      : detectAny(['crisp'])
+        ? 'crisp'
+        : detectAny(['dry'])
+          ? 'dry'
+          : '';
+
+    const feel = detectAny(['deeper feel', 'deep feel'])
+      ? 'deeper feel'
+      : detectAny(['tight feel'])
+        ? 'tight feel'
+        : '';
+
+    return {
       artistName: existing.artistName || deriveCustomerName(projectData) || '',
 
       projectName:
         existing.projectName || deriveBestProjectName(projectData) || '',
 
-      primaryUseCase:
-        existing.primaryUseCase ||
-        (lower.includes('band')
-          ? 'live performance'
-          : lower.includes('studio')
-            ? 'studio'
-            : ''),
+      primaryUseCase: existing.primaryUseCase || primaryUseCase,
 
-      styleOfPlaying:
-        existing.styleOfPlaying ||
-        (lower.includes('articulate') || lower.includes('dynamic')
-          ? 'articulate and dynamic'
-          : ''),
+      styleOfPlaying: existing.styleOfPlaying || styleOfPlaying,
 
       diameter:
         existing.diameter || projectData?.width || projectData?.diameter || '',
@@ -1846,60 +2500,48 @@ const ManageProjectModal = ({
 
       genreContext:
         existing.genreContext ||
-        (lower.includes('norteno')
-          ? 'norteno'
-          : lower.includes('mexican music')
-            ? 'mexican music'
-            : ''),
+        (genreMentions.length ? genreMentions.join(', ') : ''),
 
-      desiredOutcome:
-        existing.desiredOutcome ||
-        (lower.includes('inspiring') ? 'sounding inspiring' : ''),
+      desiredOutcome: existing.desiredOutcome || desiredOutcome,
 
-      currentPainPoints:
-        existing.currentPainPoints ||
-        (lower.includes('too dry') ? 'too dry of a snare sound' : ''),
+      currentPainPoints: existing.currentPainPoints || currentPainPoints,
 
       influenceReferences:
         existing.influenceReferences ||
-        (lower.includes('metallica') ? 'metallica' : ''),
+        (influenceMentions.length ? influenceMentions.join(', ') : ''),
 
-      visualMood:
-        existing.visualMood || (lower.includes('artistic') ? 'artistic' : ''),
+      visualMood: existing.visualMood || visualMood,
 
-      finishDirection:
-        existing.finishDirection ||
-        (lower.includes('mappa burl') ? 'mappa burl high gloss' : ''),
+      finishDirection: existing.finishDirection || finishDirection,
 
-      woodPreference: existing.woodPreference || '',
+      woodPreference: existing.woodPreference || woodPreference,
 
-      attack: existing.attack || (lower.includes('fast') ? 'fast' : ''),
+      attack: existing.attack || attack,
 
-      body: existing.body || (lower.includes('full') ? 'full' : ''),
+      body: existing.body || body,
 
-      sensitivity:
-        existing.sensitivity ||
-        (lower.includes('high sensitivity') ? 'high' : ''),
+      sensitivity: existing.sensitivity || sensitivity,
 
       sustain: existing.sustain || '',
 
-      projection:
-        existing.projection || (lower.includes('medium') ? 'medium' : ''),
+      projection: existing.projection || projection,
 
-      tuningRange:
-        existing.tuningRange ||
-        (lower.includes('medium-to-medium-high') ||
-        lower.includes('medium to medium high')
-          ? 'medium-to-medium-high'
-          : ''),
+      tuningRange: existing.tuningRange || tuningRange,
 
-      articulation:
-        existing.articulation || (lower.includes('mixed') ? 'mixed' : ''),
+      articulation: existing.articulation || articulation,
 
-      feel: existing.feel || (lower.includes('deep') ? 'deep' : ''),
+      feel: existing.feel || feel,
+
+      responsePriorities:
+        existing.responsePriorities ||
+        (responseMentions.length ? responseMentions.join(', ') : ''),
+
+      tonalGoals:
+        existing.tonalGoals ||
+        (tonalMentions.length ? tonalMentions.join(', ') : ''),
+
+      preferredSizeDirection: existing.preferredSizeDirection || sizeDirection,
     };
-
-    return next;
   };
 
   const extractQuestionnaireMappedFields = ({
@@ -1931,9 +2573,20 @@ const ManageProjectModal = ({
       ? buildDirection.shellDirectionsOpenTo.join(', ')
       : '';
 
-    const visualDirection = Array.isArray(buildDirection?.visualDirection)
-      ? buildDirection.visualDirection.join(', ')
-      : buildDirection?.visualDirection || '';
+    const visualDirectionRaw = Array.isArray(buildDirection?.visualDirection)
+      ? buildDirection.visualDirection
+      : [buildDirection?.visualDirection].filter(Boolean);
+
+    const visualDirection = visualDirectionRaw
+      .map((v) => sanitizeFreeformStoryValue(v))
+      .filter(
+        (v) =>
+          v &&
+          !["i'm not sure", 'im not sure', 'not sure', 'unsure'].includes(
+            v.toLowerCase()
+          )
+      )
+      .join(', ');
 
     const responsePriorities = Array.isArray(soundGoals?.responsePriorities)
       ? soundGoals.responsePriorities.join(', ')
@@ -1994,8 +2647,7 @@ const ManageProjectModal = ({
       woodPreference:
         existing.woodPreference || sanitizeFreeformStoryValue(shellDirections),
 
-      finishDirection:
-        existing.finishDirection || sanitizeFreeformStoryValue(visualDirection),
+      finishDirection: existing.finishDirection || visualDirection || '',
 
       responsePriorities:
         existing.responsePriorities ||
@@ -2028,10 +2680,10 @@ const ManageProjectModal = ({
     const functions = getFunctions(app);
     const callable = httpsCallable(functions, 'generateHybridStoryChapter');
 
-    console.log('[StoryEngine] starting hybrid chapter:', {
-      chapterKey,
-      sectionKey,
-    });
+    // console.log('[StoryEngine] starting hybrid chapter:', {
+    //   chapterKey,
+    //   sectionKey,
+    // });
 
     const result = await Promise.race([
       callable({
@@ -2052,12 +2704,54 @@ const ManageProjectModal = ({
       ),
     ]);
 
-    console.log('[StoryEngine] finished hybrid chapter:', {
-      chapterKey,
-      sectionKey,
-    });
+    // console.log('[StoryEngine] finished hybrid chapter:', {
+    //   chapterKey,
+    //   sectionKey,
+    // });
 
     return result?.data?.result || null;
+  };
+
+  const normalizeConsultationTranscript = async ({
+    rawTranscript,
+    artistName,
+    timeoutMs = 45000,
+  }) => {
+    const functions = getFunctions(app);
+    const callable = httpsCallable(
+      functions,
+      'normalizeConsultationTranscript'
+    );
+
+    try {
+      const result = await Promise.race([
+        callable({
+          rawTranscriptText: rawTranscript,
+          artistName,
+        }),
+        new Promise((_, reject) =>
+          setTimeout(() => {
+            reject(new Error('Transcript normalization timed out'));
+          }, timeoutMs)
+        ),
+      ]);
+
+      const turns = result?.data?.result?.turns || result?.data?.turns || [];
+
+      if (!Array.isArray(turns)) {
+        throw new Error('Transcript normalization returned an invalid shape');
+      }
+
+      return turns;
+    } catch (err) {
+      const message =
+        err?.details ||
+        err?.message ||
+        err?.customData?.message ||
+        'Transcript normalization failed';
+
+      throw new Error(message);
+    }
   };
 
   const handleRunStoryEngine = async () => {
@@ -2201,6 +2895,31 @@ const ManageProjectModal = ({
           resolvedArtistName || autoQuestionnaireMapped?.artistName || '',
       };
 
+      const derivedConsultationSummary =
+        sanitizeFreeformStoryValue(storyEngineData.consultationSummary) ||
+        sanitizeFreeformStoryValue(
+          [
+            sanitizedConsultationMapped.primaryUseCase &&
+              `Primary use: ${sanitizedConsultationMapped.primaryUseCase}.`,
+            sanitizedConsultationMapped.desiredOutcome &&
+              `Goal: ${sanitizedConsultationMapped.desiredOutcome}.`,
+            sanitizedConsultationMapped.genreContext &&
+              `Context: ${sanitizedConsultationMapped.genreContext}.`,
+            sanitizedConsultationMapped.influenceReferences &&
+              `References: ${sanitizedConsultationMapped.influenceReferences}.`,
+            sanitizedConsultationMapped.finishDirection &&
+              `Finish direction: ${sanitizedConsultationMapped.finishDirection}.`,
+            sanitizedConsultationMapped.responsePriorities &&
+              `Response priorities: ${sanitizedConsultationMapped.responsePriorities}.`,
+            sanitizedConsultationMapped.tonalGoals &&
+              `Tonal goals: ${sanitizedConsultationMapped.tonalGoals}.`,
+            sanitizedConsultationMapped.currentPainPoints &&
+              `Pain points: ${sanitizedConsultationMapped.currentPainPoints}.`,
+          ]
+            .filter(Boolean)
+            .join(' ')
+        );
+
       const consultationSource = createSourceEntry({
         type: SOURCE_TYPE.CONSULTATION,
         label: 'Consultation Transcript',
@@ -2220,10 +2939,7 @@ const ManageProjectModal = ({
       const adminNotesSource = createSourceEntry({
         type: SOURCE_TYPE.ADMIN_NOTE,
         label: 'Admin Notes',
-        content: [
-          storyEngineData.consultationSummary,
-          storyEngineData.adminNotes,
-        ]
+        content: [derivedConsultationSummary, storyEngineData.adminNotes]
           .filter(Boolean)
           .join('\n\n'),
         createdAt: new Date().toISOString(),
@@ -2366,6 +3082,7 @@ const ManageProjectModal = ({
 
       const nextState = {
         ...storyEngineData,
+        consultationSummary: derivedConsultationSummary,
         consultationMapped: sanitizedConsultationMapped,
         questionnaireMapped: sanitizedQuestionnaireMapped,
         engineRecord: record,
@@ -2377,6 +3094,7 @@ const ManageProjectModal = ({
       await saveStoryEngineToProject({
         sources: {
           consultationTranscript: nextState.consultationTranscript,
+          consultationTranscriptTurns: normalizedTranscriptTurns,
           consultationSummary: nextState.consultationSummary,
           adminNotes: nextState.adminNotes,
           questionnaireRaw: nextState.questionnaireRaw,
@@ -2434,10 +3152,577 @@ const ManageProjectModal = ({
     );
   };
 
+  const BUILD_SPEC_FIELD_LABEL_MAP = Object.fromEntries(
+    STORY_ENGINE_BUILD_SPEC_FIELDS.map((field) => [field.key, field.label])
+  );
+
+  const getOutstandingItemHelp = ({ id, type, fieldKey, prompt }) => {
+    if (id === 'consultation-transcript') {
+      return {
+        resolutionTitle: 'How to resolve',
+        resolutionSteps: [
+          'Paste the full consultation call transcript into Intake & Direction.',
+          'Open the Intake & Direction tab.',
+          'Scroll to "Full Consultation Transcript".',
+          'Paste the transcript, then click "Save Intake Inputs".',
+        ],
+        questionsToAsk: [
+          'What is the drum mainly for: live, studio, or both?',
+          'What kind of response are you chasing: dry, open, fat, articulate, sensitive?',
+          'What references or existing drum sounds are closest to the goal?',
+          'What visual direction already feels right?',
+        ],
+        whereToUpdate:
+          'Admin → Project → Intake & Direction → Full Consultation Transcript',
+      };
+    }
+
+    if (id === 'consultation-summary') {
+      return {
+        resolutionTitle: 'How to resolve',
+        resolutionSteps: [
+          'Write a short builder-facing summary of the consultation.',
+          'Capture the main sound goals, build direction, open questions, and constraints.',
+          'Save it in the Consultation Summary field.',
+        ],
+        questionsToAsk: [
+          'What 2–3 takeaways matter most from the call?',
+          'What decisions feel real already?',
+          'What still needs confirmation before story drafting?',
+        ],
+        whereToUpdate:
+          'Admin → Project → Intake & Direction → Consultation Summary',
+      };
+    }
+
+    if (id === 'questionnaire-raw') {
+      return {
+        resolutionTitle: 'How to resolve',
+        resolutionSteps: [
+          'Paste the questionnaire payload or structured intake response into Questionnaire Raw.',
+          'If the artist has not completed it yet, send or collect the intake first.',
+          'Save the intake before rerunning Story Engine.',
+        ],
+        questionsToAsk: [
+          'What genres or playing contexts matter most?',
+          'What tonal goals matter most?',
+          'What finish / hardware / shell directions are they open to?',
+          'Is there a preferred size direction?',
+        ],
+        whereToUpdate:
+          'Admin → Project → Intake & Direction → Questionnaire Raw',
+      };
+    }
+
+    if (type === 'buildspec') {
+      const prettyLabel =
+        BUILD_SPEC_FIELD_LABEL_MAP[fieldKey] || 'Build Direction';
+
+      const fieldSpecificQuestions = {
+        shellConstruction: [
+          'Are we leaning stave, ply, or hybrid?',
+          'Is there a structural reason this choice best fits the sound target?',
+        ],
+        primaryWood: [
+          'What wood feels most aligned with the tonal goal?',
+          'Is this choice confirmed or still exploratory?',
+        ],
+        secondaryWood: [
+          'Is a secondary wood actually part of the build?',
+          'If yes, what role should it play visually or tonally?',
+        ],
+        lugCount: [
+          'Does the artist want a more open feel or more tension points?',
+          'Is lug count already decided from size / style preferences?',
+        ],
+        tuningApproach: [
+          'Is the drum meant to sit low, medium, high, or across a wider range?',
+          'Should tuning behavior favor control, openness, or flexibility?',
+        ],
+        finishSystem: [
+          'Are we leaning gloss, satin, oil, lacquer, or another finish direction?',
+          'Does the finish need to prioritize grain reveal, depth, durability, or restraint?',
+        ],
+        hardwareFinish: [
+          'Chrome, black nickel, brass/gold, or something else?',
+          'Is this visually locked or still in play?',
+        ],
+      };
+
+      return {
+        resolutionTitle: `How to confirm ${prettyLabel}`,
+        resolutionSteps: [
+          'Open Story Studio.',
+          `Find "${prettyLabel}" in Build Direction Controls.`,
+          'Choose or type the confirmed direction.',
+          'Click "Save Studio State".',
+          'Rerun Story Engine after confirming the field.',
+        ],
+        questionsToAsk: fieldSpecificQuestions[fieldKey] || [
+          `What should the final direction be for ${prettyLabel}?`,
+          'Is this truly confirmed, or still open?',
+          'Does this choice affect the sound, feel, or visual direction in a meaningful way?',
+        ],
+        whereToUpdate: `Admin → Project → Story Studio → Build Direction Controls → ${prettyLabel}`,
+      };
+    }
+
+    if (type === 'prompt') {
+      return {
+        resolutionTitle: 'How to resolve engine prompt',
+        resolutionSteps: [
+          'Read the prompt carefully and identify which field lacks support.',
+          'Open Intake & Direction or Story Studio depending on the missing detail.',
+          'Add stronger source material or manually confirm the field.',
+          'Save changes and rerun Story Engine.',
+        ],
+        questionsToAsk: [
+          'What evidence actually supports this direction?',
+          'Was this stated by the artist, inferred from the call, or assumed by us?',
+          'Do we need to ask a follow-up question before locking it?',
+        ],
+        whereToUpdate:
+          'Usually Intake & Direction for source truth, or Story Studio for manual build confirmation',
+      };
+    }
+
+    if (type === 'chapter') {
+      return {
+        resolutionTitle: 'How to resolve chapter output',
+        resolutionSteps: [
+          'Make sure intake inputs and build direction fields are complete first.',
+          'Run Story Engine again.',
+          'If needed, use the chapter Regenerate button once core inputs are stronger.',
+          'Lock the section only after the output reads correctly.',
+        ],
+        questionsToAsk: [
+          'Do we have enough real source material for this chapter?',
+          'Is the build direction specific enough to avoid generic copy?',
+          'What still needs confirmation before this chapter should be generated?',
+        ],
+        whereToUpdate: 'Admin → Project → Story Studio → Story Studio Chapters',
+      };
+    }
+
+    return {
+      resolutionTitle: 'How to resolve',
+      resolutionSteps: [
+        'Review the missing item.',
+        'Add or confirm the supporting information.',
+        'Save changes and rerun Story Engine.',
+      ],
+      questionsToAsk: [],
+      whereToUpdate: 'Story Studio or Intake & Direction',
+    };
+  };
+
+  const storyStudioOutstandingItems = (() => {
+    const items = [];
+
+    if (!storyEngineData?.consultationTranscript?.trim()) {
+      items.push({
+        id: 'consultation-transcript',
+        label: 'Add consultation transcript',
+        type: 'source',
+        ...getOutstandingItemHelp({
+          id: 'consultation-transcript',
+          type: 'source',
+        }),
+      });
+    }
+
+    const effectiveConsultationSummary =
+      sanitizeFreeformStoryValue(storyEngineData?.consultationSummary) ||
+      sanitizeFreeformStoryValue(
+        [
+          storyEngineData?.consultationMapped?.primaryUseCase &&
+            `Primary use: ${storyEngineData.consultationMapped.primaryUseCase}.`,
+          storyEngineData?.consultationMapped?.desiredOutcome &&
+            `Goal: ${storyEngineData.consultationMapped.desiredOutcome}.`,
+          storyEngineData?.consultationMapped?.genreContext &&
+            `Context: ${storyEngineData.consultationMapped.genreContext}.`,
+          storyEngineData?.consultationMapped?.influenceReferences &&
+            `References: ${storyEngineData.consultationMapped.influenceReferences}.`,
+          storyEngineData?.consultationMapped?.finishDirection &&
+            `Finish direction: ${storyEngineData.consultationMapped.finishDirection}.`,
+          storyEngineData?.consultationMapped?.responsePriorities &&
+            `Response priorities: ${storyEngineData.consultationMapped.responsePriorities}.`,
+          storyEngineData?.consultationMapped?.tonalGoals &&
+            `Tonal goals: ${storyEngineData.consultationMapped.tonalGoals}.`,
+          storyEngineData?.consultationMapped?.currentPainPoints &&
+            `Pain points: ${storyEngineData.consultationMapped.currentPainPoints}.`,
+        ]
+          .filter(Boolean)
+          .join(' ')
+      );
+
+    if (!effectiveConsultationSummary) {
+      items.push({
+        id: 'consultation-summary',
+        label: 'Add consultation summary',
+        type: 'source',
+        ...getOutstandingItemHelp({
+          id: 'consultation-summary',
+          type: 'source',
+        }),
+      });
+    }
+
+    if (!storyEngineData?.questionnaireRaw?.trim()) {
+      items.push({
+        id: 'questionnaire-raw',
+        label: 'Add questionnaire raw intake',
+        type: 'source',
+        ...getOutstandingItemHelp({
+          id: 'questionnaire-raw',
+          type: 'source',
+        }),
+      });
+    }
+
+    STORY_ENGINE_BUILD_SPEC_FIELDS.forEach((field) => {
+      const value =
+        storyEngineData?.engineRecord?.buildSpec?.[field.key]?.value || '';
+
+      if (!String(value).trim()) {
+        items.push({
+          id: `buildspec-${field.key}`,
+          label: `Confirm build direction: ${field.label}`,
+          type: 'buildspec',
+          fieldKey: field.key,
+          ...getOutstandingItemHelp({
+            id: `buildspec-${field.key}`,
+            type: 'buildspec',
+            fieldKey: field.key,
+          }),
+        });
+      }
+    });
+
+    const adminPrompts =
+      storyEngineData?.engineRecord?.engineMeta?.adminPrompts || [];
+
+    adminPrompts.forEach((prompt, idx) => {
+      items.push({
+        id: `prompt-${prompt?.fieldKey || idx}`,
+        label:
+          prompt?.fieldKey && prompt?.reason
+            ? `${prompt.fieldKey}: ${prompt.reason}`
+            : prompt?.suggestion || 'Resolve engine prompt',
+        type: 'prompt',
+        prompt,
+        ...getOutstandingItemHelp({
+          id: `prompt-${prompt?.fieldKey || idx}`,
+          type: 'prompt',
+          prompt,
+        }),
+      });
+    });
+
+    const chapters = storyEngineData?.engineRecord?.chapters || {};
+
+    Object.entries(chapters).forEach(([chapterKey, chapterValue]) => {
+      const overviewText =
+        chapterValue?.storySections?.chapterOverview?.text || '';
+      const notesText =
+        chapterValue?.storySections?.buildNotesStory?.text || '';
+
+      if (!String(overviewText).trim()) {
+        items.push({
+          id: `${chapterKey}-overview`,
+          label: `${chapterValue?.label || chapterKey}: generate chapter overview`,
+          type: 'chapter',
+          ...getOutstandingItemHelp({
+            id: `${chapterKey}-overview`,
+            type: 'chapter',
+          }),
+        });
+      }
+
+      if (!String(notesText).trim()) {
+        items.push({
+          id: `${chapterKey}-notes`,
+          label: `${chapterValue?.label || chapterKey}: generate build notes`,
+          type: 'chapter',
+          ...getOutstandingItemHelp({
+            id: `${chapterKey}-notes`,
+            type: 'chapter',
+          }),
+        });
+      }
+    });
+
+    return items;
+  })();
+
+  const storyStudioSummaryStats = {
+    outstandingCount: storyStudioOutstandingItems.length,
+    chapterCount: Object.keys(storyEngineData?.engineRecord?.chapters || {})
+      .length,
+    readiness:
+      storyEngineData?.engineRecord?.engineMeta?.draftReadiness || 'not_ready',
+    confidence: Math.round(
+      (storyEngineData?.engineRecord?.engineMeta?.overallConfidence || 0) * 100
+    ),
+  };
+
+  const helpOverlayPortal =
+    outstandingHelpItem && typeof document !== 'undefined'
+      ? createPortal(
+          <div
+            className="mpm-story-help-overlay"
+            onClick={() => setOutstandingHelpItem(null)}
+          >
+            <div
+              className="mpm-story-help-modal"
+              role="dialog"
+              aria-modal="true"
+              aria-label={outstandingHelpItem.label}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="mpm-story-help-modal-head">
+                <h4>{outstandingHelpItem.label}</h4>
+
+                <button
+                  type="button"
+                  className="mpm-story-help-close"
+                  onClick={() => setOutstandingHelpItem(null)}
+                  aria-label="Close help"
+                >
+                  ✕
+                </button>
+              </div>
+
+              {!!outstandingHelpItem.whereToUpdate && (
+                <div className="mpm-story-help-block">
+                  <strong>Update here</strong>
+                  <p>{outstandingHelpItem.whereToUpdate}</p>
+                </div>
+              )}
+
+              {!!outstandingHelpItem.resolutionSteps?.length && (
+                <div className="mpm-story-help-block">
+                  <strong>How to resolve</strong>
+                  <ul>
+                    {outstandingHelpItem.resolutionSteps.map((step, idx) => (
+                      <li key={`${outstandingHelpItem.id}-step-${idx}`}>
+                        {step}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {!!outstandingHelpItem.questionsToAsk?.length && (
+                <div className="mpm-story-help-block">
+                  <strong>Questions to ask the artist</strong>
+                  <ul>
+                    {outstandingHelpItem.questionsToAsk.map((question, idx) => (
+                      <li key={`${outstandingHelpItem.id}-question-${idx}`}>
+                        {question}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          </div>,
+          document.body
+        )
+      : null;
+
+  const renderMappedFieldControl = ({ field, value, onChange }) => {
+    const options = QUESTIONNAIRE_OPTION_SETS[field.key] || [];
+
+    const multiFields = [
+      'genreContext',
+      'influenceReferences',
+      'responsePriorities',
+      'tonalGoals',
+      'woodPreference',
+    ];
+
+    const noOtherFields = [
+      'hardwareFinish',
+      'consultationContactMethod',
+      'attack',
+      'body',
+      'sensitivity',
+      'projection',
+      'tuningRange',
+      'articulation',
+      'feel',
+    ];
+
+    const isMulti = multiFields.includes(field.key);
+    const supportsOther =
+      options.length > 0 && !noOtherFields.includes(field.key);
+
+    if (!options.length) {
+      return (
+        <input
+          type="text"
+          value={value || ''}
+          onChange={(e) => onChange(e.target.value)}
+        />
+      );
+    }
+
+    if (!isMulti) {
+      const selectedValue = value || '';
+      const normalizedSelectedValue = String(selectedValue || '').trim();
+      const isOtherSelected =
+        normalizedSelectedValue && !options.includes(normalizedSelectedValue);
+
+      return (
+        <>
+          <select
+            value={isOtherSelected ? '__other__' : selectedValue}
+            onChange={(e) => {
+              const next = e.target.value;
+
+              if (next === '__other__') {
+                onChange('__other__');
+                return;
+              }
+
+              onChange(next);
+            }}
+          >
+            <option value="">Select...</option>
+            {options.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+            {supportsOther ? <option value="__other__">Other</option> : null}
+          </select>
+
+          {supportsOther && isOtherSelected ? (
+            <input
+              type="text"
+              placeholder="Enter other..."
+              value={isOtherSelected ? selectedValue : ''}
+              onChange={(e) => onChange(e.target.value)}
+              style={{ marginTop: 8 }}
+            />
+          ) : null}
+        </>
+      );
+    }
+
+    const selectedValues = splitMultiValue(value);
+    const standardValues = selectedValues.filter((v) => options.includes(v));
+    const otherValues = [...new Set(getOtherValues(selectedValues, options))];
+    const hasOther = otherValues.length > 0;
+
+    return (
+      <>
+        <div
+          className="mpm-multi-check-grid"
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+            gap: 8,
+          }}
+        >
+          {options.map((option) => {
+            const checked = standardValues.includes(option);
+
+            return (
+              <label
+                key={option}
+                className="mpm-check-option"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 8,
+                  fontSize: '0.92rem',
+                  color: 'var(--mpm-ink)',
+                }}
+              >
+                <input
+                  type="checkbox"
+                  checked={checked}
+                  onChange={(e) => {
+                    const nextStandardValues = e.target.checked
+                      ? [...standardValues, option]
+                      : standardValues.filter((v) => v !== option);
+
+                    onChange(
+                      joinMultiValue([...nextStandardValues, ...otherValues])
+                    );
+                  }}
+                />
+                <span>{option}</span>
+              </label>
+            );
+          })}
+
+          {supportsOther ? (
+            <label
+              className="mpm-check-option"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 8,
+                fontSize: '0.92rem',
+                color: 'var(--mpm-ink)',
+              }}
+            >
+              <input
+                type="checkbox"
+                checked={hasOther}
+                onChange={(e) => {
+                  if (!e.target.checked) {
+                    onChange(joinMultiValue(standardValues));
+                    return;
+                  }
+
+                  if (!hasOther) {
+                    onChange(joinMultiValue([...selectedValues, 'Other']));
+                    return;
+                  }
+
+                  onChange(joinMultiValue(selectedValues));
+                }}
+              />
+              <span>Other</span>
+            </label>
+          ) : null}
+        </div>
+
+        {supportsOther && hasOther ? (
+          <input
+            type="text"
+            placeholder="Enter other..."
+            value={otherValues.join(', ')}
+            onChange={(e) => {
+              const customValues = splitMultiValue(e.target.value).filter(
+                (v) => v.toLowerCase() !== 'other'
+              );
+
+              onChange(
+                joinMultiValue(
+                  customValues.length
+                    ? [...standardValues, ...customValues]
+                    : standardValues
+                )
+              );
+            }}
+            style={{ marginTop: 10 }}
+          />
+        ) : null}
+      </>
+    );
+  };
+
   return (
     <div className="manage-project-modal-overlay mpm-overlay" onClick={onClose}>
       <div
-        className="manage-project-modal-content mpm-modal mpm-light"
+        className={`manage-project-modal-content mpm-modal mpm-light ${
+          outstandingHelpItem ? 'mpm-help-open' : ''
+        }`}
         role="dialog"
         aria-modal="true"
         aria-labelledby="admin-project-view-title"
@@ -2445,9 +3730,91 @@ const ManageProjectModal = ({
       >
         <header className="mpm-header">
           <div className="mpm-header-top">
-            <h2 id="admin-project-view-title" className="mpm-title">
-              Admin Project View
-            </h2>
+            <div className="mpm-header-identity">
+              <div className="mpm-header-kicker">SoundLegend Project</div>
+
+              <div className="mpm-header-project-id-row">
+                <span className="mpm-header-project-id-label">Project ID</span>
+                <span className="mpm-header-project-id-value">{idText}</span>
+                <button
+                  type="button"
+                  className="mpm-copy-icon-btn"
+                  onClick={() => navigator.clipboard?.writeText(String(idText))}
+                  title="Copy project ID"
+                  aria-label="Copy project ID"
+                >
+                  ⧉
+                </button>
+              </div>
+
+              <div className="mpm-header-primary-row">
+                <h2 id="admin-project-view-title" className="mpm-title">
+                  {storyEngineData.consultationMapped.artistName ||
+                    storyEngineData.questionnaireMapped.artistName ||
+                    deriveCustomerName(projectData) ||
+                    'Unassigned Artist'}{' '}
+                </h2>
+
+                <button
+                  type="button"
+                  className="mpm-copy-icon-btn"
+                  onClick={() =>
+                    navigator.clipboard?.writeText(
+                      deriveCustomerName(projectData) || ''
+                    )
+                  }
+                  title="Copy artist name"
+                  aria-label="Copy artist name"
+                >
+                  ⧉
+                </button>
+              </div>
+
+              <div className="mpm-header-secondary-row">
+                <span className="mpm-header-email">
+                  {deriveCustomerEmail(projectData) || 'No email linked'}
+                </span>
+
+                {deriveCustomerEmail(projectData) ? (
+                  <button
+                    type="button"
+                    className="mpm-copy-icon-btn"
+                    onClick={() =>
+                      navigator.clipboard?.writeText(
+                        deriveCustomerEmail(projectData) || ''
+                      )
+                    }
+                    title="Copy email"
+                    aria-label="Copy email"
+                  >
+                    ⧉
+                  </button>
+                ) : null}
+              </div>
+
+              <div className="mpm-header-actions-row mpm-header-actions-row-compact">
+                {projectData?.id ? (
+                  <button
+                    type="button"
+                    className="mpm-action-btn mpm-action-btn-compact"
+                    onClick={handleViewAsCustomer}
+                  >
+                    Artist Portal ↗
+                  </button>
+                ) : null}
+
+                {/* {projectData?.id ? (
+                  <a
+                    className="mpm-action-btn mpm-action-btn-link mpm-action-btn-compact"
+                    href={`/legacy?projectId=${projectData.id}`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Admin ↗
+                  </a>
+                ) : null} */}
+              </div>
+            </div>
 
             <button
               type="button"
@@ -2459,188 +3826,41 @@ const ManageProjectModal = ({
             </button>
           </div>
 
-          <div className="mpm-mobile-meta-bar">
-            <div className="mpm-mobile-meta-left">
-              <span
-                className={`mpm-mobile-status ${status.toLowerCase().replace(/\s+/g, '-')}`}
-              >
-                {status}
-              </span>
-              <span className="mpm-mobile-progress">{weightedProgress}%</span>
+          <div className="mpm-header-quick-stats">
+            <div className="mpm-header-quick-stat">
+              <span className="mpm-header-quick-label">Status</span>
+              <strong className="mpm-header-quick-value">{status}</strong>
             </div>
 
-            <button
-              type="button"
-              className="mpm-mobile-meta-toggle"
-              onClick={() => setMobileMetaOpen((v) => !v)}
-            >
-              {mobileMetaOpen ? 'Hide ▲' : 'Details ▼'}
-            </button>
-          </div>
-
-          <div
-            className={`mpm-meta-collapsible mpm-header-chips ${mobileMetaOpen ? 'open' : ''}`}
-          >
-            <div
-              className={`mpm-status-chip ${status.toLowerCase().replace(/\s+/g, '-')}`}
-            >
-              Build Status: {status}
+            <div className="mpm-header-quick-stat">
+              <span className="mpm-header-quick-label">Progress</span>
+              <strong className="mpm-header-quick-value">
+                {weightedProgress}%
+              </strong>
             </div>
 
-            <div className="mpm-overall-progress-chip">
-              Overall Progress: {weightedProgress}%
+            <div className="mpm-header-quick-stat mpm-header-quick-stat-wide">
+              <span className="mpm-header-quick-label">Current Chapter</span>
+              <strong className="mpm-header-quick-value">
+                {currentPhaseLabel}
+              </strong>
             </div>
 
-            {(() => {
-              const sch = scheduleStatus({
-                startDate: projectData?.startDate,
-                targetDate: projectData?.targetCompletion,
-                bufferDays: 14,
-                progressPct: weightedProgress,
-              });
-
-              return (
-                <div className={`mpm-sched-chip ${sch.code}`}>
-                  Schedule: {sch.label} ({weightedProgress}%)
-                </div>
-              );
-            })()}
-
-            <div className="mpm-target-chip">
-              Target: {fmtMDY(projectData?.targetCompletion)} &rarr;{' '}
-              {projectData?.targetCompletion
-                ? fmtMDY(
-                    new Date(
-                      toDate(projectData.targetCompletion).getTime() +
-                        14 * 86400000
-                    )
-                  )
-                : '—'}{' '}
-              <span className="mpm-target-sub">(2-week buffer)</span>
+            <div className="mpm-header-quick-stat">
+              <span className="mpm-header-quick-label">Target</span>
+              <strong className="mpm-header-quick-value">
+                {fmtMDY(projectData?.targetCompletion)}
+              </strong>
             </div>
 
-            <div className={getStepProgressClass()}>
-              Current Step: {currentPhaseLabel}
-            </div>
-
-            <div className="mpm-total-time-wrapper">
-              <span className="mpm-total-time-label">Total Time Spent:</span>
-              <span className="mpm-total-time-value">
+            <div className="mpm-header-quick-stat">
+              <span className="mpm-header-quick-label">Time Logged</span>
+              <strong className="mpm-header-quick-value">
                 {formatFullTime(calculateProjectTotalTime())}
-              </span>
-            </div>
-
-            <div className="mpm-bulk-project-actions">
-              <button
-                type="button"
-                className="mpm-bulk-btn"
-                onClick={() => {
-                  if (
-                    window.confirm(
-                      'Mark ALL stages and sub-steps in this project as complete?'
-                    )
-                  ) {
-                    bulkUpdateAllStepsCompletion(true);
-                  }
-                }}
-              >
-                Mark entire project complete
-              </button>
-
-              <button
-                type="button"
-                className="mpm-bulk-btn mpm-bulk-btn-reset"
-                onClick={() => {
-                  if (
-                    window.confirm(
-                      'Reset ALL stages and sub-steps in this project to incomplete?'
-                    )
-                  ) {
-                    bulkUpdateAllStepsCompletion(false);
-                  }
-                }}
-              >
-                Reset entire project
-              </button>
+              </strong>
             </div>
           </div>
         </header>
-
-        <div
-          className={`mpm-id-strip mpm-meta-collapsible ${mobileMetaOpen ? 'open' : ''}`}
-        >
-          <div className="mpm-identifier-top">
-            {getIdentifier(projectData) && (
-              <span className="mpm-identifier-chip mpm-identifier-primary">
-                <span className="mpm-id-pill">ID</span>
-                {getIdentifier(projectData)}
-              </span>
-            )}
-
-            {projectData?.customerName && (
-              <span className="mpm-identifier-chip">
-                👤 {projectData.customerName}
-                {projectData?.customerEmail && (
-                  <span className="mpm-identifier-email">
-                    {'  ·  '}
-                    {projectData.customerEmail}
-                  </span>
-                )}
-              </span>
-            )}
-          </div>
-
-          <div className="mpm-id-row" style={{ marginTop: 6 }}>
-            <span className="mpm-mono-id">Project ID: {idText}</span>
-            <button
-              className="mpm-copy-btn"
-              onClick={() => navigator.clipboard?.writeText(String(idText))}
-            >
-              Copy
-            </button>
-
-            {parentOrderId && (
-              <>
-                <span style={{ opacity: 0.6, margin: '0 4px' }}>·</span>
-                <span>Parent Order ID:</span>
-                <a
-                  className="mpm-mono-id"
-                  href={`/orders/${parentOrderId}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  style={{ marginLeft: 4 }}
-                >
-                  {parentOrderId}
-                </a>
-                <button
-                  className="mpm-copy-btn"
-                  onClick={() =>
-                    navigator.clipboard?.writeText(String(parentOrderId))
-                  }
-                >
-                  Copy
-                </button>
-              </>
-            )}
-
-            {projectData?.id && (
-              <>
-                <span style={{ opacity: 0.6, margin: '0 4px' }}>·</span>
-                <button
-                  type="button"
-                  className="mpm-view-as-link"
-                  onClick={handleViewAsCustomer}
-                >
-                  <span className="mpm-view-as-label">View as Customer:</span>{' '}
-                  <span className="mpm-view-as-anchor">
-                    Open Project View ↗
-                  </span>
-                </button>
-              </>
-            )}
-          </div>
-        </div>
-
         <div className="mpm-body">
           <div className="mpm-mobile-phase-selector-wrapper">
             <select
@@ -2649,24 +3869,38 @@ const ManageProjectModal = ({
               onChange={(e) => {
                 const val = e.target.value;
 
-                if (val === 'details' || val === 'storyEngine') {
+                if (
+                  val === ADMIN_SECTIONS.RECORD ||
+                  val === ADMIN_SECTIONS.INTAKE ||
+                  val === ADMIN_SECTIONS.STORY_STUDIO
+                ) {
                   setSelectedTab(val);
-                  setSelectedStepKey(null);
+                  return;
+                }
+
+                if (val === ADMIN_SECTIONS.BUILD) {
+                  setSelectedTab(ADMIN_SECTIONS.BUILD);
+                  setExpandedStepKey(buildPhases[0]?.key || null);
+                  setSelectedStepKey(buildPhases[0]?.key || null);
                   setSelectedSubIndex(0);
                   return;
                 }
 
-                const [stepKey, idxStr] = val.split('::');
-                const idx = Number(idxStr) || 0;
+                if (val.startsWith(`${ADMIN_SECTIONS.BUILD}::`)) {
+                  const [, stepKey, idxStr] = val.split('::');
+                  const idx = Number(idxStr) || 0;
 
-                setSelectedTab(stepKey);
-                setExpandedStepKey(stepKey);
-                setSelectedStepKey(stepKey);
-                setSelectedSubIndex(idx);
+                  setSelectedTab(ADMIN_SECTIONS.BUILD);
+                  setExpandedStepKey(stepKey);
+                  setSelectedStepKey(stepKey);
+                  setSelectedSubIndex(idx);
+                }
               }}
             >
-              <option value="details">📝 Overview</option>
-              <option value="storyEngine">✍️ Story Engine</option>
+              <option value={ADMIN_SECTIONS.RECORD}>Project Record</option>
+              <option value={ADMIN_SECTIONS.INTAKE}>Intake & Direction</option>
+              <option value={ADMIN_SECTIONS.STORY_STUDIO}>Story Studio</option>
+              <option value={ADMIN_SECTIONS.BUILD}>Build Workflow</option>
 
               {(Array.isArray(buildPhases) ? buildPhases : []).map((phase) => {
                 const cl = Array.isArray(editableData?.[phase.key]?.checklist)
@@ -2681,12 +3915,10 @@ const ManageProjectModal = ({
                       const label = String(
                         item?.task ?? item?.label ?? ''
                       ).trim();
-                      const optionValue = `${phase.key}::${idx}`;
-                      const done = !!item?.completed;
+                      const optionValue = `${ADMIN_SECTIONS.BUILD}::${phase.key}::${idx}`;
 
                       return (
                         <option key={optionValue} value={optionValue}>
-                          {done ? '✅ ' : ''}
                           {label}
                         </option>
                       );
@@ -2698,553 +3930,859 @@ const ManageProjectModal = ({
           </div>
 
           <aside className="mpm-sidebar">
-            <button
-              className={`mpm-sidebar-overview-btn ${
-                selectedTab === 'details' ? 'active' : ''
-              }`}
-              onClick={() => {
-                setSelectedTab('details');
-                setSelectedStepKey(null);
-                setSelectedSubIndex(0);
-              }}
-            >
-              📝 Overview
-            </button>
+            {ADMIN_NAV_GROUPS.map((group) => (
+              <div key={group.label} className="mpm-sidebar-group">
+                <div className="mpm-sidebar-group-label">{group.label}</div>
 
-            <button
-              className={`mpm-sidebar-overview-btn ${
-                selectedTab === 'storyEngine' ? 'active' : ''
-              }`}
-              onClick={() => {
-                setSelectedTab('storyEngine');
-                setSelectedStepKey(null);
-                setSelectedSubIndex(0);
-              }}
-            >
-              ✍️ Story Engine
-            </button>
+                <div className="mpm-sidebar-group-buttons">
+                  {group.items.map((item) => (
+                    <button
+                      key={item.key}
+                      className={`mpm-sidebar-overview-btn ${
+                        selectedTab === item.key ? 'active' : ''
+                      }`}
+                      onClick={() => {
+                        setSelectedTab(item.key);
+                      }}
+                    >
+                      {item.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ))}
 
-            <div className="mpm-sidebar-step-list">
-              {(Array.isArray(buildPhases) ? buildPhases : []).map((step) => {
-                const isExpanded = expandedStepKey === step.key;
+            <div className="mpm-sidebar-group">
+              <div className="mpm-sidebar-group-label">Build Workflow</div>
 
-                const checklist = Array.isArray(
-                  editableData?.[step.key]?.checklist
-                )
-                  ? editableData[step.key].checklist
-                  : [];
+              <div className="mpm-sidebar-step-list always-open">
+                {(Array.isArray(buildPhases) ? buildPhases : []).map((step) => {
+                  const isExpanded = expandedStepKey === step.key;
 
-                const stepStatus = (() => {
-                  const checklistInner = Array.isArray(
+                  const checklist = Array.isArray(
                     editableData?.[step.key]?.checklist
                   )
                     ? editableData[step.key].checklist
                     : [];
 
-                  if (!checklistInner.length) return 'todo';
-
-                  const allDone = checklistInner.every((it) => {
-                    const states = Array.isArray(it?.checkpointStates)
-                      ? it.checkpointStates
+                  const stepStatus = (() => {
+                    const checklistInner = Array.isArray(
+                      editableData?.[step.key]?.checklist
+                    )
+                      ? editableData[step.key].checklist
                       : [];
-                    const checkpointsDone =
-                      states.length > 0 && states.every(Boolean);
-                    return !!it?.completed || checkpointsDone;
-                  });
 
-                  if (allDone) return 'done';
+                    if (!checklistInner.length) return 'todo';
 
-                  const containsActive =
-                    !!activePtr && activePtr.stepKey === step.key;
+                    const allDone = checklistInner.every((it) => {
+                      const states = Array.isArray(it?.checkpointStates)
+                        ? it.checkpointStates
+                        : [];
+                      const checkpointsDone =
+                        states.length > 0 && states.every(Boolean);
+                      return !!it?.completed || checkpointsDone;
+                    });
 
-                  return containsActive ? 'doing' : 'todo';
-                })();
+                    if (allDone) return 'done';
 
-                return (
-                  <div key={step.key} className="mpm-sidebar-step-block">
-                    <button
-                      className={`mpm-sidebar-step-root ${
-                        selectedTab === step.key ? 'active' : ''
-                      }`}
-                      onClick={() => {
-                        setExpandedStepKey(step.key);
-                        setSelectedTab(step.key);
-                        setSelectedStepKey(step.key);
-                        setSelectedSubIndex(0);
-                      }}
-                      type="button"
-                    >
-                      <StatusPip level="step" status={stepStatus} />
-                      <span className="mpm-sidebar-step-text">
-                        {step.label}
-                      </span>
-                    </button>
+                    const containsActive =
+                      !!activePtr && activePtr.stepKey === step.key;
+                    return containsActive ? 'doing' : 'todo';
+                  })();
 
-                    {isExpanded && checklist.length > 0 && (
-                      <div className="mpm-sidebar-substep-list">
-                        {(Array.isArray(checklist) ? checklist : []).map(
-                          (item, idx) => {
-                            const label = item?.task ?? item?.label ?? '';
-                            const isActiveSub =
-                              selectedStepKey === step.key &&
-                              selectedSubIndex === idx;
+                  return (
+                    <div key={step.key} className="mpm-sidebar-step-block">
+                      <button
+                        className={`mpm-sidebar-step-root ${
+                          selectedTab === ADMIN_SECTIONS.BUILD &&
+                          selectedStepKey === step.key
+                            ? 'active'
+                            : ''
+                        }`}
+                        onClick={() => {
+                          setSelectedTab(ADMIN_SECTIONS.BUILD);
+                          setExpandedStepKey(step.key);
+                          setSelectedStepKey(step.key);
+                          setSelectedSubIndex(0);
+                        }}
+                        type="button"
+                      >
+                        <StatusPip level="step" status={stepStatus} />
+                        <span className="mpm-sidebar-step-text">
+                          {step.label}
+                        </span>
+                      </button>
 
-                            const states = Array.isArray(item?.checkpointStates)
-                              ? item.checkpointStates
-                              : [];
+                      {isExpanded && checklist.length > 0 && (
+                        <div className="mpm-sidebar-substep-list">
+                          {(Array.isArray(checklist) ? checklist : []).map(
+                            (item, idx) => {
+                              const label = item?.task ?? item?.label ?? '';
+                              const isActiveSub =
+                                selectedTab === ADMIN_SECTIONS.BUILD &&
+                                selectedStepKey === step.key &&
+                                selectedSubIndex === idx;
 
-                            const checkpointsDone =
-                              states.length > 0 && states.every(Boolean);
+                              const states = Array.isArray(
+                                item?.checkpointStates
+                              )
+                                ? item.checkpointStates
+                                : [];
 
-                            const isDone = !!item?.completed || checkpointsDone;
+                              const checkpointsDone =
+                                states.length > 0 && states.every(Boolean);
 
-                            const isGlobalActive =
-                              !!activePtr &&
-                              activePtr.stepKey === step.key &&
-                              activePtr.idx === idx;
+                              const isDone =
+                                !!item?.completed || checkpointsDone;
 
-                            const subStatus = isDone
-                              ? 'done'
-                              : isGlobalActive
-                                ? 'doing'
-                                : 'todo';
+                              const isGlobalActive =
+                                !!activePtr &&
+                                activePtr.stepKey === step.key &&
+                                activePtr.idx === idx;
 
-                            return (
-                              <div key={item?.id || idx}>
-                                <button
-                                  className={`mpm-sidebar-substep-btn ${
-                                    isActiveSub ? 'active' : ''
-                                  }`}
-                                  type="button"
-                                  onClick={() => {
-                                    setSelectedStepKey(step.key);
-                                    setSelectedSubIndex(idx);
-                                    setSelectedTab(step.key);
-                                  }}
-                                >
-                                  <StatusPip
-                                    level="substep"
-                                    status={subStatus}
-                                  />
-                                  <span className="mpm-sidebar-substep-text">
-                                    {label}
-                                  </span>
-                                </button>
+                              const subStatus = isDone
+                                ? 'done'
+                                : isGlobalActive
+                                  ? 'doing'
+                                  : 'todo';
 
-                                {isActiveSub &&
-                                  (() => {
-                                    const checkpointLabels =
-                                      getCheckpointListForSubstep(
-                                        step.key,
-                                        idx,
-                                        item
-                                      );
-
-                                    if (!checkpointLabels?.length) return null;
-
-                                    return (
-                                      <div className="mpm-sidebar-task-list">
-                                        {checkpointLabels.map(
-                                          (taskLabel, cIdx) => {
-                                            const taskStatus =
-                                              getCheckpointStatus(
-                                                step.key,
-                                                idx,
-                                                item,
-                                                cIdx
-                                              );
-
-                                            return (
-                                              <div
-                                                key={`${item?.id || idx}-cp-${cIdx}`}
-                                                className="mpm-sidebar-task-row"
-                                              >
-                                                <StatusPip
-                                                  level="task"
-                                                  status={taskStatus}
-                                                />
-                                                <span className="mpm-sidebar-task-text">
-                                                  {shortenCheckpointLabel(
-                                                    getCheckpointLabelText(
-                                                      taskLabel
-                                                    )
-                                                  )}
-                                                </span>
-                                              </div>
-                                            );
-                                          }
-                                        )}
-                                      </div>
-                                    );
-                                  })()}
-                              </div>
-                            );
-                          }
-                        )}
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
+                              return (
+                                <div key={item?.id || idx}>
+                                  <button
+                                    className={`mpm-sidebar-substep-btn ${
+                                      isActiveSub ? 'active' : ''
+                                    }`}
+                                    type="button"
+                                    onClick={() => {
+                                      setSelectedTab(ADMIN_SECTIONS.BUILD);
+                                      setExpandedStepKey(step.key);
+                                      setSelectedStepKey(step.key);
+                                      setSelectedSubIndex(idx);
+                                    }}
+                                  >
+                                    <StatusPip
+                                      level="substep"
+                                      status={subStatus}
+                                    />
+                                    <span className="mpm-sidebar-substep-text">
+                                      {label}
+                                    </span>
+                                  </button>
+                                </div>
+                              );
+                            }
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </aside>
 
           <main className="mpm-main">
-            {selectedTab === 'details' ? (
+            {selectedTab === ADMIN_SECTIONS.RECORD ? (
               <div className="mpm-surface mpm-overview-scope">
-                <ProjectOverview
-                  editableData={{ ...editableData, id: projectData.id }}
-                  isEditing={isEditing}
-                  onEditToggle={() => setIsEditing((v) => !v)}
-                  handleChange={(path, value) => {
-                    setEditableData((prev) => {
-                      const updated = { ...prev };
-                      const keys = path.split('.');
-                      let cur = updated;
+                <div className="mpm-tab-shell">
+                  <ProjectOverview
+                    editableData={{ ...editableData, id: projectData.id }}
+                    isEditing={isEditing}
+                    onEditToggle={() => setIsEditing((v) => !v)}
+                    handleChange={(path, value) => {
+                      setEditableData((prev) => {
+                        const updated = { ...prev };
+                        const keys = path.split('.');
+                        let cur = updated;
 
-                      for (let i = 0; i < keys.length - 1; i += 1) {
-                        if (!cur[keys[i]]) cur[keys[i]] = {};
-                        cur = cur[keys[i]];
-                      }
+                        for (let i = 0; i < keys.length - 1; i += 1) {
+                          if (!cur[keys[i]]) cur[keys[i]] = {};
+                          cur = cur[keys[i]];
+                        }
 
-                      cur[keys[keys.length - 1]] = value;
-                      return updated;
-                    });
-                  }}
-                  onSave={() => {
-                    saveToFirestore({
-                      projectOverview: editableData.projectOverview || {},
-                    });
-                    setIsEditing(false);
-                    setShowSnackbar(true);
-                  }}
-                  onCancel={() => {
-                    setEditableData(originalData);
-                    setIsEditing(false);
-                  }}
-                />
+                        cur[keys[keys.length - 1]] = value;
+                        return updated;
+                      });
+                    }}
+                    onSave={() => {
+                      saveToFirestore({
+                        projectOverview: editableData.projectOverview || {},
+                      });
+                      setIsEditing(false);
+                      setShowSnackbar(true);
+                    }}
+                    onCancel={() => {
+                      setEditableData(originalData);
+                      setIsEditing(false);
+                    }}
+                  />
 
-                <LifecyclePanel
-                  lifecycle={editableData.lifecycle}
-                  onToggleCheckpoint={handleLifecycleCheckpointToggle}
-                />
+                  <LifecyclePanel
+                    lifecycle={editableData.lifecycle}
+                    onToggleCheckpoint={handleLifecycleCheckpointToggle}
+                  />
+                </div>
               </div>
-            ) : selectedTab === 'storyEngine' ? (
+            ) : selectedTab === ADMIN_SECTIONS.INTAKE ? (
               <div className="mpm-surface mpm-overview-scope">
-                <div className="mpm-story-layout">
-                  <section className="mpm-story-panel mpm-story-panel-wide">
-                    <div className="mpm-story-panel-header">
-                      <h3>Story Engine Sources</h3>
-                      <p>
-                        Store the full discovery inputs for this build, then run
-                        the engine to generate chapter-specific story and build
-                        direction.
+                <div className="mpm-tab-shell">
+                  <div className="mpm-tab-section-header">
+                    <div>
+                      <div className="mpm-tab-kicker">Intake & Direction</div>
+                      <h3 className="mpm-tab-title">Discovery inputs</h3>
+                      <p className="mpm-tab-subtitle">
+                        Consultation source material and mapped artistic /
+                        technical direction for the build.
                       </p>
                     </div>
 
-                    <div className="mpm-story-form-grid">
-                      <label className="mpm-story-field mpm-story-field-full">
-                        <span className="mpm-story-field-label">
-                          Full Consultation Transcript
-                        </span>
-                        <textarea
-                          value={storyEngineData.consultationTranscript}
-                          onChange={(e) =>
-                            setStoryEngineData((prev) => ({
-                              ...prev,
-                              consultationTranscript: e.target.value,
-                            }))
-                          }
-                          rows={8}
-                        />
-                      </label>
-
-                      <label className="mpm-story-field">
-                        <span className="mpm-story-field-label">
-                          Consultation Summary
-                        </span>
-                        <textarea
-                          value={storyEngineData.consultationSummary}
-                          onChange={(e) =>
-                            setStoryEngineData((prev) => ({
-                              ...prev,
-                              consultationSummary: e.target.value,
-                            }))
-                          }
-                          rows={5}
-                        />
-                      </label>
-
-                      <label className="mpm-story-field">
-                        <span className="mpm-story-field-label">
-                          Admin Notes
-                        </span>
-                        <textarea
-                          value={storyEngineData.adminNotes}
-                          onChange={(e) =>
-                            setStoryEngineData((prev) => ({
-                              ...prev,
-                              adminNotes: e.target.value,
-                            }))
-                          }
-                          rows={5}
-                        />
-                      </label>
-
-                      <label className="mpm-story-field mpm-story-field-full">
-                        <span className="mpm-story-field-label">
-                          Questionnaire Raw
-                        </span>
-                        <textarea
-                          value={storyEngineData.questionnaireRaw}
-                          onChange={(e) =>
-                            setStoryEngineData((prev) => ({
-                              ...prev,
-                              questionnaireRaw: e.target.value,
-                            }))
-                          }
-                          rows={7}
-                        />
-                      </label>
-                    </div>
-                  </section>
-
-                  <section className="mpm-story-panel">
-                    <div className="mpm-story-panel-header">
-                      <h3>Mapped Consultation Fields</h3>
-                      <p>
-                        These are the grounded artist/build inputs that drive
-                        the engine.
-                      </p>
-                    </div>
-
-                    <div className="mpm-story-form-grid">
-                      {STORY_ENGINE_FIELD_CONFIG.consultationMapped.map(
-                        (field) => {
-                          const suggestion = getMappedFieldSuggestion({
-                            engineRecord: storyEngineData.engineRecord,
-                            sectionKey: 'consultationMapped',
-                            fieldKey: field.key,
-                            recommendationKey: field.recommendationKey,
-                          });
-
-                          return (
-                            <div
-                              key={field.key}
-                              className="mpm-story-field-wrap"
-                            >
-                              <label className="mpm-story-field">
-                                <span className="mpm-story-field-label">
-                                  {field.label}
-                                </span>
-                                <input
-                                  type="text"
-                                  value={
-                                    storyEngineData.consultationMapped[
-                                      field.key
-                                    ] || ''
-                                  }
-                                  onChange={(e) =>
-                                    updateStoryEngineField(
-                                      'consultationMapped',
-                                      field.key,
-                                      e.target.value
-                                    )
-                                  }
-                                />
-                              </label>
-
-                              {renderSuggestionCard({
-                                ...suggestion,
-                                onUseSuggestion: () =>
-                                  updateStoryEngineField(
-                                    'consultationMapped',
-                                    field.key,
-                                    suggestion.suggestedValue
-                                  ),
-                              })}
-                            </div>
-                          );
+                    <div className="mpm-tab-actions">
+                      <button
+                        type="button"
+                        className="mpm-bulk-btn"
+                        onClick={handleNormalizeTranscript}
+                        disabled={
+                          storyEngineRunning ||
+                          isNormalizingTranscript ||
+                          !String(
+                            storyEngineData.consultationTranscript || ''
+                          ).trim()
                         }
+                      >
+                        {isNormalizingTranscript
+                          ? 'Formatting…'
+                          : 'Format Conversation'}
+                      </button>
+
+                      <button
+                        type="button"
+                        className="mpm-bulk-btn"
+                        onClick={() => saveStoryEngineToProject()}
+                        disabled={storyEngineRunning || isNormalizingTranscript}
+                      >
+                        Save Intake Inputs
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="mpm-intake-stack">
+                    <section
+                      className={`mpm-intake-section ${
+                        expandedIntakeSections.questionnaire ? 'is-open' : ''
+                      }`}
+                    >
+                      <button
+                        type="button"
+                        className="mpm-intake-section-toggle"
+                        onClick={() => toggleIntakeSection('questionnaire')}
+                      >
+                        <div className="mpm-intake-section-toggle-copy">
+                          <span className="mpm-intake-section-kicker">
+                            Section 1
+                          </span>
+                          <h4>Questionnaire Direction</h4>
+                          <p>
+                            Structured artist preferences pulled from
+                            questionnaire data.
+                          </p>
+                        </div>
+                        <span className="mpm-intake-section-toggle-icon">
+                          {expandedIntakeSections.questionnaire ? '−' : '+'}
+                        </span>
+                      </button>
+
+                      {expandedIntakeSections.questionnaire && (
+                        <div className="mpm-intake-section-body">
+                          <div className="mpm-story-form-grid">
+                            {STORY_ENGINE_FIELD_CONFIG.questionnaireMapped.map(
+                              (field) => {
+                                const suggestion = getMappedFieldSuggestion({
+                                  engineRecord: storyEngineData.engineRecord,
+                                  sectionKey: 'questionnaireMapped',
+                                  fieldKey: field.key,
+                                  recommendationKey: field.recommendationKey,
+                                });
+
+                                return (
+                                  <div
+                                    key={field.key}
+                                    className="mpm-story-field-wrap"
+                                  >
+                                    <div className="mpm-story-field">
+                                      <span className="mpm-story-field-label">
+                                        {field.label}
+                                      </span>
+
+                                      {renderMappedFieldControl({
+                                        field,
+                                        value:
+                                          storyEngineData.questionnaireMapped[
+                                            field.key
+                                          ] || '',
+                                        onChange: (nextValue) =>
+                                          updateStoryEngineField(
+                                            'questionnaireMapped',
+                                            field.key,
+                                            nextValue
+                                          ),
+                                      })}
+                                    </div>
+
+                                    {renderSuggestionCard({
+                                      ...suggestion,
+                                      onUseSuggestion: () =>
+                                        updateStoryEngineField(
+                                          'questionnaireMapped',
+                                          field.key,
+                                          suggestion.suggestedValue
+                                        ),
+                                    })}
+                                  </div>
+                                );
+                              }
+                            )}
+                          </div>
+                        </div>
                       )}
-                    </div>
-                  </section>
+                    </section>
 
-                  <section className="mpm-story-panel">
-                    <div className="mpm-story-panel-header">
-                      <h3>Mapped Questionnaire Fields</h3>
-                      <p>
-                        Use questionnaire data to reinforce the artist profile.
-                      </p>
-                    </div>
+                    <section
+                      className={`mpm-intake-section ${
+                        expandedIntakeSections.consultation ? 'is-open' : ''
+                      }`}
+                    >
+                      <button
+                        type="button"
+                        className="mpm-intake-section-toggle"
+                        onClick={() => toggleIntakeSection('consultation')}
+                      >
+                        <div className="mpm-intake-section-toggle-copy">
+                          <span className="mpm-intake-section-kicker">
+                            Section 2
+                          </span>
+                          <h4>Consultation Direction</h4>
+                          <p>
+                            Builder-facing interpretation of the live
+                            conversation and artistic needs.
+                          </p>
+                        </div>
+                        <span className="mpm-intake-section-toggle-icon">
+                          {expandedIntakeSections.consultation ? '−' : '+'}
+                        </span>
+                      </button>
 
-                    <div className="mpm-story-form-grid">
-                      {STORY_ENGINE_FIELD_CONFIG.questionnaireMapped.map(
-                        (field) => {
-                          const suggestion = getMappedFieldSuggestion({
-                            engineRecord: storyEngineData.engineRecord,
-                            sectionKey: 'questionnaireMapped',
-                            fieldKey: field.key,
-                            recommendationKey: field.recommendationKey,
-                          });
+                      {expandedIntakeSections.consultation && (
+                        <div className="mpm-intake-section-body">
+                          <div className="mpm-story-form-grid">
+                            {STORY_ENGINE_FIELD_CONFIG.consultationMapped.map(
+                              (field) => {
+                                const suggestion = getMappedFieldSuggestion({
+                                  engineRecord: storyEngineData.engineRecord,
+                                  sectionKey: 'consultationMapped',
+                                  fieldKey: field.key,
+                                  recommendationKey: field.recommendationKey,
+                                });
 
-                          return (
-                            <div
-                              key={field.key}
-                              className="mpm-story-field-wrap"
-                            >
-                              <label className="mpm-story-field">
-                                <span className="mpm-story-field-label">
-                                  {field.label}
-                                </span>
-                                <input
-                                  type="text"
-                                  value={
-                                    storyEngineData.questionnaireMapped[
-                                      field.key
-                                    ] || ''
-                                  }
-                                  onChange={(e) =>
-                                    updateStoryEngineField(
-                                      'questionnaireMapped',
-                                      field.key,
-                                      e.target.value
-                                    )
-                                  }
-                                />
-                              </label>
+                                return (
+                                  <div
+                                    key={field.key}
+                                    className="mpm-story-field-wrap"
+                                  >
+                                    <div className="mpm-story-field">
+                                      <span className="mpm-story-field-label">
+                                        {field.label}
+                                      </span>
 
-                              {renderSuggestionCard({
-                                ...suggestion,
-                                onUseSuggestion: () =>
-                                  updateStoryEngineField(
-                                    'questionnaireMapped',
-                                    field.key,
-                                    suggestion.suggestedValue
-                                  ),
-                              })}
-                            </div>
-                          );
-                        }
+                                      {renderMappedFieldControl({
+                                        field,
+                                        value:
+                                          storyEngineData.consultationMapped[
+                                            field.key
+                                          ] || '',
+                                        onChange: (nextValue) =>
+                                          updateStoryEngineField(
+                                            'consultationMapped',
+                                            field.key,
+                                            nextValue
+                                          ),
+                                      })}
+                                    </div>
+
+                                    {renderSuggestionCard({
+                                      ...suggestion,
+                                      onUseSuggestion: () =>
+                                        updateStoryEngineField(
+                                          'consultationMapped',
+                                          field.key,
+                                          suggestion.suggestedValue
+                                        ),
+                                    })}
+                                  </div>
+                                );
+                              }
+                            )}
+                          </div>
+                        </div>
                       )}
-                    </div>
-                  </section>
+                    </section>
 
-                  <section className="mpm-story-panel">
-                    <div className="mpm-story-panel-header">
-                      <h3>Suggested Build Directions</h3>
-                      <p>
-                        Lock in build decisions manually, or accept intelligent
-                        recommendations.
-                      </p>
-                    </div>
+                    <section
+                      className={`mpm-intake-section ${
+                        expandedIntakeSections.sources ? 'is-open' : ''
+                      }`}
+                    >
+                      <button
+                        type="button"
+                        className="mpm-intake-section-toggle"
+                        onClick={() => toggleIntakeSection('sources')}
+                      >
+                        <div className="mpm-intake-section-toggle-copy">
+                          <span className="mpm-intake-section-kicker">
+                            Section 3
+                          </span>
+                          <h4>Source Material</h4>
+                          <p>
+                            Transcript, summary, notes, and questionnaire
+                            source-of-truth.
+                          </p>
+                        </div>
+                        <span className="mpm-intake-section-toggle-icon">
+                          {expandedIntakeSections.sources ? '−' : '+'}
+                        </span>
+                      </button>
 
-                    <div className="mpm-story-form-grid">
-                      {STORY_ENGINE_BUILD_SPEC_FIELDS.map((field) => {
-                        const suggestion = getBuildSpecSuggestion(
-                          storyEngineData.engineRecord,
-                          field.recommendationKey
-                        );
-
-                        const currentValue =
-                          storyEngineData.engineRecord?.buildSpec?.[field.key]
-                            ?.value || '';
-
-                        return (
-                          <div key={field.key} className="mpm-story-field-wrap">
-                            <label className="mpm-story-field">
+                      {expandedIntakeSections.sources && (
+                        <div className="mpm-intake-section-body">
+                          <div className="mpm-story-form-grid">
+                            <div className="mpm-story-field mpm-story-field-full">
                               <span className="mpm-story-field-label">
-                                {field.label}
+                                Full Consultation Transcript
                               </span>
 
-                              {field.inputType === 'select' ? (
-                                <select
-                                  value={currentValue}
-                                  onChange={(e) =>
-                                    updateBuildSpecField(
-                                      field.key,
-                                      e.target.value,
-                                      {
-                                        status: 'observed',
-                                        lastUpdatedBy: 'admin',
-                                        manualLock: true,
-                                      }
+                              <div className="mpm-transcript-shell">
+                                <div className="mpm-code-header">
+                                  <span>Conversation View</span>
+                                  <span className="mpm-code-header-meta">
+                                    {smartTranscriptTurns.length} turns
+                                  </span>
+                                </div>
+
+                                <div className="mpm-transcript-thread">
+                                  {smartTranscriptTurns.length ? (
+                                    smartTranscriptTurns.map((turn) => (
+                                      <div
+                                        key={turn.id}
+                                        className={`mpm-transcript-line ${
+                                          turn.speaker === 'Ober Artisan'
+                                            ? 'mpm-transcript-line-craftsman'
+                                            : 'mpm-transcript-line-artist'
+                                        }`}
+                                      >
+                                        <div className="mpm-transcript-speaker">
+                                          <span className="mpm-transcript-speaker-chip">
+                                            {turn.speaker}
+                                          </span>
+                                        </div>
+
+                                        <div className="mpm-transcript-bubble">
+                                          {turn.text}
+                                        </div>
+                                      </div>
+                                    ))
+                                  ) : (
+                                    <div className="mpm-code-empty">
+                                      No transcript added yet.
+                                    </div>
+                                  )}
+                                </div>
+                              </div>
+
+                              <textarea
+                                value={storyEngineData.consultationTranscript}
+                                onChange={(e) => {
+                                  const nextValue = e.target.value;
+
+                                  setStoryEngineData((prev) => ({
+                                    ...prev,
+                                    consultationTranscript: nextValue,
+                                  }));
+
+                                  setNormalizedTranscriptTurns([]);
+                                }}
+                                rows={8}
+                                className="mpm-transcript-raw-input"
+                                placeholder="Paste raw consultation transcript here..."
+                              />
+                            </div>
+
+                            <div className="mpm-story-field">
+                              <span className="mpm-story-field-label">
+                                Consultation Summary
+                              </span>
+
+                              <div className="mpm-summary-shell">
+                                {String(
+                                  storyEngineData.consultationSummary || ''
+                                )
+                                  .split(/(?:\r?\n)+|(?<=\.)\s+(?=[A-Z])/)
+                                  .map((line) => line.trim())
+                                  .filter(Boolean).length ? (
+                                  <ul className="mpm-summary-list">
+                                    {String(
+                                      storyEngineData.consultationSummary || ''
                                     )
-                                  }
-                                >
-                                  <option value="">Select...</option>
-                                  {field.options.map((option) => (
-                                    <option key={option} value={option}>
-                                      {option}
-                                    </option>
-                                  ))}
-                                </select>
-                              ) : (
+                                      .split(/(?:\r?\n)+|(?<=\.)\s+(?=[A-Z])/)
+                                      .map((line) => line.trim())
+                                      .filter(Boolean)
+                                      .map((line, idx) => (
+                                        <li key={`consultation-summary-${idx}`}>
+                                          {line}
+                                        </li>
+                                      ))}
+                                  </ul>
+                                ) : (
+                                  <div className="mpm-code-empty">
+                                    No consultation summary yet.
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+
+                            <label className="mpm-story-field">
+                              <span className="mpm-story-field-label">
+                                Admin Notes
+                              </span>
+                              <textarea
+                                value={storyEngineData.adminNotes}
+                                onChange={(e) =>
+                                  setStoryEngineData((prev) => ({
+                                    ...prev,
+                                    adminNotes: e.target.value,
+                                  }))
+                                }
+                                rows={5}
+                              />
+                            </label>
+
+                            <div className="mpm-story-field mpm-story-field-full">
+                              <span className="mpm-story-field-label">
+                                Questionnaire Raw
+                              </span>
+
+                              <div className="mpm-code-shell">
+                                <div className="mpm-code-header">
+                                  <span>JSON</span>
+                                  <span className="mpm-code-header-meta">
+                                    Read only
+                                  </span>
+                                </div>
+
+                                <pre className="mpm-code-block">
+                                  <code>
+                                    {formattedQuestionnaireRaw ||
+                                      '// No questionnaire data yet'}
+                                  </code>
+                                </pre>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </section>
+                  </div>
+                </div>
+              </div>
+            ) : selectedTab === ADMIN_SECTIONS.STORY_STUDIO ? (
+              <div className="mpm-surface mpm-overview-scope">
+                <div className="mpm-tab-shell">
+                  <div className="mpm-story-studio-hero">
+                    <div className="mpm-story-studio-hero-copy">
+                      <div className="mpm-tab-kicker">Story Studio</div>
+                      <h3 className="mpm-tab-title">
+                        Story engine + chapter output
+                      </h3>
+                      <p className="mpm-tab-subtitle">
+                        Lock build direction, run story generation, resolve
+                        outstanding items, and review chapter output before
+                        publishing downstream.
+                      </p>
+                    </div>
+
+                    <div className="mpm-story-studio-hero-actions">
+                      <button
+                        type="button"
+                        className="mpm-bulk-btn"
+                        onClick={handleRunStoryEngine}
+                        disabled={storyEngineRunning}
+                      >
+                        {storyEngineRunning ? 'Running…' : 'Run Story Engine'}
+                      </button>
+
+                      <button
+                        type="button"
+                        className="mpm-bulk-btn"
+                        onClick={() => saveStoryEngineToProject()}
+                        disabled={storyEngineRunning}
+                      >
+                        Save Studio State
+                      </button>
+                    </div>
+                  </div>
+
+                  <section className="mpm-story-studio-summary">
+                    <div className="mpm-story-studio-summary-card">
+                      <span className="mpm-story-studio-summary-label">
+                        Outstanding
+                      </span>
+                      <strong className="mpm-story-studio-summary-value">
+                        {storyStudioSummaryStats.outstandingCount}
+                      </strong>
+                    </div>
+
+                    <div className="mpm-story-studio-summary-card">
+                      <span className="mpm-story-studio-summary-label">
+                        Chapters
+                      </span>
+                      <strong className="mpm-story-studio-summary-value">
+                        {storyStudioSummaryStats.chapterCount}
+                      </strong>
+                    </div>
+
+                    <div className="mpm-story-studio-summary-card">
+                      <span className="mpm-story-studio-summary-label">
+                        Readiness
+                      </span>
+                      <strong className="mpm-story-studio-summary-value">
+                        {storyStudioSummaryStats.readiness}
+                      </strong>
+                    </div>
+
+                    <div className="mpm-story-studio-summary-card">
+                      <span className="mpm-story-studio-summary-label">
+                        Confidence
+                      </span>
+                      <strong className="mpm-story-studio-summary-value">
+                        {storyStudioSummaryStats.confidence}%
+                      </strong>
+                    </div>
+                  </section>
+
+                  <section className="mpm-story-studio-outstanding">
+                    <div className="mpm-story-studio-outstanding-head">
+                      <div>
+                        <h4 className="mpm-story-studio-section-title">
+                          Outstanding items
+                        </h4>
+                        <p className="mpm-story-studio-section-subtitle">
+                          These are the items still blocking a fully complete
+                          intake + story build.
+                        </p>
+                      </div>
+                    </div>
+
+                    {storyStudioOutstandingItems.length ? (
+                      <div className="mpm-story-studio-outstanding-list">
+                        {storyStudioOutstandingItems.map((item) => (
+                          <div
+                            key={item.id}
+                            className={`mpm-story-studio-outstanding-item mpm-story-studio-outstanding-item-${item.type}`}
+                          >
+                            <div className="mpm-story-studio-outstanding-main">
+                              <span className="mpm-story-studio-outstanding-dot" />
+                              <span className="mpm-story-studio-outstanding-text">
+                                {item.label}
+                              </span>
+                            </div>
+
+                            <button
+                              type="button"
+                              className="mpm-story-studio-info-btn"
+                              onClick={() =>
+                                setOutstandingHelpItem((prev) =>
+                                  prev?.id === item.id ? null : item
+                                )
+                              }
+                              aria-label={`How to resolve ${item.label}`}
+                              title="How to resolve"
+                            >
+                              ?
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="mpm-story-studio-outstanding-empty">
+                        All core intake + story inputs are in place.
+                      </div>
+                    )}
+                  </section>
+
+                  <div className="mpm-story-layout">
+                    <section className="mpm-story-panel">
+                      <div className="mpm-story-panel-header">
+                        <h3>Build Direction Controls</h3>
+                        <p>
+                          Accept recommended build direction or manually confirm
+                          your own before rerunning Story Engine.
+                        </p>
+                      </div>
+
+                      <div className="mpm-story-form-grid">
+                        {STORY_ENGINE_BUILD_SPEC_FIELDS.map((field) => {
+                          const buildSpecNode =
+                            storyEngineData?.engineRecord?.buildSpec?.[
+                              field.key
+                            ] || {};
+
+                          const currentValue = buildSpecNode?.value || '';
+
+                          const suggestion = getBuildSpecSuggestion({
+                            engineRecord: storyEngineData.engineRecord,
+                            fieldKey: field.key,
+                            recommendationKey: field.recommendationKey,
+                          });
+
+                          return (
+                            <div
+                              key={field.key}
+                              className="mpm-story-field-wrap"
+                            >
+                              <div className="mpm-story-field">
+                                <span className="mpm-story-field-label">
+                                  {field.label}
+                                </span>
+
+                                {field.description ? (
+                                  <span className="mpm-help">
+                                    {field.description}
+                                  </span>
+                                ) : null}
+
                                 <input
                                   type="text"
                                   value={currentValue}
+                                  placeholder={`Enter ${field.label.toLowerCase()}...`}
                                   onChange={(e) =>
                                     updateBuildSpecField(
                                       field.key,
                                       e.target.value,
                                       {
-                                        status: 'observed',
+                                        status: e.target.value.trim()
+                                          ? 'confirmed'
+                                          : 'observed',
                                         lastUpdatedBy: 'admin',
-                                        manualLock: true,
+                                        manualLock: !!e.target.value.trim(),
+                                        confidence: e.target.value.trim()
+                                          ? 1
+                                          : buildSpecNode?.confidence || 0,
+                                        rationale: e.target.value.trim()
+                                          ? ['Confirmed manually by admin.']
+                                          : [],
                                       }
                                     )
                                   }
                                 />
-                              )}
-                            </label>
 
-                            {renderSuggestionCard({
-                              ...suggestion,
-                              onUseSuggestion: () =>
-                                updateBuildSpecField(
-                                  field.key,
-                                  suggestion.suggestedValue,
-                                  {
-                                    status: 'recommended',
-                                    confidence: suggestion.confidence,
-                                    rationale: suggestion.rationale,
-                                    lastUpdatedBy: 'story_engine',
-                                    manualLock: true,
-                                  }
-                                ),
-                            })}
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </section>
+                                <div className="mpm-story-buildspec-meta">
+                                  <span className="mpm-story-buildspec-chip">
+                                    Status:{' '}
+                                    {buildSpecNode?.status || 'unconfirmed'}
+                                  </span>
 
-                  <section className="mpm-story-toolbar">
-                    <button
-                      type="button"
-                      className="mpm-bulk-btn"
-                      onClick={handleRunStoryEngine}
-                      disabled={storyEngineRunning}
-                    >
-                      {storyEngineRunning
-                        ? 'Saving + Running...'
-                        : 'Save Story Inputs + Run Story Engine'}
-                    </button>
+                                  <span className="mpm-story-buildspec-chip">
+                                    Lock:{' '}
+                                    {buildSpecNode?.manualLock
+                                      ? 'Manual'
+                                      : 'Open'}
+                                  </span>
 
-                    <button
-                      type="button"
-                      className="mpm-bulk-btn"
-                      onClick={() => saveStoryEngineToProject()}
-                      disabled={storyEngineRunning}
-                    >
-                      Save Inputs Only
-                    </button>
-                  </section>
+                                  <span className="mpm-story-buildspec-chip">
+                                    Confidence:{' '}
+                                    {Math.round(
+                                      (buildSpecNode?.confidence || 0) * 100
+                                    )}
+                                    %
+                                  </span>
+                                </div>
 
-                  {!!storyEngineData?.engineRecord?.engineMeta && (
+                                <div className="mpm-story-buildspec-actions">
+                                  <button
+                                    type="button"
+                                    className="mpm-bulk-btn"
+                                    onClick={() =>
+                                      updateBuildSpecField(
+                                        field.key,
+                                        currentValue,
+                                        {
+                                          status: currentValue.trim()
+                                            ? 'confirmed'
+                                            : 'observed',
+                                          lastUpdatedBy: 'admin',
+                                          manualLock: !!currentValue.trim(),
+                                          confidence: currentValue.trim()
+                                            ? 1
+                                            : buildSpecNode?.confidence || 0,
+                                          rationale: currentValue.trim()
+                                            ? ['Confirmed manually by admin.']
+                                            : [],
+                                        }
+                                      )
+                                    }
+                                    disabled={
+                                      !String(currentValue || '').trim()
+                                    }
+                                  >
+                                    Confirm
+                                  </button>
+
+                                  <button
+                                    type="button"
+                                    className="mpm-bulk-btn mpm-bulk-btn-reset"
+                                    onClick={() =>
+                                      updateBuildSpecField(field.key, '', {
+                                        status: 'observed',
+                                        lastUpdatedBy: 'admin',
+                                        manualLock: false,
+                                        confidence: 0,
+                                        rationale: [],
+                                      })
+                                    }
+                                  >
+                                    Clear
+                                  </button>
+                                </div>
+                              </div>
+
+                              {renderSuggestionCard({
+                                ...suggestion,
+                                onUseSuggestion: () =>
+                                  updateBuildSpecField(
+                                    field.key,
+                                    suggestion?.suggestedValue || '',
+                                    {
+                                      status: suggestion?.suggestedValue
+                                        ? 'confirmed'
+                                        : 'observed',
+                                      lastUpdatedBy: 'admin',
+                                      manualLock: !!suggestion?.suggestedValue,
+                                      confidence: suggestion?.confidence || 0,
+                                      rationale: suggestion?.rationale || [],
+                                    }
+                                  ),
+                              })}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </section>
+
                     <section className="mpm-story-panel">
                       <div className="mpm-story-panel-header">
                         <h3>Engine Status</h3>
+                        <p>
+                          Review readiness, confidence, and unresolved prompts
+                          before generating polished chapter output.
+                        </p>
                       </div>
 
                       <div className="mpm-story-status-grid">
@@ -3253,10 +4791,8 @@ const ManageProjectModal = ({
                             Draft readiness
                           </span>
                           <strong>
-                            {
-                              storyEngineData.engineRecord.engineMeta
-                                .draftReadiness
-                            }
+                            {storyEngineData?.engineRecord?.engineMeta
+                              ?.draftReadiness || 'not_ready'}
                           </strong>
                         </div>
 
@@ -3266,19 +4802,19 @@ const ManageProjectModal = ({
                           </span>
                           <strong>
                             {Math.round(
-                              (storyEngineData.engineRecord.engineMeta
-                                .overallConfidence || 0) * 100
+                              (storyEngineData?.engineRecord?.engineMeta
+                                ?.overallConfidence || 0) * 100
                             )}
                             %
                           </strong>
                         </div>
                       </div>
 
-                      {!!storyEngineData.engineRecord.engineMeta.adminPrompts
+                      {!!storyEngineData?.engineRecord?.engineMeta?.adminPrompts
                         ?.length && (
                         <div className="mpm-story-review-list">
                           <div className="mpm-story-review-title">
-                            Unresolved Prompts
+                            Unresolved prompts
                           </div>
                           <ul>
                             {storyEngineData.engineRecord.engineMeta.adminPrompts.map(
@@ -3293,182 +4829,182 @@ const ManageProjectModal = ({
                         </div>
                       )}
                     </section>
-                  )}
 
-                  {!!storyEngineData?.engineRecord?.chapters && (
-                    <section className="mpm-story-panel mpm-story-panel-wide">
-                      <div className="mpm-story-panel-header">
-                        <h3>Chapter Draft Preview</h3>
-                        <p>
-                          Review the current chapter output before using it
-                          downstream.
-                        </p>
-                      </div>
+                    {!!storyEngineData?.engineRecord?.chapters && (
+                      <section className="mpm-story-panel mpm-story-panel-wide">
+                        <div className="mpm-story-panel-header">
+                          <h3>Story Studio Chapters</h3>
+                          <p>
+                            Review chapter output, regenerate sections, and lock
+                            approved sections.
+                          </p>
+                        </div>
 
-                      <div className="mpm-story-preview-list">
-                        {Object.entries(
-                          storyEngineData.engineRecord.chapters
-                        ).map(([chapterKey, chapterValue]) => (
-                          <article
-                            key={chapterKey}
-                            className="mpm-story-preview-card"
-                          >
-                            <div className="mpm-story-preview-head">
-                              <h4>{chapterKey}</h4>
-                              <div className="mpm-story-preview-meta">
-                                <span>
-                                  Confidence:{' '}
-                                  {Math.round(
-                                    (chapterValue?.confidenceScore || 0) * 100
-                                  )}
-                                  %
-                                </span>
-                                <span>
-                                  Flags:{' '}
-                                  {(chapterValue?.flags || []).join(', ') ||
-                                    '—'}
-                                </span>
-                              </div>
-                            </div>
-
-                            <div className="mpm-story-preview-block">
-                              <div className="mpm-story-preview-label-row">
-                                <div className="mpm-story-preview-label">
-                                  Chapter Overview
-                                  {getChapterSectionData(
-                                    chapterKey,
-                                    'chapterOverview'
-                                  )?.locked && (
-                                    <span
-                                      style={{ marginLeft: 8, opacity: 0.75 }}
-                                    >
-                                      (Locked)
-                                    </span>
-                                  )}
+                        <div className="mpm-story-preview-list">
+                          {Object.entries(
+                            storyEngineData.engineRecord.chapters
+                          ).map(([chapterKey, chapterValue]) => (
+                            <article
+                              key={chapterKey}
+                              className="mpm-story-preview-card"
+                            >
+                              <div className="mpm-story-preview-head">
+                                <h4>{chapterValue?.label || chapterKey}</h4>
+                                <div className="mpm-story-preview-meta">
+                                  <span>
+                                    Confidence:{' '}
+                                    {Math.round(
+                                      (chapterValue?.confidenceScore || 0) * 100
+                                    )}
+                                    %
+                                  </span>
+                                  <span>
+                                    Flags:{' '}
+                                    {(chapterValue?.flags || []).join(', ') ||
+                                      '—'}
+                                  </span>
                                 </div>
+                              </div>
 
-                                <div className="mpm-story-preview-actions">
-                                  <button
-                                    type="button"
-                                    className="mpm-bulk-btn"
-                                    disabled={
-                                      storyEngineRunning ||
-                                      !!getChapterSectionData(
-                                        chapterKey,
-                                        'chapterOverview'
-                                      )?.locked
-                                    }
-                                    onClick={() =>
-                                      regenerateChapterSection({
-                                        chapterKey,
-                                        sectionKey: 'chapterOverview',
-                                      })
-                                    }
-                                  >
-                                    Regenerate
-                                  </button>
-
-                                  <button
-                                    type="button"
-                                    className="mpm-bulk-btn"
-                                    onClick={() =>
-                                      toggleChapterSectionLock({
-                                        chapterKey,
-                                        sectionKey: 'chapterOverview',
-                                        locked: !getChapterSectionData(
-                                          chapterKey,
-                                          'chapterOverview'
-                                        )?.locked,
-                                      })
-                                    }
-                                  >
+                              <div className="mpm-story-preview-block">
+                                <div className="mpm-story-preview-label-row">
+                                  <div className="mpm-story-preview-label">
+                                    Chapter Overview
                                     {getChapterSectionData(
                                       chapterKey,
                                       'chapterOverview'
-                                    )?.locked
-                                      ? 'Unlock'
-                                      : 'Lock'}
-                                  </button>
-                                </div>
-                              </div>
+                                    )?.locked && (
+                                      <span
+                                        style={{ marginLeft: 8, opacity: 0.75 }}
+                                      >
+                                        (Locked)
+                                      </span>
+                                    )}
+                                  </div>
 
-                              <div className="mpm-story-preview-text">
-                                {chapterValue?.storySections?.chapterOverview
-                                  ?.text || '—'}
-                              </div>
-                            </div>
-
-                            <div className="mpm-story-preview-block">
-                              <div className="mpm-story-preview-label-row">
-                                <div className="mpm-story-preview-label">
-                                  Build Notes Story
-                                  {getChapterSectionData(
-                                    chapterKey,
-                                    'buildNotesStory'
-                                  )?.locked && (
-                                    <span
-                                      style={{ marginLeft: 8, opacity: 0.75 }}
-                                    >
-                                      (Locked)
-                                    </span>
-                                  )}
-                                </div>
-
-                                <div className="mpm-story-preview-actions">
-                                  <button
-                                    type="button"
-                                    className="mpm-bulk-btn"
-                                    disabled={
-                                      storyEngineRunning ||
-                                      !!getChapterSectionData(
-                                        chapterKey,
-                                        'buildNotesStory'
-                                      )?.locked
-                                    }
-                                    onClick={() =>
-                                      regenerateChapterSection({
-                                        chapterKey,
-                                        sectionKey: 'buildNotesStory',
-                                      })
-                                    }
-                                  >
-                                    Regenerate
-                                  </button>
-
-                                  <button
-                                    type="button"
-                                    className="mpm-bulk-btn"
-                                    onClick={() =>
-                                      toggleChapterSectionLock({
-                                        chapterKey,
-                                        sectionKey: 'buildNotesStory',
-                                        locked: !getChapterSectionData(
+                                  <div className="mpm-story-preview-actions">
+                                    <button
+                                      type="button"
+                                      className="mpm-bulk-btn"
+                                      disabled={
+                                        storyEngineRunning ||
+                                        !!getChapterSectionData(
                                           chapterKey,
-                                          'buildNotesStory'
-                                        )?.locked,
-                                      })
-                                    }
-                                  >
+                                          'chapterOverview'
+                                        )?.locked
+                                      }
+                                      onClick={() =>
+                                        regenerateChapterSection({
+                                          chapterKey,
+                                          sectionKey: 'chapterOverview',
+                                        })
+                                      }
+                                    >
+                                      Regenerate
+                                    </button>
+
+                                    <button
+                                      type="button"
+                                      className="mpm-bulk-btn"
+                                      onClick={() =>
+                                        toggleChapterSectionLock({
+                                          chapterKey,
+                                          sectionKey: 'chapterOverview',
+                                          locked: !getChapterSectionData(
+                                            chapterKey,
+                                            'chapterOverview'
+                                          )?.locked,
+                                        })
+                                      }
+                                    >
+                                      {getChapterSectionData(
+                                        chapterKey,
+                                        'chapterOverview'
+                                      )?.locked
+                                        ? 'Unlock'
+                                        : 'Lock'}
+                                    </button>
+                                  </div>
+                                </div>
+
+                                <div className="mpm-story-preview-text">
+                                  {chapterValue?.storySections?.chapterOverview
+                                    ?.text || '—'}
+                                </div>
+                              </div>
+
+                              <div className="mpm-story-preview-block">
+                                <div className="mpm-story-preview-label-row">
+                                  <div className="mpm-story-preview-label">
+                                    Build Notes
                                     {getChapterSectionData(
                                       chapterKey,
                                       'buildNotesStory'
-                                    )?.locked
-                                      ? 'Unlock'
-                                      : 'Lock'}
-                                  </button>
+                                    )?.locked && (
+                                      <span
+                                        style={{ marginLeft: 8, opacity: 0.75 }}
+                                      >
+                                        (Locked)
+                                      </span>
+                                    )}
+                                  </div>
+
+                                  <div className="mpm-story-preview-actions">
+                                    <button
+                                      type="button"
+                                      className="mpm-bulk-btn"
+                                      disabled={
+                                        storyEngineRunning ||
+                                        !!getChapterSectionData(
+                                          chapterKey,
+                                          'buildNotesStory'
+                                        )?.locked
+                                      }
+                                      onClick={() =>
+                                        regenerateChapterSection({
+                                          chapterKey,
+                                          sectionKey: 'buildNotesStory',
+                                        })
+                                      }
+                                    >
+                                      Regenerate
+                                    </button>
+
+                                    <button
+                                      type="button"
+                                      className="mpm-bulk-btn"
+                                      onClick={() =>
+                                        toggleChapterSectionLock({
+                                          chapterKey,
+                                          sectionKey: 'buildNotesStory',
+                                          locked: !getChapterSectionData(
+                                            chapterKey,
+                                            'buildNotesStory'
+                                          )?.locked,
+                                        })
+                                      }
+                                    >
+                                      {getChapterSectionData(
+                                        chapterKey,
+                                        'buildNotesStory'
+                                      )?.locked
+                                        ? 'Unlock'
+                                        : 'Lock'}
+                                    </button>
+                                  </div>
+                                </div>
+
+                                <div className="mpm-story-preview-text">
+                                  {chapterValue?.storySections?.buildNotesStory
+                                    ?.text || '—'}
                                 </div>
                               </div>
-
-                              <div className="mpm-story-preview-text">
-                                {chapterValue?.storySections?.buildNotesStory
-                                  ?.text || '—'}
-                              </div>
-                            </div>
-                          </article>
-                        ))}
-                      </div>
-                    </section>
-                  )}
+                            </article>
+                          ))}
+                        </div>
+                      </section>
+                    )}
+                  </div>
                 </div>
               </div>
             ) : (
@@ -3556,6 +5092,8 @@ const ManageProjectModal = ({
             )}
           </main>
         </div>
+
+        {helpOverlayPortal}
 
         <Snackbar
           open={showSnackbar}

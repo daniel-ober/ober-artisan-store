@@ -18,9 +18,9 @@ const TestMockupButton = () => {
         depth: '6.5',
         docId: 'test-mockup-doc',
       });
-      console.log('✅ Image generated at:', result.data.url);
+      // console.log('✅ Image generated at:', result.data.url);
     } catch (err) {
-      console.error('❌ Mockup error:', err.message);
+      // console.error('❌ Mockup error:', err.message);
     }
   };
 

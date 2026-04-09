@@ -48,7 +48,7 @@ async function updateFeuzonPricing() {
 
   // ✅ Update Firestore
   await feuzonRef.update({ pricingOptions: updatedPricing });
-  console.log("✅ Successfully updated FEUZØN pricing in Firestore!");
+  // console.log("✅ Successfully updated FEUZØN pricing in Firestore!");
 }
 
 updateFeuzonPricing()

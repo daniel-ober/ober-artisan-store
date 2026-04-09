@@ -1,5 +1,3 @@
-// src/components/PrivacyPolicy.js
-
 import React, { forwardRef } from 'react';
 import './PrivacyPolicy.css';
 
@@ -72,6 +70,13 @@ const PrivacyPolicy = forwardRef((props, ref) => {
         collect or log the build inputs, option selections, outputs, and
         interaction events needed to operate, improve, secure, or troubleshoot
         those tools.
+        <br />
+        <br />
+        <strong>Consultation Notes and Transcription Data:</strong> If you
+        participate in a consultation, discovery call, support conversation, or
+        similar interaction, we may use note-taking or transcription tools to
+        document relevant details, preferences, project goals, or follow-up
+        items shared during that conversation.
       </p>
 
       <h2>3. How We Use Your Information</h2>
@@ -81,6 +86,7 @@ const PrivacyPolicy = forwardRef((props, ref) => {
         <li>To operate customer accounts, project portals, and gated features</li>
         <li>To review, moderate, publish, or manage Legacy Vault submissions</li>
         <li>To generate, display, or improve interactive tool outputs and recommendations</li>
+        <li>To document consultations, intake details, customer preferences, and project-related notes</li>
         <li>To send updates or marketing communications if you opt in</li>
         <li>To optimize user experience and improve our products and services</li>
         <li>To maintain site security and detect, prevent, or investigate fraud or misuse</li>

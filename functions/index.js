@@ -1,5 +1,12 @@
-const { onRequest, onCall, HttpsError } = require('firebase-functions/v2/https');
-const { onDocumentCreated, onDocumentWritten } = require('firebase-functions/v2/firestore');
+const {
+  onRequest,
+  onCall,
+  HttpsError,
+} = require('firebase-functions/v2/https');
+const {
+  onDocumentCreated,
+  onDocumentWritten,
+} = require('firebase-functions/v2/firestore');
 const { defineSecret } = require('firebase-functions/params');
 const { onSchedule } = require('firebase-functions/v2/scheduler');
 const admin = require('firebase-admin');
@@ -9,8 +16,10 @@ const axios = require('axios');
 const crypto = require('crypto');
 const functions = require('firebase-functions/v2');
 const logger = require('firebase-functions/logger');
-const { generateHybridChapterText } = require('./src/generateHybridChapterText');
-
+const {
+  generateHybridChapterText,
+} = require('./src/generateHybridChapterText');
+const OpenAI = require('openai');
 const STRIPE_SECRET_KEY = defineSecret('STRIPE_SECRET_KEY');
 const STRIPE_WEBHOOK_SECRET = defineSecret('STRIPE_WEBHOOK_SECRET');
 const CLIENT_URL = defineSecret('CLIENT_URL');
@@ -19,7 +28,10 @@ const PRINTIFY_SHOP_ID = defineSecret('PRINTIFY_SHOP_ID');
 const PRINTIFY_WEBHOOK_SECRET = defineSecret('PRINTIFY_WEBHOOK_SECRET');
 const RECAPTCHA_SECRET_KEY = defineSecret('RECAPTCHA_SECRET_KEY');
 const OPENAI_API_KEY = defineSecret('OPENAI_API_KEY');
-
+const getOpenAIClient = () =>
+  new OpenAI({
+    apiKey: OPENAI_API_KEY.value(),
+  });
 admin.initializeApp();
 const db = admin.firestore();
 
@@ -707,10 +719,7 @@ exports.generateHybridStoryChapter = onCall(
         sectionKey === 'buildNotesStory' &&
         !String(prompts?.buildNotes || '').trim()
       ) {
-        throw new HttpsError(
-          'invalid-argument',
-          'Missing buildNotes prompt'
-        );
+        throw new HttpsError('invalid-argument', 'Missing buildNotes prompt');
       }
 
       if (
@@ -763,6 +772,1168 @@ exports.generateHybridStoryChapter = onCall(
       throw new HttpsError(
         'internal',
         err?.message || 'Failed generating hybrid chapter'
+      );
+    }
+  }
+);
+
+function buildNormalizeTranscriptPrompt({ rawTranscriptText, artistName }) {
+  const safeArtistName = String(artistName || 'Artist').trim() || 'Artist';
+
+  return `
+You are cleaning and structuring a noisy 2-person consultation transcript for a real custom drum build workflow.
+
+The only valid speakers are:
+- "Ober Artisan"
+- "${safeArtistName}"
+
+Your job is to:
+1. recover readable sentence boundaries
+2. preserve wording as closely as possible
+3. split the conversation into proper turns
+4. assign each turn to the most likely speaker
+5. stay conservative whenever meaning is uncertain
+
+This transcript may influence real custom drum build decisions.
+Accuracy is more important than prettiness.
+
+CRITICAL OUTPUT RULES
+- Return valid JSON only
+- No markdown
+- No code fences
+- No explanation
+- No text before or after the JSON
+- Use this exact shape:
+
+{
+  "turns": [
+    {
+      "speaker": "Ober Artisan",
+      "text": "Hello, how are you doing?",
+      "uncertain": false
+    }
+  ]
+}
+
+- "speaker" must be exactly one of:
+  - "Ober Artisan"
+  - "${safeArtistName}"
+
+MAIN GOAL
+Create a transcript that reads naturally but stays very close to what was actually said.
+
+DO NOT
+- do not summarize
+- do not rewrite into polished prose
+- do not invent facts
+- do not add product details
+- do not add emotional interpretation
+- do not create a third speaker
+- do not use labels like "Customer", "Artist", "Caller", or "Craftsman"
+- do not force alternating speakers
+- do not merge a question from one speaker with an answer from the other speaker
+
+WORDING RULES
+- preserve original wording as much as possible
+- keep rough spoken style
+- fix punctuation, capitalization, and sentence boundaries
+- fix obvious speech-to-text errors only when highly confident
+- keep awkward but understandable phrasing if meaning is still clear
+- if wording is unclear, prefer preserving it over guessing
+- if a repair requires a meaningful guess, set uncertain=true
+
+TURN-SPLITTING RULES
+You must split turns based on conversational logic, not just punctuation.
+
+Always split when:
+- one speaker asks a direct question and the next phrase is clearly the other person's answer
+- the topic ownership clearly changes
+- a first-person story switches from one person's life/history to the other's
+- a builder/process explanation switches into a customer/personal-history answer
+- a short acknowledgement like "Thanks, yeah" is followed by a new question from the other speaker
+
+Do NOT combine:
+- one person's question + the other person's answer in a single turn
+- two different speakers just because they are short adjacent phrases
+- a direct prompt from Ober Artisan with the customer's answer
+- the customer's question with Ober Artisan's explanatory answer in one turn
+
+QUESTION / ANSWER CONTINUITY
+If one speaker asks a question, the next substantial response is usually the other speaker.
+
+TOPIC OWNERSHIP RULES
+
+"Ober Artisan" is more likely when talking about:
+- how he builds drums
+- stave vs ply shells
+- shell thickness
+- reinforcement rings
+- drum construction methods
+- woodworking process
+- tuning approach
+- sound theory tools
+- his business / how he builds
+- his own arthritis story
+- questions about what the customer wants
+
+"${safeArtistName}" is more likely when talking about:
+- where he lives or lived
+- his personal drumming history
+- medical school, residency, psychiatry, retirement
+- arthritis symptoms and limitations
+- prior snares or drum kits he owned
+- what kind of sound he likes
+- why he responded to the ad
+- what he wants in his own drum
+
+CONTINUITY RULES
+- once one speaker is clearly telling a story, keep that speaker until there is strong evidence of a switch
+- prefer fewer coherent turns over many tiny fragments
+- do not switch speakers in the middle of a personal story unless there is strong evidence
+- do not switch speakers in the middle of a technical explanation unless there is strong evidence
+
+UNCERTAINTY RULES
+Set "uncertain": true when:
+- speaker assignment is a judgment call
+- wording repair required a real guess
+- the phrase is partially broken
+- a wrong interpretation could matter for build decisions
+
+Set "uncertain": false when:
+- speaker is clear
+- wording is clear or lightly repaired
+- the turn is safe and faithful
+
+RAW TRANSCRIPT
+"""${String(rawTranscriptText || '').trim()}"""
+`.trim();
+}
+
+function extractJsonObjectFromText(value = '') {
+  const text = String(value || '').trim();
+  if (!text) return null;
+
+  const cleaned = text
+    .replace(/^```json\s*/i, '')
+    .replace(/^```\s*/i, '')
+    .replace(/\s*```$/i, '')
+    .trim();
+
+  const firstBrace = cleaned.indexOf('{');
+  const lastBrace = cleaned.lastIndexOf('}');
+
+  if (firstBrace === -1 || lastBrace === -1 || lastBrace < firstBrace) {
+    return null;
+  }
+
+  const candidate = cleaned.slice(firstBrace, lastBrace + 1);
+
+  try {
+    return JSON.parse(candidate);
+  } catch {
+    return null;
+  }
+}
+
+function normalizePersonNameForTranscript(value = '') {
+  return String(value || '')
+    .toLowerCase()
+    .replace(/[^a-z\\s'-]/g, ' ')
+    .replace(/\\s+/g, ' ')
+    .trim();
+}
+
+function extractFirstNameForTranscript(value = '') {
+  return normalizePersonNameForTranscript(value).split(' ')[0] || '';
+}
+
+function mapSpeakerLabelToRoleForTranscript(label, artistName = '') {
+  const normalized = normalizePersonNameForTranscript(label);
+  const artistFirst = extractFirstNameForTranscript(artistName);
+
+  if (!normalized) return artistName || 'Artist';
+
+  if (
+    [
+      'craftsman',
+      'dan',
+      'builder',
+      'host',
+      'maker',
+      'ober',
+      'ober artisan',
+    ].includes(normalized)
+  ) {
+    return 'Ober Artisan';
+  }
+
+  if (['artist', 'customer', 'client', 'caller'].includes(normalized)) {
+    return artistName || 'Artist';
+  }
+
+  if (artistFirst && normalized === artistFirst) {
+    return artistName || 'Artist';
+  }
+
+  return artistName || 'Artist';
+}
+
+function fallbackTranscriptTurns(rawText = '', artistName = '') {
+  const text = String(rawText || '').replace(/\\r/g, '').trim();
+  if (!text) return [];
+
+  const lines = text
+    .split('\\n')
+    .map((line) => line.trim())
+    .filter(Boolean);
+
+  const explicitSpeakerLines = lines.filter((line) =>
+    /^[A-Za-z][A-Za-z\\s'-]{1,40}:\\s+/.test(line)
+  );
+
+  if (explicitSpeakerLines.length >= 2) {
+    return explicitSpeakerLines
+      .map((line, idx) => {
+        const match = line.match(
+          /^([A-Za-z][A-Za-z\\s'-]{1,40}):\\s+([\\s\\S]+)$/
+        );
+        const rawSpeaker = match?.[1] || '';
+        const content = match?.[2] || line;
+
+        return {
+          id: `turn-${idx}`,
+          speaker: mapSpeakerLabelToRoleForTranscript(rawSpeaker, artistName),
+          text: String(content || '').trim(),
+          uncertain: true,
+        };
+      })
+      .filter((turn) => turn.text);
+  }
+
+  return [
+    {
+      id: 'turn-0',
+      speaker: 'Ober Artisan',
+      text,
+      uncertain: true,
+    },
+  ];
+}
+
+exports.normalizeConsultationTranscript = onCall(
+  {
+    cors: true,
+    timeoutSeconds: 60,
+    memory: '1GiB',
+    secrets: [OPENAI_API_KEY],
+  },
+  async (request) => {
+    try {
+      const rawTranscript = String(
+        request.data?.rawTranscriptText || request.data?.rawTranscript || ''
+      ).trim();
+
+      const artistName =
+        String(request.data?.artistName || '').trim() || 'Artist';
+
+      if (!rawTranscript) {
+        throw new HttpsError(
+          'invalid-argument',
+          'rawTranscriptText or rawTranscript is required'
+        );
+      }
+
+      if (!OPENAI_API_KEY.value()) {
+        throw new HttpsError('internal', 'OPENAI_API_KEY is not configured');
+      }
+
+      const client = getOpenAIClient();
+      const prompt = buildNormalizeTranscriptPrompt({
+        rawTranscriptText: rawTranscript,
+        artistName,
+      });
+
+      let parsed = null;
+
+      try {
+        const completion = await client.chat.completions.create({
+          model: 'gpt-4.1-mini',
+          messages: [
+            {
+              role: 'system',
+              content:
+                'Return only valid JSON matching the requested schema exactly. No prose. No markdown. No code fences.',
+            },
+            {
+              role: 'user',
+              content: prompt,
+            },
+          ],
+          max_completion_tokens: 2500,
+        });
+
+        const message = completion?.choices?.[0]?.message || {};
+        const rawContent = message?.content;
+        let outputText = '';
+
+        if (typeof rawContent === 'string') {
+          outputText = rawContent.trim();
+        } else if (Array.isArray(rawContent)) {
+          outputText = rawContent
+            .map((part) => {
+              if (typeof part === 'string') return part;
+              if (typeof part?.text === 'string') return part.text;
+              if (typeof part?.content === 'string') return part.content;
+              return '';
+            })
+            .join('')
+            .trim();
+        }
+
+        if (outputText) {
+          try {
+            parsed = JSON.parse(outputText);
+          } catch {
+            parsed = extractJsonObjectFromText(outputText);
+          }
+        }
+
+        if (!parsed) {
+          logger.error('normalizeConsultationTranscript parse failure', {
+            outputPreview: String(outputText || '').slice(0, 3000),
+          });
+        }
+      } catch (modelErr) {
+        logger.error('normalizeConsultationTranscript model call failed', {
+          message: modelErr?.message || 'Unknown model error',
+          stack: modelErr?.stack || '',
+        });
+      }
+
+      let turns = Array.isArray(parsed?.turns)
+        ? parsed.turns
+            .map((turn, idx) => {
+              const rawSpeaker = String(turn?.speaker || '').trim();
+              return {
+                id: `turn-${idx}`,
+                speaker:
+                  rawSpeaker === 'Ober Artisan' ? 'Ober Artisan' : artistName,
+                text: String(turn?.text || '').trim(),
+                uncertain: !!turn?.uncertain,
+              };
+            })
+            .filter((turn) => turn.text)
+        : [];
+
+      if (!turns.length) {
+        turns = fallbackTranscriptTurns(rawTranscript, artistName);
+      }
+
+      return {
+        ok: true,
+        result: {
+          turns,
+          usedFallback: !parsed,
+        },
+      };
+    } catch (err) {
+      logger.error('normalizeConsultationTranscript failed', {
+        message: err?.message || 'Unknown error',
+        stack: err?.stack || '',
+      });
+
+      if (err instanceof HttpsError) throw err;
+
+      throw new HttpsError(
+        'internal',
+        err?.message || 'Failed to normalize consultation transcript'
+      );
+    }
+  }
+);
+
+function extractJsonObjectFromText(value = '') {
+  const text = String(value || '').trim();
+  if (!text) return null;
+
+  const cleaned = text
+    .replace(/^```json\s*/i, '')
+    .replace(/^```\s*/i, '')
+    .replace(/\s*```$/i, '')
+    .trim();
+
+  const firstBrace = cleaned.indexOf('{');
+  const lastBrace = cleaned.lastIndexOf('}');
+
+  if (firstBrace === -1 || lastBrace === -1 || lastBrace < firstBrace) {
+    return null;
+  }
+
+  const candidate = cleaned.slice(firstBrace, lastBrace + 1);
+
+  try {
+    return JSON.parse(candidate);
+  } catch {
+    return null;
+  }
+}
+
+function normalizePersonNameForTranscript(value = '') {
+  return String(value || '')
+    .toLowerCase()
+    .replace(/[^a-z\\s'-]/g, ' ')
+    .replace(/\\s+/g, ' ')
+    .trim();
+}
+
+function extractFirstNameForTranscript(value = '') {
+  return normalizePersonNameForTranscript(value).split(' ')[0] || '';
+}
+
+function mapSpeakerLabelToRoleForTranscript(label, artistName = '') {
+  const normalized = normalizePersonNameForTranscript(label);
+  const artistFirst = extractFirstNameForTranscript(artistName);
+
+  if (!normalized) return artistName || 'Artist';
+
+  if (
+    [
+      'craftsman',
+      'dan',
+      'builder',
+      'host',
+      'maker',
+      'ober',
+      'ober artisan',
+    ].includes(normalized)
+  ) {
+    return 'Ober Artisan';
+  }
+
+  if (['artist', 'customer', 'client', 'caller'].includes(normalized)) {
+    return artistName || 'Artist';
+  }
+
+  if (artistFirst && normalized === artistFirst) {
+    return artistName || 'Artist';
+  }
+
+  return artistName || 'Artist';
+}
+
+function fallbackTranscriptTurns(rawText = '', artistName = '') {
+  const text = String(rawText || '').replace(/\\r/g, '').trim();
+  if (!text) return [];
+
+  const lines = text
+    .split('\\n')
+    .map((line) => line.trim())
+    .filter(Boolean);
+
+  const explicitSpeakerLines = lines.filter((line) =>
+    /^[A-Za-z][A-Za-z\\s'-]{1,40}:\\s+/.test(line)
+  );
+
+  if (explicitSpeakerLines.length >= 2) {
+    return explicitSpeakerLines
+      .map((line, idx) => {
+        const match = line.match(/^([A-Za-z][A-Za-z\\s'-]{1,40}):\\s+([\\s\\S]+)$/);
+        const rawSpeaker = match?.[1] || '';
+        const content = match?.[2] || line;
+
+        return {
+          id: `turn-${idx}`,
+          speaker: mapSpeakerLabelToRoleForTranscript(rawSpeaker, artistName),
+          text: String(content || '').trim(),
+          uncertain: true,
+        };
+      })
+      .filter((turn) => turn.text);
+  }
+
+  return [
+    {
+      id: 'turn-0',
+      speaker: 'Ober Artisan',
+      text,
+      uncertain: true,
+    },
+  ];
+}
+
+exports.normalizeConsultationTranscript = onCall(
+  {
+    cors: true,
+    timeoutSeconds: 60,
+    memory: '1GiB',
+    secrets: [OPENAI_API_KEY],
+  },
+  async (request) => {
+    try {
+      const rawTranscript = String(
+        request.data?.rawTranscriptText || request.data?.rawTranscript || ''
+      ).trim();
+
+      const artistName =
+        String(request.data?.artistName || '').trim() || 'Artist';
+
+      if (!rawTranscript) {
+        throw new HttpsError(
+          'invalid-argument',
+          'rawTranscriptText or rawTranscript is required'
+        );
+      }
+
+      if (!OPENAI_API_KEY.value()) {
+        throw new HttpsError('internal', 'OPENAI_API_KEY is not configured');
+      }
+
+      const client = getOpenAIClient();
+      const prompt = buildNormalizeTranscriptPrompt({
+        rawTranscriptText: rawTranscript,
+        artistName,
+      });
+
+      let parsed = null;
+
+      try {
+        const completion = await client.chat.completions.create({
+          model: 'gpt-4.1-mini',
+          messages: [
+            {
+              role: 'system',
+              content:
+                'Return only valid JSON matching the requested schema exactly. No prose. No markdown. No code fences.',
+            },
+            {
+              role: 'user',
+              content: prompt,
+            },
+          ],
+          max_completion_tokens: 2500,
+        });
+
+        const message = completion?.choices?.[0]?.message || {};
+        const rawContent = message?.content;
+        let outputText = '';
+
+        if (typeof rawContent === 'string') {
+          outputText = rawContent.trim();
+        } else if (Array.isArray(rawContent)) {
+          outputText = rawContent
+            .map((part) => {
+              if (typeof part === 'string') return part;
+              if (typeof part?.text === 'string') return part.text;
+              if (typeof part?.content === 'string') return part.content;
+              return '';
+            })
+            .join('')
+            .trim();
+        }
+
+        if (outputText) {
+          try {
+            parsed = JSON.parse(outputText);
+          } catch {
+            parsed = extractJsonObjectFromText(outputText);
+          }
+        }
+
+        if (!parsed) {
+          logger.error('normalizeConsultationTranscript parse failure', {
+            outputPreview: String(outputText || '').slice(0, 3000),
+          });
+        }
+      } catch (modelErr) {
+        logger.error('normalizeConsultationTranscript model call failed', {
+          message: modelErr?.message || 'Unknown model error',
+          stack: modelErr?.stack || '',
+        });
+      }
+
+      let turns = Array.isArray(parsed?.turns)
+        ? parsed.turns
+            .map((turn, idx) => {
+              const rawSpeaker = String(turn?.speaker || '').trim();
+              return {
+                id: `turn-${idx}`,
+                speaker:
+                  rawSpeaker === 'Ober Artisan' ? 'Ober Artisan' : artistName,
+                text: String(turn?.text || '').trim(),
+                uncertain: !!turn?.uncertain,
+              };
+            })
+            .filter((turn) => turn.text)
+        : [];
+
+      if (!turns.length) {
+        turns = fallbackTranscriptTurns(rawTranscript, artistName);
+      }
+
+      return {
+        ok: true,
+        result: {
+          turns,
+          usedFallback: !parsed,
+        },
+      };
+    } catch (err) {
+      logger.error('normalizeConsultationTranscript failed', {
+        message: err?.message || 'Unknown error',
+        stack: err?.stack || '',
+      });
+
+      if (err instanceof HttpsError) throw err;
+
+      throw new HttpsError(
+        'internal',
+        err?.message || 'Failed to normalize consultation transcript'
+      );
+    }
+  }
+);
+
+function extractJsonObjectFromText(value = '') {
+  const text = String(value || '').trim();
+  if (!text) return null;
+
+  const cleaned = text
+    .replace(/^```json\s*/i, '')
+    .replace(/^```\s*/i, '')
+    .replace(/\s*```$/i, '')
+    .trim();
+
+  const firstBrace = cleaned.indexOf('{');
+  const lastBrace = cleaned.lastIndexOf('}');
+
+  if (firstBrace === -1 || lastBrace === -1 || lastBrace < firstBrace) {
+    return null;
+  }
+
+  const candidate = cleaned.slice(firstBrace, lastBrace + 1);
+
+  try {
+    return JSON.parse(candidate);
+  } catch {
+    return null;
+  }
+}
+
+exports.normalizeConsultationTranscript = onCall(
+  {
+    cors: true,
+    timeoutSeconds: 60,
+    memory: '1GiB',
+    secrets: [OPENAI_API_KEY],
+  },
+  async (request) => {
+    try {
+      const rawTranscript = String(
+        request.data?.rawTranscriptText || request.data?.rawTranscript || ''
+      ).trim();
+
+      const artistName =
+        String(request.data?.artistName || '').trim() || 'Artist';
+
+      if (!rawTranscript) {
+        throw new HttpsError(
+          'invalid-argument',
+          'rawTranscriptText or rawTranscript is required'
+        );
+      }
+
+      if (!OPENAI_API_KEY.value()) {
+        throw new HttpsError('internal', 'OPENAI_API_KEY is not configured');
+      }
+
+      const client = getOpenAIClient();
+
+      const prompt = buildNormalizeTranscriptPrompt({
+        rawTranscriptText: rawTranscript,
+        artistName,
+      });
+
+      const completion = await client.chat.completions.create({
+        model: 'gpt-4.1-mini',
+        messages: [
+          {
+            role: 'system',
+            content:
+              'Return only valid JSON matching the requested schema exactly. No prose. No markdown. No code fences.',
+          },
+          {
+            role: 'user',
+            content: prompt,
+          },
+        ],
+        response_format: {
+          type: 'json_schema',
+          json_schema: {
+            name: 'normalized_consultation_transcript',
+            strict: true,
+            schema: {
+              type: 'object',
+              additionalProperties: false,
+              properties: {
+                turns: {
+                  type: 'array',
+                  items: {
+                    type: 'object',
+                    additionalProperties: false,
+                    properties: {
+                      speaker: {
+                        type: 'string',
+                        enum: ['Ober Artisan', artistName],
+                      },
+                      text: {
+                        type: 'string',
+                      },
+                      uncertain: {
+                        type: 'boolean',
+                      },
+                    },
+                    required: ['speaker', 'text', 'uncertain'],
+                  },
+                },
+              },
+              required: ['turns'],
+            },
+          },
+        },
+        max_completion_tokens: 2500,
+      });
+
+      const message = completion?.choices?.[0]?.message || {};
+      const refusal = String(message?.refusal || '').trim();
+
+      if (refusal) {
+        logger.error('normalizeConsultationTranscript refusal', { refusal });
+        throw new HttpsError(
+          'internal',
+          `Transcript normalization refused by model: ${refusal}`
+        );
+      }
+
+      let parsed = null;
+
+      if (message?.parsed && typeof message.parsed === 'object') {
+        parsed = message.parsed;
+      }
+
+      if (!parsed) {
+        const rawContent = message?.content;
+        let outputText = '';
+
+        if (typeof rawContent === 'string') {
+          outputText = rawContent.trim();
+        } else if (Array.isArray(rawContent)) {
+          outputText = rawContent
+            .map((part) => {
+              if (typeof part === 'string') return part;
+              if (part?.type === 'text' && typeof part?.text === 'string') {
+                return part.text;
+              }
+              if (typeof part?.content === 'string') return part.content;
+              return '';
+            })
+            .join('')
+            .trim();
+        }
+
+        if (outputText) {
+          try {
+            parsed = JSON.parse(outputText);
+          } catch {
+            parsed = extractJsonObjectFromText(outputText);
+          }
+        }
+
+        if (!parsed) {
+          logger.error('normalizeConsultationTranscript parse failure', {
+            messageKeys: Object.keys(message || {}),
+            rawContentType: Array.isArray(rawContent)
+              ? 'array'
+              : typeof rawContent,
+            outputPreview: String(outputText || '').slice(0, 3000),
+            fullMessage: JSON.stringify(message || {}).slice(0, 5000),
+          });
+
+          throw new HttpsError(
+            'internal',
+            'Model returned invalid JSON for transcript normalization'
+          );
+        }
+      }
+
+      const turns = Array.isArray(parsed?.turns)
+        ? parsed.turns
+            .map((turn, idx) => {
+              const rawSpeaker = String(turn?.speaker || '').trim();
+              return {
+                id: `turn-${idx}`,
+                speaker:
+                  rawSpeaker === 'Ober Artisan' ? 'Ober Artisan' : artistName,
+                text: String(turn?.text || '').trim(),
+                uncertain: !!turn?.uncertain,
+              };
+            })
+            .filter((turn) => turn.text)
+        : [];
+
+      if (!turns.length) {
+        throw new HttpsError(
+          'internal',
+          'Transcript normalization returned zero usable turns'
+        );
+      }
+
+      return {
+        ok: true,
+        result: {
+          turns,
+        },
+      };
+    } catch (err) {
+      logger.error('normalizeConsultationTranscript failed', {
+        message: err?.message || 'Unknown error',
+        stack: err?.stack || '',
+      });
+
+      if (err instanceof HttpsError) throw err;
+
+      throw new HttpsError(
+        'internal',
+        err?.message || 'Failed to normalize consultation transcript'
+      );
+    }
+  }
+);
+
+exports.normalizeConsultationTranscript = onCall(
+  {
+    cors: true,
+    timeoutSeconds: 60,
+    memory: '1GiB',
+    secrets: [OPENAI_API_KEY],
+  },
+  async (request) => {
+    try {
+      const rawTranscript = String(
+        request.data?.rawTranscriptText || request.data?.rawTranscript || ''
+      ).trim();
+
+      const artistName =
+        String(request.data?.artistName || '').trim() || 'Artist';
+
+      if (!rawTranscript) {
+        throw new HttpsError(
+          'invalid-argument',
+          'rawTranscriptText or rawTranscript is required'
+        );
+      }
+
+      const apiKey = OPENAI_API_KEY.value();
+      if (!apiKey) {
+        throw new HttpsError('internal', 'OPENAI_API_KEY is not configured');
+      }
+
+      const client = getOpenAIClient();
+
+      const prompt = buildNormalizeTranscriptPrompt({
+        rawTranscriptText: rawTranscript,
+        artistName,
+      });
+
+      const completion = await client.chat.completions.create({
+        model: 'gpt-4.1-mini',
+        messages: [
+          {
+            role: 'system',
+            content:
+              'Return only valid JSON matching the schema exactly. No prose. No markdown. No code fences.',
+          },
+          {
+            role: 'user',
+            content: prompt,
+          },
+        ],
+        response_format: {
+          type: 'json_schema',
+          json_schema: {
+            name: 'normalized_consultation_transcript',
+            strict: true,
+            schema: {
+              type: 'object',
+              additionalProperties: false,
+              properties: {
+                turns: {
+                  type: 'array',
+                  items: {
+                    type: 'object',
+                    additionalProperties: false,
+                    properties: {
+                      speaker: {
+                        type: 'string',
+                        enum: ['Ober Artisan', artistName],
+                      },
+                      text: {
+                        type: 'string',
+                      },
+                      uncertain: {
+                        type: 'boolean',
+                      },
+                    },
+                    required: ['speaker', 'text', 'uncertain'],
+                  },
+                },
+              },
+              required: ['turns'],
+            },
+          },
+        },
+        max_completion_tokens: 2500,
+      });
+
+      const message = completion?.choices?.[0]?.message || {};
+      const refusal = String(message?.refusal || '').trim();
+
+      if (refusal) {
+        logger.error('normalizeConsultationTranscript refusal', {
+          refusal,
+        });
+
+        throw new HttpsError(
+          'internal',
+          'Transcript normalization was refused by the model'
+        );
+      }
+
+      let parsed = null;
+
+      if (message?.parsed && typeof message.parsed === 'object') {
+        parsed = message.parsed;
+      }
+
+      if (!parsed) {
+        const rawContent = message?.content;
+
+        let outputText = '';
+
+        if (typeof rawContent === 'string') {
+          outputText = rawContent.trim();
+        } else if (Array.isArray(rawContent)) {
+          outputText = rawContent
+            .map((part) => {
+              if (typeof part === 'string') return part;
+              if (part?.type === 'text' && typeof part?.text === 'string') {
+                return part.text;
+              }
+              return '';
+            })
+            .join('')
+            .trim();
+        }
+
+        if (outputText) {
+          try {
+            parsed = JSON.parse(outputText);
+          } catch {
+            parsed = extractJsonObjectFromText(outputText);
+          }
+        }
+
+        if (!parsed) {
+          logger.error('normalizeConsultationTranscript parse failure', {
+            messageKeys: Object.keys(message || {}),
+            rawContentType: Array.isArray(rawContent)
+              ? 'array'
+              : typeof rawContent,
+            outputPreview: String(outputText || '').slice(0, 2000),
+          });
+
+          throw new HttpsError(
+            'internal',
+            'Model returned invalid JSON for transcript normalization'
+          );
+        }
+      }
+
+      const turns = Array.isArray(parsed?.turns)
+        ? parsed.turns
+            .map((turn, idx) => {
+              const rawSpeaker = String(turn?.speaker || '').trim();
+              const normalizedSpeaker =
+                rawSpeaker === 'Ober Artisan' ? 'Ober Artisan' : artistName;
+
+              return {
+                id: `turn-${idx}`,
+                speaker: normalizedSpeaker,
+                text: String(turn?.text || '').trim(),
+                uncertain: !!turn?.uncertain,
+              };
+            })
+            .filter((turn) => turn.text)
+        : [];
+
+      return {
+        ok: true,
+        result: {
+          turns,
+        },
+      };
+    } catch (err) {
+      logger.error('normalizeConsultationTranscript failed', {
+        message: err?.message || 'Unknown error',
+        stack: err?.stack || '',
+      });
+
+      if (err instanceof HttpsError) throw err;
+
+      throw new HttpsError(
+        'internal',
+        err?.message || 'Failed to normalize consultation transcript'
+      );
+    }
+  }
+);
+
+exports.normalizeConsultationTranscript = onCall(
+  {
+    cors: true,
+    timeoutSeconds: 60,
+    memory: '1GiB',
+    secrets: [OPENAI_API_KEY],
+  },
+  async (request) => {
+    try {
+      const rawTranscript = String(
+        request.data?.rawTranscriptText || request.data?.rawTranscript || ''
+      ).trim();
+
+      const artistName =
+        String(request.data?.artistName || '').trim() || 'Artist';
+
+      if (!rawTranscript) {
+        throw new HttpsError(
+          'invalid-argument',
+          'rawTranscriptText or rawTranscript is required'
+        );
+      }
+
+      const apiKey = OPENAI_API_KEY.value();
+      if (!apiKey) {
+        throw new HttpsError('internal', 'OPENAI_API_KEY is not configured');
+      }
+
+      const client = getOpenAIClient();
+
+      const prompt = buildNormalizeTranscriptPrompt({
+        rawTranscriptText: rawTranscript,
+        artistName,
+      });
+
+      const completion = await client.chat.completions.create({
+        model: 'gpt-4.1-mini',
+        messages: [
+          {
+            role: 'system',
+            content:
+              'You must return only valid JSON that matches the provided schema exactly.',
+          },
+          {
+            role: 'user',
+            content: prompt,
+          },
+        ],
+        response_format: {
+          type: 'json_schema',
+          json_schema: {
+            name: 'normalized_consultation_transcript',
+            strict: true,
+            schema: {
+              type: 'object',
+              additionalProperties: false,
+              properties: {
+                turns: {
+                  type: 'array',
+                  items: {
+                    type: 'object',
+                    additionalProperties: false,
+                    properties: {
+                      speaker: {
+                        type: 'string',
+                        enum: ['Ober Artisan', artistName],
+                      },
+                      text: {
+                        type: 'string',
+                      },
+                      uncertain: {
+                        type: 'boolean',
+                      },
+                    },
+                    required: ['speaker', 'text', 'uncertain'],
+                  },
+                },
+              },
+              required: ['turns'],
+            },
+          },
+        },
+        max_completion_tokens: 2500,
+      });
+
+      const outputText = String(
+        completion?.choices?.[0]?.message?.content || ''
+      ).trim();
+
+      let parsed;
+      try {
+        parsed = JSON.parse(outputText);
+      } catch (err) {
+        logger.error('normalizeConsultationTranscript parse failure', {
+          outputText,
+        });
+
+        throw new HttpsError(
+          'internal',
+          'Model returned invalid JSON for transcript normalization'
+        );
+      }
+
+      const turns = Array.isArray(parsed?.turns)
+        ? parsed.turns
+            .map((turn, idx) => {
+              const rawSpeaker = String(turn?.speaker || '').trim();
+              const speaker =
+                rawSpeaker === 'Ober Artisan' ? 'Ober Artisan' : artistName;
+
+              return {
+                id: `turn-${idx}`,
+                speaker,
+                text: String(turn?.text || '').trim(),
+                uncertain: !!turn?.uncertain,
+              };
+            })
+            .filter((turn) => turn.text)
+        : [];
+
+      return {
+        ok: true,
+        result: {
+          turns,
+        },
+      };
+    } catch (err) {
+      logger.error('normalizeConsultationTranscript failed', {
+        message: err?.message || 'Unknown error',
+        stack: err?.stack || '',
+      });
+
+      if (err instanceof HttpsError) throw err;
+
+      throw new HttpsError(
+        'internal',
+        err?.message || 'Failed to normalize consultation transcript'
       );
     }
   }
@@ -1954,7 +3125,7 @@ exports.reconcileStripeOrders = onSchedule(
     const stripe = stripeLib(STRIPE_SECRET_KEY.value());
     const db = admin.firestore();
 
-    console.log('🔎 Running Stripe reconciliation job...');
+    // console.log('🔎 Running Stripe reconciliation job...');
 
     try {
       const since = Math.floor(Date.now() / 1000) - 60 * 60 * 24;
@@ -2037,7 +3208,7 @@ exports.reconcileStripeOrders = onSchedule(
         console.warn('✅ Recovered missing order:', orderId);
       }
 
-      console.log('✅ Stripe reconciliation complete.');
+      // console.log('✅ Stripe reconciliation complete.');
     } catch (err) {
       console.error('❌ Reconciliation job failed:', err);
 
