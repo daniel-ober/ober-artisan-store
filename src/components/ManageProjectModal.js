@@ -11,7 +11,8 @@ import {
   serverTimestamp,
 } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
-import { db } from '../firebaseConfig';
+import { db, app } from '../firebaseConfig';
+import { getFunctions, httpsCallable } from 'firebase/functions';
 import StepComponentTemplate, {
   CHECKPOINTS_BY_ITEM_ID,
 } from './StepComponentTemplate';
@@ -479,6 +480,22 @@ const deriveBestProjectName = (project = {}) => {
   );
 };
 
+const deriveBestArtistName = (project = {}, storyEngineData = {}) => {
+  return (
+    cleanStoryText(
+      storyEngineData?.consultationMapped?.artistName ||
+        storyEngineData?.questionnaireMapped?.artistName
+    ) ||
+    cleanStoryText(project?.customerName) ||
+    cleanStoryText(project?.customer?.name) ||
+    cleanStoryText(project?.customer?.displayName) ||
+    cleanStoryText(project?.customerInfo?.name) ||
+    cleanStoryText(project?.customerFullName) ||
+    cleanStoryText(project?.artistName) ||
+    ''
+  );
+};
+
 const ensureChecklistStructure = (data) => {
   const fixed = { ...(data || {}) };
 
@@ -642,6 +659,174 @@ const buildQuestionnaireRawFromProject = (project = {}) => {
   } catch {
     return '';
   }
+};
+
+const HYBRID_CHAPTER_PROMPTS = {
+  chapterOverview: `
+Write the chapter overview for this exact SoundLegend build.
+
+This must read like a real builder's note in a custom build book.
+It should feel plain, grounded, and written by hand after reviewing the project.
+
+Requirements:
+- 1 paragraph
+- 40 to 60 words
+- continue naturally from the previous chapter, but still work on its own
+- say what currently feels real
+- say what is leaning in a direction
+- say what is still open
+- stop cleanly without a concluding summary sentence
+
+Voice:
+- calm
+- plain
+- observant
+- restrained
+- human
+- workshop-real
+
+Write it like:
+- a builder documenting where the project stands right now
+- someone protecting the direction without forcing answers too early
+- someone naming what looks right so far and what still needs to stay open
+
+Use artistName only for the human/customer if a name is truly needed.
+If artistName is missing, avoid naming the person directly.
+Do NOT use SoundLegend, projectName, series name, or drum line as if it were the artist.
+
+Hard rules:
+- do not write like a summary
+- do not write like product copy
+- do not write like intake recap
+- do not write like polished presentation language
+- do not write from a bird's-eye narrator voice
+- do not use "has emerged as"
+- do not use "likely shell wood"
+- do not use "the build is settling into"
+- do not use "solid frame"
+- do not use "not yet defined in all details"
+- do not use "vintage touch"
+- do not use "remain open and need further input"
+- do not use "centers on"
+- do not use "identity"
+- do not use "concept"
+- do not use "voice"
+- do not use "at this stage"
+- do not use "at this point"
+- do not use "moving forward"
+- do not use "the next steps"
+- do not use genre lists
+- do not stack multiple specs into one elegant sentence
+
+Preferred shape:
+- sentence 1: one thing that feels real now
+- sentence 2: one thing leaning in a direction
+- sentence 3: what is still open
+- sentence 4: stop
+
+Sentence rules:
+- use short sentences
+- prefer simple nouns and verbs
+- keep each sentence focused on one idea
+- if a detail is not confirmed, say "leaning toward", "keep open", or "not locked yet"
+- the last sentence should feel like a working note, not a conclusion
+- the last sentence should be 4 to 8 words max
+
+For Commitment & Portal Setup:
+- this should feel like the project is no longer just exploratory
+- one or two directions can be named simply
+- structural choices can still stay open
+- the tone should stay steady, plain, and honest
+
+Good example of tone:
+"Maple still looks right here. Clear gloss makes sense if the figured grain stays central. Shell construction and edge details are not locked yet. Hardware can wait."
+
+Follow that level of restraint and directness.
+Do not copy the example directly.
+
+Return only the paragraph text.
+`.trim(),
+
+  buildNotes: `
+Write the build notes for this exact SoundLegend build.
+
+These are private bench notes from the maker to himself.
+They should feel like real workshop notes made during planning.
+
+Requirements:
+- return 4 to 6 bullet strings
+- one short sentence per bullet
+- each bullet should name a real direction, open question, caution, or thing to protect
+- be specific where the data supports it
+- be honest where the data does not support a firm decision yet
+
+Tone:
+- short
+- direct
+- useful
+- plainspoken
+- workshop-real
+
+Prefer wording like:
+- "Leaning toward"
+- "Keep"
+- "Not locked yet"
+- "Still needs confirmation"
+- "Hold off on"
+- "Verify before moving on"
+- "Do not finalize until"
+- "Protect"
+
+Use artistName only for the human/customer if a name is needed.
+If artistName is missing, avoid naming the person directly.
+Do NOT use SoundLegend, projectName, series name, or drum line as if it were the artist.
+
+Avoid:
+- presentation language
+- brand language
+- poetic language
+- summary lines
+- conclusion lines
+- inflated wording
+- uncertain details written as confirmed
+
+Do not use:
+- "aligns with"
+- "supports"
+- "concept"
+- "identity"
+- "signature snare"
+- "broad response"
+- "versatility"
+- "aesthetic"
+- "protect visual direction"
+- "remain open for further input"
+- "planned as"
+- "set to"
+- "locked in"
+- "finalized"
+
+Bullet rules:
+- do not write a wrap-up bullet
+- do not write a summary bullet
+- do not write any bullet that reads like marketing copy
+- do not write uncertain details as fixed
+- prefer bullets that begin with "Leaning toward", "Keep", "Hold off on", "Verify", or "Do not finalize"
+- each bullet should read like a usable shop note
+- avoid combining too many decisions into one bullet
+- if discussing hardware finish, keep it practical, like "Keep brass / gold hardware in play, but do not finalize yet"
+
+Good examples of tone:
+- "Leaning toward maple for the shell; keep construction format open."
+- "Hold off on hoop choice until edge and feel are clearer."
+- "Verify snare bed preference before cutting."
+- "Keep brass / gold hardware in play, but do not finalize yet."
+
+Follow that level of directness.
+Do not copy the examples directly.
+
+Return only an array of bullet strings.
+`.trim(),
 };
 
 const ManageProjectModal = ({
@@ -825,7 +1010,11 @@ const ManageProjectModal = ({
     const se = projectData.storyEngine || {};
 
     const hydratedQuestionnaireMapped = sanitizeStoryFieldGroup({
-      artistName: se?.sources?.questionnaireMapped?.artistName || '',
+      artistName:
+        deriveCustomerName(projectData) ||
+        se?.sources?.questionnaireMapped?.artistName ||
+        se?.sources?.consultationMapped?.artistName ||
+        '',
       styleOfPlaying: se?.sources?.questionnaireMapped?.styleOfPlaying || '',
       desiredOutcome: se?.sources?.questionnaireMapped?.desiredOutcome || '',
       genreContext: se?.sources?.questionnaireMapped?.genreContext || '',
@@ -847,8 +1036,9 @@ const ManageProjectModal = ({
 
     const hydratedConsultationMapped = sanitizeStoryFieldGroup({
       artistName:
-        se?.sources?.consultationMapped?.artistName ||
         deriveCustomerName(projectData) ||
+        se?.sources?.consultationMapped?.artistName ||
+        se?.sources?.questionnaireMapped?.artistName ||
         '',
       projectName:
         se?.sources?.consultationMapped?.projectName ||
@@ -1416,6 +1606,196 @@ const ManageProjectModal = ({
     });
   };
 
+  const getChapterSectionData = (chapterKey, sectionKey) => {
+    return (
+      storyEngineData?.engineRecord?.chapters?.[chapterKey]?.storySections?.[
+        sectionKey
+      ] || {}
+    );
+  };
+
+  const toggleChapterSectionLock = async ({
+    chapterKey,
+    sectionKey,
+    locked,
+  }) => {
+    const currentRecord =
+      storyEngineData.engineRecord || createEmptyStoryEngineRecord();
+
+    const nextRecord = {
+      ...currentRecord,
+      chapters: {
+        ...(currentRecord.chapters || {}),
+        [chapterKey]: {
+          ...(currentRecord.chapters?.[chapterKey] || {}),
+          storySections: {
+            ...(currentRecord.chapters?.[chapterKey]?.storySections || {}),
+            [sectionKey]: {
+              ...(currentRecord.chapters?.[chapterKey]?.storySections?.[
+                sectionKey
+              ] || {}),
+              locked,
+              lockedAt: locked ? new Date().toISOString() : null,
+              lockedBy: locked ? 'admin' : '',
+            },
+          },
+        },
+      },
+    };
+
+    const nextDraftPreview = {
+      ...(storyEngineData.draftPreview || {}),
+      [chapterKey]: nextRecord?.chapters?.[chapterKey]?.storySections || {},
+    };
+
+    const nextState = {
+      ...storyEngineData,
+      engineRecord: nextRecord,
+      draftPreview: nextDraftPreview,
+    };
+
+    setStoryEngineData(nextState);
+
+    await saveStoryEngineToProject({
+      sources: {
+        consultationTranscript: nextState.consultationTranscript,
+        consultationSummary: nextState.consultationSummary,
+        adminNotes: nextState.adminNotes,
+        questionnaireRaw: nextState.questionnaireRaw,
+        questionnaireMapped: nextState.questionnaireMapped,
+        consultationMapped: nextState.consultationMapped,
+      },
+      record: nextRecord,
+      draftPreview: nextDraftPreview,
+      lastRunAt: new Date().toISOString(),
+    });
+
+    setShowSnackbar(true);
+  };
+
+  const regenerateChapterSection = async ({ chapterKey, sectionKey }) => {
+    try {
+      setStoryEngineRunning(true);
+
+      const currentRecord =
+        storyEngineData.engineRecord || createEmptyStoryEngineRecord();
+      const chapter = currentRecord?.chapters?.[chapterKey];
+      if (!chapter) return;
+
+      const existingSection = chapter?.storySections?.[sectionKey] || {};
+
+      if (existingSection?.locked) {
+        console.warn(
+          `[StoryEngine] ${chapterKey}.${sectionKey} is locked. Skipping regeneration.`
+        );
+        return;
+      }
+
+      const resolvedArtistName = deriveBestArtistName(
+        projectData,
+        storyEngineData
+      );
+
+      const payload = {
+        projectId: projectData?.id || '',
+        chapterKey,
+        chapterLabel: chapter?.label || chapterKey,
+        artistName: resolvedArtistName || '',
+        projectName: deriveBestProjectName(projectData) || '',
+        consultationMapped: storyEngineData.consultationMapped,
+        questionnaireMapped: storyEngineData.questionnaireMapped,
+        buildSpec: currentRecord?.buildSpec || {},
+        recommendations: currentRecord?.recommendations || {},
+        engineMeta: currentRecord?.engineMeta || {},
+      };
+
+      const prompts =
+        sectionKey === 'chapterOverview'
+          ? { chapterOverview: HYBRID_CHAPTER_PROMPTS.chapterOverview }
+          : { buildNotes: HYBRID_CHAPTER_PROMPTS.buildNotes };
+
+      const hybridResult = await callHybridChapter({
+        chapterKey,
+        sectionKey,
+        payload,
+        prompts,
+      });
+
+      const nextRecord = {
+        ...currentRecord,
+        chapters: {
+          ...(currentRecord.chapters || {}),
+          [chapterKey]: {
+            ...(currentRecord.chapters?.[chapterKey] || {}),
+            storySections: {
+              ...(currentRecord.chapters?.[chapterKey]?.storySections || {}),
+            },
+          },
+        },
+      };
+
+      if (sectionKey === 'chapterOverview' && hybridResult?.chapterOverview) {
+        nextRecord.chapters[chapterKey].storySections.chapterOverview = {
+          ...(nextRecord.chapters[chapterKey].storySections.chapterOverview ||
+            {}),
+          text: hybridResult.chapterOverview,
+          lastGeneratedAt: new Date().toISOString(),
+          lastGeneratedBy: 'admin',
+        };
+      }
+
+      if (
+        sectionKey === 'buildNotesStory' &&
+        hybridResult?.buildNotes?.length
+      ) {
+        nextRecord.chapters[chapterKey].storySections.buildNotesStory = {
+          ...(nextRecord.chapters[chapterKey].storySections.buildNotesStory ||
+            {}),
+          text: hybridResult.buildNotes.join('\n'),
+          bulletItems: hybridResult.buildNotes,
+          lastGeneratedAt: new Date().toISOString(),
+          lastGeneratedBy: 'admin',
+        };
+      }
+
+      const nextDraftPreview = {
+        ...(storyEngineData.draftPreview || {}),
+        [chapterKey]: nextRecord?.chapters?.[chapterKey]?.storySections || {},
+      };
+
+      const nextState = {
+        ...storyEngineData,
+        engineRecord: nextRecord,
+        draftPreview: nextDraftPreview,
+      };
+
+      setStoryEngineData(nextState);
+
+      await saveStoryEngineToProject({
+        sources: {
+          consultationTranscript: nextState.consultationTranscript,
+          consultationSummary: nextState.consultationSummary,
+          adminNotes: nextState.adminNotes,
+          questionnaireRaw: nextState.questionnaireRaw,
+          questionnaireMapped: nextState.questionnaireMapped,
+          consultationMapped: nextState.consultationMapped,
+        },
+        record: nextRecord,
+        draftPreview: nextDraftPreview,
+        lastRunAt: new Date().toISOString(),
+      });
+
+      setShowSnackbar(true);
+    } catch (err) {
+      console.error(
+        `[StoryEngine] Failed regenerating ${chapterKey}.${sectionKey}:`,
+        err
+      );
+    } finally {
+      setStoryEngineRunning(false);
+    }
+  };
+
   const pickFirstMatch = (sourceText = '', patterns = []) => {
     const text = String(sourceText || '');
     for (const pattern of patterns) {
@@ -1637,12 +2017,60 @@ const ManageProjectModal = ({
     };
   };
 
+  const callHybridChapter = async ({
+    chapterKey,
+    sectionKey,
+    payload,
+    prompts,
+    model = 'gpt-4.1-mini',
+    timeoutMs = 45000,
+  }) => {
+    const functions = getFunctions(app);
+    const callable = httpsCallable(functions, 'generateHybridStoryChapter');
+
+    console.log('[StoryEngine] starting hybrid chapter:', {
+      chapterKey,
+      sectionKey,
+    });
+
+    const result = await Promise.race([
+      callable({
+        chapterKey,
+        sectionKey,
+        payload,
+        prompts,
+        model,
+      }),
+      new Promise((_, reject) =>
+        setTimeout(() => {
+          reject(
+            new Error(
+              `Hybrid callable timed out for ${chapterKey}.${sectionKey || 'unknown'}`
+            )
+          );
+        }, timeoutMs)
+      ),
+    ]);
+
+    console.log('[StoryEngine] finished hybrid chapter:', {
+      chapterKey,
+      sectionKey,
+    });
+
+    return result?.data?.result || null;
+  };
+
   const handleRunStoryEngine = async () => {
     try {
       setStoryEngineRunning(true);
 
       let record = createEmptyStoryEngineRecord();
       record.projectId = projectData?.id || null;
+
+      const resolvedArtistName = deriveBestArtistName(
+        projectData,
+        storyEngineData
+      );
 
       const autoConsultationMapped = sanitizeStoryFieldGroup({
         ...(storyEngineData.consultationMapped || {}),
@@ -1759,9 +2187,19 @@ const ManageProjectModal = ({
           '',
       });
 
-      const sanitizedConsultationMapped =
-        consultationBackfilledFromQuestionnaire;
-      const sanitizedQuestionnaireMapped = autoQuestionnaireMapped;
+      const sanitizedConsultationMapped = {
+        ...consultationBackfilledFromQuestionnaire,
+        artistName:
+          resolvedArtistName ||
+          consultationBackfilledFromQuestionnaire?.artistName ||
+          '',
+      };
+
+      const sanitizedQuestionnaireMapped = {
+        ...autoQuestionnaireMapped,
+        artistName:
+          resolvedArtistName || autoQuestionnaireMapped?.artistName || '',
+      };
 
       const consultationSource = createSourceEntry({
         type: SOURCE_TYPE.CONSULTATION,
@@ -1819,6 +2257,7 @@ const ManageProjectModal = ({
       const buildSpecKeys = Object.keys(
         storyEngineData.engineRecord?.buildSpec || {}
       );
+
       buildSpecKeys.forEach((fieldKey) => {
         const node = storyEngineData.engineRecord?.buildSpec?.[fieldKey];
         if (
@@ -1836,19 +2275,93 @@ const ManageProjectModal = ({
       record = runStoryEngine(record);
       record = runStoryDraftPipeline(record);
 
+      // DEBUG MODE: run only one chapter first until this is stable.
+      const HYBRID_TEST_CHAPTERS = ['commitmentPortal'];
+
+      for (const chapterKey of HYBRID_TEST_CHAPTERS) {
+        const chapter = record?.chapters?.[chapterKey];
+        if (!chapter) continue;
+
+        const payload = {
+          projectId: projectData?.id || '',
+          chapterKey,
+          chapterLabel: chapter?.label || chapterKey,
+          artistName: resolvedArtistName || '',
+          projectName: deriveBestProjectName(projectData) || '',
+          consultationMapped: sanitizedConsultationMapped,
+          questionnaireMapped: sanitizedQuestionnaireMapped,
+          buildSpec: record?.buildSpec || {},
+          recommendations: record?.recommendations || {},
+          engineMeta: record?.engineMeta || {},
+        };
+
+        try {
+          const hybridResult = await callHybridChapter({
+            chapterKey,
+            payload,
+            prompts: HYBRID_CHAPTER_PROMPTS,
+          });
+
+          if (hybridResult?.chapterOverview) {
+            record.chapters[chapterKey].storySections.chapterOverview = {
+              ...record.chapters[chapterKey].storySections.chapterOverview,
+              text: hybridResult.chapterOverview,
+              locked:
+                record.chapters[chapterKey].storySections.chapterOverview
+                  ?.locked || false,
+              lockedAt:
+                record.chapters[chapterKey].storySections.chapterOverview
+                  ?.lockedAt || null,
+              lockedBy:
+                record.chapters[chapterKey].storySections.chapterOverview
+                  ?.lockedBy || '',
+              lastGeneratedAt: new Date().toISOString(),
+              lastGeneratedBy: 'admin',
+            };
+          }
+
+          if (hybridResult?.buildNotes?.length) {
+            record.chapters[chapterKey].storySections.buildNotesStory = {
+              ...record.chapters[chapterKey].storySections.buildNotesStory,
+              text: hybridResult.buildNotes.join('\n'),
+              bulletItems: hybridResult.buildNotes,
+              locked:
+                record.chapters[chapterKey].storySections.buildNotesStory
+                  ?.locked || false,
+              lockedAt:
+                record.chapters[chapterKey].storySections.buildNotesStory
+                  ?.lockedAt || null,
+              lockedBy:
+                record.chapters[chapterKey].storySections.buildNotesStory
+                  ?.lockedBy || '',
+              lastGeneratedAt: new Date().toISOString(),
+              lastGeneratedBy: 'admin',
+            };
+          }
+        } catch (err) {
+          console.error(`Hybrid generation failed for ${chapterKey}:`, err);
+        }
+      }
+
       const draftPreview = {
-        discoveryDesign: record?.chapters?.discoveryDesign?.drafts || {},
-        commitmentPortal: record?.chapters?.commitmentPortal?.drafts || {},
-        woodVisionLockIn: record?.chapters?.woodVisionLockIn?.drafts || {},
-        rawShellCreation: record?.chapters?.rawShellCreation?.drafts || {},
+        discoveryDesign: record?.chapters?.discoveryDesign?.storySections || {},
+        commitmentPortal:
+          record?.chapters?.commitmentPortal?.storySections || {},
+        woodVisionLockIn:
+          record?.chapters?.woodVisionLockIn?.storySections || {},
+        rawShellCreation:
+          record?.chapters?.rawShellCreation?.storySections || {},
         shellTrueingTorchTune:
-          record?.chapters?.shellTrueingTorchTune?.drafts || {},
-        exteriorArtFinish: record?.chapters?.exteriorArtFinish?.drafts || {},
-        edgesSnareBeds: record?.chapters?.edgesSnareBeds?.drafts || {},
-        hardwareAssembly: record?.chapters?.hardwareAssembly?.drafts || {},
-        legacyTuningMedia: record?.chapters?.legacyTuningMedia?.drafts || {},
+          record?.chapters?.shellTrueingTorchTune?.storySections || {},
+        exteriorArtFinish:
+          record?.chapters?.exteriorArtFinish?.storySections || {},
+        edgesSnareBeds: record?.chapters?.edgesSnareBeds?.storySections || {},
+        hardwareAssembly:
+          record?.chapters?.hardwareAssembly?.storySections || {},
+        legacyTuningMedia:
+          record?.chapters?.legacyTuningMedia?.storySections || {},
         finalQAPackagingDelivery:
-          record?.chapters?.finalQAPackagingDelivery?.drafts || {},
+          record?.chapters?.finalQAPackagingDelivery?.storySections || {},
       };
 
       const nextState = {
@@ -2710,18 +3223,21 @@ const ManageProjectModal = ({
                     <button
                       type="button"
                       className="mpm-bulk-btn"
-                      onClick={() => saveStoryEngineToProject()}
+                      onClick={handleRunStoryEngine}
+                      disabled={storyEngineRunning}
                     >
-                      Save Story Inputs
+                      {storyEngineRunning
+                        ? 'Saving + Running...'
+                        : 'Save Story Inputs + Run Story Engine'}
                     </button>
 
                     <button
                       type="button"
                       className="mpm-bulk-btn"
-                      onClick={handleRunStoryEngine}
+                      onClick={() => saveStoryEngineToProject()}
                       disabled={storyEngineRunning}
                     >
-                      {storyEngineRunning ? 'Running...' : 'Run Story Engine'}
+                      Save Inputs Only
                     </button>
                   </section>
 
@@ -2816,9 +3332,66 @@ const ManageProjectModal = ({
                             </div>
 
                             <div className="mpm-story-preview-block">
-                              <div className="mpm-story-preview-label">
-                                Chapter Overview
+                              <div className="mpm-story-preview-label-row">
+                                <div className="mpm-story-preview-label">
+                                  Chapter Overview
+                                  {getChapterSectionData(
+                                    chapterKey,
+                                    'chapterOverview'
+                                  )?.locked && (
+                                    <span
+                                      style={{ marginLeft: 8, opacity: 0.75 }}
+                                    >
+                                      (Locked)
+                                    </span>
+                                  )}
+                                </div>
+
+                                <div className="mpm-story-preview-actions">
+                                  <button
+                                    type="button"
+                                    className="mpm-bulk-btn"
+                                    disabled={
+                                      storyEngineRunning ||
+                                      !!getChapterSectionData(
+                                        chapterKey,
+                                        'chapterOverview'
+                                      )?.locked
+                                    }
+                                    onClick={() =>
+                                      regenerateChapterSection({
+                                        chapterKey,
+                                        sectionKey: 'chapterOverview',
+                                      })
+                                    }
+                                  >
+                                    Regenerate
+                                  </button>
+
+                                  <button
+                                    type="button"
+                                    className="mpm-bulk-btn"
+                                    onClick={() =>
+                                      toggleChapterSectionLock({
+                                        chapterKey,
+                                        sectionKey: 'chapterOverview',
+                                        locked: !getChapterSectionData(
+                                          chapterKey,
+                                          'chapterOverview'
+                                        )?.locked,
+                                      })
+                                    }
+                                  >
+                                    {getChapterSectionData(
+                                      chapterKey,
+                                      'chapterOverview'
+                                    )?.locked
+                                      ? 'Unlock'
+                                      : 'Lock'}
+                                  </button>
+                                </div>
                               </div>
+
                               <div className="mpm-story-preview-text">
                                 {chapterValue?.storySections?.chapterOverview
                                   ?.text || '—'}
@@ -2826,9 +3399,66 @@ const ManageProjectModal = ({
                             </div>
 
                             <div className="mpm-story-preview-block">
-                              <div className="mpm-story-preview-label">
-                                Build Notes Story
+                              <div className="mpm-story-preview-label-row">
+                                <div className="mpm-story-preview-label">
+                                  Build Notes Story
+                                  {getChapterSectionData(
+                                    chapterKey,
+                                    'buildNotesStory'
+                                  )?.locked && (
+                                    <span
+                                      style={{ marginLeft: 8, opacity: 0.75 }}
+                                    >
+                                      (Locked)
+                                    </span>
+                                  )}
+                                </div>
+
+                                <div className="mpm-story-preview-actions">
+                                  <button
+                                    type="button"
+                                    className="mpm-bulk-btn"
+                                    disabled={
+                                      storyEngineRunning ||
+                                      !!getChapterSectionData(
+                                        chapterKey,
+                                        'buildNotesStory'
+                                      )?.locked
+                                    }
+                                    onClick={() =>
+                                      regenerateChapterSection({
+                                        chapterKey,
+                                        sectionKey: 'buildNotesStory',
+                                      })
+                                    }
+                                  >
+                                    Regenerate
+                                  </button>
+
+                                  <button
+                                    type="button"
+                                    className="mpm-bulk-btn"
+                                    onClick={() =>
+                                      toggleChapterSectionLock({
+                                        chapterKey,
+                                        sectionKey: 'buildNotesStory',
+                                        locked: !getChapterSectionData(
+                                          chapterKey,
+                                          'buildNotesStory'
+                                        )?.locked,
+                                      })
+                                    }
+                                  >
+                                    {getChapterSectionData(
+                                      chapterKey,
+                                      'buildNotesStory'
+                                    )?.locked
+                                      ? 'Unlock'
+                                      : 'Lock'}
+                                  </button>
+                                </div>
                               </div>
+
                               <div className="mpm-story-preview-text">
                                 {chapterValue?.storySections?.buildNotesStory
                                   ?.text || '—'}

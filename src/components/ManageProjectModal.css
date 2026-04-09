@@ -1247,6 +1247,20 @@
    Scrollbars
    ========================================================================== */
 
+.mpm-story-preview-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.mpm-story-preview-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
 @media (hover: hover) and (pointer: fine) {
   .mpm-sidebar::-webkit-scrollbar,
   .mpm-main::-webkit-scrollbar {

@@ -1,15 +1,15 @@
-const { onRequest } = require('firebase-functions/v2/https');
+const { onRequest, onCall, HttpsError } = require('firebase-functions/v2/https');
+const { onDocumentCreated, onDocumentWritten } = require('firebase-functions/v2/firestore');
 const { defineSecret } = require('firebase-functions/params');
 const { onSchedule } = require('firebase-functions/v2/scheduler');
-const { onCall } = require('firebase-functions/v2/https');
 const admin = require('firebase-admin');
 const express = require('express');
 const stripeLib = require('stripe');
 const axios = require('axios');
 const crypto = require('crypto');
 const functions = require('firebase-functions/v2');
-const { onDocumentCreated } = require('firebase-functions/v2/firestore');
-const { onDocumentWritten } = require('firebase-functions/v2/firestore');
+const logger = require('firebase-functions/logger');
+const { generateHybridChapterText } = require('./src/generateHybridChapterText');
 
 const STRIPE_SECRET_KEY = defineSecret('STRIPE_SECRET_KEY');
 const STRIPE_WEBHOOK_SECRET = defineSecret('STRIPE_WEBHOOK_SECRET');
@@ -18,6 +18,7 @@ const PRINTIFY_API_KEY = defineSecret('PRINTIFY_API_KEY');
 const PRINTIFY_SHOP_ID = defineSecret('PRINTIFY_SHOP_ID');
 const PRINTIFY_WEBHOOK_SECRET = defineSecret('PRINTIFY_WEBHOOK_SECRET');
 const RECAPTCHA_SECRET_KEY = defineSecret('RECAPTCHA_SECRET_KEY');
+const OPENAI_API_KEY = defineSecret('OPENAI_API_KEY');
 
 admin.initializeApp();
 const db = admin.firestore();
@@ -646,6 +647,126 @@ function computePublicSnapshot(project = {}) {
     },
   };
 }
+
+exports.generateHybridStoryChapter = onCall(
+  {
+    cors: true,
+    timeoutSeconds: 60,
+    memory: '1GiB',
+    secrets: [OPENAI_API_KEY],
+  },
+  async (request) => {
+    try {
+      const data = request.data || {};
+
+      const payload = data.payload || null;
+      const prompts = data.prompts || null;
+      const model = data.model || 'gpt-5';
+      const sectionKey = data.sectionKey || '';
+
+      const chapterKey =
+        payload?.chapterKey ||
+        data.chapterKey ||
+        payload?.stageKey ||
+        'unknown';
+
+      logger.info('[StoryEngine] starting hybrid chapter', {
+        chapterKey,
+        sectionKey,
+      });
+
+      logger.info('[StoryEngine] callable inputs', {
+        chapterKey,
+        sectionKey,
+        hasPayload: !!payload,
+        hasPrompts: !!prompts,
+        hasChapterOverview: !!prompts?.chapterOverview,
+        hasBuildNotes: !!prompts?.buildNotes,
+        model,
+      });
+
+      if (!payload) {
+        throw new HttpsError('invalid-argument', 'Missing payload');
+      }
+
+      if (!sectionKey) {
+        throw new HttpsError('invalid-argument', 'Missing sectionKey');
+      }
+
+      if (
+        sectionKey === 'chapterOverview' &&
+        !String(prompts?.chapterOverview || '').trim()
+      ) {
+        throw new HttpsError(
+          'invalid-argument',
+          'Missing chapterOverview prompt'
+        );
+      }
+
+      if (
+        sectionKey === 'buildNotesStory' &&
+        !String(prompts?.buildNotes || '').trim()
+      ) {
+        throw new HttpsError(
+          'invalid-argument',
+          'Missing buildNotes prompt'
+        );
+      }
+
+      if (
+        sectionKey !== 'chapterOverview' &&
+        sectionKey !== 'buildNotesStory'
+      ) {
+        throw new HttpsError(
+          'invalid-argument',
+          `Unsupported sectionKey: ${sectionKey}`
+        );
+      }
+
+      const apiKey = OPENAI_API_KEY.value();
+      if (!apiKey) {
+        logger.error('[StoryEngine] OPENAI_API_KEY missing');
+        throw new HttpsError('internal', 'Server missing OPENAI_API_KEY');
+      }
+
+      const result = await generateHybridChapterText({
+        apiKey,
+        model,
+        payload,
+        prompts,
+        sectionKey,
+      });
+
+      logger.info('[StoryEngine] hybrid chapter complete', {
+        chapterKey,
+        sectionKey,
+        hasChapterOverview: !!result?.chapterOverview,
+        buildNotesCount: Array.isArray(result?.buildNotes)
+          ? result.buildNotes.length
+          : 0,
+      });
+
+      return {
+        ok: true,
+        result,
+      };
+    } catch (err) {
+      logger.error('[StoryEngine] hybrid chapter failed', {
+        message: err?.message || 'Unknown error',
+        stack: err?.stack || '',
+      });
+
+      if (err instanceof HttpsError) {
+        throw err;
+      }
+
+      throw new HttpsError(
+        'internal',
+        err?.message || 'Failed generating hybrid chapter'
+      );
+    }
+  }
+);
 
 exports.mirrorPublicPrefsToShowroom = onDocumentWritten(
   { document: 'projects/{projectId}', region: 'us-central1' },
