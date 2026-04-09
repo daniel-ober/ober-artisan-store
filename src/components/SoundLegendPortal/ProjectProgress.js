@@ -3158,9 +3158,10 @@ function renderActiveStorySection({
   }
 
   if (activeStorypoint.id === 'build-notes') {
-    const buildNotesSummary =
-      getStoryEngineSectionText(project, activeStep?.key, 'chapterOverview') ||
-      getBuildNotesSummary(activeStep, project);
+    const buildNotesSummary = getStorySectionDisplayText(
+      getStoryEngineSectionText(project, activeStep?.key, 'chapterOverview'),
+      'Chapter writing will begin shortly.'
+    );
 
     const lockedStory = isStorySectionLocked(
       project,
@@ -3174,15 +3175,13 @@ function renderActiveStorySection({
       'buildNotesStory'
     );
 
-    const benchNotesFromStoryEngine =
-      getStoryEngineSectionRecord(project, activeStep?.key, 'buildNotesStory')
-        ?.bulletItems || [];
+    const benchNotesSection = getStoryEngineSectionRecord(
+      project,
+      activeStep?.key,
+      'buildNotesStory'
+    );
 
-    const benchNotes =
-      Array.isArray(benchNotesFromStoryEngine) &&
-      benchNotesFromStoryEngine.length
-        ? benchNotesFromStoryEngine
-        : getBenchNotes(activeStep, project);
+    const benchNotes = getBenchNotesDisplayItems(benchNotesSection);
 
     const storyBusy =
       storySectionBusy ===
@@ -3283,11 +3282,17 @@ function renderActiveStorySection({
             ) : null}
           </div>
 
-          <ul className="sl-progress-build-notes-bullets">
-            {benchNotes.map((note, index) => (
-              <li key={`${note}-${index}`}>{note}</li>
-            ))}
-          </ul>
+          {benchNotes.length ? (
+            <ul className="sl-progress-build-notes-bullets">
+              {benchNotes.map((note, index) => (
+                <li key={`${note}-${index}`}>{note}</li>
+              ))}
+            </ul>
+          ) : (
+            <p className="sl-progress-build-notes-placeholder">
+              Craftsman notes will be added soon.
+            </p>
+          )}
         </div>
       </div>
     );
@@ -4461,6 +4466,54 @@ function renderStorypointIcon(iconKey) {
       );
   }
 }
+
+const STORY_PLACEHOLDER_PATTERNS = [
+  /this chapter is where/i,
+  /build priorities stop being abstract/i,
+  /the decisions being clarified here/i,
+  /the final instrument reads as one complete idea/i,
+  /voice centered on/i,
+  /tailored story & direction/i,
+  /bench notes/i,
+];
+
+const cleanStorySectionText = (value = '') =>
+  String(value || '')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+const isMeaningfulStorySection = (value = '') => {
+  const text = cleanStorySectionText(value);
+  if (!text) return false;
+
+  if (text.length < 20) return false;
+
+  return !STORY_PLACEHOLDER_PATTERNS.some((pattern) => pattern.test(text));
+};
+
+const getStorySectionDisplayText = (value = '', fallbackText = '') => {
+  return isMeaningfulStorySection(value)
+    ? cleanStorySectionText(value)
+    : fallbackText;
+};
+
+const getBenchNotesDisplayItems = (section = {}) => {
+  const bulletItems = Array.isArray(section?.bulletItems)
+    ? section.bulletItems
+        .map((item) => cleanStorySectionText(item))
+        .filter((item) => isMeaningfulStorySection(item))
+    : [];
+
+  if (bulletItems.length) return bulletItems;
+
+  const text = cleanStorySectionText(section?.text || '');
+  if (!isMeaningfulStorySection(text)) return [];
+
+  return text
+    .split('\n')
+    .map((line) => cleanStorySectionText(line.replace(/^[•*-]\s*/, '')))
+    .filter(Boolean);
+};
 
 /* =========================================================
    COMPONENT HELPERS
