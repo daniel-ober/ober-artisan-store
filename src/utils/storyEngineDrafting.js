@@ -16,7 +16,6 @@ import {
   cloneStoryEngineRecord,
   saveStoryText,
   setByPath,
-  uniq,
   clamp,
 } from './storyEngineHelpers';
 
@@ -416,6 +415,185 @@ export function getAestheticSummary(facts = []) {
 }
 
 /* =========================================================
+   CHAPTER COPY HELPERS
+   ========================================================= */
+
+export function formatSizeDirection(value = '') {
+  const cleaned = stringifyValue(value);
+  if (!cleaned) return '';
+
+  if (/^\d+(\.\d+)?("?|-inch| inch|in)?$/i.test(cleaned)) {
+    return `${cleaned.replace(/("|-inch| inch|in)$/i, '')}" format`;
+  }
+
+  if (/format$/i.test(cleaned) || /size$/i.test(cleaned)) {
+    return cleaned;
+  }
+
+  return `${cleaned} direction`;
+}
+
+export function getChapterPurposeLine(chapterKey, summary = {}) {
+  const outcome = summary.identity?.outcome || '';
+
+  const map = {
+    [CHAPTER_KEYS.DISCOVERY_DESIGN]: outcome
+      ? `What matters most here is understanding what the drum has to do in order to become ${outcome}.`
+      : 'What matters most here is getting clear about the real musical job this drum needs to do.',
+
+    [CHAPTER_KEYS.COMMITMENT_PORTAL]:
+      'What matters most here is turning a good direction into a committed one so later decisions stay aligned.',
+
+    [CHAPTER_KEYS.WOOD_VISION_LOCK_IN]:
+      'What matters most here is choosing the shell direction that will shape the voice, feel, and identity of the instrument from this point forward.',
+
+    [CHAPTER_KEYS.RAW_SHELL_CREATION]:
+      'What matters most here is building a shell that gives the rest of the process something trustworthy to build on.',
+
+    [CHAPTER_KEYS.SHELL_TRUEING_TORCH_TUNE]:
+      'What matters most here is refining the shell until its response is consistent, musical, and ready for the next layer of decisions.',
+
+    [CHAPTER_KEYS.EXTERIOR_ART_FINISH]:
+      'What matters most here is making the visual language feel intentional without disconnecting it from the instrument underneath.',
+
+    [CHAPTER_KEYS.EDGES_SNARE_BEDS]:
+      'What matters most here is shaping the contact points that most directly affect sensitivity, articulation, and response.',
+
+    [CHAPTER_KEYS.HARDWARE_ASSEMBLY]:
+      'What matters most here is making sure the hardware supports the voice instead of fighting it.',
+
+    [CHAPTER_KEYS.LEGACY_TUNING_MEDIA]: outcome
+      ? `What matters most here is making sure the final tuning and presentation still point clearly toward ${outcome}.`
+      : 'What matters most here is bringing the drum into a finished voice that is worth documenting and easy to understand.',
+
+    [CHAPTER_KEYS.FINAL_QA_PACKAGING_DELIVERY]:
+      'What matters most here is confirming that the finished drum sounds, feels, and presents the way it was meant to before it leaves the shop.',
+  };
+
+  return (
+    map[chapterKey] ||
+    'What matters most here is protecting the strongest supported direction without overstating what has not yet been confirmed.'
+  );
+}
+
+export function buildChapterSummaryContext(facts = []) {
+  return {
+    identity: getIdentitySummary(facts),
+    playerContext: getPlayerContextSummary(facts),
+    build: getBuildSummary(facts),
+    sonic: getSonicSummary(facts),
+    aesthetic: getAestheticSummary(facts),
+    size: getSizeSummary(facts),
+  };
+}
+
+export function getChapterOverviewLead(chapterKey, summary = {}) {
+  const { identity, playerContext, build, aesthetic, size } = summary;
+
+  const sizeLabel = playerContext?.preferredSizeDirection
+    ? formatSizeDirection(playerContext.preferredSizeDirection)
+    : size;
+
+  const responseFocus = joinNatural(
+    takeDistinct(
+      [
+        ...playerContext.responsePriorities,
+        ...playerContext.tonalGoals,
+      ].filter(Boolean),
+      3
+    )
+  );
+
+  const materialFocus = joinNatural(
+    takeDistinct(
+      [
+        build.shellConstruction,
+        build.primaryWood,
+        build.secondaryWood,
+      ].filter(Boolean),
+      3
+    )
+  );
+
+  const visualFocus = joinNatural(
+    takeDistinct(
+      [
+        build.finishSystem,
+        aesthetic.visualMood,
+        aesthetic.finishDirection,
+      ].filter(Boolean),
+      3
+    )
+  );
+
+  const hardwareFocus = joinNatural(
+    takeDistinct(
+      [build.hoopType, build.lugCount, aesthetic.hardwareFinish].filter(
+        Boolean
+      ),
+      3
+    )
+  );
+
+  const byChapter = {
+    [CHAPTER_KEYS.DISCOVERY_DESIGN]:
+      responseFocus || identity.outcome || joinNatural(
+        takeDistinct(
+          [identity.useCase, identity.style, identity.genre].filter(Boolean),
+          3
+        )
+      ),
+
+    [CHAPTER_KEYS.COMMITMENT_PORTAL]:
+      identity.outcome || responseFocus || sizeLabel,
+
+    [CHAPTER_KEYS.WOOD_VISION_LOCK_IN]:
+      materialFocus,
+
+    [CHAPTER_KEYS.RAW_SHELL_CREATION]:
+      joinNatural(
+        takeDistinct(
+          [build.shellConstruction, build.primaryWood, sizeLabel].filter(Boolean),
+          3
+        )
+      ),
+
+    [CHAPTER_KEYS.SHELL_TRUEING_TORCH_TUNE]:
+      joinNatural(
+        takeDistinct(
+          [build.tuningApproach, build.bearingEdge, responseFocus].filter(
+            Boolean
+          ),
+          3
+        )
+      ),
+
+    [CHAPTER_KEYS.EXTERIOR_ART_FINISH]:
+      visualFocus,
+
+    [CHAPTER_KEYS.EDGES_SNARE_BEDS]:
+      joinNatural(
+        takeDistinct([build.bearingEdge, build.snareBed, responseFocus].filter(Boolean), 3)
+      ),
+
+    [CHAPTER_KEYS.HARDWARE_ASSEMBLY]:
+      hardwareFocus,
+
+    [CHAPTER_KEYS.LEGACY_TUNING_MEDIA]:
+      joinNatural(
+        takeDistinct([build.tuningApproach, identity.outcome, responseFocus].filter(Boolean), 3)
+      ),
+
+    [CHAPTER_KEYS.FINAL_QA_PACKAGING_DELIVERY]:
+      identity.outcome || joinNatural(
+        takeDistinct([sizeLabel, responseFocus].filter(Boolean), 2)
+      ),
+  };
+
+  return byChapter[chapterKey] || '';
+}
+
+/* =========================================================
    LANGUAGE BUILDING BLOCKS
    ========================================================= */
 
@@ -429,7 +607,7 @@ export function buildFocusPhrase(facts = []) {
     identity.style,
     identity.genre,
     playerContext.preferredSizeDirection
-      ? `${playerContext.preferredSizeDirection} direction`
+      ? formatSizeDirection(playerContext.preferredSizeDirection)
       : size,
     ...takeDistinct(playerContext.tonalGoals, 2),
   ].filter(Boolean);
@@ -489,224 +667,6 @@ export function shouldUseRecommendationLanguage(writingMode) {
 }
 
 /* =========================================================
-   CHAPTER-SPECIFIC HELPERS
-   ========================================================= */
-
-export function getChapterAnchor(sectionInput, facts = []) {
-  const chapterKey = sectionInput?.chapterKey;
-  const identity = getIdentitySummary(facts);
-  const build = getBuildSummary(facts);
-  const aesthetic = getAestheticSummary(facts);
-  const playerContext = getPlayerContextSummary(facts);
-
-  const tonalFocus = joinNatural(
-    takeDistinct(
-      [...playerContext.responsePriorities, ...playerContext.tonalGoals].filter(
-        Boolean
-      ),
-      3
-    )
-  );
-
-  switch (chapterKey) {
-    case CHAPTER_KEYS.DISCOVERY_DESIGN:
-      return (
-        tonalFocus ||
-        joinNatural(
-          takeDistinct(
-            [identity.useCase, identity.style, identity.genre].filter(Boolean),
-            3
-          )
-        ) ||
-        identity.outcome
-      );
-
-    case CHAPTER_KEYS.COMMITMENT_PORTAL:
-      return (
-        identity.outcome ||
-        tonalFocus ||
-        joinNatural(
-          takeDistinct(
-            [identity.projectName, identity.artistName].filter(Boolean),
-            2
-          )
-        )
-      );
-
-    case CHAPTER_KEYS.WOOD_VISION_LOCK_IN:
-      return (
-        joinNatural(
-          takeDistinct(
-            [build.shellConstruction, build.primaryWood, build.secondaryWood].filter(
-              Boolean
-            ),
-            3
-          )
-        ) || tonalFocus
-      );
-
-    case CHAPTER_KEYS.RAW_SHELL_CREATION:
-      return (
-        joinNatural(
-          takeDistinct(
-            [build.shellConstruction, build.primaryWood].filter(Boolean),
-            2
-          )
-        ) || tonalFocus
-      );
-
-    case CHAPTER_KEYS.SHELL_TRUEING_TORCH_TUNE:
-      return (
-        joinNatural(
-          takeDistinct(
-            [build.tuningApproach, build.bearingEdge].filter(Boolean),
-            2
-          )
-        ) || tonalFocus
-      );
-
-    case CHAPTER_KEYS.EXTERIOR_ART_FINISH:
-      return (
-        joinNatural(
-          takeDistinct(
-            [
-              build.finishSystem,
-              aesthetic.visualMood,
-              aesthetic.finishDirection,
-            ].filter(Boolean),
-            3
-          )
-        ) || tonalFocus
-      );
-
-    case CHAPTER_KEYS.EDGES_SNARE_BEDS:
-      return (
-        joinNatural(
-          takeDistinct(
-            [build.bearingEdge, build.snareBed].filter(Boolean),
-            2
-          )
-        ) || tonalFocus
-      );
-
-    case CHAPTER_KEYS.HARDWARE_ASSEMBLY:
-      return (
-        joinNatural(
-          takeDistinct(
-            [build.hoopType, build.lugCount, aesthetic.hardwareFinish].filter(
-              Boolean
-            ),
-            3
-          )
-        ) || tonalFocus
-      );
-
-    case CHAPTER_KEYS.LEGACY_TUNING_MEDIA:
-      return (
-        joinNatural(
-          takeDistinct(
-            [build.tuningApproach, identity.outcome].filter(Boolean),
-            2
-          )
-        ) || tonalFocus
-      );
-
-    case CHAPTER_KEYS.FINAL_QA_PACKAGING_DELIVERY:
-      return identity.outcome || tonalFocus || identity.projectName;
-
-    default:
-      return tonalFocus || identity.outcome;
-  }
-}
-
-export function getChapterWhyItMatters(sectionInput, facts = [], record = null) {
-  const chapterKey = sectionInput?.chapterKey;
-  const identity = getIdentitySummary(facts);
-  const size = getSizeSummary(facts);
-  const playerContext = getPlayerContextSummary(facts);
-  const signal = getChapterSignal(record, chapterKey);
-  const signalTension = joinNatural(
-    takeDistinct(getSignalTensionWords(signal), 2)
-  );
-
-  switch (chapterKey) {
-    case CHAPTER_KEYS.DISCOVERY_DESIGN:
-      return identity.outcome
-        ? `What matters most here is defining the build around ${identity.outcome}.`
-        : 'What matters most here is turning the player’s priorities into a usable build direction.';
-
-    case CHAPTER_KEYS.COMMITMENT_PORTAL:
-      return 'What matters most here is locking the direction tightly enough that the rest of the build can stay coherent.';
-
-    case CHAPTER_KEYS.WOOD_VISION_LOCK_IN:
-      return 'What matters most here is choosing the shell direction that will carry the feel and voice of the drum the rest of the way.';
-
-    case CHAPTER_KEYS.RAW_SHELL_CREATION:
-      return 'What matters most here is giving the shell a physical foundation that supports the intended response before the finer details begin.';
-
-    case CHAPTER_KEYS.SHELL_TRUEING_TORCH_TUNE:
-      return 'What matters most here is shaping consistency, touch, and usable tuning behavior before cosmetics or hardware start masking problems.';
-
-    case CHAPTER_KEYS.EXTERIOR_ART_FINISH:
-      return 'What matters most here is making the visual statement feel intentional without breaking the identity of the instrument.';
-
-    case CHAPTER_KEYS.EDGES_SNARE_BEDS:
-      return 'What matters most here is preserving sensitivity, articulation, and feel at the points where the drumhead and wires actually interact with the shell.';
-
-    case CHAPTER_KEYS.HARDWARE_ASSEMBLY:
-      return 'What matters most here is matching feel, control, and visual finish so the instrument behaves like one complete idea.';
-
-    case CHAPTER_KEYS.LEGACY_TUNING_MEDIA:
-      return identity.outcome
-        ? `What matters most here is making sure the final tuning and presentation still serve ${identity.outcome}.`
-        : 'What matters most here is making sure the drum sounds and presents the way the build promised it would.';
-
-    case CHAPTER_KEYS.FINAL_QA_PACKAGING_DELIVERY:
-      return size
-        ? `What matters most here is verifying that the final ${size} instrument arrives with the same intent it was designed around.`
-        : 'What matters most here is verifying that the finished instrument arrives sounding, feeling, and presenting the way it should.';
-
-    default:
-      if (signalTension) {
-        return `What matters most here is protecting the balance between ${signalTension}.`;
-      }
-      if (playerContext.preferredSizeDirection) {
-        return `What matters most here is protecting the intended ${playerContext.preferredSizeDirection} direction without drifting away from the player profile.`;
-      }
-      return 'What matters most here is protecting the strongest supported direction without overstating what has not yet been confirmed.';
-  }
-}
-
-export function getChapterVisualSentence(sectionInput, facts = []) {
-  const chapterKey = sectionInput?.chapterKey;
-  const aesthetic = getAestheticSummary(facts);
-
-  const visualGoal = joinNatural(
-    takeDistinct(
-      [
-        aesthetic.visualMood,
-        aesthetic.finishDirection,
-        aesthetic.hardwareFinish,
-      ].filter(Boolean),
-      2
-    )
-  );
-
-  if (!visualGoal) return '';
-
-  const appliesToVisualChapters = [
-    CHAPTER_KEYS.DISCOVERY_DESIGN,
-    CHAPTER_KEYS.COMMITMENT_PORTAL,
-    CHAPTER_KEYS.EXTERIOR_ART_FINISH,
-    CHAPTER_KEYS.HARDWARE_ASSEMBLY,
-  ];
-
-  if (!appliesToVisualChapters.includes(chapterKey)) return '';
-
-  return ` Visually, the build should stay aligned with a direction that feels ${visualGoal}, so the final instrument reads as one complete idea rather than a collection of parts.`;
-}
-
-/* =========================================================
    FALLBACK DRAFT COMPOSERS
    ========================================================= */
 
@@ -716,23 +676,25 @@ export function composeFallbackOverview(
   record = null
 ) {
   const facts = compactFacts(sectionInput?.resolvedFacts || []);
-  const identity = getIdentitySummary(facts);
-  const build = getBuildSummary(facts);
-  const size = getSizeSummary(facts);
-  const playerContext = getPlayerContextSummary(facts);
+  const summary = buildChapterSummaryContext(facts);
+
+  const { playerContext, build, aesthetic, size } = summary;
 
   const signal = getChapterSignal(record, sectionInput?.chapterKey);
-  const signalDirection = getSignalPrimaryDirection(signal);
   const signalResponse = joinNatural(
     takeDistinct(getSignalResponseWords(signal), 3)
   );
   const signalUseCases = joinNatural(
     takeDistinct(getSignalUseCaseWords(signal), 3)
   );
+  const signalTension = joinNatural(
+    takeDistinct(getSignalTensionWords(signal), 2)
+  );
 
   const chapterName = chapterProfile?.chapterLabel || 'This chapter';
+  const chapterKey = sectionInput?.chapterKey;
+  const overviewLead = getChapterOverviewLead(chapterKey, summary);
 
-  const anchor = getChapterAnchor(sectionInput, facts);
   const materialFocus = joinNatural(
     takeDistinct(
       [
@@ -747,39 +709,87 @@ export function composeFallbackOverview(
     )
   );
 
+  const aestheticFocus = joinNatural(
+    takeDistinct(
+      [
+        aesthetic.visualMood,
+        aesthetic.finishDirection,
+        aesthetic.hardwareFinish,
+      ].filter(Boolean),
+      2
+    )
+  );
+
+  const sizeLabel = playerContext?.preferredSizeDirection
+    ? formatSizeDirection(playerContext.preferredSizeDirection)
+    : size;
+
+  const stageLineMap = {
+    [CHAPTER_KEYS.DISCOVERY_DESIGN]:
+      'At this stage, the job is to translate priorities into a build direction that already feels believable.',
+    [CHAPTER_KEYS.COMMITMENT_PORTAL]:
+      'At this stage, the job is to stabilize the direction so the build can move forward without unnecessary drift.',
+    [CHAPTER_KEYS.WOOD_VISION_LOCK_IN]:
+      materialFocus
+        ? `At this stage, the shell direction starts to take real shape through ${materialFocus}.`
+        : 'At this stage, the shell direction starts to take real shape through the clearest supported material choices.',
+    [CHAPTER_KEYS.RAW_SHELL_CREATION]:
+      materialFocus
+        ? `At this stage, the physical shell begins to embody ${materialFocus}.`
+        : 'At this stage, the physical shell begins to embody the strongest supported direction.',
+    [CHAPTER_KEYS.SHELL_TRUEING_TORCH_TUNE]:
+      materialFocus
+        ? `At this stage, the shell is refined so choices like ${materialFocus} translate into a more dependable response.`
+        : 'At this stage, the shell is refined so the intended response becomes more dependable and repeatable.',
+    [CHAPTER_KEYS.EXTERIOR_ART_FINISH]:
+      materialFocus
+        ? `At this stage, the visual treatment begins to lock in around ${materialFocus}.`
+        : 'At this stage, the visual treatment begins to lock in around the strongest supported finish direction.',
+    [CHAPTER_KEYS.EDGES_SNARE_BEDS]:
+      materialFocus
+        ? `At this stage, the most response-sensitive details begin to lock in around ${materialFocus}.`
+        : 'At this stage, the most response-sensitive details begin to lock in.',
+    [CHAPTER_KEYS.HARDWARE_ASSEMBLY]:
+      materialFocus
+        ? `At this stage, the instrument begins to come together through choices like ${materialFocus}.`
+        : 'At this stage, the instrument begins to come together in a more complete and testable form.',
+    [CHAPTER_KEYS.LEGACY_TUNING_MEDIA]:
+      materialFocus
+        ? `At this stage, the finished voice is clarified through choices like ${materialFocus}.`
+        : 'At this stage, the finished voice is clarified and made easier to hear on its own terms.',
+    [CHAPTER_KEYS.FINAL_QA_PACKAGING_DELIVERY]:
+      'At this stage, the build needs to prove that the finished instrument still reflects the direction established earlier.',
+  };
+
   let text = '';
 
-  if (signalDirection) {
-    text += `${chapterName} centers on ${signalDirection}.`;
-  } else if (anchor) {
-    text += `${chapterName} centers on ${anchor}.`;
+  if (overviewLead) {
+    text += `${chapterName} centers on ${overviewLead}.`;
   } else {
     text += `${chapterName} centers on the clearest priorities currently supported by the build profile.`;
   }
 
-  if (materialFocus) {
-    text += ` At this stage, the build begins to align around ${materialFocus}`;
-  } else if (signalResponse) {
-    text += ` At this stage, the build is being shaped toward a response that feels ${signalResponse}`;
-  } else {
-    text += ` At this stage, the build needs to preserve a clear through-line between feel, response, and identity`;
-  }
+  text += ` ${stageLineMap[chapterKey] || 'At this stage, the build needs to preserve a clear through-line between feel, response, and identity.'}`;
 
-  if (size) {
-    text += ` within a ${size} format.`;
-  } else if (playerContext.preferredSizeDirection) {
-    text += ` within a ${playerContext.preferredSizeDirection} direction.`;
+  if (sizeLabel) {
+    text += ` The frame for that work is a ${sizeLabel}.`;
   } else if (signalUseCases) {
-    text += ` for a role that points toward ${signalUseCases}.`;
-  } else {
-    text += `.`;
+    text += ` The frame for that work points toward ${signalUseCases}.`;
   }
 
-  text += ` ${getChapterWhyItMatters(sectionInput, facts, record)}`;
+  if (signalTension) {
+    text += ` What matters most here is protecting the balance between ${signalTension}.`;
+  } else if (
+    aestheticFocus &&
+    chapterKey === CHAPTER_KEYS.EXTERIOR_ART_FINISH
+  ) {
+    text += ` It also needs to stay visually coherent in a direction that feels ${aestheticFocus}.`;
+  } else {
+    text += ` ${getChapterPurposeLine(chapterKey, summary)}`;
+  }
 
-  if (!identity.outcome && !materialFocus && !signalResponse && !signalUseCases) {
-    text +=
-      ' The goal is to protect the strongest supported direction without overstating what has not yet been confirmed.';
+  if (!materialFocus && signalResponse) {
+    text += ` The response still needs to stay pointed toward ${signalResponse}.`;
   }
 
   return normalizeDraftLength(text, sectionInput?.lengthTarget);
@@ -791,10 +801,9 @@ export function composeFallbackBuildNotes(
   record = null
 ) {
   const facts = compactFacts(sectionInput?.resolvedFacts || []);
-  const sonic = getSonicSummary(facts);
-  const build = getBuildSummary(facts);
-  const identity = getIdentitySummary(facts);
-  const playerContext = getPlayerContextSummary(facts);
+  const summary = buildChapterSummaryContext(facts);
+
+  const { identity, playerContext, build, sonic, aesthetic } = summary;
 
   const signal = getChapterSignal(record, sectionInput?.chapterKey);
   const signalDirection = getSignalPrimaryDirection(signal);
@@ -806,6 +815,8 @@ export function composeFallbackBuildNotes(
   const recommendationMode = shouldUseRecommendationLanguage(
     sectionInput?.writingMode
   );
+
+  const chapterKey = sectionInput?.chapterKey;
 
   const primaryDecision = joinNatural(
     takeDistinct(
@@ -841,10 +852,21 @@ export function composeFallbackBuildNotes(
         ...playerContext.responsePriorities,
         ...playerContext.tonalGoals,
         playerContext.preferredSizeDirection
-          ? `${playerContext.preferredSizeDirection} direction`
+          ? formatSizeDirection(playerContext.preferredSizeDirection)
           : '',
       ].filter(Boolean),
       3
+    )
+  );
+
+  const visualGoal = joinNatural(
+    takeDistinct(
+      [
+        aesthetic.visualMood,
+        aesthetic.finishDirection,
+        aesthetic.hardwareFinish,
+      ].filter(Boolean),
+      2
     )
   );
 
@@ -853,52 +875,137 @@ export function composeFallbackBuildNotes(
   const signalMaterialGoal = joinNatural(signalMaterialWords);
   const signalTensionGoal = joinNatural(signalTensionWords);
 
-  let text = '';
+  const openingMap = {
+    [CHAPTER_KEYS.DISCOVERY_DESIGN]:
+      'This chapter is where the build priorities stop being abstract and start becoming directional',
+    [CHAPTER_KEYS.COMMITMENT_PORTAL]:
+      'This chapter is where the direction gets firm enough to carry the rest of the process',
+    [CHAPTER_KEYS.WOOD_VISION_LOCK_IN]:
+      recommendationMode && primaryDecision
+        ? `The strongest current direction in this chapter is to commit to ${primaryDecision}`
+        : `This chapter is where ${primaryDecision || 'the shell direction'} starts to define the drum in a more permanent way`,
+    [CHAPTER_KEYS.RAW_SHELL_CREATION]:
+      recommendationMode && primaryDecision
+        ? `The strongest current direction in this chapter is to preserve ${primaryDecision}`
+        : `This chapter is where ${primaryDecision || 'the shell direction'} becomes physical`,
+    [CHAPTER_KEYS.SHELL_TRUEING_TORCH_TUNE]:
+      recommendationMode && primaryDecision
+        ? `The strongest current direction in this chapter is to refine around ${primaryDecision}`
+        : `This chapter is where consistency and control start to emerge through ${primaryDecision || 'the strongest supported refinements'}`,
+    [CHAPTER_KEYS.EXTERIOR_ART_FINISH]:
+      'This chapter is where the visual identity becomes deliberate',
+    [CHAPTER_KEYS.EDGES_SNARE_BEDS]:
+      recommendationMode && primaryDecision
+        ? `The strongest current direction in this chapter is to refine ${primaryDecision}`
+        : `This chapter is where the most response-sensitive shaping work happens`,
+    [CHAPTER_KEYS.HARDWARE_ASSEMBLY]:
+      'This chapter is where fit, feel, and hardware choices start to define the finished instrument',
+    [CHAPTER_KEYS.LEGACY_TUNING_MEDIA]:
+      'This chapter is where the finished voice has to become undeniable',
+    [CHAPTER_KEYS.FINAL_QA_PACKAGING_DELIVERY]:
+      'This chapter is where the full instrument has to prove itself as a complete and finished build',
+  };
 
-  if (primaryDecision) {
-    text += recommendationMode
-      ? `The strongest current direction for this chapter is to lean into ${primaryDecision}`
-      : `This chapter is where ${primaryDecision} starts to carry real weight in the build`;
-  } else if (signalDirection) {
-    text += recommendationMode
-      ? `The strongest current direction for this chapter is to preserve ${signalDirection}`
-      : `This chapter is where ${signalDirection} starts to become more intentional in the build`;
-  } else {
-    text += recommendationMode
-      ? `The strongest current direction for this chapter is to preserve the clearest supported build priorities`
-      : `This chapter is where the clearest supported priorities need to become more intentional`;
+  let text = openingMap[chapterKey];
+
+  if (!text) {
+    if (primaryDecision) {
+      text = recommendationMode
+        ? `The strongest current direction for this chapter is to lean into ${primaryDecision}`
+        : `This chapter is where ${primaryDecision} starts to carry real weight in the build`;
+    } else if (signalDirection) {
+      text = recommendationMode
+        ? `The strongest current direction for this chapter is to preserve ${signalDirection}`
+        : `This chapter is where ${signalDirection} starts to become more intentional in the build`;
+    } else {
+      text = recommendationMode
+        ? `The strongest current direction for this chapter is to preserve the clearest supported build priorities`
+        : `This chapter is where the clearest supported priorities need to become more intentional`;
+    }
   }
 
-  if (responseGoal) {
-    text += `, especially in service of a voice centered on ${responseGoal}`;
-  } else if (playerPriorityGoal) {
-    text += `, especially in service of priorities like ${playerPriorityGoal}`;
-  } else if (signalResponseGoal) {
-    text += `, especially in service of a voice centered on ${signalResponseGoal}`;
+  if (
+    ![
+      CHAPTER_KEYS.EXTERIOR_ART_FINISH,
+      CHAPTER_KEYS.HARDWARE_ASSEMBLY,
+      CHAPTER_KEYS.FINAL_QA_PACKAGING_DELIVERY,
+    ].includes(chapterKey)
+  ) {
+    if (responseGoal) {
+      text += `, especially in service of a voice centered on ${responseGoal}`;
+    } else if (playerPriorityGoal) {
+      text += `, especially in service of priorities like ${playerPriorityGoal}`;
+    } else if (signalResponseGoal) {
+      text += `, especially in service of a voice centered on ${signalResponseGoal}`;
+    }
   }
 
   text += '.';
 
+  const supportLineMap = {
+    [CHAPTER_KEYS.DISCOVERY_DESIGN]:
+      identity.outcome
+        ? `The decisions being clarified here should keep pointing toward ${identity.outcome}.`
+        : 'The decisions being clarified here should stay tied to the actual musical role of the instrument.',
+
+    [CHAPTER_KEYS.COMMITMENT_PORTAL]:
+      'From here on out, clarity matters more than optionality, because later decisions will only be as strong as this commitment point.',
+
+    [CHAPTER_KEYS.WOOD_VISION_LOCK_IN]:
+      'Once these material choices lock, they start influencing nearly every chapter that follows.',
+
+    [CHAPTER_KEYS.RAW_SHELL_CREATION]:
+      'If the shell is right here, later refinement has something honest to work with.',
+
+    [CHAPTER_KEYS.SHELL_TRUEING_TORCH_TUNE]:
+      'Small adjustments here have an outsized effect on how the drum will tune, speak, and recover under the stick.',
+
+    [CHAPTER_KEYS.EXTERIOR_ART_FINISH]:
+      'The visual direction should elevate the instrument, not distract from what the build is trying to say.',
+
+    [CHAPTER_KEYS.EDGES_SNARE_BEDS]:
+      'This is where subtle geometry choices start deciding how easily the drum speaks at low and medium dynamics.',
+
+    [CHAPTER_KEYS.HARDWARE_ASSEMBLY]:
+      'Nothing here should feel ornamental alone; each choice should support response, stability, or visual coherence.',
+
+    [CHAPTER_KEYS.LEGACY_TUNING_MEDIA]:
+      'By this point, the drum should not just sound good in isolation but sound recognizably like the build it set out to become.',
+
+    [CHAPTER_KEYS.FINAL_QA_PACKAGING_DELIVERY]:
+      'The standard here is not simply completion, but confidence that the finished build still holds together as one believable instrument.',
+  };
+
   if (identity.outcome && playerPriorityGoal) {
     text += ` Every choice here should continue to support a drum that delivers ${identity.outcome} while protecting priorities like ${playerPriorityGoal}.`;
   } else if (identity.outcome) {
-    text += ` Every choice here should continue to support a drum that lands in the direction of ${identity.outcome}.`;
+    text += ` Every choice here should continue to support a drum that serves ${identity.outcome}.`;
   } else if (signalTensionGoal) {
     text += ` Every choice here should continue to protect the balance between ${signalTensionGoal}.`;
+  } else if (supportLineMap[chapterKey]) {
+    text += ` ${supportLineMap[chapterKey]}`;
   } else if (identity.useCase || identity.style) {
     text += ` Every choice here should continue to support the way this instrument is actually meant to be used.`;
   }
 
-  text += getChapterVisualSentence(sectionInput, facts);
-
-  if (!getChapterVisualSentence(sectionInput, facts)) {
-    if (signalVisualGoal) {
-      text += ` Visually, the build should stay aligned with a direction that feels ${signalVisualGoal}, so the final instrument reads as one complete idea rather than a collection of parts.`;
-    } else if (signalMaterialGoal) {
-      text += ` Material-wise, the build should keep reinforcing ${signalMaterialGoal}, so the chapter decisions continue to support one believable voice.`;
-    } else {
-      text += ` The goal is not excess, but coherence, so the build decisions keep reinforcing one another as the drum takes shape.`;
-    }
+  if (visualGoal) {
+    text += ` Visually, the build should stay aligned with a direction that feels ${visualGoal}, so the final instrument reads as one complete idea rather than a collection of parts.`;
+  } else if (signalVisualGoal) {
+    text += ` Visually, the build should stay aligned with a direction that feels ${signalVisualGoal}, so the final instrument reads as one complete idea rather than a collection of parts.`;
+  } else if (signalMaterialGoal) {
+    text += ` Material-wise, the build should keep reinforcing ${signalMaterialGoal}, so the chapter decisions continue to support one believable voice.`;
+  } else if (
+    ![
+      CHAPTER_KEYS.COMMITMENT_PORTAL,
+      CHAPTER_KEYS.WOOD_VISION_LOCK_IN,
+      CHAPTER_KEYS.RAW_SHELL_CREATION,
+      CHAPTER_KEYS.SHELL_TRUEING_TORCH_TUNE,
+      CHAPTER_KEYS.EDGES_SNARE_BEDS,
+      CHAPTER_KEYS.LEGACY_TUNING_MEDIA,
+      CHAPTER_KEYS.FINAL_QA_PACKAGING_DELIVERY,
+    ].includes(chapterKey)
+  ) {
+    text += ` The goal is not excess, but coherence, so the build decisions keep reinforcing one another as the drum takes shape.`;
   }
 
   return normalizeDraftLength(text, sectionInput?.lengthTarget);
@@ -1039,7 +1146,7 @@ export function composeFallbackUniqueTraits(chapterPayload = {}) {
           takeDistinct(
             [
               playerContext.preferredSizeDirection
-                ? `${playerContext.preferredSizeDirection} direction`
+                ? formatSizeDirection(playerContext.preferredSizeDirection)
                 : '',
               ...playerContext.responsePriorities,
               ...playerContext.tonalGoals,

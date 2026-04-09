@@ -6,13 +6,14 @@ import {
   updateDoc,
   serverTimestamp,
 } from 'firebase/firestore';
+import { getFunctions, httpsCallable } from 'firebase/functions';
 import {
   ref as storageRef,
   getDownloadURL,
   uploadBytes,
   uploadBytesResumable,
 } from 'firebase/storage';
-import { db, storage } from '../../firebaseConfig';
+import { db, storage, app } from '../../firebaseConfig';
 import { calculateProjectProgress } from '../../utils/calculateProjectProgress';
 import { STAGES, STAGE_TEMPLATES } from '../../utils/workflowDefinitions';
 import { PROJECT_STAGE_EDU } from '../../utils/projectStageEducation';
@@ -216,6 +217,174 @@ const LEGACY_STEPKEY_FALLBACKS = {
   hardwareAssembly: ['hardwareAssembly'],
   legacyTuningMedia: ['tuningAndDetailing', 'tuningDetailing', 'legacyMedia'],
   finalQAPackagingDelivery: ['qualityCheck', 'finalQa'],
+};
+
+const HYBRID_CHAPTER_PROMPTS = {
+  chapterOverview: `
+Write the chapter overview for this exact SoundLegend build.
+
+This must read like a real builder's note in a custom build book.
+It should feel plain, grounded, and written by hand after reviewing the project.
+
+Requirements:
+- 1 paragraph
+- 40 to 60 words
+- continue naturally from the previous chapter, but still work on its own
+- say what currently feels real
+- say what is leaning in a direction
+- say what is still open
+- stop cleanly without a concluding summary sentence
+
+Voice:
+- calm
+- plain
+- observant
+- restrained
+- human
+- workshop-real
+
+Write it like:
+- a builder documenting where the project stands right now
+- someone protecting the direction without forcing answers too early
+- someone naming what looks right so far and what still needs to stay open
+
+Use artistName only for the human/customer if a name is truly needed.
+If artistName is missing, avoid naming the person directly.
+Do NOT use SoundLegend, projectName, series name, or drum line as if it were the artist.
+
+Hard rules:
+- do not write like a summary
+- do not write like product copy
+- do not write like intake recap
+- do not write like polished presentation language
+- do not write from a bird's-eye narrator voice
+- do not use "has emerged as"
+- do not use "likely shell wood"
+- do not use "the build is settling into"
+- do not use "solid frame"
+- do not use "not yet defined in all details"
+- do not use "vintage touch"
+- do not use "remain open and need further input"
+- do not use "centers on"
+- do not use "identity"
+- do not use "concept"
+- do not use "voice"
+- do not use "at this stage"
+- do not use "at this point"
+- do not use "moving forward"
+- do not use "the next steps"
+- do not use genre lists
+- do not stack multiple specs into one elegant sentence
+
+Preferred shape:
+- sentence 1: one thing that feels real now
+- sentence 2: one thing leaning in a direction
+- sentence 3: what is still open
+- sentence 4: stop
+
+Sentence rules:
+- use short sentences
+- prefer simple nouns and verbs
+- keep each sentence focused on one idea
+- if a detail is not confirmed, say "leaning toward", "keep open", or "not locked yet"
+- the last sentence should feel like a working note, not a conclusion
+- the last sentence should be 4 to 8 words max
+
+For Commitment & Portal Setup:
+- this should feel like the project is no longer just exploratory
+- one or two directions can be named simply
+- structural choices can still stay open
+- the tone should stay steady, plain, and honest
+
+Good example of tone:
+"Maple still looks right here. Clear gloss makes sense if the figured grain stays central. Shell construction and edge details are not locked yet. Hardware can wait."
+
+Follow that level of restraint and directness.
+Do not copy the example directly.
+
+Return only the paragraph text.
+`.trim(),
+
+  buildNotes: `
+Write the build notes for this exact SoundLegend build.
+
+These are private bench notes from the maker to himself.
+They should feel like real workshop notes made during planning.
+
+Requirements:
+- return 4 to 6 bullet strings
+- one short sentence per bullet
+- each bullet should name a real direction, open question, caution, or thing to protect
+- be specific where the data supports it
+- be honest where the data does not support a firm decision yet
+
+Tone:
+- short
+- direct
+- useful
+- plainspoken
+- workshop-real
+
+Prefer wording like:
+- "Leaning toward"
+- "Keep"
+- "Not locked yet"
+- "Still needs confirmation"
+- "Hold off on"
+- "Verify before moving on"
+- "Do not finalize until"
+- "Protect"
+
+Use artistName only for the human/customer if a name is needed.
+If artistName is missing, avoid naming the person directly.
+Do NOT use SoundLegend, projectName, series name, or drum line as if it were the artist.
+
+Avoid:
+- presentation language
+- brand language
+- poetic language
+- summary lines
+- conclusion lines
+- inflated wording
+- uncertain details written as confirmed
+
+Do not use:
+- "aligns with"
+- "supports"
+- "concept"
+- "identity"
+- "signature snare"
+- "broad response"
+- "versatility"
+- "aesthetic"
+- "protect visual direction"
+- "remain open for further input"
+- "planned as"
+- "set to"
+- "locked in"
+- "finalized"
+
+Bullet rules:
+- do not write a wrap-up bullet
+- do not write a summary bullet
+- do not write any bullet that reads like marketing copy
+- do not write uncertain details as fixed
+- prefer bullets that begin with "Leaning toward", "Keep", "Hold off on", "Verify", or "Do not finalize"
+- each bullet should read like a usable shop note
+- avoid combining too many decisions into one bullet
+- if discussing hardware finish, keep it practical, like "Keep brass / gold hardware in play, but do not finalize yet"
+
+Good examples of tone:
+- "Leaning toward maple for the shell; keep construction format open."
+- "Hold off on hoop choice until edge and feel are clearer."
+- "Verify snare bed preference before cutting."
+- "Keep brass / gold hardware in play, but do not finalize yet."
+
+Follow that level of directness.
+Do not copy the examples directly.
+
+Return only an array of bullet strings.
+`.trim(),
 };
 
 /* =========================================================
@@ -1677,18 +1846,46 @@ function getStoryEngineChapterKeyForStage(stageKey = '') {
 
 function getStoryEngineChapterRecord(project, stageKey = '') {
   const chapterKey = getStoryEngineChapterKeyForStage(stageKey);
-  return project?.storyEngine?.chapters?.[chapterKey] || null;
+
+  return (
+    project?.storyEngine?.record?.chapters?.[chapterKey] ||
+    project?.storyEngine?.chapters?.[chapterKey] ||
+    null
+  );
+}
+
+function getStoryEngineSectionRecord(project, stageKey = '', sectionKey = '') {
+  const chapter = getStoryEngineChapterRecord(project, stageKey);
+  return chapter?.storySections?.[sectionKey] || null;
+}
+
+function isStoryEngineSectionLocked(project, stageKey = '', sectionKey = '') {
+  return !!getStoryEngineSectionRecord(project, stageKey, sectionKey)?.locked;
+}
+
+function getStoryEngineSectionText(project, stageKey = '', sectionKey = '') {
+  return getStoryEngineSectionRecord(project, stageKey, sectionKey)?.text || '';
 }
 
 function getStoryEngineDraftText(project, stageKey = '', fieldKey = '') {
-  const chapter = getStoryEngineChapterRecord(project, stageKey);
-  if (!chapter) return '';
+  const chapterKey = getStoryEngineChapterKeyForStage(stageKey);
 
-  const drafts = chapter?.drafts || {};
-  const storySections = chapter?.storySections || {};
-  const sections = chapter?.sections || {};
+  const draftPreviewChapter =
+    project?.storyEngine?.draftPreview?.[chapterKey] || null;
+
+  const recordChapter = getStoryEngineChapterRecord(project, stageKey);
+
+  const draftPreviewValue =
+    draftPreviewChapter?.[fieldKey]?.text ||
+    draftPreviewChapter?.[fieldKey] ||
+    '';
+
+  const drafts = recordChapter?.drafts || {};
+  const storySections = recordChapter?.storySections || {};
+  const sections = recordChapter?.sections || {};
 
   const candidates = [
+    draftPreviewValue,
     drafts?.[fieldKey],
     storySections?.[fieldKey]?.text,
     storySections?.[fieldKey],
@@ -1760,7 +1957,10 @@ function softenNotSureLanguage(value = '') {
 
   return text
     .replace(/\bnot sure\b/gi, 'still discovering the clearest direction')
-    .replace(/\bguide me\b/gi, 'open to a more intuitive craftsman-led approach')
+    .replace(
+      /\bguide me\b/gi,
+      'open to a more intuitive craftsman-led approach'
+    )
     .replace(
       /\bi have somewhat of an idea what i want\b/gi,
       'there is already a real instinct taking shape'
@@ -1789,8 +1989,7 @@ function getStageNarrativeBlueprint(stageKey = '') {
         'The job here is to listen carefully, narrow the direction, and make sure the build begins from something real rather than decorative guesswork.',
     },
     commitmentPortal: {
-      summaryLead:
-        'This chapter turns the project from idea into commitment.',
+      summaryLead: 'This chapter turns the project from idea into commitment.',
       craftFocus:
         'What matters here is alignment — making sure the artistic direction, practical expectations, and build path are all clearly locked in.',
     },
@@ -1837,8 +2036,7 @@ function getStageNarrativeBlueprint(stageKey = '') {
         'The work here is about dialing in response, documenting the instrument honestly, and making sure the final personality of the drum is actually being heard.',
     },
     finalQAPackagingDelivery: {
-      summaryLead:
-        'This chapter is about final trust.',
+      summaryLead: 'This chapter is about final trust.',
       craftFocus:
         'Everything here should confirm that the instrument is truly ready — functionally, visually, and emotionally — to leave the bench and enter the artist’s life.',
     },
@@ -1856,6 +2054,7 @@ function getStageNarrativeBlueprint(stageKey = '') {
 
 function getBuildNotesInputs(step, project) {
   const stageKey = step?.key;
+  const phaseKey = getExistingPhaseKey(project, canonicalKeyForStage(stageKey));
 
   const artistIntent = softenNotSureLanguage(
     getStageSpecificText(project, stageKey, [
@@ -1936,6 +2135,33 @@ function getBuildNotesInputs(step, project) {
     'materialDirection'
   );
 
+  console.log('[BUILD NOTES INPUTS DEBUG]', {
+    stageKey,
+    phaseKey,
+    artistIntent,
+    emotionalTargets,
+    influences,
+    visualDirection,
+    customChoices,
+    storyEngineTraits,
+    storyEngineBuildNotes,
+    storyEngineBuildVision,
+    storyEngineMaterialDirection,
+    storyEngineChapterBuildNotes: getStoryEngineDraftText(
+      project,
+      stageKey,
+      'buildNotesStory'
+    ),
+    storyEngineUniqueTraits: getStoryEngineUniqueTraits(project, stageKey),
+    projectStageStory: project?.stageStory?.[stageKey],
+    stageBucket: project?.[stageKey],
+    phaseBucket: project?.[phaseKey],
+    storytellingBucket: project?.storytelling,
+    artistBucket: project?.artistDirection,
+    craftsmanBucket: project?.craftsmanDirection,
+    staticStageStoryBucket: PROJECT_STAGE_STORY?.[stageKey],
+  });
+
   return {
     artistIntent,
     emotionalTargets,
@@ -1976,7 +2202,10 @@ function getProjectSpecBenchNotes(step, project) {
   );
 
   if (diameter || depth) {
-    const size = [diameter ? formatInches(diameter) : '', depth ? formatInches(depth) : '']
+    const size = [
+      diameter ? formatInches(diameter) : '',
+      depth ? formatInches(depth) : '',
+    ]
       .filter(Boolean)
       .join(' x ');
 
@@ -2087,7 +2316,18 @@ function getBuildNotesSummary(step, project) {
   const stageKey = step?.key;
   const blueprint = getStageNarrativeBlueprint(stageKey);
 
+  const storyEngineChapterOverview = getStoryEngineDraftText(
+    project,
+    stageKey,
+    'chapterOverview'
+  );
+
   const customSummary = getStageSpecificText(project, stageKey, [
+    'chapterNarrative',
+    'storyIntro',
+    'storySummary',
+    'overviewNarrative',
+    'narrative',
     'buildNotesSummary',
     'chapterBuildSummary',
     'customBuildSummary',
@@ -2096,10 +2336,6 @@ function getBuildNotesSummary(step, project) {
     'chapterNotes',
   ]);
 
-  if (customSummary) {
-    return customSummary;
-  }
-
   const {
     artistIntent,
     emotionalTargets,
@@ -2107,26 +2343,31 @@ function getBuildNotesSummary(step, project) {
     visualDirection,
     customChoices,
     storyEngineTraits,
-    storyEngineBuildNotes,
     storyEngineBuildVision,
     storyEngineMaterialDirection,
   } = getBuildNotesInputs(step, project);
 
-  if (storyEngineBuildNotes) {
-    return storyEngineBuildNotes;
+  if (storyEngineChapterOverview) {
+    return storyEngineChapterOverview;
+  }
+
+  if (customSummary) {
+    return customSummary;
   }
 
   const parts = [blueprint.summaryLead];
 
   if (artistIntent) {
     parts.push(
-      `What is guiding it most is a player need centered around ${artistIntent.charAt(0).toLowerCase()}${artistIntent.slice(1)}.`
+      `The direction here is being shaped around ${artistIntent.charAt(0).toLowerCase()}${artistIntent.slice(1)}.`
     );
   }
 
   if (storyEngineBuildVision) {
     parts.push(
-      `${storyEngineBuildVision.endsWith('.') ? storyEngineBuildVision : `${storyEngineBuildVision}.`}`
+      storyEngineBuildVision.endsWith('.')
+        ? storyEngineBuildVision
+        : `${storyEngineBuildVision}.`
     );
   } else {
     parts.push(blueprint.craftFocus);
@@ -2134,21 +2375,21 @@ function getBuildNotesSummary(step, project) {
 
   if (influences.length) {
     parts.push(
-      `The references shaping this chapter lean toward ${influences.slice(0, 2).join(' and ')}.`
+      `The references behind this chapter lean toward ${influences.slice(0, 2).join(' and ')}.`
     );
   }
 
   if (visualDirection.length || storyEngineMaterialDirection) {
     const visualLine =
       storyEngineMaterialDirection ||
-      `Visually and materially, the build is leaning toward ${visualDirection.slice(0, 3).join(', ')}.`;
+      `Visually and materially, the build is moving toward ${visualDirection.slice(0, 3).join(', ')}.`;
 
     parts.push(visualLine.endsWith('.') ? visualLine : `${visualLine}.`);
   }
 
   if (emotionalTargets.length) {
     parts.push(
-      `The response being protected here is less about abstract adjectives and more about preserving qualities like ${emotionalTargets.slice(0, 4).join(', ')}.`
+      `The response being protected here centers on qualities like ${emotionalTargets.slice(0, 4).join(', ')}.`
     );
   }
 
@@ -2159,7 +2400,7 @@ function getBuildNotesSummary(step, project) {
 
   if (uniqueSignals.length) {
     parts.push(
-      `What makes this chapter specific to this instrument is the way choices are being narrowed around ${uniqueSignals.slice(0, 2).join(' and ')}.`
+      `What makes this chapter specific to this instrument is the way the build is narrowing around ${uniqueSignals.slice(0, 2).join(' and ')}.`
     );
   }
 
@@ -2176,6 +2417,7 @@ function getBenchNotes(step, project) {
     visualDirection,
     customChoices,
     storyEngineTraits,
+    storyEngineBuildNotes,
     storyEngineBuildVision,
     storyEngineMaterialDirection,
   } = getBuildNotesInputs(step, project);
@@ -2185,54 +2427,67 @@ function getBenchNotes(step, project) {
 
   const notes = [];
 
-  if (artistIntent) {
-    notes.push(
-      `Primary player need: ${sentenceCase(artistIntent)}`
-    );
+  const storyEngineBulletItems =
+    getStoryEngineChapterRecord(project, stageKey)?.storySections
+      ?.buildNotesStory?.bulletItems || [];
+
+  if (Array.isArray(storyEngineBulletItems) && storyEngineBulletItems.length) {
+    return dedupeNormalizedLines(storyEngineBulletItems).slice(0, 6);
   }
 
-  if (emotionalTargets.length) {
-    notes.push(
-      `Response targets: ${emotionalTargets.slice(0, 4).join(', ')}`
-    );
-  }
+  if (storyEngineBuildNotes) {
+    const splitNotes = storyEngineBuildNotes
+      .split(/\n|•|-/g)
+      .map((line) => cleanBuildPhrase(line))
+      .filter(Boolean);
 
-  if (influences.length) {
-    notes.push(
-      `Reference influences: ${influences.slice(0, 3).join(', ')}`
-    );
-  }
-
-  if (visualDirection.length) {
-    notes.push(
-      `Visual / material direction: ${visualDirection.slice(0, 3).join(', ')}`
-    );
-  }
-
-  if (storyEngineBuildVision) {
-    notes.push(
-      `Build vision: ${cleanBuildPhrase(storyEngineBuildVision)}`
-    );
-  }
-
-  if (storyEngineMaterialDirection) {
-    notes.push(
-      `Material strategy: ${cleanBuildPhrase(storyEngineMaterialDirection)}`
-    );
+    if (splitNotes.length) {
+      return dedupeNormalizedLines(splitNotes).slice(0, 6);
+    }
   }
 
   dedupeNormalizedLines([...customChoices, ...storyEngineTraits])
     .slice(0, 3)
     .forEach((item) => {
-      notes.push(`Unique build focus: ${sentenceCase(item)}`);
+      notes.push(sentenceCase(item));
     });
 
   chapterSpecificNotes.slice(0, 3).forEach((note) => notes.push(note));
   specNotes.slice(0, 4).forEach((note) => notes.push(note));
 
-  const cleaned = dedupeNormalizedLines(notes);
+  if (!notes.length) {
+    if (artistIntent) {
+      notes.push(`Primary player need: ${sentenceCase(artistIntent)}`);
+    }
 
-  return cleaned.slice(0, 8);
+    if (emotionalTargets.length) {
+      notes.push(
+        `Response targets: ${emotionalTargets.slice(0, 4).join(', ')}`
+      );
+    }
+
+    if (influences.length) {
+      notes.push(`Reference influences: ${influences.slice(0, 3).join(', ')}`);
+    }
+
+    if (visualDirection.length) {
+      notes.push(
+        `Visual / material direction: ${visualDirection.slice(0, 3).join(', ')}`
+      );
+    }
+
+    if (storyEngineBuildVision) {
+      notes.push(`Build vision: ${cleanBuildPhrase(storyEngineBuildVision)}`);
+    }
+
+    if (storyEngineMaterialDirection) {
+      notes.push(
+        `Material strategy: ${cleanBuildPhrase(storyEngineMaterialDirection)}`
+      );
+    }
+  }
+
+  return dedupeNormalizedLines(notes).slice(0, 6);
 }
 
 function getBuildDirectionData(step) {
@@ -2835,6 +3090,10 @@ function renderActiveStorySection({
   openArchiveFilePicker,
   getArchiveVisibilityLabel,
   setSelectedResourceItem,
+  isStorySectionLocked,
+  storySectionBusy,
+  onToggleStorySectionLock,
+  onRegenerateStorySection,
 }) {
   if (!activeStorypoint) return null;
 
@@ -2899,22 +3158,130 @@ function renderActiveStorySection({
   }
 
   if (activeStorypoint.id === 'build-notes') {
-    const buildNotesSummary = getBuildNotesSummary(activeStep, project);
-    const benchNotes = getBenchNotes(activeStep, project);
+    const buildNotesSummary =
+      getStoryEngineSectionText(project, activeStep?.key, 'chapterOverview') ||
+      getBuildNotesSummary(activeStep, project);
+
+    const lockedStory = isStorySectionLocked(
+      project,
+      activeStep?.key,
+      'chapterOverview'
+    );
+
+    const lockedBench = isStorySectionLocked(
+      project,
+      activeStep?.key,
+      'buildNotesStory'
+    );
+
+    const benchNotesFromStoryEngine =
+      getStoryEngineSectionRecord(project, activeStep?.key, 'buildNotesStory')
+        ?.bulletItems || [];
+
+    const benchNotes =
+      Array.isArray(benchNotesFromStoryEngine) &&
+      benchNotesFromStoryEngine.length
+        ? benchNotesFromStoryEngine
+        : getBenchNotes(activeStep, project);
+
+    const storyBusy =
+      storySectionBusy ===
+      `${getStoryEngineChapterKeyForStage(activeStep?.key)}:chapterOverview`;
+
+    const benchBusy =
+      storySectionBusy ===
+      `${getStoryEngineChapterKeyForStage(activeStep?.key)}:buildNotesStory`;
 
     return (
       <div className="sl-progress-build-notes-stack">
         <div className="sl-progress-story-section-intro-card sl-progress-story-section-intro-card--lighter sl-progress-story-section-intro-card--summary">
-          <div className="sl-progress-story-section-label">
-            Tailored Story & Direction
+          <div className="sl-progress-story-section-label-row">
+            <div className="sl-progress-story-section-label">
+              Tailored Story & Direction
+              {lockedStory ? (
+                <span className="sl-progress-story-lock-pill">Locked</span>
+              ) : null}
+            </div>
+
+            {isAdmin ? (
+              <div className="sl-progress-story-admin-actions">
+                <button
+                  type="button"
+                  className="sl-progress-stage-edu-resource-link"
+                  disabled={storyBusy || lockedStory}
+                  onClick={() =>
+                    onRegenerateStorySection?.({
+                      stageKey: activeStep?.key,
+                      sectionKey: 'chapterOverview',
+                    })
+                  }
+                >
+                  {storyBusy ? 'Regenerating…' : 'Regenerate'}
+                </button>
+
+                <button
+                  type="button"
+                  className="sl-progress-stage-edu-resource-link"
+                  onClick={() =>
+                    onToggleStorySectionLock?.({
+                      stageKey: activeStep?.key,
+                      sectionKey: 'chapterOverview',
+                      locked: !lockedStory,
+                    })
+                  }
+                >
+                  {lockedStory ? 'Unlock' : 'Lock'}
+                </button>
+              </div>
+            ) : null}
           </div>
+
           <div className="sl-progress-story-section-body">
             {buildNotesSummary}
           </div>
         </div>
 
         <div className="sl-progress-story-section-intro-card sl-progress-story-section-intro-card--lighter">
-          <div className="sl-progress-story-section-label">Bench Notes</div>
+          <div className="sl-progress-story-section-label-row">
+            <div className="sl-progress-story-section-label">
+              Bench Notes
+              {lockedBench ? (
+                <span className="sl-progress-story-lock-pill">Locked</span>
+              ) : null}
+            </div>
+
+            {isAdmin ? (
+              <div className="sl-progress-story-admin-actions">
+                <button
+                  type="button"
+                  className="sl-progress-stage-edu-resource-link"
+                  disabled={benchBusy || lockedBench}
+                  onClick={() =>
+                    onRegenerateStorySection?.({
+                      stageKey: activeStep?.key,
+                      sectionKey: 'buildNotesStory',
+                    })
+                  }
+                >
+                  {benchBusy ? 'Regenerating…' : 'Regenerate'}
+                </button>
+
+                <button
+                  type="button"
+                  className="sl-progress-stage-edu-resource-link"
+                  onClick={() =>
+                    onToggleStorySectionLock?.({
+                      stageKey: activeStep?.key,
+                      sectionKey: 'buildNotesStory',
+                      locked: !lockedBench,
+                    })
+                  }
+                >
+                  {lockedBench ? 'Unlock' : 'Lock'}
+                </button>
+              </div>
+            ) : null}
+          </div>
 
           <ul className="sl-progress-build-notes-bullets">
             {benchNotes.map((note, index) => (
@@ -4599,6 +4966,7 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
   );
 
   const [revealPanelBusy, setRevealPanelBusy] = useState(false);
+  const [storySectionBusy, setStorySectionBusy] = useState('');
 
   const [revealCoverTitle, setRevealCoverTitle] = useState(
     'Your SoundLegend Story'
@@ -6565,6 +6933,237 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
     }
   };
 
+  const callHybridChapter = async ({
+    chapterKey,
+    payload,
+    prompts,
+    sectionKey,
+    model = 'gpt-4.1-mini',
+    timeoutMs = 45000,
+  }) => {
+    const functions = getFunctions(app);
+    const callable = httpsCallable(functions, 'generateHybridStoryChapter');
+
+    const result = await Promise.race([
+      callable({
+        payload,
+        prompts,
+        sectionKey,
+        model,
+      }),
+      new Promise((_, reject) =>
+        setTimeout(() => {
+          reject(new Error(`Hybrid callable timed out for ${chapterKey}`));
+        }, timeoutMs)
+      ),
+    ]);
+
+    return result?.data?.result || null;
+  };
+
+  const saveStoryEngineRecordToProject = async (nextStoryEngine) => {
+    if (!project?.id) return;
+
+    const projectRef = doc(db, 'projects', project.id);
+
+    await updateDoc(projectRef, {
+      storyEngine: nextStoryEngine,
+      updatedAt: serverTimestamp(),
+    });
+
+    setProject((prev) =>
+      prev
+        ? {
+            ...prev,
+            storyEngine: nextStoryEngine,
+          }
+        : prev
+    );
+  };
+
+  const toggleStorySectionLock = async ({ stageKey, sectionKey, locked }) => {
+    if (!project?.id) return;
+
+    const chapterKey = getStoryEngineChapterKeyForStage(stageKey);
+    const existingStoryEngine = project?.storyEngine || {};
+    const existingRecord = existingStoryEngine?.record || {};
+    const existingChapter = existingRecord?.chapters?.[chapterKey] || {};
+    const existingStorySections = existingChapter?.storySections || {};
+    const existingSection = existingStorySections?.[sectionKey] || {};
+
+    const nextStoryEngine = {
+      ...existingStoryEngine,
+      record: {
+        ...existingRecord,
+        chapters: {
+          ...(existingRecord?.chapters || {}),
+          [chapterKey]: {
+            ...existingChapter,
+            storySections: {
+              ...existingStorySections,
+              [sectionKey]: {
+                ...existingSection,
+                locked,
+                lockedAt: locked ? new Date().toISOString() : null,
+                lockedBy: locked ? 'admin' : '',
+              },
+            },
+          },
+        },
+      },
+      draftPreview: {
+        ...(existingStoryEngine?.draftPreview || {}),
+        [chapterKey]: {
+          ...(existingStoryEngine?.draftPreview?.[chapterKey] || {}),
+          [sectionKey]: {
+            ...((existingStoryEngine?.draftPreview?.[chapterKey] || {})[
+              sectionKey
+            ] || {}),
+            text: existingSection?.text || '',
+            locked,
+            lockedAt: locked ? new Date().toISOString() : null,
+            lockedBy: locked ? 'admin' : '',
+          },
+        },
+      },
+    };
+
+    await saveStoryEngineRecordToProject(nextStoryEngine);
+  };
+
+  const regenerateStorySection = async ({ stageKey, sectionKey }) => {
+    if (!project?.id || !stageKey || !sectionKey) return;
+
+    const chapterKey = getStoryEngineChapterKeyForStage(stageKey);
+    const existingStoryEngine = project?.storyEngine || {};
+    const existingRecord = existingStoryEngine?.record || {};
+    const existingChapter = existingRecord?.chapters?.[chapterKey] || {};
+    const existingStorySections = existingChapter?.storySections || {};
+    const existingSection = existingStorySections?.[sectionKey] || {};
+
+    if (existingSection?.locked) {
+      return;
+    }
+
+    try {
+      setStorySectionBusy(`${chapterKey}:${sectionKey}`);
+
+      const payload = {
+        projectId: project?.id || '',
+        chapterKey,
+        chapterLabel: existingChapter?.label || stageKey,
+        artistName:
+          project?.storyEngine?.sources?.consultationMapped?.artistName ||
+          project?.storyEngine?.sources?.questionnaireMapped?.artistName ||
+          project?.customerName ||
+          '',
+        projectName:
+          project?.storyEngine?.sources?.consultationMapped?.projectName ||
+          project?.projectName ||
+          project?.title ||
+          project?.name ||
+          '',
+        consultationMapped:
+          project?.storyEngine?.sources?.consultationMapped || {},
+        questionnaireMapped:
+          project?.storyEngine?.sources?.questionnaireMapped || {},
+        buildSpec: existingRecord?.buildSpec || {},
+        recommendations: existingRecord?.recommendations || {},
+        engineMeta: existingRecord?.engineMeta || {},
+      };
+
+      const prompts =
+        sectionKey === 'chapterOverview'
+          ? { chapterOverview: HYBRID_CHAPTER_PROMPTS.chapterOverview }
+          : { buildNotes: HYBRID_CHAPTER_PROMPTS.buildNotes };
+
+      const hybridResult = await callHybridChapter({
+        chapterKey,
+        payload,
+        prompts,
+        sectionKey,
+      });
+
+      const nextStoryEngine = {
+        ...existingStoryEngine,
+        record: {
+          ...existingRecord,
+          chapters: {
+            ...(existingRecord?.chapters || {}),
+            [chapterKey]: {
+              ...existingChapter,
+              storySections: {
+                ...existingStorySections,
+              },
+            },
+          },
+        },
+        draftPreview: {
+          ...(existingStoryEngine?.draftPreview || {}),
+          [chapterKey]: {
+            ...(existingStoryEngine?.draftPreview?.[chapterKey] || {}),
+          },
+        },
+      };
+
+      if (sectionKey === 'chapterOverview' && hybridResult?.chapterOverview) {
+        nextStoryEngine.record.chapters[
+          chapterKey
+        ].storySections.chapterOverview = {
+          ...(existingStorySections?.chapterOverview || {}),
+          text: hybridResult.chapterOverview,
+          locked: existingStorySections?.chapterOverview?.locked || false,
+          lockedAt: existingStorySections?.chapterOverview?.lockedAt || null,
+          lockedBy: existingStorySections?.chapterOverview?.lockedBy || '',
+          lastGeneratedAt: new Date().toISOString(),
+          lastGeneratedBy: 'admin',
+        };
+
+        nextStoryEngine.draftPreview[chapterKey].chapterOverview = {
+          ...(nextStoryEngine.draftPreview?.[chapterKey]?.chapterOverview ||
+            {}),
+          text: hybridResult.chapterOverview,
+          locked: existingStorySections?.chapterOverview?.locked || false,
+        };
+      }
+
+      if (
+        sectionKey === 'buildNotesStory' &&
+        hybridResult?.buildNotes?.length
+      ) {
+        nextStoryEngine.record.chapters[
+          chapterKey
+        ].storySections.buildNotesStory = {
+          ...(existingStorySections?.buildNotesStory || {}),
+          text: hybridResult.buildNotes.join('\n'),
+          bulletItems: hybridResult.buildNotes,
+          locked: existingStorySections?.buildNotesStory?.locked || false,
+          lockedAt: existingStorySections?.buildNotesStory?.lockedAt || null,
+          lockedBy: existingStorySections?.buildNotesStory?.lockedBy || '',
+          lastGeneratedAt: new Date().toISOString(),
+          lastGeneratedBy: 'admin',
+        };
+
+        nextStoryEngine.draftPreview[chapterKey].buildNotesStory = {
+          ...(nextStoryEngine.draftPreview?.[chapterKey]?.buildNotesStory ||
+            {}),
+          text: hybridResult.buildNotes.join('\n'),
+          bulletItems: hybridResult.buildNotes,
+          locked: existingStorySections?.buildNotesStory?.locked || false,
+        };
+      }
+
+      await saveStoryEngineRecordToProject(nextStoryEngine);
+    } catch (err) {
+      console.error(
+        `[ProjectProgress] Failed regenerating ${chapterKey}.${sectionKey}:`,
+        err
+      );
+    } finally {
+      setStorySectionBusy('');
+    }
+  };
+
   const updateStageArchiveItemsForStage = async (stageKey, updater) => {
     if (!project?.id || !stageKey) return;
 
@@ -7342,6 +7941,10 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
               openArchiveFilePicker,
               getArchiveVisibilityLabel,
               setSelectedResourceItem,
+              isStorySectionLocked: isStoryEngineSectionLocked,
+              storySectionBusy,
+              onToggleStorySectionLock: toggleStorySectionLock,
+              onRegenerateStorySection: regenerateStorySection,
             })}
           </div>
         </section>
