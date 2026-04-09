@@ -45,19 +45,19 @@ export function runStoryEngineConsoleTest() {
 
   record = runStoryDraftPipeline(record);
 
-  console.log('FULL RECORD', record);
-  console.log(
-    'DISCOVERY OVERVIEW:',
-    record.chapters.discoveryDesign.storySections.chapterOverview.text
-  );
-  console.log(
-    'DISCOVERY BUILD NOTES:',
-    record.chapters.discoveryDesign.storySections.buildNotesStory.text
-  );
-  console.log(
-    'DISCOVERY UNIQUE TRAITS:',
-    record.chapters.discoveryDesign.drafts?.uniqueBuildTraits || []
-  );
+//   console.log('FULL RECORD', record);
+//   console.log(
+//     'DISCOVERY OVERVIEW:',
+//     record.chapters.discoveryDesign.storySections.chapterOverview.text
+//   );
+//   console.log(
+//     'DISCOVERY BUILD NOTES:',
+//     record.chapters.discoveryDesign.storySections.buildNotesStory.text
+//   );
+//   console.log(
+//     'DISCOVERY UNIQUE TRAITS:',
+//     record.chapters.discoveryDesign.drafts?.uniqueBuildTraits || []
+//   );
 
   return record;
 }

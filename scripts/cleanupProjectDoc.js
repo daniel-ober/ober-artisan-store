@@ -28,9 +28,9 @@ async function cleanupFields() {
 
   if (Object.keys(fieldsToDelete).length > 0) {
     await docRef.update(fieldsToDelete);
-    console.log('✅ Removed:', Object.keys(fieldsToDelete));
+    // console.log('✅ Removed:', Object.keys(fieldsToDelete));
   } else {
-    console.log('ℹ️ No matching fields found to delete.');
+    // console.log('ℹ️ No matching fields found to delete.');
   }
 }
 

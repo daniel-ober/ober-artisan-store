@@ -200,7 +200,7 @@ export const CartProvider = ({ children }) => {
     timestamp: new Date().toISOString(),
   };
 
-  console.log('🟢 Adding to Cart with lugQuantity:', lugQty);
+  // console.log('🟢 Adding to Cart with lugQuantity:', lugQty);
 
   let updatedCart = [...cart];
   const existingItemIndex = updatedCart.findIndex(

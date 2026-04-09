@@ -6,7 +6,7 @@ export const seedInventory = async () => {
   const inventoryRef = collection(db, 'inventory');
   for (const item of inventorySeedData) {
     await addDoc(inventoryRef, item);
-    console.log(`Added: ${item.name}`);
+    // console.log(`Added: ${item.name}`);
   }
-  console.log('Inventory seeding complete!');
+  // console.log('Inventory seeding complete!');
 };

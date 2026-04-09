@@ -94,9 +94,9 @@ const AdminRiskNotifications = () => {
           (r) => r.overviewStatus === 'new' || r.overviewStatus === 'inProgress'
         ).length;
 
-        console.log('🔔 Active risk alerts:', activeRiskCount); // ← You can lift this up to context if needed
+        // console.log('🔔 Active risk alerts:', activeRiskCount); // ← You can lift this up to context if needed
       } catch (err) {
-        console.error('❌ Failed to load risk notifications:', err);
+        // console.error('❌ Failed to load risk notifications:', err);
       }
     };
 

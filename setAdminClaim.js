@@ -10,7 +10,7 @@ const uid = 'PUT_ADMIN_UID_HERE'; // 👈 replace with actual UID
 
 admin.auth().setCustomUserClaims(uid, { admin: true })
   .then(() => {
-    console.log(`✅ Admin claim set for UID: ${uid}`);
+    // console.log(`✅ Admin claim set for UID: ${uid}`);
     process.exit(0);
   })
   .catch((err) => {

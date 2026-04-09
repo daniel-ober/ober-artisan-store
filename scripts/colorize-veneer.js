@@ -82,7 +82,7 @@ function parseArgs() {
     .composite([{ input: maskedColor, blend: opts.mode }])
     .toFile(output);
 
-  console.log(`✅ Wrote ${output} (${opts.mode}, thresh=${opts.thresh}, feather=${opts.feather}, target=${opts.target}, opacity=${opts.opacity})`);
+  // console.log(`✅ Wrote ${output} (${opts.mode}, thresh=${opts.thresh}, feather=${opts.feather}, target=${opts.target}, opacity=${opts.opacity})`);
 })().catch(err => {
   console.error(err);
   process.exit(1);

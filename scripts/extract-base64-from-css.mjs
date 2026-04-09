@@ -36,4 +36,4 @@ css = css.replace(re, (_m, _q, mime, b64) => {
 });
 
 fs.writeFileSync(outCssPath, css, "utf8");
-console.log(`✅ Extracted ${count} image(s). Updated CSS -> ${outCssPath}`);
+// console.log(`✅ Extracted ${count} image(s). Updated CSS -> ${outCssPath}`);

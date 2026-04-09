@@ -167,7 +167,7 @@ async function processOne(serial, doWrite = false) {
     return;
   }
 
-  console.log(`ℹ️  ${serial} center source: ${comp.debug}`);
+  // console.log(`ℹ️  ${serial} center source: ${comp.debug}`);
 
   // If Firestore already has a human-voiced "200–220 Hz" string, honor it
   const parsedLegacy = parseLegacyHzRange(specs.legacyTuningNotes);
@@ -199,28 +199,28 @@ async function processOne(serial, doWrite = false) {
 
   const d = diffSpecs(specs, proposed);
   if (!Object.keys(d).length) {
-    console.log(`✅ ${serial}: already up to date`);
+    // console.log(`✅ ${serial}: already up to date`);
     return;
   }
 
-  console.log(`\n🔎 Proposed updates for ${serial}:`);
+  // console.log(`\n🔎 Proposed updates for ${serial}:`);
   console.table(
     Object.entries(d).map(([k, v]) => ({ field: k, from: v.from, to: v.to }))
   );
 
   if (!doWrite) {
-    console.log("DRY RUN (no write). Add --write to commit.");
+    // console.log("DRY RUN (no write). Add --write to commit.");
     return;
   }
 
   await ref.update({ specs: proposed });
-  console.log(`✅ Wrote updates for ${serial}`);
+  // console.log(`✅ Wrote updates for ${serial}`);
 }
 
 async function processAll(doWrite = false) {
   const qs = await db.collection("soundlegend_showroom").get();
   if (qs.empty) {
-    console.log("No docs found in soundlegend_showroom.");
+    // console.log("No docs found in soundlegend_showroom.");
     return;
   }
   for (const doc of qs.docs) {

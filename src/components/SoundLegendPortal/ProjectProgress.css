@@ -6,6 +6,8 @@
    ========================================================= */
 
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Marck+Script&display=swap');
 
 .slp-card.pp-card[data-component='ProjectProgress'] {
   position: relative;
@@ -5284,36 +5286,99 @@ button.pp-compact-marker {
   gap: 18px;
 }
 
-.sl-progress-story-section-intro-card--summary {
-  background: rgba(255, 251, 244, 0.68);
+.sl-progress-build-notes-card {
+  position: relative;
+  z-index: 1;
+  padding: 18px 18px 64px;
+  border-radius: 16px;
+  border: 1px solid rgba(116, 88, 58, 0.1);
+  overflow: hidden;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.42),
+    0 8px 24px rgba(74, 52, 30, 0.06);
 }
 
-.sl-progress-build-notes-bullets {
-  margin: 10px 0 0;
-  padding-left: 18px;
-  display: grid;
-  gap: 10px;
+.sl-progress-build-notes-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
 }
 
-.sl-progress-build-notes-bullets li {
-  color: rgba(44, 34, 26, 0.88);
-  font-size: 0.95rem;
-  line-height: 1.65;
+.sl-progress-build-notes-card--story {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 252, 246, 0.84),
+    rgba(252, 246, 237, 0.8)
+  );
 }
 
-.sl-progress-build-notes-placeholder {
-  margin: 0;
-  font-style: italic;
-  opacity: 0.72;
+.sl-progress-build-notes-card--story::before {
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(255, 255, 255, 0.22),
+      transparent 28%
+    ),
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(92, 66, 40, 0.03) 22%,
+      transparent 45%,
+      rgba(92, 66, 40, 0.018) 70%,
+      transparent 100%
+    );
+  opacity: 0.75;
 }
 
-.sl-progress-build-notes-vision-grid {
-  display: grid;
-  gap: 14px;
-  margin-top: 8px;
+.sl-progress-build-notes-card--bench {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 250, 242, 0.5),
+      rgba(246, 238, 224, 0.54)
+    ),
+    var(--bench-page-image, none);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  border: 1px solid rgba(146, 118, 86, 0.12);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.26),
+    inset 0 0 30px rgba(120, 92, 58, 0.03),
+    0 8px 20px rgba(74, 52, 30, 0.04);
+  padding: 18px 24px 64px 26px;
 }
 
-.sl-progress-story-section-label-row {
+.sl-progress-build-notes-card--bench::before {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 250, 242, 0.18) 0%,
+      rgba(248, 239, 227, 0.22) 100%
+    ),
+    repeating-linear-gradient(
+      180deg,
+      transparent 0,
+      transparent 47px,
+      rgba(120, 96, 70, 0.055) 48px,
+      transparent 49px
+    );
+}
+.sl-progress-build-notes-card-header,
+.sl-progress-build-notes-story-body,
+.sl-progress-build-notes-bullets,
+.sl-progress-build-notes-placeholder-card,
+.sl-progress-build-notes-card-actions {
+  position: relative;
+  z-index: 1;
+}
+
+.sl-progress-build-notes-card-header {
+  margin-bottom: 10px;
+}
+
+.sl-progress-build-notes-heading-wrap {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -5321,22 +5386,238 @@ button.pp-compact-marker {
   flex-wrap: wrap;
 }
 
-.sl-progress-story-admin-actions {
+.sl-progress-build-notes-story-body {
+  max-width: 920px;
+}
+
+.sl-progress-build-notes-bullets {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+}
+
+.sl-progress-build-notes-bullets li {
+  position: relative;
+  padding-left: 26px;
+  color: rgba(52, 41, 33, 0.92);
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: 0.01em;
+  transform: rotate(-0.25deg);
+  text-shadow: 0 0 0.35px rgba(50, 38, 28, 0.16);
+}
+
+.sl-progress-build-notes-bullets li:nth-child(2n) {
+  transform: rotate(0.22deg);
+}
+
+.sl-progress-build-notes-bullets li:nth-child(3n) {
+  transform: rotate(-0.12deg);
+}
+
+.sl-progress-build-notes-bullets li::before {
+  content: '–';
+  position: absolute;
+  left: 2px;
+  top: -1px;
+  color: rgba(70, 55, 42, 0.68);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.sl-progress-build-notes-card--bench .sl-progress-story-section-label {
+  color: rgba(92, 68, 42, 0.72);
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+}
+
+.sl-progress-build-notes-placeholder-card {
+  margin-top: 6px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: rgba(255, 252, 247, 0.58);
+  border: 1px dashed rgba(116, 88, 58, 0.18);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.34);
+}
+
+.sl-progress-build-notes-placeholder-kicker {
+  margin-bottom: 6px;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(87, 65, 44, 0.64);
+}
+
+.sl-progress-build-notes-placeholder {
+  margin: 0;
+  color: rgba(67, 51, 36, 0.82);
+  font-size: 0.94rem;
+  line-height: 1.65;
+  font-style: italic;
+}
+
+.sl-progress-build-notes-card-actions {
+  position: absolute;
+  right: 16px;
+  bottom: 14px;
   display: flex;
+  align-items: center;
   gap: 8px;
   flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.sl-progress-build-notes-card-actions--corner {
+  max-width: calc(100% - 32px);
+}
+
+.sl-progress-story-action-btn {
+  appearance: none;
+  -webkit-appearance: none;
+  min-height: 38px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(104, 82, 58, 0.16);
+  background: rgba(75, 67, 61, 0.86);
+  color: rgba(255, 250, 244, 0.96);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  box-shadow:
+    0 6px 14px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  transition:
+    transform 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    opacity 180ms ease;
+}
+
+.sl-progress-story-action-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.sl-progress-story-action-btn:disabled {
+  opacity: 0.56;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.sl-progress-story-action-btn-icon {
+  width: 14px;
+  height: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+
+.sl-progress-story-action-btn-icon svg {
+  width: 14px;
+  height: 14px;
+  display: block;
+}
+
+.sl-progress-story-action-btn--regenerate {
+  background: rgba(132, 123, 115, 0.92);
+  border-color: rgba(104, 82, 58, 0.16);
+  color: rgba(255, 251, 246, 0.98);
+}
+
+.sl-progress-story-action-btn--regenerate:hover:not(:disabled) {
+  background: rgba(118, 110, 103, 0.96);
+}
+
+.sl-progress-story-action-btn--lock {
+  background: linear-gradient(
+    180deg,
+    rgba(160, 54, 54, 0.94),
+    rgba(130, 34, 34, 0.96)
+  );
+  border-color: rgba(123, 22, 22, 0.34);
+  color: rgba(255, 242, 242, 0.98);
+}
+
+.sl-progress-story-action-btn--lock:hover:not(:disabled) {
+  background: linear-gradient(
+    180deg,
+    rgba(176, 60, 60, 0.96),
+    rgba(144, 38, 38, 0.98)
+  );
+}
+
+.sl-progress-story-action-btn--unlock {
+  background: linear-gradient(
+    180deg,
+    rgba(58, 148, 82, 0.94),
+    rgba(34, 118, 58, 0.96)
+  );
+  border-color: rgba(26, 98, 48, 0.34);
+  color: rgba(242, 255, 246, 0.98);
+}
+
+.sl-progress-story-action-btn--unlock:hover:not(:disabled) {
+  background: linear-gradient(
+    180deg,
+    rgba(66, 162, 90, 0.96),
+    rgba(38, 128, 62, 0.98)
+  );
 }
 
 .sl-progress-story-lock-pill {
   display: inline-flex;
   align-items: center;
-  margin-left: 10px;
-  padding: 2px 8px;
+  padding: 3px 9px;
   border-radius: 999px;
-  font-size: 11px;
-  letter-spacing: 0.08em;
+  font-size: 0.64rem;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  background: rgba(0, 0, 0, 0.08);
+  background: rgba(92, 60, 60, 0.08);
+  border: 1px solid rgba(112, 82, 58, 0.12);
+  color: rgba(92, 64, 44, 0.72);
+}
+
+@media (max-width: 768px) {
+  .sl-progress-build-notes-card {
+    padding: 16px 14px 70px;
+    border-radius: 14px;
+  }
+
+  .sl-progress-build-notes-bullets li {
+    font-size: 0.9rem;
+    line-height: 1.62;
+  }
+
+  .sl-progress-build-notes-card-actions {
+    left: 14px;
+    right: 14px;
+    bottom: 12px;
+    justify-content: flex-end;
+  }
+
+  .sl-progress-story-action-btn {
+    min-height: 36px;
+    padding: 0 10px;
+    font-size: 0.72rem;
+  }
+
+  .sl-progress-story-action-btn-icon,
+  .sl-progress-story-action-btn-icon svg {
+    width: 13px;
+    height: 13px;
+  }
 }
 
 /* =========================================================
@@ -6259,4 +6540,877 @@ button.pp-compact-marker {
     font-size: 0.68rem;
     letter-spacing: 0.08em;
   }
+}
+
+/* =========================================================
+   CHAPTER SECTION OVERHAUL
+   ========================================================= */
+
+.sl-progress-story-book-section {
+  margin-top: 0;
+}
+
+.sl-progress-story-book-shell {
+  position: relative;
+  padding: 28px 26px 30px;
+  border: 1px solid rgba(120, 92, 58, 0.18);
+  border-top: 0;
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  color: #2a2118;
+  overflow: hidden;
+}
+
+.sl-progress-hero-carousel-shell.is-unified-stage-shell {
+  margin-bottom: 0;
+}
+
+.sl-progress-story-book-shell::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 248, 236, 0.32) 0%,
+    rgba(255, 244, 226, 0.18) 18%,
+    rgba(214, 193, 164, 0.14) 100%
+  );
+  mix-blend-mode: screen;
+}
+
+.sl-progress-story-book-shell::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(255, 255, 255, 0.24),
+      transparent 30%
+    ),
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(92, 66, 40, 0.045) 22%,
+      transparent 45%,
+      rgba(92, 66, 40, 0.03) 70%,
+      transparent 100%
+    );
+  opacity: 0.7;
+  mix-blend-mode: multiply;
+}
+
+.sl-progress-story-book-header {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 22px;
+  text-align: center;
+}
+
+.sl-progress-story-book-kicker {
+  font-size: 0.66rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(87, 65, 44, 0.62);
+  margin-bottom: 8px;
+}
+
+.sl-progress-story-book-title {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(1.25rem, 2vw, 1.85rem);
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #241b14;
+}
+
+.sl-progress-story-book-subtitle {
+  margin-top: 8px;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: rgba(63, 47, 33, 0.72);
+}
+
+/* =========================================================
+   OVERVIEW — EDITORIAL PAGE
+   ========================================================= */
+
+.sl-progress-chapter-overview-shell {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.sl-progress-chapter-overview-hero {
+  padding: 24px 24px 22px;
+  border-radius: 18px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 252, 246, 0.84),
+    rgba(252, 246, 237, 0.8)
+  );
+  border: 1px solid rgba(116, 88, 58, 0.1);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.42),
+    0 8px 24px rgba(74, 52, 30, 0.04);
+}
+
+.sl-progress-chapter-overview-kicker {
+  margin-bottom: 10px;
+  font-size: 0.64rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(87, 65, 44, 0.64);
+}
+
+.sl-progress-chapter-overview-body {
+  color: rgba(58, 43, 30, 0.9);
+  font-family: 'Cormorant Garamond', 'Garamond', 'Times New Roman', serif;
+  font-size: 1.18rem;
+  line-height: 1.84;
+  letter-spacing: 0.01em;
+  max-width: 920px;
+  margin: 0 auto;
+  text-align: center;
+  text-shadow: 0 0 0.2px rgba(70, 52, 36, 0.18);
+}
+
+.sl-progress-chapter-overview-meta-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.sl-progress-chapter-overview-meta-card {
+  padding: 14px 16px 13px;
+  border-radius: 14px;
+  background: rgba(255, 248, 238, 0.58);
+  border: 1px solid rgba(116, 88, 58, 0.12);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.sl-progress-chapter-overview-meta-label {
+  margin-bottom: 6px;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(87, 65, 44, 0.62);
+}
+
+.sl-progress-chapter-overview-meta-value {
+  font-size: 0.98rem;
+  line-height: 1.45;
+  font-weight: 600;
+  color: #2a2118;
+}
+
+.sl-progress-chapter-overview-checklist-shell {
+  padding-top: 2px;
+}
+
+.sl-progress-chapter-overview-checklist-label {
+  margin-bottom: 10px;
+  font-size: 0.64rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(87, 65, 44, 0.64);
+}
+
+/* =========================================================
+   BUILD NOTES — MAKER LEDGER
+   ========================================================= */
+
+.sl-progress-build-notes-stack {
+  display: grid;
+  gap: 18px;
+}
+
+.sl-progress-build-notes-card {
+  position: relative;
+  z-index: 1;
+  padding: 18px 18px 64px;
+  border-radius: 16px;
+  border: 1px solid rgba(116, 88, 58, 0.1);
+  overflow: hidden;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.42),
+    0 8px 24px rgba(74, 52, 30, 0.06);
+}
+
+.sl-progress-build-notes-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.sl-progress-build-notes-card--story {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 252, 246, 0.84),
+    rgba(252, 246, 237, 0.8)
+  );
+}
+
+.sl-progress-build-notes-card--story::before {
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(255, 255, 255, 0.22),
+      transparent 28%
+    ),
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(92, 66, 40, 0.03) 22%,
+      transparent 45%,
+      rgba(92, 66, 40, 0.018) 70%,
+      transparent 100%
+    );
+  opacity: 0.75;
+}
+
+.sl-progress-build-notes-card--bench {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 251, 244, 0.72),
+      rgba(248, 241, 230, 0.74)
+    ),
+    var(--bench-page-image, none);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.sl-progress-build-notes-card--bench::before {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 251, 244, 0.38) 0%,
+      rgba(249, 241, 230, 0.42) 100%
+    ),
+    repeating-linear-gradient(
+      180deg,
+      transparent 0,
+      transparent 34px,
+      rgba(110, 86, 60, 0.06) 35px,
+      transparent 36px
+    );
+}
+
+.sl-progress-build-notes-card-header,
+.sl-progress-build-notes-story-body,
+.sl-progress-build-notes-bullets,
+.sl-progress-build-notes-placeholder-card,
+.sl-progress-build-notes-card-actions {
+  position: relative;
+  z-index: 1;
+}
+
+.sl-progress-build-notes-card-header {
+  margin-bottom: 10px;
+}
+
+.sl-progress-build-notes-heading-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.sl-progress-build-notes-story-body {
+  max-width: 920px;
+}
+
+.sl-progress-story-section-label {
+  margin-bottom: 10px;
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(92, 72, 54, 0.58);
+}
+
+.sl-progress-story-section-body {
+  color: rgba(58, 43, 30, 0.88);
+  font-family: 'Cormorant Garamond', 'Garamond', 'Times New Roman', serif;
+  font-size: 1.14rem;
+  line-height: 1.8;
+  letter-spacing: 0.01em;
+  max-width: 900px;
+  margin: 0 auto;
+  text-shadow: 0 0 0.2px rgba(70, 52, 36, 0.18);
+}
+
+.sl-progress-build-notes-bullets {
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 0 0 0 24px;
+  display: grid;
+  gap: 12px;
+}
+
+.sl-progress-build-notes-bullets li {
+  position: relative;
+  padding-left: 22px;
+  color: rgba(58, 43, 30, 0.9);
+  font-family: 'Cormorant Garamond', 'Garamond', 'Times New Roman', serif;
+  font-size: 1.16rem;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 1.82;
+  letter-spacing: 0.01em;
+  text-align: left;
+  text-shadow: 0 0 0.2px rgba(70, 52, 36, 0.16);
+}
+
+.sl-progress-build-notes-bullets li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  top: 0.03em;
+  color: rgba(88, 69, 52, 0.68);
+  font-family: 'Cormorant Garamond', 'Garamond', serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.82;
+}
+
+.sl-progress-build-notes-card--bench {
+  padding: 18px 28px 64px 30px;
+}
+
+.sl-progress-build-notes-placeholder-card {
+  margin-top: 6px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: rgba(255, 252, 247, 0.58);
+  border: 1px dashed rgba(116, 88, 58, 0.18);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.34);
+}
+
+.sl-progress-build-notes-placeholder-kicker {
+  margin-bottom: 6px;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(87, 65, 44, 0.64);
+}
+
+.sl-progress-build-notes-placeholder {
+  margin: 0;
+  color: rgba(67, 51, 36, 0.82);
+  font-size: 0.94rem;
+  line-height: 1.65;
+  font-style: italic;
+}
+
+.sl-progress-build-notes-card-actions {
+  position: absolute;
+  right: 16px;
+  bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.sl-progress-build-notes-card-actions--corner {
+  max-width: calc(100% - 32px);
+}
+
+.sl-progress-story-lock-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 0.64rem;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: rgba(92, 60, 60, 0.08);
+  border: 1px solid rgba(112, 82, 58, 0.12);
+  color: rgba(92, 64, 44, 0.72);
+}
+
+.sl-progress-story-action-btn {
+  appearance: none;
+  -webkit-appearance: none;
+  min-height: 34px;
+  padding: 0 11px;
+  border-radius: 999px;
+  border: 1px solid rgba(104, 82, 58, 0.14);
+  background: rgba(122, 112, 101, 0.82);
+  color: rgba(255, 250, 244, 0.96);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  box-shadow:
+    0 5px 12px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  transition:
+    transform 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    opacity 180ms ease;
+}
+
+.sl-progress-story-action-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.sl-progress-story-action-btn:disabled {
+  opacity: 0.56;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.sl-progress-story-action-btn-icon {
+  width: 13px;
+  height: 13px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+
+.sl-progress-story-action-btn-icon svg {
+  width: 13px;
+  height: 13px;
+  display: block;
+}
+
+.sl-progress-story-action-btn--regenerate {
+  background: rgba(132, 123, 115, 0.9);
+  border-color: rgba(104, 82, 58, 0.14);
+  color: rgba(255, 251, 246, 0.98);
+}
+
+.sl-progress-story-action-btn--regenerate:hover:not(:disabled) {
+  background: rgba(118, 110, 103, 0.96);
+}
+
+.sl-progress-story-action-btn--lock {
+  background: linear-gradient(
+    180deg,
+    rgba(160, 54, 54, 0.94),
+    rgba(130, 34, 34, 0.96)
+  );
+  border-color: rgba(123, 22, 22, 0.34);
+  color: rgba(255, 242, 242, 0.98);
+}
+
+.sl-progress-story-action-btn--unlock {
+  background: linear-gradient(
+    180deg,
+    rgba(58, 148, 82, 0.94),
+    rgba(34, 118, 58, 0.96)
+  );
+  border-color: rgba(26, 98, 48, 0.34);
+  color: rgba(242, 255, 246, 0.98);
+}
+
+/* =========================================================
+   ARCHIVE — CURATED VAULT
+   ========================================================= */
+
+.sl-progress-archive-shell {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.sl-progress-archive-admin-toolbar {
+  padding: 18px;
+  border-radius: 18px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 252, 246, 0.84),
+    rgba(252, 246, 237, 0.8)
+  );
+  border: 1px solid rgba(116, 88, 58, 0.1);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.42),
+    0 8px 24px rgba(74, 52, 30, 0.04);
+}
+
+.sl-progress-archive-admin-toolbar-head {
+  margin-bottom: 12px;
+}
+
+.sl-progress-archive-admin-kicker {
+  margin-bottom: 6px;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(87, 65, 44, 0.64);
+}
+
+.sl-progress-archive-admin-title {
+  font-size: 1rem;
+  line-height: 1.25;
+  font-weight: 600;
+  color: #2a2118;
+}
+
+.sl-progress-archive-admin-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.sl-progress-archive-select {
+  width: 100%;
+  min-height: 46px;
+  border-radius: 14px;
+  background: rgba(77, 70, 63, 0.92);
+  border: 1px solid rgba(104, 82, 58, 0.16);
+  color: #fff;
+  padding: 0 14px;
+  outline: none;
+}
+
+.sl-progress-archive-upload-btn {
+  min-height: 46px;
+  padding: 0 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(104, 82, 58, 0.14);
+  background: rgba(122, 112, 101, 0.9);
+  color: rgba(255, 250, 244, 0.96);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.sl-progress-archive-upload-btn.is-disabled,
+.sl-progress-archive-upload-btn:disabled {
+  opacity: 0.56;
+  cursor: not-allowed;
+}
+
+.sl-progress-archive-selected-capture {
+  margin-top: 12px;
+  padding: 14px 15px;
+  border-radius: 14px;
+  background: rgba(255, 248, 238, 0.58);
+  border: 1px solid rgba(116, 88, 58, 0.12);
+}
+
+.sl-progress-archive-selected-capture-label {
+  margin-bottom: 6px;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(87, 65, 44, 0.64);
+}
+
+.sl-progress-archive-selected-capture-body {
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: #2a2118;
+}
+
+.sl-progress-archive-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.sl-progress-archive-artifact-card {
+  appearance: none;
+  -webkit-appearance: none;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  text-decoration: none;
+  border-radius: 16px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 252, 246, 0.84),
+    rgba(250, 243, 233, 0.82)
+  );
+  border: 1px solid rgba(116, 88, 58, 0.12);
+  padding: 0;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.42),
+    0 8px 24px rgba(74, 52, 30, 0.04);
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.sl-progress-archive-artifact-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(116, 88, 58, 0.24);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.42),
+    0 14px 28px rgba(74, 52, 30, 0.08);
+}
+
+.sl-progress-archive-artifact-thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1.2 / 1;
+  background: rgba(235, 225, 209, 0.72);
+  overflow: hidden;
+}
+
+.sl-progress-archive-artifact-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: saturate(0.96) contrast(1.02);
+}
+
+.sl-progress-archive-artifact-filetype {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: rgba(87, 65, 44, 0.8);
+}
+
+.sl-progress-archive-artifact-meta {
+  padding: 12px 12px 13px;
+}
+
+.sl-progress-archive-artifact-title {
+  font-size: 0.84rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #2a2118;
+  word-break: break-word;
+}
+
+.sl-progress-archive-artifact-subtitle {
+  margin-top: 4px;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(87, 65, 44, 0.62);
+}
+
+.sl-progress-archive-empty-state {
+  padding: 28px 22px;
+  border-radius: 18px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 252, 246, 0.82),
+    rgba(250, 243, 233, 0.78)
+  );
+  border: 1px dashed rgba(116, 88, 58, 0.2);
+  text-align: center;
+}
+
+.sl-progress-archive-empty-title {
+  margin-bottom: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2a2118;
+}
+
+.sl-progress-archive-empty-copy {
+  max-width: 680px;
+  margin: 0 auto;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: rgba(63, 47, 33, 0.72);
+}
+
+/* =========================================================
+   LIGHT PAPER OVERRIDES FOR CHECKLIST INSIDE OVERVIEW
+   ========================================================= */
+
+.sl-progress-story-book-shell .pp-stage-card--compact {
+  margin-top: 4px;
+}
+
+.sl-progress-story-book-shell .pp-compact-title,
+.sl-progress-story-book-shell .pp-compact-desc,
+.sl-progress-story-book-shell .pp-checkpoint-label {
+  color: #2a2118;
+}
+
+.sl-progress-story-book-shell .pp-compact-status.is-completed {
+  color: rgba(46, 109, 58, 0.9);
+}
+
+.sl-progress-story-book-shell .pp-compact-status.is-in-progress {
+  color: rgba(140, 97, 24, 0.9);
+}
+
+.sl-progress-story-book-shell .pp-compact-status.is-upcoming {
+  color: rgba(87, 65, 44, 0.54);
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .sl-progress-chapter-overview-meta-row,
+  .sl-progress-archive-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .sl-progress-archive-admin-controls {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .sl-progress-story-book-shell {
+    padding: 20px 16px 22px;
+  }
+
+  .sl-progress-build-notes-card,
+  .sl-progress-chapter-overview-hero,
+  .sl-progress-archive-admin-toolbar,
+  .sl-progress-archive-empty-state {
+    border-radius: 14px;
+  }
+
+  .sl-progress-build-notes-card {
+    padding: 16px 14px 70px;
+  }
+
+  .sl-progress-build-notes-bullets {
+    gap: 10px;
+  }
+
+  .sl-progress-build-notes-bullets li {
+    font-size: 0.96rem;
+    line-height: 1.62;
+    padding-left: 18px;
+  }
+
+  .sl-progress-story-section-body,
+  .sl-progress-chapter-overview-body {
+    font-size: 1.02rem;
+    line-height: 1.72;
+  }
+
+  .sl-progress-build-notes-card-actions {
+    left: 14px;
+    right: 14px;
+    bottom: 12px;
+    justify-content: flex-end;
+  }
+}
+
+.sl-progress-chapter-overview-body,
+.sl-progress-build-notes-story-body .sl-progress-story-section-body,
+.sl-progress-build-notes-bullets li {
+  color: rgba(58, 43, 30, 0.9);
+  font-family: 'Cormorant Garamond', 'Garamond', 'Times New Roman', serif;
+  font-size: 1.18rem;
+  line-height: 1.84;
+  letter-spacing: 0.01em;
+  font-style: normal;
+  font-weight: 500;
+  text-shadow: 0 0 0.2px rgba(70, 52, 36, 0.16);
+}
+
+.sl-progress-chapter-overview-body,
+.sl-progress-build-notes-story-body .sl-progress-story-section-body {
+  max-width: 920px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.sl-progress-story-section-body {
+  color: rgba(58, 43, 30, 0.9);
+  font-family: 'Cormorant Garamond', 'Garamond', 'Times New Roman', serif;
+  font-size: 1.18rem;
+  line-height: 1.84;
+  letter-spacing: 0.01em;
+  max-width: 900px;
+  margin: 0 auto;
+  font-weight: 500;
+  font-style: normal;
+  text-shadow: 0 0 0.2px rgba(70, 52, 36, 0.16);
+}
+
+.sl-progress-build-notes-bullets {
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 0 0 0 24px;
+  display: grid;
+  gap: 12px;
+}
+
+.sl-progress-build-notes-bullets li {
+  position: relative;
+  padding-left: 22px;
+  text-align: left;
+}
+
+.sl-progress-build-notes-bullets li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  top: 0.02em;
+  color: rgba(88, 69, 52, 0.68);
+  font-size: 0.95rem;
+  line-height: 1.84;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.sl-progress-story-section-label,
+.sl-progress-chapter-overview-kicker,
+.sl-progress-chapter-overview-meta-label,
+.sl-progress-build-notes-card--bench .sl-progress-story-section-label {
+  color: rgba(87, 65, 44, 0.62);
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .sl-progress-chapter-overview-body,
+  .sl-progress-build-notes-story-body .sl-progress-story-section-body,
+  .sl-progress-build-notes-bullets li {
+    font-size: 1.02rem;
+    line-height: 1.72;
+  }
+
+  .sl-progress-build-notes-bullets {
+    padding-left: 18px;
+    gap: 10px;
+  }
+
+  .sl-progress-build-notes-bullets li {
+  font-size: 1.02rem;
+  line-height: 1.72;
+  padding-left: 18px;
+}
 }

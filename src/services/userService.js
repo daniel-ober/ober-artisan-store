@@ -102,7 +102,7 @@ import {
           await updateDoc(userRef, {
             projects: updatedProjects,
           });
-          console.log(`✅ Linked project to existing user: ${email}`);
+          // console.log(`✅ Linked project to existing user: ${email}`);
         }
       } else {
         const newUserRef = doc(collection(db, 'users'));
@@ -111,7 +111,7 @@ import {
           isSoundlegend: true,
           projects: [{ projectId, label }],
         });
-        console.log(`✅ Created new user record for: ${email}`);
+        // console.log(`✅ Created new user record for: ${email}`);
       }
     } catch (err) {
       console.error('❌ Error linking project to user:', err);

@@ -70,7 +70,7 @@ async function updateHeritagePricing() {
   ];
 
   await heritageRef.update({ pricingOptions });
-  console.log("✅ Heritage pricingOptions successfully updated!");
+  // console.log("✅ Heritage pricingOptions successfully updated!");
 }
 
 updateHeritagePricing().then(() => process.exit());

@@ -38,6 +38,6 @@ function coerce(val) {
   }
 
   await ref.update({ [fieldPath]: value });
-  console.log(`✅ Updated ${serial}: ${fieldPath} = ${JSON.stringify(value)}`);
+  // console.log(`✅ Updated ${serial}: ${fieldPath} = ${JSON.stringify(value)}`);
   process.exit(0);
 })();

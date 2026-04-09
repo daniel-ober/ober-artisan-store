@@ -102,5 +102,5 @@ function hexToRgb(hex) {
     .toBuffer();
 
   fs.writeFileSync(out, outBuf);
-  console.log(`✅ Saved ${out}`);
+  // console.log(`✅ Saved ${out}`);
 })();

@@ -184,7 +184,7 @@ async function growMask(buf, px) {
     .toBuffer();
 
   await fs.promises.writeFile(outputPath, out);
-  console.log(`✅ Saved ${outputPath}`);
+  // console.log(`✅ Saved ${outputPath}`);
   // Clean up temps
   fs.promises.unlink(maskPath).catch(() => {});
   fs.promises.unlink(coloredWithAlphaPath).catch(() => {});
