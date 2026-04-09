@@ -5301,6 +5301,12 @@ button.pp-compact-marker {
   line-height: 1.65;
 }
 
+.sl-progress-build-notes-placeholder {
+  margin: 0;
+  font-style: italic;
+  opacity: 0.72;
+}
+
 .sl-progress-build-notes-vision-grid {
   display: grid;
   gap: 14px;
