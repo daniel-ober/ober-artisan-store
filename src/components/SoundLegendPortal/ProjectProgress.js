@@ -3455,9 +3455,7 @@ function renderActiveStorySection({
                   {selectedArchiveCapture.purpose}
                   <br />
                   Visibility:{' '}
-                  {getArchiveVisibilityLabel(
-                    selectedArchiveCapture.visibility
-                  )}
+                  {getArchiveVisibilityLabel(selectedArchiveCapture.visibility)}
                   {selectedArchiveCapture.angle ? (
                     <>
                       <br />
@@ -8280,28 +8278,30 @@ const ProjectProgress = ({ project: initialProject, isAdmin = false }) => {
                   />
                 </div>
 
-<div className="sl-progress-legacy-admin-field sl-progress-legacy-admin-field--full">
-  <label className="sl-progress-legacy-admin-label">
-    Upload new cover media
-  </label>
+                <div className="sl-progress-legacy-admin-field sl-progress-legacy-admin-field--full">
+                  <label className="sl-progress-legacy-admin-label">
+                    Upload new cover media
+                  </label>
 
-  <div className="sl-progress-legacy-admin-upload-row">
-    <button
-      type="button"
-      className="sl-progress-legacy-admin-btn sl-progress-legacy-admin-btn--ghost"
-      onClick={openCoverRevealFilePicker}
-      disabled={coverUploadBusy}
-    >
-      {coverUploadBusy ? 'Uploading…' : 'Upload cover image / video'}
-    </button>
+                  <div className="sl-progress-legacy-admin-upload-row">
+                    <button
+                      type="button"
+                      className="sl-progress-legacy-admin-btn sl-progress-legacy-admin-btn--ghost"
+                      onClick={openCoverRevealFilePicker}
+                      disabled={coverUploadBusy}
+                    >
+                      {coverUploadBusy
+                        ? 'Uploading…'
+                        : 'Upload cover image / video'}
+                    </button>
 
-    {revealCoverMediaTitle ? (
-      <div className="sl-progress-legacy-admin-upload-meta">
-        Current file: {revealCoverMediaTitle}
-      </div>
-    ) : null}
-  </div>
-</div>
+                    {revealCoverMediaTitle ? (
+                      <div className="sl-progress-legacy-admin-upload-meta">
+                        Current file: {revealCoverMediaTitle}
+                      </div>
+                    ) : null}
+                  </div>
+                </div>
               </div>
 
               <div className="sl-progress-legacy-admin-actions">

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { collection, updateDoc, doc, onSnapshot, query } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
-import ManageProjectModal from './ManageProjectModal';
+import ManageProjectModal from './ManageProjectModal/index';
 import { calculateProjectProgress } from '../utils/calculateProjectProgress';
 import './ManageProjects.css';
 
@@ -693,14 +693,13 @@ const ManageProjects = () => {
       </div>
 
       {isModalOpen && (
-        <ManageProjectModal
-          isOpen={isModalOpen}
-          onClose={closeModal}
-          projectData={selectedProject}
-          onSave={handleSave}
-          onProjectUpdate={handleLiveUpdate}
-        />
-      )}
+  <ManageProjectModal
+    isOpen={isModalOpen}
+    onClose={closeModal}
+    projectData={selectedProject}
+    onProjectUpdate={handleLiveUpdate}
+  />
+)}
     </div>
   );
 };
