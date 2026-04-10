@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
+import ProjectRecordSection from './ManageProjectModal/ProjectRecordSection';
+import IntakeDirectionSection from './ManageProjectModal/IntakeDirectionSection';
+import StoryStudioSection from './ManageProjectModal/StoryStudioSection';
+import BuildWorkflowSection from './ManageProjectModal/BuildWorkflowSection';
+import OutstandingHelpOverlay from './ManageProjectModal/OutstandingHelpOverlay';
 import { STAGE_TEMPLATES } from '../utils/workflowDefinitions';
 import {
   doc,
