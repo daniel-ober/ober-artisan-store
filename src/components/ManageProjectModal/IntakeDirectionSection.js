@@ -1,97 +1,9 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import {
+  CONSULTATION_INTAKE_SECTIONS,
+  buildConsultationIntakeDefaults,
+} from '../../utils/consultationIntakeSchema';
 import './IntakeDirectionSection.css';
-
-const FIELD_KEYS = [
-  'desiredOutcome',
-  'primaryUseCase',
-  'responsePriorities',
-  'tonalGoals',
-  'sizeDirection',
-  'shellWoodDirection',
-  'hardwareDirection',
-  'visualDirection',
-  'finishDirection',
-  'painPoints',
-];
-
-const FIELD_META = {
-  desiredOutcome: {
-    label: 'Desired Outcome',
-    questionnairePath: 'desiredOutcome',
-    consultationPath: 'desiredOutcome',
-    placeholder: 'What is this drum ultimately meant to become?',
-  },
-  primaryUseCase: {
-    label: 'Primary Use Case',
-    questionnairePath: 'primaryUseCase',
-    consultationPath: 'primaryUseCase',
-    placeholder: 'Live, studio, both, collecting, etc.',
-  },
-  responsePriorities: {
-    label: 'Response Priorities',
-    questionnairePath: 'responsePriorities',
-    consultationPath: 'responsePriorities',
-    placeholder: 'Fast response, low-volume sensitivity, articulation, etc.',
-  },
-  tonalGoals: {
-    label: 'Tonal Goals',
-    questionnairePath: 'tonalGoals',
-    consultationPath: 'tonalGoals',
-    placeholder: 'Warm, dry, fat, articulate, open, controlled, etc.',
-  },
-  sizeDirection: {
-    label: 'Size Direction',
-    questionnairePath: 'preferredSizeDirection',
-    consultationPath: 'preferredSizeDirection',
-    placeholder: '12", 13", 14", 14x6.5, still open, etc.',
-  },
-  shellWoodDirection: {
-    label: 'Shell / Wood Direction',
-    questionnairePath: 'woodPreference',
-    consultationPath: 'woodPreference',
-    placeholder: 'Maple, walnut, stave, builder-led, still open, etc.',
-  },
-  hardwareDirection: {
-    label: 'Hardware Direction',
-    questionnairePath: 'hardwareFinish',
-    consultationPath: 'hardwareFinish',
-    placeholder: 'Chrome, brass/gold, black nickel, still open, etc.',
-  },
-  visualDirection: {
-    label: 'Visual Direction',
-    questionnairePath: 'finishDirection',
-    consultationPath: 'visualMood',
-    placeholder: 'Natural, brushed metal, dark, resin, understated, etc.',
-  },
-  finishDirection: {
-    label: 'Finish Direction',
-    questionnairePath: 'finishDirection',
-    consultationPath: 'finishDirection',
-    placeholder: 'Gloss, satin, oil, natural, resin-accented, still open, etc.',
-  },
-  painPoints: {
-    label: 'Pain Points / Current Frustrations',
-    questionnairePath: null,
-    consultationPath: 'currentPainPoints',
-    placeholder:
-      'What is not working in their current setup or current snares?',
-  },
-};
-
-const VALIDATION_OPTIONS = [
-  { value: 'unreviewed', label: 'Not Reviewed' },
-  { value: 'valid', label: 'Valid' },
-  { value: 'changed', label: 'Changed' },
-  { value: 'invalid', label: 'Invalid' },
-  { value: 'open', label: 'Still Open' },
-];
-
-const CONFIDENCE_OPTIONS = [
-  { value: 'unknown', label: 'Unknown' },
-  { value: 'high', label: 'High' },
-  { value: 'medium', label: 'Medium' },
-  { value: 'low', label: 'Low' },
-];
 
 const REVIEW_STATE_OPTIONS = [
   { value: 'clarify', label: 'Open Question' },
@@ -99,21 +11,62 @@ const REVIEW_STATE_OPTIONS = [
   { value: 'confirmed', label: 'Locked In' },
 ];
 
-const getReviewStatePillClass = (reviewState) => {
-  if (reviewState === 'confirmed') return 'is-good';
-  if (reviewState === 'verify') return 'is-medium';
-  return 'is-soft';
-};
-
-const emptyRow = () => ({
-  consultValue: '',
-  status: 'unreviewed',
-  confidence: 'unknown',
-  rationale: '',
-  followUpNeeded: false,
-  followUpQuestion: '',
-  reviewState: '',
-});
+const TRUTH_GROUPS = [
+  {
+    key: 'purpose',
+    title: 'Purpose',
+    badge: 'P',
+    summary:
+      'Why the drum exists — role, context, where it needs to succeed, and how much direction is wanted.',
+    consultFields: [
+      'playerProfile',
+      'primaryGoal',
+      'environments',
+      'guidancePreference',
+    ],
+  },
+  {
+    key: 'feel',
+    title: 'Feel',
+    badge: 'F',
+    summary:
+      'How the drum meets the player — rebound, comfort, sensitivity, and touch.',
+    consultFields: [
+      'feelPriorities',
+      'snareLoveMost',
+      'snareFrustrations',
+      'dynamicFeel',
+    ],
+  },
+  {
+    key: 'voice',
+    title: 'Voice',
+    badge: 'V',
+    summary:
+      'What the drum says — its sonic identity, tonal character, and musical language.',
+    consultFields: [
+      'genres',
+      'tonalGoals',
+      'responsePriorities',
+      'sizeDirection',
+    ],
+  },
+  {
+    key: 'legacy',
+    title: 'Legacy',
+    badge: 'L',
+    summary:
+      'Why it matters — visual character, personal meaning, influences, and emotional permanence.',
+    consultFields: [
+      'visualDirection',
+      'hardwareFinishPreference',
+      'storyImportance',
+      'favoritePartOfPlaying',
+      'influenceReferences',
+      'finalNotes',
+    ],
+  },
+];
 
 const cleanText = (value) =>
   String(value || '')
@@ -147,20 +100,10 @@ const isEmptyish = (value) => {
       'guide me',
       'still open',
       'open',
+      "i'm not sure",
       "i'm",
       'im',
     ].includes(text)
-  );
-};
-
-const isBuilderLed = (value) => {
-  const text = normalizeCompare(value);
-  return (
-    text.includes('trust your recommendation') ||
-    text.includes('builder recommendation') ||
-    text.includes('guide me') ||
-    text.includes('not sure') ||
-    text.includes('still open')
   );
 };
 
@@ -172,8 +115,24 @@ const getDisplayValue = (value, fallback = '—') => {
       .join(', ');
     return joined || fallback;
   }
+
+  if (typeof value === 'object' && value !== null) {
+    const joined = Object.values(value)
+      .flatMap((item) => (Array.isArray(item) ? item : [item]))
+      .map((item) => cleanText(item))
+      .filter(Boolean)
+      .join(', ');
+    return joined || fallback;
+  }
+
   const text = cleanText(value);
   return text || fallback;
+};
+
+const getReviewStatePillClass = (reviewState) => {
+  if (reviewState === 'confirmed') return 'is-good';
+  if (reviewState === 'verify') return 'is-medium';
+  return 'is-soft';
 };
 
 const safeDateLabel = (value) => {
@@ -182,6 +141,24 @@ const safeDateLabel = (value) => {
   if (Number.isNaN(d.getTime())) return '—';
   return d.toLocaleString();
 };
+
+const flattenSectionFields = (sections) =>
+  sections.flatMap((section) =>
+    (section.questions || []).flatMap((question) => question.fields || [])
+  );
+
+const QUESTIONNAIRE_FIELD_INDEX = flattenSectionFields(
+  CONSULTATION_INTAKE_SECTIONS
+).reduce((acc, field) => {
+  acc[field.id] = field;
+  return acc;
+}, {});
+
+const emptyTruthRow = () => ({
+  notes: '',
+  reviewState: '',
+  checked: false,
+});
 
 const IntakeDirectionSection = ({
   storyEngineData,
@@ -213,154 +190,15 @@ const IntakeDirectionSection = ({
   const consultLocked = !!consultState?.completed;
   const summaryGenerated = !!summaryState?.generated;
 
-  const [snapshotOpen, setSnapshotOpen] = useState(true);
   const [intakeOpen, setIntakeOpen] = useState(true);
   const [consultOpen, setConsultOpen] = useState(true);
   const [summaryOpen, setSummaryOpen] = useState(true);
 
   useEffect(() => {
-    setSnapshotOpen(!summaryGenerated);
     setIntakeOpen(!intakeLocked);
     setConsultOpen(!consultLocked);
     setSummaryOpen(summaryGenerated);
   }, [intakeLocked, consultLocked, summaryGenerated]);
-
-  const questionnaireBoard = useMemo(() => {
-    const cleanBullet = (value, fallback = '') => {
-      const text = cleanText(value);
-      if (!text || isEmptyish(text)) return fallback;
-      return text;
-    };
-
-    const buildKnown = [];
-    const buildUnknown = [];
-    const playingKnown = [];
-    const playingUnknown = [];
-    const soundKnown = [];
-    const soundUnknown = [];
-
-    const desiredOutcome = cleanBullet(questionnaireMapped?.desiredOutcome);
-    const playerProfile = cleanBullet(questionnaireMapped?.styleOfPlaying);
-    const playSettings = cleanBullet(questionnaireMapped?.influenceReferences);
-    const genreContext = cleanBullet(questionnaireMapped?.genreContext);
-    const responsePriorities = cleanBullet(
-      questionnaireMapped?.responsePriorities
-    );
-    const tonalGoals = cleanBullet(questionnaireMapped?.tonalGoals);
-    const sizeDirection = cleanBullet(
-      questionnaireMapped?.preferredSizeDirection
-    );
-    const shellWoodDirection = cleanBullet(questionnaireMapped?.woodPreference);
-    const hardwareDirection = cleanBullet(questionnaireMapped?.hardwareFinish);
-    const visualDirection = cleanBullet(questionnaireMapped?.finishDirection);
-    const buildClarity = cleanBullet(questionnaireMapped?.buildClarity);
-
-    if (playerProfile) playingKnown.push(playerProfile);
-    if (playSettings) playingKnown.push(playSettings);
-    if (genreContext) playingKnown.push(genreContext);
-
-    if (!playerProfile) {
-      playingUnknown.push('Player type is still unclear.');
-    }
-
-    if (desiredOutcome) soundKnown.push(desiredOutcome);
-    if (responsePriorities) soundKnown.push(responsePriorities);
-    if (tonalGoals) soundKnown.push(tonalGoals);
-
-    if (!desiredOutcome) {
-      soundUnknown.push('Core outcome is still unclear.');
-    }
-
-    soundUnknown.push(
-      'Pain points or current snare frustrations are not yet clearly defined.'
-    );
-
-    if (sizeDirection) buildKnown.push(sizeDirection);
-    if (visualDirection) buildKnown.push(visualDirection);
-    if (buildClarity) buildKnown.push(buildClarity);
-
-    if (
-      !shellWoodDirection ||
-      shellWoodDirection.toLowerCase().includes('still open') ||
-      shellWoodDirection.toLowerCase().includes('not sure') ||
-      shellWoodDirection.toLowerCase().includes('needs consult validation')
-    ) {
-      buildUnknown.push(
-        'Shell / wood direction still needs consult validation.'
-      );
-    } else {
-      buildKnown.push(shellWoodDirection);
-    }
-
-    if (
-      !hardwareDirection ||
-      hardwareDirection.toLowerCase().includes('still open') ||
-      hardwareDirection.toLowerCase().includes('not sure') ||
-      hardwareDirection.toLowerCase().includes('needs consult validation')
-    ) {
-      buildUnknown.push('Hardware finish is still not truly decided.');
-    } else {
-      buildKnown.push(hardwareDirection);
-    }
-
-    return [
-      {
-        key: 'playingWorld',
-        icon: '◎',
-        title: 'Playing World',
-        known: playingKnown,
-        unknown: playingUnknown,
-      },
-      {
-        key: 'soundGoals',
-        icon: '◉',
-        title: 'Sound Goals',
-        known: soundKnown,
-        unknown: soundUnknown,
-      },
-      {
-        key: 'buildDirection',
-        icon: '⬡',
-        title: 'Build Direction',
-        known: buildKnown,
-        unknown: buildUnknown,
-      },
-    ];
-  }, [questionnaireMapped]);
-
-  const effectiveConsultRows = useMemo(() => {
-  const savedRows = consultState?.rows || {};
-
-  return FIELD_KEYS.map((fieldKey) => {
-    const meta = FIELD_META[fieldKey];
-    const questionnaireValue = meta.questionnairePath
-      ? questionnaireMapped?.[meta.questionnairePath] || ''
-      : '';
-
-    const consultMappedValue = meta.consultationPath
-      ? consultationMapped?.[meta.consultationPath] || ''
-      : '';
-
-    const existing = savedRows?.[fieldKey] || emptyRow();
-
-    return {
-      key: fieldKey,
-      label: meta.label,
-      questionnaireValue,
-      consultValue:
-        existing.consultValue !== undefined && existing.consultValue !== null
-          ? existing.consultValue
-          : consultMappedValue,
-      status: existing.status || 'unreviewed',
-      confidence: existing.confidence || 'unknown',
-      rationale: existing.rationale || '',
-      followUpNeeded: !!existing.followUpNeeded,
-      followUpQuestion: existing.followUpQuestion || '',
-      reviewState: existing.reviewState || '',
-      placeholder: meta.placeholder,
-    };
-  });
-}, [consultState?.rows, consultationMapped, questionnaireMapped]);
 
   const smartTranscriptTurns =
     Array.isArray(normalizedTranscriptTurns) && normalizedTranscriptTurns.length
@@ -383,51 +221,31 @@ const IntakeDirectionSection = ({
     });
   };
 
-  const updateConsultRow = (fieldKey, patch) => {
+  const updateTruthRow = (truthKey, fieldId, patch) => {
     if (consultLocked) return;
 
     updateDiscoveryWorkspace((current) => {
-      const currentRows = current?.consult?.rows || {};
-      const existing = currentRows?.[fieldKey] || emptyRow();
+      const currentRows = current?.consult?.truthRows || {};
+      const currentTruthRows = currentRows?.[truthKey] || {};
+      const existing = currentTruthRows?.[fieldId] || emptyTruthRow();
 
       return {
         ...current,
         consult: {
           ...(current?.consult || {}),
-          rows: {
+          truthRows: {
             ...currentRows,
-            [fieldKey]: {
-              ...existing,
-              ...patch,
+            [truthKey]: {
+              ...currentTruthRows,
+              [fieldId]: {
+                ...existing,
+                ...patch,
+              },
             },
           },
         },
       };
     });
-  };
-
-  const updateConsultMeta = (patch) => {
-    if (consultLocked) return;
-
-    updateDiscoveryWorkspace((current) => ({
-      ...current,
-      consult: {
-        ...(current?.consult || {}),
-        ...patch,
-      },
-    }));
-  };
-
-  const updateIntakeMeta = (patch) => {
-    if (intakeLocked) return;
-
-    updateDiscoveryWorkspace((current) => ({
-      ...current,
-      intake: {
-        ...(current?.intake || {}),
-        ...patch,
-      },
-    }));
   };
 
   const updateSummaryMeta = (patch) => {
@@ -487,7 +305,7 @@ const IntakeDirectionSection = ({
         ...(discoveryWorkspace?.consult || {}),
         completed: true,
         completedAt: new Date().toISOString(),
-        rows: discoveryWorkspace?.consult?.rows || {},
+        truthRows: discoveryWorkspace?.consult?.truthRows || {},
       },
     };
 
@@ -517,212 +335,187 @@ const IntakeDirectionSection = ({
     }
   };
 
-  const generatedIntelliSummary = useMemo(() => {
-    const rows = effectiveConsultRows;
+  const questionnaireDefaults = useMemo(
+    () => buildConsultationIntakeDefaults(),
+    []
+  );
 
-    const trustedSignals = [];
-    const changedSignals = [];
-    const conflictedSignals = [];
-    const stillOpen = [];
-    const followUps = [];
-    const builderResearch = [];
-    const confidenceRows = [];
-    const nextSteps = [];
+  const questionnaireReceived =
+    !!cleanText(storyEngineData?.questionnaireRaw) ||
+    Object.keys(questionnaireMapped || {}).length > 0;
 
-    rows.forEach((row) => {
-      const qValue = cleanText(row.questionnaireValue);
-      const cValue = cleanText(row.consultValue);
-      const status = row.status;
-      const confidence = row.confidence;
-      const rationale = cleanText(row.rationale);
-      const finalValue =
-        status === 'changed' || status === 'valid'
-          ? cValue || qValue
-          : status === 'invalid'
-            ? ''
-            : status === 'open'
-              ? cValue || qValue
-              : cValue || qValue;
+  const questionnaireStatus = questionnaireReceived ? 'Received' : 'Incomplete';
+  const intakeStatusLabel = intakeLocked ? 'Reviewed' : 'Active';
+  const consultStatusLabel = consultLocked ? 'Completed' : 'Active';
 
-      if (
-        (status === 'valid' || status === 'changed') &&
-        !isEmptyish(finalValue)
-      ) {
-        const entry = {
-          label: row.label,
-          value: finalValue,
-          confidence,
-          rationale:
-            rationale ||
-            (status === 'changed'
-              ? 'Consult call changed or clarified the original intake.'
-              : 'Questionnaire and consult review support this direction.'),
-        };
+  const truthBoards = useMemo(() => {
+    const truthRows = consultState?.truthRows || {};
 
-        if (status === 'changed') {
-          changedSignals.push(entry);
-        } else {
-          trustedSignals.push(entry);
+    return TRUTH_GROUPS.map((truth) => {
+      const items = truth.consultFields.map((fieldId) => {
+        const fieldMeta = QUESTIONNAIRE_FIELD_INDEX[fieldId];
+        const sectionDefaults = Object.values(questionnaireDefaults).find(
+          (sectionObj) =>
+            sectionObj && Object.prototype.hasOwnProperty.call(sectionObj, fieldId)
+        );
+
+        const questionnaireValue =
+          Object.entries(questionnaireDefaults).reduce((found, [sectionKey]) => {
+            if (found !== undefined) return found;
+            return questionnaireMapped?.[fieldId];
+          }, undefined) || questionnaireMapped?.[fieldId];
+
+        const consultValue = consultationMapped?.[fieldId];
+
+        const truthSavedRow =
+          truthRows?.[truth.key]?.[fieldId] || emptyTruthRow();
+
+        const finalValue =
+          consultValue !== undefined && consultValue !== null && cleanText(consultValue)
+            ? consultValue
+            : questionnaireValue;
+
+        let autoReviewState = 'verify';
+
+        if (isEmptyish(finalValue)) {
+          autoReviewState = 'clarify';
+        } else if (truthSavedRow.checked) {
+          autoReviewState = 'confirmed';
         }
-      }
 
-      if (
-        status === 'changed' &&
-        !isEmptyish(qValue) &&
-        !isEmptyish(cValue) &&
-        normalizeCompare(qValue) !== normalizeCompare(cValue)
-      ) {
-        conflictedSignals.push({
-          label: row.label,
-          from: qValue,
-          to: cValue,
-          rationale:
-            rationale ||
-            'The consultation updated or corrected the original questionnaire answer.',
-        });
-      }
+        const reviewState =
+          truthSavedRow.reviewState && cleanText(truthSavedRow.reviewState)
+            ? truthSavedRow.reviewState
+            : autoReviewState;
 
-      if (
-        status === 'open' ||
-        confidence === 'low' ||
-        confidence === 'unknown' ||
-        isEmptyish(finalValue) ||
-        isBuilderLed(finalValue)
-      ) {
-        stillOpen.push({
-          label: row.label,
-          note:
-            row.followUpQuestion ||
-            rationale ||
-            `This field is not strong enough yet to treat as locked.`,
-        });
-      }
-
-      if (row.followUpNeeded) {
-        followUps.push({
-          label: row.label,
-          question:
-            row.followUpQuestion ||
-            `Follow up with the artist to confirm ${row.label.toLowerCase()}.`,
-        });
-      }
-
-      if (
-        row.key === 'shellWoodDirection' &&
-        (status === 'open' || confidence === 'low' || isBuilderLed(finalValue))
-      ) {
-        builderResearch.push(
-          'Determine whether shell architecture should remain builder-led or be narrowed based on the target response and use case.'
-        );
-      }
-
-      if (
-        row.key === 'sizeDirection' &&
-        (status === 'open' || confidence === 'low')
-      ) {
-        builderResearch.push(
-          'Confirm whether size is truly settled before translating discovery into build specs.'
-        );
-      }
-
-      if (
-        row.key === 'painPoints' &&
-        (status === 'open' || isEmptyish(finalValue))
-      ) {
-        builderResearch.push(
-          'Clarify what is not working in the artist’s current drum or setup so this build solves a real problem.'
-        );
-      }
-
-      confidenceRows.push({
-        label: row.label,
-        value: getDisplayValue(finalValue),
-        confidence: confidence,
-        rationale:
-          rationale ||
-          (confidence === 'high'
-            ? 'Well supported by reviewed intake and consult direction.'
-            : confidence === 'medium'
-              ? 'Useful, but still needs some caution.'
-              : confidence === 'low'
-                ? 'Too soft to treat as settled.'
-                : 'Not enough support yet.'),
+        return {
+          fieldId,
+          label: fieldMeta?.label || fieldId,
+          questionnaireValue,
+          consultValue,
+          finalValue,
+          reviewState,
+          checked: !!truthSavedRow.checked,
+          notes: truthSavedRow.notes || '',
+        };
       });
+
+      const confirmedItems = items.filter(
+        (item) => item.reviewState === 'confirmed'
+      );
+      const verifyItems = items.filter((item) => item.reviewState === 'verify');
+      const clarifyItems = items.filter(
+        (item) => item.reviewState === 'clarify'
+      );
+
+      return {
+        ...truth,
+        items,
+        confirmedItems,
+        verifyItems,
+        clarifyItems,
+      };
     });
+  }, [consultState?.truthRows, consultationMapped, questionnaireDefaults, questionnaireMapped]);
+
+  const generatedIntelliSummary = useMemo(() => {
+    const allItems = truthBoards.flatMap((truth) =>
+      truth.items.map((item) => ({
+        truth: truth.title,
+        ...item,
+      }))
+    );
+
+    const trustedSignals = allItems
+      .filter((item) => item.reviewState === 'confirmed' && !isEmptyish(item.finalValue))
+      .map((item) => ({
+        label: `${item.truth} · ${item.label}`,
+        value: getDisplayValue(item.finalValue),
+        confidence: 'high',
+        rationale:
+          item.notes ||
+          'This has been discussed clearly enough to treat as part of the working direction.',
+      }));
+
+    const stillOpen = allItems
+      .filter((item) => item.reviewState !== 'confirmed')
+      .map((item) => ({
+        label: `${item.truth} · ${item.label}`,
+        note:
+          item.notes ||
+          'This area still needs either confirmation or clarification before it should be treated as locked.',
+      }));
+
+    const followUps = allItems
+      .filter((item) => item.reviewState === 'clarify')
+      .map((item) => ({
+        label: `${item.truth} · ${item.label}`,
+        question: `Ask a clarifying follow-up around ${item.label.toLowerCase()}.`,
+      }));
+
+    const confidenceRows = allItems.map((item) => ({
+      label: `${item.truth} · ${item.label}`,
+      value: getDisplayValue(item.finalValue),
+      confidence:
+        item.reviewState === 'confirmed'
+          ? 'high'
+          : item.reviewState === 'verify'
+            ? 'medium'
+            : 'low',
+      rationale:
+        item.notes ||
+        (item.reviewState === 'confirmed'
+          ? 'This appears settled enough to treat as part of the working direction.'
+          : item.reviewState === 'verify'
+            ? 'This looks directionally useful, but still needs verbal confirmation.'
+            : 'This still needs more clarity before it should influence downstream build decisions.'),
+    }));
+
+    const truthSummary = truthBoards
+      .map((truth) => {
+        const confirmedCount = truth.confirmedItems.length;
+        const totalCount = truth.items.length;
+        return `${truth.title}: ${confirmedCount}/${totalCount} areas currently feel locked in.`;
+      })
+      .join(' ');
+
+    const overview =
+      trustedSignals.length > 0
+        ? `Discovery is beginning to form around the four truths. ${truthSummary}`
+        : `Discovery has started, but there is not enough confirmed signal yet across Voice, Feel, Purpose, and Legacy to treat the build direction as truly locked.`;
+
+    const nextSteps = [];
 
     if (trustedSignals.length) {
       nextSteps.push(
-        'Promote the strongest reviewed signals into the Craftsman Master Tool as the current working direction.'
-      );
-    }
-
-    if (conflictedSignals.length) {
-      nextSteps.push(
-        'Resolve changed or conflicting fields before translating them into final build specs.'
+        'Promote the clearest confirmed signals into the next build-direction tool.'
       );
     }
 
     if (stillOpen.length) {
       nextSteps.push(
-        'Treat still-open categories as intentionally unresolved rather than guessing downstream.'
+        'Use the consultation to resolve the most important open questions without forcing weak decisions.'
       );
     }
 
     if (followUps.length) {
       nextSteps.push(
-        'Make artist follow-up part of the handoff instead of leaving unknowns implicit.'
-      );
-    }
-
-    const overviewSentenceParts = [];
-
-    const strongestHighConfidence = confidenceRows.filter(
-      (row) => row.confidence === 'high'
-    );
-
-    if (strongestHighConfidence.length) {
-      const firstTwo = strongestHighConfidence.slice(0, 2);
-      overviewSentenceParts.push(
-        `The strongest current discovery signals are ${firstTwo
-          .map((item) => `${item.label.toLowerCase()} (${item.value})`)
-          .join(' and ')}.`
-      );
-    }
-
-    if (changedSignals.length) {
-      overviewSentenceParts.push(
-        `${changedSignals.length} field${
-          changedSignals.length === 1 ? '' : 's'
-        } changed during consultation and should trust consult validation over the original questionnaire.`
-      );
-    }
-
-    if (stillOpen.length) {
-      overviewSentenceParts.push(
-        `${stillOpen.length} field${
-          stillOpen.length === 1 ? '' : 's'
-        } still need clarification before deeper build-direction work.`
-      );
-    }
-
-    if (!overviewSentenceParts.length) {
-      overviewSentenceParts.push(
-        'Discovery data has been reviewed, but not enough strong signal exists yet to promote a confident working build direction.'
+        'Capture notes by truth so the emotional and practical logic behind the build stays visible.'
       );
     }
 
     return {
-      overview: overviewSentenceParts.join(' '),
+      overview,
       trustedSignals,
-      changedSignals,
-      conflictedSignals,
+      changedSignals: [],
+      conflictedSignals: [],
       stillOpen,
       followUps,
-      builderResearch: [...new Set(builderResearch)],
+      builderResearch: [],
       confidenceRows,
       nextSteps,
     };
-  }, [effectiveConsultRows]);
+  }, [truthBoards]);
 
   useEffect(() => {
     if (!intakeLocked || !consultLocked || summaryGenerated) return;
@@ -742,256 +535,30 @@ const IntakeDirectionSection = ({
   const summaryText =
     summaryState?.editableText || generatedIntelliSummary.overview || '';
 
-  const intakeStatusLabel = intakeLocked ? 'Reviewed' : 'Active';
-  const consultStatusLabel = consultLocked ? 'Completed' : 'Active';
-
-  const questionnaireReceived =
-    !!cleanText(storyEngineData?.questionnaireRaw) ||
-    questionnaireBoard.some(
-      (section) => section.known.length > 0 || section.unknown.length > 0
-    );
-
-  const questionnaireStatus = questionnaireReceived ? 'Received' : 'Incomplete';
-
-const reviewedConsultRows = effectiveConsultRows.map((row) => {
-  const questionnaireValue = cleanText(row.questionnaireValue);
-  const consultValue = cleanText(row.consultValue);
-
-  const finalValue =
-    row.status === 'changed' || row.status === 'valid'
-      ? consultValue || questionnaireValue
-      : row.status === 'invalid'
-        ? ''
-        : consultValue || questionnaireValue;
-
-  let autoSuggestedReviewState = 'verify';
-
-  if (
-    row.status === 'open' ||
-    row.status === 'unreviewed' ||
-    row.status === 'invalid' ||
-    row.confidence === 'low' ||
-    row.confidence === 'unknown' ||
-    isEmptyish(finalValue) ||
-    isBuilderLed(finalValue)
-  ) {
-    autoSuggestedReviewState = 'clarify';
-  } else if (
-    (row.status === 'valid' || row.status === 'changed') &&
-    !isEmptyish(finalValue) &&
-    row.confidence !== 'low' &&
-    row.confidence !== 'unknown'
-  ) {
-    autoSuggestedReviewState = 'confirmed';
-  }
-
-  const finalReviewState =
-    row.reviewState && row.reviewState.trim()
-      ? row.reviewState
-      : autoSuggestedReviewState;
-
-  return {
-    ...row,
-    finalValue,
-    autoSuggestedReviewState,
-    reviewState: finalReviewState,
-  };
-});
-
-const confirmedCallItems = reviewedConsultRows.filter(
-  (row) => row.reviewState === 'confirmed'
-);
-
-const verifyCallItems = reviewedConsultRows.filter(
-  (row) => row.reviewState === 'verify'
-);
-
-const clarificationItems = reviewedConsultRows.filter(
-  (row) => row.reviewState === 'clarify'
-);
-
-  const getClarifierWhy = (row) => {
-    if (row.key === 'painPoints') {
-      return 'If we do not know what is failing in the current setup, we risk building toward a vague ideal instead of solving a real problem.';
-    }
-
-    if (row.key === 'shellWoodDirection') {
-      return 'Shell direction affects feel, response, and how much of the build should stay builder-led versus artist-led.';
-    }
-
-    if (row.key === 'sizeDirection') {
-      return 'Size strongly shapes feel, tuning behavior, and overall role of the drum.';
-    }
-
-    if (row.key === 'hardwareDirection') {
-      return 'Hardware finish may seem visual, but it often signals how resolved the broader visual direction really is.';
-    }
-
-    if (row.key === 'desiredOutcome') {
-      return 'If the true goal is soft or unclear, the rest of the build can drift into generic choices.';
-    }
-
-    if (row.key === 'responsePriorities') {
-      return 'This helps translate broad tonal language into usable performance priorities.';
-    }
-
-    if (row.key === 'tonalGoals') {
-      return 'Clear tonal language helps protect the build from vague or conflicting interpretation later.';
-    }
-
-    if (row.key === 'visualDirection' || row.key === 'finishDirection') {
-      return 'Visual direction helps determine whether the build should feel restrained, bold, organic, heirloom, or more statement-driven.';
-    }
-
-    if (row.key === 'primaryUseCase') {
-      return 'Knowing where the drum must live most often helps prioritize response, mix behavior, and feel.';
-    }
-
-    return 'This area is not strong enough yet to treat as truly confirmed.';
-  };
-
-  const getClarifierQuestions = (row) => {
-    if (row.followUpQuestion) return [row.followUpQuestion];
-
-    switch (row.key) {
-      case 'painPoints':
-        return [
-          'What is your current snare not doing for you?',
-          'Is the issue tone, feel, tuning range, sensitivity, or mixability?',
-          'Have you owned something close before that still missed the mark?',
-        ];
-
-      case 'shellWoodDirection':
-        return [
-          'Do you want me to lead more here, or do you already have a material instinct?',
-          'Would you rather optimize for warmth, articulation, dryness, complexity, or feel?',
-          'Does shell choice matter more tonally to you, visually, or both?',
-        ];
-
-      case 'sizeDirection':
-        return [
-          'Does a certain diameter or depth already feel right in your hands?',
-          'Are you after a more compact feel, a deeper feel, or are you still open?',
-          'Is size already decided, or should we keep it open while we confirm sound goals?',
-        ];
-
-      case 'hardwareDirection':
-        return [
-          'Does the hardware finish feel truly decided, or just loosely preferred right now?',
-          'Do you want the hardware to disappear into the build or help define the look?',
-          'Should we keep hardware open until shell and finish direction are firmer?',
-        ];
-
-      case 'desiredOutcome':
-        return [
-          'What do you most want this drum to become for you?',
-          'Is this meant to be a daily main snare, a studio piece, a collector piece, or something else?',
-          'What would make this feel like the right build when it is done?',
-        ];
-
-      case 'responsePriorities':
-        return [
-          'What matters more here: sensitivity, control, body, openness, crack, or flexibility?',
-          'What should this drum do easily that others have not done well for you?',
-          'When you play softly, what do you want to feel back from the drum?',
-        ];
-
-      case 'tonalGoals':
-        return [
-          'When you hear the drum in your head, what words feel most true?',
-          'Do you want it to stay controlled, open up more, or live somewhere in between?',
-          'Are there recordings or existing drums that are close to what you mean?',
-        ];
-
-      case 'visualDirection':
-      case 'finishDirection':
-        return [
-          'Do you want this build to feel understated, bold, organic, heirloom, modern, or something else?',
-          'Should the look feel quieter and timeless, or more statement-driven?',
-          'What visual choices already feel real, and what is still open?',
-        ];
-
-      case 'primaryUseCase':
-        return [
-          'Will this live mostly in the studio, on stage, at home, or across everything?',
-          'What environments does it need to succeed in most often?',
-          'Should we optimize this as a specialist or an all-arounder?',
-        ];
-
-      default:
-        return [
-          `What feels most true right now about ${row.label.toLowerCase()}?`,
-          `What still feels open or undecided about ${row.label.toLowerCase()}?`,
-        ];
-    }
-  };
-
   const callRhythmSections = [
     {
       key: 'agenda',
       title: 'Call agenda',
       bullets: [
-        'Quick welcome + set the tone',
-        'Explain how I approach the process',
-        'Confirm what already feels true from intake',
-        'Clarify missing or uncertain build direction',
-        'Talk through sound, feel, use case, and pain points',
-        'Talk through artist story, influences, and what is happening in life/music right now',
-        'Wrap with what feels confirmed, what stays open, and next steps',
+        'Welcome and set the tone',
+        'Briefly frame the four truths: Voice, Feel, Purpose, and Legacy',
+        'Confirm what already feels strong from intake',
+        'Clarify anything that still feels soft, unclear, or emotionally important',
+        'Talk about the artist behind the drum — not just the spec direction',
+        'Wrap with what feels locked, what stays open, and what happens next',
       ],
     },
     {
       key: 'opening',
-      title: 'Introduction',
+      title: 'Opening script',
       script:
-        'Thanks again for taking the time to do this. My goal today is just to understand what you are really after, what already feels true, and where I can help guide things without forcing decisions too fast.',
+        'Thanks again for taking the time to do this. My goal today is not to force decisions too quickly. I just want to understand what already feels true, where we still need to listen more carefully, and how this drum can become something genuinely meaningful for you.',
     },
     {
-      key: 'mission',
-      title: 'My mission and values',
+      key: 'truths',
+      title: 'How I frame the build',
       script:
-        'My job here is not to push you into answers before they are ready. I want to listen well, protect what already feels real, and keep the wrong things open rather than locking them too early.',
-    },
-    {
-      key: 'no-pressure',
-      title: 'Reiterate no pressure',
-      script:
-        'We do not need to force every detail today. If some things are clear, great. If some things are still open, that is completely fine too. I would rather leave something open than lock in the wrong thing.',
-    },
-    {
-      key: 'goals',
-      title: 'What I want to get out of the call',
-      bullets: [
-        'Confirm what already seems real',
-        'Catch what changed from intake',
-        'Clarify pain points and sound priorities',
-        'Understand build and visual direction',
-        'Separate artist preference from builder-led areas',
-        'Learn more about the artist behind the drum',
-      ],
-    },
-    {
-      key: 'relationship',
-      title: 'Artist story & relationship',
-      bullets: [
-        'What first pulled you into drumming?',
-        'What keeps you connected to it now?',
-        'Who are your biggest influences right now?',
-        'When you are not drumming, what are you usually doing?',
-        'What is your favorite part about playing?',
-        'Any upcoming shows, clinics, festivals, sessions, or projects?',
-      ],
-    },
-    {
-      key: 'stuck',
-      title: 'If I get stuck',
-      bullets: [
-        'Tell me about where your current snare feels right — and where it does not.',
-        'When you imagine this drum in the room, what do you want to feel immediately?',
-        'What matters more here: sensitivity, body, control, openness, or flexibility?',
-        'Which parts feel decided already, and which parts are still open?',
-        'What should I understand about you as a player before I make assumptions about the drum?',
-      ],
+        'Every SoundLegend build begins with four truths: Voice, Feel, Purpose, and Legacy. The goal is not to rush through them — it is to understand how they come together so the drum feels honest, personal, and lasting.',
     },
   ];
 
@@ -1002,9 +569,9 @@ const clarificationItems = reviewedConsultRows.filter(
           <div className="idv-kicker">Intake & Direction</div>
           <h3 className="idv-title">Discovery Workspace</h3>
           <p className="idv-subtitle">
-            Keep discovery simple: receive the questionnaire, validate it during
-            the consult, then create one intelligent handoff summary that is
-            actually useful for the next step.
+            Every SoundLegend build begins with four truths: Voice, Feel,
+            Purpose, and Legacy. This workspace helps turn the intake and the
+            consultation into something more useful than scattered notes.
           </p>
         </div>
       </div>
@@ -1013,7 +580,9 @@ const clarificationItems = reviewedConsultRows.filter(
         <div className="idv-timeline-chip">
           <span className="idv-timeline-label">Questionnaire</span>
           <span
-            className={`idv-status-pill ${questionnaireReceived ? 'is-good' : 'is-soft'}`}
+            className={`idv-status-pill ${
+              questionnaireReceived ? 'is-good' : 'is-soft'
+            }`}
           >
             {questionnaireStatus}
           </span>
@@ -1022,7 +591,9 @@ const clarificationItems = reviewedConsultRows.filter(
         <div className="idv-timeline-chip">
           <span className="idv-timeline-label">Intake Review</span>
           <span
-            className={`idv-status-pill ${intakeLocked ? 'is-good' : 'is-soft'}`}
+            className={`idv-status-pill ${
+              intakeLocked ? 'is-good' : 'is-soft'
+            }`}
           >
             {intakeStatusLabel}
           </span>
@@ -1031,7 +602,9 @@ const clarificationItems = reviewedConsultRows.filter(
         <div className="idv-timeline-chip">
           <span className="idv-timeline-label">Consultation</span>
           <span
-            className={`idv-status-pill ${consultLocked ? 'is-good' : 'is-soft'}`}
+            className={`idv-status-pill ${
+              consultLocked ? 'is-good' : 'is-soft'
+            }`}
           >
             {consultStatusLabel}
           </span>
@@ -1040,7 +613,9 @@ const clarificationItems = reviewedConsultRows.filter(
         <div className="idv-timeline-chip">
           <span className="idv-timeline-label">IntelliSummary</span>
           <span
-            className={`idv-status-pill ${summaryGenerated ? 'is-good' : 'is-soft'}`}
+            className={`idv-status-pill ${
+              summaryGenerated ? 'is-good' : 'is-soft'
+            }`}
           >
             {summaryGenerated ? 'Generated' : 'Waiting'}
           </span>
@@ -1060,8 +635,8 @@ const clarificationItems = reviewedConsultRows.filter(
               </span>
               <h4>Reviewed intake + consult handoff</h4>
               <p>
-                This becomes the useful piece of discovery data to move forward
-                into the Craftsman Master Tool.
+                This becomes the useful discovery handoff into the next stage of
+                the Ober build process.
               </p>
             </div>
             <div className="idv-section-toggle-right">
@@ -1095,7 +670,7 @@ const clarificationItems = reviewedConsultRows.filter(
                 <div className="idv-card">
                   <div className="idv-card-head">
                     <span className="idv-card-kicker">Trusted Signals</span>
-                    <h5>Safe to promote forward</h5>
+                    <h5>Safe to carry forward</h5>
                   </div>
 
                   {generatedIntelliSummary.trustedSignals.length ? (
@@ -1104,10 +679,8 @@ const clarificationItems = reviewedConsultRows.filter(
                         <div key={item.label} className="idv-info-row">
                           <div className="idv-info-row-top">
                             <strong>{item.label}</strong>
-                            <span
-                              className={`idv-confidence-pill is-${item.confidence || 'unknown'}`}
-                            >
-                              {(item.confidence || 'unknown').toUpperCase()}
+                            <span className="idv-confidence-pill is-high">
+                              HIGH
                             </span>
                           </div>
                           <div className="idv-info-row-value">{item.value}</div>
@@ -1124,38 +697,8 @@ const clarificationItems = reviewedConsultRows.filter(
 
                 <div className="idv-card">
                   <div className="idv-card-head">
-                    <span className="idv-card-kicker">Changed In Consult</span>
-                    <h5>Trust consult over questionnaire here</h5>
-                  </div>
-
-                  {generatedIntelliSummary.changedSignals.length ? (
-                    <div className="idv-list-stack">
-                      {generatedIntelliSummary.changedSignals.map((item) => (
-                        <div key={item.label} className="idv-info-row">
-                          <div className="idv-info-row-top">
-                            <strong>{item.label}</strong>
-                            <span
-                              className={`idv-confidence-pill is-${item.confidence || 'unknown'}`}
-                            >
-                              {(item.confidence || 'unknown').toUpperCase()}
-                            </span>
-                          </div>
-                          <div className="idv-info-row-value">{item.value}</div>
-                          <p>{item.rationale}</p>
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="idv-empty">
-                      No consult-validated changes recorded.
-                    </div>
-                  )}
-                </div>
-
-                <div className="idv-card">
-                  <div className="idv-card-head">
                     <span className="idv-card-kicker">Still Open</span>
-                    <h5>Not ready to treat as locked</h5>
+                    <h5>Areas still needing care</h5>
                   </div>
 
                   {generatedIntelliSummary.stillOpen.length ? (
@@ -1168,68 +711,7 @@ const clarificationItems = reviewedConsultRows.filter(
                     </ul>
                   ) : (
                     <div className="idv-empty">
-                      No major open items detected.
-                    </div>
-                  )}
-                </div>
-
-                <div className="idv-card">
-                  <div className="idv-card-head">
-                    <span className="idv-card-kicker">Artist Follow-Up</span>
-                    <h5>Questions still worth asking</h5>
-                  </div>
-
-                  {generatedIntelliSummary.followUps.length ? (
-                    <ul className="idv-list">
-                      {generatedIntelliSummary.followUps.map((item) => (
-                        <li key={item.label}>
-                          <strong>{item.label}:</strong> {item.question}
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <div className="idv-empty">
-                      No explicit artist follow-up items were flagged.
-                    </div>
-                  )}
-                </div>
-
-                <div className="idv-card">
-                  <div className="idv-card-head">
-                    <span className="idv-card-kicker">Builder Research</span>
-                    <h5>Internal work needed before spec translation</h5>
-                  </div>
-
-                  {generatedIntelliSummary.builderResearch.length ? (
-                    <ul className="idv-list">
-                      {generatedIntelliSummary.builderResearch.map((item) => (
-                        <li key={item}>{item}</li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <div className="idv-empty">
-                      No major builder research items flagged.
-                    </div>
-                  )}
-                </div>
-
-                <div className="idv-card">
-                  <div className="idv-card-head">
-                    <span className="idv-card-kicker">
-                      Recommended Next Steps
-                    </span>
-                    <h5>What should happen next</h5>
-                  </div>
-
-                  {generatedIntelliSummary.nextSteps.length ? (
-                    <ol className="idv-list idv-list-ordered">
-                      {generatedIntelliSummary.nextSteps.map((item) => (
-                        <li key={item}>{item}</li>
-                      ))}
-                    </ol>
-                  ) : (
-                    <div className="idv-empty">
-                      No specific next steps detected.
+                      No major open areas detected.
                     </div>
                   )}
                 </div>
@@ -1254,7 +736,9 @@ const clarificationItems = reviewedConsultRows.filter(
                       </div>
                       <div className="idv-confidence-side">
                         <span
-                          className={`idv-confidence-pill is-${row.confidence || 'unknown'}`}
+                          className={`idv-confidence-pill is-${
+                            row.confidence || 'unknown'
+                          }`}
                         >
                           {(row.confidence || 'unknown').toUpperCase()}
                         </span>
@@ -1279,75 +763,63 @@ const clarificationItems = reviewedConsultRows.filter(
             <span className="idv-section-kicker">Section 1</span>
             <h4>Questionnaire Intake</h4>
             <p>
-              Receive the questionnaire, review what the artist submitted, and
-              lock this section once it has been fully reviewed.
+              Review the questionnaire through the lens of the four truths so
+              the call begins with something more intentional than scattered
+              preferences.
             </p>
           </div>
           <div className="idv-section-toggle-right">
             <span
-              className={`idv-status-pill ${intakeLocked ? 'is-good' : 'is-soft'}`}
+              className={`idv-status-pill ${
+                intakeLocked ? 'is-good' : 'is-soft'
+              }`}
             >
               {intakeLocked ? 'Reviewed' : questionnaireStatus}
             </span>
             <span className="idv-toggle-icon">{intakeOpen ? '−' : '+'}</span>
           </div>
         </button>
+
         {intakeOpen && (
           <div className="idv-section-body">
             <div className="idv-card">
               <div className="idv-card-head">
-                <span className="idv-card-kicker">
-                  Questionnaire Interpretation
-                </span>
-                <h5>What the intake is telling us vs. not telling us</h5>
+                <span className="idv-card-kicker">Four Truths Snapshot</span>
+                <h5>How the intake is beginning to speak</h5>
               </div>
 
-              <div className="idv-intake-board">
-                <div className="idv-intake-board-head idv-intake-board-head--spacer" />
-                <div className="idv-intake-board-head idv-intake-board-head--known">
-                  What the intake is telling us
-                </div>
-                <div className="idv-intake-board-head idv-intake-board-head--unknown">
-                  What the intake is not telling us
-                </div>
+              <div className="idv-truth-board">
+                {truthBoards.map((truth) => (
+                  <div key={truth.key} className="idv-truth-card">
+                    <div className="idv-truth-top">
+                      <span className="idv-truth-badge">{truth.badge}</span>
+                      <div>
+                        <strong>{truth.title}</strong>
+                        <p>{truth.summary}</p>
+                      </div>
+                    </div>
 
-                {questionnaireBoard.map((section) => (
-                  <React.Fragment key={section.key}>
-                    <div className="idv-intake-board-rowhead">
-                      <span className="idv-intake-board-rowicon">
-                        {section.icon}
+                    <div className="idv-truth-stats">
+                      <span className="idv-status-pill is-good">
+                        Locked: {truth.confirmedItems.length}
                       </span>
-                      <span className="idv-intake-board-rowtitle">
-                        {section.title}
+                      <span className="idv-status-pill is-medium">
+                        Verify: {truth.verifyItems.length}
+                      </span>
+                      <span className="idv-status-pill is-soft">
+                        Open: {truth.clarifyItems.length}
                       </span>
                     </div>
 
-                    <div className="idv-intake-board-cell idv-intake-board-cell--known">
-                      {section.known.length ? (
-                        <ul className="idv-list">
-                          {section.known.map((item) => (
-                            <li key={item}>{item}</li>
-                          ))}
-                        </ul>
-                      ) : (
-                        <div className="idv-empty">No strong signal yet.</div>
-                      )}
-                    </div>
-
-                    <div className="idv-intake-board-cell idv-intake-board-cell--unknown">
-                      {section.unknown.length ? (
-                        <ul className="idv-list">
-                          {section.unknown.map((item) => (
-                            <li key={item}>{item}</li>
-                          ))}
-                        </ul>
-                      ) : (
-                        <div className="idv-empty">
-                          Nothing major missing here.
-                        </div>
-                      )}
-                    </div>
-                  </React.Fragment>
+                    <ul className="idv-list">
+                      {truth.items.slice(0, 3).map((item) => (
+                        <li key={item.fieldId}>
+                          <strong>{item.label}:</strong>{' '}
+                          {getDisplayValue(item.finalValue)}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 ))}
               </div>
 
@@ -1378,14 +850,15 @@ const clarificationItems = reviewedConsultRows.filter(
             <span className="idv-section-kicker">Section 2</span>
             <h4>Consultation Validation</h4>
             <p>
-              Validate questionnaire answers during the consult, paste
-              transcript + craftsman notes, and lock this section once discovery
-              review is complete.
+              Use the consultation to confirm, clarify, and emotionally deepen
+              what the questionnaire surfaced.
             </p>
           </div>
           <div className="idv-section-toggle-right">
             <span
-              className={`idv-status-pill ${consultLocked ? 'is-good' : 'is-soft'}`}
+              className={`idv-status-pill ${
+                consultLocked ? 'is-good' : 'is-soft'
+              }`}
             >
               {consultLocked ? 'Completed' : 'Active'}
             </span>
@@ -1398,7 +871,7 @@ const clarificationItems = reviewedConsultRows.filter(
             <div className="idv-card idv-card-full">
               <div className="idv-card-head">
                 <span className="idv-card-kicker">Call Rhythm</span>
-                <h5>Cheat sheet for call flow</h5>
+                <h5>Cheat sheet for how the conversation should feel</h5>
               </div>
 
               <div className="idv-call-rhythm-stack">
@@ -1424,94 +897,53 @@ const clarificationItems = reviewedConsultRows.filter(
 
             <div className="idv-card idv-card-full">
               <div className="idv-card-head">
-                <span className="idv-card-kicker">Discovery Clarifier</span>
-                <h5>What looks confirmed vs. what still needs clarification</h5>
+                <span className="idv-card-kicker">Four Truths Checklist</span>
+                <h5>Confirm the build through Voice, Feel, Purpose, and Legacy</h5>
               </div>
 
-              <div className="idv-clarifier-overview">
-                <div className="idv-clarifier-overview-head">
-                  Discovery areas to protect on the call
-                </div>
+              <div className="idv-truth-checklist-grid">
+                {truthBoards.map((truth) => (
+                  <div key={truth.key} className="idv-truth-checklist-card">
+                    <div className="idv-truth-checklist-head">
+                      <div className="idv-truth-top">
+                        <span className="idv-truth-badge">{truth.badge}</span>
+                        <div>
+                          <strong>{truth.title}</strong>
+                          <p>{truth.summary}</p>
+                        </div>
+                      </div>
+                    </div>
 
-                <div className="idv-clarifier-overview-grid">
-                  <div className="idv-clarifier-overview-item">
-                    <strong>Build Specs</strong>
-                    <span>
-                      Size, shell direction, hardware direction, finish
-                      direction
-                    </span>
-                  </div>
-
-                  <div className="idv-clarifier-overview-item">
-                    <strong>Feel + Sound</strong>
-                    <span>
-                      Desired outcome, tonal goals, response priorities
-                    </span>
-                  </div>
-
-                  <div className="idv-clarifier-overview-item">
-                    <strong>Use + Environment</strong>
-                    <span>
-                      Primary use case, stage/studio/home context, role of the
-                      drum
-                    </span>
-                  </div>
-
-                  <div className="idv-clarifier-overview-item">
-                    <strong>Pain Points</strong>
-                    <span>
-                      Accessibility needs, frustrations, what current drums are
-                      missing
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="idv-clarifier-columns idv-clarifier-columns-triple">
-                <div className="idv-clarifier-column">
-                  <div className="idv-clarifier-column-head idv-clarifier-column-head--good">
-                    Confirmed / Stronger Signal
-                  </div>
-
-                  <div className="idv-clarifier-stack">
-                    {confirmedCallItems.length ? (
-                      confirmedCallItems.map((row) => (
-                        <div
-                          key={row.key}
-                          className="idv-clarifier-card idv-clarifier-card--good"
-                        >
-                          <div className="idv-clarifier-top">
-                            <strong>{row.label}</strong>
+                    <div className="idv-truth-checklist-items">
+                      {truth.items.map((item) => (
+                        <div key={item.fieldId} className="idv-truth-item-card">
+                          <div className="idv-truth-item-top">
+                            <strong>{item.label}</strong>
                             <span
-                              className={`idv-status-pill ${getReviewStatePillClass(row.reviewState)}`}
+                              className={`idv-status-pill ${getReviewStatePillClass(
+                                item.reviewState
+                              )}`}
                             >
-                              Green
+                              {item.reviewState === 'confirmed'
+                                ? 'Locked In'
+                                : item.reviewState === 'verify'
+                                  ? 'Needs Confirming'
+                                  : 'Open Question'}
                             </span>
                           </div>
 
-                          <div className="idv-clarifier-value">
-                            {getDisplayValue(row.finalValue)}
+                          <div className="idv-truth-item-value">
+                            {getDisplayValue(item.finalValue)}
                           </div>
 
-                          <p className="idv-clarifier-copy">
-                            {row.rationale ||
-                              'This appears strong enough to confirm briefly on the call rather than rediscover from scratch.'}
-                          </p>
-
-                          <ul className="idv-list">
-                            <li>
-                              “Here’s what I think I’m hearing — does that still
-                              feel right?”
-                            </li>
-                          </ul>
-
-                          <div className="idv-field" style={{ marginTop: 12 }}>
+                          <div className="idv-field" style={{ marginTop: 10 }}>
                             <label className="idv-field-label">Move Item</label>
                             <select
-                              value={row.reviewState}
+                              value={item.reviewState}
                               onChange={(e) =>
-                                updateConsultRow(row.key, {
+                                updateTruthRow(truth.key, item.fieldId, {
                                   reviewState: e.target.value,
+                                  checked: e.target.value === 'confirmed',
                                 })
                               }
                               disabled={consultLocked}
@@ -1523,143 +955,27 @@ const clarificationItems = reviewedConsultRows.filter(
                               ))}
                             </select>
                           </div>
-                        </div>
-                      ))
-                    ) : (
-                      <div className="idv-empty">
-                        No strongly confirmed call items yet.
-                      </div>
-                    )}
-                  </div>
-                </div>
 
-                <div className="idv-clarifier-column">
-                  <div className="idv-clarifier-column-head idv-clarifier-column-head--verify">
-                    Needs Verification
-                  </div>
-
-                  <div className="idv-clarifier-stack">
-                    {verifyCallItems.length ? (
-                      verifyCallItems.map((row) => (
-                        <div
-                          key={row.key}
-                          className="idv-clarifier-card idv-clarifier-card--verify"
-                        >
-                          <div className="idv-clarifier-top">
-                            <strong>{row.label}</strong>
-                            <span
-                              className={`idv-status-pill ${getReviewStatePillClass(row.reviewState)}`}
-                            >
-                              Yellow
-                            </span>
-                          </div>
-
-                          <div className="idv-clarifier-value">
-                            Current signal: {getDisplayValue(row.finalValue)}
-                          </div>
-
-                          <p className="idv-clarifier-copy">
-                            This looks directionally useful, but should still be
-                            confirmed out loud before treating it as locked.
-                          </p>
-
-                          <ul className="idv-list">
-                            <li>
-                              “This sounds directionally right to me — do you
-                              want to keep this in play?”
-                            </li>
-                          </ul>
-
-                          <div className="idv-field" style={{ marginTop: 12 }}>
-                            <label className="idv-field-label">Move Item</label>
-                            <select
-                              value={row.reviewState}
+                          <div className="idv-field" style={{ marginTop: 10 }}>
+                            <label className="idv-field-label">Notes</label>
+                            <textarea
+                              className="idv-textarea"
+                              rows={3}
+                              value={item.notes}
                               onChange={(e) =>
-                                updateConsultRow(row.key, {
-                                  reviewState: e.target.value,
+                                updateTruthRow(truth.key, item.fieldId, {
+                                  notes: e.target.value,
                                 })
                               }
                               disabled={consultLocked}
-                            >
-                              {REVIEW_STATE_OPTIONS.map((option) => (
-                                <option key={option.value} value={option.value}>
-                                  {option.label}
-                                </option>
-                              ))}
-                            </select>
+                              placeholder={`Any notes about how ${truth.title.toLowerCase()} is becoming clearer here...`}
+                            />
                           </div>
                         </div>
-                      ))
-                    ) : (
-                      <div className="idv-empty">
-                        No items currently waiting on verbal verification.
-                      </div>
-                    )}
+                      ))}
+                    </div>
                   </div>
-                </div>
-
-                <div className="idv-clarifier-column">
-                  <div className="idv-clarifier-column-head idv-clarifier-column-head--warn">
-                    Needs Clarification
-                  </div>
-
-                  <div className="idv-clarifier-stack">
-                    {clarificationItems.length ? (
-                      clarificationItems.map((row) => (
-                        <div
-                          key={row.key}
-                          className="idv-clarifier-card idv-clarifier-card--warn"
-                        >
-                          <div className="idv-clarifier-top">
-                            <strong>{row.label}</strong>
-                            <span
-                              className={`idv-status-pill ${getReviewStatePillClass(row.reviewState)}`}
-                            >
-                              Red
-                            </span>
-                          </div>
-
-                          <div className="idv-clarifier-value">
-                            Current signal: {getDisplayValue(row.finalValue)}
-                          </div>
-
-                          <p className="idv-clarifier-copy">
-                            {getClarifierWhy(row)}
-                          </p>
-
-                          <ul className="idv-list">
-                            {getClarifierQuestions(row).map((question) => (
-                              <li key={question}>{question}</li>
-                            ))}
-                          </ul>
-
-                          <div className="idv-field" style={{ marginTop: 12 }}>
-                            <label className="idv-field-label">Move Item</label>
-                            <select
-                              value={row.reviewState}
-                              onChange={(e) =>
-                                updateConsultRow(row.key, {
-                                  reviewState: e.target.value,
-                                })
-                              }
-                              disabled={consultLocked}
-                            >
-                              {REVIEW_STATE_OPTIONS.map((option) => (
-                                <option key={option.value} value={option.value}>
-                                  {option.label}
-                                </option>
-                              ))}
-                            </select>
-                          </div>
-                        </div>
-                      ))
-                    ) : (
-                      <div className="idv-empty">
-                        No major clarification gaps detected.
-                      </div>
-                    )}
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
 
@@ -1765,81 +1081,8 @@ const clarificationItems = reviewedConsultRows.filter(
                     }));
                   }}
                   disabled={consultLocked}
-                  placeholder="Internal notes, contradictions, builder observations, hard no’s, sizing corrections, things to follow up on..."
+                  placeholder="Builder observations, emotional cues, contradictions, meaningful notes, and things worth protecting..."
                 />
-              </div>
-            </div>
-
-            <div className="idv-card">
-              <div className="idv-card-head">
-                <span className="idv-card-kicker">Post-Call Consolidation</span>
-                <h5>What the call actually gave us</h5>
-              </div>
-
-              <div className="idv-grid-2">
-                <div className="idv-info-row">
-                  <div className="idv-info-row-top">
-                    <strong>What the call clarified</strong>
-                  </div>
-                  {generatedIntelliSummary.trustedSignals.length ? (
-                    <ul className="idv-list">
-                      {generatedIntelliSummary.trustedSignals.map((item) => (
-                        <li key={item.label}>
-                          <strong>{item.label}:</strong> {item.value}
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <div className="idv-empty">
-                      No strong clarifications captured yet.
-                    </div>
-                  )}
-                </div>
-
-                <div className="idv-info-row">
-                  <div className="idv-info-row-top">
-                    <strong>What changed from intake</strong>
-                  </div>
-                  {generatedIntelliSummary.conflictedSignals.length ? (
-                    <ul className="idv-list">
-                      {generatedIntelliSummary.conflictedSignals.map((item) => (
-                        <li key={item.label}>
-                          <strong>{item.label}:</strong> {item.from} → {item.to}
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <div className="idv-empty">
-                      No major intake-to-call changes recorded yet.
-                    </div>
-                  )}
-                </div>
-
-                <div className="idv-info-row">
-                  <div className="idv-info-row-top">
-                    <strong>What still remains open</strong>
-                  </div>
-                  {generatedIntelliSummary.stillOpen.length ? (
-                    <ul className="idv-list">
-                      {generatedIntelliSummary.stillOpen.map((item) => (
-                        <li key={item.label}>
-                          <strong>{item.label}:</strong> {item.note}
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <div className="idv-empty">
-                      No major open items detected.
-                    </div>
-                  )}
-                </div>
-
-                <div className="idv-info-row">
-                  <div className="idv-info-row-top">
-                    <strong>Builder-facing overview</strong>
-                  </div>
-                  <p>{generatedIntelliSummary.overview}</p>
-                </div>
               </div>
             </div>
 

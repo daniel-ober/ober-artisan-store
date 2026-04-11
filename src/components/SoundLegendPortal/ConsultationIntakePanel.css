@@ -1,75 +1,113 @@
-.cip-shell {
-  width: 100%;
-  color: #271f16;
-}
+/* ==========================================================================
+   ConsultationIntakePanel.css
+   Ober / SoundLegend questionnaire
+   ========================================================================== */
 
-.cip-header {
-  padding: 30px 30px 18px;
-  border-bottom: 1px solid rgba(73, 58, 33, 0.14);
+.cip-shell.cip-shell--ober {
+  position: relative;
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 28px;
+  border-radius: 30px;
   background:
-    radial-gradient(
-      circle at top left,
-      rgba(181, 144, 67, 0.11),
-      transparent 34%
-    ),
-    linear-gradient(
-      180deg,
-      rgba(246, 239, 227, 0.98),
-      rgba(235, 226, 211, 0.97)
-    );
+    radial-gradient(circle at top left, rgba(181, 142, 67, 0.12), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.04), transparent 22%),
+    linear-gradient(180deg, #15110d 0%, #1b1510 38%, #120e0b 100%);
+  border: 1px solid rgba(181, 142, 67, 0.18);
+  box-shadow:
+    0 26px 70px rgba(0, 0, 0, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  color: #f5ede0;
+  isolation: isolate;
+  opacity: 1 !important;
 }
 
-.cip-header-copy {
-  max-width: 840px;
-  width: 100%;
-  text-align: left;
+.cip-shell.cip-shell--ober *,
+.cip-shell.cip-shell--ober *::before,
+.cip-shell.cip-shell--ober *::after {
+  box-sizing: border-box;
 }
 
-.cip-kicker {
-  display: inline-block;
-  margin: 0 0 10px;
-  font-size: 0.7rem;
-  line-height: 1;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  font-weight: 800;
-  color: rgba(88, 68, 31, 0.68);
+/* ==========================================================================
+   HEADER
+   ========================================================================== */
+
+.cip-header.cip-header--ober {
+  position: relative;
+  z-index: 3;
+  margin-bottom: 24px;
+  opacity: 1 !important;
 }
 
-.cip-title {
-  margin: 0 0 10px;
-  font-size: 1.8rem;
-  line-height: 1.06;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  color: #201b14;
+.cip-header-copy.cip-header-copy--ober {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  opacity: 1 !important;
 }
 
-.cip-subtitle {
-  margin: 0 0 10px;
-  font-size: 1rem;
-  line-height: 1.7;
-  color: rgba(52, 45, 35, 0.84);
-}
-
-.cip-meta-note {
+.cip-shell.cip-shell--ober .cip-kicker {
   margin: 0;
-  font-size: 0.92rem;
-  line-height: 1.65;
-  color: rgba(88, 74, 49, 0.78);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #d2b06a !important;
+  opacity: 1 !important;
+  filter: none !important;
+  mix-blend-mode: normal !important;
 }
+
+.cip-shell.cip-shell--ober .cip-title {
+  margin: 0;
+  font-size: clamp(2rem, 3vw, 3rem);
+  line-height: 1.02;
+  font-weight: 800;
+  color: #fff8ee !important;
+  opacity: 1 !important;
+  filter: none !important;
+  mix-blend-mode: normal !important;
+}
+
+.cip-shell.cip-shell--ober .cip-subtitle {
+  margin: 0;
+  max-width: 900px;
+  font-size: 1.03rem;
+  line-height: 1.75;
+  color: rgba(245, 237, 224, 0.88) !important;
+  opacity: 1 !important;
+  filter: none !important;
+  mix-blend-mode: normal !important;
+}
+
+.cip-shell.cip-shell--ober .cip-meta-note {
+  margin: 0;
+  max-width: 900px;
+  font-size: 0.98rem;
+  line-height: 1.8;
+  color: rgba(245, 237, 224, 0.68) !important;
+  opacity: 1 !important;
+  filter: none !important;
+  mix-blend-mode: normal !important;
+}
+
+/* ==========================================================================
+   PROGRESS
+   ========================================================================== */
 
 .cip-progress-card {
-  margin: 18px 24px 0;
-  padding: 18px 18px 16px;
-  border-radius: 22px;
-  background: linear-gradient(
-    180deg,
-    rgba(244, 236, 223, 0.98),
-    rgba(234, 224, 208, 0.97)
-  );
-  border: 1px solid rgba(94, 72, 34, 0.14);
-  box-shadow: 0 14px 34px rgba(43, 35, 19, 0.09);
+  position: relative;
+  z-index: 3;
+  margin-bottom: 24px;
+  padding: 22px 22px 18px;
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(255, 248, 236, 0.07), rgba(255, 248, 236, 0.03)) !important;
+  border: 1px solid rgba(181, 142, 67, 0.14) !important;
+  opacity: 1 !important;
+  filter: none !important;
+  mix-blend-mode: normal !important;
 }
 
 .cip-progress-topline {
@@ -77,35 +115,38 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: 16px;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
+  opacity: 1 !important;
 }
 
 .cip-progress-copy {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  opacity: 1 !important;
 }
 
-.cip-progress-label {
-  font-size: 0.72rem;
-  line-height: 1;
-  font-weight: 800;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: rgba(98, 78, 40, 0.72);
-}
-
-.cip-progress-title {
-  font-size: 1rem;
-  line-height: 1.2;
+.cip-shell.cip-shell--ober .cip-progress-label {
+  font-size: 0.75rem;
   font-weight: 700;
-  color: #231d15;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(245, 237, 224, 0.58) !important;
+  opacity: 1 !important;
 }
 
-.cip-progress-percent {
-  font-size: 0.9rem;
-  font-weight: 800;
-  color: #7f6328;
+.cip-shell.cip-shell--ober .cip-progress-title {
+  font-size: 1.28rem;
+  font-weight: 700;
+  color: #fff7ea !important;
+  opacity: 1 !important;
+}
+
+.cip-shell.cip-shell--ober .cip-progress-percent {
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: #d2b06a !important;
+  opacity: 1 !important;
 }
 
 .cip-progress-track {
@@ -113,91 +154,150 @@
   height: 10px;
   border-radius: 999px;
   overflow: hidden;
-  background: rgba(121, 95, 43, 0.12);
-  margin-bottom: 14px;
+  background: rgba(255, 248, 237, 0.08);
+  margin-bottom: 18px;
 }
 
 .cip-progress-fill {
   height: 100%;
   border-radius: 999px;
-  background: linear-gradient(90deg, #d8b158 0%, #bb8c2a 100%);
-  transition: width 0.22s ease;
+  background: linear-gradient(90deg, #8f6b2b 0%, #d2b06a 54%, #e7cb8e 100%);
+  box-shadow: 0 0 16px rgba(210, 176, 106, 0.22);
 }
 
 .cip-step-dots {
+  position: relative;
+  z-index: 2;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+  opacity: 1 !important;
 }
 
 .cip-step-dot {
+  padding: 14px 14px 12px;
+  border-radius: 18px;
+  background: rgba(255, 248, 237, 0.04) !important;
+  border: 1px solid rgba(181, 142, 67, 0.1) !important;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 4px;
-  min-height: 54px;
-  padding: 10px 12px;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.72);
-  border: 1px solid rgba(186, 171, 139, 0.22);
-  box-sizing: border-box;
+  gap: 5px;
+  opacity: 1 !important;
 }
 
 .cip-step-dot.is-active {
   background: linear-gradient(
     180deg,
-    rgba(247, 235, 206, 0.92),
-    rgba(240, 225, 186, 0.88)
-  );
-  border-color: rgba(199, 155, 53, 0.34);
-  box-shadow: 0 8px 20px rgba(176, 142, 60, 0.12);
+    rgba(210, 176, 106, 0.16),
+    rgba(210, 176, 106, 0.07)
+  ) !important;
+  border-color: rgba(210, 176, 106, 0.32) !important;
 }
 
 .cip-step-dot.is-complete {
   background: linear-gradient(
     180deg,
-    rgba(238, 234, 221, 0.9),
-    rgba(232, 227, 213, 0.88)
-  );
-  border-color: rgba(165, 152, 120, 0.24);
-}
-
-.cip-step-dot.is-locked {
-  opacity: 0.72;
-}
-
-.cip-step-dot:disabled {
-  cursor: default;
+    rgba(93, 132, 93, 0.18),
+    rgba(93, 132, 93, 0.08)
+  ) !important;
+  border-color: rgba(93, 132, 93, 0.28) !important;
 }
 
 .cip-step-dot-number {
-  display: block;
-  margin-bottom: 6px;
-  font-size: 0.78rem;
-  font-weight: 800;
-  color: #876926;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #d2b06a !important;
+  opacity: 1 !important;
 }
 
 .cip-step-dot-text {
-  display: block;
-  font-size: 0.82rem;
-  line-height: 1.3;
-  font-weight: 600;
-  color: #342b20;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff4e7 !important;
+  opacity: 1 !important;
 }
 
+.cip-step-dot-meta {
+  font-size: 0.82rem;
+  color: rgba(245, 237, 224, 0.68) !important;
+  opacity: 1 !important;
+}
+
+/* ==========================================================================
+   SECTION CARD
+   ========================================================================== */
+
 .cip-section-card {
-  margin: 18px 24px 0;
-  padding: 24px 24px 16px;
-  border-radius: 24px;
-  background: linear-gradient(
-    180deg,
-    rgba(242, 234, 221, 0.98),
-    rgba(233, 223, 207, 0.97)
+  position: relative;
+  margin-bottom: 18px;
+  padding: 28px;
+  border-radius: 28px;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(245, 239, 228, 0.98),
+      rgba(236, 227, 212, 0.98)
+    );
+  border: 1px solid rgba(193, 173, 139, 0.34);
+  box-shadow:
+    0 18px 44px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.48);
+  color: #241c15;
+  overflow: hidden;
+}
+
+.cip-section-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.42;
+}
+
+.cip-section-card--purpose::before {
+  background: radial-gradient(
+    circle at top right,
+    rgba(183, 146, 77, 0.12),
+    transparent 30%
   );
-  border: 1px solid rgba(94, 72, 34, 0.14);
-  box-shadow: 0 18px 42px rgba(43, 35, 19, 0.09);
+}
+
+.cip-section-card--feel::before {
+  background: radial-gradient(
+    circle at top right,
+    rgba(145, 108, 82, 0.12),
+    transparent 30%
+  );
+}
+
+.cip-section-card--voice::before {
+  background: radial-gradient(
+    circle at top right,
+    rgba(102, 96, 132, 0.12),
+    transparent 30%
+  );
+}
+
+.cip-section-card--legacy::before {
+  background: radial-gradient(
+    circle at top right,
+    rgba(124, 109, 86, 0.12),
+    transparent 30%
+  );
+}
+
+.cip-section-card--consult::before {
+  background: radial-gradient(
+    circle at top right,
+    rgba(101, 112, 133, 0.1),
+    transparent 30%
+  );
+}
+
+.cip-section-heading,
+.cip-section-body {
+  position: relative;
+  z-index: 1;
 }
 
 .cip-section-heading {
@@ -206,207 +306,247 @@
 
 .cip-section-kicker {
   margin-bottom: 8px;
-  font-size: 0.72rem;
-  line-height: 1;
-  font-weight: 800;
-  letter-spacing: 0.16em;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(113, 87, 36, 0.72);
+  color: #a8833e;
 }
 
 .cip-section-title {
   margin: 0 0 8px;
-  font-size: 1.35rem;
-  line-height: 1.15;
+  font-size: 2rem;
+  line-height: 1.08;
   font-weight: 800;
-  color: #1f1a13;
+  color: #1f1712;
 }
 
 .cip-section-description {
   margin: 0;
-  font-size: 0.96rem;
-  line-height: 1.7;
-  color: rgba(65, 56, 43, 0.76);
+  font-size: 1rem;
+  line-height: 1.75;
+  color: rgba(36, 28, 21, 0.74);
 }
 
-.cip-section-body {
-  width: 100%;
+/* ==========================================================================
+   STORY BLOCK
+   ========================================================================== */
+
+.cip-story-block {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  gap: 14px;
+  margin-bottom: 20px;
+  padding: 18px 18px 18px 16px;
+  border-radius: 20px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 249, 240, 0.96),
+    rgba(243, 234, 218, 0.96)
+  );
+  border: 1px solid rgba(188, 166, 128, 0.24);
 }
+
+.cip-story-mark {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 4px;
+}
+
+.cip-story-mark-line {
+  width: 1px;
+  flex: 1;
+  min-height: 42px;
+  background: linear-gradient(
+    180deg,
+    rgba(168, 133, 64, 0.7),
+    rgba(168, 133, 64, 0.12)
+  );
+}
+
+.cip-story-mark-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: #b69149;
+  box-shadow: 0 0 0 4px rgba(182, 145, 73, 0.12);
+}
+
+.cip-story-copy p {
+  margin: 0;
+  font-size: 1.02rem;
+  line-height: 1.88;
+  color: rgba(36, 28, 21, 0.84);
+}
+
+/* ==========================================================================
+   ERROR
+   ========================================================================== */
+
+.cip-section-error {
+  margin-bottom: 18px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(171, 73, 62, 0.08);
+  border: 1px solid rgba(171, 73, 62, 0.12);
+  color: #9a493f;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   QUESTIONS
+   ========================================================================== */
 
 .cip-fields-stack {
-  display: grid;
-  gap: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
 
 .cip-field-card {
-  position: relative;
   padding: 18px;
-  border-radius: 18px;
-  background: linear-gradient(
-    180deg,
-    rgba(248, 243, 235, 0.9),
-    rgba(239, 231, 219, 0.96)
-  );
-  border: 1px solid rgba(101, 81, 42, 0.1);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.55),
-    0 8px 20px rgba(43, 35, 19, 0.05);
+  border-radius: 22px;
+  background: rgba(255, 250, 243, 0.76);
+  border: 1px solid rgba(196, 177, 144, 0.26);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.56);
+}
+
+.cip-field-card--error {
+  border-color: rgba(170, 89, 75, 0.26);
+  background: rgba(255, 246, 244, 0.82);
 }
 
 .cip-field-card-topline {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
   margin-bottom: 10px;
-  gap: 10px;
 }
 
 .cip-field-step {
-  font-size: 0.72rem;
-  line-height: 1;
-  font-weight: 800;
-  letter-spacing: 0.16em;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(177, 129, 36, 0.9);
+  color: #af8945;
 }
 
 .cip-field-optional {
-  font-size: 0.72rem;
+  font-size: 0.9rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(89, 74, 46, 0.62);
+  color: rgba(36, 28, 21, 0.45);
 }
 
 .cip-field-label {
   display: block;
-  margin: 0 0 8px;
-  font-size: 1rem;
-  line-height: 1.4;
+  margin-bottom: 8px;
+  font-size: 1.18rem;
   font-weight: 700;
-  letter-spacing: -0.01em;
-  color: #262016;
+  line-height: 1.4;
+  color: #241c15;
 }
 
 .cip-field-helper {
-  margin: 0 0 14px;
-  font-size: 0.88rem;
-  line-height: 1.58;
-  color: rgba(78, 67, 49, 0.72);
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: rgba(36, 28, 21, 0.58);
 }
 
-.cip-field-control {
-  width: 100%;
+.cip-group-note {
+  margin-bottom: 14px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(210, 183, 120, 0.15);
+  border: 1px solid rgba(180, 148, 82, 0.18);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: rgba(63, 47, 27, 0.86);
 }
+
+.cip-group-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cip-subfield {
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(255, 251, 245, 0.78);
+  border: 1px solid rgba(196, 177, 144, 0.18);
+}
+
+.cip-subfield--error {
+  border-color: rgba(170, 89, 75, 0.24);
+  background: rgba(255, 244, 242, 0.82);
+}
+
+.cip-subfield-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.45;
+  color: #281f18;
+}
+
+.cip-subfield-helper {
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: rgba(36, 28, 21, 0.55);
+}
+
+/* ==========================================================================
+   FORM CONTROLS
+   ========================================================================== */
 
 .cip-field-input,
 .cip-field-select,
 .cip-field-textarea {
   width: 100%;
   box-sizing: border-box;
-  border-radius: 14px;
-  border: 1px solid rgba(105, 84, 45, 0.18);
-  background: rgba(250, 246, 240, 0.96);
-  color: #231d15;
-  padding: 13px 14px;
-  font-size: 0.97rem;
-  line-height: 1.45;
+  border-radius: 16px;
+  border: 1px solid rgba(195, 178, 146, 0.5);
+  background: rgba(255, 255, 255, 0.94);
+  color: #2a2119;
+  font-size: 1.02rem;
+  line-height: 1.5;
+  padding: 15px 16px;
+  outline: none;
   transition:
-    border-color 0.18s ease,
-    box-shadow 0.18s ease,
-    background 0.18s ease;
-}
-
-.cip-section-error {
-  margin: 0 0 16px;
-  padding: 12px 14px;
-  border-radius: 14px;
-  border: 1px solid rgba(176, 92, 92, 0.22);
-  background: rgba(186, 96, 96, 0.08);
-  color: #8a3434;
-  font-size: 0.88rem;
-  line-height: 1.55;
-  font-weight: 600;
-}
-
-.cip-field-card--error {
-  border-color: rgba(190, 92, 92, 0.34);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.025),
-    0 10px 24px rgba(0, 0, 0, 0.08),
-    0 0 0 2px rgba(190, 92, 92, 0.08);
-  background:
-    linear-gradient(
-      180deg,
-      rgba(255, 236, 236, 0.82),
-      rgba(255, 244, 244, 0.74)
-    ),
-    linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.82),
-      rgba(250, 246, 239, 0.88)
-    );
-}
-
-.cip-field-card--success {
-  border-color: rgba(116, 154, 108, 0.3);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.025),
-    0 10px 24px rgba(0, 0, 0, 0.06),
-    0 0 0 2px rgba(116, 154, 108, 0.08);
-  background:
-    linear-gradient(
-      180deg,
-      rgba(240, 247, 238, 0.92),
-      rgba(248, 250, 243, 0.9)
-    ),
-    linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.82),
-      rgba(250, 246, 239, 0.88)
-    );
-}
-
-.cip-field-status {
-  margin-top: 10px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  line-height: 1.35;
-}
-
-.cip-field-status--error {
-  color: #b14f4f;
-}
-
-.cip-field-status--success {
-  color: #5f7f56;
-}
-
-.cip-field-textarea {
-  min-height: 132px;
-  resize: vertical;
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
 }
 
 .cip-field-input::placeholder,
 .cip-field-textarea::placeholder {
-  color: rgba(101, 82, 51, 0.46);
+  color: rgba(82, 66, 47, 0.42);
 }
 
 .cip-field-input:focus,
 .cip-field-select:focus,
 .cip-field-textarea:focus {
-  outline: none;
-  border-color: rgba(189, 141, 46, 0.46);
-  box-shadow: 0 0 0 4px rgba(206, 164, 76, 0.12);
-  background: rgba(255, 255, 255, 0.98);
+  border-color: rgba(185, 150, 79, 0.62);
+  box-shadow: 0 0 0 4px rgba(185, 150, 79, 0.1);
+  background: #fffdfa;
 }
 
-.cip-field-input:read-only,
-.cip-field-textarea:read-only,
-.cip-field-select:disabled {
-  opacity: 0.72;
-  cursor: not-allowed;
+.cip-field-textarea {
+  min-height: 150px;
+  resize: vertical;
 }
+
+/* ==========================================================================
+   CHIP GROUPS
+   ========================================================================== */
 
 .cip-chip-group {
   display: flex;
@@ -416,137 +556,110 @@
 
 .cip-chip {
   appearance: none;
-  border: 1px solid rgba(112, 88, 43, 0.14);
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.9),
-    rgba(247, 242, 233, 0.95)
-  );
-  color: #372d20;
-  border-radius: 14px;
-  min-height: 42px;
-  padding: 10px 13px;
-  font-size: 0.84rem;
-  font-weight: 600;
-  line-height: 1.28;
+  border: 1px solid rgba(196, 177, 144, 0.34);
+  background: rgba(255, 255, 255, 0.9);
+  color: #2b221a;
+  border-radius: 999px;
+  padding: 12px 16px;
   cursor: pointer;
   transition:
-    transform 0.16s ease,
-    border-color 0.16s ease,
-    background 0.16s ease,
-    color 0.16s ease,
-    box-shadow 0.16s ease;
-}
-
-.cip-chip--descriptive {
-  display: flex;
+    transform 0.15s ease,
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+  display: inline-flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 4px;
-  min-width: 180px;
-}
-
-.cip-chip-label {
-  font-weight: 700;
-}
-
-.cip-chip-description {
-  font-size: 0.75rem;
-  line-height: 1.35;
-  color: rgba(72, 61, 43, 0.72);
   text-align: left;
 }
 
-.cip-chip:hover:not(:disabled):not(.is-active):not([aria-pressed='true']) {
+.cip-chip:hover {
   transform: translateY(-1px);
-  border-color: rgba(182, 137, 44, 0.26);
+  border-color: rgba(185, 150, 79, 0.44);
+}
+
+.cip-chip.is-active {
   background: linear-gradient(
     180deg,
-    rgba(255, 251, 243, 1),
-    rgba(247, 240, 227, 1)
+    rgba(212, 179, 106, 0.96),
+    rgba(190, 148, 58, 0.95)
   );
+  border-color: rgba(169, 135, 68, 0.72);
+  box-shadow: 0 8px 18px rgba(185, 150, 79, 0.18);
+  color: #24190f;
 }
 
-.cip-chip.is-active,
-.cip-chip[aria-pressed='true'],
-.cip-chip.is-active:hover:not(:disabled),
-.cip-chip[aria-pressed='true']:hover:not(:disabled),
-.cip-chip.is-active:focus-visible,
-.cip-chip[aria-pressed='true']:focus-visible {
-  background: linear-gradient(
-    180deg,
-    rgba(255, 244, 216, 0.98),
-    rgba(245, 224, 173, 0.98)
-  );
-  border-color: rgba(190, 142, 47, 0.42);
-  color: #2c2110;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.55),
-    0 8px 16px rgba(80, 61, 24, 0.08);
+.cip-chip.is-readonly {
+  cursor: default;
 }
 
-.cip-chip:focus-visible {
-  outline: none;
-  border-color: rgba(190, 142, 47, 0.42);
-  box-shadow:
-    0 0 0 3px rgba(214, 174, 82, 0.14),
-    0 8px 16px rgba(0, 0, 0, 0.06);
+.cip-chip-label {
+  font-size: 0.98rem;
+  font-weight: 600;
+  line-height: 1.35;
 }
 
-.cip-chip.is-readonly,
-.cip-chip:disabled {
-  opacity: 0.72;
-  cursor: not-allowed;
-  transform: none;
-}
-
-.cip-other-wrap {
-  margin-top: 12px;
-}
-
-.cip-other-label {
-  display: block;
-  margin: 0 0 8px;
+.cip-chip-description {
   font-size: 0.82rem;
-  font-weight: 700;
-  color: rgba(71, 58, 37, 0.76);
+  line-height: 1.45;
+  opacity: 0.78;
 }
+
+/* ==========================================================================
+   STATUS
+   ========================================================================== */
+
+.cip-field-status {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.cip-field-status--error {
+  color: #a55449;
+}
+
+.cip-field-status--success {
+  color: #5b7f57;
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
 
 .cip-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  padding: 18px 24px 24px;
+  gap: 18px;
+  margin-top: 10px;
 }
 
 .cip-autosave-note {
-  font-size: 0.88rem;
+  font-size: 0.95rem;
   line-height: 1.6;
-  color: rgba(80, 66, 44, 0.72);
-  max-width: 680px;
+  color: rgba(245, 237, 224, 0.72);
 }
 
 .cip-footer-actions {
   display: flex;
-  gap: 10px;
+  align-items: center;
+  gap: 12px;
 }
 
 .cip-nav-btn {
   appearance: none;
-  min-height: 44px;
+  border: none;
   border-radius: 999px;
-  padding: 0 18px;
-  font-size: 0.88rem;
-  line-height: 1;
-  font-weight: 800;
+  padding: 14px 22px;
+  font-size: 1rem;
+  font-weight: 700;
   cursor: pointer;
   transition:
-    transform 0.16s ease,
-    box-shadow 0.16s ease,
-    opacity 0.16s ease,
-    background 0.16s ease,
-    border-color 0.16s ease;
+    transform 0.15s ease,
+    opacity 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .cip-nav-btn:hover:not(:disabled) {
@@ -554,112 +667,178 @@
 }
 
 .cip-nav-btn:disabled {
-  opacity: 0.6;
+  opacity: 0.5;
   cursor: not-allowed;
-  transform: none;
 }
 
 .cip-nav-btn--ghost {
-  border: 1px solid rgba(101, 81, 42, 0.14);
-  background: rgba(255, 255, 255, 0.72);
-  color: #2c2418;
+  background: rgba(255, 251, 245, 0.96);
+  color: #231b14;
+  border: 1px solid rgba(202, 183, 148, 0.26);
 }
 
 .cip-nav-btn--primary {
-  border: 1px solid rgba(191, 144, 48, 0.26);
-  background: linear-gradient(180deg, #d8b158 0%, #c89a36 100%);
-  color: #1f170a;
-  box-shadow:
-    0 12px 26px rgba(173, 131, 38, 0.18),
-    inset 0 1px 0 rgba(255, 248, 222, 0.38);
+  background: linear-gradient(180deg, #d8b460 0%, #c29a43 100%);
+  color: #23170c;
+  box-shadow: 0 10px 24px rgba(194, 154, 67, 0.24);
 }
 
-@media (max-width: 900px) {
-  .cip-header {
-    padding: 24px 22px 16px;
-  }
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
 
-  .cip-progress-card,
-  .cip-section-card {
-    margin-left: 18px;
-    margin-right: 18px;
-  }
-
-  .cip-footer {
-    padding: 18px 18px 22px;
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .cip-footer-actions {
-    justify-content: stretch;
-  }
-
-  .cip-footer-actions .cip-nav-btn {
-    flex: 1 1 auto;
+@media (max-width: 980px) {
+  .cip-shell.cip-shell--ober {
+    padding: 22px;
   }
 
   .cip-step-dots {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .cip-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .cip-footer-actions {
+    justify-content: space-between;
+  }
 }
 
 @media (max-width: 640px) {
-  .cip-header {
-    padding: 20px 16px 14px;
-  }
-
-  .cip-title {
-    font-size: 1.48rem;
-  }
-
-  .cip-subtitle,
-  .cip-meta-note {
-    font-size: 0.93rem;
+  .cip-shell.cip-shell--ober {
+    padding: 16px;
+    border-radius: 20px;
   }
 
   .cip-progress-card,
   .cip-section-card {
-    margin-left: 14px;
-    margin-right: 14px;
-    padding-left: 14px;
-    padding-right: 14px;
+    padding: 18px;
+    border-radius: 20px;
   }
 
-  .cip-section-card {
-    padding-top: 18px;
-    padding-bottom: 12px;
+  .cip-shell.cip-shell--ober .cip-title {
+    font-size: 1.8rem;
   }
 
-  .cip-field-card {
-    padding: 15px 14px 15px;
-    border-radius: 16px;
-  }
-
-  .cip-field-label {
-    font-size: 0.95rem;
-  }
-
-  .cip-field-helper {
-    font-size: 0.82rem;
-    margin-bottom: 12px;
-  }
-
-  .cip-chip-group {
-    gap: 8px;
-  }
-
-  .cip-chip {
-    min-height: 38px;
-    padding: 8px 10px;
-    font-size: 0.78rem;
-  }
-
-  .cip-chip--descriptive {
-    min-width: 100%;
+  .cip-section-title {
+    font-size: 1.55rem;
   }
 
   .cip-step-dots {
     grid-template-columns: 1fr;
   }
+
+  .cip-field-card {
+    padding: 14px;
+    border-radius: 18px;
+  }
+
+  .cip-chip {
+    width: 100%;
+    border-radius: 16px;
+  }
+
+  .cip-footer-actions {
+    flex-direction: column;
+  }
+
+  .cip-nav-btn {
+    width: 100%;
+  }
+}
+
+/* ==========================================================================
+   FINAL HARD OVERRIDES — KEEP AT BOTTOM
+   ========================================================================== */
+
+.slq-panel-wrap .cip-shell.cip-shell--ober,
+.slq-page .cip-shell.cip-shell--ober {
+  background:
+    radial-gradient(circle at top left, rgba(181, 142, 67, 0.12), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.04), transparent 22%),
+    linear-gradient(180deg, #15110d 0%, #1b1510 38%, #120e0b 100%) !important;
+  border: 1px solid rgba(181, 142, 67, 0.18) !important;
+  box-shadow:
+    0 26px 70px rgba(0, 0, 0, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
+  color: #f5ede0 !important;
+  opacity: 1 !important;
+}
+
+.slq-panel-wrap .cip-shell.cip-shell--ober .cip-header,
+.slq-panel-wrap .cip-shell.cip-shell--ober .cip-header-copy,
+.slq-panel-wrap .cip-shell.cip-shell--ober .cip-progress-card,
+.slq-panel-wrap .cip-shell.cip-shell--ober .cip-progress-topline,
+.slq-panel-wrap .cip-shell.cip-shell--ober .cip-progress-copy,
+.slq-panel-wrap .cip-shell.cip-shell--ober .cip-step-dots,
+.slq-page .cip-shell.cip-shell--ober .cip-header,
+.slq-page .cip-shell.cip-shell--ober .cip-header-copy,
+.slq-page .cip-shell.cip-shell--ober .cip-progress-card,
+.slq-page .cip-shell.cip-shell--ober .cip-progress-topline,
+.slq-page .cip-shell.cip-shell--ober .cip-progress-copy,
+.slq-page .cip-shell.cip-shell--ober .cip-step-dots {
+  position: relative !important;
+  z-index: 5 !important;
+  opacity: 1 !important;
+  filter: none !important;
+  mix-blend-mode: normal !important;
+  visibility: visible !important;
+}
+
+.slq-panel-wrap .cip-shell.cip-shell--ober .cip-kicker,
+.slq-page .cip-shell.cip-shell--ober .cip-kicker {
+  color: #d2b06a !important;
+  opacity: 1 !important;
+}
+
+.slq-panel-wrap .cip-shell.cip-shell--ober .cip-title,
+.slq-page .cip-shell.cip-shell--ober .cip-title {
+  color: #fff8ee !important;
+  opacity: 1 !important;
+}
+
+.slq-panel-wrap .cip-shell.cip-shell--ober .cip-subtitle,
+.slq-page .cip-shell.cip-shell--ober .cip-subtitle {
+  color: rgba(245, 237, 224, 0.88) !important;
+  opacity: 1 !important;
+}
+
+.slq-panel-wrap .cip-shell.cip-shell--ober .cip-meta-note,
+.slq-page .cip-shell.cip-shell--ober .cip-meta-note {
+  color: rgba(245, 237, 224, 0.68) !important;
+  opacity: 1 !important;
+}
+
+.slq-panel-wrap .cip-shell.cip-shell--ober .cip-progress-label,
+.slq-page .cip-shell.cip-shell--ober .cip-progress-label {
+  color: rgba(245, 237, 224, 0.58) !important;
+  opacity: 1 !important;
+}
+
+.slq-panel-wrap .cip-shell.cip-shell--ober .cip-progress-title,
+.slq-page .cip-shell.cip-shell--ober .cip-progress-title {
+  color: #fff7ea !important;
+  opacity: 1 !important;
+}
+
+.slq-panel-wrap .cip-shell.cip-shell--ober .cip-progress-percent,
+.slq-panel-wrap .cip-shell.cip-shell--ober .cip-step-dot-number,
+.slq-page .cip-shell.cip-shell--ober .cip-progress-percent,
+.slq-page .cip-shell.cip-shell--ober .cip-step-dot-number {
+  color: #d2b06a !important;
+  opacity: 1 !important;
+}
+
+.slq-panel-wrap .cip-shell.cip-shell--ober .cip-step-dot-text,
+.slq-page .cip-shell.cip-shell--ober .cip-step-dot-text {
+  color: #fff4e7 !important;
+  opacity: 1 !important;
+}
+
+.slq-panel-wrap .cip-shell.cip-shell--ober .cip-step-dot-meta,
+.slq-page .cip-shell.cip-shell--ober .cip-step-dot-meta {
+  color: rgba(245, 237, 224, 0.68) !important;
+  opacity: 1 !important;
 }
