@@ -33,7 +33,6 @@ import {
 
 import { buildStoryEngineFromSources } from '../utils/storyEngineBuildIntentAdapter';
 import { runVoicingNarrativePipeline } from '../utils/storyEngineVoicingNarrative';
-
 import { runStoryDraftPipeline } from '../utils/storyEngineDrafting';
 
 const generateAndDownloadVCard = ({ firstName, lastName, email, phone }) => {
@@ -217,30 +216,26 @@ const mapIntakeToStoryEngineFieldMap = ({
     submissionData.lastName || ''
   }`.trim();
 
-  const playingWorld = consultationIntake?.playingWorld || {};
-  const soundGoals = consultationIntake?.soundGoals || {};
-  const buildDirection = consultationIntake?.buildDirection || {};
-  const consultPrep = consultationIntake?.consultPrep || {};
+  const purpose = consultationIntake?.purpose || {};
+  const feel = consultationIntake?.feel || {};
+  const voice = consultationIntake?.voice || {};
+  const legacy = consultationIntake?.legacy || {};
+  const consult = consultationIntake?.consult || {};
 
-  const tonalGoals = Array.isArray(soundGoals.tonalGoals)
-    ? soundGoals.tonalGoals
+  const tonalGoals = Array.isArray(voice.tonalGoals) ? voice.tonalGoals : [];
+  const responsePriorities = Array.isArray(voice.responsePriorities)
+    ? voice.responsePriorities
     : [];
-
-  const responsePriorities = Array.isArray(soundGoals.responsePriorities)
-    ? soundGoals.responsePriorities
+  const genres = Array.isArray(voice.genres) ? voice.genres : [];
+  const environments = Array.isArray(purpose.environments)
+    ? purpose.environments
     : [];
-
-  const playSettings = Array.isArray(playingWorld.playSettings)
-    ? playingWorld.playSettings
+  const visualDirection = Array.isArray(legacy.visualDirection)
+    ? legacy.visualDirection
     : [];
-
-  const genres = Array.isArray(playingWorld.genres) ? playingWorld.genres : [];
-
-  const consultationDays = normalizeAvailabilityValue(
-    consultPrep.consultationDays
-  );
+  const consultationDays = normalizeAvailabilityValue(consult.consultationDays);
   const consultationTimes = normalizeAvailabilityValue(
-    consultPrep.consultationTimes
+    consult.consultationTimes
   );
 
   const combinedAvailability =
@@ -260,35 +255,30 @@ const mapIntakeToStoryEngineFieldMap = ({
     'buildIdentity.projectName': `${
       fullName || 'SoundLegend'
     } SoundLegend Build`,
-    'buildIdentity.primaryUseCase': normalizeTextValue(soundGoals.primaryGoal),
-    'buildIdentity.styleOfPlaying': normalizeTextValue(
-      buildDirection.buildClarity
-    ),
+    'buildIdentity.primaryUseCase': normalizeTextValue(purpose.primaryGoal),
+    'buildIdentity.styleOfPlaying': normalizeTextValue(purpose.playerProfile),
 
     'globalProfile.playerContext.genreContext': joinArrayForField(genres),
     'globalProfile.playerContext.desiredOutcome': normalizeTextValue(
-      soundGoals.primaryGoal
+      purpose.primaryGoal
     ),
-    'globalProfile.playerContext.currentPainPoints': normalizeTextValue(
-      buildDirection.buildClarity
+    'globalProfile.playerContext.currentPainPoints': joinArrayForField(
+      feel.snareFrustrations
     ),
-    'globalProfile.playerContext.influenceReferences':
-      joinArrayForField(playSettings),
+    'globalProfile.playerContext.influenceReferences': normalizeTextValue(
+      legacy.influenceReferences
+    ),
 
-    'globalProfile.aestheticIntent.visualMood': joinArrayForField(
-      buildDirection.visualDirection
-    ),
-    'globalProfile.aestheticIntent.finishDirection': joinArrayForField(
-      buildDirection.visualDirection
-    ),
+    'globalProfile.aestheticIntent.visualMood':
+      joinArrayForField(visualDirection),
+    'globalProfile.aestheticIntent.finishDirection':
+      joinArrayForField(visualDirection),
 
     'globalProfile.sonicIntent.attack': joinArrayForField(tonalGoals),
     'globalProfile.sonicIntent.body': joinArrayForField(tonalGoals),
-    'globalProfile.sonicIntent.sensitivity': tonalGoals.includes(
-      'Sensitive / ghost-note friendly'
-    )
-      ? 'Sensitive / ghost-note friendly'
-      : joinArrayForField(responsePriorities),
+    'globalProfile.sonicIntent.sensitivity': normalizeTextValue(
+      feel.dynamicFeel
+    ),
     'globalProfile.sonicIntent.sustain': tonalGoals.includes('Open / resonant')
       ? 'Open / resonant'
       : tonalGoals.includes('Dry / controlled')
@@ -302,25 +292,29 @@ const mapIntakeToStoryEngineFieldMap = ({
         ? 'Punchy'
         : '',
     'globalProfile.sonicIntent.tuningRange': normalizeTextValue(
-      buildDirection.preferredSizeDirection
+      voice.sizeDirection
     ),
     'globalProfile.sonicIntent.articulation':
       joinArrayForField(responsePriorities),
-    'globalProfile.sonicIntent.feel': joinArrayForField(tonalGoals),
+    'globalProfile.sonicIntent.feel': joinArrayForField(feel.feelPriorities),
 
-    'globalProfile.buildPreferences.shellConstruction': joinArrayForField(
-      buildDirection.shellDirectionsOpenTo
-    ),
+    'globalProfile.buildPreferences.shellConstruction': '',
     'globalProfile.buildPreferences.hardwareFinish': normalizeTextValue(
-      buildDirection.hardwareFinishPreference
+      legacy.hardwareFinishPreference
     ),
     'globalProfile.buildPreferences.sizePreference': normalizeTextValue(
-      buildDirection.preferredSizeDirection
+      voice.sizeDirection
     ),
     'globalProfile.buildPreferences.contactPreference': normalizeTextValue(
-      consultPrep.consultationContactMethod
+      consult.consultationContactMethod
     ),
     'globalProfile.buildPreferences.availability': combinedAvailability,
+
+    'globalProfile.buildPreferences.environment':
+      joinArrayForField(environments),
+    'globalProfile.buildPreferences.guidancePreference': normalizeTextValue(
+      purpose.guidancePreference
+    ),
   };
 };
 
@@ -386,7 +380,7 @@ const buildInitialStoryEngineRecord = ({
       submissionId: submissionData?.id || '',
       questionnaireCompleted: !!submissionData?.questionnaireCompleted,
       consultationContactMethod:
-        consultationIntake?.consultPrep?.consultationContactMethod || '',
+        consultationIntake?.consult?.consultationContactMethod || '',
     },
   });
 
@@ -704,7 +698,7 @@ const ViewSoundlegendModal = ({
 
         if (
           (!mergedData.consultationIntake ||
-            !mergedData.consultationIntake.soundlegendVision) &&
+            !mergedData.consultationIntake.purpose) &&
           mergedData.questionnaireToken
         ) {
           try {
@@ -759,18 +753,16 @@ const ViewSoundlegendModal = ({
   if (!submissionId) return null;
 
   const intakeDefaults = buildConsultationIntakeDefaults();
+  const resolvedConsultationIntake = consultationIntake || intakeDefaults;
 
-  const playingWorld =
-    consultationIntake?.playingWorld || intakeDefaults.playingWorld;
-
-  const soundGoals =
-    consultationIntake?.soundGoals || intakeDefaults.soundGoals;
-
-  const buildDirection =
-    consultationIntake?.buildDirection || intakeDefaults.buildDirection;
-
-  const consultPrep =
-    consultationIntake?.consultPrep || intakeDefaults.consultPrep;
+  const purpose =
+    resolvedConsultationIntake?.purpose || intakeDefaults.purpose || {};
+  const feel = resolvedConsultationIntake?.feel || intakeDefaults.feel || {};
+  const voice = resolvedConsultationIntake?.voice || intakeDefaults.voice || {};
+  const legacy =
+    resolvedConsultationIntake?.legacy || intakeDefaults.legacy || {};
+  const consult =
+    resolvedConsultationIntake?.consult || intakeDefaults.consult || {};
 
   return ReactDOM.createPortal(
     <div
@@ -944,82 +936,96 @@ const ViewSoundlegendModal = ({
                   <tbody>
                     <tr>
                       <th>Player profile</th>
-                      <td>{renderIntakeValue(playingWorld.playerProfile)}</td>
-                    </tr>
-                    <tr>
-                      <th>Play settings</th>
-                      <td>{renderIntakeValue(playingWorld.playSettings)}</td>
-                    </tr>
-                    <tr>
-                      <th>Genres</th>
-                      <td>{renderIntakeValue(playingWorld.genres)}</td>
-                    </tr>
-                    <tr>
-                      <th>Vision clarity</th>
-                      <td>{renderIntakeValue(buildDirection.buildClarity)}</td>
+                      <td>{renderIntakeValue(purpose.playerProfile)}</td>
                     </tr>
                     <tr>
                       <th>Main goal</th>
-                      <td>{renderIntakeValue(soundGoals.primaryGoal)}</td>
+                      <td>{renderIntakeValue(purpose.primaryGoal)}</td>
+                    </tr>
+                    <tr>
+                      <th>Environments</th>
+                      <td>{renderIntakeValue(purpose.environments)}</td>
+                    </tr>
+                    <tr>
+                      <th>Guidance preference</th>
+                      <td>{renderIntakeValue(purpose.guidancePreference)}</td>
+                    </tr>
+
+                    <tr>
+                      <th>Feel priorities</th>
+                      <td>{renderIntakeValue(feel.feelPriorities)}</td>
+                    </tr>
+                    <tr>
+                      <th>What feels right</th>
+                      <td>{renderIntakeValue(feel.snareLoveMost)}</td>
+                    </tr>
+                    <tr>
+                      <th>Snare frustrations</th>
+                      <td>{renderIntakeValue(feel.snareFrustrations)}</td>
+                    </tr>
+                    <tr>
+                      <th>Low-volume sensitivity</th>
+                      <td>{renderIntakeValue(feel.dynamicFeel)}</td>
+                    </tr>
+
+                    <tr>
+                      <th>Genres</th>
+                      <td>{renderIntakeValue(voice.genres)}</td>
                     </tr>
                     <tr>
                       <th>Tonal direction</th>
-                      <td>{renderIntakeValue(soundGoals.tonalGoals)}</td>
+                      <td>{renderIntakeValue(voice.tonalGoals)}</td>
                     </tr>
                     <tr>
                       <th>Response priorities</th>
-                      <td>
-                        {renderIntakeValue(soundGoals.responsePriorities)}
-                      </td>
+                      <td>{renderIntakeValue(voice.responsePriorities)}</td>
                     </tr>
                     <tr>
                       <th>Size direction</th>
-                      <td>
-                        {renderIntakeValue(
-                          buildDirection.preferredSizeDirection
-                        )}
-                      </td>
+                      <td>{renderIntakeValue(voice.sizeDirection)}</td>
                     </tr>
-                    <tr>
-                      <th>Shell direction</th>
-                      <td>
-                        {renderIntakeValue(
-                          buildDirection.shellDirectionsOpenTo
-                        )}
-                      </td>
-                    </tr>
+
                     <tr>
                       <th>Visual direction</th>
-                      <td>
-                        {renderIntakeValue(buildDirection.visualDirection)}
-                      </td>
+                      <td>{renderIntakeValue(legacy.visualDirection)}</td>
                     </tr>
                     <tr>
                       <th>Hardware finish</th>
                       <td>
-                        {renderIntakeValue(
-                          buildDirection.hardwareFinishPreference
-                        )}
+                        {renderIntakeValue(legacy.hardwareFinishPreference)}
                       </td>
                     </tr>
                     <tr>
-                      <th>Scheduling contact method</th>
-                      <td>
-                        {renderIntakeValue(
-                          consultPrep.consultationContactMethod
-                        )}
-                      </td>
+                      <th>Story importance</th>
+                      <td>{renderIntakeValue(legacy.storyImportance)}</td>
                     </tr>
                     <tr>
-                      <th>Scheduling availability</th>
+                      <th>Favorite part of playing</th>
+                      <td>{renderIntakeValue(legacy.favoritePartOfPlaying)}</td>
+                    </tr>
+                    <tr>
+                      <th>Influences</th>
                       <td className="pre">
-                        {buildSchedulingAvailabilityText(consultPrep)}
+                        {renderIntakeValue(legacy.influenceReferences)}
                       </td>
                     </tr>
                     <tr>
                       <th>Final notes</th>
                       <td className="pre">
-                        {renderIntakeValue(consultPrep.finalNotes)}
+                        {renderIntakeValue(legacy.finalNotes)}
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <th>Scheduling contact method</th>
+                      <td>
+                        {renderIntakeValue(consult.consultationContactMethod)}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>Scheduling availability</th>
+                      <td className="pre">
+                        {buildSchedulingAvailabilityText(consult)}
                       </td>
                     </tr>
                   </tbody>

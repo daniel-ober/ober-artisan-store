@@ -40,6 +40,50 @@ function getOptionDescription(option) {
   return typeof option === 'string' ? '' : option.description || '';
 }
 
+function isFieldComplete(value, field) {
+  if (field?.optional) return true;
+
+  if (field?.type === 'multiSelect') {
+    return Array.isArray(value) && value.length > 0;
+  }
+
+  return String(value || '').trim() !== '';
+}
+
+function isQuestionOptional(question) {
+  const fields = Array.isArray(question?.fields) ? question.fields : [];
+  if (!fields.length) return false;
+  return fields.every((field) => field?.optional);
+}
+
+const getMissingFieldIdsForQuestion = (section, question, formState) => {
+  const fields = Array.isArray(question?.fields) ? question.fields : [];
+
+  return fields
+    .filter((field) => !field?.optional)
+    .filter((field) => {
+      const value = formState?.[section?.id]?.[field.id];
+      return !isFieldComplete(value, field);
+    })
+    .map((field) => field.id);
+};
+
+const getQuestionCountForSection = (section) => {
+  const questions = Array.isArray(section?.questions) ? section.questions : [];
+  return questions.filter((question) => !isQuestionOptional(question)).length;
+};
+
+const getCompletedCountForSection = (section, formState) => {
+  const questions = Array.isArray(section?.questions) ? section.questions : [];
+
+  return questions.filter((question) => {
+    if (isQuestionOptional(question)) return false;
+    return (
+      getMissingFieldIdsForQuestion(section, question, formState).length === 0
+    );
+  }).length;
+};
+
 function ConsultationIntakePanel({
   value,
   onChange,
@@ -48,7 +92,7 @@ function ConsultationIntakePanel({
   isSubmitting = false,
   readOnly = false,
   title = 'SoundLegend Questionnaire',
-  subtitle = 'We do not want to take more than a few minutes of your time. These are mostly easy select questions, and nothing you choose here is locked in or a commitment by any means.',
+  subtitle = 'A few quick sections to help shape a more thoughtful, personal consultation.',
 }) {
   const [formState, setFormState] = useState(() =>
     normalizeIncomingIntake(value)
@@ -89,53 +133,46 @@ function ConsultationIntakePanel({
   }, [activeSectionIndex]);
 
   const totalSections = CONSULTATION_INTAKE_SECTIONS.length;
-
   const activeSection =
     CONSULTATION_INTAKE_SECTIONS[activeSectionIndex] || null;
 
+  const totalQuestionCount = useMemo(() => {
+    return CONSULTATION_INTAKE_SECTIONS.reduce(
+      (sum, section) => sum + getQuestionCountForSection(section),
+      0
+    );
+  }, []);
+
+  const totalCompletedQuestionCount = useMemo(() => {
+    return CONSULTATION_INTAKE_SECTIONS.reduce(
+      (sum, section) => sum + getCompletedCountForSection(section, formState),
+      0
+    );
+  }, [formState]);
+
   const sectionProgressPercent = useMemo(() => {
-    if (!totalSections) return 0;
-    return Math.round(((activeSectionIndex + 1) / totalSections) * 100);
-  }, [activeSectionIndex, totalSections]);
+    if (!totalQuestionCount) return 0;
+    return Math.round((totalCompletedQuestionCount / totalQuestionCount) * 100);
+  }, [totalCompletedQuestionCount, totalQuestionCount]);
 
   const intakeComplete = useMemo(
     () => isConsultationIntakeComplete(formState),
     [formState]
   );
 
-  const getFieldValue = (sectionId, fieldId) =>
-    formState?.[sectionId]?.[fieldId];
+  const activeSectionMissingQuestionIds = useMemo(() => {
+    if (!activeSection) return [];
 
-  const isFieldComplete = (section, field) => {
-    if (field.optional) return true;
+    return (activeSection.questions || [])
+      .filter(
+        (question) =>
+          getMissingFieldIdsForQuestion(activeSection, question, formState)
+            .length > 0
+      )
+      .map((question) => question.id);
+  }, [activeSection, formState]);
 
-    const value = getFieldValue(section.id, field.id);
-
-    if (field.type === 'multiSelect') {
-      return Array.isArray(value) && value.length > 0;
-    }
-
-    return String(value || '').trim() !== '';
-  };
-
-  const getMissingFieldIdsForSection = (section) =>
-    (section?.fields || [])
-      .filter((field) => !isFieldComplete(section, field))
-      .map((field) => field.id);
-
-  const activeSectionMissingFieldIds = activeSection
-    ? getMissingFieldIdsForSection(activeSection)
-    : [];
-
-  const activeSectionComplete = activeSectionMissingFieldIds.length === 0;
-
-  const shouldHighlightFieldError = (fieldId) =>
-    (attemptedNext || attemptedSubmit) &&
-    activeSectionMissingFieldIds.includes(fieldId);
-
-  const shouldHighlightFieldSuccess = (fieldId) =>
-    (attemptedNext || attemptedSubmit) &&
-    !activeSectionMissingFieldIds.includes(fieldId);
+  const activeSectionComplete = activeSectionMissingQuestionIds.length === 0;
 
   const updateField = (sectionId, fieldId, nextValue) => {
     if (readOnly) return;
@@ -276,8 +313,6 @@ function ConsultationIntakePanel({
   if (!activeSection) return null;
 
   const canGoBack = activeSectionIndex > 0;
-  const canGoNext = activeSectionIndex < totalSections - 1;
-
   const isLastSection = activeSectionIndex === totalSections - 1;
 
   const handleNextSection = () => {
@@ -304,17 +339,16 @@ function ConsultationIntakePanel({
   };
 
   return (
-    <div className="cip-shell">
-      <div className="cip-header">
-        <div className="cip-header-copy">
-          <div className="cip-kicker">
-            {readOnly ? 'Questionnaire Submitted' : 'Private Questionnaire'}
-          </div>
+    <div className="cip-shell cip-shell--ober">
+      <div className="cip-header cip-header--ober">
+        <div className="cip-header-copy cip-header-copy--ober">
+          <div className="cip-kicker">Private Questionnaire</div>
           <h3 className="cip-title">{title}</h3>
           <p className="cip-subtitle">{subtitle}</p>
           <p className="cip-meta-note">
-            Most people finish this in under 5 minutes. These are mostly easy
-            selections, with one optional write-in question saved for the end.
+            This is not meant to feel clinical or rigid. It is simply a
+            thoughtful way for us to begin understanding the four truths behind
+            your build before the consultation begins.
           </p>
         </div>
       </div>
@@ -343,78 +377,132 @@ function ConsultationIntakePanel({
               key={section.id}
               className={`cip-step-dot ${
                 index === activeSectionIndex ? 'is-active' : ''
-              } ${index < activeSectionIndex ? 'is-complete' : ''} ${
-                index > activeSectionIndex ? 'is-locked' : ''
+              } ${
+                getCompletedCountForSection(section, formState) ===
+                getQuestionCountForSection(section)
+                  ? 'is-complete'
+                  : ''
               }`}
             >
               <span className="cip-step-dot-number">{index + 1}</span>
               <span className="cip-step-dot-text">
                 {section.shortTitle || section.title}
               </span>
+              <span className="cip-step-dot-meta">
+                {getCompletedCountForSection(section, formState)}/
+                {getQuestionCountForSection(section)}
+              </span>
             </div>
           ))}
         </div>
       </div>
 
-      <div className="cip-section-card">
+      <div
+        className={`cip-section-card cip-section-card--${activeSection.id || 'default'}`}
+      >
         <div className="cip-section-heading">
-          <div className="cip-section-kicker">Focused intake</div>
+          <div className="cip-section-kicker">
+            {activeSection.truthLabel || 'Focused intake'}
+          </div>
           <h4 className="cip-section-title">{activeSection.title}</h4>
           <p className="cip-section-description">{activeSection.description}</p>
         </div>
 
+        {activeSection.storyIntro ? (
+          <div className="cip-story-block">
+            <div className="cip-story-mark">
+              <span className="cip-story-mark-dot" />
+              <span className="cip-story-mark-line" />
+            </div>
+            <div className="cip-story-copy">
+              <p>{activeSection.storyIntro}</p>
+            </div>
+          </div>
+        ) : null}
+
         {(attemptedNext || attemptedSubmit) && !activeSectionComplete ? (
           <div className="cip-section-error">
-            Please complete all required questions in this section before
+            Please complete all required answers in this section before
             continuing.
           </div>
         ) : null}
+
         <div className="cip-section-body">
           <div className="cip-fields-stack">
-            {activeSection.fields.map((field, index) => {
-              const isWide =
-                field.type === 'textarea' || field.type === 'multiSelect';
+            {(activeSection.questions || []).map((question, index) => {
+              const questionMissing = getMissingFieldIdsForQuestion(
+                activeSection,
+                question,
+                formState
+              );
+              const questionComplete = questionMissing.length === 0;
+              const showQuestionError =
+                !questionComplete && (attemptedNext || attemptedSubmit);
 
               return (
                 <div
-                  key={field.id}
+                  key={question.id}
                   className={`cip-field-card ${
-                    isWide ? 'cip-field-card--wide' : ''
-                  } ${
-                    shouldHighlightFieldError(field.id)
-                      ? 'cip-field-card--error'
-                      : ''
-                  } ${
-                    shouldHighlightFieldSuccess(field.id)
-                      ? 'cip-field-card--success'
-                      : ''
+                    showQuestionError ? 'cip-field-card--error' : ''
                   }`}
                 >
                   <div className="cip-field-card-topline">
                     <div className="cip-field-step">Question {index + 1}</div>
-                    {field.optional ? (
+                    {question.optional ? (
                       <div className="cip-field-optional">Optional</div>
                     ) : null}
                   </div>
 
-                  <label className="cip-field-label">{field.label}</label>
+                  <label className="cip-field-label">{question.label}</label>
 
-                  {field.helperText ? (
-                    <div className="cip-field-helper">{field.helperText}</div>
-                  ) : field.placeholder && field.type !== 'textarea' ? (
-                    <div className="cip-field-helper">{field.placeholder}</div>
+                  {question.helperText ? (
+                    <div className="cip-field-helper">
+                      {question.helperText}
+                    </div>
                   ) : null}
 
-                  <div className="cip-field-control">
-                    {renderField(activeSection, field)}
+                  <div className="cip-group-fields">
+                    {(question.fields || []).map((field) => {
+                      const fieldHasError =
+                        questionMissing.includes(field.id) &&
+                        (attemptedNext || attemptedSubmit);
+
+                      return (
+                        <div
+                          key={field.id}
+                          className={`cip-subfield ${
+                            fieldHasError ? 'cip-subfield--error' : ''
+                          }`}
+                        >
+                          {question.fields.length > 1 ? (
+                            <label className="cip-subfield-label">
+                              {field.label}
+                            </label>
+                          ) : null}
+
+                          {field.helperText ? (
+                            <div className="cip-subfield-helper">
+                              {field.helperText}
+                            </div>
+                          ) : null}
+
+                          <div className="cip-field-control">
+                            {renderField(activeSection, field)}
+                          </div>
+
+                          {fieldHasError ? (
+                            <div className="cip-field-status cip-field-status--error">
+                              This answer still needs attention.
+                            </div>
+                          ) : null}
+                        </div>
+                      );
+                    })}
                   </div>
-                  {shouldHighlightFieldError(field.id) ? (
+
+                  {showQuestionError ? (
                     <div className="cip-field-status cip-field-status--error">
-                      This question still needs an answer.
-                    </div>
-                  ) : shouldHighlightFieldSuccess(field.id) ? (
-                    <div className="cip-field-status cip-field-status--success">
-                      Complete
+                      This question still needs a few answers.
                     </div>
                   ) : null}
                 </div>
