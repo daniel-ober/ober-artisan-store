@@ -10,7 +10,8 @@ import {
   Timestamp,
   deleteDoc,
 } from 'firebase/firestore';
-import { db } from '../firebaseConfig';
+import { getFunctions, httpsCallable } from 'firebase/functions';
+import { db, app } from '../firebaseConfig';
 
 import './AdminModalTheme.css';
 import './ViewSoundlegendModal.css';
@@ -206,6 +207,20 @@ const joinArrayForField = (value) => {
     : [];
 
   return arr.length ? arr.join(', ') : '';
+};
+
+const hasMeaningfulValue = (value) => {
+  if (Array.isArray(value)) return value.some((item) => hasMeaningfulValue(item));
+  if (value && typeof value === 'object') {
+    return Object.values(value).some((item) => hasMeaningfulValue(item));
+  }
+  return String(value || '').trim() !== '';
+};
+
+const hasMeaningfulQuestionnaire = (consultationIntake = {}) => {
+  return ['purpose', 'feel', 'voice', 'legacy', 'consult'].some((key) =>
+    hasMeaningfulValue(consultationIntake?.[key])
+  );
 };
 
 const mapIntakeToStoryEngineFieldMap = ({
@@ -414,6 +429,362 @@ const buildInitialStoryEngineRecord = ({
   return record;
 };
 
+const buildDiscoveryBridgeInput = ({
+  submissionData = {},
+  consultationIntake = {},
+  storyEngine = null,
+}) => {
+  const purpose = consultationIntake?.purpose || {};
+  const feel = consultationIntake?.feel || {};
+  const voice = consultationIntake?.voice || {};
+  const legacy = consultationIntake?.legacy || {};
+  const consult = consultationIntake?.consult || {};
+
+  return {
+    submission: {
+      id: submissionData?.id || '',
+      firstName: submissionData?.firstName || '',
+      lastName: submissionData?.lastName || '',
+      fullName:
+        `${submissionData?.firstName || ''} ${submissionData?.lastName || ''}`.trim(),
+      email: submissionData?.email || '',
+      phone: submissionData?.phone || '',
+      artistBio: submissionData?.artistBio || '',
+      inspiration: submissionData?.inspiration || '',
+      questionnaireCompleted: !!submissionData?.questionnaireCompleted,
+    },
+    intake: {
+      purpose: {
+        playerProfile: purpose.playerProfile || '',
+        primaryGoal: purpose.primaryGoal || '',
+        environments: Array.isArray(purpose.environments)
+          ? purpose.environments
+          : [],
+        guidancePreference: purpose.guidancePreference || '',
+      },
+      feel: {
+        feelPriorities: Array.isArray(feel.feelPriorities)
+          ? feel.feelPriorities
+          : [],
+        snareLoveMost: feel.snareLoveMost || '',
+        snareFrustrations: Array.isArray(feel.snareFrustrations)
+          ? feel.snareFrustrations
+          : [],
+        dynamicFeel: feel.dynamicFeel || '',
+      },
+      voice: {
+        genres: Array.isArray(voice.genres) ? voice.genres : [],
+        tonalGoals: Array.isArray(voice.tonalGoals) ? voice.tonalGoals : [],
+        responsePriorities: Array.isArray(voice.responsePriorities)
+          ? voice.responsePriorities
+          : [],
+        sizeDirection: voice.sizeDirection || '',
+      },
+      legacy: {
+        visualDirection: Array.isArray(legacy.visualDirection)
+          ? legacy.visualDirection
+          : [],
+        hardwareFinishPreference: legacy.hardwareFinishPreference || '',
+        storyImportance: legacy.storyImportance || '',
+        favoritePartOfPlaying: legacy.favoritePartOfPlaying || '',
+        influenceReferences: legacy.influenceReferences || '',
+        finalNotes: legacy.finalNotes || '',
+      },
+      consult: {
+        consultationContactMethod: consult.consultationContactMethod || '',
+        consultationDays: Array.isArray(consult.consultationDays)
+          ? consult.consultationDays
+          : [],
+        consultationTimes: Array.isArray(consult.consultationTimes)
+          ? consult.consultationTimes
+          : [],
+      },
+    },
+    consultationMapped: {},
+    consultationSummary: '',
+    consultationTranscript: '',
+    adminNotes: '',
+    discoveryWorkspace: {},
+    storyEngineSnapshot: storyEngine || null,
+  };
+};
+
+const buildDiscoveryBridgePromptPayload = (discoveryBridgeInput) => ({
+  system: `
+You are an expert discovery-to-build analysis assistant for custom artisan snare drums.
+
+Your job is to analyze intake, questionnaire answers, consultation notes, transcript content, and craftsman notes to identify:
+- what is already strong enough to trust
+- what is still too unclear to safely build around
+- what could block, weaken, or misdirect the build if left unresolved
+- what the craftsman should ask next
+- what assumptions should be avoided
+
+Be conservative.
+Do not invent preferences that are not supported.
+Do not pretend the build is ready if important decisions are still missing.
+
+You must return valid JSON only.
+No markdown.
+No prose outside JSON.
+  `.trim(),
+  user: `
+Analyze this custom snare discovery payload and return JSON in exactly this shape:
+
+{
+  "overallBuildReadiness": "low",
+  "globalBuildBlockers": ["..."],
+  "globalConsultPriorities": ["..."],
+  "truths": {
+    "purpose": {
+      "buildReadiness": "low",
+      "signalsWeHave": ["..."],
+      "criticalUnknowns": ["..."],
+      "assumptionsToAvoid": ["..."],
+      "followupQuestions": ["..."],
+      "watchouts": ["..."],
+      "recommendationNotes": ["..."]
+    },
+    "feel": {
+      "buildReadiness": "low",
+      "signalsWeHave": ["..."],
+      "criticalUnknowns": ["..."],
+      "assumptionsToAvoid": ["..."],
+      "followupQuestions": ["..."],
+      "watchouts": ["..."],
+      "recommendationNotes": ["..."]
+    },
+    "voice": {
+      "buildReadiness": "low",
+      "signalsWeHave": ["..."],
+      "criticalUnknowns": ["..."],
+      "assumptionsToAvoid": ["..."],
+      "followupQuestions": ["..."],
+      "watchouts": ["..."],
+      "recommendationNotes": ["..."]
+    },
+    "legacy": {
+      "buildReadiness": "low",
+      "signalsWeHave": ["..."],
+      "criticalUnknowns": ["..."],
+      "assumptionsToAvoid": ["..."],
+      "followupQuestions": ["..."],
+      "watchouts": ["..."],
+      "recommendationNotes": ["..."]
+    }
+  },
+  "proposedConsultFlow": ["..."],
+  "buildDirectionSnapshot": {
+    "safeToSayNow": ["..."],
+    "unsafeToAssumeNow": ["..."],
+    "likelyDecisionAreasNext": ["..."]
+  }
+}
+
+Allowed buildReadiness values:
+- "low"
+- "medium"
+- "high"
+
+Truth mapping:
+- purpose = why this drum exists, role, use case, context
+- feel = touch, rebound, comfort, dynamic response, frustrations
+- voice = tonal identity, projection, tuning lane, size implications
+- legacy = visual direction, emotional significance, story, aesthetic alignment
+
+Important:
+- criticalUnknowns should focus on what still must be clarified before real build planning
+- assumptionsToAvoid should protect the craftsman from false confidence
+- followupQuestions should be specific and useful, not generic filler
+- watchouts should point out risk, contradiction, or hidden decision gaps
+- recommendationNotes should help the craftsman understand how to think about the next step
+
+The output should help a craftsman bridge the gap between intake truth and actual build readiness.
+
+Here is the payload:
+
+${JSON.stringify(discoveryBridgeInput, null, 2)}
+  `.trim(),
+});
+
+const toArrayOfStrings = (value) => {
+  if (!Array.isArray(value)) return [];
+  return value.map((item) => String(item || '').trim()).filter(Boolean);
+};
+
+const buildBridgeOverviewText = (bridge = {}) => {
+  const blockers = toArrayOfStrings(bridge?.globalBuildBlockers);
+  const priorities = toArrayOfStrings(bridge?.globalConsultPriorities);
+  const safeToSayNow = toArrayOfStrings(
+    bridge?.buildDirectionSnapshot?.safeToSayNow
+  );
+  const unsafeToAssumeNow = toArrayOfStrings(
+    bridge?.buildDirectionSnapshot?.unsafeToAssumeNow
+  );
+
+  const parts = [];
+
+  if (safeToSayNow.length) {
+    parts.push(`What feels usable now: ${safeToSayNow.slice(0, 3).join('; ')}.`);
+  }
+
+  if (priorities.length) {
+    parts.push(
+      `Next consult priorities: ${priorities.slice(0, 3).join('; ')}.`
+    );
+  }
+
+  if (blockers.length) {
+    parts.push(`Current blockers: ${blockers.slice(0, 3).join('; ')}.`);
+  }
+
+  if (unsafeToAssumeNow.length) {
+    parts.push(
+      `Do not assume yet: ${unsafeToAssumeNow.slice(0, 3).join('; ')}.`
+    );
+  }
+
+  return parts.join(' ').trim();
+};
+
+const adaptDiscoveryBridgeToSummaryStructure = (bridge = {}) => {
+  const truths = bridge?.truths || {};
+  const truthOrder = ['purpose', 'feel', 'voice', 'legacy'];
+
+  const trustedSignals = [];
+  const stillOpen = [];
+  const confidenceRows = [];
+  const followUps = [];
+  const builderResearch = [];
+  const nextSteps = [];
+  const changedSignals = [];
+  const conflictedSignals = [];
+
+  truthOrder.forEach((truthKey) => {
+    const truth = truths?.[truthKey] || {};
+    const truthTitle =
+      truthKey.charAt(0).toUpperCase() + truthKey.slice(1);
+
+    const signalsWeHave = toArrayOfStrings(truth.signalsWeHave);
+    const criticalUnknowns = toArrayOfStrings(truth.criticalUnknowns);
+    const assumptionsToAvoid = toArrayOfStrings(truth.assumptionsToAvoid);
+    const followupQuestions = toArrayOfStrings(truth.followupQuestions);
+    const watchouts = toArrayOfStrings(truth.watchouts);
+    const recommendationNotes = toArrayOfStrings(truth.recommendationNotes);
+
+    const confidence =
+      truth.buildReadiness === 'high'
+        ? 'high'
+        : truth.buildReadiness === 'medium'
+          ? 'medium'
+          : 'low';
+
+    signalsWeHave.forEach((signal, index) => {
+      trustedSignals.push({
+        label: `${truthTitle} · Signal ${index + 1}`,
+        value: signal,
+        confidence,
+        rationale:
+          recommendationNotes[0] ||
+          watchouts[0] ||
+          `Bridge analysis found this signal usable enough to carry into the next stage.`,
+      });
+    });
+
+    criticalUnknowns.forEach((item, index) => {
+      stillOpen.push({
+        label: `${truthTitle} · Open ${index + 1}`,
+        note: item,
+      });
+    });
+
+    assumptionsToAvoid.forEach((item, index) => {
+      builderResearch.push({
+        label: `${truthTitle} · Assumption ${index + 1}`,
+        note: item,
+      });
+    });
+
+    followupQuestions.forEach((item, index) => {
+      followUps.push({
+        label: `${truthTitle} · Follow-up ${index + 1}`,
+        question: item,
+      });
+    });
+
+    confidenceRows.push({
+      label: truthTitle,
+      value: signalsWeHave.length
+        ? signalsWeHave.join(' • ')
+        : 'No strong confirmed signals yet.',
+      confidence,
+      rationale:
+        recommendationNotes[0] ||
+        watchouts[0] ||
+        (confidence === 'high'
+          ? 'This truth looks strong enough to build around.'
+          : confidence === 'medium'
+            ? 'This truth is directionally useful but still needs confirming.'
+            : 'This truth is still too soft to treat as stable build direction.'),
+    });
+  });
+
+  toArrayOfStrings(bridge?.globalConsultPriorities).forEach((item) => {
+    nextSteps.push(item);
+  });
+
+  toArrayOfStrings(bridge?.globalBuildBlockers).forEach((item, index) => {
+    conflictedSignals.push({
+      label: `Global blocker ${index + 1}`,
+      note: item,
+    });
+  });
+
+  toArrayOfStrings(
+    bridge?.buildDirectionSnapshot?.unsafeToAssumeNow
+  ).forEach((item, index) => {
+    changedSignals.push({
+      label: `Unsafe assumption ${index + 1}`,
+      note: item,
+    });
+  });
+
+  return {
+    overview: buildBridgeOverviewText(bridge),
+    trustedSignals,
+    changedSignals,
+    conflictedSignals,
+    stillOpen,
+    followUps,
+    builderResearch,
+    confidenceRows,
+    nextSteps,
+  };
+};
+
+const buildDiscoveryWorkspaceFromBridge = (bridge = {}) => {
+  const structured = adaptDiscoveryBridgeToSummaryStructure(bridge);
+
+  return {
+    intake: {
+      completed: false,
+      completedAt: null,
+    },
+    consult: {
+      completed: false,
+      completedAt: null,
+      rows: {},
+      truthRows: {},
+    },
+    summary: {
+      generated: true,
+      generatedAt: new Date().toISOString(),
+      editableText: structured.overview || '',
+      structured,
+    },
+  };
+};
+
 const ViewSoundlegendModal = ({
   submission,
   onClose,
@@ -432,6 +803,7 @@ const ViewSoundlegendModal = ({
     submission ? { ...submission, id: submission.id } : null
   );
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isCreatingProject, setIsCreatingProject] = useState(false);
 
   const {
     firstName,
@@ -575,12 +947,14 @@ const ViewSoundlegendModal = ({
   };
 
   const createProject = async () => {
-    if (!submissionId) return;
+    if (!submissionId || isCreatingProject) return;
 
     const confirmCreation = window.confirm(
       `Create Project for ${firstName || ''} ${lastName || ''}?`
     );
     if (!confirmCreation) return;
+
+    setIsCreatingProject(true);
 
     try {
       const protectedFields = buildSoundLegendProtectedFields();
@@ -619,20 +993,124 @@ const ViewSoundlegendModal = ({
       const projectRef = await addDoc(collection(db, 'projects'), projectData);
       const newProjectId = projectRef.id;
 
-      const storyEngine = buildInitialStoryEngineRecord({
-        submissionData: {
-          ...(fullSubmission || submission),
-          id: submissionId,
-        },
+      const submissionSnapshot = {
+        ...(fullSubmission || submission),
+        id: submissionId,
+      };
+
+      let storyEngine = buildInitialStoryEngineRecord({
+        submissionData: submissionSnapshot,
         consultationIntake: resolvedConsultationIntake,
         projectId: newProjectId,
       });
 
-      await updateDoc(doc(db, 'projects', newProjectId), {
+      let discoveryBridge = null;
+      let discoveryWorkspace =
+        storyEngine?.sources?.discoveryWorkspace || {
+          intake: {
+            completed: false,
+            completedAt: null,
+          },
+          consult: {
+            completed: false,
+            completedAt: null,
+            rows: {},
+            truthRows: {},
+          },
+          summary: {
+            generated: false,
+            generatedAt: null,
+            editableText: '',
+            structured: null,
+          },
+        };
+
+      const shouldGenerateBridge = hasMeaningfulQuestionnaire(
+        resolvedConsultationIntake
+      );
+
+      if (shouldGenerateBridge) {
+        try {
+          const discoveryBridgeInput = buildDiscoveryBridgeInput({
+            submissionData: submissionSnapshot,
+            consultationIntake: resolvedConsultationIntake,
+            storyEngine,
+          });
+
+          const promptPayload =
+            buildDiscoveryBridgePromptPayload(discoveryBridgeInput);
+
+          const functions = getFunctions(app, 'us-central1');
+          const generateDiscoveryBridge = httpsCallable(
+            functions,
+            'generateDiscoveryBridge'
+          );
+
+          const bridgeResponse = await generateDiscoveryBridge({
+            projectId: newProjectId,
+            discoveryBridgeInput,
+            promptPayload,
+          });
+
+          discoveryBridge =
+            bridgeResponse?.data?.result ||
+            bridgeResponse?.data?.discoveryBridge ||
+            bridgeResponse?.data ||
+            null;
+
+          if (discoveryBridge && typeof discoveryBridge === 'object') {
+            discoveryBridge = {
+              ...discoveryBridge,
+              generatedAt:
+                discoveryBridge.generatedAt || new Date().toISOString(),
+              rawResponseText:
+                discoveryBridge.rawResponseText ||
+                buildBridgeOverviewText(discoveryBridge),
+            };
+
+            discoveryWorkspace =
+              buildDiscoveryWorkspaceFromBridge(discoveryBridge);
+          }
+        } catch (bridgeErr) {
+          console.error('❌ Failed to generate discovery bridge:', bridgeErr);
+        }
+      }
+
+      const nextStoryEngine = {
+        ...storyEngine,
+        sources: {
+          ...(storyEngine?.sources || {}),
+          consultationTranscript:
+            storyEngine?.sources?.consultationTranscript || '',
+          consultationTranscriptTurns:
+            storyEngine?.sources?.consultationTranscriptTurns || [],
+          consultationSummary:
+            storyEngine?.sources?.consultationSummary || '',
+          adminNotes: storyEngine?.sources?.adminNotes || '',
+          questionnaireRaw:
+            storyEngine?.sources?.questionnaireRaw ||
+            JSON.stringify(resolvedConsultationIntake, null, 2),
+          questionnaireMapped:
+            storyEngine?.sources?.questionnaireMapped || {},
+          consultationMapped:
+            storyEngine?.sources?.consultationMapped || {},
+          discoveryWorkspace,
+        },
+      };
+
+      storyEngine = nextStoryEngine;
+
+      const projectUpdatePayload = {
         id: newProjectId,
         storyEngine,
         updatedAt: Timestamp.now(),
-      });
+      };
+
+      if (discoveryBridge) {
+        projectUpdatePayload.discoveryBridge = discoveryBridge;
+      }
+
+      await updateDoc(doc(db, 'projects', newProjectId), projectUpdatePayload);
 
       const submissionRef = doc(db, 'soundlegend_submissions', submissionId);
       const systemEntry = {
@@ -664,6 +1142,8 @@ const ViewSoundlegendModal = ({
     } catch (err) {
       console.error('❌ Failed to create project:', err);
       alert('Failed to create project. Please try again.');
+    } finally {
+      setIsCreatingProject(false);
     }
   };
 
@@ -841,8 +1321,12 @@ const ViewSoundlegendModal = ({
                   </div>
                 </div>
               ) : (
-                <button className="btn btn--sm" onClick={createProject}>
-                  Create Project
+                <button
+                  className="btn btn--sm"
+                  onClick={createProject}
+                  disabled={isCreatingProject}
+                >
+                  {isCreatingProject ? 'Creating…' : 'Create Project'}
                 </button>
               )}
 

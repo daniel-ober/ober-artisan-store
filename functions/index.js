@@ -35,6 +35,64 @@ const getOpenAIClient = () =>
 admin.initializeApp();
 const db = admin.firestore();
 
+function normalizeDiscoveryBridgePayload(raw = {}) {
+  const emptyTruth = {
+    buildReadiness: 'low',
+    signalsWeHave: [],
+    criticalUnknowns: [],
+    assumptionsToAvoid: [],
+    followupQuestions: [],
+    watchouts: [],
+    recommendationNotes: [],
+  };
+
+  return {
+    overallBuildReadiness: raw?.overallBuildReadiness || 'low',
+    globalBuildBlockers: Array.isArray(raw?.globalBuildBlockers)
+      ? raw.globalBuildBlockers
+      : [],
+    globalConsultPriorities: Array.isArray(raw?.globalConsultPriorities)
+      ? raw.globalConsultPriorities
+      : [],
+    truths: {
+      purpose: {
+        ...emptyTruth,
+        ...(raw?.truths?.purpose || {}),
+      },
+      feel: {
+        ...emptyTruth,
+        ...(raw?.truths?.feel || {}),
+      },
+      voice: {
+        ...emptyTruth,
+        ...(raw?.truths?.voice || {}),
+      },
+      legacy: {
+        ...emptyTruth,
+        ...(raw?.truths?.legacy || {}),
+      },
+    },
+    proposedConsultFlow: Array.isArray(raw?.proposedConsultFlow)
+      ? raw.proposedConsultFlow
+      : [],
+    buildDirectionSnapshot: {
+      safeToSayNow: Array.isArray(raw?.buildDirectionSnapshot?.safeToSayNow)
+        ? raw.buildDirectionSnapshot.safeToSayNow
+        : [],
+      unsafeToAssumeNow: Array.isArray(
+        raw?.buildDirectionSnapshot?.unsafeToAssumeNow
+      )
+        ? raw.buildDirectionSnapshot.unsafeToAssumeNow
+        : [],
+      likelyDecisionAreasNext: Array.isArray(
+        raw?.buildDirectionSnapshot?.likelyDecisionAreasNext
+      )
+        ? raw.buildDirectionSnapshot.likelyDecisionAreasNext
+        : [],
+    },
+  };
+}
+
 // === Gmail API mailer (Workspace via service account DWD) ===
 const { google } = require('googleapis');
 const GMAIL_CLIENT_EMAIL = defineSecret('GMAIL_CLIENT_EMAIL');
@@ -772,6 +830,182 @@ exports.generateHybridStoryChapter = onCall(
       throw new HttpsError(
         'internal',
         err?.message || 'Failed generating hybrid chapter'
+      );
+    }
+  }
+);
+
+exports.generateDiscoveryBridge = onCall(
+  {
+    region: 'us-central1',
+    cors: true,
+    timeoutSeconds: 120,
+    memory: '1GiB',
+    secrets: [OPENAI_API_KEY],
+  },
+  async (request) => {
+    try {
+      const ctx = request.auth;
+      const isAdmin =
+        ctx?.token?.admin === true || ctx?.token?.isAdmin === true;
+
+      if (!isAdmin) {
+        throw new HttpsError(
+          'permission-denied',
+          'Only admins can generate discovery bridge analysis.'
+        );
+      }
+
+      const { projectId, discoveryBridgeInput, promptPayload } =
+        request.data || {};
+
+      if (!projectId || typeof projectId !== 'string') {
+        throw new HttpsError(
+          'invalid-argument',
+          'Missing valid projectId.'
+        );
+      }
+
+      if (
+        !discoveryBridgeInput ||
+        typeof discoveryBridgeInput !== 'object'
+      ) {
+        throw new HttpsError(
+          'invalid-argument',
+          'Missing valid discoveryBridgeInput.'
+        );
+      }
+
+      if (
+        !promptPayload ||
+        typeof promptPayload !== 'object' ||
+        !String(promptPayload.system || '').trim() ||
+        !String(promptPayload.user || '').trim()
+      ) {
+        throw new HttpsError(
+          'invalid-argument',
+          'Missing valid promptPayload.'
+        );
+      }
+
+      const projectRef = db.collection('projects').doc(projectId);
+      const projectSnap = await projectRef.get();
+
+      if (!projectSnap.exists) {
+        throw new HttpsError('not-found', 'Project not found.');
+      }
+
+      if (!OPENAI_API_KEY.value()) {
+        throw new HttpsError('internal', 'OPENAI_API_KEY is not configured');
+      }
+
+      const client = getOpenAIClient();
+
+      let parsed = null;
+      let rawText = '';
+
+      try {
+        const completion = await client.chat.completions.create({
+          model: 'gpt-4.1-mini',
+          messages: [
+            {
+              role: 'system',
+              content:
+                'Return only valid JSON. No prose. No markdown. No code fences.',
+            },
+            {
+              role: 'user',
+              content: `${String(promptPayload.system || '').trim()}\n\n${String(
+                promptPayload.user || ''
+              ).trim()}`,
+            },
+          ],
+          response_format: { type: 'json_object' },
+          max_completion_tokens: 4000,
+        });
+
+        const message = completion?.choices?.[0]?.message || {};
+        const rawContent = message?.content;
+
+        if (typeof rawContent === 'string') {
+          rawText = rawContent.trim();
+        } else if (Array.isArray(rawContent)) {
+          rawText = rawContent
+            .map((part) => {
+              if (typeof part === 'string') return part;
+              if (typeof part?.text === 'string') return part.text;
+              if (typeof part?.content === 'string') return part.content;
+              return '';
+            })
+            .join('')
+            .trim();
+        }
+
+        if (!rawText) {
+          throw new Error('OpenAI returned empty output');
+        }
+
+        parsed = JSON.parse(rawText);
+      } catch (err) {
+        logger.error('generateDiscoveryBridge OpenAI call failed', {
+          message: err?.message || 'Unknown error',
+          stack: err?.stack || '',
+          rawTextPreview: String(rawText || '').slice(0, 3000),
+        });
+
+        throw new HttpsError(
+          'internal',
+          'Failed to generate discovery bridge.'
+        );
+      }
+
+      const normalized = normalizeDiscoveryBridgePayload(parsed);
+
+      const finalBridge = {
+        version: 1,
+        schemaVersion: 1,
+        promptVersion: 1,
+        generatedAt: admin.firestore.FieldValue.serverTimestamp(),
+        generatedByUid: ctx.uid,
+        overallBuildReadiness: normalized.overallBuildReadiness,
+        globalBuildBlockers: normalized.globalBuildBlockers,
+        globalConsultPriorities: normalized.globalConsultPriorities,
+        truths: normalized.truths,
+        proposedConsultFlow: normalized.proposedConsultFlow,
+        buildDirectionSnapshot: normalized.buildDirectionSnapshot,
+        sourceInput: discoveryBridgeInput,
+        rawResponseText: rawText,
+      };
+
+      await projectRef.set(
+        {
+          storyEngine: {
+            discoveryBridge: finalBridge,
+          },
+          updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+        },
+        { merge: true }
+      );
+
+      return {
+        ok: true,
+        projectId,
+        discoveryBridge: {
+          ...finalBridge,
+          generatedAt: new Date().toISOString(),
+        },
+      };
+    } catch (err) {
+      logger.error('generateDiscoveryBridge failed', {
+        message: err?.message || 'Unknown error',
+        stack: err?.stack || '',
+      });
+
+      if (err instanceof HttpsError) throw err;
+
+      throw new HttpsError(
+        'internal',
+        err?.message || 'Failed to generate discovery bridge'
       );
     }
   }

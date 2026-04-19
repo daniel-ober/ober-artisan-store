@@ -1,536 +1,691 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { useInView } from 'react-intersection-observer';
-import { useNavigate } from 'react-router-dom';
+import React, { useRef, useEffect, useCallback, useState } from 'react';
+
 import './OurCraft.css';
-import ArtisanDrums from './ArtisanDrums';
+
 import {
+
   Sparkles,
+
   HandHeart,
+
   Flame,
+
   Music,
+
   TreeDeciduous,
+
   SearchCheck,
+
+  Ear,
+
+  ScanSearch,
+
+  SlidersHorizontal,
+
+  Hammer,
+
+  ChevronLeft,
+
+  ChevronRight,
+
 } from 'lucide-react';
 
 function usePrefersReducedMotion() {
-  const [prefers, setPrefers] = useState(false);
+
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
   useEffect(() => {
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const onChange = () => setPrefers(mq.matches);
-    onChange();
-    mq.addEventListener?.('change', onChange);
-    return () => mq.removeEventListener?.('change', onChange);
+
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    const handleChange = () => {
+
+      setPrefersReducedMotion(mediaQuery.matches);
+
+    };
+
+    handleChange();
+
+    mediaQuery.addEventListener?.('change', handleChange);
+
+    return () => {
+
+      mediaQuery.removeEventListener?.('change', handleChange);
+
+    };
+
   }, []);
-  return prefers;
+
+  return prefersReducedMotion;
+
 }
 
-const values = [
+const PUBLIC = process.env.PUBLIC_URL || '';
+
+const storySlides = [
+
   {
+
+    key: 'craft',
+
+    kicker: 'Our Craft',
+
+    title: (
+
+      <>
+
+        Built by hand.
+
+        <br />
+
+        Guided by ear.
+
+        <br />
+
+        Refined by story.
+
+      </>
+
+    ),
+
+    body: [
+
+      'Ober Artisan Drums is not just about making instruments. It is about listening closely enough to build something that feels inevitable — a drum with soul, identity, and a reason to exist.',
+
+      'Based in Nashville, Dan Ober designs, builds, tunes, photographs, documents, and continuously refines the full experience in-house. From shell shaping to software systems, every part of the process is treated as craft.',
+
+    ],
+
+    mediaUrl: `${PUBLIC}/our-craft/1.png`,
+
+    type: 'craft',
+
+  },
+
+  {
+
+    key: 'philosophy',
+
+    kicker: 'Our Philosophy',
+
+    title: <>Built with intention.</>,
+
+    body: [
+
+      'A drum doesn’t need to be told what to be. It needs to be heard clearly enough to be built truthfully.',
+
+      'At Ober Artisan Drums, listening comes first — to the player, the materials, and the instrument’s natural response. The goal is not to impose identity, but to reveal it with greater clarity, care, and intent.',
+
+    ],
+
+    mediaUrl: `${PUBLIC}/our-craft/2.png`,
+
+    type: 'philosophy',
+
+  },
+
+  {
+
+    key: 'discovery',
+
+    kicker: 'Ober LegacyPrint™ Discovery System',
+
+    title: (
+
+      <>
+
+        Where listening
+
+        <br />
+
+        becomes direction.
+
+      </>
+
+    ),
+
+    body: [
+
+      'Our discovery process is designed to slow the right moments down, so the direction behind a build can become clearer, more personal, and more intentional.',
+
+      'LegacyPrint™ helps translate broad tonal goals into more grounded direction — giving voicing conversations more structure without replacing the ear, the craft, or the human judgment behind the build.',
+
+    ],
+
+    mediaUrl: `${PUBLIC}/our-craft/3.png`,
+
+    type: 'discovery',
+
+  },
+
+];
+
+const principles = [
+
+  {
+
     label: 'Creative Spark',
+
     description:
-      'Every drum starts with a spark — inspiration that shapes everything.',
+
+      'Every drum begins with an idea worth honoring — not a template to copy.',
+
     icon: Sparkles,
+
   },
+
   {
+
     label: 'Maker’s Touch',
+
     description:
-      'Crafted by real hands, not robots — every drum bears a maker’s mark.',
+
+      'Every instrument is shaped by real hands, real listening, and real judgment.',
+
     icon: HandHeart,
+
   },
+
   {
+
     label: 'Torch-Tuned Resonance',
+
     description:
-      'Proprietary process — controlled flame reveals the wood’s truest voice.',
+
+      'Our proprietary torch-tuning approach helps reveal the shell’s natural voice with intention.',
+
     icon: Flame,
+
   },
+
   {
+
     label: 'Built for Expression',
+
     description:
-      'Inspiring playability, unmatched tone — every drum is made to move you.',
+
+      'A great drum should not just sound good. It should invite more truth out of the player.',
+
     icon: Music,
+
   },
+
   {
+
     label: 'Timeless Materials',
+
     description:
-      'Premium woods and honest hardware, chosen for sound, not shortcuts.',
+
+      'We choose woods and components for tone, character, and longevity — not shortcuts.',
+
     icon: TreeDeciduous,
+
   },
+
   {
-    label: 'Obsessive Detail',
+
+    label: 'Care in the details',
+
     description:
-      'From edge to finish, every detail is pored over for perfection.',
+
+      'From bearing edges to finish behavior, we approach each detail with intention and respect for the instrument.',
+
     icon: SearchCheck,
+
   },
+
+];
+
+const discoverySteps = [
+
+  {
+
+    title: 'Listen',
+
+    text: 'A deeper read of the player — not just what looks good on paper, but what feels true in purpose, touch, sound, and story.',
+
+    icon: Ear,
+
+  },
+
+  {
+
+    title: 'Interpret',
+
+    text: 'Discovery helps separate what is already clear from what still needs pressure-testing, so the build can move with clarity and purpose.',
+
+    icon: ScanSearch,
+
+  },
+
+  {
+
+    title: 'Refine',
+
+    text: 'Direction becomes more specific, more honest, and more personal through consultation, mapping, and review.',
+
+    icon: SlidersHorizontal,
+
+  },
+
+  {
+
+    title: 'Build with intent',
+
+    text: 'Once direction is clear, shell, voicing, materials, finish, hardware, and feel can move together in a more cohesive way.',
+
+    icon: Hammer,
+
+  },
+
+];
+
+const discoveryUses = [
+
+  {
+
+    title: 'For Heritage',
+
+    text: 'LegacyPrint™ helps preserve the line’s rooted warmth and tonal identity with more consistency and intention.',
+
+  },
+
+  {
+
+    title: 'For Feuzøn',
+
+    text: 'LegacyPrint™ helps compare broader sound areas — projection, articulation, complexity, and tonal spread.',
+
+  },
+
+  {
+
+    title: 'For SoundLegend',
+
+    text: 'LegacyPrint™ is used most fully here, helping shape the deepest level of build planning, tonal direction, and personal voicing.',
+
+  },
+
 ];
 
 const OurCraft = () => {
-  const navigate = useNavigate();
+
   const prefersReducedMotion = usePrefersReducedMotion();
 
-  // anchors
-  const philosophyRef = useRef(null);
-  const founderRef = useRef(null);
-  const heritageRef = useRef(null);
-  const feuzonRef = useRef(null);
-  const soundlegendRef = useRef(null);
-  const finalSectionRef = useRef(null);
+  const railRef = useRef(null);
 
-  const [hoveredValue, setHoveredValue] = useState(null);
-  const [showDrumLayers, setShowDrumLayers] = useState(false);
-  const [shouldScrollToFinalSection, setShouldScrollToFinalSection] =
-    useState(false);
+  const slideRefs = useRef([]);
 
-  // reveal drum layers as SoundLegend approaches (feels responsive)
-  const [soundlegendTriggerRef, inView] = useInView({
-    threshold: 0,
-    rootMargin: '240px 0px 0px 0px',
-  });
+  const [activeSlide, setActiveSlide] = useState(0);
 
   useEffect(() => {
+
     document.body.classList.add('our-craft-page');
+
     return () => document.body.classList.remove('our-craft-page');
+
   }, []);
 
-  useEffect(() => {
-    if (inView) setShowDrumLayers(true);
-  }, [inView]);
+  const scrollToSlide = useCallback(
+
+    (index) => {
+
+      const target = slideRefs.current[index];
+
+      if (!target) return;
+
+      target.scrollIntoView({
+
+        behavior: prefersReducedMotion ? 'auto' : 'smooth',
+
+        inline: 'start',
+
+        block: 'nearest',
+
+      });
+
+      setActiveSlide(index);
+
+    },
+
+    [prefersReducedMotion]
+
+  );
+
+  const goPrev = useCallback(() => {
+
+    scrollToSlide(Math.max(activeSlide - 1, 0));
+
+  }, [activeSlide, scrollToSlide]);
+
+  const goNext = useCallback(() => {
+
+    scrollToSlide(Math.min(activeSlide + 1, storySlides.length - 1));
+
+  }, [activeSlide, scrollToSlide]);
 
   useEffect(() => {
-    if (
-      showDrumLayers &&
-      shouldScrollToFinalSection &&
-      finalSectionRef.current
-    ) {
-      const t = setTimeout(() => {
-        finalSectionRef.current.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start',
-        });
-        setShouldScrollToFinalSection(false);
-      }, 100);
-      return () => clearTimeout(t);
-    }
-  }, [showDrumLayers, shouldScrollToFinalSection]);
 
-  const scrollTo = useCallback((ref, alignStart = false) => {
-    if (!ref?.current) return;
-    ref.current.scrollIntoView({
-      behavior: 'smooth',
-      block: alignStart ? 'start' : 'nearest',
-    });
+    const rail = railRef.current;
+
+    if (!rail) return undefined;
+
+    const handleScroll = () => {
+
+      const width = rail.clientWidth || 1;
+
+      const index = Math.round(rail.scrollLeft / width);
+
+      setActiveSlide(Math.max(0, Math.min(index, storySlides.length - 1)));
+
+    };
+
+    rail.addEventListener('scroll', handleScroll, { passive: true });
+
+    handleScroll();
+
+    return () => rail.removeEventListener('scroll', handleScroll);
+
   }, []);
 
-  const handleLearnMore = useCallback(() => {
-    if (!showDrumLayers) {
-      setShowDrumLayers(true);
-      setTimeout(
-        () => finalSectionRef.current?.scrollIntoView({ behavior: 'smooth' }),
-        150
+  const renderSupplement = useCallback((slide) => {
+
+    if (slide.type === 'philosophy') {
+
+      return (
+
+        <div
+
+          className="oc-story-grid oc-story-grid-philosophy"
+
+          role="list"
+
+          aria-label="Philosophy highlights"
+
+        >
+
+          {principles.map((item) => {
+
+            const Icon = item.icon;
+
+            return (
+
+              <article
+
+                key={item.label}
+
+                className="oc-story-mini-card"
+
+                role="listitem"
+
+              >
+
+                <div className="oc-story-mini-top">
+
+                  <span className="oc-story-mini-icon">
+
+                    <Icon size={15} aria-hidden />
+
+                  </span>
+
+                  <h3>{item.label}</h3>
+
+                </div>
+
+                <p>{item.description}</p>
+
+              </article>
+
+            );
+
+          })}
+
+        </div>
+
       );
-    } else {
-      finalSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+
     }
-  }, [showDrumLayers]);
+
+    if (slide.type === 'discovery') {
+
+      return (
+
+        <div className="oc-discovery-stack">
+
+          <div
+
+            className="oc-story-grid oc-story-grid-discovery"
+
+            role="list"
+
+            aria-label="Discovery steps"
+
+          >
+
+            {discoverySteps.map((item) => {
+
+              const Icon = item.icon;
+
+              return (
+
+                <article
+
+                  key={item.title}
+
+                  className="oc-story-mini-card"
+
+                  role="listitem"
+
+                >
+
+                  <div className="oc-story-mini-top">
+
+                    <span className="oc-story-mini-icon">
+
+                      <Icon size={15} aria-hidden />
+
+                    </span>
+
+                    <h3>{item.title}</h3>
+
+                  </div>
+
+                  <p>{item.text}</p>
+
+                </article>
+
+              );
+
+            })}
+
+          </div>
+
+          <div
+
+            className="oc-discovery-usage-grid"
+
+            role="list"
+
+            aria-label="LegacyPrint uses"
+
+          >
+
+            {discoveryUses.map((item) => (
+
+              <article
+
+                key={item.title}
+
+                className="oc-discovery-usage-card"
+
+                role="listitem"
+
+              >
+
+                <span className="oc-discovery-usage-kicker">{item.title}</span>
+
+                <p>{item.text}</p>
+
+              </article>
+
+            ))}
+
+          </div>
+
+        </div>
+
+      );
+
+    }
+
+    return null;
+
+  }, []);
 
   return (
-    <div className="ourcraft-scroll-wrapper">
-      <main className="ourcraft-container">
-        {/* HERO */}
-        <section
-          className="ourcraft-section craft-hero-section"
-          aria-label="Our Story"
-        >
-          <div className="hero-grid section-content reveal">
-            <div className="hero-text">
-              <div className="story-inner">
-                <h1>Our Story</h1>
-                <p>
-                  Crafted in Nashville. Rooted in sound and built by hand —
-                  every part of it.
-                </p>
-                <p>
-                  Ober Artisan Drums is the work of Dan Ober, a Boston native
-                  who studied composition and film scoring at Berklee College of
-                  Music, and sharpened his drumming under world-class players
-                  like Mike Mangini and Kim Plainfield.
-                </p>
-                <p>
-                  Now based in Nashville, Dan doesn’t just build drums — he
-                  builds the entire experience. From shaping shells and
-                  designing the site, to 3D modeling tools and producing all
-                  photography, video, and sound in-house — it’s all part of one
-                  mission: to craft timeless instruments with soul, originality,
-                  and character that resonate with every drummer’s journey.
-                </p>
-                <p>
-                  This is small-batch drum making — fueled by obsession, built
-                  by hand.
-                </p>
 
-                <div className="mobile-scroll-indicator">
-                  <button
-                    type="button"
-                    className="scroll-indicator btn-ghost"
-                    onClick={() => scrollTo(philosophyRef)}
-                    aria-label="Scroll to Our Philosophy"
-                  >
-                    ↓ Our Philosophy
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+    <div className="ourcraft-page-shell">
 
-          <div className="desktop-scroll-indicator scroll-indicator-wrapper">
-            <button
-              type="button"
-              className="scroll-indicator btn-ghost"
-              onClick={() => scrollTo(philosophyRef)}
-              aria-label="Scroll to Our Philosophy"
-            >
-              ↓ Our Philosophy
-            </button>
-          </div>
-        </section>
+      <main className="ourcraft-root">
 
-        {/* PHILOSOPHY */}
-        <section
-          ref={philosophyRef}
-          className="ourcraft-section philosophy-section"
-          aria-label="Our Philosophy"
-        >
-          <div className="philosophy-grid section-content reveal">
-            <div className="philosophy-text">
-              <div className="philosophy-inner">
-                <h2>Our Philosophy</h2>
-                <p className="quote">
-                  “A drum doesn’t need to be told what to be — it needs to be
-                  listened to.”
-                </p>
-                <p>
-                  Like a luthier tapping a violin, or a mastering engineer
-                  knowing when a mix is done — we listen until the drum says,{' '}
-                  <em>“I’m ready.”</em>
-                </p>
-                <div className="values-hint" aria-hidden="true">
-                  Hover or tap an icon to learn more
-                </div>
-                <div className="craft-values" role="list">
-                  {values.map((val, i) => {
-                    const Icon = val.icon;
-                    const open = hoveredValue === i;
-                    return (
-                      <button
-                        key={val.label}
-                        type="button"
-                        className="value-item"
-                        role="listitem"
-                        onMouseEnter={() => setHoveredValue(i)}
-                        onMouseLeave={() => setHoveredValue(null)}
-                        onFocus={() => setHoveredValue(i)}
-                        onBlur={() => setHoveredValue(null)}
-                        aria-describedby={open ? `val-tip-${i}` : undefined}
-                      >
-                        <div className="icon-wrapper">
-                          <Icon size={28} aria-hidden />
-                          <span className="sr-only">{val.label}</span>
-                          <div
-                            id={`val-tip-${i}`}
-                            className={`tooltip ${open ? 'tooltip--visible' : ''}`}
-                            role="tooltip"
-                          >
-                            {val.description}
-                          </div>
-                        </div>
-                        <p>{val.label}</p>
-                      </button>
-                    );
-                  })}
-                </div>
+        <section className="oc-story-shell" aria-label="Our Craft story panels">
 
-                <div className="mobile-scroll-indicator">
-                  <button
-                    type="button"
-                    className="scroll-indicator btn-ghost"
-                    onClick={() => scrollTo(founderRef, true)}
-                    aria-label="Scroll to Our Founder's Batch"
-                  >
-                    ↓ Our Founder&apos;s Batch
-                  </button>
-                </div>
-              </div>
-            </div>
+          <div className="oc-story-rail" ref={railRef}>
 
-            <div className="scroll-spacer" />
-            <div className="desktop-scroll-indicator scroll-indicator-wrapper">
-              <button
-                type="button"
-                className="scroll-indicator btn-ghost"
-                onClick={() => scrollTo(founderRef, true)}
-                aria-label="Scroll to Our Founder's Batch"
+            {storySlides.map((slide, index) => (
+
+              <section
+
+                key={slide.key}
+
+                ref={(el) => {
+
+                  slideRefs.current[index] = el;
+
+                }}
+
+                className="oc-story-slide"
+
+                aria-label={slide.kicker}
+
               >
-                ↓ Our Founder&apos;s Batch
+
+                <div
+
+                  className="oc-story-media"
+
+                  aria-hidden="true"
+
+                  style={{ backgroundImage: `url("${slide.mediaUrl}")` }}
+
+                />
+
+                <div className="oc-story-overlay" />
+
+                <div className="oc-wrap oc-story-wrap">
+
+                  <div className="oc-story-inner">
+
+                    <div className="oc-story-copy">
+
+                      <span className="oc-kicker">{slide.kicker}</span>
+
+                      <h1 className="oc-story-title">{slide.title}</h1>
+
+                      {slide.body.map((paragraph) => (
+
+                        <p key={paragraph}>{paragraph}</p>
+
+                      ))}
+
+                    </div>
+
+                    {renderSupplement(slide)}
+
+                  </div>
+
+                </div>
+
+              </section>
+
+            ))}
+
+          </div>
+
+          <div className="oc-story-ui">
+
+            <div className="oc-story-arrow-row">
+
+              <button
+
+                type="button"
+
+                className="oc-story-arrow"
+
+                onClick={goPrev}
+
+                disabled={activeSlide === 0}
+
+                aria-label="Previous panel"
+
+              >
+
+                <ChevronLeft size={18} />
+
               </button>
-            </div>
-          </div>
-        </section>
 
-        {/* FOUNDER'S BATCH */}
-        <section
-          ref={founderRef}
-          className="ourcraft-section artisan-intro-section"
-          aria-label="Our Founder's Batch"
-        >
-          <div className="founder-grid section-content reveal">
-            <div className="founder-text">
-              <div className="artisan-intro-inner">
-                <h2>Our Founder&apos;s Batch</h2>
+              <div className="oc-story-dots" aria-label="Story slide navigation">
 
-                <figure className="founder-figure">
-                  <img
-                    className="founder-wide-img"
-                    src="/our-craft/wide.png"
-                    alt="Three-drum composition from the Founder's Batch series"
-                    loading="lazy"
-                    decoding="async"
+                {storySlides.map((slide, index) => (
+
+                  <button
+
+                    key={slide.key}
+
+                    type="button"
+
+                    className={`oc-story-dot ${activeSlide === index ? 'is-active' : ''}`}
+
+                    onClick={() => scrollToSlide(index)}
+
+                    aria-label={`Go to ${slide.kicker}`}
+
                   />
-                </figure>
 
-                <div className="desktop-scroll-indicator scroll-indicator-wrapper">
-                  <button
-                    type="button"
-                    className="scroll-indicator btn-ghost"
-                    onClick={() => scrollTo(heritageRef)}
-                    aria-label="Scroll to Heritage Series"
-                  >
-                    ↓ Heritage Series
-                  </button>
-                </div>
+                ))}
 
-                <div className="mobile-scroll-indicator">
-                  <button
-                    type="button"
-                    className="scroll-indicator btn-ghost"
-                    onClick={() => scrollTo(heritageRef)}
-                    aria-label="Scroll to Heritage Series"
-                  >
-                    ↓ Heritage Series
-                  </button>
-                </div>
               </div>
+
+              <button
+
+                type="button"
+
+                className="oc-story-arrow"
+
+                onClick={goNext}
+
+                disabled={activeSlide === storySlides.length - 1}
+
+                aria-label="Next panel"
+
+              >
+
+                <ChevronRight size={18} />
+
+              </button>
+
             </div>
+
           </div>
+
         </section>
 
-        {/* HERITAGE */}
-        <section
-          ref={heritageRef}
-          className="ourcraft-section heritage-reveal-section"
-          aria-label="Heritage Series"
-        >
-          <div className="heritage-grid section-content reveal">
-            <div className="drum-image-col">
-              <img
-                src="/artisan-shop/heritage-left.png"
-                alt="Heritage drum angled left"
-                className="heritage-drum-img"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-
-            <div className="drum-text-col">
-              <img
-                src="/resized-logos/heritage-white.png"
-                alt="Heritage Series logo"
-                className="heritage-logo"
-                loading="lazy"
-                decoding="async"
-              />
-              <div className="heritage-text">
-                <p className="heritage-quote">
-                  “The drum that started it all — classic craftsmanship,
-                  timeless sound.”
-                </p>
-
-                <ul className="heritage-description-list">
-                  <li>Northern Red Oak shell</li>
-                  <li>Stave-built for pure resonance</li>
-                  <li>45°/Roundover bearing edges</li>
-                  <li>Hand-scorched for visual depth + warmth</li>
-                  <li>Builds starting at $850</li>
-                </ul>
-
-                <div className="mobile-scroll-indicator">
-                  <button
-                    type="button"
-                    className="scroll-indicator btn-ghost"
-                    onClick={() => scrollTo(feuzonRef)}
-                    aria-label="Scroll to FEUZØN Series"
-                  >
-                    ↓ FEUZØN Series
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="desktop-scroll-indicator scroll-indicator-wrapper">
-            <button
-              type="button"
-              className="scroll-indicator btn-ghost"
-              onClick={() => scrollTo(feuzonRef)}
-              aria-label="Scroll to FEUZØN Series"
-            >
-              ↓ FEUZØN Series
-            </button>
-          </div>
-        </section>
-
-        {/* FEUZØN */}
-        <section
-          ref={feuzonRef}
-          className="ourcraft-section feuzon-reveal-section"
-          aria-label="FEUZØN Series"
-        >
-          <div className="feuzon-grid section-content reveal">
-            <div className="drum-image-col feuzon-image-wrapper">
-              <img
-                src="/artisan-shop/feuzon-right.png"
-                alt="Feuzon drum angled right"
-                className="feuzon-drum-img"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-
-            <div className="drum-text-col feuzon-text-col">
-              <img
-                src="/resized-logos/feuzon-white.png"
-                alt="Feuzon logo"
-                className="feuzon-logo"
-                loading="lazy"
-                decoding="async"
-              />
-              <div className="feuzon-text">
-                <p className="feuzon-quote">
-                  “Blending tradition and innovation into one harmonious voice.”
-                </p>
-                <ul className="feuzon-description-list">
-                  <li>Hybrid shell: stave + steam-bent</li>
-                  <li>150+ unique build variations to fit your voice</li>
-                  <li>45°/Roundover bearing edges</li>
-                  <li>Torch-tuned for clarity + balance</li>
-                  <li>Builds starting at $1050</li>
-                </ul>
-
-                <div className="mobile-scroll-indicator">
-                  <button
-                    type="button"
-                    className="scroll-indicator btn-ghost"
-                    onClick={() => scrollTo(soundlegendRef)}
-                    aria-label="Scroll to SoundLegend Series"
-                  >
-                    ↓ SoundLegend Series
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="desktop-scroll-indicator scroll-indicator-wrapper">
-            <button
-              type="button"
-              className="scroll-indicator btn-ghost"
-              onClick={() => scrollTo(soundlegendRef)}
-              aria-label="Scroll to SoundLegend Series"
-            >
-              ↓ SoundLegend Series
-            </button>
-          </div>
-        </section>
-
-        {/* SOUNDLEGEND */}
-        <section
-          ref={soundlegendRef}
-          className="ourcraft-section soundlegend-reveal-section"
-          aria-label="SoundLegend Series"
-        >
-          <div className="soundlegend-grid section-content reveal">
-            <div className="drum-image-col">
-              <img
-                src="/artisan-shop/soundlegend-left.png"
-                alt="SoundLegend drum angled left"
-                className="soundlegend-drum-img"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-
-            <div className="drum-text-col">
-              <img
-                src="/resized-logos/soundlegend-white.png"
-                alt="SoundLegend logo"
-                className="soundlegend-logo"
-                loading="lazy"
-                decoding="async"
-              />
-              <div className="soundlegend-text">
-                <p className="soundlegend-quote">
-                  “Every drum tells a story — let’s craft yours together.”
-                </p>
-                <ul className="soundlegend-description-list">
-                  <li>Custom-built from your vision</li>
-                  <li>1-on-1 with Dan Ober</li>
-                  <li>High resolution concept mockups</li>
-                  <li>Behind-the-scenes access</li>
-                  <li>Limited Edition gift item</li>
-                  <li>Builds starting at $1499</li>
-                </ul>
-
-                <div className="mobile-scroll-indicator">
-                  <button
-                    type="button"
-                    className="scroll-indicator btn-ghost"
-                    onClick={handleLearnMore}
-                    aria-label="Learn more about our series"
-                  >
-                    ↓ Learn More
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="desktop-scroll-indicator scroll-indicator-wrapper">
-            <button
-              type="button"
-              className="scroll-indicator btn-ghost"
-              onClick={handleLearnMore}
-              aria-label="Learn more about our series"
-            >
-              ↓ Learn More
-            </button>
-          </div>
-        </section>
-
-        {/* Trigger AFTER SoundLegend for inView tracking */}
-        <div ref={soundlegendTriggerRef} aria-hidden style={{ height: 1 }} />
-
-        {/* DRUM DISPLAY */}
-        {showDrumLayers && (
-          <section
-            ref={finalSectionRef}
-            className="ourcraft-section artisan-final-section"
-            aria-label="Founder’s Batch Comparison"
-            style={{ padding: 0, margin: 0 }}
-          >
-            <ArtisanDrums prefersReducedMotion={prefersReducedMotion} />
-          </section>
-        )}
       </main>
+
     </div>
+
   );
+
 };
 
 export default OurCraft;
